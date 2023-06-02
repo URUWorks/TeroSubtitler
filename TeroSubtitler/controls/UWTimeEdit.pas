@@ -181,7 +181,6 @@ begin
 
   AutoSelect  := False;
   AutoSize    := False;
-  NumbersOnly := True;
   Alignment   := taCenter;
   Font.Style  := [fsBold];
 
