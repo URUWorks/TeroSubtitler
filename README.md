@@ -25,7 +25,7 @@ Tero Subtitler is an open source, cross platform, and free subtitle editing soft
 
 Powerful multimedia playback engine.
 
-### ffmpeg
+### FFmpeg
 
 Advanced audio/video manipulation tool.
 
