@@ -45,7 +45,7 @@ Auto-translation API.
 
 Lazarus IDE.
 
-## External packages required to compile
+### External packages required to compile
 
 - ATSynEdit
 - BGRABitmap
