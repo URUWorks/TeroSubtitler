@@ -1,0 +1,69 @@
+object frmQualityCheck: TfrmQualityCheck
+  Left = 241
+  Height = 391
+  Top = 116
+  Width = 572
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Quality check'
+  ClientHeight = 391
+  ClientWidth = 572
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object lblRules: TLabel
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 28
+    Caption = 'Rules'
+    ParentColor = False
+  end
+  object cboRules: TComboBox
+    Left = 112
+    Height = 23
+    Top = 8
+    Width = 452
+    ItemHeight = 15
+    OnChange = cboRulesChange
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object VST: TLazVirtualStringTree
+    Left = 8
+    Height = 311
+    Top = 40
+    Width = 556
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    DefaultText = 'Node'
+    Header.AutoSizeIndex = 0
+    Header.Columns = <>
+    Header.MainColumn = -1
+    Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+    TabOrder = 1
+    TreeOptions.AutoOptions = [toAutoTristateTracking]
+    TreeOptions.MiscOptions = [toCheckSupport, toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+    TreeOptions.PaintOptions = [toHideFocusRect, toShowHorzGridLines, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+    TreeOptions.StringOptions = []
+    OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+    OnDblClick = VSTDblClick
+    OnDrawText = VSTDrawText
+    OnGetText = VSTGetText
+    OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+    OnResize = VSTResize
+  end
+  object btnClose: TButton
+    Left = 489
+    Height = 25
+    Top = 359
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 2
+  end
+end

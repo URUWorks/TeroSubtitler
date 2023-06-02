@@ -1,0 +1,82 @@
+object frmModifySelection: TfrmModifySelection
+  Left = 260
+  Height = 169
+  Top = 127
+  Width = 344
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Modify selection'
+  ClientHeight = 169
+  ClientWidth = 344
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object cboRule: TComboBox
+    Left = 8
+    Height = 23
+    Top = 8
+    Width = 128
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object edtText: TEdit
+    Left = 144
+    Height = 23
+    Top = 8
+    Width = 192
+    TabOrder = 0
+  end
+  object btnApply: TButton
+    Left = 181
+    Height = 25
+    Top = 136
+    Width = 75
+    Caption = 'Apply'
+    Default = True
+    OnClick = btnApplyClick
+    TabOrder = 5
+  end
+  object btnClose: TButton
+    Left = 261
+    Height = 25
+    Top = 136
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 6
+  end
+  object rbnAddToCurrentSelection: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 75
+    Width = 18
+    AutoSize = False
+    Caption = 'Add to current selection'
+    TabOrder = 3
+    TabStop = False
+  end
+  object rbnNewSelection: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 56
+    Width = 18
+    AutoSize = False
+    Caption = 'New selection'
+    TabOrder = 2
+    TabStop = False
+  end
+  object rbnSubtractFromCurrentSelection: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 94
+    Width = 18
+    AutoSize = False
+    Caption = 'Subtract from current selection'
+    TabOrder = 4
+    TabStop = False
+  end
+end

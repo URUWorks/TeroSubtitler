@@ -1,0 +1,102 @@
+object frmTranslationMemoryList: TfrmTranslationMemoryList
+  Left = 246
+  Height = 400
+  Top = 116
+  Width = 600
+  BorderIcons = [biMaximize]
+  Caption = 'Translation memory'
+  ClientHeight = 400
+  ClientWidth = 600
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object VST: TLazVirtualStringTree
+    Left = 8
+    Height = 351
+    Top = 8
+    Width = 583
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    DefaultText = 'Node'
+    Header.AutoSizeIndex = 0
+    Header.Columns = <>
+    Header.MainColumn = -1
+    Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+    TabOrder = 3
+    TreeOptions.AutoOptions = [toAutoTristateTracking]
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+    TreeOptions.PaintOptions = [toHideFocusRect, toShowDropmark, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+    TreeOptions.StringOptions = []
+    OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+    OnDrawText = VSTDrawText
+    OnGetText = VSTGetText
+    OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+    OnResize = VSTResize
+  end
+  object btnClose: TButton
+    Left = 508
+    Height = 25
+    Top = 365
+    Width = 83
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 2
+  end
+  object lblTotal: TLabel
+    Left = 8
+    Height = 15
+    Top = 370
+    Width = 28
+    Anchors = [akLeft, akBottom]
+    Caption = 'Total:'
+    ParentColor = False
+  end
+  object lblCount: TLabel
+    AnchorSideLeft.Control = lblTotal
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = lblTotal
+    Left = 44
+    Height = 15
+    Top = 370
+    Width = 6
+    BorderSpacing.Left = 8
+    Caption = '0'
+    ParentColor = False
+  end
+  object btnCopy: TButton
+    Left = 424
+    Height = 25
+    Top = 365
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'Copy'
+    OnClick = btnCopyClick
+    TabOrder = 1
+  end
+  object edtFind: TEdit
+    Left = 235
+    Height = 23
+    Top = 365
+    Width = 180
+    Anchors = [akRight, akBottom]
+    OnChange = edtFindChange
+    TabOrder = 0
+  end
+  object lblFind: TLabel
+    AnchorSideTop.Control = edtFind
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = edtFind
+    Left = 204
+    Height = 15
+    Top = 369
+    Width = 23
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 8
+    Caption = 'Find'
+    ParentColor = False
+  end
+end

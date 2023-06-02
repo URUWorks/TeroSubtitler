@@ -1,0 +1,14 @@
+object frmVideo: TfrmVideo
+  Left = 247
+  Height = 480
+  Top = 135
+  Width = 640
+  HorzScrollBar.Visible = False
+  VertScrollBar.Visible = False
+  Constraints.MinHeight = 350
+  Constraints.MinWidth = 350
+  FormStyle = fsStayOnTop
+  OnClose = FormClose
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+end

@@ -1,0 +1,216 @@
+object frmAdjustSubtitle: TfrmAdjustSubtitle
+  Left = 239
+  Height = 354
+  Top = 115
+  Width = 580
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Adjust subtitle'
+  ClientHeight = 354
+  ClientWidth = 580
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object btnApply: TButton
+    Left = 417
+    Height = 25
+    Top = 320
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'Apply'
+    Default = True
+    OnClick = btnApplyClick
+    TabOrder = 0
+  end
+  object btnClose: TButton
+    Left = 497
+    Height = 25
+    Top = 320
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 1
+  end
+  object lyoSimple: TUWLayout
+    Left = 0
+    Height = 32
+    Top = 32
+    Width = 580
+    Anchors = [akTop, akLeft, akRight]
+    ClientHeight = 32
+    ClientWidth = 580
+    TabOrder = 2
+    object lblFirstSpoken: TLabel
+      Left = 8
+      Height = 15
+      Top = 4
+      Width = 156
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'First spoken line'
+      ParentColor = False
+    end
+    object tedFirst: TUWTimeEdit
+      Left = 168
+      Height = 23
+      Top = 0
+      Width = 104
+      Value = 0
+      FPS = 25
+      FrameStep = 1
+      TimeStep = 10
+      TimeMode = temTime
+      Alignment = taCenter
+      Constraints.MinHeight = 21
+      Constraints.MinWidth = 80
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+    end
+    object lblLastSpoken: TLabel
+      Left = 294
+      Height = 15
+      Top = 4
+      Width = 156
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      AutoSize = False
+      Caption = 'Last spoken line'
+      ParentColor = False
+    end
+    object tedLast: TUWTimeEdit
+      Left = 454
+      Height = 23
+      Top = 0
+      Width = 104
+      Value = 0
+      FPS = 25
+      FrameStep = 1
+      TimeStep = 10
+      TimeMode = temTime
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      Constraints.MinHeight = 21
+      Constraints.MinWidth = 80
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+    end
+  end
+  object lyoAdvanced: TUWLayout
+    Left = 0
+    Height = 208
+    Top = 104
+    Width = 580
+    Anchors = [akTop, akLeft, akRight]
+    ClientHeight = 208
+    ClientWidth = 580
+    TabOrder = 3
+    object lblIndex: TLabel
+      Left = 8
+      Height = 15
+      Top = 180
+      Width = 182
+      Alignment = taRightJustify
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      Caption = 'Subtitle #'
+      ParentColor = False
+    end
+    object tedTime: TUWTimeEdit
+      Left = 292
+      Height = 23
+      Top = 176
+      Width = 104
+      Value = 0
+      FPS = 25
+      FrameStep = 1
+      TimeStep = 10
+      TimeMode = temTime
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      Constraints.MinHeight = 21
+      Constraints.MinWidth = 80
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+    end
+    object btnAdd: TButton
+      Left = 417
+      Height = 25
+      Top = 176
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Add'
+      OnClick = btnAddClick
+      TabOrder = 3
+    end
+    object btnRemove: TButton
+      Left = 497
+      Height = 25
+      Top = 176
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Remove'
+      OnClick = btnRemoveClick
+      TabOrder = 4
+    end
+    object spnIndex: TSpinEdit
+      Left = 196
+      Height = 23
+      Top = 176
+      Width = 90
+      Anchors = [akTop, akRight]
+      OnChange = spnIndexChange
+      TabOrder = 0
+    end
+    object VST: TLazVirtualStringTree
+      Left = 8
+      Height = 168
+      Top = 0
+      Width = 564
+      Anchors = [akTop, akLeft, akRight]
+      Header.AutoSizeIndex = 0
+      Header.Columns = <>
+      Header.MainColumn = -1
+      Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+      TabOrder = 5
+      TreeOptions.AutoOptions = [toAutoTristateTracking]
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+      TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
+      TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+      TreeOptions.StringOptions = []
+      OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+      OnDrawText = VSTDrawText
+      OnGetText = VSTGetText
+      OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+      OnResize = VSTResize
+    end
+  end
+  object rdoSimple: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 8
+    Width = 18
+    AutoSize = False
+    Caption = 'Simple'
+    OnChange = rdoSimpleChange
+    TabOrder = 4
+    TabStop = False
+  end
+  object rdoAdvanced: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 80
+    Width = 18
+    AutoSize = False
+    Caption = 'Advanced'
+    OnChange = rdoSimpleChange
+    TabOrder = 5
+    TabStop = False
+  end
+end

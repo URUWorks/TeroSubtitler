@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Language Mail="uruworks@gmail.com" Name="Default" Count="37" Author="URUWorks">
+  <Form Name="frmMain" Caption="tero subtitler">
+    <Section Name="TMenuItem">
+      <mnuFile>File</mnuFile>
+      <mnuFileMRU>Recent files</mnuFileMRU>
+      <mnuFileImport>Import</mnuFileImport>
+      <mnuFileExport>Export</mnuFileExport>
+      <mnuEdit>Edit</mnuEdit>
+      <mnuEditTimings>Timings</mnuEditTimings>
+      <mnuEditTimingsEndCue>End Cue</mnuEditTimingsEndCue>
+      <mnuEditTimingsExtend>Extend length</mnuEditTimingsExtend>
+      <mnuEditTexts>Text</mnuEditTexts>
+      <mnuEditRTL>Right-to-left</mnuEditRTL>
+      <mnuEditSubtitles>Subtitles</mnuEditSubtitles>
+      <mnuEditFormat>Format</mnuEditFormat>
+      <mnuEditInsertSymbol>Insert Unicode symbol</mnuEditInsertSymbol>
+      <mnuFind>Find</mnuFind>
+      <mnuSelect>Select</mnuSelect>      
+      <mnuTools>Tools</mnuTools>
+      <mnuToolsTranslationMemory>Translation memory</mnuToolsTranslationMemory>
+	  <mnuToolsTerminology>Terminology</mnuToolsTerminology>      
+      <mnuView>View</mnuView>
+      <mnuViewColumns>Columns</mnuViewColumns>
+      <mnuViewToolbars>Toolbars</mnuViewToolbars>      
+      <mnuViewWindows>Windows</mnuViewWindows>
+      <mnuVideo>Video</mnuVideo>
+      <mnuVideoPlayback>Playback</mnuVideoPlayback>
+      <mnuVideoAudio>Audio</mnuVideoAudio>
+      <mnuVideoVolume>Volume</mnuVideoVolume>            
+      <mnuVideoSubtitles>Subtitles</mnuVideoSubtitles>
+      <mnuHelp>Help</mnuHelp>
+      <mnuDictionary>Dictionary</mnuDictionary>
+    </Section>
+    <Section Name="TLabel">
+      <lblMediaLength Hint="Video length and FPS"/>
+      <lblMediaTime Hint="Current video position"/>
+    </Section>
+    <Section Name="TComboBox">
+      <cboInputFPS Hint="'Input FPS' of the movie that the current subtitle file was originally made for"/>    
+      <cboFPS Hint="'FPS' of the movie you want to adjust the current subtitle file for"/>
+      <cboFormat Hint="Format"/>
+      <cboEncoding Hint="Encoding"/>
+    </Section>                        
+    <Section Name="TAction">
+      <actNewSubtitle Hint="Start a new subtitle project">New subtitle</actNewSubtitle>
+      <actLoadSubtitle Hint="Load a subtitle file">Load subtitle...</actLoadSubtitle>
+      <actUndo Hint="Undo last action">Undo</actUndo>
+      <actRedo Hint="Redo last undo">Redo</actRedo>
+      <actCut>Cut</actCut>
+      <actCopy>Copy</actCopy>
+      <actPaste>Paste</actPaste>
+      <actFind>Find...</actFind>
+      <actFindNext>Find next</actFindNext>
+      <actFindPrevious>Find previous</actFindPrevious>
+      <actReplace>Replace...</actReplace>
+      <actAbout>About %s</actAbout>
+      <actCheckForUpdates>Check for updates...</actCheckForUpdates>
+      <actInsertSubtitleBefore Hint="Insert subtitle before the current subtitle">Insert subtitle before</actInsertSubtitleBefore>
+      <actInsertSubtitle Hint="Insert a new subtitle after the current subtitle">Insert subtitle</actInsertSubtitle>
+      <actDeleteSubtitle Hint="Delete selected subtitle(s)">Delete subtitle(s)</actDeleteSubtitle>
+      <actListMode>List mode</actListMode>
+      <actSourceMode>Source mode</actSourceMode>
+      <actTranscriptionMode Hint="Enable free-write mode">Transcription mode</actTranscriptionMode>
+      <actTranslatorMode>Translator mode</actTranslatorMode>
+      <actVideoPreview>Video preview</actVideoPreview>
+      <actWaveformPreview>Waveform preview</actWaveformPreview>
+      <actUnDockVideo>Dock video</actUnDockVideo>
+      <actUnDockWaveform>Dock waveform</actUnDockWaveform>
+      <actTimeMode Hint="Set time code format to HH:MM:SS.ZZZ">Time mode</actTimeMode>
+      <actFramesMode Hint="Set time code format to HH:MM:SS:FF">Frame mode</actFramesMode>
+      <actPreviousSubtitle>Previous subtitle</actPreviousSubtitle>
+      <actNextSubtitle>Next subtitle</actNextSubtitle>
+      <actFontBold>Bold</actFontBold>
+      <actFontItalic>Italic</actFontItalic>
+      <actFontUnderline>Underline</actFontUnderline>
+      <actFontStrikeout>Strikethrough</actFontStrikeout>
+      <actFontClear>Clear formatting</actFontClear>
+      <actMediaPlay>Play/Pause</actMediaPlay>
+      <actMediaStop>Stop</actMediaStop>
+      <actMediaAutoScroll>Update list on preview</actMediaAutoScroll>
+      <actMediaChangePlayRate>Playback rate</actMediaChangePlayRate>
+      <actMediaRewind>Rewind</actMediaRewind>
+      <actMediaForward>Forward</actMediaForward>
+      <actMediaPlaySelection>Play selection</actMediaPlaySelection>
+      <actMediaPlayFromSelection>Play from selection</actMediaPlayFromSelection>
+      <actMediaPlayBeforeSelection>Play before selection</actMediaPlayBeforeSelection>
+      <actMediaPlayAfterSelection>Play after selection</actMediaPlayAfterSelection>
+      <actMediaAddSubtitle>Add subtitle</actMediaAddSubtitle>
+      <actMediaDeleteSubtitle>Delete subtitle</actMediaDeleteSubtitle>
+      <actMediaZoomIn>Zoom in</actMediaZoomIn>
+      <actMediaZoomOut>Zoom out</actMediaZoomOut>
+      <actMediaZoomSelection>Zoom selection</actMediaZoomSelection>
+      <actCombineSubtitles Hint="Combines all the selected subtitles into one">Combine subtitles</actCombineSubtitles>
+      <actSelectAll>Select all</actSelectAll>
+      <actInvertSelection>Invert selection</actInvertSelection>
+      <actSelectCurrentToBeginning>Select current to beginning</actSelectCurrentToBeginning>
+      <actSelectCurrentToEnd>Select current to end</actSelectCurrentToEnd>
+      <actModifySelection>Modify selection...</actModifySelection>      
+      <actDurationLimits>Duration limits...</actDurationLimits>
+      <actAutomaticDuration>Automatic duration...</actAutomaticDuration>
+      <actTimeExpander>Time expander/reducer...</actTimeExpander>
+      <actSetDelay>Set delay...</actSetDelay>
+      <actShiftTimes>Shift times...</actShiftTimes>
+      <ShiftTimeMore>Shift %dms more</ShiftTimeMore>
+      <ShiftTimeLess>Shift %dms less</ShiftTimeLess>          
+      <actConvertCase>Convert case...</actConvertCase>
+      <actUnbreakSubtitle>Unbreak subtitle</actUnbreakSubtitle>
+      <actSetMaximumLineLength>Set maximum line length</actSetMaximumLineLength>
+      <actReverseText>Reverse text</actReverseText>
+      <actFixRTLPunctuation>Fix punctuation</actFixRTLPunctuation>
+      <actDivideSubtitle>Divide subtitle</actDivideSubtitle>
+      <actMarkSubtitle>Mark subtitle(s)</actMarkSubtitle>
+      <actUnMarkSubtitle>Unmark subtitle(s)</actUnMarkSubtitle>
+      <actAdjustSubtitle>Adjust subtitle...</actAdjustSubtitle>
+      <actJumpToNextMarked>Jump to next marked</actJumpToNextMarked>
+      <actJumpToPreviousMarked>Jump to previous marked</actJumpToPreviousMarked>
+      <actEndCueAddOneFrame>Add one frame</actEndCueAddOneFrame>
+      <actEndCueSubtractOneFrame>Subtract one frame</actEndCueSubtractOneFrame>
+      <actMultipleReplace>Multiple replace...</actMultipleReplace>
+      <actGoTo>Go to line number...</actGoTo>
+      <actReadTimingsFromFile>Read timings from file...</actReadTimingsFromFile>
+      <actReadTextsFromFile>Read text from file...</actReadTextsFromFile>
+      <actExtendLengthToPrevious>Extend initial time to previous</actExtendLengthToPrevious>
+      <actExtendLengthToNext>Extend final time to next</actExtendLengthToNext>
+      <actSetAutomaticDuration>Set automatic duration</actSetAutomaticDuration>
+      <actSetDefaultPause Hint="only if the gap is too short">Set default pause</actSetDefaultPause>
+      <actSwapTexts>Swap text</actSwapTexts>
+      <actShowColumnNumber>Number/Gap</actShowColumnNumber>
+      <actShowColumnTimes>Times</actShowColumnTimes>
+      <actShowColumnDuration>Duration</actShowColumnDuration>
+      <actShowColumnCPS>Characters per second</actShowColumnCPS>
+      <actShowColumnWPM>Words per minute</actShowColumnWPM>
+      <actShowColumnCPL>Characters per line</actShowColumnCPL>
+      <actWebReference>Web reference...</actWebReference>
+      <actSplitSubtitleAtPosition>Split line at cursor position</actSplitSubtitleAtPosition>
+      <actHelp>Help</actHelp>
+      <actSettings>Settings...</actSettings>
+      <actRestoreBackup>Restore backup...</actRestoreBackup>
+      <actSaveSubtitle Hint="Save current subtitle to file">Save subtitle</actSaveSubtitle>
+      <actSaveSubtitleAs Hint="Save current subtitle to a specific file">Save subtitle as...</actSaveSubtitleAs>
+      <actSaveTranslation Hint="Save current translation to file">Save translation</actSaveTranslation>
+      <actSaveTranslationAs Hint="Save current translation to a specific file">Save translation as...</actSaveTranslationAs>
+      <actCloseSubtitle>Close subtitles</actCloseSubtitle>
+      <actCloseApp>Close</actCloseApp>
+      <actImportSubtitles>Subtitles...</actImportSubtitles>
+      <actExportMarkedSubtitles>Marked subtitles...</actExportMarkedSubtitles>
+      <actExportTextOnly>Text only...</actExportTextOnly>            
+      <actMediaPreviousFrame>Previous frame</actMediaPreviousFrame>
+      <actMediaNextFrame>Next frame</actMediaNextFrame>
+      <actMediaSetInitialTime>Set initial time</actMediaSetInitialTime>
+      <actMediaSetFinalTime>Set final time</actMediaSetFinalTime>
+      <actMediaStartSubtitle>Start subtitle</actMediaStartSubtitle>
+      <actMediaEndSubtitle>End subtitle</actMediaEndSubtitle>
+      <actLoadVideo Hint="Open a video file">Open video...</actLoadVideo>
+      <actCloseVideo>Close video</actCloseVideo>
+      <actSMPTE>SMPTE timing</actSMPTE>
+      <actWaveExtract>Extract waveform...</actWaveExtract>
+      <actLoadVideoFromURL>Open video from URL...</actLoadVideoFromURL>
+      <actSpellCheck>Spell check...</actSpellCheck>
+      <actTranslate>Auto translate...</actTranslate>
+      <actFixSubtitles>Fix subtitles...</actFixSubtitles>
+      <actTranslationMemorySettings>Open...</actTranslationMemorySettings>
+      <actTranslationMemoryList>List...</actTranslationMemoryList>
+      <actFontColorDlg>Color...</actFontColorDlg>
+      <actFontColor>Set current font color</actFontColor>      
+      <actAlignToLeft>Align to left</actAlignToLeft>
+      <actAlignToCenter>Align to center</actAlignToCenter>
+      <actAlignToRight>Align to right</actAlignToRight>
+      <actAlignToNone>Align to none</actAlignToNone>
+      <actVAlignToBottom>Vertical align to bottom</actVAlignToBottom>
+      <actVAlignToMiddle>Vertical align to middle</actVAlignToMiddle>
+      <actVAlignToTop>Vertical align to top</actVAlignToTop>
+      <actAutoBreakSubtitle Hint="Split a long line into two or more lines">Autobreak</actAutoBreakSubtitle>
+      <actAddNote>Note...</actAddNote>
+      <actTranslationMemory>Show...</actTranslationMemory>
+      <actTranslationMemoryClose>Close</actTranslationMemoryClose>
+      <actValidateTM Hint="Validates and advances to the next">Validate translation memory</actValidateTM>
+      <actTM1>Use text from position 1 (tm)</actTM1>
+      <actTM2>Use text from position 2 (tm)</actTM2>
+      <actTM3>Use text from position 3 (tm)</actTM3>
+      <actTBXSettings>Open...</actTBXSettings>
+      <actTBXClose>Close</actTBXClose>
+      <actTBX>Show...</actTBX>      
+      <actTBXList>List...</actTBXList>
+      <actTBXEdit>Add...</actTBXEdit>            
+      <actInsertCurrentTime>Insert current time</actInsertCurrentTime>
+      <actLoadTranscription>Transcription...</actLoadTranscription>
+      <actSaveTranscription>Transcription...</actSaveTranscription>
+      <actGoToTime>Go to time...</actGoToTime>
+      <actShotChanges>Shot changes...</actShotChanges>
+      <actAudioToText>Audio to text...</actAudioToText>            
+      <actBatchConvert>Batch convert...</actBatchConvert>      
+      <actQualityCheck>Quality check...</actQualityCheck>
+      <actCompare>Compare...</actCompare>
+      <actSwapWorkspace>Swap video layout</actSwapWorkspace>
+      <actInsertShotChange>Insert shot change</actInsertShotChange>                  
+      <actDeleteShotChange>Delete shot change(s)</actDeleteShotChange>
+      <actViewShotChange Hint="Enable/disable shot changes">Shot changes</actViewShotChange>
+      <actCenterWaveform>Center waveform</actCenterWaveform>
+      <actDetectSilentZones Hint="Click to refresh list">Detect silent zones</actDetectSilentZones>
+      <actSetAsDefaultFormat>Set as default save format</actSetAsDefaultFormat>
+      <actSetAsDefaultEncoding>Set as default save encoding</actSetAsDefaultEncoding>
+      <actMediaSubSizeInc>Increase video font size</actMediaSubSizeInc>      
+      <actMediaSubSizeDec>Reduce video font size</actMediaSubSizeDec>      
+      <actAddQuotationMarks>Add quotation marks</actAddQuotationMarks>
+      <actMediaVolumeUp>Up</actMediaVolumeUp>
+      <actMediaVolumeDown>Down</actMediaVolumeDown>
+      <actMediaVolumeMute>Mute</actMediaVolumeMute>      
+      <actShowToolBarMain>Main</actShowToolBarMain>
+      <actShowToolbarFPS>FPS</actShowToolbarFPS>
+      <actShowToolbarFormat>Format</actShowToolbarFormat>
+      <actShowToolbarEncoding>Encoding</actShowToolbarEncoding>                                                         
+    </Section>
+    <Section Name="TUWTimeEdit">
+      <tedInitial Hint="Initial time"/>
+      <tedFinal Hint="Final time"/>
+      <tedDuration Hint="Duration"/>
+      <tedPause Hint="Pause"/>
+    </Section>        
+  </Form>
+  <Form Name="frmAbout" Caption="About">
+    <Section Name="TLabel">
+      <lblInfo>version %s||Compiled at %s on %s|Compiler version: %s|Target CPU: %s</lblInfo>
+      <lblDonate>If you like this software, please consider making a donation.|Click here to do it.</lblDonate>
+    </Section>
+  </Form>
+  <Form Name="frmAdjustSubtitle" Caption="Adjust subtitle">
+    <Section Name="TLabel">
+      <lblFirstSpoken>First spoken line</lblFirstSpoken>
+      <lblLastSpoken>Last spoken line</lblLastSpoken>
+      <lblIndex>Subtitle #</lblIndex>
+    </Section>
+    <Section Name="TUWRadioButton">
+      <rdoSimple>Simple</rdoSimple>
+      <rdoAdvanced>Advanced</rdoAdvanced>
+    </Section>
+  </Form>
+  <Form Name="frmAutomaticDurations" Caption="Automatic durations">
+    <Section Name="TLabel">
+      <lblCondition>Apply if:</lblCondition>
+      <lblChars>per character</lblChars>
+      <lblWord>per word</lblWord>
+      <lblLine>per line</lblLine>
+    </Section>
+  </Form>
+  <Form Name="frmFixSubtitles" Caption="Fix subtitles">
+    <Section Name="TLabel">
+      <lblOCR>OCR Script</lblOCR>
+      <lblSpacingHyphen>Spacing of opening hyphen</lblSpacingHyphen>
+    </Section>
+  </Form>
+  <Form Name="frmConvertCase" Caption="Convert case">
+    <Section Name="TUWRadioButton">
+      <rdoSentenceType>Sentence type</rdoSentenceType>
+      <rdoLowercase>lowercase</rdoLowercase>
+      <rdoUppercase>UPPERCASE</rdoUppercase>
+      <rdoTitleType>Title Type</rdoTitleType>
+      <rdoInverseType>iNVERSE tYPE</rdoInverseType>
+    </Section>
+  </Form>
+  <Form Name="frmCustomFileDlg" Caption="">
+    <Section Name="TLabel">
+      <lblFileName>Filename</lblFileName>
+      <lblFormat>Format</lblFormat>
+      <lblEncoding>Encoding</lblEncoding>
+      <lblFPS>FPS</lblFPS>
+    </Section>
+  </Form>
+  <Form Name="frmDelay" Caption="Set delay">
+  </Form>
+  <Form Name="frmShiftTimes" Caption="Shift times">
+    <Section Name="TLabel">
+      <lblOffset>Direction</lblOffset>
+      <lblStartIndex>Start #</lblStartIndex>
+      <lblEndIndex>End #</lblEndIndex>
+    </Section>
+  </Form>  
+  <Form Name="frmDurationLimits" Caption="Duration limits">
+    <Section Name="TUWCheckBox">
+      <chkSetMaxDuration>Set maximum duration (ms)</chkSetMaxDuration>
+      <chkSetMinDuration>Set minimum duration (ms)</chkSetMinDuration>
+    </Section>
+  </Form>
+  <Form Name="frmFindAndReplace" Caption="Find and replace">
+    <Section Name="TLabel">
+      <lblTextToFind>Text to find:</lblTextToFind>
+      <lblOptions>Options:</lblOptions>
+    </Section>
+    <Section Name="TUWCheckBox">
+      <chkReplaceWith>Replace with:</chkReplaceWith>
+      <chkCaseSensitive>Case sensitive</chkCaseSensitive>
+      <chkPreserveCaseOnReplace>Preserve case on replace</chkPreserveCaseOnReplace>
+      <chkRegularExpression>Use regular expression</chkRegularExpression>
+      <chkWholeWord>Whole word</chkWholeWord>
+    </Section>
+  </Form>
+  <Form Name="frmGoTo" Caption="Go to line">
+    <Section Name="TLabel">
+      <lblNumber>Number:</lblNumber>
+    </Section>
+  </Form>
+  <Form Name="frmGoToTime" Caption="Go to">
+    <Section Name="TLabel">
+      <lblTime>Time:</lblTime>
+    </Section>
+  </Form>    
+  <Form Name="frmModifySelection" Caption="Modify selection">
+    <Section Name="TUWRadioButton">
+      <rbnNewSelection>New selection</rbnNewSelection>
+      <rbnAddToCurrentSelection>Add to current selection</rbnAddToCurrentSelection>
+      <rbnSubtractFromCurrentSelection>Subtract from current selection</rbnSubtractFromCurrentSelection>
+    </Section>  
+  </Form>
+  <Form Name="frmMultipleReplace" Caption="Multiple replace">
+    <Section Name="TLabel">
+      <lblFind>Find:</lblFind>
+      <lblReplace>Replace with:</lblReplace>
+    </Section>
+    <Section Name="TUWCheckBox">
+      <chkRE>Regular expression</chkRE>
+    </Section>
+  </Form>
+  <Form Name="frmRestoreBackup" Caption="Restore backup">
+  </Form>
+  <Form Name="frmSettings" Caption="Settings">
+    <Section Name="TLabel">
+      <lblLanguage>Language</lblLanguage>
+      <lblWebReference>Web reference</lblWebReference>
+      <lblTimeCodeMode>Time code mode</lblTimeCodeMode>
+      <lblDefaultFrameRate>Default frame rate</lblDefaultFrameRate>
+      <lblDefaultFileEncoding>Default file encoding</lblDefaultFileEncoding>
+      <lblDefaultFileFormat>Default file format</lblDefaultFileFormat>      
+      <lblAutoBackup>Auto-backup every (minutes)</lblAutoBackup>
+      <lblZeroToDisable>(0 to disable)</lblZeroToDisable>      
+      <lblProfile>Profile</lblProfile>      
+      <lblNewSubtitleMs>New subtitle (ms)</lblNewSubtitleMs>
+      <lblMinDurationMs>Min. duration (ms)</lblMinDurationMs>
+      <lblMinDurationPerWordMs>Min. duration per word (ms)</lblMinDurationPerWordMs>
+      <lblMaxDurationMs>Max. duration (ms)</lblMaxDurationMs>
+      <lblMaxLineCount>Max. line count</lblMaxLineCount>
+      <lblShiftTimeMs>Shift time (ms)</lblShiftTimeMs>
+      <lblSubtitlePauseMs>Min. gap</lblSubtitlePauseMs>
+      <lblCPS>Characters per second</lblCPS>
+      <lblWPM>Words per minute</lblWPM>      
+      <lblCPL>Characters per line</lblCPL>            
+      <lblRepeatableChars>Repeatable characters</lblRepeatableChars>
+      <lblProhibitedChars>Prohibited characters</lblProhibitedChars>
+      <lblTheme>Theme</lblTheme>
+      <lblListMode>List mode</lblListMode>
+	  <lblSubtitles>Subtitles</lblSubtitles>      
+	  <lblSubColor>Color</lblSubColor>
+	  <lblSubBorder>Border</lblSubBorder>
+	  <lblSubShadow>Shadow</lblSubShadow>
+	  <lblSubBackground>Background</lblSubBackground>
+	  <lblSubSize>Size</lblSubSize>
+	  <lblWaveform>Waveform</lblWaveform>
+	  <lblWaveColor>Color</lblWaveColor>
+	  <lblWaveStart>Start line</lblWaveStart>
+	  <lblWaveEnd>End line</lblWaveEnd>	        
+      <lblToolBarMain>Main</lblToolBarMain>
+      <lblToolBarEditor>Editor</lblToolBarEditor>
+      <lblToolBarVideo>Video</lblToolBarVideo>
+      <lblToolBarWave>Waveform</lblToolBarWave>
+      <lblShortcutCat>Category</lblShortcutCat>
+      <lblShortcut>Shortcut</lblShortcut>      
+      <lblFFMPEG>ffmpeg folder</lblFFMPEG>
+      <lblSeekTime>Seek time (ms)</lblSeekTime>
+      <lblFrameStep>Frame step</lblFrameStep>
+    </Section>
+    <Section Name="TUWCheckBox">
+      <chkShowSplashWindow>Show splash window</chkShowSplashWindow>
+      <chkUseOwnFileDialog>Use Tero file dialog</chkUseOwnFileDialog>
+      <chkPromptForDeleteSubtitles>Prompt when deleting subtitles</chkPromptForDeleteSubtitles>
+      <chkDotsOnSplit>Add '...' on split subtitle</chkDotsOnSplit>
+      <chkDrawTags>Interpret tags in list</chkDrawTags>
+      <chkDrawErrors>Show errors in list</chkDrawErrors>
+      <chkShowCPSBar>Show CPS bar</chkShowCPSBar>
+      <chkPauseIsFrames>Frames</chkPauseIsFrames>
+      <chkDrawWaveformGAP>Show gap in timeline</chkDrawWaveformGAP>
+      <chkAutoPlay>Autoplay on video load</chkAutoPlay>            
+    </Section>
+    <Section Name="TButton">
+      <btnShortCutApply>Apply</btnShortCutApply>
+      <btnShortCutSave>Save as...</btnShortCutSave>
+    </Section>
+    <Section Name="TEdit">      
+      <edtCPSStrategy Hint="Characters to ignore"/>      
+    </Section>           
+  </Form>
+  <Form Name="frmSpellCheck" Caption="Spell check">
+    <Section Name="TLabel">
+      <lblDictionary>Dictionary</lblDictionary>
+      <lblNotFound>Not found</lblNotFound>
+      <lblSuggestions>Suggestions</lblSuggestions>
+      <lblSource>Source</lblSource>
+      <lblCurrentLine># %d</lblCurrentLine>      
+    </Section>
+  </Form>
+  <Form Name="frmTimeExpander" Caption="Time expander/reducer">
+    <Section Name="TUWCheckBox">
+      <chkSubtitle>Only if subtitle is longer than</chkSubtitle>
+      <chkDuration>Only if duration is longer than</chkDuration>
+    </Section>
+    <Section Name="TLabel">
+      <lblChars>characters</lblChars>
+      <lblMs>ms</lblMs>
+    </Section>
+  </Form>
+  <Form Name="frmTranslate" Caption="Translate">
+    <Section Name="TLabel">
+      <lblSourceLanguage>Source language:</lblSourceLanguage>
+      <lblTranslationLanguage>Translation language:</lblTranslationLanguage>
+      <lblInput>Input:</lblInput>
+      <lblOutput>Output:</lblOutput>
+    </Section>
+  </Form>
+  <Form Name="frmTranslationMemory" Caption="Translation memory">
+  </Form>
+  <Form Name="frmTranslationMemorySettings" Caption="Translation memory settings">
+    <Section Name="TLabel">
+      <lblSourceLang>Source language</lblSourceLang>
+      <lblTransLang>Translation language</lblTransLang>
+      <lblFileName>File name</lblFileName>
+    </Section>
+  </Form>
+  <Form Name="frmTranslationMemoryList" Caption="Translation memory">
+    <Section Name="TLabel">
+      <lblTotal>Total:</lblTotal>
+      <lblFind>Find</lblFind>
+    </Section>  
+  </Form>
+  <Form Name="frmTBXSettings" Caption="Terminology settings">
+    <Section Name="TLabel">
+      <lblSourceLang>Source language</lblSourceLang>
+      <lblTransLang>Translation language</lblTransLang>
+      <lblFileName>File name</lblFileName>
+    </Section>
+  </Form>  
+  <Form Name="frmTBXList" Caption="Terminology">
+    <Section Name="TLabel">
+      <lblTotal>Total:</lblTotal>
+      <lblFind>Find</lblFind>
+    </Section>  
+  </Form>
+  <Form Name="frmTBXEdit" Caption="Terminology">
+    <Section Name="TLabel">
+      <lblOriginal>Original</lblOriginal>
+      <lblTranslated>Translated</lblTranslated>
+      <lblNotes>Notes</lblNotes>
+    </Section>
+  </Form>                
+  <Form Name="frmWaveExtractor" Caption="Waveform extractor">
+    <Section Name="TLabel">
+      <lblTrack>Track:</lblTrack>
+      <lblWait>Please wait</lblWait>      
+    </Section>
+  </Form>
+  <Form Name="frmShotChanges" Caption="Shot changes">
+    <Section Name="TLabel">
+      <lblTimeCodeIn>Time code for import</lblTimeCodeIn>
+      <lblTimeCodeOut>Time code for export</lblTimeCodeOut>
+      <lblSensitivity>Detection sensitivity</lblSensitivity>      
+    </Section>          
+  </Form>
+  <Form Name="frmBatchConvert" Caption="Batch convert">
+    <Section Name="TLabel">
+      <lblOutput>Output:</lblOutput>
+      <lblOutputFolder>Folder</lblOutputFolder>
+      <lblFormat>Format</lblFormat>
+      <lblEncoding>Encoding</lblEncoding>
+      <lblFromFPS>From FPS</lblFromFPS>
+      <lblToFPS>To FPS</lblToFPS>
+    </Section>
+  </Form>
+  <Form Name="frmQualityCheck" Caption="Quality check">
+    <Section Name="TLabel">
+      <lblRules>Rules</lblRules>
+    </Section>
+  </Form>
+  <Form Name="frmAudioToText" Caption="Audio to text">
+    <Section Name="TLabel">
+      <lblTrack>Track</lblTrack>    
+      <lblLanguage>Language</lblLanguage>
+      <lblModel>Model</lblModel>
+      <lblWait>Please wait</lblWait>      
+    </Section>
+    <Section Name="TUWRadioButton">
+      <rbnAddSubtitlesWhileTranscribing>Add subtitles while transcribing</rbnAddSubtitlesWhileTranscribing>
+      <rbnLoadSubtitlesAfterTranscript>Load subtitles after transcription</rbnLoadSubtitlesAfterTranscript>      
+    </Section>    
+  </Form>
+  <Form Name="frmAudioToTextModel" Caption="Audio to text model">
+  </Form>      
+  <Form Name="frmCompare" Caption="Compare">
+  </Form>
+  <Form Name="frmConventions" Caption="Conventions">
+    <Section Name="TLabel">
+      <lblName>Name</lblName>
+    </Section>  
+  </Form>
+  <Form Name="frmWizard" Caption="Getting started wizard">
+    <Section Name="TLabel">
+      <lblWelcome>Welcome to</lblWelcome>
+      <lblExperience>In just a few steps, you'll be setup and ready for the best subtitling experience.</lblExperience>
+      <lblRequiredFiles>For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you.</lblRequiredFiles>
+      <lbllibMPV>libmpv:</lbllibMPV>
+      <lbllibmpvDesc>The powerful mpv multimedia engine used for playback.</lbllibmpvDesc>
+      <lblYTDLP>yt-dlp:</lblYTDLP>
+      <lblYTDLPDesc>Addition for opening videos via URL.</lblYTDLPDesc>      
+      <lblFFMPEG>ffmpeg:</lblFFMPEG>
+      <lblffmpegDesc>The absolute solution for audio, and shot changes extraction.</lblffmpegDesc>
+      <lblWhisper>whisper.cpp:</lblWhisper>
+      <lblWhisperDesc>Automatic speech recognition for audio-to-text.</lblWhisperDesc>                                            
+    </Section>
+  </Form>
+  <Form Name="frmDownload" Caption="">
+    <Section Name="TLabel">
+      <lblDownload>Downloading...</lblDownload>
+    </Section>
+  </Form>                                                                                                
+  <Form Name="frmWelcome" Caption="">
+    <Section Name="TLabel">
+      <lblNewSubtitle>New empty subtitle</lblNewSubtitle>
+      <lblOpenFile>Open file...</lblOpenFile>
+      <lblBatchConvert>Batch convert...</lblBatchConvert>
+      <lblExit>Exit</lblExit>      
+      <lblRecentFiles>Recent files</lblRecentFiles>      
+    </Section>
+    <Section Name="TUWCheckBox">
+      <chkShowOnStartup>Show on startup</chkShowOnStartup>
+    </Section>
+  </Form>
+  <FixSubtitlesStrings>
+    <etUnnecessarySpaces>Remove unnecessary spaces</etUnnecessarySpaces>
+    <etUnnecessaryDots>Remove unnecessary dots</etUnnecessaryDots>
+    <etFixTags>Fix invalid tags</etFixTags>
+    <etTimeTooShort>Fix durations too short</etTimeTooShort>
+    <etTimeTooLong>Fix durations too long</etTimeTooLong>
+    <etOverlapping>Fix overlapping display times</etOverlapping>
+    <etBadValues>Fix bad timing values</etBadValues>
+    <etUnbreak>Remove line breaks in %d characters or less</etUnbreak>
+    <etBreakLongLines>Break overlong lines</etBreakLongLines>
+    <etEmpty>Remove empty subtitles</etEmpty>
+    <etEllipsesSingleSmartCharacter>Convert ellipsis dots to Unicode character</etEllipsesSingleSmartCharacter>
+    <etProhibitedChars>Remove subtitles with %s</etProhibitedChars>
+    <etHearingImpaired>Remove text for hearing impaired</etHearingImpaired>
+    <etRepeatedSubtitle>Remove repeated subtitles</etRepeatedSubtitle>
+    <etRepeatedChars>Remove repeated characters</etRepeatedChars>
+    <etIncompleteHyphenText>Remove incomplete hyphenated line</etIncompleteHyphenText>
+    <etSpaceOfOpeningHyphen>Spacing of opening hyphen</etSpaceOfOpeningHyphen>
+    <etRemoveSpacesWithinBrackets>Remove spaces within brackets</etRemoveSpacesWithinBrackets>    
+    <etFixInterrobang>Fix interrobang: !? -> ?!</etFixInterrobang>
+    <etOCR>Fix common OCR errors</etOCR>
+    <Index>#</Index>
+    <Action>Action</Action>
+    <Current>Current</Current>
+    <After>After</After>
+    <AddSpacing>Add spacing</AddSpacing>
+    <RemoveSpacing>Remove spacing</RemoveSpacing>      
+  </FixSubtitlesStrings>
+  <SettingsStrings>
+    <General>General</General>
+    <Conventions>Conventions</Conventions>
+    <Appearance>Appearance</Appearance>
+    <Toolbar>Toolbar</Toolbar>
+    <Shortcuts>Shortcuts</Shortcuts>
+    <MPV>Video player</MPV>
+    <Tools>Tools</Tools>
+    <AutoMode>Automatic</AutoMode>
+    <LightMode>Light mode</LightMode>
+    <DarkMode>Dark mode</DarkMode>
+    <ListMode>List</ListMode>
+    <BlockMode>Block</BlockMode>
+    <Frames>Frames</Frames>
+    <Milliseconds>Milliseconds</Milliseconds>    
+  </SettingsStrings>
+  <TipStrings>
+    <Tip1>Tip: Use &lt;%s/%s&gt; to go to previous/next subtitle</Tip1>
+    <Tip2>Tip: Use &lt;%s&gt; for a web word reference</Tip2>
+    <Tip3>Tip: Use &lt;%s&gt; dock/undock video window</Tip3>
+    <Tip4>Tip: Use &lt;%s&gt; dock/undock waveform window</Tip4>
+  </TipStrings>
+  <CommonStrings>
+    <OpenFile>Open file</OpenFile>    
+    <SaveFile>Save file</SaveFile>  
+    <AllSupportedFiles>All supported files</AllSupportedFiles>
+    <UnableToLoad>Error loading file, unrecognized format.</UnableToLoad>    
+    <FileChanged>File has not been saved.</FileChanged>
+    <TranslationFileChanged>Translation file has not been saved.</TranslationFileChanged>    
+    <AskToSave>'%s'||Do you wish to save it?</AskToSave>
+    <NoName>no name</NoName>
+    <WriteDenieded>Write denied. Please check folder permissions.</WriteDenieded>
+    <BackupSaved>Backup saved.</BackupSaved>
+    <NoSubtitlesMarked>There are no marked subtitles.</NoSubtitlesMarked>
+    <PromptForDeleteLines>The selected lines will be deleted.</PromptForDeleteLines>
+    <TranscriptionModeExit>Exiting transcription mode will lose any unsaved changes.</TranscriptionModeExit>
+    <TextFormatted>Export formatted text?</TextFormatted>        
+    <NoInternetConnection>No Internet connection available</NoInternetConnection>
+    <FailedToDownload>No content downloaded, missing file or no Internet connection.</FailedToDownload>
+    <AskToExtractAudio>Audio waveform was not found, do you want to extract it?</AskToExtractAudio>
+    <ExtractAppError>Unable to find '%s'.</ExtractAppError>
+    <Extracting>Extracting...</Extracting>
+    <Transcribing>Transcribing...</Transcribing>    
+    <libMPVError>Unable to find the required libraries to run the embedded mpv player. Please download them.</libMPVError>
+    <libMPVglError>Failed to initialize mpv GL context.</libMPVglError>
+    <libMPVVersionError>Could not initialize libmpv, possibly the wrong library was installed.</libMPVVersionError>
+    <SpellCheckFinished>Spell check finished.</SpellCheckFinished>
+    <Detect>Auto-detect</Detect>
+    <AddNote>Add note</AddNote>
+    <OpenVideoFromURL>Open video from</OpenVideoFromURL>    
+    <URL>URL</URL>
+    <NewShortCutPreset>Enter a name for your shortcuts preset</NewShortCutPreset>
+    <NewShortCutPresetName>Name</NewShortCutPresetName>
+    <FolderNotEmpty>The folder is not empty.</FolderNotEmpty>
+    <ContinueAnyway>Continue?</ContinueAnyway>
+    <SubtitleStartedAt>Subtitle started at %s</SubtitleStartedAt>    
+    <SubtitleEndedAt>Subtitle ended in %s</SubtitleEndedAt>
+    <Failed>Failed.</Failed>    
+    <Success>Success.</Success>
+    <NewVersionFound>A new version was found.</NewVersionFound>
+    <SeeChangeList>Do you want to see the change list?</SeeChangeList>
+    <NoNewVersion>You're using latest version.</NoNewVersion>    
+    <ErrorExecuting>Error executing '%s'.</ErrorExecuting> 
+  </CommonStrings>
+  <CommonControls> 
+    <rbnAllTheSubtitles>All the subtitles</rbnAllTheSubtitles>
+    <rbnFromTheSelectedSubtitle>From the selected subtitle</rbnFromTheSelectedSubtitle>
+    <rbnOnlySelectedSubtitles>Only selected subtitles</rbnOnlySelectedSubtitles>
+    <btnClose>Close</btnClose>
+    <btnOk>OK</btnOk>
+    <btnYes>Yes</btnYes>
+    <btnNo>No</btnNo>
+    <btnCancel>Cancel</btnCancel>
+    <btnSave>Save</btnSave>
+    <btnLoad>Open</btnLoad>    
+    <btnApply>Apply</btnApply>
+    <btnFind>Find</btnFind>
+    <btnFindNext>Find next</btnFindNext>
+    <btnFindPrev>Find prev.</btnFindPrev>
+    <btnReplace>Replace</btnReplace>
+    <btnReplaceAll>Repl. All</btnReplaceAll>
+    <btnRestore>Restore</btnRestore>
+    <btnAdd>Add</btnAdd>
+    <btnRemove>Remove</btnRemove>
+    <btnSelectAll>Select all</btnSelectAll>
+    <btnInvert>Invert</btnInvert>        
+    <btnScanFolder>Scan...</btnScanFolder>    
+    <btnGo>Go</btnGo>
+    <btnSkip>Skip</btnSkip>
+    <btnSkipAll>Skip all</btnSkipAll>
+    <btnAdd>Add</btnAdd>
+    <btnChange>Change</btnChange>
+    <btnChangeAll>Change all</btnChangeAll>
+    <btnTranslate>Translate</btnTranslate>
+    <btnOpenFile>...</btnOpenFile>
+    <btnExtract>Extract...</btnExtract>
+    <btnImport>Import...</btnImport>
+    <btnExport>Export...</btnExport>    
+    <btnDetect>Detect</btnDetect>
+    <btnGenerate>Generate</btnGenerate>        
+    <btnCopy>Copy</btnCopy>
+    <btnValidate>Validate</btnValidate>    
+    <btnUse>Use</btnUse>
+    <btnUpdate>Update</btnUpdate>    
+    <btnNext>Next</btnNext>
+    <btnDownload>Download</btnDownload>    
+    <lblScope>Scope:</lblScope>
+  </CommonControls>
+  <TranslationMemoryStrings>
+    <Original>Original</Original>
+    <Translated>Translated</Translated>
+    <Percent>Percent</Percent>
+  </TranslationMemoryStrings>  
+  <RestoreBackupStrings>
+    <DateTime>Date / Time</DateTime>
+    <Filename>File name</Filename>
+  </RestoreBackupStrings>
+  <ModifySelectionStrings>
+    <Contains>Contains</Contains>
+    <StartsWith>Starts with</StartsWith>
+    <EndsWith>Ends with</EndsWith>
+  </ModifySelectionStrings>      
+  <AdjustSubtitleStrings>
+    <Index>#</Index>
+    <OldTime>Old time</OldTime>
+    <NewTime>New time</NewTime>
+  </AdjustSubtitleStrings>
+  <AutomaticDurationStrings>
+    <NewDurationAll>New duration in all cases</NewDurationAll>
+    <NewDurationGreater>New duration is greater than original</NewDurationGreater>
+    <NewDurationSmaller>New duration is smaller than original</NewDurationSmaller>
+  </AutomaticDurationStrings>
+  <TimeExpanderStrings>
+    <Expand>Expand</Expand>
+    <Reduce>Reduce</Reduce>
+  </TimeExpanderStrings>                                
+  <MultipleReplaceStrings>
+    <Find>Find</Find>
+    <ReplaceWith>Replace with</ReplaceWith>
+    <RegExpr>R. Expression</RegExpr>
+  </MultipleReplaceStrings>     
+  <BatchConvertStrings>
+    <FileName>File name</FileName>
+    <FileFormat>Format</FileFormat>
+    <FileState>State</FileState>
+  </BatchConvertStrings>
+  <QualityCheckStrings>
+    <Index>#</Index>
+    <Rule>Broken rule</Rule>
+    <qcCPS>CPS (characters-per-second)</qcCPS>
+    <qcWPM>WPM (words-per-minute)</qcWPM>
+    <qcCPL>CPL (characters-per-line)</qcCPL>
+    <qcMaximumLines>Maximum lines</qcMaximumLines>
+    <qcMinimumDuration>Minimum duration</qcMinimumDuration>
+    <qcMaximumDuration>Maximum duration</qcMaximumDuration>
+    <qcGAP>Gap Minimum duration</qcGAP>        
+  </QualityCheckStrings>
+  <ShotChangesStrings>
+    <Frames>Frames</Frames>
+    <Seconds>Seconds</Seconds>
+    <Milliseconds>Milliseconds</Milliseconds>
+    <HHMMSSZZZ>HH:MM:SS.ZZZ</HHMMSSZZZ>
+    <HHMMSSFF>HH:MM:SS:FF</HHMMSSFF>      
+    <edl>Edit Decision Lists</edl>    
+    <shotchanges>Text files</shotchanges>
+  </ShotChangesStrings>
+  <CompareStrings>
+    <Index>Index</Index>
+    <InitialTime>Initial time</InitialTime>
+    <FinalTime>Final time</FinalTime>    
+    <Text>Text</Text>
+  </CompareStrings>                                                                                                                              
+  <HeaderStrings>
+    <Index>#/Gap</Index>
+    <Times>Times</Times>
+    <Duration>Duration</Duration>
+    <StyleAndActor>Style/Actor</StyleAndActor>
+    <Text>Text</Text>
+    <Translation>Translation</Translation>
+    <CPS>CPS</CPS>
+    <WPM>WPM</WPM>
+    <CPL>CPL</CPL>
+  </HeaderStrings>
+  <AppStrings>
+    <TextChars>Text (%s characters at %.2f CPS):</TextChars>
+    <Text>Text</Text>
+    <TranslationChars>Translation (%s characters at %.2f CPS):</TranslationChars>
+    <Translation>Translation</Translation>
+    <LineSelected>%d lines selected / %d</LineSelected>
+    <Marked>Marked subtitle</Marked>
+    <BadValues>Bad values</BadValues>
+    <TimeTooLong>Duration too long</TimeTooLong>
+    <TimeTooShort>Duration too short</TimeTooShort>
+    <GapTooShort>Gap too short</GapTooShort>
+    <MaxCPS>Too many CPS</MaxCPS>
+    <OverlappingWithPrev>Overlapping with previous subtitle</OverlappingWithPrev>
+    <OverlappingWithNext>Overlapping with following subtitle</OverlappingWithNext>    
+    <FixTags>Unnecessary tags</FixTags>
+    <Empty>Empty subtitle</Empty>
+    <Unbreak>Line breaks less than %d characters</Unbreak>
+    <UnnecessarySpaces>Unnecessary spaces</UnnecessarySpaces>
+    <UnnecessaryDots>Unnecessary dots</UnnecessaryDots>
+    <RepeatedChars>Repeated character</RepeatedChars>
+    <ProhibitedChars>Contains a prohibited character</ProhibitedChars>
+    <HearingImpaired>Hearing impaired</HearingImpaired>
+    <BreakLongLines>Line(s) too long</BreakLongLines>
+    <RepeatedSubtitle>Repeated subtitle</RepeatedSubtitle>
+    <EllipsesSingleSmartCharacter>Ellipses dots instead of Unicode character</EllipsesSingleSmartCharacter>
+    <MaxLines>Maximum number of lines exceeded</MaxLines>
+    <OCR>OCR error</OCR>        
+    <WaveformText>Click here to use timeline</WaveformText>    
+    <VideoLen>/ %s (%s FPS)</VideoLen>
+    <VideoLenSMPTE>/ %s (%s FPS/SMPTE)</VideoLenSMPTE>    
+    <ReadingVideoFile>Reading video file...</ReadingVideoFile>
+    <Custom>Custom</Custom>    
+  </AppStrings>
+</Language>

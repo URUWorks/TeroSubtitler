@@ -1,0 +1,322 @@
+object frmConventions: TfrmConventions
+  Left = 236
+  Height = 498
+  Top = 113
+  Width = 707
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Conventions'
+  ClientHeight = 498
+  ClientWidth = 707
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object btnClose: TButton
+    Left = 624
+    Height = 25
+    Top = 464
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 4
+  end
+  object lstTree: TListBox
+    Left = 8
+    Height = 448
+    Top = 8
+    Width = 200
+    Anchors = [akTop, akLeft, akBottom]
+    ExtendedSelect = False
+    ItemHeight = 0
+    OnSelectionChange = lstTreeSelectionChange
+    TabOrder = 0
+  end
+  object btnAdd: TButton
+    Left = 624
+    Height = 25
+    Top = 8
+    Width = 75
+    Anchors = [akTop, akRight]
+    Caption = 'Add'
+    OnClick = btnAddClick
+    TabOrder = 1
+  end
+  object btnRemove: TButton
+    Left = 624
+    Height = 25
+    Top = 40
+    Width = 75
+    Anchors = [akTop, akRight]
+    Caption = 'Remove'
+    OnClick = btnRemoveClick
+    TabOrder = 2
+  end
+  object btnUpdate: TButton
+    Left = 624
+    Height = 25
+    Top = 72
+    Width = 75
+    Anchors = [akTop, akRight]
+    Caption = 'Update'
+    OnClick = btnUpdateClick
+    TabOrder = 3
+  end
+  object lyoConvention: TUWLayout
+    Left = 216
+    Height = 448
+    Top = 8
+    Width = 403
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ClientHeight = 448
+    ClientWidth = 403
+    TabOrder = 5
+    object lblNewSubtitleMs: TLabel
+      Left = 0
+      Height = 15
+      Top = 100
+      Width = 190
+      AutoSize = False
+      Caption = 'New subtitle (ms)'
+      ParentColor = False
+    end
+    object spnNewSubtitleMs: TSpinEdit
+      Left = 190
+      Height = 23
+      Top = 96
+      Width = 80
+      MaxValue = 5000
+      TabOrder = 3
+      Value = 1000
+    end
+    object lblMinDurationMs: TLabel
+      Left = 0
+      Height = 15
+      Top = 132
+      Width = 190
+      AutoSize = False
+      Caption = 'Min. duration (ms)'
+      ParentColor = False
+    end
+    object spnMinDurationMs: TSpinEdit
+      Left = 190
+      Height = 23
+      Top = 128
+      Width = 80
+      MaxValue = 5000
+      TabOrder = 4
+      Value = 1000
+    end
+    object lblMaxDurationMs: TLabel
+      Left = 0
+      Height = 15
+      Top = 196
+      Width = 190
+      AutoSize = False
+      Caption = 'Max. duration (ms)'
+      ParentColor = False
+    end
+    object spnMaxDurationMs: TSpinEdit
+      Left = 190
+      Height = 23
+      Top = 192
+      Width = 80
+      MaxValue = 10000
+      TabOrder = 6
+      Value = 8000
+    end
+    object lblSubtitlePauseMs: TLabel
+      Left = 0
+      Height = 15
+      Top = 260
+      Width = 190
+      AutoSize = False
+      Caption = 'Min. subtitle pause'
+      ParentColor = False
+    end
+    object spnSubtitlePauseMs: TSpinEdit
+      Left = 190
+      Height = 23
+      Top = 256
+      Width = 80
+      MaxValue = 10000
+      TabOrder = 8
+      Value = 200
+    end
+    object edtRepeatableChars: TEdit
+      Left = 190
+      Height = 23
+      Top = 32
+      Width = 212
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 1
+    end
+    object edtProhibitedChars: TEdit
+      Left = 190
+      Height = 23
+      Top = 64
+      Width = 212
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 2
+    end
+    object lblRepeatableChars: TLabel
+      Left = 0
+      Height = 15
+      Top = 36
+      Width = 190
+      AutoSize = False
+      Caption = 'Repeatable chars'
+      ParentColor = False
+    end
+    object lblProhibitedChars: TLabel
+      Left = 0
+      Height = 15
+      Top = 68
+      Width = 190
+      AutoSize = False
+      Caption = 'Prohibited chars'
+      ParentColor = False
+    end
+    object chkDotsOnSplit: TUWCheckBox
+      Left = 0
+      Height = 19
+      Top = 392
+      Width = 18
+      AutoSize = False
+      Caption = 'Dots on split'
+      TabOrder = 14
+    end
+    object lblMaxLineCount: TLabel
+      Left = 0
+      Height = 15
+      Top = 228
+      Width = 190
+      AutoSize = False
+      Caption = 'Max. line count'
+      ParentColor = False
+    end
+    object spnMaxLineCount: TSpinEdit
+      Left = 190
+      Height = 23
+      Top = 224
+      Width = 80
+      MaxValue = 10
+      TabOrder = 7
+      Value = 2
+    end
+    object lblCPS: TLabel
+      Left = 0
+      Height = 15
+      Top = 292
+      Width = 190
+      AutoSize = False
+      Caption = 'CPS'
+      ParentColor = False
+    end
+    object spnCPS: TSpinEdit
+      Left = 190
+      Height = 23
+      Top = 288
+      Width = 80
+      MaxValue = 1000
+      TabOrder = 10
+      Value = 15
+    end
+    object lblWPM: TLabel
+      Left = 0
+      Height = 15
+      Top = 324
+      Width = 190
+      AutoSize = False
+      Caption = 'WPM'
+      ParentColor = False
+    end
+    object spnWPM: TSpinEdit
+      Left = 190
+      Height = 23
+      Top = 320
+      Width = 80
+      MaxValue = 1000
+      TabOrder = 12
+      Value = 180
+    end
+    object spnCPL: TSpinEdit
+      Left = 191
+      Height = 23
+      Top = 352
+      Width = 80
+      MaxValue = 500
+      TabOrder = 13
+      Value = 37
+    end
+    object lblCPL: TLabel
+      Left = 0
+      Height = 15
+      Top = 356
+      Width = 190
+      AutoSize = False
+      Caption = 'CPL'
+      ParentColor = False
+    end
+    object lblName: TLabel
+      Left = 0
+      Height = 15
+      Top = 4
+      Width = 190
+      AutoSize = False
+      Caption = 'Name'
+      ParentColor = False
+    end
+    object edtName: TEdit
+      Left = 190
+      Height = 23
+      Top = 0
+      Width = 212
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 0
+    end
+    object lblMinDurationPerWordMs: TLabel
+      Left = 0
+      Height = 15
+      Top = 164
+      Width = 190
+      AutoSize = False
+      Caption = 'Min. duration per word (ms)'
+      ParentColor = False
+    end
+    object spnMinDurationPerWord: TSpinEdit
+      Left = 190
+      Height = 23
+      Top = 160
+      Width = 80
+      MaxValue = 5000
+      TabOrder = 5
+      Value = 1000
+    end
+    object cboPauseMode: TComboBox
+      AnchorSideTop.Control = spnSubtitlePauseMs
+      AnchorSideTop.Side = asrCenter
+      Left = 280
+      Height = 23
+      Top = 256
+      Width = 122
+      Anchors = [akTop, akLeft, akRight]
+      ItemHeight = 15
+      Style = csDropDownList
+      TabOrder = 9
+    end
+    object edtCPSStrategy: TEdit
+      AnchorSideTop.Control = spnCPS
+      AnchorSideTop.Side = asrCenter
+      Left = 280
+      Height = 23
+      Top = 288
+      Width = 122
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 11
+    end
+  end
+end

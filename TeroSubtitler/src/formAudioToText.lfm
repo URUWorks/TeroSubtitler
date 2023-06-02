@@ -1,0 +1,176 @@
+object frmAudioToText: TfrmAudioToText
+  Left = 237
+  Height = 289
+  Top = 117
+  Width = 388
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Audio to text'
+  ClientHeight = 289
+  ClientWidth = 388
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object lblLanguage: TLabel
+    AnchorSideTop.Control = cboLanguage
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 44
+    Width = 52
+    Caption = 'Language'
+    ParentColor = False
+  end
+  object cboLanguage: TComboBox
+    Left = 96
+    Height = 23
+    Top = 40
+    Width = 283
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object lblModel: TLabel
+    AnchorSideTop.Control = cboModel
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 76
+    Width = 34
+    Caption = 'Model'
+    ParentColor = False
+  end
+  object cboModel: TComboBox
+    Left = 96
+    Height = 23
+    Top = 72
+    Width = 203
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object btnModel: TButton
+    AnchorSideTop.Control = cboModel
+    AnchorSideTop.Side = asrCenter
+    Left = 304
+    Height = 25
+    Top = 71
+    Width = 75
+    Caption = '...'
+    OnClick = btnModelClick
+    TabOrder = 3
+  end
+  object btnGenerate: TButton
+    Left = 224
+    Height = 25
+    Top = 254
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'Generate'
+    Default = True
+    OnClick = btnGenerateClick
+    TabOrder = 6
+  end
+  object btnClose: TButton
+    Left = 304
+    Height = 25
+    Top = 254
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 7
+  end
+  object lblTrack: TLabel
+    AnchorSideTop.Control = cboTrack
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 27
+    Caption = 'Track'
+    ParentColor = False
+  end
+  object cboTrack: TComboBox
+    Left = 96
+    Height = 23
+    Top = 8
+    Width = 283
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object lblWait: TLabel
+    Left = 0
+    Height = 32
+    Top = 168
+    Width = 389
+    Alignment = taCenter
+    AutoSize = False
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+    WordWrap = True
+  end
+  object lblStatus: TLabel
+    Left = 0
+    Height = 40
+    Top = 200
+    Width = 389
+    Alignment = taCenter
+    AutoSize = False
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+    WordWrap = True
+  end
+  object prbProgress: TProgressBar
+    AnchorSideTop.Control = lblTimeElapsed
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 8
+    Top = 262
+    Width = 152
+    Step = 1
+    TabOrder = 8
+    Visible = False
+  end
+  object lblTimeElapsed: TLabel
+    Left = 160
+    Height = 17
+    Top = 258
+    Width = 55
+    Alignment = taRightJustify
+    Anchors = [akRight, akBottom]
+    AutoSize = False
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object rbnAddSubtitlesWhileTranscribing: TUWRadioButton
+    Left = 96
+    Height = 23
+    Top = 104
+    Width = 18
+    AutoSize = False
+    Caption = 'Add subtitles while transcribing'
+    Checked = True
+    TabOrder = 5
+    State = cbChecked
+  end
+  object rbnLoadSubtitlesAfterTranscript: TUWRadioButton
+    Left = 96
+    Height = 23
+    Top = 128
+    Width = 18
+    AutoSize = False
+    Caption = 'Load subtitles after transcription'
+    TabOrder = 4
+    TabStop = False
+  end
+end

@@ -1,0 +1,3782 @@
+object frmMain: TfrmMain
+  Left = 235
+  Height = 800
+  Top = 113
+  Width = 1124
+  AllowDropFiles = True
+  Caption = 'tero'
+  ClientHeight = 780
+  ClientWidth = 1124
+  Constraints.MinHeight = 400
+  Constraints.MinWidth = 400
+  Menu = MainMenu
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDropFiles = FormDropFiles
+  OnResize = FormResize
+  OnShow = FormShow
+  Position = poMainFormCenter
+  ShowHint = True
+  LCLVersion = '2.2.6.0'
+  object LayoutWaveform: TUWLayout
+    Left = 0
+    Height = 120
+    Top = 637
+    Width = 1124
+    Align = alBottom
+    ClientHeight = 120
+    ClientWidth = 1124
+    Constraints.MaxHeight = 200
+    Constraints.MinHeight = 100
+    Constraints.MinWidth = 100
+    TabOrder = 2
+    object WAVE: TUWWaveformDisplayer
+      Left = 0
+      Height = 94
+      Top = 26
+      Width = 1124
+      MinimumBlank = 30
+      EmptyText = 'Click to add waveform'
+      FPS = 25
+      FPSTimeMode = False
+      CenterPlayCursor = True
+      SceneChangeEnabled = True
+      DrawGAP = True
+      SavePeakToFile = True
+      OnSelectionChange = WAVESelectionChange
+      OnSelectedSubtitleItem = WAVESelectedSubtitleItem
+      OnSelectedSubtitleItemChange = WAVESelectedSubtitleItemChange
+      OnSelectedSubtitleItemChanged = WAVESelectedSubtitleItemChanged
+      OnTimeLineClick = WAVETimeLineClick
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      PopupMenu = popWAVE
+      TabStop = True
+      TabOrder = 0
+      OnClick = WAVEClick
+      OnContextPopup = WAVEContextPopup
+    end
+    object ToolBarWaveform: TToolBar
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideRight.Side = asrCenter
+      Left = 416
+      Height = 22
+      Top = 0
+      Width = 293
+      Align = alNone
+      Anchors = [akTop]
+      AutoSize = True
+      EdgeBorders = []
+      Images = ImageList_Default
+      TabOrder = 1
+      Transparent = True
+      Wrapable = False
+      object wtlb0: TToolButton
+        Left = 1
+        Top = 0
+        Action = actMediaPlaySelection
+        DropdownMenu = popLoopCount
+        Style = tbsDropDown
+      end
+      object wtlb1: TToolButton
+        Left = 36
+        Top = 0
+        Action = actMediaPlayFromSelection
+      end
+      object wtlb2: TToolButton
+        Left = 59
+        Top = 0
+        Action = actMediaPlayBeforeSelection
+      end
+      object wtlb3: TToolButton
+        Left = 82
+        Top = 0
+        Action = actMediaPlayAfterSelection
+      end
+      object wtlbdiv0: TToolButton
+        Left = 105
+        Height = 22
+        Top = 0
+        Style = tbsDivider
+      end
+      object wtlb4: TToolButton
+        Left = 110
+        Top = 0
+        Action = actMediaAddSubtitle
+      end
+      object wtlbdiv1: TToolButton
+        Left = 133
+        Height = 22
+        Top = 0
+        Style = tbsDivider
+      end
+      object wtlb5: TToolButton
+        Left = 138
+        Top = 0
+        Action = actMediaZoomIn
+      end
+      object wtlb6: TToolButton
+        Left = 161
+        Top = 0
+        Action = actMediaZoomOut
+      end
+      object wtlb7: TToolButton
+        Left = 184
+        Top = 0
+        Action = actMediaZoomSelection
+      end
+      object wtlbdiv2: TToolButton
+        Left = 207
+        Height = 22
+        Top = 0
+        Style = tbsDivider
+      end
+      object wtlb8: TToolButton
+        Left = 212
+        Top = 0
+        Action = actCenterWaveform
+      end
+      object wtlb9: TToolButton
+        Left = 235
+        Top = 0
+        Action = actViewShotChange
+      end
+      object wtlb10: TToolButton
+        Left = 258
+        Top = 0
+        Action = actDetectSilentZones
+        DropdownMenu = popSilentZones
+        Style = tbsDropDown
+      end
+    end
+  end
+  object LayoutVideo: TUWLayout
+    Left = 624
+    Height = 603
+    Top = 29
+    Width = 500
+    Align = alRight
+    ClientHeight = 603
+    ClientWidth = 500
+    Constraints.MinHeight = 150
+    Constraints.MinWidth = 150
+    TabOrder = 1
+    object LayoutVideoControls: TUWLayout
+      Left = 0
+      Height = 36
+      Top = 567
+      Width = 500
+      Align = alBottom
+      ClientHeight = 36
+      ClientWidth = 500
+      TabOrder = 0
+      object ToolBarVideo: TToolBar
+        AnchorSideRight.Side = asrCenter
+        Left = 0
+        Height = 22
+        Top = 12
+        Width = 304
+        Align = alNone
+        AutoSize = True
+        EdgeBorders = []
+        Images = ImageList_Default
+        TabOrder = 0
+        Transparent = True
+        Wrapable = False
+        object vtlb0: TToolButton
+          Left = 1
+          Top = 0
+          Action = actMediaPlay
+        end
+        object vtlb1: TToolButton
+          Left = 24
+          Top = 0
+          Action = actMediaStop
+        end
+        object vtlbdiv0: TToolButton
+          Left = 47
+          Height = 22
+          Top = 0
+          Style = tbsDivider
+        end
+        object vtlb2: TToolButton
+          Left = 52
+          Top = 0
+          Action = actMediaAutoScroll
+        end
+        object vtlb3: TToolButton
+          Left = 75
+          Top = 0
+          Action = actMediaChangePlayRate
+          DropdownMenu = popPlayRate
+          Style = tbsDropDown
+        end
+        object vtlbdiv1: TToolButton
+          Left = 110
+          Height = 22
+          Top = 0
+          Style = tbsDivider
+        end
+        object vtlb4: TToolButton
+          Left = 115
+          Top = 0
+          Action = actMediaRewind
+        end
+        object vtlb5: TToolButton
+          Left = 138
+          Top = 0
+          Action = actMediaForward
+        end
+        object vtlb6: TToolButton
+          Left = 161
+          Top = 0
+          Action = actMediaPreviousFrame
+        end
+        object vtlb7: TToolButton
+          Left = 184
+          Top = 0
+          Action = actMediaNextFrame
+        end
+        object vtlbdiv2: TToolButton
+          Left = 207
+          Height = 22
+          Top = 0
+          Style = tbsDivider
+        end
+        object vtlb8: TToolButton
+          Left = 212
+          Top = 0
+          Action = actMediaSetInitialTime
+        end
+        object vtlb9: TToolButton
+          Left = 235
+          Top = 0
+          Action = actMediaSetFinalTime
+        end
+        object vtlb10: TToolButton
+          Left = 258
+          Top = 0
+          Action = actMediaStartSubtitle
+        end
+        object vtlb11: TToolButton
+          Left = 281
+          Top = 0
+          Action = actMediaEndSubtitle
+        end
+      end
+      object sbrSeek: TUWSeekBar
+        Left = 0
+        Height = 7
+        Top = 0
+        Width = 500
+        ShowButton = False
+        Max = 1000
+        Position = 0
+        BackColor = 13882323
+        FillColor = 13997662
+        ButtonColor = 6908265
+        BtnDownColor = 10061943
+        Align = alTop
+        OnMouseDown = sbrSeekMouseDown
+        OnMouseMove = sbrSeekMouseMove
+        OnMouseUp = sbrSeekMouseUp
+        OnMouseLeave = sbrSeekMouseLeave
+      end
+      object lblMediaLength: TLabel
+        Left = 413
+        Height = 15
+        Top = 16
+        Width = 80
+        Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        Caption = '/ 00:00:00.000'
+        Font.Style = [fsBold]
+        Layout = tlCenter
+        ParentColor = False
+        ParentFont = False
+        ShowAccelChar = False
+      end
+      object lblMediaTime: TLabel
+        AnchorSideTop.Control = lblMediaLength
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = lblMediaLength
+        Left = 338
+        Height = 15
+        Top = 16
+        Width = 72
+        Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 3
+        Caption = '00:00:00.000'
+        Font.Style = [fsBold]
+        Layout = tlCenter
+        ParentColor = False
+        ParentFont = False
+        ShowAccelChar = False
+      end
+    end
+    object MPV: TMPVPlayer
+      Left = 0
+      Height = 567
+      Top = 0
+      Width = 500
+      Align = alClient
+      BevelOuter = bvNone
+      ParentColor = False
+      PopupMenu = popVideo
+      TabOrder = 1
+      OnClick = MPVClick
+      OnMouseWheelDown = MPVMouseWheelDown
+      OnMouseWheelUp = MPVMouseWheelUp
+      AutoStartPlayback = True
+      AutoLoadSubtitle = False
+      KeepAspect = True
+      RendererMode = rmEmbedding
+      LogLevel = llStatus
+      OnStartFile = MPVStartFile
+      OnEndFile = MPVEndFile
+      OnFileLoaded = MPVFileLoaded
+      OnAudioReconfig = MPVAudioReconfig
+      OnPlay = MPVPlay
+      OnStop = MPVStop
+      OnPause = MPVPause
+      OnTimeChanged = MPVTimeChanged
+    end
+  end
+  object SplitterWaveform: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 632
+    Width = 1124
+    Align = alBottom
+    AutoSnap = False
+    ResizeAnchor = akBottom
+    ResizeStyle = rsLine
+  end
+  object SplitterVideo: TSplitter
+    Left = 619
+    Height = 603
+    Top = 29
+    Width = 5
+    Align = alRight
+    AutoSnap = False
+    ResizeAnchor = akRight
+    ResizeStyle = rsLine
+  end
+  object LayoutSubtitles: TUWLayout
+    Left = 0
+    Height = 603
+    Top = 29
+    Width = 619
+    Align = alClient
+    ClientHeight = 603
+    ClientWidth = 619
+    Constraints.MinHeight = 150
+    Constraints.MinWidth = 150
+    TabOrder = 0
+    object LayoutVST: TUWLayout
+      Left = 0
+      Height = 603
+      Top = 0
+      Width = 619
+      Align = alClient
+      ClientHeight = 603
+      ClientWidth = 619
+      TabOrder = 0
+      OnResize = LayoutVSTResize
+      object LayoutEditor: TUWLayout
+        Left = 0
+        Height = 136
+        Top = 467
+        Width = 619
+        Align = alBottom
+        ClientHeight = 136
+        ClientWidth = 619
+        TabOrder = 0
+        object LayoutEditorTimes: TUWLayout
+          Left = 0
+          Height = 136
+          Top = 0
+          Width = 148
+          Align = alLeft
+          ClientHeight = 136
+          ClientWidth = 148
+          TabOrder = 0
+          object tedInitial: TUWTimeEdit
+            Left = 24
+            Height = 23
+            Top = 27
+            Width = 104
+            Value = 0
+            FPS = 25
+            FrameStep = 1
+            TimeStep = 10
+            TimeMode = temTime
+            OnTimeChange = tedTimeChange
+            Alignment = taCenter
+            Constraints.MinHeight = 21
+            Constraints.MinWidth = 90
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+          end
+          object btnInitialTime: TUWFlatButton
+            Left = 1
+            Top = 27
+            ButtonStyle = True
+            HightlightColor = clBtnHighlight
+            BorderColor = clActiveCaption
+            CheckedColor = clInactiveBorder
+            Images = ImageList_Default
+            ImageIndex = 34
+            Action = actExtendLengthToPrevious
+            Color = clBtnFace
+          end
+          object btnFinalTime: TUWFlatButton
+            Left = 1
+            Top = 55
+            ButtonStyle = True
+            HightlightColor = clBtnHighlight
+            BorderColor = clActiveCaption
+            CheckedColor = clInactiveBorder
+            Images = ImageList_Default
+            ImageIndex = 35
+            Action = actExtendLengthToNext
+            Color = clBtnFace
+          end
+          object tedFinal: TUWTimeEdit
+            Left = 24
+            Height = 23
+            Top = 55
+            Width = 104
+            Value = 0
+            FPS = 25
+            FrameStep = 1
+            TimeStep = 10
+            TimeMode = temTime
+            OnTimeChange = tedTimeChange
+            Alignment = taCenter
+            Constraints.MinHeight = 21
+            Constraints.MinWidth = 90
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 2
+          end
+          object btnDuration: TUWFlatButton
+            Left = 1
+            Top = 83
+            ButtonStyle = True
+            HightlightColor = clBtnHighlight
+            BorderColor = clActiveCaption
+            CheckedColor = clInactiveBorder
+            Images = ImageList_Default
+            ImageIndex = 36
+            Action = actSetAutomaticDuration
+            Color = clBtnFace
+          end
+          object tedDuration: TUWTimeEdit
+            Left = 24
+            Height = 23
+            Top = 83
+            Width = 104
+            Value = 0
+            FPS = 25
+            FrameStep = 1
+            TimeStep = 10
+            TimeMode = temTime
+            OnTimeChange = tedTimeChange
+            Alignment = taCenter
+            Constraints.MinHeight = 21
+            Constraints.MinWidth = 90
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 4
+          end
+          object btnPause: TUWFlatButton
+            Left = 1
+            Top = 111
+            ButtonStyle = True
+            HightlightColor = clBtnHighlight
+            BorderColor = clActiveCaption
+            CheckedColor = clInactiveBorder
+            Images = ImageList_Default
+            ImageIndex = 37
+            Action = actSetDefaultPause
+            Color = clBtnFace
+          end
+          object tedPause: TUWTimeEdit
+            Left = 24
+            Height = 23
+            Top = 111
+            Width = 104
+            Value = 0
+            FPS = 25
+            FrameStep = 1
+            TimeStep = 10
+            TimeMode = temTime
+            OnTimeChange = tedTimeChange
+            Alignment = taCenter
+            Constraints.MinHeight = 21
+            Constraints.MinWidth = 90
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 6
+          end
+        end
+        object LayoutEditorClient: TUWLayout
+          Left = 148
+          Height = 136
+          Top = 0
+          Width = 471
+          Align = alClient
+          ClientHeight = 136
+          ClientWidth = 471
+          TabOrder = 1
+          object mmoText: TUWMemo
+            Left = 0
+            Height = 79
+            Top = 55
+            Width = 208
+            LabelMemo.AnchorSideLeft.Control = mmoText
+            LabelMemo.AnchorSideRight.Control = mmoText
+            LabelMemo.AnchorSideRight.Side = asrBottom
+            LabelMemo.AnchorSideBottom.Control = mmoText
+            LabelMemo.Left = 0
+            LabelMemo.Height = 15
+            LabelMemo.Top = 37
+            LabelMemo.Width = 208
+            LabelMemo.Anchors = [akLeft, akRight, akBottom]
+            LabelMemo.BorderSpacing.Bottom = 3
+            LabelMemo.Caption = 'mmoText'
+            LabelMemo.FocusControl = mmoText
+            LabelMemo.ParentColor = False
+            CPSBar.AnchorSideLeft.Control = mmoText
+            CPSBar.AnchorSideTop.Control = mmoText
+            CPSBar.AnchorSideTop.Side = asrBottom
+            CPSBar.AnchorSideRight.Control = mmoText
+            CPSBar.AnchorSideRight.Side = asrBottom
+            CPSBar.Cursor = crArrow
+            CPSBar.Left = 0
+            CPSBar.Height = 3
+            CPSBar.Top = 134
+            CPSBar.Width = 208
+            CPSBar.Max = 27
+            CPSBar.BackColor = clBtnFace
+            CPSBar.BorderColor = clInactiveBorder
+            CPSBar.Anchors = [akTop, akLeft, akRight]
+            LabelSpacing = 3
+            CPSBarSpacing = 0
+            Alignment = taCenter
+            Font.Style = [fsBold]
+            OnChange = mmoTextChange
+            ParentFont = False
+            PopupMenu = popMemo
+            ScrollBars = ssAutoVertical
+            TabOrder = 0
+          end
+          object mmoTranslation: TUWMemo
+            Left = 216
+            Height = 79
+            Top = 55
+            Width = 208
+            LabelMemo.AnchorSideLeft.Control = mmoTranslation
+            LabelMemo.AnchorSideRight.Control = mmoTranslation
+            LabelMemo.AnchorSideRight.Side = asrBottom
+            LabelMemo.AnchorSideBottom.Control = mmoTranslation
+            LabelMemo.Left = 216
+            LabelMemo.Height = 15
+            LabelMemo.Top = 37
+            LabelMemo.Width = 208
+            LabelMemo.Anchors = [akLeft, akRight, akBottom]
+            LabelMemo.BorderSpacing.Bottom = 3
+            LabelMemo.Caption = 'mmoTranslation'
+            LabelMemo.FocusControl = mmoTranslation
+            LabelMemo.ParentColor = False
+            LabelMemo.Visible = False
+            CPSBar.AnchorSideLeft.Control = mmoTranslation
+            CPSBar.AnchorSideTop.Control = mmoTranslation
+            CPSBar.AnchorSideTop.Side = asrBottom
+            CPSBar.AnchorSideRight.Control = mmoTranslation
+            CPSBar.AnchorSideRight.Side = asrBottom
+            CPSBar.Cursor = crArrow
+            CPSBar.Left = 216
+            CPSBar.Height = 3
+            CPSBar.Top = 134
+            CPSBar.Width = 208
+            CPSBar.Max = 27
+            CPSBar.BackColor = clBtnFace
+            CPSBar.BorderColor = clInactiveBorder
+            CPSBar.Anchors = [akTop, akLeft, akRight]
+            LabelSpacing = 3
+            CPSBarSpacing = 0
+            Alignment = taCenter
+            Font.Style = [fsBold]
+            OnChange = mmoTextChange
+            ParentFont = False
+            PopupMenu = popMemo
+            ScrollBars = ssAutoVertical
+            TabOrder = 1
+            Visible = False
+          end
+          object ToolBarEditor: TToolBar
+            Left = 0
+            Height = 22
+            Top = 2
+            Width = 471
+            AutoSize = True
+            BorderSpacing.Top = 2
+            EdgeBorders = []
+            Images = ImageList_Default
+            TabOrder = 2
+            Transparent = True
+            Wrapable = False
+            object etlb0: TToolButton
+              Left = 1
+              Top = 0
+              Action = actPreviousSubtitle
+            end
+            object etlb1: TToolButton
+              Left = 24
+              Top = 0
+              Action = actNextSubtitle
+            end
+            object etlbdiv0: TToolButton
+              Left = 47
+              Height = 22
+              Top = 0
+              Style = tbsDivider
+            end
+            object etlb2: TToolButton
+              Left = 52
+              Top = 0
+              Action = actFontBold
+            end
+            object etlb3: TToolButton
+              Left = 75
+              Top = 0
+              Action = actFontItalic
+            end
+            object etlb4: TToolButton
+              Left = 98
+              Top = 0
+              Action = actFontUnderline
+            end
+            object etlb5: TToolButton
+              Left = 121
+              Top = 0
+              Action = actFontStrikeout
+            end
+            object etlb6: TToolButton
+              Left = 144
+              Top = 0
+              Action = actFontClear
+            end
+            object etlbdiv1: TToolButton
+              Left = 167
+              Height = 22
+              Top = 0
+              Style = tbsDivider
+            end
+            object etlb7: TToolButton
+              Left = 172
+              Top = 0
+              Action = actAlignToLeft
+            end
+            object etlb8: TToolButton
+              Left = 195
+              Top = 0
+              Action = actAlignToCenter
+            end
+            object etlb9: TToolButton
+              Left = 218
+              Top = 0
+              Action = actAlignToRight
+            end
+            object etlb10: TToolButton
+              Left = 241
+              Top = 0
+              Action = actAlignToNone
+            end
+            object etlbdiv2: TToolButton
+              Left = 264
+              Height = 22
+              Top = 0
+              Style = tbsDivider
+            end
+            object etlb11: TToolButton
+              Left = 269
+              Top = 0
+              Action = actVAlignToBottom
+            end
+            object etlb12: TToolButton
+              Left = 292
+              Top = 0
+              Action = actVAlignToMiddle
+            end
+            object etlb13: TToolButton
+              Left = 315
+              Top = 0
+              Action = actVAlignToTop
+            end
+            object etlbdiv3: TToolButton
+              Left = 338
+              Height = 22
+              Top = 0
+              Style = tbsDivider
+            end
+            object etlb14: TToolButton
+              Left = 343
+              Top = 0
+              Action = actAutoBreakSubtitle
+            end
+            object tlbValidate: TToolButton
+              Left = 366
+              Top = 0
+              Action = actValidateTM
+            end
+          end
+        end
+      end
+      object VST: TLazVirtualStringTree
+        Left = 0
+        Height = 467
+        Top = 0
+        Width = 619
+        Align = alClient
+        Header.AutoSizeIndex = -1
+        Header.Columns = <>
+        Header.MainColumn = -1
+        Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+        Header.PopupMenu = popVSTHeader
+        HintMode = hmHint
+        PopupMenu = popVST
+        TabOrder = 1
+        TreeOptions.AutoOptions = [toAutoTristateTracking]
+        TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+        TreeOptions.PaintOptions = [toHideFocusRect, toHideSelection, toShowDropmark, toThemeAware, toUseBlendedImages, toAlwaysHideSelection]
+        TreeOptions.SelectionOptions = [toFullRowSelect, toMultiSelect, toSimpleDrawSelection]
+        TreeOptions.StringOptions = []
+        OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+        OnChange = VSTChange
+        OnContextPopup = VSTContextPopup
+        OnDblClick = VSTDblClick
+        OnGetHint = VSTGetHint
+        OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+        OnResize = VSTResize
+      end
+    end
+    object LayoutSource: TUWLayout
+      Left = 150
+      Height = 133
+      Top = 16
+      Width = 174
+      ClientHeight = 133
+      ClientWidth = 174
+      TabOrder = 1
+      Visible = False
+      object mmoSourceView: TMemo
+        Left = 0
+        Height = 133
+        Top = 0
+        Width = 174
+        Align = alClient
+        OnChange = mmoSourceViewChange
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+        WordWrap = False
+      end
+    end
+    object LayoutTranscription: TUWLayout
+      Left = 150
+      Height = 133
+      Top = 152
+      Width = 174
+      TabOrder = 2
+      Visible = False
+    end
+  end
+  object StatusBar: TUWStatusBar
+    Left = 0
+    Height = 23
+    Top = 757
+    Width = 1124
+    Panels = <    
+      item
+        Bevel = pbNone
+        Width = 250
+      end    
+      item
+        Alignment = taRightJustify
+        Bevel = pbNone
+        Width = 200
+      end>
+    SimplePanel = False
+  end
+  object CoolBarMain: TCoolBar
+    Left = 0
+    Height = 29
+    Top = 0
+    Width = 1124
+    AutoSize = True
+    BandBorderStyle = bsNone
+    Bands = <    
+      item
+        Break = False
+        Control = ToolBarMain
+        FixedBackground = False
+        HorizontalOnly = True
+        ParentBitmap = False
+        Width = 502
+      end    
+      item
+        Break = False
+        Control = ToolBarFPS
+        FixedBackground = False
+        HorizontalOnly = True
+        ParentBitmap = False
+        Width = 191
+      end    
+      item
+        Break = False
+        Control = ToolBarFormat
+        FixedBackground = False
+        HorizontalOnly = True
+        ParentBitmap = False
+        Width = 211
+      end    
+      item
+        Break = False
+        Control = ToolBarEncoding
+        FixedBackground = False
+        HorizontalOnly = True
+        ParentBitmap = False
+        Width = 211
+      end>
+    EdgeBorders = []
+    EdgeInner = esNone
+    EdgeOuter = esNone
+    GrabStyle = gsHorLines
+    GrabWidth = 3
+    HorizontalSpacing = 0
+    ShowText = False
+    object ToolBarMain: TToolBar
+      AnchorSideLeft.Control = CoolBarMain
+      AnchorSideTop.Control = CoolBarMain
+      Left = 5
+      Height = 22
+      Top = 3
+      Width = 492
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 5
+      BorderSpacing.Top = 3
+      BorderSpacing.Bottom = 1
+      EdgeBorders = []
+      EdgeInner = esNone
+      EdgeOuter = esNone
+      Images = ImageList_Default
+      TabOrder = 0
+      Transparent = True
+      Wrapable = False
+      object tlb0: TToolButton
+        Left = 1
+        Top = 0
+        Action = actNewSubtitle
+      end
+      object tlb1: TToolButton
+        Left = 24
+        Top = 0
+        Action = actLoadSubtitle
+        DropdownMenu = popMRU
+        Style = tbsDropDown
+      end
+      object tlb2: TToolButton
+        Left = 59
+        Top = 0
+        Action = actSaveSubtitle
+      end
+      object tlbdiv0: TToolButton
+        Left = 82
+        Height = 22
+        Top = 0
+        Style = tbsDivider
+      end
+      object tlb3: TToolButton
+        Left = 87
+        Top = 0
+        Action = actUndo
+      end
+      object tlb4: TToolButton
+        Left = 110
+        Top = 0
+        Action = actRedo
+      end
+      object tlbdiv1: TToolButton
+        Left = 133
+        Height = 22
+        Top = 0
+        Style = tbsDivider
+      end
+      object tlb5: TToolButton
+        Left = 138
+        Top = 0
+        Action = actCut
+      end
+      object tlb6: TToolButton
+        Left = 161
+        Top = 0
+        Action = actCopy
+      end
+      object tlb7: TToolButton
+        Left = 184
+        Top = 0
+        Action = actPaste
+      end
+      object tlbdiv2: TToolButton
+        Left = 207
+        Height = 22
+        Top = 0
+        Style = tbsDivider
+      end
+      object tlb8: TToolButton
+        Left = 212
+        Top = 0
+        Action = actInsertSubtitle
+        DropdownMenu = popDropInsert
+        Style = tbsDropDown
+      end
+      object tlb9: TToolButton
+        Left = 247
+        Top = 0
+        Action = actCombineSubtitles
+      end
+      object tlb10: TToolButton
+        Left = 270
+        Top = 0
+        Action = actDeleteSubtitle
+      end
+      object tlbdiv3: TToolButton
+        Left = 293
+        Height = 22
+        Top = 0
+        Style = tbsDivider
+      end
+      object tlb11: TToolButton
+        Left = 298
+        Top = 0
+        Action = actListMode
+        Style = tbsCheck
+      end
+      object tlb12: TToolButton
+        Left = 321
+        Top = 0
+        Action = actSourceMode
+        Style = tbsCheck
+      end
+      object tlb13: TToolButton
+        Left = 344
+        Top = 0
+        Action = actTranscriptionMode
+        Style = tbsCheck
+      end
+      object tlbdiv4: TToolButton
+        Left = 367
+        Height = 22
+        Top = 0
+        Style = tbsDivider
+      end
+      object tlb14: TToolButton
+        Left = 372
+        Top = 0
+        Action = actTranslatorMode
+      end
+      object tlb15: TToolButton
+        Left = 395
+        Top = 0
+        Action = actVideoPreview
+      end
+      object tlb16: TToolButton
+        Left = 418
+        Top = 0
+        Action = actWaveformPreview
+      end
+      object tlbdiv5: TToolButton
+        Left = 441
+        Height = 22
+        Top = 0
+        Style = tbsDivider
+      end
+      object tlb17: TToolButton
+        Left = 446
+        Top = 0
+        Action = actTimeMode
+        Style = tbsCheck
+      end
+      object tlb18: TToolButton
+        Left = 469
+        Top = 0
+        Action = actFramesMode
+        Style = tbsCheck
+      end
+    end
+    object ToolBarFPS: TToolBar
+      AnchorSideLeft.Control = CoolBarMain
+      AnchorSideTop.Control = CoolBarMain
+      Left = 507
+      Height = 23
+      Top = 3
+      Width = 184
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 507
+      BorderSpacing.Top = 3
+      EdgeBorders = []
+      Images = ImageList_Default
+      TabOrder = 1
+      Transparent = True
+      Wrapable = False
+      object cboInputFPS: TComboBox
+        Left = 1
+        Height = 23
+        Top = 0
+        Width = 90
+        ItemHeight = 15
+        OnSelect = cboInputFPSSelect
+        Style = csDropDownList
+        TabOrder = 0
+        TabStop = False
+      end
+      object cboFPS: TComboBox
+        Left = 94
+        Height = 23
+        Top = 0
+        Width = 90
+        ItemHeight = 15
+        OnKeyPress = cboFPSKeyPress
+        OnSelect = cboFPSSelect
+        Style = csDropDownList
+        TabOrder = 1
+        TabStop = False
+      end
+      object lblSeparatorFPS: TLabel
+        Left = 91
+        Height = 15
+        Top = 0
+        Width = 3
+        Caption = ' '
+        ParentColor = False
+      end
+    end
+    object ToolBarFormat: TToolBar
+      AnchorSideLeft.Control = CoolBarMain
+      AnchorSideTop.Control = CoolBarMain
+      Left = 698
+      Height = 23
+      Top = 3
+      Width = 204
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 698
+      BorderSpacing.Top = 3
+      EdgeBorders = []
+      Images = ImageList_Default
+      TabOrder = 2
+      Transparent = True
+      Wrapable = False
+      object tlb19: TToolButton
+        Left = 1
+        Top = 0
+        Action = actSetAsDefaultFormat
+      end
+      object cboFormat: TComboBox
+        Left = 24
+        Height = 23
+        Top = 0
+        Width = 180
+        ItemHeight = 15
+        Style = csDropDownList
+        TabOrder = 0
+        TabStop = False
+      end
+    end
+    object ToolBarEncoding: TToolBar
+      AnchorSideLeft.Control = CoolBarMain
+      AnchorSideTop.Control = CoolBarMain
+      Left = 909
+      Height = 23
+      Top = 3
+      Width = 204
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 909
+      BorderSpacing.Top = 3
+      EdgeBorders = []
+      Images = ImageList_Default
+      TabOrder = 3
+      Transparent = True
+      Wrapable = False
+      object tlb20: TToolButton
+        Left = 1
+        Top = 0
+        Action = actSetAsDefaultEncoding
+      end
+      object cboEncoding: TComboBox
+        Left = 24
+        Height = 23
+        Top = 0
+        Width = 180
+        ItemHeight = 15
+        Style = csDropDownList
+        TabOrder = 0
+        TabStop = False
+      end
+    end
+  end
+  object MainMenu: TMainMenu
+    Images = ImageList_Default
+    Left = 26
+    Top = 40
+    object mnuFile: TMenuItem
+      Caption = 'File'
+      object MenuItem3: TMenuItem
+        Action = actNewSubtitle
+      end
+      object MenuItem4: TMenuItem
+        Action = actLoadSubtitle
+      end
+      object mnuFileMRU: TMenuItem
+        Caption = 'Recent files'
+      end
+      object Separator1: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem113: TMenuItem
+        Action = actRestoreBackup
+      end
+      object Separator21: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem39: TMenuItem
+        Action = actSaveSubtitle
+      end
+      object MenuItem5: TMenuItem
+        Action = actSaveSubtitleAs
+      end
+      object MenuItem40: TMenuItem
+        Action = actSaveTranslation
+      end
+      object MenuItem6: TMenuItem
+        Action = actSaveTranslationAs
+      end
+      object Separator29: TMenuItem
+        Caption = '-'
+      end
+      object mnuFileImport: TMenuItem
+        Caption = 'Import'
+        object MenuItem146: TMenuItem
+          Action = actImportSubtitles
+        end
+        object MenuItem126: TMenuItem
+          Action = actLoadTranscription
+        end
+      end
+      object mnuFileExport: TMenuItem
+        Caption = 'Export'
+        object MenuItem148: TMenuItem
+          Action = actExportTextOnly
+        end
+        object MenuItem147: TMenuItem
+          Action = actExportMarkedSubtitles
+        end
+        object MenuItem127: TMenuItem
+          Action = actSaveTranscription
+        end
+      end
+      object Separator30: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem135: TMenuItem
+        Action = actCompare
+      end
+      object Separator39: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem7: TMenuItem
+        Action = actCloseSubtitle
+      end
+      object mnuExit: TMenuItem
+        Action = actCloseApp
+      end
+    end
+    object mnuEdit: TMenuItem
+      Caption = 'Edit'
+      object MenuItem9: TMenuItem
+        Action = actUndo
+      end
+      object MenuItem10: TMenuItem
+        Action = actRedo
+      end
+      object Separator2: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem11: TMenuItem
+        Action = actCut
+      end
+      object MenuItem12: TMenuItem
+        Action = actCopy
+      end
+      object MenuItem13: TMenuItem
+        Action = actPaste
+      end
+      object Separator3: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem14: TMenuItem
+        Action = actInsertSubtitleBefore
+      end
+      object MenuItem15: TMenuItem
+        Action = actInsertSubtitle
+      end
+      object MenuItem16: TMenuItem
+        Action = actDeleteSubtitle
+      end
+      object Separator4: TMenuItem
+        Caption = '-'
+      end
+      object mnuEditInsertSymbol: TMenuItem
+        Caption = 'Insert unicode symbol'
+      end
+      object Separator5: TMenuItem
+        Caption = '-'
+      end
+      object mnuEditTimings: TMenuItem
+        Caption = 'Timings'
+        object MenuItem63: TMenuItem
+          Action = actAdjustSubtitle
+        end
+        object MenuItem47: TMenuItem
+          Action = actAutomaticDuration
+        end
+        object MenuItem46: TMenuItem
+          Action = actDurationLimits
+        end
+        object MenuItem49: TMenuItem
+          Action = actSetDelay
+        end
+        object MenuItem69: TMenuItem
+          Action = actShiftTimes
+        end
+        object MenuItem48: TMenuItem
+          Action = actTimeExpander
+        end
+        object Separator13: TMenuItem
+          Caption = '-'
+        end
+        object mnuEditTimingsEndCue: TMenuItem
+          Caption = 'End Cue'
+          object MenuItem66: TMenuItem
+            Action = actEndCueAddOneFrame
+          end
+          object MenuItem67: TMenuItem
+            Action = actEndCueSubtractOneFrame
+          end
+        end
+        object mnuEditTimingsExtend: TMenuItem
+          Caption = 'Extend length'
+          object MenuItem72: TMenuItem
+            Action = actExtendLengthToPrevious
+          end
+          object MenuItem73: TMenuItem
+            Action = actExtendLengthToNext
+          end
+          object Separator14: TMenuItem
+            Caption = '-'
+          end
+          object MenuItem50: TMenuItem
+            Action = actSetAutomaticDuration
+          end
+          object MenuItem74: TMenuItem
+            Action = actSetDefaultPause
+          end
+        end
+        object Separator19: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem68: TMenuItem
+          Action = actReadTimingsFromFile
+        end
+      end
+      object mnuEditTexts: TMenuItem
+        Caption = 'Texts'
+        object MenuItem55: TMenuItem
+          Action = actAutoBreakSubtitle
+        end
+        object MenuItem53: TMenuItem
+          Action = actConvertCase
+        end
+        object MenuItem54: TMenuItem
+          Action = actUnbreakSubtitle
+        end
+        object MenuItem56: TMenuItem
+          Action = actSetMaximumLineLength
+        end
+        object MenuItem150: TMenuItem
+          Action = actAddQuotationMarks
+        end
+        object MenuItem75: TMenuItem
+          Action = actSwapTexts
+        end
+        object Separator15: TMenuItem
+          Caption = '-'
+        end
+        object mnuEditRTL: TMenuItem
+          Caption = 'Right-to-left'
+          object MenuItem57: TMenuItem
+            Action = actReverseText
+          end
+          object MenuItem58: TMenuItem
+            Action = actFixRTLPunctuation
+          end
+        end
+        object Separator18: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem71: TMenuItem
+          Action = actReadTextsFromFile
+        end
+      end
+      object mnuEditSubtitles: TMenuItem
+        Caption = 'Subtitles'
+        object MenuItem62: TMenuItem
+          Action = actCombineSubtitles
+        end
+        object MenuItem59: TMenuItem
+          Action = actDivideSubtitle
+        end
+        object Separator16: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem64: TMenuItem
+          Action = actJumpToNextMarked
+        end
+        object MenuItem65: TMenuItem
+          Action = actJumpToPreviousMarked
+        end
+        object Separator17: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem60: TMenuItem
+          Action = actMarkSubtitle
+        end
+        object MenuItem61: TMenuItem
+          Action = actUnMarkSubtitle
+        end
+      end
+      object mnuEditFormat: TMenuItem
+        Caption = 'Format'
+        object MenuItem117: TMenuItem
+          Action = actFontBold
+        end
+        object MenuItem118: TMenuItem
+          Action = actFontItalic
+        end
+        object MenuItem119: TMenuItem
+          Action = actFontUnderline
+        end
+        object MenuItem120: TMenuItem
+          Action = actFontStrikeout
+        end
+        object MenuItem121: TMenuItem
+          Action = actFontColorDlg
+        end
+        object Separator31: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem122: TMenuItem
+          Action = actFontClear
+        end
+      end
+      object Separator23: TMenuItem
+        Caption = '-'
+      end
+      object mnuSettings: TMenuItem
+        Action = actSettings
+      end
+    end
+    object mnuFind: TMenuItem
+      Caption = 'Find'
+      object MenuItem41: TMenuItem
+        Action = actFind
+      end
+      object MenuItem42: TMenuItem
+        Action = actFindNext
+      end
+      object MenuItem43: TMenuItem
+        Action = actFindPrevious
+      end
+      object Separator20: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem44: TMenuItem
+        Action = actReplace
+      end
+      object MenuItem51: TMenuItem
+        Action = actMultipleReplace
+      end
+      object Separator12: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem45: TMenuItem
+        Action = actGoTo
+      end
+      object MenuItem125: TMenuItem
+        Action = actGoToTime
+      end
+    end
+    object mnuSelect: TMenuItem
+      Caption = 'Select'
+      object MenuItem17: TMenuItem
+        Action = actSelectAll
+      end
+      object MenuItem38: TMenuItem
+        Action = actInvertSelection
+      end
+      object Separator37: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem162: TMenuItem
+        Action = actSelectCurrentToBeginning
+      end
+      object MenuItem164: TMenuItem
+        Action = actSelectCurrentToEnd
+      end
+      object Separator46: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem52: TMenuItem
+        Action = actModifySelection
+      end
+    end
+    object mnuTools: TMenuItem
+      Caption = 'Tools'
+      object MenuItem111: TMenuItem
+        Action = actTranslate
+      end
+      object MenuItem114: TMenuItem
+        Action = actFixSubtitles
+      end
+      object MenuItem116: TMenuItem
+        Action = actSpellCheck
+      end
+      object MenuItem112: TMenuItem
+        Action = actQualityCheck
+      end
+      object MenuItem109: TMenuItem
+        Action = actBatchConvert
+      end
+      object Separator33: TMenuItem
+        Caption = '-'
+      end
+      object mnuToolsTranslationMemory: TMenuItem
+        Caption = 'Translation memory'
+        object MenuItem123: TMenuItem
+          Action = actTranslationMemorySettings
+        end
+        object MenuItem124: TMenuItem
+          Action = actTranslationMemoryClose
+        end
+        object Separator32: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem115: TMenuItem
+          Action = actTranslationMemory
+        end
+        object MenuItem140: TMenuItem
+          Action = actTranslationMemoryList
+        end
+      end
+      object mnuToolsTerminology: TMenuItem
+        Caption = 'Terminology'
+        object MenuItem142: TMenuItem
+          Action = actTBXSettings
+        end
+        object MenuItem143: TMenuItem
+          Action = actTBXClose
+        end
+        object Separator43: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem145: TMenuItem
+          Action = actTBXEdit
+        end
+        object MenuItem163: TMenuItem
+          Action = actTBX
+        end
+        object MenuItem144: TMenuItem
+          Action = actTBXList
+        end
+      end
+    end
+    object mnuView: TMenuItem
+      Caption = 'View'
+      object MenuItem21: TMenuItem
+        Action = actListMode
+        AutoCheck = True
+      end
+      object MenuItem22: TMenuItem
+        Action = actSourceMode
+        AutoCheck = True
+      end
+      object MenuItem23: TMenuItem
+        Action = actTranscriptionMode
+        AutoCheck = True
+      end
+      object Separator6: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem20: TMenuItem
+        Action = actTranslatorMode
+      end
+      object MenuItem18: TMenuItem
+        Action = actVideoPreview
+      end
+      object MenuItem19: TMenuItem
+        Action = actWaveformPreview
+      end
+      object Separator7: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem141: TMenuItem
+        Action = actCenterWaveform
+        AutoCheck = True
+      end
+      object MenuItem139: TMenuItem
+        Action = actViewShotChange
+        AutoCheck = True
+      end
+      object Separator42: TMenuItem
+        Caption = '-'
+      end
+      object mnuViewColumns: TMenuItem
+        Caption = 'Columns'
+        object MenuItem76: TMenuItem
+          Action = actShowColumnNumber
+          AutoCheck = True
+        end
+        object MenuItem77: TMenuItem
+          Action = actShowColumnTimes
+          AutoCheck = True
+        end
+        object MenuItem78: TMenuItem
+          Action = actShowColumnDuration
+          AutoCheck = True
+        end
+        object MenuItem79: TMenuItem
+          Action = actShowColumnCPS
+          AutoCheck = True
+        end
+        object MenuItem80: TMenuItem
+          Action = actShowColumnWPM
+          AutoCheck = True
+        end
+        object MenuItem81: TMenuItem
+          Action = actShowColumnCPL
+          AutoCheck = True
+        end
+      end
+      object mnuViewToolbars: TMenuItem
+        Caption = 'Toolbars'
+        object MenuItem160: TMenuItem
+          Action = actShowToolbarMain
+          AutoCheck = True
+        end
+        object MenuItem157: TMenuItem
+          Action = actShowToolbarFPS
+          AutoCheck = True
+        end
+        object MenuItem158: TMenuItem
+          Action = actShowToolbarFormat
+          AutoCheck = True
+        end
+        object MenuItem159: TMenuItem
+          Action = actShowToolbarEncoding
+          AutoCheck = True
+        end
+      end
+      object mnuViewWindows: TMenuItem
+        Caption = 'Windows'
+        object MenuItem24: TMenuItem
+          Action = actUnDockVideo
+        end
+        object MenuItem25: TMenuItem
+          Action = actUnDockWaveform
+        end
+        object Separator40: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem136: TMenuItem
+          Action = actSwapWorkspace
+          AutoCheck = True
+        end
+      end
+    end
+    object mnuVideo: TMenuItem
+      Caption = 'Video'
+      object MenuItem26: TMenuItem
+        Action = actLoadVideo
+      end
+      object MenuItem108: TMenuItem
+        Action = actLoadVideoFromURL
+      end
+      object MenuItem27: TMenuItem
+        Action = actCloseVideo
+      end
+      object Separator9: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem28: TMenuItem
+        Action = actMediaAutoScroll
+      end
+      object Separator10: TMenuItem
+        Caption = '-'
+      end
+      object mnuVideoPlayback: TMenuItem
+        Caption = 'Playback'
+        object MenuItem29: TMenuItem
+          Action = actMediaPlay
+        end
+        object MenuItem30: TMenuItem
+          Action = actMediaStop
+        end
+        object MenuItem31: TMenuItem
+          Action = actMediaRewind
+        end
+        object MenuItem33: TMenuItem
+          Action = actMediaForward
+        end
+        object MenuItem152: TMenuItem
+          Action = actMediaPreviousFrame
+        end
+        object MenuItem153: TMenuItem
+          Action = actMediaNextFrame
+        end
+      end
+      object mnuVideoAudio: TMenuItem
+        Caption = 'Audio'
+      end
+      object mnuVideoVolume: TMenuItem
+        Caption = 'Volume'
+        object MenuItem154: TMenuItem
+          Action = actMediaVolumeUp
+        end
+        object MenuItem155: TMenuItem
+          Action = actMediaVolumeDown
+        end
+        object MenuItem156: TMenuItem
+          Action = actMediaVolumeMute
+          AutoCheck = True
+        end
+      end
+      object mnuVideoSubtitles: TMenuItem
+        Caption = 'Subtitles'
+        object MenuItem34: TMenuItem
+          Action = actMediaSetInitialTime
+        end
+        object MenuItem35: TMenuItem
+          Action = actMediaSetFinalTime
+        end
+        object MenuItem36: TMenuItem
+          Action = actMediaStartSubtitle
+        end
+        object MenuItem37: TMenuItem
+          Action = actMediaEndSubtitle
+        end
+      end
+      object Separator11: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem149: TMenuItem
+        Action = actSMPTE
+        AutoCheck = True
+      end
+      object Separator44: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem8: TMenuItem
+        Action = actShotChanges
+      end
+      object MenuItem70: TMenuItem
+        Action = actAudioToText
+      end
+      object MenuItem32: TMenuItem
+        Action = actWaveExtract
+      end
+    end
+    object mnuHelp: TMenuItem
+      Caption = 'Help'
+      object mnuCheckForUpdates: TMenuItem
+        Action = actCheckForUpdates
+      end
+      object mnuHelpSeparator: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem110: TMenuItem
+        Action = actHelp
+      end
+      object mnuAbout: TMenuItem
+        Action = actAbout
+      end
+    end
+  end
+  object ImageList_Dark: TImageList
+    Left = 440
+    Top = 40
+    Bitmap = {
+      4C7A4E0000001000000010000000921900000000000078DAED5D0B9056C595FE
+      111C719875715671B67C44D080BAEA62342ABBD9251A6391657D5140708A2596
+      9A68B29A8A6EB96A7C2496AC586467A5248931EA8E8F251B1313448CBF8A2C28
+      061785009305475E5799C189283A22F29C99BBA7E1BB72A6A7DFF77FCD70A9FA
+      8AF9BBFBEBC7E973FA769FDBDD378EE35C4C88A2683E2136E04E422E410C5EBC
+      9F2FD298FE75CBC3C0CF2910C9F548C1DF9B4700BF5B5B3CF93DEA92F133BEA7
+      FDD8F42F6FB15F8E3CE35511A6125A15E99A09B711FA1BDA330D69DFD040C4CD
+      30F0DF47BAE31471C7B13C385A51E72A56B62E7F53BDA639F073867ABD1FC8CF
+      49EDCAF8BD97BF197F0FF3E00E03E70307FB31E9EF74D84003A1CDC3FEDBC0A9
+      826DCBEDB7F1459A5F833B9D8599F83C2EF95FD4A13D05BF5D11EFC38F4BC897
+      D39AF82E882B0C69EB9FF32CAB52F8ED29F85B6003A1FC06D8608307FF5DA415
+      76DB5F9E47F4466CD8B04185518426C2224DBC8E7F28A1811033B8F24599CD12
+      D785AF2A9363176121E13A429582BFD4C095B19C70740A7E0CB95679D45F85EB
+      3CE47724E21E2674206C5160FF8D246C113275D49FC58AB8B3099F58F8365CD5
+      176CAF82ED3F07DB6F425FBADA3F07D7A106E856283F866E8F32F0AB60E30B61
+      F33ADBD95B17897F346CDBD5FE96327E15E41407F2AFF3E4CAF55F84F00ED8F8
+      28D8BCABFC76C1A64706F6DF27B069B9FF163BEACF5521634005DACF26C2259A
+      FAD6424E830DFAFB24E153C2410AFEEB84F72CF67302FAEA45897B0DC26F70B0
+      BF5790F652FC1E0CFDF8D8D1FE8F055FB47500E10DFCFE9EC7F8B1009C15F8BF
+      DD73FCF91CA18BE9EE7702C6AF8F03E62F09CE046F07FE9FE6C11F4EF808DC33
+      086B089D84CB2DFC7308CF12F6A0CC7F42F840C8A20BE35BBD823F83D00A7482
+      5FCBCADA86B036E8F822892F74F61FA0B7E350966C174F421F4E21B4101E67FC
+      D52CED58E88EFC1C9AC37E4F25AC93C69FA709B3091F12FE59D11FEF239F8708
+      5B853E32FE5708BF203C81F2557D2AEAFD20DAF19DA4FDD29AAC3FFC7DAB2C6B
+      08EE7FE3FC199E6BC6699E6BC6A351BF5DCCF762F25FEAEA7C8B5407DF3A1FC9
+      7E6F765C038BF887903E74FDFF504AFF41A1F95B52F21B52C86F3AF4759AC14F
+      A3C274295F57FF19F799F9F8347C702464BA057FE702301E704AEF387FB53D3F
+      E623DD32C42D53CCDDE4B8F98C9FC4BBF2F7C62BF849DDE6B17409E6B1781BDF
+      06137F990559F9E52BBF14FD9F86EF03CECF7BAEBF04F2855A3F04F888633EFE
+      04FA8E39DFD73F5D8EF2CBD9FE5C91DB5F2A7E8FB60594DF4D2E65EABF5CA0FE
+      F4E8CF4AF01FA4AD7F09E55788FE53E94F29F5B72F8E1FD9F32345FB0B60BF41
+      6B1907BEEA6F153FE89D7301F939CFF55AAC687F39F9AA77C3BAFEB0C92F84AF
+      4A63E2EBF4A7AFF09D6DBF087CE771A4887300A7E7B685EF64BB252EDFC4F79E
+      B764F2CBE45728F99571EEEF828352CCF18712B613463B96738114763DA19370
+      04E14B86BA88F046C8F91A16FE3C6131E11B886B54E4217E3F8AF83F114E42F8
+      20C24EBCB338097131D21EC4B88F23FC3DC2292CDF8B113E12BF4F419A181C5E
+      67E1173F55AAD78378EFC1C34E653EF7460BBF157998F8BAFA8F44D8C58CABAA
+      BF4E7EB74176839046273F55FF7D037DF63C8B37F51FCFE37CE84A277487C79F
+      EFA8CBA351F7A129F4FEE09071A442ECFF66C27A366E45E84F5B7BAA094B196F
+      0390FC5E41F83303FF15A47B8450C7C287101E40DCEB1AEE79887FD190FF1CA4
+      19A3887B0471A67DE0C720CD2C43DD4DEDAB419A25929EFC92B01B713F32F0A7
+      22CD1EC2538481EC9D5C825F1AF88F49699F207C2A853D64E0FF584ABB037692
+      86BF2D057F3BDB7F9BE029037F9694F6A7087F00FB6A3F22DC6DE0DF8E346D49
+      3D2BC07EE7430E4BA15762BCBF493A8F731CC21E449AA5E0D8CE0C3E0C0E0FBB
+      07B83B095BBBE6ADDFB7BCBD66DB3BEB9A376D78AB69C5BAE6950BD7BED5FC82
+      0897D29F4B381C75EAC66F6B6B8B6580AFEB8F8CDFBBF9F71492BF6ECDEA57D6
+      BDB5FA65D2BD97D737AF7C6D63B476ABC4FF3B70EEC798716F7296CE62037703
+      F7A8CEE1B17D376712CE869DE5D91E97187FE7117736D2F6B73C4B0FC5B3EC45
+      FC5D94F98322CFA308FF4DF81073A83DD8CF90C773D854E70B58BB5F9010E319
+      7799867B39A10B69EF969EC3C310F6029B1F72EE70D4F505CBDE89F148B34B9A
+      5FFC91F5354F3F1B98A4382F993CC3FF91B5F70889BF84A5AD677399A41D9710
+      96337EC2FB1D384B980EFD8EC527FCFF252CD3F0655D55F1C51C7BACA2FE93A5
+      B2C5DF5314F51F8BB0D715F2BB823017B84221BF35D2BC6A9767FF8D90E2BEE6
+      A83FBBF11C52E57F0D6BB34A7FC5DAE7348B0D9C417819FA98E4B515F3E7AA4A
+      9BFF1770FC90F7F1E9F618DACE2187EE314CD29FCFD67A3EFBB84CE7006DDC31
+      1EFC444E1D6C6DEFC3B7ED77746DD3BF40466D86BD7169645208FE6669BD3686
+      F93AD2E8D47447BEBCB7B0879C2AD88717F2FECFABAF14EFBF62ECF1BD95D084
+      F1B80BEB8D5B11677A7F38C6E1DDC7184DF913556934363A41E21FCFE28648F3
+      8AE1921F2249771CE3DFA1295725BFA41EDF67FCB5867756BAF03F327E97859F
+      60380BDF1EC03F9185EF64FC8D01EF3FFF8FF17F60E8375D3FDEE1D07F3278FF
+      1D2FE9CFD73DF4E7EB1AFB19A3B8ABC6557FF91EF95BD89C54E00F083BBA52E7
+      0E549F2FB079A00922CD1714FC268FF79F4D86F72F4ECFA48CDFE7F82B53EACF
+      596C2D66824873565F3A7FAB91F3B7D91AF45ACFFD43D5580325327B59E5C390
+      F8E2D9F43DACB5FF4BF22BEF44D824A4192EF18F64BEED5D86BEDBC5DE5D0D61
+      FCABA5F59AC022845F455820C589B4DF64FCD1584B27F1AF48FED763D9FB8164
+      DD3D5A6AFF78167F9542A657B3F8F10AF971FE959E7CB9FEFF833A27DCCF411E
+      BAFAEBE4F74DE0558BFCD2F65F0EFE80447F9E50E8CF134C7F4658F4F750497F
+      173AE86FB0FD14D87647608DB2146BCC0EFCDDA0F099C8B851F13E477EDF72A3
+      669D9497F48FFBD7EA10C6FDA6559A7387D596F78B313B7B96833FA60361031D
+      9E1F0391B603EFB36778CEBD73AC2DA20ECD8A79A76D2F49320F5DE571EECD96
+      2E94BF0EFFD77AD4BF96D57F26FE9EE221BF29D1FE7BE542FBAF93F9E266B2F2
+      063A7093B275FA3B45F1FEF90A83FEBADA4FACB11F95FD2E97E61C2EF65B08FB
+      DF6EA8FBCE22D97F4380FDCF607B5242EDFF3456F6951E3EAC1CABC32ACBBA53
+      654B89FD375780FDAF52D8BFADFEB56CEC98A1B17F93FC12FB9F893EE84CD17F
+      F2F3C3D5FE671AF4F70AA93FEB589D6DF61F07D84FB0FD57D83AA2CE1126BE4D
+      7FF7E66129BF477A39CC3097AA34BE4FFBCB5DFFBA02F00BD1FF41FA97A1A27C
+      10CE7BB72DFB989DCE4D783CFB42F8B9007E5C207E2E801FA7E05BF7D1079C41
+      ED53EFCCFBB81DC7B6B3100EE380F1BD71C6AF787E2EF4DC5ADA3DF33EE74633
+      14ED197EA6740E409C279897ECFDB5F00FC7DEC3187B8FF9FE6317FE04A45D2F
+      D5E7434F7E8C3A9FC9CE44E41CF839E9EC4492CF30077E9C467F35E738783FDC
+      EB50FF9B93740CF33CF9B174EE681ED30317FE52A6035C862EF23F93F5D9BDC0
+      CD7D75FEE0B99FCA6B9E59C43C54E97633E8786DF01585D4C3B57E1D0C72589A
+      BBFD4BD12FD54017DBD393FC5D6DF1ADCAFED518FB816347DFAC785FF6314335
+      F8D552BE69EEDDDB0AC8E17B188ABD27B11036972BD45C2472BF3F9383EFCDF5
+      BD3F53DE9BBB6F8FE6BAE65875864305913692EEDE74E57E9687541716AE94B7
+      2BBFD0E5FBF28BD1FE72951FC24F5B7E007FAF0E6E58BBCA992BD2326E1AFB29
+      C4F77F32FB77B07F59278BAD7FE51A7F5CC7C052D85F39C69FCCFE0F6CFB77B5
+      8152E95F39CBAF84F6EBE60499FD67F6DF179FFF59F9E55DFF64F69F3DFF337E
+      EFE59761FCCAEC3FB3FFCC7E0E5CF965F69FCDFFB3F123B3FFDE6AFFC53AFF97
+      97E07AFE4FDCB139593A3F310461732CE7FF1E7338BFD1A839FFF78CE3FD3555
+      482B9FFF9BECF19E77B274FE2FAF393FA3E3D78223CEDECC8DF6DF23E7B38F40
+      70DA53EC4310FC4FA4DF8D51F7FB8B7518CCEA9F842D6767BD6F91CE3FCBA857
+      9CC17B55B1DF47DCB77992A2FFE648E7FF047EAF69EF0289FB98A2EC646F818A
+      7F3CFAAB1E7AA33BFFB323DA7F37EB9B84D708ABA37DF7B1DACECF26FB277E43
+      F81BC559E3529EFFCBECFFC0B47F1FC8F6FF7D9CA793E16AFF6B15F5D4F155F6
+      BFCA91AFB37F1BDF66FFEB2C7C9BFD88BB2D36615EDE8ABFF9BD773F2983FDA7
+      39FF1F4B3AAD8A53D97F87E3F8A1B2FF2ED8D24083FD0D449A4E85FDABC60095
+      FD4E667BEBF8F97FD518A0E2D73279AC62775AF8DA6F0CFBDF9D82FF09D3DD3C
+      ECDAD5F6E5F3FF71B4FF8ED39C83EDCBE7FF3BD137A6FB22AB980EA8CEFFEF41
+      7CBDA43F89FDCE6567C56778EA2FDF53197AFE7F7B2F38FF9F3DFFB3E77FC8FC
+      5F75DECB67FEEFCAD7CDFF5DF8A6F9BF89EF32FF37F1F30EF6BFC9C0FF496F38
+      FF5F80BDCC8B301714F72FF4F73DFF25E9B9361FCFF3373DF2093CBFF3593E29
+      CFFF2C4CC95F52E2FA87CA2FA4FF7E9B467F3254C4B74C92FE9FCFFAAC5BB8E7
+      D963E7F3C719BFD7F3F30EEBCF7C666BBDC2FE75985FC4F3B319BF77F3F30EFC
+      7C1FBF3727EDFA7F8741763B1CFD7FF551F76FE11C21F97D4CF77FBADEDFA6BA
+      FFD375FD1F2BD6FFF51EEBF77A85FFCF77FD1FE3FD908BFF4E17F7B186EF728F
+      4EE2FF4B7CEF8779F00F53F8FF26799CE99D14A9EFFFF4ED3FD5FD9F36FF61EC
+      E0FF9B24E96F2DAB73A9FC7FFC3EFC157D79FD0F1DE4EBFF9CCF3A4EE337715E
+      475AF8D675AC235FBB8EF6E4F7F00304F29794B8FEA1F273E9BF44677E1BA23F
+      192AEEDB03A330FE2DF28C3F34EAF93D58D7F85151F7FB785DE35579FAC42FB5
+      D869B1E3D3D63FADFC0AD57F2AFD586C8BCF6CB0227CFE4DE813555F2DB4C4C7
+      D29AE0D014F1317474548A78B9ACD0F8728F0DA1F54F23BF90FE5B6CD10F637C
+      6683DD9EC1FDA27DDF2F15DF4A1E607B0FACE0D761DFE67AECDB14F7EDFD3DF0
+      E568DF7764FA19F8E21BAEC9F7E8C57BFE47B1C67C17EF47C5BA4B7C27F81005
+      5F84FDCC61DEBB13FB4AAB25FE5F135A14E9C57BE60D8437301625E19732BE68
+      D30D9AF2C4B7F126C0D73002FF77F36345FBBEB9ACB3C5B7091749B2EF2FF1C7
+      5ADAFC8CA5FF86127E8C75F4FD90FD2384FB084F11BEEBD0FF42FE35D1BE6FF9
+      0C22FC39F60988BBBF0E76E00FF5DC3B3F54E28BEF7F9D03FDBB0CBA732DDE9D
+      5F8BDF97215EA45B59607E70FD2B740ECE310063C21916FBED071BFF32B3FBC3
+      3116AC87ECEA0CFA73396C7C136C7E15E49EECF9F9146384CCAF864DEF7490FB
+      CF14E3C7A551F76F3DBD019BEF54F05B3056A8FCD6DCC62744FBBF8B29438C15
+      FD24BEBC4EBD08B6AF7B6E1F65E9BF672C72186BE17F17B67F1FC682468C0D33
+      31560CB5F00F46BF0CC658300863438D42FEDEB623F1BD6DB7C0FC54F5EF83FE
+      FF490AFFFFA432F8FF4D3E60D9FF3FC9C3F73EC9E2FFB7AD4F4DFEFFD8816FF2
+      FFDB744FE7FF1FECC11FACF0FF4FF4D83F38D1D1FF6FEBBF62F9FF272AFCFF13
+      2BD1FFDF47ECBF21C0FE55DFFF0AD19F068DFD9BC601FEFE6A7514FEFDAC66D8
+      B0CDCE75F6BB1B361C6AFFBBD9D99710FB5FCBC6CF10FB9F5920FB9F1160FF33
+      2DF65F2BE9AFABFD877C3F4F65BF2B18AFC960BFFCFCBF4E67E5DFBAF3FFAEFC
+      E4F767E7FFDF59FFA6F3F96991969D9FB6DE15EB73AF9EC7FD93DDDA528CFB2B
+      1DF9F2BD04AEF71738853BA4ABA8F607F45F5AFDD9A7BFEB56BBEB2FA58DD4E7
+      FF7DED473EFFEFCAAFB8FB3F02EF5F28D9FD3FADADADCF139E13FFFBF289F374
+      4B4BCBDEE701FDFDAC8E8F329E4FCA40D81CE2D6247D47BFF306FED3220DA51F
+      8DBACADC2793B41AFE677E3EE29D9AD459E61AF831717AD896CC35C98FE741FF
+      0FA0DFBF89D4F7B36AE52FF2B0F58B6FFFDBEEFF48A1BF65BDFFA388DFECB2CE
+      45537C83A4987C71F7C2AD84BF82AFC9979FFCBD0D7EAF71F27B0B477E2CF914
+      7FC0E694BE7C9E4F39F821F50F955FDAFE2BA7FE05D94F2FF0FFDBEC3FE8BB29
+      05E4BBE88C89EFA2B32E7C93CDF8F2659B2D353FA4FEA1F24BDB7FE5D6BF54F6
+      53A1DFEC74FE0EA3A3CFBC1C7CA35E39F08D7AEDC157DA55205FB5FFB794FC90
+      FA87CA2F6DFF954AFF52D94F6FB5FFA40D21BC12F2857FFC61EC91F98B00BEAC
+      FBE26EBB932DFC050C2A1B12FF66112E543C3FB779AC033B25FE22C095BF5153
+      FF0606DD18B0570E1EF253F683037F4DB4EFFB9D27AAF6115598FE05D94F2FB2
+      FFDEB0FE7719CF2B99EFF2FEAD98FCDE2EBF0376FD1F55CEFD0D41DF3CCDF819
+      BF8FF0CB627F45F0FF19E561E03B8D87452C3FE39796EFFBFC76E587AEBF9D50
+      287E1F3D836BB56107FB37EA4111F94E7AE8C80F697F21ECCF6A131EF22B17DF
+      F83C0BF09FBBCEBF0F18FB97E4227CA477E2CC63B2F77731C26A2C321D0DBF54
+      B2BF51BEFB7703D2A8B89319EF2EC23016370C61493E9729F6C2EF42FC3843FD
+      C645FBEFACE5EFA4A622DFBB1C74F8DF10369585AD8CDCEFEE1E82B4CB59D8EE
+      A8FB5D7336DD97EFEDDD1AC0DFCE7E3705D47F654AF9F1B447A24F5CFB6FB7A2
+      AEE33DF427391B2AE7FF558BFE7648F254E55183B29620CD56EC9DBF09756E94
+      F298113076F13CB684F81C51EE76F86033FB57EBAF0A3EF6AF426FB27F53FD57
+      A6945F66FF99FDABEC5F35671C26E9B5CEFE75F3CDE18A336BB2FDBF84F7C4E2
+      0CED518AB926CF6F36380733FB7FC961ED7108E32F475923A1CF2F79F8DE67C3
+      FE07E03DE2B600FE0ED6176F3AD69FB75F9C593A5692DF391A99F1BF6F025F65
+      FFB3A3EEDF7C508D3DB32DF62FDE379E27ED1BEA87B0060FFB6F50BCC3F4B1FF
+      3F30FB5F1160FF5FD5FCED6AFF359ABF7BD8BFC3FA40EC2FFE69E0DAA22E799F
+      1CC03D9BF09E6AAD1459EE3EA0F8ABA37DDF728935FCEB146DEC710662FD860D
+      6B383F2997FE6F91F83DF6700B2EDF278E746DC97A51E2EFDD43BE7E63CB56DD
+      3E73CE53F04D67684AC1DF5BFF751B37B607F27BCA2FF2929F720F3CF5C15B12
+      FF44FCFF81457FBECD9E292AFD99E6A0BFA3787DA4B8133DEC67711A5F0164F3
+      6091FD0771E03CC4E5AC7BA5E511A7CCC3EB1DAFE359DC42E6F1458F3C42FC7E
+      366E88FCD3F47FA17427885B093EC0B7DF7E3B0E44A1F8C128103F6BBFA59E9A
+      B034FC34EDFF2C0F0BBF5B5D0D7CD7FABAF6BFAB4C7281F5EFD67F05F2FFCF8F
+      BA7F3327741CCDF8E9F8630B307F319DDB9EA9B97BC2F7DC7648FBCF97EF6D08
+      905F9AB9872A9DEA9B312A3BD0A55BAE085FA2E0EBD289393EBFD7B8396277DC
+      45DDEFC6D4A5AB839F71A9869BD3A5637380F996F1EA4ED3B8E3385EDEE9C037
+      8EF7491E29F87BF348C98F3DF93DF272E0AB9E23A1FC5C4A7E48F969DAAF2AD3
+      979F4BC94F537E9AF63B41C1CF7BF0F30A7EA5D8FFDF128601C713BEE669FFC7
+      49F2FE92A7FDCBFCAF78DABFCC1F44B8807002E25CF83AF99D1F503E477DCAF2
+      EB0F80F24F33943FD6817F17E15B80286F02C3B44AB37F9FB5AAEBB331901FBA
+      86F55DB3C525E0A7AD7F884FA1587CD77E0FE587CAB212F9C5882FA55D8AB1EF
+      D78456C4B5E2F769161DAE22DC46D89D8C2F0C31C2457C7F0D7F26D2CD254C24
+      D420BC06BFE7227EA6829B3CDF9F250CD1E43F04F131D2F3B859A8E7A596365E
+      8A74B3A4F0CD0877B1F53C64CAC33A3CF91D52D87B9EFC3629EC17081F63E18E
+      D1B43F91FF6CC2600DF730C48B74A314F10FB23E14FD3D10E1E2FFF1ACFF051A
+      35FA3715B251E99F8C464D3D4742DFDB90AE19ED3D1B1C973C4C90F39891328F
+      2D81CF4C51EE76C22D057E8FC07132FA7C81ABCF92A51173A716B4F15D0FFE08
+      C2D3928C77616DF3AF84C32DFCC832562E277CDEC0BF9EF081258F3996F68BB1
+      F639967E336CE687E8EF2E07F91D44B881F02769BC3945FC36F02F91647D0DC0
+      C32E31F05B514692B61575B80175B2F55F17DAF843B4793393C373C973C8C09F
+      6391BDE89BEB0DFCCFA38F4D794416F91F0E5D9B0FDDE35CA19B231CED2707DD
+      8F610BDFF2B09F040B6083275BD6EE4173148DEF20E738C79C9FF6FDA3823F18
+      D8A8018FD7F15DC6CF72F0B90C7DF9B123FF588D1F500ED3F1738EF34C13BFDA
+      618E6B6B7FB545778BD97F2ED0F143F53F1FC0CF839BCC9D5A3DB8ADE054319F
+      46DE1331B8C9FCB9CE63FE5207CE6656B6EF1C88CBAC147C591F7DF8B107DFC5
+      7E5DF8361BD4F16B1CD7A8A6F6D738AC6F4BDD7F3A7EA2BFC778708F61FA9BC6
+      7EA6C3061BD89AC5056DE05415C0FEF97AC817D31C7D19BA75D0660F7F886C4F
+      8D52DD7D7D958D8AB560ECB0E72467E0EBF250E5D968588BBAD86FA3652D6B93
+      47B1CA8F2DEFE274FC3885FCE314FDBFD953FF789D374B36F08023E202D8BFAE
+      BE2390DF52F8533AF07703E24C6DBB91B0D350EE76A451F96FE4394C5E335627
+      7155923F23465DC51A70B2E40B1C8230BE3E6C60EBED0EAC3DE732DF934A6706
+      224D2738A7B0B26394615B3F4D4659491D9A599B6A1DF8B54C1EABD81AD3D507
+      CCE3DA99CF3684FF09D60CE25DEDE98EF3E7C1BCFE01EFD0EBB9FFCC935FC574
+      40F4E16996F93797793DFABE83FBEE1CF979F47997ACBFAAFAB3DF036CF663E2
+      236C1B7C1A4AFB4DEBF37BE79D774C88815C207A0BFF74420BE143C28506FE85
+      48D3024EC23D9DA5ED647970FE85884BC2641E47BB82DFAE49ABC2FB0AFEFB9A
+      B469EB9FC86013EA68935F3BD29EDE87F427985F08BF7D5757978C7E842AC240
+      E020451ADD183098F045C2ED8447093F475F9D80B81E7567618308FF49D8C3DA
+      BE86700EECE671C270423F057F186114A189717712AE243CC9C296114E94F887
+      1066116613A6107620ED3CC2C5840E49E77F25388C7F166137D24D24CC257C44
+      184DF877C26B125E251CCDF877B0BCDF205C44F80F427FC2B984718487245CCC
+      F8B3A4FADD44A863721D4A68863C123CCAF88F4A71CDE024FCBF449EBC8C598C
+      3F0E75E0984C388F3080701FDAF43AE3DFC1F8C7226E9984FB21C376C8740264
+      2C647D96D47FBF92EA27D25D823E8CD1A753D0C7B3A4FECB41279631BED099AB
+      08BB585813746C9842FFFA41371F87AE9E0BDD4DB87BA0DB830CFA9FD8CF09B0
+      999FA36F6E874D29ED47659BB0D9C47EAB60D34AFBCDD0BBE1F15CEF8642F133
+      F45EFC3F7D2A4C7E
+    }
+  end
+  object ImageList_Default: TImageList
+    Left = 352
+    Top = 40
+    Bitmap = {
+      4C7A4E0000001000000010000000A62200000000000078DAED9D09781445F6C0
+      07D1ECA2FC3F012F56DD5514419070050F3C964371110415028AAB881C224B70
+      0557911BD7AC81B0C128A2202208E20578AD6B448C22715142201A8C845B2021
+      10EEDCC74CEAFF5EF36AA8A9A9EEAEEE1948C0E9EFFB7DD353F57E55D555F57A
+      3239268C310F035E1EE94905980593010F8791C74EF84C83C976BEEA50B51182
+      6FB411A2CF9CF8AAB6227EC477913F567E8A033F857B172D6351403C900B3089
+      1C60025017F09890A0F06492CDFC8B97B10318B3BA2078AEB0CCA4BD5C1A7314
+      2F333B6CC69560E7AB0E3E2E3E76A7BE6A5C11FFB4F50BF031759FBE8BB1E85C
+      B29C1DD4CC1F3312290792807C075E3E39518B87B5A8BB7ACE93EBC4F1AD4C1A
+      C4A05C09D6C151F2F90BFD97A20B2462B978A8BCFC4D3F18F0582A4F028EEAF8
+      629D107354AE77E8335D3FEFE734031D3F357998E9FC619DCAC7B6750F3E8EDA
+      04AEADEEC1F7813C7F56FB4EDA7F4A5F77AC61F68F86E01FA21C70EBA35B77C9
+      E3D14950B4D76ADF713E8FEFB71762E3286FEBCA5F479C8EBC37ACA98A8E4016
+      9066526FE6D703920026A0EB639F3992ABE3ABFA14A9005601714094C2CFB070
+      653281CB42F019CD6B9483F1AB8873307F1751DD1B8097CAD25CAE5F5BE010CE
+      A9E6FE59A3A8BB0128B2F1ED187226E45E2DCE7F0FE57E16ADA56EFE8B887B28
+      89F6965B9FD1DEEE68E147518EAFA29C37CB1D632C927F19E5B66EFE65087E14
+      CD1373E9C73974E5F1A751B99772BC23E5BCEEFC55504EB775B97E4594D3F2FA
+      ADD1DC3F43DCDC036A5B1E5D72C97379C03D26758D8022A08185FF3E50029CA5
+      A84B07F6DBF47F35C0802FA5F2E1543E5AE31A5653ECBDF4BC0150011CD39C83
+      3F928FD77A36B08E9E3FE9601EBF21E7477A3CEA701DAE00AAC945FEE6622D8F
+      71DF851B436E193D26E8BA4D9A8C6DF6873F4C39426E3B604BE3C6537D975E3A
+      798095D7BEFDF01B81CF802A80B56E3DF2612C6FDB76C4EFE1793591093CA870
+      93815CC2873ED048A82FA6B27C200F4893FC12A0077016D007FB92EAD1791F38
+      1B6809EC011609F5BF08E73D8122C94F033E119EC703DB84E745C0C7C047C061
+      60A4E4C70007A89D794021F0A4507F3BF00EB018FB37995F1CF75CBA0EFF7E1A
+      33B49B485D6002900D300B728178204AF2936D3C9904C9B7E3321A5F05F90534
+      86781A93EE989F95C6E074CC1709CF710C6CEBA64CCBF7BC582FC47BE476750E
+      21BEB6F88742F493F8FC6DDA986EE962BD347F89B45FFDEB37E5A9FB594971A1
+      C1E4D1B166EB9728EDA9281A473ED62F7CED9F060A2F9FE2A22CF6E752217EA9
+      C3BDEDA17D7588B8C8858FC4125AF1780F9835E9023318A1ACE7F710384F9562
+      9909625DAAE0FB63F0E0E77BD25A18A8EAE87980CF8F3DAB9B06F58D65FCB0F3
+      ED0E2BDFE2DA836222FD9FDAFE4FC5FA87E23B45F0535CF829E17ADF0007D381
+      C7BF39B01E03445FEBB0F075FAF71F35D43FE36DB8EDDFC2D7BE76952FADA5E3
+      EBE75E387C8B3DC6BD001CFA721BE2787410DBF008BE6B1CF6CFE4BE6B03A18E
+      FF14CE9F72FD1C5CA772FF84324F61BAFF9CECFB97DDFDE764DFBFC272FF3CDD
+      5F3FACEE9F21BE7E07DD3F670EF23064D46DC7B1BA1E0BDF38EC7CDE970ADEBF
+      8A70F9C658D6C0A98A4435F2F5D7A4CFAF953BE2398F5FFAF08973B3F973EBFB
+      D753D337DD3F67886FB77EB5CD0F076FF4BA880978ECD0F0991535D4BF95EF88
+      C8FC45E62F9CF35763F4F5E87096669C8A264029D049B39F3BA4B251800FB810
+      B8D5622C58BE0060C070A1FC0B600DF008D52D50B481CF1752FD3EE05A2A3F0F
+      28072650D93E8A5928B4818F8BA87C3FD05268B73795B7A5E72D298691238EB9
+      0068258D6B2E902B95B5A2587E2D567E2EB561E59B8DBF2D95F5165CD5F8CDE6
+      6F02CDDD791463367FAAF57B84D6EC0BA1DE6AFDC436BAD25EF1D1DE11EBBB6A
+      EEE54E34F62621ECFB73B4E26A38FFC7B5F7A8180B6C0718B1139860122B722E
+      9021783B08FEFC47E0FF2CFCD514371F682C945F0CBC4675E9266E17AAFFD2A2
+      FD4F28A6BBA26E3ED55D65E15F4E314B2CC66E757DF52966AD50760EF01E5049
+      75332CFC788AA9029601BF07E609F3CBA82D33FF2D297631502295CDB3F05F91
+      62CB80F210FDE210FC5220492A5B66E12F91625FA572DC5B7B8123C0F316FE44
+      8AC9E7E3ACE9FC7DEEA19B5281522003580BCC059E06FE0478883F51D95C8AC9
+      20075D66C11BE418CF273F78037B26B62D7BA66F1B1677778B80D883BFFECCF2
+      36AE669BBE5AC456CF1D8D6505583EE1810EC0F5ECC5C77BB0A706C5B1118312
+      D8F0C1AF827F6D802F1FD53E9F518E7171233F6571719F0562E3E3E1F76537E2
+      87EC3FD1AB65483EEEA170FA6F8DE9C63E9AD893A5CD7B8A657E38931DD8F1D3
+      71BFE7B5C67E1B1A3B84258FE8C192877766098FDEC2A6FEF546EEA658E5C0DF
+      7B5FC746DFDB8A8D8D6D273AA28BF9551788016EA03CC3F20A21AE82CA9EA698
+      18C8A5BAD09E47C851997AC097443DB3B850EF1F2B939A057068D79A4BB2578C
+      7F77CDC29E8757CDBEC1B76A7687AA350B7B1CDABCEA859483BFA65D2CC78B64
+      7F31EE8EB4799D2BE09CA9F86E5E97CA6DDFBD789FCAFDE5CB0903BE7EB94D35
+      C665BCFF102BD896CACA8BF619E0399661DDD72FB765395FC73F22BA3FA73CD3
+      6CF59C5B7C58BF35EDDFE6BFC3037518F3ED6B1D718C8DB9BF66C15D1B79BFD5
+      D55E7FFC8FA3DB1AE42E4F60D5DE4AA36EDD7B038C36D25EEFBC16DDAF66B6B8
+      9B5FDF91DC8C80FED2075DE267F7B27F196587F7ACF5CFC7D7B3DADD03D79CC9
+      9F5795171A311B46B50C70112CC30363783CF4FD43EA4BADD73BF1BD9525E29A
+      AC017AFAC7BFE7F89F91ED591A1FE4EF7EFFB9A0F193EB81754D17E70FE76AD7
+      075359E6DFA30D76BF3B2568FE7E5874CF163EFF700D977FF34A4C85EEFA61EC
+      8F1F3FDE5CDC03EB970EBC4BDE3F15C5070CC4FD939ADCAA12FABB49B50777AD
+      7F6BF8FFE6776366FB17FADD0F8FD1563950762CAF1D8CF3DBF477FA41EE5CCF
+      90EF17F52AFCFEAD9E13A03E4A8E3F137E7FBFE9E2BB9128201EC805183DC653
+      B93FCEC24F204F2641D3E7F15DE97957A12CC897CFC558015DBFBBAE2FCC9317
+      E7C8856F364FBA3E2F7B8AE6289F48E26BA5E95BCD65B8FC028AED2ECD5381CD
+      5EB09BAB444D3F8AE6259FBC8079AACD39993CFCCF4C42D7E1E7621B1E2B1FBF
+      0EE1B1707E19306EDAA3B764C1633581EF37C6515DD0D72E82DBFD9F0FDFB40D
+      BF669AFFE41DD59F4EBE1BBFA6F3CD1DD5D5F85A0AEAB6638CC2C7E7FD3166D6
+      884E551BFF3B8715EEDFE57FDDC0732C7BF9F14E95F4F5583FD187F32B670EBB
+      AD08FA61FB369FF83DD65DEB5718F003EBA0AF1288CFC3F754823F09DBC53EC4
+      03AEC1403C3086C6309EFB30575BDF84B8E2837981BF6736A2139BFDB7CE0165
+      1803E545E06F14FA37E64A3E5E87EBC1BE5E1BD985BDF1F7DBFDD782738AEFFF
+      ECFCEFDF9A6878E8E3F876677E65942F1BDF03E7B19CFBD307DFB2DB18FFA1BD
+      B6BF3B873130CFE5E0FFCC7D58D729AAF9531DC2FC4D12D70FC6704C5E3FF9C0
+      3A8C9931E4D6A3E888FB17B81FDB85F9F605ED9F82DDD86F35EC1F631FC60FEC
+      78BFB47F38DDA16E27C6E07CFC674A2F8357477629A6316F53ED5FE96B7ACC91
+      671306DDBC5178FFB001CBCCF2A73600E3690FA4DB7C3F81514C7B859FA5E172
+      B214BEE9FB48F93D25C545FC33CBFF29C4FDD301C8D47031A6436DC9BB701C0F
+      5EAB6404B096785C1563E19F0B7C0B3002CFEBD9F8CD8027810780B78172C12F
+      A7B20728A699E45F04BC45B1158227C3EB1601170BFE50C027C5A651F910E01B
+      A90E6387097E27608D50BF1AF89370AD7FA4325E8FB19DA4EB8F15EA8728E674
+      A8501FAB983FD11FECD097C7FF358D99BB57D07C988DDF6CFE8611DFD9CC5FA8
+      EB873417F6CF62C5FE592CEC9FE636FBB79EB47F5769EC5FD7F913CA31BECF15
+      32CD81242003F0121954D65C112F326642DF26E5F0C84C28C518851705A460CC
+      A4FE4DD9A7F326B31D3FFFC0BC559506788E655847EDA490C3FD642C4F18DCC1
+      BB7747B6E9BD1FEBA60DBD91B791446E345EE3A47E5757EFFB7593EDEB07C64C
+      EC77B58FE6A525EF1BC7E7FF7AEF48017B756C6FF6C69401CA363E9D37A95A18
+      430E9EFFFA4BBADF9D19D7C53F67AA0363A93E1BA8C0739C273C663F7DB7D9DC
+      FBC783B154767442DF2B2B457FCEB8FB4CFD85CF0F34622ACA8A795911F8DBF0
+      7C57CE7AEDF163AC30FE5978FED9FCE702E60FAF63DEA4FE4A1F63C94FE6EB87
+      6BA2BB7EB88F60DC3E723D7C0C2F0C8EA9B26A03EB708F097D2BF72F8E0FF7AC
+      B85EFF993FB51AF798C9FE0D357F54F99B2978999AF91BC9FF30E4BF7860CEE1
+      BD00F7B44EFECB079F3BCC29DE8655FE637F66F38F396597FF98E3663EDE1BEC
+      F25F67FC76F92F1E780FC0718BF317C9FFF0E57F6DFA1EC0F4BBCE6FAC8995CF
+      6C30DAB0E93F285E2E33F13DB5D07772FD353DFEC661F0C3B1FEAEF65F849AE3
+      D05B0F0760B507347D8EE87ACCD6DEC40F72757DE91AFC2E96BBB87EBFEBC20F
+      70757CABBEED7C3BD7CCB7C9795B3F42ADF91A20285775F257D5865D59C43F39
+      FE827E8D943E96EBEE03DE06C7891B0AE79F3F9DD911C9D3939AFF480C9021AC
+      FF586025D050C36F081C266F2EC1DBD1F1FB51EC76E1753786DA74E2331A730C
+      B53156E7EB468ADD2EDDF3B09DABEC7C9DBD6BB77FC5AF3568CCE23A4CD3183F
+      3AD3A476563AF4F9DAC9FE584D3F43D803E21CEACC7F8CB066D388B1565FBB9D
+      CE08FBC2E31256036DA8E22A05CCBC7CC0E7721CBAE3F30AC8656EE6C3EDDCBA
+      71CF25AA09269CF33A3B5FECF742E9B995FF2D704CE05CF2CF95DAD5992FB33E
+      0A09B9BC4A40775EDDEC0DB7F1A66D849AFFF47DC87820D7E2FB8E32B9E4A09B
+      E0C09341B700CFB767FD4FFBF3D33096FC02AB9F33591DF258CCCACDDAB7AB0F
+      57FF4EFD9371FD35D5BF1B3FD4FE5DF8C61EDCBC6195B68BB1821B4AFE24520E
+      E2F7F6F31D78F9E44445F25F2FFFDDE6A9DBFD5753F71FDD7BE0A9C8BF9AB8FF
+      44F2FFB79DFFBA3970AAF65F4DF65F1BAEDFEC6B8248FE47F2FF4C7CFD8FF45F
+      B3EF7F22F91F79FD8FF8A7AF5F03F7AF48FE47F23F923FBFDDF98BE47FE4EBFF
+      C8FD2392FFA765FE2FEEDBC223D11C480232002F914165CD15F12263DE8EBDAE
+      1C1E9909A518A3F0701C2918B3E4FED62CFD8D78B62F3B9DF9AA2A0DF01CCBB0
+      8EDA492187FBC958BE6CC86DDEC33BCDFF7E03EB960FEBCCDB4822371AAF7149
+      FFE8EA23BB3607C4AF9C3AC8403C30E6EDFEAD7C342F2D79DF383EF9E0D72D1F
+      E9F39EAF16C69083E7FB37ADD7F63196EAB2810A3CF7D1DFEFA87C0EBF168CA5
+      32FCBFA437E3D4A8E62B357E58808FCFF1A82A2BE165F87F2E7F07E45D9B740B
+      EBF2FA7DECBF3FFD9755549459EEFF82CD99FEF13F7B7826FE1C7A44C3A9CD58
+      83A9D7B02BA6C5B0E11F3ECDBEDDFCADFF6F92E463DD9B2F703F99FC3A8DE3A3
+      ABD0E7344DBC910D5D3E867D919512B47EC63E8A6D896B188D3E02FD17893EE7
+      CA691D025CDC63BC6FDC3FDC87D842D1BB24BE157BECC37FB0ACAC6F8CF55A37
+      FF5FD5B8C7E4FD2BF865E8C138AA7A2EF8EBA68FB23FFFBEA8AC10FFAFE87B56
+      F923F8DF02CB819B817A174CB9C63303FF68F9785CA666FE46F23F92FFAEF2DF
+      C96BA798FFF83B280F3E386D7FAF5E53988CD921E63FFA10BB55D797F39FFC6C
+      1D5F95FF3ABE55FE93BFCDC4FFD92EFFC97F1BC80372093C3FC07FC72792FF91
+      FC37CB7FC8834A335F27FFC1DF86E798D36EF21F9885E798D3BA8798FF7CFD70
+      4DE4F5D3C97FDA03C618960EB9B5CAAA0D55FEABF62F8E0FF7AC4EFE87297F54
+      F99B297891FC8FE47FAD7DFDC7AFFFA78CE8C5103CC4739DD77FFCFA5FD757BD
+      FE233ABED9EBBFE497CABEDDEBBFE4DF299C6BBDFE939F07E40AE75AAFFFEC0C
+      FA5B06CFE4BBD280ADC020A02EE05161E13301D376347DD3761CFA41EDB8F439
+      AB42F4D79EE2F1BB9D3F37EBF76128FB2742CD1273B727156044AA5DB9C26722
+      76E511FF8CF35384B814BBF208B58BD8DBAE4C05980DA9163ED321E29FB17E8A
+      867F46E5FFA43BDACA340792800CC04B6450597345BCC898C9DDDA95C1235341
+      7563145E1490823153BB77A8FE6CD634B6F3A70CFFE7FFE13996611DB595420E
+      F793B17C7AFFDBBDF9DB724CDF37625DE2FDDD781B49E446E3354EED7E3DDBB7
+      634B40FC827F3C66201E1843E3C07969C9FBC6F1C907BF6EF9C058610C3978FE
+      EBC60DDA3EC6D27CFE0254E2B9EA6765663EC6927F4CE5E335CB6B27CE434569
+      092F2F02B6E2F9EEEC9FFCF5AF3F3130C8C7327E602C956703B3F0FCF3D989FE
+      FAA24307D94B8FDEEB77F11CCBF881B15497CCD76FCA5F627CE2FA61FC6B2306
+      18882EC6602CAD5F34ED01630C89FDEFF0C97B405EFB17EEFD73B1D0B762FF5E
+      6F8C0FF7ACB85EB0E69593BBB5AF32D9BF42FEB42F37CB1FA0D4247F82F217AE
+      314BC8BB1FCDF2F74CB887AD9874D3567A4C13CEB7028380BA804785E033FE28
+      9F5BB5A3E99BB6E3D00F6AC7A5CF5915A2BFF6148FDFEDFCE9AC1FDF331FBAD9
+      3F116A8EC5035BA8E8086401690EEBEB01490013D0ADC73673A43A9D7A559B4E
+      EA332CEA4E457DA8E30F75FEC2B57EAAFDB1C6AE3E9283359CFF43208787C05A
+      0C813519D2C2A360954D3D134802EA85508FE4487D39AD97FB725B8F64D460BD
+      DBF187327F6ED66F8DCDFEB0AC8FE420F3BC37AC29A70ED00EB80D385B2857A2
+      F01B032B81EDC0B54043E0CF4467E00AEAC3CCBF0B280118B000580864037B81
+      3C20051800FC4EE163D91C72AD28072602E74A7E1B608F22DE07EC00D601AB84
+      F27B051FAF69B4497FBB817E404BA0393D1A75827F099061E2FF0AF412E70C1E
+      EB4A7E4F9B6BFED466FD9A00AF00B3809769EEE7032F02CB802734D61FE7BF3E
+      7011701E703ED000E71938C7CA473A5DF37F4D00E6802692FF137023B012B80F
+      58083C0ECCA6C78554BE92E27E0AB31FD2F86B49FE9B7136DD13DAD9E46F1DCA
+      F1CE42DE37A47BC176BA3734B6D83F0328C7F328E7B3E91EB080F67109DD2364
+      FF5CCAE9728DFC9FA3B87FDC2BD4AFA25CDF41B92FFB7BE85E21FABC4ECCF17E
+      94FBAA31E0BDA28EE4D795E6B217E5BECAC77BC52536EBF7A9CD3CF4B4F19FA0
+      DC7F91EE050BE8DE308BEE154D6CFC73685D1AD0BDE03CBA37D497E73F92FBEE
+      693DF27A99E64012900178890C2A6BAE881719D326EE863278642AA86E8CC28B
+      025230A6FD131DAB133E98C1D66D59CF2ABD9506788E6558476DA590C3FD642C
+      EF3AAEBB37678FF9EF6F62DDEDE37BF03692C88DC66B8C79E266B6256FABEDEF
+      AE610C8D03E7A525EF1BC7C78F03C70EB2071307B1A12F8D50B681B1C21872F0
+      7CC3B64CBFDBFB9FB1FE39531D184BF3F90B5089E7384F783C30FDE18039571D
+      184BFE31D9375B3BB1BD92F212FEBC08D88AE73FEEC8D2F631969E6703B3F07C
+      FAD2A480F9B33A3096FC64BE7EED46DDE4D35D3F8CA5F58BA63D608CA1EBF8BB
+      2CDBC0BA5B9FEE5A2CF41DB47F711FE1F870CF8AEB056B5ED936EEC62A93FDEB
+      CF1F8829B798BF5293FC09CA5FB8C62C21EF7ED4CCDFD335FF935CE43F5FBF96
+      21E47F34EF5BCC7FF1C07B00DE0BC43D2DE47F32E5803FFFE583CF1DDE13781B
+      42FE6F86FD5228E6AF998FE0BD41CC7FA002DA30F633E6B46EFE8A3E1FBFCBFC
+      DFCAEF9F62FEAB0E71FE84FC9F15A6FC4F7691FFB3ACF25F5C4FDABFB532FF17
+      3FDE220A880772010FC108B3E7B9E4A09BA0116FF61CDD023CCFCFF941FBF7C7
+      3196FC02DEA6D3BFDF16C662EA0F4D996260E31B6351E6DE9B7D0C4CFC0042F0
+      03C68FE3E59E8C782D66D73F62C5F3A63ED6D5F6EB170F1CAF3866A7EBAFB97F
+      8CFD9BF7739AB68BB1C2FE0D257F12290793807C077E3E395152FE334DCCF2DF
+      29E1C87FD3FD63B37EB6FB4F3EAAAAAA5DF985855E366AD44ED6B7EF1656517C
+      D4915F5CEC632347EE6477DEB9890D1AB49D792BCB4C7DEC67E0C06D2C2121CF
+      18ABEC1E38506539FED2529F31468C9F38718F31663C1F3C38D0B51AFFB66D65
+      FE36CC5CBBEBC7361E7C702B1B3E7C073B7CB8CAD5FAF97CE15F7F133F9CF9EF
+      1439FF753D7FFE87E37B08E363AF60125A718A72CF15E3630D74FA939F77EC18
+      1F1087CF45747C6013300EB80EA82FB78163B4F119510CCC07FA00570075F818
+      347D9155C014A0914BDFDF4E0DF96EC6EF76FE5CAF9FBC6FF95E1471E23BDDBF
+      6EF3E77421D4F1CBF789507CE93E61B967ECFAD7D9B39ABE69CEB8F00372B606
+      7C37E3773B7F21AD5FA8FBA706FC5A95FFE11A574DF966F775DD7DC5F792C2D7
+      DAD71ABE655E39F483F2FA14FB6EC66F3B7FA1AE9FCA3F55FBEF4C7B5DAF53C7
+      E3CAE7EB72F1C5ED5DFB567176AF0B723D5104BC01F4042E50B561E3CB7BFF59
+      A0858DFF8D802A8776024B803B45BF4D9BB862CA15A6894FF2D3A02CCD81BFDB
+      64FC490266F700631E1CCC9F721D34FC2DC058A029708ED5FAD9BD2EABDE0F9C
+      8CD7F5DE3D2E3CADF3DFEDFB7F9DEF01628C99AF7BE8FA66DFFFD7F5CDBE7F7D
+      327D9DEFFF5BF93ADFFFAFCDD7AFF3FDFF93B57F74BE078831B5F5FDBFE277AD
+      95BF837D0A7C8FD5EFEA47FC887F86FB35927FE1E6F6B9310C71EBB9F543ED3F
+      E29F5A5FDEAFE070F81EF097B9CC3BCBBFD7B1F91B2753C2E59F898492C3B2E3
+      B48D50FD70E6C16FCD0DD5FFCB6B31417B47BC0F3C35B9B5E5EBE89B8FB5F04C
+      7D26DA33F2F9369E27A7B6F68C81F86726B6F68C1F1FED993236DAB348F13AFC
+      5BCE7FE9F340EB03938135C267FFAEA1B2FA369FFDDB69716CCB9D169FFDBBC3
+      8851B81F0EEFFA108FFB72D240B627FD6B5672689F019E6399D0CE7D92DF68C9
+      FDAD8DCFC0DDF0F64CD3F75D58E7FFCC6A70043F9EF75BEDF3FAE3274C5868C0
+      0FACFB62DC802A6A239EFB6FC75EF71396EDDB14F8F93DAACF90C7CF31163E8F
+      F978FFF4F9DB152545FE7EE5CF81E7E3A82C293CF1B9DD27FA2FC432AC333EBB
+      76CAE2201FCB8CDF5F3AF1B9BDA57EBF7FAB2CD5E70F5B8D9FAED972FEB04FDE
+      2F9FBF1513FECAFB7F4EF02FA235D15BBFE3F3D548DA03B1F2FE293D72C040B1
+      7F90058A7DD8CD66FF7A35DAA84FD7B696E6A9903E3BFB691AF302A98D648DCF
+      E39611DB38E4C2E79F978D7BE0D948FEABF7AF7CD8E5BFEAF3BB833E3FCA22FF
+      79FED696FCB71ABF4EFE07CF9F2F92FF91FC0F4BFE4B5FB704E47F4571215BB3
+      22F5C4DF5EAC58C1CA8B8B34F3DFC73E5BFE15EBDFFFC4FFA2C0F3E5CBBF33EA
+      A4FC3F477EFDCF4CDFC81E7D7466C0EB269E63D9BAB59B587E768698FF7581B6
+      3CFFF76EDFC6EEBF3F81A9FE0F0C8275795BB78AF97F36D002FA2FC6B2037979
+      AC4F9FE74DFD7E7DA6B2637B7771BF8CAF05E4FF262CCBFF2593A5FF901DF4BA
+      CF9F67AF4D17F3FF1778FCA36AFEB66FDDC3468E9CEDF7F17CD7D61D8E5EFF8B
+      8F159EF8FD673A3FCDF27F8390FF3FBAC8FF6E26E7BAF95FDFE43C28FFE9FD8B
+      1551C0AB36DFBF31A3317D3E0F73E1DFB07058F47ED57B2578DEC4CA7F6B68AB
+      A18B865E5765F65E0B9EC749CFF11AE3815CD1E9FBDAAC009FF70B8F7B243F41
+      7E6F87EE59F0922AF9F9FCFDA2E4176059AB4F7F301C11C96726BE1123BBA7D0
+      37C6DFE6A334B77ED0FCF5993BDBC9FC45D167FBE407B431E7159FE437A5C783
+      36FB6F045061B17F1234F66F47713C527C5307F9B3C665FE88F93BF7647DFFA0
+      5EBD1E1EFA9FA2C6B953A4FF4BEAC60FA90DF2B5DB50D53B69C3ACDEA40D3B42
+      6E431E5FDDBAAD7A3A6823C0EDD6AA3E23C4B1C8F85DD1175C1DDF23FAB28B68
+      ACB7A9ABE30BE3F6E8BA2A6AC5EFEFB8FFFFC3E1F25D13263F72FD36E3EC7EA9
+      874938D93F2ADFDF86CE383156C0DF8695CF63347CDDF19A8DDF8DEFB1BA7E69
+      9C1E3342CD7DE14825DC1E8C88F8A1F93D43F4ADC8056601512E7D4E82CBEBEF
+      4A310521CC9F599C5B3F55717DAA3C308BCB5494AF55F866718D811CA12C87CA
+      E4C32A0E1F3388C616D71E14C7EF03B3477A520166C164C0C391EF23366E501B
+      66BEEA50B511826FB411A2CF9CF8AAB6EC7C7E2EF5E9CA57B577B2FB0FE5FA55
+      7D3AF5558FA7AAFF50AE5F17859FE2C04F51F891FCAF25F96FB1E691FECFF0FE
+      4F75FE4FBCCFC374307BFF102E5FE3B0F5DD8CE564F87607C4A067E9EB8EE564
+      FB3B367E1B347E2CD3F52DE620602E694E4E5B5F2661D0F1FA2D995F057F8E20
+      949DAABCB243FA594134B054F839582E3D8FD6F819C384C5435B562A7FD7F178
+      F904A0AE893F0BE3DE1ED68A65BC3F9D1DFAF567E3E7C5F888CFB19CDA9AA570
+      6F35DCA1D755EFCB4957FFDE0A94633DB571ABE42FC1F2CC0F932D7316EBC95F
+      22FAEF0C6F63FCECABE8C01E4B1FEB8539F5FB706D5E2CF755555AFA584FBE57
+      F4973C76FC67A40EFACF0FE87FE875EF60F9C6CFE658FA58AFBA7E3EFF4B86B7
+      F616987C86E9C11D59EC9D11EDB8AFFA3F1A73699FF8D6BDFB42F1E1DD9B0C0F
+      1FD72F9D21AE3FB2C064FFC5D3DCE8FCEEED02937DD896F67BBEF0BF46F07A6F
+      2047A70D2BE43692436CE3900BDF43FD9602CF86F3E708CB8679445A001F01DF
+      48E53AFE63C01E80017B1DF8CD818FC9E35400A9C03340431B7FA7E4CA6402D7
+      58F8A38083366D7C6273FDD1C0E7427C01D011980A1C02AA35E6EF2C6034B00F
+      C815CA5BE2730BFF1E69AE871362D93D167E2EF5C16373690CA3694C76EB574D
+      D73895AEB9409887CF696EACFC4F6CE61ED76694857F0DADB1551B3B6DE6BF21
+      EDB554DA7BA28B7BB3B966FE7868EF33CA85C71CE40FE71BCAC11656F9F3C203
+      1E3318A1AC17FC5429969920D6A50ABE3F263333D37FBEF9C5E3A8EA10D9C77A
+      243B29B86F2CE3F556BECEE1D6E79FD1EDD43F5A7E8CF5593188C52CBF9D951C
+      AD70E4175616B17BBE78985DFD4E07D6F5B33EACAACC6BEA7FF7FD7AD6F9D37B
+      D8E8FF4D34C62ABBF9A5FB2DC7FF43FA7A638C183F64D593C698F1FC0EC1B5BB
+      FEECC39BFD6DA85C9DF9C3366EF9A807EBF9F900565076D0D5FA79ABBDAED65F
+      0733DF29829FE2C237BE07D06D718B28201EC8059826B9E4A09BE0C09341B700
+      CF33F3F53FFF1763C92FE06D393DE4B1E81C95D555AEFC2395C7D8DD63FAB056
+      036258E9019F23BFB0AA88F578F25E76F9DD4DD96D8FDDC1BCC5D5A63EF673F3
+      902E2C6EF653C6586537BFACC072FCC5DE12638C18FFC8F3C38C31E379A7E1DD
+      025CABF16F3C9CE36FC3CCB5BB7E6CE3FA476E65DDE27AB282F283AED6CF57ED
+      0BFBFA9BF8C61E5C97A7FFF9BF182BB8A1E44F22E5601290EFC0CB27276A69E7
+      74241EC8059826B9E4449D7FFE748638704512B88F681F8719F70BF0D1691BAA
+      F15E78E10C3F6647B366AFB0860D8FFF9F7AD9E7ED9A8D432E57F978346A94E8
+      472E130F335F1E87D978AC7CBB6B31F34B4B2B0D1A34986E802E3FE77576BED8
+      EFC183A501CFADFCBBEE7A875D7EF98B7E30167DDEAFD5FCDBCD153F2EBBEC45
+      03C92F68D820915DD06806BBE082195A7B4FD87F05620EE8E68D109F48F99B04
+      E43BC8BB7CDEC6BB7D3C1E89EE4006500230A284CABA2BE2453E79AFAFDF31E3
+      1385571F3880F5EFF7F7B0F5F3C7B3FDBF7C6F7CCF0BC1732CC33A6AE30039DC
+      CFC4F28F875CCA8EFC9A6DFE3A0C759F0C6BC2DBC820B78FD16F3F0F3B4ADF77
+      E2C7D7CFF53608F85A1C62DEEBE71F472FDE378E4F3EF835CBC7FA37C68963A8
+      C0F302C5F72ECD7C8CA5BA721EA3FAFEA13CF7FC5A3096CAAADF8DF55499F9AB
+      FE151BE0E373FE7784DCCFCB58796ED991827C6F45A9F6EDFBC0960C71FC75AA
+      BDDEE3FD277B8E63736C583091FB38F7AD603D6E863168F9B87EC63E3ABE4F71
+      ED3D7E4F46E1E21E13FAF6E8F8B85E1BDE9C60EC31D5FE85584E80575CB04B2B
+      7F827C7A0E75F792536A96BF27F3F78AED7E467106F9AD174CEDB267EEB36D0E
+      171DD97FA7998F751883B1E87017E1B12FC535F6F136441FCBB04E280BF044E6
+      3C137D54F6B14CF76742F3C6773820FB5866F2F3A790C6CFE7E0CDC9B7E6E118
+      EDE60F6330567023FB2F44AA4B8FCAD401A280DF13672962FCFE8EC11E9106C0
+      F5C0446021F03AD01AB89AEAFCB10AFF3CE04DA00A60C416E046E030B0086806
+      D451F857011D812CC12D070603EF0B65EB81A692FF3B6009F011301028A3D895
+      406FC02BF8C807E8087E07A092E2FA03FF018E009D807F03DF4B7C075C26F893
+      84B6D701BD8099405DE026A00F304FA2B7E02F91C6F734D05898D726400ECD07
+      67A1E02F94EA72C8E1FE1FA84DB18F2582DF87C620F210D005381B7891AE295D
+      F02709FE1FA96EBDC4CB348747694EFBD11CE35C7790D6EF03697C18770FAD21
+      A3351D486BBC445A3F0FED89F5828F7B660850219465D11EBB4AB1FFEAD0DE5C
+      447BF526DABBDCADA2BD7D9EC5FEE7F97335E5CCEBB4361329A794F9A3CA4DCA
+      599EBF5194D3CAFC8D707AE359E2616E08971FE1F4E5FF018BDF7D07
+    }
+  end
+  object ActionList: TActionList
+    Images = ImageList_Default
+    Left = 88
+    Top = 40
+    object actNewSubtitle: TAction
+      Category = 'File'
+      Caption = 'New subtitle'
+      ImageIndex = 0
+      OnExecute = actNewSubtitleExecute
+    end
+    object actLoadSubtitle: TAction
+      Category = 'File'
+      Caption = 'Load subtitle...'
+      ImageIndex = 1
+      OnExecute = actLoadSubtitleExecute
+    end
+    object actUndo: TAction
+      Tag = 2
+      Category = 'Edit'
+      Caption = 'Undo'
+      ImageIndex = 3
+      OnExecute = actUndoExecute
+    end
+    object actRedo: TAction
+      Tag = 2
+      Category = 'Edit'
+      Caption = 'Redo'
+      ImageIndex = 4
+      OnExecute = actRedoExecute
+    end
+    object actCut: TAction
+      Tag = 17
+      Category = 'Edit'
+      Caption = 'Cut'
+      ImageIndex = 5
+      OnExecute = actCutExecute
+    end
+    object actCopy: TAction
+      Tag = 17
+      Category = 'Edit'
+      Caption = 'Copy'
+      ImageIndex = 6
+      OnExecute = actCopyExecute
+    end
+    object actPaste: TAction
+      Tag = 17
+      Category = 'Edit'
+      Caption = 'Paste'
+      ImageIndex = 7
+      OnExecute = actPasteExecute
+    end
+    object actFind: TAction
+      Tag = 1
+      Category = 'Find'
+      Caption = 'Find...'
+      ImageIndex = 69
+      OnExecute = actFindExecute
+    end
+    object actFindNext: TAction
+      Tag = 2
+      Category = 'Find'
+      Caption = 'Find next'
+      OnExecute = actFindNextExecute
+    end
+    object actFindPrevious: TAction
+      Tag = 2
+      Category = 'Find'
+      Caption = 'Find previous'
+      OnExecute = actFindPreviousExecute
+    end
+    object actReplace: TAction
+      Tag = 1
+      Category = 'Find'
+      Caption = 'Replace...'
+      ImageIndex = 70
+      OnExecute = actReplaceExecute
+    end
+    object actInsertSubtitleBefore: TAction
+      Tag = 17
+      Category = 'Edit'
+      Caption = 'Insert subtitle before'
+      ImageIndex = 9
+      OnExecute = actInsertSubtitleBeforeExecute
+    end
+    object actInsertSubtitle: TAction
+      Tag = 17
+      Category = 'Edit'
+      Caption = 'Insert subtitle'
+      ImageIndex = 8
+      OnExecute = actInsertSubtitleExecute
+    end
+    object actDeleteSubtitle: TAction
+      Tag = 17
+      Category = 'Edit'
+      Caption = 'Delete subtitle(s)'
+      ImageIndex = 10
+      OnExecute = actDeleteSubtitleExecute
+    end
+    object actListMode: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'List mode'
+      Checked = True
+      GroupIndex = 1
+      ImageIndex = 11
+      OnExecute = actListModeExecute
+    end
+    object actSourceMode: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Source mode'
+      GroupIndex = 1
+      ImageIndex = 12
+      OnExecute = actSourceModeExecute
+    end
+    object actTranscriptionMode: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Transcription mode'
+      GroupIndex = 1
+      ImageIndex = 13
+      OnExecute = actTranscriptionModeExecute
+    end
+    object actTranslatorMode: TAction
+      Category = 'View'
+      Caption = 'Translator mode'
+      ImageIndex = 14
+      OnExecute = actTranslatorModeExecute
+    end
+    object actVideoPreview: TAction
+      Category = 'View'
+      Caption = 'Video preview'
+      Checked = True
+      ImageIndex = 15
+      OnExecute = actVideoPreviewExecute
+    end
+    object actWaveformPreview: TAction
+      Category = 'View'
+      Caption = 'Waveform preview'
+      Checked = True
+      ImageIndex = 16
+      OnExecute = actWaveformPreviewExecute
+    end
+    object actUnDockVideo: TAction
+      Category = 'View'
+      Caption = 'Dock video'
+      Checked = True
+      OnExecute = actUnDockVideoExecute
+    end
+    object actUnDockWaveform: TAction
+      Category = 'View'
+      Caption = 'Dock waveform'
+      Checked = True
+      OnExecute = actUnDockWaveformExecute
+    end
+    object actTimeMode: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Time mode'
+      Checked = True
+      GroupIndex = 2
+      ImageIndex = 17
+      OnExecute = actTimeModeExecute
+    end
+    object actFramesMode: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Frames mode'
+      GroupIndex = 2
+      ImageIndex = 18
+      OnExecute = actFramesModeExecute
+    end
+    object actPreviousSubtitle: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'Previous subtitle'
+      ImageIndex = 20
+      OnExecute = actPreviousSubtitleExecute
+    end
+    object actNextSubtitle: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'Next subtitle'
+      ImageIndex = 21
+      OnExecute = actNextSubtitleExecute
+    end
+    object actFontBold: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'Bold'
+      ImageIndex = 22
+      OnExecute = actFontBoldExecute
+    end
+    object actFontItalic: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'Italic'
+      ImageIndex = 23
+      OnExecute = actFontItalicExecute
+    end
+    object actFontUnderline: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'Underline'
+      ImageIndex = 24
+      OnExecute = actFontUnderlineExecute
+    end
+    object actFontStrikeout: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'Strikeout'
+      ImageIndex = 25
+      OnExecute = actFontStrikeoutExecute
+    end
+    object actFontClear: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'Clear'
+      ImageIndex = 26
+      OnExecute = actFontClearExecute
+    end
+    object actMediaPlay: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Play/Pause'
+      ImageIndex = 38
+      OnExecute = actMediaPlayExecute
+    end
+    object actMediaStop: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Stop'
+      ImageIndex = 40
+      OnExecute = actMediaStopExecute
+    end
+    object actMediaAutoScroll: TAction
+      Category = 'Video'
+      Caption = 'Update list on preview'
+      ImageIndex = 41
+      OnExecute = actMediaAutoScrollExecute
+    end
+    object actMediaChangePlayRate: TAction
+      Tag = 4
+      Category = 'Video'
+      AutoCheck = True
+      Caption = 'Playback rate'
+      ImageIndex = 42
+      OnExecute = actMediaChangePlayRateExecute
+    end
+    object actMediaRewind: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Rewind'
+      ImageIndex = 43
+      OnExecute = actMediaRewindExecute
+    end
+    object actMediaForward: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Forward'
+      ImageIndex = 44
+      OnExecute = actMediaForwardExecute
+    end
+    object actMediaPlaySelection: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Play selection'
+      ImageIndex = 51
+      OnExecute = actMediaPlaySelectionExecute
+    end
+    object actMediaPlayFromSelection: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Play from selection'
+      ImageIndex = 54
+      OnExecute = actMediaPlayFromSelectionExecute
+    end
+    object actMediaPlayBeforeSelection: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Play before selection'
+      ImageIndex = 52
+      OnExecute = actMediaPlayBeforeSelectionExecute
+    end
+    object actMediaPlayAfterSelection: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Play after selection'
+      ImageIndex = 53
+      OnExecute = actMediaPlayAfterSelectionExecute
+    end
+    object actMediaAddSubtitle: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Add subtitle'
+      ImageIndex = 55
+      OnExecute = actMediaAddSubtitleExecute
+    end
+    object actCombineSubtitles: TAction
+      Tag = 1
+      Category = 'Edit'
+      Caption = 'Combine subtitles'
+      ImageIndex = 63
+      OnExecute = actCombineSubtitlesExecute
+    end
+    object actSelectAll: TAction
+      Tag = 17
+      Category = 'Select'
+      Caption = 'Select all'
+      OnExecute = actSelectAllExecute
+    end
+    object actInvertSelection: TAction
+      Tag = 17
+      Category = 'Select'
+      Caption = 'Invert selection'
+      OnExecute = actInvertSelectionExecute
+    end
+    object actDurationLimits: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Duration limits...'
+      OnExecute = actDurationLimitsExecute
+    end
+    object actAutomaticDuration: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Automatic duration...'
+      OnExecute = actAutomaticDurationExecute
+    end
+    object actTimeExpander: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Time expander/reducer...'
+      OnExecute = actTimeExpanderExecute
+    end
+    object actSetDelay: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Set delay...'
+      OnExecute = actSetDelayExecute
+    end
+    object actConvertCase: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Convert case...'
+      OnExecute = actConvertCaseExecute
+    end
+    object actUnbreakSubtitle: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Unbreak subtitle'
+      OnExecute = actUnbreakSubtitleExecute
+    end
+    object actSetMaximumLineLength: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Set maximum line length'
+      OnExecute = actSetMaximumLineLengthExecute
+    end
+    object actReverseText: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Reverse text'
+      OnExecute = actReverseTextExecute
+    end
+    object actFixRTLPunctuation: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Fix punctuation'
+      OnExecute = actFixRTLPunctuationExecute
+    end
+    object actDivideSubtitle: TAction
+      Tag = 1
+      Category = 'Subtitle'
+      Caption = 'Divide subtitle'
+      OnExecute = actDivideSubtitleExecute
+    end
+    object actMarkSubtitle: TAction
+      Tag = 1
+      Category = 'Subtitle'
+      Caption = 'Mark subtitle(s)'
+      OnExecute = actMarkSubtitleExecute
+    end
+    object actUnMarkSubtitle: TAction
+      Tag = 1
+      Category = 'Subtitle'
+      Caption = 'Unmark subtitle(s)'
+      OnExecute = actUnMarkSubtitleExecute
+    end
+    object actJumpToNextMarked: TAction
+      Tag = 1
+      Category = 'Subtitle'
+      Caption = 'Jump to next marked'
+      OnExecute = actJumpToNextMarkedExecute
+    end
+    object actJumpToPreviousMarked: TAction
+      Tag = 1
+      Category = 'Subtitle'
+      Caption = 'Jump to previous marked'
+      OnExecute = actJumpToPreviousMarkedExecute
+    end
+    object actMultipleReplace: TAction
+      Tag = 1
+      Category = 'Find'
+      Caption = 'Multiple replace...'
+      OnExecute = actMultipleReplaceExecute
+    end
+    object actGoTo: TAction
+      Tag = 1
+      Category = 'Find'
+      Caption = 'Go to line number...'
+      OnExecute = actGoToExecute
+    end
+    object actSelectCurrentToBeginning: TAction
+      Tag = 17
+      Category = 'Select'
+      Caption = 'Current to beginning'
+      OnExecute = actSelectCurrentToBeginningExecute
+    end
+    object actSelectCurrentToEnd: TAction
+      Tag = 17
+      Category = 'Select'
+      Caption = 'Current to end'
+      OnExecute = actSelectCurrentToEndExecute
+    end
+    object actModifySelection: TAction
+      Tag = 1
+      Category = 'Select'
+      Caption = 'Modify selection...'
+      OnExecute = actModifySelectionExecute
+    end
+    object actShowColumnNumber: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Number/GAP'
+      OnExecute = actShowColumnNumberExecute
+    end
+    object actShowColumnTimes: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Times'
+      OnExecute = actShowColumnTimesExecute
+    end
+    object actShowColumnDuration: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Duration'
+      OnExecute = actShowColumnDurationExecute
+    end
+    object actShowColumnCPS: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Characters per second'
+      OnExecute = actShowColumnCPSExecute
+    end
+    object actShowColumnWPM: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Words per minute'
+      OnExecute = actShowColumnWPMExecute
+    end
+    object actShowColumnCPL: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Characters per line'
+      OnExecute = actShowColumnCPLExecute
+    end
+    object actHelp: TAction
+      Category = 'Help'
+      Caption = 'Help'
+      OnExecute = actHelpExecute
+    end
+    object actAbout: TAction
+      Category = 'Help'
+      Caption = 'About...'
+      OnExecute = actAboutExecute
+    end
+    object actSettings: TAction
+      Category = 'Edit'
+      Caption = 'Settings...'
+      ImageIndex = 19
+      OnExecute = actSettingsExecute
+    end
+    object actRestoreBackup: TAction
+      Category = 'File'
+      Caption = 'Restore backup...'
+      OnExecute = actRestoreBackupExecute
+    end
+    object actSaveSubtitle: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save subtitle'
+      ImageIndex = 2
+      OnExecute = actSaveSubtitleExecute
+    end
+    object actSaveSubtitleAs: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save subtitle as...'
+      OnExecute = actSaveSubtitleAsExecute
+    end
+    object actSaveTranslation: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save translation'
+      OnExecute = actSaveTranslationExecute
+    end
+    object actSaveTranslationAs: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save translation as...'
+      OnExecute = actSaveTranslationAsExecute
+    end
+    object actLoadTranscription: TAction
+      Category = 'File'
+      Caption = 'Transcription...'
+      OnExecute = actLoadTranscriptionExecute
+    end
+    object actSaveTranscription: TAction
+      Tag = 16
+      Category = 'File'
+      Caption = 'Transcription...'
+      OnExecute = actSaveTranscriptionExecute
+    end
+    object actMediaPreviousFrame: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Prev frame'
+      ImageIndex = 45
+      OnExecute = actMediaPreviousFrameExecute
+    end
+    object actMediaNextFrame: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Next frame'
+      ImageIndex = 46
+      OnExecute = actMediaNextFrameExecute
+    end
+    object actWebReference: TAction
+      Tag = 1
+      Category = 'Tools'
+      Caption = 'Web reference...'
+      OnExecute = actWebReferenceExecute
+    end
+    object actTranslate: TAction
+      Tag = 1
+      Category = 'Tools'
+      Caption = 'Auto translate...'
+      OnExecute = actTranslateExecute
+    end
+    object actFixSubtitles: TAction
+      Tag = 1
+      Category = 'Tools'
+      Caption = 'Fix subtitles...'
+      OnExecute = actFixSubtitlesExecute
+    end
+    object actSpellCheck: TAction
+      Tag = 1
+      Category = 'Tools'
+      Caption = 'Spell check...'
+      OnExecute = actSpellCheckExecute
+    end
+    object actFontColorDlg: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'Color...'
+      OnExecute = actFontColorDlgExecute
+    end
+    object actFontColor: TAction
+      Tag = 1
+      Category = 'Editor'
+      OnExecute = actFontColorExecute
+    end
+    object actAlignToLeft: TAction
+      Tag = 1
+      Category = 'Editor'
+      AutoCheck = True
+      Caption = 'Align to left'
+      GroupIndex = 3
+      ImageIndex = 27
+      OnExecute = actAlignToLeftExecute
+    end
+    object actAlignToCenter: TAction
+      Tag = 1
+      Category = 'Editor'
+      AutoCheck = True
+      Caption = 'Align to center'
+      GroupIndex = 3
+      ImageIndex = 28
+      OnExecute = actAlignToCenterExecute
+    end
+    object actAlignToRight: TAction
+      Tag = 1
+      Category = 'Editor'
+      AutoCheck = True
+      Caption = 'Align to right'
+      GroupIndex = 3
+      ImageIndex = 29
+      OnExecute = actAlignToRightExecute
+    end
+    object actAlignToNone: TAction
+      Tag = 1
+      Category = 'Editor'
+      AutoCheck = True
+      Caption = 'Align to none'
+      Checked = True
+      GroupIndex = 3
+      ImageIndex = 30
+      OnExecute = actAlignToNoneExecute
+    end
+    object actVAlignToBottom: TAction
+      Tag = 1
+      Category = 'Editor'
+      AutoCheck = True
+      Caption = 'VAlign to bottom'
+      Checked = True
+      GroupIndex = 4
+      ImageIndex = 31
+      OnExecute = actVAlignToBottomExecute
+    end
+    object actVAlignToMiddle: TAction
+      Tag = 1
+      Category = 'Editor'
+      AutoCheck = True
+      Caption = 'VAlign to middle'
+      GroupIndex = 4
+      ImageIndex = 32
+      OnExecute = actVAlignToMiddleExecute
+    end
+    object actVAlignToTop: TAction
+      Tag = 1
+      Category = 'Editor'
+      AutoCheck = True
+      Caption = 'VAlign to top'
+      GroupIndex = 4
+      ImageIndex = 33
+      OnExecute = actVAlignToTopExecute
+    end
+    object actAutoBreakSubtitle: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'Autobreak'
+      ImageIndex = 64
+      OnExecute = actAutoBreakSubtitleExecute
+    end
+    object actAddNote: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'Add note...'
+      OnExecute = actAddNoteExecute
+    end
+    object actQualityCheck: TAction
+      Tag = 1
+      Category = 'Tools'
+      Caption = 'Quality check...'
+      OnExecute = actQualityCheckExecute
+    end
+    object actBatchConvert: TAction
+      Category = 'Tools'
+      Caption = 'Batch convert...'
+      OnExecute = actBatchConvertExecute
+    end
+    object actGoToTime: TAction
+      Tag = 4
+      Category = 'Find'
+      Caption = 'Go to time...'
+      OnExecute = actGoToTimeExecute
+    end
+    object actMediaDeleteSubtitle: TAction
+      Tag = 1
+      Category = 'Waveform'
+      Caption = 'Delete subtitle'
+      ImageIndex = 10
+      OnExecute = actMediaDeleteSubtitleExecute
+    end
+    object actMediaZoomIn: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Zoom in'
+      ImageIndex = 59
+      OnExecute = actMediaZoomInExecute
+    end
+    object actMediaZoomOut: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Zoom out'
+      ImageIndex = 60
+      OnExecute = actMediaZoomOutExecute
+    end
+    object actMediaZoomSelection: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Zoom selection'
+      ImageIndex = 61
+      OnExecute = actMediaZoomSelectionExecute
+    end
+    object actSwapWorkspace: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Swap video layout'
+      OnExecute = actSwapWorkspaceExecute
+    end
+    object actInsertShotChange: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Insert shot change'
+      OnExecute = actInsertShotChangeExecute
+    end
+    object actDeleteShotChange: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Delete shot change'
+      OnExecute = actDeleteShotChangeExecute
+    end
+    object actViewShotChange: TAction
+      Category = 'Waveform'
+      AutoCheck = True
+      Caption = 'View shot change'
+      ImageIndex = 76
+      OnExecute = actViewShotChangeExecute
+    end
+    object actCenterWaveform: TAction
+      Category = 'Waveform'
+      AutoCheck = True
+      Caption = 'Center waveform'
+      ImageIndex = 75
+      OnExecute = actCenterWaveformExecute
+    end
+    object actSetAsDefaultFormat: TAction
+      Category = 'Subtitle'
+      Caption = 'Set Format as default'
+      ImageIndex = 67
+      OnExecute = actSetAsDefaultFormatExecute
+    end
+    object actSetAsDefaultEncoding: TAction
+      Category = 'Subtitle'
+      Caption = 'Set encoding as default'
+      ImageIndex = 66
+      OnExecute = actSetAsDefaultEncodingExecute
+    end
+    object actDetectSilentZones: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Detect silent zones'
+      ImageIndex = 77
+      OnExecute = actDetectSilentZonesExecute
+    end
+    object actImportSubtitles: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Import subtitles'
+      OnExecute = actImportSubtitlesExecute
+    end
+    object actExportMarkedSubtitles: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Export marked subtitles'
+      OnExecute = actExportMarkedSubtitlesExecute
+    end
+    object actExportTextOnly: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Export text only'
+      OnExecute = actExportTextOnlyExecute
+    end
+    object actCompare: TAction
+      Category = 'File'
+      Caption = 'Compare...'
+      OnExecute = actCompareExecute
+    end
+    object actCloseSubtitle: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Close subtitle'
+      OnExecute = actCloseSubtitleExecute
+    end
+    object actCloseApp: TAction
+      Category = 'File'
+      Caption = 'Close'
+      OnExecute = actCloseAppExecute
+    end
+    object actAddQuotationMarks: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Add Quotation Marks'
+      OnExecute = actAddQuotationMarksExecute
+    end
+    object actSwapTexts: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Swap texts'
+      OnExecute = actSwapTextsExecute
+    end
+    object actReadTextsFromFile: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Read texts from file...'
+      OnExecute = actReadTextsFromFileExecute
+    end
+    object actSplitSubtitleAtPosition: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Split line at cursor position'
+      OnExecute = actSplitSubtitleAtPositionExecute
+    end
+    object actInsertCurrentTime: TAction
+      Tag = 4
+      Category = 'Texts'
+      Caption = 'Insert current time'
+      OnExecute = actInsertCurrentTimeExecute
+    end
+    object actShowToolbarMain: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Main'
+      OnExecute = actShowToolbarMainExecute
+    end
+    object actShowToolbarFPS: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'FPS'
+      OnExecute = actShowToolbarFPSExecute
+    end
+    object actShowToolbarFormat: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Format'
+      OnExecute = actShowToolbarFormatExecute
+    end
+    object actShowToolbarEncoding: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Encoding'
+      OnExecute = actShowToolbarEncodingExecute
+    end
+    object actShiftTimes: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Shift...'
+      OnExecute = actShiftTimesExecute
+    end
+    object actShiftTimeMore: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Shift more'
+      OnExecute = actShiftTimeMoreExecute
+    end
+    object actShiftTimeLess: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Shift less'
+      OnExecute = actShiftTimeLessExecute
+    end
+    object actAdjustSubtitle: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Adjust subtitle...'
+      OnExecute = actAdjustSubtitleExecute
+    end
+    object actEndCueAddOneFrame: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Add one frame'
+      OnExecute = actEndCueAddOneFrameExecute
+    end
+    object actEndCueSubtractOneFrame: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Subtract one frame'
+      OnExecute = actEndCueSubtractOneFrameExecute
+    end
+    object actExtendLengthToPrevious: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Extend to previous'
+      OnExecute = actExtendLengthToPreviousExecute
+    end
+    object actExtendLengthToNext: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Extend to next'
+      OnExecute = actExtendLengthToNextExecute
+    end
+    object actSetAutomaticDuration: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Set automatic duration'
+      OnExecute = actSetAutomaticDurationExecute
+    end
+    object actSetDefaultPause: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Set default pause'
+      OnExecute = actSetDefaultPauseExecute
+    end
+    object actReadTimingsFromFile: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Read timings from file...'
+      OnExecute = actReadTimingsFromFileExecute
+    end
+    object actMediaBack1Sec: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Back1Sec'
+      OnExecute = actMediaBack1SecExecute
+    end
+    object actMediaForward1Sec: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Forward1Sec'
+      OnExecute = actMediaForward1SecExecute
+    end
+    object actMediaBack1Min: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Back1Min'
+      OnExecute = actMediaBack1MinExecute
+    end
+    object actMediaForward1Min: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Forward1Min'
+      OnExecute = actMediaForward1MinExecute
+    end
+    object actMediaSetInitialTime: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Set initial time'
+      ImageIndex = 47
+      OnExecute = actMediaSetInitialTimeExecute
+    end
+    object actMediaSetFinalTime: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Set final time'
+      ImageIndex = 48
+      OnExecute = actMediaSetFinalTimeExecute
+    end
+    object actMediaStartSubtitle: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Start subtitle'
+      ImageIndex = 49
+      OnExecute = actMediaStartSubtitleExecute
+    end
+    object actMediaEndSubtitle: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'End subtitle'
+      ImageIndex = 50
+      OnExecute = actMediaEndSubtitleExecute
+    end
+    object actMediaSubSizeInc: TAction
+      Tag = 4
+      Category = 'Video'
+      OnExecute = actMediaSubSizeIncExecute
+    end
+    object actMediaSubSizeDec: TAction
+      Tag = 4
+      Category = 'Video'
+      OnExecute = actMediaSubSizeDecExecute
+    end
+    object actMediaVolumeUp: TAction
+      Category = 'Video'
+      Caption = 'Up'
+      OnExecute = actMediaVolumeUpExecute
+    end
+    object actMediaVolumeDown: TAction
+      Category = 'Video'
+      Caption = 'Down'
+      OnExecute = actMediaVolumeDownExecute
+    end
+    object actMediaVolumeMute: TAction
+      Category = 'Video'
+      AutoCheck = True
+      Caption = 'Mute'
+      OnExecute = actMediaVolumeMuteExecute
+    end
+    object actLoadVideo: TAction
+      Category = 'Video'
+      Caption = 'Open video...'
+      OnExecute = actLoadVideoExecute
+    end
+    object actLoadVideoFromURL: TAction
+      Category = 'Video'
+      Caption = 'Open video from URL...'
+      OnExecute = actLoadVideoFromURLExecute
+    end
+    object actCloseVideo: TAction
+      Tag = 2
+      Category = 'Video'
+      Caption = 'Close video'
+      OnExecute = actCloseVideoExecute
+    end
+    object actSMPTE: TAction
+      Category = 'Video'
+      AutoCheck = True
+      Caption = 'SMPTE'
+      OnExecute = actSMPTEExecute
+    end
+    object actAudioToText: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Audio to text'
+      OnExecute = actAudioToTextExecute
+    end
+    object actShotChanges: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Shot changes...'
+      OnExecute = actShotChangesExecute
+    end
+    object actWaveExtract: TAction
+      Tag = 2
+      Category = 'Video'
+      Caption = 'Extract waveform...'
+      OnExecute = actWaveExtractExecute
+    end
+    object actTranslationMemorySettings: TAction
+      Tag = 1
+      Category = 'Tools'
+      Caption = 'Settings...'
+      OnExecute = actTranslationMemorySettingsExecute
+    end
+    object actTranslationMemoryClose: TAction
+      Tag = 2
+      Category = 'Tools'
+      Caption = 'Close'
+      OnExecute = actTranslationMemoryCloseExecute
+    end
+    object actTranslationMemory: TAction
+      Tag = 2
+      Category = 'Tools'
+      Caption = 'Show...'
+      OnExecute = actTranslationMemoryExecute
+    end
+    object actTranslationMemoryList: TAction
+      Tag = 2
+      Category = 'Tools'
+      Caption = 'List...'
+      OnExecute = actTranslationMemoryListExecute
+    end
+    object actTM1: TAction
+      Tag = 1
+      Category = 'Tools'
+      OnExecute = actTM1Execute
+    end
+    object actTM2: TAction
+      Tag = 1
+      Category = 'Tools'
+      OnExecute = actTM2Execute
+    end
+    object actTM3: TAction
+      Tag = 1
+      Category = 'Tools'
+      OnExecute = actTM3Execute
+    end
+    object actValidateTM: TAction
+      Tag = 1
+      Category = 'Tools'
+      Caption = 'Validate translation memory'
+      ImageIndex = 71
+      OnExecute = actValidateTMExecute
+    end
+    object actTBXSettings: TAction
+      Tag = 1
+      Category = 'Tools'
+      Caption = 'Settings...'
+      OnExecute = actTBXSettingsExecute
+    end
+    object actTBXClose: TAction
+      Tag = 2
+      Category = 'Tools'
+      Caption = 'Close'
+      OnExecute = actTBXCloseExecute
+    end
+    object actTBXEdit: TAction
+      Tag = 2
+      Category = 'Tools'
+      Caption = 'Add...'
+      OnExecute = actTBXEditExecute
+    end
+    object actTBXList: TAction
+      Tag = 2
+      Category = 'Tools'
+      Caption = 'List...'
+      OnExecute = actTBXListExecute
+    end
+    object actTBX: TAction
+      Tag = 2
+      Category = 'Tools'
+      Caption = 'Show...'
+      OnExecute = actTBXExecute
+    end
+    object actCheckForUpdates: TAction
+      Category = 'Help'
+      Caption = 'Check for updates'
+      OnExecute = actCheckForUpdatesExecute
+    end
+  end
+  object popDropInsert: TPopupMenu
+    Images = ImageList_Default
+    Left = 27
+    Top = 96
+    object MenuItem2: TMenuItem
+      Action = actInsertSubtitle
+    end
+    object MenuItem1: TMenuItem
+      Action = actInsertSubtitleBefore
+    end
+  end
+  object popMRU: TPopupMenu
+    Left = 26
+    Top = 152
+  end
+  object popPlayRate: TPopupMenu
+    Left = 27
+    Top = 208
+  end
+  object TimerWaveform: TTimer
+    Enabled = False
+    Interval = 40
+    OnTimer = DoWaveformTimer
+    Left = 544
+    Top = 40
+  end
+  object popLoopCount: TPopupMenu
+    Left = 27
+    Top = 264
+  end
+  object TimerSubtitle: TTimer
+    Enabled = False
+    Interval = 17
+    OnTimer = DoSubtitleTimer
+    Left = 544
+    Top = 104
+  end
+  object ImageList_ET_Default: TImageList
+    Left = 352
+    Top = 104
+    Bitmap = {
+      4C7A130000001000000010000000710C00000000000078DAED9A0B7415C519C7
+      273C420850DA824005115101939BDC9088F838788A85025A382A82210F92F008
+      2141B43C14103D28687D100A52DBD2D24215E44D89A0BC41DA125013290544A0
+      82882D8A24D686F048C89DFEBFE5DBCB64D8DD7BF7E61690937BCE2FD999F9FE
+      33DF7CF3CDEEDDBD2BA514B206883CFC7120A5A370241CFAF2F2F24BB89CE35F
+      0EBD3EBFAB717C35EEA18C1FAA3E5CEB7FA5FCBF92F90784466F7054B3290745
+      DC261C28503415CC21C6AC2F605B75ECC6E06BAE3B02C6814E4A7B7390A9F4F3
+      B5A6DFC5E5ED20CAC1BF488BB93FAC8C1B15607E7AEC3CCAD8C36C6CEDB466DB
+      591EBBB985FE48007F089F8D5D20FD34501284DE6496D67E846D4CFF5B048895
+      1A8B16AC39C779456DD941CCD5249B3514FBBE2ED64FB08DE9FBC35C67FAB015
+      443B68A339C7CCB1EDF297FC6BA5B4B7E2BA234AFE360EB07F8E68E8FBC78EDE
+      3C9FF210F6AFB91F76F1BAFA98B3ACEFEBA06BACEC0527FF8B6CE6AEC66F98B6
+      1F5A58C4CF2A6E81F67F14AFB11AC7DE0EF9232DF23E5AF1433D578E73B107B3
+      955898E7CA4E2EF4ADB8BE5CD18B20F6B0B4D8BF92CFABC19CEFACF4E5AC6FEE
+      62FFAAFE9B31C8D4C60D66FF1729EB77483BBF3BED6175FDF47DE7A48F52F67F
+      814DFE5AE903E5AF5D9CA759EC9F5D36FBC7C4A31C97B0E61CEB1E76B1466EF7
+      BFDF6FBA2F70B9FFABCD9DF5CD438D1FEB83DDFFD5FA70D0DAE68F7E4FE470ED
+      0F76FF07D207DAFF81F4FAFE0F873E54FFADCE9F6EE2D7DBE5F5DF69FF8772FD
+      08C7F52B1CD7CF90AEDFB286F7FFC4C90F368892E22DE2F8E625E2D0EF9F1187
+      DF78413C785B0B95C6601E2805AB401B2BBDA651E905A4C2B3BA5EB1BD11DC01
+      BA305E701738A7E8D355BDA26D0BFEA58D751E4C661F168321A09E8D7E266BD6
+      8237400597BF0131EA9C2CF4CD4015F8379773814FF1E30498C87E34B5D0D703
+      4F80FB404750C63A8AF92F4089D2D7381BFF4DD6B11D8D3F96EBDA83C7C024D0
+      49D3934FF7B05DA616BF1CAB35D5F4C74125AD0BF88C7DCD67DFA98FE5E0470E
+      FA545E2773CCA7D92E1E6CE3BAE74D6DD1E33FB18A7F0AF7F1118856C6EAC3FA
+      E9665DE1F0AEC2267E14839BB5B9F6677DBE59B76D48171120FEE2CDFE71E671
+      775E87A7CCB67DAF8C08CBBEBD1A08F693112FFAA5C7894CBDBEC1F8951DC000
+      95A8314BDA9AEDD00C18EC116983E3C442F45181FFBBB39244E245FD8AB1406A
+      6C61ED9383E385D4498F175F0EF68A95839244738C9707FB52E61BD6FB9A3499
+      D801B667ACF4E0189899D94E445D3A9FE56BA15F82F665A63DFC1E8931A7C1F7
+      32F8B41963B7B68FD4F498A456BDBAC3DEC7BE7E42B5D074CF8C17DD82893574
+      7B786C5F4A1791205C7CD213455F659EABA3C62E4BE075EA8E79DD1B70EC3871
+      92B515714D53DA734CFB202E1339B64BC18D8A3DC5CAA770618DBC62AA10AFE6
+      5BAC2D711A4C459F8D60F7B6C5FA945CE83DBFBB8DBE12CC891C53705D8657FC
+      146B3243252B4674F5AFE793ABDA81F68AFF1B408C70FD99DE0BFEF4D36B2FD7
+      FEBB629FA1F28762986C19D439C22B62B176F3AB5566CBF1A00A3C406D6463A5
+      4D8D1777A2FD2BEC9752D0C2DF305CBE0F6D85F7FE891DA88D6CC8B65ACE7B45
+      2FD49F00E7C0AEEC24D1D468C891ADA1F58911721DD5415F8C7C3D8B1C399916
+      2F7AFBCF4F28638F9743BBA9DA39215B8E06123E0CA7E280581109FFD7C0EE14
+      EC4BB0A7D3C0412AD3DCA60851479BFB36701E7EF8E74336646B682E6869AF57
+      A0BFFD833CE2629C29E6A41D2EB7AA5D920DD99286B49909A21DCA9FE3B80AF3
+      3B867975E4B14718BE67CB51FEF5F1889B31D7A3640BBE488B15B7507D66AC68
+      C5BE9C37CEADB1A22DC6DD60C42E57DE60EC73D4196DB0215BD2A87EC18FEF23
+      967FA7F5B9A95F01F97E0E71DF61B63F768B6860AC11CEFF646B950358A368F8
+      3F8872857366BCDA4E6D641354DE52FC2877AFF24F4AA790E8065681C810B43F
+      06A780040B2CDAA9CFD16007DB9DE263AAEB0DCA59EB033FD7B4D7838FB85D66
+      245CC02C832A453B4AD33600C5D43E79401379A0788BF4F97C06EFCC7B5EA6DE
+      56AD9F3C0BBFA94E4EEA5F579E3D532ECDCF475B974BE49CAA95166313DBA96D
+      CFF6357EED871B17FBB5693142BE953FD2D4EFB0D097515BC5D93386F6FDF50B
+      647AEC456DE13BF3E4F9CA0A991A63D49DB5D09F32F585EFCE373454A63E76AE
+      7BD3E853D19759E80BC97ED18C5CBF967CFF60C322FF7CF6ED5CEBE47FAE1A23
+      D252ECCC0FC574F2238DCCF6D176F12768ADD6CC9BE25FBF83BBB6C967073533
+      B5FB78AD75AD4FCB11237732ABE7CF6ED046D33EAE682937FBB07F1F72F9341F
+      935D9485DFBF56B4DD43D84F75791F750B652FEBDF0726DC2E7E051E51CA1160
+      2E3802568221A0A5DDF709B42D03E7C0BD5CEE07A4860FEC048916FA46A01894
+      809BC17CD6CC01E3C07BA092EB0ED8F8703DF8143C085E0479A099D2DE93F587
+      95BA2EE02F6015C8063738CCF105D6FF46A92BD6E658019ADBE877B3CD035CBE
+      81CBA7D9D777B9BF080BAD6ADB90EB72B86E75A0EF7B56B6385EC3753941E857
+      B36D36971BB22FD22A669C3FC53CA73CC5B635B7FF8CCBBB6DC6BB4E596F930F
+      94F6DF72DD0B0E3EB703B9A080D7F876A5ED30EB7B2A75CDD857CA9D7B4091E9
+      AF45DF07585FC9B9398E735572EEB6012779DC7A16FA44DE0B3E8B7DD28F6DEE
+      E7F6290E736CC97B7325EFD5B96AFEE07802C8BF569E1BD472ED807B0AC98845
+      4385B8EB77975E97A8CEAC37EDEDF44E04D0BB225CFA5A6AA9E5EA38FFB82987
+      4BFF5D262F51180CF10A919B2822B3BCA25F7682787CA857BC8CE30559F16209
+      DA660F4F1013509F0C9B46399D8518D159F8B5A3920C7D2CECDF4EF1D491C988
+      0DF1A8F61F31ABC27DE161F4733FFA88627D1DF4FD4C6A9C284BD6CEAFC99E88
+      4BCEB9DC775566BC28842FADA01D4BFDAADA4903938C7BCE698392FC7503711F
+      8C31FDE54763E91EB5EEC1648BF37AC1DC970CFDFA792FC9148FF1FC5E221EF2
+      6F2BE6488CA7FA5149FDE8FE9D38F6A9DCBF73A3F19FF4697111E8A38ED127FC
+      869D7F5E55BA7EF2A3177C9F95D3C3F8FF6C7292DCB46C8E543F9B5136F5C9B1
+      D5C75EFBC797AAD952D9B4A18F36D74ACC676AB21293A31F17C9D7C60E30FA9A
+      3566805136ED9571397E75BEA09C416C9E4BF144F8488375ACB66E54D6E383FF
+      3EC4B478646771D348E400E5138EEF46DDFAE48BB155E3ECD7A7C7D5F90CE365
+      63DC86868EF5280BCC2512C70F0D434E20CE8B916B85E9202D4E949A79883C5D
+      989B783177553D74462EC317813104FAA0DF52C8A62DCAAFA09FA33437E81A92
+      7DAE853E8FCBA4CF30F59DFD7DDE84BABFC287B7F25CEAA96E98D7386E00BAC1
+      2E826CB10E3A1E3013EC05A798BD5CE7B1B0378904AF0323276D380F66B3ADAE
+      DDECA0D3D9A4F5F1BA0BADC96BCA7CCF87A0274D2C981582D66406D847C7B4AF
+      71FE0B0AB265FD1E5046C76E3FACFF2F13AAFEDB30F8FFCB1AC46F3AAF810C71
+      FD6238076687A09FA9E5EF2617DA8DA0BEC51E782D402E56F2B8F51DF6612CE7
+      95991B657C9CAFCCD74F187E3F88011E8B67F8F46CFE3DF009580B0682088B67
+      904DC03BE00E2E5F07F682FF80456029FFD6500996F0F34EBD8FC66C732FF775
+      18FC819F73D3B3D5AFC0CBE00C186FF32C348AC7923C2EFD1F033A813FF1F3D9
+      85E07387E7A9F5597B8051E778104CE57E7FE0D007B5CD052B2DDA86F2B3E606
+      0EFAE9601C9861F13BC5EBEC87D333E1A6600E781E4C0313B8FE568EC1A400FA
+      B6603F38011A812739F6FF001F83E800FA57C171D09ECB113C8F33EC43A067DA
+      033946595CA6357C03A4F3BCEA3A689783BB4022C7A12DFF2EF222B73FC47DD9
+      FDEE7594F3CEF47B05E7A23AE73E9C670D1DD67727FF664039DFD3C28EF2FCCF
+      367EDC099E63BC0E73A5F8D6ABBDFFABE5BB049F3FADEADC5253BD0CE3F86E90
+      76BFDD5D6BEFFFA47615DF0B45971E2F1AA57BC434DCFFBCED521A91E91539FC
+      3E0DBD07B625250ED76340EF8F3809B3E24557D8FFD3E67D3FA292DE55ABF68E
+      8DFA6E89578CE27780A4235EB19DFCB49B37C698CDEFD7D06FE83B32E2441281
+      B6A1661F9909A28BD35CD07E2BC6590DFD7AED1DCC2FD9872141BD47E8151DB4
+      F70ABF661F32ACEC8D7774E2440F2BE0FF13A6FF69B1C26BF30E579B80F18B17
+      9B6CF3CD597F3AC32BE6512E886BE8537B4DA9A5964BAEE38EE5FF97FE6A7EFF
+      DEE9FC61F7BD26408CA4A617C17CAF51BF078551EFFAFB14D98743CFCF50962A
+      7129E2BA522E975AD8104F717D0F732E9A6EA9A2F3C3754F29E3F88F15FB52B3
+      7F1B1F891E3518DFAF0F62FE52ED47F7B9A6B96F774F11CCB922CCFA90F64FED
+      F5FFAABD9650FEAE014F583C1F156ED699A900DBC0D3E6B3D2007A7AFE743798
+      C2EF165769FD5505799E5449E0678BEBC1B76EEE7F5DCED5953E8CD7FDEFA4FF
+      35E17F101F0B94
+    }
+  end
+  object ImageList_ET_Dark: TImageList
+    Left = 440
+    Top = 104
+    Bitmap = {
+      4C7A130000001000000010000000A70900000000000078DAED5C0B908E5518FE
+      37AC65956459B1E4121976308A7461AA71D98889CA24295108496CE83A916A54
+      E492CA8C269A2E6EC9FD52BAA8A18B95C4268ADFA252B25DEC2F76D9AFF7E439
+      336FEF9CF3DDF6DF16F3EFCC33FEEF9CF39CF39EF7BCEF39E77BCFF9E4E5E539
+      79A58F880571E3D35F44E2FF6CFF7FE0FB492BF3F685DE03B71F961FAFF12F2B
+      F94B79FC82D49D9577EA8F97891172901771C152C62904BE0774FA5226BBE655
+      211C425A94904D68CAF2D308FD593D87047F0B9E3710525CE44B36F4BD176B37
+      C5A37F527799ACEDBB2D65DDC64AA51F43DB69067ED4431E85624B392FFE44C2
+      611F7C8D69223F8A325AFE9A3E6C53E7D504E738EC4AE50DF2D1578D41E028DD
+      770F307E1194D1B2F7429A96E1234265176E65D8986EDB66BF4ABE5A2CBF16D2
+      A2CC7EAB78F84F5440FA8F0D59E84F2C84FF6A7FD882712D068E81DFDD855785
+      F9829BFC3996BE73FDDD2DFCA1A6417F26BD79F97F0AC698EB31CBC57E1C83DD
+      576672F0B9323B800F0E62BAD07365D300FC5A488F317EC4870F3B06FF7530AF
+      FA5D5F243F067E5A00FFE5F26B1DF417EDFAF1FF1C367EDF8BF9DDCD87F9F849
+      BF73E3A730FF5F6AB15F13DFCB7E6D7A9E68F09F2D16FFD1C864BF0F83731CBC
+      5E01C628A8FF9BECC3AFFF9BFA9E5602FD05F17F9BFC41EC27E273EDF7EBFF5E
+      7C2FFFF7E24BFF8F073FACFCA6F93388FEB202AEFF6EFE1F66FD88C7FA158FF5
+      33D4FA6D7A6F0A8ABD7BF77AA10AE135423E6109212320BF0BC16178DC857F11
+      A12DA10DD0927005E138E3F7B3F0EB117E146D9D203C0A19E6110610CA5BF853
+      C1594D789D5088E7DF09CDB89C067E75C249C24F781E4A286672FC4A78087254
+      35F0CB134612AE235C4238029ED2F93384C3ACAE6C0FFDAF4139D5FE68A43524
+      DC477898D054F0954C57A15C7FA1BF21A63115FC9F09456A5CF69EFA53B24E86
+      ECAA8E45840B5DF87D314EBACD4750AE05613DD22678E8FF36D4F115A1322B7B
+      3DF8CF7BF023D04123D1D79BC09FEC836FC2B51887B136FE990C1FBEAFD103B6
+      25D39B106E11A8C7F2D5F3ED8437E18F5B09AD59FE6861AF0A1F226F8C214FE1
+      206131218D300C769A0F3FD77EA3E4FADBC2DF8FB922C5D01F3577CC272C64E5
+      EF254C844F7F40A8E3A2A766CC6614F73B6647ED7DEA7A1BEB47AB0063A4D09D
+      C9BD9CF155FB1D7CF07F03B71073CEEFF0C18790BE0073BC2E3F1F72168BF9F2
+      49F89C49FF47919F4A5866C83FCC6436F1D55C358B5083D0993045E072265F7D
+      F443CBFF9E5C0B7CA20B7C207236CD033EFA7D0121DDA78E9A13E688B407B1AE
+      76435E730BB71DE117F8714D96FE056CB109F27E41593936BF628FB145ADCF48
+      AF039B5C83B4CD8463B0F12C363FA9E718619D981346C066EEC173326105A100
+      36AAE6B55D78567D3B47C8B51E6B1AEFCF39285B00EE36F46F87D0733AB81F89
+      3AD351B6105C65DFFBA0E3FDD87BA8728321FB70C6556B631ECA1E205C8CF45A
+      90E504E6D67AF013A5BBBA6C6F7610657681C3E53A9FF035C6271D63F119CBAF
+      8831DA8AB2261B50EB7E1FD8CA49D80ECFEF23F6066E4887EDBA963B83D65F8E
+      F6D8C72787E05E03DB53B6F186213F1976FF19CA15E0F708F84C8CAD4D0F086E
+      6DECDF547E54C0C1986AEE70C1AD08FF8CC2AE1BB2BC3BC4FC3FCC20F730E4ED
+      16E997B1F61D834F686C40B94C3127696E2E78B9C2AE358EA0AC7EBE5A70DB22
+      3D177390E41730FE3582CBF74BB9684BF237823346705B88F72B9BFC43858E72
+      0DEBE426E48D70D1BF466F96A7F6699FA2CE5C8CB5E4160B1BC9157030776408
+      EEFD8C1BC35E6504648D61AFB109E54CFBBD9718F7DA10FE540E7ED43E8C2F1B
+      E2072F126E66CF4984D988412C260C20A4BBC41F1622DED801CF3D0CF1391593
+      F89CD0DAC04F256C46ECB211610E38B31023FA985084B49D16196A1376136E24
+      3C4D1846A8CEF23B81BF87A5B5217C425882584D5D973E3E05FECB2C6DB3E863
+      A14B4C7C2BCA74C3735D3C1F85ACAB505F9281CBCB5642DA10A42DF711FF3295
+      5D81B4213EF8CBC5795D25C8E258749684BEAC42DF74D93AC8BF01CF5B2DEDD5
+      60E3ADF125CB7F05694FB9C85C9F3014313B35C697B1BC3DE0776269D521ABB2
+      9DAB103BAB63A97B27F845B0CD6CD8AA03DBCD20FC8676CB1BF8ADE10BC5063F
+      E981325D91FF844B1FD3E19B8BE1ABB385FD8C234C2E8DF85F020994700FAAD7
+      6CBFEBD6BFE54B811F08F1E227904002A7D5FCE3EB395EFCB3287E978C18A57A
+      D79984F712159F9D411847B81531575BEC6E99C79CA9DECDF610BAB2772915CF
+      7A8C9D77393843D3B0D5B31131A4D1EC9D4F6319EAF692679725BD2FF87D595A
+      14B1E2A888239BF811165BD15C1D5730C53338BE40B9152C7ED959E8BAB30B7F
+      B0283B98B529DB2F421C9DF355DC6B2E7ECFC5B3ADFF07D0CFF12276EF8562C4
+      6A1A3039AF24ACF5C1557F8308952CB1A79EB08979B0918DEC1CD2C13952D0F7
+      6C15F77816B14FC7D2B61F34401CE3AD907C1DE752B182244B7E26CEA6B6B3F8
+      DB76A465BAD4AB7437D36253FC2C7D86216E988C732DBFE3BF4ED43133C4FE6B
+      3AEBEF8910FC1398B3A685DDFFE1AC28B704FC6D6CDE0B6A078AF3171096FF67
+      1CE47FA104FCE731064EC8F1D3F1C51921F85385FDAE0BC07D9F50C1E003D33D
+      6CB108ED56F038039BC26CE3087E4F369D3BC661FD6F66981792119BFF18E7CF
+      AB118F35CD39E71256B2F8740DCC377F10DEC679EF12F47D3EE29DA6FB454B70
+      BEBC127B845711E77670263409E7F10F5AF49682B61CB4ABFE1DA5EEBA601D8B
+      61EEDFE7A2FB0AE0EE04781F77B1B5B29A4B1D2A6F36EE17C8BC8158FB2ABAF0
+      954F64C306E439C54CC8E1E6D75571B63D01770EC621BD3174F0B08FB56E07CE
+      DA52711EA074FF0DE15B1FE767CFE13E903E7F49423FFE860C5EF3526FE8E82E
+      3C8FC25DAC7EE8573917EE22DC156B0D3DD4C3FAF734F27BA22EDBB9571EEC4E
+      CBFD0E6C51DE275A60D903E8F1FD1C6706CAE63B19CA293B7FD722473BECA7C6
+      E3EE9BADAF0DE53DB60412280B04B893FE9F6F030CDFF905FAEEAD847C278EED
+      97A8FF67F13DC0F3FCDE9B10F9A958BB9605E427E1BE6A01BB07580DA8E8C157
+      77BE7EF0D8BBCDD7776C0CFCE1EC6E831BD43D81248BFCA9D8CBEA773075CE7E
+      293090D5D1C6437F8D71776FAD483F08FE009FE3D7443C1F02FF4E0B5FE9B8A3
+      052399FC2D2DFC0C9FEF8E9110FCA3B8C35EED6CBA7F9B40020958FFBF00E373
+      69F1CFE075DB097006FB9FF34F961638FE14477E28C491BF80E9250769F9ECFB
+      1D5946612CF81D45FFF3D93D79CDE388E05B921CF0C7B23675F97CF9BD89A1FD
+      8E25689FF3BDFAEF887AA4FCF1D07F59DB5F68FF49E0B47D7FCDC7BDBA91E29B
+      EC88E1FDD5CFB7F7EA3EE17AC22384B63EF8EAEED795B833A6BE6B3D29EA3B19
+      E2FDB315EEB7AD25FC19F0FDD7ADFF25E587C2E9227F59E21FCAC1EEE4
+    }
+  end
+  object popVSTHeader: TPopupMenu
+    Left = 27
+    Top = 320
+    object MenuItem82: TMenuItem
+      Action = actShowColumnNumber
+      AutoCheck = True
+    end
+    object MenuItem83: TMenuItem
+      Action = actShowColumnTimes
+      AutoCheck = True
+    end
+    object MenuItem84: TMenuItem
+      Action = actShowColumnDuration
+      AutoCheck = True
+    end
+    object MenuItem85: TMenuItem
+      Action = actShowColumnCPS
+      AutoCheck = True
+    end
+    object MenuItem86: TMenuItem
+      Action = actShowColumnWPM
+      AutoCheck = True
+    end
+    object MenuItem87: TMenuItem
+      Action = actShowColumnCPL
+      AutoCheck = True
+    end
+  end
+  object popVST: TPopupMenu
+    Images = ImageList_Default
+    OnPopup = DoVSTPopup
+    Left = 27
+    Top = 376
+    object MenuItem88: TMenuItem
+      Action = actInsertSubtitleBefore
+    end
+    object MenuItem89: TMenuItem
+      Action = actInsertSubtitle
+    end
+    object MenuItem90: TMenuItem
+      Action = actDeleteSubtitle
+    end
+    object Separator22: TMenuItem
+      Caption = '-'
+    end
+    object mnuVSTInsertSymbol: TMenuItem
+    end
+    object Separator38: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem91: TMenuItem
+      Action = actCut
+    end
+    object MenuItem92: TMenuItem
+      Action = actCopy
+    end
+    object MenuItem93: TMenuItem
+      Action = actPaste
+    end
+    object mnuNoteSeparator: TMenuItem
+      Caption = '-'
+    end
+    object mnuAddNote: TMenuItem
+      Action = actAddNote
+    end
+    object Separator8: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem94: TMenuItem
+      Action = actMarkSubtitle
+    end
+    object MenuItem95: TMenuItem
+      Action = actUnMarkSubtitle
+    end
+    object Separator36: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem132: TMenuItem
+      Action = actJumpToPreviousMarked
+    end
+    object MenuItem133: TMenuItem
+      Action = actJumpToNextMarked
+    end
+  end
+  object popMemo: TPopupMenu
+    Images = ImageList_Default
+    OnPopup = DoMemoPopup
+    Left = 27
+    Top = 434
+    object mnuHunspellSeparator: TMenuItem
+      Caption = '-'
+    end
+    object mnuDictionary: TMenuItem
+      Caption = 'Dictionary'
+    end
+    object Separator24: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem96: TMenuItem
+      Action = actWebReference
+    end
+    object Separator26: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem97: TMenuItem
+      Action = actCut
+    end
+    object MenuItem98: TMenuItem
+      Action = actCopy
+    end
+    object MenuItem99: TMenuItem
+      Action = actPaste
+    end
+    object Separator27: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem100: TMenuItem
+      Action = actSelectAll
+    end
+    object Separator28: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem107: TMenuItem
+      Action = actSplitSubtitleAtPosition
+    end
+    object MenuItem151: TMenuItem
+      Action = actAddQuotationMarks
+    end
+    object mnuMemoInsertSymbol: TMenuItem
+    end
+  end
+  object popVideo: TPopupMenu
+    Images = ImageList_Default
+    Left = 88
+    Top = 96
+    object MenuItem101: TMenuItem
+      Action = actMediaPlay
+    end
+    object MenuItem102: TMenuItem
+      Action = actMediaStop
+    end
+    object Separator45: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem161: TMenuItem
+      Action = actSMPTE
+      AutoCheck = True
+    end
+  end
+  object popWAVE: TPopupMenu
+    Images = ImageList_Default
+    OnPopup = DoWAVEPopup
+    Left = 88
+    Top = 152
+    object MenuItem103: TMenuItem
+      Action = actMediaPlaySelection
+    end
+    object MenuItem104: TMenuItem
+      Action = actMediaPlayFromSelection
+    end
+    object MenuItem105: TMenuItem
+      Action = actMediaPlayBeforeSelection
+    end
+    object Separator25: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem106: TMenuItem
+      Action = actMediaAddSubtitle
+    end
+    object MenuItem134: TMenuItem
+      Action = actMediaDeleteSubtitle
+    end
+    object Separator41: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem137: TMenuItem
+      Action = actInsertShotChange
+    end
+    object MenuItem138: TMenuItem
+      Action = actDeleteShotChange
+    end
+  end
+  object TimerAutoBackup: TTimer
+    Enabled = False
+    Interval = 0
+    OnTimer = DoAutoBackupTimer
+    Left = 544
+    Top = 168
+  end
+  object popTranscription: TPopupMenu
+    OnPopup = DoTranscriptionPopup
+    Left = 88
+    Top = 208
+    object MenuItem128: TMenuItem
+      Action = actCut
+    end
+    object MenuItem129: TMenuItem
+      Action = actCopy
+    end
+    object MenuItem130: TMenuItem
+      Action = actPaste
+    end
+    object Separator34: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem131: TMenuItem
+      Action = actSelectAll
+    end
+    object Separator35: TMenuItem
+      Caption = '-'
+    end
+    object mnuTranscriptionInsertTime: TMenuItem
+      Action = actInsertCurrentTime
+    end
+  end
+  object TimerStatus: TTimer
+    Enabled = False
+    Interval = 10000
+    OnTimer = DoStatusTimer
+    Left = 544
+    Top = 232
+  end
+  object popSilentZones: TPopupMenu
+    Left = 88
+    Top = 264
+  end
+end

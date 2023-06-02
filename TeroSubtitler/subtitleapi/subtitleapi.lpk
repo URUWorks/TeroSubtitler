@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="5">
+    <PathDelim Value="\"/>
+    <Name Value="SubtitleAPI"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Version Major="1"/>
+    <Files>
+      <Item>
+        <Filename Value="UWSubtitleAPI.pas"/>
+        <UnitName Value="UWSubtitleAPI"/>
+      </Item>
+      <Item>
+        <Filename Value="UWSubtitleAPI.Tags.pas"/>
+        <UnitName Value="UWSubtitleAPI.Tags"/>
+      </Item>
+      <Item>
+        <Filename Value="UWSubtitleAPI.ExtraInfo.pas"/>
+        <UnitName Value="UWSubtitleAPI.ExtraInfo"/>
+      </Item>
+      <Item>
+        <Filename Value="UWSubtitleAPI.TimeCode.pas"/>
+        <UnitName Value="UWSubtitleAPI.TimeCode"/>
+      </Item>
+      <Item>
+        <Filename Value="UWSubtitleAPI.TMX.pas"/>
+        <UnitName Value="UWSubtitleAPI.TMX"/>
+      </Item>
+      <Item>
+        <Filename Value="UWSubtitleAPI.TBX.pas"/>
+        <UnitName Value="UWSubtitleAPI.TBX"/>
+      </Item>
+      <Item>
+        <Filename Value="UWSubtitleAPI.EDL.pas"/>
+        <UnitName Value="UWSubtitleAPI.EDL"/>
+      </Item>
+    </Files>
+    <RequiredPkgs>
+      <Item>
+        <PackageName Value="LGenerics"/>
+      </Item>
+      <Item>
+        <PackageName Value="UWCommon"/>
+      </Item>
+      <Item>
+        <PackageName Value="FCL"/>
+      </Item>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

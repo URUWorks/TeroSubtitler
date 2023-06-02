@@ -1,0 +1,171 @@
+object frmFixSubtitles: TfrmFixSubtitles
+  Left = 242
+  Height = 600
+  Top = 116
+  Width = 1000
+  BorderIcons = []
+  Caption = 'Fix subtitles'
+  ClientHeight = 600
+  ClientWidth = 1000
+  Constraints.MinHeight = 200
+  Constraints.MinWidth = 200
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object lyoBottom: TUWLayout
+    Left = 0
+    Height = 41
+    Top = 559
+    Width = 1000
+    Align = alBottom
+    ClientHeight = 41
+    ClientWidth = 1000
+    TabOrder = 2
+    object btnApply: TButton
+      Left = 837
+      Height = 25
+      Top = 8
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Apply'
+      Default = True
+      OnClick = btnApplyClick
+      TabOrder = 0
+    end
+    object btnClose: TButton
+      Left = 917
+      Height = 25
+      Top = 8
+      Width = 75
+      Anchors = [akTop, akRight]
+      Cancel = True
+      Caption = 'Close'
+      OnClick = btnCloseClick
+      TabOrder = 1
+    end
+  end
+  object lyoLeft: TUWLayout
+    Left = 0
+    Height = 559
+    Top = 0
+    Width = 350
+    Align = alLeft
+    ClientHeight = 559
+    ClientWidth = 350
+    Constraints.MaxWidth = 400
+    Constraints.MinWidth = 250
+    TabOrder = 0
+    object clbOptions: TCheckListBox
+      Left = 8
+      Height = 456
+      Top = 8
+      Width = 342
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      ExtendedSelect = False
+      ItemHeight = 0
+      OnClickCheck = clbOptionsClickCheck
+      TabOrder = 0
+    end
+    object lblConvention: TLabel
+      Left = 8
+      Height = 15
+      Top = 476
+      Width = 62
+      Anchors = [akLeft, akBottom]
+      Caption = 'Convention'
+      ParentColor = False
+    end
+    object cboConvention: TComboBox
+      Left = 192
+      Height = 23
+      Top = 472
+      Width = 158
+      Anchors = [akLeft, akRight, akBottom]
+      ItemHeight = 15
+      OnSelect = cboConventionSelect
+      Style = csDropDownList
+      TabOrder = 1
+    end
+    object lblOCR: TLabel
+      Left = 8
+      Height = 15
+      Top = 508
+      Width = 24
+      Anchors = [akLeft, akBottom]
+      Caption = 'OCR'
+      ParentColor = False
+    end
+    object cboOCR: TComboBox
+      Left = 192
+      Height = 23
+      Top = 504
+      Width = 158
+      Anchors = [akLeft, akRight, akBottom]
+      ItemHeight = 15
+      OnChange = clbOptionsClickCheck
+      Style = csDropDownList
+      TabOrder = 2
+    end
+    object lblSpacingHyphen: TLabel
+      Left = 8
+      Height = 15
+      Top = 540
+      Width = 146
+      Anchors = [akLeft, akBottom]
+      Caption = 'Spacing of opening hyphen'
+      ParentColor = False
+    end
+    object cboSpacingHyphen: TComboBox
+      Left = 192
+      Height = 23
+      Top = 536
+      Width = 158
+      Anchors = [akLeft, akRight, akBottom]
+      ItemHeight = 15
+      OnChange = clbOptionsClickCheck
+      Style = csDropDownList
+      TabOrder = 3
+    end
+  end
+  object lyoClient: TUWLayout
+    Left = 356
+    Height = 559
+    Top = 0
+    Width = 644
+    Align = alClient
+    ClientHeight = 559
+    ClientWidth = 644
+    TabOrder = 1
+    object VST: TLazVirtualStringTree
+      Left = 0
+      Height = 551
+      Top = 8
+      Width = 636
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Header.AutoSizeIndex = 0
+      Header.Columns = <>
+      Header.MainColumn = -1
+      Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+      TabOrder = 0
+      TreeOptions.AutoOptions = [toAutoTristateTracking]
+      TreeOptions.MiscOptions = [toCheckSupport, toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+      TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
+      TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+      TreeOptions.StringOptions = []
+      OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+      OnDrawText = VSTDrawText
+      OnGetText = VSTGetText
+      OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+      OnInitNode = VSTInitNode
+      OnResize = VSTResize
+    end
+  end
+  object Splitter1: TSplitter
+    Left = 350
+    Height = 559
+    Top = 0
+    Width = 6
+  end
+end

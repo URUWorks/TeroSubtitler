@@ -1,0 +1,120 @@
+object frmShiftTimes: TfrmShiftTimes
+  Left = 237
+  Height = 188
+  Top = 115
+  Width = 273
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Shift'
+  ClientHeight = 188
+  ClientWidth = 273
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object btnClose: TButton
+    Left = 190
+    Height = 25
+    Top = 155
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 3
+  end
+  object btnApply: TButton
+    Left = 110
+    Height = 25
+    Top = 155
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'Apply'
+    Default = True
+    OnClick = btnApplyClick
+    TabOrder = 2
+  end
+  object lblOffset: TLabel
+    AnchorSideTop.Control = cboOffset
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = cboOffset
+    Left = 8
+    Height = 15
+    Top = 9
+    Width = 32
+    BorderSpacing.Right = 8
+    Caption = 'Offset'
+    ParentColor = False
+  end
+  object cboOffset: TComboBox
+    Left = 72
+    Height = 23
+    Top = 5
+    Width = 66
+    ItemHeight = 15
+    ItemIndex = 0
+    Items.Strings = (
+      '+'
+      '-'
+    )
+    Style = csDropDownList
+    TabOrder = 1
+    Text = '+'
+  end
+  object tedOffset: TUWTimeEdit
+    Left = 144
+    Height = 23
+    Top = 5
+    Width = 104
+    Value = 0
+    FPS = 25
+    FrameStep = 1
+    TimeStep = 10
+    TimeMode = temTime
+    Alignment = taCenter
+    Constraints.MinHeight = 21
+    Constraints.MinWidth = 80
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+  end
+  object lblScope: TLabel
+    Left = 8
+    Height = 15
+    Top = 49
+    Width = 35
+    Caption = 'Scope:'
+    ParentColor = False
+  end
+  object rbnAllTheSubtitles: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 69
+    Width = 18
+    AutoSize = False
+    Caption = 'All the subtitles'
+    TabOrder = 5
+    TabStop = False
+  end
+  object rbnFromTheSelectedSubtitle: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 88
+    Width = 18
+    AutoSize = False
+    Caption = 'From the selected subtitle'
+    TabOrder = 6
+    TabStop = False
+  end
+  object rbnOnlySelectedSubtitles: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 107
+    Width = 18
+    AutoSize = False
+    Caption = 'Only selected subtitles'
+    TabOrder = 7
+    TabStop = False
+  end
+end

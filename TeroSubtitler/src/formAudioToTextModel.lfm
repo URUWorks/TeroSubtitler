@@ -1,0 +1,49 @@
+object frmAudioToTextModel: TfrmAudioToTextModel
+  Left = 239
+  Height = 88
+  Top = 118
+  Width = 346
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Audio to text models'
+  ClientHeight = 88
+  ClientWidth = 346
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object cboModel: TComboBox
+    Left = 8
+    Height = 23
+    Top = 8
+    Width = 248
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object btnDownload: TButton
+    AnchorSideLeft.Control = cboModel
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = cboModel
+    AnchorSideTop.Side = asrCenter
+    Left = 264
+    Height = 25
+    Top = 7
+    Width = 75
+    BorderSpacing.Left = 8
+    Caption = 'Download'
+    OnClick = btnDownloadClick
+    TabOrder = 1
+  end
+  object btnClose: TButton
+    Left = 264
+    Height = 25
+    Top = 56
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 2
+  end
+end

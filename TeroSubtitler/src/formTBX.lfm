@@ -1,0 +1,50 @@
+object frmTBX: TfrmTBX
+  Left = 236
+  Height = 176
+  Top = 114
+  Width = 480
+  BorderIcons = []
+  Caption = 'Terminology'
+  ClientHeight = 176
+  ClientWidth = 480
+  FormStyle = fsStayOnTop
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object VST: TLazVirtualStringTree
+    Left = 8
+    Height = 159
+    Top = 8
+    Width = 375
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    DefaultText = 'Node'
+    Header.AutoSizeIndex = 0
+    Header.Columns = <>
+    Header.MainColumn = -1
+    Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+    TabOrder = 0
+    TreeOptions.AutoOptions = [toAutoTristateTracking]
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+    TreeOptions.PaintOptions = [toHideFocusRect, toShowDropmark, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+    TreeOptions.StringOptions = []
+    OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+    OnDrawText = VSTDrawText
+    OnGetText = VSTGetText
+    OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+    OnResize = VSTResize
+  end
+  object btnClose: TButton
+    Left = 388
+    Height = 25
+    Top = 143
+    Width = 83
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 1
+  end
+end

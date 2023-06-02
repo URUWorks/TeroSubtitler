@@ -1,0 +1,53 @@
+object frmCustomInputDlg: TfrmCustomInputDlg
+  Left = 263
+  Height = 93
+  Top = 119
+  Width = 450
+  BorderIcons = []
+  BorderStyle = bsSingle
+  ClientHeight = 93
+  ClientWidth = 450
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object lblMessage: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 23
+    Caption = 'Msg'
+    ParentColor = False
+  end
+  object btnOk: TButton
+    Left = 288
+    Height = 25
+    Top = 60
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'Ok'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+  end
+  object btnCancel: TButton
+    Left = 368
+    Height = 25
+    Top = 60
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+  end
+  object mmoInput: TMemo
+    Left = 8
+    Height = 23
+    Top = 28
+    Width = 435
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    OnKeyDown = mmoInputKeyDown
+    TabOrder = 0
+  end
+end

@@ -1,0 +1,72 @@
+object frmAbout: TfrmAbout
+  Left = 236
+  Height = 316
+  Top = 114
+  Width = 380
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'About...'
+  ClientHeight = 316
+  ClientWidth = 380
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object imgLogo: TImage
+    Left = 76
+    Height = 33
+    Top = 8
+    Width = 226
+    AntialiasingMode = amOn
+    Proportional = True
+    Stretch = True
+  end
+  object btnClose: TButton
+    Left = 153
+    Height = 25
+    Top = 280
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    Default = True
+    OnClick = btnCloseClick
+    TabOrder = 0
+  end
+  object lblInfo: TLabel
+    Left = 0
+    Height = 88
+    Top = 56
+    Width = 378
+    Alignment = taCenter
+    AutoSize = False
+    ParentColor = False
+  end
+  object lblUW: TLabel
+    Cursor = crHandPoint
+    Left = 0
+    Height = 40
+    Top = 224
+    Width = 380
+    Alignment = taCenter
+    AutoSize = False
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    OnClick = lblUWClick
+  end
+  object lblDonate: TLabel
+    Cursor = crHandPoint
+    Left = 0
+    Height = 48
+    Top = 160
+    Width = 380
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Donate'
+    ParentColor = False
+    ParentFont = False
+    WordWrap = True
+    OnClick = lblDonateClick
+  end
+end

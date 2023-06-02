@@ -1,0 +1,146 @@
+object frmCompare: TfrmCompare
+  Left = 245
+  Height = 481
+  Top = 115
+  Width = 905
+  BorderIcons = []
+  Caption = 'Compare'
+  ClientHeight = 481
+  ClientWidth = 905
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnResize = FormResize
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object lyoFile1: TUWLayout
+    Left = 0
+    Height = 439
+    Top = 0
+    Width = 456
+    Align = alLeft
+    ClientHeight = 439
+    ClientWidth = 456
+    TabOrder = 0
+    object edtFile1: TEdit
+      Left = 8
+      Height = 23
+      Top = 8
+      Width = 360
+      Anchors = [akTop, akLeft, akRight]
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object btnFile1: TButton
+      Left = 373
+      Height = 25
+      Top = 8
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = '...'
+      OnClick = btnFile1Click
+      TabOrder = 1
+    end
+    object VST1: TLazVirtualStringTree
+      Left = 8
+      Height = 399
+      Top = 40
+      Width = 441
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 8
+      Header.AutoSizeIndex = 0
+      Header.Columns = <>
+      Header.MainColumn = -1
+      Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+      TabOrder = 2
+      TreeOptions.AutoOptions = [toAutoTristateTracking]
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+      TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
+      TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+      TreeOptions.StringOptions = []
+      OnAdvancedHeaderDraw = VST1AdvancedHeaderDraw
+      OnDrawText = VST1DrawText
+      OnGetText = VST1GetText
+      OnHeaderDrawQueryElements = VST1HeaderDrawQueryElements
+      OnResize = VST1Resize
+      OnScroll = VST1Scroll
+    end
+  end
+  object lyoFile2: TUWLayout
+    Left = 456
+    Height = 439
+    Top = 0
+    Width = 449
+    Align = alClient
+    ClientHeight = 439
+    ClientWidth = 449
+    TabOrder = 1
+    object edtFile2: TEdit
+      Left = 0
+      Height = 23
+      Top = 8
+      Width = 360
+      Anchors = [akTop, akLeft, akRight]
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object btnFile2: TButton
+      Left = 365
+      Height = 25
+      Top = 8
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = '...'
+      OnClick = btnFile1Click
+      TabOrder = 1
+    end
+    object VST2: TLazVirtualStringTree
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideRight.Side = asrBottom
+      Left = 1
+      Height = 399
+      Top = 40
+      Width = 440
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Right = 8
+      Header.AutoSizeIndex = 0
+      Header.Columns = <>
+      Header.MainColumn = -1
+      Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+      TabOrder = 2
+      TreeOptions.AutoOptions = [toAutoTristateTracking]
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+      TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
+      TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+      TreeOptions.StringOptions = []
+      OnAdvancedHeaderDraw = VST1AdvancedHeaderDraw
+      OnDrawText = VST1DrawText
+      OnGetText = VST1GetText
+      OnHeaderDrawQueryElements = VST1HeaderDrawQueryElements
+      OnResize = VST1Resize
+      OnScroll = VST1Scroll
+    end
+  end
+  object lyoBottom: TUWLayout
+    Left = 0
+    Height = 42
+    Top = 439
+    Width = 905
+    Align = alBottom
+    ClientHeight = 42
+    ClientWidth = 905
+    TabOrder = 2
+    object btnClose: TButton
+      Left = 822
+      Height = 25
+      Top = 8
+      Width = 75
+      Anchors = [akRight, akBottom]
+      Cancel = True
+      Caption = 'Close'
+      OnClick = btnCloseClick
+      TabOrder = 0
+    end
+  end
+end

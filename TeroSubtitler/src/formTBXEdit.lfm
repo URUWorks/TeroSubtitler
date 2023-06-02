@@ -1,0 +1,81 @@
+object frmTBXEdit: TfrmTBXEdit
+  Left = 247
+  Height = 142
+  Top = 121
+  Width = 428
+  BorderIcons = []
+  Caption = 'Terminology'
+  ClientHeight = 142
+  ClientWidth = 428
+  FormStyle = fsSystemStayOnTop
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object btnAdd: TButton
+    Left = 336
+    Height = 25
+    Top = 8
+    Width = 83
+    Caption = 'Add'
+    Default = True
+    OnClick = btnAddClick
+    TabOrder = 3
+  end
+  object btnClose: TButton
+    Left = 336
+    Height = 25
+    Top = 105
+    Width = 83
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 4
+  end
+  object lblOriginal: TLabel
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 42
+    Caption = 'Original'
+    ParentColor = False
+  end
+  object edtOriginal: TEdit
+    Left = 88
+    Height = 23
+    Top = 8
+    Width = 240
+    TabOrder = 0
+  end
+  object lblTranslated: TLabel
+    Left = 8
+    Height = 15
+    Top = 44
+    Width = 53
+    Caption = 'Translated'
+    ParentColor = False
+  end
+  object edtTranslated: TEdit
+    Left = 88
+    Height = 23
+    Top = 40
+    Width = 240
+    TabOrder = 1
+  end
+  object mmoNotes: TMemo
+    Left = 88
+    Height = 58
+    Top = 72
+    Width = 240
+    TabOrder = 2
+  end
+  object lblNotes: TLabel
+    Left = 8
+    Height = 15
+    Top = 76
+    Width = 31
+    Caption = 'Notes'
+    ParentColor = False
+  end
+end

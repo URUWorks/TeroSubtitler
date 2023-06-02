@@ -1,0 +1,248 @@
+object frmWelcome: TfrmWelcome
+  Left = 256
+  Height = 317
+  Top = 127
+  Width = 700
+  BorderIcons = []
+  BorderStyle = bsNone
+  ClientHeight = 317
+  ClientWidth = 700
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object shaBackground: TShape
+    Left = 0
+    Height = 317
+    Top = 0
+    Width = 264
+    Align = alLeft
+    Enabled = False
+    Pen.Style = psClear
+  end
+  object shaBorder: TShape
+    Left = 0
+    Height = 317
+    Top = 0
+    Width = 700
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Brush.Style = bsClear
+    Pen.Width = 2
+  end
+  object imgLogo: TImage
+    Left = 19
+    Height = 33
+    Top = 18
+    Width = 226
+    AutoSize = True
+    Enabled = False
+    Proportional = True
+    Transparent = True
+  end
+  object lblNewSubtitle: TLabel
+    Cursor = crHandPoint
+    Left = 59
+    Height = 15
+    Top = 99
+    Width = 110
+    Caption = 'New empty subtitle'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    OnClick = fbnNewSubtitleClick
+  end
+  object lblOpenFile: TLabel
+    Cursor = crHandPoint
+    Left = 59
+    Height = 15
+    Top = 144
+    Width = 60
+    Caption = 'Open file...'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    OnClick = fbnOpenFileClick
+  end
+  object lblRecentFiles: TLabel
+    Left = 280
+    Height = 15
+    Top = 36
+    Width = 66
+    Caption = 'Recent files'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object fbnNewSubtitle: TUWFlatButton
+    Cursor = crHandPoint
+    Left = 19
+    Height = 36
+    Top = 88
+    Width = 36
+    ButtonStyle = True
+    HightlightColor = clBtnHighlight
+    BorderColor = clActiveCaption
+    CheckedColor = clInactiveBorder
+    Images = ImageList_Default
+    ImageIndex = 0
+    Color = clBtnFace
+    OnClick = fbnNewSubtitleClick
+  end
+  object fbnOpenSubtitle: TUWFlatButton
+    Cursor = crHandPoint
+    Left = 19
+    Height = 36
+    Top = 133
+    Width = 36
+    ButtonStyle = True
+    HightlightColor = clBtnHighlight
+    BorderColor = clActiveCaption
+    CheckedColor = clInactiveBorder
+    Images = ImageList_Default
+    ImageIndex = 1
+    Color = clBtnFace
+    OnClick = fbnOpenFileClick
+  end
+  object chkShowOnStartup: TUWCheckBox
+    Left = 8
+    Height = 19
+    Top = 293
+    Width = 18
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    Caption = 'Show on startup'
+    TabOrder = 0
+  end
+  object fbnBatchConvert: TUWFlatButton
+    Cursor = crHandPoint
+    Left = 19
+    Height = 36
+    Top = 178
+    Width = 36
+    ButtonStyle = True
+    HightlightColor = clBtnHighlight
+    BorderColor = clActiveCaption
+    CheckedColor = clInactiveBorder
+    Images = ImageList_Default
+    ImageIndex = 2
+    Color = clBtnFace
+    OnClick = fbnBatchConvertClick
+  end
+  object lblBatchConvert: TLabel
+    Cursor = crHandPoint
+    Left = 59
+    Height = 15
+    Top = 189
+    Width = 88
+    Caption = 'Batch convert...'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    OnClick = fbnBatchConvertClick
+  end
+  object bvlLine1: TBevel
+    Left = 19
+    Height = 2
+    Top = 127
+    Width = 245
+    Shape = bsTopLine
+  end
+  object bvlLine2: TBevel
+    Left = 19
+    Height = 2
+    Top = 172
+    Width = 245
+    Shape = bsTopLine
+  end
+  object bvlLine3: TBevel
+    Left = 19
+    Height = 2
+    Top = 217
+    Width = 245
+    Shape = bsTopLine
+  end
+  object fbnExit: TUWFlatButton
+    Cursor = crHandPoint
+    Left = 19
+    Height = 36
+    Top = 223
+    Width = 36
+    ButtonStyle = True
+    HightlightColor = clBtnHighlight
+    BorderColor = clActiveCaption
+    CheckedColor = clInactiveBorder
+    Images = ImageList_Default
+    ImageIndex = 3
+    Color = clBtnFace
+    OnClick = fbnExitClick
+  end
+  object lblExit: TLabel
+    Cursor = crHandPoint
+    Left = 59
+    Height = 15
+    Top = 234
+    Width = 21
+    Caption = 'Exit'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    OnClick = fbnExitClick
+  end
+  object ImageList_Dark: TImageList
+    Height = 32
+    Width = 32
+    Left = 288
+    Top = 256
+    Bitmap = {
+      4C7A040000002000000020000000660200000000000078DAED9ABF6AC33010C6
+      0D85AC5D037E8642A74C854027BF4421532683DF202F9187C91428180A8140C0
+      4F908021D03550C874958B5D5C457224F94E72D21BBEA575EF77964E7FBEAB01
+      208296F6FBFD546823048E5A08453A81C4834BFEB107FB6A0E067C40D222305F
+      9983033F3294510E01F87F7208C4FFCD2120FF2787C07CB863BE515ECC673EF3
+      99CF7CE6339FF937C047D50DF04B427E69C04F903CB0AC2A66A2E0351A09A542
+      EF426783789F42B9D00CA14663A15D8F77FB107A746457EF5D208C6F95C38303
+      3F459CE3B9033F976254F33F31F8BB49FDAC696EE7FAF9B41EF3268E5C6B638B
+      DCC78EE3B4AB6B0E63BF759DABA21E87507CD0D45E442455BDE41EF9AA7A397B
+      E69BCC17F399CF7CE6339FF9CCA7E7CB778098901D4BAC53ED1BDA3F5B59DE81
+      6DEE3E2B8567C9A83D77873244FFE57AFF6EE6A5F0CC8E153E34B3F454B6CA5B
+      63AEF2C136FE1FB32FD0D7FFF7E90B50D7DFB5BE40EAA1DEE616FEBFBD2F2EEB
+      EF4146847BA2AAD6AA1EDCB387B340771E3C11AC0B5DFF437E6EE9615D74F53F
+      5E3CAD0B5DFF63E4715D74F53F5CFB6258FD8F3E7D318CFE07D5BDCCF4FEC77C
+      E6339F9EFF85CCB7FD7E7483CCB7FDDFD90C996F7B065577C36D407E732E6C89
+      F853A936BAE2BE11F0D7ADDFAD2DE2BAF6055463FCAA79F753471CD7BE0068C6
+      60ADF126BA383EFA0259405F5618F81AAABE4061514F987D810BFF7FED7B046A
+      1D0E075989D051089055C54C0CF82501BB5169C0074ADD203FEA29E6DBF1B1C5
+      7C7B3ED6DCF7AD3FDF7C08C8C7D8DF5CF910900F81F9D100F8D100F8A1EB7F08
+      EB7F08FB1F9F3F61F97CFF1B16FFBFF98FD0FECFABFFFD06EE1580A3
+    }
+  end
+  object ImageList_Default: TImageList
+    Height = 32
+    Width = 32
+    Left = 288
+    Top = 208
+    Bitmap = {
+      4C7A040000002000000020000000620200000000000078DAED9AB16AC3301086
+      0585AC5D037E8642A74C8540A7BE44A1532683DF202F9187C91428180A8140C0
+      CF1008740D143CA93255C051245727DF496A73825B5A57DF493A49F75F25A514
+      529B6E73655B6532D096C2A3C91ED7E01F47B0BD7D18E04B245B26E60FFA00E0
+      FB36900F11F9561F22F3AF7C48C0BFF021115FFE63BEAF5FCC673EF399CF7CE6
+      339FF9B9F3B12D77FE81907DF0E0BF206960D38EBAEF0B7EAF4D9495CADE95B5
+      1EFD7D2AAB95BD21C468A16C3F626C1FCAEE03D9DDB81B84F9ED7CB80BE09788
+      6BBC08E0D7461FDDFACF3CFE6EA6BFF5F5ADD5DF977ACECFCD8CB529C0F769E0
+      3CED75CC619CB7A16BD5E87948C5978ED8A36AB678A923F26DF1D246E60BDFFB
+      89F9CC673EF399CF7CE693F2CD1CA020641706EBA47543FF676B600E0CC97DD6
+      16CD5245D0DC2EAB10F55768FE7D5E972632BBB0E8D00AA8A9A056F7E6DCA683
+      21FA1FB32E3056FF8FA90B50C7DF6F75813242BC2D00FABF7F2EAEC4CF7B9009
+      E199D83AEA648F224EB38DFB81605FB8EA1FE677AB08FB62A8FEF114695FB8EA
+      1F9388FB62A8FE115A17C3AA7F8CA98B61D43FA8F232DFFC8FF9CC673E3DFF0B
+      990F7D3FBA45E643FF77F686CC87DE415D6EB84BC83FDF0B3B22FEDC888DA17E
+      5F09F89BDEEF36807E43EB02B6397E768CFD34D04F685D403AE660E3D026AE16
+      A32E5025D4658D87AEA1AA0B348078C2AC0B5CE97FDB3B84942688DF3F78F049
+      DF7F78F049F7DC1FE4A3E63BCC1FBD3F93F203FCCC9A6F3B87FB6B1F6BFC8EEF
+      63F365423EEAD9065C7F99902F13F345067C91017FF4D98FC01719F0939C7FB7
+      7AFFE476FF73FE971DFFD6F4476AFD1755FF7E031D548601
+    }
+  end
+end

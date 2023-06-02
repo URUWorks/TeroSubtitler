@@ -1,0 +1,181 @@
+object frmFindAndReplace: TfrmFindAndReplace
+  Left = 260
+  Height = 346
+  Top = 127
+  Width = 457
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Find & Replace'
+  ClientHeight = 346
+  ClientWidth = 457
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object lblTextToFind: TLabel
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 120
+    AutoSize = False
+    Caption = 'Text to find:'
+    ParentColor = False
+  end
+  object btnClose: TButton
+    Left = 373
+    Height = 25
+    Top = 312
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 14
+  end
+  object btnFind: TButton
+    Left = 293
+    Height = 25
+    Top = 312
+    Width = 75
+    Caption = 'Find'
+    Default = True
+    OnClick = btnFindClick
+    TabOrder = 13
+  end
+  object btnFindNext: TButton
+    Left = 213
+    Height = 25
+    Top = 312
+    Width = 75
+    Caption = 'Find next'
+    OnClick = btnFindNextClick
+    TabOrder = 10
+  end
+  object btnFindPrev: TButton
+    Left = 133
+    Height = 25
+    Top = 312
+    Width = 75
+    Caption = 'Find prev'
+    OnClick = btnFindPrevClick
+    TabOrder = 9
+  end
+  object btnReplace: TButton
+    Left = 293
+    Height = 25
+    Top = 280
+    Width = 75
+    Caption = 'Replace'
+    OnClick = btnReplaceClick
+    TabOrder = 12
+  end
+  object btnReplaceAll: TButton
+    Left = 213
+    Height = 25
+    Top = 280
+    Width = 75
+    Caption = 'Replace all'
+    OnClick = btnReplaceAllClick
+    TabOrder = 11
+  end
+  object mmoTextToFind: TMemo
+    Left = 133
+    Height = 58
+    Top = 12
+    Width = 315
+    OnKeyDown = mmoTextToFindKeyDown
+    TabOrder = 0
+  end
+  object mmoReplaceWith: TMemo
+    Left = 133
+    Height = 58
+    Top = 80
+    Width = 315
+    OnKeyDown = mmoReplaceWithKeyDown
+    TabOrder = 1
+  end
+  object chkReplaceWith: TUWCheckBox
+    Left = 8
+    Height = 19
+    Top = 80
+    Width = 18
+    AutoSize = False
+    Caption = 'Replace with:'
+    Checked = True
+    OnChange = chkReplaceWithChange
+    State = cbChecked
+    TabOrder = 2
+  end
+  object chkCaseSensitive: TUWCheckBox
+    Left = 213
+    Height = 23
+    Top = 152
+    Width = 18
+    AutoSize = False
+    Caption = 'Case sensitive'
+    TabOrder = 3
+  end
+  object chkPreserveCaseOnReplace: TUWCheckBox
+    Left = 213
+    Height = 23
+    Top = 171
+    Width = 18
+    AutoSize = False
+    Caption = 'Preserve case on replace'
+    TabOrder = 4
+  end
+  object chkRegularExpression: TUWCheckBox
+    Left = 213
+    Height = 23
+    Top = 209
+    Width = 18
+    AutoSize = False
+    Caption = 'Use regular expression'
+    TabOrder = 6
+  end
+  object rbnFromTheSelectedSubtitle: TUWRadioButton
+    Left = 213
+    Height = 19
+    Top = 267
+    Width = 18
+    AutoSize = False
+    Caption = 'From the selected subtitle'
+    TabOrder = 8
+    TabStop = False
+  end
+  object rbnAllTheSubtitles: TUWRadioButton
+    Left = 213
+    Height = 19
+    Top = 248
+    Width = 18
+    AutoSize = False
+    Caption = 'All the subtitles'
+    TabOrder = 7
+    TabStop = False
+  end
+  object lblOptions: TLabel
+    Left = 133
+    Height = 15
+    Top = 156
+    Width = 45
+    Caption = 'Options:'
+    ParentColor = False
+  end
+  object lblScope: TLabel
+    Left = 133
+    Height = 15
+    Top = 250
+    Width = 35
+    Caption = 'Scope:'
+    ParentColor = False
+  end
+  object chkWholeWord: TUWCheckBox
+    Left = 213
+    Height = 23
+    Top = 190
+    Width = 18
+    AutoSize = False
+    Caption = 'Whole word'
+    TabOrder = 5
+  end
+end

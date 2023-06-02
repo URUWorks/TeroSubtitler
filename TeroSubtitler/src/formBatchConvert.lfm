@@ -1,0 +1,231 @@
+object frmBatchConvert: TfrmBatchConvert
+  Left = 282
+  Height = 449
+  Top = 127
+  Width = 600
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Batch convert'
+  ClientHeight = 449
+  ClientWidth = 600
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object VST: TLazVirtualStringTree
+    Left = 7
+    Height = 208
+    Top = 8
+    Width = 506
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Header.AutoSizeIndex = 0
+    Header.Columns = <>
+    Header.MainColumn = -1
+    Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+    TabOrder = 0
+    TreeOptions.AutoOptions = [toAutoTristateTracking]
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+    TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect, toMultiSelect, toSimpleDrawSelection]
+    TreeOptions.StringOptions = []
+    OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+    OnDrawText = VSTDrawText
+    OnGetText = VSTGetText
+    OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+    OnResize = VSTResize
+    OnStructureChange = VSTStructureChange
+  end
+  object btnApply: TButton
+    Left = 438
+    Height = 25
+    Top = 416
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'Apply'
+    Default = True
+    OnClick = btnApplyClick
+    TabOrder = 12
+  end
+  object btnClose: TButton
+    Left = 518
+    Height = 25
+    Top = 416
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 13
+  end
+  object btnScanFolder: TButton
+    Left = 518
+    Height = 25
+    Top = 8
+    Width = 75
+    Anchors = [akTop, akRight]
+    Caption = 'Scan...'
+    OnClick = btnScanFolderClick
+    TabOrder = 1
+  end
+  object btnAdd: TButton
+    Left = 518
+    Height = 25
+    Top = 36
+    Width = 75
+    Anchors = [akTop, akRight]
+    Caption = 'Add...'
+    OnClick = btnAddClick
+    TabOrder = 2
+  end
+  object btnRemove: TButton
+    Left = 518
+    Height = 25
+    Top = 64
+    Width = 75
+    Anchors = [akTop, akRight]
+    Caption = 'Remove'
+    Enabled = False
+    OnClick = btnRemoveClick
+    TabOrder = 3
+  end
+  object btnSelectAll: TButton
+    Left = 518
+    Height = 25
+    Top = 92
+    Width = 75
+    Anchors = [akTop, akRight]
+    Caption = 'Select all'
+    OnClick = btnSelectAllClick
+    TabOrder = 4
+  end
+  object btnInvert: TButton
+    Left = 518
+    Height = 25
+    Top = 120
+    Width = 75
+    Anchors = [akTop, akRight]
+    Caption = 'Invert'
+    OnClick = btnInvertClick
+    TabOrder = 5
+  end
+  object lblOutput: TLabel
+    Left = 8
+    Height = 15
+    Top = 226
+    Width = 41
+    Anchors = [akLeft, akBottom]
+    Caption = 'Output:'
+    ParentColor = False
+  end
+  object lblOutputFolder: TLabel
+    Left = 8
+    Height = 15
+    Top = 255
+    Width = 33
+    Anchors = [akLeft, akBottom]
+    Caption = 'Folder'
+    ParentColor = False
+  end
+  object edtFolder: TEdit
+    Left = 96
+    Height = 23
+    Top = 251
+    Width = 336
+    Anchors = [akLeft, akRight, akBottom]
+    TabOrder = 6
+  end
+  object lblFormat: TLabel
+    Left = 8
+    Height = 15
+    Top = 284
+    Width = 38
+    Anchors = [akLeft, akBottom]
+    Caption = 'Format'
+    ParentColor = False
+  end
+  object cboFormat: TComboBox
+    Left = 97
+    Height = 23
+    Top = 280
+    Width = 416
+    Anchors = [akLeft, akRight, akBottom]
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 8
+  end
+  object lblEncoding: TLabel
+    Left = 8
+    Height = 15
+    Top = 313
+    Width = 50
+    Caption = 'Encoding'
+    ParentColor = False
+  end
+  object cboEncoding: TComboBox
+    Left = 96
+    Height = 23
+    Top = 309
+    Width = 416
+    Anchors = [akLeft, akRight, akBottom]
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 9
+  end
+  object lblFromFPS: TLabel
+    Left = 8
+    Height = 15
+    Top = 342
+    Width = 50
+    Caption = 'From FPS'
+    ParentColor = False
+  end
+  object lblToFPS: TLabel
+    Left = 7
+    Height = 15
+    Top = 371
+    Width = 34
+    Anchors = [akLeft, akBottom]
+    Caption = 'To FPS'
+    ParentColor = False
+  end
+  object cboFromFPS: TComboBox
+    Left = 97
+    Height = 23
+    Top = 338
+    Width = 208
+    Anchors = [akLeft, akRight, akBottom]
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 10
+  end
+  object cboToFPS: TComboBox
+    Left = 97
+    Height = 23
+    Top = 367
+    Width = 208
+    Anchors = [akLeft, akRight, akBottom]
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 11
+  end
+  object btnOpenFolder: TButton
+    Left = 438
+    Height = 25
+    Top = 249
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = '...'
+    OnClick = btnOpenFolderClick
+    TabOrder = 7
+  end
+  object prbProgress: TProgressBar
+    Left = 8
+    Height = 8
+    Top = 424
+    Width = 424
+    Anchors = [akLeft, akRight, akBottom]
+    TabOrder = 14
+    Visible = False
+  end
+end

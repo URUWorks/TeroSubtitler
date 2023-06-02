@@ -1,0 +1,61 @@
+object frmRestoreBackup: TfrmRestoreBackup
+  Left = 256
+  Height = 290
+  Top = 127
+  Width = 580
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Restore backup'
+  ClientHeight = 290
+  ClientWidth = 580
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object btnRestore: TButton
+    Left = 417
+    Height = 25
+    Top = 257
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'Restore'
+    Default = True
+    OnClick = btnRestoreClick
+    TabOrder = 1
+  end
+  object btnClose: TButton
+    Left = 497
+    Height = 25
+    Top = 257
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 2
+  end
+  object VST: TLazVirtualStringTree
+    Left = 8
+    Height = 241
+    Top = 8
+    Width = 564
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Header.AutoSizeIndex = 0
+    Header.Columns = <>
+    Header.MainColumn = -1
+    Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+    TabOrder = 0
+    TreeOptions.AutoOptions = [toAutoTristateTracking]
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+    TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+    TreeOptions.StringOptions = []
+    OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+    OnDblClick = VSTDblClick
+    OnDrawText = VSTDrawText
+    OnGetText = VSTGetText
+    OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+    OnResize = VSTResize
+  end
+end

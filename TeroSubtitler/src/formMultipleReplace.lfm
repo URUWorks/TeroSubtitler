@@ -1,0 +1,119 @@
+object frmMultipleReplace: TfrmMultipleReplace
+  Left = 260
+  Height = 353
+  Top = 127
+  Width = 456
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Multiple replace'
+  ClientHeight = 353
+  ClientWidth = 456
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object edtFind: TEdit
+    Left = 112
+    Height = 23
+    Top = 8
+    Width = 256
+    OnChange = edtFindChange
+    TabOrder = 0
+  end
+  object lblFind: TLabel
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 26
+    Caption = 'Find:'
+    ParentColor = False
+  end
+  object lblReplace: TLabel
+    Left = 8
+    Height = 15
+    Top = 44
+    Width = 70
+    Caption = 'Replace with:'
+    ParentColor = False
+  end
+  object edtReplace: TEdit
+    Left = 112
+    Height = 23
+    Top = 40
+    Width = 256
+    OnChange = edtFindChange
+    TabOrder = 1
+  end
+  object btnClose: TButton
+    Left = 373
+    Height = 25
+    Top = 320
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 5
+  end
+  object btnApply: TButton
+    Left = 293
+    Height = 25
+    Top = 320
+    Width = 75
+    Caption = 'Apply'
+    Default = True
+    OnClick = btnApplyClick
+    TabOrder = 4
+  end
+  object btnAdd: TButton
+    Left = 373
+    Height = 25
+    Top = 8
+    Width = 75
+    Caption = 'Add'
+    Enabled = False
+    OnClick = btnAddClick
+    TabOrder = 2
+  end
+  object btnRemove: TButton
+    Left = 373
+    Height = 25
+    Top = 40
+    Width = 75
+    Caption = 'Remove'
+    Enabled = False
+    OnClick = btnRemoveClick
+    TabOrder = 3
+  end
+  object VST: TLazVirtualStringTree
+    Left = 8
+    Height = 208
+    Top = 104
+    Width = 440
+    Header.AutoSizeIndex = 0
+    Header.Columns = <>
+    Header.MainColumn = -1
+    Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+    TabOrder = 6
+    TreeOptions.AutoOptions = [toAutoTristateTracking]
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+    TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+    TreeOptions.StringOptions = []
+    OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+    OnChange = VSTChange
+    OnDrawText = VSTDrawText
+    OnGetText = VSTGetText
+    OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+    OnResize = VSTResize
+  end
+  object chkRE: TUWCheckBox
+    Left = 112
+    Height = 19
+    Top = 72
+    Width = 18
+    AutoSize = False
+    Caption = 'Regular expression'
+    TabOrder = 7
+  end
+end

@@ -1,0 +1,47 @@
+object frmDownload: TfrmDownload
+  Left = 242
+  Height = 83
+  Top = 113
+  Width = 400
+  BorderIcons = []
+  BorderStyle = bsSingle
+  ClientHeight = 83
+  ClientWidth = 400
+  OnActivate = FormActivate
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object lblDownload: TLabel
+    Left = 0
+    Height = 32
+    Top = 0
+    Width = 400
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Downloading'
+    Font.Style = [fsBold]
+    Layout = tlCenter
+    ParentColor = False
+    ParentFont = False
+  end
+  object prbDownload: TProgressBar
+    Left = 8
+    Height = 8
+    Top = 64
+    Width = 384
+    Style = pbstMarquee
+    TabOrder = 0
+  end
+  object lblInfo: TLabel
+    Left = 0
+    Height = 32
+    Top = 32
+    Width = 400
+    Alignment = taCenter
+    AutoSize = False
+    Layout = tlCenter
+    ParentColor = False
+  end
+end

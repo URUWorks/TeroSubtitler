@@ -1,0 +1,99 @@
+object frmWaveExtractor: TfrmWaveExtractor
+  Left = 235
+  Height = 169
+  Top = 114
+  Width = 481
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Wave extractor'
+  ClientHeight = 169
+  ClientWidth = 481
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object btnExtract: TButton
+    Left = 317
+    Height = 25
+    Top = 136
+    Width = 75
+    Caption = 'Extract...'
+    Default = True
+    OnClick = btnExtractClick
+    TabOrder = 1
+  end
+  object btnClose: TButton
+    Left = 397
+    Height = 25
+    Top = 136
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 2
+  end
+  object lblTrack: TLabel
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 30
+    Caption = 'Track:'
+    ParentColor = False
+  end
+  object cboTrack: TComboBox
+    Left = 64
+    Height = 23
+    Top = 8
+    Width = 408
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object lblWait: TLabel
+    Left = 8
+    Height = 32
+    Top = 52
+    Width = 464
+    Alignment = taCenter
+    AutoSize = False
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+    WordWrap = True
+  end
+  object lblStatus: TLabel
+    Left = 8
+    Height = 40
+    Top = 84
+    Width = 464
+    Alignment = taCenter
+    AutoSize = False
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+    WordWrap = True
+  end
+  object prbProgress: TProgressBar
+    Left = 8
+    Height = 8
+    Top = 144
+    Width = 232
+    Style = pbstMarquee
+    TabOrder = 3
+    Visible = False
+  end
+  object lblTimeElapsed: TLabel
+    Left = 248
+    Height = 17
+    Top = 140
+    Width = 63
+    Alignment = taRightJustify
+    AutoSize = False
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+end

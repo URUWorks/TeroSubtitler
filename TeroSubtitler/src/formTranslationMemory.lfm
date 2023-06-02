@@ -1,0 +1,82 @@
+object frmTranslationMemory: TfrmTranslationMemory
+  Left = 238
+  Height = 176
+  Top = 116
+  Width = 480
+  BorderIcons = []
+  Caption = 'Translation memory'
+  ClientHeight = 176
+  ClientWidth = 480
+  FormStyle = fsSystemStayOnTop
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object VST: TLazVirtualStringTree
+    Left = 8
+    Height = 159
+    Top = 8
+    Width = 375
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    DefaultText = 'Node'
+    Header.AutoSizeIndex = 0
+    Header.Columns = <>
+    Header.MainColumn = -1
+    Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+    TabOrder = 0
+    TreeOptions.AutoOptions = [toAutoTristateTracking]
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+    TreeOptions.PaintOptions = [toHideFocusRect, toShowDropmark, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+    TreeOptions.StringOptions = []
+    OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+    OnBeforeCellPaint = VSTBeforeCellPaint
+    OnDrawText = VSTDrawText
+    OnGetText = VSTGetText
+    OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+    OnResize = VSTResize
+  end
+  object btnCopy: TButton
+    Left = 388
+    Height = 25
+    Top = 8
+    Width = 83
+    Anchors = [akTop, akRight]
+    Caption = 'Copy'
+    Default = True
+    OnClick = btnCopyClick
+    TabOrder = 1
+  end
+  object btnValidate: TButton
+    Left = 388
+    Height = 25
+    Top = 40
+    Width = 83
+    Anchors = [akTop, akRight]
+    Caption = 'Validate'
+    OnClick = btnValidateClick
+    TabOrder = 2
+  end
+  object btnClose: TButton
+    Left = 388
+    Height = 25
+    Top = 143
+    Width = 83
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 4
+  end
+  object btnUse: TButton
+    Left = 388
+    Height = 25
+    Top = 72
+    Width = 83
+    Anchors = [akTop, akRight]
+    Caption = 'Use'
+    OnClick = btnUseClick
+    TabOrder = 3
+  end
+end

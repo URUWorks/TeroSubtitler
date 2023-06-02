@@ -1,0 +1,161 @@
+object frmTimeExpander: TfrmTimeExpander
+  Left = 246
+  Height = 329
+  Top = 121
+  Width = 280
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Time expander'
+  ClientHeight = 329
+  ClientWidth = 280
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object cboMode: TComboBox
+    Left = 8
+    Height = 23
+    Top = 8
+    Width = 168
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object edtTime: TEdit
+    Left = 182
+    Height = 23
+    Top = 8
+    Width = 64
+    Anchors = [akTop]
+    NumbersOnly = True
+    OnChange = edtTimeChange
+    TabOrder = 1
+    Text = '1'
+  end
+  object btnApply: TButton
+    Left = 117
+    Height = 25
+    Top = 296
+    Width = 75
+    Caption = 'Apply'
+    Default = True
+    OnClick = btnApplyClick
+    TabOrder = 9
+  end
+  object btnClose: TButton
+    Left = 197
+    Height = 25
+    Top = 296
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 10
+  end
+  object chkSubtitle: TUWCheckBox
+    Left = 8
+    Height = 19
+    Top = 48
+    Width = 18
+    AutoSize = False
+    Caption = 'Only if subtitle is longer than'
+    Checked = True
+    State = cbChecked
+    TabOrder = 2
+  end
+  object edtSubtitleValue: TEdit
+    Left = 24
+    Height = 23
+    Top = 72
+    Width = 64
+    NumbersOnly = True
+    OnChange = edtTimeChange
+    TabOrder = 3
+    Text = '1'
+  end
+  object lblChars: TLabel
+    Left = 96
+    Height = 15
+    Top = 76
+    Width = 54
+    Caption = 'characters'
+    ParentColor = False
+  end
+  object chkDuration: TUWCheckBox
+    Left = 8
+    Height = 19
+    Top = 112
+    Width = 18
+    AutoSize = False
+    Caption = 'Only if duration is longer than'
+    Checked = True
+    State = cbChecked
+    TabOrder = 4
+  end
+  object edtDurationValue: TEdit
+    Left = 24
+    Height = 23
+    Top = 140
+    Width = 64
+    NumbersOnly = True
+    OnChange = edtTimeChange
+    TabOrder = 5
+    Text = '1'
+  end
+  object lblMs: TLabel
+    Left = 96
+    Height = 15
+    Top = 144
+    Width = 16
+    Caption = 'ms'
+    ParentColor = False
+  end
+  object rbnFromTheSelectedSubtitle: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 231
+    Width = 18
+    AutoSize = False
+    Caption = 'From the selected subtitle'
+    TabOrder = 7
+    TabStop = False
+  end
+  object rbnAllTheSubtitles: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 212
+    Width = 18
+    AutoSize = False
+    Caption = 'All the subtitles'
+    TabOrder = 6
+    TabStop = False
+  end
+  object lblScope: TLabel
+    Left = 8
+    Height = 15
+    Top = 192
+    Width = 35
+    Caption = 'Scope:'
+    ParentColor = False
+  end
+  object rbnOnlySelectedSubtitles: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 250
+    Width = 18
+    AutoSize = False
+    Caption = 'Only selected subtitles'
+    TabOrder = 8
+    TabStop = False
+  end
+  object lblMs1: TLabel
+    Left = 254
+    Height = 15
+    Top = 12
+    Width = 16
+    Caption = 'ms'
+    ParentColor = False
+  end
+end

@@ -1,0 +1,271 @@
+object frmWizard: TfrmWizard
+  Left = 248
+  Height = 337
+  Top = 116
+  Width = 544
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Wizard'
+  ClientHeight = 337
+  ClientWidth = 544
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object lyoPage0: TUWLayout
+    Left = 0
+    Height = 300
+    Top = 0
+    Width = 544
+    ClientHeight = 300
+    ClientWidth = 544
+    TabOrder = 0
+    object imgLogo: TImage
+      Left = 160
+      Height = 33
+      Top = 64
+      Width = 226
+      AntialiasingMode = amOn
+      Proportional = True
+      Stretch = True
+    end
+    object lblWelcome: TLabel
+      Left = 0
+      Height = 24
+      Top = 40
+      Width = 544
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Welcome to'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblExperience: TLabel
+      Left = 0
+      Height = 56
+      Top = 168
+      Width = 544
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'In just a few steps you''ll be setup and ready for the best experience.'
+      ParentColor = False
+      WordWrap = True
+    end
+  end
+  object btnNext: TButton
+    Left = 461
+    Height = 25
+    Top = 304
+    Width = 75
+    Caption = 'Next'
+    Default = True
+    OnClick = btnNextClick
+    TabOrder = 2
+  end
+  object lyoPage1: TUWLayout
+    Tag = 1
+    Left = 0
+    Height = 300
+    Top = 0
+    Width = 544
+    ClientHeight = 300
+    ClientWidth = 544
+    TabOrder = 1
+    Visible = False
+    object lbllibMPV: TLabel
+      Left = 16
+      Height = 15
+      Top = 69
+      Width = 44
+      Caption = 'libmpv: '
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblRequiredFiles: TLabel
+      Left = 16
+      Height = 40
+      Top = 8
+      Width = 515
+      AutoSize = False
+      Caption = 'Required files'
+      ParentColor = False
+      WordWrap = True
+    end
+    object btnDownload: TButton
+      Left = 456
+      Height = 25
+      Top = 72
+      Width = 75
+      Caption = 'Download'
+      OnClick = btnDownloadClick
+      TabOrder = 0
+    end
+    object lblFFMPEG: TLabel
+      Left = 16
+      Height = 15
+      Top = 160
+      Width = 45
+      Caption = 'ffmpeg:'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object btnDownloadFFMPEG: TButton
+      Left = 456
+      Height = 25
+      Top = 169
+      Width = 75
+      Caption = 'Download'
+      OnClick = btnDownloadFFMPEGClick
+      TabOrder = 2
+    end
+    object lblLibMPVStatus: TLabel
+      AnchorSideLeft.Control = lbllibMPV
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = lbllibMPV
+      AnchorSideTop.Side = asrCenter
+      Left = 64
+      Height = 15
+      Top = 69
+      Width = 3
+      BorderSpacing.Left = 4
+      Caption = ' '
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblFFMPEGStatus: TLabel
+      AnchorSideLeft.Control = lblFFMPEG
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = lblFFMPEG
+      AnchorSideTop.Side = asrCenter
+      Left = 65
+      Height = 15
+      Top = 160
+      Width = 3
+      BorderSpacing.Left = 4
+      Caption = ' '
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lbllibmpvDesc: TLabel
+      AnchorSideLeft.Control = lbllibMPV
+      AnchorSideTop.Control = lbllibMPV
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 15
+      Top = 88
+      Width = 3
+      BorderSpacing.Top = 4
+      Caption = ' '
+      ParentColor = False
+    end
+    object lblffmpegDesc: TLabel
+      AnchorSideLeft.Control = lblFFMPEG
+      AnchorSideTop.Control = lblFFMPEG
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 15
+      Top = 179
+      Width = 3
+      BorderSpacing.Top = 4
+      Caption = ' '
+      ParentColor = False
+    end
+    object lblYTDLP: TLabel
+      Left = 16
+      Height = 15
+      Top = 112
+      Width = 35
+      Caption = 'yt-dlp:'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblYTDLPDesc: TLabel
+      AnchorSideLeft.Control = lblYTDLP
+      AnchorSideTop.Control = lblYTDLP
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 15
+      Top = 131
+      Width = 3
+      BorderSpacing.Top = 4
+      Caption = ' '
+      ParentColor = False
+    end
+    object btnDownloadYTDLP: TButton
+      Left = 456
+      Height = 25
+      Top = 121
+      Width = 75
+      Caption = 'Download'
+      OnClick = btnDownloadYTDLPClick
+      TabOrder = 1
+    end
+    object lblYTDLPStatus: TLabel
+      AnchorSideLeft.Control = lblYTDLP
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = lblYTDLP
+      AnchorSideTop.Side = asrCenter
+      Left = 55
+      Height = 1
+      Top = 119
+      Width = 1
+      BorderSpacing.Left = 4
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblWhisperDesc: TLabel
+      AnchorSideLeft.Control = lblWhisper
+      AnchorSideTop.Control = lblWhisper
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 15
+      Top = 227
+      Width = 3
+      BorderSpacing.Top = 4
+      Caption = ' '
+      ParentColor = False
+    end
+    object lblWhisper: TLabel
+      Left = 16
+      Height = 15
+      Top = 208
+      Width = 71
+      Caption = 'Whisper.cpp:'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object btnDownloadWhisper: TButton
+      Left = 456
+      Height = 25
+      Top = 217
+      Width = 75
+      Caption = 'Download'
+      OnClick = btnDownloadWhisperClick
+      TabOrder = 3
+    end
+    object lblWhisperStatus: TLabel
+      AnchorSideLeft.Control = lblWhisper
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = lblWhisper
+      AnchorSideTop.Side = asrCenter
+      Left = 91
+      Height = 15
+      Top = 208
+      Width = 3
+      BorderSpacing.Left = 4
+      Caption = ' '
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+  end
+end

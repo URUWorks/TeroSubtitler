@@ -1,0 +1,152 @@
+object frmShotChanges: TfrmShotChanges
+  Left = 242
+  Height = 409
+  Top = 118
+  Width = 419
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Shot changes'
+  ClientHeight = 409
+  ClientWidth = 419
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object btnApply: TButton
+    Left = 256
+    Height = 25
+    Top = 376
+    Width = 75
+    Caption = 'Apply'
+    Default = True
+    OnClick = btnApplyClick
+    TabOrder = 7
+  end
+  object btnClose: TButton
+    Left = 336
+    Height = 25
+    Top = 376
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 8
+  end
+  object mmoTimes: TMemo
+    Left = 8
+    Height = 240
+    Top = 8
+    Width = 323
+    OnChange = mmoTimesChange
+    ReadOnly = True
+    ScrollBars = ssAutoVertical
+    TabOrder = 0
+  end
+  object lblTimeCodeIn: TLabel
+    Left = 8
+    Height = 15
+    Top = 261
+    Width = 97
+    Caption = 'Time code import:'
+    ParentColor = False
+  end
+  object btnImport: TButton
+    Left = 336
+    Height = 25
+    Top = 8
+    Width = 75
+    Caption = 'Import...'
+    OnClick = btnImportClick
+    TabOrder = 1
+  end
+  object btnDetect: TButton
+    Left = 336
+    Height = 25
+    Top = 72
+    Width = 75
+    Caption = 'Detect'
+    OnClick = btnDetectClick
+    TabOrder = 3
+  end
+  object btnExport: TButton
+    Left = 336
+    Height = 25
+    Top = 40
+    Width = 75
+    Caption = 'Export...'
+    Enabled = False
+    OnClick = btnExportClick
+    TabOrder = 2
+  end
+  object lblIdle: TLabel
+    Left = 245
+    Height = 1
+    Top = 381
+    Width = 1
+    Alignment = taRightJustify
+    ParentColor = False
+    ShowAccelChar = False
+    Visible = False
+  end
+  object spnSensitivity: TFloatSpinEdit
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Side = asrCenter
+    Left = 200
+    Height = 23
+    Top = 320
+    Width = 72
+    BorderSpacing.Right = 8
+    Increment = 0.1
+    MaxValue = 0.9
+    MinValue = 0.1
+    TabOrder = 6
+    Value = 0.4
+  end
+  object lblSensitivity: TLabel
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = spnSensitivity
+    Left = 8
+    Height = 15
+    Top = 324
+    Width = 89
+    BorderSpacing.Right = 8
+    Caption = 'Detect sensitivity'
+    ParentColor = False
+  end
+  object prbExtracting: TProgressBar
+    Left = 8
+    Height = 8
+    Top = 384
+    Width = 192
+    Style = pbstMarquee
+    TabOrder = 9
+    Visible = False
+  end
+  object cboTimeCodeImport: TComboBox
+    Left = 200
+    Height = 23
+    Top = 257
+    Width = 131
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 4
+  end
+  object lblTimeCodeOut: TLabel
+    Left = 8
+    Height = 15
+    Top = 292
+    Width = 95
+    Caption = 'Time code export:'
+    ParentColor = False
+  end
+  object cboTimeCodeExport: TComboBox
+    Left = 200
+    Height = 23
+    Top = 288
+    Width = 131
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 5
+  end
+end

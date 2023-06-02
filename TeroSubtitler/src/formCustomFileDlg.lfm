@@ -1,0 +1,112 @@
+object frmCustomFileDlg: TfrmCustomFileDlg
+  Left = 262
+  Height = 220
+  Top = 118
+  Width = 387
+  BorderIcons = []
+  BorderStyle = bsSingle
+  ClientHeight = 220
+  ClientWidth = 387
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object edtFileName: TEdit
+    Left = 8
+    Height = 23
+    Top = 28
+    Width = 292
+    OnChange = edtFileNameChange
+    TabOrder = 0
+  end
+  object btnOpenFile: TButton
+    Left = 305
+    Height = 25
+    Top = 28
+    Width = 75
+    Caption = '...'
+    OnClick = btnOpenFileClick
+    TabOrder = 1
+  end
+  object lblFileName: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 48
+    Caption = 'Filename'
+    ParentColor = False
+  end
+  object cboFormat: TComboBox
+    Left = 8
+    Height = 23
+    Top = 84
+    Width = 292
+    ItemHeight = 15
+    OnSelect = cboFormatSelect
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object lblFormat: TLabel
+    Left = 8
+    Height = 15
+    Top = 64
+    Width = 38
+    Caption = 'Format'
+    ParentColor = False
+  end
+  object lblEncoding: TLabel
+    Left = 8
+    Height = 15
+    Top = 120
+    Width = 50
+    Caption = 'Encoding'
+    ParentColor = False
+  end
+  object cboEncoding: TComboBox
+    Left = 8
+    Height = 23
+    Top = 140
+    Width = 372
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 4
+  end
+  object btnApply: TButton
+    Left = 225
+    Height = 25
+    Top = 188
+    Width = 75
+    Caption = 'Apply'
+    Default = True
+    Enabled = False
+    ModalResult = 1
+    TabOrder = 5
+  end
+  object btnCancel: TButton
+    Left = 305
+    Height = 25
+    Top = 188
+    Width = 75
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 6
+  end
+  object lblFPS: TLabel
+    Left = 305
+    Height = 15
+    Top = 64
+    Width = 19
+    Caption = 'FPS'
+    ParentColor = False
+  end
+  object cboFPS: TComboBox
+    Left = 305
+    Height = 23
+    Top = 84
+    Width = 75
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 3
+  end
+end

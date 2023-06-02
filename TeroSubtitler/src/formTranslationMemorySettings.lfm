@@ -1,0 +1,94 @@
+object frmTranslationMemorySettings: TfrmTranslationMemorySettings
+  Left = 253
+  Height = 145
+  Top = 123
+  Width = 523
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Translation memory settings'
+  ClientHeight = 145
+  ClientWidth = 523
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object edtOpenFile: TEdit
+    Left = 160
+    Height = 23
+    Top = 8
+    Width = 272
+    TabOrder = 0
+  end
+  object btnOpenFile: TButton
+    Left = 440
+    Height = 25
+    Top = 8
+    Width = 75
+    Caption = '...'
+    OnClick = btnOpenFileClick
+    TabOrder = 1
+  end
+  object lblSourceLang: TLabel
+    Left = 8
+    Height = 15
+    Top = 46
+    Width = 88
+    Caption = 'Source language'
+    ParentColor = False
+  end
+  object cboSourceLang: TComboBox
+    Left = 160
+    Height = 23
+    Top = 42
+    Width = 355
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object lblTransLang: TLabel
+    Left = 8
+    Height = 15
+    Top = 78
+    Width = 109
+    Caption = 'Translation language'
+    ParentColor = False
+  end
+  object cboTransLang: TComboBox
+    Left = 160
+    Height = 23
+    Top = 74
+    Width = 355
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 3
+  end
+  object lblFileName: TLabel
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 51
+    Caption = 'File name'
+    ParentColor = False
+  end
+  object btnApply: TButton
+    Left = 360
+    Height = 25
+    Top = 112
+    Width = 75
+    Caption = 'Apply'
+    Default = True
+    OnClick = btnApplyClick
+    TabOrder = 4
+  end
+  object btnClose: TButton
+    Left = 440
+    Height = 25
+    Top = 112
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 5
+  end
+end

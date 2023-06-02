@@ -1,0 +1,155 @@
+object frmAutomaticDurations: TfrmAutomaticDurations
+  Left = 241
+  Height = 307
+  Top = 119
+  Width = 280
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Automatic durations'
+  ClientHeight = 307
+  ClientWidth = 280
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object lblCondition: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 44
+    Caption = 'Apply if:'
+    ParentColor = False
+  end
+  object cboCondition: TComboBox
+    Left = 8
+    Height = 23
+    Top = 28
+    Width = 264
+    Anchors = [akLeft, akRight, akBottom]
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object btnClose: TButton
+    Left = 197
+    Height = 25
+    Top = 274
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 2
+  end
+  object btnApply: TButton
+    Left = 117
+    Height = 25
+    Top = 274
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'Apply'
+    Default = True
+    OnClick = btnApplyClick
+    TabOrder = 1
+  end
+  object edtChars: TEdit
+    Left = 142
+    Height = 23
+    Top = 66
+    Width = 50
+    Anchors = [akLeft, akBottom]
+    NumbersOnly = True
+    TabOrder = 3
+    Text = '1'
+  end
+  object lblChars: TLabel
+    Left = 26
+    Height = 15
+    Top = 70
+    Width = 69
+    Anchors = [akLeft, akBottom]
+    Caption = 'per character'
+    ParentColor = False
+  end
+  object edtWord: TEdit
+    Left = 142
+    Height = 23
+    Top = 96
+    Width = 50
+    Anchors = [akLeft, akBottom]
+    NumbersOnly = True
+    TabOrder = 4
+    Text = '1'
+  end
+  object lblWord: TLabel
+    Left = 26
+    Height = 15
+    Top = 100
+    Width = 47
+    Anchors = [akLeft, akBottom]
+    Caption = 'per word'
+    ParentColor = False
+  end
+  object edtLine: TEdit
+    Left = 142
+    Height = 23
+    Top = 126
+    Width = 50
+    Anchors = [akLeft, akBottom]
+    NumbersOnly = True
+    TabOrder = 5
+    Text = '1'
+  end
+  object lblLine: TLabel
+    Left = 26
+    Height = 15
+    Top = 130
+    Width = 39
+    Anchors = [akLeft, akBottom]
+    Caption = 'per line'
+    ParentColor = False
+  end
+  object rbnFromTheSelectedSubtitle: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 209
+    Width = 18
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    Caption = 'From the selected subtitle'
+    TabOrder = 6
+    TabStop = False
+  end
+  object rbnAllTheSubtitles: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 190
+    Width = 18
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    Caption = 'All the subtitles'
+    TabOrder = 7
+    TabStop = False
+  end
+  object lblScope: TLabel
+    Left = 8
+    Height = 15
+    Top = 170
+    Width = 35
+    Anchors = [akLeft, akBottom]
+    Caption = 'Scope:'
+    ParentColor = False
+  end
+  object rbnOnlySelectedSubtitles: TUWRadioButton
+    Left = 8
+    Height = 19
+    Top = 228
+    Width = 18
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    Caption = 'Only selected subtitles'
+    TabOrder = 8
+    TabStop = False
+  end
+end

@@ -1,0 +1,54 @@
+object frmGoTo: TfrmGoTo
+  Left = 260
+  Height = 93
+  Top = 127
+  Width = 171
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Go to'
+  ClientHeight = 93
+  ClientWidth = 171
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object lblNumber: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 47
+    Caption = 'Number:'
+    ParentColor = False
+  end
+  object edtNumber: TEdit
+    Left = 8
+    Height = 23
+    Top = 28
+    Width = 155
+    NumbersOnly = True
+    OnChange = edtNumberChange
+    TabOrder = 0
+    Text = '0'
+  end
+  object btnClose: TButton
+    Left = 88
+    Height = 25
+    Top = 60
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 2
+  end
+  object btnGo: TButton
+    Left = 8
+    Height = 25
+    Top = 60
+    Width = 75
+    Caption = 'Go'
+    Default = True
+    OnClick = btnGoClick
+    TabOrder = 1
+  end
+end

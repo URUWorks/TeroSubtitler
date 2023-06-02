@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="5">
+    <PathDelim Value="\"/>
+    <Name Value="TeroControls"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Version Major="1"/>
+    <Files>
+      <Item>
+        <Filename Value="UWLayout.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWLayout"/>
+      </Item>
+      <Item>
+        <Filename Value="UWTimeEdit.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWTimeEdit"/>
+      </Item>
+      <Item>
+        <Filename Value="WAVDisplayer.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="WAVDisplayer"/>
+      </Item>
+      <Item>
+        <Filename Value="UWSeekBar.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWSeekBar"/>
+      </Item>
+      <Item>
+        <Filename Value="UWCPSBar.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWCPSBar"/>
+      </Item>
+      <Item>
+        <Filename Value="UWMemo.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWMemo"/>
+      </Item>
+      <Item>
+        <Filename Value="UWFlatButton.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWFlatButton"/>
+      </Item>
+      <Item>
+        <Filename Value="UWStatusBar.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWStatusBar"/>
+      </Item>
+      <Item>
+        <Filename Value="UWCheckBox.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWCheckBox"/>
+      </Item>
+      <Item>
+        <Filename Value="UWRadioButton.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWRadioButton"/>
+      </Item>
+      <Item>
+        <Filename Value="UWGroupBox.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWGroupBox"/>
+      </Item>
+      <Item>
+        <Filename Value="UWHotKey.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWHotKey"/>
+      </Item>
+    </Files>
+    <RequiredPkgs>
+      <Item>
+        <PackageName Value="laz.virtualtreeview_package"/>
+      </Item>
+      <Item>
+        <PackageName Value="BGRABitmapPack"/>
+      </Item>
+      <Item>
+        <PackageName Value="SubtitleAPI"/>
+      </Item>
+      <Item>
+        <PackageName Value="UWCommon"/>
+      </Item>
+      <Item>
+        <PackageName Value="LCLBase"/>
+      </Item>
+      <Item>
+        <PackageName Value="FCL"/>
+      </Item>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

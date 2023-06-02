@@ -1,0 +1,172 @@
+object frmSpellCheck: TfrmSpellCheck
+  Left = 256
+  Height = 337
+  Top = 127
+  Width = 466
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Spell check'
+  ClientHeight = 337
+  ClientWidth = 466
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object lblDictionary: TLabel
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 54
+    Caption = 'Dictionary'
+    ParentColor = False
+  end
+  object cboDictionary: TComboBox
+    Left = 120
+    Height = 23
+    Top = 8
+    Width = 240
+    ItemHeight = 15
+    OnChange = cboDictionaryChange
+    Style = csDropDownList
+    TabOrder = 0
+    TabStop = False
+  end
+  object lblNotFound: TLabel
+    Left = 8
+    Height = 15
+    Top = 80
+    Width = 55
+    Caption = 'Not found'
+    ParentColor = False
+  end
+  object mmoNotFound: TMemo
+    Left = 8
+    Height = 81
+    Top = 100
+    Width = 352
+    Anchors = [akLeft, akBottom]
+    HideSelection = False
+    ReadOnly = True
+    TabOrder = 2
+    TabStop = False
+  end
+  object lblSuggestions: TLabel
+    Left = 8
+    Height = 15
+    Top = 196
+    Width = 64
+    Anchors = [akLeft, akBottom]
+    Caption = 'Suggestions'
+    ParentColor = False
+  end
+  object lstSuggestions: TListBox
+    Left = 8
+    Height = 81
+    Top = 216
+    Width = 352
+    Anchors = [akLeft, akBottom]
+    ExtendedSelect = False
+    ItemHeight = 0
+    OnSelectionChange = lstSuggestionsSelectionChange
+    TabOrder = 3
+  end
+  object btnSkip: TButton
+    Left = 368
+    Height = 25
+    Top = 100
+    Width = 90
+    Anchors = [akLeft, akBottom]
+    Caption = 'Skip'
+    OnClick = btnSkipClick
+    TabOrder = 5
+  end
+  object btnSkipAll: TButton
+    Left = 368
+    Height = 25
+    Top = 128
+    Width = 90
+    Anchors = [akLeft, akBottom]
+    Caption = 'Skip all'
+    OnClick = btnSkipAllClick
+    TabOrder = 6
+  end
+  object btnAdd: TButton
+    Left = 368
+    Height = 25
+    Top = 156
+    Width = 90
+    Anchors = [akLeft, akBottom]
+    Caption = 'Add'
+    OnClick = btnAddClick
+    TabOrder = 7
+  end
+  object btnChange: TButton
+    Left = 368
+    Height = 25
+    Top = 216
+    Width = 90
+    Anchors = [akLeft, akBottom]
+    Caption = 'Change'
+    OnClick = btnChangeClick
+    TabOrder = 8
+  end
+  object btnChangeAll: TButton
+    Left = 368
+    Height = 25
+    Top = 244
+    Width = 90
+    Anchors = [akLeft, akBottom]
+    Caption = 'Change all'
+    OnClick = btnChangeAllClick
+    TabOrder = 9
+  end
+  object btnClose: TButton
+    Left = 368
+    Height = 25
+    Top = 304
+    Width = 90
+    Anchors = [akLeft, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 10
+  end
+  object edtCustom: TEdit
+    Left = 8
+    Height = 23
+    Top = 304
+    Width = 352
+    Anchors = [akLeft, akBottom]
+    TabOrder = 4
+  end
+  object lblSource: TLabel
+    Left = 8
+    Height = 15
+    Top = 44
+    Width = 36
+    Caption = 'Source'
+    ParentColor = False
+  end
+  object cboSource: TComboBox
+    Left = 120
+    Height = 23
+    Top = 40
+    Width = 240
+    ItemHeight = 15
+    OnChange = cboSourceChange
+    Style = csDropDownList
+    TabOrder = 1
+    TabStop = False
+  end
+  object lblCurrentLine: TLabel
+    Left = 250
+    Height = 15
+    Top = 80
+    Width = 110
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Current line'
+    ParentColor = False
+  end
+end
