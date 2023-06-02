@@ -586,6 +586,7 @@
     <SaveFile>Guardar archivo</SaveFile>    
     <AllSupportedFiles>Todos los archivos compatibles</AllSupportedFiles>
     <UnableToLoad>Error al cargar el archivo, formato no reconocido.</UnableToLoad>
+    <FileNotFound>No se puede encontrar el archivo.</FileNotFound>
     <FileChanged>El archivo ha cambiado.</FileChanged>
     <TranslationFileChanged>La traducción ha cambiado.</TranslationFileChanged>
     <AskToSave>'%s'||¿Desea guardar los cambios?</AskToSave>

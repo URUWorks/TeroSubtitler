@@ -179,7 +179,11 @@ begin
   _FPS := AFPS;
   if _FPS = -1 then _FPS := Workspace.FPS.DefFPS;
 
-  if Subtitles.LoadFromFile(FileName, AEncoding, _FPS, AFormat) then
+  if not FileExists(FileName) then
+  begin
+    ShowErrorMessageDialog(GetCommonString('FileNotFound'));
+  end
+  else if Subtitles.LoadFromFile(FileName, AEncoding, _FPS, AFormat) then
   begin
     frmMain.VST.RootNodeCount := Subtitles.Count;
     frmMain.cboEncoding.ItemIndex := GetEncodingIndex(Subtitles.CodePage);

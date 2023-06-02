@@ -585,7 +585,8 @@
     <OpenFile>Open file</OpenFile>    
     <SaveFile>Save file</SaveFile>  
     <AllSupportedFiles>All supported files</AllSupportedFiles>
-    <UnableToLoad>Error loading file, unrecognized format.</UnableToLoad>    
+    <UnableToLoad>Error loading file, unrecognized format.</UnableToLoad>
+    <FileNotFound>File cannot be found.</FileNotFound>
     <FileChanged>File has not been saved.</FileChanged>
     <TranslationFileChanged>Translation file has not been saved.</TranslationFileChanged>    
     <AskToSave>'%s'||Do you wish to save it?</AskToSave>
@@ -620,7 +621,7 @@
     <Success>Success.</Success>
     <NewVersionFound>A new version was found.</NewVersionFound>
     <SeeChangeList>Do you want to see the change list?</SeeChangeList>
-    <NoNewVersion>You're using latest version.</NoNewVersion>    
+    <NoNewVersion>You're using the latest version.</NoNewVersion>    
     <ErrorExecuting>Error executing '%s'.</ErrorExecuting> 
   </CommonStrings>
   <CommonControls> 
