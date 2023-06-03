@@ -1,17 +1,26 @@
-name: Update Changelog
+# This is a basic workflow to help you get started with the GitHub Auto-Release on Commit Action.
+name: AutoRelease
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches: [ master ]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-    update-changelog:
-        runs-on: ubuntu-latest
+  # This workflow contains a single job called "build"
+  release:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: auto-update-changelog
-              uses: MusfiqDehan/Auto-Update-CHANGELOG@v0.7.0
-              with:
-                  trigger: Update CHANGELOG for v0.1.0
-                  token: ${{ secrets.GITHUB_TOKEN }}
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+      - uses: CupOfTea696/gh-action-auto-release@v1.0.2
+      
+        with:
+          title: "Release: $version"
+          tag: "v$semver"
+          draft: false
+          regex: "/^Release: #{semver}$/i"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
