@@ -13,5 +13,4 @@ jobs:
             - name: auto-update-changelog
               uses: MusfiqDehan/Auto-Update-CHANGELOG@v0.7.0
               with:
-                  trigger: Update CHANGELOG
                   token: ${{ secrets.GITHUB_TOKEN }}
