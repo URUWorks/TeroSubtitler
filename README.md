@@ -81,5 +81,5 @@ Over an estimated 20 years of development on URUWorks programs, economic assista
 
 Rafael López Sánchez,
 Scott Napier,
-Serenella Massidda
+Serenella Massidda,
 and all users of our software!
