@@ -1,0 +1,17 @@
+name: Update Changelog
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    update-changelog:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: auto-update-changelog
+              uses: MusfiqDehan/Auto-Update-CHANGELOG@v0.7.0
+              with:
+                  trigger: Update CHANGELOG
+                  token: ${{ secrets.GITHUB_TOKEN }}
