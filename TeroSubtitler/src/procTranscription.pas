@@ -22,7 +22,8 @@ unit procTranscription;
 interface
 
 uses
-  Classes, Controls, SysUtils, Menus, Forms, ATSynEdit, ATSynEdit_Commands;
+  Classes, Controls, SysUtils, Menus, Forms, LCLType, ATSynEdit,
+  ATSynEdit_Commands;
 
 procedure TranscriptionInitializeControls;
 procedure TranscriptionUnInitializeControls;
@@ -73,27 +74,31 @@ begin
       with Memo.Keymap do
       begin
         Clear;
-        Add(cCommand_KeyLeft,         '', ['Left'], []);
-        Add(cCommand_KeyLeft_Sel,     '', ['Shift+Left'], []);
-        Add(cCommand_KeyRight,        '', ['Right'], []);
-        Add(cCommand_KeyRight_Sel,    '', ['Shift+Right'], []);
-        Add(cCommand_KeyUp,           '', ['Up'], []);
-        Add(cCommand_KeyUp_Sel,       '', ['Shift+Up'], []);
-        Add(cCommand_KeyDown,         '', ['Down'], []);
-        Add(cCommand_KeyDown_Sel,     '', ['Shift+Down'], []);
-        Add(cCommand_KeyHome,         '', {$ifndef darwin} ['Home'],       {$else} ['Meta+Left'],        {$endif} []);
-        Add(cCommand_KeyHome_Sel,     '', {$ifndef darwin} ['Shift+Home'], {$else} ['Meta+Shift+Left'],  {$endif} []);
-        Add(cCommand_KeyEnd,          '', {$ifndef darwin} ['End'],        {$else} ['Meta+Right'],       {$endif} []);
-        Add(cCommand_KeyEnd_Sel,      '', {$ifndef darwin} ['Shift+End'],  {$else} ['Meta+Shift+Right'], {$endif} []);
-        Add(cCommand_KeyPageUp,       '', ['PgUp'], []);
-        Add(cCommand_KeyPageUp_Sel,   '', ['Shift+PgUp'], []);
-        Add(cCommand_KeyPageDown,     '', ['PgDn'], []);
-        Add(cCommand_KeyPageDown_Sel, '', ['Shift+PgDn'], []);
-        Add(cCommand_KeyBackspace,    '', ['Bksp'], ['Shift+Bksp']);
-        Add(cCommand_KeyDelete,       '', ['Del'], []);
-        Add(cCommand_KeyEnter,        '', ['Enter'], ['Shift+Enter']);
+        Add(cCommand_KeyLeft,         '', [VK_LEFT], []);
+        Add(cCommand_KeyLeft_Sel,     '', [scShift+VK_LEFT], []);
+        Add(cCommand_KeyRight,        '', [VK_RIGHT], []);
+        Add(cCommand_KeyRight_Sel,    '', [scShift+VK_RIGHT], []);
+        Add(cCommand_KeyUp,           '', [VK_UP], []);
+        Add(cCommand_KeyUp_Sel,       '', [scShift+VK_UP], []);
+        Add(cCommand_KeyDown,         '', [VK_DOWN], []);
+        Add(cCommand_KeyDown_Sel,     '', [scShift+VK_DOWN], []);
+
+        Add(cCommand_KeyHome,         '', {$ifndef darwin} [VK_HOME],         {$else} [scMeta+VK_LEFT],          {$endif} []);
+        Add(cCommand_KeyHome_Sel,     '', {$ifndef darwin} [scShift+VK_HOME], {$else} [scMeta+scShift+VK_LEFT],  {$endif} []);
+        Add(cCommand_KeyEnd,          '', {$ifndef darwin} [VK_END],          {$else} [scMeta+VK_RIGHT],         {$endif} []);
+        Add(cCommand_KeyEnd_Sel,      '', {$ifndef darwin} [scShift+VK_END],  {$else} [scMeta+scShift+VK_RIGHT], {$endif} []);
+
+        Add(cCommand_KeyPageUp,       '', [VK_PRIOR], []);
+        Add(cCommand_KeyPageUp_Sel,   '', [scShift+VK_PRIOR], []);
+        Add(cCommand_KeyPageDown,     '', [VK_NEXT], []);
+        Add(cCommand_KeyPageDown_Sel, '', [scShift+VK_NEXT], []);
+
+        Add(cCommand_KeyBackspace, '', [VK_BACK], [scShift+VK_BACK]);
+        Add(cCommand_KeyDelete, '', [VK_DELETE], []);
+        Add(cCommand_KeyEnter, '', [VK_RETURN], [scShift+VK_RETURN]);
+        Add(cCommand_KeyTab, '', [], []);
       end;
-      Memo.DoCommand(cCommand_ToggleFolding, cInvokeInternal);
+      Memo.DoCommand(cCommand_ToggleFolding, TATCommandInvoke.Internal);
 
       ColorThemeInstance.Apply(Memo, cmAuto);
     end;
@@ -115,7 +120,7 @@ begin
   with Workspace.Transcription do
     if Assigned(Memo) then
     begin
-      Memo.DoCommand(ACommand, cInvokeInternal, AText);
+      Memo.DoCommand(ACommand, TATCommandInvoke.Internal, AText);
       if AUpdate then Memo.Update;
     end;
 end;
