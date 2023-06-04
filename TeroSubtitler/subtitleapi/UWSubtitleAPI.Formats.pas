@@ -120,6 +120,7 @@ type
 
 { Helpers }
 
+function FormatToName(const AFormat: TUWSubtitleFormats): String;
 function IndexToName(const FormatIndex: ShortInt): String;
 function NameToIndex(const FormatName: String): ShortInt;
 function SubtitleEncoding(const Encoding: Integer): TEncoding;
@@ -134,6 +135,13 @@ implementation
 { Helpers }
 
 // -----------------------------------------------------------------------------
+
+function FormatToName(const AFormat: TUWSubtitleFormats): String;
+begin
+  Result := IndexToName(Integer(AFormat));
+end;
+
+//------------------------------------------------------------------------------
 
 function IndexToName(const FormatIndex: ShortInt): String;
 begin
