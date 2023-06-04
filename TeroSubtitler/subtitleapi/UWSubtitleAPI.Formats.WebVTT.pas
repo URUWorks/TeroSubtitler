@@ -45,7 +45,7 @@ type
 implementation
 
 uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSystem.StrUtils,
-  UWSystem.SysUtils;
+  UWSystem.SysUtils, UWSubtitleAPI.Formats.WebVTT.Types;
 
 {
 This format allows for time notation of hours, minutes, seconds and milliseconds,
@@ -248,11 +248,17 @@ end;
 
 function TUWWebVTT.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
-  i     : Integer;
-  Text  : String;
+  i : Integer;
+  Text : String;
   Align : String;
+  WriteNumbers : Boolean;
 begin
   Result  := False;
+
+  if (Subtitles.Header <> NIL) then
+    WriteNumbers := PVTTHeader(Subtitles.Header)^.WriteCueIdentifiers
+  else
+    WriteNumbers := False;
 
   StringList.Add('WEBVTT', False);
   StringList.Add('', False);
@@ -261,6 +267,7 @@ begin
   begin
     Align := '';
 
+    // TODO
     if Subtitles.ExtraInfo[i] <> NIL then
       with PWebVTT_ExtraInfo(Subtitles.ExtraInfo[i])^ do
       begin
@@ -280,6 +287,9 @@ begin
         1: Align := Align + '50%';
         2: Align := Align + '10%';
       end;
+
+    if WriteNumbers then
+      StringList.Add((i+1).ToString, False);
 
     StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz') + Align, False);
     Text := TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
