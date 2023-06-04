@@ -684,7 +684,7 @@ procedure TfrmMain.actSelectAllExecute(Sender: TObject);
 var
   Memo: TUWMemo;
 begin
-  if Workspace.ViewMode <> vmTranscription then
+  if Workspace.ViewMode = vmList then
   begin
     if VST.Focused then
     begin
@@ -697,6 +697,8 @@ begin
       if Memo <> NIL then Memo.SelectAll;
     end;
   end
+  else if Workspace.ViewMode = vmSource then
+    mmoSourceView.SelectAll
   else
     TranscriptionSelectAll;
 end;
@@ -1162,6 +1164,13 @@ end;
 procedure TfrmMain.actSettingsExecute(Sender: TObject);
 begin
   ShowSettings;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actFormatPropertiesExecute(Sender: TObject);
+begin
+  ShowFormatProperties;
 end;
 
 // -----------------------------------------------------------------------------

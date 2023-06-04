@@ -257,7 +257,6 @@ type
   TAppOptions = record
     CommonErrors         : TSubtitleErrorTypeSet;
     Conventions          : TProfileItem;
-    DefNewSubtitleMS     : Cardinal;
     ShiftTimeMS          : Cardinal;
     DefChangePlayRate    : Byte;
     AutoBackupSeconds    : Cardinal;
@@ -269,7 +268,6 @@ type
     ExpandLen            : Cardinal;
     ShowWelcomeAtStartup : Boolean;
     UseOwnFileDialog     : Boolean;
-    DotsOnSplit          : Boolean;
     AutoCheckErrors      : Boolean;
     AskForDeleteLines    : Boolean;
     TextToFind           : String;

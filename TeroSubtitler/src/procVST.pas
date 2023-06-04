@@ -410,7 +410,7 @@ begin
         if Assigned(Item) then
         begin
           ti  := (Item^.FinalTime + 1);
-          tf  := ti + AppOptions.DefNewSubtitleMS;
+          tf  := ti + AppOptions.Conventions.NewSubtitleMs;
           SelArray[i] := InsertSubtitle(Run^.Index+1, ti, tf, '', '', False);
           Inc(i);
         end;
@@ -445,7 +445,7 @@ begin
       ti := 0;
 
     //ti := ti + Options.FakeStart;
-    tf := ti + AppOptions.DefNewSubtitleMS;
+    tf := ti + AppOptions.Conventions.NewSubtitleMs;
     VSTSelectNode(AVST, InsertSubtitle(pos, ti, tf, '', ''), True);
   end;
   DoAutoCheckErrors;
@@ -546,7 +546,7 @@ begin
         if Assigned(Item) then
         with Item^, AppOptions.Conventions do
         begin
-          SplitRegExpr('\|\|', DivideLines(Text, InitialTime, FinalTime, AppOptions.DotsOnSplit, AppOptions.Conventions.CPL), s);
+          SplitRegExpr('\|\|', DivideLines(Text, InitialTime, FinalTime, AppOptions.Conventions.DotsOnSplit, AppOptions.Conventions.CPL), s);
           DeleteSubtitle(x, False, False);
 
           while s.Count >= 3 do

@@ -15,6 +15,9 @@ uses
   {$IFDEF HASAMIGA}
   athreads,
   {$ENDIF}
+  {$IF DEFINED(LCLGTK2) or DEFINED(LCLGTK3)}
+  procXLib,
+  {$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, lazcontrols, formMain, formWaveform, formVideo, procUndo,
   formFindAndReplace, formGoTo, formDurationLimits, formAutomaticDurations,
@@ -27,7 +30,7 @@ uses
   formQualityCheck, procQualityCheck, formCompare, procFixSubtitles, procFiles,
   procForms, procMPV, procSubtitle, procVST_Loops, formConventions,
   formTranslationMemoryList, formWizard, formDownload, procMRU, formShiftTimes,
-  formAudioToText, formAudioToTextModel, formTBX;
+  formAudioToText, formAudioToTextModel, formTBX, formFormatProperties;
 
 {$R *.res}
 

@@ -42,6 +42,7 @@ procedure ShowModifySelection;
 procedure ShowTranslate;
 procedure ShowWaveExtractor;
 procedure ShowSettings;
+procedure ShowFormatProperties;
 procedure ShowRestoreBackup;
 procedure ShowFixSubtitles;
 procedure ShowTranslationMemory;
@@ -76,7 +77,8 @@ uses
   formSpellCheck, formGoToTime, formShotChanges, formBatchConvert,
   formQualityCheck, formCompare, formTranslationMemoryList, formTBXList,
   formTBX, formTBXSettings, formTBXEdit, formWizard, formShiftTimes,
-  formAudioToText, formAudioToTextModel, procTypes, procCommon, procWorkspace;
+  formAudioToText, formAudioToTextModel, procTypes, procCommon, procWorkspace,
+  formFormatProperties;
 
 // -----------------------------------------------------------------------------
 
@@ -330,6 +332,19 @@ begin
   end
   else
     frmSettings.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowFormatProperties;
+begin
+  if frmFormatProperties = NIL then
+  begin
+    frmFormatProperties := TfrmFormatProperties.Create(Application);
+    ShowForm(frmFormatProperties);
+  end
+  else
+    frmFormatProperties.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

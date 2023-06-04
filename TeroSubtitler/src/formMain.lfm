@@ -1399,6 +1399,9 @@ object frmMain: TfrmMain
       object Separator23: TMenuItem
         Caption = '-'
       end
+      object mnuFormatProperties: TMenuItem
+        Action = actFormatProperties
+      end
       object mnuSettings: TMenuItem
         Action = actSettings
       end
@@ -3323,6 +3326,11 @@ object frmMain: TfrmMain
       Category = 'Help'
       Caption = 'Check for updates'
       OnExecute = actCheckForUpdatesExecute
+    end
+    object actFormatProperties: TAction
+      Category = 'Edit'
+      Caption = 'Format properties'
+      OnExecute = actFormatPropertiesExecute
     end
   end
   object popDropInsert: TPopupMenu

@@ -74,7 +74,7 @@ procedure CheckForTerminology(const AIndex: Integer);
 
 procedure RefreshAppTitle;
 
-procedure SetStatusBarText(const AText: String; const APanelIndex: Integer = 0);
+procedure SetStatusBarText(const AText: String; const APanelIndex: Integer = 0; const AUseTimer: Boolean = True);
 
 procedure DoAutoCheckErrors(const AAll: Boolean = True);
 
@@ -198,7 +198,7 @@ begin
     finally
       Formats.Free;
     end;
-    ItemIndex := 0;
+    ItemIndex := Integer(Workspace.DefFormat)-1;
     Items.EndUpdate;
   end;
 end;
@@ -1049,13 +1049,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure SetStatusBarText(const AText: String; const APanelIndex: Integer = 0);
+procedure SetStatusBarText(const AText: String; const APanelIndex: Integer = 0; const AUseTimer: Boolean = True);
 begin
   with frmMain do
   begin
     TimerStatus.Enabled := False;
     StatusBar.Panels[APanelIndex].Text := AText;
-    if not AText.IsEmpty then
+    if not AText.IsEmpty and AUseTimer then
       TimerStatus.Enabled := True;
   end;
 end;

@@ -211,6 +211,8 @@ begin
       WPM                := 180;
       CPL                := 37;
       CPSLineLenStrategy := '';
+      NewSubtitleMS      := 1000;
+      DotsOnSplit        := True;
 
       frmMain.mmoText.CPSBar.Max := MaxCPS;
     end;
@@ -221,7 +223,6 @@ begin
       etBreakLongLines, etRepeatedSubtitle, etEllipsesSingleSmartCharacter,
       etMaxLines, etOCR];
 
-    DefNewSubtitleMS     := 1000;
     DefChangePlayRate    := 50;
     ShiftTimeMS          := 500;
     AutoBackupSeconds    := 300;
@@ -235,7 +236,6 @@ begin
 
     ShowWelcomeAtStartup := True;
     UseOwnFileDialog     := False;
-    DotsOnSplit          := True;
     AutoCheckErrors      := True;
     AskForDeleteLines    := True;
     TextToFind           := '';
@@ -342,7 +342,6 @@ begin
       AutoBackupSeconds := GetValue('AutoBackupSeconds', AutoBackupSeconds);
       ColorThemeInstance.ColorMode := TColorMode(GetValue('ColorThemeMode', Integer(ColorThemeInstance.ColorMode)));
       AutoCheckErrors := GetValue('AutoCheckErrors', AutoCheckErrors);
-      DefNewSubtitleMS := GetValue('DefNewSubtitleMS', DefNewSubtitleMS);
       DefChangePlayRate := GetValue('DefChangePlayRate', DefChangePlayRate);
       ShiftTimeMS := GetValue('ShiftTimeMS', ShiftTimeMS);
       AutoLengthChar := GetValue('AutoLengthChar', AutoLengthChar);
@@ -351,7 +350,6 @@ begin
       ExpandMs := GetValue('ExpandMs', ExpandMs);
       ExpandChar := GetValue('ExpandChar', ExpandChar);
       ExpandLen := GetValue('ExpandLen', ExpandLen);
-      DotsOnSplit := GetValue('DotsOnSplit', DotsOnSplit);
       UseOwnFileDialog := GetValue('UseOwnFileDialog', UseOwnFileDialog);
       AskForDeleteLines := GetValue('AskForDeleteLines', AskForDeleteLines);
       WebSearchURL := GetValue('WebSearchURL', WebSearchURL);
@@ -397,6 +395,8 @@ begin
         WPM := GetValue('WPM', WPM);
         CPL := GetValue('CPL', CPL);
         CPSLineLenStrategy := GetValue('CPSLineLenStrategy', CPSLineLenStrategy);
+        NewSubtitleMS := GetValue('NewSubtitleMS', NewSubtitleMS);
+        DotsOnSplit := GetValue('DotsOnSplit', DotsOnSplit);
         CloseKey;
 
         if PauseInFrames then
@@ -553,7 +553,6 @@ begin
       SetValue('AutoBackupSeconds', AutoBackupSeconds);
       SetValue('ColorThemeMode', Integer(ColorThemeInstance.ColorMode));
       SetValue('AutoCheckErrors', AutoCheckErrors);
-      SetValue('DefNewSubtitleMS', DefNewSubtitleMS);
       SetValue('DefChangePlayRate', DefChangePlayRate);
       SetValue('ShiftTimeMS', ShiftTimeMS);
       SetValue('AutoLengthChar', AutoLengthChar);
@@ -562,7 +561,6 @@ begin
       SetValue('ExpandMs', ExpandMs);
       SetValue('ExpandChar', ExpandChar);
       SetValue('ExpandLen', ExpandLen);
-      SetValue('DotsOnSplit', DotsOnSplit);
       SetValue('UseOwnFileDialog', UseOwnFileDialog);
       SetValue('AskForDeleteLines', AskForDeleteLines);
       SetValue('WebSearchURL', WebSearchURL);
@@ -588,6 +586,8 @@ begin
         SetValue('WPM', WPM);
         SetValue('CPL', CPL);
         SetValue('CPSLineLenStrategy', CPSLineLenStrategy);
+        SetValue('NewSubtitleMS', NewSubtitleMS);
+        SetValue('DotsOnSplit', DotsOnSplit);
         CloseKey;
       end;
 
@@ -784,7 +784,7 @@ begin
       begin
         Conventions.RepeatableChars    := RepeatableChars;
         Conventions.ProhibitedChars    := ProhibitedChars;
-        AppOptions.DefNewSubtitleMS    := NewSubtitleMs;
+        Conventions.NewSubtitleMS      := NewSubtitleMS;
         Conventions.MinDuration        := MinDuration;
         Conventions.MinDurationPerWord := MinDurationPerWord;
         Conventions.MaxDuration        := MaxDuration;
@@ -794,7 +794,8 @@ begin
         Conventions.MaxCPS             := MaxCPS;
         Conventions.WPM                := WPM;
         Conventions.CPL                := CPL;
-        AppOptions.DotsOnSplit         := DotsOnSplit;
+        Conventions.DotsOnSplit        := DotsOnSplit;
+        Conventions.AddHyphenSpace     := AddHyphenSpace;
       end;
   finally
     FProfiles.Free;

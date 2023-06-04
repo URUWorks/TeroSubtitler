@@ -68,6 +68,7 @@ type
     actAddQuotationMarks: TAction;
     actAudioToText: TAction;
     actCheckForUpdates: TAction;
+    actFormatProperties: TAction;
     actTBX: TAction;
     actMediaBack1Sec: TAction;
     actMediaForward1Sec: TAction;
@@ -273,6 +274,7 @@ type
     MenuItem162: TMenuItem;
     MenuItem163: TMenuItem;
     MenuItem164: TMenuItem;
+    mnuFormatProperties: TMenuItem;
     mnuCheckForUpdates: TMenuItem;
     MenuItem17: TMenuItem;
     MenuItem38: TMenuItem;
@@ -822,6 +824,7 @@ type
     procedure actTranslateExecute(Sender: TObject);
     procedure actWaveExtractExecute(Sender: TObject);
     procedure actSettingsExecute(Sender: TObject);
+    procedure actFormatPropertiesExecute(Sender: TObject);
     procedure actRestoreBackupExecute(Sender: TObject);
     procedure actFixSubtitlesExecute(Sender: TObject);
     procedure actTranslationMemorySettingsExecute(Sender: TObject);
@@ -899,7 +902,8 @@ uses
 procedure TfrmMain.FormCreate(Sender: TObject);
 {$IFDEF DARWIN}
 var
-  AppMenu, AboutMenu, SettingsMenu, AppUpdate, SepMenu: TMenuItem;
+  AppMenu, AboutMenu, SettingsMenu, FormatPropertiesMenu,
+  AppUpdate, SepMenu: TMenuItem;
 {$ENDIF}
 begin
   Randomize; // used for tips
@@ -931,7 +935,6 @@ begin
   FillMenuWithLoopCount(popLoopCount);
   FillWithDictionaries(mnuDictionary, NIL);
   FillMenuWithUnicodeSymbols(mnuEditInsertSymbol);
-  cboFormat.ItemIndex := Integer(sfSubRip)-1;
   mnuVSTInsertSymbol.Assign(mnuEditInsertSymbol);
   mnuMemoInsertSymbol.Assign(mnuEditInsertSymbol);
   // Tag controls
@@ -987,6 +990,10 @@ begin
   SepMenu.Caption := '-';
   AppMenu.Add(SepMenu); {Add - as item in application menu}
 
+  FormatPropertiesMenu := TMenuItem.Create(Self);
+  FormatPropertiesMenu.Action := actFormatProperties;
+  AppMenu.Add(FormatPropertiesMenu); {Add format properties as item in application menu}
+
   SettingsMenu := TMenuItem.Create(Self);
   SettingsMenu.Action := actSettings;
   AppMenu.Add(SettingsMenu); {Add Settings as item in application menu}
@@ -995,11 +1002,12 @@ begin
   SepMenu.Caption := '-';
   AppMenu.Add(SepMenu); {Add - as item in application menu}
 
-  mnuAbout.Visible           := False;
-  mnuCheckForUpdates.Visible := False;
-  mnuHelpSeparator.Visible   := False;
-  mnuSettings.Visible        := False;
-  mnuExit.Visible            := False;
+  mnuAbout.Visible            := False;
+  mnuCheckForUpdates.Visible  := False;
+  mnuHelpSeparator.Visible    := False;
+  mnuFormatProperties.Visible := False;
+  mnuSettings.Visible         := False;
+  mnuExit.Visible             := False;
   {$ENDIF}
 
   // update workspace
@@ -1007,8 +1015,6 @@ begin
   EnableWorkArea(False);
   CheckColorTheme(Self);
 end;
-
-// -----------------------------------------------------------------------------
 
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
@@ -1075,7 +1081,7 @@ begin
   end;
 
   // Show random tip
-  SetStatusBarText(GetRandomTipString);
+  SetStatusBarText(GetRandomTipString, 0, False);
 end;
 
 // -----------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language Mail="uruworks@gmail.com" Name="Default" Count="37" Author="URUWorks">
+<Language Mail="uruworks@gmail.com" Name="Default" Count="38" Author="URUWorks">
   <Form Name="frmMain" Caption="tero subtitler">
     <Section Name="TMenuItem">
       <mnuFile>File</mnuFile>
@@ -136,6 +136,7 @@
       <actSplitSubtitleAtPosition>Split line at cursor position</actSplitSubtitleAtPosition>
       <actHelp>Help</actHelp>
       <actSettings>Settings...</actSettings>
+      <actFormatProperties>Format properties...</actFormatProperties>
       <actRestoreBackup>Restore backup...</actRestoreBackup>
       <actSaveSubtitle Hint="Save current subtitle to file">Save subtitle</actSaveSubtitle>
       <actSaveSubtitleAs Hint="Save current subtitle to a specific file">Save subtitle as...</actSaveSubtitleAs>
@@ -499,6 +500,11 @@
       <lblName>Name</lblName>
     </Section>  
   </Form>
+  <Form Name="frmFormatProperties" Caption="Format properties">
+    <Section Name="TUWCheckBox">
+      <chkVTTWriteCueIdentifiers>Write cue identifiers</chkVTTWriteCueIdentifiers>
+    </Section>    
+  </Form> 
   <Form Name="frmWizard" Caption="Getting started wizard">
     <Section Name="TLabel">
       <lblWelcome>Welcome to</lblWelcome>

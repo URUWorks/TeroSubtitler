@@ -292,7 +292,6 @@ begin
   FillComboWithShortcuts;
   FillComboWithShortCutsPreset(cboShortCutPreset);
   cboDefaultFileEncoding.ItemIndex := Workspace.DefEncoding;
-  cboDefaultFileFormat.ItemIndex   := Integer(Workspace.DefFormat)-1;
   btnShortCutApply.Enabled := False;
 
   with LanguageManager do
@@ -327,8 +326,9 @@ begin
       spnWPM.Value                := WPM;
       spnCPL.Value                := CPL;
       edtCPSStrategy.Text         := CPSLineLenStrategy;
+      spnNewSubtitleMs.Value      := NewSubtitleMs;
+      chkDotsOnSplit.Checked      := DotsOnSplit;
     end;
-    spnNewSubtitleMs.Value      := DefNewSubtitleMS;
     spnShiftTimeMs.Value        := ShiftTimeMS;
     spnAutoBackupMinutes.Value  := AutoBackupSeconds div 60;
     chkShowSplashWindow.Checked := ShowWelcomeAtStartup;
@@ -337,7 +337,6 @@ begin
     chkDrawErrors.Checked               := VSTOptions.DrawErrors;
     chkShowCPSBar.Checked               := frmMain.mmoText.CPSBar.Visible;
     chkDrawWaveformGAP.Checked          := frmMain.WAVE.DrawGAP;
-    chkDotsOnSplit.Checked              := DotsOnSplit;
     chkPromptForDeleteSubtitles.Checked := AskForDeleteLines;
 
     cboTheme.ItemIndex := Integer(ColorThemeInstance.ColorMode);
@@ -435,6 +434,8 @@ begin
       WPM                := spnWPM.Value;
       CPL                := spnCPL.Value;
       CPSLineLenStrategy := edtCPSStrategy.Text;
+      NewSubtitleMS      := spnNewSubtitleMs.Value;
+      DotsOnSplit        := chkDotsOnSplit.Checked;
 
       if PauseInFrames then
         frmMain.WAVE.MinimumBlank := FramesToTime(MinPause, Workspace.FPS.OutputFPS)
@@ -443,7 +444,6 @@ begin
 
       frmMain.mmoText.CPSBar.Max := MaxCPS;
     end;
-    DefNewSubtitleMS      := spnNewSubtitleMs.Value;
     ShiftTimeMS           := spnShiftTimeMs.Value;
     AutoBackupSeconds     := spnAutoBackupMinutes.Value*60;
     ShowWelcomeAtStartup  := chkShowSplashWindow.Checked;
@@ -453,7 +453,6 @@ begin
     frmMain.WAVE.DrawGAP  := chkDrawWaveformGAP.Checked;
     frmMain.mmoText.CPSBar.Visible        := chkShowCPSBar.Checked;
     frmMain.mmoTranslation.CPSBar.Visible := chkShowCPSBar.Checked;
-    DotsOnSplit           := chkDotsOnSplit.Checked;
     AskForDeleteLines     := chkPromptForDeleteSubtitles.Checked;
   end;
 
@@ -483,6 +482,8 @@ begin
   Workspace.FPS.DefFPS  := StrToFloatDef(cboDefaultFrameRate.Text, Workspace.FPS.OutputFPS, AppOptions.FormatSettings);
   Workspace.DefEncoding := cboDefaultFileEncoding.ItemIndex;
   Workspace.DefFormat   := TUWSubtitleFormats(cboDefaultFileFormat.ItemIndex+1);
+  if SubtitleInfo.Text.FileName.IsEmpty then
+    frmMain.cboFormat.ItemIndex := Integer(Workspace.DefFormat)-1;
 
   with frmMain do
   begin
