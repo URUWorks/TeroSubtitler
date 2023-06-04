@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  UWCheckBox, UWRadioButton;
+  UWRadioButton;
 
 type
 
