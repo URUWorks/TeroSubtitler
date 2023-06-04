@@ -392,7 +392,7 @@ object frmMain: TfrmMain
         Align = alBottom
         ClientHeight = 136
         ClientWidth = 619
-        TabOrder = 0
+        TabOrder = 1
         object LayoutEditorTimes: TUWLayout
           Left = 0
           Height = 136
@@ -401,7 +401,7 @@ object frmMain: TfrmMain
           Align = alLeft
           ClientHeight = 136
           ClientWidth = 148
-          TabOrder = 0
+          TabOrder = 1
           object tedInitial: TUWTimeEdit
             Left = 24
             Height = 23
@@ -531,7 +531,7 @@ object frmMain: TfrmMain
           Align = alClient
           ClientHeight = 136
           ClientWidth = 471
-          TabOrder = 1
+          TabOrder = 0
           object mmoText: TUWMemo
             Left = 0
             Height = 79
@@ -750,7 +750,7 @@ object frmMain: TfrmMain
         Header.PopupMenu = popVSTHeader
         HintMode = hmHint
         PopupMenu = popVST
-        TabOrder = 1
+        TabOrder = 0
         TreeOptions.AutoOptions = [toAutoTristateTracking]
         TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
         TreeOptions.PaintOptions = [toHideFocusRect, toHideSelection, toShowDropmark, toThemeAware, toUseBlendedImages, toAlwaysHideSelection]
