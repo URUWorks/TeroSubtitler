@@ -606,7 +606,10 @@ end;
 procedure TUWTimeEdit.UpDownClick(Sender: TObject; Button: TUDBtnType);
 begin
   if not Focused then
+  begin
+    SetFocus;
     SelLength := 0;
+  end;
 
   if Button = btNext then
     DoTimeUp
