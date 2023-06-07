@@ -81,4 +81,5 @@ Rafael López Sánchez,
 Scott Napier,
 Serenella Massidda,
 Martin Keary,
+Casper Jeukendrup,
 and all users of our software!
