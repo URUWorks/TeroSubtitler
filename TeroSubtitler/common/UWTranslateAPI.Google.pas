@@ -26,6 +26,7 @@ uses
 
 
 function GoogleTranslateText(const AText, SourceLng, DestLng: String): String;
+function GoogleGetLanguageIndex(ALang: String): Integer;
 
 const
   GoogleTranslateLocale: array [0..56] of String = (
@@ -207,6 +208,20 @@ begin
   finally
     jdResponse.Free;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function GoogleGetLanguageIndex(ALang: String): Integer;
+var
+  i: Integer;
+begin
+  Result := 0;
+
+  //ALang := ALang.ToLower;
+  for i := 1 to Length(GoogleTranslateLocale)-1 do
+    if ALang = GoogleTranslateLocale[i] then
+      Result := i;
 end;
 
 // -----------------------------------------------------------------------------
