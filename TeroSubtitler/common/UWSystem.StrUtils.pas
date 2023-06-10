@@ -406,8 +406,10 @@ procedure AnsiStringToAnsiChar(var Dest: array of AnsiChar; const Source: AnsiSt
 var
   i, MaxLen: Integer;
 begin
+  //StrLCopy(PChar(@Dest[0]), PChar(Source), High(Dest));
   MaxLen := High(Dest);
 
+  //FillChar(Dest, SizeOf(Dest), #0);
   for i := 0 to MaxLen do
     Dest[i] := #0;
 
