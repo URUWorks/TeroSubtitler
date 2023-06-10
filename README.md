@@ -47,7 +47,6 @@ Lazarus IDE.
 
 - ATSynEdit
 - BGRABitmap
-- LGenerics
 - UW_MPVPlayer
 
 ## Contributions
