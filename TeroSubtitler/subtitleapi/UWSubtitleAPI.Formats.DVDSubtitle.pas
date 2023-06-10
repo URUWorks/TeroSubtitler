@@ -130,28 +130,27 @@ end;
 
 function TUWDVDSubtitle.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
-  i         : Integer;
-  ExtraInfo : PDVDSubtitle_Info;
-  Text      : String;
+  i    : Integer;
+  Text : String;
 begin
-  Result  := False;
+  Result := False;
 
-  ExtraInfo := Subtitles.Header;
-  if ExtraInfo = NIL then Exit;
-
-  StringList.Add('{HEAD', False);
-  StringList.Add('DISCID=' + ExtraInfo^.DiskId, False);
-  StringList.Add('DVDTITLE=' + ExtraInfo^.DVDTitle, False);
-  StringList.Add('CODEPAGE=1250', False);
-  StringList.Add('FORMAT=ASCII', False);
-  StringList.Add('LANG=' + ExtraInfo^.Language, False);
-  StringList.Add('TITLE=1', False);
-  StringList.Add('ORIGINAL=ORIGINAL', False);
-  StringList.Add('AUTHOR=' + ExtraInfo^.Author, False);
-  StringList.Add('WEB=' + ExtraInfo^.Web, False);
-  StringList.Add('INFO=' + ExtraInfo^.Info, False);
-  StringList.Add('LICENSE=' + ExtraInfo^.License, False);
-  StringList.Add('}', False);
+  with Subtitles.FormatProperties^.DVDSubtitle do
+  begin
+    StringList.Add('{HEAD', False);
+    StringList.Add('DISCID=' + DiskId, False);
+    StringList.Add('DVDTITLE=' + DVDTitle, False);
+    StringList.Add('CODEPAGE=1250', False);
+    StringList.Add('FORMAT=ASCII', False);
+    StringList.Add('LANG=' + Language, False);
+    StringList.Add('TITLE=1', False);
+    StringList.Add('ORIGINAL=ORIGINAL', False);
+    StringList.Add('AUTHOR=' + Author, False);
+    StringList.Add('WEB=' + Web, False);
+    StringList.Add('INFO=' + Info, False);
+    StringList.Add('LICENSE=' + License, False);
+    StringList.Add('}', False);
+  end;
 
   for i := FromItem to ToItem do
   begin

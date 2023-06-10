@@ -34,7 +34,7 @@ type
     UnknowCodes2      : array[0..9] of Byte;
     Comments          : array[0..38] of AnsiChar;
     PrimaryFont       : array[0..6] of AnsiChar;
-    PrimaryLanguage   : Byte;
+    PrimaryLanguage   : Byte;                     // $09 English
     UnknowCodes3      : array[0..22] of Byte;
     OriginalTitle     : array[0..27] of AnsiChar;
     SecondaryFont     : array[0..6] of AnsiChar;
@@ -47,17 +47,32 @@ type
 //    UnknowCodes6      : array[0..14] of Byte;
   end;
 
+  TLanguageId = record
+    ShortName : AnsiString;
+    Hex       : Byte;
+  end;
+
 const
 
-  LangIdEnglish            = $01;
+  LangIdEnglish            = $09;
   LangIdDanish             = $07;
-  LangIdAlbanian           = $09;
   LangIdSwedish            = $28;
-  LangIdHebrew             = $56;
+  LangIdHebrew             = $8F;
   LangIdArabic             = $80;
-  LangIdRussian            = $8f;
+  LangIdRussian            = $56;
   LangIdChineseTraditional = $90;
   LangIdChineseSimplified  = $91;
+
+  LanguageId: array[0..7] of TLanguageId = (
+    (ShortName: 'en';    Hex: LangIdEnglish),
+    (ShortName: 'da';    Hex: LangIdDanish),
+    (ShortName: 'sv';    Hex: LangIdSwedish),
+    (ShortName: 'el';    Hex: LangIdHebrew),
+    (ShortName: 'ar';    Hex: LangIdArabic),
+    (ShortName: 'ru';    Hex: LangIdRussian),
+    (ShortName: 'zh-CN'; Hex: LangIdChineseTraditional),
+    (ShortName: 'zh-TW'; Hex: LangIdChineseSimplified)
+  );
 
   TUnkownCodes : array[0..6] of Byte = ($00, $00, $00, $00, $00, $00, $00);
 
@@ -219,10 +234,39 @@ const
     'х'
   );
 
+function GetCavena890LangIndex(const ALang: AnsiString): Integer; overload;
+function GetCavena890LangIndex(const ALangId: Byte): Integer; overload;
+
 //------------------------------------------------------------------------------
 
 implementation
 
 //------------------------------------------------------------------------------
+
+function GetCavena890LangIndex(const ALang: AnsiString): Integer;
+var
+  i: Integer;
+begin
+  Result := 0;
+
+  for i := 0 to Length(LanguageId)-1 do
+    if ALang = LanguageId[i].ShortName then
+      Exit(i);
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetCavena890LangIndex(const ALangId: Byte): Integer;
+var
+  i: Integer;
+begin
+  Result := 0;
+
+  for i := 0 to Length(LanguageId)-1 do
+    if ALangId = LanguageId[i].Hex then
+      Exit(i);
+end;
+
+// -----------------------------------------------------------------------------
 
 end.

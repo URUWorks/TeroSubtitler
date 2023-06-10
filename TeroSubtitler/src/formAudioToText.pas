@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  UWRadioButton;
+  UWRadioButton, UWCheckBox;
 
 type
 
@@ -47,6 +47,7 @@ type
     prbProgress: TProgressBar;
     rbnAddSubtitlesWhileTranscribing: TUWRadioButton;
     rbnLoadSubtitlesAfterTranscript: TUWRadioButton;
+    chkTranslate: TUWCheckBox;
     procedure btnCloseClick(Sender: TObject);
     procedure btnGenerateClick(Sender: TObject);
     procedure btnModelClick(Sender: TObject);
@@ -83,7 +84,7 @@ uses
 procedure TfrmAudioToText.FormCreate(Sender: TObject);
 begin
   LoadLanguage(Self);
-  FillComboWithGoogleLanguages(cboLanguage, 14);
+  FillComboWithGoogleLanguages(cboLanguage, 0);
   FillComboWithModels(cboModel);
   FillComboWithAudioStreams(cboTrack);
   cboLanguage.Items[0] := GetCommonString('Detect');
@@ -111,7 +112,7 @@ end;
 
 procedure TfrmAudioToText.btnCloseClick(Sender: TObject);
 begin
-  if btnGenerate.Enabled then
+  if (cboTrack.Items.Count = 0) or btnGenerate.Enabled then
     Close
   else
     CancelProcess := True;
@@ -214,11 +215,20 @@ begin
         if FileExists(s) then // wave extracted
         begin
           // do transcribe, main -m models/ggml-base.en.bin -l en -osrt -of outputfile.srt -f samples/jfk.wav
+          ss := WHISPER_Params;
+          if rbnAddSubtitlesWhileTranscribing.Checked then
+            ss.Insert(ss.IndexOf(' -osrt'), ' -pp');
+
+          if chkTranslate.Checked then
+            ss.Insert(ss.IndexOf(' -osrt'), ' -tr');
+
+          AParamArray := ss.Split(' ');
+
           cn := GoogleTranslateLocale[cboLanguage.ItemIndex];
           ss := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '_'+cn)]);
           lblStatus.Caption := GetCommonString('Transcribing');
           Application.ProcessMessages;
-          AParamArray := WHISPER_Params.Split(' ');
+
           for i := 0 to High(AParamArray) do
             AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%model', '%lang'], [s, ss, ConcatPaths([WhisperModelsFolder, cboModel.Text+'.bin']), cn], []);
 

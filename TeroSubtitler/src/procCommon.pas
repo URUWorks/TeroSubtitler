@@ -527,6 +527,14 @@ begin
         UpdateCoolBar(-1, False);
       end;
     end;
+    // Format properties
+    OpenKey('FormatProperties');
+    //
+    OpenKey(FormatToName(sfWebVTT));
+    Subtitles.FormatProperties^.WebVTT.WriteCueIdentifiers := GetValue('WriteCueIdentifiers', False);
+    CloseKey;
+    //
+    CloseKey;
   finally
     Free;
   end;
@@ -712,6 +720,15 @@ begin
         CloseKey;
       end;
     end;
+    // Format properties
+    OpenKey('FormatProperties');
+    // WebVTT
+    OpenKey(FormatToName(sfWebVTT));
+    SetValue('WriteCueIdentifiers', Subtitles.FormatProperties^.WebVTT.WriteCueIdentifiers);
+    CloseKey;
+    //
+    CloseKey;
+    //
     Flush;
   finally
     Free;
@@ -1122,7 +1139,11 @@ end;
 function libMPVFileName(const AFullRoot: Boolean = True): String;
 begin
   if AFullRoot then
+    {$IFDEF LINUX}
+    Result := GetInstallFolder(LIBMPV_DLL_NAME)
+    {$ELSE}
     Result := ConcatPaths([libmpvFolder, LIBMPV_DLL_NAME])
+    {$ENDIF}
   else
     Result := LIBMPV_DLL_NAME;
 end;
@@ -1132,7 +1153,11 @@ end;
 function YTDLPFileName(const AFullRoot: Boolean = True): String;
 begin
   if AFullRoot then
+    {$IFDEF LINUX}
+    Result := GetInstallFolder(YTDLP_EXE)
+    {$ELSE}
     Result := ConcatPaths([YTDLPFolder, YTDLP_EXE])
+    {$ENDIF}
   else
     Result := YTDLP_EXE;
 end;
@@ -1141,7 +1166,11 @@ end;
 
 function ffmpegFileName: String;
 begin
+  {$IFDEF LINUX}
+  Result := GetInstallFolder(FFMPEG_EXE);
+  {$ELSE}
   Result := ConcatPaths([ffmpegFolder, FFMPEG_EXE]);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------
@@ -1225,7 +1254,11 @@ end;
 
 function WhisperFileName: String;
 begin
+  {$IFDEF LINUX}
+  Result := GetInstallFolder(WHISPER_EXE);
+  {$ELSE}
   Result := ConcatPaths([WhisperFolder, WHISPER_EXE]);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------
@@ -1310,29 +1343,52 @@ end;
 function GetInstallFolder(const AFileName: String): String;
 const
   {$IFDEF LINUX}
-  pathLst : array[0..2] of string = (
+  pathLst : array[0..8] of string = (
     '/usr/bin',
     '/bin',
-    '/usr/local/bin'
+    '/usr/local/bin',
+    '/usr/lib',
+    '/lib',
+    '/usr/local/lib',
+    '/lib64',
+    '/usr/lib64',
+    '/usr/lib/x86_64-linux-gnu'
   );
   {$ELSE}
-  pathLst : array[0..1] of string = (
+  pathLst : array[0..3] of string = (
     '/usr/local/bin',
-    '/opt/local/bin'
+    '/opt/local/bin',
+    '/usr/local/lib',
+    '/opt/local/lib'
     );
   {$ENDIF}
 var
   pathIdx : Integer;
   pathStr : string;
+  sr      : TSearchRec;
+  re      : Integer;
 begin
   for pathIdx := Low(pathLst) to High(pathLst) do
   begin
     pathStr := pathLst[pathIdx];
     if not DirectoryExists(pathStr) then continue;
-    // look for bin
+    // look for file
     if FileExists(pathStr + PathDelim + AFileName) then
     begin
       Result := pathStr + PathDelim + AFileName;
+      Exit;
+    end;
+    {$IFDEF LINUX}
+    // look for .so.x
+    re := SysUtils.FindFirst(pathStr + PathDelim + AFileName + '.*', faAnyFile, sr);
+    {$ELSE}
+    // look for x.dylib
+    re := SysUtils.FindFirst(pathStr + PathDelim + ChangeFileExt(AFileName, '') + '.*.dylib', faAnyFile, sr);
+    {$ENDIF}
+    FindClose(sr);
+    if (re = 0) then
+    begin
+      Result := pathStr + PathDelim + sr.Name;
       Exit;
     end;
   end;

@@ -73,12 +73,6 @@ procedure DropFilesProcessFile(const FileName: String);
 
 procedure CommandLineProcess;
 
-{ FormatProperties }
-
-function HasFormatProperties(const AFormat: TUWSubtitleFormats): Boolean;
-procedure SetFormatProperties(const AFormat: TUWSubtitleFormats; const ASubtitles: TUWSubtitles);
-procedure ClearFormatProperties(const AFormat: TUWSubtitleFormats; const ASubtitles: TUWSubtitles);
-
 // -----------------------------------------------------------------------------
 
 implementation
@@ -86,8 +80,7 @@ implementation
 uses
   procCommon, procWorkspace, procVST, procSubtitle, procUndo, UWSystem.Encoding,
   formCustomFileDlg, UWSystem.XMLLang, UWSystem.SysUtils, Forms, procMRU,
-  UWSystem.StrUtils, XMLConf,
-  UWSubtitleAPI.Formats.WebVTT.Types;
+  UWSystem.StrUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -181,7 +174,7 @@ var
   MRUInfoObject: TMRUInfoObject;
   VFisLoaded: Boolean;
 begin
-  if not CloseSubtitle(not AutoLoadVideoFile) then Exit;
+  if not CloseSubtitle(AutoLoadVideoFile) then Exit;
 
   _FPS := AFPS;
   if _FPS = -1 then _FPS := Workspace.FPS.DefFPS;
@@ -299,9 +292,6 @@ begin
   _Encoding := AEncoding;
   if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
 
-  if HasFormatProperties(Format) then
-    SetFormatProperties(Format, Subtitles);
-
   if Subtitles.SaveToFile(FileName, _FPS, _Encoding, Format, SubtitleMode) then
   begin
     SubtitleChangedReset(SubtitleMode);
@@ -310,10 +300,7 @@ begin
       MRU.Add(FileName, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPV.IsPlaying);
   end
   else
-    ShowErrorMessageDialog(GetLangString('SaveSubtitleError'));
-
-  if HasFormatProperties(Format) then
-    ClearFormatProperties(Format, Subtitles);
+    ShowErrorMessageDialog(GetCommonString('SaveSubtitleError'));
 end;
 
 // -----------------------------------------------------------------------------
@@ -355,8 +342,7 @@ begin
 
   Subs := TUWSubtitles.Create;
   try
-    if HasFormatProperties(Format) then
-      SetFormatProperties(Format, Subs);
+    Subs.FormatProperties := Subtitles.FormatProperties;
 
     for i := 0 to Subtitles.Count-1 do
       if Subtitles[i].Marked then
@@ -372,9 +358,6 @@ begin
       else
         ShowErrorMessageDialog(GetLangString('SaveSubtitleError'));
     end;
-
-    if HasFormatProperties(Format) then
-      ClearFormatProperties(Format, Subs);
   finally
     Subs.Free;
   end;
@@ -986,59 +969,6 @@ begin
     begin
       //ParamStr(i);
     end;
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-{ FormatProperties }
-
-// -----------------------------------------------------------------------------
-
-function HasFormatProperties(const AFormat: TUWSubtitleFormats): Boolean;
-begin
-  Result := False;
-  if AFormat = sfWebVTT then
-    Result := True;
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure SetFormatProperties(const AFormat: TUWSubtitleFormats; const ASubtitles: TUWSubtitles);
-var
-  vttInfo: PVTTHeader;
-begin
-  with TXMLConfig.Create(NIL) do
-  try
-    FileName := SettingsFileName;
-    OpenKey('FormatProperties');
-    case AFormat of
-      sfWebVTT: begin
-                  OpenKey(FormatToName(sfWebVTT));
-                  New(vttInfo);
-                  vttInfo^.WriteCueIdentifiers := GetValue('WriteCueIdentifiers', False);
-                  Subtitles.Header := vttInfo;
-                  CloseKey;
-                end;
-    end;
-    CloseKey;
-  finally
-    Free;
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure ClearFormatProperties(const AFormat: TUWSubtitleFormats; const ASubtitles: TUWSubtitles);
-begin
-  case AFormat of
-    sfWebVTT: begin
-                if Subtitles.Header <> NIL then
-                begin
-                  Dispose(PVTTHeader(Subtitles.Header));
-                  Subtitles.Header := NIL;
-                end;
-              end;
   end;
 end;
 

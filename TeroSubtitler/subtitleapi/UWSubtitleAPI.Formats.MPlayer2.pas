@@ -56,7 +56,7 @@ end;
 
 function TUWMPlayer2.Format: TUWSubtitleFormats;
 begin
-  Result := TUWSubtitleFormats.sfMPlayer;
+  Result := TUWSubtitleFormats.sfMPlayer2;
 end;
 
 // -----------------------------------------------------------------------------

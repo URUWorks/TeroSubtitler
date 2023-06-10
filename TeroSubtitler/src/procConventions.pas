@@ -68,10 +68,11 @@ type
     function SaveToFile(const AFileName: String): Boolean;
     function AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
     procedure UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
-    function Ready    : Boolean;
+    function Ready: Boolean;
     procedure FillTStrings(const AStrings: TStrings; const AClear: Boolean = True);
     function FindItemIndex(const AName: String): Integer;
     function FindProfile(const AName: String): PProfileItem;
+    procedure Sort;
     property FileName : String       read FFileName write FFileName;
     property Items    : TProfileList read FList;
   end;
@@ -81,6 +82,17 @@ type
 implementation
 
 uses UWSubtitleAPI.Utils;
+
+// -----------------------------------------------------------------------------
+
+{ Helpers }
+
+// -----------------------------------------------------------------------------
+
+function CompareItems(const Item1, Item2: PProfileItem): Integer;
+begin
+  Result := CompareText(Item1^.Name, Item2^.Name);
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -195,6 +207,7 @@ begin
         end;
         NodeProfile := NodeProfile.NextSibling;
       end;
+      Sort;
     end;
   finally
     XmlDoc.Free;
@@ -262,7 +275,7 @@ var
   Item: PProfileItem;
   i: Integer;
 begin
-  Result := 0;
+  Result := -1;
 
   for i := 0 to FList.Count-1 do
     if FList.Items[i]^.Name = AName then
@@ -294,7 +307,11 @@ begin
   end;
 
   if not AUpdate then
-    Result := FList.Add(Item)+1;
+  begin
+    FList.Add(Item);
+    Sort;
+    Result := FList.IndexOf(Item);
+  end;
 
   FChanged := True;
 end;
@@ -363,6 +380,13 @@ begin
       Result := FList.Items[i];
       Break;
     end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TProfiles.Sort;
+begin
+  FList.Sort(@CompareItems);
 end;
 
 // -----------------------------------------------------------------------------

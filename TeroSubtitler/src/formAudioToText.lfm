@@ -1,12 +1,12 @@
 object frmAudioToText: TfrmAudioToText
   Left = 237
-  Height = 289
+  Height = 306
   Top = 117
   Width = 388
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Audio to text'
-  ClientHeight = 289
+  ClientHeight = 306
   ClientWidth = 388
   OnClose = FormClose
   OnCreate = FormCreate
@@ -65,24 +65,24 @@ object frmAudioToText: TfrmAudioToText
   object btnGenerate: TButton
     Left = 224
     Height = 25
-    Top = 254
+    Top = 271
     Width = 75
     Anchors = [akRight, akBottom]
     Caption = 'Generate'
     Default = True
     OnClick = btnGenerateClick
-    TabOrder = 6
+    TabOrder = 7
   end
   object btnClose: TButton
     Left = 304
     Height = 25
-    Top = 254
+    Top = 271
     Width = 75
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
-    TabOrder = 7
+    TabOrder = 8
   end
   object lblTrack: TLabel
     AnchorSideTop.Control = cboTrack
@@ -106,9 +106,10 @@ object frmAudioToText: TfrmAudioToText
   object lblWait: TLabel
     Left = 0
     Height = 32
-    Top = 168
+    Top = 185
     Width = 389
     Alignment = taCenter
+    Anchors = [akLeft, akBottom]
     AutoSize = False
     Font.Style = [fsBold]
     ParentColor = False
@@ -119,9 +120,10 @@ object frmAudioToText: TfrmAudioToText
   object lblStatus: TLabel
     Left = 0
     Height = 40
-    Top = 200
+    Top = 217
     Width = 389
     Alignment = taCenter
+    Anchors = [akLeft, akBottom]
     AutoSize = False
     Font.Style = [fsBold]
     ParentColor = False
@@ -134,16 +136,17 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 8
-    Top = 262
+    Top = 279
     Width = 152
+    Anchors = [akLeft, akRight, akBottom]
     Step = 1
-    TabOrder = 8
+    TabOrder = 9
     Visible = False
   end
   object lblTimeElapsed: TLabel
     Left = 160
     Height = 17
-    Top = 258
+    Top = 275
     Width = 55
     Alignment = taRightJustify
     Anchors = [akRight, akBottom]
@@ -172,5 +175,14 @@ object frmAudioToText: TfrmAudioToText
     Caption = 'Load subtitles after transcription'
     TabOrder = 4
     TabStop = False
+  end
+  object chkTranslate: TUWCheckBox
+    Left = 96
+    Height = 23
+    Top = 152
+    Width = 16
+    AutoSize = False
+    Caption = 'Translate to english'
+    TabOrder = 6
   end
 end

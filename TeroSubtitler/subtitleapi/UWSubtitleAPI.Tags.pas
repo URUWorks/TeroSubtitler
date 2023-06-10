@@ -59,7 +59,7 @@ end;
 function TSTagsToHTML(const Text: String): String;
 begin
   Result := Text;
-  if Result = '' then Exit;
+  if Result.IsEmpty then Exit;
 
   Result := ReplaceRegExpr('\{c&(.*?|var)\&}', Result, '<font color=$1>', True);
   Result := ReplaceRegExpr('\{c\}', Result, '</font>', True);
@@ -79,7 +79,8 @@ end;
 function HTMLTagsToTS(const Text: String): String;
 begin
   Result := Text;
-  if Result = '' then Exit;
+  if Result.IsEmpty then Exit;
+
   Result := ReplaceRegExpr('<font color=(.*?|var)>', Result, '{\c&$1&}', True);
   Result := ReplaceRegExpr('</font>', Result, '{\c}', True);
 //  Result := ReplaceRegExpr('<(.*?|var)>', Result, '{$1}', True);
@@ -98,6 +99,8 @@ end;
 function TSTagsToMicroDVD(const Text: String): String;
 begin
   Result := Text;
+  if Result.IsEmpty then Exit;
+
   Result := ReplaceString(Result, '{\i1}', '{y:i}');
   Result := ReplaceString(Result, '{\i0}', '');
   Result := ReplaceString(Result, '{\b1}', '{y:b}');
@@ -113,6 +116,8 @@ end;
 function MicroDVDTagsToTS(const Text: String): String;
 begin
   Result := Text;
+  if Result.IsEmpty then Exit;
+
   Result := ReplaceString(Result, '{y:i}', '{\i1}');
   Result := ReplaceString(Result, '{y:b}', '{\b1}');
   Result := ReplaceString(Result, '{y:u}', '{\u1}');
@@ -126,7 +131,7 @@ end;
 function TSTagsToXML(const Text: String): String;
 begin
   Result := Text;
-  if Result = '' then Exit;
+  if Result.IsEmpty then Exit;
 
   Result := ReplaceRegExpr('\{\\b1}(.*?)\{\\b0}', Result, '<span style="bold">$1</span>', True);
   Result := ReplaceRegExpr('\{\\i1}(.*?)\{\\i0}', Result, '<span style="italic">$1</span>', True);
@@ -140,7 +145,7 @@ end;
 function XMLTagsToTS(const Text: String): String;
 begin
   Result := Text;
-  if Result = '' then Exit;
+  if Result.IsEmpty then Exit;
 
   Result := ReplaceRegExpr('<span (s|.*S)tyle="bold">(.*?)<\/span>', Result, '{\\b1}$2{\\b0}', True);
   Result := ReplaceRegExpr('<span (s|.*S)tyle="italic">(.*?)<\/span>', Result, '{\\i1}$2{\\i0}', True);
@@ -154,6 +159,9 @@ end;
 
 function MacDVDTagsToTS(const Text: String): String;
 begin
+  Result := Text;
+  if Result.IsEmpty then Exit;
+
   Result := ReplaceRegExpr('\^B(.*?)\^B', Result, '{\\b1}$1{\\b0}', True);
   Result := ReplaceRegExpr('\^I(.*?)\^I', Result, '{\\i1}$1{\\i0}', True);
   Result := ReplaceRegExpr('\^U(.*?)\^U', Result, '{\\u1}$1{\\u0}', True);
@@ -164,10 +172,13 @@ end;
 
 function TSToMacDVDTags(const Text: String): String;
 begin
-  Result := ReplaceRegExpr('{\\b1}(.*?){\\b0}', Result, '\^B$1\^B', True);
-  Result := ReplaceRegExpr('{\\i1}(.*?){\\i0}', Result, '\^I$1\^I', True);
-  Result := ReplaceRegExpr('{\\u1}(.*?){\\u0}', Result, '\^U$1\^U', True);
-  Result := ReplaceRegExpr('{\\s1}(.*?){\\s0}', Result, '\^S$1\^S', True);
+  Result := Text;
+  if Result.IsEmpty then Exit;
+
+  Result := ReplaceRegExpr('\{\\b1\}(.*?)\{\\b0\}', Result, '\^B$1\^B', True);
+  Result := ReplaceRegExpr('\{\\i1\}(.*?)\{\\i0\}', Result, '\^I$1\^I', True);
+  Result := ReplaceRegExpr('\{\\u1\}(.*?)\{\\u0\}', Result, '\^U$1\^U', True);
+  Result := ReplaceRegExpr('\{\\s1\}(.*?)\{\\s0\}', Result, '\^S$1\^S', True);
 end;
 
 // -----------------------------------------------------------------------------

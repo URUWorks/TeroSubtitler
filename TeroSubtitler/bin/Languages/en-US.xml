@@ -489,7 +489,10 @@
     <Section Name="TUWRadioButton">
       <rbnAddSubtitlesWhileTranscribing>Add subtitles while transcribing</rbnAddSubtitlesWhileTranscribing>
       <rbnLoadSubtitlesAfterTranscript>Load subtitles after transcription</rbnLoadSubtitlesAfterTranscript>      
-    </Section>    
+    </Section>
+    <Section Name="TUWCheckBox">
+      <chkTranslate>Translate to English</chkTranslate>
+    </Section>            
   </Form>
   <Form Name="frmAudioToTextModel" Caption="Audio to text model">
   </Form>      
@@ -501,6 +504,36 @@
     </Section>  
   </Form>
   <Form Name="frmFormatProperties" Caption="Format properties">
+    <Section Name="TLabel">
+      <lblASLanguage>Language</lblASLanguage>
+      <lblASFontName>Font name</lblASFontName>
+      <lblASFontSize>Font size</lblASFontSize>
+      <lblASFontColor>Font color</lblASFontColor>
+      <lblASPositionX>Position X</lblASPositionX>
+      <lblASPositionY>Position Y</lblASPositionY>
+      <lblASWidth>Width</lblASWidth>
+      <lblASHeight>Height</lblASHeight>
+      <lblASAlignment>Alignment</lblASAlignment>
+      <lblCavenaTranslatedTitle>Translated title</lblCavenaTranslatedTitle>
+      <lblCavenaOriginalTitle>Original title</lblCavenaOriginalTitle>
+      <lblCavenaTranslator>Translator</lblCavenaTranslator>
+      <lblCavenaComment>Comments</lblCavenaComment>
+      <lblCavenaLanguage>Language</lblCavenaLanguage>
+      <lblCavenaTCStart>Start timecode</lblCavenaTCStart>            
+      <lblDVDTitle>Title</lblDVDTitle>
+      <lblDVDAuthor>Author</lblDVDAuthor>
+      <lblDVDInfo>Info</lblDVDInfo>
+      <lblDVDWeb>Web</lblDVDWeb>
+      <lblDVDLanguage>Language</lblDVDLanguage>
+      <lblEBUDFC>Disk format code</lblEBUDFC>      
+      <lblEBUDSC>Display standard code</lblEBUDSC>      
+      <lblEBUCCT>Character code table</lblEBUCCT>      
+      <lblEBUCPN>Code page number</lblEBUCPN>      
+      <lblEBULC>Language code</lblEBULC>      
+      <lblEBUCO>Country origin</lblEBUCO>      
+      <lblEBUNDC>Max chars</lblEBUNDC>      
+      <lblEBUNDR>Max rows</lblEBUNDR>      
+    </Section>        
     <Section Name="TUWCheckBox">
       <chkVTTWriteCueIdentifiers>Write cue identifiers</chkVTTWriteCueIdentifiers>
     </Section>    
@@ -593,6 +626,7 @@
     <AllSupportedFiles>All supported files</AllSupportedFiles>
     <UnableToLoad>Error loading file, unrecognized format.</UnableToLoad>
     <FileNotFound>File cannot be found.</FileNotFound>
+    <SaveSubtitleError>Error trying to save the file.</SaveSubtitleError>
     <FileChanged>File has not been saved.</FileChanged>
     <TranslationFileChanged>Translation file has not been saved.</TranslationFileChanged>    
     <AskToSave>'%s'||Do you wish to save it?</AskToSave>
@@ -737,7 +771,21 @@
     <InitialTime>Initial time</InitialTime>
     <FinalTime>Final time</FinalTime>    
     <Text>Text</Text>
-  </CompareStrings>                                                                                                                              
+  </CompareStrings>
+  <FormatPropertiesStrings>
+    <Center>Center</Center>
+    <Left>Left</Left>
+    <Right>Right</Right>          
+    <Undefined>Undefined</Undefined>
+    <OpenSubtitling>Open subtitling</OpenSubtitling>
+    <Level1Teletext>Level-1 teletext</Level1Teletext>    
+    <Level2Teletext>Level-2 teletext</Level2Teletext>
+    <Latin>Latin</Latin>    
+    <LatinCyrillic>Latin/Cyrillic</LatinCyrillic>
+    <LatinArabic>Latin/Arabic</LatinArabic>
+    <LatinGreek>Latin/Greek</LatinGreek>
+    <LatinHebrew>Latin/Hebrew</LatinHebrew>
+  </FormatPropertiesStrings>                                                                                                                                                                                                                  
   <HeaderStrings>
     <Index>#/Gap</Index>
     <Times>Times</Times>

@@ -15,7 +15,7 @@
  *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
  *}
 
-unit UWSubtitleAPI.Formats.SBV;
+unit UWSubtitleAPI.Formats.SubViewer;
 
 // -----------------------------------------------------------------------------
 
@@ -26,9 +26,9 @@ uses
 
 type
 
-  { TUWSBV }
+  { TUWSubViewer }
 
-  TUWSBV = class(TUWSubtitleCustomFormat)
+  TUWSubViewer = class(TUWSubtitleCustomFormat)
   public
     function Name: String; override;
     function Format: TUWSubtitleFormats; override;
@@ -47,35 +47,35 @@ uses UWSubtitleAPI.Tags, UWSystem.SysUtils;
 
 // -----------------------------------------------------------------------------
 
-function TUWSBV.Name: String;
+function TUWSubViewer.Name: String;
 begin
   Result := IndexToName(Integer(Format));
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSBV.Format: TUWSubtitleFormats;
+function TUWSubViewer.Format: TUWSubtitleFormats;
 begin
-  Result := TUWSubtitleFormats.sfSBV;
+  Result := TUWSubtitleFormats.sfSubViewer;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSBV.Extension: String;
+function TUWSubViewer.Extension: String;
 begin
   Result := '*.sbv';
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSBV.HasStyleSupport: Boolean;
+function TUWSubViewer.HasStyleSupport: Boolean;
 begin
   Result := True;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSBV.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
+function TUWSubViewer.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
 begin
   if (TimeInFormat(Copy(SubtitleFile[Row], 1, 11), 'h:mm:ss.zzz')) and
      (TimeInFormat(Copy(SubtitleFile[Row], 13, 11), 'h:mm:ss.zzz')) and
@@ -87,7 +87,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSBV.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
+function TUWSubViewer.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
 var
   i           : Integer;
   InitialTime : Integer;
@@ -134,7 +134,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSBV.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWSubViewer.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   i    : Integer;
   Text : String;

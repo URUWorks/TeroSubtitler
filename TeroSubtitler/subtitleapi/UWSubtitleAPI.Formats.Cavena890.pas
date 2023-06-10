@@ -157,24 +157,14 @@ begin
     Result := Result.Replace(Encoding.GetString(Byte), '{\i0}');
   finally
     SetLength(Byte, 0);
-    //Encoding.Free;
   end;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure WriteByte(const Stream: TStream; const bByte: Byte);
-//var
-//  Buffer : TBytes;
 begin
-//  SetLength(Buffer, 1);
-//  try
-//    Buffer[0] := bByte;
-//    Stream.Write(Buffer, 0, Length(Buffer));
-    Stream.Write(bByte, 1);
-//  finally
-//    SetLength(Buffer, 0);
-//  end;
+  Stream.Write(bByte, 1);
 end;
 
 // -----------------------------------------------------------------------------
@@ -206,19 +196,15 @@ begin
     for i := 0 to Length(Result)-1 do Result[i] := $7F;
 
   Encoding := TEncoding.Default;
-  try
-    index := 0;
-    for i := 0 to Text.Length-1 do
+  index := 0;
+  for i := 0 to Text.Length-1 do
+  begin
+    current := Text.Substring(i, 1);
+    if index < 50 then
     begin
-      current := Text.Substring(i, 1);
-      if index < 50 then
-      begin
-        Result[index] := Encoding.GetBytes(current)[0];
-        inc(index);
-      end;
+      Result[index] := Encoding.GetBytes(current)[0];
+      inc(index);
     end;
-  finally
-//    Encoding.Free;
   end;
 end;
 
@@ -330,8 +316,10 @@ var
   number     : Integer;
   startFrame : Double;
   endFrame   : Double;
-  langId     : Integer;
-  lang       : String;
+  langId1,
+  langId2    : Integer;
+  fontname1,
+  fontname2,
   line1,
   line2      : String;
 
@@ -347,7 +335,12 @@ begin
       SetLength(Bytes, FileStream.Size);
       FileStream.Read(Bytes[0], FileStream.Size);
 
-      lang       := GetLanguage(Bytes);
+      langId1 := Bytes[146];
+      langId2 := Bytes[147];
+
+      fontname1 := TEncoding.ASCII.GetString(Bytes, 187, 6);
+      fontname2 := TEncoding.ASCII.GetString(Bytes, 246, 6);
+
       i          := 455;
       lastNumber := -1;
 
@@ -359,10 +352,8 @@ begin
         startFrame := Bytes[start-14] * 256 * 256 + Bytes[start-13] * 256 + Bytes[start-12];
         endFrame   := Bytes[start-11] * 256 * 256 + Bytes[start-10] * 256 + Bytes[start-9];
 
-        langId := Bytes[start-8];
-
-        line1 := FixText(Bytes, start, textLength, langId).Trim;
-        line2 := FixText(Bytes, start + textLength + 6, textLength, langId).Trim;
+        line1 := FixText(Bytes, start, textLength, langId1).Trim;
+        line2 := FixText(Bytes, start + textLength + 6, textLength, langId2).Trim;
 
         if LastNumber = Number then
         begin
@@ -392,17 +383,14 @@ end;
 
 function TUWCavena890.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
-  Stream    : TStream;
-  Buffer    : TBytes;
-  i         : Integer;
-  langId    : Integer;
-  lang      : String;
-  number    : Integer;
-  ExtraInfo : PCavena890_Info;
+  Stream : TStream;
+  Buffer : TBytes;
+  i      : Integer;
+  langId : Integer;
+  lang   : String;
+  number : Integer;
 begin
   Result := False;
-  ExtraInfo := Subtitles.Header;
-  if ExtraInfo = NIL then Exit;
 
   Stream := TFileStream.Create(FileName, fmCreate);
   try
@@ -428,7 +416,7 @@ begin
     end;
 
     // HEADER
-    Stream.WriteBuffer(ExtraInfo^, SizeOf(TCavena890_Info));
+    Stream.WriteBuffer(Subtitles.FormatProperties^.Cavena890, SizeOf(TCavena890_Info));
 
     // Subtitles
     number := 16;

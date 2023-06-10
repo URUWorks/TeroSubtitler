@@ -76,7 +76,8 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procCommon, procColorTheme, formDownload;
+  procTypes, procWorkspace, procCommon, procColorTheme, formDownload
+  {$IFDEF DARWIN}, UWSystem.SysUtils{$ENDIF};
 
 {$R *.lfm}
 
@@ -96,6 +97,13 @@ begin
   btnDownloadYTDLP.Caption   := btnDownload.Caption;
   btnDownloadFFMPEG.Caption  := btnDownload.Caption;
   btnDownloadWhisper.Caption := btnDownload.Caption;
+
+  {$IFDEF LINUX}
+  btnDownload.Visible        := False;
+  btnDownloadYTDLP.Visible   := False;
+  btnDownloadFFMPEG.Visible  := False;
+  btnDownloadWhisper.Visible := False;
+  {$ENDIF};
 
   // libMPV
   if FileExists(libMPVFileName) then
@@ -236,6 +244,11 @@ end;
 
 procedure TfrmWizard.btnDownloadFFMPEGClick(Sender: TObject);
 begin
+//  {$IFDEF DARWIN}
+//  ShowDownloadDialog(StringReplace(URL_FFMPEG, '%cpu', GetCPUArchitecture, []), ConcatPaths([ffmpegFolder, 'ffmpeg.zip']));
+//  {$ELSE}
+//  ShowDownloadDialog(URL_FFMPEG, ConcatPaths([ffmpegFolder, 'ffmpeg.zip']));
+//  {$ENDIF}
   ShowDownloadDialog(URL_FFMPEG, ConcatPaths([ffmpegFolder, 'ffmpeg.zip']));
   if FileExists(ffmpegFileName) then
   begin
@@ -249,7 +262,11 @@ end;
 
 procedure TfrmWizard.btnDownloadWhisperClick(Sender: TObject);
 begin
+  {$IFDEF DARWIN}
+  ShowDownloadDialog(StringReplace(URL_WHISPER, '%cpu', GetCPUArchitecture, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
+  {$ELSE}
   ShowDownloadDialog(URL_WHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
+  {$ENDIF}
   if FileExists(WhisperFileName) then
   begin
     btnDownloadWhisper.Enabled := False;

@@ -114,20 +114,22 @@ begin
 
         while (i+c < (SubtitleFile.Count-1)) and (Copy(SubtitleFile[i+c], 1, 5) <> '-->> ') do
         begin
-          If Text <> '' then
+          if Text <> '' then
             Text := Text + sLineBreak + SubtitleFile[i+c]
           else
             Text := SubtitleFile[i+c];
+
           Inc(c);
         end;
-        If (IsInteger(Copy(SubtitleFile[i+c], 6, 2))) then
+
+        if (IsInteger(Copy(SubtitleFile[i+c], 6, 2))) then
           FinalTime := FramesToTime(StrToIntDef(Copy(SubtitleFile[i+c], 6, 6), -1), FPS)
         else
           FinalTime := InitialTime + 2000;
 
         Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
       end;
-      Inc(i);
+      Inc(i, c+1);
     end;
   finally
     if Subtitles.Count > 0 then Result := True;

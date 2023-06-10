@@ -126,19 +126,20 @@ type
 
   TUWSubtitles = class
   private
-    FFormat        : TUWSubtitleFormats;
-    FFPS           : Single;
-    FEIType        : TUWSubtitleExtraInfoType;
-    FList          : TUWSubtitleItemList;
-    FExtraInfo     : TList;
-    FHeader        : Pointer;
-    FStyles        : TList;
-    FCodePage      : Integer;
-    FSearchStartAt : Integer;
-    FSearchIdx     : Integer;
-    FSearchSkip    : Integer;
-    FReplaceEntity : Boolean;
-    FTimeBase      : TSubtitleTimeBase;
+    FFormat           : TUWSubtitleFormats;
+    FFPS              : Single;
+    FEIType           : TUWSubtitleExtraInfoType;
+    FList             : TUWSubtitleItemList;
+    FExtraInfo        : TList;
+    FHeader           : Pointer;
+    FStyles           : TList;
+    FCodePage         : Integer;
+    FSearchStartAt    : Integer;
+    FSearchIdx        : Integer;
+    FSearchSkip       : Integer;
+    FReplaceEntity    : Boolean;
+    FTimeBase         : TSubtitleTimeBase;
+    FFormatProperties : PFormatProperties;
     function GetCount: Integer;
     procedure SetFormat(const Format: TUWSubtitleFormats);
     function GetItem(Index: Integer): TUWSubtitleItem;
@@ -221,6 +222,7 @@ type
     property Header: Pointer read FHeader write FHeader;
     property ReplaceEntities: Boolean read FReplaceEntity write FReplaceEntity;
     property TimeBase: TSubtitleTimeBase read FTimeBase write FTimeBase;
+    property FormatProperties: PFormatProperties read FFormatProperties write FFormatProperties;
   end;
 
   { TUWSubtitleCustomFormat }
@@ -276,7 +278,7 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils,
   UWSubtitleAPI.Formats.JACOSub, UWSubtitleAPI.Formats.KaraokeLyricsLRC,
   UWSubtitleAPI.Formats.KaraokeLyricsVKT, UWSubtitleAPI.Formats.MacDVDStudioPro,
   UWSubtitleAPI.Formats.MacSUB, UWSubtitleAPI.Formats.MPlayer,
-  UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.SBV,
+  UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.SubViewer,
   UWSubtitleAPI.Formats.Sofni, UWSubtitleAPI.Formats.STL,
   UWSubtitleAPI.Formats.ITunesTimedText, UWSubtitleAPI.Formats.Tero;
 
@@ -710,10 +712,10 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWMPlayer.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWMPlayer2.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWNetflixTimedText.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWSBV.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSofni.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSTL.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSubViewer.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWTero.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWTimedText.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWWebVTT.Create) );
@@ -750,6 +752,8 @@ begin
   FHeader        := NIL;
   FReplaceEntity := True;
   FTimeBase      := stbMedia;
+  New(FFormatProperties);
+  DefaultFormatPropertiesSettings(FFormatProperties);
 end;
 
 // -----------------------------------------------------------------------------
@@ -757,6 +761,7 @@ end;
 destructor TUWSubtitles.Destroy;
 begin
   FHeader := NIL;
+  Dispose(FFormatProperties);
   ClearExtraInfoList(FExtraInfo, FEIType);
   FExtraInfo.Free;
   FStyles.Free;
@@ -1511,6 +1516,7 @@ begin
           Result := AList[f].SaveSubtitle(FileName, FPS, Encoding, Self, SubtitleMode, iFrom, iTo)
         else
           Result := AList[f].SaveSubtitle(ChangeFileExt(FileName, AList[f].Extension.Replace('*', '')), FPS, Encoding, Self, SubtitleMode, iFrom, iTo);
+
         Exit;
       end;
   finally

@@ -162,18 +162,25 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmConventions.btnAddClick(Sender: TObject);
+var
+  i: Integer;
 begin
   if FList <> NIL then
   begin
     if edtName.Text <> '' then
     begin
-      if FList.AddItem(edtName.Text, spnNewSubtitleMs.Value, spnMinDurationMs.Value,
+      i := FList.AddItem(edtName.Text, spnNewSubtitleMs.Value, spnMinDurationMs.Value,
         spnMinDurationPerWord.Value, spnMaxDurationMs.Value,
         spnMaxLineCount.Value, spnSubtitlePauseMs.Value,
         spnCPS.Value, spnWPM.Value, spnCPL.Value, cboPauseMode.ItemIndex = 1,
         edtRepeatableChars.Text, edtProhibitedChars.Text,
-        chkDotsOnSplit.Checked, edtCPSStrategy.Text) > 0 then
-      lstTree.Items.Add(edtName.Text);
+        chkDotsOnSplit.Checked, edtCPSStrategy.Text);
+
+      if i >= 0 then
+      begin
+        lstTree.Items.Insert(i, edtName.Text);
+        lstTree.ItemIndex := i;
+      end;
     end
     else
       edtName.SetFocus;
@@ -189,6 +196,9 @@ begin
     begin
       FList.Items.Delete(lstTree.ItemIndex);
       lstTree.DeleteSelected;
+
+      if lstTree.Count > 0 then
+        lstTree.ItemIndex := 0;
     end;
 end;
 

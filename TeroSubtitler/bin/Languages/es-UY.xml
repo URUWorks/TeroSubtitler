@@ -489,7 +489,10 @@
     <Section Name="TUWRadioButton">
       <rbnAddSubtitlesWhileTranscribing>Agregar subtítulos mientras se transcribe</rbnAddSubtitlesWhileTranscribing>
       <rbnLoadSubtitlesAfterTranscript>Cargar subtítulos después de la transcripción</rbnLoadSubtitlesAfterTranscript>
-    </Section>        
+    </Section>
+    <Section Name="TUWCheckBox">
+      <chkTranslate>Traducir al ingles</chkTranslate>
+    </Section>                        
   </Form>
   <Form Name="frmAudioToTextModel" Caption="Modelo de audio a texto">
   </Form>            
@@ -501,6 +504,36 @@
     </Section>    
   </Form>
   <Form Name="frmFormatProperties" Caption="Format properties">
+    <Section Name="TLabel">
+      <lblASLanguage>Idioma</lblASLanguage>
+      <lblASFontName>Nombre de la fuente</lblASFontName>
+      <lblASFontSize>Tamaño de fuente</lblASFontSize>
+      <lblASFontColor>Color de fuente</lblASFontColor>
+      <lblASPositionX>Posición X</lblASPositionX>
+      <lblASPositionY>Posición Y</lblASPositionY>
+      <lblASWidth>Ancho</lblASWidth>
+      <lblASHeight>Alto</lblASHeight>
+      <lblASAlignment>Alineación</lblASAlignment>
+      <lblCavenaTranslatedTitle>Título traducido</lblCavenaTranslatedTitle>
+      <lblCavenaOriginalTitle>Titulo original</lblCavenaOriginalTitle>
+      <lblCavenaTranslator>Traductor</lblCavenaTranslator>
+      <lblCavenaComment>Comentarios</lblCavenaComment>
+      <lblCavenaLanguage>Idioma</lblCavenaLanguage>
+      <lblCavenaTCStart>Cód. tiempo de inicio</lblCavenaTCStart>            
+      <lblDVDTitle>Título</lblDVDTitle>
+      <lblDVDAuthor>Autor</lblDVDAuthor>
+      <lblDVDInfo>Información</lblDVDInfo>
+      <lblDVDWeb>Web</lblDVDWeb>
+      <lblDVDLanguage>Idioma</lblDVDLanguage>
+      <lblEBUDFC>Código de formato de disco</lblEBUDFC>      
+      <lblEBUDSC>Código estándar</lblEBUDSC>      
+      <lblEBUCCT>Tabla de caracteres</lblEBUCCT>      
+      <lblEBUCPN>Núm. página de códigos</lblEBUCPN>      
+      <lblEBULC>Código de lenguaje</lblEBULC>      
+      <lblEBUCO>País de origen</lblEBUCO>      
+      <lblEBUNDC>Caracteres máximos</lblEBUNDC>      
+      <lblEBUNDR>Filas máximas</lblEBUNDR>      
+    </Section>      
     <Section Name="TUWCheckBox">
       <chkVTTWriteCueIdentifiers>Escribir identificadores de subtítulos</chkVTTWriteCueIdentifiers>
     </Section>  
@@ -593,6 +626,7 @@
     <AllSupportedFiles>Todos los archivos compatibles</AllSupportedFiles>
     <UnableToLoad>Error al cargar el archivo, formato no reconocido.</UnableToLoad>
     <FileNotFound>No se puede encontrar el archivo.</FileNotFound>
+    <SaveSubtitleError>Error al intentar guardar el archivo.</SaveSubtitleError>    
     <FileChanged>El archivo ha cambiado.</FileChanged>
     <TranslationFileChanged>La traducción ha cambiado.</TranslationFileChanged>
     <AskToSave>'%s'||¿Desea guardar los cambios?</AskToSave>
@@ -737,7 +771,21 @@
     <InitialTime>Tiempo inicial</InitialTime>
     <FinalTime>Tiempo final</FinalTime>    
     <Text>Texto</Text>
-  </CompareStrings>                                        
+  </CompareStrings>
+  <FormatPropertiesStrings>
+    <Center>Centro</Center>
+    <Left>Izquierda</Left>
+    <Right>Derecha</Right>          
+    <Undefined>Indefinido</Undefined>
+    <OpenSubtitling>Subtitulado abierto</OpenSubtitling>
+    <Level1Teletext>Teletexto de nivel 1</Level1Teletext>    
+    <Level2Teletext>Teletexto de nivel 2</Level2Teletext>
+    <Latin>Latín</Latin>    
+    <LatinCyrillic>Latín/Cirílico</LatinCyrillic>
+    <LatinArabic>Latín/Arabe</LatinArabic>
+    <LatinGreek>Latín/Griego</LatinGreek>
+    <LatinHebrew>Latín/Hebreo</LatinHebrew>
+  </FormatPropertiesStrings>                                                                                  
   <HeaderStrings>
     <Index>#/Pausa</Index>
     <Times>Tiempos</Times>

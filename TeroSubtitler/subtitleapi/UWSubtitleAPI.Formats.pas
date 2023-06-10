@@ -61,12 +61,12 @@ const
     'MPlayer',
     'MPlayer2',
     'Netflix Timed Text',
-    'SBV',
     'Sofni',
     'STL',
     'SubRip',
+    'SubViewer',
     'Tero',
-    'Timed-Text',
+    'Timed Text',
     'WebVTT'
   );
 
@@ -109,10 +109,10 @@ type
     sfMPlayer,
     sfMPlayer2,
     sfNetflixTimedText,
-    sfSBV,
     sfSofni,
     sfSTL,
     sfSubRip,
+    sfSubViewer,
     sfTero,
     sfTimedText,
     sfWebVTT

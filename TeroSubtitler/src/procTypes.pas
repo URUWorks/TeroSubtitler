@@ -106,7 +106,7 @@ const
   YTDLP_EXE = 'yt-dlp.exe';
 
   WHISPER_EXE      = 'main.exe';
-  WHISPER_Params   = '-m "%model" -l %lang -pp -osrt -of "%output" -f "%input"';
+  WHISPER_Params   = '-m "%model" -l %lang -osrt -of "%output" -f "%input"';
   WHISPER_ffParams = '-i "%input" -ar 16000 -ac %trackid -c:a pcm_s16le -y "%output"';
   {$ENDIF}
   {$IFDEF LINUX}
@@ -129,7 +129,7 @@ const
   URL_FFMPEG = 'https://github.com/URUWorks/additional-files/raw/main/ffmpeg/ffmpeg_macos64.zip';
   URL_LIBMPV = 'https://github.com/URUWorks/additional-files/raw/main/libmpv/libmpv_macos.zip';
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos.zip';
-  URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_macos64.zip';
+  URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_%cpu.zip';
 
   FFMPEG_EXE      = 'ffmpeg';
   FFMPEG_Params   = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -y %output';
@@ -290,7 +290,7 @@ var
   MRU           : TMRU;
   TMX           : TUWTMX;
   TBX           : TUWTBX;
-  LastTickCount : Cardinal;     // Source memo chage
+  LastTickCount : Cardinal;     // Source memo change
 
 implementation
 

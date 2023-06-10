@@ -45,7 +45,9 @@ procedure PrepareMPV;
 begin
   with frmMain.MPV do
   begin
-    MPVFileName   := libMPVFileName(False);
+    {$IFNDEF LINUX}
+    MPVFileName := libMPVFileName(False);
+    {$ENDIF}
     {$IFDEF DARWIN}
     YTDLPFileName := procCommon.YTDLPFileName;
     {$ENDIF}

@@ -56,14 +56,14 @@ end;
 
 function TUWKaraokeLyricsVKT.Format: TUWSubtitleFormats;
 begin
-  Result := TUWSubtitleFormats.sfKaraokeLyricsLRC;
+  Result := TUWSubtitleFormats.sfKaraokeLyricsVKT;
 end;
 
 // -----------------------------------------------------------------------------
 
 function TUWKaraokeLyricsVKT.Extension: String;
 begin
-  Result := '*.lrc';
+  Result := '*.vkt';
 end;
 
 // -----------------------------------------------------------------------------

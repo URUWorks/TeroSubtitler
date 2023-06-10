@@ -44,9 +44,6 @@
     </Files>
     <RequiredPkgs>
       <Item>
-        <PackageName Value="LGenerics"/>
-      </Item>
-      <Item>
         <PackageName Value="UWCommon"/>
       </Item>
       <Item>

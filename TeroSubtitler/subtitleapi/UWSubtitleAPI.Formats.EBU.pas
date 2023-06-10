@@ -220,55 +220,54 @@ var
   GSIBlock : TGSIBlock;
   TTIBlock : TTTIBlock;
   i        : Integer;
-  Info     : PEBU_Info;
 begin
   Result := False;
-
-  Info := Subtitles.Header;
-  if Info = NIL then Exit;
 
   //if Encoding = NIL then
   //  Encoding := TEncoding.GetEncoding(CharCodeTableToEncoding(''));
 
   Stream := TFileStream.Create(FileName, fmCreate);
   try
-    FillChar(GSIBlock, SizeOf(TGSIBlock), DSC_Undefined);
-    with GSIBlock do
+    with Subtitles.FormatProperties^ do
     begin
-      AnsiStringToAnsiChar(CodePageNumber, Info^.CodePageNumber);
-      if Info^.DiskFormatCode = 0 then //if FPS < 29 then
-        DiskFormatCode    := DFC_25
-      else
-        DiskFormatCode    := DFC_30;
-      DisplayStandardCode := Info^.DisplayStandardCode;
-      AnsiStringToAnsiChar(CharCodeTableNumber, Info^.CharCodeTableNumber);
-      AnsiStringToAnsiChar(LanguageCode, Info^.LanguageCode);
-      //OriginalProgrammeTitle
-      //OriginalEpisodeTitle
-      //TranslatedProgrammeTitle
-      //TranslatedEpisodeTitle
-      //TranslatorName
-      //TranslatorContactDetails
-      //SubtitleListRefCode
-      CreationDate   := '100101';
-      RevisionDate   := '100101';
-      RevisionNumber := '00';
-      AnsiStringToAnsiChar(TotalNumberTTIBlocks, AnsiString(AddChar('0', IntToStr((ToItem-FromItem)+1), 5)));
-      AnsiStringToAnsiChar(TotalNumberSubtitles, AnsiString(AddChar('0', IntToStr((ToItem-FromItem)+1), 5)));
-      TotalNumberSubtitleGroups := '000';
-      AnsiStringToAnsiChar(MaxNumberDisplayableChars, Info^.MaxNumberDisplayableChars);
-      AnsiStringToAnsiChar(MaxNumberDisplayableRows, Info^.MaxNumberDisplayableRows);
-      TimeCodeStatus      := TCS_Use;
-      AnsiStringToAnsiChar(TimeCodeStartProgramme, AnsiString(TimeToString(Subtitles[0].InitialTime, 'hhmmssff', FPS)));
-      AnsiStringToAnsiChar(TimeCodeFirstCue, AnsiString(TimeToString(Subtitles[0].InitialTime, 'hhmmssff', FPS)));
-      TotalNumberDisks    := $31;
-      DiskSequenceNumber  := $31;
-      AnsiStringToAnsiChar(CountryOrigin, Info^.CountryOrigin);
-      AnsiStringToAnsiChar(Publisher, 'URUWorks');
-      AnsiStringToAnsiChar(EditorName, 'URUWorks');
-      AnsiStringToAnsiChar(EditorContact, 'uruworks.net');
+      FillChar(GSIBlock, SizeOf(TGSIBlock), DSC_Undefined);
+      with GSIBlock do
+      begin
+        AnsiStringToAnsiChar(CodePageNumber, EBU.CodePageNumber);
+        if EBU.DiskFormatCode = 0 then //if FPS < 29 then
+          DiskFormatCode    := DFC_25
+        else
+          DiskFormatCode    := DFC_30;
+        DisplayStandardCode := EBU.DisplayStandardCode;
+        AnsiStringToAnsiChar(CharCodeTableNumber, EBU.CharCodeTableNumber);
+        AnsiStringToAnsiChar(LanguageCode, EBU.LanguageCode);
+        //OriginalProgrammeTitle
+        //OriginalEpisodeTitle
+        //TranslatedProgrammeTitle
+        //TranslatedEpisodeTitle
+        //TranslatorName
+        //TranslatorContactDetails
+        //SubtitleListRefCode
+        CreationDate   := '100101';
+        RevisionDate   := '100101';
+        RevisionNumber := '00';
+        AnsiStringToAnsiChar(TotalNumberTTIBlocks, AnsiString(AddChar('0', IntToStr((ToItem-FromItem)+1), 5)));
+        AnsiStringToAnsiChar(TotalNumberSubtitles, AnsiString(AddChar('0', IntToStr((ToItem-FromItem)+1), 5)));
+        TotalNumberSubtitleGroups := '000';
+        AnsiStringToAnsiChar(MaxNumberDisplayableChars, EBU.MaxNumberDisplayableChars);
+        AnsiStringToAnsiChar(MaxNumberDisplayableRows, EBU.MaxNumberDisplayableRows);
+        TimeCodeStatus      := TCS_Use;
+        AnsiStringToAnsiChar(TimeCodeStartProgramme, AnsiString(TimeToString(Subtitles[0].InitialTime, 'hhmmssff', FPS)));
+        AnsiStringToAnsiChar(TimeCodeFirstCue, AnsiString(TimeToString(Subtitles[0].InitialTime, 'hhmmssff', FPS)));
+        TotalNumberDisks    := $31;
+        DiskSequenceNumber  := $31;
+        AnsiStringToAnsiChar(CountryOrigin, EBU.CountryOrigin);
+        AnsiStringToAnsiChar(Publisher, 'URUWorks');
+        AnsiStringToAnsiChar(EditorName, 'URUWorks');
+        AnsiStringToAnsiChar(EditorContact, 'uruworks.net');
+      end;
+      Stream.WriteBuffer(GSIBlock, SizeOf(TGSIBlock));
     end;
-    Stream.WriteBuffer(GSIBlock, SizeOf(TGSIBlock));
 
     for i := FromItem to ToItem do
     begin

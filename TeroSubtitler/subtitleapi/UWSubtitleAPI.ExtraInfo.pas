@@ -132,20 +132,107 @@ type
 
   { WebVTT }
 
+  PWebVTT_Info = ^TWebVTT_Info;
+  TWebVTT_Info = record
+    WriteCueIdentifiers : Boolean;
+  end;
+
   PWebVTT_ExtraInfo = ^TWebVTT_ExtraInfo;
   TWebVTT_ExtraInfo = record
-//    VerticalText : Integer;  // D:vertical (vertical growing left)
+    //VerticalText : Integer;    // D:vertical (vertical growing left)
                                // D:vertical-lr (vertical growing right)
     LinePos      : Integer;    // line:[a number]%, where [a number] is a positive integer.
                                // line:[a number], where [a number] is a positive or negative integer.
-//    TextPos      : Integer;  // T:[a number]%, where [a number] is a positive integer.
-//    TextSize     : Integer;  // S:[a number]%, where [a number] is a positive integer.
+    //TextPos      : Integer;    // T:[a number]%, where [a number] is a positive integer.
+    //TextSize     : Integer;    // S:[a number]%, where [a number] is a positive integer.
     TextAlign    : AnsiString; // align:left or align:center or align:right
   end;
+
+  { Format properties }
+
+  PFormatProperties = ^TFormatProperties;
+  TFormatProperties = record
+    AdvancedSubtitles : TXAS_Info;
+    Cavena890         : TCavena890_Info;
+    DVDSubtitle       : TDVDSubtitle_Info;
+    EBU               : TEBU_Info;
+    WebVTT            : TWebVTT_Info;
+  end;
+
+procedure DefaultFormatPropertiesSettings(AFormatProperties: PFormatProperties);
 
 // -----------------------------------------------------------------------------
 
 implementation
+
+uses UWSystem.StrUtils;
+
+// -----------------------------------------------------------------------------
+
+procedure DefaultFormatPropertiesSettings(AFormatProperties: PFormatProperties);
+begin
+  FillByte(AFormatProperties^, SizeOf(TFormatProperties), 0);
+  with AFormatProperties^ do
+  begin
+    with AdvancedSubtitles do
+    begin
+      Language  := 'en';
+      FontName  := 'arialbd.ttf';
+      FontSize  := 60;
+      FontColor := $FFFFFF;
+      X         := 10;
+      Y         := 90;
+      W         := 80;
+      H         := 10;
+      Alignment := 0;
+    end;
+
+    with Cavena890 do
+    begin
+      //AnsiStringToAnsiChar(TapeNumber, '');
+      //AnsiStringToAnsiChar(TranslatedTitle, '');
+      //AnsiStringToAnsiChar(Translator, '');
+      //AnsiStringToAnsiChar(TranslatedEpisode, '');
+      //AnsiStringToAnsiChar(Comments, '');
+      //AnsiStringToAnsiChar(PrimaryFont, '');
+      //AnsiStringToAnsiChar(OriginalTitle, '');
+      //AnsiStringToAnsiChar(SecondaryFont, '');
+      AnsiStringToAnsiChar(StartTime, '00:00:00:00');
+      //AnsiStringToAnsiChar(Producer, '');
+      //AnsiStringToAnsiChar(EpisodeTitle, '');
+      PrimaryLanguage := LangIdEnglish;
+    end;
+
+    with DVDSubtitle do
+    begin
+      Assigned := False;
+      DiskId   := '';
+      DVDTitle := '';
+      Language := 'en';
+      Author   := '';
+      Web      := 'uruworks.net';
+      Info     := '';
+      License  := '';
+    end;
+
+    with EBU do
+    begin
+      DiskFormatCode            := 0;
+      CodePageNumber            := '850';
+      DisplayStandardCode       := 0;
+      CharCodeTableNumber       := '';
+      LanguageCode              := '0A';
+      CountryOrigin             := 'URY';
+      MaxNumberDisplayableChars := '40';
+      MaxNumberDisplayableRows  := '23';
+    end;
+
+    with WebVTT do
+    begin
+      WriteCueIdentifiers := False;
+    end;
+  end;
+end;
 
 // -----------------------------------------------------------------------------
 

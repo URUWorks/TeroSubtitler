@@ -45,7 +45,7 @@ type
 implementation
 
 uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats.WebVTT.Types;
+  UWSystem.SysUtils;
 
 {
 This format allows for time notation of hours, minutes, seconds and milliseconds,
@@ -251,14 +251,8 @@ var
   i : Integer;
   Text : String;
   Align : String;
-  WriteNumbers : Boolean;
 begin
   Result  := False;
-
-  if (Subtitles.Header <> NIL) then
-    WriteNumbers := PVTTHeader(Subtitles.Header)^.WriteCueIdentifiers
-  else
-    WriteNumbers := False;
 
   StringList.Add('WEBVTT', False);
   StringList.Add('', False);
@@ -288,7 +282,7 @@ begin
         2: Align := Align + '10%';
       end;
 
-    if WriteNumbers then
+    if Subtitles.FormatProperties^.WebVTT.WriteCueIdentifiers then
       StringList.Add((i+1).ToString, False);
 
     StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz') + Align, False);
