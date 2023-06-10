@@ -22,9 +22,14 @@ unit UWSystem.SysUtils;
 interface
 
 uses
-  SysUtils, Math, LCLIntf, Graphics;
+  SysUtils, Math, LCLIntf, Graphics
+  {$IFDEF DARWIN}, Unix, sysctl{$ENDIF};
 
 // -----------------------------------------------------------------------------
+
+{$IFDEF DARWIN}
+function GetCPUArchitecture: AnsiString;
+{$ENDIF}
 
 function Iff(const Condition: Boolean; const TruePart, FalsePart: String): String; overload;
 function Iff(const Condition: Boolean; const TruePart, FalsePart: Char): Char; overload;
@@ -72,6 +77,32 @@ function MixColors(C1, C2: TColor; Opacity: Integer = 70): TColor;
 // -----------------------------------------------------------------------------
 
 implementation
+
+//------------------------------------------------------------------------------
+
+{$IFDEF DARWIN}
+function GetCPUArchitecture: AnsiString;
+var
+  mib     : array[0..1] of Integer;
+  CharLen : size_t;
+  cpuArch : PChar;
+begin
+  Result := '';
+  mib[0] := CTL_HW;
+  mib[1] := HW_MACHINE;
+
+  if fpSysCtl(PCInt(@mib), Length(mib), NIL, @CharLen, NIL, 0) <> 0 then
+    Exit;
+
+  cpuArch := GetMem(CharLen);
+  try
+    if fpSysCtl(PCInt(@mib), Length(mib), cpuArch, @CharLen, NIL, 0) = 0 then
+      Result := cpuArch;
+  finally
+    FreeMem(cpuArch);
+  end;
+end;
+{$ENDIF}
 
 //------------------------------------------------------------------------------
 
