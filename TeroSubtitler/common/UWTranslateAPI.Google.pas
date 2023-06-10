@@ -1,4 +1,4 @@
-{*
+4{*
  *  URUWorks Google Translate API
  *
  *  The contents of this file are used with permission, subject to
@@ -186,28 +186,29 @@ begin
   if (AText = '') or (SourceLng = '') or (DestLng = '') then Exit;
 
   strResponse := CallGoogleTranslate(Format(GoogleTranslateURL,[HTTPEncode(AText), SourceLng, DestLng]));
-  try
-    jdResponse    := GetJSON(strResponse);
-    jdTranslation := jdResponse.FindPath('[0]');
-    if (jdTranslation <> NIL) and (jdTranslation.JSONType = jtArray) then
-    begin
-      jaTranslation := TJSONArray(jdTranslation);
-      for Index := 0 to Pred(jaTranslation.Count) do
+  if strResponse <> '' then
+    try
+      jdResponse    := GetJSON(strResponse);
+      jdTranslation := jdResponse.FindPath('[0]');
+      if (jdTranslation <> NIL) and (jdTranslation.JSONType = jtArray) then
       begin
-        jdTranslationArray := jaTranslation[Index];
-        if (jdTranslationArray <> NIL) and (jdTranslationArray.JSONType = jtArray) then
+        jaTranslation := TJSONArray(jdTranslation);
+        for Index := 0 to Pred(jaTranslation.Count) do
         begin
-          jaTranslationArray := TJSONArray(jdTranslationArray);
-          if Result <> '' then
-            Result := Result + LineEnding + Trim(jaTranslationArray[0].AsString)
-          else
-            Result := Trim(jaTranslationArray[0].AsString);
+          jdTranslationArray := jaTranslation[Index];
+          if (jdTranslationArray <> NIL) and (jdTranslationArray.JSONType = jtArray) then
+          begin
+            jaTranslationArray := TJSONArray(jdTranslationArray);
+            if Result <> '' then
+              Result := Result + LineEnding + Trim(jaTranslationArray[0].AsString)
+            else
+              Result := Trim(jaTranslationArray[0].AsString);
+          end;
         end;
       end;
+    finally
+      jdResponse.Free;
     end;
-  finally
-    jdResponse.Free;
-  end;
 end;
 
 // -----------------------------------------------------------------------------
