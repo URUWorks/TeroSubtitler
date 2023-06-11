@@ -54,19 +54,27 @@ type
 
 const
 
-  LangIdEnglish            = $09;
   LangIdDanish             = $07;
+  LangIdEnglish            = $09;
+  LangIdSpanish            = $20;
+  LangIdFrench             = $25;
   LangIdSwedish            = $28;
+  LangIdItalian            = $2B;
+  LangIdPortuguese         = $37;
   LangIdHebrew             = $8F;
   LangIdArabic             = $80;
   LangIdRussian            = $56;
   LangIdChineseTraditional = $90;
   LangIdChineseSimplified  = $91;
 
-  LanguageId: array[0..7] of TLanguageId = (
-    (ShortName: 'en';    Hex: LangIdEnglish),
+  LanguageId: array[0..11] of TLanguageId = (
     (ShortName: 'da';    Hex: LangIdDanish),
+    (ShortName: 'en';    Hex: LangIdEnglish),
+    (ShortName: 'es';    Hex: LangIdSpanish),
+    (ShortName: 'fr';    Hex: LangIdFrench),
     (ShortName: 'sv';    Hex: LangIdSwedish),
+    (ShortName: 'it';    Hex: LangIdItalian),
+    (ShortName: 'pr';    Hex: LangIdPortuguese),
     (ShortName: 'el';    Hex: LangIdHebrew),
     (ShortName: 'ar';    Hex: LangIdArabic),
     (ShortName: 'ru';    Hex: LangIdRussian),

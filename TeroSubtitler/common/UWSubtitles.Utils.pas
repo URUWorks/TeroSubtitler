@@ -603,6 +603,9 @@ function FixHearingImpaired(const Text: String; const Enter: String = sLineBreak
 var
   PosEnter : Integer;
   A, B     : String;
+
+  sl       : TStringList;
+  i        : Integer;
 begin
   Result := '';
   if Text <> '' then
@@ -625,6 +628,24 @@ begin
     end
     else
       Result := B;
+
+    // remnants after Remove Text for Hearing Impaired
+    if Result <> Text then
+    begin
+      sl := TStringList.Create;
+      try
+        sl.Text := Result;
+        for i := sl.Count-1 downto 0 do
+        begin
+          A := sl[i].Trim;
+          if (A.IsEmpty) or (A.StartsWith('-') and (A.Length = 1)) then
+            sl.Delete(i);
+        end;
+        Result := sl.Text.Trim;
+      finally
+        sl.Free;
+      end;
+    end;
   end;
 end;
 

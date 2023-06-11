@@ -159,8 +159,8 @@ const
   TTC_ReleaseMosaic    = $1F;
 
 function CharCodeTableToEncoding(const CCT: AnsiString): Integer;
-function ReplaceTagsEBU2SW(const Text: String): String;
-function ReplaceTagsSW2EBU(const Text: String): String;
+function ReplaceTagsEBU2TS(const Text: String): String;
+function ReplaceTagsTS2EBU(const Text: String): String;
 
 //------------------------------------------------------------------------------
 
@@ -188,7 +188,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-function ReplaceTagsEBU2SW(const Text: String): String;
+function ReplaceTagsEBU2TS(const Text: String): String;
 var
   i: Integer;
 begin
@@ -201,6 +201,7 @@ begin
   // Teletext Control Codes, TO DO!
   for i := 0 to 31 do Result := ReplaceStr(Result, Chr(i), '');
 
+  Result := ReplaceStr(Result, '|', LineEnding);
   Result := ReplaceStr(Result, Chr(TF_CRLF), LineEnding);
   Result := ReplaceStr(Result, Chr(TF_ItalicsOn), '{\i1}');
   Result := ReplaceStr(Result, Chr(TF_ItalicsOff), '{\i0}');
@@ -209,14 +210,15 @@ begin
   Result := ReplaceStr(Result, Chr(TF_BoxingOn), '{\b1}');
   Result := ReplaceStr(Result, Chr(TF_BoxingOff), '{\b0}');
 
-  Result := Trim(Result);
+  Result := Result.Trim;
 end;
 
 //------------------------------------------------------------------------------
 
-function ReplaceTagsSW2EBU(const Text: String): String;
+function ReplaceTagsTS2EBU(const Text: String): String;
 begin
-  Result := ReplaceStr(Text, LineEnding, Chr(TF_CRLF));
+  Result := ReplaceStr(Text, LineEnding, '|');
+  //Result := ReplaceStr(Text, LineEnding, Chr(TF_CRLF));
   Result := ReplaceStr(Result, '{\i1}', Chr(TF_ItalicsOn));
   Result := ReplaceStr(Result, '{\i0}', Chr(TF_ItalicsOff));
   Result := ReplaceStr(Result, '{\u1}', Chr(TF_UnderlineOn));

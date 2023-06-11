@@ -1161,7 +1161,8 @@ procedure TUWSubtitles.Insert(const Index: Integer; const AInitialTime, AFinalTi
 var
   I: PUWSubtitleItem;
 begin
-  if (SkipInvalidValues and ((Trim(AText) = '')) or (AInitialTime > AFinalTime) or (AInitialTime = -1)) then Exit;
+//  if (SkipInvalidValues and ((Trim(AText) = '')) or (AInitialTime > AFinalTime) or (AInitialTime = -1)) then Exit;
+  if SkipInvalidValues and (Trim(AText) = '') and ((AInitialTime > AFinalTime) or (AInitialTime = -1)) then Exit;
 
   FExtraInfo.Insert(Index, ExtraInfo);
 

@@ -177,7 +177,7 @@ begin
               FinalTime   := ((TimeCodeOut[0]*3600)*1000) + ((TimeCodeOut[1]*60)*1000) + (TimeCodeOut[2]*1000) + Round(TimeCodeOut[3]*FrameRate);
 
               ArrayToTBytes(TextBytes, TextField, 0);
-              Text := ReplaceTagsEBU2SW(Encoding.GetString(TextBytes));
+              Text := ReplaceTagsEBU2TS(Encoding.GetString(TextBytes));
 
               if (InitialTime > -1) and (FinalTime > -1) then
               begin
@@ -234,7 +234,7 @@ begin
       with GSIBlock do
       begin
         AnsiStringToAnsiChar(CodePageNumber, EBU.CodePageNumber);
-        if EBU.DiskFormatCode = 0 then //if FPS < 29 then
+        if EBU.DiskFormatCode = 0 then
           DiskFormatCode    := DFC_25
         else
           DiskFormatCode    := DFC_30;
@@ -278,15 +278,24 @@ begin
         SubtitleNumberToByteArray(SubtitleNumber, i);
         ExtBlockNumber      := $FF;
         CumulativeStatus    := CS_Not;
-        VerticalPosition    := PEBU_ExtraInfo(Subtitles.ExtraInfo[i])^.VerticalPosition;
-        JustificationCode   := PEBU_ExtraInfo(Subtitles.ExtraInfo[i])^.JustificationCode;
+        if PEBU_ExtraInfo(Subtitles.ExtraInfo[i]) <> NIL then
+        begin
+          VerticalPosition  := PEBU_ExtraInfo(Subtitles.ExtraInfo[i])^.VerticalPosition;
+          JustificationCode := PEBU_ExtraInfo(Subtitles.ExtraInfo[i])^.JustificationCode;
+        end
+        else
+        begin
+          VerticalPosition  := 0;
+          JustificationCode := JC_Unchanged;
+        end;
         CommentFlag         := CF_TFHaveData;
         with Subtitles[i] do
         begin
           TimeCodeToByteArray(TimeCodeIn, InitialTime, FPS);
           TimeCodeToByteArray(TimeCodeOut, FinalTime, FPS);
         end;
-        Buffer := Encoding.GetBytes(ReplaceTagsSW2EBU(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])));
+        Buffer := Encoding.GetBytes(ReplaceTagsTS2EBU(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])));
+        FillByte(TextField, SizeOf(TextField), 0);
         TBytesToArray(TextField, Buffer, 0);
       end;
       Stream.WriteBuffer(TTIBlock, SizeOf(TTTIBlock));

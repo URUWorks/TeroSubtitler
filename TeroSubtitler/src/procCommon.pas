@@ -324,6 +324,8 @@ begin
       CoolBarMain.Bands[0].AutosizeWidth;
       CoolBarMain.Bands[1].AutosizeWidth;
       CoolBarMain.Bands[2].AutosizeWidth;
+
+      LayoutVideo.Width := Width div 2;
     end;
 
     Exit;

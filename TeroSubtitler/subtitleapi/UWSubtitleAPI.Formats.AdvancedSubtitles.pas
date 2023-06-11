@@ -170,53 +170,43 @@ begin
   Result := False;
   XmlDoc := TXMLDocument.Create;
   try
-    if Subtitles.Header <> NIL then
-    begin
-      with PXAS_Info(Subtitles.Header)^ do
-      begin
-        Root := XmlDoc.CreateElement('root');
-          TDOMElement(Root).SetAttribute('xml:lang', Language);
-          TDOMElement(Root).SetAttribute('xmlns', 'http://www.dvdforum.org/2005/ihd');
-          TDOMElement(Root).SetAttribute('xmlns:style', 'http://www.dvdforum.org/2005/ihd#style');
-          TDOMElement(Root).SetAttribute('xmlns:state', 'http://www.dvdforum.org/2005/ihd#state');
-          XmlDoc.Appendchild(Root);
-        Root := XmlDoc.DocumentElement;
-
-        Element := XmlDoc.CreateElement('head');
-        Root.AppendChild(Element);
-
-        Element := XmlDoc.CreateElement('styling');
-        Root.AppendChild(Element);
-
-        Element := XmlDoc.CreateElement('style');
-          TDOMElement(Root).SetAttribute('id', 'swText');
-          TDOMElement(Root).SetAttribute('style:font', 'file:///dvddisc/ADV_OBJ/' + FontName);
-          TDOMElement(Root).SetAttribute('style:fontSize', IntToStr(FontSize) + 'px');
-          TDOMElement(Root).SetAttribute('style:color', AlphaColorToRGBAString(FontColor));
-          TDOMElement(Root).SetAttribute('style:textAlign', ByteToTextAlignString(Alignment));
-        Root.AppendChild(Element);
-
-        Element := XmlDoc.CreateElement('body');
-          TDOMElement(Root).SetAttribute('xml:base', 'file:///dvddisc/ADV_OBJ/');
-        Root.AppendChild(Element);
-
-        Element := XmlDoc.CreateElement('div');
-          TDOMElement(Root).SetAttribute('style:position', 'absolute');
-          TDOMElement(Root).SetAttribute('style:x', IntToStr(X) + '%');
-          TDOMElement(Root).SetAttribute('style:y', IntToStr(Y) + '%');
-          TDOMElement(Root).SetAttribute('style:width', IntToStr(W) + '%');
-          TDOMElement(Root).SetAttribute('style:height', IntToStr(H) + '%');
-        Root.AppendChild(Element);
-
-        Node := Element;
-      end;
-    end
-    else
+    with Subtitles.FormatProperties^.AdvancedSubtitles do
     begin
       Root := XmlDoc.CreateElement('root');
-      XmlDoc.Appendchild(Root);
+        TDOMElement(Root).SetAttribute('xml:lang', Language);
+        TDOMElement(Root).SetAttribute('xmlns', 'http://www.dvdforum.org/2005/ihd');
+        TDOMElement(Root).SetAttribute('xmlns:style', 'http://www.dvdforum.org/2005/ihd#style');
+        TDOMElement(Root).SetAttribute('xmlns:state', 'http://www.dvdforum.org/2005/ihd#state');
+        XmlDoc.Appendchild(Root);
       Root := XmlDoc.DocumentElement;
-      Node := Root;
+
+      Element := XmlDoc.CreateElement('head');
+      Root.AppendChild(Element);
+
+      Element := XmlDoc.CreateElement('styling');
+      Root.AppendChild(Element);
+
+      Element := XmlDoc.CreateElement('style');
+        TDOMElement(Root).SetAttribute('id', 'swText');
+        TDOMElement(Root).SetAttribute('style:font', 'file:///dvddisc/ADV_OBJ/' + FontName);
+        TDOMElement(Root).SetAttribute('style:fontSize', IntToStr(FontSize) + 'px');
+        TDOMElement(Root).SetAttribute('style:color', AlphaColorToRGBAString(FontColor));
+        TDOMElement(Root).SetAttribute('style:textAlign', ByteToTextAlignString(Alignment));
+      Root.AppendChild(Element);
+
+      Element := XmlDoc.CreateElement('body');
+        TDOMElement(Root).SetAttribute('xml:base', 'file:///dvddisc/ADV_OBJ/');
+      Root.AppendChild(Element);
+
+      Element := XmlDoc.CreateElement('div');
+        TDOMElement(Root).SetAttribute('style:position', 'absolute');
+        TDOMElement(Root).SetAttribute('style:x', IntToStr(X) + '%');
+        TDOMElement(Root).SetAttribute('style:y', IntToStr(Y) + '%');
+        TDOMElement(Root).SetAttribute('style:width', IntToStr(W) + '%');
+        TDOMElement(Root).SetAttribute('style:height', IntToStr(H) + '%');
+      Root.AppendChild(Element);
+
+      Node := Element;
     end;
 
     for i := FromItem to ToItem do

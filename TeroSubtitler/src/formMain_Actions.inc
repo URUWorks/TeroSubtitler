@@ -774,7 +774,7 @@ end;
 procedure TfrmMain.actSMPTEExecute(Sender: TObject);
 begin
   MPV.SMPTEMode := actSMPTE.Checked;
-  //WAVE.SetSceneChangeTimeMode(actSMPTE.Checked);
+  WAVE.SetSceneChangeTimeMode(actSMPTE.Checked);
   UpdateVideoLengthString;
 end;
 

@@ -100,9 +100,11 @@ function TUWGPACTTXT.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: 
 var
   XmlDoc      : TXMLDocument;
   Node        : TDOMNode;
+  NodeList    : TDOMNodeList;
   InitialTime : Integer;
   FinalTime   : Integer;
   Text        : String;
+  i : Integer;
 begin
   Result := False;
   XmlDoc := NIL;
@@ -111,29 +113,34 @@ begin
   //ReadXMLFile(XmlDoc, SubtitleFile.FileName);
   if Assigned(XmlDoc) then
     try
-      Node := XMLFindNodeByName(XmlDoc, 'TextSample');
-      if Assigned(Node) then
-        repeat
+      i := 0;
+      NodeList := XmlDoc.GetElementsByTagName('TextSample');
+      if Assigned(NodeList) and (NodeList.Count > 0) then
+        while i < NodeList.Count do
+        begin
+          Node := NodeList.Item[i];
           // First node has InitialTime and Subtitle text
           InitialTime := StringToTime(Node.Attributes.GetNamedItem('sampleTime').NodeValue);
           if XMLHasAttribute(Node, 'text') then
             Text := HTMLTagsToTS(ReplaceEnters(XMLGetAttrValue(Node, 'text'), '<br/>', LineEnding))
           else
-            Text := HTMLTagsToTS(ReplaceEnters(Node.TextContent, '<br/>', LineEnding));
+            //Text := HTMLTagsToTS(ReplaceEnters(Node.TextContent, '<br/>', LineEnding));
+            Text := HTMLTagsToTS(ReplaceEnters(XMLExtractTextContent(Node.ChildNodes), '<br/>', LineEnding));
 
           // Next node has FinalTime
-          Node := Node.NextSibling;
+          Inc(i);
+          Node := NodeList.Item[i];
           if Assigned(Node) then
           begin
             FinalTime := StringToTime(XMLGetAttrValue(Node, 'sampleTime'));
-            if XMLHasAttribute(Node, 'text') then Node := Node.PreviousSibling;
+            if XMLHasAttribute(Node, 'text') then Dec(i);
           end
           else
             FinalTime := InitialTime + 1000;
 
           Subtitles.Add(InitialTime, FinalTime, HTMLTagsToTS(Text), '', NIL, False);
-          Node := Node.NextSibling;
-        until (Node = NIL);
+          Inc(i);
+        end;
     finally
        XmlDoc.Free;
        Result := Subtitles.Count > 0;

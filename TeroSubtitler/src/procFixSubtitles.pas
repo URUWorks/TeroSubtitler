@@ -271,6 +271,13 @@ begin
             FixedItem.Text        := tmp;
             FixedItem.ErrorsFixed := [etHearingImpaired];
             Add(FixedItem);
+
+            if tmp = '' then
+            begin
+              FixedItem.Text        := '';
+              FixedItem.ErrorsFixed := [etEmpty];
+              Add(FixedItem);
+            end;
           end;
         end;
       end;
