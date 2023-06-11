@@ -19,7 +19,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
-      <BuildNr Value="1"/>
+      <BuildNr Value="3"/>
       <StringTable CompanyName="URUWorks" LegalCopyright="Copyright © 2023 URUWorks." ProductName="tero"/>
     </VersionInfo>
     <BuildModes>

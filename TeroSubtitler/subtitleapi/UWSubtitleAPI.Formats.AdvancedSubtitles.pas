@@ -187,23 +187,23 @@ begin
       Root.AppendChild(Element);
 
       Element := XmlDoc.CreateElement('style');
-        TDOMElement(Root).SetAttribute('id', 'swText');
-        TDOMElement(Root).SetAttribute('style:font', 'file:///dvddisc/ADV_OBJ/' + FontName);
-        TDOMElement(Root).SetAttribute('style:fontSize', IntToStr(FontSize) + 'px');
-        TDOMElement(Root).SetAttribute('style:color', AlphaColorToRGBAString(FontColor));
-        TDOMElement(Root).SetAttribute('style:textAlign', ByteToTextAlignString(Alignment));
+        TDOMElement(Element).SetAttribute('id', 'swText');
+        TDOMElement(Element).SetAttribute('style:font', 'file:///dvddisc/ADV_OBJ/' + FontName);
+        TDOMElement(Element).SetAttribute('style:fontSize', IntToStr(FontSize) + 'px');
+        TDOMElement(Element).SetAttribute('style:color', AlphaColorToRGBAString(FontColor));
+        TDOMElement(Element).SetAttribute('style:textAlign', ByteToTextAlignString(Alignment));
       Root.AppendChild(Element);
 
       Element := XmlDoc.CreateElement('body');
-        TDOMElement(Root).SetAttribute('xml:base', 'file:///dvddisc/ADV_OBJ/');
+        TDOMElement(Element).SetAttribute('xml:base', 'file:///dvddisc/ADV_OBJ/');
       Root.AppendChild(Element);
 
       Element := XmlDoc.CreateElement('div');
-        TDOMElement(Root).SetAttribute('style:position', 'absolute');
-        TDOMElement(Root).SetAttribute('style:x', IntToStr(X) + '%');
-        TDOMElement(Root).SetAttribute('style:y', IntToStr(Y) + '%');
-        TDOMElement(Root).SetAttribute('style:width', IntToStr(W) + '%');
-        TDOMElement(Root).SetAttribute('style:height', IntToStr(H) + '%');
+        TDOMElement(Element).SetAttribute('style:position', 'absolute');
+        TDOMElement(Element).SetAttribute('style:x', IntToStr(X) + '%');
+        TDOMElement(Element).SetAttribute('style:y', IntToStr(Y) + '%');
+        TDOMElement(Element).SetAttribute('style:width', IntToStr(W) + '%');
+        TDOMElement(Element).SetAttribute('style:height', IntToStr(H) + '%');
       Root.AppendChild(Element);
 
       Node := Element;

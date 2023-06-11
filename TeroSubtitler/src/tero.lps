@@ -43,8 +43,8 @@
         <Filename Value="procCommon.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="304"/>
-        <CursorPos Y="327"/>
+        <TopLine Value="280"/>
+        <CursorPos X="14" Y="327"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -273,7 +273,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="401"/>
-        <CursorPos Y="418"/>
+        <CursorPos X="27" Y="414"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -608,8 +608,8 @@
         <Filename Value="procFixSubtitles.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="535"/>
-        <CursorPos X="3" Y="561"/>
+        <TopLine Value="545"/>
+        <CursorPos X="3" Y="548"/>
         <UsageCount Value="97"/>
       </Unit>
       <Unit>
@@ -739,8 +739,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="72"/>
-        <CursorPos X="5" Y="83"/>
+        <TopLine Value="248"/>
+        <CursorPos X="23" Y="265"/>
         <UsageCount Value="16"/>
       </Unit>
       <Unit>
@@ -834,6 +834,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.ExtraInfo.pas"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="30"/>
+        <CursorPos X="3" Y="47"/>
         <UsageCount Value="13"/>
       </Unit>
       <Unit>
@@ -855,8 +857,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.AdvancedSubtitles.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="153"/>
-        <CursorPos Y="168"/>
+        <TopLine Value="168"/>
+        <CursorPos X="37" Y="211"/>
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
@@ -953,8 +955,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.GPACTTXT.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="112"/>
-        <CursorPos Y="145"/>
+        <TopLine Value="169"/>
+        <CursorPos Y="193"/>
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
@@ -1060,8 +1062,6 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.SubRip.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="30"/>
-        <CursorPos X="56" Y="44"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -1389,8 +1389,7 @@
       <Unit>
         <Filename Value="..\common\UWSubtitles.Utils.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="612"/>
-        <CursorPos Y="629"/>
+        <CursorPos X="49" Y="24"/>
         <UsageCount Value="12"/>
       </Unit>
       <Unit>
@@ -2174,7 +2173,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="7">
+    <JumpHistory HistoryIndex="10">
       <Position>
         <Filename Value="formMain.pas"/>
         <Caret Line="1434" TopLine="1428"/>
@@ -2205,6 +2204,17 @@
       <Position>
         <Filename Value="formMain.pas"/>
         <Caret Line="18" Column="37"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="13" Column="33"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="8" Column="18"/>
       </Position>
     </JumpHistory>
     <RunParams>
