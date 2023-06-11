@@ -660,7 +660,7 @@
     <Failed>Failed.</Failed>    
     <Success>Success.</Success>
     <NewVersionFound>A new version was found.</NewVersionFound>
-    <SeeChangeList>Do you want to see the change list?</SeeChangeList>
+    <SeeChangeList>Do you want to see the changelog?</SeeChangeList>
     <NoNewVersion>You're using the latest version.</NoNewVersion>    
     <ErrorExecuting>Error executing '%s'.</ErrorExecuting> 
   </CommonStrings>
