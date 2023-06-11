@@ -550,7 +550,7 @@
       <lblFFMPEG>ffmpeg:</lblFFMPEG>
       <lblffmpegDesc>La solución absoluta para la extracción de audio y cambios de escena.</lblffmpegDesc>
       <lblWhisper>whisper.cpp:</lblWhisper>
-      <lblWhisperDesc>Reconocimiento automático de voz usando en audio a texto.</lblWhisperDesc>                
+      <lblWhisperDesc>Reconocimiento automático de voz usado en audio a texto.</lblWhisperDesc>                
     </Section>
   </Form>  
   <Form Name="frmDownload" Caption="">
