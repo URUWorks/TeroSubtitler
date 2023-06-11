@@ -1,4 +1,4 @@
-4{*
+{*
  *  URUWorks Google Translate API
  *
  *  The contents of this file are used with permission, subject to
