@@ -764,7 +764,8 @@
     <HHMMSSZZZ>HH:MM:SS.ZZZ</HHMMSSZZZ>
     <HHMMSSFF>HH:MM:SS:FF</HHMMSSFF>
     <edl>Listas de decisiones de edición</edl>    
-    <shotchanges>Archivos de texto</shotchanges>              
+    <shotchanges>Archivos de texto</shotchanges>
+    <xml>XML</xml>              
   </ShotChangesStrings>                                                                
   <CompareStrings>
     <Index>Indice</Index>

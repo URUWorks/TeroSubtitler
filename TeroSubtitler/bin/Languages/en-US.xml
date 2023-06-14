@@ -765,6 +765,7 @@
     <HHMMSSFF>HH:MM:SS:FF</HHMMSSFF>      
     <edl>Edit Decision Lists</edl>    
     <shotchanges>Text files</shotchanges>
+    <xml>XML</xml>
   </ShotChangesStrings>
   <CompareStrings>
     <Index>Index</Index>

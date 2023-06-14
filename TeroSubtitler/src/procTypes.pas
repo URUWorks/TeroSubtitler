@@ -54,9 +54,9 @@ const
     '.wav', '.peak'
   );
 
-  TShotChangeExts : array[0..1] of String =
+  TShotChangeExts : array[0..2] of String =
   (
-    '.edl', '.shotchanges'
+    '.edl', '.shotchanges', '.xml'
   );
 
   TUnicodeSymbols : array[0..8] of String =

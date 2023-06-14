@@ -84,7 +84,7 @@ type
 implementation
 
 uses
-  UWSystem.TimeUtils, UWSystem.StrUtils;
+  UWSystem.TimeUtils, UWSystem.StrUtils, laz2_XMLRead, laz2_DOM;
 
 // -----------------------------------------------------------------------------
 
@@ -189,100 +189,151 @@ var
   s, sx: String;
   x, i: Integer;
   Item: TItem;
+
+  XmlDoc: TXMLDocument;
+  Node, SubNode: TDOMNode;
+  NodeList: TDOMNodeList;
 begin
   if not FileExists(AFileName) then Exit;
   Clear;
 
-  SL := TStringList.Create;
-  try
-    SL.LoadFromFile(AFileName);
-    if SL.Count < 2 then Exit;
-
-    if SL[0].StartsWith('TITLE') then
-    begin
-      x := Pos(':', SL[0]);
-      FHeader.Title := Trim(Copy(SL[0], x+1, SL[0].Length-x));
-      SL.Delete(0);
+  if AFileName.ToLower.EndsWith('.xml') then // XML?
+  begin
+    XmlDoc := NIL;
+    try
+      ReadXMLFile(XmlDoc, AFileName);
+    except
+      Exit;
     end;
 
-    if SL[0].StartsWith('FCM') then
+    if Assigned(XmlDoc) then
     begin
-      x := Pos(' ', SL[0]);
-      s := Copy(SL[0], x+1, SL[0].Length-x);
-      if s = 'NON-DROP FRAME' then
-        FHeader.FCM := fcmNONDROPFRAME
-      else
-        FHeader.FCM := fcmDROPFRAME;
-      SL.Delete(0);
-    end;
-
-    for i := 0 to SL.Count-1 do
-      with Item do
+      i := 0;
+      NodeList := XmlDoc.GetElementsByTagName('clipitem');
+      if Assigned(NodeList) and (NodeList.Count > 0) then
       begin
-        s  := SL[i];
-        sx := CopyAndDel(s, ' ');
-        s  := s.Trim;
-
-        Index := StrToIntDef(sx, 0);
-        if Index = 0 then Continue;
-
-        if sx.Length = 6 then // 000001
+        with Item do
         begin
-          ReelName := CopyAndDel(s, '|');
-          ClipName := CopyAndDel(s, ' ');
-
-          sx := CopyAndDel(s, ' ');
-          if sx = 'V' then
-            TypeOfTrack := totV
-          else if sx.StartsWith('A') then
-            TypeOfTrack := totAA
-          else
-            TypeOfTrack := totAAV;
-
-          s := Trim(s);
-
-          sx := CopyAndDel(s, ' ');
-          if sx = 'C' then
-            TypeOfCut := tocC;
-
-          s := s.Trim;
-
-          ClipIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-          ClipOut := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-          TapeIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-          TapeOut := StringToTime(s, False, FFPS);
-
-          AddItem(Item);
-        end
-        else
-        begin // 001
-          sx := CopyAndDel(s, ' '); // AX
-          sx := CopyAndDel(s, ' '); // AA..
-          if sx = 'V' then
-            TypeOfTrack := totV
-          else if sx = 'AA' then
-            TypeOfTrack := totAA
-          else
-            TypeOfTrack := totAAV;
-
-          s := s.Trim;
-
-          sx := CopyAndDel(s, ' '); // C
-          if sx = 'C' then
-            TypeOfCut := tocC;
-
-          s := s.Trim;
-
-          ClipIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-          ClipOut := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-          TapeIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-          TapeOut := StringToTime(s, False, FFPS);
-
-          AddItem(Item);
+          while i < NodeList.Count do
+          begin
+            Node := NodeList.Item[i];
+            SubNode := Node.FindNode('start');
+            if Assigned(SubNode) then
+            begin
+              Index       := i+1;
+              ReelName    := '';
+              TypeOfTrack := totV;
+              TypeOfCut   := tocC;
+              ClipName    := '';
+              Comment     := '';
+              ClipIn      := 0;
+              ClipOut     := FramesToTime(StrToIntDef(SubNode.TextContent, 0), FFPS);
+              TapeIn      := 0;
+              TapeOut     := 0;
+              AddItem(Item);
+            end;
+            Inc(i);
+          end;
         end;
       end;
-  finally
-    SL.Free;
+    end;
+  end
+  else // TEXT?
+  begin
+    SL := TStringList.Create;
+    try
+      SL.LoadFromFile(AFileName);
+      if SL.Count < 2 then Exit;
+
+      if SL[0].StartsWith('TITLE') then
+      begin
+        x := Pos(':', SL[0]);
+        FHeader.Title := Trim(Copy(SL[0], x+1, SL[0].Length-x));
+        SL.Delete(0);
+      end;
+
+      if SL[0].StartsWith('FCM') then
+      begin
+        x := Pos(' ', SL[0]);
+        s := Copy(SL[0], x+1, SL[0].Length-x);
+        if s = 'NON-DROP FRAME' then
+          FHeader.FCM := fcmNONDROPFRAME
+        else
+          FHeader.FCM := fcmDROPFRAME;
+        SL.Delete(0);
+      end;
+
+      for i := 0 to SL.Count-1 do
+        with Item do
+        begin
+          s  := SL[i];
+          sx := CopyAndDel(s, ' ');
+          s  := s.Trim;
+
+          Index := StrToIntDef(sx, 0);
+          if Index = 0 then Continue;
+
+          if sx.Length = 6 then // 000001
+          begin
+            ReelName := CopyAndDel(s, '|');
+            ClipName := CopyAndDel(s, ' ');
+
+            sx := CopyAndDel(s, ' ');
+            if sx = 'V' then
+              TypeOfTrack := totV
+            else if sx.StartsWith('A') then
+              TypeOfTrack := totAA
+            else
+              TypeOfTrack := totAAV;
+
+            s := Trim(s);
+
+            sx := CopyAndDel(s, ' ');
+            if sx = 'C' then
+              TypeOfCut := tocC;
+
+            s := s.Trim;
+
+            ClipIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
+            ClipOut := StringToTime(CopyAndDel(s, ' '), False, FFPS);
+            TapeIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
+            TapeOut := StringToTime(s, False, FFPS);
+
+            AddItem(Item);
+          end
+          else
+          begin // 001
+            sx := CopyAndDel(s, ' '); // AX
+            s := s.Trim;
+
+            sx := CopyAndDel(s, ' '); // AA...
+            s := s.Trim;
+            if sx = 'V' then
+              TypeOfTrack := totV
+            else if sx = 'AA' then
+              TypeOfTrack := totAA
+            else
+              TypeOfTrack := totAAV;
+
+            s := s.Trim;
+
+            sx := CopyAndDel(s, ' '); // C
+            if sx = 'C' then
+              TypeOfCut := tocC;
+
+            s := s.Trim;
+
+            ClipIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
+            ClipOut := StringToTime(CopyAndDel(s, ' '), False, FFPS);
+            TapeIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
+            TapeOut := StringToTime(s, False, FFPS);
+
+            AddItem(Item);
+          end;
+        end;
+    finally
+      SL.Free;
+    end;
   end;
 end;
 
@@ -374,4 +425,4 @@ end;
 // -----------------------------------------------------------------------------
 
 end.
-4
+

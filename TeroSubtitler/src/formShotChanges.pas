@@ -213,7 +213,7 @@ begin
 
     if Execute then
     begin
-      if FileName.EndsWith('.edl') then
+      if FileName.ToLower.EndsWith('.edl') or FileName.ToLower.EndsWith('.xml') then
       begin
         edl := TEDL.Create(FileName, '', GetFPS);
         try
