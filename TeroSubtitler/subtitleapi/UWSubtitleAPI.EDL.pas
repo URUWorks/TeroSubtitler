@@ -72,6 +72,7 @@ type
     function Ready: Boolean;
     procedure LoadFromFile(const AFileName: String);
     function SaveToFile(const AFileName: String): Boolean;
+    function SaveToFileXML(const AFileName: String): Boolean;
     function AddItem(const AItem: TItem): Integer; overload;
     function AddItem(const AIndex: Cardinal; const AReelName: String; const ATypeOfTrack: TTypeOfTrack; const ATypeOfCut: TTypeOfCut; const AClipIn, AClipOut, ATapeIn, ATapeOut: Cardinal; const AClipName, AComment: String): Integer; overload;
     property FileName : String   read FFileName write FFileName;
@@ -84,7 +85,7 @@ type
 implementation
 
 uses
-  UWSystem.TimeUtils, UWSystem.StrUtils, laz2_XMLRead, laz2_DOM;
+  UWSystem.TimeUtils, UWSystem.StrUtils, laz2_XMLRead, laz2_DOM, laz2_XMLWrite;
 
 // -----------------------------------------------------------------------------
 
@@ -197,7 +198,7 @@ begin
   if not FileExists(AFileName) then Exit;
   Clear;
 
-  if AFileName.ToLower.EndsWith('.xml') then // XML?
+  if AFileName.ToLower.EndsWith('.xml') then // XML
   begin
     XmlDoc := NIL;
     try
@@ -207,7 +208,7 @@ begin
     end;
 
     if Assigned(XmlDoc) then
-    begin
+    try
       i := 0;
       NodeList := XmlDoc.GetElementsByTagName('clipitem');
       if Assigned(NodeList) and (NodeList.Count > 0) then
@@ -236,9 +237,11 @@ begin
           end;
         end;
       end;
+    finally
+      XmlDoc.Free;
     end;
   end
-  else // TEXT?
+  else // TEXT
   begin
     SL := TStringList.Create;
     try
@@ -348,32 +351,116 @@ begin
   Result := False;
   if FList.Count = 0 then Exit;
 
-  SL := TStringList.Create;
-  try
-    f := ExtractFileName(FHeader.Title);
-    FHeader.Title := ChangeFileExt(f, '');
+  if AFileName.ToLower.EndsWith('.xml') then // XML
+    SaveToFileXML(AFileName)
+  else
+  begin
+    SL := TStringList.Create;
+    try
+      f := ExtractFileName(FHeader.Title);
+      FHeader.Title := ChangeFileExt(f, '');
 
-    SL.Add('TITLE : ' + FHeader.Title);
+      SL.Add('TITLE : ' + FHeader.Title);
+      for i := 0 to FList.Count-1 do
+        with FList.Items[i]^ do
+        begin
+          s := Format('%s  %s|%s %s     %s        %s %s %s %s',
+            [AddChar('0', Index.ToString, 6),
+            ReplaceString(FHeader.Title, ' ', '_'),
+            ReplaceString(f, ' ', '_'),
+            totToStr(TypeOfTrack),
+            tocToStr(TypeOfCut),
+            TimeToString(ClipIn, 'hh:mm:ss:ff', FFPS),
+            TimeToString(ClipOut, 'hh:mm:ss:ff', FFPS),
+            TimeToString(ClipIn, 'hh:mm:ss:ff', FFPS),
+            TimeToString(ClipOut, 'hh:mm:ss:ff', FFPS)]);
+
+          SL.Add(s);
+        end;
+      SL.SaveToFile(AFileName);
+      Result := True;
+    finally
+      SL.Free;
+    end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TEDL.SaveToFileXML(const AFileName: String): Boolean;
+var
+  XmlDoc : TXMLDocument;
+  Root, Element, Node, SubNode, XNode : TDOMNode;
+  i : Integer;
+begin
+  Result := False;
+  if FList.Count = 0 then Exit;
+
+  XmlDoc := TXMLDocument.Create;
+  try
+//    XmlDoc.AppendChild(XmlDoc.CreateComment('!DOCTYPE xmeml'));
+
+    Root := XmlDoc.CreateElement('xmeml');
+      TDOMElement(Root).SetAttribute('version', '5');
+      XmlDoc.Appendchild(Root);
+    Root := XmlDoc.DocumentElement;
+
+    Element := XmlDoc.CreateElement('sequence');
+      TDOMElement(Element).SetAttribute('id', 'Sequence 1 ');
+//      Node := XmlDoc.CreateElement('uuid');
+//      Node.TextContent := '';
+//      Element.AppendChild(Node);
+      Node := XmlDoc.CreateElement('updatebehavior');
+      Node.TextContent := 'add';
+      Element.AppendChild(Node);
+      Node := XmlDoc.CreateElement('name');
+      Node.TextContent := 'Sequence 1';
+      Element.AppendChild(Node);
+//      Node := XmlDoc.CreateElement('duration');
+//      Node.TextContent := '';
+//      Element.AppendChild(Node);
+      Node := XmlDoc.CreateElement('in');
+      Node.TextContent := '-1';
+      Element.AppendChild(Node);
+      Node := XmlDoc.CreateElement('out');
+      Node.TextContent := '-1';
+      Element.AppendChild(Node);
+      Node := XmlDoc.CreateElement('ismasterclip');
+      Node.TextContent := 'FALSE';
+      Element.AppendChild(Node);
+      Node := XmlDoc.CreateElement('rate');
+        SubNode := XmlDoc.CreateElement('ntsc');
+        SubNode.TextContent := 'TRUE';
+      Node.AppendChild(SubNode);
+//      SubNode := XmlDoc.CreateElement('timebase');
+//        SubNode.TextContent := '';
+//      Node.AppendChild(SubNode);
+      Element.AppendChild(Node);
+      Node := XmlDoc.CreateElement('media');
+      Element.AppendChild(Node);
+      SubNode := XmlDoc.CreateElement('video');
+      Node.AppendChild(SubNode);
+      Node := XmlDoc.CreateElement('track'); // Node = TRACK
+      SubNode.AppendChild(Node);
+      //
+    Root.AppendChild(Element);
+
     for i := 0 to FList.Count-1 do
       with FList.Items[i]^ do
       begin
-        s := Format('%s  %s|%s %s     %s        %s %s %s %s',
-          [AddChar('0', Index.ToString, 6),
-          ReplaceString(FHeader.Title, ' ', '_'),
-          ReplaceString(f, ' ', '_'),
-          totToStr(TypeOfTrack),
-          tocToStr(TypeOfCut),
-          TimeToString(ClipIn, 'hh:mm:ss:ff', FFPS),
-          TimeToString(ClipOut, 'hh:mm:ss:ff', FFPS),
-          TimeToString(ClipIn, 'hh:mm:ss:ff', FFPS),
-          TimeToString(ClipOut, 'hh:mm:ss:ff', FFPS)]);
-
-        SL.Add(s);
+        SubNode := XmlDoc.CreateElement('clipitem');
+          XNode := XmlDoc.CreateElement('start');
+          XNode.TextContent := TimeToFrames(ClipOut, FFPS).ToString;
+        SubNode.AppendChild(XNode);
+        Node.AppendChild(SubNode);
       end;
-    SL.SaveToFile(AFileName);
-    Result := True;
+    try
+      WriteXML(XmlDoc, AFileName);
+      Result := True;
+    except
+    end;
   finally
-    SL.Free;
+    XmlDoc.Free;
   end;
 end;
 

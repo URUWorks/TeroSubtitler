@@ -182,6 +182,9 @@ begin
         else
           v := StringToTime(mmoTimes.Lines[i]);
 
+        if frmMain.MPV.SMPTEMode then
+          v := Round(v / 1.001);
+
         SC[i] := v;
       end;
 
@@ -267,7 +270,7 @@ begin
       Options  := [ofOverwritePrompt, ofEnableSizing];
       if Execute then
       begin
-        if FileName.EndsWith('.edl') then
+        if FileName.ToLower.EndsWith('.edl') or FileName.ToLower.EndsWith('.xml') then
         begin
           edl := TEDL.Create(FileName, frmMain.MPV.FileName, GetFPS);
           try
