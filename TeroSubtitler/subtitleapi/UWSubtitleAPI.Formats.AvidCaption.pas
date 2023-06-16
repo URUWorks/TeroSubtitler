@@ -91,7 +91,8 @@ begin
   if Contains('@ This file ', SubtitleFile[Row]) or Contains('<begin subtitles>', SubtitleFile[Row]) or
     ((TimeInFormat(Copy(SubtitleFile[Row], 1, 11), ATimeFormat))) and
     (TimeInFormat(Copy(SubtitleFile[Row], 13, 11), ATimeFormat)) and
-    (Copy(SubtitleFile[Row], 12, 1) = ' ')  then
+    (Copy(SubtitleFile[Row], 12, 1) = ' ') and
+    (SubtitleFile[Row].Length = 23) then
     Result := True
   else
     Result := False;
@@ -109,7 +110,7 @@ begin
   Result := False;
   try
     i := 0;
-    while i < SubtitleFile.Count do
+    while i < SubtitleFile.Count-1 do
     begin
       if (TimeInFormat(Copy(SubtitleFile[i], 1, 11), ATimeFormat)) and
          (TimeInFormat(Copy(SubtitleFile[i], 13, 11), ATimeFormat)) then
@@ -119,7 +120,7 @@ begin
         Text        := '';
 
         Inc(i);
-        while (i < SubtitleFile.Count) and
+        while (i < SubtitleFile.Count-1) and not SubtitleFile[i].IsEmpty and
               (not TimeInFormat(Copy(SubtitleFile[i], 1, 11), ATimeFormat)) and
               (not TimeInFormat(Copy(SubtitleFile[i], 13, 11), ATimeFormat)) do
         begin
@@ -132,7 +133,7 @@ begin
         end;
         Dec(i);
 
-        if (InitialTime > -1) and (FinalTime > -1) then
+        if (InitialTime >= 0) and (FinalTime > 0) then
           Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
       end;
       Inc(i);
@@ -150,7 +151,7 @@ var
 begin
   Result  := False;
 
-  StringList.Add('@ This file written with the Avid Caption plugin, version 1');
+  StringList.Add('@ This file was written with Tero Subtitler');
   StringList.Add('', False);
   StringList.Add('<begin subtitles>');
 

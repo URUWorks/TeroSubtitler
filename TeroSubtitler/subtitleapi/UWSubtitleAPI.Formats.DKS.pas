@@ -109,7 +109,9 @@ begin
         if FinalTime = -1 then FinalTime := InitialTime + 2000;
 
         Text := ReplaceString(Copy(SubtitleFile[i], 11, Length(SubtitleFile[i])), '[br]', LineEnding);
-        Subtitles.Add(InitialTime, FinalTime, Text, '');
+
+        if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+          Subtitles.Add(InitialTime, FinalTime, Text, '');
       end;
     end;
   finally
@@ -133,7 +135,7 @@ begin
     if (Subtitles[i].InitialTime = Subtitles[i].FinalTime) then
       Subtitles.FinalTime[i] := Subtitles[i].InitialTime + 1000;
 
-    StringList.Add('[' + TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss') + ']' + ReplaceEnters(Text,'[br]'), False);
+    StringList.Add('[' + TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss') + ']' + ReplaceEnters(Text, LineEnding, '[br]'), False);
     StringList.Add('[' + TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss') + ']', False);
   end;
 

@@ -86,8 +86,8 @@ end;
 
 function TUWFABSubtitler.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
 begin
-  if (TimeInFormat(Copy(SubtitleFile[Row], 1, 11), 'hh:mm:ss:zz')) and
-     (TimeInFormat(Copy(SubtitleFile[Row], 14, 11), 'hh:mm:ss:zz')) and
+  if (TimeInFormat(Copy(SubtitleFile[Row], 1, 11), 'hh:mm:ss:ff')) and
+     (TimeInFormat(Copy(SubtitleFile[Row], 14, 11), 'hh:mm:ss:ff')) and
      (Pos('  ', SubtitleFile[Row]) = 12) then
     Result := True
   else
@@ -105,30 +105,28 @@ var
 begin
   Result := False;
   try
-    for i := 0 to SubtitleFile.Count-1 do
+    i := 0;
+    while i < SubtitleFile.Count-1 do
     begin
-      InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 8));
-      FinalTime   := StringToTime(Copy(SubtitleFile[i], 14, 8));
+      InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11), False, FPS);
+      FinalTime   := StringToTime(Copy(SubtitleFile[i], 14, 11), False, FPS);
 
-      if IsInteger(Copy(SubtitleFile[i], 10, 2)) then
-        InitialTime := InitialTime + FramesToTime(StrToInt(Copy(SubtitleFile[i], 10, 2)), FPS);
-      if IsInteger(Copy(SubtitleFile[i], 23, 2)) then
-        FinalTime := FinalTime + FramesToTime(StrToInt(Copy(SubtitleFile[i], 23, 2)), FPS);
+      Inc(i);
 
-      c    := 1;
       Text := '';
-      while (i+c <= (SubtitleFile.Count-1)) and
-            (StringToTime(Copy(SubtitleFile[i+c], 1, 8)) = -1) and
-            (StringToTime(Copy(SubtitleFile[i+c], 14, 8)) = -1) do
+      while (i <= (SubtitleFile.Count-1)) and
+            (StringToTime(Copy(SubtitleFile[i], 1, 11)) = 0) and
+            (StringToTime(Copy(SubtitleFile[i], 14, 11)) = 0) do
       begin
         if Text <> '' then
-          Text := Text + LineEnding + SubtitleFile[i+c]
+          Text := Text + LineEnding + SubtitleFile[i]
         else
-          Text := SubtitleFile[i+c];
-        Inc(c);
+          Text := SubtitleFile[i];
+
+        Inc(i);
       end;
 
-      if (InitialTime > -1) and (FinalTime > -1) then
+      if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
         Subtitles.Add(InitialTime, FinalTime, Text, '');
     end;
   finally
@@ -152,11 +150,13 @@ begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
 
     // Time format is hh:mm:ss:ff
-    InitialTime := TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:') +
-                     AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].InitialTime, FPS)), 2);
+    InitialTime := TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:ff', FPS);
+//    InitialTime := TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:') +
+//                     AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].InitialTime, FPS)), 2);
 
-    FinalTime := TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:') +
-                   AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].FinalTime, FPS)), 2);
+    FinalTime := TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:ff', FPS);
+//    FinalTime := TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:') +
+//                   AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].FinalTime, FPS)), 2);
 
     StringList.Add(InitialTime + '  ' + FinalTime);
     StringList.Add(Text, False);

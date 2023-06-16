@@ -77,9 +77,10 @@ end;
 
 function TUWKaraokeLyricsVKT.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
 begin
-  if (TimeInFormat(Copy(SubtitleFile[Row], 2, 8), 'mm:ss.zz')) and
-     (Copy(SubtitleFile[Row], 1, 1) = '[') and
-     (Copy(SubtitleFile[Row], 10, 1) = ']') then
+  //if (IsInteger(Copy(SubtitleFile[Row], 2, 5))) and
+  if (Copy(SubtitleFile[Row], 1, 1) = '{') and
+    (Copy(SubtitleFile[Row], 7, 1) = ' ') and
+    (Copy(SubtitleFile[Row], Length(SubtitleFile[Row]), 1) = '}') then
     Result := True
   else
     Result := False;
@@ -97,18 +98,19 @@ begin
   Result := False;
   try
     for i := 0 to SubtitleFile.Count-1 do
-    begin
-      InitialTime := StringToTime(Copy(SubtitleFile[i], 2, Pos(']', SubtitleFile[i]) - 2), True);
-      if i+1 <= (SubtitleFile.Count-1) then
-        FinalTime := StringToTime(Copy(SubtitleFile[i+1], 2, Pos(']', SubtitleFile[i+1]) - 2), True)
-      else
-        FinalTime := InitialTime + 2000;
+      if SubtitleFile[i].StartsWith('{') then
+      begin
+        InitialTime := StrToInt(Copy(SubtitleFile[i], 2, Pos(' ', SubtitleFile[i]) - 2))*10;
+        if (i+1 <= (SubtitleFile.Count-1)) and (Copy(SubtitleFile[i+1], 1, 1) = '{') then
+          FinalTime := StrToInt(Copy(SubtitleFile[i+1], 2, Pos(' ', SubtitleFile[i+1]) - 2))*10
+        else
+          FinalTime := InitialTime + 2000;
 
-      Text := Copy(SubtitleFile[i], Pos(']', SubtitleFile[i]) + 1, Length(SubtitleFile[i]));
+        Text := Copy(SubtitleFile[i], Pos(' ', SubtitleFile[i]) + 1, LastDelimiter('}', SubtitleFile[i]) - (Pos(' ', SubtitleFile[i]) + 1));
 
-      if (InitialTime > -1) and (FinalTime > -1) then
-        Subtitles.Add(InitialTime, FinalTime, Text, '');
-    end;
+        if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+          Subtitles.Add(InitialTime, FinalTime, Text, '');
+      end;
   finally
     Result := Subtitles.Count > 0;
   end;
@@ -118,23 +120,39 @@ end;
 
 function TUWKaraokeLyricsVKT.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
-  i    : Integer;
-  Text : String;
+  i       : Integer;
+  Text    : String;
+  DateSep : Char;
+  DateFor : String;
 begin
   Result  := False;
 
-  StringList.Add('[ti:Project title]', False);
-  StringList.Add('[ar:Project author]', False);
-  StringList.Add('[la:af]', False);
-  StringList.Add('Project title', False);
-  StringList.Add('', False);
+  StringList.Add('# <HEAD>', False);
+  StringList.Add('# FRAME RATE=MP3', False);
+  StringList.Add('# CREATOR=Project author', False);
+  StringList.Add('# VIDEO SOURCE=C:\Untitled.avi', False);
+  // DATE
+  DateSep         := SysUtils.FormatSettings.DateSeparator;
+  DateFor         := SysUtils.FormatSettings.ShortDateFormat;
+  SysUtils.FormatSettings.DateSeparator   := '-';
+  SysUtils.FormatSettings.ShortDateFormat := 'yyyy/mm/dd';
+  StringList.Add('# DATE=' + DateToStr(Date), False);
+  SysUtils.FormatSettings.DateSeparator   := DateSep;
+  SysUtils.FormatSettings.ShortDateFormat := DateFor;
+  //
+  StringList.Add('# </HEAD>', False);
+  StringList.Add('#', False);
 
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add('[' + TimeToString(Subtitles[i].InitialTime, 'mm:ss.zz') + ']' + ReplaceEnters(Text, ''), False);
-    StringList.Add('[' + TimeToString(Subtitles[i].FinalTime, 'mm:ss.zz') + ']');
+    StringList.Add('{' + IntToStr(Subtitles[i].InitialTime div 10).PadLeft(5, '0') + ' ' + ReplaceEnters(Text, LineEnding, ' ') + '}', False);
+    StringList.Add('{' + IntToStr(Subtitles[i].FinalTime div 10).PadLeft(5, '0') + ' }');
   end;
+
+  StringList.Add('', False);
+  StringList.Add('#', False);
+  StringList.Add('# THE END.', False);
 
   try
     StringList.SaveToFile(FileName, Encoding);

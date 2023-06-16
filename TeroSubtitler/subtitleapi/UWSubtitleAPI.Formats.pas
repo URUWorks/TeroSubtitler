@@ -34,7 +34,7 @@ const
     'Advanced SubStation Alpha',
     'Advanced Subtitles',
     'AQTitle',
-    'Avid Caption',
+    'Avid DS Caption',
     'Captions 32',
     'Captions Inc.',
     'Cavena 890',

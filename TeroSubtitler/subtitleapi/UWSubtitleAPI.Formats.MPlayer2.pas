@@ -115,7 +115,7 @@ begin
 
         Text := ReplaceString(Copy(SubtitleFile[i], Pos(']', SubtitleFile[i], Pos(']', SubtitleFile[i]) + 1) + 1, Length(SubtitleFile[i])), '|', LineEnding);
 
-      if (InitialTime > -1) and (FinalTime > -1) then
+      if (InitialTime >= 0) and (FinalTime > 0) then
         Subtitles.Add(InitialTime, FinalTime, Text, '');
       end;
     end;

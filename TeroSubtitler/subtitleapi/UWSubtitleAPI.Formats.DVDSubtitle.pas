@@ -105,7 +105,7 @@ begin
         Text := '';
         while (i+c < (SubtitleFile.Count-1)) and (SubtitleFile[i+c] <> '}') do
         begin
-          If Text <> '' then
+          if Text <> '' then
             Text := Text + LineEnding + SubtitleFile[i+c]
           else
             Text := SubtitleFile[i+c];
@@ -117,7 +117,7 @@ begin
         FinalTime := StringToTime(Copy(SubtitleFile[i+c], 4, 11));
         if FinalTime = -1 then FinalTime := InitialTime + 2000;
 
-      if (InitialTime > -1) and (FinalTime > -1) then
+      if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
         Subtitles.Add(InitialTime, FinalTime, Text, '');
       end;
     end;

@@ -146,7 +146,7 @@ begin
         else
           ExtraInfo := NIL;
 
-        if (InitialTime > -1) and (FinalTime > -1) then
+        if (InitialTime >= 0) and (FinalTime > 0) then
         begin
           Inc(i);
           Text := '';

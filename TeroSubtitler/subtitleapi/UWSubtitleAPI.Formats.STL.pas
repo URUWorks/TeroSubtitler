@@ -168,7 +168,7 @@ begin
         FinalTime   := -1;
       end;
 
-      if (InitialTime > -1) and (FinalTime > -1) then
+      if (InitialTime >= 0) and (FinalTime > 0) then
       begin
         Text := STLTagsToSW(ReplaceEnters(Text, '|', LineEnding));
         Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);

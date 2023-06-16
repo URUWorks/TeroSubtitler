@@ -165,7 +165,7 @@ begin
         // tags
         Text := MicroDVDTagsToTS(Text);
 
-        if (InitialTime > -1) and (FinalTime > -1) then
+        if (InitialTime >= 0) and (FinalTime > 0) then
           Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
       end;
     end;

@@ -112,11 +112,11 @@ begin
 
           Inc(i);
         end;
-        InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11));
-        FinalTime   := StringToTime(Copy(SubtitleFile[i], 13, 11));
+        InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11), False, FPS);
+        FinalTime   := StringToTime(Copy(SubtitleFile[i], 13, 11), False, FPS);
 
         Text := HTMLTagsToTS(Text);
-        if (InitialTime > -1) and (FinalTime > -1) then
+        if (InitialTime >= 0) and (FinalTime > 0) then
           Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
       end;
 

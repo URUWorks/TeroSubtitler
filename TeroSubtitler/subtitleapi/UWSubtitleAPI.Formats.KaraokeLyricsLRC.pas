@@ -97,18 +97,19 @@ begin
   Result := False;
   try
     for i := 0 to SubtitleFile.Count-1 do
-    begin
-      InitialTime := StringToTime(Copy(SubtitleFile[i], 2, Pos(']', SubtitleFile[i]) - 2), True);
-      if i+1 <= (SubtitleFile.Count-1) then
-        FinalTime := StringToTime(Copy(SubtitleFile[i+1], 2, Pos(']', SubtitleFile[i+1]) - 2), True)
-      else
-        FinalTime := InitialTime + 2000;
+      if SubtitleFile[i].StartsWith('[') and (Pos(']', SubtitleFile[i]) = 10) then
+      begin
+        InitialTime := StringToTime(Copy(SubtitleFile[i], 2, Pos(']', SubtitleFile[i]) - 2), True);
+        if i+1 <= (SubtitleFile.Count-1) then
+          FinalTime := StringToTime(Copy(SubtitleFile[i+1], 2, Pos(']', SubtitleFile[i+1]) - 2), True)
+        else
+          FinalTime := InitialTime + 2000;
 
-      Text := Copy(SubtitleFile[i], Pos(']', SubtitleFile[i]) + 1, Length(SubtitleFile[i]));
+        Text := Copy(SubtitleFile[i], Pos(']', SubtitleFile[i]) + 1, Length(SubtitleFile[i]));
 
-      if (InitialTime > -1) and (FinalTime > -1) then
-        Subtitles.Add(InitialTime, FinalTime, Text, '');
-    end;
+        if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+          Subtitles.Add(InitialTime, FinalTime, Text, '');
+      end;
   finally
     Result := Subtitles.Count > 0;
   end;
@@ -132,7 +133,7 @@ begin
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add('[' + TimeToString(Subtitles[i].InitialTime, 'mm:ss.zz') + ']' + ReplaceEnters(Text, ''), False);
+    StringList.Add('[' + TimeToString(Subtitles[i].InitialTime, 'mm:ss.zz') + ']' + ReplaceEnters(Text, LineEnding, ' '), False);
     StringList.Add('[' + TimeToString(Subtitles[i].FinalTime, 'mm:ss.zz') + ']');
   end;
 

@@ -108,7 +108,8 @@ begin
         FinalTime   := StringToTime(Copy(SubtitleFile[i+1], 1, 11));
         Text        := ReplaceString(Copy(SubtitleFile[i], 18, Length(SubtitleFile[i])), '\', LineEnding);
 
-        Subtitles.Add(InitialTime, FinalTime, Text, '');
+        if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+          Subtitles.Add(InitialTime, FinalTime, Text, '');
       end;
     end;
   finally

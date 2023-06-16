@@ -141,10 +141,10 @@ end;
 function TUWMacDVDStudioPro.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
 begin
   //00:00:03:00 00:00:08:00 Text<P>Text
-  if (TimeInFormat(Copy(SubtitleFile[Row], 1, 11), 'hh:mm:ss:zz')) and
-     (TimeInFormat(Copy(SubtitleFile[Row], 13, 11), 'hh:mm:ss:zz')) and
-     (Pos(',', SubtitleFile[Row]) = 12) and
-     (StringCount(',', SubtitleFile[Row]) = 2) then
+  if (TimeInFormat(Copy(SubtitleFile[Row], 1, 11), 'hh:mm:ss:ff')) and
+     (TimeInFormat(Copy(SubtitleFile[Row], 13, 11), 'hh:mm:ss:ff')) and
+     (Pos(#9, SubtitleFile[Row]) = 12) and
+     (StringCount(#9, SubtitleFile[Row]) = 2) then
     Result := True
   else
     Result := False;
@@ -167,21 +167,22 @@ begin
       else if SubtitleFile[i].StartsWith('$VertAlign') then
         Item.VAlign := StringToVAlign(SubtitleFile[i]);
 
-      if not TimeInFormat(Copy(SubtitleFile[i], 1, 8), 'hh:mm:ss') then Continue;
-      Item.InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 8));
-      Item.FinalTime   := StringToTime(Copy(SubtitleFile[i], 13, 8));
+      if not TimeInFormat(Copy(SubtitleFile[i], 1, 11), 'hh:mm:ss:ff') or
+        not TimeInFormat(Copy(SubtitleFile[i], 13, 11), 'hh:mm:ss:ff') then
+        Continue;
 
-      if IsInteger(Copy(SubtitleFile[i], 10, 2)) then
-        Item.InitialTime := Item.InitialTime + FramesToTime(StrToInt(Copy(SubtitleFile[i], 10, 2)), FPS);
-      if IsInteger(Copy(SubtitleFile[i], 22, 2)) then
-        Item.FinalTime := Item.FinalTime + FramesToTime(StrToInt(Copy(SubtitleFile[i], 22, 2)), FPS);
+      Item.InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11), False, FPS);
+      Item.FinalTime   := StringToTime(Copy(SubtitleFile[i], 13, 11), False, FPS);
 
-      Item.Text := ReplaceString(Copy(SubtitleFile[i], 25, Length(SubtitleFile[i])), '<P>', LineEnding).Trim;
-      Item.Text := ReplaceString(Item.Text, '| ', LineEnding);
-      Item.Text := ReplaceString(Item.Text, '|', LineEnding);
+//      if IsInteger(Copy(SubtitleFile[i], 10, 2)) then
+//        Item.InitialTime := Item.InitialTime + FramesToTime(StrToInt(Copy(SubtitleFile[i], 10, 2)), FPS);
+//      if IsInteger(Copy(SubtitleFile[i], 22, 2)) then
+//        Item.FinalTime := Item.FinalTime + FramesToTime(StrToInt(Copy(SubtitleFile[i], 22, 2)), FPS);
+
+      Item.Text := ReplaceString(Copy(SubtitleFile[i], 25), '<P>', LineEnding).Trim;
       Item.Text := MacDVDTagsToTS(Item.Text);
 
-      if (Item.InitialTime > -1) and (Item.FinalTime > -1) then
+      if (Item.InitialTime >= 0) and (Item.FinalTime > 0) then
       begin
         Subtitles.Add(Item);
         Item.Text := '';
@@ -210,14 +211,17 @@ begin
     Text := TSToMacDVDTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
 
     // Time format is hh:mm:ss:ff
-    InitialTime := TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:') +
-                   AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].InitialTime, FPS)), 2);
+    InitialTime := TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:ff', FPS);
+//    InitialTime := TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:') +
+//                   AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].InitialTime, FPS)), 2);
 
-    FinalTime := TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:') +
-                 AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].FinalTime, FPS)), 2);
+    FinalTime := TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:ff', FPS);
+//    FinalTime := TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:') +
+//                 AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].FinalTime, FPS)), 2);
 
     StringList.Add(HAlignToString(Subtitles[i].Align));
     StringList.Add(VAlignToString(Subtitles[i].VAlign));
+//    StringList.Add(InitialTime + #9 + FinalTime + #9 + ReplaceString(Text, LineEnding, '<P>'));
     StringList.Add(InitialTime + #9 + FinalTime + #9 + ReplaceString(Text, LineEnding, '<P>'));
   end;
 

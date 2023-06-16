@@ -108,12 +108,12 @@ begin
         while not TimeInFormat(Copy(SubtitleFile[i-c], Length(SubtitleFile[i-c])-24, 11), 'hh:mm:ss:zz') and
           (i-c > 0) do
         begin
-          if SubtitleFile[i-c] = '@@9' then break;
+          if SubtitleFile[i-c] = '@@9' then Break;
           Text := Copy(SubtitleFile[i-c], 5, Length(SubtitleFile[i-c])) + LineEnding + Text;
           Inc(c);
         end;
 
-        if (InitialTime > -1) and (FinalTime > -1) then
+        if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
           Subtitles.Add(InitialTime, FinalTime, Text, '');
       end;
     end;
@@ -131,7 +131,7 @@ begin
   Result  := False;
 
   StringList.Add('@@9 Title', False);
-  StringList.Add('@@9 Created by URUWorks Subtitle Workshop (uruworks.net)', False);
+  StringList.Add('@@9 Created by URUWorks Tero Subtitler (uruworks.net)', False);
   StringList.Add('@@9 STORY:', False);
   StringList.Add('@@9 LANG: ENG', False);
   for i := 1 to 4 do StringList.Add('@@9', False);
@@ -140,7 +140,7 @@ begin
   begin
     Subtitles.Text[i] := RemoveTSTags(Subtitles.Text[i]);
 
-    StringList.Add('@@9 ' + ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), LineEnding+'@@9 ') +
+    StringList.Add('@@9 ' + ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), LineEnding, LineEnding + '@@9 ') +
                 '<' + TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:zz') + '><'  +
                 TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:zz') + '>');
 

@@ -211,7 +211,7 @@ begin
         else
           v := 0;
 
-        if (InitialTime > -1) and (FinalTime > -1) then
+        if (InitialTime >= 0) and (FinalTime > 0) then
         begin
           Inc(i);
           Text := '';
@@ -276,10 +276,10 @@ begin
       end;
 
     if Subtitles[i].VAlign > 0 then
-      case Subtitles[i].Align of
-        0: Align := Align + '80%';
-        1: Align := Align + '50%';
-        2: Align := Align + '10%';
+      case Subtitles[i].VAlign of
+        0: Align := Align + ' line:80%';
+        1: Align := Align + ' line:50%';
+        2: Align := Align + ' line:10%';
       end;
 
     if Subtitles.FormatProperties^.WebVTT.WriteCueIdentifiers then

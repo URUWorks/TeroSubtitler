@@ -120,7 +120,7 @@ begin
     begin
       if (Pos('BMPFILE:', SubtitleFile[i]) = 1) then
       begin
-        Text := Trim(Copy(SubtitleFile[i], 9, Length(SubtitleFile[i])));
+        Text := Trim(Copy(SubtitleFile[i], 9));
         if (Pos('STARTTIME:', SubtitleFile[i+1]) = 1) then
         begin
           InitialTime := Round((StrToFloat(Trim(Copy(SubtitleFile[i+1], 11, Length(SubtitleFile[i+1]))))+(256*c))*1000);
@@ -137,7 +137,7 @@ begin
           else
             FinalTime := InitialTime + 2000;
 
-          if (InitialTime > -1) and (FinalTime > -1) then
+          if (InitialTime >= 0) and (FinalTime > 0) then
             Subtitles.Add(InitialTime, FinalTime, Text, '');
         end;
       end;
@@ -181,7 +181,7 @@ begin
     if Length(Copy(tmpNum,Pos('.',tmpNum)+1,Length(tmpNum))) < 2 then
       tmpNum := tmpNum + '0';
 
-    StringList.Add('BMPFILE: ' + ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), ' '), False);
+    StringList.Add('BMPFILE: ' + ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), LineEnding, ' '), False);
     StringList.Add('', False);
     StringList.Add('STARTTIME: ' + tmpNum, False);
     StringList.Add('', False);

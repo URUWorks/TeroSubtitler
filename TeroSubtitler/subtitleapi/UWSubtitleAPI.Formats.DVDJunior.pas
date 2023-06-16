@@ -102,9 +102,9 @@ begin
     begin
       InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11));
       FinalTime   := StringToTime(Copy(SubtitleFile[i], 13, 11));
-      Text        := ReplaceString(Copy(SubtitleFile[i], 25, Length(SubtitleFile[i])), '<', LineEnding);
+      Text        := ReplaceString(Copy(SubtitleFile[i], 25), '<', LineEnding);
 
-      if (InitialTime > -1) and (FinalTime > -1) then
+      if (InitialTime >= 0) and (FinalTime > 0) then
         Subtitles.Add(InitialTime, FinalTime, Text, '');
     end;
   finally
@@ -126,7 +126,7 @@ begin
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add(TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:zz') + '&' + TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:zz') + '#' + ReplaceEnters(Text, '<'), False);
+    StringList.Add(TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:zz') + '&' + TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:zz') + '#' + ReplaceEnters(Text, LineEnding, '<'), False);
   end;
 
   try

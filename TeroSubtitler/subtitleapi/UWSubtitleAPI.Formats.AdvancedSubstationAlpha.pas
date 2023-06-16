@@ -116,11 +116,11 @@ begin
         a := PosEx(',', SubtitleFile[i], a + 1);
         FinalTime   := StringToTime(Trim(Copy(SubtitleFile[i], a + 1, PosEx(',', SubtitleFile[i], a + 1) - (a + 1))));
 
-        if (InitialTime > -1) and (FinalTime > -1) then
+        if (InitialTime >= 0) and (FinalTime > 0) then
         begin
           Text := SubtitleFile[i];
           for a := 1 to 9 do Delete(Text, 1, Pos(',', Text));
-          Text := ReplaceString(Trim(Text), '\N', #13#10);
+          Text := ReplaceString(Trim(Text), '\N', LineEnding);
           Text := ReplaceString(Text, '{\i1}', '{i}');
           Text := ReplaceString(Text, '{\b1}', '{b}');
           Text := ReplaceString(Text, '{\u1}', '{u}');
@@ -164,7 +164,7 @@ begin
   for i := FromItem to ToItem do
   begin
     Text := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
-    Text := ReplaceString(Trim(Text), '\N', #13#10);
+    Text := ReplaceString(Trim(Text), LineEnding, '\N');
     Text := ReplaceString(Text, '{i}', '{\i0}');
     Text := ReplaceString(Text, '{b}', '{\b0}');
     Text := ReplaceString(Text, '{u}', '{\u0}');

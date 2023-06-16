@@ -104,7 +104,7 @@ begin
       InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11));
       FinalTime   := StringToTime(Copy(SubtitleFile[i], 15, 11));
 
-      if (InitialTime > -1) and (FinalTime > -1) then
+      if (InitialTime >= 0) and (FinalTime > 0) then
       begin
         Text := Trim(Copy(SubtitleFile[i], 29, 33));
         Txt  := Trim(Copy(SubtitleFile[i], 63, Length(SubtitleFile[i])-62));
