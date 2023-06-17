@@ -573,7 +573,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="154"/>
+        <UsageCount Value="155"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToText.pas"/>
@@ -584,7 +584,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="209"/>
         <CursorPos Y="224"/>
-        <UsageCount Value="140"/>
+        <UsageCount Value="141"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToTextModel.pas"/>
@@ -594,7 +594,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="135"/>
+        <UsageCount Value="136"/>
       </Unit>
       <Unit>
         <Filename Value="formTBX.pas"/>
@@ -604,7 +604,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="124"/>
+        <UsageCount Value="125"/>
       </Unit>
       <Unit>
         <Filename Value="procFixSubtitles.pas"/>
@@ -612,7 +612,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="545"/>
         <CursorPos X="3" Y="548"/>
-        <UsageCount Value="108"/>
+        <UsageCount Value="109"/>
       </Unit>
       <Unit>
         <Filename Value="formFormatProperties.pas"/>
@@ -623,7 +623,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="268"/>
         <CursorPos X="62" Y="287"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="61"/>
       </Unit>
       <Unit>
         <Filename Value="procFix.pas"/>
@@ -741,8 +741,7 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="248"/>
-        <CursorPos X="72" Y="274"/>
+        <CursorPos X="55" Y="113"/>
         <UsageCount Value="16"/>
       </Unit>
       <Unit>
@@ -805,7 +804,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.TimedText.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="121"/>
+        <TopLine Value="259"/>
+        <CursorPos X="2" Y="272"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -832,8 +832,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Tags.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="152"/>
-        <CursorPos X="3" Y="172"/>
+        <TopLine Value="131"/>
+        <CursorPos X="3" Y="133"/>
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
@@ -977,8 +977,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.FABSubtitler.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="104"/>
-        <CursorPos X="47" Y="129"/>
+        <TopLine Value="9"/>
+        <CursorPos X="24" Y="26"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -1005,8 +1005,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.ITunesTimedText.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="151"/>
-        <CursorPos Y="293"/>
+        <TopLine Value="140"/>
+        <CursorPos Y="156"/>
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
@@ -1026,13 +1026,15 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.KaraokeLyricsVKT.pas"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="8"/>
+        <CursorPos X="28" Y="25"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.MacDVDStudioPro.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="160"/>
-        <CursorPos X="57" Y="185"/>
+        <TopLine Value="9"/>
+        <CursorPos X="44" Y="26"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -1066,8 +1068,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.NetflixTimedText.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="122"/>
-        <CursorPos Y="135"/>
+        <TopLine Value="141"/>
+        <CursorPos Y="163"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -1080,8 +1082,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.SubViewer.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="106"/>
-        <CursorPos X="49" Y="108"/>
+        <TopLine Value="127"/>
+        <CursorPos X="31" Y="148"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -1094,8 +1096,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.STL.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="155"/>
-        <CursorPos X="47" Y="171"/>
+        <TopLine Value="206"/>
+        <CursorPos Y="228"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
