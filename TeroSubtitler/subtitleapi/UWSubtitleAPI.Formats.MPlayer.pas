@@ -115,7 +115,8 @@ begin
         FinalTime     := FramesToTime(StrToInt(Copy(SubtitleFile[i], Pos(',',SubtitleFile[i]) + 1, Pos(',', SubtitleFile[i], Pos(',',SubtitleFile[i]) + 1) - (Pos(',',SubtitleFile[i]) + 1))), FPS);
         Text          := ReplaceString(Copy(SubtitleFile[i], Pos(',', SubtitleFile[i], Pos(',', SubtitleFile[i], Pos(',', SubtitleFile[i], Pos(',',SubtitleFile[i]) + 1)) + 1) + 1, Length(SubtitleFile[i])), '|', LineEnding);
 
-        Subtitles.Add(InitialTime, FinalTime, Text, '');
+        if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+          Subtitles.Add(InitialTime, FinalTime, Text, '');
       end;
     end;
   finally

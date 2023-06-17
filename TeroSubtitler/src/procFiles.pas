@@ -322,7 +322,7 @@ begin
 
   ATimeDate := FormatDateTime('yyyy-mm-dd_hh-nn-ss_', Now);
 
-  if Subtitles.SaveToFile(BackupFolder+ATimeDate+ChangeFileExt(AFileName, '.tero'), AFPS, AEncoding, sfTero, smText) then
+  if Subtitles.SaveToFile(BackupFolder+ATimeDate+ChangeFileExt(AFileName, '.tero'), AFPS, AEncoding, sfTeroSubtitler, smText) then
     SetStatusBarText(GetCommonString('BackupSaved'));
 end;
 

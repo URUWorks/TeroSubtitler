@@ -172,7 +172,7 @@ begin
     Text := ReplaceString(Text, '{/b}', '{\b1}');
     Text := ReplaceString(Text, '{/u}', '{\u1}');
 
-    StringList.Add('Dialogue: 0,' + TimeToString(Subtitles[i].InitialTime, 'h:mm:ss.zz') + ',' + TimeToString(Subtitles[i].FinalTime, 'h:mm:ss.zz') + ',Default,,0000,0000,0000,,'+ ReplaceEnters(Text,'\N'), False);
+    StringList.Add('Dialogue: 0,' + TimeToString(Subtitles[i].InitialTime, 'h:mm:ss.zz') + ',' + TimeToString(Subtitles[i].FinalTime, 'h:mm:ss.zz') + ',Default,,0000,0000,0000,,' + Text, False);
   end;
 
   try

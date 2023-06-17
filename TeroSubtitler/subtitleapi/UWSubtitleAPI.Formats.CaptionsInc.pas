@@ -124,7 +124,8 @@ begin
             Break;
         end;
 
-        Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+        if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
       end;
     end;
   finally

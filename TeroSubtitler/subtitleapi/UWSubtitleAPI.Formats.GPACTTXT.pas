@@ -138,7 +138,9 @@ begin
           else
             FinalTime := InitialTime + 1000;
 
-          Subtitles.Add(InitialTime, FinalTime, HTMLTagsToTS(Text), '', NIL, False);
+          if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+            Subtitles.Add(InitialTime, FinalTime, HTMLTagsToTS(Text), '', NIL, False);
+
           Inc(i);
         end;
     finally

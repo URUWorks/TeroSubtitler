@@ -130,7 +130,7 @@ procedure TfrmRestoreBackup.btnRestoreClick(Sender: TObject);
 begin
   if (VST.RootNodeCount > 0) and (VST.SelectedCount = 1) then
   begin
-    LoadSubtitle(FList[VSTFocusedNode(VST)], sfTero);
+    LoadSubtitle(FList[VSTFocusedNode(VST)], sfTeroSubtitler);
     Close;
   end;
 end;

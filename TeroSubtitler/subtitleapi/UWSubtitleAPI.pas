@@ -279,8 +279,8 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils,
   UWSubtitleAPI.Formats.KaraokeLyricsVKT, UWSubtitleAPI.Formats.MacDVDStudioPro,
   UWSubtitleAPI.Formats.MacSUB, UWSubtitleAPI.Formats.MPlayer,
   UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.SubViewer,
-  UWSubtitleAPI.Formats.Sofni, UWSubtitleAPI.Formats.STL,
-  UWSubtitleAPI.Formats.ITunesTimedText, UWSubtitleAPI.Formats.Tero;
+  UWSubtitleAPI.Formats.Sofni, UWSubtitleAPI.Formats.SpruceSubtitleFile,
+  UWSubtitleAPI.Formats.ITunesTimedText, UWSubtitleAPI.Formats.TeroSubtitler;
 
 // -----------------------------------------------------------------------------
 
@@ -713,10 +713,10 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWMPlayer2.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWNetflixTimedText.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSofni.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWSTL.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSpruceSubtitleFile.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubViewer.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWTero.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWTeroSubtitler.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWTimedText.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWWebVTT.Create) );
 end;

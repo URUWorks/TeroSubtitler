@@ -131,7 +131,9 @@ begin
 
                 Text := XMLExtractTextContent(Node.ChildNodes);
                 Text := ReplaceEnters(Text, '<br/>', LineEnding);
-                Subtitles.Add(InitialTime, FinalTime, HTMLTagsToTS(Text), '', NIL, False);
+
+                if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+                  Subtitles.Add(InitialTime, FinalTime, HTMLTagsToTS(Text), '', NIL, False);
               end;
             end;
             Node := Node.NextSibling;

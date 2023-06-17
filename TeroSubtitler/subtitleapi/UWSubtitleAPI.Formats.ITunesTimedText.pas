@@ -221,7 +221,7 @@ begin
     Root := XmlDoc.DocumentElement;
 
     Element := XmlDoc.CreateElement('head');
-      TDOMElement(Element).SetAttribute('xmlns', '');
+      //TDOMElement(Element).SetAttribute('xmlns', '');
       Node := XmlDoc.CreateElement('metadata');
       Element.AppendChild(Node);
       SubNode := XmlDoc.CreateElement('ttm:title');

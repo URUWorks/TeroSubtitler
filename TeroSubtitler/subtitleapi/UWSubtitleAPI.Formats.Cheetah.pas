@@ -89,7 +89,7 @@ end;
 
 function TUWCheetah.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
 var
-  i, c        : Integer;
+  i, c, t     : Integer;
   InitialTime : Integer;
   FinalTime   : Integer;
   Text        : String;
@@ -97,12 +97,17 @@ begin
   Result := False;
   try
     for i := SubtitleFile.Count-1 downto 0 do
-      if (Pos('*', SubtitleFile[i]) = 1) and (Pos('*t ', LowerCase(SubtitleFile[i])) <> 1) then
+      if (Pos('*', SubtitleFile[i]) = 1) and (Pos('*t', LowerCase(SubtitleFile[i])) <> 1) then
         SubtitleFile.Delete(i);
 
     for i := 0 to SubtitleFile.Count-2 do
     begin
-      if (TimeInFormat(Copy(SubtitleFile[i], 4, 11), 'hh:mm:ss:zz')) then
+      if (Pos('*t ', LowerCase(SubtitleFile[i])) = 1) then
+        t := 4
+      else
+        t := 5;
+
+      if TimeInFormat(Copy(SubtitleFile[i], t, 11), 'hh:mm:ss:zz') then
       begin
         c    := 1;
         Text := '';
@@ -116,9 +121,11 @@ begin
           Inc(c);
         end;
 
-        InitialTime := StringToTime(Copy(SubtitleFile[i], 4, 11));
-        FinalTime   := StringToTime(Copy(SubtitleFile[i+c], 4, 11));
-        Subtitles.Add(InitialTime, FinalTime, Text, '');
+        InitialTime := StringToTime(Copy(SubtitleFile[i], t, 11));
+        FinalTime   := StringToTime(Copy(SubtitleFile[i+c], t, 11));
+
+        if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+          Subtitles.Add(InitialTime, FinalTime, Text, '');
       end;
     end;
   finally

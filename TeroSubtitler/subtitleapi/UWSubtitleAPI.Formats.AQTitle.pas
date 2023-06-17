@@ -127,7 +127,8 @@ begin
         else
           FinalTime := InitialTime + 2000;
 
-        Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+        if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
       end;
       Inc(i, c+1);
     end;
