@@ -1,0 +1,31 @@
+1.0.0.3 (17.6.2023)
+fixed EDL from Final Cut Pro 7 don't import properly #75
+added XML from Final Cut Pro 7 #76
+improved iTunes Timed Text: exported file doesn't comply with Apple's guidelines #101
+improved Various subtitle formats
+
+1.0.0.2 (11.6.2023)
+fixed Make subtitle list and video window equal size #77
+fixed Remnants of previously loaded video present when loading a subtitle file with no video previously attributed #91
+fixed [macOS – ARM64] Tero 1.0.0.1: EXC_BAD_ACCESS (SIGKILL (Code Signature Invalid)) #98
+fixed [enhancement] Inaccurate message within the update dialogue box #99
+
+1.0.0.1 (10.6.2023)
+fixed Inaccurate warning after accessing relocated file #55
+fixed Different default file format won't be saved in tero.cfg #61
+fixed Shortcuts don't immediately work after start-up #66
+fixed [macOS] Source mode: every keyboard shortcut works but “Select all” (⌘ + A) #70
+fixed Error when saving as MAC DVD Studio Pro #79
+fixed SBV > SubViewer #80
+fixed Timed-Text > Timed Text #81
+fixed Empty warning when saving Cavena 890 #82
+fixed Empty warning when saving DVDSubtitle #83
+fixed Empty warning when saving second Karaoke Lyrics LRC #85
+fixed Empty warning when saving second MPlayer #86
+fixed Avid Caption > Avid DS #87
+fixed Error when loading Advanced Subtitles.xas #89
+fixed Error when loading GPAC TTXT.ttxt #90
+improved Audio-to-text
+added Format properties
+
+1.0.0.0 (first release)
