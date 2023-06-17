@@ -22,7 +22,7 @@ unit UWSubtitleAPI.Formats.KaraokeLyricsVKT;
 interface
 
 uses
-  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSubtitleAPI.Formats;
+  SysUtils, UWSubtitleAPI, UWSubtitleAPI.Formats;
 
 type
 

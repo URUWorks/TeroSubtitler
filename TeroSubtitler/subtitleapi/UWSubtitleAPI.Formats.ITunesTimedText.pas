@@ -153,7 +153,7 @@ begin
               if Node.Attributes.GetNamedItem('region') <> NIL then
               begin
                 with Node.Attributes.GetNamedItem('region') do
-                  if (NodeValue = 'top') or (NodeValue = 'sh0') then
+                if NodeValue.Contains('top') or (NodeValue = 'sh0') then
                     VAlign := 2
                   else
                     VAlign := 0;
@@ -193,11 +193,14 @@ begin
     Root := XmlDoc.CreateElement('tt');
       TDOMElement(Root).SetAttribute('xmlns', 'http://www.w3.org/ns/ttml');
       TDOMElement(Root).SetAttribute('xmlns:ttp', 'http://www.w3.org/ns/ttml#parameter');
-      TDOMElement(Root).SetAttribute('ttp:timeBase', 'media');
       TDOMElement(Root).SetAttribute('xmlns:tts', 'http://www.w3.org/ns/ttml#style');
-      TDOMElement(Root).SetAttribute('xml:lang', 'en');
       TDOMElement(Root).SetAttribute('xmlns:ttm', 'http://www.w3.org/ns/ttml#metadata');
-      TDOMElement(Root).SetAttribute('ttp:timeBase', 'smpte');
+      TDOMElement(Root).SetAttribute('xml:lang', 'en');
+
+      if Subtitles.TimeBase = stbSMPTE then
+        TDOMElement(Root).SetAttribute('ttp:timeBase', 'smpte')
+      else
+        TDOMElement(Root).SetAttribute('ttp:timeBase', 'media');
 
       if IsInteger(FPS) then
       begin
@@ -250,7 +253,6 @@ begin
       TDOMElement(SubNode).SetAttribute('tts:fontFamily', 'sansSerif');
       TDOMElement(SubNode).SetAttribute('tts:color', 'white');
       Node.AppendChild(SubNode);
-
     Root.AppendChild(Element);
 
     Node := XmlDoc.CreateElement('layout');

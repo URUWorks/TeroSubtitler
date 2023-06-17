@@ -101,20 +101,20 @@ end;
 
 function TUWTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
 
-  function GetTime(const S: String): Integer;
+  function GetTime(const S: String; const aFPS: Single): Integer;
   begin
     if AnsiEndsStr('t', S) then // ticks
       Result := TicksToMSecs(StrToInt64(Copy(S, 0, Length(S)-1)))
+    else if AnsiEndsStr('s', S) then // seconds
+        Result := StringToTime(Copy(S, 0, Length(S)-1))
     else
-      Result := StringToTime(S);
+      Result := StringToTime(S, False, aFPS);
   end;
 
 var
-  XmlDoc      : TXMLDocument;
-  Node        : TDOMNode;
-  InitialTime : Integer;
-  FinalTime   : Integer;
-  Text        : String;
+  XmlDoc : TXMLDocument;
+  Node   : TDOMNode;
+  Item   : TUWSubtitleItem;
 begin
   Result := False;
   XmlDoc := NIL;
@@ -123,20 +123,56 @@ begin
   //ReadXMLFile(XmlDoc, SubtitleFile.FileName);
   if Assigned(XmlDoc) then
     try
+      Node := XMLFindNodeByName(XmlDoc, 'tt');
+      Subtitles.FrameRate := FPS;
+
+      if Assigned(Node) then
+      begin
+        if XMLHasAttribute(Node, 'ttp:frameRate') then
+        begin
+          Subtitles.FrameRate := StrToFloatDef(XMLGetAttrValue(Node, 'ttp:frameRate'), FPS);
+
+          if XMLHasAttribute(Node, 'ttp:frameRateMultiplier') and XMLGetAttrValue(Node, 'ttp:frameRateMultiplier').StartsWith('999') then
+            Subtitles.FrameRate := Subtitles.FrameRate - (Subtitles.FrameRate * 0.001);
+        end;
+
+        if XMLHasAttribute(Node, 'ttp:timeBase') then
+        begin
+          if XMLGetAttrValue(Node, 'ttp:timeBase') = 'smpte' then
+            Subtitles.TimeBase := stbSMPTE
+          else
+            Subtitles.TimeBase := stbMedia;
+        end;
+      end;
+
       Node := XMLFindNodeByName(XmlDoc, 'p');
       if Assigned(Node) then
         repeat
           if Node.HasAttributes then
           begin
-            if Node.Attributes.GetNamedItem('begin') <> NIL then
-              InitialTime := GetTime(Node.Attributes.GetNamedItem('begin').NodeValue);
-            if Node.Attributes.GetNamedItem('end') <> NIL then
-              FinalTime   := GetTime(Node.Attributes.GetNamedItem('end').NodeValue);
+            ClearSubtitleItem(Item);
+            with Item do
+            begin
+              if Node.Attributes.GetNamedItem('region') <> NIL then
+              begin
+                with Node.Attributes.GetNamedItem('region') do
+                  if (NodeValue = 'top') or (NodeValue = 'sh0') then
+                    VAlign := 2
+                  else
+                    VAlign := 0;
+              end;
 
-            Text := XMLExtractTextContent(Node.ChildNodes);
-            Text := ReplaceEnters(Text, '<br/>', LineEnding);
-            Subtitles.Add(InitialTime, FinalTime, HTMLTagsToTS(Text), '', NIL, False);
+              if Node.Attributes.GetNamedItem('begin') <> NIL then
+                InitialTime := GetTime(Node.Attributes.GetNamedItem('begin').NodeValue, Subtitles.FrameRate);
+              if Node.Attributes.GetNamedItem('end') <> NIL then
+                FinalTime   := GetTime(Node.Attributes.GetNamedItem('end').NodeValue, Subtitles.FrameRate);
+
+              Text := XMLExtractTextContent(Node.ChildNodes);
+              Text := HTMLTagsToTS(ReplaceEnters(Text, '<br/>', LineEnding));
+            end;
+            Subtitles.Add(Item, NIL, False);
           end;
+
           Node := Node.NextSibling;
         until (Node = NIL);
     finally
@@ -176,17 +212,51 @@ begin
       Node := XmlDoc.CreateElement('styling');
       Element.AppendChild(Node);
       SubNode := XmlDoc.CreateElement('style');
-      TDOMElement(SubNode).SetAttribute('id', 's0');
-      TDOMElement(SubNode).SetAttribute('tts:backgroundColor', 'black');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'normal');
       TDOMElement(SubNode).SetAttribute('tts:fontStyle', 'normal');
-      TDOMElement(SubNode).SetAttribute('tts:fontSize', '16');
+      TDOMElement(SubNode).SetAttribute('tts:fontSize', '100%');
+      TDOMElement(SubNode).SetAttribute('tts:fontWeight', 'normal');
+      TDOMElement(SubNode).SetAttribute('tts:fontFamily', 'sansSerif');
+      TDOMElement(SubNode).SetAttribute('tts:color', 'white');
+      Node.AppendChild(SubNode);
+      SubNode := XmlDoc.CreateElement('style');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'italic');
+      TDOMElement(SubNode).SetAttribute('tts:fontStyle', 'italic');
+      TDOMElement(SubNode).SetAttribute('tts:fontSize', '100%');
+      TDOMElement(SubNode).SetAttribute('tts:fontWeight', 'normal');
+      TDOMElement(SubNode).SetAttribute('tts:fontFamily', 'sansSerif');
+      TDOMElement(SubNode).SetAttribute('tts:color', 'white');
+      Node.AppendChild(SubNode);
+      SubNode := XmlDoc.CreateElement('style');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'bold');
+      TDOMElement(SubNode).SetAttribute('tts:fontStyle', 'bold');
+      TDOMElement(SubNode).SetAttribute('tts:fontSize', '100%');
+      TDOMElement(SubNode).SetAttribute('tts:fontWeight', 'normal');
       TDOMElement(SubNode).SetAttribute('tts:fontFamily', 'sansSerif');
       TDOMElement(SubNode).SetAttribute('tts:color', 'white');
       Node.AppendChild(SubNode);
     Root.AppendChild(Element);
 
+    Node := XmlDoc.CreateElement('layout');
+    Element.AppendChild(Node);
+      SubNode := XmlDoc.CreateElement('region');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'top');
+      TDOMElement(SubNode).SetAttribute('tts:origin', '0% 0%');
+      TDOMElement(SubNode).SetAttribute('tts:extent', '100% 15%');
+      TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
+      TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'before');
+      Node.AppendChild(SubNode);
+      SubNode := XmlDoc.CreateElement('region');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'bottom');
+      TDOMElement(SubNode).SetAttribute('tts:origin', '0% 85%');
+      TDOMElement(SubNode).SetAttribute('tts:extent', '100% 15%');
+      TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
+      TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'after');
+      Node.AppendChild(SubNode);
+    Root.AppendChild(Element);
+
     Element := XmlDoc.CreateElement('body');
-      TDOMElement(Element).SetAttribute('style', 's0');
+      TDOMElement(Element).SetAttribute('style', 'normal');
     Root.AppendChild(Element);
 
     Node := XmlDoc.CreateElement('div');
@@ -195,6 +265,7 @@ begin
     for i := FromItem to ToItem do
     begin
       Element := XmlDoc.CreateElement('p');
+      TDOMElement(Element).SetAttribute('region', iff(Subtitles[i].VAlign > 0, 'top', 'bottom'));
       TDOMElement(Element).SetAttribute('begin', TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz'));
       TDOMElement(Element).SetAttribute('id', TimeToString(Subtitles.InitialTime[i], 'p' + IntToStr(i)));
       TDOMElement(Element).SetAttribute('end', TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz'));

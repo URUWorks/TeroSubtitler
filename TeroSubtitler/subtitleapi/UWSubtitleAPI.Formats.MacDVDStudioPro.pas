@@ -23,7 +23,7 @@ interface
 
 uses
   SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats, StrUtils;
+  UWSystem.SysUtils, UWSubtitleAPI.Formats;
 
 type
 
