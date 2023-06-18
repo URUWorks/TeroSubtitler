@@ -1,4 +1,5 @@
 1.0.0.4 (x.6.2023)
+improved Make it clearer what URLs are accepted #46
 improved Conventions: count space characters #26
 
 1.0.0.3 (17.6.2023)
