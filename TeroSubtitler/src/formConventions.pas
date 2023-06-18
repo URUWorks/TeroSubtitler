@@ -50,6 +50,7 @@ type
     lblName: TLabel;
     lblNewSubtitleMs: TLabel;
     lblProhibitedChars: TLabel;
+    lblCPSStrategy: TLabel;
     lblRepeatableChars: TLabel;
     lblSubtitlePauseMs: TLabel;
     lblWPM: TLabel;

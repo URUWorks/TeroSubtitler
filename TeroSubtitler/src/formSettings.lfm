@@ -1,7 +1,7 @@
 object frmSettings: TfrmSettings
   Left = 235
   Height = 489
-  Top = 112
+  Top = 115
   Width = 672
   BorderIcons = []
   BorderStyle = bsSingle
@@ -277,32 +277,13 @@ object frmSettings: TfrmSettings
     object lblNewSubtitleMs: TLabel
       Left = 0
       Height = 15
-      Top = 100
+      Top = 132
       Width = 206
       AutoSize = False
       Caption = 'New subtitle (ms)'
       ParentColor = False
     end
     object spnNewSubtitleMs: TSpinEdit
-      Left = 208
-      Height = 23
-      Top = 96
-      Width = 80
-      MaxValue = 5000
-      OnChange = spnConventionChange
-      TabOrder = 4
-      Value = 1000
-    end
-    object lblMinDurationMs: TLabel
-      Left = 0
-      Height = 15
-      Top = 132
-      Width = 206
-      AutoSize = False
-      Caption = 'Min. duration (ms)'
-      ParentColor = False
-    end
-    object spnMinDurationMs: TSpinEdit
       Left = 208
       Height = 23
       Top = 128
@@ -312,10 +293,29 @@ object frmSettings: TfrmSettings
       TabOrder = 5
       Value = 1000
     end
+    object lblMinDurationMs: TLabel
+      Left = 0
+      Height = 15
+      Top = 164
+      Width = 206
+      AutoSize = False
+      Caption = 'Min. duration (ms)'
+      ParentColor = False
+    end
+    object spnMinDurationMs: TSpinEdit
+      Left = 208
+      Height = 23
+      Top = 160
+      Width = 80
+      MaxValue = 5000
+      OnChange = spnConventionChange
+      TabOrder = 6
+      Value = 1000
+    end
     object lblMaxDurationMs: TLabel
       Left = 0
       Height = 15
-      Top = 196
+      Top = 228
       Width = 206
       AutoSize = False
       Caption = 'Max. duration (ms)'
@@ -324,17 +324,17 @@ object frmSettings: TfrmSettings
     object spnMaxDurationMs: TSpinEdit
       Left = 208
       Height = 23
-      Top = 192
+      Top = 224
       Width = 80
       MaxValue = 10000
       OnChange = spnConventionChange
-      TabOrder = 7
+      TabOrder = 8
       Value = 8000
     end
     object lblSubtitlePauseMs: TLabel
       Left = 0
       Height = 15
-      Top = 260
+      Top = 292
       Width = 206
       AutoSize = False
       Caption = 'Min. subtitle pause'
@@ -343,11 +343,11 @@ object frmSettings: TfrmSettings
     object spnSubtitlePauseMs: TSpinEdit
       Left = 208
       Height = 23
-      Top = 256
+      Top = 288
       Width = 80
       MaxValue = 10000
       OnChange = spnConventionChange
-      TabOrder = 9
+      TabOrder = 10
       Value = 200
     end
     object edtRepeatableChars: TEdit
@@ -389,7 +389,7 @@ object frmSettings: TfrmSettings
     object chkDotsOnSplit: TUWCheckBox
       Left = 0
       Height = 19
-      Top = 392
+      Top = 424
       Width = 18
       AutoSize = False
       Caption = 'Dots on split'
@@ -429,7 +429,7 @@ object frmSettings: TfrmSettings
     object lblMaxLineCount: TLabel
       Left = 0
       Height = 15
-      Top = 228
+      Top = 260
       Width = 206
       AutoSize = False
       Caption = 'Max. line count'
@@ -438,17 +438,17 @@ object frmSettings: TfrmSettings
     object spnMaxLineCount: TSpinEdit
       Left = 208
       Height = 23
-      Top = 224
+      Top = 256
       Width = 80
       MaxValue = 10
       OnChange = spnConventionChange
-      TabOrder = 8
+      TabOrder = 9
       Value = 2
     end
     object lblCPS: TLabel
       Left = 0
       Height = 15
-      Top = 292
+      Top = 324
       Width = 206
       AutoSize = False
       Caption = 'CPS'
@@ -457,17 +457,17 @@ object frmSettings: TfrmSettings
     object spnCPS: TSpinEdit
       Left = 208
       Height = 23
-      Top = 288
+      Top = 320
       Width = 80
       MaxValue = 1000
       OnChange = spnConventionChange
-      TabOrder = 11
+      TabOrder = 12
       Value = 15
     end
     object lblWPM: TLabel
       Left = 0
       Height = 15
-      Top = 324
+      Top = 356
       Width = 206
       AutoSize = False
       Caption = 'WPM'
@@ -476,7 +476,7 @@ object frmSettings: TfrmSettings
     object spnWPM: TSpinEdit
       Left = 208
       Height = 23
-      Top = 320
+      Top = 352
       Width = 80
       MaxValue = 1000
       OnChange = spnConventionChange
@@ -486,7 +486,7 @@ object frmSettings: TfrmSettings
     object spnCPL: TSpinEdit
       Left = 209
       Height = 23
-      Top = 352
+      Top = 384
       Width = 80
       MaxValue = 500
       OnChange = spnConventionChange
@@ -496,7 +496,7 @@ object frmSettings: TfrmSettings
     object lblCPL: TLabel
       Left = 0
       Height = 15
-      Top = 356
+      Top = 388
       Width = 206
       AutoSize = False
       Caption = 'CPL'
@@ -505,7 +505,7 @@ object frmSettings: TfrmSettings
     object lblMinDurationPerWordMs: TLabel
       Left = 0
       Height = 15
-      Top = 164
+      Top = 196
       Width = 206
       AutoSize = False
       Caption = 'Min. duration per word (ms)'
@@ -514,11 +514,11 @@ object frmSettings: TfrmSettings
     object spnMinDurationPerWord: TSpinEdit
       Left = 208
       Height = 23
-      Top = 160
+      Top = 192
       Width = 80
       MaxValue = 5000
       OnChange = spnConventionChange
-      TabOrder = 6
+      TabOrder = 7
       Value = 1000
     end
     object cboPauseMode: TComboBox
@@ -526,22 +526,30 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Left = 298
       Height = 23
-      Top = 256
+      Top = 288
       Width = 118
       ItemHeight = 15
       OnChange = spnConventionChange
       Style = csDropDownList
-      TabOrder = 10
+      TabOrder = 11
     end
     object edtCPSStrategy: TEdit
-      AnchorSideTop.Control = spnCPS
       AnchorSideTop.Side = asrCenter
-      Left = 298
+      Left = 209
       Height = 23
-      Top = 288
-      Width = 118
+      Top = 96
+      Width = 287
       OnChange = spnConventionChange
-      TabOrder = 12
+      TabOrder = 4
+    end
+    object lblCPSStrategy: TLabel
+      Left = 0
+      Height = 15
+      Top = 100
+      Width = 206
+      AutoSize = False
+      Caption = 'Chars excluded from CPS count'
+      ParentColor = False
     end
   end
   object lyoAppearance: TUWLayout

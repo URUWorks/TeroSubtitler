@@ -347,6 +347,7 @@
       <lblCPL>Caracteres por línea</lblCPL>            
       <lblRepeatableChars>Caracteres repetibles</lblRepeatableChars>
       <lblProhibitedChars>Caracteres prohibidos</lblProhibitedChars>
+      <lblCPSStrategy>Caract. excl. en conteo de CPS</lblCPSStrategy>                      
       <lblTheme>Tema</lblTheme>
       <lblListMode>Modo de lista</lblListMode>
 	  <lblSubtitles>Subtítulos</lblSubtitles>      
@@ -385,9 +386,6 @@
       <btnShortCutApply>Aplicar</btnShortCutApply>
       <btnShortCutSave>Guardar...</btnShortCutSave>
     </Section>
-    <Section Name="TEdit">      
-      <edtCPSStrategy Hint="Caracteres a ignorar"/>      
-    </Section>                       
   </Form>
   <Form Name="frmSpellCheck" Caption="Corrector ortográfico">
     <Section Name="TLabel">

@@ -66,6 +66,7 @@ type
     cbnSubBackground: TColorButton;
     cboPauseMode: TComboBox;
     edtCPSStrategy: TEdit;
+    lblCPSStrategy: TLabel;
     lblShortCutPreset: TLabel;
     lblWaveStart: TLabel;
     lblWaveColor: TLabel;

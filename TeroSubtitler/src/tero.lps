@@ -19,7 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="43" Y="15"/>
+        <TopLine Value="1060"/>
+        <CursorPos X="44" Y="1076"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -252,8 +253,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="245"/>
-        <CursorPos X="3" Y="263"/>
+        <TopLine Value="670"/>
+        <CursorPos Y="681"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -424,8 +425,8 @@
         <Filename Value="procFiles.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="308"/>
-        <CursorPos X="102" Y="325"/>
+        <TopLine Value="943"/>
+        <CursorPos X="3" Y="964"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -480,8 +481,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="186"/>
-        <CursorPos X="41" Y="201"/>
+        <TopLine Value="188"/>
+        <CursorPos X="93" Y="188"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -575,7 +576,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="158"/>
+        <UsageCount Value="161"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToText.pas"/>
@@ -586,7 +587,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="209"/>
         <CursorPos Y="224"/>
-        <UsageCount Value="144"/>
+        <UsageCount Value="147"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToTextModel.pas"/>
@@ -596,7 +597,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="139"/>
+        <UsageCount Value="142"/>
       </Unit>
       <Unit>
         <Filename Value="formTBX.pas"/>
@@ -606,7 +607,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="128"/>
+        <UsageCount Value="131"/>
       </Unit>
       <Unit>
         <Filename Value="procFixSubtitles.pas"/>
@@ -614,7 +615,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="545"/>
         <CursorPos X="3" Y="548"/>
-        <UsageCount Value="112"/>
+        <UsageCount Value="115"/>
       </Unit>
       <Unit>
         <Filename Value="formFormatProperties.pas"/>
@@ -625,7 +626,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="268"/>
         <CursorPos X="62" Y="287"/>
-        <UsageCount Value="64"/>
+        <UsageCount Value="67"/>
       </Unit>
       <Unit>
         <Filename Value="procFix.pas"/>
@@ -2221,7 +2222,7 @@
         <UsageCount Value="9"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="5">
+    <JumpHistory HistoryIndex="7">
       <Position>
         <Filename Value="formMain.pas"/>
         <Caret Line="6" Column="28"/>
@@ -2244,6 +2245,14 @@
       <Position>
         <Filename Value="formMain.pas"/>
         <Caret Line="15" Column="43"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="10" Column="38"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="1076" Column="15" TopLine="1060"/>
       </Position>
     </JumpHistory>
     <RunParams>
