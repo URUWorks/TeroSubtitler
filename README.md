@@ -73,7 +73,8 @@ URUWorks' subtitling solution began as Subtitle Workshop. In making the distinct
 
 Over an estimated 20 years of development on URUWorks programs, economic assistance (to cover hosting and software costs, etc.) has been minimal. We firmly believe in free software, and that all software for personal use must be free. Hence, Tero Subtitler (and ViPlay) will always be made available to anyone who likes or finds them useful, never to become shareware programs. To continually improve them, however, we would really appreciate a donation via PayPal or your support on Patreon. Please remember that this is voluntary; you will not receive any less support or consideration.
  
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=uruworks@gmail.com&lc=US&item_name=Donate+to+URUWorks+Tero+Subtitler&no_note=0&cn=&curency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted)
+[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=uruworks@gmail.com&lc=US&item_name=Donate+to+URUWorks+Tero+Subtitler&no_note=0&cn=&curency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted)
+[![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/uruworks)
 
 ## Special thanks 
 
