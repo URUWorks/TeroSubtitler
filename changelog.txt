@@ -1,3 +1,6 @@
+1.0.0.4 (x.6.2023)
+improved Conventions: count space characters #26
+
 1.0.0.3 (17.6.2023)
 fixed EDL from Final Cut Pro 7 don't import properly #75
 added XML from Final Cut Pro 7 #76
