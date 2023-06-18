@@ -1,6 +1,7 @@
 # ![TeroSubtitler](share/terosubtitler_logo.png)
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 [![discord](https://img.shields.io/badge/Discord-blue)](https://discord.gg/EqzXEa8pHK)
+[![ko-fi](https://img.shields.io/badge/Ko--fi-F16061?logo=ko-fi&logoColor=white)](https://ko-fi.com/uruworks)
 
 Tero Subtitler is an open source, cross-platform, and free subtitle editing software.
 
