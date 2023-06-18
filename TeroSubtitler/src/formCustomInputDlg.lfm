@@ -1,7 +1,7 @@
 object frmCustomInputDlg: TfrmCustomInputDlg
-  Left = 263
+  Left = 244
   Height = 93
-  Top = 119
+  Top = 118
   Width = 450
   BorderIcons = []
   BorderStyle = bsSingle
@@ -49,5 +49,15 @@ object frmCustomInputDlg: TfrmCustomInputDlg
     Anchors = [akTop, akLeft, akRight, akBottom]
     OnKeyDown = mmoInputKeyDown
     TabOrder = 0
+  end
+  object lblHelp: TLabel
+    Cursor = crHandPoint
+    Left = 8
+    Height = 1
+    Top = 84
+    Width = 1
+    Anchors = [akLeft, akBottom]
+    ParentColor = False
+    OnClick = lblHelpClick
   end
 end

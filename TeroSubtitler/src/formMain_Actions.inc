@@ -1125,7 +1125,7 @@ procedure TfrmMain.actAddNoteExecute(Sender: TObject);
 begin
   if VST.SelectedCount = 1 then
     with Subtitles.ItemPointer[VSTFocusedNode(VST)]^ do
-      Notes := InputDialog(GetCommonString('AddNote'), '', Notes, 135);
+      Notes := InputDialog(GetCommonString('AddNote'), '', Notes, '', '', 135);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1134,7 +1134,7 @@ procedure TfrmMain.actLoadVideoFromURLExecute(Sender: TObject);
 var
   s: String;
 begin
-  s := InputDialog(GetCommonString('OpenVideoFromURL'), GetCommonString('URL'), '');
+  s := InputDialog(GetCommonString('OpenVideoFromURL'), GetCommonString('URL'), '', GetCommonString('SupportedSites'), 'https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md');
   if not s.IsEmpty then
   begin
     if not actVideoPreview.Checked then

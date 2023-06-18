@@ -649,6 +649,7 @@
     <AddNote>Añadir nota</AddNote>
     <OpenVideoFromURL>Abrir vídeo desde</OpenVideoFromURL>
     <URL>URL</URL>
+    <SupportedSites>Sitios compatibles</SupportedSites>
     <NewShortCutPreset>Ingrese un nombre para el ajuste preestablecido de atajos</NewShortCutPreset>
     <NewShortCutPresetName>Nombre</NewShortCutPresetName>    
     <FolderNotEmpty>La carpeta no está vacía.</FolderNotEmpty>

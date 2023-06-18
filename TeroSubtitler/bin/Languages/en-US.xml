@@ -649,6 +649,7 @@
     <AddNote>Add note</AddNote>
     <OpenVideoFromURL>Open video from</OpenVideoFromURL>    
     <URL>URL</URL>
+    <SupportedSites>Supported sites</SupportedSites>
     <NewShortCutPreset>Enter a name for your shortcuts preset</NewShortCutPreset>
     <NewShortCutPresetName>Name</NewShortCutPresetName>
     <FolderNotEmpty>The folder is not empty.</FolderNotEmpty>

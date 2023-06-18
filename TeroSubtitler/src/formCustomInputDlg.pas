@@ -22,7 +22,7 @@ unit formCustomInputDlg;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, StdCtrls, LCLType;
+  Classes, SysUtils, Forms, Controls, StdCtrls, LCLType, LCLIntf;
 
 type
 
@@ -31,15 +31,18 @@ type
   TfrmCustomInputDlg = class(TForm)
     btnOk: TButton;
     btnCancel: TButton;
+    lblHelp: TLabel;
     lblMessage: TLabel;
     mmoInput: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure lblHelpClick(Sender: TObject);
     procedure mmoInputKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
       );
   private
 
   public
+    FURL: String;
     function Execute(const ACaption, APrompt: String; const ADefault: String = ''; const AHeight: Integer = 93): String;
   end;
 
@@ -65,6 +68,7 @@ procedure TfrmCustomInputDlg.FormCreate(Sender: TObject);
 begin
   LoadLanguage(Self);
   lblMessage.Caption := '';
+  FURL := '';
 end;
 
 // -----------------------------------------------------------------------------
@@ -72,6 +76,13 @@ end;
 procedure TfrmCustomInputDlg.FormShow(Sender: TObject);
 begin
   CheckColorTheme(Self);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmCustomInputDlg.lblHelpClick(Sender: TObject);
+begin
+  OpenURL(FURL);
 end;
 
 // -----------------------------------------------------------------------------

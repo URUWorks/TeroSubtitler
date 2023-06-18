@@ -95,7 +95,7 @@ function GetInstallFolder(const AFileName: String): String;
 
 { Custom inputbox dialog }
 
-function InputDialog(const ACaption, APrompt, ADefault: String; const AHeight: Integer = 93): String;
+function InputDialog(const ACaption, APrompt, ADefault: String; const AHelp: String = ''; const AURL: String = ''; const AHeight: Integer = 93): String;
 
 { Custom message dialogs }
 
@@ -1417,10 +1417,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function InputDialog(const ACaption, APrompt, ADefault: String; const AHeight: Integer = 93): String;
+function InputDialog(const ACaption, APrompt, ADefault: String; const AHelp: String = ''; const AURL: String = ''; const AHeight: Integer = 93): String;
 begin
   with TfrmCustomInputDlg.Create(NIL) do
   try
+    FURL := AURL;
+    lblHelp.Caption := AHelp;
     Result := Execute(ACaption, APrompt, ADefault, AHeight);
   finally
     Free;

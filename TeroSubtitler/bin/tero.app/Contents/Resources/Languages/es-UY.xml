@@ -347,6 +347,7 @@
       <lblCPL>Caracteres por línea</lblCPL>            
       <lblRepeatableChars>Caracteres repetibles</lblRepeatableChars>
       <lblProhibitedChars>Caracteres prohibidos</lblProhibitedChars>
+      <lblCPSStrategy>Caract. excl. en conteo de CPS</lblCPSStrategy>                      
       <lblTheme>Tema</lblTheme>
       <lblListMode>Modo de lista</lblListMode>
 	  <lblSubtitles>Subtítulos</lblSubtitles>      
@@ -385,9 +386,6 @@
       <btnShortCutApply>Aplicar</btnShortCutApply>
       <btnShortCutSave>Guardar...</btnShortCutSave>
     </Section>
-    <Section Name="TEdit">      
-      <edtCPSStrategy Hint="Caracteres a ignorar"/>      
-    </Section>                       
   </Form>
   <Form Name="frmSpellCheck" Caption="Corrector ortográfico">
     <Section Name="TLabel">
@@ -550,7 +548,7 @@
       <lblFFMPEG>ffmpeg:</lblFFMPEG>
       <lblffmpegDesc>La solución absoluta para la extracción de audio y cambios de escena.</lblffmpegDesc>
       <lblWhisper>whisper.cpp:</lblWhisper>
-      <lblWhisperDesc>Reconocimiento automático de voz usando en audio a texto.</lblWhisperDesc>                
+      <lblWhisperDesc>Reconocimiento automático de voz usado en audio a texto.</lblWhisperDesc>                
     </Section>
   </Form>  
   <Form Name="frmDownload" Caption="">
@@ -651,6 +649,7 @@
     <AddNote>Añadir nota</AddNote>
     <OpenVideoFromURL>Abrir vídeo desde</OpenVideoFromURL>
     <URL>URL</URL>
+    <SupportedSites>Sitios compatibles</SupportedSites>
     <NewShortCutPreset>Ingrese un nombre para el ajuste preestablecido de atajos</NewShortCutPreset>
     <NewShortCutPresetName>Nombre</NewShortCutPresetName>    
     <FolderNotEmpty>La carpeta no está vacía.</FolderNotEmpty>
@@ -764,7 +763,8 @@
     <HHMMSSZZZ>HH:MM:SS.ZZZ</HHMMSSZZZ>
     <HHMMSSFF>HH:MM:SS:FF</HHMMSSFF>
     <edl>Listas de decisiones de edición</edl>    
-    <shotchanges>Archivos de texto</shotchanges>              
+    <shotchanges>Archivos de texto</shotchanges>
+    <xml>XML</xml>              
   </ShotChangesStrings>                                                                
   <CompareStrings>
     <Index>Indice</Index>

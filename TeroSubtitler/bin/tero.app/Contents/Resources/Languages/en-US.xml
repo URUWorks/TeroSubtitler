@@ -347,6 +347,7 @@
       <lblCPL>Characters per line</lblCPL>            
       <lblRepeatableChars>Repeatable characters</lblRepeatableChars>
       <lblProhibitedChars>Prohibited characters</lblProhibitedChars>
+      <lblCPSStrategy>Chars excluded from CPS count</lblCPSStrategy>      
       <lblTheme>Theme</lblTheme>
       <lblListMode>List mode</lblListMode>
 	  <lblSubtitles>Subtitles</lblSubtitles>      
@@ -385,9 +386,6 @@
       <btnShortCutApply>Apply</btnShortCutApply>
       <btnShortCutSave>Save as...</btnShortCutSave>
     </Section>
-    <Section Name="TEdit">      
-      <edtCPSStrategy Hint="Characters to ignore"/>      
-    </Section>           
   </Form>
   <Form Name="frmSpellCheck" Caption="Spell check">
     <Section Name="TLabel">
@@ -651,6 +649,7 @@
     <AddNote>Add note</AddNote>
     <OpenVideoFromURL>Open video from</OpenVideoFromURL>    
     <URL>URL</URL>
+    <SupportedSites>Supported sites</SupportedSites>
     <NewShortCutPreset>Enter a name for your shortcuts preset</NewShortCutPreset>
     <NewShortCutPresetName>Name</NewShortCutPresetName>
     <FolderNotEmpty>The folder is not empty.</FolderNotEmpty>
@@ -660,7 +659,7 @@
     <Failed>Failed.</Failed>    
     <Success>Success.</Success>
     <NewVersionFound>A new version was found.</NewVersionFound>
-    <SeeChangeList>Do you want to see the change list?</SeeChangeList>
+    <SeeChangeList>Do you want to see the changelog?</SeeChangeList>
     <NoNewVersion>You're using the latest version.</NoNewVersion>    
     <ErrorExecuting>Error executing '%s'.</ErrorExecuting> 
   </CommonStrings>
@@ -765,6 +764,7 @@
     <HHMMSSFF>HH:MM:SS:FF</HHMMSSFF>      
     <edl>Edit Decision Lists</edl>    
     <shotchanges>Text files</shotchanges>
+    <xml>XML</xml>
   </ShotChangesStrings>
   <CompareStrings>
     <Index>Index</Index>
