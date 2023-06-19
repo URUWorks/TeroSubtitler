@@ -120,7 +120,7 @@ type
 
 { Helpers }
 
-function FormatToName(const AFormat: TUWSubtitleFormats): String;
+function FormatToName(const AFormat: TUWSubtitleFormats; const ARemoveSpaces: Boolean = False): String;
 function IndexToName(const FormatIndex: ShortInt): String;
 function NameToIndex(const FormatName: String): ShortInt;
 function SubtitleEncoding(const Encoding: Integer): TEncoding;
@@ -136,9 +136,10 @@ implementation
 
 // -----------------------------------------------------------------------------
 
-function FormatToName(const AFormat: TUWSubtitleFormats): String;
+function FormatToName(const AFormat: TUWSubtitleFormats; const ARemoveSpaces: Boolean = False): String;
 begin
   Result := IndexToName(Integer(AFormat));
+  if ARemoveSpaces then Result := Result.Replace(' ', '');
 end;
 
 //------------------------------------------------------------------------------

@@ -129,11 +129,11 @@ end;
 
 function TUWWebVTT.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
 begin
-
-  if (SubtitleFile[Row] = 'WEBVTT') or
-     ((TimeInFormat(Copy(SubtitleFile[Row], 1, 12), 'hh:mm:ss.zzz')) and
-     (TimeInFormat(Copy(SubtitleFile[Row], 18, 12), 'hh:mm:ss.zzz')) and
-     (Pos(' --> ', SubtitleFile[Row]) > 0)) then
+//  if (SubtitleFile[Row] = 'WEBVTT') or
+//     ((TimeInFormat(Copy(SubtitleFile[Row], 1, 12), 'hh:mm:ss.zzz')) and
+//     (TimeInFormat(Copy(SubtitleFile[Row], 18, 12), 'hh:mm:ss.zzz')) and
+//     (Pos(' --> ', SubtitleFile[Row]) > 0)) then
+  if (SubtitleFile[0] = 'WEBVTT') then
      Result := True
    else
      Result := False;
@@ -148,9 +148,20 @@ var
   FinalTime   : Integer;
   Text, s     : String;
   ExtraInfo   : PWebVTT_ExtraInfo;
+  ExtraTime   : Integer;
 begin
   Result := False;
   try
+    ExtraTime := 0;
+    with Subtitles.FormatProperties^.WebVTT do
+      if UseXTIMESTAMP and (SubtitleFile[1].StartsWith('X-TIMESTAMP-MAP=MPEGTS')) then
+      begin
+        x := Pos('MPEGTS:', SubtitleFile[1])+7;
+        MPEGTS := StrToIntDef(Copy(SubtitleFile[1], x, Pos(',', SubtitleFile[1])-x), 0);
+        LOCAL := StringToTime(Copy(SubtitleFile[1], Pos('LOCAL:', SubtitleFile[1])+6, 12));
+        ExtraTime := LOCAL;
+      end;
+
     i := 0;
     while i < SubtitleFile.Count do
     begin
@@ -158,8 +169,8 @@ begin
       begin
         s := ReplaceString(SubtitleFile[i], ' ', '');
 
-        InitialTime := StringToTime(Copy(s, 1, 12));
-        FinalTime   := StringToTime(Copy(s, 16, 12));
+        InitialTime := StringToTime(Copy(s, 1, 12))  + ExtraTime;
+        FinalTime   := StringToTime(Copy(s, 16, 12)) + ExtraTime;
 
         c := Pos('align', SubtitleFile[i]);
         if (c > 0) then
@@ -251,10 +262,20 @@ var
   i : Integer;
   Text : String;
   Align : String;
+  ExtraTime : Integer;
 begin
   Result  := False;
 
   StringList.Add('WEBVTT', False);
+
+  ExtraTime := 0;
+  with Subtitles.FormatProperties^.WebVTT do
+    if UseXTIMESTAMP then
+    begin
+      StringList.Add(SysUtils.Format('X-TIMESTAMP-MAP=MPEGTS:%d,LOCAL:%s', [MPEGTS, TimeToString(LOCAL, 'hh:mm:ss.zzz')]), False);
+      ExtraTime := LOCAL;
+    end;
+
   StringList.Add('', False);
 
   for i := FromItem to ToItem do
@@ -285,7 +306,7 @@ begin
     if Subtitles.FormatProperties^.WebVTT.WriteCueIdentifiers then
       StringList.Add((i+1).ToString, False);
 
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz') + Align, False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i]-ExtraTime, 'hh:mm:ss.zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i]-ExtraTime, 'hh:mm:ss.zzz') + Align, False);
     Text := TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
     StringList.Add(Text, False);
     StringList.Add('', False);

@@ -135,6 +135,9 @@ type
   PWebVTT_Info = ^TWebVTT_Info;
   TWebVTT_Info = record
     WriteCueIdentifiers : Boolean;
+    UseXTIMESTAMP : Boolean;
+    MPEGTS: Integer;
+    LOCAL: Integer;
   end;
 
   PWebVTT_ExtraInfo = ^TWebVTT_ExtraInfo;
@@ -230,6 +233,9 @@ begin
     with WebVTT do
     begin
       WriteCueIdentifiers := False;
+      UseXTIMESTAMP       := False;
+      MPEGTS              := 0;
+      LOCAL               := 0;
     end;
   end;
 end;

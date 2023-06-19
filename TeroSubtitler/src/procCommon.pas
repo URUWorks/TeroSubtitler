@@ -124,7 +124,7 @@ uses
   procColorTheme, LCLProc, formCustomInputDlg, UWSystem.Globalization,
   UWSystem.TimeUtils, libMPV.Client, UWSpellcheck.Hunspell, procConventions,
   UWSystem.InetUtils, fileinfo, winpeimagereader, elfreader, machoreader,
-  LCLIntf;
+  LCLIntf, UWSystem.StrUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -531,11 +531,78 @@ begin
     end;
     // Format properties
     OpenKey('FormatProperties');
-    //
-    OpenKey(FormatToName(sfWebVTT));
-    Subtitles.FormatProperties^.WebVTT.WriteCueIdentifiers := GetValue('WriteCueIdentifiers', False);
-    CloseKey;
-    //
+      //
+      OpenKey(FormatToName(sfAdvancedSubtitles, True));
+      with Subtitles.FormatProperties^.AdvancedSubtitles do
+      begin
+        Language  := GetValue('Language', Language);
+        FontName  := GetValue('FontName', FontName);
+        FontSize  := GetValue('FontSize', FontSize);
+        FontColor := GetValue('FontColor', FontColor);
+        X         := GetValue('X', X);
+        Y         := GetValue('Y', Y);
+        W         := GetValue('W', W);
+        H         := GetValue('H', H);;
+        Alignment := GetValue('Alignment', Alignment);
+      end;
+      CloseKey;
+      //
+      OpenKey(FormatToName(sfCavena890, True));
+      with Subtitles.FormatProperties^.Cavena890 do
+      begin
+        AnsiStringToAnsiChar(TapeNumber, GetValue('TapeNumber', TapeNumber));
+        AnsiStringToAnsiChar(TranslatedTitle, GetValue('TranslatedTitle', TranslatedTitle));
+        AnsiStringToAnsiChar(Translator, GetValue('Translator', Translator));
+        AnsiStringToAnsiChar(TranslatedEpisode, GetValue('TranslatedEpisode', TranslatedEpisode));
+        AnsiStringToAnsiChar(Comments, GetValue('Comments', Comments));
+        AnsiStringToAnsiChar(PrimaryFont, GetValue('PrimaryFont', PrimaryFont));
+        AnsiStringToAnsiChar(OriginalTitle, GetValue('OriginalTitle', OriginalTitle));
+        AnsiStringToAnsiChar(SecondaryFont, GetValue('SecondaryFont', SecondaryFont));
+        AnsiStringToAnsiChar(StartTime, GetValue('StartTime', StartTime));
+        AnsiStringToAnsiChar(Producer, GetValue('Producer', Producer));
+        AnsiStringToAnsiChar(EpisodeTitle, GetValue('EpisodeTitle', EpisodeTitle));
+        PrimaryLanguage := GetValue('PrimaryLanguage', PrimaryLanguage);
+      end;
+      CloseKey;
+      //
+      OpenKey(FormatToName(sfDVDSubtitle, True));
+      with Subtitles.FormatProperties^.DVDSubtitle do
+      begin
+        Assigned := GetValue('Assigned', Assigned);
+        DiskId   := GetValue('DiskId', DiskId);
+        DVDTitle := GetValue('DVDTitle', DVDTitle);
+        Language := GetValue('Language', Language);
+        Author   := GetValue('Author', Author);
+        Web      := GetValue('Web', Web);
+        Info     := GetValue('Info', Info);
+        License  := GetValue('License', License);
+      end;
+      CloseKey;
+      //
+      OpenKey(FormatToName(sfEBU, True));
+      with Subtitles.FormatProperties^.EBU do
+      begin
+        DiskFormatCode            := GetValue('DiskFormatCode', DiskFormatCode);
+        CodePageNumber            := GetValue('CodePageNumber', CodePageNumber);
+        DisplayStandardCode       := GetValue('DisplayStandardCode', DisplayStandardCode);
+        CharCodeTableNumber       := GetValue('CharCodeTableNumber', CharCodeTableNumber);
+        LanguageCode              := GetValue('LanguageCode', LanguageCode);
+        CountryOrigin             := GetValue('CountryOrigin', CountryOrigin);
+        MaxNumberDisplayableChars := GetValue('MaxNumberDisplayableChars', MaxNumberDisplayableChars);
+        MaxNumberDisplayableRows  := GetValue('MaxNumberDisplayableRows', MaxNumberDisplayableRows);
+      end;
+      CloseKey;
+      //
+      OpenKey(FormatToName(sfWebVTT, True));
+      with Subtitles.FormatProperties^.WebVTT do
+      begin
+        WriteCueIdentifiers := GetValue('WriteCueIdentifiers', WriteCueIdentifiers);
+        UseXTIMESTAMP       := GetValue('UseXTIMESTAMP', UseXTIMESTAMP);
+        MPEGTS              := GetValue('MPEGTS', MPEGTS);
+        LOCAL               := GetValue('LOCAL', LOCAL);
+      end;
+      CloseKey;
+      //
     CloseKey;
   finally
     Free;
@@ -724,11 +791,77 @@ begin
     end;
     // Format properties
     OpenKey('FormatProperties');
-    // WebVTT
-    OpenKey(FormatToName(sfWebVTT));
-    SetValue('WriteCueIdentifiers', Subtitles.FormatProperties^.WebVTT.WriteCueIdentifiers);
-    CloseKey;
-    //
+      //
+      OpenKey(FormatToName(sfAdvancedSubtitles, True));
+      with Subtitles.FormatProperties^.AdvancedSubtitles do
+      begin
+        SetValue('Language', Language);
+        SetValue('FontName', FontName);
+        SetValue('FontSize', FontSize);
+        SetValue('FontColor', FontColor);
+        SetValue('X', X);
+        SetValue('Y', Y);
+        SetValue('W', W);
+        SetValue('H', H);
+        SetValue('Alignment', Alignment);
+      end;
+      CloseKey;
+      //
+      OpenKey(FormatToName(sfCavena890, True));
+      with Subtitles.FormatProperties^.Cavena890 do
+      begin
+        SetValue('TapeNumber', TapeNumber);
+        SetValue('TranslatedTitle', TranslatedTitle);
+        SetValue('Translator', Translator);
+        SetValue('TranslatedEpisode', TranslatedEpisode);
+        SetValue('Comments', Comments);
+        SetValue('PrimaryFont', PrimaryFont);
+        SetValue('OriginalTitle', OriginalTitle);
+        SetValue('SecondaryFont', SecondaryFont);
+        SetValue('Producer', Producer);
+        SetValue('EpisodeTitle', EpisodeTitle);
+        SetValue('PrimaryLanguage', PrimaryLanguage);
+      end;
+      CloseKey;
+      //
+      OpenKey(FormatToName(sfDVDSubtitle, True));
+      with Subtitles.FormatProperties^.DVDSubtitle do
+      begin
+        SetValue('Assigned', Assigned);
+        SetValue('DiskId', DiskId);
+        SetValue('DVDTitle', DVDTitle);
+        SetValue('Language', Language);
+        SetValue('Author', Author);
+        SetValue('Web', Web);
+        SetValue('Info', Info);
+        SetValue('License', License);
+      end;
+      CloseKey;
+      //
+      OpenKey(FormatToName(sfEBU, True));
+      with Subtitles.FormatProperties^.EBU do
+      begin
+        SetValue('DiskFormatCode', DiskFormatCode);
+        SetValue('CodePageNumber', CodePageNumber);
+        SetValue('DisplayStandardCode', DisplayStandardCode);
+        SetValue('CharCodeTableNumber', CharCodeTableNumber);
+        SetValue('LanguageCode', LanguageCode);
+        SetValue('CountryOrigin', CountryOrigin);
+        SetValue('MaxNumberDisplayableChars', MaxNumberDisplayableChars);
+        SetValue('MaxNumberDisplayableRows', MaxNumberDisplayableRows);
+      end;
+      CloseKey;
+      //
+      OpenKey(FormatToName(sfWebVTT, True));
+      with Subtitles.FormatProperties^.WebVTT do
+      begin
+        SetValue('WriteCueIdentifiers', WriteCueIdentifiers);
+        SetValue('UseXTIMESTAMP', UseXTIMESTAMP);
+        SetValue('MPEGTS', MPEGTS);
+        SetValue('LOCAL', LOCAL);
+      end;
+      CloseKey;
+      //
     CloseKey;
     //
     Flush;

@@ -530,10 +530,13 @@
       <lblEBULC>Código de lenguaje</lblEBULC>      
       <lblEBUCO>País de origen</lblEBUCO>      
       <lblEBUNDC>Caracteres máximos</lblEBUNDC>      
-      <lblEBUNDR>Filas máximas</lblEBUNDR>      
+      <lblEBUNDR>Filas máximas</lblEBUNDR>
+      <lblVTTMPEGTS>Tiempo MPEG-2:</lblVTTMPEGTS>
+      <lblVTTLOCAL>Tiempo de entrada:</lblVTTLOCAL>            
     </Section>      
     <Section Name="TUWCheckBox">
       <chkVTTWriteCueIdentifiers>Escribir identificadores de subtítulos</chkVTTWriteCueIdentifiers>
+      <chkUseXTIMESTAMP>Usar cabecera X-TIMESTAMP-MAP</chkUseXTIMESTAMP>
     </Section>  
   </Form>   
   <Form Name="frmWizard" Caption="Asistente de configuración">

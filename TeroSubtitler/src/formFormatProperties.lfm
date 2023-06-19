@@ -31,6 +31,55 @@ object frmFormatProperties: TfrmFormatProperties
       Caption = 'Write cue identifiers'
       TabOrder = 0
     end
+    object chkVTTUseXTIMESTAMP: TUWCheckBox
+      Left = 0
+      Height = 23
+      Top = 24
+      Width = 16
+      AutoSize = False
+      Caption = 'Use X-TIMESTAMP-MAP header'
+      TabOrder = 1
+    end
+    object spnVTTMPEGTS: TSpinEdit
+      Left = 152
+      Height = 23
+      Top = 56
+      Width = 200
+      TabOrder = 2
+    end
+    object lblVTTMPEGTS: TLabel
+      Left = 0
+      Height = 15
+      Top = 60
+      Width = 73
+      Caption = 'MPEG-2 time:'
+      ParentColor = False
+    end
+    object lblVTTLOCAL: TLabel
+      Left = 0
+      Height = 15
+      Top = 92
+      Width = 51
+      Caption = 'Cue time:'
+      ParentColor = False
+    end
+    object tedVTTLOCAL: TUWTimeEdit
+      Left = 152
+      Height = 23
+      Top = 88
+      Width = 186
+      Value = 0
+      FPS = 25
+      FrameStep = 1
+      TimeStep = 1
+      TimeMode = temTime
+      Alignment = taCenter
+      Constraints.MinHeight = 21
+      Constraints.MinWidth = 90
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+    end
   end
   object cboFormats: TComboBox
     Left = 8

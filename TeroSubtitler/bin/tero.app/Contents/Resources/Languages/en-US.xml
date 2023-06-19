@@ -531,9 +531,12 @@
       <lblEBUCO>Country origin</lblEBUCO>      
       <lblEBUNDC>Max chars</lblEBUNDC>      
       <lblEBUNDR>Max rows</lblEBUNDR>      
+      <lblVTTMPEGTS>MPEG-2 time:</lblVTTMPEGTS>
+      <lblVTTLOCAL>Cue time:</lblVTTLOCAL>
     </Section>        
     <Section Name="TUWCheckBox">
       <chkVTTWriteCueIdentifiers>Write cue identifiers</chkVTTWriteCueIdentifiers>
+      <chkVTTUseXTIMESTAMP>Use X-TIMESTAMP-MAP header</chkVTTUseXTIMESTAMP>      
     </Section>    
   </Form> 
   <Form Name="frmWizard" Caption="Getting started wizard">

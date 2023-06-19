@@ -41,6 +41,7 @@ type
     cboASAlignment: TComboBox;
     cboASLanguage: TComboBox;
     cboCavenaLanguage: TComboBox;
+    chkVTTUseXTIMESTAMP: TUWCheckBox;
     edtASFontName: TEdit;
     edtDVDWeb: TEdit;
     edtDVDAuthor: TEdit;
@@ -54,6 +55,8 @@ type
     edtEBULC: TEdit;
     edtEBUCO: TEdit;
     lblASFontColor: TLabel;
+    lblVTTMPEGTS: TLabel;
+    lblVTTLOCAL: TLabel;
     lblDVDWeb: TLabel;
     lblDVDLanguage: TLabel;
     lblDVDAuthor: TLabel;
@@ -88,6 +91,7 @@ type
     chkVTTWriteCueIdentifiers: TUWCheckBox;
     lyoAdvancedSubtitles: TUWLayout;
     spnASFontSize: TSpinEdit;
+    spnVTTMPEGTS: TSpinEdit;
     spnASPositionX: TSpinEdit;
     spnASPositionY: TSpinEdit;
     spnEBUNDC: TSpinEdit;
@@ -95,6 +99,7 @@ type
     spnASWidth: TSpinEdit;
     spnASHeight: TSpinEdit;
     tedCavenaTCStart: TUWTimeEdit;
+    tedVTTLOCAL: TUWTimeEdit;
     procedure btnApplyClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure cboFormatsSelect(Sender: TObject);
@@ -247,6 +252,9 @@ begin
     with Subtitles.FormatProperties^.WebVTT do
     begin
       chkVTTWriteCueIdentifiers.Checked := WriteCueIdentifiers;
+      chkVTTUseXTIMESTAMP.Checked := UseXTIMESTAMP;
+      spnVTTMPEGTS.Value := MPEGTS;
+      tedVTTLOCAL.Value := LOCAL;
     end;
   finally
     FAppStringList.Free;
@@ -336,6 +344,9 @@ begin
   with Subtitles.FormatProperties^.WebVTT do
   begin
     WriteCueIdentifiers := chkVTTWriteCueIdentifiers.Checked;
+    UseXTIMESTAMP := chkVTTUseXTIMESTAMP.Checked;
+    MPEGTS := spnVTTMPEGTS.Value;
+    LOCAL := tedVTTLOCAL.Value;
   end;
 
   Close;
