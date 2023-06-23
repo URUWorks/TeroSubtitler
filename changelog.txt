@@ -1,6 +1,7 @@
 1.0.0.4 (x.6.2023)
 improved Make it clearer what URLs are accepted #46
 improved Conventions: count space characters #26
+fixed Resize handles for columns do not show a preview of the dragging result #105
 fixed Translation disappears when switching from “List mode” to “Source mode” #104
 fixed Format properties not saved when closing App
 fixed 'Remove spaces within brackets' bug
