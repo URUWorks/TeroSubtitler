@@ -33,6 +33,26 @@
       <string>Editor</string>
       <key>CFBundleTypeExtensions</key>
       <array>
+        <string>srt</string>
+        <string>itt</string>
+        <string>xml</string>
+        <string>vtt</string>
+        <string>dfxp</string>
+        <string>sub</string>
+        <string>stl</string>
+        <string>ass</string>
+        <string>xas</string>
+        <string>aqt</string>
+        <string>asc</string>
+        <string>cap</string>
+        <string>ttxt</string>
+        <string>lrc</string>
+        <string>vkt</string>
+        <string>scr</string>
+        <string>mpl</string>
+        <string>dks</string>
+        <string>txt</string>
+        <string>tero</string>
         <string>*</string>
       </array>
       <key>CFBundleTypeOSTypes</key>
@@ -41,6 +61,8 @@
         <string>disk</string>
         <string>****</string>
       </array>
+      <key>LSIsAppleDefaultForType</key>
+      <true/>
     </dict>
   </array>
   <key>NSHighResolutionCapable</key>
