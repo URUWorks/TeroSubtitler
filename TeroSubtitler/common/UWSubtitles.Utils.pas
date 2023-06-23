@@ -757,7 +757,7 @@ end;
 
 function RemoveSpacesWithinCustomBrackets(const Text: String; const OpenBracket, CloseBracket: String): String;
 var
-  x, b1, b2 : Integer;
+  x, b1, b2, l: Integer;
   s : String;
 begin
   Result := Text;
@@ -766,14 +766,17 @@ begin
   while x > 0 do
   begin
     b1 := Pos(OpenBracket, Result, x);
-    b2 := Pos(CloseBracket, Result, b1+1);
-    x  := b2+1;
+    b2 := Pos(CloseBracket, Result, b1);
 
     if (b1 = 0) or (b2 = 0) then Exit;
 
-    s := Copy(Result, b1+1, b2-2);
-    Delete(Result, b1+1, b2-2);
-    Insert(s.Trim, Result, b1+1);
+    x := b2+1;
+    b1 += 1;
+
+    l := b2-b1;
+    s := Copy(Result, b1, l);
+    Delete(Result, b1, l);
+    Insert(s.Trim, Result, b1);
   end;
 end;
 

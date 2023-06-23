@@ -19,8 +19,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="1429"/>
-        <CursorPos Y="1463"/>
+        <CursorPos X="27" Y="17"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -573,7 +572,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="165"/>
+        <UsageCount Value="167"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToText.pas"/>
@@ -584,7 +583,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="209"/>
         <CursorPos Y="224"/>
-        <UsageCount Value="151"/>
+        <UsageCount Value="153"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToTextModel.pas"/>
@@ -594,7 +593,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="146"/>
+        <UsageCount Value="148"/>
       </Unit>
       <Unit>
         <Filename Value="formTBX.pas"/>
@@ -604,15 +603,15 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="135"/>
+        <UsageCount Value="137"/>
       </Unit>
       <Unit>
         <Filename Value="procFixSubtitles.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="545"/>
-        <CursorPos X="3" Y="548"/>
-        <UsageCount Value="119"/>
+        <TopLine Value="399"/>
+        <CursorPos X="59" Y="557"/>
+        <UsageCount Value="121"/>
       </Unit>
       <Unit>
         <Filename Value="formFormatProperties.pas"/>
@@ -623,7 +622,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="304"/>
         <CursorPos Y="314"/>
-        <UsageCount Value="71"/>
+        <UsageCount Value="73"/>
       </Unit>
       <Unit>
         <Filename Value="procFix.pas"/>
@@ -741,8 +740,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="124"/>
-        <CursorPos X="5" Y="142"/>
+        <TopLine Value="248"/>
+        <CursorPos X="23" Y="265"/>
         <UsageCount Value="17"/>
       </Unit>
       <Unit>
@@ -832,8 +831,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Tags.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="57"/>
-        <CursorPos X="25" Y="68"/>
+        <TopLine Value="111"/>
+        <CursorPos Y="137"/>
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
@@ -1111,8 +1110,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.WebVTT.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="218"/>
-        <CursorPos X="5" Y="236"/>
+        <TopLine Value="254"/>
+        <CursorPos X="5" Y="271"/>
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
@@ -1298,7 +1297,8 @@
       <Unit>
         <Filename Value="..\..\Components\UW_MPVPlayer\MPVPlayer.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
+        <TopLine Value="68"/>
+        <CursorPos X="5" Y="70"/>
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
@@ -1433,7 +1433,8 @@
       <Unit>
         <Filename Value="..\common\UWSubtitles.Utils.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="49" Y="24"/>
+        <TopLine Value="745"/>
+        <CursorPos X="37" Y="770"/>
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
@@ -2218,7 +2219,15 @@
         <UsageCount Value="9"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory HistoryIndex="1">
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="1463" TopLine="1429"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+      </Position>
+    </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode=""/>
