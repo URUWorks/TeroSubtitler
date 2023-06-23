@@ -2,6 +2,7 @@
 improved Make it clearer what URLs are accepted #46
 improved Conventions: count space characters #26
 fixed Format properties not saved when closing App
+fixed 'Remove spaces within brackets' bug
 added X-TIMESTAMP-MAP for WebVTT format properties
 
 1.0.0.3 (17.6.2023)
