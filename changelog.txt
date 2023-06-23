@@ -1,3 +1,6 @@
+1.0.0.5 (x.6.2023)
+added [macOS] Tero Subtitler available in context menu of file
+
 1.0.0.4 (23.6.2023)
 improved Make it clearer what URLs are accepted #46
 improved Conventions: count space characters #26
