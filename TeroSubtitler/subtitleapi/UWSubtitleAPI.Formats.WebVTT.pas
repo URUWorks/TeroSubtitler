@@ -262,18 +262,18 @@ var
   i : Integer;
   Text : String;
   Align : String;
-  ExtraTime : Integer;
+//  ExtraTime : Integer;
 begin
   Result  := False;
 
   StringList.Add('WEBVTT', False);
 
-  ExtraTime := 0;
+  //ExtraTime := 0;
   with Subtitles.FormatProperties^.WebVTT do
     if UseXTIMESTAMP then
     begin
       StringList.Add(SysUtils.Format('X-TIMESTAMP-MAP=MPEGTS:%d,LOCAL:%s', [MPEGTS, TimeToString(LOCAL, 'hh:mm:ss.zzz')]), False);
-      ExtraTime := LOCAL;
+      //ExtraTime := LOCAL;
     end;
 
   StringList.Add('', False);
@@ -306,7 +306,7 @@ begin
     if Subtitles.FormatProperties^.WebVTT.WriteCueIdentifiers then
       StringList.Add((i+1).ToString, False);
 
-    StringList.Add(TimeToString(Subtitles.InitialTime[i]-ExtraTime, 'hh:mm:ss.zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i]-ExtraTime, 'hh:mm:ss.zzz') + Align, False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz') + Align, False);
     Text := TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
     StringList.Add(Text, False);
     StringList.Add('', False);
