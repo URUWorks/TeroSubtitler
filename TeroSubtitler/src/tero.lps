@@ -19,7 +19,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="27" Y="17"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -28,8 +27,8 @@
         <Filename Value="procTypes.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="40"/>
-        <CursorPos Y="59"/>
+        <TopLine Value="132"/>
+        <CursorPos X="11" Y="160"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -44,6 +43,8 @@
         <Filename Value="procCommon.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="1599"/>
+        <CursorPos X="21" Y="1603"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -197,8 +198,8 @@
         <Filename Value="procWorkspace.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="230"/>
-        <CursorPos Y="243"/>
+        <TopLine Value="626"/>
+        <CursorPos X="29" Y="633"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -361,7 +362,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <CursorPos Y="17"/>
+        <TopLine Value="85"/>
+        <CursorPos X="3" Y="129"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -423,8 +425,8 @@
         <Filename Value="procFiles.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="943"/>
-        <CursorPos X="3" Y="964"/>
+        <TopLine Value="162"/>
+        <CursorPos X="64" Y="190"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -572,7 +574,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="167"/>
+        <UsageCount Value="168"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToText.pas"/>
@@ -583,7 +585,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="209"/>
         <CursorPos Y="224"/>
-        <UsageCount Value="153"/>
+        <UsageCount Value="154"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToTextModel.pas"/>
@@ -593,7 +595,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="148"/>
+        <UsageCount Value="149"/>
       </Unit>
       <Unit>
         <Filename Value="formTBX.pas"/>
@@ -603,7 +605,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="137"/>
+        <UsageCount Value="138"/>
       </Unit>
       <Unit>
         <Filename Value="procFixSubtitles.pas"/>
@@ -611,7 +613,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="399"/>
         <CursorPos X="59" Y="557"/>
-        <UsageCount Value="121"/>
+        <UsageCount Value="122"/>
       </Unit>
       <Unit>
         <Filename Value="formFormatProperties.pas"/>
@@ -622,7 +624,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="304"/>
         <CursorPos Y="314"/>
-        <UsageCount Value="73"/>
+        <UsageCount Value="74"/>
       </Unit>
       <Unit>
         <Filename Value="procFix.pas"/>
@@ -654,9 +656,9 @@
         <Filename Value="C:\lazarus2\lcl\controls.pp"/>
         <UnitName Value="Controls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1564"/>
-        <CursorPos X="15" Y="1572"/>
-        <UsageCount Value="8"/>
+        <TopLine Value="40"/>
+        <CursorPos X="3" Y="58"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus2\lcl\extctrls.pp"/>
@@ -1075,8 +1077,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="123"/>
-        <CursorPos X="35" Y="142"/>
+        <TopLine Value="96"/>
+        <CursorPos X="20" Y="116"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -1297,8 +1299,6 @@
       <Unit>
         <Filename Value="..\..\Components\UW_MPVPlayer\MPVPlayer.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="68"/>
-        <CursorPos X="5" Y="70"/>
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
@@ -1548,16 +1548,16 @@
         <UnitName Value="UITypes"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="32"/>
-        <CursorPos X="46" Y="45"/>
-        <UsageCount Value="7"/>
+        <CursorPos X="3" Y="44"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus2\fpc\3.2.2\source\packages\rtl-objpas\src\inc\system.uitypes.pp"/>
         <UnitName Value="System.UITypes"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="187"/>
-        <CursorPos X="3" Y="209"/>
-        <UsageCount Value="7"/>
+        <TopLine Value="193"/>
+        <CursorPos X="3" Y="208"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus2\lcl\include\customform.inc"/>
@@ -2219,13 +2219,21 @@
         <UsageCount Value="9"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="1">
+    <JumpHistory HistoryIndex="3">
       <Position>
         <Filename Value="formMain.pas"/>
         <Caret Line="1463" TopLine="1429"/>
       </Position>
       <Position>
         <Filename Value="formMain.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="10" Column="42"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="15" Column="83"/>
       </Position>
     </JumpHistory>
     <RunParams>

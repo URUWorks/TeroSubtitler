@@ -902,7 +902,7 @@ uses
 procedure TfrmMain.FormCreate(Sender: TObject);
 {$IFDEF DARWIN}
 var
-  AppMenu, AboutMenu, SettingsMenu, FormatPropertiesMenu,
+  AppMenu, AboutMenu, SettingsMenu, //FormatPropertiesMenu,
   AppUpdate, SepMenu: TMenuItem;
 {$ENDIF}
 begin
@@ -969,6 +969,10 @@ begin
   ForceDirectories(WhisperModelsFolder);
   ForceDirectories(WhisperTranscriptionsFolder);
   {$IFDEF DARWIN}
+  // rsLine not working on macOS?
+  SplitterVideo.ResizeStyle    := rsUpdate;
+  SplitterWaveform.ResizeStyle := SplitterVideo.ResizeStyle;
+
   // prepare macOS menu
   AppMenu := TMenuItem.Create(Self); {Application menu}
   AppMenu.Caption := #$EF#$A3#$BF;   {Unicode Apple logo char}
@@ -990,9 +994,9 @@ begin
   SepMenu.Caption := '-';
   AppMenu.Add(SepMenu); {Add - as item in application menu}
 
-  FormatPropertiesMenu := TMenuItem.Create(Self);
-  FormatPropertiesMenu.Action := actFormatProperties;
-  AppMenu.Add(FormatPropertiesMenu); {Add format properties as item in application menu}
+  //FormatPropertiesMenu := TMenuItem.Create(Self);
+  //FormatPropertiesMenu.Action := actFormatProperties;
+  //AppMenu.Add(FormatPropertiesMenu); {Add format properties as item in application menu}
 
   SettingsMenu := TMenuItem.Create(Self);
   SettingsMenu.Action := actSettings;
@@ -1005,7 +1009,7 @@ begin
   mnuAbout.Visible            := False;
   mnuCheckForUpdates.Visible  := False;
   mnuHelpSeparator.Visible    := False;
-  mnuFormatProperties.Visible := False;
+  //mnuFormatProperties.Visible := False;
   mnuSettings.Visible         := False;
   mnuExit.Visible             := False;
   {$ENDIF}
@@ -1072,8 +1076,10 @@ begin
         ShowErrorMessageDialog(GetCommonString('libMPVVersionError'));
     end;
 
+    {$IFNDEF DARWIN}
     // Commandline
     CommandLineProcess;
+    {$ENDIF}
 
     // Welcome form
     if AppOptions.ShowWelcomeAtStartup and not VST.Enabled then

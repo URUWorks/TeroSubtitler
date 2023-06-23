@@ -637,6 +637,7 @@
     <NoSubtitlesMarked>There are no marked subtitles.</NoSubtitlesMarked>
     <PromptForDeleteLines>The selected lines will be deleted.</PromptForDeleteLines>
     <TranscriptionModeExit>Exiting transcription mode will lose any unsaved changes.</TranscriptionModeExit>
+    <SourceModeWarning>Switching to source mode will change the format to "Tero Subtitler", otherwise unsaved translations will be lost.</SourceModeWarning>
     <TextFormatted>Export formatted text?</TextFormatted>        
     <NoInternetConnection>No Internet connection available</NoInternetConnection>
     <FailedToDownload>No content downloaded, missing file or no Internet connection.</FailedToDownload>

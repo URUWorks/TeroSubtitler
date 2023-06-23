@@ -618,6 +618,8 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure SetViewMode(const AViewMode: TViewMode);
+var
+  r: Integer;
 begin
   // show requested layout (like a pagecontrol)
   if Workspace.ViewMode = AViewMode then Exit;
@@ -631,6 +633,21 @@ begin
           frmMain.actTranscriptionMode.Checked := True;
           Exit;
         end;
+  end
+  else if (Workspace.ViewMode = vmList) and (AViewMode = vmSource) then
+  begin
+    with frmMain do
+      if Workspace.TranslatorMode and (TUWSubtitleFormats(cboFormat.ItemIndex+1) <> sfTeroSubtitler) then
+      begin
+        r := CustomQuestionDialog('CommonStrings', 'SourceModeWarning', 'ContinueAnyway', [mbYes, mbNo, mbCancel]);
+        case r of
+          mrCancel : begin
+                       frmMain.actListMode.Checked := True;
+                       Exit;
+                     end;
+          mrYes    : cboFormat.ItemIndex := Integer(sfTeroSubtitler)-1;
+        end;
+      end;
   end;
 
   Workspace.ViewMode := AViewMode;

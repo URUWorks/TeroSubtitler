@@ -637,6 +637,7 @@
     <NoSubtitlesMarked>No hay subtítulos marcados.</NoSubtitlesMarked>
     <PromptForDeleteLines>Las líneas seleccionadas serán eliminadas.</PromptForDeleteLines>    
     <TranscriptionModeExit>Si sale del modo de transcripción se perderán los cambios no guardados.</TranscriptionModeExit>
+    <SourceModeWarning>Al cambiar al modo código se cambiará el formato a "Tero Subtitler", de lo contrario, se perderán las traducciones no guardadas.</SourceModeWarning>
     <TextFormatted>¿Exportar texto con formato?</TextFormatted>    
     <NoInternetConnection>No hay conexión a Internet disponible</NoInternetConnection>
     <FailedToDownload>No hay contenido descargado, falta un archivo o no hay conexión a Internet.</FailedToDownload>
