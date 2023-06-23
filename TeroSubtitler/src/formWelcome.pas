@@ -116,6 +116,10 @@ end;
 
 procedure TfrmWelcome.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
+  {$IFDEF DARWIN}
+  if not frmMain.Visible then frmMain.Show;
+  {$ENDIF}
+
   AppOptions.ShowWelcomeAtStartup := chkShowOnStartup.Checked;
   CloseAction := caFree;
   frmWelcome  := NIL;

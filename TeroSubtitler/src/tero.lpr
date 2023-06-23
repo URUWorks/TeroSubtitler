@@ -39,7 +39,9 @@ begin
   Application.Title:='Tero Subtitler';
   Application.Scaled:=True;
   Application.Initialize;
+  Application.ShowMainForm := False;
   Application.CreateForm(TfrmMain, frmMain);
+  InitializeApp;
   Application.Run;
 end.
 

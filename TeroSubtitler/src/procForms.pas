@@ -117,7 +117,7 @@ begin
   if frmWelcome = NIL then
   begin
     frmWelcome := TfrmWelcome.Create(Application);
-    ShowForm(frmWelcome);
+    ShowForm(frmWelcome{$IFDEF DARWIN}, False{$ENDIF});
   end;
 end;
 

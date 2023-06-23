@@ -73,6 +73,10 @@ procedure DropFilesProcessFile(const FileName: String);
 
 procedure CommandLineProcess;
 
+{ Initialize App }
+
+procedure InitializeApp;
+
 // -----------------------------------------------------------------------------
 
 implementation
@@ -80,7 +84,10 @@ implementation
 uses
   procCommon, procWorkspace, procVST, procSubtitle, procUndo, UWSystem.Encoding,
   formCustomFileDlg, UWSystem.XMLLang, UWSystem.SysUtils, Forms, procMRU,
-  UWSystem.StrUtils;
+  UWSystem.StrUtils, procForms
+  {$IFDEF DARWIN}
+  , formWelcome
+  {$ENDIF};
 
 // -----------------------------------------------------------------------------
 
@@ -174,6 +181,9 @@ var
   MRUInfoObject: TMRUInfoObject;
   VFisLoaded: Boolean;
 begin
+  {$IFDEF DARWIN}
+  if not frmMain.Visible then frmMain.Show;
+  {$ENDIF}
   if not CloseSubtitle(AutoLoadVideoFile) then Exit;
 
   _FPS := AFPS;
@@ -907,6 +917,10 @@ procedure DropFilesProcess(const FileNames: array of String);
 var
   c: Integer;
 begin
+  {$IFDEF DARWIN}
+  if frmWelcome <> NIL then frmWelcome.Close;
+  {$ENDIF}
+
   for c := 0 to Length(FileNames)-1 do
   begin
     if DirectoryExists(FileNames[c]) then
@@ -969,6 +983,46 @@ begin
     begin
       //ParamStr(i);
     end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+{ Initialize App }
+
+// -----------------------------------------------------------------------------
+
+procedure InitializeApp;
+begin
+  if not FileExists(SettingsFileName) then // first start? show wizard!
+  begin
+    ShowWizard;
+  end
+  else
+  begin
+    // libMPV
+    with frmMain do
+      if not MPV.IsLibMPVAvailable then
+      begin
+        if MPV.Error = -20 then
+          ShowErrorMessageDialog(GetCommonString('libMPVError')) // dll not found
+        else
+          ShowErrorMessageDialog(GetCommonString('libMPVVersionError'));
+      end;
+
+    {$IFNDEF DARWIN}
+    // check commandline
+    CommandLineProcess;
+    {$ENDIF}
+
+    // Welcome form
+    if AppOptions.ShowWelcomeAtStartup and not frmMain.VST.Enabled then
+      ShowWelcome
+    {$IFDEF DARWIN}
+    else
+    {$ELSE};
+    {$ENDIF}
+    Application.ShowMainForm := True;
   end;
 end;
 

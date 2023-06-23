@@ -1060,32 +1060,6 @@ end;
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
   LoadFormSettings(Self);
-
-  if not FileExists(SettingsFileName) then // first start? show wizard!
-  begin
-    ShowWizard;
-  end
-  else
-  begin
-    // libMPV
-    if not MPV.IsLibMPVAvailable then
-    begin
-      if MPV.Error = -20 then
-        ShowErrorMessageDialog(GetCommonString('libMPVError')) // dll not found
-      else
-        ShowErrorMessageDialog(GetCommonString('libMPVVersionError'));
-    end;
-
-    {$IFNDEF DARWIN}
-    // Commandline
-    CommandLineProcess;
-    {$ENDIF}
-
-    // Welcome form
-    if AppOptions.ShowWelcomeAtStartup and not VST.Enabled then
-     ShowWelcome;
-  end;
-
   // Show random tip
   SetStatusBarText(GetRandomTipString, 0, False);
 end;
