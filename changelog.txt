@@ -1,4 +1,4 @@
-1.0.0.4 (x.6.2023)
+1.0.0.4 (23.6.2023)
 improved Make it clearer what URLs are accepted #46
 improved Conventions: count space characters #26
 fixed Resize handles for columns do not show a preview of the dragging result #105
