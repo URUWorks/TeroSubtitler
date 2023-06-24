@@ -975,7 +975,7 @@ object frmSettings: TfrmSettings
   object lyoToolbar: TUWLayout
     Left = -336
     Height = 440
-    Top = 312
+    Top = 304
     Width = 496
     ClientHeight = 440
     ClientWidth = 496
@@ -1584,5 +1584,36 @@ object frmSettings: TfrmSettings
         Style = tbsCheck
       end
     end
+  end
+  object lyoFileTypeAssociations: TUWLayout
+    Left = -336
+    Height = 442
+    Top = 368
+    Width = 496
+    ClientHeight = 442
+    ClientWidth = 496
+    TabOrder = 9
+    Visible = False
+    object tlbFileTypeIco: TToolBar
+      Left = 0
+      Height = 432
+      Top = 0
+      Width = 480
+      Align = alNone
+      ButtonHeight = 48
+      ButtonWidth = 48
+      EdgeBorders = []
+      EdgeInner = esNone
+      EdgeOuter = esNone
+      Images = imlFileTypes
+      TabOrder = 0
+    end
+  end
+  object imlFileTypes: TImageList
+    Height = 48
+    Scaled = True
+    Width = 48
+    Left = 552
+    Top = 456
   end
 end

@@ -607,6 +607,7 @@
     <Shortcuts>Atajos</Shortcuts>
     <MPV>Reproductor</MPV>
     <Tools>Herramientas</Tools>
+    <FileTypeAssociations>Tipos de archivo</FileTypeAssociations>
     <AutoMode>Automático</AutoMode>
     <LightMode>Modo claro</LightMode>
     <DarkMode>Modo oscuro</DarkMode>

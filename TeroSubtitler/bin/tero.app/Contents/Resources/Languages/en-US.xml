@@ -607,6 +607,7 @@
     <Shortcuts>Shortcuts</Shortcuts>
     <MPV>Video player</MPV>
     <Tools>Tools</Tools>
+    <FileTypeAssociations>File types</FileTypeAssociations>
     <AutoMode>Automatic</AutoMode>
     <LightMode>Light mode</LightMode>
     <DarkMode>Dark mode</DarkMode>

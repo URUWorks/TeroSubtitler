@@ -66,6 +66,7 @@ type
     cbnSubBackground: TColorButton;
     cboPauseMode: TComboBox;
     edtCPSStrategy: TEdit;
+    imlFileTypes: TImageList;
     lblCPSStrategy: TLabel;
     lblShortCutPreset: TLabel;
     lblWaveStart: TLabel;
@@ -81,6 +82,7 @@ type
     lblFrameStep: TLabel;
     lblWaveform: TLabel;
     lblToolBarWave: TLabel;
+    lyoFileTypeAssociations: TUWLayout;
     spnSubSize: TSpinEdit;
     spnSeekTime: TSpinEdit;
     spnFrameStep: TSpinEdit;
@@ -142,6 +144,7 @@ type
     lyoMPV: TUWLayout;
     lyoToolbar: TUWLayout;
     tlbWaveform_: TToolBar;
+    tlbFileTypeIco: TToolBar;
     ToolButton1: TToolButton;
     ToolButton10: TToolButton;
     ToolButton11: TToolButton;
@@ -233,6 +236,12 @@ type
   private
     FProfiles: TProfiles;
     FShortCutListIndex: array of Byte;
+    {$IFDEF WINDOWS}
+    FUpdateFileTypes: Boolean;
+    procedure PrepareToolbarAndImagelistIcos;
+    procedure UpdateFileTypeAssociations;
+    procedure FileTypeIconClick(Sender: TObject);
+    {$ENDIF}
     procedure SetLayoutPage(const APage: TUWLayout);
     procedure FillComboWithShortcuts;
   public
@@ -249,7 +258,10 @@ implementation
 uses
   procTypes, procWorkspace, procCommon, UWSystem.SysUtils, ActnList,
   procColorTheme, formMain, UWSystem.Globalization, formConventions,
-  procShortCut, procMPV, UWSystem.TimeUtils;
+  procShortCut, procMPV, UWSystem.TimeUtils
+  {$IFDEF WINDOWS}
+  , FileUtil, procFileTypes
+  {$ENDIF};
 
 {$R *.lfm}
 
@@ -276,6 +288,9 @@ begin
     Add(GetString(FAppStringList, 'Shortcuts'));
     Add(GetString(FAppStringList, 'MPV'));
     Add(GetString(FAppStringList, 'Tools'));
+    {$IFDEF WINDOWS}
+    Add(GetString(FAppStringList, 'FileTypeAssociations'));
+    {$ENDIF}
   end;
   lstTree.ItemIndex := 0;
   with cboPauseMode.Items do
@@ -292,6 +307,9 @@ begin
   FillComboWithEncodings(cboDefaultFileEncoding);
   FillComboWithShortcuts;
   FillComboWithShortCutsPreset(cboShortCutPreset);
+  {$IFDEF WINDOWS}
+  PrepareToolbarAndImagelistIcos;
+  {$ENDIF}
   cboDefaultFileEncoding.ItemIndex := Workspace.DefEncoding;
   btnShortCutApply.Enabled := False;
 
@@ -514,8 +532,8 @@ begin
   UpdateToolBarButtons(False);
 
   //if not frmMain.Enabled then
-    frmMain.cboInputFPS.ItemIndex := cboDefaultFrameRate.ItemIndex; //frmMain.cboInputFPS.Items.IndexOf(SingleToStr(Workspace.FPS.DefFPS, AppOptions.FormatSettings));
-    frmMain.cboFPS.ItemIndex      := cboDefaultFrameRate.ItemIndex;
+  frmMain.cboInputFPS.ItemIndex := cboDefaultFrameRate.ItemIndex;
+  frmMain.cboFPS.ItemIndex      := cboDefaultFrameRate.ItemIndex;
 
   frmMain.VSTDrawInitialize(TVSTDrawMode(cboListMode.ItemIndex));
   frmMain.VSTResize(NIL);
@@ -528,6 +546,10 @@ begin
 
   UpdateMPVOptions;
 
+  {$IFDEF WINDOWS}
+  UpdateFileTypeAssociations;
+  {$ENDIF}
+
   FProfiles.Free;
   CloseAction := caFree;
   frmSettings := NIL;
@@ -538,6 +560,7 @@ end;
 procedure TfrmSettings.FormShow(Sender: TObject);
 begin
   CheckColorTheme(Self);
+  tlbFileTypeIco.Images := imlFileTypes;
 end;
 
 // -----------------------------------------------------------------------------
@@ -577,6 +600,9 @@ begin
     4: SetLayoutPage(lyoShortcuts);
     5: SetLayoutPage(lyoMPV);
     6: SetLayoutPage(lyoTools);
+    {$IFDEF WINDOWS}
+    7: SetLayoutPage(lyoFileTypeAssociations);
+    {$ENDIF}
   end;
 end;
 
@@ -797,6 +823,68 @@ begin
   if (cboProfile.Tag = 0) and (cboProfile.ItemIndex <> 0) then
     cboProfile.ItemIndex := 0;
 end;
+
+// -----------------------------------------------------------------------------
+
+{$IFDEF WINDOWS}
+procedure TfrmSettings.PrepareToolbarAndImagelistIcos;
+var
+  Icos: TStringList;
+  Picture: TPicture;
+  x, i: Integer;
+begin
+  FUpdateFileTypes := False;
+  Icos := TStringList.Create;
+  try
+    Icos.Sorted := True;
+    FindAllFiles(Icos, IconsFolder, '*.ico', False);
+
+    if Icos.Count > 0 then
+    begin
+      Picture := TPicture.Create;
+      try
+        for x := 0 to Icos.Count-1 do
+        begin
+          Picture.LoadFromFile(Icos[x]);
+          i := imlFileTypes.AddIcon(Picture.Icon);
+
+          with TToolButton.Create(tlbFileTypeIco) do
+          begin
+            Parent     := tlbFileTypeIco;
+            Caption    := ChangeFileExt(ExtractFileName(Icos[x]), '');
+            Style      := tbsCheck;
+            AutoSize   := True;
+            OnClick    := @FileTypeIconClick;
+            ImageIndex := i;
+            Down       := IsRegisteredFileType('.' + Caption);
+          end;
+        end;
+      finally
+        Picture.Free;
+      end;
+    end;
+  finally
+    Icos.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.UpdateFileTypeAssociations;
+var
+  x: Integer;
+begin
+  for x := 0 to tlbFileTypeIco.ButtonCount-1 do
+    RegisterFileType('.' + tlbFileTypeIco.Buttons[x].Caption, IconsFolder + tlbFileTypeIco.Buttons[x].Caption + '.ico', tlbFileTypeIco.Buttons[x].Down, FUpdateFileTypes and (x = tlbFileTypeIco.ButtonCount-1));
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.FileTypeIconClick(Sender: TObject);
+begin
+  FUpdateFileTypes := True;
+end;
+{$ENDIF}
 
 // -----------------------------------------------------------------------------
 

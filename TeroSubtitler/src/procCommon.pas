@@ -61,6 +61,7 @@ function LanguageFileName: String;
 function ShortCutFolder: String;
 function ShortCutFileName: String;
 function OCRFolder: String;
+function IconsFolder: String;
 function ExtensionsFolder: String;
 function WaveformsFolder: String;
 function ShotChangesFolder: String;
@@ -1182,6 +1183,17 @@ begin
   Result := GetCustomFolderPath('Resources/OCR/');
   {$ELSE}
   Result := GetCustomFolderPath('OCR');
+  {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
+function IconsFolder: String;
+begin
+  {$IFDEF DARWIN}
+  Result := GetCustomFolderPath('Resources/Icons/');
+  {$ELSE}
+  Result := GetCustomFolderPath('Icons');
   {$ENDIF}
 end;
 
