@@ -108,7 +108,7 @@ end;
 
 function TUWWebVTT.Extension: String;
 begin
-  Result := '*.vtt';
+  Result := '*.vtt;*.webvtt';
 end;
 
 // -----------------------------------------------------------------------------

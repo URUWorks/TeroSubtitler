@@ -169,6 +169,7 @@ type
     function GetStringWPM(Index: Integer; const IsOriginal: Boolean): Double;
     function GetTextWPM(Index: Integer): Double;
     function GetTranslationWPM(Index: Integer): Double;
+    function FixExtension(const AFileName, AExtension: String): String;
   public
     constructor Create;
     destructor Destroy; override;
@@ -1516,7 +1517,7 @@ begin
         if not FixFileName then
           Result := AList[f].SaveSubtitle(FileName, FPS, Encoding, Self, SubtitleMode, iFrom, iTo)
         else
-          Result := AList[f].SaveSubtitle(ChangeFileExt(FileName, AList[f].Extension.Replace('*', '')), FPS, Encoding, Self, SubtitleMode, iFrom, iTo);
+          Result := AList[f].SaveSubtitle(FixExtension(FileName, AList[f].Extension), FPS, Encoding, Self, SubtitleMode, iFrom, iTo);
 
         Exit;
       end;
@@ -1582,6 +1583,22 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function TUWSubtitles.FixExtension(const AFileName, AExtension: String): String;
+var
+  s: String;
+  x: Integer;
+begin
+  x := Pos(';', AExtension);
+  if x > 0 then
+    s := Copy(AExtension, 1, x-1)
+  else
+    s := AExtension;
+
+  Result := ChangeFileExt(AFileName, s.Replace('*', ''));
+end;
+
+// -----------------------------------------------------------------------------
+
 function TUWSubtitles.FixFileNameExtension(const AFileName: String; const AFormat: TUWSubtitleFormats): String;
 var
   AList : TUWSubtitleCustomFormatList;
@@ -1593,7 +1610,7 @@ begin
   try
     for f := 0 to AList.Count-1 do
       if (AList[f].Format = AFormat) then
-        Result := ChangeFileExt(AFileName, AList[f].Extension.Replace('*', ''));
+        Result := FixExtension(AFileName, AList[f].Extension);
   finally
     FinalizeSubtitleFormats(AList);
   end;
