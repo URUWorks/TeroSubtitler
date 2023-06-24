@@ -1,6 +1,8 @@
 1.0.0.5 (x.6.2023)
 fixed File doesn't open when dragged onto Tero Subtitler icon #102
+improved .webvtt extension #108
 added [macOS] Tero Subtitler available in context menu of file
+added [Windows] File type associations
 
 1.0.0.4 (23.6.2023)
 improved Make it clearer what URLs are accepted #46
