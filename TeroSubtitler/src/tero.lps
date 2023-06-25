@@ -44,8 +44,6 @@
         <Filename Value="procCommon.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1191"/>
-        <CursorPos X="3" Y="1193"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -310,7 +308,6 @@
         <Filename Value="procShortCut.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <CursorPos Y="17"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -570,7 +567,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="185"/>
+        <UsageCount Value="187"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToText.pas"/>
@@ -581,7 +578,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="209"/>
         <CursorPos Y="224"/>
-        <UsageCount Value="171"/>
+        <UsageCount Value="173"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToTextModel.pas"/>
@@ -591,7 +588,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="166"/>
+        <UsageCount Value="168"/>
       </Unit>
       <Unit>
         <Filename Value="formTBX.pas"/>
@@ -601,15 +598,15 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="155"/>
+        <UsageCount Value="157"/>
       </Unit>
       <Unit>
         <Filename Value="procFixSubtitles.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="399"/>
-        <CursorPos X="59" Y="557"/>
-        <UsageCount Value="139"/>
+        <TopLine Value="529"/>
+        <CursorPos X="16" Y="550"/>
+        <UsageCount Value="141"/>
       </Unit>
       <Unit>
         <Filename Value="formFormatProperties.pas"/>
@@ -620,13 +617,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="304"/>
         <CursorPos Y="314"/>
-        <UsageCount Value="91"/>
+        <UsageCount Value="93"/>
       </Unit>
       <Unit>
         <Filename Value="procFileTypes.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="24"/>
+        <UsageCount Value="26"/>
       </Unit>
       <Unit>
         <Filename Value="procFix.pas"/>
@@ -1108,7 +1105,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.SubRip.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="22" Y="13"/>
+        <TopLine Value="30"/>
+        <CursorPos X="12" Y="47"/>
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
@@ -1434,8 +1432,8 @@
       <Unit>
         <Filename Value="..\common\UWSubtitles.Utils.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="745"/>
-        <CursorPos X="37" Y="770"/>
+        <TopLine Value="822"/>
+        <CursorPos Y="849"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -1455,8 +1453,9 @@
       <Unit>
         <Filename Value="..\common\UWWindows.MenuTheming.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos Y="16"/>
-        <UsageCount Value="7"/>
+        <TopLine Value="141"/>
+        <CursorPos X="35" Y="153"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus2\fpc\3.2.2\source\rtl\win\wininc\defines.inc"/>
@@ -1681,8 +1680,8 @@
         <UnitName Value="LCLProc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="74"/>
-        <CursorPos X="24" Y="89"/>
-        <UsageCount Value="8"/>
+        <CursorPos X="44" Y="89"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="..\controls\UWCheckBox.pas"/>
@@ -1869,8 +1868,7 @@
       <Unit>
         <Filename Value="..\controls\UWHotKey.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos Y="4"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus2\fpc\3.2.2\source\rtl\objpas\sysutils\sysutilh.inc"/>
@@ -2259,7 +2257,7 @@
     <JumpHistory>
       <Position>
         <Filename Value="formMain.pas"/>
-        <Caret Line="18" Column="32"/>
+        <Caret Line="6" Column="27"/>
       </Position>
     </JumpHistory>
     <RunParams>
