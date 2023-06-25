@@ -680,7 +680,7 @@ begin
         if cat = Category then
         begin
           if ShortCut <> 0 then
-            sc := ShortCutToText(ShortCut)
+            sc := ShortCutToTextEx(ShortCut)
           else
             sc := '';
 
@@ -745,7 +745,7 @@ begin
       if (ShortCut <> hkShortcut.HotKey) then
       begin
         ShortCut := hkShortcut.HotKey;
-        lstShortcuts.Items[lstShortcuts.ItemIndex] := Caption + ' [' + ShortCutToText(ShortCut) + ']';
+        lstShortcuts.Items[lstShortcuts.ItemIndex] := Caption + ' [' + ShortCutToTextEx(ShortCut) + ']';
 
         btnShortCutApply.Enabled := True;
       end;

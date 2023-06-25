@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, Controls, SysUtils, Menus, Forms, procTypes, UWSubtitleAPI,
-  formCustomQuestionDlg, formCustomMessageDlg
+  UWHotKey, formCustomQuestionDlg, formCustomMessageDlg
   {$IFNDEF WINDOWS}, UWCheckBox, UWRadioButton{$ENDIF}
   {$IFDEF DARWIN}, CocoaAll, CocoaUtils{$ENDIF};
 
@@ -1041,10 +1041,10 @@ begin
       Result := GetString(sl, 'Tip' + rndTip.ToString);
       with frmMain do
         case rndTip of
-          1: Result := Format(Result, [ShortCutToText(actPreviousSubtitle.ShortCut), ShortCutToText(actNextSubtitle.ShortCut)]);
-          2: Result := Format(Result, [ShortCutToText(actWebReference.ShortCut)]);
-          3: Result := Format(Result, [ShortCutToText(actUnDockVideo.ShortCut)]);
-          4: Result := Format(Result, [ShortCutToText(actUnDockWaveform.ShortCut)]);
+          1: Result := Format(Result, [ShortCutToTextEx(actPreviousSubtitle.ShortCut), ShortCutToTextEx(actNextSubtitle.ShortCut)]);
+          2: Result := Format(Result, [ShortCutToTextEx(actWebReference.ShortCut)]);
+          3: Result := Format(Result, [ShortCutToTextEx(actUnDockVideo.ShortCut)]);
+          4: Result := Format(Result, [ShortCutToTextEx(actUnDockWaveform.ShortCut)]);
         end;
       SetStatusBarText(Result);
     end

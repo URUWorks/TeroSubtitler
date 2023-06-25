@@ -94,6 +94,9 @@ type
     property Visible;
   end;
 
+{ Helpers }
+
+function ShortCutToTextEx(const AShortCut: TShortCut): String;
 procedure Register;
 
 //------------------------------------------------------------------------------
@@ -142,7 +145,7 @@ begin
       newShift := newShift or scMeta;
 
     newShortCut := Key or newShift;
-    s := ShortCutToText(newShortCut);
+    s := ShortCutToTextEx(newShortCut);
     if (s <> '') then
     begin
       FHotKey := newShortCut;
@@ -168,9 +171,20 @@ begin
   if FHotKey = 0 then
     s := FEmptyText
   else
-    s := ShortCutToText(FHotKey);
+    s := ShortCutToTextEx(FHotKey);
 
   Text := s;
+end;
+
+// -----------------------------------------------------------------------------
+
+{ Helpers }
+
+// -----------------------------------------------------------------------------
+
+function ShortCutToTextEx(const AShortCut: TShortCut): String;
+begin
+  Result := ShortCutToText(AShortCut){$IFDEF DARWIN}.Replace('Meta', #$2318){$ENDIF};
 end;
 
 // -----------------------------------------------------------------------------
