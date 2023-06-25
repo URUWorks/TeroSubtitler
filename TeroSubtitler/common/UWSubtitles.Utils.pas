@@ -109,7 +109,7 @@ var
 begin
   Result := Duration;
   Apply  := False;
-  pc     := Length(Text);
+  pc     := UTF8Length(Text);
 
   if (CharsValue > 0) and (pc > CharsValue) then Apply := True;
 
@@ -142,7 +142,7 @@ var
 begin
   Result := Duration;
 
-  pc := Length(Text);
+  pc := UTF8Length(Text);
   pw := WordCount(Text);
   pl := LineCount(Text);
   nd := (pc * msPerChar) + (pw * msPerWord) + (pl * msPerLine);
@@ -202,7 +202,7 @@ end;
 
 function RemoveUnnecessaryDots(Text: String): String;
 begin
-  while Pos('....', Text) > 0 do Delete(Text, Pos('....', Text), 1);
+  while UTF8Pos('....', Text) > 0 do Delete(Text, UTF8Pos('....', Text), 1);
   Result := Text;
 end;
 
@@ -219,7 +219,7 @@ begin
   while AnsiContainsText(Result, '  ') do Result := ReplaceString(Result, '  ', ' ');
   while AnsiContainsText(Result, v1) do Result := ReplaceString(Result, v1, BreakChar);
   while AnsiContainsText(Result, v2) do Result := ReplaceString(Result, v2, BreakChar);
-  if AnsiEndsText(BreakChar, Result) then Result := Copy(Result, 1, Length(Result)-Length(BreakChar));
+  if AnsiEndsText(BreakChar, Result) then Result := Copy(Result, 1);
   if AnsiStartsText(BreakChar, Result) then Delete(Result, 1, 1);
 end;
 
@@ -261,7 +261,7 @@ var
 begin
   Result   := False;
   EnterLen := Length(sLineBreak);
-  PosEnter := Pos(sLineBreak, Text);
+  PosEnter := UTF8Pos(sLineBreak, Text);
   while PosEnter > 0 do
   begin
     if PosEnter-1 > MaxChars then
@@ -269,10 +269,10 @@ begin
       Result := True;
       Exit;
     end;
-    Text     := Copy(Text, PosEnter + EnterLen, Length(Text) - PosEnter);
-    PosEnter := Pos(sLineBreak, Text);
+    Text     := Copy(Text, PosEnter + EnterLen);
+    PosEnter := UTF8Pos(sLineBreak, Text);
   end;
-  Result := Length(Text) > MaxChars;
+  Result := UTF8Length(Text) > MaxChars;
 end;
 
 // -----------------------------------------------------------------------------
@@ -283,7 +283,7 @@ var
   s        : TStringList;
 begin
   Result := Text;
-  l := Length(Text);
+  l := UTF8Length(Text);
   if (Text = '') or ((l <= ChrsPerLine) and not AnsiContainsText(Text, '-')) then Exit;
 
   Text := RemoveUnnecessarySpaces(Text, BreakChar);
@@ -296,8 +296,8 @@ begin
       SplitRegExpr('\-', Text, s);
       if s.Count > 0 then
       begin
-        if Pos('-', Text) > 1 then
-          Result := Copy(Text, 1, Pos('-', Text)-1) + BreakChar
+        if UTF8Pos('-', Text) > 1 then
+          Result := Copy(Text, 1, UTF8Pos('-', Text)-1) + BreakChar
         else
           Result := '';
 
@@ -349,8 +349,8 @@ function UnbreakSubtitlesIfLessThanChars(const Text: String; const MaxChars: Int
 var
   x: Integer;
 begin
-  x := Pos(BreakChar, Text);
-  if (x > 0) and (not Text.StartsWith('-')) and (UnbreakSubtitles(Text, BreakChar).Length <= MaxChars) then
+  x := UTF8Pos(BreakChar, Text);
+  if (x > 0) and (not Text.StartsWith('-')) and (UTF8Length(UnbreakSubtitles(Text, BreakChar)) <= MaxChars) then
     Result := UnbreakSubtitles(Text, BreakChar)
   else
     Result := Text;
@@ -415,10 +415,10 @@ begin
   Result := '';
   sl := TStringList.Create;
   try
-    if (Position = 0) or (Position >= Text.Length) then Exit;
+    if (Position = 0) or (Position >= UTF8Length(Text)) then Exit;
 
     sl.Add(Copy(Text, 1, Position).Trim);
-    sl.Add(Copy(Text, Position+1, Text.Length-Position).Trim);
+    sl.Add(Copy(Text, Position+1).Trim);
 
     duration := (FinalTime - InitialTime) div sl.Count;
     ft       := InitialTime + duration;
@@ -454,14 +454,14 @@ begin
     begin
       c := iff(Enter = #13#10, 1, 0);
 
-      SetLength(Result, Length(Text));
+      SetLength(Result, UTF8Length(Text));
       TotalLines := 0;
       repeat
         NewEnter := 0;
-        PosEnter := Pos(Enter, Text);
+        PosEnter := UTF8Pos(Enter, Text);
 
         if PosEnter = 0 then
-          PosEnter := Length(Text)+1
+          PosEnter := UTF8Length(Text)+1
         else
           NewEnter := PosEnter;
 
@@ -486,7 +486,7 @@ begin
     else
     begin
       Result := '';
-      for x := 1 to Length(Text) do Result := Text[x] + Result;
+      for x := 1 to UTF8Length(Text) do Result := Text[x] + Result;
 
       if (Enter = #13#10) then
         Result := ReplaceString(Result, #10#13, #13#10);
@@ -523,32 +523,32 @@ var
       exit;
     end;
 
-    P := Pos(Temp[i], SpecialChars);
+    P := UTF8Pos(Temp[i], SpecialChars);
     while P <> 0 do
     begin
       Prefix := Prefix + Temp[i];
-      Temp   := Copy(Temp, 2, Length(Temp)-1);
+      Temp   := Copy(Temp, 2);
       if Temp = '' then
         P := 0
       else
-        P := Pos(Temp[i], SpecialChars);
+        P := UTF8Pos(Temp[i], SpecialChars);
     end;
     if Suffix = ' -' then Suffix := '- ';
 
-    I := Length(Temp);
+    I := UTF8Length(Temp);
     if Temp = '' then
       P := 0
     else
-      P := Pos(Temp[i], SpecialChars);
+      P := UTF8Pos(Temp[i], SpecialChars);
     while P <> 0 do
     begin
       Suffix := Suffix + Temp[I];
-      Temp   := Copy(Temp, 1, Length(Temp)-1);
-      i      := Length(Temp);
+      Temp   := Copy(Temp, 1);
+      i      := UTF8Length(Temp);
       if Temp = '' then
         P := 0
       else
-        P := Pos(Temp[i], SpecialChars);
+        P := UTF8Pos(Temp[i], SpecialChars);
       end;
     if Prefix = '- ' then Prefix := ' -';
 
@@ -557,12 +557,12 @@ var
 begin
   A := Text;
   B := '';
-  Posit := Pos(Delimiter, A);
+  Posit := UTF8Pos(Delimiter, A);
   while Posit > 0 do
   begin
     B     := B + FixSubString(Copy(A, 1, Posit-1)) + Delimiter;
-    A     := Copy(A, Posit + Length(Delimiter), Length(A) - Posit);
-    Posit := Pos(Delimiter, A);
+    A     := Copy(A, Posit + Length(Delimiter));
+    Posit := UTF8Pos(Delimiter, A);
   end;
   B := B + FixSubString(A);
   Result := B;
@@ -586,15 +586,15 @@ function FixHearingImpaired(const Text: String; const Enter: String = sLineBreak
 
   function RHearingImpaired(Line: String): String;
   begin
-    while (Pos('(', Line) > 0) and (Pos(')', Line) > Pos('(', Line)) do
+    while (UTF8Pos('(', Line) > 0) and (UTF8Pos(')', Line) > UTF8Pos('(', Line)) do
     begin
-      if Copy(Line, Pos(')', Line) + 1, 1) = ':' then Delete(Line, Pos(')', Line) + 1, 1);
-      Delete(Line, Pos('(', Line), Pos(')', Line) - Pos('(', Line) + 1);
+      if Copy(Line, UTF8Pos(')', Line) + 1, 1) = ':' then Delete(Line, UTF8Pos(')', Line) + 1, 1);
+      Delete(Line, UTF8Pos('(', Line), UTF8Pos(')', Line) - UTF8Pos('(', Line) + 1);
     end;
-    while (Pos('[', Line) > 0) and (Pos(']', Line) > Pos('[', Line)) do
+    while (UTF8Pos('[', Line) > 0) and (UTF8Pos(']', Line) > UTF8Pos('[', Line)) do
     begin
-      if Copy(Line, Pos(']', Line) + 1, 1) = ':' then Delete(Line, Pos(']', Line) + 1, 1);
-      Delete(Line, Pos('[', Line), Pos(']', Line) - Pos('[', Line) + 1);
+      if Copy(Line, UTF8Pos(']', Line) + 1, 1) = ':' then Delete(Line, UTF8Pos(']', Line) + 1, 1);
+      Delete(Line, UTF8Pos('[', Line), UTF8Pos(']', Line) - UTF8Pos('[', Line) + 1);
     end;
 
     Result := Line;
@@ -612,18 +612,18 @@ begin
   begin
     A := Text;
     B := '';
-    PosEnter := Pos(Enter, A);
+    PosEnter := UTF8Pos(Enter, A);
     while PosEnter > 0 do
     begin
       B        := B + RHearingImpaired(Copy(A, 1, PosEnter-1)) + Enter;
-      A        := Copy(A, PosEnter + Length(Enter), Length(A) - PosEnter);
-      PosEnter := Pos(Enter, A);
+      A        := Copy(A, PosEnter + Length(Enter));
+      PosEnter := UTF8Pos(Enter, A);
     end;
     B := RemoveUnnecessarySpaces(RHearingImpaired(B + RHearingImpaired(A)));
 
-    if (Pos(Enter, B) = 0) and (Copy(B, 1, 1) = '-') then
+    if (UTF8Pos(Enter, B) = 0) and (Copy(B, 1, 1) = '-') then
     begin
-      B := Copy(B, Length(Enter), Length(B));
+      B := Copy(B, Length(Enter));
       Result := RemoveUnnecessarySpaces(B);
     end
     else
@@ -638,7 +638,7 @@ begin
         for i := sl.Count-1 downto 0 do
         begin
           A := sl[i].Trim;
-          if (A.IsEmpty) or (A.StartsWith('-') and (A.Length = 1)) then
+          if (A.IsEmpty) or (A.StartsWith('-') and (UTF8Length(A) = 1)) then
             sl.Delete(i);
         end;
         Result := sl.Text.Trim;
@@ -656,7 +656,7 @@ var
   i: Integer;
 begin
   Result := False;
-  for i := 1 to Length(Text)-1 do
+  for i := 1 to UTF8Length(Text)-1 do
   begin
     if (Pos(Text[i], RepeatableChars) > 0) and (Text[i+1] = Text[i]) then
       if (Text[i] <> '/') or (Copy(Text, i-1, 3) <> '://') then
@@ -673,7 +673,7 @@ function FixRepeatedChar(Text: String; const RepeatableChars: String): String;
 var
   i: Integer;
 begin
-  for i := Length(Text) downto 2 do
+  for i := UTF8Length(Text) downto 2 do
   begin
     if (Pos(Text[i], RepeatableChars) > 0) and (Text[i-1] = Text[i]) then
       if (Text[i] <> '/') or (Copy(Text, i-2, 3) <> '://') then
@@ -765,8 +765,8 @@ begin
   x := 1;
   while x > 0 do
   begin
-    b1 := Pos(OpenBracket, Result, x);
-    b2 := Pos(CloseBracket, Result, b1);
+    b1 := UTF8Pos(OpenBracket, Result, x);
+    b2 := UTF8Pos(CloseBracket, Result, b1);
 
     if (b1 = 0) or (b2 = 0) then Exit;
 
@@ -821,8 +821,8 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; 
     TagID  := '';
 
     // color
-    p := Pos('&', ATag);
-    px := Pos('&', ATag, p+1);
+    p := UTF8Pos('&', ATag);
+    px := UTF8Pos('&', ATag, p+1);
     if (p > 0) and (px > 0) then
     begin
       TagID := 'c';
@@ -830,7 +830,7 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; 
       Exit;
     end;
     // font name
-    p := Pos('fn', ATag);
+    p := UTF8Pos('fn', ATag);
     if (p > 0) then
     begin
       TagID := 'fn';
@@ -838,7 +838,7 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; 
       Exit;
     end;
     // font size
-    p := Pos('fs', ATag);
+    p := UTF8Pos('fs', ATag);
     if (p > 0) then
     begin
       TagID := 'fs';
@@ -846,7 +846,7 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; 
       Exit;
     end;
     // font encoding
-    p := Pos('fe', ATag);
+    p := UTF8Pos('fe', ATag);
     if (p > 0) then
     begin
       TagID := 'fe';
