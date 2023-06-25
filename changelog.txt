@@ -1,6 +1,6 @@
 1.0.0.5 (x.6.2023)
 - fixed: File doesn't open when dragged onto Tero Subtitler icon #102
-- fixed: CPL flag displayed incorrectly with some texts
+- fixed: CPL flag appeared with some text when there was no breach
 - improved: .webvtt extension #108
 - improved: [macOS] Displays “⌘” instead of “Meta” for shortcuts
 - added: [macOS] Tero Subtitler available in context menu of file
