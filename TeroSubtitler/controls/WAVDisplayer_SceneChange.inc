@@ -233,6 +233,7 @@ var
   i: Integer;
 begin
   if Length(FSceneChangeList) > 0 then
+  begin
     for i := 0 to High(FSceneChangeList) do
     begin
       if ASMPTE then
@@ -240,6 +241,8 @@ begin
       else
         FSceneChangeList[i] := Round(FSceneChangeList[i] * 1.001);
     end;
+    DoUpdate;
+  end;
 end;
 
 //------------------------------------------------------------------------------
