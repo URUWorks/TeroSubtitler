@@ -64,6 +64,8 @@ type
     destructor Destroy; override;
     function CanUndo: Boolean;
     function CanRedo: Boolean;
+    function UndoCount: Integer;
+    function RedoCount: Integer;
     procedure AddUndo(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
     procedure AddUndoIfNotResent(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
     procedure AddRedo(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const Group: Byte);
@@ -222,14 +224,28 @@ end;
 
 function TUndo.CanUndo: Boolean;
 begin
-  Result := FUndoList.Count > 0;
+  Result := UndoCount > 0;
 end;
 
 // -----------------------------------------------------------------------------
 
 function TUndo.CanRedo: Boolean;
 begin
-  Result := FRedoList.Count > 0;
+  Result := RedoCount > 0;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUndo.UndoCount: Integer;
+begin
+  Result := FUndoList.Count;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUndo.RedoCount: Integer;
+begin
+  Result := FRedoList.Count;
 end;
 
 // -----------------------------------------------------------------------------

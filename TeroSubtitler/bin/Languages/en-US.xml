@@ -92,6 +92,7 @@
       <actMediaZoomOut>Zoom out</actMediaZoomOut>
       <actMediaZoomSelection>Zoom selection</actMediaZoomSelection>
       <actCombineSubtitles Hint="Combines all the selected subtitles into one">Combine subtitles</actCombineSubtitles>
+      <actSort>Sort</actSort>
       <actSelectAll>Select all</actSelectAll>
       <actInvertSelection>Invert selection</actInvertSelection>
       <actSelectCurrentToBeginning>Select current to beginning</actSelectCurrentToBeginning>

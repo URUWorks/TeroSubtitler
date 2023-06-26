@@ -92,6 +92,7 @@
       <actMediaZoomOut>Disminuir zoom</actMediaZoomOut>
       <actMediaZoomSelection>Selección de zoom</actMediaZoomSelection>
       <actCombineSubtitles Hint="Combina todos los subtítulos seleccionados en uno">Combinar subtítulos</actCombineSubtitles>
+      <actSort>Ordenar</actSort>
       <actSelectAll>Seleccionar todo</actSelectAll>
       <actInvertSelection>Invertir selección</actInvertSelection>
       <actSelectCurrentToBeginning>Seleccionar del actual al primero</actSelectCurrentToBeginning>

@@ -36,8 +36,6 @@
         <Filename Value="procVST.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="533"/>
-        <CursorPos X="97" Y="549"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -77,8 +75,8 @@
         <Filename Value="formMain_Actions.inc"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1100"/>
-        <CursorPos Y="1128"/>
+        <TopLine Value="1504"/>
+        <CursorPos Y="1529"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -91,7 +89,8 @@
         <Filename Value="procUndo.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <CursorPos Y="17"/>
+        <TopLine Value="136"/>
+        <CursorPos X="14" Y="164"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -368,8 +367,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="164"/>
-        <CursorPos X="29" Y="180"/>
+        <TopLine Value="179"/>
+        <CursorPos X="27" Y="185"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -426,8 +425,7 @@
         <Filename Value="procVST_Loops.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="253"/>
-        <CursorPos X="3" Y="255"/>
+        <CursorPos X="21" Y="28"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -567,7 +565,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="187"/>
+        <UsageCount Value="189"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToText.pas"/>
@@ -578,7 +576,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="209"/>
         <CursorPos Y="224"/>
-        <UsageCount Value="173"/>
+        <UsageCount Value="175"/>
       </Unit>
       <Unit>
         <Filename Value="formAudioToTextModel.pas"/>
@@ -588,7 +586,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="168"/>
+        <UsageCount Value="170"/>
       </Unit>
       <Unit>
         <Filename Value="formTBX.pas"/>
@@ -598,15 +596,15 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="157"/>
+        <UsageCount Value="159"/>
       </Unit>
       <Unit>
         <Filename Value="procFixSubtitles.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="529"/>
-        <CursorPos X="16" Y="550"/>
-        <UsageCount Value="141"/>
+        <TopLine Value="207"/>
+        <CursorPos X="21" Y="224"/>
+        <UsageCount Value="143"/>
       </Unit>
       <Unit>
         <Filename Value="formFormatProperties.pas"/>
@@ -617,13 +615,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="304"/>
         <CursorPos Y="314"/>
-        <UsageCount Value="93"/>
+        <UsageCount Value="95"/>
       </Unit>
       <Unit>
         <Filename Value="procFileTypes.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="28"/>
       </Unit>
       <Unit>
         <Filename Value="procFix.pas"/>
@@ -741,8 +739,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="249"/>
-        <CursorPos X="23" Y="266"/>
+        <TopLine Value="110"/>
+        <CursorPos X="3" Y="127"/>
         <UsageCount Value="16"/>
       </Unit>
       <Unit>
@@ -1262,8 +1260,8 @@
       <Unit>
         <Filename Value="..\controls\WAVDisplayer.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="258"/>
-        <CursorPos X="15" Y="275"/>
+        <TopLine Value="1962"/>
+        <CursorPos X="4" Y="1970"/>
         <UsageCount Value="30"/>
       </Unit>
       <Unit>
@@ -1432,8 +1430,8 @@
       <Unit>
         <Filename Value="..\common\UWSubtitles.Utils.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="822"/>
-        <CursorPos Y="849"/>
+        <TopLine Value="170"/>
+        <CursorPos X="37" Y="186"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -1896,16 +1894,16 @@
       <Unit>
         <Filename Value="..\controls\WAVDisplayer_Draw.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="82"/>
-        <CursorPos X="45" Y="94"/>
-        <UsageCount Value="9"/>
+        <TopLine Value="595"/>
+        <CursorPos X="18" Y="623"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="..\controls\WAVDisplayer_SceneChange.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="70"/>
-        <CursorPos X="3" Y="72"/>
-        <UsageCount Value="8"/>
+        <TopLine Value="215"/>
+        <CursorPos X="9" Y="243"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="..\controls\WAVDisplayer_SilentZone.inc"/>
@@ -2254,10 +2252,56 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory>
+    <JumpHistory HistoryIndex="12">
       <Position>
         <Filename Value="formMain.pas"/>
-        <Caret Line="6" Column="27"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="70" Column="13" TopLine="42"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="100" Column="20" TopLine="72"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="106" Column="18" TopLine="78"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="278" TopLine="250"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="636" Column="27" TopLine="608"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="1116" TopLine="1088"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="1443" TopLine="1409"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="1443" TopLine="1409"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="1450" TopLine="1416"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="875" TopLine="858"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="873" Column="25" TopLine="859"/>
       </Position>
     </JumpHistory>
     <RunParams>

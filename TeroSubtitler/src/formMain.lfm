@@ -1353,6 +1353,9 @@ object frmMain: TfrmMain
         object MenuItem59: TMenuItem
           Action = actDivideSubtitle
         end
+        object MenuItem165: TMenuItem
+          Action = actSort
+        end
         object Separator16: TMenuItem
           Caption = '-'
         end
@@ -2955,18 +2958,6 @@ object frmMain: TfrmMain
       ImageIndex = 75
       OnExecute = actCenterWaveformExecute
     end
-    object actSetAsDefaultFormat: TAction
-      Category = 'Subtitle'
-      Caption = 'Set Format as default'
-      ImageIndex = 67
-      OnExecute = actSetAsDefaultFormatExecute
-    end
-    object actSetAsDefaultEncoding: TAction
-      Category = 'Subtitle'
-      Caption = 'Set encoding as default'
-      ImageIndex = 66
-      OnExecute = actSetAsDefaultEncodingExecute
-    end
     object actDetectSilentZones: TAction
       Tag = 8
       Category = 'Waveform'
@@ -3331,6 +3322,24 @@ object frmMain: TfrmMain
       Category = 'Edit'
       Caption = 'Format properties'
       OnExecute = actFormatPropertiesExecute
+    end
+    object actSort: TAction
+      Tag = 1
+      Category = 'Subtitle'
+      Caption = 'Sort'
+      OnExecute = actSortExecute
+    end
+    object actSetAsDefaultFormat: TAction
+      Category = 'Subtitle'
+      Caption = 'Set Format as default'
+      ImageIndex = 67
+      OnExecute = actSetAsDefaultFormatExecute
+    end
+    object actSetAsDefaultEncoding: TAction
+      Category = 'Subtitle'
+      Caption = 'Set encoding as default'
+      ImageIndex = 66
+      OnExecute = actSetAsDefaultEncodingExecute
     end
   end
   object popDropInsert: TPopupMenu

@@ -56,6 +56,7 @@ procedure VSTFindNext;
 procedure VSTDoLoop(const AVST: TLazVirtualStringTree; Proc: TVSTDoLoopProc; const Selection: TVSTDoLoopSelection = dlSelected; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
 
 procedure VSTAdjustSubtitles(const AdjSub: TAdjustSubtitles);
+procedure VSTSort(const AVST: TLazVirtualStringTree);
 
 // -----------------------------------------------------------------------------
 
@@ -835,6 +836,49 @@ begin
   finally
     SetLength(Deltas, 0);
     SetLength(Starts, 0);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure VSTSort(const AVST: TLazVirtualStringTree);
+var
+  i, a, c : Integer;
+  tmp     : TUWSubtitleItem;
+  List    : array of TUWSubtitleItem;
+begin
+  if AVST.RootNodeCount > 0 then
+  begin
+    SetLength(List, Subtitles.Count);
+    try
+      for i := 0 to Subtitles.Count-1 do
+        List[i] := Subtitles.Items[i];
+
+      c := UndoInstance.UndoCount;
+      for i := 0 to High(List) do
+        for a := i to High(List) do
+          if List[i].InitialTime > List[a].InitialTime then
+          begin
+            UndoInstance.AddUndo(utSubtitleChange, i, List[i], False);
+            UndoInstance.AddUndo(utSubtitleChange, a, List[a], False);
+
+            tmp     := List[i];
+            List[i] := List[a];
+            List[a] := tmp;
+          end;
+
+      if UndoInstance.UndoCount <> c then
+      begin
+        for i := 0 to Subtitles.Count-1 do
+          Subtitles.Items[i] := List[i];
+
+        UndoInstance.IncrementUndoGroup;
+        DoAutoCheckErrors(False);
+        AVST.Invalidate;
+      end;
+    finally
+      SetLength(List, 0);
+    end;
   end;
 end;
 

@@ -69,6 +69,7 @@ type
     actAudioToText: TAction;
     actCheckForUpdates: TAction;
     actFormatProperties: TAction;
+    actSort: TAction;
     actTBX: TAction;
     actMediaBack1Sec: TAction;
     actMediaForward1Sec: TAction;
@@ -274,6 +275,7 @@ type
     MenuItem162: TMenuItem;
     MenuItem163: TMenuItem;
     MenuItem164: TMenuItem;
+    MenuItem165: TMenuItem;
     mnuFormatProperties: TMenuItem;
     mnuCheckForUpdates: TMenuItem;
     MenuItem17: TMenuItem;
@@ -870,6 +872,7 @@ type
     procedure actShowToolbarFPSExecute(Sender: TObject);
     procedure actShowToolbarFormatExecute(Sender: TObject);
     procedure actShowToolbarEncodingExecute(Sender: TObject);
+    procedure actSortExecute(Sender: TObject);
   private
 
   public
