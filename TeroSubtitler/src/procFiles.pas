@@ -997,6 +997,7 @@ begin
   if not FileExists(SettingsFileName) then // first start? show wizard!
   begin
     ShowWizard;
+    Application.ShowMainForm := True;
   end
   else
   begin
