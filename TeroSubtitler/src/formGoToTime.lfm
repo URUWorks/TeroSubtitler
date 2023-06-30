@@ -49,7 +49,7 @@ object frmGoToTime: TfrmGoToTime
     Value = 0
     FPS = 25
     FrameStep = 1
-    TimeStep = 10
+    TimeStep = 1
     TimeMode = temTime
     Alignment = taCenter
     Constraints.MinHeight = 21

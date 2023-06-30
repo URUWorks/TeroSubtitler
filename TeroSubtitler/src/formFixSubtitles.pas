@@ -397,6 +397,7 @@ begin
 
       UndoInstance.IncrementUndoGroup;
       UpdateValues(True);
+      DoAutoCheckErrors;
     finally
       numList.Free;
     end;

@@ -410,7 +410,7 @@ object frmMain: TfrmMain
             Value = 0
             FPS = 25
             FrameStep = 1
-            TimeStep = 10
+            TimeStep = 1
             TimeMode = temTime
             OnTimeChange = tedTimeChange
             Alignment = taCenter
@@ -452,7 +452,7 @@ object frmMain: TfrmMain
             Value = 0
             FPS = 25
             FrameStep = 1
-            TimeStep = 10
+            TimeStep = 1
             TimeMode = temTime
             OnTimeChange = tedTimeChange
             Alignment = taCenter
@@ -482,7 +482,7 @@ object frmMain: TfrmMain
             Value = 0
             FPS = 25
             FrameStep = 1
-            TimeStep = 10
+            TimeStep = 1
             TimeMode = temTime
             OnTimeChange = tedTimeChange
             Alignment = taCenter
@@ -512,7 +512,7 @@ object frmMain: TfrmMain
             Value = 0
             FPS = 25
             FrameStep = 1
-            TimeStep = 10
+            TimeStep = 1
             TimeMode = temTime
             OnTimeChange = tedTimeChange
             Alignment = taCenter
