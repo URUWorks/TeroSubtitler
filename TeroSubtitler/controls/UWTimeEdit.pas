@@ -174,7 +174,7 @@ begin
   Height     := 23;
   FFPS       := 25;
   FValue     := 0;
-  FTimeStep  := 10;
+  FTimeStep  := 1;
   FFrameStep := 1;
   FTimeMode  := TUWTimeEditMode.temTime;
   Text       := '00:00:00.000';
