@@ -202,7 +202,7 @@ end;
 
 function RemoveUnnecessaryDots(Text: String): String;
 begin
-  while UTF8Pos('....', Text) > 0 do Delete(Text, UTF8Pos('....', Text), 1);
+  while UTF8Pos('....', Text) > 0 do UTF8Delete(Text, UTF8Pos('....', Text), 1);
   Result := Text;
 end;
 
@@ -260,7 +260,7 @@ var
   EnterLen : Integer;
 begin
   Result   := False;
-  EnterLen := Length(sLineBreak);
+  EnterLen := UTF8Length(sLineBreak);
   PosEnter := UTF8Pos(sLineBreak, Text);
   while PosEnter > 0 do
   begin
@@ -269,7 +269,7 @@ begin
       Result := True;
       Exit;
     end;
-    Text     := Copy(Text, PosEnter + EnterLen);
+    Text     := UTF8Copy(Text, PosEnter + EnterLen, UTF8Length(Text)-PosEnter);
     PosEnter := UTF8Pos(sLineBreak, Text);
   end;
   Result := UTF8Length(Text) > MaxChars;
@@ -297,7 +297,7 @@ begin
       if s.Count > 0 then
       begin
         if UTF8Pos('-', Text) > 1 then
-          Result := Copy(Text, 1, UTF8Pos('-', Text)-1) + BreakChar
+          Result := UTF8Copy(Text, 1, UTF8Pos('-', Text)-1) + BreakChar
         else
           Result := '';
 
@@ -417,8 +417,8 @@ begin
   try
     if (Position = 0) or (Position >= UTF8Length(Text)) then Exit;
 
-    sl.Add(Copy(Text, 1, Position).Trim);
-    sl.Add(Copy(Text, Position+1).Trim);
+    sl.Add(UTF8Copy(Text, 1, Position).Trim);
+    sl.Add(UTF8Copy(Text, Position+1, UTF8Length(Text)-Position).Trim);
 
     duration := (FinalTime - InitialTime) div sl.Count;
     ft       := InitialTime + duration;
@@ -479,7 +479,7 @@ begin
             Result[TotalLines+NewEnter]   := Enter[1];
         end;
 
-        Delete(Text, 1, PosEnter+c);
+        UTF8Delete(Text, 1, PosEnter+c);
         Inc(TotalLines, PosEnter+c);
       until Text = '';
     end
@@ -527,7 +527,7 @@ var
     while P <> 0 do
     begin
       Prefix := Prefix + Temp[i];
-      Temp   := Copy(Temp, 2);
+      Temp   := UTF8Copy(Temp, 2, UTF8Length(Temp)-2);
       if Temp = '' then
         P := 0
       else
@@ -543,7 +543,7 @@ var
     while P <> 0 do
     begin
       Suffix := Suffix + Temp[I];
-      Temp   := Copy(Temp, 1);
+      Temp   := UTF8Copy(Temp, 1, UTF8Length(Temp));
       i      := UTF8Length(Temp);
       if Temp = '' then
         P := 0
@@ -560,8 +560,8 @@ begin
   Posit := UTF8Pos(Delimiter, A);
   while Posit > 0 do
   begin
-    B     := B + FixSubString(Copy(A, 1, Posit-1)) + Delimiter;
-    A     := Copy(A, Posit + Length(Delimiter));
+    B     := B + FixSubString(UTF8Copy(A, 1, Posit-1)) + Delimiter;
+    A     := Copy(A, Posit + UTF8Length(Delimiter));
     Posit := UTF8Pos(Delimiter, A);
   end;
   B := B + FixSubString(A);
@@ -574,7 +574,8 @@ function IsHearingImpaired(const Text: String): Boolean;
 begin
   if ((Pos('(', Text) > 0) and (Pos(')', Text) > Pos('(', Text))) or
     ((Pos('[', Text) > 0) and (Pos(']', Text) > Pos('[', Text))) or
-    ((Pos('<', Text) > 0) and (Pos('>', Text) > Pos('<', Text))) then
+    ((Pos('<', Text) > 0) and (Pos('>', Text) > Pos('<', Text))) or
+    (StringCount('♪', Text) > 1) or (StringCount('♫', Text) > 1) then
     Result := True
   else
     Result := False;
@@ -584,26 +585,39 @@ end;
 
 function FixHearingImpaired(const Text: String; const Enter: String = sLineBreak): String;
 
+  function RHearingImpairedBetweenChar(Line, AChar: String): String;
+  var
+    a, b: Integer;
+  begin
+    Result := Line;
+    repeat
+      a := UTF8Pos(AChar, Result);
+      b := UTF8Pos(AChar, Result, a+1);
+      if (a > 0) and (b > 0) then UTF8Delete(Result, a, b);
+    until (a = 0) or (b = 0);
+  end;
+
+  function RHearingImpairedBetweenChars(Line, AChar, BChar: String): String;
+  begin
+    Result := Line;
+    while (UTF8Pos(AChar, Result) > 0) and (UTF8Pos(BChar, Result) > UTF8Pos(AChar, Result)) do
+    begin
+      if UTF8Copy(Result, UTF8Pos(BChar, Result) + 1, 1) = ':' then UTF8Delete(Result, UTF8Pos(BChar, Result) + 1, 1);
+      UTF8Delete(Result, UTF8Pos(AChar, Result), UTF8Pos(BChar, Result) - UTF8Pos(AChar, Result) + 1);
+    end;
+  end;
+
   function RHearingImpaired(Line: String): String;
   begin
-    while (UTF8Pos('(', Line) > 0) and (UTF8Pos(')', Line) > UTF8Pos('(', Line)) do
-    begin
-      if Copy(Line, UTF8Pos(')', Line) + 1, 1) = ':' then Delete(Line, UTF8Pos(')', Line) + 1, 1);
-      Delete(Line, UTF8Pos('(', Line), UTF8Pos(')', Line) - UTF8Pos('(', Line) + 1);
-    end;
-    while (UTF8Pos('[', Line) > 0) and (UTF8Pos(']', Line) > UTF8Pos('[', Line)) do
-    begin
-      if Copy(Line, UTF8Pos(']', Line) + 1, 1) = ':' then Delete(Line, UTF8Pos(']', Line) + 1, 1);
-      Delete(Line, UTF8Pos('[', Line), UTF8Pos(']', Line) - UTF8Pos('[', Line) + 1);
-    end;
-
-    Result := Line;
+    Result := RHearingImpairedBetweenChars(Line, '(', ')');
+    Result := RHearingImpairedBetweenChars(Result, '[', ']');
+    Result := RHearingImpairedBetweenChar(Result, '♪');
+    Result := RHearingImpairedBetweenChar(Result, '♫');
   end;
 
 var
   PosEnter : Integer;
   A, B     : String;
-
   sl       : TStringList;
   i        : Integer;
 begin
@@ -615,15 +629,21 @@ begin
     PosEnter := UTF8Pos(Enter, A);
     while PosEnter > 0 do
     begin
-      B        := B + RHearingImpaired(Copy(A, 1, PosEnter-1)) + Enter;
-      A        := Copy(A, PosEnter + Length(Enter));
+      B        := B + RHearingImpaired(UTF8Copy(A, 1, PosEnter-1)) + Enter;
+      A        := UTF8Copy(A, PosEnter + UTF8Length(Enter), UTF8Length(A));
       PosEnter := UTF8Pos(Enter, A);
     end;
     B := RemoveUnnecessarySpaces(RHearingImpaired(B + RHearingImpaired(A)));
 
-    if (UTF8Pos(Enter, B) = 0) and (Copy(B, 1, 1) = '-') then
+    PosEnter := UTF8Pos(Enter, B);
+    if (PosEnter > 0) and (UTF8Copy(B, 1, PosEnter-1).Trim = '-') then
     begin
-      B := Copy(B, Length(Enter));
+      UTF8Delete(B, 1, PosEnter+UTF8Length(Enter));
+    end;
+
+    if (UTF8Pos(Enter, B) = 0) and (UTF8Copy(B, 1, 1) = '-') then
+    begin
+      UTF8Delete(B, 1, 1);
       Result := RemoveUnnecessarySpaces(B);
     end
     else
@@ -658,11 +678,11 @@ begin
   Result := False;
   for i := 1 to UTF8Length(Text)-1 do
   begin
-    if (Pos(Text[i], RepeatableChars) > 0) and (Text[i+1] = Text[i]) then
-      if (Text[i] <> '/') or (Copy(Text, i-1, 3) <> '://') then
+    if (UTF8Pos(Text[i], RepeatableChars) > 0) and (Text[i+1] = Text[i]) then
+      if (Text[i] <> '/') or (UTF8Copy(Text, i-1, 3) <> '://') then
       begin
         Result := True;
-        exit;
+        Exit;
       end;
   end;
 end;
@@ -675,9 +695,9 @@ var
 begin
   for i := UTF8Length(Text) downto 2 do
   begin
-    if (Pos(Text[i], RepeatableChars) > 0) and (Text[i-1] = Text[i]) then
-      if (Text[i] <> '/') or (Copy(Text, i-2, 3) <> '://') then
-        Delete(Text, i, 1);
+    if (UTF8Pos(Text[i], RepeatableChars) > 0) and (Text[i-1] = Text[i]) then
+      if (Text[i] <> '/') or (UTF8Copy(Text, i-2, 3) <> '://') then
+        UTF8Delete(Text, i, 1);
   end;
   Result := Text;
 end;
@@ -774,9 +794,9 @@ begin
     b1 += 1;
 
     l := b2-b1;
-    s := Copy(Result, b1, l);
-    Delete(Result, b1, l);
-    Insert(s.Trim, Result, b1);
+    s := UTF8Copy(Result, b1, l);
+    UTF8Delete(Result, b1, l);
+    UTF8Insert(s.Trim, Result, b1);
   end;
 end;
 
@@ -826,7 +846,7 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; 
     if (p > 0) and (px > 0) then
     begin
       TagID := 'c';
-      Result := Copy(ATag, p + 1, px - 1);
+      Result := UTF8Copy(ATag, p + 1, px - 1);
       Exit;
     end;
     // font name
@@ -834,7 +854,7 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; 
     if (p > 0) then
     begin
       TagID := 'fn';
-      Result := Copy(ATag, p + 2, MaxInt);
+      Result := UTF8Copy(ATag, p + 2, MaxInt);
       Exit;
     end;
     // font size
@@ -842,7 +862,7 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; 
     if (p > 0) then
     begin
       TagID := 'fs';
-      Result := Copy(ATag, p + 2, MaxInt);
+      Result := UTF8Copy(ATag, p + 2, MaxInt);
       Exit;
     end;
     // font encoding
@@ -850,7 +870,7 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; 
     if (p > 0) then
     begin
       TagID := 'fe';
-      Result := Copy(ATag, p + 2, MaxInt);
+      Result := UTF8Copy(ATag, p + 2, MaxInt);
       Exit;
     end;
   end;
