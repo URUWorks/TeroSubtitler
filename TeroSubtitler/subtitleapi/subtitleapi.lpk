@@ -41,6 +41,10 @@
         <Filename Value="UWSubtitleAPI.EDL.pas"/>
         <UnitName Value="UWSubtitleAPI.EDL"/>
       </Item>
+      <Item>
+        <Filename Value="UWSubtitleAPI.CustomFormat.pas"/>
+        <UnitName Value="UWSubtitleAPI.CustomFormat"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

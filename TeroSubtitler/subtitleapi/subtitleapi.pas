@@ -10,7 +10,7 @@ interface
 uses
   UWSubtitleAPI, UWSubtitleAPI.Tags, UWSubtitleAPI.ExtraInfo, 
   UWSubtitleAPI.TimeCode, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, 
-  UWSubtitleAPI.EDL, LazarusPackageIntf;
+  UWSubtitleAPI.EDL, UWSubtitleAPI.CustomFormat, LazarusPackageIntf;
 
 implementation
 

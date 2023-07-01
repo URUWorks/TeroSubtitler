@@ -19,7 +19,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
-      <BuildNr Value="5"/>
+      <BuildNr Value="6"/>
       <StringTable CompanyName="URUWorks" FileDescription="Tero Subtitler" LegalCopyright="Copyright © 2023 URUWorks." ProductName="Tero Subtitler"/>
     </VersionInfo>
     <BuildModes>
@@ -597,6 +597,13 @@
       <Unit>
         <Filename Value="procFileTypes.pas"/>
         <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="formCustomFormat.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmCustomFormat"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit>
     </Units>
   </ProjectOptions>

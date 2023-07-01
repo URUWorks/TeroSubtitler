@@ -1536,3 +1536,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actExportCustomFormatExecute(Sender: TObject);
+begin
+  ShowCustomFormat;
+end;
+
+// -----------------------------------------------------------------------------
+

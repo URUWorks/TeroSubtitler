@@ -1191,6 +1191,12 @@ object frmMain: TfrmMain
         object MenuItem127: TMenuItem
           Action = actSaveTranscription
         end
+        object Separator47: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem166: TMenuItem
+          Action = actExportCustomFormat
+        end
       end
       object Separator30: TMenuItem
         Caption = '-'
@@ -2983,22 +2989,6 @@ object frmMain: TfrmMain
       Caption = 'Export text only'
       OnExecute = actExportTextOnlyExecute
     end
-    object actCompare: TAction
-      Category = 'File'
-      Caption = 'Compare...'
-      OnExecute = actCompareExecute
-    end
-    object actCloseSubtitle: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Close subtitle'
-      OnExecute = actCloseSubtitleExecute
-    end
-    object actCloseApp: TAction
-      Category = 'File'
-      Caption = 'Close'
-      OnExecute = actCloseAppExecute
-    end
     object actAddQuotationMarks: TAction
       Tag = 1
       Category = 'Texts'
@@ -3340,6 +3330,28 @@ object frmMain: TfrmMain
       Caption = 'Set encoding as default'
       ImageIndex = 66
       OnExecute = actSetAsDefaultEncodingExecute
+    end
+    object actExportCustomFormat: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Custom format'
+      OnExecute = actExportCustomFormatExecute
+    end
+    object actCompare: TAction
+      Category = 'File'
+      Caption = 'Compare...'
+      OnExecute = actCompareExecute
+    end
+    object actCloseSubtitle: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Close subtitle'
+      OnExecute = actCloseSubtitleExecute
+    end
+    object actCloseApp: TAction
+      Category = 'File'
+      Caption = 'Close'
+      OnExecute = actCloseAppExecute
     end
   end
   object popDropInsert: TPopupMenu

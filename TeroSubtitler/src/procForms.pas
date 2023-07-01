@@ -56,6 +56,7 @@ procedure ShowAudioToTextModels;
 procedure ShowBatchConvert;
 procedure ShowQualityCheck;
 procedure ShowCompare;
+procedure ShowCustomFormat;
 procedure ShowTBXSettings;
 procedure ShowTBX;
 procedure ShowTBXList;
@@ -78,7 +79,7 @@ uses
   formQualityCheck, formCompare, formTranslationMemoryList, formTBXList,
   formTBX, formTBXSettings, formTBXEdit, formWizard, formShiftTimes,
   formAudioToText, formAudioToTextModel, procTypes, procCommon, procWorkspace,
-  formFormatProperties;
+  formFormatProperties, formCustomFormat;
 
 // -----------------------------------------------------------------------------
 
@@ -523,6 +524,19 @@ begin
   end
   else
     frmCompare.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowCustomFormat;
+begin
+  if frmCustomFormat = NIL then
+  begin
+    frmCustomFormat := TfrmCustomFormat.Create(Application);
+    ShowForm(frmCustomFormat);
+  end
+  else
+    frmCustomFormat.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

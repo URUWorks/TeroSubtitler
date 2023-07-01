@@ -1,0 +1,36 @@
+;
+; URUWorks Tero Subtitler - Subtitle Template File
+;
+
+[Information]
+Name=HTML Example
+Extension=*.html
+Time structure=hh:mm:ss:zz
+Time=1
+FPS=25
+Decimal separator=,
+New line char=|
+
+[Format text]
+<html>
+  <head>
+    <link rel="stylesheet" href="null">
+      <style TYPE="text/css">
+        <!--BODY { background: #000040; }
+        .para1 { margin-top: -40px; margin-left: 155px; margin-right: 10px; font-family: "font2, Arial"; font-size: 30px; line-height: 35px; text-align: left; color: #DDA46A; }
+        .para2 { margin-top: 15px; margin-left: 15px; margin-right: 50px; font-family: "font1, Arial Black"; font-size: 50px; line-height: 40px; text-align: left; color: #004080; }
+      --></style>
+    <title>{$Product} - HTML Test Format</title>
+  </head>
+  <body BGCOLOR="#000080" topmargin="0" leftmargin="0" text="#FFFFFF">
+    <div align="center"><div CLASS="para2" align="center"><p>{$Product}</p></div><div CLASS="para1" align="center"><p>custom format export</p></div></div>
+    <hr align="left" width="90%" noshade size="1" color="#FFBF00"><div align="right"><table border="0" cellspacing="0" cellpadding="0" width="98%"><tr><td><small><small>
+    <font color="#409FFF" face="Arial">visit <a href="{$WebSite}">{$Company}</a> website for updates!</font><br>
+    <font face="Arial" color="#FFBF00">{TotalCount}</font><font color="#409FFF" face="Arial"> Subtitles.
+    </small></small><br></td></tr></table></div><ul><font face="Arial" color="#FFFFFF"><small>
+    {RepeatSub}
+    {tsIndex}. {tsStart} / {tsEnd} - {tsText}<br>
+    {EndRepeat}
+    </font></ul></blockquote><hr align="left" width="90%" noshade size="1" color="#FFBF00">
+  </body>
+</html>

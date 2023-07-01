@@ -77,6 +77,7 @@ function LogMPVFileName: String;
 function DictionariesFolder: String;
 function BackupFolder: String;
 function ProjectsFolder: String;
+function CustomFormatFolder: String;
 function TranslationMemoryFolder: String;
 function TerminologyFolder: String;
 function WhisperFolder: String;
@@ -1361,6 +1362,17 @@ begin
   Result := GetUserDir + RootCfg+'/Projects/';
   {$ELSE}
   Result := GetCustomFolderPath('Projects');
+  {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
+function CustomFormatFolder: String;
+begin
+  {$IFDEF DARWIN}
+  Result := GetCustomFolderPath('Resources/CustomFormat/');
+  {$ELSE}
+  Result := GetCustomFolderPath('CustomFormat');
   {$ENDIF}
 end;
 

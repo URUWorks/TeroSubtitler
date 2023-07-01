@@ -69,6 +69,7 @@ type
     actAudioToText: TAction;
     actCheckForUpdates: TAction;
     actFormatProperties: TAction;
+    actExportCustomFormat: TAction;
     actSort: TAction;
     actTBX: TAction;
     actMediaBack1Sec: TAction;
@@ -276,6 +277,7 @@ type
     MenuItem163: TMenuItem;
     MenuItem164: TMenuItem;
     MenuItem165: TMenuItem;
+    MenuItem166: TMenuItem;
     mnuFormatProperties: TMenuItem;
     mnuCheckForUpdates: TMenuItem;
     MenuItem17: TMenuItem;
@@ -468,6 +470,7 @@ type
     Separator45: TMenuItem;
     Separator46: TMenuItem;
     mnuHelpSeparator: TMenuItem;
+    Separator47: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
@@ -873,6 +876,7 @@ type
     procedure actShowToolbarFormatExecute(Sender: TObject);
     procedure actShowToolbarEncodingExecute(Sender: TObject);
     procedure actSortExecute(Sender: TObject);
+    procedure actExportCustomFormatExecute(Sender: TObject);
   private
 
   public
@@ -1022,6 +1026,8 @@ begin
   EnableWorkArea(False);
   CheckColorTheme(Self);
 end;
+
+// -----------------------------------------------------------------------------
 
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin

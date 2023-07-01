@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language Mail="uruworks@gmail.com" Name="es-UY" Count="38" Author="URUWorks">
+<Language Mail="uruworks@gmail.com" Name="es-UY" Count="39" Author="URUWorks">
   <Form Name="frmMain" Caption="tero subtitler">
     <Section Name="TMenuItem">
       <mnuFile>Archivo</mnuFile>
@@ -148,6 +148,7 @@
       <actImportSubtitles>Subtítulos...</actImportSubtitles>
       <actExportMarkedSubtitles>Subtítulos marcados...</actExportMarkedSubtitles>            
       <actExportTextOnly>Solo texto...</actExportTextOnly>
+      <actExportCustomFormat>Formato personalizado...</actExportCustomFormat>
       <actMediaPreviousFrame>Fotograma anterior</actMediaPreviousFrame>
       <actMediaNextFrame>Siguiente fotograma</actMediaNextFrame>
       <actMediaSetInitialTime>Establecer tiempo inicial</actMediaSetInitialTime>
@@ -415,6 +416,19 @@
       <lblOutput>Salida:</lblOutput>
     </Section>
   </Form>
+  <Form Name="frmCustomFormat" Caption="Formato personalizado">
+    <Section Name="TLabel">
+      <lblScript>Guion</lblScript>
+      <lblFPS>CPS</lblFPS>
+      <lblEncoding>Codificación</lblEncoding>
+      <lblTitle>Título</lblTitle>
+      <lblExtension>Extensión</lblExtension>
+      <lblNewLineChar>Carácter de nueva línea</lblNewLineChar>
+      <lblTimeFormat>Formato de tiempo</lblTimeFormat>
+      <lblSeparatorChar>Separador decimal</lblSeparatorChar>
+      <lblTimeCode>Código de tiempo</lblTimeCode>
+    </Section>
+  </Form>      
   <Form Name="frmTranslationMemory" Caption="Memoria de traducción">
   </Form>
   <Form Name="frmTranslationMemorySettings" Caption="Configuración de la memoria de traducción">
@@ -792,6 +806,10 @@
     <LatinGreek>Latín/Griego</LatinGreek>
     <LatinHebrew>Latín/Hebreo</LatinHebrew>
   </FormatPropertiesStrings>                                                                                  
+  <CustomFormatStrings>
+    <Time>Tiempo</Time>
+    <Frames>Fotogramas</Frames>
+  </CustomFormatStrings>                                                                                                                                                                                                                      
   <HeaderStrings>
     <Index>#/Pausa</Index>
     <Times>Tiempos</Times>

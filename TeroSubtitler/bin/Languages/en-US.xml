@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language Mail="uruworks@gmail.com" Name="Default" Count="38" Author="URUWorks">
+<Language Mail="uruworks@gmail.com" Name="Default" Count="39" Author="URUWorks">
   <Form Name="frmMain" Caption="tero subtitler">
     <Section Name="TMenuItem">
       <mnuFile>File</mnuFile>
@@ -148,6 +148,7 @@
       <actImportSubtitles>Subtitles...</actImportSubtitles>
       <actExportMarkedSubtitles>Marked subtitles...</actExportMarkedSubtitles>
       <actExportTextOnly>Text only...</actExportTextOnly>            
+      <actExportCustomFormat>Custom format...</actExportCustomFormat>
       <actMediaPreviousFrame>Previous frame</actMediaPreviousFrame>
       <actMediaNextFrame>Next frame</actMediaNextFrame>
       <actMediaSetInitialTime>Set initial time</actMediaSetInitialTime>
@@ -415,6 +416,19 @@
       <lblOutput>Output:</lblOutput>
     </Section>
   </Form>
+  <Form Name="frmCustomFormat" Caption="Custom format">
+    <Section Name="TLabel">
+      <lblScript>Script</lblScript>
+      <lblFPS>FPS</lblFPS>
+      <lblEncoding>Encoding</lblEncoding>
+      <lblTitle>Title</lblTitle>
+      <lblExtension>Extension</lblExtension>
+      <lblNewLineChar>New line char</lblNewLineChar>
+      <lblTimeFormat>Time format</lblTimeFormat>
+      <lblSeparatorChar>Decimal separator</lblSeparatorChar>
+      <lblTimeCode>Time code</lblTimeCode>
+    </Section>
+  </Form>        
   <Form Name="frmTranslationMemory" Caption="Translation memory">
   </Form>
   <Form Name="frmTranslationMemorySettings" Caption="Translation memory settings">
@@ -791,7 +805,11 @@
     <LatinArabic>Latin/Arabic</LatinArabic>
     <LatinGreek>Latin/Greek</LatinGreek>
     <LatinHebrew>Latin/Hebrew</LatinHebrew>
-  </FormatPropertiesStrings>                                                                                                                                                                                                                  
+  </FormatPropertiesStrings>
+  <CustomFormatStrings>
+    <Time>Time</Time>
+    <Frames>Frames</Frames>
+  </CustomFormatStrings>                                                                                                                                                                                                                    
   <HeaderStrings>
     <Index>#/Gap</Index>
     <Times>Times</Times>

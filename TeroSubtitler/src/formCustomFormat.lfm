@@ -1,0 +1,210 @@
+object frmCustomFormat: TfrmCustomFormat
+  Left = 245
+  Height = 424
+  Top = 119
+  Width = 984
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Custom format'
+  ClientHeight = 424
+  ClientWidth = 984
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object cboScript: TComboBox
+    Left = 8
+    Height = 23
+    Top = 28
+    Width = 292
+    ItemHeight = 15
+    OnSelect = cboScriptSelect
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object lblScript: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 30
+    Caption = 'Script'
+    ParentColor = False
+  end
+  object lblFPS: TLabel
+    Left = 305
+    Height = 15
+    Top = 8
+    Width = 19
+    Caption = 'FPS'
+    ParentColor = False
+  end
+  object cboFPS: TComboBox
+    Left = 305
+    Height = 23
+    Top = 28
+    Width = 75
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object lblEncoding: TLabel
+    Left = 8
+    Height = 15
+    Top = 64
+    Width = 50
+    Caption = 'Encoding'
+    ParentColor = False
+  end
+  object cboEncoding: TComboBox
+    Left = 8
+    Height = 23
+    Top = 84
+    Width = 372
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object btnSave: TButton
+    Left = 225
+    Height = 25
+    Top = 391
+    Width = 75
+    Caption = 'Save...'
+    Default = True
+    Enabled = False
+    ModalResult = 1
+    OnClick = btnSaveClick
+    TabOrder = 5
+  end
+  object btnClose: TButton
+    Left = 305
+    Height = 25
+    Top = 391
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    ModalResult = 2
+    OnClick = btnCloseClick
+    TabOrder = 6
+  end
+  object lyoEditor: TUWLayout
+    Left = 392
+    Height = 416
+    Top = 0
+    Width = 592
+    ClientHeight = 416
+    ClientWidth = 592
+    TabOrder = 4
+    object mmoSource: TMemo
+      Left = 0
+      Height = 408
+      Top = 8
+      Width = 584
+      ScrollBars = ssAutoBoth
+      TabOrder = 0
+      WordWrap = False
+    end
+  end
+  object lyoSettings: TUWLayout
+    Left = 8
+    Height = 232
+    Top = 136
+    Width = 372
+    ClientHeight = 232
+    ClientWidth = 372
+    TabOrder = 3
+    object lblExtension: TLabel
+      Left = 0
+      Height = 15
+      Top = 56
+      Width = 51
+      Caption = 'Extension'
+      ParentColor = False
+    end
+    object edtExtension: TEdit
+      Left = 0
+      Height = 23
+      Top = 76
+      Width = 184
+      TabOrder = 1
+    end
+    object lblNewLineChar: TLabel
+      Left = 189
+      Height = 15
+      Top = 56
+      Width = 72
+      Caption = 'New line char'
+      ParentColor = False
+    end
+    object edtNewLineChar: TEdit
+      Left = 189
+      Height = 23
+      Top = 76
+      Width = 183
+      TabOrder = 2
+    end
+    object lblSeparatorChar: TLabel
+      Left = 189
+      Height = 15
+      Top = 112
+      Width = 50
+      Caption = 'Separator'
+      ParentColor = False
+    end
+    object edtSeparatorChar: TEdit
+      Left = 189
+      Height = 23
+      Top = 132
+      Width = 183
+      TabOrder = 4
+    end
+    object edtTimeFormat: TEdit
+      Left = 0
+      Height = 23
+      Top = 132
+      Width = 184
+      TabOrder = 3
+    end
+    object lblTimeFormat: TLabel
+      Left = 0
+      Height = 15
+      Top = 112
+      Width = 65
+      Caption = 'Time format'
+      ParentColor = False
+    end
+    object lblTimeCode: TLabel
+      Left = 0
+      Height = 15
+      Top = 168
+      Width = 55
+      Caption = 'Time code'
+      ParentColor = False
+    end
+    object cboTimeCode: TComboBox
+      Left = 0
+      Height = 23
+      Top = 188
+      Width = 372
+      ItemHeight = 15
+      Style = csDropDownList
+      TabOrder = 5
+    end
+    object lblTitle: TLabel
+      Left = 0
+      Height = 15
+      Top = 0
+      Width = 22
+      Caption = 'Title'
+      ParentColor = False
+    end
+    object edtTitle: TEdit
+      Left = 0
+      Height = 23
+      Top = 20
+      Width = 372
+      TabOrder = 0
+    end
+  end
+end

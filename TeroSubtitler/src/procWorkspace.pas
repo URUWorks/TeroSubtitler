@@ -38,6 +38,7 @@ procedure FillComboWithGoogleLanguages(const Combo: TCombobox; const Index: Inte
 procedure FillItemsWithConventions(const AItems: TStrings; AProfiles: TProfiles = NIL);
 procedure FillComboWithShortCutsPreset(const ACombo: TComboBox);
 procedure FillComboWithModels(const Combo: TComboBox);
+procedure FillComboWithCustomFormat(const Combo: TComboBox);
 procedure FillWithDictionaries(const AMenu: TMenuItem; const ACombo: TComboBox);
 procedure FillMenuWithPlayRate(const AParent: TComponent);
 procedure FillMenuWithLoopCount(const AParent: TComponent);
@@ -297,6 +298,27 @@ var
   SearchRec: TSearchRec;
 begin
   if SysUtils.FindFirst(WhisperModelsFolder + '*.bin', faAnyFile, SearchRec) = 0 then
+  try
+    Combo.Items.BeginUpdate;
+    Combo.Items.Clear;
+    repeat
+      Combo.Items.Add(ChangeFileExt(SearchRec.Name, ''));
+    until FindNext(SearchRec) <> 0;
+  finally
+    if Combo.Items.Count > 0 then
+      Combo.ItemIndex := 0;
+    Combo.Items.EndUpdate;
+    FindClose(SearchRec);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure FillComboWithCustomFormat(const Combo: TComboBox);
+var
+  SearchRec: TSearchRec;
+begin
+  if SysUtils.FindFirst(CustomFormatFolder + '*.cfp', faAnyFile, SearchRec) = 0 then
   try
     Combo.Items.BeginUpdate;
     Combo.Items.Clear;
