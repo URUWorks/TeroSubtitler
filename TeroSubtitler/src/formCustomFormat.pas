@@ -230,7 +230,7 @@ end;
 function TfrmCustomFormat.ReplaceHeaderTags(const S, TimeFormat: String): String;
 begin
   Result := ReplaceString(S,   '{$Company}', 'URUWorks');
-  Result := ReplaceString(Result, '{$Product}', ProgramName);
+  Result := ReplaceString(Result, '{$Software}', ProgramName);
   Result := ReplaceString(Result, '{$WebSite}', ProgramWebsite);
   Result := ReplaceString(Result, '{TotalCount}', IntToStr(Subtitles.Count));
   Result := ReplaceString(Result, '{FPS}', cboFPS.Text);
