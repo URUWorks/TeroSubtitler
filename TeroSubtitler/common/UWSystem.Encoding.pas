@@ -286,18 +286,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetStringCount(const ASourceString: String; const AWords: array of String): Integer;
+function GetStringCount(const ASourceString: String; const AWords: array of String; const ATryDefault: Boolean = False): Integer;
 begin
   Result := RE_StringCount('\b(' + String.Join('|', AWords) + ')\b', ASourceString);
+  if (Result = 0) and ATryDefault then // I don't know why regexpr gives me 0 sometimes
+    Result := StringsCount(ASourceString, AWords);
 end;
 
 // -----------------------------------------------------------------------------
 
 function DetectAnsiEncoding(const Buffer: TBytes): TEncoding;
 const
-  _Russian: array of String = ('что', 'быть', 'весь', 'этот', 'один', 'такой');
+  _Russian: array of String = ('что', 'быть', 'весь', 'этот', 'один', 'такой', '[Ээч]?то', '[Нн]е', '[ТтМмбв]ы', 'Да', '[Нн]ет', 'Он', 'его', 'тебя', 'как', 'меня', 'Но', 'всё', 'мне', 'вас', 'знаю', 'ещё', 'за', 'нас', 'чтобы', 'был', 'Я', '[Bb]тор.*', 'Держ.*');
   _Bulgarian: array of String = ('Какво', 'тук', 'може', 'Как', 'Ваше', 'какво');
-  _SerbianCyrillic: array of String = ('сам', 'али', 'није', 'само', 'ово', 'како', 'добро', 'све', 'тако', 'ће', 'могу', 'ћу', 'зашто', 'нешто', 'за', 'шта', 'овде', 'бити', 'чини', 'учениче', 'побегне', 'остати', 'Један', 'Назад', 'Молим');
+  _SerbianCyrillic: array of String = ('сам', 'али', 'није', 'само', 'ово', 'како', 'добро', 'све', 'тако', 'ће', 'могу', 'ћу', 'зашто', 'нешто', 'за', 'шта', 'овде', 'бити', 'чини', 'учениче', 'побегне', 'остати', 'Један', 'Назад', 'Молим', 'ће', 'ћемо', 'Хоћу');
   _Greek: array of String = ('μου', '[Εε]ίναι', 'αυτό', 'Τόμπυ', 'καλά', 'Ενταξει', 'πρεπει', 'Λοιπον', 'τιποτα', 'ξερεις');
   _CroatianAndSerbian: array of String = ('sam', 'ali', 'nije', 'Nije', 'samo', 'ovo', 'kako', 'dobro', 'Dobro', 'sve', 'tako', 'će', 'mogu', 'ću', 'zašto', 'nešto', 'za', 'misliš', 'možeš', 'možemo', 'ništa', 'znaš', 'ćemo', 'znam');
   _CzechAndSlovak: array of String = ('[Oo]n[ao]?', '[Jj]?si', '[Aa]le', '[Tt]en(to)?', '[Rr]ok', '[Tt]ak', '[Aa]by', '[Tt]am', '[Jj]ed(en|na|no)', '[Nn]ež', '[Aa]ni', '[Bb]ez', '[Dd]obr[ýáé]', '[Vv]šak', '[Cc]el[ýáé]', '[Nn]ov[ýáé]', '[Dd]ruh[ýáé]', 'jsem', 'poøádku', 'Pojïme', 'háje', 'není', 'Jdeme', 'všecko', 'jsme', 'Prosím', 'Vezmi', 'když', 'Takže', 'Dìkuji', 'prechádzku', 'všetko', 'Poïme', 'potom', 'Takže', 'Neviem', 'budúcnosti', 'trochu');
@@ -311,17 +313,17 @@ const
 var
   Encoding, Enc : TEncoding;
   Text          : String;
-  WordMinCount  : Integer;
+  MinCount  : Integer;
 begin
   Result := NIL;
-  WordMinCount := Length(Buffer) div 300;
+  MinCount := Length(Buffer) div 300;
 
   // Cyrillic
   Encoding := TEncoding.GetEncoding(1251);
   Text := Encoding.GetString(Buffer);
-  if (GetStringCount(Text, _Russian) > 5) or
-     (GetStringCount(Text, _Bulgarian) > 5) or
-     (GetStringCount(Text, _SerbianCyrillic) > WordMinCount) then
+  if (GetStringCount(Text, _Russian, True) > 5) or
+     (GetStringCount(Text, _Bulgarian, True) > 5) or
+     (GetStringCount(Text, _SerbianCyrillic, True) > MinCount) then
   begin
    Exit(Encoding);
   end;
@@ -345,11 +347,11 @@ begin
   // Central European/Eastern European
   Encoding := TEncoding.GetEncoding(1250);
   Text := Encoding.GetString(Buffer);
-  if (GetStringCount(Text, _CroatianAndSerbian) > WordMinCount) or
-     (GetStringCount(Text, _CzechAndSlovak) > WordMinCount) or
-     (GetStringCount(Text, _Czech) > WordMinCount) or
-     (GetStringCount(Text, _Polish) > WordMinCount) or
-     (GetStringCount(Text, _Hungarian) > WordMinCount) or
+  if (GetStringCount(Text, _CroatianAndSerbian) > MinCount) or
+     (GetStringCount(Text, _CzechAndSlovak) > MinCount) or
+     (GetStringCount(Text, _Czech) > MinCount) or
+     (GetStringCount(Text, _Polish) > MinCount) or
+     (GetStringCount(Text, _Hungarian) > MinCount) or
      (GetStringCount(Text, ['să', 'şi', 'văzut', 'regulă', 'găsit', 'viaţă']) > 99) then
   begin
     Exit(Encoding);
