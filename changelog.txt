@@ -1,3 +1,7 @@
+1.0.0.6 (x.7.2023)
+- fixed: Autodetect Win1251 #115
+- added: Custom format export
+
 1.0.0.5 (30.6.2023)
 - fixed: Musical notes excluded from Hearing Impaired filter #111
 - fixed: File doesn't open when dragged onto Tero Subtitler icon #102
