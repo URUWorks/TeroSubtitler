@@ -45,6 +45,7 @@
     <Section Name="TAction">
       <actNewSubtitle Hint="Iniciar un nuevo proyecto de subtítulos">Nuevo subtítulo</actNewSubtitle>
       <actLoadSubtitle Hint="Abrir un archivo de subtítulos">Abrir subtítulo...</actLoadSubtitle>
+      <actLoadTranslation>Abrir traducción...</actLoadTranslation>
       <actUndo Hint="Deshacer última acción">Deshacer</actUndo>
       <actRedo Hint="Rehacer última acción">Rehacer</actRedo>
       <actCut>Cortar</actCut>

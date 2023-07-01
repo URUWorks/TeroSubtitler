@@ -95,6 +95,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actLoadTranslationExecute(Sender: TObject);
+begin
+  LoadSubtitleWithDialog(smTranslation);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actSaveSubtitleExecute(Sender: TObject);
 begin
   SaveCurrentSubtitle;

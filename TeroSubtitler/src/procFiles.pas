@@ -43,10 +43,11 @@ function LoadShotChangesFileName(const FileName: String): Boolean;
 
 { Subtitle files with dialogs }
 
-procedure LoadSubtitleWithDialog;
+procedure LoadSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 procedure SaveSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 procedure SaveCurrentSubtitle(const SubtitleMode: TSubtitleMode = smText);
 procedure LoadVideoWithDialog;
+procedure ReadSubtitleData(const AFileName: String; const OnlyTimings: Boolean; const SubtitleMode: TSubtitleMode = smText; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 procedure ReadTimingsFromFileWithDialog;
 procedure ReadTextsFromFileWithDialog;
 procedure ImportSubtitleWithDialog;
@@ -510,7 +511,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure LoadSubtitleWithDialog;
+procedure LoadSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 var
   OD : TOpenDialog;
   CD : TfrmCustomFileDlg;
@@ -522,7 +523,13 @@ begin
       CD.FileName := SubtitleInfo.Text.FileName;
       if CD.Execute then
       begin
-        LoadSubtitle(CD.FileName, CD.Format, CD.Encoding, CD.FPS);
+        if SubtitleMode = smText then
+          LoadSubtitle(CD.FileName, CD.Format, CD.Encoding, CD.FPS)
+        else
+        begin
+          if Subtitles.Count > 0 then
+            ReadSubtitleData(CD.FileName, False, smTranslation, CD.Format, CD.Encoding, CD.FPS);
+        end;
       end;
     finally
       CD.Free;
@@ -538,7 +545,13 @@ begin
 
       if OD.Execute then
       begin
-        LoadSubtitle(OD.FileName);
+        if SubtitleMode = smText then
+          LoadSubtitle(OD.FileName)
+        else
+        begin
+          if Subtitles.Count > 0 then
+            ReadSubtitleData(OD.FileName, False, smTranslation);
+        end;
       end;
     finally
       OD.Free;
@@ -630,7 +643,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure ReadSubtitleData(const AFileName: String; const OnlyTimings: Boolean; const SubtitleMode: TSubtitleMode = smText);
+procedure ReadSubtitleData(const AFileName: String; const OnlyTimings: Boolean; const SubtitleMode: TSubtitleMode = smText; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 var
   Sub  : TUWSubtitles;
   i, c : Integer;
@@ -654,6 +667,9 @@ begin
 
         UndoInstance.IncrementUndoGroup;
         UpdateValues(True);
+
+        if (SubtitleMode = smTranslation) and not Workspace.TranslatorMode then
+          SetTranslatorMode(True);
       end;
     finally
       Sub.Free;

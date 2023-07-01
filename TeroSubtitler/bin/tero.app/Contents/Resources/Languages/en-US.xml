@@ -45,6 +45,7 @@
     <Section Name="TAction">
       <actNewSubtitle Hint="Start a new subtitle project">New subtitle</actNewSubtitle>
       <actLoadSubtitle Hint="Load a subtitle file">Load subtitle...</actLoadSubtitle>
+      <actLoadTranslation>Load translation...</actLoadTranslation>
       <actUndo Hint="Undo last action">Undo</actUndo>
       <actRedo Hint="Redo last undo">Redo</actRedo>
       <actCut>Cut</actCut>

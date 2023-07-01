@@ -70,6 +70,7 @@ type
     actCheckForUpdates: TAction;
     actFormatProperties: TAction;
     actExportCustomFormat: TAction;
+    actLoadTranslation: TAction;
     actSort: TAction;
     actTBX: TAction;
     actMediaBack1Sec: TAction;
@@ -278,6 +279,7 @@ type
     MenuItem164: TMenuItem;
     MenuItem165: TMenuItem;
     MenuItem166: TMenuItem;
+    MenuItem167: TMenuItem;
     mnuFormatProperties: TMenuItem;
     mnuCheckForUpdates: TMenuItem;
     MenuItem17: TMenuItem;
@@ -713,6 +715,7 @@ type
     procedure actWaveformPreviewExecute(Sender: TObject);
     procedure actNewSubtitleExecute(Sender: TObject);
     procedure actLoadSubtitleExecute(Sender: TObject);
+    procedure actLoadTranslationExecute(Sender: TObject);
     procedure actSaveSubtitleExecute(Sender: TObject);
     procedure actSaveSubtitleAsExecute(Sender: TObject);
     procedure actSaveTranslationExecute(Sender: TObject);

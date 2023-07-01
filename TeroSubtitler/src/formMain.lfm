@@ -1144,6 +1144,9 @@ object frmMain: TfrmMain
       object MenuItem4: TMenuItem
         Action = actLoadSubtitle
       end
+      object MenuItem167: TMenuItem
+        Action = actLoadTranslation
+      end
       object mnuFileMRU: TMenuItem
         Caption = 'Recent files'
       end
@@ -2719,47 +2722,6 @@ object frmMain: TfrmMain
       ImageIndex = 19
       OnExecute = actSettingsExecute
     end
-    object actRestoreBackup: TAction
-      Category = 'File'
-      Caption = 'Restore backup...'
-      OnExecute = actRestoreBackupExecute
-    end
-    object actSaveSubtitle: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Save subtitle'
-      ImageIndex = 2
-      OnExecute = actSaveSubtitleExecute
-    end
-    object actSaveSubtitleAs: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Save subtitle as...'
-      OnExecute = actSaveSubtitleAsExecute
-    end
-    object actSaveTranslation: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Save translation'
-      OnExecute = actSaveTranslationExecute
-    end
-    object actSaveTranslationAs: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Save translation as...'
-      OnExecute = actSaveTranslationAsExecute
-    end
-    object actLoadTranscription: TAction
-      Category = 'File'
-      Caption = 'Transcription...'
-      OnExecute = actLoadTranscriptionExecute
-    end
-    object actSaveTranscription: TAction
-      Tag = 16
-      Category = 'File'
-      Caption = 'Transcription...'
-      OnExecute = actSaveTranscriptionExecute
-    end
     object actMediaPreviousFrame: TAction
       Tag = 4
       Category = 'Video'
@@ -2970,24 +2932,6 @@ object frmMain: TfrmMain
       Caption = 'Detect silent zones'
       ImageIndex = 77
       OnExecute = actDetectSilentZonesExecute
-    end
-    object actImportSubtitles: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Import subtitles'
-      OnExecute = actImportSubtitlesExecute
-    end
-    object actExportMarkedSubtitles: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Export marked subtitles'
-      OnExecute = actExportMarkedSubtitlesExecute
-    end
-    object actExportTextOnly: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Export text only'
-      OnExecute = actExportTextOnlyExecute
     end
     object actAddQuotationMarks: TAction
       Tag = 1
@@ -3330,6 +3274,71 @@ object frmMain: TfrmMain
       Caption = 'Set encoding as default'
       ImageIndex = 66
       OnExecute = actSetAsDefaultEncodingExecute
+    end
+    object actLoadTranslation: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Load translation...'
+      OnExecute = actLoadTranslationExecute
+    end
+    object actRestoreBackup: TAction
+      Category = 'File'
+      Caption = 'Restore backup...'
+      OnExecute = actRestoreBackupExecute
+    end
+    object actSaveSubtitle: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save subtitle'
+      ImageIndex = 2
+      OnExecute = actSaveSubtitleExecute
+    end
+    object actSaveSubtitleAs: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save subtitle as...'
+      OnExecute = actSaveSubtitleAsExecute
+    end
+    object actSaveTranslation: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save translation'
+      OnExecute = actSaveTranslationExecute
+    end
+    object actSaveTranslationAs: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save translation as...'
+      OnExecute = actSaveTranslationAsExecute
+    end
+    object actLoadTranscription: TAction
+      Category = 'File'
+      Caption = 'Transcription...'
+      OnExecute = actLoadTranscriptionExecute
+    end
+    object actSaveTranscription: TAction
+      Tag = 16
+      Category = 'File'
+      Caption = 'Transcription...'
+      OnExecute = actSaveTranscriptionExecute
+    end
+    object actImportSubtitles: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Import subtitles'
+      OnExecute = actImportSubtitlesExecute
+    end
+    object actExportMarkedSubtitles: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Export marked subtitles'
+      OnExecute = actExportMarkedSubtitlesExecute
+    end
+    object actExportTextOnly: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Export text only'
+      OnExecute = actExportTextOnlyExecute
     end
     object actExportCustomFormat: TAction
       Tag = 1
