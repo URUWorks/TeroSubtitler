@@ -1,5 +1,6 @@
 1.0.0.6 (x.7.2023)
 - fixed: Autodetect Win1251 #115
+- fixed: Load translation missing #113
 - added: Custom format export
 
 1.0.0.5 (30.6.2023)
