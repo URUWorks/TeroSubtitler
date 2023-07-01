@@ -75,8 +75,8 @@
         <Filename Value="formMain_Actions.inc"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="44"/>
-        <CursorPos Y="66"/>
+        <TopLine Value="721"/>
+        <CursorPos X="32" Y="751"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -196,8 +196,8 @@
         <Filename Value="procWorkspace.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="733"/>
-        <CursorPos X="29" Y="737"/>
+        <TopLine Value="1067"/>
+        <CursorPos X="29" Y="1078"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -422,8 +422,8 @@
         <Filename Value="procFiles.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="605"/>
-        <CursorPos X="27" Y="663"/>
+        <TopLine Value="396"/>
+        <CursorPos X="20" Y="417"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -450,8 +450,8 @@
         <Filename Value="formMain_MPV.inc"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="155"/>
-        <CursorPos X="24" Y="168"/>
+        <TopLine Value="58"/>
+        <CursorPos X="30" Y="73"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -466,8 +466,6 @@
         <Filename Value="procForms.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="50"/>
-        <CursorPos X="27" Y="82"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -581,8 +579,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="209"/>
-        <CursorPos Y="224"/>
+        <TopLine Value="228"/>
+        <CursorPos Y="254"/>
         <UsageCount Value="190"/>
       </Unit>
       <Unit>
@@ -637,8 +635,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="148"/>
-        <CursorPos X="34" Y="166"/>
+        <TopLine Value="226"/>
+        <CursorPos X="42" Y="234"/>
         <UsageCount Value="32"/>
       </Unit>
       <Unit>
@@ -1125,7 +1123,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.Formats.SubRip.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="22" Y="13"/>
+        <TopLine Value="30"/>
+        <CursorPos X="12" Y="47"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -2297,7 +2296,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="1">
+    <JumpHistory HistoryIndex="5">
       <Position>
         <Filename Value="formMain.pas"/>
         <Caret Line="717" TopLine="688"/>
@@ -2305,6 +2304,22 @@
       <Position>
         <Filename Value="formMain.pas"/>
         <Caret Line="698" Column="31" TopLine="689"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="17" Column="25"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="1455" TopLine="1421"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="1433" Column="27" TopLine="1421"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="1437" Column="43" TopLine="1421"/>
       </Position>
     </JumpHistory>
     <RunParams>

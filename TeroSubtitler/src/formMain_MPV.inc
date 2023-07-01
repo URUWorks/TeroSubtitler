@@ -82,6 +82,7 @@ begin
   end;
 
   UpdateVideoLengthString;
+  RefreshAppTitle;
 end;
 
 // -----------------------------------------------------------------------------

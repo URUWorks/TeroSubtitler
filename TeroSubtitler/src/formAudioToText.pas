@@ -247,12 +247,12 @@ begin
                   cboFPS.ItemIndex      := i;
                   cboInputFPS.ItemIndex := i;
                 end;
-              end;
-              DoAutoCheckErrors;
 
-              frmMain.TimerSubtitle.Enabled := TimerSub;
-              if isPlaying then
-                frmMain.MPV.Resume;
+                DoAutoCheckErrors;
+                if VST.RootNodeCount > 0 then EnableWorkArea;
+                TimerSubtitle.Enabled := TimerSub;
+                if isPlaying then MPV.Resume;
+              end;
             end
             else
               ShowErrorMessageDialog(Format(GetCommonString('ErrorExecuting'), [WAVEOptions.AudioToTextApp]));

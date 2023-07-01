@@ -1077,6 +1077,8 @@ begin
   s := ExtractFileName(SubtitleInfo.Text.FileName);
   if not s.IsEmpty then
     s := s + ' - ' + ProgramName
+  else if not frmMain.MPV.FileName.IsEmpty then
+    s := ExtractFileName(frmMain.MPV.FileName) + ' - ' + ProgramName
   else
     s := ProgramName;
 
