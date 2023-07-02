@@ -93,7 +93,7 @@ begin
   LoadLanguage(Self);
   CustomFormat := TUWSubtitleCustomTextFormat.Create('');
 
-  FillComboWithFPS(cboFPS, Workspace.FPS.DefFPS);
+  FillComboWithFPS(cboFPS, GetFPS);
   FillComboWithEncodings(cboEncoding);
   FillComboWithCustomFormat(cboScript);
 

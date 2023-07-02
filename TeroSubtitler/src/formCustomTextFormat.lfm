@@ -1,13 +1,13 @@
 object frmCustomTextFormat: TfrmCustomTextFormat
   Left = 245
-  Height = 424
+  Height = 169
   Top = 119
-  Width = 984
+  Width = 389
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Custom format'
-  ClientHeight = 424
-  ClientWidth = 984
+  Caption = 'Custom text format'
+  ClientHeight = 169
+  ClientWidth = 389
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -68,7 +68,7 @@ object frmCustomTextFormat: TfrmCustomTextFormat
   object btnSave: TButton
     Left = 225
     Height = 25
-    Top = 391
+    Top = 136
     Width = 75
     Caption = 'Save...'
     Default = True
@@ -80,7 +80,7 @@ object frmCustomTextFormat: TfrmCustomTextFormat
   object btnClose: TButton
     Left = 305
     Height = 25
-    Top = 391
+    Top = 136
     Width = 75
     Cancel = True
     Caption = 'Close'
@@ -96,6 +96,7 @@ object frmCustomTextFormat: TfrmCustomTextFormat
     ClientHeight = 416
     ClientWidth = 592
     TabOrder = 4
+    Visible = False
     object mmoSource: TMemo
       Left = 0
       Height = 408
@@ -109,11 +110,12 @@ object frmCustomTextFormat: TfrmCustomTextFormat
   object lyoSettings: TUWLayout
     Left = 8
     Height = 232
-    Top = 136
+    Top = 184
     Width = 372
     ClientHeight = 232
     ClientWidth = 372
     TabOrder = 3
+    Visible = False
     object lblExtension: TLabel
       Left = 0
       Height = 15
