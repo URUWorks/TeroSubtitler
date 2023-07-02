@@ -710,7 +710,6 @@
     <btnGo>Go</btnGo>
     <btnSkip>Skip</btnSkip>
     <btnSkipAll>Skip all</btnSkipAll>
-    <btnAdd>Add</btnAdd>
     <btnChange>Change</btnChange>
     <btnChangeAll>Change all</btnChangeAll>
     <btnTranslate>Translate</btnTranslate>
