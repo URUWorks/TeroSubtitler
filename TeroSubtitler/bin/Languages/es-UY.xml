@@ -710,7 +710,6 @@
     <btnGo>Ir</btnGo>
     <btnSkip>Saltar</btnSkip>
     <btnSkipAll>Saltar todo</btnSkipAll>
-    <btnAdd>Agregar</btnAdd>
     <btnChange>Cambiar</btnChange>
     <btnChangeAll>Cambiar todo</btnChangeAll>
     <btnTranslate>Traducir</btnTranslate>
