@@ -149,7 +149,7 @@
       <actImportSubtitles>Subtítulos...</actImportSubtitles>
       <actExportMarkedSubtitles>Subtítulos marcados...</actExportMarkedSubtitles>            
       <actExportTextOnly>Solo texto...</actExportTextOnly>
-      <actExportCustomFormat>Formato personalizado...</actExportCustomFormat>
+      <actExportCustomTextFormat>Formato de texto personalizado...</actExportCustomTextFormat>
       <actMediaPreviousFrame>Fotograma anterior</actMediaPreviousFrame>
       <actMediaNextFrame>Siguiente fotograma</actMediaNextFrame>
       <actMediaSetInitialTime>Establecer tiempo inicial</actMediaSetInitialTime>
@@ -417,7 +417,7 @@
       <lblOutput>Salida:</lblOutput>
     </Section>
   </Form>
-  <Form Name="frmCustomFormat" Caption="Formato personalizado">
+  <Form Name="frmCustomTextFormat" Caption="Formato de texto personalizado">
     <Section Name="TLabel">
       <lblScript>Guion</lblScript>
       <lblFPS>CPS</lblFPS>
