@@ -137,6 +137,7 @@ type
     FSearchStartAt    : Integer;
     FSearchIdx        : Integer;
     FSearchSkip       : Integer;
+    FAutoSort         : Boolean;
     FReplaceEntity    : Boolean;
     FTimeBase         : TSubtitleTimeBase;
     FFormatProperties : PFormatProperties;
@@ -202,6 +203,7 @@ type
     property Format: TUWSubtitleFormats read FFormat write SetFormat;
     property CodePage: Integer read FCodePage;
     property FrameRate: Single read FFPS write FFPS;
+    property AutoSort: Boolean read FAutoSort write FAutoSort; // Auto sort subtitles on load
     property Items[Index: Integer]: TUWSubtitleItem read GetItem write PutItem; default;
     property ItemPointer[Index: Integer]: PUWSubtitleItem read GetItemPointer;
     property Text[Index: Integer]: String read GetText write PutText;
@@ -751,6 +753,7 @@ begin
   FSearchIdx     := 0;
   FSearchSkip    := 0;
   FHeader        := NIL;
+  FAutoSort      := True;
   FReplaceEntity := True;
   FTimeBase      := stbMedia;
   New(FFormatProperties);
@@ -1483,6 +1486,7 @@ begin
         except
         end;
     finally
+      if FAutoSort then Sort;
       SubFile.Free;
     end;
   finally
