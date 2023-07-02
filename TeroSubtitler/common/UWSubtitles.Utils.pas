@@ -611,8 +611,9 @@ function FixHearingImpaired(const Text: String; const Enter: String = sLineBreak
   begin
     Result := RHearingImpairedBetweenChars(Line, '(', ')');
     Result := RHearingImpairedBetweenChars(Result, '[', ']');
-    Result := RHearingImpairedBetweenChar(Result, '♪');
-    Result := RHearingImpairedBetweenChar(Result, '♫');
+    //Result := RHearingImpairedBetweenChar(Result, '♪');
+    //Result := RHearingImpairedBetweenChar(Result, '♫');
+    Result := StringsReplace(Result, ['♪', '♫'], ['', ''], [rfReplaceAll]);
   end;
 
 var
