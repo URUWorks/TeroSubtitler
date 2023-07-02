@@ -1,4 +1,4 @@
-object frmCustomFormat: TfrmCustomFormat
+object frmCustomTextFormat: TfrmCustomTextFormat
   Left = 245
   Height = 424
   Top = 119

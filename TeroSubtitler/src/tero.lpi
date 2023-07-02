@@ -599,9 +599,9 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="formCustomFormat.pas"/>
+        <Filename Value="formCustomTextFormat.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="frmCustomFormat"/>
+        <ComponentName Value="frmCustomTextFormat"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>

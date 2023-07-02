@@ -69,7 +69,7 @@ type
     actAudioToText: TAction;
     actCheckForUpdates: TAction;
     actFormatProperties: TAction;
-    actExportCustomFormat: TAction;
+    actExportCustomTextFormat: TAction;
     actLoadTranslation: TAction;
     actSort: TAction;
     actTBX: TAction;
@@ -879,7 +879,7 @@ type
     procedure actShowToolbarFormatExecute(Sender: TObject);
     procedure actShowToolbarEncodingExecute(Sender: TObject);
     procedure actSortExecute(Sender: TObject);
-    procedure actExportCustomFormatExecute(Sender: TObject);
+    procedure actExportCustomTextFormatExecute(Sender: TObject);
   private
 
   public

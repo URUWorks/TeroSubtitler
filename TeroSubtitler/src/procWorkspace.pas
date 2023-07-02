@@ -38,7 +38,7 @@ procedure FillComboWithGoogleLanguages(const Combo: TCombobox; const Index: Inte
 procedure FillItemsWithConventions(const AItems: TStrings; AProfiles: TProfiles = NIL);
 procedure FillComboWithShortCutsPreset(const ACombo: TComboBox);
 procedure FillComboWithModels(const Combo: TComboBox);
-procedure FillComboWithCustomFormat(const Combo: TComboBox);
+procedure FillComboWithCustomFormat(const Combo: TComboBox; const AExtension: String = '*.cft');
 procedure FillWithDictionaries(const AMenu: TMenuItem; const ACombo: TComboBox);
 procedure FillMenuWithPlayRate(const AParent: TComponent);
 procedure FillMenuWithLoopCount(const AParent: TComponent);
@@ -314,11 +314,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure FillComboWithCustomFormat(const Combo: TComboBox);
+procedure FillComboWithCustomFormat(const Combo: TComboBox; const AExtension: String = '*.cft');
 var
   SearchRec: TSearchRec;
 begin
-  if SysUtils.FindFirst(CustomFormatFolder + '*.cfp', faAnyFile, SearchRec) = 0 then
+  if SysUtils.FindFirst(CustomFormatFolder + AExtension, faAnyFile, SearchRec) = 0 then
   try
     Combo.Items.BeginUpdate;
     Combo.Items.Clear;

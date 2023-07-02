@@ -1543,9 +1543,9 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actExportCustomFormatExecute(Sender: TObject);
+procedure TfrmMain.actExportCustomTextFormatExecute(Sender: TObject);
 begin
-  ShowCustomFormat;
+  ShowCustomTextFormat;
 end;
 
 // -----------------------------------------------------------------------------

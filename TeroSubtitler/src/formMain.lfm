@@ -1198,7 +1198,7 @@ object frmMain: TfrmMain
           Caption = '-'
         end
         object MenuItem166: TMenuItem
-          Action = actExportCustomFormat
+          Action = actExportCustomTextFormat
         end
       end
       object Separator30: TMenuItem
@@ -3340,11 +3340,11 @@ object frmMain: TfrmMain
       Caption = 'Export text only'
       OnExecute = actExportTextOnlyExecute
     end
-    object actExportCustomFormat: TAction
+    object actExportCustomTextFormat: TAction
       Tag = 1
       Category = 'File'
-      Caption = 'Custom format'
-      OnExecute = actExportCustomFormatExecute
+      Caption = 'Custom text format...'
+      OnExecute = actExportCustomTextFormatExecute
     end
     object actCompare: TAction
       Category = 'File'

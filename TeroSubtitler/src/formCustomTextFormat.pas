@@ -15,7 +15,7 @@
  *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
  *}
 
-unit formCustomFormat;
+unit formCustomTextFormat;
 
 {$mode ObjFPC}{$H+}
 
@@ -27,9 +27,9 @@ uses
 
 type
 
-  { TfrmCustomFormat }
+  { TfrmCustomTextFormat }
 
-  TfrmCustomFormat = class(TForm)
+  TfrmCustomTextFormat = class(TForm)
     btnSave: TButton;
     btnClose: TButton;
     cboEncoding: TComboBox;
@@ -68,7 +68,7 @@ type
   end;
 
 var
-  frmCustomFormat: TfrmCustomFormat;
+  frmCustomTextFormat: TfrmCustomTextFormat;
 
 // -----------------------------------------------------------------------------
 
@@ -82,11 +82,11 @@ uses
 
 // -----------------------------------------------------------------------------
 
-{ TfrmCustomFormat }
+{ TfrmCustomTextFormat }
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmCustomFormat.FormCreate(Sender: TObject);
+procedure TfrmCustomTextFormat.FormCreate(Sender: TObject);
 var
   FAppStringList: TAppStringList = NIL;
 begin
@@ -113,32 +113,32 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmCustomFormat.FormClose(Sender: TObject;
+procedure TfrmCustomTextFormat.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   CustomFormat.Free;
 
   CloseAction := caFree;
-  frmCustomFormat := NIL;
+  frmCustomTextFormat := NIL;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmCustomFormat.FormShow(Sender: TObject);
+procedure TfrmCustomTextFormat.FormShow(Sender: TObject);
 begin
   CheckColorTheme(Self);
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmCustomFormat.btnCloseClick(Sender: TObject);
+procedure TfrmCustomTextFormat.btnCloseClick(Sender: TObject);
 begin
   Close;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmCustomFormat.btnSaveClick(Sender: TObject);
+procedure TfrmCustomTextFormat.btnSaveClick(Sender: TObject);
 var
   SD  : TSaveDialog;
   TXT : TStringList;
@@ -198,13 +198,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmCustomFormat.cboScriptSelect(Sender: TObject);
+procedure TfrmCustomTextFormat.cboScriptSelect(Sender: TObject);
 var
   FS: TFormatSettings;
 begin
   with CustomFormat do
   begin
-    LoadFromFile(CustomFormatFolder + cboScript.Items[cboScript.ItemIndex] + '.cfp');
+    LoadFromFile(CustomFormatFolder + cboScript.Items[cboScript.ItemIndex] + '.cft');
     if Success then
     begin
       FS := AppOptions.FormatSettings;
@@ -227,7 +227,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TfrmCustomFormat.ReplaceHeaderTags(const S, TimeFormat: String): String;
+function TfrmCustomTextFormat.ReplaceHeaderTags(const S, TimeFormat: String): String;
 begin
   Result := ReplaceString(S,   '{$Company}', 'URUWorks');
   Result := ReplaceString(Result, '{$Software}', ProgramName);
@@ -248,7 +248,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TfrmCustomFormat.ReplaceBodyTags(const S, TimeFormat: String; const Item: TUWSubtitleItem; const InFrames: Boolean; const NewChar: String; const Index: Integer): String;
+function TfrmCustomTextFormat.ReplaceBodyTags(const S, TimeFormat: String; const Item: TUWSubtitleItem; const InFrames: Boolean; const NewChar: String; const Index: Integer): String;
 
   function GetTime(const Time: Cardinal): String;
   begin

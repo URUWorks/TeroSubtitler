@@ -42,8 +42,7 @@
         <Filename Value="procCommon.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1370"/>
-        <CursorPos X="46" Y="1375"/>
+        <CursorPos X="33" Y="9"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -77,8 +76,8 @@
         <Filename Value="formMain_Actions.inc"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="721"/>
-        <CursorPos X="32" Y="751"/>
+        <TopLine Value="1518"/>
+        <CursorPos X="23" Y="1548"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -198,8 +197,6 @@
         <Filename Value="procWorkspace.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="580"/>
-        <CursorPos X="9" Y="610"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -468,6 +465,8 @@
         <Filename Value="procForms.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="531"/>
+        <CursorPos X="31" Y="531"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -631,14 +630,12 @@
         <UsageCount Value="44"/>
       </Unit>
       <Unit>
-        <Filename Value="formCustomFormat.pas"/>
+        <Filename Value="formCustomTextFormat.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="frmCustomFormat"/>
+        <ComponentName Value="frmCustomTextFormat"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="226"/>
-        <CursorPos X="42" Y="234"/>
         <UsageCount Value="33"/>
       </Unit>
       <Unit>
@@ -757,8 +754,8 @@
       <Unit>
         <Filename Value="..\subtitleapi\UWSubtitleAPI.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1430"/>
-        <CursorPos X="20" Y="1463"/>
+        <TopLine Value="249"/>
+        <CursorPos X="23" Y="266"/>
         <UsageCount Value="15"/>
       </Unit>
       <Unit>
@@ -2298,7 +2295,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="9">
+    <JumpHistory HistoryIndex="11">
       <Position>
         <Filename Value="formMain.pas"/>
         <Caret Line="717" TopLine="688"/>
@@ -2338,6 +2335,14 @@
       <Position>
         <Filename Value="formMain.pas"/>
         <Caret Line="1435" Column="35" TopLine="1421"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="8" Column="14"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
+        <Caret Line="11" Column="35"/>
       </Position>
     </JumpHistory>
     <RunParams>
