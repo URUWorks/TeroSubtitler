@@ -20,19 +20,19 @@ Tero Subtitler is an open source, cross-platform, and free subtitle editing soft
 - Tools for manipulation (frame/video rate conversion), formatting (fonts and alignment), quality control (spell check), analysis (comparing subtitle sets), translation (including auto), transcription (including auto), validation (industry and customizable profiles), and automation (correcting errors and breaches)
 - And much more
 
-### mpv playback engine
+### [mpv](https://mpv.io/) playback engine
 
 Powerful multimedia playback engine.
 
-### FFmpeg
+### [FFmpeg](https://ffmpeg.org/)
 
 Advanced audio/video manipulation tool.
 
-### yt-dlp
+### [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 
 For opening videos via URL.
 
-### whisper.cpp
+### [whisper.cpp](https://github.com/ggerganov/whisper.cpp)
 
 For the automatic transcription of audio to subtitles.
 
@@ -42,13 +42,13 @@ Auto-translation API.
 
 ## Compiling
 
-Lazarus IDE.
+[Lazarus IDE](https://www.lazarus-ide.org/).
 
 ### External packages required to compile
 
-- ATSynEdit
-- BGRABitmap
-- UW_MPVPlayer
+- [ATSynEdit](https://wiki.freepascal.org/ATSynEdit)
+- [BGRABitmap](https://wiki.freepascal.org/BGRABitmap)
+- [UW_MPVPlayer](https://github.com/URUWorks/UW_MPVPlayer)
 
 ## Contributions
 
