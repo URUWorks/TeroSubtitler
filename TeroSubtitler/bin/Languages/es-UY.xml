@@ -683,6 +683,7 @@
     <SeeChangeList>¿Quieres ver la lista de cambios?</SeeChangeList>
     <NoNewVersion>Estás usando la última versión.</NoNewVersion>
     <ErrorExecuting>Error al ejecutar '%s'.</ErrorExecuting>            
+    <FeatureNotAvailableFromURL>Función no disponible para video en línea.</FeatureNotAvailableFromURL>
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>Todos los subtitulos</rbnAllTheSubtitles>

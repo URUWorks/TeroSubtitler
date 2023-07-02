@@ -366,6 +366,12 @@ var
   i, x, sc: Integer;
   sl: TStringList = NIL;
 begin
+  if frmMain.MPV.FileName.StartsWith('http') then
+  begin
+    ShowErrorMessageDialog(GetCommonString('FeatureNotAvailableFromURL'));
+    Exit;
+  end;
+
   FCancel := False;
   SetControlsEnabled(False);
   try

@@ -184,7 +184,12 @@ var
   isPlaying: Boolean;
   TimerSub: Boolean;
 begin
-  if not FileExists(GetExtractAppFile) then
+  if frmMain.MPV.FileName.StartsWith('http') then
+  begin
+    ShowErrorMessageDialog(GetCommonString('FeatureNotAvailableFromURL'));
+    Exit;
+  end
+  else if not FileExists(GetExtractAppFile) then
     ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [WAVEOptions.ExtractApp]))
   else if not FileExists(GetAudioToTextAppFile) then
     ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [WAVEOptions.AudioToTextApp]))

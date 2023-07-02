@@ -119,7 +119,12 @@ var
   i: Integer;
   AParamArray: TStringArray;
 begin
-  if not FileExists(GetExtractAppFile) then
+  if frmMain.MPV.FileName.StartsWith('http') then
+  begin
+    ShowErrorMessageDialog(GetCommonString('FeatureNotAvailableFromURL'));
+    Exit;
+  end
+  else if not FileExists(GetExtractAppFile) then
     ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [WAVEOptions.ExtractApp]))
   else if (WAVEOptions.ExtractParams <> '') then
   begin
