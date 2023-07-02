@@ -1,6 +1,7 @@
 1.0.0.6 (x.7.2023)
 - fixed: Blocked save function #119
 - fixed: Video title not displayed #118
+- fixed: Select the number of the audio track #117
 - fixed: Autodetect Win1251 #115
 - fixed: Load translation missing #113
 - added: Custom format export
