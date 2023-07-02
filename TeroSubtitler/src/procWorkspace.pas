@@ -585,17 +585,26 @@ begin
     UpdateCPSAndTexts(VSTFocusedNode(VST));
     UpdateStatusBar;
 
+    // Enable/Disable actions by tag
+    for i := 0 to ActionList.ActionCount-1 do
+       with (ActionList[i] as TAction) do
+       begin
+         if (Tag and TAG_ACTION_BYVAL) = TAG_ACTION_BYVAL then
+           Enabled := AValue
+         else if Tag <> TAG_ACTION_ALWAYSENABLED then
+         begin
+           //if (Tag and TAG_ACTION_VIDEO) = TAG_ACTION_VIDEO then
+           //  Enabled := actCloseVideo.Enabled
+           //else if (Tag and TAG_ACTION_AUDIO) = TAG_ACTION_AUDIO then
+           //  Enabled := WAVE.IsEnabled
+           //else
+             Enabled := False;
+         end;
+       end;
     // Actions
     actUndo.Enabled := False;
     actRedo.Enabled := False;
     actCloseVideo.Enabled := MPV.GetMediaLenInMs > 0;
-    // Enable/Disable actions by tag
-    for i := 0 to ActionList.ActionCount-1 do
-       with (ActionList[i] as TAction) do
-         if (Tag and TAG_ACTION_BYVAL) = TAG_ACTION_BYVAL then
-           Enabled := AValue
-         else if Tag <> TAG_ACTION_ALWAYSENABLED then
-           Enabled := False;
 
     // Find
     if AValue then

@@ -61,8 +61,6 @@ begin
   //else if not MPVOptions.UnDockData.FileName.IsEmpty then
   PrepareUnDockData(True);
 
-  actWaveExtract.Enabled := True;
-
   if (not WAVE.IsPeakDataLoaded and Assigned(MRUInfoObject) and not MRUInfoObject.WaveformFile.IsEmpty) or (not MPVOptions.UnDockData.WAVELoaded) then
     LoadAudio(GetMediaFileNameIfExists(MPV.FileName, TAudioExts));
 

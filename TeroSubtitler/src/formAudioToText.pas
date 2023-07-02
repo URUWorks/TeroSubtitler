@@ -249,7 +249,13 @@ begin
                 end;
 
                 DoAutoCheckErrors;
-                if VST.RootNodeCount > 0 then EnableWorkArea;
+                if (VST.RootNodeCount > 0) and not VST.Enabled then
+                begin
+                  EnableWorkArea;
+                  EnableActionsByTag([TAG_ACTION_VIDEO], True);
+                  if WAVE.IsTimeLineEnabled then
+                    EnableActionsByTag([TAG_ACTION_AUDIO], True);
+                end;
                 TimerSubtitle.Enabled := TimerSub;
                 if isPlaying then MPV.Resume;
               end;

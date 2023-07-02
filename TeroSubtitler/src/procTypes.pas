@@ -107,7 +107,7 @@ const
 
   WHISPER_EXE      = 'main.exe';
   WHISPER_Params   = '-m "%model" -l %lang -osrt -of "%output" -f "%input"';
-  WHISPER_ffParams = '-i "%input" -ar 16000 -ac %trackid -c:a pcm_s16le -y "%output"';
+  WHISPER_ffParams = '-i "%input" -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y "%output"';
   {$ENDIF}
   {$IFDEF LINUX}
   URL_FFMPEG = '';
@@ -123,7 +123,7 @@ const
 
   WHISPER_EXE      = 'main';
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
-  WHISPER_ffParams = '-i %input -ar 16000 -ac %trackid -c:a pcm_s16le -y %output';
+  WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
   {$ENDIF}
   {$IFDEF DARWIN}
   URL_FFMPEG = 'https://github.com/URUWorks/additional-files/raw/main/ffmpeg/ffmpeg_macos64.zip';
@@ -139,7 +139,7 @@ const
 
   WHISPER_EXE      = 'main';
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
-  WHISPER_ffParams = '-i %input -ar 16000 -ac %trackid -c:a pcm_s16le -y %output';
+  WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
   {$ENDIF}
 
 type

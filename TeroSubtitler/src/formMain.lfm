@@ -3166,7 +3166,7 @@ object frmMain: TfrmMain
       OnExecute = actShotChangesExecute
     end
     object actWaveExtract: TAction
-      Tag = 2
+      Tag = 4
       Category = 'Video'
       Caption = 'Extract waveform...'
       OnExecute = actWaveExtractExecute
