@@ -28,8 +28,7 @@
         <Filename Value="procTypes.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="262"/>
-        <CursorPos X="5" Y="279"/>
+        <CursorPos X="3"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -245,8 +244,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="112"/>
-        <CursorPos X="21" Y="123"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -378,7 +375,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="353"/>
-        <CursorPos Y="374"/>
+        <CursorPos X="3" Y="373"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -588,8 +585,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="178"/>
-        <CursorPos Y="189"/>
         <UsageCount Value="193"/>
       </Unit>
       <Unit>
@@ -599,7 +594,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <CursorPos Y="17"/>
+        <TopLine Value="58"/>
+        <CursorPos X="42" Y="67"/>
         <UsageCount Value="188"/>
       </Unit>
       <Unit>
