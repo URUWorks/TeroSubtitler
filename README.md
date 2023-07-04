@@ -44,9 +44,15 @@ Auto-translation API.
 
 [Lazarus IDE](https://www.lazarus-ide.org/).
 
+### Internal packages required to compile
+
+- [UW Common](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/common)
+- [Tero controls](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/controls)
+- [Subtitle API](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/subtitleapi)
+
 ### External packages required to compile
 
-- [ATSynEdit](https://wiki.freepascal.org/ATSynEdit)
+- [ATSynEdit](https://wiki.freepascal.org/ATSynEdit) ([EncConv]([https://github.com/Alexey-T/EncConv](https://github.com/Alexey-T/EncConv)), [ATFlatControls]([https://github.com/Alexey-T/ATFlatControls](https://github.com/Alexey-T/ATFlatControls)))
 - [BGRABitmap](https://wiki.freepascal.org/BGRABitmap)
 - [UW_MPVPlayer](https://github.com/URUWorks/UW_MPVPlayer)
 
