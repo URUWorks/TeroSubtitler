@@ -28,7 +28,7 @@
         <Filename Value="procTypes.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="3"/>
+        <CursorPos X="61" Y="16"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -41,8 +41,8 @@
         <Filename Value="procCommon.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="226"/>
-        <CursorPos X="90" Y="239"/>
+        <TopLine Value="229"/>
+        <CursorPos Y="251"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -2308,7 +2308,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="18">
+    <JumpHistory HistoryIndex="19">
       <Position>
         <Filename Value="formMain.pas"/>
       </Position>
@@ -2382,6 +2382,9 @@
       <Position>
         <Filename Value="formMain.pas"/>
         <Caret Line="947" TopLine="914"/>
+      </Position>
+      <Position>
+        <Filename Value="formMain.pas"/>
       </Position>
     </JumpHistory>
     <RunParams>
