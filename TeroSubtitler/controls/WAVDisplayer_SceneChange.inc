@@ -94,6 +94,13 @@ end;
 
 //------------------------------------------------------------------------------
 
+function TUWWaveformDisplayer.GetSceneChangeList: TIntegerDynArray;
+begin
+  Result := FSceneChangeList;
+end;
+
+//------------------------------------------------------------------------------
+
 function TUWWaveformDisplayer.GetSceneChangeAt(const Index: Integer): Integer;
 begin
   if (Index >= Low(FSceneChangeList)) and (Index <= High(FSceneChangeList)) then
@@ -106,7 +113,7 @@ end;
 
 function TUWWaveformDisplayer.GetNextSceneChangeIndex(const ATimeMS: Integer; const ABackward: Boolean = False): Integer;
 begin
-  Result := BinarySearchSC(FSceneChangeList, ATimeMS, ABackward);
+  Result := BinarySearch_IntArray(FSceneChangeList, ATimeMS, ABackward);
 end;
 
 //------------------------------------------------------------------------------

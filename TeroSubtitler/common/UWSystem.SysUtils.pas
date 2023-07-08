@@ -22,7 +22,7 @@ unit UWSystem.SysUtils;
 interface
 
 uses
-  SysUtils, Math, LCLIntf, Graphics
+  SysUtils, Math, LCLIntf, Graphics, Types
   {$IFDEF DARWIN}, Unix, sysctl{$ENDIF};
 
 // -----------------------------------------------------------------------------
@@ -73,6 +73,10 @@ procedure ArrayToTBytes(var DestArray: TBytes; const SourceArray: array of Byte;
 procedure TBytesToArray(var DestArray: array of Byte; const SourceArray: TBytes; const StartIndex: Integer);
 
 function MixColors(C1, C2: TColor; Opacity: Integer = 70): TColor;
+
+{ BinarySearch }
+
+function BinarySearch_IntArray(const IntArray: TIntegerDynArray; const Value: Integer; const Backward: Boolean = False): Integer;
 
 // -----------------------------------------------------------------------------
 
@@ -515,6 +519,34 @@ begin
   B2 := GetBValue(C2);
 
   Result := RGB(Round((R1*Opacity+R2*p2)/100), Round((G1*Opacity+G2*p2)/100), Round((B1*Opacity+B2*p2)/100));
+end;
+
+// -----------------------------------------------------------------------------
+
+function BinarySearch_IntArray(const IntArray: TIntegerDynArray; const Value: Integer; const Backward: Boolean = False): Integer;
+var
+  Min, Mid, Max : Integer;
+begin
+  Min := Low(IntArray);
+  Max := High(IntArray);
+  Mid := (Max + Min) div 2;
+
+  while (Min <= Max) do
+  begin
+    if (IntArray[Mid] < Value) then
+      Min := Mid + 1
+    else if (IntArray[Mid] > Value) then
+      Max := Mid - 1
+    else
+      Exit(Mid);
+
+    Mid := (Max + Min) div 2;
+  end;
+
+  if Backward then
+    Result := Max
+  else
+    Result := Min;
 end;
 
 // -----------------------------------------------------------------------------

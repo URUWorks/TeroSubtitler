@@ -275,6 +275,7 @@ type
     procedure SetSceneChangeList(const SceneChangeList: TIntegerDynArray);
     procedure ClearSceneChange;
     function GetSceneChangeCount: Integer;
+    function GetSceneChangeList: TIntegerDynArray;
     function GetSceneChangeAt(const Index: Integer): Integer;
     function GetNextSceneChangeIndex(const ATimeMS: Integer; const ABackward: Boolean = False): Integer;
     function GetNextSceneChange(const ATimeMS: Integer): Integer;
@@ -343,34 +344,6 @@ uses UWSystem.TimeUtils, UWSystem.SysUtils;
 // -----------------------------------------------------------------------------
 
 { Helpers }
-
-// -----------------------------------------------------------------------------
-
-function BinarySearchSC(const IntArray: TIntegerDynArray; const Value: Integer; const Backward: Boolean = False): Integer;
-var
-  Min, Mid, Max : Integer;
-begin
-  Min := Low(IntArray);
-  Max := High(IntArray);
-  Mid := (Max + Min) div 2;
-
-  while (Min <= Max) do
-  begin
-    if (IntArray[Mid] < Value) then
-      Min := Mid + 1
-    else if (IntArray[Mid] > Value) then
-      Max := Mid - 1
-    else
-      Exit(Mid);
-
-    Mid := (Max + Min) div 2;
-  end;
-
-  if Backward then
-    Result := Max
-  else
-    Result := Min;
-end;
 
 // -----------------------------------------------------------------------------
 
@@ -681,7 +654,7 @@ begin
 
   if FSceneChangeEnabled and (System.Length(FSceneChangeList) > 0) then
   begin
-    Idx         := BinarySearchSC(FSceneChangeList, PosMs);
+    Idx         := BinarySearch_IntArray(FSceneChangeList, PosMs);
     IdxForward  := Idx;
     IdxBackward := Idx - 1;
 
