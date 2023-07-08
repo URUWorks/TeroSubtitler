@@ -42,6 +42,9 @@ type
     edtRepeatableChars: TEdit;
     edtRepeatableChars1: TEdit;
     lblCPL: TLabel;
+    lblSCSnapArea: TLabel;
+    lblSCSnapInCues: TLabel;
+    lblSCSnapOutCues: TLabel;
     lblCPS: TLabel;
     lblMaxDurationMs: TLabel;
     lblMaxLineCount: TLabel;
@@ -57,6 +60,9 @@ type
     lstTree: TListBox;
     lyoConvention: TUWLayout;
     spnCPL: TSpinEdit;
+    spnSCSnapArea: TSpinEdit;
+    spnSCSnapInCues: TSpinEdit;
+    spnSCSnapOutCues: TSpinEdit;
     spnCPS: TSpinEdit;
     spnMaxDurationMs: TSpinEdit;
     spnMaxLineCount: TSpinEdit;
@@ -146,6 +152,7 @@ begin
         edtName.Text                := Name;
         edtRepeatableChars.Text     := RepeatableChars;
         edtProhibitedChars.Text     := ProhibitedChars;
+        edtCPSStrategy.Text         := CPSLineLenStrategy;
         spnNewSubtitleMs.Value      := NewSubtitleMs;
         spnMinDurationMs.Value      := MinDuration;
         spnMinDurationPerWord.Value := MinDurationPerWord;
@@ -155,8 +162,10 @@ begin
         spnCPS.Value                := MaxCPS;
         spnWPM.Value                := WPM;
         spnCPL.Value                := CPL;
+        spnSCSnapArea.Value         := ShotcutSnapArea;
+        spnSCSnapInCues.Value       := ShotcutInCues;
+        spnSCSnapOutCues.Value      := ShotcutOutCues;
         chkDotsOnSplit.Checked      := DotsOnSplit;
-        edtCPSStrategy.Text         := CPSLineLenStrategy;
       end;
 end;
 
@@ -173,7 +182,9 @@ begin
       i := FList.AddItem(edtName.Text, spnNewSubtitleMs.Value, spnMinDurationMs.Value,
         spnMinDurationPerWord.Value, spnMaxDurationMs.Value,
         spnMaxLineCount.Value, spnSubtitlePauseMs.Value,
-        spnCPS.Value, spnWPM.Value, spnCPL.Value, cboPauseMode.ItemIndex = 1,
+        spnCPS.Value, spnWPM.Value, spnCPL.Value,
+        spnSCSnapArea.Value, spnSCSnapInCues.Value, spnSCSnapOutCues.Value,
+        cboPauseMode.ItemIndex = 1,
         edtRepeatableChars.Text, edtProhibitedChars.Text,
         chkDotsOnSplit.Checked, edtCPSStrategy.Text);
 
@@ -214,6 +225,7 @@ begin
       spnMinDurationMs.Value, spnMinDurationPerWord.Value, spnMaxDurationMs.Value,
       spnMaxLineCount.Value, spnSubtitlePauseMs.Value,
       spnCPS.Value, spnWPM.Value, spnCPL.Value,
+      spnSCSnapArea.Value, spnSCSnapInCues.Value, spnSCSnapOutCues.Value,
       cboPauseMode.ItemIndex = 1, edtRepeatableChars.Text,
       edtProhibitedChars.Text, chkDotsOnSplit.Checked, edtCPSStrategy.Text);
 end;

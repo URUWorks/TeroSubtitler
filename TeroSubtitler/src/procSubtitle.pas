@@ -40,6 +40,7 @@ procedure SetSubtitleText(const Index: Integer; const Text: String; const Subtit
 procedure SetSubtitleTexts(const Index: Integer; const Text: String; const Translation: String; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True; const Resent: Boolean = True);
 procedure SetSubtitleValues(const Index: Integer; const AInitialTime, AFinalTime: Integer; const Text: String; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
 
+function GetCorrectTime(const ATime: Integer; AIsFrames: Boolean): Integer;
 function GetTimeStr(const Time: Integer; const Trim: Boolean = False): String;
 function GetInitialTimeStr(const Index: Integer; const Trim: Boolean = False): String;
 function GetFinalTimeStr(const Index: Integer; const Trim: Boolean = False): String;
@@ -295,6 +296,18 @@ begin
     UpdateCPSAndTexts(Index);
     frmMain.VST.Invalidate;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetCorrectTime(const ATime: Integer; AIsFrames: Boolean): Integer;
+begin
+  if AIsFrames then
+  begin
+    Result := FramesToTime(ATime, Workspace.FPS.OutputFPS);
+  end
+  else
+    Result := ATime;
 end;
 
 // -----------------------------------------------------------------------------

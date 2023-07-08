@@ -350,7 +350,10 @@
       <lblCPL>Caracteres por línea</lblCPL>            
       <lblRepeatableChars>Caracteres repetibles</lblRepeatableChars>
       <lblProhibitedChars>Caracteres prohibidos</lblProhibitedChars>
-      <lblCPSStrategy>Caract. excl. en conteo de CPS</lblCPSStrategy>                      
+      <lblCPSStrategy>Caract. excl. en conteo de CPS</lblCPSStrategy>
+      <lblSCSnapArea>Área de ajuste de cambio de escena (fotogramas)</lblSCSnapArea>
+      <lblSCSnapInCues>Ajustar entrada (fotogramas)</lblSCSnapInCues>
+      <lblSCSnapOutCues>Ajustar salida (fotogramas)</lblSCSnapOutCues>                                        
       <lblTheme>Tema</lblTheme>
       <lblListMode>Modo de lista</lblListMode>
 	  <lblSubtitles>Subtítulos</lblSubtitles>      
@@ -608,6 +611,9 @@
     <etRemoveSpacesWithinBrackets>Eliminar espacios entre paréntesis</etRemoveSpacesWithinBrackets>
     <etFixInterrobang>Corregir exclarrogativo: !? -> ?!</etFixInterrobang>        
     <etOCR>Solucionar errores comunes de OCR</etOCR>
+    <etSnapToShotChanges>Ajustar tiempos a cambios de plano</etSnapToShotChanges>
+    <etSnapToShotChangesInCue>Ajustar entrada a cambio de plano</etSnapToShotChangesInCue>
+    <etSnapToShotChangesOutCue>Ajustar salida a cambio de plano</etSnapToShotChangesOutCue>    
     <Index>#</Index>
     <Action>Acción</Action>
     <Current>Actual</Current>

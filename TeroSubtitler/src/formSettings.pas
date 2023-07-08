@@ -68,6 +68,9 @@ type
     edtCPSStrategy: TEdit;
     imlFileTypes: TImageList;
     lblCPSStrategy: TLabel;
+    lblSCSnapArea: TLabel;
+    lblSCSnapInCues: TLabel;
+    lblSCSnapOutCues: TLabel;
     lblShortCutPreset: TLabel;
     lblWaveStart: TLabel;
     lblWaveColor: TLabel;
@@ -83,6 +86,9 @@ type
     lblWaveform: TLabel;
     lblToolBarWave: TLabel;
     lyoFileTypeAssociations: TUWLayout;
+    spnSCSnapArea: TSpinEdit;
+    spnSCSnapInCues: TSpinEdit;
+    spnSCSnapOutCues: TSpinEdit;
     spnSubSize: TSpinEdit;
     spnSeekTime: TSpinEdit;
     spnFrameStep: TSpinEdit;
@@ -334,18 +340,21 @@ begin
       else
         cboPauseMode.ItemIndex := 0;
 
+      edtRepeatableChars.Text     := RepeatableChars;
+      edtProhibitedChars.Text     := ProhibitedChars;
+      edtCPSStrategy.Text         := CPSLineLenStrategy;
+      spnNewSubtitleMs.Value      := NewSubtitleMs;
       spnMinDurationMs.Value      := MinDuration;
       spnMinDurationPerWord.Value := MinDurationPerWord;
       spnMaxDurationMs.Value      := MaxDuration;
       spnMaxLineCount.Value       := MaxLines;
       spnSubtitlePauseMs.Value    := MinPause;
-      edtProhibitedChars.Text     := ProhibitedChars;
-      edtRepeatableChars.Text     := RepeatableChars;
       spnCPS.Value                := MaxCPS;
       spnWPM.Value                := WPM;
       spnCPL.Value                := CPL;
-      edtCPSStrategy.Text         := CPSLineLenStrategy;
-      spnNewSubtitleMs.Value      := NewSubtitleMs;
+      spnSCSnapArea.Value         := ShotcutSnapArea;
+      spnSCSnapInCues.Value       := ShotcutInCues;
+      spnSCSnapOutCues.Value      := ShotcutOutCues;
       chkDotsOnSplit.Checked      := DotsOnSplit;
     end;
     spnShiftTimeMs.Value        := ShiftTimeMS;
@@ -441,19 +450,23 @@ begin
         Name             := cboProfile.Text
       else
         Name             := '';
+
+      RepeatableChars    := edtRepeatableChars.Text;
+      ProhibitedChars    := edtProhibitedChars.Text;
+      CPSLineLenStrategy := edtCPSStrategy.Text;
       PauseInFrames      := cboPauseMode.ItemIndex = 1;
+      NewSubtitleMS      := spnNewSubtitleMs.Value;
       MinDuration        := spnMinDurationMs.Value;
       MaxDuration        := spnMaxDurationMs.Value;
-      ProhibitedChars    := edtProhibitedChars.Text;
-      RepeatableChars    := edtRepeatableChars.Text;
       MaxLines           := spnMaxLineCount.Value;
       MinDurationPerWord := spnMinDurationPerWord.Value;
       MinPause           := spnSubtitlePauseMs.Value;
       MaxCPS             := spnCPS.Value;
       WPM                := spnWPM.Value;
       CPL                := spnCPL.Value;
-      CPSLineLenStrategy := edtCPSStrategy.Text;
-      NewSubtitleMS      := spnNewSubtitleMs.Value;
+      ShotcutSnapArea    := spnSCSnapArea.Value;
+      ShotcutInCues      := spnSCSnapInCues.Value;
+      ShotcutOutCues     := spnSCSnapOutCues.Value;
       DotsOnSplit        := chkDotsOnSplit.Checked;
 
       if PauseInFrames then
@@ -786,7 +799,7 @@ var
 begin
   if cboProfile.ItemIndex = 0 then
     Profile := @AppOptions.Conventions
-  else if (FProfiles.Items.Count > 0) and (cboProfile.ItemIndex > 0) and (cboProfile.ItemIndex < FProfiles.Items.Count) then
+  else if (FProfiles.Items.Count > 0) and (cboProfile.ItemIndex > 0) and (cboProfile.ItemIndex <= FProfiles.Items.Count) then
     Profile := FProfiles.Items[cboProfile.ItemIndex-1];
 
   with Profile^ do
@@ -800,6 +813,7 @@ begin
 
     edtRepeatableChars.Text     := RepeatableChars;
     edtProhibitedChars.Text     := ProhibitedChars;
+    edtCPSStrategy.Text         := CPSLineLenStrategy;
     spnNewSubtitleMs.Value      := NewSubtitleMs;
     spnMinDurationMs.Value      := MinDuration;
     spnMinDurationPerWord.Value := MinDurationPerWord;
@@ -809,8 +823,10 @@ begin
     spnCPS.Value                := MaxCPS;
     spnWPM.Value                := WPM;
     spnCPL.Value                := CPL;
+    spnSCSnapArea.Value         := ShotcutSnapArea;
+    spnSCSnapInCues.Value       := ShotcutInCues;
+    spnSCSnapOutCues.Value      := ShotcutOutCues;
     chkDotsOnSplit.Checked      := DotsOnSplit;
-    edtCPSStrategy.Text         := CPSLineLenStrategy;
 
     cboProfile.Tag := 0;
   end;

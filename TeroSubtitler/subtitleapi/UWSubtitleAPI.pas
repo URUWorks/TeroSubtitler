@@ -98,6 +98,9 @@ type
     etFixInterrobang,
     etOverlappingWithPrev,
     etOverlappingWithNext,
+    etSnapToShotChanges,
+    etSnapToShotChangesInCue,
+    etSnapToShotChangesOutCue,
     etNone
   );
 

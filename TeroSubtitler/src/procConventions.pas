@@ -46,6 +46,9 @@ type
     DotsOnSplit        : Boolean;
     AddHyphenSpace     : Boolean;
     CPSLineLenStrategy : String;
+    ShotcutSnapArea    : Cardinal;
+    ShotcutInCues      : Cardinal;
+    ShotcutOutCues     : Cardinal;
   end;
 
   { TProfileList }
@@ -66,8 +69,8 @@ type
     procedure Close;
     procedure LoadFromFile(const AFileName: String);
     function SaveToFile(const AFileName: String): Boolean;
-    function AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
-    procedure UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
+    function AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
+    procedure UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
     function Ready: Boolean;
     procedure FillTStrings(const AStrings: TStrings; const AClear: Boolean = True);
     function FindItemIndex(const AName: String): Integer;
@@ -201,6 +204,9 @@ begin
             ProhibitedChars    := TryGetNamedItem(NodeProfile, 'ProhibitedChars');
             DotsOnSplit        := TryGetNamedItem(NodeProfile, 'DotsOnSplit').ToBoolean;
             CPSLineLenStrategy := TryGetNamedItem(NodeProfile, 'CPSLineLenStrategy');
+            ShotcutSnapArea    := TryGetNamedItem(NodeProfile, 'ShotcutSnapArea').ToInteger;
+            ShotcutInCues      := TryGetNamedItem(NodeProfile, 'ShotcutInCues').ToInteger;
+            ShotcutOutCues      := TryGetNamedItem(NodeProfile, 'ShotcutOutCues').ToInteger;
           end;
           FList.Add(Item);
         except
@@ -254,6 +260,9 @@ begin
         TDOMElement(Node).SetAttribute('ProhibitedChars', ProhibitedChars);
         TDOMElement(Node).SetAttribute('DotsOnSplit', DotsOnSplit.ToString);
         TDOMElement(Node).SetAttribute('CPSLineLenStrategy', CPSLineLenStrategy);
+        TDOMElement(Node).SetAttribute('ShotcutSnapArea', ShotcutSnapArea.ToString);
+        TDOMElement(Node).SetAttribute('ShotcutInCues', ShotcutInCues.ToString);
+        TDOMElement(Node).SetAttribute('ShotcutOutCues', ShotcutOutCues.ToString);
       end;
       Root.AppendChild(Node);
     end;
@@ -270,7 +279,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TProfiles.AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
+function TProfiles.AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
 var
   Item: PProfileItem;
   i: Integer;
@@ -304,6 +313,9 @@ begin
     CPL                := ACPL;
     DotsOnSplit        := ADotsOnSplit;
     CPSLineLenStrategy := ACPSLineLenStrategy;
+    ShotcutSnapArea    := AShotcutSnapArea;
+    ShotcutInCues      := AShotcutInCues;
+    ShotcutOutCues     := AShotcutOutCues;
   end;
 
   if not AUpdate then
@@ -318,13 +330,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TProfiles.UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
+procedure TProfiles.UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
 begin
   if FList.Count = 0 then Exit;
 
   AddItem(AName, ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration,
-    AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, APauseInFrames,
-    ARepeatableChars, AProhibitedChars, ADotsOnSplit, ACPSLineLenStrategy, True, AIndex);
+    AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutInCues, AShotcutOutCues,
+    APauseInFrames, ARepeatableChars, AProhibitedChars, ADotsOnSplit, ACPSLineLenStrategy, True, AIndex);
 end;
 
 // -----------------------------------------------------------------------------

@@ -24,7 +24,8 @@ unit procFixSubtitles;
 
 interface
 
-uses generics.collections, UWSubtitleAPI, procConventions, UWSubtitles.OCR;
+uses generics.collections, Types, UWSubtitleAPI, procConventions,
+  UWSubtitles.OCR;
 
 type
 
@@ -53,13 +54,12 @@ type
     constructor Create(const Subtitles: TUWSubtitles = NIL);
     destructor Destroy; override;
     property Errors: TSubtitleErrorTypeSet read FErrors write FErrors;
-    procedure FixErrors(const OCRFile: String = ''; const Profile: PProfileItem = NIL);
+    procedure FixErrors(const OCRFile: String = ''; const Profile: PProfileItem = NIL; const AShotChanges: TIntegerDynArray = NIL);
   end;
 
   TCheckMethodType    = (cmTimes, cmTexts);
   TCheckMethodTypeSet = set of TCheckMethodType;
 
-function GetCorrectedMinPause(const APause: Integer; AIsFrames: Boolean): Integer;
 function CheckErrors(const Subtitles: TUWSubtitles; const Index: Integer; const ErrorsToCheck: TSubtitleErrorTypeSet; const Options: TProfileItem; const ACheckMethod: TCheckMethodTypeSet; const OCR: TUWOCRScript = NIL): TSubtitleErrorTypeSet;
 
 // -----------------------------------------------------------------------------
@@ -68,7 +68,7 @@ implementation
 
 uses
   procTypes, UWSubtitles.Utils, UWSystem.StrUtils, UWSubtitleAPI.Tags,
-  UWSystem.TimeUtils;
+  UWSystem.TimeUtils, UWSystem.SysUtils, procSubtitle;
 
 // -----------------------------------------------------------------------------
 
@@ -109,13 +109,18 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile: PProfileItem = NIL);
+procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile: PProfileItem = NIL; const AShotChanges: TIntegerDynArray = NIL);
 var
   FixedItem : TSubtitleInfoItem;
   i, x      : Integer;
   tmp, s    : String;
   ocr       : TUWOCRScript;
   iGap      : Integer;
+
+  Idx, IdxForward, IdxBackward,
+  DistForward, DistBackward,
+  SnapMs, InCue, OutCue,
+  Candidate1, Candidate2: Integer;
 
   procedure ClearItem(const Index: Integer);
   begin
@@ -131,8 +136,11 @@ begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
 
   Clear;
-  iGap := GetCorrectedMinPause(Profile^.MinPause, Profile^.PauseInFrames);
-  ocr  := TUWOCRScript.Create(OCRFile);
+  iGap   := GetCorrectTime(Profile^.MinPause, Profile^.PauseInFrames);
+  SnapMs := FramesToTime(Profile^.ShotcutSnapArea, Workspace.FPS.OutputFPS);
+  InCue  := FramesToTime(Profile^.ShotcutInCues, Workspace.FPS.OutputFPS);
+  OutCue := FramesToTime(Profile^.ShotcutOutCues, Workspace.FPS.OutputFPS);
+  ocr    := TUWOCRScript.Create(OCRFile);
   try
     for i := 0 to FSubtitles.Count-1 do
     begin
@@ -432,22 +440,53 @@ begin
           Add(FixedItem);
         end;
       end;
+
+      ClearItem(i);
+      // Snap to shot changes
+      if etSnapToShotChanges in FErrors then
+      begin
+        if (AShotChanges <> NIL) and (Length(AShotChanges) > 0) then
+        begin
+          Idx         := BinarySearch_IntArray(AShotChanges, FixedItem.InitialTime);
+          IdxForward  := Idx;
+          IdxBackward := Idx - 1;
+
+          if (IdxForward < Length(AShotChanges)) and (IdxBackward >= 0) then
+          begin
+            DistForward  := AShotChanges[IdxForward] - FixedItem.InitialTime;
+            DistBackward := FixedItem.InitialTime - AShotChanges[IdxBackward];
+
+            if (DistForward < DistBackward) then
+            begin
+              Candidate1 := AShotChanges[IdxForward];
+              Candidate2 := AShotChanges[IdxForward+1];
+            end
+            else
+            begin
+              Candidate1 := AShotChanges[IdxBackward];
+              Candidate2 := AShotChanges[IdxForward];
+            end;
+
+            if (Abs(Candidate1 - FixedItem.InitialTime) > InCue) and (Abs(Candidate1 - FixedItem.InitialTime) < SnapMs) then
+            begin
+              FixedItem.InitialTime := Candidate1 + InCue;
+              FixedItem.ErrorsFixed := [etSnapToShotChangesInCue];
+              Add(FixedItem);
+            end;
+
+            if (Abs(Candidate2 - FixedItem.FinalTime) > OutCue) and (Abs(Candidate2 - FixedItem.FinalTime) < SnapMs) then
+            begin
+              FixedItem.FinalTime   := Candidate2 - OutCue;
+              FixedItem.ErrorsFixed := [etSnapToShotChangesOutCue];
+              Add(FixedItem);
+            end;
+          end;
+        end;
+      end;
     end;
   finally
     ocr.Free;
   end;
-end;
-
-// -----------------------------------------------------------------------------
-
-function GetCorrectedMinPause(const APause: Integer; AIsFrames: Boolean): Integer;
-begin
-  if AIsFrames then
-  begin
-    Result := FramesToTime(1, Workspace.FPS.OutputFPS) * APause;
-  end
-  else
-    Result := APause;
 end;
 
 // -----------------------------------------------------------------------------
@@ -633,7 +672,7 @@ begin
     // Pause too short *
     if etPauseTooShort in ErrorsToCheck then
     begin
-      if (Index >= 0) and (Index < Subtitles.Count-1) and (Subtitles.Pause[Index] < GetCorrectedMinPause(Options.MinPause, Options.PauseInFrames)) then
+      if (Index >= 0) and (Index < Subtitles.Count-1) and (Subtitles.Pause[Index] < GetCorrectTime(Options.MinPause, Options.PauseInFrames)) then
       begin
         Result := Result + [etPauseTooShort];
       end;

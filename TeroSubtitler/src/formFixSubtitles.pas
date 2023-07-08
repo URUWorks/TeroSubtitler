@@ -94,7 +94,7 @@ implementation
 
 uses
   procTypes, procVST, procWorkspace, procColorTheme, procSubtitle, procUndo,
-  procCommon, UWSystem.TimeUtils, UWSystem.StrUtils, XMLConf;
+  procCommon, UWSystem.TimeUtils, UWSystem.StrUtils, XMLConf, formMain;
 
 {$R *.lfm}
 
@@ -163,6 +163,7 @@ begin
       AddOptionItem(etRemoveSpacesWithinBrackets, GetString(FAppStringList, 'etRemoveSpacesWithinBrackets'), GetValue('Option17', False));
       AddOptionItem(etFixInterrobang, GetString(FAppStringList, 'etFixInterrobang'), GetValue('Option18', False));
       AddOptionItem(etOCR, GetString(FAppStringList, 'etOCR'), GetValue('Option19', False));
+      AddOptionItem(etSnapToShotChanges, GetString(FAppStringList, 'etSnapToShotChanges'), GetValue('Option20', False));
       s := GetValue('OCRScript', '');
       x := cboOCR.Items.IndexOf(s);
       if x >= 0 then
@@ -196,6 +197,7 @@ begin
     AddOptionItem(etRemoveSpacesWithinBrackets, GetString(FAppStringList, 'etRemoveSpacesWithinBrackets'));
     AddOptionItem(etFixInterrobang, GetString(FAppStringList, 'etFixInterrobang'));
     AddOptionItem(etOCR, GetString(FAppStringList, 'etOCR'), False);
+    AddOptionItem(etSnapToShotChanges, GetString(FAppStringList, 'etSnapToShotChanges'), False);
   end;
 
   cboSpacingHyphen.AddItem(GetString(FAppStringList, 'AddSpacing'), NIL);
@@ -424,9 +426,9 @@ begin
   Profile^.AddHyphenSpace := (cboSpacingHyphen.ItemIndex = 0);
 
   if cboOCR.Items.Count > 0 then
-    FList.FixErrors(OCRFolder + cboOCR.Items[cboOCR.ItemIndex] + '.ocr', Profile)
+    FList.FixErrors(OCRFolder + cboOCR.Items[cboOCR.ItemIndex] + '.ocr', Profile, frmMain.WAVE.GetSceneChangeList)
   else
-    FList.FixErrors('', Profile);
+    FList.FixErrors('', Profile, frmMain.WAVE.GetSceneChangeList);
 
   VST.RootNodeCount := FList.Count;
 end;
@@ -475,6 +477,12 @@ begin
     Result := FOptions[18].Description
   else if etOCR in AError then
     Result := FOptions[19].Description
+  else if etSnapToShotChanges in AError then
+    Result := FOptions[20].Description
+  else if etSnapToShotChangesInCue in AError then
+    Result := GetString(FAppStringList, 'etSnapToShotChangesInCue')
+  else if etSnapToShotChangesOutCue in AError then
+    Result := GetString(FAppStringList, 'etSnapToShotChangesOutCue')
   else
     Result := '';
 end;
@@ -485,7 +493,10 @@ function TfrmFixSubtitles.IsTimeFixed(const Item: TSubtitleInfoItem): Boolean;
 begin
   with Item do
     if (etOverlapping in ErrorsFixed) or (etBadValues in ErrorsFixed) or
-       (etTimeTooShort in ErrorsFixed) or (etTimeTooLong in ErrorsFixed) then
+       (etTimeTooShort in ErrorsFixed) or (etTimeTooLong in ErrorsFixed) or
+       (etSnapToShotChanges in ErrorsFixed) or
+       (etSnapToShotChangesInCue in ErrorsFixed) or
+       (etSnapToShotChangesOutCue in ErrorsFixed) then
       Result := True
     else
       Result := False;
@@ -497,8 +508,8 @@ function TfrmFixSubtitles.GetFixedText(const Item: TSubtitleInfoItem): String;
 begin
   with Item do
     if IsTimeFixed(Item) then
-      Result := TimeToString(InitialTime, DefTimeFormat) + ' --> ' +
-                TimeToString(FinalTime, DefTimeFormat) // + ' ' + Text
+      Result := GetTimeStr(InitialTime) + ' --> ' +
+                GetTimeStr(FinalTime) // + ' ' + Text
     else
       Result := ReplaceEnters(Text);
 end;
@@ -509,8 +520,8 @@ function TfrmFixSubtitles.GetText(const Index: Integer; const Item: TSubtitleInf
 begin
   with Subtitles[Index] do
     if IsTimeFixed(Item) then
-      Result := TimeToString(InitialTime, DefTimeFormat) + ' --> ' +
-                TimeToString(FinalTime, DefTimeFormat) // + ' ' + Text
+      Result := GetTimeStr(InitialTime) + ' --> ' +
+                GetTimeStr(FinalTime) // + ' ' + Text
     else
       Result := ReplaceEnters(Text);
 end;

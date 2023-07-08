@@ -1,12 +1,12 @@
 object frmSettings: TfrmSettings
   Left = 235
-  Height = 489
+  Height = 596
   Top = 115
   Width = 672
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Settings'
-  ClientHeight = 489
+  ClientHeight = 596
   ClientWidth = 672
   OnClose = FormClose
   OnCreate = FormCreate
@@ -15,9 +15,9 @@ object frmSettings: TfrmSettings
   ShowHint = True
   LCLVersion = '2.2.6.0'
   object btnClose: TButton
-    Left = 589
+    Left = 590
     Height = 25
-    Top = 456
+    Top = 560
     Width = 75
     Cancel = True
     Caption = 'Close'
@@ -27,7 +27,7 @@ object frmSettings: TfrmSettings
   end
   object lstTree: TListBox
     Left = 8
-    Height = 440
+    Height = 546
     Top = 8
     Width = 152
     ExtendedSelect = False
@@ -37,10 +37,10 @@ object frmSettings: TfrmSettings
   end
   object lyoGeneral: TUWLayout
     Left = 168
-    Height = 440
+    Height = 546
     Top = 8
     Width = 496
-    ClientHeight = 440
+    ClientHeight = 546
     ClientWidth = 496
     TabOrder = 2
     object lblLanguage: TLabel
@@ -267,10 +267,10 @@ object frmSettings: TfrmSettings
   end
   object lyoConventions: TUWLayout
     Left = -336
-    Height = 440
+    Height = 546
     Top = 24
     Width = 496
-    ClientHeight = 440
+    ClientHeight = 546
     ClientWidth = 496
     TabOrder = 3
     Visible = False
@@ -389,12 +389,12 @@ object frmSettings: TfrmSettings
     object chkDotsOnSplit: TUWCheckBox
       Left = 0
       Height = 19
-      Top = 424
+      Top = 520
       Width = 18
       AutoSize = False
       Caption = 'Dots on split'
       OnChange = spnConventionChange
-      TabOrder = 15
+      TabOrder = 18
     end
     object cboProfile: TComboBox
       Left = 208
@@ -484,7 +484,7 @@ object frmSettings: TfrmSettings
       Value = 180
     end
     object spnCPL: TSpinEdit
-      Left = 209
+      Left = 208
       Height = 23
       Top = 384
       Width = 80
@@ -551,13 +551,66 @@ object frmSettings: TfrmSettings
       Caption = 'Chars excluded from CPS count'
       ParentColor = False
     end
+    object lblSCSnapArea: TLabel
+      Left = 0
+      Height = 15
+      Top = 420
+      Width = 190
+      AutoSize = False
+      Caption = 'Shot change snap area (frames)'
+      ParentColor = False
+    end
+    object spnSCSnapArea: TSpinEdit
+      Left = 208
+      Height = 23
+      Top = 416
+      Width = 80
+      MaxValue = 30
+      TabOrder = 15
+      Value = 12
+    end
+    object lblSCSnapInCues: TLabel
+      Left = 0
+      Height = 15
+      Top = 452
+      Width = 190
+      AutoSize = False
+      Caption = 'Snap in cues (frames)'
+      ParentColor = False
+    end
+    object spnSCSnapInCues: TSpinEdit
+      Left = 208
+      Height = 23
+      Top = 448
+      Width = 80
+      MaxValue = 30
+      TabOrder = 16
+    end
+    object lblSCSnapOutCues: TLabel
+      Left = 0
+      Height = 15
+      Top = 484
+      Width = 190
+      AutoSize = False
+      Caption = 'Snap out cues (frames)'
+      ParentColor = False
+    end
+    object spnSCSnapOutCues: TSpinEdit
+      Left = 208
+      Height = 23
+      Top = 480
+      Width = 80
+      MaxValue = 30
+      TabOrder = 17
+      Value = 2
+    end
   end
   object lyoAppearance: TUWLayout
     Left = -336
-    Height = 440
+    Height = 546
     Top = 120
     Width = 496
-    ClientHeight = 440
+    ClientHeight = 546
     ClientWidth = 496
     TabOrder = 4
     Visible = False
@@ -780,10 +833,10 @@ object frmSettings: TfrmSettings
   end
   object lyoTools: TUWLayout
     Left = -336
-    Height = 440
+    Height = 546
     Top = 184
     Width = 496
-    ClientHeight = 440
+    ClientHeight = 546
     ClientWidth = 496
     TabOrder = 5
     Visible = False
@@ -817,16 +870,16 @@ object frmSettings: TfrmSettings
   end
   object lyoShortcuts: TUWLayout
     Left = -336
-    Height = 440
+    Height = 546
     Top = 216
     Width = 496
-    ClientHeight = 440
+    ClientHeight = 546
     ClientWidth = 496
     TabOrder = 6
     Visible = False
     object lstShortcuts: TListBox
       Left = 0
-      Height = 345
+      Height = 450
       Top = 64
       Width = 496
       Anchors = [akTop, akLeft, akRight]
@@ -859,7 +912,7 @@ object frmSettings: TfrmSettings
     object hkShortcut: TUWHotKey
       Left = 207
       Height = 23
-      Top = 416
+      Top = 520
       Width = 289
       EmptyText = 'None'
       HotKey = 0
@@ -870,7 +923,7 @@ object frmSettings: TfrmSettings
     object lblShortcut: TLabel
       Left = 0
       Height = 15
-      Top = 420
+      Top = 524
       Width = 45
       Caption = 'Shortcut'
       ParentColor = False
@@ -917,10 +970,10 @@ object frmSettings: TfrmSettings
   end
   object lyoMPV: TUWLayout
     Left = -336
-    Height = 442
+    Height = 546
     Top = 280
     Width = 496
-    ClientHeight = 442
+    ClientHeight = 546
     ClientWidth = 496
     TabOrder = 7
     Visible = False
@@ -974,10 +1027,10 @@ object frmSettings: TfrmSettings
   end
   object lyoToolbar: TUWLayout
     Left = -336
-    Height = 440
+    Height = 546
     Top = 304
     Width = 496
-    ClientHeight = 440
+    ClientHeight = 546
     ClientWidth = 496
     TabOrder = 8
     Visible = False
@@ -1587,16 +1640,16 @@ object frmSettings: TfrmSettings
   end
   object lyoFileTypeAssociations: TUWLayout
     Left = -336
-    Height = 442
-    Top = 368
+    Height = 546
+    Top = 344
     Width = 496
-    ClientHeight = 442
+    ClientHeight = 546
     ClientWidth = 496
     TabOrder = 9
     Visible = False
     object tlbFileTypeIco: TToolBar
       Left = 0
-      Height = 432
+      Height = 480
       Top = 0
       Width = 480
       Align = alNone
@@ -1613,7 +1666,7 @@ object frmSettings: TfrmSettings
     Height = 48
     Scaled = True
     Width = 48
-    Left = 552
-    Top = 456
+    Left = 553
+    Top = 560
   end
 end
