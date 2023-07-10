@@ -1,4 +1,7 @@
 1.0.0.7 (x.7.2023)
+- fixed: After changing the language, the list headers remain on the previous language
+- improved: Import shot changes [XML]
+- added: Actors
 - added: Snapping to shot changes
 
 1.0.0.6 (7.7.2023)
