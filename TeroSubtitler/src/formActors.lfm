@@ -1,0 +1,70 @@
+object frmActors: TfrmActors
+  Left = 237
+  Height = 368
+  Top = 114
+  Width = 365
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Actors'
+  ClientHeight = 368
+  ClientWidth = 365
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object edtActor: TEdit
+    Left = 8
+    Height = 23
+    Top = 8
+    Width = 275
+    OnKeyDown = edtActorKeyDown
+    TabOrder = 0
+  end
+  object btnActorAdd: TButton
+    Left = 288
+    Height = 23
+    Top = 8
+    Width = 32
+    Caption = '+'
+    OnClick = btnActorAddClick
+    TabOrder = 1
+  end
+  object btnActorRemove: TButton
+    Left = 325
+    Height = 23
+    Top = 8
+    Width = 32
+    Caption = '-'
+    OnClick = btnActorRemoveClick
+    TabOrder = 2
+  end
+  object lstActors: TListBox
+    Left = 8
+    Height = 288
+    Top = 40
+    Width = 349
+    ItemHeight = 0
+    TabOrder = 3
+  end
+  object btnApply: TButton
+    Left = 202
+    Height = 25
+    Top = 336
+    Width = 75
+    Caption = 'Apply'
+    Default = True
+    OnClick = btnApplyClick
+    TabOrder = 4
+  end
+  object btnClose: TButton
+    Left = 282
+    Height = 25
+    Top = 336
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 5
+  end
+end

@@ -67,6 +67,8 @@ function GetMemoWordUnderCaret(const Memo: TUWMemo; const SelectWord: Boolean = 
 function GetFPS: Single;
 function GetDefPause: Integer;
 
+procedure SetActor;
+
 procedure UpdateVideoLengthString;
 
 procedure GetTranslationMemoryAtIndex(const Index: Integer);
@@ -576,6 +578,7 @@ begin
     tedDuration.Enabled    := AValue;
     tedPause.Enabled       := AValue;
     sbrSeek.Enabled        := AValue;
+    cboActor.Enabled       := AValue;
 
     if frmMain.Visible and VST.Enabled and mmoText.Enabled and LayoutVST.Visible then
     begin
@@ -1013,6 +1016,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure SetActor;
+begin
+  with frmMain do
+    if GetMemoFocused = NIL then
+      VSTDoLoop(VST, @ApplyActor)
+    else
+    begin
+      Subtitles.ItemPointer[VSTFocusedNode(VST)]^.Actor := cboActor.Text;
+      UpdateValues(True);
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure UpdateVideoLengthString;
 var
   s: String;
@@ -1223,6 +1240,9 @@ begin
         tedDuration.SetValueOnly(0);
         mmoText.Text        := '';
         mmoTranslation.Text := '';
+        cboActor.Tag  := 1;
+        cboActor.Text := '';
+        cboActor.Tag  := 0;
       end
       else if Assigned(VST.GetFirstSelected) then // one or more selected
       begin
@@ -1256,6 +1276,10 @@ begin
           actExtendLengthToNext.Enabled     := NodeIndex < Subtitles.Count-1;
           actSetDefaultPause.Enabled        := actExtendLengthToNext.Enabled;
           tedPause.Enabled                  := actSetDefaultPause.Enabled;
+
+          cboActor.Tag  := 1;
+          cboActor.Text := Subtitles[NodeIndex].Actor;
+          cboActor.Tag  := 0;
 
           CheckForTranslationMemory(NodeIndex);
           CheckForTerminology(NodeIndex);

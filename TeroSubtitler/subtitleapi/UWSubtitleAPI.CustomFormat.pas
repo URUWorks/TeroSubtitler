@@ -22,8 +22,7 @@ unit UWSubtitleAPI.CustomFormat;
 interface
 
 uses
-  Classes, SysUtils, UWSystem.FileUtils, UWSystem.StrUtils, UWSystem.SysUtils,
-  IniFiles;
+  Classes, SysUtils, UWSystem.FileUtils, UWSystem.SysUtils, IniFiles;
 
 type
 

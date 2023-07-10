@@ -70,6 +70,7 @@ type
     actCheckForUpdates: TAction;
     actFormatProperties: TAction;
     actExportCustomTextFormat: TAction;
+    actActor: TAction;
     actLoadTranslation: TAction;
     actSort: TAction;
     actTBX: TAction;
@@ -138,6 +139,7 @@ type
     actShowColumnDuration: TAction;
     actShowColumnTimes: TAction;
     actShowColumnNumber: TAction;
+    actShowColumnStyleAndActor: TAction;
     actSwapTexts: TAction;
     actSetAutomaticDuration: TAction;
     actSetDefaultPause: TAction;
@@ -210,10 +212,12 @@ type
     actCloseApp: TAction;
     actNewSubtitle: TAction;
     ActionList: TActionList;
+    btnActor: TUWFlatButton;
     btnFinalTime: TUWFlatButton;
     btnDuration: TUWFlatButton;
     btnPause: TUWFlatButton;
     btnInitialTime: TUWFlatButton;
+    cboActor: TComboBox;
     cboFPS: TComboBox;
     cboFormat: TComboBox;
     cboEncoding: TComboBox;
@@ -280,6 +284,8 @@ type
     MenuItem165: TMenuItem;
     MenuItem166: TMenuItem;
     MenuItem167: TMenuItem;
+    MenuItem168: TMenuItem;
+    MenuItem169: TMenuItem;
     mnuFormatProperties: TMenuItem;
     mnuCheckForUpdates: TMenuItem;
     MenuItem17: TMenuItem;
@@ -619,6 +625,8 @@ type
     procedure cboInputFPSSelect(Sender: TObject);
     procedure cboFPSKeyPress(Sender: TObject; var Key: char);
     procedure cboFPSSelect(Sender: TObject);
+    procedure cboActorChange(Sender: TObject);
+    procedure cboActorKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure MRUItemClick(Sender: TObject);
     procedure MRUOnChange(Sender: TObject);
     procedure PlayRateClick(Sender: TObject);
@@ -825,6 +833,7 @@ type
     procedure actShowColumnCPSExecute(Sender: TObject);
     procedure actShowColumnWPMExecute(Sender: TObject);
     procedure actShowColumnCPLExecute(Sender: TObject);
+    procedure actShowColumnStyleAndActorExecute(Sender: TObject);
     procedure actWebReferenceExecute(Sender: TObject);
     procedure actSplitSubtitleAtPositionExecute(Sender: TObject);
     procedure actAddNoteExecute(Sender: TObject);
@@ -880,6 +889,7 @@ type
     procedure actShowToolbarEncodingExecute(Sender: TObject);
     procedure actSortExecute(Sender: TObject);
     procedure actExportCustomTextFormatExecute(Sender: TObject);
+    procedure actActorExecute(Sender: TObject);
   private
 
   public
@@ -961,6 +971,8 @@ begin
   MRU.OnMRUItemClick := @MRUItemClick;
   MRU.OnChange       := @MRUOnChange;
   MRU.LoadFromXML(MRUFileName);
+  // Actors
+  LoadActors;
   // TMX
   TMX := TUWTMX.Create('');
   // TBX
@@ -1048,6 +1060,8 @@ begin
     // MRU
     MRU.SaveToXML(MRUFileName);
     MRU.Free;
+    // Actors
+    SaveActors;
     // MPV
     MPV.Close;
     // VST
@@ -1440,6 +1454,25 @@ begin
       actUndo.Enabled := not Memo.Strings.UndoEmpty;
       actRedo.Enabled := not Memo.Strings.RedoEmpty;
     end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.cboActorChange(Sender: TObject);
+begin
+  if cboActor.Tag = 0 then SetActor;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.cboActorKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = VK_RETURN) and (cboActor.Text <> '') and (cboActor.Items.IndexOf(cboActor.Text) < 0) then
+  begin
+    cboActor.Items.Add(cboActor.Text);
+    Key := 0;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

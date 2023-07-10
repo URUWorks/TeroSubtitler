@@ -29,6 +29,7 @@ procedure ApplyCheckErrorsTimesOnly(const Item: PUWSubtitleItem; const Index: In
 procedure ApplySetTextFromMemo(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplySetTranslationFromMemo(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyText(const Item: PUWSubtitleItem; const Index: Integer; const NewSubtitleText, NewSubtitleTranslation: String; const Resent: Boolean = True);
+procedure ApplyActor(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFontBold(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFontItalic(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFontStrikeOut(const Item: PUWSubtitleItem; const Index: Integer);
@@ -102,6 +103,16 @@ end;
 procedure ApplyText(const Item: PUWSubtitleItem; const Index: Integer; const NewSubtitleText, NewSubtitleTranslation: String; const Resent: Boolean = True);
 begin
   SetSubtitleTexts(Index, NewSubtitleText, NewSubtitleTranslation, False, False, Resent);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ApplyActor(const Item: PUWSubtitleItem; const Index: Integer);
+begin
+  UndoInstance.AddUndo(utSubtitleChange, Index, Subtitles[Index]);
+
+  with frmMain do
+    Item^.Actor := cboActor.Text;
 end;
 
 // -----------------------------------------------------------------------------

@@ -1072,6 +1072,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actShowColumnStyleAndActorExecute(Sender: TObject);
+begin
+  VSTShowColumn(VST, 3, (Sender as TAction).Checked);
+  VSTResize(VST);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actWebReferenceExecute(Sender: TObject);
 var
   Memo : TUWMemo;
@@ -1546,6 +1554,13 @@ end;
 procedure TfrmMain.actExportCustomTextFormatExecute(Sender: TObject);
 begin
   ShowCustomTextFormat;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actActorExecute(Sender: TObject);
+begin
+  ShowActors;
 end;
 
 // -----------------------------------------------------------------------------

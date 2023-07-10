@@ -39,6 +39,9 @@ procedure SaveSettings;
 procedure LoadFormSettings(const AForm: TForm);
 procedure SaveFormSettings(const AForm: TForm);
 
+procedure LoadActors;
+procedure SaveActors;
+
 procedure UpdateValuesFromDefaultConvention;
 
 { Language }
@@ -426,7 +429,7 @@ begin
         actShowColumnNumber.Checked := GetValue('ColumnNumber', actShowColumnNumber.Checked);
         actShowColumnTimes.Checked := GetValue('ColumnTimes', actShowColumnTimes.Checked);
         actShowColumnDuration.Checked := GetValue('ColumnDuration', actShowColumnDuration.Checked);
-        //actShowColumnStyle.Checked := GetValue('ColumnStyle', actShowColumnStyle.Checked);
+        actShowColumnStyleAndActor.Checked := GetValue('ColumnStyleAndActor', actShowColumnStyleAndActor.Checked);
         actShowColumnCPS.Checked := GetValue('ColumnCPS', actShowColumnCPS.Checked);
         actShowColumnWPM.Checked := GetValue('ColumnWPM', actShowColumnWPM.Checked);
         actShowColumnCPL.Checked := GetValue('ColumnCPL', actShowColumnCPL.Checked);
@@ -702,7 +705,7 @@ begin
         SetValue('ColumnNumber', actShowColumnNumber.Checked);
         SetValue('ColumnTimes', actShowColumnTimes.Checked);
         SetValue('ColumnDuration', actShowColumnDuration.Checked);
-        //SetValue('ColumnStyle', actShowColumnStyle.Checked);
+        SetValue('ColumnStyleAndActor', actShowColumnStyleAndActor.Checked);
         SetValue('ColumnCPS', actShowColumnCPS.Checked);
         SetValue('ColumnWPM', actShowColumnWPM.Checked);
         SetValue('ColumnCPL', actShowColumnCPL.Checked);
@@ -927,6 +930,34 @@ begin
   finally
     Free;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure LoadActors;
+begin
+  with frmMain.cboActor do
+    if FileExists(ActorsFileName) then
+    try
+      Items.LoadFromFile(ActorsFileName);
+    except
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SaveActors;
+begin
+  with frmMain.cboActor do
+    if Items.Count > 0 then
+    begin
+      try
+        Items.SaveToFile(ActorsFileName);
+      except
+      end;
+    end
+    else if FileExists(ActorsFileName) then
+      DeleteFile(ActorsFileName);
 end;
 
 // -----------------------------------------------------------------------------

@@ -50,6 +50,7 @@ procedure ShowTranslationMemorySettings;
 procedure ShowTranslationMemoryList;
 procedure ShowSpellCheck;
 procedure ShowGoToTime;
+procedure ShowActors;
 procedure ShowShotChanges;
 procedure ShowAudioToText;
 procedure ShowAudioToTextModels;
@@ -79,7 +80,7 @@ uses
   formQualityCheck, formCompare, formTranslationMemoryList, formTBXList,
   formTBX, formTBXSettings, formTBXEdit, formWizard, formShiftTimes,
   formAudioToText, formAudioToTextModel, procTypes, procCommon, procWorkspace,
-  formFormatProperties, formCustomTextFormat;
+  formFormatProperties, formCustomTextFormat, formActors;
 
 // -----------------------------------------------------------------------------
 
@@ -325,6 +326,12 @@ begin
       UpdateCommonActionString;
       UpdateVideoLengthString;
       RefreshAppTitle;
+
+      with frmMain do
+      begin
+        VSTDrawInitialize(VSTOptions.DrawMode);
+        VSTResize(NIL);
+      end;
     end
     else if OldShiftMs <> AppOptions.ShiftTimeMS then
       UpdateCommonActionString;
@@ -446,6 +453,19 @@ begin
   end
   else
     frmGoToTime.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowActors;
+begin
+  if frmActors = NIL then
+  begin
+    frmActors := TfrmActors.Create(Application);
+    ShowForm(frmActors);
+  end
+  else
+    frmActors.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language Mail="uruworks@gmail.com" Name="Default" Count="39" Author="URUWorks">
+<Language Mail="uruworks@gmail.com" Name="Default" Count="40" Author="URUWorks">
   <Form Name="frmMain" Caption="tero subtitler">
     <Section Name="TMenuItem">
       <mnuFile>File</mnuFile>
@@ -134,6 +134,7 @@
       <actShowColumnCPS>Characters per second</actShowColumnCPS>
       <actShowColumnWPM>Words per minute</actShowColumnWPM>
       <actShowColumnCPL>Characters per line</actShowColumnCPL>
+      <actShowColumnStyleAndActor>Style/Actor</actShowColumnStyleAndActor>
       <actWebReference>Web reference...</actWebReference>
       <actSplitSubtitleAtPosition>Split line at cursor position</actSplitSubtitleAtPosition>
       <actHelp>Help</actHelp>
@@ -271,8 +272,7 @@
       <lblFPS>FPS</lblFPS>
     </Section>
   </Form>
-  <Form Name="frmDelay" Caption="Set delay">
-  </Form>
+  <Form Name="frmDelay" Caption="Set delay"/>
   <Form Name="frmShiftTimes" Caption="Shift times">
     <Section Name="TLabel">
       <lblOffset>Direction</lblOffset>
@@ -325,8 +325,7 @@
       <chkRE>Regular expression</chkRE>
     </Section>
   </Form>
-  <Form Name="frmRestoreBackup" Caption="Restore backup">
-  </Form>
+  <Form Name="frmRestoreBackup" Caption="Restore backup"/>
   <Form Name="frmSettings" Caption="Settings">
     <Section Name="TLabel">
       <lblLanguage>Language</lblLanguage>
@@ -433,8 +432,7 @@
       <lblTimeCode>Time code</lblTimeCode>
     </Section>
   </Form>        
-  <Form Name="frmTranslationMemory" Caption="Translation memory">
-  </Form>
+  <Form Name="frmTranslationMemory" Caption="Translation memory"/>
   <Form Name="frmTranslationMemorySettings" Caption="Translation memory settings">
     <Section Name="TLabel">
       <lblSourceLang>Source language</lblSourceLang>
@@ -496,6 +494,7 @@
       <lblRules>Rules</lblRules>
     </Section>
   </Form>
+  <Form Name="frmActors" Caption="Actors"/>  
   <Form Name="frmAudioToText" Caption="Audio to text">
     <Section Name="TLabel">
       <lblTrack>Track</lblTrack>    
@@ -511,10 +510,8 @@
       <chkTranslate>Translate to English</chkTranslate>
     </Section>            
   </Form>
-  <Form Name="frmAudioToTextModel" Caption="Audio to text model">
-  </Form>      
-  <Form Name="frmCompare" Caption="Compare">
-  </Form>
+  <Form Name="frmAudioToTextModel" Caption="Audio to text model"/>
+  <Form Name="frmCompare" Caption="Compare"/>
   <Form Name="frmConventions" Caption="Conventions">
     <Section Name="TLabel">
       <lblName>Name</lblName>
@@ -687,9 +684,11 @@
     <Success>Success.</Success>
     <NewVersionFound>A new version was found.</NewVersionFound>
     <SeeChangeList>Do you want to see the changelog?</SeeChangeList>
-    <NoNewVersion>You're using the latest version.</NoNewVersion>    
+    <NoNewVersion>You're using the latest version.</NoNewVersion>        
     <ErrorExecuting>Error executing '%s'.</ErrorExecuting>
-    <FeatureNotAvailableFromURL>Function not available for online video.</FeatureNotAvailableFromURL> 
+    <FeatureNotAvailableFromURL>Function not available for online video.</FeatureNotAvailableFromURL>
+    <MultipleTracksDetected>Multiple tracks detected</MultipleTracksDetected> 
+    <SelectTrackToUse>Select the track to use:</SelectTrackToUse>
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>All the subtitles</rbnAllTheSubtitles>

@@ -50,7 +50,7 @@ begin
       VSTAddColumn(VST, GetString(FAppStringList, 'Index'), 70, taCenter, actShowColumnNumber.Checked);
       VSTAddColumn(VST, GetString(FAppStringList, 'Times'), 90, taCenter, actShowColumnTimes.Checked);
       VSTAddColumn(VST, GetString(FAppStringList, 'Duration'), 70, taCenter, actShowColumnDuration.Checked);
-      VSTAddColumn(VST, GetString(FAppStringList, 'StyleAndActor'), 90, taCenter, False);
+      VSTAddColumn(VST, GetString(FAppStringList, 'StyleAndActor'), 90, taCenter, actShowColumnStyleAndActor.Checked);
       VSTAddColumn(VST, GetString(FAppStringList, 'Text'), 200, taLeftJustify);
       VSTAddColumn(VST, GetString(FAppStringList, 'Translation'), 200, taLeftJustify, actTranslatorMode.Checked);
       VSTAddColumn(VST, GetString(FAppStringList, 'CPS'), 50, taCenter, actShowColumnCPS.Checked);
@@ -274,7 +274,14 @@ begin
          TargetCanvas.TextRect(R, R.Left, R.Top, GetDurationTimeStr(Node^.Index, True), TS);
        end;
     3: begin
-          // Style & Actor
+         // Style & Actor
+         TS.Alignment := taCenter;
+         TS.Layout := tlTop;
+         TargetCanvas.TextRect(R, R.Left, R.Top, Subtitles[Node^.Index].Style, TS);
+         R.Top := TextHeight;
+         //TargetCanvas.Font.Style := TargetCanvas.Font.Style + [TFontStyle.fsBold];
+         TargetCanvas.TextRect(R, R.Left, R.Top, Subtitles[Node^.Index].Actor, TS);
+         //TargetCanvas.Font.Style := TargetCanvas.Font.Style - [TFontStyle.fsBold];
        end;
     4: begin
          // Text

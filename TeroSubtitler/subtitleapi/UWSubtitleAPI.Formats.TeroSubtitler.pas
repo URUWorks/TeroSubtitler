@@ -150,6 +150,8 @@ begin
                 Marked := Node.Attributes.GetNamedItem('marked').NodeValue.ToBoolean;
               if Node.Attributes.GetNamedItem('notes') <> NIL then
                 Notes  := Node.Attributes.GetNamedItem('notes').NodeValue;
+              if Node.Attributes.GetNamedItem('actor') <> NIL then
+                Actor  := Node.Attributes.GetNamedItem('actor').NodeValue;
             end;
           end;
           Node := Node.NextSibling;
@@ -249,6 +251,8 @@ begin
         TDOMElement(Element).SetAttribute('marked', Subtitles[i].Marked.ToString);
       if not Subtitles[i].Notes.IsEmpty then
         TDOMElement(Element).SetAttribute('notes', Subtitles[i].Notes);
+      if not Subtitles[i].Actor.IsEmpty then
+        TDOMElement(Element).SetAttribute('actor', Subtitles[i].Notes);
 
       SubElement := XmlDoc.CreateElement('text');
       SubNode := XmlDoc.CreateTextNode(ReplaceEnters(Subtitles.Text[i]));
