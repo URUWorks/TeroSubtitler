@@ -57,6 +57,8 @@ type
 
   TEDLList = specialize TFPGList<PItem>;
 
+  { TEDL }
+
   TEDL = class
   private
     FFileName : String;
@@ -64,6 +66,7 @@ type
     FList     : TEDLList;
     FChanged  : Boolean;
     FFPS      : Single;
+    FID       : Integer;
   public
     constructor Create(const AFileName: String; const ATitle: String = ''; const AFPS: Single = 25; const AFCM: TFCM = fcmNONDROPFRAME);
     destructor Destroy; override;
@@ -73,11 +76,13 @@ type
     procedure LoadFromFile(const AFileName: String);
     function SaveToFile(const AFileName: String): Boolean;
     function SaveToFileXML(const AFileName: String): Boolean;
+    function GetXMLTrackList(const AFileName: String; out ATracks: TStrings): Boolean;
     function AddItem(const AItem: TItem): Integer; overload;
     function AddItem(const AIndex: Cardinal; const AReelName: String; const ATypeOfTrack: TTypeOfTrack; const ATypeOfCut: TTypeOfCut; const AClipIn, AClipOut, ATapeIn, ATapeOut: Cardinal; const AClipName, AComment: String): Integer; overload;
     property FileName : String   read FFileName write FFileName;
+    property ID       : Integer  read FID       write FID;
     property Items    : TEDLList read FList;
-    property Header   : THeader  read FHeader write FHeader;
+    property Header   : THeader  read FHeader   write FHeader;
   end;
 
 // -----------------------------------------------------------------------------
@@ -121,6 +126,7 @@ begin
   FHeader.FCM   := AFCM;
 
   FFPS      := AFPS;
+  FID       := 0;
   FChanged  := False;
   FFileName := AFileName;
   if AFileName <> '' then LoadFromFile(AFileName);
@@ -193,7 +199,7 @@ var
 
   XmlDoc: TXMLDocument;
   Node, SubNode: TDOMNode;
-  NodeList: TDOMNodeList;
+  NodeTrack, NodeList: TDOMNodeList;
 begin
   if not FileExists(AFileName) then Exit;
   Clear;
@@ -209,32 +215,32 @@ begin
 
     if Assigned(XmlDoc) then
     try
-      i := 0;
-      NodeList := XmlDoc.GetElementsByTagName('clipitem');
-      if Assigned(NodeList) and (NodeList.Count > 0) then
+      NodeTrack := XmlDoc.GetElementsByTagName('track');
+      if Assigned(NodeTrack) and (NodeTrack.Count > 0) and (FID < NodeTrack.Count) then
       begin
         with Item do
         begin
-          while i < NodeList.Count do
-          begin
-            Node := NodeList.Item[i];
-            SubNode := Node.FindNode('start');
-            if Assigned(SubNode) then
+          NodeList := NodeTrack.Item[FID].GetChildNodes;
+          if Assigned(NodeList) then
+            for i := 0 to NodeList.Count-1 do
             begin
-              Index       := i+1;
-              ReelName    := '';
-              TypeOfTrack := totV;
-              TypeOfCut   := tocC;
-              ClipName    := '';
-              Comment     := '';
-              ClipIn      := 0;
-              ClipOut     := FramesToTime(StrToIntDef(SubNode.TextContent, 0), FFPS);
-              TapeIn      := 0;
-              TapeOut     := 0;
-              AddItem(Item);
+              Node    := NodeList.Item[i];
+              SubNode := Node.FindNode('start');
+              if Assigned(SubNode) then
+              begin
+                Index       := i+1;
+                ReelName    := '';
+                TypeOfTrack := totV;
+                TypeOfCut   := tocC;
+                ClipName    := '';
+                Comment     := '';
+                ClipIn      := 0;
+                ClipOut     := FramesToTime(StrToIntDef(SubNode.TextContent, 0), FFPS);
+                TapeIn      := 0;
+                TapeOut     := 0;
+                AddItem(Item);
+              end;
             end;
-            Inc(i);
-          end;
         end;
       end;
     finally
@@ -461,6 +467,61 @@ begin
     end;
   finally
     XmlDoc.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TEDL.GetXMLTrackList(const AFileName: String; out ATracks: TStrings): Boolean;
+var
+  i, x: Integer;
+  XmlDoc: TXMLDocument;
+  Node, SubNode, IdNode: TDOMNode;
+  NodeList: TDOMNodeList;
+begin
+  Result := False;
+  if not FileExists(AFileName) then Exit;
+
+  if AFileName.ToLower.EndsWith('.xml') then // XML
+  begin
+    XmlDoc := NIL;
+    try
+      ReadXMLFile(XmlDoc, AFileName);
+    except
+      Exit;
+    end;
+
+    if Assigned(XmlDoc) then
+    try
+      NodeList := XmlDoc.GetElementsByTagName('track');
+      if Assigned(NodeList) and (NodeList.Count > 0) then
+      begin
+        Result := True;
+        if not Assigned(ATracks) then ATracks := TStringList.Create;
+        for i := 0 to NodeList.Count-1 do
+        begin
+          Node := NodeList.Item[i];
+          SubNode := Node.FindNode('clipitem');
+          if Assigned(SubNode) and SubNode.HasAttributes then
+          begin
+            IdNode := SubNode.Attributes.GetNamedItem('id');
+            if Assigned(IdNode) then
+            begin
+              x := ATracks.Add(IdNode.NodeValue);
+              SubNode := SubNode.FindNode('sourcetrack');
+              if Assigned(SubNode) then
+              begin
+                SubNode := SubNode.FindNode('mediatype');
+                if Assigned(SubNode) then
+                  ATracks[x] := ATracks[x] + ' [' + SubNode.TextContent + ']';
+              end;
+            end;
+          end;
+        end;
+      end;
+    finally
+      XmlDoc.Free;
+    end;
   end;
 end;
 

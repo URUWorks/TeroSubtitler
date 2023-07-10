@@ -605,6 +605,20 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="formActors.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmActors"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
+      <Unit>
+        <Filename Value="formCustomSelectDlg.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmCustomSelectDlg"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

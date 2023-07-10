@@ -72,7 +72,8 @@ implementation
 
 uses
   procTypes, procWorkspace, procCommon, UWSystem.TimeUtils, UWSystem.SysUtils,
-  UWSystem.Process, formMain, UWSubtitleAPI.EDL, UWSystem.XMLLang;
+  UWSystem.Process, formMain, UWSubtitleAPI.EDL, UWSystem.XMLLang,
+  formCustomSelectDlg;
 
 const
   tcFrames       = 0;
@@ -207,6 +208,7 @@ procedure TfrmShotChanges.btnImportClick(Sender: TObject);
 var
   i   : Integer;
   edl : TEDL;
+  ATracks: TStrings = NIL;
 begin
   with TOpenDialog.Create(Self) do
   try
@@ -218,8 +220,12 @@ begin
     begin
       if FileName.ToLower.EndsWith('.edl') or FileName.ToLower.EndsWith('.xml') then
       begin
-        edl := TEDL.Create(FileName, '', GetFPS);
+        edl := TEDL.Create('', '', GetFPS);
         try
+          if edl.GetXMLTrackList(FileName, ATracks) and (ATracks.Count > 1) then
+            edl.ID := formCustomSelectDlg.ExecuteDialog(GetCommonString('MultipleTracksDetected'), GetCommonString('SelectTrackToUse'), ATracks);
+
+          edl.LoadFromFile(FileName);
           mmoTimes.Lines.BeginUpdate;
           try
             mmoTimes.Clear;
@@ -233,6 +239,7 @@ begin
           cboTimeCodeImport.ItemIndex := tcMilliseconds;
         finally
           edl.Free;
+          if Assigned(ATracks) then ATracks.Free;
         end;
       end
       else

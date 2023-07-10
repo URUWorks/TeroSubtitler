@@ -31,7 +31,7 @@ uses
   procForms, procMPV, procSubtitle, procVST_Loops, formConventions,
   formTranslationMemoryList, formWizard, formDownload, procMRU, formShiftTimes,
   formAudioToText, formAudioToTextModel, formTBX, formFormatProperties, 
-procFileTypes, formCustomTextFormat;
+procFileTypes, formCustomTextFormat, formActors, formCustomSelectDlg;
 
 {$R *.res}
 
