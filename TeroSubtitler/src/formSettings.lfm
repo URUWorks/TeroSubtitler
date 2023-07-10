@@ -535,10 +535,10 @@ object frmSettings: TfrmSettings
     end
     object edtCPSStrategy: TEdit
       AnchorSideTop.Side = asrCenter
-      Left = 209
+      Left = 208
       Height = 23
       Top = 96
-      Width = 287
+      Width = 288
       OnChange = spnConventionChange
       TabOrder = 4
     end
@@ -555,7 +555,7 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 420
-      Width = 190
+      Width = 206
       AutoSize = False
       Caption = 'Shot change snap area (frames)'
       ParentColor = False
@@ -573,7 +573,7 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 452
-      Width = 190
+      Width = 206
       AutoSize = False
       Caption = 'Snap in cues (frames)'
       ParentColor = False
@@ -590,7 +590,7 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 484
-      Width = 190
+      Width = 206
       AutoSize = False
       Caption = 'Snap out cues (frames)'
       ParentColor = False

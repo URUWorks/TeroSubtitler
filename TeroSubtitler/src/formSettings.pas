@@ -548,8 +548,7 @@ begin
   frmMain.cboInputFPS.ItemIndex := cboDefaultFrameRate.ItemIndex;
   frmMain.cboFPS.ItemIndex      := cboDefaultFrameRate.ItemIndex;
 
-  frmMain.VSTDrawInitialize(TVSTDrawMode(cboListMode.ItemIndex));
-  frmMain.VSTResize(NIL);
+  VSTOptions.DrawMode := TVSTDrawMode(cboListMode.ItemIndex);
 
   ColorThemeInstance.ColorMode := TColorMode(cboTheme.ItemIndex);
   CheckColorTheme;
