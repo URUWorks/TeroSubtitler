@@ -540,6 +540,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actMediaMoveSubtitleExecute(Sender: TObject);
+begin
+  if (MPV.GetMediaLenInMs > 0) and actVideoPreview.Checked and (VST.SelectedCount > 0) then
+    VSTDoLoop(VST, @ApplyMoveSubtitle, dlSelected, True, True);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actMediaSetInitialTimeExecute(Sender: TObject);
 begin
   if not (MPV.GetMediaLenInMs > 0) or (VSTFocusedNode(VST) < 0) then Exit;

@@ -45,6 +45,7 @@ procedure ApplySetTimeDurationFromSpin(const Item: PUWSubtitleItem; const Index:
 procedure ApplySetTimePauseFromSpin(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplySetTimeInitialFromMPV(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplySetTimeFinalFromMPV(const Item: PUWSubtitleItem; const Index: Integer);
+procedure ApplyMoveSubtitle(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyUnbreakSubtitles(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyAutoBreakSubtitles(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyChangeFPS(const Item: PUWSubtitleItem; const Index: Integer);
@@ -297,6 +298,20 @@ procedure ApplySetTimeFinalFromMPV(const Item: PUWSubtitleItem; const Index: Int
 begin
   with frmMain do
     SetSubtitleTime(Index, MPV.GetMediaPosInMs, tedFinal.Tag);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ApplyMoveSubtitle(const Item: PUWSubtitleItem; const Index: Integer);
+var
+  d: Integer;
+begin
+  with Item^, frmMain do
+  begin
+    d := MPV.GetMediaPosInMs;
+    SetSubtitleTime(Index, SetDelay(InitialTime, d), tedInitial.Tag, False, False);
+    SetSubtitleTime(Index, SetDelay(FinalTime, d), tedFinal.Tag, False, False);
+  end;
 end;
 
 // -----------------------------------------------------------------------------

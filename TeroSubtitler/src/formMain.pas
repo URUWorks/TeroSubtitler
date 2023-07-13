@@ -71,6 +71,7 @@ type
     actFormatProperties: TAction;
     actExportCustomTextFormat: TAction;
     actActor: TAction;
+    actMediaMoveSubtitle: TAction;
     actLoadTranslation: TAction;
     actSort: TAction;
     actTBX: TAction;
@@ -286,6 +287,7 @@ type
     MenuItem167: TMenuItem;
     MenuItem168: TMenuItem;
     MenuItem169: TMenuItem;
+    MenuItem170: TMenuItem;
     mnuFormatProperties: TMenuItem;
     mnuCheckForUpdates: TMenuItem;
     MenuItem17: TMenuItem;
@@ -479,6 +481,7 @@ type
     Separator46: TMenuItem;
     mnuHelpSeparator: TMenuItem;
     Separator47: TMenuItem;
+    Separator48: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
@@ -771,8 +774,9 @@ type
     procedure actMediaForward1SecExecute(Sender: TObject);
     procedure actMediaBack1MinExecute(Sender: TObject);
     procedure actMediaForward1MinExecute(Sender: TObject);
-    procedure actMediaSetFinalTimeExecute(Sender: TObject);
+    procedure actMediaMoveSubtitleExecute(Sender: TObject);
     procedure actMediaSetInitialTimeExecute(Sender: TObject);
+    procedure actMediaSetFinalTimeExecute(Sender: TObject);
     procedure actMediaStartSubtitleExecute(Sender: TObject);
     procedure actMediaEndSubtitleExecute(Sender: TObject);
     procedure actMediaPlaySelectionExecute(Sender: TObject);

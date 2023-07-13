@@ -566,6 +566,7 @@ object frmSettings: TfrmSettings
       Top = 416
       Width = 80
       MaxValue = 30
+      OnChange = spnConventionChange
       TabOrder = 15
       Value = 12
     end
@@ -584,6 +585,7 @@ object frmSettings: TfrmSettings
       Top = 448
       Width = 80
       MaxValue = 30
+      OnChange = spnConventionChange
       TabOrder = 16
     end
     object lblSCSnapOutCues: TLabel
@@ -601,6 +603,7 @@ object frmSettings: TfrmSettings
       Top = 480
       Width = 80
       MaxValue = 30
+      OnChange = spnConventionChange
       TabOrder = 17
       Value = 2
     end

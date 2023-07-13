@@ -1721,6 +1721,12 @@ object frmMain: TfrmMain
       end
       object mnuVideoSubtitles: TMenuItem
         Caption = 'Subtitles'
+        object MenuItem170: TMenuItem
+          Action = actMediaMoveSubtitle
+        end
+        object Separator48: TMenuItem
+          Caption = '-'
+        end
         object MenuItem34: TMenuItem
           Action = actMediaSetInitialTime
         end
@@ -3081,100 +3087,6 @@ object frmMain: TfrmMain
       Caption = 'Forward1Min'
       OnExecute = actMediaForward1MinExecute
     end
-    object actMediaSetInitialTime: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = 'Set initial time'
-      ImageIndex = 47
-      OnExecute = actMediaSetInitialTimeExecute
-    end
-    object actMediaSetFinalTime: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = 'Set final time'
-      ImageIndex = 48
-      OnExecute = actMediaSetFinalTimeExecute
-    end
-    object actMediaStartSubtitle: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = 'Start subtitle'
-      ImageIndex = 49
-      OnExecute = actMediaStartSubtitleExecute
-    end
-    object actMediaEndSubtitle: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = 'End subtitle'
-      ImageIndex = 50
-      OnExecute = actMediaEndSubtitleExecute
-    end
-    object actMediaSubSizeInc: TAction
-      Tag = 4
-      Category = 'Video'
-      OnExecute = actMediaSubSizeIncExecute
-    end
-    object actMediaSubSizeDec: TAction
-      Tag = 4
-      Category = 'Video'
-      OnExecute = actMediaSubSizeDecExecute
-    end
-    object actMediaVolumeUp: TAction
-      Category = 'Video'
-      Caption = 'Up'
-      OnExecute = actMediaVolumeUpExecute
-    end
-    object actMediaVolumeDown: TAction
-      Category = 'Video'
-      Caption = 'Down'
-      OnExecute = actMediaVolumeDownExecute
-    end
-    object actMediaVolumeMute: TAction
-      Category = 'Video'
-      AutoCheck = True
-      Caption = 'Mute'
-      OnExecute = actMediaVolumeMuteExecute
-    end
-    object actLoadVideo: TAction
-      Category = 'Video'
-      Caption = 'Open video...'
-      OnExecute = actLoadVideoExecute
-    end
-    object actLoadVideoFromURL: TAction
-      Category = 'Video'
-      Caption = 'Open video from URL...'
-      OnExecute = actLoadVideoFromURLExecute
-    end
-    object actCloseVideo: TAction
-      Tag = 2
-      Category = 'Video'
-      Caption = 'Close video'
-      OnExecute = actCloseVideoExecute
-    end
-    object actSMPTE: TAction
-      Category = 'Video'
-      AutoCheck = True
-      Caption = 'SMPTE'
-      OnExecute = actSMPTEExecute
-    end
-    object actAudioToText: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = 'Audio to text'
-      OnExecute = actAudioToTextExecute
-    end
-    object actShotChanges: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = 'Shot changes...'
-      OnExecute = actShotChangesExecute
-    end
-    object actWaveExtract: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = 'Extract waveform...'
-      OnExecute = actWaveExtractExecute
-    end
     object actTranslationMemorySettings: TAction
       Tag = 1
       Category = 'Tools'
@@ -3408,6 +3320,106 @@ object frmMain: TfrmMain
       AutoCheck = True
       Caption = 'Encoding'
       OnExecute = actShowToolbarEncodingExecute
+    end
+    object actMediaMoveSubtitle: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Move'
+      OnExecute = actMediaMoveSubtitleExecute
+    end
+    object actMediaSetInitialTime: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Set initial time'
+      ImageIndex = 47
+      OnExecute = actMediaSetInitialTimeExecute
+    end
+    object actMediaSetFinalTime: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Set final time'
+      ImageIndex = 48
+      OnExecute = actMediaSetFinalTimeExecute
+    end
+    object actMediaStartSubtitle: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Start subtitle'
+      ImageIndex = 49
+      OnExecute = actMediaStartSubtitleExecute
+    end
+    object actMediaEndSubtitle: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'End subtitle'
+      ImageIndex = 50
+      OnExecute = actMediaEndSubtitleExecute
+    end
+    object actMediaSubSizeInc: TAction
+      Tag = 4
+      Category = 'Video'
+      OnExecute = actMediaSubSizeIncExecute
+    end
+    object actMediaSubSizeDec: TAction
+      Tag = 4
+      Category = 'Video'
+      OnExecute = actMediaSubSizeDecExecute
+    end
+    object actMediaVolumeUp: TAction
+      Category = 'Video'
+      Caption = 'Up'
+      OnExecute = actMediaVolumeUpExecute
+    end
+    object actMediaVolumeDown: TAction
+      Category = 'Video'
+      Caption = 'Down'
+      OnExecute = actMediaVolumeDownExecute
+    end
+    object actMediaVolumeMute: TAction
+      Category = 'Video'
+      AutoCheck = True
+      Caption = 'Mute'
+      OnExecute = actMediaVolumeMuteExecute
+    end
+    object actLoadVideo: TAction
+      Category = 'Video'
+      Caption = 'Open video...'
+      OnExecute = actLoadVideoExecute
+    end
+    object actLoadVideoFromURL: TAction
+      Category = 'Video'
+      Caption = 'Open video from URL...'
+      OnExecute = actLoadVideoFromURLExecute
+    end
+    object actCloseVideo: TAction
+      Tag = 2
+      Category = 'Video'
+      Caption = 'Close video'
+      OnExecute = actCloseVideoExecute
+    end
+    object actSMPTE: TAction
+      Category = 'Video'
+      AutoCheck = True
+      Caption = 'SMPTE'
+      OnExecute = actSMPTEExecute
+    end
+    object actAudioToText: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Audio to text'
+      OnExecute = actAudioToTextExecute
+    end
+    object actShotChanges: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Shot changes...'
+      OnExecute = actShotChangesExecute
+    end
+    object actWaveExtract: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Extract waveform...'
+      OnExecute = actWaveExtractExecute
     end
   end
   object popDropInsert: TPopupMenu
