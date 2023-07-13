@@ -104,8 +104,6 @@
       <actTimeExpander>Expandir/reducir  tiempo...</actTimeExpander>
       <actSetDelay>Establecer retraso...</actSetDelay>
       <actShiftTimes>Desplazar tiempos...</actShiftTimes>
-      <ShiftTimeMore>Desplazar %dms más</ShiftTimeMore>
-      <ShiftTimeLess>Desplazar %dms menos</ShiftTimeLess>            
       <actConvertCase>Convertir mayúsculas/minúsculas...</actConvertCase>
       <actUnbreakSubtitle>Quitar carácteres de corte</actUnbreakSubtitle>
       <actSetMaximumLineLength>Establecer longitud máxima de línea</actSetMaximumLineLength>
@@ -153,6 +151,7 @@
       <actExportCustomTextFormat>Formato de texto personalizado...</actExportCustomTextFormat>
       <actMediaPreviousFrame>Fotograma anterior</actMediaPreviousFrame>
       <actMediaNextFrame>Siguiente fotograma</actMediaNextFrame>
+      <actMediaMoveSubtitle>Mover subtítulo</actMediaMoveSubtitle>
       <actMediaSetInitialTime>Establecer tiempo inicial</actMediaSetInitialTime>
       <actMediaSetFinalTime>Establecer tiempo final</actMediaSetFinalTime>
       <actMediaStartSubtitle>Iniciar subtítulo</actMediaStartSubtitle>
@@ -655,7 +654,9 @@
     <WriteDenieded>Escritura denegada. Verifique los permisos de la carpeta.</WriteDenieded>
     <BackupSaved>Respaldo guardado.</BackupSaved>
     <NoSubtitlesMarked>No hay subtítulos marcados.</NoSubtitlesMarked>
-    <PromptForDeleteLines>Las líneas seleccionadas serán eliminadas.</PromptForDeleteLines>    
+    <PromptForDeleteLines>Las líneas seleccionadas serán eliminadas.</PromptForDeleteLines>
+    <ShiftTimeMore>Desplazar %dms más</ShiftTimeMore>
+    <ShiftTimeLess>Desplazar %dms menos</ShiftTimeLess>                    
     <TranscriptionModeExit>Si sale del modo de transcripción se perderán los cambios no guardados.</TranscriptionModeExit>
     <SourceModeWarning>Al cambiar al modo código se cambiará el formato a "Tero Subtitler", de lo contrario, se perderán las traducciones no guardadas.</SourceModeWarning>
     <TextFormatted>¿Exportar texto con formato?</TextFormatted>    

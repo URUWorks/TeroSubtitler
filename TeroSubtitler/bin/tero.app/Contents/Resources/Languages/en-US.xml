@@ -104,8 +104,6 @@
       <actTimeExpander>Time expander/reducer...</actTimeExpander>
       <actSetDelay>Set delay...</actSetDelay>
       <actShiftTimes>Shift times...</actShiftTimes>
-      <ShiftTimeMore>Shift %dms more</ShiftTimeMore>
-      <ShiftTimeLess>Shift %dms less</ShiftTimeLess>          
       <actConvertCase>Convert case...</actConvertCase>
       <actUnbreakSubtitle>Unbreak subtitle</actUnbreakSubtitle>
       <actSetMaximumLineLength>Set maximum line length</actSetMaximumLineLength>
@@ -153,6 +151,7 @@
       <actExportCustomTextFormat>Custom text format...</actExportCustomTextFormat>
       <actMediaPreviousFrame>Previous frame</actMediaPreviousFrame>
       <actMediaNextFrame>Next frame</actMediaNextFrame>
+      <actMediaMoveSubtitle>Move subtitle</actMediaMoveSubtitle>      
       <actMediaSetInitialTime>Set initial time</actMediaSetInitialTime>
       <actMediaSetFinalTime>Set final time</actMediaSetFinalTime>
       <actMediaStartSubtitle>Start subtitle</actMediaStartSubtitle>
@@ -656,6 +655,8 @@
     <BackupSaved>Backup saved.</BackupSaved>
     <NoSubtitlesMarked>There are no marked subtitles.</NoSubtitlesMarked>
     <PromptForDeleteLines>The selected lines will be deleted.</PromptForDeleteLines>
+    <ShiftTimeMore>Shift %dms more</ShiftTimeMore>
+    <ShiftTimeLess>Shift %dms less</ShiftTimeLess>                  
     <TranscriptionModeExit>Exiting transcription mode will lose any unsaved changes.</TranscriptionModeExit>
     <SourceModeWarning>Switching to source mode will change the format to "Tero Subtitler", otherwise unsaved translations will be lost.</SourceModeWarning>
     <TextFormatted>Export formatted text?</TextFormatted>        
