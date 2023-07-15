@@ -2,6 +2,7 @@
 - fixed: After changing the language, the list headers remain on the previous language
 - fixed: The names of the menu items are not displayed #121
 - improved: Import shot changes [XML]
+- added: Save project #123
 - added: Move subtitle to current time #122
 - added: Actors
 - added: Snapping to shot changes
