@@ -315,7 +315,13 @@ begin
 
   if Subtitles.SaveToFile(FileName, _FPS, _Encoding, Format, SubtitleMode) then
   begin
+    if SubtitleMode = smText then
+      SubtitleInfo.Text.FileName := FileName
+    else
+      SubtitleInfo.Translation.FileName := FileName;
+
     SubtitleChangedReset(SubtitleMode);
+    RefreshAppTitle;
 
     with frmMain do
       MRU.Add(FileName, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPV.IsPlaying);
@@ -927,6 +933,12 @@ procedure SaveProjectWithDialog;
 var
   SD : TSaveDialog;
 begin
+  if SubtitleInfo.Text.FileName.IsEmpty then
+    SaveSubtitleWithDialog;
+
+  if SubtitleInfo.Translation.FileName.IsEmpty then
+    SaveSubtitleWithDialog(smTranslation);
+
   SD := TSaveDialog.Create(NIL);
   try
     SD.Title   := GetCommonString('SaveFile');
