@@ -46,15 +46,15 @@ Auto-translation API.
 
 ### Internal packages required to compile
 
-- [Subtitle API](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/subtitleapi)
-- [Tero controls](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/controls)
-- [UW Common](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/common)
+- [UW Subtitle API](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/subtitleapi)
+- [UW Tero controls](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/controls)
+- [UW Common units](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/common)
 
 ### External packages required to compile
 
 - [ATSynEdit](https://wiki.freepascal.org/ATSynEdit) ([EncConv](https://github.com/Alexey-T/EncConv), [ATFlatControls](https://github.com/Alexey-T/ATFlatControls))
 - [BGRABitmap](https://wiki.freepascal.org/BGRABitmap)
-- [UW_MPVPlayer](https://github.com/URUWorks/UW_MPVPlayer)
+- [UW MPVPlayer](https://github.com/URUWorks/UW_MPVPlayer)
 
 ## Contributions
 
