@@ -543,7 +543,7 @@ end;
 procedure TfrmMain.actMediaMoveSubtitleExecute(Sender: TObject);
 begin
   if (MPV.GetMediaLenInMs > 0) and actVideoPreview.Checked and (VST.SelectedCount > 0) then
-    VSTDoLoop(VST, @ApplyMoveSubtitle, dlSelected, True, True);
+    VSTMoveSubtitle(VST, True, True);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1569,6 +1569,20 @@ end;
 procedure TfrmMain.actActorExecute(Sender: TObject);
 begin
   ShowActors;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actLoadProjectExecute(Sender: TObject);
+begin
+  LoadProjectWithDialog;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actSaveProjectExecute(Sender: TObject);
+begin
+  SaveProjectWithDialog;
 end;
 
 // -----------------------------------------------------------------------------

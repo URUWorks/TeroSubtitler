@@ -54,6 +54,16 @@ procedure ImportSubtitleWithDialog;
 procedure ExportMarkedSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 procedure ExportTextOnlySubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 
+{ Project files }
+
+procedure LoadProject(const FileName: String);
+procedure SaveProject(const FileName: String);
+
+{ Project files with dialogs }
+
+procedure LoadProjectWithDialog;
+procedure SaveProjectWithDialog;
+
 { Transcription files }
 
 procedure LoadTranscription(const FileName: String);
@@ -85,7 +95,7 @@ implementation
 uses
   procCommon, procWorkspace, procVST, procSubtitle, procUndo, UWSystem.Encoding,
   formCustomFileDlg, UWSystem.XMLLang, UWSystem.SysUtils, Forms, procMRU,
-  UWSystem.StrUtils, procForms
+  UWSystem.StrUtils, procForms, procProjectFile
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -656,7 +666,7 @@ begin
       begin
         if Sub.Count > Subtitles.Count then
           c := Subtitles.Count
-        else //if Sub.Count < Subtitles.Count then
+        else
           c := Sub.Count;
 
         for i := 0 to c-1 do
@@ -668,8 +678,11 @@ begin
         UndoInstance.IncrementUndoGroup;
         UpdateValues(True);
 
-        if (SubtitleMode = smTranslation) and not Workspace.TranslatorMode then
-          SetTranslatorMode(True);
+        if (SubtitleMode = smTranslation) then
+        begin
+          SubtitleInfo.Translation.FileName := AFileName;
+          if not Workspace.TranslatorMode then SetTranslatorMode(True);
+        end;
       end;
     finally
       Sub.Free;
@@ -845,6 +858,86 @@ begin
     finally
       SD.Free;
     end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+{ Project files }
+
+// -----------------------------------------------------------------------------
+
+procedure LoadProject(const FileName: String);
+begin
+  if FileName.IsEmpty then Exit;
+  with TProjectFile.Create(FileName) do
+  try
+    if Ready then
+    begin
+      LoadSubtitle(Original, sfInvalid, NIL, -1, False);
+      if Subtitles.Count > 0 then
+        ReadSubtitleData(Translation, False, smTranslation);
+    end;
+  finally
+    Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SaveProject(const FileName: String);
+begin
+  if FileName.IsEmpty then Exit;
+  with TProjectFile.Create(FileName, False) do
+  try
+    Original    := SubtitleInfo.Text.FileName;
+    Translation := SubtitleInfo.Translation.FileName;
+    SaveProject;
+  finally
+    Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+{ Project files with dialogs }
+
+// -----------------------------------------------------------------------------
+
+procedure LoadProjectWithDialog;
+var
+  OD : TOpenDialog;
+begin
+  OD := TOpenDialog.Create(NIL);
+  try
+    OD.Title   := GetCommonString('OpenFile');
+    OD.Filter  := GetCommonString('ProjectFile') + '|*.stp';
+    OD.Options := OD.Options + [ofFileMustExist];
+
+    if OD.Execute then
+      LoadProject(OD.FileName);
+  finally
+    OD.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SaveProjectWithDialog;
+var
+  SD : TSaveDialog;
+begin
+  SD := TSaveDialog.Create(NIL);
+  try
+    SD.Title   := GetCommonString('SaveFile');
+    SD.Filter  := GetCommonString('ProjectFile') + '|*.stp';
+    SD.Options := [ofOverwritePrompt, ofEnableSizing];
+    //SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
+
+    if SD.Execute then
+      SaveProject(SD.FileName);
+  finally
+    SD.Free;
   end;
 end;
 

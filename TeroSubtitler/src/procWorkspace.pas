@@ -760,6 +760,7 @@ begin
     LayoutVSTResize(LayoutVST);
     VSTResize(VST);
   end;
+  RefreshAppTitle;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1102,7 +1103,12 @@ var
 begin
   s := ExtractFileName(SubtitleInfo.Text.FileName);
   if not s.IsEmpty then
-    s := s + ' - ' + ProgramName
+  begin
+    if Workspace.TranslatorMode then
+      s := s + ' / ' + iff(SubtitleInfo.Translation.FileName.IsEmpty, '?', ExtractFileName(SubtitleInfo.Translation.FileName));
+
+    s := s + ' - ' + ProgramName;
+  end
   else if not frmMain.MPV.FileName.IsEmpty then
     s := ExtractFileName(frmMain.MPV.FileName) + ' - ' + ProgramName
   else

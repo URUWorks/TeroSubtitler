@@ -112,8 +112,8 @@ procedure ApplyDelay(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^, frmDelay do
   begin
-    SetSubtitleTime(Index, SetDelay(InitialTime, iff(cboMode.ItemIndex = 0, tedTime.Value, -tedTime.Value)), 0, False, False);
-    SetSubtitleTime(Index, SetDelay(FinalTime, iff(cboMode.ItemIndex = 0, tedTime.Value, -tedTime.Value)), 1, False, False);
+    SetSubtitleTime(Index, SetDelay(InitialTime, iff(cboMode.ItemIndex = 0, tedTime.Value, -tedTime.Value)), frmMain.tedInitial.Tag, False, False);
+    SetSubtitleTime(Index, SetDelay(FinalTime, iff(cboMode.ItemIndex = 0, tedTime.Value, -tedTime.Value)), frmMain.tedFinal.Tag, False, False);
   end;
 end;
 

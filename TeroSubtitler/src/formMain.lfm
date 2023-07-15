@@ -1170,6 +1170,9 @@ object frmMain: TfrmMain
       object MenuItem167: TMenuItem
         Action = actLoadTranslation
       end
+      object MenuItem171: TMenuItem
+        Action = actLoadProject
+      end
       object mnuFileMRU: TMenuItem
         Caption = 'Recent files'
       end
@@ -1193,6 +1196,9 @@ object frmMain: TfrmMain
       end
       object MenuItem6: TMenuItem
         Action = actSaveTranslationAs
+      end
+      object MenuItem172: TMenuItem
+        Action = actSaveProject
       end
       object Separator29: TMenuItem
         Caption = '-'
@@ -3197,87 +3203,6 @@ object frmMain: TfrmMain
       Caption = 'Load translation...'
       OnExecute = actLoadTranslationExecute
     end
-    object actRestoreBackup: TAction
-      Category = 'File'
-      Caption = 'Restore backup...'
-      OnExecute = actRestoreBackupExecute
-    end
-    object actSaveSubtitle: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Save subtitle'
-      ImageIndex = 2
-      OnExecute = actSaveSubtitleExecute
-    end
-    object actSaveSubtitleAs: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Save subtitle as...'
-      OnExecute = actSaveSubtitleAsExecute
-    end
-    object actSaveTranslation: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Save translation'
-      OnExecute = actSaveTranslationExecute
-    end
-    object actSaveTranslationAs: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Save translation as...'
-      OnExecute = actSaveTranslationAsExecute
-    end
-    object actLoadTranscription: TAction
-      Category = 'File'
-      Caption = 'Transcription...'
-      OnExecute = actLoadTranscriptionExecute
-    end
-    object actSaveTranscription: TAction
-      Tag = 16
-      Category = 'File'
-      Caption = 'Transcription...'
-      OnExecute = actSaveTranscriptionExecute
-    end
-    object actImportSubtitles: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Import subtitles'
-      OnExecute = actImportSubtitlesExecute
-    end
-    object actExportMarkedSubtitles: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Export marked subtitles'
-      OnExecute = actExportMarkedSubtitlesExecute
-    end
-    object actExportTextOnly: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Export text only'
-      OnExecute = actExportTextOnlyExecute
-    end
-    object actExportCustomTextFormat: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Custom text format...'
-      OnExecute = actExportCustomTextFormatExecute
-    end
-    object actCompare: TAction
-      Category = 'File'
-      Caption = 'Compare...'
-      OnExecute = actCompareExecute
-    end
-    object actCloseSubtitle: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Close subtitle'
-      OnExecute = actCloseSubtitleExecute
-    end
-    object actCloseApp: TAction
-      Category = 'File'
-      Caption = 'Close'
-      OnExecute = actCloseAppExecute
-    end
     object actActor: TAction
       Tag = 1
       Category = 'Editor'
@@ -3420,6 +3345,97 @@ object frmMain: TfrmMain
       Category = 'Video'
       Caption = 'Extract waveform...'
       OnExecute = actWaveExtractExecute
+    end
+    object actLoadProject: TAction
+      Category = 'File'
+      Caption = 'Load project'
+      OnExecute = actLoadProjectExecute
+    end
+    object actRestoreBackup: TAction
+      Category = 'File'
+      Caption = 'Restore backup...'
+      OnExecute = actRestoreBackupExecute
+    end
+    object actSaveSubtitle: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save subtitle'
+      ImageIndex = 2
+      OnExecute = actSaveSubtitleExecute
+    end
+    object actSaveSubtitleAs: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save subtitle as...'
+      OnExecute = actSaveSubtitleAsExecute
+    end
+    object actSaveTranslation: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save translation'
+      OnExecute = actSaveTranslationExecute
+    end
+    object actSaveTranslationAs: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save translation as...'
+      OnExecute = actSaveTranslationAsExecute
+    end
+    object actSaveProject: TAction
+      Category = 'File'
+      Caption = 'Save project'
+      OnExecute = actSaveProjectExecute
+    end
+    object actLoadTranscription: TAction
+      Category = 'File'
+      Caption = 'Transcription...'
+      OnExecute = actLoadTranscriptionExecute
+    end
+    object actSaveTranscription: TAction
+      Tag = 16
+      Category = 'File'
+      Caption = 'Transcription...'
+      OnExecute = actSaveTranscriptionExecute
+    end
+    object actImportSubtitles: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Import subtitles'
+      OnExecute = actImportSubtitlesExecute
+    end
+    object actExportMarkedSubtitles: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Export marked subtitles'
+      OnExecute = actExportMarkedSubtitlesExecute
+    end
+    object actExportTextOnly: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Export text only'
+      OnExecute = actExportTextOnlyExecute
+    end
+    object actExportCustomTextFormat: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Custom text format...'
+      OnExecute = actExportCustomTextFormatExecute
+    end
+    object actCompare: TAction
+      Category = 'File'
+      Caption = 'Compare...'
+      OnExecute = actCompareExecute
+    end
+    object actCloseSubtitle: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Close subtitle'
+      OnExecute = actCloseSubtitleExecute
+    end
+    object actCloseApp: TAction
+      Category = 'File'
+      Caption = 'Close'
+      OnExecute = actCloseAppExecute
     end
   end
   object popDropInsert: TPopupMenu

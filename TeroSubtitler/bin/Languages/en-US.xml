@@ -46,6 +46,7 @@
       <actNewSubtitle Hint="Start a new subtitle project">New subtitle</actNewSubtitle>
       <actLoadSubtitle Hint="Load a subtitle file">Load subtitle...</actLoadSubtitle>
       <actLoadTranslation>Load translation...</actLoadTranslation>
+      <actLoadProject>Load project...</actLoadProject>
       <actUndo Hint="Undo last action">Undo</actUndo>
       <actRedo Hint="Redo last undo">Redo</actRedo>
       <actCut>Cut</actCut>
@@ -143,6 +144,7 @@
       <actSaveSubtitleAs Hint="Save current subtitle to a specific file">Save subtitle as...</actSaveSubtitleAs>
       <actSaveTranslation Hint="Save current translation to file">Save translation</actSaveTranslation>
       <actSaveTranslationAs Hint="Save current translation to a specific file">Save translation as...</actSaveTranslationAs>
+      <actSaveProject>Save project...</actSaveProject>
       <actCloseSubtitle>Close subtitles</actCloseSubtitle>
       <actCloseApp>Close</actCloseApp>
       <actImportSubtitles>Subtitles...</actImportSubtitles>
@@ -644,6 +646,7 @@
     <OpenFile>Open file</OpenFile>    
     <SaveFile>Save file</SaveFile>  
     <AllSupportedFiles>All supported files</AllSupportedFiles>
+    <ProjectFile>Subtitle Translation Project</ProjectFile>
     <UnableToLoad>Error loading file, unrecognized format.</UnableToLoad>
     <FileNotFound>File cannot be found.</FileNotFound>
     <SaveSubtitleError>Error trying to save the file.</SaveSubtitleError>

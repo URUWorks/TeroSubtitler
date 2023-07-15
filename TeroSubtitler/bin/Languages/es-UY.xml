@@ -46,6 +46,7 @@
       <actNewSubtitle Hint="Iniciar un nuevo proyecto de subtítulos">Nuevo subtítulo</actNewSubtitle>
       <actLoadSubtitle Hint="Abrir un archivo de subtítulos">Abrir subtítulo...</actLoadSubtitle>
       <actLoadTranslation>Abrir traducción...</actLoadTranslation>
+      <actLoadProject>Abrir proyecto...</actLoadProject>
       <actUndo Hint="Deshacer última acción">Deshacer</actUndo>
       <actRedo Hint="Rehacer última acción">Rehacer</actRedo>
       <actCut>Cortar</actCut>
@@ -143,6 +144,7 @@
       <actSaveSubtitleAs Hint="Guarda el subtítulo en un archivo específico">Guardar subtítulo como...</actSaveSubtitleAs>
       <actSaveTranslation Hint="Guarda la traducción actual en archivo">Guardar traducción</actSaveTranslation>
       <actSaveTranslationAs Hint="Guarda la traducción actual en archivo específico">Guardar traducción como...</actSaveTranslationAs>
+      <actSaveProject>Guardar proyecto...</actSaveProject>
       <actCloseSubtitle>Cerrar subtítulos</actCloseSubtitle>
       <actCloseApp>Salir</actCloseApp>
       <actImportSubtitles>Subtítulos...</actImportSubtitles>
@@ -644,6 +646,7 @@
     <OpenFile>Abrir archivo</OpenFile>    
     <SaveFile>Guardar archivo</SaveFile>    
     <AllSupportedFiles>Todos los archivos compatibles</AllSupportedFiles>
+    <ProjectFile>Proyecto de traducción de subtítulos</ProjectFile>
     <UnableToLoad>Error al cargar el archivo, formato no reconocido.</UnableToLoad>
     <FileNotFound>No se puede encontrar el archivo.</FileNotFound>
     <SaveSubtitleError>Error al intentar guardar el archivo.</SaveSubtitleError>    

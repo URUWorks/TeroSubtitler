@@ -54,6 +54,7 @@ function VSTFind(const FindText: String; const CaseSensitive: Boolean; const Fro
 procedure VSTFindPrevious;
 procedure VSTFindNext;
 procedure VSTDoLoop(const AVST: TLazVirtualStringTree; Proc: TVSTDoLoopProc; const Selection: TVSTDoLoopSelection = dlSelected; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
+procedure VSTMoveSubtitle(const AVST: TLazVirtualStringTree; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
 
 procedure VSTAdjustSubtitles(const AdjSub: TAdjustSubtitles);
 procedure VSTSort(const AVST: TLazVirtualStringTree);
@@ -773,6 +774,39 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure VSTMoveSubtitle(const AVST: TLazVirtualStringTree; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
+var
+  Item  : PUWSubtitleItem;
+  Delay : Integer;
+  Run   : PVirtualNode;
+begin
+  Run := AVST.GetFirstSelected;
+  if Assigned(Run) then
+  begin
+    Delay := frmMain.MPV.GetMediaPosInMs - Subtitles.ItemPointer[Run^.Index]^.InitialTime;
+    while Assigned(Run) do
+    begin
+      Item := Subtitles.ItemPointer[Run^.Index];
+      if Assigned(Item) then
+        with Item^ do
+        begin
+          SetSubtitleTime(Run^.Index, SetDelay(InitialTime, Delay), frmMain.tedInitial.Tag, False, False);
+          SetSubtitleTime(Run^.Index, SetDelay(FinalTime, Delay), frmMain.tedFinal.Tag, False, False);
+        end;
+      Run := AVST.GetNextSelected(Run);
+    end;
+
+    if IncrementUndo then
+    begin
+      UndoInstance.IncrementUndoGroup;
+      SubtitleChanged(True, True);
+    end;
+
+    if Refresh then UpdateValues(True);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
 
 procedure VSTAdjustSubtitles(const AdjSub: TAdjustSubtitles);
 var
