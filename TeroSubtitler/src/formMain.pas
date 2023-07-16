@@ -1233,15 +1233,18 @@ begin
 
   cboFPS.ItemIndex := cboInputFPS.ItemIndex;
   Workspace.FPS.OutputFPS := Workspace.FPS.DefFPS;
+  SetTimeFPStoTimeEditCtrls;
+  UpdateValues(True);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.cboFPSSelect(Sender: TObject);
 begin
-  VSTDoLoop(VST, @ApplyChangeFPS, dlAll, True, True);
+  VSTDoLoop(VST, @ApplyChangeFPS, dlAll, False, True);
   Workspace.FPS.OutputFPS := GetFPS;
   SetTimeFPStoTimeEditCtrls;
+  UpdateValues(True);
 end;
 
 // -----------------------------------------------------------------------------

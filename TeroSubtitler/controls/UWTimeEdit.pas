@@ -546,12 +546,12 @@ end;
 
 procedure TUWTimeEdit.SetValueOnly(const NewValue: Integer);
 begin
-  if FValue <> NewValue then
-  begin
+  //if FValue <> NewValue then
+  //begin
     FValue := NewValue;
     Constrain(FValue, 0, MaxTime);
     UpdateValue(False);
-  end;
+  //end;
 end;
 
 // -----------------------------------------------------------------------------

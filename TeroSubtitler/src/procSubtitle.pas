@@ -123,11 +123,14 @@ begin
   else
     Result := Subtitles.Add(Item, NIL);
 
-  SubtitleChanged(True, True);
   UndoInstance.AddUndo(utInsertLine, Result, Item, AutoIncrementUndo);
 
   frmMain.VST.RootNodeCount := Subtitles.Count;
-  if AUpdate then UpdateValues(True);
+  if AUpdate then
+  begin
+    UpdateValues(True);
+    SubtitleChanged(True, True);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -153,9 +156,12 @@ begin
   UndoInstance.AddUndo(utDeleteLine, Index, Subtitles[Index], AutoIncrementUndo);
 
   Subtitles.Delete(Index);
-  SubtitleChanged(True, True);
   frmMain.VST.RootNodeCount := Subtitles.Count;
-  if AUpdate then UpdateValues(True);
+  if AUpdate then
+  begin
+    UpdateValues(True);
+    SubtitleChanged(True, True);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -196,6 +202,7 @@ begin
 
   if AUpdate then
   begin
+    SubtitleChanged(True, True);
     if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
     UpdateCPSAndTexts(Index);
     if frmMain.VST.SelectedCount = 1 then frmMain.VST.Invalidate;
@@ -227,9 +234,9 @@ begin
     end;
   end;
 
-  SubtitleChanged(True, True);
   if AUpdate then
   begin
+    SubtitleChanged(True, True);
     if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
     UpdateCPSAndTexts(Index);
     if frmMain.VST.SelectedCount = 1 then frmMain.VST.Invalidate;
@@ -247,18 +254,13 @@ begin
 
 
   if SubtitleMode = smText then
-  begin
-    Subtitles.Text[Index] := Text;
-    SubtitleChanged(True, False);
-  end
+    Subtitles.Text[Index] := Text
   else
-  begin
     Subtitles.Translation[Index] := Text;
-    SubtitleChanged(False, True);
-  end;
 
   if AUpdate then
   begin
+    SubtitleChanged(SubtitleMode = smText, SubtitleMode = smTranslation);
     if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts]);
     UpdateCPSAndTexts(Index);
     frmMain.VST.Invalidate;
@@ -276,10 +278,10 @@ begin
 
   Subtitles.Text[Index]        := Text;
   Subtitles.Translation[Index] := Translation;
-  SubtitleChanged(True, True);
 
   if AUpdate then
   begin
+    SubtitleChanged(True, True);
     if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts]);
     UpdateCPSAndTexts(Index);
     frmMain.VST.Invalidate;

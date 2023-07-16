@@ -1255,8 +1255,7 @@ begin
         LastIndex := -1;
         NodeIndex := VST.GetFirstSelected^.Index;
         if VST.SelectedCount > 1 then LastIndex := VSTLastSelectedNodeIndex(VST);
-        if not Subtitles.ValidIndex(LastIndex) then
-          LastIndex := NodeIndex;
+        if not Subtitles.ValidIndex(LastIndex) then LastIndex := NodeIndex;
 
         tedInitial.SetValueOnly(Subtitles[NodeIndex].InitialTime);
         tedFinal.SetValueOnly(Subtitles[LastIndex].FinalTime);
