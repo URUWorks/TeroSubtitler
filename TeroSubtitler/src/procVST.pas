@@ -709,7 +709,11 @@ begin
     end;
   end;
 
-  if Replace then UpdateValues(True);
+  if Replace then
+  begin
+    UpdateValues(True);
+    DoAutoCheckErrors;
+  end;
 
   with frmMain do
   begin
@@ -802,7 +806,12 @@ begin
     UndoInstance.IncrementUndoGroup;
     SubtitleChanged(True, True);
   end;
-  if Refresh then UpdateValues(True);
+
+  if Refresh then
+  begin
+    UpdateValues(True);
+    DoAutoCheckErrors;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -835,7 +844,11 @@ begin
       SubtitleChanged(True, True);
     end;
 
-    if Refresh then UpdateValues(True);
+    if Refresh then
+    begin
+      UpdateValues(True);
+      DoAutoCheckErrors;
+    end;
   end;
 end;
 
