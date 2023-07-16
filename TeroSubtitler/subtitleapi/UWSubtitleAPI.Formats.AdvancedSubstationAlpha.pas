@@ -142,7 +142,7 @@ end;
 
 function TUWAdvancedSubstationAlpha.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
-  i    : Integer;
+  i, it, ft : Integer;
   Text : String;
 begin
   Result  := False;
@@ -172,7 +172,14 @@ begin
     Text := ReplaceString(Text, '{/b}', '{\b1}');
     Text := ReplaceString(Text, '{/u}', '{\u1}');
 
-    StringList.Add('Dialogue: 0,' + TimeToString(Subtitles[i].InitialTime, 'h:mm:ss.zz') + ',' + TimeToString(Subtitles[i].FinalTime, 'h:mm:ss.zz') + ',Default,,0000,0000,0000,,' + Text, False);
+    it := Subtitles[i].InitialTime;
+    ft := Subtitles[i].FinalTime;
+    if Subtitles.TimeBase = stbSMPTE then
+    begin
+      it := Round(it / 1.001);
+      ft := Round(ft / 1.001);
+    end;
+    StringList.Add('Dialogue: 0,' + TimeToString(it, 'h:mm:ss.zz') + ',' + TimeToString(ft, 'h:mm:ss.zz') + ',Default,,0000,0000,0000,,' + Text, False);
   end;
 
   try
