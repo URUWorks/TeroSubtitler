@@ -1254,7 +1254,7 @@ begin
       begin
         LastIndex := -1;
         NodeIndex := VST.GetFirstSelected^.Index;
-        if VST.SelectedCount > 1 then LastIndex := VSTLastSelectedNode(VST);
+        if VST.SelectedCount > 1 then LastIndex := VSTLastSelectedNodeIndex(VST);
         if not Subtitles.ValidIndex(LastIndex) then
           LastIndex := NodeIndex;
 
