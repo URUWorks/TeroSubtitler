@@ -176,8 +176,8 @@ begin
     ft := Subtitles[i].FinalTime;
     if Subtitles.TimeBase = stbSMPTE then
     begin
-      it := Round(it / 1.001);
-      ft := Round(ft / 1.001);
+      it := Trunc(it * 1.001);
+      ft := Trunc(ft * 1.001);
     end;
     StringList.Add('Dialogue: 0,' + TimeToString(it, 'h:mm:ss.zz') + ',' + TimeToString(ft, 'h:mm:ss.zz') + ',Default,,0000,0000,0000,,' + Text, False);
   end;
