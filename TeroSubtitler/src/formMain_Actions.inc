@@ -790,6 +790,15 @@ procedure TfrmMain.actSMPTEExecute(Sender: TObject);
 begin
   MPV.SMPTEMode := actSMPTE.Checked;
   WAVE.SetSceneChangeTimeMode(actSMPTE.Checked);
+  if MPVOptions.SubtitleHandleByMPV then
+  begin
+    if MPV.SMPTEMode then
+      Subtitles.TimeBase := stbSMPTE
+    else
+      Subtitles.TimeBase := stbMedia;
+
+    if MPV.Initialized then MPVSaveSubtitleTempTrack;
+  end;
   UpdateVideoLengthString;
 end;
 

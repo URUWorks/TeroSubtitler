@@ -189,6 +189,7 @@ type
   { TMPVOptions }
 
   TMPVOptions = record
+    SubtitleHandleByMPV    : Boolean; // mpv handles the subtitle
     TextColor              : String;
     TextBorderColor        : String;
     TextShadowColor        : String;

@@ -77,6 +77,7 @@ function libMPVFileName(const AFullRoot: Boolean = True): String;
 function YTDLPFileName(const AFullRoot: Boolean = True): String;
 function ffmpegFileName: String;
 function LogMPVFileName: String;
+function MPVTempSubFileName: String;
 function DictionariesFolder: String;
 function BackupFolder: String;
 function ProjectsFolder: String;
@@ -153,6 +154,7 @@ begin
   FillByte(MPVOptions, SizeOf(TMPVOptions), 0);
   with MPVOptions do
   begin
+    SubtitleHandleByMPV    := False;
     TextColor              := '#FFFFFF';
     TextBorderColor        := '#000000';
     TextShadowColor        := '#000000';
@@ -439,6 +441,7 @@ begin
       with MPVOptions, frmMain do
       begin
         OpenKey('MPV');
+        SubtitleHandleByMPV := GetValue('SubtitleHandleByMPV', SubtitleHandleByMPV);
         AutoStartPlaying := GetValue('AutoStartPlaying', AutoStartPlaying);
         SubtitleToShow := TSubtitleMode(GetValue('SubtitleToShow', Integer(SubtitleToShow)));
         actMediaAutoScroll.Checked := GetValue('UpdateListOnPreview', actMediaAutoScroll.Checked);
@@ -715,6 +718,7 @@ begin
       with MPVOptions, frmMain do
       begin
         OpenKey('MPV');
+        SetValue('SubtitleHandleByMPV', SubtitleHandleByMPV);
         SetValue('AutoStartPlaying', AutoStartPlaying);
         SetValue('SubtitleToShow', Integer(SubtitleToShow));
         SetValue('UpdateListOnPreview', actMediaAutoScroll.Checked);
@@ -1367,6 +1371,13 @@ begin
   {$ELSE}
   Result := GetCustomFilePath(RootCfg+'_mpv.log');
   {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
+function MPVTempSubFileName: String;
+begin
+  Result := ConcatPaths([GetTempDir, '_tssubtmp.ass']);
 end;
 
 // -----------------------------------------------------------------------------

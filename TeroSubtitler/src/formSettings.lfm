@@ -1,12 +1,12 @@
 object frmSettings: TfrmSettings
   Left = 235
-  Height = 596
+  Height = 593
   Top = 115
   Width = 672
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Settings'
-  ClientHeight = 596
+  ClientHeight = 593
   ClientWidth = 672
   OnClose = FormClose
   OnCreate = FormCreate

@@ -32,12 +32,16 @@ procedure MPVPlay(const PlayMode: TMediaPlayMode = mpmAll);
 procedure MPVSeekTo(const AForward: Boolean; const MSecsToSeek: Integer); overload;
 procedure MPVSeekTo(const Value: Integer; const Play: Boolean = False); overload;
 procedure MPVAlterPlayRate(const Value: Boolean);
+procedure MPVLoadSubtitleTempTrack;
+procedure MPVReloadSubtitleTempTrack;
+function MPVSaveSubtitleTempTrack: Boolean;
+procedure MPVDeleteSubtitleTempTrack;
 
 // -----------------------------------------------------------------------------
 
 implementation
 
-uses MPVPlayer, procCommon;
+uses MPVPlayer, procCommon, UWSystem.Encoding;
 
 // -----------------------------------------------------------------------------
 
@@ -186,6 +190,39 @@ begin
       MPV.SetPlaybackRate(AppOptions.DefChangePlayRate)
     else
       MPV.SetPlaybackRate(100);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MPVLoadSubtitleTempTrack;
+begin
+  frmMain.MPV.LoadTrack(ttSubtitle, MPVTempSubFileName);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MPVReloadSubtitleTempTrack;
+begin
+  frmMain.MPV.ReloadTrack(ttSubtitle);
+end;
+
+// -----------------------------------------------------------------------------
+
+function MPVSaveSubtitleTempTrack: Boolean;
+var
+  AFPS      : Single;
+  AEncoding : TEncoding;
+begin
+  AFPS      := Workspace.FPS.OutputFPS;
+  AEncoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID);
+  Result    := Subtitles.SaveToFile(MPVTempSubFileName, AFPS, AEncoding, sfAdvancedSubStationAlpha, smText);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MPVDeleteSubtitleTempTrack;
+begin
+  if FileExists(MPVTempSubFileName) then DeleteFile(MPVTempSubFileName);
 end;
 
 // -----------------------------------------------------------------------------

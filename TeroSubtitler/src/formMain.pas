@@ -1081,6 +1081,8 @@ begin
     WAVE.Subtitles := NIL;
     // Free SubtitleAPI
     Subtitles.Free;
+    // Temp subtitle
+    MPVDeleteSubtitleTempTrack;
   end;
 end;
 

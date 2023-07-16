@@ -67,8 +67,14 @@ begin
   if not WAVE.IsPeakDataLoaded then
     WAVE.EmptyText := LanguageManager.GetAppString('WaveformText');
 
-  timerSubtitle.Enabled := True;
+  timerSubtitle.Enabled := not MPVOptions.SubtitleHandleByMPV;
   timerWaveform.Enabled := True;
+
+  if MPVOptions.SubtitleHandleByMPV then
+  begin
+    if MPVSaveSubtitleTempTrack then
+      MPVLoadSubtitleTempTrack;
+  end;
 
   if Assigned(MRUInfoObject) then
   begin

@@ -72,7 +72,7 @@ implementation
 
 uses
   formMain, procVST, procUndo, procVST_Loops, procWorkspace, procFixSubtitles,
-  UWSystem.Encoding, UWSystem.TimeUtils, UWSystem.StrUtils,
+  UWSystem.Encoding, UWSystem.TimeUtils, UWSystem.StrUtils, procFiles, procMPV,
   UWSubtitleAPI.Tags, UWSubtitleAPI.Formats, procTranscription;
 
 // -----------------------------------------------------------------------------
@@ -166,6 +166,12 @@ begin
   begin
     if AText        then Text.Changed        := True;
     if ATranslation then Translation.Changed := True;
+  end;
+
+  if MPVOptions.SubtitleHandleByMPV then
+  begin
+    if MPVSaveSubtitleTempTrack then
+      MPVReloadSubtitleTempTrack;
   end;
 end;
 
