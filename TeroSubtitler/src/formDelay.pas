@@ -109,11 +109,13 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure ApplyDelay(const Item: PUWSubtitleItem; const Index: Integer);
+var
+  d: Integer;
 begin
   with Item^, frmDelay do
   begin
-    SetSubtitleTime(Index, SetDelay(InitialTime, iff(cboMode.ItemIndex = 0, tedTime.Value, -tedTime.Value)), frmMain.tedInitial.Tag, False, False);
-    SetSubtitleTime(Index, SetDelay(FinalTime, iff(cboMode.ItemIndex = 0, tedTime.Value, -tedTime.Value)), frmMain.tedFinal.Tag, False, False);
+    d := iff(cboMode.ItemIndex = 0, tedTime.Value, -tedTime.Value);
+    SetSubtitleTimes(Index, SetDelay(InitialTime, d), SetDelay(FinalTime, d), False, False);
   end;
 end;
 
