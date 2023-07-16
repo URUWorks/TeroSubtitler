@@ -35,7 +35,8 @@ procedure VSTSetNodeHeight(const AVST: TLazVirtualStringTree; const AHeight: Int
 procedure VSTShowColumn(const AVST: TLazVirtualStringTree; const Index: Integer; const Visible: Boolean);
 
 function VSTFocusedNode(const AVST: TLazVirtualStringTree): Integer;
-function VSTLastSelectedNode(const AVST: TLazVirtualStringTree): Integer;
+function VSTLastSelectedNode(const AVST: TLazVirtualStringTree): PVirtualNode;
+function VSTLastSelectedNodeIndex(const AVST: TLazVirtualStringTree): Integer;
 function VSTGetNodeAtIndex(const AVST: TLazVirtualStringTree; const AIndex: Integer): PVirtualNode;
 procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer; const AClear: Boolean); overload;
 procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean); overload;
@@ -159,19 +160,29 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function VSTLastSelectedNode(const AVST: TLazVirtualStringTree): Integer;
+function VSTLastSelectedNode(const AVST: TLazVirtualStringTree): PVirtualNode;
 var
   Node: PVirtualNode;
 begin
-  Result := -1;
-  Node   := AVST.GetFirstSelected;
+  Node := AVST.GetFirstSelected;
   if Assigned(Node) then
-  begin
     while Assigned(AVST.GetNextSelected(Node)) do
       Node := AVST.GetNextSelected(Node);
 
-    Result := Node^.Index;
-  end;
+  Result := Node;
+end;
+
+// -----------------------------------------------------------------------------
+
+function VSTLastSelectedNodeIndex(const AVST: TLazVirtualStringTree): Integer;
+var
+  Node: PVirtualNode;
+begin
+  Node := VSTLastSelectedNode(AVST);
+  if Assigned(Node) then
+    Result := Node^.Index
+  else
+    Result := -1;
 end;
 
 // -----------------------------------------------------------------------------
@@ -396,27 +407,49 @@ var
   Item      : PUWSubtitleItem;
   ti, tf    : Integer;
   pos, i    : Integer;
+  Pause     : Integer;
   SelArray  : TIntegerDynArray;
 begin
+  Pause := GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames);
   // Multiple subtitles selected
   if AVST.SelectedCount > 1 then
   begin
-    i := 0;
     SelArray := NIL;
     SetLength(SelArray, AVST.SelectedCount);
     try
-      Run := AVST.GetFirstSelected;
-      while Assigned(Run) do
+      if Before then
       begin
-        Item := Subtitles.ItemPointer[Run^.Index];
-        if Assigned(Item) then
+        i := AVST.SelectedCount-1;
+        Run := VSTLastSelectedNode(AVST);
+        while Assigned(Run) do
         begin
-          ti  := (Item^.FinalTime + 1);
-          tf  := ti + AppOptions.Conventions.NewSubtitleMs;
-          SelArray[i] := InsertSubtitle(Run^.Index+1, ti, tf, '', '', False);
-          Inc(i);
+          Item := Subtitles.ItemPointer[Run^.Index];
+          if Assigned(Item) then
+          begin
+            ti  := Item^.InitialTime - AppOptions.Conventions.NewSubtitleMs - Pause;
+            tf  := ti + AppOptions.Conventions.NewSubtitleMs;
+            SelArray[i] := InsertSubtitle(Run^.Index, ti, tf, '', '', False);
+            Dec(i);
+          end;
+          Run := AVST.GetPreviousSelected(Run);
         end;
-        Run := AVST.GetNextSelected(Run);
+      end
+      else
+      begin
+        i := 0;
+        Run := AVST.GetFirstSelected;
+        while Assigned(Run) do
+        begin
+          Item := Subtitles.ItemPointer[Run^.Index];
+          if Assigned(Item) then
+          begin
+            ti  := Item^.FinalTime + Pause;
+            tf  := ti + AppOptions.Conventions.NewSubtitleMs;
+            SelArray[i] := InsertSubtitle(Run^.Index+1, ti, tf, '', '', False);
+            Inc(i);
+          end;
+          Run := AVST.GetNextSelected(Run);
+        end;
       end;
       VSTSelectNodes(AVST, SelArray, True);
     finally
@@ -429,24 +462,24 @@ begin
     pos := -1;
     i   := VSTFocusedNode(AVST);
 
-    if i >= 0 then
+    if i > 0 then
     begin
-      if frmMain.MPV.GetMediaLenInMs = 0 then
-        ti := Subtitles[i].FinalTime + 1
-      else
-        ti := frmMain.MPV.GetMediaPosInMs;
-
-      if not Before then
-        pos := i+1
-      else
+      if Before then
+      begin
+        ti := Subtitles[i].InitialTime - AppOptions.Conventions.NewSubtitleMs - Pause;
         pos := i;
+      end
+      else
+      begin
+        ti := Subtitles[i].FinalTime + Pause;
+        pos := i+1;
+      end;
     end
-    else if Subtitles.Count > 0 then
-      ti := Subtitles.Items[Subtitles.Count].FinalTime + 1
+    else if (i <> 0) and (Subtitles.Count > 0) then
+      ti := Subtitles.Items[Subtitles.Count-1].FinalTime + Pause
     else
       ti := 0;
 
-    //ti := ti + Options.FakeStart;
     tf := ti + AppOptions.Conventions.NewSubtitleMs;
     VSTSelectNode(AVST, InsertSubtitle(pos, ti, tf, '', ''), True);
   end;
@@ -721,7 +754,7 @@ begin
       c := AFrom;
       x := ATo;
     end
-    else if (Selection = dlSelected) or (Selection = dlCurrentToLast) then
+    else if (Selection = dlCurrentToLast) then
       c := Range(VSTFocusedNode(AVST), 0, Subtitles.Count-1);
 
     for i := c to x do
