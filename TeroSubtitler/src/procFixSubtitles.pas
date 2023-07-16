@@ -110,33 +110,33 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile: PProfileItem = NIL; const AShotChanges: TIntegerDynArray = NIL);
+
+  procedure ClearItem(var AFixedItem: TSubtitleInfoItem; const Index: Integer);
+  begin
+    AFixedItem.Index       := Index;
+    AFixedItem.Apply       := True;
+    AFixedItem.InitialTime := FSubtitles[Index].InitialTime;
+    AFixedItem.FinalTime   := FSubtitles[Index].FinalTime;
+    AFixedItem.Text        := FSubtitles[Index].Text;
+    AFixedItem.ErrorsFixed := [etNone];
+  end;
+
 var
   FixedItem : TSubtitleInfoItem;
   i, x      : Integer;
   tmp, s    : String;
   ocr       : TUWOCRScript;
-  iGap      : Integer;
+  GapMs     : Integer;
 
   Idx, IdxForward, IdxBackward,
   DistForward, DistBackward,
   SnapMs, InCue, OutCue,
   Candidate1, Candidate2: Integer;
-
-  procedure ClearItem(const Index: Integer);
-  begin
-    FixedItem.Index       := Index;
-    FixedItem.Apply       := True;
-    FixedItem.InitialTime := FSubtitles[Index].InitialTime;
-    FixedItem.FinalTime   := FSubtitles[Index].FinalTime;
-    FixedItem.Text        := FSubtitles[Index].Text;
-    FixedItem.ErrorsFixed := [etNone];
-  end;
-
 begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
 
   Clear;
-  iGap   := GetCorrectTime(Profile^.MinPause, Profile^.PauseInFrames);
+  GapMs  := GetCorrectTime(Profile^.MinPause, Profile^.PauseInFrames);
   SnapMs := FramesToTime(Profile^.ShotcutSnapArea, Workspace.FPS.OutputFPS);
   InCue  := FramesToTime(Profile^.ShotcutInCues, Workspace.FPS.OutputFPS);
   OutCue := FramesToTime(Profile^.ShotcutOutCues, Workspace.FPS.OutputFPS);
@@ -144,7 +144,7 @@ begin
   try
     for i := 0 to FSubtitles.Count-1 do
     begin
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Repeated subtitle
       if etRepeatedSubtitle in FErrors then
       begin
@@ -155,7 +155,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Unbreak if chars is less than X
       if etUnbreak in FErrors then
       begin
@@ -169,7 +169,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Unnecessary Spaces
       if etUnnecessarySpaces in FErrors then
       begin
@@ -182,7 +182,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Unnecessary Dots
       if etUnnecessaryDots in FErrors then
       begin
@@ -195,7 +195,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Empty subtitle
       if etEmpty in FErrors then
       begin
@@ -206,7 +206,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Ellipses dots to single smart character
       if etEllipsesSingleSmartCharacter in FErrors then
       begin
@@ -219,7 +219,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Fix Tags
       if etFixTags in FErrors then
       begin
@@ -240,7 +240,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Prohibited chars
       if etProhibitedChars in FErrors then
       begin
@@ -251,7 +251,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Break long lines
       if etBreakLongLines in FErrors then
       begin
@@ -267,7 +267,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Hearing impaired
       if etHearingImpaired in FErrors then
       begin
@@ -290,7 +290,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Repeated chars
       if etRepeatedChars in FErrors then
       begin
@@ -306,7 +306,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // OCR
       if etOCR in FErrors then
       begin
@@ -322,7 +322,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Time too short
       if etTimeTooShort in FErrors then
       begin
@@ -334,7 +334,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Time too long
       if etTimeTooLong in FErrors then
       begin
@@ -346,7 +346,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Bad Values
       if etBadValues in FErrors then
       begin
@@ -360,7 +360,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Overlapping
       if etOverlapping in FErrors then
       begin
@@ -368,7 +368,7 @@ begin
         begin
           if FixedItem.InitialTime <= FSubtitles[i-1].FinalTime then
           begin
-            FixedItem.InitialTime := FSubtitles[i-1].FinalTime + iGap;
+            FixedItem.InitialTime := FSubtitles[i-1].FinalTime + GapMs;
             FixedItem.ErrorsFixed := [etOverlapping, etOverlappingWithPrev];
             Add(FixedItem);
           end;
@@ -389,7 +389,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Incomplete opening hyphen text
       if etIncompleteHyphenText in FErrors then
       begin
@@ -402,7 +402,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Spacing of opening hyphen (Add or Remove)
       if etSpaceOfOpeningHyphen in FErrors then
       begin
@@ -415,7 +415,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Remove spaces within brackets
       if etRemoveSpacesWithinBrackets in FErrors then
       begin
@@ -428,7 +428,7 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Fix interrobang
       if etFixInterrobang in FErrors then
       begin
@@ -441,45 +441,42 @@ begin
         end;
       end;
 
-      ClearItem(i);
+      ClearItem(FixedItem, i);
       // Snap to shot changes
-      if etSnapToShotChanges in FErrors then
+      if (etSnapToShotChanges in FErrors) and (AShotChanges <> NIL) and (Length(AShotChanges) > 0) then
       begin
-        if (AShotChanges <> NIL) and (Length(AShotChanges) > 0) then
+        Idx         := BinarySearch_IntArray(AShotChanges, FixedItem.InitialTime);
+        IdxForward  := Idx;
+        IdxBackward := Idx - 1;
+
+        if (IdxForward < Length(AShotChanges)-1) and (IdxBackward >= 0) then
         begin
-          Idx         := BinarySearch_IntArray(AShotChanges, FixedItem.InitialTime);
-          IdxForward  := Idx;
-          IdxBackward := Idx - 1;
+          DistForward  := AShotChanges[IdxForward] - FixedItem.InitialTime;
+          DistBackward := FixedItem.InitialTime - AShotChanges[IdxBackward];
 
-          if (IdxForward < Length(AShotChanges)) and (IdxBackward >= 0) then
+          if (DistForward < DistBackward) then
           begin
-            DistForward  := AShotChanges[IdxForward] - FixedItem.InitialTime;
-            DistBackward := FixedItem.InitialTime - AShotChanges[IdxBackward];
+            Candidate1 := AShotChanges[IdxForward];
+            Candidate2 := AShotChanges[IdxForward+1];
+          end
+          else
+          begin
+            Candidate1 := AShotChanges[IdxBackward];
+            Candidate2 := AShotChanges[IdxForward];
+          end;
 
-            if (DistForward < DistBackward) then
-            begin
-              Candidate1 := AShotChanges[IdxForward];
-              Candidate2 := AShotChanges[IdxForward+1];
-            end
-            else
-            begin
-              Candidate1 := AShotChanges[IdxBackward];
-              Candidate2 := AShotChanges[IdxForward];
-            end;
+          if (Abs(Candidate1 - FixedItem.InitialTime) < SnapMs) then
+          begin
+            FixedItem.InitialTime := Candidate1 + InCue;
+            FixedItem.ErrorsFixed := [etSnapToShotChangesInCue];
+            Add(FixedItem);
+          end;
 
-            if (Abs(Candidate1 - FixedItem.InitialTime) > InCue) and (Abs(Candidate1 - FixedItem.InitialTime) < SnapMs) then
-            begin
-              FixedItem.InitialTime := Candidate1 + InCue;
-              FixedItem.ErrorsFixed := [etSnapToShotChangesInCue];
-              Add(FixedItem);
-            end;
-
-            if (Abs(Candidate2 - FixedItem.FinalTime) > OutCue) and (Abs(Candidate2 - FixedItem.FinalTime) < SnapMs) then
-            begin
-              FixedItem.FinalTime   := Candidate2 - OutCue;
-              FixedItem.ErrorsFixed := [etSnapToShotChangesOutCue];
-              Add(FixedItem);
-            end;
+          if (Abs(Candidate2 - FixedItem.FinalTime) < SnapMs) then
+          begin
+            FixedItem.FinalTime   := Candidate2 - OutCue;
+            FixedItem.ErrorsFixed := [etSnapToShotChangesOutCue];
+            Add(FixedItem);
           end;
         end;
       end;
