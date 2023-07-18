@@ -53,7 +53,7 @@ type
   private
     FUndoList      : TUndoList;
     FRedoList      : TUndoList;
-    FMax           : Byte;
+    FMax           : Integer;
     FLastUndoGroup : Byte;
     FLastTickCount : Cardinal;
     FOnChange      : TUndoChangeEvent;
@@ -72,7 +72,7 @@ type
     procedure Undo(const VST: TLazVirtualStringTree);
     procedure Redo(const VST: TLazVirtualStringTree);
     procedure IncrementUndoGroup;
-    property Max: Byte read FMax write FMax;
+    property Max: Integer read FMax write FMax;
     property OnChange: TUndoChangeEvent read FOnChange write SetOnChanged;
   end;
 
@@ -203,7 +203,7 @@ constructor TUndo.Create;
 begin
   FUndoList      := TUndoList.Create;
   FRedoList      := TUndoList.Create;
-  FMax           := 100;
+  FMax           := 1000;
   FLastUndoGroup := 0;
   FLastTickCount := GetTickCount;
 end;
