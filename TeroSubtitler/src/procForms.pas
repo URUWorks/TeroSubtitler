@@ -339,18 +339,24 @@ begin
     else if OldShiftMs <> AppOptions.ShiftTimeMS then
       UpdateCommonActionString;
 
-    if OldHandleByMPV <> MPVOptions.SubtitleHandleByMPV then
+    if frmMain.MPV.IsMediaLoaded then
     begin
-      if MPVOptions.SubtitleHandleByMPV then
+      if (OldHandleByMPV <> MPVOptions.SubtitleHandleByMPV) then
       begin
-        if MPVSaveSubtitleTempTrack then
-          MPVLoadSubtitleTempTrack;
+        if MPVOptions.SubtitleHandleByMPV then
+        begin
+          frmMain.MPV.ShowText('', '');
+          if MPVSaveSubtitleTempTrack then
+            MPVLoadSubtitleTempTrack;
+        end
+        else
+        begin
+          MPVRemoveSubtitleTempTrack;
+          MPVDeleteSubtitleTempTrack;
+        end;
       end
-      else
-      begin
-        MPVRemoveSubtitleTempTrack;
-        MPVDeleteSubtitleTempTrack;
-      end;
+      else if MPVOptions.SubtitleHandleByMPV then
+        MPVReloadSubtitleTempTrack(True);
     end;
 
     DoAutoCheckErrors;

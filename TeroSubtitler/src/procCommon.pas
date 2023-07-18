@@ -99,6 +99,8 @@ function GetAudioToTextAppFile: String;
 function GetInstallFolder(const AFileName: String): String;
 {$ENDIF}
 
+function PrepareSSAStyleString: AnsiString;
+
 { Custom inputbox dialog }
 
 function InputDialog(const ACaption, APrompt, ADefault: String; const AHelp: String = ''; const AURL: String = ''; const AHeight: Integer = 93): String;
@@ -607,6 +609,13 @@ begin
       end;
       CloseKey;
       //
+      OpenKey(FormatToName(sfAdvancedSubStationAlpha, True));
+      with Subtitles.FormatProperties^.SSA do
+      begin
+        DefaultStyleSettings := GetValue('DefaultStyleSettings', DefaultStyleSettings);
+      end;
+      CloseKey;
+      //
       OpenKey(FormatToName(sfWebVTT, True));
       with Subtitles.FormatProperties^.WebVTT do
       begin
@@ -864,6 +873,13 @@ begin
         SetValue('CountryOrigin', CountryOrigin);
         SetValue('MaxNumberDisplayableChars', MaxNumberDisplayableChars);
         SetValue('MaxNumberDisplayableRows', MaxNumberDisplayableRows);
+      end;
+      CloseKey;
+      //
+      OpenKey(FormatToName(sfAdvancedSubStationAlpha, True));
+      with Subtitles.FormatProperties^.SSA do
+      begin
+        SetValue('DefaultStyleSettings', DefaultStyleSettings);
       end;
       CloseKey;
       //
@@ -1615,6 +1631,20 @@ begin
   Result := '';
 end;
 {$ENDIF}
+
+// -----------------------------------------------------------------------------
+
+function PrepareSSAStyleString: AnsiString;
+
+  function CorrectColorFormat(const AColor: String): String;
+  begin
+    Result := Format('&H00%s%s%s', [Copy(AColor, 6, 2), Copy(AColor, 4, 2), Copy(AColor, 2, 2)]);
+  end;
+
+begin
+  with MPVOptions do
+    Result := Format('Default,Arial,%d,%s,%s,%s,%s,0,0,0,0,100,100,0,0,1,1,1,2,10,10,10,1', [TextSize, CorrectColorFormat(TextColor), CorrectColorFormat(TextColor), CorrectColorFormat(TextBorderColor), CorrectColorFormat(TextBackgroundColor)]);
+end;
 
 // -----------------------------------------------------------------------------
 

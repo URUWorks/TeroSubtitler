@@ -33,7 +33,7 @@ procedure MPVSeekTo(const AForward: Boolean; const MSecsToSeek: Integer); overlo
 procedure MPVSeekTo(const Value: Integer; const Play: Boolean = False); overload;
 procedure MPVAlterPlayRate(const Value: Boolean);
 procedure MPVLoadSubtitleTempTrack;
-procedure MPVReloadSubtitleTempTrack;
+procedure MPVReloadSubtitleTempTrack(const ASaveBefore: Boolean = False);
 procedure MPVRemoveSubtitleTempTrack;
 function MPVSaveSubtitleTempTrack: Boolean;
 procedure MPVDeleteSubtitleTempTrack;
@@ -125,6 +125,8 @@ begin
       MPV.mpv_set_option_string_('sub-back-color=#00000000');
     end;
   end;
+
+  Subtitles.FormatProperties^.SSA.DefaultStyleSettings := PrepareSSAStyleString;
 end;
 
 // -----------------------------------------------------------------------------
@@ -223,8 +225,9 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure MPVReloadSubtitleTempTrack;
+procedure MPVReloadSubtitleTempTrack(const ASaveBefore: Boolean = False);
 begin
+  if ASaveBefore then MPVSaveSubtitleTempTrack;
   frmMain.MPV.ReloadTrack(ttSubtitle);
 end;
 

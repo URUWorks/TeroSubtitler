@@ -37,8 +37,8 @@
       <lblMediaTime Hint="Current video position"/>
     </Section>
     <Section Name="TComboBox">
-      <cboInputFPS Hint="'Input FPS' of the movie that the current subtitle file was originally made for"/>    
-      <cboFPS Hint="'FPS' of the movie you want to adjust the current subtitle file for"/>
+      <cboInputFPS Hint="FPS of the movie the opened subtitle file was made for"/>    
+      <cboFPS Hint="Target FPS of subtitle file"/>
       <cboFormat Hint="Format"/>
       <cboEncoding Hint="Encoding"/>
     </Section>                        

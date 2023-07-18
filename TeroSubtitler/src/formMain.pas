@@ -1169,12 +1169,6 @@ begin
   end
   else if ChangeType = uctItems then
     UpdateValues(True);
-
-  if MPVOptions.SubtitleHandleByMPV then
-  begin
-    if MPVSaveSubtitleTempTrack then
-      MPVReloadSubtitleTempTrack;
-  end;
 end;
 
 // -----------------------------------------------------------------------------

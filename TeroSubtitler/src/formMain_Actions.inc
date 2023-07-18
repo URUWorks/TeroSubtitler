@@ -150,6 +150,12 @@ begin
   begin
     UndoInstance.Undo(VST);
     if WAVE.IsTimeLineEnabled then WAVE.ClearSelection;
+
+    if MPVOptions.SubtitleHandleByMPV then
+    begin
+      if MPVSaveSubtitleTempTrack then
+        MPVReloadSubtitleTempTrack;
+    end;
   end
   else if Workspace.ViewMode = vmSource then
     mmoSourceView.Undo
@@ -165,10 +171,15 @@ begin
   begin
     UndoInstance.Redo(VST);
     if WAVE.IsTimeLineEnabled then WAVE.ClearSelection;
+
+    if MPVOptions.SubtitleHandleByMPV then
+    begin
+      if MPVSaveSubtitleTempTrack then
+        MPVReloadSubtitleTempTrack;
+    end;
   end
   else if Workspace.ViewMode = vmSource then
   begin
-
   end
   else
     TranscriptionRedo;
