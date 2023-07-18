@@ -108,6 +108,12 @@ type
   { SSA }
 
   TSSAEventType  = (etDialogue, etComment, etPicture, etSound, etCommand);
+
+  PSSA_Info = ^TSSA_Info;
+  TSSA_Info = record
+    DefaultStyleSettings : AnsiString;
+  end;
+
   PSSA_ExtraInfo = ^TSSA_ExtraInfo;
   TSSA_ExtraInfo = record
     EventType : TSSAEventType; // Event (most times "Dialogue)         (Default = "Dialogue")
@@ -159,6 +165,7 @@ type
     Cavena890         : TCavena890_Info;
     DVDSubtitle       : TDVDSubtitle_Info;
     EBU               : TEBU_Info;
+    SSA               : TSSA_Info;
     WebVTT            : TWebVTT_Info;
   end;
 
@@ -228,6 +235,11 @@ begin
       CountryOrigin             := 'URY';
       MaxNumberDisplayableChars := '40';
       MaxNumberDisplayableRows  := '23';
+    end;
+
+    with SSA do
+    begin
+      DefaultStyleSettings := 'Default,Arial,18,&H00FFFFFF,&H0000FFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,1,1,2,10,10,10,1';
     end;
 
     with WebVTT do

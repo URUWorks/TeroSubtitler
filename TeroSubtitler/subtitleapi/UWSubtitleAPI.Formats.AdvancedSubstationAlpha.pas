@@ -46,6 +46,10 @@ implementation
 
 uses strUtils, UWSystem.StrUtils, UWSystem.SysUtils;
 
+const
+  SSA_EventFormat = 'Format: Layer, Start, End, Style, Actor, MarginL, MarginR, MarginV, Effect, Text';
+  SSA_StyleFormat = 'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding';
+
 // -----------------------------------------------------------------------------
 
 function TUWAdvancedSubstationAlpha.Name: String;
@@ -149,11 +153,11 @@ begin
 //  StringList.Add('Timer: ' + ASSAttributes.Timer, False);
   StringList.Add('', False);
   StringList.Add('[V4+ Styles]', False);
-//  StringList.Add(Format, False);
-//  StringList.Add(GetASSStyleStr);
+  StringList.Add(SSA_StyleFormat, False);
+  StringList.Add('Style: ' + Subtitles.FormatProperties^.SSA.DefaultStyleSettings, False);
   StringList.Add('', False);
   StringList.Add('[Events]', False);
-  StringList.Add('Format: Layer, Start, End, Style, Actor, MarginL, MarginR, MarginV, Effect, Text', False);
+  StringList.Add(SSA_EventFormat, False);
 
   for i := FromItem to ToItem do
   begin
