@@ -36,7 +36,7 @@ For opening videos via URL.
 
 For the automatic transcription of audio to subtitles.
 
-### Google Translate
+### [Google Translate](https://translate.google.com/)
 
 Auto-translation API.
 
