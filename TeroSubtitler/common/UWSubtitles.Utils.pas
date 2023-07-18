@@ -32,7 +32,7 @@ type
 function SetDurationLimits(const Duration, Min, Max: Cardinal; const UseMax: Boolean = True; const UseMin: Boolean = True): Cardinal; // maximum duration and minimum duration
 function SetDelay(const Time, Delay: Integer): Cardinal;                        // positive or negative, time or frames
 function TimeExpander(const Text: String; const Duration, MSecsValue, CharsValue, MinMSecsDuration: Cardinal; const Expand: Boolean): Cardinal; // expand/reduce the final time of certain subtitles under certain conditions
-function ExtendLength(const NextInitialTime: Cardinal): Cardinal;               // extend the length of selected subtitles to the start time of the next one
+function ExtendLength(const NextInitialTime: Cardinal; const AGapMs: Cardinal): Cardinal;
 function AutomaticDurations(const Text: String; const Duration, msPerChar, msPerWord, msPerLine: Cardinal; const Mode: TAutomaticDurationMode): Cardinal; // calculate the duration of subtitles using a simple formula
 procedure ShiftTime(const InitialTime, FinalTime, Value: Integer; out NewInitialTime, NewFinalTime: Integer); // Time to shift subtitle forwards/backwards
 
@@ -127,9 +127,9 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function ExtendLength(const NextInitialTime: Cardinal): Cardinal;
+function ExtendLength(const NextInitialTime: Cardinal; const AGapMs: Cardinal): Cardinal;
 begin
-  Result := NextInitialTime - 1;
+  Result := NextInitialTime - AGapMs;
 end;
 
 // -----------------------------------------------------------------------------

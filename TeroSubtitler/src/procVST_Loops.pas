@@ -340,7 +340,7 @@ begin
   if Index < (Subtitles.Count-1) then
   begin
     NewTime := Subtitles.InitialTime[Index+1];
-    SetSubtitleTime(Index, ExtendLength(NewTime), frmMain.tedFinal.Tag, False, False);
+    SetSubtitleTime(Index, ExtendLength(NewTime, GetDefPause), frmMain.tedFinal.Tag, False, False);
   end;
 end;
 
