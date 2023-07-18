@@ -80,7 +80,7 @@ uses
   formQualityCheck, formCompare, formTranslationMemoryList, formTBXList,
   formTBX, formTBXSettings, formTBXEdit, formWizard, formShiftTimes,
   formAudioToText, formAudioToTextModel, procTypes, procCommon, procWorkspace,
-  formFormatProperties, formCustomTextFormat, formActors;
+  formFormatProperties, formCustomTextFormat, formActors, procMPV;
 
 // -----------------------------------------------------------------------------
 
@@ -313,12 +313,15 @@ procedure ShowSettings;
 var
   OldLang: String;
   OldShiftMs: Integer;
+  OldHandleByMPV: Boolean;
 begin
   if frmSettings = NIL then
   begin
+    OldLang        := AppOptions.Language;
+    OldShiftMs     := AppOptions.ShiftTimeMS;
+    OldHandleByMPV := MPVOptions.SubtitleHandleByMPV;
+
     frmSettings := TfrmSettings.Create(Application);
-    OldLang    := AppOptions.Language;
-    OldShiftMs := AppOptions.ShiftTimeMS;
     frmSettings.ShowModal;
     if OldLang <> AppOptions.Language then
     begin
@@ -335,6 +338,20 @@ begin
     end
     else if OldShiftMs <> AppOptions.ShiftTimeMS then
       UpdateCommonActionString;
+
+    if OldHandleByMPV <> MPVOptions.SubtitleHandleByMPV then
+    begin
+      if MPVOptions.SubtitleHandleByMPV then
+      begin
+        if MPVSaveSubtitleTempTrack then
+          MPVLoadSubtitleTempTrack;
+      end
+      else
+      begin
+        MPVRemoveSubtitleTempTrack;
+        MPVDeleteSubtitleTempTrack;
+      end;
+    end;
 
     DoAutoCheckErrors;
   end

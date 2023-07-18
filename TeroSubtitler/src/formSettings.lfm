@@ -992,7 +992,7 @@ object frmSettings: TfrmSettings
     object lblSeekTime: TLabel
       Left = 0
       Height = 15
-      Top = 39
+      Top = 60
       Width = 206
       AutoSize = False
       Caption = 'Seek time (ms)'
@@ -1001,17 +1001,17 @@ object frmSettings: TfrmSettings
     object spnSeekTime: TSpinEdit
       Left = 208
       Height = 23
-      Top = 35
+      Top = 56
       Width = 80
       MaxValue = 10000
       MinValue = 100
-      TabOrder = 1
+      TabOrder = 2
       Value = 5000
     end
     object lblFrameStep: TLabel
       Left = 0
       Height = 15
-      Top = 72
+      Top = 93
       Width = 206
       AutoSize = False
       Caption = 'Frame step'
@@ -1020,18 +1020,27 @@ object frmSettings: TfrmSettings
     object spnFrameStep: TSpinEdit
       Left = 208
       Height = 23
-      Top = 68
+      Top = 89
       Width = 80
       MaxValue = 60
       MinValue = 1
-      TabOrder = 2
+      TabOrder = 3
       Value = 1
+    end
+    object chkSubtitleHandleByMPV: TUWCheckBox
+      Left = 0
+      Height = 19
+      Top = 23
+      Width = 18
+      AutoSize = False
+      Caption = 'mpv handles subtitles for preview'
+      TabOrder = 1
     end
   end
   object lyoToolbar: TUWLayout
     Left = -336
     Height = 546
-    Top = 304
+    Top = 296
     Width = 496
     ClientHeight = 546
     ClientWidth = 496
@@ -1644,7 +1653,7 @@ object frmSettings: TfrmSettings
   object lyoFileTypeAssociations: TUWLayout
     Left = -336
     Height = 546
-    Top = 344
+    Top = 360
     Width = 496
     ClientHeight = 546
     ClientWidth = 496

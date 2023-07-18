@@ -386,7 +386,8 @@
       <chkShowCPSBar>Mostrar barra de CPS</chkShowCPSBar>      
       <chkPauseIsFrames>Fotogramas</chkPauseIsFrames>
       <chkDrawWaveformGAP>Mostrar pausa en la línea de tiempo</chkDrawWaveformGAP>
-      <chkAutoPlay>Reproducción automática al cargar vídeo</chkAutoPlay>                  
+      <chkAutoPlay>Reproducción automática al cargar vídeo</chkAutoPlay>
+      <chkSubtitleHandleByMPV>mpv maneja los subtítulos para la vista previa</chkSubtitleHandleByMPV>                  
     </Section>
     <Section Name="TButton">
       <btnShortCutApply>Aplicar</btnShortCutApply>

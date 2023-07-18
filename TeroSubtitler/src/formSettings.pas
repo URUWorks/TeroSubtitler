@@ -47,6 +47,7 @@ type
     cboTimeCodeMode: TComboBox;
     cboDefaultFrameRate: TComboBox;
     cboDefaultFileEncoding: TComboBox;
+    chkSubtitleHandleByMPV: TUWCheckBox;
     chkSubBackground: TCheckBox;
     chkDotsOnSplit: TUWCheckBox;
     chkDrawWaveformGAP: TUWCheckBox;
@@ -372,17 +373,18 @@ begin
 
   with MPVOptions do
   begin
-    chkAutoPlay.Checked          := AutoStartPlaying;
-    spnSeekTime.Value            := SeekTime;
-    spnFrameStep.Value           := FrameStep;
+    chkAutoPlay.Checked            := AutoStartPlaying;
+    chkSubtitleHandleByMPV.Checked := SubtitleHandleByMPV;
+    spnSeekTime.Value              := SeekTime;
+    spnFrameStep.Value             := FrameStep;
 
-    cbnSub.ButtonColor           := HexStrToColor(TextColor);
-    cbnSubBorder.ButtonColor     := HexStrToColor(TextBorderColor);
-    cbnSubShadow.ButtonColor     := HexStrToColor(TextShadowColor);
-    chkSubShadow.Checked         := UseTextShadowColor;
-    cbnSubBackground.ButtonColor := HexStrToColor(TextBackgroundColor);
-    chkSubBackground.Checked     := UseTextBackgroundColor;
-    spnSubSize.Value             := TextSize;
+    cbnSub.ButtonColor             := HexStrToColor(TextColor);
+    cbnSubBorder.ButtonColor       := HexStrToColor(TextBorderColor);
+    cbnSubShadow.ButtonColor       := HexStrToColor(TextShadowColor);
+    chkSubShadow.Checked           := UseTextShadowColor;
+    cbnSubBackground.ButtonColor   := HexStrToColor(TextBackgroundColor);
+    chkSubBackground.Checked       := UseTextBackgroundColor;
+    spnSubSize.Value               := TextSize;
   end;
 
   with frmMain.WAVE do
@@ -491,6 +493,7 @@ begin
   with MPVOptions do
   begin
     AutoStartPlaying       := chkAutoPlay.Checked;
+    SubtitleHandleByMPV    := chkSubtitleHandleByMPV.Checked;
     SeekTime               := spnSeekTime.Value;
     FrameStep              := spnFrameStep.Value;
     TextColor              := ColorToHexStr(cbnSub.ButtonColor);

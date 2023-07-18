@@ -387,6 +387,7 @@
       <chkPauseIsFrames>Frames</chkPauseIsFrames>
       <chkDrawWaveformGAP>Show gap in timeline</chkDrawWaveformGAP>
       <chkAutoPlay>Autoplay on video load</chkAutoPlay>            
+      <chkSubtitleHandleByMPV>mpv handles subtitles for preview</chkSubtitleHandleByMPV>
     </Section>
     <Section Name="TButton">
       <btnShortCutApply>Apply</btnShortCutApply>

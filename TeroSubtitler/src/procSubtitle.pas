@@ -51,6 +51,7 @@ function GetSubtitleText(const Index: Integer; const SubtitleMode: TSubtitleMode
 function GetMaxLinesOf(Text: String; const Separator: String = sLineBreak): Integer;
 function GetLengthForEachLine(Text: String; const Separator: String = sLineBreak; const LastSeparator: String = sLineBreak): String;
 procedure SelectSubtitleAndFocusMemo(const NextSibiling: Boolean; const WaveToo: Boolean = False);
+function GetSubtitleIndexAtTime(const MSecs: Cardinal): Integer;
 function GetSubtitleTextAtTime(const MSecs: Cardinal): String;
 
 procedure InsertMemoText(const AText: String);
@@ -446,82 +447,78 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function GetSubtitleIndexAtTime(const MSecs: Cardinal): Integer;
+var
+  i: Integer;
+begin
+  Result := -1;
+
+  if Subtitles.Count > 0 then
+    for i := 0 to Subtitles.Count-1 do
+      with Subtitles[i] do
+        if (MSecs >= InitialTime) and (MSecs < FinalTime) then
+        begin
+          Result := i;
+          SubtitleInfo.LastSubtitle.ShowIndex := Result;
+          Break;
+        end;
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetSubtitleTextAtTime(const MSecs: Cardinal): String;
 var
-  Run: PVirtualNode;
+  i: Integer;
   s: String;
 begin
   Result := '';
 
-  with frmMain.VST do
-    if TotalCount > 0 then
+  i := GetSubtitleIndexAtTime(MSecs);
+  if i >= 0 then
+    with Subtitles[i] do
     begin
-      Run := GetFirst;
-      while Assigned(Run) do
-      begin
-        with Subtitles[Run^.Index] do
-          if (MSecs >= InitialTime) and (MSecs < FinalTime) then // if (MSecs >= InitialTime) and (MSecs <= FinalTime) then
-          begin
-            Result := Text;
-            case MPVOptions.SubtitleToShow of
-              TSubtitleMode.smText        : Result := Text;
-              TSubtitleMode.smTranslation : Result := Translation;
-            end;
-            Result := ReplaceString(Result, sLineBreak, #10) + #10 + ' ';
-            s := '';
-            if Subtitles[Run^.Index].Align <> 0 then
-            begin
-              case Subtitles[Run^.Index].Align of
-                1: case Subtitles[Run^.Index].VAlign of
-                     1 : s := '{\an4}';
-                     2 : s := '{\an7}';
-                   else
-                     s := '{\an1}';
-                   end;
-                2: case Subtitles[Run^.Index].VAlign of
-                     1 : s := '{\an5}';
-                     2 : s := '{\an8}';
-                   else
-                     s := '{\an2}';
-                   end;
-                3: case Subtitles[Run^.Index].VAlign of
-                     1 : s := '{\an6}';
-                     2 : s := '{\an9}';
-                   else
-                     s := '{\an3}';
-                   end;
-              end;
-            end
-            else if Subtitles[Run^.Index].VAlign <> 0 then
-            begin
-              case Subtitles[Run^.Index].VAlign of
-                1 : s := '{\an5}';
-                2 : s := '{\an8}';
-              else
-                s := '{\an2}';
-              end;
-            end;
-
-            if not s.IsEmpty then
-              Result := s + Result + '{\an0}';
-
-            SubtitleInfo.LastSubtitle.ShowIndex := Run^.Index;
-            if SubtitleInfo.LastSubtitle.Selected <> SubtitleInfo.LastSubtitle.ShowIndex then
-            begin
-              SubtitleInfo.LastSubtitle.Selected := Run^.Index;
-              if frmMain.actMediaAutoScroll.Checked then
-                VSTSelectNode(frmMain.VST, Run, True);
-            end;
-            Break;
-          end
-          else if (MSecs < InitialTime) then
-          begin
-            SubtitleInfo.LastSubtitle.ShowIndex := 0;
-            Break;
-          end;
-
-        Run := GetNext(Run);
+      Result := Text;
+      case MPVOptions.SubtitleToShow of
+        TSubtitleMode.smText        : Result := Text;
+        TSubtitleMode.smTranslation : Result := Translation;
       end;
+      Result := ReplaceString(Result, sLineBreak, #10) + #10 + ' ';
+      s := '';
+      if Align <> 0 then
+      begin
+        case Align of
+          1: case VAlign of
+               1 : s := '{\an4}';
+               2 : s := '{\an7}';
+             else
+               s := '{\an1}';
+             end;
+          2: case VAlign of
+               1 : s := '{\an5}';
+               2 : s := '{\an8}';
+             else
+               s := '{\an2}';
+             end;
+          3: case VAlign of
+               1 : s := '{\an6}';
+               2 : s := '{\an9}';
+             else
+               s := '{\an3}';
+             end;
+        end;
+      end
+      else if VAlign <> 0 then
+      begin
+        case VAlign of
+          1 : s := '{\an5}';
+          2 : s := '{\an8}';
+        else
+          s := '{\an2}';
+        end;
+      end;
+
+      if not s.IsEmpty then
+        Result := s + Result + '{\an0}';
     end;
 end;
 

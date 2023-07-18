@@ -67,7 +67,7 @@ begin
   if not WAVE.IsPeakDataLoaded then
     WAVE.EmptyText := LanguageManager.GetAppString('WaveformText');
 
-  timerSubtitle.Enabled := not MPVOptions.SubtitleHandleByMPV;
+  timerSubtitle.Enabled := True;
   timerWaveform.Enabled := True;
 
   if MPVOptions.SubtitleHandleByMPV then
@@ -172,8 +172,24 @@ end;
 procedure TfrmMain.DoSubtitleTimer(Sender: TObject);
 begin
   TimerSubtitle.Enabled := False;
-  //MPV.ShowOverlayText(GetSubtitleTextAtTime(MPV.GetMediaPosInMs));
-  MPV.ShowText(GetSubtitleTextAtTime(MPV.GetMediaPosInMs), '');
+  if MPVOptions.SubtitleHandleByMPV then
+  begin
+    if actMediaAutoScroll.Checked then
+      GetSubtitleIndexAtTime(MPV.GetMediaPosInMs);
+  end
+  else
+  begin
+    //MPV.ShowOverlayText(GetSubtitleTextAtTime(MPV.GetMediaPosInMs));
+    MPV.ShowText(GetSubtitleTextAtTime(MPV.GetMediaPosInMs), '');
+  end;
+
+  if SubtitleInfo.LastSubtitle.Selected <> SubtitleInfo.LastSubtitle.ShowIndex then
+  begin
+    SubtitleInfo.LastSubtitle.Selected := SubtitleInfo.LastSubtitle.ShowIndex;
+    if actMediaAutoScroll.Checked then
+      VSTSelectNode(VST, SubtitleInfo.LastSubtitle.Selected, True);
+  end;
+
   TimerSubtitle.Enabled := True;
 end;
 
