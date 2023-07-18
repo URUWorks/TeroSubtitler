@@ -121,12 +121,6 @@ begin
           Text := SubtitleFile[i];
           for a := 1 to 9 do Delete(Text, 1, Pos(',', Text));
           Text := ReplaceString(Trim(Text), '\N', LineEnding);
-          Text := ReplaceString(Text, '{\i1}', '{i}');
-          Text := ReplaceString(Text, '{\b1}', '{b}');
-          Text := ReplaceString(Text, '{\u1}', '{u}');
-          Text := ReplaceString(Text, '{\i0}', '{/i}');
-          Text := ReplaceString(Text, '{\b0}', '{/b}');
-          Text := ReplaceString(Text, '{\u0}', '{/u}');
 
           Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
         end;
@@ -143,7 +137,7 @@ end;
 function TUWAdvancedSubstationAlpha.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   i, it, ft : Integer;
-  Text : String;
+  Text, s : String;
 begin
   Result  := False;
 
@@ -165,12 +159,43 @@ begin
   begin
     Text := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
     Text := ReplaceString(Trim(Text), LineEnding, '\N');
-    Text := ReplaceString(Text, '{i}', '{\i0}');
-    Text := ReplaceString(Text, '{b}', '{\b0}');
-    Text := ReplaceString(Text, '{u}', '{\u0}');
-    Text := ReplaceString(Text, '{/i}', '{\i1}');
-    Text := ReplaceString(Text, '{/b}', '{\b1}');
-    Text := ReplaceString(Text, '{/u}', '{\u1}');
+
+    s := '';
+    if Subtitles[i].Align <> 0 then
+    begin
+      case Subtitles[i].Align of
+        1: case Subtitles[i].VAlign of
+             1 : s := '{\an4}';
+             2 : s := '{\an7}';
+           else
+             s := '{\an1}';
+           end;
+        2: case Subtitles[i].VAlign of
+             1 : s := '{\an5}';
+             2 : s := '{\an8}';
+           else
+             s := '{\an2}';
+           end;
+        3: case Subtitles[i].VAlign of
+             1 : s := '{\an6}';
+             2 : s := '{\an9}';
+           else
+             s := '{\an3}';
+           end;
+      end;
+    end
+    else if Subtitles[i].VAlign <> 0 then
+    begin
+      case Subtitles[i].VAlign of
+        1 : s := '{\an5}';
+        2 : s := '{\an8}';
+      else
+        s := '{\an2}';
+      end;
+    end;
+
+    if not s.IsEmpty then
+      Text := s + Text + '{\an0}';
 
     it := Subtitles[i].InitialTime;
     ft := Subtitles[i].FinalTime;
