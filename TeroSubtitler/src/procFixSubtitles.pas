@@ -72,6 +72,31 @@ uses
 
 // -----------------------------------------------------------------------------
 
+function FindBestShotCutMs(const AShotChanges: TIntegerDynArray; const ATimeMs: Integer): Integer;
+var
+  Idx, IdxForward, IdxBackward,
+  DistForward, DistBackward : Integer;
+begin
+  Idx         := BinarySearch_IntArray(AShotChanges, ATimeMs);
+  IdxForward  := Idx;
+  IdxBackward := Idx - 1;
+
+  if (IdxForward < Length(AShotChanges)) and (IdxBackward >= 0) then
+  begin
+    DistForward  := AShotChanges[IdxForward] - ATimeMs;
+    DistBackward := ATimeMs - AShotChanges[IdxBackward];
+
+    if (DistForward < DistBackward) then
+      Result := AShotChanges[IdxForward]
+    else
+      Result := AShotChanges[IdxBackward];
+  end
+  else
+    Result := -1;
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetItemDuration(const Item: TSubtitleInfoItem): Cardinal;
 begin
   Result := Item.FinalTime-Item.InitialTime;
@@ -128,10 +153,8 @@ var
   ocr       : TUWOCRScript;
   GapMs     : Integer;
 
-  Idx, IdxForward, IdxBackward,
-  DistForward, DistBackward,
-  SnapMs, InCue, OutCue,
-  Candidate1, Candidate2: Integer;
+  SnapMs, ShotCut,
+  InCue, OutCue : Integer;
 begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
 
@@ -445,40 +468,31 @@ begin
       // Snap to shot changes
       if (etSnapToShotChanges in FErrors) and (AShotChanges <> NIL) and (Length(AShotChanges) > 0) then
       begin
-        Idx         := BinarySearch_IntArray(AShotChanges, FixedItem.InitialTime);
-        IdxForward  := Idx;
-        IdxBackward := Idx - 1;
-
-        if (IdxForward < Length(AShotChanges)-1) and (IdxBackward >= 0) then
+        // In Cue
+        ShotCut := FindBestShotCutMs(AShotChanges, FixedItem.InitialTime);
+        if ShotCut >= 0 then
         begin
-          DistForward  := AShotChanges[IdxForward] - FixedItem.InitialTime;
-          DistBackward := FixedItem.InitialTime - AShotChanges[IdxBackward];
-
-          if (DistForward < DistBackward) then
+          if (Abs(ShotCut - FixedItem.InitialTime) < SnapMs) and (Subtitles.Duration[i] > Profile^.MinDuration) and
+             (i-1 >= 0) and (ShotCut > Subtitles[i-1].FinalTime) then
           begin
-            Candidate1 := AShotChanges[IdxForward];
-            Candidate2 := AShotChanges[IdxForward+1];
-          end
-          else
-          begin
-            Candidate1 := AShotChanges[IdxBackward];
-            Candidate2 := AShotChanges[IdxForward];
-          end;
-
-          if (Abs(Candidate1 - FixedItem.InitialTime) < SnapMs) then
-          begin
-            FixedItem.InitialTime := Candidate1 + InCue;
+            FixedItem.InitialTime := ShotCut + InCue;
             FixedItem.ErrorsFixed := [etSnapToShotChangesInCue];
-            Add(FixedItem);
-          end;
-
-          if (Abs(Candidate2 - FixedItem.FinalTime) < SnapMs) then
-          begin
-            FixedItem.FinalTime   := Candidate2 - OutCue;
-            FixedItem.ErrorsFixed := [etSnapToShotChangesOutCue];
-            Add(FixedItem);
           end;
         end;
+        // Out Cue
+        ShotCut := FindBestShotCutMs(AShotChanges, FixedItem.FinalTime);
+        if ShotCut >= 0 then
+        begin
+          if (Abs(ShotCut - FixedItem.FinalTime) < SnapMs) and (Subtitles.Duration[i] > Profile^.MinDuration) and
+             (i+1 < Subtitles.Count) and (ShotCut - OutCue < Subtitles[i+1].InitialTime) then
+          begin
+            FixedItem.FinalTime   := ShotCut - OutCue;
+            FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etSnapToShotChangesOutCue];
+          end;
+        end;
+
+        if (etSnapToShotChangesInCue in FixedItem.ErrorsFixed) or (etSnapToShotChangesOutCue in FixedItem.ErrorsFixed) then
+          Add(FixedItem);
       end;
     end;
   finally

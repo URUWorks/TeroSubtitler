@@ -398,8 +398,8 @@ begin
       end;
 
       UndoInstance.IncrementUndoGroup;
-      UpdateValues(True);
       DoAutoCheckErrors;
+      UpdateValues(True);
     finally
       numList.Free;
     end;
