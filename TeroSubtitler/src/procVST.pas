@@ -809,8 +809,8 @@ begin
 
   if Refresh then
   begin
-    UpdateValues(True);
     DoAutoCheckErrors;
+    UpdateValues(True);
   end;
 end;
 
