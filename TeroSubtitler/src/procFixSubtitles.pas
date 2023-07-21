@@ -473,7 +473,7 @@ begin
         if ShotCut >= 0 then
         begin
           if (Abs(ShotCut - FixedItem.InitialTime) < SnapMs) and (Subtitles.Duration[i] > Profile^.MinDuration) and
-             (i-1 >= 0) and (ShotCut > Subtitles[i-1].FinalTime) then
+             (i-1 >= 0) and (ShotCut > Subtitles[i-1].FinalTime + Profile^.MinPause) then
           begin
             FixedItem.InitialTime := ShotCut + InCue;
             FixedItem.ErrorsFixed := [etSnapToShotChangesInCue];
@@ -484,7 +484,7 @@ begin
         if ShotCut >= 0 then
         begin
           if (Abs(ShotCut - FixedItem.FinalTime) < SnapMs) and (Subtitles.Duration[i] > Profile^.MinDuration) and
-             (i+1 < Subtitles.Count) and (ShotCut - OutCue < Subtitles[i+1].InitialTime) then
+             (i+1 < Subtitles.Count) and (ShotCut - OutCue < Subtitles[i+1].InitialTime - Profile^.MinPause) then
           begin
             FixedItem.FinalTime   := ShotCut - OutCue;
             FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etSnapToShotChangesOutCue];

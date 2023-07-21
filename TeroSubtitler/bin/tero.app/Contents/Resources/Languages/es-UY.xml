@@ -122,6 +122,7 @@
       <actGoTo>Ir al número de línea...</actGoTo>
       <actReadTimingsFromFile>Leer tiempos desde archivo...</actReadTimingsFromFile>
       <actReadTextsFromFile>Leer textos desde archivo...</actReadTextsFromFile>
+      <actActor>Actores...</actActor>
       <actExtendLengthToPrevious>Extender tiempo inicial al anterior</actExtendLengthToPrevious>
       <actExtendLengthToNext>Extender tiempo final al siguiente</actExtendLengthToNext>
       <actSetAutomaticDuration>Establecer duración automática</actSetAutomaticDuration>

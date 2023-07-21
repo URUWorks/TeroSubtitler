@@ -340,7 +340,7 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 416
       Width = 80
-      MaxValue = 30
+      MaxValue = 20
       TabOrder = 14
       Value = 12
     end
@@ -358,7 +358,7 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 448
       Width = 80
-      MaxValue = 30
+      MaxValue = 15
       TabOrder = 15
     end
     object lblSCSnapOutCues: TLabel
@@ -375,7 +375,7 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 480
       Width = 80
-      MaxValue = 30
+      MaxValue = 15
       TabOrder = 16
       Value = 2
     end

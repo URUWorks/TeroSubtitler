@@ -122,6 +122,7 @@
       <actGoTo>Go to line number...</actGoTo>
       <actReadTimingsFromFile>Read timings from file...</actReadTimingsFromFile>
       <actReadTextsFromFile>Read text from file...</actReadTextsFromFile>
+      <actActor>Actors...</actActor>
       <actExtendLengthToPrevious>Extend initial time to previous</actExtendLengthToPrevious>
       <actExtendLengthToNext>Extend final time to next</actExtendLengthToNext>
       <actSetAutomaticDuration>Set automatic duration</actSetAutomaticDuration>
@@ -352,8 +353,8 @@
       <lblProhibitedChars>Prohibited characters</lblProhibitedChars>
       <lblCPSStrategy>Chars excluded from CPS count</lblCPSStrategy>
       <lblSCSnapArea>Shot change snap area (frames)</lblSCSnapArea>
-      <lblSCSnapInCues>Snap in cues (frames)</lblSCSnapInCues>
-      <lblSCSnapOutCues>Snap out cues (frames)</lblSCSnapOutCues>            
+      <lblSCSnapInCues>Snap in cues after sc (frames)</lblSCSnapInCues>
+      <lblSCSnapOutCues>Snap out cues before sc (frames)</lblSCSnapOutCues>            
       <lblTheme>Theme</lblTheme>
       <lblListMode>List mode</lblListMode>
 	  <lblSubtitles>Subtitles</lblSubtitles>      

@@ -565,7 +565,7 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 416
       Width = 80
-      MaxValue = 30
+      MaxValue = 20
       OnChange = spnConventionChange
       TabOrder = 15
       Value = 12
@@ -584,7 +584,7 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 448
       Width = 80
-      MaxValue = 30
+      MaxValue = 15
       OnChange = spnConventionChange
       TabOrder = 16
     end
@@ -602,7 +602,7 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 480
       Width = 80
-      MaxValue = 30
+      MaxValue = 15
       OnChange = spnConventionChange
       TabOrder = 17
       Value = 2
