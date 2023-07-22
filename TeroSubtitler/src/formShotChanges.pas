@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  Spin, Types, process, StrUtils;
+  Spin, UWTimeEdit, Types, process, StrUtils;
 
 type
 
@@ -35,8 +35,10 @@ type
     btnImport: TButton;
     btnDetect: TButton;
     btnExport: TButton;
+    cboOffset: TComboBox;
     cboTimeCodeImport: TComboBox;
     cboTimeCodeExport: TComboBox;
+    lblOffset: TLabel;
     prbExtracting: TProgressBar;
     spnSensitivity: TFloatSpinEdit;
     lblSensitivity: TLabel;
@@ -44,6 +46,7 @@ type
     lblTimeCodeIn: TLabel;
     lblTimeCodeOut: TLabel;
     mmoTimes: TMemo;
+    tedOffset: TUWTimeEdit;
     procedure btnApplyClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure btnExportClick(Sender: TObject);
@@ -93,6 +96,7 @@ const
 procedure TfrmShotChanges.FormCreate(Sender: TObject);
 var
   FAppStringList: TAppStringList;
+  i: Integer;
 begin
   LoadLanguage(Self);
 
@@ -115,6 +119,9 @@ begin
   FAppStringList.Free;
 
   FCancel := False;
+
+  for i := 0 to High(frmMain.WAVE.GetSceneChangeList) do
+    mmoTimes.Lines.Add(frmMain.WAVE.GetSceneChangeList[i].ToString);
 end;
 
 // -----------------------------------------------------------------------------
@@ -155,8 +162,8 @@ end;
 procedure TfrmShotChanges.btnApplyClick(Sender: TObject);
 var
   i, v : Integer;
-  s    : String;
-  SC   : TIntegerDynArray;
+  s : String;
+  SC : TIntegerDynArray;
 begin
   if mmoTimes.Lines.Count > 0 then
   begin
@@ -183,6 +190,9 @@ begin
         else
           v := StringToTime(mmoTimes.Lines[i]);
 
+        if tedOffset.Value > 0 then
+          v := v + iff(cboOffset.ItemIndex = 0, tedOffset.Value, -tedOffset.Value);
+
         if frmMain.MPV.SMPTEMode then
           v := Round(v / 1.001);
 
@@ -190,7 +200,7 @@ begin
       end;
 
       s := ConcatPaths([ShotChangesFolder, ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '.shotchanges')]);
-      if not FileExists(s) then
+      //if not FileExists(s) then
         mmoTimes.Lines.SaveToFile(s);
 
       frmMain.WAVE.SetSceneChangeList(SC);

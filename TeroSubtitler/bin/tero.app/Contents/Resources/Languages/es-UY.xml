@@ -480,6 +480,7 @@
       <lblTimeCodeIn>Código de tiempo al importar</lblTimeCodeIn>
       <lblTimeCodeOut>Código de tiempo al exportar</lblTimeCodeOut>
       <lblSensitivity>Sensibilidad de detección</lblSensitivity>            
+      <lblOffset>Desplazamiento</lblOffset>      
     </Section>        
   </Form>      
   <Form Name="frmBatchConvert" Caption="Batch convert">

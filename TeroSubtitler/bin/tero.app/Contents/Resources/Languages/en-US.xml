@@ -479,7 +479,8 @@
     <Section Name="TLabel">
       <lblTimeCodeIn>Time code for import</lblTimeCodeIn>
       <lblTimeCodeOut>Time code for export</lblTimeCodeOut>
-      <lblSensitivity>Detection sensitivity</lblSensitivity>      
+      <lblSensitivity>Detection sensitivity</lblSensitivity>
+      <lblOffset>Offset</lblOffset>      
     </Section>          
   </Form>
   <Form Name="frmBatchConvert" Caption="Batch convert">
