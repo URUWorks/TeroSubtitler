@@ -93,12 +93,13 @@ begin
   begin
     lbl            := TLabel.Create(Self);
     lbl.Parent     := Self;
-    lbl.SetBounds(lblRecentFiles.Left, h + (i*(lblRecentFiles.Height+6)), 100, 15);
+    lbl.SetBounds(lblRecentFiles.Left, h + (i*(lblRecentFiles.Height+6)), 400, 15);
     lbl.Caption    := ExtractFileName(MRU.Items[i]);
     lbl.Hint       := ExtractFilePath(MRU.Items[i]);
     lbl.ShowHint   := True;
     lbl.Tag        := i;
-    lbl.Font.Color := ColorThemeInstance.Colors.Text; //clNavy;
+    lbl.Font.Color := ColorThemeInstance.Colors.Text;
+
     if not FileExists(MRU.Items[i]) then
     begin
       lbl.Enabled := False;
