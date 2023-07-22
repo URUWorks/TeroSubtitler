@@ -1,3 +1,6 @@
+1.0.0.8 (x.8.2023)
+- added: Shotchanges offset
+
 1.0.0.7 (21.7.2023)
 - fixed: Extend length should respect gapping #128
 - fixed: After changing the language, the list headers remain on the previous language
