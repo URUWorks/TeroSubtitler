@@ -1,12 +1,12 @@
 object frmCustomImageFormat: TfrmCustomImageFormat
   Left = 245
-  Height = 289
+  Height = 417
   Top = 119
   Width = 756
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Custom image format'
-  ClientHeight = 289
+  ClientHeight = 417
   ClientWidth = 756
   OnClose = FormClose
   OnCreate = FormCreate
@@ -51,7 +51,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
   object btnSave: TButton
     Left = 593
     Height = 25
-    Top = 256
+    Top = 384
     Width = 75
     Caption = 'Save...'
     Default = True
@@ -63,7 +63,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
   object btnClose: TButton
     Left = 673
     Height = 25
-    Top = 256
+    Top = 384
     Width = 75
     Cancel = True
     Caption = 'Close'
@@ -139,6 +139,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Width = 75
     MinValue = 100
     TabOrder = 6
+    Value = 720
   end
   object spnHeight: TSpinEdit
     Left = 491
@@ -147,6 +148,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Width = 75
     MinValue = 100
     TabOrder = 7
+    Value = 576
   end
   object lblX: TLabel
     Left = 480
@@ -198,6 +200,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Top = 140
     Width = 257
     ItemHeight = 15
+    OnSelect = cboFontSelect
     Style = csDropDownList
     TabOrder = 12
   end
@@ -214,7 +217,9 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 140
     Width = 75
+    OnChange = cboFontSelect
     TabOrder = 13
+    Value = 24
   end
   object lblFontSize: TLabel
     Left = 673
@@ -223,5 +228,16 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Width = 20
     Caption = 'Size'
     ParentColor = False
+  end
+  object ttbPreview: TUWTextBox
+    Cursor = crArrow
+    Left = 8
+    Height = 135
+    Top = 240
+    Width = 740
+    Text = 'URUWorks Tero Subtitler'
+    BackColor = clDefault
+    Font.Color = clWhite
+    Font.Height = -32
   end
 end

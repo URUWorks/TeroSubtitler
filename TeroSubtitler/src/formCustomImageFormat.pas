@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
-  UWLayout, UWSubtitleAPI.CustomFormat, UWSubtitleAPI;
+  UWSubtitleAPI.CustomFormat, UWTextBox;
 
 type
 
@@ -56,8 +56,10 @@ type
     spnHeight: TSpinEdit;
     spnLeft: TSpinEdit;
     spnRight: TSpinEdit;
+    ttbPreview: TUWTextBox;
     procedure btnCloseClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
+    procedure cboFontSelect(Sender: TObject);
     procedure cboScriptSelect(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -77,7 +79,7 @@ implementation
 
 uses
   procWorkspace, procTypes, procCommon, UWSystem.XMLLang, UWSystem.Encoding,
-  UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils;
+  UWSystem.SysUtils;
 
 {$R *.lfm}
 
@@ -90,12 +92,20 @@ uses
 procedure TfrmCustomImageFormat.FormCreate(Sender: TObject);
 var
   FAppStringList: TAppStringList = NIL;
+  i: Integer;
 begin
   LoadLanguage(Self);
   CustomFormat := TUWSubtitleCustomTextFormat.Create('');
 
   FillComboWithFPS(cboFPS, GetFPS);
   FillComboWithCustomFormat(cboScript, '*.cfi');
+
+  cboFont.Items.Assign(Screen.Fonts);
+  i := cboFont.Items.IndexOf('Verdana');
+  if i >= 0 then
+    cboFont.ItemIndex := i
+  else
+    cboFont.ItemIndex := 0;
 
   LanguageManager.GetAppStringList('CustomFormatStrings', FAppStringList);
   FAppStringList.Free;
@@ -121,6 +131,8 @@ end;
 procedure TfrmCustomImageFormat.FormShow(Sender: TObject);
 begin
   CheckColorTheme(Self);
+  ttbPreview.BackColor := Color;
+  cboFontSelect(NIL);
 end;
 
 // -----------------------------------------------------------------------------
@@ -167,6 +179,15 @@ begin
       cboFPS.Text := SingleToStr(FPS, FS);
     end;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmCustomImageFormat.cboFontSelect(Sender: TObject);
+begin
+  ttbPreview.Font.Name := cboFont.Text;
+  ttbPreview.Font.Size := spnFontSize.Value;
+  ttbPreview.ReDraw;
 end;
 
 // -----------------------------------------------------------------------------
