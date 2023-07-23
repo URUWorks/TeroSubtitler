@@ -944,7 +944,7 @@ begin
     SD.Title   := GetCommonString('SaveFile');
     SD.Filter  := GetCommonString('ProjectFile') + '|*.stp';
     SD.Options := [ofOverwritePrompt, ofEnableSizing];
-    //SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
+    SD.FileName := ChangeFileExt('Project_' + ExtractFileName(SubtitleInfo.Text.FileName), '');
 
     if SD.Execute then
       SaveProject(SD.FileName);
