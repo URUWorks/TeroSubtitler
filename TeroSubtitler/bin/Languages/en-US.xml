@@ -84,6 +84,10 @@
       <actMediaChangePlayRate>Playback rate</actMediaChangePlayRate>
       <actMediaRewind>Rewind</actMediaRewind>
       <actMediaForward>Forward</actMediaForward>
+      <actMediaBack1Sec>Go back 1 second</actMediaBack1Sec>
+      <actMediaBack1Min>Go back 1 minute</actMediaBack1Min>      
+      <actMediaForward1Sec>Forward 1 second</actMediaForward1Sec>
+      <actMediaForward1Min>Forward 1 minute</actMediaForward1Min>            
       <actMediaPlaySelection>Play selection</actMediaPlaySelection>
       <actMediaPlayFromSelection>Play from selection</actMediaPlayFromSelection>
       <actMediaPlayBeforeSelection>Play before selection</actMediaPlayBeforeSelection>
@@ -152,7 +156,8 @@
       <actExportMarkedSubtitles>Marked subtitles...</actExportMarkedSubtitles>
       <actExportTextOnly>Text only...</actExportTextOnly>            
       <actExportCustomTextFormat>Custom text format...</actExportCustomTextFormat>
-      <actMediaPreviousFrame>Previous frame</actMediaPreviousFrame>
+      <actExportCustomImageFormat>Custom image format...</actExportCustomImageFormat>
+      <actMediaPreviousFrame>Previous frame</actMediaPreviousFrame>      
       <actMediaNextFrame>Next frame</actMediaNextFrame>
       <actMediaMoveSubtitle>Move subtitle</actMediaMoveSubtitle>      
       <actMediaSetInitialTime>Set initial time</actMediaSetInitialTime>
@@ -214,7 +219,7 @@
       <actMediaVolumeUp>Up</actMediaVolumeUp>
       <actMediaVolumeDown>Down</actMediaVolumeDown>
       <actMediaVolumeMute>Mute</actMediaVolumeMute>      
-      <actShowToolBarMain>Main</actShowToolBarMain>
+      <actShowToolbarMain>Main</actShowToolbarMain>
       <actShowToolbarFPS>FPS</actShowToolbarFPS>
       <actShowToolbarFormat>Format</actShowToolbarFormat>
       <actShowToolbarEncoding>Encoding</actShowToolbarEncoding>                                                         
@@ -637,8 +642,24 @@
     <ListMode>List</ListMode>
     <BlockMode>Block</BlockMode>
     <Frames>Frames</Frames>
-    <Milliseconds>Milliseconds</Milliseconds>    
+    <Milliseconds>Milliseconds</Milliseconds>        
+    <ShortCutNone>None</ShortCutNone>
   </SettingsStrings>
+  <ShortCutCategoryStrings>
+    <Edit>Edit</Edit>  
+    <Editor>Editor</Editor>
+    <File>File</File>
+    <Find>Find</Find>
+    <Help>Help</Help>
+    <Select>Select</Select>
+    <Subtitle>Subtitle</Subtitle>
+    <Texts>Texts</Texts>
+    <Timings>Timings</Timings>
+    <Tools>Tools</Tools>
+    <Video>Video</Video>
+    <View>View</View>
+    <Waveform>Waveform</Waveform>    
+  </ShortCutCategoryStrings>  
   <TipStrings>
     <Tip1>Tip: Use &lt;%s/%s&gt; to go to previous/next subtitle</Tip1>
     <Tip2>Tip: Use &lt;%s&gt; for a web word reference</Tip2>

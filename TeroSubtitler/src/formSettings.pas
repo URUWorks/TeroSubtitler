@@ -243,6 +243,7 @@ type
   private
     FProfiles: TProfiles;
     FShortCutListIndex: array of Byte;
+    FShortCutListCategory: TStrings;
     {$IFDEF WINDOWS}
     FUpdateFileTypes: Boolean;
     procedure PrepareToolbarAndImagelistIcos;
@@ -307,6 +308,9 @@ begin
     Add(GetString(FAppStringList, 'Frames'));
     EndUpdate;
   end;
+
+  hkShortcut.EmptyText  := GetString(FAppStringList, 'ShortCutNone');
+  FShortCutListCategory := TStringList.Create;
 
   FillComboWithLanguageFiles(cboLanguage);
   FillComboWithFPS(cboDefaultFrameRate, Workspace.FPS.DefFPS);
@@ -565,6 +569,7 @@ begin
   UpdateFileTypeAssociations;
   {$ENDIF}
 
+  FShortCutListCategory.Free;
   FProfiles.Free;
   CloseAction := caFree;
   frmSettings := NIL;
@@ -683,16 +688,15 @@ end;
 procedure TfrmSettings.cboShortcutCatSelect(Sender: TObject);
 var
   i: Integer;
-  s, sc, cat: String;
+  s, sc: String;
 begin
-  cat := cboShortcutCat.Text;
   lstShortcuts.Clear;
   with frmMain do
     for i := 0 to ActionList.ActionCount-1 do
     begin
       with TAction(ActionList.Actions[i]) do
       begin
-        if cat = Category then
+        if FShortCutListCategory[cboShortcutCat.ItemIndex] = Category then
         begin
           if ShortCut <> 0 then
             sc := ShortCutToTextEx(ShortCut)
@@ -728,8 +732,11 @@ begin
     for i := 0 to ActionList.ActionCount-1 do
       with TAction(ActionList.Actions[i]) do
       begin
-        if cboShortcutCat.Items.IndexOf(Category) < 0 then
-          cboShortcutCat.AddItem(Category, NIL);
+        if FShortCutListCategory.IndexOf(Category) < 0 then
+        begin
+          cboShortcutCat.AddItem(GetCommonString(Category, 'ShortCutCategoryStrings'), NIL);
+          FShortCutListCategory.Add(Category);
+        end;
       end;
 
     if cboShortcutCat.Items.Count > 0 then cboShortcutCat.ItemIndex := 0;

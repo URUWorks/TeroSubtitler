@@ -71,7 +71,7 @@
       <actUnDockWaveform>Acoplar forma de onda</actUnDockWaveform>
       <actTimeMode Hint="Establece el formato de código de tiempo en HH:MM:SS.ZZZ">Modo de tiempo</actTimeMode>
       <actFramesMode Hint="Establece el formato de código de tiempo en HH:MM:SS:FF">Modo de fotogramas</actFramesMode>
-      <actPreviousSubtitle>subtítulo anterior</actPreviousSubtitle>
+      <actPreviousSubtitle>Subtítulo anterior</actPreviousSubtitle>
       <actNextSubtitle>Siguiente subtítulo</actNextSubtitle>
       <actFontBold>Negrita</actFontBold>
       <actFontItalic>Cursiva</actFontItalic>
@@ -84,6 +84,10 @@
       <actMediaChangePlayRate>Velocidad de reproducción</actMediaChangePlayRate>
       <actMediaRewind>Retroceder</actMediaRewind>
       <actMediaForward>Adelantar</actMediaForward>
+      <actMediaBack1Sec>Retroceder 1 segundo</actMediaBack1Sec>
+      <actMediaBack1Min>Retroceder 1 minuto</actMediaBack1Min>      
+      <actMediaForward1Sec>Adelantar 1 segundo</actMediaForward1Sec>
+      <actMediaForward1Min>Adelantar 1 minuto</actMediaForward1Min>                  
       <actMediaPlaySelection>Reproducir selección</actMediaPlaySelection>
       <actMediaPlayFromSelection>Reproducir desde la selección</actMediaPlayFromSelection>
       <actMediaPlayBeforeSelection>Reproducir antes de la selección</actMediaPlayBeforeSelection>
@@ -152,6 +156,7 @@
       <actExportMarkedSubtitles>Subtítulos marcados...</actExportMarkedSubtitles>            
       <actExportTextOnly>Solo texto...</actExportTextOnly>
       <actExportCustomTextFormat>Formato de texto personalizado...</actExportCustomTextFormat>
+      <actExportCustomImageFormat>Formato de imagen personalizado...</actExportCustomImageFormat>
       <actMediaPreviousFrame>Fotograma anterior</actMediaPreviousFrame>
       <actMediaNextFrame>Siguiente fotograma</actMediaNextFrame>
       <actMediaMoveSubtitle>Mover subtítulo</actMediaMoveSubtitle>
@@ -214,7 +219,7 @@
       <actMediaVolumeUp>Subir</actMediaVolumeUp>
       <actMediaVolumeDown>Bajar</actMediaVolumeDown>
       <actMediaVolumeMute>Silenciar</actMediaVolumeMute>
-      <actShowToolBarMain>Principal</actShowToolBarMain>
+      <actShowToolbarMain>Principal</actShowToolbarMain>      
       <actShowToolbarFPS>FPS</actShowToolbarFPS>
       <actShowToolbarFormat>Formato</actShowToolbarFormat>
       <actShowToolbarEncoding>Codificación</actShowToolbarEncoding>                            
@@ -638,7 +643,23 @@
     <BlockMode>Bloque</BlockMode>
     <Frames>Fotogramas</Frames>
     <Milliseconds>Milisegundos</Milliseconds>    
+    <ShortCutNone>Ninguno</ShortCutNone>
   </SettingsStrings>
+  <ShortCutCategoryStrings>
+    <Edit>Editar</Edit>  
+    <Editor>Editor</Editor>
+    <File>Archivo</File>
+    <Find>Buscar</Find>
+    <Help>Ayuda</Help>
+    <Select>Seleccionar</Select>
+    <Subtitle>Subtítulo</Subtitle>
+    <Texts>Textos</Texts>
+    <Timings>Tiempos</Timings>
+    <Tools>Herramientas</Tools>
+    <Video>Video</Video>
+    <View>Ver</View>
+    <Waveform>Forma de onda</Waveform>
+  </ShortCutCategoryStrings>          
   <TipStrings>
     <Tip1>Consejo: utilice &lt;%s/%s&gt; para ir al subtítulo anterior/siguiente</Tip1>
     <Tip2>Consejo: utilice &lt;%s&gt; para una referencia de palabra web</Tip2>
