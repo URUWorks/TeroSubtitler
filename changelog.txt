@@ -1,8 +1,12 @@
 1.0.0.8 (x.8.2023)
+- fixed: Project autoname #132
+- fixed: Missing strings in language file
 - added: Shotchanges offset
+- added: Custom image format export
 
 1.0.0.7 (21.7.2023)
 - fixed: Extend length should respect gapping #128
+- fixed: Delay is not set #124
 - fixed: After changing the language, the list headers remain on the previous language
 - fixed: The names of the menu items are not displayed #121
 - improved: Import shot changes [XML]
