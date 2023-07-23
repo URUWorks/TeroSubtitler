@@ -71,6 +71,7 @@ type
     actFormatProperties: TAction;
     actExportCustomTextFormat: TAction;
     actActor: TAction;
+    actExportCustomImageFormat: TAction;
     actSaveProject: TAction;
     actLoadProject: TAction;
     actMediaMoveSubtitle: TAction;
@@ -292,6 +293,7 @@ type
     MenuItem170: TMenuItem;
     MenuItem171: TMenuItem;
     MenuItem172: TMenuItem;
+    MenuItem173: TMenuItem;
     mnuFormatProperties: TMenuItem;
     mnuCheckForUpdates: TMenuItem;
     MenuItem17: TMenuItem;
@@ -897,6 +899,7 @@ type
     procedure actShowToolbarEncodingExecute(Sender: TObject);
     procedure actSortExecute(Sender: TObject);
     procedure actExportCustomTextFormatExecute(Sender: TObject);
+    procedure actExportCustomImageFormatExecute(Sender: TObject);
     procedure actActorExecute(Sender: TObject);
     procedure actLoadProjectExecute(Sender: TObject);
     procedure actSaveProjectExecute(Sender: TObject);

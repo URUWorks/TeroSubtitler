@@ -1586,6 +1586,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actExportCustomImageFormatExecute(Sender: TObject);
+begin
+  ShowCustomImageFormat;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actActorExecute(Sender: TObject);
 begin
   ShowActors;

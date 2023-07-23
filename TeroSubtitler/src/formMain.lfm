@@ -1229,6 +1229,9 @@ object frmMain: TfrmMain
         object MenuItem166: TMenuItem
           Action = actExportCustomTextFormat
         end
+        object MenuItem173: TMenuItem
+          Action = actExportCustomImageFormat
+        end
       end
       object Separator30: TMenuItem
         Caption = '-'
@@ -3420,6 +3423,12 @@ object frmMain: TfrmMain
       Category = 'File'
       Caption = 'Custom text format...'
       OnExecute = actExportCustomTextFormatExecute
+    end
+    object actExportCustomImageFormat: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Custom image format...'
+      OnExecute = actExportCustomImageFormatExecute
     end
     object actCompare: TAction
       Category = 'File'

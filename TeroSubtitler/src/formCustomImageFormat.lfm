@@ -1,0 +1,227 @@
+object frmCustomImageFormat: TfrmCustomImageFormat
+  Left = 245
+  Height = 289
+  Top = 119
+  Width = 756
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Custom image format'
+  ClientHeight = 289
+  ClientWidth = 756
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object cboScript: TComboBox
+    Left = 8
+    Height = 23
+    Top = 28
+    Width = 292
+    ItemHeight = 15
+    OnSelect = cboScriptSelect
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object lblScript: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 30
+    Caption = 'Script'
+    ParentColor = False
+  end
+  object lblFPS: TLabel
+    Left = 305
+    Height = 15
+    Top = 8
+    Width = 19
+    Caption = 'FPS'
+    ParentColor = False
+  end
+  object cboFPS: TComboBox
+    Left = 305
+    Height = 23
+    Top = 28
+    Width = 75
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object btnSave: TButton
+    Left = 593
+    Height = 25
+    Top = 256
+    Width = 75
+    Caption = 'Save...'
+    Default = True
+    Enabled = False
+    ModalResult = 1
+    OnClick = btnSaveClick
+    TabOrder = 14
+  end
+  object btnClose: TButton
+    Left = 673
+    Height = 25
+    Top = 256
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    ModalResult = 2
+    OnClick = btnCloseClick
+    TabOrder = 15
+  end
+  object edtFileName: TEdit
+    Left = 8
+    Height = 23
+    Top = 84
+    Width = 372
+    TabOrder = 2
+  end
+  object edtPrefix: TEdit
+    Left = 8
+    Height = 23
+    Top = 140
+    Width = 372
+    TabOrder = 3
+  end
+  object edtFolder: TEdit
+    Left = 7
+    Height = 23
+    Top = 196
+    Width = 292
+    TabOrder = 4
+  end
+  object lblFileName: TLabel
+    Left = 8
+    Height = 15
+    Top = 64
+    Width = 51
+    Caption = 'File name'
+    ParentColor = False
+  end
+  object lblPrefix: TLabel
+    Left = 8
+    Height = 15
+    Top = 120
+    Width = 66
+    Caption = 'Image prefix'
+    ParentColor = False
+  end
+  object lblFolder: TLabel
+    Left = 8
+    Height = 15
+    Top = 176
+    Width = 33
+    Caption = 'Folder'
+    ParentColor = False
+  end
+  object btnFolder: TButton
+    Left = 305
+    Height = 25
+    Top = 196
+    Width = 75
+    Caption = '...'
+    TabOrder = 5
+  end
+  object lblImageSize: TLabel
+    Left = 400
+    Height = 15
+    Top = 8
+    Width = 55
+    Caption = 'Image size'
+    ParentColor = False
+  end
+  object spnWidth: TSpinEdit
+    Left = 400
+    Height = 23
+    Top = 28
+    Width = 75
+    MinValue = 100
+    TabOrder = 6
+  end
+  object spnHeight: TSpinEdit
+    Left = 491
+    Height = 23
+    Top = 28
+    Width = 75
+    MinValue = 100
+    TabOrder = 7
+  end
+  object lblX: TLabel
+    Left = 480
+    Height = 15
+    Top = 32
+    Width = 6
+    Caption = 'x'
+    ParentColor = False
+  end
+  object lblSafeArea: TLabel
+    Left = 400
+    Height = 15
+    Top = 64
+    Width = 189
+    Caption = 'Safe area % (left, top, right, bottom)'
+    ParentColor = False
+  end
+  object spnLeft: TSpinEdit
+    Left = 400
+    Height = 23
+    Top = 84
+    Width = 75
+    TabOrder = 8
+  end
+  object spnTop: TSpinEdit
+    Left = 491
+    Height = 23
+    Top = 84
+    Width = 75
+    TabOrder = 9
+  end
+  object spnRight: TSpinEdit
+    Left = 582
+    Height = 23
+    Top = 84
+    Width = 75
+    TabOrder = 10
+  end
+  object spnBottom: TSpinEdit
+    Left = 673
+    Height = 23
+    Top = 84
+    Width = 75
+    TabOrder = 11
+  end
+  object cboFont: TComboBox
+    Left = 400
+    Height = 23
+    Top = 140
+    Width = 257
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 12
+  end
+  object lblFont: TLabel
+    Left = 400
+    Height = 15
+    Top = 120
+    Width = 24
+    Caption = 'Font'
+    ParentColor = False
+  end
+  object spnFontSize: TSpinEdit
+    Left = 673
+    Height = 23
+    Top = 140
+    Width = 75
+    TabOrder = 13
+  end
+  object lblFontSize: TLabel
+    Left = 673
+    Height = 15
+    Top = 120
+    Width = 20
+    Caption = 'Size'
+    ParentColor = False
+  end
+end

@@ -83,9 +83,9 @@ type
     property NewLineChar : String read FNewLine write FNewLine;
   end;
 
-  { TUWSubtitleExportFormat }
+  { TUWSubtitleCustomImageFormat }
 
-  TUWSubtitleExportFormat = class(TUWSubtitleTemplate)
+  TUWSubtitleCustomImageFormat = class(TUWSubtitleTemplate)
   private
     { Private declarations }
     FImageFormats : String;
@@ -323,11 +323,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-{ TUWSubtitleExportFormat }
+{ TUWSubtitleCustomImageFormat }
 
 // -----------------------------------------------------------------------------
 
-procedure TUWSubtitleExportFormat.ReadTemplate(const ReadOnlyHeader: Boolean = False);
+procedure TUWSubtitleCustomImageFormat.ReadTemplate(const ReadOnlyHeader: Boolean = False);
 begin
   if (FFileName <> '') and FileExists(FFileName) then
     with TIniFile.Create(FFileName) do

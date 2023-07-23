@@ -623,6 +623,13 @@
         <Filename Value="procProjectFile.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="formCustomImageFormat.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmCustomImageFormat"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
