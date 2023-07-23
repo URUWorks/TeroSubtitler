@@ -607,11 +607,11 @@ begin
     begin
       if IsHearingImpaired(Subtitles[Index].Text) then
       begin
-        s := FixHearingImpaired(Subtitles[Index].Text, sLineBreak);
-        if Subtitles[Index].Text <> s then
-        begin
+        //s := FixHearingImpaired(Subtitles[Index].Text, sLineBreak);
+        //if Subtitles[Index].Text <> s then
+        //begin
           Result := Result + [etHearingImpaired];
-        end;
+        //end;
       end;
     end;
 
