@@ -73,6 +73,11 @@
         <HasRegisterProc Value="True"/>
         <UnitName Value="UWHotKey"/>
       </Item>
+      <Item>
+        <Filename Value="UWTextBox.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWTextBox"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>
