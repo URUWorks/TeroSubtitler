@@ -1,6 +1,7 @@
 1.0.0.8 (x.8.2023)
 - fixed: Project autoname #132
 - fixed: Missing strings in language file
+- added: Italian language (thx GitGianluc)
 - added: Russian language (thx RoxMarty)
 - added: Shotchanges offset
 - added: Custom image format export
