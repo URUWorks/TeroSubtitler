@@ -19,7 +19,7 @@
       <mnuSelect>Seleziona</mnuSelect>      
       <mnuTools>Strumenti</mnuTools>
       <mnuToolsTranslationMemory>Memoria di traduzione</mnuToolsTranslationMemory>
-	  <mnuToolsTerminology>Glossario</mnuToolsTerminology>      
+      <mnuToolsTerminology>Glossario</mnuToolsTerminology>      
       <mnuView>Visualizza</mnuView>
       <mnuViewColumns>Colonne</mnuViewColumns>
       <mnuViewToolbars>Barre degli strumenti</mnuViewToolbars>      
@@ -126,7 +126,7 @@
       <actGoTo>Vai al numero di riga...</actGoTo>
       <actReadTimingsFromFile>Leggi tempistiche da file...</actReadTimingsFromFile>
       <actReadTextsFromFile>Leggi testo da file...</actReadTextsFromFile>
-      <actActor>Attori...</actActor>
+      <actActor>Interpreti...</actActor>
       <actExtendLengthToPrevious>Estendi il tempo di inizio al precedente</actExtendLengthToPrevious>
       <actExtendLengthToNext>Estendi il tempo di fine al successivo</actExtendLengthToNext>
       <actSetAutomaticDuration>Imposta durata automatica</actSetAutomaticDuration>
@@ -503,7 +503,7 @@
       <lblRules>Norme</lblRules>
     </Section>
   </Form>
-  <Form Name="frmActors" Caption="Attori"/>  
+  <Form Name="frmActors" Caption="Interpreti"/>  
   <Form Name="frmAudioToText" Caption="Da audio a testo">
     <Section Name="TLabel">
       <lblTrack>Traccia</lblTrack>    
@@ -848,7 +848,7 @@
     <Index>#/Intervallo</Index>
     <Times>Tempistiche</Times>
     <Duration>Durata</Duration>
-    <StyleAndActor>Stile/Attore</StyleAndActor>
+    <StyleAndActor>Stile/Interprete</StyleAndActor>
     <Text>Testo</Text>
     <Translation>Traduzione</Translation>
     <CPS>CPS</CPS>
