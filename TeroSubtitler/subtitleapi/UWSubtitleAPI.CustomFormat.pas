@@ -39,6 +39,7 @@ type
     FDecSeparator : Char;
     FSubPadding   : Byte;
     FFPSPadding   : Byte;
+    FFPS          : Single;
     FHeader       : String;
     FBody         : String;
     FFooter       : String;
@@ -62,6 +63,7 @@ type
     property DecSeparator : Char        read FDecSeparator write FDecSeparator;
     property SubPadding   : Byte        read FSubPadding   write FSubPadding;
     property FPSPadding   : Byte        read FFPSPadding   write FFPSPadding;
+    property FPS          : Single      read FFPS          write FFPS;
     property Header       : String      read FHeader       write FHeader;
     property Body         : String      read FBody         write FBody;
     property Footer       : String      read FFooter       write FFooter;
@@ -73,13 +75,11 @@ type
   TUWSubtitleCustomTextFormat = class(TUWSubtitleTemplate)
   private
     { Private declarations }
-    FFPS     : Single;
     FNewLine : String;
     procedure ReadTemplate(const ReadOnlyHeader: Boolean = False); override;
   public
     { Public declarations }
     procedure SaveToFile(const AFileName: String); override;
-    property FPS         : Single read FFPS     write FFPS;
     property NewLineChar : String read FNewLine write FNewLine;
   end;
 
@@ -336,6 +336,7 @@ begin
       FExtension    := ReadString(InfoHeader, 'Extension', '');
       FTimeFormat   := ReadString(InfoHeader, 'Time Structure', 'hh:mm:ss:zz');
       FTime         := ReadBool(InfoHeader, 'Time', True);
+      FFPS          := ReadInteger(InfoHeader, 'FPS', 25);
       FDecSeparator := ReadString(InfoHeader, 'Decimal separator', '.')[1];
       FImageFormats := ReadString(InfoHeader, 'Image format', 'bmp8');
       FTransparent  := HexStrToInt(ReadString(InfoHeader, 'Transparent color', 'FF00FF'));

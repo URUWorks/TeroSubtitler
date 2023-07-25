@@ -1,0 +1,28 @@
+;
+; URUWorks Tero Subtitler - Custom Image Format
+;
+
+[Information]
+Name=Sonic Scenarist HDMV Authoring
+Extension=*.xml
+Time structure=hh:mm:ss:ff
+Time=True
+Decimal separator=.
+
+[Format text]
+<?xml version="1.0" encoding="UTF-8"?>
+<BDN Version="0.93" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BD-03-006-0093b BDN File Format.xsd">
+  <Description>
+    <Name Title="{Company}" Content=""/>
+    <Language Code="eng"/>
+    <Format VideoFormat="{ImageHeight}p" FrameRate="{FPS}" DropFrame="False"/>
+    <Events Type="Graphic" FirstEventInTC="{FirstStart}" LastEventOutTC="{LastEnd}" NumberofEvents="{TotalCount}"/>
+  </Description>
+  <Events>
+{RepeatSub}
+    <Event InTC="{tsStart}" OutTC="{tsEnd}" Forced="False">
+      <Graphic Width="{ImageWidth}" Height="{ImageHeight}" X="0" Y="0">{tsImage}</Graphic>
+    </Event>
+{EndRepeat}
+  </Events>
+</BDN>

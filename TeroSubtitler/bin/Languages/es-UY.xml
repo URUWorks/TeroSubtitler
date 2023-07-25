@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language Mail="uruworks@gmail.com" Name="es-UY" Count="40" Author="URUWorks">
+<Language Mail="uruworks@gmail.com" Name="es-UY" Count="41" Author="URUWorks">
   <Form Name="frmMain" Caption="tero subtitler">
     <Section Name="TMenuItem">
       <mnuFile>Archivo</mnuFile>
@@ -276,7 +276,7 @@
       <lblFileName>Nombre de archivo</lblFileName>
       <lblFormat>Formato</lblFormat>
       <lblEncoding>Codificación</lblEncoding>
-      <lblFPS>CPS</lblFPS>
+      <lblFPS>FPS</lblFPS>
     </Section>
   </Form>
   <Form Name="frmDelay" Caption="Establecer retraso"/>
@@ -430,7 +430,7 @@
   <Form Name="frmCustomTextFormat" Caption="Formato de texto personalizado">
     <Section Name="TLabel">
       <lblScript>Guion</lblScript>
-      <lblFPS>CPS</lblFPS>
+      <lblFPS>FPS</lblFPS>
       <lblEncoding>Codificación</lblEncoding>
       <lblTitle>Título</lblTitle>
       <lblExtension>Extensión</lblExtension>
@@ -439,7 +439,19 @@
       <lblSeparatorChar>Separador decimal</lblSeparatorChar>
       <lblTimeCode>Código de tiempo</lblTimeCode>
     </Section>
-  </Form>      
+  </Form>
+  <Form Name="frmCustomImageFormat" Caption="Formato de imagén personalizado">
+    <Section Name="TLabel">
+      <lblScript>Guion</lblScript>
+      <lblFPS>FPS</lblFPS>
+      <lblPrefix>Prefijo</lblPrefix>
+      <lblFolder>Carpeta</lblFolder>
+      <lblImageSize>Tamaño de la imagen</lblImageSize>
+      <lblSafeArea>Área segura (izquierda, arriba, derecha, abajo)</lblSafeArea>
+      <lblFont>Fuente</lblFont>
+      <lblFontSize>Tamaño</lblFontSize>
+    </Section>
+  </Form>              
   <Form Name="frmTranslationMemory" Caption="Memoria de traducción"/>
   <Form Name="frmTranslationMemorySettings" Caption="Configuración de la memoria de traducción">
     <Section Name="TLabel">
@@ -716,7 +728,8 @@
     <ErrorExecuting>Error al ejecutar '%s'.</ErrorExecuting>            
     <FeatureNotAvailableFromURL>Función no disponible para video en línea.</FeatureNotAvailableFromURL>
     <MultipleTracksDetected>Múltiples pistas detectadas</MultipleTracksDetected> 
-    <SelectTrackToUse>Seleccione la pista a utilizar:</SelectTrackToUse>    
+    <SelectTrackToUse>Seleccione la pista a utilizar:</SelectTrackToUse>
+    <WriteStatus>Escribiendo %d/%d</WriteStatus>    
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>Todos los subtitulos</rbnAllTheSubtitles>

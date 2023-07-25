@@ -61,8 +61,6 @@ type
     procedure FormShow(Sender: TObject);
   private
     CustomFormat: TUWSubtitleCustomTextFormat;
-    function ReplaceHeaderTags(const S, TimeFormat: String): String;
-    function ReplaceBodyTags(const S, TimeFormat: String; const Item: TUWSubtitleItem; const InFrames: Boolean; const NewChar: String; const Index: Integer): String;
   public
 
   end;
@@ -76,7 +74,7 @@ implementation
 
 uses
   procWorkspace, procTypes, procCommon, UWSystem.XMLLang, UWSystem.Encoding,
-  UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils;
+  UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils, procCustomFormat;
 
 {$R *.lfm}
 
@@ -174,13 +172,13 @@ begin
           try
             Clear;
             if Header <> '' then
-              Add(ReplaceHeaderTags(Header, TimeFormat));
+              Add(CFReplaceHeaderTags(Header, TimeFormat, cboFPS.Text, 0, 0));
 
             for i := 0 to Subtitles.Count-1 do
-              Add(ReplaceBodyTags(Body, TimeFormat, Subtitles[i], not Time, NewLineChar, i+1));
+              Add(CFReplaceBodyTags(Body, TimeFormat, cboFPS.Text, Subtitles[i], not Time, NewLineChar, i+1));
 
             if Footer <> '' then
-              Add(ReplaceHeaderTags(Footer, TimeFormat));
+              Add(CFReplaceHeaderTags(Footer, TimeFormat, cboFPS.Text, 0, 0));
           finally
             EndUpdate;
           end;
@@ -222,58 +220,6 @@ begin
         cboTimeCode.ItemIndex := 1;
       mmoSource.Text          := Text;
     end;
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-function TfrmCustomTextFormat.ReplaceHeaderTags(const S, TimeFormat: String): String;
-begin
-  Result := ReplaceString(S,   '{$Company}', 'URUWorks');
-  Result := ReplaceString(Result, '{$Software}', ProgramName);
-  Result := ReplaceString(Result, '{$WebSite}', ProgramWebsite);
-  Result := ReplaceString(Result, '{TotalCount}', IntToStr(Subtitles.Count));
-  Result := ReplaceString(Result, '{FPS}', cboFPS.Text);
-  with Subtitles[0] do // First node
-  begin
-    Result := ReplaceString(Result, '{FirstStart}', Iff(TimeFormat <> '', TimeToString(InitialTime, TimeFormat), IntToStr(InitialTime)));
-    Result := ReplaceString(Result, '{FirstEnd}', Iff(TimeFormat <> '', TimeToString(FinalTime, TimeFormat), IntToStr(FinalTime)));
-  end;
-  with Subtitles[Subtitles.Count-1] do // Last node
-  begin
-    Result := ReplaceString(Result, '{LastStart}', Iff(TimeFormat <> '', TimeToString(InitialTime, TimeFormat), IntToStr(InitialTime)));
-    Result := ReplaceString(Result, '{LastEnd}', Iff(TimeFormat <> '', TimeToString(FinalTime, TimeFormat), IntToStr(FinalTime)));
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-function TfrmCustomTextFormat.ReplaceBodyTags(const S, TimeFormat: String; const Item: TUWSubtitleItem; const InFrames: Boolean; const NewChar: String; const Index: Integer): String;
-
-  function GetTime(const Time: Cardinal): String;
-  begin
-    if InFrames then
-      Result := IntToStr(TimeToFrames(Time, StrToSingle(cboFPS.Text, Workspace.FPS.DefFPS, AppOptions.FormatSettings)))
-    else
-      Result := Iff(TimeFormat <> '', TimeToString(Time, TimeFormat), IntToStr(Time));
-  end;
-
-begin
-  with Item do
-  begin
-    Result := ReplaceHeaderTags(S, TimeFormat);
-    Result := ReplaceString(Result, '{tsIndex}', IntToStr(Index));
-    Result := ReplaceString(Result, '{tsStart}', GetTime(InitialTime));
-    Result := ReplaceString(Result, '{tsEnd}', GetTime(FinalTime));
-    Result := ReplaceString(Result, '{tsDuration}', GetTime(FinalTime-InitialTime));
-    Result := ReplaceString(Result, '{tsText}', ReplaceEnters(Text, sLineBreak, iff(LowerCase(NewChar) = '[enter]', sLineBreak, NewChar)));
-    Result := ReplaceString(Result, '{tsTranslation}', ReplaceEnters(Translation, sLineBreak, iff(LowerCase(NewChar) = '[enter]', sLineBreak, NewChar)));
-    Result := ReplaceString(Result, '{tsStyle}', Style);
-    Result := ReplaceString(Result, '{tsActor}', Actor);
-    Result := ReplaceString(Result, '{tsX1}', IntToStr(R.Left));
-    Result := ReplaceString(Result, '{tsX2}', IntToStr(R.Right));
-    Result := ReplaceString(Result, '{tsY1}', IntToStr(R.Top));
-    Result := ReplaceString(Result, '{tsY2}', IntToStr(R.Bottom));
   end;
 end;
 

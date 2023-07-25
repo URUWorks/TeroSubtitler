@@ -56,9 +56,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Caption = 'Save...'
     Default = True
     Enabled = False
-    ModalResult = 1
     OnClick = btnSaveClick
-    TabOrder = 14
+    TabOrder = 13
   end
   object btnClose: TButton
     Left = 673
@@ -67,62 +66,47 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Width = 75
     Cancel = True
     Caption = 'Close'
-    ModalResult = 2
     OnClick = btnCloseClick
-    TabOrder = 15
+    TabOrder = 14
   end
-  object edtFileName: TEdit
+  object edtPrefix: TEdit
     Left = 8
     Height = 23
     Top = 84
     Width = 372
     TabOrder = 2
   end
-  object edtPrefix: TEdit
+  object edtFolder: TEdit
     Left = 8
     Height = 23
     Top = 140
-    Width = 372
-    TabOrder = 3
-  end
-  object edtFolder: TEdit
-    Left = 7
-    Height = 23
-    Top = 196
     Width = 292
-    TabOrder = 4
-  end
-  object lblFileName: TLabel
-    Left = 8
-    Height = 15
-    Top = 64
-    Width = 51
-    Caption = 'File name'
-    ParentColor = False
+    TabOrder = 3
   end
   object lblPrefix: TLabel
     Left = 8
     Height = 15
-    Top = 120
+    Top = 64
     Width = 66
     Caption = 'Image prefix'
     ParentColor = False
   end
   object lblFolder: TLabel
-    Left = 8
+    Left = 9
     Height = 15
-    Top = 176
+    Top = 120
     Width = 33
     Caption = 'Folder'
     ParentColor = False
   end
   object btnFolder: TButton
-    Left = 305
+    Left = 306
     Height = 25
-    Top = 196
+    Top = 140
     Width = 75
     Caption = '...'
-    TabOrder = 5
+    OnClick = btnFolderClick
+    TabOrder = 4
   end
   object lblImageSize: TLabel
     Left = 400
@@ -138,7 +122,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Top = 28
     Width = 75
     MinValue = 100
-    TabOrder = 6
+    TabOrder = 5
     Value = 720
   end
   object spnHeight: TSpinEdit
@@ -147,7 +131,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Top = 28
     Width = 75
     MinValue = 100
-    TabOrder = 7
+    TabOrder = 6
     Value = 576
   end
   object lblX: TLabel
@@ -162,8 +146,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Left = 400
     Height = 15
     Top = 64
-    Width = 189
-    Caption = 'Safe area % (left, top, right, bottom)'
+    Width = 176
+    Caption = 'Safe area (left, top, right, bottom)'
     ParentColor = False
   end
   object spnLeft: TSpinEdit
@@ -171,28 +155,28 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
-    TabOrder = 8
+    TabOrder = 7
   end
   object spnTop: TSpinEdit
     Left = 491
     Height = 23
     Top = 84
     Width = 75
-    TabOrder = 9
+    TabOrder = 8
   end
   object spnRight: TSpinEdit
     Left = 582
     Height = 23
     Top = 84
     Width = 75
-    TabOrder = 10
+    TabOrder = 9
   end
   object spnBottom: TSpinEdit
     Left = 673
     Height = 23
     Top = 84
     Width = 75
-    TabOrder = 11
+    TabOrder = 10
   end
   object cboFont: TComboBox
     Left = 400
@@ -202,7 +186,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     ItemHeight = 15
     OnSelect = cboFontSelect
     Style = csDropDownList
-    TabOrder = 12
+    TabOrder = 11
   end
   object lblFont: TLabel
     Left = 400
@@ -218,7 +202,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Top = 140
     Width = 75
     OnChange = cboFontSelect
-    TabOrder = 13
+    TabOrder = 12
     Value = 24
   end
   object lblFontSize: TLabel
@@ -231,13 +215,24 @@ object frmCustomImageFormat: TfrmCustomImageFormat
   end
   object ttbPreview: TUWTextBox
     Cursor = crArrow
-    Left = 8
-    Height = 135
-    Top = 240
+    Left = 9
+    Height = 199
+    Top = 176
     Width = 740
     Text = 'URUWorks Tero Subtitler'
     BackColor = clDefault
     Font.Color = clWhite
     Font.Height = -32
+  end
+  object lblStatus: TLabel
+    Left = 9
+    Height = 48
+    Top = 208
+    Width = 740
+    Alignment = taCenter
+    AutoSize = False
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
   end
 end

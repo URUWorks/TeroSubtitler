@@ -1,0 +1,22 @@
+;
+; URUWorks Tero Subtitler - Custom Image Format
+;
+
+[Information]
+Name=DoStudio
+Extension=*.dost
+Time structure=hh:mm:ss:ff
+Time=True
+Decimal separator=.
+SubPadding=4
+FPSPadding=5
+
+[Format text]
+$FORMAT=480
+$DROP={FPS}
+$VERSION=1.2
+$ULEAD=TRUE
+NO		INTIME		OUTTIME		XPOS	YPOS	FILENAME	FADEIN	FADEOUT
+{RepeatSub}
+{tsIndex}	{tsStart}	{tsEnd}	0		0	{tsImage}	0		0
+{EndRepeat}

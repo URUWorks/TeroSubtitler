@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language Mail="uruworks@gmail.com" Name="Default" Count="40" Author="URUWorks">
+<Language Mail="uruworks@gmail.com" Name="Default" Count="41" Author="URUWorks">
   <Form Name="frmMain" Caption="tero subtitler">
     <Section Name="TMenuItem">
       <mnuFile>File</mnuFile>
@@ -440,6 +440,18 @@
       <lblTimeCode>Time code</lblTimeCode>
     </Section>
   </Form>        
+  <Form Name="frmCustomImageFormat" Caption="Custom image format">
+    <Section Name="TLabel">
+      <lblScript>Script</lblScript>
+      <lblFPS>FPS</lblFPS>
+      <lblPrefix>Prefix</lblPrefix>
+      <lblFolder>Folder</lblFolder>
+      <lblImageSize>Image size</lblImageSize>
+      <lblSafeArea>Safe area (left, top, right, bottom)</lblSafeArea>
+      <lblFont>Font</lblFont>
+      <lblFontSize>Size</lblFontSize>
+    </Section>
+  </Form>      
   <Form Name="frmTranslationMemory" Caption="Translation memory"/>
   <Form Name="frmTranslationMemorySettings" Caption="Translation memory settings">
     <Section Name="TLabel">
@@ -717,6 +729,7 @@
     <FeatureNotAvailableFromURL>Function not available for online video.</FeatureNotAvailableFromURL>
     <MultipleTracksDetected>Multiple tracks detected</MultipleTracksDetected> 
     <SelectTrackToUse>Select the track to use:</SelectTrackToUse>
+    <WriteStatus>Writing %d/%d</WriteStatus>    
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>All the subtitles</rbnAllTheSubtitles>

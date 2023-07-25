@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
-  UWSubtitleAPI.CustomFormat, UWTextBox;
+  UWTextBox, UWSubtitleAPI.CustomFormat, UWSubtitleAPI, UWSubtitleAPI.Tags;
 
 type
 
@@ -36,16 +36,15 @@ type
     cboScript: TComboBox;
     cboFPS: TComboBox;
     cboFont: TComboBox;
-    edtFileName: TEdit;
     edtPrefix: TEdit;
     edtFolder: TEdit;
+    lblStatus: TLabel;
     lblFont: TLabel;
     lblSafeArea: TLabel;
     lblFontSize: TLabel;
     lblX: TLabel;
     lblScript: TLabel;
     lblFPS: TLabel;
-    lblFileName: TLabel;
     lblPrefix: TLabel;
     lblFolder: TLabel;
     lblImageSize: TLabel;
@@ -58,6 +57,7 @@ type
     spnRight: TSpinEdit;
     ttbPreview: TUWTextBox;
     procedure btnCloseClick(Sender: TObject);
+    procedure btnFolderClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure cboFontSelect(Sender: TObject);
     procedure cboScriptSelect(Sender: TObject);
@@ -65,7 +65,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
-    CustomFormat: TUWSubtitleCustomTextFormat;
+    CustomFormat: TUWSubtitleCustomImageFormat;
+    StatusString: String;
+    procedure SaveImageFile(const AFileName: String; const AIndex: Integer);
   public
 
   end;
@@ -79,7 +81,7 @@ implementation
 
 uses
   procWorkspace, procTypes, procCommon, UWSystem.XMLLang, UWSystem.Encoding,
-  UWSystem.SysUtils;
+  UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils, procCustomFormat;
 
 {$R *.lfm}
 
@@ -91,11 +93,10 @@ uses
 
 procedure TfrmCustomImageFormat.FormCreate(Sender: TObject);
 var
-  FAppStringList: TAppStringList = NIL;
   i: Integer;
 begin
   LoadLanguage(Self);
-  CustomFormat := TUWSubtitleCustomTextFormat.Create('');
+  CustomFormat := TUWSubtitleCustomImageFormat.Create('');
 
   FillComboWithFPS(cboFPS, GetFPS);
   FillComboWithCustomFormat(cboScript, '*.cfi');
@@ -107,12 +108,13 @@ begin
   else
     cboFont.ItemIndex := 0;
 
-  LanguageManager.GetAppStringList('CustomFormatStrings', FAppStringList);
-  FAppStringList.Free;
+  StatusString := GetCommonString('WriteStatus');
 
   cboScriptSelect(NIL);
 
   btnSave.Enabled := cboScript.Items.Count > 0;
+
+  lblStatus.Hide;
 end;
 
 // -----------------------------------------------------------------------------
@@ -144,22 +146,80 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmCustomImageFormat.btnFolderClick(Sender: TObject);
+begin
+  with TSelectDirectoryDialog.Create(Self) do
+  try
+    Options := Options + [ofOldStyleDialog, ofCreatePrompt];
+
+    if Execute then
+      edtFolder.Text := FileName;
+  finally
+    Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmCustomImageFormat.btnSaveClick(Sender: TObject);
 var
-  SD : TSaveDialog;
+  SD  : TSaveDialog;
+  TXT : TStringList;
+  i   : Integer;
+  img : String;
 begin
-  SD := TSaveDialog.Create(NIL);
-  try
-    SD.Title  := GetCommonString('SaveFile');
-    //SD.Filter := Format('%s (%s)|%s', []);
-    SD.FilterIndex := 0;
-    SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
-    SD.Options := [ofOverwritePrompt, ofEnableSizing];
-    if SD.Execute then
-    begin
+  if edtPrefix.Text = '' then
+    edtPrefix.SetFocus
+  else if edtFolder.Text = '' then
+    edtFolder.SetFocus
+  else
+  begin
+    SD := TSaveDialog.Create(NIL);
+    try
+      SD.Title  := GetCommonString('SaveFile');
+      with CustomFormat do
+        SD.Filter := Format('%s (%s)|%s', [CustomFormat.Name, CustomFormat.Extension, CustomFormat.Extension]);
+      SD.FilterIndex := 0;
+      SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
+      SD.Options := [ofOverwritePrompt, ofEnableSizing];
+      if SD.Execute then
+      begin
+        with CustomFormat do
+        begin
+          TXT := TStringList.Create;
+          with TXT do
+          try
+            lblStatus.Show;
+            ttbPreview.Hide;
+            BeginUpdate;
+            try
+              if Header <> '' then
+                Add(CFReplaceHeaderTags(Header, TimeFormat, cboFPS.Text, spnWidth.Value, spnHeight.Value));
+
+              for i := 0 to Subtitles.Count-1 do
+              begin
+                lblStatus.Caption := Format(StatusString, [i, Subtitles.Count]);
+                Application.ProcessMessages;
+                img := Format('%s%.4d.png', [edtPrefix.Text, i+1]);
+                Add(CFReplaceBodyTags(Body, TimeFormat, cboFPS.Text, Subtitles[i], not Time, sLineBreak, i+1, img));
+                SaveImageFile(ConcatPaths([edtFolder.Text, img]), i);
+              end;
+
+              if Footer <> '' then
+                Add(CFReplaceHeaderTags(Footer, TimeFormat, cboFPS.Text, spnWidth.Value, spnHeight.Value));
+            finally
+              EndUpdate;
+            end;
+            SaveToFile(ChangeFileExt(SD.FileName, Extension));
+          finally
+            Free;
+          end;
+        end;
+        Close;
+      end;
+    finally
+      SD.Free;
     end;
-  finally
-    SD.Free;
   end;
 end;
 
@@ -188,6 +248,14 @@ begin
   ttbPreview.Font.Name := cboFont.Text;
   ttbPreview.Font.Size := spnFontSize.Value;
   ttbPreview.ReDraw;
+end;
+
+// -----------------------------------------------------------------------------
+
+
+procedure TfrmCustomImageFormat.SaveImageFile(const AFileName: String; const AIndex: Integer);
+begin
+  ttbPreview.SaveImageToFile(AFileName, RemoveTSTags(Subtitles[AIndex].Text), spnWidth.Value, spnHeight.Value, True);
 end;
 
 // -----------------------------------------------------------------------------

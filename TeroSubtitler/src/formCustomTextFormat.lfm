@@ -73,7 +73,6 @@ object frmCustomTextFormat: TfrmCustomTextFormat
     Caption = 'Save...'
     Default = True
     Enabled = False
-    ModalResult = 1
     OnClick = btnSaveClick
     TabOrder = 5
   end
@@ -84,7 +83,6 @@ object frmCustomTextFormat: TfrmCustomTextFormat
     Width = 75
     Cancel = True
     Caption = 'Close'
-    ModalResult = 2
     OnClick = btnCloseClick
     TabOrder = 6
   end

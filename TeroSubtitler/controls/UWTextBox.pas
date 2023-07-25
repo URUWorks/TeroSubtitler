@@ -31,28 +31,30 @@ type
 
   TUWTextBox = class(TGraphicControl)
   private
-    FBuffer    : TBGRABitmap;
-    FRenderer  : TBGRATextEffectFontRenderer;
-    FLoaded    : Boolean;
-    FText      : String;
-    FBackColor : TColor;
-    FSpacing   : Byte;
+    FBitmap      : TBGRABitmap;
+    FRenderer    : TBGRATextEffectFontRenderer;
+    FLoaded      : Boolean;
+    FText        : String;
+    FBackColor   : TColor;
+    FSpacing     : Byte;
+    FTransparent : Boolean;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    procedure DrawBuffer(const ABuffer: TBGRABitmap = NIL; const AWidth: Integer = -1; const AHeight: Integer = -1; const ATransparent: Boolean = False);
+    procedure DrawBuffer(const AWidth: Integer = -1; const AHeight: Integer = -1);
     procedure ReDraw;
-    procedure SaveToFile(const AFileName: String; const AWidth: Integer = -1; const AHeight: Integer = -1; const ATransparent: Boolean = False);
-    property Buffer: TBGRABitmap read FBuffer;
+    procedure SaveImageToFile(const AFileName: String; const AText: String = ''; const AWidth: Integer = -1; const AHeight: Integer = -1; const ATransparent: Boolean = False);
+    property Bitmap: TBGRABitmap read FBitmap;
     property Renderer: TBGRATextEffectFontRenderer read FRenderer;
   protected
     procedure Loaded; override;
     procedure Paint; override;
     procedure Resize; override;
   published
-    property Text      : String read FText      write FText;
-    property BackColor : TColor read FBackColor write FBackColor;
-    property Spacing   : Byte   read FSpacing   write FSpacing;
+    property Text        : String  read FText        write FText;
+    property BackColor   : TColor  read FBackColor   write FBackColor;
+    property Spacing     : Byte    read FSpacing     write FSpacing;
+    property Transparent : Boolean read FTransparent write FTransparent;
 
     property Anchors;
     property Font;
@@ -78,8 +80,8 @@ constructor TUWTextBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
-  Width  := 100;
-  Height := 7;
+  Width  := 200;
+  Height := 100;
 
   ControlStyle := ControlStyle + [csOpaque];
   Color        := clDefault;
@@ -91,15 +93,17 @@ begin
   else
     FBackColor := clBtnFace;
 
-  FText    := 'URUWorks Tero Subtitler';
-  FSpacing := 0;
+  FText        := 'URUWorks Tero Subtitler';
+  FSpacing     := 0;
+  FTransparent := False;
+
   with Font do
   begin
     Color := clWhite;
     Size  := 24;
   end;
 
-  FBuffer   := TBGRABitmap.Create(Width, Height, ColorToBGRA(FBackColor));
+  FBitmap   := TBGRABitmap.Create(Width, Height, ColorToBGRA(FBackColor));
   FRenderer := TBGRATextEffectFontRenderer.Create;
 
   with FRenderer do
@@ -114,13 +118,19 @@ begin
     ShadowColor      := ColorToBGRA(clBlack);
     ShadowVisible    := True;
   end;
+
+  with FBitmap do
+  begin
+    FontRenderer := FRenderer;
+    FontQuality  := fqFineAntialiasing;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
 
 destructor TUWTextBox.Destroy;
 begin
-  FBuffer.Free;
+  FBitmap.Free;
   inherited Destroy;
 end;
 
@@ -141,7 +151,7 @@ begin
     Canvas.DrawFocusRect(Rect(0, 0, Width, Height));
 
   if Visible then
-    FBuffer.Draw(Canvas, 0, 0);
+    FBitmap.Draw(Canvas, 0, 0);
 end;
 
 // -----------------------------------------------------------------------------
@@ -156,26 +166,16 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTextBox.DrawBuffer(const ABuffer: TBGRABitmap = NIL; const AWidth: Integer = -1; const AHeight: Integer = -1; const ATransparent: Boolean = False);
-var
-  bgra: TBGRABitmap;
+procedure TUWTextBox.DrawBuffer(const AWidth: Integer = -1; const AHeight: Integer = -1);
 begin
-  if ABuffer <> NIL then
-    bgra := ABuffer
-  else
-    bgra := FBuffer;
-
-  bgra.FontRenderer := FRenderer;
-  bgra.FontQuality  := fqFineAntialiasing;
-
-  if (AWidth > 0) and (AHeight > 0) then
-    bgra.SetSize(AWidth, AHeight)
-  else
-    bgra.SetSize(Width, Height);
-
-  with bgra do
+  with FBitmap do
   begin
-    if ATransparent then
+    if (AWidth > 0) and (AHeight > 0) then
+      SetSize(AWidth, AHeight)
+    else
+      SetSize(Self.Width, Self.Height);
+
+    if FTransparent then
       FillTransparent
     else
       Fill(ColorToBGRA(FBackColor));
@@ -196,17 +196,15 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTextBox.SaveToFile(const AFileName: String; const AWidth: Integer = -1; const AHeight: Integer = -1; const ATransparent: Boolean = False);
-var
-  bgra: TBGRABitmap;
+procedure TUWTextBox.SaveImageToFile(const AFileName: String; const AText: String = ''; const AWidth: Integer = -1; const AHeight: Integer = -1; const ATransparent: Boolean = False);
 begin
-  bgra := TBGRABitmap.Create(Width, Height, ColorToBGRA(FBackColor));
-  try
-    DrawBuffer(bgra, AWidth, AHeight, ATransparent);
-    bgra.SaveToFile(AFileName);
-  finally
-    bgra.Free;
-  end;
+  if not AText.IsEmpty then
+    FText := AText;
+
+  FTransparent := ATransparent;
+
+  DrawBuffer(AWidth, AHeight);
+  FBitmap.SaveToFile(AFileName);
 end;
 
 // -----------------------------------------------------------------------------
