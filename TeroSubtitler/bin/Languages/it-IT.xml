@@ -731,8 +731,8 @@
     <btnLoad>Apri</btnLoad>    
     <btnApply>Applica</btnApply>
     <btnFind>Trova</btnFind>
-    <btnFindNext>Find successivo</btnFindNext>
-    <btnFindPrev>Find precedente</btnFindPrev>
+    <btnFindNext>Trova successivo</btnFindNext>
+    <btnFindPrev>Trova precedente</btnFindPrev>
     <btnReplace>Sostituisci</btnReplace>
     <btnReplaceAll>Sostituisci tutto</btnReplaceAll>
     <btnRestore>Ripristina</btnRestore>
@@ -828,7 +828,7 @@
   </CompareStrings>
   <FormatPropertiesStrings>
     <Center>Al centro</Center>
-    <Left>A sinista</Left>
+    <Left>A sinistra</Left>
     <Right>A destra</Right>          
     <Undefined>Non definito</Undefined>
     <OpenSubtitling>Sottotitolazione libera</OpenSubtitling>
