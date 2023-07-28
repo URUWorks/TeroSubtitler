@@ -47,9 +47,9 @@ type
     function Ready: Boolean;
     function LoadDictionary(const aff, dict: String): Boolean;
     procedure UnloadDictionary;
-    function Spell(const Text: String): Boolean;
-    function Suggest(const Text: String; var Suggests: TStrings): Boolean;
-    procedure Add(const Word: String);
+    function Spell(const AWord: String): Boolean;
+    function Suggest(const AWord: String; var ASuggests: TStrings): Boolean;
+    procedure Add(const AWord: String);
     function GetCorrectLibrayFileName: String;
   end;
 
@@ -129,7 +129,7 @@ begin
   if not Ready or not FileExists(aff) or not FileExists(dict) then Exit;
 
   if Assigned(hunspell_create) then
-    FSpell := hunspell_create(PChar(String(aff)), PChar(String(dict)));
+    FSpell := hunspell_create(PChar(aff), PChar(dict));
 
   Result := FSpell <> NIL;
 end;
@@ -147,42 +147,46 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWHunspell.Spell(const Text: String): Boolean;
+function TUWHunspell.Spell(const AWord: String): Boolean;
 begin
   if Assigned(FSpell) and Assigned(hunspell_spell) then
-    Result := hunspell_spell(FSpell, PChar(String(Text)))
+    Result := hunspell_spell(FSpell, PChar(AWord))
   else
     Result := False;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWHunspell.Suggest(const Text: String; var Suggests: TStrings): Boolean;
+function TUWHunspell.Suggest(const AWord: String; var ASuggests: TStrings): Boolean;
 var
   l, i : Integer;
-  s    : PPChar;
+  s, w : PPChar;
 begin
-  if (Suggests = NIL) then Suggests := TStringList.Create;
-  Suggests.Clear;
+  if (ASuggests = NIL) then ASuggests := TStringList.Create;
+  ASuggests.Clear;
 
   if Assigned(FSpell) and Assigned(hunspell_suggest) then
   begin
-    l := hunspell_suggest(FSpell, s, PChar(String(Text)));
-    for i := 1 to Pred(l) do
-      Suggests.Add(String(s[i]));
+    l := hunspell_suggest(FSpell, s, PChar(AWord));
+    w := s;
+    for i := 1 to l do
+    begin
+      ASuggests.Add(w^);
+      Inc(PtrInt(w), SizeOf(Pointer));
+    end;
 
     if Assigned(hunspell_free_list) then hunspell_free_list(FSpell, s, l);
   end;
 
-  Result := Suggests.Count > 0;
+  Result := ASuggests.Count > 0;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWHunspell.Add(const Word: String);
+procedure TUWHunspell.Add(const AWord: String);
 begin
   if Assigned(FSpell) and Assigned(hunspell_add) then
-    if Word <> '' then hunspell_add(FSpell, PChar(String(Word)));
+    if AWord <> '' then hunspell_add(FSpell, PChar(AWord));
 end;
 
 // -----------------------------------------------------------------------------
