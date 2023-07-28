@@ -36,8 +36,8 @@ procedure DefaultValues;
 procedure LoadSettings;
 procedure SaveSettings;
 
-procedure LoadFormSettings(const AForm: TForm);
-procedure SaveFormSettings(const AForm: TForm);
+function LoadFormSettings(const AForm: TForm): String;
+procedure SaveFormSettings(const AForm: TForm; const AExtra: String = '');
 
 procedure LoadActors;
 procedure SaveActors;
@@ -903,7 +903,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure LoadFormSettings(const AForm: TForm);
+function LoadFormSettings(const AForm: TForm): String;
 var
   ws: TWindowState;
 begin
@@ -921,6 +921,7 @@ begin
       else
         AForm.WindowState := ws;
 
+      Result := GetValue('Extra', '');
       CloseKey;
     end;
   finally
@@ -930,7 +931,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure SaveFormSettings(const AForm: TForm);
+procedure SaveFormSettings(const AForm: TForm; const AExtra: String = '');
 begin
   with TXMLConfig.Create(NIL) do
   try
@@ -944,6 +945,7 @@ begin
       SetValue('W', Width);
       SetValue('H', Height);
       SetValue('State', Integer(WindowState));
+      SetValue('Extra', AExtra);
       CloseKey;
     end;
     Flush;
