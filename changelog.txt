@@ -4,9 +4,9 @@
 - fixed: Remember settings in Auto Translate
 - added: Italian language (thx GitGianluc)
 - added: Russian language (thx RoxMarty)
-- added: PySceneDetect support
 - added: Font color button
 - added: Font format to popup menu
+- added: PySceneDetect support [shotchanges]
 - added: Shotchanges offset
 - added: Custom image format export
 
