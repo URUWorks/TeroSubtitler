@@ -107,6 +107,7 @@ end;
 procedure TfrmTranslate.FormClose(Sender: TObject; var CloseAction: TCloseAction
   );
 begin
+  SaveFormSettings(Self, Format('%d,%d,%d,%d', [cboSourceLanguage.ItemIndex, cboTranslationLanguage.ItemIndex, cboInput.ItemIndex, cboOutput.ItemIndex]));
   CloseAction := caFree;
   frmTranslate := NIL;
 end;
@@ -114,8 +115,23 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmTranslate.FormShow(Sender: TObject);
+var
+  s: String;
+  AParamArray: TStringArray;
 begin
   CheckColorTheme(Self);
+  s := LoadFormSettings(Self);
+  if not s.IsEmpty then
+  begin
+    AParamArray := s.Split(',');
+    if Length(AParamArray) = 4 then
+    begin
+      cboSourceLanguage.ItemIndex := AParamArray[0].ToInteger;
+      cboTranslationLanguage.ItemIndex := AParamArray[1].ToInteger;
+      cboInput.ItemIndex := AParamArray[2].ToInteger;
+      cboOutput.ItemIndex := AParamArray[3].ToInteger;
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
