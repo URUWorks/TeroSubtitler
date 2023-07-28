@@ -3,6 +3,8 @@
 - fixed: Missing strings in language file
 - added: Italian language (thx GitGianluc)
 - added: Russian language (thx RoxMarty)
+- added: Font color button
+- added: Font format to popup menu
 - added: Shotchanges offset
 - added: Custom image format export
 
