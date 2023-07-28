@@ -121,7 +121,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 28
     Width = 75
-    MinValue = 100
+    MaxValue = 7680
+    MinValue = 160
     TabOrder = 5
     Value = 720
   end
@@ -130,7 +131,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 28
     Width = 75
-    MinValue = 100
+    MaxValue = 4320
+    MinValue = 160
     TabOrder = 6
     Value = 576
   end
@@ -155,6 +157,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
+    MaxValue = 20
     TabOrder = 7
   end
   object spnTop: TSpinEdit
@@ -162,6 +165,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
+    MaxValue = 20
     TabOrder = 8
   end
   object spnRight: TSpinEdit
@@ -169,6 +173,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
+    MaxValue = 20
     TabOrder = 9
   end
   object spnBottom: TSpinEdit
@@ -176,6 +181,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
+    MaxValue = 20
     TabOrder = 10
   end
   object cboFont: TComboBox
@@ -201,6 +207,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 140
     Width = 75
+    MaxValue = 1000
+    MinValue = 2
     OnChange = cboFontSelect
     TabOrder = 12
     Value = 24
