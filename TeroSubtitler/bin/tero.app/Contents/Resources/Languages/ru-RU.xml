@@ -139,7 +139,7 @@
       <actShowColumnWPM>Слов в минуту</actShowColumnWPM>
       <actShowColumnCPL>Символов в линии</actShowColumnCPL>
       <actShowColumnStyleAndActor>Стиль/Актёр</actShowColumnStyleAndActor>
-      <actWebReference>Ссылка на сайт...</actWebReference>
+      <actWebReference>Ссылка на онлайн словарь WebReference</actWebReference>
       <actSplitSubtitleAtPosition>Разделить строку на месте курсора</actSplitSubtitleAtPosition>
       <actHelp>Помощь</actHelp>
       <actSettings>Настройки общие...</actSettings>
@@ -155,7 +155,8 @@
       <actImportSubtitles>Субтитры...</actImportSubtitles>
       <actExportMarkedSubtitles>Помеченные субтитры...</actExportMarkedSubtitles>
       <actExportTextOnly>Только текст...</actExportTextOnly>            
-      <actExportCustomTextFormat>Указать формат экспорта текста...</actExportCustomTextFormat>
+      <actExportCustomTextFormat>Настроить формат экспорта текста...</actExportCustomTextFormat>
+      <actExportCustomImageFormat>Настроить формат экспорта изображений...</actExportCustomImageFormat>
       <actMediaPreviousFrame>Предыдущий кадр</actMediaPreviousFrame>
       <actMediaNextFrame>Следующий кадр</actMediaNextFrame>
       <actMediaMoveSubtitle>Сдвинуть субтитр</actMediaMoveSubtitle>      
@@ -335,7 +336,7 @@
   <Form Name="frmSettings" Caption="Настройки">
     <Section Name="TLabel">
       <lblLanguage>Язык</lblLanguage>
-      <lblWebReference>Ссылка WebReference</lblWebReference>
+      <lblWebReference>Ссылка на онлайн словарь WebReference</lblWebReference>
       <lblTimeCodeMode>Режим тайм-кода</lblTimeCodeMode>
       <lblDefaultFrameRate>Частота кадров по-умолчанию</lblDefaultFrameRate>
       <lblDefaultFileEncoding>Кодировка по-умолчанию</lblDefaultFileEncoding>
@@ -438,7 +439,19 @@
       <lblSeparatorChar>Десятичный разделитель</lblSeparatorChar>
       <lblTimeCode>Тайм-код</lblTimeCode>
     </Section>
-  </Form>        
+  </Form>
+  <Form Name="frmCustomImageFormat" Caption="Выбрать формат изображения">
+    <Section Name="TLabel">
+      <lblScript>Скрипт</lblScript>
+      <lblFPS>FPS</lblFPS>
+      <lblPrefix>Префикс</lblPrefix>
+      <lblFolder>Папка</lblFolder>
+      <lblImageSize>Размер изображения</lblImageSize>
+      <lblSafeArea>Пиксели безопасной зоны (слева, сверху, справа, снизу)</lblSafeArea>
+      <lblFont>Шрифт</lblFont>
+      <lblFontSize>Размер</lblFontSize>
+    </Section>
+  </Form>      
   <Form Name="frmTranslationMemory" Caption="Памятка перевода"/>
   <Form Name="frmTranslationMemorySettings" Caption="Настройки памятки перевода">
     <Section Name="TLabel">
@@ -481,9 +494,11 @@
   </Form>
   <Form Name="frmShotChanges" Caption="Смены кадра">
     <Section Name="TLabel">
+      <lblDetectApp>Программа для их обнаружения</lblDetectApp>    
       <lblTimeCodeIn>Таймкод для импорта</lblTimeCodeIn>
       <lblTimeCodeOut>Таймкод для экспорта</lblTimeCodeOut>
       <lblSensitivity>Чувствительность обнаружения</lblSensitivity>      
+      <lblOffset>Смещение</lblOffset>      
     </Section>          
   </Form>
   <Form Name="frmBatchConvert" Caption="Пакетное преобразование">
@@ -640,14 +655,30 @@
     <ListMode>Список</ListMode>
     <BlockMode>Блок</BlockMode>
     <Frames>Кадры</Frames>
-    <Milliseconds>Миллисекунды</Milliseconds>    
+    <Milliseconds>Миллисекунды</Milliseconds>
+    <ShortCutNone>Отсутствует</ShortCutNone>
   </SettingsStrings>
+  <ShortCutCategoryStrings>
+    <Edit>Редактировать</Edit>  
+    <Editor>Редактор</Editor>
+    <File>Файл</File>
+    <Find>Найти</Find>
+    <Help>Помощь</Help>
+    <Select>Выбрать</Select>
+    <Subtitle>Субтитр</Subtitle>
+    <Texts>Текст</Texts>
+    <Timings>Тайминги</Timings>
+    <Tools>Инструменты</Tools>
+    <Video>Видео</Video>
+    <View>Вид</View>
+    <Waveform>Аудиоволна</Waveform>    
+  </ShortCutCategoryStrings>
   <TipStrings>
-    <Tip1>Tip: Use &lt;%s/%s&gt; to go to previous/next subtitle</Tip1>
-    <Tip2>Tip: Use &lt;%s&gt; for a web word reference</Tip2>
-    <Tip3>Tip: Use &lt;%s&gt; dock/undock video window</Tip3>
-    <Tip4>Tip: Use &lt;%s&gt; dock/undock waveform window</Tip4>
-  </TipStrings>
+    <Tip1>Совет: Нажмите &lt;%s/%s&gt; для перехода к следующему/предыдущему субтитру</Tip1>
+    <Tip2>Совет: Нажмите &lt;%s&gt; для ссылки (reference) на web word</Tip2>
+    <Tip3>Совет: Нажмите &lt;%s&gt; для пристыковки/отстыковки окна видео</Tip3>
+    <Tip4>Совет: Нажмите &lt;%s&gt; для пристыковки/отстыковки окна аудиоволны</Tip4>
+  </TipStrings>    
   <CommonStrings>
     <OpenFile>Открыть файл</OpenFile>    
     <SaveFile>Сохранить файл</SaveFile>  
@@ -699,6 +730,7 @@
     <FeatureNotAvailableFromURL>Функция недоступна для онлайн видео.</FeatureNotAvailableFromURL> 
     <MultipleTracksDetected>Обнаружено несколько дорожек</MultipleTracksDetected> 
     <SelectTrackToUse>Выберите нужную дорожку:</SelectTrackToUse>
+    <WriteStatus>Экспорт изображений %d/%d</WriteStatus>    
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>Все субтитры</rbnAllTheSubtitles>
