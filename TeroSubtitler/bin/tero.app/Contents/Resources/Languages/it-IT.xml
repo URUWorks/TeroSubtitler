@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Language Mail="uruworks@gmail.com" Name="Default" Count="40" Author="URUWorks">
-  <Form Name="frmMain" Caption="tero sottotitolor">
+  <Form Name="frmMain" Caption="Tero sottotitolatore">
     <Section Name="TMenuItem">
       <mnuFile>File</mnuFile>
       <mnuFileMRU>File recenti</mnuFileMRU>
@@ -19,7 +19,7 @@
       <mnuSelect>Seleziona</mnuSelect>      
       <mnuTools>Strumenti</mnuTools>
       <mnuToolsTranslationMemory>Memoria di traduzione</mnuToolsTranslationMemory>
-	  <mnuToolsTerminology>Glossario</mnuToolsTerminology>      
+      <mnuToolsTerminology>Glossario</mnuToolsTerminology>      
       <mnuView>Visualizza</mnuView>
       <mnuViewColumns>Colonne</mnuViewColumns>
       <mnuViewToolbars>Barre degli strumenti</mnuViewToolbars>      
@@ -126,7 +126,7 @@
       <actGoTo>Vai al numero di riga...</actGoTo>
       <actReadTimingsFromFile>Leggi tempistiche da file...</actReadTimingsFromFile>
       <actReadTextsFromFile>Leggi testo da file...</actReadTextsFromFile>
-      <actActor>Attori...</actActor>
+      <actActor>Interpreti...</actActor>
       <actExtendLengthToPrevious>Estendi il tempo di inizio al precedente</actExtendLengthToPrevious>
       <actExtendLengthToNext>Estendi il tempo di fine al successivo</actExtendLengthToNext>
       <actSetAutomaticDuration>Imposta durata automatica</actSetAutomaticDuration>
@@ -503,7 +503,7 @@
       <lblRules>Norme</lblRules>
     </Section>
   </Form>
-  <Form Name="frmActors" Caption="Attori"/>  
+  <Form Name="frmActors" Caption="Interpreti"/>  
   <Form Name="frmAudioToText" Caption="Da audio a testo">
     <Section Name="TLabel">
       <lblTrack>Traccia</lblTrack>    
@@ -731,8 +731,8 @@
     <btnLoad>Apri</btnLoad>    
     <btnApply>Applica</btnApply>
     <btnFind>Trova</btnFind>
-    <btnFindNext>Find successivo</btnFindNext>
-    <btnFindPrev>Find precedente</btnFindPrev>
+    <btnFindNext>Trova successivo</btnFindNext>
+    <btnFindPrev>Trova precedente</btnFindPrev>
     <btnReplace>Sostituisci</btnReplace>
     <btnReplaceAll>Sostituisci tutto</btnReplaceAll>
     <btnRestore>Ripristina</btnRestore>
@@ -828,7 +828,7 @@
   </CompareStrings>
   <FormatPropertiesStrings>
     <Center>Al centro</Center>
-    <Left>A sinista</Left>
+    <Left>A sinistra</Left>
     <Right>A destra</Right>          
     <Undefined>Non definito</Undefined>
     <OpenSubtitling>Sottotitolazione libera</OpenSubtitling>
@@ -848,7 +848,7 @@
     <Index>#/Intervallo</Index>
     <Times>Tempistiche</Times>
     <Duration>Durata</Duration>
-    <StyleAndActor>Stile/Attore</StyleAndActor>
+    <StyleAndActor>Stile/Interprete</StyleAndActor>
     <Text>Testo</Text>
     <Translation>Traduzione</Translation>
     <CPS>CPS</CPS>
