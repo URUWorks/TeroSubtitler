@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
-  ExtCtrls, UWLayout, UWCheckBox, UWHotKey, UWSystem.XMLLang,
+  ExtCtrls, UWLayout, UWCheckBox, UWHotKey, UWSystem.XMLLang, ActnList,
   procConventions, LCLProc, ComCtrls, UWSubtitleAPI.Formats;
 
 type
@@ -75,6 +75,7 @@ type
     lblSCSnapArea: TLabel;
     lblSCSnapInCues: TLabel;
     lblSCSnapOutCues: TLabel;
+    lblShortCutInUse: TLabel;
     lblShortCutPreset: TLabel;
     lblWaveStart: TLabel;
     lblWaveColor: TLabel;
@@ -255,6 +256,7 @@ type
     procedure UpdateFileTypeAssociations;
     procedure FileTypeIconClick(Sender: TObject);
     {$ENDIF}
+    function GetActionFromShortCut(const AShortCut: TShortCut): TAction;
     procedure SetLayoutPage(const APage: TUWLayout);
     procedure FillComboWithShortcuts;
   public
@@ -269,9 +271,9 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procCommon, UWSystem.SysUtils, ActnList,
-  procColorTheme, formMain, UWSystem.Globalization, formConventions,
-  procShortCut, procMPV, UWSystem.TimeUtils
+  procTypes, procWorkspace, procCommon, UWSystem.SysUtils, procColorTheme,
+  formMain, UWSystem.Globalization, formConventions, procShortCut, procMPV,
+  UWSystem.TimeUtils
   {$IFDEF WINDOWS}
   , FileUtil, procFileTypes
   {$ENDIF};
@@ -784,15 +786,44 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmSettings.hkShortcutChange(Sender: TObject);
+function TfrmSettings.GetActionFromShortCut(const AShortCut: TShortCut): TAction;
+var
+  i: Integer;
 begin
+  Result := NIL;
+  with frmMain do
+    for i := 0 to ActionList.ActionCount-1 do
+      if AShortCut = TAction(ActionList.Actions[i]).ShortCut then
+        Exit(TAction(ActionList.Actions[i]));
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.hkShortcutChange(Sender: TObject);
+var
+  AAction: TAction;
+begin
+  lblShortCutInUse.Caption := '';
   if (lstShortcuts.ItemIndex >= 0) then
     with TAction(frmMain.ActionList.Actions[FShortCutListIndex[lstShortcuts.ItemIndex]]) do
       if (ShortCut <> hkShortcut.HotKey) then
       begin
-        ShortCut := hkShortcut.HotKey;
-        lstShortcuts.Items[lstShortcuts.ItemIndex] := Caption + ' [' + ShortCutToTextEx(ShortCut) + ']';
+        AAction := GetActionFromShortCut(hkShortcut.HotKey);
+        if (AAction <> NIL) and (hkShortcut.HotKey <> 0) then
+        begin
+          {if MsgReplaceShortCut(AAction.Caption) = mrNo then
+          begin
+            hkShortcut.HotKey := 0;
+            Exit;
+          end
+          else
+            AAction.ShortCut := 0;}
 
+          lblShortCutInUse.Caption := Format(GetCommonString('ShortCutInUse'), [AAction.Caption]);
+        end;
+
+        ShortCut := hkShortcut.HotKey;
+        lstShortcuts.Items[lstShortcuts.ItemIndex] := Caption + ' [' + ShortCutToTextEx(ShortCut) + ']'; //cboShortcutCatSelect(NIL);
         btnShortCutApply.Enabled := True;
       end;
 end;

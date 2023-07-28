@@ -185,6 +185,7 @@ end;
 function ShortCutToTextEx(const AShortCut: TShortCut): String;
 begin
   Result := ShortCutToText(AShortCut){$IFDEF DARWIN}.Replace('Meta', #$2318){$ENDIF};
+  if Result = 'Unknown' then Result := '';
 end;
 
 // -----------------------------------------------------------------------------

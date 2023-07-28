@@ -901,7 +901,7 @@ object frmSettings: TfrmSettings
   object lyoShortcuts: TUWLayout
     Left = -336
     Height = 546
-    Top = 216
+    Top = 248
     Width = 496
     ClientHeight = 546
     ClientWidth = 496
@@ -909,7 +909,7 @@ object frmSettings: TfrmSettings
     Visible = False
     object lstShortcuts: TListBox
       Left = 0
-      Height = 450
+      Height = 427
       Top = 64
       Width = 496
       Anchors = [akTop, akLeft, akRight]
@@ -940,9 +940,9 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object hkShortcut: TUWHotKey
-      Left = 207
+      Left = 206
       Height = 23
-      Top = 520
+      Top = 500
       Width = 289
       EmptyText = 'None'
       HotKey = 0
@@ -953,7 +953,7 @@ object frmSettings: TfrmSettings
     object lblShortcut: TLabel
       Left = 0
       Height = 15
-      Top = 524
+      Top = 504
       Width = 45
       Caption = 'Shortcut'
       ParentColor = False
@@ -996,6 +996,16 @@ object frmSettings: TfrmSettings
       Caption = 'Save as...'
       OnClick = btnShortCutSaveClick
       TabOrder = 2
+    end
+    object lblShortCutInUse: TLabel
+      Left = 0
+      Height = 15
+      Top = 528
+      Width = 3
+      Caption = ' '
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
   end
   object lyoMPV: TUWLayout

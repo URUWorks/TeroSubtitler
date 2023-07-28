@@ -731,6 +731,7 @@
     <MultipleTracksDetected>Multiple tracks detected</MultipleTracksDetected> 
     <SelectTrackToUse>Select the track to use:</SelectTrackToUse>
     <WriteStatus>Writing %d/%d</WriteStatus>    
+    <ShortCutInUse>Shortcut currently used in '%s'.</ShortCutInUse>
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>All the subtitles</rbnAllTheSubtitles>

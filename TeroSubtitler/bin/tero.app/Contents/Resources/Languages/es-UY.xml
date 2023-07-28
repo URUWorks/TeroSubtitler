@@ -730,7 +730,8 @@
     <FeatureNotAvailableFromURL>Función no disponible para video en línea.</FeatureNotAvailableFromURL>
     <MultipleTracksDetected>Múltiples pistas detectadas</MultipleTracksDetected> 
     <SelectTrackToUse>Seleccione la pista a utilizar:</SelectTrackToUse>
-    <WriteStatus>Escribiendo %d/%d</WriteStatus>    
+    <WriteStatus>Escribiendo %d/%d</WriteStatus>
+    <ShortCutInUse>Atajo utilizado en '%s'.</ShortCutInUse>    
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>Todos los subtitulos</rbnAllTheSubtitles>

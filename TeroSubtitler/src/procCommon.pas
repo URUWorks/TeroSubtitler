@@ -118,6 +118,7 @@ function MsgSaveSubtitle(FileName: String; const ASubtitleMode: TSubtitleMode = 
 function MsgDeleteFiles: Integer;
 function MsgFolderNotEmpty: Integer;
 function MsgExportTextOnlyFormat: Integer;
+//function MsgReplaceShortCut(const AAction: String): Integer;
 
 { Check for updates}
 
@@ -1766,6 +1767,21 @@ function MsgExportTextOnlyFormat: Integer;
 begin
   Result := CustomQuestionDialog('CommonStrings', 'TextFormatted', '', [mbYes, mbNo]);
 end;
+
+// -----------------------------------------------------------------------------
+
+{function MsgReplaceShortCut(const AAction: String): Integer;
+var
+  sl : TAppStringList = NIL;
+  sm : String;
+begin
+  if LanguageManager.GetAppStringList('CommonStrings', sl) then
+  begin
+    sm := Format(GetString(sl, 'ShortCutInUse'), [AAction]);
+    Result := formCustomQuestionDlg.ShowQuestionDialog(sm, GetString(sl, 'ReassignShortCut'), ProgramName, [mbYes, mbNo]);
+  end;
+  FreeAndNil(sl);
+end;}
 
 // -----------------------------------------------------------------------------
 
