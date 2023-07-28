@@ -447,7 +447,7 @@
       <lblPrefix>Prefijo</lblPrefix>
       <lblFolder>Carpeta</lblFolder>
       <lblImageSize>Tamaño de la imagen</lblImageSize>
-      <lblSafeArea>Área segura (izquierda, arriba, derecha, abajo)</lblSafeArea>
+      <lblSafeArea>Margenes en píxeles (izquierdo, superior, derecho, inferior)</lblSafeArea>
       <lblFont>Fuente</lblFont>
       <lblFontSize>Tamaño</lblFontSize>
     </Section>
@@ -494,6 +494,7 @@
   </Form>
   <Form Name="frmShotChanges" Caption="Cambios de plano">
     <Section Name="TLabel">
+      <lblDetectApp>Aplicación para detección</lblDetectApp>
       <lblTimeCodeIn>Código de tiempo al importar</lblTimeCodeIn>
       <lblTimeCodeOut>Código de tiempo al exportar</lblTimeCodeOut>
       <lblSensitivity>Sensibilidad de detección</lblSensitivity>            

@@ -1,12 +1,12 @@
 object frmShotChanges: TfrmShotChanges
   Left = 242
-  Height = 432
+  Height = 464
   Top = 118
   Width = 455
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Shot changes'
-  ClientHeight = 432
+  ClientHeight = 464
   ClientWidth = 455
   OnClose = FormClose
   OnCreate = FormCreate
@@ -16,22 +16,22 @@ object frmShotChanges: TfrmShotChanges
   object btnApply: TButton
     Left = 293
     Height = 25
-    Top = 400
+    Top = 431
     Width = 75
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick
-    TabOrder = 9
+    TabOrder = 10
   end
   object btnClose: TButton
     Left = 373
     Height = 25
-    Top = 400
+    Top = 431
     Width = 75
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
-    TabOrder = 10
+    TabOrder = 11
   end
   object mmoTimes: TMemo
     Left = 8
@@ -46,7 +46,7 @@ object frmShotChanges: TfrmShotChanges
   object lblTimeCodeIn: TLabel
     Left = 8
     Height = 15
-    Top = 261
+    Top = 292
     Width = 97
     Caption = 'Time code import:'
     ParentColor = False
@@ -80,9 +80,9 @@ object frmShotChanges: TfrmShotChanges
     TabOrder = 2
   end
   object lblIdle: TLabel
-    Left = 245
+    Left = 285
     Height = 1
-    Top = 405
+    Top = 436
     Width = 1
     Alignment = taRightJustify
     ParentColor = False
@@ -94,13 +94,13 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideTop.Side = asrCenter
     Left = 200
     Height = 23
-    Top = 320
+    Top = 350
     Width = 168
     BorderSpacing.Right = 8
     Increment = 0.1
     MaxValue = 0.9
     MinValue = 0.1
-    TabOrder = 6
+    TabOrder = 7
     Value = 0.4
   end
   object lblSensitivity: TLabel
@@ -108,7 +108,7 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideRight.Control = spnSensitivity
     Left = 8
     Height = 15
-    Top = 324
+    Top = 354
     Width = 89
     BorderSpacing.Right = 8
     Caption = 'Detect sensitivity'
@@ -117,30 +117,13 @@ object frmShotChanges: TfrmShotChanges
   object prbExtracting: TProgressBar
     Left = 8
     Height = 8
-    Top = 408
-    Width = 272
+    Top = 439
+    Width = 233
     Style = pbstMarquee
-    TabOrder = 11
+    TabOrder = 13
     Visible = False
   end
   object cboTimeCodeImport: TComboBox
-    Left = 200
-    Height = 23
-    Top = 257
-    Width = 168
-    ItemHeight = 15
-    Style = csDropDownList
-    TabOrder = 4
-  end
-  object lblTimeCodeOut: TLabel
-    Left = 8
-    Height = 15
-    Top = 292
-    Width = 95
-    Caption = 'Time code export:'
-    ParentColor = False
-  end
-  object cboTimeCodeExport: TComboBox
     Left = 200
     Height = 23
     Top = 288
@@ -149,10 +132,27 @@ object frmShotChanges: TfrmShotChanges
     Style = csDropDownList
     TabOrder = 5
   end
+  object lblTimeCodeOut: TLabel
+    Left = 8
+    Height = 15
+    Top = 323
+    Width = 95
+    Caption = 'Time code export:'
+    ParentColor = False
+  end
+  object cboTimeCodeExport: TComboBox
+    Left = 200
+    Height = 23
+    Top = 319
+    Width = 168
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 6
+  end
   object cboOffset: TComboBox
     Left = 200
     Height = 23
-    Top = 352
+    Top = 381
     Width = 41
     ItemHeight = 15
     ItemIndex = 0
@@ -161,13 +161,13 @@ object frmShotChanges: TfrmShotChanges
       '-'
     )
     Style = csDropDownList
-    TabOrder = 7
+    TabOrder = 8
     Text = '+'
   end
   object tedOffset: TUWTimeEdit
     Left = 248
     Height = 23
-    Top = 352
+    Top = 381
     Width = 104
     Value = 0
     FPS = 25
@@ -179,17 +179,34 @@ object frmShotChanges: TfrmShotChanges
     Constraints.MinWidth = 80
     Font.Style = [fsBold]
     ParentFont = False
-    TabOrder = 8
+    TabOrder = 9
   end
   object lblOffset: TLabel
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = spnSensitivity
     Left = 8
     Height = 15
-    Top = 356
+    Top = 385
     Width = 32
     BorderSpacing.Right = 8
     Caption = 'Offset'
     ParentColor = False
+  end
+  object lblDetectApp: TLabel
+    Left = 8
+    Height = 15
+    Top = 261
+    Width = 75
+    Caption = 'App to detect:'
+    ParentColor = False
+  end
+  object cboDetectApp: TComboBox
+    Left = 200
+    Height = 23
+    Top = 257
+    Width = 168
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 4
   end
 end

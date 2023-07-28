@@ -447,7 +447,7 @@
       <lblPrefix>Prefix</lblPrefix>
       <lblFolder>Folder</lblFolder>
       <lblImageSize>Image size</lblImageSize>
-      <lblSafeArea>Safe area (left, top, right, bottom)</lblSafeArea>
+      <lblSafeArea>Safe area pixels (left, top, right, bottom)</lblSafeArea>
       <lblFont>Font</lblFont>
       <lblFontSize>Size</lblFontSize>
     </Section>
@@ -494,6 +494,7 @@
   </Form>
   <Form Name="frmShotChanges" Caption="Shot changes">
     <Section Name="TLabel">
+      <lblDetectApp>App to detect</lblDetectApp>    
       <lblTimeCodeIn>Time code for import</lblTimeCodeIn>
       <lblTimeCodeOut>Time code for export</lblTimeCodeOut>
       <lblSensitivity>Detection sensitivity</lblSensitivity>

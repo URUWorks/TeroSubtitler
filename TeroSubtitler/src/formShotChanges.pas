@@ -38,7 +38,9 @@ type
     cboOffset: TComboBox;
     cboTimeCodeImport: TComboBox;
     cboTimeCodeExport: TComboBox;
+    cboDetectApp: TComboBox;
     lblOffset: TLabel;
+    lblDetectApp: TLabel;
     prbExtracting: TProgressBar;
     spnSensitivity: TFloatSpinEdit;
     lblSensitivity: TLabel;
@@ -102,6 +104,14 @@ begin
 
   FAppStringList := NIL;
   LanguageManager.GetAppStringList('ShotChangesStrings', FAppStringList);
+  with cboDetectApp.Items do
+  begin
+    BeginUpdate;
+    Clear;
+    Add('FFmpeg');
+    Add('PySceneDetect');
+    EndUpdate;
+  end;
   with cboTimeCodeImport.Items do
   begin
     BeginUpdate;
@@ -116,6 +126,7 @@ begin
   cboTimeCodeExport.Items.Assign(cboTimeCodeImport.Items);
   cboTimeCodeImport.ItemIndex := 2;
   cboTimeCodeExport.ItemIndex := 4;
+  cboDetectApp.ItemIndex := 0;
   FAppStringList.Free;
 
   FCancel := False;
@@ -129,6 +140,7 @@ end;
 procedure TfrmShotChanges.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
+  SaveFormSettings(Self, Format('%d,%d,%d', [cboDetectApp.ItemIndex, cboTimeCodeImport.ItemIndex, cboTimeCodeExport.ItemIndex]));
   CloseAction := caFree;
   frmShotChanges := NIL;
 end;
@@ -136,8 +148,22 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmShotChanges.FormShow(Sender: TObject);
+var
+  s: String;
+  AParamArray: TStringArray;
 begin
   CheckColorTheme(Self);
+  s := LoadFormSettings(Self);
+  if not s.IsEmpty then
+  begin
+    AParamArray := s.Split(',');
+    if Length(AParamArray) = 3 then
+    begin
+      cboDetectApp.ItemIndex := AParamArray[0].ToInteger;
+      cboTimeCodeImport.ItemIndex := AParamArray[1].ToInteger;
+      cboTimeCodeExport.ItemIndex := AParamArray[2].ToInteger;
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -355,10 +381,13 @@ begin
   btnImport.Enabled := AValue;
   btnExport.Enabled := AValue;
   btnDetect.Enabled := AValue;
+  cboDetectApp.Enabled := AValue;
   cboTimeCodeImport.Enabled := AValue;
   cboTimeCodeExport.Enabled := AValue;
   btnApply.Enabled := AValue;
   spnSensitivity.Enabled := AValue;
+  cboOffset.Enabled := AValue;
+  tedOffset.Enabled := AValue;
 
   if AValue then
   begin
@@ -374,6 +403,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure RunAppTime_CB(const TimeElapsed: Double; var Cancel: Boolean);
+begin
+  frmShotChanges.lblIdle.Caption := TimeToString(Trunc(TimeElapsed)*1000, 'mm:ss');
+  Cancel := frmShotChanges.FCancel;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmShotChanges.btnDetectClick(Sender: TObject);
 const
   sc_timeid = 'pts_time:';
@@ -382,6 +419,7 @@ var
   AParamArray: TStringArray;
   i, x, sc: Integer;
   sl: TStringList = NIL;
+  outfile: String;
 begin
   if frmMain.MPV.FileName.StartsWith('http') then
   begin
@@ -392,34 +430,82 @@ begin
   FCancel := False;
   SetControlsEnabled(False);
   try
-    AParamArray := FFMPEG_SCParams.Split(' ');
-    for i := 0 to High(AParamArray) do
-      AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%value'], [frmMain.MPV.FileName, FloatToStr(spnSensitivity.Value, AppOptions.FormatSettings)], []);
-
-    if not FileExists(GetExtractAppFile) then
+    if cboDetectApp.ItemIndex = 0 then // FFmpeg
     begin
-      ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [FFMPEG_EXE]))
-    end
-    else
-    begin
-      FTimeElapsed := 0;
+      AParamArray := FFMPEG_SCParams.Split(' ');
+      for i := 0 to High(AParamArray) do
+        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%value'], [frmMain.MPV.FileName, FloatToStr(spnSensitivity.Value, AppOptions.FormatSettings)], []);
 
-      if ExecuteAppLoop(GetExtractAppFile, AParamArray, sl, @RunApp_CB) and (sl.Count > 0) then
-      try
-        mmoTimes.Lines.BeginUpdate;
-        for i := 0 to sl.Count-1 do
-        begin
-          x := Pos(sc_timeid, sl[i]);
-          if x > 0 then
+      if not FileExists(GetExtractAppFile) then
+      begin
+        ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [FFMPEG_EXE]))
+      end
+      else
+      begin
+        FTimeElapsed := 0;
+
+        if ExecuteAppLoop(GetExtractAppFile, AParamArray, sl, @RunApp_CB) and (sl.Count > 0) then
+        try
+          mmoTimes.Lines.BeginUpdate;
+          mmoTimes.Clear;
+          for i := 0 to sl.Count-1 do
           begin
-            sc := Round(StrToSingle(Copy(sl[i], x+sc_timeid.Length, Pos(' ', sl[i], x+1)-x-sc_timeid.Length).Replace(',', '.'), 0, AppOptions.FormatSettings)*1000);
-            if sc > 0 then
-              mmoTimes.Lines.Add(IntToStr(sc));
+            x := Pos(sc_timeid, sl[i]);
+            if x > 0 then
+            begin
+              sc := Round(StrToSingle(Copy(sl[i], x+sc_timeid.Length, Pos(' ', sl[i], x+1)-x-sc_timeid.Length).Replace(',', '.'), 0, AppOptions.FormatSettings)*1000);
+              if sc > 0 then
+                mmoTimes.Lines.Add(IntToStr(sc));
+            end;
+          end;
+        finally
+          mmoTimes.Lines.EndUpdate;
+          if Assigned(sl) then sl.Free;
+        end;
+      end;
+    end
+    else // PySceneDetect
+    begin
+      outfile := ChangeFileExt(GetTempFileName, '.csv');
+      AParamArray := SCENEDETECT_SCParams.Split(' ');
+      for i := 0 to High(AParamArray) do
+        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%value'], [frmMain.MPV.FileName, outfile, FloatToStr(spnSensitivity.Value, AppOptions.FormatSettings)], []);
+
+      if not FileExists(GetExtractAppFile(False)) then
+      begin
+        ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [SCENEDETECT_EXE]))
+      end
+      else
+      begin
+        FTimeElapsed := 0;
+
+        if ExecuteApp(GetExtractAppFile(False), AParamArray, True, True, @RunAppTime_CB) then
+        begin
+          if FileExists(outfile) then
+          begin
+            sl := TStringList.Create;
+            try
+              sl.LoadFromFile(outfile);
+              if sl.Count > 2 then
+                for i := 0 to 1 do
+                  sl.Delete(i);
+
+              mmoTimes.Lines.BeginUpdate;
+              mmoTimes.Clear;
+              for i := 0 to sl.Count-1 do
+              begin
+                AParamArray := sl[i].Split(',');
+                sc := StringToTime(AParamArray[2]);
+                if sc > 0 then
+                  mmoTimes.Lines.Add(sc.ToString);
+              end;
+              DeleteFile(outfile);
+            finally
+              mmoTimes.Lines.EndUpdate;
+              if Assigned(sl) then sl.Free;
+            end;
           end;
         end;
-      finally
-        mmoTimes.Lines.EndUpdate;
-        if Assigned(sl) then sl.Free;
       end;
     end;
   finally

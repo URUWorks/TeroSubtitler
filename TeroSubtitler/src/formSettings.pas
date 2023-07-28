@@ -33,6 +33,7 @@ type
   TfrmSettings = class(TForm)
     btnClose: TButton;
     btnFFMPEG: TButton;
+    btnSceneDetect: TButton;
     btnProfile: TButton;
     btnShortCutApply: TButton;
     btnShortCutSave: TButton;
@@ -67,8 +68,10 @@ type
     cbnSubBackground: TColorButton;
     cboPauseMode: TComboBox;
     edtCPSStrategy: TEdit;
+    edtSceneDetect: TEdit;
     imlFileTypes: TImageList;
     lblCPSStrategy: TLabel;
+    lblSceneDetect: TLabel;
     lblSCSnapArea: TLabel;
     lblSCSnapInCues: TLabel;
     lblSCSnapOutCues: TLabel;
@@ -229,6 +232,7 @@ type
     procedure btnCloseClick(Sender: TObject);
     procedure btnFFMPEGClick(Sender: TObject);
     procedure btnProfileClick(Sender: TObject);
+    procedure btnSceneDetectClick(Sender: TObject);
     procedure btnShortCutApplyClick(Sender: TObject);
     procedure btnShortCutSaveClick(Sender: TObject);
     procedure cboProfileSelect(Sender: TObject);
@@ -399,6 +403,7 @@ begin
     cbnWaveEnd.ButtonColor   := CustomColors.ItemFT;
   end;
   edtFFMPEG.Text := WAVEOptions.ffmpegFolder;
+  edtSceneDetect.Text := WAVEOptions.SceneDetectFolder;
 
   cboTimeCodeMode.ItemIndex := Integer(Workspace.WorkMode);
   cboListMode.ItemIndex := Integer(VSTOptions.DrawMode);
@@ -517,6 +522,7 @@ begin
     CustomColors.ItemFT   := cbnWaveEnd.ButtonColor;
   end;
   WAVEOptions.ffmpegFolder := edtFFMPEG.Text;
+  WAVEOptions.SceneDetectFolder := edtSceneDetect.Text;
 
   SetWorkMode(TWorkMode(cboTimeCodeMode.ItemIndex));
   Workspace.FPS.DefFPS  := StrToFloatDef(cboDefaultFrameRate.Text, Workspace.FPS.OutputFPS, AppOptions.FormatSettings);
@@ -679,6 +685,23 @@ begin
       cboProfile.ItemIndex := 0;
 
     cboProfileSelect(Sender);
+  finally
+    Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.btnSceneDetectClick(Sender: TObject);
+begin
+  with TSelectDirectoryDialog.Create(Self) do
+  try
+    Options := Options + [ofPathMustExist, ofOldStyleDialog];
+
+    if Execute then
+    begin
+      edtSceneDetect.Text := FileName;
+    end;
   finally
     Free;
   end;

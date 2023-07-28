@@ -76,6 +76,7 @@ function HunspellFileName: String;
 function libMPVFileName(const AFullRoot: Boolean = True): String;
 function YTDLPFileName(const AFullRoot: Boolean = True): String;
 function ffmpegFileName: String;
+function SceneDetectFileName: String;
 function LogMPVFileName: String;
 function MPVTempSubFileName: String;
 function DictionariesFolder: String;
@@ -93,7 +94,7 @@ function YTDLPFolder: String;
 function ffmpegFolder: String;
 
 function GetDictionaryNameFromCaption(const AText: String): String;
-function GetExtractAppFile: String;
+function GetExtractAppFile(const FFmpeg: Boolean = True): String;
 function GetAudioToTextAppFile: String;
 {$IFDEF UNIX}
 function GetInstallFolder(const AFileName: String): String;
@@ -187,6 +188,7 @@ begin
     {$ELSE}
     ffmpegFolder := ExtractFilePath(GetInstallFolder(FFMPEG_EXE));
     {$ENDIF}
+    SceneDetectFolder := '';
   end;
 
   FillByte(Workspace, SizeOf(TWorkspace), 0);
@@ -476,6 +478,7 @@ begin
         AudioToTextApp    := GetValue('AudioToTextApp', AudioToTextApp);
         AudioToTextParams := GetValue('AudioToTextParams', AudioToTextParams);
         ffmpegFolder := GetValue('ffmpegFolder', ffmpegFolder);
+        SceneDetectFolder := GetValue('SceneDetectFolder', SceneDetectFolder);
         frmMain.WAVE.DrawGAP := GetValue('DrawGAP', False);
         frmMain.actViewShotChange.Checked := GetValue('ViewShotChanges', False);
         frmMain.actViewShotChangeExecute(NIL);
@@ -759,6 +762,7 @@ begin
         SetValue('AudioToTextApp', AudioToTextApp);
         SetValue('AudioToTextParams', AudioToTextParams);
         SetValue('ffmpegFolder', ffmpegFolder);
+        SetValue('SceneDetectFolder', SceneDetectFolder);
         SetValue('ViewShotChanges', frmMain.actViewShotChange.Checked);
         SetValue('CenterWaveform', frmMain.actCenterWaveform.Checked);
         SetValue('DrawGAP', frmMain.WAVE.DrawGAP);
@@ -1382,6 +1386,17 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function SceneDetectFileName: String;
+begin
+  {$IFDEF LINUX}
+  Result := GetInstallFolder(SCENEDETECT_EXE);
+  {$ELSE}
+  Result := ConcatPaths([WaveOptions.SceneDetectFolder, SCENEDETECT_EXE]);
+  {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
 function LogMPVFileName: String;
 begin
   {$IFDEF DARWIN}
@@ -1550,9 +1565,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetExtractAppFile: String;
+function GetExtractAppFile(const FFmpeg: Boolean = True): String;
 begin
-  Result := ConcatPaths([WAVEOptions.ffmpegFolder, WAVEOptions.ExtractApp]);
+  if FFmpeg then
+    Result := ConcatPaths([WAVEOptions.ffmpegFolder, WAVEOptions.ExtractApp])
+  else
+    Result := SceneDetectFileName;
 end;
 
 // -----------------------------------------------------------------------------

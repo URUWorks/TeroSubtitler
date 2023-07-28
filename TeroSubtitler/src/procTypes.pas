@@ -108,6 +108,9 @@ const
   WHISPER_EXE      = 'main.exe';
   WHISPER_Params   = '-m "%model" -l %lang -osrt -of "%output" -f "%input"';
   WHISPER_ffParams = '-i "%input" -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y "%output"';
+
+  SCENEDETECT_EXE      = 'scenedetect.exe';
+  SCENEDETECT_SCParams = '-i "%input" list-scenes -f "%output" -q';
   {$ENDIF}
   {$IFDEF LINUX}
   URL_FFMPEG = '';
@@ -124,6 +127,9 @@ const
   WHISPER_EXE      = 'main';
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
   WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
+
+  SCENEDETECT_EXE      = 'scenedetect';
+  SCENEDETECT_SCParams = '-i %input list-scenes -f %output -q';
   {$ENDIF}
   {$IFDEF DARWIN}
   URL_FFMPEG = 'https://github.com/URUWorks/additional-files/raw/main/ffmpeg/ffmpeg_macos64.zip';
@@ -140,6 +146,9 @@ const
   WHISPER_EXE      = 'main';
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
   WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
+
+  SCENEDETECT_EXE      = 'scenedetect';
+  SCENEDETECT_SCParams = '-i %input list-scenes -f %output -q';
   {$ENDIF}
 
 type
@@ -224,6 +233,7 @@ type
     AudioToTextApp    : String;
     AudioToTextParams : String;
     ffmpegFolder      : String;
+    SceneDetectFolder : String;
   end;
 
   { TAdjustSubtitles }

@@ -870,6 +870,33 @@ object frmSettings: TfrmSettings
       OnClick = btnFFMPEGClick
       TabOrder = 1
     end
+    object lblSceneDetect: TLabel
+      Left = 0
+      Height = 15
+      Top = 36
+      Width = 206
+      AutoSize = False
+      Caption = 'SceneDetect folder'
+      ParentColor = False
+    end
+    object edtSceneDetect: TEdit
+      Left = 208
+      Height = 23
+      Top = 32
+      Width = 208
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 2
+    end
+    object btnSceneDetect: TButton
+      Left = 422
+      Height = 25
+      Top = 32
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = '...'
+      OnClick = btnSceneDetectClick
+      TabOrder = 3
+    end
   end
   object lyoShortcuts: TUWLayout
     Left = -336
