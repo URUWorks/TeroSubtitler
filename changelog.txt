@@ -1,6 +1,7 @@
 1.0.0.8 (x.8.2023)
 - fixed: Project autoname #132
 - fixed: Missing strings in language file
+- fixed: Remember settings in Auto Translate
 - added: Italian language (thx GitGianluc)
 - added: Russian language (thx RoxMarty)
 - added: Font color button
