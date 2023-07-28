@@ -165,7 +165,7 @@ end;
 
 procedure TfrmSpellCheck.PopulateWordMap(const AText: String);
 const
-  WordSplit: array [0..16] of String = (' ',',','.',';','/',':','"','`','-','(',')','[',']','{','}','!',sLineBreak);
+  WordSplit: array [0..18] of String = (' ',',','.',';','/',':','"','`','-','(',')','[',']','{','}','!','?','¿',sLineBreak);
 
 var
   sArr : TStringArray;
@@ -226,7 +226,7 @@ begin
     try
       for i := 0 to FWordMap.Count-1 do
       begin
-        if not HunspellInstance.Spell(FWordMap.Data[i]) and
+        if not HunspellInstance.Spell(UTF8LowerCase(FWordMap.Data[i])) and
           (FSkipList.IndexOf(FWordMap.Data[i]) < 0) and (FTempList.IndexOf(FWordMap.Data[i]) < 0) then
         begin
           x := FChangeList.IndexOf(FWordMap.Data[i]);
@@ -254,7 +254,7 @@ begin
         end;
       end;
       InitializeSpellAtLine(FLastLine+1);
-      DoSpell;
+      DoSpell(FirstLoad);
     finally
       if Suggests <> NIL then
         Suggests.Free;
