@@ -37,8 +37,8 @@ type
     FTimeFormat   : ShortString;
     FTime         : Boolean;
     FDecSeparator : Char;
-    FSubPadding   : Byte;
-    FFPSPadding   : Byte;
+    //FSubPadding   : Byte;
+    //FFPSPadding   : Byte;
     FFPS          : Single;
     FHeader       : String;
     FBody         : String;
@@ -61,8 +61,8 @@ type
     property TimeFormat   : ShortString read FTimeFormat   write FTimeFormat;
     property Time         : Boolean     read FTime         write FTime;
     property DecSeparator : Char        read FDecSeparator write FDecSeparator;
-    property SubPadding   : Byte        read FSubPadding   write FSubPadding;
-    property FPSPadding   : Byte        read FFPSPadding   write FFPSPadding;
+    //property SubPadding   : Byte        read FSubPadding   write FSubPadding;
+    //property FPSPadding   : Byte        read FFPSPadding   write FFPSPadding;
     property FPS          : Single      read FFPS          write FFPS;
     property Header       : String      read FHeader       write FHeader;
     property Body         : String      read FBody         write FBody;
@@ -88,13 +88,9 @@ type
   TUWSubtitleCustomImageFormat = class(TUWSubtitleTemplate)
   private
     { Private declarations }
-    FImageFormats : String;
-    FTransparent  : Integer;
     procedure ReadTemplate(const ReadOnlyHeader: Boolean = False); override;
   public
     { Public declarations }
-    property ImageFormats     : String  read FImageFormats write FImageFormats;
-    property TransparentColor : Integer read FTransparent  write FTransparent;
   end;
 
 // -----------------------------------------------------------------------------
@@ -144,8 +140,8 @@ begin
   FBody       := '';
   FFooter     := '';
   FText       := '';
-  FSubPadding := 0;
-  FFPSPadding := 0;
+  //FSubPadding := 0;
+  //FFPSPadding := 0;
 end;
 
 // -----------------------------------------------------------------------------
@@ -274,8 +270,8 @@ begin
       FFPS          := ReadInteger(InfoHeader, 'FPS', 25);
       FDecSeparator := ReadString(InfoHeader, 'Decimal separator', ',')[1];
       FNewLine      := ReadString(InfoHeader, 'New line char', '|');
-      FSubPadding   := ReadInteger(InfoHeader, 'SubPadding', 0);
-      FFPSPadding   := ReadInteger(InfoHeader, 'FPSPadding', 0);
+      //FSubPadding   := ReadInteger(InfoHeader, 'SubPadding', 0);
+      //FFPSPadding   := ReadInteger(InfoHeader, 'FPSPadding', 0);
 
       if (FName <> '') then
         inherited ReadTemplate(ReadOnlyHeader);
@@ -303,8 +299,8 @@ begin
       WriteLn('Time=' + IntToStr(Integer(FTime)));
       WriteLn('FPS=' + Format('%.3f', [FFPS]));
       WriteLn('New line char=' + FNewLine);
-      WriteLn('SubPadding=' + IntToStr(Integer(FSubPadding)));
-      WriteLn('FPSPadding=' + IntToStr(Integer(FFPSPadding)));
+      //WriteLn('SubPadding=' + IntToStr(Integer(FSubPadding)));
+      //WriteLn('FPSPadding=' + IntToStr(Integer(FFPSPadding)));
       WriteLn('');
       WriteLn('[Format text]');
       if FText <> '' then
@@ -338,10 +334,8 @@ begin
       FTime         := ReadBool(InfoHeader, 'Time', True);
       FFPS          := ReadInteger(InfoHeader, 'FPS', 25);
       FDecSeparator := ReadString(InfoHeader, 'Decimal separator', '.')[1];
-      FImageFormats := ReadString(InfoHeader, 'Image format', 'bmp8');
-      FTransparent  := HexStrToInt(ReadString(InfoHeader, 'Transparent color', 'FF00FF'));
-      FSubPadding   := ReadInteger(InfoHeader, 'SubPadding', 0);
-      FFPSPadding   := ReadInteger(InfoHeader, 'FPSPadding', 0);
+      //FSubPadding   := ReadInteger(InfoHeader, 'SubPadding', 0);
+      //FFPSPadding   := ReadInteger(InfoHeader, 'FPSPadding', 0);
 
       if (FName <> '') then
         inherited ReadTemplate(ReadOnlyHeader);

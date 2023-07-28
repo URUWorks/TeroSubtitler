@@ -41,9 +41,9 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    procedure DrawBuffer(const AWidth: Integer = -1; const AHeight: Integer = -1);
+    procedure DrawBuffer(const AWidth: Integer = -1; const AHeight: Integer = -1; const AAlign: TAlignment = taCenter; const VAlign: TTextLayout = tlCenter; const ALeft: Integer = 0; const ATop: Integer = 0; const ARight: Integer = 0; const ABottom: Integer = 0);
     procedure ReDraw;
-    procedure SaveImageToFile(const AFileName: String; const AText: String = ''; const AWidth: Integer = -1; const AHeight: Integer = -1; const ATransparent: Boolean = False);
+    procedure SaveImageToFile(const AFileName: String; const AText: String = ''; const AWidth: Integer = -1; const AHeight: Integer = -1; const AAlign: TAlignment = taCenter; const VAlign: TTextLayout = tlCenter; const ATransparent: Boolean = False; const ALeft: Integer = 0; const ATop: Integer = 0; const ARight: Integer = 0; const ABottom: Integer = 0);
     property Bitmap: TBGRABitmap read FBitmap;
     property Renderer: TBGRATextEffectFontRenderer read FRenderer;
   protected
@@ -69,6 +69,9 @@ procedure Register;
 // -----------------------------------------------------------------------------
 
 implementation
+
+uses
+  UWSubtitleAPI.Tags, BGRADefaultBitmap;
 
 // -----------------------------------------------------------------------------
 
@@ -166,7 +169,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTextBox.DrawBuffer(const AWidth: Integer = -1; const AHeight: Integer = -1);
+procedure TUWTextBox.DrawBuffer(const AWidth: Integer = -1; const AHeight: Integer = -1; const AAlign: TAlignment = taCenter; const VAlign: TTextLayout = tlCenter; const ALeft: Integer = 0; const ATop: Integer = 0; const ARight: Integer = 0; const ABottom: Integer = 0);
+var
+  ts : TTextStyle;
+  r  : TRect;
 begin
   with FBitmap do
   begin
@@ -182,7 +188,14 @@ begin
 
     FontName := Font.Name;
     FontFullHeight := Font.Size;
-    TextOut(Width div 2, Height div 3, FText, ColorToBGRA(Font.Color), taCenter, FSpacing);
+
+    ts := BGRADefaultBitmap.DefaultTextStyle;
+    ts.Alignment := AAlign;
+    ts.Layout    := VAlign;
+
+    r := Rect(ClipRect.Left + ALeft, ClipRect.Top + ATop, ClipRect.Right - ARight, ClipRect.Bottom - ABottom);
+
+    TextRect(r, 0, 0, RemoveTSTags(FText), ts, ColorToBGRA(Font.Color));
   end;
 end;
 
@@ -196,14 +209,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTextBox.SaveImageToFile(const AFileName: String; const AText: String = ''; const AWidth: Integer = -1; const AHeight: Integer = -1; const ATransparent: Boolean = False);
+procedure TUWTextBox.SaveImageToFile(const AFileName: String; const AText: String = ''; const AWidth: Integer = -1; const AHeight: Integer = -1; const AAlign: TAlignment = taCenter; const VAlign: TTextLayout = tlCenter; const ATransparent: Boolean = False; const ALeft: Integer = 0; const ATop: Integer = 0; const ARight: Integer = 0; const ABottom: Integer = 0);
 begin
   if not AText.IsEmpty then
     FText := AText;
 
   FTransparent := ATransparent;
 
-  DrawBuffer(AWidth, AHeight);
+  DrawBuffer(AWidth, AHeight, AAlign, VAlign, ALeft, ATop, ARight, ABottom);
   FBitmap.SaveToFile(AFileName);
 end;
 

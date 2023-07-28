@@ -1095,21 +1095,18 @@ object frmSettings: TfrmSettings
       object ToolButton1: TToolButton
         Left = 1
         Top = 0
-        Caption = 'ToolButton1'
         ImageIndex = 0
         Style = tbsCheck
       end
       object ToolButton2: TToolButton
         Left = 24
         Top = 0
-        Caption = 'ToolButton2'
         ImageIndex = 1
         Style = tbsCheck
       end
       object ToolButton3: TToolButton
         Left = 47
         Top = 0
-        Caption = 'ToolButton3'
         ImageIndex = 2
         Style = tbsCheck
       end
@@ -1117,20 +1114,17 @@ object frmSettings: TfrmSettings
         Left = 70
         Height = 22
         Top = 0
-        Caption = 'ToolButton4'
         Style = tbsDivider
       end
       object ToolButton5: TToolButton
         Left = 75
         Top = 0
-        Caption = 'ToolButton5'
         ImageIndex = 3
         Style = tbsCheck
       end
       object ToolButton6: TToolButton
         Left = 98
         Top = 0
-        Caption = 'ToolButton6'
         ImageIndex = 4
         Style = tbsCheck
       end
@@ -1138,27 +1132,23 @@ object frmSettings: TfrmSettings
         Left = 121
         Height = 22
         Top = 0
-        Caption = 'ToolButton7'
         Style = tbsDivider
       end
       object ToolButton8: TToolButton
         Left = 126
         Top = 0
-        Caption = 'ToolButton8'
         ImageIndex = 5
         Style = tbsCheck
       end
       object ToolButton9: TToolButton
         Left = 149
         Top = 0
-        Caption = 'ToolButton9'
         ImageIndex = 6
         Style = tbsCheck
       end
       object ToolButton10: TToolButton
         Left = 172
         Top = 0
-        Caption = 'ToolButton10'
         ImageIndex = 7
         Style = tbsCheck
       end
@@ -1166,27 +1156,23 @@ object frmSettings: TfrmSettings
         Left = 195
         Height = 22
         Top = 0
-        Caption = 'ToolButton11'
         Style = tbsDivider
       end
       object ToolButton12: TToolButton
         Left = 200
         Top = 0
-        Caption = 'ToolButton12'
         ImageIndex = 8
         Style = tbsCheck
       end
       object ToolButton13: TToolButton
         Left = 223
         Top = 0
-        Caption = 'ToolButton13'
         ImageIndex = 63
         Style = tbsCheck
       end
       object ToolButton14: TToolButton
         Left = 246
         Top = 0
-        Caption = 'ToolButton14'
         ImageIndex = 10
         Style = tbsCheck
       end
@@ -1194,27 +1180,23 @@ object frmSettings: TfrmSettings
         Left = 269
         Height = 22
         Top = 0
-        Caption = 'ToolButton15'
         Style = tbsDivider
       end
       object ToolButton16: TToolButton
         Left = 274
         Top = 0
-        Caption = 'ToolButton16'
         ImageIndex = 11
         Style = tbsCheck
       end
       object ToolButton17: TToolButton
         Left = 297
         Top = 0
-        Caption = 'ToolButton17'
         ImageIndex = 12
         Style = tbsCheck
       end
       object ToolButton18: TToolButton
         Left = 320
         Top = 0
-        Caption = 'ToolButton18'
         ImageIndex = 13
         Style = tbsCheck
       end
@@ -1222,27 +1204,23 @@ object frmSettings: TfrmSettings
         Left = 343
         Height = 22
         Top = 0
-        Caption = 'ToolButton19'
         Style = tbsDivider
       end
       object ToolButton20: TToolButton
         Left = 348
         Top = 0
-        Caption = 'ToolButton20'
         ImageIndex = 14
         Style = tbsCheck
       end
       object ToolButton21: TToolButton
         Left = 371
         Top = 0
-        Caption = 'ToolButton21'
         ImageIndex = 15
         Style = tbsCheck
       end
       object ToolButton22: TToolButton
         Left = 394
         Top = 0
-        Caption = 'ToolButton22'
         ImageIndex = 16
         Style = tbsCheck
       end
@@ -1250,20 +1228,17 @@ object frmSettings: TfrmSettings
         Left = 417
         Height = 22
         Top = 0
-        Caption = 'ToolButton23'
         Style = tbsDivider
       end
       object ToolButton24: TToolButton
         Left = 422
         Top = 0
-        Caption = 'ToolButton24'
         ImageIndex = 17
         Style = tbsCheck
       end
       object ToolButton25: TToolButton
         Left = 445
         Top = 0
-        Caption = 'ToolButton25'
         ImageIndex = 18
         Style = tbsCheck
       end
@@ -1272,7 +1247,7 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 22
       Top = 92
-      Width = 366
+      Width = 389
       Align = alNone
       AutoSize = True
       Caption = 'tlbEditor_'
@@ -1285,14 +1260,12 @@ object frmSettings: TfrmSettings
       object ToolButton26: TToolButton
         Left = 1
         Top = 0
-        Caption = 'ToolButton26'
         ImageIndex = 20
         Style = tbsCheck
       end
       object ToolButton27: TToolButton
         Left = 24
         Top = 0
-        Caption = 'ToolButton27'
         ImageIndex = 21
         Style = tbsCheck
       end
@@ -1300,118 +1273,107 @@ object frmSettings: TfrmSettings
         Left = 47
         Height = 22
         Top = 0
-        Caption = 'ToolButton28'
         Style = tbsDivider
       end
       object ToolButton29: TToolButton
         Left = 52
         Top = 0
-        Caption = 'ToolButton29'
         ImageIndex = 22
         Style = tbsCheck
       end
       object ToolButton30: TToolButton
         Left = 75
         Top = 0
-        Caption = 'ToolButton30'
         ImageIndex = 23
         Style = tbsCheck
       end
       object ToolButton31: TToolButton
         Left = 98
         Top = 0
-        Caption = 'ToolButton31'
         ImageIndex = 24
         Style = tbsCheck
       end
       object ToolButton32: TToolButton
         Left = 121
         Top = 0
-        Caption = 'ToolButton32'
         ImageIndex = 25
         Style = tbsCheck
       end
-      object ToolButton33: TToolButton
+      object ToolButton74: TToolButton
         Left = 144
         Top = 0
-        Caption = 'ToolButton33'
+        ImageIndex = 79
+        Style = tbsCheck
+      end
+      object ToolButton33: TToolButton
+        Left = 167
+        Top = 0
         ImageIndex = 26
         Style = tbsCheck
       end
       object ToolButton34: TToolButton
-        Left = 167
+        Left = 190
         Height = 22
         Top = 0
-        Caption = 'ToolButton34'
         Style = tbsDivider
       end
       object ToolButton35: TToolButton
-        Left = 172
+        Left = 195
         Top = 0
-        Caption = 'ToolButton35'
         ImageIndex = 27
         Style = tbsCheck
       end
       object ToolButton36: TToolButton
-        Left = 195
+        Left = 218
         Top = 0
-        Caption = 'ToolButton36'
         ImageIndex = 28
         Style = tbsCheck
       end
       object ToolButton37: TToolButton
-        Left = 218
+        Left = 241
         Top = 0
-        Caption = 'ToolButton37'
         ImageIndex = 29
         Style = tbsCheck
       end
       object ToolButton38: TToolButton
-        Left = 241
+        Left = 264
         Top = 0
-        Caption = 'ToolButton38'
         ImageIndex = 30
         Style = tbsCheck
       end
       object ToolButton39: TToolButton
-        Left = 264
+        Left = 287
         Height = 22
         Top = 0
-        Caption = 'ToolButton39'
         Style = tbsDivider
       end
       object ToolButton40: TToolButton
-        Left = 269
+        Left = 292
         Top = 0
-        Caption = 'ToolButton40'
         ImageIndex = 31
         Style = tbsCheck
       end
       object ToolButton41: TToolButton
-        Left = 292
+        Left = 315
         Top = 0
-        Caption = 'ToolButton41'
         ImageIndex = 32
         Style = tbsCheck
       end
       object ToolButton42: TToolButton
-        Left = 315
+        Left = 338
         Top = 0
-        Caption = 'ToolButton42'
         ImageIndex = 33
         Style = tbsCheck
       end
       object ToolButton43: TToolButton
-        Left = 338
+        Left = 361
         Height = 22
         Top = 0
-        Caption = 'ToolButton43'
         Style = tbsDivider
       end
       object ToolButton44: TToolButton
-        Left = 343
+        Left = 366
         Top = 0
-        Caption = 'ToolButton44'
         ImageIndex = 64
         Style = tbsCheck
       end
@@ -1433,14 +1395,12 @@ object frmSettings: TfrmSettings
       object ToolButton45: TToolButton
         Left = 1
         Top = 0
-        Caption = 'ToolButton45'
         ImageIndex = 38
         Style = tbsCheck
       end
       object ToolButton46: TToolButton
         Left = 24
         Top = 0
-        Caption = 'ToolButton46'
         ImageIndex = 40
         Style = tbsCheck
       end
@@ -1448,20 +1408,17 @@ object frmSettings: TfrmSettings
         Left = 47
         Height = 22
         Top = 0
-        Caption = 'ToolButton47'
         Style = tbsDivider
       end
       object ToolButton48: TToolButton
         Left = 52
         Top = 0
-        Caption = 'ToolButton48'
         ImageIndex = 41
         Style = tbsCheck
       end
       object ToolButton49: TToolButton
         Left = 75
         Top = 0
-        Caption = 'ToolButton49'
         ImageIndex = 42
         Style = tbsCheck
       end
@@ -1469,34 +1426,29 @@ object frmSettings: TfrmSettings
         Left = 98
         Height = 22
         Top = 0
-        Caption = 'ToolButton50'
         Style = tbsDivider
       end
       object ToolButton51: TToolButton
         Left = 103
         Top = 0
-        Caption = 'ToolButton51'
         ImageIndex = 43
         Style = tbsCheck
       end
       object ToolButton52: TToolButton
         Left = 126
         Top = 0
-        Caption = 'ToolButton52'
         ImageIndex = 44
         Style = tbsCheck
       end
       object ToolButton53: TToolButton
         Left = 149
         Top = 0
-        Caption = 'ToolButton53'
         ImageIndex = 45
         Style = tbsCheck
       end
       object ToolButton54: TToolButton
         Left = 172
         Top = 0
-        Caption = 'ToolButton54'
         ImageIndex = 46
         Style = tbsCheck
       end
@@ -1504,34 +1456,29 @@ object frmSettings: TfrmSettings
         Left = 195
         Height = 22
         Top = 0
-        Caption = 'ToolButton55'
         Style = tbsDivider
       end
       object ToolButton56: TToolButton
         Left = 200
         Top = 0
-        Caption = 'ToolButton56'
         ImageIndex = 47
         Style = tbsCheck
       end
       object ToolButton57: TToolButton
         Left = 223
         Top = 0
-        Caption = 'ToolButton57'
         ImageIndex = 48
         Style = tbsCheck
       end
       object ToolButton58: TToolButton
         Left = 246
         Top = 0
-        Caption = 'ToolButton58'
         ImageIndex = 49
         Style = tbsCheck
       end
       object ToolButton59: TToolButton
         Left = 269
         Top = 0
-        Caption = 'ToolButton59'
         ImageIndex = 50
         Style = tbsCheck
       end
@@ -1553,28 +1500,24 @@ object frmSettings: TfrmSettings
       object ToolButton60: TToolButton
         Left = 1
         Top = 0
-        Caption = 'ToolButton60'
         ImageIndex = 51
         Style = tbsCheck
       end
       object ToolButton61: TToolButton
         Left = 24
         Top = 0
-        Caption = 'ToolButton61'
         ImageIndex = 54
         Style = tbsCheck
       end
       object ToolButton62: TToolButton
         Left = 47
         Top = 0
-        Caption = 'ToolButton62'
         ImageIndex = 52
         Style = tbsCheck
       end
       object ToolButton63: TToolButton
         Left = 70
         Top = 0
-        Caption = 'ToolButton63'
         ImageIndex = 53
         Style = tbsCheck
       end
@@ -1582,13 +1525,11 @@ object frmSettings: TfrmSettings
         Left = 93
         Height = 22
         Top = 0
-        Caption = 'ToolButton64'
         Style = tbsDivider
       end
       object ToolButton65: TToolButton
         Left = 98
         Top = 0
-        Caption = 'ToolButton65'
         ImageIndex = 55
         Style = tbsCheck
       end
@@ -1596,27 +1537,23 @@ object frmSettings: TfrmSettings
         Left = 121
         Height = 22
         Top = 0
-        Caption = 'ToolButton66'
         Style = tbsDivider
       end
       object ToolButton67: TToolButton
         Left = 126
         Top = 0
-        Caption = 'ToolButton67'
         ImageIndex = 59
         Style = tbsCheck
       end
       object ToolButton68: TToolButton
         Left = 149
         Top = 0
-        Caption = 'ToolButton68'
         ImageIndex = 60
         Style = tbsCheck
       end
       object ToolButton69: TToolButton
         Left = 172
         Top = 0
-        Caption = 'ToolButton69'
         ImageIndex = 61
         Style = tbsCheck
       end
@@ -1624,27 +1561,23 @@ object frmSettings: TfrmSettings
         Left = 195
         Height = 22
         Top = 0
-        Caption = 'ToolButton70'
         Style = tbsDivider
       end
       object ToolButton71: TToolButton
         Left = 200
         Top = 0
-        Caption = 'ToolButton71'
         ImageIndex = 75
         Style = tbsCheck
       end
       object ToolButton72: TToolButton
         Left = 223
         Top = 0
-        Caption = 'ToolButton72'
         ImageIndex = 76
         Style = tbsCheck
       end
       object ToolButton73: TToolButton
         Left = 246
         Top = 0
-        Caption = 'ToolButton73'
         ImageIndex = 77
         Style = tbsCheck
       end

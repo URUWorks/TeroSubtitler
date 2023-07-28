@@ -294,6 +294,8 @@ type
     MenuItem171: TMenuItem;
     MenuItem172: TMenuItem;
     MenuItem173: TMenuItem;
+    mnuVSTFormat: TMenuItem;
+    mnuMemoFormat: TMenuItem;
     mnuFormatProperties: TMenuItem;
     mnuCheckForUpdates: TMenuItem;
     MenuItem17: TMenuItem;
@@ -488,6 +490,8 @@ type
     mnuHelpSeparator: TMenuItem;
     Separator47: TMenuItem;
     Separator48: TMenuItem;
+    Separator49: TMenuItem;
+    Separator50: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
@@ -563,17 +567,18 @@ type
     etlb3: TToolButton;
     tlb2: TToolButton;
     etlb4: TToolButton;
-    etlb6: TToolButton;
-    etlbdiv1: TToolButton;
     etlb7: TToolButton;
+    etlbdiv1: TToolButton;
     etlb8: TToolButton;
     etlb9: TToolButton;
     etlb10: TToolButton;
-    etlbdiv2: TToolButton;
     etlb11: TToolButton;
+    etlbdiv2: TToolButton;
     etlb12: TToolButton;
-    tlbdiv0: TToolButton;
     etlb13: TToolButton;
+    tlbdiv0: TToolButton;
+    etlb14: TToolButton;
+    etlb6: TToolButton;
     wtlb0: TToolButton;
     wtlb1: TToolButton;
     wtlb2: TToolButton;
@@ -605,7 +610,7 @@ type
     vtlb11: TToolButton;
     tlb9: TToolButton;
     etlbdiv3: TToolButton;
-    etlb14: TToolButton;
+    etlb15: TToolButton;
     tlbdiv3: TToolButton;
     tlbdiv1: TToolButton;
     etlb5: TToolButton;
@@ -968,6 +973,8 @@ begin
   FillMenuWithLoopCount(popLoopCount);
   FillWithDictionaries(mnuDictionary, NIL);
   FillMenuWithUnicodeSymbols(mnuEditInsertSymbol);
+  mnuVSTFormat.Assign(mnuEditFormat);
+  mnuMemoFormat.Assign(mnuEditFormat);
   mnuVSTInsertSymbol.Assign(mnuEditInsertSymbol);
   mnuMemoInsertSymbol.Assign(mnuEditInsertSymbol);
   // Tag controls

@@ -319,7 +319,7 @@ begin
       tlb17.Hide;
       tlb18.Hide;
       etlb5.Hide;
-      etlb6.Hide;
+      etlb7.Hide;
       vtlb8.Hide;
       vtlb9.Hide;
       vtlb10.Hide;

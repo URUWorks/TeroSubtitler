@@ -8,8 +8,6 @@ Extension=*.dost
 Time structure=hh:mm:ss:ff
 Time=True
 Decimal separator=.
-SubPadding=4
-FPSPadding=5
 
 [Format text]
 $FORMAT=480

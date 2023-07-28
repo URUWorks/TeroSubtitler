@@ -223,6 +223,7 @@ type
     ToolButton71: TToolButton;
     ToolButton72: TToolButton;
     ToolButton73: TToolButton;
+    ToolButton74: TToolButton;
     ToolButton8: TToolButton;
     ToolButton9: TToolButton;
     procedure btnCloseClick(Sender: TObject);

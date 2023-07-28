@@ -22,10 +22,11 @@ unit procCustomFormat;
 interface
 
 uses
-  Classes, SysUtils, Graphics, StdCtrls, UWSubtitleAPI;
+  Classes, SysUtils, Graphics, UWSubtitleAPI;
 
 function CFReplaceHeaderTags(const S, TimeFormat, FPS: String; const W, H: Integer): String;
 function CFReplaceBodyTags(const S, TimeFormat, FPS: String; const Item: TUWSubtitleItem; const InFrames: Boolean; const NewChar: String; const Index: Integer; const ImageFile: String = ''): String;
+function CFFixExtension(const AFileName, AExtension: String): String;
 
 // -----------------------------------------------------------------------------
 
@@ -87,6 +88,13 @@ begin
     Result := ReplaceString(Result, '{tsY2}', R.Bottom.ToString);
     Result := ReplaceString(Result, '{tsImage}', ImageFile);
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function CFFixExtension(const AFileName, AExtension: String): String;
+begin
+  Result := ChangeFileExt(AFileName, AExtension.Replace('*', ''));
 end;
 
 // -----------------------------------------------------------------------------

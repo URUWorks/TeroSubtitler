@@ -182,7 +182,7 @@ begin
           finally
             EndUpdate;
           end;
-          SaveToFile(ChangeFileExt(s, Extension), TEncoding.GetEncoding(Encodings[cboEncoding.ItemIndex].CPID));
+          SaveToFile(CFFixExtension(s, Extension), TEncoding.GetEncoding(Encodings[cboEncoding.ItemIndex].CPID));
         finally
           Free;
         end;

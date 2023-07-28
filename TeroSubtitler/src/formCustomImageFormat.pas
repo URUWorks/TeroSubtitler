@@ -67,6 +67,7 @@ type
   private
     CustomFormat: TUWSubtitleCustomImageFormat;
     StatusString: String;
+    procedure SetControlsEnabled(const AValue: Boolean);
     procedure SaveImageFile(const AFileName: String; const AIndex: Integer);
   public
 
@@ -81,7 +82,7 @@ implementation
 
 uses
   procWorkspace, procTypes, procCommon, UWSystem.XMLLang, UWSystem.Encoding,
-  UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils, procCustomFormat;
+  UWSystem.SysUtils, procCustomFormat;
 
 {$R *.lfm}
 
@@ -184,6 +185,7 @@ begin
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
       if SD.Execute then
       begin
+        SetControlsEnabled(False);
         with CustomFormat do
         begin
           TXT := TStringList.Create;
@@ -210,11 +212,12 @@ begin
             finally
               EndUpdate;
             end;
-            SaveToFile(ChangeFileExt(SD.FileName, Extension));
+            SaveToFile(CFFixExtension(SD.FileName, Extension));
           finally
             Free;
           end;
         end;
+        SetControlsEnabled(True);
         Close;
       end;
     finally
@@ -252,10 +255,47 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmCustomImageFormat.SetControlsEnabled(const AValue: Boolean);
+begin
+  cboScript.Enabled := AValue;
+  cboFPS.Enabled := AValue;
+  edtPrefix.Enabled := AValue;
+  edtFolder.Enabled := AValue;
+  btnFolder.Enabled := AValue;
+  spnWidth.Enabled := AValue;
+  spnHeight.Enabled := AValue;
+  spnLeft.Enabled := AValue;
+  spnTop.Enabled := AValue;
+  spnRight.Enabled := AValue;
+  spnBottom.Enabled := AValue;
+  cboFont.Enabled := AValue;
+  spnFontSize.Enabled := AValue;
+  btnSave.Enabled := AValue;
+  btnClose.Enabled := AValue;
+end;
+
+// -----------------------------------------------------------------------------
 
 procedure TfrmCustomImageFormat.SaveImageFile(const AFileName: String; const AIndex: Integer);
+var
+  h : TAlignment;
+  v : TTextLayout;
 begin
-  ttbPreview.SaveImageToFile(AFileName, RemoveTSTags(Subtitles[AIndex].Text), spnWidth.Value, spnHeight.Value, True);
+  case Subtitles[AIndex].Align of
+    1 : h := taLeftJustify;
+    3 : h := taRightJustify;
+  else
+    h := taCenter;
+  end;
+
+  case Subtitles[AIndex].VAlign of
+    1 : v := tlCenter;
+    2 : v := tlTop;
+  else
+    v := tlBottom;
+  end;
+
+  ttbPreview.SaveImageToFile(AFileName, Subtitles[AIndex].Text, spnWidth.Value, spnHeight.Value, h, v, True, spnLeft.Value, spnTop.Value, spnRight.Value, spnBottom.Value);
 end;
 
 // -----------------------------------------------------------------------------
