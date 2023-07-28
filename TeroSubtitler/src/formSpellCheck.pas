@@ -266,8 +266,12 @@ begin
     lblCurrentLine.Caption := '';
 
     if not FirstLoad then
+    begin
       with LanguageManager do
         ShowMessageDialog(GetCommonString('SpellCheckFinished'));
+
+      //Close;
+    end;
   end;
 end;
 
@@ -304,7 +308,10 @@ end;
 procedure TfrmSpellCheck.btnChangeClick(Sender: TObject);
 begin
   if (lstSuggestions.Count > 0) and (mmoNotFound.SelText <> '') then
+  begin
     SetSubtitleText(FLastLine, ReplaceString(GetSubtitleText(FLastLine, FSource), mmoNotFound.SelText, edtCustom.Text, True, False), FSource, False, False, False);
+    FTempList.Add(mmoNotFound.SelText);
+  end;
 
   DoSpell;
 end;
