@@ -88,9 +88,15 @@ type
   TUWSubtitleCustomImageFormat = class(TUWSubtitleTemplate)
   private
     { Private declarations }
+    FWidth  : Integer;
+    FHeight : Integer;
+    FMargin : TRect;
     procedure ReadTemplate(const ReadOnlyHeader: Boolean = False); override;
   public
     { Public declarations }
+    property Width  : Integer read FWidth  write FWidth;
+    property Height : Integer read FHeight write FHeight;
+    property Margin : TRect   read FMargin write FMargin;
   end;
 
 // -----------------------------------------------------------------------------
@@ -267,7 +273,7 @@ begin
       FExtension    := ReadString(InfoHeader, 'Extension', '');
       FTimeFormat   := ReadString(InfoHeader, 'Time Structure', 'hh:mm:ss,zzz');
       FTime         := ReadBool(InfoHeader, 'Time', True);
-      FFPS          := ReadInteger(InfoHeader, 'FPS', 25);
+      FFPS          := StrToFloatDef(ReadString(InfoHeader, 'FPS', '25'), 25); //ReadInteger(InfoHeader, 'FPS', 25);
       FDecSeparator := ReadString(InfoHeader, 'Decimal separator', ',')[1];
       FNewLine      := ReadString(InfoHeader, 'New line char', '|');
       //FSubPadding   := ReadInteger(InfoHeader, 'SubPadding', 0);
@@ -328,14 +334,20 @@ begin
   if (FFileName <> '') and FileExists(FFileName) then
     with TIniFile.Create(FFileName) do
     try
-      FName         := ReadString(InfoHeader, 'Name', '');
-      FExtension    := ReadString(InfoHeader, 'Extension', '');
-      FTimeFormat   := ReadString(InfoHeader, 'Time Structure', 'hh:mm:ss:zz');
-      FTime         := ReadBool(InfoHeader, 'Time', True);
-      FFPS          := ReadInteger(InfoHeader, 'FPS', 25);
-      FDecSeparator := ReadString(InfoHeader, 'Decimal separator', '.')[1];
-      //FSubPadding   := ReadInteger(InfoHeader, 'SubPadding', 0);
-      //FFPSPadding   := ReadInteger(InfoHeader, 'FPSPadding', 0);
+      FName          := ReadString(InfoHeader, 'Name', '');
+      FExtension     := ReadString(InfoHeader, 'Extension', '');
+      FTimeFormat    := ReadString(InfoHeader, 'Time Structure', 'hh:mm:ss:zz');
+      FTime          := ReadBool(InfoHeader, 'Time', True);
+      FFPS           := StrToFloatDef(ReadString(InfoHeader, 'FPS', '25'), 25); //ReadInteger(InfoHeader, 'FPS', 25);
+      FDecSeparator  := ReadString(InfoHeader, 'Decimal separator', '.')[1];
+      FWidth         := ReadInteger(InfoHeader, 'Width', 720);
+      FHeight        := ReadInteger(InfoHeader, 'Height', 480);
+      FMargin.Left   := ReadInteger(InfoHeader, 'MarginLeft', 0);
+      FMargin.Top    := ReadInteger(InfoHeader, 'MarginTop', 0);
+      FMargin.Right  := ReadInteger(InfoHeader, 'MarginRight', 0);
+      FMargin.Bottom := ReadInteger(InfoHeader, 'MarginBottom', 0);
+      //FSubPadding    := ReadInteger(InfoHeader, 'SubPadding', 0);
+      //FFPSPadding    := ReadInteger(InfoHeader, 'FPSPadding', 0);
 
       if (FName <> '') then
         inherited ReadTemplate(ReadOnlyHeader);

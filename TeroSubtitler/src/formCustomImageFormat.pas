@@ -178,8 +178,7 @@ begin
     SD := TSaveDialog.Create(NIL);
     try
       SD.Title  := GetCommonString('SaveFile');
-      with CustomFormat do
-        SD.Filter := Format('%s (%s)|%s', [CustomFormat.Name, CustomFormat.Extension, CustomFormat.Extension]);
+      SD.Filter := Format('%s (%s)|%s', [CustomFormat.Name, CustomFormat.Extension, CustomFormat.Extension]);
       SD.FilterIndex := 0;
       SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
@@ -203,7 +202,7 @@ begin
                 lblStatus.Caption := Format(StatusString, [i, Subtitles.Count]);
                 Application.ProcessMessages;
                 img := Format('%s%.4d.png', [edtPrefix.Text, i+1]);
-                Add(CFReplaceBodyTags(Body, TimeFormat, cboFPS.Text, Subtitles[i], not Time, sLineBreak, i+1, img));
+                Add(CFReplaceBodyTags(Body, TimeFormat, cboFPS.Text, Subtitles[i], not Time, sLineBreak, i+1, img, spnWidth.Value, spnHeight.Value));
                 SaveImageFile(ConcatPaths([edtFolder.Text, img]), i);
               end;
 
@@ -240,6 +239,12 @@ begin
       FS := AppOptions.FormatSettings;
       FS.DecimalSeparator := DecSeparator;
       cboFPS.Text := SingleToStr(FPS, FS);
+      spnWidth.Value := Width;
+      spnHeight.Value := Height;
+      spnLeft.Value := Margin.Left;
+      spnTop.Value := Margin.Top;
+      spnRight.Value := Margin.Right;
+      spnBottom.Value := Margin.Bottom;
     end;
   end;
 end;

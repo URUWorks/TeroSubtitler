@@ -8,6 +8,8 @@ Extension=*.xml
 Time structure=hh:mm:ss:ff
 Time=True
 Decimal separator=.
+Width=720
+Height=480
 
 [Format text]
 <?xml version="1.0" encoding="UTF-8"?>

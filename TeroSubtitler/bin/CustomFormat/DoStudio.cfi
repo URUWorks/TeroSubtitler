@@ -3,14 +3,16 @@
 ;
 
 [Information]
-Name=DoStudio
+Name=DoStudio 1.2
 Extension=*.dost
 Time structure=hh:mm:ss:ff
 Time=True
 Decimal separator=.
+Width=720
+Height=480
 
 [Format text]
-$FORMAT=480
+$FORMAT={ImageHeight}
 $DROP={FPS}
 $VERSION=1.2
 $ULEAD=TRUE

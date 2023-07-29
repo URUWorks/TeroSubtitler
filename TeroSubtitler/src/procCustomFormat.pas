@@ -25,7 +25,7 @@ uses
   Classes, SysUtils, Graphics, UWSubtitleAPI;
 
 function CFReplaceHeaderTags(const S, TimeFormat, FPS: String; const W, H: Integer): String;
-function CFReplaceBodyTags(const S, TimeFormat, FPS: String; const Item: TUWSubtitleItem; const InFrames: Boolean; const NewChar: String; const Index: Integer; const ImageFile: String = ''): String;
+function CFReplaceBodyTags(const S, TimeFormat, FPS: String; const Item: TUWSubtitleItem; const InFrames: Boolean; const NewChar: String; const Index: Integer; const ImageFile: String = ''; const W: Integer = 0; const H: Integer = 0): String;
 function CFFixExtension(const AFileName, AExtension: String): String;
 
 // -----------------------------------------------------------------------------
@@ -44,8 +44,8 @@ begin
   Result := ReplaceString(Result, '{WebSite}', ProgramWebsite);
   Result := ReplaceString(Result, '{TotalCount}', Subtitles.Count.ToString);
   Result := ReplaceString(Result, '{FPS}', FPS);
-  Result := ReplaceString(Result, '{Width}', W.ToString);
-  Result := ReplaceString(Result, '{Height}', H.ToString);
+  Result := ReplaceString(Result, '{ImageWidth}', W.ToString);
+  Result := ReplaceString(Result, '{ImageHeight}', H.ToString);
   with Subtitles[0] do // First sub
   begin
     Result := ReplaceString(Result, '{FirstStart}', Iff(TimeFormat <> '', TimeToString(InitialTime, TimeFormat), IntToStr(InitialTime)));
@@ -60,7 +60,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function CFReplaceBodyTags(const S, TimeFormat, FPS: String; const Item: TUWSubtitleItem; const InFrames: Boolean; const NewChar: String; const Index: Integer; const ImageFile: String = ''): String;
+function CFReplaceBodyTags(const S, TimeFormat, FPS: String; const Item: TUWSubtitleItem; const InFrames: Boolean; const NewChar: String; const Index: Integer; const ImageFile: String = ''; const W: Integer = 0; const H: Integer = 0): String;
 
   function GetTime(const Time: Cardinal): String;
   begin
@@ -73,7 +73,7 @@ function CFReplaceBodyTags(const S, TimeFormat, FPS: String; const Item: TUWSubt
 begin
   with Item do
   begin
-    Result := CFReplaceHeaderTags(S, TimeFormat, FPS, 0, 0);
+    Result := CFReplaceHeaderTags(S, TimeFormat, FPS, W, H);
     Result := ReplaceString(Result, '{tsIndex}', IntToStr(Index));
     Result := ReplaceString(Result, '{tsStart}', GetTime(InitialTime));
     Result := ReplaceString(Result, '{tsEnd}', GetTime(FinalTime));
