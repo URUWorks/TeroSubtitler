@@ -53,11 +53,14 @@ object frmTranslate: TfrmTranslate
     ParentColor = False
   end
   object cboSourceLanguage: TComboBox
+    AnchorSideTop.Control = lblSourceLanguage
+    AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 23
-    Top = 25
+    Top = 28
     Width = 192
     AutoSize = False
+    BorderSpacing.Top = 5
     ItemHeight = 15
     ReadOnly = True
     Style = csDropDownList
@@ -72,11 +75,14 @@ object frmTranslate: TfrmTranslate
     ParentColor = False
   end
   object cboTranslationLanguage: TComboBox
+    AnchorSideTop.Control = lblTranslationLanguage
+    AnchorSideTop.Side = asrBottom
     Left = 208
     Height = 23
-    Top = 25
+    Top = 28
     Width = 192
     AutoSize = False
+    BorderSpacing.Top = 5
     ItemHeight = 15
     ReadOnly = True
     Style = csDropDownList
@@ -91,22 +97,28 @@ object frmTranslate: TfrmTranslate
     ParentColor = False
   end
   object cboInput: TComboBox
+    AnchorSideTop.Control = lblInput
+    AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 23
-    Top = 73
+    Top = 76
     Width = 192
     AutoSize = False
+    BorderSpacing.Top = 5
     ItemHeight = 15
     ReadOnly = True
     Style = csDropDownList
     TabOrder = 2
   end
   object cboOutput: TComboBox
+    AnchorSideTop.Control = lblOutput
+    AnchorSideTop.Side = asrBottom
     Left = 208
     Height = 23
-    Top = 73
+    Top = 76
     Width = 192
     AutoSize = False
+    BorderSpacing.Top = 5
     ItemHeight = 15
     ReadOnly = True
     Style = csDropDownList

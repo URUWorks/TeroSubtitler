@@ -128,33 +128,13 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       Left = 8
       Height = 15
       Top = 180
-      Width = 274
+      Width = 256
       Alignment = taRightJustify
       Anchors = [akTop, akLeft, akRight]
       AutoSize = False
       BorderSpacing.Right = 5
       Caption = 'Subtitle #'
       ParentColor = False
-    end
-    object tedTime: TUWTimeEdit
-      AnchorSideRight.Control = btnPlus
-      Left = 382
-      Height = 23
-      Top = 176
-      Width = 104
-      Value = 0
-      FPS = 25
-      FrameStep = 1
-      TimeStep = 1
-      TimeMode = temTime
-      Alignment = taCenter
-      Anchors = [akTop, akRight]
-      BorderSpacing.Right = 5
-      Constraints.MinHeight = 21
-      Constraints.MinWidth = 80
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 2
     end
     object btnPlus: TButton
       AnchorSideRight.Control = btnMinus
@@ -166,7 +146,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       BorderSpacing.Right = 5
       Caption = '+'
       OnClick = btnPlusClick
-      TabOrder = 3
+      TabOrder = 2
     end
     object btnMinus: TButton
       Left = 534
@@ -176,11 +156,10 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       Anchors = [akTop, akRight]
       Caption = '-'
       OnClick = btnMinusClick
-      TabOrder = 4
+      TabOrder = 3
     end
     object spnIndex: TSpinEdit
-      AnchorSideRight.Control = tedTime
-      Left = 287
+      Left = 269
       Height = 23
       Top = 176
       Width = 90
@@ -200,7 +179,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       Header.Columns = <>
       Header.MainColumn = -1
       Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
-      TabOrder = 5
+      TabOrder = 4
       TreeOptions.AutoOptions = [toAutoTristateTracking]
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
       TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
@@ -211,6 +190,24 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       OnGetText = VSTGetText
       OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
       OnResize = VSTResize
+    end
+    object tedTime: TUWTimeEdit
+      Left = 366
+      Height = 23
+      Top = 176
+      Width = 104
+      Value = 0
+      FPS = 25
+      FrameStep = 1
+      TimeStep = 1
+      TimeMode = temTime
+      Alignment = taCenter
+      Anchors = [akTop, akRight]
+      Constraints.MinHeight = 21
+      Constraints.MinWidth = 80
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
     end
   end
   object rdoSimple: TUWRadioButton

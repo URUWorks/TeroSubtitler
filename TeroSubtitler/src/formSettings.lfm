@@ -71,29 +71,33 @@ object frmSettings: TfrmSettings
       TabOrder = 0
     end
     object edtWebReference: TEdit
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 23
       Top = 32
       Width = 268
       Anchors = [akTop, akLeft, akRight]
       AutoSize = False
+      BorderSpacing.Top = 8
       TabOrder = 1
     end
     object lblWebReference: TLabel
       Left = 0
       Height = 15
-      Top = 35
+      Top = 36
       Width = 248
       AutoSize = False
       Caption = 'Web reference'
       ParentColor = False
     end
     object cboTimeCodeMode: TComboBox
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 23
       Top = 64
       Width = 134
       AutoSize = False
+      BorderSpacing.Top = 8
       ItemHeight = 15
       ItemIndex = 0
       Items.Strings = (
@@ -123,11 +127,13 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object cboDefaultFrameRate: TComboBox
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 23
       Top = 96
       Width = 134
       AutoSize = False
+      BorderSpacing.Top = 8
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 3
@@ -142,11 +148,13 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object cboDefaultFileEncoding: TComboBox
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 23
       Top = 128
       Width = 134
       AutoSize = False
+      BorderSpacing.Top = 8
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 4
@@ -161,11 +169,13 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object spnAutoBackupMinutes: TSpinEdit
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 23
       Top = 224
       Width = 67
       AutoSize = False
+      BorderSpacing.Top = 8
       MaxValue = 30
       TabOrder = 7
       Value = 5
@@ -225,11 +235,13 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object spnShiftTimeMs: TSpinEdit
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 23
       Top = 192
       Width = 67
       AutoSize = False
+      BorderSpacing.Top = 8
       MaxValue = 10000
       TabOrder = 6
       Value = 500
@@ -244,20 +256,27 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object cboDefaultFileFormat: TComboBox
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 23
       Top = 160
       Width = 134
       AutoSize = False
+      BorderSpacing.Top = 8
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 5
     end
     object lblZeroToDisable: TLabel
-      Left = 322
+      AnchorSideLeft.Control = spnAutoBackupMinutes
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = spnAutoBackupMinutes
+      AnchorSideTop.Side = asrCenter
+      Left = 320
       Height = 15
       Top = 228
       Width = 60
+      BorderSpacing.Left = 5
       Caption = '0 to disable'
       ParentColor = False
     end
@@ -283,7 +302,7 @@ object frmSettings: TfrmSettings
   object lyoConventions: TUWLayout
     Left = -336
     Height = 546
-    Top = 120
+    Top = 192
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -441,6 +460,8 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object btnProfile: TButton
+      AnchorSideTop.Control = cboProfile
+      AnchorSideTop.Side = asrCenter
       Left = 468
       Height = 23
       Top = 0
@@ -1026,6 +1047,8 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object btnShortCutApply: TButton
+      AnchorSideTop.Control = cboShortCutPreset
+      AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = btnShortCutSave
       Left = 329
       Height = 23
@@ -1038,6 +1061,7 @@ object frmSettings: TfrmSettings
       TabOrder = 1
     end
     object btnShortCutSave: TButton
+      AnchorSideTop.Control = btnShortCutApply
       Left = 425
       Height = 23
       Top = 0

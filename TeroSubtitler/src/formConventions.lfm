@@ -36,6 +36,7 @@ object frmConventions: TfrmConventions
     TabOrder = 0
   end
   object btnAdd: TButton
+    AnchorSideTop.Control = lyoConvention
     Left = 801
     Height = 26
     Top = 8
