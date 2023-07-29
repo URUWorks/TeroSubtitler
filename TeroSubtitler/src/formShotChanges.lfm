@@ -2,32 +2,43 @@ object frmShotChanges: TfrmShotChanges
   Left = 242
   Height = 464
   Top = 118
-  Width = 455
+  Width = 472
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Shot changes'
   ClientHeight = 464
-  ClientWidth = 455
+  ClientWidth = 472
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object btnApply: TButton
-    Left = 293
-    Height = 25
-    Top = 431
-    Width = 75
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnClose
+    Left = 277
+    Height = 26
+    Top = 430
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick
     TabOrder = 10
   end
   object btnClose: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
     Left = 373
-    Height = 25
-    Top = 431
-    Width = 75
+    Height = 26
+    Top = 430
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
@@ -38,6 +49,7 @@ object frmShotChanges: TfrmShotChanges
     Height = 240
     Top = 8
     Width = 360
+    Anchors = [akTop, akLeft, akRight]
     OnChange = mmoTimesChange
     ReadOnly = True
     ScrollBars = ssAutoVertical
@@ -52,39 +64,51 @@ object frmShotChanges: TfrmShotChanges
     ParentColor = False
   end
   object btnImport: TButton
+    AnchorSideLeft.Control = btnClose
     Left = 373
-    Height = 25
+    Height = 26
     Top = 8
-    Width = 75
+    Width = 91
     Caption = 'Import...'
     OnClick = btnImportClick
     TabOrder = 1
   end
   object btnDetect: TButton
+    AnchorSideLeft.Control = btnClose
+    AnchorSideTop.Control = btnExport
+    AnchorSideTop.Side = asrBottom
     Left = 373
-    Height = 25
-    Top = 72
-    Width = 75
+    Height = 26
+    Top = 70
+    Width = 91
+    BorderSpacing.Top = 5
     Caption = 'Detect'
     OnClick = btnDetectClick
     TabOrder = 3
   end
   object btnExport: TButton
+    AnchorSideLeft.Control = btnClose
+    AnchorSideTop.Control = btnImport
+    AnchorSideTop.Side = asrBottom
     Left = 373
-    Height = 25
-    Top = 40
-    Width = 75
+    Height = 26
+    Top = 39
+    Width = 91
+    BorderSpacing.Top = 5
     Caption = 'Export...'
     Enabled = False
     OnClick = btnExportClick
     TabOrder = 2
   end
   object lblIdle: TLabel
-    Left = 285
+    AnchorSideRight.Control = btnApply
+    Left = 271
     Height = 1
     Top = 436
     Width = 1
     Alignment = taRightJustify
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     ParentColor = False
     ShowAccelChar = False
     Visible = False
@@ -96,6 +120,8 @@ object frmShotChanges: TfrmShotChanges
     Height = 23
     Top = 350
     Width = 168
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
     BorderSpacing.Right = 8
     Increment = 0.1
     MaxValue = 0.9
@@ -118,7 +144,7 @@ object frmShotChanges: TfrmShotChanges
     Left = 8
     Height = 8
     Top = 439
-    Width = 233
+    Width = 225
     Style = pbstMarquee
     TabOrder = 13
     Visible = False
@@ -128,6 +154,8 @@ object frmShotChanges: TfrmShotChanges
     Height = 23
     Top = 288
     Width = 168
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 5
@@ -145,15 +173,22 @@ object frmShotChanges: TfrmShotChanges
     Height = 23
     Top = 319
     Width = 168
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 6
   end
   object cboOffset: TComboBox
+    AnchorSideLeft.Control = spnSensitivity
+    AnchorSideRight.Control = tedOffset
     Left = 200
     Height = 23
     Top = 381
-    Width = 41
+    Width = 43
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
+    BorderSpacing.Right = 5
     ItemHeight = 15
     ItemIndex = 0
     Items.Strings = (
@@ -175,6 +210,7 @@ object frmShotChanges: TfrmShotChanges
     TimeStep = 1
     TimeMode = temTime
     Alignment = taCenter
+    Anchors = [akTop, akLeft, akRight]
     Constraints.MinHeight = 21
     Constraints.MinWidth = 80
     Font.Style = [fsBold]
@@ -205,6 +241,8 @@ object frmShotChanges: TfrmShotChanges
     Height = 23
     Top = 257
     Width = 168
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 4

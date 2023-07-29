@@ -41,20 +41,20 @@ type
   { TfrmMultipleReplace }
 
   TfrmMultipleReplace = class(TForm)
-    btnRemove: TButton;
+    btnMinus: TButton;
     btnClose: TButton;
     btnApply: TButton;
-    btnAdd: TButton;
+    btnPlus: TButton;
     chkRE: TUWCheckBox;
     edtFind: TEdit;
     edtReplace: TEdit;
     lblFind: TLabel;
     lblReplace: TLabel;
     VST: TLazVirtualStringTree;
-    procedure btnAddClick(Sender: TObject);
+    procedure btnPlusClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
-    procedure btnRemoveClick(Sender: TObject);
+    procedure btnMinusClick(Sender: TObject);
     procedure edtFindChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -148,7 +148,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMultipleReplace.btnAddClick(Sender: TObject);
+procedure TfrmMultipleReplace.btnPlusClick(Sender: TObject);
 var
   Item: PFindItem;
 begin
@@ -181,7 +181,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMultipleReplace.btnRemoveClick(Sender: TObject);
+procedure TfrmMultipleReplace.btnMinusClick(Sender: TObject);
 var
   i: Integer;
 begin
@@ -199,7 +199,7 @@ end;
 
 procedure TfrmMultipleReplace.edtFindChange(Sender: TObject);
 begin
-  btnAdd.Enabled := (edtFind.Text <> '') and (edtReplace.Text <> '');
+  btnPlus.Enabled := (edtFind.Text <> '') and (edtReplace.Text <> '');
 end;
 
 // -----------------------------------------------------------------------------
@@ -265,7 +265,7 @@ end;
 procedure TfrmMultipleReplace.VSTChange(Sender: TBaseVirtualTree;
   Node: PVirtualNode);
 begin
-  btnRemove.Enabled := VST.RootNodeCount > 0;
+  btnMinus.Enabled := VST.RootNodeCount > 0;
 end;
 
 // -----------------------------------------------------------------------------

@@ -14,20 +14,31 @@ object frmTranslate: TfrmTranslate
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object btnTranslate: TButton
-    Left = 245
-    Height = 25
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnClose
+    Left = 213
+    Height = 26
     Top = 224
-    Width = 75
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Translate'
     Default = True
     OnClick = btnTranslateClick
     TabOrder = 7
   end
   object btnClose: TButton
-    Left = 325
-    Height = 25
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 309
+    Height = 26
     Top = 224
-    Width = 75
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
@@ -46,6 +57,7 @@ object frmTranslate: TfrmTranslate
     Height = 23
     Top = 25
     Width = 192
+    AutoSize = False
     ItemHeight = 15
     ReadOnly = True
     Style = csDropDownList
@@ -64,6 +76,7 @@ object frmTranslate: TfrmTranslate
     Height = 23
     Top = 25
     Width = 192
+    AutoSize = False
     ItemHeight = 15
     ReadOnly = True
     Style = csDropDownList
@@ -82,6 +95,7 @@ object frmTranslate: TfrmTranslate
     Height = 23
     Top = 73
     Width = 192
+    AutoSize = False
     ItemHeight = 15
     ReadOnly = True
     Style = csDropDownList
@@ -92,6 +106,7 @@ object frmTranslate: TfrmTranslate
     Height = 23
     Top = 73
     Width = 192
+    AutoSize = False
     ItemHeight = 15
     ReadOnly = True
     Style = csDropDownList
@@ -106,10 +121,15 @@ object frmTranslate: TfrmTranslate
     ParentColor = False
   end
   object prbTranslate: TProgressBar
+    AnchorSideTop.Control = btnTranslate
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = cboSourceLanguage
+    AnchorSideRight.Side = asrBottom
     Left = 8
     Height = 8
-    Top = 232
-    Width = 224
+    Top = 233
+    Width = 192
+    Anchors = [akTop, akLeft, akRight]
     ParentColor = False
     TabOrder = 9
   end

@@ -1,12 +1,12 @@
 object frmTBXSettings: TfrmTBXSettings
   Left = 253
-  Height = 145
+  Height = 160
   Top = 123
   Width = 523
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Translation memory settings'
-  ClientHeight = 145
+  ClientHeight = 160
   ClientWidth = 523
   OnClose = FormClose
   OnCreate = FormCreate
@@ -14,17 +14,21 @@ object frmTBXSettings: TfrmTBXSettings
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object edtOpenFile: TEdit
+    AnchorSideRight.Control = btnOpenFile
     Left = 160
     Height = 23
     Top = 8
-    Width = 272
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
+    BorderSpacing.Right = 5
     TabOrder = 0
   end
   object btnOpenFile: TButton
-    Left = 440
-    Height = 25
+    Left = 467
+    Height = 23
     Top = 8
-    Width = 75
+    Width = 48
     Caption = '...'
     OnClick = btnOpenFileClick
     TabOrder = 1
@@ -42,6 +46,7 @@ object frmTBXSettings: TfrmTBXSettings
     Height = 23
     Top = 42
     Width = 355
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 2
@@ -59,6 +64,7 @@ object frmTBXSettings: TfrmTBXSettings
     Height = 23
     Top = 74
     Width = 355
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 3
@@ -72,20 +78,31 @@ object frmTBXSettings: TfrmTBXSettings
     ParentColor = False
   end
   object btnApply: TButton
-    Left = 360
-    Height = 25
-    Top = 112
-    Width = 75
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnClose
+    Left = 328
+    Height = 26
+    Top = 126
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick
     TabOrder = 4
   end
   object btnClose: TButton
-    Left = 440
-    Height = 25
-    Top = 112
-    Width = 75
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 424
+    Height = 26
+    Top = 126
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick

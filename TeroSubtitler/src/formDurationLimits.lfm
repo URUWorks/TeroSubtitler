@@ -2,12 +2,12 @@ object frmDurationLimits: TfrmDurationLimits
   Left = 260
   Height = 289
   Top = 127
-  Width = 280
+  Width = 315
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Duration limits'
   ClientHeight = 289
-  ClientWidth = 280
+  ClientWidth = 315
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -17,8 +17,9 @@ object frmDurationLimits: TfrmDurationLimits
     Left = 24
     Height = 23
     Top = 32
-    Width = 248
+    Width = 283
     Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
     NumbersOnly = True
     TabOrder = 0
     Text = '1'
@@ -27,29 +28,35 @@ object frmDurationLimits: TfrmDurationLimits
     Left = 24
     Height = 23
     Top = 104
-    Width = 248
+    Width = 283
     Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
     NumbersOnly = True
     TabOrder = 1
     Text = '1'
   end
   object btnClose: TButton
-    Left = 197
-    Height = 25
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 216
+    Height = 26
     Top = 256
-    Width = 75
+    Width = 91
     Anchors = [akTop, akRight]
+    BorderSpacing.Right = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
     TabOrder = 8
   end
   object btnApply: TButton
-    Left = 117
-    Height = 25
+    AnchorSideRight.Control = btnClose
+    Left = 120
+    Height = 26
     Top = 256
-    Width = 75
+    Width = 91
     Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick

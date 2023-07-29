@@ -14,22 +14,32 @@ object frmRestoreBackup: TfrmRestoreBackup
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object btnRestore: TButton
-    Left = 417
-    Height = 25
-    Top = 257
-    Width = 75
+    AnchorSideRight.Control = btnClose
+    AnchorSideBottom.Control = btnClose
+    AnchorSideBottom.Side = asrBottom
+    Left = 385
+    Height = 26
+    Top = 256
+    Width = 91
     Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 5
     Caption = 'Restore'
     Default = True
     OnClick = btnRestoreClick
     TabOrder = 1
   end
   object btnClose: TButton
-    Left = 497
-    Height = 25
-    Top = 257
-    Width = 75
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 481
+    Height = 26
+    Top = 256
+    Width = 91
     Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick

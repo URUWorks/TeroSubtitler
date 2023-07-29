@@ -18,6 +18,7 @@ object frmModifySelection: TfrmModifySelection
     Height = 23
     Top = 8
     Width = 128
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 1
@@ -27,23 +28,34 @@ object frmModifySelection: TfrmModifySelection
     Height = 23
     Top = 8
     Width = 192
+    AutoSize = False
     TabOrder = 0
   end
   object btnApply: TButton
-    Left = 181
-    Height = 25
-    Top = 136
-    Width = 75
+    AnchorSideRight.Control = btnClose
+    Left = 149
+    Height = 26
+    Top = 135
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick
     TabOrder = 5
   end
   object btnClose: TButton
-    Left = 261
-    Height = 25
-    Top = 136
-    Width = 75
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 245
+    Height = 26
+    Top = 135
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick

@@ -2,11 +2,11 @@ object frmFixSubtitles: TfrmFixSubtitles
   Left = 242
   Height = 600
   Top = 116
-  Width = 1000
+  Width = 1024
   BorderIcons = []
   Caption = 'Fix subtitles'
   ClientHeight = 600
-  ClientWidth = 1000
+  ClientWidth = 1024
   Constraints.MinHeight = 200
   Constraints.MinWidth = 200
   OnClose = FormClose
@@ -16,29 +16,31 @@ object frmFixSubtitles: TfrmFixSubtitles
   LCLVersion = '2.2.6.0'
   object lyoBottom: TUWLayout
     Left = 0
-    Height = 41
-    Top = 559
-    Width = 1000
+    Height = 42
+    Top = 558
+    Width = 1024
     Align = alBottom
-    ClientHeight = 41
-    ClientWidth = 1000
+    ClientHeight = 42
+    ClientWidth = 1024
     TabOrder = 2
     object btnApply: TButton
-      Left = 837
-      Height = 25
+      AnchorSideRight.Control = btnClose
+      Left = 829
+      Height = 26
       Top = 8
-      Width = 75
+      Width = 91
       Anchors = [akTop, akRight]
+      BorderSpacing.Right = 5
       Caption = 'Apply'
       Default = True
       OnClick = btnApplyClick
       TabOrder = 0
     end
     object btnClose: TButton
-      Left = 917
-      Height = 25
+      Left = 925
+      Height = 26
       Top = 8
-      Width = 75
+      Width = 91
       Anchors = [akTop, akRight]
       Cancel = True
       Caption = 'Close'
@@ -48,20 +50,20 @@ object frmFixSubtitles: TfrmFixSubtitles
   end
   object lyoLeft: TUWLayout
     Left = 0
-    Height = 559
+    Height = 558
     Top = 0
-    Width = 350
+    Width = 380
     Align = alLeft
-    ClientHeight = 559
-    ClientWidth = 350
+    ClientHeight = 558
+    ClientWidth = 380
     Constraints.MaxWidth = 400
     Constraints.MinWidth = 250
     TabOrder = 0
     object clbOptions: TCheckListBox
       Left = 8
-      Height = 456
+      Height = 455
       Top = 8
-      Width = 342
+      Width = 372
       Anchors = [akTop, akLeft, akRight, akBottom]
       ExtendedSelect = False
       ItemHeight = 0
@@ -71,7 +73,7 @@ object frmFixSubtitles: TfrmFixSubtitles
     object lblConvention: TLabel
       Left = 8
       Height = 15
-      Top = 476
+      Top = 475
       Width = 62
       Anchors = [akLeft, akBottom]
       Caption = 'Convention'
@@ -80,9 +82,10 @@ object frmFixSubtitles: TfrmFixSubtitles
     object cboConvention: TComboBox
       Left = 192
       Height = 23
-      Top = 472
-      Width = 158
+      Top = 471
+      Width = 188
       Anchors = [akLeft, akRight, akBottom]
+      AutoSize = False
       ItemHeight = 15
       OnSelect = cboConventionSelect
       Style = csDropDownList
@@ -91,7 +94,7 @@ object frmFixSubtitles: TfrmFixSubtitles
     object lblOCR: TLabel
       Left = 8
       Height = 15
-      Top = 508
+      Top = 507
       Width = 24
       Anchors = [akLeft, akBottom]
       Caption = 'OCR'
@@ -100,9 +103,10 @@ object frmFixSubtitles: TfrmFixSubtitles
     object cboOCR: TComboBox
       Left = 192
       Height = 23
-      Top = 504
-      Width = 158
+      Top = 503
+      Width = 188
       Anchors = [akLeft, akRight, akBottom]
+      AutoSize = False
       ItemHeight = 15
       OnChange = clbOptionsClickCheck
       Style = csDropDownList
@@ -111,7 +115,7 @@ object frmFixSubtitles: TfrmFixSubtitles
     object lblSpacingHyphen: TLabel
       Left = 8
       Height = 15
-      Top = 540
+      Top = 539
       Width = 146
       Anchors = [akLeft, akBottom]
       Caption = 'Spacing of opening hyphen'
@@ -120,9 +124,10 @@ object frmFixSubtitles: TfrmFixSubtitles
     object cboSpacingHyphen: TComboBox
       Left = 192
       Height = 23
-      Top = 536
-      Width = 158
+      Top = 535
+      Width = 188
       Anchors = [akLeft, akRight, akBottom]
+      AutoSize = False
       ItemHeight = 15
       OnChange = clbOptionsClickCheck
       Style = csDropDownList
@@ -130,19 +135,19 @@ object frmFixSubtitles: TfrmFixSubtitles
     end
   end
   object lyoClient: TUWLayout
-    Left = 356
-    Height = 559
+    Left = 386
+    Height = 558
     Top = 0
-    Width = 644
+    Width = 638
     Align = alClient
-    ClientHeight = 559
-    ClientWidth = 644
+    ClientHeight = 558
+    ClientWidth = 638
     TabOrder = 1
     object VST: TLazVirtualStringTree
       Left = 0
-      Height = 551
+      Height = 550
       Top = 8
-      Width = 636
+      Width = 630
       Anchors = [akTop, akLeft, akRight, akBottom]
       Header.AutoSizeIndex = 0
       Header.Columns = <>
@@ -163,8 +168,8 @@ object frmFixSubtitles: TfrmFixSubtitles
     end
   end
   object Splitter1: TSplitter
-    Left = 350
-    Height = 559
+    Left = 380
+    Height = 558
     Top = 0
     Width = 6
   end

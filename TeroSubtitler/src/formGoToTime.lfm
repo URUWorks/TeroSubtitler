@@ -2,12 +2,12 @@ object frmGoToTime: TfrmGoToTime
   Left = 266
   Height = 93
   Top = 121
-  Width = 170
+  Width = 280
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Go to'
   ClientHeight = 93
-  ClientWidth = 170
+  ClientWidth = 280
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -22,20 +22,30 @@ object frmGoToTime: TfrmGoToTime
     ParentColor = False
   end
   object btnGo: TButton
-    Left = 8
-    Height = 25
+    AnchorSideRight.Control = btnClose
+    Left = 85
+    Height = 26
     Top = 60
-    Width = 75
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Go'
     Default = True
     OnClick = btnGoClick
     TabOrder = 1
   end
   object btnClose: TButton
-    Left = 88
-    Height = 25
-    Top = 60
-    Width = 75
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 181
+    Height = 26
+    Top = 59
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
@@ -45,13 +55,14 @@ object frmGoToTime: TfrmGoToTime
     Left = 8
     Height = 23
     Top = 28
-    Width = 140
+    Width = 249
     Value = 0
     FPS = 25
     FrameStep = 1
     TimeStep = 1
     TimeMode = temTime
     Alignment = taCenter
+    Anchors = [akTop, akLeft, akRight]
     Constraints.MinHeight = 21
     Constraints.MinWidth = 80
     Font.Style = [fsBold]

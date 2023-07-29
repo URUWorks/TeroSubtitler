@@ -1,12 +1,12 @@
 object frmActors: TfrmActors
-  Left = 237
-  Height = 368
-  Top = 114
+  Left = 246
+  Height = 369
+  Top = 120
   Width = 365
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Actors'
-  ClientHeight = 368
+  ClientHeight = 369
   ClientWidth = 365
   OnClose = FormClose
   OnCreate = FormCreate
@@ -14,54 +14,70 @@ object frmActors: TfrmActors
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object edtActor: TEdit
+    AnchorSideRight.Control = btnActorAdd
     Left = 8
     Height = 23
     Top = 8
-    Width = 275
+    Width = 263
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
+    BorderSpacing.Right = 5
     OnKeyDown = edtActorKeyDown
     TabOrder = 0
   end
   object btnActorAdd: TButton
-    Left = 288
+    AnchorSideRight.Control = btnActorRemove
+    Left = 276
     Height = 23
     Top = 8
-    Width = 32
+    Width = 38
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = '+'
     OnClick = btnActorAddClick
     TabOrder = 1
   end
   object btnActorRemove: TButton
-    Left = 325
+    Left = 319
     Height = 23
     Top = 8
-    Width = 32
+    Width = 38
     Caption = '-'
     OnClick = btnActorRemoveClick
     TabOrder = 2
   end
   object lstActors: TListBox
+    AnchorSideTop.Control = edtActor
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = btnApply
     Left = 8
-    Height = 288
-    Top = 40
+    Height = 293
+    Top = 37
     Width = 349
+    Anchors = [akTop, akLeft, akBottom]
+    BorderSpacing.Top = 6
+    BorderSpacing.Bottom = 6
     ItemHeight = 0
     TabOrder = 3
   end
   object btnApply: TButton
-    Left = 202
-    Height = 25
+    AnchorSideRight.Control = btnClose
+    Left = 170
+    Height = 26
     Top = 336
-    Width = 75
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick
     TabOrder = 4
   end
   object btnClose: TButton
-    Left = 282
-    Height = 25
+    Left = 266
+    Height = 26
     Top = 336
-    Width = 75
+    Width = 91
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick

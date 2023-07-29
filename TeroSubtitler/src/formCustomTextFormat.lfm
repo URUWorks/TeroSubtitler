@@ -17,7 +17,8 @@ object frmCustomTextFormat: TfrmCustomTextFormat
     Left = 8
     Height = 23
     Top = 28
-    Width = 292
+    Width = 276
+    AutoSize = False
     ItemHeight = 15
     OnSelect = cboScriptSelect
     Style = csDropDownList
@@ -32,7 +33,7 @@ object frmCustomTextFormat: TfrmCustomTextFormat
     ParentColor = False
   end
   object lblFPS: TLabel
-    Left = 305
+    Left = 289
     Height = 15
     Top = 8
     Width = 19
@@ -40,10 +41,11 @@ object frmCustomTextFormat: TfrmCustomTextFormat
     ParentColor = False
   end
   object cboFPS: TComboBox
-    Left = 305
+    Left = 289
     Height = 23
     Top = 28
-    Width = 75
+    Width = 91
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 1
@@ -61,15 +63,19 @@ object frmCustomTextFormat: TfrmCustomTextFormat
     Height = 23
     Top = 84
     Width = 372
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 2
   end
   object btnSave: TButton
-    Left = 225
-    Height = 25
-    Top = 136
-    Width = 75
+    AnchorSideRight.Control = btnClose
+    Left = 193
+    Height = 26
+    Top = 135
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Save...'
     Default = True
     Enabled = False
@@ -77,10 +83,10 @@ object frmCustomTextFormat: TfrmCustomTextFormat
     TabOrder = 5
   end
   object btnClose: TButton
-    Left = 305
-    Height = 25
-    Top = 136
-    Width = 75
+    Left = 289
+    Height = 26
+    Top = 135
+    Width = 91
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick

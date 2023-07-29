@@ -55,10 +55,17 @@ object frmWizard: TfrmWizard
     end
   end
   object btnNext: TButton
-    Left = 461
-    Height = 25
-    Top = 304
-    Width = 75
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 445
+    Height = 26
+    Top = 303
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Caption = 'Next'
     Default = True
     OnClick = btnNextClick
@@ -95,29 +102,38 @@ object frmWizard: TfrmWizard
       WordWrap = True
     end
     object btnDownload: TButton
-      Left = 456
-      Height = 25
-      Top = 72
-      Width = 75
+      AnchorSideLeft.Control = btnDownloadFFMPEG
+      AnchorSideTop.Control = lblLibMPVStatus
+      AnchorSideTop.Side = asrCenter
+      Left = 445
+      Height = 26
+      Top = 63
+      Width = 91
       Caption = 'Download'
       OnClick = btnDownloadClick
       TabOrder = 0
     end
     object lblFFMPEG: TLabel
+      AnchorSideTop.Control = lblYTDLPDesc
+      AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 15
-      Top = 160
+      Top = 153
       Width = 45
+      BorderSpacing.Top = 8
       Caption = 'ffmpeg:'
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
     end
     object btnDownloadFFMPEG: TButton
-      Left = 456
-      Height = 25
-      Top = 169
-      Width = 75
+      AnchorSideLeft.Control = btnDownloadWhisper
+      AnchorSideTop.Control = lblFFMPEGStatus
+      AnchorSideTop.Side = asrCenter
+      Left = 445
+      Height = 26
+      Top = 147
+      Width = 91
       Caption = 'Download'
       OnClick = btnDownloadFFMPEGClick
       TabOrder = 2
@@ -144,7 +160,7 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Side = asrCenter
       Left = 65
       Height = 15
-      Top = 160
+      Top = 153
       Width = 3
       BorderSpacing.Left = 4
       Caption = ' '
@@ -170,17 +186,20 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 15
-      Top = 179
+      Top = 172
       Width = 3
       BorderSpacing.Top = 4
       Caption = ' '
       ParentColor = False
     end
     object lblYTDLP: TLabel
+      AnchorSideTop.Control = lbllibmpvDesc
+      AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 15
-      Top = 112
+      Top = 111
       Width = 35
+      BorderSpacing.Top = 8
       Caption = 'yt-dlp:'
       Font.Style = [fsBold]
       ParentColor = False
@@ -192,17 +211,20 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 15
-      Top = 131
+      Top = 130
       Width = 3
       BorderSpacing.Top = 4
       Caption = ' '
       ParentColor = False
     end
     object btnDownloadYTDLP: TButton
-      Left = 456
-      Height = 25
-      Top = 121
-      Width = 75
+      AnchorSideLeft.Control = btnDownloadFFMPEG
+      AnchorSideTop.Control = lblYTDLPStatus
+      AnchorSideTop.Side = asrCenter
+      Left = 445
+      Height = 26
+      Top = 105
+      Width = 91
       Caption = 'Download'
       OnClick = btnDownloadYTDLPClick
       TabOrder = 1
@@ -214,7 +236,7 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Side = asrCenter
       Left = 55
       Height = 1
-      Top = 119
+      Top = 118
       Width = 1
       BorderSpacing.Left = 4
       Font.Style = [fsBold]
@@ -227,27 +249,36 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 15
-      Top = 227
+      Top = 214
       Width = 3
       BorderSpacing.Top = 4
       Caption = ' '
       ParentColor = False
     end
     object lblWhisper: TLabel
+      AnchorSideTop.Control = lblffmpegDesc
+      AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 15
-      Top = 208
+      Top = 195
       Width = 71
+      BorderSpacing.Top = 8
       Caption = 'Whisper.cpp:'
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
     end
     object btnDownloadWhisper: TButton
-      Left = 456
-      Height = 25
-      Top = 217
-      Width = 75
+      AnchorSideTop.Control = lblWhisperStatus
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = lyoPage1
+      AnchorSideRight.Side = asrBottom
+      Left = 445
+      Height = 26
+      Top = 189
+      Width = 91
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 8
       Caption = 'Download'
       OnClick = btnDownloadWhisperClick
       TabOrder = 3
@@ -259,7 +290,7 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Side = asrCenter
       Left = 91
       Height = 15
-      Top = 208
+      Top = 195
       Width = 3
       BorderSpacing.Left = 4
       Caption = ' '

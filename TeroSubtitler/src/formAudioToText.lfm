@@ -28,6 +28,7 @@ object frmAudioToText: TfrmAudioToText
     Height = 23
     Top = 40
     Width = 283
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 1
@@ -43,10 +44,14 @@ object frmAudioToText: TfrmAudioToText
     ParentColor = False
   end
   object cboModel: TComboBox
+    AnchorSideRight.Control = btnModel
     Left = 96
     Height = 23
     Top = 72
-    Width = 203
+    Width = 230
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
+    BorderSpacing.Right = 5
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 2
@@ -54,30 +59,32 @@ object frmAudioToText: TfrmAudioToText
   object btnModel: TButton
     AnchorSideTop.Control = cboModel
     AnchorSideTop.Side = asrCenter
-    Left = 304
-    Height = 25
-    Top = 71
-    Width = 75
+    Left = 331
+    Height = 23
+    Top = 72
+    Width = 48
     Caption = '...'
     OnClick = btnModelClick
     TabOrder = 3
   end
   object btnGenerate: TButton
-    Left = 224
-    Height = 25
+    AnchorSideRight.Control = btnClose
+    Left = 192
+    Height = 26
     Top = 271
-    Width = 75
+    Width = 91
     Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 5
     Caption = 'Generate'
     Default = True
     OnClick = btnGenerateClick
     TabOrder = 7
   end
   object btnClose: TButton
-    Left = 304
-    Height = 25
+    Left = 288
+    Height = 26
     Top = 271
-    Width = 75
+    Width = 91
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Close'
@@ -99,6 +106,7 @@ object frmAudioToText: TfrmAudioToText
     Height = 23
     Top = 8
     Width = 283
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 0
@@ -134,23 +142,27 @@ object frmAudioToText: TfrmAudioToText
   object prbProgress: TProgressBar
     AnchorSideTop.Control = lblTimeElapsed
     AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = lblTimeElapsed
     Left = 8
     Height = 8
     Top = 279
-    Width = 152
+    Width = 119
     Anchors = [akLeft, akRight, akBottom]
+    BorderSpacing.Right = 5
     Step = 1
     TabOrder = 9
     Visible = False
   end
   object lblTimeElapsed: TLabel
-    Left = 160
+    AnchorSideRight.Control = btnGenerate
+    Left = 132
     Height = 17
     Top = 275
     Width = 55
     Alignment = taRightJustify
     Anchors = [akRight, akBottom]
     AutoSize = False
+    BorderSpacing.Right = 5
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False

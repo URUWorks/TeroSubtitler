@@ -14,20 +14,31 @@ object frmWaveExtractor: TfrmWaveExtractor
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object btnExtract: TButton
-    Left = 317
-    Height = 25
-    Top = 136
-    Width = 75
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnClose
+    Left = 286
+    Height = 26
+    Top = 135
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Extract...'
     Default = True
     OnClick = btnExtractClick
     TabOrder = 1
   end
   object btnClose: TButton
-    Left = 397
-    Height = 25
-    Top = 136
-    Width = 75
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 382
+    Height = 26
+    Top = 135
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
@@ -42,10 +53,14 @@ object frmWaveExtractor: TfrmWaveExtractor
     ParentColor = False
   end
   object cboTrack: TComboBox
+    AnchorSideRight.Control = btnClose
+    AnchorSideRight.Side = asrBottom
     Left = 64
     Height = 23
     Top = 8
-    Width = 408
+    Width = 409
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 0
@@ -54,7 +69,7 @@ object frmWaveExtractor: TfrmWaveExtractor
     Left = 8
     Height = 32
     Top = 52
-    Width = 464
+    Width = 465
     Alignment = taCenter
     AutoSize = False
     Font.Style = [fsBold]
@@ -67,7 +82,7 @@ object frmWaveExtractor: TfrmWaveExtractor
     Left = 8
     Height = 40
     Top = 84
-    Width = 464
+    Width = 465
     Alignment = taCenter
     AutoSize = False
     Font.Style = [fsBold]
@@ -77,21 +92,29 @@ object frmWaveExtractor: TfrmWaveExtractor
     WordWrap = True
   end
   object prbProgress: TProgressBar
+    AnchorSideRight.Control = lblTimeElapsed
     Left = 8
     Height = 8
     Top = 144
-    Width = 232
+    Width = 204
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 6
     Style = pbstMarquee
     TabOrder = 3
     Visible = False
   end
   object lblTimeElapsed: TLabel
-    Left = 248
+    AnchorSideTop.Control = btnExtract
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = btnExtract
+    Left = 218
     Height = 17
     Top = 140
     Width = 63
     Alignment = taRightJustify
+    Anchors = [akTop, akRight]
     AutoSize = False
+    BorderSpacing.Right = 5
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False

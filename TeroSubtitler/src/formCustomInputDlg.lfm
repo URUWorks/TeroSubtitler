@@ -20,21 +20,23 @@ object frmCustomInputDlg: TfrmCustomInputDlg
     ParentColor = False
   end
   object btnOk: TButton
-    Left = 288
-    Height = 25
+    AnchorSideRight.Control = btnCancel
+    Left = 256
+    Height = 26
     Top = 60
-    Width = 75
+    Width = 91
     Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 5
     Caption = 'Ok'
     Default = True
     ModalResult = 1
     TabOrder = 1
   end
   object btnCancel: TButton
-    Left = 368
-    Height = 25
+    Left = 352
+    Height = 26
     Top = 60
-    Width = 75
+    Width = 91
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Cancel'
@@ -54,7 +56,7 @@ object frmCustomInputDlg: TfrmCustomInputDlg
     Cursor = crHandPoint
     Left = 8
     Height = 1
-    Top = 84
+    Top = 85
     Width = 1
     Anchors = [akLeft, akBottom]
     ParentColor = False

@@ -2,12 +2,12 @@ object frmSettings: TfrmSettings
   Left = 235
   Height = 593
   Top = 115
-  Width = 672
+  Width = 720
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Settings'
   ClientHeight = 593
-  ClientWidth = 672
+  ClientWidth = 720
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -15,10 +15,17 @@ object frmSettings: TfrmSettings
   ShowHint = True
   LCLVersion = '2.2.6.0'
   object btnClose: TButton
-    Left = 590
-    Height = 25
-    Top = 560
-    Width = 75
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 621
+    Height = 26
+    Top = 559
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     Default = True
@@ -29,61 +36,64 @@ object frmSettings: TfrmSettings
     Left = 8
     Height = 546
     Top = 8
-    Width = 152
+    Width = 180
     ExtendedSelect = False
     ItemHeight = 0
     OnSelectionChange = lstTreeSelectionChange
     TabOrder = 1
   end
   object lyoGeneral: TUWLayout
-    Left = 168
+    Left = 196
     Height = 546
     Top = 8
-    Width = 496
+    Width = 516
     ClientHeight = 546
-    ClientWidth = 496
+    ClientWidth = 516
     TabOrder = 2
     object lblLanguage: TLabel
       Left = 0
       Height = 15
       Top = 4
-      Width = 206
+      Width = 248
       AutoSize = False
       Caption = 'Language'
       ParentColor = False
     end
     object cboLanguage: TComboBox
-      Left = 208
+      Left = 248
       Height = 23
       Top = 0
-      Width = 288
+      Width = 268
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 0
     end
     object edtWebReference: TEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 32
-      Width = 288
+      Width = 268
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
       TabOrder = 1
     end
     object lblWebReference: TLabel
       Left = 0
       Height = 15
       Top = 35
-      Width = 206
+      Width = 248
       AutoSize = False
       Caption = 'Web reference'
       ParentColor = False
     end
     object cboTimeCodeMode: TComboBox
-      Left = 208
+      Left = 248
       Height = 23
       Top = 64
-      Width = 145
+      Width = 134
+      AutoSize = False
       ItemHeight = 15
       ItemIndex = 0
       Items.Strings = (
@@ -98,7 +108,7 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 68
-      Width = 206
+      Width = 248
       AutoSize = False
       Caption = 'Time code mode'
       ParentColor = False
@@ -107,16 +117,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 100
-      Width = 206
+      Width = 248
       AutoSize = False
       Caption = 'Default frame rate'
       ParentColor = False
     end
     object cboDefaultFrameRate: TComboBox
-      Left = 208
+      Left = 248
       Height = 23
       Top = 96
-      Width = 145
+      Width = 134
+      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 3
@@ -125,16 +136,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 132
-      Width = 206
+      Width = 248
       AutoSize = False
       Caption = 'Default file encoding'
       ParentColor = False
     end
     object cboDefaultFileEncoding: TComboBox
-      Left = 208
+      Left = 248
       Height = 23
       Top = 128
-      Width = 145
+      Width = 134
+      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 4
@@ -143,16 +155,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 228
-      Width = 206
+      Width = 248
       AutoSize = False
       Caption = 'Auto-backup every (minutes)'
       ParentColor = False
     end
     object spnAutoBackupMinutes: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 224
-      Width = 80
+      Width = 67
+      AutoSize = False
       MaxValue = 30
       TabOrder = 7
       Value = 5
@@ -206,16 +219,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 196
-      Width = 206
+      Width = 248
       AutoSize = False
       Caption = 'Shift time (ms)'
       ParentColor = False
     end
     object spnShiftTimeMs: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 192
-      Width = 80
+      Width = 67
+      AutoSize = False
       MaxValue = 10000
       TabOrder = 6
       Value = 500
@@ -224,22 +238,23 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 164
-      Width = 206
+      Width = 248
       AutoSize = False
       Caption = 'Default file format'
       ParentColor = False
     end
     object cboDefaultFileFormat: TComboBox
-      Left = 208
+      Left = 248
       Height = 23
       Top = 160
-      Width = 145
+      Width = 134
+      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 5
     end
     object lblZeroToDisable: TLabel
-      Left = 293
+      Left = 322
       Height = 15
       Top = 228
       Width = 60
@@ -268,26 +283,27 @@ object frmSettings: TfrmSettings
   object lyoConventions: TUWLayout
     Left = -336
     Height = 546
-    Top = 24
-    Width = 496
+    Top = 120
+    Width = 516
     ClientHeight = 546
-    ClientWidth = 496
+    ClientWidth = 516
     TabOrder = 3
     Visible = False
     object lblNewSubtitleMs: TLabel
       Left = 0
       Height = 15
       Top = 132
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'New subtitle (ms)'
       ParentColor = False
     end
     object spnNewSubtitleMs: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 128
       Width = 80
+      AutoSize = False
       MaxValue = 5000
       OnChange = spnConventionChange
       TabOrder = 5
@@ -297,16 +313,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 164
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Min. duration (ms)'
       ParentColor = False
     end
     object spnMinDurationMs: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 160
       Width = 80
+      AutoSize = False
       MaxValue = 5000
       OnChange = spnConventionChange
       TabOrder = 6
@@ -316,16 +333,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 228
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Max. duration (ms)'
       ParentColor = False
     end
     object spnMaxDurationMs: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 224
       Width = 80
+      AutoSize = False
       MaxValue = 10000
       OnChange = spnConventionChange
       TabOrder = 8
@@ -335,36 +353,39 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 292
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Min. subtitle pause'
       ParentColor = False
     end
     object spnSubtitlePauseMs: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 288
       Width = 80
+      AutoSize = False
       MaxValue = 10000
       OnChange = spnConventionChange
       TabOrder = 10
       Value = 200
     end
     object edtRepeatableChars: TEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 32
-      Width = 288
+      Width = 268
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
       OnChange = spnConventionChange
       TabOrder = 2
     end
     object edtProhibitedChars: TEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 64
-      Width = 288
+      Width = 268
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
       OnChange = spnConventionChange
       TabOrder = 3
     end
@@ -372,7 +393,7 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 36
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Repeatable chars'
       ParentColor = False
@@ -381,7 +402,7 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 68
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Prohibited chars'
       ParentColor = False
@@ -397,11 +418,14 @@ object frmSettings: TfrmSettings
       TabOrder = 18
     end
     object cboProfile: TComboBox
-      Left = 208
+      AnchorSideRight.Control = btnProfile
+      Left = 248
       Height = 23
       Top = 0
-      Width = 208
+      Width = 215
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      BorderSpacing.Right = 5
       ItemHeight = 15
       OnSelect = cboProfileSelect
       Style = csDropDownList
@@ -411,16 +435,16 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 4
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Profile'
       ParentColor = False
     end
     object btnProfile: TButton
-      Left = 422
-      Height = 25
+      Left = 468
+      Height = 23
       Top = 0
-      Width = 75
+      Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
       OnClick = btnProfileClick
@@ -430,16 +454,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 260
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Max. line count'
       ParentColor = False
     end
     object spnMaxLineCount: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 256
       Width = 80
+      AutoSize = False
       MaxValue = 10
       OnChange = spnConventionChange
       TabOrder = 9
@@ -449,16 +474,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 324
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'CPS'
       ParentColor = False
     end
     object spnCPS: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 320
       Width = 80
+      AutoSize = False
       MaxValue = 1000
       OnChange = spnConventionChange
       TabOrder = 12
@@ -468,26 +494,28 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 356
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'WPM'
       ParentColor = False
     end
     object spnWPM: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 352
       Width = 80
+      AutoSize = False
       MaxValue = 1000
       OnChange = spnConventionChange
       TabOrder = 13
       Value = 180
     end
     object spnCPL: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 384
       Width = 80
+      AutoSize = False
       MaxValue = 500
       OnChange = spnConventionChange
       TabOrder = 14
@@ -497,7 +525,7 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 388
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'CPL'
       ParentColor = False
@@ -506,16 +534,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 196
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Min. duration per word (ms)'
       ParentColor = False
     end
     object spnMinDurationPerWord: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 192
       Width = 80
+      AutoSize = False
       MaxValue = 5000
       OnChange = spnConventionChange
       TabOrder = 7
@@ -524,10 +553,11 @@ object frmSettings: TfrmSettings
     object cboPauseMode: TComboBox
       AnchorSideTop.Control = spnSubtitlePauseMs
       AnchorSideTop.Side = asrCenter
-      Left = 298
+      Left = 336
       Height = 23
       Top = 288
-      Width = 118
+      Width = 127
+      AutoSize = False
       ItemHeight = 15
       OnChange = spnConventionChange
       Style = csDropDownList
@@ -535,10 +565,11 @@ object frmSettings: TfrmSettings
     end
     object edtCPSStrategy: TEdit
       AnchorSideTop.Side = asrCenter
-      Left = 208
+      Left = 248
       Height = 23
       Top = 96
-      Width = 288
+      Width = 268
+      AutoSize = False
       OnChange = spnConventionChange
       TabOrder = 4
     end
@@ -546,7 +577,7 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 100
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Chars excluded from CPS count'
       ParentColor = False
@@ -555,16 +586,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 420
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Shot change snap area (frames)'
       ParentColor = False
     end
     object spnSCSnapArea: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 416
       Width = 80
+      AutoSize = False
       MaxValue = 20
       OnChange = spnConventionChange
       TabOrder = 15
@@ -574,16 +606,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 452
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Snap in cues (frames)'
       ParentColor = False
     end
     object spnSCSnapInCues: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 448
       Width = 80
+      AutoSize = False
       MaxValue = 15
       OnChange = spnConventionChange
       TabOrder = 16
@@ -592,16 +625,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 484
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Snap out cues (frames)'
       ParentColor = False
     end
     object spnSCSnapOutCues: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 480
       Width = 80
+      AutoSize = False
       MaxValue = 15
       OnChange = spnConventionChange
       TabOrder = 17
@@ -611,27 +645,28 @@ object frmSettings: TfrmSettings
   object lyoAppearance: TUWLayout
     Left = -336
     Height = 546
-    Top = 120
-    Width = 496
+    Top = 256
+    Width = 516
     ClientHeight = 546
-    ClientWidth = 496
+    ClientWidth = 516
     TabOrder = 4
     Visible = False
     object lblTheme: TLabel
       Left = 0
       Height = 15
       Top = 4
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Theme'
       ParentColor = False
     end
     object cboTheme: TComboBox
-      Left = 208
+      Left = 248
       Height = 23
       Top = 0
-      Width = 288
+      Width = 268
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 0
@@ -640,17 +675,18 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 36
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'List mode'
       ParentColor = False
     end
     object cboListMode: TComboBox
-      Left = 208
+      Left = 248
       Height = 23
       Top = 32
-      Width = 288
+      Width = 268
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 1
@@ -674,7 +710,7 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object cbnSub: TColorButton
-      Left = 208
+      Left = 248
       Height = 25
       Top = 100
       Width = 80
@@ -692,7 +728,7 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object cbnSubBorder: TColorButton
-      Left = 208
+      Left = 248
       Height = 25
       Top = 132
       Width = 80
@@ -710,7 +746,7 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object cbnSubShadow: TColorButton
-      Left = 208
+      Left = 248
       Height = 25
       Top = 164
       Width = 80
@@ -728,7 +764,7 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object cbnSubBackground: TColorButton
-      Left = 208
+      Left = 248
       Height = 25
       Top = 196
       Width = 80
@@ -746,24 +782,25 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object spnSubSize: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 228
       Width = 80
+      AutoSize = False
       MaxValue = 150
       MinValue = 1
       TabOrder = 4
       Value = 32
     end
     object chkSubBackground: TCheckBox
-      Left = 296
+      Left = 336
       Height = 19
       Top = 200
       Width = 20
       TabOrder = 3
     end
     object chkSubShadow: TCheckBox
-      Left = 296
+      Left = 336
       Height = 19
       Top = 168
       Width = 20
@@ -788,7 +825,7 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object cbnWaveColor: TColorButton
-      Left = 208
+      Left = 248
       Height = 25
       Top = 296
       Width = 80
@@ -806,7 +843,7 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object cbnWaveStart: TColorButton
-      Left = 208
+      Left = 248
       Height = 25
       Top = 328
       Width = 80
@@ -824,7 +861,7 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object cbnWaveEnd: TColorButton
-      Left = 208
+      Left = 248
       Height = 25
       Top = 360
       Width = 80
@@ -837,34 +874,37 @@ object frmSettings: TfrmSettings
   object lyoTools: TUWLayout
     Left = -336
     Height = 546
-    Top = 184
-    Width = 496
+    Top = 320
+    Width = 516
     ClientHeight = 546
-    ClientWidth = 496
+    ClientWidth = 516
     TabOrder = 5
     Visible = False
     object lblFFMPEG: TLabel
       Left = 0
       Height = 15
       Top = 4
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'ffmpeg folder'
       ParentColor = False
     end
     object edtFFMPEG: TEdit
-      Left = 208
+      AnchorSideRight.Control = btnFFMPEG
+      Left = 248
       Height = 23
       Top = 0
-      Width = 208
+      Width = 215
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      BorderSpacing.Right = 5
       TabOrder = 0
     end
     object btnFFMPEG: TButton
-      Left = 422
-      Height = 25
+      Left = 468
+      Height = 23
       Top = 0
-      Width = 75
+      Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
       OnClick = btnFFMPEGClick
@@ -874,24 +914,27 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 36
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'SceneDetect folder'
       ParentColor = False
     end
     object edtSceneDetect: TEdit
-      Left = 208
+      AnchorSideRight.Control = btnSceneDetect
+      Left = 248
       Height = 23
       Top = 32
-      Width = 208
+      Width = 215
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      BorderSpacing.Right = 5
       TabOrder = 2
     end
     object btnSceneDetect: TButton
-      Left = 422
-      Height = 25
+      Left = 468
+      Height = 23
       Top = 32
-      Width = 75
+      Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
       OnClick = btnSceneDetectClick
@@ -901,17 +944,17 @@ object frmSettings: TfrmSettings
   object lyoShortcuts: TUWLayout
     Left = -336
     Height = 546
-    Top = 248
-    Width = 496
+    Top = 384
+    Width = 516
     ClientHeight = 546
-    ClientWidth = 496
+    ClientWidth = 516
     TabOrder = 6
     Visible = False
     object lstShortcuts: TListBox
       Left = 0
       Height = 427
       Top = 64
-      Width = 496
+      Width = 516
       Anchors = [akTop, akLeft, akRight]
       ExtendedSelect = False
       ItemHeight = 0
@@ -921,11 +964,12 @@ object frmSettings: TfrmSettings
       TabOrder = 4
     end
     object cboShortcutCat: TComboBox
-      Left = 208
+      Left = 168
       Height = 23
       Top = 32
-      Width = 288
+      Width = 348
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
       ItemHeight = 15
       OnSelect = cboShortcutCatSelect
       Style = csDropDownList
@@ -940,10 +984,11 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object hkShortcut: TUWHotKey
-      Left = 206
+      AnchorSideLeft.Control = cboShortcutCat
+      Left = 168
       Height = 23
       Top = 500
-      Width = 289
+      Width = 347
       EmptyText = 'None'
       HotKey = 0
       Anchors = [akTop, akLeft, akRight]
@@ -959,11 +1004,14 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object cboShortCutPreset: TComboBox
-      Left = 208
+      AnchorSideRight.Control = btnShortCutApply
+      Left = 168
       Height = 23
       Top = 0
-      Width = 128
+      Width = 156
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      BorderSpacing.Right = 5
       ItemHeight = 15
       OnSelect = cboShortCutPresetSelect
       Style = csDropDownList
@@ -978,20 +1026,22 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object btnShortCutApply: TButton
-      Left = 341
-      Height = 25
+      AnchorSideRight.Control = btnShortCutSave
+      Left = 329
+      Height = 23
       Top = 0
-      Width = 75
+      Width = 91
       Anchors = [akTop, akRight]
+      BorderSpacing.Right = 5
       Caption = 'Apply'
       OnClick = btnShortCutApplyClick
       TabOrder = 1
     end
     object btnShortCutSave: TButton
-      Left = 421
-      Height = 25
+      Left = 425
+      Height = 23
       Top = 0
-      Width = 75
+      Width = 91
       Anchors = [akTop, akRight]
       Caption = 'Save as...'
       OnClick = btnShortCutSaveClick
@@ -1011,10 +1061,10 @@ object frmSettings: TfrmSettings
   object lyoMPV: TUWLayout
     Left = -336
     Height = 546
-    Top = 280
-    Width = 496
+    Top = 448
+    Width = 516
     ClientHeight = 546
-    ClientWidth = 496
+    ClientWidth = 516
     TabOrder = 7
     Visible = False
     object chkAutoPlay: TUWCheckBox
@@ -1030,16 +1080,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 60
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Seek time (ms)'
       ParentColor = False
     end
     object spnSeekTime: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 56
       Width = 80
+      AutoSize = False
       MaxValue = 10000
       MinValue = 100
       TabOrder = 2
@@ -1049,16 +1100,17 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 93
-      Width = 206
+      Width = 246
       AutoSize = False
       Caption = 'Frame step'
       ParentColor = False
     end
     object spnFrameStep: TSpinEdit
-      Left = 208
+      Left = 248
       Height = 23
       Top = 89
       Width = 80
+      AutoSize = False
       MaxValue = 60
       MinValue = 1
       TabOrder = 3
@@ -1077,10 +1129,10 @@ object frmSettings: TfrmSettings
   object lyoToolbar: TUWLayout
     Left = -336
     Height = 546
-    Top = 296
-    Width = 496
+    Top = 496
+    Width = 516
     ClientHeight = 546
-    ClientWidth = 496
+    ClientWidth = 516
     TabOrder = 8
     Visible = False
     object lblToolBarMain: TLabel
@@ -1623,10 +1675,10 @@ object frmSettings: TfrmSettings
   object lyoFileTypeAssociations: TUWLayout
     Left = -336
     Height = 546
-    Top = 360
-    Width = 496
+    Top = 544
+    Width = 516
     ClientHeight = 546
-    ClientWidth = 496
+    ClientWidth = 516
     TabOrder = 9
     Visible = False
     object tlbFileTypeIco: TToolBar
@@ -1648,7 +1700,7 @@ object frmSettings: TfrmSettings
     Height = 48
     Scaled = True
     Width = 48
-    Left = 553
+    Left = 416
     Top = 560
   end
 end

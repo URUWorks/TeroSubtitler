@@ -2,12 +2,12 @@ object frmFindAndReplace: TfrmFindAndReplace
   Left = 260
   Height = 346
   Top = 127
-  Width = 457
+  Width = 520
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Find & Replace'
   ClientHeight = 346
-  ClientWidth = 457
+  ClientWidth = 520
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -23,57 +23,73 @@ object frmFindAndReplace: TfrmFindAndReplace
     ParentColor = False
   end
   object btnClose: TButton
-    Left = 373
-    Height = 25
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 421
+    Height = 26
     Top = 312
-    Width = 75
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
     TabOrder = 14
   end
   object btnFind: TButton
-    Left = 293
-    Height = 25
+    AnchorSideRight.Control = btnClose
+    Left = 325
+    Height = 26
     Top = 312
-    Width = 75
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Find'
     Default = True
     OnClick = btnFindClick
     TabOrder = 13
   end
   object btnFindNext: TButton
-    Left = 213
-    Height = 25
+    AnchorSideRight.Control = btnFind
+    Left = 229
+    Height = 26
     Top = 312
-    Width = 75
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Find next'
     OnClick = btnFindNextClick
     TabOrder = 10
   end
   object btnFindPrev: TButton
+    AnchorSideRight.Control = btnFindNext
     Left = 133
-    Height = 25
+    Height = 26
     Top = 312
-    Width = 75
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Find prev'
     OnClick = btnFindPrevClick
     TabOrder = 9
   end
   object btnReplace: TButton
-    Left = 293
-    Height = 25
+    Left = 325
+    Height = 26
     Top = 280
-    Width = 75
+    Width = 91
     Caption = 'Replace'
     OnClick = btnReplaceClick
     TabOrder = 12
   end
   object btnReplaceAll: TButton
-    Left = 213
-    Height = 25
+    Left = 229
+    Height = 26
     Top = 280
-    Width = 75
+    Width = 91
     Caption = 'Replace all'
     OnClick = btnReplaceAllClick
     TabOrder = 11
@@ -82,7 +98,7 @@ object frmFindAndReplace: TfrmFindAndReplace
     Left = 133
     Height = 58
     Top = 12
-    Width = 315
+    Width = 379
     OnKeyDown = mmoTextToFindKeyDown
     TabOrder = 0
   end
@@ -90,7 +106,7 @@ object frmFindAndReplace: TfrmFindAndReplace
     Left = 133
     Height = 58
     Top = 80
-    Width = 315
+    Width = 379
     OnKeyDown = mmoReplaceWithKeyDown
     TabOrder = 1
   end

@@ -17,7 +17,7 @@ object frmBatchConvert: TfrmBatchConvert
     Left = 7
     Height = 208
     Top = 8
-    Width = 506
+    Width = 490
     Anchors = [akTop, akLeft, akRight, akBottom]
     Header.AutoSizeIndex = 0
     Header.Columns = <>
@@ -37,21 +37,23 @@ object frmBatchConvert: TfrmBatchConvert
     OnStructureChange = VSTStructureChange
   end
   object btnApply: TButton
-    Left = 438
-    Height = 25
-    Top = 416
-    Width = 75
+    AnchorSideRight.Control = btnClose
+    Left = 406
+    Height = 26
+    Top = 415
+    Width = 91
     Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick
     TabOrder = 12
   end
   object btnClose: TButton
-    Left = 518
-    Height = 25
-    Top = 416
-    Width = 75
+    Left = 502
+    Height = 26
+    Top = 415
+    Width = 91
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Close'
@@ -59,30 +61,30 @@ object frmBatchConvert: TfrmBatchConvert
     TabOrder = 13
   end
   object btnScanFolder: TButton
-    Left = 518
-    Height = 25
+    Left = 502
+    Height = 26
     Top = 8
-    Width = 75
+    Width = 91
     Anchors = [akTop, akRight]
     Caption = 'Scan...'
     OnClick = btnScanFolderClick
     TabOrder = 1
   end
   object btnAdd: TButton
-    Left = 518
-    Height = 25
-    Top = 36
-    Width = 75
+    Left = 502
+    Height = 26
+    Top = 39
+    Width = 91
     Anchors = [akTop, akRight]
     Caption = 'Add...'
     OnClick = btnAddClick
     TabOrder = 2
   end
   object btnRemove: TButton
-    Left = 518
-    Height = 25
-    Top = 64
-    Width = 75
+    Left = 502
+    Height = 26
+    Top = 70
+    Width = 91
     Anchors = [akTop, akRight]
     Caption = 'Remove'
     Enabled = False
@@ -90,20 +92,20 @@ object frmBatchConvert: TfrmBatchConvert
     TabOrder = 3
   end
   object btnSelectAll: TButton
-    Left = 518
-    Height = 25
-    Top = 92
-    Width = 75
+    Left = 502
+    Height = 26
+    Top = 101
+    Width = 91
     Anchors = [akTop, akRight]
     Caption = 'Select all'
     OnClick = btnSelectAllClick
     TabOrder = 4
   end
   object btnInvert: TButton
-    Left = 518
-    Height = 25
-    Top = 120
-    Width = 75
+    Left = 502
+    Height = 26
+    Top = 132
+    Width = 91
     Anchors = [akTop, akRight]
     Caption = 'Invert'
     OnClick = btnInvertClick
@@ -128,11 +130,14 @@ object frmBatchConvert: TfrmBatchConvert
     ParentColor = False
   end
   object edtFolder: TEdit
+    AnchorSideRight.Control = btnOpenFolder
     Left = 96
     Height = 23
     Top = 251
-    Width = 336
+    Width = 348
     Anchors = [akLeft, akRight, akBottom]
+    AutoSize = False
+    BorderSpacing.Right = 5
     TabOrder = 6
   end
   object lblFormat: TLabel
@@ -148,8 +153,9 @@ object frmBatchConvert: TfrmBatchConvert
     Left = 97
     Height = 23
     Top = 280
-    Width = 416
+    Width = 400
     Anchors = [akLeft, akRight, akBottom]
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 8
@@ -166,8 +172,9 @@ object frmBatchConvert: TfrmBatchConvert
     Left = 96
     Height = 23
     Top = 309
-    Width = 416
+    Width = 401
     Anchors = [akLeft, akRight, akBottom]
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 9
@@ -195,6 +202,7 @@ object frmBatchConvert: TfrmBatchConvert
     Top = 338
     Width = 208
     Anchors = [akLeft, akRight, akBottom]
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 10
@@ -205,26 +213,29 @@ object frmBatchConvert: TfrmBatchConvert
     Top = 367
     Width = 208
     Anchors = [akLeft, akRight, akBottom]
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 11
   end
   object btnOpenFolder: TButton
-    Left = 438
-    Height = 25
-    Top = 249
-    Width = 75
+    Left = 449
+    Height = 23
+    Top = 251
+    Width = 48
     Anchors = [akRight, akBottom]
     Caption = '...'
     OnClick = btnOpenFolderClick
     TabOrder = 7
   end
   object prbProgress: TProgressBar
+    AnchorSideRight.Control = btnApply
     Left = 8
     Height = 8
     Top = 424
-    Width = 424
+    Width = 393
     Anchors = [akLeft, akRight, akBottom]
+    BorderSpacing.Right = 5
     TabOrder = 14
     Visible = False
   end

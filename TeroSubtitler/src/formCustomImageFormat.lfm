@@ -18,6 +18,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 28
     Width = 292
+    AutoSize = False
     ItemHeight = 15
     OnSelect = cboScriptSelect
     Style = csDropDownList
@@ -44,15 +45,19 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 28
     Width = 75
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 1
   end
   object btnSave: TButton
-    Left = 593
-    Height = 25
+    AnchorSideRight.Control = btnClose
+    Left = 561
+    Height = 26
     Top = 384
-    Width = 75
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Save...'
     Default = True
     Enabled = False
@@ -60,10 +65,10 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     TabOrder = 13
   end
   object btnClose: TButton
-    Left = 673
-    Height = 25
-    Top = 384
-    Width = 75
+    Left = 657
+    Height = 26
+    Top = 383
+    Width = 91
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
@@ -74,6 +79,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 372
+    AutoSize = False
     TabOrder = 2
   end
   object edtFolder: TEdit
@@ -81,6 +87,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 140
     Width = 292
+    AutoSize = False
     TabOrder = 3
   end
   object lblPrefix: TLabel
@@ -101,7 +108,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
   end
   object btnFolder: TButton
     Left = 306
-    Height = 25
+    Height = 23
     Top = 140
     Width = 75
     Caption = '...'
@@ -121,6 +128,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 28
     Width = 75
+    AutoSize = False
     MaxValue = 7680
     MinValue = 160
     TabOrder = 5
@@ -131,6 +139,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 28
     Width = 75
+    AutoSize = False
     MaxValue = 4320
     MinValue = 160
     TabOrder = 6
@@ -157,6 +166,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
+    AutoSize = False
     MaxValue = 20
     TabOrder = 7
   end
@@ -165,6 +175,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
+    AutoSize = False
     MaxValue = 20
     TabOrder = 8
   end
@@ -173,6 +184,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
+    AutoSize = False
     MaxValue = 20
     TabOrder = 9
   end
@@ -181,6 +193,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
+    AutoSize = False
     MaxValue = 20
     TabOrder = 10
   end
@@ -189,6 +202,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 140
     Width = 257
+    AutoSize = False
     ItemHeight = 15
     OnSelect = cboFontSelect
     Style = csDropDownList
@@ -207,6 +221,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 140
     Width = 75
+    AutoSize = False
     MaxValue = 1000
     MinValue = 2
     OnChange = cboFontSelect
@@ -226,7 +241,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Left = 9
     Height = 199
     Top = 176
-    Width = 740
+    Width = 739
     Text = 'URUWorks Tero Subtitler'
     BackColor = clDefault
     Font.Color = clWhite
@@ -236,7 +251,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Left = 9
     Height = 48
     Top = 208
-    Width = 740
+    Width = 739
     Alignment = taCenter
     AutoSize = False
     Font.Style = [fsBold]

@@ -2,12 +2,12 @@ object frmTimeExpander: TfrmTimeExpander
   Left = 246
   Height = 329
   Top = 121
-  Width = 280
+  Width = 283
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Time expander'
   ClientHeight = 329
-  ClientWidth = 280
+  ClientWidth = 283
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -17,38 +17,51 @@ object frmTimeExpander: TfrmTimeExpander
     Left = 8
     Height = 23
     Top = 8
-    Width = 168
+    Width = 171
     Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 0
   end
   object edtTime: TEdit
-    Left = 182
+    Left = 184
     Height = 23
     Top = 8
     Width = 64
     Anchors = [akTop]
+    AutoSize = False
     NumbersOnly = True
     OnChange = edtTimeChange
     TabOrder = 1
     Text = '1'
   end
   object btnApply: TButton
-    Left = 117
-    Height = 25
-    Top = 296
-    Width = 75
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnClose
+    Left = 88
+    Height = 26
+    Top = 295
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick
     TabOrder = 9
   end
   object btnClose: TButton
-    Left = 197
-    Height = 25
-    Top = 296
-    Width = 75
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 184
+    Height = 26
+    Top = 295
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
@@ -70,6 +83,7 @@ object frmTimeExpander: TfrmTimeExpander
     Height = 23
     Top = 72
     Width = 64
+    AutoSize = False
     NumbersOnly = True
     OnChange = edtTimeChange
     TabOrder = 3
@@ -99,6 +113,7 @@ object frmTimeExpander: TfrmTimeExpander
     Height = 23
     Top = 140
     Width = 64
+    AutoSize = False
     NumbersOnly = True
     OnChange = edtTimeChange
     TabOrder = 5
@@ -151,10 +166,13 @@ object frmTimeExpander: TfrmTimeExpander
     TabStop = False
   end
   object lblMs1: TLabel
-    Left = 254
+    AnchorSideLeft.Control = edtTime
+    AnchorSideLeft.Side = asrBottom
+    Left = 253
     Height = 15
     Top = 12
     Width = 16
+    BorderSpacing.Left = 5
     Caption = 'ms'
     ParentColor = False
   end

@@ -14,11 +14,16 @@ object frmTranslationMemory: TfrmTranslationMemory
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object VST: TLazVirtualStringTree
+    AnchorSideRight.Control = btnClose
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
     Left = 8
-    Height = 159
+    Height = 160
     Top = 8
-    Width = 375
+    Width = 368
     Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Right = 5
+    BorderSpacing.Bottom = 8
     DefaultText = 'Node'
     Header.AutoSizeIndex = 0
     Header.Columns = <>
@@ -38,10 +43,10 @@ object frmTranslationMemory: TfrmTranslationMemory
     OnResize = VSTResize
   end
   object btnCopy: TButton
-    Left = 388
-    Height = 25
+    Left = 381
+    Height = 26
     Top = 8
-    Width = 83
+    Width = 91
     Anchors = [akTop, akRight]
     Caption = 'Copy'
     Default = True
@@ -49,32 +54,44 @@ object frmTranslationMemory: TfrmTranslationMemory
     TabOrder = 1
   end
   object btnValidate: TButton
-    Left = 388
-    Height = 25
-    Top = 40
-    Width = 83
+    AnchorSideTop.Control = btnCopy
+    AnchorSideTop.Side = asrBottom
+    Left = 381
+    Height = 26
+    Top = 39
+    Width = 91
     Anchors = [akTop, akRight]
+    BorderSpacing.Top = 5
     Caption = 'Validate'
     OnClick = btnValidateClick
     TabOrder = 2
   end
   object btnClose: TButton
-    Left = 388
-    Height = 25
-    Top = 143
-    Width = 83
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 381
+    Height = 26
+    Top = 142
+    Width = 91
     Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
     TabOrder = 4
   end
   object btnUse: TButton
-    Left = 388
-    Height = 25
-    Top = 72
-    Width = 83
+    AnchorSideTop.Control = btnValidate
+    AnchorSideTop.Side = asrBottom
+    Left = 381
+    Height = 26
+    Top = 70
+    Width = 91
     Anchors = [akTop, akRight]
+    BorderSpacing.Top = 5
     Caption = 'Use'
     OnClick = btnUseClick
     TabOrder = 3

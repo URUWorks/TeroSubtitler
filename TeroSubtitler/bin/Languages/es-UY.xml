@@ -753,6 +753,8 @@
     <btnRestore>Restaurar</btnRestore>
     <btnAdd>Agregar</btnAdd>
     <btnRemove>Remover</btnRemove>
+    <btnPlus>+</btnPlus>
+    <btnMinus>-</btnMinus>    
     <btnSelectAll>Sel. todo</btnSelectAll>
     <btnInvert>Invertir</btnInvert>        
     <btnScanFolder>Escanear...</btnScanFolder>

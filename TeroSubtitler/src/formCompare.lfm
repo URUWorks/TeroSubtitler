@@ -23,31 +23,37 @@ object frmCompare: TfrmCompare
     ClientWidth = 456
     TabOrder = 0
     object edtFile1: TEdit
+      AnchorSideRight.Control = btnFile1
       Left = 8
       Height = 23
       Top = 8
-      Width = 360
+      Width = 388
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      BorderSpacing.Right = 5
       ReadOnly = True
       TabOrder = 0
     end
     object btnFile1: TButton
-      Left = 373
-      Height = 25
+      Left = 401
+      Height = 23
       Top = 8
-      Width = 75
+      Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
       OnClick = btnFile1Click
       TabOrder = 1
     end
     object VST1: TLazVirtualStringTree
+      AnchorSideTop.Control = edtFile1
+      AnchorSideTop.Side = asrBottom
       Left = 8
-      Height = 399
-      Top = 40
+      Height = 400
+      Top = 39
       Width = 441
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
       BorderSpacing.Right = 8
       Header.AutoSizeIndex = 0
       Header.Columns = <>
@@ -77,19 +83,22 @@ object frmCompare: TfrmCompare
     ClientWidth = 449
     TabOrder = 1
     object edtFile2: TEdit
+      AnchorSideRight.Control = btnFile2
       Left = 0
       Height = 23
       Top = 8
-      Width = 360
+      Width = 387
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      BorderSpacing.Right = 5
       ReadOnly = True
       TabOrder = 0
     end
     object btnFile2: TButton
-      Left = 365
-      Height = 25
+      Left = 392
+      Height = 23
       Top = 8
-      Width = 75
+      Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
       OnClick = btnFile1Click
@@ -97,12 +106,15 @@ object frmCompare: TfrmCompare
     end
     object VST2: TLazVirtualStringTree
       AnchorSideLeft.Side = asrCenter
+      AnchorSideTop.Control = edtFile2
+      AnchorSideTop.Side = asrBottom
       AnchorSideRight.Side = asrBottom
-      Left = 1
-      Height = 399
-      Top = 40
+      Left = 0
+      Height = 400
+      Top = 39
       Width = 440
       Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Top = 8
       BorderSpacing.Right = 8
       Header.AutoSizeIndex = 0
       Header.Columns = <>
@@ -132,10 +144,10 @@ object frmCompare: TfrmCompare
     ClientWidth = 905
     TabOrder = 2
     object btnClose: TButton
-      Left = 822
-      Height = 25
+      Left = 805
+      Height = 26
       Top = 8
-      Width = 75
+      Width = 91
       Anchors = [akRight, akBottom]
       Cancel = True
       Caption = 'Close'

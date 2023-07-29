@@ -2,22 +2,26 @@ object frmMultipleReplace: TfrmMultipleReplace
   Left = 260
   Height = 353
   Top = 127
-  Width = 456
+  Width = 490
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Multiple replace'
   ClientHeight = 353
-  ClientWidth = 456
+  ClientWidth = 490
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object edtFind: TEdit
+    AnchorSideRight.Control = btnPlus
     Left = 112
     Height = 23
     Top = 8
-    Width = 256
+    Width = 284
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
+    BorderSpacing.Right = 5
     OnChange = edtFindChange
     TabOrder = 0
   end
@@ -38,58 +42,82 @@ object frmMultipleReplace: TfrmMultipleReplace
     ParentColor = False
   end
   object edtReplace: TEdit
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
     Left = 112
     Height = 23
     Top = 40
-    Width = 256
+    Width = 370
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
+    BorderSpacing.Right = 8
     OnChange = edtFindChange
     TabOrder = 1
   end
   object btnClose: TButton
-    Left = 373
-    Height = 25
-    Top = 320
-    Width = 75
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 391
+    Height = 26
+    Top = 319
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
     TabOrder = 5
   end
   object btnApply: TButton
-    Left = 293
-    Height = 25
-    Top = 320
-    Width = 75
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnClose
+    Left = 295
+    Height = 26
+    Top = 319
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick
     TabOrder = 4
   end
-  object btnAdd: TButton
-    Left = 373
-    Height = 25
+  object btnPlus: TButton
+    AnchorSideRight.Control = btnMinus
+    Left = 401
+    Height = 23
     Top = 8
-    Width = 75
-    Caption = 'Add'
+    Width = 38
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
+    Caption = '+'
     Enabled = False
-    OnClick = btnAddClick
+    OnClick = btnPlusClick
     TabOrder = 2
   end
-  object btnRemove: TButton
-    Left = 373
-    Height = 25
-    Top = 40
-    Width = 75
-    Caption = 'Remove'
+  object btnMinus: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 444
+    Height = 23
+    Top = 8
+    Width = 38
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 8
+    Caption = '-'
     Enabled = False
-    OnClick = btnRemoveClick
+    OnClick = btnMinusClick
     TabOrder = 3
   end
   object VST: TLazVirtualStringTree
     Left = 8
     Height = 208
     Top = 104
-    Width = 440
+    Width = 474
+    Anchors = [akTop, akLeft, akRight]
     Header.AutoSizeIndex = 0
     Header.Columns = <>
     Header.MainColumn = -1

@@ -23,10 +23,10 @@ object frmAbout: TfrmAbout
     Stretch = True
   end
   object btnClose: TButton
-    Left = 153
-    Height = 25
+    Left = 144
+    Height = 26
     Top = 280
-    Width = 75
+    Width = 91
     Cancel = True
     Caption = 'Close'
     Default = True

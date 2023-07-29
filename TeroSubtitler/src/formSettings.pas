@@ -609,7 +609,7 @@ begin
     if (C is TUWLayout) then
       if TUWLayout(C) = APage then
       begin
-        TUWLayout(C).Left := 168;
+        TUWLayout(C).Left := 196;
         TUWLayout(C).Top  := 8;
         TUWLayout(C).Show;
       end

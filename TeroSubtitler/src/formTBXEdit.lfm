@@ -14,26 +14,35 @@ object frmTBXEdit: TfrmTBXEdit
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object btnAdd: TButton
-    Left = 336
-    Height = 25
+    Left = 329
+    Height = 23
     Top = 8
-    Width = 83
+    Width = 91
     Caption = 'Add'
     Default = True
     OnClick = btnAddClick
     TabOrder = 3
   end
   object btnClose: TButton
-    Left = 336
-    Height = 25
-    Top = 105
-    Width = 83
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 329
+    Height = 26
+    Top = 108
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
     TabOrder = 4
   end
   object lblOriginal: TLabel
+    AnchorSideTop.Control = edtOriginal
+    AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 15
     Top = 12
@@ -45,36 +54,54 @@ object frmTBXEdit: TfrmTBXEdit
     Left = 88
     Height = 23
     Top = 8
-    Width = 240
+    Width = 236
+    AutoSize = False
     TabOrder = 0
   end
   object lblTranslated: TLabel
+    AnchorSideTop.Control = edtTranslated
+    AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 15
-    Top = 44
+    Top = 40
     Width = 53
     Caption = 'Translated'
     ParentColor = False
   end
   object edtTranslated: TEdit
+    AnchorSideTop.Control = edtOriginal
+    AnchorSideTop.Side = asrBottom
     Left = 88
     Height = 23
-    Top = 40
-    Width = 240
+    Top = 36
+    Width = 236
+    AutoSize = False
+    BorderSpacing.Top = 5
     TabOrder = 1
   end
   object mmoNotes: TMemo
+    AnchorSideLeft.Control = edtOriginal
+    AnchorSideTop.Control = edtTranslated
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = btnClose
+    AnchorSideBottom.Control = btnClose
+    AnchorSideBottom.Side = asrBottom
     Left = 88
-    Height = 58
-    Top = 72
-    Width = 240
+    Height = 70
+    Top = 64
+    Width = 236
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Top = 5
+    BorderSpacing.Right = 5
     TabOrder = 2
   end
   object lblNotes: TLabel
+    AnchorSideTop.Control = mmoNotes
     Left = 8
     Height = 15
-    Top = 76
+    Top = 68
     Width = 31
+    BorderSpacing.Top = 4
     Caption = 'Notes'
     ParentColor = False
   end

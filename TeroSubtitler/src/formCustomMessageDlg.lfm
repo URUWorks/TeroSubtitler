@@ -12,10 +12,10 @@ object frmCustomMessageDlg: TfrmCustomMessageDlg
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object btnOk: TButton
-    Left = 316
-    Height = 25
+    Left = 301
+    Height = 26
     Top = 87
-    Width = 75
+    Width = 91
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Ok'

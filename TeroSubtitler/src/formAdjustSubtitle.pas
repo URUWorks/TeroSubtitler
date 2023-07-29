@@ -33,8 +33,8 @@ type
   TfrmAdjustSubtitle = class(TForm)
     btnApply: TButton;
     btnClose: TButton;
-    btnAdd: TButton;
-    btnRemove: TButton;
+    btnPlus: TButton;
+    btnMinus: TButton;
     lblIndex: TLabel;
     lblFirstSpoken: TLabel;
     lblLastSpoken: TLabel;
@@ -47,10 +47,10 @@ type
     lyoAdvanced: TUWLayout;
     tedTime: TUWTimeEdit;
     VST: TLazVirtualStringTree;
-    procedure btnAddClick(Sender: TObject);
+    procedure btnPlusClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
-    procedure btnRemoveClick(Sender: TObject);
+    procedure btnMinusClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -207,7 +207,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmAdjustSubtitle.btnRemoveClick(Sender: TObject);
+procedure TfrmAdjustSubtitle.btnMinusClick(Sender: TObject);
 var
   Index, len, rest: Integer;
 begin
@@ -270,7 +270,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmAdjustSubtitle.btnAddClick(Sender: TObject);
+procedure TfrmAdjustSubtitle.btnPlusClick(Sender: TObject);
 var
   Item: TAdjustItem;
   i   : Integer;

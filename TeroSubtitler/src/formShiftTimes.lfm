@@ -2,34 +2,44 @@ object frmShiftTimes: TfrmShiftTimes
   Left = 237
   Height = 188
   Top = 115
-  Width = 273
+  Width = 293
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Shift'
   ClientHeight = 188
-  ClientWidth = 273
+  ClientWidth = 293
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object btnClose: TButton
-    Left = 190
-    Height = 25
-    Top = 155
-    Width = 75
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 194
+    Height = 26
+    Top = 154
+    Width = 91
     Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
     TabOrder = 3
   end
   object btnApply: TButton
-    Left = 110
-    Height = 25
-    Top = 155
-    Width = 75
+    AnchorSideRight.Control = btnClose
+    AnchorSideBottom.Control = btnClose
+    AnchorSideBottom.Side = asrBottom
+    Left = 98
+    Height = 26
+    Top = 154
+    Width = 91
     Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick
@@ -48,10 +58,11 @@ object frmShiftTimes: TfrmShiftTimes
     ParentColor = False
   end
   object cboOffset: TComboBox
-    Left = 72
+    Left = 78
     Height = 23
     Top = 5
     Width = 66
+    AutoSize = False
     ItemHeight = 15
     ItemIndex = 0
     Items.Strings = (
@@ -63,16 +74,19 @@ object frmShiftTimes: TfrmShiftTimes
     Text = '+'
   end
   object tedOffset: TUWTimeEdit
-    Left = 144
+    AnchorSideLeft.Control = cboOffset
+    AnchorSideLeft.Side = asrBottom
+    Left = 149
     Height = 23
     Top = 5
-    Width = 104
+    Width = 123
     Value = 0
     FPS = 25
     FrameStep = 1
     TimeStep = 1
     TimeMode = temTime
     Alignment = taCenter
+    BorderSpacing.Left = 5
     Constraints.MinHeight = 21
     Constraints.MinWidth = 80
     Font.Style = [fsBold]

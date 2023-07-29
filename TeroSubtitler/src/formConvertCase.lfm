@@ -2,32 +2,38 @@ object frmConvertCase: TfrmConvertCase
   Left = 260
   Height = 266
   Top = 127
-  Width = 250
+  Width = 280
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Convert case'
   ClientHeight = 266
-  ClientWidth = 250
+  ClientWidth = 280
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object btnApply: TButton
-    Left = 85
-    Height = 25
+    AnchorSideRight.Control = btnClose
+    Left = 83
+    Height = 26
     Top = 232
-    Width = 75
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick
     TabOrder = 6
   end
   object btnClose: TButton
-    Left = 165
-    Height = 25
+    AnchorSideRight.Control = lyoScope
+    AnchorSideRight.Side = asrBottom
+    Left = 179
+    Height = 26
     Top = 232
-    Width = 75
+    Width = 91
+    Anchors = [akTop, akRight]
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
@@ -88,9 +94,10 @@ object frmConvertCase: TfrmConvertCase
     Left = 16
     Height = 96
     Top = 128
-    Width = 224
+    Width = 254
+    Anchors = [akTop, akLeft, akRight]
     ClientHeight = 96
-    ClientWidth = 224
+    ClientWidth = 254
     TabOrder = 5
     object lblScope: TLabel
       Left = 0

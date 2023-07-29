@@ -2,22 +2,22 @@ object frmConventions: TfrmConventions
   Left = 236
   Height = 596
   Top = 116
-  Width = 800
+  Width = 900
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Conventions'
   ClientHeight = 596
-  ClientWidth = 800
+  ClientWidth = 900
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object btnClose: TButton
-    Left = 717
-    Height = 25
+    Left = 801
+    Height = 26
     Top = 562
-    Width = 75
+    Width = 91
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Close'
@@ -36,58 +36,66 @@ object frmConventions: TfrmConventions
     TabOrder = 0
   end
   object btnAdd: TButton
-    Left = 717
-    Height = 25
+    Left = 801
+    Height = 26
     Top = 8
-    Width = 75
+    Width = 91
     Anchors = [akTop, akRight]
     Caption = 'Add'
     OnClick = btnAddClick
     TabOrder = 1
   end
   object btnRemove: TButton
-    Left = 717
-    Height = 25
-    Top = 40
-    Width = 75
+    AnchorSideTop.Control = btnAdd
+    AnchorSideTop.Side = asrBottom
+    Left = 801
+    Height = 26
+    Top = 39
+    Width = 91
     Anchors = [akTop, akRight]
+    BorderSpacing.Top = 5
     Caption = 'Remove'
     OnClick = btnRemoveClick
     TabOrder = 2
   end
   object btnUpdate: TButton
-    Left = 717
-    Height = 25
-    Top = 72
-    Width = 75
+    AnchorSideTop.Control = btnRemove
+    AnchorSideTop.Side = asrBottom
+    Left = 801
+    Height = 26
+    Top = 70
+    Width = 91
     Anchors = [akTop, akRight]
+    BorderSpacing.Top = 5
     Caption = 'Update'
     OnClick = btnUpdateClick
     TabOrder = 3
   end
   object lyoConvention: TUWLayout
+    AnchorSideRight.Control = btnAdd
     Left = 216
     Height = 546
     Top = 8
-    Width = 496
+    Width = 585
     Anchors = [akTop, akLeft, akRight, akBottom]
     ClientHeight = 546
-    ClientWidth = 496
+    ClientWidth = 585
     TabOrder = 5
     object lblNewSubtitleMs: TLabel
       Left = 0
       Height = 15
       Top = 132
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'New subtitle (ms)'
       ParentColor = False
     end
     object spnNewSubtitleMs: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 128
-      Width = 78
+      Width = 91
+      AutoSize = False
       MaxValue = 5000
       TabOrder = 4
       Value = 1000
@@ -96,16 +104,17 @@ object frmConventions: TfrmConventions
       Left = 0
       Height = 15
       Top = 164
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'Min. duration (ms)'
       ParentColor = False
     end
     object spnMinDurationMs: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 160
-      Width = 80
+      Width = 91
+      AutoSize = False
       MaxValue = 5000
       TabOrder = 5
       Value = 1000
@@ -114,16 +123,17 @@ object frmConventions: TfrmConventions
       Left = 0
       Height = 15
       Top = 228
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'Max. duration (ms)'
       ParentColor = False
     end
     object spnMaxDurationMs: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 224
-      Width = 80
+      Width = 91
+      AutoSize = False
       MaxValue = 10000
       TabOrder = 7
       Value = 8000
@@ -132,41 +142,44 @@ object frmConventions: TfrmConventions
       Left = 0
       Height = 15
       Top = 292
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'Min. subtitle pause'
       ParentColor = False
     end
     object spnSubtitlePauseMs: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 288
-      Width = 80
+      Width = 91
+      AutoSize = False
       MaxValue = 10000
       TabOrder = 9
       Value = 200
     end
     object edtRepeatableChars: TEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 32
-      Width = 287
+      Width = 339
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
       TabOrder = 1
     end
     object edtProhibitedChars: TEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 64
-      Width = 287
+      Width = 339
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
       TabOrder = 2
     end
     object lblRepeatableChars: TLabel
       Left = 0
       Height = 15
       Top = 36
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'Repeatable chars'
       ParentColor = False
@@ -175,7 +188,7 @@ object frmConventions: TfrmConventions
       Left = 0
       Height = 15
       Top = 68
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'Prohibited chars'
       ParentColor = False
@@ -193,16 +206,17 @@ object frmConventions: TfrmConventions
       Left = 0
       Height = 15
       Top = 260
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'Max. line count'
       ParentColor = False
     end
     object spnMaxLineCount: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 256
-      Width = 80
+      Width = 91
+      AutoSize = False
       MaxValue = 10
       TabOrder = 8
       Value = 2
@@ -211,16 +225,17 @@ object frmConventions: TfrmConventions
       Left = 0
       Height = 15
       Top = 324
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'CPS'
       ParentColor = False
     end
     object spnCPS: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 320
-      Width = 80
+      Width = 91
+      AutoSize = False
       MaxValue = 1000
       TabOrder = 11
       Value = 15
@@ -229,25 +244,27 @@ object frmConventions: TfrmConventions
       Left = 0
       Height = 15
       Top = 356
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'WPM'
       ParentColor = False
     end
     object spnWPM: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 352
-      Width = 80
+      Width = 91
+      AutoSize = False
       MaxValue = 1000
       TabOrder = 12
       Value = 180
     end
     object spnCPL: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 384
-      Width = 80
+      Width = 91
+      AutoSize = False
       MaxValue = 500
       TabOrder = 13
       Value = 37
@@ -256,7 +273,7 @@ object frmConventions: TfrmConventions
       Left = 0
       Height = 15
       Top = 388
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'CPL'
       ParentColor = False
@@ -271,57 +288,66 @@ object frmConventions: TfrmConventions
       ParentColor = False
     end
     object edtName: TEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 0
-      Width = 287
+      Width = 339
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
       TabOrder = 0
     end
     object lblMinDurationPerWordMs: TLabel
       Left = 0
       Height = 15
       Top = 196
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'Min. duration per word (ms)'
       ParentColor = False
     end
     object spnMinDurationPerWord: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 192
-      Width = 80
+      Width = 91
+      AutoSize = False
       MaxValue = 5000
       TabOrder = 6
       Value = 1000
     end
     object cboPauseMode: TComboBox
+      AnchorSideLeft.Control = spnSubtitlePauseMs
+      AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = spnSubtitlePauseMs
       AnchorSideTop.Side = asrCenter
-      Left = 296
+      AnchorSideRight.Control = edtRepeatableChars
+      AnchorSideRight.Side = asrBottom
+      Left = 336
       Height = 23
       Top = 288
-      Width = 118
+      Width = 243
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      BorderSpacing.Left = 5
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 10
     end
     object edtCPSStrategy: TEdit
       AnchorSideTop.Side = asrCenter
-      Left = 208
+      Left = 240
       Height = 23
       Top = 96
-      Width = 287
+      Width = 339
       Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
       TabOrder = 3
     end
     object lblCPSStrategy: TLabel
       Left = 0
       Height = 15
       Top = 100
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'Chars excluded from CPS count'
       ParentColor = False
@@ -330,16 +356,17 @@ object frmConventions: TfrmConventions
       Left = 0
       Height = 15
       Top = 420
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'Shot change snap area (frames)'
       ParentColor = False
     end
     object spnSCSnapArea: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 416
-      Width = 80
+      Width = 91
+      AutoSize = False
       MaxValue = 20
       TabOrder = 14
       Value = 12
@@ -348,16 +375,17 @@ object frmConventions: TfrmConventions
       Left = 0
       Height = 15
       Top = 452
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'Snap in cues (frames)'
       ParentColor = False
     end
     object spnSCSnapInCues: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 448
-      Width = 80
+      Width = 91
+      AutoSize = False
       MaxValue = 15
       TabOrder = 15
     end
@@ -365,16 +393,17 @@ object frmConventions: TfrmConventions
       Left = 0
       Height = 15
       Top = 484
-      Width = 206
+      Width = 238
       AutoSize = False
       Caption = 'Snap out cues (frames)'
       ParentColor = False
     end
     object spnSCSnapOutCues: TSpinEdit
-      Left = 208
+      Left = 240
       Height = 23
       Top = 480
-      Width = 80
+      Width = 91
+      AutoSize = False
       MaxValue = 15
       TabOrder = 16
       Value = 2

@@ -1,7 +1,7 @@
 object frmTranslationMemoryList: TfrmTranslationMemoryList
-  Left = 246
+  Left = 238
   Height = 400
-  Top = 116
+  Top = 117
   Width = 600
   BorderIcons = [biMaximize]
   Caption = 'Translation memory'
@@ -36,22 +36,28 @@ object frmTranslationMemoryList: TfrmTranslationMemoryList
     OnResize = VSTResize
   end
   object btnClose: TButton
-    Left = 508
-    Height = 25
-    Top = 365
-    Width = 83
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 501
+    Height = 26
+    Top = 366
+    Width = 91
     Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
     TabOrder = 2
   end
   object lblTotal: TLabel
+    AnchorSideTop.Control = lblFind
     Left = 8
     Height = 15
-    Top = 370
+    Top = 372
     Width = 28
-    Anchors = [akLeft, akBottom]
     Caption = 'Total:'
     ParentColor = False
   end
@@ -61,28 +67,38 @@ object frmTranslationMemoryList: TfrmTranslationMemoryList
     AnchorSideTop.Control = lblTotal
     Left = 44
     Height = 15
-    Top = 370
+    Top = 372
     Width = 6
     BorderSpacing.Left = 8
     Caption = '0'
     ParentColor = False
   end
   object btnCopy: TButton
-    Left = 424
-    Height = 25
-    Top = 365
-    Width = 75
-    Anchors = [akRight, akBottom]
+    AnchorSideTop.Control = btnClose
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = btnClose
+    AnchorSideBottom.Control = btnClose
+    AnchorSideBottom.Side = asrBottom
+    Left = 405
+    Height = 23
+    Top = 368
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Copy'
     OnClick = btnCopyClick
     TabOrder = 1
   end
   object edtFind: TEdit
-    Left = 235
+    AnchorSideTop.Control = btnCopy
+    AnchorSideRight.Control = btnCopy
+    Left = 220
     Height = 23
-    Top = 365
+    Top = 368
     Width = 180
-    Anchors = [akRight, akBottom]
+    Anchors = [akTop, akRight]
+    AutoSize = False
+    BorderSpacing.Right = 5
     OnChange = edtFindChange
     TabOrder = 0
   end
@@ -90,9 +106,9 @@ object frmTranslationMemoryList: TfrmTranslationMemoryList
     AnchorSideTop.Control = edtFind
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = edtFind
-    Left = 204
+    Left = 189
     Height = 15
-    Top = 369
+    Top = 372
     Width = 23
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 8

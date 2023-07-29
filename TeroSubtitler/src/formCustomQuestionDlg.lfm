@@ -1,31 +1,33 @@
 object frmCustomQuestionDlg: TfrmCustomQuestionDlg
   Left = 302
-  Height = 169
+  Height = 170
   Top = 171
-  Width = 400
+  Width = 431
   BorderIcons = []
   BorderStyle = bsSingle
-  ClientHeight = 169
-  ClientWidth = 400
+  ClientHeight = 170
+  ClientWidth = 431
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object btnCancel: TButton
-    Left = 316
-    Height = 25
+    Left = 331
+    Height = 26
     Top = 136
-    Width = 75
+    Width = 91
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 2
   end
   object btnYes: TButton
-    Left = 156
-    Height = 25
+    AnchorSideRight.Control = btnNo
+    Left = 139
+    Height = 26
     Top = 136
-    Width = 76
+    Width = 91
+    BorderSpacing.Right = 5
     Caption = 'Yes'
     Default = True
     ModalResult = 6
@@ -41,7 +43,7 @@ object frmCustomQuestionDlg: TfrmCustomQuestionDlg
     Left = 64
     Height = 32
     Top = 16
-    Width = 328
+    Width = 358
     AutoSize = False
     Caption = 'Title'
     Font.Style = [fsBold]
@@ -53,17 +55,20 @@ object frmCustomQuestionDlg: TfrmCustomQuestionDlg
     Left = 64
     Height = 80
     Top = 48
-    Width = 327
+    Width = 358
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = False
     Caption = 'Question'
     ParentColor = False
     WordWrap = True
   end
   object btnNo: TButton
-    Left = 236
-    Height = 25
+    AnchorSideRight.Control = btnCancel
+    Left = 235
+    Height = 26
     Top = 136
-    Width = 76
+    Width = 91
+    BorderSpacing.Right = 5
     Caption = 'No'
     ModalResult = 7
     TabOrder = 1

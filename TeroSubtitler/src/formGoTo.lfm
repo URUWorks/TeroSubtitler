@@ -2,12 +2,12 @@ object frmGoTo: TfrmGoTo
   Left = 260
   Height = 93
   Top = 127
-  Width = 171
+  Width = 280
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Go to'
   ClientHeight = 93
-  ClientWidth = 171
+  ClientWidth = 280
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -25,27 +25,39 @@ object frmGoTo: TfrmGoTo
     Left = 8
     Height = 23
     Top = 28
-    Width = 155
+    Width = 264
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
     NumbersOnly = True
     OnChange = edtNumberChange
     TabOrder = 0
     Text = '0'
   end
   object btnClose: TButton
-    Left = 88
-    Height = 25
-    Top = 60
-    Width = 75
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 181
+    Height = 26
+    Top = 59
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
     TabOrder = 2
   end
   object btnGo: TButton
-    Left = 8
-    Height = 25
-    Top = 60
-    Width = 75
+    AnchorSideRight.Control = btnClose
+    Left = 85
+    Height = 26
+    Top = 59
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Go'
     Default = True
     OnClick = btnGoClick

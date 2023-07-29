@@ -14,21 +14,23 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
   object btnApply: TButton
-    Left = 417
-    Height = 25
+    AnchorSideRight.Control = btnClose
+    Left = 385
+    Height = 26
     Top = 320
-    Width = 75
+    Width = 91
     Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
     OnClick = btnApplyClick
     TabOrder = 0
   end
   object btnClose: TButton
-    Left = 497
-    Height = 25
+    Left = 481
+    Height = 26
     Top = 320
-    Width = 75
+    Width = 91
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Close'
@@ -45,12 +47,17 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
     ClientWidth = 580
     TabOrder = 2
     object lblFirstSpoken: TLabel
+      AnchorSideTop.Control = tedFirst
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = tedFirst
       Left = 8
       Height = 15
       Top = 4
-      Width = 156
+      Width = 155
       Alignment = taRightJustify
+      Anchors = [akTop, akLeft, akRight]
       AutoSize = False
+      BorderSpacing.Right = 5
       Caption = 'First spoken line'
       ParentColor = False
     end
@@ -72,13 +79,17 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       TabOrder = 0
     end
     object lblLastSpoken: TLabel
-      Left = 294
+      AnchorSideTop.Control = tedLast
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = tedLast
+      Left = 293
       Height = 15
       Top = 4
       Width = 156
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
       AutoSize = False
+      BorderSpacing.Right = 5
       Caption = 'Last spoken line'
       ParentColor = False
     end
@@ -111,18 +122,23 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
     ClientWidth = 580
     TabOrder = 3
     object lblIndex: TLabel
+      AnchorSideTop.Control = spnIndex
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = spnIndex
       Left = 8
       Height = 15
       Top = 180
-      Width = 182
+      Width = 274
       Alignment = taRightJustify
       Anchors = [akTop, akLeft, akRight]
       AutoSize = False
+      BorderSpacing.Right = 5
       Caption = 'Subtitle #'
       ParentColor = False
     end
     object tedTime: TUWTimeEdit
-      Left = 292
+      AnchorSideRight.Control = btnPlus
+      Left = 382
       Height = 23
       Top = 176
       Width = 104
@@ -133,38 +149,44 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       TimeMode = temTime
       Alignment = taCenter
       Anchors = [akTop, akRight]
+      BorderSpacing.Right = 5
       Constraints.MinHeight = 21
       Constraints.MinWidth = 80
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
     end
-    object btnAdd: TButton
-      Left = 417
-      Height = 25
+    object btnPlus: TButton
+      AnchorSideRight.Control = btnMinus
+      Left = 491
+      Height = 23
       Top = 176
-      Width = 75
+      Width = 38
       Anchors = [akTop, akRight]
-      Caption = 'Add'
-      OnClick = btnAddClick
+      BorderSpacing.Right = 5
+      Caption = '+'
+      OnClick = btnPlusClick
       TabOrder = 3
     end
-    object btnRemove: TButton
-      Left = 497
-      Height = 25
+    object btnMinus: TButton
+      Left = 534
+      Height = 23
       Top = 176
-      Width = 75
+      Width = 38
       Anchors = [akTop, akRight]
-      Caption = 'Remove'
-      OnClick = btnRemoveClick
+      Caption = '-'
+      OnClick = btnMinusClick
       TabOrder = 4
     end
     object spnIndex: TSpinEdit
-      Left = 196
+      AnchorSideRight.Control = tedTime
+      Left = 287
       Height = 23
       Top = 176
       Width = 90
       Anchors = [akTop, akRight]
+      AutoSize = False
+      BorderSpacing.Right = 5
       OnChange = spnIndexChange
       TabOrder = 0
     end

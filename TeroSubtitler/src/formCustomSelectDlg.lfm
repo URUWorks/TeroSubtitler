@@ -1,11 +1,11 @@
 object frmCustomSelectDlg: TfrmCustomSelectDlg
   Left = 244
-  Height = 93
+  Height = 95
   Top = 118
   Width = 450
   BorderIcons = []
   BorderStyle = bsSingle
-  ClientHeight = 93
+  ClientHeight = 95
   ClientWidth = 450
   OnCreate = FormCreate
   OnShow = FormShow
@@ -20,32 +20,40 @@ object frmCustomSelectDlg: TfrmCustomSelectDlg
     ParentColor = False
   end
   object btnOk: TButton
-    Left = 288
-    Height = 25
+    AnchorSideTop.Control = btnCancel
+    AnchorSideRight.Control = btnCancel
+    Left = 256
+    Height = 26
     Top = 60
-    Width = 75
-    Anchors = [akRight, akBottom]
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Caption = 'Ok'
     Default = True
     ModalResult = 1
     TabOrder = 1
   end
   object btnCancel: TButton
-    Left = 368
-    Height = 25
+    Left = 352
+    Height = 26
     Top = 60
-    Width = 75
-    Anchors = [akRight, akBottom]
+    Width = 91
+    Anchors = [akTop, akRight]
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 2
   end
   object cboSelect: TComboBox
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
     Left = 8
     Height = 23
     Top = 28
-    Width = 435
+    Width = 434
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
+    BorderSpacing.Right = 8
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 0
