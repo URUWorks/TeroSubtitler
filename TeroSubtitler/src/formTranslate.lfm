@@ -89,10 +89,13 @@ object frmTranslate: TfrmTranslate
     TabOrder = 1
   end
   object lblInput: TLabel
+    AnchorSideTop.Control = cboSourceLanguage
+    AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 15
-    Top = 56
+    Top = 59
     Width = 31
+    BorderSpacing.Top = 8
     Caption = 'Input:'
     ParentColor = False
   end
@@ -101,7 +104,7 @@ object frmTranslate: TfrmTranslate
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 23
-    Top = 76
+    Top = 79
     Width = 192
     AutoSize = False
     BorderSpacing.Top = 5
@@ -115,7 +118,7 @@ object frmTranslate: TfrmTranslate
     AnchorSideTop.Side = asrBottom
     Left = 208
     Height = 23
-    Top = 76
+    Top = 79
     Width = 192
     AutoSize = False
     BorderSpacing.Top = 5
@@ -125,10 +128,13 @@ object frmTranslate: TfrmTranslate
     TabOrder = 3
   end
   object lblOutput: TLabel
+    AnchorSideTop.Control = cboTranslationLanguage
+    AnchorSideTop.Side = asrBottom
     Left = 208
     Height = 15
-    Top = 56
+    Top = 59
     Width = 41
+    BorderSpacing.Top = 8
     Caption = 'Output:'
     ParentColor = False
   end

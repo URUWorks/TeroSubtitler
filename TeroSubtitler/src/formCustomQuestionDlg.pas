@@ -111,7 +111,7 @@ begin
   if AButtons = [] then
     AButtons := [mbYes, mbNo, mbCancel];
 
-  ALeft := 316;
+  ALeft := 331;
   SetButton(btnCancel, mbCancel);
   SetButton(btnNo, mbNo);
   SetButton(btnYes, mbYes);

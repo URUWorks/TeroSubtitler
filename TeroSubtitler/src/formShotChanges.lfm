@@ -184,6 +184,8 @@ object frmShotChanges: TfrmShotChanges
   end
   object cboOffset: TComboBox
     AnchorSideLeft.Control = spnSensitivity
+    AnchorSideTop.Control = tedOffset
+    AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = tedOffset
     Left = 200
     Height = 23
