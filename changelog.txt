@@ -2,6 +2,7 @@
 - fixed: Project autoname #132
 - fixed: Missing strings in language file
 - fixed: Remember settings in Auto Translate
+- improved: Button and form size
 - added: Italian language (thx GitGianluc)
 - added: Russian language (thx RoxMarty)
 - added: Notice of shortcut in use [settings]
