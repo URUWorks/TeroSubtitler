@@ -20,7 +20,6 @@ object frmAudioToTextModel: TfrmAudioToTextModel
     Top = 8
     Width = 235
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     BorderSpacing.Right = 5
     ItemHeight = 15
     Style = csDropDownList

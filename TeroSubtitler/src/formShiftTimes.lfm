@@ -62,7 +62,6 @@ object frmShiftTimes: TfrmShiftTimes
     Height = 23
     Top = 5
     Width = 66
-    AutoSize = False
     ItemHeight = 15
     ItemIndex = 0
     Items.Strings = (

@@ -26,7 +26,6 @@ object frmQualityCheck: TfrmQualityCheck
     Height = 23
     Top = 8
     Width = 452
-    AutoSize = False
     ItemHeight = 15
     OnChange = cboRulesChange
     Style = csDropDownList

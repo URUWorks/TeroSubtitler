@@ -85,7 +85,6 @@ object frmFixSubtitles: TfrmFixSubtitles
       Top = 471
       Width = 188
       Anchors = [akLeft, akRight, akBottom]
-      AutoSize = False
       ItemHeight = 15
       OnSelect = cboConventionSelect
       Style = csDropDownList
@@ -106,7 +105,6 @@ object frmFixSubtitles: TfrmFixSubtitles
       Top = 503
       Width = 188
       Anchors = [akLeft, akRight, akBottom]
-      AutoSize = False
       ItemHeight = 15
       OnChange = clbOptionsClickCheck
       Style = csDropDownList
@@ -127,7 +125,6 @@ object frmFixSubtitles: TfrmFixSubtitles
       Top = 535
       Width = 188
       Anchors = [akLeft, akRight, akBottom]
-      AutoSize = False
       ItemHeight = 15
       OnChange = clbOptionsClickCheck
       Style = csDropDownList

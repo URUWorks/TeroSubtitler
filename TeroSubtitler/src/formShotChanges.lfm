@@ -121,7 +121,6 @@ object frmShotChanges: TfrmShotChanges
     Top = 350
     Width = 186
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     BorderSpacing.Right = 8
     Increment = 0.1
     MaxValue = 0.9
@@ -158,7 +157,6 @@ object frmShotChanges: TfrmShotChanges
     Top = 288
     Width = 186
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 5
@@ -177,7 +175,6 @@ object frmShotChanges: TfrmShotChanges
     Top = 319
     Width = 186
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 6
@@ -247,7 +244,6 @@ object frmShotChanges: TfrmShotChanges
     Top = 257
     Width = 186
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 4

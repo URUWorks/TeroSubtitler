@@ -527,7 +527,6 @@ object frmMain: TfrmMain
             Height = 23
             Top = 2
             Width = 118
-            AutoSize = False
             ItemHeight = 15
             OnChange = cboActorChange
             OnKeyDown = cboActorKeyDown
@@ -1069,7 +1068,6 @@ object frmMain: TfrmMain
         Height = 23
         Top = 0
         Width = 90
-        AutoSize = False
         ItemHeight = 15
         OnSelect = cboInputFPSSelect
         Style = csDropDownList
@@ -1081,7 +1079,6 @@ object frmMain: TfrmMain
         Height = 23
         Top = 0
         Width = 90
-        AutoSize = False
         ItemHeight = 15
         OnKeyPress = cboFPSKeyPress
         OnSelect = cboFPSSelect
@@ -1124,7 +1121,6 @@ object frmMain: TfrmMain
         Height = 23
         Top = 0
         Width = 180
-        AutoSize = False
         ItemHeight = 15
         Style = csDropDownList
         TabOrder = 0
@@ -1157,7 +1153,6 @@ object frmMain: TfrmMain
         Height = 23
         Top = 0
         Width = 180
-        AutoSize = False
         ItemHeight = 15
         Style = csDropDownList
         TabOrder = 0

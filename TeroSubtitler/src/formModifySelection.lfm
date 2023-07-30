@@ -18,7 +18,6 @@ object frmModifySelection: TfrmModifySelection
     Height = 23
     Top = 8
     Width = 128
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 1
@@ -28,7 +27,6 @@ object frmModifySelection: TfrmModifySelection
     Height = 23
     Top = 8
     Width = 192
-    AutoSize = False
     TabOrder = 0
   end
   object btnApply: TButton

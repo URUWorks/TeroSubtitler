@@ -27,7 +27,6 @@ object frmGoTo: TfrmGoTo
     Top = 28
     Width = 264
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     NumbersOnly = True
     OnChange = edtNumberChange
     TabOrder = 0

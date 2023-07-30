@@ -52,7 +52,6 @@ object frmCustomSelectDlg: TfrmCustomSelectDlg
     Top = 28
     Width = 434
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     BorderSpacing.Right = 8
     ItemHeight = 15
     Style = csDropDownList

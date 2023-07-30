@@ -29,7 +29,6 @@ object frmCompare: TfrmCompare
       Top = 8
       Width = 388
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       BorderSpacing.Right = 5
       ReadOnly = True
       TabOrder = 0
@@ -89,7 +88,6 @@ object frmCompare: TfrmCompare
       Top = 8
       Width = 387
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       BorderSpacing.Right = 5
       ReadOnly = True
       TabOrder = 0

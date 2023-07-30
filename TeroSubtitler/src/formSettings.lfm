@@ -65,7 +65,6 @@ object frmSettings: TfrmSettings
       Top = 0
       Width = 268
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 0
@@ -77,7 +76,6 @@ object frmSettings: TfrmSettings
       Top = 32
       Width = 268
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       BorderSpacing.Top = 8
       TabOrder = 1
     end
@@ -96,7 +94,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 64
       Width = 134
-      AutoSize = False
       BorderSpacing.Top = 8
       ItemHeight = 15
       ItemIndex = 0
@@ -132,7 +129,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 96
       Width = 134
-      AutoSize = False
       BorderSpacing.Top = 8
       ItemHeight = 15
       Style = csDropDownList
@@ -153,7 +149,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 128
       Width = 134
-      AutoSize = False
       BorderSpacing.Top = 8
       ItemHeight = 15
       Style = csDropDownList
@@ -174,7 +169,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 224
       Width = 67
-      AutoSize = False
       BorderSpacing.Top = 8
       MaxValue = 30
       TabOrder = 7
@@ -240,7 +234,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 192
       Width = 67
-      AutoSize = False
       BorderSpacing.Top = 8
       MaxValue = 10000
       TabOrder = 6
@@ -261,7 +254,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 160
       Width = 134
-      AutoSize = False
       BorderSpacing.Top = 8
       ItemHeight = 15
       Style = csDropDownList
@@ -322,7 +314,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 128
       Width = 80
-      AutoSize = False
       MaxValue = 5000
       OnChange = spnConventionChange
       TabOrder = 5
@@ -342,7 +333,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 160
       Width = 80
-      AutoSize = False
       MaxValue = 5000
       OnChange = spnConventionChange
       TabOrder = 6
@@ -362,7 +352,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 224
       Width = 80
-      AutoSize = False
       MaxValue = 10000
       OnChange = spnConventionChange
       TabOrder = 8
@@ -382,7 +371,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 288
       Width = 80
-      AutoSize = False
       MaxValue = 10000
       OnChange = spnConventionChange
       TabOrder = 10
@@ -394,7 +382,6 @@ object frmSettings: TfrmSettings
       Top = 32
       Width = 268
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       OnChange = spnConventionChange
       TabOrder = 2
     end
@@ -404,7 +391,6 @@ object frmSettings: TfrmSettings
       Top = 64
       Width = 268
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       OnChange = spnConventionChange
       TabOrder = 3
     end
@@ -443,7 +429,6 @@ object frmSettings: TfrmSettings
       Top = 0
       Width = 215
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       BorderSpacing.Right = 5
       ItemHeight = 15
       OnSelect = cboProfileSelect
@@ -485,7 +470,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 256
       Width = 80
-      AutoSize = False
       MaxValue = 10
       OnChange = spnConventionChange
       TabOrder = 9
@@ -505,7 +489,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 320
       Width = 80
-      AutoSize = False
       MaxValue = 1000
       OnChange = spnConventionChange
       TabOrder = 12
@@ -525,7 +508,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 352
       Width = 80
-      AutoSize = False
       MaxValue = 1000
       OnChange = spnConventionChange
       TabOrder = 13
@@ -536,7 +518,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 384
       Width = 80
-      AutoSize = False
       MaxValue = 500
       OnChange = spnConventionChange
       TabOrder = 14
@@ -565,7 +546,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 192
       Width = 80
-      AutoSize = False
       MaxValue = 5000
       OnChange = spnConventionChange
       TabOrder = 7
@@ -578,7 +558,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 288
       Width = 127
-      AutoSize = False
       ItemHeight = 15
       OnChange = spnConventionChange
       Style = csDropDownList
@@ -590,7 +569,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 96
       Width = 268
-      AutoSize = False
       OnChange = spnConventionChange
       TabOrder = 4
     end
@@ -617,7 +595,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 416
       Width = 80
-      AutoSize = False
       MaxValue = 20
       OnChange = spnConventionChange
       TabOrder = 15
@@ -637,7 +614,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 448
       Width = 80
-      AutoSize = False
       MaxValue = 15
       OnChange = spnConventionChange
       TabOrder = 16
@@ -656,7 +632,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 480
       Width = 80
-      AutoSize = False
       MaxValue = 15
       OnChange = spnConventionChange
       TabOrder = 17
@@ -687,7 +662,6 @@ object frmSettings: TfrmSettings
       Top = 0
       Width = 268
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 0
@@ -707,7 +681,6 @@ object frmSettings: TfrmSettings
       Top = 32
       Width = 268
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 1
@@ -807,7 +780,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 228
       Width = 80
-      AutoSize = False
       MaxValue = 150
       MinValue = 1
       TabOrder = 4
@@ -917,7 +889,6 @@ object frmSettings: TfrmSettings
       Top = 0
       Width = 215
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       BorderSpacing.Right = 5
       TabOrder = 0
     end
@@ -947,7 +918,6 @@ object frmSettings: TfrmSettings
       Top = 32
       Width = 215
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       BorderSpacing.Right = 5
       TabOrder = 2
     end
@@ -990,7 +960,6 @@ object frmSettings: TfrmSettings
       Top = 32
       Width = 348
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       ItemHeight = 15
       OnSelect = cboShortcutCatSelect
       Style = csDropDownList
@@ -1031,7 +1000,6 @@ object frmSettings: TfrmSettings
       Top = 0
       Width = 156
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       BorderSpacing.Right = 5
       ItemHeight = 15
       OnSelect = cboShortCutPresetSelect
@@ -1114,7 +1082,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 56
       Width = 80
-      AutoSize = False
       MaxValue = 10000
       MinValue = 100
       TabOrder = 2
@@ -1134,7 +1101,6 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 89
       Width = 80
-      AutoSize = False
       MaxValue = 60
       MinValue = 1
       TabOrder = 3

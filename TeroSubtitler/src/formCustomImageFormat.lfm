@@ -18,7 +18,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 28
     Width = 292
-    AutoSize = False
     ItemHeight = 15
     OnSelect = cboScriptSelect
     Style = csDropDownList
@@ -45,7 +44,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 28
     Width = 75
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 1
@@ -79,7 +77,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 372
-    AutoSize = False
     TabOrder = 2
   end
   object edtFolder: TEdit
@@ -87,7 +84,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 140
     Width = 292
-    AutoSize = False
     TabOrder = 3
   end
   object lblPrefix: TLabel
@@ -128,7 +124,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 28
     Width = 75
-    AutoSize = False
     MaxValue = 7680
     MinValue = 160
     TabOrder = 5
@@ -139,7 +134,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 28
     Width = 75
-    AutoSize = False
     MaxValue = 4320
     MinValue = 160
     TabOrder = 6
@@ -166,7 +160,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
-    AutoSize = False
     MaxValue = 20
     TabOrder = 8
   end
@@ -178,7 +171,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
-    AutoSize = False
     BorderSpacing.Left = 5
     MaxValue = 20
     TabOrder = 9
@@ -191,7 +183,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
-    AutoSize = False
     BorderSpacing.Left = 5
     MaxValue = 20
     TabOrder = 10
@@ -204,7 +195,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
-    AutoSize = False
     BorderSpacing.Left = 5
     MaxValue = 20
     TabOrder = 11
@@ -218,7 +208,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Top = 140
     Width = 235
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     ItemHeight = 15
     OnSelect = cboFontSelect
     Style = csDropDownList
@@ -240,7 +229,6 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 140
     Width = 75
-    AutoSize = False
     BorderSpacing.Left = 5
     MaxValue = 1000
     MinValue = 2

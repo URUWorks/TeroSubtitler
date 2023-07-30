@@ -18,7 +18,6 @@ object frmCustomFileDlg: TfrmCustomFileDlg
     Top = 28
     Width = 292
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     BorderSpacing.Right = 5
     OnChange = edtFileNameChange
     TabOrder = 0
@@ -45,7 +44,6 @@ object frmCustomFileDlg: TfrmCustomFileDlg
     Height = 23
     Top = 84
     Width = 292
-    AutoSize = False
     ItemHeight = 15
     OnSelect = cboFormatSelect
     Style = csDropDownList
@@ -113,7 +111,6 @@ object frmCustomFileDlg: TfrmCustomFileDlg
     Height = 23
     Top = 84
     Width = 75
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 3

@@ -27,7 +27,6 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     Top = 28
     Width = 264
     Anchors = [akLeft, akRight, akBottom]
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 0
@@ -62,7 +61,6 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     Top = 66
     Width = 50
     Anchors = [akLeft, akBottom]
-    AutoSize = False
     NumbersOnly = True
     TabOrder = 3
     Text = '1'
@@ -82,7 +80,6 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     Top = 96
     Width = 50
     Anchors = [akLeft, akBottom]
-    AutoSize = False
     NumbersOnly = True
     TabOrder = 4
     Text = '1'
@@ -102,7 +99,6 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     Top = 126
     Width = 50
     Anchors = [akLeft, akBottom]
-    AutoSize = False
     NumbersOnly = True
     TabOrder = 5
     Text = '1'

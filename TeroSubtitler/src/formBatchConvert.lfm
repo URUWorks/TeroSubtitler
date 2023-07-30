@@ -136,7 +136,6 @@ object frmBatchConvert: TfrmBatchConvert
     Top = 251
     Width = 348
     Anchors = [akLeft, akRight, akBottom]
-    AutoSize = False
     BorderSpacing.Right = 5
     TabOrder = 6
   end
@@ -155,7 +154,6 @@ object frmBatchConvert: TfrmBatchConvert
     Top = 280
     Width = 400
     Anchors = [akLeft, akRight, akBottom]
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 8
@@ -174,7 +172,6 @@ object frmBatchConvert: TfrmBatchConvert
     Top = 309
     Width = 401
     Anchors = [akLeft, akRight, akBottom]
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 9
@@ -202,7 +199,6 @@ object frmBatchConvert: TfrmBatchConvert
     Top = 338
     Width = 208
     Anchors = [akLeft, akRight, akBottom]
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 10
@@ -213,7 +209,6 @@ object frmBatchConvert: TfrmBatchConvert
     Top = 367
     Width = 208
     Anchors = [akLeft, akRight, akBottom]
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 11

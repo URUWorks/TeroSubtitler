@@ -26,7 +26,6 @@ object frmSpellCheck: TfrmSpellCheck
     Height = 23
     Top = 8
     Width = 240
-    AutoSize = False
     ItemHeight = 15
     OnChange = cboDictionaryChange
     Style = csDropDownList
@@ -150,7 +149,6 @@ object frmSpellCheck: TfrmSpellCheck
     Height = 23
     Top = 309
     Width = 352
-    AutoSize = False
     BorderSpacing.Top = 5
     TabOrder = 4
   end
@@ -167,7 +165,6 @@ object frmSpellCheck: TfrmSpellCheck
     Height = 23
     Top = 40
     Width = 240
-    AutoSize = False
     ItemHeight = 15
     OnChange = cboSourceChange
     Style = csDropDownList

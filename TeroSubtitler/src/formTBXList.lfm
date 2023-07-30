@@ -101,7 +101,6 @@ object frmTBXList: TfrmTBXList
     Top = 368
     Width = 180
     Anchors = [akTop, akRight]
-    AutoSize = False
     BorderSpacing.Right = 5
     OnChange = edtFindChange
     TabOrder = 0

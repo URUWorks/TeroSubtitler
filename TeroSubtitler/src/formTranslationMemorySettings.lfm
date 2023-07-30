@@ -20,7 +20,6 @@ object frmTranslationMemorySettings: TfrmTranslationMemorySettings
     Top = 8
     Width = 302
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     BorderSpacing.Right = 5
     TabOrder = 0
   end
@@ -46,7 +45,6 @@ object frmTranslationMemorySettings: TfrmTranslationMemorySettings
     Height = 23
     Top = 42
     Width = 355
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 2
@@ -64,7 +62,6 @@ object frmTranslationMemorySettings: TfrmTranslationMemorySettings
     Height = 23
     Top = 74
     Width = 355
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 3

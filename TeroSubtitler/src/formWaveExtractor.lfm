@@ -60,7 +60,6 @@ object frmWaveExtractor: TfrmWaveExtractor
     Top = 8
     Width = 409
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 0

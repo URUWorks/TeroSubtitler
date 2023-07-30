@@ -30,7 +30,6 @@ object frmTimeExpander: TfrmTimeExpander
     Top = 8
     Width = 64
     Anchors = [akTop]
-    AutoSize = False
     NumbersOnly = True
     OnChange = edtTimeChange
     TabOrder = 1
@@ -83,7 +82,6 @@ object frmTimeExpander: TfrmTimeExpander
     Height = 23
     Top = 72
     Width = 64
-    AutoSize = False
     NumbersOnly = True
     OnChange = edtTimeChange
     TabOrder = 3
@@ -113,7 +111,6 @@ object frmTimeExpander: TfrmTimeExpander
     Height = 23
     Top = 140
     Width = 64
-    AutoSize = False
     NumbersOnly = True
     OnChange = edtTimeChange
     TabOrder = 5

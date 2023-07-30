@@ -96,7 +96,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 128
       Width = 91
-      AutoSize = False
       MaxValue = 5000
       TabOrder = 4
       Value = 1000
@@ -115,7 +114,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 160
       Width = 91
-      AutoSize = False
       MaxValue = 5000
       TabOrder = 5
       Value = 1000
@@ -134,7 +132,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 224
       Width = 91
-      AutoSize = False
       MaxValue = 10000
       TabOrder = 7
       Value = 8000
@@ -153,7 +150,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 288
       Width = 91
-      AutoSize = False
       MaxValue = 10000
       TabOrder = 9
       Value = 200
@@ -164,7 +160,6 @@ object frmConventions: TfrmConventions
       Top = 32
       Width = 339
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       TabOrder = 1
     end
     object edtProhibitedChars: TEdit
@@ -173,7 +168,6 @@ object frmConventions: TfrmConventions
       Top = 64
       Width = 339
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       TabOrder = 2
     end
     object lblRepeatableChars: TLabel
@@ -217,7 +211,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 256
       Width = 91
-      AutoSize = False
       MaxValue = 10
       TabOrder = 8
       Value = 2
@@ -236,7 +229,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 320
       Width = 91
-      AutoSize = False
       MaxValue = 1000
       TabOrder = 11
       Value = 15
@@ -255,7 +247,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 352
       Width = 91
-      AutoSize = False
       MaxValue = 1000
       TabOrder = 12
       Value = 180
@@ -265,7 +256,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 384
       Width = 91
-      AutoSize = False
       MaxValue = 500
       TabOrder = 13
       Value = 37
@@ -294,7 +284,6 @@ object frmConventions: TfrmConventions
       Top = 0
       Width = 339
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       TabOrder = 0
     end
     object lblMinDurationPerWordMs: TLabel
@@ -311,7 +300,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 192
       Width = 91
-      AutoSize = False
       MaxValue = 5000
       TabOrder = 6
       Value = 1000
@@ -328,7 +316,6 @@ object frmConventions: TfrmConventions
       Top = 288
       Width = 243
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       BorderSpacing.Left = 5
       ItemHeight = 15
       Style = csDropDownList
@@ -341,7 +328,6 @@ object frmConventions: TfrmConventions
       Top = 96
       Width = 339
       Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
       TabOrder = 3
     end
     object lblCPSStrategy: TLabel
@@ -367,7 +353,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 416
       Width = 91
-      AutoSize = False
       MaxValue = 20
       TabOrder = 14
       Value = 12
@@ -386,7 +371,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 448
       Width = 91
-      AutoSize = False
       MaxValue = 15
       TabOrder = 15
     end
@@ -404,7 +388,6 @@ object frmConventions: TfrmConventions
       Height = 23
       Top = 480
       Width = 91
-      AutoSize = False
       MaxValue = 15
       TabOrder = 16
       Value = 2

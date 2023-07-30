@@ -19,7 +19,6 @@ object frmDurationLimits: TfrmDurationLimits
     Top = 32
     Width = 283
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     NumbersOnly = True
     TabOrder = 0
     Text = '1'
@@ -30,7 +29,6 @@ object frmDurationLimits: TfrmDurationLimits
     Top = 104
     Width = 283
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     NumbersOnly = True
     TabOrder = 1
     Text = '1'

@@ -28,7 +28,6 @@ object frmAudioToText: TfrmAudioToText
     Height = 23
     Top = 40
     Width = 283
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 1
@@ -50,7 +49,6 @@ object frmAudioToText: TfrmAudioToText
     Top = 72
     Width = 230
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     BorderSpacing.Right = 5
     ItemHeight = 15
     Style = csDropDownList
@@ -106,7 +104,6 @@ object frmAudioToText: TfrmAudioToText
     Height = 23
     Top = 8
     Width = 283
-    AutoSize = False
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 0

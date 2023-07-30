@@ -87,7 +87,6 @@ object frmFormatProperties: TfrmFormatProperties
     Top = 8
     Width = 352
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     ItemHeight = 15
     OnSelect = cboFormatsSelect
     Style = csDropDownList
@@ -159,7 +158,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 32
       Width = 200
-      AutoSize = False
       TabOrder = 1
     end
     object spnASFontSize: TSpinEdit
@@ -167,7 +165,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 64
       Width = 200
-      AutoSize = False
       MaxValue = 600
       MinValue = 1
       TabOrder = 2
@@ -194,7 +191,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 128
       Width = 200
-      AutoSize = False
       MaxValue = 100
       TabOrder = 3
     end
@@ -211,7 +207,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 160
       Width = 200
-      AutoSize = False
       MaxValue = 100
       TabOrder = 4
     end
@@ -228,7 +223,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 192
       Width = 200
-      AutoSize = False
       MaxValue = 100
       TabOrder = 5
     end
@@ -245,7 +239,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 224
       Width = 200
-      AutoSize = False
       MaxValue = 100
       TabOrder = 6
     end
@@ -262,7 +255,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 256
       Width = 200
-      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 7
@@ -282,7 +274,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 0
       Width = 200
-      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 0
@@ -375,7 +366,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 0
       Width = 200
-      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 0
@@ -385,7 +375,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 32
       Width = 200
-      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 1
@@ -395,7 +384,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 64
       Width = 200
-      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 2
@@ -419,7 +407,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 192
       Width = 200
-      AutoSize = False
       MaxValue = 255
       MinValue = 1
       TabOrder = 6
@@ -430,7 +417,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 224
       Width = 200
-      AutoSize = False
       MaxValue = 10
       MinValue = 1
       TabOrder = 7
@@ -528,7 +514,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 128
       Width = 200
-      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 4
@@ -634,7 +619,6 @@ object frmFormatProperties: TfrmFormatProperties
       Height = 23
       Top = 128
       Width = 200
-      AutoSize = False
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 4
