@@ -2,12 +2,12 @@ object frmCustomImageFormat: TfrmCustomImageFormat
   Left = 245
   Height = 417
   Top = 119
-  Width = 724
+  Width = 723
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Custom image format'
   ClientHeight = 417
-  ClientWidth = 724
+  ClientWidth = 723
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -40,19 +40,24 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     ParentColor = False
   end
   object cboFPS: TComboBox
+    AnchorSideLeft.Control = cboScript
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = cboScript
     Left = 305
     Height = 23
     Top = 28
     Width = 75
+    BorderSpacing.Left = 5
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 1
   end
   object btnSave: TButton
+    AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
     Left = 528
     Height = 26
-    Top = 384
+    Top = 383
     Width = 91
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
@@ -63,10 +68,17 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     TabOrder = 14
   end
   object btnClose: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
     Left = 624
     Height = 26
     Top = 383
     Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
@@ -103,10 +115,15 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     ParentColor = False
   end
   object btnFolder: TButton
-    Left = 306
+    AnchorSideLeft.Control = edtFolder
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtFolder
+    AnchorSideTop.Side = asrCenter
+    Left = 305
     Height = 23
     Top = 140
     Width = 75
+    BorderSpacing.Left = 5
     Caption = '...'
     OnClick = btnFolderClick
     TabOrder = 4
@@ -160,7 +177,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Height = 23
     Top = 84
     Width = 75
-    MaxValue = 20
+    MaxValue = 250
     TabOrder = 8
   end
   object spnTop: TSpinEdit
@@ -172,7 +189,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Top = 84
     Width = 75
     BorderSpacing.Left = 5
-    MaxValue = 20
+    MaxValue = 250
     TabOrder = 9
   end
   object spnRight: TSpinEdit
@@ -184,7 +201,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Top = 84
     Width = 75
     BorderSpacing.Left = 5
-    MaxValue = 20
+    MaxValue = 250
     TabOrder = 10
   end
   object spnBottom: TSpinEdit
@@ -196,7 +213,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Top = 84
     Width = 75
     BorderSpacing.Left = 5
-    MaxValue = 20
+    MaxValue = 250
     TabOrder = 11
   end
   object cboFont: TComboBox
@@ -230,7 +247,7 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Top = 140
     Width = 75
     BorderSpacing.Left = 5
-    MaxValue = 1000
+    MaxValue = 999
     MinValue = 2
     OnChange = cboFontSelect
     TabOrder = 13
