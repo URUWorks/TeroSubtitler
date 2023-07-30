@@ -937,7 +937,7 @@ object frmSettings: TfrmSettings
       Top = 36
       Width = 246
       AutoSize = False
-      Caption = 'SceneDetect folder'
+      Caption = 'PySceneDetect folder'
       ParentColor = False
     end
     object edtSceneDetect: TEdit

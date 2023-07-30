@@ -378,7 +378,8 @@
       <lblToolBarWave>Forma de onda</lblToolBarWave>
       <lblShortcutCat>Categoría</lblShortcutCat>
       <lblShortcut>Atajo</lblShortcut>      
-      <lblFFMPEG>Ruta de ffmpeg</lblFFMPEG>      
+      <lblFFMPEG>Ruta de FFmpeg</lblFFMPEG>
+      <lblSceneDetect>Ruta de PySceneDetect</lblSceneDetect>            
       <lblSeekTime>Tiempo para adelanto/retroceso (ms)</lblSeekTime>
       <lblFrameStep>Pasos de fotogramas</lblFrameStep>                
     </Section>
@@ -586,7 +587,7 @@
       <lbllibmpvDesc>El potente motor multimedia mpv utilizado para la reproducción.</lbllibmpvDesc>
       <lblYTDLP>yt-dlp:</lblYTDLP>
       <lblYTDLPDesc>Adición para abrir videos a través de URL.</lblYTDLPDesc>            
-      <lblFFMPEG>ffmpeg:</lblFFMPEG>
+      <lblFFMPEG>FFmpeg:</lblFFMPEG>
       <lblffmpegDesc>La solución absoluta para la extracción de audio y cambios de escena.</lblffmpegDesc>
       <lblWhisper>whisper.cpp:</lblWhisper>
       <lblWhisperDesc>Reconocimiento automático de voz usado en audio a texto.</lblWhisperDesc>                

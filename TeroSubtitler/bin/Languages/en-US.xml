@@ -378,7 +378,8 @@
       <lblToolBarWave>Waveform</lblToolBarWave>
       <lblShortcutCat>Category</lblShortcutCat>
       <lblShortcut>Shortcut</lblShortcut>      
-      <lblFFMPEG>ffmpeg folder</lblFFMPEG>
+      <lblFFMPEG>FFmpeg folder</lblFFMPEG>
+      <lblSceneDetect>PySceneDetect folder</lblSceneDetect>
       <lblSeekTime>Seek time (ms)</lblSeekTime>
       <lblFrameStep>Frame step</lblFrameStep>
     </Section>
@@ -586,7 +587,7 @@
       <lbllibmpvDesc>The powerful mpv multimedia engine used for playback.</lbllibmpvDesc>
       <lblYTDLP>yt-dlp:</lblYTDLP>
       <lblYTDLPDesc>Addition for opening videos via URL.</lblYTDLPDesc>      
-      <lblFFMPEG>ffmpeg:</lblFFMPEG>
+      <lblFFMPEG>FFmpeg:</lblFFMPEG>
       <lblffmpegDesc>The absolute solution for audio, and shot changes extraction.</lblffmpegDesc>
       <lblWhisper>whisper.cpp:</lblWhisper>
       <lblWhisperDesc>Automatic speech recognition for audio-to-text.</lblWhisperDesc>                                            
