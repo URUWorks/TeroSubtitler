@@ -24,6 +24,36 @@ interface
 uses
   Classes, SysUtils, Graphics, UWSubtitleAPI;
 
+type
+
+  TCustomResolution = record
+    Name   : String;
+    Width  : Integer;
+    Height : Integer;
+  end;
+
+const
+
+  TResolutionList : array[0..15] of TCustomResolution =
+  (
+    (Name: '8K (7680x4320)'; Width: 7680; Height: 4320),
+    (Name: '4K (4096x2160)'; Width: 4096; Height: 2160),
+    (Name: 'UHD (3840x2160)'; Width: 3840; Height: 2160),
+    (Name: '2K (2048x1080)'; Width: 2048; Height: 1080),
+    (Name: '2K CinemaScope (2048x858)'; Width: 2048; Height: 858),
+    (Name: '2K Flat (1998x1080)'; Width: 1998; Height: 1080),
+    (Name: 'FHD (1920x1080)'; Width: 1920; Height: 1080),
+    (Name: '1440x1080'; Width: 1440; Height: 1080),
+    (Name: 'HD (1280x720)'; Width: 1280; Height: 720),
+    (Name: '960x720'; Width: 960; Height: 720),
+    (Name: '480p (848x480)'; Width: 848; Height: 480),
+    (Name: 'PAL (720x576)'; Width: 720; Height: 576),
+    (Name: 'NTSC (720x480)'; Width: 720; Height: 480),
+    (Name: 'SD (640x480)'; Width: 640; Height: 480),
+    (Name: '640x352'; Width: 640; Height: 352),
+    (Name: '640x272'; Width: 640; Height: 272)
+  );
+
 function CFReplaceHeaderTags(const S, TimeFormat, FPS: String; const W, H: Integer): String;
 function CFReplaceBodyTags(const S, TimeFormat, FPS: String; const Item: TUWSubtitleItem; const InFrames: Boolean; const NewChar: String; const Index: Integer; const ImageFile: String = ''; const W: Integer = 0; const H: Integer = 0): String;
 function CFFixExtension(const AFileName, AExtension: String): String;

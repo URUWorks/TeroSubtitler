@@ -22,7 +22,7 @@ unit formCustomImageFormat;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin, Menus,
   UWTextBox, UWSubtitleAPI.CustomFormat, UWSubtitleAPI, UWSubtitleAPI.Tags;
 
 type
@@ -30,6 +30,7 @@ type
   { TfrmCustomImageFormat }
 
   TfrmCustomImageFormat = class(TForm)
+    btnRes: TButton;
     btnSave: TButton;
     btnClose: TButton;
     btnFolder: TButton;
@@ -48,6 +49,7 @@ type
     lblPrefix: TLabel;
     lblFolder: TLabel;
     lblImageSize: TLabel;
+    popRes: TPopupMenu;
     spnFontSize: TSpinEdit;
     spnTop: TSpinEdit;
     spnBottom: TSpinEdit;
@@ -58,6 +60,7 @@ type
     ttbPreview: TUWTextBox;
     procedure btnCloseClick(Sender: TObject);
     procedure btnFolderClick(Sender: TObject);
+    procedure btnResClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure cboFontSelect(Sender: TObject);
     procedure cboScriptSelect(Sender: TObject);
@@ -67,6 +70,7 @@ type
   private
     CustomFormat: TUWSubtitleCustomImageFormat;
     StatusString: String;
+    procedure ResItemClick(Sender: TObject);
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure SaveImageFile(const AFileName: String; const AIndex: Integer);
   public
@@ -95,6 +99,7 @@ uses
 procedure TfrmCustomImageFormat.FormCreate(Sender: TObject);
 var
   i: Integer;
+  m: TMenuItem;
 begin
   LoadLanguage(Self);
   CustomFormat := TUWSubtitleCustomImageFormat.Create('');
@@ -108,6 +113,16 @@ begin
     cboFont.ItemIndex := i
   else
     cboFont.ItemIndex := 0;
+
+  popRes.Items.Clear;
+  for i := 0 to High(TResolutionList) do
+  begin
+    m := TMenuItem.Create(popRes);
+    m.Caption := TResolutionList[i].Name;
+    m.Tag := i;
+    m.OnClick := @ResItemClick;
+    popRes.Items.Add(m);
+  end;
 
   StatusString := GetCommonString('WriteStatus');
 
@@ -158,6 +173,13 @@ begin
   finally
     Free;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmCustomImageFormat.btnResClick(Sender: TObject);
+begin
+  popRes.PopUp;
 end;
 
 // -----------------------------------------------------------------------------
@@ -260,6 +282,17 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmCustomImageFormat.ResItemClick(Sender: TObject);
+begin
+  with TResolutionList[TMenuItem(Sender).Tag] do
+  begin
+    spnWidth.Value  := Width;
+    spnHeight.Value := Height;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmCustomImageFormat.SetControlsEnabled(const AValue: Boolean);
 begin
   cboScript.Enabled := AValue;
@@ -269,6 +302,7 @@ begin
   btnFolder.Enabled := AValue;
   spnWidth.Enabled := AValue;
   spnHeight.Enabled := AValue;
+  btnRes.Enabled := AValue;
   spnLeft.Enabled := AValue;
   spnTop.Enabled := AValue;
   spnRight.Enabled := AValue;
