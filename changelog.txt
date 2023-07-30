@@ -1,4 +1,4 @@
-1.0.0.8 (x.8.2023)
+1.0.0.8 (30.7.2023)
 - fixed: Project autoname #132
 - fixed: Missing strings in language file
 - fixed: Remember settings in Auto Translate
