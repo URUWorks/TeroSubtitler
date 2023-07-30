@@ -19,7 +19,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
-      <BuildNr Value="8"/>
+      <BuildNr Value="9"/>
       <StringTable CompanyName="URUWorks" FileDescription="Tero Subtitler" LegalCopyright="Copyright © 2023 URUWorks." ProductName="Tero Subtitler"/>
     </VersionInfo>
     <BuildModes>
