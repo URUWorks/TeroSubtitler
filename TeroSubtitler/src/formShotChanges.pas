@@ -109,7 +109,7 @@ begin
     BeginUpdate;
     Clear;
     Add('FFmpeg');
-    Add('PySceneDetect');
+    if FileExists(SceneDetectFileName) then Add('PySceneDetect');
     EndUpdate;
   end;
   with cboTimeCodeImport.Items do
