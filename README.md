@@ -46,9 +46,9 @@ Auto-translation API.
 
 ### Internal packages required to compile
 
+- [UW Common units](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/common)
 - [UW Subtitle API](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/subtitleapi)
 - [UW Tero controls](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/controls)
-- [UW Common units](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/common)
 
 ### External packages required to compile
 
