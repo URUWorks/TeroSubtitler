@@ -379,6 +379,7 @@
       <lblShortcutCat>Категория</lblShortcutCat>
       <lblShortcut>Ярлык</lblShortcut>      
       <lblFFMPEG>Путь к ffmpeg</lblFFMPEG>
+      <lblSceneDetect>Путь к PySceneTools</lblSceneDetect>
       <lblSeekTime>Время поиска (ms)</lblSeekTime>
       <lblFrameStep>Шаг фрейма</lblFrameStep>
     </Section>
@@ -730,7 +731,8 @@
     <FeatureNotAvailableFromURL>Функция недоступна для онлайн видео.</FeatureNotAvailableFromURL> 
     <MultipleTracksDetected>Обнаружено несколько дорожек</MultipleTracksDetected> 
     <SelectTrackToUse>Выберите нужную дорожку:</SelectTrackToUse>
-    <WriteStatus>Экспорт изображений %d/%d</WriteStatus>    
+    <WriteStatus>Экспорт изображений %d/%d</WriteStatus>
+    <ShortCutInUse>Горячая клавиша используется тут: '%s'.</ShortCutInUse>
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>Все субтитры</rbnAllTheSubtitles>
@@ -752,6 +754,8 @@
     <btnRestore>Восстановить</btnRestore>
     <btnAdd>Добавить</btnAdd>
     <btnRemove>Удалить</btnRemove>
+    <btnPlus>+</btnPlus>
+    <btnMinus>-</btnMinus>
     <btnSelectAll>Выбрать всё</btnSelectAll>
     <btnInvert>Инвертиров.</btnInvert>        
     <btnScanFolder>Сканировать</btnScanFolder>    
