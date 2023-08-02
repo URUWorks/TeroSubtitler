@@ -30,7 +30,7 @@ const
 
   ProgramName       = 'Tero Subtitler';
   ProgramWebsite    = 'https://uruworks.net';
-  ProgramHelpURL    = 'https://uruworks.net';
+  ProgramHelpURL    = 'https://help.uruworks.net';
   ProgramUpdateURL  = 'https://raw.githubusercontent.com/URUWorks/TeroSubtitler/main/version.txt';
   ProgramReleaseURL = 'https://github.com/URUWorks/TeroSubtitler/releases';
   UWDonateURL       = 'https://www.paypal.me/URUWorks';
