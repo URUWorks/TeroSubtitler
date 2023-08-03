@@ -47,6 +47,7 @@ type
     AddHyphenSpace     : Boolean;
     CPSLineLenStrategy : String;
     ShotcutSnapArea    : Cardinal;
+    ShotcutThreshold   : Cardinal;
     ShotcutInCues      : Cardinal;
     ShotcutOutCues     : Cardinal;
   end;
@@ -69,8 +70,8 @@ type
     procedure Close;
     procedure LoadFromFile(const AFileName: String);
     function SaveToFile(const AFileName: String): Boolean;
-    function AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
-    procedure UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
+    function AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
+    procedure UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
     function Ready: Boolean;
     procedure FillTStrings(const AStrings: TStrings; const AClear: Boolean = True);
     function FindItemIndex(const AName: String): Integer;
@@ -205,8 +206,9 @@ begin
             DotsOnSplit        := TryGetNamedItem(NodeProfile, 'DotsOnSplit').ToBoolean;
             CPSLineLenStrategy := TryGetNamedItem(NodeProfile, 'CPSLineLenStrategy');
             ShotcutSnapArea    := TryGetNamedItem(NodeProfile, 'ShotcutSnapArea').ToInteger;
+            ShotcutThreshold   := TryGetNamedItem(NodeProfile, 'ShotcutThreshold').ToInteger;
             ShotcutInCues      := TryGetNamedItem(NodeProfile, 'ShotcutInCues').ToInteger;
-            ShotcutOutCues      := TryGetNamedItem(NodeProfile, 'ShotcutOutCues').ToInteger;
+            ShotcutOutCues     := TryGetNamedItem(NodeProfile, 'ShotcutOutCues').ToInteger;
           end;
           FList.Add(Item);
         except
@@ -261,6 +263,7 @@ begin
         TDOMElement(Node).SetAttribute('DotsOnSplit', DotsOnSplit.ToString);
         TDOMElement(Node).SetAttribute('CPSLineLenStrategy', CPSLineLenStrategy);
         TDOMElement(Node).SetAttribute('ShotcutSnapArea', ShotcutSnapArea.ToString);
+        TDOMElement(Node).SetAttribute('ShotcutThreshold', ShotcutThreshold.ToString);
         TDOMElement(Node).SetAttribute('ShotcutInCues', ShotcutInCues.ToString);
         TDOMElement(Node).SetAttribute('ShotcutOutCues', ShotcutOutCues.ToString);
       end;
@@ -279,7 +282,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TProfiles.AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
+function TProfiles.AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
 var
   Item: PProfileItem;
   i: Integer;
@@ -314,6 +317,7 @@ begin
     DotsOnSplit        := ADotsOnSplit;
     CPSLineLenStrategy := ACPSLineLenStrategy;
     ShotcutSnapArea    := AShotcutSnapArea;
+    ShotcutThreshold   := AShotcutThreshold;
     ShotcutInCues      := AShotcutInCues;
     ShotcutOutCues     := AShotcutOutCues;
   end;
@@ -330,12 +334,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TProfiles.UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
+procedure TProfiles.UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
 begin
   if FList.Count = 0 then Exit;
 
   AddItem(AName, ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration,
-    AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutInCues, AShotcutOutCues,
+    AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues,
     APauseInFrames, ARepeatableChars, AProhibitedChars, ADotsOnSplit, ACPSLineLenStrategy, True, AIndex);
 end;
 

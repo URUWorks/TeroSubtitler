@@ -92,6 +92,7 @@ type
     lblToolBarWave: TLabel;
     lyoFileTypeAssociations: TUWLayout;
     spnSCSnapArea: TSpinEdit;
+    spnSCSnapThreshold: TSpinEdit;
     spnSCSnapInCues: TSpinEdit;
     spnSCSnapOutCues: TSpinEdit;
     spnSubSize: TSpinEdit;
@@ -888,6 +889,7 @@ begin
     spnWPM.Value                := WPM;
     spnCPL.Value                := CPL;
     spnSCSnapArea.Value         := ShotcutSnapArea;
+    spnSCSnapThreshold.Value    := ShotcutThreshold;
     spnSCSnapInCues.Value       := ShotcutInCues;
     spnSCSnapOutCues.Value      := ShotcutOutCues;
     chkDotsOnSplit.Checked      := DotsOnSplit;

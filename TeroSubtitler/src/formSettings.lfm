@@ -294,7 +294,7 @@ object frmSettings: TfrmSettings
   object lyoConventions: TUWLayout
     Left = -336
     Height = 546
-    Top = 192
+    Top = 224
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -420,7 +420,7 @@ object frmSettings: TfrmSettings
       AutoSize = False
       Caption = 'Dots on split'
       OnChange = spnConventionChange
-      TabOrder = 18
+      TabOrder = 19
     end
     object cboProfile: TComboBox
       AnchorSideRight.Control = btnProfile
@@ -598,7 +598,7 @@ object frmSettings: TfrmSettings
       MaxValue = 20
       OnChange = spnConventionChange
       TabOrder = 15
-      Value = 12
+      Value = 7
     end
     object lblSCSnapInCues: TLabel
       Left = 0
@@ -616,7 +616,7 @@ object frmSettings: TfrmSettings
       Width = 80
       MaxValue = 15
       OnChange = spnConventionChange
-      TabOrder = 16
+      TabOrder = 17
     end
     object lblSCSnapOutCues: TLabel
       Left = 0
@@ -634,8 +634,18 @@ object frmSettings: TfrmSettings
       Width = 80
       MaxValue = 15
       OnChange = spnConventionChange
-      TabOrder = 17
+      TabOrder = 18
       Value = 2
+    end
+    object spnSCSnapThreshold: TSpinEdit
+      Left = 336
+      Height = 23
+      Top = 416
+      Width = 80
+      MaxValue = 20
+      OnChange = spnConventionChange
+      TabOrder = 16
+      Value = 11
     end
   end
   object lyoAppearance: TUWLayout

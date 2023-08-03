@@ -148,22 +148,24 @@ procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile:
 
 var
   FixedItem : TSubtitleInfoItem;
-  i, x      : Integer;
+  i, x, z   : Integer;
   tmp, s    : String;
   ocr       : TUWOCRScript;
   GapMs     : Integer;
 
   SnapMs, ShotCut,
+  ThresholdMs,
   InCue, OutCue : Integer;
 begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
 
   Clear;
-  GapMs  := GetCorrectTime(Profile^.MinPause, Profile^.PauseInFrames);
-  SnapMs := FramesToTime(Profile^.ShotcutSnapArea, Workspace.FPS.OutputFPS);
-  InCue  := FramesToTime(Profile^.ShotcutInCues, Workspace.FPS.OutputFPS);
-  OutCue := FramesToTime(Profile^.ShotcutOutCues, Workspace.FPS.OutputFPS);
-  ocr    := TUWOCRScript.Create(OCRFile);
+  GapMs       := GetCorrectTime(Profile^.MinPause, Profile^.PauseInFrames);
+  SnapMs      := FramesToTime(Profile^.ShotcutSnapArea, Workspace.FPS.OutputFPS);
+  ThresholdMs := FramesToTime(Profile^.ShotcutThreshold, Workspace.FPS.OutputFPS);
+  InCue       := FramesToTime(Profile^.ShotcutInCues, Workspace.FPS.OutputFPS);
+  OutCue      := FramesToTime(Profile^.ShotcutOutCues, Workspace.FPS.OutputFPS);
+  ocr := TUWOCRScript.Create(OCRFile);
   try
     for i := 0 to FSubtitles.Count-1 do
     begin
@@ -468,14 +470,20 @@ begin
       // Snap to shot changes
       if (etSnapToShotChanges in FErrors) and (AShotChanges <> NIL) and (Length(AShotChanges) > 0) then
       begin
+        x := FramesToTime(Profile^.ShotcutThreshold + 1, Workspace.FPS.OutputFPS);
+
         // In Cue
         ShotCut := FindBestShotCutMs(AShotChanges, FixedItem.InitialTime);
         if ShotCut >= 0 then
         begin
-          if (Abs(ShotCut - FixedItem.InitialTime) < SnapMs) and (Subtitles.Duration[i] > Profile^.MinDuration) and
-             (i-1 >= 0) and (ShotCut > Subtitles[i-1].FinalTime + Profile^.MinPause) then
+          if (Abs(ShotCut - FixedItem.InitialTime) <= ThresholdMs) and (Subtitles.Duration[i] > Profile^.MinDuration) and
+             (i-1 >= 0) and (ShotCut > Subtitles[i-1].FinalTime + Profile^.MinPause) and (FixedItem.InitialTime < ShotCut) then
           begin
-            FixedItem.InitialTime := ShotCut + InCue;
+            if (Abs(ShotCut - FixedItem.InitialTime) <= SnapMs) then
+              FixedItem.InitialTime := ShotCut + InCue
+            else
+              FixedItem.InitialTime := ShotCut - x;
+
             FixedItem.ErrorsFixed := [etSnapToShotChangesInCue];
           end;
         end;
@@ -483,11 +491,21 @@ begin
         ShotCut := FindBestShotCutMs(AShotChanges, FixedItem.FinalTime);
         if ShotCut >= 0 then
         begin
-          if (Abs(ShotCut - FixedItem.FinalTime) < SnapMs) and (Subtitles.Duration[i] > Profile^.MinDuration) and
-             (i+1 < Subtitles.Count) and (ShotCut - OutCue < Subtitles[i+1].InitialTime - Profile^.MinPause) then
+          if (Abs(ShotCut - FixedItem.FinalTime) <= ThresholdMs) and (Subtitles.Duration[i] > Profile^.MinDuration) and
+             (i+1 < Subtitles.Count) and (ShotCut - OutCue < Subtitles[i+1].InitialTime - Profile^.MinPause) and (FixedItem.FinalTime > ShotCut) then
           begin
-            FixedItem.FinalTime   := ShotCut - OutCue;
-            FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etSnapToShotChangesOutCue];
+            z := FixedItem.FinalTime;
+
+            if (Abs(ShotCut - FixedItem.FinalTime) <= SnapMs) then
+              z := ShotCut - OutCue
+            else if (ShotCut + x) < (Subtitles[i+1].InitialTime - Profile^.MinPause) then
+              z := ShotCut + x;
+
+            if FixedItem.FinalTime <> z then
+            begin
+              FixedItem.FinalTime   := z;
+              FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etSnapToShotChangesOutCue];
+            end;
           end;
         end;
 

@@ -195,7 +195,7 @@ object frmConventions: TfrmConventions
       Width = 18
       AutoSize = False
       Caption = 'Dots on split'
-      TabOrder = 17
+      TabOrder = 18
     end
     object lblMaxLineCount: TLabel
       Left = 0
@@ -355,7 +355,7 @@ object frmConventions: TfrmConventions
       Width = 91
       MaxValue = 20
       TabOrder = 14
-      Value = 12
+      Value = 7
     end
     object lblSCSnapInCues: TLabel
       Left = 0
@@ -372,7 +372,7 @@ object frmConventions: TfrmConventions
       Top = 448
       Width = 91
       MaxValue = 15
-      TabOrder = 15
+      TabOrder = 16
     end
     object lblSCSnapOutCues: TLabel
       Left = 0
@@ -389,8 +389,17 @@ object frmConventions: TfrmConventions
       Top = 480
       Width = 91
       MaxValue = 15
-      TabOrder = 16
+      TabOrder = 17
       Value = 2
+    end
+    object spnSCSnapThreshold: TSpinEdit
+      Left = 336
+      Height = 23
+      Top = 416
+      Width = 91
+      MaxValue = 20
+      TabOrder = 15
+      Value = 11
     end
   end
 end

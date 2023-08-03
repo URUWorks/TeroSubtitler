@@ -224,7 +224,8 @@ begin
       RepeatedTolerance  := 100;
       WPM                := 180;
       CPL                := 37;
-      ShotcutSnapArea    := 12;
+      ShotcutSnapArea    := 7;
+      ShotcutThreshold   := 11;
       ShotcutInCues      := 0;
       ShotcutOutCues     := 2;
       DotsOnSplit        := True;
@@ -413,6 +414,7 @@ begin
         WPM := GetValue('WPM', WPM);
         CPL := GetValue('CPL', CPL);
         ShotcutSnapArea := GetValue('ShotcutSnapArea', ShotcutSnapArea);
+        ShotcutThreshold := GetValue('ShotcutThreshold', ShotcutThreshold);
         ShotcutInCues := GetValue('ShotcutInCues', ShotcutInCues);
         ShotcutOutCues := GetValue('ShotcutOutCues', ShotcutOutCues);
         DotsOnSplit := GetValue('DotsOnSplit', DotsOnSplit);

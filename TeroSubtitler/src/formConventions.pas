@@ -61,6 +61,7 @@ type
     lyoConvention: TUWLayout;
     spnCPL: TSpinEdit;
     spnSCSnapArea: TSpinEdit;
+    spnSCSnapThreshold: TSpinEdit;
     spnSCSnapInCues: TSpinEdit;
     spnSCSnapOutCues: TSpinEdit;
     spnCPS: TSpinEdit;
@@ -163,6 +164,7 @@ begin
         spnWPM.Value                := WPM;
         spnCPL.Value                := CPL;
         spnSCSnapArea.Value         := ShotcutSnapArea;
+        spnSCSnapThreshold.Value    := ShotcutThreshold;
         spnSCSnapInCues.Value       := ShotcutInCues;
         spnSCSnapOutCues.Value      := ShotcutOutCues;
         chkDotsOnSplit.Checked      := DotsOnSplit;
@@ -183,7 +185,7 @@ begin
         spnMinDurationPerWord.Value, spnMaxDurationMs.Value,
         spnMaxLineCount.Value, spnSubtitlePauseMs.Value,
         spnCPS.Value, spnWPM.Value, spnCPL.Value,
-        spnSCSnapArea.Value, spnSCSnapInCues.Value, spnSCSnapOutCues.Value,
+        spnSCSnapArea.Value, spnSCSnapThreshold.Value, spnSCSnapInCues.Value, spnSCSnapOutCues.Value,
         cboPauseMode.ItemIndex = 1,
         edtRepeatableChars.Text, edtProhibitedChars.Text,
         chkDotsOnSplit.Checked, edtCPSStrategy.Text);
@@ -225,7 +227,7 @@ begin
       spnMinDurationMs.Value, spnMinDurationPerWord.Value, spnMaxDurationMs.Value,
       spnMaxLineCount.Value, spnSubtitlePauseMs.Value,
       spnCPS.Value, spnWPM.Value, spnCPL.Value,
-      spnSCSnapArea.Value, spnSCSnapInCues.Value, spnSCSnapOutCues.Value,
+      spnSCSnapArea.Value, spnSCSnapThreshold.Value, spnSCSnapInCues.Value, spnSCSnapOutCues.Value,
       cboPauseMode.ItemIndex = 1, edtRepeatableChars.Text,
       edtProhibitedChars.Text, chkDotsOnSplit.Checked, edtCPSStrategy.Text);
 end;
