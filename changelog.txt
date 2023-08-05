@@ -3,6 +3,7 @@
 - updated: Russian language (thx RoxMarty)
 - improved: iTunes subtitle format
 - added: Brazilian Portuguese language (thx Gzushgshsh)
+- added: Chaining subtitles
 
 1.0.0.8 (30.7.2023)
 - fixed: Project autoname #132
