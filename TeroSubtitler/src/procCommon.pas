@@ -225,7 +225,7 @@ begin
       WPM                := 180;
       CPL                := 37;
       ShotcutSnapArea    := 7;
-      ShotcutThreshold   := 11;
+      ShotcutThreshold   := 12;
       ShotcutInCues      := 0;
       ShotcutOutCues     := 2;
       DotsOnSplit        := True;
@@ -692,6 +692,10 @@ begin
         SetValue('CPL', CPL);
         SetValue('CPSLineLenStrategy', CPSLineLenStrategy);
         SetValue('NewSubtitleMS', NewSubtitleMS);
+        SetValue('ShotcutSnapArea', ShotcutSnapArea);
+        SetValue('ShotcutThreshold', ShotcutThreshold);
+        SetValue('ShotcutInCues', ShotcutInCues);
+        SetValue('ShotcutOutCues', ShotcutOutCues);
         SetValue('DotsOnSplit', DotsOnSplit);
         CloseKey;
       end;

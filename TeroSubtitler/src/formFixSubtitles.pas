@@ -164,6 +164,7 @@ begin
       AddOptionItem(etFixInterrobang, GetString(FAppStringList, 'etFixInterrobang'), GetValue('Option18', False));
       AddOptionItem(etOCR, GetString(FAppStringList, 'etOCR'), GetValue('Option19', False));
       AddOptionItem(etSnapToShotChanges, GetString(FAppStringList, 'etSnapToShotChanges'), GetValue('Option20', False));
+      AddOptionItem(etChaining, GetString(FAppStringList, 'etChaining'), GetValue('Option21', False));
       s := GetValue('OCRScript', '');
       x := cboOCR.Items.IndexOf(s);
       if x >= 0 then
@@ -198,6 +199,7 @@ begin
     AddOptionItem(etFixInterrobang, GetString(FAppStringList, 'etFixInterrobang'));
     AddOptionItem(etOCR, GetString(FAppStringList, 'etOCR'), False);
     AddOptionItem(etSnapToShotChanges, GetString(FAppStringList, 'etSnapToShotChanges'), False);
+    AddOptionItem(etChaining, GetString(FAppStringList, 'etChaining'), False);
   end;
 
   cboSpacingHyphen.AddItem(GetString(FAppStringList, 'AddSpacing'), NIL);
@@ -483,6 +485,8 @@ begin
     Result := GetString(FAppStringList, 'etSnapToShotChangesInCue')
   else if etSnapToShotChangesOutCue in AError then
     Result := GetString(FAppStringList, 'etSnapToShotChangesOutCue')
+  else if etChaining in AError then
+    Result := FOptions[21].Description
   else
     Result := '';
 end;
@@ -496,7 +500,8 @@ begin
        (etTimeTooShort in ErrorsFixed) or (etTimeTooLong in ErrorsFixed) or
        (etSnapToShotChanges in ErrorsFixed) or
        (etSnapToShotChangesInCue in ErrorsFixed) or
-       (etSnapToShotChangesOutCue in ErrorsFixed) then
+       (etSnapToShotChangesOutCue in ErrorsFixed) or
+       (etChaining in ErrorsFixed) then
       Result := True
     else
       Result := False;

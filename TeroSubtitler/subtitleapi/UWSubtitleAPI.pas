@@ -101,6 +101,7 @@ type
     etSnapToShotChanges,
     etSnapToShotChangesInCue,
     etSnapToShotChangesOutCue,
+    etChaining,
     etNone
   );
 

@@ -357,9 +357,9 @@
       <lblRepeatableChars>Repeatable characters</lblRepeatableChars>
       <lblProhibitedChars>Prohibited characters</lblProhibitedChars>
       <lblCPSStrategy>Chars excluded from CPS count</lblCPSStrategy>
-      <lblSCSnapArea>Shot change snap area (frames)</lblSCSnapArea>
-      <lblSCSnapInCues>Snap in cues after sc (frames)</lblSCSnapInCues>
-      <lblSCSnapOutCues>Snap out cues before sc (frames)</lblSCSnapOutCues>            
+      <lblSCSnapArea>Shot change snap/threshold (frames)</lblSCSnapArea>
+      <lblSCSnapInCues>Snap in cues after SC (frames)</lblSCSnapInCues>
+      <lblSCSnapOutCues>Snap out cues before SC (frames)</lblSCSnapOutCues>            
       <lblTheme>Theme</lblTheme>
       <lblListMode>List mode</lblListMode>
 	  <lblSubtitles>Subtitles</lblSubtitles>      
@@ -634,6 +634,7 @@
     <etSnapToShotChanges>Snap times to shot changes</etSnapToShotChanges>
     <etSnapToShotChangesInCue>Snap In Cue to shot change</etSnapToShotChangesInCue>
     <etSnapToShotChangesOutCue>Snap Out Cue to shot change</etSnapToShotChangesOutCue>
+    <etChaining>Chaining subtitles</etChaining>
     <Index>#</Index>
     <Action>Action</Action>
     <Current>Current</Current>

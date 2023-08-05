@@ -67,7 +67,7 @@ function CheckErrors(const Subtitles: TUWSubtitles; const Index: Integer; const 
 implementation
 
 uses
-  procTypes, UWSubtitles.Utils, UWSystem.StrUtils, UWSubtitleAPI.Tags,
+  procTypes, UWSubtitles.Utils, UWSystem.StrUtils, UWSubtitleAPI.Tags, Math,
   UWSystem.TimeUtils, UWSystem.SysUtils, procSubtitle;
 
 // -----------------------------------------------------------------------------
@@ -470,38 +470,44 @@ begin
       // Snap to shot changes
       if (etSnapToShotChanges in FErrors) and (AShotChanges <> NIL) and (Length(AShotChanges) > 0) then
       begin
-        x := FramesToTime(Profile^.ShotcutThreshold + 1, Workspace.FPS.OutputFPS);
-
         // In Cue
         ShotCut := FindBestShotCutMs(AShotChanges, FixedItem.InitialTime);
         if ShotCut >= 0 then
         begin
-          if (Abs(ShotCut - FixedItem.InitialTime) <= ThresholdMs) and (Subtitles.Duration[i] > Profile^.MinDuration) and
-             (i-1 >= 0) and (ShotCut > Subtitles[i-1].FinalTime + Profile^.MinPause) and (FixedItem.InitialTime < ShotCut) then
+          if (Abs(ShotCut - FixedItem.InitialTime) < ThresholdMs) and (Subtitles.Duration[i] >= Profile^.MinDuration) and
+             (i-1 >= 0) and (ShotCut > Subtitles[i-1].FinalTime + Profile^.MinPause) then //and (FixedItem.InitialTime < ShotCut) then
           begin
-            if (Abs(ShotCut - FixedItem.InitialTime) <= SnapMs) then
-              FixedItem.InitialTime := ShotCut + InCue
-            else
-              FixedItem.InitialTime := ShotCut - x;
+            z := FixedItem.InitialTime;
 
-            FixedItem.ErrorsFixed := [etSnapToShotChangesInCue];
+            if (Abs(ShotCut - FixedItem.InitialTime) <= SnapMs) then
+              z := ShotCut + InCue
+            else if Sign(ShotCut - FixedItem.InitialTime) <= 0 then
+              z := ShotCut + ThresholdMs
+            else
+              z := ShotCut - ThresholdMs;
+
+            if (FixedItem.InitialTime <> z) and (Abs(FixedItem.InitialTime - z) > FramesToTime(1, Workspace.FPS.OutputFPS)) then
+            begin
+              FixedItem.InitialTime := z;
+              FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etSnapToShotChangesInCue];
+            end;
           end;
         end;
         // Out Cue
         ShotCut := FindBestShotCutMs(AShotChanges, FixedItem.FinalTime);
         if ShotCut >= 0 then
         begin
-          if (Abs(ShotCut - FixedItem.FinalTime) <= ThresholdMs) and (Subtitles.Duration[i] > Profile^.MinDuration) and
-             (i+1 < Subtitles.Count) and (ShotCut - OutCue < Subtitles[i+1].InitialTime - Profile^.MinPause) and (FixedItem.FinalTime > ShotCut) then
+          if (Abs(ShotCut - FixedItem.FinalTime) < ThresholdMs) and (Subtitles.Duration[i] >= Profile^.MinDuration) and
+             (i+1 < Subtitles.Count) and (ShotCut - OutCue < Subtitles[i+1].InitialTime - Profile^.MinPause) then //and (FixedItem.FinalTime > ShotCut) then
           begin
             z := FixedItem.FinalTime;
 
             if (Abs(ShotCut - FixedItem.FinalTime) <= SnapMs) then
               z := ShotCut - OutCue
-            else if (ShotCut + x) < (Subtitles[i+1].InitialTime - Profile^.MinPause) then
-              z := ShotCut + x;
+            else if (ShotCut + ThresholdMs) <= (Subtitles[i+1].InitialTime - Profile^.MinPause) then
+              z := ShotCut + ThresholdMs;
 
-            if FixedItem.FinalTime <> z then
+            if (FixedItem.FinalTime <> z) and (Abs(FixedItem.FinalTime - z) > FramesToTime(1, Workspace.FPS.OutputFPS)) then
             begin
               FixedItem.FinalTime   := z;
               FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etSnapToShotChangesOutCue];
@@ -510,7 +516,24 @@ begin
         end;
 
         if (etSnapToShotChangesInCue in FixedItem.ErrorsFixed) or (etSnapToShotChangesOutCue in FixedItem.ErrorsFixed) then
+        begin
+          if (etSnapToShotChangesInCue in FixedItem.ErrorsFixed) and (etSnapToShotChangesOutCue in FixedItem.ErrorsFixed) then
+            FixedItem.ErrorsFixed := [etSnapToShotChanges];
+
           Add(FixedItem);
+        end;
+      end;
+
+      ClearItem(FixedItem, i);
+      // Chaining
+      if (etChaining in FErrors) and (i+1 < Subtitles.Count) then
+      begin
+        if ((Subtitles[i+1].InitialTime - FixedItem.FinalTime) < ThresholdMs) and (((Subtitles[i+1].InitialTime - GapMs) - FixedItem.FinalTime) > FramesToTime(1, Workspace.FPS.OutputFPS)) then
+        begin
+          FixedItem.FinalTime := Subtitles[i+1].InitialTime - GapMs;
+          FixedItem.ErrorsFixed := [etChaining];
+          Add(FixedItem);
+        end;
       end;
     end;
   finally

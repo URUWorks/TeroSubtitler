@@ -357,7 +357,7 @@
       <lblRepeatableChars>Caracteres repetibles</lblRepeatableChars>
       <lblProhibitedChars>Caracteres prohibidos</lblProhibitedChars>
       <lblCPSStrategy>Caract. excl. en conteo de CPS</lblCPSStrategy>
-      <lblSCSnapArea>Área de ajuste de cambio de escena (fotogramas)</lblSCSnapArea>
+      <lblSCSnapArea>Área de ajuste/umbral de CDE (fotogramas)</lblSCSnapArea>
       <lblSCSnapInCues>Ajustar entrada (fotogramas)</lblSCSnapInCues>
       <lblSCSnapOutCues>Ajustar salida (fotogramas)</lblSCSnapOutCues>                                        
       <lblTheme>Tema</lblTheme>
@@ -633,7 +633,8 @@
     <etOCR>Solucionar errores comunes de OCR</etOCR>
     <etSnapToShotChanges>Ajustar tiempos a cambios de plano</etSnapToShotChanges>
     <etSnapToShotChangesInCue>Ajustar entrada a cambio de plano</etSnapToShotChangesInCue>
-    <etSnapToShotChangesOutCue>Ajustar salida a cambio de plano</etSnapToShotChangesOutCue>    
+    <etSnapToShotChangesOutCue>Ajustar salida a cambio de plano</etSnapToShotChangesOutCue>
+    <etChaining>Encadenamiento de subtítulos</etChaining>    
     <Index>#</Index>
     <Action>Acción</Action>
     <Current>Actual</Current>

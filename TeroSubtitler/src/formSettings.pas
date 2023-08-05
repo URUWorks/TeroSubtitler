@@ -366,6 +366,7 @@ begin
       spnWPM.Value                := WPM;
       spnCPL.Value                := CPL;
       spnSCSnapArea.Value         := ShotcutSnapArea;
+      spnSCSnapThreshold.Value    := ShotcutThreshold;
       spnSCSnapInCues.Value       := ShotcutInCues;
       spnSCSnapOutCues.Value      := ShotcutOutCues;
       chkDotsOnSplit.Checked      := DotsOnSplit;
@@ -480,6 +481,7 @@ begin
       WPM                := spnWPM.Value;
       CPL                := spnCPL.Value;
       ShotcutSnapArea    := spnSCSnapArea.Value;
+      ShotcutThreshold   := spnSCSnapThreshold.Value;
       ShotcutInCues      := spnSCSnapInCues.Value;
       ShotcutOutCues     := spnSCSnapOutCues.Value;
       DotsOnSplit        := chkDotsOnSplit.Checked;
