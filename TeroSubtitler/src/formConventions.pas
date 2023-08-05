@@ -49,18 +49,19 @@ type
     lblMaxDurationMs: TLabel;
     lblMaxLineCount: TLabel;
     lblMinDurationMs: TLabel;
-    lblMinDurationPerWordMs: TLabel;
     lblName: TLabel;
     lblNewSubtitleMs: TLabel;
     lblProhibitedChars: TLabel;
     lblCPSStrategy: TLabel;
     lblRepeatableChars: TLabel;
+    lblChaining: TLabel;
     lblSubtitlePauseMs: TLabel;
     lblWPM: TLabel;
     lstTree: TListBox;
     lyoConvention: TUWLayout;
     spnCPL: TSpinEdit;
     spnSCSnapArea: TSpinEdit;
+    spnChaining: TSpinEdit;
     spnSCSnapThreshold: TSpinEdit;
     spnSCSnapInCues: TSpinEdit;
     spnSCSnapOutCues: TSpinEdit;
@@ -167,6 +168,7 @@ begin
         spnSCSnapThreshold.Value    := ShotcutThreshold;
         spnSCSnapInCues.Value       := ShotcutInCues;
         spnSCSnapOutCues.Value      := ShotcutOutCues;
+        spnChaining.Value           := Chaining;
         chkDotsOnSplit.Checked      := DotsOnSplit;
       end;
 end;
@@ -186,6 +188,7 @@ begin
         spnMaxLineCount.Value, spnSubtitlePauseMs.Value,
         spnCPS.Value, spnWPM.Value, spnCPL.Value,
         spnSCSnapArea.Value, spnSCSnapThreshold.Value, spnSCSnapInCues.Value, spnSCSnapOutCues.Value,
+        spnChaining.Value,
         cboPauseMode.ItemIndex = 1,
         edtRepeatableChars.Text, edtProhibitedChars.Text,
         chkDotsOnSplit.Checked, edtCPSStrategy.Text);
@@ -228,6 +231,7 @@ begin
       spnMaxLineCount.Value, spnSubtitlePauseMs.Value,
       spnCPS.Value, spnWPM.Value, spnCPL.Value,
       spnSCSnapArea.Value, spnSCSnapThreshold.Value, spnSCSnapInCues.Value, spnSCSnapOutCues.Value,
+      spnChaining.Value,
       cboPauseMode.ItemIndex = 1, edtRepeatableChars.Text,
       edtProhibitedChars.Text, chkDotsOnSplit.Checked, edtCPSStrategy.Text);
 end;

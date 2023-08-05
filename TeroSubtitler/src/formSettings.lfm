@@ -294,7 +294,7 @@ object frmSettings: TfrmSettings
   object lyoConventions: TUWLayout
     Left = -336
     Height = 546
-    Top = 224
+    Top = 192
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -325,7 +325,7 @@ object frmSettings: TfrmSettings
       Top = 164
       Width = 246
       AutoSize = False
-      Caption = 'Min. duration (ms)'
+      Caption = 'Min. duration / per word (ms)'
       ParentColor = False
     end
     object spnMinDurationMs: TSpinEdit
@@ -341,7 +341,7 @@ object frmSettings: TfrmSettings
     object lblMaxDurationMs: TLabel
       Left = 0
       Height = 15
-      Top = 228
+      Top = 200
       Width = 246
       AutoSize = False
       Caption = 'Max. duration (ms)'
@@ -350,7 +350,7 @@ object frmSettings: TfrmSettings
     object spnMaxDurationMs: TSpinEdit
       Left = 248
       Height = 23
-      Top = 224
+      Top = 196
       Width = 80
       MaxValue = 10000
       OnChange = spnConventionChange
@@ -360,7 +360,7 @@ object frmSettings: TfrmSettings
     object lblSubtitlePauseMs: TLabel
       Left = 0
       Height = 15
-      Top = 292
+      Top = 264
       Width = 246
       AutoSize = False
       Caption = 'Min. subtitle pause'
@@ -369,7 +369,7 @@ object frmSettings: TfrmSettings
     object spnSubtitlePauseMs: TSpinEdit
       Left = 248
       Height = 23
-      Top = 288
+      Top = 260
       Width = 80
       MaxValue = 10000
       OnChange = spnConventionChange
@@ -420,7 +420,7 @@ object frmSettings: TfrmSettings
       AutoSize = False
       Caption = 'Dots on split'
       OnChange = spnConventionChange
-      TabOrder = 19
+      TabOrder = 20
     end
     object cboProfile: TComboBox
       AnchorSideRight.Control = btnProfile
@@ -459,7 +459,7 @@ object frmSettings: TfrmSettings
     object lblMaxLineCount: TLabel
       Left = 0
       Height = 15
-      Top = 260
+      Top = 232
       Width = 246
       AutoSize = False
       Caption = 'Max. line count'
@@ -468,7 +468,7 @@ object frmSettings: TfrmSettings
     object spnMaxLineCount: TSpinEdit
       Left = 248
       Height = 23
-      Top = 256
+      Top = 228
       Width = 80
       MaxValue = 10
       OnChange = spnConventionChange
@@ -478,7 +478,7 @@ object frmSettings: TfrmSettings
     object lblCPS: TLabel
       Left = 0
       Height = 15
-      Top = 324
+      Top = 296
       Width = 246
       AutoSize = False
       Caption = 'CPS'
@@ -487,7 +487,7 @@ object frmSettings: TfrmSettings
     object spnCPS: TSpinEdit
       Left = 248
       Height = 23
-      Top = 320
+      Top = 292
       Width = 80
       MaxValue = 1000
       OnChange = spnConventionChange
@@ -497,7 +497,7 @@ object frmSettings: TfrmSettings
     object lblWPM: TLabel
       Left = 0
       Height = 15
-      Top = 356
+      Top = 328
       Width = 246
       AutoSize = False
       Caption = 'WPM'
@@ -506,7 +506,7 @@ object frmSettings: TfrmSettings
     object spnWPM: TSpinEdit
       Left = 248
       Height = 23
-      Top = 352
+      Top = 324
       Width = 80
       MaxValue = 1000
       OnChange = spnConventionChange
@@ -516,7 +516,7 @@ object frmSettings: TfrmSettings
     object spnCPL: TSpinEdit
       Left = 248
       Height = 23
-      Top = 384
+      Top = 356
       Width = 80
       MaxValue = 500
       OnChange = spnConventionChange
@@ -526,37 +526,28 @@ object frmSettings: TfrmSettings
     object lblCPL: TLabel
       Left = 0
       Height = 15
-      Top = 388
+      Top = 360
       Width = 246
       AutoSize = False
       Caption = 'CPL'
       ParentColor = False
     end
-    object lblMinDurationPerWordMs: TLabel
-      Left = 0
-      Height = 15
-      Top = 196
-      Width = 246
-      AutoSize = False
-      Caption = 'Min. duration per word (ms)'
-      ParentColor = False
-    end
     object spnMinDurationPerWord: TSpinEdit
-      Left = 248
+      Left = 336
       Height = 23
-      Top = 192
+      Top = 160
       Width = 80
       MaxValue = 5000
       OnChange = spnConventionChange
       TabOrder = 7
-      Value = 1000
+      Value = 300
     end
     object cboPauseMode: TComboBox
       AnchorSideTop.Control = spnSubtitlePauseMs
       AnchorSideTop.Side = asrCenter
       Left = 336
       Height = 23
-      Top = 288
+      Top = 260
       Width = 127
       ItemHeight = 15
       OnChange = spnConventionChange
@@ -584,7 +575,7 @@ object frmSettings: TfrmSettings
     object lblSCSnapArea: TLabel
       Left = 0
       Height = 15
-      Top = 420
+      Top = 392
       Width = 246
       AutoSize = False
       Caption = 'Shot change snap area (frames)'
@@ -593,7 +584,7 @@ object frmSettings: TfrmSettings
     object spnSCSnapArea: TSpinEdit
       Left = 248
       Height = 23
-      Top = 416
+      Top = 388
       Width = 80
       MaxValue = 20
       OnChange = spnConventionChange
@@ -603,7 +594,7 @@ object frmSettings: TfrmSettings
     object lblSCSnapInCues: TLabel
       Left = 0
       Height = 15
-      Top = 452
+      Top = 424
       Width = 246
       AutoSize = False
       Caption = 'Snap in cues (frames)'
@@ -612,7 +603,7 @@ object frmSettings: TfrmSettings
     object spnSCSnapInCues: TSpinEdit
       Left = 248
       Height = 23
-      Top = 448
+      Top = 420
       Width = 80
       MaxValue = 15
       OnChange = spnConventionChange
@@ -621,7 +612,7 @@ object frmSettings: TfrmSettings
     object lblSCSnapOutCues: TLabel
       Left = 0
       Height = 15
-      Top = 484
+      Top = 456
       Width = 246
       AutoSize = False
       Caption = 'Snap out cues (frames)'
@@ -630,7 +621,7 @@ object frmSettings: TfrmSettings
     object spnSCSnapOutCues: TSpinEdit
       Left = 248
       Height = 23
-      Top = 480
+      Top = 452
       Width = 80
       MaxValue = 15
       OnChange = spnConventionChange
@@ -640,12 +631,31 @@ object frmSettings: TfrmSettings
     object spnSCSnapThreshold: TSpinEdit
       Left = 336
       Height = 23
-      Top = 416
+      Top = 388
       Width = 80
       MaxValue = 20
       OnChange = spnConventionChange
       TabOrder = 16
       Value = 11
+    end
+    object spnChaining: TSpinEdit
+      Left = 248
+      Height = 23
+      Top = 484
+      Width = 80
+      MaxValue = 30
+      OnChange = spnConventionChange
+      TabOrder = 19
+      Value = 12
+    end
+    object lblChaining: TLabel
+      Left = 0
+      Height = 15
+      Top = 488
+      Width = 246
+      AutoSize = False
+      Caption = 'Chaining (frames)'
+      ParentColor = False
     end
   end
   object lyoAppearance: TUWLayout

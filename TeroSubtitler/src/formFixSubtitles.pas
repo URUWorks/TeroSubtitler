@@ -483,6 +483,8 @@ begin
     Result := FOptions[20].Description
   else if etSnapToShotChangesInCue in AError then
     Result := GetString(FAppStringList, 'etSnapToShotChangesInCue')
+  else if etSnapToShotChangesInCueAway in AError then
+    Result := GetString(FAppStringList, 'etSnapToShotChangesInCueAway')
   else if etSnapToShotChangesOutCue in AError then
     Result := GetString(FAppStringList, 'etSnapToShotChangesOutCue')
   else if etChaining in AError then
@@ -500,6 +502,7 @@ begin
        (etTimeTooShort in ErrorsFixed) or (etTimeTooLong in ErrorsFixed) or
        (etSnapToShotChanges in ErrorsFixed) or
        (etSnapToShotChangesInCue in ErrorsFixed) or
+       (etSnapToShotChangesInCueAway in ErrorsFixed) or
        (etSnapToShotChangesOutCue in ErrorsFixed) or
        (etChaining in ErrorsFixed) then
       Result := True

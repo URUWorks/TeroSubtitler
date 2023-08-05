@@ -155,7 +155,9 @@ var
 
   SnapMs, ShotCut,
   ThresholdMs,
-  InCue, OutCue : Integer;
+  InCue, OutCue,
+  ChainingMS : Integer;
+  SnapAway : Boolean;
 begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
 
@@ -165,6 +167,7 @@ begin
   ThresholdMs := FramesToTime(Profile^.ShotcutThreshold, Workspace.FPS.OutputFPS);
   InCue       := FramesToTime(Profile^.ShotcutInCues, Workspace.FPS.OutputFPS);
   OutCue      := FramesToTime(Profile^.ShotcutOutCues, Workspace.FPS.OutputFPS);
+  ChainingMS  := FramesToTime(Profile^.Chaining, Workspace.FPS.OutputFPS);
   ocr := TUWOCRScript.Create(OCRFile);
   try
     for i := 0 to FSubtitles.Count-1 do
@@ -477,10 +480,14 @@ begin
           if (Abs(ShotCut - FixedItem.InitialTime) < ThresholdMs) and (Subtitles.Duration[i] >= Profile^.MinDuration) and
              (i-1 >= 0) and (ShotCut > Subtitles[i-1].FinalTime + Profile^.MinPause) then //and (FixedItem.InitialTime < ShotCut) then
           begin
+            SnapAway := True;
             z := FixedItem.InitialTime;
 
             if (Abs(ShotCut - FixedItem.InitialTime) <= SnapMs) then
-              z := ShotCut + InCue
+            begin
+              z := ShotCut + InCue;
+              SnapAway := False;
+            end
             else if Sign(ShotCut - FixedItem.InitialTime) <= 0 then
               z := ShotCut + ThresholdMs
             else
@@ -489,7 +496,10 @@ begin
             if (FixedItem.InitialTime <> z) and (Abs(FixedItem.InitialTime - z) > FramesToTime(1, Workspace.FPS.OutputFPS)) then
             begin
               FixedItem.InitialTime := z;
-              FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etSnapToShotChangesInCue];
+              if SnapAway then
+                FixedItem.ErrorsFixed := [etSnapToShotChangesInCueAway]
+              else
+                FixedItem.ErrorsFixed := [etSnapToShotChangesInCue];
             end;
           end;
         end;
@@ -515,7 +525,7 @@ begin
           end;
         end;
 
-        if (etSnapToShotChangesInCue in FixedItem.ErrorsFixed) or (etSnapToShotChangesOutCue in FixedItem.ErrorsFixed) then
+        if (etSnapToShotChangesInCue in FixedItem.ErrorsFixed) or (etSnapToShotChangesInCueAway in FixedItem.ErrorsFixed) or (etSnapToShotChangesOutCue in FixedItem.ErrorsFixed) then
         begin
           if (etSnapToShotChangesInCue in FixedItem.ErrorsFixed) and (etSnapToShotChangesOutCue in FixedItem.ErrorsFixed) then
             FixedItem.ErrorsFixed := [etSnapToShotChanges];
@@ -528,7 +538,7 @@ begin
       // Chaining
       if (etChaining in FErrors) and (i+1 < Subtitles.Count) then
       begin
-        if ((Subtitles[i+1].InitialTime - FixedItem.FinalTime) < ThresholdMs) and (((Subtitles[i+1].InitialTime - GapMs) - FixedItem.FinalTime) > FramesToTime(1, Workspace.FPS.OutputFPS)) then
+        if ((Subtitles[i+1].InitialTime - FixedItem.FinalTime) < ChainingMS) and (((Subtitles[i+1].InitialTime - GapMs) - FixedItem.FinalTime) > FramesToTime(1, Workspace.FPS.OutputFPS)) then
         begin
           FixedItem.FinalTime := Subtitles[i+1].InitialTime - GapMs;
           FixedItem.ErrorsFixed := [etChaining];

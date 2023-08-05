@@ -228,6 +228,7 @@ begin
       ShotcutThreshold   := 12;
       ShotcutInCues      := 0;
       ShotcutOutCues     := 2;
+      Chaining           := 12;
       DotsOnSplit        := True;
 
       frmMain.mmoText.CPSBar.Max := MaxCPS;
@@ -417,6 +418,7 @@ begin
         ShotcutThreshold := GetValue('ShotcutThreshold', ShotcutThreshold);
         ShotcutInCues := GetValue('ShotcutInCues', ShotcutInCues);
         ShotcutOutCues := GetValue('ShotcutOutCues', ShotcutOutCues);
+        Chaining := GetValue('Chaining', Chaining);
         DotsOnSplit := GetValue('DotsOnSplit', DotsOnSplit);
         CloseKey;
 
@@ -670,7 +672,6 @@ begin
       SetValue('AskForDeleteLines', AskForDeleteLines);
       SetValue('WebSearchURL', WebSearchURL);
       SetValue('TextToFind', TextToFind);
-      SetValue('Profile', Name);
       SetValue('CommonErrors', Integer(CommonErrors));
       SetValue('ShowCPSBar', frmMain.mmoText.CPSBar.Visible);
       CloseKey;
@@ -678,6 +679,7 @@ begin
       with Conventions do
       begin
         OpenKey('CommonErrorsCfg');
+        SetValue('Profile', Name);
         SetValue('RepeatableChars', RepeatableChars);
         SetValue('ProhibitedChars', ProhibitedChars);
         SetValue('MaxLines', MaxLines);
@@ -696,6 +698,7 @@ begin
         SetValue('ShotcutThreshold', ShotcutThreshold);
         SetValue('ShotcutInCues', ShotcutInCues);
         SetValue('ShotcutOutCues', ShotcutOutCues);
+        SetValue('Chaining', Chaining);
         SetValue('DotsOnSplit', DotsOnSplit);
         CloseKey;
       end;
@@ -1017,6 +1020,11 @@ begin
         Conventions.MaxCPS             := MaxCPS;
         Conventions.WPM                := WPM;
         Conventions.CPL                := CPL;
+        Conventions.ShotcutSnapArea    := ShotcutSnapArea;
+        Conventions.ShotcutThreshold   := ShotcutThreshold;
+        Conventions.ShotcutInCues      := ShotcutInCues;
+        Conventions.ShotcutOutCues     := ShotcutOutCues;
+        Conventions.Chaining           := Chaining;
         Conventions.DotsOnSplit        := DotsOnSplit;
         Conventions.AddHyphenSpace     := AddHyphenSpace;
       end;

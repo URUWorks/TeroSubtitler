@@ -345,8 +345,7 @@
       <lblZeroToDisable>(0 to disable)</lblZeroToDisable>      
       <lblProfile>Profile</lblProfile>      
       <lblNewSubtitleMs>New subtitle (ms)</lblNewSubtitleMs>
-      <lblMinDurationMs>Min. duration (ms)</lblMinDurationMs>
-      <lblMinDurationPerWordMs>Min. duration per word (ms)</lblMinDurationPerWordMs>
+      <lblMinDurationMs>Min. duration / per word (ms)</lblMinDurationMs>
       <lblMaxDurationMs>Max. duration (ms)</lblMaxDurationMs>
       <lblMaxLineCount>Max. line count</lblMaxLineCount>
       <lblShiftTimeMs>Shift time (ms)</lblShiftTimeMs>
@@ -357,9 +356,10 @@
       <lblRepeatableChars>Repeatable characters</lblRepeatableChars>
       <lblProhibitedChars>Prohibited characters</lblProhibitedChars>
       <lblCPSStrategy>Chars excluded from CPS count</lblCPSStrategy>
-      <lblSCSnapArea>Shot change snap/threshold (frames)</lblSCSnapArea>
+      <lblSCSnapArea>Shot change snap / threshold (frames)</lblSCSnapArea>
       <lblSCSnapInCues>Snap in cues after SC (frames)</lblSCSnapInCues>
       <lblSCSnapOutCues>Snap out cues before SC (frames)</lblSCSnapOutCues>            
+      <lblChaining>Chaining (frames)</lblChaining>
       <lblTheme>Theme</lblTheme>
       <lblListMode>List mode</lblListMode>
 	  <lblSubtitles>Subtitles</lblSubtitles>      
@@ -634,6 +634,7 @@
     <etSnapToShotChanges>Snap times to shot changes</etSnapToShotChanges>
     <etSnapToShotChangesInCue>Snap In Cue to shot change</etSnapToShotChangesInCue>
     <etSnapToShotChangesOutCue>Snap Out Cue to shot change</etSnapToShotChangesOutCue>
+    <etSnapToShotChangesInCueAway>Snap In Cue away from shot change</etSnapToShotChangesInCueAway>        
     <etChaining>Chaining subtitles</etChaining>
     <Index>#</Index>
     <Action>Action</Action>

@@ -106,7 +106,7 @@ object frmConventions: TfrmConventions
       Top = 164
       Width = 238
       AutoSize = False
-      Caption = 'Min. duration (ms)'
+      Caption = 'Min. duration / per word (ms)'
       ParentColor = False
     end
     object spnMinDurationMs: TSpinEdit
@@ -121,7 +121,7 @@ object frmConventions: TfrmConventions
     object lblMaxDurationMs: TLabel
       Left = 0
       Height = 15
-      Top = 228
+      Top = 200
       Width = 238
       AutoSize = False
       Caption = 'Max. duration (ms)'
@@ -130,7 +130,7 @@ object frmConventions: TfrmConventions
     object spnMaxDurationMs: TSpinEdit
       Left = 240
       Height = 23
-      Top = 224
+      Top = 196
       Width = 91
       MaxValue = 10000
       TabOrder = 7
@@ -139,7 +139,7 @@ object frmConventions: TfrmConventions
     object lblSubtitlePauseMs: TLabel
       Left = 0
       Height = 15
-      Top = 292
+      Top = 264
       Width = 238
       AutoSize = False
       Caption = 'Min. subtitle pause'
@@ -148,7 +148,7 @@ object frmConventions: TfrmConventions
     object spnSubtitlePauseMs: TSpinEdit
       Left = 240
       Height = 23
-      Top = 288
+      Top = 260
       Width = 91
       MaxValue = 10000
       TabOrder = 9
@@ -195,12 +195,12 @@ object frmConventions: TfrmConventions
       Width = 18
       AutoSize = False
       Caption = 'Dots on split'
-      TabOrder = 18
+      TabOrder = 19
     end
     object lblMaxLineCount: TLabel
       Left = 0
       Height = 15
-      Top = 260
+      Top = 232
       Width = 238
       AutoSize = False
       Caption = 'Max. line count'
@@ -209,7 +209,7 @@ object frmConventions: TfrmConventions
     object spnMaxLineCount: TSpinEdit
       Left = 240
       Height = 23
-      Top = 256
+      Top = 228
       Width = 91
       MaxValue = 10
       TabOrder = 8
@@ -218,7 +218,7 @@ object frmConventions: TfrmConventions
     object lblCPS: TLabel
       Left = 0
       Height = 15
-      Top = 324
+      Top = 296
       Width = 238
       AutoSize = False
       Caption = 'CPS'
@@ -227,7 +227,7 @@ object frmConventions: TfrmConventions
     object spnCPS: TSpinEdit
       Left = 240
       Height = 23
-      Top = 320
+      Top = 292
       Width = 91
       MaxValue = 1000
       TabOrder = 11
@@ -236,7 +236,7 @@ object frmConventions: TfrmConventions
     object lblWPM: TLabel
       Left = 0
       Height = 15
-      Top = 356
+      Top = 328
       Width = 238
       AutoSize = False
       Caption = 'WPM'
@@ -245,7 +245,7 @@ object frmConventions: TfrmConventions
     object spnWPM: TSpinEdit
       Left = 240
       Height = 23
-      Top = 352
+      Top = 324
       Width = 91
       MaxValue = 1000
       TabOrder = 12
@@ -254,7 +254,7 @@ object frmConventions: TfrmConventions
     object spnCPL: TSpinEdit
       Left = 240
       Height = 23
-      Top = 384
+      Top = 356
       Width = 91
       MaxValue = 500
       TabOrder = 13
@@ -263,7 +263,7 @@ object frmConventions: TfrmConventions
     object lblCPL: TLabel
       Left = 0
       Height = 15
-      Top = 388
+      Top = 360
       Width = 238
       AutoSize = False
       Caption = 'CPL'
@@ -286,23 +286,14 @@ object frmConventions: TfrmConventions
       Anchors = [akTop, akLeft, akRight]
       TabOrder = 0
     end
-    object lblMinDurationPerWordMs: TLabel
-      Left = 0
-      Height = 15
-      Top = 196
-      Width = 238
-      AutoSize = False
-      Caption = 'Min. duration per word (ms)'
-      ParentColor = False
-    end
     object spnMinDurationPerWord: TSpinEdit
-      Left = 240
+      Left = 336
       Height = 23
-      Top = 192
+      Top = 160
       Width = 91
       MaxValue = 5000
       TabOrder = 6
-      Value = 1000
+      Value = 300
     end
     object cboPauseMode: TComboBox
       AnchorSideLeft.Control = spnSubtitlePauseMs
@@ -313,7 +304,7 @@ object frmConventions: TfrmConventions
       AnchorSideRight.Side = asrBottom
       Left = 336
       Height = 23
-      Top = 288
+      Top = 260
       Width = 243
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Left = 5
@@ -342,7 +333,7 @@ object frmConventions: TfrmConventions
     object lblSCSnapArea: TLabel
       Left = 0
       Height = 15
-      Top = 420
+      Top = 392
       Width = 238
       AutoSize = False
       Caption = 'Shot change snap area (frames)'
@@ -351,7 +342,7 @@ object frmConventions: TfrmConventions
     object spnSCSnapArea: TSpinEdit
       Left = 240
       Height = 23
-      Top = 416
+      Top = 388
       Width = 91
       MaxValue = 20
       TabOrder = 14
@@ -360,7 +351,7 @@ object frmConventions: TfrmConventions
     object lblSCSnapInCues: TLabel
       Left = 0
       Height = 15
-      Top = 452
+      Top = 424
       Width = 238
       AutoSize = False
       Caption = 'Snap in cues (frames)'
@@ -369,7 +360,7 @@ object frmConventions: TfrmConventions
     object spnSCSnapInCues: TSpinEdit
       Left = 240
       Height = 23
-      Top = 448
+      Top = 420
       Width = 91
       MaxValue = 15
       TabOrder = 16
@@ -377,7 +368,7 @@ object frmConventions: TfrmConventions
     object lblSCSnapOutCues: TLabel
       Left = 0
       Height = 15
-      Top = 484
+      Top = 456
       Width = 238
       AutoSize = False
       Caption = 'Snap out cues (frames)'
@@ -386,7 +377,7 @@ object frmConventions: TfrmConventions
     object spnSCSnapOutCues: TSpinEdit
       Left = 240
       Height = 23
-      Top = 480
+      Top = 452
       Width = 91
       MaxValue = 15
       TabOrder = 17
@@ -395,11 +386,29 @@ object frmConventions: TfrmConventions
     object spnSCSnapThreshold: TSpinEdit
       Left = 336
       Height = 23
-      Top = 416
+      Top = 388
       Width = 91
       MaxValue = 20
       TabOrder = 15
       Value = 11
+    end
+    object lblChaining: TLabel
+      Left = 0
+      Height = 15
+      Top = 488
+      Width = 238
+      AutoSize = False
+      Caption = 'Chaining (frames)'
+      ParentColor = False
+    end
+    object spnChaining: TSpinEdit
+      Left = 240
+      Height = 23
+      Top = 484
+      Width = 91
+      MaxValue = 30
+      TabOrder = 18
+      Value = 12
     end
   end
 end

@@ -50,6 +50,7 @@ type
     ShotcutThreshold   : Cardinal;
     ShotcutInCues      : Cardinal;
     ShotcutOutCues     : Cardinal;
+    Chaining           : Cardinal;
   end;
 
   { TProfileList }
@@ -70,8 +71,8 @@ type
     procedure Close;
     procedure LoadFromFile(const AFileName: String);
     function SaveToFile(const AFileName: String): Boolean;
-    function AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
-    procedure UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
+    function AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
+    procedure UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
     function Ready: Boolean;
     procedure FillTStrings(const AStrings: TStrings; const AClear: Boolean = True);
     function FindItemIndex(const AName: String): Integer;
@@ -152,11 +153,11 @@ end;
 
 procedure TProfiles.LoadFromFile(const AFileName: String);
 
-  function TryGetNamedItem(const ANode: TDOMNode; const AName: DOMString): DOMString;
+  function TryGetNamedItem(const ANode: TDOMNode; const AName, ADefault: DOMString): DOMString;
   var
     ANodeItem: TDOMNode;
   begin
-    Result := '';
+    Result := ADefault;
     if (ANode <> NIL) then
     begin
       ANodeItem := ANode.Attributes.GetNamedItem(AName);
@@ -190,25 +191,26 @@ begin
         try
           with Item^ do
           begin
-            Name               := TryGetNamedItem(NodeProfile, 'name');
-            NewSubtitleMs      := TryGetNamedItem(NodeProfile, 'NewSubtitleMs').ToInteger;
-            MinDuration        := TryGetNamedItem(NodeProfile, 'MinDuration').ToInteger;
-            MinDurationPerWord := TryGetNamedItem(NodeProfile, 'MinDurationPerWord').ToInteger;
-            MaxDuration        := TryGetNamedItem(NodeProfile, 'MaxDuration').ToInteger;
-            MaxLines           := TryGetNamedItem(NodeProfile, 'MaxLines').ToInteger;
-            MinPause           := TryGetNamedItem(NodeProfile, 'MinPause').ToInteger;
-            PauseInFrames      := TryGetNamedItem(NodeProfile, 'PauseInFrames').ToBoolean;
-            MaxCPS             := TryGetNamedItem(NodeProfile, 'MaxCPS').ToInteger;
-            WPM                := TryGetNamedItem(NodeProfile, 'WPM').ToInteger;
-            CPL                := TryGetNamedItem(NodeProfile, 'CPL').ToInteger;
-            RepeatableChars    := TryGetNamedItem(NodeProfile, 'RepeatableChars');
-            ProhibitedChars    := TryGetNamedItem(NodeProfile, 'ProhibitedChars');
-            DotsOnSplit        := TryGetNamedItem(NodeProfile, 'DotsOnSplit').ToBoolean;
-            CPSLineLenStrategy := TryGetNamedItem(NodeProfile, 'CPSLineLenStrategy');
-            ShotcutSnapArea    := TryGetNamedItem(NodeProfile, 'ShotcutSnapArea').ToInteger;
-            ShotcutThreshold   := TryGetNamedItem(NodeProfile, 'ShotcutThreshold').ToInteger;
-            ShotcutInCues      := TryGetNamedItem(NodeProfile, 'ShotcutInCues').ToInteger;
-            ShotcutOutCues     := TryGetNamedItem(NodeProfile, 'ShotcutOutCues').ToInteger;
+            Name               := TryGetNamedItem(NodeProfile, 'name', '');
+            NewSubtitleMs      := TryGetNamedItem(NodeProfile, 'NewSubtitleMs', '1000').ToInteger;
+            MinDuration        := TryGetNamedItem(NodeProfile, 'MinDuration', '1000').ToInteger;
+            MinDurationPerWord := TryGetNamedItem(NodeProfile, 'MinDurationPerWord', '300').ToInteger;
+            MaxDuration        := TryGetNamedItem(NodeProfile, 'MaxDuration', '8000').ToInteger;
+            MaxLines           := TryGetNamedItem(NodeProfile, 'MaxLines', '2').ToInteger;
+            MinPause           := TryGetNamedItem(NodeProfile, 'MinPause', '200').ToInteger;
+            PauseInFrames      := TryGetNamedItem(NodeProfile, 'PauseInFrames', '0').ToBoolean;
+            MaxCPS             := TryGetNamedItem(NodeProfile, 'MaxCPS', '15').ToInteger;
+            WPM                := TryGetNamedItem(NodeProfile, 'WPM', '180').ToInteger;
+            CPL                := TryGetNamedItem(NodeProfile, 'CPL', '37').ToInteger;
+            RepeatableChars    := TryGetNamedItem(NodeProfile, 'RepeatableChars', '');
+            ProhibitedChars    := TryGetNamedItem(NodeProfile, 'ProhibitedChars', '');
+            DotsOnSplit        := TryGetNamedItem(NodeProfile, 'DotsOnSplit', '1').ToBoolean;
+            CPSLineLenStrategy := TryGetNamedItem(NodeProfile, 'CPSLineLenStrategy', '');
+            ShotcutSnapArea    := TryGetNamedItem(NodeProfile, 'ShotcutSnapArea', '7').ToInteger;
+            ShotcutThreshold   := TryGetNamedItem(NodeProfile, 'ShotcutThreshold', '12').ToInteger;
+            ShotcutInCues      := TryGetNamedItem(NodeProfile, 'ShotcutInCues', '0').ToInteger;
+            ShotcutOutCues     := TryGetNamedItem(NodeProfile, 'ShotcutOutCues', '2').ToInteger;
+            Chaining           := TryGetNamedItem(NodeProfile, 'Chaining', '12').ToInteger;
           end;
           FList.Add(Item);
         except
@@ -266,6 +268,7 @@ begin
         TDOMElement(Node).SetAttribute('ShotcutThreshold', ShotcutThreshold.ToString);
         TDOMElement(Node).SetAttribute('ShotcutInCues', ShotcutInCues.ToString);
         TDOMElement(Node).SetAttribute('ShotcutOutCues', ShotcutOutCues.ToString);
+        TDOMElement(Node).SetAttribute('Chaining', Chaining.ToString);
       end;
       Root.AppendChild(Node);
     end;
@@ -282,7 +285,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TProfiles.AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
+function TProfiles.AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
 var
   Item: PProfileItem;
   i: Integer;
@@ -320,6 +323,7 @@ begin
     ShotcutThreshold   := AShotcutThreshold;
     ShotcutInCues      := AShotcutInCues;
     ShotcutOutCues     := AShotcutOutCues;
+    Chaining           := AChaining;
   end;
 
   if not AUpdate then
@@ -334,12 +338,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TProfiles.UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
+procedure TProfiles.UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
 begin
   if FList.Count = 0 then Exit;
 
   AddItem(AName, ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration,
-    AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues,
+    AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining,
     APauseInFrames, ARepeatableChars, AProhibitedChars, ADotsOnSplit, ACPSLineLenStrategy, True, AIndex);
 end;
 

@@ -345,8 +345,7 @@
       <lblZeroToDisable>(0 para deshabilitar)</lblZeroToDisable>
       <lblProfile>Perfil</lblProfile>
       <lblNewSubtitleMs>Nuevo subtítulo (ms)</lblNewSubtitleMs>
-      <lblMinDurationMs>Mín. duración (ms)</lblMinDurationMs>
-      <lblMinDurationPerWordMs>Mín. duración por palabra (ms)</lblMinDurationPerWordMs>
+      <lblMinDurationMs>Mín. duración / por palabra (ms)</lblMinDurationMs>
       <lblMaxDurationMs>Máx. duración (ms)</lblMaxDurationMs>
       <lblMaxLineCount>Máx. cantidad de líneas</lblMaxLineCount>
       <lblShiftTimeMs>Desplazar (ms)</lblShiftTimeMs>
@@ -359,7 +358,8 @@
       <lblCPSStrategy>Caract. excl. en conteo de CPS</lblCPSStrategy>
       <lblSCSnapArea>Área de ajuste/umbral de CDE (fotogramas)</lblSCSnapArea>
       <lblSCSnapInCues>Ajustar entrada (fotogramas)</lblSCSnapInCues>
-      <lblSCSnapOutCues>Ajustar salida (fotogramas)</lblSCSnapOutCues>                                        
+      <lblSCSnapOutCues>Ajustar salida (fotogramas)</lblSCSnapOutCues>
+      <lblChaining>Encadenamiento (fotogramas)</lblChaining>                                        
       <lblTheme>Tema</lblTheme>
       <lblListMode>Modo de lista</lblListMode>
 	  <lblSubtitles>Subtítulos</lblSubtitles>      
@@ -634,6 +634,7 @@
     <etSnapToShotChanges>Ajustar tiempos a cambios de plano</etSnapToShotChanges>
     <etSnapToShotChangesInCue>Ajustar entrada a cambio de plano</etSnapToShotChangesInCue>
     <etSnapToShotChangesOutCue>Ajustar salida a cambio de plano</etSnapToShotChangesOutCue>
+    <etSnapToShotChangesInCueAway>Ajustar entrada lejos del cambio de plano</etSnapToShotChangesInCueAway>
     <etChaining>Encadenamiento de subtítulos</etChaining>    
     <Index>#</Index>
     <Action>Acción</Action>

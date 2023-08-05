@@ -75,6 +75,7 @@ type
     lblSCSnapArea: TLabel;
     lblSCSnapInCues: TLabel;
     lblSCSnapOutCues: TLabel;
+    lblChaining: TLabel;
     lblShortCutInUse: TLabel;
     lblShortCutPreset: TLabel;
     lblWaveStart: TLabel;
@@ -92,6 +93,7 @@ type
     lblToolBarWave: TLabel;
     lyoFileTypeAssociations: TUWLayout;
     spnSCSnapArea: TSpinEdit;
+    spnChaining: TSpinEdit;
     spnSCSnapThreshold: TSpinEdit;
     spnSCSnapInCues: TSpinEdit;
     spnSCSnapOutCues: TSpinEdit;
@@ -110,7 +112,6 @@ type
     lblToolBarEditor: TLabel;
     lblZeroToDisable: TLabel;
     lblDefaultFileFormat: TLabel;
-    lblMinDurationPerWordMs: TLabel;
     lblWPM: TLabel;
     lblCPL: TLabel;
     lblMaxLineCount: TLabel;
@@ -369,6 +370,7 @@ begin
       spnSCSnapThreshold.Value    := ShotcutThreshold;
       spnSCSnapInCues.Value       := ShotcutInCues;
       spnSCSnapOutCues.Value      := ShotcutOutCues;
+      spnChaining.Value           := Chaining;
       chkDotsOnSplit.Checked      := DotsOnSplit;
     end;
     spnShiftTimeMs.Value        := ShiftTimeMS;
@@ -484,6 +486,7 @@ begin
       ShotcutThreshold   := spnSCSnapThreshold.Value;
       ShotcutInCues      := spnSCSnapInCues.Value;
       ShotcutOutCues     := spnSCSnapOutCues.Value;
+      Chaining           := spnChaining.Value;
       DotsOnSplit        := chkDotsOnSplit.Checked;
 
       if PauseInFrames then
@@ -894,6 +897,7 @@ begin
     spnSCSnapThreshold.Value    := ShotcutThreshold;
     spnSCSnapInCues.Value       := ShotcutInCues;
     spnSCSnapOutCues.Value      := ShotcutOutCues;
+    spnChaining.Value           := Chaining;
     chkDotsOnSplit.Checked      := DotsOnSplit;
 
     cboProfile.Tag := 0;
