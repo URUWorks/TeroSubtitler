@@ -566,9 +566,11 @@ begin
   end;
   UpdateToolBarButtons(False);
 
-  //if not frmMain.Enabled then
-  frmMain.cboInputFPS.ItemIndex := cboDefaultFrameRate.ItemIndex;
-  frmMain.cboFPS.ItemIndex      := cboDefaultFrameRate.ItemIndex;
+  if not IsWorkAreaEnabled then // Only change if work area is disabled
+  begin
+    frmMain.cboInputFPS.ItemIndex := cboDefaultFrameRate.ItemIndex;
+    frmMain.cboFPS.ItemIndex      := cboDefaultFrameRate.ItemIndex;
+  end;
 
   VSTOptions.DrawMode := TVSTDrawMode(cboListMode.ItemIndex);
 
