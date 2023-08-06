@@ -208,6 +208,8 @@
       <actSwapWorkspace>Intercambiar diseño de vídeo</actSwapWorkspace>
       <actInsertShotChange>Insertar cambio de plano</actInsertShotChange>                  
       <actDeleteShotChange>Borrar cambio(s) de plano</actDeleteShotChange>
+      <actGoToPrevShotChange>Saltar a cambio de plano anterior</actGoToPrevShotChange>
+      <actGoToNextShotChange>Saltar a cambio de plano siguiente</actGoToNextShotChange>            
       <actViewShotChange Hint="Habilita/deshabilita los cambios de plano">Cambios de plano</actViewShotChange>      
       <actCenterWaveform>Centrar forma de onda</actCenterWaveform>
       <actDetectSilentZones Hint="Clic para refrescar la lista">Detectar zonas de silencio</actDetectSilentZones>

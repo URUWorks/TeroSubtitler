@@ -72,6 +72,8 @@ type
     actExportCustomTextFormat: TAction;
     actActor: TAction;
     actExportCustomImageFormat: TAction;
+    actGoToNextShotChange: TAction;
+    actGoToPrevShotChange: TAction;
     actSaveProject: TAction;
     actLoadProject: TAction;
     actMediaMoveSubtitle: TAction;
@@ -294,6 +296,8 @@ type
     MenuItem171: TMenuItem;
     MenuItem172: TMenuItem;
     MenuItem173: TMenuItem;
+    MenuItem174: TMenuItem;
+    MenuItem175: TMenuItem;
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
     mnuFormatProperties: TMenuItem;
@@ -702,6 +706,7 @@ type
     procedure DoWaveformTimer(Sender: TObject);
     procedure WAVEClick(Sender: TObject);
     procedure WAVETimeLineClick(Sender: TObject; const Time: Integer);
+    procedure GoToNextShotChange(const APrevious: Boolean = False);
     // formMain_MPV
     procedure MPVClick(Sender: TObject);
     procedure MPVStartFile(Sender: TObject);
@@ -880,6 +885,8 @@ type
     procedure actSwapWorkspaceExecute(Sender: TObject);
     procedure actInsertShotChangeExecute(Sender: TObject);
     procedure actDeleteShotChangeExecute(Sender: TObject);
+    procedure actGoToNextShotChangeExecute(Sender: TObject);
+    procedure actGoToPrevShotChangeExecute(Sender: TObject);
     procedure actViewShotChangeExecute(Sender: TObject);
     procedure actCenterWaveformExecute(Sender: TObject);
     procedure actSetAsDefaultEncodingExecute(Sender: TObject);

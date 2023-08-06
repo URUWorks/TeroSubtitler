@@ -1401,6 +1401,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actGoToNextShotChangeExecute(Sender: TObject);
+begin
+  GoToNextShotChange;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actGoToPrevShotChangeExecute(Sender: TObject);
+begin
+  GoToNextShotChange(True);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actViewShotChangeExecute(Sender: TObject);
 begin
   WAVE.SceneChangeEnabled := actViewShotChange.Checked;

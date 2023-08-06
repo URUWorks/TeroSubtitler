@@ -105,3 +105,31 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.GoToNextShotChange(const APrevious: Boolean = False);
+var
+  x: Integer;
+begin
+  with WAVE do
+    if IsTimeLineEnabled then
+    begin
+      if APrevious then
+        x := GetPreviousSceneChange(CursorPosMS-1)
+      else
+        x := GetNextSceneChange(CursorPosMS+1);
+
+      if x > 0 then
+      begin
+        if MPV.IsMediaLoaded then
+        begin
+          if MPV.IsPlaying then MPV.Pause;
+          SetCursorMS(x);
+          MPV.SetMediaPosInMs(x);
+        end
+        else
+          WAVE.SetPlayCursorMS(x, True);
+      end;
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+

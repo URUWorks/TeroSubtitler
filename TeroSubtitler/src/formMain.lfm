@@ -2966,27 +2966,6 @@ object frmMain: TfrmMain
       Caption = 'Delete shot change'
       OnExecute = actDeleteShotChangeExecute
     end
-    object actViewShotChange: TAction
-      Category = 'Waveform'
-      AutoCheck = True
-      Caption = 'View shot change'
-      ImageIndex = 76
-      OnExecute = actViewShotChangeExecute
-    end
-    object actCenterWaveform: TAction
-      Category = 'Waveform'
-      AutoCheck = True
-      Caption = 'Center waveform'
-      ImageIndex = 75
-      OnExecute = actCenterWaveformExecute
-    end
-    object actDetectSilentZones: TAction
-      Tag = 8
-      Category = 'Waveform'
-      Caption = 'Detect silent zones'
-      ImageIndex = 77
-      OnExecute = actDetectSilentZonesExecute
-    end
     object actAddQuotationMarks: TAction
       Tag = 1
       Category = 'Texts'
@@ -3457,6 +3436,39 @@ object frmMain: TfrmMain
       Caption = 'Close'
       OnExecute = actCloseAppExecute
     end
+    object actGoToNextShotChange: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Go to next shot change'
+      OnExecute = actGoToNextShotChangeExecute
+    end
+    object actGoToPrevShotChange: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Go to prev shot change'
+      OnExecute = actGoToPrevShotChangeExecute
+    end
+    object actViewShotChange: TAction
+      Category = 'Waveform'
+      AutoCheck = True
+      Caption = 'View shot change'
+      ImageIndex = 76
+      OnExecute = actViewShotChangeExecute
+    end
+    object actCenterWaveform: TAction
+      Category = 'Waveform'
+      AutoCheck = True
+      Caption = 'Center waveform'
+      ImageIndex = 75
+      OnExecute = actCenterWaveformExecute
+    end
+    object actDetectSilentZones: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Detect silent zones'
+      ImageIndex = 77
+      OnExecute = actDetectSilentZonesExecute
+    end
   end
   object popDropInsert: TPopupMenu
     Images = ImageList_Default
@@ -3876,6 +3888,12 @@ object frmMain: TfrmMain
     end
     object Separator41: TMenuItem
       Caption = '-'
+    end
+    object MenuItem174: TMenuItem
+      Action = actGoToPrevShotChange
+    end
+    object MenuItem175: TMenuItem
+      Action = actGoToNextShotChange
     end
     object MenuItem137: TMenuItem
       Action = actInsertShotChange
