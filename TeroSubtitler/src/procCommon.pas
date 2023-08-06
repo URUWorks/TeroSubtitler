@@ -486,7 +486,7 @@ begin
         frmMain.WAVE.DrawGAP := GetValue('DrawGAP', False);
         frmMain.actViewShotChange.Checked := GetValue('ViewShotChanges', False);
         frmMain.actViewShotChangeExecute(NIL);
-        frmMain.actCenterWaveform.Checked := GetValue('CenterWaveform', True);
+        frmMain.actCenterWaveform.Checked := GetValue('CenterWaveform', False);
         frmMain.actCenterWaveformExecute(NIL);
         CloseKey;
 
