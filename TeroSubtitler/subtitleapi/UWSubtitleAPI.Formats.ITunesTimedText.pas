@@ -103,7 +103,7 @@ function TUWITunesTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; cons
     if AnsiEndsStr('t', S) then // ticks
       Result := TicksToMSecs(StrToInt64(Copy(S, 0, Length(S)-1)))
     else if AnsiEndsStr('s', S) then // seconds
-        Result := StringToTime(Copy(S, 0, Length(S)-1))
+      Result := StringToTime(Copy(S, 0, Length(S)-1))
     else
       Result := StringToTime(S, False, aFPS);
   end;
