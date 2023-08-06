@@ -39,9 +39,9 @@ object frmMain: TfrmMain
       EmptyText = 'Click to add waveform'
       FPS = 25
       FPSTimeMode = False
-      CenterPlayCursor = True
+      CenterPlayCursor = False
       SceneChangeEnabled = True
-      DrawGAP = True
+      DrawGAP = False
       SavePeakToFile = True
       OnSelectionChange = WAVESelectionChange
       OnSelectedSubtitleItem = WAVESelectedSubtitleItem
