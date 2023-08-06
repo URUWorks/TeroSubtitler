@@ -2,6 +2,7 @@
 - fixed: Height of some controls
 - updated: Russian language (thx RoxMarty)
 - improved: iTunes subtitle format
+- added: Jump to previous/next shotchange
 - added: Brazilian Portuguese language (thx Gzushgshsh)
 - added: Chaining subtitles
 
