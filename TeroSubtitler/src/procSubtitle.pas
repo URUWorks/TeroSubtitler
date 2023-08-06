@@ -253,7 +253,6 @@ begin
   else
     UndoInstance.AddUndo(utSubtitleChange, Index, Subtitles[Index], AutoIncrementUndo);
 
-
   if SubtitleMode = smText then
     Subtitles.Text[Index] := Text
   else
