@@ -534,7 +534,7 @@ begin
         end;
       end;
 
-      ClearItem(FixedItem, i);
+      //ClearItem(FixedItem, i);
       // Chaining
       if (etChaining in FErrors) and (i+1 < Subtitles.Count) then
       begin
@@ -569,7 +569,7 @@ begin
     // Repeated subtitle
     if etRepeatedSubtitle in ErrorsToCheck then
     begin
-      if (Index > 0) and Subtitles.IsEqualItem(Subtitles[Index], Subtitles[Index-1]) and (Subtitles[Index].Text <> '') and (Subtitles.Pause[Index] < Options.RepeatedTolerance) then
+      if (Index > 0) and Subtitles.IsEqualItem(Subtitles[Index], Subtitles[Index-1]) and (Subtitles[Index].Text <> '') and (Options.RepeatedTolerance > 0) and (Subtitles.Pause[Index] < Options.RepeatedTolerance) then
       begin
         Result := Result + [etRepeatedSubtitle];
       end;
@@ -578,11 +578,12 @@ begin
     // Unbreak if chars is less than X
     if etUnbreak in ErrorsToCheck then
     begin
-      t := RemoveTSTags(Subtitles[Index].Text);
-      s := UnbreakSubtitlesIfLessThanChars(t, Options.CPL);
-      if t <> s then
+      if Options.CPL > 0 then
       begin
-        Result := Result + [etUnbreak];
+        t := RemoveTSTags(Subtitles[Index].Text);
+        s := UnbreakSubtitlesIfLessThanChars(t, Options.CPL);
+        if t <> s then
+          Result := Result + [etUnbreak];
       end;
     end;
 
@@ -630,52 +631,38 @@ begin
     begin
       s := FixTags(Subtitles[Index].Text, swt_StartTag, swt_EndTag);
       if Subtitles[Index].Text <> s then
-      begin
         Result := Result + [etFixTags];
-      end;
     end;
 
     // Prohibited chars
     if etProhibitedChars in ErrorsToCheck then
     begin
-      if HasProhibitedChars(Subtitles[Index].Text, Options.ProhibitedChars) then
-      begin
+      if (Options.ProhibitedChars <> '') and HasProhibitedChars(Subtitles[Index].Text, Options.ProhibitedChars) then
         Result := Result + [etProhibitedChars];
-      end;
     end;
 
     // Break long lines
     if etBreakLongLines in ErrorsToCheck then
     begin
-      if HasTooLongLine(RemoveTSTags(Subtitles[Index].Text), Options.CPL) then
-      begin
+      if (Options.CPL > 0) and HasTooLongLine(RemoveTSTags(Subtitles[Index].Text), Options.CPL) then
         Result := Result + [etBreakLongLines];
-      end;
     end;
 
     // Hearing impaired
     if etHearingImpaired in ErrorsToCheck then
     begin
       if IsHearingImpaired(Subtitles[Index].Text) then
-      begin
-        //s := FixHearingImpaired(Subtitles[Index].Text, sLineBreak);
-        //if Subtitles[Index].Text <> s then
-        //begin
-          Result := Result + [etHearingImpaired];
-        //end;
-      end;
+        Result := Result + [etHearingImpaired];
     end;
 
     // Repeated chars
     if etRepeatedChars in ErrorsToCheck then
     begin
-      if HasRepeatedChar(Subtitles[Index].Text, Options.RepeatableChars) then
+      if (Options.RepeatableChars <> '') and HasRepeatedChar(Subtitles[Index].Text, Options.RepeatableChars) then
       begin
         s := FixRepeatedChar(Subtitles[Index].Text, Options.RepeatableChars);
         if Subtitles[Index].Text <> s then
-        begin
           Result := Result + [etRepeatedChars];
-        end;
       end;
     end;
 
@@ -686,19 +673,15 @@ begin
       begin
         s := OCR.Fix(Subtitles[Index].Text);
         if Subtitles[Index].Text <> s then
-        begin
           Result := Result + [etOCR];
-        end;
       end;
     end;
 
     // Max Lines *
     if etMaxLines in ErrorsToCheck then
     begin
-      if (LineCount(Subtitles.Text[Index], sLineBreak) > Options.MaxLines) then
-      begin
+      if (Options.MaxLines > 0) and (LineCount(Subtitles.Text[Index], sLineBreak) > Options.MaxLines) then
         Result := Result + [etMaxLines];
-      end;
     end;
   end;
 
@@ -707,59 +690,46 @@ begin
     // Time too short
     if etTimeTooShort in ErrorsToCheck then
     begin
-      if Subtitles.Duration[Index] < Options.MinDuration then
-      begin
+      if (Options.MinDuration > 0) and (Subtitles.Duration[Index] < Options.MinDuration) then
         Result := Result + [etTimeTooShort];
-      end;
     end;
 
     // Time too long
     if etTimeTooLong in ErrorsToCheck then
     begin
-      if Subtitles.Duration[Index] > Options.MaxDuration then
-      begin
+      if (Options.MaxDuration > 0) and (Subtitles.Duration[Index] > Options.MaxDuration) then
         Result := Result + [etTimeTooLong];
-      end;
     end;
 
     // Bad Values
     if etBadValues in ErrorsToCheck then
     begin
       if Subtitles.InitialTime[Index] > Subtitles.FinalTime[Index] then
-      begin
         Result := Result + [etBadValues];
-      end;
     end;
 
     // Pause too short *
     if etPauseTooShort in ErrorsToCheck then
     begin
-      if (Index >= 0) and (Index < Subtitles.Count-1) and (Subtitles.Pause[Index] < GetCorrectTime(Options.MinPause, Options.PauseInFrames)) then
-      begin
+      if (Index >= 0) and (Index < Subtitles.Count-1) and (Options.MinPause > 0) and (Subtitles.Pause[Index] < GetCorrectTime(Options.MinPause, Options.PauseInFrames)) then
         Result := Result + [etPauseTooShort];
-      end;
     end;
 
     // too much CPS *
     if etMaxCPS in ErrorsToCheck then
     begin
-      if (Subtitles.TextCPS[Index, Options.CPSLineLenStrategy] > Options.MaxCPS) then
-      begin
+      if (Options.MaxCPS > 0) and (Subtitles.TextCPS[Index, Options.CPSLineLenStrategy] > Options.MaxCPS) then
         Result := Result + [etMaxCPS];
-      end;
     end;
 
     // Overlapping
     if etOverlapping in ErrorsToCheck then
     begin
       if (Index > 0) and (Subtitles.InitialTime[Index] <= Subtitles.FinalTime[Index-1]) then
-      begin
         Result := Result + [etOverlapping, etOverlappingWithPrev];
-      end;
+
       if (Index < Subtitles.Count-1) and (Subtitles.FinalTime[Index] >= Subtitles.InitialTime[Index+1]) then
-      begin
         Result := Result + [etOverlapping, etOverlappingWithNext];
-      end;
     end;
   end;
 end;
