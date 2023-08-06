@@ -257,7 +257,8 @@ type
     procedure ClearSelection;
     function IsTimeLineEnabled: Boolean;
     function GetPlayCursorMS: Integer;
-    procedure SetPlayCursorMS(NewPosMS: Integer);
+    procedure SetPlayCursorMS(NewPosMS: Integer; const ABothCursor: Boolean = False);
+    procedure SetCursorMS(NewPosMS: Integer; const AUpdate: Boolean = False);
     procedure ZoomAll;
     procedure ZoomIn;
     procedure ZoomOut;
@@ -829,7 +830,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure TUWWaveformDisplayer.SetPlayCursorMS(NewPosMS: Integer);
+procedure TUWWaveformDisplayer.SetPlayCursorMS(NewPosMS: Integer; const ABothCursor: Boolean = False);
 var
   AMiddle: Integer;
 begin
@@ -837,6 +838,7 @@ begin
   if FPlayCursorMS <> NewPosMS then
   begin
     FPlayCursorMS := NewPosMS;
+    if ABothCursor then FCursorMS := FPlayCursorMS;
     if Assigned(FOnPlayCursorChange) then FOnPlayCursorChange(Self);
 
     if not FCenterPlay then
@@ -856,6 +858,18 @@ begin
       else
         UpdateView([uvfPlayCursor]);
     end;
+  end;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.SetCursorMS(NewPosMS: Integer; const AUpdate: Boolean = False);
+begin
+  Constrain(NewPosMS, 0, FLengthMS);
+  if FCursorMS <> NewPosMS then
+  begin
+    FCursorMS := NewPosMS;
+    if AUpdate then UpdateView([uvfCursor]);
   end;
 end;
 
