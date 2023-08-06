@@ -103,7 +103,7 @@ end;
 function FramesToTime(const Frames, FPS: Single): Cardinal;
 begin
   if FPS > 0 then
-    Result := Trunc((Frames / FPS) * 1000.0)
+    Result := Round((Frames / FPS) * 1000.0)
   else
     Result := 0;
 end;
