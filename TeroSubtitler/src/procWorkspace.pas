@@ -47,6 +47,7 @@ procedure FillComboWithAudioStreams(const ACombo: TComboBox);
 procedure FillMenuWithUnicodeSymbols(const AParent: TComponent);
 procedure FillMenuWithSilentZone(const AParent: TComponent);
 
+function IsWorkAreaEnabled: Boolean;
 procedure EnableWorkArea(const AValue: Boolean = True);
 procedure EnableActionsByTag(const ATags: array of Integer; const AValue: Boolean);
 procedure EnableTimerAutoBackup(const AValue: Boolean = True);
@@ -79,7 +80,7 @@ procedure RefreshAppTitle;
 
 procedure SetStatusBarText(const AText: String; const APanelIndex: Integer = 0; const AUseTimer: Boolean = True);
 
-procedure DoAutoCheckErrors(const AAll: Boolean = True);
+procedure DoAutoCheckErrors(const AAll: Boolean = True; const ARefresh: Boolean = False);
 
 procedure UpdateStatusBar;
 procedure UpdateCPSAndTexts(const AIndex: Integer);
@@ -554,6 +555,14 @@ begin
             Add(Item);
       end;
     end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function IsWorkAreaEnabled: Boolean;
+begin
+  with frmMain do
+    Result := VST.Enabled; // and LayoutVST.Visible;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1135,14 +1144,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure DoAutoCheckErrors(const AAll: Boolean = True);
+procedure DoAutoCheckErrors(const AAll: Boolean = True; const ARefresh: Boolean = False);
 begin
   if AppOptions.AutoCheckErrors then
   begin
     if AAll then
-      VSTDoLoop(frmMain.VST, @ApplyCheckErrors, dlAll, False)
+      VSTDoLoop(frmMain.VST, @ApplyCheckErrors, dlAll, ARefresh)
     else
-      VSTDoLoop(frmMain.VST, @ApplyCheckErrorsTimesOnly, dlAll, False);
+      VSTDoLoop(frmMain.VST, @ApplyCheckErrorsTimesOnly, dlAll, ARefresh);
   end;
 end;
 
