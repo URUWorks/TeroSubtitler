@@ -493,7 +493,7 @@ begin
             else
               z := ShotCut - ThresholdMs;
 
-            if (FixedItem.InitialTime <> z) and (Abs(FixedItem.InitialTime - z) > FramesToTime(1, Workspace.FPS.OutputFPS)) then
+            if (FixedItem.InitialTime <> z) and (Abs(FixedItem.InitialTime - z) >= FramesToTime(1, Workspace.FPS.OutputFPS)) then
             begin
               FixedItem.InitialTime := z;
               if SnapAway then
@@ -517,7 +517,7 @@ begin
             else if (ShotCut + ThresholdMs) <= (Subtitles[i+1].InitialTime - Profile^.MinPause) then
               z := ShotCut + ThresholdMs;
 
-            if (FixedItem.FinalTime <> z) and (Abs(FixedItem.FinalTime - z) > FramesToTime(1, Workspace.FPS.OutputFPS)) then
+            if (FixedItem.FinalTime <> z) and (Abs(FixedItem.FinalTime - z) >= FramesToTime(1, Workspace.FPS.OutputFPS)) then
             begin
               FixedItem.FinalTime   := z;
               FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etSnapToShotChangesOutCue];
