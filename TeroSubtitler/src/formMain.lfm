@@ -501,7 +501,7 @@ object frmMain: TfrmMain
             CheckedColor = clInactiveBorder
             Images = ImageList_Default
             ImageIndex = 37
-            Action = actSetDefaultPause
+            Action = actSetDefaultGap
             Color = clBtnFace
           end
           object tedPause: TUWTimeEdit
@@ -1342,7 +1342,7 @@ object frmMain: TfrmMain
             Action = actSetAutomaticDuration
           end
           object MenuItem74: TMenuItem
-            Action = actSetDefaultPause
+            Action = actSetDefaultGap
           end
         end
         object Separator19: TMenuItem
@@ -3050,11 +3050,11 @@ object frmMain: TfrmMain
       Caption = 'Set automatic duration'
       OnExecute = actSetAutomaticDurationExecute
     end
-    object actSetDefaultPause: TAction
+    object actSetDefaultGap: TAction
       Tag = 1
       Category = 'Timings'
       Caption = 'Set default pause'
-      OnExecute = actSetDefaultPauseExecute
+      OnExecute = actSetDefaultGapExecute
     end
     object actReadTimingsFromFile: TAction
       Tag = 1
@@ -3436,17 +3436,17 @@ object frmMain: TfrmMain
       Caption = 'Close'
       OnExecute = actCloseAppExecute
     end
-    object actGoToNextShotChange: TAction
+    object actJumpToNextShotChange: TAction
       Tag = 8
       Category = 'Waveform'
-      Caption = 'Go to next shot change'
-      OnExecute = actGoToNextShotChangeExecute
+      Caption = 'Jump to next shot change'
+      OnExecute = actJumpToNextShotChangeExecute
     end
-    object actGoToPrevShotChange: TAction
+    object actJumpToPrevShotChange: TAction
       Tag = 8
       Category = 'Waveform'
-      Caption = 'Go to prev shot change'
-      OnExecute = actGoToPrevShotChangeExecute
+      Caption = 'Jump to previous shot change'
+      OnExecute = actJumpToPrevShotChangeExecute
     end
     object actViewShotChange: TAction
       Category = 'Waveform'
@@ -3890,10 +3890,10 @@ object frmMain: TfrmMain
       Caption = '-'
     end
     object MenuItem174: TMenuItem
-      Action = actGoToPrevShotChange
+      Action = actJumpToPrevShotChange
     end
     object MenuItem175: TMenuItem
-      Action = actGoToNextShotChange
+      Action = actJumpToNextShotChange
     end
     object MenuItem137: TMenuItem
       Action = actInsertShotChange

@@ -1245,7 +1245,7 @@ begin
       actExtendLengthToPrevious.Enabled := mmoText.Enabled;
       actExtendLengthToNext.Enabled     := mmoText.Enabled;
       actSetAutomaticDuration.Enabled   := mmoText.Enabled;
-      actSetDefaultPause.Enabled        := mmoText.Enabled;
+      actSetDefaultGap.Enabled          := mmoText.Enabled;
 
       if VST.SelectedCount = 0 then // zero selected
       begin
@@ -1288,8 +1288,8 @@ begin
 
           actExtendLengthToPrevious.Enabled := (NodeIndex > 0);
           actExtendLengthToNext.Enabled     := NodeIndex < Subtitles.Count-1;
-          actSetDefaultPause.Enabled        := actExtendLengthToNext.Enabled;
-          tedPause.Enabled                  := actSetDefaultPause.Enabled;
+          actSetDefaultGap.Enabled          := actExtendLengthToNext.Enabled;
+          tedPause.Enabled                  := actSetDefaultGap.Enabled;
 
           cboActor.Tag  := 1;
           cboActor.Text := Subtitles[NodeIndex].Actor;
@@ -1314,8 +1314,8 @@ begin
 
           actExtendLengthToPrevious.Enabled := True;
           actExtendLengthToNext.Enabled     := True;
-          actSetDefaultPause.Enabled        := NodeIndex < Subtitles.Count-1;
-          tedPause.Enabled                  := actSetDefaultPause.Enabled;
+          actSetDefaultGap.Enabled          := NodeIndex < Subtitles.Count-1;
+          tedPause.Enabled                  := actSetDefaultGap.Enabled;
         end;
         actAutomaticDuration.Enabled := True;
       end;

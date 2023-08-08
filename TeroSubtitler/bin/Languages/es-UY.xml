@@ -130,7 +130,7 @@
       <actExtendLengthToPrevious>Extender tiempo inicial al anterior</actExtendLengthToPrevious>
       <actExtendLengthToNext>Extender tiempo final al siguiente</actExtendLengthToNext>
       <actSetAutomaticDuration>Establecer duración automática</actSetAutomaticDuration>
-      <actSetDefaultPause Hint="sólo si la pausa es demasiado corta">Establecer pausa predeterminada</actSetDefaultPause>
+      <actSetDefaultGap Hint="sólo si la pausa es demasiado corta">Establecer pausa predeterminada</actSetDefaultGap>
       <actSwapTexts>Intercambiar textos</actSwapTexts>
       <actShowColumnNumber>Número/Pausa</actShowColumnNumber>
       <actShowColumnTimes>Tiempos</actShowColumnTimes>
@@ -208,8 +208,8 @@
       <actSwapWorkspace>Intercambiar diseño de vídeo</actSwapWorkspace>
       <actInsertShotChange>Insertar cambio de plano</actInsertShotChange>                  
       <actDeleteShotChange>Borrar cambio(s) de plano</actDeleteShotChange>
-      <actGoToPrevShotChange>Saltar a cambio de plano anterior</actGoToPrevShotChange>
-      <actGoToNextShotChange>Saltar a cambio de plano siguiente</actGoToNextShotChange>            
+      <actJumpToPrevShotChange>Saltar a cambio de plano anterior</actJumpToPrevShotChange>
+      <actJumpToNextShotChange>Saltar a cambio de plano siguiente</actJumpToNextShotChange>            
       <actViewShotChange Hint="Habilita/deshabilita los cambios de plano">Cambios de plano</actViewShotChange>      
       <actCenterWaveform>Centrar forma de onda</actCenterWaveform>
       <actDetectSilentZones Hint="Clic para refrescar la lista">Detectar zonas de silencio</actDetectSilentZones>

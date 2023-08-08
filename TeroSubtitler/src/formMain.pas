@@ -72,8 +72,8 @@ type
     actExportCustomTextFormat: TAction;
     actActor: TAction;
     actExportCustomImageFormat: TAction;
-    actGoToNextShotChange: TAction;
-    actGoToPrevShotChange: TAction;
+    actJumpToNextShotChange: TAction;
+    actJumpToPrevShotChange: TAction;
     actSaveProject: TAction;
     actLoadProject: TAction;
     actMediaMoveSubtitle: TAction;
@@ -148,7 +148,7 @@ type
     actShowColumnStyleAndActor: TAction;
     actSwapTexts: TAction;
     actSetAutomaticDuration: TAction;
-    actSetDefaultPause: TAction;
+    actSetDefaultGap: TAction;
     actReadTextsFromFile: TAction;
     actReadTimingsFromFile: TAction;
     actModifySelection: TAction;
@@ -845,7 +845,7 @@ type
     procedure actExtendLengthToNextExecute(Sender: TObject);
     procedure actExtendLengthToPreviousExecute(Sender: TObject);
     procedure actSetAutomaticDurationExecute(Sender: TObject);
-    procedure actSetDefaultPauseExecute(Sender: TObject);
+    procedure actSetDefaultGapExecute(Sender: TObject);
     procedure actSwapTextsExecute(Sender: TObject);
     procedure actShowColumnNumberExecute(Sender: TObject);
     procedure actShowColumnTimesExecute(Sender: TObject);
@@ -885,8 +885,8 @@ type
     procedure actSwapWorkspaceExecute(Sender: TObject);
     procedure actInsertShotChangeExecute(Sender: TObject);
     procedure actDeleteShotChangeExecute(Sender: TObject);
-    procedure actGoToNextShotChangeExecute(Sender: TObject);
-    procedure actGoToPrevShotChangeExecute(Sender: TObject);
+    procedure actJumpToNextShotChangeExecute(Sender: TObject);
+    procedure actJumpToPrevShotChangeExecute(Sender: TObject);
     procedure actViewShotChangeExecute(Sender: TObject);
     procedure actCenterWaveformExecute(Sender: TObject);
     procedure actSetAsDefaultEncodingExecute(Sender: TObject);

@@ -1038,7 +1038,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actSetDefaultPauseExecute(Sender: TObject);
+procedure TfrmMain.actSetDefaultGapExecute(Sender: TObject);
 begin
   VSTDoLoop(VST, @ApplyDefaultPause);
 end;
@@ -1401,14 +1401,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actGoToNextShotChangeExecute(Sender: TObject);
+procedure TfrmMain.actJumpToNextShotChangeExecute(Sender: TObject);
 begin
   GoToNextShotChange;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actGoToPrevShotChangeExecute(Sender: TObject);
+procedure TfrmMain.actJumpToPrevShotChangeExecute(Sender: TObject);
 begin
   GoToNextShotChange(True);
 end;

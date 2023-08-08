@@ -130,7 +130,7 @@
       <actExtendLengthToPrevious>Extend initial time to previous</actExtendLengthToPrevious>
       <actExtendLengthToNext>Extend final time to next</actExtendLengthToNext>
       <actSetAutomaticDuration>Set automatic duration</actSetAutomaticDuration>
-      <actSetDefaultPause Hint="only if the gap is too short">Set default pause</actSetDefaultPause>
+      <actSetDefaultGap Hint="only if the gap is too short">Set default gap</actSetDefaultGap>
       <actSwapTexts>Swap text</actSwapTexts>
       <actShowColumnNumber>Number/Gap</actShowColumnNumber>
       <actShowColumnTimes>Times</actShowColumnTimes>
@@ -208,8 +208,8 @@
       <actSwapWorkspace>Swap video layout</actSwapWorkspace>
       <actInsertShotChange>Insert shot change</actInsertShotChange>                  
       <actDeleteShotChange>Delete shot change(s)</actDeleteShotChange>
-      <actGoToPrevShotChange>Jump to previous shot change</actGoToPrevShotChange>
-      <actGoToNextShotChange>Jump to next shot change</actGoToNextShotChange>      
+      <actJumpToPrevShotChange>Jump to previous shot change</actJumpToPrevShotChange>
+      <actJumpToNextShotChange>Jump to next shot change</actJumpToNextShotChange>      
       <actViewShotChange Hint="Enable/disable shot changes">Shot changes</actViewShotChange>
       <actCenterWaveform>Center waveform</actCenterWaveform>
       <actDetectSilentZones Hint="Click to refresh list">Detect silent zones</actDetectSilentZones>
