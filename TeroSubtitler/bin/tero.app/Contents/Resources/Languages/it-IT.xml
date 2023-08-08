@@ -44,20 +44,20 @@
     </Section>                        
     <Section Name="TAction">
       <actNewSubtitle Hint="Avvia un nuovo progetto di sottotitoli">Nuovo sottotitolo</actNewSubtitle>
-      <actLoadSubtitle Hint="Carica un file di sottotitoli">Carica sottotitoli...</actLoadSubtitle>
-      <actLoadTranslation>Carica traduzione...</actLoadTranslation>
-      <actLoadProject>Carica progetto...</actLoadProject>
+      <actLoadSubtitle Hint="Carica un file di sottotitoli">Carica sottotitoli…</actLoadSubtitle>
+      <actLoadTranslation>Carica traduzione…</actLoadTranslation>
+      <actLoadProject>Carica progetto…</actLoadProject>
       <actUndo Hint="Annulla l’ultima azione">Annulla</actUndo>
       <actRedo Hint="Ripeti l’ultima azione">Ripeti</actRedo>
       <actCut>Taglia</actCut>
       <actCopy>Copia</actCopy>
       <actPaste>Incolla</actPaste>
-      <actFind>Trova...</actFind>
+      <actFind>Trova…</actFind>
       <actFindNext>Trova successivo</actFindNext>
       <actFindPrevious>Trova precedente</actFindPrevious>
-      <actReplace>Sostituisci...</actReplace>
+      <actReplace>Sostituisci…</actReplace>
       <actAbout>Informazioni su %s</actAbout>
-      <actCheckForUpdates>Controlla aggiornamenti...</actCheckForUpdates>
+      <actCheckForUpdates>Controlla aggiornamenti…</actCheckForUpdates>
       <actInsertSubtitleBefore Hint="Inserisci un sottotitolo prima di quello attuale">Inserisci sottotitolo prima</actInsertSubtitleBefore>
       <actInsertSubtitle Hint="Inserisci un nuovo sottotitolo dopo il sottotitolo attuale">Inserisci sottotitolo</actInsertSubtitle>
       <actDeleteSubtitle Hint="Elimina il/i sottotitolo/i selezionato/i">Elimina sottotitolo/i</actDeleteSubtitle>
@@ -103,13 +103,13 @@
       <actInvertSelection>Inverti la selezione</actInvertSelection>
       <actSelectCurrentToBeginning>Seleziona dal sottotitolo attuale fino al primo</actSelectCurrentToBeginning>
       <actSelectCurrentToEnd>Seleziona dal sottotitolo attuale fino all’ultimo</actSelectCurrentToEnd>
-      <actModifySelection>Modifica selezione...</actModifySelection>      
-      <actDurationLimits>Limiti di durata...</actDurationLimits>
-      <actAutomaticDuration>Durata automatica...</actAutomaticDuration>
-      <actTimeExpander>Dilatatore/riduttore delle tempistiche...</actTimeExpander>
-      <actSetDelay>Imposta ritardo...</actSetDelay>
-      <actShiftTimes>Sposta tempistiche...</actShiftTimes>       
-      <actConvertCase>Converti maiuscole/minuscole...</actConvertCase>
+      <actModifySelection>Modifica selezione…</actModifySelection>      
+      <actDurationLimits>Limiti di durata…</actDurationLimits>
+      <actAutomaticDuration>Durata automatica…</actAutomaticDuration>
+      <actTimeExpander>Dilatatore/riduttore delle tempistiche…</actTimeExpander>
+      <actSetDelay>Imposta ritardo…</actSetDelay>
+      <actShiftTimes>Sposta tempistiche…</actShiftTimes>       
+      <actConvertCase>Converti maiuscole/minuscole…</actConvertCase>
       <actUnbreakSubtitle>Disattiva a capo automatico nei sottotitoli</actUnbreakSubtitle>
       <actSetMaximumLineLength>Imposta lunghezza massima della riga</actSetMaximumLineLength>
       <actReverseText>Testo a rovescio</actReverseText>
@@ -117,20 +117,20 @@
       <actDivideSubtitle>Separa sottotitolo</actDivideSubtitle>
       <actMarkSubtitle>Contrassegna sottotitolo/i</actMarkSubtitle>
       <actUnMarkSubtitle>Decontrassegna sottotitolo/i</actUnMarkSubtitle>
-      <actAdjustSubtitle>Regola sottotitolo...</actAdjustSubtitle>
+      <actAdjustSubtitle>Regola sottotitolo…</actAdjustSubtitle>
       <actJumpToNextMarked>Passa al sottotitolo contrassegnato successivo</actJumpToNextMarked>
       <actJumpToPreviousMarked>Passa al sottotitolo contrassegnato precedente</actJumpToPreviousMarked>
       <actEndCueAddOneFrame>Aggiungi un fotogramma</actEndCueAddOneFrame>
       <actEndCueSubtractOneFrame>Rimuovi un fotogramma</actEndCueSubtractOneFrame>
-      <actMultipleReplace>Sostituzioni multiple...</actMultipleReplace>
-      <actGoTo>Vai al numero di riga...</actGoTo>
-      <actReadTimingsFromFile>Leggi tempistiche da file...</actReadTimingsFromFile>
-      <actReadTextsFromFile>Leggi testo da file...</actReadTextsFromFile>
-      <actActor>Interpreti...</actActor>
+      <actMultipleReplace>Sostituzioni multiple…</actMultipleReplace>
+      <actGoTo>Vai al numero di riga…</actGoTo>
+      <actReadTimingsFromFile>Leggi tempistiche da file…</actReadTimingsFromFile>
+      <actReadTextsFromFile>Leggi testo da file…</actReadTextsFromFile>
+      <actActor>Interpreti…</actActor>
       <actExtendLengthToPrevious>Estendi il tempo di inizio al precedente</actExtendLengthToPrevious>
       <actExtendLengthToNext>Estendi il tempo di fine al successivo</actExtendLengthToNext>
       <actSetAutomaticDuration>Imposta durata automatica</actSetAutomaticDuration>
-      <actSetDefaultPause Hint="solo se l’intervallo è troppo breve">Imposta pausa predefinita</actSetDefaultPause>
+      <actSetDefaultPause Hint="solo se l’intervallo è troppo breve">Imposta intervallo predefinito</actSetDefaultPause>
       <actSwapTexts>Scambia posizione del testo</actSwapTexts>
       <actShowColumnNumber>Numero/Intervallo</actShowColumnNumber>
       <actShowColumnTimes>Tempistiche</actShowColumnTimes>
@@ -139,24 +139,24 @@
       <actShowColumnWPM>Parole al minuto</actShowColumnWPM>
       <actShowColumnCPL>Caratteri per riga</actShowColumnCPL>
       <actShowColumnStyleAndActor>Stile/Interpreti</actShowColumnStyleAndActor>
-      <actWebReference>Definizione online...</actWebReference>
+      <actWebReference>Definizione online…</actWebReference>
       <actSplitSubtitleAtPosition>Dividi la riga in corrispondenza del cursore</actSplitSubtitleAtPosition>
       <actHelp>Aiuto</actHelp>
-      <actSettings>Impostazioni...</actSettings>
-      <actFormatProperties>Proprietà del formato...</actFormatProperties>
-      <actRestoreBackup>Ripristina backup...</actRestoreBackup>
+      <actSettings>Impostazioni…</actSettings>
+      <actFormatProperties>Proprietà del formato…</actFormatProperties>
+      <actRestoreBackup>Ripristina backup…</actRestoreBackup>
       <actSaveSubtitle Hint="Salva gli attuali sottotitoli in un file">Salva sottotitoli</actSaveSubtitle>
-      <actSaveSubtitleAs Hint="Salva gli attuali sottotitoli in un formato specifico di file">Salva sottotitoli come...</actSaveSubtitleAs>
+      <actSaveSubtitleAs Hint="Salva gli attuali sottotitoli in un formato specifico di file">Salva sottotitoli come…</actSaveSubtitleAs>
       <actSaveTranslation Hint="Salva l’attuale traduzione in un file">Salva traduzione</actSaveTranslation>
-      <actSaveTranslationAs Hint="Salva l’attuale traduzione in un formato specifico di file">Salva traduzione come...</actSaveTranslationAs>
-      <actSaveProject>Salva progetto...</actSaveProject>
+      <actSaveTranslationAs Hint="Salva l’attuale traduzione in un formato specifico di file">Salva traduzione come…</actSaveTranslationAs>
+      <actSaveProject>Salva progetto…</actSaveProject>
       <actCloseSubtitle>Chiudi sottotitoli</actCloseSubtitle>
       <actCloseApp>Chiudi</actCloseApp>
-      <actImportSubtitles>Sottotitoli...</actImportSubtitles>
-      <actExportMarkedSubtitles>Sottotitoli contrassegnati...</actExportMarkedSubtitles>
-      <actExportTextOnly>Solo testo...</actExportTextOnly>            
-      <actExportCustomTextFormat>Formato di testo personalizzato...</actExportCustomTextFormat>
-      <actExportCustomImageFormat>Formato di immagine personalizzata...</actExportCustomImageFormat>
+      <actImportSubtitles>Sottotitoli…</actImportSubtitles>
+      <actExportMarkedSubtitles>Sottotitoli contrassegnati…</actExportMarkedSubtitles>
+      <actExportTextOnly>Solo testo…</actExportTextOnly>            
+      <actExportCustomTextFormat>Formato di testo personalizzato…</actExportCustomTextFormat>
+      <actExportCustomImageFormat>Formato di immagine personalizzata…</actExportCustomImageFormat>
       <actMediaPreviousFrame>Fotogramma precedente</actMediaPreviousFrame>
       <actMediaNextFrame>Fotogramma successivo</actMediaNextFrame>
       <actMediaMoveSubtitle>Sposta sottotitolo</actMediaMoveSubtitle>
@@ -164,17 +164,17 @@
       <actMediaSetFinalTime>Imposta tempistica finale</actMediaSetFinalTime>
       <actMediaStartSubtitle>Inizio sottotitolo</actMediaStartSubtitle>
       <actMediaEndSubtitle>Fine sottotitolo</actMediaEndSubtitle>
-      <actLoadVideo Hint="Apri un file video">Apri filmato...</actLoadVideo>
+      <actLoadVideo Hint="Apri un file video">Apri filmato…</actLoadVideo>
       <actCloseVideo>Chiudi filmato</actCloseVideo>
       <actSMPTE>Tempistica SMPTE</actSMPTE>
-      <actWaveExtract>Estrai la forma d’onda...</actWaveExtract>
-      <actLoadVideoFromURL>Apri filmato da URL...</actLoadVideoFromURL>
-      <actSpellCheck>Controllo ortografico...</actSpellCheck>
-      <actTranslate>Traduzione automatica...</actTranslate>
-      <actFixSubtitles>Correzione sottotitoli...</actFixSubtitles>
-      <actTranslationMemorySettings>Apri...</actTranslationMemorySettings>
-      <actTranslationMemoryList>Elenco...</actTranslationMemoryList>
-      <actFontColorDlg>Colore...</actFontColorDlg>
+      <actWaveExtract>Estrai la forma d’onda…</actWaveExtract>
+      <actLoadVideoFromURL>Apri filmato da URL…</actLoadVideoFromURL>
+      <actSpellCheck>Controllo ortografico…</actSpellCheck>
+      <actTranslate>Traduzione automatica…</actTranslate>
+      <actFixSubtitles>Correzione sottotitoli…</actFixSubtitles>
+      <actTranslationMemorySettings>Apri…</actTranslationMemorySettings>
+      <actTranslationMemoryList>Elenco…</actTranslationMemoryList>
+      <actFontColorDlg>Colore…</actFontColorDlg>
       <actFontColor>Imposta il colore del testo</actFontColor>      
       <actAlignToLeft>Allinea a sinistra</actAlignToLeft>
       <actAlignToCenter>Allinea al centro</actAlignToCenter>
@@ -184,30 +184,32 @@
       <actVAlignToMiddle>Allineamento verticale al centro</actVAlignToMiddle>
       <actVAlignToTop>Allineamento verticale in alto</actVAlignToTop>
       <actAutoBreakSubtitle Hint="Dividi una riga lunga in due o più righe">A capo automatico</actAutoBreakSubtitle>
-      <actAddNote>Annota...</actAddNote>
-      <actTranslationMemory>Mostra...</actTranslationMemory>
+      <actAddNote>Annota…</actAddNote>
+      <actTranslationMemory>Mostra…</actTranslationMemory>
       <actTranslationMemoryClose>Chiudi</actTranslationMemoryClose>
       <actValidateTM Hint="Convalida e passa alla voce successiva">Convalida memoria di traduzione</actValidateTM>
       <actTM1>Utilizza il testo dalla posizione 1 (tm)</actTM1>
       <actTM2>Utilizza il testo dalla posizione 2 (tm)</actTM2>
       <actTM3>Utilizza il testo dalla posizione 3 (tm)</actTM3>
-      <actTBXSettings>Apri...</actTBXSettings>
+      <actTBXSettings>Apri…</actTBXSettings>
       <actTBXClose>Chiudi</actTBXClose>
-      <actTBX>Mostra...</actTBX>      
-      <actTBXList>Elenco...</actTBXList>
-      <actTBXEdit>Aggiungi...</actTBXEdit>            
+      <actTBX>Mostra…</actTBX>      
+      <actTBXList>Elenco…</actTBXList>
+      <actTBXEdit>Aggiungi…</actTBXEdit>            
       <actInsertCurrentTime>Inserisci tempistica attuale</actInsertCurrentTime>
-      <actLoadTranscription>Trascrizione...</actLoadTranscription>
-      <actSaveTranscription>Trascrizione...</actSaveTranscription>
-      <actGoToTime>Vai al momento...</actGoToTime>
-      <actShotChanges>Cambi di inquadratura...</actShotChanges>
-      <actAudioToText>Da audio a testo...</actAudioToText>            
-      <actBatchConvert>Conversione in blocco...</actBatchConvert>      
-      <actQualityCheck>Controllo qualità...</actQualityCheck>
-      <actCompare>Confronta...</actCompare>
+      <actLoadTranscription>Trascrizione…</actLoadTranscription>
+      <actSaveTranscription>Trascrizione…</actSaveTranscription>
+      <actGoToTime>Vai al momento…</actGoToTime>
+      <actShotChanges>Cambi di inquadratura…</actShotChanges>
+      <actAudioToText>Da audio a testo…</actAudioToText>            
+      <actBatchConvert>Conversione in blocco…</actBatchConvert>      
+      <actQualityCheck>Controllo qualità…</actQualityCheck>
+      <actCompare>Confronta…</actCompare>
       <actSwapWorkspace>Scambia la posizione del riquadro del video</actSwapWorkspace>
       <actInsertShotChange>Inserisci un cambio di inquadratura</actInsertShotChange>                  
       <actDeleteShotChange>Elimina un cambio di inquadratura</actDeleteShotChange>
+      <actJumpToPrevShotChange>Passa al precedente cambio di inquadratura</actJumpToPrevShotChange>
+      <actJumpToNextShotChange>Passa al successivo cambio di inquadratura</actJumpToNextShotChange>
       <actViewShotChange Hint="Abilita/disabilita i cambi di inquadratura">Cambi di inquadratura</actViewShotChange>
       <actCenterWaveform>Allinea forma d’onda al centro</actCenterWaveform>
       <actDetectSilentZones Hint="Fare clic per aggiornare l’elenco">Rileva zone di silenzio</actDetectSilentZones>
@@ -345,8 +347,7 @@
       <lblZeroToDisable>(0 per disabilitare)</lblZeroToDisable>      
       <lblProfile>Profilo</lblProfile>      
       <lblNewSubtitleMs>Nuovo sottotitolo (ms)</lblNewSubtitleMs>
-      <lblMinDurationMs>Durata min. (ms)</lblMinDurationMs>
-      <lblMinDurationPerWordMs>Durata min. per parola (ms)</lblMinDurationPerWordMs>
+      <lblMinDurationMs>Durata min. / per parola (ms)</lblMinDurationMs>
       <lblMaxDurationMs>Durata max. (ms)</lblMaxDurationMs>
       <lblMaxLineCount>Conteggio max. riga</lblMaxLineCount>
       <lblShiftTimeMs>Sposta tempistiche (ms)</lblShiftTimeMs>
@@ -357,9 +358,10 @@
       <lblRepeatableChars>Caratteri ripetibili</lblRepeatableChars>
       <lblProhibitedChars>Caratteri non consentiti</lblProhibitedChars>
       <lblCPSStrategy>Caratteri esclusi dal conteggio di CPS</lblCPSStrategy>
-      <lblSCSnapArea>Area di ancoraggio per i cambi di scena (fotogrammi)</lblSCSnapArea>
-      <lblSCSnapInCues>Àncora i punti di ingresso dopo il cambio di inquadratura (fotogrammi)</lblSCSnapInCues>
-      <lblSCSnapOutCues>Àncora i punti di uscita prima del cambio di inquadratura (fotogrammi)</lblSCSnapOutCues>            
+      <lblSCSnapArea>Ancoraggio per i cambi di scena / entrata (fotogrammi)</lblSCSnapArea>
+      <lblSCSnapInCues>Àncora i punti di entrata dopo il c.i. (fotogrammi)</lblSCSnapInCues>
+      <lblSCSnapOutCues>Àncora i punti di uscita prima del c.i. (fotogrammi)</lblSCSnapOutCues>
+      <lblChaining>Concatenazione (fotogrammi)</lblChaining>            
       <lblTheme>Tema</lblTheme>
       <lblListMode>Modalità elenco</lblListMode>
 	  <lblSubtitles>Sottotitoli</lblSubtitles>      
@@ -378,7 +380,8 @@
       <lblToolBarWave>Forma d’onda</lblToolBarWave>
       <lblShortcutCat>Categoria</lblShortcutCat>
       <lblShortcut>Scorciatoie da tastiera</lblShortcut>      
-      <lblFFMPEG>Cartella ffmpeg</lblFFMPEG>
+      <lblFFMPEG>Cartella FFmpeg</lblFFMPEG>
+      <lblSceneDetect>Cartella PySceneDetect</lblSceneDetect>
       <lblSeekTime>Tempo di ricerca (ms)</lblSeekTime>
       <lblFrameStep>Intervallo fotogramma</lblFrameStep>
     </Section>
@@ -386,7 +389,7 @@
       <chkShowSplashWindow>Mostra finestra di avvio</chkShowSplashWindow>
       <chkUseOwnFileDialog>Usa finestra di dialogo di Tero per i file</chkUseOwnFileDialog>
       <chkPromptForDeleteSubtitles>Mostra un avviso quando si rimuovono sottotitoli</chkPromptForDeleteSubtitles>
-      <chkDotsOnSplit>Aggiungi ’...’ in corrispondenza della divisione di un sottotitolo</chkDotsOnSplit>
+      <chkDotsOnSplit>Aggiungi ’…’ in corrispondenza della divisione di un sottotitolo</chkDotsOnSplit>
       <chkDrawTags>Interpreta i tag nell’elenco</chkDrawTags>
       <chkDrawErrors>Mostra gli errori nell’elenco</chkDrawErrors>
       <chkShowCPSBar>Mostra la barra CPS</chkShowCPSBar>
@@ -397,7 +400,7 @@
     </Section>
     <Section Name="TButton">
       <btnShortCutApply>Applica</btnShortCutApply>
-      <btnShortCutSave>Salva come...</btnShortCutSave>
+      <btnShortCutSave>Salva come…</btnShortCutSave>
     </Section>
   </Form>
   <Form Name="frmSpellCheck" Caption="Controllo ortografico">
@@ -409,7 +412,7 @@
       <lblCurrentLine># %d</lblCurrentLine>      
     </Section>
   </Form>
-  <Form Name="frmTimeExpander" Caption="Dilatatore/riduttore delle tempistiche...">
+  <Form Name="frmTimeExpander" Caption="Dilatatore/riduttore delle tempistiche…">
     <Section Name="TUWCheckBox">
       <chkSubtitle>Solo se il sottotitolo è più lungo di</chkSubtitle>
       <chkDuration>Solo se la durata è maggiore di</chkDuration>
@@ -438,6 +441,18 @@
       <lblTimeFormat>Formato delle tempistiche</lblTimeFormat>
       <lblSeparatorChar>Separatore dei decimali</lblSeparatorChar>
       <lblTimeCode>Codice temporale</lblTimeCode>
+    </Section>
+  </Form>
+  <Form Name="frmCustomImageFormat" Caption="Formato di immagine personalizzata">
+    <Section Name="TLabel">
+      <lblScript>Trascrizione</lblScript>
+      <lblFPS>FPS</lblFPS>
+      <lblPrefix>Prefisso</lblPrefix>
+      <lblFolder>Cartella</lblFolder>
+      <lblImageSize>Dimensione dell’immagine</lblImageSize>
+      <lblSafeArea>Margini di abbondanza in pixel (sinistro, superiore, destro, inferiore)</lblSafeArea>
+      <lblFont>Carattere</lblFont>
+      <lblFontSize>Dimensione</lblFontSize>
     </Section>
   </Form>        
   <Form Name="frmTranslationMemory" Caption="Memoria di traduzione"/>
@@ -482,6 +497,7 @@
   </Form>
   <Form Name="frmShotChanges" Caption="Cambi di inquadratura">
     <Section Name="TLabel">
+      <lblDetectApp>Applicazione per il rilevamento</lblDetectApp>
       <lblTimeCodeIn>Codice temporale per l’importazione</lblTimeCodeIn>
       <lblTimeCodeOut>Codice temporale per l’esportazione</lblTimeCodeOut>
       <lblSensitivity>Sensibilità di rilevamento</lblSensitivity>
@@ -573,7 +589,7 @@
       <lbllibmpvDesc>Il potente motore multimediale mpv utilizzato per la riproduzione.</lbllibmpvDesc>
       <lblYTDLP>yt-dlp:</lblYTDLP>
       <lblYTDLPDesc>Componente opzionale per aprire video tramite URL.</lblYTDLPDesc>      
-      <lblFFMPEG>ffmpeg:</lblFFMPEG>
+      <lblFFMPEG>FFmpeg:</lblFFMPEG>
       <lblffmpegDesc>La soluzione definitiva per l’estrazione dell’audio e dei cambi di inquadratura.</lblffmpegDesc>
       <lblWhisper>whisper.cpp:</lblWhisper>
       <lblWhisperDesc>Riconoscimento automatico del parlato per la conversione da audio a testo.</lblWhisperDesc>
@@ -581,14 +597,14 @@
   </Form>
   <Form Name="frmDownload" Caption="">
     <Section Name="TLabel">
-      <lblDownload>Scaricamento in corso...</lblDownload>
+      <lblDownload>Scaricamento in corso…</lblDownload>
     </Section>
   </Form>                                                                                                
   <Form Name="frmWelcome" Caption="">
     <Section Name="TLabel">
       <lblNewSubtitle>Nuovo sottotitolo vuoto</lblNewSubtitle>
-      <lblOpenFile>Apri file...</lblOpenFile>
-      <lblBatchConvert>Converti in blocco...</lblBatchConvert>
+      <lblOpenFile>Apri file…</lblOpenFile>
+      <lblBatchConvert>Converti in blocco…</lblBatchConvert>
       <lblExit>Esci</lblExit>      
       <lblRecentFiles>File recenti</lblRecentFiles>      
     </Section>
@@ -620,6 +636,8 @@
     <etSnapToShotChanges>Allineare le tempistiche ai cambi di inquadratura</etSnapToShotChanges>
     <etSnapToShotChangesInCue>Àncora il punto di ingresso al cambio di inquadratura</etSnapToShotChangesInCue>
     <etSnapToShotChangesOutCue>Àncora il punto di uscita al cambio di inquadratura</etSnapToShotChangesOutCue>
+    <etSnapToShotChangesInCueAway>Àncora il punto di ingresso lontano dal cambio di inquadratura</etSnapToShotChangesInCueAway>
+    <etChaining>Concatenazione dei sottotitoli</etChaining>
     <Index>#</Index>
     <Action>Azione</Action>
     <Current>Attuale</Current>
@@ -691,8 +709,8 @@
     <FailedToDownload>Nessun contenuto è stato scaricato: file mancante o connessione Internet assente.</FailedToDownload>
     <AskToExtractAudio>Forma d’onda dell’audio non trovata, si desidera estrarla?</AskToExtractAudio>
     <ExtractAppError>Impossibile trovate ’%s’.</ExtractAppError>
-    <Extracting>Estrazione in corso...</Extracting>
-    <Transcribing>Trascrizione in corso...</Transcribing>    
+    <Extracting>Estrazione in corso…</Extracting>
+    <Transcribing>Trascrizione in corso…</Transcribing>    
     <libMPVError>Impossibile trovare le librerie necessarie al funzionamento del riproduttore mpv incorporato. Si prega di scaricarle.</libMPVError>
     <libMPVglError>Inizializzazione del contesto grafico GL di mpv non riuscita.</libMPVglError>
     <libMPVVersionError>Impossibile inizializzare libmpv; è probabile che sia stata installata la libreria non corretta.</libMPVVersionError>
@@ -717,6 +735,8 @@
     <FeatureNotAvailableFromURL>Funzione non disponibile per i video in Rete.</FeatureNotAvailableFromURL>
     <MultipleTracksDetected>Più tracce rilevate</MultipleTracksDetected> 
     <SelectTrackToUse>Selezionare la traccia da utilizzare:</SelectTrackToUse>
+    <WriteStatus>Scrittura in corso… %d/%d</WriteStatus>
+    <ShortCutInUse>Scorciatoia attualmente in uso per ‘%s’.</ShortCutInUse>
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>Tutti i sottotitoli</rbnAllTheSubtitles>
@@ -738,19 +758,21 @@
     <btnRestore>Ripristina</btnRestore>
     <btnAdd>Aggiungi</btnAdd>
     <btnRemove>Rimuovi</btnRemove>
+    <btnPlus>+</btnPlus>
+    <btnMinus>-</btnMinus>
     <btnSelectAll>Seleziona tutto</btnSelectAll>
     <btnInvert>Selezione inversa</btnInvert>        
-    <btnScanFolder>Esplora...</btnScanFolder>    
+    <btnScanFolder>Esplora…</btnScanFolder>    
     <btnGo>Vai</btnGo>
     <btnSkip>Salta</btnSkip>
     <btnSkipAll>Salta tutto</btnSkipAll>
     <btnChange>Modifica</btnChange>
     <btnChangeAll>Modifica tutto</btnChangeAll>
     <btnTranslate>Traduci</btnTranslate>
-    <btnOpenFile>...</btnOpenFile>
-    <btnExtract>Estrai...</btnExtract>
-    <btnImport>Importa...</btnImport>
-    <btnExport>Esporta...</btnExport>    
+    <btnOpenFile>…</btnOpenFile>
+    <btnExtract>Estrai…</btnExtract>
+    <btnImport>Importa…</btnImport>
+    <btnExport>Esporta…</btnExport>    
     <btnDetect>Rileva</btnDetect>
     <btnGenerate>Genera</btnGenerate>        
     <btnCopy>Copia</btnCopy>
@@ -885,7 +907,7 @@
     <WaveformText>Clicca qui per usare la linea del tempo</WaveformText>    
     <VideoLen>/ %s (%s FPS)</VideoLen>
     <VideoLenSMPTE>/ %s (%s FPS/SMPTE)</VideoLenSMPTE>    
-    <ReadingVideoFile>Lettura del file video in corso...</ReadingVideoFile>
+    <ReadingVideoFile>Lettura del file video in corso…</ReadingVideoFile>
     <Custom>Personalizzato</Custom>    
   </AppStrings>
 </Language>
