@@ -1,5 +1,6 @@
 1.0.0.9 (x.8.2023)
 - fixed: Height of some controls
+- updated: Italian language (thx GitGianluc)
 - updated: Russian language (thx RoxMarty)
 - improved: iTunes subtitle format
 - added: Jump to previous/next shotchange
