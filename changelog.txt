@@ -1,4 +1,5 @@
 1.0.0.9 (x.8.2023)
+- fixed: Tagging included in character count in Fix Subtitles #143
 - fixed: Height of some controls
 - updated: Italian language (thx GitGianluc)
 - updated: Russian language (thx RoxMarty)
