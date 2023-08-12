@@ -1,9 +1,11 @@
 1.0.0.9 (x.8.2023)
+- fixed: Loading iTT changes default frame rate #144
 - fixed: Tagging included in character count in Fix Subtitles #143
 - fixed: Height of some controls
 - updated: Italian language (thx GitGianluc)
 - updated: Russian language (thx RoxMarty)
 - improved: iTunes subtitle format
+- added: Transcription button at welcome window
 - added: Absorb SMPTE Timing setting into Time Code Mode #127
 - added: Windows installer script (thx CM630)
 - added: Jump to previous/next shotchange
