@@ -3,6 +3,7 @@
 - updated: Italian language (thx GitGianluc)
 - updated: Russian language (thx RoxMarty)
 - improved: iTunes subtitle format
+- added: Absorb SMPTE Timing setting into Time Code Mode #127
 - added: Windows installer script (thx CM630)
 - added: Jump to previous/next shotchange
 - added: Brazilian Portuguese language (thx Gzushgshsh)
