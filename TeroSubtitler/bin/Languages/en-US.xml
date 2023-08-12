@@ -602,6 +602,7 @@
   <Form Name="frmWelcome" Caption="">
     <Section Name="TLabel">
       <lblNewSubtitle>New empty subtitle</lblNewSubtitle>
+      <lblNewTranscription>New transcription</lblNewTranscription>      
       <lblOpenFile>Open file...</lblOpenFile>
       <lblBatchConvert>Batch convert...</lblBatchConvert>
       <lblExit>Exit</lblExit>      

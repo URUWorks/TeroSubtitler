@@ -671,8 +671,7 @@ begin
   if (Workspace.ViewMode = vmTranscription) and (AViewMode <> vmTranscription) then
   begin
     with Workspace.Transcription do
-      if Assigned(Memo) and (Memo.Modified) and
-        (CustomQuestionDialog('CommonStrings', 'TranscriptionModeExit', 'ContinueAnyway', [mbYes, mbNo]) = mrNo) then
+      if Assigned(Memo) and (Memo.Modified) and (MsgExitTranscriptionMode = mrNo) then
         begin
           frmMain.actTranscriptionMode.Checked := True;
           Exit;

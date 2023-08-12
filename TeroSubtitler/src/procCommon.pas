@@ -118,6 +118,7 @@ function MsgSaveSubtitle(FileName: String; const ASubtitleMode: TSubtitleMode = 
 function MsgDeleteFiles: Integer;
 function MsgFolderNotEmpty: Integer;
 function MsgExportTextOnlyFormat: Integer;
+function MsgExitTranscriptionMode: Integer;
 //function MsgReplaceShortCut(const AAction: String): Integer;
 
 { Check for updates}
@@ -1779,6 +1780,13 @@ end;
 function MsgExportTextOnlyFormat: Integer;
 begin
   Result := CustomQuestionDialog('CommonStrings', 'TextFormatted', '', [mbYes, mbNo]);
+end;
+
+// -----------------------------------------------------------------------------
+
+function MsgExitTranscriptionMode: Integer;
+begin
+  Result := CustomQuestionDialog('CommonStrings', 'TranscriptionModeExit', 'ContinueAnyway', [mbYes, mbNo])
 end;
 
 // -----------------------------------------------------------------------------

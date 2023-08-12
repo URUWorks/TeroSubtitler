@@ -1068,7 +1068,17 @@ end;
 
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
-  CanClose := CloseSubtitle(True);
+  if (Workspace.ViewMode = vmTranscription) then
+  begin
+    with Workspace.Transcription do
+      if Assigned(Memo) and (Memo.Modified) then
+        CanClose := (MsgExitTranscriptionMode = mrYes)
+      else
+        CanClose := True;
+  end
+  else
+    CanClose := CloseSubtitle(True);
+
   if CanClose then
   begin
     // Settings

@@ -3363,6 +3363,7 @@ object frmMain: TfrmMain
       OnExecute = actSaveTranslationAsExecute
     end
     object actSaveProject: TAction
+      Tag = 1
       Category = 'File'
       Caption = 'Save project'
       OnExecute = actSaveProjectExecute

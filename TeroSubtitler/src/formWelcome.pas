@@ -33,14 +33,17 @@ type
     bvlLine1: TBevel;
     bvlLine2: TBevel;
     bvlLine3: TBevel;
+    bvlLine4: TBevel;
     chkShowOnStartup: TUWCheckBox;
     fbnBatchConvert: TUWFlatButton;
     fbnExit: TUWFlatButton;
+    fbnNewTranscription: TUWFlatButton;
     ImageList_Dark: TImageList;
     ImageList_Default: TImageList;
     imgLogo: TImage;
     lblExit: TLabel;
     lblNewSubtitle: TLabel;
+    lblNewTranscription: TLabel;
     lblOpenFile: TLabel;
     lblBatchConvert: TLabel;
     lblRecentFiles: TLabel;
@@ -48,13 +51,14 @@ type
     fbnNewSubtitle: TUWFlatButton;
     fbnOpenSubtitle: TUWFlatButton;
     shaBorder: TShape;
-    procedure fbnBatchConvertClick(Sender: TObject);
-    procedure fbnExitClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure fbnNewSubtitleClick(Sender: TObject);
+    procedure fbnNewTranscriptionClick(Sender: TObject);
     procedure fbnOpenFileClick(Sender: TObject);
+    procedure fbnBatchConvertClick(Sender: TObject);
+    procedure fbnExitClick(Sender: TObject);
   private
     procedure MRUItemClick(Sender: TObject);
   public
@@ -69,7 +73,8 @@ var
 implementation
 
 uses
-  procTypes, procFiles, procColorTheme, procCommon, procForms, formMain;
+  procTypes, procFiles, procColorTheme, procCommon, procForms, formMain,
+  procWorkspace;
 
 {$R *.lfm}
 
@@ -144,12 +149,15 @@ begin
     else
     begin
       png.LoadFromLazarusResource('terosubtitler');
-      fbnNewSubtitle.Color  := shaBackground.Brush.Color;
+      fbnNewSubtitle.Color := shaBackground.Brush.Color;
+      fbnNewTranscription.Color := fbnNewSubtitle.Color;
       fbnOpenSubtitle.Color := fbnNewSubtitle.Color;
       fbnBatchConvert.Color := fbnNewSubtitle.Color;
-      fbnExit.Color         := fbnNewSubtitle.Color;
+      fbnExit.Color := fbnNewSubtitle.Color;
       fbnNewSubtitle.DrawBuffer;
       fbnNewSubtitle.Invalidate;
+      fbnNewTranscription.DrawBuffer;
+      fbnNewTranscription.Invalidate;
       fbnOpenSubtitle.DrawBuffer;
       fbnOpenSubtitle.Invalidate;
       fbnBatchConvert.DrawBuffer;
@@ -168,6 +176,7 @@ end;
 procedure TfrmWelcome.MRUItemClick(Sender: TObject);
 begin
   Hide;
+  SetViewMode(vmList);
   LoadSubtitle(MRU.Items[(Sender as TLabel).Tag]);
   Close;
 end;
@@ -177,7 +186,17 @@ end;
 procedure TfrmWelcome.fbnNewSubtitleClick(Sender: TObject);
 begin
   Hide;
+  SetViewMode(vmList);
   NewSubtitle;
+  Close;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmWelcome.fbnNewTranscriptionClick(Sender: TObject);
+begin
+  Hide;
+  SetViewMode(vmTranscription);
   Close;
 end;
 
@@ -186,6 +205,7 @@ end;
 procedure TfrmWelcome.fbnOpenFileClick(Sender: TObject);
 begin
   Hide;
+  SetViewMode(vmList);
   LoadSubtitleWithDialog;
   Close;
 end;
