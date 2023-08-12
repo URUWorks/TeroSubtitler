@@ -212,9 +212,9 @@ begin
     if Subtitles.FrameRate > 0 then
     begin
       frmMain.cboInputFPS.ItemIndex := frmMain.cboInputFPS.Items.IndexOf(SingleToStr(Subtitles.FrameRate, AppOptions.FormatSettings));
-      Workspace.FPS.DefFPS  := Subtitles.FrameRate;
+      _FPS := Subtitles.FrameRate;
     end;
-    Workspace.FPS.OutputFPS := Workspace.FPS.DefFPS;
+    Workspace.FPS.OutputFPS := _FPS;
     frmMain.cboFPS.ItemIndex := frmMain.cboInputFPS.ItemIndex;
     SetTimeFPStoTimeEditCtrls;
 
