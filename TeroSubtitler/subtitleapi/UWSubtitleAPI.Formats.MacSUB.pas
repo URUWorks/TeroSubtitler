@@ -147,9 +147,9 @@ begin
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add('/' + IntToStr(TimeToFrames(Subtitles[i].InitialTime, FPS)), False);
+    StringList.Add('/' + IntToStr(TimeToFrames(Subtitles.InitialTime[i], FPS)), False);
     StringList.Add(Text, False);
-    StringList.Add('/' + IntToStr(TimeToFrames(Subtitles[i].FinalTime, FPS)), False);
+    StringList.Add('/' + IntToStr(TimeToFrames(Subtitles.FinalTime[i], FPS)), False);
   end;
 
   try

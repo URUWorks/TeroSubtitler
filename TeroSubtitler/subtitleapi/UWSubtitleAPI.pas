@@ -204,6 +204,8 @@ type
     function SaveToString(const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): String;
     function FillDialogFilter(AllSupportedText: String = 'All supported files'): String;
     function FixFileNameExtension(const AFileName: String; const AFormat: TUWSubtitleFormats): String;
+    procedure ConvertTimesToSMPTE(const AValue: Boolean);
+    function IsSMPTESupported(const AFormat: TUWSubtitleFormats = sfInvalid): Boolean;
     property Count: Integer read GetCount;
     property Format: TUWSubtitleFormats read FFormat write SetFormat;
     property CodePage: Integer read FCodePage;
@@ -906,7 +908,11 @@ begin
   Result := 0;
 
   if ValidIndex(Index) then
+  begin
     Result := FList[Index]^.InitialTime;
+    if FTimeBase = stbSMPTE then
+      Result := Round(Result * 1.001);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -940,7 +946,11 @@ begin
   Result := 0;
 
   if ValidIndex(Index) then
+  begin
     Result := FList[Index]^.FinalTime;
+    if FTimeBase = stbSMPTE then
+      Result := Round(Result * 1.001);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1459,7 +1469,7 @@ begin
 
       AFPS := FPS;
       if AFPS <= 0 then AFPS := 25;
-      FFPS := -1;
+      FFPS := AFPS; //-1;
       FTimeBase := stbMedia;
 
       // First try Text formats
@@ -1471,7 +1481,7 @@ begin
               begin
                 Result := AList[f].LoadSubtitle(SubFile, AFPS, Self);
                 Self.FCodePage := SubFile.CodePage;
-                Self.Format := AList[f].Format;
+                Self.FFormat := AList[f].Format;
                 Exit;
               end;
           except
@@ -1485,7 +1495,7 @@ begin
             begin
               Result := AList[f].LoadSubtitle(SubFile, AFPS, Self);
               Self.FCodePage := SubFile.CodePage;
-              Self.Format := AList[f].Format;
+              Self.FFormat := AList[f].Format;
               Exit;
             end;
         except
@@ -1622,6 +1632,43 @@ begin
         Result := FixExtension(AFileName, AList[f].Extension);
   finally
     FinalizeSubtitleFormats(AList);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWSubtitles.ConvertTimesToSMPTE(const AValue: Boolean);
+var
+  i: Integer;
+begin
+  for i := 0 to Count-1 do
+    with FList[i]^ do
+      if not AValue then
+      begin
+        InitialTime := Round(InitialTime * 1.001);
+        FinalTime   := Round(FinalTime * 1.001);
+      end
+      else
+      begin
+        InitialTime := Round(InitialTime / 1.001);
+        FinalTime   := Round(FinalTime / 1.001);
+      end;
+end;
+
+// -----------------------------------------------------------------------------
+function TUWSubtitles.IsSMPTESupported(const AFormat: TUWSubtitleFormats = sfInvalid): Boolean;
+var
+  f: TUWSubtitleFormats;
+begin
+  if AFormat = sfInvalid then
+    f := FFormat
+  else
+    f := AFormat;
+
+  case f of
+    sfITunesTimedText: Result := True;
+    else
+      Result := False;
   end;
 end;
 

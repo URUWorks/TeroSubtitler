@@ -267,14 +267,14 @@ end;
 
 procedure TfrmMain.actTimeModeExecute(Sender: TObject);
 begin
-  SetWorkMode(wmTime);
+  if Workspace.WorkMode <> wmTime then SetWorkMode(wmTime);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actFramesModeExecute(Sender: TObject);
 begin
-  SetWorkMode(wmFrames);
+  if Workspace.WorkMode <> wmFrames then SetWorkMode(wmFrames);
 end;
 
 // -----------------------------------------------------------------------------
@@ -793,24 +793,6 @@ begin
   timerWaveform.Enabled := False;
 
   EnableActionsByTag([TAG_ACTION_VIDEO, TAG_ACTION_AUDIO], False);
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure TfrmMain.actSMPTEExecute(Sender: TObject);
-begin
-  MPV.SMPTEMode := actSMPTE.Checked;
-  WAVE.SetSceneChangeTimeMode(actSMPTE.Checked);
-  if MPVOptions.SubtitleHandleByMPV then
-  begin
-    if MPV.SMPTEMode then
-      Subtitles.TimeBase := stbSMPTE
-    else
-      Subtitles.TimeBase := stbMedia;
-
-    if MPV.Initialized then MPVSaveSubtitleTempTrack;
-  end;
-  UpdateVideoLengthString;
 end;
 
 // -----------------------------------------------------------------------------

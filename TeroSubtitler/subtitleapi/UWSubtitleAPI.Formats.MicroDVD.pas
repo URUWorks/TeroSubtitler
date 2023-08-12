@@ -205,7 +205,7 @@ begin
           XY := SysUtils.Format('{P:%d,%d}', [X, Y]);
 
     Subtitles.Text[i] := TSTagsToMicroDVD(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add('{' + IntToStr(TimeToFrames(Subtitles[i].InitialTime, FPS)) + '}{' + IntToStr(TimeToFrames(Subtitles[i].FinalTime, FPS)) + '}' +
+    StringList.Add('{' + IntToStr(TimeToFrames(Subtitles.InitialTime[i], FPS)) + '}{' + IntToStr(TimeToFrames(Subtitles.FinalTime[i], FPS)) + '}' +
     XY + ReplaceEnters(Subtitles[i].Text), False);
   end;
 

@@ -167,6 +167,7 @@ type
     ViewMode       : TViewMode;
     WorkMode       : TWorkMode;
     TranslatorMode : Boolean;
+    SMPTE          : Boolean;
     FPS            : record        // used for conversions
                        DefFPS    : Single;
                        OutputFPS : Single;

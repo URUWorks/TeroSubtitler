@@ -184,7 +184,7 @@ function TUWITunesTimedText.SaveSubtitle(const FileName: String; const FPS: Sing
 var
   XmlDoc : TXMLDocument;
   Root, Element, Node, SubNode : TDOMNode;
-  i, it, ft : Integer;
+  i : Integer;
   NewFPS: Single;
 begin
   Result := False;
@@ -282,19 +282,11 @@ begin
 
     for i := FromItem to ToItem do
     begin
-      it := Subtitles[i].InitialTime;
-      ft := Subtitles[i].FinalTime;
-      if not IsInteger(FPS) then
-      begin
-        it := Trunc(it / 1.001);
-        ft := Trunc(ft / 1.001);
-      end;
-
       Element := XmlDoc.CreateElement('p');
       TDOMElement(Element).SetAttribute('region', iff(Subtitles[i].VAlign > 0, 'top', 'bottom'));
-      TDOMElement(Element).SetAttribute('begin', TimeToString(it, 'hh:mm:ss:ff', NewFPS));
+      TDOMElement(Element).SetAttribute('begin', TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', NewFPS));
       //TDOMElement(Element).SetAttribute('id', TimeToString(Subtitles.InitialTime[i], 'p' + IntToStr(i)));
-      TDOMElement(Element).SetAttribute('end', TimeToString(ft, 'hh:mm:ss:ff', NewFPS));
+      TDOMElement(Element).SetAttribute('end', TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', NewFPS));
       SubNode := XmlDoc.CreateTextNode(TSTagsToXML(ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), sLineBreak, '<br/>')));
       Element.AppendChild(SubNode);
       Node.AppendChild(Element);

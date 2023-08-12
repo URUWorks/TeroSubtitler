@@ -289,11 +289,9 @@ begin
           JustificationCode := JC_Unchanged;
         end;
         CommentFlag         := CF_TFHaveData;
-        with Subtitles[i] do
-        begin
-          TimeCodeToByteArray(TimeCodeIn, InitialTime, FPS);
-          TimeCodeToByteArray(TimeCodeOut, FinalTime, FPS);
-        end;
+
+        TimeCodeToByteArray(TimeCodeIn, Subtitles.InitialTime[i], FPS);
+        TimeCodeToByteArray(TimeCodeOut, Subtitles.FinalTime[i], FPS);
         Buffer := Encoding.GetBytes(ReplaceTagsTS2EBU(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])));
         FillByte(TextField, SizeOf(TextField), 0);
         TBytesToArray(TextField, Buffer, 0);

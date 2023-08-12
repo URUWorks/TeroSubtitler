@@ -339,7 +339,7 @@ var
 begin
   if Index < (Subtitles.Count-1) then
   begin
-    NewTime := Subtitles.InitialTime[Index+1];
+    NewTime := Subtitles[Index+1].InitialTime;
     SetSubtitleTime(Index, ExtendLength(NewTime, GetDefPause), frmMain.tedFinal.Tag, False, False);
   end;
 end;
@@ -351,11 +351,11 @@ var
   NewTime: Integer;
 begin
   if Index > 0 then
-    NewTime := Subtitles.FinalTime[Index-1] + GetDefPause
+    NewTime := Subtitles[Index-1].FinalTime + GetDefPause
   else
-    NewTime := Subtitles.InitialTime[Index];
+    NewTime := Subtitles[Index].InitialTime;
 
-  if NewTime <> Subtitles.InitialTime[Index] then
+  if NewTime <> Subtitles[Index].InitialTime then
     SetSubtitleTime(Index, NewTime, frmMain.tedInitial.Tag);
 end;
 
@@ -368,7 +368,7 @@ begin
   with Subtitles[Index] do
     NewTime := InitialTime + AutomaticDurations(Text, Subtitles.Duration[Index], 60, 50, 50, TAutomaticDurationMode.dmAlwaysNew);
 
-  if NewTime <> Subtitles.FinalTime[Index] then
+  if NewTime <> Subtitles[Index].FinalTime then
     SetSubtitleTime(Index, NewTime, frmMain.tedFinal.Tag);
 end;
 

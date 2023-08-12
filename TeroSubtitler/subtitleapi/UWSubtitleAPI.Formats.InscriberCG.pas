@@ -141,8 +141,8 @@ begin
     Subtitles.Text[i] := RemoveTSTags(Subtitles.Text[i]);
 
     StringList.Add('@@9 ' + ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), LineEnding, LineEnding + '@@9 ') +
-                '<' + TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:zz') + '><'  +
-                TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:zz') + '>');
+                '<' + TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + '><'  +
+                TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz') + '>');
 
     StringList.Add('', False);
   end;

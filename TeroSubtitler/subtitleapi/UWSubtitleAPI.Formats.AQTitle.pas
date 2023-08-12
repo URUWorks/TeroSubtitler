@@ -149,7 +149,7 @@ begin
 
   for i := FromItem to ToItem do
   begin
-    StringList.Add('-->> ' + AddChar('0', IntToStr(TimeToFrames(Subtitles[i].InitialTime, FPS)), 6), False);
+    StringList.Add('-->> ' + AddChar('0', IntToStr(TimeToFrames(Subtitles.InitialTime[i], FPS)), 6), False);
 
     TextSrc := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
     if StringCount(sLineBreak, TextSrc) = 0      then Text := TextSrc + sLineBreak
@@ -157,7 +157,7 @@ begin
     else if StringCount(sLineBreak, TextSrc) > 1 then Text := Copy(TextSrc, 0, Pos(sLineBreak, TextSrc) + 2) + ReplaceEnters(Copy(TextSrc, Pos(sLineBreak, TextSrc) + 2, Length(TextSrc)), ' ');
 
     StringList.Add(Text, False);
-    StringList.Add('-->> ' + AddChar('0', IntToStr(TimeToFrames(Subtitles[i].FinalTime, FPS)), 6), False);
+    StringList.Add('-->> ' + AddChar('0', IntToStr(TimeToFrames(Subtitles.FinalTime[i], FPS)), 6), False);
     StringList.Add('', False);
     StringList.Add('', False);
   end;

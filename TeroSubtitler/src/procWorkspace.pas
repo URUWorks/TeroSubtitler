@@ -61,6 +61,7 @@ procedure SetDockWaveformWindow(const AValue: Boolean);
 function GetTimeEditMode: TUWTimeEditMode;
 procedure SetTimeFPStoTimeEditCtrls;
 procedure SetWorkMode(const Mode: TWorkMode; const AUpdate: Boolean = True);
+procedure SetSMPTEMode(const AValue: Boolean);
 
 procedure FocusMemo(const SelectText: Boolean = True);
 function GetMemoFocused: TUWMemo;
@@ -100,7 +101,7 @@ uses
   UWSystem.StrUtils, UWSystem.Encoding, UWSubtitleAPI.Formats, MPVPlayer,
   character, LazUTF8, formTranslationMemory, UWSubtitleAPI.Tags,
   UWTranslateAPI.Google, procTranscription, formCustomQuestionDlg,
-  UWSystem.TimeUtils, formTBX, procVST_Loops;
+  UWSystem.TimeUtils, formTBX, procVST_Loops, procMPV;
 
 // -----------------------------------------------------------------------------
 
@@ -890,6 +891,13 @@ begin
   with frmMain do
   begin
     VSTBeginUpdate(VST);
+
+    if not IsInteger(GetFPS) then
+    begin
+      Subtitles.ConvertTimesToSMPTE(Mode = wmFrames);
+      SetSMPTEMode(Mode = wmFrames);
+    end;
+
     try
       for i := 0 to ComponentCount-1 do
         if Components[i] is TUWTimeEdit then
@@ -901,8 +909,6 @@ begin
 
       WAVE.FPS := Workspace.FPS.OutputFPS;
       WAVE.FPSTimeMode := (Mode = wmFrames);
-
-      //MPV.SMPTEMode := (Mode = wmFrames);
 
       if Mode = wmTime then
       begin
@@ -924,6 +930,29 @@ begin
       VSTEndUpdate(VST);
     end;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SetSMPTEMode(const AValue: Boolean);
+begin
+  with Workspace, frmMain do
+    //if SMPTE <> AValue then
+    begin
+      SMPTE := AValue;
+      MPV.SMPTEMode := SMPTE;
+      WAVE.SetSceneChangeTimeMode(SMPTE);
+      if MPVOptions.SubtitleHandleByMPV then
+      begin
+        if SMPTE then
+          Subtitles.TimeBase := stbSMPTE
+        else
+          Subtitles.TimeBase := stbMedia;
+
+        if MPV.Initialized then MPVSaveSubtitleTempTrack;
+      end;
+      UpdateVideoLengthString;
+    end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1052,7 +1081,7 @@ begin
 
       if l > 0 then
       begin
-        if not actSMPTE.Checked then
+        if not Workspace.SMPTE then
           s := GetLangString('VideoLen')
         else
           s := GetLangString('VideoLenSMPTE');
@@ -1099,7 +1128,7 @@ procedure CheckForTerminology(const AIndex: Integer);
 begin
   if (frmTBX <> NIL) then
   begin
-    TBX.FindAllTerms(Subtitles.Text[AIndex]);
+    TBX.FindAllTerms(Subtitles[AIndex].Text);
     frmTBX.UpdateTermList;
   end;
 end;

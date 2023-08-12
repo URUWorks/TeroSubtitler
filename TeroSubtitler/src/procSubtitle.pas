@@ -363,9 +363,9 @@ end;
 function GetSubtitleText(const Index: Integer; const SubtitleMode: TSubtitleMode = smText): String;
 begin
   if SubtitleMode = smText then
-    Result := Subtitles.Text[Index]
+    Result := Subtitles[Index].Text
   else
-    Result := Subtitles.Translation[Index];
+    Result := Subtitles[Index].Translation;
 end;
 
 // -----------------------------------------------------------------------------
@@ -455,7 +455,7 @@ begin
   if Subtitles.Count > 0 then
     for i := 0 to Subtitles.Count-1 do
       with Subtitles[i] do
-        if (MSecs >= InitialTime) and (MSecs < FinalTime) then
+        if (InitialTime <= MSecs + 1) and (FinalTime > MSecs) then
         begin
           Result := i;
           SubtitleInfo.LastSubtitle.ShowIndex := Result;

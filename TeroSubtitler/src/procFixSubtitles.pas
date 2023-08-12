@@ -680,7 +680,7 @@ begin
     // Max Lines *
     if etMaxLines in ErrorsToCheck then
     begin
-      if (Options.MaxLines > 0) and (LineCount(Subtitles.Text[Index], sLineBreak) > Options.MaxLines) then
+      if (Options.MaxLines > 0) and (LineCount(Subtitles[Index].Text, sLineBreak) > Options.MaxLines) then
         Result := Result + [etMaxLines];
     end;
   end;
@@ -704,7 +704,7 @@ begin
     // Bad Values
     if etBadValues in ErrorsToCheck then
     begin
-      if Subtitles.InitialTime[Index] > Subtitles.FinalTime[Index] then
+      if Subtitles[Index].InitialTime > Subtitles[Index].FinalTime then
         Result := Result + [etBadValues];
     end;
 
@@ -725,10 +725,10 @@ begin
     // Overlapping
     if etOverlapping in ErrorsToCheck then
     begin
-      if (Index > 0) and (Subtitles.InitialTime[Index] <= Subtitles.FinalTime[Index-1]) then
+      if (Index > 0) and (Subtitles[Index].InitialTime <= Subtitles[Index-1].FinalTime) then
         Result := Result + [etOverlapping, etOverlappingWithPrev];
 
-      if (Index < Subtitles.Count-1) and (Subtitles.FinalTime[Index] >= Subtitles.InitialTime[Index+1]) then
+      if (Index < Subtitles.Count-1) and (Subtitles[Index].FinalTime >= Subtitles[Index+1].InitialTime) then
         Result := Result + [etOverlapping, etOverlappingWithNext];
     end;
   end;

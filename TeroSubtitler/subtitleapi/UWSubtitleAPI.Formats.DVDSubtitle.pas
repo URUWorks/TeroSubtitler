@@ -156,10 +156,10 @@ begin
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
 
-    StringList.Add('{T ' + TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:zz'), False);
+    StringList.Add('{T ' + TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz'), False);
     StringList.Add(Text, False);
     StringList.Add('}', False);
-    StringList.Add('{T ' + TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:zz'), False);
+    StringList.Add('{T ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz'), False);
     StringList.Add('', False);
     StringList.Add('}', False);
   end;

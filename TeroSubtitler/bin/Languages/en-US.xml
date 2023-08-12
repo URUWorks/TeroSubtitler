@@ -166,7 +166,6 @@
       <actMediaEndSubtitle>End subtitle</actMediaEndSubtitle>
       <actLoadVideo Hint="Open a video file">Open video...</actLoadVideo>
       <actCloseVideo>Close video</actCloseVideo>
-      <actSMPTE>SMPTE timing</actSMPTE>
       <actWaveExtract>Extract waveform...</actWaveExtract>
       <actLoadVideoFromURL>Open video from URL...</actLoadVideoFromURL>
       <actSpellCheck>Spell check...</actSpellCheck>

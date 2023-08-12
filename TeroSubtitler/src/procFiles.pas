@@ -218,17 +218,21 @@ begin
     frmMain.cboFPS.ItemIndex := frmMain.cboInputFPS.ItemIndex;
     SetTimeFPStoTimeEditCtrls;
 
-    with frmMain do
-      if (Subtitles.TimeBase = stbSMPTE) and not actSMPTE.Checked and not IsInteger(Subtitles.FrameRate) then
+    if not Subtitles.IsSMPTESupported then
+    begin
+      if (Workspace.WorkMode = wmFrames) and not IsInteger(Subtitles.FrameRate) then
       begin
-        actSMPTE.Checked := True;
-        actSMPTEExecute(NIL);
-      end
-      else if (Subtitles.TimeBase = stbMedia) and actSMPTE.Checked then
-      begin
-        actSMPTE.Checked := False;
-        actSMPTEExecute(NIL);
+        Subtitles.ConvertTimesToSMPTE(True);
+        SetSMPTEMode(True);
       end;
+    end
+    else
+    begin
+      if (Subtitles.TimeBase = stbSMPTE) and not Workspace.SMPTE and not IsInteger(Subtitles.FrameRate) then
+        SetSMPTEMode(True)
+      else if (Subtitles.TimeBase = stbMedia) and Workspace.SMPTE then
+        SetSMPTEMode(False);
+    end;
 
     DoAutoCheckErrors;
 
@@ -312,6 +316,11 @@ begin
   if _FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
   _Encoding := AEncoding;
   if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
+
+  if Workspace.SMPTE then
+    Subtitles.TimeBase := stbSMPTE
+  else
+    Subtitles.TimeBase := stbMedia;
 
   if Subtitles.SaveToFile(FileName, _FPS, _Encoding, Format, SubtitleMode) then
   begin
@@ -409,7 +418,7 @@ begin
   txt := TUWStringList.Create;
   try
     for i := 0 to Subtitles.Count-1 do
-      txt.Add(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]) + sLineBreak);
+      txt.Add(iff(SubtitleMode = smText, Subtitles[i].Text, Subtitles[i].Translation) + sLineBreak);
 
     if not Formatted then
       txt.Text := ReplaceEnters(txt.Text, sLineBreak, ' ');

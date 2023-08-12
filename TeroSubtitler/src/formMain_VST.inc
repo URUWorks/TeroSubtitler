@@ -641,11 +641,21 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.VSTDblClick(Sender: TObject);
+var
+  it: Integer;
 begin
   if WAVE.IsPeakDataLoaded then
     WAVE.SelectSubtitle(VSTFocusedNode(VST), True, True);
 
-  MPV.SetMediaPosInMs(Subtitles.ItemPointer[VSTFocusedNode(VST)]^.InitialTime);
+  it := Subtitles.ItemPointer[VSTFocusedNode(VST)]^.InitialTime;
+  MPV.SetMediaPosInMs(it);
+
+  if MPV.IsPaused then
+  begin
+    lblMediaTime.Tag     := TAG_CONTROL_UPDATE;
+    lblMediaTime.Caption := GetTimeStr(it);
+  end;
+
   FocusMemo;
 end;
 

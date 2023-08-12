@@ -48,7 +48,6 @@ implementation
 uses UWSubtitleAPI.Tags;
 
 // -----------------------------------------------------------------------------
-// -----------------------------------------------------------------------------
 
 function StringToHAlign(const AText: String): Integer;
 begin
@@ -100,7 +99,6 @@ begin
   end;
 end;
 
-// -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 
 function TUWMacDVDStudioPro.Name: String;
@@ -211,11 +209,11 @@ begin
     Text := TSToMacDVDTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
 
     // Time format is hh:mm:ss:ff
-    InitialTime := TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:ff', FPS);
+    InitialTime := TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS);
 //    InitialTime := TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:') +
 //                   AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].InitialTime, FPS)), 2);
 
-    FinalTime := TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:ff', FPS);
+    FinalTime := TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS);
 //    FinalTime := TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:') +
 //                 AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].FinalTime, FPS)), 2);
 

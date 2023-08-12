@@ -131,7 +131,7 @@ begin
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add(TimeToString(Subtitles[i].InitialTime, 'h:mm:ss.zz') + ' ' + TimeToString(Subtitles[i].FinalTime, 'h:mm:ss.zz') + ' {NTP} ' + ReplaceEnters(Text, LineEnding, '\n'), False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'h:mm:ss.zz') + ' ' + TimeToString(Subtitles.FinalTime[i], 'h:mm:ss.zz') + ' {NTP} ' + ReplaceEnters(Text, LineEnding, '\n'), False);
   end;
 
   try

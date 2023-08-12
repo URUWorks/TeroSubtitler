@@ -170,7 +170,7 @@ begin
   begin
     Subtitles.Text[i] := RemoveTSTags(Subtitles.Text[i]);
 
-    sTime := Subtitles[i].InitialTime / 1000;
+    sTime := Subtitles.InitialTime[i] / 1000;
     if sTime > (256*c) Then inc(c);
 
     sTime  := sTime - (256*(c-1));
@@ -212,7 +212,7 @@ begin
     StringList.Add(SysUtils.Format('TIME: %s ENABLE_OGT',[tmpNum]), False);
     StringList.Add('', False);
 
-    sTime := Subtitles[i].FinalTime / 1000;
+    sTime := Subtitles.FinalTime[i] / 1000;
     sTime := sTime - (256*(c-1));
 
     tmpNum := LimitDecimals(sTime, 2);

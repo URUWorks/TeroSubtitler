@@ -152,7 +152,7 @@ begin
 
     StringList.Add('** Caption Number '+ IntToStr(SubIndex), False);
     StringList.Add('*PopOn', False);
-    StringList.Add('*T ' + TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:zz'), False);
+    StringList.Add('*T ' + TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz'), False);
     StringList.Add('*BottomUp', False);
     StringList.Add('*Lf01', False);
     StringList.Add(Text, False);
@@ -161,7 +161,7 @@ begin
 
     StringList.Add('** Caption Number '+ IntToStr(SubIndex), False);
     StringList.Add('*PopOn', False);
-    StringList.Add('*T ' + TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:zz'), False);
+    StringList.Add('*T ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz'), False);
     StringList.Add('*BottomUp', False);
     StringList.Add('*Lf01', False);
     StringList.Add('', False);

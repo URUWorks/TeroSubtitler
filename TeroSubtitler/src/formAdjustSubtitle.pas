@@ -235,7 +235,7 @@ end;
 
 procedure TfrmAdjustSubtitle.spnIndexChange(Sender: TObject);
 begin
-  tedTime.Value := Subtitles.InitialTime[spnIndex.Value-1];
+  tedTime.Value := Subtitles[spnIndex.Value-1].InitialTime;
 end;
 
 // -----------------------------------------------------------------------------

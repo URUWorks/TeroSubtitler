@@ -80,9 +80,6 @@ begin
   begin
     if MPVOptions.UnDockData.FileName.IsEmpty then
       WAVE.SetPlayCursorMS(MRUInfoObject.WAVEPosition);
-
-    //actSMPTE.Checked := MRUInfoObject.SMPTE;
-    //MPV.SMPTEMode    := actSMPTE.Checked;
   end;
 
   UpdateVideoLengthString;
@@ -139,7 +136,10 @@ begin
   if not sbrSeek.MouseIsDown then
   begin
     sbrSeek.Position := Time;
-    lblMediaTime.Caption := GetTimeStr(Time);
+    if lblMediaTime.Tag = TAG_CONTROL_UPDATE then
+      lblMediaTime.Tag := TAG_CONTROL_NORMAL
+    else
+      lblMediaTime.Caption := GetTimeStr(Time);
   end;
 end;
 

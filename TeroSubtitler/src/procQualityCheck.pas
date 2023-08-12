@@ -85,15 +85,15 @@ begin
     if (Profile.WPM > 0) and (Subtitles.TextWPM[i] > Profile.WPM) then
       item.QC := item.QC + [qcWPM];
 
-    if (Profile.CPL > 0) and (GetMaxLinesOf(Subtitles.Text[i]) > Profile.CPL) then
+    if (Profile.CPL > 0) and (GetMaxLinesOf(Subtitles[i].Text) > Profile.CPL) then
       item.QC := item.QC + [qcCPL];
 
-    if (Profile.MaxLines > 0) and (LineCount(Subtitles.Text[i]) > Profile.MaxLines) then
+    if (Profile.MaxLines > 0) and (LineCount(Subtitles[i].Text) > Profile.MaxLines) then
       item.QC := item.QC + [qcMaximumLines];
 
     if (Profile.MinDuration > 0) and (Subtitles.Duration[i] < Profile.MinDuration) then
       item.QC := item.QC + [qcMinimumDuration]
-    else if (Profile.MinDurationPerWord > 0) and (Subtitles.Text[i] <> '') and  ((Subtitles.Duration[i] div WordCount(Subtitles.Text[i])) < Profile.MinDurationPerWord) then
+    else if (Profile.MinDurationPerWord > 0) and (Subtitles[i].Text <> '') and  ((Subtitles.Duration[i] div WordCount(Subtitles[i].Text)) < Profile.MinDurationPerWord) then
       item.QC := item.QC + [qcMinimumDuration];
 
     if (Profile.MaxDuration > 0) and (Subtitles.Duration[i] > Profile.MaxDuration) then

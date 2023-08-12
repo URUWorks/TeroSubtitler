@@ -135,8 +135,8 @@ begin
     if (Subtitles[i].InitialTime = Subtitles[i].FinalTime) then
       Subtitles.FinalTime[i] := Subtitles[i].InitialTime + 1000;
 
-    StringList.Add('[' + TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss') + ']' + ReplaceEnters(Text, LineEnding, '[br]'), False);
-    StringList.Add('[' + TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss') + ']', False);
+    StringList.Add('[' + TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss') + ']' + ReplaceEnters(Text, LineEnding, '[br]'), False);
+    StringList.Add('[' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss') + ']', False);
   end;
 
   try

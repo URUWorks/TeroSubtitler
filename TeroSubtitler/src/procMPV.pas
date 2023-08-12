@@ -58,7 +58,7 @@ begin
     {$ENDIF}
     LogLevel := llNo;
     AutoStartPlayback := False;
-    SMPTEMode := frmMain.actSMPTE.Checked;
+    SMPTEMode := Workspace.SMPTE;
     with MPVOptions do
     begin
       AddOption('osd-color=' + TextColor);

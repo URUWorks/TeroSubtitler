@@ -94,7 +94,6 @@ type
     actMediaVolumeMute: TAction;
     actMediaVolumeDown: TAction;
     actMediaVolumeUp: TAction;
-    actSMPTE: TAction;
     actMediaSubSizeInc: TAction;
     actMediaSubSizeDec: TAction;
     actTBXEdit: TAction;
@@ -271,7 +270,6 @@ type
     MenuItem146: TMenuItem;
     MenuItem147: TMenuItem;
     MenuItem148: TMenuItem;
-    MenuItem149: TMenuItem;
     MenuItem150: TMenuItem;
     MenuItem151: TMenuItem;
     MenuItem152: TMenuItem;
@@ -283,7 +281,6 @@ type
     MenuItem158: TMenuItem;
     MenuItem159: TMenuItem;
     MenuItem160: TMenuItem;
-    MenuItem161: TMenuItem;
     MenuItem162: TMenuItem;
     MenuItem163: TMenuItem;
     MenuItem164: TMenuItem;
@@ -488,8 +485,6 @@ type
     Separator41: TMenuItem;
     Separator42: TMenuItem;
     Separator43: TMenuItem;
-    Separator44: TMenuItem;
-    Separator45: TMenuItem;
     Separator46: TMenuItem;
     mnuHelpSeparator: TMenuItem;
     Separator47: TMenuItem;
@@ -643,6 +638,7 @@ type
     procedure cboInputFPSSelect(Sender: TObject);
     procedure cboFPSKeyPress(Sender: TObject; var Key: char);
     procedure cboFPSSelect(Sender: TObject);
+    procedure cboFormatSelect(Sender: TObject);
     procedure cboActorChange(Sender: TObject);
     procedure cboActorKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure MRUItemClick(Sender: TObject);
@@ -813,7 +809,6 @@ type
     procedure actModifySelectionExecute(Sender: TObject);
     procedure actLoadVideoExecute(Sender: TObject);
     procedure actCloseVideoExecute(Sender: TObject);
-    procedure actSMPTEExecute(Sender: TObject);
     procedure actFindExecute(Sender: TObject);
     procedure actFindNextExecute(Sender: TObject);
     procedure actFindPreviousExecute(Sender: TObject);
@@ -1261,7 +1256,19 @@ begin
   VSTDoLoop(VST, @ApplyChangeFPS, dlAll, False, True);
   Workspace.FPS.OutputFPS := GetFPS;
   SetTimeFPStoTimeEditCtrls;
+
+  if (Workspace.WorkMode = wmFrames) then
+    SetSMPTEMode(not IsInteger(GetFPS));
+
   UpdateValues(True);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.cboFormatSelect(Sender: TObject);
+begin
+  Subtitles.Format := TUWSubtitleFormats(cboFormat.ItemIndex+1);
+  //SetSMPTEMode(Subtitles.IsSMPTESupported and not IsInteger(GetFPS));
 end;
 
 // -----------------------------------------------------------------------------

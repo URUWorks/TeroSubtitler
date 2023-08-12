@@ -195,6 +195,7 @@ begin
   FillByte(Workspace, SizeOf(TWorkspace), 0);
   with Workspace do
   begin
+    SMPTE         := False;
     FPS.DefFPS    := 23.976;
     FPS.OutputFPS := FPS.DefFPS;
     DefEncoding   := MaxEncodings-1; // utf-8
@@ -464,7 +465,6 @@ begin
         TextSize := GetValue('TextSize', TextSize);
         TextShadowOffset := GetValue('TextShadowOffset', TextShadowOffset);
         MPV.RendererMode := TMPVPlayerRenderMode(GetValue('RendererMode', Integer({$IFDEF WINDOWS}rmEmbedding{$ELSE}rmOpenGL{$ENDIF})));
-        actSMPTE.Checked := GetValue('SMPTE', False);
         SeekTime         := GetValue('SeekTime', 5000);
         FrameStep        := GetValue('FrameStep', 1);
         Volume.Percent   := GetValue('Volume', 75);
@@ -754,7 +754,6 @@ begin
         SetValue('TextSize', TextSize);
         SetValue('TextShadowOffset', TextShadowOffset);
         SetValue('RendererMode', Integer(MPV.RendererMode));
-        SetValue('SMPTE', actSMPTE.Checked);
         SetValue('SeekTime', SeekTime);
         SetValue('FrameStep', FrameStep);
         SetValue('Volume', Volume.Percent);

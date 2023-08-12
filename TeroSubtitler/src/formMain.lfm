@@ -1122,6 +1122,7 @@ object frmMain: TfrmMain
         Top = 0
         Width = 180
         ItemHeight = 15
+        OnSelect = cboFormatSelect
         Style = csDropDownList
         TabOrder = 0
         TabStop = False
@@ -1755,13 +1756,6 @@ object frmMain: TfrmMain
         end
       end
       object Separator11: TMenuItem
-        Caption = '-'
-      end
-      object MenuItem149: TMenuItem
-        Action = actSMPTE
-        AutoCheck = True
-      end
-      object Separator44: TMenuItem
         Caption = '-'
       end
       object MenuItem8: TMenuItem
@@ -3315,12 +3309,6 @@ object frmMain: TfrmMain
       Caption = 'Close video'
       OnExecute = actCloseVideoExecute
     end
-    object actSMPTE: TAction
-      Category = 'Video'
-      AutoCheck = True
-      Caption = 'SMPTE'
-      OnExecute = actSMPTEExecute
-    end
     object actAudioToText: TAction
       Tag = 4
       Category = 'Video'
@@ -3854,13 +3842,6 @@ object frmMain: TfrmMain
     end
     object MenuItem102: TMenuItem
       Action = actMediaStop
-    end
-    object Separator45: TMenuItem
-      Caption = '-'
-    end
-    object MenuItem161: TMenuItem
-      Action = actSMPTE
-      AutoCheck = True
     end
   end
   object popWAVE: TPopupMenu

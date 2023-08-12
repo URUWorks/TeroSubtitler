@@ -286,13 +286,13 @@ begin
   begin
     SAPI.ItemPointer[i]^.Data := 0;
 
-    if SAPI1.InitialTime[i] <> SAPI2.InitialTime[i] then
+    if SAPI1[i].InitialTime <> SAPI2[i].InitialTime then
       SAPI.ItemPointer[i]^.Data := SAPI[i].Data or DIFF_INITIAL;
 
-    if SAPI1.FinalTime[i] <> SAPI2.FinalTime[i] then
+    if SAPI1[i].FinalTime <> SAPI2[i].FinalTime then
       SAPI.ItemPointer[i]^.Data := SAPI[i].Data or DIFF_FINAL;
 
-    if SAPI1.Text[i] <> SAPI2.Text[i] then
+    if SAPI1[i].Text <> SAPI2[i].Text then
       SAPI.ItemPointer[i]^.Data := SAPI[i].Data or DIFF_TEXT;
   end;
 

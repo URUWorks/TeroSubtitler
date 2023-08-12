@@ -165,7 +165,7 @@ begin
         Text := AddCharR(' ', Text, 67);
     end;
 
-    StringList.Add(TimeToString(Subtitles[i].InitialTime, 'hh:mm:ss:zz') + ' , ' + TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:zz') + ' , ' + Text, False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + ' , ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz') + ' , ' + Text, False);
   end;
 
   try

@@ -532,7 +532,9 @@ begin
   WAVEOptions.ffmpegFolder := edtFFMPEG.Text;
   WAVEOptions.SceneDetectFolder := edtSceneDetect.Text;
 
-  SetWorkMode(TWorkMode(cboTimeCodeMode.ItemIndex));
+  if Workspace.WorkMode <> TWorkMode(cboTimeCodeMode.ItemIndex) then
+    SetWorkMode(TWorkMode(cboTimeCodeMode.ItemIndex));
+
   Workspace.FPS.DefFPS  := StrToFloatDef(cboDefaultFrameRate.Text, Workspace.FPS.OutputFPS, AppOptions.FormatSettings);
   Workspace.DefEncoding := cboDefaultFileEncoding.ItemIndex;
   Workspace.DefFormat   := TUWSubtitleFormats(cboDefaultFileFormat.ItemIndex+1);
