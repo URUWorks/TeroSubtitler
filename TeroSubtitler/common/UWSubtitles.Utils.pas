@@ -340,7 +340,7 @@ end;
 
 function UnbreakSubtitles(const Text: String; const BreakChar: String = sLineBreak): String;
 begin
-  Result := RemoveUnnecessarySpaces(ReplaceString(Text, BreakChar, ' '), BreakChar);
+  Result := ReplaceString(Text, BreakChar, ' ');
 end;
 
 // -----------------------------------------------------------------------------
@@ -350,7 +350,7 @@ var
   x: Integer;
 begin
   x := UTF8Pos(BreakChar, Text);
-  if (x > 0) and (not Text.StartsWith('-')) and (UTF8Length(UnbreakSubtitles(Text, BreakChar)) <= MaxChars) then
+  if (x > 0) and (not Text.StartsWith('-')) and (UTF8Length(ReplaceRegExpr('{(.*?)}', UnbreakSubtitles(Text, BreakChar), '', True)) <= MaxChars) then
     Result := UnbreakSubtitles(Text, BreakChar)
   else
     Result := Text;
