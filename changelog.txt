@@ -3,6 +3,7 @@
 - updated: Italian language (thx GitGianluc)
 - updated: Russian language (thx RoxMarty)
 - improved: iTunes subtitle format
+- added: Windows installer script (thx CM630)
 - added: Jump to previous/next shotchange
 - added: Brazilian Portuguese language (thx Gzushgshsh)
 - added: Chaining subtitles
