@@ -1077,14 +1077,16 @@ function GetCommonString(const S: String; const ASection: String = 'CommonString
 var
   sl: TAppStringList = NIL;
 begin
-  try
-    if LanguageManager.GetAppStringList(ASection, sl) then
+  if LanguageManager.GetAppStringList(ASection, sl) then
+  begin
+    try
       Result := GetString(sl, S)
-    else
-      Result := '';
-  finally
-    sl.Free;
-  end;
+    finally
+      sl.Free;
+    end;
+  end
+  else
+    Result := '';
 end;
 
 // -----------------------------------------------------------------------------
@@ -1093,13 +1095,13 @@ procedure UpdateCommonActionString;
 var
   sl: TAppStringList = NIL;
 begin
+  if LanguageManager.GetAppStringList('CommonStrings', sl) then
   try
-    if LanguageManager.GetAppStringList('CommonStrings', sl) then
-      with frmMain do
-      begin
-        actShiftTimeMore.Caption := Format(GetString(sl, 'ShiftTimeMore'), [AppOptions.ShiftTimeMS]);
-        actShiftTimeLess.Caption := Format(GetString(sl, 'ShiftTimeLess'), [AppOptions.ShiftTimeMS]);
-      end;
+    with frmMain do
+    begin
+      actShiftTimeMore.Caption := Format(GetString(sl, 'ShiftTimeMore'), [AppOptions.ShiftTimeMS]);
+      actShiftTimeLess.Caption := Format(GetString(sl, 'ShiftTimeLess'), [AppOptions.ShiftTimeMS]);
+    end;
   finally
     sl.Free;
   end;
@@ -1112,9 +1114,9 @@ var
   sl: TAppStringList = NIL;
   rndTip: Integer;
 begin
-  try
-    if LanguageManager.GetAppStringList('TipStrings', sl) then
-    begin
+  if LanguageManager.GetAppStringList('TipStrings', sl) then
+  begin
+    try
       rndTip := Random(sl.Count)+1;
       Result := GetString(sl, 'Tip' + rndTip.ToString);
       with frmMain do
@@ -1125,12 +1127,12 @@ begin
           4: Result := Format(Result, [ShortCutToTextEx(actUnDockWaveform.ShortCut)]);
         end;
       SetStatusBarText(Result);
-    end
-    else
-      Result := '';
-  finally
-    sl.Free;
-  end;
+    finally
+      sl.Free;
+    end;
+  end
+  else
+    Result := '';
 end;
 
 // -----------------------------------------------------------------------------
@@ -1160,13 +1162,13 @@ var
   end;
 
 begin
-  try
-    if LanguageManager.GetAppStringList(ASection, sl) then
+  if LanguageManager.GetAppStringList(ASection, sl) then
+    try
       for i := 0 to AForm.ControlCount-1 do
         CheckControl(AForm.Controls[i]);
-  finally
-    sl.Free;
-  end;
+    finally
+      sl.Free;
+    end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1737,8 +1739,10 @@ var
   sl: TAppStringList = NIL;
 begin
   if LanguageManager.GetAppStringList(ASectionName, sl) then
+  begin
     Result := formCustomQuestionDlg.ShowQuestionDialog(GetString(sl, Title), GetString(sl, Caption), ProgramName, AButtons);
-  FreeAndNil(sl);
+    FreeAndNil(sl);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1757,8 +1761,8 @@ begin
 
     if FileName.IsEmpty then FileName := GetString(sl, 'NoName');
     Result := formCustomQuestionDlg.ShowQuestionDialog(sm, Format(GetString(sl, 'AskToSave'), [FileName]), ProgramName);
+    FreeAndNil(sl);
   end;
-  FreeAndNil(sl);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1800,8 +1804,8 @@ begin
   begin
     sm := Format(GetString(sl, 'ShortCutInUse'), [AAction]);
     Result := formCustomQuestionDlg.ShowQuestionDialog(sm, GetString(sl, 'ReassignShortCut'), ProgramName, [mbYes, mbNo]);
+    FreeAndNil(sl);
   end;
-  FreeAndNil(sl);
 end;}
 
 // -----------------------------------------------------------------------------
