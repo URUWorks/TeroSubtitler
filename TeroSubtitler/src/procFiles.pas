@@ -150,6 +150,7 @@ begin
     VST.RootNodeCount := 0;
     Subtitles.Clear;
     mmoSourceView.Lines.Clear;
+    UndoInstance.Clear;
     EnableWorkArea(not ACloseVideo);
     RefreshAppTitle;
   end;
