@@ -985,6 +985,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actRoundTimesExecute(Sender: TObject);
+begin
+  VSTDoLoop(VST, @ApplyRoundTimes);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actReadTimingsFromFileExecute(Sender: TObject);
 begin
   ReadTimingsFromFileWithDialog;

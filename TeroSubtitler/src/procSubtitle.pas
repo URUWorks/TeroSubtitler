@@ -73,8 +73,9 @@ implementation
 
 uses
   formMain, procVST, procUndo, procVST_Loops, procWorkspace, procFixSubtitles,
-  UWSystem.Encoding, UWSystem.TimeUtils, UWSystem.StrUtils, procFiles, procMPV,
-  UWSubtitleAPI.Tags, UWSubtitleAPI.Formats, procTranscription;
+  UWSystem.Encoding, UWSystem.TimeUtils, UWSystem.StrUtils, procMPV,
+  UWSubtitleAPI.Tags, UWSubtitleAPI.Formats, procTranscription,
+  UWSubtitles.Utils;
 
 // -----------------------------------------------------------------------------
 
@@ -139,12 +140,20 @@ end;
 function InsertSubtitle(const Index: Integer; const InitialTime, FinalTime: Integer; const Text, Translation: String; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer;
 var
   Item: TUWSubtitleItem;
+  it, ft: Integer;
 begin
   ClearSubtitleItem(Item);
   Item.InitialTime := InitialTime;
   Item.FinalTime   := FinalTime;
   Item.Text        := Text;
   Item.Translation := Translation;
+
+  if Workspace.WorkMode = wmFrames then
+  begin
+    RoundFramesValue(InitialTime, FinalTime, Workspace.FPS.OutputFPS, it, ft);
+    Item.InitialTime := it;
+    Item.FinalTime   := ft;
+  end;
 
   Result := InsertSubtitle(Index, Item, AutoIncrementUndo, AUpdate);
 end;
@@ -196,6 +205,9 @@ end;
 
 procedure SetSubtitleTimes(const Index: Integer; const AInitialTime, AFinalTime: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
 begin
+  if (Subtitles.InitialTime[Index] = AInitialTime) and (Subtitles.FinalTime[Index] = AFinalTime) then
+    Exit;
+
   UndoInstance.AddUndo(utSubtitleChange, Index, Subtitles[Index], AutoIncrementUndo);
 
   Subtitles.InitialTime[Index] := AInitialTime;

@@ -1316,6 +1316,9 @@ object frmMain: TfrmMain
         object MenuItem48: TMenuItem
           Action = actTimeExpander
         end
+        object MenuItem149: TMenuItem
+          Action = actRoundTimes
+        end
         object Separator13: TMenuItem
           Caption = '-'
         end
@@ -3050,12 +3053,6 @@ object frmMain: TfrmMain
       Caption = 'Set default pause'
       OnExecute = actSetDefaultGapExecute
     end
-    object actReadTimingsFromFile: TAction
-      Tag = 1
-      Category = 'Timings'
-      Caption = 'Read timings from file...'
-      OnExecute = actReadTimingsFromFileExecute
-    end
     object actMediaBack1Sec: TAction
       Tag = 4
       Category = 'Video'
@@ -3457,6 +3454,18 @@ object frmMain: TfrmMain
       Caption = 'Detect silent zones'
       ImageIndex = 77
       OnExecute = actDetectSilentZonesExecute
+    end
+    object actRoundTimes: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Round times'
+      OnExecute = actRoundTimesExecute
+    end
+    object actReadTimingsFromFile: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Read timings from file...'
+      OnExecute = actReadTimingsFromFileExecute
     end
   end
   object popDropInsert: TPopupMenu

@@ -72,6 +72,7 @@ type
     actExportCustomTextFormat: TAction;
     actActor: TAction;
     actExportCustomImageFormat: TAction;
+    actRoundTimes: TAction;
     actJumpToNextShotChange: TAction;
     actJumpToPrevShotChange: TAction;
     actSaveProject: TAction;
@@ -270,6 +271,7 @@ type
     MenuItem146: TMenuItem;
     MenuItem147: TMenuItem;
     MenuItem148: TMenuItem;
+    MenuItem149: TMenuItem;
     MenuItem150: TMenuItem;
     MenuItem151: TMenuItem;
     MenuItem152: TMenuItem;
@@ -835,6 +837,7 @@ type
     procedure actJumpToPreviousMarkedExecute(Sender: TObject);
     procedure actEndCueAddOneFrameExecute(Sender: TObject);
     procedure actEndCueSubtractOneFrameExecute(Sender: TObject);
+    procedure actRoundTimesExecute(Sender: TObject);
     procedure actReadTimingsFromFileExecute(Sender: TObject);
     procedure actReadTextsFromFileExecute(Sender: TObject);
     procedure actExtendLengthToNextExecute(Sender: TObject);

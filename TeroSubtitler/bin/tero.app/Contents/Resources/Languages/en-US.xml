@@ -131,6 +131,7 @@
       <actExtendLengthToNext>Extend final time to next</actExtendLengthToNext>
       <actSetAutomaticDuration>Set automatic duration</actSetAutomaticDuration>
       <actSetDefaultGap Hint="only if the gap is too short">Set default gap</actSetDefaultGap>
+      <actRoundTimes>Round times</actRoundTimes>
       <actSwapTexts>Swap text</actSwapTexts>
       <actShowColumnNumber>Number/Gap</actShowColumnNumber>
       <actShowColumnTimes>Times</actShowColumnTimes>

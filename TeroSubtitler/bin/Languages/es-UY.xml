@@ -131,6 +131,7 @@
       <actExtendLengthToNext>Extender tiempo final al siguiente</actExtendLengthToNext>
       <actSetAutomaticDuration>Establecer duración automática</actSetAutomaticDuration>
       <actSetDefaultGap Hint="sólo si la pausa es demasiado corta">Establecer pausa predeterminada</actSetDefaultGap>
+      <actRoundTimes>Redondear tiempos</actRoundTimes>      
       <actSwapTexts>Intercambiar textos</actSwapTexts>
       <actShowColumnNumber>Número/Pausa</actShowColumnNumber>
       <actShowColumnTimes>Tiempos</actShowColumnTimes>
