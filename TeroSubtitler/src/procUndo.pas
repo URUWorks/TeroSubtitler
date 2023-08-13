@@ -66,6 +66,7 @@ type
     function CanRedo: Boolean;
     function UndoCount: Integer;
     function RedoCount: Integer;
+    procedure Clear;
     procedure AddUndo(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
     procedure AddUndoIfNotResent(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
     procedure AddRedo(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const Group: Byte);
@@ -212,8 +213,7 @@ end;
 
 destructor TUndo.Destroy;
 begin
-  ClearList(FUndoList);
-  ClearList(FRedoList);
+  Clear;
   FUndoList.Free;
   FRedoList.Free;
 
@@ -246,6 +246,14 @@ end;
 function TUndo.RedoCount: Integer;
 begin
   Result := FRedoList.Count;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUndo.Clear;
+begin
+  ClearList(FUndoList);
+  ClearList(FRedoList);
 end;
 
 // -----------------------------------------------------------------------------
