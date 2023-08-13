@@ -16,6 +16,9 @@
       </XPManifest>
       <Icon Value="0"/>
     </General>
+    <i18n>
+      <OutDir Value="..\bin\Languages"/>
+    </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
