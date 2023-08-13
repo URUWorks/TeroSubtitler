@@ -67,11 +67,13 @@ object frmWelcome: TfrmWelcome
   object lblRecentFiles: TLabel
     AnchorSideTop.Control = imgLogo
     AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = imgLogo
+    AnchorSideBottom.Side = asrBottom
     Left = 280
     Height = 15
-    Top = 59
+    Top = 36
     Width = 66
-    BorderSpacing.Top = 8
+    Anchors = [akLeft, akBottom]
     Caption = 'Recent files'
     Font.Style = [fsBold]
     ParentColor = False

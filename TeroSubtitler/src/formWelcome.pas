@@ -92,7 +92,7 @@ begin
   LoadLanguage(Self, False);
   chkShowOnStartup.Checked := AppOptions.ShowWelcomeAtStartup;
 
-  h := lblRecentFiles.Top + lblRecentFiles.Height + 8;
+  h := lblRecentFiles.Top + lblRecentFiles.Height + 16;
   if MRU.Items.Count > 0 then
   for i := 0 to MRU.Items.Count-1 do
   begin
