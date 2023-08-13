@@ -35,6 +35,7 @@ function TimeExpander(const Text: String; const Duration, MSecsValue, CharsValue
 function ExtendLength(const NextInitialTime: Cardinal; const AGapMs: Cardinal): Cardinal;
 function AutomaticDurations(const Text: String; const Duration, msPerChar, msPerWord, msPerLine: Cardinal; const Mode: TAutomaticDurationMode): Cardinal; // calculate the duration of subtitles using a simple formula
 procedure ShiftTime(const InitialTime, FinalTime, Value: Integer; out NewInitialTime, NewFinalTime: Integer); // Time to shift subtitle forwards/backwards
+procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Single; out NewInitialTime, NewFinalTime: Integer);
 
 { Texts }
 
@@ -69,7 +70,8 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; 
 
 implementation
 
-uses UWSystem.SysUtils, UWSystem.StrUtils, RegExpr, LazUTF8, LCLIntf;
+uses UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils, RegExpr,
+  LazUTF8, LCLIntf;
 
 // -----------------------------------------------------------------------------
 
@@ -161,6 +163,14 @@ procedure ShiftTime(const InitialTime, FinalTime, Value: Integer;
 begin
   NewInitialTime := InitialTime + Value;
   NewFinalTime   := FinalTime   + Value;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Single; out NewInitialTime, NewFinalTime: Integer);
+begin
+  NewInitialTime := RoundTimeWithFrames(InitialTime, AFPS);
+  NewFinalTime   := RoundTimeWithFrames(FinalTime, AFPS);
 end;
 
 // -----------------------------------------------------------------------------

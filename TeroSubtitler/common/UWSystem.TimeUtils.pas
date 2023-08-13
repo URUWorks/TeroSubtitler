@@ -31,6 +31,7 @@ procedure DecodeTime(const Time: Cardinal; out Hour, Min, Secs, MSecs: Word);
 function TimeToFrames(const Time: Cardinal; const FPS: Single): Cardinal;
 function TimeToFramesMaxFPS(const Time: Cardinal; const FPS: Single): Cardinal;
 function FramesToTime(const Frames, FPS: Single): Cardinal;
+function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Single): Cardinal;
 function TimeToString(const Time: Cardinal; TimeFormat: String = 'hh:mm:ss'; const FPS: Single = 25; const ATrim: Boolean = False): String;
 function StringToTime(const Time: String; const NoHours: Boolean = False; const FPS: Single = 0): Cardinal;
 function TimeInFormat(const Time, Format: String): Boolean;
@@ -106,6 +107,13 @@ begin
     Result := Round((Frames / FPS) * 1000.0)
   else
     Result := 0;
+end;
+
+// -----------------------------------------------------------------------------
+
+function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Single): Cardinal;
+begin
+  Result := FramesToTime(TimeToFrames(ATimeMS, AFPS), AFPS)
 end;
 
 // -----------------------------------------------------------------------------
