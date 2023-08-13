@@ -42,7 +42,7 @@ procedure MPVDeleteSubtitleTempTrack;
 
 implementation
 
-uses MPVPlayer, procCommon, UWSystem.Encoding;
+uses MPVPlayer, procCommon, UWSystem.Encoding, UWSystem.SysUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -86,7 +86,7 @@ begin
       AddOption('sub-scale-by-window=yes');
       AddOption('sub-scale-with-window=yes');
       AddOption('volume=' + IntToStr(Volume.Percent));
-      AddOption('mute=' + BoolToStr(Volume.Mute, 'yes', 'no'));
+      AddOption('mute=' + SysUtils.BoolToStr(Volume.Mute, 'yes', 'no'));
 
       //AddOption('log-file='+LogMPVFileName);
     end;
@@ -247,7 +247,13 @@ var
 begin
   AFPS      := Workspace.FPS.OutputFPS;
   AEncoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID);
-  Result    := Subtitles.SaveToFile(MPVTempSubFileName, AFPS, AEncoding, sfAdvancedSubStationAlpha, smText);
+
+  if IsInteger(Workspace.FPS.OutputFPS) then
+    Subtitles.TimeBase := stbMedia
+  else
+    Subtitles.TimeBase := stbSMPTE;
+
+  Result := Subtitles.SaveToFile(MPVTempSubFileName, AFPS, AEncoding, sfAdvancedSubStationAlpha, smText);
 end;
 
 // -----------------------------------------------------------------------------

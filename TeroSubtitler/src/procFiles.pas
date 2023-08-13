@@ -233,10 +233,10 @@ begin
         if Workspace.WorkMode = wmTime then
           Subtitles.ConvertTimesToSMPTE(False);
 
-        if not Workspace.SMPTE then
-          SetSMPTEMode(True)
+        //if not Workspace.SMPTE then
+          SetSMPTEMode(False)
       end
-      else if (Subtitles.TimeBase = stbMedia) and Workspace.SMPTE then
+      else if (Subtitles.TimeBase = stbMedia) then //and Workspace.SMPTE then
         SetSMPTEMode(False);
     end;
 
