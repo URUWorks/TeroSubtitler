@@ -1,4 +1,4 @@
-1.0.0.9 (x.8.2023)
+1.0.0.9 (14.8.2023)
 - fixed: Loading iTT changes default frame rate #144
 - fixed: Tagging included in character count in Fix Subtitles #143
 - fixed: Some entries in iTunes Timed Text don't display at the right time in videos with non-integer rates when mpv doesn't handle subtitles #63
