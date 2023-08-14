@@ -219,8 +219,8 @@ begin
         if tedOffset.Value > 0 then
           v := v + iff(cboOffset.ItemIndex = 0, tedOffset.Value, -tedOffset.Value);
 
-        if frmMain.MPV.SMPTEMode then
-          v := Round(v / 1.001);
+        //if frmMain.MPV.SMPTEMode then
+        //  v := Round(v / 1.001);
 
         SC[i] := v;
       end;
