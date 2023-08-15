@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Tero Subtitler"
-#define MyAppVersion "1.0.0.8"
-#define ShortAppVersion "1008"
+#define MyAppVersion "1.0.1.0"
+#define ShortAppVersion "1010"
 #define MyAppPublisher "URUWorks"
 #define MyAppURL "https://github.com/URUWorks/TeroSubtitler/releases"
 #define MyAppExeName "tero.exe"
@@ -30,7 +30,7 @@ PrivilegesRequiredOverridesAllowed=dialog
 OutputDir={#SourcePath}
 ArchitecturesInstallIn64BitMode=x64
 OutputBaseFilename=ts{#ShortAppVersion}_win64
-SetupIconFile={#SourcePath}\bin\Icons\890.ico
+SetupIconFile={#SourcePath}\images\install.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
