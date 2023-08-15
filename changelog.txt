@@ -1,3 +1,7 @@
+1.0.1.0 (x.9.2023)
+- fixed: Times of imported iTunes Timed Text file misinterpreted in frame mode
+- added: [Windows] new installer icon
+
 1.0.0.9 (14.8.2023)
 - fixed: Loading iTT changes default frame rate #144
 - fixed: Tagging included in character count in Fix Subtitles #143
