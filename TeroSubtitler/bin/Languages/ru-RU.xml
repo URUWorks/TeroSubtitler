@@ -130,7 +130,8 @@
       <actExtendLengthToPrevious>Увеличить начальное время до предыдущего</actExtendLengthToPrevious>
       <actExtendLengthToNext>Продлить время окончания до следующего</actExtendLengthToNext>
       <actSetAutomaticDuration>Авто длина</actSetAutomaticDuration>
-      <actSetDefaultPause Hint="только если промежуток мал">Настроить паузу по-умолчанию</actSetDefaultPause>
+      <actSetDefaultGap Hint="только если промежуток мал">Настроить промежуток по-умолчанию</actSetDefaultGap>
+      <actRoundTimes>Округление чисел</actRoundTimes>
       <actSwapTexts>Поменять текст</actSwapTexts>
       <actShowColumnNumber>Номер/Зазор</actShowColumnNumber>
       <actShowColumnTimes>Начало/конец</actShowColumnTimes>
@@ -208,6 +209,8 @@
       <actSwapWorkspace>Переместить видеоокно влево/вправо</actSwapWorkspace>
       <actInsertShotChange>Вставить смену кадра(ов)</actInsertShotChange>                  
       <actDeleteShotChange>Удалить смену кадра(ов)</actDeleteShotChange>
+      <actJumpToPrevShotChange>Перейти к предыдущему изменению кадра</actJumpToPrevShotChange>
+      <actJumpToNextShotChange>Перейти к следующему изменению кадра</actJumpToNextShotChange>      
       <actViewShotChange Hint="Enable/disable shot changes">Вкл/откл смену кадров</actViewShotChange>
       <actCenterWaveform>Центрировать аудиоволну</actCenterWaveform>
       <actDetectSilentZones Hint="Click to refresh list">Определить тихие участки</actDetectSilentZones>
@@ -360,6 +363,7 @@
       <lblSCSnapArea>Область смены привязки кадра</lblSCSnapArea>
       <lblSCSnapInCues>Привязка реплик после sc (кадров)</lblSCSnapInCues>
       <lblSCSnapOutCues>Привязка кадров перед sc (кадров)</lblSCSnapOutCues>            
+      <lblChaining>Цепочка (кадров)</lblChaining>
       <lblTheme>Тема</lblTheme>
       <lblListMode>Режим списка</lblListMode>
 	  <lblSubtitles>Субтитры</lblSubtitles>      
@@ -601,6 +605,7 @@
   <Form Name="frmWelcome" Caption="">
     <Section Name="TLabel">
       <lblNewSubtitle>Новый пустой субтитр</lblNewSubtitle>
+      <lblNewTranscription>Новая транскрипция</lblNewTranscription>      
       <lblOpenFile>Открыть файл...</lblOpenFile>
       <lblBatchConvert>Пакетное преобразование...</lblBatchConvert>
       <lblExit>Выход</lblExit>      
@@ -634,6 +639,8 @@
     <etSnapToShotChanges>Привязать время к смене кадров</etSnapToShotChanges>
     <etSnapToShotChangesInCue>Snap In Cue to shot change</etSnapToShotChangesInCue>
     <etSnapToShotChangesOutCue>Snap Out Cue to shot change</etSnapToShotChangesOutCue>
+    <etSnapToShotChangesInCueAway>Snap In Cue away from shot change</etSnapToShotChangesInCueAway>        
+    <etChaining>Цепочка субтитров</etChaining>
     <Index>#</Index>
     <Action>Действия</Action>
     <Current>Текущее</Current>
