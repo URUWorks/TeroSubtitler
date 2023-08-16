@@ -141,11 +141,10 @@ object frmShotChanges: TfrmShotChanges
   end
   object prbExtracting: TProgressBar
     AnchorSideRight.Control = cboOffset
-    AnchorSideRight.Side = asrBottom
     Left = 8
     Height = 8
     Top = 439
-    Width = 235
+    Width = 192
     Anchors = [akTop, akLeft, akRight]
     Style = pbstMarquee
     TabOrder = 13
