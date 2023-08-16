@@ -248,7 +248,7 @@ begin
   AFPS      := Workspace.FPS.OutputFPS;
   AEncoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID);
 
-  if IsInteger(Workspace.FPS.OutputFPS) then
+  if Workspace.WorkMode = wmTime then //if IsInteger(Workspace.FPS.OutputFPS) then
     Subtitles.TimeBase := stbMedia
   else
     Subtitles.TimeBase := stbSMPTE;

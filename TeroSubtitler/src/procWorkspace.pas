@@ -940,7 +940,7 @@ begin
     begin
       SMPTE := AValue;
       MPV.SMPTEMode := SMPTE;
-      //WAVE.SetSceneChangeTimeMode(SMPTE);
+      WAVE.SetSceneChangeTimeMode(SMPTE);
       if MPVOptions.SubtitleHandleByMPV then
       begin
         if SMPTE then

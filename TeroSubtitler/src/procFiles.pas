@@ -230,7 +230,17 @@ begin
     else
     begin
       if (Subtitles.TimeBase = stbSMPTE) then
-        SetSMPTEMode(not IsInteger(Subtitles.FrameRate))
+      begin
+        if (Workspace.WorkMode = wmTime) then
+        begin
+          if not IsInteger(Subtitles.FrameRate) then
+            Subtitles.ConvertTimesToSMPTE(False);
+
+          SetSMPTEMode(False);
+        end
+        else
+          SetSMPTEMode(not IsInteger(Subtitles.FrameRate));
+      end
       else if (Subtitles.TimeBase = stbMedia) then
         SetSMPTEMode(False);
     end;
