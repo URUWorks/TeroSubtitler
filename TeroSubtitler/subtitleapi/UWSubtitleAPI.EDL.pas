@@ -61,14 +61,15 @@ type
 
   TEDL = class
   private
-    FFileName : String;
-    FHeader   : THeader;
-    FList     : TEDLList;
-    FChanged  : Boolean;
-    FFPS      : Single;
-    FID       : Integer;
+    FFileName  : String;
+    FHeader    : THeader;
+    FList      : TEDLList;
+    FChanged   : Boolean;
+    FFPS       : Single;
+    FID        : Integer;
+    FFSettings : TFormatSettings;
   public
-    constructor Create(const AFileName: String; const ATitle: String = ''; const AFPS: Single = 25; const AFCM: TFCM = fcmNONDROPFRAME);
+    constructor Create(const AFileName: String; const ATitle: String; const AFPS: Single; const AFormatSettings: TFormatSettings; const AFCM: TFCM = fcmNONDROPFRAME);
     destructor Destroy; override;
     procedure Clear;
     procedure Close;
@@ -79,10 +80,11 @@ type
     function GetXMLTrackList(const AFileName: String; out ATracks: TStrings): Boolean;
     function AddItem(const AItem: TItem): Integer; overload;
     function AddItem(const AIndex: Cardinal; const AReelName: String; const ATypeOfTrack: TTypeOfTrack; const ATypeOfCut: TTypeOfCut; const AClipIn, AClipOut, ATapeIn, ATapeOut: Cardinal; const AClipName, AComment: String): Integer; overload;
-    property FileName : String   read FFileName write FFileName;
-    property ID       : Integer  read FID       write FID;
-    property Items    : TEDLList read FList;
-    property Header   : THeader  read FHeader   write FHeader;
+    property FileName       : String           read FFileName  write FFileName;
+    property ID             : Integer          read FID        write FID;
+    property Items          : TEDLList         read FList;
+    property Header         : THeader          read FHeader    write FHeader;
+    property FormatSettings : TFormatSettings  read FFSettings write FFSettings;
   end;
 
 // -----------------------------------------------------------------------------
@@ -90,7 +92,8 @@ type
 implementation
 
 uses
-  UWSystem.TimeUtils, UWSystem.StrUtils, laz2_XMLRead, laz2_DOM, laz2_XMLWrite;
+  UWSystem.TimeUtils, UWSystem.SysUtils, UWSystem.StrUtils,
+  laz2_XMLRead, laz2_DOM, laz2_XMLWrite;
 
 // -----------------------------------------------------------------------------
 
@@ -117,7 +120,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-constructor TEDL.Create(const AFileName: String; const ATitle: String = ''; const AFPS: Single = 25; const AFCM: TFCM = fcmNONDROPFRAME);
+constructor TEDL.Create(const AFileName: String; const ATitle: String; const AFPS: Single; const AFormatSettings: TFormatSettings; const AFCM: TFCM = fcmNONDROPFRAME);
 begin
   FillByte(FHeader, SizeOf(THeader), 0);
   FList := TEDLList.Create;
@@ -125,10 +128,11 @@ begin
   FHeader.Title := ATitle;
   FHeader.FCM   := AFCM;
 
-  FFPS      := AFPS;
-  FID       := 0;
-  FChanged  := False;
-  FFileName := AFileName;
+  FFPS       := AFPS;
+  FID        := 0;
+  FChanged   := False;
+  FFileName  := AFileName;
+  FFSettings := AFormatSettings; //SysUtils.FormatSettings;
   if AFileName <> '' then LoadFromFile(AFileName);
 end;
 
@@ -225,6 +229,14 @@ begin
             for i := 0 to NodeList.Count-1 do
             begin
               Node    := NodeList.Item[i];
+              SubNode := Node.FindNode('rate');
+              if Assigned(SubNode) then
+              begin
+                SubNode := SubNode.FindNode('timebase');
+                if Assigned(SubNode) then
+                  FFPS := StrToSingle(SubNode.TextContent, 24, FFSettings);
+              end;
+
               SubNode := Node.FindNode('start');
               if Assigned(SubNode) then
               begin
@@ -238,7 +250,9 @@ begin
                 ClipOut     := FramesToTime(StrToIntDef(SubNode.TextContent, 0), FFPS);
                 TapeIn      := 0;
                 TapeOut     := 0;
-                AddItem(Item);
+
+                if ClipOut > 0 then
+                  AddItem(Item);
               end;
             end;
         end;

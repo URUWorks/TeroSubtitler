@@ -256,7 +256,7 @@ begin
     begin
       if FileName.ToLower.EndsWith('.edl') or FileName.ToLower.EndsWith('.xml') then
       begin
-        edl := TEDL.Create('', '', GetFPS);
+        edl := TEDL.Create('', '', GetFPS, AppOptions.FormatSettings);
         try
           if edl.GetXMLTrackList(FileName, ATracks) and (ATracks.Count > 1) then
             edl.ID := formCustomSelectDlg.ExecuteDialog(GetCommonString('MultipleTracksDetected'), GetCommonString('SelectTrackToUse'), ATracks);
@@ -315,7 +315,7 @@ begin
       begin
         if FileName.ToLower.EndsWith('.edl') or FileName.ToLower.EndsWith('.xml') then
         begin
-          edl := TEDL.Create(FileName, frmMain.MPV.FileName, GetFPS);
+          edl := TEDL.Create(FileName, frmMain.MPV.FileName, GetFPS, AppOptions.FormatSettings);
           try
             x := 0;
             for i := 0 to mmoTimes.Lines.Count-1 do
