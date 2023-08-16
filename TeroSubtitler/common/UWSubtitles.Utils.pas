@@ -585,7 +585,7 @@ begin
   if ((Pos('(', Text) > 0) and (Pos(')', Text) > Pos('(', Text))) or
     ((Pos('[', Text) > 0) and (Pos(']', Text) > Pos('[', Text))) or
     ((Pos('<', Text) > 0) and (Pos('>', Text) > Pos('<', Text))) or
-    (StringCount('♪', Text) > 1) or (StringCount('♫', Text) > 1) then
+    (StringCount('♪', Text) > 0) or (StringCount('♫', Text) > 0) then
     Result := True
   else
     Result := False;
