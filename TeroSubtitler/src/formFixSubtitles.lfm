@@ -150,6 +150,7 @@ object frmFixSubtitles: TfrmFixSubtitles
       Header.Columns = <>
       Header.MainColumn = -1
       Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+      PopupMenu = PopupMenuSelect
       TabOrder = 0
       TreeOptions.AutoOptions = [toAutoTristateTracking]
       TreeOptions.MiscOptions = [toCheckSupport, toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
@@ -157,6 +158,7 @@ object frmFixSubtitles: TfrmFixSubtitles
       TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
       TreeOptions.StringOptions = []
       OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+      OnChecked = VSTChecked
       OnDrawText = VSTDrawText
       OnGetText = VSTGetText
       OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
@@ -169,5 +171,21 @@ object frmFixSubtitles: TfrmFixSubtitles
     Height = 558
     Top = 0
     Width = 6
+  end
+  object PopupMenuSelect: TPopupMenu
+    Left = 432
+    Top = 496
+    object mnuSelectAll: TMenuItem
+      Caption = 'mnuSelectAll'
+      OnClick = mnuSelectAllClick
+    end
+    object mnuDeSelectAll: TMenuItem
+      Caption = 'mnuDeSelectAll'
+      OnClick = mnuDeSelectAllClick
+    end
+    object mnuInvertSelection: TMenuItem
+      Caption = 'mnuInvertSelection'
+      OnClick = mnuInvertSelectionClick
+    end
   end
 end

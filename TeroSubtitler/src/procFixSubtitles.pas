@@ -44,7 +44,7 @@ type
 
   { TUWSubtitleInfo }
 
-  TSubtitleInfoCustomList = TList<TSubtitleInfoItem>;
+  TSubtitleInfoCustomList = TList<PSubtitleInfoItem>;
 
   TSubtitleInfoList = class(TSubtitleInfoCustomList)
   private
@@ -53,6 +53,7 @@ type
   public
     constructor Create(const Subtitles: TUWSubtitles = NIL);
     destructor Destroy; override;
+    procedure ClearItems;
     property Errors: TSubtitleErrorTypeSet read FErrors write FErrors;
     procedure FixErrors(const OCRFile: String = ''; const Profile: PProfileItem = NIL; const AShotChanges: TIntegerDynArray = NIL);
   end;
@@ -129,15 +130,31 @@ end;
 destructor TSubtitleInfoList.Destroy;
 begin
   if FSubtitles <> NIL then FSubtitles := NIL;
+  ClearItems;
   inherited;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TSubtitleInfoList.ClearItems;
+var
+  i: Integer;
+begin
+  if Count > 0 then
+  begin
+    for i := 0 to Count-1 do
+      Dispose(PSubtitleInfoItem(Items[i]));
+  end;
+  Clear;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile: PProfileItem = NIL; const AShotChanges: TIntegerDynArray = NIL);
 
-  procedure ClearItem(var AFixedItem: TSubtitleInfoItem; const Index: Integer);
+  procedure ClearItem(var AFixedItem: PSubtitleInfoItem; const Index: Integer);
   begin
+    New(AFixedItem);
     AFixedItem.Index       := Index;
     AFixedItem.Apply       := True;
     AFixedItem.InitialTime := FSubtitles[Index].InitialTime;
@@ -147,7 +164,7 @@ procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile:
   end;
 
 var
-  FixedItem : TSubtitleInfoItem;
+  FixedItem : PSubtitleInfoItem;
   i, x, z   : Integer;
   tmp, s    : String;
   ocr       : TUWOCRScript;
@@ -161,7 +178,7 @@ var
 begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
 
-  Clear;
+  ClearItems;
   GapMs       := GetCorrectTime(Profile^.MinPause, Profile^.PauseInFrames);
   SnapMs      := FramesToTime(Profile^.ShotcutSnapArea, Workspace.FPS.OutputFPS);
   ThresholdMs := FramesToTime(Profile^.ShotcutThreshold, Workspace.FPS.OutputFPS);
@@ -176,7 +193,7 @@ begin
       // Repeated subtitle
       if etRepeatedSubtitle in FErrors then
       begin
-        if (i > 0) and IsEqualSubtitle(FixedItem, FSubtitles[i-1]) then
+        if (i > 0) and IsEqualSubtitle(FixedItem^, FSubtitles[i-1]) then
         begin
           FixedItem.ErrorsFixed := [etRepeatedSubtitle];
           Add(FixedItem);
@@ -219,17 +236,6 @@ begin
         begin
           FixedItem.Text := tmp;
           FixedItem.ErrorsFixed := [etUnnecessaryDots];
-          Add(FixedItem);
-        end;
-      end;
-
-      ClearItem(FixedItem, i);
-      // Empty subtitle
-      if etEmpty in FErrors then
-      begin
-        if FixedItem.Text = '' then
-        begin
-          FixedItem.ErrorsFixed := [etEmpty];
           Add(FixedItem);
         end;
       end;
@@ -308,13 +314,24 @@ begin
             FixedItem.ErrorsFixed := [etHearingImpaired];
             Add(FixedItem);
 
-            if tmp = '' then
+            {if tmp = '' then
             begin
               FixedItem.Text        := '';
               FixedItem.ErrorsFixed := [etEmpty];
               Add(FixedItem);
-            end;
+            end;}
           end;
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      // Empty subtitle
+      if etEmpty in FErrors then
+      begin
+        if FixedItem.Text = '' then
+        begin
+          FixedItem.ErrorsFixed := [etEmpty];
+          Add(FixedItem);
         end;
       end;
 
@@ -354,7 +371,7 @@ begin
       // Time too short
       if etTimeTooShort in FErrors then
       begin
-        if GetItemDuration(FixedItem) < Profile^.MinDuration then
+        if GetItemDuration(FixedItem^) < Profile^.MinDuration then
         begin
           FixedItem.FinalTime   := FixedItem.InitialTime + Profile^.MinDuration;
           FixedItem.ErrorsFixed := [etTimeTooShort];
@@ -366,7 +383,7 @@ begin
       // Time too long
       if etTimeTooLong in FErrors then
       begin
-        if GetItemDuration(FixedItem) > Profile^.MaxDuration then
+        if GetItemDuration(FixedItem^) > Profile^.MaxDuration then
         begin
           FixedItem.FinalTime   := FixedItem.InitialTime + Profile^.MaxDuration;
           FixedItem.ErrorsFixed := [etTimeTooLong];

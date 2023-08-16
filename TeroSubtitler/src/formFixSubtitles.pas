@@ -25,11 +25,13 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
   CheckLst, laz.VirtualTrees, UWSubtitleAPI, procFixSubtitles, UWSystem.XMLLang,
-  generics.collections, LCLIntf, LCLType, procConventions, UWLayout;
+  generics.collections, LCLIntf, LCLType, Menus, procConventions, UWLayout;
 
 type
 
   { TfrmFixSubtitles }
+
+  TVSTSelectionMode = (vsmSelectAll, vsmDeSelectAll, vsmInvertSelection);
 
   TCustomErrorOption = record
     Error       : TSubtitleErrorType;
@@ -47,6 +49,10 @@ type
     lblSpacingHyphen: TLabel;
     lblOCR: TLabel;
     lblConvention: TLabel;
+    mnuInvertSelection: TMenuItem;
+    mnuDeSelectAll: TMenuItem;
+    mnuSelectAll: TMenuItem;
+    PopupMenuSelect: TPopupMenu;
     Splitter1: TSplitter;
     lyoBottom: TUWLayout;
     lyoLeft: TUWLayout;
@@ -59,8 +65,12 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure mnuInvertSelectionClick(Sender: TObject);
+    procedure mnuSelectAllClick(Sender: TObject);
+    procedure mnuDeSelectAllClick(Sender: TObject);
     procedure VSTAdvancedHeaderDraw(Sender: TVTHeader;
       var PaintInfo: THeaderPaintInfo; const Elements: THeaderPaintElements);
+    procedure VSTChecked(Sender: TBaseVirtualTree; Node: PVirtualNode);
     procedure VSTDrawText(Sender: TBaseVirtualTree; TargetCanvas: TCanvas;
       Node: PVirtualNode; Column: TColumnIndex; const CellText: String;
       const CellRect: TRect; var DefaultDraw: Boolean);
@@ -81,6 +91,7 @@ type
     function IsTimeFixed(const Item: TSubtitleInfoItem): Boolean;
     function GetFixedText(const Item: TSubtitleInfoItem): String;
     function GetText(const Index: Integer; const Item: TSubtitleInfoItem): String;
+    procedure VSTSelect(const ASelectMode: TVSTSelectionMode);
   public
 
   end;
@@ -315,9 +326,18 @@ begin
   case Column of
     0: CellText := IntToStr(FList[Node^.Index].Index+1);
     1: CellText := GetErrorStr(FList[Node^.Index].ErrorsFixed);
-    2: CellText := GetText(FList[Node^.Index].Index, FList[Node^.Index]);
-    3: CellText := GetFixedText(FList[Node^.Index]);
+    2: CellText := GetText(FList[Node^.Index].Index, FList[Node^.Index]^);
+    3: CellText := GetFixedText(FList[Node^.Index]^);
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmFixSubtitles.VSTChecked(Sender: TBaseVirtualTree;
+  Node: PVirtualNode);
+begin
+  if Assigned(Node) and (FList.Count > 0) then
+    FList[Node^.Index]^.Apply := Node^.CheckState = csCheckedNormal;
 end;
 
 // -----------------------------------------------------------------------------
@@ -383,7 +403,7 @@ begin
       numList.Clear;
       // Apply all text/times changes
       for i := 0 to FList.Count-1 do
-        with FList[i] do
+        with FList[i]^ do
           if Apply then
           begin
             if (etEmpty in ErrorsFixed) or (etProhibitedChars in ErrorsFixed) or (etRepeatedSubtitle in ErrorsFixed) then
@@ -532,6 +552,58 @@ begin
                 GetTimeStr(FinalTime) // + ' ' + Text
     else
       Result := ReplaceEnters(Text);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmFixSubtitles.mnuSelectAllClick(Sender: TObject);
+begin
+  VSTSelect(vsmSelectAll);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmFixSubtitles.mnuDeSelectAllClick(Sender: TObject);
+begin
+  VSTSelect(vsmDeSelectAll);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmFixSubtitles.mnuInvertSelectionClick(Sender: TObject);
+begin
+  VSTSelect(vsmInvertSelection);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmFixSubtitles.VSTSelect(const ASelectMode: TVSTSelectionMode);
+var
+  Run: PVirtualNode;
+begin
+  if VST.RootNodeCount > 0 then
+  begin
+    Run := VST.GetFirst;
+    if Assigned(Run) then
+      while Assigned(Run) do
+      begin
+        case ASelectMode of
+          vsmSelectAll   : Run^.CheckState := csCheckedNormal;
+          vsmDeSelectAll : Run^.CheckState := csUncheckedNormal;
+        else
+          if Run^.CheckState = csCheckedNormal then
+            Run^.CheckState := csUncheckedNormal
+          else
+            Run^.CheckState := csCheckedNormal;
+        end;
+
+        if (FList.Count > 0) then
+          FList[Run^.Index]^.Apply := Run^.CheckState = csCheckedNormal;
+
+        Run := VST.GetNext(Run);
+      end;
+    VST.Invalidate;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

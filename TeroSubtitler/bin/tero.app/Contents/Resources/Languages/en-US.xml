@@ -263,6 +263,11 @@
       <lblOCR>OCR Script</lblOCR>
       <lblSpacingHyphen>Spacing of opening hyphen</lblSpacingHyphen>
     </Section>
+    <Section Name="TMenuItem">
+      <mnuSelectAll>Select all</mnuSelectAll>
+      <mnuDeSelectAll>De-select all</mnuDeSelectAll>
+      <mnuInvertSelection>Invert selection</mnuInvertSelection>
+    </Section>    
   </Form>
   <Form Name="frmConvertCase" Caption="Convert case">
     <Section Name="TUWRadioButton">

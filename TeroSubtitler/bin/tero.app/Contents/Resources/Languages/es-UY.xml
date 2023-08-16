@@ -263,6 +263,11 @@
       <lblOCR>Guión OCR</lblOCR>
       <lblSpacingHyphen>Espaciado guión de apertura</lblSpacingHyphen>            
     </Section>
+    <Section Name="TMenuItem">
+      <mnuSelectAll>Seleccionar todo</mnuSelectAll>
+      <mnuDeSelectAll>Deseleccionar todo</mnuDeSelectAll>
+      <mnuInvertSelection>Invertir selección</mnuInvertSelection>
+    </Section>        
   </Form>
   <Form Name="frmConvertCase" Caption="Convertir mayúsculas/minúsculas">
     <Section Name="TUWRadioButton">
