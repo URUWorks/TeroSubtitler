@@ -1,5 +1,8 @@
 1.0.1.0 (x.9.2023)
+- fixed: One-ended musical notes should count as hearing impaired text #148
+- fixed: Fix Subtitles always applied even if entry is unchecked
 - fixed: Times of imported iTunes Timed Text file misinterpreted in frame mode
+- added: De-select #147
 - added: [Windows] new installer icon
 
 1.0.0.9 (14.8.2023)
