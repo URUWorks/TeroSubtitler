@@ -29,7 +29,7 @@ uses
 
 function CloseSubtitle(const ACloseVideo: Boolean): Boolean;
 procedure NewSubtitle(const InsertEmptySubtitle: Boolean = True);
-procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AutoLoadVideoFile: Boolean = True);
+procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AutoLoadVideoFile: Boolean = True; const AddToMRU: Boolean = True);
 procedure ImportSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 procedure SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 procedure SaveSubtitleAutoBackup;
@@ -187,7 +187,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AutoLoadVideoFile: Boolean = True);
+procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AutoLoadVideoFile: Boolean = True; const AddToMRU: Boolean = True);
 var
   _FPS: Single;
   MRUInfoObject: TMRUInfoObject;
@@ -264,8 +264,9 @@ begin
 
     if AutoLoadVideoFile and not VFisLoaded then LoadVideo(GetMediaFileNameIfExists(FileName, TVideoExts));
 
-    with frmMain do
-      MRU.Add(FileName, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPVOptions.AutoStartPlaying);
+    if AddToMRU then
+      with frmMain do
+        MRU.Add(FileName, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPVOptions.AutoStartPlaying);
 
     if frmMain.WindowState = wsMinimized then
       frmMain.WindowState := wsNormal;
@@ -890,9 +891,12 @@ begin
   try
     if Ready then
     begin
-      LoadSubtitle(Original, sfInvalid, NIL, -1, False);
+      LoadSubtitle(Original, sfInvalid, NIL, -1, False, False);
       if Subtitles.Count > 0 then
         ReadSubtitleData(Translation, False, smTranslation);
+
+        with frmMain do
+          MRU.Add(FileName, '', '', VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPVOptions.AutoStartPlaying);
     end;
   finally
     Free;
@@ -909,6 +913,9 @@ begin
     Original    := SubtitleInfo.Text.FileName;
     Translation := SubtitleInfo.Translation.FileName;
     SaveProject;
+
+    with frmMain do
+      MRU.Add(FileName, '', '', VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPVOptions.AutoStartPlaying);
   finally
     Free;
   end;
@@ -927,7 +934,7 @@ begin
   OD := TOpenDialog.Create(NIL);
   try
     OD.Title   := GetCommonString('OpenFile');
-    OD.Filter  := GetCommonString('ProjectFile') + '|*.stp';
+    OD.Filter  := GetCommonString('ProjectFile') + '|*' + TProjectExt;
     OD.Options := OD.Options + [ofFileMustExist];
 
     if OD.Execute then
@@ -952,7 +959,7 @@ begin
   SD := TSaveDialog.Create(NIL);
   try
     SD.Title   := GetCommonString('SaveFile');
-    SD.Filter  := GetCommonString('ProjectFile') + '|*.stp';
+    SD.Filter  := GetCommonString('ProjectFile') + '|*' + TProjectExt;
     SD.Options := [ofOverwritePrompt, ofEnableSizing];
     SD.FileName := ChangeFileExt('Project_' + ExtractFileName(SubtitleInfo.Text.FileName), '');
 

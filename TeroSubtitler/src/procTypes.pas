@@ -59,6 +59,8 @@ const
     '.edl', '.shotchanges', '.xml'
   );
 
+  TProjectExt = '.stp';
+
   TUnicodeSymbols : array[0..8] of String =
   (
     '♪', '♫', '©', '…', '‘', '’', '“', '”', '⹀' //, '♥'

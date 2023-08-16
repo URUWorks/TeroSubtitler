@@ -67,7 +67,7 @@ type
 implementation
 
 uses
-  Laz2_DOM, laz2_XMLRead, laz2_XMLWrite;
+  procTypes, Laz2_DOM, laz2_XMLRead, laz2_XMLWrite;
 
 // -----------------------------------------------------------------------------
 
@@ -174,6 +174,8 @@ procedure TMRU.Update(const FileName, AVideoFile, AWaveFile: String; const ASele
 var
   Idx : Integer;
 begin
+  if LowerCase(ExtractFileExt(FileName)) = TProjectExt then Exit;
+
   Idx := FStrings.IndexOf(FileName);
   if (Idx <> -1) and (FStrings.Objects[Idx] <> NIL) then
   begin
@@ -196,6 +198,9 @@ var
   Idx : Integer;
 begin
   Result := NIL;
+
+  if LowerCase(ExtractFileExt(FileName)) = TProjectExt then Exit;
+
   Idx := FStrings.IndexOf(FileName);
   if (Idx <> -1) and (FStrings.Objects[Idx] <> NIL) then
     Result := TMRUInfoObject(FStrings.Objects[Idx]);

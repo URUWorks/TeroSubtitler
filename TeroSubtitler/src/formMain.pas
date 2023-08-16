@@ -1287,8 +1287,14 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.MRUItemClick(Sender: TObject);
+var
+  s : String;
 begin
-  LoadSubtitle((Sender as TMenuItem).Caption);
+  s := (Sender as TMenuItem).Caption;
+  if LowerCase(ExtractFileExt(s)) = TProjectExt then
+    LoadProject(s)
+  else
+    LoadSubtitle(s);
 end;
 
 // -----------------------------------------------------------------------------
