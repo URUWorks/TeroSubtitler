@@ -174,10 +174,18 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmWelcome.MRUItemClick(Sender: TObject);
+var
+  s : String;
 begin
   Hide;
   SetViewMode(vmList);
-  LoadSubtitle(MRU.Items[(Sender as TLabel).Tag]);
+
+  s := MRU.Items[(Sender as TLabel).Tag];
+  if LowerCase(ExtractFileExt(s)) = TProjectExt then
+    LoadProject(s)
+  else
+    LoadSubtitle(s);
+
   Close;
 end;
 
