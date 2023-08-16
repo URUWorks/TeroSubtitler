@@ -1253,8 +1253,8 @@ end;
 
 procedure TfrmMain.cboInputFPSSelect(Sender: TObject);
 begin
-  with cboInputFPS, AppOptions do
-    Workspace.FPS.DefFPS := StrToFloatDef(Text, Workspace.FPS.DefFPS, FormatSettings);
+  //with cboInputFPS, AppOptions do
+  //  Workspace.FPS.DefFPS := StrToFloatDef(Text, Workspace.FPS.DefFPS, FormatSettings);
 
   cboFPS.ItemIndex := cboInputFPS.ItemIndex;
   Workspace.FPS.OutputFPS := Workspace.FPS.DefFPS;
