@@ -640,9 +640,20 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actMediaAddSubtitleExecute(Sender: TObject);
+var
+  i: Integer;
 begin
-  if WAVE.IsTimeLineEnabled and not WAVE.SelectionIsEmpty and WAVE.IsOnlySelection then
-    WAVE.SelectSubtitle(InsertSubtitle(Subtitles.FindInsertPos(WAVE.Selection), WAVE.Selection), True, False);
+  if WAVE.IsTimeLineEnabled then
+  begin
+    if not WAVE.SelectionIsEmpty and WAVE.IsOnlySelection then
+      WAVE.SelectSubtitle(InsertSubtitle(Subtitles.FindInsertPos(WAVE.Selection), WAVE.Selection), True, False)
+    else if WAVE.SelectionIsEmpty then
+    begin
+      i := Subtitles.FindInsertPos(WAVE.CursorPosMS, WAVE.CursorPosMS);
+      i := InsertSubtitle(i, WAVE.CursorPosMS, CalcNewSubtitleFinalTime(i-1, WAVE.CursorPosMS), '', '');
+      WAVE.SelectSubtitle(i, True, False);
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
