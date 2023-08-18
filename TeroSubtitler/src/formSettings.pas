@@ -295,53 +295,56 @@ var
 begin
   LoadLanguage(Self);
 
-  LanguageManager.GetAppStringList('SettingsStrings', FAppStringList);
-  with lstTree.Items do
-  begin
-    Add(GetString(FAppStringList, 'General'));
-    Add(GetString(FAppStringList, 'Conventions'));
-    Add(GetString(FAppStringList, 'Appearance'));
-    Add(GetString(FAppStringList, 'Toolbar'));
-    Add(GetString(FAppStringList, 'Shortcuts'));
-    Add(GetString(FAppStringList, 'MPV'));
-    Add(GetString(FAppStringList, 'Tools'));
+  if LanguageManager.GetAppStringList('SettingsStrings', FAppStringList) then
+  try
+    with lstTree.Items do
+    begin
+      Add(GetString(FAppStringList, 'General'));
+      Add(GetString(FAppStringList, 'Conventions'));
+      Add(GetString(FAppStringList, 'Appearance'));
+      Add(GetString(FAppStringList, 'Toolbar'));
+      Add(GetString(FAppStringList, 'Shortcuts'));
+      Add(GetString(FAppStringList, 'MPV'));
+      Add(GetString(FAppStringList, 'Tools'));
+      {$IFDEF WINDOWS}
+      Add(GetString(FAppStringList, 'FileTypeAssociations'));
+      {$ENDIF}
+    end;
+    lstTree.ItemIndex := 0;
+    with cboPauseMode.Items do
+    begin
+      BeginUpdate;
+      Add(GetString(FAppStringList, 'Milliseconds'));
+      Add(GetString(FAppStringList, 'Frames'));
+      EndUpdate;
+    end;
+
+    hkShortcut.EmptyText  := GetString(FAppStringList, 'ShortCutNone');
+    FShortCutListCategory := TStringList.Create;
+
+    FillComboWithLanguageFiles(cboLanguage);
+    FillComboWithFPS(cboDefaultFrameRate, Workspace.FPS.InputFPS);
+    FillComboWithFormats(cboDefaultFileFormat);
+    FillComboWithEncodings(cboDefaultFileEncoding);
+    FillComboWithShortcuts;
+    FillComboWithShortCutsPreset(cboShortCutPreset);
     {$IFDEF WINDOWS}
-    Add(GetString(FAppStringList, 'FileTypeAssociations'));
+    PrepareToolbarAndImagelistIcos;
     {$ENDIF}
-  end;
-  lstTree.ItemIndex := 0;
-  with cboPauseMode.Items do
-  begin
-    BeginUpdate;
-    Add(GetString(FAppStringList, 'Milliseconds'));
-    Add(GetString(FAppStringList, 'Frames'));
-    EndUpdate;
-  end;
+    cboDefaultFileEncoding.ItemIndex := Workspace.DefEncoding;
+    btnShortCutApply.Enabled := False;
 
-  hkShortcut.EmptyText  := GetString(FAppStringList, 'ShortCutNone');
-  FShortCutListCategory := TStringList.Create;
-
-  FillComboWithLanguageFiles(cboLanguage);
-  FillComboWithFPS(cboDefaultFrameRate, Workspace.FPS.DefFPS);
-  FillComboWithFormats(cboDefaultFileFormat);
-  FillComboWithEncodings(cboDefaultFileEncoding);
-  FillComboWithShortcuts;
-  FillComboWithShortCutsPreset(cboShortCutPreset);
-  {$IFDEF WINDOWS}
-  PrepareToolbarAndImagelistIcos;
-  {$ENDIF}
-  cboDefaultFileEncoding.ItemIndex := Workspace.DefEncoding;
-  btnShortCutApply.Enabled := False;
-
-  with LanguageManager do
-  begin
-    cboTheme.AddItem(GetString(FAppStringList, 'AutoMode'), NIL);
-    cboTheme.AddItem(GetString(FAppStringList, 'LightMode'), NIL);
-    cboTheme.AddItem(GetString(FAppStringList, 'DarkMode'), NIL);
-    cboListMode.AddItem(GetString(FAppStringList, 'ListMode'), NIL);
-    cboListMode.AddItem(GetString(FAppStringList, 'BlockMode'), NIL);
+    with LanguageManager do
+    begin
+      cboTheme.AddItem(GetString(FAppStringList, 'AutoMode'), NIL);
+      cboTheme.AddItem(GetString(FAppStringList, 'LightMode'), NIL);
+      cboTheme.AddItem(GetString(FAppStringList, 'DarkMode'), NIL);
+      cboListMode.AddItem(GetString(FAppStringList, 'ListMode'), NIL);
+      cboListMode.AddItem(GetString(FAppStringList, 'BlockMode'), NIL);
+    end;
+  finally
+    FAppStringList.Free;
   end;
-  FAppStringList.Free;
 
   with AppOptions do
   begin
@@ -535,9 +538,9 @@ begin
   if Workspace.WorkMode <> TWorkMode(cboTimeCodeMode.ItemIndex) then
     SetWorkMode(TWorkMode(cboTimeCodeMode.ItemIndex));
 
-  Workspace.FPS.DefFPS  := StrToFloatDef(cboDefaultFrameRate.Text, Workspace.FPS.OutputFPS, AppOptions.FormatSettings);
-  Workspace.DefEncoding := cboDefaultFileEncoding.ItemIndex;
-  Workspace.DefFormat   := TUWSubtitleFormats(cboDefaultFileFormat.ItemIndex+1);
+  Workspace.FPS.InputFPS := StrToFloatDef(cboDefaultFrameRate.Text, Workspace.FPS.OutputFPS, AppOptions.FormatSettings);
+  Workspace.DefEncoding  := cboDefaultFileEncoding.ItemIndex;
+  Workspace.DefFormat    := TUWSubtitleFormats(cboDefaultFileFormat.ItemIndex+1);
   if SubtitleInfo.Text.FileName.IsEmpty then
     frmMain.cboFormat.ItemIndex := Integer(Workspace.DefFormat)-1;
 
