@@ -47,6 +47,7 @@ procedure ApplySetTimeInitialFromMPV(const Item: PUWSubtitleItem; const Index: I
 procedure ApplySetTimeFinalFromMPV(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyUnbreakSubtitles(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyAutoBreakSubtitles(const Item: PUWSubtitleItem; const Index: Integer);
+procedure ApplyChangeInputFPS(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyChangeFPS(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyExtendLengthToNext(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyExtendLengthToPrevious(const Item: PUWSubtitleItem; const Index: Integer);
@@ -314,6 +315,22 @@ procedure ApplyAutoBreakSubtitles(const Item: PUWSubtitleItem; const Index: Inte
 begin
   with Item^, AppOptions.Conventions do
     ApplyText(Item, Index, AutoBreakSubtitle(Text, CPL), AutoBreakSubtitle(Translation, CPL), False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ApplyChangeInputFPS(const Item: PUWSubtitleItem; const Index: Integer);
+var
+  it, ft : Integer;
+begin
+  UndoInstance.AddUndo(utSubtitleChange, Index, Item^, False, False);
+  with Item^ do
+  begin
+    it          := TimeToFrames(InitialTime, GetInputFPS);
+    ft          := TimeToFrames(FinalTime, GetInputFPS);
+    InitialTime := FramesToTime(it, Workspace.FPS.InputFPS);
+    FinalTime   := FramesToTime(ft, Workspace.FPS.InputFPS);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
