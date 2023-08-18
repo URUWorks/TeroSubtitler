@@ -32,6 +32,8 @@ function InsertSubtitle(const Index: Integer; const Item: TUWSubtitleItem; const
 function InsertSubtitle(const Index: Integer; const InitialTime, FinalTime: Integer; const Text, Translation: String; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer; overload;
 procedure DeleteSubtitle(const Index: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
 
+function CalcNewSubtitleFinalTime(const Index: Integer; const AInitialTime: Integer): Integer;
+
 procedure SubtitleChanged(const AText, ATranslation: Boolean);
 procedure SubtitleChangedReset(const ASubtitleMode: TSubtitleMode);
 procedure SetSubtitleTimes(const Index: Integer; const AInitialTime, AFinalTime: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
@@ -171,6 +173,18 @@ begin
   begin
     UpdateValues(True);
     SubtitleChanged(True, True);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function CalcNewSubtitleFinalTime(const Index: Integer; const AInitialTime: Integer): Integer;
+begin
+  Result := AInitialTime + AppOptions.Conventions.MinDuration;
+  if (Index >= 0) and (Index < Subtitles.Count) then
+  begin
+    if Result >= Subtitles[Index+1].InitialTime then
+      Result := Subtitles[Index+1].InitialTime - GetDefPause;
   end;
 end;
 
