@@ -127,7 +127,7 @@ begin
   cboToFPS.Items.Assign(cboFromFPS.Items);
 
   cboFormat.ItemIndex := Integer(sfSubRip)-1;
-  cboFromFPS.ItemIndex  := cboFromFPS.Items.IndexOf(SingleToStr(Workspace.FPS.DefFPS, AppOptions.FormatSettings));
+  cboFromFPS.ItemIndex  := cboFromFPS.Items.IndexOf(SingleToStr(GetInputFPS, AppOptions.FormatSettings));
   cboToFPS.ItemIndex    := cboToFPS.Items.IndexOf(SingleToStr(GetFPS, AppOptions.FormatSettings));
   cboEncoding.ItemIndex := Workspace.DefEncoding;
 

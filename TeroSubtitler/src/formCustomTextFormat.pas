@@ -161,7 +161,7 @@ begin
         NewLineChar  := edtNewLineChar.Text;
         TimeFormat   := edtTimeFormat.Text;
         DecSeparator := iff(edtSeparatorChar.Text <> '', edtSeparatorChar.Text[1], ',');
-        FPS          := StrToSingle(cboFPS.Text, Workspace.FPS.DefFPS, AppOptions.FormatSettings);
+        FPS          := StrToSingle(cboFPS.Text, Workspace.FPS.InputFPS, AppOptions.FormatSettings);
         Time         := cboTimeCode.ItemIndex = 0;
         ReadFormattingFromStrings(mmoSource.Lines);
 

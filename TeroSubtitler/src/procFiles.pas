@@ -199,7 +199,7 @@ begin
   if not CloseSubtitle(AutoLoadVideoFile) then Exit;
 
   _FPS := AFPS;
-  if _FPS = -1 then _FPS := Workspace.FPS.DefFPS;
+  if _FPS = -1 then _FPS := Workspace.FPS.InputFPS;
 
   if not FileExists(FileName) then
   begin
@@ -296,7 +296,7 @@ begin
   if Subtitles.Count = 0 then Exit;
 
   _FPS := AFPS;
-  if _FPS = -1 then _FPS := Workspace.FPS.DefFPS;
+  if _FPS = -1 then _FPS := Workspace.FPS.InputFPS;
 
   Subs := TUWSubtitles.Create;
   try
@@ -689,7 +689,7 @@ begin
   begin
     Sub := TUWSubtitles.Create;
     try
-      if Sub.LoadFromFile(AFileName, NIL, Workspace.FPS.DefFPS) then
+      if Sub.LoadFromFile(AFileName, NIL, Workspace.FPS.InputFPS) then
       begin
         if Sub.Count > Subtitles.Count then
           c := Subtitles.Count

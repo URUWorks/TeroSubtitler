@@ -197,8 +197,8 @@ begin
   with Workspace do
   begin
     SMPTE         := False;
-    FPS.DefFPS    := 23.976;
-    FPS.OutputFPS := FPS.DefFPS;
+    FPS.InputFPS  := 23.976;
+    FPS.OutputFPS := FPS.InputFPS;
     DefEncoding   := MaxEncodings-1; // utf-8
     DefFormat     := sfSubRip;
     Transcription.Memo := NIL;
@@ -386,9 +386,9 @@ begin
         WorkMode := TWorkMode(GetValue('WorkMode', Integer(WorkMode)));
         TranslatorMode := GetValue('TranslatorMode', TranslatorMode);
         SetTranslatorMode(TranslatorMode);
-        FPS.DefFPS  := StrToSingle(GetValue('DefFPS', SingleToStr(FPS.DefFPS, FormatSettings)), 25, FormatSettings);
-        DefEncoding := GetValue('DefEncoding', DefEncoding);
-        DefFormat   := TUWSubtitleFormats(GetValue('DefFormat', Integer(DefFormat)));
+        FPS.InputFPS := StrToSingle(GetValue('DefFPS', SingleToStr(FPS.InputFPS, FormatSettings)), 25, FormatSettings);
+        DefEncoding  := GetValue('DefEncoding', DefEncoding);
+        DefFormat    := TUWSubtitleFormats(GetValue('DefFormat', Integer(DefFormat)));
         SetVideoPreview(GetValue('VideoPreview', False));
         SetWaveformPreview(GetValue('AudioPreview', False));
         SetDockVideoWindow(GetValue('DockVideoControls', True));
@@ -710,7 +710,7 @@ begin
         SetValue('ViewMode', Integer(ViewMode));
         SetValue('WorkMode', Integer(WorkMode));
         SetValue('TranslatorMode', TranslatorMode);
-        SetValue('DefFPS', SingleToStr(FPS.DefFPS, FormatSettings));
+        SetValue('DefFPS', SingleToStr(FPS.InputFPS, FormatSettings));
         SetValue('DefEncoding', DefEncoding);
         SetValue('DefFormat', Integer(DefFormat));
         SetValue('VideoPreview', actVideoPreview.Checked);

@@ -1,12 +1,12 @@
 object frmShotChanges: TfrmShotChanges
   Left = 242
-  Height = 464
+  Height = 466
   Top = 118
   Width = 490
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Shot changes'
-  ClientHeight = 464
+  ClientHeight = 466
   ClientWidth = 490
   OnClose = FormClose
   OnCreate = FormCreate
@@ -18,7 +18,7 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideRight.Control = btnClose
     Left = 295
     Height = 26
-    Top = 430
+    Top = 432
     Width = 91
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
@@ -34,7 +34,7 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideBottom.Side = asrBottom
     Left = 391
     Height = 26
-    Top = 430
+    Top = 432
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 8
@@ -56,6 +56,8 @@ object frmShotChanges: TfrmShotChanges
     TabOrder = 0
   end
   object lblTimeCodeIn: TLabel
+    AnchorSideTop.Control = cboTimeCodeImport
+    AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 15
     Top = 292
@@ -101,10 +103,12 @@ object frmShotChanges: TfrmShotChanges
     TabOrder = 2
   end
   object lblIdle: TLabel
+    AnchorSideTop.Control = btnApply
+    AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = btnApply
     Left = 289
     Height = 1
-    Top = 436
+    Top = 445
     Width = 1
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
@@ -115,12 +119,14 @@ object frmShotChanges: TfrmShotChanges
   end
   object spnSensitivity: TFloatSpinEdit
     AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Side = asrCenter
+    AnchorSideTop.Control = cboTimeCodeExport
+    AnchorSideTop.Side = asrBottom
     Left = 200
     Height = 23
     Top = 350
     Width = 186
     Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Top = 8
     BorderSpacing.Right = 8
     Increment = 0.1
     MaxValue = 0.9
@@ -129,6 +135,7 @@ object frmShotChanges: TfrmShotChanges
     Value = 0.4
   end
   object lblSensitivity: TLabel
+    AnchorSideTop.Control = spnSensitivity
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = spnSensitivity
     Left = 8
@@ -140,10 +147,12 @@ object frmShotChanges: TfrmShotChanges
     ParentColor = False
   end
   object prbExtracting: TProgressBar
+    AnchorSideTop.Control = btnApply
+    AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = cboOffset
     Left = 8
     Height = 8
-    Top = 439
+    Top = 441
     Width = 192
     Anchors = [akTop, akLeft, akRight]
     Style = pbstMarquee
@@ -151,16 +160,21 @@ object frmShotChanges: TfrmShotChanges
     Visible = False
   end
   object cboTimeCodeImport: TComboBox
+    AnchorSideTop.Control = cboDetectApp
+    AnchorSideTop.Side = asrBottom
     Left = 200
     Height = 23
     Top = 288
     Width = 186
     Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Top = 8
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 5
   end
   object lblTimeCodeOut: TLabel
+    AnchorSideTop.Control = cboTimeCodeExport
+    AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 15
     Top = 323
@@ -169,11 +183,14 @@ object frmShotChanges: TfrmShotChanges
     ParentColor = False
   end
   object cboTimeCodeExport: TComboBox
+    AnchorSideTop.Control = cboTimeCodeImport
+    AnchorSideTop.Side = asrBottom
     Left = 200
     Height = 23
     Top = 319
     Width = 186
     Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Top = 8
     ItemHeight = 15
     Style = csDropDownList
     TabOrder = 6
@@ -188,7 +205,6 @@ object frmShotChanges: TfrmShotChanges
     Top = 381
     Width = 43
     Anchors = [akTop, akLeft, akRight]
-    AutoSize = False
     BorderSpacing.Right = 5
     ItemHeight = 15
     ItemIndex = 0
@@ -201,6 +217,8 @@ object frmShotChanges: TfrmShotChanges
     Text = '+'
   end
   object tedOffset: TUWTimeEdit
+    AnchorSideTop.Control = spnSensitivity
+    AnchorSideTop.Side = asrBottom
     Left = 248
     Height = 23
     Top = 381
@@ -212,6 +230,7 @@ object frmShotChanges: TfrmShotChanges
     TimeMode = temTime
     Alignment = taCenter
     Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Top = 8
     Constraints.MinHeight = 21
     Constraints.MinWidth = 80
     Font.Style = [fsBold]
@@ -219,6 +238,7 @@ object frmShotChanges: TfrmShotChanges
     TabOrder = 9
   end
   object lblOffset: TLabel
+    AnchorSideTop.Control = cboOffset
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = spnSensitivity
     Left = 8
@@ -230,6 +250,8 @@ object frmShotChanges: TfrmShotChanges
     ParentColor = False
   end
   object lblDetectApp: TLabel
+    AnchorSideTop.Control = cboDetectApp
+    AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 15
     Top = 261

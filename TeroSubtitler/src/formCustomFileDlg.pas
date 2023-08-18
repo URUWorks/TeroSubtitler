@@ -85,7 +85,7 @@ begin
   Encoding := NIL;
   FPS      := -1;
 
-  FillComboWithFPS(cboFPS, Workspace.FPS.DefFPS);
+  FillComboWithFPS(cboFPS, Workspace.FPS.InputFPS);
   FillComboWithEncodings(cboEncoding);
   FillComboWithFormats(cboFormat);
 end;

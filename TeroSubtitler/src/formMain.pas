@@ -970,8 +970,8 @@ begin
   // VST
   VSTDrawInitialize(VSTOptions.DrawMode);
   // Prepare combos and menus
-  FillComboWithFPS(cboInputFPS, Workspace.FPS.DefFPS);
-  FillComboWithFPS(cboFPS, Workspace.FPS.DefFPS);
+  FillComboWithFPS(cboInputFPS, Workspace.FPS.InputFPS);
+  FillComboWithFPS(cboFPS, Workspace.FPS.InputFPS);
   FillComboWithEncodings(cboEncoding);
   FillComboWithFormats(cboFormat);
   FillMenuWithPlayRate(popPlayRate);
@@ -1253,11 +1253,13 @@ end;
 
 procedure TfrmMain.cboInputFPSSelect(Sender: TObject);
 begin
-  //with cboInputFPS, AppOptions do
-  //  Workspace.FPS.DefFPS := StrToFloatDef(Text, Workspace.FPS.DefFPS, FormatSettings);
+  if VST.RootNodeCount > 0 then
+    VSTDoLoop(VST, @ApplyChangeInputFPS, dlAll, False, True);
+
+  Workspace.FPS.InputFPS := GetInputFPS;
 
   cboFPS.ItemIndex := cboInputFPS.ItemIndex;
-  Workspace.FPS.OutputFPS := Workspace.FPS.DefFPS;
+  Workspace.FPS.OutputFPS := Workspace.FPS.InputFPS;
   SetTimeFPStoTimeEditCtrls;
   UpdateValues(True);
 end;
@@ -1266,7 +1268,9 @@ end;
 
 procedure TfrmMain.cboFPSSelect(Sender: TObject);
 begin
-  VSTDoLoop(VST, @ApplyChangeFPS, dlAll, False, True);
+  if VST.RootNodeCount > 0 then
+    VSTDoLoop(VST, @ApplyChangeFPS, dlAll, False, True);
+
   Workspace.FPS.OutputFPS := GetFPS;
   SetTimeFPStoTimeEditCtrls;
 
@@ -1281,7 +1285,6 @@ end;
 procedure TfrmMain.cboFormatSelect(Sender: TObject);
 begin
   Subtitles.Format := TUWSubtitleFormats(cboFormat.ItemIndex+1);
-  //SetSMPTEMode(Subtitles.IsSMPTESupported and not IsInteger(GetFPS));
 end;
 
 // -----------------------------------------------------------------------------

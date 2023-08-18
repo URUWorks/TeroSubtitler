@@ -66,6 +66,8 @@ procedure SetSMPTEMode(const AValue: Boolean);
 procedure FocusMemo(const SelectText: Boolean = True);
 function GetMemoFocused: TUWMemo;
 function GetMemoWordUnderCaret(const Memo: TUWMemo; const SelectWord: Boolean = False): String;
+function GetFPSFromString(const AValue: String; const ADefault: Single): Single;
+function GetInputFPS: Single;
 function GetFPS: Single;
 function GetDefPause: Integer;
 
@@ -1035,10 +1037,24 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function GetFPSFromString(const AValue: String; const ADefault: Single): Single;
+begin
+  with AppOptions do
+    Result := StrToFloatDef(AValue, ADefault, FormatSettings);
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetInputFPS: Single;
+begin
+  Result := GetFPSFromString(frmMain.cboInputFPS.Text, Workspace.FPS.InputFPS);
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetFPS: Single;
 begin
-  with frmMain.cboFPS, AppOptions do
-    Result := StrToFloatDef(Text, Workspace.FPS.OutputFPS, FormatSettings);
+  Result := GetFPSFromString(frmMain.cboFPS.Text, Workspace.FPS.OutputFPS);
 end;
 
 // -----------------------------------------------------------------------------

@@ -61,6 +61,7 @@ type
   private
     FTimeElapsed: Double;
     FCancel: Boolean;
+    FSMPTE: Boolean;
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure RunApp_CB(Sender, Context: TObject; Status: TRunCommandEventCode; const Message: String);
     function IsTimeCode(const ACode: Integer): Boolean;
@@ -97,42 +98,47 @@ const
 
 procedure TfrmShotChanges.FormCreate(Sender: TObject);
 var
-  FAppStringList: TAppStringList;
+  FAppStringList: TAppStringList = NIL;
   i: Integer;
 begin
   LoadLanguage(Self);
 
-  FAppStringList := NIL;
-  LanguageManager.GetAppStringList('ShotChangesStrings', FAppStringList);
-  with cboDetectApp.Items do
-  begin
-    BeginUpdate;
-    Clear;
-    Add('FFmpeg');
-    if FileExists(SceneDetectFileName) then Add('PySceneDetect');
-    EndUpdate;
+  if LanguageManager.GetAppStringList('ShotChangesStrings', FAppStringList) then
+  try
+    with cboDetectApp.Items do
+    begin
+      BeginUpdate;
+      Clear;
+      Add('FFmpeg');
+      if FileExists(SceneDetectFileName) then Add('PySceneDetect');
+      EndUpdate;
+    end;
+    with cboTimeCodeImport.Items do
+    begin
+      BeginUpdate;
+      Clear;
+      Add(GetString(FAppStringList, 'Frames'));
+      Add(GetString(FAppStringList, 'Seconds'));
+      Add(GetString(FAppStringList, 'Milliseconds'));
+      Add(GetString(FAppStringList, 'HHMMSSZZZ'));
+      Add(GetString(FAppStringList, 'HHMMSSFF'));
+      EndUpdate;
+    end;
+    cboTimeCodeExport.Items.Assign(cboTimeCodeImport.Items);
+    cboTimeCodeImport.ItemIndex := 2;
+    cboTimeCodeExport.ItemIndex := 4;
+    cboDetectApp.ItemIndex := 0;
+  finally
+    FAppStringList.Free;
   end;
-  with cboTimeCodeImport.Items do
-  begin
-    BeginUpdate;
-    Clear;
-    Add(GetString(FAppStringList, 'Frames'));
-    Add(GetString(FAppStringList, 'Seconds'));
-    Add(GetString(FAppStringList, 'Milliseconds'));
-    Add(GetString(FAppStringList, 'HHMMSSZZZ'));
-    Add(GetString(FAppStringList, 'HHMMSSFF'));
-    EndUpdate;
-  end;
-  cboTimeCodeExport.Items.Assign(cboTimeCodeImport.Items);
-  cboTimeCodeImport.ItemIndex := 2;
-  cboTimeCodeExport.ItemIndex := 4;
-  cboDetectApp.ItemIndex := 0;
-  FAppStringList.Free;
 
   FCancel := False;
+  FSMPTE  := False;
 
-  for i := 0 to High(frmMain.WAVE.GetSceneChangeList) do
-    mmoTimes.Lines.Add(frmMain.WAVE.GetSceneChangeList[i].ToString);
+  with frmMain.WAVE do
+    if Length(GetSceneChangeList) > 0 then
+      for i := 0 to High(GetSceneChangeList) do
+        mmoTimes.Lines.Add(GetSceneChangeList[i].ToString);
 end;
 
 // -----------------------------------------------------------------------------
@@ -219,8 +225,8 @@ begin
         if tedOffset.Value > 0 then
           v := v + iff(cboOffset.ItemIndex = 0, tedOffset.Value, -tedOffset.Value);
 
-        //if frmMain.MPV.SMPTEMode then
-        //  v := Round(v / 1.001);
+        if FSMPTE and (Workspace.WorkMode = wmTime) then
+          v := Round(v * 1.001);
 
         SC[i] := v;
       end;
@@ -276,6 +282,7 @@ begin
         finally
           edl.Free;
           if Assigned(ATracks) then ATracks.Free;
+          FSMPTE := True;
         end;
       end
       else
@@ -283,6 +290,8 @@ begin
         mmoTimes.Lines.LoadFromFile(FileName);
         if mmoTimes.Lines.Count > 0 then
         begin
+          FSMPTE := False;
+
           if StrToIntDef(mmoTimes.Lines[0], 0) > 0 then
             cboTimeCodeImport.ItemIndex := tcMilliseconds
           else if TimeInFormat(mmoTimes.Lines[0], 'hh:mm:ss.zzz') then
