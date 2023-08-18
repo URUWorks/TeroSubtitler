@@ -345,7 +345,7 @@
       <lblLanguage>Language</lblLanguage>
       <lblWebReference>Web reference</lblWebReference>
       <lblTimeCodeMode>Time code mode</lblTimeCodeMode>
-      <lblDefaultFrameRate>Default frame rate</lblDefaultFrameRate>
+      <lblDefaultFrameRate>Default input frame rate</lblDefaultFrameRate>
       <lblDefaultFileEncoding>Default file encoding</lblDefaultFileEncoding>
       <lblDefaultFileFormat>Default file format</lblDefaultFileFormat>      
       <lblAutoBackup>Auto-backup every (minutes)</lblAutoBackup>
