@@ -222,7 +222,7 @@ begin
     frmMain.VST.RootNodeCount := Subtitles.Count;
     frmMain.cboEncoding.ItemIndex := GetEncodingIndex(Subtitles.CodePage);
     frmMain.cboFormat.ItemIndex := Integer(Subtitles.Format)-1;
-    if (Subtitles.FrameRate > 0) and (Subtitles.FrameRate <> _FPS) then
+    if (Subtitles.FrameRate > 0) then
     begin
       frmMain.cboInputFPS.ItemIndex := frmMain.cboInputFPS.Items.IndexOf(SingleToStr(Subtitles.FrameRate, AppOptions.FormatSettings));
       _FPS := Subtitles.FrameRate;
