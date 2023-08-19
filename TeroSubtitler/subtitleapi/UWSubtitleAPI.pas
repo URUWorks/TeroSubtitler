@@ -204,6 +204,7 @@ type
     function SaveToString(const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): String;
     function FillDialogFilter(AllSupportedText: String = 'All supported files'): String;
     function FixFileNameExtension(const AFileName: String; const AFormat: TUWSubtitleFormats): String;
+    procedure DoFPSConversion(const AOldFPS, ANewFPS: Single);
     procedure ConvertTimesToSMPTE(const AValue: Boolean);
     function IsSMPTESupported(const AFormat: TUWSubtitleFormats = sfInvalid): Boolean;
     property Count: Integer read GetCount;
@@ -1637,6 +1638,22 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TUWSubtitles.DoFPSConversion(const AOldFPS, ANewFPS: Single);
+var
+  i, it, ft : Integer;
+begin
+  for i := 0 to Count-1 do
+    with FList[i]^ do
+    begin
+      it          := TimeToFrames(InitialTime, AOldFPS);
+      ft          := TimeToFrames(FinalTime, AOldFPS);
+      InitialTime := FramesToTime(it, ANewFPS);
+      FinalTime   := FramesToTime(ft, ANewFPS);
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TUWSubtitles.ConvertTimesToSMPTE(const AValue: Boolean);
 var
   i: Integer;
@@ -1656,6 +1673,7 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
+
 function TUWSubtitles.IsSMPTESupported(const AFormat: TUWSubtitleFormats = sfInvalid): Boolean;
 var
   f: TUWSubtitleFormats;
