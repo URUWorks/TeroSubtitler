@@ -71,14 +71,14 @@ type
     function GetSnappingPoint(MinBlankTime : Integer) : Integer;
   end;
 
-  PSilentZoneRange = ^TSilentZoneRange;
-  TSilentZoneRange = record
+  PZoneRange = ^TZoneRange;
+  TZoneRange = record
     Start,
     Stop     : Integer;
     RmsSum   : Double;
     RmsCount : Integer;
   end;
-  TSilentZonesList = array of PSilentZoneRange;
+  TZonesList = array of PZoneRange;
 
   TCustomColors = record
     Waveform,
@@ -107,16 +107,16 @@ type
 
   TUWWaveformDisplayer = class(TCustomControl)
   private
-    FPeakTab        : array of TPeak;
-    FPeakTabSize    : Cardinal;
-    FSamplesPerPeak : Cardinal;
-    FPeakDataLoaded : Boolean;
-    FSavePeakToFile : Boolean;
-    FWaveFormat     : TWaveFormatEx;
+    FPeakTab         : array of TPeak;
+    FPeakTabSize     : Cardinal;
+    FSamplesPerPeak  : Cardinal;
+    FPeakDataLoaded  : Boolean;
+    FSavePeakToFile  : Boolean;
+    FWaveFormat      : TWaveFormatEx;
 
-    FSilentZones    : TSilentZonesList;
+    FSilentZones     : TZonesList;
 
-    FSubtitles : TUWSubtitles;
+    FSubtitles       : TUWSubtitles;
 
     FBackBuffer,
     FBackBufferWAVE,
@@ -286,11 +286,11 @@ type
     procedure InsertSceneChange(const Src: TIntegerDynArray); overload;
     procedure InsertSceneChange(const ATimeInMS: Integer); overload;
     procedure SetSceneChangeTimeMode(const ASMPTE: Boolean);
-    // silentezone
-    procedure ClearZoneList(var AZoneList: TSilentZonesList);
-    function DetectZoneList(var AZoneList: TSilentZonesList; const AFindSilent: Boolean = True; const Threshold: Integer = 100; const WinSizeMS: Integer = 100): Boolean;
+    // silent/zonelist
+    procedure ClearZoneList(var AZoneList: TZonesList);
+    function DetectZoneList(var AZoneList: TZonesList; const AFindSilent: Boolean = True; const Threshold: Integer = 100; const WinSizeMS: Integer = 100): Boolean;
     function DetectSilentZone(const Threshold: Integer = 100; const WinSizeMS: Integer = 100): Boolean;
-    // propertys
+    // properties
     property Selection: TUWSubtitleItem read FDynamicSelection;
     property SelectedItem: PUWSubtitleItem read FSelectedSubtitle;
     property IsMouseDown: Boolean read FMouseIsDown;
@@ -306,7 +306,7 @@ type
     property CenterPlayCursor              : Boolean                      read FCenterPlay                   write FCenterPlay;
     property SceneChangeEnabled            : Boolean                      read FSceneChangeEnabled           write SetSceneChangeEnabled;
     property DrawGAP                       : Boolean                      read FDrawGAP                      write FDrawGAP;
-    property SilentZones                   : TSilentZonesList             read FSilentZones;
+    property SilentZones                   : TZonesList                   read FSilentZones;
     property SavePeakToFile                : Boolean                      read FSavePeakToFile               write FSavePeakToFile;
     property OnCustomDrawSubtitleItem      : TCustomDrawSubtitleEvent     read FOnCustomDrawSubtitleItem     write FOnCustomDrawSubtitleItem;
     property OnCursorChange                : TNotifyEvent                 read FOnCursorChange               write FOnCursorChange;

@@ -32,7 +32,7 @@
 
 //------------------------------------------------------------------------------
 
-procedure TUWWaveformDisplayer.ClearZoneList(var AZoneList: TSilentZonesList);
+procedure TUWWaveformDisplayer.ClearZoneList(var AZoneList: TZonesList);
 var
   i: Integer;
 begin
@@ -49,16 +49,16 @@ end;
 
 //------------------------------------------------------------------------------
 
-function TUWWaveformDisplayer.DetectZoneList(var AZoneList: TSilentZonesList; const AFindSilent: Boolean = True; const Threshold: Integer = 100; const WinSizeMS: Integer = 100): Boolean;
+function TUWWaveformDisplayer.DetectZoneList(var AZoneList: TZonesList; const AFindSilent: Boolean = True; const Threshold: Integer = 100; const WinSizeMS: Integer = 100): Boolean;
 var
   WinPeaks, i, j : Integer;
   SampleLen, PeakLen, Sum, Rms : Double;
   Start, Stop : Int64;
-  SilentRange : PSilentZoneRange;
+  ZoneRange : PZoneRange;
 begin
   Result := False;
   ClearZoneList(AZoneList);
-  SilentRange := NIL;
+  ZoneRange := NIL;
   SampleLen := (1.0 / FWaveFormat.nSamplesPerSec);
   PeakLen := SampleLen * FSamplesPerPeak;
   WinPeaks := Ceil((WinSizeMS / 1000.0) / PeakLen);
@@ -76,27 +76,27 @@ begin
         Start := Round((i - j) * PeakLen * 1000.0);
         Stop  := Round(i * PeakLen * 1000.0);
 
-        if Assigned(SilentRange) then
+        if Assigned(ZoneRange) then
         begin
           // Simply increase previous zone
-          SilentRange^.Stop   := Stop;
-          SilentRange^.RmsSum := SilentRange^.RmsSum + Rms;
-          Inc(SilentRange^.RmsCount);
+          ZoneRange^.Stop   := Stop;
+          ZoneRange^.RmsSum := ZoneRange^.RmsSum + Rms;
+          Inc(ZoneRange^.RmsCount);
         end
         else
         begin
           // Add new zone
-          New(SilentRange);
-          SilentRange^.Start    := Start;
-          SilentRange^.Stop     := Stop;
-          SilentRange^.RmsSum   := Rms;
-          SilentRange^.RmsCount := 1;
+          New(ZoneRange);
+          ZoneRange^.Start    := Start;
+          ZoneRange^.Stop     := Stop;
+          ZoneRange^.RmsSum   := Rms;
+          ZoneRange^.RmsCount := 1;
           SetLength(AZoneList, Length(AZoneList)+1);
-          AZoneList[Length(AZoneList)-1] := SilentRange;
+          AZoneList[Length(AZoneList)-1] := ZoneRange;
         end;
       end
       else
-        SilentRange := NIL;
+        ZoneRange := NIL;
 
       j := 0;
       Sum := 0;
