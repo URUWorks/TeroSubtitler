@@ -55,7 +55,7 @@ begin
     MPVFileName := libMPVFileName(False);
     {$ENDIF}
     {$IFDEF DARWIN}
-    YTDLPFileName := procCommon.YTDLPFileName;
+    YTDLPFileName := procConfig.YTDLPFileName;
     {$ENDIF}
     LogLevel := llNo;
     AutoStartPlayback := False;

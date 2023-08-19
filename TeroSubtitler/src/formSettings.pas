@@ -50,6 +50,7 @@ type
     cboTimeCodeMode: TComboBox;
     cboDefaultFrameRate: TComboBox;
     cboDefaultFileEncoding: TComboBox;
+    chkPromptForInputFPS: TUWCheckBox;
     chkSubtitleHandleByMPV: TUWCheckBox;
     chkSubBackground: TCheckBox;
     chkDotsOnSplit: TUWCheckBox;
@@ -76,6 +77,7 @@ type
     imlFileTypes: TImageList;
     lblCPSStrategy: TLabel;
     lblSceneDetect: TLabel;
+    lblDialogSegmentsDetectionThreshold: TLabel;
     lblWhisperCPP: TLabel;
     lblYTDLP: TLabel;
     lblSCSnapArea: TLabel;
@@ -103,6 +105,7 @@ type
     spnSCSnapThreshold: TSpinEdit;
     spnSCSnapInCues: TSpinEdit;
     spnSCSnapOutCues: TSpinEdit;
+    spnDetectDialogSegment: TSpinEdit;
     spnSubSize: TSpinEdit;
     spnSeekTime: TSpinEdit;
     spnFrameStep: TSpinEdit;
@@ -384,15 +387,17 @@ begin
       spnChaining.Value           := Chaining;
       chkDotsOnSplit.Checked      := DotsOnSplit;
     end;
-    spnShiftTimeMs.Value        := ShiftTimeMS;
-    spnAutoBackupMinutes.Value  := AutoBackupSeconds div 60;
-    chkShowSplashWindow.Checked := ShowWelcomeAtStartup;
-    chkUseOwnFileDialog.Checked := UseOwnFileDialog;
+    spnShiftTimeMs.Value         := ShiftTimeMS;
+    spnDetectDialogSegment.Value := DialogSegmentThreshold;
+    spnAutoBackupMinutes.Value   := AutoBackupSeconds div 60;
+    chkShowSplashWindow.Checked  := ShowWelcomeAtStartup;
+    chkUseOwnFileDialog.Checked  := UseOwnFileDialog;
     chkDrawTags.Checked                 := VSTOptions.DrawTags;
     chkDrawErrors.Checked               := VSTOptions.DrawErrors;
     chkShowCPSBar.Checked               := frmMain.mmoText.CPSBar.Visible;
     chkDrawWaveformGAP.Checked          := frmMain.WAVE.DrawGAP;
     chkPromptForDeleteSubtitles.Checked := AskForDeleteLines;
+    chkPromptForInputFPS.Checked        := AskForInputFPS;
 
     cboTheme.ItemIndex := Integer(ColorThemeInstance.ColorMode);
   end;
@@ -510,16 +515,18 @@ begin
 
       frmMain.mmoText.CPSBar.Max := MaxCPS;
     end;
-    ShiftTimeMS           := spnShiftTimeMs.Value;
-    AutoBackupSeconds     := spnAutoBackupMinutes.Value*60;
-    ShowWelcomeAtStartup  := chkShowSplashWindow.Checked;
-    UseOwnFileDialog      := chkUseOwnFileDialog.Checked;
-    VSTOptions.DrawTags   := chkDrawTags.Checked;
-    VSTOptions.DrawErrors := chkDrawErrors.Checked;
-    frmMain.WAVE.DrawGAP  := chkDrawWaveformGAP.Checked;
+    ShiftTimeMS            := spnShiftTimeMs.Value;
+    DialogSegmentThreshold := spnDetectDialogSegment.Value;
+    AutoBackupSeconds      := spnAutoBackupMinutes.Value*60;
+    ShowWelcomeAtStartup   := chkShowSplashWindow.Checked;
+    UseOwnFileDialog       := chkUseOwnFileDialog.Checked;
+    VSTOptions.DrawTags    := chkDrawTags.Checked;
+    VSTOptions.DrawErrors  := chkDrawErrors.Checked;
+    frmMain.WAVE.DrawGAP   := chkDrawWaveformGAP.Checked;
     frmMain.mmoText.CPSBar.Visible        := chkShowCPSBar.Checked;
     frmMain.mmoTranslation.CPSBar.Visible := chkShowCPSBar.Checked;
-    AskForDeleteLines     := chkPromptForDeleteSubtitles.Checked;
+    AskForDeleteLines := chkPromptForDeleteSubtitles.Checked;
+    AskForInputFPS    := chkPromptForInputFPS.Checked;
   end;
 
   with MPVOptions do

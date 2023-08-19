@@ -230,9 +230,10 @@ begin
       etBreakLongLines, etRepeatedSubtitle, etEllipsesSingleSmartCharacter,
       etMaxLines, etOCR];
 
-    DefChangePlayRate    := 50;
-    ShiftTimeMS          := 500;
-    AutoBackupSeconds    := 300;
+    DefChangePlayRate      := 50;
+    DialogSegmentThreshold := 60;
+    ShiftTimeMS            := 500;
+    AutoBackupSeconds      := 300;
 
     AutoLengthChar       := 60;
     AutoLengthWord       := 50;
@@ -245,6 +246,7 @@ begin
     UseOwnFileDialog     := False;
     AutoCheckErrors      := True;
     AskForDeleteLines    := True;
+    AskForInputFPS       := False;
     TextToFind           := '';
     WebSearchURL         := URL_WordReference;
     Language             := GetOSLanguage;
@@ -351,6 +353,7 @@ begin
       ColorThemeInstance.ColorMode := TColorMode(GetValue('ColorThemeMode', Integer(ColorThemeInstance.ColorMode)));
       AutoCheckErrors := GetValue('AutoCheckErrors', AutoCheckErrors);
       DefChangePlayRate := GetValue('DefChangePlayRate', DefChangePlayRate);
+      DialogSegmentThreshold := GetValue('DialogSegmentThreshold', DialogSegmentThreshold);
       ShiftTimeMS := GetValue('ShiftTimeMS', ShiftTimeMS);
       AutoLengthChar := GetValue('AutoLengthChar', AutoLengthChar);
       AutoLengthWord := GetValue('AutoLengthWord', AutoLengthWord);
@@ -360,6 +363,7 @@ begin
       ExpandLen := GetValue('ExpandLen', ExpandLen);
       UseOwnFileDialog := GetValue('UseOwnFileDialog', UseOwnFileDialog);
       AskForDeleteLines := GetValue('AskForDeleteLines', AskForDeleteLines);
+      AskForInputFPS := GetValue('AskForInputFPS', AskForInputFPS);
       WebSearchURL := GetValue('WebSearchURL', WebSearchURL);
       TextToFind := GetValue('TextToFind', TextToFind);
       CommonErrors := TSubtitleErrorTypeSet(GetValue('CommonErrors', Integer(CommonErrors)));
@@ -654,6 +658,7 @@ begin
       SetValue('ColorThemeMode', Integer(ColorThemeInstance.ColorMode));
       SetValue('AutoCheckErrors', AutoCheckErrors);
       SetValue('DefChangePlayRate', DefChangePlayRate);
+      SetValue('DialogSegmentThreshold', DialogSegmentThreshold);
       SetValue('ShiftTimeMS', ShiftTimeMS);
       SetValue('AutoLengthChar', AutoLengthChar);
       SetValue('AutoLengthWord', AutoLengthWord);
@@ -663,6 +668,7 @@ begin
       SetValue('ExpandLen', ExpandLen);
       SetValue('UseOwnFileDialog', UseOwnFileDialog);
       SetValue('AskForDeleteLines', AskForDeleteLines);
+      SetValue('AskForInputFPS', AskForInputFPS);
       SetValue('WebSearchURL', WebSearchURL);
       SetValue('TextToFind', TextToFind);
       SetValue('CommonErrors', Integer(CommonErrors));

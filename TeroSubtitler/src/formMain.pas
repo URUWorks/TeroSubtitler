@@ -72,6 +72,7 @@ type
     actExportCustomTextFormat: TAction;
     actActor: TAction;
     actExportCustomImageFormat: TAction;
+    actDetectDialogSegments: TAction;
     actRoundTimes: TAction;
     actJumpToNextShotChange: TAction;
     actJumpToPrevShotChange: TAction;
@@ -283,6 +284,7 @@ type
     MenuItem158: TMenuItem;
     MenuItem159: TMenuItem;
     MenuItem160: TMenuItem;
+    MenuItem161: TMenuItem;
     MenuItem162: TMenuItem;
     MenuItem163: TMenuItem;
     MenuItem164: TMenuItem;
@@ -705,6 +707,7 @@ type
     procedure WAVEClick(Sender: TObject);
     procedure WAVETimeLineClick(Sender: TObject; const Time: Integer);
     procedure GoToNextShotChange(const APrevious: Boolean = False);
+    procedure DetectDialogSegments;
     // formMain_MPV
     procedure MPVClick(Sender: TObject);
     procedure MPVStartFile(Sender: TObject);
@@ -890,6 +893,7 @@ type
     procedure actSetAsDefaultEncodingExecute(Sender: TObject);
     procedure actSetAsDefaultFormatExecute(Sender: TObject);
     procedure actDetectSilentZonesExecute(Sender: TObject);
+    procedure actDetectDialogSegmentsExecute(Sender: TObject);
     procedure actTBXExecute(Sender: TObject);
     procedure actTBXListExecute(Sender: TObject);
     procedure actTBXSettingsExecute(Sender: TObject);
@@ -931,7 +935,8 @@ uses
   procConfig, procDialogs, procWorkspace, procVST, procVST_Loops,
   procUnDockVideoControls, procColorTheme, procFiles, procMPV, procSubtitle,
   procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.XMLLang,
-  UWSystem.SysUtils, UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX;
+  UWSystem.SysUtils, UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX,
+  formCustomQuestionDlg;
 
 {$R *.lfm}
 

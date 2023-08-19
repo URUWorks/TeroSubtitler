@@ -1451,6 +1451,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actDetectDialogSegmentsExecute(Sender: TObject);
+begin
+  DetectDialogSegments;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actTBXExecute(Sender: TObject);
 begin
   ShowTBX;

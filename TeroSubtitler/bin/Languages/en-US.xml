@@ -213,6 +213,7 @@
       <actViewShotChange Hint="Enable/disable shot changes">Shot changes</actViewShotChange>
       <actCenterWaveform>Center waveform</actCenterWaveform>
       <actDetectSilentZones Hint="Click to refresh list">Detect silent zones</actDetectSilentZones>
+      <actDetectDialogSegments>Detect dialog segments...</actDetectDialogSegments>
       <actSetAsDefaultFormat>Set as default save format</actSetAsDefaultFormat>
       <actSetAsDefaultEncoding>Set as default save encoding</actSetAsDefaultEncoding>
       <actMediaSubSizeInc>Increase video font size</actMediaSubSizeInc>      
@@ -356,7 +357,8 @@
       <lblMaxDurationMs>Max. duration (ms)</lblMaxDurationMs>
       <lblMaxLineCount>Max. line count</lblMaxLineCount>
       <lblShiftTimeMs>Shift time (ms)</lblShiftTimeMs>
-      <lblSubtitlePauseMs>Min. gap</lblSubtitlePauseMs>
+      <lblDialogSegmentsDetectionThreshold>Dialog segments detection threshold</lblDialogSegmentsDetectionThreshold>
+      <lblSubtitlePauseMs>Min. gap</lblSubtitlePauseMs>      
       <lblCPS>Characters per second</lblCPS>
       <lblWPM>Words per minute</lblWPM>      
       <lblCPL>Characters per line</lblCPL>            
@@ -396,6 +398,7 @@
       <chkShowSplashWindow>Show splash window</chkShowSplashWindow>
       <chkUseOwnFileDialog>Use Tero file dialog</chkUseOwnFileDialog>
       <chkPromptForDeleteSubtitles>Prompt when deleting subtitles</chkPromptForDeleteSubtitles>
+      <chkPromptForInputFPS>Prompt for FPS before loading a file</chkPromptForInputFPS>      
       <chkDotsOnSplit>Add '...' on split subtitle</chkDotsOnSplit>
       <chkDrawTags>Interpret tags in list</chkDrawTags>
       <chkDrawErrors>Show errors in list</chkDrawErrors>
@@ -718,7 +721,9 @@
     <AskToExtractAudio>Audio waveform was not found, do you want to extract it?</AskToExtractAudio>
     <ExtractAppError>Unable to find '%s'.</ExtractAppError>
     <Extracting>Extracting...</Extracting>
-    <Transcribing>Transcribing...</Transcribing>    
+    <Transcribing>Transcribing...</Transcribing>
+    <DetectDialogSegmentsWarning>Attempting to detect dialog segments deletes all subtitles from the list.</DetectDialogSegmentsWarning>    
+    <Entry>Entry %d</Entry>    
     <libMPVError>Unable to find the required libraries to run the embedded mpv player. Please download them.</libMPVError>
     <libMPVglError>Failed to initialize mpv GL context.</libMPVglError>
     <libMPVVersionError>Could not initialize libmpv, possibly the wrong library was installed.</libMPVVersionError>
@@ -743,6 +748,7 @@
     <FeatureNotAvailableFromURL>Function not available for online video.</FeatureNotAvailableFromURL>
     <MultipleTracksDetected>Multiple tracks detected</MultipleTracksDetected> 
     <SelectTrackToUse>Select the track to use:</SelectTrackToUse>
+    <SelectFPSToUse>Select FPS to use:</SelectFPSToUse>
     <WriteStatus>Writing %d/%d</WriteStatus>    
     <ShortCutInUse>Shortcut currently used in '%s'.</ShortCutInUse>
   </CommonStrings>

@@ -287,8 +287,9 @@ type
     procedure InsertSceneChange(const ATimeInMS: Integer); overload;
     procedure SetSceneChangeTimeMode(const ASMPTE: Boolean);
     // silentezone
+    procedure ClearZoneList(var AZoneList: TSilentZonesList);
+    function DetectZoneList(var AZoneList: TSilentZonesList; const AFindSilent: Boolean = True; const Threshold: Integer = 100; const WinSizeMS: Integer = 100): Boolean;
     function DetectSilentZone(const Threshold: Integer = 100; const WinSizeMS: Integer = 100): Boolean;
-    procedure ClearSilentZones;
     // propertys
     property Selection: TUWSubtitleItem read FDynamicSelection;
     property SelectedItem: PUWSubtitleItem read FSelectedSubtitle;
@@ -543,7 +544,7 @@ begin
   FDynamicSelOldSub := NIL;
   FSubtitles        := NIL;
 
-  ClearSilentZones;
+  ClearZoneList(FSilentZones);
 
   FBackBufferItems.Free;
   FBackBufferWAVE.Free;

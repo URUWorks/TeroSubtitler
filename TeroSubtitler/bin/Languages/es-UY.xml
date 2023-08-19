@@ -213,6 +213,7 @@
       <actViewShotChange Hint="Habilita/deshabilita los cambios de plano">Cambios de plano</actViewShotChange>      
       <actCenterWaveform>Centrar forma de onda</actCenterWaveform>
       <actDetectSilentZones Hint="Clic para refrescar la lista">Detectar zonas de silencio</actDetectSilentZones>
+      <actDetectDialogSegments>Detectar segmentos de diálogo...</actDetectDialogSegments>
       <actSetAsDefaultFormat>Establecer como formato predeterminado para guardar</actSetAsDefaultFormat>
       <actSetAsDefaultEncoding>Establecer como codificación predeterminada para guardar</actSetAsDefaultEncoding>                  
       <actMediaSubSizeInc>Incrementar tamaño de la fuente de vídeo</actMediaSubSizeInc>      
@@ -356,6 +357,7 @@
       <lblMaxDurationMs>Máx. duración (ms)</lblMaxDurationMs>
       <lblMaxLineCount>Máx. cantidad de líneas</lblMaxLineCount>
       <lblShiftTimeMs>Desplazar (ms)</lblShiftTimeMs>
+      <lblDialogSegmentsDetectionThreshold>Umbral de detección de segmentos de diálogo</lblDialogSegmentsDetectionThreshold>      
       <lblSubtitlePauseMs>Pausa mín. entre subtítulos</lblSubtitlePauseMs>      
       <lblCPS>Caracteres por segundo</lblCPS>
       <lblWPM>Palabras por minuto</lblWPM>      
@@ -396,6 +398,7 @@
       <chkShowSplashWindow>Mostrar ventana de bienvenida</chkShowSplashWindow>
       <chkUseOwnFileDialog>Usar diálogo de archivo de Tero</chkUseOwnFileDialog>
       <chkPromptForDeleteSubtitles>Solicitud de eliminación de subtítulos</chkPromptForDeleteSubtitles>
+      <chkPromptForInputFPS>Solicitar FPS antes de cargar un archivo</chkPromptForInputFPS>
       <chkDotsOnSplit>Agregar '...' al dividir subtítulo</chkDotsOnSplit>
       <chkDrawTags>Interpretar etiquetas en la lista</chkDrawTags>
       <chkDrawErrors>Mostrar errores en la lista</chkDrawErrors>
@@ -719,6 +722,8 @@
     <ExtractAppError>No se puede encontrar '%s'.</ExtractAppError>
     <Extracting>Extrayendo...</Extracting>
     <Transcribing>Transcribiendo...</Transcribing>
+    <DetectDialogSegmentsWarning>Intentar detectar segmentos de diálogo elimina todos los subtítulos de la lista.</DetectDialogSegmentsWarning>
+    <Entry>Entrada %d</Entry>
     <libMPVError>No se pueden encontrar las bibliotecas necesarias para ejecutar el reproductor mpv incorporado. Por favor, vaya y descárguelos.</libMPVError>
     <libMPVglError>No se pudo inicializar el contexto mpv GL.</libMPVglError>
     <libMPVVersionError>No se pudo iniciar libmpv, posiblemente se instaló una biblioteca incorrecta.</libMPVVersionError>
@@ -743,6 +748,7 @@
     <FeatureNotAvailableFromURL>Función no disponible para video en línea.</FeatureNotAvailableFromURL>
     <MultipleTracksDetected>Múltiples pistas detectadas</MultipleTracksDetected> 
     <SelectTrackToUse>Seleccione la pista a utilizar:</SelectTrackToUse>
+    <SelectFPSToUse>Seleccione los FPS a utilizar:</SelectFPSToUse>
     <WriteStatus>Escribiendo %d/%d</WriteStatus>
     <ShortCutInUse>Atajo utilizado en '%s'.</ShortCutInUse>    
   </CommonStrings>

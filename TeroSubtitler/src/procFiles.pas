@@ -95,7 +95,8 @@ implementation
 uses
   procConfig, procDialogs, procWorkspace, procVST, procSubtitle, procUndo,
   UWSystem.Encoding, formCustomFileDlg, UWSystem.XMLLang, UWSystem.SysUtils,
-  Forms, procMRU, UWSystem.StrUtils, procForms, procProjectFile
+  Forms, procMRU, UWSystem.StrUtils, procForms, procProjectFile,
+  formCustomSelectDlg
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -204,13 +205,24 @@ begin
   if not FileExists(FileName) then
   begin
     ShowErrorMessageDialog(GetCommonString('FileNotFound'));
-  end
-  else if Subtitles.LoadFromFile(FileName, AEncoding, _FPS, AFormat) then
+    Exit;
+  end;
+
+  if AppOptions.AskForInputFPS and not Subtitles.IsSMPTESupported(Subtitles.GetFormatFromFile(FileName)) then
+  begin
+    with frmMain.cboInputFPS do
+    begin
+      ItemIndex := formCustomSelectDlg.ExecuteDialog('', GetCommonString('SelectFPSToUse'), Items, ItemIndex);
+      _FPS := DefFPSList[ItemIndex];
+    end;
+  end;
+
+  if Subtitles.LoadFromFile(FileName, AEncoding, _FPS, AFormat) then
   begin
     frmMain.VST.RootNodeCount := Subtitles.Count;
     frmMain.cboEncoding.ItemIndex := GetEncodingIndex(Subtitles.CodePage);
     frmMain.cboFormat.ItemIndex := Integer(Subtitles.Format)-1;
-    if Subtitles.FrameRate > 0 then
+    if (Subtitles.FrameRate > 0) and (Subtitles.FrameRate <> _FPS) then
     begin
       frmMain.cboInputFPS.ItemIndex := frmMain.cboInputFPS.Items.IndexOf(SingleToStr(Subtitles.FrameRate, AppOptions.FormatSettings));
       _FPS := Subtitles.FrameRate;

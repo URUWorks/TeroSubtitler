@@ -1770,6 +1770,9 @@ object frmMain: TfrmMain
       object MenuItem32: TMenuItem
         Action = actWaveExtract
       end
+      object MenuItem161: TMenuItem
+        Action = actDetectDialogSegments
+      end
     end
     object mnuHelp: TMenuItem
       Caption = 'Help'
@@ -3466,6 +3469,12 @@ object frmMain: TfrmMain
       Category = 'Timings'
       Caption = 'Read timings from file...'
       OnExecute = actReadTimingsFromFileExecute
+    end
+    object actDetectDialogSegments: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Detect dialog segments...'
+      OnExecute = actDetectDialogSegmentsExecute
     end
   end
   object popDropInsert: TPopupMenu
