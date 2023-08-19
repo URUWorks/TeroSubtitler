@@ -387,6 +387,8 @@
       <lblShortcut>Atajo</lblShortcut>      
       <lblFFMPEG>Ruta de FFmpeg</lblFFMPEG>
       <lblSceneDetect>Ruta de PySceneDetect</lblSceneDetect>            
+      <lblWhisperCPP>Ruta de Whisper.cpp</lblWhisperCPP>
+      <lblYTDLP>Ruta de YT-DLP</lblYTDLP>
       <lblSeekTime>Tiempo para adelanto/retroceso (ms)</lblSeekTime>
       <lblFrameStep>Pasos de fotogramas</lblFrameStep>                
     </Section>

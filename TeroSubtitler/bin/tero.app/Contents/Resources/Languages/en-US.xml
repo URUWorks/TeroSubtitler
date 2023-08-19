@@ -385,8 +385,10 @@
       <lblToolBarWave>Waveform</lblToolBarWave>
       <lblShortcutCat>Category</lblShortcutCat>
       <lblShortcut>Shortcut</lblShortcut>      
-      <lblFFMPEG>FFmpeg folder</lblFFMPEG>
-      <lblSceneDetect>PySceneDetect folder</lblSceneDetect>
+      <lblFFMPEG>FFmpeg</lblFFMPEG>
+      <lblSceneDetect>PySceneDetect</lblSceneDetect>     
+      <lblWhisperCPP>Whisper.cpp</lblWhisperCPP>
+      <lblYTDLP>YT-DLP</lblYTDLP>      
       <lblSeekTime>Seek time (ms)</lblSeekTime>
       <lblFrameStep>Frame step</lblFrameStep>
     </Section>
