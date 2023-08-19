@@ -37,7 +37,7 @@ procedure DockWaveformControls(const CalledFromWaveForm: Boolean = False);
 implementation
 
 uses
-  formMain, formVideo, formWaveform, procWorkspace, procTypes, procCommon;
+  formMain, formVideo, formWaveform, procWorkspace, procTypes, procConfig;
 
 // -----------------------------------------------------------------------------
 

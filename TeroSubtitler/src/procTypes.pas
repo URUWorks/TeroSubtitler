@@ -230,13 +230,24 @@ type
   { TWAVEOptions }
 
   TWAVEOptions = record
-    LoopCount         : Byte;
-    ExtractApp        : String;
-    ExtractParams     : String;
-    AudioToTextApp    : String;
-    AudioToTextParams : String;
-    ffmpegFolder      : String;
-    SceneDetectFolder : String;
+    LoopCount : Byte;
+  end;
+
+  { TTools }
+
+  TTools = record
+    FFmpeg                       : String;
+    FFmpeg_ParamsForAudioExtract : String;
+    FFmpeg_ParamsForShotChanges  : String;
+    FFmpeg_ParamsForWhisper      : String;
+
+    PySceneDetect        : String;
+    PySceneDetect_Params : String;
+
+    WhisperCPP        : String;
+    WhisperCPP_Params : String;
+
+    YTDLP : String;
   end;
 
   { TAdjustSubtitles }
@@ -300,6 +311,7 @@ var
   VSTOptions    : TVSTOptions;
   MPVOptions    : TMPVOptions;
   WAVEOptions   : TWAVEOptions;
+  Tools         : TTools;
   AppOptions    : TAppOptions;
   MRU           : TMRU;
   TMX           : TUWTMX;

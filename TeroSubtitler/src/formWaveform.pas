@@ -46,7 +46,7 @@ implementation
 // -----------------------------------------------------------------------------
 
 uses
-  procUnDockVideoControls, procCommon;
+  procUnDockVideoControls, procConfig;
 
 {$R *.lfm}
 

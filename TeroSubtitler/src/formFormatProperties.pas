@@ -121,7 +121,7 @@ var
 implementation
 
 uses
-  procTypes, LazUTF8, procWorkspace, procCommon, UWSubtitleAPI.Formats,
+  procTypes, LazUTF8, procWorkspace, procConfig, UWSubtitleAPI.Formats,
   UWSystem.TimeUtils, UWTranslateAPI.Google, UWSystem.XMLLang,
   UWSubtitleAPI.Formats.Cavena890.Types;
 

@@ -217,7 +217,7 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="procCommon.pas"/>
+        <Filename Value="procConfig.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
@@ -635,6 +635,10 @@
       </Unit>
       <Unit>
         <Filename Value="procCustomFormat.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="procDialogs.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>

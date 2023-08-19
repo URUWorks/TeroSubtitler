@@ -102,8 +102,8 @@ var
 implementation
 
 uses
-  UWSystem.SysUtils, UWSubtitleAPI, UWSubtitleAPI.Formats, procVST,
-  procTypes, RegExpr, procWorkspace, procColorTheme, procCommon,
+  UWSystem.SysUtils, UWSubtitleAPI, UWSubtitleAPI.Formats, procVST, procTypes,
+  RegExpr, procWorkspace, procColorTheme, procConfig, procDialogs,
   UWSystem.XMLLang, UWSystem.FileUtils, UWSystem.Encoding;
 
 {$R *.lfm}

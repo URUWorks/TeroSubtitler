@@ -56,7 +56,7 @@ var
 implementation
 
 uses
-  formMain, UWSubtitleAPI, procVST, procTypes, procWorkspace, procCommon,
+  formMain, UWSubtitleAPI, procVST, procTypes, procWorkspace, procConfig,
   UWSystem.XMLLang;
 
 {$R *.lfm}

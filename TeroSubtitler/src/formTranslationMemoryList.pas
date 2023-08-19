@@ -67,7 +67,7 @@ var
 implementation
 
 uses
-  procTypes, procVST, RegExpr, procWorkspace, procColorTheme, procCommon,
+  procTypes, procVST, RegExpr, procWorkspace, procColorTheme, procConfig,
   Clipbrd, UWSystem.XMLLang, UWSystem.StrUtils;
 
 {$R *.lfm}

@@ -63,7 +63,7 @@ var
 implementation
 
 uses procTypes, procVST, procSubtitle, UWSubtitleAPI, UWSubtitles.Utils,
-  formMain, procWorkspace, procCommon, UWSystem.XMLLang;
+  formMain, procWorkspace, procConfig, UWSystem.XMLLang;
 
 // -----------------------------------------------------------------------------
 

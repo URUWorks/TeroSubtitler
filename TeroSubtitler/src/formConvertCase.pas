@@ -62,7 +62,7 @@ implementation
 
 uses
   procTypes, procVST, procVST_Loops, UWSystem.StrUtils,
-  UWSubtitleAPI, formMain, LazUTF8, procWorkspace, procCommon;
+  UWSubtitleAPI, formMain, LazUTF8, procWorkspace, procConfig;
 
 {$R *.lfm}
 

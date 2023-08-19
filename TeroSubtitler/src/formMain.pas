@@ -927,11 +927,10 @@ var
 implementation
 
 uses
-  FormVideo,
-  UWSpellcheck.Hunspell, RegExpr, procShortCut, procTranscription,
-  procCommon, procWorkspace, procVST, procVST_Loops, procUnDockVideoControls,
-  procColorTheme, procFiles, procMPV, procSubtitle, procForms,
-  UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.XMLLang,
+  FormVideo, UWSpellcheck.Hunspell, RegExpr, procShortCut, procTranscription,
+  procConfig, procDialogs, procWorkspace, procVST, procVST_Loops,
+  procUnDockVideoControls, procColorTheme, procFiles, procMPV, procSubtitle,
+  procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.XMLLang,
   UWSystem.SysUtils, UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX;
 
 {$R *.lfm}

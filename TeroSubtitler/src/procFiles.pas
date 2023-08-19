@@ -93,9 +93,9 @@ procedure InitializeApp;
 implementation
 
 uses
-  procCommon, procWorkspace, procVST, procSubtitle, procUndo, UWSystem.Encoding,
-  formCustomFileDlg, UWSystem.XMLLang, UWSystem.SysUtils, Forms, procMRU,
-  UWSystem.StrUtils, procForms, procProjectFile
+  procConfig, procDialogs, procWorkspace, procVST, procSubtitle, procUndo,
+  UWSystem.Encoding, formCustomFileDlg, UWSystem.XMLLang, UWSystem.SysUtils,
+  Forms, procMRU, UWSystem.StrUtils, procForms, procProjectFile
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};

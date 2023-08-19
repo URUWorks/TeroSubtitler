@@ -894,12 +894,14 @@ object frmSettings: TfrmSettings
     TabOrder = 5
     Visible = False
     object lblFFMPEG: TLabel
+      AnchorSideTop.Control = edtFFMPEG
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
       Top = 4
       Width = 246
       AutoSize = False
-      Caption = 'ffmpeg folder'
+      Caption = 'ffmpeg'
       ParentColor = False
     end
     object edtFFMPEG: TEdit
@@ -913,6 +915,8 @@ object frmSettings: TfrmSettings
       TabOrder = 0
     end
     object btnFFMPEG: TButton
+      AnchorSideTop.Control = edtFFMPEG
+      AnchorSideTop.Side = asrCenter
       Left = 468
       Height = 23
       Top = 0
@@ -923,33 +927,112 @@ object frmSettings: TfrmSettings
       TabOrder = 1
     end
     object lblSceneDetect: TLabel
+      AnchorSideTop.Control = edtSceneDetect
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 36
+      Top = 35
       Width = 246
       AutoSize = False
-      Caption = 'PySceneDetect folder'
+      Caption = 'PySceneDetect'
       ParentColor = False
     end
     object edtSceneDetect: TEdit
-      AnchorSideRight.Control = btnSceneDetect
+      AnchorSideTop.Control = edtFFMPEG
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = edtFFMPEG
+      AnchorSideRight.Side = asrBottom
       Left = 248
       Height = 23
-      Top = 32
+      Top = 31
       Width = 215
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Right = 5
+      BorderSpacing.Top = 8
       TabOrder = 2
     end
     object btnSceneDetect: TButton
+      AnchorSideTop.Control = edtSceneDetect
+      AnchorSideTop.Side = asrCenter
       Left = 468
       Height = 23
-      Top = 32
+      Top = 31
       Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
       OnClick = btnSceneDetectClick
       TabOrder = 3
+    end
+    object lblWhisperCPP: TLabel
+      AnchorSideTop.Control = edtWhisperCPP
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 66
+      Width = 246
+      AutoSize = False
+      Caption = 'Whisper.cpp'
+      ParentColor = False
+    end
+    object edtWhisperCPP: TEdit
+      AnchorSideTop.Control = edtSceneDetect
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = btnWhisperCPP
+      Left = 248
+      Height = 23
+      Top = 62
+      Width = 215
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 5
+      TabOrder = 4
+    end
+    object btnWhisperCPP: TButton
+      AnchorSideTop.Control = edtWhisperCPP
+      AnchorSideTop.Side = asrCenter
+      Left = 468
+      Height = 23
+      Top = 62
+      Width = 48
+      Anchors = [akTop, akRight]
+      Caption = '...'
+      OnClick = btnWhisperCPPClick
+      TabOrder = 5
+    end
+    object lblYTDLP: TLabel
+      AnchorSideTop.Control = edtYTDLP
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 97
+      Width = 246
+      AutoSize = False
+      Caption = 'YT-DLP'
+      ParentColor = False
+    end
+    object edtYTDLP: TEdit
+      AnchorSideTop.Control = edtWhisperCPP
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = btnYTDLP
+      Left = 248
+      Height = 23
+      Top = 93
+      Width = 215
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 5
+      TabOrder = 6
+    end
+    object btnYTDLP: TButton
+      AnchorSideTop.Control = edtYTDLP
+      AnchorSideTop.Side = asrCenter
+      Left = 468
+      Height = 23
+      Top = 93
+      Width = 48
+      Anchors = [akTop, akRight]
+      Caption = '...'
+      OnClick = btnYTDLPClick
+      TabOrder = 7
     end
   end
   object lyoShortcuts: TUWLayout

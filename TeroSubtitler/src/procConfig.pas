@@ -15,7 +15,7 @@
  *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
  *}
 
-unit procCommon;
+unit procConfig;
 
 {$mode ObjFPC}{$H+}
 {$IFDEF DARWIN}
@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, Controls, SysUtils, Menus, Forms, procTypes, UWSubtitleAPI,
-  UWHotKey, formCustomQuestionDlg, formCustomMessageDlg
+  UWHotKey, formCustomQuestionDlg
   {$IFNDEF WINDOWS}, UWCheckBox, UWRadioButton{$ENDIF}
   {$IFDEF DARWIN}, CocoaAll, CocoaUtils{$ENDIF};
 
@@ -100,27 +100,6 @@ function GetAudioToTextAppFile: String;
 function GetInstallFolder(const AFileName: String): String;
 {$ENDIF}
 
-function PrepareSSAStyleString: AnsiString;
-
-{ Custom inputbox dialog }
-
-function InputDialog(const ACaption, APrompt, ADefault: String; const AHelp: String = ''; const AURL: String = ''; const AHeight: Integer = 93): String;
-
-{ Custom message dialogs }
-
-procedure ShowErrorMessageDialog(const AMessage: String; const ACaption: String = '');
-procedure ShowMessageDialog(const AMessage: String; const ACaption: String = '');
-
-{ Custom question dialogs }
-
-function CustomQuestionDialog(const ASectionName, Title, Caption: String; const AButtons: TCustomDlgButtons = []): Integer;
-function MsgSaveSubtitle(FileName: String; const ASubtitleMode: TSubtitleMode = smText): Integer;
-function MsgDeleteFiles: Integer;
-function MsgFolderNotEmpty: Integer;
-function MsgExportTextOnlyFormat: Integer;
-function MsgExitTranscriptionMode: Integer;
-//function MsgReplaceShortCut(const AAction: String): Integer;
-
 { Check for updates}
 
 procedure CheckForUpdates;
@@ -130,9 +109,9 @@ procedure CheckForUpdates;
 implementation
 
 uses
-  RegExpr, formMain, XMLConf, UWSystem.Encoding, UWSystem.SysUtils,
-  UWSubtitleAPI.Formats, UWLayout, UWSystem.XMLLang, MPVPlayer, procWorkspace,
-  procColorTheme, LCLProc, formCustomInputDlg, UWSystem.Globalization,
+  RegExpr, formMain, XMLConf, UWSystem.Encoding, UWSystem.SysUtils, Dialogs,
+  procDialogs, UWSubtitleAPI.Formats, UWLayout, UWSystem.XMLLang, MPVPlayer,
+  procWorkspace, procColorTheme, LCLProc, UWSystem.Globalization,
   UWSystem.TimeUtils, libMPV.Client, UWSpellcheck.Hunspell, procConventions,
   UWSystem.InetUtils, fileinfo, winpeimagereader, elfreader, machoreader,
   LCLIntf, UWSystem.StrUtils;
@@ -146,6 +125,26 @@ uses
 procedure DefaultValues;
 begin
   LastTickCount := 0;
+
+  FillByte(Tools, SizeOf(TTools), 0);
+  with Tools do
+  begin
+    {$IFDEF WINDOWS}
+    if DirectoryExists('c:\ffmpeg\bin') then
+      FFmpeg := ConcatPaths(['c:\ffmpeg\bin', FFMPEG_EXE]);
+    {$ELSE}
+    FFmpeg        := GetInstallFolder(FFMPEG_EXE);
+    PySceneDetect := GetInstallFolder(SCENEDETECT_EXE);
+    WhisperCPP    := GetInstallFolder(WHISPER_EXE);
+    YTDLP         := GetInstallFolder(YTDLP_EXE);
+    {$ENDIF}
+
+    FFmpeg_ParamsForAudioExtract := FFMPEG_Params;
+    FFmpeg_ParamsForShotChanges  := FFMPEG_SCParams;
+    FFmpeg_ParamsForWhisper      := WHISPER_ffParams;
+    PySceneDetect_Params         := SCENEDETECT_SCParams;
+    WhisperCPP_Params            := WHISPER_Params;
+  end;
 
   with VSTOptions do
   begin
@@ -179,18 +178,7 @@ begin
   FillByte(WAVEOptions, SizeOf(TWAVEOptions), 0);
   with WAVEOptions do
   begin
-    LoopCount         := 3;
-    ExtractApp        := FFMPEG_EXE;
-    ExtractParams     := FFMPEG_Params;
-    AudioToTextApp    := WHISPER_EXE;
-    AudioToTextParams := WHISPER_Params;
-    {$IFDEF WINDOWS}
-    if DirectoryExists('c:\ffmpeg\bin') then
-      ffmpegFolder := 'c:\ffmpeg\bin';
-    {$ELSE}
-    ffmpegFolder := ExtractFilePath(GetInstallFolder(FFMPEG_EXE));
-    {$ENDIF}
-    SceneDetectFolder := '';
+    LoopCount := 3;
   end;
 
   FillByte(Workspace, SizeOf(TWorkspace), 0);
@@ -478,23 +466,27 @@ begin
       begin
         OpenKey('WAVE');
         LoopCount := GetValue('LoopCount', LoopCount);
-        ExtractApp    := GetValue('ExtractApp', ExtractApp);
-        ExtractParams := GetValue('ExtractParams', ExtractParams);
-        AudioToTextApp    := GetValue('AudioToTextApp', AudioToTextApp);
-        AudioToTextParams := GetValue('AudioToTextParams', AudioToTextParams);
-        ffmpegFolder := GetValue('ffmpegFolder', ffmpegFolder);
-        SceneDetectFolder := GetValue('SceneDetectFolder', SceneDetectFolder);
         frmMain.WAVE.DrawGAP := GetValue('DrawGAP', False);
         frmMain.actViewShotChange.Checked := GetValue('ViewShotChanges', False);
         frmMain.actViewShotChangeExecute(NIL);
         frmMain.actCenterWaveform.Checked := GetValue('CenterWaveform', False);
         frmMain.actCenterWaveformExecute(NIL);
         CloseKey;
+      end;
 
-        if ExtractApp.IsEmpty then ExtractApp := FFMPEG_EXE;
-        if ExtractParams.IsEmpty then ExtractParams := FFMPEG_Params;
-        if AudioToTextApp.IsEmpty then AudioToTextApp := WHISPER_EXE;
-        if AudioToTextParams.IsEmpty then AudioToTextParams := WHISPER_Params;
+      with Tools do
+      begin
+        OpenKey('Tools');
+        FFmpeg                       := GetValue('FFmpeg', FFmpeg);
+        FFmpeg_ParamsForAudioExtract := GetValue('FFmpeg_ParamsForAudioExtract', FFmpeg_ParamsForAudioExtract);
+        FFmpeg_ParamsForShotChanges  := GetValue('FFmpeg_ParamsForShotChanges', FFmpeg_ParamsForShotChanges);
+        FFmpeg_ParamsForWhisper      := GetValue('FFmpeg_ParamsForWhisper', FFmpeg_ParamsForWhisper);
+        PySceneDetect        := GetValue('PySceneDetect', PySceneDetect);
+        PySceneDetect_Params := GetValue('PySceneDetect_Params', PySceneDetect_Params);
+        WhisperCPP        := GetValue('WhisperCPP', WhisperCPP);
+        WhisperCPP_Params := GetValue('WhisperCPP_Params', WhisperCPP_Params);
+        YTDLP := GetValue('YTDLP', YTDLP);
+        CloseKey;
       end;
 
       with frmMain do
@@ -766,15 +758,24 @@ begin
       begin
         OpenKey('WAVE');
         SetValue('LoopCount', LoopCount);
-        SetValue('ExtractApp', ExtractApp);
-        SetValue('ExtractParams', ExtractParams);
-        SetValue('AudioToTextApp', AudioToTextApp);
-        SetValue('AudioToTextParams', AudioToTextParams);
-        SetValue('ffmpegFolder', ffmpegFolder);
-        SetValue('SceneDetectFolder', SceneDetectFolder);
         SetValue('ViewShotChanges', frmMain.actViewShotChange.Checked);
         SetValue('CenterWaveform', frmMain.actCenterWaveform.Checked);
         SetValue('DrawGAP', frmMain.WAVE.DrawGAP);
+        CloseKey;
+      end;
+
+      with Tools do
+      begin
+        OpenKey('Tools');
+        SetValue('FFmpeg', FFmpeg);
+        SetValue('FFmpeg_ParamsForAudioExtract', FFmpeg_ParamsForAudioExtract);
+        SetValue('FFmpeg_ParamsForShotChanges', FFmpeg_ParamsForShotChanges);
+        SetValue('FFmpeg_ParamsForWhisper', FFmpeg_ParamsForWhisper);
+        SetValue('PySceneDetect', PySceneDetect);
+        SetValue('PySceneDetect_Params', PySceneDetect_Params);
+        SetValue('WhisperCPP', WhisperCPP);
+        SetValue('WhisperCPP_Params', WhisperCPP_Params);
+        SetValue('YTDLP', YTDLP);
         CloseKey;
       end;
 
@@ -1380,35 +1381,23 @@ end;
 function YTDLPFileName(const AFullRoot: Boolean = True): String;
 begin
   if AFullRoot then
-    {$IFDEF LINUX}
-    Result := GetInstallFolder(YTDLP_EXE)
-    {$ELSE}
-    Result := ConcatPaths([YTDLPFolder, YTDLP_EXE])
-    {$ENDIF}
+    Result := Tools.YTDLP
   else
-    Result := YTDLP_EXE;
+    Result := ExtractFileName(Tools.YTDLP);
 end;
 
 // -----------------------------------------------------------------------------
 
 function ffmpegFileName: String;
 begin
-  {$IFDEF LINUX}
-  Result := GetInstallFolder(FFMPEG_EXE);
-  {$ELSE}
-  Result := ConcatPaths([ffmpegFolder, FFMPEG_EXE]);
-  {$ENDIF}
+  Result := Tools.FFmpeg;
 end;
 
 // -----------------------------------------------------------------------------
 
 function SceneDetectFileName: String;
 begin
-  {$IFDEF LINUX}
-  Result := GetInstallFolder(SCENEDETECT_EXE);
-  {$ELSE}
-  Result := ConcatPaths([WaveOptions.SceneDetectFolder, SCENEDETECT_EXE]);
-  {$ENDIF}
+  Result := Tools.PySceneDetect;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1510,11 +1499,7 @@ end;
 
 function WhisperFileName: String;
 begin
-  {$IFDEF LINUX}
-  Result := GetInstallFolder(WHISPER_EXE);
-  {$ELSE}
-  Result := ConcatPaths([WhisperFolder, WHISPER_EXE]);
-  {$ENDIF}
+  Result := Tools.WhisperCPP;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1584,16 +1569,16 @@ end;
 function GetExtractAppFile(const FFmpeg: Boolean = True): String;
 begin
   if FFmpeg then
-    Result := ConcatPaths([WAVEOptions.ffmpegFolder, WAVEOptions.ExtractApp])
+    Result := Tools.FFmpeg
   else
-    Result := SceneDetectFileName;
+    Result := Tools.PySceneDetect;
 end;
 
 // -----------------------------------------------------------------------------
 
 function GetAudioToTextAppFile: String;
 begin
-  Result := ConcatPaths([WhisperFolder, WAVEOptions.AudioToTextApp]);
+  Result := ConcatPaths([WhisperFolder, ExtractFileName(Tools.WhisperCPP)]);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1670,146 +1655,6 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function PrepareSSAStyleString: AnsiString;
-
-  function CorrectColorFormat(const AColor: String): String;
-  begin
-    Result := Format('&H00%s%s%s', [Copy(AColor, 6, 2), Copy(AColor, 4, 2), Copy(AColor, 2, 2)]);
-  end;
-
-begin
-  with MPVOptions do
-    Result := Format('Default,Arial,%d,%s,%s,%s,%s,0,0,0,0,100,100,0,0,1,1,1,2,10,10,10,1', [TextSize, CorrectColorFormat(TextColor), CorrectColorFormat(TextColor), CorrectColorFormat(TextBorderColor), CorrectColorFormat(TextBackgroundColor)]);
-end;
-
-// -----------------------------------------------------------------------------
-
-{ Custom inputbox dialog }
-
-// -----------------------------------------------------------------------------
-
-function InputDialog(const ACaption, APrompt, ADefault: String; const AHelp: String = ''; const AURL: String = ''; const AHeight: Integer = 93): String;
-begin
-  with TfrmCustomInputDlg.Create(NIL) do
-  try
-    FURL := AURL;
-    lblHelp.Caption := AHelp;
-    Result := Execute(ACaption, APrompt, ADefault, AHeight);
-  finally
-    Free;
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-{ Custom Message dialog }
-
-// -----------------------------------------------------------------------------
-
-procedure ShowErrorMessageDialog(const AMessage: String; const ACaption: String = '');
-begin
-  with TfrmCustomMessageDlg.Create(NIL) do
-  try
-    Execute(AMessage, ACaption);
-  finally
-    Free;
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure ShowMessageDialog(const AMessage: String; const ACaption: String = '');
-begin
-  with TfrmCustomMessageDlg.Create(NIL) do
-  try
-    Execute(AMessage, ACaption, imInformation);
-  finally
-    Free;
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-{ Custom question dialogs }
-
-// -----------------------------------------------------------------------------
-
-function CustomQuestionDialog(const ASectionName, Title, Caption: String; const AButtons: TCustomDlgButtons = []): Integer;
-var
-  sl: TAppStringList = NIL;
-begin
-  if LanguageManager.GetAppStringList(ASectionName, sl) then
-  begin
-    Result := formCustomQuestionDlg.ShowQuestionDialog(GetString(sl, Title), GetString(sl, Caption), ProgramName, AButtons);
-    FreeAndNil(sl);
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-function MsgSaveSubtitle(FileName: String; const ASubtitleMode: TSubtitleMode = smText): Integer;
-var
-  sl : TAppStringList = NIL;
-  sm : String;
-begin
-  if LanguageManager.GetAppStringList('CommonStrings', sl) then
-  begin
-    if ASubtitleMode = smText then
-      sm := GetString(sl, 'FileChanged')
-    else
-      sm := GetString(sl, 'TranslationFileChanged');
-
-    if FileName.IsEmpty then FileName := GetString(sl, 'NoName');
-    Result := formCustomQuestionDlg.ShowQuestionDialog(sm, Format(GetString(sl, 'AskToSave'), [FileName]), ProgramName);
-    FreeAndNil(sl);
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-function MsgDeleteFiles: Integer;
-begin
-  Result := CustomQuestionDialog('CommonStrings', 'PromptForDeleteLines', 'ContinueAnyway', [mbYes, mbNo]);
-end;
-
-// -----------------------------------------------------------------------------
-
-function MsgFolderNotEmpty: Integer;
-begin
-  Result := CustomQuestionDialog('CommonStrings', 'FolderNotEmpty', 'ContinueAnyway', [mbYes, mbNo]);
-end;
-
-// -----------------------------------------------------------------------------
-
-function MsgExportTextOnlyFormat: Integer;
-begin
-  Result := CustomQuestionDialog('CommonStrings', 'TextFormatted', '', [mbYes, mbNo]);
-end;
-
-// -----------------------------------------------------------------------------
-
-function MsgExitTranscriptionMode: Integer;
-begin
-  Result := CustomQuestionDialog('CommonStrings', 'TranscriptionModeExit', 'ContinueAnyway', [mbYes, mbNo])
-end;
-
-// -----------------------------------------------------------------------------
-
-{function MsgReplaceShortCut(const AAction: String): Integer;
-var
-  sl : TAppStringList = NIL;
-  sm : String;
-begin
-  if LanguageManager.GetAppStringList('CommonStrings', sl) then
-  begin
-    sm := Format(GetString(sl, 'ShortCutInUse'), [AAction]);
-    Result := formCustomQuestionDlg.ShowQuestionDialog(sm, GetString(sl, 'ReassignShortCut'), ProgramName, [mbYes, mbNo]);
-    FreeAndNil(sl);
-  end;
-end;}
-
-// -----------------------------------------------------------------------------
-
 { Check for updates}
 
 // -----------------------------------------------------------------------------
@@ -1829,7 +1674,7 @@ begin
         sOld := FileVerInfo.VersionStrings.Values['FileVersion'];
         if (sNew.Trim > sOld.Trim) then // New version available
         begin
-          if CustomQuestionDialog('CommonStrings', 'NewVersionFound', 'SeeChangeList', [mbYes, mbNo]) = mrYes then
+          if CustomQuestionDialog('CommonStrings', 'NewVersionFound', 'SeeChangeList', [dbYes, dbNo]) = mrYes then
             OpenURL(ProgramReleaseURL);
         end
         else // you're using latest version

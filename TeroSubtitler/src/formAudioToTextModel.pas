@@ -59,7 +59,7 @@ var
 implementation
 
 uses
-  procWorkspace, procCommon, procTypes, formDownload;
+  procWorkspace, procConfig, procTypes, formDownload;
 
 const
   Models: TModels =

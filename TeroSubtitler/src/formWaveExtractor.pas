@@ -57,8 +57,8 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procCommon, UWSystem.XMLLang, UWSystem.Process,
-  UWSystem.TimeUtils, StrUtils, formMain, MPVPlayer;
+  procTypes, procWorkspace, procConfig, procDialogs, UWSystem.XMLLang,
+  UWSystem.Process, UWSystem.TimeUtils, StrUtils, formMain, MPVPlayer;
 
 {$R *.lfm}
 
@@ -122,8 +122,8 @@ begin
   if frmMain.MPV.FileName.StartsWith('http') then
     ShowErrorMessageDialog(GetCommonString('FeatureNotAvailableFromURL'))
   else if not FileExists(GetExtractAppFile) then
-    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [WAVEOptions.ExtractApp]))
-  else if (WAVEOptions.ExtractParams <> '') then
+    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(GetExtractAppFile)]))
+  else if (Tools.FFmpeg_ParamsForAudioExtract <> '') then
   begin
     CancelExtraction       := False;
     btnExtract.Enabled     := False;
@@ -149,7 +149,7 @@ begin
       p := frmMain.MPV.IsPlaying;
       if p then frmMain.MPV.Pause;
 
-      AParamArray := WAVEOptions.ExtractParams.Split(' ');
+      AParamArray := Tools.FFmpeg_ParamsForAudioExtract.Split(' ');
       for i := 0 to High(AParamArray) do
         AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%trackid'], [frmMain.MPV.FileName, s, cboTrack.ItemIndex.ToString], []);
 

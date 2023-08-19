@@ -66,7 +66,7 @@ var
 implementation
 
 uses
-  procWorkspace, procTypes, procCommon, UWSystem.XMLLang, UWSystem.Encoding;
+  procWorkspace, procTypes, procConfig, UWSystem.XMLLang, UWSystem.Encoding;
 
 {$R *.lfm}
 

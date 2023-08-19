@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin, Menus,
-  UWTextBox, UWSubtitleAPI.CustomFormat, UWSubtitleAPI, UWSubtitleAPI.Tags;
+  UWTextBox, UWSubtitleAPI.CustomFormat, UWSubtitleAPI;
 
 type
 
@@ -85,7 +85,7 @@ var
 implementation
 
 uses
-  procWorkspace, procTypes, procCommon, UWSystem.XMLLang, UWSystem.Encoding,
+  procWorkspace, procTypes, procConfig, UWSystem.XMLLang, UWSystem.Encoding,
   UWSystem.SysUtils, procCustomFormat;
 
 {$R *.lfm}

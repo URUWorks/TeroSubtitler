@@ -59,8 +59,8 @@ implementation
 // -----------------------------------------------------------------------------
 
 uses
-  procTypes, RegExpr, procWorkspace, procColorTheme, procCommon,
-  Clipbrd, UWSystem.XMLLang, formMain;
+  procTypes, RegExpr, procWorkspace, procColorTheme, procConfig, Clipbrd,
+  UWSystem.XMLLang, formMain;
 
 {$R *.lfm}
 

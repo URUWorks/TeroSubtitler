@@ -69,9 +69,10 @@ var
 implementation
 
 uses
-  procWorkspace, procCommon, procTypes, UWSystem.TimeUtils, formMain,
-  UWSystem.Process, procFiles, procForms, StrUtils, UWTranslateAPI.Google,
-  procSubtitle, procVST, UWSubtitleAPI.Formats, UWSystem.SysUtils;
+  procWorkspace, procConfig, procDialogs, procTypes, UWSystem.TimeUtils,
+  formMain, UWSystem.Process, procFiles, procForms, StrUtils,
+  UWTranslateAPI.Google, procSubtitle, procVST, UWSubtitleAPI.Formats,
+  UWSystem.SysUtils;
 
 {$R *.lfm}
 
@@ -187,10 +188,10 @@ begin
   if frmMain.MPV.FileName.StartsWith('http') then
     ShowErrorMessageDialog(GetCommonString('FeatureNotAvailableFromURL'))
   else if not FileExists(GetExtractAppFile) then
-    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [WAVEOptions.ExtractApp]))
+    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(Tools.FFmpeg)]))
   else if not FileExists(GetAudioToTextAppFile) then
-    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [WAVEOptions.AudioToTextApp]))
-  else if (WAVEOptions.ExtractParams <> '') and (WAVEOptions.AudioToTextParams <> '') and (cboModel.ItemIndex >= 0) then
+    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(Tools.WhisperCPP)]))
+  else if (Tools.FFmpeg_ParamsForAudioExtract <> '') and (Tools.WhisperCPP_Params <> '') and (cboModel.ItemIndex >= 0) then
   begin
     CancelProcess     := False;
     lblStatus.Caption := GetCommonString('Extracting');
@@ -263,7 +264,7 @@ begin
               end;
             end
             else
-              ShowErrorMessageDialog(Format(GetCommonString('ErrorExecuting'), [WAVEOptions.AudioToTextApp]));
+              ShowErrorMessageDialog(Format(GetCommonString('ErrorExecuting'), [ExtractFileName(Tools.FFmpeg)]));
           end
           else
           begin
@@ -283,12 +284,12 @@ begin
               end;
             end
             else
-              ShowErrorMessageDialog(Format(GetCommonString('ErrorExecuting'), [WAVEOptions.AudioToTextApp]));
+              ShowErrorMessageDialog(Format(GetCommonString('ErrorExecuting'), [ExtractFileName(Tools.WhisperCPP)]));
           end;
         end;
       end
       else
-        ShowErrorMessageDialog(Format(GetCommonString('ErrorExecuting'), [WAVEOptions.ExtractApp]));
+        ShowErrorMessageDialog(Format(GetCommonString('ErrorExecuting'), [ExtractFileName(Tools.FFmpeg)]));
     finally
       SetControlsEnabled(True);
       Close;

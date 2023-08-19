@@ -98,12 +98,12 @@ procedure UpdateCoolBar(const ABand: Integer; const AVisible: Boolean);
 implementation
 
 uses
-  procVST, procCommon, formMain, formVideo, formWaveform, procSubtitle,
-  procUnDockVideoControls, UWSystem.Globalization, UWSystem.SysUtils,
-  UWSystem.StrUtils, UWSystem.Encoding, UWSubtitleAPI.Formats, MPVPlayer,
-  character, LazUTF8, formTranslationMemory, UWSubtitleAPI.Tags,
-  UWTranslateAPI.Google, procTranscription, formCustomQuestionDlg,
-  UWSystem.TimeUtils, formTBX, procVST_Loops, procMPV;
+  procVST, procConfig, procDialogs, formMain, formVideo, formWaveform,
+  procSubtitle, procUnDockVideoControls, UWSystem.Globalization,
+  UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.Encoding,
+  UWSubtitleAPI.Formats, MPVPlayer, character, LazUTF8, formTranslationMemory,
+  UWSubtitleAPI.Tags, UWTranslateAPI.Google, procTranscription,
+  formCustomQuestionDlg, UWSystem.TimeUtils, formTBX, procVST_Loops, procMPV;
 
 // -----------------------------------------------------------------------------
 
@@ -684,7 +684,7 @@ begin
     with frmMain do
       if Workspace.TranslatorMode and (TUWSubtitleFormats(cboFormat.ItemIndex+1) <> sfTeroSubtitler) then
       begin
-        r := CustomQuestionDialog('CommonStrings', 'SourceModeWarning', 'ContinueAnyway', [mbYes, mbNo, mbCancel]);
+        r := CustomQuestionDialog('CommonStrings', 'SourceModeWarning', 'ContinueAnyway', [dbYes, dbNo, dbCancel]);
         case r of
           mrCancel : begin
                        frmMain.actListMode.Checked := True;

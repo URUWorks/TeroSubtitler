@@ -85,7 +85,7 @@ implementation
 
 uses
   UWSystem.SysUtils, UWSubtitleAPI, procVST, procSubtitle, procTypes, RegExpr,
-  procWorkspace, procColorTheme, procCommon, UWSystem.XMLLang;
+  procWorkspace, procColorTheme, procConfig, UWSystem.XMLLang;
 
 {$R *.lfm}
 

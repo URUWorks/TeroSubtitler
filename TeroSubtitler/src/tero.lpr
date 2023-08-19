@@ -32,7 +32,7 @@ uses
   formTranslationMemoryList, formWizard, formDownload, procMRU, formShiftTimes,
   formAudioToText, formAudioToTextModel, formTBX, formFormatProperties, 
   procFileTypes, formCustomTextFormat, formActors, formCustomSelectDlg,
-  procProjectFile, formCustomImageFormat, procCustomFormat;
+  procProjectFile, formCustomImageFormat, procCustomFormat, procDialogs;
 
 {$R *.res}
 

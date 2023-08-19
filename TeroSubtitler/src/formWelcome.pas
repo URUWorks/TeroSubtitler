@@ -73,7 +73,7 @@ var
 implementation
 
 uses
-  procTypes, procFiles, procColorTheme, procCommon, procForms, formMain,
+  procTypes, procFiles, procColorTheme, procConfig, procForms, formMain,
   procWorkspace;
 
 {$R *.lfm}

@@ -80,7 +80,7 @@ var
 implementation
 
 uses
-  procVST, procWorkspace, procSubtitle, procColorTheme, procCommon,
+  procVST, procWorkspace, procSubtitle, procColorTheme, procConfig,
   UWSystem.XMLLang;
 
 {$R *.lfm}

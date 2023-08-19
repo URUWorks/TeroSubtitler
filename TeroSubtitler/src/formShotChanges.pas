@@ -77,9 +77,9 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procCommon, UWSystem.TimeUtils, UWSystem.SysUtils,
-  UWSystem.Process, formMain, UWSubtitleAPI.EDL, UWSystem.XMLLang,
-  formCustomSelectDlg;
+  procTypes, procWorkspace, procConfig, procDialogs, UWSystem.TimeUtils,
+  UWSystem.SysUtils, UWSystem.Process, formMain, UWSubtitleAPI.EDL,
+  UWSystem.XMLLang, formCustomSelectDlg;
 
 const
   tcFrames       = 0;

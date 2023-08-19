@@ -74,7 +74,7 @@ var
 implementation
 
 uses
-  procVST, procTypes, RegExpr, procWorkspace, procColorTheme, procCommon,
+  procVST, procTypes, RegExpr, procWorkspace, procColorTheme, procConfig,
   UWSystem.XMLLang, procSubtitle;
 
 const

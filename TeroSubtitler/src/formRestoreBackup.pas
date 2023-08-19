@@ -63,7 +63,7 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procCommon, procVST, procFiles, procColorTheme,
+  procTypes, procWorkspace, procConfig, procVST, procFiles, procColorTheme,
   UWSystem.XMLLang, FileUtil, UWSubtitleAPI.Formats;
 
 {$R *.lfm}

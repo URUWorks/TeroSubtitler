@@ -35,6 +35,8 @@ type
     btnFFMPEG: TButton;
     btnSceneDetect: TButton;
     btnProfile: TButton;
+    btnWhisperCPP: TButton;
+    btnYTDLP: TButton;
     btnShortCutApply: TButton;
     btnShortCutSave: TButton;
     cbnWaveColor: TColorButton;
@@ -69,9 +71,13 @@ type
     cboPauseMode: TComboBox;
     edtCPSStrategy: TEdit;
     edtSceneDetect: TEdit;
+    edtWhisperCPP: TEdit;
+    edtYTDLP: TEdit;
     imlFileTypes: TImageList;
     lblCPSStrategy: TLabel;
     lblSceneDetect: TLabel;
+    lblWhisperCPP: TLabel;
+    lblYTDLP: TLabel;
     lblSCSnapArea: TLabel;
     lblSCSnapInCues: TLabel;
     lblSCSnapOutCues: TLabel;
@@ -238,6 +244,8 @@ type
     procedure btnSceneDetectClick(Sender: TObject);
     procedure btnShortCutApplyClick(Sender: TObject);
     procedure btnShortCutSaveClick(Sender: TObject);
+    procedure btnWhisperCPPClick(Sender: TObject);
+    procedure btnYTDLPClick(Sender: TObject);
     procedure cboProfileSelect(Sender: TObject);
     procedure cboShortcutCatSelect(Sender: TObject);
     procedure cboShortCutPresetSelect(Sender: TObject);
@@ -273,9 +281,9 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procCommon, UWSystem.SysUtils, procColorTheme,
-  formMain, UWSystem.Globalization, formConventions, procShortCut, procMPV,
-  UWSystem.TimeUtils
+  procTypes, procWorkspace, procConfig, procDialogs, UWSystem.SysUtils,
+  procColorTheme, formMain, UWSystem.Globalization, formConventions,
+  procShortCut, procMPV, UWSystem.TimeUtils
   {$IFDEF WINDOWS}
   , FileUtil, procFileTypes
   {$ENDIF};
@@ -411,8 +419,11 @@ begin
     cbnWaveStart.ButtonColor := CustomColors.ItemIT;
     cbnWaveEnd.ButtonColor   := CustomColors.ItemFT;
   end;
-  edtFFMPEG.Text := WAVEOptions.ffmpegFolder;
-  edtSceneDetect.Text := WAVEOptions.SceneDetectFolder;
+
+  edtFFMPEG.Text := Tools.FFmpeg;
+  edtSceneDetect.Text := Tools.PySceneDetect;
+  edtWhisperCPP.Text := Tools.WhisperCPP;
+  edtYTDLP.Text := Tools.YTDLP;
 
   cboTimeCodeMode.ItemIndex := Integer(Workspace.WorkMode);
   cboListMode.ItemIndex := Integer(VSTOptions.DrawMode);
@@ -532,8 +543,11 @@ begin
     CustomColors.ItemIT   := cbnWaveStart.ButtonColor;
     CustomColors.ItemFT   := cbnWaveEnd.ButtonColor;
   end;
-  WAVEOptions.ffmpegFolder := edtFFMPEG.Text;
-  WAVEOptions.SceneDetectFolder := edtSceneDetect.Text;
+
+  Tools.FFmpeg := edtFFMPEG.Text;
+  Tools.PySceneDetect := edtSceneDetect.Text;
+  Tools.WhisperCPP := edtWhisperCPP.Text;
+  Tools.YTDLP := edtYTDLP.Text;
 
   if Workspace.WorkMode <> TWorkMode(cboTimeCodeMode.ItemIndex) then
     SetWorkMode(TWorkMode(cboTimeCodeMode.ItemIndex));
@@ -652,17 +666,28 @@ end;
 
 procedure TfrmSettings.btnFFMPEGClick(Sender: TObject);
 begin
-  with TSelectDirectoryDialog.Create(Self) do
-  try
-    Options := Options + [ofPathMustExist, ofOldStyleDialog];
+  edtFFMPEG.Text := GetFileFromOpenDialog(edtFFMPEG.Text);
+end;
 
-    if Execute then
-    begin
-      edtFFMPEG.Text := FileName;
-    end;
-  finally
-    Free;
-  end;
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.btnSceneDetectClick(Sender: TObject);
+begin
+  edtSceneDetect.Text := GetFileFromOpenDialog(edtSceneDetect.Text);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.btnWhisperCPPClick(Sender: TObject);
+begin
+  edtWhisperCPP.Text := GetFileFromOpenDialog(edtWhisperCPP.Text);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.btnYTDLPClick(Sender: TObject);
+begin
+  edtYTDLP.Text := GetFileFromOpenDialog(edtYTDLP.Text);
 end;
 
 // -----------------------------------------------------------------------------
@@ -700,23 +725,6 @@ begin
       cboProfile.ItemIndex := 0;
 
     cboProfileSelect(Sender);
-  finally
-    Free;
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure TfrmSettings.btnSceneDetectClick(Sender: TObject);
-begin
-  with TSelectDirectoryDialog.Create(Self) do
-  try
-    Options := Options + [ofPathMustExist, ofOldStyleDialog];
-
-    if Execute then
-    begin
-      edtSceneDetect.Text := FileName;
-    end;
   finally
     Free;
   end;

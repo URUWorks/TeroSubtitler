@@ -88,8 +88,8 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procColorTheme, procSubtitle, procCommon,
-  UWSystem.XMLLang, UWSystem.StrUtils, UWSpellcheck.Hunspell,
+  procTypes, procWorkspace, procColorTheme, procSubtitle, procConfig,
+  procDialogs, UWSystem.XMLLang, UWSystem.StrUtils, UWSpellcheck.Hunspell,
   formMain;
 
 {$R *.lfm}

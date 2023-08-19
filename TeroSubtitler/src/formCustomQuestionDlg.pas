@@ -28,7 +28,7 @@ type
 
   { TfrmCustomQuestionDlg }
 
-  TCustomDlgBtn     = (mbYes, mbNo, mbCancel);
+  TCustomDlgBtn     = (dbYes, dbNo, dbCancel);
   TCustomDlgButtons = set of TCustomDlgBtn;
 
   TfrmCustomQuestionDlg = class(TForm)
@@ -57,7 +57,7 @@ var
 implementation
 
 uses
-  procTypes, procCommon, procWorkspace, UWSystem.XMLLang, procColorTheme;
+  procTypes, procConfig, procWorkspace, UWSystem.XMLLang, procColorTheme;
 
 {$R *.lfm}
 
@@ -109,12 +109,12 @@ begin
   lblQuestion.Caption := AQuestion;
 
   if AButtons = [] then
-    AButtons := [mbYes, mbNo, mbCancel];
+    AButtons := [dbYes, dbNo, dbCancel];
 
   ALeft := 331;
-  SetButton(btnCancel, mbCancel);
-  SetButton(btnNo, mbNo);
-  SetButton(btnYes, mbYes);
+  SetButton(btnCancel, dbCancel);
+  SetButton(btnNo, dbNo);
+  SetButton(btnYes, dbYes);
 
   btnCancel.Cancel := btnCancel.Visible;
   btnNo.Cancel := not btnCancel.Visible;

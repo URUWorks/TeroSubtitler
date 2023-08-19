@@ -56,7 +56,7 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procCommon, procColorTheme, Zipper;
+  procTypes, procWorkspace, procConfig, procDialogs, procColorTheme, Zipper;
 
 {$R *.lfm}
 

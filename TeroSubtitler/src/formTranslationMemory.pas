@@ -73,7 +73,7 @@ implementation
 // -----------------------------------------------------------------------------
 
 uses
-  procTypes, procVST, RegExpr, procWorkspace, procColorTheme, procCommon,
+  procTypes, procVST, RegExpr, procWorkspace, procColorTheme, procConfig,
   Clipbrd, formMain, UWSystem.XMLLang;
 
 {$R *.lfm}

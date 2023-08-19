@@ -66,7 +66,7 @@ implementation
 
 uses
   procTypes, procVST, procSubtitle, UWSubtitleAPI, UWSubtitles.Utils,
-  formMain, UWSystem.SysUtils, procWorkspace, procCommon, UWSystem.XMLLang;
+  formMain, UWSystem.SysUtils, procWorkspace, procConfig, UWSystem.XMLLang;
 
 {$R *.lfm}
 

@@ -76,7 +76,7 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procCommon, procColorTheme, formDownload
+  procTypes, procWorkspace, procConfig, procColorTheme, formDownload
   {$IFDEF DARWIN}, UWSystem.SysUtils{$ENDIF};
 
 {$R *.lfm}
@@ -132,13 +132,11 @@ begin
   // ffmpeg
   if FileExists(ffmpegFileName) then
   begin
-    WAVEOptions.ffmpegFolder := ffmpegFolder;
     btnDownloadFFMPEG.Enabled := False;
     lblFFMPEGStatus.Caption := sSuccess;
   end
   else
   begin
-    WAVEOptions.ffmpegFolder := ffmpegFolder;
     btnDownloadFFMPEG.Enabled := True;
     lblFFMPEGStatus.Caption := sFailed;
   end;
@@ -233,9 +231,10 @@ begin
   {$ELSE}
   ShowDownloadDialog(URL_YTDLP, YTDLPFileName);
   {$ENDIF}
-  if FileExists(YTDLPFileName) then
+  if FileExists(ConcatPaths([YTDLPFolder, YTDLP_EXE])) then
   begin
     btnDownloadYTDLP.Enabled := False;
+    Tools.YTDLP              := ConcatPaths([YTDLPFolder, YTDLP_EXE]);
     lblYTDLPStatus.Caption   := sSuccess;
   end;
 end;
@@ -250,10 +249,10 @@ begin
 //  ShowDownloadDialog(URL_FFMPEG, ConcatPaths([ffmpegFolder, 'ffmpeg.zip']));
 //  {$ENDIF}
   ShowDownloadDialog(URL_FFMPEG, ConcatPaths([ffmpegFolder, 'ffmpeg.zip']));
-  if FileExists(ffmpegFileName) then
+  if FileExists(ConcatPaths([ffmpegFolder, FFMPEG_EXE])) then
   begin
     btnDownloadFFMPEG.Enabled := False;
-    WAVEOptions.ffmpegFolder  := ffmpegFolder;
+    Tools.FFmpeg              := ConcatPaths([ffmpegFolder, FFMPEG_EXE]);
     lblFFMPEGStatus.Caption   := sSuccess;
   end;
 end;
@@ -267,9 +266,10 @@ begin
   {$ELSE}
   ShowDownloadDialog(URL_WHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
   {$ENDIF}
-  if FileExists(WhisperFileName) then
+  if FileExists(ConcatPaths([WhisperFolder, WHISPER_EXE])) then
   begin
     btnDownloadWhisper.Enabled := False;
+    Tools.WhisperCPP           := ConcatPaths([WhisperFolder, WHISPER_EXE]);
     lblWhisperStatus.Caption   := sSuccess;
   end;
 end;

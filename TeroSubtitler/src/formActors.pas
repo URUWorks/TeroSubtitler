@@ -58,7 +58,7 @@ var
 implementation
 
 uses
-  procWorkspace, procCommon, procColorTheme, formMain;
+  procWorkspace, procConfig, procColorTheme, formMain;
 
 {$R *.lfm}
 

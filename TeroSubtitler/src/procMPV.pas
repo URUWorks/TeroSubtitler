@@ -37,12 +37,13 @@ procedure MPVReloadSubtitleTempTrack(const ASaveBefore: Boolean = False);
 procedure MPVRemoveSubtitleTempTrack;
 function MPVSaveSubtitleTempTrack: Boolean;
 procedure MPVDeleteSubtitleTempTrack;
+function PrepareSSAStyleString: AnsiString;
 
 // -----------------------------------------------------------------------------
 
 implementation
 
-uses MPVPlayer, procCommon, UWSystem.Encoding, UWSystem.SysUtils;
+uses MPVPlayer, procConfig, UWSystem.Encoding;
 
 // -----------------------------------------------------------------------------
 
@@ -261,6 +262,20 @@ end;
 procedure MPVDeleteSubtitleTempTrack;
 begin
   if FileExists(MPVTempSubFileName) then DeleteFile(MPVTempSubFileName);
+end;
+
+// -----------------------------------------------------------------------------
+
+function PrepareSSAStyleString: AnsiString;
+
+  function CorrectColorFormat(const AColor: String): String;
+  begin
+    Result := Format('&H00%s%s%s', [Copy(AColor, 6, 2), Copy(AColor, 4, 2), Copy(AColor, 2, 2)]);
+  end;
+
+begin
+  with MPVOptions do
+    Result := Format('Default,Arial,%d,%s,%s,%s,%s,0,0,0,0,100,100,0,0,1,1,1,2,10,10,10,1', [TextSize, CorrectColorFormat(TextColor), CorrectColorFormat(TextColor), CorrectColorFormat(TextBorderColor), CorrectColorFormat(TextBackgroundColor)]);
 end;
 
 // -----------------------------------------------------------------------------

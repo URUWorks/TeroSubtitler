@@ -61,7 +61,7 @@ var
 implementation
 
 uses procTypes, procVST, procSubtitle, UWSubtitleAPI,
-  UWSubtitles.Utils, formMain, procWorkspace, procCommon;
+  UWSubtitles.Utils, formMain, procWorkspace, procConfig;
 
 {$R *.lfm}
 

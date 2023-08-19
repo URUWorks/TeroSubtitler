@@ -59,7 +59,7 @@ implementation
 
 uses
   procWorkspace, UWSystem.XMLLang, UWSystem.Globalization, procTypes,
-  procCommon;
+  procConfig;
 
 {$R *.lfm}
 

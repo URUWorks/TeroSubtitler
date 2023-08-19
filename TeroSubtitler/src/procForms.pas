@@ -80,7 +80,7 @@ uses
   formSpellCheck, formGoToTime, formShotChanges, formBatchConvert,
   formQualityCheck, formCompare, formTranslationMemoryList, formTBXList,
   formTBX, formTBXSettings, formTBXEdit, formWizard, formShiftTimes,
-  formAudioToText, formAudioToTextModel, procTypes, procCommon, procWorkspace,
+  formAudioToText, formAudioToTextModel, procTypes, procConfig, procWorkspace,
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
   formActors, procMPV;
 

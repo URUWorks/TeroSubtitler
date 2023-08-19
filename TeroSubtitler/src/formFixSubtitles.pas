@@ -105,7 +105,7 @@ implementation
 
 uses
   procTypes, procVST, procWorkspace, procColorTheme, procSubtitle, procUndo,
-  procCommon, UWSystem.TimeUtils, UWSystem.StrUtils, XMLConf, formMain;
+  procConfig, UWSystem.StrUtils, XMLConf, formMain;
 
 {$R *.lfm}
 

@@ -75,7 +75,7 @@ var
 
 implementation
 
-uses procVST, procWorkspace, procCommon, formMain;
+uses procVST, procWorkspace, procConfig, formMain;
 
 {$R *.lfm}
 

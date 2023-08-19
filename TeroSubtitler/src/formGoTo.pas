@@ -53,7 +53,7 @@ var
 implementation
 
 uses
-  procVST, formMain, procWorkspace, procCommon;
+  procVST, formMain, procWorkspace, procConfig;
 
 {$R *.lfm}
 

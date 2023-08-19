@@ -60,7 +60,7 @@ var
 implementation
 
 uses
-  procTypes, procVST, procWorkspace, procColorTheme, procCommon;
+  procTypes, procVST, procWorkspace, procColorTheme, procConfig;
 
 {$R *.lfm}
 

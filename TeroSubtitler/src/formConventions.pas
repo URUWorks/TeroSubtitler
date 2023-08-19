@@ -96,7 +96,7 @@ implementation
 
 
 uses
-  procTypes, RegExpr, procWorkspace, procColorTheme, procCommon,
+  procTypes, RegExpr, procWorkspace, procColorTheme, procConfig,
   UWSystem.XMLLang;
 
 {$R *.lfm}

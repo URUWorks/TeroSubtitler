@@ -53,7 +53,7 @@ var
 implementation
 
 uses
-  procTypes, procCommon, procWorkspace, UWSystem.XMLLang, procColorTheme;
+  procTypes, procConfig, procWorkspace, UWSystem.XMLLang, procColorTheme;
 
 {$R *.lfm}
 

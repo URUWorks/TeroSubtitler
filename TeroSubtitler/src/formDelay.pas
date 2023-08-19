@@ -59,7 +59,7 @@ implementation
 // -----------------------------------------------------------------------------
 
 uses procTypes, procVST, procSubtitle, procWorkspace, UWSubtitleAPI,
-  UWSubtitles.Utils, UWSystem.SysUtils, formMain, procCommon;
+  UWSubtitles.Utils, UWSystem.SysUtils, formMain, procConfig;
 
 {$R *.lfm}
 
