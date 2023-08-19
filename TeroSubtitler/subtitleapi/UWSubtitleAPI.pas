@@ -198,6 +198,7 @@ type
     procedure Sort;
     function IsEqualItemTimes(const I1, I2: TUWSubtitleItem): Boolean;
     function IsEqualItem(const I1, I2: TUWSubtitleItem): Boolean;
+    function GetFormatFromFile(const FileName: String): TUWSubtitleFormats;
     function LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
     function LoadFromString(const S: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
     function SaveToFile(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1; const FixFileName: Boolean = False): Boolean;
@@ -1444,6 +1445,50 @@ begin
     Result := True
   else
     Result := False;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWSubtitles.GetFormatFromFile(const FileName: String): TUWSubtitleFormats;
+var
+  AList   : TUWSubtitleCustomFormatList = NIL;
+  SubFile : TUWStringList;
+  i, f    : Integer;
+begin
+  Result := sfInvalid;
+  InitializeSubtitleFormats(AList);
+  try
+    SubFile := TUWStringList.Create(FileName);
+    try
+      // First try Text formats
+      if SubFile.Count > 0 then
+        for i := 0 to SubFile.Count-1 do
+          try
+            for f := 0 to AList.Count-1 do
+              if AList[f].IsTextBased and AList[f].IsMine(SubFile, i) then
+              begin
+                Result := AList[f].Format;
+                Exit;
+              end;
+          except
+          end;
+
+      // If not, try binary formats
+      try
+        for f := 0 to AList.Count-1 do
+          if not AList[f].IsTextBased and AList[f].IsMine(SubFile, 0) then
+          begin
+            Result := AList[f].Format;
+            Exit;
+          end;
+      except
+      end;
+    finally
+      SubFile.Free;
+    end;
+  finally
+    FinalizeSubtitleFormats(AList);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
