@@ -31,6 +31,7 @@ procedure PasteFromClipboard;
 function InsertSubtitle(const Index: Integer; const Item: TUWSubtitleItem; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer; overload;
 function InsertSubtitle(const Index: Integer; const InitialTime, FinalTime: Integer; const Text, Translation: String; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer; overload;
 procedure DeleteSubtitle(const Index: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
+procedure ClearSubtitles(const AutoIncrementUndo: Boolean = True);
 
 function CalcNewSubtitleFinalTime(const Index: Integer; const AInitialTime: Integer): Integer;
 
@@ -174,6 +175,29 @@ begin
     UpdateValues(True);
     SubtitleChanged(True, True);
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ClearSubtitles(const AutoIncrementUndo: Boolean = True);
+var
+  i: Integer;
+begin
+  if Subtitles.Count = 0 then Exit;
+
+  for i := Subtitles.Count-1 downto 0 do
+  begin
+    UndoInstance.AddUndo(utDeleteLine, i, Subtitles[i], False);
+    Subtitles.Delete(i);
+  end;
+
+  if AutoIncrementUndo then
+    UndoInstance.IncrementUndoGroup;
+
+  frmMain.VST.RootNodeCount := Subtitles.Count;
+
+  UpdateValues(True);
+  SubtitleChanged(True, True);
 end;
 
 // -----------------------------------------------------------------------------
