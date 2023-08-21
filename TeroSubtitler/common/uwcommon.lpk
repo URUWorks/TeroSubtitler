@@ -77,6 +77,10 @@
         <Filename Value="UWWindows.DarkTheme.pas"/>
         <UnitName Value="UWWindows.DarkTheme"/>
       </Item>
+      <Item>
+        <Filename Value="UWSystem.ThreadProcess.pas"/>
+        <UnitName Value="UWSystem.ThreadProcess"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>
