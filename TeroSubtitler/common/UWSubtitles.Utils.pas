@@ -627,7 +627,7 @@ function FixHearingImpaired(const Text: String; const Enter: String = sLineBreak
 var
   PosEnter : Integer;
   A, B     : String;
-  sl       : TStringList;
+  sl       : TStrings;
   i        : Integer;
 begin
   Result := '';
@@ -664,12 +664,13 @@ begin
       sl := TStringList.Create;
       try
         sl.Text := Result;
-        for i := sl.Count-1 downto 0 do
-        begin
-          A := sl[i].Trim;
-          if (A.IsEmpty) or (A.StartsWith('-') and (UTF8Length(A) = 1)) then
-            sl.Delete(i);
-        end;
+        if sl.Count > 0 then
+          for i := sl.Count-1 downto 0 do
+          begin
+            A := sl[i].Trim;
+            if (A.IsEmpty) or (A.StartsWith('-') and (UTF8Length(A) = 1)) then
+              sl.Delete(i);
+          end;
         Result := sl.Text.Trim;
       finally
         sl.Free;
