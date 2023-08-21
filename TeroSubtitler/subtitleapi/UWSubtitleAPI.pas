@@ -198,7 +198,8 @@ type
     procedure Sort;
     function IsEqualItemTimes(const I1, I2: TUWSubtitleItem): Boolean;
     function IsEqualItem(const I1, I2: TUWSubtitleItem): Boolean;
-    function GetFormatFromFile(const FileName: String): TUWSubtitleFormats;
+    function GetFormatFromFile(const AFileName: String): TUWSubtitleFormats;
+    function GetTimeBaseFromFile(const AFileName: String): TSubtitleTimeBase;
     function LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
     function LoadFromString(const S: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
     function SaveToFile(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1; const FixFileName: Boolean = False): Boolean;
@@ -1449,7 +1450,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.GetFormatFromFile(const FileName: String): TUWSubtitleFormats;
+function TUWSubtitles.GetFormatFromFile(const AFileName: String): TUWSubtitleFormats;
 var
   AList   : TUWSubtitleCustomFormatList = NIL;
   SubFile : TUWStringList;
@@ -1458,7 +1459,7 @@ begin
   Result := sfInvalid;
   InitializeSubtitleFormats(AList);
   try
-    SubFile := TUWStringList.Create(FileName);
+    SubFile := TUWStringList.Create(AFileName);
     try
       // First try Text formats
       if SubFile.Count > 0 then
@@ -1488,6 +1489,22 @@ begin
     end;
   finally
     FinalizeSubtitleFormats(AList);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWSubtitles.GetTimeBaseFromFile(const AFileName: String): TSubtitleTimeBase;
+var
+  Sub : TUWSubtitles;
+begin
+  Result := stbMedia;
+  Sub := TUWSubtitles.Create;
+  try
+    if Sub.LoadFromFile(AFileName, NIL, 0) then
+      Result := Sub.TimeBase;
+  finally
+    Sub.Free;
   end;
 end;
 
