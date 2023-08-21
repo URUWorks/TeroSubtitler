@@ -24,8 +24,6 @@ interface
 uses
   Forms, Classes, SysUtils, Process;
 
-// -----------------------------------------------------------------------------
-
 type
 
   TUWProcessCB   = procedure(const TimeElapsed: Double; var Cancel: Boolean);
