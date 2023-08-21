@@ -152,9 +152,8 @@ end;
 
 procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile: PProfileItem = NIL; const AShotChanges: TIntegerDynArray = NIL);
 
-  procedure ClearItem(var AFixedItem: PSubtitleInfoItem; const Index: Integer);
+  procedure ClearItem(var AFixedItem: TSubtitleInfoItem; const Index: Integer);
   begin
-    New(AFixedItem);
     AFixedItem.Index       := Index;
     AFixedItem.Apply       := True;
     AFixedItem.InitialTime := FSubtitles[Index].InitialTime;
@@ -163,8 +162,22 @@ procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile:
     AFixedItem.ErrorsFixed := [etNone];
   end;
 
+  function NewItem(AFixedItem: TSubtitleInfoItem): PSubtitleInfoItem;
+  begin
+    New(Result);
+    with Result^ do
+    begin
+      Index       := AFixedItem.Index;
+      Apply       := AFixedItem.Apply;
+      InitialTime := AFixedItem.InitialTime;
+      FinalTime   := AFixedItem.FinalTime;
+      Text        := AFixedItem.Text;
+      ErrorsFixed := AFixedItem.ErrorsFixed;
+    end;
+  end;
+
 var
-  FixedItem : PSubtitleInfoItem;
+  FixedItem : TSubtitleInfoItem;
   i, x, z   : Integer;
   tmp, s    : String;
   ocr       : TUWOCRScript;
@@ -175,6 +188,9 @@ var
   InCue, OutCue,
   ChainingMS : Integer;
   SnapAway : Boolean;
+
+  NeedClear,
+  SkipItem: Boolean;
 begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
 
@@ -189,14 +205,17 @@ begin
   try
     for i := 0 to FSubtitles.Count-1 do
     begin
+      NeedClear := True;
+      SkipItem  := False;
+
       ClearItem(FixedItem, i);
       // Repeated subtitle
       if etRepeatedSubtitle in FErrors then
       begin
-        if (i > 0) and IsEqualSubtitle(FixedItem^, FSubtitles[i-1]) then
+        if (i > 0) and IsEqualSubtitle(FixedItem, FSubtitles[i-1]) then
         begin
           FixedItem.ErrorsFixed := [etRepeatedSubtitle];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -210,7 +229,7 @@ begin
         begin
           FixedItem.Text := UnbreakSubtitlesIfLessThanChars(FixedItem.Text, Profile^.CPL);
           FixedItem.ErrorsFixed := [etUnbreak];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -223,7 +242,7 @@ begin
         begin
           FixedItem.Text := tmp;
           FixedItem.ErrorsFixed := [etUnnecessarySpaces];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -236,7 +255,7 @@ begin
         begin
           FixedItem.Text := tmp;
           FixedItem.ErrorsFixed := [etUnnecessaryDots];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -249,7 +268,7 @@ begin
         begin
           FixedItem.Text := tmp;
           FixedItem.ErrorsFixed := [etEllipsesSingleSmartCharacter];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -262,7 +281,7 @@ begin
         begin
           FixedItem.Text := tmp;
           FixedItem.ErrorsFixed := [etFixTags];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
         //
         tmp := FixTags(FixedItem.Text, '<', '>');
@@ -270,7 +289,7 @@ begin
         begin
           FixedItem.Text := tmp;
           FixedItem.ErrorsFixed := [etFixTags];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -281,7 +300,7 @@ begin
         if HasProhibitedChars(FixedItem.Text, Profile^.ProhibitedChars) then
         begin
           FixedItem.ErrorsFixed := [etProhibitedChars];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -296,7 +315,7 @@ begin
           begin
             FixedItem.Text := tmp;
             FixedItem.ErrorsFixed := [etBreakLongLines];
-            Add(FixedItem);
+            Add(NewItem(FixedItem));
           end;
         end;
       end;
@@ -312,26 +331,26 @@ begin
           begin
             FixedItem.Text        := tmp;
             FixedItem.ErrorsFixed := [etHearingImpaired];
-            Add(FixedItem);
 
-            {if tmp = '' then
+            if tmp = '' then
             begin
-              FixedItem.Text        := '';
-              FixedItem.ErrorsFixed := [etEmpty];
-              Add(FixedItem);
-            end;}
+              FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etEmpty];
+              SkipItem := True;
+            end;
+
+            Add(NewItem(FixedItem));
           end;
         end;
       end;
 
-      //ClearItem(FixedItem, i);
+      ClearItem(FixedItem, i);
       // Empty subtitle
-      if etEmpty in FErrors then
+      if (etEmpty in FErrors) and not SkipItem then
       begin
         if FixedItem.Text = '' then
         begin
           FixedItem.ErrorsFixed := [etEmpty];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -346,7 +365,7 @@ begin
           begin
             FixedItem.Text        := tmp;
             FixedItem.ErrorsFixed := [etRepeatedChars];
-            Add(FixedItem);
+            Add(NewItem(FixedItem));
           end;
         end;
       end;
@@ -362,7 +381,7 @@ begin
           begin
             FixedItem.Text        := tmp;
             FixedItem.ErrorsFixed := [etOCR];
-            Add(FixedItem);
+            Add(NewItem(FixedItem));
           end;
         end;
       end;
@@ -371,11 +390,11 @@ begin
       // Time too short
       if etTimeTooShort in FErrors then
       begin
-        if GetItemDuration(FixedItem^) < Profile^.MinDuration then
+        if GetItemDuration(FixedItem) < Profile^.MinDuration then
         begin
           FixedItem.FinalTime   := FixedItem.InitialTime + Profile^.MinDuration;
           FixedItem.ErrorsFixed := [etTimeTooShort];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -383,11 +402,11 @@ begin
       // Time too long
       if etTimeTooLong in FErrors then
       begin
-        if GetItemDuration(FixedItem^) > Profile^.MaxDuration then
+        if GetItemDuration(FixedItem) > Profile^.MaxDuration then
         begin
           FixedItem.FinalTime   := FixedItem.InitialTime + Profile^.MaxDuration;
           FixedItem.ErrorsFixed := [etTimeTooLong];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -401,7 +420,7 @@ begin
           FixedItem.InitialTime := FixedItem.FinalTime;
           FixedItem.FinalTime   := x;
           FixedItem.ErrorsFixed := [etBadValues];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -415,7 +434,7 @@ begin
           begin
             FixedItem.InitialTime := FSubtitles[i-1].FinalTime + GapMs;
             FixedItem.ErrorsFixed := [etOverlapping, etOverlappingWithPrev];
-            Add(FixedItem);
+            Add(NewItem(FixedItem));
           end;
         end
         else if (i < (FSubtitles.Count-1)) and (FixedItem.FinalTime >= FSubtitles[i+1].InitialTime) then
@@ -430,7 +449,7 @@ begin
             FixedItem.FinalTime := x;
 
           FixedItem.ErrorsFixed := [etOverlapping, etOverlappingWithNext];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -443,7 +462,7 @@ begin
         begin
           FixedItem.Text := tmp;
           FixedItem.ErrorsFixed := [etIncompleteHyphenText];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -456,7 +475,7 @@ begin
         begin
           FixedItem.Text := tmp;
           FixedItem.ErrorsFixed := [etSpaceOfOpeningHyphen];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -469,7 +488,7 @@ begin
         begin
           FixedItem.Text := tmp;
           FixedItem.ErrorsFixed := [etRemoveSpacesWithinBrackets];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -482,7 +501,7 @@ begin
         begin
           FixedItem.Text := tmp;
           FixedItem.ErrorsFixed := [etFixInterrobang];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
 
@@ -547,11 +566,12 @@ begin
           if (etSnapToShotChangesInCue in FixedItem.ErrorsFixed) and (etSnapToShotChangesOutCue in FixedItem.ErrorsFixed) then
             FixedItem.ErrorsFixed := [etSnapToShotChanges];
 
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
+          NeedClear := False;
         end;
       end;
 
-      //ClearItem(FixedItem, i);
+      if NeedClear then ClearItem(FixedItem, i);
       // Chaining
       if (etChaining in FErrors) and (i+1 < Subtitles.Count) then
       begin
@@ -559,7 +579,7 @@ begin
         begin
           FixedItem.FinalTime := Subtitles[i+1].InitialTime - GapMs;
           FixedItem.ErrorsFixed := [etChaining];
-          Add(FixedItem);
+          Add(NewItem(FixedItem));
         end;
       end;
     end;

@@ -86,6 +86,7 @@ type
     FList: TSubtitleInfoList;
     FAppStringList: TAppStringList;
     FProfiles: TProfiles;
+    FProfile: PProfileItem;
     procedure UpdateItemList;
     function GetErrorStr(const AError: TSubtitleErrorTypeSet): String;
     function IsTimeFixed(const Item: TSubtitleInfoItem): Boolean;
@@ -365,15 +366,12 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmFixSubtitles.cboConventionSelect(Sender: TObject);
-var
-  Profile: PProfileItem;
 begin
-  Profile := FProfiles.FindProfile(cboConvention.Text);
+  FProfile := FProfiles.FindProfile(cboConvention.Text);
+  if FProfile = NIL then
+    FProfile := @AppOptions.Conventions;
 
-  if Profile = NIL then
-    Profile := @AppOptions.Conventions;
-
-  clbOptions.Items[11] := Format(GetString(FAppStringList, 'etProhibitedChars'), [Profile^.ProhibitedChars]);
+  clbOptions.Items[11] := Format(GetString(FAppStringList, 'etProhibitedChars'), [FProfile^.ProhibitedChars]);
   UpdateItemList;
 end;
 
@@ -434,25 +432,31 @@ end;
 procedure TfrmFixSubtitles.UpdateItemList;
 var
   i: Integer;
-  Profile: PProfileItem;
 begin
   FList.Errors := [];
-  for i := 0 to Length(FOptions)-1 do
-    if FOptions[i].Enabled then FList.Errors := FList.Errors + [FOptions[i].Error];
+  Screen.Cursor := crHourGlass;
+  VST.BeginUpdate;
+  try
+    VST.RootNodeCount := 0;
+    FList.ClearItems;
 
-  VST.RootNodeCount := 0;
-  Profile := FProfiles.FindProfile(cboConvention.Text);
-  if Profile = NIL then
-    Profile := @AppOptions.Conventions;
+    for i := 0 to Length(FOptions)-1 do
+      if FOptions[i].Enabled then FList.Errors := FList.Errors + [FOptions[i].Error];
 
-  Profile^.AddHyphenSpace := (cboSpacingHyphen.ItemIndex = 0);
+    if FProfile = NIL then
+      FProfile := @AppOptions.Conventions;
 
-  if cboOCR.Items.Count > 0 then
-    FList.FixErrors(OCRFolder + cboOCR.Items[cboOCR.ItemIndex] + '.ocr', Profile, frmMain.WAVE.GetSceneChangeList)
-  else
-    FList.FixErrors('', Profile, frmMain.WAVE.GetSceneChangeList);
+    FProfile^.AddHyphenSpace := (cboSpacingHyphen.ItemIndex = 0);
 
-  VST.RootNodeCount := FList.Count;
+    if cboOCR.Items.Count > 0 then
+      FList.FixErrors(OCRFolder + cboOCR.Items[cboOCR.ItemIndex] + '.ocr', FProfile, frmMain.WAVE.GetSceneChangeList)
+    else
+      FList.FixErrors('', FProfile, frmMain.WAVE.GetSceneChangeList);
+  finally
+    VST.RootNodeCount := FList.Count;
+    VST.EndUpdate;
+    Screen.Cursor := crDefault;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
