@@ -56,6 +56,7 @@ procedure ApplyCommonControlsString(const AForm: TForm; const ASection: String =
 { Special folders }
 
 function GetCustomFolderPath(const SubFolder: String): String;
+function GetCustomUserPath(const AFolder: String): String;
 function GetCustomFilePath(const FileName: String): String;
 function SettingsFileName: String;
 function CurrentWorkFileName: String;
@@ -130,13 +131,37 @@ begin
   with Tools do
   begin
     {$IFDEF WINDOWS}
-    if DirectoryExists('c:\ffmpeg\bin') then
-      FFmpeg := ConcatPaths(['c:\ffmpeg\bin', FFMPEG_EXE]);
+    if DirectoryExists(GetCustomUserPath('ffmpeg')) then
+      FFmpeg := ConcatPaths([GetCustomUserPath('ffmpeg'), FFMPEG_EXE]);
+
+    if DirectoryExists(GetCustomUserPath('PySceneDetect')) then
+      PySceneDetect := ConcatPaths([GetCustomUserPath('PySceneDetect'), SCENEDETECT_EXE]);
+
+    if DirectoryExists(GetCustomUserPath('Whisper')) then
+      WhisperCPP := ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE]);
+
+    if FileExists(GetCustomFilePath(YTDLP_EXE)) then
+      YTDLP := GetCustomFilePath(YTDLP_EXE);
     {$ELSE}
-    FFmpeg        := GetInstallFolder(FFMPEG_EXE);
-    PySceneDetect := GetInstallFolder(SCENEDETECT_EXE);
-    WhisperCPP    := GetInstallFolder(WHISPER_EXE);
-    YTDLP         := GetInstallFolder(YTDLP_EXE);
+    if DirectoryExists(GetCustomUserPath('ffmpeg')) then
+      FFmpeg := ConcatPaths([GetCustomUserPath('ffmpeg'), FFMPEG_EXE])
+    else
+      FFmpeg := GetInstallFolder(FFMPEG_EXE);
+
+    if DirectoryExists(GetCustomUserPath('PySceneDetect')) then
+      PySceneDetect := ConcatPaths([GetCustomUserPath('PySceneDetect'), SCENEDETECT_EXE])
+    else
+      PySceneDetect := GetInstallFolder(SCENEDETECT_EXE);
+
+    if DirectoryExists(GetCustomUserPath('Whisper')) then
+      WhisperCPP := ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE])
+    else
+      WhisperCPP := GetInstallFolder(WHISPER_EXE);
+
+    if DirectoryExists(GetCustomUserPath('ytdlp')) then
+      YTDLP := ConcatPaths([GetCustomUserPath('ytdlp'), YTDLP_EXE])
+    else
+      YTDLP := GetInstallFolder(YTDLP_EXE);
     {$ENDIF}
 
     FFmpeg_ParamsForAudioExtract := FFMPEG_Params;
@@ -1195,6 +1220,17 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function GetCustomUserPath(const AFolder: String): String;
+begin
+  {$IFDEF DARWIN}
+  Result := Format('%s%s/%s/', [GetUserDir, RootCfg, AFolder]);
+  {$ELSE}
+  Result := GetCustomFolderPath(AFolder);
+  {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetCustomFilePath(const FileName: String): String;
 begin
   {$IFDEF DARWIN}
@@ -1299,22 +1335,14 @@ end;
 
 function WaveformsFolder: String;
 begin
-  {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/Waveforms/';
-  {$ELSE}
-  Result := GetCustomFolderPath('Waveforms');
-  {$ENDIF}
+  Result := GetCustomUserPath('Waveforms');
 end;
 
 // -----------------------------------------------------------------------------
 
 function ShotChangesFolder: String;
 begin
-  {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/ShotChanges/';
-  {$ELSE}
-  Result := GetCustomFolderPath('ShotChanges');
-  {$ENDIF}
+  Result := GetCustomUserPath('ShotChanges');
 end;
 
 // -----------------------------------------------------------------------------
@@ -1439,22 +1467,14 @@ end;
 
 function BackupFolder: String;
 begin
-  {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/Backup/';
-  {$ELSE}
-  Result := GetCustomFolderPath('Backup');
-  {$ENDIF}
+  Result := GetCustomUserPath('Backup');
 end;
 
 // -----------------------------------------------------------------------------
 
 function ProjectsFolder: String;
 begin
-  {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/Projects/';
-  {$ELSE}
-  Result := GetCustomFolderPath('Projects');
-  {$ENDIF}
+  Result := GetCustomUserPath('Projects');
 end;
 
 // -----------------------------------------------------------------------------
@@ -1472,33 +1492,21 @@ end;
 
 function TranslationMemoryFolder: String;
 begin
-  {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/TM/';
-  {$ELSE}
-  Result := GetCustomFolderPath('TM');
-  {$ENDIF}
+  Result := GetCustomUserPath('TM');
 end;
 
 // -----------------------------------------------------------------------------
 
 function TerminologyFolder: String;
 begin
-  {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/Terminology/';
-  {$ELSE}
-  Result := GetCustomFolderPath('Terminology');
-  {$ENDIF}
+  Result := GetCustomUserPath('Terminology');
 end;
 
 // -----------------------------------------------------------------------------
 
 function WhisperFolder: String;
 begin
-  {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/Whisper/';
-  {$ELSE}
-  Result := GetCustomFolderPath('Whisper');
-  {$ENDIF}
+  Result := GetCustomUserPath('Whisper');
 end;
 
 // -----------------------------------------------------------------------------
@@ -1539,7 +1547,7 @@ end;
 function YTDLPFolder: String;
 begin
   {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/ytdlp/';
+  Result := GetCustomUserPath('ytdlp');
   {$ELSE}
   Result := libmpvFolder;
   {$ENDIF}
@@ -1550,7 +1558,7 @@ end;
 function ffmpegFolder: String;
 begin
   {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/ffmpeg/';
+  Result := GetCustomUserPath('ffmpeg');
   {$ELSE}
   Result := GetCustomFolderPath('ffmpeg');
   {$ENDIF}
