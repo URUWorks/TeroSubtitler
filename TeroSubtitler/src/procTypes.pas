@@ -122,8 +122,8 @@ const
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_linux.zip';
 
   FFMPEG_EXE      = 'ffmpeg';
-  //FFMPEG_Params   = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -y %output';
-  FFMPEG_Params   = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y %output';
+  FFMPEG_Params   = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -y %output';
+  //FFMPEG_Params   = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y %output';
   FFMPEG_SCParams = '-hide_banner -i %input -vf select=''gt(scene,%value)'',showinfo -f null -';
 
   YTDLP_EXE = 'yt-dlp_linux_aarch64';
@@ -142,8 +142,8 @@ const
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_%cpu.zip';
 
   FFMPEG_EXE      = 'ffmpeg';
-  //FFMPEG_Params   = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -y %output';
-  FFMPEG_Params   = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y %output';
+  FFMPEG_Params   = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -y %output';
+  //FFMPEG_Params   = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y %output';
   FFMPEG_SCParams = '-hide_banner -i %input -vf select=''gt(scene,%value)'',showinfo -f null -';
 
   YTDLP_EXE = 'yt-dlp_macos';

@@ -208,12 +208,13 @@ begin
     Exit;
   end;
 
-  if AppOptions.AskForInputFPS and not Subtitles.IsSMPTESupported(Subtitles.GetFormatFromFile(FileName)) then
+  if AppOptions.AskForInputFPS and (Subtitles.GetTimeBaseFromFile(FileName) = stbMedia) then //not Subtitles.IsSMPTESupported(Subtitles.GetFormatFromFile(FileName)) then
   begin
     with frmMain.cboInputFPS do
     begin
       ItemIndex := formCustomSelectDlg.ExecuteDialog('', GetCommonString('SelectFPSToUse'), Items, ItemIndex);
       _FPS := DefFPSList[ItemIndex];
+      frmMain.cboInputFPSSelect(NIL);
     end;
   end;
 
@@ -227,9 +228,7 @@ begin
       frmMain.cboInputFPS.ItemIndex := frmMain.cboInputFPS.Items.IndexOf(SingleToStr(Subtitles.FrameRate, AppOptions.FormatSettings));
       _FPS := Subtitles.FrameRate;
     end;
-    Workspace.FPS.OutputFPS := _FPS;
-    frmMain.cboFPS.ItemIndex := frmMain.cboInputFPS.ItemIndex;
-    SetTimeFPStoTimeEditCtrls;
+    frmMain.cboInputFPSSelect(NIL);
 
     if not Subtitles.IsSMPTESupported then
     begin

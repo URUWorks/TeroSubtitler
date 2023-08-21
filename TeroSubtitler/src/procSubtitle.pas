@@ -505,7 +505,7 @@ begin
   if Subtitles.Count > 0 then
     for i := 0 to Subtitles.Count-1 do
       with Subtitles[i] do
-        if (InitialTime <= MSecs + 1) and (FinalTime > MSecs) then
+        if (InitialTime <= MSecs + 1) and (FinalTime > MSecs + 1) then
         begin
           Result := i;
           SubtitleInfo.LastSubtitle.ShowIndex := Result;

@@ -1257,7 +1257,7 @@ end;
 
 procedure TfrmMain.cboInputFPSSelect(Sender: TObject);
 begin
-  if VST.RootNodeCount > 0 then
+  if (VST.RootNodeCount > 0) and (Sender <> NIL) then
     VSTDoLoop(VST, @ApplyChangeInputFPS, dlAll, False, True);
 
   Workspace.FPS.InputFPS := GetInputFPS;
@@ -1265,14 +1265,16 @@ begin
   cboFPS.ItemIndex := cboInputFPS.ItemIndex;
   Workspace.FPS.OutputFPS := Workspace.FPS.InputFPS;
   SetTimeFPStoTimeEditCtrls;
-  UpdateValues(True);
+
+  if (Sender <> NIL) then
+    UpdateValues(True);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.cboFPSSelect(Sender: TObject);
 begin
-  if VST.RootNodeCount > 0 then
+  if (VST.RootNodeCount > 0) and (Sender <> NIL) then
     VSTDoLoop(VST, @ApplyChangeFPS, dlAll, False, True);
 
   Workspace.FPS.OutputFPS := GetFPS;
@@ -1281,7 +1283,8 @@ begin
   if (Workspace.WorkMode = wmFrames) then
     SetSMPTEMode(not IsInteger(GetFPS));
 
-  UpdateValues(True);
+  if (Sender <> NIL) then
+    UpdateValues(True);
 end;
 
 // -----------------------------------------------------------------------------

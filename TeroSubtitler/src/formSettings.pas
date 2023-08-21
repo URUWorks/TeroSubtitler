@@ -595,7 +595,7 @@ begin
   if not IsWorkAreaEnabled then // Only change if work area is disabled
   begin
     frmMain.cboInputFPS.ItemIndex := cboDefaultFrameRate.ItemIndex;
-    frmMain.cboFPS.ItemIndex      := cboDefaultFrameRate.ItemIndex;
+    frmMain.cboInputFPSSelect(NIL);
   end;
 
   VSTOptions.DrawMode := TVSTDrawMode(cboListMode.ItemIndex);
