@@ -213,6 +213,7 @@
       <actViewShotChange Hint="Abilita/disabilita i cambi di inquadratura">Cambi di inquadratura</actViewShotChange>
       <actCenterWaveform>Allinea forma d’onda al centro</actCenterWaveform>
       <actDetectSilentZones Hint="Fare clic per aggiornare l’elenco">Rileva zone di silenzio</actDetectSilentZones>
+      <actDetectDialogSegments>Rileva parti dialogate…</actDetectDialogSegments>
       <actSetAsDefaultFormat>Imposta come formato di salvataggio predefinito</actSetAsDefaultFormat>
       <actSetAsDefaultEncoding>Imposta come codifica di salvataggio predefinita</actSetAsDefaultEncoding>
       <actMediaSubSizeInc>Aumenta la dimensione del testo nel video</actMediaSubSizeInc>      
@@ -345,7 +346,7 @@
       <lblLanguage>Lingua</lblLanguage>
       <lblWebReference>Definizione online</lblWebReference>
       <lblTimeCodeMode>Modalità codice temporale</lblTimeCodeMode>
-      <lblDefaultFrameRate>Frequenza dei fotogrammi predefinita</lblDefaultFrameRate>
+      <lblDefaultFrameRate>Frequenza fotogrammi di ingresso predefinita</lblDefaultFrameRate>
       <lblDefaultFileEncoding>Codifica file predefinita</lblDefaultFileEncoding>
       <lblDefaultFileFormat>Formato file predefinito</lblDefaultFileFormat>      
       <lblAutoBackup>Backup automatico ogni (minuti)</lblAutoBackup>
@@ -356,6 +357,7 @@
       <lblMaxDurationMs>Durata max. (ms)</lblMaxDurationMs>
       <lblMaxLineCount>Conteggio max. riga</lblMaxLineCount>
       <lblShiftTimeMs>Sposta tempistiche (ms)</lblShiftTimeMs>
+      <lblDialogSegmentsDetectionThreshold>Soglia di rilevamento per le parti dialogate</lblDialogSegmentsDetectionThreshold>
       <lblSubtitlePauseMs>Intervallo min.</lblSubtitlePauseMs>
       <lblCPS>Caratteri per secondo</lblCPS>
       <lblWPM>Parole per minuto</lblWPM>      
@@ -369,24 +371,26 @@
       <lblChaining>Concatenazione (fotogrammi)</lblChaining>            
       <lblTheme>Tema</lblTheme>
       <lblListMode>Modalità elenco</lblListMode>
-	  <lblSubtitles>Sottotitoli</lblSubtitles>      
-	  <lblSubColor>Colore</lblSubColor>
-	  <lblSubBorder>Bordo</lblSubBorder>
-	  <lblSubShadow>Ombra</lblSubShadow>
-	  <lblSubBackground>Sfondo</lblSubBackground>
-	  <lblSubSize>Dimensione</lblSubSize>
-	  <lblWaveform>Forma d’onda</lblWaveform>
-	  <lblWaveColor>Colore</lblWaveColor>
-	  <lblWaveStart>Riga iniziale</lblWaveStart>
-	  <lblWaveEnd>Riga finale</lblWaveEnd>	        
+      <lblSubtitles>Sottotitoli</lblSubtitles>      
+      <lblSubColor>Colore</lblSubColor>
+      <lblSubBorder>Bordo</lblSubBorder>
+      <lblSubShadow>Ombra</lblSubShadow>
+      <lblSubBackground>Sfondo</lblSubBackground>
+      <lblSubSize>Dimensione</lblSubSize>
+      <lblWaveform>Forma d’onda</lblWaveform>
+      <lblWaveColor>Colore</lblWaveColor>
+      <lblWaveStart>Riga iniziale</lblWaveStart>
+      <lblWaveEnd>Riga finale</lblWaveEnd>	        
       <lblToolBarMain>Principale</lblToolBarMain>
       <lblToolBarEditor>Aspetto del testo</lblToolBarEditor>
       <lblToolBarVideo>Filmato</lblToolBarVideo>
       <lblToolBarWave>Forma d’onda</lblToolBarWave>
       <lblShortcutCat>Categoria</lblShortcutCat>
       <lblShortcut>Scorciatoie da tastiera</lblShortcut>      
-      <lblFFMPEG>Cartella FFmpeg</lblFFMPEG>
-      <lblSceneDetect>Cartella PySceneDetect</lblSceneDetect>
+      <lblFFMPEG>FFmpeg</lblFFMPEG>
+      <lblSceneDetect>PySceneDetect</lblSceneDetect>
+      <lblWhisperCPP>Whisper.cpp</lblWhisperCPP>
+      <lblYTDLP>YT-DLP</lblYTDLP>
       <lblSeekTime>Tempo di ricerca (ms)</lblSeekTime>
       <lblFrameStep>Intervallo fotogramma</lblFrameStep>
     </Section>
@@ -394,6 +398,7 @@
       <chkShowSplashWindow>Mostra finestra di avvio</chkShowSplashWindow>
       <chkUseOwnFileDialog>Usa finestra di dialogo di Tero per i file</chkUseOwnFileDialog>
       <chkPromptForDeleteSubtitles>Mostra un avviso quando si rimuovono sottotitoli</chkPromptForDeleteSubtitles>
+      <chkPromptForInputFPS>Mostra un avviso sui FPS prima di caricare un file</chkPromptForInputFPS> 
       <chkDotsOnSplit>Aggiungi ’…’ in corrispondenza della divisione di un sottotitolo</chkDotsOnSplit>
       <chkDrawTags>Interpreta i tag nell’elenco</chkDrawTags>
       <chkDrawErrors>Mostra gli errori nell’elenco</chkDrawErrors>
@@ -716,7 +721,9 @@
     <AskToExtractAudio>Forma d’onda dell’audio non trovata, si desidera estrarla?</AskToExtractAudio>
     <ExtractAppError>Impossibile trovate ’%s’.</ExtractAppError>
     <Extracting>Estrazione in corso…</Extracting>
-    <Transcribing>Trascrizione in corso…</Transcribing>    
+    <Transcribing>Trascrizione in corso…</Transcribing>
+    <DetectDialogSegmentsWarning>Tentando di rilevare le parti dialogate, tutti i sottotitoli in elenco saranno cancellati.</DetectDialogSegmentsWarning>    
+    <Entry>Elemento %d</Entry>    
     <libMPVError>Impossibile trovare le librerie necessarie al funzionamento del riproduttore mpv incorporato. Si prega di scaricarle.</libMPVError>
     <libMPVglError>Inizializzazione del contesto grafico GL di mpv non riuscita.</libMPVglError>
     <libMPVVersionError>Impossibile inizializzare libmpv; è probabile che sia stata installata la libreria non corretta.</libMPVVersionError>
@@ -741,6 +748,7 @@
     <FeatureNotAvailableFromURL>Funzione non disponibile per i video in Rete.</FeatureNotAvailableFromURL>
     <MultipleTracksDetected>Più tracce rilevate</MultipleTracksDetected> 
     <SelectTrackToUse>Selezionare la traccia da utilizzare:</SelectTrackToUse>
+    <SelectFPSToUse>Selezionare i FPS da utilizzare:</SelectFPSToUse>
     <WriteStatus>Scrittura in corso… %d/%d</WriteStatus>
     <ShortCutInUse>Scorciatoia attualmente in uso per ‘%s’.</ShortCutInUse>
   </CommonStrings>
