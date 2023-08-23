@@ -45,7 +45,7 @@ type
 implementation
 
 uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSystem.StrUtils,
-  UWSystem.SysUtils;
+  UWSystem.SysUtils, UWSubtitleAPI.Utils;
 
 {
 This format allows for time notation of hours, minutes, seconds and milliseconds,
@@ -238,7 +238,7 @@ begin
             Inc(i);
           end;
           Dec(i);
-          Text := HTMLTagsToTS(Text);
+          Text := HTMLTagsToTS(HTMLDecode(Text));
           x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
           Subtitles.ItemPointer[x]^.Align  := c;
           Subtitles.ItemPointer[x]^.VAlign := v;
