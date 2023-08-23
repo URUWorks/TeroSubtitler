@@ -668,7 +668,7 @@ begin
     if FromBegining then
       c := 0
     else
-      c := Range(VSTFocusedNode(frmMain.VST)+1, 0, Subtitles.Count-1);
+      c := Range(VSTFocusedNode(frmMain.VST), 0, Subtitles.Count-1);
 
     for i := c to Subtitles.Count-1 do
     begin
@@ -691,7 +691,7 @@ begin
                 else
                   s := ReplaceRegExpr(FindText, Text, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False);
 
-                SetSubtitleText(i, s, smText, False);
+                SetSubtitleText(i, s, smText, False, False, False);
               end;
               if FoundText(Translation) then
               begin
@@ -700,7 +700,7 @@ begin
                 else
                   s := ReplaceRegExpr(FindText, Translation, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False);
 
-                SetSubtitleText(i, s, smTranslation, False);
+                SetSubtitleText(i, s, smTranslation, False, False, False);
               end;
               if not ReplaceAll then Break;
             end;
