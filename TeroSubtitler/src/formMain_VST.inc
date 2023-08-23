@@ -173,10 +173,12 @@ procedure TfrmMain.VSTDrawText(Sender: TBaseVirtualTree; TargetCanvas: TCanvas;
 
 var
   TS : TTextStyle;
-  R  : TRect;
-  c  : Cardinal;
+  R : TRect;
+  c : Cardinal;
   TextHeight : Integer;
-  oldColor: TColor;
+  oldColor : TColor;
+  iArray : TIntegerDynArray;
+  i : Integer;
 
   procedure DrawCPS(const Original: Boolean);
   var
@@ -335,15 +337,48 @@ begin
          // CPL
          TS.Alignment := taRightJustify;
          TS.Layout := tlTop;
-         c := TargetCanvas.Font.Color;
-         if (etBreakLongLines in Subtitles[Node^.Index].ErrorType) then TargetCanvas.Font.Color := clRed;
-         if WorkSpace.TranslatorMode then
+         if (etBreakLongLines in Subtitles[Node^.Index].ErrorType) then
          begin
-           TargetCanvas.TextRect(R, R.Left, R.Top, GetLengthForEachLine(Subtitles[Node^.Index].Translation, sLineBreak, ''), TS);
-           TS.Alignment := taLeftJustify;
+           c := TargetCanvas.Font.Color;
+
+           if WorkSpace.TranslatorMode then
+           begin
+             iArray := GetLengthForEachLineIntArray(Subtitles[Node^.Index].Translation, sLineBreak, '');
+             for i := 0 to High(iArray) do
+             begin
+               if iArray[i] > AppOptions.Conventions.CPL then
+                 TargetCanvas.Font.Color := clRed;
+
+               TargetCanvas.TextRect(R, R.Left, R.Top, iArray[i].ToString, TS);
+               R.Top := TextHeight;
+               TargetCanvas.Font.Color := c;
+             end;
+             TS.Alignment := taLeftJustify;
+             R := CellRect;
+           end;
+
+           iArray := GetLengthForEachLineIntArray(Subtitles[Node^.Index].Text, sLineBreak, '');
+           for i := 0 to High(iArray) do
+           begin
+             if iArray[i] > AppOptions.Conventions.CPL then
+               TargetCanvas.Font.Color := clRed;
+
+             TargetCanvas.TextRect(R, R.Left, R.Top, iArray[i].ToString, TS);
+             R.Top := TextHeight;
+             TargetCanvas.Font.Color := c;
+           end;
+
+           SetLength(iArray, 0);
+         end
+         else
+         begin
+           if WorkSpace.TranslatorMode then
+           begin
+             TargetCanvas.TextRect(R, R.Left, R.Top, GetLengthForEachLine(Subtitles[Node^.Index].Translation, sLineBreak, ''), TS);
+             TS.Alignment := taLeftJustify;
+           end;
+           TargetCanvas.TextRect(R, R.Left, R.Top, GetLengthForEachLine(Subtitles[Node^.Index].Text, sLineBreak, ''), TS);
          end;
-         TargetCanvas.TextRect(R, R.Left, R.Top, GetLengthForEachLine(Subtitles[Node^.Index].Text, sLineBreak, ''), TS);
-         TargetCanvas.Font.Color := c;
        end;
   end;
 end;

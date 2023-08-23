@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, StdCtrls, SysUtils, Graphics, LazUTF8, procTypes, laz.VirtualTrees,
-  UWSubtitleAPI, UWMemo;
+  UWSubtitleAPI, UWMemo, Types;
 
 procedure CopyToClipboard(const ACut: Boolean = False);
 procedure PasteFromClipboard;
@@ -53,6 +53,7 @@ function GetSubtitleText(const Index: Integer; const SubtitleMode: TSubtitleMode
 
 function GetMaxLinesOf(Text: String; const Separator: String = sLineBreak): Integer;
 function GetLengthForEachLine(Text: String; const Separator: String = sLineBreak; const LastSeparator: String = sLineBreak): String;
+function GetLengthForEachLineIntArray(Text: String; const Separator: String = sLineBreak; const LastSeparator: String = sLineBreak): TIntegerDynArray;
 procedure SelectSubtitleAndFocusMemo(const NextSibiling: Boolean; const WaveToo: Boolean = False);
 function GetSubtitleIndexAtTime(const MSecs: Cardinal): Integer;
 function GetSubtitleTextAtTime(const MSecs: Cardinal): String;
@@ -470,6 +471,23 @@ begin
   end
   else
     Result := IntToStr(UTF8Length(Text));
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetLengthForEachLineIntArray(Text: String; const Separator: String = sLineBreak; const LastSeparator: String = sLineBreak): TIntegerDynArray;
+var
+  sArray: TStringArray;
+  i: Integer;
+begin
+  SetLength(Result, 0);
+  sArray := GetLengthForEachLine(Text, Separator, LastSeparator).Split(sLineBreak, TStringSplitOptions.ExcludeEmpty);
+  if Length(sArray) > 0 then
+  begin
+    SetLength(Result, Length(sArray));
+    for i := 0 to High(sArray) do
+      Result[i] := sArray[i].ToInteger;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
