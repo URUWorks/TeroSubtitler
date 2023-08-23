@@ -103,6 +103,19 @@ uses
 
 // -----------------------------------------------------------------------------
 
+{ Helpers }
+
+// -----------------------------------------------------------------------------
+
+function GetSuggestedFileNameForSave: String;
+begin
+  Result := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
+  if Result.IsEmpty and not frmMain.MPV.FileName.IsEmpty then
+    Result := ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '');
+end;
+
+// -----------------------------------------------------------------------------
+
 { Subtitle files }
 
 // -----------------------------------------------------------------------------
@@ -195,7 +208,11 @@ var
   VFisLoaded: Boolean;
 begin
   {$IFDEF DARWIN}
-  if not frmMain.Visible then frmMain.Show;
+  if not frmMain.Visible then
+  begin
+    frmMain.Show;
+    Application.ProcessMessages;
+  end;
   {$ENDIF}
   if not CloseSubtitle(AutoLoadVideoFile) then Exit;
 
@@ -618,7 +635,7 @@ begin
   begin
     CD := TfrmCustomFileDlg.Create(NIL);
     try
-      CD.FileName := SubtitleInfo.Text.FileName;
+      CD.FileName := GetSuggestedFileNameForSave;
       if CD.Execute(dmSave) then
       begin
         SaveSubtitle(CD.FileName, CD.Format, SubtitleMode, CD.Encoding, CD.FPS);
@@ -634,7 +651,8 @@ begin
       SD.Title  := GetCommonString('SaveFile');
       SD.Filter := Subtitles.FillDialogFilter('');
       SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
-      SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
+      SD.FileName := GetSuggestedFileNameForSave;
+
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
       if SD.Execute then
       begin
