@@ -4,8 +4,9 @@
 - fixed: HTML Codes #153
 - fixed: One-ended musical notes should count as hearing impaired text #148
 - fixed: Imported shot changes aren't always accurate #74
-- fixed: Fix Subtitles always applied even if entry is unchecked
+- fixed: Options in "Find" window are now remembered
 - fixed: Times of imported iTunes Timed Text file misinterpreted in frame mode
+- fixed: Fix Subtitles always applied even if entry is unchecked
 - fixed: Potential crash in "Fix Subtitles" 
 - added: Dialog segments detection [experimental]
 - added: Possibility to choose FPS before loading a subtitle file
