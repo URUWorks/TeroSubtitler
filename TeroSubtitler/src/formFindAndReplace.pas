@@ -118,6 +118,8 @@ end;
 procedure TfrmFindAndReplace.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
+  SaveFormSettings(Self, Format('%d,%d,%d,%d', [chkCaseSensitive.Checked.ToInteger, chkPreserveCaseOnReplace.Checked.ToInteger, chkWholeWord.Checked.ToInteger, chkRegularExpression.Checked.ToInteger]));
+
   CloseAction := caFree;
   frmFindAndReplace := NIL;
 end;
@@ -125,8 +127,24 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmFindAndReplace.FormShow(Sender: TObject);
+var
+  s: String;
+  AParamArray: TStringArray;
 begin
   CheckColorTheme(Self);
+
+  s := LoadFormSettings(Self);
+  if not s.IsEmpty then
+  begin
+    AParamArray := s.Split(',');
+    if Length(AParamArray) = 4 then
+    begin
+      chkCaseSensitive.Checked := AParamArray[0].ToBoolean;
+      chkPreserveCaseOnReplace.Checked := AParamArray[1].ToBoolean;
+      chkWholeWord.Checked := AParamArray[2].ToBoolean;
+      chkRegularExpression.Checked := AParamArray[3].ToBoolean;
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -190,7 +208,7 @@ end;
 
 procedure TfrmFindAndReplace.btnFindNextClick(Sender: TObject);
 begin
-  VSTFindNext;
+  VSTFindNext(chkWholeWord.Checked, chkRegularExpression.Checked);
   //Close;
 end;
 
@@ -198,7 +216,7 @@ end;
 
 procedure TfrmFindAndReplace.btnFindPrevClick(Sender: TObject);
 begin
-  VSTFindPrevious;
+  VSTFindPrevious(chkWholeWord.Checked, chkRegularExpression.Checked);
   //Close;
 end;
 
