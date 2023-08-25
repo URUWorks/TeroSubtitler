@@ -144,6 +144,7 @@ type
     FSearchSkip       : Integer;
     FAutoSort         : Boolean;
     FReplaceEntity    : Boolean;
+    FTag              : Byte;
     FTimeBase         : TSubtitleTimeBase;
     FFormatProperties : PFormatProperties;
     function GetCount: Integer;
@@ -233,6 +234,7 @@ type
     property ExtraInfoType: TUWSubtitleExtraInfoType read FEIType write FEIType;
     property ExtraInfo[Index: Integer]: Pointer read GetExtraInfo write SetExtraInfo;
     property Header: Pointer read FHeader write FHeader;
+    property Tag: Byte read FTag write FTag;
     property ReplaceEntities: Boolean read FReplaceEntity write FReplaceEntity;
     property TimeBase: TSubtitleTimeBase read FTimeBase write FTimeBase;
     property FormatProperties: PFormatProperties read FFormatProperties write FFormatProperties;
@@ -765,6 +767,7 @@ begin
   FHeader        := NIL;
   FAutoSort      := True;
   FReplaceEntity := True;
+  FTag           := 0;
   FTimeBase      := stbMedia;
   New(FFormatProperties);
   DefaultFormatPropertiesSettings(FFormatProperties);

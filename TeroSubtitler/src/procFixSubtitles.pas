@@ -188,9 +188,6 @@ var
   InCue, OutCue,
   ChainingMS : Integer;
   SnapAway : Boolean;
-
-  NeedClear,
-  SkipItem: Boolean;
 begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
 
@@ -205,10 +202,26 @@ begin
   try
     for i := 0 to FSubtitles.Count-1 do
     begin
-      NeedClear := True;
-      SkipItem  := False;
-
       ClearItem(FixedItem, i);
+
+      // -- Texts
+
+      // Hearing impaired
+      if etHearingImpaired in FErrors then
+      begin
+        if IsHearingImpaired(FixedItem.Text) then
+        begin
+          tmp := FixHearingImpaired(FixedItem.Text, sLineBreak);
+          if FixedItem.Text <> tmp then
+          begin
+            FixedItem.Text        := tmp;
+            FixedItem.ErrorsFixed := [etHearingImpaired];
+            Add(NewItem(FixedItem));
+          end;
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
       // Repeated subtitle
       if etRepeatedSubtitle in FErrors then
       begin
@@ -219,7 +232,125 @@ begin
         end;
       end;
 
-      ClearItem(FixedItem, i);
+      //ClearItem(FixedItem, i);
+      // Unnecessary Dots
+      if etUnnecessaryDots in FErrors then
+      begin
+        tmp := RemoveUnnecessaryDots(FixedItem.Text);
+        if FixedItem.Text <> tmp then
+        begin
+          FixedItem.Text := tmp;
+          FixedItem.ErrorsFixed := [etUnnecessaryDots];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      // Unnecessary Spaces
+      if etUnnecessarySpaces in FErrors then
+      begin
+        tmp := RemoveUnnecessarySpaces(FixedItem.Text);
+        if FixedItem.Text <> tmp then
+        begin
+          FixedItem.Text := tmp;
+          FixedItem.ErrorsFixed := [etUnnecessarySpaces];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      // Ellipses dots to single smart character
+      if etEllipsesSingleSmartCharacter in FErrors then
+      begin
+        tmp := ReplaceString(FixedItem.Text, '...', '…');
+        if FixedItem.Text <> tmp then
+        begin
+          FixedItem.Text := tmp;
+          FixedItem.ErrorsFixed := [etEllipsesSingleSmartCharacter];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      // Repeated chars
+      if etRepeatedChars in FErrors then
+      begin
+        if HasRepeatedChar(FixedItem.Text, Profile^.RepeatableChars) then
+        begin
+          tmp := FixRepeatedChar(FixedItem.Text, Profile^.RepeatableChars);
+          if FixedItem.Text <> tmp then
+          begin
+            FixedItem.Text        := tmp;
+            FixedItem.ErrorsFixed := [etRepeatedChars];
+            Add(NewItem(FixedItem));
+          end;
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      // Prohibited chars
+      if etProhibitedChars in FErrors then
+      begin
+        if HasProhibitedChars(FixedItem.Text, Profile^.ProhibitedChars) then
+        begin
+          FixedItem.ErrorsFixed := [etProhibitedChars];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      // Incomplete opening hyphen text
+      if etIncompleteHyphenText in FErrors then
+      begin
+        tmp := FixIncompleteOpenedHyphen(FixedItem.Text);
+        if FixedItem.Text <> tmp then
+        begin
+          FixedItem.Text := tmp;
+          FixedItem.ErrorsFixed := [etIncompleteHyphenText];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      // Spacing of opening hyphen (Add or Remove)
+      if etSpaceOfOpeningHyphen in FErrors then
+      begin
+        tmp := SpacingOfOpeningHyphen(FixedItem.Text, Profile^.AddHyphenSpace);
+        if FixedItem.Text <> tmp then
+        begin
+          FixedItem.Text := tmp;
+          FixedItem.ErrorsFixed := [etSpaceOfOpeningHyphen];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      // Remove spaces within brackets
+      if etRemoveSpacesWithinBrackets in FErrors then
+      begin
+        tmp := RemoveSpacesWithinBrackets(FixedItem.Text);
+        if FixedItem.Text <> tmp then
+        begin
+          FixedItem.Text := tmp;
+          FixedItem.ErrorsFixed := [etRemoveSpacesWithinBrackets];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      // Fix interrobang
+      if etFixInterrobang in FErrors then
+      begin
+        tmp := FixInterrobang(FixedItem.Text);
+        if FixedItem.Text <> tmp then
+        begin
+          FixedItem.Text := tmp;
+          FixedItem.ErrorsFixed := [etFixInterrobang];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
       // Unbreak if chars is less than X
       if etUnbreak in FErrors then
       begin
@@ -233,46 +364,7 @@ begin
         end;
       end;
 
-      ClearItem(FixedItem, i);
-      // Unnecessary Spaces
-      if etUnnecessarySpaces in FErrors then
-      begin
-        tmp := RemoveUnnecessarySpaces(FixedItem.Text);
-        if FixedItem.Text <> tmp then
-        begin
-          FixedItem.Text := tmp;
-          FixedItem.ErrorsFixed := [etUnnecessarySpaces];
-          Add(NewItem(FixedItem));
-        end;
-      end;
-
-      ClearItem(FixedItem, i);
-      // Unnecessary Dots
-      if etUnnecessaryDots in FErrors then
-      begin
-        tmp := RemoveUnnecessaryDots(FixedItem.Text);
-        if FixedItem.Text <> tmp then
-        begin
-          FixedItem.Text := tmp;
-          FixedItem.ErrorsFixed := [etUnnecessaryDots];
-          Add(NewItem(FixedItem));
-        end;
-      end;
-
-      ClearItem(FixedItem, i);
-      // Ellipses dots to single smart character
-      if etEllipsesSingleSmartCharacter in FErrors then
-      begin
-        tmp := ReplaceString(FixedItem.Text, '...', '…');
-        if FixedItem.Text <> tmp then
-        begin
-          FixedItem.Text := tmp;
-          FixedItem.ErrorsFixed := [etEllipsesSingleSmartCharacter];
-          Add(NewItem(FixedItem));
-        end;
-      end;
-
-      ClearItem(FixedItem, i);
+      //ClearItem(FixedItem, i);
       // Fix Tags
       if etFixTags in FErrors then
       begin
@@ -293,18 +385,7 @@ begin
         end;
       end;
 
-      ClearItem(FixedItem, i);
-      // Prohibited chars
-      if etProhibitedChars in FErrors then
-      begin
-        if HasProhibitedChars(FixedItem.Text, Profile^.ProhibitedChars) then
-        begin
-          FixedItem.ErrorsFixed := [etProhibitedChars];
-          Add(NewItem(FixedItem));
-        end;
-      end;
-
-      ClearItem(FixedItem, i);
+      //ClearItem(FixedItem, i);
       // Break long lines
       if etBreakLongLines in FErrors then
       begin
@@ -320,57 +401,7 @@ begin
         end;
       end;
 
-      ClearItem(FixedItem, i);
-      // Hearing impaired
-      if etHearingImpaired in FErrors then
-      begin
-        if IsHearingImpaired(FixedItem.Text) then
-        begin
-          tmp := FixHearingImpaired(FixedItem.Text, sLineBreak);
-          if FixedItem.Text <> tmp then
-          begin
-            FixedItem.Text        := tmp;
-            FixedItem.ErrorsFixed := [etHearingImpaired];
-
-            if tmp = '' then
-            begin
-              FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etEmpty];
-              SkipItem := True;
-            end;
-
-            Add(NewItem(FixedItem));
-          end;
-        end;
-      end;
-
-      ClearItem(FixedItem, i);
-      // Empty subtitle
-      if (etEmpty in FErrors) and not SkipItem then
-      begin
-        if FixedItem.Text = '' then
-        begin
-          FixedItem.ErrorsFixed := [etEmpty];
-          Add(NewItem(FixedItem));
-        end;
-      end;
-
-      ClearItem(FixedItem, i);
-      // Repeated chars
-      if etRepeatedChars in FErrors then
-      begin
-        if HasRepeatedChar(FixedItem.Text, Profile^.RepeatableChars) then
-        begin
-          tmp := FixRepeatedChar(FixedItem.Text, Profile^.RepeatableChars);
-          if FixedItem.Text <> tmp then
-          begin
-            FixedItem.Text        := tmp;
-            FixedItem.ErrorsFixed := [etRepeatedChars];
-            Add(NewItem(FixedItem));
-          end;
-        end;
-      end;
-
-      ClearItem(FixedItem, i);
+      //ClearItem(FixedItem, i);
       // OCR
       if etOCR in FErrors then
       begin
@@ -386,7 +417,20 @@ begin
         end;
       end;
 
-      ClearItem(FixedItem, i);
+      //ClearItem(FixedItem, i);
+      // Empty subtitle
+      if (etEmpty in FErrors) then
+      begin
+        if FixedItem.Text = '' then
+        begin
+          FixedItem.ErrorsFixed := [etEmpty];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      // -- Times
+
+      //ClearItem(FixedItem, i);
       // Time too short
       if etTimeTooShort in FErrors then
       begin
@@ -398,7 +442,7 @@ begin
         end;
       end;
 
-      ClearItem(FixedItem, i);
+      //ClearItem(FixedItem, i);
       // Time too long
       if etTimeTooLong in FErrors then
       begin
@@ -410,7 +454,7 @@ begin
         end;
       end;
 
-      ClearItem(FixedItem, i);
+      //ClearItem(FixedItem, i);
       // Bad Values
       if etBadValues in FErrors then
       begin
@@ -424,7 +468,7 @@ begin
         end;
       end;
 
-      ClearItem(FixedItem, i);
+      //ClearItem(FixedItem, i);
       // Overlapping
       if etOverlapping in FErrors then
       begin
@@ -453,59 +497,8 @@ begin
         end;
       end;
 
-      ClearItem(FixedItem, i);
-      // Incomplete opening hyphen text
-      if etIncompleteHyphenText in FErrors then
-      begin
-        tmp := FixIncompleteOpenedHyphen(FixedItem.Text);
-        if FixedItem.Text <> tmp then
-        begin
-          FixedItem.Text := tmp;
-          FixedItem.ErrorsFixed := [etIncompleteHyphenText];
-          Add(NewItem(FixedItem));
-        end;
-      end;
 
-      ClearItem(FixedItem, i);
-      // Spacing of opening hyphen (Add or Remove)
-      if etSpaceOfOpeningHyphen in FErrors then
-      begin
-        tmp := SpacingOfOpeningHyphen(FixedItem.Text, Profile^.AddHyphenSpace);
-        if FixedItem.Text <> tmp then
-        begin
-          FixedItem.Text := tmp;
-          FixedItem.ErrorsFixed := [etSpaceOfOpeningHyphen];
-          Add(NewItem(FixedItem));
-        end;
-      end;
-
-      ClearItem(FixedItem, i);
-      // Remove spaces within brackets
-      if etRemoveSpacesWithinBrackets in FErrors then
-      begin
-        tmp := RemoveSpacesWithinBrackets(FixedItem.Text);
-        if FixedItem.Text <> tmp then
-        begin
-          FixedItem.Text := tmp;
-          FixedItem.ErrorsFixed := [etRemoveSpacesWithinBrackets];
-          Add(NewItem(FixedItem));
-        end;
-      end;
-
-      ClearItem(FixedItem, i);
-      // Fix interrobang
-      if etFixInterrobang in FErrors then
-      begin
-        tmp := FixInterrobang(FixedItem.Text);
-        if FixedItem.Text <> tmp then
-        begin
-          FixedItem.Text := tmp;
-          FixedItem.ErrorsFixed := [etFixInterrobang];
-          Add(NewItem(FixedItem));
-        end;
-      end;
-
-      ClearItem(FixedItem, i);
+      //ClearItem(FixedItem, i);
       // Snap to shot changes
       if (etSnapToShotChanges in FErrors) and (AShotChanges <> NIL) and (Length(AShotChanges) > 0) then
       begin
@@ -567,11 +560,9 @@ begin
             FixedItem.ErrorsFixed := [etSnapToShotChanges];
 
           Add(NewItem(FixedItem));
-          NeedClear := False;
         end;
       end;
 
-      if NeedClear then ClearItem(FixedItem, i);
       // Chaining
       if (etChaining in FErrors) and (i+1 < Subtitles.Count) then
       begin

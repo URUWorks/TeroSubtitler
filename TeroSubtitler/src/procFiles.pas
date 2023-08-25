@@ -253,7 +253,9 @@ begin
       begin
         Subtitles.ConvertTimesToSMPTE(True);
         SetSMPTEMode(True);
-      end;
+      end
+      else
+        SetSMPTEMode(False);
     end
     else
     begin

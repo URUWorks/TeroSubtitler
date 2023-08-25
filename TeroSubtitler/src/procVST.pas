@@ -24,6 +24,9 @@ interface
 uses
   Classes, SysUtils, Graphics, Types, Forms, laz.VirtualTrees, procTypes;
 
+type
+  TFindMode = (fmBegin, fmCurrent, fmNext, fmBackward);
+
 function VSTUpdating(const AVST: TLazVirtualStringTree): Boolean;
 procedure VSTBeginUpdate(const AVST: TLazVirtualStringTree);
 procedure VSTEndUpdate(const AVST: TLazVirtualStringTree);
@@ -51,7 +54,7 @@ procedure VSTDeleteSubtitles(const AVST: TLazVirtualStringTree);
 procedure VSTCombineSubtitles(const AVST: TLazVirtualStringTree);
 procedure VSTDivideSubtitles(const AVST: TLazVirtualStringTree);
 
-function VSTFind(const FindText: String; const CaseSensitive: Boolean; const FromBegining: Boolean; const Backward: Boolean = False; const Replace: Boolean = False; const NewText: String = ''; const ReplaceAll: Boolean = False; const CasePreserve: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False): Boolean;
+function VSTFind(const FindText: String; const CaseSensitive: Boolean; const FindMode: TFindMode; const Replace: Boolean = False; const NewText: String = ''; const ReplaceAll: Boolean = False; const CasePreserve: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False): Boolean;
 procedure VSTFindPrevious;
 procedure VSTFindNext;
 procedure VSTDoLoop(const AVST: TLazVirtualStringTree; Proc: TVSTDoLoopProc; const Selection: TVSTDoLoopSelection = dlSelected; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
@@ -608,7 +611,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function VSTFind(const FindText: String; const CaseSensitive: Boolean; const FromBegining: Boolean; const Backward: Boolean = False; const Replace: Boolean = False; const NewText: String = ''; const ReplaceAll: Boolean = False; const CasePreserve: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False): Boolean;
+function VSTFind(const FindText: String; const CaseSensitive: Boolean; const FindMode: TFindMode; const Replace: Boolean = False; const NewText: String = ''; const ReplaceAll: Boolean = False; const CasePreserve: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False): Boolean;
 
   function FoundText(const S: String): Boolean;
   var
@@ -646,7 +649,7 @@ begin
 
   if Subtitles.Count > 0 then
   begin
-    if Backward then
+    if FindMode = fmBackward then
     begin
       for i := (VSTFocusedNode(frmMain.VST)-1) downto 0 do
       begin
@@ -665,10 +668,16 @@ begin
       Exit;
     end;
 
-    if FromBegining then
+    if FindMode = fmBegin then
       c := 0
     else
-      c := Range(VSTFocusedNode(frmMain.VST), 0, Subtitles.Count-1);
+    begin
+      i := VSTFocusedNode(frmMain.VST);
+      if FindMode = fmNext then
+        Inc(i);
+
+      c := Range(i, 0, Subtitles.Count-1);
+    end;
 
     for i := c to Subtitles.Count-1 do
     begin
@@ -727,7 +736,7 @@ end;
 procedure VSTFindPrevious;
 begin
   with AppOptions do
-    if TextToFind <> '' then VSTFind(TextToFind, False, False, True);
+    if TextToFind <> '' then VSTFind(TextToFind, False, fmBackward);
 end;
 
 // -----------------------------------------------------------------------------
@@ -735,7 +744,7 @@ end;
 procedure VSTFindNext;
 begin
   with AppOptions do
-    if TextToFind <> '' then VSTFind(TextToFind, False, False);
+    if TextToFind <> '' then VSTFind(TextToFind, False, fmNext);
 end;
 
 // -----------------------------------------------------------------------------

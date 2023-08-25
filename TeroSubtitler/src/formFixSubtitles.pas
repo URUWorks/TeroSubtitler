@@ -418,6 +418,7 @@ begin
       end;
 
       UndoInstance.IncrementUndoGroup;
+      SubtitleChanged(True, False);
       DoAutoCheckErrors;
       UpdateValues(True);
     finally

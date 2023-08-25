@@ -81,6 +81,20 @@ uses procVST, procWorkspace, procConfig, formMain;
 
 // -----------------------------------------------------------------------------
 
+{ Helpers }
+
+// -----------------------------------------------------------------------------
+
+function FindModeFromBoolean(const AFromBegining: Boolean): TFindMode;
+begin
+  if AFromBegining then
+    Result := fmBegin
+  else
+    Result := fmCurrent;
+end;
+
+// -----------------------------------------------------------------------------
+
 { TfrmFindAndReplace }
 
 // -----------------------------------------------------------------------------
@@ -166,10 +180,10 @@ end;
 
 procedure TfrmFindAndReplace.btnFindClick(Sender: TObject);
 begin
-  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, True, False,
-    False, '', False, False, chkWholeWord.Checked, chkRegularExpression.Checked);
+  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, fmBegin, False, '',
+    False, False, chkWholeWord.Checked, chkRegularExpression.Checked);
 
-  Close;
+  //Close;
 end;
 
 // -----------------------------------------------------------------------------
@@ -177,7 +191,7 @@ end;
 procedure TfrmFindAndReplace.btnFindNextClick(Sender: TObject);
 begin
   VSTFindNext;
-  Close;
+  //Close;
 end;
 
 // -----------------------------------------------------------------------------
@@ -185,14 +199,14 @@ end;
 procedure TfrmFindAndReplace.btnFindPrevClick(Sender: TObject);
 begin
   VSTFindPrevious;
-  Close;
+  //Close;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmFindAndReplace.btnReplaceAllClick(Sender: TObject);
 begin
-  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, rbnAllTheSubtitles.Checked, False,
+  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, FindModeFromBoolean(rbnAllTheSubtitles.Checked),
     True, mmoReplaceWith.Text, True, chkPreserveCaseOnReplace.Checked, chkWholeWord.Checked, chkRegularExpression.Checked);
 
   Close;
@@ -202,10 +216,10 @@ end;
 
 procedure TfrmFindAndReplace.btnReplaceClick(Sender: TObject);
 begin
-  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, rbnAllTheSubtitles.Checked, False,
+  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, FindModeFromBoolean(rbnAllTheSubtitles.Checked),
     True, mmoReplaceWith.Text, False, chkPreserveCaseOnReplace.Checked, chkRegularExpression.Checked);
 
-  Close;
+  //Close;
 end;
 
 // -----------------------------------------------------------------------------

@@ -43,7 +43,7 @@ function PrepareSSAStyleString: AnsiString;
 
 implementation
 
-uses MPVPlayer, procConfig, UWSystem.Encoding;
+uses MPVPlayer, procConfig, UWSystem.Encoding, UWSystem.SysUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -249,12 +249,19 @@ begin
   AFPS      := Workspace.FPS.OutputFPS;
   AEncoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID);
 
-  if Workspace.WorkMode = wmTime then //if IsInteger(Workspace.FPS.OutputFPS) then
+  if Workspace.WorkMode = wmTime then
     Subtitles.TimeBase := stbMedia
   else
-    Subtitles.TimeBase := stbSMPTE;
+  begin
+    if IsInteger(Subtitles.FrameRate) then
+      Subtitles.TimeBase := stbMedia
+    else
+      Subtitles.TimeBase := stbSMPTE;
+  end;
 
+  Subtitles.Tag := 1;
   Result := Subtitles.SaveToFile(MPVTempSubFileName, AFPS, AEncoding, sfAdvancedSubStationAlpha, smText);
+  Subtitles.Tag := 0;
 end;
 
 // -----------------------------------------------------------------------------
