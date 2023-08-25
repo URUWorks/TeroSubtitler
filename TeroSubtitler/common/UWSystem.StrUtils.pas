@@ -134,7 +134,7 @@ begin
   BuffRes := SearchBuf(Buffer, BuffLen, 0, BuffLen, AWord, Options);
 
   if BuffRes <> NIL then
-    Result  := String(BuffRes);
+    Result := String(BuffRes);
 end;
 
 // -----------------------------------------------------------------------------
