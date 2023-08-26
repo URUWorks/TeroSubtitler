@@ -8,6 +8,7 @@
 - fixed: Times of imported iTunes Timed Text file misinterpreted in frame mode
 - fixed: Fix Subtitles always applied even if entry is unchecked
 - fixed: Potential crash in "Fix Subtitles" 
+- added: Display Actor on Preview
 - added: Dialog segments detection [experimental]
 - added: Possibility to choose FPS before loading a subtitle file
 - added: External tools root [settings]
