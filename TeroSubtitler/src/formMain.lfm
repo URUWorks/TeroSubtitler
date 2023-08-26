@@ -1602,6 +1602,13 @@ object frmMain: TfrmMain
       object Separator7: TMenuItem
         Caption = '-'
       end
+      object MenuItem176: TMenuItem
+        Action = actShowActorOnPreview
+        AutoCheck = True
+      end
+      object Separator44: TMenuItem
+        Caption = '-'
+      end
       object MenuItem141: TMenuItem
         Action = actCenterWaveform
         AutoCheck = True
@@ -2729,42 +2736,6 @@ object frmMain: TfrmMain
       Caption = 'Modify selection...'
       OnExecute = actModifySelectionExecute
     end
-    object actShowColumnNumber: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Number/GAP'
-      OnExecute = actShowColumnNumberExecute
-    end
-    object actShowColumnTimes: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Times'
-      OnExecute = actShowColumnTimesExecute
-    end
-    object actShowColumnDuration: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Duration'
-      OnExecute = actShowColumnDurationExecute
-    end
-    object actShowColumnCPS: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Characters per second'
-      OnExecute = actShowColumnCPSExecute
-    end
-    object actShowColumnWPM: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Words per minute'
-      OnExecute = actShowColumnWPMExecute
-    end
-    object actShowColumnCPL: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Characters per line'
-      OnExecute = actShowColumnCPLExecute
-    end
     object actHelp: TAction
       Category = 'Help'
       Caption = 'Help'
@@ -3197,42 +3168,6 @@ object frmMain: TfrmMain
       ImageIndex = 78
       OnExecute = actActorExecute
     end
-    object actShowColumnStyleAndActor: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Style/Actor'
-      OnExecute = actShowColumnStyleAndActorExecute
-    end
-    object actSwapWorkspace: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Swap video layout'
-      OnExecute = actSwapWorkspaceExecute
-    end
-    object actShowToolbarMain: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Main'
-      OnExecute = actShowToolbarMainExecute
-    end
-    object actShowToolbarFPS: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'FPS'
-      OnExecute = actShowToolbarFPSExecute
-    end
-    object actShowToolbarFormat: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Format'
-      OnExecute = actShowToolbarFormatExecute
-    end
-    object actShowToolbarEncoding: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Encoding'
-      OnExecute = actShowToolbarEncodingExecute
-    end
     object actMediaMoveSubtitle: TAction
       Tag = 4
       Category = 'Video'
@@ -3475,6 +3410,85 @@ object frmMain: TfrmMain
       Category = 'Waveform'
       Caption = 'Detect dialog segments...'
       OnExecute = actDetectDialogSegmentsExecute
+    end
+    object actShowActorOnPreview: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Display Actor on Preview'
+      ImageIndex = 78
+      OnExecute = actShowActorOnPreviewExecute
+    end
+    object actShowColumnNumber: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Number/GAP'
+      OnExecute = actShowColumnNumberExecute
+    end
+    object actShowColumnTimes: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Times'
+      OnExecute = actShowColumnTimesExecute
+    end
+    object actShowColumnDuration: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Duration'
+      OnExecute = actShowColumnDurationExecute
+    end
+    object actShowColumnCPS: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Characters per second'
+      OnExecute = actShowColumnCPSExecute
+    end
+    object actShowColumnWPM: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Words per minute'
+      OnExecute = actShowColumnWPMExecute
+    end
+    object actShowColumnCPL: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Characters per line'
+      OnExecute = actShowColumnCPLExecute
+    end
+    object actShowColumnStyleAndActor: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Style/Actor'
+      OnExecute = actShowColumnStyleAndActorExecute
+    end
+    object actSwapWorkspace: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Swap video layout'
+      OnExecute = actSwapWorkspaceExecute
+    end
+    object actShowToolbarMain: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Main'
+      OnExecute = actShowToolbarMainExecute
+    end
+    object actShowToolbarFPS: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'FPS'
+      OnExecute = actShowToolbarFPSExecute
+    end
+    object actShowToolbarFormat: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Format'
+      OnExecute = actShowToolbarFormatExecute
+    end
+    object actShowToolbarEncoding: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Encoding'
+      OnExecute = actShowToolbarEncodingExecute
     end
   end
   object popDropInsert: TPopupMenu

@@ -293,6 +293,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actShowActorOnPreviewExecute(Sender: TObject);
+begin
+  //
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actPreviousSubtitleExecute(Sender: TObject);
 begin
   SelectSubtitleAndFocusMemo(False);

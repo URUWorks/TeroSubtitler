@@ -473,6 +473,7 @@ begin
         SubtitleToShow := TSubtitleMode(GetValue('SubtitleToShow', Integer(SubtitleToShow)));
         actMediaAutoScroll.Checked := GetValue('UpdateListOnPreview', actMediaAutoScroll.Checked);
         actMediaChangePlayRate.Checked := GetValue('MediaChangePlayRate', actMediaChangePlayRate.Checked);
+        actShowActorOnPreview.Checked := GetValue('ShowActorOnPreview', actShowActorOnPreview.Checked);
         TextBorderColor := GetValue('TextBorderColor', TextBorderColor);
         TextColor := GetValue('TextColor', TextColor);
         TextShadowColor := GetValue('TextShadowColor', TextShadowColor);
@@ -768,6 +769,7 @@ begin
         SetValue('SubtitleToShow', Integer(SubtitleToShow));
         SetValue('UpdateListOnPreview', actMediaAutoScroll.Checked);
         SetValue('MediaChangePlayRate', actMediaChangePlayRate.Checked);
+        SetValue('ShowActorOnPreview', actShowActorOnPreview.Checked);
         SetValue('TextBorderColor', TextBorderColor);
         SetValue('TextColor', TextColor);
         SetValue('TextShadowColor', TextShadowColor);

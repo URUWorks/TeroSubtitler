@@ -132,6 +132,7 @@
       <actSetAutomaticDuration>Set automatic duration</actSetAutomaticDuration>
       <actSetDefaultGap Hint="only if the gap is too short">Set default gap</actSetDefaultGap>
       <actRoundTimes>Round times</actRoundTimes>
+      <actShowActorOnPreview>Display Actor on Preview</actShowActorOnPreview>      
       <actSwapTexts>Swap text</actSwapTexts>
       <actShowColumnNumber>Number/Gap</actShowColumnNumber>
       <actShowColumnTimes>Times</actShowColumnTimes>

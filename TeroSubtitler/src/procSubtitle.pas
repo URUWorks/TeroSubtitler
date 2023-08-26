@@ -584,6 +584,9 @@ begin
         end;
       end;
 
+      if frmMain.actShowActorOnPreview.Checked and not Actor.IsEmpty then
+        Result := '[' + Actor + '] ' + Result;
+
       if not s.IsEmpty then
         Result := s + Result + '{\an0}';
     end;

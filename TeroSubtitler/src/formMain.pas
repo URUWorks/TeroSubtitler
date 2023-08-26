@@ -73,6 +73,7 @@ type
     actActor: TAction;
     actExportCustomImageFormat: TAction;
     actDetectDialogSegments: TAction;
+    actShowActorOnPreview: TAction;
     actRoundTimes: TAction;
     actJumpToNextShotChange: TAction;
     actJumpToPrevShotChange: TAction;
@@ -299,6 +300,7 @@ type
     MenuItem173: TMenuItem;
     MenuItem174: TMenuItem;
     MenuItem175: TMenuItem;
+    MenuItem176: TMenuItem;
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
     mnuFormatProperties: TMenuItem;
@@ -489,6 +491,7 @@ type
     Separator41: TMenuItem;
     Separator42: TMenuItem;
     Separator43: TMenuItem;
+    Separator44: TMenuItem;
     Separator46: TMenuItem;
     mnuHelpSeparator: TMenuItem;
     Separator47: TMenuItem;
@@ -762,6 +765,7 @@ type
     procedure actTimeModeExecute(Sender: TObject);
     procedure actUnDockVideoExecute(Sender: TObject);
     procedure actUnDockWaveformExecute(Sender: TObject);
+    procedure actShowActorOnPreviewExecute(Sender: TObject);
     procedure actPreviousSubtitleExecute(Sender: TObject);
     procedure actNextSubtitleExecute(Sender: TObject);
     procedure actFontBoldExecute(Sender: TObject);
