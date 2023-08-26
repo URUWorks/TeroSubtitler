@@ -55,8 +55,8 @@ procedure VSTCombineSubtitles(const AVST: TLazVirtualStringTree);
 procedure VSTDivideSubtitles(const AVST: TLazVirtualStringTree);
 
 function VSTFind(const FindText: String; const CaseSensitive: Boolean; const FindMode: TFindMode; const Replace: Boolean = False; const NewText: String = ''; const ReplaceAll: Boolean = False; const CasePreserve: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False): Boolean;
-procedure VSTFindPrevious(const WholeWord: Boolean = False; const RE: Boolean = False);
-procedure VSTFindNext(const WholeWord: Boolean = False; const RE: Boolean = False);
+procedure VSTFindPrevious(const CaseSensitive: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False);
+procedure VSTFindNext(const CaseSensitive: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False);
 procedure VSTDoLoop(const AVST: TLazVirtualStringTree; Proc: TVSTDoLoopProc; const Selection: TVSTDoLoopSelection = dlSelected; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
 procedure VSTMoveSubtitle(const AVST: TLazVirtualStringTree; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
 
@@ -733,18 +733,18 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure VSTFindPrevious(const WholeWord: Boolean = False; const RE: Boolean = False);
+procedure VSTFindPrevious(const CaseSensitive: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False);
 begin
   with AppOptions do
-    if TextToFind <> '' then VSTFind(TextToFind, False, fmBackward, False, '', False, False, WholeWord, RE);
+    if TextToFind <> '' then VSTFind(TextToFind, CaseSensitive, fmBackward, False, '', False, False, WholeWord, RE);
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure VSTFindNext(const WholeWord: Boolean = False; const RE: Boolean = False);
+procedure VSTFindNext(const CaseSensitive: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False);
 begin
   with AppOptions do
-    if TextToFind <> '' then VSTFind(TextToFind, False, fmNext, False, '', False, False, WholeWord, RE);
+    if TextToFind <> '' then VSTFind(TextToFind, CaseSensitive, fmNext, False, '', False, False, WholeWord, RE);
 end;
 
 // -----------------------------------------------------------------------------

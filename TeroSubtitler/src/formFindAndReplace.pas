@@ -208,7 +208,7 @@ end;
 
 procedure TfrmFindAndReplace.btnFindNextClick(Sender: TObject);
 begin
-  VSTFindNext(chkWholeWord.Checked, chkRegularExpression.Checked);
+  VSTFindNext(chkCaseSensitive.Checked, chkWholeWord.Checked, chkRegularExpression.Checked);
   //Close;
 end;
 
@@ -216,7 +216,7 @@ end;
 
 procedure TfrmFindAndReplace.btnFindPrevClick(Sender: TObject);
 begin
-  VSTFindPrevious(chkWholeWord.Checked, chkRegularExpression.Checked);
+  VSTFindPrevious(chkCaseSensitive.Checked, chkWholeWord.Checked, chkRegularExpression.Checked);
   //Close;
 end;
 
