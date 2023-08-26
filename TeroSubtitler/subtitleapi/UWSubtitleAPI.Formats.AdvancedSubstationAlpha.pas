@@ -106,7 +106,7 @@ var
   i, a        : Integer;
   InitialTime : Integer;
   FinalTime   : Integer;
-  Text        : String;
+  Text, Actor : String;
 begin
   Result := False;
   try
@@ -123,10 +123,14 @@ begin
         if (InitialTime >= 0) and (FinalTime > 0) then
         begin
           Text := SubtitleFile[i];
-          for a := 1 to 9 do Delete(Text, 1, Pos(',', Text));
+          for a := 1 to 4 do Delete(Text, 1, Pos(',', Text));
+          Actor := Copy(Text, 1, Pos(',', Text)-1);
+          for a := 1 to 5 do Delete(Text, 1, Pos(',', Text));
+
           Text := ReplaceString(Trim(Text), '\N', LineEnding);
 
-          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+          a := Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+          Subtitles.ItemPointer[a]^.Actor := Actor;
         end;
       end;
       Inc(i);
@@ -201,7 +205,7 @@ begin
     if not s.IsEmpty then
       Text := s + Text + '{\an0}';
 
-    StringList.Add('Dialogue: 0,' + TimeToString(Subtitles.InitialTime[i], 'h:mm:ss.zz') + ',' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.FinalTime[i], Subtitles.FinalTime[i] - 1), 'h:mm:ss.zz') + ',Default,,0000,0000,0000,,' + Text, False);
+    StringList.Add('Dialogue: 0,' + TimeToString(Subtitles.InitialTime[i], 'h:mm:ss.zz') + ',' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.FinalTime[i], Subtitles.FinalTime[i] - 1), 'h:mm:ss.zz') + ',Default,' + Subtitles[i].Actor + ',0000,0000,0000,,' + Text, False);
   end;
 
   try
