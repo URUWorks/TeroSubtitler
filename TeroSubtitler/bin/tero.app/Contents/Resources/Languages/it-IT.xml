@@ -700,7 +700,7 @@
     <SaveFile>Salva file</SaveFile>  
     <AllSupportedFiles>Tutti i file supportati</AllSupportedFiles>
     <ProjectFile>Progetto di traduzione di sottotitoli</ProjectFile>
-    <UnableToLoad>Errore nel caricamento del file: format non riconosciuto.</UnableToLoad>
+    <UnableToLoad>Errore nel caricamento del file: formato non riconosciuto.</UnableToLoad>
     <FileNotFound>File non trovato.</FileNotFound>
     <SaveSubtitleError>Errore nel tentativo di salvataggio del file.</SaveSubtitleError>
     <FileChanged>Il file non è stato salvato.</FileChanged>
