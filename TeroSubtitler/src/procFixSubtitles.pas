@@ -739,7 +739,7 @@ begin
     // Pause too short *
     if etPauseTooShort in ErrorsToCheck then
     begin
-      if (Index >= 0) and (Index < Subtitles.Count-1) and (Options.MinPause > 0) and (Subtitles.Pause[Index] < GetCorrectTime(Options.MinPause, Options.PauseInFrames)) then
+      if (Index >= 0) and (Index < Subtitles.Count-1) and (Options.MinPause > 0) and (GetCorrectPause(Index) < GetCorrectTime(Options.MinPause, Options.PauseInFrames)) then
         Result := Result + [etPauseTooShort];
     end;
 

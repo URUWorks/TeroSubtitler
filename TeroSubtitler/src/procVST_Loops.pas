@@ -374,7 +374,7 @@ begin
     NewTime := Subtitles[Index].InitialTime;
 
   if NewTime <> Subtitles[Index].InitialTime then
-    SetSubtitleTime(Index, NewTime, frmMain.tedInitial.Tag);
+    SetSubtitleTime(Index, NewTime, frmMain.tedInitial.Tag, False, False);
 end;
 
 // -----------------------------------------------------------------------------

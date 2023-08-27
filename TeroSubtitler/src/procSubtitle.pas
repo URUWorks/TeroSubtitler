@@ -44,6 +44,7 @@ procedure SetSubtitleTexts(const Index: Integer; const Text: String; const Trans
 procedure SetSubtitleValues(const Index: Integer; const AInitialTime, AFinalTime: Integer; const Text: String; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
 
 function GetCorrectTime(const ATime: Integer; AIsFrames: Boolean): Integer;
+function GetCorrectPause(const AIndex: Integer): Integer;
 function GetTimeStr(const Time: Integer; const Trim: Boolean = False): String;
 function GetInitialTimeStr(const Index: Integer; const Trim: Boolean = False): String;
 function GetFinalTimeStr(const Index: Integer; const Trim: Boolean = False): String;
@@ -371,6 +372,21 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function GetCorrectPause(const AIndex: Integer): Integer;
+var
+  it, ft: Integer;
+begin
+  if Workspace.WorkMode = wmTime then
+    Result := Subtitles.Pause[AIndex]
+  else
+  begin
+    RoundFramesValue(Subtitles[AIndex+1].InitialTime, Subtitles[AIndex].FinalTime, Workspace.FPS.OutputFPS, it, ft);
+    Result := it-ft;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetTimeStr(const Time: Integer; const Trim: Boolean = False): String;
 begin
   if Workspace.WorkMode = wmTime then
@@ -398,8 +414,16 @@ end;
 // -----------------------------------------------------------------------------
 
 function GetDurationTimeStr(const Index: Integer; const Trim: Boolean = False): String;
+var
+  it, ft: Integer;
 begin
-  Result := GetTimeStr(Subtitles.Duration[Index], Trim);
+  if Workspace.WorkMode = wmTime then
+    Result := GetTimeStr(Subtitles.Duration[Index], Trim)
+  else
+  begin
+    RoundFramesValue(Subtitles[Index].InitialTime, Subtitles[Index].FinalTime, Workspace.FPS.OutputFPS, it, ft);
+    Result := GetTimeStr(ft-it, Trim)
+  end;
 end;
 
 // -----------------------------------------------------------------------------
