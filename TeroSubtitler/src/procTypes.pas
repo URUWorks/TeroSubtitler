@@ -305,6 +305,7 @@ type
     AutoCheckErrors        : Boolean;
     AskForDeleteLines      : Boolean;
     AskForInputFPS         : Boolean;
+    CheckErrorsBeforeSave  : Boolean;
     TextToFind             : String;
     LastUnicodeChar        : String;
     WebSearchURL           : String;

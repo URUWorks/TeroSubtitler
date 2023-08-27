@@ -51,8 +51,7 @@ function DoQualityCheck(const AProfileName: String; const AProfiles: TProfiles; 
 implementation
 
 uses
-  procTypes, procSubtitle, UWSystem.StrUtils,
-  UWSystem.TimeUtils;
+  procTypes, procSubtitle, UWSystem.StrUtils, UWSystem.TimeUtils;
 
 // -----------------------------------------------------------------------------
 

@@ -51,6 +51,7 @@ type
     cboDefaultFrameRate: TComboBox;
     cboDefaultFileEncoding: TComboBox;
     chkPromptForInputFPS: TUWCheckBox;
+    chkPromptForSaveWithErrors: TUWCheckBox;
     chkSubtitleHandleByMPV: TUWCheckBox;
     chkSubBackground: TCheckBox;
     chkDotsOnSplit: TUWCheckBox;
@@ -398,6 +399,7 @@ begin
     chkDrawWaveformGAP.Checked          := frmMain.WAVE.DrawGAP;
     chkPromptForDeleteSubtitles.Checked := AskForDeleteLines;
     chkPromptForInputFPS.Checked        := AskForInputFPS;
+    chkPromptForSaveWithErrors.Checked  := CheckErrorsBeforeSave;
 
     cboTheme.ItemIndex := Integer(ColorThemeInstance.ColorMode);
   end;
@@ -527,6 +529,7 @@ begin
     frmMain.mmoTranslation.CPSBar.Visible := chkShowCPSBar.Checked;
     AskForDeleteLines := chkPromptForDeleteSubtitles.Checked;
     AskForInputFPS    := chkPromptForInputFPS.Checked;
+    CheckErrorsBeforeSave := chkPromptForSaveWithErrors.Checked;
   end;
 
   with MPVOptions do

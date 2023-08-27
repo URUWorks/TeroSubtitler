@@ -268,16 +268,17 @@ begin
     ExpandChar           := 40;
     ExpandLen            := 1000;
 
-    ShowWelcomeAtStartup := True;
-    UseOwnFileDialog     := False;
-    AutoCheckErrors      := True;
-    AskForDeleteLines    := True;
-    AskForInputFPS       := False;
-    TextToFind           := '';
-    WebSearchURL         := URL_WordReference;
-    Language             := GetOSLanguage;
-    HunspellLanguage     := 'en_US';
-    ShortCutPreset       := 'Tero.key';
+    ShowWelcomeAtStartup  := True;
+    UseOwnFileDialog      := False;
+    AutoCheckErrors       := True;
+    AskForDeleteLines     := True;
+    AskForInputFPS        := False;
+    CheckErrorsBeforeSave := False;
+    TextToFind            := '';
+    WebSearchURL          := URL_WordReference;
+    Language              := GetOSLanguage;
+    HunspellLanguage      := 'en_US';
+    ShortCutPreset        := 'Tero.key';
     // Our FormatSettings
     FormatSettings       := DefaultFormatSettings;
     FormatSettings.DecimalSeparator  := '.';
@@ -390,6 +391,7 @@ begin
       UseOwnFileDialog := GetValue('UseOwnFileDialog', UseOwnFileDialog);
       AskForDeleteLines := GetValue('AskForDeleteLines', AskForDeleteLines);
       AskForInputFPS := GetValue('AskForInputFPS', AskForInputFPS);
+      CheckErrorsBeforeSave := GetValue('CheckErrorsBeforeSave', CheckErrorsBeforeSave);
       WebSearchURL := GetValue('WebSearchURL', WebSearchURL);
       TextToFind := GetValue('TextToFind', TextToFind);
       CommonErrors := TSubtitleErrorTypeSet(GetValue('CommonErrors', Integer(CommonErrors)));
@@ -696,6 +698,7 @@ begin
       SetValue('UseOwnFileDialog', UseOwnFileDialog);
       SetValue('AskForDeleteLines', AskForDeleteLines);
       SetValue('AskForInputFPS', AskForInputFPS);
+      SetValue('CheckErrorsBeforeSave', CheckErrorsBeforeSave);
       SetValue('WebSearchURL', WebSearchURL);
       SetValue('TextToFind', TextToFind);
       SetValue('CommonErrors', Integer(CommonErrors));

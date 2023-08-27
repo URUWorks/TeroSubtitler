@@ -208,19 +208,7 @@ object frmSettings: TfrmSettings
       TabOrder = 11
     end
     object chkDrawTags: TUWCheckBox
-      AnchorSideTop.Control = chkPromptForInputFPS
-      AnchorSideTop.Side = asrBottom
-      Left = 0
-      Height = 19
-      Top = 380
-      Width = 18
-      AutoSize = False
-      BorderSpacing.Top = 2
-      Caption = 'Draw tags'
-      TabOrder = 13
-    end
-    object chkDrawErrors: TUWCheckBox
-      AnchorSideTop.Control = chkDrawTags
+      AnchorSideTop.Control = chkPromptForSaveWithErrors
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 19
@@ -228,8 +216,20 @@ object frmSettings: TfrmSettings
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
-      Caption = 'Draw errors'
+      Caption = 'Draw tags'
       TabOrder = 14
+    end
+    object chkDrawErrors: TUWCheckBox
+      AnchorSideTop.Control = chkDrawTags
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 19
+      Top = 422
+      Width = 18
+      AutoSize = False
+      BorderSpacing.Top = 2
+      Caption = 'Draw errors'
+      TabOrder = 15
     end
     object lblShiftTimeMs: TLabel
       Left = 0
@@ -289,24 +289,24 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 19
-      Top = 422
+      Top = 443
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Show GAP in waveform'
-      TabOrder = 15
+      TabOrder = 16
     end
     object chkShowCPSBar: TUWCheckBox
       AnchorSideTop.Control = chkDrawWaveformGAP
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 19
-      Top = 443
+      Top = 464
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Show CPS bar'
-      TabOrder = 16
+      TabOrder = 17
     end
     object chkPromptForInputFPS: TUWCheckBox
       AnchorSideTop.Control = chkPromptForDeleteSubtitles
@@ -340,6 +340,18 @@ object frmSettings: TfrmSettings
       MinValue = 1
       TabOrder = 7
       Value = 60
+    end
+    object chkPromptForSaveWithErrors: TUWCheckBox
+      AnchorSideTop.Control = chkPromptForInputFPS
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 19
+      Top = 380
+      Width = 18
+      AutoSize = False
+      BorderSpacing.Top = 2
+      Caption = 'Prompt for save with errors'
+      TabOrder = 13
     end
   end
   object lyoConventions: TUWLayout

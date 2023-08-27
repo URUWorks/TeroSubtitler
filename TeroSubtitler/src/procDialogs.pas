@@ -38,6 +38,7 @@ procedure ShowMessageDialog(const AMessage: String; const ACaption: String = '')
 
 function CustomQuestionDialog(const ASectionName, Title, Caption: String; const AButtons: TCustomDlgButtons = []): Integer;
 function MsgSaveSubtitle(FileName: String; const ASubtitleMode: TSubtitleMode = smText): Integer;
+function MsgSaveWithErrors: Integer;
 function MsgDeleteFiles: Integer;
 function MsgFolderNotEmpty: Integer;
 function MsgExportTextOnlyFormat: Integer;
@@ -139,6 +140,13 @@ begin
   finally
     FreeAndNil(sl);
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function MsgSaveWithErrors: Integer;
+begin
+  Result := CustomQuestionDialog('CommonStrings', 'SubtitleHasErrorsToFix', 'ContinueAnyway', [dbYes, dbNo]);
 end;
 
 // -----------------------------------------------------------------------------

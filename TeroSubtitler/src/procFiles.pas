@@ -100,7 +100,7 @@ uses
   procConfig, procDialogs, procWorkspace, procVST, procSubtitle, procUndo,
   UWSystem.Encoding, formCustomFileDlg, UWSystem.XMLLang, UWSystem.SysUtils,
   Forms, procMRU, UWSystem.StrUtils, procForms, procProjectFile,
-  formCustomSelectDlg, LCLIntf, Base64
+  formCustomSelectDlg, procFixSubtitles, LCLIntf, Base64
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -361,7 +361,7 @@ begin
   _FPS := AFPS;
   if _FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
   _Encoding := AEncoding;
-  if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
+  if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
 
   if Workspace.SMPTE then
     Subtitles.TimeBase := stbSMPTE
@@ -637,6 +637,10 @@ var
   SD : TSaveDialog;
   CD : TfrmCustomFileDlg;
 begin
+  if AppOptions.CheckErrorsBeforeSave and NeedToCheckErrors(Subtitles) then
+    if MsgSaveWithErrors = mrNo then
+      Exit;
+
   if AppOptions.UseOwnFileDialog then
   begin
     CD := TfrmCustomFileDlg.Create(NIL);
@@ -1103,13 +1107,15 @@ const HTMLFormat: String =
   '<html lang="en">' + sLineBreak +
   '  <head>' + sLineBreak +
   '    <meta charset="utf-8">' + sLineBreak +
-  '    <title>Tero Subtitler (Web Preview)</title>' + sLineBreak +
+  '    <title>' + ProgramName + ' (Web Preview)</title>' + sLineBreak +
   '  </head>' + sLineBreak +
-  '  <body>' + sLineBreak +
-  '    <video controls preload="metadata">' + sLineBreak +
-  '      <source src="[VIDEO]" type ="video/[EXT]" />' + sLineBreak +
-  '      <track label="English" kind="subtitles" srclang="en" src="data:text/vtt;base64, [BASE64]" default>' + sLineBreak +
-  '    </video>' + sLineBreak +
+  '  <body style="background-color:Black;">' + sLineBreak +
+  '    <center>' + sLineBreak +
+  '      <video controls preload="metadata">' + sLineBreak +
+  '        <source src="file://[VIDEO]" type="video/[EXT]">' + sLineBreak +
+  '        <track label="' + ProgramName + '" kind="subtitles" srclang="en" src="data:text/vtt;base64, [BASE64]" default>' + sLineBreak +
+  '      </video>' + sLineBreak +
+  '    </center>' + sLineBreak +
   '  </body>' + sLineBreak +
   '</html>';
 
@@ -1139,16 +1145,15 @@ begin
 
     ts := TStringList.Create;
     try
-      ts.Text  := HTMLFormat;
-      SubText  := EncodeStringBase64(Subtitles.SaveToString(Workspace.FPS.OutputFPS, NIL, sfWebVTT, smText));
-
+      ts.Text := HTMLFormat;
+      SubText := EncodeStringBase64(Subtitles.SaveToString(Workspace.FPS.OutputFPS, NIL, sfWebVTT, smText));
       Delete(VideoExt, 1, 1);
-      ts.Text := ts.Text.Replace('[VIDEO]', 'file://' + frmMain.MPV.FileName);
+      ts.Text := ts.Text.Replace('[VIDEO]', frmMain.MPV.FileName);
       ts.Text := ts.Text.Replace('[EXT]', VideoExt);
       ts.Text := ts.Text.Replace('[BASE64]', SubText);
 
       ts.SaveToFile(WebPreviewTempFileName);
-      OpenURL({$IFDEF DARWIN}'file://'+{$ENDIF}WebPreviewTempFileName);
+      OpenURL({$IFDEF DARWIN}'file://' + {$ENDIF}WebPreviewTempFileName);
     finally
       ts.Free;
     end;

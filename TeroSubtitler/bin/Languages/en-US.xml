@@ -400,7 +400,8 @@
       <chkShowSplashWindow>Show splash window</chkShowSplashWindow>
       <chkUseOwnFileDialog>Use Tero file dialog</chkUseOwnFileDialog>
       <chkPromptForDeleteSubtitles>Prompt when deleting subtitles</chkPromptForDeleteSubtitles>
-      <chkPromptForInputFPS>Prompt for FPS before loading a file</chkPromptForInputFPS>      
+      <chkPromptForInputFPS>Prompt for FPS before loading a file</chkPromptForInputFPS>
+      <chkPromptForSaveWithErrors>Prompt for save with errors</chkPromptForSaveWithErrors>            
       <chkDotsOnSplit>Add '...' on split subtitle</chkDotsOnSplit>
       <chkDrawTags>Interpret tags in list</chkDrawTags>
       <chkDrawErrors>Show errors in list</chkDrawErrors>
@@ -717,6 +718,7 @@
     <ShiftTimeLess>Shift %dms less</ShiftTimeLess>                  
     <TranscriptionModeExit>Exiting transcription mode will lose any unsaved changes.</TranscriptionModeExit>
     <SourceModeWarning>Switching to source mode will change the format to "Tero Subtitler", otherwise unsaved translations will be lost.</SourceModeWarning>
+    <SubtitleHasErrorsToFix>Current subtitle has errors to fix, and will be saved.</SubtitleHasErrorsToFix>
     <TextFormatted>Export formatted text?</TextFormatted>        
     <NoInternetConnection>No Internet connection available</NoInternetConnection>
     <FailedToDownload>No content downloaded, missing file or no Internet connection.</FailedToDownload>

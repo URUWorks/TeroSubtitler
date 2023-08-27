@@ -62,6 +62,7 @@ type
   TCheckMethodTypeSet = set of TCheckMethodType;
 
 function CheckErrors(const Subtitles: TUWSubtitles; const Index: Integer; const ErrorsToCheck: TSubtitleErrorTypeSet; const Options: TProfileItem; const ACheckMethod: TCheckMethodTypeSet; const OCR: TUWOCRScript = NIL): TSubtitleErrorTypeSet;
+function NeedToCheckErrors(const Subtitles: TUWSubtitles): Boolean;
 
 // -----------------------------------------------------------------------------
 
@@ -760,6 +761,24 @@ begin
         Result := Result + [etOverlapping, etOverlappingWithNext];
     end;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function NeedToCheckErrors(const Subtitles: TUWSubtitles): Boolean;
+var
+  i: Integer;
+begin
+  Result := False;
+  if Subtitles.Count > 0 then
+    for i := 0 to Subtitles.Count-1 do
+    begin
+      if Subtitles[i].ErrorType <> [] then
+      begin
+        Result := True;
+        Break;
+      end;
+    end;
 end;
 
 // -----------------------------------------------------------------------------
