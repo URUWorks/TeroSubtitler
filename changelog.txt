@@ -1,4 +1,5 @@
 1.0.1.0 (x.9.2023)
+- fixed: Colour and alignment ignored in SRT #161
 - fixed: Undo of replace doesn't work properly #156
 - fixed: CPL breaches not flagged on a line-by-line basis #155
 - fixed: HTML Codes #153
@@ -8,6 +9,7 @@
 - fixed: Times of imported iTunes Timed Text file misinterpreted in frame mode
 - fixed: Fix Subtitles always applied even if entry is unchecked
 - fixed: Potential crash in "Fix Subtitles" 
+- added: Web Preview
 - added: Display Actor on Preview
 - added: Dialog segments detection [experimental]
 - added: Possibility to choose FPS before loading a subtitle file
