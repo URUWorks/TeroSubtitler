@@ -205,7 +205,7 @@ begin
     if not s.IsEmpty then
       Text := s + Text + '{\an0}';
 
-    StringList.Add('Dialogue: 0,' + TimeToString(Subtitles.InitialTime[i], 'h:mm:ss.zz') + ',' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.FinalTime[i], Subtitles.FinalTime[i] - 1), 'h:mm:ss.zz') + ',Default,' + Subtitles[i].Actor + ',0000,0000,0000,,' + Text, False);
+    StringList.Add('Dialogue: 0,' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.InitialTime[i], Subtitles.InitialTime[i] - 1), 'h:mm:ss.zz') + ',' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.FinalTime[i], Subtitles.FinalTime[i] - 1), 'h:mm:ss.zz') + ',Default,' + Subtitles[i].Actor + ',0000,0000,0000,,' + Text, False);
   end;
 
   try
