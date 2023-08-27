@@ -74,6 +74,10 @@ procedure SaveTranscription(const FileName: String);
 procedure LoadTranscriptionWithDialog;
 procedure SaveTranscriptionWithDialog;
 
+{ WebPreview }
+
+procedure SaveForWebPreview;
+
 { Drop files }
 
 procedure DropFilesProcess(const FileNames: array of String);
@@ -96,7 +100,7 @@ uses
   procConfig, procDialogs, procWorkspace, procVST, procSubtitle, procUndo,
   UWSystem.Encoding, formCustomFileDlg, UWSystem.XMLLang, UWSystem.SysUtils,
   Forms, procMRU, UWSystem.StrUtils, procForms, procProjectFile,
-  formCustomSelectDlg
+  formCustomSelectDlg, LCLIntf, Base64
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -1083,6 +1087,71 @@ begin
     end;
   finally
     SD.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+{ WebPreview }
+
+// -----------------------------------------------------------------------------
+
+procedure SaveForWebPreview;
+
+const HTMLFormat: String =
+  '<!doctype html>' + sLineBreak +
+  '<html lang="en">' + sLineBreak +
+  '  <head>' + sLineBreak +
+  '    <meta charset="utf-8">' + sLineBreak +
+  '    <title>Tero Subtitler (Web Preview)</title>' + sLineBreak +
+  '  </head>' + sLineBreak +
+  '  <body>' + sLineBreak +
+  '    <video controls preload="metadata">' + sLineBreak +
+  '      <source src="[VIDEO]" type ="video/[EXT]" />' + sLineBreak +
+  '      <track label="English" kind="subtitles" srclang="en" src="data:text/vtt;base64, [BASE64]" default>' + sLineBreak +
+  '    </video>' + sLineBreak +
+  '  </body>' + sLineBreak +
+  '</html>';
+
+var
+  ts : TStrings;
+  i : Integer;
+  SubText : String;
+  VideoExt : String;
+  VideoSupport : Boolean;
+begin
+  if (Subtitles.Count > 0) and frmMain.MPV.IsMediaLoaded then
+  begin
+    VideoExt := ExtractFileExt(frmMain.MPV.FileName.ToLower);
+    VideoSupport := False;
+    for i := 0 to High(TVideoWebExts) do
+      if VideoExt = TVideoWebExts[i] then
+      begin
+        VideoSupport := True;
+        Break;
+      end;
+
+    if not VideoSupport then
+    begin
+      ShowErrorMessageDialog(GetCommonString('WebVideoUnsupported'));
+      Exit;
+    end;
+
+    ts := TStringList.Create;
+    try
+      ts.Text  := HTMLFormat;
+      SubText  := EncodeStringBase64(Subtitles.SaveToString(Workspace.FPS.OutputFPS, NIL, sfWebVTT, smText));
+
+      Delete(VideoExt, 1, 1);
+      ts.Text := ts.Text.Replace('[VIDEO]', 'file://' + frmMain.MPV.FileName);
+      ts.Text := ts.Text.Replace('[EXT]', VideoExt);
+      ts.Text := ts.Text.Replace('[BASE64]', SubText);
+
+      ts.SaveToFile(WebPreviewTempFileName);
+      OpenURL({$IFDEF DARWIN}'file://'+{$ENDIF}WebPreviewTempFileName);
+    finally
+      ts.Free;
+    end;
   end;
 end;
 

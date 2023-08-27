@@ -49,6 +49,11 @@ const
     '.mpe', '.nsv'
   );
 
+  TVideoWebExts : array[0..2] of String =
+  (
+    '.mp4', '.ogg', '.webm'
+  );
+
   TAudioExts : array[0..1] of String =
   (
     '.wav', '.peak'

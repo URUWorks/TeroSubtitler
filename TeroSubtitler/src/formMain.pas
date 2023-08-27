@@ -73,6 +73,7 @@ type
     actActor: TAction;
     actExportCustomImageFormat: TAction;
     actDetectDialogSegments: TAction;
+    actWebPreview: TAction;
     actShowActorOnPreview: TAction;
     actRoundTimes: TAction;
     actJumpToNextShotChange: TAction;
@@ -301,6 +302,7 @@ type
     MenuItem174: TMenuItem;
     MenuItem175: TMenuItem;
     MenuItem176: TMenuItem;
+    MenuItem177: TMenuItem;
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
     mnuFormatProperties: TMenuItem;
@@ -492,6 +494,7 @@ type
     Separator42: TMenuItem;
     Separator43: TMenuItem;
     Separator44: TMenuItem;
+    Separator45: TMenuItem;
     Separator46: TMenuItem;
     mnuHelpSeparator: TMenuItem;
     Separator47: TMenuItem;
@@ -921,6 +924,7 @@ type
     procedure actActorExecute(Sender: TObject);
     procedure actLoadProjectExecute(Sender: TObject);
     procedure actSaveProjectExecute(Sender: TObject);
+    procedure actWebPreviewExecute(Sender: TObject);
   private
 
   public
@@ -1116,6 +1120,8 @@ begin
     Subtitles.Free;
     // Temp subtitle
     MPVDeleteSubtitleTempTrack;
+    // Temp Web preview file
+    if FileExists(WebPreviewTempFileName) then DeleteFile(WebPreviewTempFileName);
   end;
 end;
 
@@ -1270,6 +1276,8 @@ begin
   Workspace.FPS.OutputFPS := Workspace.FPS.InputFPS;
   SetTimeFPStoTimeEditCtrls;
 
+  DoAutoCheckErrors;
+
   if (Sender <> NIL) then
     UpdateValues(True);
 end;
@@ -1286,6 +1294,8 @@ begin
 
   if (Workspace.WorkMode = wmFrames) then
     SetSMPTEMode(not IsInteger(GetFPS));
+
+  DoAutoCheckErrors;
 
   if (Sender <> NIL) then
     UpdateValues(True);

@@ -170,6 +170,7 @@
       <actCloseVideo>Cerrar vídeo</actCloseVideo>
       <actWaveExtract>Extraer forma de onda...</actWaveExtract>
       <actLoadVideoFromURL>Abrir vídeo desde URL...</actLoadVideoFromURL>
+      <actWebPreview>Vista previa web...</actWebPreview>
       <actSpellCheck>Corrector ortográfico...</actSpellCheck>
       <actTranslate>Traducción automática...</actTranslate>
       <actFixSubtitles>Corregir subtítulos...</actFixSubtitles>
@@ -734,6 +735,7 @@
     <OpenVideoFromURL>Abrir vídeo desde</OpenVideoFromURL>
     <URL>URL</URL>
     <SupportedSites>Sitios compatibles</SupportedSites>
+    <WebVideoUnsupported>El formato de vídeo no es compatible con la reproducción en navegador web.</WebVideoUnsupported>
     <NewShortCutPreset>Ingrese un nombre para el ajuste preestablecido de atajos</NewShortCutPreset>
     <NewShortCutPresetName>Nombre</NewShortCutPresetName>    
     <FolderNotEmpty>La carpeta no está vacía.</FolderNotEmpty>

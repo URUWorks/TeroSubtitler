@@ -1780,6 +1780,12 @@ object frmMain: TfrmMain
       object MenuItem161: TMenuItem
         Action = actDetectDialogSegments
       end
+      object Separator45: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem177: TMenuItem
+        Action = actWebPreview
+      end
     end
     object mnuHelp: TMenuItem
       Caption = 'Help'
@@ -3489,6 +3495,12 @@ object frmMain: TfrmMain
       AutoCheck = True
       Caption = 'Encoding'
       OnExecute = actShowToolbarEncodingExecute
+    end
+    object actWebPreview: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Web Preview...'
+      OnExecute = actWebPreviewExecute
     end
   end
   object popDropInsert: TPopupMenu

@@ -993,19 +993,19 @@ end;
 
 procedure TfrmMain.actEndCueAddOneFrameExecute(Sender: TObject);
 begin
-  VSTDoLoop(VST, @ApplyEndCueAddOneFrame);
+  VSTDoLoop(VST, @ApplyEndCueAddOneFrame, dlSelected, True, True);
 end;
 
 procedure TfrmMain.actEndCueSubtractOneFrameExecute(Sender: TObject);
 begin
-  VSTDoLoop(VST, @ApplyEndCueSubtractOneFrame);
+  VSTDoLoop(VST, @ApplyEndCueSubtractOneFrame, dlSelected, True, True);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actRoundTimesExecute(Sender: TObject);
 begin
-  VSTDoLoop(VST, @ApplyRoundTimes);
+  VSTDoLoop(VST, @ApplyRoundTimes, dlSelected, True, True);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1026,14 +1026,14 @@ end;
 
 procedure TfrmMain.actExtendLengthToPreviousExecute(Sender: TObject);
 begin
-  VSTDoLoop(VST, @ApplyExtendLengthToPrevious);
+  VSTDoLoop(VST, @ApplyExtendLengthToPrevious, dlSelected, True, True);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actExtendLengthToNextExecute(Sender: TObject);
 begin
-  VSTDoLoop(VST, @ApplyExtendLengthToNext);
+  VSTDoLoop(VST, @ApplyExtendLengthToNext, dlSelected, True, True);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1054,7 +1054,7 @@ end;
 
 procedure TfrmMain.actSwapTextsExecute(Sender: TObject);
 begin
-  VSTDoLoop(VST, @ApplySwapTexts);
+  VSTDoLoop(VST, @ApplySwapTexts, dlSelected, True, True);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1638,6 +1638,13 @@ end;
 procedure TfrmMain.actSaveProjectExecute(Sender: TObject);
 begin
   SaveProjectWithDialog;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actWebPreviewExecute(Sender: TObject);
+begin
+  SaveForWebPreview;
 end;
 
 // -----------------------------------------------------------------------------

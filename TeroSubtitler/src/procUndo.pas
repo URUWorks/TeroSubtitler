@@ -144,53 +144,58 @@ var
 begin
   if not Assigned(VST) or not Assigned(FromList) or not Assigned(ToList) then Exit;
 
-  VST.ClearSelection;
+  VST.BeginUpdate;
+  try
+    VST.ClearSelection;
 
-  group := FromList.Last^.Group;
-  if (FromList.Last^.UndoType = utSubtitleChange) and Subtitles.ValidIndex(FromList.Last^.Index) then
-  begin
-    ToList.Add(NewPUndo(utSubtitleChange, FromList.Last^.Index, Subtitles.Items[FromList.Last^.Index], FromList.Last^.Group));
-    Subtitles.Items[FromList.Last^.Index] := FromList.Last^.Subtitle;
-    VSTSelectNode(VST, FromList.Last^.Index, False);
-  end
-  else if (FromList.Last^.UndoType = utInsertLine) and Subtitles.ValidIndex(FromList.Last^.Index) then
-  begin
-    ToList.Add(NewPUndo(utDeleteLine, FromList.Last^.Index, Subtitles.Items[FromList.Last^.Index], FromList.Last^.Group));
-    Subtitles.Delete(FromList.Last^.Index);
-  end
-  else if (FromList.Last^.UndoType = utDeleteLine) then
-  begin
-    ToList.Add(NewPUndo(utInsertLine, FromList.Last^.Index, Subtitles.Items[FromList.Last^.Index], FromList.Last^.Group));
-    Subtitles.Insert(FromList.Last^.Index, FromList.Last^.Subtitle, NIL);
-    VSTSelectNode(VST, FromList.Last^.Index, False);
-  end;
-
-  DeleteLastItem(FromList);
-  for i := FromList.Count-1 downto 0 do
-  begin
-    if group = FromList[i]^.Group then
+    group := FromList.Last^.Group;
+    if (FromList.Last^.UndoType = utSubtitleChange) and Subtitles.ValidIndex(FromList.Last^.Index) then
     begin
-      if (FromList.Last^.UndoType = utSubtitleChange) and Subtitles.ValidIndex(FromList[i]^.Index) then
-      begin
-        ToList.Add(NewPUndo(utSubtitleChange, FromList[i]^.Index, Subtitles.Items[FromList.Last^.Index], FromList[i]^.Group));
-        Subtitles.Items[FromList[i]^.Index] := FromList[i]^.Subtitle;
-        VSTSelectNode(VST, FromList.Last^.Index, False);
-      end
-      else if (FromList.Last^.UndoType = utInsertLine) and Subtitles.ValidIndex(FromList[i]^.Index) then
-      begin
-        ToList.Add(NewPUndo(utDeleteLine, FromList[i]^.Index, Subtitles.Items[FromList.Last^.Index], FromList[i]^.Group));
-        Subtitles.Delete(FromList[i]^.Index);
-      end
-      else if FromList.Last^.UndoType = utDeleteLine then
-      begin
-        ToList.Add(NewPUndo(utInsertLine, FromList[i]^.Index, Subtitles.Items[FromList.Last^.Index], FromList[i]^.Group));
-        Subtitles.Insert(FromList[i]^.Index, FromList[i]^.Subtitle, NIL);
-        VSTSelectNode(VST, FromList[i]^.Index, False);
-      end;
-      DeleteLastItem(FromList);
+      ToList.Add(NewPUndo(utSubtitleChange, FromList.Last^.Index, Subtitles.Items[FromList.Last^.Index], FromList.Last^.Group));
+      Subtitles.Items[FromList.Last^.Index] := FromList.Last^.Subtitle;
+      VSTSelectNode(VST, FromList.Last^.Index, False);
     end
-    else
-      Break;
+    else if (FromList.Last^.UndoType = utInsertLine) and Subtitles.ValidIndex(FromList.Last^.Index) then
+    begin
+      ToList.Add(NewPUndo(utDeleteLine, FromList.Last^.Index, Subtitles.Items[FromList.Last^.Index], FromList.Last^.Group));
+      Subtitles.Delete(FromList.Last^.Index);
+    end
+    else if (FromList.Last^.UndoType = utDeleteLine) then
+    begin
+      ToList.Add(NewPUndo(utInsertLine, FromList.Last^.Index, Subtitles.Items[FromList.Last^.Index], FromList.Last^.Group));
+      Subtitles.Insert(FromList.Last^.Index, FromList.Last^.Subtitle, NIL);
+      VSTSelectNode(VST, FromList.Last^.Index, False);
+    end;
+
+    DeleteLastItem(FromList);
+    for i := FromList.Count-1 downto 0 do
+    begin
+      if group = FromList[i]^.Group then
+      begin
+        if (FromList.Last^.UndoType = utSubtitleChange) and Subtitles.ValidIndex(FromList[i]^.Index) then
+        begin
+          ToList.Add(NewPUndo(utSubtitleChange, FromList[i]^.Index, Subtitles.Items[FromList.Last^.Index], FromList[i]^.Group));
+          Subtitles.Items[FromList[i]^.Index] := FromList[i]^.Subtitle;
+          VSTSelectNode(VST, FromList.Last^.Index, False);
+        end
+        else if (FromList.Last^.UndoType = utInsertLine) and Subtitles.ValidIndex(FromList[i]^.Index) then
+        begin
+          ToList.Add(NewPUndo(utDeleteLine, FromList[i]^.Index, Subtitles.Items[FromList.Last^.Index], FromList[i]^.Group));
+          Subtitles.Delete(FromList[i]^.Index);
+        end
+        else if FromList.Last^.UndoType = utDeleteLine then
+        begin
+          ToList.Add(NewPUndo(utInsertLine, FromList[i]^.Index, Subtitles.Items[FromList.Last^.Index], FromList[i]^.Group));
+          Subtitles.Insert(FromList[i]^.Index, FromList[i]^.Subtitle, NIL);
+          VSTSelectNode(VST, FromList[i]^.Index, False);
+        end;
+        DeleteLastItem(FromList);
+      end
+      else
+        Break;
+    end;
+  finally
+    VST.EndUpdate;
   end;
 end;
 

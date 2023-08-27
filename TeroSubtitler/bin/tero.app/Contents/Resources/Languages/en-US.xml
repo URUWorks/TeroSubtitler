@@ -170,6 +170,7 @@
       <actCloseVideo>Close video</actCloseVideo>
       <actWaveExtract>Extract waveform...</actWaveExtract>
       <actLoadVideoFromURL>Open video from URL...</actLoadVideoFromURL>
+      <actWebPreview>Web Preview...</actWebPreview>
       <actSpellCheck>Spell check...</actSpellCheck>
       <actTranslate>Auto translate...</actTranslate>
       <actFixSubtitles>Fix subtitles...</actFixSubtitles>
@@ -309,7 +310,7 @@
     </Section>
     <Section Name="TUWCheckBox">
       <chkReplaceWith>Replace with:</chkReplaceWith>
-      <chkCaseSensitive>Case sensitive</chkCaseSensitive>
+      <chkCaseSensitive>Case-sensitive</chkCaseSensitive>
       <chkPreserveCaseOnReplace>Preserve case on replace</chkPreserveCaseOnReplace>
       <chkRegularExpression>Use regular expression</chkRegularExpression>
       <chkWholeWord>Whole word</chkWholeWord>
@@ -521,8 +522,8 @@
       <lblOutputFolder>Folder</lblOutputFolder>
       <lblFormat>Format</lblFormat>
       <lblEncoding>Encoding</lblEncoding>
-      <lblFromFPS>From FPS</lblFromFPS>
-      <lblToFPS>To FPS</lblToFPS>
+      <lblFromFPS>Input FPS</lblFromFPS>
+      <lblToFPS>Target FPS</lblToFPS>
     </Section>
   </Form>
   <Form Name="frmQualityCheck" Caption="Quality check">
@@ -727,13 +728,14 @@
     <Entry>Entry %d</Entry>    
     <libMPVError>Unable to find the required libraries to run the embedded mpv player. Please download them.</libMPVError>
     <libMPVglError>Failed to initialize mpv GL context.</libMPVglError>
-    <libMPVVersionError>Could not initialize libmpv, possibly the wrong library was installed.</libMPVVersionError>
+    <libMPVVersionError>Could not initialize libmpv. Check if the right library was installed.</libMPVVersionError>
     <SpellCheckFinished>Spell check finished.</SpellCheckFinished>
     <Detect>Auto-detect</Detect>
     <AddNote>Add note</AddNote>
     <OpenVideoFromURL>Open video from</OpenVideoFromURL>    
     <URL>URL</URL>
     <SupportedSites>Supported sites</SupportedSites>
+    <WebVideoUnsupported>The video format is not supported for playback in the web browser.</WebVideoUnsupported>
     <NewShortCutPreset>Enter a name for your shortcuts preset</NewShortCutPreset>
     <NewShortCutPresetName>Name</NewShortCutPresetName>
     <FolderNotEmpty>The folder is not empty.</FolderNotEmpty>

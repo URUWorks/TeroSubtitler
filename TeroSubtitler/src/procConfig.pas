@@ -80,6 +80,7 @@ function ffmpegFileName: String;
 function SceneDetectFileName: String;
 function LogMPVFileName: String;
 function MPVTempSubFileName: String;
+function WebPreviewTempFileName: String;
 function DictionariesFolder: String;
 function BackupFolder: String;
 function ProjectsFolder: String;
@@ -1452,6 +1453,13 @@ end;
 function MPVTempSubFileName: String;
 begin
   Result := ConcatPaths([GetTempDir, '_tssubtmp.ass']);
+end;
+
+// -----------------------------------------------------------------------------
+
+function WebPreviewTempFileName: String;
+begin
+  Result := ConcatPaths([GetTempDir, '_tswebprevtmp.html']);
 end;
 
 // -----------------------------------------------------------------------------
