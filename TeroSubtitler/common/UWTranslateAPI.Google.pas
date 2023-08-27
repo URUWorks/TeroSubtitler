@@ -199,10 +199,10 @@ begin
           if (jdTranslationArray <> NIL) and (jdTranslationArray.JSONType = jtArray) then
           begin
             jaTranslationArray := TJSONArray(jdTranslationArray);
-            if Result <> '' then
-              Result := Result + LineEnding + Trim(jaTranslationArray[0].AsString)
+            if jaTranslationArray[0].AsString <> '' then
+              Result := Result + jaTranslationArray[0].AsString
             else
-              Result := Trim(jaTranslationArray[0].AsString);
+              Result := Result + LineEnding;
           end;
         end;
       end;
