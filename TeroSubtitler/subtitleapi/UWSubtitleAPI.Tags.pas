@@ -50,8 +50,36 @@ uses UWSystem.StrUtils, RegExpr;
 
 function RemoveTSTags(const Text: String): String;
 begin
-  //Result := Text;
   Result := ReplaceRegExpr('\{.*?\}', Text, '', True);
+end;
+
+//------------------------------------------------------------------------------
+
+function ReplaceHTMLTagColor(const Text: String): String;
+var
+  a, b, x : Integer;
+  c, s : String;
+begin
+  Result := Text;
+  x := 1;
+  repeat
+    a := Pos('{\c&', Result, x);
+    if a > 0 then
+    begin
+      x := a+1;
+      b := Pos('&}', Result, x);
+      if b > a then
+      begin
+        c := Copy(Result, a+4, 6);
+        if c.Length = 6 then
+        begin
+          s := Format('%s%s%s', [Copy(c, 5, 2), Copy(c, 3, 2), Copy(c, 1, 2)]);
+          Result := Result.Remove(a+3, 6);
+          Result := Result.Insert(a+3, s);
+        end;
+      end;
+    end;
+  until a = 0;
 end;
 
 //------------------------------------------------------------------------------
@@ -61,9 +89,9 @@ begin
   Result := Text;
   if Result.IsEmpty then Exit;
 
-  Result := ReplaceRegExpr('\{c&(.*?|var)\&}', Result, '<font color=$1>', True);
-  Result := ReplaceRegExpr('\{c\}', Result, '</font>', True);
-//  Result := ReplaceRegExpr('\{(.*?|var)\}', Result, '<$1>', True);
+  Result := ReplaceHTMLTagColor(Result);
+  Result := ReplaceRegExpr('\{c&(.*?|var)\&}', Result, '<font color="#$1">', True);
+  Result := ReplaceString(Result, '{\c}', '</font>');
   Result := ReplaceString(Result, '{\b1}', '<b>');
   Result := ReplaceString(Result, '{\i1}', '<i>');
   Result := ReplaceString(Result, '{\u1}', '<u>');
@@ -81,9 +109,10 @@ begin
   Result := Text;
   if Result.IsEmpty then Exit;
 
-  Result := ReplaceRegExpr('<font color=(.*?|var)>', Result, '{\c&$1&}', True);
-  Result := ReplaceRegExpr('</font>', Result, '{\c}', True);
-//  Result := ReplaceRegExpr('<(.*?|var)>', Result, '{$1}', True);
+  Result := ReplaceString(Result, 'color="#', 'color="');
+  Result := ReplaceRegExpr('<font color="(.*?|var)">', Result, '{\\c&$1&}', True);
+  Result := ReplaceHTMLTagColor(Result);
+  Result := ReplaceString(Result, '</font>', '{\c}');
   Result := ReplaceString(Result, '<b>', '{\b1}');
   Result := ReplaceString(Result, '<i>', '{\i1}');
   Result := ReplaceString(Result, '<u>', '{\u1}');

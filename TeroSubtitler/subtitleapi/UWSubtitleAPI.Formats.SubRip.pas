@@ -113,7 +113,7 @@ end;
 
 function TUWSubRip.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
 var
-  i           : Integer;
+  i, x        : Integer;
   InitialTime : Integer;
   FinalTime   : Integer;
   Text, s     : String;
@@ -144,7 +144,20 @@ begin
           ExtraInfo^.Y2 := StrToIntDef(Copy(SubtitleFile[i], Y2+3, Length(SubtitleFile[i])-(Y2+2)), 0);
         end
         else
+        begin
           ExtraInfo := NIL;
+
+          if (X1 > 0) then
+          begin
+            s := Copy(SubtitleFile[i], X1+3);
+            X2 := Pos(' ', s);
+            if X2 > 0 then
+              s := Copy(s, 1, X2-1);
+
+            if StrToIntDef(s, -1) = 0 then
+              X1 := 2;
+          end;
+        end;
 
         if (InitialTime >= 0) and (FinalTime > 0) then
         begin
@@ -162,7 +175,10 @@ begin
           end;
 
           Text := HTMLTagsToTS(Text);
-          Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
+          x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
+
+          if (ExtraInfo = NIL) and (X1 > 0) then
+            Subtitles.ItemPointer[x]^.VAlign := X1;
         end;
       end;
       Inc(i);
@@ -201,7 +217,12 @@ begin
           XY := '';
       end
     else
-      XY := '';
+    begin
+      if Subtitles[i].VAlign = 2 then
+        XY := 'X1:0'
+      else
+        XY := '';
+    end;
 
     StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss,zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss,zzz') + XY, False);
     Text := TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
