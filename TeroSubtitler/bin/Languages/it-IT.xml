@@ -132,6 +132,7 @@
       <actSetAutomaticDuration>Imposta durata automatica</actSetAutomaticDuration>
       <actSetDefaultPause Hint="solo se l’intervallo è troppo breve">Imposta intervallo predefinito</actSetDefaultPause>
       <actRoundTimes>Arrotonda tempistiche</actRoundTimes>
+      <actShowActorOnPreview>Mostra interprete nell’anteprima</actShowActorOnPreview>
       <actSwapTexts>Scambia posizione del testo</actSwapTexts>
       <actShowColumnNumber>Numero/Intervallo</actShowColumnNumber>
       <actShowColumnTimes>Tempistiche</actShowColumnTimes>
@@ -169,6 +170,7 @@
       <actCloseVideo>Chiudi filmato</actCloseVideo>
       <actWaveExtract>Estrai la forma d’onda…</actWaveExtract>
       <actLoadVideoFromURL>Apri filmato da URL…</actLoadVideoFromURL>
+      <actWebPreview>Anteprima web…</actWebPreview>
       <actSpellCheck>Controllo ortografico…</actSpellCheck>
       <actTranslate>Traduzione automatica…</actTranslate>
       <actFixSubtitles>Correzione sottotitoli…</actFixSubtitles>
@@ -398,7 +400,8 @@
       <chkShowSplashWindow>Mostra finestra di avvio</chkShowSplashWindow>
       <chkUseOwnFileDialog>Usa finestra di dialogo di Tero per i file</chkUseOwnFileDialog>
       <chkPromptForDeleteSubtitles>Mostra un avviso quando si rimuovono sottotitoli</chkPromptForDeleteSubtitles>
-      <chkPromptForInputFPS>Mostra un avviso sui FPS prima di caricare un file</chkPromptForInputFPS> 
+      <chkPromptForInputFPS>Mostra un avviso sui FPS prima di caricare un file</chkPromptForInputFPS>
+      <chkPromptForSaveWithErrors>Mostra un avviso al salvataggio di un file che presenta errori</chkPromptForSaveWithErrors> 
       <chkDotsOnSplit>Aggiungi ’…’ in corrispondenza della divisione di un sottotitolo</chkDotsOnSplit>
       <chkDrawTags>Interpreta i tag nell’elenco</chkDrawTags>
       <chkDrawErrors>Mostra gli errori nell’elenco</chkDrawErrors>
@@ -520,8 +523,8 @@
       <lblOutputFolder>Cartella</lblOutputFolder>
       <lblFormat>Formato</lblFormat>
       <lblEncoding>Codifica</lblEncoding>
-      <lblFromFPS>Da FPS</lblFromFPS>
-      <lblToFPS>A FPS</lblToFPS>
+      <lblFromFPS>FPS di ingresso</lblFromFPS>
+      <lblToFPS>FPS di destinazione</lblToFPS>
     </Section>
   </Form>
   <Form Name="frmQualityCheck" Caption="Controllo qualità">
@@ -715,6 +718,7 @@
     <ShiftTimeLess>Sposta di %dms indietro</ShiftTimeLess>  
     <TranscriptionModeExit>L’uscita dalla modalità trascrizione causerà la perdita di tutte le modifiche non salvate.</TranscriptionModeExit>
     <SourceModeWarning>Passando alla modalità sorgente, il formato del file sarà modificato in “Tero Subtitler”; altrimenti, tutte le traduzioni non salvate verranno perse.</SourceModeWarning>
+    <SubtitleHasErrorsToFix>Il sottotitolo attuale contiene errori da correggere, ma sarà salvato comunque.</SubtitleHasErrorsToFix>
     <TextFormatted>Esportare il testo formattato?</TextFormatted>        
     <NoInternetConnection>Connessione Internet assente</NoInternetConnection>
     <FailedToDownload>Nessun contenuto è stato scaricato: file mancante o connessione Internet assente.</FailedToDownload>
@@ -726,13 +730,14 @@
     <Entry>Elemento %d</Entry>    
     <libMPVError>Impossibile trovare le librerie necessarie al funzionamento del riproduttore mpv incorporato. Si prega di scaricarle.</libMPVError>
     <libMPVglError>Inizializzazione del contesto grafico GL di mpv non riuscita.</libMPVglError>
-    <libMPVVersionError>Impossibile inizializzare libmpv; è probabile che sia stata installata la libreria non corretta.</libMPVVersionError>
+    <libMPVVersionError>Impossibile inizializzare libmpv; verificare che la libreria corretta sia stata installata.</libMPVVersionError>
     <SpellCheckFinished>Controllo ortografico terminato.</SpellCheckFinished>
     <Detect>Rilevamento automatico</Detect>
     <AddNote>Aggiungi una nota</AddNote>
     <OpenVideoFromURL>Apri filmato da</OpenVideoFromURL>    
     <URL>URL</URL>
     <SupportedSites>Siti supportati</SupportedSites>
+    <WebVideoUnsupported>L’attuale formato video non è supportato per la riproduzione all’interno di un browser web.</WebVideoUnsupported>
     <NewShortCutPreset>Specifica un nome per l’insieme di scorciatoie preimpostate</NewShortCutPreset>
     <NewShortCutPresetName>Nome</NewShortCutPresetName>
     <FolderNotEmpty>La cartella non è vuota.</FolderNotEmpty>
