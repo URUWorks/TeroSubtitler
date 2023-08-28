@@ -87,7 +87,7 @@ begin
     if (Profile.CPL > 0) and (GetMaxLinesOf(Subtitles[i].Text) > Profile.CPL) then
       item.QC := item.QC + [qcCPL];
 
-    if (Profile.MaxLines > 0) and (LineCount(Subtitles[i].Text) > Profile.MaxLines) then
+    if (Profile.MaxLines > 0) and (LineCount(Subtitles[i].Text, sLineBreak) > Profile.MaxLines) then
       item.QC := item.QC + [qcMaximumLines];
 
     if (Profile.MinDuration > 0) and (Subtitles.Duration[i] < Profile.MinDuration) then
