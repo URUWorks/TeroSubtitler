@@ -273,7 +273,7 @@ begin
     AutoCheckErrors       := True;
     AskForDeleteLines     := True;
     AskForInputFPS        := False;
-    CheckErrorsBeforeSave := False;
+    CheckErrorsBeforeSave := True;
     TextToFind            := '';
     WebSearchURL          := URL_WordReference;
     Language              := GetOSLanguage;

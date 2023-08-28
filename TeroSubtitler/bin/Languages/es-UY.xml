@@ -401,7 +401,7 @@
       <chkUseOwnFileDialog>Usar diálogo de archivo de Tero</chkUseOwnFileDialog>
       <chkPromptForDeleteSubtitles>Solicitud de eliminación de subtítulos</chkPromptForDeleteSubtitles>
       <chkPromptForInputFPS>Solicitar FPS antes de cargar un archivo</chkPromptForInputFPS>
-      <chkPromptForSaveWithErrors>Confirmar al guardar con errores</chkPromptForSaveWithErrors>
+      <chkPromptForSaveWithErrors>Preguntar al guardar un archivo con errores</chkPromptForSaveWithErrors>
       <chkDotsOnSplit>Agregar '...' al dividir subtítulo</chkDotsOnSplit>
       <chkDrawTags>Interpretar etiquetas en la lista</chkDrawTags>
       <chkDrawErrors>Mostrar errores en la lista</chkDrawErrors>
@@ -719,7 +719,7 @@
     <TranscriptionModeExit>Si sale del modo de transcripción se perderán los cambios no guardados.</TranscriptionModeExit>
     <SourceModeWarning>Al cambiar al modo código se cambiará el formato a "Tero Subtitler", de lo contrario, se perderán las traducciones no guardadas.</SourceModeWarning>
     <TextFormatted>¿Exportar texto con formato?</TextFormatted>
-    <SubtitleHasErrorsToFix>El subtítulo actual tiene errores a corregir, y será guardado.</SubtitleHasErrorsToFix>    
+    <SubtitleHasErrorsToFix>El subtítulos actual contiene errores que se recomienda resolver, pero se puede guardar.</SubtitleHasErrorsToFix>    
     <NoInternetConnection>No hay conexión a Internet disponible</NoInternetConnection>
     <FailedToDownload>No hay contenido descargado, falta un archivo o no hay conexión a Internet.</FailedToDownload>
     <AskToExtractAudio>No se encontró la forma de onda de audio, ¿desea extraerla?</AskToExtractAudio>

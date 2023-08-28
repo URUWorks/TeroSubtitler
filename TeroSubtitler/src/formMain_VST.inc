@@ -189,7 +189,12 @@ var
     else
       cps := Subtitles.TranslationCPS[Node^.Index, AppOptions.Conventions.CPSLineLenStrategy];
 
+    c := TargetCanvas.Font.Color;
+    if cps > AppOptions.Conventions.MaxCPS then
+      TargetCanvas.Font.Color := clRed;
+
     TargetCanvas.TextRect(R, R.Left, R.Top, Format('%.2f', [cps], AppOptions.FormatSettings), TS);
+    TargetCanvas.Font.Color := c;
   end;
 
   procedure DrawWPM(const Original: Boolean);
@@ -314,7 +319,6 @@ begin
          // CPS
          TS.Alignment := taCenter;
          TS.Layout := tlTop;
-         if (etMaxCPS in Subtitles[Node^.Index].ErrorType) then TargetCanvas.Font.Color := clRed;
          DrawCPS(True);
          if WorkSpace.TranslatorMode then
          begin
