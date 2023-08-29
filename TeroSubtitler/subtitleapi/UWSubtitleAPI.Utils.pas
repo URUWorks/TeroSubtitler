@@ -40,7 +40,7 @@ function HTMLDecode(const AStr: String): String;
 implementation
 
 uses
-  UWSubtitleAPI.Tags, UWSystem.StrUtils;
+  UWSubtitleAPI.Tags, UWSystem.StrUtils, RegExpr;
 
 // -----------------------------------------------------------------------------
 
@@ -49,6 +49,17 @@ var
   Stream : TStringStream;
 begin
   if not Assigned(StringList) then Exit;
+
+  with TRegExpr.Create('<\?xml version="(.*?)"') do
+  try
+    if Exec(StringList.Text) then
+    begin
+      if Match[1].Length > 3 then
+        StringList.Text := Replace(InputString, '<?xml version="1.0"', True);
+    end;
+  finally
+    Free;
+  end;
 
   Stream := TStringStream.Create(StringList.Text);
   try
