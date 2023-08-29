@@ -718,8 +718,8 @@
     <ShiftTimeLess>Desplazar %dms menos</ShiftTimeLess>                    
     <TranscriptionModeExit>Si sale del modo de transcripción se perderán los cambios no guardados.</TranscriptionModeExit>
     <SourceModeWarning>Al cambiar al modo código se cambiará el formato a "Tero Subtitler", de lo contrario, se perderán las traducciones no guardadas.</SourceModeWarning>
-    <TextFormatted>¿Exportar texto con formato?</TextFormatted>
-    <SubtitleHasErrorsToFix>El subtítulos actual contiene errores que se recomienda resolver, pero se puede guardar.</SubtitleHasErrorsToFix>    
+    <SubtitleHasErrorsToFix>El subtítulo actual contiene errores que se recomienda resolver, pero se puede guardar.</SubtitleHasErrorsToFix>    
+    <TextFormatted>¿Exportar texto con formato?</TextFormatted>    
     <NoInternetConnection>No hay conexión a Internet disponible</NoInternetConnection>
     <FailedToDownload>No hay contenido descargado, falta un archivo o no hay conexión a Internet.</FailedToDownload>
     <AskToExtractAudio>No se encontró la forma de onda de audio, ¿desea extraerla?</AskToExtractAudio>
