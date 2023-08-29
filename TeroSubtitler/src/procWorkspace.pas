@@ -767,6 +767,15 @@ begin
     if actTranslatorMode.Checked <> AValue then actTranslatorMode.Checked := AValue;
     VSTShowColumn(VST, 5, AValue);
     mmoTranslation.Visible := AValue;
+    if AValue then
+      MPVOptions.SubtitleToShow := smTranslation
+    else
+      MPVOptions.SubtitleToShow := smText;
+
+    if MPVSaveSubtitleTempTrack then
+      MPVReloadSubtitleTempTrack;
+
+    DoAutoCheckErrors;
     if AValue then UpdateCPSAndTexts(VSTFocusedNode(VST));
     LayoutVSTResize(LayoutVST);
     VSTResize(VST);

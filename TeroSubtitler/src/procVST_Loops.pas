@@ -76,14 +76,16 @@ uses
 
 procedure ApplyCheckErrors(const Item: PUWSubtitleItem; const Index: Integer);
 begin
-  Item^.ErrorType := CheckErrors(Subtitles, Index, AppOptions.CommonErrors, AppOptions.Conventions, [cmTexts, cmTimes]);
+  Item^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors, AppOptions.Conventions, [cmTexts, cmTimes]);
+  if Workspace.TranslatorMode then
+    Item^.ErrorType := Item^.ErrorType + CheckErrors(Subtitles, Index, smTranslation, AppOptions.CommonErrors, AppOptions.Conventions, [cmTexts, cmTimes]);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure ApplyCheckErrorsTimesOnly(const Item: PUWSubtitleItem; const Index: Integer);
 begin
-  Item^.ErrorType := CheckErrors(Subtitles, Index, AppOptions.CommonErrors, AppOptions.Conventions, [cmTimes]);
+  Item^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors, AppOptions.Conventions, [cmTimes]);
 end;
 
 // -----------------------------------------------------------------------------

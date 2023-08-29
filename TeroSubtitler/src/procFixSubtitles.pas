@@ -61,7 +61,7 @@ type
   TCheckMethodType    = (cmTimes, cmTexts);
   TCheckMethodTypeSet = set of TCheckMethodType;
 
-function CheckErrors(const Subtitles: TUWSubtitles; const Index: Integer; const ErrorsToCheck: TSubtitleErrorTypeSet; const Options: TProfileItem; const ACheckMethod: TCheckMethodTypeSet; const OCR: TUWOCRScript = NIL): TSubtitleErrorTypeSet;
+function CheckErrors(const Subtitles: TUWSubtitles; const Index: Integer; const SubtitleMode: TSubtitleMode; const ErrorsToCheck: TSubtitleErrorTypeSet; const Options: TProfileItem; const ACheckMethod: TCheckMethodTypeSet; const OCR: TUWOCRScript = NIL): TSubtitleErrorTypeSet;
 function NeedToCheckErrors(const Subtitles: TUWSubtitles): Boolean;
 
 // -----------------------------------------------------------------------------
@@ -586,19 +586,24 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function CheckErrors(const Subtitles: TUWSubtitles; const Index: Integer; const ErrorsToCheck: TSubtitleErrorTypeSet; const Options: TProfileItem; const ACheckMethod: TCheckMethodTypeSet; const OCR: TUWOCRScript = NIL): TSubtitleErrorTypeSet;
+function CheckErrors(const Subtitles: TUWSubtitles; const Index: Integer; const SubtitleMode: TSubtitleMode; const ErrorsToCheck: TSubtitleErrorTypeSet; const Options: TProfileItem; const ACheckMethod: TCheckMethodTypeSet; const OCR: TUWOCRScript = NIL): TSubtitleErrorTypeSet;
 var
-  s, t: String;
+  Text, s, t: String;
 begin
   Result := [];
   if not Assigned(Subtitles) or (Subtitles.Count < 1) or (Index > Subtitles.Count) then Exit;
 
   if cmTexts in ACheckMethod then
   begin
+    if SubtitleMode = smText then
+      Text := Subtitles[Index].Text
+    else
+      Text := Subtitles[Index].Translation;
+
     // Repeated subtitle
     if etRepeatedSubtitle in ErrorsToCheck then
     begin
-      if (Index > 0) and Subtitles.IsEqualItem(Subtitles[Index], Subtitles[Index-1]) and (Subtitles[Index].Text <> '') and (Options.RepeatedTolerance > 0) and (Subtitles.Pause[Index] < Options.RepeatedTolerance) then
+      if (Index > 0) and Subtitles.IsEqualItem(Subtitles[Index], Subtitles[Index-1]) and (Text <> '') and (Options.RepeatedTolerance > 0) and (Subtitles.Pause[Index] < Options.RepeatedTolerance) then
       begin
         Result := Result + [etRepeatedSubtitle];
       end;
@@ -609,7 +614,7 @@ begin
     begin
       if Options.CPL > 0 then
       begin
-        t := RemoveTSTags(Subtitles[Index].Text);
+        t := RemoveTSTags(Text);
         s := UnbreakSubtitlesIfLessThanChars(t, Options.CPL);
         if t <> s then
           Result := Result + [etUnbreak];
@@ -619,8 +624,8 @@ begin
     // Unnecessary Spaces
     if etUnnecessarySpaces in ErrorsToCheck then
     begin
-      s := RemoveUnnecessarySpaces(Subtitles[Index].Text);
-      if Subtitles[Index].Text <> s then
+      s := RemoveUnnecessarySpaces(Text);
+      if Text <> s then
       begin
         Result := Result + [etUnnecessarySpaces];
       end;
@@ -629,8 +634,8 @@ begin
     // Unnecessary Dots
     if etUnnecessaryDots in ErrorsToCheck then
     begin
-      s := RemoveUnnecessaryDots(Subtitles[Index].Text);
-      if Subtitles[Index].Text <> s then
+      s := RemoveUnnecessaryDots(Text);
+      if Text <> s then
       begin
         Result := Result + [etUnnecessaryDots];
       end;
@@ -639,7 +644,7 @@ begin
     // Empty subtitle
     if etEmpty in ErrorsToCheck then
     begin
-      if Subtitles[Index].Text = '' then
+      if Text = '' then
       begin
         Result := Result + [etEmpty];
       end;
@@ -648,8 +653,8 @@ begin
     // Ellipses dots to single smart character
     if etEllipsesSingleSmartCharacter in ErrorsToCheck then
     begin
-      s := ReplaceString(Subtitles[Index].Text, '...', '…');
-      if Subtitles[Index].Text <> s then
+      s := ReplaceString(Text, '...', '…');
+      if Text <> s then
       begin
         Result := Result + [etEllipsesSingleSmartCharacter];
       end;
@@ -658,39 +663,39 @@ begin
     // Fix Tags
     if etFixTags in ErrorsToCheck then
     begin
-      s := FixTags(Subtitles[Index].Text, swt_StartTag, swt_EndTag);
-      if Subtitles[Index].Text <> s then
+      s := FixTags(Text, swt_StartTag, swt_EndTag);
+      if Text <> s then
         Result := Result + [etFixTags];
     end;
 
     // Prohibited chars
     if etProhibitedChars in ErrorsToCheck then
     begin
-      if (Options.ProhibitedChars <> '') and HasProhibitedChars(Subtitles[Index].Text, Options.ProhibitedChars) then
+      if (Options.ProhibitedChars <> '') and HasProhibitedChars(Text, Options.ProhibitedChars) then
         Result := Result + [etProhibitedChars];
     end;
 
     // Break long lines
     if etBreakLongLines in ErrorsToCheck then
     begin
-      if (Options.CPL > 0) and HasTooLongLine(RemoveTSTags(Subtitles[Index].Text), Options.CPL) then
+      if (Options.CPL > 0) and HasTooLongLine(RemoveTSTags(Text), Options.CPL) then
         Result := Result + [etBreakLongLines];
     end;
 
     // Hearing impaired
     if etHearingImpaired in ErrorsToCheck then
     begin
-      if IsHearingImpaired(Subtitles[Index].Text) then
+      if IsHearingImpaired(Text) then
         Result := Result + [etHearingImpaired];
     end;
 
     // Repeated chars
     if etRepeatedChars in ErrorsToCheck then
     begin
-      if (Options.RepeatableChars <> '') and HasRepeatedChar(Subtitles[Index].Text, Options.RepeatableChars) then
+      if (Options.RepeatableChars <> '') and HasRepeatedChar(Text, Options.RepeatableChars) then
       begin
-        s := FixRepeatedChar(Subtitles[Index].Text, Options.RepeatableChars);
-        if Subtitles[Index].Text <> s then
+        s := FixRepeatedChar(Text, Options.RepeatableChars);
+        if Text <> s then
           Result := Result + [etRepeatedChars];
       end;
     end;
@@ -698,10 +703,10 @@ begin
     // OCR
     if (etOCR in ErrorsToCheck) and (OCR <> NIL) then
     begin
-      if OCR.HasErrors(Subtitles[Index].Text) then
+      if OCR.HasErrors(Text) then
       begin
-        s := OCR.Fix(Subtitles[Index].Text);
-        if Subtitles[Index].Text <> s then
+        s := OCR.Fix(Text);
+        if Text <> s then
           Result := Result + [etOCR];
       end;
     end;
@@ -709,7 +714,7 @@ begin
     // Max Lines *
     if etMaxLines in ErrorsToCheck then
     begin
-      if (Options.MaxLines > 0) and (LineCount(Subtitles[Index].Text, sLineBreak) > Options.MaxLines) then
+      if (Options.MaxLines > 0) and (LineCount(Text, sLineBreak) > Options.MaxLines) then
         Result := Result + [etMaxLines];
     end;
   end;
@@ -747,7 +752,9 @@ begin
     // too much CPS *
     if etMaxCPS in ErrorsToCheck then
     begin
-      if (Options.MaxCPS > 0) and (Subtitles.TextCPS[Index, Options.CPSLineLenStrategy] > Options.MaxCPS) then
+      if (Options.MaxCPS > 0) then
+        if ((SubtitleMode = smText) and (Subtitles.TextCPS[Index, Options.CPSLineLenStrategy] > Options.MaxCPS)) or
+           ((SubtitleMode = smTranslation) and (Subtitles.TranslationCPS[Index, Options.CPSLineLenStrategy] > Options.MaxCPS)) then
         Result := Result + [etMaxCPS];
     end;
 
@@ -773,7 +780,7 @@ begin
   if Subtitles.Count > 0 then
     for i := 0 to Subtitles.Count-1 do
     begin
-      if Subtitles[i].ErrorType <> [] then
+      if (Subtitles[i].ErrorType <> []) and (Subtitles[i].ErrorType <> [etHearingImpaired]) then
       begin
         Result := True;
         Break;

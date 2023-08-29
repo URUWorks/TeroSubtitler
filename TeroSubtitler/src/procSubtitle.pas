@@ -256,7 +256,7 @@ begin
   if AUpdate then
   begin
     SubtitleChanged(True, True);
-    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
+    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
     UpdateCPSAndTexts(Index);
     if frmMain.VST.SelectedCount = 1 then frmMain.VST.Invalidate;
   end;
@@ -273,7 +273,7 @@ begin
     TAG_CONTROL_FINALTIME   : begin
                                 Subtitles.FinalTime[Index] := Time;
                                 if AppOptions.AutoCheckErrors and (Subtitles.ValidIndex(Index+1)) then
-                                  CheckErrors(Subtitles, Index+1, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
+                                  CheckErrors(Subtitles, Index+1, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
                       end;
     TAG_CONTROL_DURATION    : Subtitles.Duration[Index] := Time;
     TAG_CONTROL_PAUSE       : Subtitles.Pause[Index]    := Time;
@@ -290,7 +290,7 @@ begin
   if AUpdate then
   begin
     SubtitleChanged(True, True);
-    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
+    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
     UpdateCPSAndTexts(Index);
     if frmMain.VST.SelectedCount = 1 then frmMain.VST.Invalidate;
   end;
@@ -313,7 +313,7 @@ begin
   if AUpdate then
   begin
     SubtitleChanged(SubtitleMode = smText, SubtitleMode = smTranslation);
-    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts]);
+    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, SubtitleMode, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts]);
     UpdateCPSAndTexts(Index);
     frmMain.VST.Invalidate;
   end;
@@ -334,7 +334,12 @@ begin
   if AUpdate then
   begin
     SubtitleChanged(True, True);
-    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts]);
+    if AppOptions.AutoCheckErrors then
+    begin
+      Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts]);
+      if Workspace.TranslatorMode then
+        Subtitles.ItemPointer[Index]^.ErrorType += CheckErrors(Subtitles, Index, smTranslation, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts]);
+    end;
     UpdateCPSAndTexts(Index);
     frmMain.VST.Invalidate;
   end;
@@ -352,7 +357,7 @@ begin
 
   if AUpdate then
   begin
-    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts, cmTimes]);
+    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts, cmTimes]);
     UpdateCPSAndTexts(Index);
     frmMain.VST.Invalidate;
   end;
