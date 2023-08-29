@@ -360,7 +360,7 @@ begin
       SelSt   := SelStart;
       s       := Text;
 
-      if not CharInSet(KeyChar, [#48..#57]) then Exit; // 0 - 9
+      if not CharInSet(KeyChar, ['0'..'9']) then Exit;
 
       if (FTimeMode = TUWTimeEditMode.temTime) then
       begin
@@ -378,7 +378,9 @@ begin
         FMINMASK := '00:00:00:00';
         FMAXMASK := MSToHHMMSSFFMax(MaxTime, FFPS);
 
-        if KeyChar > FMAXMASK[SelSt+1] then
+        if ((SelSt+1)=11) and (Text[10] < FMAXMASK[10]) then
+          s[SelSt+1] := KeyChar
+        else if KeyChar > FMAXMASK[SelSt+1] then
           s[SelSt+1] := FMAXMASK[SelSt+1]
         else if KeyChar < FMINMASK[SelSt+1] then
           s[SelSt+1] := FMINMASK[SelSt+1]
