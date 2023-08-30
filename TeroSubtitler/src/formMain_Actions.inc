@@ -156,6 +156,8 @@ begin
       if MPVSaveSubtitleTempTrack then
         MPVReloadSubtitleTempTrack;
     end;
+
+    DoAutoCheckErrors(False, True);
   end
   else if Workspace.ViewMode = vmSource then
     mmoSourceView.Undo
@@ -177,6 +179,8 @@ begin
       if MPVSaveSubtitleTempTrack then
         MPVReloadSubtitleTempTrack;
     end;
+
+    DoAutoCheckErrors(False, True);
   end
   else if Workspace.ViewMode = vmSource then
   begin
