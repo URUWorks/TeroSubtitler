@@ -39,7 +39,7 @@ type
     FinalTime   : Integer;
     Text,
     Translation : String;
-    QC          : TQualityCheckTypeSet;
+    QC          : TQualityCheckType;
   end;
 
   TSubtitleCheckItemList = TList<TSubtitleCheckItem>;
@@ -56,10 +56,20 @@ uses
 // -----------------------------------------------------------------------------
 
 function DoQualityCheck(const AProfileName: String; const AProfiles: TProfiles; var AList: TSubtitleCheckItemList; const AFPS: Single): Boolean;
+
+  procedure AddQCItem(const AIndex: Integer; const AQC: TQualityCheckType);
+  var
+    item: TSubtitleCheckItem;
+  begin
+    FillByte(item, SizeOf(item), 0);
+    item.Index := AIndex;
+    item.QC    := AQC;
+    AList.Add(item);
+  end;
+
 var
   i: Integer;
   Profile: PProfileItem;
-  item: TSubtitleCheckItem;
 begin
   Result := False;
   if (AProfiles = NIL) or (Subtitles.Count = 0) then Exit;
@@ -74,46 +84,39 @@ begin
 
   for i := 0 to Subtitles.Count-1 do
   begin
-    FillByte(item, SizeOf(item), 0);
-
-    item.Index := i;
-
     if (Profile.MaxCPS > 0) and (Subtitles.TextCPS[i, Profile.CPSLineLenStrategy] > Profile.MaxCPS) then
-      item.QC := item.QC + [qcCPS];
+      AddQCItem(i, qcCPS);
 
     if (Profile.WPM > 0) and (Subtitles.TextWPM[i] > Profile.WPM) then
-      item.QC := item.QC + [qcWPM];
+      AddQCItem(i, qcWPM);
 
     if (Profile.CPL > 0) and (GetMaxLinesOf(Subtitles[i].Text) > Profile.CPL) then
-      item.QC := item.QC + [qcCPL];
+      AddQCItem(i, qcCPL);
 
     if (Profile.MaxLines > 0) and (LineCount(Subtitles[i].Text, sLineBreak) > Profile.MaxLines) then
-      item.QC := item.QC + [qcMaximumLines];
+      AddQCItem(i, qcMaximumLines);
 
     if (Profile.MinDuration > 0) and (Subtitles.Duration[i] < Profile.MinDuration) then
-      item.QC := item.QC + [qcMinimumDuration]
+      AddQCItem(i, qcMinimumDuration)
     else if (Profile.MinDurationPerWord > 0) and (Subtitles[i].Text <> '') and  ((Subtitles.Duration[i] div WordCount(Subtitles[i].Text)) < Profile.MinDurationPerWord) then
-      item.QC := item.QC + [qcMinimumDuration];
+      AddQCItem(i, qcMinimumDuration);
 
     if (Profile.MaxDuration > 0) and (Subtitles.Duration[i] > Profile.MaxDuration) then
-      item.QC := item.QC + [qcMaximumDuration];
+      AddQCItem(i, qcMaximumDuration);
 
     if i <> Subtitles.Count-1 then
     begin
       if Profile.PauseInFrames then
       begin
         if (Subtitles.Pause[i] < FramesToTime(Profile.MinPause, AFPS)) then
-          item.QC := item.QC + [qcGAP];
+          AddQCItem(i, qcGAP);
       end
       else
       begin
         if (Subtitles.Pause[i] < Profile.MinPause) then
-          item.QC := item.QC + [qcGAP];
+          AddQCItem(i, qcGAP);
       end;
     end;
-
-    if item.QC <> [] then
-      AList.Add(item);
   end;
 
   Result := True;

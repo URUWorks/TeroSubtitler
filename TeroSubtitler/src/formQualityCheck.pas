@@ -55,7 +55,7 @@ type
     FAppStringList: TAppStringList;
     FProfiles: TProfiles;
     FList: TSubtitleCheckItemList;
-    function GetRuleDescription(const ARules: TQualityCheckTypeSet): String;
+    function GetRuleDescription(const ARules: TQualityCheckType): String;
   public
 
   end;
@@ -214,32 +214,24 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TfrmQualityCheck.GetRuleDescription(const ARules: TQualityCheckTypeSet): String;
+function TfrmQualityCheck.GetRuleDescription(const ARules: TQualityCheckType): String;
 
   procedure RuleDesc(ADesc: String);
   begin
-    if Result.IsEmpty then
-      Result := GetString(FAppStringList, ADesc)
-    else
-      Result := Result + ', ' + GetString(FAppStringList, ADesc);
+    Result := GetString(FAppStringList, ADesc);
   end;
 
 begin
   Result := '';
-  if qcCPS in ARules then
-    RuleDesc('qcCPS')
-  else if qcWPM in ARules then
-    RuleDesc('qcWPM')
-  else if qcCPL in ARules then
-    RuleDesc('qcCPL')
-  else if qcMaximumLines in ARules then
-    RuleDesc('qcMaximumLines')
-  else if qcMinimumDuration in ARules then
-    RuleDesc('qcMinimumDuration')
-  else if qcMaximumDuration in ARules then
-    RuleDesc('qcMaximumDuration')
-  else if qcGAP in ARules then
-    RuleDesc('qcGAP');
+  case ARules of
+    qcCPS: RuleDesc('qcCPS');
+    qcWPM: RuleDesc('qcWPM');
+    qcCPL: RuleDesc('qcCPL');
+    qcMaximumLines: RuleDesc('qcMaximumLines');
+    qcMinimumDuration: RuleDesc('qcMinimumDuration');
+    qcMaximumDuration: RuleDesc('qcMaximumDuration');
+    qcGAP: RuleDesc('qcGAP');
+  end;
 end;
 
 // -----------------------------------------------------------------------------
