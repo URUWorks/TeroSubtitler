@@ -634,7 +634,7 @@
     <etTimeTooLong>Fix durations too long</etTimeTooLong>
     <etOverlapping>Fix overlapping display times</etOverlapping>
     <etBadValues>Fix bad timing values</etBadValues>
-    <etUnbreak>Remove line breaks in %d characters or less</etUnbreak>
+    <etUnbreak>Remove line breaks if %d characters not exceeded</etUnbreak>    
     <etBreakLongLines>Break overlong lines</etBreakLongLines>
     <etEmpty>Remove empty subtitles</etEmpty>
     <etEllipsesSingleSmartCharacter>Convert ellipsis dots to Unicode character</etEllipsesSingleSmartCharacter>
