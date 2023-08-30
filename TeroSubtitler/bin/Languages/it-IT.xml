@@ -16,18 +16,18 @@
       <mnuEditFormat>Formato</mnuEditFormat>
       <mnuEditInsertSymbol>Inserisci simbolo Unicode</mnuEditInsertSymbol>
       <mnuFind>Trova</mnuFind>
-      <mnuSelect>Seleziona</mnuSelect>      
+      <mnuSelect>Seleziona</mnuSelect>
       <mnuTools>Strumenti</mnuTools>
       <mnuToolsTranslationMemory>Memoria di traduzione</mnuToolsTranslationMemory>
-      <mnuToolsTerminology>Glossario</mnuToolsTerminology>      
+      <mnuToolsTerminology>Glossario</mnuToolsTerminology>
       <mnuView>Visualizza</mnuView>
       <mnuViewColumns>Colonne</mnuViewColumns>
-      <mnuViewToolbars>Barre degli strumenti</mnuViewToolbars>      
+      <mnuViewToolbars>Barre degli strumenti</mnuViewToolbars>
       <mnuViewWindows>Finestre</mnuViewWindows>
       <mnuVideo>Video</mnuVideo>
       <mnuVideoPlayback>Riproduzione</mnuVideoPlayback>
       <mnuVideoAudio>Audio</mnuVideoAudio>
-      <mnuVideoVolume>Volume</mnuVideoVolume>            
+      <mnuVideoVolume>Volume</mnuVideoVolume>
       <mnuVideoSubtitles>Sottotitoli</mnuVideoSubtitles>
       <mnuHelp>Aiuto</mnuHelp>
       <mnuDictionary>Dizionario</mnuDictionary>
@@ -37,11 +37,11 @@
       <lblMediaTime Hint="Posizione attuale del video"/>
     </Section>
     <Section Name="TComboBox">
-      <cboInputFPS Hint="FPS del filmato per il quale il file di sottotitoli attualmente aperto è stato creato"/>    
+      <cboInputFPS Hint="FPS del filmato per il quale il file di sottotitoli attualmente aperto è stato creato"/>
       <cboFPS Hint="FPS di destinazione del file di sottotitoli"/>
       <cboFormat Hint="Formato"/>
       <cboEncoding Hint="Codifica"/>
-    </Section>                        
+    </Section>
     <Section Name="TAction">
       <actNewSubtitle Hint="Avvia un nuovo progetto di sottotitoli">Nuovo sottotitolo</actNewSubtitle>
       <actLoadSubtitle Hint="Carica un file di sottotitoli">Carica sottotitoli…</actLoadSubtitle>
@@ -85,7 +85,7 @@
       <actMediaRewind>Indietro</actMediaRewind>
       <actMediaForward>Avanti</actMediaForward>
       <actMediaBack1Sec>Vai indietro di 1 secondo</actMediaBack1Sec>
-      <actMediaBack1Min>Vai indietro di 1 minuto</actMediaBack1Min>      
+      <actMediaBack1Min>Vai indietro di 1 minuto</actMediaBack1Min>
       <actMediaForward1Sec>Vai avanti di 1 secondo</actMediaForward1Sec>
       <actMediaForward1Min>Vai avanti di 1 minuto</actMediaForward1Min>
       <actMediaPlaySelection>Riproduci la selezione</actMediaPlaySelection>
@@ -103,12 +103,12 @@
       <actInvertSelection>Inverti la selezione</actInvertSelection>
       <actSelectCurrentToBeginning>Seleziona dal sottotitolo attuale fino al primo</actSelectCurrentToBeginning>
       <actSelectCurrentToEnd>Seleziona dal sottotitolo attuale fino all’ultimo</actSelectCurrentToEnd>
-      <actModifySelection>Modifica selezione…</actModifySelection>      
+      <actModifySelection>Modifica selezione…</actModifySelection>
       <actDurationLimits>Limiti di durata…</actDurationLimits>
       <actAutomaticDuration>Durata automatica…</actAutomaticDuration>
       <actTimeExpander>Dilatatore/riduttore delle tempistiche…</actTimeExpander>
       <actSetDelay>Imposta ritardo…</actSetDelay>
-      <actShiftTimes>Sposta tempistiche…</actShiftTimes>       
+      <actShiftTimes>Sposta tempistiche…</actShiftTimes>
       <actConvertCase>Converti maiuscole/minuscole…</actConvertCase>
       <actUnbreakSubtitle>Disattiva a capo automatico nei sottotitoli</actUnbreakSubtitle>
       <actSetMaximumLineLength>Imposta lunghezza massima della riga</actSetMaximumLineLength>
@@ -156,7 +156,7 @@
       <actCloseApp>Chiudi</actCloseApp>
       <actImportSubtitles>Sottotitoli…</actImportSubtitles>
       <actExportMarkedSubtitles>Sottotitoli contrassegnati…</actExportMarkedSubtitles>
-      <actExportTextOnly>Solo testo…</actExportTextOnly>            
+      <actExportTextOnly>Solo testo…</actExportTextOnly>
       <actExportCustomTextFormat>Formato di testo personalizzato…</actExportCustomTextFormat>
       <actExportCustomImageFormat>Formato di immagine personalizzata…</actExportCustomImageFormat>
       <actMediaPreviousFrame>Fotogramma precedente</actMediaPreviousFrame>
@@ -177,7 +177,7 @@
       <actTranslationMemorySettings>Apri…</actTranslationMemorySettings>
       <actTranslationMemoryList>Elenco…</actTranslationMemoryList>
       <actFontColorDlg>Colore…</actFontColorDlg>
-      <actFontColor>Imposta il colore del testo</actFontColor>      
+      <actFontColor>Imposta il colore del testo</actFontColor>
       <actAlignToLeft>Allinea a sinistra</actAlignToLeft>
       <actAlignToCenter>Allinea al centro</actAlignToCenter>
       <actAlignToRight>Allinea a destra</actAlignToRight>
@@ -195,20 +195,20 @@
       <actTM3>Utilizza il testo dalla posizione 3 (tm)</actTM3>
       <actTBXSettings>Apri…</actTBXSettings>
       <actTBXClose>Chiudi</actTBXClose>
-      <actTBX>Mostra…</actTBX>      
+      <actTBX>Mostra…</actTBX>
       <actTBXList>Elenco…</actTBXList>
-      <actTBXEdit>Aggiungi…</actTBXEdit>            
+      <actTBXEdit>Aggiungi…</actTBXEdit>
       <actInsertCurrentTime>Inserisci tempistica attuale</actInsertCurrentTime>
       <actLoadTranscription>Trascrizione…</actLoadTranscription>
       <actSaveTranscription>Trascrizione…</actSaveTranscription>
       <actGoToTime>Vai al momento…</actGoToTime>
       <actShotChanges>Cambi di inquadratura…</actShotChanges>
-      <actAudioToText>Da audio a testo…</actAudioToText>            
-      <actBatchConvert>Conversione in blocco…</actBatchConvert>      
+      <actAudioToText>Da audio a testo…</actAudioToText>
+      <actBatchConvert>Conversione in blocco…</actBatchConvert>
       <actQualityCheck>Controllo qualità…</actQualityCheck>
       <actCompare>Confronta…</actCompare>
       <actSwapWorkspace>Scambia la posizione del riquadro del video</actSwapWorkspace>
-      <actInsertShotChange>Inserisci un cambio di inquadratura</actInsertShotChange>                  
+      <actInsertShotChange>Inserisci un cambio di inquadratura</actInsertShotChange>
       <actDeleteShotChange>Elimina un cambio di inquadratura</actDeleteShotChange>
       <actJumpToPrevShotChange>Passa al cambio di inquadratura precedente</actJumpToPrevShotChange>
       <actJumpToNextShotChange>Passa al cambio di inquadratura successivo</actJumpToNextShotChange>
@@ -218,23 +218,23 @@
       <actDetectDialogSegments>Rileva parti dialogate…</actDetectDialogSegments>
       <actSetAsDefaultFormat>Imposta come formato di salvataggio predefinito</actSetAsDefaultFormat>
       <actSetAsDefaultEncoding>Imposta come codifica di salvataggio predefinita</actSetAsDefaultEncoding>
-      <actMediaSubSizeInc>Aumenta la dimensione del testo nel video</actMediaSubSizeInc>      
-      <actMediaSubSizeDec>Riduci la dimensione del testo nel video</actMediaSubSizeDec>      
+      <actMediaSubSizeInc>Aumenta la dimensione del testo nel video</actMediaSubSizeInc>
+      <actMediaSubSizeDec>Riduci la dimensione del testo nel video</actMediaSubSizeDec>
       <actAddQuotationMarks>Aggiungi virgolette</actAddQuotationMarks>
       <actMediaVolumeUp>Alza</actMediaVolumeUp>
       <actMediaVolumeDown>Abbassa</actMediaVolumeDown>
-      <actMediaVolumeMute>Silenzia</actMediaVolumeMute>      
+      <actMediaVolumeMute>Silenzia</actMediaVolumeMute>
       <actShowToolbarMain>Principale</actShowToolbarMain>
       <actShowToolbarFPS>FPS</actShowToolbarFPS>
       <actShowToolbarFormat>Formato</actShowToolbarFormat>
-      <actShowToolbarEncoding>Codifica</actShowToolbarEncoding>                                                         
+      <actShowToolbarEncoding>Codifica</actShowToolbarEncoding>
     </Section>
     <Section Name="TUWTimeEdit">
       <tedInitial Hint="Tempistica iniziale"/>
       <tedFinal Hint="Tempistica finale"/>
       <tedDuration Hint="Durata"/>
       <tedPause Hint="Pausa"/>
-    </Section>        
+    </Section>
   </Form>
   <Form Name="frmAbout" Caption="Informazioni">
     <Section Name="TLabel">
@@ -270,7 +270,7 @@
       <mnuSelectAll>Seleziona tutto</mnuSelectAll>
       <mnuDeSelectAll>Deseleziona tutto</mnuDeSelectAll>
       <mnuInvertSelection>Inverti selezione</mnuInvertSelection>
-    </Section> 
+    </Section>
   </Form>
   <Form Name="frmConvertCase" Caption="Conversione maiuscole/minuscole">
     <Section Name="TUWRadioButton">
@@ -296,7 +296,7 @@
       <lblStartIndex>Inizio #</lblStartIndex>
       <lblEndIndex>Fine #</lblEndIndex>
     </Section>
-  </Form>  
+  </Form>
   <Form Name="frmDurationLimits" Caption="Limiti di durata">
     <Section Name="TUWCheckBox">
       <chkSetMaxDuration>Imposta la durata massima (ms)</chkSetMaxDuration>
@@ -325,13 +325,13 @@
     <Section Name="TLabel">
       <lblTime>Tempistica:</lblTime>
     </Section>
-  </Form>    
+  </Form>
   <Form Name="frmModifySelection" Caption="Modifica della selezione">
     <Section Name="TUWRadioButton">
       <rbnNewSelection>Nuova selezione</rbnNewSelection>
       <rbnAddToCurrentSelection>Aggiungi alla selezione attuale</rbnAddToCurrentSelection>
       <rbnSubtractFromCurrentSelection>Sottrai dalla selezione attuale</rbnSubtractFromCurrentSelection>
-    </Section>  
+    </Section>
   </Form>
   <Form Name="frmMultipleReplace" Caption="Sostituzioni multiple">
     <Section Name="TLabel">
@@ -350,10 +350,10 @@
       <lblTimeCodeMode>Modalità codice temporale</lblTimeCodeMode>
       <lblDefaultFrameRate>Frequenza fotogrammi di ingresso predefinita</lblDefaultFrameRate>
       <lblDefaultFileEncoding>Codifica file predefinita</lblDefaultFileEncoding>
-      <lblDefaultFileFormat>Formato file predefinito</lblDefaultFileFormat>      
+      <lblDefaultFileFormat>Formato file predefinito</lblDefaultFileFormat>
       <lblAutoBackup>Backup automatico ogni (minuti)</lblAutoBackup>
-      <lblZeroToDisable>(0 per disabilitare)</lblZeroToDisable>      
-      <lblProfile>Profilo</lblProfile>      
+      <lblZeroToDisable>(0 per disabilitare)</lblZeroToDisable>
+      <lblProfile>Profilo</lblProfile>
       <lblNewSubtitleMs>Nuovo sottotitolo (ms)</lblNewSubtitleMs>
       <lblMinDurationMs>Durata min. / per parola (ms)</lblMinDurationMs>
       <lblMaxDurationMs>Durata max. (ms)</lblMaxDurationMs>
@@ -362,18 +362,18 @@
       <lblDialogSegmentsDetectionThreshold>Soglia di rilevamento per le parti dialogate</lblDialogSegmentsDetectionThreshold>
       <lblSubtitlePauseMs>Intervallo min.</lblSubtitlePauseMs>
       <lblCPS>Caratteri per secondo</lblCPS>
-      <lblWPM>Parole per minuto</lblWPM>      
-      <lblCPL>Caratteri per riga</lblCPL>            
+      <lblWPM>Parole per minuto</lblWPM>
+      <lblCPL>Caratteri per riga</lblCPL>
       <lblRepeatableChars>Caratteri ripetibili</lblRepeatableChars>
       <lblProhibitedChars>Caratteri non consentiti</lblProhibitedChars>
       <lblCPSStrategy>Caratteri esclusi dal conteggio di CPS</lblCPSStrategy>
       <lblSCSnapArea>Ancoraggio per i cambi di scena / entrata (fotogrammi)</lblSCSnapArea>
       <lblSCSnapInCues>Àncora i punti di entrata dopo il c.i. (fotogrammi)</lblSCSnapInCues>
       <lblSCSnapOutCues>Àncora i punti di uscita prima del c.i. (fotogrammi)</lblSCSnapOutCues>
-      <lblChaining>Concatenazione (fotogrammi)</lblChaining>            
+      <lblChaining>Concatenazione (fotogrammi)</lblChaining>
       <lblTheme>Tema</lblTheme>
       <lblListMode>Modalità elenco</lblListMode>
-      <lblSubtitles>Sottotitoli</lblSubtitles>      
+      <lblSubtitles>Sottotitoli</lblSubtitles>
       <lblSubColor>Colore</lblSubColor>
       <lblSubBorder>Bordo</lblSubBorder>
       <lblSubShadow>Ombra</lblSubShadow>
@@ -382,13 +382,13 @@
       <lblWaveform>Forma d’onda</lblWaveform>
       <lblWaveColor>Colore</lblWaveColor>
       <lblWaveStart>Riga iniziale</lblWaveStart>
-      <lblWaveEnd>Riga finale</lblWaveEnd>	        
+      <lblWaveEnd>Riga finale</lblWaveEnd>	
       <lblToolBarMain>Principale</lblToolBarMain>
       <lblToolBarEditor>Aspetto del testo</lblToolBarEditor>
       <lblToolBarVideo>Filmato</lblToolBarVideo>
       <lblToolBarWave>Forma d’onda</lblToolBarWave>
       <lblShortcutCat>Categoria</lblShortcutCat>
-      <lblShortcut>Scorciatoie da tastiera</lblShortcut>      
+      <lblShortcut>Scorciatoie da tastiera</lblShortcut>
       <lblFFMPEG>FFmpeg</lblFFMPEG>
       <lblSceneDetect>PySceneDetect</lblSceneDetect>
       <lblWhisperCPP>Whisper.cpp</lblWhisperCPP>
@@ -401,7 +401,7 @@
       <chkUseOwnFileDialog>Usa finestra di dialogo di Tero per i file</chkUseOwnFileDialog>
       <chkPromptForDeleteSubtitles>Mostra un avviso quando si rimuovono sottotitoli</chkPromptForDeleteSubtitles>
       <chkPromptForInputFPS>Mostra un avviso sui FPS prima di caricare un file</chkPromptForInputFPS>
-      <chkPromptForSaveWithErrors>Mostra un avviso al salvataggio di un file che presenta errori</chkPromptForSaveWithErrors> 
+      <chkPromptForSaveWithErrors>Mostra un avviso al salvataggio di un file che presenta errori</chkPromptForSaveWithErrors>
       <chkDotsOnSplit>Aggiungi ’…’ in corrispondenza della divisione di un sottotitolo</chkDotsOnSplit>
       <chkDrawTags>Interpreta i tag nell’elenco</chkDrawTags>
       <chkDrawErrors>Mostra gli errori nell’elenco</chkDrawErrors>
@@ -409,7 +409,7 @@
       <chkPauseIsFrames>Fotogrammi</chkPauseIsFrames>
       <chkDrawWaveformGAP>Mostra intervallo nella linea del tempo</chkDrawWaveformGAP>
       <chkAutoPlay>Riproduci automaticamente al caricamento del video</chkAutoPlay>
-      <chkSubtitleHandleByMPV>mpv gestisce i sottotitoli nella visualizzazione dell’anteprima</chkSubtitleHandleByMPV>         
+      <chkSubtitleHandleByMPV>mpv gestisce i sottotitoli nella visualizzazione dell’anteprima</chkSubtitleHandleByMPV>
     </Section>
     <Section Name="TButton">
       <btnShortCutApply>Applica</btnShortCutApply>
@@ -422,7 +422,7 @@
       <lblNotFound>Non trovato</lblNotFound>
       <lblSuggestions>Suggerimenti</lblSuggestions>
       <lblSource>Sorgente</lblSource>
-      <lblCurrentLine># %d</lblCurrentLine>      
+      <lblCurrentLine># %d</lblCurrentLine>
     </Section>
   </Form>
   <Form Name="frmTimeExpander" Caption="Dilatatore/riduttore delle tempistiche…">
@@ -467,7 +467,7 @@
       <lblFont>Carattere</lblFont>
       <lblFontSize>Dimensione</lblFontSize>
     </Section>
-  </Form>        
+  </Form>
   <Form Name="frmTranslationMemory" Caption="Memoria di traduzione"/>
   <Form Name="frmTranslationMemorySettings" Caption="Impostazioni della memoria di traduzione">
     <Section Name="TLabel">
@@ -480,7 +480,7 @@
     <Section Name="TLabel">
       <lblTotal>Totale:</lblTotal>
       <lblFind>Trova</lblFind>
-    </Section>  
+    </Section>
   </Form>
   <Form Name="frmTBXSettings" Caption="Impostazioni del glossario">
     <Section Name="TLabel">
@@ -488,12 +488,12 @@
       <lblTransLang>Lingua della traduzione</lblTransLang>
       <lblFileName>Nome file</lblFileName>
     </Section>
-  </Form>  
+  </Form>
   <Form Name="frmTBXList" Caption="Glossario">
     <Section Name="TLabel">
       <lblTotal>Totale:</lblTotal>
       <lblFind>Trova</lblFind>
-    </Section>  
+    </Section>
   </Form>
   <Form Name="frmTBXEdit" Caption="Glossario">
     <Section Name="TLabel">
@@ -501,11 +501,11 @@
       <lblTranslated>Tradotto</lblTranslated>
       <lblNotes>Note</lblNotes>
     </Section>
-  </Form>                
+  </Form>
   <Form Name="frmWaveExtractor" Caption="Estrattore della forma d’onda">
     <Section Name="TLabel">
       <lblTrack>Traccia:</lblTrack>
-      <lblWait>Attendi</lblWait>      
+      <lblWait>Attendi</lblWait>
     </Section>
   </Form>
   <Form Name="frmShotChanges" Caption="Cambi di inquadratura">
@@ -515,7 +515,7 @@
       <lblTimeCodeOut>Codice temporale per l’esportazione</lblTimeCodeOut>
       <lblSensitivity>Sensibilità di rilevamento</lblSensitivity>
       <lblOffset>Scostamento</lblOffset>
-    </Section>          
+    </Section>
   </Form>
   <Form Name="frmBatchConvert" Caption="Conversione in blocco">
     <Section Name="TLabel">
@@ -532,28 +532,28 @@
       <lblRules>Norme</lblRules>
     </Section>
   </Form>
-  <Form Name="frmActors" Caption="Interpreti"/>  
+  <Form Name="frmActors" Caption="Interpreti"/>
   <Form Name="frmAudioToText" Caption="Da audio a testo">
     <Section Name="TLabel">
-      <lblTrack>Traccia</lblTrack>    
+      <lblTrack>Traccia</lblTrack>
       <lblLanguage>Lingua</lblLanguage>
       <lblModel>Modello</lblModel>
-      <lblWait>Attendi</lblWait>      
+      <lblWait>Attendi</lblWait>
     </Section>
     <Section Name="TUWRadioButton">
       <rbnAddSubtitlesWhileTranscribing>Aggiungi sottotitoli durante la trascrizione</rbnAddSubtitlesWhileTranscribing>
-      <rbnLoadSubtitlesAfterTranscript>Carica sottotitoli al termine della trascrizione</rbnLoadSubtitlesAfterTranscript>      
+      <rbnLoadSubtitlesAfterTranscript>Carica sottotitoli al termine della trascrizione</rbnLoadSubtitlesAfterTranscript>
     </Section>
     <Section Name="TUWCheckBox">
       <chkTranslate>Traduci in inglese</chkTranslate>
-    </Section>            
+    </Section>
   </Form>
   <Form Name="frmAudioToTextModel" Caption="Modelli di conversione da audio a testo"/>
   <Form Name="frmCompare" Caption="Confronta"/>
   <Form Name="frmConventions" Caption="Convenzioni">
     <Section Name="TLabel">
       <lblName>Nome</lblName>
-    </Section>  
+    </Section>
   </Form>
   <Form Name="frmFormatProperties" Caption="Proprietà del formato">
     <Section Name="TLabel">
@@ -571,28 +571,28 @@
       <lblCavenaTranslator>Traduttore</lblCavenaTranslator>
       <lblCavenaComment>Commenti</lblCavenaComment>
       <lblCavenaLanguage>Lingua</lblCavenaLanguage>
-      <lblCavenaTCStart>Codice temporale di inizio</lblCavenaTCStart>            
+      <lblCavenaTCStart>Codice temporale di inizio</lblCavenaTCStart>
       <lblDVDTitle>Titolo</lblDVDTitle>
       <lblDVDAuthor>Autore</lblDVDAuthor>
       <lblDVDInfo>Informazioni</lblDVDInfo>
       <lblDVDWeb>Sito web</lblDVDWeb>
       <lblDVDLanguage>Lingua</lblDVDLanguage>
-      <lblEBUDFC>Codice del formato del disco</lblEBUDFC>      
-      <lblEBUDSC>Mostra il codice standard</lblEBUDSC>      
-      <lblEBUCCT>Tabella della mappa caratteri</lblEBUCCT>      
-      <lblEBUCPN>Numero della tabella dei caratteri</lblEBUCPN>      
-      <lblEBULC>Codice della lingua</lblEBULC>      
-      <lblEBUCO>Paese d’origine</lblEBUCO>      
-      <lblEBUNDC>Numero massimo di caratteri</lblEBUNDC>      
-      <lblEBUNDR>Numero massimo di righe</lblEBUNDR>      
+      <lblEBUDFC>Codice del formato del disco</lblEBUDFC>
+      <lblEBUDSC>Mostra il codice standard</lblEBUDSC>
+      <lblEBUCCT>Tabella della mappa caratteri</lblEBUCCT>
+      <lblEBUCPN>Numero della tabella dei caratteri</lblEBUCPN>
+      <lblEBULC>Codice della lingua</lblEBULC>
+      <lblEBUCO>Paese d’origine</lblEBUCO>
+      <lblEBUNDC>Numero massimo di caratteri</lblEBUNDC>
+      <lblEBUNDR>Numero massimo di righe</lblEBUNDR>
       <lblVTTMPEGTS>Tempo in formato MPEG-2:</lblVTTMPEGTS>
       <lblVTTLOCAL>Marcatore di comparsa del sottotitolo:</lblVTTLOCAL>
-    </Section>        
+    </Section>
     <Section Name="TUWCheckBox">
       <chkVTTWriteCueIdentifiers>Includi gli identificatori dei blocchi di testo</chkVTTWriteCueIdentifiers>
-      <chkVTTUseXTIMESTAMP>Utilizza l’intestazione X-TIMESTAMP-MAP</chkVTTUseXTIMESTAMP>      
-    </Section>    
-  </Form> 
+      <chkVTTUseXTIMESTAMP>Utilizza l’intestazione X-TIMESTAMP-MAP</chkVTTUseXTIMESTAMP>
+    </Section>
+  </Form>
   <Form Name="frmWizard" Caption="Assistente di avvio">
     <Section Name="TLabel">
       <lblWelcome>Benvenuti in</lblWelcome>
@@ -601,7 +601,7 @@
       <lbllibMPV>libmpv:</lbllibMPV>
       <lbllibmpvDesc>Il potente motore multimediale mpv utilizzato per la riproduzione.</lbllibmpvDesc>
       <lblYTDLP>yt-dlp:</lblYTDLP>
-      <lblYTDLPDesc>Componente opzionale per aprire video tramite URL.</lblYTDLPDesc>      
+      <lblYTDLPDesc>Componente opzionale per aprire video tramite URL.</lblYTDLPDesc>
       <lblFFMPEG>FFmpeg:</lblFFMPEG>
       <lblffmpegDesc>La soluzione definitiva per l’estrazione dell’audio e dei cambi di inquadratura.</lblffmpegDesc>
       <lblWhisper>whisper.cpp:</lblWhisper>
@@ -612,15 +612,15 @@
     <Section Name="TLabel">
       <lblDownload>Scaricamento in corso…</lblDownload>
     </Section>
-  </Form>                                                                                                
+  </Form>
   <Form Name="frmWelcome" Caption="">
     <Section Name="TLabel">
       <lblNewSubtitle>Nuovo sottotitolo vuoto</lblNewSubtitle>
       <lblNewTranscription>Nuova trascrizione</lblNewTranscription>
       <lblOpenFile>Apri file…</lblOpenFile>
       <lblBatchConvert>Converti in blocco…</lblBatchConvert>
-      <lblExit>Esci</lblExit>      
-      <lblRecentFiles>File recenti</lblRecentFiles>      
+      <lblExit>Esci</lblExit>
+      <lblRecentFiles>File recenti</lblRecentFiles>
     </Section>
     <Section Name="TUWCheckBox">
       <chkShowOnStartup>Mostra all’avvio</chkShowOnStartup>
@@ -634,7 +634,7 @@
     <etTimeTooLong>Correggi le durate troppo estese</etTimeTooLong>
     <etOverlapping>Correggi le sovrapposizioni nelle tempistiche di comparsa</etOverlapping>
     <etBadValues>Correggi i valori di tempistica sbagliati</etBadValues>
-    <etUnbreak>Rimuovi interruzioni di riga in %d caratteri o meno</etUnbreak>
+    <etUnbreak>Rimuovi interruzioni di riga se il testo non supera i %d caratteri</etUnbreak>
     <etBreakLongLines>Suddividi righe troppo lunghe</etBreakLongLines>
     <etEmpty>Rimuovi i sottotitoli vuoti</etEmpty>
     <etEllipsesSingleSmartCharacter>Converti i punti di sospensione nel carattere Unicode corrispondente</etEllipsesSingleSmartCharacter>
@@ -644,7 +644,7 @@
     <etRepeatedChars>Rimuovi i caratteri ripetuti</etRepeatedChars>
     <etIncompleteHyphenText>Rimuovi riga con troncamento di parola</etIncompleteHyphenText>
     <etSpaceOfOpeningHyphen>Spaziatura del trattino di apertura</etSpaceOfOpeningHyphen>
-    <etRemoveSpacesWithinBrackets>Rimuovi gli spazi all’interno delle parentesi</etRemoveSpacesWithinBrackets>    
+    <etRemoveSpacesWithinBrackets>Rimuovi gli spazi all’interno delle parentesi</etRemoveSpacesWithinBrackets>
     <etFixInterrobang>Correggi il punto esclarrogativo: !? -> ?!</etFixInterrobang>
     <etOCR>Correggi gli errori OCR comuni</etOCR>
     <etSnapToShotChanges>Allineare le tempistiche ai cambi di inquadratura</etSnapToShotChanges>
@@ -657,7 +657,7 @@
     <Current>Attuale</Current>
     <After>Dopo</After>
     <AddSpacing>Aggiungi spaziatura</AddSpacing>
-    <RemoveSpacing>Rimuovi spaziatura</RemoveSpacing>      
+    <RemoveSpacing>Rimuovi spaziatura</RemoveSpacing>
   </FixSubtitlesStrings>
   <SettingsStrings>
     <General>Generali</General>
@@ -675,10 +675,10 @@
     <BlockMode>Blocco</BlockMode>
     <Frames>Fotogrammi</Frames>
     <Milliseconds>Millisecondi</Milliseconds>
-    <ShortCutNone>Nessuno</ShortCutNone>  
+    <ShortCutNone>Nessuno</ShortCutNone>
   </SettingsStrings>
   <ShortCutCategoryStrings>
-    <Edit>Modifica</Edit>  
+    <Edit>Modifica</Edit>
     <Editor>Aspetto del testo</Editor>
     <File>File</File>
     <Find>Trova</Find>
@@ -690,7 +690,7 @@
     <Tools>Strumenti</Tools>
     <Video>Filmato</Video>
     <View>Visualizza</View>
-    <Waveform>Forma d’onda</Waveform>    
+    <Waveform>Forma d’onda</Waveform>
   </ShortCutCategoryStrings>
   <TipStrings>
     <Tip1>Suggerimento: usa &lt;%s/%s&gt; per passare al precedente/prossimo sottotitolo</Tip1>
@@ -699,15 +699,15 @@
     <Tip4>Suggerimento: usa &lt;%s&gt; per agganciare/sganciare il riquadro della forma d’onda</Tip4>
   </TipStrings>
   <CommonStrings>
-    <OpenFile>Apri file</OpenFile>    
-    <SaveFile>Salva file</SaveFile>  
+    <OpenFile>Apri file</OpenFile>
+    <SaveFile>Salva file</SaveFile>
     <AllSupportedFiles>Tutti i file supportati</AllSupportedFiles>
     <ProjectFile>Progetto di traduzione di sottotitoli</ProjectFile>
     <UnableToLoad>Errore nel caricamento del file: formato non riconosciuto.</UnableToLoad>
     <FileNotFound>File non trovato.</FileNotFound>
     <SaveSubtitleError>Errore nel tentativo di salvataggio del file.</SaveSubtitleError>
     <FileChanged>Il file non è stato salvato.</FileChanged>
-    <TranslationFileChanged>Il file della traduzione non è stato salvato.</TranslationFileChanged>    
+    <TranslationFileChanged>Il file della traduzione non è stato salvato.</TranslationFileChanged>
     <AskToSave>’%s’||Si desidera salvarlo?</AskToSave>
     <NoName>senza nome</NoName>
     <WriteDenieded>Scrittura non consentita. Verifica i permessi sulla cartella.</WriteDenieded>
@@ -715,26 +715,26 @@
     <NoSubtitlesMarked>Non sono presenti sottotitoli contrassegnati.</NoSubtitlesMarked>
     <PromptForDeleteLines>Le righe selezionate verranno cancellate.</PromptForDeleteLines>
     <ShiftTimeMore>Sposta di %dms in avanti</ShiftTimeMore>
-    <ShiftTimeLess>Sposta di %dms indietro</ShiftTimeLess>  
+    <ShiftTimeLess>Sposta di %dms indietro</ShiftTimeLess>
     <TranscriptionModeExit>L’uscita dalla modalità trascrizione causerà la perdita di tutte le modifiche non salvate.</TranscriptionModeExit>
     <SourceModeWarning>Passando alla modalità sorgente, il formato del file sarà modificato in “Tero Subtitler”; altrimenti, tutte le traduzioni non salvate verranno perse.</SourceModeWarning>
     <SubtitleHasErrorsToFix>L’attuale insieme di sottotitoli contiene errori che si raccomanda di risolvere, ma è possibile salvarlo.</SubtitleHasErrorsToFix>
-    <TextFormatted>Esportare il testo formattato?</TextFormatted>        
+    <TextFormatted>Esportare il testo formattato?</TextFormatted>
     <NoInternetConnection>Connessione Internet assente</NoInternetConnection>
     <FailedToDownload>Nessun contenuto è stato scaricato: file mancante o connessione Internet assente.</FailedToDownload>
     <AskToExtractAudio>Forma d’onda dell’audio non trovata, si desidera estrarla?</AskToExtractAudio>
     <ExtractAppError>Impossibile trovate ’%s’.</ExtractAppError>
     <Extracting>Estrazione in corso…</Extracting>
     <Transcribing>Trascrizione in corso…</Transcribing>
-    <DetectDialogSegmentsWarning>Tentando di rilevare le parti dialogate, tutti i sottotitoli in elenco saranno cancellati.</DetectDialogSegmentsWarning>    
-    <Entry>Elemento %d</Entry>    
+    <DetectDialogSegmentsWarning>Tentando di rilevare le parti dialogate, tutti i sottotitoli in elenco saranno cancellati.</DetectDialogSegmentsWarning>
+    <Entry>Elemento %d</Entry>
     <libMPVError>Impossibile trovare le librerie necessarie al funzionamento del riproduttore mpv incorporato. Si prega di scaricarle.</libMPVError>
     <libMPVglError>Inizializzazione del contesto grafico GL di mpv non riuscita.</libMPVglError>
     <libMPVVersionError>Impossibile inizializzare libmpv; verificare che la libreria corretta sia stata installata.</libMPVVersionError>
     <SpellCheckFinished>Controllo ortografico terminato.</SpellCheckFinished>
     <Detect>Rilevamento automatico</Detect>
     <AddNote>Aggiungi una nota</AddNote>
-    <OpenVideoFromURL>Apri filmato da</OpenVideoFromURL>    
+    <OpenVideoFromURL>Apri filmato da</OpenVideoFromURL>
     <URL>URL</URL>
     <SupportedSites>Siti supportati</SupportedSites>
     <WebVideoUnsupported>L’attuale formato video non è supportato per la riproduzione all’interno di un browser web.</WebVideoUnsupported>
@@ -742,22 +742,22 @@
     <NewShortCutPresetName>Nome</NewShortCutPresetName>
     <FolderNotEmpty>La cartella non è vuota.</FolderNotEmpty>
     <ContinueAnyway>Continuare?</ContinueAnyway>
-    <SubtitleStartedAt>Sottotitolo cominciato a %s</SubtitleStartedAt>    
+    <SubtitleStartedAt>Sottotitolo cominciato a %s</SubtitleStartedAt>
     <SubtitleEndedAt>Sottotitolo terminato in %s</SubtitleEndedAt>
-    <Failed>Operazione non riuscita.</Failed>    
+    <Failed>Operazione non riuscita.</Failed>
     <Success>Operazione completata.</Success>
     <NewVersionFound>È disponibile una nuova versione.</NewVersionFound>
     <SeeChangeList>Si desidera consultare il registro delle modifiche?</SeeChangeList>
-    <NoNewVersion>È in uso la versione più recente del software.</NoNewVersion>        
+    <NoNewVersion>È in uso la versione più recente del software.</NoNewVersion>
     <ErrorExecuting>Errore durante l’esecuzione di ’%s’.</ErrorExecuting>
     <FeatureNotAvailableFromURL>Funzione non disponibile per i video in Rete.</FeatureNotAvailableFromURL>
-    <MultipleTracksDetected>Più tracce rilevate</MultipleTracksDetected> 
+    <MultipleTracksDetected>Più tracce rilevate</MultipleTracksDetected>
     <SelectTrackToUse>Selezionare la traccia da utilizzare:</SelectTrackToUse>
     <SelectFPSToUse>Selezionare i FPS da utilizzare:</SelectFPSToUse>
     <WriteStatus>Scrittura in corso… %d/%d</WriteStatus>
     <ShortCutInUse>Scorciatoia attualmente in uso per ‘%s’.</ShortCutInUse>
   </CommonStrings>
-  <CommonControls> 
+  <CommonControls>
     <rbnAllTheSubtitles>Tutti i sottotitoli</rbnAllTheSubtitles>
     <rbnFromTheSelectedSubtitle>Dal sottotitolo selezionato</rbnFromTheSelectedSubtitle>
     <rbnOnlySelectedSubtitles>Solo sottotitoli selezionati</rbnOnlySelectedSubtitles>
@@ -767,7 +767,7 @@
     <btnNo>No</btnNo>
     <btnCancel>Annulla</btnCancel>
     <btnSave>Salva</btnSave>
-    <btnLoad>Apri</btnLoad>    
+    <btnLoad>Apri</btnLoad>
     <btnApply>Applica</btnApply>
     <btnFind>Trova</btnFind>
     <btnFindNext>Trova successivo</btnFindNext>
@@ -780,8 +780,8 @@
     <btnPlus>+</btnPlus>
     <btnMinus>-</btnMinus>
     <btnSelectAll>Seleziona tutto</btnSelectAll>
-    <btnInvert>Selezione inversa</btnInvert>        
-    <btnScanFolder>Esplora…</btnScanFolder>    
+    <btnInvert>Selezione inversa</btnInvert>
+    <btnScanFolder>Esplora…</btnScanFolder>
     <btnGo>Vai</btnGo>
     <btnSkip>Salta</btnSkip>
     <btnSkipAll>Salta tutto</btnSkipAll>
@@ -791,22 +791,22 @@
     <btnOpenFile>…</btnOpenFile>
     <btnExtract>Estrai…</btnExtract>
     <btnImport>Importa…</btnImport>
-    <btnExport>Esporta…</btnExport>    
+    <btnExport>Esporta…</btnExport>
     <btnDetect>Rileva</btnDetect>
-    <btnGenerate>Genera</btnGenerate>        
+    <btnGenerate>Genera</btnGenerate>
     <btnCopy>Copia</btnCopy>
-    <btnValidate>Convalida</btnValidate>    
+    <btnValidate>Convalida</btnValidate>
     <btnUse>Utilizza</btnUse>
-    <btnUpdate>Aggiorna</btnUpdate>    
+    <btnUpdate>Aggiorna</btnUpdate>
     <btnNext>Prossimo</btnNext>
-    <btnDownload>Scarica</btnDownload>    
+    <btnDownload>Scarica</btnDownload>
     <lblScope>Destinazione:</lblScope>
   </CommonControls>
   <TranslationMemoryStrings>
     <Original>Originale</Original>
     <Translated>Tradotto</Translated>
     <Percent>Percentuale</Percent>
-  </TranslationMemoryStrings>  
+  </TranslationMemoryStrings>
   <RestoreBackupStrings>
     <DateTime>Data / Ora</DateTime>
     <Filename>Nome file</Filename>
@@ -815,7 +815,7 @@
     <Contains>Contiene</Contains>
     <StartsWith>Comincia con</StartsWith>
     <EndsWith>Termina con</EndsWith>
-  </ModifySelectionStrings>      
+  </ModifySelectionStrings>
   <AdjustSubtitleStrings>
     <Index>#</Index>
     <OldTime>Tempistica precedente</OldTime>
@@ -829,12 +829,12 @@
   <TimeExpanderStrings>
     <Expand>Espandi</Expand>
     <Reduce>Riduci</Reduce>
-  </TimeExpanderStrings>                                
+  </TimeExpanderStrings>
   <MultipleReplaceStrings>
     <Find>Trova</Find>
     <ReplaceWith>Sostituisci con</ReplaceWith>
     <RegExpr>Espressione regolare</RegExpr>
-  </MultipleReplaceStrings>     
+  </MultipleReplaceStrings>
   <BatchConvertStrings>
     <FileName>Nome file</FileName>
     <FileFormat>Formato</FileFormat>
@@ -849,33 +849,33 @@
     <qcMaximumLines>Massimo di righe</qcMaximumLines>
     <qcMinimumDuration>Durata minima</qcMinimumDuration>
     <qcMaximumDuration>Durata massima</qcMaximumDuration>
-    <qcGAP>Intervallo durata minima</qcGAP>        
+    <qcGAP>Intervallo durata minima</qcGAP>
   </QualityCheckStrings>
   <ShotChangesStrings>
     <Frames>Fotogrammi</Frames>
     <Seconds>Secondi</Seconds>
     <Milliseconds>Millisecondi</Milliseconds>
     <HHMMSSZZZ>HH:MM:SS.ZZZ</HHMMSSZZZ>
-    <HHMMSSFF>HH:MM:SS:FF</HHMMSSFF>      
-    <edl>Modifica gli elenchi di decisioni</edl>    
+    <HHMMSSFF>HH:MM:SS:FF</HHMMSSFF>
+    <edl>Modifica gli elenchi di decisioni</edl>
     <shotchanges>File di testo</shotchanges>
     <xml>XML</xml>
   </ShotChangesStrings>
   <CompareStrings>
     <Index>Numero</Index>
     <InitialTime>Tempistica iniziale</InitialTime>
-    <FinalTime>Tempistica finale</FinalTime>    
+    <FinalTime>Tempistica finale</FinalTime>
     <Text>Testo</Text>
   </CompareStrings>
   <FormatPropertiesStrings>
     <Center>Al centro</Center>
     <Left>A sinistra</Left>
-    <Right>A destra</Right>          
+    <Right>A destra</Right>
     <Undefined>Non definito</Undefined>
     <OpenSubtitling>Sottotitolazione libera</OpenSubtitling>
-    <Level1Teletext>Teletesto di livello 1</Level1Teletext>    
+    <Level1Teletext>Teletesto di livello 1</Level1Teletext>
     <Level2Teletext>Teletesto di livello 2</Level2Teletext>
-    <Latin>Latino</Latin>    
+    <Latin>Latino</Latin>
     <LatinCyrillic>Latino/Cirillico</LatinCyrillic>
     <LatinArabic>Latino/Arabo</LatinArabic>
     <LatinGreek>Latino/Greco</LatinGreek>
@@ -884,7 +884,7 @@
   <CustomFormatStrings>
     <Time>Tempistica</Time>
     <Frames>Fotogrammi</Frames>
-  </CustomFormatStrings>                                                                                                                                                                                                                    
+  </CustomFormatStrings>
   <HeaderStrings>
     <Index>#/Intervallo</Index>
     <Times>Tempistiche</Times>
@@ -909,7 +909,7 @@
     <GapTooShort>Intervallo troppo breve</GapTooShort>
     <MaxCPS>Troppi CPS</MaxCPS>
     <OverlappingWithPrev>Sovrapposizione con il sottotitolo precedente</OverlappingWithPrev>
-    <OverlappingWithNext>Sovrapposizione con il sottotitolo successivo</OverlappingWithNext>    
+    <OverlappingWithNext>Sovrapposizione con il sottotitolo successivo</OverlappingWithNext>
     <FixTags>Tag non necessari</FixTags>
     <Empty>Sottotitolo vuoto</Empty>
     <Unbreak>Interruzioni di riga più breve di %d caratteri</Unbreak>
@@ -922,11 +922,11 @@
     <RepeatedSubtitle>Sottotitolo ripetuto</RepeatedSubtitle>
     <EllipsesSingleSmartCharacter>Punti di sospensione al posto del carattere Unicode corrispondente</EllipsesSingleSmartCharacter>
     <MaxLines>Limite del numero massimo di righe superato</MaxLines>
-    <OCR>Errore OCR</OCR>        
-    <WaveformText>Clicca qui per usare la linea del tempo</WaveformText>    
+    <OCR>Errore OCR</OCR>
+    <WaveformText>Clicca qui per usare la linea del tempo</WaveformText>
     <VideoLen>/ %s (%s FPS)</VideoLen>
-    <VideoLenSMPTE>/ %s (%s FPS/SMPTE)</VideoLenSMPTE>    
+    <VideoLenSMPTE>/ %s (%s FPS/SMPTE)</VideoLenSMPTE>
     <ReadingVideoFile>Lettura del file video in corso…</ReadingVideoFile>
-    <Custom>Personalizzato</Custom>    
+    <Custom>Personalizzato</Custom>
   </AppStrings>
 </Language>
