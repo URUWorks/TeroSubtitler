@@ -634,7 +634,7 @@
     <etTimeTooLong>Corregir duración demasiado larga</etTimeTooLong>
     <etOverlapping>Corregir tiempo de visualización superpuesto</etOverlapping>
     <etBadValues>Corregir valores de tiempos incorrectos</etBadValues>
-    <etUnbreak>Quitar saltos de línea en textos en %d caracteres o menos</etUnbreak>
+    <etUnbreak>Quitar saltos de línea si no se exceden %d caracteres</etUnbreak>    
     <etBreakLongLines>Romper filas largas</etBreakLongLines>
     <etEmpty>Eliminar subtítulos vacíos</etEmpty>
     <etEllipsesSingleSmartCharacter>Cambiar puntos suspensivos a carácter inteligente</etEllipsesSingleSmartCharacter>    
