@@ -360,7 +360,7 @@ var
   x: Integer;
 begin
   x := UTF8Pos(BreakChar, Text);
-  if (x > 0) and (not Text.StartsWith('-')) and (UTF8Length(ReplaceRegExpr('{(.*?)}', UnbreakSubtitles(Text, BreakChar), '', True)) <= MaxChars) then
+  if (x > 0) and (not Text.StartsWith('-')) and (UTF8Length(ReplaceRegExpr('{(.*?)}', UnbreakSubtitles(Text, BreakChar), '', True)) <= MaxChars) and (not Copy(Text, x+BreakChar.Length).StartsWith('-')) then
     Result := UnbreakSubtitles(Text, BreakChar)
   else
     Result := Text;
