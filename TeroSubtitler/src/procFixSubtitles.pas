@@ -435,12 +435,14 @@ begin
       // Time too short
       if etTimeTooShort in FErrors then
       begin
-        if GetItemDuration(FixedItem) < Profile^.MinDuration then
-        begin
-          FixedItem.FinalTime   := FixedItem.InitialTime + Profile^.MinDuration;
-          FixedItem.ErrorsFixed := [etTimeTooShort];
-          Add(NewItem(FixedItem));
-        end;
+        if (GetItemDuration(FixedItem) < Profile^.MinDuration) then
+          if ((i < FSubtitles.Count-1) and (FixedItem.InitialTime + Profile^.MinDuration < FSubtitles[i+1].InitialTime - GetCorrectPause(i))) or
+            (i = FSubtitles.Count-1) then
+          begin
+            FixedItem.FinalTime   := FixedItem.InitialTime + Profile^.MinDuration;
+            FixedItem.ErrorsFixed := [etTimeTooShort];
+            Add(NewItem(FixedItem));
+          end;
       end;
 
       //ClearItem(FixedItem, i);
