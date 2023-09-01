@@ -84,7 +84,7 @@ begin
     Stream.Position := 0;
 
     if ReplaceEntities then
-      StringList.Text := HTMLDecode(Stream.DataString) //HTMLReplaceEntities(Stream.DataString)
+      StringList.Text := StrToXMLValue(Stream.DataString) //HTMLDecode(Stream.DataString) //HTMLReplaceEntities(Stream.DataString)
     else
       StringList.Text := Stream.DataString;
   finally
@@ -183,7 +183,7 @@ begin
   for I := 0 to A.Count-1 do
     Result := Result + DOMNodeToString(A[I]);
 
-  Result := XMLTagsToTS(Result);
+  Result := XMLTagsToTS(XMLValueToStr(Result));
 end;
 
 // -----------------------------------------------------------------------------

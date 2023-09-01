@@ -766,7 +766,7 @@ begin
   FSearchSkip    := 0;
   FHeader        := NIL;
   FAutoSort      := True;
-  FReplaceEntity := True;
+  FReplaceEntity := False;
   FTag           := 0;
   FTimeBase      := stbMedia;
   New(FFormatProperties);
