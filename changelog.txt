@@ -1,4 +1,4 @@
-1.0.1.0 (x.9.2023)
+1.0.1.0 (1.9.2023)
 - fixed: Colour and alignment ignored in SRT #161
 - fixed: Auto translate sometimes produces more than two lines #160
 - fixed: Don’t allow export of iTT if it breaches specification #158
