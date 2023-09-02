@@ -196,12 +196,12 @@ end;
 
 function TUWSubRip.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
-  i       : Integer;
-  Count   : Integer;
-  Text    : String;
-  XY      : String;
+  i     : Integer;
+  Count : Integer;
+  Text  : String;
+  XY    : String;
 begin
-  Result  := False;
+  Result := False;
 
   Count := 1;
   for i := FromItem to ToItem do
