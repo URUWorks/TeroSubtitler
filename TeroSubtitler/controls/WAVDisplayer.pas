@@ -272,7 +272,8 @@ type
     procedure DoUpdate(const Complete: Boolean = True);
     // scenechange
     procedure SetSceneChangeEnabled(const AValue: Boolean);
-    procedure LoadSceneChangeFile(const AFileName: String);
+    procedure LoadSceneChangeFile(const AFileName: String; const ASMPTE: Boolean = False);
+    procedure SaveSceneChangeFile(const AFileName: String);
     procedure SetSceneChangeList(const SceneChangeList: TIntegerDynArray);
     procedure ClearSceneChange;
     function GetSceneChangeCount: Integer;

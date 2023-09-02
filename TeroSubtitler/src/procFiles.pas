@@ -569,7 +569,7 @@ begin
     s := ConcatPaths([ShotChangesFolder, ExtractFileName(ChangeFileExt(FileName, TShotChangeExts[i]))]);
     if FileExists(s) then
     begin
-      frmMain.WAVE.LoadSceneChangeFile(s);
+      frmMain.WAVE.LoadSceneChangeFile(s, (Workspace.WorkMode = wmTime));
       Result := True;
       Break;
     end;

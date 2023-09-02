@@ -41,10 +41,11 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure TUWWaveformDisplayer.LoadSceneChangeFile(const AFileName: String);
+procedure TUWWaveformDisplayer.LoadSceneChangeFile(const AFileName: String; const ASMPTE: Boolean = False);
 var
   i : Integer;
   s : TStrings;
+  isSmpte : Boolean;
 begin
   if FileExists(AFileName) then
   begin
@@ -53,15 +54,51 @@ begin
       s.LoadFromFile(AFileName);
       if s.Count > 0 then
       begin
+        isSmpte := False;
+        if ASMPTE and (s[0] = '-1') then
+        begin
+          s.Delete(0);
+          isSmpte := True;
+        end;
+
         SetLength(FSceneChangeList, s.Count);
+
         for i := 0 to s.Count-1 do
-          FSceneChangeList[i] := StrToIntDef(s[i], 0);
+          if not isSmpte then
+            FSceneChangeList[i] := StrToIntDef(s[i], 0)
+          else
+            FSceneChangeList[i] := Round(StrToIntDef(s[i], 0) * 1.001);
 
         SetSceneChangeEnabled(FSceneChangeEnabled);
       end;
     finally
       s.Free;
     end;
+  end;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.SaveSceneChangeFile(const AFileName: String);
+var
+  i : Integer;
+  s : TStrings;
+begin
+  if (Length(FSceneChangeList) = 0) or AFileName.IsEmpty then Exit;
+
+  s := TStringList.Create;
+  try
+    s.BeginUpdate;
+    try
+      for i := Low(FSceneChangeList) to High(FSceneChangeList) do
+        s.Add(FSceneChangeList[i].ToString);
+
+      s.SaveToFile(AFileName);
+    finally
+      s.EndUpdate;
+    end;
+  finally
+    s.Free;
   end;
 end;
 

@@ -232,10 +232,17 @@ begin
       end;
 
       s := ConcatPaths([ShotChangesFolder, ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '.shotchanges')]);
-      //if not FileExists(s) then
-        mmoTimes.Lines.SaveToFile(s);
 
-      frmMain.WAVE.SetSceneChangeList(SC);
+      if FSMPTE then
+        mmoTimes.Lines.Insert(0, '-1');
+
+      mmoTimes.Lines.SaveToFile(s);
+
+      with frmMain.WAVE do
+      begin
+        SetSceneChangeList(SC);
+        //SaveSceneChangeFile(s);
+      end;
     finally
       SetLength(SC, 0);
     end;
