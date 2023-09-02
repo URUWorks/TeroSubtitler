@@ -27,7 +27,7 @@ const
 
   { TUWSubtitleFormatsName }
 
-  TUWSubtitleFormatsName : array[1..39] of String =
+  TUWSubtitleFormatsName : array[1..40] of String =
   (
     'ABC iView',
     'Adobe Encore DVD',
@@ -41,6 +41,7 @@ const
     'Cheetah',
     'Cheetah Caption',
     'CPC-600',
+    'CSV',
     'DKS Subtitle Format',
     'DRTIC',
     'DVD Junior',
@@ -89,6 +90,7 @@ type
     sfCheetah,
     sfCheetahCaption,
     sfCPC600,
+    sfCSV,
     sfDKS,
     sfDRTIC,
     sfDVDJunior,

@@ -295,7 +295,8 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils,
   UWSubtitleAPI.Formats.MacSUB, UWSubtitleAPI.Formats.MPlayer,
   UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.SubViewer,
   UWSubtitleAPI.Formats.Sofni, UWSubtitleAPI.Formats.SpruceSubtitleFile,
-  UWSubtitleAPI.Formats.ITunesTimedText, UWSubtitleAPI.Formats.TeroSubtitler;
+  UWSubtitleAPI.Formats.ITunesTimedText, UWSubtitleAPI.Formats.TeroSubtitler,
+  UWSubtitleAPI.Formats.CSV;
 
 // -----------------------------------------------------------------------------
 
@@ -707,6 +708,7 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWCheetah.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWCheetahCaption.Create) ); // binary
   AList.Add( TUWSubtitleCustomFormat(TUWCPC600.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWCSV.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWDKS.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWDRTIC.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWDVDJunior.Create) );
