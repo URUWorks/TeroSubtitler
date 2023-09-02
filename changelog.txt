@@ -1,3 +1,8 @@
+1.0.1.1 (x.9.2023)
+- fixed: Truncated filenames at start-up window
+- fixed: Shot changes misaligned when opening non-integer file in ZZZ mode
+- added: CSV format
+
 1.0.1.0 (1.9.2023)
 - fixed: Colour and alignment ignored in SRT #161
 - fixed: Auto translate sometimes produces more than two lines #160
