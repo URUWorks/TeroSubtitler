@@ -99,6 +99,7 @@ begin
     lbl            := TLabel.Create(Self);
     lbl.Parent     := Self;
     lbl.SetBounds(lblRecentFiles.Left, h + (i*(lblRecentFiles.Height+6)), 400, 15);
+    lbl.Name       := 'lMRUItem' + i.ToString;
     lbl.Caption    := ExtractFileName(MRU.Items[i]);
     lbl.Hint       := ExtractFilePath(MRU.Items[i]);
     lbl.ShowHint   := True;
@@ -135,7 +136,9 @@ end;
 
 procedure TfrmWelcome.FormShow(Sender: TObject);
 var
-  png: TPortableNetworkGraphic;
+  png : TPortableNetworkGraphic;
+  i : Integer;
+  lbl : TLabel;
 begin
   ColorThemeInstance.Apply(Self, ColorThemeInstance.ColorMode, ImageList_Dark, ImageList_Default);
   png := TPortableNetworkGraphic.Create;
@@ -169,6 +172,18 @@ begin
   finally
     png.Free;
   end;
+
+  for i := 0 to ComponentCount-1 do
+    if Components[i].Name.StartsWith('lMRUItem') then
+    begin
+      lbl := TLabel(Components[i]);
+      if lbl.Width > (Width - lbl.Left) then
+      begin
+        repeat
+          lbl.Caption := Copy(lbl.Caption, 1, Length(lbl.Caption)-6) + '...';
+        until lbl.Width < (Width - lbl.Left);
+      end;
+    end;
 end;
 
 // -----------------------------------------------------------------------------
