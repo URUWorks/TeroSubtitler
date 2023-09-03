@@ -72,14 +72,14 @@ end;
 
 function TUWCSV.IsTimeBased: Boolean;
 begin
-  Result := True;
+  Result := False;
 end;
 
 // -----------------------------------------------------------------------------
 
 function TUWCSV.HasStyleSupport: Boolean;
 begin
-  Result := False;
+  Result := True;
 end;
 
 // -----------------------------------------------------------------------------
