@@ -1,6 +1,7 @@
 1.0.1.1 (x.9.2023)
 - fixed: Truncated filenames at start-up window
 - fixed: Shot changes misaligned when opening non-integer file in ZZZ mode
+- added: Spreadsheet (XLS, XLSX, ODS) format
 - added: CSV format
 
 1.0.1.0 (1.9.2023)
