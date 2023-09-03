@@ -296,7 +296,7 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils,
   UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.SubViewer,
   UWSubtitleAPI.Formats.Sofni, UWSubtitleAPI.Formats.SpruceSubtitleFile,
   UWSubtitleAPI.Formats.ITunesTimedText, UWSubtitleAPI.Formats.TeroSubtitler,
-  UWSubtitleAPI.Formats.CSV;
+  UWSubtitleAPI.Formats.CSV, UWSubtitleAPI.Formats.Spreadsheet;
 
 // -----------------------------------------------------------------------------
 
@@ -730,6 +730,7 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWMPlayer2.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWNetflixTimedText.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSofni.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSpreadsheet.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSpruceSubtitleFile.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubViewer.Create) );

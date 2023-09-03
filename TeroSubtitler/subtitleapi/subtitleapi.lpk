@@ -48,10 +48,10 @@
     </Files>
     <RequiredPkgs>
       <Item>
-        <PackageName Value="UWCommon"/>
+        <PackageName Value="laz_fpspreadsheet"/>
       </Item>
       <Item>
-        <PackageName Value="FCL"/>
+        <PackageName Value="UWCommon"/>
       </Item>
     </RequiredPkgs>
     <UsageOptions>

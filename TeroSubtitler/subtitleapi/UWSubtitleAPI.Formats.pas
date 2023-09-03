@@ -27,7 +27,7 @@ const
 
   { TUWSubtitleFormatsName }
 
-  TUWSubtitleFormatsName : array[1..40] of String =
+  TUWSubtitleFormatsName : array[1..41] of String =
   (
     'ABC iView',
     'Adobe Encore DVD',
@@ -63,6 +63,7 @@ const
     'MPlayer2',
     'Netflix Timed Text',
     'Sofni',
+    'Spreadsheet',
     'Spruce Subtitle File',
     'SubRip',
     'SubViewer',
@@ -112,6 +113,7 @@ type
     sfMPlayer2,
     sfNetflixTimedText,
     sfSofni,
+    sfSpreadsheet,
     sfSpruceSubtitleFile,
     sfSubRip,
     sfSubViewer,
