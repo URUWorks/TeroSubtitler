@@ -54,6 +54,7 @@ Auto-translation API.
 
 - [ATSynEdit](https://wiki.freepascal.org/ATSynEdit) ([EncConv](https://github.com/Alexey-T/EncConv), [ATFlatControls](https://github.com/Alexey-T/ATFlatControls))
 - [BGRABitmap](https://wiki.freepascal.org/BGRABitmap)
+- [FPSpreadsheet](https://wiki.lazarus.freepascal.org/FPSpreadsheet)
 - [UW MPVPlayer](https://github.com/URUWorks/UW_MPVPlayer)
 
 ## Contributions
