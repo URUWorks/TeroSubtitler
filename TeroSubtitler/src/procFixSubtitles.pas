@@ -390,9 +390,9 @@ begin
       // Break long lines
       if etBreakLongLines in FErrors then
       begin
-        if HasTooLongLine(RemoveTSTags(FixedItem.Text), Profile^.CPL) and (Pos(sLineBreak, FixedItem.Text) = 0) then
+        if HasTooLongLine(RemoveTSTags(FixedItem.Text), Profile^.CPL) then //and (Pos(sLineBreak, FixedItem.Text) = 0) then
         begin
-          tmp := AutoBreakSubtitle(FixedItem.Text, Profile^.CPL, sLineBreak, False);
+          tmp := AutoBreakSubtitle(FixedItem.Text, Profile^.CPL);
           if FixedItem.Text <> tmp then
           begin
             FixedItem.Text := tmp;
