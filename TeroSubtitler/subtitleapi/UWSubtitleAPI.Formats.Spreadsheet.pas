@@ -22,8 +22,8 @@ unit UWSubtitleAPI.Formats.Spreadsheet;
 interface
 
 uses
-  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats;
+  SysUtils, Classes, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.SysUtils,
+  UWSubtitleAPI.Formats;
 
 type
 
@@ -113,6 +113,7 @@ var
   InitialTime : Integer;
   FinalTime   : Integer;
   Text, s     : String;
+  sl          : TStrings;
 begin
   Result := False;
 
@@ -121,7 +122,21 @@ begin
     Workbook.ReadFromFile(SubtitleFile.FileName);
     if Workbook.GetWorksheetCount > 0 then
     begin
-      Worksheet := Workbook.GetFirstWorksheet;
+      if Assigned(Subtitles.OnLoadDataFunc) and (Workbook.GetWorksheetCount > 1) then
+      begin
+        try
+          sl := TStringList.Create;
+          for col := 0 to Workbook.GetWorksheetCount-1 do
+            sl.Add(Workbook.GetWorksheetByIndex(col).Name);
+
+          Worksheet := Workbook.GetWorksheetByIndex(Subtitles.OnLoadDataFunc(sl, sl.ClassName));
+        finally
+          sl.Free;
+        end;
+      end
+      else
+        Worksheet := Workbook.GetFirstWorksheet;
+
       for row := 0 to Worksheet.GetLastRowIndex do
       begin
         InitialTime := -1;
