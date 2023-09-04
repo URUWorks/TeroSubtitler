@@ -109,6 +109,7 @@ type
   TSubtitleErrorTypeSet = set of TSubtitleErrorType;
   TSubtitleMode = (smText, smTranslation);
   TSubtitleTimeBase = (stbMedia, stbSMPTE);
+  TSubtitleLoadDataFunc = function(const AData: Pointer; const ADataClass: ShortString): Integer;
 
   PUWSubtitleItem = ^TUWSubtitleItem;
   TUWSubtitleItem = record
@@ -147,6 +148,7 @@ type
     FTag              : Byte;
     FTimeBase         : TSubtitleTimeBase;
     FFormatProperties : PFormatProperties;
+    FLoadDataFunc     : TSubtitleLoadDataFunc;
     function GetCount: Integer;
     procedure SetFormat(const Format: TUWSubtitleFormats);
     function GetItem(Index: Integer): TUWSubtitleItem;
@@ -238,6 +240,7 @@ type
     property ReplaceEntities: Boolean read FReplaceEntity write FReplaceEntity;
     property TimeBase: TSubtitleTimeBase read FTimeBase write FTimeBase;
     property FormatProperties: PFormatProperties read FFormatProperties write FFormatProperties;
+    property OnLoadDataFunc: TSubtitleLoadDataFunc read FLoadDataFunc write FLoadDataFunc;
   end;
 
   { TUWSubtitleCustomFormat }
@@ -772,6 +775,7 @@ begin
   FReplaceEntity := False;
   FTag           := 0;
   FTimeBase      := stbMedia;
+  FLoadDataFunc  := NIL;
   New(FFormatProperties);
   DefaultFormatPropertiesSettings(FFormatProperties);
 end;
@@ -781,6 +785,7 @@ end;
 destructor TUWSubtitles.Destroy;
 begin
   FHeader := NIL;
+  FLoadDataFunc := NIL;
   Dispose(FFormatProperties);
   ClearExtraInfoList(FExtraInfo, FEIType);
   FExtraInfo.Free;
@@ -1563,7 +1568,7 @@ begin
             if not AList[f].IsTextBased and (((Format = sfInvalid) and AList[f].IsMine(SubFile, 0)) or (AList[f].Format = Format)) then
             begin
               Result := AList[f].LoadSubtitle(SubFile, AFPS, Self);
-              Self.FCodePage := SubFile.CodePage;
+              Self.FCodePage := 65001; //SubFile.CodePage;
               Self.FFormat := AList[f].Format;
               Exit;
             end;
