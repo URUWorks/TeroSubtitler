@@ -754,6 +754,7 @@
     <MultipleTracksDetected>Multiple tracks detected</MultipleTracksDetected> 
     <SelectTrackToUse>Select the track to use:</SelectTrackToUse>
     <SelectFPSToUse>Select FPS to use:</SelectFPSToUse>
+    <SelectSheetToUse>Select sheet to use:</SelectSheetToUse>
     <WriteStatus>Writing %d/%d</WriteStatus>    
     <ShortCutInUse>Shortcut currently used in '%s'.</ShortCutInUse>
   </CommonStrings>

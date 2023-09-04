@@ -754,6 +754,7 @@
     <MultipleTracksDetected>Múltiples pistas detectadas</MultipleTracksDetected> 
     <SelectTrackToUse>Seleccione la pista a utilizar:</SelectTrackToUse>
     <SelectFPSToUse>Seleccione los FPS a utilizar:</SelectFPSToUse>
+    <SelectSheetToUse>Seleccione la hoja a utilizar:</SelectSheetToUse>
     <WriteStatus>Escribiendo %d/%d</WriteStatus>
     <ShortCutInUse>Atajo utilizado en '%s'.</ShortCutInUse>    
   </CommonStrings>
