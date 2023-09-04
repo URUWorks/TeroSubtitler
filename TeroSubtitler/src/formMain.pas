@@ -931,6 +931,10 @@ type
 
   end;
 
+  { SubtileAPI OnLoadDataFunc }
+
+  function SAPILoadDataFunc(const AData: Pointer; const ADataClass: ShortString): Integer;
+
 var
   frmMain: TfrmMain;
 
@@ -944,7 +948,7 @@ uses
   procUnDockVideoControls, procColorTheme, procFiles, procMPV, procSubtitle,
   procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.XMLLang,
   UWSystem.SysUtils, UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX,
-  formCustomQuestionDlg;
+  formCustomQuestionDlg, formCustomSelectDlg;
 
 {$R *.lfm}
 
@@ -965,6 +969,7 @@ begin
   DoubleBuffered := True;
   // Initialize SubtitleAPI
   Subtitles := TUWSubtitles.Create;
+  Subtitles.OnLoadDataFunc := @SAPILoadDataFunc;
   // Link subtitles to Waveform
   WAVE.EmptyText := '';
   WAVE.Subtitles := Subtitles;
@@ -1555,6 +1560,19 @@ begin
     cboActor.Items.Add(cboActor.Text);
     Key := 0;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+{ SubtileAPI OnLoadDataFunc }
+
+// -----------------------------------------------------------------------------
+
+function SAPILoadDataFunc(const AData: Pointer; const ADataClass: ShortString): Integer;
+begin
+  Result := 0;
+  if ADataClass = 'TStringList' then
+    Result := formCustomSelectDlg.ExecuteDialog('', GetCommonString('SelectSheetToUse'), TStrings(AData), 0);
 end;
 
 // -----------------------------------------------------------------------------
