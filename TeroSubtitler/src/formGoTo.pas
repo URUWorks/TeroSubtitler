@@ -95,7 +95,7 @@ end;
 procedure TfrmGoTo.btnGoClick(Sender: TObject);
 begin
   VSTSelectNode(frmMain.VST, StrToInt(edtNumber.Text)-1, True);
-  Close;
+  //Close;
 end;
 
 // -----------------------------------------------------------------------------
