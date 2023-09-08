@@ -1152,7 +1152,7 @@ begin
   sl := TStringList.Create;
   try
     with Subtitles[x] do
-      SplitRegExpr('\|\|', DivideLinesAtPosition(Memo.Text, InitialTime, FinalTime, idx), sl);
+      SplitRegExpr('\|\|', DivideLinesAtPosition(Memo.Text, InitialTime, FinalTime, idx, GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames)), sl);
 
     DeleteSubtitle(x, False, False);
 
