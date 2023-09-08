@@ -123,7 +123,7 @@
       <actEndCueAddOneFrame>Add one frame</actEndCueAddOneFrame>
       <actEndCueSubtractOneFrame>Subtract one frame</actEndCueSubtractOneFrame>
       <actMultipleReplace>Multiple replace...</actMultipleReplace>
-      <actGoTo>Go to line number...</actGoTo>
+      <actGoTo>Go to line entry...</actGoTo>
       <actReadTimingsFromFile>Read timings from file...</actReadTimingsFromFile>
       <actReadTextsFromFile>Read text from file...</actReadTextsFromFile>
       <actActor>Actors...</actActor>
@@ -318,7 +318,7 @@
   </Form>
   <Form Name="frmGoTo" Caption="Go to line">
     <Section Name="TLabel">
-      <lblNumber>Number:</lblNumber>
+      <lblNumber>Entry:</lblNumber>
     </Section>
   </Form>
   <Form Name="frmGoToTime" Caption="Go to">
