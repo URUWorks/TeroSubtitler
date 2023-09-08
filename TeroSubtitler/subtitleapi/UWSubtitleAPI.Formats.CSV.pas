@@ -173,12 +173,12 @@ begin
       [Count,
        TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS), //iff(Subtitles.TimeBase = stbMedia, TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz'), TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS)),
        TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS), //iff(Subtitles.TimeBase = stbMedia, TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz'), TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS)),
-       TSTagsToHTML(ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), sLineBreak, sLineBreak+sLineBreak))]), False);
+       TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]))]), False);
     Inc(Count);
   end;
 
   try
-    StringList.SaveToFile(FileName, Encoding);
+    StringList.SaveToFile(FileName, TEncoding.UTF8); // The character set used by data contained in the file MUST be an 8-bit (UTF-8)
     Result := True;
   except
   end;
