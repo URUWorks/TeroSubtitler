@@ -582,20 +582,20 @@ begin
         x    := frmMain.VST.AbsoluteIndex(NodeArray[i]);
         Item := Subtitles.ItemPointer[x];
         if Assigned(Item) then
-        with Item^, AppOptions.Conventions do
-        begin
-          SplitRegExpr('\|\|', DivideLines(Text, InitialTime, FinalTime, AppOptions.Conventions.DotsOnSplit, AppOptions.Conventions.CPL), s);
-          DeleteSubtitle(x, False, False);
-
-          while s.Count >= 3 do
+          with Item^, AppOptions.Conventions do
           begin
-            t1 := StrToIntDef(s[0], 0);
-            t2 := StrToIntDef(s[1], 0);
-            InsertSubtitle(x, t1, t2, s[2], '', False, False);
-            for c := 1 to 3 do s.Delete(0);
-            inc(x);
+            SplitRegExpr('\|\|', DivideLines(Text, InitialTime, FinalTime, AppOptions.Conventions.DotsOnSplit, AppOptions.Conventions.CPL, GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames)), s);
+            DeleteSubtitle(x, False, False);
+
+            while s.Count >= 3 do
+            begin
+              t1 := StrToIntDef(s[0], 0);
+              t2 := StrToIntDef(s[1], 0);
+              InsertSubtitle(x, t1, t2, FixIncompleteTags(s[2]), '', False, False);
+              for c := 1 to 3 do s.Delete(0);
+              inc(x);
+            end;
           end;
-        end;
       end;
       NodeArray := NIL;
     finally
