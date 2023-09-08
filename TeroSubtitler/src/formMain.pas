@@ -1281,10 +1281,11 @@ begin
   Workspace.FPS.OutputFPS := Workspace.FPS.InputFPS;
   SetTimeFPStoTimeEditCtrls;
 
-  DoAutoCheckErrors;
-
   if (Sender <> NIL) then
+  begin
+    DoAutoCheckErrors;
     UpdateValues(True);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1300,10 +1301,11 @@ begin
   if (Workspace.WorkMode = wmFrames) then
     SetSMPTEMode(not IsInteger(GetFPS));
 
-  DoAutoCheckErrors;
-
   if (Sender <> NIL) then
+  begin
+    DoAutoCheckErrors;
     UpdateValues(True);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
