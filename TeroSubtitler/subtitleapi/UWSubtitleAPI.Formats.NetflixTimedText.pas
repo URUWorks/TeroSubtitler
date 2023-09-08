@@ -278,7 +278,7 @@ begin
       XMLToStrings(XmlDoc, StringList, Subtitles.ReplaceEntities);
 
       if not FileName.IsEmpty then
-        StringList.SaveToFile(FileName, Encoding);
+        StringList.SaveToFile(FileName, TEncoding.UTF8); // must be encoded using UTF-8
 
       Result := True;
     except

@@ -313,7 +313,7 @@ begin
   end;
 
   try
-    StringList.SaveToFile(FileName, Encoding);
+    StringList.SaveToFile(FileName, TEncoding.UTF8); // must be encoded using UTF-8
     Result := True;
   except
   end;
