@@ -41,6 +41,7 @@ function PreserveCase(const Text, NewText: String): String;
 function SentenceCase(const Text: String): String;
 function InvertCase(const Text: String): String;
 function TitleCase(const Text: String): String;
+procedure RE_ExtractTags(const AText: String; const AList: TStrings; const AOpenChar: Char = '{'; const ACloseChar: Char = '}');
 function RE_StringCount(const ARExpr, ASource: String): Integer;
 function RE_Pos(const ARExpr, ASource: String): Integer;
 function PosCS(const SubStr, Str: String): Integer;
@@ -260,6 +261,45 @@ begin
       up := False;
     end;
     Inc(i);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function Strings_FindPairIndexFromValue(const AItem: String; const AList: TStrings): Integer;
+var
+  i: Integer;
+begin
+  Result := -1;
+  for i := 0 to AList.Count-1 do
+    if AItem = Copy(AList[i], 1, Pos(AList.NameValueSeparator, AList[i])-1) then
+      Exit(i);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure RE_ExtractTags(const AText: String; const AList: TStrings; const AOpenChar: Char = '{'; const ACloseChar: Char = '}');
+var
+  RE : TRegExpr;
+  x  : Integer;
+begin
+  RE := TRegExpr.Create('\'+AOpenChar+'\\(.*?)\'+ACloseChar);
+  try
+    if RE.Exec(AText) then
+    repeat
+      if RE.Match[1].EndsWith('0') then
+      begin
+        x := Strings_FindPairIndexFromValue(Copy(RE.Match[1], 1, RE.MatchLen[1]-1) + '1', AList);
+        if x > -1 then
+          AList.Delete(x)
+        else
+          AList.AddPair(RE.Match[1], RE.MatchPos[0].ToString);
+      end
+      else
+        AList.AddPair(RE.Match[1], RE.MatchPos[0].ToString);
+    until not RE.ExecNext;
+  finally
+    RE.Free;
   end;
 end;
 
