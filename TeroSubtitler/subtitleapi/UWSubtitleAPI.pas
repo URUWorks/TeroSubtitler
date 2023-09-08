@@ -299,7 +299,8 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils,
   UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.SubViewer,
   UWSubtitleAPI.Formats.Sofni, UWSubtitleAPI.Formats.SpruceSubtitleFile,
   UWSubtitleAPI.Formats.ITunesTimedText, UWSubtitleAPI.Formats.TeroSubtitler,
-  UWSubtitleAPI.Formats.CSV, UWSubtitleAPI.Formats.Spreadsheet;
+  UWSubtitleAPI.Formats.CSV, UWSubtitleAPI.Formats.Spreadsheet,
+  UWSubtitleAPI.Formats.TSV;
 
 // -----------------------------------------------------------------------------
 
@@ -739,6 +740,7 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWSubViewer.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWTeroSubtitler.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWTimedText.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWTSV.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWWebVTT.Create) );
 end;
 

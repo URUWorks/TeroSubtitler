@@ -27,7 +27,7 @@ const
 
   { TUWSubtitleFormatsName }
 
-  TUWSubtitleFormatsName : array[1..41] of String =
+  TUWSubtitleFormatsName : array[1..42] of String =
   (
     'ABC iView',
     'Adobe Encore DVD',
@@ -69,6 +69,7 @@ const
     'SubViewer',
     'Tero Subtitler',
     'Timed Text',
+    'TSV',
     'WebVTT'
   );
 
@@ -119,6 +120,7 @@ type
     sfSubViewer,
     sfTeroSubtitler,
     sfTimedText,
+    sfTSV,
     sfWebVTT
   );
 
