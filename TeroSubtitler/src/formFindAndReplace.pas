@@ -227,7 +227,7 @@ begin
   VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, FindModeFromBoolean(rbnAllTheSubtitles.Checked),
     True, mmoReplaceWith.Text, True, chkPreserveCaseOnReplace.Checked, chkWholeWord.Checked, chkRegularExpression.Checked);
 
-  Close;
+  //Close;
 end;
 
 // -----------------------------------------------------------------------------
