@@ -22,7 +22,8 @@ unit UWSubtitleAPI.Utils;
 interface
 
 uses
-  Classes, UWSubtitleAPI, laz2_DOM, laz2_XMLRead, laz2_XMLWrite, SysUtils;
+  Classes, UWSubtitleAPI, laz2_DOM, laz2_XMLRead, laz2_XMLWrite, SysUtils,
+  StrUtils;
 
 procedure StringsToXML(var XmlDoc: TXMLDocument; const StringList: TUWStringList);
 procedure XMLToStrings(const XmlDoc: TXMLDocument; const StringList: TUWStringList; const ReplaceEntities: Boolean = True);
@@ -303,22 +304,11 @@ end;
 
 function HTMLDecode(const AStr: String): String;
 begin
-  Result := AStr;
-  Result := StringReplace(Result, #13#13, #13, [rfReplaceAll]);
-  Result := StringReplace(Result, #10#10, #10, [rfReplaceAll]);
-  Result := StringReplace(Result, #10#13#10#13, #10#13, [rfReplaceAll]);
-  Result := StringReplace(Result, '&amp;', '&', [rfReplaceAll]);
-  Result := StringReplace(Result, '&quot;', '"',  [rfReplaceAll]);
-  Result := StringReplace(Result, '&lt;', '<', [rfReplaceAll]);
-  Result := StringReplace(Result, '&gt;', '>', [rfReplaceAll]);
-  Result := StringReplace(Result, '&nbsp;', ' ', [rfReplaceAll]);
-  Result := StringReplace(Result, '&auml;', 'ä', [rfReplaceAll]);
-  Result := StringReplace(Result, '&ouml;', 'ö', [rfReplaceAll]);
-  Result := StringReplace(Result, '&uuml;', 'ü', [rfReplaceAll]);
-  Result := StringReplace(Result, '&Auml;', 'Ä', [rfReplaceAll]);
-  Result := StringReplace(Result, '&Ouml;', 'Ö', [rfReplaceAll]);
-  Result := StringReplace(Result, '&Uuml;', 'Ü', [rfReplaceAll]);
-  Result := StringReplace(Result, '&szlig;', 'ß', [rfReplaceAll]);
+  Result := StringsReplace(AStr, [#13#13, #10#10, #10#13#10#13, '&amp;',
+    '&quot;', '&lt;', '&gt;', '&nbsp;', '&auml;', '&ouml;', '&uuml;', '&Auml;',
+    '&Ouml;', '&Uuml;', '&szlig;'],
+    [#13, #10, #10#13, '&', '"', '<', '>', ' ', 'ä', 'ö', 'ü', 'Ä',
+    'Ö', 'Ü', 'ß'], [rfReplaceAll]);
 end;
 
 // -----------------------------------------------------------------------------
