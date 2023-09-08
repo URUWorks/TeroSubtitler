@@ -754,6 +754,7 @@
     <MultipleTracksDetected>Più tracce rilevate</MultipleTracksDetected>
     <SelectTrackToUse>Selezionare la traccia da utilizzare:</SelectTrackToUse>
     <SelectFPSToUse>Selezionare i FPS da utilizzare:</SelectFPSToUse>
+    <SelectSheetToUse>Selezionare il foglio da utilizzare:</SelectSheetToUse>
     <WriteStatus>Scrittura in corso… %d/%d</WriteStatus>
     <ShortCutInUse>Scorciatoia attualmente in uso per ‘%s’.</ShortCutInUse>
   </CommonStrings>
