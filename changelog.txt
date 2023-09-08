@@ -1,8 +1,12 @@
 1.0.1.1 (x.9.2023)
+- fixed: Window closes after going to line number #180
+- fixed: Window disappears after applying Replace All #179
+- fixed: Gapping not respected when dividing subtitle #178
+- fixed: Tagging not fully carried over in divided subtitle #177
 - fixed: Truncated filenames at start-up window
 - fixed: Shot changes misaligned when opening non-integer file in ZZZ mode
 - added: Spreadsheet (XLS, XLSX, ODS) format
-- added: CSV format
+- added: CSV/TSV format
 
 1.0.1.0 (1.9.2023)
 - fixed: Colour and alignment ignored in SRT #161
