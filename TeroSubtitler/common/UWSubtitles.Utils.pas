@@ -40,6 +40,7 @@ procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Si
 { Texts }
 
 function FixTags(const Text: String; const StartTag, EndTag: Char): String;
+function FixIncompleteTags(const Text: String; const StartTag: Char = '{'; const EndTag: Char = '}'): String;
 function RemoveUnnecessaryDots(Text: String): String;
 function RemoveUnnecessarySpaces(const Text: String; const BreakChar: String = sLineBreak): String;
 function HasProhibitedChars(Text, Chars: String): Boolean;
@@ -48,8 +49,8 @@ function SmartLineAdjust(Text: String; const ChrsPerLine: Integer; const BreakCh
 function AutoBreakSubtitle(Text: String; const ChrsPerLine: Integer; const BreakChar: String = sLineBreak; const UnbreakBefore: Boolean = True): String;
 function UnbreakSubtitles(const Text: String; const BreakChar: String = sLineBreak): String; // make subtitles be in one line
 function UnbreakSubtitlesIfLessThanChars(const Text: String; const MaxChars: Integer; const BreakChar: String = sLineBreak): String;
-function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const AddDots: Boolean = False; const ChrsPerLine: Integer = 43; const BreakChar: String = sLineBreak): String; // easily divide a subtitle with more than one line (or one big line) into two subtitles with proper time recalculation
-function DivideLinesAtPosition(Text: String; const InitialTime, FinalTime, Position: Cardinal): String;
+function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const AddDots: Boolean = False; const ChrsPerLine: Integer = 43; const Gap: Integer = 833; const BreakChar: String = sLineBreak): String;
+function DivideLinesAtPosition(Text: String; const InitialTime, FinalTime, Position: Cardinal; const Gap: Integer = 833): String;
 function SetMaximumLineLength(const Text: String; const MaxChrs: Integer; const BreakChar: String = sLineBreak): String; // splits the subtitle in N number of lines so that each of the lines is shorter than a maximum specified length
 function ReverseText(Text: String; const Enter: String = sLineBreak; const KeepLinesOrder: Boolean = True): String;
 function FixRTLPunctuation(const Text: String; const Delimiter: String = sLineBreak): String;
@@ -206,6 +207,51 @@ begin
   Result := FixTag(Result, 'i');
   Result := FixTag(Result, 'u');
   Result := FixTag(Result, 's');
+
+//  Result := ReplaceRegExpr(Format('\s+(?=[^%s\%s]*\%s)', [StartTag, EndTag, EndTag]), Text, ''); // Fails :S
+end;
+
+// -----------------------------------------------------------------------------
+
+function FixIncompleteTags(const Text: String; const StartTag: Char = '{'; const EndTag: Char = '}'): String;
+var
+  L : TStrings;
+  s : String;
+  x, i : Integer;
+begin
+  if Text.IsEmpty then Exit;
+  Result := Text;
+
+  L := TStringList.Create;
+  try
+    RE_ExtractTags(Text, L);
+    if L.Count > 0 then
+    begin
+      for i := 0 to L.Count-1 do
+      begin
+        x := Pos(L.NameValueSeparator, L[i]);
+        s := Copy(L[i], 1, x-1);
+        x := Copy(L[i], x+1).ToInteger;
+
+        if s.EndsWith('1') then
+        begin
+          if x < Result.Length then
+            Result := Format('%s%s\%s0%s', [Result, StartTag, Copy(s, 1, s.Length-1), EndTag])
+          else
+            Delete(Result, x, s.Length+3);
+        end
+        else if s.EndsWith('0') then
+        begin
+          if x >= (Result.Length - (s.Length+3)) then
+            Result := Format('%s\%s1%s%s', [StartTag, Copy(s, 1, s.Length-1), EndTag, Result])
+          else
+            Delete(Result, x, s.Length+3);
+        end;
+      end;
+    end;
+  finally
+    L.Free;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -368,7 +414,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const AddDots: Boolean = False; const ChrsPerLine: Integer = 43; const BreakChar: String = sLineBreak): String;
+function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const AddDots: Boolean = False; const ChrsPerLine: Integer = 43; const Gap: Integer = 833; const BreakChar: String = sLineBreak): String;
 var
   s               : TStringList;
   i, ft, duration : Cardinal;
@@ -407,7 +453,8 @@ begin
       else
         str := s[i];
 
-      Result := Format('%s%d||%d||%s||', [Result, ft + 1, ft + duration, str]);
+      ft := ft + Gap;
+      Result := Format('%s%d||%d||%s||', [Result, ft, ft + duration, str]);
       ft := ft + duration;
     end;
   finally
@@ -417,7 +464,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function DivideLinesAtPosition(Text: String; const InitialTime, FinalTime, Position: Cardinal): String;
+function DivideLinesAtPosition(Text: String; const InitialTime, FinalTime, Position: Cardinal; const Gap: Integer = 833): String;
 var
   sl : TStringList;
   i, ft, duration : Cardinal;
@@ -437,6 +484,7 @@ begin
 
     for i := 1 to sl.Count - 1 do
     begin
+      ft := ft + Gap;
       Result := Format('%s%d||%d||%s||', [Result, ft + 1, ft + duration, sl[i]]);
       ft := ft + duration;
     end;
