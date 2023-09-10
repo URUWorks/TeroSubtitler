@@ -666,6 +666,9 @@ type
     procedure DoWAVEPopup(Sender: TObject);
     procedure DoAutoBackupTimer(Sender: TObject);
     procedure DoStatusTimer(Sender: TObject);
+    {$IFDEF DARWIN}
+    procedure DoSaveDialogTypeChange(Sender: TObject);
+    {$ENDIF}
     // Memo (ATSynEdit)
     procedure MemoClickLink(Sender: TObject; const ALink: String);
     procedure MemoContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
@@ -1563,6 +1566,20 @@ begin
     Key := 0;
   end;
 end;
+
+// -----------------------------------------------------------------------------
+
+{$IFDEF DARWIN}
+procedure TfrmMain.DoSaveDialogTypeChange(Sender: TObject);
+begin
+  if Sender = NIL then Exit;
+  with TSaveDialog(Sender) do
+  begin
+    DefaultExt := GetDefaultExtFromFilter(FilterIndex, Filter);
+    FileName := ChangeFileExt(FileName, DefaultExt);
+  end;
+end;
+{$ENDIF}
 
 // -----------------------------------------------------------------------------
 

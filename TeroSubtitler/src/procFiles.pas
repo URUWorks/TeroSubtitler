@@ -25,6 +25,10 @@ uses
   Classes, SysUtils, Controls, Dialogs, formMain, procTypes, UWSubtitleAPI,
   UWSubtitleAPI.Formats;
 
+{ Helpers }
+
+function GetDefaultExtFromFilter(const AIndex: Integer; const AFilter: String): String;
+
 { Subtitle files }
 
 function CloseSubtitle(const ACloseVideo: Boolean): Boolean;
@@ -116,6 +120,30 @@ begin
   Result := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
   if Result.IsEmpty and not frmMain.MPV.FileName.IsEmpty then
     Result := ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '');
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetDefaultExtFromFilter(const AIndex: Integer; const AFilter: String): String;
+var
+  sa : TStringArray;
+  s : String;
+  index, a, b : Integer;
+begin
+  if AFilter.IsEmpty then Exit;
+  sa := AFilter.Split('|');
+  index := (AIndex-1) * 2;
+  s := sa[index];
+  a := Pos('*.', s);
+  if a > 0 then
+  begin
+    b := Pos(';', s);
+    if b > 0 then
+      s := Copy(s, a+1, b-a-1)
+    else
+      s := Copy(s, a+1, s.Length-a-1);
+  end;
+  Result := s;
 end;
 
 // -----------------------------------------------------------------------------
@@ -661,7 +689,10 @@ begin
       SD.Title  := GetCommonString('SaveFile');
       SD.Filter := Subtitles.FillDialogFilter('');
       SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
-      SD.FileName := GetSuggestedFileNameForSave;
+      SD.FileName := {$IFDEF DARWIN}ChangeFileExt({$ENDIF}GetSuggestedFileNameForSave{$IFDEF DARWIN}, GetDefaultExtFromFilter(SD.FilterIndex, SD.Filter)){$ENDIF};
+      {$IFDEF DARWIN}
+      SD.OnTypeChange := @frmMain.DoSaveDialogTypeChange;
+      {$ENDIF}
 
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
       if SD.Execute then
