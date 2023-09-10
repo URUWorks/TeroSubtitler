@@ -5,6 +5,7 @@
 - fixed: Tagging not fully carried over in divided subtitle #177
 - fixed: Truncated filenames at start-up window
 - fixed: Shot changes misaligned when opening non-integer file in ZZZ mode
+- added: Remove excess tagging #176
 - added: Spreadsheet (XLS, XLSX, ODS) format
 - added: CSV/TSV format
 
