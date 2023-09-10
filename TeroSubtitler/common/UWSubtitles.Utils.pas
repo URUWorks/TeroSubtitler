@@ -260,6 +260,7 @@ end;
 function CleanupTags(const Text: String; const Tags: Array of String; const StartTag: Char = '{'; const EndTag: Char = '}'): String;
 var
   i : Integer;
+  sTag, eTag: String;
 begin
   Result := Text;
   if Result.IsEmpty or (Length(Tags) = 0) then Exit;
@@ -271,6 +272,16 @@ begin
       Result,
       '$1$2$4$5$3',
       [rroModifierI, rroModifierG, rroModifierM, rroUseSubstitution]);
+  end;
+
+  //
+  for i := 0 to Length(Tags)-1 do
+  begin
+    sTag := Format('%s\%s1%s', [StartTag, Tags[i], EndTag]);
+    eTag := Format('%s\%s0%s', [StartTag, Tags[i], EndTag]);
+
+    while Result.Contains(sTag+sTag) and Result.Contains(eTag+eTag) do
+      Result := StringsReplace(Result, [sTag+sTag, eTag+eTag], [sTag, eTag], [rfReplaceAll]);
   end;
 end;
 
