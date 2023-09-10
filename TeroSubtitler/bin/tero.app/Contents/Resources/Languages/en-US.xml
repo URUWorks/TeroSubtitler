@@ -652,6 +652,7 @@
     <etSnapToShotChangesOutCue>Snap Out Cue to shot change</etSnapToShotChangesOutCue>
     <etSnapToShotChangesInCueAway>Snap In Cue away from shot change</etSnapToShotChangesInCueAway>        
     <etChaining>Chaining subtitles</etChaining>
+    <etCleanupTags>Cleanup tags</etCleanupTags>    
     <Index>#</Index>
     <Action>Action</Action>
     <Current>Current</Current>
@@ -911,7 +912,7 @@
     <MaxCPS>Too many CPS</MaxCPS>
     <OverlappingWithPrev>Overlapping with previous subtitle</OverlappingWithPrev>
     <OverlappingWithNext>Overlapping with following subtitle</OverlappingWithNext>    
-    <FixTags>Unnecessary tags</FixTags>
+    <FixTags>Invalid or incomplete tags</FixTags>
     <Empty>Empty subtitle</Empty>
     <Unbreak>Line breaks less than %d characters</Unbreak>
     <UnnecessarySpaces>Unnecessary spaces</UnnecessarySpaces>

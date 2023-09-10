@@ -651,7 +651,8 @@
     <etSnapToShotChangesInCue>Ajustar entrada a cambio de plano</etSnapToShotChangesInCue>
     <etSnapToShotChangesOutCue>Ajustar salida a cambio de plano</etSnapToShotChangesOutCue>
     <etSnapToShotChangesInCueAway>Ajustar entrada lejos del cambio de plano</etSnapToShotChangesInCueAway>
-    <etChaining>Encadenamiento de subtítulos</etChaining>    
+    <etChaining>Encadenamiento de subtítulos</etChaining>
+    <etCleanupTags>Limpieza de etiquetas</etCleanupTags>    
     <Index>#</Index>
     <Action>Acción</Action>
     <Current>Actual</Current>
@@ -911,7 +912,7 @@
     <MaxCPS>Demasiados CPS</MaxCPS>
     <OverlappingWithPrev>Superposición con el subtítulo anterior</OverlappingWithPrev>
     <OverlappingWithNext>Superposición con el subtítulo siguiente</OverlappingWithNext>        
-    <FixTags>Etiquetas innecesarias</FixTags>
+    <FixTags>Etiquetas inválidas o incompletas</FixTags>
     <Empty>Subtítulo vacío</Empty>
     <Unbreak>Saltos de línea menores a %d caracteres</Unbreak>    
     <UnnecessarySpaces>Espacios innecesarios</UnnecessarySpaces>
