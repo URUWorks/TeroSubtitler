@@ -387,6 +387,19 @@ begin
       end;
 
       //ClearItem(FixedItem, i);
+      // Cleanup Tags
+      if etCleanupTags in FErrors then
+      begin
+        tmp := CleanupTags(FixedItem.Text, [swt_Bold, swt_Italic, swt_Underline, swt_Strikeout]);
+        if FixedItem.Text <> tmp then
+        begin
+          FixedItem.Text := tmp;
+          FixedItem.ErrorsFixed := [etCleanupTags];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
       // Break long lines
       if etBreakLongLines in FErrors then
       begin

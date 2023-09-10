@@ -21,11 +21,15 @@ unit UWSubtitles.Utils;
 
 interface
 
-uses SysUtils, StrUtils, Classes, Graphics, Math;
+uses SysUtils, StrUtils, Classes, Graphics, Math, uregexpr;
 
 type
 
   TAutomaticDurationMode = (dmAlwaysNew, dmIfGreater, dmIfSmaller);
+
+  TRegExReplaceSpaces = class
+    function ReplaceSpaces(ARegExpr: TRegExpr): RegExprString;
+  end;
 
 { Timings }
 
@@ -41,6 +45,7 @@ procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Si
 
 function FixTags(const Text: String; const StartTag, EndTag: Char): String;
 function FixIncompleteTags(const Text: String; const StartTag: Char = '{'; const EndTag: Char = '}'): String;
+function CleanupTags(const Text: String; const Tags: Array of String; const StartTag: Char = '{'; const EndTag: Char = '}'): String;
 function RemoveUnnecessaryDots(Text: String): String;
 function RemoveUnnecessarySpaces(const Text: String; const BreakChar: String = sLineBreak): String;
 function HasProhibitedChars(Text, Chars: String): Boolean;
@@ -71,7 +76,7 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; 
 
 implementation
 
-uses UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils, RegExpr,
+uses UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils,
   LazUTF8, LCLIntf;
 
 // -----------------------------------------------------------------------------
@@ -180,35 +185,31 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function TRegExReplaceSpaces.ReplaceSpaces(ARegExpr: TRegExpr): RegExprString;
+begin
+  Result := ReplaceString(ARegExpr.Match[0], ' ', '');
+end;
+
+// -----------------------------------------------------------------------------
+
 function FixTags(const Text: String; const StartTag, EndTag: Char): String;
 
-  function FixTag(const S: String; const Tag: Char): String;
+  function RemoveSpaces(const S: String): String;
   var
-    sTag: String;
+    rs : TRegExReplaceSpaces;
   begin
-    Result := S;
-    sTag   := Format('%s\%s1%s', [StartTag, Tag, EndTag]);
-    Result := ReplaceString(Result, Format('%s \%s1 %s', [StartTag, Tag, EndTag]), sTag);
-    Result := ReplaceString(Result, Format('%s \%s1%s', [StartTag, Tag, EndTag]), sTag);
-    Result := ReplaceString(Result, Format('%s\%s1 %s', [StartTag, Tag, EndTag]), sTag);
-    sTag   := Format('%s\%s0%s', [StartTag, Tag, EndTag]);
-    Result := ReplaceString(Result, Format('%s \ %s0 %s', [StartTag, Tag, EndTag]), sTag);
-    Result := ReplaceString(Result, Format('%s \%s0%s', [StartTag, Tag, EndTag]), sTag);
-    Result := ReplaceString(Result, Format('%s\%s0 %s', [StartTag, Tag, EndTag]), sTag);
-    Result := ReplaceString(Result, Format('%s \%s0 %s', [StartTag, Tag, EndTag]), sTag);
-
-    Result := ReplaceString(Result, Format('%s\%s1%s %s\%s0%s', [StartTag, Tag, EndTag, StartTag, Tag, EndTag]), '');
-    Result := ReplaceString(Result, Format('%s\%s1%s%s\%s0%s', [StartTag, Tag, EndTag, StartTag, Tag, EndTag]), '');
+    with TRegExpr.Create('({.+})') do
+    try
+      ModifierG := False;
+      Result := Replace(S, @rs.ReplaceSpaces);
+    finally
+      Free;
+    end;
   end;
 
 begin
-  Result := Text;
-  Result := FixTag(Result, 'b');
-  Result := FixTag(Result, 'i');
-  Result := FixTag(Result, 'u');
-  Result := FixTag(Result, 's');
-
-//  Result := ReplaceRegExpr(Format('\s+(?=[^%s\%s]*\%s)', [StartTag, EndTag, EndTag]), Text, ''); // Fails :S
+  Result := RemoveSpaces(Text); //Result := ReplaceRegExpr(Format('\s+(?=[^%s%s]*\%s)', [StartTag, EndTag, EndTag]), Text, '', [rroModifierG]);
+  Result := FixIncompleteTags(Result, StartTag, EndTag);
 end;
 
 // -----------------------------------------------------------------------------
@@ -251,6 +252,25 @@ begin
     end;
   finally
     L.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function CleanupTags(const Text: String; const Tags: Array of String; const StartTag: Char = '{'; const EndTag: Char = '}'): String;
+var
+  i : Integer;
+begin
+  Result := Text;
+  if Result.IsEmpty or (Length(Tags) = 0) then Exit;
+
+  for i := 0 to Length(Tags)-1 do
+  begin
+    Result := ReplaceRegExpr(
+      Format('(%s\\%s1%s)([\s\S]*?)(%s\\%s0%s)(\s*)\1([\s\S]*?)\3', [StartTag, Tags[i], EndTag, StartTag, Tags[i], EndTag]),
+      Result,
+      '$1$2$4$5$3',
+      [rroModifierI, rroModifierG, rroModifierM, rroUseSubstitution]);
   end;
 end;
 

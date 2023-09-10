@@ -553,6 +553,9 @@ begin
       for I := High(Nodes) downto 0 do
         DeleteSubtitle(Nodes[I]^.Index, False, False);
 
+      s  := CleanupTags(s, [swt_Bold, swt_Italic, swt_Underline, swt_Strikeout]);
+      st := CleanupTags(st, [swt_Bold, swt_Italic, swt_Underline, swt_Strikeout]);
+
       InsertSubtitle(x, it, ft, s, st);
     finally
       AVST.ClearSelection;

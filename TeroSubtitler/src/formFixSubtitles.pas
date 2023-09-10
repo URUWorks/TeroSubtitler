@@ -177,6 +177,7 @@ begin
       AddOptionItem(etOCR, GetString(FAppStringList, 'etOCR'), GetValue('Option19', False));
       AddOptionItem(etSnapToShotChanges, GetString(FAppStringList, 'etSnapToShotChanges'), GetValue('Option20', False));
       AddOptionItem(etChaining, GetString(FAppStringList, 'etChaining'), GetValue('Option21', False));
+      AddOptionItem(etCleanupTags, GetString(FAppStringList, 'etCleanupTags'), GetValue('Option22', False));
       s := GetValue('OCRScript', '');
       x := cboOCR.Items.IndexOf(s);
       if x >= 0 then
@@ -212,6 +213,7 @@ begin
     AddOptionItem(etOCR, GetString(FAppStringList, 'etOCR'), False);
     AddOptionItem(etSnapToShotChanges, GetString(FAppStringList, 'etSnapToShotChanges'), False);
     AddOptionItem(etChaining, GetString(FAppStringList, 'etChaining'), False);
+    AddOptionItem(etCleanupTags, GetString(FAppStringList, 'etCleanupTags'), False);
   end;
 
   cboSpacingHyphen.AddItem(GetString(FAppStringList, 'AddSpacing'), NIL);
@@ -514,6 +516,8 @@ begin
     Result := GetString(FAppStringList, 'etSnapToShotChangesOutCue')
   else if etChaining in AError then
     Result := FOptions[21].Description
+  else if etCleanupTags in AError then
+    Result := FOptions[22].Description
   else
     Result := '';
 end;

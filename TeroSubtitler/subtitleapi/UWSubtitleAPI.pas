@@ -103,6 +103,7 @@ type
     etSnapToShotChangesOutCue,
     etSnapToShotChangesInCueAway,
     etChaining,
+    etCleanupTags,
     etNone
   );
 
