@@ -821,35 +821,42 @@ end;
 
 function SpacingOfOpeningHyphen(const Text: String; const AddSpace: Boolean): String;
 var
-  sl: TStringList;
-  i: Integer;
-  s: String;
+  sl, slt : TStringList;
+  i, x : Integer;
+  s : String;
 begin
   Result := Text;
-  if Result.IsEmpty or not Text.StartsWith('-') then Exit;
+  if Result.IsEmpty or (Result.Length < 3) then Exit;
 
   sl := TStringList.Create;
   try
-    sl.Text := Text;
+    slt := TStringList.Create;
+    try
+      sl.Text  := ReplaceRegExpr('\{.*?\}', Text, '', True); // text without tags
+      slt.Text := Text; // normal text
 
-    for i := 0 to sl.Count-1 do
-      if sl[i].StartsWith('-') then
-      begin
-        s := sl[i];
-        if AddSpace then
+      for i := 0 to sl.Count-1 do
+        if sl[i].StartsWith('-') then
         begin
-          if Pos(' ', s) <> 2 then
-            Insert(' ', s, 2);
-        end
-        else
-        begin
-          if Pos(' ', s) = 2 then
-            Delete(s, 2, 1);
+          s := slt[i];
+          x := Pos('-', s)+1;
+          if AddSpace then
+          begin
+            if s[x] <> ' ' then
+              Insert(' ', s, x);
+          end
+          else
+          begin
+            while s[x] = ' ' do //if s[x] = ' ' then
+              Delete(s, x, 1);
+          end;
+          slt[i] := s;
         end;
-        sl[i] := s;
-      end;
 
-      Result := sl.Text.TrimRight;
+        Result := slt.Text.TrimRight;
+    finally
+      slt.Free;
+    end;
   finally
     sl.Free;
   end;
