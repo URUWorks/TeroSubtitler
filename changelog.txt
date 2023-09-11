@@ -3,6 +3,7 @@
 - fixed: Window disappears after applying Replace All #179
 - fixed: Gapping not respected when dividing subtitle #178
 - fixed: Tagging not fully carried over in divided subtitle #177
+- fixed: Add or Remove Opening Hyphen doesn't function if preceded with tags #175
 - fixed: Truncated filenames at start-up window
 - fixed: Shot changes misaligned when opening non-integer file in ZZZ mode
 - added: Remove excess tagging #176
