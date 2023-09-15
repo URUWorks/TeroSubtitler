@@ -286,10 +286,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetStringCount(const ASourceString: String; const AWords: array of String; const ATryDefault: Boolean = False): Integer;
+function GetStringCount(const ASourceString: String; const AWords: array of String): Integer;
 begin
   Result := RE_StringCount('\b(' + String.Join('|', AWords) + ')\b', ASourceString);
-  if (Result = 0) and ATryDefault then // I don't know why regexpr gives me 0 sometimes
+  if Result = 0 then // I don't know why regexpr sometimes gives me 0 when it shouldnt
     Result := StringsCount(ASourceString, AWords);
 end;
 
@@ -312,8 +312,8 @@ const
 
 var
   Encoding, Enc : TEncoding;
-  Text          : String;
-  MinCount  : Integer;
+  Text : String;
+  MinCount : Integer;
 begin
   Result := NIL;
   MinCount := Length(Buffer) div 300;
@@ -321,11 +321,11 @@ begin
   // Cyrillic
   Encoding := TEncoding.GetEncoding(1251);
   Text := Encoding.GetString(Buffer);
-  if (GetStringCount(Text, _Russian, True) > 5) or
-     (GetStringCount(Text, _Bulgarian, True) > 5) or
-     (GetStringCount(Text, _SerbianCyrillic, True) > MinCount) then
+  if (GetStringCount(Text, _Russian) > 5) or
+     (GetStringCount(Text, _Bulgarian) > 5) or
+     (GetStringCount(Text, _SerbianCyrillic) > MinCount) then
   begin
-   Exit(Encoding);
+    Exit(Encoding);
   end;
 
   // Greek
