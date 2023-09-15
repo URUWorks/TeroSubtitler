@@ -143,7 +143,7 @@ begin
     actWaveExtract.Execute;
 
   if WAVE.IsPeakDataLoaded and (CustomQuestionDialog('CommonStrings', 'DetectDialogSegmentsWarning', 'ContinueAnyway', [dbYes, dbNo]) = mrYes) then
-    if WAVE.DetectZoneList(DialogList, False, AppOptions.DialogSegmentThreshold*100) then
+    if WAVE.DetectZoneList(DialogList, False, AppOptions.DialogSegmentThreshold) then
     try
       s := GetCommonString('Entry');
       UndoInstance.IncrementUndoGroup;

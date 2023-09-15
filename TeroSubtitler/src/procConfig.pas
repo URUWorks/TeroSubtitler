@@ -257,7 +257,7 @@ begin
       etMaxLines, etOCR];
 
     DefChangePlayRate      := 50;
-    DialogSegmentThreshold := 60;
+    DialogSegmentThreshold := 6000;
     ShiftTimeMS            := 500;
     AutoBackupSeconds      := 300;
 

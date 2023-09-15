@@ -52,12 +52,13 @@ object frmSettings: TfrmSettings
     TabOrder = 2
     object lblLanguage: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 4
       Width = 248
       AutoSize = False
       Caption = 'Language'
       ParentColor = False
+      WordWrap = True
     end
     object cboLanguage: TComboBox
       Left = 248
@@ -81,12 +82,13 @@ object frmSettings: TfrmSettings
     end
     object lblWebReference: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 36
       Width = 248
       AutoSize = False
       Caption = 'Web reference'
       ParentColor = False
+      WordWrap = True
     end
     object cboTimeCodeMode: TComboBox
       AnchorSideTop.Side = asrBottom
@@ -107,21 +109,23 @@ object frmSettings: TfrmSettings
     end
     object lblTimeCodeMode: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 68
       Width = 248
       AutoSize = False
       Caption = 'Time code mode'
       ParentColor = False
+      WordWrap = True
     end
     object lblDefaultFrameRate: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 100
       Width = 248
       AutoSize = False
       Caption = 'Default frame rate'
       ParentColor = False
+      WordWrap = True
     end
     object cboDefaultFrameRate: TComboBox
       AnchorSideTop.Side = asrBottom
@@ -136,12 +140,13 @@ object frmSettings: TfrmSettings
     end
     object lblDefaultFileEncoding: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 132
       Width = 248
       AutoSize = False
       Caption = 'Default file encoding'
       ParentColor = False
+      WordWrap = True
     end
     object cboDefaultFileEncoding: TComboBox
       AnchorSideTop.Side = asrBottom
@@ -156,12 +161,13 @@ object frmSettings: TfrmSettings
     end
     object lblAutoBackup: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 260
       Width = 248
       AutoSize = False
       Caption = 'Auto-backup every (minutes)'
       ParentColor = False
+      WordWrap = True
     end
     object spnAutoBackupMinutes: TSpinEdit
       AnchorSideTop.Side = asrBottom
@@ -233,12 +239,13 @@ object frmSettings: TfrmSettings
     end
     object lblShiftTimeMs: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 196
       Width = 248
       AutoSize = False
       Caption = 'Shift time (ms)'
       ParentColor = False
+      WordWrap = True
     end
     object spnShiftTimeMs: TSpinEdit
       AnchorSideTop.Side = asrBottom
@@ -253,12 +260,13 @@ object frmSettings: TfrmSettings
     end
     object lblDefaultFileFormat: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 164
       Width = 248
       AutoSize = False
       Caption = 'Default file format'
       ParentColor = False
+      WordWrap = True
     end
     object cboDefaultFileFormat: TComboBox
       AnchorSideTop.Side = asrBottom
@@ -322,12 +330,13 @@ object frmSettings: TfrmSettings
     end
     object lblDialogSegmentsDetectionThreshold: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 228
       Width = 248
       AutoSize = False
       Caption = 'Dialog segments detection threshold'
       ParentColor = False
+      WordWrap = True
     end
     object spnDetectDialogSegment: TSpinEdit
       AnchorSideTop.Side = asrBottom
@@ -336,10 +345,10 @@ object frmSettings: TfrmSettings
       Top = 224
       Width = 67
       BorderSpacing.Top = 8
-      MaxValue = 200
-      MinValue = 1
+      MaxValue = 32767
+      MinValue = 100
       TabOrder = 7
-      Value = 60
+      Value = 6000
     end
     object chkPromptForSaveWithErrors: TUWCheckBox
       AnchorSideTop.Control = chkPromptForInputFPS
@@ -357,7 +366,7 @@ object frmSettings: TfrmSettings
   object lyoConventions: TUWLayout
     Left = -336
     Height = 546
-    Top = 192
+    Top = 72
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -365,12 +374,13 @@ object frmSettings: TfrmSettings
     Visible = False
     object lblNewSubtitleMs: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 132
       Width = 246
       AutoSize = False
       Caption = 'New subtitle (ms)'
       ParentColor = False
+      WordWrap = True
     end
     object spnNewSubtitleMs: TSpinEdit
       Left = 248
@@ -384,12 +394,13 @@ object frmSettings: TfrmSettings
     end
     object lblMinDurationMs: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 164
       Width = 246
       AutoSize = False
       Caption = 'Min. duration / per word (ms)'
       ParentColor = False
+      WordWrap = True
     end
     object spnMinDurationMs: TSpinEdit
       Left = 248
@@ -403,12 +414,13 @@ object frmSettings: TfrmSettings
     end
     object lblMaxDurationMs: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 200
       Width = 246
       AutoSize = False
       Caption = 'Max. duration (ms)'
       ParentColor = False
+      WordWrap = True
     end
     object spnMaxDurationMs: TSpinEdit
       Left = 248
@@ -422,12 +434,13 @@ object frmSettings: TfrmSettings
     end
     object lblSubtitlePauseMs: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 264
       Width = 246
       AutoSize = False
       Caption = 'Min. subtitle pause'
       ParentColor = False
+      WordWrap = True
     end
     object spnSubtitlePauseMs: TSpinEdit
       Left = 248
@@ -459,21 +472,23 @@ object frmSettings: TfrmSettings
     end
     object lblRepeatableChars: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 36
       Width = 246
       AutoSize = False
       Caption = 'Repeatable chars'
       ParentColor = False
+      WordWrap = True
     end
     object lblProhibitedChars: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 68
       Width = 246
       AutoSize = False
       Caption = 'Prohibited chars'
       ParentColor = False
+      WordWrap = True
     end
     object chkDotsOnSplit: TUWCheckBox
       Left = 0
@@ -500,12 +515,13 @@ object frmSettings: TfrmSettings
     end
     object lblProfile: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 4
       Width = 246
       AutoSize = False
       Caption = 'Profile'
       ParentColor = False
+      WordWrap = True
     end
     object btnProfile: TButton
       AnchorSideTop.Control = cboProfile
@@ -521,12 +537,13 @@ object frmSettings: TfrmSettings
     end
     object lblMaxLineCount: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 232
       Width = 246
       AutoSize = False
       Caption = 'Max. line count'
       ParentColor = False
+      WordWrap = True
     end
     object spnMaxLineCount: TSpinEdit
       Left = 248
@@ -540,12 +557,13 @@ object frmSettings: TfrmSettings
     end
     object lblCPS: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 296
       Width = 246
       AutoSize = False
       Caption = 'CPS'
       ParentColor = False
+      WordWrap = True
     end
     object spnCPS: TSpinEdit
       Left = 248
@@ -559,12 +577,13 @@ object frmSettings: TfrmSettings
     end
     object lblWPM: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 328
       Width = 246
       AutoSize = False
       Caption = 'WPM'
       ParentColor = False
+      WordWrap = True
     end
     object spnWPM: TSpinEdit
       Left = 248
@@ -588,12 +607,13 @@ object frmSettings: TfrmSettings
     end
     object lblCPL: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 360
       Width = 246
       AutoSize = False
       Caption = 'CPL'
       ParentColor = False
+      WordWrap = True
     end
     object spnMinDurationPerWord: TSpinEdit
       Left = 336
@@ -628,21 +648,23 @@ object frmSettings: TfrmSettings
     end
     object lblCPSStrategy: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 100
       Width = 246
       AutoSize = False
       Caption = 'Chars excluded from CPS count'
       ParentColor = False
+      WordWrap = True
     end
     object lblSCSnapArea: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 392
       Width = 246
       AutoSize = False
       Caption = 'Shot change snap area (frames)'
       ParentColor = False
+      WordWrap = True
     end
     object spnSCSnapArea: TSpinEdit
       Left = 248
@@ -656,12 +678,13 @@ object frmSettings: TfrmSettings
     end
     object lblSCSnapInCues: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 424
       Width = 246
       AutoSize = False
       Caption = 'Snap in cues (frames)'
       ParentColor = False
+      WordWrap = True
     end
     object spnSCSnapInCues: TSpinEdit
       Left = 248
@@ -674,12 +697,13 @@ object frmSettings: TfrmSettings
     end
     object lblSCSnapOutCues: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 456
       Width = 246
       AutoSize = False
       Caption = 'Snap out cues (frames)'
       ParentColor = False
+      WordWrap = True
     end
     object spnSCSnapOutCues: TSpinEdit
       Left = 248
@@ -713,18 +737,19 @@ object frmSettings: TfrmSettings
     end
     object lblChaining: TLabel
       Left = 0
-      Height = 15
+      Height = 30
       Top = 488
       Width = 246
       AutoSize = False
       Caption = 'Chaining (frames)'
       ParentColor = False
+      WordWrap = True
     end
   end
   object lyoAppearance: TUWLayout
     Left = -336
     Height = 546
-    Top = 256
+    Top = 168
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -950,7 +975,7 @@ object frmSettings: TfrmSettings
   object lyoTools: TUWLayout
     Left = -336
     Height = 546
-    Top = 320
+    Top = 232
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -1101,7 +1126,7 @@ object frmSettings: TfrmSettings
   object lyoShortcuts: TUWLayout
     Left = -336
     Height = 546
-    Top = 384
+    Top = 360
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -1219,7 +1244,7 @@ object frmSettings: TfrmSettings
   object lyoMPV: TUWLayout
     Left = -336
     Height = 546
-    Top = 448
+    Top = 424
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -1285,7 +1310,7 @@ object frmSettings: TfrmSettings
   object lyoToolbar: TUWLayout
     Left = -336
     Height = 546
-    Top = 496
+    Top = 480
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -1831,7 +1856,7 @@ object frmSettings: TfrmSettings
   object lyoFileTypeAssociations: TUWLayout
     Left = -336
     Height = 546
-    Top = 544
+    Top = 536
     Width = 516
     ClientHeight = 546
     ClientWidth = 516

@@ -292,7 +292,7 @@ type
     Conventions            : TProfileItem;
     ShiftTimeMS            : Cardinal;
     DefChangePlayRate      : Byte;
-    DialogSegmentThreshold : Byte;
+    DialogSegmentThreshold : Cardinal;
     AutoBackupSeconds      : Cardinal;
     AutoLengthChar         : Cardinal;
     AutoLengthWord         : Cardinal;
