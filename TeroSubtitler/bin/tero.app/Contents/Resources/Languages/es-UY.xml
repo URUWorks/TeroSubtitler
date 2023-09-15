@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language Mail="uruworks@gmail.com" Name="es-UY" Count="41" Author="URUWorks">
+<Language Mail="uruworks@gmail.com" Name="es-UY" Author="URUWorks">
   <Form Name="frmMain" Caption="tero subtitler">
     <Section Name="TMenuItem">
       <mnuFile>Archivo</mnuFile>
@@ -359,7 +359,7 @@
       <lblMaxDurationMs>Máx. duración (ms)</lblMaxDurationMs>
       <lblMaxLineCount>Máx. cantidad de líneas</lblMaxLineCount>
       <lblShiftTimeMs>Desplazar (ms)</lblShiftTimeMs>
-      <lblDialogSegmentsDetectionThreshold>Umbral de detección de segmentos de diálogo</lblDialogSegmentsDetectionThreshold>      
+      <lblDialogSegmentsDetectionThreshold>Umbral de detección de segmentos de diálogo (rms)</lblDialogSegmentsDetectionThreshold>      
       <lblSubtitlePauseMs>Pausa mín. entre subtítulos</lblSubtitlePauseMs>      
       <lblCPS>Caracteres por segundo</lblCPS>
       <lblWPM>Palabras por minuto</lblWPM>      

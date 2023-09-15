@@ -747,25 +747,28 @@ var
   xdoc: TXMLDocument;
   Child: TDOMNode;
   Section: TFormSection;
-  i, aSize: Integer;
+  i: Integer;
+  FormList: TDOMNodeList;
 begin
-  aSize := 0;
   xdoc := TXMLDocument.Create;
   try
     ReadXMLFile(xdoc, AFileName);
     Child := xdoc.DocumentElement;
     FSections.Clear;
 
+    if not Assigned(Child) then Exit;
+
     if Header.LangName = '' then
       Header.LoadFromXML(Child);
 
-    aSize := StrToIntDef(TDomElement(Child).GetAttribute('Count'), 0);
-    for i := 0 to aSize-1 do
-    begin
-      Section := TFormSection.Create;
-      Section.LoadFromXML(Child.ChildNodes[i]);
-      FSections.PushBack(Section);
-    end;
+    FormList := Child.GetChildNodes;
+    for i := 0 to FormList.Count-1 do
+      if FormList.Item[i].NodeName = 'Form' then
+      begin
+        Section := TFormSection.Create;
+        Section.LoadFromXML(FormList.Item[i]);
+        FSections.PushBack(Section);
+      end;
 
     AppStrings.LoadFromXML(GetNodeByName(xdoc, 'AppStrings'));
   finally
@@ -787,7 +790,6 @@ begin
     xdoc.AppendChild(Node);
     Node := xdoc.DocumentElement;
     Header.SaveToXML(Node);
-    TDomElement(Node).SetAttribute('Count', IntToStr(FSections.Size));
 
     for i := 0 to FSections.Size-1 do
       FSections[i].SaveToXML(xdoc, node);

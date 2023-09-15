@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language Mail="uruworks@gmail.com" Name="Default" Count="41" Author="URUWorks">
+<Language Mail="uruworks@gmail.com" Name="Default" Author="URUWorks">
   <Form Name="frmMain" Caption="tero subtitler">
     <Section Name="TMenuItem">
       <mnuFile>File</mnuFile>
@@ -359,7 +359,7 @@
       <lblMaxDurationMs>Max. duration (ms)</lblMaxDurationMs>
       <lblMaxLineCount>Max. line count</lblMaxLineCount>
       <lblShiftTimeMs>Shift time (ms)</lblShiftTimeMs>
-      <lblDialogSegmentsDetectionThreshold>Dialog segments detection threshold</lblDialogSegmentsDetectionThreshold>
+      <lblDialogSegmentsDetectionThreshold>Dialog segments detection threshold (rms)</lblDialogSegmentsDetectionThreshold>
       <lblSubtitlePauseMs>Min. gap</lblSubtitlePauseMs>      
       <lblCPS>Characters per second</lblCPS>
       <lblWPM>Words per minute</lblWPM>      
