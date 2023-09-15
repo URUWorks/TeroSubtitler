@@ -311,6 +311,9 @@ begin
   with TRegExpr.Create do
   try
     ModifierG  := False;
+    //ModifierM  := True;
+    //ModifierI  := True;
+    //ModifierR  := True;
     Expression := ARExpr;
     if Exec(ASource) then
       repeat
