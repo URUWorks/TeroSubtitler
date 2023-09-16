@@ -1,4 +1,4 @@
-1.0.1.1 (x.9.2023)
+1.0.1.1 (16.9.2023)
 - fixed: Window closes after going to line number #180
 - fixed: Window disappears after applying Replace All #179
 - fixed: Gapping not respected when dividing subtitle #178
