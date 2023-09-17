@@ -123,7 +123,7 @@
       <actEndCueAddOneFrame>Добавить один кадр</actEndCueAddOneFrame>
       <actEndCueSubtractOneFrame>Убрать один кадр</actEndCueSubtractOneFrame>
       <actMultipleReplace>Множественная замена...</actMultipleReplace>
-      <actGoTo>Перейти к строке номер...</actGoTo>
+      <actGoTo>Ввести номер строки...</actGoTo>
       <actReadTimingsFromFile>Взять тайминги из файла...</actReadTimingsFromFile>
       <actReadTextsFromFile>Взять текст из файла...</actReadTextsFromFile>
       <actActor>Актёры...</actActor>
@@ -132,6 +132,7 @@
       <actSetAutomaticDuration>Авто длина</actSetAutomaticDuration>
       <actSetDefaultGap Hint="только если промежуток мал">Настроить промежуток по-умолчанию</actSetDefaultGap>
       <actRoundTimes>Округление чисел</actRoundTimes>
+      <actShowActorOnPreview>Отображать актёров при предпросмотре</actShowActorOnPreview>      
       <actSwapTexts>Поменять текст</actSwapTexts>
       <actShowColumnNumber>Номер/Зазор</actShowColumnNumber>
       <actShowColumnTimes>Начало/конец</actShowColumnTimes>
@@ -167,9 +168,9 @@
       <actMediaEndSubtitle>Конец субтитра</actMediaEndSubtitle>
       <actLoadVideo Hint="Open a video file">Открыть видео...</actLoadVideo>
       <actCloseVideo>Закрыть видео</actCloseVideo>
-      <actSMPTE>Тайминг в формате SMPTE</actSMPTE>
       <actWaveExtract>Извлечь звуковую волну...</actWaveExtract>
       <actLoadVideoFromURL>Открыть видео по ссылке...</actLoadVideoFromURL>
+      <actWebPreview>Предпросмотр видео в браузере...</actWebPreview>
       <actSpellCheck>Проверить орфографию...</actSpellCheck>
       <actTranslate>Автоперевод...</actTranslate>
       <actFixSubtitles>Исправить субтитры...</actFixSubtitles>
@@ -214,6 +215,7 @@
       <actViewShotChange Hint="Enable/disable shot changes">Вкл/откл смену кадров</actViewShotChange>
       <actCenterWaveform>Центрировать аудиоволну</actCenterWaveform>
       <actDetectSilentZones Hint="Click to refresh list">Определить тихие участки</actDetectSilentZones>
+      <actDetectDialogSegments>Определение диалоговых сегментов...</actDetectDialogSegments>
       <actSetAsDefaultFormat>Установить форматом сохранения по-умолчанию</actSetAsDefaultFormat>
       <actSetAsDefaultEncoding>Кодировка сохранения по-умолчанию</actSetAsDefaultEncoding>
       <actMediaSubSizeInc>Увеличить шрифт субтитров видео</actMediaSubSizeInc>      
@@ -264,6 +266,11 @@
       <lblOCR>OCR Script</lblOCR>
       <lblSpacingHyphen>Интервал между нач. дефисами</lblSpacingHyphen>
     </Section>
+    <Section Name="TMenuItem">
+      <mnuSelectAll>Выбрать всё</mnuSelectAll>
+      <mnuDeSelectAll>Отменить выбор</mnuDeSelectAll>
+      <mnuInvertSelection>Обратить выбор</mnuInvertSelection>
+    </Section>    
   </Form>
   <Form Name="frmConvertCase" Caption="Преобразовать регистр">
     <Section Name="TUWRadioButton">
@@ -311,7 +318,7 @@
   </Form>
   <Form Name="frmGoTo" Caption="Перейти к строке">
     <Section Name="TLabel">
-      <lblNumber>Номер строки:</lblNumber>
+      <lblNumber>Ввод номера строки:</lblNumber>
     </Section>
   </Form>
   <Form Name="frmGoToTime" Caption="Перейти">
@@ -349,10 +356,10 @@
       <lblProfile>Профиль</lblProfile>      
       <lblNewSubtitleMs>Новый субтитр (мс)</lblNewSubtitleMs>
       <lblMinDurationMs>Мин. длина (мс)</lblMinDurationMs>
-      <lblMinDurationPerWordMs>Мин. длина слова (мс)</lblMinDurationPerWordMs>
       <lblMaxDurationMs>Макс. длина (мс)</lblMaxDurationMs>
       <lblMaxLineCount>Макс. количство строк</lblMaxLineCount>
       <lblShiftTimeMs>Сдвинуть по времени (мс)</lblShiftTimeMs>
+      <lblDialogSegmentsDetectionThreshold>Порог определения диалоговых сегментов</lblDialogSegmentsDetectionThreshold>
       <lblSubtitlePauseMs>Мин. зазор между субтитрами</lblSubtitlePauseMs>
       <lblCPS>Символов в секунду</lblCPS>
       <lblWPM>Слов в минуту</lblWPM>      
@@ -384,6 +391,8 @@
       <lblShortcut>Ярлык</lblShortcut>      
       <lblFFMPEG>Путь к ffmpeg</lblFFMPEG>
       <lblSceneDetect>Путь к PySceneTools</lblSceneDetect>
+      <lblWhisperCPP>Путь к Whisper.cpp</lblWhisperCPP>
+      <lblYTDLP>Путь к YT-DLP</lblYTDLP>      
       <lblSeekTime>Время поиска (ms)</lblSeekTime>
       <lblFrameStep>Шаг фрейма</lblFrameStep>
     </Section>
@@ -391,6 +400,8 @@
       <chkShowSplashWindow>Показать заставку</chkShowSplashWindow>
       <chkUseOwnFileDialog>Использовать диалоговое окно Tero</chkUseOwnFileDialog>
       <chkPromptForDeleteSubtitles>Запрос при удалении субтитров</chkPromptForDeleteSubtitles>
+      <chkPromptForInputFPS>Запрос о FPS перед загрузкой файла</chkPromptForInputFPS>
+      <chkPromptForSaveWithErrors>Предупреждать при сохранении файла с ошибками</chkPromptForSaveWithErrors>            
       <chkDotsOnSplit>Добавить '...' к разделённым субтитрам</chkDotsOnSplit>
       <chkDrawTags>Интерпретирование меток в списке</chkDrawTags>
       <chkDrawErrors>Показать ошибки списком</chkDrawErrors>
@@ -641,6 +652,7 @@
     <etSnapToShotChangesOutCue>Snap Out Cue to shot change</etSnapToShotChangesOutCue>
     <etSnapToShotChangesInCueAway>Snap In Cue away from shot change</etSnapToShotChangesInCueAway>        
     <etChaining>Цепочка субтитров</etChaining>
+    <etCleanupTags>Очистить теги</etCleanupTags>    
     <Index>#</Index>
     <Action>Действия</Action>
     <Current>Текущее</Current>
@@ -707,6 +719,7 @@
     <ShiftTimeLess>Сдвинуть %dms назад</ShiftTimeLess>          
     <TranscriptionModeExit>Текущий перевод не сохранён и будет потерян.</TranscriptionModeExit>
     <SourceModeWarning>Переход в режим Исходного кода изменит формат "Tero Subtitler", всё несохранённое будет потеряно.</SourceModeWarning>
+    <SubtitleHasErrorsToFix>Текущий набор субтитров содержит ошибки, которые предлагается устранить, однако сохранение всё же возможно.</SubtitleHasErrorsToFix>
     <TextFormatted>Экспортировать форматированный текст?</TextFormatted>        
     <NoInternetConnection>Нет доступа к интернету</NoInternetConnection>
     <FailedToDownload>Нечего загружать, отсутствует файл или нет доступа в Интернет.</FailedToDownload>
@@ -714,6 +727,8 @@
     <ExtractAppError>Невозможно найти '%s'.</ExtractAppError>
     <Extracting>Извлечение...</Extracting>
     <Transcribing>Транскрибирование...</Transcribing>    
+    <DetectDialogSegmentsWarning>При попытке обнаружить сегменты диалога все субтитры удаляются из списка.</DetectDialogSegmentsWarning>    
+    <Entry>Ввод %d</Entry>    
     <libMPVError>Не удаётся найти библиотеки для работы встроенного MPV плеера. Скачайте их.</libMPVError>
     <libMPVglError>Не удалось инициализировать mpv GL контекст.</libMPVglError>
     <libMPVVersionError>Не удаётся запустить libmpv, возможно установлена неверная библиотека.</libMPVVersionError>
@@ -723,6 +738,7 @@
     <OpenVideoFromURL>Открыть видео по ссылке</OpenVideoFromURL>    
     <URL>URL</URL>
     <SupportedSites>Поддерживаемые сайты</SupportedSites>
+    <WebVideoUnsupported>Формат видео не поддерживается для воспроизведения в веб-браузере.</WebVideoUnsupported>
     <NewShortCutPreset>Имя пресета горячих клавиш</NewShortCutPreset>
     <NewShortCutPresetName>Имя</NewShortCutPresetName>
     <FolderNotEmpty>Папка не пуста.</FolderNotEmpty>
@@ -738,6 +754,8 @@
     <FeatureNotAvailableFromURL>Функция недоступна для онлайн видео.</FeatureNotAvailableFromURL> 
     <MultipleTracksDetected>Обнаружено несколько дорожек</MultipleTracksDetected> 
     <SelectTrackToUse>Выберите нужную дорожку:</SelectTrackToUse>
+    <SelectFPSToUse>Выбрать нужный FPS:</SelectFPSToUse>
+    <SelectSheetToUse>Выбрать нужный лист:</SelectSheetToUse>
     <WriteStatus>Экспорт изображений %d/%d</WriteStatus>
     <ShortCutInUse>Горячая клавиша используется тут: '%s'.</ShortCutInUse>
   </CommonStrings>
@@ -894,8 +912,8 @@
     <MaxCPS>Слишком много CPS</MaxCPS>
     <OverlappingWithPrev>Наложение с предыдущим субтитром</OverlappingWithPrev>
     <OverlappingWithNext>Наложение с последующим субтитром</OverlappingWithNext>    
-    <FixTags>Лишние метки</FixTags>
-    <Empty>Пусто субтитр</Empty>
+    <FixTags>Некорректные метки</FixTags>
+    <Empty>Пустой субтитр</Empty>
     <Unbreak>Разрыв строки менее %d символов</Unbreak>
     <UnnecessarySpaces>Лишние пробелы</UnnecessarySpaces>
     <UnnecessaryDots>Лишние точки</UnnecessaryDots>
