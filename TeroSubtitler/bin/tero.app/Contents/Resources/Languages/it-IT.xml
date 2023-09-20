@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Language Mail="uruworks@gmail.com" Name="Default" Count="41" Author="URUWorks">
+<Language Mail="uruworks@gmail.com" Name="Default" Author="URUWorks">
   <Form Name="frmMain" Caption="Tero sottotitolatore">
     <Section Name="TMenuItem">
       <mnuFile>File</mnuFile>
@@ -359,7 +359,7 @@
       <lblMaxDurationMs>Durata max. (ms)</lblMaxDurationMs>
       <lblMaxLineCount>Conteggio max. riga</lblMaxLineCount>
       <lblShiftTimeMs>Sposta tempistiche (ms)</lblShiftTimeMs>
-      <lblDialogSegmentsDetectionThreshold>Soglia di rilevamento per le parti dialogate</lblDialogSegmentsDetectionThreshold>
+      <lblDialogSegmentsDetectionThreshold>Soglia di rilevamento per le parti dialogate (rms)</lblDialogSegmentsDetectionThreshold>
       <lblSubtitlePauseMs>Intervallo min.</lblSubtitlePauseMs>
       <lblCPS>Caratteri per secondo</lblCPS>
       <lblWPM>Parole per minuto</lblWPM>
@@ -652,6 +652,7 @@
     <etSnapToShotChangesOutCue>Àncora il punto di uscita al cambio di inquadratura</etSnapToShotChangesOutCue>
     <etSnapToShotChangesInCueAway>Àncora il punto di ingresso lontano dal cambio di inquadratura</etSnapToShotChangesInCueAway>
     <etChaining>Concatenazione dei sottotitoli</etChaining>
+    <etCleanupTags>Ripulitura dei tag</etCleanupTags>
     <Index>#</Index>
     <Action>Azione</Action>
     <Current>Attuale</Current>
@@ -911,7 +912,7 @@
     <MaxCPS>Troppi CPS</MaxCPS>
     <OverlappingWithPrev>Sovrapposizione con il sottotitolo precedente</OverlappingWithPrev>
     <OverlappingWithNext>Sovrapposizione con il sottotitolo successivo</OverlappingWithNext>
-    <FixTags>Tag non necessari</FixTags>
+    <FixTags>Tag non validi o incompleti</FixTags>
     <Empty>Sottotitolo vuoto</Empty>
     <Unbreak>Interruzioni di riga più breve di %d caratteri</Unbreak>
     <UnnecessarySpaces>Spazi non necessari</UnnecessarySpaces>
