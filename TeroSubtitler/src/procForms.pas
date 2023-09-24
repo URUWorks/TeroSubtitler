@@ -59,6 +59,7 @@ procedure ShowQualityCheck;
 procedure ShowCompare;
 procedure ShowCustomTextFormat;
 procedure ShowCustomImageFormat;
+procedure ShowExportSUP;
 procedure ShowTBXSettings;
 procedure ShowTBX;
 procedure ShowTBXList;
@@ -82,7 +83,7 @@ uses
   formTBX, formTBXSettings, formTBXEdit, formWizard, formShiftTimes,
   formAudioToText, formAudioToTextModel, procTypes, procConfig, procWorkspace,
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
-  formActors, procMPV;
+  formActors, formExportSUP, procMPV;
 
 // -----------------------------------------------------------------------------
 
@@ -595,6 +596,19 @@ begin
   end
   else
     frmCustomImageFormat.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowExportSUP;
+begin
+  if frmExportSUP = NIL then
+  begin
+    frmExportSUP := TfrmExportSUP.Create(Application);
+    ShowForm(frmExportSUP);
+  end
+  else
+    frmExportSUP.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

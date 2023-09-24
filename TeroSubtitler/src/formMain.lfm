@@ -1238,6 +1238,12 @@ object frmMain: TfrmMain
         object MenuItem173: TMenuItem
           Action = actExportCustomImageFormat
         end
+        object Separator51: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem178: TMenuItem
+          Action = actExportSUP
+        end
       end
       object Separator30: TMenuItem
         Caption = '-'
@@ -3350,22 +3356,6 @@ object frmMain: TfrmMain
       Caption = 'Custom image format...'
       OnExecute = actExportCustomImageFormatExecute
     end
-    object actCompare: TAction
-      Category = 'File'
-      Caption = 'Compare...'
-      OnExecute = actCompareExecute
-    end
-    object actCloseSubtitle: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Close subtitle'
-      OnExecute = actCloseSubtitleExecute
-    end
-    object actCloseApp: TAction
-      Category = 'File'
-      Caption = 'Close'
-      OnExecute = actCloseAppExecute
-    end
     object actJumpToNextShotChange: TAction
       Tag = 8
       Category = 'Waveform'
@@ -3501,6 +3491,28 @@ object frmMain: TfrmMain
       Category = 'Video'
       Caption = 'Web Preview...'
       OnExecute = actWebPreviewExecute
+    end
+    object actExportSUP: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Blu Ray SUP...'
+      OnExecute = actExportSUPExecute
+    end
+    object actCompare: TAction
+      Category = 'File'
+      Caption = 'Compare...'
+      OnExecute = actCompareExecute
+    end
+    object actCloseSubtitle: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Close subtitle'
+      OnExecute = actCloseSubtitleExecute
+    end
+    object actCloseApp: TAction
+      Category = 'File'
+      Caption = 'Close'
+      OnExecute = actCloseAppExecute
     end
   end
   object popDropInsert: TPopupMenu

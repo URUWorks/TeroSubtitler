@@ -1,38 +1,20 @@
-object frmCustomImageFormat: TfrmCustomImageFormat
+object frmExportSUP: TfrmExportSUP
   Left = 245
-  Height = 417
+  Height = 378
   Top = 119
-  Width = 723
+  Width = 651
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Custom image format'
-  ClientHeight = 417
-  ClientWidth = 723
+  Caption = 'Blu-ray SUP'
+  ClientHeight = 378
+  ClientWidth = 651
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
-  object cboScript: TComboBox
-    Left = 8
-    Height = 23
-    Top = 28
-    Width = 292
-    ItemHeight = 15
-    OnSelect = cboScriptSelect
-    Style = csDropDownList
-    TabOrder = 0
-  end
-  object lblScript: TLabel
-    Left = 8
-    Height = 15
-    Top = 8
-    Width = 30
-    Caption = 'Script'
-    ParentColor = False
-  end
   object lblFPS: TLabel
-    Left = 305
+    Left = 328
     Height = 15
     Top = 8
     Width = 19
@@ -40,41 +22,38 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     ParentColor = False
   end
   object cboFPS: TComboBox
-    AnchorSideLeft.Control = cboScript
     AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = cboScript
-    Left = 305
+    Left = 328
     Height = 23
     Top = 28
     Width = 75
     BorderSpacing.Left = 5
     ItemHeight = 15
     Style = csDropDownList
-    TabOrder = 1
+    TabOrder = 2
   end
   object btnSave: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
-    Left = 528
+    Left = 456
     Height = 26
-    Top = 383
+    Top = 344
     Width = 91
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
     Caption = 'Save...'
     Default = True
-    Enabled = False
     OnClick = btnSaveClick
-    TabOrder = 14
+    TabOrder = 10
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 624
+    Left = 552
     Height = 26
-    Top = 383
+    Top = 344
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 8
@@ -82,90 +61,46 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
-    TabOrder = 15
+    TabOrder = 11
   end
-  object edtPrefix: TEdit
-    Left = 8
-    Height = 23
-    Top = 84
-    Width = 372
-    TabOrder = 2
-  end
-  object edtFolder: TEdit
-    Left = 8
-    Height = 23
-    Top = 140
-    Width = 292
-    TabOrder = 3
-  end
-  object lblPrefix: TLabel
+  object lblImageSize: TLabel
     Left = 8
     Height = 15
     Top = 64
-    Width = 66
-    Caption = 'Image prefix'
-    ParentColor = False
-  end
-  object lblFolder: TLabel
-    Left = 9
-    Height = 15
-    Top = 120
-    Width = 33
-    Caption = 'Folder'
-    ParentColor = False
-  end
-  object btnFolder: TButton
-    AnchorSideLeft.Control = edtFolder
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = edtFolder
-    AnchorSideTop.Side = asrCenter
-    Left = 305
-    Height = 23
-    Top = 140
-    Width = 75
-    BorderSpacing.Left = 5
-    Caption = '...'
-    OnClick = btnFolderClick
-    TabOrder = 4
-  end
-  object lblImageSize: TLabel
-    Left = 400
-    Height = 15
-    Top = 8
     Width = 55
     Caption = 'Image size'
     ParentColor = False
   end
   object spnWidth: TSpinEdit
-    Left = 400
+    Left = 8
     Height = 23
-    Top = 28
+    Top = 84
     Width = 75
     MaxValue = 7680
     MinValue = 160
-    TabOrder = 5
-    Value = 720
+    TabOrder = 3
+    Value = 1920
   end
   object spnHeight: TSpinEdit
-    Left = 491
+    Left = 99
     Height = 23
-    Top = 28
+    Top = 84
     Width = 75
     MaxValue = 4320
     MinValue = 160
-    TabOrder = 6
-    Value = 576
+    TabOrder = 4
+    Value = 1080
   end
   object lblX: TLabel
-    Left = 480
+    Left = 88
     Height = 15
-    Top = 32
+    Top = 88
     Width = 6
     Caption = 'x'
     ParentColor = False
   end
   object lblSafeArea: TLabel
-    Left = 400
+    Left = 328
     Height = 15
     Top = 64
     Width = 176
@@ -173,18 +108,42 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     ParentColor = False
   end
   object spnLeft: TSpinEdit
-    Left = 400
+    Left = 328
     Height = 23
     Top = 84
     Width = 75
     MaxValue = 250
-    TabOrder = 8
+    TabOrder = 6
   end
   object spnTop: TSpinEdit
     AnchorSideLeft.Control = spnLeft
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = spnLeft
-    Left = 480
+    Left = 408
+    Height = 23
+    Top = 84
+    Width = 75
+    BorderSpacing.Left = 5
+    MaxValue = 250
+    TabOrder = 7
+  end
+  object spnRight: TSpinEdit
+    AnchorSideLeft.Control = spnTop
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = spnTop
+    Left = 488
+    Height = 23
+    Top = 84
+    Width = 75
+    BorderSpacing.Left = 5
+    MaxValue = 250
+    TabOrder = 8
+  end
+  object spnBottom: TSpinEdit
+    AnchorSideLeft.Control = spnRight
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = spnRight
+    Left = 568
     Height = 23
     Top = 84
     Width = 75
@@ -192,48 +151,24 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     MaxValue = 250
     TabOrder = 9
   end
-  object spnRight: TSpinEdit
-    AnchorSideLeft.Control = spnTop
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = spnTop
-    Left = 560
-    Height = 23
-    Top = 84
-    Width = 75
-    BorderSpacing.Left = 5
-    MaxValue = 250
-    TabOrder = 10
-  end
-  object spnBottom: TSpinEdit
-    AnchorSideLeft.Control = spnRight
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = spnRight
-    Left = 640
-    Height = 23
-    Top = 84
-    Width = 75
-    BorderSpacing.Left = 5
-    MaxValue = 250
-    TabOrder = 11
-  end
   object cboFont: TComboBox
-    AnchorSideLeft.Control = spnLeft
-    AnchorSideRight.Control = spnRight
+    AnchorSideLeft.Control = spnWidth
+    AnchorSideRight.Control = btnRes
     AnchorSideRight.Side = asrBottom
-    Left = 400
+    Left = 8
     Height = 23
-    Top = 140
-    Width = 235
+    Top = 28
+    Width = 219
     Anchors = [akTop, akLeft, akRight]
     ItemHeight = 15
     OnSelect = cboFontSelect
     Style = csDropDownList
-    TabOrder = 12
+    TabOrder = 0
   end
   object lblFont: TLabel
-    Left = 400
+    Left = 8
     Height = 15
-    Top = 120
+    Top = 8
     Width = 24
     Caption = 'Font'
     ParentColor = False
@@ -242,22 +177,22 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     AnchorSideLeft.Control = cboFont
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = cboFont
-    Left = 640
+    Left = 232
     Height = 23
-    Top = 140
+    Top = 28
     Width = 75
     BorderSpacing.Left = 5
     MaxValue = 999
     MinValue = 2
     OnChange = cboFontSelect
-    TabOrder = 13
+    TabOrder = 1
     Value = 24
   end
   object lblFontSize: TLabel
     AnchorSideLeft.Control = spnFontSize
-    Left = 640
+    Left = 232
     Height = 15
-    Top = 120
+    Top = 8
     Width = 20
     Caption = 'Size'
     ParentColor = False
@@ -266,8 +201,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Cursor = crArrow
     Left = 9
     Height = 199
-    Top = 176
-    Width = 706
+    Top = 136
+    Width = 634
     Text = 'URUWorks Tero Subtitler'
     BackColor = clDefault
     Spacing = 0
@@ -278,8 +213,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
   object lblStatus: TLabel
     Left = 9
     Height = 48
-    Top = 208
-    Width = 706
+    Top = 168
+    Width = 634
     Alignment = taCenter
     AutoSize = False
     Font.Style = [fsBold]
@@ -290,17 +225,17 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     AnchorSideLeft.Control = spnHeight
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = spnHeight
-    Left = 571
+    Left = 179
     Height = 23
-    Top = 28
+    Top = 84
     Width = 48
     BorderSpacing.Left = 5
     Caption = '...'
     OnClick = btnResClick
-    TabOrder = 7
+    TabOrder = 5
   end
   object popRes: TPopupMenu
-    Left = 632
-    Top = 26
+    Left = 232
+    Top = 80
   end
 end

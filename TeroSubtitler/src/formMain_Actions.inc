@@ -1625,6 +1625,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actExportSUPExecute(Sender: TObject);
+begin
+  ShowExportSUP;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actActorExecute(Sender: TObject);
 begin
   ShowActors;

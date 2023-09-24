@@ -73,6 +73,7 @@ type
     actActor: TAction;
     actExportCustomImageFormat: TAction;
     actDetectDialogSegments: TAction;
+    actExportSUP: TAction;
     actWebPreview: TAction;
     actShowActorOnPreview: TAction;
     actRoundTimes: TAction;
@@ -303,6 +304,7 @@ type
     MenuItem175: TMenuItem;
     MenuItem176: TMenuItem;
     MenuItem177: TMenuItem;
+    MenuItem178: TMenuItem;
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
     mnuFormatProperties: TMenuItem;
@@ -501,6 +503,7 @@ type
     Separator48: TMenuItem;
     Separator49: TMenuItem;
     Separator50: TMenuItem;
+    Separator51: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
@@ -924,6 +927,7 @@ type
     procedure actSortExecute(Sender: TObject);
     procedure actExportCustomTextFormatExecute(Sender: TObject);
     procedure actExportCustomImageFormatExecute(Sender: TObject);
+    procedure actExportSUPExecute(Sender: TObject);
     procedure actActorExecute(Sender: TObject);
     procedure actLoadProjectExecute(Sender: TObject);
     procedure actSaveProjectExecute(Sender: TObject);

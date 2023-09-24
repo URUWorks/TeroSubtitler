@@ -159,6 +159,7 @@
       <actExportTextOnly>Text only...</actExportTextOnly>            
       <actExportCustomTextFormat>Custom text format...</actExportCustomTextFormat>
       <actExportCustomImageFormat>Custom image format...</actExportCustomImageFormat>
+      <actExportSUP>Blu-ray SUP...</actExportSUP>      
       <actMediaPreviousFrame>Previous frame</actMediaPreviousFrame>      
       <actMediaNextFrame>Next frame</actMediaNextFrame>
       <actMediaMoveSubtitle>Move subtitle</actMediaMoveSubtitle>      

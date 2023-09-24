@@ -66,6 +66,8 @@ const
 
   TProjectExt = '.stp';
 
+  TBluRayExt = '.sup';
+
   TUnicodeSymbols : array[0..8] of String =
   (
     '♪', '♫', '©', '…', '‘', '’', '“', '”', '⹀' //, '♥'
