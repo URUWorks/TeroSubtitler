@@ -311,6 +311,13 @@ begin
   spnFontSize.Enabled := AValue;
   btnSave.Enabled := AValue;
   btnClose.Enabled := AValue;
+
+  if not AValue then
+    Cursor := crHourGlass
+  else
+    Cursor := crDefault;
+
+  lblStatus.Cursor := Cursor;
 end;
 
 // -----------------------------------------------------------------------------
@@ -319,6 +326,7 @@ procedure TfrmCustomImageFormat.SaveImageFile(const AFileName: String; const AIn
 var
   h : TAlignment;
   v : TTextLayout;
+  buf : TUWBGRAText;
 begin
   case Subtitles[AIndex].Align of
     1 : h := taLeftJustify;
@@ -334,7 +342,13 @@ begin
     v := tlBottom;
   end;
 
-  ttbPreview.SaveImageToFile(AFileName, Subtitles[AIndex].Text, spnWidth.Value, spnHeight.Value, h, v, True, spnLeft.Value, spnTop.Value, spnRight.Value, spnBottom.Value);
+  buf := TUWBGRAText.Create(Subtitles[AIndex].Text, ttbPreview.Width, ttbPreview.Height, ttbPreview.Font, True);
+  try
+    buf.DrawBuffer(Subtitles[AIndex].Text, spnWidth.Value, spnHeight.Value, h, v, spnLeft.Value, spnTop.Value, spnRight.Value, spnBottom.Value);
+    buf.Bitmap.SaveToFile(AFileName);
+  finally
+    buf.Free;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

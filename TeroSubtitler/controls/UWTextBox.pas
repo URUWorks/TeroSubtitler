@@ -27,34 +27,57 @@ uses
 
 type
 
+  { TUWBGRAText }
+
+  TUWBGRAText = class
+  private
+    FBitmap      : TBGRABitmap;
+    FRenderer    : TBGRATextEffectFontRenderer;
+    FText        : String;
+    FTextColor   : TColor;
+    FBackColor   : TColor;
+    FSpacing     : Byte;
+    FTransparent : Boolean;
+    FFont        : TFont;
+  public
+    constructor Create(const AText: String; const AWidth: Integer; const AHeight: Integer; const AFont: TFont; const ATransparent: Boolean = False);
+    destructor Destroy; override;
+    procedure DrawBuffer(const AText: String; const AWidth: Integer = -1; const AHeight: Integer = -1; const AAlign: TAlignment = taCenter; const VAlign: TTextLayout = tlCenter; const ALeft: Integer = 0; const ATop: Integer = 0; const ARight: Integer = 0; const ABottom: Integer = 0);
+    property Bitmap: TBGRABitmap read FBitmap;
+    property Renderer: TBGRATextEffectFontRenderer read FRenderer;
+    property TextColor: TColor read FTextColor write FTextColor;
+    property BackColor: TColor read FBackColor write FBackColor;
+    property Font: TFont read FFont write FFont;
+  end;
+
   { TUWTextBox }
 
   TUWTextBox = class(TGraphicControl)
   private
-    FBitmap      : TBGRABitmap;
-    FRenderer    : TBGRATextEffectFontRenderer;
-    FLoaded      : Boolean;
-    FText        : String;
-    FBackColor   : TColor;
-    FSpacing     : Byte;
-    FTransparent : Boolean;
+    FBuffer: TUWBGRAText;
+    FLoaded: Boolean;
+    procedure SetText(const AText: String);
+    function GetText: String;
+    procedure SetBackColor(const AColor: TColor);
+    function GetBackColor: TColor;
+    procedure SetSpacing(const ASpacing: Byte);
+    function GetSpacing: Byte;
+    procedure SetTransparent(const ATransparent: Boolean);
+    function GetTransparent: Boolean;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    procedure DrawBuffer(const AWidth: Integer = -1; const AHeight: Integer = -1; const AAlign: TAlignment = taCenter; const VAlign: TTextLayout = tlCenter; const ALeft: Integer = 0; const ATop: Integer = 0; const ARight: Integer = 0; const ABottom: Integer = 0);
     procedure ReDraw;
-    procedure SaveImageToFile(const AFileName: String; const AText: String = ''; const AWidth: Integer = -1; const AHeight: Integer = -1; const AAlign: TAlignment = taCenter; const VAlign: TTextLayout = tlCenter; const ATransparent: Boolean = False; const ALeft: Integer = 0; const ATop: Integer = 0; const ARight: Integer = 0; const ABottom: Integer = 0);
-    property Bitmap: TBGRABitmap read FBitmap;
-    property Renderer: TBGRATextEffectFontRenderer read FRenderer;
+    property Buffer: TUWBGRAText read FBuffer;
   protected
     procedure Loaded; override;
     procedure Paint; override;
     procedure Resize; override;
   published
-    property Text        : String  read FText        write FText;
-    property BackColor   : TColor  read FBackColor   write FBackColor;
-    property Spacing     : Byte    read FSpacing     write FSpacing;
-    property Transparent : Boolean read FTransparent write FTransparent;
+    property Text        : String read GetText write SetText;
+    property BackColor   : TColor  read GetBackColor   write SetBackColor;
+    property Spacing     : Byte    read GetSpacing     write SetSpacing;
+    property Transparent : Boolean read GetTransparent write SetTransparent;
 
     property Anchors;
     property Font;
@@ -71,7 +94,98 @@ procedure Register;
 implementation
 
 uses
-  UWSubtitleAPI.Tags, BGRADefaultBitmap;
+  UWSubtitleAPI.Tags, BGRADefaultBitmap, BGRAColorQuantization;
+
+// -----------------------------------------------------------------------------
+
+{ TUWBGRAText }
+
+// -----------------------------------------------------------------------------
+
+constructor TUWBGRAText.Create(const AText: String; const AWidth: Integer; const AHeight: Integer; const AFont: TFont; const ATransparent: Boolean = False);
+begin
+  FBitmap   := TBGRABitmap.Create(AWidth, AHeight, ColorToBGRA(FBackColor));
+  FRenderer := TBGRATextEffectFontRenderer.Create;
+  FFont     := TFont.Create;
+  FFont.Assign(AFont);
+
+  with FRenderer do
+  begin
+    FontName := FFont.Name;
+
+    OutlineColor     := ColorToBGRA(clBlack);
+    OutlineWidth     := 4;
+    OutlineVisible   := True;
+    OuterOutlineOnly := True;
+
+    ShadowColor   := ColorToBGRA(clBlack);
+    ShadowVisible := True;
+  end;
+
+  with FBitmap do
+  begin
+    FontRenderer   := FRenderer;
+    FontQuality    := fqFineAntialiasing;
+    FontFullHeight := FFont.Size;
+  end;
+
+  FText := AText;
+  FSpacing := 0;
+  FTransparent := ATransparent;
+
+  FTextColor := clWhite;
+  FBackColor := clBtnFace;
+end;
+
+// -----------------------------------------------------------------------------
+
+destructor TUWBGRAText.Destroy;
+begin
+  FFont.Free;
+  FBitmap.Free;
+  inherited Destroy;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWBGRAText.DrawBuffer(const AText: String; const AWidth: Integer = -1; const AHeight: Integer = -1; const AAlign: TAlignment = taCenter; const VAlign: TTextLayout = tlCenter; const ALeft: Integer = 0; const ATop: Integer = 0; const ARight: Integer = 0; const ABottom: Integer = 0);
+var
+  ts : TTextStyle;
+  r  : TRect;
+  s  : TSize;
+begin
+  with FBitmap do
+  begin
+    FText := AText;
+
+    FontName := FFont.Name;
+    FontFullHeight := FFont.Size;
+
+    ts := BGRADefaultBitmap.DefaultTextStyle;
+    ts.Alignment := AAlign;
+    ts.Layout    := VAlign;
+
+    r := Rect(ClipRect.Left + ALeft, ClipRect.Top + ATop, ClipRect.Right - ARight, ClipRect.Bottom - ABottom);
+
+    if (AWidth > 0) and (AHeight > 0) then // Full Size
+      SetSize(AWidth, AHeight)
+    else
+    begin // Auto Size
+      s := TextSizeMultiline(FText);
+      SetSize(s.Width + 15, s.Height + 15);
+      ts.Alignment := taCenter;
+      ts.Layout    := tlCenter;
+      r := Rect(ClipRect.Left, ClipRect.Top, ClipRect.Right, ClipRect.Bottom);
+    end;
+
+    if FTransparent then
+      FillTransparent
+    else
+      Fill(ColorToBGRA(FBackColor));
+
+    TextRect(r, 0, 0, RemoveTSTags(FText), ts, ColorToBGRA(Font.Color));
+  end;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -83,57 +197,27 @@ constructor TUWTextBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
-  Width  := 200;
-  Height := 100;
+  Width  := 320;
+  Height := 240;
 
   ControlStyle := ControlStyle + [csOpaque];
   Color        := clDefault;
   Cursor       := crArrow;
   FLoaded      := False;
 
+  FBuffer := TUWBGRAText.Create('URUWorks Tero Subtitler', Width, Height, Font, True);
+
   if Parent <> NIL then
-    FBackColor := Parent.Color
+    FBuffer.BackColor := Parent.Color
   else
-    FBackColor := clBtnFace;
-
-  FText        := 'URUWorks Tero Subtitler';
-  FSpacing     := 0;
-  FTransparent := False;
-
-  with Font do
-  begin
-    Color := clWhite;
-    Size  := 24;
-  end;
-
-  FBitmap   := TBGRABitmap.Create(Width, Height, ColorToBGRA(FBackColor));
-  FRenderer := TBGRATextEffectFontRenderer.Create;
-
-  with FRenderer do
-  begin
-    FontName         := Font.Name;
-
-    OutlineColor     := ColorToBGRA(clBlack);
-    OutlineWidth     := 4;
-    OutlineVisible   := True;
-    OuterOutlineOnly := True;
-
-    ShadowColor      := ColorToBGRA(clBlack);
-    ShadowVisible    := True;
-  end;
-
-  with FBitmap do
-  begin
-    FontRenderer := FRenderer;
-    FontQuality  := fqFineAntialiasing;
-  end;
+    FBuffer.BackColor := clBtnFace;
 end;
 
 // -----------------------------------------------------------------------------
 
 destructor TUWTextBox.Destroy;
 begin
-  FBitmap.Free;
+  FBuffer.Free;
   inherited Destroy;
 end;
 
@@ -143,7 +227,7 @@ procedure TUWTextBox.Loaded;
 begin
   inherited Loaded;
   FLoaded := True;
-  DrawBuffer;
+  FBuffer.DrawBuffer(FBuffer.FText, Width, Height);
 end;
 
 // -----------------------------------------------------------------------------
@@ -154,7 +238,7 @@ begin
     Canvas.DrawFocusRect(Rect(0, 0, Width, Height));
 
   if Visible then
-    FBitmap.Draw(Canvas, 0, 0);
+    FBuffer.FBitmap.Draw(Canvas, 0, 0);
 end;
 
 // -----------------------------------------------------------------------------
@@ -164,60 +248,72 @@ begin
   inherited;
 
   if FLoaded then
-    DrawBuffer;
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure TUWTextBox.DrawBuffer(const AWidth: Integer = -1; const AHeight: Integer = -1; const AAlign: TAlignment = taCenter; const VAlign: TTextLayout = tlCenter; const ALeft: Integer = 0; const ATop: Integer = 0; const ARight: Integer = 0; const ABottom: Integer = 0);
-var
-  ts : TTextStyle;
-  r  : TRect;
-begin
-  with FBitmap do
-  begin
-    if (AWidth > 0) and (AHeight > 0) then
-      SetSize(AWidth, AHeight)
-    else
-      SetSize(Self.Width, Self.Height);
-
-    if FTransparent then
-      FillTransparent
-    else
-      Fill(ColorToBGRA(FBackColor));
-
-    FontName := Font.Name;
-    FontFullHeight := Font.Size;
-
-    ts := BGRADefaultBitmap.DefaultTextStyle;
-    ts.Alignment := AAlign;
-    ts.Layout    := VAlign;
-
-    r := Rect(ClipRect.Left + ALeft, ClipRect.Top + ATop, ClipRect.Right - ARight, ClipRect.Bottom - ABottom);
-
-    TextRect(r, 0, 0, RemoveTSTags(FText), ts, ColorToBGRA(Font.Color));
-  end;
+    FBuffer.DrawBuffer(FBuffer.FText, Width, Height);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TUWTextBox.ReDraw;
 begin
-  DrawBuffer;
+  FBuffer.Font.Assign(Font);
+  FBuffer.DrawBuffer(FBuffer.FText, Width, Height);
   Invalidate;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTextBox.SaveImageToFile(const AFileName: String; const AText: String = ''; const AWidth: Integer = -1; const AHeight: Integer = -1; const AAlign: TAlignment = taCenter; const VAlign: TTextLayout = tlCenter; const ATransparent: Boolean = False; const ALeft: Integer = 0; const ATop: Integer = 0; const ARight: Integer = 0; const ABottom: Integer = 0);
+procedure TUWTextBox.SetText(const AText: String);
 begin
-  if not AText.IsEmpty then
-    FText := AText;
+  FBuffer.FText := AText;
+end;
 
-  FTransparent := ATransparent;
+// -----------------------------------------------------------------------------
 
-  DrawBuffer(AWidth, AHeight, AAlign, VAlign, ALeft, ATop, ARight, ABottom);
-  FBitmap.SaveToFile(AFileName);
+function TUWTextBox.GetText: String;
+begin
+  Result := FBuffer.FText;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTextBox.SetBackColor(const AColor: TColor);
+begin
+  FBuffer.FBackColor := AColor;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWTextBox.GetBackColor: TColor;
+begin
+  Result := FBuffer.FBackColor;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTextBox.SetSpacing(const ASpacing: Byte);
+begin
+  FBuffer.FSpacing := ASpacing;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWTextBox.GetSpacing: Byte;
+begin
+  Result := FBuffer.FSpacing;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTextBox.SetTransparent(const ATransparent: Boolean);
+begin
+  FBuffer.FTransparent := ATransparent;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWTextBox.GetTransparent: Boolean;
+begin
+  Result := FBuffer.FTransparent;
 end;
 
 // -----------------------------------------------------------------------------
