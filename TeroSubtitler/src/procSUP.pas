@@ -81,7 +81,7 @@ begin
           if i >= 0 then
             clr := i
           else
-            clr := BGRAColorToARGB(quant.ReducedPalette.FindNearestColorIndex(p[x]));
+            clr := quant.ReducedPalette.FindNearestColorIndex(p[x]);
 
           r := bmp.Scanline[y];
           len := 1;
