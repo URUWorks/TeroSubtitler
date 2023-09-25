@@ -79,9 +79,9 @@ begin
         begin
           i := quant.ReducedPalette.IndexOfColor(p[x]);
           if i >= 0 then
-            clr := BGRAColorToARGB(quant.ReducedPalette.Color[i])
+            clr := i
           else
-            clr := BGRAColorToARGB(quant.ReducedPalette.FindNearestColor(p[x]));
+            clr := BGRAColorToARGB(quant.ReducedPalette.FindNearestColorIndex(p[x]));
 
           r := bmp.Scanline[y];
           len := 1;
@@ -183,15 +183,15 @@ begin
     SetWord(CompositionNumber, ACompositionNumber);
     CompositionState := csfEpochStart;
     PaletteUpdateFlag := pufFalse;
-    PaletteID := $00;
-    NumberOfCompositionObjects := $01;
+    PaletteID := 0;
+    NumberOfCompositionObjects := 1;
   end;
   AStream.Write(pcs, SizeOf(pcs));
   // CO
   with co do
   begin
     SetWord(ObjectID, 0);
-    WindowID := $00;
+    WindowID := 0;
     ObjectCroppedFlag := ocfOff;
     SetWord(ObjectHorizontalPosition, 0);
     SetWord(ObjectVerticalPosition, 0);
@@ -211,8 +211,8 @@ begin
   AStream.Write(pgs, SizeOf(pgs));
   with wds do
   begin
-    NumberOfWindows := $01;
-    WindowID := $00;
+    NumberOfWindows := 1;
+    WindowID := 0;
     SetWord(WindowHorizontalPosition, 0);
     SetWord(WindowVerticalPosition, 0);
     SetWord(WindowWidth, AImage.Width);
@@ -229,8 +229,8 @@ begin
   AStream.Write(pgs, SizeOf(pgs));
   with pds do
   begin
-    PaletteID := $00;
-    PaletteVersionNumber := $00;
+    PaletteID := 0;
+    PaletteVersionNumber := 0;
     AStream.Write(pds, SizeOf(pds));
     with pdse do
     begin
@@ -239,8 +239,8 @@ begin
         PaletteEntryID := x;
         ColorToYCbCr(pal.Color[x], Y, Cb, Cr, ituBT601);
         Luminance := Y;
-        ColorDifferenceRed := Cb;
-        ColorDifferenceBlue := Cr;
+        ColorDifferenceRed := Cr;
+        ColorDifferenceBlue := Cb;
         Transparency := pal.Color[x].Alpha;
         AStream.Write(pdse, SizeOf(pdse));
       end;
@@ -258,7 +258,7 @@ begin
   with ods do
   begin
     SetWord(ObjectID, 0);
-    ObjectVersionNumber := $00;
+    ObjectVersionNumber := 0;
     LastInSequenceFlag := lsfFirstAndLast;
   end;
   AStream.Write(ods, SizeOf(ods));
@@ -285,16 +285,16 @@ begin
   begin
     SetDWord(PTS, ft);
     SegmentType := stfPCS;
-    SetWord(SegmentSize, SizeOf(pcs) + SizeOf(co));
+    SetWord(SegmentSize, SizeOf(pcs));
   end;
   AStream.Write(pgs, SizeOf(pgs));
   with pcs do
   begin
     SetWord(CompositionNumber, ACompositionNumber + 1);
+    CompositionState := csfNormal;
+    NumberOfCompositionObjects := 0;
   end;
   AStream.Write(pcs, SizeOf(pcs));
-  // CO
-  AStream.Write(co, SizeOf(co));
 
   // WDS
   with pgs do
