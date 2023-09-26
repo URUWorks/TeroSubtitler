@@ -85,6 +85,7 @@ We appreciate any donation, no matter how small, to help cover the costs of deve
 
 ## Special thanks 
 
+Circular,
 Rafael López Sánchez,
 Scott Napier,
 Serenella Massidda,
