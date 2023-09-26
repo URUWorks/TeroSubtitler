@@ -142,7 +142,9 @@ begin
       WhisperCPP := ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE]);
 
     if FileExists(GetCustomFilePath(YTDLP_EXE)) then
-      YTDLP := GetCustomFilePath(YTDLP_EXE);
+      YTDLP := GetCustomFilePath(YTDLP_EXE)
+    else
+      YTDLP := ConcatPaths([YTDLPFolder, YTDLP_EXE]);
     {$ELSE}
     if DirectoryExists(GetCustomUserPath('ffmpeg')) then
       FFmpeg := ConcatPaths([GetCustomUserPath('ffmpeg'), FFMPEG_EXE])
