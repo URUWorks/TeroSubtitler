@@ -471,11 +471,10 @@
   </Form>
   <Form Name="frmExportSUP" Caption="Blu-ray SUP">
     <Section Name="TLabel">
-      <lblFPS>FPS</lblFPS>
-      <lblVideoRes>Video resolution</lblVideoRes>
-      <lblSafeArea>Safe area pixels (left, top, right, bottom)</lblSafeArea>
       <lblFont>Font</lblFont>
       <lblFontSize>Size</lblFontSize>
+      <lblSafeArea>Safe area pixels (left, top, right, bottom)</lblSafeArea>
+      <lblVideoRes>Video resolution</lblVideoRes>
     </Section>
   </Form>              
   <Form Name="frmTranslationMemory" Caption="Translation memory"/>

@@ -13,25 +13,6 @@ object frmExportSUP: TfrmExportSUP
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '2.2.6.0'
-  object lblFPS: TLabel
-    Left = 328
-    Height = 15
-    Top = 8
-    Width = 19
-    Caption = 'FPS'
-    ParentColor = False
-  end
-  object cboFPS: TComboBox
-    AnchorSideLeft.Side = asrBottom
-    Left = 328
-    Height = 23
-    Top = 28
-    Width = 75
-    BorderSpacing.Left = 5
-    ItemHeight = 15
-    Style = csDropDownList
-    TabOrder = 2
-  end
   object btnSave: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
@@ -44,7 +25,7 @@ object frmExportSUP: TfrmExportSUP
     Caption = 'Save...'
     Default = True
     OnClick = btnSaveClick
-    TabOrder = 10
+    TabOrder = 9
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -61,7 +42,7 @@ object frmExportSUP: TfrmExportSUP
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
-    TabOrder = 11
+    TabOrder = 10
   end
   object lblVideoRes: TLabel
     Left = 8
@@ -78,7 +59,7 @@ object frmExportSUP: TfrmExportSUP
     Width = 75
     MaxValue = 7680
     MinValue = 160
-    TabOrder = 3
+    TabOrder = 2
     Value = 1920
   end
   object spnHeight: TSpinEdit
@@ -88,7 +69,7 @@ object frmExportSUP: TfrmExportSUP
     Width = 75
     MaxValue = 4320
     MinValue = 160
-    TabOrder = 4
+    TabOrder = 3
     Value = 1080
   end
   object lblX: TLabel
@@ -102,7 +83,7 @@ object frmExportSUP: TfrmExportSUP
   object lblSafeArea: TLabel
     Left = 328
     Height = 15
-    Top = 64
+    Top = 8
     Width = 176
     Caption = 'Safe area (left, top, right, bottom)'
     ParentColor = False
@@ -110,10 +91,10 @@ object frmExportSUP: TfrmExportSUP
   object spnLeft: TSpinEdit
     Left = 328
     Height = 23
-    Top = 84
+    Top = 28
     Width = 75
     MaxValue = 250
-    TabOrder = 6
+    TabOrder = 5
   end
   object spnTop: TSpinEdit
     AnchorSideLeft.Control = spnLeft
@@ -121,11 +102,11 @@ object frmExportSUP: TfrmExportSUP
     AnchorSideTop.Control = spnLeft
     Left = 408
     Height = 23
-    Top = 84
+    Top = 28
     Width = 75
     BorderSpacing.Left = 5
     MaxValue = 250
-    TabOrder = 7
+    TabOrder = 6
   end
   object spnRight: TSpinEdit
     AnchorSideLeft.Control = spnTop
@@ -133,11 +114,11 @@ object frmExportSUP: TfrmExportSUP
     AnchorSideTop.Control = spnTop
     Left = 488
     Height = 23
-    Top = 84
+    Top = 28
     Width = 75
     BorderSpacing.Left = 5
     MaxValue = 250
-    TabOrder = 8
+    TabOrder = 7
   end
   object spnBottom: TSpinEdit
     AnchorSideLeft.Control = spnRight
@@ -145,11 +126,11 @@ object frmExportSUP: TfrmExportSUP
     AnchorSideTop.Control = spnRight
     Left = 568
     Height = 23
-    Top = 84
+    Top = 28
     Width = 75
     BorderSpacing.Left = 5
     MaxValue = 250
-    TabOrder = 9
+    TabOrder = 8
   end
   object cboFont: TComboBox
     AnchorSideLeft.Control = spnWidth
@@ -159,7 +140,6 @@ object frmExportSUP: TfrmExportSUP
     Height = 23
     Top = 28
     Width = 219
-    Anchors = [akTop, akLeft, akRight]
     ItemHeight = 15
     OnSelect = cboFontSelect
     Style = csDropDownList
@@ -232,7 +212,7 @@ object frmExportSUP: TfrmExportSUP
     BorderSpacing.Left = 5
     Caption = '...'
     OnClick = btnResClick
-    TabOrder = 5
+    TabOrder = 4
   end
   object popRes: TPopupMenu
     Left = 232

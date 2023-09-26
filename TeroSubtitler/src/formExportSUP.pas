@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin, Menus,
-  UWTextBox, UWSubtitleAPI, UWSubtitleAPI.SUP;
+  UWTextBox, UWSubtitleAPI;
 
 type
 
@@ -33,14 +33,12 @@ type
     btnRes: TButton;
     btnSave: TButton;
     btnClose: TButton;
-    cboFPS: TComboBox;
     cboFont: TComboBox;
     lblStatus: TLabel;
     lblFont: TLabel;
     lblSafeArea: TLabel;
     lblFontSize: TLabel;
     lblX: TLabel;
-    lblFPS: TLabel;
     lblVideoRes: TLabel;
     popRes: TPopupMenu;
     spnFontSize: TSpinEdit;
@@ -92,8 +90,6 @@ var
   m: TMenuItem;
 begin
   LoadLanguage(Self);
-
-  FillComboWithFPS(cboFPS, GetFPS);
 
   cboFont.Items.Assign(Screen.Fonts);
   i := cboFont.Items.IndexOf('Verdana');
@@ -202,7 +198,6 @@ end;
 
 procedure TfrmExportSUP.SetControlsEnabled(const AValue: Boolean);
 begin
-  cboFPS.Enabled := AValue;
   spnWidth.Enabled := AValue;
   spnHeight.Enabled := AValue;
   btnRes.Enabled := AValue;
@@ -228,8 +223,6 @@ end;
 procedure TfrmExportSUP.WriteSUPFile(const AFileName: String);
 var
   fs : TFileStream;
-  h : TAlignment;
-  v : TTextLayout;
   i, n : Integer;
   buf : TUWBGRAText;
 begin
@@ -241,7 +234,7 @@ begin
       for i := 0 to Subtitles.Count-1 do
       begin
         buf.DrawBuffer(Subtitles[i].Text);
-        WriteSUPFrame(fs, Subtitles, i, n, buf.Bitmap, spnWidth.Value, spnHeight.Value);
+        WriteSUPFrame(fs, Subtitles, i, n, buf.Bitmap, spnWidth.Value, spnHeight.Value, Rect(spnLeft.Value, spnTop.Value, spnRight.Value, spnBottom.Value));
         Inc(n, 2);
 
         lblStatus.Caption := Format(StatusString, [i, Subtitles.Count]);

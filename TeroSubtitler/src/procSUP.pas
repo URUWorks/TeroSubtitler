@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, UWSubtitleAPI, BGRABitmap;
 
-procedure WriteSUPFrame(const AStream: TStream; const ASubtitles: TUWSubtitles; const AIndex, ACompositionNumber: Integer; const AImage: TBGRABitmap; const AVideoWidth, AVideoHeight: Integer);
+procedure WriteSUPFrame(const AStream: TStream; const ASubtitles: TUWSubtitles; const AIndex, ACompositionNumber: Integer; const AImage: TBGRABitmap; const AVideoWidth, AVideoHeight: Integer; const AMargins: TRect);
 
 // -----------------------------------------------------------------------------
 
@@ -140,12 +140,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure WriteSUPFrame(const AStream: TStream; const ASubtitles: TUWSubtitles; const AIndex, ACompositionNumber: Integer; const AImage: TBGRABitmap; const AVideoWidth, AVideoHeight: Integer);
+procedure WriteSUPFrame(const AStream: TStream; const ASubtitles: TUWSubtitles; const AIndex, ACompositionNumber: Integer; const AImage: TBGRABitmap; const AVideoWidth, AVideoHeight: Integer; const AMargins: TRect);
 var
   pal : TFPPalette = NIL;
   rlebuf : TBytes;
   rlesize : Integer;
   x, it, ft : Integer;
+  Xoffset, Yoffset : Integer;
   Y, Cb, Cr : Byte;
   pgs : TPGS;
   pcs : TPCS;
@@ -162,6 +163,70 @@ begin
 
   // Get image buffer/pallete
   rlesize := EncodeImage(AImage, rlebuf, pal);
+
+  // Prepare alignments
+  Xoffset := 0;
+  Yoffset := 0;
+  if ASubtitles[AIndex].Align <> 0 then
+  begin
+    case ASubtitles[AIndex].Align of
+      1: case ASubtitles[AIndex].VAlign of // Left
+           1 : begin // Center
+                 Xoffset := AMargins.Left;
+                 Yoffset := (AVideoHeight - AImage.Height) div 2;
+               end;
+           2 : begin // Top
+                 Xoffset := AMargins.Left;
+                 Yoffset := AMargins.Top;
+               end;
+         else // Bottom
+           Xoffset := AMargins.Left;
+           Yoffset := AVideoHeight - (AImage.Height + AMargins.Bottom);
+         end;
+      2: case ASubtitles[AIndex].VAlign of // Center
+           1 : begin // Middle
+                 Xoffset := (AVideoWidth - AImage.Width) div 2;
+                 Yoffset := (AVideoHeight - AImage.Height) div 2;
+               end;
+           2 : begin // Top
+                 Xoffset := (AVideoWidth - AImage.Width) div 2;
+                 Yoffset := AMargins.Top;
+               end
+         else // Bottom
+           Xoffset := (AVideoWidth - AImage.Width) div 2;
+           Yoffset := AVideoHeight - (AImage.Height + AMargins.Bottom);
+         end;
+      3: case ASubtitles[AIndex].VAlign of // Right
+           1 : begin // Center
+                 Xoffset := AVideoWidth - AImage.Width - AMargins.Right;
+                 Yoffset := (AVideoHeight - AImage.Height) div 2;
+               end;
+           2 : begin // Top
+                 Xoffset := AVideoWidth - AImage.Width - AMargins.Right;
+                 Yoffset := AMargins.Top;
+             end;
+         else // Bottom
+           Xoffset := AVideoWidth - AImage.Width - AMargins.Right;
+           Yoffset := AVideoHeight - (AImage.Height + AMargins.Bottom);
+         end;
+    end;
+  end
+  else if ASubtitles[AIndex].VAlign <> 0 then
+  begin
+    case ASubtitles[AIndex].VAlign of // Middle
+      1 : begin // Center
+            Xoffset := (AVideoWidth - AImage.Width) div 2;
+            Yoffset := (AVideoHeight - AImage.Height) div 2;
+          end;
+      2 : begin // Top
+            Xoffset := (AVideoWidth - AImage.Width) div 2;
+            Yoffset := AMargins.Top;
+          end;
+    else // Bottom
+      Xoffset := (AVideoWidth - AImage.Width) div 2;
+      Yoffset := AVideoHeight - (AImage.Height + AMargins.Bottom);
+    end;
+  end;
 
   // PCS - START
   with pgs do
@@ -191,8 +256,8 @@ begin
     SetWord(ObjectID, 0);
     WindowID := 0;
     ObjectCroppedFlag := ocfOff;
-    SetWord(ObjectHorizontalPosition, 0);
-    SetWord(ObjectVerticalPosition, 0);
+    SetWord(ObjectHorizontalPosition, Xoffset);
+    SetWord(ObjectVerticalPosition, Yoffset);
     SetWord(ObjectCroppingHorizontalPosition, 0);
     SetWord(ObjectCroppingVerticalPosition, 0);
     SetWord(ObjectCroppingWidth, 0);
@@ -211,8 +276,8 @@ begin
   begin
     NumberOfWindows := 1;
     WindowID := 0;
-    SetWord(WindowHorizontalPosition, 0);
-    SetWord(WindowVerticalPosition, 0);
+    SetWord(WindowHorizontalPosition, Xoffset);
+    SetWord(WindowVerticalPosition, Yoffset);
     SetWord(WindowWidth, AImage.Width);
     SetWord(WindowHeight, AImage.Height);
   end;
