@@ -85,7 +85,7 @@ begin
 
           r := bmp.Scanline[y];
           len := 1;
-          while x + len < bmp.Width do
+          while (x + len < bmp.Width) and (len < $3FFF) do
           begin
             if r[x + len] <> p[x] then Break;
             Inc(len);
@@ -98,8 +98,6 @@ begin
           end
           else
           begin
-            if len > $3FFF then len := $3FFF;
-
             // rle id
             bytes.WriteByte(0);
 

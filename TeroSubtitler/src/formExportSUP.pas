@@ -41,7 +41,7 @@ type
     lblFontSize: TLabel;
     lblX: TLabel;
     lblFPS: TLabel;
-    lblImageSize: TLabel;
+    lblVideoRes: TLabel;
     popRes: TPopupMenu;
     spnFontSize: TSpinEdit;
     spnTop: TSpinEdit;

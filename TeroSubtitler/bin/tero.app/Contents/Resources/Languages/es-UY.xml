@@ -468,7 +468,16 @@
       <lblFont>Fuente</lblFont>
       <lblFontSize>Tamaño</lblFontSize>
     </Section>
-  </Form>              
+  </Form>
+  <Form Name="frmExportSUP" Caption="Blu-ray SUP">
+    <Section Name="TLabel">
+      <lblFPS>FPS</lblFPS>
+      <lblVideoRes>Resolución de video</lblVideoRes>
+      <lblSafeArea>Margenes en píxeles (izquierdo, superior, derecho, inferior)</lblSafeArea>
+      <lblFont>Fuente</lblFont>
+      <lblFontSize>Tamaño</lblFontSize>
+    </Section>
+  </Form>                              
   <Form Name="frmTranslationMemory" Caption="Memoria de traducción"/>
   <Form Name="frmTranslationMemorySettings" Caption="Configuración de la memoria de traducción">
     <Section Name="TLabel">

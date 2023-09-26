@@ -63,12 +63,12 @@ object frmExportSUP: TfrmExportSUP
     OnClick = btnCloseClick
     TabOrder = 11
   end
-  object lblImageSize: TLabel
+  object lblVideoRes: TLabel
     Left = 8
     Height = 15
     Top = 64
-    Width = 55
-    Caption = 'Image size'
+    Width = 48
+    Caption = 'Video res'
     ParentColor = False
   end
   object spnWidth: TSpinEdit

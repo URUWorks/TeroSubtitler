@@ -151,8 +151,8 @@ type
     ObjectDataLength    : array[0..2] of Byte; // The length of the Run-length Encoding (RLE) data buffer with the compressed image data
     Width               : array[0..1] of Byte; // Width of the image
     Height              : array[0..1] of Byte; // Height of the image
-    //ObjectData          : array of Byte;       // This is the image data compressed using Run-length Encoding (RLE). The size of the data is defined in the Object Data Length field
   end;
+  TODSObjectData        = array of Byte;       // This is the image data compressed using Run-length Encoding (RLE). The size of the data is defined in the Object Data Length field
 
 const
 
