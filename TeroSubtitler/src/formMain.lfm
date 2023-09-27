@@ -2394,27 +2394,6 @@ object frmMain: TfrmMain
       ImageIndex = 70
       OnExecute = actReplaceExecute
     end
-    object actInsertSubtitleBefore: TAction
-      Tag = 17
-      Category = 'Edit'
-      Caption = 'Insert subtitle before'
-      ImageIndex = 9
-      OnExecute = actInsertSubtitleBeforeExecute
-    end
-    object actInsertSubtitle: TAction
-      Tag = 17
-      Category = 'Edit'
-      Caption = 'Insert subtitle'
-      ImageIndex = 8
-      OnExecute = actInsertSubtitleExecute
-    end
-    object actDeleteSubtitle: TAction
-      Tag = 17
-      Category = 'Edit'
-      Caption = 'Delete subtitle(s)'
-      ImageIndex = 10
-      OnExecute = actDeleteSubtitleExecute
-    end
     object actListMode: TAction
       Category = 'View'
       AutoCheck = True
@@ -2615,13 +2594,6 @@ object frmMain: TfrmMain
       ImageIndex = 55
       OnExecute = actMediaAddSubtitleExecute
     end
-    object actCombineSubtitles: TAction
-      Tag = 1
-      Category = 'Edit'
-      Caption = 'Combine subtitles'
-      ImageIndex = 63
-      OnExecute = actCombineSubtitlesExecute
-    end
     object actSelectAll: TAction
       Tag = 17
       Category = 'Select'
@@ -2757,12 +2729,6 @@ object frmMain: TfrmMain
       Category = 'Help'
       Caption = 'About...'
       OnExecute = actAboutExecute
-    end
-    object actSettings: TAction
-      Category = 'Edit'
-      Caption = 'Settings...'
-      ImageIndex = 19
-      OnExecute = actSettingsExecute
     end
     object actMediaPreviousFrame: TAction
       Tag = 4
@@ -3144,11 +3110,6 @@ object frmMain: TfrmMain
       Caption = 'Check for updates'
       OnExecute = actCheckForUpdatesExecute
     end
-    object actFormatProperties: TAction
-      Category = 'Edit'
-      Caption = 'Format properties'
-      OnExecute = actFormatPropertiesExecute
-    end
     object actSort: TAction
       Tag = 1
       Category = 'Subtitle'
@@ -3513,6 +3474,50 @@ object frmMain: TfrmMain
       Category = 'File'
       Caption = 'Close'
       OnExecute = actCloseAppExecute
+    end
+    object actCopyVideoPosToClipboard: TAction
+      Category = 'Edit'
+      Caption = 'Copy video pos to clipboard'
+      OnExecute = actCopyVideoPosToClipboardExecute
+    end
+    object actInsertSubtitleBefore: TAction
+      Tag = 17
+      Category = 'Edit'
+      Caption = 'Insert subtitle before'
+      ImageIndex = 9
+      OnExecute = actInsertSubtitleBeforeExecute
+    end
+    object actInsertSubtitle: TAction
+      Tag = 17
+      Category = 'Edit'
+      Caption = 'Insert subtitle'
+      ImageIndex = 8
+      OnExecute = actInsertSubtitleExecute
+    end
+    object actDeleteSubtitle: TAction
+      Tag = 17
+      Category = 'Edit'
+      Caption = 'Delete subtitle(s)'
+      ImageIndex = 10
+      OnExecute = actDeleteSubtitleExecute
+    end
+    object actCombineSubtitles: TAction
+      Tag = 1
+      Category = 'Edit'
+      Caption = 'Combine subtitles'
+      ImageIndex = 63
+      OnExecute = actCombineSubtitlesExecute
+    end
+    object actSettings: TAction
+      Category = 'Edit'
+      Caption = 'Settings...'
+      ImageIndex = 19
+      OnExecute = actSettingsExecute
+    end
+    object actFormatProperties: TAction
+      Category = 'Edit'
+      Caption = 'Format properties'
+      OnExecute = actFormatPropertiesExecute
     end
   end
   object popDropInsert: TPopupMenu

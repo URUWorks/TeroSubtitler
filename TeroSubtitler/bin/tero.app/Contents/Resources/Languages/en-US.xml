@@ -52,6 +52,7 @@
       <actCut>Cut</actCut>
       <actCopy>Copy</actCopy>
       <actPaste>Paste</actPaste>
+      <actCopyVideoPosToClipboard>Copy video position to clipboard</actCopyVideoPosToClipboard>
       <actFind>Find...</actFind>
       <actFindNext>Find next</actFindNext>
       <actFindPrevious>Find previous</actFindPrevious>

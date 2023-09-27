@@ -74,6 +74,7 @@ type
     actExportCustomImageFormat: TAction;
     actDetectDialogSegments: TAction;
     actExportSUP: TAction;
+    actCopyVideoPosToClipboard: TAction;
     actWebPreview: TAction;
     actShowActorOnPreview: TAction;
     actRoundTimes: TAction;
@@ -767,6 +768,7 @@ type
     procedure actCutExecute(Sender: TObject);
     procedure actCopyExecute(Sender: TObject);
     procedure actPasteExecute(Sender: TObject);
+    procedure actCopyVideoPosToClipboardExecute(Sender: TObject);
     procedure actInsertSubtitleBeforeExecute(Sender: TObject);
     procedure actInsertSubtitleExecute(Sender: TObject);
     procedure actDeleteSubtitleExecute(Sender: TObject);

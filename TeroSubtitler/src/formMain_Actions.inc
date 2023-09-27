@@ -227,6 +227,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actCopyVideoPosToClipboardExecute(Sender: TObject);
+begin
+  CopyCurrentVideoPosToClipboard;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actInsertSubtitleBeforeExecute(Sender: TObject);
 begin
   if Workspace.ViewMode = vmList then
@@ -431,49 +438,49 @@ end;
 
 procedure TfrmMain.actAlignToLeftExecute(Sender: TObject);
 begin
-  SetAlignTo(1);
+  SetAlignTo(shaLeft);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actAlignToCenterExecute(Sender: TObject);
 begin
-  SetAlignTo(2);
+  SetAlignTo(shaCenter);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actAlignToRightExecute(Sender: TObject);
 begin
-  SetAlignTo(3);
+  SetAlignTo(shaRight);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actAlignToNoneExecute(Sender: TObject);
 begin
-  SetAlignTo(0);
+  SetAlignTo(shaNone);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actVAlignToBottomExecute(Sender: TObject);
 begin
-  SetVAlignTo(0);
+  SetVAlignTo(svaBottom);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actVAlignToMiddleExecute(Sender: TObject);
 begin
-  SetVAlignTo(1);
+  SetVAlignTo(svaCenter);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actVAlignToTopExecute(Sender: TObject);
 begin
-  SetVAlignTo(2);
+  SetVAlignTo(svaTop);
 end;
 
 // -----------------------------------------------------------------------------
