@@ -69,7 +69,7 @@ const
 
   // FrameRate
 
-  frf23976 = $10;
+  frf23976 = $10;  // Default
   frf24    = $20;
   frf25    = $30;
   frf2997  = $40;

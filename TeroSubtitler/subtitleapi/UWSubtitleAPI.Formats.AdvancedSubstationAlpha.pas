@@ -169,34 +169,34 @@ begin
     Text := ReplaceString(Trim(Text), LineEnding, '\N');
 
     s := '';
-    if Subtitles[i].Align <> 0 then
+    if Subtitles[i].Align <> shaNone then
     begin
       case Subtitles[i].Align of
-        1: case Subtitles[i].VAlign of
-             1 : s := '{\an4}';
-             2 : s := '{\an7}';
-           else
-             s := '{\an1}';
+        shaLeft : case Subtitles[i].VAlign of
+                    svaCenter : s := '{\an4}';
+                    svaTop    : s := '{\an7}';
+                  else
+                    s := '{\an1}';
            end;
-        2: case Subtitles[i].VAlign of
-             1 : s := '{\an5}';
-             2 : s := '{\an8}';
-           else
-             s := '{\an2}';
-           end;
-        3: case Subtitles[i].VAlign of
-             1 : s := '{\an6}';
-             2 : s := '{\an9}';
-           else
-             s := '{\an3}';
-           end;
+        shaCenter : case Subtitles[i].VAlign of
+                      svaCenter : s := '{\an5}';
+                      svaTop    : s := '{\an8}';
+                    else
+                      s := '{\an2}';
+                    end;
+        shaRight : case Subtitles[i].VAlign of
+                     svaCenter : s := '{\an6}';
+                     svaTop    : s := '{\an9}';
+                   else
+                     s := '{\an3}';
+                   end;
       end;
     end
-    else if Subtitles[i].VAlign <> 0 then
+    else if Subtitles[i].VAlign <> svaBottom then
     begin
       case Subtitles[i].VAlign of
-        1 : s := '{\an5}';
-        2 : s := '{\an8}';
+        svaCenter : s := '{\an5}';
+        svaTop    : s := '{\an8}';
       else
         s := '{\an2}';
       end;

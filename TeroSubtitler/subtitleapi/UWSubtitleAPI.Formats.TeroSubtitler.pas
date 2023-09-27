@@ -143,9 +143,9 @@ begin
             with Subtitles.ItemPointer[i]^ do
             begin
               if Node.Attributes.GetNamedItem('align') <> NIL then
-                Align  := Node.Attributes.GetNamedItem('align').NodeValue.ToInteger;
+                Align  := TSubtitleHAlign(Node.Attributes.GetNamedItem('align').NodeValue.ToInteger);
               if Node.Attributes.GetNamedItem('valign') <> NIL then
-                VAlign := Node.Attributes.GetNamedItem('valign').NodeValue.ToInteger;
+                VAlign := TSubtitleVAlign(Node.Attributes.GetNamedItem('valign').NodeValue.ToInteger);
               if Node.Attributes.GetNamedItem('marked') <> NIL then
                 Marked := Node.Attributes.GetNamedItem('marked').NodeValue.ToBoolean;
               if Node.Attributes.GetNamedItem('notes') <> NIL then
@@ -243,10 +243,10 @@ begin
       TDOMElement(Element).SetAttribute('begin', Subtitles.InitialTime[i].ToString);
       TDOMElement(Element).SetAttribute('end', Subtitles.FinalTime[i].ToString);
 
-      if Subtitles[i].Align > 0 then
-        TDOMElement(Element).SetAttribute('align', Subtitles[i].Align.ToString);
-      if Subtitles[i].VAlign > 0 then
-        TDOMElement(Element).SetAttribute('valign', Subtitles[i].VAlign.ToString);
+      if Subtitles[i].Align <> shaNone then
+        TDOMElement(Element).SetAttribute('align', Integer(Subtitles[i].Align).ToString);
+      if Subtitles[i].VAlign <> svaBottom then
+        TDOMElement(Element).SetAttribute('valign', Integer(Subtitles[i].VAlign).ToString);
       if Subtitles[i].Marked then
         TDOMElement(Element).SetAttribute('marked', Subtitles[i].Marked.ToString);
       if not Subtitles[i].Notes.IsEmpty then

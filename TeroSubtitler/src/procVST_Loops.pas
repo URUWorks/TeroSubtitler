@@ -231,13 +231,13 @@ begin
 
   with frmMain do
     if actAlignToLeft.Checked then
-      Item^.Align := 1
+      Item^.Align := shaLeft
     else if actAlignToCenter.Checked then
-      Item^.Align := 2
+      Item^.Align := shaCenter
     else if actAlignToRight.Checked then
-      Item^.Align := 3
+      Item^.Align := shaRight
     else
-      Item^.Align := 0;
+      Item^.Align := shaNone;
 end;
 
 // -----------------------------------------------------------------------------
@@ -248,11 +248,11 @@ begin
 
   with frmMain do
     if actVAlignToMiddle.Checked then
-      Item^.VAlign := 1
+      Item^.VAlign := svaCenter
     else if actVAlignToTop.Checked then
-      Item^.VAlign := 2
+      Item^.VAlign := svaTop
     else
-      Item^.VAlign := 0;
+      Item^.VAlign := svaBottom;
 end;
 
 // -----------------------------------------------------------------------------

@@ -27,6 +27,7 @@ uses
 
 procedure CopyToClipboard(const ACut: Boolean = False);
 procedure PasteFromClipboard;
+procedure CopyCurrentVideoPosToClipboard;
 
 function InsertSubtitle(const Index: Integer; const Item: TUWSubtitleItem; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer; overload;
 function InsertSubtitle(const Index: Integer; const InitialTime, FinalTime: Integer; const Text, Translation: String; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer; overload;
@@ -65,8 +66,8 @@ procedure SetTextTag(const Tag: String);
 procedure SetTextCustomTag(const Tag: String);
 procedure SetTextTagColor(const HexColor: String);
 
-procedure SetAlignTo(const ATag: Integer);
-procedure SetVAlignTo(const ATag: Integer);
+procedure SetAlignTo(const AAlign: TSubtitleHAlign);
+procedure SetVAlignTo(const AVAlign: TSubtitleVAlign);
 
 function SetEndCueOneFrame(const AFinalTime: Integer; const ASubtract: Boolean = False): Integer;
 
@@ -80,7 +81,7 @@ uses
   formMain, procVST, procUndo, procVST_Loops, procWorkspace, procFixSubtitles,
   UWSystem.Encoding, UWSystem.TimeUtils, UWSystem.StrUtils, procMPV,
   UWSubtitleAPI.Tags, UWSubtitleAPI.Formats, procTranscription,
-  UWSubtitles.Utils;
+  UWSubtitles.Utils, Clipbrd;
 
 // -----------------------------------------------------------------------------
 
@@ -118,6 +119,15 @@ begin
     if Memo <> NIL then
       Memo.PasteFromClipboard;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure CopyCurrentVideoPosToClipboard;
+begin
+  with frmMain.MPV do
+    if IsMediaLoaded then
+      Clipboard.AsText := GetMediaPosInMs.ToString;
 end;
 
 // -----------------------------------------------------------------------------
@@ -580,34 +590,34 @@ begin
       end;
       Result := ReplaceString(Result, sLineBreak, #10) + #10 + ' ';
       s := '';
-      if Align <> 0 then
+      if Align <> shaNone then
       begin
         case Align of
-          1: case VAlign of
-               1 : s := '{\an4}';
-               2 : s := '{\an7}';
-             else
-               s := '{\an1}';
-             end;
-          2: case VAlign of
-               1 : s := '{\an5}';
-               2 : s := '{\an8}';
-             else
-               s := '{\an2}';
-             end;
-          3: case VAlign of
-               1 : s := '{\an6}';
-               2 : s := '{\an9}';
-             else
-               s := '{\an3}';
-             end;
+          shaLeft : case VAlign of
+                      svaCenter : s := '{\an4}';
+                      svaTop    : s := '{\an7}';
+                    else
+                      s := '{\an1}';
+                    end;
+          shaCenter : case VAlign of
+                        svaCenter : s := '{\an5}';
+                        svaTop    : s := '{\an8}';
+                      else
+                        s := '{\an2}';
+                      end;
+          shaRight : case VAlign of
+                       svaCenter : s := '{\an6}';
+                       svaTop    : s := '{\an9}';
+                     else
+                       s := '{\an3}';
+                     end;
         end;
       end
-      else if VAlign <> 0 then
+      else if VAlign <> svaBottom then
       begin
         case VAlign of
-          1 : s := '{\an5}';
-          2 : s := '{\an8}';
+          svaCenter : s := '{\an5}';
+          svaTop    : s := '{\an8}';
         else
           s := '{\an2}';
         end;
@@ -697,24 +707,24 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure SetAlignTo(const ATag: Integer);
+procedure SetAlignTo(const AAlign: TSubtitleHAlign);
 begin
   with frmMain do
     if GetMemoFocused = NIL then
       VSTDoLoop(VST, @ApplyAlign)
     else
-      Subtitles.ItemPointer[VSTFocusedNode(VST)]^.Align := ATag;
+      Subtitles.ItemPointer[VSTFocusedNode(VST)]^.Align := AAlign;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure SetVAlignTo(const ATag: Integer);
+procedure SetVAlignTo(const AVAlign: TSubtitleVAlign);
 begin
   with frmMain do
     if GetMemoFocused = NIL then
       VSTDoLoop(VST, @ApplyVAlign)
     else
-      Subtitles.ItemPointer[VSTFocusedNode(VST)]^.VAlign := ATag;
+      Subtitles.ItemPointer[VSTFocusedNode(VST)]^.VAlign := AVAlign;
 end;
 
 // -----------------------------------------------------------------------------

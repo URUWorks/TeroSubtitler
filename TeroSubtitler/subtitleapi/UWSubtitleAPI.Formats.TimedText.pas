@@ -157,9 +157,9 @@ begin
               begin
                 with Node.Attributes.GetNamedItem('region') do
                   if (NodeValue = 'top') or (NodeValue = 'sh0') then
-                    VAlign := 2
+                    VAlign := svaTop
                   else
-                    VAlign := 0;
+                    VAlign := svaBottom;
               end;
 
               if Node.Attributes.GetNamedItem('begin') <> NIL then
@@ -265,7 +265,7 @@ begin
     for i := FromItem to ToItem do
     begin
       Element := XmlDoc.CreateElement('p');
-      TDOMElement(Element).SetAttribute('region', iff(Subtitles[i].VAlign > 0, 'top', 'bottom'));
+      TDOMElement(Element).SetAttribute('region', iff(Subtitles[i].VAlign = svaTop, 'top', 'bottom'));
       TDOMElement(Element).SetAttribute('begin', TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz'));
       TDOMElement(Element).SetAttribute('id', TimeToString(Subtitles.InitialTime[i], 'p' + IntToStr(i)));
       TDOMElement(Element).SetAttribute('end', TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz'));

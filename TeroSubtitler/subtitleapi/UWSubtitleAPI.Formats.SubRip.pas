@@ -178,7 +178,7 @@ begin
           x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
 
           if (ExtraInfo = NIL) and (X1 > 0) then
-            Subtitles.ItemPointer[x]^.VAlign := X1;
+            Subtitles.ItemPointer[x]^.VAlign := TSubtitleVAlign(X1);
         end;
       end;
       Inc(i);
@@ -218,7 +218,7 @@ begin
       end
     else
     begin
-      if Subtitles[i].VAlign = 2 then
+      if Subtitles[i].VAlign = svaTop then
         XY := 'X1:0'
       else
         XY := '';

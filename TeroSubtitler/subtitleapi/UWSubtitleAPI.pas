@@ -110,6 +110,8 @@ type
   TSubtitleErrorTypeSet = set of TSubtitleErrorType;
   TSubtitleMode = (smText, smTranslation);
   TSubtitleTimeBase = (stbMedia, stbSMPTE);
+  TSubtitleHAlign = (shaNone, shaLeft, shaCenter, shaRight);
+  TSubtitleVAlign = (svaBottom, svaCenter, svaTop);
   TSubtitleLoadDataFunc = function(const AData: Pointer; const ADataClass: ShortString): Integer;
 
   PUWSubtitleItem = ^TUWSubtitleItem;
@@ -120,8 +122,8 @@ type
     FinalTime   : TUWTimeCode;
     Marked      : Boolean;
     ErrorType   : TSubtitleErrorTypeSet;
-    Align       : Integer;
-    VAlign      : Integer;
+    Align       : TSubtitleHAlign;
+    VAlign      : TSubtitleVAlign;
     R           : TRect;
     Style       : String;
     Actor       : String;
@@ -1211,8 +1213,8 @@ begin
     FinalTime    := AFinalTime;
     Marked       := False;
     ErrorType    := [];
-    Align        := 0;
-    VAlign       := 0;
+    Align        := shaNone;
+    VAlign       := svaBottom;
     R            := Rect(0, 0, 0, 0);
     Style        := '';
     Actor        := '';
@@ -1873,8 +1875,8 @@ begin
     FinalTime   := 0;
     Marked      := False;
     ErrorType   := [];
-    Align       := 0;
-    VAlign      := 0;
+    Align       := shaNone;
+    VAlign      := svaBottom;
     R           := Rect(0, 0, 0, 0);
     Style       := '';
     Actor       := '';

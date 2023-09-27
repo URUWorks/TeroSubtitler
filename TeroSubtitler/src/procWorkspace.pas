@@ -1328,15 +1328,15 @@ begin
           mmoText.Text        := Subtitles[NodeIndex].Text;
           mmoTranslation.Text := Subtitles[NodeIndex].Translation;
           case Subtitles[NodeIndex].Align of
-            0: actAlignToNone.Checked   := True;
-            1: actAlignToLeft.Checked   := True;
-            2: actAlignToCenter.Checked := True;
-            3: actAlignToRight.Checked  := True;
+            shaNone   : actAlignToNone.Checked   := True;
+            shaLeft   : actAlignToLeft.Checked   := True;
+            shaCenter : actAlignToCenter.Checked := True;
+            shaRight  : actAlignToRight.Checked  := True;
           end;
           case Subtitles[NodeIndex].VAlign of
-            0: actVAlignToBottom.Checked := True;
-            1: actVAlignToMiddle.Checked := True;
-            2: actVAlignToTop.Checked    := True;
+            svaBottom : actVAlignToBottom.Checked := True;
+            svaCenter : actVAlignToMiddle.Checked := True;
+            svaTop    : actVAlignToTop.Checked    := True;
           end;
 
           actExtendLengthToPrevious.Enabled := (NodeIndex > 0);

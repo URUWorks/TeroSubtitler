@@ -49,38 +49,38 @@ uses UWSubtitleAPI.Tags;
 
 // -----------------------------------------------------------------------------
 
-function StringToHAlign(const AText: String): Integer;
+function StringToHAlign(const AText: String): TSubtitleHAlign;
 begin
   if AText.ToLower.Contains('left') then
-    Result := 1
+    Result := shaLeft
   else if AText.ToLower.Contains('center') then
-    Result := 2
+    Result := shaCenter
   else if AText.ToLower.Contains('right') then
-    Result := 3
+    Result := shaRight
   else
-    Result := 0;
+    Result := shaNone;
 end;
 
 // -----------------------------------------------------------------------------
 
-function StringToVAlign(const AText: String): Integer;
+function StringToVAlign(const AText: String): TSubtitleVAlign;
 begin
   if AText.ToLower.Contains('top') then
-    Result := 2
+    Result := svaTop
   else if AText.ToLower.Contains('center') then
-    Result := 1
+    Result := svaCenter
   else
-    Result := 0;
+    Result := svaBottom;
 end;
 
 // -----------------------------------------------------------------------------
 
-function HAlignToString(const AValue: Integer): String;
+function HAlignToString(const AValue: TSubtitleHAlign): String;
 begin
   case AValue of
-    1: Result := '$HorzAlign = Left';
-    2: Result := '$HorzAlign = Center';
-    3: Result := '$HorzAlign = Right';
+    shaLeft   : Result := '$HorzAlign = Left';
+    shaCenter : Result := '$HorzAlign = Center';
+    shaRight  : Result := '$HorzAlign = Right';
   else
     Result := '';
   end;
@@ -88,12 +88,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function VAlignToString(const AValue: Integer): String;
+function VAlignToString(const AValue: TSubtitleVAlign): String;
 begin
   case AValue of
-    0: Result := '$HorzAlign = Bottom';
-    1: Result := '$HorzAlign = Center';
-    2: Result := '$HorzAlign = Top';
+    svaBottom : Result := '$HorzAlign = Bottom';
+    svaCenter : Result := '$HorzAlign = Center';
+    svaTop    : Result := '$HorzAlign = Top';
   else
     Result := '';
   end;

@@ -329,15 +329,15 @@ var
   buf : TUWBGRAText;
 begin
   case Subtitles[AIndex].Align of
-    1 : h := taLeftJustify;
-    3 : h := taRightJustify;
+    shaLeft  : h := taLeftJustify;
+    shaRight : h := taRightJustify;
   else
     h := taCenter;
   end;
 
   case Subtitles[AIndex].VAlign of
-    1 : v := tlCenter;
-    2 : v := tlTop;
+    svaCenter : v := tlCenter;
+    svaTop    : v := tlTop;
   else
     v := tlBottom;
   end;

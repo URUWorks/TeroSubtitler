@@ -199,7 +199,10 @@ begin
           end;
         end
         else
+        begin
+          c := 0;
           ExtraInfo := NIL;
+        end;
 
         v := Pos('line', s);
         if (v > 0) then
@@ -240,8 +243,8 @@ begin
           Dec(i);
           Text := HTMLTagsToTS(HTMLDecode(Text));
           x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
-          Subtitles.ItemPointer[x]^.Align  := c;
-          Subtitles.ItemPointer[x]^.VAlign := v;
+          Subtitles.ItemPointer[x]^.Align  := TSubtitleHAlign(c);
+          Subtitles.ItemPointer[x]^.VAlign := TSubtitleVAlign(v);
         end;
       end;
       Inc(i);
@@ -289,18 +292,18 @@ begin
 
       end;
 
-    if Subtitles[i].Align > 0 then
+    if Subtitles[i].Align <> shaNone then
       case Subtitles[i].Align of
-        1: Align := ' align:left';
-        2: Align := ' align:center';
-        3: Align := ' align:right';
+        shaLeft   : Align := ' align:left';
+        shaCenter : Align := ' align:center';
+        shaRight  : Align := ' align:right';
       end;
 
-    if Subtitles[i].VAlign > 0 then
+    if Subtitles[i].VAlign <> svaBottom then
       case Subtitles[i].VAlign of
-        0: Align := Align + ' line:80%';
-        1: Align := Align + ' line:50%';
-        2: Align := Align + ' line:10%';
+        svaBottom : Align := Align + ' line:80%';
+        svaCenter : Align := Align + ' line:50%';
+        svaTop    : Align := Align + ' line:10%';
       end;
 
     if Subtitles.FormatProperties^.WebVTT.WriteCueIdentifiers then

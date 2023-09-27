@@ -165,67 +165,47 @@ begin
   rlesize := EncodeImage(AImage, rlebuf, pal);
 
   // Prepare alignments
-  Xoffset := 0;
-  Yoffset := 0;
-  if ASubtitles[AIndex].Align <> 0 then
-  begin
-    case ASubtitles[AIndex].Align of
-      1: case ASubtitles[AIndex].VAlign of // Left
-           1 : begin // Center
-                 Xoffset := AMargins.Left;
-                 Yoffset := (AVideoHeight - AImage.Height) div 2;
-               end;
-           2 : begin // Top
-                 Xoffset := AMargins.Left;
-                 Yoffset := AMargins.Top;
-               end;
-         else // Bottom
-           Xoffset := AMargins.Left;
-           Yoffset := AVideoHeight - (AImage.Height + AMargins.Bottom);
-         end;
-      2: case ASubtitles[AIndex].VAlign of // Center
-           1 : begin // Middle
-                 Xoffset := (AVideoWidth - AImage.Width) div 2;
-                 Yoffset := (AVideoHeight - AImage.Height) div 2;
-               end;
-           2 : begin // Top
-                 Xoffset := (AVideoWidth - AImage.Width) div 2;
-                 Yoffset := AMargins.Top;
-               end
-         else // Bottom
-           Xoffset := (AVideoWidth - AImage.Width) div 2;
-           Yoffset := AVideoHeight - (AImage.Height + AMargins.Bottom);
-         end;
-      3: case ASubtitles[AIndex].VAlign of // Right
-           1 : begin // Center
+  case ASubtitles[AIndex].Align of
+    shaLeft : case ASubtitles[AIndex].VAlign of
+                svaCenter : begin
+                              Xoffset := AMargins.Left;
+                              Yoffset := (AVideoHeight - AImage.Height) div 2;
+                            end;
+                svaTop   : begin
+                             Xoffset := AMargins.Left;
+                             Yoffset := AMargins.Top;
+                           end;
+                else
+                  Xoffset := AMargins.Left;
+                  Yoffset := AVideoHeight - (AImage.Height + AMargins.Bottom);
+                end;
+    shaCenter,
+    shaNone   : case ASubtitles[AIndex].VAlign of
+                  svaCenter : begin
+                                Xoffset := (AVideoWidth - AImage.Width) div 2;
+                                Yoffset := (AVideoHeight - AImage.Height) div 2;
+                              end;
+                  svaTop    : begin
+                                Xoffset := (AVideoWidth - AImage.Width) div 2;
+                                Yoffset := AMargins.Top;
+                              end
+                  else
+                    Xoffset := (AVideoWidth - AImage.Width) div 2;
+                    Yoffset := AVideoHeight - (AImage.Height + AMargins.Bottom);
+                  end;
+    shaRight : case ASubtitles[AIndex].VAlign of
+               svaCenter : begin
+                             Xoffset := AVideoWidth - AImage.Width - AMargins.Right;
+                             Yoffset := (AVideoHeight - AImage.Height) div 2;
+                           end;
+               svaTop    : begin
+                             Xoffset := AVideoWidth - AImage.Width - AMargins.Right;
+                             Yoffset := AMargins.Top;
+                           end;
+               else
                  Xoffset := AVideoWidth - AImage.Width - AMargins.Right;
-                 Yoffset := (AVideoHeight - AImage.Height) div 2;
+                 Yoffset := AVideoHeight - (AImage.Height + AMargins.Bottom);
                end;
-           2 : begin // Top
-                 Xoffset := AVideoWidth - AImage.Width - AMargins.Right;
-                 Yoffset := AMargins.Top;
-             end;
-         else // Bottom
-           Xoffset := AVideoWidth - AImage.Width - AMargins.Right;
-           Yoffset := AVideoHeight - (AImage.Height + AMargins.Bottom);
-         end;
-    end;
-  end
-  else if ASubtitles[AIndex].VAlign <> 0 then
-  begin
-    case ASubtitles[AIndex].VAlign of // Middle
-      1 : begin // Center
-            Xoffset := (AVideoWidth - AImage.Width) div 2;
-            Yoffset := (AVideoHeight - AImage.Height) div 2;
-          end;
-      2 : begin // Top
-            Xoffset := (AVideoWidth - AImage.Width) div 2;
-            Yoffset := AMargins.Top;
-          end;
-    else // Bottom
-      Xoffset := (AVideoWidth - AImage.Width) div 2;
-      Yoffset := AVideoHeight - (AImage.Height + AMargins.Bottom);
-    end;
   end;
 
   // PCS - START

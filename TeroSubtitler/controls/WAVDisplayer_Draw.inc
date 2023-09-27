@@ -441,8 +441,8 @@ begin
           else
           begin
             case Subtitles[i].Align of
-              2: FTS.Alignment := taCenter;
-              3: FTS.Alignment := taRightJustify;
+              shaCenter : FTS.Alignment := taCenter;
+              shaRight  : FTS.Alignment := taRightJustify;
             else
               FTS.Alignment := taLeftJustify;
             end;
