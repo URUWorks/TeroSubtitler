@@ -1,6 +1,7 @@
 1.0.1.2 (x.x.2023)
 - fixed: [Windows] Crash when trying to download YT-DLP in the initial wizard
 - added: Blu-ray (SUP) export
+- added: Shortcut to copy current video position to the clipboard
 
 1.0.1.1 (16.9.2023)
 - fixed: Window closes after going to line number #180
