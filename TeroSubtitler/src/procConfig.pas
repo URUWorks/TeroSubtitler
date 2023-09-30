@@ -98,6 +98,7 @@ function ffmpegFolder: String;
 function GetDictionaryNameFromCaption(const AText: String): String;
 function GetExtractAppFile(const FFmpeg: Boolean = True): String;
 function GetAudioToTextAppFile: String;
+function GetAudioToTextParams: String;
 {$IFDEF UNIX}
 function GetInstallFolder(const AFileName: String): String;
 {$ENDIF}
@@ -139,7 +140,10 @@ begin
       PySceneDetect := ConcatPaths([GetCustomUserPath('PySceneDetect'), SCENEDETECT_EXE]);
 
     if DirectoryExists(GetCustomUserPath('Whisper')) then
-      WhisperCPP := ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE]);
+    begin
+      WhisperCPP    := ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE]);
+      FasterWhisper := ConcatPaths([GetCustomUserPath('Whisper'), FASTERWHISPER_EXE]);
+    end;
 
     if FileExists(GetCustomFilePath(YTDLP_EXE)) then
       YTDLP := GetCustomFilePath(YTDLP_EXE)
@@ -157,9 +161,15 @@ begin
       PySceneDetect := GetInstallFolder(SCENEDETECT_EXE);
 
     if DirectoryExists(GetCustomUserPath('Whisper')) then
-      WhisperCPP := ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE])
+    begin
+      WhisperCPP    := ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE]);
+      FasterWhisper := ConcatPaths([GetCustomUserPath('Whisper'), FASTERWHISPER_EXE]);
+    end
     else
-      WhisperCPP := GetInstallFolder(WHISPER_EXE);
+    begin
+      WhisperCPP    := GetInstallFolder(WHISPER_EXE);
+      FasterWhisper := GetInstallFolder(FASTERWHISPER_EXE);
+    end;
 
     if DirectoryExists(GetCustomUserPath('ytdlp')) then
       YTDLP := ConcatPaths([GetCustomUserPath('ytdlp'), YTDLP_EXE])
@@ -173,6 +183,7 @@ begin
     PySceneDetect_Params         := SCENEDETECT_SCParams;
     WhisperCPP_Params            := WHISPER_Params;
   end;
+  Tools.FasterWhisper_Params     := FASTERWHISPER_Params;
 
   with VSTOptions do
   begin
@@ -520,6 +531,9 @@ begin
         PySceneDetect_Params := GetValue('PySceneDetect_Params', PySceneDetect_Params);
         WhisperCPP        := GetValue('WhisperCPP', WhisperCPP);
         WhisperCPP_Params := GetValue('WhisperCPP_Params', WhisperCPP_Params);
+        FasterWhisper        := GetValue('FasterWhisper', FasterWhisper);
+        FasterWhisper_Params := GetValue('FasterWhisper_Params', FasterWhisper_Params);
+        WhisperEngine := TWhisperEngine(GetValue('WhisperEngine', 0));
         YTDLP := GetValue('YTDLP', YTDLP);
         CloseKey;
       end;
@@ -814,6 +828,9 @@ begin
         SetValue('PySceneDetect_Params', PySceneDetect_Params);
         SetValue('WhisperCPP', WhisperCPP);
         SetValue('WhisperCPP_Params', WhisperCPP_Params);
+        SetValue('FasterWhisper', FasterWhisper);
+        SetValue('FasterWhisper_Params', FasterWhisper_Params);
+        SetValue('WhisperEngine', Integer(WhisperEngine));
         SetValue('YTDLP', YTDLP);
         CloseKey;
       end;
@@ -1607,7 +1624,20 @@ end;
 
 function GetAudioToTextAppFile: String;
 begin
-  Result := ConcatPaths([WhisperFolder, ExtractFileName(Tools.WhisperCPP)]);
+  if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
+    Result := Tools.WhisperCPP
+  else
+    Result := Tools.FasterWhisper;
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetAudioToTextParams: String;
+begin
+  if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
+    Result := Tools.WhisperCPP_Params
+  else
+    Result := Tools.FasterWhisper_Params;
 end;
 
 // -----------------------------------------------------------------------------

@@ -37,7 +37,9 @@ procedure FillComboWithOCRScripts(const ACombo: TComboBox; const AIndex: Integer
 procedure FillComboWithGoogleLanguages(const Combo: TCombobox; const Index: Integer = 0);
 procedure FillItemsWithConventions(const AItems: TStrings; AProfiles: TProfiles = NIL);
 procedure FillComboWithShortCutsPreset(const ACombo: TComboBox);
+procedure FillComboWithWhisperEngines(const ACombo: TComboBox; const AIndex: Integer = 0);
 procedure FillComboWithModels(const Combo: TComboBox);
+procedure FillComboWithFasterModels(const Combo: TComboBox);
 procedure FillComboWithCustomFormat(const Combo: TComboBox; const AExtension: String = '*.cft');
 procedure FillWithDictionaries(const AMenu: TMenuItem; const ACombo: TComboBox);
 procedure FillMenuWithPlayRate(const AParent: TComponent);
@@ -99,7 +101,7 @@ implementation
 
 uses
   procVST, procConfig, procDialogs, formMain, formVideo, formWaveform,
-  procSubtitle, procUnDockVideoControls, UWSystem.Globalization,
+  procSubtitle, procUnDockVideoControls, UWSystem.Globalization, FileUtil,
   UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.Encoding,
   UWSubtitleAPI.Formats, MPVPlayer, character, LazUTF8, formTranslationMemory,
   UWSubtitleAPI.Tags, UWTranslateAPI.Google, procTranscription,
@@ -299,6 +301,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure FillComboWithWhisperEngines(const ACombo: TComboBox; const AIndex: Integer = 0);
+begin
+  ACombo.Items.BeginUpdate;
+  try
+    ACombo.Items.Add('Whisper.CPP');
+    ACombo.Items.Add('Faster-Whisper');
+  finally
+    ACombo.ItemIndex := AIndex;
+    ACombo.Items.EndUpdate;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure FillComboWithModels(const Combo: TComboBox);
 var
   SearchRec: TSearchRec;
@@ -315,6 +331,39 @@ begin
       Combo.ItemIndex := 0;
     Combo.Items.EndUpdate;
     FindClose(SearchRec);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure FillComboWithFasterModels(const Combo: TComboBox);
+var
+  dir: TStrings;
+  i, x: Integer;
+begin
+  dir := TStringList.Create;
+  try
+    with dir do
+    begin
+      FindAllDirectories(dir, WhisperModelsFolder, False);
+      if dir.Count > 0 then
+      begin
+        Combo.Items.BeginUpdate;
+        Combo.Items.Clear;
+
+        for i := 0 to dir.Count-1 do
+        begin
+          x := Pos('faster-whisper-', dir[i]);
+          if x > 0 then
+            Combo.Items.Add(Copy(dir[i], x+15));
+        end;
+
+        Combo.ItemIndex := 0;
+        Combo.Items.EndUpdate;
+      end;
+    end;
+  finally
+    dir.Free;
   end;
 end;
 

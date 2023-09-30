@@ -34,10 +34,12 @@ type
     btnClose: TButton;
     btnModel: TButton;
     cboLanguage: TComboBox;
+    cboEngine: TComboBox;
     cboTrack: TComboBox;
     cboModel: TComboBox;
     cboModel1: TComboBox;
     lblLanguage: TLabel;
+    lblEngine: TLabel;
     lblStatus: TLabel;
     lblTimeElapsed: TLabel;
     lblTrack: TLabel;
@@ -51,6 +53,7 @@ type
     procedure btnCloseClick(Sender: TObject);
     procedure btnGenerateClick(Sender: TObject);
     procedure btnModelClick(Sender: TObject);
+    procedure cboEngineSelect(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -85,12 +88,13 @@ uses
 procedure TfrmAudioToText.FormCreate(Sender: TObject);
 begin
   LoadLanguage(Self);
+  FillComboWithWhisperEngines(cboEngine, Integer(Tools.WhisperEngine));
   FillComboWithGoogleLanguages(cboLanguage, 0);
-  FillComboWithModels(cboModel);
   FillComboWithAudioStreams(cboTrack);
   cboLanguage.Items[0] := GetCommonString('Detect');
   btnGenerate.Enabled := (cboTrack.Items.Count > 0);
   CancelProcess := False;
+  cboEngineSelect(NIL);
 end;
 
 // -----------------------------------------------------------------------------
@@ -130,6 +134,25 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmAudioToText.cboEngineSelect(Sender: TObject);
+begin
+  with Tools do
+  begin
+    WhisperEngine := TWhisperEngine(cboEngine.ItemIndex);
+
+    rbnAddSubtitlesWhileTranscribing.Enabled := WhisperEngine = TWhisperEngine.WhisperCPP;
+    if not rbnAddSubtitlesWhileTranscribing.Enabled then
+      rbnLoadSubtitlesAfterTranscript.Checked := True;
+
+    if WhisperEngine = TWhisperEngine.WhisperCPP then
+      FillComboWithModels(cboModel)
+    else
+      FillComboWithFasterModels(cboModel);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure ProcessCB(const TimeElapsed: Double; var Cancel: Boolean);
 begin
   frmAudioToText.lblTimeElapsed.Caption := TimeToString(Trunc(TimeElapsed)*1000, 'mm:ss');
@@ -150,24 +173,39 @@ begin
   sl := TStringList.Create;
   try
     sl.Text := Output;
+    writeln(Output);
     for i := 0 to sl.Count-1 do
     begin
-      // Subtitle info
-      if Pos('-->', sl[i]) = 15 then
+      if Tools.WhisperEngine = WhisperCPP then
       begin
-        it     := StringToTime(Copy(sl[i], 2, 12));
-        ft     := StringToTime(Copy(sl[i], 19, 12));
-        Output := Copy(sl[i], 35, sl[i].Length-34);
-        VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True);
-      end;
-      // Progress
-      if Pos('progress =', sl[i]) > 0 then
+        // Subtitle info
+        if Pos('-->', sl[i]) = 15 then
+        begin
+          it     := StringToTime(Copy(sl[i], 2, 12));
+          ft     := StringToTime(Copy(sl[i], 19, 12));
+          Output := Copy(sl[i], 35, sl[i].Length-34);
+          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True);
+        end;
+        // Progress
+        if Pos('progress =', sl[i]) > 0 then
+        begin
+          it := sl[i].LastIndexOf(' ');
+          ft := sl[i].Length-it;
+          s  := Copy(sl[i], it+1, ft-1).Trim;
+          frmAudioToText.prbProgress.Position   := s.ToInteger;
+          frmAudioToText.lblTimeElapsed.Caption := s + '%';
+        end;
+      end
+      else
       begin
-        it := sl[i].LastIndexOf(' ');
-        ft := sl[i].Length-it;
-        s  := Copy(sl[i], it+1, ft-1).Trim;
-        frmAudioToText.prbProgress.Position   := s.ToInteger;
-        frmAudioToText.lblTimeElapsed.Caption := s + '%';
+        // Subtitle info
+        if Pos('-->', sl[i]) = 12 then
+        begin
+          it     := StringToTime(Copy(sl[i], 2, 9));
+          ft     := StringToTime(Copy(sl[i], 16, 9));
+          Output := Copy(sl[i], 28);
+          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True);
+        end;
       end;
     end;
   finally
@@ -179,7 +217,7 @@ end;
 
 procedure TfrmAudioToText.btnGenerateClick(Sender: TObject);
 var
-  s, ss, cn: String;
+  s, ss, cn, model, modelpath, srtfile: String;
   i: Integer;
   AParamArray: TStringArray;
   isPlaying: Boolean;
@@ -190,8 +228,8 @@ begin
   else if not FileExists(GetExtractAppFile) then
     ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(Tools.FFmpeg)]))
   else if not FileExists(GetAudioToTextAppFile) then
-    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(Tools.WhisperCPP)]))
-  else if (Tools.FFmpeg_ParamsForAudioExtract <> '') and (Tools.WhisperCPP_Params <> '') and (cboModel.ItemIndex >= 0) then
+    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(GetAudioToTextAppFile)]))
+  else if (Tools.FFmpeg_ParamsForAudioExtract <> '') and ((Tools.WhisperCPP_Params <> '') or (Tools.FasterWhisper_Params <> '')) and (cboModel.ItemIndex >= 0) then
   begin
     CancelProcess     := False;
     lblStatus.Caption := GetCommonString('Extracting');
@@ -218,24 +256,52 @@ begin
         if FileExists(s) then // wave extracted
         begin
           // do transcribe, main -m models/ggml-base.en.bin -l en -osrt -of outputfile.srt -f samples/jfk.wav
-          ss := WHISPER_Params;
-          if rbnAddSubtitlesWhileTranscribing.Checked then
-            ss.Insert(ss.IndexOf(' -osrt'), ' -pp');
+          ss := GetAudioToTextParams;
+          cn := GoogleTranslateLocale[cboLanguage.ItemIndex];
 
-          if chkTranslate.Checked then
-            ss.Insert(ss.IndexOf(' -osrt'), ' -tr');
+          if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
+          begin
+            if rbnAddSubtitlesWhileTranscribing.Checked then
+              ss.Insert(ss.IndexOf(' -osrt'), ' -pp');
+
+            if chkTranslate.Checked then
+              ss.Insert(ss.IndexOf(' -osrt'), ' -tr');
+
+            model := ConcatPaths([WhisperModelsFolder, cboModel.Text+'.bin']);
+            modelpath := '';
+          end
+          else
+          begin
+            if chkTranslate.Checked then
+              ss := ss + ' --task translate';
+
+            if cboLanguage.ItemIndex = 0 then
+              cn := 'en';
+
+            model := cboModel.Text;
+            modelpath := ConcatPaths([WhisperModelsFolder, 'faster-whisper-' + model]);
+          end;
 
           AParamArray := ss.Split(' ');
 
-          cn := GoogleTranslateLocale[cboLanguage.ItemIndex];
-          ss := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '_'+cn)]);
+          if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
+          begin
+            ss := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '_' + cn)]);
+            srtfile := ss + '.srt';
+          end
+          else
+          begin
+            ss := WhisperTranscriptionsFolder;
+            srtfile := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '_' + cn)]) + '.srt';
+          end;
+
           lblStatus.Caption := GetCommonString('Transcribing');
           Application.ProcessMessages;
 
           for i := 0 to High(AParamArray) do
-            AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%model', '%lang'], [s, ss, ConcatPaths([WhisperModelsFolder, cboModel.Text+'.bin']), cn], []);
+            AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%model', '%binpath', '%lang'], [s, ss, model, modelpath, cn], []);
 
-          if rbnAddSubtitlesWhileTranscribing.Checked then
+          if rbnAddSubtitlesWhileTranscribing.Checked and rbnAddSubtitlesWhileTranscribing.Enabled then
           begin
             if ExecuteAppEx(GetAudioToTextAppFile, AParamArray, @ProcessCBEx) then
             begin
@@ -273,14 +339,16 @@ begin
               // delete wave file
               DeleteFile(s);
 
-              //s := ChangeFileExt(ss, '.srt'); // doesnt work :S
-              s := ss; // transcribed srt file
-              if not s.EndsWith('.srt') then
-                s := s + '.srt';
-
-              if FileExists(s) then
+              if Tools.WhisperEngine <> TWhisperEngine.WhisperCPP then
               begin
-                LoadSubtitle(s, sfInvalid, NIL, -1, False);
+                s := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(s), '.srt')]);
+                if FileExists(srtfile) then DeleteFile(srtfile);
+                RenameFile(s, srtfile);
+              end;
+
+              if FileExists(srtfile) then
+              begin
+                LoadSubtitle(srtfile, sfSubRip, NIL, -1, False);
               end;
             end
             else
@@ -312,6 +380,7 @@ begin
   btnGenerate.Enabled := AValue;
   btnModel.Enabled    := AValue;
   cboTrack.Enabled    := AValue;
+  cboEngine.Enabled   := AValue;
   cboLanguage.Enabled := AValue;
   cboModel.Enabled    := AValue;
 

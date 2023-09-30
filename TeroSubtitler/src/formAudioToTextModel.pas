@@ -76,6 +76,25 @@ const
     (Name: 'large-v1'; Size: '3.1 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v1.bin')
   );
 
+  FasterModels: TModels =
+  (
+    (Name: 'base'; Size: '148 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-base/resolve/main/'),
+    (Name: 'base.en'; Size: '148 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-base.en/resolve/main/'),
+    (Name: 'tiny'; Size: '78 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-tiny/resolve/main/'),
+    (Name: 'tiny.en'; Size: '78 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-tiny.en/resolve/main/'),
+    (Name: 'small'; Size: '488 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-small/resolve/main/'),
+    (Name: 'small.en'; Size: '488 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-small.en/resolve/main/'),
+    (Name: 'medium'; Size: '1.53 GB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-medium/resolve/main/'),
+    (Name: 'medium.en'; Size: '1.53 GB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-medium.en/resolve/main/'),
+    (Name: 'large-v1'; Size: '3.1 GB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-large-v1/resolve/main/'),
+    (Name: 'large-v2'; Size: '3.1 GB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-large-v2/resolve/main/')
+  );
+
+  FasterModelFiles: array[0..3] of String = ('model.bin', 'config.json', 'vocabulary.txt', 'tokenizer.json');
+
+var
+  ModelsToUse: TModels;
+
 {$R *.lfm}
 
 // -----------------------------------------------------------------------------
@@ -90,9 +109,14 @@ var
 begin
   LoadLanguage(Self);
 
+  if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
+    ModelsToUse := Models
+  else
+    ModelsToUse := FasterModels;
+
   cboModel.Items.BeginUpdate;
-  for i := 0 to Length(Models)-1 do
-    cboModel.Items.Add(Format('%s (%s)', [Models[i].Name, Models[i].Size]));
+  for i := 0 to Length(ModelsToUse)-1 do
+    cboModel.Items.Add(Format('%s (%s)', [ModelsToUse[i].Name, ModelsToUse[i].Size]));
 
   if cboModel.Items.Count > 0 then cboModel.ItemIndex := 0;
   cboModel.Items.EndUpdate;
@@ -125,10 +149,24 @@ end;
 
 procedure TfrmAudioToTextModel.btnDownloadClick(Sender: TObject);
 var
-  s: String;
+  s, d: String;
+  i: Integer;
 begin
-  s := ConcatPaths([WhisperModelsFolder, Models[cboModel.ItemIndex].Name+'.bin']);
-  ShowDownloadDialog(Models[cboModel.ItemIndex].URL, s);
+  if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
+  begin
+    s := ConcatPaths([WhisperModelsFolder, ModelsToUse[cboModel.ItemIndex].Name+'.bin']);
+    ShowDownloadDialog(ModelsToUse[cboModel.ItemIndex].URL, s);
+  end
+  else
+  begin
+    d := ConcatPaths([WhisperModelsFolder, 'faster-whisper-' + ModelsToUse[cboModel.ItemIndex].Name]);
+    CreateDir(d);
+    for i := 0 to Length(FasterModelFiles)-1 do
+    begin
+      s := ConcatPaths([d, FasterModelFiles[i]]);
+      ShowDownloadDialog(ModelsToUse[cboModel.ItemIndex].URL + FasterModelFiles[i], s);
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

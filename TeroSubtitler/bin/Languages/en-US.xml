@@ -394,6 +394,7 @@
       <lblFFMPEG>FFmpeg</lblFFMPEG>
       <lblSceneDetect>PySceneDetect</lblSceneDetect>     
       <lblWhisperCPP>Whisper.cpp</lblWhisperCPP>
+      <lblFasterWhisper>Faster-Whisper</lblFasterWhisper>
       <lblYTDLP>YT-DLP</lblYTDLP>      
       <lblSeekTime>Seek time (ms)</lblSeekTime>
       <lblFrameStep>Frame step</lblFrameStep>
@@ -545,7 +546,8 @@
   <Form Name="frmActors" Caption="Actors"/>  
   <Form Name="frmAudioToText" Caption="Audio to text">
     <Section Name="TLabel">
-      <lblTrack>Track</lblTrack>    
+      <lblTrack>Track</lblTrack>
+      <lblEngine>Engine</lblEngine>          
       <lblLanguage>Language</lblLanguage>
       <lblModel>Model</lblModel>
       <lblWait>Please wait</lblWait>      
@@ -615,7 +617,9 @@
       <lblFFMPEG>FFmpeg:</lblFFMPEG>
       <lblffmpegDesc>The absolute solution for audio, and shot changes extraction.</lblffmpegDesc>
       <lblWhisper>whisper.cpp:</lblWhisper>
-      <lblWhisperDesc>Automatic speech recognition for audio-to-text.</lblWhisperDesc>                                            
+      <lblWhisperDesc>Automatic speech recognition for audio-to-text.</lblWhisperDesc>
+      <lblFasterWhisper>Faster-Whisper:</lblFasterWhisper>
+      <lblFasterWhisperDesc>Faster automatic speech recognition for audio-to-text.</lblFasterWhisperDesc>                                                                                              
     </Section>
   </Form>
   <Form Name="frmDownload" Caption="">

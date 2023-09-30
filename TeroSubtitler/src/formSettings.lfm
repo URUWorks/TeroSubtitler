@@ -1091,16 +1091,52 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 97
+      Top = 128
       Width = 246
       AutoSize = False
       Caption = 'YT-DLP'
       ParentColor = False
     end
     object edtYTDLP: TEdit
-      AnchorSideTop.Control = edtWhisperCPP
+      AnchorSideTop.Control = edtFasterWhisper
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = btnYTDLP
+      Left = 248
+      Height = 23
+      Top = 124
+      Width = 215
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 5
+      TabOrder = 8
+    end
+    object btnYTDLP: TButton
+      AnchorSideTop.Control = edtYTDLP
+      AnchorSideTop.Side = asrCenter
+      Left = 468
+      Height = 23
+      Top = 124
+      Width = 48
+      Anchors = [akTop, akRight]
+      Caption = '...'
+      OnClick = btnYTDLPClick
+      TabOrder = 9
+    end
+    object lblFasterWhisper: TLabel
+      AnchorSideTop.Control = edtFasterWhisper
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 97
+      Width = 246
+      AutoSize = False
+      Caption = 'Faster-Whisper'
+      ParentColor = False
+    end
+    object edtFasterWhisper: TEdit
+      AnchorSideTop.Control = edtWhisperCPP
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = btnFasterWhisper
       Left = 248
       Height = 23
       Top = 93
@@ -1110,8 +1146,8 @@ object frmSettings: TfrmSettings
       BorderSpacing.Right = 5
       TabOrder = 6
     end
-    object btnYTDLP: TButton
-      AnchorSideTop.Control = edtYTDLP
+    object btnFasterWhisper: TButton
+      AnchorSideTop.Control = edtFasterWhisper
       AnchorSideTop.Side = asrCenter
       Left = 468
       Height = 23
@@ -1119,7 +1155,7 @@ object frmSettings: TfrmSettings
       Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
-      OnClick = btnYTDLPClick
+      OnClick = btnFasterWhisperClick
       TabOrder = 7
     end
   end

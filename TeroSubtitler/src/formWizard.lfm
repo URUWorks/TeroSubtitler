@@ -298,5 +298,60 @@ object frmWizard: TfrmWizard
       ParentColor = False
       ParentFont = False
     end
+    object lblFasterWhisperDesc: TLabel
+      AnchorSideLeft.Control = lblFasterWhisper
+      AnchorSideTop.Control = lblFasterWhisper
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 15
+      Top = 256
+      Width = 3
+      BorderSpacing.Top = 4
+      Caption = ' '
+      ParentColor = False
+    end
+    object lblFasterWhisper: TLabel
+      AnchorSideTop.Control = lblWhisperDesc
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 15
+      Top = 237
+      Width = 87
+      BorderSpacing.Top = 8
+      Caption = 'Faster-Whisper:'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object btnDownloadFasterWhisper: TButton
+      AnchorSideTop.Control = lblFasterWhisperStatus
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = lyoPage1
+      AnchorSideRight.Side = asrBottom
+      Left = 445
+      Height = 26
+      Top = 231
+      Width = 91
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 8
+      Caption = 'Download'
+      OnClick = btnDownloadFasterWhisperClick
+      TabOrder = 4
+    end
+    object lblFasterWhisperStatus: TLabel
+      AnchorSideLeft.Control = lblFasterWhisper
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = lblFasterWhisper
+      AnchorSideTop.Side = asrCenter
+      Left = 107
+      Height = 15
+      Top = 237
+      Width = 3
+      BorderSpacing.Left = 4
+      Caption = ' '
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
   end
 end

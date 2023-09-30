@@ -36,6 +36,7 @@ type
     btnSceneDetect: TButton;
     btnProfile: TButton;
     btnWhisperCPP: TButton;
+    btnFasterWhisper: TButton;
     btnYTDLP: TButton;
     btnShortCutApply: TButton;
     btnShortCutSave: TButton;
@@ -74,12 +75,14 @@ type
     edtCPSStrategy: TEdit;
     edtSceneDetect: TEdit;
     edtWhisperCPP: TEdit;
+    edtFasterWhisper: TEdit;
     edtYTDLP: TEdit;
     imlFileTypes: TImageList;
     lblCPSStrategy: TLabel;
     lblSceneDetect: TLabel;
     lblDialogSegmentsDetectionThreshold: TLabel;
     lblWhisperCPP: TLabel;
+    lblFasterWhisper: TLabel;
     lblYTDLP: TLabel;
     lblSCSnapArea: TLabel;
     lblSCSnapInCues: TLabel;
@@ -243,6 +246,7 @@ type
     ToolButton8: TToolButton;
     ToolButton9: TToolButton;
     procedure btnCloseClick(Sender: TObject);
+    procedure btnFasterWhisperClick(Sender: TObject);
     procedure btnFFMPEGClick(Sender: TObject);
     procedure btnProfileClick(Sender: TObject);
     procedure btnSceneDetectClick(Sender: TObject);
@@ -430,6 +434,7 @@ begin
   edtFFMPEG.Text := Tools.FFmpeg;
   edtSceneDetect.Text := Tools.PySceneDetect;
   edtWhisperCPP.Text := Tools.WhisperCPP;
+  edtFasterWhisper.Text := Tools.FasterWhisper;
   edtYTDLP.Text := Tools.YTDLP;
 
   cboTimeCodeMode.ItemIndex := Integer(Workspace.WorkMode);
@@ -557,6 +562,7 @@ begin
   Tools.FFmpeg := edtFFMPEG.Text;
   Tools.PySceneDetect := edtSceneDetect.Text;
   Tools.WhisperCPP := edtWhisperCPP.Text;
+  Tools.FasterWhisper := edtFasterWhisper.Text;
   Tools.YTDLP := edtYTDLP.Text;
 
   if Workspace.WorkMode <> TWorkMode(cboTimeCodeMode.ItemIndex) then
@@ -691,6 +697,13 @@ end;
 procedure TfrmSettings.btnWhisperCPPClick(Sender: TObject);
 begin
   edtWhisperCPP.Text := GetFileFromOpenDialog(edtWhisperCPP.Text);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.btnFasterWhisperClick(Sender: TObject);
+begin
+  edtFasterWhisper.Text := GetFileFromOpenDialog(edtFasterWhisper.Text);
 end;
 
 // -----------------------------------------------------------------------------

@@ -107,6 +107,7 @@ const
   URL_LIBMPV  = 'https://github.com/URUWorks/additional-files/raw/main/libmpv/libmpv2_win64.zip';
   URL_YTDLP   = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe';
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_win64.zip';
+  URL_FASTERWHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/fasterwhisper_win64.zip';
 
   FFMPEG_EXE      = 'ffmpeg.exe';
   //FFMPEG_Params   = '-i "%input" -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -y "%output"';
@@ -119,6 +120,9 @@ const
   WHISPER_Params   = '-m "%model" -l %lang -osrt -of "%output" -f "%input"';
   WHISPER_ffParams = '-i "%input" -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y "%output"';
 
+  FASTERWHISPER_EXE    = 'whisper-ctranslate2.exe';
+  FASTERWHISPER_Params = '"%input" --output_dir %output --model %model --model_directory %binpath --language %lang --output_format srt';
+
   SCENEDETECT_EXE      = 'scenedetect.exe';
   SCENEDETECT_SCParams = '-i "%input" list-scenes -f "%output" -q';
   {$ENDIF}
@@ -127,6 +131,7 @@ const
   URL_LIBMPV = '';
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux_aarch64';
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_linux.zip';
+  URL_FASTERWHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/fasterwhisper_linux.zip';
 
   FFMPEG_EXE      = 'ffmpeg';
   FFMPEG_Params   = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -y %output';
@@ -139,6 +144,9 @@ const
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
   WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
 
+  FASTERWHISPER_EXE    = 'whisper-ctranslate2';
+  FASTERWHISPER_Params = '%input --output_dir %output --model %model --model_directory %binpath --language %lang --output_format srt';
+
   SCENEDETECT_EXE      = 'scenedetect';
   SCENEDETECT_SCParams = '-i %input list-scenes -f %output -q';
   {$ENDIF}
@@ -147,6 +155,7 @@ const
   URL_LIBMPV = 'https://github.com/URUWorks/additional-files/raw/main/libmpv/libmpv_macos.zip';
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos.zip';
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_%cpu.zip';
+  URL_FASTERWHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/fasterwhisper_%cpu.zip';
 
   FFMPEG_EXE      = 'ffmpeg';
   FFMPEG_Params   = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -y %output';
@@ -158,6 +167,9 @@ const
   WHISPER_EXE      = 'main';
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
   WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
+
+  FASTERWHISPER_EXE    = 'whisper-ctranslate2';
+  FASTERWHISPER_Params = '%input --output_dir %output --model %model --model_directory %binpath --language %lang --output_format srt';
 
   SCENEDETECT_EXE      = 'scenedetect';
   SCENEDETECT_SCParams = '-i %input list-scenes -f %output -q';
@@ -245,6 +257,8 @@ type
 
   { TTools }
 
+  TWhisperEngine = (WhisperCPP, FasterWhisper);
+
   TTools = record
     FFmpeg                       : String;
     FFmpeg_ParamsForAudioExtract : String;
@@ -257,7 +271,12 @@ type
     WhisperCPP        : String;
     WhisperCPP_Params : String;
 
+    FasterWhisper        : String;
+    FasterWhisper_Params : String;
+
     YTDLP : String;
+
+    WhisperEngine : TWhisperEngine;
   end;
 
   { TAdjustSubtitles }

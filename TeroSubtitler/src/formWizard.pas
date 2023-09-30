@@ -32,13 +32,17 @@ type
   TfrmWizard = class(TForm)
     btnDownloadFFMPEG: TButton;
     btnDownloadWhisper: TButton;
+    btnDownloadFasterWhisper: TButton;
     btnDownloadYTDLP: TButton;
     btnNext: TButton;
     btnDownload: TButton;
     imgLogo: TImage;
+    lblFasterWhisper: TLabel;
+    lblFasterWhisperDesc: TLabel;
     lblWhisperStatus: TLabel;
     lblWhisper: TLabel;
     lblWhisperDesc: TLabel;
+    lblFasterWhisperStatus: TLabel;
     lblYTDLPStatus: TLabel;
     lblYTDLP: TLabel;
     lbllibmpvDesc: TLabel;
@@ -53,10 +57,11 @@ type
     lblWelcome: TLabel;
     lyoPage0: TUWLayout;
     lyoPage1: TUWLayout;
-    procedure btnDownloadFFMPEGClick(Sender: TObject);
     procedure btnDownloadClick(Sender: TObject);
-    procedure btnDownloadWhisperClick(Sender: TObject);
+    procedure btnDownloadFFMPEGClick(Sender: TObject);
     procedure btnDownloadYTDLPClick(Sender: TObject);
+    procedure btnDownloadWhisperClick(Sender: TObject);
+    procedure btnDownloadFasterWhisperClick(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -271,6 +276,23 @@ begin
     btnDownloadWhisper.Enabled := False;
     Tools.WhisperCPP           := ConcatPaths([WhisperFolder, WHISPER_EXE]);
     lblWhisperStatus.Caption   := sSuccess;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmWizard.btnDownloadFasterWhisperClick(Sender: TObject);
+begin
+  {$IFDEF DARWIN}
+  ShowDownloadDialog(StringReplace(URL_FASTERWHISPER, '%cpu', GetCPUArchitecture, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
+  {$ELSE}
+  ShowDownloadDialog(URL_FASTERWHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
+  {$ENDIF}
+  if FileExists(ConcatPaths([WhisperFolder, FASTERWHISPER_EXE])) then
+  begin
+    btnDownloadFasterWhisper.Enabled := False;
+    Tools.FasterWhisper              := ConcatPaths([WhisperFolder, FASTERWHISPER_EXE]);
+    lblFasterWhisperStatus.Caption   := sSuccess;
   end;
 end;
 

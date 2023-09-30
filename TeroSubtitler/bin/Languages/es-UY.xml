@@ -394,6 +394,7 @@
       <lblFFMPEG>Ruta de FFmpeg</lblFFMPEG>
       <lblSceneDetect>Ruta de PySceneDetect</lblSceneDetect>            
       <lblWhisperCPP>Ruta de Whisper.cpp</lblWhisperCPP>
+      <lblFasterWhisper>Ruta de Faster-Whisper</lblFasterWhisper>
       <lblYTDLP>Ruta de YT-DLP</lblYTDLP>
       <lblSeekTime>Tiempo para adelanto/retroceso (ms)</lblSeekTime>
       <lblFrameStep>Pasos de fotogramas</lblFrameStep>                
@@ -545,7 +546,8 @@
   <Form Name="frmActors" Caption="Actores"/>
   <Form Name="frmAudioToText" Caption="Audio a texto">
     <Section Name="TLabel">
-      <lblTrack>Pista</lblTrack>    
+      <lblTrack>Pista</lblTrack>
+      <lblEngine>Motor</lblEngine>    
       <lblLanguage>Lenguaje</lblLanguage>
       <lblModel>Modelo</lblModel>
       <lblWait>Por favor espere</lblWait>      
@@ -615,7 +617,9 @@
       <lblFFMPEG>FFmpeg:</lblFFMPEG>
       <lblffmpegDesc>La solución absoluta para la extracción de audio y cambios de escena.</lblffmpegDesc>
       <lblWhisper>whisper.cpp:</lblWhisper>
-      <lblWhisperDesc>Reconocimiento automático de voz usado en audio a texto.</lblWhisperDesc>                
+      <lblWhisperDesc>Reconocimiento automático de voz usado en audio a texto.</lblWhisperDesc>
+      <lblFasterWhisper>Faster-Whisper:</lblFasterWhisper>
+      <lblFasterWhisperDesc>Rápido reconocimiento automático de voz usado en audio a texto.</lblFasterWhisperDesc>                                      
     </Section>
   </Form>  
   <Form Name="frmDownload" Caption="">
