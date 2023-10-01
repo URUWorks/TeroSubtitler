@@ -531,8 +531,10 @@ begin
         PySceneDetect_Params := GetValue('PySceneDetect_Params', PySceneDetect_Params);
         WhisperCPP        := GetValue('WhisperCPP', WhisperCPP);
         WhisperCPP_Params := GetValue('WhisperCPP_Params', WhisperCPP_Params);
+        WhisperCPP_Additional := GetValue('WhisperCPP_Additional', WhisperCPP_Additional);
         FasterWhisper        := GetValue('FasterWhisper', FasterWhisper);
         FasterWhisper_Params := GetValue('FasterWhisper_Params', FasterWhisper_Params);
+        FasterWhisper_Additional := GetValue('FasterWhisper_Additional', FasterWhisper_Additional);
         WhisperEngine := TWhisperEngine(GetValue('WhisperEngine', 0));
         YTDLP := GetValue('YTDLP', YTDLP);
         CloseKey;
@@ -828,8 +830,10 @@ begin
         SetValue('PySceneDetect_Params', PySceneDetect_Params);
         SetValue('WhisperCPP', WhisperCPP);
         SetValue('WhisperCPP_Params', WhisperCPP_Params);
+        SetValue('WhisperCPP_Additional', WhisperCPP_Additional);
         SetValue('FasterWhisper', FasterWhisper);
         SetValue('FasterWhisper_Params', FasterWhisper_Params);
+        SetValue('FasterWhisper_Additional', FasterWhisper_Additional);
         SetValue('WhisperEngine', Integer(WhisperEngine));
         SetValue('YTDLP', YTDLP);
         CloseKey;

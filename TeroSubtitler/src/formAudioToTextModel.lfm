@@ -31,8 +31,8 @@ object frmAudioToTextModel: TfrmAudioToTextModel
     AnchorSideTop.Control = cboModel
     AnchorSideTop.Side = asrCenter
     Left = 248
-    Height = 23
-    Top = 8
+    Height = 26
+    Top = 6
     Width = 91
     Anchors = [akTop]
     BorderSpacing.Left = 5

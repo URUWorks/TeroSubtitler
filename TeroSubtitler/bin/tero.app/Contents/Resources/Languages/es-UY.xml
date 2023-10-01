@@ -771,7 +771,8 @@
     <SelectFPSToUse>Seleccione los FPS a utilizar:</SelectFPSToUse>
     <SelectSheetToUse>Seleccione la hoja a utilizar:</SelectSheetToUse>
     <WriteStatus>Escribiendo %d/%d</WriteStatus>
-    <ShortCutInUse>Atajo utilizado en '%s'.</ShortCutInUse>    
+    <ShortCutInUse>Atajo utilizado en '%s'.</ShortCutInUse>
+    <AdditionalParams>Parámetros adicionales:</AdditionalParams>    
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>Todos los subtitulos</rbnAllTheSubtitles>

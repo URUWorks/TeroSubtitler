@@ -18,7 +18,7 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 15
-    Top = 76
+    Top = 44
     Width = 52
     Caption = 'Language'
     ParentColor = False
@@ -26,11 +26,11 @@ object frmAudioToText: TfrmAudioToText
   object cboLanguage: TComboBox
     Left = 96
     Height = 23
-    Top = 72
+    Top = 40
     Width = 284
     ItemHeight = 15
     Style = csDropDownList
-    TabOrder = 2
+    TabOrder = 1
   end
   object lblModel: TLabel
     AnchorSideTop.Control = cboModel
@@ -52,7 +52,7 @@ object frmAudioToText: TfrmAudioToText
     BorderSpacing.Right = 5
     ItemHeight = 15
     Style = csDropDownList
-    TabOrder = 3
+    TabOrder = 4
   end
   object btnModel: TButton
     AnchorSideTop.Control = cboModel
@@ -63,7 +63,7 @@ object frmAudioToText: TfrmAudioToText
     Width = 48
     Caption = '...'
     OnClick = btnModelClick
-    TabOrder = 4
+    TabOrder = 5
   end
   object btnGenerate: TButton
     AnchorSideTop.Control = btnClose
@@ -77,7 +77,7 @@ object frmAudioToText: TfrmAudioToText
     Caption = 'Generate'
     Default = True
     OnClick = btnGenerateClick
-    TabOrder = 8
+    TabOrder = 9
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -94,7 +94,7 @@ object frmAudioToText: TfrmAudioToText
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
-    TabOrder = 9
+    TabOrder = 10
   end
   object lblTrack: TLabel
     AnchorSideTop.Control = cboTrack
@@ -154,7 +154,7 @@ object frmAudioToText: TfrmAudioToText
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Right = 5
     Step = 1
-    TabOrder = 10
+    TabOrder = 11
     Visible = False
   end
   object lblTimeElapsed: TLabel
@@ -182,7 +182,7 @@ object frmAudioToText: TfrmAudioToText
     AutoSize = False
     Caption = 'Add subtitles while transcribing'
     Checked = True
-    TabOrder = 5
+    TabOrder = 6
     State = cbChecked
   end
   object rbnLoadSubtitlesAfterTranscript: TUWRadioButton
@@ -193,7 +193,7 @@ object frmAudioToText: TfrmAudioToText
     Anchors = [akLeft, akBottom]
     AutoSize = False
     Caption = 'Load subtitles after transcription'
-    TabOrder = 6
+    TabOrder = 7
     TabStop = False
   end
   object chkTranslate: TUWCheckBox
@@ -204,26 +204,37 @@ object frmAudioToText: TfrmAudioToText
     Anchors = [akLeft, akBottom]
     AutoSize = False
     Caption = 'Translate to english'
-    TabOrder = 7
+    TabOrder = 8
   end
   object cboEngine: TComboBox
     Left = 96
     Height = 23
-    Top = 40
-    Width = 284
+    Top = 72
+    Width = 231
     ItemHeight = 15
     OnSelect = cboEngineSelect
     Style = csDropDownList
-    TabOrder = 1
+    TabOrder = 2
   end
   object lblEngine: TLabel
     AnchorSideTop.Control = cboEngine
     AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 15
-    Top = 44
+    Top = 76
     Width = 36
     Caption = 'Engine'
     ParentColor = False
+  end
+  object btnEngine: TButton
+    AnchorSideTop.Control = cboEngine
+    AnchorSideTop.Side = asrCenter
+    Left = 332
+    Height = 23
+    Top = 72
+    Width = 48
+    Caption = '...'
+    OnClick = btnEngineClick
+    TabOrder = 3
   end
 end

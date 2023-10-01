@@ -268,11 +268,13 @@ type
     PySceneDetect        : String;
     PySceneDetect_Params : String;
 
-    WhisperCPP        : String;
-    WhisperCPP_Params : String;
+    WhisperCPP            : String;
+    WhisperCPP_Params     : String;
+    WhisperCPP_Additional : String;
 
-    FasterWhisper        : String;
-    FasterWhisper_Params : String;
+    FasterWhisper            : String;
+    FasterWhisper_Params     : String;
+    FasterWhisper_Additional : String;
 
     YTDLP : String;
 

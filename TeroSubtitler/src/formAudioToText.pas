@@ -33,6 +33,7 @@ type
     btnGenerate: TButton;
     btnClose: TButton;
     btnModel: TButton;
+    btnEngine: TButton;
     cboLanguage: TComboBox;
     cboEngine: TComboBox;
     cboTrack: TComboBox;
@@ -51,6 +52,7 @@ type
     rbnLoadSubtitlesAfterTranscript: TUWRadioButton;
     chkTranslate: TUWCheckBox;
     procedure btnCloseClick(Sender: TObject);
+    procedure btnEngineClick(Sender: TObject);
     procedure btnGenerateClick(Sender: TObject);
     procedure btnModelClick(Sender: TObject);
     procedure cboEngineSelect(Sender: TObject);
@@ -121,6 +123,18 @@ begin
     Close
   else
     CancelProcess := True;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAudioToText.btnEngineClick(Sender: TObject);
+begin
+  // Additional engine params
+  with Tools do
+    if WhisperEngine = TWhisperEngine.WhisperCPP then
+      WhisperCPP_Additional := InputDialog('Whisper.CPP', GetCommonString('AdditionalParams'), WhisperCPP_Additional)
+    else
+      FasterWhisper_Additional := InputDialog('Faster-Whisper', GetCommonString('AdditionalParams'), FasterWhisper_Additional);
 end;
 
 // -----------------------------------------------------------------------------
@@ -267,6 +281,9 @@ begin
             if chkTranslate.Checked then
               ss.Insert(ss.IndexOf(' -osrt'), ' -tr');
 
+            if not Tools.WhisperCPP_Additional.IsEmpty then
+              ss := ss + ' ' + Tools.WhisperCPP_Additional;
+
             model := ConcatPaths([WhisperModelsFolder, cboModel.Text+'.bin']);
             modelpath := '';
           end
@@ -277,6 +294,9 @@ begin
 
             if cboLanguage.ItemIndex = 0 then
               cn := 'en';
+
+            if not Tools.FasterWhisper_Additional.IsEmpty then
+              ss := ss + ' ' + Tools.FasterWhisper_Additional;
 
             model := cboModel.Text;
             modelpath := ConcatPaths([WhisperModelsFolder, 'faster-whisper-' + model]);
