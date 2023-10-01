@@ -33,7 +33,7 @@ Advanced audio/video manipulation tool.
 
 For opening videos via URL.
 
-### [whisper.cpp](https://github.com/ggerganov/whisper.cpp)
+### [whisper.cpp](https://github.com/ggerganov/whisper.cpp) / [whisper-ctranslate2](https://github.com/Softcatala/whisper-ctranslate2)
 
 For the automatic transcription of audio to subtitles.
 
