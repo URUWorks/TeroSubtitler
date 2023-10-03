@@ -73,6 +73,7 @@ procedure ArrayToTBytes(var DestArray: TBytes; const SourceArray: array of Byte;
 procedure TBytesToArray(var DestArray: array of Byte; const SourceArray: TBytes; const StartIndex: Integer);
 
 function MixColors(C1, C2: TColor; Opacity: Integer = 70): TColor;
+function GetDefaultFontSize(const AFont: TFont): Integer;
 
 { BinarySearch }
 
@@ -519,6 +520,13 @@ begin
   B2 := GetBValue(C2);
 
   Result := RGB(Round((R1*Opacity+R2*p2)/100), Round((G1*Opacity+G2*p2)/100), Round((B1*Opacity+B2*p2)/100));
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetDefaultFontSize(const AFont: TFont): Integer;
+begin
+  Result := Round((- GetFontData(AFont.Handle).Height * 72 / AFont.PixelsPerInch));
 end;
 
 // -----------------------------------------------------------------------------
