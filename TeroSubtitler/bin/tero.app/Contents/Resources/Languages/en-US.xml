@@ -375,6 +375,8 @@
       <lblChaining>Chaining (frames)</lblChaining>
       <lblTheme>Theme</lblTheme>
       <lblListMode>List mode</lblListMode>
+      <lblListFontSize>List font size</lblListFontSize>
+      <lblTextBoxFontSize>Text box font size</lblTextBoxFontSize>
 	  <lblSubtitles>Subtitles</lblSubtitles>      
 	  <lblSubColor>Color</lblSubColor>
 	  <lblSubBorder>Border</lblSubBorder>

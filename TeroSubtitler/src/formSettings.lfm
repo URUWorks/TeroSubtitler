@@ -756,6 +756,8 @@ object frmSettings: TfrmSettings
     TabOrder = 4
     Visible = False
     object lblTheme: TLabel
+      AnchorSideTop.Control = cboTheme
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
       Top = 4
@@ -775,201 +777,301 @@ object frmSettings: TfrmSettings
       TabOrder = 0
     end
     object lblListMode: TLabel
+      AnchorSideTop.Control = cboListMode
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 36
+      Top = 35
       Width = 246
       AutoSize = False
       Caption = 'List mode'
       ParentColor = False
     end
     object cboListMode: TComboBox
+      AnchorSideTop.Control = cboTheme
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 23
-      Top = 32
+      Top = 31
       Width = 268
       Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 1
     end
     object lblSubtitles: TLabel
+      AnchorSideTop.Control = spnTextBoxFontSize
+      AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 15
-      Top = 72
+      Top = 136
       Width = 49
+      BorderSpacing.Top = 20
       Caption = 'Subtitles'
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
     end
     object lblSubColor: TLabel
+      AnchorSideTop.Control = cbnSub
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 104
+      Top = 166
       Width = 29
       Caption = 'Color'
       ParentColor = False
     end
     object cbnSub: TColorButton
+      AnchorSideTop.Control = lblSubtitles
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 25
-      Top = 100
+      Top = 161
       Width = 80
+      BorderSpacing.Top = 10
       BorderWidth = 2
       ButtonColorSize = 16
       ButtonColor = clWhite
       Flat = True
     end
     object lblSubBorder: TLabel
+      AnchorSideTop.Control = cbnSubBorder
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 136
+      Top = 196
       Width = 35
       Caption = 'Border'
       ParentColor = False
     end
     object cbnSubBorder: TColorButton
+      AnchorSideTop.Control = cbnSub
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 25
-      Top = 132
+      Top = 191
       Width = 80
+      BorderSpacing.Top = 5
       BorderWidth = 2
       ButtonColorSize = 16
       ButtonColor = clBlack
       Flat = True
     end
     object lblSubShadow: TLabel
+      AnchorSideTop.Control = cbnSubShadow
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 168
+      Top = 226
       Width = 42
       Caption = 'Shadow'
       ParentColor = False
     end
     object cbnSubShadow: TColorButton
+      AnchorSideTop.Control = cbnSubBorder
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 25
-      Top = 164
+      Top = 221
       Width = 80
+      BorderSpacing.Top = 5
       BorderWidth = 2
       ButtonColorSize = 16
       ButtonColor = clBlack
       Flat = True
     end
     object lblSubBackground: TLabel
+      AnchorSideTop.Control = cbnSubBackground
       Left = 0
       Height = 15
-      Top = 200
+      Top = 251
       Width = 64
       Caption = 'Background'
       ParentColor = False
     end
     object cbnSubBackground: TColorButton
+      AnchorSideTop.Control = cbnSubShadow
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 25
-      Top = 196
+      Top = 251
       Width = 80
+      BorderSpacing.Top = 5
       BorderWidth = 2
       ButtonColorSize = 16
       ButtonColor = clBlack
       Flat = True
     end
     object lblSubSize: TLabel
+      AnchorSideTop.Control = spnSubSize
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 232
+      Top = 285
       Width = 20
       Caption = 'Size'
       ParentColor = False
     end
     object spnSubSize: TSpinEdit
+      AnchorSideTop.Control = cbnSubBackground
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 23
-      Top = 228
+      Top = 281
       Width = 80
+      BorderSpacing.Top = 5
       MaxValue = 150
       MinValue = 1
-      TabOrder = 4
+      TabOrder = 6
       Value = 32
     end
     object chkSubBackground: TCheckBox
+      AnchorSideTop.Control = cbnSubBackground
+      AnchorSideTop.Side = asrCenter
       Left = 336
       Height = 19
-      Top = 200
+      Top = 254
       Width = 20
-      TabOrder = 3
+      TabOrder = 5
     end
     object chkSubShadow: TCheckBox
+      AnchorSideTop.Control = cbnSubShadow
+      AnchorSideTop.Side = asrCenter
       Left = 336
       Height = 19
-      Top = 168
+      Top = 224
       Width = 20
-      TabOrder = 2
+      TabOrder = 4
     end
     object lblWaveform: TLabel
+      AnchorSideTop.Control = spnSubSize
+      AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 15
-      Top = 268
+      Top = 324
       Width = 60
+      BorderSpacing.Top = 20
       Caption = 'Waveform'
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
     end
     object lblWaveColor: TLabel
+      AnchorSideTop.Control = cbnWaveColor
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 300
+      Top = 354
       Width = 29
       Caption = 'Color'
       ParentColor = False
     end
     object cbnWaveColor: TColorButton
+      AnchorSideTop.Control = lblWaveform
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 25
-      Top = 296
+      Top = 349
       Width = 80
+      BorderSpacing.Top = 10
       BorderWidth = 2
       ButtonColorSize = 16
       ButtonColor = 12080128
       Flat = True
     end
     object lblWaveStart: TLabel
+      AnchorSideTop.Control = cbnWaveStart
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 332
+      Top = 384
       Width = 46
       Caption = 'Start line'
       ParentColor = False
     end
     object cbnWaveStart: TColorButton
+      AnchorSideTop.Control = cbnWaveColor
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 25
-      Top = 328
+      Top = 379
       Width = 80
+      BorderSpacing.Top = 5
       BorderWidth = 2
       ButtonColorSize = 16
       ButtonColor = 30720
       Flat = True
     end
     object lblWaveEnd: TLabel
+      AnchorSideTop.Control = cbnWaveEnd
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 364
+      Top = 414
       Width = 42
       Caption = 'End line'
       ParentColor = False
     end
     object cbnWaveEnd: TColorButton
+      AnchorSideTop.Control = cbnWaveStart
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 25
-      Top = 360
+      Top = 409
       Width = 80
+      BorderSpacing.Top = 5
       BorderWidth = 2
       ButtonColorSize = 16
       ButtonColor = 658070
       Flat = True
+    end
+    object lblListFontSize: TLabel
+      AnchorSideTop.Control = spnListFontSize
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 66
+      Width = 65
+      Caption = 'List font size'
+      ParentColor = False
+    end
+    object spnListFontSize: TSpinEdit
+      AnchorSideTop.Control = cboListMode
+      AnchorSideTop.Side = asrBottom
+      Left = 248
+      Height = 23
+      Top = 62
+      Width = 80
+      BorderSpacing.Top = 8
+      MaxValue = 60
+      MinValue = 8
+      TabOrder = 2
+      Value = 9
+    end
+    object spnTextBoxFontSize: TSpinEdit
+      AnchorSideTop.Control = spnListFontSize
+      AnchorSideTop.Side = asrBottom
+      Left = 248
+      Height = 23
+      Top = 93
+      Width = 80
+      BorderSpacing.Top = 8
+      MaxValue = 60
+      MinValue = 8
+      TabOrder = 3
+      Value = 9
+    end
+    object lblTextBoxFontSize: TLabel
+      AnchorSideTop.Control = spnTextBoxFontSize
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 97
+      Width = 91
+      Caption = 'Text box font size'
+      ParentColor = False
     end
   end
   object lyoTools: TUWLayout

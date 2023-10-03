@@ -317,12 +317,14 @@ var
   OldLang: String;
   OldShiftMs: Integer;
   OldHandleByMPV: Boolean;
+  OldFontSize: Integer;
 begin
   if frmSettings = NIL then
   begin
     OldLang        := AppOptions.Language;
     OldShiftMs     := AppOptions.ShiftTimeMS;
     OldHandleByMPV := MPVOptions.SubtitleHandleByMPV;
+    OldFontSize    := frmMain.VST.Font.Size;
 
     frmSettings := TfrmSettings.Create(Application);
     frmSettings.ShowModal;
@@ -332,15 +334,16 @@ begin
       UpdateCommonActionString;
       UpdateVideoLengthString;
       RefreshAppTitle;
+    end
+    else if OldShiftMs <> AppOptions.ShiftTimeMS then
+      UpdateCommonActionString;
 
-      with frmMain do
+    with frmMain do
+      if (OldFontSize <> VST.Font.Size) or (OldLang <> AppOptions.Language) then
       begin
         VSTDrawInitialize(VSTOptions.DrawMode);
         VSTResize(NIL);
       end;
-    end
-    else if OldShiftMs <> AppOptions.ShiftTimeMS then
-      UpdateCommonActionString;
 
     if frmMain.MPV.IsMediaLoaded then
     begin

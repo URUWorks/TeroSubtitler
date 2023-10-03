@@ -300,6 +300,9 @@ begin
 
   with frmMain do
   begin
+    VST.Font.Size            := GetDefaultFontSize(VST.Font);
+    mmoText.Font.Size        := GetDefaultFontSize(mmoText.Font);
+    mmoTranslation.Font.Size := mmoText.Font.Size;
     actShowColumnNumber.Checked    := True;
     actShowColumnTimes.Checked     := True;
     actShowColumnDuration.Checked  := True;
@@ -546,6 +549,10 @@ begin
         SetBounds(GetValue('X', Left), GetValue('Y', Top), GetValue('W', Width), GetValue('H', Height));
         LayoutVideo.Width := GetValue('VW', LayoutVideo.Width);
         LayoutWaveform.Height := GetValue('WF', LayoutWaveform.Height);
+        VST.Font.Size := GetValue('VSTFontSize', VST.Font.Size);
+        VST.Header.Font.Size := VST.Font.Size;
+        mmoText.Font.Size := GetValue('TextBoxFontSize', mmoText.Font.Size);
+        mmoTranslation.Font.Size := mmoText.Font.Size;
         CloseKey;
 
         OpenKey('ToolBars');
@@ -849,6 +856,8 @@ begin
         SetValue('VW', LayoutVideo.Width);
         SetValue('WF', LayoutWaveform.Height);
         SetValue('State', Integer(WindowState));
+        SetValue('VSTFontSize', VST.Font.Size);
+        SetValue('TextBoxFontSize', mmoText.Font.Size);
         CloseKey;
 
         OpenKey('ToolBars');

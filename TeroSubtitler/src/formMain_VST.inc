@@ -34,10 +34,11 @@ begin
     VST.Header.Columns.Clear;
     VST.DefaultText := '';
 
-    TextHeight := VST.Font.GetTextHeight('W');
+    TextHeight := VST.Canvas.Font.GetTextHeight('W');
     if ADrawMode = dmList then
     begin
       VST.DefaultNodeHeight := (TextHeight*4);
+      VST.Header.Height     := TextHeight+4;
       VST.Header.Options    := VST.Header.Options + [hoVisible];
       VST.TreeOptions.PaintOptions := VST.TreeOptions.PaintOptions + [toShowHorzGridLines];
       VST.OnGetText         := @VSTGetText;
@@ -222,7 +223,7 @@ begin
   TS.EndEllipsis := True;
   TS.RightToLeft := Application.IsRightToLeft;
   R := CellRect;
-  TextHeight := VST.Font.GetTextHeight('W');
+  TextHeight := VST.Canvas.Font.GetTextHeight('W');
 
   case Column of
     0: begin

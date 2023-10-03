@@ -78,7 +78,9 @@ type
     edtFasterWhisper: TEdit;
     edtYTDLP: TEdit;
     imlFileTypes: TImageList;
+    lblListFontSize: TLabel;
     lblCPSStrategy: TLabel;
+    lblTextBoxFontSize: TLabel;
     lblSceneDetect: TLabel;
     lblDialogSegmentsDetectionThreshold: TLabel;
     lblWhisperCPP: TLabel;
@@ -104,6 +106,7 @@ type
     lblWaveform: TLabel;
     lblToolBarWave: TLabel;
     lyoFileTypeAssociations: TUWLayout;
+    spnTextBoxFontSize: TSpinEdit;
     spnSCSnapArea: TSpinEdit;
     spnChaining: TSpinEdit;
     spnSCSnapThreshold: TSpinEdit;
@@ -113,6 +116,7 @@ type
     spnSubSize: TSpinEdit;
     spnSeekTime: TSpinEdit;
     spnFrameStep: TSpinEdit;
+    spnListFontSize: TSpinEdit;
     tlbMain_: TToolBar;
     tlbEditor_: TToolBar;
     edtFFMPEG: TEdit;
@@ -408,6 +412,8 @@ begin
     cboTheme.ItemIndex := Integer(ColorThemeInstance.ColorMode);
   end;
 
+  spnListFontSize.Value            := frmMain.VST.Font.Size;
+  spnTextBoxFontSize.Value         := frmMain.mmoText.Font.Size;
   with MPVOptions do
   begin
     chkAutoPlay.Checked            := AutoStartPlaying;
@@ -536,6 +542,12 @@ begin
     AskForInputFPS    := chkPromptForInputFPS.Checked;
     CheckErrorsBeforeSave := chkPromptForSaveWithErrors.Checked;
   end;
+
+  frmMain.VST.Font.Size            := spnListFontSize.Value;
+  frmMain.VST.Canvas.Font.Size     := frmMain.VST.Font.Size;
+  frmMain.VST.Header.Font.Size     := frmMain.VST.Font.Size;
+  frmMain.mmoText.Font.Size        := spnTextBoxFontSize.Value;
+  frmMain.mmoTranslation.Font.Size := frmMain.mmoText.Font.Size;
 
   with MPVOptions do
   begin

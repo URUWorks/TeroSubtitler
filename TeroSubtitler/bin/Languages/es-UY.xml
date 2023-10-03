@@ -375,6 +375,8 @@
       <lblChaining>Encadenamiento (fotogramas)</lblChaining>                                        
       <lblTheme>Tema</lblTheme>
       <lblListMode>Modo de lista</lblListMode>
+      <lblListFontSize>Tamaño de fuente de la lista</lblListFontSize>
+      <lblTextBoxFontSize>Tamaño de fuente del cuadro de texto</lblTextBoxFontSize>      
 	  <lblSubtitles>Subtítulos</lblSubtitles>      
 	  <lblSubColor>Color</lblSubColor>
 	  <lblSubBorder>Borde</lblSubBorder>
