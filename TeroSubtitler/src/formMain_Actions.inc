@@ -1667,3 +1667,22 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actRemoveLineFromEntryExecute(Sender: TObject);
+var
+  s : String;
+  numbers : TStringArray;
+begin
+  s := InputDialog(actRemoveLineFromEntry.Caption, GetCommonString('Line'), '');
+  if not s.IsEmpty then
+  begin
+    numbers := s.Split(',');
+    try
+      VSTDeleteLineFromEntry(VST, numbers);
+    finally
+      SetLength(numbers, 0);
+    end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+

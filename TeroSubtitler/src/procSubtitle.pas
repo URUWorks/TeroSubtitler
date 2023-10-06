@@ -32,6 +32,7 @@ procedure CopyCurrentVideoPosToClipboard;
 function InsertSubtitle(const Index: Integer; const Item: TUWSubtitleItem; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer; overload;
 function InsertSubtitle(const Index: Integer; const InitialTime, FinalTime: Integer; const Text, Translation: String; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer; overload;
 procedure DeleteSubtitle(const Index: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
+function DeleteLineFromText(const Index, ALine: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True): String;
 procedure ClearSubtitles(const AutoIncrementUndo: Boolean = True);
 
 function CalcNewSubtitleFinalTime(const Index: Integer; const AInitialTime: Integer): Integer;
@@ -127,7 +128,7 @@ procedure CopyCurrentVideoPosToClipboard;
 begin
   with frmMain.MPV do
     if IsMediaLoaded then
-      Clipboard.AsText := GetMediaPosInMs.ToString;
+      Clipboard.AsText := GetTimeStr(GetMediaPosInMs);
 end;
 
 // -----------------------------------------------------------------------------
@@ -186,6 +187,30 @@ begin
   begin
     UpdateValues(True);
     SubtitleChanged(True, True);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function DeleteLineFromText(const Index, ALine: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True): String;
+var
+  sl : TStrings;
+begin
+  Result := '';
+  if not Subtitles.ValidIndex(Index) then Exit;
+
+  sl := TStringList.Create;
+  try
+    sl.SkipLastLineBreak := True;
+    Result := Subtitles.Text[Index];
+    sl.Text := Result;
+    if (ALine >= 0) and (ALine < sl.Count) then
+    begin
+      sl.Delete(ALine);
+      Result := sl.Text;
+    end;
+  finally
+    sl.Free;
   end;
 end;
 

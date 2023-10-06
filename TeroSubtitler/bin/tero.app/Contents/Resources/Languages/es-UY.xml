@@ -62,6 +62,7 @@
       <actInsertSubtitleBefore Hint="Insertar subtítulo antes de la línea actual">Insertar subtítulo antes</actInsertSubtitleBefore>
       <actInsertSubtitle Hint="Insertar un nuevo subtítulo después de la línea actual">Insertar subtítulo</actInsertSubtitle>
       <actDeleteSubtitle Hint="Borra las línea(s) seleccionada(s)">Borrar subtítulo(s)</actDeleteSubtitle>
+      <actRemoveLineFromEntry>Eliminar línea de la entrada...</actRemoveLineFromEntry>
       <actListMode>Modo de lista</actListMode>
       <actSourceMode>Modo de código fuente</actSourceMode>
       <actTranscriptionMode Hint="Habilita el modo de escritura libremente">Modo de transcripción</actTranscriptionMode>
@@ -774,7 +775,8 @@
     <SelectSheetToUse>Seleccione la hoja a utilizar:</SelectSheetToUse>
     <WriteStatus>Escribiendo %d/%d</WriteStatus>
     <ShortCutInUse>Atajo utilizado en '%s'.</ShortCutInUse>
-    <AdditionalParams>Parámetros adicionales:</AdditionalParams>    
+    <AdditionalParams>Parámetros adicionales:</AdditionalParams>
+    <Line>Línea:</Line>    
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>Todos los subtitulos</rbnAllTheSubtitles>

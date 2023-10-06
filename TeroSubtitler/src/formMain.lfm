@@ -1382,6 +1382,9 @@ object frmMain: TfrmMain
         object MenuItem75: TMenuItem
           Action = actSwapTexts
         end
+        object MenuItem179: TMenuItem
+          Action = actRemoveLineFromEntry
+        end
         object Separator15: TMenuItem
           Caption = '-'
         end
@@ -3518,6 +3521,11 @@ object frmMain: TfrmMain
       Category = 'Edit'
       Caption = 'Format properties'
       OnExecute = actFormatPropertiesExecute
+    end
+    object actRemoveLineFromEntry: TAction
+      Category = 'Texts'
+      Caption = 'Remove line from entry...'
+      OnExecute = actRemoveLineFromEntryExecute
     end
   end
   object popDropInsert: TPopupMenu

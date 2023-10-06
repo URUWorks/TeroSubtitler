@@ -75,6 +75,7 @@ type
     actDetectDialogSegments: TAction;
     actExportSUP: TAction;
     actCopyVideoPosToClipboard: TAction;
+    actRemoveLineFromEntry: TAction;
     actWebPreview: TAction;
     actShowActorOnPreview: TAction;
     actRoundTimes: TAction;
@@ -306,6 +307,7 @@ type
     MenuItem176: TMenuItem;
     MenuItem177: TMenuItem;
     MenuItem178: TMenuItem;
+    MenuItem179: TMenuItem;
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
     mnuFormatProperties: TMenuItem;
@@ -934,6 +936,7 @@ type
     procedure actLoadProjectExecute(Sender: TObject);
     procedure actSaveProjectExecute(Sender: TObject);
     procedure actWebPreviewExecute(Sender: TObject);
+    procedure actRemoveLineFromEntryExecute(Sender: TObject);
   private
 
   public

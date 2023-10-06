@@ -63,6 +63,8 @@ procedure VSTMoveSubtitle(const AVST: TLazVirtualStringTree; const Refresh: Bool
 procedure VSTAdjustSubtitles(const AdjSub: TAdjustSubtitles);
 procedure VSTSort(const AVST: TLazVirtualStringTree);
 
+procedure VSTDeleteLineFromEntry(const AVST: TLazVirtualStringTree; const ALines: TStringArray);
+
 // -----------------------------------------------------------------------------
 
 implementation
@@ -975,6 +977,33 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
+
+procedure VSTDeleteLineFromEntry(const AVST: TLazVirtualStringTree; const ALines: TStringArray);
+var
+  Nodes : TNodeArray;
+  I, c, n : Integer;
+begin
+  Nodes := NIL;
+  if (AVST.SelectedCount > 0) and (Length(ALines) > 0) then
+  begin
+    AVST.BeginUpdate;
+    try
+      Nodes := AVST.GetSortedSelection(True);
+
+      for I := 0 to High(Nodes) do
+        for c := 0 to Length(ALines)-1 do
+        begin
+          n := StrToIntDef(ALines[c], 0);
+          if n > 0 then
+            SetSubtitleText(Nodes[I]^.Index, DeleteLineFromText(Nodes[I]^.Index, n-1), smText, I=High(Nodes), I=High(Nodes), False);
+        end;
+    finally
+      AVST.EndUpdate;
+    end;
+  end;
+end;
+
+//----------------------------------------------------------------------------------------------------------------------
 
 end.
 
