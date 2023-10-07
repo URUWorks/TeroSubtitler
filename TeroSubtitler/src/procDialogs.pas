@@ -27,7 +27,7 @@ uses
 
 { Custom inputbox dialog }
 
-function InputDialog(const ACaption, APrompt, ADefault: String; const AHelp: String = ''; const AURL: String = ''; const AHeight: Integer = 93): String;
+function InputDialog(const ACaption, APrompt, ADefault: String; const AHelp: String = ''; const AURL: String = ''; const AHeight: Integer = 93; const AOnlyNumbers: Boolean = False): String;
 
 { Custom message dialogs }
 
@@ -61,13 +61,13 @@ uses
 
 // -----------------------------------------------------------------------------
 
-function InputDialog(const ACaption, APrompt, ADefault: String; const AHelp: String = ''; const AURL: String = ''; const AHeight: Integer = 93): String;
+function InputDialog(const ACaption, APrompt, ADefault: String; const AHelp: String = ''; const AURL: String = ''; const AHeight: Integer = 93; const AOnlyNumbers: Boolean = False): String;
 begin
   with TfrmCustomInputDlg.Create(NIL) do
   try
     FURL := AURL;
     lblHelp.Caption := AHelp;
-    Result := Execute(ACaption, APrompt, ADefault, AHeight);
+    Result := Execute(ACaption, APrompt, ADefault, AHeight, AOnlyNumbers);
   finally
     Free;
   end;

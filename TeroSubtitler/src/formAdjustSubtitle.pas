@@ -80,7 +80,7 @@ var
 implementation
 
 uses
-  procVST, procWorkspace, procSubtitle, procColorTheme, procConfig,
+  procVST, procWorkspace, procSubtitle, procColorTheme, procConfig, formMain,
   UWSystem.XMLLang;
 
 {$R *.lfm}
@@ -236,6 +236,7 @@ end;
 procedure TfrmAdjustSubtitle.spnIndexChange(Sender: TObject);
 begin
   tedTime.Value := Subtitles[spnIndex.Value-1].InitialTime;
+  VSTSelectNode(frmMain.VST, spnIndex.Value-1, True);
 end;
 
 // -----------------------------------------------------------------------------

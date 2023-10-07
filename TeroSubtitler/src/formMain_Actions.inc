@@ -1672,7 +1672,7 @@ var
   s : String;
   numbers : TStringArray;
 begin
-  s := InputDialog(actRemoveLineFromEntry.Caption, GetCommonString('Line'), '');
+  s := InputDialog(actRemoveLineFromEntry.Caption, GetCommonString('Line'), '', '', '', 93, True);
   if not s.IsEmpty then
   begin
     numbers := s.Split(',');

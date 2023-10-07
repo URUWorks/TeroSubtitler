@@ -43,7 +43,7 @@ type
 
   public
     FURL: String;
-    function Execute(const ACaption, APrompt: String; const ADefault: String = ''; const AHeight: Integer = 93): String;
+    function Execute(const ACaption, APrompt: String; const ADefault: String = ''; const AHeight: Integer = 93; const AOnlyNumbers: Boolean = False): String;
   end;
 
 var
@@ -99,12 +99,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TfrmCustomInputDlg.Execute(const ACaption, APrompt: String; const ADefault: String = ''; const AHeight: Integer = 93): String;
+function TfrmCustomInputDlg.Execute(const ACaption, APrompt: String; const ADefault: String = ''; const AHeight: Integer = 93; const AOnlyNumbers: Boolean = False): String;
 begin
-  Height             := AHeight;
-  Caption            := ACaption;
-  lblMessage.Caption := APrompt;
-  mmoInput.Text      := ADefault;
+  Height               := AHeight;
+  Caption              := ACaption;
+  lblMessage.Caption   := APrompt;
+  mmoInput.Text        := ADefault;
+  mmoInput.NumbersOnly := AOnlyNumbers;
   mmoInput.SelectAll;
 
   if (ShowModal = mrOK) then

@@ -803,6 +803,7 @@ begin
 
   sl := TStringList.Create;
   try
+    sl.SkipLastLineBreak := True;
     sl.Text := Text;
     c := sl.Count;
 
@@ -811,7 +812,7 @@ begin
         sl.Delete(i);
 
     if c <> sl.Count then
-      Result := sl.Text.TrimRight;
+      Result := sl.Text;
   finally
     sl.Free;
   end;
@@ -832,6 +833,7 @@ begin
   try
     slt := TStringList.Create;
     try
+      sl.SkipLastLineBreak := True;
       sl.Text  := ReplaceRegExpr('\{.*?\}', Text, '', True); // text without tags
       slt.Text := Text; // normal text
 
@@ -853,7 +855,7 @@ begin
           slt[i] := s;
         end;
 
-        Result := slt.Text.TrimRight;
+        Result := slt.Text;
     finally
       slt.Free;
     end;
