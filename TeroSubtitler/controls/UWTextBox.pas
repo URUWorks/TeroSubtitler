@@ -94,7 +94,7 @@ procedure Register;
 implementation
 
 uses
-  UWSubtitleAPI.Tags, BGRADefaultBitmap, BGRAColorQuantization;
+  UWSubtitleAPI.Tags, BGRADefaultBitmap;
 
 // -----------------------------------------------------------------------------
 
