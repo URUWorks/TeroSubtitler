@@ -42,6 +42,7 @@ function HHMMSSFFTimeToMS(const Time: String; const FPS: Single): Integer;
 function RefTimeToMSecs(const RefTime: Int64): Cardinal;
 function MSecsToRefTime(const MSecs: Cardinal): Int64;
 function TicksToMSecs(const Ticks: Int64; const TicksPerSecond: Integer = 10000): Integer;
+function StrSecsToMSecs(const ASeconds: String): Integer; // 25.1
 function GetHours(const Time: Cardinal): Integer;
 function GetMinutes(const Time: Cardinal): Integer;
 function GetSeconds(const Time: Cardinal): Integer;
@@ -332,6 +333,20 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
+
+function StrSecsToMSecs(const ASeconds: String): Integer; // 25.1
+var
+  FormatSettings : TFormatSettings;
+begin
+  FormatSettings := DefaultFormatSettings;
+  FormatSettings.DecimalSeparator  := '.';
+  FormatSettings.ThousandSeparator := FormatSettings.DecimalSeparator;
+  Result := Trunc( StrToFloatDef(ASeconds, 0, FormatSettings) * 1000 );
+end;
+
+// -----------------------------------------------------------------------------
+
+
 
 function GetHours(const Time: Cardinal): Integer;
 var
