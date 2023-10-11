@@ -66,7 +66,7 @@ end;
 
 function TUWTimedText.Extension: String;
 begin
-  Result := '*.xml';
+  Result := '*.xml;*.ttml';
 end;
 
 // -----------------------------------------------------------------------------
@@ -90,7 +90,7 @@ var
   sExt: String;
 begin
   sExt := LowerCase(ExtractFileExt(SubtitleFile.FileName));
-  if ((sExt = '.xml') or (sExt = '.tt') or (sExt = '.dfxp')) and
+  if ((sExt = '.xml') or (sExt = '.ttml') or (sExt = '.tt') or (sExt = '.dfxp')) and
     (Contains('<tt xml:', SubtitleFile[Row]) or Contains('</tt>', SubtitleFile[Row])) then
     Result := True
   else
@@ -106,7 +106,7 @@ function TUWTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS:
     if AnsiEndsStr('t', S) then // ticks
       Result := TicksToMSecs(StrToInt64(Copy(S, 0, Length(S)-1)))
     else if AnsiEndsStr('s', S) then // seconds
-        Result := StringToTime(Copy(S, 0, Length(S)-1))
+      Result := StrSecsToMSecs(Copy(S, 0, Length(S)-1).Replace(',', '.'))
     else
       Result := StringToTime(S, False, aFPS);
   end;
