@@ -120,7 +120,7 @@ const
   WHISPER_Params   = '-m "%model" -l %lang -osrt -of "%output" -f "%input"';
   WHISPER_ffParams = '-i "%input" -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y "%output"';
 
-  FASTERWHISPER_EXE    = 'whisper-ctranslate2.exe';
+  FASTERWHISPER_EXE    = 'whisper_ctranslate2.exe';
   FASTERWHISPER_Params = '"%input" --output_dir %output --model %model --model_directory %binpath --language %lang --output_format srt';
 
   SCENEDETECT_EXE      = 'scenedetect.exe';
@@ -144,7 +144,7 @@ const
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
   WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
 
-  FASTERWHISPER_EXE    = 'whisper-ctranslate2';
+  FASTERWHISPER_EXE    = 'whisper_ctranslate2';
   FASTERWHISPER_Params = '%input --output_dir %output --model %model --model_directory %binpath --language %lang --output_format srt';
 
   SCENEDETECT_EXE      = 'scenedetect';
@@ -168,7 +168,7 @@ const
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
   WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
 
-  FASTERWHISPER_EXE    = 'whisper-ctranslate2';
+  FASTERWHISPER_EXE    = 'whisper_ctranslate2';
   FASTERWHISPER_Params = '%input --output_dir %output --model %model --model_directory %binpath --language %lang --output_format srt';
 
   SCENEDETECT_EXE      = 'scenedetect';
