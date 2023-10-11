@@ -1,5 +1,6 @@
 1.0.1.2 (x.x.2023)
 - fixed: [Windows] Crash when trying to download YT-DLP in the initial wizard
+- added: Support TTML files #188
 - added: Blu-ray (SUP) export
 - added: Shortcut to copy current video position to the clipboard
 - added: Faster-Whisper [Audio to text]
