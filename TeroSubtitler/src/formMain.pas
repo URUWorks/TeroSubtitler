@@ -75,6 +75,7 @@ type
     actDetectDialogSegments: TAction;
     actExportSUP: TAction;
     actCopyVideoPosToClipboard: TAction;
+    actScreenshotToFile: TAction;
     actRemoveLineFromEntry: TAction;
     actWebPreview: TAction;
     actShowActorOnPreview: TAction;
@@ -308,6 +309,7 @@ type
     MenuItem177: TMenuItem;
     MenuItem178: TMenuItem;
     MenuItem179: TMenuItem;
+    MenuItem180: TMenuItem;
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
     mnuFormatProperties: TMenuItem;
@@ -507,6 +509,7 @@ type
     Separator49: TMenuItem;
     Separator50: TMenuItem;
     Separator51: TMenuItem;
+    Separator52: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
@@ -936,6 +939,7 @@ type
     procedure actLoadProjectExecute(Sender: TObject);
     procedure actSaveProjectExecute(Sender: TObject);
     procedure actWebPreviewExecute(Sender: TObject);
+    procedure actScreenshotToFileExecute(Sender: TObject);
     procedure actRemoveLineFromEntryExecute(Sender: TObject);
   private
 
@@ -1038,6 +1042,7 @@ begin
   // prepare special folders
   ForceDirectories(WaveformsFolder);
   ForceDirectories(ShotChangesFolder);
+  ForceDirectories(ScreenshotsFolder);
   ForceDirectories(BackupFolder);
   ForceDirectories(ProjectsFolder);
   ForceDirectories(TranslationMemoryFolder);

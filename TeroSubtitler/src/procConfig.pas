@@ -69,6 +69,7 @@ function IconsFolder: String;
 function ExtensionsFolder: String;
 function WaveformsFolder: String;
 function ShotChangesFolder: String;
+function ScreenshotsFolder: String;
 function MRUFileName: String;
 function ConventionsFileName: String;
 function StylesFileName: String;
@@ -1381,6 +1382,13 @@ end;
 function ShotChangesFolder: String;
 begin
   Result := GetCustomUserPath('ShotChanges');
+end;
+
+// -----------------------------------------------------------------------------
+
+function ScreenshotsFolder: String;
+begin
+  Result := GetCustomUserPath('Screenshots');
 end;
 
 // -----------------------------------------------------------------------------

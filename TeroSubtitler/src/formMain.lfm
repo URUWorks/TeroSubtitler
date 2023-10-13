@@ -1777,6 +1777,12 @@ object frmMain: TfrmMain
       object Separator11: TMenuItem
         Caption = '-'
       end
+      object MenuItem180: TMenuItem
+        Action = actScreenshotToFile
+      end
+      object Separator52: TMenuItem
+        Caption = '-'
+      end
       object MenuItem8: TMenuItem
         Action = actShotChanges
       end
@@ -3526,6 +3532,12 @@ object frmMain: TfrmMain
       Category = 'Texts'
       Caption = 'Remove line from entry...'
       OnExecute = actRemoveLineFromEntryExecute
+    end
+    object actScreenshotToFile: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Screenshot to file'
+      OnExecute = actScreenshotToFileExecute
     end
   end
   object popDropInsert: TPopupMenu

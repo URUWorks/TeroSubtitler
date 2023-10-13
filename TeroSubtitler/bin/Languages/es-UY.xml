@@ -174,6 +174,7 @@
       <actWaveExtract>Extraer forma de onda...</actWaveExtract>
       <actLoadVideoFromURL>Abrir vídeo desde URL...</actLoadVideoFromURL>
       <actWebPreview>Vista previa web...</actWebPreview>
+      <actScreenshotToFile>Capturar cuadro...</actScreenshotToFile>
       <actSpellCheck>Corrector ortográfico...</actSpellCheck>
       <actTranslate>Traducción automática...</actTranslate>
       <actFixSubtitles>Corregir subtítulos...</actFixSubtitles>

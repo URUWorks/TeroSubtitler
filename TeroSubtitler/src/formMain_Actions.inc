@@ -1667,6 +1667,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actScreenshotToFileExecute(Sender: TObject);
+var
+  s : String;
+begin
+  if MPV.IsMediaLoaded then
+  begin
+    s := Format('%s%s%d.png', [ScreenshotsFolder, ChangeFileExt(ExtractFileName(MPV.FileName), ''), MPV.GetMediaPosInMs]);
+    MPV.ScreenshotToFile(s);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actRemoveLineFromEntryExecute(Sender: TObject);
 var
   s : String;

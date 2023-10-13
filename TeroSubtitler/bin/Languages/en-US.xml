@@ -174,6 +174,7 @@
       <actWaveExtract>Extract waveform...</actWaveExtract>
       <actLoadVideoFromURL>Open video from URL...</actLoadVideoFromURL>
       <actWebPreview>Web Preview...</actWebPreview>
+      <actScreenshotToFile>Screenshot to file...</actScreenshotToFile>
       <actSpellCheck>Spell check...</actSpellCheck>
       <actTranslate>Auto translate...</actTranslate>
       <actFixSubtitles>Fix subtitles...</actFixSubtitles>
