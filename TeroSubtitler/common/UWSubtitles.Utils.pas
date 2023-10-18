@@ -834,6 +834,7 @@ begin
     slt := TStringList.Create;
     try
       sl.SkipLastLineBreak := True;
+      slt.SkipLastLineBreak := True;
       sl.Text  := ReplaceRegExpr('\{.*?\}', Text, '', True); // text without tags
       slt.Text := Text; // normal text
 
