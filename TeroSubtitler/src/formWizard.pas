@@ -104,10 +104,11 @@ begin
   btnDownloadWhisper.Caption := btnDownload.Caption;
 
   {$IFDEF LINUX}
-  btnDownload.Visible        := False;
-  btnDownloadYTDLP.Visible   := False;
-  btnDownloadFFMPEG.Visible  := False;
-  btnDownloadWhisper.Visible := False;
+  btnDownload.Visible              := False;
+  btnDownloadYTDLP.Visible         := False;
+  btnDownloadFFMPEG.Visible        := False;
+  btnDownloadWhisper.Visible       := False;
+  btnDownloadFasterWhisper.Visible := False;
   {$ENDIF};
 
   // libMPV
