@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Tero Subtitler"
-#define MyAppVersion "1.0.1.0"
-#define ShortAppVersion "1010"
+#define MyAppVersion "1.0.1.2"
+#define ShortAppVersion "1012"
 #define MyAppPublisher "URUWorks"
 #define MyAppURL "https://github.com/URUWorks/TeroSubtitler/releases"
 #define MyAppExeName "tero.exe"
