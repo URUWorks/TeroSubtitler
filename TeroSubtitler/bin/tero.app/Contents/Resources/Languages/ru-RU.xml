@@ -52,6 +52,7 @@
       <actCut>Вырезать</actCut>
       <actCopy>Копировать</actCopy>
       <actPaste>Вставить</actPaste>
+      <actCopyVideoPosToClipboard>Скопировать позицию видео в буфер обмена</actCopyVideoPosToClipboard>
       <actFind>Найти...</actFind>
       <actFindNext>Найти далее</actFindNext>
       <actFindPrevious>Найти ранее</actFindPrevious>
@@ -61,6 +62,7 @@
       <actInsertSubtitleBefore Hint="Вставить субтитр перед текущим">Вставить субтитр ДО текущего</actInsertSubtitleBefore>
       <actInsertSubtitle Hint="Вставить новый субтитр после текущего">Вставить субтитр ПОСЛЕ текущего</actInsertSubtitle>
       <actDeleteSubtitle Hint="Удалить выбранный(е) субтитр(ы)">Удалить субтитр(ы)</actDeleteSubtitle>
+      <actRemoveLineFromEntry>Удалить введённую строку из записи...</actRemoveLineFromEntry>
       <actListMode>Режим списка</actListMode>
       <actSourceMode>Режим исходного кода</actSourceMode>
       <actTranscriptionMode Hint="Включить режим свободной записи">Режим транскрибирования</actTranscriptionMode>
@@ -159,6 +161,7 @@
       <actExportTextOnly>Только текст...</actExportTextOnly>            
       <actExportCustomTextFormat>Настроить формат экспорта текста...</actExportCustomTextFormat>
       <actExportCustomImageFormat>Настроить формат экспорта изображений...</actExportCustomImageFormat>
+      <actExportSUP>Blu-ray SUP...</actExportSUP>
       <actMediaPreviousFrame>Предыдущий кадр</actMediaPreviousFrame>
       <actMediaNextFrame>Следующий кадр</actMediaNextFrame>
       <actMediaMoveSubtitle>Сдвинуть субтитр</actMediaMoveSubtitle>      
@@ -171,6 +174,7 @@
       <actWaveExtract>Извлечь звуковую волну...</actWaveExtract>
       <actLoadVideoFromURL>Открыть видео по ссылке...</actLoadVideoFromURL>
       <actWebPreview>Предпросмотр видео в браузере...</actWebPreview>
+      <actScreenshotToFile>Сохранить скриншот в файл...</actScreenshotToFile>
       <actSpellCheck>Проверить орфографию...</actSpellCheck>
       <actTranslate>Автоперевод...</actTranslate>
       <actFixSubtitles>Исправить субтитры...</actFixSubtitles>
@@ -373,6 +377,8 @@
       <lblChaining>Цепочка (кадров)</lblChaining>
       <lblTheme>Тема</lblTheme>
       <lblListMode>Режим списка</lblListMode>
+      <lblListFontSize>Размер шрифта списка</lblListFontSize>
+      <lblTextBoxFontSize>Размер шрифта окна текста</lblTextBoxFontSize>
 	  <lblSubtitles>Субтитры</lblSubtitles>      
 	  <lblSubColor>Цвет</lblSubColor>
 	  <lblSubBorder>Окаймление</lblSubBorder>
@@ -389,10 +395,11 @@
       <lblToolBarWave>Аудиоволна</lblToolBarWave>
       <lblShortcutCat>Категория</lblShortcutCat>
       <lblShortcut>Ярлык</lblShortcut>      
-      <lblFFMPEG>Путь к ffmpeg</lblFFMPEG>
-      <lblSceneDetect>Путь к PySceneTools</lblSceneDetect>
-      <lblWhisperCPP>Путь к Whisper.cpp</lblWhisperCPP>
-      <lblYTDLP>Путь к YT-DLP</lblYTDLP>      
+      <lblFFMPEG>Путь к ffmpeg:</lblFFMPEG>
+      <lblSceneDetect>Путь к PySceneTools:</lblSceneDetect>
+      <lblWhisperCPP>Путь к Whisper:</lblWhisperCPP>
+      <lblFasterWhisper>Путь к ускоренному Whisper:</lblFasterWhisper>
+      <lblYTDLP>Путь к YT-DLP:</lblYTDLP>      
       <lblSeekTime>Время поиска (ms)</lblSeekTime>
       <lblFrameStep>Шаг фрейма</lblFrameStep>
     </Section>
@@ -468,6 +475,14 @@
       <lblFontSize>Размер</lblFontSize>
     </Section>
   </Form>      
+  <Form Name="frmExportSUP" Caption="Blu-ray SUP">
+    <Section Name="TLabel">
+      <lblFont>Шрифт</lblFont>
+      <lblFontSize>Размер</lblFontSize>
+      <lblSafeArea>Безопасная область пикселей (слева, сверху, справа, снизу)</lblSafeArea>
+      <lblVideoRes>Разрешение видео</lblVideoRes>
+    </Section>
+  </Form>              
   <Form Name="frmTranslationMemory" Caption="Памятка перевода"/>
   <Form Name="frmTranslationMemorySettings" Caption="Настройки памятки перевода">
     <Section Name="TLabel">
@@ -536,6 +551,7 @@
   <Form Name="frmAudioToText" Caption="Перевод аудио в текст">
     <Section Name="TLabel">
       <lblTrack>Дорожка</lblTrack>    
+      <lblEngine>Движок</lblEngine>
       <lblLanguage>Язык</lblLanguage>
       <lblModel>Модель</lblModel>
       <lblWait>Подождите</lblWait>      
@@ -606,6 +622,8 @@
       <lblffmpegDesc>Незаменимое решение для извлечения звука и кадров.</lblffmpegDesc>
       <lblWhisper>whisper.cpp:</lblWhisper>
       <lblWhisperDesc>Автоматическое распознавание и преобразование речи в субтитры.</lblWhisperDesc>                                            
+      <lblFasterWhisper>Ускоренный Whisper:</lblFasterWhisper>
+      <lblFasterWhisperDesc>Ускоренное распознавание и преобразование речи в субтитры.</lblFasterWhisperDesc>
     </Section>
   </Form>
   <Form Name="frmDownload" Caption="">
@@ -758,6 +776,8 @@
     <SelectSheetToUse>Выбрать нужный лист:</SelectSheetToUse>
     <WriteStatus>Экспорт изображений %d/%d</WriteStatus>
     <ShortCutInUse>Горячая клавиша используется тут: '%s'.</ShortCutInUse>
+    <AdditionalParams>Дополнительные параметры:</AdditionalParams>    
+    <Line>Строка:</Line>
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>Все субтитры</rbnAllTheSubtitles>
