@@ -193,8 +193,6 @@ function TUWTSV.SaveSubtitle(const FileName: String; const FPS: Single; const En
 var
   i     : Integer;
   Count : Integer;
-  Text  : String;
-  XY    : String;
 begin
   Result  := False;
 

@@ -22,8 +22,8 @@ unit UWSubtitleAPI.Formats.CSV;
 interface
 
 uses
-  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats;
+  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.SysUtils,
+  UWSubtitleAPI.Formats;
 
 type
 
