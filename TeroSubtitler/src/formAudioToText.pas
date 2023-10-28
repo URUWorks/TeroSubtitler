@@ -396,7 +396,7 @@ begin
   lblStatus.Visible      := not AValue;
   lblTimeElapsed.Visible := not AValue;
 
-  btnGenerate.Enabled := AValue;
+  btnEngine.Enabled   := AValue;
   btnModel.Enabled    := AValue;
   cboTrack.Enabled    := AValue;
   cboEngine.Enabled   := AValue;
