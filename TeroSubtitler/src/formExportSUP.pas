@@ -74,7 +74,7 @@ implementation
 
 uses
   procWorkspace, procTypes, procConfig, UWSystem.XMLLang, UWSystem.Encoding,
-  UWSystem.SysUtils, procCustomFormat, procSUP;
+  procCustomFormat, procSUP;
 
 {$R *.lfm}
 
