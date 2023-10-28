@@ -159,6 +159,17 @@ begin
     lblWhisperStatus.Caption := sFailed;
   end;
 
+  // faster-whisper
+  if FileExists(Tools.FasterWhisper) then
+  begin
+    btnDownloadFasterWhisper.Enabled := False;
+    lblFasterWhisperStatus.Caption := sSuccess;
+  end
+  else
+  begin
+    btnDownloadFasterWhisper.Enabled := True;
+    lblFasterWhisperStatus.Caption := sFailed;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

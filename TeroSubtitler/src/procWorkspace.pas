@@ -346,10 +346,11 @@ begin
     with dir do
     begin
       FindAllDirectories(dir, WhisperModelsFolder, False);
+      Combo.Items.Clear;
+
       if dir.Count > 0 then
       begin
         Combo.Items.BeginUpdate;
-        Combo.Items.Clear;
 
         for i := 0 to dir.Count-1 do
         begin

@@ -187,7 +187,7 @@ begin
   sl := TStringList.Create;
   try
     sl.Text := Output;
-    writeln(Output);
+
     for i := 0 to sl.Count-1 do
     begin
       if Tools.WhisperEngine = WhisperCPP then
@@ -259,7 +259,6 @@ begin
     Application.ProcessMessages;
     try
       // extract wave file, ffmpeg -i input.mp3 -ar 16000 -ac 1 -c:a pcm_s16le output.wav
-      //s := ChangeFileExt(GetTempFileName(WhisperTranscriptionsFolder, 'temp'), '.wav');
       s := ChangeFileExt(GetTempFileName, '.wav');
       AParamArray := WHISPER_ffParams.Split(' ');
       for i := 0 to High(AParamArray) do
@@ -299,7 +298,7 @@ begin
               ss := ss + ' ' + Tools.FasterWhisper_Additional;
 
             model := cboModel.Text;
-            modelpath := ConcatPaths([WhisperModelsFolder, 'faster-whisper-' + model]);
+            modelpath := ExcludeTrailingPathDelimiter(WhisperModelsFolder);
           end;
 
           AParamArray := ss.Split(' ');
@@ -311,7 +310,7 @@ begin
           end
           else
           begin
-            ss := WhisperTranscriptionsFolder;
+            ss := ExcludeTrailingPathDelimiter(WhisperTranscriptionsFolder);
             srtfile := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '_' + cn)]) + '.srt';
           end;
 

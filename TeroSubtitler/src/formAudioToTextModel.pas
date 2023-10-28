@@ -106,6 +106,7 @@ var
 procedure TfrmAudioToTextModel.FormCreate(Sender: TObject);
 var
   i: Integer;
+  s: String;
 begin
   LoadLanguage(Self);
 
@@ -116,7 +117,15 @@ begin
 
   cboModel.Items.BeginUpdate;
   for i := 0 to Length(ModelsToUse)-1 do
-    cboModel.Items.Add(Format('%s (%s)', [ModelsToUse[i].Name, ModelsToUse[i].Size]));
+  begin
+    s := ModelsToUse[i].Name;
+
+    if ((Tools.WhisperEngine = TWhisperEngine.WhisperCPP) and FileExists(ConcatPaths([WhisperModelsFolder, s+'.bin']))) or
+      ((Tools.WhisperEngine = TWhisperEngine.FasterWhisper) and FileExists(ConcatPaths([WhisperModelsFolder, 'faster-whisper-'+s, 'model.bin']))) then
+      s := '* ' + s;
+
+    cboModel.Items.Add(Format('%s (%s)', [s, ModelsToUse[i].Size]));
+  end;
 
   if cboModel.Items.Count > 0 then cboModel.ItemIndex := 0;
   cboModel.Items.EndUpdate;
