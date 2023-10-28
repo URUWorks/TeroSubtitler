@@ -360,7 +360,10 @@ begin
       SelSt   := SelStart;
       s       := Text;
 
-      if not CharInSet(KeyChar, ['0'..'9']) then Exit;
+      if CharInSet(KeyChar, [#96..#105]) then // numpad 0-9
+        KeyChar := Chr(Key - 48)
+      else if not CharInSet(KeyChar, [#48..#57]) then // 0-9
+        Exit;
 
       if (FTimeMode = TUWTimeEditMode.temTime) then
       begin
