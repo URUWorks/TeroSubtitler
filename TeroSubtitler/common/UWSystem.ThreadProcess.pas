@@ -26,7 +26,8 @@ uses
 
 type
 
-  TOnDataReceived = procedure(Output: String);
+  TOnDataReceived = procedure(Output: String; var ATerminate: Boolean);
+  TOnTimeElapsed  = procedure(const ATime: Double);
 
   TUWThreadProcess = class(TThread)
   private
@@ -41,11 +42,12 @@ type
   public
     TerminateProcess : Boolean;
     OutputString     : String;
+    TimeElapsed      : Double;
     constructor Create(const AFileName: String; const AParams: TStringArray; AOnDataReceived: TOnDataReceived = NIL; AOnDone: TNotifyEvent = NIL);
     property Terminated;
   end;
 
-function ExecuteThreadProcess(const AAppFileName: String; const AParams: TStringArray; const AOnDataReceived: TOnDataReceived = NIL): Boolean;
+function ExecuteThreadProcess(const AAppFileName: String; const AParams: TStringArray; const AOnDataReceived: TOnDataReceived = NIL; const AOnTimeElapsed: TOnTimeElapsed = NIL): Boolean;
 
 // -----------------------------------------------------------------------------
 
@@ -63,6 +65,7 @@ begin
   FOnProcess       := AOnDataReceived;
   FOnDone          := AOnDone;
   OutputString     := '';
+  TimeElapsed      := 0;
   FreeOnTerminate  := True;
 end;
 
@@ -135,7 +138,7 @@ end;
 procedure TUWThreadProcess.DataReceived;
 begin
   if Assigned(FOnProcess) then
-    FOnProcess(OutputString);
+    FOnProcess(OutputString, TerminateProcess);
 end;
 
 // -----------------------------------------------------------------------------
@@ -148,16 +151,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function ExecuteThreadProcess(const AAppFileName: String; const AParams: TStringArray; const AOnDataReceived: TOnDataReceived = NIL): Boolean;
+function ExecuteThreadProcess(const AAppFileName: String; const AParams: TStringArray; const AOnDataReceived: TOnDataReceived = NIL; const AOnTimeElapsed: TOnTimeElapsed = NIL): Boolean;
 begin
   Result := False;
   with TUWThreadProcess.Create(AAppFileName, AParams, AOnDataReceived) do
   begin
+    TimeElapsed := 0;
     Start;
     while not Finished do
     begin
-      Sleep(100);
       Application.ProcessMessages;
+      Sleep(100);
+      TimeElapsed += 0.1;
+      if Assigned(AOnTimeElapsed) then
+        AOnTimeElapsed(TimeElapsed);
     end;
     Result := True;
   end;
