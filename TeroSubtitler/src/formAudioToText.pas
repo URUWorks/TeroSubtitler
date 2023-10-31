@@ -77,7 +77,7 @@ uses
   procWorkspace, procConfig, procDialogs, procTypes, UWSystem.TimeUtils,
   formMain, UWSystem.Process, procFiles, procForms, StrUtils,
   UWTranslateAPI.Google, procSubtitle, procVST, UWSubtitleAPI.Formats,
-  UWSystem.SysUtils;
+  UWSystem.SysUtils, UWSystem.ThreadProcess;
 
 {$R *.lfm}
 
@@ -154,9 +154,9 @@ begin
   begin
     WhisperEngine := TWhisperEngine(cboEngine.ItemIndex);
 
-    rbnAddSubtitlesWhileTranscribing.Enabled := WhisperEngine = TWhisperEngine.WhisperCPP;
+    {rbnAddSubtitlesWhileTranscribing.Enabled := WhisperEngine = TWhisperEngine.WhisperCPP;
     if not rbnAddSubtitlesWhileTranscribing.Enabled then
-      rbnLoadSubtitlesAfterTranscript.Checked := True;
+      rbnLoadSubtitlesAfterTranscript.Checked := True;}
 
     if WhisperEngine = TWhisperEngine.WhisperCPP then
       FillComboWithModels(cboModel)
@@ -171,6 +171,66 @@ procedure ProcessCB(const TimeElapsed: Double; var Cancel: Boolean);
 begin
   frmAudioToText.lblTimeElapsed.Caption := TimeToString(Trunc(TimeElapsed)*1000, 'mm:ss');
   Cancel := CancelProcess;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ThreadProcessCB(Output: String; var ATerminate: Boolean);
+var
+  sl : TStringList;
+  i, it, ft : Integer;
+  s : String;
+begin
+  ATerminate := CancelProcess;
+  Application.ProcessMessages;
+  // process output received
+  sl := TStringList.Create;
+  try
+    sl.Text := Output;
+
+    for i := 0 to sl.Count-1 do
+    begin
+      if Tools.WhisperEngine = WhisperCPP then
+      begin
+        // Subtitle info
+        if Pos('-->', sl[i]) = 15 then
+        begin
+          it     := StringToTime(Copy(sl[i], 2, 12));
+          ft     := StringToTime(Copy(sl[i], 19, 12));
+          Output := Copy(sl[i], 35, sl[i].Length-34);
+          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True);
+        end;
+        // Progress
+        if Pos('progress =', sl[i]) > 0 then
+        begin
+          it := sl[i].LastIndexOf(' ');
+          ft := sl[i].Length-it;
+          s  := Copy(sl[i], it+1, ft-1).Trim;
+          frmAudioToText.prbProgress.Position   := s.ToInteger;
+          frmAudioToText.lblTimeElapsed.Caption := s + '%';
+        end;
+      end
+      else
+      begin
+        // Subtitle info
+        if Pos('-->', sl[i]) = 12 then
+        begin
+          it     := StringToTime(Copy(sl[i], 2, 9), True);
+          ft     := StringToTime(Copy(sl[i], 16, 9), True);
+          Output := Copy(sl[i], 28);
+          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True);
+        end;
+      end;
+    end;
+  finally
+    sl.Free;
+  end;
+end;
+
+procedure ThreadProcessCBTime(const ATime: Double);
+begin
+  if Tools.WhisperEngine <> WhisperCPP then
+    frmAudioToText.lblTimeElapsed.Caption := TimeToString(Trunc(ATime)*1000, 'mm:ss');
 end;
 
 // -----------------------------------------------------------------------------
@@ -215,8 +275,8 @@ begin
         // Subtitle info
         if Pos('-->', sl[i]) = 12 then
         begin
-          it     := StringToTime(Copy(sl[i], 2, 9));
-          ft     := StringToTime(Copy(sl[i], 16, 9));
+          it     := StringToTime(Copy(sl[i], 2, 9), True);
+          ft     := StringToTime(Copy(sl[i], 16, 9), True);
           Output := Copy(sl[i], 28);
           VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True);
         end;
@@ -288,11 +348,11 @@ begin
           end
           else
           begin
+            if cboLanguage.ItemIndex <> 0 then
+              ss := ss + ' --language %lang';
+
             if chkTranslate.Checked then
               ss := ss + ' --task translate';
-
-            if cboLanguage.ItemIndex = 0 then
-              cn := 'en';
 
             if not Tools.FasterWhisper_Additional.IsEmpty then
               ss := ss + ' ' + Tools.FasterWhisper_Additional;
@@ -320,9 +380,10 @@ begin
           for i := 0 to High(AParamArray) do
             AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%model', '%binpath', '%lang'], [s, ss, model, modelpath, cn], []);
 
-          if rbnAddSubtitlesWhileTranscribing.Checked and rbnAddSubtitlesWhileTranscribing.Enabled then
+          if rbnAddSubtitlesWhileTranscribing.Checked then //and rbnAddSubtitlesWhileTranscribing.Enabled then
           begin
-            if ExecuteAppEx(GetAudioToTextAppFile, AParamArray, @ProcessCBEx) then
+            //if ExecuteAppEx(GetAudioToTextAppFile, AParamArray, @ProcessCBEx) then
+            if ExecuteThreadProcess(GetAudioToTextAppFile, AParamArray, @ThreadProcessCB, @ThreadProcessCBTime) then
             begin
               // delete wave file
               DeleteFile(s);
@@ -406,7 +467,7 @@ begin
   rbnAddSubtitlesWhileTranscribing.Enabled := AValue;
   rbnLoadSubtitlesAfterTranscript.Enabled  := AValue;
 
-  if rbnAddSubtitlesWhileTranscribing.Checked then
+  if rbnAddSubtitlesWhileTranscribing.Checked and (cboEngine.ItemIndex = 0) then
     prbProgress.Visible := not AValue;
 
   if AValue then

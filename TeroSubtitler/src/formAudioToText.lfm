@@ -149,9 +149,9 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideRight.Control = lblTimeElapsed
     Left = 8
     Height = 8
-    Top = 312
+    Top = 314
     Width = 120
-    Anchors = [akLeft, akRight, akBottom]
+    Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 5
     Step = 1
     TabOrder = 11
