@@ -292,7 +292,7 @@ end;
 
 procedure TfrmAudioToText.btnGenerateClick(Sender: TObject);
 const
-  pyEnvironment = 'PYTHONIOENCODING=utf-8;PYTHONLEGACYWINDOWSSTDIO=utf-8';
+  pyEnvironment = 'PYTHONUTF8=1;PYTHONIOENCODING=utf-8;PYTHONLEGACYWINDOWSSTDIO=utf-8';
 
 var
   s, ss, cn, model, modelpath, srtfile: String;
