@@ -94,7 +94,7 @@ uses
   procTypes, procWorkspace, procColorTheme, procConfig, UWSystem.XMLLang,
   procCustomFormat, procGenerateVideo, formMain, UWSubtitleAPI,
   UWSubtitleAPI.Formats, UWSystem.Encoding, UWSystem.TimeUtils,
-  UWSystem.SysUtils;
+  UWSystem.SysUtils, procDialogs;
 
 {$R *.lfm}
 
@@ -275,6 +275,7 @@ begin
   cboAudioEncoding.Enabled := AValue;
   cboSampleRate.Enabled := AValue;
   cboBitRate.Enabled := AValue;
+  chkReEncodeAudioClick(NIL);
 
   if AValue then
     btnClose.Caption := GetCommonString('btnClose', 'CommonControls')
@@ -294,6 +295,12 @@ procedure TfrmGenerateVideo.btnGenerateClick(Sender: TObject);
 var
   s, sub, aEnc, style: String;
 begin
+  if not FileExists(Tools.FFmpeg) then
+  begin
+    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(Tools.FFmpeg)]));
+    Exit;
+  end;
+
   CancelGeneration := False;
 
   with TSaveDialog.Create(NIL) do
