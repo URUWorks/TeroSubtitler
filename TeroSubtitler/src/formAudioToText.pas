@@ -182,6 +182,7 @@ var
   s : String;
 begin
   ATerminate := CancelProcess;
+  writeln(output);
   Application.ProcessMessages;
   // process output received
   sl := TStringList.Create;
@@ -290,10 +291,14 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmAudioToText.btnGenerateClick(Sender: TObject);
+const
+  pyEnvironment = 'PYTHONIOENCODING=utf-8;PYTHONLEGACYWINDOWSSTDIO=utf-8';
+
 var
   s, ss, cn, model, modelpath, srtfile: String;
   i: Integer;
   AParamArray: TStringArray;
+  AEnvironment: TStringArray;
   isPlaying: Boolean;
   TimerSub: Boolean;
 begin
@@ -318,6 +323,8 @@ begin
 
     Application.ProcessMessages;
     try
+      SetLength(AEnvironment, 0);
+
       // extract wave file, ffmpeg -i input.mp3 -ar 16000 -ac 1 -c:a pcm_s16le output.wav
       s := ChangeFileExt(GetTempFileName, '.wav');
       AParamArray := WHISPER_ffParams.Split(' ');
@@ -326,6 +333,8 @@ begin
 
       if ExecuteApp(GetExtractAppFile, AParamArray, True, True, @ProcessCB) then
       begin
+        SetLength(AParamArray, 0);
+
         if FileExists(s) then // wave extracted
         begin
           // do transcribe, main -m models/ggml-base.en.bin -l en -osrt -of outputfile.srt -f samples/jfk.wav
@@ -359,6 +368,8 @@ begin
 
             model := cboModel.Text;
             modelpath := ExcludeTrailingPathDelimiter(WhisperModelsFolder);
+
+            AEnvironment := pyEnvironment.Split(';');
           end;
 
           AParamArray := ss.Split(' ');
@@ -383,7 +394,7 @@ begin
           if rbnAddSubtitlesWhileTranscribing.Checked then //and rbnAddSubtitlesWhileTranscribing.Enabled then
           begin
             //if ExecuteAppEx(GetAudioToTextAppFile, AParamArray, @ProcessCBEx) then
-            if ExecuteThreadProcess(GetAudioToTextAppFile, AParamArray, @ThreadProcessCB, @ThreadProcessCBTime) then
+            if ExecuteThreadProcess(GetAudioToTextAppFile, AParamArray, AEnvironment, @ThreadProcessCB, @ThreadProcessCBTime) then
             begin
               // delete wave file
               DeleteFile(s);
@@ -439,6 +450,8 @@ begin
       else
         ShowErrorMessageDialog(Format(GetCommonString('ErrorExecuting'), [ExtractFileName(Tools.FFmpeg)]));
     finally
+      SetLength(AParamArray, 0);
+      SetLength(AEnvironment, 0);
       SetControlsEnabled(True);
       Close;
     end;
