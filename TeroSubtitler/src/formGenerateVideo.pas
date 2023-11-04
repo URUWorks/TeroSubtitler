@@ -275,6 +275,11 @@ begin
   cboAudioEncoding.Enabled := AValue;
   cboSampleRate.Enabled := AValue;
   cboBitRate.Enabled := AValue;
+
+  if AValue then
+    btnClose.Caption := GetCommonString('btnClose', 'CommonControls')
+  else
+    btnClose.Caption := GetCommonString('btnCancel', 'CommonControls');
 end;
 
 procedure ProcessCB(const TimeElapsed: Double; var Cancel: Boolean);
@@ -293,9 +298,9 @@ begin
 
   with TSaveDialog.Create(NIL) do
   try
-    Title   := GetCommonString('SaveFile');
-    //Filter  := GetCommonString('ProjectFile') + '|*' + TProjectExt;
-    Options := [ofOverwritePrompt, ofEnableSizing];
+    Title    := GetCommonString('SaveFile');
+    Filter   := 'MP4 (*.mp4)|*.mp4';
+    Options  := [ofOverwritePrompt, ofEnableSizing];
     FileName := '';
 
     if Execute then
