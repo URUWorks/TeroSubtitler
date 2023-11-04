@@ -42,12 +42,14 @@ type
   public
     TerminateProcess : Boolean;
     OutputString     : String;
+    Environment      : TStringArray;
     TimeElapsed      : Double;
     constructor Create(const AFileName: String; const AParams: TStringArray; AOnDataReceived: TOnDataReceived = NIL; AOnDone: TNotifyEvent = NIL);
     property Terminated;
   end;
 
-function ExecuteThreadProcess(const AAppFileName: String; const AParams: TStringArray; const AOnDataReceived: TOnDataReceived = NIL; const AOnTimeElapsed: TOnTimeElapsed = NIL): Boolean;
+function ExecuteThreadProcess(const AAppFileName: String; const AParams: TStringArray; const AOnDataReceived: TOnDataReceived = NIL; const AOnTimeElapsed: TOnTimeElapsed = NIL): Boolean; overload;
+function ExecuteThreadProcess(const AAppFileName: String; const AParams: TStringArray; const AEnvironment: TStringArray; const AOnDataReceived: TOnDataReceived = NIL; const AOnTimeElapsed: TOnTimeElapsed = NIL): Boolean; overload;
 
 // -----------------------------------------------------------------------------
 
@@ -67,6 +69,7 @@ begin
   OutputString     := '';
   TimeElapsed      := 0;
   FreeOnTerminate  := True;
+  SetLength(Environment, 0);
 end;
 
 // -----------------------------------------------------------------------------
@@ -96,12 +99,21 @@ begin
     for i := 0 to High(FParams) do
       AProcess.Parameters.Add(FParams[i]);
 
+    // Environment
+    for i := 1 to GetEnvironmentVariableCount do
+      AProcess.Environment.Add(GetEnvironmentString(i));
+
+    if Length(Environment) > 0 then
+      for i := 0 to High(Environment) do
+        if Environment[i] <> '' then
+          AProcess.Environment.Add(Environment[i]);
+
     try
       // Start the process
       AProcess.Execute;
 
       // All generated output from AProcess is read in a loop until no more data is available
-      while AProcess.Running do
+      while AProcess.Running and not TerminateProcess do
       begin
         // Get the new data from the process to a maximum of the buffer size that was allocated.
         // Note that all read(...) calls will block except for the last one, which returns 0 (zero).
@@ -111,12 +123,6 @@ begin
 
         if Assigned(FOnProcess) then
           Synchronize(@DataReceived);
-
-        if TerminateProcess then
-        begin
-          AProcess.Terminate(-1);
-          Exit;
-        end;
 
         if BytesRead = 0 then Break; // Stop if no more data is available
       end;
@@ -156,6 +162,28 @@ begin
   Result := False;
   with TUWThreadProcess.Create(AAppFileName, AParams, AOnDataReceived) do
   begin
+    TimeElapsed := 0;
+    Start;
+    while not Finished do
+    begin
+      Application.ProcessMessages;
+      Sleep(100);
+      TimeElapsed += 0.1;
+      if Assigned(AOnTimeElapsed) then
+        AOnTimeElapsed(TimeElapsed);
+    end;
+    Result := True;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function ExecuteThreadProcess(const AAppFileName: String; const AParams: TStringArray; const AEnvironment: TStringArray; const AOnDataReceived: TOnDataReceived = NIL; const AOnTimeElapsed: TOnTimeElapsed = NIL): Boolean;
+begin
+  Result := False;
+  with TUWThreadProcess.Create(AAppFileName, AParams, AOnDataReceived) do
+  begin
+    Environment := AEnvironment;
     TimeElapsed := 0;
     Start;
     while not Finished do
