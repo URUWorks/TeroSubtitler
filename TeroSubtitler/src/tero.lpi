@@ -653,6 +653,17 @@
         <Filename Value="procSUP.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="formGenerateVideo.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmGenerateVideo"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
+      <Unit>
+        <Filename Value="procGenerateVideo.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

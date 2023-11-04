@@ -33,6 +33,10 @@ procedure FillComboWithLanguageFiles(const Combo: TComboBox);
 procedure FillComboWithFPS(const Combo: TComboBox; const ADefault: Single = -1);
 procedure FillComboWithEncodings(const Combo: TComboBox);
 procedure FillComboWithFormats(const Combo: TComboBox);
+procedure FillComboWithVideoEncoders(const Combo: TComboBox);
+procedure FillComboWithAudioEncoders(const Combo: TComboBox);
+procedure FillComboWithAudioSampleRate(const Combo: TComboBox);
+procedure FillComboWithAudioBitRate(const Combo: TComboBox);
 procedure FillComboWithOCRScripts(const ACombo: TComboBox; const AIndex: Integer = 0);
 procedure FillComboWithGoogleLanguages(const Combo: TCombobox; const Index: Integer = 0);
 procedure FillItemsWithConventions(const AItems: TStrings; AProfiles: TProfiles = NIL);
@@ -165,7 +169,9 @@ begin
   begin
     Items.BeginUpdate;
     Clear;
-    for i := 0 to Length(DefFPSList)-1 do Items.Add(SingleToStr(DefFPSList[i], FormatSettings));
+    for i := 0 to Length(DefFPSList)-1 do
+      Items.Add(SingleToStr(DefFPSList[i], FormatSettings));
+
     if ADefault > -1 then
       ItemIndex := Items.IndexOf(SingleToStr(ADefault, FormatSettings));
     Items.EndUpdate;
@@ -182,8 +188,8 @@ begin
   begin
     Items.BeginUpdate;
     Clear;
-    for i := 0 to MaxEncodings-1 do Items.Add(
-      Format('%d: %s', [Encodings[i].CPID, Encodings[i].CPName]));
+    for i := 0 to MaxEncodings-1 do
+      Items.Add(Format('%d: %s', [Encodings[i].CPID, Encodings[i].CPName]));
 
     ItemIndex := Items.Count-1;
     Items.EndUpdate;
@@ -208,6 +214,78 @@ begin
       Formats.Free;
     end;
     ItemIndex := Integer(Workspace.DefFormat)-1;
+    Items.EndUpdate;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure FillComboWithVideoEncoders(const Combo: TComboBox);
+var
+  i: Byte;
+begin
+  with Combo do
+  begin
+    Items.BeginUpdate;
+    Clear;
+    for i := 0 to High(TVideoEncoders) do
+      Items.Add(TVideoEncoders[i]);
+
+    ItemIndex := 0;
+    Items.EndUpdate;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure FillComboWithAudioEncoders(const Combo: TComboBox);
+var
+  i: Byte;
+begin
+  with Combo do
+  begin
+    Items.BeginUpdate;
+    Clear;
+    for i := 0 to High(TAudioEncoders) do
+      Items.Add(TAudioEncoders[i]);
+
+    ItemIndex := 0;
+    Items.EndUpdate;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure FillComboWithAudioSampleRate(const Combo: TComboBox);
+var
+  i: Byte;
+begin
+  with Combo do
+  begin
+    Items.BeginUpdate;
+    Clear;
+    for i := 0 to High(TAudioSampleRate) do
+      Items.Add(TAudioSampleRate[i].ToString);
+
+    ItemIndex := 0;
+    Items.EndUpdate;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure FillComboWithAudioBitRate(const Combo: TComboBox);
+var
+  i: Byte;
+begin
+  with Combo do
+  begin
+    Items.BeginUpdate;
+    Clear;
+    for i := 0 to High(TAudioBitRate) do
+      Items.Add(TAudioBitRate[i].ToString);
+
+    ItemIndex := 0;
     Items.EndUpdate;
   end;
 end;

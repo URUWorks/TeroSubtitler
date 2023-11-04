@@ -1,0 +1,331 @@
+object frmGenerateVideo: TfrmGenerateVideo
+  Left = 260
+  Height = 286
+  Top = 127
+  Width = 465
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Generate video'
+  ClientHeight = 286
+  ClientWidth = 465
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object btnClose: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 366
+    Height = 26
+    Top = 252
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Cancel = True
+    Caption = 'Close'
+    OnClick = btnCloseClick
+    TabOrder = 12
+  end
+  object btnGenerate: TButton
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnClose
+    Left = 270
+    Height = 26
+    Top = 252
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
+    Caption = 'Generate'
+    Default = True
+    OnClick = btnGenerateClick
+    TabOrder = 11
+  end
+  object VST: TLazVirtualStringTree
+    Left = 366
+    Height = 24
+    Top = 224
+    Width = 80
+    Anchors = [akTop, akLeft, akRight]
+    Header.AutoSizeIndex = 0
+    Header.Columns = <>
+    Header.MainColumn = -1
+    Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+    TabOrder = 14
+    TreeOptions.AutoOptions = [toAutoTristateTracking]
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+    TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+    TreeOptions.StringOptions = []
+    Visible = False
+    OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+    OnDrawText = VSTDrawText
+    OnGetText = VSTGetText
+    OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+    OnResize = VSTResize
+  end
+  object lblFont: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 24
+    Caption = 'Font'
+    ParentColor = False
+  end
+  object cboFont: TComboBox
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 28
+    Width = 219
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object lblFontSize: TLabel
+    AnchorSideLeft.Control = spnFontSize
+    Left = 232
+    Height = 15
+    Top = 8
+    Width = 20
+    Caption = 'Size'
+    ParentColor = False
+  end
+  object spnFontSize: TSpinEdit
+    AnchorSideLeft.Control = cboFont
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = cboFont
+    Left = 232
+    Height = 23
+    Top = 28
+    Width = 75
+    BorderSpacing.Left = 5
+    MaxValue = 999
+    MinValue = 2
+    TabOrder = 1
+    Value = 24
+  end
+  object lblVideoRes: TLabel
+    Left = 8
+    Height = 15
+    Top = 64
+    Width = 48
+    Caption = 'Video res'
+    ParentColor = False
+  end
+  object spnWidth: TSpinEdit
+    Left = 8
+    Height = 23
+    Top = 84
+    Width = 75
+    MaxValue = 7680
+    MinValue = 160
+    TabOrder = 3
+    Value = 1920
+  end
+  object lblX: TLabel
+    Left = 88
+    Height = 15
+    Top = 88
+    Width = 6
+    Caption = 'x'
+    ParentColor = False
+  end
+  object spnHeight: TSpinEdit
+    Left = 99
+    Height = 23
+    Top = 84
+    Width = 75
+    MaxValue = 4320
+    MinValue = 160
+    TabOrder = 4
+    Value = 1080
+  end
+  object btnRes: TButton
+    AnchorSideLeft.Control = spnHeight
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = spnHeight
+    Left = 179
+    Height = 23
+    Top = 84
+    Width = 48
+    BorderSpacing.Left = 5
+    Caption = '...'
+    OnClick = btnResClick
+    TabOrder = 5
+  end
+  object cbnSub: TColorButton
+    AnchorSideLeft.Control = spnFontSize
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = spnFontSize
+    Left = 312
+    Height = 25
+    Top = 28
+    Width = 70
+    BorderSpacing.Left = 5
+    BorderWidth = 1
+    ButtonColorSize = 16
+    ButtonColor = clWhite
+    Flat = True
+  end
+  object lblFontColor: TLabel
+    AnchorSideLeft.Control = cbnSub
+    AnchorSideTop.Control = lblFontSize
+    Left = 312
+    Height = 15
+    Top = 8
+    Width = 29
+    Caption = 'Color'
+    ParentColor = False
+  end
+  object cbnBox: TColorButton
+    AnchorSideLeft.Control = cbnSub
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = spnFontSize
+    Left = 387
+    Height = 25
+    Top = 28
+    Width = 70
+    BorderSpacing.Left = 5
+    BorderWidth = 1
+    ButtonColorSize = 16
+    ButtonColor = clBlack
+    Flat = True
+  end
+  object chkBox: TUWCheckBox
+    AnchorSideLeft.Control = cbnBox
+    AnchorSideTop.Control = lblFontSize
+    AnchorSideTop.Side = asrCenter
+    Left = 387
+    Height = 23
+    Top = 4
+    Width = 16
+    AutoSize = False
+    Caption = 'Box'
+    TabOrder = 2
+  end
+  object lblVideoEncoding: TLabel
+    AnchorSideLeft.Control = cboVideoEncoding
+    AnchorSideTop.Control = lblVideoRes
+    Left = 232
+    Height = 15
+    Top = 64
+    Width = 83
+    Caption = 'Video encoding'
+    ParentColor = False
+  end
+  object cboVideoEncoding: TComboBox
+    AnchorSideLeft.Control = spnFontSize
+    AnchorSideRight.Control = cbnBox
+    AnchorSideRight.Side = asrBottom
+    Left = 232
+    Height = 23
+    Top = 84
+    Width = 225
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 6
+  end
+  object chkReEncodeAudio: TUWCheckBox
+    Left = 8
+    Height = 23
+    Top = 120
+    Width = 16
+    AutoSize = False
+    Caption = 'Re-encode audio'
+    OnClick = chkReEncodeAudioClick
+    TabOrder = 7
+  end
+  object lblSampleRate: TLabel
+    Left = 8
+    Height = 15
+    Top = 176
+    Width = 62
+    Caption = 'Sample rate'
+    ParentColor = False
+  end
+  object cboSampleRate: TComboBox
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 196
+    Width = 219
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 9
+  end
+  object lblBitrate: TLabel
+    Left = 232
+    Height = 15
+    Top = 176
+    Width = 37
+    Caption = 'Bit rate'
+    ParentColor = False
+  end
+  object cboBitRate: TComboBox
+    AnchorSideRight.Side = asrBottom
+    Left = 232
+    Height = 23
+    Top = 196
+    Width = 219
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 10
+  end
+  object lblAudioEncoding: TLabel
+    Left = 232
+    Height = 15
+    Top = 120
+    Width = 85
+    Caption = 'Audio encoding'
+    ParentColor = False
+  end
+  object cboAudioEncoding: TComboBox
+    AnchorSideRight.Side = asrBottom
+    Left = 232
+    Height = 23
+    Top = 140
+    Width = 219
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 8
+  end
+  object lblTimeElapsed: TLabel
+    AnchorSideTop.Control = btnGenerate
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = btnGenerate
+    Left = 202
+    Height = 17
+    Top = 257
+    Width = 63
+    Alignment = taRightJustify
+    Anchors = [akTop, akRight]
+    AutoSize = False
+    BorderSpacing.Right = 5
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object prbProgress: TProgressBar
+    AnchorSideTop.Control = lblTimeElapsed
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = lblTimeElapsed
+    Left = 8
+    Height = 8
+    Top = 261
+    Width = 188
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 6
+    Style = pbstMarquee
+    TabOrder = 13
+    Visible = False
+  end
+  object popRes: TPopupMenu
+    Left = 184
+    Top = 112
+  end
+end

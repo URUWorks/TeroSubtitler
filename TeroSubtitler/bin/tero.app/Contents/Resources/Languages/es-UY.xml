@@ -162,6 +162,7 @@
       <actExportCustomTextFormat>Formato de texto personalizado...</actExportCustomTextFormat>
       <actExportCustomImageFormat>Formato de imagen personalizado...</actExportCustomImageFormat>
       <actExportSUP>Blu-ray SUP...</actExportSUP>
+      <actGenerateVideo>Generar vídeo con subtítulos incrustados...</actGenerateVideo>
       <actMediaPreviousFrame>Fotograma anterior</actMediaPreviousFrame>
       <actMediaNextFrame>Siguiente fotograma</actMediaNextFrame>
       <actMediaMoveSubtitle>Mover subtítulo</actMediaMoveSubtitle>
@@ -482,7 +483,23 @@
       <lblSafeArea>Margenes en píxeles (izquierdo, superior, derecho, inferior)</lblSafeArea>
       <lblVideoRes>Resolución de video</lblVideoRes>      
     </Section>
-  </Form>                              
+  </Form>
+  <Form Name="frmGenerateVideo" Caption="Generar vídeo con subtítulos incrustados...">
+    <Section Name="TLabel">
+      <lblFont>Fuente</lblFont>
+      <lblFontSize>Tamaño</lblFontSize>
+      <lblFontColor>Color</lblFontColor>
+      <lblVideoRes>Resolución de video</lblVideoRes>
+      <lblVideoEncoding>Codificación de vídeo</lblVideoEncoding>
+      <lblAudioEncoding>Codificación de audio</lblAudioEncoding>
+      <lblSampleRate>Frecuencia de muestreo</lblSampleRate>
+      <lblBitrate>Tasa de bits</lblBitrate>            
+    </Section>
+    <Section Name="TUWCheckBox">
+      <chkBox>Caja</chkBox>
+      <chkReEncodeAudio>Recodificar audio</chkReEncodeAudio>      
+    </Section>                
+  </Form>                                                              
   <Form Name="frmTranslationMemory" Caption="Memoria de traducción"/>
   <Form Name="frmTranslationMemorySettings" Caption="Configuración de la memoria de traducción">
     <Section Name="TLabel">

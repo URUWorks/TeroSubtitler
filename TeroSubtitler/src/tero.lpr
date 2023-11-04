@@ -33,7 +33,7 @@ uses
   formAudioToText, formAudioToTextModel, formTBX, formFormatProperties,
   procFileTypes, formCustomTextFormat, formActors, formCustomSelectDlg,
   procProjectFile, formCustomImageFormat, procCustomFormat, procDialogs,
-  formExportSUP, procSUP;
+  formExportSUP, procSUP, formGenerateVideo, procGenerateVideo;
 
 {$R *.res}
 

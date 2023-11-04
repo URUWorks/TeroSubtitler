@@ -60,6 +60,7 @@ procedure ShowCompare;
 procedure ShowCustomTextFormat;
 procedure ShowCustomImageFormat;
 procedure ShowExportSUP;
+procedure ShowGenerateVideo;
 procedure ShowTBXSettings;
 procedure ShowTBX;
 procedure ShowTBXList;
@@ -83,7 +84,7 @@ uses
   formTBX, formTBXSettings, formTBXEdit, formWizard, formShiftTimes,
   formAudioToText, formAudioToTextModel, procTypes, procConfig, procWorkspace,
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
-  formActors, formExportSUP, procMPV;
+  formActors, formExportSUP, formGenerateVideo, procMPV;
 
 // -----------------------------------------------------------------------------
 
@@ -612,6 +613,19 @@ begin
   end
   else
     frmExportSUP.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowGenerateVideo;
+begin
+  if frmGenerateVideo = NIL then
+  begin
+    frmGenerateVideo := TfrmGenerateVideo.Create(Application);
+    ShowForm(frmGenerateVideo);
+  end
+  else
+    frmGenerateVideo.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

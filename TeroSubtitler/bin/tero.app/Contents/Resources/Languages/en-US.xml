@@ -162,6 +162,7 @@
       <actExportCustomTextFormat>Custom text format...</actExportCustomTextFormat>
       <actExportCustomImageFormat>Custom image format...</actExportCustomImageFormat>
       <actExportSUP>Blu-ray SUP...</actExportSUP>      
+      <actGenerateVideo>Generate video with hardcoded subtitles...</actGenerateVideo>
       <actMediaPreviousFrame>Previous frame</actMediaPreviousFrame>      
       <actMediaNextFrame>Next frame</actMediaNextFrame>
       <actMediaMoveSubtitle>Move subtitle</actMediaMoveSubtitle>      
@@ -482,7 +483,23 @@
       <lblSafeArea>Safe area pixels (left, top, right, bottom)</lblSafeArea>
       <lblVideoRes>Video resolution</lblVideoRes>
     </Section>
-  </Form>              
+  </Form>
+  <Form Name="frmGenerateVideo" Caption="Generate video with hardcoded subtitles">
+    <Section Name="TLabel">
+      <lblFont>Font</lblFont>
+      <lblFontSize>Size</lblFontSize>
+      <lblFontColor>Color</lblFontColor>
+      <lblVideoRes>Video resolution</lblVideoRes>          
+      <lblVideoEncoding>Video encoding</lblVideoEncoding>
+      <lblAudioEncoding>Audio encoding</lblAudioEncoding>
+      <lblSampleRate>Sample rate</lblSampleRate>
+      <lblBitrate>Bit rate</lblBitrate>
+    </Section>
+    <Section Name="TUWCheckBox">
+      <chkBox>Box</chkBox>
+      <chkReEncodeAudio>Re-encode audio</chkReEncodeAudio>
+    </Section>                
+  </Form>                              
   <Form Name="frmTranslationMemory" Caption="Translation memory"/>
   <Form Name="frmTranslationMemorySettings" Caption="Translation memory settings">
     <Section Name="TLabel">
