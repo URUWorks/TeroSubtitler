@@ -162,6 +162,7 @@
       <actExportCustomTextFormat>Настроить формат экспорта текста...</actExportCustomTextFormat>
       <actExportCustomImageFormat>Настроить формат экспорта изображений...</actExportCustomImageFormat>
       <actExportSUP>Blu-ray SUP...</actExportSUP>
+      <actGenerateVideo>Сгенерировать видео с хардсабами...</actGenerateVideo>
       <actMediaPreviousFrame>Предыдущий кадр</actMediaPreviousFrame>
       <actMediaNextFrame>Следующий кадр</actMediaNextFrame>
       <actMediaMoveSubtitle>Сдвинуть субтитр</actMediaMoveSubtitle>      
@@ -483,6 +484,22 @@
       <lblVideoRes>Разрешение видео</lblVideoRes>
     </Section>
   </Form>              
+  <Form Name="frmGenerateVideo" Caption="Generate video with hardcoded subtitles">
+    <Section Name="TLabel">
+      <lblFont>Шрифт</lblFont>
+      <lblFontSize>Размер</lblFontSize>
+      <lblFontColor>Цвет</lblFontColor>
+      <lblVideoRes>Разрешение видео</lblVideoRes>          
+      <lblVideoEncoding>Кодирование видео</lblVideoEncoding>
+      <lblAudioEncoding>Кодирование аудио</lblAudioEncoding>
+      <lblSampleRate>Частота дискретизации</lblSampleRate>
+      <lblBitrate>Битрейт</lblBitrate>
+    </Section>
+    <Section Name="TUWCheckBox">
+      <chkBox>Box</chkBox>
+      <chkReEncodeAudio>Перекодировать аудио</chkReEncodeAudio>
+    </Section>                
+  </Form>                              
   <Form Name="frmTranslationMemory" Caption="Памятка перевода"/>
   <Form Name="frmTranslationMemorySettings" Caption="Настройки памятки перевода">
     <Section Name="TLabel">
