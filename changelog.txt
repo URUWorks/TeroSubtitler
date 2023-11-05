@@ -2,6 +2,7 @@
 - fixed: numpad #192
 - fixed: Trying to use Faster-whisper #191
 - added: Generate video with hardcoded subtitles
+- updated: Italian language (thx GitGianluc)
 - updated: Russian language (thx RoxMarty)
 - improved: Switch to Purfview's Faster-Whisper
 
