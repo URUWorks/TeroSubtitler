@@ -52,6 +52,7 @@
       <actCut>Taglia</actCut>
       <actCopy>Copia</actCopy>
       <actPaste>Incolla</actPaste>
+      <actCopyVideoPosToClipboard>Copia la tempistica della posizione del video negli appunti</actCopyVideoPosToClipboard>
       <actFind>Trova…</actFind>
       <actFindNext>Trova successivo</actFindNext>
       <actFindPrevious>Trova precedente</actFindPrevious>
@@ -61,6 +62,7 @@
       <actInsertSubtitleBefore Hint="Inserisci un sottotitolo prima di quello attuale">Inserisci sottotitolo prima</actInsertSubtitleBefore>
       <actInsertSubtitle Hint="Inserisci un nuovo sottotitolo dopo il sottotitolo attuale">Inserisci sottotitolo</actInsertSubtitle>
       <actDeleteSubtitle Hint="Elimina il/i sottotitolo/i selezionato/i">Elimina sottotitolo/i</actDeleteSubtitle>
+      <actRemoveLineFromEntry>Rimuovi riga in base al numero…</actRemoveLineFromEntry>
       <actListMode>Modalità elenco</actListMode>
       <actSourceMode>Modalità sorgente</actSourceMode>
       <actTranscriptionMode Hint="Abilita la modalità di scrittura libera">Modalità trascrizione</actTranscriptionMode>
@@ -159,6 +161,8 @@
       <actExportTextOnly>Solo testo…</actExportTextOnly>
       <actExportCustomTextFormat>Formato di testo personalizzato…</actExportCustomTextFormat>
       <actExportCustomImageFormat>Formato di immagine personalizzata…</actExportCustomImageFormat>
+      <actExportSUP>Formato .sup per Blu-ray…</actExportSUP>
+      <actGenerateVideo>Genera video con sottotitoli fissi…</actGenerateVideo>
       <actMediaPreviousFrame>Fotogramma precedente</actMediaPreviousFrame>
       <actMediaNextFrame>Fotogramma successivo</actMediaNextFrame>
       <actMediaMoveSubtitle>Sposta sottotitolo</actMediaMoveSubtitle>
@@ -171,6 +175,7 @@
       <actWaveExtract>Estrai la forma d’onda…</actWaveExtract>
       <actLoadVideoFromURL>Apri filmato da URL…</actLoadVideoFromURL>
       <actWebPreview>Anteprima web…</actWebPreview>
+      <actScreenshotToFile>Salva un’istantanea dello schermo…</actScreenshotToFile>
       <actSpellCheck>Controllo ortografico…</actSpellCheck>
       <actTranslate>Traduzione automatica…</actTranslate>
       <actFixSubtitles>Correzione sottotitoli…</actFixSubtitles>
@@ -373,6 +378,8 @@
       <lblChaining>Concatenazione (fotogrammi)</lblChaining>
       <lblTheme>Tema</lblTheme>
       <lblListMode>Modalità elenco</lblListMode>
+      <lblListFontSize>Dimensione del carattere per l’elenco</lblListFontSize>
+      <lblTextBoxFontSize>Dimensione del carattere per i riquadri di testo</lblTextBoxFontSize>
       <lblSubtitles>Sottotitoli</lblSubtitles>
       <lblSubColor>Colore</lblSubColor>
       <lblSubBorder>Bordo</lblSubBorder>
@@ -392,6 +399,7 @@
       <lblFFMPEG>FFmpeg</lblFFMPEG>
       <lblSceneDetect>PySceneDetect</lblSceneDetect>
       <lblWhisperCPP>Whisper.cpp</lblWhisperCPP>
+      <lblFasterWhisper>Faster-Whisper</lblFasterWhisper>
       <lblYTDLP>YT-DLP</lblYTDLP>
       <lblSeekTime>Tempo di ricerca (ms)</lblSeekTime>
       <lblFrameStep>Intervallo fotogramma</lblFrameStep>
@@ -468,6 +476,30 @@
       <lblFontSize>Dimensione</lblFontSize>
     </Section>
   </Form>
+  <Form Name="frmExportSUP" Caption="Formato .sup per Blu-ray">
+    <Section Name="TLabel">
+      <lblFont>Carattere</lblFont>
+      <lblFontSize>Dimensione</lblFontSize>
+      <lblSafeArea>Margini di abbondanza in pixel (sinistro, superiore, destro, inferiore)</lblSafeArea>
+      <lblVideoRes>Risoluzione video</lblVideoRes>
+    </Section>
+  </Form>
+  <Form Name="frmGenerateVideo" Caption="Genera video con sottotitoli fissi">
+    <Section Name="TLabel">
+      <lblFont>Carattere</lblFont>
+      <lblFontSize>Dimensione</lblFontSize>
+      <lblFontColor>Colore</lblFontColor>
+      <lblVideoRes>Risoluzione video</lblVideoRes>
+      <lblVideoEncoding>Codifica video</lblVideoEncoding>
+      <lblAudioEncoding>Codifica audio</lblAudioEncoding>
+      <lblSampleRate>Frequenza di campionamento</lblSampleRate>
+      <lblBitrate>Velocità di trasmissione in bit</lblBitrate>
+    </Section>
+    <Section Name="TUWCheckBox">
+      <chkBox>Riquadro</chkBox>
+      <chkReEncodeAudio>Ricodifica audio</chkReEncodeAudio>
+    </Section>
+  </Form>
   <Form Name="frmTranslationMemory" Caption="Memoria di traduzione"/>
   <Form Name="frmTranslationMemorySettings" Caption="Impostazioni della memoria di traduzione">
     <Section Name="TLabel">
@@ -536,6 +568,7 @@
   <Form Name="frmAudioToText" Caption="Da audio a testo">
     <Section Name="TLabel">
       <lblTrack>Traccia</lblTrack>
+      <lblEngine>Motore</lblEngine>
       <lblLanguage>Lingua</lblLanguage>
       <lblModel>Modello</lblModel>
       <lblWait>Attendi</lblWait>
@@ -604,8 +637,10 @@
       <lblYTDLPDesc>Componente opzionale per aprire video tramite URL.</lblYTDLPDesc>
       <lblFFMPEG>FFmpeg:</lblFFMPEG>
       <lblffmpegDesc>La soluzione definitiva per l’estrazione dell’audio e dei cambi di inquadratura.</lblffmpegDesc>
-      <lblWhisper>whisper.cpp:</lblWhisper>
+      <lblWhisper>Whisper.cpp:</lblWhisper>
       <lblWhisperDesc>Riconoscimento automatico del parlato per la conversione da audio a testo.</lblWhisperDesc>
+      <lblFasterWhisper>Faster-Whisper:</lblFasterWhisper>
+      <lblFasterWhisperDesc>Riconoscimento automatico più rapido del parlato per la conversione da audio a testo.</lblFasterWhisperDesc>
     </Section>
   </Form>
   <Form Name="frmDownload" Caption="">
@@ -758,6 +793,8 @@
     <SelectSheetToUse>Selezionare il foglio da utilizzare:</SelectSheetToUse>
     <WriteStatus>Scrittura in corso… %d/%d</WriteStatus>
     <ShortCutInUse>Scorciatoia attualmente in uso per ‘%s’.</ShortCutInUse>
+    <AdditionalParams>Parametri aggiuntivi:</AdditionalParams>
+    <Line>Riga:</Line>
   </CommonStrings>
   <CommonControls>
     <rbnAllTheSubtitles>Tutti i sottotitoli</rbnAllTheSubtitles>
