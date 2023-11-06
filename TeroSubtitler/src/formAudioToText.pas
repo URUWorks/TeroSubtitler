@@ -182,7 +182,7 @@ var
   s : String;
 begin
   ATerminate := CancelProcess;
-  writeln(output);
+  //writeln(output);
   Application.ProcessMessages;
   // process output received
   sl := TStringList.Create;
