@@ -28,7 +28,7 @@ uses
 // -----------------------------------------------------------------------------
 
 {$IFDEF DARWIN}
-function GetCPUArchitecture: AnsiString;
+function GetCPUArchitectureString: AnsiString;
 {$ENDIF}
 
 function Iff(const Condition: Boolean; const TruePart, FalsePart: String): String; overload;
@@ -81,6 +81,12 @@ function BinarySearch_IntArray(const IntArray: TIntegerDynArray; const Value: In
 
 // -----------------------------------------------------------------------------
 
+{$IFDEF DARWIN}
+const
+  moProcessIsNative = 0;
+  moProcessIsTranslated = 1;
+{$ENDIF}
+
 implementation
 
 //------------------------------------------------------------------------------
@@ -106,6 +112,34 @@ begin
   finally
     FreeMem(cpuArch);
   end;
+end;
+
+//------------------------------------------------------------------------------
+
+function GetProcessIsTranslated: Integer;
+var
+  ret  : Integer;
+  size : size_t;
+begin
+  Result := -1;
+  ret    := 0;
+  size   := SizeOf(ret);
+
+  if FPsysctlbyname('sysctl.proc_translated', @ret, @size, NIL, 0) = 0 then
+    Result := ret;
+end;
+
+//------------------------------------------------------------------------------
+
+function GetCPUArchitectureString: AnsiString;
+var
+  r: Integer;
+begin
+  r := GetProcessIsTranslated;
+  if r <> -1 then
+    Result := 'arm64'
+  else
+    Result := 'x86_64'
 end;
 {$ENDIF}
 
