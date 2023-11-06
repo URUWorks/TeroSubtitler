@@ -261,7 +261,7 @@ end;
 procedure TfrmWizard.btnDownloadFFMPEGClick(Sender: TObject);
 begin
 //  {$IFDEF DARWIN}
-//  ShowDownloadDialog(StringReplace(URL_FFMPEG, '%cpu', GetCPUArchitecture, []), ConcatPaths([ffmpegFolder, 'ffmpeg.zip']));
+//  ShowDownloadDialog(StringReplace(URL_FFMPEG, '%cpu', GetCPUArchitectureString, []), ConcatPaths([ffmpegFolder, 'ffmpeg.zip']));
 //  {$ELSE}
 //  ShowDownloadDialog(URL_FFMPEG, ConcatPaths([ffmpegFolder, 'ffmpeg.zip']));
 //  {$ENDIF}
@@ -279,7 +279,7 @@ end;
 procedure TfrmWizard.btnDownloadWhisperClick(Sender: TObject);
 begin
   {$IFDEF DARWIN}
-  ShowDownloadDialog(StringReplace(URL_WHISPER, '%cpu', GetCPUArchitecture, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
+  ShowDownloadDialog(StringReplace(URL_WHISPER, '%cpu', GetCPUArchitectureString, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
   {$ELSE}
   ShowDownloadDialog(URL_WHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
   {$ENDIF}
@@ -296,7 +296,7 @@ end;
 procedure TfrmWizard.btnDownloadFasterWhisperClick(Sender: TObject);
 begin
   {$IFDEF DARWIN}
-  ShowDownloadDialog(StringReplace(URL_FASTERWHISPER, '%cpu', GetCPUArchitecture, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
+  ShowDownloadDialog(StringReplace(URL_FASTERWHISPER, '%cpu', GetCPUArchitectureString, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
   {$ELSE}
   ShowDownloadDialog(URL_FASTERWHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
   {$ENDIF}
