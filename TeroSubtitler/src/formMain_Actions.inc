@@ -1675,6 +1675,7 @@ begin
   begin
     s := Format('%s%s%d.png', [ScreenshotsFolder, ChangeFileExt(ExtractFileName(MPV.FileName), ''), MPV.GetMediaPosInMs]);
     MPV.ScreenshotToFile(s);
+    SetStatusBarText(s);
   end;
 end;
 
