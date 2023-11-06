@@ -311,7 +311,7 @@ begin
     FileName := '';
 
     if Execute then
-      s := FileName
+      s := ChangeFileExt(FileName, '.mp4')
     else
       s := '';
   finally
