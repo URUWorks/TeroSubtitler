@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  UWRadioButton, UWCheckBox;
+  UWRadioButton, UWCheckBox, LCLIntf;
 
 type
 
@@ -61,6 +61,7 @@ type
     procedure FormShow(Sender: TObject);
   private
     procedure SetControlsEnabled(const AValue: Boolean);
+    procedure OpenFolderClick(Sender: TObject);
   public
 
   end;
@@ -439,6 +440,7 @@ begin
 
               if FileExists(srtfile) then
               begin
+                ShowMessageDialog(GetCommonString('FileSavedSuccessfully'), '', GetCommonString('OpenContainingFolder'), @OpenFolderClick);
                 LoadSubtitle(srtfile, sfSubRip, NIL, -1, False);
               end;
             end
@@ -493,6 +495,13 @@ begin
     btnClose.Caption := GetCommonString('btnCancel', 'CommonControls');
     btnClose.Tag := 1;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAudioToText.OpenFolderClick(Sender: TObject);
+begin
+  OpenDocument(WhisperTranscriptionsFolder);
 end;
 
 // -----------------------------------------------------------------------------
