@@ -32,7 +32,7 @@ function InputDialog(const ACaption, APrompt, ADefault: String; const AHelp: Str
 { Custom message dialogs }
 
 procedure ShowErrorMessageDialog(const AMessage: String; const ACaption: String = '');
-procedure ShowMessageDialog(const AMessage: String; const ACaption: String = '');
+procedure ShowMessageDialog(const AMessage: String; const ACaption: String = ''; const ACustomAction: String = ''; const ACustomActionClick: TNotifyEvent = NIL);
 
 { Custom question dialogs }
 
@@ -91,11 +91,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure ShowMessageDialog(const AMessage: String; const ACaption: String = '');
+procedure ShowMessageDialog(const AMessage: String; const ACaption: String = ''; const ACustomAction: String = ''; const ACustomActionClick: TNotifyEvent = NIL);
 begin
   with TfrmCustomMessageDlg.Create(NIL) do
   try
-    Execute(AMessage, ACaption, imInformation);
+    Execute(AMessage, ACaption, imInformation, ACustomAction, ACustomActionClick);
   finally
     Free;
   end;

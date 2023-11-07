@@ -34,16 +34,15 @@ type
     btnOk: TButton;
     ImageDlg: TImage;
     ImageList: TImageList;
+    lblCustomAction: TLabel;
     lblMessage: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
 
   public
-    function Execute(const AMessage: String; const ACaption: String = ''; const AIcon: TIconMode = imQuestion): Integer;
+    function Execute(const AMessage: String; const ACaption: String = ''; const AIcon: TIconMode = imQuestion; const ACustomAction: String = ''; const ACustomActionClick: TNotifyEvent = NIL): Integer;
   end;
-
-function ShowMessageDialog(const AMessage: String; const ACaption: String = ''): Integer;
 
 var
   frmCustomMessageDlg: TfrmCustomMessageDlg;
@@ -78,7 +77,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TfrmCustomMessageDlg.Execute(const AMessage: String; const ACaption: String = ''; const AIcon: TIconMode = imQuestion): Integer;
+function TfrmCustomMessageDlg.Execute(const AMessage: String; const ACaption: String = ''; const AIcon: TIconMode = imQuestion; const ACustomAction: String = ''; const ACustomActionClick: TNotifyEvent = NIL): Integer;
 begin
   if ColorThemeInstance.GetRealColorMode = cmDark then
   begin
@@ -101,19 +100,11 @@ begin
     Caption := ACaption;
 
   lblMessage.Caption := AMessage;
+  lblCustomAction.Caption := ACustomAction;
+  lblCustomAction.OnClick := ACustomActionClick;
+  lblCustomAction.Visible := ACustomActionClick <> NIL;
+
   Result := ShowModal;
-end;
-
-// -----------------------------------------------------------------------------
-
-function ShowMessageDialog(const AMessage: String; const ACaption: String = ''): Integer;
-begin
-  with TfrmCustomMessageDlg.Create(NIL) do
-  try
-    Result := Execute(AMessage, ACaption);
-  finally
-    Free;
-  end;
 end;
 
 // -----------------------------------------------------------------------------

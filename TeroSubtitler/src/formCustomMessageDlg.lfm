@@ -43,11 +43,21 @@ object frmCustomMessageDlg: TfrmCustomMessageDlg
     ParentFont = False
     WordWrap = True
   end
+  object lblCustomAction: TLabel
+    AnchorSideTop.Control = btnOk
+    AnchorSideTop.Side = asrCenter
+    Cursor = crHandPoint
+    Left = 8
+    Height = 1
+    Top = 100
+    Width = 1
+    ParentColor = False
+  end
   object ImageList: TImageList
     Height = 32
     Width = 32
-    Left = 16
-    Top = 64
+    Left = 144
+    Top = 32
     Bitmap = {
       4C7A0400000020000000200000004E0B00000000000078DAC59A0B7054D519C7
       3F0679B5B688231465606804273E98AA3CAC1DAD5647E84351C44AD1B1D28A75
