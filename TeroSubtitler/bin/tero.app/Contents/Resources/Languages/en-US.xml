@@ -794,7 +794,9 @@
     <WriteStatus>Writing %d/%d</WriteStatus>    
     <ShortCutInUse>Shortcut currently used in '%s'.</ShortCutInUse>
     <AdditionalParams>Additional params:</AdditionalParams>    
-    <Line>Line:</Line>    
+    <Line>Line:</Line>
+    <FileSavedSuccessfully>File saved successfully.</FileSavedSuccessfully>    
+    <OpenContainingFolder>Open containing folder</OpenContainingFolder>
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>All the subtitles</rbnAllTheSubtitles>

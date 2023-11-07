@@ -794,7 +794,9 @@
     <WriteStatus>Escribiendo %d/%d</WriteStatus>
     <ShortCutInUse>Atajo utilizado en '%s'.</ShortCutInUse>
     <AdditionalParams>Parámetros adicionales:</AdditionalParams>
-    <Line>Línea:</Line>    
+    <Line>Línea:</Line>
+    <FileSavedSuccessfully>Archivo guardado exitosamente.</FileSavedSuccessfully>    
+    <OpenContainingFolder>Abrir carpeta contenedora</OpenContainingFolder>        
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>Todos los subtitulos</rbnAllTheSubtitles>
