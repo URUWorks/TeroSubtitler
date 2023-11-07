@@ -76,8 +76,10 @@ type
       var PaintInfo: THeaderPaintInfo; var Elements: THeaderPaintElements);
     procedure VSTResize(Sender: TObject);
   private
+    FMP4FileName: String;
     procedure ResItemClick(Sender: TObject);
     procedure SetControlsEnabled(const AValue: Boolean);
+    procedure OpenFolderClick(Sender: TObject);
   public
 
   end;
@@ -291,10 +293,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmGenerateVideo.OpenFolderClick(Sender: TObject);
+begin
+  OpenDocument(ExtractFileDir(FMP4FileName));
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmGenerateVideo.btnGenerateClick(Sender: TObject);
 var
-  s, sub, aEnc, style: String;
+  sub, aEnc, style: String;
 begin
+  FMP4FileName := '';
+
   if not FileExists(Tools.FFmpeg) then
   begin
     ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(Tools.FFmpeg)]));
@@ -311,14 +322,12 @@ begin
     FileName := '';
 
     if Execute then
-      s := ChangeFileExt(FileName, '.mp4')
-    else
-      s := '';
+      FMP4FileName := ChangeFileExt(FileName, '.mp4');
   finally
     Free;
   end;
 
-  if s.IsEmpty then Exit;
+  if FMP4FileName.IsEmpty then Exit;
 
   SetControlsEnabled(False);
 
@@ -336,11 +345,12 @@ begin
     if chkBox.Checked then
       style += ',BorderStyle=4,BackColour=' + IntToHexStr(cbnBox.ButtonColor, True, '&H00');
 
-    GenerateVideoWithSubtitle(frmMain.MPV.FileName, sub, s,
+    if GenerateVideoWithSubtitle(frmMain.MPV.FileName, sub, FMP4FileName,
       spnWidth.Value, spnHeight.Value,
       cboVideoEncoding.Text, style, aEnc,
       TAudioSampleRate[cboSampleRate.ItemIndex], TAudioBitRate[cboBitRate.ItemIndex],
-      @ProcessCB);
+      @ProcessCB) then
+        ShowMessageDialog(GetCommonString('FileSavedSuccessfully'), '', GetCommonString('OpenContainingFolder'), @OpenFolderClick);
 
     SetControlsEnabled(True);
     //Close;
