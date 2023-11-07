@@ -142,7 +142,6 @@ begin
   FillComboWithAudioEncoders(cboAudioEncoding);
   FillComboWithAudioSampleRate(cboSampleRate);
   FillComboWithAudioBitRate(cboBitRate);
-  chkReEncodeAudioClick(NIL);
 
   CancelGeneration := False;
 end;
@@ -152,6 +151,10 @@ end;
 procedure TfrmGenerateVideo.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
+  SaveFormSettings(Self, Format('%d,%d,%d,%d,%d,%d,%d,%d,%d,%d',
+    [cboFont.ItemIndex, spnFontSize.Value, cbnSub.ButtonColor, cbnBox.ButtonColor,
+    chkBox.Checked.ToInteger, cboVideoEncoding.ItemIndex, chkReEncodeAudio.Checked.ToInteger,
+    cboAudioEncoding.ItemIndex, cboSampleRate.ItemIndex, cboBitRate.ItemIndex]));
   CloseAction := caFree;
   frmGenerateVideo := NIL;
 end;
@@ -159,8 +162,30 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmGenerateVideo.FormShow(Sender: TObject);
+var
+  s: String;
+  AParamArray: TStringArray;
 begin
   CheckColorTheme(Self);
+  s := LoadFormSettings(Self);
+  if not s.IsEmpty then
+  begin
+    AParamArray := s.Split(',');
+    if Length(AParamArray) = 10 then
+    begin
+      cboFont.ItemIndex := AParamArray[0].ToInteger;
+      spnFontSize.Value := AParamArray[1].ToInteger;
+      cbnSub.ButtonColor := AParamArray[2].ToInteger;
+      cbnBox.ButtonColor := AParamArray[3].ToInteger;
+      chkBox.Checked := AParamArray[4].ToBoolean;
+      cboVideoEncoding.ItemIndex := AParamArray[5].ToInteger;
+      chkReEncodeAudio.Checked := AParamArray[6].ToBoolean;
+      cboAudioEncoding.ItemIndex := AParamArray[7].ToInteger;
+      cboSampleRate.ItemIndex := AParamArray[8].ToInteger;
+      cboBitRate.ItemIndex := AParamArray[9].ToInteger;
+    end;
+  end;
+  chkReEncodeAudioClick(NIL);
 end;
 
 // -----------------------------------------------------------------------------
