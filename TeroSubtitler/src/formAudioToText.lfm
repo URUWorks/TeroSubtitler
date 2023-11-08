@@ -118,7 +118,7 @@ object frmAudioToText: TfrmAudioToText
   object lblWait: TLabel
     Left = 0
     Height = 32
-    Top = 224
+    Top = 232
     Width = 389
     Alignment = taCenter
     Anchors = [akLeft, akBottom]
@@ -132,7 +132,7 @@ object frmAudioToText: TfrmAudioToText
   object lblStatus: TLabel
     Left = 0
     Height = 40
-    Top = 256
+    Top = 264
     Width = 389
     Alignment = taCenter
     Anchors = [akLeft, akBottom]
