@@ -40,6 +40,7 @@ type
     cboSampleRate: TComboBox;
     cboBitRate: TComboBox;
     cboVideoEncoding: TComboBox;
+    cboVideoPreset: TComboBox;
     lblFont: TLabel;
     lblAudioEncoding: TLabel;
     lblSampleRate: TLabel;
@@ -48,6 +49,7 @@ type
     lblVideoEncoding: TLabel;
     lblFontSize: TLabel;
     lblFontColor: TLabel;
+    lblVideoPreset: TLabel;
     lblVideoRes: TLabel;
     lblX: TLabel;
     popRes: TPopupMenu;
@@ -61,6 +63,7 @@ type
     procedure btnGenerateClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure btnResClick(Sender: TObject);
+    procedure cboVideoEncodingSelect(Sender: TObject);
     procedure chkReEncodeAudioClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -76,10 +79,11 @@ type
       var PaintInfo: THeaderPaintInfo; var Elements: THeaderPaintElements);
     procedure VSTResize(Sender: TObject);
   private
-    FMP4FileName: String;
+    FOutputFileName: String;
     procedure ResItemClick(Sender: TObject);
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure OpenFolderClick(Sender: TObject);
+    function SuggestNewVideoFileName: String;
   public
 
   end;
@@ -186,6 +190,7 @@ begin
     end;
   end;
   chkReEncodeAudioClick(NIL);
+  cboVideoEncodingSelect(NIL);
 end;
 
 // -----------------------------------------------------------------------------
@@ -282,6 +287,17 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmGenerateVideo.cboVideoEncodingSelect(Sender: TObject);
+begin
+  cboVideoPreset.Enabled := cboVideoEncoding.ItemIndex = High(TFFVideoEncoders);
+  if cboVideoPreset.Enabled then
+    FillComboWithVideoProfileProRes(cboVideoPreset)
+  else
+    cboVideoPreset.Clear;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmGenerateVideo.SetControlsEnabled(const AValue: Boolean);
 begin
   lblTimeElapsed.Caption := '';
@@ -298,11 +314,16 @@ begin
   spnHeight.Enabled := AValue;
   btnRes.Enabled := AValue;
   cboVideoEncoding.Enabled := AValue;
+  cboVideoPreset.Enabled := False;
   chkReEncodeAudio.Enabled := AValue;
-  cboAudioEncoding.Enabled := AValue;
-  cboSampleRate.Enabled := AValue;
-  cboBitRate.Enabled := AValue;
-  chkReEncodeAudioClick(NIL);
+  cboAudioEncoding.Enabled := False;
+  cboSampleRate.Enabled := False;
+  cboBitRate.Enabled := False;
+  if AValue then
+  begin
+    chkReEncodeAudioClick(NIL);
+    cboVideoEncodingSelect(NIL);
+  end;
 
   if AValue then
     btnClose.Caption := GetCommonString('btnClose', 'CommonControls')
@@ -320,16 +341,31 @@ end;
 
 procedure TfrmGenerateVideo.OpenFolderClick(Sender: TObject);
 begin
-  OpenDocument(ExtractFileDir(FMP4FileName));
+  OpenDocument(ExtractFileDir(FOutputFileName));
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmGenerateVideo.SuggestNewVideoFileName: String;
+begin
+  Result := ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '');
+
+  case cboVideoEncoding.ItemIndex of
+    3..5 : Result += '_x265';
+    6    : Result += '_vp9';
+    7    : Result += '_ProRes';
+  else
+    Result += '_x264';
+  end;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmGenerateVideo.btnGenerateClick(Sender: TObject);
 var
-  sub, aEnc, style: String;
+  sub, aEnc, style, ext: String;
 begin
-  FMP4FileName := '';
+  FOutputFileName := '';
 
   if not FileExists(Tools.FFmpeg) then
   begin
@@ -341,18 +377,34 @@ begin
 
   with TSaveDialog.Create(NIL) do
   try
-    Title    := GetCommonString('SaveFile');
-    Filter   := 'MP4 (*.mp4)|*.mp4';
+    Title := GetCommonString('SaveFile');
+
+    if cboVideoEncoding.ItemIndex <> 7 then
+    begin
+      Filter := 'MP4 (*.mp4)|*.mp4';
+      ext := '.mp4';
+    end
+    else
+    begin
+      Filter := 'MOV (*.mov)|*.mov';
+      ext := '.mov';
+    end;
+
     Options  := [ofOverwritePrompt, ofEnableSizing];
-    FileName := '';
+    FileName := SuggestNewVideoFileName;
 
     if Execute then
-      FMP4FileName := ChangeFileExt(FileName, '.mp4');
+    begin
+      if ExtractFileExt(FOutputFileName) = '' then
+        FOutputFileName := ChangeFileExt(FileName, ext)
+      else
+        FOutputFileName := FileName;
+    end
+    else
+      Exit;
   finally
     Free;
   end;
-
-  if FMP4FileName.IsEmpty then Exit;
 
   SetControlsEnabled(False);
 
@@ -360,7 +412,7 @@ begin
   if Subtitles.SaveToFile(sub, Workspace.FPS.OutputFPS, TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID), sfAdvancedSubStationAlpha, smText) then
   begin
     if chkReEncodeAudio.Checked then
-      aEnc := cboAudioEncoding.Text
+      aEnc := TFFAudioEncoders[cboAudioEncoding.ItemIndex].Codec
     else
       aEnc := '';
 
@@ -370,12 +422,14 @@ begin
     if chkBox.Checked then
       style += ',BorderStyle=4,BackColour=' + IntToHexStr(cbnBox.ButtonColor, True, '&H00');
 
-    if GenerateVideoWithSubtitle(frmMain.MPV.FileName, sub, FMP4FileName,
+    if GenerateVideoWithSubtitle(frmMain.MPV.FileName, sub, FOutputFileName,
       spnWidth.Value, spnHeight.Value,
-      cboVideoEncoding.Text, style, aEnc,
-      TAudioSampleRate[cboSampleRate.ItemIndex], TAudioBitRate[cboBitRate.ItemIndex],
+      TFFVideoEncoders[cboVideoEncoding.ItemIndex].Codec, cboVideoPreset.ItemIndex, style, aEnc,
+      TFFAudioSampleRate[cboSampleRate.ItemIndex].Value, TFFAudioBitRate[cboBitRate.ItemIndex].Value,
       @ProcessCB) then
-        ShowMessageDialog(GetCommonString('FileSavedSuccessfully'), '', GetCommonString('OpenContainingFolder'), @OpenFolderClick);
+        ShowMessageDialog(GetCommonString('FileSavedSuccessfully'), '', GetCommonString('OpenContainingFolder'), @OpenFolderClick)
+      else
+        ShowErrorMessageDialog(GetCommonString('VideoGenerationFailed'));
 
     SetControlsEnabled(True);
     //Close;

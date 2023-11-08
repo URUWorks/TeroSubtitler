@@ -1,13 +1,13 @@
 object frmGenerateVideo: TfrmGenerateVideo
   Left = 260
-  Height = 286
+  Height = 336
   Top = 127
-  Width = 465
+  Width = 459
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Generate video'
-  ClientHeight = 286
-  ClientWidth = 465
+  ClientHeight = 336
+  ClientWidth = 459
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -18,9 +18,9 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 366
+    Left = 360
     Height = 26
-    Top = 252
+    Top = 302
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 8
@@ -28,33 +28,33 @@ object frmGenerateVideo: TfrmGenerateVideo
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
-    TabOrder = 12
+    TabOrder = 13
   end
   object btnGenerate: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
-    Left = 270
+    Left = 264
     Height = 26
-    Top = 252
+    Top = 302
     Width = 91
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
     Caption = 'Generate'
     Default = True
     OnClick = btnGenerateClick
-    TabOrder = 11
+    TabOrder = 12
   end
   object VST: TLazVirtualStringTree
     Left = 366
     Height = 24
-    Top = 224
-    Width = 80
+    Top = 280
+    Width = 74
     Anchors = [akTop, akLeft, akRight]
     Header.AutoSizeIndex = 0
     Header.Columns = <>
     Header.MainColumn = -1
     Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
-    TabOrder = 14
+    TabOrder = 15
     TreeOptions.AutoOptions = [toAutoTristateTracking]
     TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
     TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
@@ -164,7 +164,7 @@ object frmGenerateVideo: TfrmGenerateVideo
     Left = 312
     Height = 25
     Top = 28
-    Width = 70
+    Width = 67
     BorderSpacing.Left = 5
     BorderWidth = 1
     ButtonColorSize = 16
@@ -185,10 +185,10 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideLeft.Control = cbnSub
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = spnFontSize
-    Left = 387
+    Left = 384
     Height = 25
     Top = 28
-    Width = 70
+    Width = 67
     BorderSpacing.Left = 5
     BorderWidth = 1
     ButtonColorSize = 16
@@ -199,7 +199,7 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideLeft.Control = cbnBox
     AnchorSideTop.Control = lblFontSize
     AnchorSideTop.Side = asrCenter
-    Left = 387
+    Left = 384
     Height = 23
     Top = 4
     Width = 16
@@ -224,26 +224,28 @@ object frmGenerateVideo: TfrmGenerateVideo
     Left = 232
     Height = 23
     Top = 84
-    Width = 225
-    Anchors = [akTop, akLeft, akRight]
+    Width = 219
     ItemHeight = 15
+    OnSelect = cboVideoEncodingSelect
     Style = csDropDownList
     TabOrder = 6
   end
   object chkReEncodeAudio: TUWCheckBox
+    AnchorSideTop.Control = lblAudioEncoding
+    AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 23
-    Top = 120
+    Top = 172
     Width = 16
     AutoSize = False
     Caption = 'Re-encode audio'
     OnClick = chkReEncodeAudioClick
-    TabOrder = 7
+    TabOrder = 8
   end
   object lblSampleRate: TLabel
     Left = 8
     Height = 15
-    Top = 176
+    Top = 232
     Width = 62
     Caption = 'Sample rate'
     ParentColor = False
@@ -252,16 +254,16 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideRight.Side = asrBottom
     Left = 8
     Height = 23
-    Top = 196
+    Top = 252
     Width = 219
     ItemHeight = 15
     Style = csDropDownList
-    TabOrder = 9
+    TabOrder = 10
   end
   object lblBitrate: TLabel
     Left = 232
     Height = 15
-    Top = 176
+    Top = 232
     Width = 37
     Caption = 'Bit rate'
     ParentColor = False
@@ -270,16 +272,16 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideRight.Side = asrBottom
     Left = 232
     Height = 23
-    Top = 196
+    Top = 252
     Width = 219
     ItemHeight = 15
     Style = csDropDownList
-    TabOrder = 10
+    TabOrder = 11
   end
   object lblAudioEncoding: TLabel
     Left = 232
     Height = 15
-    Top = 120
+    Top = 176
     Width = 85
     Caption = 'Audio encoding'
     ParentColor = False
@@ -288,19 +290,19 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideRight.Side = asrBottom
     Left = 232
     Height = 23
-    Top = 140
+    Top = 196
     Width = 219
     ItemHeight = 15
     Style = csDropDownList
-    TabOrder = 8
+    TabOrder = 9
   end
   object lblTimeElapsed: TLabel
     AnchorSideTop.Control = btnGenerate
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = btnGenerate
-    Left = 202
+    Left = 196
     Height = 17
-    Top = 257
+    Top = 307
     Width = 63
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
@@ -316,16 +318,37 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideRight.Control = lblTimeElapsed
     Left = 8
     Height = 8
-    Top = 261
-    Width = 188
+    Top = 311
+    Width = 182
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 6
     Style = pbstMarquee
-    TabOrder = 13
+    TabOrder = 14
     Visible = False
   end
+  object lblVideoPreset: TLabel
+    AnchorSideLeft.Control = cboVideoPreset
+    Left = 232
+    Height = 15
+    Top = 120
+    Width = 65
+    Caption = 'Video preset'
+    ParentColor = False
+  end
+  object cboVideoPreset: TComboBox
+    AnchorSideLeft.Control = spnFontSize
+    AnchorSideRight.Control = cbnBox
+    AnchorSideRight.Side = asrBottom
+    Left = 232
+    Height = 23
+    Top = 140
+    Width = 219
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 7
+  end
   object popRes: TPopupMenu
-    Left = 184
+    Left = 176
     Top = 112
   end
 end
