@@ -484,7 +484,7 @@
       <lblVideoRes>Risoluzione video</lblVideoRes>
     </Section>
   </Form>
-  <Form Name="frmGenerateVideo" Caption="Genera video con sottotitoli fissi">
+  <Form Name="frmGenerateVideo" Caption="Genera video con sottotitoli impressi">
     <Section Name="TLabel">
       <lblFont>Carattere</lblFont>
       <lblFontSize>Dimensione</lblFontSize>
