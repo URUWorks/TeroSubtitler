@@ -162,7 +162,7 @@
       <actExportCustomTextFormat>Formato di testo personalizzato…</actExportCustomTextFormat>
       <actExportCustomImageFormat>Formato di immagine personalizzata…</actExportCustomImageFormat>
       <actExportSUP>Formato .sup per Blu-ray…</actExportSUP>
-      <actGenerateVideo>Genera video con sottotitoli fissi…</actGenerateVideo>
+      <actGenerateVideo>Genera video con sottotitoli impressi…</actGenerateVideo>
       <actMediaPreviousFrame>Fotogramma precedente</actMediaPreviousFrame>
       <actMediaNextFrame>Fotogramma successivo</actMediaNextFrame>
       <actMediaMoveSubtitle>Sposta sottotitolo</actMediaMoveSubtitle>
@@ -795,6 +795,9 @@
     <ShortCutInUse>Scorciatoia attualmente in uso per ‘%s’.</ShortCutInUse>
     <AdditionalParams>Parametri aggiuntivi:</AdditionalParams>
     <Line>Riga:</Line>
+    <FileSavedSuccessfully>File salvato con successo.</FileSavedSuccessfully>
+    <VideoGenerationFailed>Errore nella creazione del video.</VideoGenerationFailed>
+    <OpenContainingFolder>Apri la cartella di destinazione</OpenContainingFolder>
   </CommonStrings>
   <CommonControls>
     <rbnAllTheSubtitles>Tutti i sottotitoli</rbnAllTheSubtitles>
