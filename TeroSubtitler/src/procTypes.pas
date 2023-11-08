@@ -73,28 +73,6 @@ const
     '♪', '♫', '©', '…', '‘', '’', '“', '”', '⹀' //, '♥'
   );
 
-  TVideoEncoders : array[0..6] of String =
-  (
-    'libx264', 'libx265',
-    'libvpx-vp9',
-    'h264_nvenc', 'h264_amf', 'hevc_nvenc', 'hevc_amf'
-  );
-
-  TAudioEncoders : array[0..1] of String =
-  (
-    'aac', 'flac'
-  );
-
-  TAudioSampleRate : array[0..4] of Integer =
-  (
-    44100, 48000, 88200, 96000, 192000
-  );
-
-  TAudioBitRate : array[0..4] of Integer =
-  (
-    64, 128, 160, 196, 320
-  );
-
   swt_StartTag  = '{';
   swt_EndTag    = '}';
   swt_Bold      = 'b';
