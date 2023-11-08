@@ -796,6 +796,7 @@
     <AdditionalParams>Parámetros adicionales:</AdditionalParams>
     <Line>Línea:</Line>
     <FileSavedSuccessfully>Archivo guardado exitosamente.</FileSavedSuccessfully>    
+    <VideoGenerationFailed>Error en la generación de vídeo.</VideoGenerationFailed>
     <OpenContainingFolder>Abrir carpeta contenedora</OpenContainingFolder>        
   </CommonStrings>
   <CommonControls> 

@@ -795,7 +795,8 @@
     <ShortCutInUse>Shortcut currently used in '%s'.</ShortCutInUse>
     <AdditionalParams>Additional params:</AdditionalParams>    
     <Line>Line:</Line>
-    <FileSavedSuccessfully>File saved successfully.</FileSavedSuccessfully>    
+    <FileSavedSuccessfully>File saved successfully.</FileSavedSuccessfully>
+    <VideoGenerationFailed>Video generation failed.</VideoGenerationFailed>    
     <OpenContainingFolder>Open containing folder</OpenContainingFolder>
   </CommonStrings>
   <CommonControls> 
