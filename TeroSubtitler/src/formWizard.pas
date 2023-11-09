@@ -299,6 +299,7 @@ begin
   ShowDownloadDialog(StringReplace(URL_FASTERWHISPER, '%cpu', GetCPUArchitectureString, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
   {$ELSE}
   ShowDownloadDialog(URL_FASTERWHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
+  ShowDownloadDialog(URL_FASTERWHISPERCUDA, ConcatPaths([WhisperFolder, 'cuda.zip']));
   {$ENDIF}
   if FileExists(ConcatPaths([WhisperFolder, FASTERWHISPER_EXE])) then
   begin
