@@ -222,8 +222,8 @@ begin
   try
     for i := 0 to High(AParamArray) do
       AParamArray[i] := StringsReplace(AParamArray[i],
-        ['%input', '%subtitle', '%output'],
-        [AVideoFileName, ASubtitleFileName, AOutputVideoFileName], [rfReplaceAll]);
+        ['%input', '%subtitle', '%output', '%%'],
+        [AVideoFileName, ASubtitleFileName, AOutputVideoFileName, ' '], [rfReplaceAll]);
 
     ExecuteApp(Tools.FFmpeg, AParamArray, True, True, ACB);
 

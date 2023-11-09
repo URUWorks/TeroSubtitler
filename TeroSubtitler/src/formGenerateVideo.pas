@@ -417,7 +417,7 @@ begin
       aEnc := '';
 
     style := Format('Fontname=%s,Fontsize=%d,Alignment=2,PrimaryColour=%s,Outline=0,Shadow=0,MarginV=20',
-      [cboFont.Text, spnFontSize.Value, IntToHexStr(cbnSub.ButtonColor, True, '&H00')]);
+      [StringReplace(cboFont.Text, ' ', '%%', [rfReplaceAll]), spnFontSize.Value, IntToHexStr(cbnSub.ButtonColor, True, '&H00')]);
 
     if chkBox.Checked then
       style += ',BorderStyle=4,BackColour=' + IntToHexStr(cbnBox.ButtonColor, True, '&H00');
