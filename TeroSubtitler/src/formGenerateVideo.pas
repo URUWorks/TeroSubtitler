@@ -39,12 +39,14 @@ type
     cboAudioEncoding: TComboBox;
     cboSampleRate: TComboBox;
     cboBitRate: TComboBox;
+    cboAudioChannels: TComboBox;
     cboVideoEncoding: TComboBox;
     cboVideoPreset: TComboBox;
     lblFont: TLabel;
     lblAudioEncoding: TLabel;
     lblSampleRate: TLabel;
     lblBitrate: TLabel;
+    lblAudioChannels: TLabel;
     lblTimeElapsed: TLabel;
     lblVideoEncoding: TLabel;
     lblFontSize: TLabel;
@@ -144,6 +146,7 @@ begin
 
   FillComboWithVideoEncoders(cboVideoEncoding);
   FillComboWithAudioEncoders(cboAudioEncoding);
+  FillComboWithAudioChannels(cboAudioChannels);
   FillComboWithAudioSampleRate(cboSampleRate);
   FillComboWithAudioBitRate(cboBitRate);
 
@@ -155,10 +158,10 @@ end;
 procedure TfrmGenerateVideo.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
-  SaveFormSettings(Self, Format('%d,%d,%d,%d,%d,%d,%d,%d,%d,%d',
+  SaveFormSettings(Self, Format('%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d',
     [cboFont.ItemIndex, spnFontSize.Value, cbnSub.ButtonColor, cbnBox.ButtonColor,
     chkBox.Checked.ToInteger, cboVideoEncoding.ItemIndex, chkReEncodeAudio.Checked.ToInteger,
-    cboAudioEncoding.ItemIndex, cboSampleRate.ItemIndex, cboBitRate.ItemIndex]));
+    cboAudioEncoding.ItemIndex, cboAudioChannels.ItemIndex, cboSampleRate.ItemIndex, cboBitRate.ItemIndex]));
   CloseAction := caFree;
   frmGenerateVideo := NIL;
 end;
@@ -175,7 +178,7 @@ begin
   if not s.IsEmpty then
   begin
     AParamArray := s.Split(',');
-    if Length(AParamArray) = 10 then
+    if Length(AParamArray) = 11 then
     begin
       cboFont.ItemIndex := AParamArray[0].ToInteger;
       spnFontSize.Value := AParamArray[1].ToInteger;
@@ -185,8 +188,9 @@ begin
       cboVideoEncoding.ItemIndex := AParamArray[5].ToInteger;
       chkReEncodeAudio.Checked := AParamArray[6].ToBoolean;
       cboAudioEncoding.ItemIndex := AParamArray[7].ToInteger;
-      cboSampleRate.ItemIndex := AParamArray[8].ToInteger;
-      cboBitRate.ItemIndex := AParamArray[9].ToInteger;
+      cboAudioChannels.ItemIndex := AParamArray[8].ToInteger;
+      cboSampleRate.ItemIndex := AParamArray[9].ToInteger;
+      cboBitRate.ItemIndex := AParamArray[10].ToInteger;
     end;
   end;
   chkReEncodeAudioClick(NIL);
@@ -215,8 +219,13 @@ end;
 procedure TfrmGenerateVideo.chkReEncodeAudioClick(Sender: TObject);
 begin
   cboAudioEncoding.Enabled := chkReEncodeAudio.Checked;
+  cboAudioChannels.Enabled := chkReEncodeAudio.Checked;
   cboSampleRate.Enabled    := chkReEncodeAudio.Checked;
   cboBitRate.Enabled       := chkReEncodeAudio.Checked;
+  lblAudioEncoding.Enabled := chkReEncodeAudio.Checked;
+  lblAudioChannels.Enabled := chkReEncodeAudio.Checked;
+  lblSampleRate.Enabled    := chkReEncodeAudio.Checked;
+  lblBitrate.Enabled       := chkReEncodeAudio.Checked;
 end;
 
 // -----------------------------------------------------------------------------
@@ -317,6 +326,7 @@ begin
   cboVideoPreset.Enabled := False;
   chkReEncodeAudio.Enabled := AValue;
   cboAudioEncoding.Enabled := False;
+  cboAudioChannels.Enabled := False;
   cboSampleRate.Enabled := False;
   cboBitRate.Enabled := False;
   if AValue then
@@ -424,8 +434,10 @@ begin
 
     if GenerateVideoWithSubtitle(frmMain.MPV.FileName, sub, FOutputFileName,
       spnWidth.Value, spnHeight.Value,
-      TFFVideoEncoders[cboVideoEncoding.ItemIndex].Codec, cboVideoPreset.ItemIndex, style, aEnc,
-      TFFAudioSampleRate[cboSampleRate.ItemIndex].Value, TFFAudioBitRate[cboBitRate.ItemIndex].Value,
+      TFFVideoEncoders[cboVideoEncoding.ItemIndex].Codec, cboVideoPreset.ItemIndex, style,
+      aEnc, TFFAudioChannels[cboAudioChannels.ItemIndex].Value,
+      TFFAudioSampleRate[cboSampleRate.ItemIndex].Value,
+      TFFAudioBitRate[cboBitRate.ItemIndex].Value,
       @ProcessCB) then
         ShowMessageDialog(GetCommonString('FileSavedSuccessfully'), '', GetCommonString('OpenContainingFolder'), @OpenFolderClick)
       else

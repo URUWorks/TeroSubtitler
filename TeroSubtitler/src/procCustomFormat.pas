@@ -34,7 +34,7 @@ type
 
 const
 
-  TResolutionList : array[0..15] of TCustomResolution =
+  TResolutionList : array[0..16] of TCustomResolution =
   (
     (Name: '8K (7680x4320)'; Width: 7680; Height: 4320),
     (Name: '4K (4096x2160)'; Width: 4096; Height: 2160),
@@ -45,6 +45,7 @@ const
     (Name: 'FHD (1920x1080)'; Width: 1920; Height: 1080),
     (Name: '1440x1080'; Width: 1440; Height: 1080),
     (Name: 'HD (1280x720)'; Width: 1280; Height: 720),
+    (Name: '576p (1024x576)'; Width: 1024; Height: 576),
     (Name: '960x720'; Width: 960; Height: 720),
     (Name: '480p (848x480)'; Width: 848; Height: 480),
     (Name: 'PAL (720x576)'; Width: 720; Height: 576),

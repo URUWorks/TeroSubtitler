@@ -50,10 +50,11 @@ const
       (Name: 'Apple ProRes'; Codec: 'prores_ks')
     );
 
-  TFFAudioEncoders: array[0..1] of TFFmpegEncoderInfoS =
+  TFFAudioEncoders: array[0..2] of TFFmpegEncoderInfoS =
     (
       (Name: 'AAC'; Codec: 'aac'),
-      (Name: 'FLAC'; Codec: 'flac')
+      (Name: 'FLAC'; Codec: 'flac'),
+      (Name: 'ALAC'; Codec: 'alac')
     );
 
   TFFAudioSampleRate: array[0..4] of TFFmpegEncoderInfoI =
@@ -74,18 +75,28 @@ const
       (Name: '320k'; Value: 320)
     );
 
+  TFFAudioChannels: array[0..4] of TFFmpegEncoderInfoI =
+    (
+      (Name: 'Mono'; Value: 1),
+      (Name: 'Stereo'; Value: 2),
+      (Name: '2.1'; Value: 3),
+      (Name: '5.1'; Value: 6),
+      (Name: '7.1'; Value: 8)
+    );
+
   TFFProResProfile: array[0..5] of String =
     (
-      'Proxy', 'LT', 'Standard', 'HQ', '4444', '4444 XQ'
+      '422 Proxy', '422 LT', '422', '422 HQ', '4444', '4444 XQ'
     );
 
 procedure FillComboWithVideoEncoders(const Combo: TComboBox);
 procedure FillComboWithVideoProfileProRes(const Combo: TComboBox);
 procedure FillComboWithAudioEncoders(const Combo: TComboBox);
+procedure FillComboWithAudioChannels(const Combo: TComboBox);
 procedure FillComboWithAudioSampleRate(const Combo: TComboBox);
 procedure FillComboWithAudioBitRate(const Combo: TComboBox);
 
-function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioSampleRate: Integer = 44100; AAudioBitRate: Integer = 128; const ACB: TUWProcessCB = NIL): Boolean;
+function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: Integer = 128; const ACB: TUWProcessCB = NIL): Boolean;
 
 // -----------------------------------------------------------------------------
 
@@ -149,6 +160,24 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure FillComboWithAudioChannels(const Combo: TComboBox);
+var
+  i: Byte;
+begin
+  with Combo do
+  begin
+    Items.BeginUpdate;
+    Clear;
+    for i := 0 to High(TFFAudioChannels) do
+      Items.Add(TFFAudioChannels[i].Name);
+
+    ItemIndex := 0;
+    Items.EndUpdate;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure FillComboWithAudioSampleRate(const Combo: TComboBox);
 var
   i: Byte;
@@ -185,7 +214,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioSampleRate: Integer = 44100; AAudioBitRate: Integer = 128; const ACB: TUWProcessCB = NIL): Boolean;
+function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: Integer = 128; const ACB: TUWProcessCB = NIL): Boolean;
 var
   VideoSettings,
   AudioSettings, s : String;
@@ -207,7 +236,7 @@ begin
   if AAudioCodec.IsEmpty then
     AudioSettings := ''
   else
-    AudioSettings := '-c:a ' + AAudioCodec + ' -ar ' + AAudioSampleRate.ToString + ' -b:a ' + AAudioBitRate.ToString;
+    AudioSettings := '-c:a ' + AAudioCodec + ' -ac ' + AAudioChannels.ToString + ' -ar ' + AAudioSampleRate.ToString + ' -b:a ' + AAudioBitRate.ToString;
 
   if AStyle.IsEmpty then
     AStyle := 'Fontname=Verdana,Fontsize=20,Alignment=2,PrimaryColour=&H00FFFFFF,BackColour=&H00000000,Outline=0,Shadow=0,MarginV=20';
