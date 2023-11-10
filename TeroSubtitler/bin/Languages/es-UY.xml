@@ -491,7 +491,9 @@
       <lblFontColor>Color</lblFontColor>
       <lblVideoRes>Resolución de video</lblVideoRes>
       <lblVideoEncoding>Codificación de vídeo</lblVideoEncoding>
+      <lblVideoPreset>Preestablecido</lblVideoPreset>
       <lblAudioEncoding>Codificación de audio</lblAudioEncoding>
+      <lblAudioChannels>Canales</lblAudioChannels>
       <lblSampleRate>Frecuencia de muestreo</lblSampleRate>
       <lblBitrate>Tasa de bits</lblBitrate>            
     </Section>

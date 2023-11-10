@@ -489,9 +489,11 @@
       <lblFont>Font</lblFont>
       <lblFontSize>Size</lblFontSize>
       <lblFontColor>Color</lblFontColor>
-      <lblVideoRes>Video resolution</lblVideoRes>          
+      <lblVideoRes>Video resolution</lblVideoRes>                
       <lblVideoEncoding>Video encoding</lblVideoEncoding>
+      <lblVideoPreset>Preset</lblVideoPreset>
       <lblAudioEncoding>Audio encoding</lblAudioEncoding>
+      <lblAudioChannels>Channels</lblAudioChannels>
       <lblSampleRate>Sample rate</lblSampleRate>
       <lblBitrate>Bit rate</lblBitrate>
     </Section>
