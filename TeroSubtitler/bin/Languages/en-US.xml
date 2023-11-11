@@ -493,6 +493,8 @@
       <lblVideoRes>Resolution</lblVideoRes>                
       <lblVideoCodec>Codec</lblVideoCodec>
       <lblVideoSubtype>Subtype</lblVideoSubtype>
+      <lblCutFrom>From</lblCutFrom>
+      <lblCutTo>To</lblCutTo>            
       <lblAudioCodec>Codec</lblAudioCodec>
       <lblAudioChannels>Channels</lblAudioChannels>
       <lblSampleRate>Sample rate</lblSampleRate>
@@ -505,6 +507,7 @@
     </Section>    
     <Section Name="TUWCheckBox">
       <chkBox>Box</chkBox>
+      <chkCut>Cut</chkCut>      
       <chkReEncodeAudio>Re-encode</chkReEncodeAudio>
     </Section>                
   </Form>                              

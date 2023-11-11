@@ -493,6 +493,8 @@
       <lblVideoRes>Resolución</lblVideoRes>
       <lblVideoCodec>Codificación</lblVideoCodec>
       <lblVideoSubtype>Subtipo</lblVideoSubtype>
+      <lblCutFrom>Desde</lblCutFrom>
+      <lblCutTo>Hasta</lblCutTo>      
       <lblAudioCodec>Codificación</lblAudioCodec>
       <lblAudioChannels>Canales</lblAudioChannels>
       <lblSampleRate>Frecuencia de muestreo</lblSampleRate>
@@ -505,6 +507,7 @@
     </Section>        
     <Section Name="TUWCheckBox">
       <chkBox>Caja</chkBox>
+      <chkCut>Cortar</chkCut>
       <chkReEncodeAudio>Re-codificar</chkReEncodeAudio>      
     </Section>                
   </Form>                                                              
