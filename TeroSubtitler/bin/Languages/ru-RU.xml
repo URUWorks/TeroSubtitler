@@ -486,17 +486,28 @@
   </Form>              
   <Form Name="frmGenerateVideo" Caption="Generate video with hardcoded subtitles">
     <Section Name="TLabel">
+      <lblFormat>Формат</lblFormat>
       <lblFont>Шрифт</lblFont>
       <lblFontSize>Размер</lblFontSize>
       <lblFontColor>Цвет</lblFontColor>
       <lblVideoRes>Разрешение видео</lblVideoRes>          
-      <lblVideoEncoding>Кодирование видео</lblVideoEncoding>
-      <lblAudioEncoding>Кодирование аудио</lblAudioEncoding>
+      <lblVideoCodec>Кодек</lblVideoCodec>
+      <lblVideoSubtype>Тип видео</lblVideoSubtype>
+      <lblCutFrom>От</lblCutFrom>
+      <lblCutTo>К</lblCutTo>            
+      <lblAudioCodec>Аудиокодек</lblAudioCodec>
+      <lblAudioChannels>Аудиоканалы</lblAudioChannels>
       <lblSampleRate>Частота дискретизации</lblSampleRate>
       <lblBitrate>Битрейт</lblBitrate>
     </Section>
+    <Section Name="TUWRadioButton">
+      <rdoSubtitle>Субтитры</rdoSubtitle>
+      <rdoVideo>Видео</rdoVideo>
+      <rdoAudio>Аудио</rdoAudio>      
+    </Section>    
     <Section Name="TUWCheckBox">
       <chkBox>Box</chkBox>
+      <chkCut>Вырезать</chkCut>      
       <chkReEncodeAudio>Перекодировать аудио</chkReEncodeAudio>
     </Section>                
   </Form>                              
@@ -795,6 +806,9 @@
     <ShortCutInUse>Горячая клавиша используется тут: '%s'.</ShortCutInUse>
     <AdditionalParams>Дополнительные параметры:</AdditionalParams>    
     <Line>Строка:</Line>
+    <FileSavedSuccessfully>Файл сохранён успешно.</FileSavedSuccessfully>
+    <VideoGenerationFailed>Сбой генерации видео.</VideoGenerationFailed>    
+    <OpenContainingFolder>Открыть соответствующую папку</OpenContainingFolder>
   </CommonStrings>
   <CommonControls> 
     <rbnAllTheSubtitles>Все субтитры</rbnAllTheSubtitles>
