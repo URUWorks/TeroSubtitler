@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
   laz.VirtualTrees, LCLIntf, LCLType, Spin, Menus, ComCtrls, UWCheckBox,
-  UWLayout, UWRadioButton;
+  UWLayout, UWRadioButton, UWTimeEdit;
 
 type
 
@@ -44,6 +44,8 @@ type
     cboAudioChannels: TComboBox;
     cboVideoCodec: TComboBox;
     cboVideoSubtype: TComboBox;
+    lblCutFrom: TLabel;
+    lblCutTo: TLabel;
     lblFont: TLabel;
     lblAudioEncoding: TLabel;
     lblFormat: TLabel;
@@ -70,12 +72,16 @@ type
     rdoSubtitle: TUWRadioButton;
     rdoVideo: TUWRadioButton;
     rdoAudio: TUWRadioButton;
+    chkCut: TUWCheckBox;
+    tedCutFrom: TUWTimeEdit;
+    tedCutTo: TUWTimeEdit;
     VST: TLazVirtualStringTree;
     procedure btnGenerateClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure btnResClick(Sender: TObject);
     procedure cboFormatSelect(Sender: TObject);
     procedure cboVideoCodecSelect(Sender: TObject);
+    procedure chkCutClick(Sender: TObject);
     procedure chkReEncodeAudioClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -83,6 +89,7 @@ type
     procedure rdoAudioChange(Sender: TObject);
     procedure rdoSubtitleChange(Sender: TObject);
     procedure rdoVideoChange(Sender: TObject);
+    procedure tedCutFromTimeChange(Sender: TObject; const NewTime: Cardinal);
     procedure VSTAdvancedHeaderDraw(Sender: TVTHeader;
       var PaintInfo: THeaderPaintInfo; const Elements: THeaderPaintElements);
     procedure VSTDrawText(Sender: TBaseVirtualTree; TargetCanvas: TCanvas;
@@ -138,6 +145,11 @@ begin
   //VSTAddColumn(VST, GetString(FAppStringList, 'Subtitle'), 150);
   //FAppStringList.Free;
 
+  tedCutFrom.FPS := GetFPS;
+  tedCutTo.FPS := tedCutFrom.FPS;
+  tedCutFrom.TimeMode := GetTimeEditMode;
+  tedCutTo.TimeMode := tedCutFrom.TimeMode;
+
   cboFont.Items.Assign(Screen.Fonts);
   i := cboFont.Items.IndexOf('Verdana');
   if i >= 0 then
@@ -158,11 +170,11 @@ begin
   spnWidth.Value  := frmMain.MPV.GetVideoWidth;
   spnHeight.Value := frmMain.MPV.GetVideoHeight;
 
+  FillComboWithFormats(cboFormat);
   FillComboWithAudioEncoders(cboAudioCodec);
   FillComboWithAudioChannels(cboAudioChannels);
   FillComboWithAudioSampleRate(cboSampleRate);
   FillComboWithAudioBitRate(cboBitRate);
-  FillComboWithFormats(cboFormat);
 
   CancelGeneration := False;
 
@@ -174,10 +186,10 @@ end;
 procedure TfrmGenerateVideo.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
-  SaveFormSettings(Self, Format('%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d',
-    [cboFont.ItemIndex, spnFontSize.Value, cbnSub.ButtonColor, cbnBox.ButtonColor,
-    chkBox.Checked.ToInteger, cboVideoCodec.ItemIndex, chkReEncodeAudio.Checked.ToInteger,
-    cboAudioCodec.ItemIndex, cboAudioChannels.ItemIndex, cboSampleRate.ItemIndex, cboBitRate.ItemIndex]));
+  SaveFormSettings(Self, Format('%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d',
+    [cboFormat.ItemIndex, cboFont.ItemIndex, spnFontSize.Value, cbnSub.ButtonColor, cbnBox.ButtonColor,
+    chkBox.Checked.ToInteger, cboVideoCodec.ItemIndex, cboVideoSubtype.ItemIndex, chkCut.Checked.ToInteger,
+    chkReEncodeAudio.Checked.ToInteger, cboAudioCodec.ItemIndex, cboAudioChannels.ItemIndex, cboSampleRate.ItemIndex, cboBitRate.ItemIndex]));
   CloseAction := caFree;
   frmGenerateVideo := NIL;
 end;
@@ -194,23 +206,33 @@ begin
   if not s.IsEmpty then
   begin
     AParamArray := s.Split(',');
-    if Length(AParamArray) = 11 then
+    if Length(AParamArray) = 14 then
     begin
-      cboFont.ItemIndex := AParamArray[0].ToInteger;
-      spnFontSize.Value := AParamArray[1].ToInteger;
-      cbnSub.ButtonColor := AParamArray[2].ToInteger;
-      cbnBox.ButtonColor := AParamArray[3].ToInteger;
-      chkBox.Checked := AParamArray[4].ToBoolean;
-      cboVideoCodec.ItemIndex := AParamArray[5].ToInteger;
-      chkReEncodeAudio.Checked := AParamArray[6].ToBoolean;
-      cboAudioCodec.ItemIndex := AParamArray[7].ToInteger;
-      cboAudioChannels.ItemIndex := AParamArray[8].ToInteger;
-      cboSampleRate.ItemIndex := AParamArray[9].ToInteger;
-      cboBitRate.ItemIndex := AParamArray[10].ToInteger;
+      cboFormat.ItemIndex := AParamArray[0].ToInteger;
+      cboFormatSelect(NIL);
+      cboFont.ItemIndex := AParamArray[1].ToInteger;
+      spnFontSize.Value := AParamArray[2].ToInteger;
+      cbnSub.ButtonColor := AParamArray[3].ToInteger;
+      cbnBox.ButtonColor := AParamArray[4].ToInteger;
+      chkBox.Checked := AParamArray[5].ToBoolean;
+      cboVideoCodec.ItemIndex := AParamArray[6].ToInteger;
+      cboVideoSubtype.ItemIndex := AParamArray[7].ToInteger;
+      //chkCut.Checked := AParamArray[8].ToBoolean;
+      chkCutClick(NIL);
+      chkReEncodeAudio.Checked := AParamArray[9].ToBoolean;
+      chkReEncodeAudioClick(NIL);
+      cboAudioCodec.ItemIndex := AParamArray[10].ToInteger;
+      cboAudioChannels.ItemIndex := AParamArray[11].ToInteger;
+      cboSampleRate.ItemIndex := AParamArray[12].ToInteger;
+      cboBitRate.ItemIndex := AParamArray[13].ToInteger;
     end;
+  end
+  else
+  begin
+    cboFormatSelect(NIL);
+    chkCutClick(NIL);
+    chkReEncodeAudioClick(NIL);
   end;
-  chkReEncodeAudioClick(NIL);
-  cboFormatSelect(NIL);
 end;
 
 // -----------------------------------------------------------------------------
@@ -232,6 +254,15 @@ end;
 procedure TfrmGenerateVideo.rdoVideoChange(Sender: TObject);
 begin
   SetLayoutPage(lyoVideo);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmGenerateVideo.tedCutFromTimeChange(Sender: TObject;
+  const NewTime: Cardinal);
+begin
+  if chkCut.Checked then
+    frmMain.MPV.SetMediaPosInMs(NewTime);
 end;
 
 // -----------------------------------------------------------------------------
@@ -338,7 +369,7 @@ begin
     if (C is TUWLayout) then
       if TUWLayout(C) = APage then
       begin
-        TUWLayout(C).Left := 120;
+        TUWLayout(C).Left := 130;
         TUWLayout(C).Top  := 64;
         TUWLayout(C).Show;
       end
@@ -373,6 +404,16 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmGenerateVideo.chkCutClick(Sender: TObject);
+begin
+  tedCutFrom.Enabled := chkCut.Checked;
+  tedCutTo.Enabled   := chkCut.Checked;
+  lblCutFrom.Enabled := chkCut.Checked;
+  lblCutTo.Enabled   := chkCut.Checked;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmGenerateVideo.SetControlsEnabled(const AValue: Boolean);
 begin
   lblTimeElapsed.Caption := '';
@@ -394,6 +435,9 @@ begin
   btnRes.Enabled := AValue;
   cboVideoCodec.Enabled := AValue;
   cboVideoSubtype.Enabled := AValue;
+  chkCut.Enabled := AValue;
+  tedCutFrom.Enabled := False;
+  tedCutTo.Enabled := False;
   chkReEncodeAudio.Enabled := AValue;
   cboAudioCodec.Enabled := False;
   cboAudioChannels.Enabled := False;
@@ -402,6 +446,7 @@ begin
 
   if AValue then
   begin
+    chkCutClick(NIL);
     chkReEncodeAudioClick(NIL);
     cboVideoCodecSelect(NIL);
   end;
@@ -461,6 +506,14 @@ procedure TfrmGenerateVideo.btnGenerateClick(Sender: TObject);
     end;
   end;
 
+  function GetCutValue(const TED: TUWTimeEdit): Integer;
+  begin
+    if chkCut.Checked then
+      Result := TED.Value
+    else
+      Result := -1;
+  end;
+
 var
   sub, aEnc, style, ext: String;
 begin
@@ -486,7 +539,6 @@ begin
 
     if Execute then
     begin
-      writeln(ExtractFileExt(FileName));
       if ExtractFileExt(FileName) <> ext then
         FOutputFileName := ChangeFileExt(FileName, ext)
       else
@@ -516,7 +568,9 @@ begin
 
     if GenerateVideoWithSubtitle(frmMain.MPV.FileName, sub, FOutputFileName,
       spnWidth.Value, spnHeight.Value,
-      GetVideoCodec, cboVideoSubtype.ItemIndex, style,
+      GetVideoCodec, cboVideoSubtype.ItemIndex,
+      GetCutValue(tedCutFrom), GetCutValue(tedCutTo),
+      style,
       aEnc, TFFAudioChannels[cboAudioChannels.ItemIndex].Value,
       TFFAudioSampleRate[cboSampleRate.ItemIndex].Value,
       TFFAudioBitRate[cboBitRate.ItemIndex].Value,

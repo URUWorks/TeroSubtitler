@@ -70,11 +70,12 @@ const
       (Name: 'Apple ProRes'; Value: 'prores_ks')
     );
 
-  TFFAudioEncoders: array[0..2] of TFFmpegEncoderInfoS =
+  TFFAudioEncoders: array[0..3] of TFFmpegEncoderInfoS =
     (
       (Name: 'AAC'; Value: 'aac'),
       (Name: 'FLAC'; Value: 'flac'),
-      (Name: 'ALAC'; Value: 'alac')
+      (Name: 'ALAC'; Value: 'alac'),
+      (Name: 'Opus'; Value: 'libopus')
     );
 
   TFFAudioSampleRate: array[0..4] of TFFmpegEncoderInfoI =
@@ -126,13 +127,14 @@ procedure FillComboWithAudioSampleRate(const Combo: TComboBox);
 procedure FillComboWithAudioBitRate(const Combo: TComboBox);
 procedure FillComboWithFormats(const Combo: TComboBox);
 
-function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: Integer = 128; const ACB: TUWProcessCB = NIL): Boolean;
+function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; ACutFrom: Integer = -1; ACutTo: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: Integer = 128; const ACB: TUWProcessCB = NIL): Boolean;
 
 // -----------------------------------------------------------------------------
 
 implementation
 
-uses procTypes;
+uses
+  procTypes, procWorkspace, UWSystem.TimeUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -264,7 +266,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: Integer = 128; const ACB: TUWProcessCB = NIL): Boolean;
+function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; ACutFrom: Integer = -1; ACutTo: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: Integer = 128; const ACB: TUWProcessCB = NIL): Boolean;
 var
   VideoSettings,
   AudioSettings, s : String;
@@ -282,6 +284,9 @@ begin
     VideoSettings += ' -tag:v hvc1'
   else if (AVideoCodec = 'prores_ks') and (AVideoProfile <> -1) then
     VideoSettings += ' -profile:v ' + AVideoProfile.ToString;
+
+  if (ACutFrom > -1) and (ACutTo > -1) then
+    VideoSettings += Format(' -ss %s -to %s', [TimeToString(ACutFrom, DefTimeFormat, GetFPS), TimeToString(ACutTo, DefTimeFormat, GetFPS)]);
 
   if AAudioCodec.IsEmpty then
     AudioSettings := ''
