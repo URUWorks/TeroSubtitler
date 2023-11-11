@@ -486,20 +486,26 @@
   </Form>
   <Form Name="frmGenerateVideo" Caption="Generate video with hardcoded subtitles">
     <Section Name="TLabel">
+      <lblFormat>Format</lblFormat>
       <lblFont>Font</lblFont>
       <lblFontSize>Size</lblFontSize>
       <lblFontColor>Color</lblFontColor>
-      <lblVideoRes>Video resolution</lblVideoRes>                
-      <lblVideoEncoding>Video encoding</lblVideoEncoding>
-      <lblVideoPreset>Preset</lblVideoPreset>
-      <lblAudioEncoding>Audio encoding</lblAudioEncoding>
+      <lblVideoRes>Resolution</lblVideoRes>                
+      <lblVideoCodec>Codec</lblVideoCodec>
+      <lblVideoSubtype>Subtype</lblVideoSubtype>
+      <lblAudioCodec>Codec</lblAudioCodec>
       <lblAudioChannels>Channels</lblAudioChannels>
       <lblSampleRate>Sample rate</lblSampleRate>
       <lblBitrate>Bit rate</lblBitrate>
     </Section>
+    <Section Name="TUWRadioButton">
+      <rdoSubtitle>Subtitle</rdoSubtitle>
+      <rdoVideo>Video</rdoVideo>
+      <rdoAudio>Audio</rdoAudio>      
+    </Section>    
     <Section Name="TUWCheckBox">
       <chkBox>Box</chkBox>
-      <chkReEncodeAudio>Re-encode audio</chkReEncodeAudio>
+      <chkReEncodeAudio>Re-encode</chkReEncodeAudio>
     </Section>                
   </Form>                              
   <Form Name="frmTranslationMemory" Caption="Translation memory"/>

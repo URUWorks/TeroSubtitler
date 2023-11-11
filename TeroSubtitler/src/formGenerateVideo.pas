@@ -23,7 +23,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  laz.VirtualTrees, LCLIntf, LCLType, Spin, Menus, ComCtrls, UWCheckBox;
+  laz.VirtualTrees, LCLIntf, LCLType, Spin, Menus, ComCtrls, UWCheckBox,
+  UWLayout, UWRadioButton;
 
 type
 
@@ -36,22 +37,24 @@ type
     cbnSub: TColorButton;
     cbnBox: TColorButton;
     cboFont: TComboBox;
-    cboAudioEncoding: TComboBox;
+    cboAudioCodec: TComboBox;
+    cboFormat: TComboBox;
     cboSampleRate: TComboBox;
     cboBitRate: TComboBox;
     cboAudioChannels: TComboBox;
-    cboVideoEncoding: TComboBox;
-    cboVideoPreset: TComboBox;
+    cboVideoCodec: TComboBox;
+    cboVideoSubtype: TComboBox;
     lblFont: TLabel;
     lblAudioEncoding: TLabel;
+    lblFormat: TLabel;
     lblSampleRate: TLabel;
     lblBitrate: TLabel;
     lblAudioChannels: TLabel;
     lblTimeElapsed: TLabel;
-    lblVideoEncoding: TLabel;
+    lblVideoCodec: TLabel;
     lblFontSize: TLabel;
     lblFontColor: TLabel;
-    lblVideoPreset: TLabel;
+    lblVideoSubtype: TLabel;
     lblVideoRes: TLabel;
     lblX: TLabel;
     popRes: TPopupMenu;
@@ -61,15 +64,25 @@ type
     spnWidth: TSpinEdit;
     chkBox: TUWCheckBox;
     chkReEncodeAudio: TUWCheckBox;
+    lyoSubtitles: TUWLayout;
+    lyoVideo: TUWLayout;
+    lyoAudio: TUWLayout;
+    rdoSubtitle: TUWRadioButton;
+    rdoVideo: TUWRadioButton;
+    rdoAudio: TUWRadioButton;
     VST: TLazVirtualStringTree;
     procedure btnGenerateClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure btnResClick(Sender: TObject);
-    procedure cboVideoEncodingSelect(Sender: TObject);
+    procedure cboFormatSelect(Sender: TObject);
+    procedure cboVideoCodecSelect(Sender: TObject);
     procedure chkReEncodeAudioClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure rdoAudioChange(Sender: TObject);
+    procedure rdoSubtitleChange(Sender: TObject);
+    procedure rdoVideoChange(Sender: TObject);
     procedure VSTAdvancedHeaderDraw(Sender: TVTHeader;
       var PaintInfo: THeaderPaintInfo; const Elements: THeaderPaintElements);
     procedure VSTDrawText(Sender: TBaseVirtualTree; TargetCanvas: TCanvas;
@@ -83,6 +96,7 @@ type
   private
     FOutputFileName: String;
     procedure ResItemClick(Sender: TObject);
+    procedure SetLayoutPage(const APage: TUWLayout);
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure OpenFolderClick(Sender: TObject);
     function SuggestNewVideoFileName: String;
@@ -144,13 +158,15 @@ begin
   spnWidth.Value  := frmMain.MPV.GetVideoWidth;
   spnHeight.Value := frmMain.MPV.GetVideoHeight;
 
-  FillComboWithVideoEncoders(cboVideoEncoding);
-  FillComboWithAudioEncoders(cboAudioEncoding);
+  FillComboWithAudioEncoders(cboAudioCodec);
   FillComboWithAudioChannels(cboAudioChannels);
   FillComboWithAudioSampleRate(cboSampleRate);
   FillComboWithAudioBitRate(cboBitRate);
+  FillComboWithFormats(cboFormat);
 
   CancelGeneration := False;
+
+  rdoSubtitle.Checked := True;
 end;
 
 // -----------------------------------------------------------------------------
@@ -160,8 +176,8 @@ procedure TfrmGenerateVideo.FormClose(Sender: TObject;
 begin
   SaveFormSettings(Self, Format('%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d',
     [cboFont.ItemIndex, spnFontSize.Value, cbnSub.ButtonColor, cbnBox.ButtonColor,
-    chkBox.Checked.ToInteger, cboVideoEncoding.ItemIndex, chkReEncodeAudio.Checked.ToInteger,
-    cboAudioEncoding.ItemIndex, cboAudioChannels.ItemIndex, cboSampleRate.ItemIndex, cboBitRate.ItemIndex]));
+    chkBox.Checked.ToInteger, cboVideoCodec.ItemIndex, chkReEncodeAudio.Checked.ToInteger,
+    cboAudioCodec.ItemIndex, cboAudioChannels.ItemIndex, cboSampleRate.ItemIndex, cboBitRate.ItemIndex]));
   CloseAction := caFree;
   frmGenerateVideo := NIL;
 end;
@@ -185,16 +201,37 @@ begin
       cbnSub.ButtonColor := AParamArray[2].ToInteger;
       cbnBox.ButtonColor := AParamArray[3].ToInteger;
       chkBox.Checked := AParamArray[4].ToBoolean;
-      cboVideoEncoding.ItemIndex := AParamArray[5].ToInteger;
+      cboVideoCodec.ItemIndex := AParamArray[5].ToInteger;
       chkReEncodeAudio.Checked := AParamArray[6].ToBoolean;
-      cboAudioEncoding.ItemIndex := AParamArray[7].ToInteger;
+      cboAudioCodec.ItemIndex := AParamArray[7].ToInteger;
       cboAudioChannels.ItemIndex := AParamArray[8].ToInteger;
       cboSampleRate.ItemIndex := AParamArray[9].ToInteger;
       cboBitRate.ItemIndex := AParamArray[10].ToInteger;
     end;
   end;
   chkReEncodeAudioClick(NIL);
-  cboVideoEncodingSelect(NIL);
+  cboFormatSelect(NIL);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmGenerateVideo.rdoAudioChange(Sender: TObject);
+begin
+  SetLayoutPage(lyoAudio);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmGenerateVideo.rdoSubtitleChange(Sender: TObject);
+begin
+  SetLayoutPage(lyoSubtitles);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmGenerateVideo.rdoVideoChange(Sender: TObject);
+begin
+  SetLayoutPage(lyoVideo);
 end;
 
 // -----------------------------------------------------------------------------
@@ -216,9 +253,17 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmGenerateVideo.cboFormatSelect(Sender: TObject);
+begin
+  FillComboWithVideoEncoders(cboVideoCodec, cboFormat.ItemIndex);
+  cboVideoCodecSelect(NIL);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmGenerateVideo.chkReEncodeAudioClick(Sender: TObject);
 begin
-  cboAudioEncoding.Enabled := chkReEncodeAudio.Checked;
+  cboAudioCodec.Enabled := chkReEncodeAudio.Checked;
   cboAudioChannels.Enabled := chkReEncodeAudio.Checked;
   cboSampleRate.Enabled    := chkReEncodeAudio.Checked;
   cboBitRate.Enabled       := chkReEncodeAudio.Checked;
@@ -285,6 +330,24 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmGenerateVideo.SetLayoutPage(const APage: TUWLayout);
+var
+  C: TComponent;
+begin
+  for C in Self do
+    if (C is TUWLayout) then
+      if TUWLayout(C) = APage then
+      begin
+        TUWLayout(C).Left := 120;
+        TUWLayout(C).Top  := 64;
+        TUWLayout(C).Show;
+      end
+      else
+        TUWLayout(C).Hide;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmGenerateVideo.ResItemClick(Sender: TObject);
 begin
   with TResolutionList[TMenuItem(Sender).Tag] do
@@ -296,13 +359,16 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmGenerateVideo.cboVideoEncodingSelect(Sender: TObject);
+procedure TfrmGenerateVideo.cboVideoCodecSelect(Sender: TObject);
+var
+  idx: Integer;
 begin
-  cboVideoPreset.Enabled := cboVideoEncoding.ItemIndex = High(TFFVideoEncoders);
-  if cboVideoPreset.Enabled then
-    FillComboWithVideoProfileProRes(cboVideoPreset)
-  else
-    cboVideoPreset.Clear;
+  idx := cboVideoCodec.ItemIndex;
+
+  if cboFormat.ItemIndex > 1 then
+    idx += cboFormat.ItemIndex;
+
+  FillComboWithVideoSubtypes(cboVideoSubtype, idx);
 end;
 
 // -----------------------------------------------------------------------------
@@ -314,6 +380,10 @@ begin
   prbProgress.Visible := not AValue;
   btnGenerate.Enabled := AValue;
 
+  cboFormat.Enabled := AValue;
+  rdoSubtitle.Enabled := AValue;
+  rdoVideo.Enabled := AValue;
+  rdoAudio.Enabled := AValue;
   cboFont.Enabled := AValue;
   spnFontSize.Enabled := AValue;
   chkBox.Enabled := AValue;
@@ -322,17 +392,18 @@ begin
   spnWidth.Enabled := AValue;
   spnHeight.Enabled := AValue;
   btnRes.Enabled := AValue;
-  cboVideoEncoding.Enabled := AValue;
-  cboVideoPreset.Enabled := False;
+  cboVideoCodec.Enabled := AValue;
+  cboVideoSubtype.Enabled := AValue;
   chkReEncodeAudio.Enabled := AValue;
-  cboAudioEncoding.Enabled := False;
+  cboAudioCodec.Enabled := False;
   cboAudioChannels.Enabled := False;
   cboSampleRate.Enabled := False;
   cboBitRate.Enabled := False;
+
   if AValue then
   begin
     chkReEncodeAudioClick(NIL);
-    cboVideoEncodingSelect(NIL);
+    cboVideoCodecSelect(NIL);
   end;
 
   if AValue then
@@ -360,18 +431,36 @@ function TfrmGenerateVideo.SuggestNewVideoFileName: String;
 begin
   Result := ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '');
 
-  case cboVideoEncoding.ItemIndex of
-    3..5 : Result += '_x265';
-    6    : Result += '_vp9';
-    7    : Result += '_ProRes';
-  else
-    Result += '_x264';
+  case cboFormat.ItemIndex of
+    0, 1 :  case cboVideoCodec.ItemIndex of
+              1 : Result += '_x265';
+              2 : Result += '_vp9';
+              else
+                Result += '_x264';
+              end;
+    2: Result += '_vp9';
+    3: Result += '_ProRes';
   end;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmGenerateVideo.btnGenerateClick(Sender: TObject);
+
+  function GetVideoCodec: String;
+  begin
+    case cboFormat.ItemIndex of
+      0, 1 :  case cboVideoCodec.ItemIndex of
+                1 : Result := TFFVideoH265Subtype[cboVideoSubtype.ItemIndex].Value;
+                2 : Result := TFFVideoVP9Subtype[cboVideoSubtype.ItemIndex].Value;
+                else
+                  Result := TFFVideoH264Subtype[cboVideoSubtype.ItemIndex].Value;
+                end;
+      2: Result := TFFVideoVP9Subtype[cboVideoSubtype.ItemIndex].Value;
+      3: Result := TFFVideoProResSubtype[cboVideoSubtype.ItemIndex].Value;
+    end;
+  end;
+
 var
   sub, aEnc, style, ext: String;
 begin
@@ -389,23 +478,16 @@ begin
   try
     Title := GetCommonString('SaveFile');
 
-    if cboVideoEncoding.ItemIndex <> 7 then
-    begin
-      Filter := 'MP4 (*.mp4)|*.mp4';
-      ext := '.mp4';
-    end
-    else
-    begin
-      Filter := 'MOV (*.mov)|*.mov';
-      ext := '.mov';
-    end;
+    Filter := Format('%s (*%s)|*%s', [TFFFormats[cboFormat.ItemIndex].Name, TFFFormats[cboFormat.ItemIndex].Value, TFFFormats[cboFormat.ItemIndex].Value]);
+    ext := TFFFormats[cboFormat.ItemIndex].Value;
 
     Options  := [ofOverwritePrompt, ofEnableSizing];
-    FileName := SuggestNewVideoFileName;
+    FileName := ChangeFileExt(SuggestNewVideoFileName, ext);
 
     if Execute then
     begin
-      if ExtractFileExt(FOutputFileName) = '' then
+      writeln(ExtractFileExt(FileName));
+      if ExtractFileExt(FileName) <> ext then
         FOutputFileName := ChangeFileExt(FileName, ext)
       else
         FOutputFileName := FileName;
@@ -422,7 +504,7 @@ begin
   if Subtitles.SaveToFile(sub, Workspace.FPS.OutputFPS, TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID), sfAdvancedSubStationAlpha, smText) then
   begin
     if chkReEncodeAudio.Checked then
-      aEnc := TFFAudioEncoders[cboAudioEncoding.ItemIndex].Codec
+      aEnc := TFFAudioEncoders[cboAudioCodec.ItemIndex].Value
     else
       aEnc := '';
 
@@ -434,7 +516,7 @@ begin
 
     if GenerateVideoWithSubtitle(frmMain.MPV.FileName, sub, FOutputFileName,
       spnWidth.Value, spnHeight.Value,
-      TFFVideoEncoders[cboVideoEncoding.ItemIndex].Codec, cboVideoPreset.ItemIndex, style,
+      GetVideoCodec, cboVideoSubtype.ItemIndex, style,
       aEnc, TFFAudioChannels[cboAudioChannels.ItemIndex].Value,
       TFFAudioSampleRate[cboSampleRate.ItemIndex].Value,
       TFFAudioBitRate[cboBitRate.ItemIndex].Value,

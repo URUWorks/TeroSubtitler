@@ -486,20 +486,26 @@
   </Form>
   <Form Name="frmGenerateVideo" Caption="Generar vídeo con subtítulos incrustados...">
     <Section Name="TLabel">
+      <lblFormat>Formato</lblFormat>
       <lblFont>Fuente</lblFont>
       <lblFontSize>Tamaño</lblFontSize>
       <lblFontColor>Color</lblFontColor>
-      <lblVideoRes>Resolución de video</lblVideoRes>
-      <lblVideoEncoding>Codificación de vídeo</lblVideoEncoding>
-      <lblVideoPreset>Preestablecido</lblVideoPreset>
-      <lblAudioEncoding>Codificación de audio</lblAudioEncoding>
+      <lblVideoRes>Resolución</lblVideoRes>
+      <lblVideoCodec>Codificación</lblVideoCodec>
+      <lblVideoSubtype>Subtipo</lblVideoSubtype>
+      <lblAudioCodec>Codificación</lblAudioCodec>
       <lblAudioChannels>Canales</lblAudioChannels>
       <lblSampleRate>Frecuencia de muestreo</lblSampleRate>
       <lblBitrate>Tasa de bits</lblBitrate>            
     </Section>
+    <Section Name="TUWRadioButton">
+      <rdoSubtitle>Subtítulo</rdoSubtitle>
+      <rdoVideo>Video</rdoVideo>
+      <rdoAudio>Audio</rdoAudio>      
+    </Section>        
     <Section Name="TUWCheckBox">
       <chkBox>Caja</chkBox>
-      <chkReEncodeAudio>Recodificar audio</chkReEncodeAudio>      
+      <chkReEncodeAudio>Re-codificar</chkReEncodeAudio>      
     </Section>                
   </Form>                                                              
   <Form Name="frmTranslationMemory" Caption="Memoria de traducción"/>
