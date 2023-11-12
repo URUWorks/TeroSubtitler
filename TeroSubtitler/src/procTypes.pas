@@ -158,8 +158,8 @@ const
   URL_FFMPEG = 'https://github.com/URUWorks/additional-files/raw/main/ffmpeg/ffmpeg_macos64.zip';
   URL_LIBMPV = 'https://github.com/URUWorks/additional-files/raw/main/libmpv/libmpv_macos.zip';
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos.zip';
-  URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_%cpu.zip';
-  URL_FASTERWHISPER     = 'https://github.com/URUWorks/additional-files/raw/main/whisper/fasterwhisper_%cpu.zip';
+  URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_macos_%cpu.zip';
+  URL_FASTERWHISPER     = 'https://github.com/URUWorks/additional-files/raw/main/whisper/fasterwhisper_macos_%cpu.zip';
   //URL_FASTERWHISPERCUDA = '';
 
   FFMPEG_EXE           = 'ffmpeg';
