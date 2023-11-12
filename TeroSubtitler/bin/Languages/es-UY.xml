@@ -501,7 +501,7 @@
       <lblBitrate>Tasa de bits</lblBitrate>            
     </Section>
     <Section Name="TUWRadioButton">
-      <rdoSubtitle>Subtítulo</rdoSubtitle>
+      <rdoSubtitle>Subtítulos</rdoSubtitle>
       <rdoVideo>Video</rdoVideo>
       <rdoAudio>Audio</rdoAudio>      
     </Section>        
