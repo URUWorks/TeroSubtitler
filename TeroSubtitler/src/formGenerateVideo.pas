@@ -171,7 +171,6 @@ begin
   spnHeight.Value := frmMain.MPV.GetVideoHeight;
 
   FillComboWithFormats(cboFormat);
-  FillComboWithAudioEncoders(cboAudioCodec);
   FillComboWithAudioChannels(cboAudioChannels);
   FillComboWithAudioSampleRate(cboSampleRate);
   FillComboWithAudioBitRate(cboBitRate);
@@ -285,9 +284,15 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmGenerateVideo.cboFormatSelect(Sender: TObject);
+var
+  ProRes: Boolean;
 begin
   FillComboWithVideoEncoders(cboVideoCodec, cboFormat.ItemIndex);
   cboVideoCodecSelect(NIL);
+  ProRes := cboFormat.ItemIndex = High(TFFFormats);
+  FillComboWithAudioEncoders(cboAudioCodec, ProRes);
+  lblBitrate.Visible := not ProRes;
+  cboBitRate.Visible := lblBitrate.Visible;
 end;
 
 // -----------------------------------------------------------------------------
@@ -556,7 +561,12 @@ begin
   if Subtitles.SaveToFile(sub, Workspace.FPS.OutputFPS, TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID), sfAdvancedSubStationAlpha, smText) then
   begin
     if chkReEncodeAudio.Checked then
-      aEnc := TFFAudioEncoders[cboAudioCodec.ItemIndex].Value
+    begin
+      if cboFormat.ItemIndex = High(TFFFormats) then
+        aEnc := TFFAudioProResEncoders[cboAudioCodec.ItemIndex].Value
+      else
+        aEnc := TFFAudioEncoders[cboAudioCodec.ItemIndex].Value;
+    end
     else
       aEnc := '';
 
@@ -573,7 +583,7 @@ begin
       style,
       aEnc, TFFAudioChannels[cboAudioChannels.ItemIndex].Value,
       TFFAudioSampleRate[cboSampleRate.ItemIndex].Value,
-      TFFAudioBitRate[cboBitRate.ItemIndex].Value,
+      TFFAudioBitRate[cboBitRate.ItemIndex],
       @ProcessCB) then
         ShowMessageDialog(GetCommonString('FileSavedSuccessfully'), '', GetCommonString('OpenContainingFolder'), @OpenFolderClick)
       else
