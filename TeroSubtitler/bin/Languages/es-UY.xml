@@ -507,7 +507,8 @@
     <Section Name="TUWRadioButton">
       <rdoSubtitle>Subtítulos</rdoSubtitle>
       <rdoVideo>Video</rdoVideo>
-      <rdoAudio>Audio</rdoAudio>      
+      <rdoAudio>Audio</rdoAudio>
+      <rdoOthers>Otros</rdoOthers>      
     </Section>        
     <Section Name="TUWCheckBox">
       <chkBox>Caja</chkBox>      
