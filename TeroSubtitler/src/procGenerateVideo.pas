@@ -22,7 +22,7 @@ unit procGenerateVideo;
 interface
 
 uses
-  Classes, StdCtrls, SysUtils, StrUtils, FileUtil, UWSystem.Process;
+  Classes, StdCtrls, SysUtils, StrUtils, FileUtil, UWSystem.ThreadProcess;
 
 type
 
@@ -83,7 +83,7 @@ const
       (Name: 'PCM 16-bit'; Value: 'pcm_s16le'),
       (Name: 'PCM 24-bit'; Value: 'pcm_s24le'),
       (Name: 'PCM 32-bit'; Value: 'pcm_s32le'),
-      (Name: 'FAAC'; Value: 'libfaac')
+      (Name: 'AAC'; Value: 'aac')
     );
 
   TFFAudioSampleRate: array[0..4] of TFFmpegEncoderInfoI =
@@ -131,7 +131,7 @@ procedure FillComboWithAudioSampleRate(const Combo: TComboBox);
 procedure FillComboWithAudioBitRate(const Combo: TComboBox);
 procedure FillComboWithFormats(const Combo: TComboBox);
 
-function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; ACutFrom: Integer = -1; ACutTo: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: String = ''; const ACB: TUWProcessCB = NIL): Boolean;
+function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; AExtra: String = ''; ACutFrom: Integer = -1; ACutTo: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: String = ''; const ACB: TOnDataReceived = NIL): Boolean;
 
 // -----------------------------------------------------------------------------
 
@@ -273,7 +273,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; ACutFrom: Integer = -1; ACutTo: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: String = ''; const ACB: TUWProcessCB = NIL): Boolean;
+function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; AExtra: String = ''; ACutFrom: Integer = -1; ACutTo: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: String = ''; const ACB: TOnDataReceived = NIL): Boolean;
 var
   VideoSettings,
   AudioSettings, s : String;
@@ -320,10 +320,10 @@ begin
 
     for i := 0 to High(AParamArray) do
       AParamArray[i] := StringsReplace(AParamArray[i],
-        ['%input', '%subtitle', '%output', '%%'],
-        [AVideoFileName, ASubtitleFileName, AOutputVideoFileName, ' '], [rfReplaceAll]);
+        ['%input', '%extra', '%subtitle', '%output', '%%'],
+        [AVideoFileName, AExtra, ASubtitleFileName, AOutputVideoFileName, ' '], [rfReplaceAll]);
 
-    ExecuteApp(Tools.FFmpeg, AParamArray, True, True, ACB);
+    ExecuteThreadProcess(Tools.FFmpeg, AParamArray, ACB);
 
     Result := FileExists(AOutputVideoFileName) and (FileSize(AOutputVideoFileName) > 0);
   finally

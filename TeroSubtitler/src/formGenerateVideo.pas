@@ -44,6 +44,12 @@ type
     cboAudioChannels: TComboBox;
     cboVideoCodec: TComboBox;
     cboVideoSubtype: TComboBox;
+    chkDeinterlace: TUWCheckBox;
+    chkCrop: TUWCheckBox;
+    lblCropLeft: TLabel;
+    lblCropTop: TLabel;
+    lblCropWidth: TLabel;
+    lblCropHeight: TLabel;
     lblCutFrom: TLabel;
     lblCutTo: TLabel;
     lblFont: TLabel;
@@ -61,6 +67,11 @@ type
     lblX: TLabel;
     popRes: TPopupMenu;
     prbProgress: TProgressBar;
+    rdoOthers: TUWRadioButton;
+    spnCropLeft: TSpinEdit;
+    spnCropTop: TSpinEdit;
+    spnCropWidth: TSpinEdit;
+    spnCropHeight: TSpinEdit;
     spnFontSize: TSpinEdit;
     spnHeight: TSpinEdit;
     spnWidth: TSpinEdit;
@@ -75,18 +86,21 @@ type
     chkCut: TUWCheckBox;
     tedCutFrom: TUWTimeEdit;
     tedCutTo: TUWTimeEdit;
+    lyoOthers: TUWLayout;
     VST: TLazVirtualStringTree;
     procedure btnGenerateClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure btnResClick(Sender: TObject);
     procedure cboFormatSelect(Sender: TObject);
     procedure cboVideoCodecSelect(Sender: TObject);
+    procedure chkCropClick(Sender: TObject);
     procedure chkCutClick(Sender: TObject);
     procedure chkReEncodeAudioClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure rdoAudioChange(Sender: TObject);
+    procedure rdoOthersChange(Sender: TObject);
     procedure rdoSubtitleChange(Sender: TObject);
     procedure rdoVideoChange(Sender: TObject);
     procedure tedCutFromTimeChange(Sender: TObject; const NewTime: Cardinal);
@@ -187,8 +201,9 @@ procedure TfrmGenerateVideo.FormClose(Sender: TObject;
 begin
   SaveFormSettings(Self, Format('%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d',
     [cboFormat.ItemIndex, cboFont.ItemIndex, spnFontSize.Value, cbnSub.ButtonColor, cbnBox.ButtonColor,
-    chkBox.Checked.ToInteger, cboVideoCodec.ItemIndex, cboVideoSubtype.ItemIndex, chkCut.Checked.ToInteger,
-    chkReEncodeAudio.Checked.ToInteger, cboAudioCodec.ItemIndex, cboAudioChannels.ItemIndex, cboSampleRate.ItemIndex, cboBitRate.ItemIndex]));
+    chkBox.Checked.ToInteger, cboVideoCodec.ItemIndex, cboVideoSubtype.ItemIndex,
+    chkReEncodeAudio.Checked.ToInteger, cboAudioCodec.ItemIndex, cboAudioChannels.ItemIndex, cboSampleRate.ItemIndex, cboBitRate.ItemIndex,
+    chkDeinterlace.Checked.ToInteger]));
   CloseAction := caFree;
   frmGenerateVideo := NIL;
 end;
@@ -216,14 +231,16 @@ begin
       chkBox.Checked := AParamArray[5].ToBoolean;
       cboVideoCodec.ItemIndex := AParamArray[6].ToInteger;
       cboVideoSubtype.ItemIndex := AParamArray[7].ToInteger;
-      //chkCut.Checked := AParamArray[8].ToBoolean;
-      chkCutClick(NIL);
-      chkReEncodeAudio.Checked := AParamArray[9].ToBoolean;
+      chkReEncodeAudio.Checked := AParamArray[8].ToBoolean;
       chkReEncodeAudioClick(NIL);
-      cboAudioCodec.ItemIndex := AParamArray[10].ToInteger;
-      cboAudioChannels.ItemIndex := AParamArray[11].ToInteger;
-      cboSampleRate.ItemIndex := AParamArray[12].ToInteger;
-      cboBitRate.ItemIndex := AParamArray[13].ToInteger;
+      cboAudioCodec.ItemIndex := AParamArray[9].ToInteger;
+      cboAudioChannels.ItemIndex := AParamArray[10].ToInteger;
+      cboSampleRate.ItemIndex := AParamArray[11].ToInteger;
+      cboBitRate.ItemIndex := AParamArray[12].ToInteger;
+      chkDeinterlace.Checked := AParamArray[13].ToBoolean;
+      //chkCut.Checked := AParamArray[14].ToBoolean;
+      chkCutClick(NIL);
+      chkCropClick(NIL);
     end;
   end
   else
@@ -239,6 +256,13 @@ end;
 procedure TfrmGenerateVideo.rdoAudioChange(Sender: TObject);
 begin
   SetLayoutPage(lyoAudio);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmGenerateVideo.rdoOthersChange(Sender: TObject);
+begin
+  SetLayoutPage(lyoOthers);
 end;
 
 // -----------------------------------------------------------------------------
@@ -291,8 +315,8 @@ begin
   cboVideoCodecSelect(NIL);
   ProRes := cboFormat.ItemIndex = High(TFFFormats);
   FillComboWithAudioEncoders(cboAudioCodec, ProRes);
-  lblBitrate.Visible := not ProRes;
-  cboBitRate.Visible := lblBitrate.Visible;
+  //lblBitrate.Visible := not ProRes;
+  //cboBitRate.Visible := lblBitrate.Visible;
 end;
 
 // -----------------------------------------------------------------------------
@@ -409,6 +433,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmGenerateVideo.chkCropClick(Sender: TObject);
+begin
+  lblCropLeft.Enabled   := chkCrop.Checked;
+  lblCropTop.Enabled    := chkCrop.Checked;
+  lblCropWidth.Enabled  := chkCrop.Checked;
+  lblCropHeight.Enabled := chkCrop.Checked;
+  spnCropLeft.Enabled   := chkCrop.Checked;
+  spnCropTop.Enabled    := chkCrop.Checked;
+  spnCropWidth.Enabled  := chkCrop.Checked;
+  spnCropHeight.Enabled := chkCrop.Checked;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmGenerateVideo.chkCutClick(Sender: TObject);
 begin
   tedCutFrom.Enabled := chkCut.Checked;
@@ -440,18 +478,25 @@ begin
   btnRes.Enabled := AValue;
   cboVideoCodec.Enabled := AValue;
   cboVideoSubtype.Enabled := AValue;
-  chkCut.Enabled := AValue;
-  tedCutFrom.Enabled := False;
-  tedCutTo.Enabled := False;
   chkReEncodeAudio.Enabled := AValue;
   cboAudioCodec.Enabled := False;
   cboAudioChannels.Enabled := False;
   cboSampleRate.Enabled := False;
   cboBitRate.Enabled := False;
+  chkDeinterlace.Enabled := AValue;
+  chkCut.Enabled := AValue;
+  tedCutFrom.Enabled := False;
+  tedCutTo.Enabled := False;
+  chkCrop.Enabled := AValue;
+  spnCropLeft.Enabled   := False;
+  spnCropTop.Enabled    := False;
+  spnCropWidth.Enabled  := False;
+  spnCropHeight.Enabled := False;
 
   if AValue then
   begin
     chkCutClick(NIL);
+    chkCropClick(NIL);
     chkReEncodeAudioClick(NIL);
     cboVideoCodecSelect(NIL);
   end;
@@ -462,14 +507,29 @@ begin
     btnClose.Caption := GetCommonString('btnCancel', 'CommonControls');
 end;
 
-procedure ProcessCB(const TimeElapsed: Double; var Cancel: Boolean);
+// -----------------------------------------------------------------------------
+
+procedure ProcessCB(Output: String; var ATerminate: Boolean);
+var
+  x, time : Integer;
 begin
-  frmGenerateVideo.lblTimeElapsed.Caption := TimeToString(Trunc(TimeElapsed)*1000, 'mm:ss');
-  Cancel := CancelGeneration;
+  ATerminate := CancelGeneration;
+  Application.ProcessMessages;
+  // process output received
+  x := Pos('time=', Output);
+  if x > 0 then
+  begin
+    time := StringToTime(Copy(Output, x+5, 8));
+    if (time >= 0) and (frmMain.sbrSeek.Max > 0) then
+    begin
+      x := Round((time / frmMain.sbrSeek.Max) * 100);
+      frmGenerateVideo.prbProgress.Position := x;
+      frmGenerateVideo.lblTimeElapsed.Caption := x.ToString + '%';
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
-
 procedure TfrmGenerateVideo.OpenFolderClick(Sender: TObject);
 begin
   OpenDocument(ExtractFileDir(FOutputFileName));
@@ -520,8 +580,10 @@ procedure TfrmGenerateVideo.btnGenerateClick(Sender: TObject);
   end;
 
 var
-  sub, aEnc, style, ext: String;
+  sub, aEnc, style, extra, ext: String;
 begin
+  prbProgress.Position := 0;
+  lblTimeElapsed.Caption := '';
   FOutputFileName := '';
 
   if not FileExists(Tools.FFmpeg) then
@@ -570,6 +632,14 @@ begin
     else
       aEnc := '';
 
+    if chkDeinterlace.Checked then
+      extra := 'yadif, '
+    else
+      extra := '';
+
+    if chkCrop.Checked then
+      extra += Format('crop=%d:%d:%d:%d, ', [spnCropWidth.Value, spnCropHeight.Value, spnCropLeft.Value, spnCropTop.Value]);
+
     style := Format('Fontname=%s,Fontsize=%d,Alignment=2,PrimaryColour=%s,Outline=0,Shadow=0,MarginV=20',
       [StringReplace(cboFont.Text, ' ', '%%', [rfReplaceAll]), spnFontSize.Value, IntToHexStr(cbnSub.ButtonColor, True, '&H00')]);
 
@@ -578,7 +648,7 @@ begin
 
     if GenerateVideoWithSubtitle(frmMain.MPV.FileName, sub, FOutputFileName,
       spnWidth.Value, spnHeight.Value,
-      GetVideoCodec, cboVideoSubtype.ItemIndex,
+      GetVideoCodec, cboVideoSubtype.ItemIndex, extra,
       GetCutValue(tedCutFrom), GetCutValue(tedCutTo),
       style,
       aEnc, TFFAudioChannels[cboAudioChannels.ItemIndex].Value,

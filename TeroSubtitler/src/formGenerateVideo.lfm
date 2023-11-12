@@ -1,12 +1,12 @@
 object frmGenerateVideo: TfrmGenerateVideo
   Left = 244
-  Height = 386
+  Height = 385
   Top = 117
   Width = 373
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Generate video'
-  ClientHeight = 386
+  ClientHeight = 385
   ClientWidth = 373
   OnClose = FormClose
   OnCreate = FormCreate
@@ -20,7 +20,7 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideBottom.Side = asrBottom
     Left = 274
     Height = 26
-    Top = 352
+    Top = 351
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 8
@@ -28,21 +28,21 @@ object frmGenerateVideo: TfrmGenerateVideo
     Cancel = True
     Caption = 'Close'
     OnClick = btnCloseClick
-    TabOrder = 5
+    TabOrder = 6
   end
   object btnGenerate: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
     Left = 178
     Height = 26
-    Top = 352
+    Top = 351
     Width = 91
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
     Caption = 'Generate'
     Default = True
     OnClick = btnGenerateClick
-    TabOrder = 4
+    TabOrder = 5
   end
   object VST: TLazVirtualStringTree
     Left = 8
@@ -54,7 +54,7 @@ object frmGenerateVideo: TfrmGenerateVideo
     Header.Columns = <>
     Header.MainColumn = -1
     Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
-    TabOrder = 7
+    TabOrder = 8
     TreeOptions.AutoOptions = [toAutoTristateTracking]
     TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
     TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
@@ -71,10 +71,10 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideTop.Control = btnGenerate
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = btnGenerate
-    Left = 110
+    Left = 130
     Height = 17
-    Top = 357
-    Width = 63
+    Top = 356
+    Width = 43
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     AutoSize = False
@@ -89,12 +89,11 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideRight.Control = lblTimeElapsed
     Left = 8
     Height = 8
-    Top = 361
-    Width = 96
+    Top = 360
+    Width = 116
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 6
-    Style = pbstMarquee
-    TabOrder = 6
+    TabOrder = 7
     Visible = False
   end
   object lblFormat: TLabel
@@ -121,12 +120,12 @@ object frmGenerateVideo: TfrmGenerateVideo
   end
   object lyoSubtitles: TUWLayout
     Left = 130
-    Height = 256
+    Height = 280
     Top = 64
     Width = 235
-    ClientHeight = 256
+    ClientHeight = 280
     ClientWidth = 235
-    TabOrder = 8
+    TabOrder = 9
     object lblFont: TLabel
       AnchorSideBottom.Control = cboFont
       Left = 0
@@ -226,12 +225,12 @@ object frmGenerateVideo: TfrmGenerateVideo
   end
   object lyoVideo: TUWLayout
     Left = 130
-    Height = 256
+    Height = 280
     Top = 64
     Width = 235
-    ClientHeight = 256
+    ClientHeight = 280
     ClientWidth = 235
-    TabOrder = 9
+    TabOrder = 10
     object lblVideoRes: TLabel
       Left = 0
       Height = 15
@@ -330,93 +329,15 @@ object frmGenerateVideo: TfrmGenerateVideo
       Style = csDropDownList
       TabOrder = 4
     end
-    object chkCut: TUWCheckBox
-      Left = 0
-      Height = 23
-      Top = 176
-      Width = 16
-      AutoSize = False
-      Caption = 'Cut'
-      OnClick = chkCutClick
-      TabOrder = 5
-    end
-    object lblCutFrom: TLabel
-      AnchorSideTop.Control = chkCut
-      AnchorSideTop.Side = asrBottom
-      Left = 0
-      Height = 15
-      Top = 204
-      Width = 28
-      BorderSpacing.Top = 5
-      Caption = 'From'
-      ParentColor = False
-    end
-    object tedCutFrom: TUWTimeEdit
-      AnchorSideLeft.Control = lblCutFrom
-      AnchorSideTop.Control = lblCutFrom
-      AnchorSideTop.Side = asrBottom
-      Left = 0
-      Height = 23
-      Top = 224
-      Width = 104
-      Value = 0
-      FPS = 25
-      FrameStep = 1
-      TimeStep = 1
-      TimeMode = temTime
-      OnTimeChange = tedCutFromTimeChange
-      Alignment = taCenter
-      BorderSpacing.Top = 5
-      Constraints.MinHeight = 21
-      Constraints.MinWidth = 90
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 6
-    end
-    object lblCutTo: TLabel
-      AnchorSideLeft.Control = tedCutFrom
-      AnchorSideLeft.Side = asrBottom
-      AnchorSideTop.Control = lblCutFrom
-      AnchorSideTop.Side = asrCenter
-      Left = 119
-      Height = 15
-      Top = 204
-      Width = 12
-      BorderSpacing.Left = 15
-      Caption = 'To'
-      ParentColor = False
-    end
-    object tedCutTo: TUWTimeEdit
-      AnchorSideLeft.Control = lblCutTo
-      AnchorSideTop.Control = lblCutTo
-      AnchorSideTop.Side = asrBottom
-      Left = 119
-      Height = 23
-      Top = 224
-      Width = 104
-      Value = 0
-      FPS = 25
-      FrameStep = 1
-      TimeStep = 1
-      TimeMode = temTime
-      OnTimeChange = tedCutFromTimeChange
-      Alignment = taCenter
-      BorderSpacing.Top = 5
-      Constraints.MinHeight = 21
-      Constraints.MinWidth = 90
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 8
-    end
   end
   object lyoAudio: TUWLayout
     Left = 130
-    Height = 256
+    Height = 280
     Top = 64
     Width = 235
-    ClientHeight = 256
+    ClientHeight = 280
     ClientWidth = 235
-    TabOrder = 10
+    TabOrder = 11
     object chkReEncodeAudio: TUWCheckBox
       AnchorSideTop.Side = asrCenter
       Left = 0
@@ -553,6 +474,218 @@ object frmGenerateVideo: TfrmGenerateVideo
     Caption = 'Audio'
     OnChange = rdoAudioChange
     TabOrder = 3
+    TabStop = False
+  end
+  object lyoOthers: TUWLayout
+    Left = 130
+    Height = 280
+    Top = 64
+    Width = 235
+    ClientHeight = 280
+    ClientWidth = 235
+    TabOrder = 12
+    object chkDeinterlace: TUWCheckBox
+      Left = 0
+      Height = 23
+      Top = 0
+      Width = 16
+      AutoSize = False
+      Caption = 'Deinterlace'
+      OnClick = chkCutClick
+      TabOrder = 0
+    end
+    object chkCut: TUWCheckBox
+      Left = 0
+      Height = 23
+      Top = 24
+      Width = 16
+      AutoSize = False
+      Caption = 'Cut'
+      OnClick = chkCutClick
+      TabOrder = 1
+    end
+    object lblCutFrom: TLabel
+      AnchorSideTop.Control = chkCut
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 15
+      Top = 52
+      Width = 28
+      BorderSpacing.Top = 5
+      Caption = 'From'
+      ParentColor = False
+    end
+    object tedCutFrom: TUWTimeEdit
+      AnchorSideLeft.Control = lblCutFrom
+      AnchorSideTop.Control = lblCutFrom
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 72
+      Width = 104
+      Value = 0
+      FPS = 25
+      FrameStep = 1
+      TimeStep = 1
+      TimeMode = temTime
+      OnTimeChange = tedCutFromTimeChange
+      Alignment = taCenter
+      BorderSpacing.Top = 5
+      Constraints.MinHeight = 21
+      Constraints.MinWidth = 90
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+    end
+    object lblCutTo: TLabel
+      AnchorSideLeft.Control = tedCutFrom
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = lblCutFrom
+      AnchorSideTop.Side = asrCenter
+      Left = 119
+      Height = 15
+      Top = 52
+      Width = 12
+      BorderSpacing.Left = 15
+      Caption = 'To'
+      ParentColor = False
+    end
+    object tedCutTo: TUWTimeEdit
+      AnchorSideLeft.Control = lblCutTo
+      AnchorSideTop.Control = lblCutTo
+      AnchorSideTop.Side = asrBottom
+      Left = 119
+      Height = 23
+      Top = 72
+      Width = 104
+      Value = 0
+      FPS = 25
+      FrameStep = 1
+      TimeStep = 1
+      TimeMode = temTime
+      OnTimeChange = tedCutFromTimeChange
+      Alignment = taCenter
+      BorderSpacing.Top = 5
+      Constraints.MinHeight = 21
+      Constraints.MinWidth = 90
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+    end
+    object chkCrop: TUWCheckBox
+      AnchorSideTop.Control = tedCutFrom
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 105
+      Width = 16
+      AutoSize = False
+      BorderSpacing.Top = 10
+      Caption = 'Crop'
+      OnClick = chkCropClick
+      TabOrder = 6
+    end
+    object spnCropLeft: TSpinEdit
+      AnchorSideTop.Control = lblCropLeft
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 153
+      Width = 104
+      BorderSpacing.Top = 5
+      MaxValue = 7000
+      TabOrder = 7
+    end
+    object lblCropLeft: TLabel
+      AnchorSideTop.Control = chkCrop
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 15
+      Top = 133
+      Width = 20
+      BorderSpacing.Top = 5
+      Caption = 'Left'
+      ParentColor = False
+    end
+    object spnCropTop: TSpinEdit
+      AnchorSideTop.Control = lblCropTop
+      AnchorSideTop.Side = asrBottom
+      Left = 119
+      Height = 23
+      Top = 153
+      Width = 104
+      BorderSpacing.Top = 5
+      MaxValue = 4000
+      TabOrder = 8
+    end
+    object lblCropTop: TLabel
+      AnchorSideTop.Control = lblCropLeft
+      AnchorSideTop.Side = asrCenter
+      Left = 119
+      Height = 15
+      Top = 133
+      Width = 19
+      BorderSpacing.Top = 5
+      Caption = 'Top'
+      ParentColor = False
+    end
+    object lblCropWidth: TLabel
+      AnchorSideTop.Control = spnCropLeft
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 15
+      Top = 186
+      Width = 32
+      BorderSpacing.Top = 10
+      Caption = 'Width'
+      ParentColor = False
+    end
+    object spnCropWidth: TSpinEdit
+      AnchorSideTop.Control = lblCropWidth
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 206
+      Width = 104
+      BorderSpacing.Top = 5
+      MaxValue = 8000
+      TabOrder = 9
+    end
+    object lblCropHeight: TLabel
+      AnchorSideTop.Control = lblCropWidth
+      AnchorSideTop.Side = asrCenter
+      Left = 119
+      Height = 15
+      Top = 186
+      Width = 36
+      BorderSpacing.Top = 5
+      Caption = 'Height'
+      ParentColor = False
+    end
+    object spnCropHeight: TSpinEdit
+      AnchorSideTop.Control = lblCropHeight
+      AnchorSideTop.Side = asrBottom
+      Left = 119
+      Height = 23
+      Top = 206
+      Width = 104
+      BorderSpacing.Top = 5
+      MaxValue = 5000
+      TabOrder = 10
+    end
+  end
+  object rdoOthers: TUWRadioButton
+    AnchorSideTop.Control = rdoAudio
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 148
+    Width = 18
+    AutoSize = False
+    BorderSpacing.Top = 5
+    Caption = 'Others'
+    OnChange = rdoOthersChange
+    TabOrder = 4
     TabStop = False
   end
   object popRes: TPopupMenu

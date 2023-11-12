@@ -493,12 +493,16 @@
       <lblVideoRes>Resolution</lblVideoRes>                
       <lblVideoCodec>Codec</lblVideoCodec>
       <lblVideoSubtype>Subtype</lblVideoSubtype>
-      <lblCutFrom>From</lblCutFrom>
-      <lblCutTo>To</lblCutTo>            
       <lblAudioCodec>Codec</lblAudioCodec>
       <lblAudioChannels>Channels</lblAudioChannels>
       <lblSampleRate>Sample rate</lblSampleRate>
       <lblBitrate>Bit rate</lblBitrate>
+      <lblCutFrom>From</lblCutFrom>
+      <lblCutTo>To</lblCutTo>                  
+      <lblCropLeft>Left</lblCropLeft>
+      <lblCropTop>Top</lblCropTop>
+      <lblCropWidth>Width</lblCropWidth>
+      <lblCropHeight>Height</lblCropHeight>
     </Section>
     <Section Name="TUWRadioButton">
       <rdoSubtitle>Subtitles</rdoSubtitle>
@@ -506,9 +510,11 @@
       <rdoAudio>Audio</rdoAudio>      
     </Section>    
     <Section Name="TUWCheckBox">
-      <chkBox>Box</chkBox>
-      <chkCut>Cut</chkCut>      
+      <chkBox>Box</chkBox>                
       <chkReEncodeAudio>Re-encode</chkReEncodeAudio>
+      <chkDeinterlace>Deinterlace</chkDeinterlace>
+      <chkCut>Cut</chkCut>
+      <chkCrop>Crop</chkCrop>    
     </Section>                
   </Form>                              
   <Form Name="frmTranslationMemory" Caption="Translation memory"/>
