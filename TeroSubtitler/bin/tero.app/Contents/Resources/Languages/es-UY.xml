@@ -162,7 +162,7 @@
       <actExportCustomTextFormat>Formato de texto personalizado...</actExportCustomTextFormat>
       <actExportCustomImageFormat>Formato de imagen personalizado...</actExportCustomImageFormat>
       <actExportSUP>Blu-ray SUP...</actExportSUP>
-      <actGenerateVideo>Generar vídeo con subtítulos incrustados...</actGenerateVideo>
+      <actGenerateVideo>Vídeo con subtítulos incrustados...</actGenerateVideo>
       <actMediaPreviousFrame>Fotograma anterior</actMediaPreviousFrame>
       <actMediaNextFrame>Siguiente fotograma</actMediaNextFrame>
       <actMediaMoveSubtitle>Mover subtítulo</actMediaMoveSubtitle>

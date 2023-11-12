@@ -1244,6 +1244,12 @@ object frmMain: TfrmMain
         object MenuItem178: TMenuItem
           Action = actExportSUP
         end
+        object Separator53: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem181: TMenuItem
+          Action = actGenerateVideo
+        end
       end
       object Separator30: TMenuItem
         Caption = '-'
@@ -1794,9 +1800,6 @@ object frmMain: TfrmMain
       end
       object MenuItem161: TMenuItem
         Action = actDetectDialogSegments
-      end
-      object MenuItem181: TMenuItem
-        Action = actGenerateVideo
       end
       object Separator45: TMenuItem
         Caption = '-'

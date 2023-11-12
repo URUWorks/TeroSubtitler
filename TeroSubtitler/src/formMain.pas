@@ -512,6 +512,7 @@ type
     Separator50: TMenuItem;
     Separator51: TMenuItem;
     Separator52: TMenuItem;
+    Separator53: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
