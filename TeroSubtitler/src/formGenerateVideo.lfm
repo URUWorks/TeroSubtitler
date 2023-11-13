@@ -1,12 +1,12 @@
 object frmGenerateVideo: TfrmGenerateVideo
   Left = 244
-  Height = 385
+  Height = 427
   Top = 117
   Width = 373
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Generate video'
-  ClientHeight = 385
+  ClientHeight = 427
   ClientWidth = 373
   OnClose = FormClose
   OnCreate = FormCreate
@@ -20,7 +20,7 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideBottom.Side = asrBottom
     Left = 274
     Height = 26
-    Top = 351
+    Top = 393
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 8
@@ -35,7 +35,7 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideRight.Control = btnClose
     Left = 178
     Height = 26
-    Top = 351
+    Top = 393
     Width = 91
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
@@ -73,7 +73,7 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideRight.Control = btnGenerate
     Left = 130
     Height = 17
-    Top = 356
+    Top = 398
     Width = 43
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
@@ -89,7 +89,7 @@ object frmGenerateVideo: TfrmGenerateVideo
     AnchorSideRight.Control = lblTimeElapsed
     Left = 8
     Height = 8
-    Top = 360
+    Top = 402
     Width = 116
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 6
@@ -120,10 +120,10 @@ object frmGenerateVideo: TfrmGenerateVideo
   end
   object lyoSubtitles: TUWLayout
     Left = 130
-    Height = 280
+    Height = 296
     Top = 64
     Width = 235
-    ClientHeight = 280
+    ClientHeight = 296
     ClientWidth = 235
     TabOrder = 9
     object lblFont: TLabel
@@ -225,10 +225,10 @@ object frmGenerateVideo: TfrmGenerateVideo
   end
   object lyoVideo: TUWLayout
     Left = 130
-    Height = 280
+    Height = 296
     Top = 64
     Width = 235
-    ClientHeight = 280
+    ClientHeight = 296
     ClientWidth = 235
     TabOrder = 10
     object lblVideoRes: TLabel
@@ -332,10 +332,10 @@ object frmGenerateVideo: TfrmGenerateVideo
   end
   object lyoAudio: TUWLayout
     Left = 130
-    Height = 280
+    Height = 296
     Top = 64
     Width = 235
-    ClientHeight = 280
+    ClientHeight = 296
     ClientWidth = 235
     TabOrder = 11
     object chkReEncodeAudio: TUWCheckBox
@@ -478,10 +478,10 @@ object frmGenerateVideo: TfrmGenerateVideo
   end
   object lyoOthers: TUWLayout
     Left = 130
-    Height = 280
+    Height = 296
     Top = 64
     Width = 235
-    ClientHeight = 280
+    ClientHeight = 296
     ClientWidth = 235
     TabOrder = 12
     object chkDeinterlace: TUWCheckBox
@@ -672,6 +672,43 @@ object frmGenerateVideo: TfrmGenerateVideo
       BorderSpacing.Top = 5
       MaxValue = 5000
       TabOrder = 10
+    end
+    object chkRotate: TUWCheckBox
+      AnchorSideTop.Control = spnCropWidth
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 239
+      Width = 16
+      AutoSize = False
+      BorderSpacing.Top = 10
+      Caption = 'Rotate'
+      OnClick = chkRotateClick
+      TabOrder = 11
+    end
+    object cboRotate: TComboBox
+      AnchorSideTop.Control = chkRotate
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 267
+      Width = 104
+      BorderSpacing.Top = 5
+      ItemHeight = 15
+      Style = csDropDownList
+      TabOrder = 12
+    end
+    object chkFlip: TUWCheckBox
+      AnchorSideTop.Control = cboRotate
+      AnchorSideTop.Side = asrCenter
+      Left = 119
+      Height = 23
+      Top = 267
+      Width = 16
+      AutoSize = False
+      BorderSpacing.Top = 10
+      Caption = 'Flip'
+      TabOrder = 13
     end
   end
   object rdoOthers: TUWRadioButton

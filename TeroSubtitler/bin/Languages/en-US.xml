@@ -508,7 +508,7 @@
       <rdoSubtitle>Subtitles</rdoSubtitle>
       <rdoVideo>Video</rdoVideo>
       <rdoAudio>Audio</rdoAudio>
-      <rdoOthers>Others</rdoOthers>            
+      <rdoOthers>Other</rdoOthers>            
     </Section>    
     <Section Name="TUWCheckBox">
       <chkBox>Box</chkBox>                
@@ -516,6 +516,8 @@
       <chkDeinterlace>Deinterlace</chkDeinterlace>
       <chkCut>Cut</chkCut>
       <chkCrop>Crop</chkCrop>    
+      <chkRotate>Rotate</chkRotate>
+      <chkFlip>Flip</chkFlip>            
     </Section>                
   </Form>                              
   <Form Name="frmTranslationMemory" Caption="Translation memory"/>

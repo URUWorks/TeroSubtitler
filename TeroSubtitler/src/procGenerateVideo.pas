@@ -86,13 +86,19 @@ const
       (Name: 'AAC'; Value: 'aac')
     );
 
-  TFFAudioSampleRate: array[0..4] of TFFmpegEncoderInfoI =
+  TFFAudioSampleRate: array[0..9] of TFFmpegEncoderInfoI =
     (
+      (Name: '8000 Hz'; Value: 8000),
+      (Name: '12000 Hz'; Value: 12000),
+      (Name: '16000 Hz'; Value: 16000),
+      (Name: '22050 Hz'; Value: 22050),
+      (Name: '24000 Hz'; Value: 24000),
+      (Name: '32000 Hz'; Value: 32000),
       (Name: '44100 Hz'; Value: 44100),
       (Name: '48000 Hz'; Value: 48000),
       (Name: '88200 Hz'; Value: 88200),
-      (Name: '96000 Hz'; Value: 96000),
-      (Name: '192000 Hz'; Value: 192000)
+      (Name: '96000 Hz'; Value: 96000)
+//      (Name: '192000 Hz'; Value: 192000)
     );
 
   TFFAudioBitRate: array[0..4] of String =
@@ -122,6 +128,13 @@ const
       '422 Proxy', '422 LT', '422', '422 HQ', '4444', '4444 XQ'
     );
 
+  TFFRotate: array[0..2] of TFFmpegEncoderInfoS =
+    (
+      (Name: '90'; Value: 'transpose=1'),
+      (Name: '-90'; Value: 'transpose=2'),
+      (Name: '180'; Value: 'transpose=1,transpose=1')
+    );
+
 procedure FillComboWithVideoEncoders(const Combo: TComboBox; const AFormat: Integer);
 procedure FillComboWithVideoSubtypes(const Combo: TComboBox; const AEncoderIndex: Integer);
 procedure FillComboWithVideoProfileProRes(const Combo: TComboBox);
@@ -130,6 +143,7 @@ procedure FillComboWithAudioChannels(const Combo: TComboBox);
 procedure FillComboWithAudioSampleRate(const Combo: TComboBox);
 procedure FillComboWithAudioBitRate(const Combo: TComboBox);
 procedure FillComboWithFormats(const Combo: TComboBox);
+procedure FillComboWithRotate(const Combo: TComboBox);
 
 function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; AExtra: String = ''; ACutFrom: Integer = -1; ACutTo: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: String = ''; const ACB: TOnDataReceived = NIL): Boolean;
 
@@ -142,7 +156,7 @@ uses
 
 // -----------------------------------------------------------------------------
 
-procedure FillComboWithArrayType(const Combo: TComboBox; const AType: array of TFFmpegEncoderInfoS);
+procedure FillComboWithArrayType(const Combo: TComboBox; const AType: array of TFFmpegEncoderInfoS; const AIndex: Integer = 0);
 var
   i: Byte;
 begin
@@ -153,14 +167,14 @@ begin
     for i := 0 to High(AType) do
       Items.Add(AType[i].Name);
 
-    ItemIndex := 0;
+    ItemIndex := AIndex;
     Items.EndUpdate;
   end;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure FillComboWithArrayType(const Combo: TComboBox; const AType: array of TFFmpegEncoderInfoI);
+procedure FillComboWithArrayType(const Combo: TComboBox; const AType: array of TFFmpegEncoderInfoI; const AIndex: Integer = 0);
 var
   i: Byte;
 begin
@@ -171,14 +185,14 @@ begin
     for i := 0 to High(AType) do
       Items.Add(AType[i].Name);
 
-    ItemIndex := 0;
+    ItemIndex := AIndex;
     Items.EndUpdate;
   end;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure FillComboWithArrayString(const Combo: TComboBox; const AArray: array of String);
+procedure FillComboWithArrayString(const Combo: TComboBox; const AArray: array of String; const AIndex: Integer = 0);
 var
   i: Byte;
 begin
@@ -189,7 +203,7 @@ begin
     for i := 0 to High(AArray) do
       Items.Add(AArray[i]);
 
-    ItemIndex := 0;
+    ItemIndex := AIndex;
     Items.EndUpdate;
   end;
 end;
@@ -247,21 +261,21 @@ end;
 
 procedure FillComboWithAudioChannels(const Combo: TComboBox);
 begin
-  FillComboWithArrayType(Combo, TFFAudioChannels);
+  FillComboWithArrayType(Combo, TFFAudioChannels, 1);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure FillComboWithAudioSampleRate(const Combo: TComboBox);
 begin
-  FillComboWithArrayType(Combo, TFFAudioSampleRate);
+  FillComboWithArrayType(Combo, TFFAudioSampleRate, 6);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure FillComboWithAudioBitRate(const Combo: TComboBox);
 begin
-  FillComboWithArrayString(Combo, TFFAudioBitRate);
+  FillComboWithArrayString(Combo, TFFAudioBitRate, 1);
 end;
 
 // -----------------------------------------------------------------------------
@@ -269,6 +283,13 @@ end;
 procedure FillComboWithFormats(const Combo: TComboBox);
 begin
   FillComboWithArrayType(Combo, TFFFormats);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure FillComboWithRotate(const Combo: TComboBox);
+begin
+  FillComboWithArrayType(Combo, TFFRotate);
 end;
 
 // -----------------------------------------------------------------------------

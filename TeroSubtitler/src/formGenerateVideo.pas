@@ -44,8 +44,11 @@ type
     cboAudioChannels: TComboBox;
     cboVideoCodec: TComboBox;
     cboVideoSubtype: TComboBox;
+    chkRotate: TUWCheckBox;
     chkDeinterlace: TUWCheckBox;
     chkCrop: TUWCheckBox;
+    chkFlip: TUWCheckBox;
+    cboRotate: TComboBox;
     lblCropLeft: TLabel;
     lblCropTop: TLabel;
     lblCropWidth: TLabel;
@@ -96,6 +99,7 @@ type
     procedure chkCropClick(Sender: TObject);
     procedure chkCutClick(Sender: TObject);
     procedure chkReEncodeAudioClick(Sender: TObject);
+    procedure chkRotateClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -188,6 +192,7 @@ begin
   FillComboWithAudioChannels(cboAudioChannels);
   FillComboWithAudioSampleRate(cboSampleRate);
   FillComboWithAudioBitRate(cboBitRate);
+  FillComboWithRotate(cboRotate);
 
   CancelGeneration := False;
 
@@ -241,13 +246,16 @@ begin
       //chkCut.Checked := AParamArray[14].ToBoolean;
       chkCutClick(NIL);
       chkCropClick(NIL);
+      chkRotateClick(NIL);
     end;
   end
   else
   begin
     cboFormatSelect(NIL);
-    chkCutClick(NIL);
     chkReEncodeAudioClick(NIL);
+    chkCutClick(NIL);
+    chkCropClick(NIL);
+    chkRotateClick(NIL);
   end;
 end;
 
@@ -331,6 +339,13 @@ begin
   lblAudioChannels.Enabled := chkReEncodeAudio.Checked;
   lblSampleRate.Enabled    := chkReEncodeAudio.Checked;
   lblBitrate.Enabled       := chkReEncodeAudio.Checked;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmGenerateVideo.chkRotateClick(Sender: TObject);
+begin
+  cboRotate.Enabled := chkRotate.Checked;
 end;
 
 // -----------------------------------------------------------------------------
@@ -468,6 +483,7 @@ begin
   rdoSubtitle.Enabled := AValue;
   rdoVideo.Enabled := AValue;
   rdoAudio.Enabled := AValue;
+  rdoOthers.Enabled := AValue;
   cboFont.Enabled := AValue;
   spnFontSize.Enabled := AValue;
   chkBox.Enabled := AValue;
@@ -492,11 +508,15 @@ begin
   spnCropTop.Enabled    := False;
   spnCropWidth.Enabled  := False;
   spnCropHeight.Enabled := False;
+  chkRotate.Enabled := AValue;
+  cboRotate.Enabled := False;
+  chkFlip.Enabled := AValue;
 
   if AValue then
   begin
     chkCutClick(NIL);
     chkCropClick(NIL);
+    chkRotateClick(NIL);
     chkReEncodeAudioClick(NIL);
     cboVideoCodecSelect(NIL);
   end;
@@ -633,12 +653,18 @@ begin
       aEnc := '';
 
     if chkDeinterlace.Checked then
-      extra := 'yadif, '
+      extra := 'yadif,'
     else
       extra := '';
 
     if chkCrop.Checked then
-      extra += Format('crop=%d:%d:%d:%d, ', [spnCropWidth.Value, spnCropHeight.Value, spnCropLeft.Value, spnCropTop.Value]);
+      extra += Format('crop=%d:%d:%d:%d,', [spnCropWidth.Value, spnCropHeight.Value, spnCropLeft.Value, spnCropTop.Value]);
+
+    if chkRotate.Checked then
+      extra += TFFRotate[cboRotate.ItemIndex].Value + ',';
+
+    if chkFlip.Checked then
+      extra += 'hflip,';
 
     style := Format('Fontname=%s,Fontsize=%d,Alignment=2,PrimaryColour=%s,Outline=0,Shadow=0,MarginV=20',
       [StringReplace(cboFont.Text, ' ', '%%', [rfReplaceAll]), spnFontSize.Value, IntToHexStr(cbnSub.ButtonColor, True, '&H00')]);

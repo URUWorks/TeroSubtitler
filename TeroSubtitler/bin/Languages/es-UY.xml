@@ -515,7 +515,9 @@
       <chkReEncodeAudio>Re-codificar</chkReEncodeAudio>
       <chkDeinterlace>Desentrelazar</chkDeinterlace>
       <chkCut>Cortar</chkCut>
-      <chkCrop>Recorte</chkCrop>                
+      <chkCrop>Recorte</chkCrop>
+      <chkRotate>Rotar</chkRotate>
+      <chkFlip>Espejo</chkFlip>                                  
     </Section>                
   </Form>                                                              
   <Form Name="frmTranslationMemory" Caption="Memoria de traducción"/>
