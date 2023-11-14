@@ -162,7 +162,7 @@
       <actExportCustomTextFormat>Formato di testo personalizzato…</actExportCustomTextFormat>
       <actExportCustomImageFormat>Formato di immagine personalizzata…</actExportCustomImageFormat>
       <actExportSUP>Formato .sup per Blu-ray…</actExportSUP>
-      <actGenerateVideo>Genera video con sottotitoli impressi…</actGenerateVideo>
+      <actGenerateVideo>Video con sottotitoli impressi…</actGenerateVideo>
       <actMediaPreviousFrame>Fotogramma precedente</actMediaPreviousFrame>
       <actMediaNextFrame>Fotogramma successivo</actMediaNextFrame>
       <actMediaMoveSubtitle>Sposta sottotitolo</actMediaMoveSubtitle>
@@ -486,18 +486,38 @@
   </Form>
   <Form Name="frmGenerateVideo" Caption="Genera video con sottotitoli impressi">
     <Section Name="TLabel">
+      <lblFormat>Formato</lblFormat>
       <lblFont>Carattere</lblFont>
       <lblFontSize>Dimensione</lblFontSize>
       <lblFontColor>Colore</lblFontColor>
-      <lblVideoRes>Risoluzione video</lblVideoRes>
-      <lblVideoEncoding>Codifica video</lblVideoEncoding>
-      <lblAudioEncoding>Codifica audio</lblAudioEncoding>
+      <lblVideoRes>Risoluzione</lblVideoRes>
+      <lblVideoCodec>Codifica</lblVideoCodec>
+      <lblVideoSubtype>Sottotipo</lblVideoSubtype>
+      <lblAudioCodec>Codifica</lblAudioCodec>
+      <lblAudioChannels>Canali</lblAudioChannels>
       <lblSampleRate>Frequenza di campionamento</lblSampleRate>
       <lblBitrate>Velocità di trasmissione in bit</lblBitrate>
+      <lblCutFrom>Da</lblCutFrom>
+      <lblCutTo>A</lblCutTo>
+      <lblCropLeft>Sinistra</lblCropLeft>
+      <lblCropTop>In alto</lblCropTop>
+      <lblCropWidth>Larghezza</lblCropWidth>
+      <lblCropHeight>Altezza</lblCropHeight>
+    </Section>
+    <Section Name="TUWRadioButton">
+      <rdoSubtitle>Sottotitoli</rdoSubtitle>
+      <rdoVideo>Video</rdoVideo>
+      <rdoAudio>Audio</rdoAudio>
+      <rdoOthers>Altro</rdoOthers>  
     </Section>
     <Section Name="TUWCheckBox">
       <chkBox>Riquadro</chkBox>
-      <chkReEncodeAudio>Ricodifica audio</chkReEncodeAudio>
+      <chkReEncodeAudio>Ricodifica</chkReEncodeAudio>
+      <chkDeinterlace>Deinterlaccia</chkDeinterlace>
+      <chkCut>Taglia</chkCut>
+      <chkCrop>Ritaglia</chkCrop>
+      <chkRotate>Ruota</chkRotate>
+      <chkFlip>Rifletti</chkFlip>
     </Section>
   </Form>
   <Form Name="frmTranslationMemory" Caption="Memoria di traduzione"/>
