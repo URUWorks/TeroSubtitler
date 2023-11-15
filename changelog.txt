@@ -1,4 +1,5 @@
 1.0.1.3 (x.x.2023)
+- fixed: OCR scripts don't work #198
 - fixed: numpad #192
 - fixed: Trying to use Faster-whisper #191
 - added: Generate video with hardcoded subtitles
