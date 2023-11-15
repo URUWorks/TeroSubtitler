@@ -61,7 +61,7 @@ type
 
 implementation
 
-uses UWSystem.StrUtils, RegExpr;
+uses UWSystem.StrUtils, RegExpr, jsonscanner;
 
 // -----------------------------------------------------------------------------
 
@@ -123,7 +123,7 @@ var
 begin
   FileStream := TFileStream.Create(FileName, fmOpenRead);
   try
-    Parser := TJSONParser.Create(FileStream);
+    Parser := TJSONParser.Create(FileStream, [joUTF8,joBOMCheck]);
     ZeroArray := TJSONArray.Create;
     try
       FOCRList.Clear;
@@ -148,7 +148,7 @@ begin
           if joItem.Find('UseRE', Data) and (Data <> NIL) then
             UseRE := Data.AsBoolean
           else
-            UseRE := True;
+            UseRE := False;
         end;
 
         FOCRList.Add(OCRItem);
