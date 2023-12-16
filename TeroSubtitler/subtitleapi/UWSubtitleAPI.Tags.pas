@@ -90,7 +90,7 @@ begin
   if Result.IsEmpty then Exit;
 
   Result := ReplaceHTMLTagColor(Result);
-  Result := ReplaceRegExpr('\{c&(.*?|var)\&}', Result, '<font color="#$1">', True);
+  Result := ReplaceRegExpr('\{\\c&(.*?|var)\&}', Result, '<font color="#$1">', True);
   Result := ReplaceString(Result, '{\c}', '</font>');
   Result := ReplaceString(Result, '{\b1}', '<b>');
   Result := ReplaceString(Result, '{\i1}', '<i>');
