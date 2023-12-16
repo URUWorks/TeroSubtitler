@@ -97,19 +97,15 @@ uses
 
 procedure TfrmMultipleReplace.FormCreate(Sender: TObject);
 begin
-  //LoadLanguage(Self);
-  //TODO: Localize = Seems there is nothing to do, the strings are commented
-
   FList := TListFind.Create;
 
   VSTAddColumn(VST, lngmrFind, 150);
   VSTAddColumn(VST, lngmrReplaceWith, 150);
   VSTAddColumn(VST, lngmrRegExpr, 100);
 
-{  LanguageManager.GetAppStringList('MultipleReplaceStrings', FAppStringList);
-  VSTAddColumn(VST, GetString(FAppStringList, 'Find'), 150);
-  VSTAddColumn(VST, GetString(FAppStringList, 'ReplaceWith'), 150);
-  VSTAddColumn(VST, GetString(FAppStringList, 'RegExpr'), 100);}
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------

@@ -102,9 +102,9 @@ implementation
 
 uses
   procConfig, procDialogs, procWorkspace, procVST, procSubtitle, procUndo,
-  UWSystem.Encoding, formCustomFileDlg, UWSystem.XMLLang, UWSystem.SysUtils,
-  Forms, procMRU, UWSystem.StrUtils, procForms, procProjectFile,
-  formCustomSelectDlg, procFixSubtitles, LCLIntf, Base64
+  UWSystem.Encoding, formCustomFileDlg, UWSystem.SysUtils, Forms, procMRU,
+  UWSystem.StrUtils, procForms, procProjectFile, formCustomSelectDlg,
+  procFixSubtitles, LCLIntf, Base64
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};

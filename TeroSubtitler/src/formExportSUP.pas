@@ -73,8 +73,7 @@ var
 implementation
 
 uses
-  procWorkspace, procTypes, UWSystem.XMLLang, UWSystem.Encoding,
-  procCustomFormat, procSUP;
+  procWorkspace, procTypes, UWSystem.Encoding, procCustomFormat, procSUP;
 
 {$R *.lfm}
 

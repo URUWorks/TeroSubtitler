@@ -64,7 +64,7 @@ implementation
 
 uses
   procTypes, procVST, procSubtitle, UWSubtitleAPI, UWSubtitles.Utils,
-  formMain, procWorkspace, UWSystem.XMLLang;
+  formMain, procWorkspace;
 
 // -----------------------------------------------------------------------------
 

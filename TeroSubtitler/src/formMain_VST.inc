@@ -656,7 +656,7 @@ begin
       if etOverlappingWithNext in ErrorType then SetHintText(lngasOverlappingWithNext);
       if etFixTags             in ErrorType then SetHintText(lngfsetFixTags);
       if etEmpty               in ErrorType then SetHintText(lngfsetEmpty);
-//TODO: Localize      if etUnbreak             in ErrorType then SetHintText(Format(lngfsetUnbreak), [AppOptions.Conventions.CPL]));
+      if etUnbreak             in ErrorType then SetHintText(Format(lngfsetUnbreak, [AppOptions.Conventions.CPL]));
       if etUnnecessarySpaces   in ErrorType then SetHintText(lngasUnnecessarySpaces);
       if etUnnecessaryDots     in ErrorType then SetHintText(lngasUnnecessaryDots);
       if etRepeatedChars       in ErrorType then SetHintText(lngasRepeatedChars);

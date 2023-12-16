@@ -23,8 +23,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
-  ExtCtrls, UWLayout, UWCheckBox, UWHotKey, UWSystem.XMLLang, ActnList,
-  procConventions, LCLProc, ComCtrls, UWSubtitleAPI.Formats, LCLTranslator, procLocalize;
+  ExtCtrls, UWLayout, UWCheckBox, UWHotKey, ActnList, procConventions, LCLProc,
+  ComCtrls, UWSubtitleAPI.Formats, LCLTranslator, procLocalize;
 
 type
 
@@ -352,17 +352,12 @@ begin
     cboDefaultFileEncoding.ItemIndex := Workspace.DefEncoding;
     btnShortCutApply.Enabled := False;
 
-    //TODO: Localize
-//    with LanguageManager do
-//    begin
-      cboTheme.AddItem(lngssAutoMode, NIL);
-      cboTheme.AddItem(lngssLightMode, NIL);
-      cboTheme.AddItem(lngssDarkMode, NIL);
-      cboListMode.AddItem(lngssListMode, NIL);
-      cboListMode.AddItem(lngssBlockMode, NIL);
-  //  end;
+    cboTheme.AddItem(lngssAutoMode, NIL);
+    cboTheme.AddItem(lngssLightMode, NIL);
+    cboTheme.AddItem(lngssDarkMode, NIL);
+    cboListMode.AddItem(lngssListMode, NIL);
+    cboListMode.AddItem(lngssBlockMode, NIL);
   finally
-
   end;
 
   with AppOptions do
@@ -482,6 +477,10 @@ begin
       if tlbWaveform_.Buttons[i].Visible and (tlbWaveform_.Buttons[i].Style = tbsCheck) then
         tlbWaveform_.Buttons[i].Down := ToolBarWaveform.Buttons[i].Visible;
   end;
+
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------

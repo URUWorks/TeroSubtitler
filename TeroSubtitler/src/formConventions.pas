@@ -115,6 +115,10 @@ begin
   btnClose.Caption := lngbtnClose;
 
   FList := NIL;
+
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------

@@ -109,6 +109,10 @@ begin
     rbnFromTheSelectedSubtitle.Checked := True
   else
     rbnAllTheSubtitles.Checked := True;
+
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------

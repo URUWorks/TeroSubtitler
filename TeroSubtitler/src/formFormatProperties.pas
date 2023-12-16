@@ -122,8 +122,7 @@ implementation
 
 uses
   procTypes, LazUTF8, procWorkspace, UWSubtitleAPI.Formats, UWSystem.TimeUtils,
-  UWTranslateAPI.Google, UWSystem.XMLLang,
-  UWSubtitleAPI.Formats.Cavena890.Types, LCLTranslator;
+  UWTranslateAPI.Google, UWSubtitleAPI.Formats.Cavena890.Types, LCLTranslator;
 
 {$R *.lfm}
 
@@ -258,6 +257,10 @@ begin
   end;
 
   cboFormatsSelect(NIL);
+
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------

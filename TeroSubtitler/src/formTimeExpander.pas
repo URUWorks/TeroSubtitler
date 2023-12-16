@@ -66,7 +66,7 @@ implementation
 
 uses
   procTypes, procVST, procSubtitle, UWSubtitleAPI, UWSubtitles.Utils,
-  formMain, UWSystem.SysUtils, procWorkspace, UWSystem.XMLLang;
+  formMain, UWSystem.SysUtils, procWorkspace;
 
 {$R *.lfm}
 
@@ -96,6 +96,10 @@ begin
     rbnOnlySelectedSubtitles.Checked := True
   else
     rbnAllTheSubtitles.Checked := True;
+
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------

@@ -96,6 +96,10 @@ procedure UpdateValues(const AInvalidate: Boolean = False);
 procedure UpdateToolBarButtons(const AOnlyDivider: Boolean);
 procedure UpdateCoolBar(const ABand: Integer; const AVisible: Boolean);
 
+{$IFNDEF WINDOWS}
+procedure PrepareCustomControls(const AForm: TForm);
+{$ENDIF}
+
 // -----------------------------------------------------------------------------
 
 implementation
@@ -106,7 +110,8 @@ uses
   UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.Encoding,
   UWSubtitleAPI.Formats, MPVPlayer, character, LazUTF8, formTranslationMemory,
   UWSubtitleAPI.Tags, UWTranslateAPI.Google, procTranscription,
-  formCustomQuestionDlg, UWSystem.TimeUtils, formTBX, procVST_Loops, procMPV;
+  formCustomQuestionDlg, UWSystem.TimeUtils, formTBX, procVST_Loops, procMPV
+  {$IFNDEF WINDOWS}, UWCheckBox, UWRadioButton{$ENDIF};
 
 // -----------------------------------------------------------------------------
 
@@ -160,22 +165,6 @@ begin
     FindClose(SearchRec);
   end;
 end;
-
-
-{OBSOLETE: Was for XML transaltions
-procedure FillComboWithLanguageFiles(const Combo: TComboBox);
-var
-  SearchRec: TSearchRec;
-begin
-  if SysUtils.FindFirst(LanguageFolder + '*.xml', faAnyFile, SearchRec) = 0 then
-  try
-    repeat
-      Combo.Items.Add(GetCultureDisplayName(AnsiString(ChangeFileExt(SearchRec.Name, ''))));
-    until FindNext(SearchRec) <> 0;
-  finally
-    FindClose(SearchRec);
-  end;
-end;}
 
 // -----------------------------------------------------------------------------
 
@@ -1533,6 +1522,21 @@ begin
     CoolBarMain.Visible := x > 0;
   end;
 end;
+
+// -----------------------------------------------------------------------------
+
+{$IFNDEF WINDOWS}
+procedure PrepareCustomControls(const AForm: TForm);
+var
+  C: TComponent;
+begin
+  for C in AForm do
+    if (C is TUWCheckBox) then
+      (C as TUWCheckBox).AutoSize := True
+    else if (C is TUWRadioButton) then
+      (C as TUWRadioButton).AutoSize := True;
+end;
+{$ENDIF}
 
 // -----------------------------------------------------------------------------
 

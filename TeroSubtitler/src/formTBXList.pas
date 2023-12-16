@@ -68,7 +68,7 @@ implementation
 
 uses
   procTypes, procVST, RegExpr, procWorkspace, procColorTheme, procConfig,
-  Clipbrd, UWSystem.XMLLang;
+  Clipbrd;
 
 {$R *.lfm}
 

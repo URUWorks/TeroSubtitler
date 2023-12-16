@@ -138,10 +138,9 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procColorTheme, procConfig, UWSystem.XMLLang,
-  procCustomFormat, procGenerateVideo, formMain, UWSubtitleAPI,
-  UWSubtitleAPI.Formats, UWSystem.Encoding, UWSystem.TimeUtils,
-  UWSystem.SysUtils, procDialogs;
+  procTypes, procWorkspace, procColorTheme, procConfig, procCustomFormat,
+  procGenerateVideo, formMain, UWSubtitleAPI, UWSubtitleAPI.Formats,
+  UWSystem.Encoding, UWSystem.TimeUtils, UWSystem.SysUtils, procDialogs;
 
 {$R *.lfm}
 
@@ -155,12 +154,7 @@ procedure TfrmGenerateVideo.FormCreate(Sender: TObject);
 var
   i: Integer;
   m: TMenuItem;
-  //  FAppStringList: TAppStringList = NIL;
 begin
-  //LanguageManager.GetAppStringList('GenerateVideoStrings', FAppStringList);
-  //VSTAddColumn(VST, GetString(FAppStringList, 'Subtitle'), 150);
-  //FAppStringList.Free;
-
   tedCutFrom.FPS := GetFPS;
   tedCutTo.FPS := tedCutFrom.FPS;
   tedCutFrom.TimeMode := GetTimeEditMode;
@@ -195,6 +189,10 @@ begin
   CancelGeneration := False;
 
   rdoSubtitle.Checked := True;
+
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------

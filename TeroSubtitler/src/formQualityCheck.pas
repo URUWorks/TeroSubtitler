@@ -23,8 +23,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  laz.VirtualTrees, UWSystem.XMLLang, LCLIntf, LCLType, procQualityCheck,
-  procConventions, LCLTranslator,procLocalize;
+  laz.VirtualTrees, LCLIntf, LCLType, procQualityCheck, procConventions,
+  LCLTranslator, procLocalize;
 
 type
 

@@ -64,7 +64,7 @@ implementation
 
 uses
   procTypes, procWorkspace, procConfig, procVST, procFiles, procColorTheme,
-  UWSystem.XMLLang, FileUtil, UWSubtitleAPI.Formats;
+  FileUtil, UWSubtitleAPI.Formats;
 
 {$R *.lfm}
 

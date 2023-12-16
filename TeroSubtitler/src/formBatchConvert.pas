@@ -103,8 +103,8 @@ implementation
 
 uses
   UWSystem.SysUtils, UWSubtitleAPI, UWSubtitleAPI.Formats, procVST, procTypes,
-  RegExpr, procWorkspace, procColorTheme, procDialogs, UWSystem.XMLLang,
-  UWSystem.FileUtils, UWSystem.Encoding;
+  RegExpr, procWorkspace, procColorTheme, procDialogs, UWSystem.FileUtils,
+  UWSystem.Encoding;
 
 {$R *.lfm}
 

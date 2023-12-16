@@ -53,7 +53,7 @@ function GetFileFromOpenDialog(const ADefault: String = ''): String;
 implementation
 
 uses
-  Dialogs, UWSystem.XMLLang, formCustomInputDlg;
+  Dialogs, formCustomInputDlg;
 
 // -----------------------------------------------------------------------------
 

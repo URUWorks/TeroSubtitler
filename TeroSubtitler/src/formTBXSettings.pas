@@ -58,7 +58,7 @@ var
 implementation
 
 uses
-  procWorkspace, UWSystem.XMLLang, UWSystem.Globalization, procTypes;
+  procWorkspace, UWSystem.Globalization, procTypes;
 
 {$R *.lfm}
 

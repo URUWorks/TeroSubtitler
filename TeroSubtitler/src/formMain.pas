@@ -966,8 +966,8 @@ uses
   FormVideo, UWSpellcheck.Hunspell, RegExpr, procShortCut, procTranscription,
   procConfig, procDialogs, procWorkspace, procVST, procVST_Loops,
   procUnDockVideoControls, procColorTheme, procFiles, procMPV, procSubtitle,
-  procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.XMLLang,
-  UWSystem.SysUtils, UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX,
+  procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.SysUtils,
+  UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX,
   formCustomQuestionDlg, formCustomSelectDlg ;
 
 {$R *.lfm}
@@ -999,8 +999,7 @@ begin
   DefaultValues;
   LoadSettings;
   LoadShortCutsFromFile(ShortCutFileName, ActionList);
-  // Init and load language
-  //LanguageManager.SetLanguageFolder(LanguageFolder); //TODO: Localize: Is this necessary?
+  // Init language
   SetGUILanguage;
   UpdateCommonActionString;
   RefreshAppTitle;

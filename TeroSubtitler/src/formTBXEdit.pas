@@ -60,7 +60,7 @@ implementation
 
 uses
   procTypes, RegExpr, procWorkspace, procColorTheme, procConfig, Clipbrd,
-  UWSystem.XMLLang, formMain, LCLTranslator;
+  formMain, LCLTranslator;
 
 {$R *.lfm}
 

@@ -88,8 +88,7 @@ implementation
 
 uses
   procTypes, procWorkspace, procColorTheme, procSubtitle, procConfig,
-  procDialogs, UWSystem.XMLLang, UWSystem.StrUtils, UWSpellcheck.Hunspell,
-  formMain;
+  procDialogs, UWSystem.StrUtils, UWSpellcheck.Hunspell, formMain;
 
 {$R *.lfm}
 

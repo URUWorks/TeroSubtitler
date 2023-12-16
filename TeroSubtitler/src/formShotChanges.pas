@@ -79,7 +79,7 @@ implementation
 uses
   procTypes, procWorkspace, procConfig, procDialogs, UWSystem.TimeUtils,
   UWSystem.SysUtils, UWSystem.Process, formMain, UWSubtitleAPI.EDL,
-  UWSystem.XMLLang, formCustomSelectDlg;
+  formCustomSelectDlg;
 
 const
   tcFrames       = 0;
@@ -555,6 +555,16 @@ end;
 // -----------------------------------------------------------------------------
 
 function TfrmShotChanges.FillDialogFilter(const AAllSupportedFiles: Boolean): String;
+
+  function GetLocalizeStr(const AID: Integer): String;
+  begin
+    case AID of
+      0: Result := lngscEDL;
+      1: Result := lngscShotChanges;
+      2: Result := lngscXML;
+    end;
+  end;
+
 var
   i: Integer;
   s: String;
@@ -564,8 +574,7 @@ begin
 
   for i := 0 to Length(TShotChangeExts)-1 do
   begin
-    //TODO: Localize
-    //Result := Result + GetCommonString(Copy(TShotChangeExts[i], 2), 'ShotChangesStrings') + ' (*' + TShotChangeExts[i] + ')|*' + TShotChangeExts[i] + '|';
+    Result := Result + GetLocalizeStr(i) + ' (*' + TShotChangeExts[i] + ')|*' + TShotChangeExts[i] + '|';
     s := s + '*' + TShotChangeExts[i] + ';';
   end;
 

@@ -116,6 +116,10 @@ begin
       lbl.OnClick := @MRUItemClick;
     end;
   end;
+
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------

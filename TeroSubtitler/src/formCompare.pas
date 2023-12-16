@@ -74,8 +74,7 @@ var
 implementation
 
 uses
-  procVST, procTypes, RegExpr, procWorkspace, procColorTheme, UWSystem.XMLLang,
-  procSubtitle;
+  procVST, procTypes, RegExpr, procWorkspace, procColorTheme, procSubtitle;
 
 const
   DIFF_INITIAL = 1;

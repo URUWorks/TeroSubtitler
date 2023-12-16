@@ -46,12 +46,8 @@ procedure UpdateValuesFromDefaultConvention;
 
 { Language }
 
-//procedure LoadLanguage(const AForm: TForm; const ACommonControls: Boolean = True);
-//function GetLangString(const S: String): String;
-//function GetCommonString(const S: String; const ASection: String = 'CommonStrings'): String;
 procedure UpdateCommonActionString;
 function GetRandomTipString: String;
-//procedure ApplyCommonControlsString(const AForm: TForm; const ASection: String = 'CommonControls');
 
 { Special folders }
 
@@ -61,7 +57,7 @@ function GetCustomFilePath(const FileName: String): String;
 function SettingsFileName: String;
 function CurrentWorkFileName: String;
 function LanguageFolder: String;
-function LanguageFileName (Default: Boolean  = false): String;
+function LanguageFileName(Default: Boolean = False): String;
 function ShortCutFolder: String;
 function ShortCutFileName: String;
 function OCRFolder: String;
@@ -114,10 +110,10 @@ implementation
 
 uses
   RegExpr, formMain, XMLConf, UWSystem.Encoding, UWSystem.SysUtils, Dialogs,
-  procDialogs, UWSubtitleAPI.Formats, UWSystem.XMLLang, MPVPlayer,
-  procWorkspace, procColorTheme, LCLProc, UWSystem.Globalization,
-  UWSystem.TimeUtils, libMPV.Client, UWSpellcheck.Hunspell, procConventions,
-  UWSystem.InetUtils, fileinfo, winpeimagereader, elfreader, machoreader,
+  procDialogs, UWSubtitleAPI.Formats, MPVPlayer, procWorkspace, procColorTheme,
+  LCLProc, UWSystem.Globalization, UWSystem.TimeUtils, libMPV.Client,
+  UWSpellcheck.Hunspell, procConventions, UWSystem.InetUtils,
+  fileinfo, winpeimagereader, elfreader, machoreader,
   LCLIntf, UWSystem.StrUtils;
 
 // -----------------------------------------------------------------------------
@@ -338,7 +334,7 @@ begin
     SetVideoPreview(False);
     SetWaveformPreview(False);
     AppOptions.GUILanguage := GetOSLanguage;
-    if LanguageFileName (True)  = '' then
+    if LanguageFileName(True) = '' then
       AppOptions.GUILanguage := '';
 
     UpdateValuesFromDefaultConvention;
@@ -1105,58 +1101,6 @@ end;
 
 // -----------------------------------------------------------------------------
 
-{procedure LoadLanguage(const AForm: TForm; const ACommonControls: Boolean = True);
-{$IFNDEF WINDOWS}
-var
-  C: TComponent;
-{$ENDIF}
-begin
-  with LanguageManager do
-    ApplyLanguage(GetLangIndexByName(AppOptions.GUILanguage), AForm);
-
-  if ACommonControls then
-    ApplyCommonControlsString(AForm);
-
-  {$IFNDEF WINDOWS}
-  for C in AForm do
-    if (C is TUWCheckBox) then
-      (C as TUWCheckBox).AutoSize := True
-    else if (C is TUWRadioButton) then
-      (C as TUWRadioButton).AutoSize := True;
-  {$ENDIF}
-
-  if AForm = frmMain then
-    frmMain.actAbout.Caption := Format(frmMain.actAbout.Caption, [ProgramName]);
-end;}
-
-// -----------------------------------------------------------------------------
-
-{function GetLangString(const S: String): String;
-begin
-  with LanguageManager do
-    Result := GetAppString(S);
-end;}
-
-// -----------------------------------------------------------------------------
-
-{function GetCommonString(const S: String; const ASection: String = 'CommonStrings'): String;
-var
-  sl: TAppStringList = NIL;
-begin
-  if LanguageManager.GetAppStringList(ASection, sl) then
-  begin
-    try
-      Result := GetString(sl, S)
-    finally
-      sl.Free;
-    end;
-  end
-  else
-    Result := '';
-end;}
-
-// -----------------------------------------------------------------------------
-
 procedure UpdateCommonActionString;
 begin
   with frmMain do
@@ -1167,32 +1111,6 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
-
-{function GetRandomTipString: String;
-var
-  sl: TAppStringList = NIL;
-  rndTip: Integer;
-begin
-  if LanguageManager.GetAppStringList('TipStrings', sl) then
-  begin
-    try
-      rndTip := Random(sl.Count)+1;
-      Result := GetString(sl, 'Tip' + rndTip.ToString);
-      with frmMain do
-        case rndTip of
-          1: Result := Format(Result, [ShortCutToTextEx(actPreviousSubtitle.ShortCut), ShortCutToTextEx(actNextSubtitle.ShortCut)]);
-          2: Result := Format(Result, [ShortCutToTextEx(actWebReference.ShortCut)]);
-          3: Result := Format(Result, [ShortCutToTextEx(actUnDockVideo.ShortCut)]);
-          4: Result := Format(Result, [ShortCutToTextEx(actUnDockWaveform.ShortCut)]);
-        end;
-      SetStatusBarText(Result);
-    finally
-      sl.Free;
-    end;
-  end
-  else
-    Result := '';
-end;}
 
 //TODO: Localize: Check if the behaviour is okay
 function GetRandomTipString: String;
@@ -1209,43 +1127,6 @@ begin
     end;
   SetStatusBarText(Result);
 end;
-
-
-// -----------------------------------------------------------------------------
-
-{procedure ApplyCommonControlsString(const AForm: TForm; const ASection: String = 'CommonControls');
-var
-  sl : TAppStringList = NIL;
-  i  : Integer;
-  s  : String;
-
-  procedure CheckControl(const ACtrl: TControl);
-  var
-    c: Integer;
-  begin
-    if ACtrl is TUWLayout then
-    begin
-      with (ACtrl as TUWLayout) do
-      for c := 0 to ControlCount-1 do
-        CheckControl(Controls[c]);
-    end
-    else
-    begin
-      s := GetString(sl, ACtrl.Name);
-      if s <> '' then
-        ACtrl.Caption := s;
-    end;
-  end;
-
-begin
-  if LanguageManager.GetAppStringList(ASection, sl) then
-    try
-      for i := 0 to AForm.ControlCount-1 do
-        CheckControl(AForm.Controls[i]);
-    finally
-      sl.Free;
-    end;
-end;    }
 
 // -----------------------------------------------------------------------------
 
@@ -1319,25 +1200,28 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function DefaultDialect(Language: string): string;
+function DefaultDialect(Language: String): String;
 begin
   Result := 'en_US';
-  if Language.StartsWith('es_') then exit ('es-UY');
-  //Currently English (USA) is default anyway
-  //if Language.StartsWith('en_') then exit ('en_US');
+  if Language.StartsWith('es_') then Exit('es_UY');
+  //English (USA) is default
   //Other dialects might be added here
 end;
 
-function LanguageFileName (Default: boolean = false): String;
+// -----------------------------------------------------------------------------
+
+function LanguageFileName(Default: Boolean = False): String;
 var
-  LanguageFile: string;
+  LanguageFile: String;
 begin
   Result := ''; //If no language is present, no localization will be loaded
-  if Default
-    then LanguageFile := LanguageFolder + AppNameD + GetOSLanguage + '.po'
-    else LanguageFile := LanguageFolder + AppNameD + AppOptions.GUILanguage + '.po';
-  if FileExists (LanguageFile) then exit (LanguageFile);
-  if FileExists (DefaultDialect(LanguageFile)) then exit (DefaultDialect(LanguageFile));
+  if Default then
+    LanguageFile := LanguageFolder + AppNameD + GetOSLanguage + '.po'
+  else
+    LanguageFile := LanguageFolder + AppNameD + AppOptions.GUILanguage + '.po';
+
+  if FileExists(LanguageFile) then Exit(LanguageFile);
+  if FileExists(DefaultDialect(LanguageFile)) then Exit(DefaultDialect(LanguageFile));
 end;
 
 // -----------------------------------------------------------------------------

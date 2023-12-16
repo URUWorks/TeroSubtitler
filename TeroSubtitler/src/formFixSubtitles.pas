@@ -24,8 +24,9 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  CheckLst, laz.VirtualTrees, UWSubtitleAPI, procFixSubtitles, UWSystem.XMLLang,
-  generics.collections, LCLIntf, LCLType, Menus, procConventions, UWLayout, LCLTranslator, procLocalize;
+  CheckLst, laz.VirtualTrees, UWSubtitleAPI, procFixSubtitles,
+  generics.collections, LCLIntf, LCLType, Menus, procConventions, UWLayout,
+  LCLTranslator, procLocalize;
 
 type
 

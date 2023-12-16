@@ -57,8 +57,8 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procConfig, procDialogs, UWSystem.XMLLang,
-  UWSystem.Process, UWSystem.TimeUtils, StrUtils, formMain, MPVPlayer;
+  procTypes, procWorkspace, procConfig, procDialogs, UWSystem.Process,
+  UWSystem.TimeUtils, StrUtils, formMain, MPVPlayer;
 
 {$R *.lfm}
 

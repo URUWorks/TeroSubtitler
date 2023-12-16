@@ -54,7 +54,7 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, UWSystem.XMLLang;
+  procTypes, procWorkspace;
 
 {$R *.lfm}
 

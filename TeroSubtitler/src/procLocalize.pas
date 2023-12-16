@@ -264,9 +264,9 @@ resourcestring
   lngscMilliseconds = 'Milliseconds';
   lngscHHMMSSZZZ = 'HH:MM:SS.ZZZ';
   lngscHHMMSSFF = 'HH:MM:SS:FF';
-  lngscedl = 'Edit Decision Lists';
-  lngscshotchanges = 'Text files';
-  lngscxml = 'XML';
+  lngscEDL = 'Edit Decision Lists';
+  lngscShotChanges = 'Text files';
+  lngscXML = 'XML';
 
   //ShortCutCategoryStrings
   lngscEdit = 'Edit';

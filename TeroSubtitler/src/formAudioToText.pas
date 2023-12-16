@@ -97,6 +97,10 @@ begin
   btnGenerate.Enabled := (cboTrack.Items.Count > 0);
   CancelProcess := False;
   cboEngineSelect(NIL);
+
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------
