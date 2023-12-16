@@ -426,8 +426,24 @@ end;
 // -----------------------------------------------------------------------------
 
 function UnbreakSubtitles(const Text: String; const BreakChar: String = sLineBreak): String;
+var
+  AllLines : Array of String;
+  Line : integer = 0;
 begin
-  Result := ReplaceString(Text, BreakChar, ' ');
+  if Pos(BreakChar,Text) = 0 then
+    Exit(Text);
+
+  if Pos('-',Text) = 0 then
+    Exit(ReplaceString(Text, BreakChar, ' '));
+
+  AllLines := Text.Split([BreakChar]);
+  Result := AllLines[0];
+
+ for Line := 1 to High(AllLines) do
+   if UTF8LeftStr(AllLines[Line],1)= '-' then
+     Result := Result + BreakChar + AllLines[Line]
+   else
+     Result := Result + ' ' + AllLines[Line];
 end;
 
 // -----------------------------------------------------------------------------
