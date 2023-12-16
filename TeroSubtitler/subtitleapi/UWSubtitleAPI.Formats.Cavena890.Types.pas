@@ -66,20 +66,22 @@ const
   LangIdRussian            = $56;
   LangIdChineseTraditional = $90;
   LangIdChineseSimplified  = $91;
+  LangIdBulgarian          = $77;
 
-  LanguageId: array[0..11] of TLanguageId = (
+  LanguageId: array[0..12] of TLanguageId = (
     (ShortName: 'da';    Hex: LangIdDanish),
     (ShortName: 'en';    Hex: LangIdEnglish),
     (ShortName: 'es';    Hex: LangIdSpanish),
     (ShortName: 'fr';    Hex: LangIdFrench),
     (ShortName: 'sv';    Hex: LangIdSwedish),
     (ShortName: 'it';    Hex: LangIdItalian),
-    (ShortName: 'pr';    Hex: LangIdPortuguese),
+    (ShortName: 'pt-BR'; Hex: LangIdPortuguese),
     (ShortName: 'el';    Hex: LangIdHebrew),
     (ShortName: 'ar';    Hex: LangIdArabic),
     (ShortName: 'ru';    Hex: LangIdRussian),
     (ShortName: 'zh-CN'; Hex: LangIdChineseTraditional),
-    (ShortName: 'zh-TW'; Hex: LangIdChineseSimplified)
+    (ShortName: 'zh-TW'; Hex: LangIdChineseSimplified),
+    (ShortName: 'bg'; Hex: LangIdBulgarian)
   );
 
   TUnkownCodes : array[0..6] of Byte = ($00, $00, $00, $00, $00, $00, $00);
