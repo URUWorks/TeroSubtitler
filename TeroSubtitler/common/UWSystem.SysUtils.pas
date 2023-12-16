@@ -53,7 +53,7 @@ function StringToShortInt(const S: String; const Default: ShortInt = 0): ShortIn
 function StringToSmallInt(const S: String; const Default: SmallInt = 0): SmallInt;
 function StringToInt(const S: String; const Default: Integer = 0): Integer;
 
-function HexToByte(const s: String): Byte;
+function HexToByte(s: String): Byte;
 function BaseToInt(const Number: String; const Base: Byte): Integer;
 function HexStrToInt(S: String): Integer;
 function HexStrToColor(S: String): TColor;
@@ -336,12 +336,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function HexToByte(const s: String): Byte;
+function HexToByte(s: String): Byte;
 const
   cs = '0123456789ABCDEF';
 
 begin
-
+  s := s.ToUpper;
   if (Length(s) = 2) and CharInSet(s[1], ['0'..'9','A'..'F']) and CharInSet(s[2], ['0'..'9','A'..'F']) then
     Result := ((Pos(s[1], cs)-1)*16) + (Pos(s[2], cs)-1)
   else
