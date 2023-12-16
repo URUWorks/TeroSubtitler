@@ -72,8 +72,8 @@ type
   private
     FIndex: Integer;
     FLngList: TStrings;
-    sSuccess, sFailed: String;
     procedure SetPageStep(const AIndex: Integer);
+    procedure SetLanguage;
   public
   end;
 
@@ -100,8 +100,6 @@ procedure TfrmWizard.FormCreate(Sender: TObject);
 begin
   FLngList := TStringList.Create;
   FIndex   := 0;
-  sSuccess := lngSuccess;
-  sFailed  := lngFailed;
 
   btnDownloadYTDLP.Caption   := btnDownload.Caption;
   btnDownloadFFMPEG.Caption  := btnDownload.Caption;
@@ -119,66 +117,67 @@ begin
   if FileExists(libMPVFileName) then
   begin
     btnDownload.Enabled := False;
-    lblLibMPVStatus.Caption := sSuccess;
+    lblLibMPVStatus.Caption := lngSuccess;
   end
   else
   begin
     btnDownload.Enabled := True;
-    lblLibMPVStatus.Caption := sFailed;
+    lblLibMPVStatus.Caption := lngFailed;
   end;
 
   // yt-dlp
   if FileExists(YTDLPFileName) then
   begin
     btnDownloadYTDLP.Enabled := False;
-    lblYTDLPStatus.Caption := sSuccess;
+    lblYTDLPStatus.Caption := lngSuccess;
   end
   else
   begin
     btnDownloadYTDLP.Enabled := True;
-    lblYTDLPStatus.Caption := sFailed;
+    lblYTDLPStatus.Caption := lngFailed;
   end;
 
   // ffmpeg
   if FileExists(ffmpegFileName) then
   begin
     btnDownloadFFMPEG.Enabled := False;
-    lblFFMPEGStatus.Caption := sSuccess;
+    lblFFMPEGStatus.Caption := lngSuccess;
   end
   else
   begin
     btnDownloadFFMPEG.Enabled := True;
-    lblFFMPEGStatus.Caption := sFailed;
+    lblFFMPEGStatus.Caption := lngFailed;
   end;
 
   // whisper.cpp
   if FileExists(WhisperFileName) then
   begin
     btnDownloadWhisper.Enabled := False;
-    lblWhisperStatus.Caption := sSuccess;
+    lblWhisperStatus.Caption := lngSuccess;
   end
   else
   begin
     btnDownloadWhisper.Enabled := True;
-    lblWhisperStatus.Caption := sFailed;
+    lblWhisperStatus.Caption := lngFailed;
   end;
 
   // faster-whisper
   if FileExists(Tools.FasterWhisper) then
   begin
     btnDownloadFasterWhisper.Enabled := False;
-    lblFasterWhisperStatus.Caption := sSuccess;
+    lblFasterWhisperStatus.Caption := lngSuccess;
   end
   else
   begin
     btnDownloadFasterWhisper.Enabled := True;
-    lblFasterWhisperStatus.Caption := sFailed;
+    lblFasterWhisperStatus.Caption := lngFailed;
   end;
 
   lblLanguage.Visible := False;
   cboLanguage.Visible := False;
   FillComboWithLanguages(cboLanguage, FLngList);
   GetGUILangIndex(FLngList, GetOSLanguage);
+  SetLanguage;
 end;
 
 // -----------------------------------------------------------------------------
@@ -240,7 +239,9 @@ begin
   SetPageStep(FIndex+1);
 end;
 
-procedure TfrmWizard.cboLanguageChange(Sender: TObject);
+// -----------------------------------------------------------------------------
+
+procedure TfrmWizard.SetLanguage;
 begin
   if Length(FLngList.Strings[cboLanguage.ItemIndex].Split([';'])) > 0 then
     AppOptions.GUILanguage := FLngList.Strings[cboLanguage.ItemIndex].Split([';'])[0]
@@ -252,13 +253,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmWizard.cboLanguageChange(Sender: TObject);
+begin
+  SetLanguage;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmWizard.btnDownloadClick(Sender: TObject);
 begin
   ShowDownloadDialog(URL_LIBMPV, ConcatPaths([libmpvFolder, 'libmpv.zip']));
   if FileExists(libMPVFileName) then
   begin
     btnDownload.Enabled := False;
-    lblLibMPVStatus.Caption   := sSuccess;
+    lblLibMPVStatus.Caption := lngSuccess;
   end;
 end;
 
@@ -275,7 +283,7 @@ begin
   begin
     btnDownloadYTDLP.Enabled := False;
     Tools.YTDLP              := ConcatPaths([YTDLPFolder, YTDLP_EXE]);
-    lblYTDLPStatus.Caption   := sSuccess;
+    lblYTDLPStatus.Caption   := lngSuccess;
   end;
 end;
 
@@ -293,7 +301,7 @@ begin
   begin
     btnDownloadFFMPEG.Enabled := False;
     Tools.FFmpeg              := ConcatPaths([ffmpegFolder, FFMPEG_EXE]);
-    lblFFMPEGStatus.Caption   := sSuccess;
+    lblFFMPEGStatus.Caption   := lngSuccess;
   end;
 end;
 
@@ -310,7 +318,7 @@ begin
   begin
     btnDownloadWhisper.Enabled := False;
     Tools.WhisperCPP           := ConcatPaths([WhisperFolder, WHISPER_EXE]);
-    lblWhisperStatus.Caption   := sSuccess;
+    lblWhisperStatus.Caption   := lngSuccess;
   end;
 end;
 
@@ -328,7 +336,7 @@ begin
   begin
     btnDownloadFasterWhisper.Enabled := False;
     Tools.FasterWhisper              := ConcatPaths([WhisperFolder, FASTERWHISPER_EXE]);
-    lblFasterWhisperStatus.Caption   := sSuccess;
+    lblFasterWhisperStatus.Caption   := lngSuccess;
   end;
 end;
 
