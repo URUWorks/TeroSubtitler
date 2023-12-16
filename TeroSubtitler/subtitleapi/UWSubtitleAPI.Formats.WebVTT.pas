@@ -22,14 +22,23 @@ unit UWSubtitleAPI.Formats.WebVTT;
 interface
 
 uses
-  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSubtitleAPI.Formats;
+  Classes, SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSubtitleAPI.Formats,
+  RegExpr, Graphics;
 
 type
 
   { TUWWebVTT }
 
   TUWWebVTT = class(TUWSubtitleCustomFormat)
+  private
+    FColors : TStringList;
+    function FromRepl(ARegExpr: TRegExpr): RegExprString;
+    function TagsToTS(const Text: String): String;
+    function ToRepl(ARegExpr: TRegExpr): RegExprString;
+    function TSToTags(const Text: String): String;
   public
+    constructor Create;
+    destructor Destroy; override;
     function Name: String; override;
     function Format: TUWSubtitleFormats; override;
     function Extension: String; override;
@@ -81,6 +90,10 @@ Replacements
 & has to be replaced with &amp;
 < has to be replaced with &lt;
 > has to be replaced with &gt;
+
+Color declaration tags
+<c.lime>Hey!</c>
+
 Voice declaration tags
 
 <v.Name>
@@ -89,6 +102,127 @@ Example:
 - <v.John>Hey!</v>
 - <v.Jane>Hey!</v>
 }
+
+type
+
+  TUWWebVTTColor = record
+    Name  : String;
+    Color : String;
+  end;
+
+const
+
+  TUWWebVTTDefColors : array[0..7] of TUWWebVTTColor =
+  (
+    (Name: 'white'; Color: 'ffffff'),
+    (Name: 'lime'; Color: '00ff00'),
+    (Name: 'cyan'; Color: 'ffff00'),
+    (Name: 'red'; Color: '0000ff'),
+    (Name: 'yellow'; Color: '00ffff'),
+    (Name: 'magenta'; Color: 'ff00ff'),
+    (Name: 'blue'; Color: 'ff0000'),
+    (Name: 'black'; Color: '000000')
+  );
+
+// -----------------------------------------------------------------------------
+
+constructor TUWWebVTT.Create;
+var
+  i: Integer;
+begin
+  inherited Create;
+
+  FColors := TStringList.Create;
+  FColors.Duplicates := dupIgnore;
+  for i := 0 to High(TUWWebVTTDefColors) do
+    FColors.AddPair(TUWWebVTTDefColors[i].Name, TUWWebVTTDefColors[i].Color);
+end;
+
+// -----------------------------------------------------------------------------
+
+destructor TUWWebVTT.Destroy;
+begin
+  FColors.Free;
+
+  inherited Destroy;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWWebVTT.FromRepl(ARegExpr: TRegExpr): RegExprString;
+var
+  i: Integer;
+  s: String;
+begin
+  s := ARegExpr.Match[1];
+  i := FColors.IndexOfName(s);
+
+  if i >= 0 then
+    s := FColors.ValueFromIndex[i];
+
+  Result := '{\c&' + s + '&}';
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWWebVTT.TagsToTS(const Text: String): String;
+begin
+  Result := Text;
+  if Result.IsEmpty then Exit;
+
+  with TRegExpr.Create('\<c\.(.*?)\>') do
+  try
+     Result := Replace(Result, @FromRepl);
+  finally
+    Free;
+  end;
+
+  Result := ReplaceString(Result, '</c>', '{\c}');
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWWebVTT.ToRepl(ARegExpr: TRegExpr): RegExprString;
+var
+  i: Integer;
+  s: String;
+  b: Boolean;
+begin
+  b := False;
+  s := ARegExpr.Match[1];
+  for i := 0 to FColors.Count-1 do
+    if s = FColors.ValueFromIndex[i] then
+    begin
+      s := FColors.Names[i];
+      b := True;
+      Break;
+    end;
+
+  if not b then
+    FColors.AddPair(s, s);
+
+  Result := '<c.' + s + '>';
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWWebVTT.TSToTags(const Text: String): String;
+var
+  i: Integer;
+  s: String;
+begin
+  Result := Text;
+  if Result.IsEmpty then Exit;
+
+  with TRegExpr.Create('\{\\c&(.*?)\&}') do
+  try
+     Result := Replace(Result, @ToRepl);
+  finally
+    Free;
+  end;
+
+  Result := ReplaceString(Result, '{\c}', '</c>');
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -142,13 +276,27 @@ end;
 // -----------------------------------------------------------------------------
 
 function TUWWebVTT.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
+
+  function rgbToStr(s: String): String;
+  var
+    sArray: TStringArray;
+  begin
+    Result := '';
+    sArray := s.Split(',');
+
+    if Length(sArray) > 2 then
+      Result := IntToHexStr(RGBToColor(sArray[0].ToInteger, sArray[1].ToInteger, sArray[2].ToInteger)).ToLower;
+
+    SetLength(sArray, 0);
+  end;
+
 var
-  i, c, x, v  : Integer;
+  i, c, x, v : Integer;
   InitialTime : Integer;
-  FinalTime   : Integer;
-  Text, s     : String;
-  ExtraInfo   : PWebVTT_ExtraInfo;
-  ExtraTime   : Integer;
+  FinalTime : Integer;
+  Text, s, Voice : String;
+  ExtraInfo : PWebVTT_ExtraInfo;
+  ExtraTime : Integer;
 begin
   Result := False;
   try
@@ -165,7 +313,21 @@ begin
     i := 0;
     while i < SubtitleFile.Count do
     begin
-      if Pos(' --> ', SubtitleFile[i]) > 0 then
+      if SubtitleFile[i].StartsWith('::cue(.') then
+      begin
+        with TRegExpr.Create('\:\:cue\(([a-zA-Z\._\-\d%#]*)\)\s\{\scolor:rgb\(([\,\d]*)\)\s\}') do // "::cue(.mycolor) { color:rgb(254,219,72) }"
+        try
+          try
+            InputString := SubtitleFile[i];
+            if Exec then
+              FColors.AddPair(Match[1], rgbToStr(Match[2]));
+          except
+          end;
+        finally
+          Free;
+        end;
+      end
+      else if Pos(' --> ', SubtitleFile[i]) > 0 then
       begin
         s := ReplaceString(SubtitleFile[i], ' ', '');
 
@@ -241,9 +403,29 @@ begin
             Inc(i);
           end;
           Dec(i);
-          Text := HTMLTagsToTS(HTMLDecode(Text));
+
+          // Get speaker/voice
+          Voice := '';
+          with TRegExpr.Create('\<v\s([\S]*)\>([\s\S]*)\<\/v\>') do // "<v Bob>text</v>"
+          try
+            try
+              InputString := Text;
+              if Exec then
+              begin
+                Voice := Match[1];
+                Text := Replace(InputString, '$2', True);
+              end;
+            except
+            end;
+          finally
+            Free;
+          end;
+
+          // Final text
+          Text := TagsToTS(HTMLTagsToTS(HTMLDecode(Text)));
           x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
-          Subtitles.ItemPointer[x]^.Align  := TSubtitleHAlign(c);
+          Subtitles.ItemPointer[x]^.Actor := Voice;
+          Subtitles.ItemPointer[x]^.Align := TSubtitleHAlign(c);
           Subtitles.ItemPointer[x]^.VAlign := TSubtitleVAlign(v);
         end;
       end;
@@ -262,12 +444,14 @@ end;
 
 function TUWWebVTT.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
-  i : Integer;
+  i, c : Integer;
   Text : String;
   Align : String;
 //  ExtraTime : Integer;
+  SL : TStringList;
+  b : Boolean;
 begin
-  Result  := False;
+  Result := False;
 
   StringList.Add('WEBVTT', False);
 
@@ -310,9 +494,43 @@ begin
       StringList.Add((i+1).ToString, False);
 
     StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz') + Align, False);
-    Text := TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
+    Text := TSTagsToHTML(TSToTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])));
+    if not Subtitles[i].Actor.IsEmpty then
+      Text := '<v ' + Subtitles[i].Actor + '>' + Text + '</v>';
+
     StringList.Add(Text, False);
     StringList.Add('', False);
+  end;
+
+  SL := TStringList.Create;
+  try
+    SL.Duplicates := dupIgnore;
+    SL.Clear;
+
+    for i := 0 to FColors.Count-1 do
+    begin
+      b := False;
+      for c := 0 to High(TUWWebVTTDefColors) do
+        if FColors.Names[i] = TUWWebVTTDefColors[c].Name then
+        begin
+          b := True;
+          Break;
+        end;
+
+      if not b then
+        SL.Add(
+          SysUtils.Format('::cue(.%s) { color:rgb(%d,%d,%d) }',
+            [FColors.Names[i], HexToByte(Copy(FColors.ValueFromIndex[i], 1, 2)), HexToByte(Copy(FColors.ValueFromIndex[i], 3, 2)), HexToByte(Copy(FColors.ValueFromIndex[i], 5, 2))])
+        );
+    end;
+
+    if SL.Count > 0 then
+    begin
+      SL.Insert(0, 'STYLE');
+      StringList.Insert(2, SL.Text, False);
+    end;
+  finally
+    SL.Free;
   end;
 
   try
