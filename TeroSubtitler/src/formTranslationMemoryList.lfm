@@ -11,7 +11,6 @@ object frmTranslationMemoryList: TfrmTranslationMemoryList
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
   object VST: TLazVirtualStringTree
     Left = 8
     Height = 351
@@ -57,7 +56,7 @@ object frmTranslationMemoryList: TfrmTranslationMemoryList
     Left = 8
     Height = 15
     Top = 372
-    Width = 28
+    Width = 30
     Caption = 'Total:'
     ParentColor = False
   end
@@ -65,7 +64,7 @@ object frmTranslationMemoryList: TfrmTranslationMemoryList
     AnchorSideLeft.Control = lblTotal
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = lblTotal
-    Left = 44
+    Left = 46
     Height = 15
     Top = 372
     Width = 6

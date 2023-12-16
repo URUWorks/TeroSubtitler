@@ -26,8 +26,8 @@ uses
   LCLIntf, fileinfo,
   winpeimagereader, {need this for reading exe info}
   elfreader, {needed for reading ELF executables}
-  machoreader; {needed for reading MACH-O executables}
-
+  machoreader {needed for reading MACH-O executables},
+  LCLTranslator, procLocalize;
 
 type
 
@@ -59,7 +59,7 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procConfig, procColorTheme, UWSystem.StrUtils;
+  procTypes, procWorkspace, procColorTheme;
 
 {$R *.lfm}
 
@@ -73,17 +73,13 @@ procedure TfrmAbout.FormCreate(Sender: TObject);
 var
   FileVerInfo: TFileVersionInfo;
 begin
-  LoadLanguage(Self);
-
   FileVerInfo := TFileVersionInfo.Create(NIL);
   try
     FileVerInfo.ReadFileInfo;
-
-    lblInfo.Caption := Format(ReplaceEnters(lblInfo.Caption, '|', sLineBreak),
-      [FileVerInfo.VersionStrings.Values['FileVersion'], {$I %TIME%}, {$I %DATE%}, {$I %FPCVERSION%}, {$I %FPCTARGET%}]);
-
+   { lblInfo.Caption := Format(ReplaceEnters(lblInfo.Caption, '|', sLineBreak),
+      [FileVerInfo.VersionStrings.Values['FileVersion'], {$I %TIME%}, {$I %DATE%}, {$I %FPCVERSION%}, {$I %FPCTARGET%}]);}
+    lblInfo.Caption := Format(lngabVersion, [FileVerInfo.VersionStrings.Values['FileVersion'], {$I %TIME%}, {$I %DATE%}, {$I %FPCVERSION%}, {$I %FPCTARGET%}]);
     lblUW.Caption := 'uruworks.net' + sLineBreak + FileVerInfo.VersionStrings.Values['LegalCopyright'];
-    lblDonate.Caption := ReplaceEnters(lblDonate.Caption, '|', sLineBreak);
   finally
     FileVerInfo.Free;
   end;

@@ -5,7 +5,7 @@ object frmGoTo: TfrmGoTo
   Width = 280
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Go to'
+  Caption = 'Go to line'
   ClientHeight = 93
   ClientWidth = 280
   OnClose = FormClose
@@ -17,8 +17,8 @@ object frmGoTo: TfrmGoTo
     Left = 8
     Height = 15
     Top = 8
-    Width = 47
-    Caption = 'Number:'
+    Width = 30
+    Caption = 'Entry:'
     ParentColor = False
   end
   object edtNumber: TEdit

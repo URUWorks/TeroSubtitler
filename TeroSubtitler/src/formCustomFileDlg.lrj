@@ -1,0 +1,9 @@
+{"version":1,"strings":[
+{"hash":12558,"name":"tfrmcustomfiledlg.btnopenfile.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":2901221,"name":"tfrmcustomfiledlg.lblfilename.caption","sourcebytes":[70,105,108,101,110,97,109,101],"value":"Filename"},
+{"hash":81171332,"name":"tfrmcustomfiledlg.lblformat.caption","sourcebytes":[70,111,114,109,97,116],"value":"Format"},
+{"hash":77966471,"name":"tfrmcustomfiledlg.lblencoding.caption","sourcebytes":[69,110,99,111,100,105,110,103],"value":"Encoding"},
+{"hash":4749113,"name":"tfrmcustomfiledlg.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":77089212,"name":"tfrmcustomfiledlg.btncancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":19283,"name":"tfrmcustomfiledlg.lblfps.caption","sourcebytes":[70,80,83],"value":"FPS"}
+]}

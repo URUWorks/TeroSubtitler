@@ -1,0 +1,7 @@
+{"version":1,"strings":[
+{"hash":75150995,"name":"tfrmactors.caption","sourcebytes":[65,99,116,111,114,115],"value":"Actors"},
+{"hash":43,"name":"tfrmactors.btnactoradd.caption","sourcebytes":[43],"value":"+"},
+{"hash":45,"name":"tfrmactors.btnactorremove.caption","sourcebytes":[45],"value":"-"},
+{"hash":4749113,"name":"tfrmactors.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmactors.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

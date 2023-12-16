@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  laz.VirtualTrees, fgl, StrUtils, LCLIntf, LCLType, UWCheckBox;
+  laz.VirtualTrees, fgl, StrUtils, LCLIntf, LCLType, UWCheckBox, LCLTranslator;
 
 type
 
@@ -85,7 +85,7 @@ implementation
 
 uses
   UWSystem.SysUtils, UWSubtitleAPI, procVST, procSubtitle, procTypes, RegExpr,
-  procWorkspace, procColorTheme, procConfig, UWSystem.XMLLang;
+  procWorkspace, procColorTheme, procLocalize;
 
 {$R *.lfm}
 
@@ -96,18 +96,20 @@ uses
 // -----------------------------------------------------------------------------
 
 procedure TfrmMultipleReplace.FormCreate(Sender: TObject);
-var
-  FAppStringList: TAppStringList = NIL;
 begin
-  LoadLanguage(Self);
+  //LoadLanguage(Self);
+  //TODO: Localize = Seems there is nothing to do, the strings are commented
 
   FList := TListFind.Create;
 
-  LanguageManager.GetAppStringList('MultipleReplaceStrings', FAppStringList);
+  VSTAddColumn(VST, lngmrFind, 150);
+  VSTAddColumn(VST, lngmrReplaceWith, 150);
+  VSTAddColumn(VST, lngmrRegExpr, 100);
+
+{  LanguageManager.GetAppStringList('MultipleReplaceStrings', FAppStringList);
   VSTAddColumn(VST, GetString(FAppStringList, 'Find'), 150);
   VSTAddColumn(VST, GetString(FAppStringList, 'ReplaceWith'), 150);
-  VSTAddColumn(VST, GetString(FAppStringList, 'RegExpr'), 100);
-  FAppStringList.Free;
+  VSTAddColumn(VST, GetString(FAppStringList, 'RegExpr'), 100);}
 end;
 
 // -----------------------------------------------------------------------------

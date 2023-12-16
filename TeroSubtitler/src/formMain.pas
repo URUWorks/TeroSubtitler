@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2024 URUWorks, uruworks@gmail.com.
  *}
 
 unit formMain;
@@ -26,7 +26,8 @@ uses
   StdCtrls, ExtCtrls, Types, UWLayout, WAVDisplayer, UWTimeEdit, UWMemo,
   UWFlatButton, UWSeekBar, UWStatusBar, UWSubtitleAPI, BGRABitmap,
   BGRABitmapTypes, UWSystem.TimeUtils, LCLIntf, LCLType, ActnList, Buttons,
-  laz.VirtualTrees, MPVPlayer, UWSubtitleAPI.Formats, procTypes, procUndo;
+  laz.VirtualTrees, MPVPlayer, UWSubtitleAPI.Formats, procTypes, procUndo,
+  LCLTranslator, UWSystem.Globalization, procLocalize;
 
 type
 
@@ -733,7 +734,6 @@ type
     procedure MPVClick(Sender: TObject);
     procedure MPVStartFile(Sender: TObject);
     procedure MPVFileLoaded(Sender: TObject);
-    procedure MPVEndFile(ASender: TObject; AParam: Integer);
     procedure MPVPause(Sender: TObject);
     procedure MPVPlay(Sender: TObject);
     procedure MPVStop(Sender: TObject);
@@ -968,7 +968,7 @@ uses
   procUnDockVideoControls, procColorTheme, procFiles, procMPV, procSubtitle,
   procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.XMLLang,
   UWSystem.SysUtils, UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX,
-  formCustomQuestionDlg, formCustomSelectDlg;
+  formCustomQuestionDlg, formCustomSelectDlg ;
 
 {$R *.lfm}
 
@@ -1000,8 +1000,8 @@ begin
   LoadSettings;
   LoadShortCutsFromFile(ShortCutFileName, ActionList);
   // Init and load language
-  LanguageManager.SetLanguageFolder(LanguageFolder);
-  LoadLanguage(Self, False);
+  //LanguageManager.SetLanguageFolder(LanguageFolder); //TODO: Localize: Is this necessary?
+  SetGUILanguage;
   UpdateCommonActionString;
   RefreshAppTitle;
   // VST
@@ -1609,7 +1609,7 @@ function SAPILoadDataFunc(const AData: Pointer; const ADataClass: ShortString): 
 begin
   Result := 0;
   if ADataClass = 'TStringList' then
-    Result := formCustomSelectDlg.ExecuteDialog('', GetCommonString('SelectSheetToUse'), TStrings(AData), 0);
+    Result := formCustomSelectDlg.ExecuteDialog('', lngSelectSheetToUse, TStrings(AData), 0);
 end;
 
 // -----------------------------------------------------------------------------

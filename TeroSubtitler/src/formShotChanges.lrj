@@ -1,0 +1,14 @@
+{"version":1,"strings":[
+{"hash":209267619,"name":"tfrmshotchanges.caption","sourcebytes":[83,104,111,116,32,99,104,97,110,103,101,115],"value":"Shot changes"},
+{"hash":4749113,"name":"tfrmshotchanges.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmshotchanges.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":214297908,"name":"tfrmshotchanges.lbltimecodein.caption","sourcebytes":[84,105,109,101,32,99,111,100,101,32,102,111,114,32,105,109,112,111,114,116],"value":"Time code for import"},
+{"hash":124338510,"name":"tfrmshotchanges.btnimport.caption","sourcebytes":[73,109,112,111,114,116,46,46,46],"value":"Import..."},
+{"hash":78424996,"name":"tfrmshotchanges.btndetect.caption","sourcebytes":[68,101,116,101,99,116],"value":"Detect"},
+{"hash":124337662,"name":"tfrmshotchanges.btnexport.caption","sourcebytes":[69,120,112,111,114,116,46,46,46],"value":"Export..."},
+{"hash":175354873,"name":"tfrmshotchanges.lblsensitivity.caption","sourcebytes":[68,101,116,101,99,116,105,111,110,32,115,101,110,115,105,116,105,118,105,116,121],"value":"Detection sensitivity"},
+{"hash":210693428,"name":"tfrmshotchanges.lbltimecodeout.caption","sourcebytes":[84,105,109,101,32,99,111,100,101,32,102,111,114,32,101,120,112,111,114,116],"value":"Time code for export"},
+{"hash":43,"name":"tfrmshotchanges.cbooffset.text","sourcebytes":[43],"value":"+"},
+{"hash":89971140,"name":"tfrmshotchanges.lbloffset.caption","sourcebytes":[79,102,102,115,101,116],"value":"Offset"},
+{"hash":249483508,"name":"tfrmshotchanges.lbldetectapp.caption","sourcebytes":[65,112,112,32,116,111,32,100,101,116,101,99,116],"value":"App to detect"}
+]}

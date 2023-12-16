@@ -1,0 +1,14 @@
+{"version":1,"strings":[
+{"hash":61648324,"name":"tfrmaudiototext.caption","sourcebytes":[65,117,100,105,111,32,116,111,32,116,101,120,116],"value":"Audio to text"},
+{"hash":139375349,"name":"tfrmaudiototext.lbllanguage.caption","sourcebytes":[76,97,110,103,117,97,103,101],"value":"Language"},
+{"hash":5528252,"name":"tfrmaudiototext.lblmodel.caption","sourcebytes":[77,111,100,101,108],"value":"Model"},
+{"hash":12558,"name":"tfrmaudiototext.btnmodel.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":206343285,"name":"tfrmaudiototext.btngenerate.caption","sourcebytes":[71,101,110,101,114,97,116,101],"value":"Generate"},
+{"hash":4863637,"name":"tfrmaudiototext.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":5998491,"name":"tfrmaudiototext.lbltrack.caption","sourcebytes":[84,114,97,99,107],"value":"Track"},
+{"hash":193367063,"name":"tfrmaudiototext.rbnaddsubtitleswhiletranscribing.caption","sourcebytes":[65,100,100,32,115,117,98,116,105,116,108,101,115,32,119,104,105,108,101,32,116,114,97,110,115,99,114,105,98,105,110,103],"value":"Add subtitles while transcribing"},
+{"hash":62290958,"name":"tfrmaudiototext.rbnloadsubtitlesaftertranscript.caption","sourcebytes":[76,111,97,100,32,115,117,98,116,105,116,108,101,115,32,97,102,116,101,114,32,116,114,97,110,115,99,114,105,112,116,105,111,110],"value":"Load subtitles after transcription"},
+{"hash":91053608,"name":"tfrmaudiototext.chktranslate.caption","sourcebytes":[84,114,97,110,115,108,97,116,101,32,116,111,32,208,149,110,103,108,105,115,104],"value":"Translate to \u0415nglish"},
+{"hash":80011333,"name":"tfrmaudiototext.lblengine.caption","sourcebytes":[69,110,103,105,110,101],"value":"Engine"},
+{"hash":12558,"name":"tfrmaudiototext.btnengine.caption","sourcebytes":[46,46,46],"value":"..."}
+]}

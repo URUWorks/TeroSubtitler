@@ -12,7 +12,6 @@ object frmAudioToText: TfrmAudioToText
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
   object lblLanguage: TLabel
     AnchorSideTop.Control = cboLanguage
     AnchorSideTop.Side = asrCenter
@@ -203,7 +202,7 @@ object frmAudioToText: TfrmAudioToText
     Width = 16
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = 'Translate to english'
+    Caption = 'Translate to Еnglish'
     TabOrder = 8
   end
   object cboEngine: TComboBox

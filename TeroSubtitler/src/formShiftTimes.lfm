@@ -5,7 +5,7 @@ object frmShiftTimes: TfrmShiftTimes
   Width = 293
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Shift'
+  Caption = 'Shift times'
   ClientHeight = 188
   ClientWidth = 293
   OnClose = FormClose

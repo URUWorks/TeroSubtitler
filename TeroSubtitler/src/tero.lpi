@@ -17,14 +17,65 @@
       <Icon Value="0"/>
     </General>
     <i18n>
+      <EnableI18N Value="True"/>
       <OutDir Value="..\bin\Languages"/>
+      <ExcludedIdentifiers Count="48">
+        <Item1 Value="tfrmmain.caption"/>
+        <Item2 Value="tfrmmain.lblseparatorfps.caption"/>
+        <Item3 Value="tfrmmain.lblmedialength.caption"/>
+        <Item4 Value="tfrmmain.lblmediatime.caption"/>
+        <Item5 Value="tfrmmain.mmotext.labelmemo.caption"/>
+        <Item6 Value="tfrmmain.mmotranslation.labelmemo.caption"/>
+        <Item7 Value="tfrmmain.mnumemoformat.caption"/>
+        <Item8 Value="tfrmmain.mnuvstformat.caption"/>
+        <Item9 Value="tfrmmain.tlbeditor_.caption"/>
+        <Item10 Value="tfrmmain.tlbmain_.caption"/>
+        <Item11 Value="tfrmmain.tlbvideo_.caption"/>
+        <Item12 Value="tfrmmain.tlbwaveform_.caption"/>
+        <Item13 Value="tfrmsettings.lblshortcutinuse.caption"/>
+        <Item14 Value="tfrmgoto.edtnumber.text"/>
+        <Item15 Value="tfrmtbxlist.lblcount.caption"/>
+        <Item16 Value="tfrmtimeexpander.edtdurationvalue.text"/>
+        <Item17 Value="tfrmtimeexpander.edtsubtitlevalue.text"/>
+        <Item18 Value="tfrmtimeexpander.edttime.text"/>
+        <Item19 Value="tfrmtranslationmemorylist.lblcount.caption"/>
+        <Item20 Value="tfrmwizard.lblfasterwhisperstatus.caption"/>
+        <Item21 Value="tfrmwizard.lblffmpegstatus.caption"/>
+        <Item22 Value="tfrmwizard.lbllibmpvstatus.caption"/>
+        <Item23 Value="tfrmwizard.lblwhisperstatus.caption"/>
+        <Item24 Value="tfrmfixsubtitles.mnudeselectall.caption"/>
+        <Item25 Value="tfrmfixsubtitles.mnuinvertselection.caption"/>
+        <Item26 Value="tfrmfixsubtitles.mnuselectall.caption"/>
+        <Item27 Value="tfrmautomaticdurations.edtchars.text"/>
+        <Item28 Value="tfrmautomaticdurations.edtline.text"/>
+        <Item29 Value="tfrmautomaticdurations.edtword.text"/>
+        <Item30 Value="tfrmdurationlimits.edtsetmaxduration.text"/>
+        <Item31 Value="tfrmdurationlimits.edtsetminduration.text"/>
+        <Item32 Value="tfrmtimeexpander.edtdurationvalue.text"/>
+        <Item33 Value="tfrmtimeexpander.edtsubtitlevalue.text"/>
+        <Item34 Value="tfrmtimeexpander.edttime.text"/>
+        <Item35 Value="tfrmgoto.editnumber.text"/>
+        <Item36 Value="tfrmtbxlist.lblcount.caption"/>
+        <Item37 Value="tfrmtranslationmemorylist.lblcount.caption"/>
+        <Item38 Value="tfrmsettings.cbotimecodemode.text"/>
+        <Item39 Value="tfrmabout.lblInfo.caption"/>
+        <Item40 Value="tfrmabout.lblUW.caption"/>
+        <Item41 Value="tfrmmain.tlbeditor_.caption"/>
+        <Item42 Value="tfrmmain.tlbmain_.caption"/>
+        <Item43 Value="tfrmmain.tlbvideo_.caption"/>
+        <Item44 Value="tfrmmain.tlbwaveform_.caption"/>
+        <Item45 Value="tfrmsettings.tlbeditor_.caption"/>
+        <Item46 Value="tfrmsettings.tlbmain_.caption"/>
+        <Item47 Value="tfrmsettings.tlbvideo_.caption"/>
+        <Item48 Value="tfrmsettings.tlbwaveform_.caption"/>
+      </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
       <RevisionNr Value="1"/>
-      <BuildNr Value="3"/>
-      <StringTable CompanyName="URUWorks" FileDescription="Tero Subtitler" LegalCopyright="Copyright © 2023 URUWorks." ProductName="Tero Subtitler"/>
+      <BuildNr Value="4"/>
+      <StringTable CompanyName="URUWorks" FileDescription="Tero Subtitler" LegalCopyright="Copyright © 2023-2024 URUWorks." ProductName="Tero Subtitler"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
@@ -662,6 +713,10 @@
       </Unit>
       <Unit>
         <Filename Value="procGenerateVideo.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="procLocalize.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>

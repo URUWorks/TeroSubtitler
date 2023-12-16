@@ -22,7 +22,7 @@ unit formCustomSelectDlg;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, StdCtrls, LCLType, LCLIntf;
+  Classes, SysUtils, Forms, Controls, StdCtrls, LCLType, LCLIntf, LCLTranslator;
 
 type
 
@@ -51,7 +51,7 @@ var
 implementation
 
 uses
-  procTypes, procConfig, procWorkspace, UWSystem.XMLLang;
+  procTypes, procWorkspace, UWSystem.XMLLang;
 
 {$R *.lfm}
 
@@ -63,7 +63,6 @@ uses
 
 procedure TfrmCustomSelectDlg.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
   lblMessage.Caption := '';
 end;
 

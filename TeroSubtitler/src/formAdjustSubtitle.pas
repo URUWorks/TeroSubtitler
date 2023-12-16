@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
   laz.VirtualTrees, UWTimeEdit, UWLayout, UWRadioButton, procTypes, LCLIntf,
-  LCLType;
+  LCLType, LCLTranslator, procLocalize;
 
 type
 
@@ -80,7 +80,7 @@ var
 implementation
 
 uses
-  procVST, procWorkspace, procSubtitle, procColorTheme, procConfig, formMain,
+  procVST, procWorkspace, procSubtitle, procColorTheme, formMain,
   UWSystem.XMLLang;
 
 {$R *.lfm}
@@ -92,11 +92,7 @@ uses
 // -----------------------------------------------------------------------------
 
 procedure TfrmAdjustSubtitle.FormCreate(Sender: TObject);
-var
-  FAppStringList: TAppStringList = NIL;
 begin
-  LoadLanguage(Self);
-
   tedFirst.FPS      := GetFPS;
   tedLast.FPS       := tedFirst.FPS;
   tedFirst.TimeMode := GetTimeEditMode;
@@ -111,11 +107,10 @@ begin
   spnIndex.MaxValue := Subtitles.Count;
   spnIndex.MinValue := 1;
 
-  LanguageManager.GetAppStringList('AdjustSubtitleStrings', FAppStringList);
-  VSTAddColumn(VST, GetString(FAppStringList, 'Index'), 75);
-  VSTAddColumn(VST, GetString(FAppStringList, 'OldTime'), 150);
-  VSTAddColumn(VST, GetString(FAppStringList, 'NewTime'), 100);
-  FAppStringList.Free;
+  //Lng AdjustSubtitleStrings
+  VSTAddColumn(VST, lngIndex, 75);
+  VSTAddColumn(VST, lngOldTime, 150);
+  VSTAddColumn(VST, lngNewTime, 100);
 
   spnIndexChange(Sender);
   rdoSimple.Checked := True;

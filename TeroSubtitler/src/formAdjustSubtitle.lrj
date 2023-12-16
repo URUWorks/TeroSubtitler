@@ -1,0 +1,12 @@
+{"version":1,"strings":[
+{"hash":173091637,"name":"tfrmadjustsubtitle.caption","sourcebytes":[65,100,106,117,115,116,32,115,117,98,116,105,116,108,101],"value":"Adjust subtitle"},
+{"hash":4749113,"name":"tfrmadjustsubtitle.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmadjustsubtitle.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":238179317,"name":"tfrmadjustsubtitle.lblfirstspoken.caption","sourcebytes":[70,105,114,115,116,32,115,112,111,107,101,110,32,108,105,110,101],"value":"First spoken line"},
+{"hash":242905845,"name":"tfrmadjustsubtitle.lbllastspoken.caption","sourcebytes":[76,97,115,116,32,115,112,111,107,101,110,32,108,105,110,101],"value":"Last spoken line"},
+{"hash":185633971,"name":"tfrmadjustsubtitle.lblindex.caption","sourcebytes":[83,117,98,116,105,116,108,101,32,35],"value":"Subtitle #"},
+{"hash":43,"name":"tfrmadjustsubtitle.btnplus.caption","sourcebytes":[43],"value":"+"},
+{"hash":45,"name":"tfrmadjustsubtitle.btnminus.caption","sourcebytes":[45],"value":"-"},
+{"hash":94390053,"name":"tfrmadjustsubtitle.rdosimple.caption","sourcebytes":[83,105,109,112,108,101],"value":"Simple"},
+{"hash":197676484,"name":"tfrmadjustsubtitle.rdoadvanced.caption","sourcebytes":[65,100,118,97,110,99,101,100],"value":"Advanced"}
+]}

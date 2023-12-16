@@ -1,0 +1,11 @@
+{"version":1,"strings":[
+{"hash":146956512,"name":"tfrmexportsup.caption","sourcebytes":[66,108,117,45,114,97,121,32,83,85,80],"value":"Blu-ray SUP"},
+{"hash":160203102,"name":"tfrmexportsup.btnsave.caption","sourcebytes":[83,97,118,101,46,46,46],"value":"Save..."},
+{"hash":4863637,"name":"tfrmexportsup.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":170847518,"name":"tfrmexportsup.lblvideores.caption","sourcebytes":[86,105,100,101,111,32,114,101,115,111,108,117,116,105,111,110],"value":"Video resolution"},
+{"hash":120,"name":"tfrmexportsup.lblx.caption","sourcebytes":[120],"value":"x"},
+{"hash":15147289,"name":"tfrmexportsup.lblsafearea.caption","sourcebytes":[83,97,102,101,32,97,114,101,97,32,112,105,120,101,108,115,32,40,108,101,102,116,44,32,116,111,112,44,32,114,105,103,104,116,44,32,98,111,116,116,111,109,41],"value":"Safe area pixels (left, top, right, bottom)"},
+{"hash":317012,"name":"tfrmexportsup.lblfont.caption","sourcebytes":[70,111,110,116],"value":"Font"},
+{"hash":368901,"name":"tfrmexportsup.lblfontsize.caption","sourcebytes":[83,105,122,101],"value":"Size"},
+{"hash":12558,"name":"tfrmexportsup.btnres.caption","sourcebytes":[46,46,46],"value":"..."}
+]}

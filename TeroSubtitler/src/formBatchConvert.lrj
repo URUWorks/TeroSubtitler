@@ -1,0 +1,17 @@
+{"version":1,"strings":[
+{"hash":49239732,"name":"tfrmbatchconvert.caption","sourcebytes":[66,97,116,99,104,32,99,111,110,118,101,114,116],"value":"Batch convert"},
+{"hash":4749113,"name":"tfrmbatchconvert.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmbatchconvert.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":160960862,"name":"tfrmbatchconvert.btnscanfolder.caption","sourcebytes":[83,99,97,110,46,46,46],"value":"Scan..."},
+{"hash":75133198,"name":"tfrmbatchconvert.btnadd.caption","sourcebytes":[65,100,100,46,46,46],"value":"Add..."},
+{"hash":93079237,"name":"tfrmbatchconvert.btnremove.caption","sourcebytes":[82,101,109,111,118,101],"value":"Remove"},
+{"hash":195296268,"name":"tfrmbatchconvert.btnselectall.caption","sourcebytes":[83,101,108,101,99,116,32,97,108,108],"value":"Select all"},
+{"hash":84266132,"name":"tfrmbatchconvert.btninvert.caption","sourcebytes":[73,110,118,101,114,116],"value":"Invert"},
+{"hash":113998890,"name":"tfrmbatchconvert.lbloutput.caption","sourcebytes":[79,117,116,112,117,116,58],"value":"Output:"},
+{"hash":81144514,"name":"tfrmbatchconvert.lbloutputfolder.caption","sourcebytes":[70,111,108,100,101,114],"value":"Folder"},
+{"hash":81171332,"name":"tfrmbatchconvert.lblformat.caption","sourcebytes":[70,111,114,109,97,116],"value":"Format"},
+{"hash":77966471,"name":"tfrmbatchconvert.lblencoding.caption","sourcebytes":[69,110,99,111,100,105,110,103],"value":"Encoding"},
+{"hash":130423555,"name":"tfrmbatchconvert.lblfromfps.caption","sourcebytes":[73,110,112,117,116,32,70,80,83],"value":"Input FPS"},
+{"hash":230941651,"name":"tfrmbatchconvert.lbltofps.caption","sourcebytes":[84,97,114,103,101,116,32,70,80,83],"value":"Target FPS"},
+{"hash":12558,"name":"tfrmbatchconvert.btnopenfolder.caption","sourcebytes":[46,46,46],"value":"..."}
+]}

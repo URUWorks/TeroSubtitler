@@ -1,0 +1,16 @@
+{"version":1,"strings":[
+{"hash":178215748,"name":"tfrmcustomimageformat.caption","sourcebytes":[67,117,115,116,111,109,32,105,109,97,103,101,32,102,111,114,109,97,116],"value":"Custom image format"},
+{"hash":94015604,"name":"tfrmcustomimageformat.lblscript.caption","sourcebytes":[83,99,114,105,112,116],"value":"Script"},
+{"hash":19283,"name":"tfrmcustomimageformat.lblfps.caption","sourcebytes":[70,80,83],"value":"FPS"},
+{"hash":160203102,"name":"tfrmcustomimageformat.btnsave.caption","sourcebytes":[83,97,118,101,46,46,46],"value":"Save..."},
+{"hash":4863637,"name":"tfrmcustomimageformat.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":91798792,"name":"tfrmcustomimageformat.lblprefix.caption","sourcebytes":[80,114,101,102,105,120],"value":"Prefix"},
+{"hash":81144514,"name":"tfrmcustomimageformat.lblfolder.caption","sourcebytes":[70,111,108,100,101,114],"value":"Folder"},
+{"hash":12558,"name":"tfrmcustomimageformat.btnfolder.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":225617013,"name":"tfrmcustomimageformat.lblimagesize.caption","sourcebytes":[73,109,97,103,101,32,115,105,122,101],"value":"Image size"},
+{"hash":120,"name":"tfrmcustomimageformat.lblx.caption","sourcebytes":[120],"value":"x"},
+{"hash":15147289,"name":"tfrmcustomimageformat.lblsafearea.caption","sourcebytes":[83,97,102,101,32,97,114,101,97,32,112,105,120,101,108,115,32,40,108,101,102,116,44,32,116,111,112,44,32,114,105,103,104,116,44,32,98,111,116,116,111,109,41],"value":"Safe area pixels (left, top, right, bottom)"},
+{"hash":317012,"name":"tfrmcustomimageformat.lblfont.caption","sourcebytes":[70,111,110,116],"value":"Font"},
+{"hash":368901,"name":"tfrmcustomimageformat.lblfontsize.caption","sourcebytes":[83,105,122,101],"value":"Size"},
+{"hash":12558,"name":"tfrmcustomimageformat.btnres.caption","sourcebytes":[46,46,46],"value":"..."}
+]}

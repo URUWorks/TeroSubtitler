@@ -51,7 +51,6 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 5
     Caption = 'Apply'
-    Default = True
     OnClick = btnApplyClick
     TabOrder = 1
   end

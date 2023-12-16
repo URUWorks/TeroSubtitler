@@ -178,7 +178,6 @@ object frmSpellCheck: TfrmSpellCheck
     Width = 150
     Alignment = taRightJustify
     AutoSize = False
-    Caption = 'Current line'
     ParentColor = False
   end
 end

@@ -1,0 +1,6 @@
+{"version":1,"strings":[
+{"hash":5117871,"name":"tfrmgototime.caption","sourcebytes":[71,111,32,116,111],"value":"Go to"},
+{"hash":5964682,"name":"tfrmgototime.lbltime.caption","sourcebytes":[84,105,109,101,58],"value":"Time:"},
+{"hash":1247,"name":"tfrmgototime.btngo.caption","sourcebytes":[71,111],"value":"Go"},
+{"hash":4863637,"name":"tfrmgototime.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":224695422,"name":"tfrmmodifyselection.caption","sourcebytes":[77,111,100,105,102,121,32,115,101,108,101,99,116,105,111,110],"value":"Modify selection"},
+{"hash":4749113,"name":"tfrmmodifyselection.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmmodifyselection.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":234650062,"name":"tfrmmodifyselection.rbnaddtocurrentselection.caption","sourcebytes":[65,100,100,32,116,111,32,99,117,114,114,101,110,116,32,115,101,108,101,99,116,105,111,110],"value":"Add to current selection"},
+{"hash":108255150,"name":"tfrmmodifyselection.rbnnewselection.caption","sourcebytes":[78,101,119,32,115,101,108,101,99,116,105,111,110],"value":"New selection"},
+{"hash":123305742,"name":"tfrmmodifyselection.rbnsubtractfromcurrentselection.caption","sourcebytes":[83,117,98,116,114,97,99,116,32,102,114,111,109,32,99,117,114,114,101,110,116,32,115,101,108,101,99,116,105,111,110],"value":"Subtract from current selection"}
+]}

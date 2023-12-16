@@ -5,7 +5,7 @@ object frmTimeExpander: TfrmTimeExpander
   Width = 283
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Time expander'
+  Caption = 'Time expander/reducer'
   ClientHeight = 329
   ClientWidth = 283
   OnClose = FormClose

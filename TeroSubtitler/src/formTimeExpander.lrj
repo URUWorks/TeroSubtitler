@@ -1,0 +1,17 @@
+{"version":1,"strings":[
+{"hash":227010754,"name":"tfrmtimeexpander.caption","sourcebytes":[84,105,109,101,32,101,120,112,97,110,100,101,114,47,114,101,100,117,99,101,114],"value":"Time expander/reducer"},
+{"hash":49,"name":"tfrmtimeexpander.edttime.text","sourcebytes":[49],"value":"1"},
+{"hash":4749113,"name":"tfrmtimeexpander.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmtimeexpander.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":5083326,"name":"tfrmtimeexpander.chksubtitle.caption","sourcebytes":[79,110,108,121,32,105,102,32,115,117,98,116,105,116,108,101,32,105,115,32,108,111,110,103,101,114,32,116,104,97,110],"value":"Only if subtitle is longer than"},
+{"hash":49,"name":"tfrmtimeexpander.edtsubtitlevalue.text","sourcebytes":[49],"value":"1"},
+{"hash":142357011,"name":"tfrmtimeexpander.lblchars.caption","sourcebytes":[99,104,97,114,97,99,116,101,114,115],"value":"characters"},
+{"hash":227185550,"name":"tfrmtimeexpander.chkduration.caption","sourcebytes":[79,110,108,121,32,105,102,32,100,117,114,97,116,105,111,110,32,105,115,32,108,111,110,103,101,114,32,116,104,97,110],"value":"Only if duration is longer than"},
+{"hash":49,"name":"tfrmtimeexpander.edtdurationvalue.text","sourcebytes":[49],"value":"1"},
+{"hash":1859,"name":"tfrmtimeexpander.lblms.caption","sourcebytes":[109,115],"value":"ms"},
+{"hash":253276677,"name":"tfrmtimeexpander.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,116,104,101,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101],"value":"From the selected subtitle"},
+{"hash":52430339,"name":"tfrmtimeexpander.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,116,104,101,32,115,117,98,116,105,116,108,101,115],"value":"All the subtitles"},
+{"hash":94004874,"name":"tfrmtimeexpander.lblscope.caption","sourcebytes":[83,99,111,112,101,58],"value":"Scope:"},
+{"hash":82358371,"name":"tfrmtimeexpander.rbnonlyselectedsubtitles.caption","sourcebytes":[79,110,108,121,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101,115],"value":"Only selected subtitles"},
+{"hash":1859,"name":"tfrmtimeexpander.lblms1.caption","sourcebytes":[109,115],"value":"ms"}
+]}

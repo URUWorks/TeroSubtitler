@@ -53,7 +53,7 @@ var
 implementation
 
 uses
-  procVST, formMain, procWorkspace, procConfig;
+  procVST, formMain, procWorkspace;
 
 {$R *.lfm}
 
@@ -65,7 +65,7 @@ uses
 
 procedure TfrmGoTo.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
+  //LoadLanguage(Self);
 end;
 
 // -----------------------------------------------------------------------------

@@ -22,7 +22,7 @@ unit formCustomMessageDlg;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, LCLTranslator;
 
 type
 
@@ -52,7 +52,7 @@ var
 implementation
 
 uses
-  procTypes, procConfig, procWorkspace, UWSystem.XMLLang, procColorTheme;
+  procTypes, procWorkspace, UWSystem.XMLLang, procColorTheme;
 
 {$R *.lfm}
 
@@ -64,7 +64,6 @@ uses
 
 procedure TfrmCustomMessageDlg.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
   lblMessage.Caption := '';
 end;
 

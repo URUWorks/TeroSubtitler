@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  LCLType, UWCheckBox, UWRadioButton;
+  LCLType, UWCheckBox, UWRadioButton, LCLTranslator;
 
 type
 
@@ -101,8 +101,6 @@ end;
 
 procedure TfrmFindAndReplace.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
-
   btnReplaceAll.Top := btnFindNext.Top;
   btnReplace.Top    := btnReplaceAll.Top;
   chkReplaceWithChange(Sender);

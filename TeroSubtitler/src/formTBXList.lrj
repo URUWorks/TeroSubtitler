@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":3210409,"name":"tfrmtbxlist.caption","sourcebytes":[84,101,114,109,105,110,111,108,111,103,121],"value":"Terminology"},
+{"hash":4863637,"name":"tfrmtbxlist.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":95856634,"name":"tfrmtbxlist.lbltotal.caption","sourcebytes":[84,111,116,97,108,58],"value":"Total:"},
+{"hash":48,"name":"tfrmtbxlist.lblcount.caption","sourcebytes":[48],"value":"0"},
+{"hash":304761,"name":"tfrmtbxlist.btncopy.caption","sourcebytes":[67,111,112,121],"value":"Copy"},
+{"hash":315460,"name":"tfrmtbxlist.lblfind.caption","sourcebytes":[70,105,110,100],"value":"Find"}
+]}

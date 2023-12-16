@@ -61,7 +61,7 @@ var
 implementation
 
 uses procTypes, procVST, procSubtitle, UWSubtitleAPI,
-  UWSubtitles.Utils, formMain, procWorkspace, procConfig;
+  UWSubtitles.Utils, formMain, procWorkspace, LCLTranslator;
 
 {$R *.lfm}
 
@@ -73,8 +73,6 @@ uses procTypes, procVST, procSubtitle, UWSubtitleAPI,
 
 procedure TfrmDurationLimits.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
-
   edtSetMaxDuration.Text := AppOptions.Conventions.MaxDuration.ToString;
   edtSetMinDuration.Text := AppOptions.Conventions.MinDuration.ToString;
 

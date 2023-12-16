@@ -1,0 +1,5 @@
+{"version":1,"strings":[
+{"hash":98629500,"name":"tfrmaudiototextmodel.caption","sourcebytes":[65,117,100,105,111,32,116,111,32,116,101,120,116,32,109,111,100,101,108],"value":"Audio to text model"},
+{"hash":115683780,"name":"tfrmaudiototextmodel.btndownload.caption","sourcebytes":[68,111,119,110,108,111,97,100],"value":"Download"},
+{"hash":4863637,"name":"tfrmaudiototextmodel.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

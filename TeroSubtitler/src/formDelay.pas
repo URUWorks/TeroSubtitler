@@ -59,7 +59,7 @@ implementation
 // -----------------------------------------------------------------------------
 
 uses procTypes, procVST, procSubtitle, procWorkspace, UWSubtitleAPI,
-  UWSubtitles.Utils, UWSystem.SysUtils, formMain, procConfig;
+  UWSubtitles.Utils, UWSystem.SysUtils, formMain, LCLTranslator;
 
 {$R *.lfm}
 
@@ -71,8 +71,6 @@ uses procTypes, procVST, procSubtitle, procWorkspace, UWSubtitleAPI,
 
 procedure TfrmDelay.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
-
   tedTime.FPS := GetFPS;
   tedTime.TimeMode := GetTimeEditMode;
 

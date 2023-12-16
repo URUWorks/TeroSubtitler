@@ -52,7 +52,7 @@ var
 implementation
 
 uses
-  formMain, procWorkspace, procConfig, procMPV;
+  formMain, procWorkspace, procMPV, LCLTranslator;
 
 {$R *.lfm}
 
@@ -64,7 +64,6 @@ uses
 
 procedure TfrmGoToTime.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
   tedPosition.TimeMode := GetTimeEditMode;
   tedPosition.FPS := GetFPS;
   tedPosition.Value := frmMain.MPV.GetMediaPosInMs;

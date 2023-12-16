@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
   laz.VirtualTrees, LCLIntf, LCLType, Spin, Menus, ComCtrls, UWCheckBox,
-  UWLayout, UWRadioButton, UWTimeEdit;
+  UWLayout, UWRadioButton, UWTimeEdit, LCLTranslator, procLocalize;
 
 type
 
@@ -157,8 +157,6 @@ var
   m: TMenuItem;
   //  FAppStringList: TAppStringList = NIL;
 begin
-  LoadLanguage(Self);
-
   //LanguageManager.GetAppStringList('GenerateVideoStrings', FAppStringList);
   //VSTAddColumn(VST, GetString(FAppStringList, 'Subtitle'), 150);
   //FAppStringList.Free;
@@ -522,9 +520,9 @@ begin
   end;
 
   if AValue then
-    btnClose.Caption := GetCommonString('btnClose', 'CommonControls')
+    btnClose.Caption := lngbtnClose
   else
-    btnClose.Caption := GetCommonString('btnCancel', 'CommonControls');
+    btnClose.Caption := lngbtnCancel;
 end;
 
 // -----------------------------------------------------------------------------
@@ -608,7 +606,7 @@ begin
 
   if not FileExists(Tools.FFmpeg) then
   begin
-    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(Tools.FFmpeg)]));
+    ShowErrorMessageDialog(Format(lngExtractAppError, [ExtractFileName(Tools.FFmpeg)]));
     Exit;
   end;
 
@@ -616,7 +614,7 @@ begin
 
   with TSaveDialog.Create(NIL) do
   try
-    Title := GetCommonString('SaveFile');
+    Title := lngSaveFile;
 
     Filter := Format('%s (*%s)|*%s', [TFFFormats[cboFormat.ItemIndex].Name, TFFFormats[cboFormat.ItemIndex].Value, TFFFormats[cboFormat.ItemIndex].Value]);
     ext := TFFFormats[cboFormat.ItemIndex].Value;
@@ -681,9 +679,9 @@ begin
       TFFAudioSampleRate[cboSampleRate.ItemIndex].Value,
       TFFAudioBitRate[cboBitRate.ItemIndex],
       @ProcessCB) then
-        ShowMessageDialog(GetCommonString('FileSavedSuccessfully'), '', GetCommonString('OpenContainingFolder'), @OpenFolderClick)
+        ShowMessageDialog(lngFileSavedSuccessfully, '', lngOpenContainingFolder, @OpenFolderClick)
       else
-        ShowErrorMessageDialog(GetCommonString('VideoGenerationFailed'));
+        ShowErrorMessageDialog(lngVideoGenerationFailed);
 
     SetControlsEnabled(True);
     //Close;

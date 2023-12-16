@@ -1,0 +1,4 @@
+{"version":1,"strings":[
+{"hash":1371,"name":"tfrmcustommessagedlg.btnok.caption","sourcebytes":[79,107],"value":"Ok"},
+{"hash":63608709,"name":"tfrmcustommessagedlg.lblmessage.caption","sourcebytes":[77,101,115,115,97,103,101],"value":"Message"}
+]}

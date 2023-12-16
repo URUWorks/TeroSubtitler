@@ -48,8 +48,8 @@ object frmExportSUP: TfrmExportSUP
     Left = 8
     Height = 15
     Top = 64
-    Width = 48
-    Caption = 'Video res'
+    Width = 86
+    Caption = 'Video resolution'
     ParentColor = False
   end
   object spnWidth: TSpinEdit
@@ -84,8 +84,8 @@ object frmExportSUP: TfrmExportSUP
     Left = 328
     Height = 15
     Top = 8
-    Width = 176
-    Caption = 'Safe area (left, top, right, bottom)'
+    Width = 209
+    Caption = 'Safe area pixels (left, top, right, bottom)'
     ParentColor = False
   end
   object spnLeft: TSpinEdit

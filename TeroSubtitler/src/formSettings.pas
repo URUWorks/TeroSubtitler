@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
   ExtCtrls, UWLayout, UWCheckBox, UWHotKey, UWSystem.XMLLang, ActnList,
-  procConventions, LCLProc, ComCtrls, UWSubtitleAPI.Formats;
+  procConventions, LCLProc, ComCtrls, UWSubtitleAPI.Formats, LCLTranslator, procLocalize;
 
 type
 
@@ -274,6 +274,7 @@ type
     FShortCutListCategory: TStrings;
     {$IFDEF WINDOWS}
     FUpdateFileTypes: Boolean;
+    FLngList: TStrings;
     procedure PrepareToolbarAndImagelistIcos;
     procedure UpdateFileTypeAssociations;
     procedure FileTypeIconClick(Sender: TObject);
@@ -310,39 +311,36 @@ uses
 
 procedure TfrmSettings.FormCreate(Sender: TObject);
 var
-  FAppStringList: TAppStringList = NIL;
   i: Integer;
 begin
-  LoadLanguage(Self);
-
-  if LanguageManager.GetAppStringList('SettingsStrings', FAppStringList) then
+  FLngList := TStringList.Create;
   try
     with lstTree.Items do
     begin
-      Add(GetString(FAppStringList, 'General'));
-      Add(GetString(FAppStringList, 'Conventions'));
-      Add(GetString(FAppStringList, 'Appearance'));
-      Add(GetString(FAppStringList, 'Toolbar'));
-      Add(GetString(FAppStringList, 'Shortcuts'));
-      Add(GetString(FAppStringList, 'MPV'));
-      Add(GetString(FAppStringList, 'Tools'));
+      Add(lngssGeneral);
+      Add(lngssConventions);
+      Add(lngssAppearance);
+      Add(lngssToolbar);
+      Add(lngssShortcuts);
+      Add(lngssMPV);
+      Add(lngssTools);
       {$IFDEF WINDOWS}
-      Add(GetString(FAppStringList, 'FileTypeAssociations'));
+      Add(lngssFileTypeAssociations);
       {$ENDIF}
     end;
     lstTree.ItemIndex := 0;
     with cboPauseMode.Items do
     begin
       BeginUpdate;
-      Add(GetString(FAppStringList, 'Milliseconds'));
-      Add(GetString(FAppStringList, 'Frames'));
+      Add(lngssMilliseconds);
+      Add(lngssFrames);
       EndUpdate;
     end;
 
-    hkShortcut.EmptyText  := GetString(FAppStringList, 'ShortCutNone');
+    hkShortcut.EmptyText  := lngssShortCutNone;
     FShortCutListCategory := TStringList.Create;
 
-    FillComboWithLanguageFiles(cboLanguage);
+    FillComboWithLanguages(cboLanguage, FLngList);
     FillComboWithFPS(cboDefaultFrameRate, Workspace.FPS.InputFPS);
     FillComboWithFormats(cboDefaultFileFormat);
     FillComboWithEncodings(cboDefaultFileEncoding);
@@ -354,22 +352,24 @@ begin
     cboDefaultFileEncoding.ItemIndex := Workspace.DefEncoding;
     btnShortCutApply.Enabled := False;
 
-    with LanguageManager do
-    begin
-      cboTheme.AddItem(GetString(FAppStringList, 'AutoMode'), NIL);
-      cboTheme.AddItem(GetString(FAppStringList, 'LightMode'), NIL);
-      cboTheme.AddItem(GetString(FAppStringList, 'DarkMode'), NIL);
-      cboListMode.AddItem(GetString(FAppStringList, 'ListMode'), NIL);
-      cboListMode.AddItem(GetString(FAppStringList, 'BlockMode'), NIL);
-    end;
+    //TODO: Localize
+//    with LanguageManager do
+//    begin
+      cboTheme.AddItem(lngssAutoMode, NIL);
+      cboTheme.AddItem(lngssLightMode, NIL);
+      cboTheme.AddItem(lngssDarkMode, NIL);
+      cboListMode.AddItem(lngssListMode, NIL);
+      cboListMode.AddItem(lngssBlockMode, NIL);
+  //  end;
   finally
-    FAppStringList.Free;
+
   end;
 
   with AppOptions do
   begin
-    cboLanguage.ItemIndex := cboLanguage.Items.IndexOf(GetCultureDisplayName(Language));
-    edtWebReference.Text  := WebSearchURL;
+    cboLanguage.ItemIndex := GetGUILangIndex(FLngList,GUILanguage);
+
+    edtWebReference.Text := WebSearchURL;
     with Conventions do
     begin
       if PauseInFrames then
@@ -448,7 +448,7 @@ begin
 
   FProfiles := TProfiles.Create(ConventionsFileName);
   FillItemsWithConventions(cboProfile.Items, FProfiles);
-  cboProfile.Items.Insert(0, LanguageManager.GetAppString('Custom'));
+  cboProfile.Items.Insert(0, lngasCustom);
   i := cboProfile.Items.IndexOf(AppOptions.Conventions.Name);
   if i >= 0 then
     cboProfile.ItemIndex := i
@@ -492,7 +492,11 @@ var
 begin
   with AppOptions do
   begin
-    Language     := GetCultureName(cboLanguage.Text);
+   if Length(FLngList.Strings[cboLanguage.ItemIndex].Split([';'])) > 0 then
+      GUILanguage := FLngList.Strings[cboLanguage.ItemIndex].Split([';'])[0]
+    else
+      GUILanguage := 'en_US';
+
     WebSearchURL := edtWebReference.Text;
     with Conventions do
     begin
@@ -541,7 +545,7 @@ begin
     AskForDeleteLines := chkPromptForDeleteSubtitles.Checked;
     AskForInputFPS    := chkPromptForInputFPS.Checked;
     CheckErrorsBeforeSave := chkPromptForSaveWithErrors.Checked;
-  end;
+  end; //with
 
   frmMain.VST.Font.Size            := spnListFontSize.Value;
   frmMain.VST.Canvas.Font.Size     := frmMain.VST.Font.Size;
@@ -618,7 +622,6 @@ begin
     frmMain.cboInputFPS.ItemIndex := cboDefaultFrameRate.ItemIndex;
     frmMain.cboInputFPSSelect(NIL);
   end;
-
   VSTOptions.DrawMode := TVSTDrawMode(cboListMode.ItemIndex);
 
   ColorThemeInstance.ColorMode := TColorMode(cboTheme.ItemIndex);
@@ -635,6 +638,7 @@ begin
 
   FShortCutListCategory.Free;
   FProfiles.Free;
+  FLngList.Free;
   CloseAction := caFree;
   frmSettings := NIL;
 end;
@@ -752,7 +756,7 @@ begin
     ShowModal;
 
     FillItemsWithConventions(cboProfile.Items, FProfiles);
-    cboProfile.Items.Insert(0, LanguageManager.GetAppString('Custom'));
+    cboProfile.Items.Insert(0, lngasCustom);
     i := cboProfile.Items.IndexOf(s);
     if i >= 0 then
       cboProfile.ItemIndex := i
@@ -816,14 +820,14 @@ begin
       begin
         if FShortCutListCategory.IndexOf(Category) < 0 then
         begin
-          cboShortcutCat.AddItem(GetCommonString(Category, 'ShortCutCategoryStrings'), NIL);
+          cboShortcutCat.AddItem(LocalizeCategory(ActionList.Actions[i].Category), NIL);
           FShortCutListCategory.Add(Category);
-        end;
-      end;
+        end; //if
+      end; //with TAction
 
     if cboShortcutCat.Items.Count > 0 then cboShortcutCat.ItemIndex := 0;
     cboShortcutCatSelect(NIL);
-  end;
+  end; //with frmMain
 end;
 
 // -----------------------------------------------------------------------------
@@ -875,7 +879,7 @@ begin
           else
             AAction.ShortCut := 0;}
 
-          lblShortCutInUse.Caption := Format(GetCommonString('ShortCutInUse'), [AAction.Caption]);
+          lblShortCutInUse.Caption := Format(lngShortCutInUse, [AAction.Caption]);
         end;
 
         ShortCut := hkShortcut.HotKey;
@@ -899,7 +903,7 @@ procedure TfrmSettings.btnShortCutSaveClick(Sender: TObject);
 var
   s, f: String;
 begin
-  s := InputDialog(GetCommonString('NewShortCutPreset'), GetCommonString('NewShortCutPresetName'), '');
+  s := InputDialog(lngNewShortCutPreset, lngNewShortCutPresetName, '');
   if not s.IsEmpty then
   begin
     f := ConcatPaths([ShortCutFolder, s + '.key']);

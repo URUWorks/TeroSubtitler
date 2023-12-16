@@ -1,0 +1,5 @@
+{"version":1,"strings":[
+{"hash":4691652,"name":"tfrmabout.caption","sourcebytes":[65,98,111,117,116],"value":"About"},
+{"hash":4863637,"name":"tfrmabout.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":18264398,"name":"tfrmabout.lbldonate.caption","sourcebytes":[73,102,32,121,111,117,32,108,105,107,101,32,116,104,105,115,32,115,111,102,116,119,97,114,101,44,32,112,108,101,97,115,101,32,99,111,110,115,105,100,101,114,32,109,97,107,105,110,103,32,97,32,100,111,110,97,116,105,111,110,46,13,10,67,108,105,99,107,32,104,101,114,101,32,116,111,32,100,111,32,105,116,46],"value":"If you like this software, please consider making a donation.\r\nClick here to do it."}
+]}

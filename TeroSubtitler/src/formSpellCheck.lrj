@@ -1,0 +1,13 @@
+{"version":1,"strings":[
+{"hash":238258107,"name":"tfrmspellcheck.caption","sourcebytes":[83,112,101,108,108,32,99,104,101,99,107],"value":"Spell check"},
+{"hash":184739641,"name":"tfrmspellcheck.lbldictionary.caption","sourcebytes":[68,105,99,116,105,111,110,97,114,121],"value":"Dictionary"},
+{"hash":107822884,"name":"tfrmspellcheck.lblnotfound.caption","sourcebytes":[78,111,116,32,102,111,117,110,100],"value":"Not found"},
+{"hash":217078147,"name":"tfrmspellcheck.lblsuggestions.caption","sourcebytes":[83,117,103,103,101,115,116,105,111,110,115],"value":"Suggestions"},
+{"hash":369152,"name":"tfrmspellcheck.btnskip.caption","sourcebytes":[83,107,105,112],"value":"Skip"},
+{"hash":33710988,"name":"tfrmspellcheck.btnskipall.caption","sourcebytes":[83,107,105,112,32,97,108,108],"value":"Skip all"},
+{"hash":18340,"name":"tfrmspellcheck.btnadd.caption","sourcebytes":[65,100,100],"value":"Add"},
+{"hash":77497557,"name":"tfrmspellcheck.btnchange.caption","sourcebytes":[67,104,97,110,103,101],"value":"Change"},
+{"hash":81001132,"name":"tfrmspellcheck.btnchangeall.caption","sourcebytes":[67,104,97,110,103,101,32,97,108,108],"value":"Change all"},
+{"hash":4863637,"name":"tfrmspellcheck.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":94816405,"name":"tfrmspellcheck.lblsource.caption","sourcebytes":[83,111,117,114,99,101],"value":"Source"}
+]}

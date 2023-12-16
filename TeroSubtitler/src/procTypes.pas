@@ -338,7 +338,7 @@ type
     TextToFind             : String;
     LastUnicodeChar        : String;
     WebSearchURL           : String;
-    Language               : String;
+    GUILanguage            : String;
     HunspellLanguage       : String;
     ShortCutPreset         : String;
     FormatSettings         : TFormatSettings;

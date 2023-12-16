@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  Spin, UWTimeEdit, Types, process, StrUtils;
+  Spin, UWTimeEdit, Types, process, StrUtils, LCLTranslator,procLocalize;
 
 type
 
@@ -98,12 +98,8 @@ const
 
 procedure TfrmShotChanges.FormCreate(Sender: TObject);
 var
-  FAppStringList: TAppStringList = NIL;
   i: Integer;
 begin
-  LoadLanguage(Self);
-
-  if LanguageManager.GetAppStringList('ShotChangesStrings', FAppStringList) then
   try
     with cboDetectApp.Items do
     begin
@@ -117,11 +113,11 @@ begin
     begin
       BeginUpdate;
       Clear;
-      Add(GetString(FAppStringList, 'Frames'));
-      Add(GetString(FAppStringList, 'Seconds'));
-      Add(GetString(FAppStringList, 'Milliseconds'));
-      Add(GetString(FAppStringList, 'HHMMSSZZZ'));
-      Add(GetString(FAppStringList, 'HHMMSSFF'));
+      Add(lngscFrames);
+      Add(lngscSeconds);
+      Add(lngscMilliseconds);
+      Add(lngscHHMMSSZZZ);
+      Add(lngscHHMMSSFF);
       EndUpdate;
     end;
     cboTimeCodeExport.Items.Assign(cboTimeCodeImport.Items);
@@ -129,7 +125,6 @@ begin
     cboTimeCodeExport.ItemIndex := 4;
     cboDetectApp.ItemIndex := 0;
   finally
-    FAppStringList.Free;
   end;
 
   FCancel := False;
@@ -261,7 +256,7 @@ var
 begin
   with TOpenDialog.Create(Self) do
   try
-    Title   := GetCommonString('OpenFile');
+    Title   := lngOpenFile;
     Filter  := FillDialogFilter(True);
     Options := Options + [ofFileMustExist];
 
@@ -272,7 +267,7 @@ begin
         edl := TEDL.Create('', '', GetFPS, AppOptions.FormatSettings);
         try
           if edl.GetXMLTrackList(FileName, ATracks) and (ATracks.Count > 1) then
-            edl.ID := formCustomSelectDlg.ExecuteDialog(GetCommonString('MultipleTracksDetected'), GetCommonString('SelectTrackToUse'), ATracks);
+            edl.ID := formCustomSelectDlg.ExecuteDialog(lngMultipleTracksDetected, lngSelectTrackToUse, ATracks);
 
           edl.LoadFromFile(FileName);
           mmoTimes.Lines.BeginUpdate;
@@ -323,7 +318,7 @@ begin
   if mmoTimes.Lines.Count > 0 then
     with TSaveDialog.Create(frmMain) do
     try
-      Title    := GetCommonString('SaveFile');
+      Title    := lngSaveFile;
       Filter   := FillDialogFilter(False);
       FileName := '';
       Options  := [ofOverwritePrompt, ofEnableSizing];
@@ -407,12 +402,12 @@ begin
 
   if AValue then
   begin
-    btnClose.Caption := GetCommonString('btnClose', 'CommonControls');
+    btnClose.Caption := lngbtnClose;
     btnClose.Tag := 0;
   end
   else
   begin
-    btnClose.Caption := GetCommonString('btnCancel', 'CommonControls');
+    btnClose.Caption := lngbtnCancel;
     btnClose.Tag := 1;
   end;
 end;
@@ -439,7 +434,7 @@ var
 begin
   if frmMain.MPV.FileName.StartsWith('http') then
   begin
-    ShowErrorMessageDialog(GetCommonString('FeatureNotAvailableFromURL'));
+    ShowErrorMessageDialog(lngFeatureNotAvailableFromURL);
     Exit;
   end;
 
@@ -454,7 +449,7 @@ begin
 
       if not FileExists(GetExtractAppFile) then
       begin
-        ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [FFMPEG_EXE]))
+        ShowErrorMessageDialog(Format(lngExtractAppError, [FFMPEG_EXE]))
       end
       else
       begin
@@ -489,7 +484,7 @@ begin
 
       if not FileExists(GetExtractAppFile(False)) then
       begin
-        ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [SCENEDETECT_EXE]))
+        ShowErrorMessageDialog(Format(lngExtractAppError, [SCENEDETECT_EXE]))
       end
       else
       begin
@@ -569,14 +564,15 @@ begin
 
   for i := 0 to Length(TShotChangeExts)-1 do
   begin
-    Result := Result + GetCommonString(Copy(TShotChangeExts[i], 2), 'ShotChangesStrings') + ' (*' + TShotChangeExts[i] + ')|*' + TShotChangeExts[i] + '|';
+    //TODO: Localize
+    //Result := Result + GetCommonString(Copy(TShotChangeExts[i], 2), 'ShotChangesStrings') + ' (*' + TShotChangeExts[i] + ')|*' + TShotChangeExts[i] + '|';
     s := s + '*' + TShotChangeExts[i] + ';';
   end;
 
   if AAllSupportedFiles then
   begin
     System.Delete(s, Length(s), 1);
-    Result := GetCommonString('AllSupportedFiles') + ' (' + s + ')|' + s + '|' + Result;
+    Result := lngAllSupportedFiles + ' (' + s + ')|' + s + '|' + Result;
   end;
 end;
 

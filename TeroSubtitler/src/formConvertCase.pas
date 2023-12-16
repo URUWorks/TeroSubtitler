@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  UWRadioButton, UWLayout;
+  UWRadioButton, UWLayout, LCLTranslator;
 
 type
 
@@ -62,7 +62,7 @@ implementation
 
 uses
   procTypes, procVST, procVST_Loops, UWSystem.StrUtils,
-  UWSubtitleAPI, formMain, LazUTF8, procWorkspace, procConfig;
+  UWSubtitleAPI, formMain, LazUTF8, procWorkspace;
 
 {$R *.lfm}
 
@@ -74,8 +74,6 @@ uses
 
 procedure TfrmConvertCase.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
-
   if (frmMain.VST.SelectedCount = 1) then
     rbnFromTheSelectedSubtitle.Checked := True
   else if (frmMain.VST.SelectedCount > 1) then

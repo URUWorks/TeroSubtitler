@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLIntf,
-  LCLType, laz.VirtualTrees, UWSubtitleAPI, UWLayout;
+  LCLType, laz.VirtualTrees, UWSubtitleAPI, UWLayout, LCLTranslator, procLocalize;
 
 type
 
@@ -74,8 +74,8 @@ var
 implementation
 
 uses
-  procVST, procTypes, RegExpr, procWorkspace, procColorTheme, procConfig,
-  UWSystem.XMLLang, procSubtitle;
+  procVST, procTypes, RegExpr, procWorkspace, procColorTheme, UWSystem.XMLLang,
+  procSubtitle;
 
 const
   DIFF_INITIAL = 1;
@@ -91,18 +91,12 @@ const
 // -----------------------------------------------------------------------------
 
 procedure TfrmCompare.FormCreate(Sender: TObject);
-var
-  FAppStringList: TAppStringList = NIL;
 begin
-  LoadLanguage(Self);
-
-  LanguageManager.GetAppStringList('CompareStrings', FAppStringList);
-  VSTAddColumn(VST1, GetString(FAppStringList, 'Index'), 70);
-  VSTAddColumn(VST1, GetString(FAppStringList, 'InitialTime'), 100);
-  VSTAddColumn(VST1, GetString(FAppStringList, 'FinalTime'), 100);
-  VSTAddColumn(VST1, GetString(FAppStringList, 'Text'), 150);
+  VSTAddColumn(VST1, lngteIndex, 70);
+  VSTAddColumn(VST1, lngteInitialTime, 100);
+  VSTAddColumn(VST1, lngteFinalTime, 100);
+  VSTAddColumn(VST1, lngteText, 150);
   VST2.Header.Columns.Assign(VST1.Header.Columns);
-  FAppStringList.Free;
 
   SAPI := NIL;
   SAPI1 := TUWSubtitles.Create;
@@ -246,8 +240,8 @@ procedure TfrmCompare.btnFile1Click(Sender: TObject);
 begin
   with TOpenDialog.Create(Self) do
   try
-    Title   := GetCommonString('OpenFile');
-    Filter  := Subtitles.FillDialogFilter(GetCommonString('AllSupportedFiles'));
+    Title   := lngOpenFile;
+    Filter  := Subtitles.FillDialogFilter(lngAllSupportedFiles);
     Options := Options + [ofFileMustExist];
 
     if Execute then

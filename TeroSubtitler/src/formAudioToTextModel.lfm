@@ -5,7 +5,7 @@ object frmAudioToTextModel: TfrmAudioToTextModel
   Width = 346
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Audio to text models'
+  Caption = 'Audio to text model'
   ClientHeight = 90
   ClientWidth = 346
   OnClose = FormClose

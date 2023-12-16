@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  UWSubtitleAPI.Formats;
+  UWSubtitleAPI.Formats, procLocalize;
 
 type
 
@@ -66,7 +66,7 @@ var
 implementation
 
 uses
-  procWorkspace, procTypes, procConfig, UWSystem.XMLLang, UWSystem.Encoding;
+  procWorkspace, procTypes, UWSystem.XMLLang, UWSystem.Encoding, LCLTranslator;
 
 {$R *.lfm}
 
@@ -78,8 +78,6 @@ uses
 
 procedure TfrmCustomFileDlg.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
-
   FileName := '';
   Format   := sfInvalid;
   Encoding := NIL;
@@ -106,17 +104,17 @@ begin
 
   if (ADlgMode = dmOpen) then
   begin
-    Caption := GetCommonString('OpenFile');
-    btnApply.Caption := GetCommonString('btnLoad', 'CommonControls');
-    cboEncoding.Items.Insert(0, GetCommonString('Detect'));
+    Caption := lngOpenFile;
+    btnApply.Caption := lngbtnLoad;
+    cboEncoding.Items.Insert(0, lngDetect);
     cboFormat.Items.Insert(0, cboEncoding.Items[0]);
     cboEncoding.ItemIndex := 0;
     cboFormat.ItemIndex   := 0;
   end
   else
   begin
-    Caption := GetCommonString('SaveFile');
-    btnApply.Caption := GetCommonString('btnSave', 'CommonControls');
+    Caption := lngSaveFile;
+    btnApply.Caption := lngbtnSave;
     cboFormat.ItemIndex   := Integer(Workspace.DefFormat)-1; //frmMain.cboFormat.ItemIndex;
     cboEncoding.ItemIndex := Workspace.DefEncoding; //frmMain.cboEncoding.ItemIndex;
   end;
@@ -158,8 +156,8 @@ begin
   begin
     OD := TOpenDialog.Create(Self);
     try
-      OD.Title  := GetCommonString('OpenFile');
-      OD.Filter := Subtitles.FillDialogFilter(GetCommonString('AllSupportedFiles'));
+      OD.Title  := lngOpenFile;
+      OD.Filter := Subtitles.FillDialogFilter(lngAllSupportedFiles);
       OD.FilterIndex := cboFormat.ItemIndex+1;
       OD.FileName := ExtractFileName(edtFileName.Text);
       if OD.Execute then
@@ -172,7 +170,7 @@ begin
   begin
     SD := TSaveDialog.Create(Self);
     try
-      SD.Title  := GetCommonString('SaveFile');
+      SD.Title  := lngSaveFile;
       SD.Filter := Subtitles.FillDialogFilter('');
       SD.FilterIndex := cboFormat.ItemIndex+1;
       SD.FileName := ExtractFileName(edtFileName.Text);

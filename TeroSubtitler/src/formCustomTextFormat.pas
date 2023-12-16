@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, UWLayout,
-  UWSubtitleAPI.CustomFormat, UWSubtitleAPI;
+  UWSubtitleAPI.CustomFormat, UWSubtitleAPI, LCLTranslator, procLocalize;
 
 type
 
@@ -85,23 +85,18 @@ uses
 // -----------------------------------------------------------------------------
 
 procedure TfrmCustomTextFormat.FormCreate(Sender: TObject);
-var
-  FAppStringList: TAppStringList = NIL;
 begin
-  LoadLanguage(Self);
   CustomFormat := TUWSubtitleCustomTextFormat.Create('');
 
   FillComboWithFPS(cboFPS, GetFPS);
   FillComboWithEncodings(cboEncoding);
   FillComboWithCustomFormat(cboScript);
 
-  LanguageManager.GetAppStringList('CustomFormatStrings', FAppStringList);
   with cboTimeCode.Items do
   begin
-    Add(GetString(FAppStringList, 'Time'));
-    Add(GetString(FAppStringList, 'Frames'));
+    Add(lngcfsTime);
+    Add(lngcfsFrames);
   end;
-  FAppStringList.Free;
   cboTimeCode.ItemIndex := 0;
 
   cboScriptSelect(NIL);
@@ -145,7 +140,7 @@ var
 begin
   SD := TSaveDialog.Create(NIL);
   try
-    SD.Title  := GetCommonString('SaveFile');
+    SD.Title  := lngSaveFile;
     SD.Filter := Format('%s (%s)|%s', [edtTitle.Text, edtExtension.Text, edtExtension.Text]);
     SD.FilterIndex := 0;
     SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');

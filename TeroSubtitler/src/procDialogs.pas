@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, procTypes, UWSubtitleAPI, formCustomQuestionDlg,
-  formCustomMessageDlg;
+  formCustomMessageDlg, procLocalize;
 
 { Custom inputbox dialog }
 
@@ -36,7 +36,7 @@ procedure ShowMessageDialog(const AMessage: String; const ACaption: String = '';
 
 { Custom question dialogs }
 
-function CustomQuestionDialog(const ASectionName, Title, Caption: String; const AButtons: TCustomDlgButtons = []): Integer;
+function CustomQuestionDialog(Title, Caption: String; const AButtons: TCustomDlgButtons = []): Integer;
 function MsgSaveSubtitle(FileName: String; const ASubtitleMode: TSubtitleMode = smText): Integer;
 function MsgSaveWithErrors: Integer;
 function MsgDeleteFiles: Integer;
@@ -53,7 +53,7 @@ function GetFileFromOpenDialog(const ADefault: String = ''): String;
 implementation
 
 uses
-  procConfig, Dialogs, UWSystem.XMLLang, formCustomInputDlg;
+  Dialogs, UWSystem.XMLLang, formCustomInputDlg;
 
 // -----------------------------------------------------------------------------
 
@@ -107,6 +107,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
+{//OBSOLETE: NonPO
 function CustomQuestionDialog(const ASectionName, Title, Caption: String; const AButtons: TCustomDlgButtons = []): Integer;
 var
   sl: TAppStringList = NIL;
@@ -118,27 +119,29 @@ begin
   finally
     FreeAndNil(sl);
   end;
+end;}
+
+function CustomQuestionDialog(Title, Caption: String; const AButtons: TCustomDlgButtons = []): Integer;
+begin
+    Result := formCustomQuestionDlg.ShowQuestionDialog(Title, Caption, ProgramName, AButtons);
 end;
 
 // -----------------------------------------------------------------------------
 
 function MsgSaveSubtitle(FileName: String; const ASubtitleMode: TSubtitleMode = smText): Integer;
 var
-  sl : TAppStringList = NIL;
   sm : String;
 begin
   Result := 0;
-  if LanguageManager.GetAppStringList('CommonStrings', sl) then
   try
     if ASubtitleMode = smText then
-      sm := GetString(sl, 'FileChanged')
+      sm := lngFileChanged
     else
-      sm := GetString(sl, 'TranslationFileChanged');
+      sm := lngTranslationFileChanged;
 
-    if FileName.IsEmpty then FileName := GetString(sl, 'NoName');
-    Result := formCustomQuestionDlg.ShowQuestionDialog(sm, Format(GetString(sl, 'AskToSave'), [FileName]), ProgramName);
+    if FileName.IsEmpty then FileName := lngNoName;
+    Result := formCustomQuestionDlg.ShowQuestionDialog(sm, Format(lngAskToSave, [FileName]), ProgramName);
   finally
-    FreeAndNil(sl);
   end;
 end;
 
@@ -146,35 +149,35 @@ end;
 
 function MsgSaveWithErrors: Integer;
 begin
-  Result := CustomQuestionDialog('CommonStrings', 'SubtitleHasErrorsToFix', 'ContinueAnyway', [dbYes, dbNo]);
+  Result := CustomQuestionDialog(lngSubtitleHasErrorsToFix, lngContinueAnyway, [dbYes, dbNo]);
 end;
 
 // -----------------------------------------------------------------------------
 
 function MsgDeleteFiles: Integer;
 begin
-  Result := CustomQuestionDialog('CommonStrings', 'PromptForDeleteLines', 'ContinueAnyway', [dbYes, dbNo]);
+  Result := CustomQuestionDialog(lngPromptForDeleteLines, lngContinueAnyway, [dbYes, dbNo]);
 end;
 
 // -----------------------------------------------------------------------------
 
 function MsgFolderNotEmpty: Integer;
 begin
-  Result := CustomQuestionDialog('CommonStrings', 'FolderNotEmpty', 'ContinueAnyway', [dbYes, dbNo]);
+  Result := CustomQuestionDialog(lngFolderNotEmpty, lngContinueAnyway, [dbYes, dbNo]);
 end;
 
 // -----------------------------------------------------------------------------
 
 function MsgExportTextOnlyFormat: Integer;
 begin
-  Result := CustomQuestionDialog('CommonStrings', 'TextFormatted', '', [dbYes, dbNo]);
+  Result := CustomQuestionDialog(lngTextFormatted, '', [dbYes, dbNo]);
 end;
 
 // -----------------------------------------------------------------------------
 
 function MsgExitTranscriptionMode: Integer;
 begin
-  Result := CustomQuestionDialog('CommonStrings', 'TranscriptionModeExit', 'ContinueAnyway', [dbYes, dbNo])
+  Result := CustomQuestionDialog(lngTranscriptionModeExit, lngContinueAnyway, [dbYes, dbNo])
 end;
 
 // -----------------------------------------------------------------------------
@@ -189,8 +192,8 @@ begin
 
   with TOpenDialog.Create(NIL) do
   try
-    Title   := GetCommonString('OpenFile');
-    Filter  := GetCommonString('AllSupportedFiles') + ' (*.*)|*.*';
+    Title   := lngOpenFile;
+    Filter  := lngAllSupportedFiles + ' (*.*)|*.*';
     Options := Options + [ofPathMustExist, ofFileMustExist];
 
     if Execute then

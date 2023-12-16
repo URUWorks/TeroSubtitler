@@ -1,0 +1,14 @@
+{"version":1,"strings":[
+{"hash":220264372,"name":"tfrmcustomtextformat.caption","sourcebytes":[67,117,115,116,111,109,32,116,101,120,116,32,102,111,114,109,97,116],"value":"Custom text format"},
+{"hash":94015604,"name":"tfrmcustomtextformat.lblscript.caption","sourcebytes":[83,99,114,105,112,116],"value":"Script"},
+{"hash":19283,"name":"tfrmcustomtextformat.lblfps.caption","sourcebytes":[70,80,83],"value":"FPS"},
+{"hash":77966471,"name":"tfrmcustomtextformat.lblencoding.caption","sourcebytes":[69,110,99,111,100,105,110,103],"value":"Encoding"},
+{"hash":160203102,"name":"tfrmcustomtextformat.btnsave.caption","sourcebytes":[83,97,118,101,46,46,46],"value":"Save..."},
+{"hash":4863637,"name":"tfrmcustomtextformat.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":180737198,"name":"tfrmcustomtextformat.lblextension.caption","sourcebytes":[69,120,116,101,110,115,105,111,110],"value":"Extension"},
+{"hash":12577842,"name":"tfrmcustomtextformat.lblnewlinechar.caption","sourcebytes":[78,101,119,32,108,105,110,101,32,99,104,97,114],"value":"New line char"},
+{"hash":109630626,"name":"tfrmcustomtextformat.lblseparatorchar.caption","sourcebytes":[83,101,112,97,114,97,116,111,114],"value":"Separator"},
+{"hash":112038132,"name":"tfrmcustomtextformat.lbltimeformat.caption","sourcebytes":[84,105,109,101,32,102,111,114,109,97,116],"value":"Time format"},
+{"hash":58121893,"name":"tfrmcustomtextformat.lbltimecode.caption","sourcebytes":[84,105,109,101,32,99,111,100,101],"value":"Time code"},
+{"hash":5966629,"name":"tfrmcustomtextformat.lbltitle.caption","sourcebytes":[84,105,116,108,101],"value":"Title"}
+]}

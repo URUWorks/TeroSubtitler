@@ -94,9 +94,9 @@ object frmFixSubtitles: TfrmFixSubtitles
       Left = 8
       Height = 15
       Top = 507
-      Width = 24
+      Width = 57
       Anchors = [akLeft, akBottom]
-      Caption = 'OCR'
+      Caption = 'OCR Script'
       ParentColor = False
     end
     object cboOCR: TComboBox

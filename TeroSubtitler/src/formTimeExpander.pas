@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  UWCheckBox, UWRadioButton;
+  UWCheckBox, UWRadioButton, LCLTranslator, procLocalize;
 
 type
 
@@ -66,7 +66,7 @@ implementation
 
 uses
   procTypes, procVST, procSubtitle, UWSubtitleAPI, UWSubtitles.Utils,
-  formMain, UWSystem.SysUtils, procWorkspace, procConfig, UWSystem.XMLLang;
+  formMain, UWSystem.SysUtils, procWorkspace, UWSystem.XMLLang;
 
 {$R *.lfm}
 
@@ -77,19 +77,13 @@ uses
 // -----------------------------------------------------------------------------
 
 procedure TfrmTimeExpander.FormCreate(Sender: TObject);
-var
-  FAppStringList: TAppStringList = NIL;
 begin
-  LoadLanguage(Self);
   lblMs1.Caption := lblMs.Caption;
-
-  LanguageManager.GetAppStringList('TimeExpanderStrings', FAppStringList);
   with cboMode.Items do
   begin
-    Add(GetString(FAppStringList, 'Expand'));
-    Add(GetString(FAppStringList, 'Reduce'));
+    Add(lngteExpand);
+    Add(lngteReduce);
   end;
-  FAppStringList.Free;
   cboMode.ItemIndex := 0;
 
   edtTime.Text          := AppOptions.ExpandMs.ToString;

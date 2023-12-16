@@ -1,0 +1,7 @@
+{"version":1,"strings":[
+{"hash":185847605,"name":"tfrmgoto.caption","sourcebytes":[71,111,32,116,111,32,108,105,110,101],"value":"Go to line"},
+{"hash":80067018,"name":"tfrmgoto.lblnumber.caption","sourcebytes":[69,110,116,114,121,58],"value":"Entry:"},
+{"hash":48,"name":"tfrmgoto.edtnumber.text","sourcebytes":[48],"value":"0"},
+{"hash":4863637,"name":"tfrmgoto.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":1247,"name":"tfrmgoto.btngo.caption","sourcebytes":[71,111],"value":"Go"}
+]}

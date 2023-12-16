@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin, Menus,
-  UWTextBox, UWSubtitleAPI;
+  UWTextBox, UWSubtitleAPI, LCLTranslator, procLocalize;
 
 type
 
@@ -73,7 +73,7 @@ var
 implementation
 
 uses
-  procWorkspace, procTypes, procConfig, UWSystem.XMLLang, UWSystem.Encoding,
+  procWorkspace, procTypes, UWSystem.XMLLang, UWSystem.Encoding,
   procCustomFormat, procSUP;
 
 {$R *.lfm}
@@ -89,8 +89,6 @@ var
   i: Integer;
   m: TMenuItem;
 begin
-  LoadLanguage(Self);
-
   cboFont.Items.Assign(Screen.Fonts);
   i := cboFont.Items.IndexOf('Verdana');
   if i >= 0 then
@@ -108,7 +106,7 @@ begin
     popRes.Items.Add(m);
   end;
 
-  StatusString := GetCommonString('WriteStatus');
+  StatusString := lngWriteStatus;
 
   lblStatus.Hide;
 end;
@@ -153,7 +151,7 @@ var
 begin
   SD := TSaveDialog.Create(NIL);
   try
-    SD.Title  := GetCommonString('SaveFile');
+    SD.Title  := lngSaveFile;
     SD.Filter := Format('%s (*%s)|*%s', ['Blu-Ray', TBluRayExt, TBluRayExt]);
     SD.FilterIndex := 0;
     SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), TBluRayExt);

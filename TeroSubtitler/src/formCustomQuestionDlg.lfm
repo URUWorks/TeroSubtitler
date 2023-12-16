@@ -10,7 +10,6 @@ object frmCustomQuestionDlg: TfrmCustomQuestionDlg
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
   object btnCancel: TButton
     Left = 331
     Height = 26

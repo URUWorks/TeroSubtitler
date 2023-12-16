@@ -1,0 +1,19 @@
+{"version":1,"strings":[
+{"hash":245608869,"name":"tfrmfindandreplace.caption","sourcebytes":[70,105,110,100,32,97,110,100,32,114,101,112,108,97,99,101],"value":"Find and replace"},
+{"hash":195275898,"name":"tfrmfindandreplace.lbltexttofind.caption","sourcebytes":[84,101,120,116,32,116,111,32,102,105,110,100,58],"value":"Text to find:"},
+{"hash":4863637,"name":"tfrmfindandreplace.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":315460,"name":"tfrmfindandreplace.btnfind.caption","sourcebytes":[70,105,110,100],"value":"Find"},
+{"hash":73859572,"name":"tfrmfindandreplace.btnfindnext.caption","sourcebytes":[70,105,110,100,32,110,101,120,116],"value":"Find next"},
+{"hash":73872838,"name":"tfrmfindandreplace.btnfindprev.caption","sourcebytes":[70,105,110,100,32,112,114,101,118],"value":"Find prev"},
+{"hash":147269573,"name":"tfrmfindandreplace.btnreplace.caption","sourcebytes":[82,101,112,108,97,99,101],"value":"Replace"},
+{"hash":131047692,"name":"tfrmfindandreplace.btnreplaceall.caption","sourcebytes":[82,101,112,108,97,99,101,32,97,108,108],"value":"Replace all"},
+{"hash":263925114,"name":"tfrmfindandreplace.chkreplacewith.caption","sourcebytes":[82,101,112,108,97,99,101,32,119,105,116,104,58],"value":"Replace with:"},
+{"hash":219741685,"name":"tfrmfindandreplace.chkcasesensitive.caption","sourcebytes":[67,97,115,101,45,115,101,110,115,105,116,105,118,101],"value":"Case-sensitive"},
+{"hash":219031461,"name":"tfrmfindandreplace.chkpreservecaseonreplace.caption","sourcebytes":[80,114,101,115,101,114,118,101,32,99,97,115,101,32,111,110,32,114,101,112,108,97,99,101],"value":"Preserve case on replace"},
+{"hash":117601406,"name":"tfrmfindandreplace.chkregularexpression.caption","sourcebytes":[85,115,101,32,114,101,103,117,108,97,114,32,101,120,112,114,101,115,115,105,111,110],"value":"Use regular expression"},
+{"hash":253276677,"name":"tfrmfindandreplace.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,116,104,101,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101],"value":"From the selected subtitle"},
+{"hash":52430339,"name":"tfrmfindandreplace.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,116,104,101,32,115,117,98,116,105,116,108,101,115],"value":"All the subtitles"},
+{"hash":128999434,"name":"tfrmfindandreplace.lbloptions.caption","sourcebytes":[79,112,116,105,111,110,115,58],"value":"Options:"},
+{"hash":94004874,"name":"tfrmfindandreplace.lblscope.caption","sourcebytes":[83,99,111,112,101,58],"value":"Scope:"},
+{"hash":41032164,"name":"tfrmfindandreplace.chkwholeword.caption","sourcebytes":[87,104,111,108,101,32,119,111,114,100],"value":"Whole word"}
+]}

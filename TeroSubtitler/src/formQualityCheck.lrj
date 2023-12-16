@@ -1,0 +1,5 @@
+{"version":1,"strings":[
+{"hash":64084859,"name":"tfrmqualitycheck.caption","sourcebytes":[81,117,97,108,105,116,121,32,99,104,101,99,107],"value":"Quality check"},
+{"hash":5882563,"name":"tfrmqualitycheck.lblrules.caption","sourcebytes":[82,117,108,101,115],"value":"Rules"},
+{"hash":4863637,"name":"tfrmqualitycheck.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

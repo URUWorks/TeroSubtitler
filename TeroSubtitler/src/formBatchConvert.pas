@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  laz.VirtualTrees, fgl, LCLIntf, LCLType;
+  laz.VirtualTrees, fgl, LCLIntf, LCLType, LCLTranslator, procLocalize;
 
 type
 
@@ -103,8 +103,8 @@ implementation
 
 uses
   UWSystem.SysUtils, UWSubtitleAPI, UWSubtitleAPI.Formats, procVST, procTypes,
-  RegExpr, procWorkspace, procColorTheme, procConfig, procDialogs,
-  UWSystem.XMLLang, UWSystem.FileUtils, UWSystem.Encoding;
+  RegExpr, procWorkspace, procColorTheme, procDialogs, UWSystem.XMLLang,
+  UWSystem.FileUtils, UWSystem.Encoding;
 
 {$R *.lfm}
 
@@ -115,11 +115,7 @@ uses
 // -----------------------------------------------------------------------------
 
 procedure TfrmBatchConvert.FormCreate(Sender: TObject);
-var
-  FAppStringList: TAppStringList = NIL;
 begin
-  LoadLanguage(Self);
-
   FList := TQueueList.Create;
   FillComboWithFormats(cboFormat);
   FillComboWithEncodings(cboEncoding);
@@ -131,11 +127,9 @@ begin
   cboToFPS.ItemIndex    := cboToFPS.Items.IndexOf(SingleToStr(GetFPS, AppOptions.FormatSettings));
   cboEncoding.ItemIndex := Workspace.DefEncoding;
 
-  LanguageManager.GetAppStringList('BatchConvertStrings', FAppStringList);
-  VSTAddColumn(VST, GetString(FAppStringList, 'FileName'), 150);
-  VSTAddColumn(VST, GetString(FAppStringList, 'FileFormat'), 150);
-  VSTAddColumn(VST, GetString(FAppStringList, 'FileState'), 80);
-  FAppStringList.Free;
+  VSTAddColumn(VST, lngbcFileName, 150);
+  VSTAddColumn(VST, lngbcFileFormat, 150);
+  VSTAddColumn(VST, lngbcFileState, 80);
 end;
 
 // -----------------------------------------------------------------------------
@@ -316,8 +310,8 @@ var
 begin
   with TOpenDialog.Create(Self) do
   try
-    Title   := GetCommonString('OpenFile');
-    Filter  := Subtitles.FillDialogFilter(GetCommonString('AllSupportedFiles'));
+    Title   := lngOpenFile;
+    Filter  := Subtitles.FillDialogFilter(lngAllSupportedFiles);
     Options := Options + [ofFileMustExist, ofAllowMultiSelect];
 
     if Execute then

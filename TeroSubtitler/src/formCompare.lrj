@@ -1,0 +1,6 @@
+{"version":1,"strings":[
+{"hash":174352581,"name":"tfrmcompare.caption","sourcebytes":[67,111,109,112,97,114,101],"value":"Compare"},
+{"hash":12558,"name":"tfrmcompare.btnfile1.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":12558,"name":"tfrmcompare.btnfile2.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":4863637,"name":"tfrmcompare.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

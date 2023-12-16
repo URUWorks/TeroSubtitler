@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  UWRadioButton;
+  UWRadioButton, LCLTranslator, procLocalize;
 
 type
 
@@ -62,8 +62,9 @@ var
 
 implementation
 
-uses procTypes, procVST, procSubtitle, UWSubtitleAPI, UWSubtitles.Utils,
-  formMain, procWorkspace, procConfig, UWSystem.XMLLang;
+uses
+  procTypes, procVST, procSubtitle, UWSubtitleAPI, UWSubtitles.Utils,
+  formMain, procWorkspace, UWSystem.XMLLang;
 
 // -----------------------------------------------------------------------------
 
@@ -74,19 +75,13 @@ uses procTypes, procVST, procSubtitle, UWSubtitleAPI, UWSubtitles.Utils,
 // -----------------------------------------------------------------------------
 
 procedure TfrmAutomaticDurations.FormCreate(Sender: TObject);
-var
-  FAppStringList: TAppStringList = NIL;
 begin
-  LoadLanguage(Self);
-
-  LanguageManager.GetAppStringList('AutomaticDurationStrings', FAppStringList);
   with cboCondition.Items do
   begin
-    Add(GetString(FAppStringList, 'NewDurationAll'));
-    Add(GetString(FAppStringList, 'NewDurationGreater'));
-    Add(GetString(FAppStringList, 'NewDurationSmaller'));
+    Add(lngNewDurationAll);
+    Add(lngNewDurationGreater);
+    Add(lngNewDurationSmaller);
   end;
-  FAppStringList.Free;
   cboCondition.ItemIndex := 0;
 
   edtChars.Text := AppOptions.AutoLengthChar.ToString;

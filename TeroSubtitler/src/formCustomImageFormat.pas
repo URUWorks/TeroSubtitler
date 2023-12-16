@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin, Menus,
-  UWTextBox, UWSubtitleAPI.CustomFormat, UWSubtitleAPI;
+  UWTextBox, UWSubtitleAPI.CustomFormat, UWSubtitleAPI, LCLTranslator, procLocalize;
 
 type
 
@@ -101,7 +101,6 @@ var
   i: Integer;
   m: TMenuItem;
 begin
-  LoadLanguage(Self);
   CustomFormat := TUWSubtitleCustomImageFormat.Create('');
 
   FillComboWithFPS(cboFPS, GetFPS);
@@ -124,7 +123,7 @@ begin
     popRes.Items.Add(m);
   end;
 
-  StatusString := GetCommonString('WriteStatus');
+  StatusString := lngWriteStatus;
 
   cboScriptSelect(NIL);
 
@@ -199,7 +198,7 @@ begin
   begin
     SD := TSaveDialog.Create(NIL);
     try
-      SD.Title  := GetCommonString('SaveFile');
+      SD.Title  := lngSaveFile;
       SD.Filter := Format('%s (%s)|%s', [CustomFormat.Name, CustomFormat.Extension, CustomFormat.Extension]);
       SD.FilterIndex := 0;
       SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');

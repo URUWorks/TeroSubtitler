@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  UWRadioButton, UWLayout, UWTimeEdit;
+  UWRadioButton, UWLayout, UWTimeEdit, LCLTranslator;
 
 type
 
@@ -59,7 +59,7 @@ var
 implementation
 
 uses
-  procVST, procWorkspace, procSubtitle, procColorTheme, procConfig, procTypes,
+  procVST, procWorkspace, procSubtitle, procColorTheme, procTypes,
   UWSystem.XMLLang, formMain, UWSubtitles.Utils, UWSubtitleAPI;
 
 {$R *.lfm}
@@ -89,8 +89,6 @@ end;
 
 procedure TfrmShiftTimes.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
-
   tedOffset.FPS      := GetFPS;
   tedOffset.TimeMode := GetTimeEditMode;
 

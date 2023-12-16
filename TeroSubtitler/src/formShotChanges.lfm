@@ -61,8 +61,8 @@ object frmShotChanges: TfrmShotChanges
     Left = 8
     Height = 15
     Top = 292
-    Width = 97
-    Caption = 'Time code import:'
+    Width = 112
+    Caption = 'Time code for import'
     ParentColor = False
   end
   object btnImport: TButton
@@ -141,9 +141,9 @@ object frmShotChanges: TfrmShotChanges
     Left = 8
     Height = 15
     Top = 354
-    Width = 89
+    Width = 106
     BorderSpacing.Right = 8
-    Caption = 'Detect sensitivity'
+    Caption = 'Detection sensitivity'
     ParentColor = False
   end
   object prbExtracting: TProgressBar
@@ -178,8 +178,8 @@ object frmShotChanges: TfrmShotChanges
     Left = 8
     Height = 15
     Top = 323
-    Width = 95
-    Caption = 'Time code export:'
+    Width = 110
+    Caption = 'Time code for export'
     ParentColor = False
   end
   object cboTimeCodeExport: TComboBox
@@ -255,8 +255,8 @@ object frmShotChanges: TfrmShotChanges
     Left = 8
     Height = 15
     Top = 261
-    Width = 75
-    Caption = 'App to detect:'
+    Width = 72
+    Caption = 'App to detect'
     ParentColor = False
   end
   object cboDetectApp: TComboBox

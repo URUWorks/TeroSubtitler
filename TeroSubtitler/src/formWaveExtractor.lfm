@@ -5,7 +5,7 @@ object frmWaveExtractor: TfrmWaveExtractor
   Width = 481
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Wave extractor'
+  Caption = 'Waveform extractor'
   ClientHeight = 169
   ClientWidth = 481
   OnClose = FormClose

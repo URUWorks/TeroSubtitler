@@ -1,0 +1,11 @@
+{"version":1,"strings":[
+{"hash":79358003,"name":"tfrmfixsubtitles.caption","sourcebytes":[70,105,120,32,115,117,98,116,105,116,108,101,115],"value":"Fix subtitles"},
+{"hash":4749113,"name":"tfrmfixsubtitles.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmfixsubtitles.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":213977614,"name":"tfrmfixsubtitles.lblconvention.caption","sourcebytes":[67,111,110,118,101,110,116,105,111,110],"value":"Convention"},
+{"hash":94357556,"name":"tfrmfixsubtitles.lblocr.caption","sourcebytes":[79,67,82,32,83,99,114,105,112,116],"value":"OCR Script"},
+{"hash":56003934,"name":"tfrmfixsubtitles.lblspacinghyphen.caption","sourcebytes":[83,112,97,99,105,110,103,32,111,102,32,111,112,101,110,105,110,103,32,104,121,112,104,101,110],"value":"Spacing of opening hyphen"},
+{"hash":100610028,"name":"tfrmfixsubtitles.mnuselectall.caption","sourcebytes":[109,110,117,83,101,108,101,99,116,65,108,108],"value":"mnuSelectAll"},
+{"hash":119548204,"name":"tfrmfixsubtitles.mnudeselectall.caption","sourcebytes":[109,110,117,68,101,83,101,108,101,99,116,65,108,108],"value":"mnuDeSelectAll"},
+{"hash":154572718,"name":"tfrmfixsubtitles.mnuinvertselection.caption","sourcebytes":[109,110,117,73,110,118,101,114,116,83,101,108,101,99,116,105,111,110],"value":"mnuInvertSelection"}
+]}

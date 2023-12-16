@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":3210409,"name":"tfrmtbxedit.caption","sourcebytes":[84,101,114,109,105,110,111,108,111,103,121],"value":"Terminology"},
+{"hash":18340,"name":"tfrmtbxedit.btnadd.caption","sourcebytes":[65,100,100],"value":"Add"},
+{"hash":4863637,"name":"tfrmtbxedit.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":150864156,"name":"tfrmtbxedit.lbloriginal.caption","sourcebytes":[79,114,105,103,105,110,97,108],"value":"Original"},
+{"hash":94843444,"name":"tfrmtbxedit.lbltranslated.caption","sourcebytes":[84,114,97,110,115,108,97,116,101,100],"value":"Translated"},
+{"hash":5597891,"name":"tfrmtbxedit.lblnotes.caption","sourcebytes":[78,111,116,101,115],"value":"Notes"}
+]}

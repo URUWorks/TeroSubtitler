@@ -1,0 +1,10 @@
+{"version":1,"strings":[
+{"hash":63130837,"name":"tfrmmultiplereplace.caption","sourcebytes":[77,117,108,116,105,112,108,101,32,114,101,112,108,97,99,101],"value":"Multiple replace"},
+{"hash":5047418,"name":"tfrmmultiplereplace.lblfind.caption","sourcebytes":[70,105,110,100,58],"value":"Find:"},
+{"hash":263925114,"name":"tfrmmultiplereplace.lblreplace.caption","sourcebytes":[82,101,112,108,97,99,101,32,119,105,116,104,58],"value":"Replace with:"},
+{"hash":4863637,"name":"tfrmmultiplereplace.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":4749113,"name":"tfrmmultiplereplace.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":43,"name":"tfrmmultiplereplace.btnplus.caption","sourcebytes":[43],"value":"+"},
+{"hash":45,"name":"tfrmmultiplereplace.btnminus.caption","sourcebytes":[45],"value":"-"},
+{"hash":84393230,"name":"tfrmmultiplereplace.chkre.caption","sourcebytes":[82,101,103,117,108,97,114,32,101,120,112,114,101,115,115,105,111,110],"value":"Regular expression"}
+]}

@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  UWSystem.InetUtils;
+  UWSystem.InetUtils, LCLTranslator, procLocalize;
 
 type
 
@@ -56,7 +56,7 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procConfig, procDialogs, procColorTheme, Zipper;
+  procTypes, procWorkspace, procDialogs, procColorTheme, Zipper;
 
 {$R *.lfm}
 
@@ -90,7 +90,6 @@ end;
 
 procedure TfrmDownload.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
   FDownloader := TDownloader.Create;
 end;
 
@@ -154,7 +153,7 @@ begin
   try
     Result := Execute(AURL, AFolder);
     if not Result then
-      ShowErrorMessageDialog(GetCommonString('FailedToDownload'));
+      ShowErrorMessageDialog(lngFailedToDownload);
   finally
     Free;
   end;

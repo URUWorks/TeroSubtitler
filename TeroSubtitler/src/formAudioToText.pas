@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  UWRadioButton, UWCheckBox, LCLIntf;
+  UWRadioButton, UWCheckBox, LCLIntf, LCLTranslator, procLocalize;
 
 type
 
@@ -90,11 +90,10 @@ uses
 
 procedure TfrmAudioToText.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
   FillComboWithWhisperEngines(cboEngine, Integer(Tools.WhisperEngine));
   FillComboWithGoogleLanguages(cboLanguage, 0);
   FillComboWithAudioStreams(cboTrack);
-  cboLanguage.Items[0] := GetCommonString('Detect');
+  cboLanguage.Items[0] := lngDetect;
   btnGenerate.Enabled := (cboTrack.Items.Count > 0);
   CancelProcess := False;
   cboEngineSelect(NIL);
@@ -133,9 +132,9 @@ begin
   // Additional engine params
   with Tools do
     if WhisperEngine = TWhisperEngine.WhisperCPP then
-      WhisperCPP_Additional := InputDialog('Whisper.CPP', GetCommonString('AdditionalParams'), WhisperCPP_Additional)
+      WhisperCPP_Additional := InputDialog('Whisper.CPP', lngAdditionalParams, WhisperCPP_Additional)
     else
-      FasterWhisper_Additional := InputDialog('Faster-Whisper', GetCommonString('AdditionalParams'), FasterWhisper_Additional);
+      FasterWhisper_Additional := InputDialog('Faster-Whisper', lngAdditionalParams, FasterWhisper_Additional);
 end;
 
 // -----------------------------------------------------------------------------
@@ -304,15 +303,15 @@ var
   TimerSub: Boolean;
 begin
   if frmMain.MPV.FileName.StartsWith('http') then
-    ShowErrorMessageDialog(GetCommonString('FeatureNotAvailableFromURL'))
+    ShowErrorMessageDialog(lngFeatureNotAvailableFromURL)
   else if not FileExists(GetExtractAppFile) then
-    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(Tools.FFmpeg)]))
+    ShowErrorMessageDialog(Format(lngExtractAppError, [ExtractFileName(Tools.FFmpeg)]))
   else if not FileExists(GetAudioToTextAppFile) then
-    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(GetAudioToTextAppFile)]))
+    ShowErrorMessageDialog(Format(lngExtractAppError, [ExtractFileName(GetAudioToTextAppFile)]))
   else if (Tools.FFmpeg_ParamsForAudioExtract <> '') and ((Tools.WhisperCPP_Params <> '') or (Tools.FasterWhisper_Params <> '')) and (cboModel.ItemIndex >= 0) then
   begin
     CancelProcess     := False;
-    lblStatus.Caption := GetCommonString('Extracting');
+    lblStatus.Caption := lngExtracting;
     SetControlsEnabled(False);
 
     TimerSub := frmMain.TimerSubtitle.Enabled;
@@ -386,7 +385,7 @@ begin
             srtfile := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '_' + cn)]) + '.srt';
           end;
 
-          lblStatus.Caption := GetCommonString('Transcribing');
+          lblStatus.Caption := lngTranscribing;
           Application.ProcessMessages;
 
           for i := 0 to High(AParamArray) do
@@ -422,7 +421,7 @@ begin
               end;
             end
             else
-              ShowErrorMessageDialog(Format(GetCommonString('ErrorExecuting'), [ExtractFileName(Tools.FFmpeg)]));
+              ShowErrorMessageDialog(Format(lngErrorExecuting, [ExtractFileName(Tools.FFmpeg)]));
           end
           else
           begin
@@ -440,17 +439,17 @@ begin
 
               if FileExists(srtfile) then
               begin
-                ShowMessageDialog(GetCommonString('FileSavedSuccessfully'), '', GetCommonString('OpenContainingFolder'), @OpenFolderClick);
+                ShowMessageDialog(lngFileSavedSuccessfully, '', lngOpenContainingFolder, @OpenFolderClick);
                 LoadSubtitle(srtfile, sfSubRip, NIL, -1, False);
               end;
             end
             else
-              ShowErrorMessageDialog(Format(GetCommonString('ErrorExecuting'), [ExtractFileName(Tools.WhisperCPP)]));
+              ShowErrorMessageDialog(Format(lngErrorExecuting, [ExtractFileName(Tools.WhisperCPP)]));
           end;
         end;
       end
       else
-        ShowErrorMessageDialog(Format(GetCommonString('ErrorExecuting'), [ExtractFileName(Tools.FFmpeg)]));
+        ShowErrorMessageDialog(Format(lngErrorExecuting, [ExtractFileName(Tools.FFmpeg)]));
     finally
       SetLength(AParamArray, 0);
       SetLength(AEnvironment, 0);
@@ -487,12 +486,12 @@ begin
 
   if AValue then
   begin
-    btnClose.Caption := GetCommonString('btnClose', 'CommonControls');
+    btnClose.Caption := lngbtnClose;
     btnClose.Tag := 0;
   end
   else
   begin
-    btnClose.Caption := GetCommonString('btnCancel', 'CommonControls');
+    btnClose.Caption := lngbtnCancel;
     btnClose.Tag := 1;
   end;
 end;

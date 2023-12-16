@@ -25,7 +25,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
   CheckLst, laz.VirtualTrees, UWSubtitleAPI, procFixSubtitles, UWSystem.XMLLang,
-  generics.collections, LCLIntf, LCLType, Menus, procConventions, UWLayout;
+  generics.collections, LCLIntf, LCLType, Menus, procConventions, UWLayout, LCLTranslator, procLocalize;
 
 type
 
@@ -84,7 +84,7 @@ type
   private
     FOptions: array of TCustomErrorOption;
     FList: TSubtitleInfoList;
-    FAppStringList: TAppStringList;
+//    FAppStringList: TAppStringList;
     FProfiles: TProfiles;
     FProfile: PProfileItem;
     procedure UpdateItemList;
@@ -140,14 +140,10 @@ var
   s: String;
   x: Integer;
 begin
-  LoadLanguage(Self);
   FProfiles := TProfiles.Create(ConventionsFileName);
   FillItemsWithConventions(cboConvention.Items, FProfiles);
   FillComboWithOCRScripts(cboOCR);
-  cboConvention.Items.Insert(0, LanguageManager.GetAppString('Custom'));
-  FAppStringList := NIL;
-  LanguageManager.GetAppStringList('FixSubtitlesStrings', FAppStringList);
-
+  cboConvention.Items.Insert(0, lngasCustom);
   if FileExists(SettingsFileName) then
   begin
     with TXMLConfig.Create(NIL) do
@@ -155,29 +151,29 @@ begin
       FileName := SettingsFileName;
       OpenKey(Self.Name);
 
-      AddOptionItem(etUnnecessarySpaces, GetString(FAppStringList, 'etUnnecessarySpaces'), GetValue('Option0', True));
-      AddOptionItem(etUnnecessaryDots, GetString(FAppStringList, 'etUnnecessaryDots'), GetValue('Option1', True));
-      AddOptionItem(etFixTags, GetString(FAppStringList, 'etFixTags'), GetValue('Option2', True));
-      AddOptionItem(etTimeTooShort, GetString(FAppStringList, 'etTimeTooShort'), GetValue('Option3', True));
-      AddOptionItem(etTimeTooLong, GetString(FAppStringList, 'etTimeTooLong'), GetValue('Option4', True));
-      AddOptionItem(etOverlapping, GetString(FAppStringList, 'etOverlapping'), GetValue('Option5', True));
-      AddOptionItem(etBadValues, GetString(FAppStringList, 'etBadValues'), GetValue('Option6', True));
-      AddOptionItem(etUnbreak, Format(GetString(FAppStringList, 'etUnbreak'), [AppOptions.Conventions.CPL]), GetValue('Option7', True));
-      AddOptionItem(etBreakLongLines, GetString(FAppStringList, 'etBreakLongLines'), GetValue('Option8', True));
-      AddOptionItem(etEmpty, GetString(FAppStringList, 'etEmpty'), GetValue('Option9', True));
-      AddOptionItem(etEllipsesSingleSmartCharacter, GetString(FAppStringList, 'etEllipsesSingleSmartCharacter'), GetValue('Option10', True));
-      AddOptionItem(etProhibitedChars, Format(GetString(FAppStringList, 'etProhibitedChars'), [AppOptions.Conventions.ProhibitedChars]), GetValue('Option11', True));
-      AddOptionItem(etHearingImpaired, GetString(FAppStringList, 'etHearingImpaired'), GetValue('Option12', True));
-      AddOptionItem(etRepeatedSubtitle, GetString(FAppStringList, 'etRepeatedSubtitle'), GetValue('Option13', True));
-      AddOptionItem(etRepeatedChars, GetString(FAppStringList, 'etRepeatedChars'), GetValue('Option14', True));
-      AddOptionItem(etIncompleteHyphenText, GetString(FAppStringList, 'etIncompleteHyphenText'), GetValue('Option15', True));
-      AddOptionItem(etSpaceOfOpeningHyphen, GetString(FAppStringList, 'etSpaceOfOpeningHyphen'), GetValue('Option16', False));
-      AddOptionItem(etRemoveSpacesWithinBrackets, GetString(FAppStringList, 'etRemoveSpacesWithinBrackets'), GetValue('Option17', False));
-      AddOptionItem(etFixInterrobang, GetString(FAppStringList, 'etFixInterrobang'), GetValue('Option18', False));
-      AddOptionItem(etOCR, GetString(FAppStringList, 'etOCR'), GetValue('Option19', False));
-      AddOptionItem(etSnapToShotChanges, GetString(FAppStringList, 'etSnapToShotChanges'), GetValue('Option20', False));
-      AddOptionItem(etChaining, GetString(FAppStringList, 'etChaining'), GetValue('Option21', False));
-      AddOptionItem(etCleanupTags, GetString(FAppStringList, 'etCleanupTags'), GetValue('Option22', False));
+      AddOptionItem(etUnnecessarySpaces, lngfsetUnnecessarySpaces, GetValue('Option0', True));
+      AddOptionItem(etUnnecessaryDots, lngfsetUnnecessaryDots, GetValue('Option1', True));
+      AddOptionItem(etFixTags, lngfsetFixTags, GetValue('Option2', True));
+      AddOptionItem(etTimeTooShort, lngfsetTimeTooShort, GetValue('Option3', True));
+      AddOptionItem(etTimeTooLong, lngfsetTimeTooLong, GetValue('Option4', True));
+      AddOptionItem(etOverlapping, lngfsetOverlapping, GetValue('Option5', True));
+      AddOptionItem(etBadValues, lngfsetBadValues, GetValue('Option6', True));
+      AddOptionItem(etUnbreak, Format(lngfsetUnbreak, [AppOptions.Conventions.CPL]), GetValue('Option7', True));
+      AddOptionItem(etBreakLongLines, lngfsetBreakLongLines, GetValue('Option8', True));
+      AddOptionItem(etEmpty, lngfsetEmpty, GetValue('Option9', True));
+      AddOptionItem(etEllipsesSingleSmartCharacter, lngfsetEllipsesSingleSmartCharacter, GetValue('Option10', True));
+      AddOptionItem(etProhibitedChars, Format(lngfsetProhibitedChars, [AppOptions.Conventions.ProhibitedChars]), GetValue('Option11', True));
+      AddOptionItem(etHearingImpaired, lngfsetHearingImpaired, GetValue('Option12', True));
+      AddOptionItem(etRepeatedSubtitle, lngfsetRepeatedSubtitle, GetValue('Option13', True));
+      AddOptionItem(etRepeatedChars, lngfsetRepeatedChars, GetValue('Option14', True));
+      AddOptionItem(etIncompleteHyphenText, lngfsetIncompleteHyphenText, GetValue('Option15', True));
+      AddOptionItem(etSpaceOfOpeningHyphen, lngfsetSpaceOfOpeningHyphen, GetValue('Option16', False));
+      AddOptionItem(etRemoveSpacesWithinBrackets, lngfsetRemoveSpacesWithinBrackets, GetValue('Option17', False));
+      AddOptionItem(etFixInterrobang, lngfsetFixInterrobang, GetValue('Option18', False));
+      AddOptionItem(etOCR, lngfsetOCR, GetValue('Option19', False));
+      AddOptionItem(etSnapToShotChanges, lngfsetSnapToShotChanges, GetValue('Option20', False));
+      AddOptionItem(etChaining, lngfsetChaining, GetValue('Option21', False));
+      AddOptionItem(etCleanupTags, lngfsetCleanupTags, GetValue('Option22', False));
       s := GetValue('OCRScript', '');
       x := cboOCR.Items.IndexOf(s);
       if x >= 0 then
@@ -191,39 +187,39 @@ begin
   end
   else
   begin
-    AddOptionItem(etUnnecessarySpaces, GetString(FAppStringList, 'etUnnecessarySpaces'));
-    AddOptionItem(etUnnecessaryDots, GetString(FAppStringList, 'etUnnecessaryDots'));
-    AddOptionItem(etFixTags, GetString(FAppStringList, 'etFixTags'));
-    AddOptionItem(etTimeTooShort, GetString(FAppStringList, 'etTimeTooShort'));
-    AddOptionItem(etTimeTooLong, GetString(FAppStringList, 'etTimeTooLong'));
-    AddOptionItem(etOverlapping, GetString(FAppStringList, 'etOverlapping'));
-    AddOptionItem(etBadValues, GetString(FAppStringList, 'etBadValues'));
-    AddOptionItem(etUnbreak, Format(GetString(FAppStringList, 'etUnbreak'), [AppOptions.Conventions.CPL]));
-    AddOptionItem(etBreakLongLines, GetString(FAppStringList, 'etBreakLongLines'));
-    AddOptionItem(etEmpty, GetString(FAppStringList, 'etEmpty'));
-    AddOptionItem(etEllipsesSingleSmartCharacter, GetString(FAppStringList, 'etEllipsesSingleSmartCharacter'));
-    AddOptionItem(etProhibitedChars, Format(GetString(FAppStringList, 'etProhibitedChars'), [AppOptions.Conventions.ProhibitedChars]));
-    AddOptionItem(etHearingImpaired, GetString(FAppStringList, 'etHearingImpaired'));
-    AddOptionItem(etRepeatedSubtitle, GetString(FAppStringList, 'etRepeatedSubtitle'));
-    AddOptionItem(etRepeatedChars, GetString(FAppStringList, 'etRepeatedChars'));
-    AddOptionItem(etIncompleteHyphenText, GetString(FAppStringList, 'etIncompleteHyphenText'));
-    AddOptionItem(etSpaceOfOpeningHyphen, GetString(FAppStringList, 'etSpaceOfOpeningHyphen'));
-    AddOptionItem(etRemoveSpacesWithinBrackets, GetString(FAppStringList, 'etRemoveSpacesWithinBrackets'));
-    AddOptionItem(etFixInterrobang, GetString(FAppStringList, 'etFixInterrobang'));
-    AddOptionItem(etOCR, GetString(FAppStringList, 'etOCR'), False);
-    AddOptionItem(etSnapToShotChanges, GetString(FAppStringList, 'etSnapToShotChanges'), False);
-    AddOptionItem(etChaining, GetString(FAppStringList, 'etChaining'), False);
-    AddOptionItem(etCleanupTags, GetString(FAppStringList, 'etCleanupTags'), False);
+    AddOptionItem(etUnnecessarySpaces, lngfsetUnnecessarySpaces);
+    AddOptionItem(etUnnecessaryDots, lngfsetUnnecessaryDots);
+    AddOptionItem(etFixTags, lngfsetFixTags);
+    AddOptionItem(etTimeTooShort, lngfsetTimeTooShort);
+    AddOptionItem(etTimeTooLong, lngfsetTimeTooLong);
+    AddOptionItem(etOverlapping, lngfsetOverlapping);
+    AddOptionItem(etBadValues, lngfsetBadValues);
+    AddOptionItem(etUnbreak, Format(lngfsetUnbreak, [AppOptions.Conventions.CPL]));
+    AddOptionItem(etBreakLongLines, lngfsetBreakLongLines);
+    AddOptionItem(etEmpty, lngfsetEmpty);
+    AddOptionItem(etEllipsesSingleSmartCharacter, lngfsetEllipsesSingleSmartCharacter);
+    AddOptionItem(etProhibitedChars, Format(lngfsetProhibitedChars, [AppOptions.Conventions.ProhibitedChars]));
+    AddOptionItem(etHearingImpaired, lngfsetHearingImpaired);
+    AddOptionItem(etRepeatedSubtitle, lngfsetRepeatedSubtitle);
+    AddOptionItem(etRepeatedChars, lngfsetRepeatedChars);
+    AddOptionItem(etIncompleteHyphenText, lngfsetIncompleteHyphenText);
+    AddOptionItem(etSpaceOfOpeningHyphen, lngfsetSpaceOfOpeningHyphen);
+    AddOptionItem(etRemoveSpacesWithinBrackets, lngfsetRemoveSpacesWithinBrackets);
+    AddOptionItem(etFixInterrobang, lngfsetFixInterrobang);
+    AddOptionItem(etOCR, lngfsetOCR, False);
+    AddOptionItem(etSnapToShotChanges, lngfsetSnapToShotChanges, False);
+    AddOptionItem(etChaining, lngfsetChaining, False);
+    AddOptionItem(etCleanupTags, lngfsetCleanupTags, False);
   end;
 
-  cboSpacingHyphen.AddItem(GetString(FAppStringList, 'AddSpacing'), NIL);
-  cboSpacingHyphen.AddItem(GetString(FAppStringList, 'RemoveSpacing'), NIL);
+  cboSpacingHyphen.AddItem(lngfsAddSpacing, NIL);
+  cboSpacingHyphen.AddItem(lngfsRemoveSpacing, NIL);
   cboSpacingHyphen.ItemIndex := x;
 
-  VSTAddColumn(VST, GetString(FAppStringList, 'Index'), 75);
-  VSTAddColumn(VST, GetString(FAppStringList, 'Action'), 50, taLeftJustify);
-  VSTAddColumn(VST, GetString(FAppStringList, 'Current'), 50, taLeftJustify);
-  VSTAddColumn(VST, GetString(FAppStringList, 'After'), 50, taLeftJustify);
+  VSTAddColumn(VST, lngfsIndex, 75);
+  VSTAddColumn(VST, lngfsAction, 50, taLeftJustify);
+  VSTAddColumn(VST, lngfsCurrent, 50, taLeftJustify);
+  VSTAddColumn(VST, lngfsAfter, 50, taLeftJustify);
 
   FList := TSubtitleInfoList.Create(Subtitles);
 
@@ -261,7 +257,6 @@ begin
 
   SaveFormSettings(Self);
   FProfiles.Free;
-  FAppStringList.Free;
   FList.Free;
   SetLength(FOptions, 0);
 
@@ -373,7 +368,7 @@ begin
   if FProfile = NIL then
     FProfile := @AppOptions.Conventions;
 
-  clbOptions.Items[11] := Format(GetString(FAppStringList, 'etProhibitedChars'), [FProfile^.ProhibitedChars]);
+  clbOptions.Items[11] := Format(lngfsetProhibitedChars, [FProfile^.ProhibitedChars]);
   UpdateItemList;
 end;
 
@@ -509,11 +504,11 @@ begin
   else if etSnapToShotChanges in AError then
     Result := FOptions[20].Description
   else if etSnapToShotChangesInCue in AError then
-    Result := GetString(FAppStringList, 'etSnapToShotChangesInCue')
+    Result := lngfsetSnapToShotChangesInCue
   else if etSnapToShotChangesInCueAway in AError then
-    Result := GetString(FAppStringList, 'etSnapToShotChangesInCueAway')
+    Result := lngfsetSnapToShotChangesInCueAway
   else if etSnapToShotChangesOutCue in AError then
-    Result := GetString(FAppStringList, 'etSnapToShotChangesOutCue')
+    Result := lngfsetSnapToShotChangesOutCue
   else if etChaining in AError then
     Result := FOptions[21].Description
   else if etCleanupTags in AError then

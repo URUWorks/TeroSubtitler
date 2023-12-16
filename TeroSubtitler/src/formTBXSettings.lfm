@@ -5,7 +5,7 @@ object frmTBXSettings: TfrmTBXSettings
   Width = 523
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Translation memory settings'
+  Caption = 'Terminology settings'
   ClientHeight = 160
   ClientWidth = 523
   OnClose = FormClose
@@ -70,8 +70,8 @@ object frmTBXSettings: TfrmTBXSettings
     Left = 8
     Height = 15
     Top = 12
-    Width = 51
-    Caption = 'File name'
+    Width = 48
+    Caption = 'Filename'
     ParentColor = False
   end
   object btnApply: TButton

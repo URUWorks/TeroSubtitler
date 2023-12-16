@@ -1,0 +1,9 @@
+{"version":1,"strings":[
+{"hash":179186757,"name":"tfrmwelcome.lblnewsubtitle.caption","sourcebytes":[78,101,119,32,101,109,112,116,121,32,115,117,98,116,105,116,108,101],"value":"New empty subtitle"},
+{"hash":161792366,"name":"tfrmwelcome.lblopenfile.caption","sourcebytes":[79,112,101,110,32,102,105,108,101,46,46,46],"value":"Open file..."},
+{"hash":65502867,"name":"tfrmwelcome.lblrecentfiles.caption","sourcebytes":[82,101,99,101,110,116,32,102,105,108,101,115],"value":"Recent files"},
+{"hash":205488704,"name":"tfrmwelcome.chkshowonstartup.caption","sourcebytes":[83,104,111,119,32,111,110,32,115,116,97,114,116,117,112],"value":"Show on startup"},
+{"hash":90923006,"name":"tfrmwelcome.lblbatchconvert.caption","sourcebytes":[66,97,116,99,104,32,99,111,110,118,101,114,116,46,46,46],"value":"Batch convert..."},
+{"hash":315140,"name":"tfrmwelcome.lblexit.caption","sourcebytes":[69,120,105,116],"value":"Exit"},
+{"hash":80953486,"name":"tfrmwelcome.lblnewtranscription.caption","sourcebytes":[78,101,119,32,116,114,97,110,115,99,114,105,112,116,105,111,110],"value":"New transcription"}
+]}

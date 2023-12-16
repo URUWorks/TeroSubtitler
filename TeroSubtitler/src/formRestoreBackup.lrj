@@ -1,0 +1,5 @@
+{"version":1,"strings":[
+{"hash":170725168,"name":"tfrmrestorebackup.caption","sourcebytes":[82,101,115,116,111,114,101,32,98,97,99,107,117,112],"value":"Restore backup"},
+{"hash":147502805,"name":"tfrmrestorebackup.btnrestore.caption","sourcebytes":[82,101,115,116,111,114,101],"value":"Restore"},
+{"hash":4863637,"name":"tfrmrestorebackup.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

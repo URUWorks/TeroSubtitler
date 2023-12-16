@@ -1,0 +1,5 @@
+{"version":1,"strings":[
+{"hash":21655,"name":"tfrmcustomselectdlg.lblmessage.caption","sourcebytes":[77,115,103],"value":"Msg"},
+{"hash":1371,"name":"tfrmcustomselectdlg.btnok.caption","sourcebytes":[79,107],"value":"Ok"},
+{"hash":77089212,"name":"tfrmcustomselectdlg.btncancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"}
+]}

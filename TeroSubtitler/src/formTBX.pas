@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  laz.VirtualTrees, LCLIntf, LCLType, Math;
+  laz.VirtualTrees, LCLIntf, LCLType, Math, LCLTranslator;
 
 type
 
@@ -72,7 +72,7 @@ uses
 
 procedure TfrmTBX.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
+  //LoadLanguage(Self);
 
   VSTAddColumn(VST, TBX.Langs^.SrcLang, 150, taLeftJustify);
   VSTAddColumn(VST, TBX.Langs^.DstLang, 150, taLeftJustify);

@@ -443,7 +443,7 @@ object frmGenerateVideo: TfrmGenerateVideo
     Width = 18
     AutoSize = False
     BorderSpacing.Top = 13
-    Caption = 'Subtitle'
+    Caption = 'Subtitles'
     OnChange = rdoSubtitleChange
     TabOrder = 1
     TabStop = False

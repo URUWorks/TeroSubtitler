@@ -5,7 +5,7 @@ object frmAbout: TfrmAbout
   Width = 380
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'About...'
+  Caption = 'About'
   ClientHeight = 316
   ClientWidth = 380
   OnClose = FormClose
@@ -63,7 +63,7 @@ object frmAbout: TfrmAbout
     Width = 380
     Alignment = taCenter
     AutoSize = False
-    Caption = 'Donate'
+    Caption = 'If you like this software, please consider making a donation.'#13#10'Click here to do it.'
     ParentColor = False
     ParentFont = False
     WordWrap = True

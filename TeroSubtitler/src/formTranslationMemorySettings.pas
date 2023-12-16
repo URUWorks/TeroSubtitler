@@ -22,7 +22,7 @@ unit formTranslationMemorySettings;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLTranslator, procLocalize;
 
 type
 
@@ -58,8 +58,7 @@ var
 implementation
 
 uses
-  procWorkspace, UWSystem.XMLLang, UWSystem.Globalization, procTypes,
-  procConfig;
+  procWorkspace, UWSystem.XMLLang, UWSystem.Globalization, procTypes;
 
 {$R *.lfm}
 
@@ -71,11 +70,10 @@ uses
 
 procedure TfrmTranslationMemorySettings.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
-
   FillCultureTStrings(cboSourceLang.Items);
   cboTransLang.Items.Assign(cboSourceLang.Items);
 
+  //TODO: Localize = Maybe nothing to do
   cboSourceLang.ItemIndex := 49;  // eng
   cboTransLang.ItemIndex  := 120; // spa
 end;
@@ -111,8 +109,8 @@ var
 begin
   OD := TOpenDialog.Create(NIL);
   try
-    OD.Title   := GetCommonString('OpenFile');
-    OD.Filter  := GetCommonString('AllSupportedFiles') + '(*.tmx)|*.tmx';
+    OD.Title   := lngOpenFile;
+    OD.Filter  := lngAllSupportedFiles + '(*.tmx)|*.tmx';
     OD.Options := [ofCreatePrompt, ofOverwritePrompt];
 
     if OD.Execute then

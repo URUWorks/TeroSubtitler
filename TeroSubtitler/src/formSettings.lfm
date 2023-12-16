@@ -26,9 +26,7 @@ object frmSettings: TfrmSettings
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 8
     BorderSpacing.Bottom = 8
-    Cancel = True
     Caption = 'Close'
-    Default = True
     OnClick = btnCloseClick
     TabOrder = 0
   end
@@ -123,7 +121,7 @@ object frmSettings: TfrmSettings
       Top = 100
       Width = 248
       AutoSize = False
-      Caption = 'Default frame rate'
+      Caption = 'Default input frame rate'
       ParentColor = False
       WordWrap = True
     end
@@ -198,7 +196,7 @@ object frmSettings: TfrmSettings
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
-      Caption = 'Use own file dialog'
+      Caption = 'Use Tero file dialog'
       TabOrder = 10
     end
     object chkPromptForDeleteSubtitles: TUWCheckBox
@@ -210,7 +208,7 @@ object frmSettings: TfrmSettings
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
-      Caption = 'Prompt for delete subtitles'
+      Caption = 'Prompt when deleting subtitles'
       TabOrder = 11
     end
     object chkDrawTags: TUWCheckBox
@@ -222,7 +220,7 @@ object frmSettings: TfrmSettings
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
-      Caption = 'Draw tags'
+      Caption = 'Interpret tags in list'
       TabOrder = 14
     end
     object chkDrawErrors: TUWCheckBox
@@ -234,7 +232,7 @@ object frmSettings: TfrmSettings
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
-      Caption = 'Draw errors'
+      Caption = 'Show errors in list'
       TabOrder = 15
     end
     object lblShiftTimeMs: TLabel
@@ -287,9 +285,9 @@ object frmSettings: TfrmSettings
       Left = 320
       Height = 15
       Top = 260
-      Width = 60
+      Width = 68
       BorderSpacing.Left = 5
-      Caption = '0 to disable'
+      Caption = '(0 to disable)'
       ParentColor = False
     end
     object chkDrawWaveformGAP: TUWCheckBox
@@ -301,7 +299,7 @@ object frmSettings: TfrmSettings
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
-      Caption = 'Show GAP in waveform'
+      Caption = 'Show gap in timeline'
       TabOrder = 16
     end
     object chkShowCPSBar: TUWCheckBox
@@ -334,7 +332,7 @@ object frmSettings: TfrmSettings
       Top = 228
       Width = 248
       AutoSize = False
-      Caption = 'Dialog segments detection threshold'
+      Caption = 'Dialog segments detection threshold (rms)'
       ParentColor = False
       WordWrap = True
     end
@@ -359,14 +357,14 @@ object frmSettings: TfrmSettings
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
-      Caption = 'Prompt for save with errors'
+      Caption = 'Prompt when saving file with errors'
       TabOrder = 13
     end
   end
   object lyoConventions: TUWLayout
-    Left = -336
+    Left = -328
     Height = 546
-    Top = 72
+    Top = 112
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -438,7 +436,7 @@ object frmSettings: TfrmSettings
       Top = 264
       Width = 246
       AutoSize = False
-      Caption = 'Min. subtitle pause'
+      Caption = 'Min. gap'
       ParentColor = False
       WordWrap = True
     end
@@ -476,7 +474,7 @@ object frmSettings: TfrmSettings
       Top = 36
       Width = 246
       AutoSize = False
-      Caption = 'Repeatable chars'
+      Caption = 'Repeatable characters'
       ParentColor = False
       WordWrap = True
     end
@@ -486,7 +484,7 @@ object frmSettings: TfrmSettings
       Top = 68
       Width = 246
       AutoSize = False
-      Caption = 'Prohibited chars'
+      Caption = 'Prohibited characters'
       ParentColor = False
       WordWrap = True
     end
@@ -496,7 +494,7 @@ object frmSettings: TfrmSettings
       Top = 520
       Width = 18
       AutoSize = False
-      Caption = 'Dots on split'
+      Caption = 'Add ''...'' on split subtitle'
       OnChange = spnConventionChange
       TabOrder = 20
     end
@@ -561,7 +559,7 @@ object frmSettings: TfrmSettings
       Top = 296
       Width = 246
       AutoSize = False
-      Caption = 'CPS'
+      Caption = 'Characters per second'
       ParentColor = False
       WordWrap = True
     end
@@ -581,7 +579,7 @@ object frmSettings: TfrmSettings
       Top = 328
       Width = 246
       AutoSize = False
-      Caption = 'WPM'
+      Caption = 'Words per minute'
       ParentColor = False
       WordWrap = True
     end
@@ -611,7 +609,7 @@ object frmSettings: TfrmSettings
       Top = 360
       Width = 246
       AutoSize = False
-      Caption = 'CPL'
+      Caption = 'Characters per line'
       ParentColor = False
       WordWrap = True
     end
@@ -662,7 +660,7 @@ object frmSettings: TfrmSettings
       Top = 392
       Width = 246
       AutoSize = False
-      Caption = 'Shot change snap area (frames)'
+      Caption = 'Shot change snap / threshold (frames)'
       ParentColor = False
       WordWrap = True
     end
@@ -682,7 +680,7 @@ object frmSettings: TfrmSettings
       Top = 424
       Width = 246
       AutoSize = False
-      Caption = 'Snap in cues (frames)'
+      Caption = 'Snap in cues after SC (frames)'
       ParentColor = False
       WordWrap = True
     end
@@ -701,7 +699,7 @@ object frmSettings: TfrmSettings
       Top = 456
       Width = 246
       AutoSize = False
-      Caption = 'Snap out cues (frames)'
+      Caption = 'Snap out cues before SC (frames)'
       ParentColor = False
       WordWrap = True
     end
@@ -747,9 +745,9 @@ object frmSettings: TfrmSettings
     end
   end
   object lyoAppearance: TUWLayout
-    Left = -336
+    Left = -328
     Height = 546
-    Top = 168
+    Top = 176
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -1075,9 +1073,9 @@ object frmSettings: TfrmSettings
     end
   end
   object lyoTools: TUWLayout
-    Left = -336
+    Left = -328
     Height = 546
-    Top = 232
+    Top = 240
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -1091,7 +1089,7 @@ object frmSettings: TfrmSettings
       Top = 4
       Width = 246
       AutoSize = False
-      Caption = 'ffmpeg'
+      Caption = 'FFmpeg'
       ParentColor = False
     end
     object edtFFMPEG: TEdit
@@ -1262,9 +1260,9 @@ object frmSettings: TfrmSettings
     end
   end
   object lyoShortcuts: TUWLayout
-    Left = -336
+    Left = -328
     Height = 546
-    Top = 360
+    Top = 304
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -1380,9 +1378,9 @@ object frmSettings: TfrmSettings
     end
   end
   object lyoMPV: TUWLayout
-    Left = -336
+    Left = -328
     Height = 546
-    Top = 424
+    Top = 368
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -1394,7 +1392,7 @@ object frmSettings: TfrmSettings
       Top = 4
       Width = 18
       AutoSize = False
-      Caption = 'Auto play on load'
+      Caption = 'Autoplay on video load'
       TabOrder = 0
     end
     object lblSeekTime: TLabel
@@ -1446,9 +1444,9 @@ object frmSettings: TfrmSettings
     end
   end
   object lyoToolbar: TUWLayout
-    Left = -336
+    Left = -328
     Height = 546
-    Top = 480
+    Top = 432
     Width = 516
     ClientHeight = 546
     ClientWidth = 516
@@ -1482,8 +1480,8 @@ object frmSettings: TfrmSettings
       Left = 0
       Height = 15
       Top = 208
-      Width = 29
-      Caption = 'Wave'
+      Width = 55
+      Caption = 'Waveform'
       ParentColor = False
     end
     object tlbMain_: TToolBar
@@ -1992,9 +1990,9 @@ object frmSettings: TfrmSettings
     end
   end
   object lyoFileTypeAssociations: TUWLayout
-    Left = -336
+    Left = -328
     Height = 546
-    Top = 536
+    Top = 496
     Width = 516
     ClientHeight = 546
     ClientWidth = 516

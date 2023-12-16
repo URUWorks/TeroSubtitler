@@ -69,7 +69,7 @@ object frmTranslate: TfrmTranslate
     Left = 208
     Height = 15
     Top = 8
-    Width = 112
+    Width = 114
     Caption = 'Translation language:'
     ParentColor = False
   end

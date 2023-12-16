@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  UWRadioButton;
+  UWRadioButton, LCLTranslator,procLocalize;
 
 type
 
@@ -56,8 +56,7 @@ var
 implementation
 
 uses
-  formMain, UWSubtitleAPI, procVST, procTypes, procWorkspace, procConfig,
-  UWSystem.XMLLang;
+  formMain, UWSubtitleAPI, procVST, procTypes, procWorkspace, UWSystem.XMLLang;
 
 {$R *.lfm}
 
@@ -68,16 +67,10 @@ uses
 // -----------------------------------------------------------------------------
 
 procedure TfrmModifySelection.FormCreate(Sender: TObject);
-var
-  FAppStringList: TAppStringList = NIL;
 begin
-  LoadLanguage(Self);
-
-  LanguageManager.GetAppStringList('ModifySelectionStrings', FAppStringList);
-  cboRule.Items.Add(GetString(FAppStringList, 'Contains'));
-  cboRule.Items.Add(GetString(FAppStringList, 'StartsWith'));
-  cboRule.Items.Add(GetString(FAppStringList, 'EndsWith'));
-  FAppStringList.Free;
+  cboRule.Items.Add(lngmsContains);
+  cboRule.Items.Add(lngmsStartsWith);
+  cboRule.Items.Add(lngmsEndsWith);
 
   cboRule.ItemIndex := 0;
 

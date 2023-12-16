@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
-  UWLayout, UWCheckBox, UWTimeEdit;
+  UWLayout, UWCheckBox, UWTimeEdit,procLocalize;
 
 type
 
@@ -121,9 +121,9 @@ var
 implementation
 
 uses
-  procTypes, LazUTF8, procWorkspace, procConfig, UWSubtitleAPI.Formats,
-  UWSystem.TimeUtils, UWTranslateAPI.Google, UWSystem.XMLLang,
-  UWSubtitleAPI.Formats.Cavena890.Types;
+  procTypes, LazUTF8, procWorkspace, UWSubtitleAPI.Formats, UWSystem.TimeUtils,
+  UWTranslateAPI.Google, UWSystem.XMLLang,
+  UWSubtitleAPI.Formats.Cavena890.Types, LCLTranslator;
 
 {$R *.lfm}
 
@@ -155,17 +155,14 @@ end;
 
 procedure TfrmFormatProperties.FormCreate(Sender: TObject);
 var
-  FAppStringList: TAppStringList = NIL;
   i: Integer;
 begin
-  LoadLanguage(Self);
   FillComboWithFormatProperties;
   FillComboWithGoogleLanguages(cboASLanguage);
   FillComboWithCavenaLangs(cboCavenaLanguage);
   cboASLanguage.Items.Delete(0); // delete "auto" item
   cboDVDLanguage.Items.Assign(cboASLanguage.Items);
 
-  LanguageManager.GetAppStringList('FormatPropertiesStrings', FAppStringList);
   try
     // Advanced Subtitles
     with Subtitles.FormatProperties^.AdvancedSubtitles do
@@ -180,9 +177,9 @@ begin
       spnASHeight.Value := H;
       with cboASAlignment.Items do
       begin
-        Add(GetString(FAppStringList, 'Center'));
-        Add(GetString(FAppStringList, 'Left'));
-        Add(GetString(FAppStringList, 'Right'));
+        Add(lngfoCenter);
+        Add(lngfoLeft);
+        Add(lngfoRight);
       end;
       cboASAlignment.ItemIndex := Alignment;
     end;
@@ -216,10 +213,10 @@ begin
 
       with cboEBUDSC.Items do
       begin
-        Add(GetString(FAppStringList, 'Undefined'));
-        Add(GetString(FAppStringList, 'OpenSubtitling'));
-        Add(GetString(FAppStringList, 'Level1Teletext'));
-        Add(GetString(FAppStringList, 'Level2Teletext'));
+        Add(lngfoUndefined);
+        Add(lngfoOpenSubtitling);
+        Add(lngfoLevel1Teletext);
+        Add(lngfoLevel2Teletext);
       end;
 
       case DisplayStandardCode of
@@ -232,11 +229,11 @@ begin
 
       with cboEBUCCT.Items do
       begin
-        Add(GetString(FAppStringList, 'Latin'));
-        Add(GetString(FAppStringList, 'LatinCyrillic'));
-        Add(GetString(FAppStringList, 'LatinArabic'));
-        Add(GetString(FAppStringList, 'LatinGreek'));
-        Add(GetString(FAppStringList, 'LatinHebrew'));
+        Add(lngfoLatin);
+        Add(lngfoLatinCyrillic);
+        Add(lngfoLatinArabic);
+        Add(lngfoLatinGreek);
+        Add(lngfoLatinHebrew);
       end;
 
       cboEBUDFC.ItemIndex := DiskFormatCode;
@@ -257,7 +254,7 @@ begin
       tedVTTLOCAL.Value := LOCAL;
     end;
   finally
-    FAppStringList.Free;
+
   end;
 
   cboFormatsSelect(NIL);

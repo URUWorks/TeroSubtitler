@@ -5,7 +5,7 @@ object frmFindAndReplace: TfrmFindAndReplace
   Width = 520
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Find & Replace'
+  Caption = 'Find and replace'
   ClientHeight = 346
   ClientWidth = 520
   OnClose = FormClose
@@ -128,7 +128,7 @@ object frmFindAndReplace: TfrmFindAndReplace
     Top = 152
     Width = 18
     AutoSize = False
-    Caption = 'Case sensitive'
+    Caption = 'Case-sensitive'
     TabOrder = 3
   end
   object chkPreserveCaseOnReplace: TUWCheckBox

@@ -1,0 +1,6 @@
+{"version":1,"strings":[
+{"hash":147852866,"name":"tfrmwaveextractor.caption","sourcebytes":[87,97,118,101,102,111,114,109,32,101,120,116,114,97,99,116,111,114],"value":"Waveform extractor"},
+{"hash":142524606,"name":"tfrmwaveextractor.btnextract.caption","sourcebytes":[69,120,116,114,97,99,116,46,46,46],"value":"Extract..."},
+{"hash":4863637,"name":"tfrmwaveextractor.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":95975914,"name":"tfrmwaveextractor.lbltrack.caption","sourcebytes":[84,114,97,99,107,58],"value":"Track:"}
+]}

@@ -1,0 +1,16 @@
+{"version":1,"strings":[
+{"hash":179637843,"name":"tfrmautomaticdurations.caption","sourcebytes":[65,117,116,111,109,97,116,105,99,32,100,117,114,97,116,105,111,110,115],"value":"Automatic durations"},
+{"hash":121317354,"name":"tfrmautomaticdurations.lblcondition.caption","sourcebytes":[65,112,112,108,121,32,105,102,58],"value":"Apply if:"},
+{"hash":4863637,"name":"tfrmautomaticdurations.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":4749113,"name":"tfrmautomaticdurations.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":49,"name":"tfrmautomaticdurations.edtchars.text","sourcebytes":[49],"value":"1"},
+{"hash":239321938,"name":"tfrmautomaticdurations.lblchars.caption","sourcebytes":[112,101,114,32,99,104,97,114,97,99,116,101,114],"value":"per character"},
+{"hash":49,"name":"tfrmautomaticdurations.edtword.text","sourcebytes":[49],"value":"1"},
+{"hash":206037476,"name":"tfrmautomaticdurations.lblword.caption","sourcebytes":[112,101,114,32,119,111,114,100],"value":"per word"},
+{"hash":49,"name":"tfrmautomaticdurations.edtline.text","sourcebytes":[49],"value":"1"},
+{"hash":205990181,"name":"tfrmautomaticdurations.lblline.caption","sourcebytes":[112,101,114,32,108,105,110,101],"value":"per line"},
+{"hash":253276677,"name":"tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,116,104,101,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101],"value":"From the selected subtitle"},
+{"hash":52430339,"name":"tfrmautomaticdurations.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,116,104,101,32,115,117,98,116,105,116,108,101,115],"value":"All the subtitles"},
+{"hash":94004874,"name":"tfrmautomaticdurations.lblscope.caption","sourcebytes":[83,99,111,112,101,58],"value":"Scope:"},
+{"hash":82358371,"name":"tfrmautomaticdurations.rbnonlyselectedsubtitles.caption","sourcebytes":[79,110,108,121,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101,115],"value":"Only selected subtitles"}
+]}

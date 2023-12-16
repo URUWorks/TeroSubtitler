@@ -102,8 +102,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Left = 8
     Height = 15
     Top = 64
-    Width = 66
-    Caption = 'Image prefix'
+    Width = 30
+    Caption = 'Prefix'
     ParentColor = False
   end
   object lblFolder: TLabel
@@ -168,8 +168,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Left = 400
     Height = 15
     Top = 64
-    Width = 176
-    Caption = 'Safe area (left, top, right, bottom)'
+    Width = 209
+    Caption = 'Safe area pixels (left, top, right, bottom)'
     ParentColor = False
   end
   object spnLeft: TSpinEdit

@@ -4,7 +4,7 @@ object frmTBXList: TfrmTBXList
   Top = 117
   Width = 600
   BorderIcons = [biMaximize]
-  Caption = 'TBX'
+  Caption = 'Terminology'
   ClientHeight = 400
   ClientWidth = 600
   OnClose = FormClose

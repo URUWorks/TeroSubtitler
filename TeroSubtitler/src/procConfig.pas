@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, Controls, SysUtils, Menus, Forms, procTypes, UWSubtitleAPI,
-  UWHotKey, formCustomQuestionDlg
+  UWHotKey, formCustomQuestionDlg, procLocalize
   {$IFNDEF WINDOWS}, UWCheckBox, UWRadioButton{$ENDIF}
   {$IFDEF DARWIN}, CocoaAll, CocoaUtils{$ENDIF};
 
@@ -46,12 +46,12 @@ procedure UpdateValuesFromDefaultConvention;
 
 { Language }
 
-procedure LoadLanguage(const AForm: TForm; const ACommonControls: Boolean = True);
-function GetLangString(const S: String): String;
-function GetCommonString(const S: String; const ASection: String = 'CommonStrings'): String;
+//procedure LoadLanguage(const AForm: TForm; const ACommonControls: Boolean = True);
+//function GetLangString(const S: String): String;
+//function GetCommonString(const S: String; const ASection: String = 'CommonStrings'): String;
 procedure UpdateCommonActionString;
 function GetRandomTipString: String;
-procedure ApplyCommonControlsString(const AForm: TForm; const ASection: String = 'CommonControls');
+//procedure ApplyCommonControlsString(const AForm: TForm; const ASection: String = 'CommonControls');
 
 { Special folders }
 
@@ -61,7 +61,7 @@ function GetCustomFilePath(const FileName: String): String;
 function SettingsFileName: String;
 function CurrentWorkFileName: String;
 function LanguageFolder: String;
-function LanguageFileName: String;
+function LanguageFileName (Default: Boolean  = false): String;
 function ShortCutFolder: String;
 function ShortCutFileName: String;
 function OCRFolder: String;
@@ -114,7 +114,7 @@ implementation
 
 uses
   RegExpr, formMain, XMLConf, UWSystem.Encoding, UWSystem.SysUtils, Dialogs,
-  procDialogs, UWSubtitleAPI.Formats, UWLayout, UWSystem.XMLLang, MPVPlayer,
+  procDialogs, UWSubtitleAPI.Formats, UWSystem.XMLLang, MPVPlayer,
   procWorkspace, procColorTheme, LCLProc, UWSystem.Globalization,
   UWSystem.TimeUtils, libMPV.Client, UWSpellcheck.Hunspell, procConventions,
   UWSystem.InetUtils, fileinfo, winpeimagereader, elfreader, machoreader,
@@ -290,11 +290,11 @@ begin
     CheckErrorsBeforeSave := True;
     TextToFind            := '';
     WebSearchURL          := URL_WordReference;
-    Language              := GetOSLanguage;
+    GUILanguage           := GetOSLanguage;
     HunspellLanguage      := 'en_US';
     ShortCutPreset        := 'Tero.key';
     // Our FormatSettings
-    FormatSettings       := DefaultFormatSettings;
+    FormatSettings                   := DefaultFormatSettings;
     FormatSettings.DecimalSeparator  := '.';
     FormatSettings.ThousandSeparator := FormatSettings.DecimalSeparator;
   end;
@@ -337,14 +337,9 @@ begin
   begin
     SetVideoPreview(False);
     SetWaveformPreview(False);
-
-    if not FileExists(LanguageFileName) then
-    begin
-      if AppOptions.Language.StartsWith('es-') then
-        AppOptions.Language := 'es-UY'
-      else
-        AppOptions.Language := 'en-US';
-    end;
+    AppOptions.GUILanguage := GetOSLanguage;
+    if LanguageFileName (True)  = '' then
+      AppOptions.GUILanguage := '';
 
     UpdateValuesFromDefaultConvention;
 
@@ -381,7 +376,7 @@ begin
     end;
 
     Exit;
-  end;
+  end; //if not FileExists
 
   with TXMLConfig.Create(NIL) do
   try
@@ -389,7 +384,7 @@ begin
     with AppOptions do
     begin
       OpenKey('Settings');
-      Language := GetValue('Language', Language);
+      GUILanguage := GetValue('Language', GUILanguage);
       HunspellLanguage := GetValue('HunspellLanguage', HunspellLanguage);
       ShortCutPreset := GetValue('ShortCutFile', ShortCutPreset);
       ShowWelcomeAtStartup := GetValue('ShowWelcomeAtStartup', ShowWelcomeAtStartup);
@@ -705,7 +700,7 @@ begin
     with AppOptions do
     begin
       OpenKey('Settings');
-      SetValue('Language', Language);
+      SetValue('Language', GUILanguage);
       SetValue('HunspellLanguage', HunspellLanguage);
       SetValue('ShortCutFile', ShortCutPreset);
       SetValue('ShowWelcomeAtStartup', ShowWelcomeAtStartup);
@@ -1110,14 +1105,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure LoadLanguage(const AForm: TForm; const ACommonControls: Boolean = True);
+{procedure LoadLanguage(const AForm: TForm; const ACommonControls: Boolean = True);
 {$IFNDEF WINDOWS}
 var
   C: TComponent;
 {$ENDIF}
 begin
   with LanguageManager do
-    ApplyLanguage(GetLangIndexByName(AppOptions.Language), AForm);
+    ApplyLanguage(GetLangIndexByName(AppOptions.GUILanguage), AForm);
 
   if ACommonControls then
     ApplyCommonControlsString(AForm);
@@ -1132,19 +1127,19 @@ begin
 
   if AForm = frmMain then
     frmMain.actAbout.Caption := Format(frmMain.actAbout.Caption, [ProgramName]);
-end;
+end;}
 
 // -----------------------------------------------------------------------------
 
-function GetLangString(const S: String): String;
+{function GetLangString(const S: String): String;
 begin
   with LanguageManager do
     Result := GetAppString(S);
-end;
+end;}
 
 // -----------------------------------------------------------------------------
 
-function GetCommonString(const S: String; const ASection: String = 'CommonStrings'): String;
+{function GetCommonString(const S: String; const ASection: String = 'CommonStrings'): String;
 var
   sl: TAppStringList = NIL;
 begin
@@ -1158,29 +1153,22 @@ begin
   end
   else
     Result := '';
-end;
+end;}
 
 // -----------------------------------------------------------------------------
 
 procedure UpdateCommonActionString;
-var
-  sl: TAppStringList = NIL;
 begin
-  if LanguageManager.GetAppStringList('CommonStrings', sl) then
-  try
-    with frmMain do
+  with frmMain do
     begin
-      actShiftTimeMore.Caption := Format(GetString(sl, 'ShiftTimeMore'), [AppOptions.ShiftTimeMS]);
-      actShiftTimeLess.Caption := Format(GetString(sl, 'ShiftTimeLess'), [AppOptions.ShiftTimeMS]);
+      actShiftTimeMore.Caption := lngShiftTimeMore;
+      actShiftTimeLess.Caption := lngShiftTimeLess;
     end;
-  finally
-    sl.Free;
-  end;
 end;
 
 // -----------------------------------------------------------------------------
 
-function GetRandomTipString: String;
+{function GetRandomTipString: String;
 var
   sl: TAppStringList = NIL;
   rndTip: Integer;
@@ -1204,11 +1192,28 @@ begin
   end
   else
     Result := '';
+end;}
+
+//TODO: Localize: Check if the behaviour is okay
+function GetRandomTipString: String;
+var
+  rndTip: Integer;
+begin
+  rndTip := Random(3)+1;
+  with frmMain do
+    case rndTip of
+      1: Result := Format(lngtTip1, [ShortCutToTextEx(actPreviousSubtitle.ShortCut), ShortCutToTextEx(actNextSubtitle.ShortCut)]);
+      2: Result := Format(lngtTip2, [ShortCutToTextEx(actWebReference.ShortCut)]);
+      3: Result := Format(lngtTip3, [ShortCutToTextEx(actUnDockVideo.ShortCut)]);
+      4: Result := Format(lngtTip4, [ShortCutToTextEx(actUnDockWaveform.ShortCut)]);
+    end;
+  SetStatusBarText(Result);
 end;
+
 
 // -----------------------------------------------------------------------------
 
-procedure ApplyCommonControlsString(const AForm: TForm; const ASection: String = 'CommonControls');
+{procedure ApplyCommonControlsString(const AForm: TForm; const ASection: String = 'CommonControls');
 var
   sl : TAppStringList = NIL;
   i  : Integer;
@@ -1240,7 +1245,7 @@ begin
     finally
       sl.Free;
     end;
-end;
+end;    }
 
 // -----------------------------------------------------------------------------
 
@@ -1314,9 +1319,25 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function LanguageFileName: String;
+function DefaultDialect(Language: string): string;
 begin
-  Result := LanguageFolder + AppOptions.Language + '.lng';
+  Result := 'en_US';
+  if Language.StartsWith('es_') then exit ('es-UY');
+  //Currently English (USA) is default anyway
+  //if Language.StartsWith('en_') then exit ('en_US');
+  //Other dialects might be added here
+end;
+
+function LanguageFileName (Default: boolean = false): String;
+var
+  LanguageFile: string;
+begin
+  Result := ''; //If no language is present, no localization will be loaded
+  if Default
+    then LanguageFile := LanguageFolder + AppNameD + GetOSLanguage + '.po'
+    else LanguageFile := LanguageFolder + AppNameD + AppOptions.GUILanguage + '.po';
+  if FileExists (LanguageFile) then exit (LanguageFile);
+  if FileExists (DefaultDialect(LanguageFile)) then exit (DefaultDialect(LanguageFile));
 end;
 
 // -----------------------------------------------------------------------------
@@ -1754,17 +1775,17 @@ begin
         sOld := FileVerInfo.VersionStrings.Values['FileVersion'];
         if (sNew.Trim > sOld.Trim) then // New version available
         begin
-          if CustomQuestionDialog('CommonStrings', 'NewVersionFound', 'SeeChangeList', [dbYes, dbNo]) = mrYes then
+          if CustomQuestionDialog(lngNewVersionFound, lngSeeChangeList, [dbYes, dbNo]) = mrYes then
             OpenURL(ProgramReleaseURL);
         end
         else // you're using latest version
-          ShowMessageDialog(GetCommonString('NoNewVersion'));
+          ShowMessageDialog(lngNoNewVersion);
       finally
         FileVerInfo.Free;
       end;
     end
     else // no internet or file lost?
-      ShowErrorMessageDialog(GetCommonString('FailedToDownload'));
+      ShowErrorMessageDialog(lngFailedToDownload);
   finally
     Free;
   end;

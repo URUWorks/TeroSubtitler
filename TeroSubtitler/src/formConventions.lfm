@@ -142,7 +142,7 @@ object frmConventions: TfrmConventions
       Top = 264
       Width = 238
       AutoSize = False
-      Caption = 'Min. subtitle pause'
+      Caption = 'Min. gap'
       ParentColor = False
     end
     object spnSubtitlePauseMs: TSpinEdit
@@ -176,7 +176,7 @@ object frmConventions: TfrmConventions
       Top = 36
       Width = 238
       AutoSize = False
-      Caption = 'Repeatable chars'
+      Caption = 'Repeatable characters'
       ParentColor = False
     end
     object lblProhibitedChars: TLabel
@@ -185,7 +185,7 @@ object frmConventions: TfrmConventions
       Top = 68
       Width = 238
       AutoSize = False
-      Caption = 'Prohibited chars'
+      Caption = 'Prohibited characters'
       ParentColor = False
     end
     object chkDotsOnSplit: TUWCheckBox
@@ -194,7 +194,7 @@ object frmConventions: TfrmConventions
       Top = 520
       Width = 18
       AutoSize = False
-      Caption = 'Dots on split'
+      Caption = 'Add ''...'' on split subtitle'
       TabOrder = 19
     end
     object lblMaxLineCount: TLabel
@@ -221,7 +221,7 @@ object frmConventions: TfrmConventions
       Top = 296
       Width = 238
       AutoSize = False
-      Caption = 'CPS'
+      Caption = 'Characters per second'
       ParentColor = False
     end
     object spnCPS: TSpinEdit
@@ -239,7 +239,7 @@ object frmConventions: TfrmConventions
       Top = 328
       Width = 238
       AutoSize = False
-      Caption = 'WPM'
+      Caption = 'Words per minute'
       ParentColor = False
     end
     object spnWPM: TSpinEdit
@@ -266,7 +266,7 @@ object frmConventions: TfrmConventions
       Top = 360
       Width = 238
       AutoSize = False
-      Caption = 'CPL'
+      Caption = 'Characters per line'
       ParentColor = False
     end
     object lblName: TLabel
@@ -336,7 +336,7 @@ object frmConventions: TfrmConventions
       Top = 392
       Width = 238
       AutoSize = False
-      Caption = 'Shot change snap area (frames)'
+      Caption = 'Shot change snap / threshold (frames)'
       ParentColor = False
     end
     object spnSCSnapArea: TSpinEdit
@@ -354,7 +354,7 @@ object frmConventions: TfrmConventions
       Top = 424
       Width = 238
       AutoSize = False
-      Caption = 'Snap in cues (frames)'
+      Caption = 'Snap in cues after SC (frames)'
       ParentColor = False
     end
     object spnSCSnapInCues: TSpinEdit
@@ -371,7 +371,7 @@ object frmConventions: TfrmConventions
       Top = 456
       Width = 238
       AutoSize = False
-      Caption = 'Snap out cues (frames)'
+      Caption = 'Snap out cues before SC (frames)'
       ParentColor = False
     end
     object spnSCSnapOutCues: TSpinEdit

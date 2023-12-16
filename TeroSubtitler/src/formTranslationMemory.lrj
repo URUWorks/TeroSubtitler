@@ -1,0 +1,7 @@
+{"version":1,"strings":[
+{"hash":34260793,"name":"tfrmtranslationmemory.caption","sourcebytes":[84,114,97,110,115,108,97,116,105,111,110,32,109,101,109,111,114,121],"value":"Translation memory"},
+{"hash":304761,"name":"tfrmtranslationmemory.btncopy.caption","sourcebytes":[67,111,112,121],"value":"Copy"},
+{"hash":137342309,"name":"tfrmtranslationmemory.btnvalidate.caption","sourcebytes":[86,97,108,105,100,97,116,101],"value":"Validate"},
+{"hash":4863637,"name":"tfrmtranslationmemory.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":23701,"name":"tfrmtranslationmemory.btnuse.caption","sourcebytes":[85,115,101],"value":"Use"}
+]}

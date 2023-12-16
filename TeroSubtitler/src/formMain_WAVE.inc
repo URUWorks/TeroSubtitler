@@ -137,15 +137,16 @@ procedure TfrmMain.DetectDialogSegments;
 var
   DialogList: TZonesList;
   i, x: Integer;
-  s: String;
+  //s: String;
 begin
   if not WAVE.IsPeakDataLoaded then
     actWaveExtract.Execute;
 
-  if WAVE.IsPeakDataLoaded and (CustomQuestionDialog('CommonStrings', 'DetectDialogSegmentsWarning', 'ContinueAnyway', [dbYes, dbNo]) = mrYes) then
+  if WAVE.IsPeakDataLoaded and (CustomQuestionDialog(lngDetectDialogSegmentsWarning, lngContinueAnyway, [dbYes, dbNo]) = mrYes) then
     if WAVE.DetectZoneList(DialogList, False, AppOptions.DialogSegmentThreshold) then
     try
-      s := GetCommonString('Entry');
+      //s := GetCommonString('Entry');
+
       UndoInstance.IncrementUndoGroup;
       ClearSubtitles(False);
       x := 0;
@@ -154,7 +155,7 @@ begin
         begin
           if (Stop-Start) >= 500 then
           begin
-            InsertSubtitle(x, Start, Stop, Format(s, [x+1]), '', False, False);
+            InsertSubtitle(x, Start, Stop, Format(lngEntry, [x+1]), '', False, False);
             Inc(x);
           end;
         end;

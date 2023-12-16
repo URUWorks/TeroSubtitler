@@ -1,0 +1,9 @@
+{"version":1,"strings":[
+{"hash":13202387,"name":"tfrmtranslationmemorysettings.caption","sourcebytes":[84,114,97,110,115,108,97,116,105,111,110,32,109,101,109,111,114,121,32,115,101,116,116,105,110,103,115],"value":"Translation memory settings"},
+{"hash":12558,"name":"tfrmtranslationmemorysettings.btnopenfile.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":214407829,"name":"tfrmtranslationmemorysettings.lblsourcelang.caption","sourcebytes":[83,111,117,114,99,101,32,108,97,110,103,117,97,103,101],"value":"Source language"},
+{"hash":114234821,"name":"tfrmtranslationmemorysettings.lbltranslang.caption","sourcebytes":[84,114,97,110,115,108,97,116,105,111,110,32,108,97,110,103,117,97,103,101],"value":"Translation language"},
+{"hash":41356085,"name":"tfrmtranslationmemorysettings.lblfilename.caption","sourcebytes":[70,105,108,101,32,110,97,109,101],"value":"File name"},
+{"hash":4749113,"name":"tfrmtranslationmemorysettings.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmtranslationmemorysettings.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

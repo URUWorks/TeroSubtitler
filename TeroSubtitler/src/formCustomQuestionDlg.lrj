@@ -1,0 +1,7 @@
+{"version":1,"strings":[
+{"hash":77089212,"name":"tfrmcustomquestiondlg.btncancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":24515,"name":"tfrmcustomquestiondlg.btnyes.caption","sourcebytes":[89,101,115],"value":"Yes"},
+{"hash":5966629,"name":"tfrmcustomquestiondlg.lbltitle.caption","sourcebytes":[84,105,116,108,101],"value":"Title"},
+{"hash":197831646,"name":"tfrmcustomquestiondlg.lblquestion.caption","sourcebytes":[81,117,101,115,116,105,111,110],"value":"Question"},
+{"hash":1359,"name":"tfrmcustomquestiondlg.btnno.caption","sourcebytes":[78,111],"value":"No"}
+]}

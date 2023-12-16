@@ -22,7 +22,7 @@ unit formAudioToTextModel;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLTranslator;
 
 type
 
@@ -108,8 +108,6 @@ var
   i: Integer;
   s: String;
 begin
-  LoadLanguage(Self);
-
   if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
     ModelsToUse := Models
   else

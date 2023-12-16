@@ -26,7 +26,7 @@ end;
 
 procedure TfrmMain.MPVStartFile(Sender: TObject);
 begin
-  SetStatusBarText(GetLangString('ReadingVideoFile'));
+  SetStatusBarText(lngasReadingVideoFile);
 end;
 
 // -----------------------------------------------------------------------------
@@ -65,7 +65,7 @@ begin
     LoadAudio(GetMediaFileNameIfExists(MPV.FileName, TAudioExts));
 
   if not WAVE.IsPeakDataLoaded then
-    WAVE.EmptyText := LanguageManager.GetAppString('WaveformText');
+    WAVE.EmptyText := lngasWaveformText;
 
   timerSubtitle.Enabled := True;
   timerWaveform.Enabled := True;
@@ -84,14 +84,6 @@ begin
 
   UpdateVideoLengthString;
   RefreshAppTitle;
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure TfrmMain.MPVEndFile(ASender: TObject; AParam: Integer);
-begin
-  if MPV.GetMediaPosInMs > 0 then
-    MPV.Pause;
 end;
 
 // -----------------------------------------------------------------------------

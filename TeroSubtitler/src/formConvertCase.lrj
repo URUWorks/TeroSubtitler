@@ -1,0 +1,14 @@
+{"version":1,"strings":[
+{"hash":230736981,"name":"tfrmconvertcase.caption","sourcebytes":[67,111,110,118,101,114,116,32,99,97,115,101],"value":"Convert case"},
+{"hash":4749113,"name":"tfrmconvertcase.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmconvertcase.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":11676789,"name":"tfrmconvertcase.rdosentencetype.caption","sourcebytes":[83,101,110,116,101,110,99,101,32,116,121,112,101],"value":"Sentence type"},
+{"hash":231271413,"name":"tfrmconvertcase.rdolowercase.caption","sourcebytes":[108,111,119,101,114,99,97,115,101],"value":"lowercase"},
+{"hash":77999141,"name":"tfrmconvertcase.rdouppercase.caption","sourcebytes":[85,80,80,69,82,67,65,83,69],"value":"UPPERCASE"},
+{"hash":40898773,"name":"tfrmconvertcase.rdotitletype.caption","sourcebytes":[84,105,116,108,101,32,84,121,112,101],"value":"Title Type"},
+{"hash":26489909,"name":"tfrmconvertcase.rdoinversetype.caption","sourcebytes":[105,78,86,69,82,83,69,32,116,89,80,69],"value":"iNVERSE tYPE"},
+{"hash":94004874,"name":"tfrmconvertcase.lblscope.caption","sourcebytes":[83,99,111,112,101,58],"value":"Scope:"},
+{"hash":52430339,"name":"tfrmconvertcase.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,116,104,101,32,115,117,98,116,105,116,108,101,115],"value":"All the subtitles"},
+{"hash":253276677,"name":"tfrmconvertcase.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,116,104,101,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101],"value":"From the selected subtitle"},
+{"hash":82358371,"name":"tfrmconvertcase.rbnonlyselectedsubtitles.caption","sourcebytes":[79,110,108,121,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101,115],"value":"Only selected subtitles"}
+]}

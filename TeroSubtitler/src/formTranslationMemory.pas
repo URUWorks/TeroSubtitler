@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, laz.VirtualTrees,
-  LCLIntf, LCLType, StdCtrls;
+  LCLIntf, LCLType, StdCtrls, LCLTranslator, procLocalize;
 
 type
 
@@ -85,16 +85,10 @@ uses
 // -----------------------------------------------------------------------------
 
 procedure TfrmTranslationMemory.FormCreate(Sender: TObject);
-var
-  FAppStringList: TAppStringList = NIL;
 begin
-  LoadLanguage(Self);
-
-  LanguageManager.GetAppStringList('TranslationMemoryStrings', FAppStringList);
-  VSTAddColumn(VST, GetString(FAppStringList, 'Original'), 150, taLeftJustify);
-  VSTAddColumn(VST, GetString(FAppStringList, 'Translated'), 150, taLeftJustify);
-  VSTAddColumn(VST, GetString(FAppStringList, 'Percent'), 80, taLeftJustify);
-  FAppStringList.Free;
+  VSTAddColumn(VST, lngOriginal, 150, taLeftJustify);
+  VSTAddColumn(VST, lngTranslated, 150, taLeftJustify);
+  VSTAddColumn(VST, lngPercent, 80, taLeftJustify);
 end;
 
 // -----------------------------------------------------------------------------

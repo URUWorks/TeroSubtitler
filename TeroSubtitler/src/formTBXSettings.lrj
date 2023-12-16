@@ -1,0 +1,9 @@
+{"version":1,"strings":[
+{"hash":57692275,"name":"tfrmtbxsettings.caption","sourcebytes":[84,101,114,109,105,110,111,108,111,103,121,32,115,101,116,116,105,110,103,115],"value":"Terminology settings"},
+{"hash":12558,"name":"tfrmtbxsettings.btnopenfile.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":214407829,"name":"tfrmtbxsettings.lblsourcelang.caption","sourcebytes":[83,111,117,114,99,101,32,108,97,110,103,117,97,103,101],"value":"Source language"},
+{"hash":114234821,"name":"tfrmtbxsettings.lbltranslang.caption","sourcebytes":[84,114,97,110,115,108,97,116,105,111,110,32,108,97,110,103,117,97,103,101],"value":"Translation language"},
+{"hash":2901221,"name":"tfrmtbxsettings.lblfilename.caption","sourcebytes":[70,105,108,101,110,97,109,101],"value":"Filename"},
+{"hash":4749113,"name":"tfrmtbxsettings.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmtbxsettings.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

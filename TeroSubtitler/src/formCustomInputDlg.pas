@@ -22,7 +22,7 @@ unit formCustomInputDlg;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, StdCtrls, LCLType, LCLIntf;
+  Classes, SysUtils, Forms, Controls, StdCtrls, LCLType, LCLIntf, LCLTranslator;
 
 type
 
@@ -54,7 +54,7 @@ var
 implementation
 
 uses
-  procTypes, procConfig, procWorkspace, UWSystem.XMLLang;
+  procTypes, procWorkspace, UWSystem.XMLLang;
 
 {$R *.lfm}
 
@@ -66,7 +66,6 @@ uses
 
 procedure TfrmCustomInputDlg.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
   lblMessage.Caption := '';
   FURL := '';
 end;

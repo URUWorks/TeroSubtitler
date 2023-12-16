@@ -600,7 +600,7 @@ begin
   with SubtitleInfo.LastSubtitle do
   begin
     InitialTime := MPV.GetMediaPosInMs;
-    SetStatusBarText(Format(GetCommonString('SubtitleStartedAt'), [GetTimeStr(InitialTime, True)]));
+    SetStatusBarText(Format(lngSubtitleStartedAt, [GetTimeStr(InitialTime, True)]));
   end;
 end;
 
@@ -623,7 +623,7 @@ begin
       l := AppOptions.Conventions.MinDuration;
 
     InsertSubtitle(i, InitialTime, l, '', '');
-    SetStatusBarText(Format(GetCommonString('SubtitleEndedAt'), [GetTimeStr(l, True)]));
+    SetStatusBarText(Format(lngSubtitleEndedAt, [GetTimeStr(l, True)]));
   end;
 end;
 
@@ -1186,7 +1186,7 @@ procedure TfrmMain.actAddNoteExecute(Sender: TObject);
 begin
   if VST.SelectedCount = 1 then
     with Subtitles.ItemPointer[VSTFocusedNode(VST)]^ do
-      Notes := InputDialog(GetCommonString('AddNote'), '', Notes, '', '', 135);
+      Notes := InputDialog(lngAddNote, '', Notes, '', '', 135);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1195,7 +1195,7 @@ procedure TfrmMain.actLoadVideoFromURLExecute(Sender: TObject);
 var
   s: String;
 begin
-  s := InputDialog(GetCommonString('OpenVideoFromURL'), GetCommonString('URL'), '', GetCommonString('SupportedSites'), 'https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md');
+  s := InputDialog(lngOpenVideoFromURL, lngURL, '', lngSupportedSites, 'https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md');
   if not s.IsEmpty then
   begin
     if not actVideoPreview.Checked then
@@ -1686,7 +1686,7 @@ var
   s : String;
   numbers : TStringArray;
 begin
-  s := InputDialog(actRemoveLineFromEntry.Caption, GetCommonString('Line'), '', '', '', 93, True);
+  s := InputDialog(actRemoveLineFromEntry.Caption, lngLine, '', '', '', 93, True);
   if not s.IsEmpty then
   begin
     numbers := s.Split(',');

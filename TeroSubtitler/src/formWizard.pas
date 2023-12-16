@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  UWLayout;
+  UWLayout, LCLTranslator, procLocalize, UWSystem.Globalization;
 
 type
 
@@ -36,18 +36,20 @@ type
     btnDownloadYTDLP: TButton;
     btnNext: TButton;
     btnDownload: TButton;
+    cboLanguage: TComboBox;
     imgLogo: TImage;
     lblFasterWhisper: TLabel;
-    lblFasterWhisperDesc: TLabel;
+    lblFasterWhisper_Hint: TLabel;
+    lblFFMPEG_Hint: TLabel;
+    lblLanguage: TLabel;
+    lbllibMPV_Hint: TLabel;
+    lblWhisper_Hint: TLabel;
     lblWhisperStatus: TLabel;
     lblWhisper: TLabel;
-    lblWhisperDesc: TLabel;
     lblFasterWhisperStatus: TLabel;
+    lblYTDLP_Hint: TLabel;
     lblYTDLPStatus: TLabel;
     lblYTDLP: TLabel;
-    lbllibmpvDesc: TLabel;
-    lblffmpegDesc: TLabel;
-    lblYTDLPDesc: TLabel;
     lblLibMPVStatus: TLabel;
     lblFFMPEGStatus: TLabel;
     lblFFMPEG: TLabel;
@@ -63,11 +65,13 @@ type
     procedure btnDownloadWhisperClick(Sender: TObject);
     procedure btnDownloadFasterWhisperClick(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
+    procedure cboLanguageChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
     FIndex: Integer;
+    FLngList: TStrings;
     sSuccess, sFailed: String;
     procedure SetPageStep(const AIndex: Integer);
   public
@@ -94,10 +98,10 @@ uses
 
 procedure TfrmWizard.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
+  FLngList := TStringList.Create;
   FIndex   := 0;
-  sSuccess := GetCommonString('Success');
-  sFailed  := GetCommonString('Failed');
+  sSuccess := lngSuccess;
+  sFailed  := lngFailed;
 
   btnDownloadYTDLP.Caption   := btnDownload.Caption;
   btnDownloadFFMPEG.Caption  := btnDownload.Caption;
@@ -170,6 +174,11 @@ begin
     btnDownloadFasterWhisper.Enabled := True;
     lblFasterWhisperStatus.Caption := sFailed;
   end;
+
+  lblLanguage.Visible := False;
+  cboLanguage.Visible := False;
+  FillComboWithLanguages(cboLanguage, FLngList);
+  GetGUILangIndex(FLngList, GetOSLanguage);
 end;
 
 // -----------------------------------------------------------------------------
@@ -177,6 +186,7 @@ end;
 procedure TfrmWizard.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   CloseAction := caFree;
+  FLngList.Free;
   frmWizard := NIL;
 end;
 
@@ -218,6 +228,9 @@ begin
         else
           Visible := False
       end;
+
+  lblLanguage.Visible := AIndex = 1;
+  cboLanguage.Visible := AIndex = 1;
 end;
 
 // -----------------------------------------------------------------------------
@@ -225,6 +238,16 @@ end;
 procedure TfrmWizard.btnNextClick(Sender: TObject);
 begin
   SetPageStep(FIndex+1);
+end;
+
+procedure TfrmWizard.cboLanguageChange(Sender: TObject);
+begin
+  if Length(FLngList.Strings[cboLanguage.ItemIndex].Split([';'])) > 0 then
+    AppOptions.GUILanguage := FLngList.Strings[cboLanguage.ItemIndex].Split([';'])[0]
+  else
+    AppOptions.GUILanguage := 'en_US';
+
+  SetGUILanguage;
 end;
 
 // -----------------------------------------------------------------------------

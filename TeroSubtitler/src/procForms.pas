@@ -84,7 +84,8 @@ uses
   formTBX, formTBXSettings, formTBXEdit, formWizard, formShiftTimes,
   formAudioToText, formAudioToTextModel, procTypes, procConfig, procWorkspace,
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
-  formActors, formExportSUP, formGenerateVideo, procMPV;
+  formActors, formExportSUP, formGenerateVideo, procMPV, LCLTranslator,
+  procLocalize;
 
 // -----------------------------------------------------------------------------
 
@@ -322,16 +323,17 @@ var
 begin
   if frmSettings = NIL then
   begin
-    OldLang        := AppOptions.Language;
+    OldLang        := AppOptions.GUILanguage;
     OldShiftMs     := AppOptions.ShiftTimeMS;
     OldHandleByMPV := MPVOptions.SubtitleHandleByMPV;
     OldFontSize    := frmMain.VST.Font.Size;
 
     frmSettings := TfrmSettings.Create(Application);
     frmSettings.ShowModal;
-    if OldLang <> AppOptions.Language then
+    if OldLang <> AppOptions.GUILanguage then
     begin
-      LoadLanguage(frmMain);
+      //LoadLanguage(frmMain);
+      SetGUILanguage;
       UpdateCommonActionString;
       UpdateVideoLengthString;
       RefreshAppTitle;
@@ -340,7 +342,7 @@ begin
       UpdateCommonActionString;
 
     with frmMain do
-      if (OldFontSize <> VST.Font.Size) or (OldLang <> AppOptions.Language) then
+      if (OldFontSize <> VST.Font.Size) or (OldLang <> AppOptions.GUILanguage) then
       begin
         VSTDrawInitialize(VSTOptions.DrawMode);
         VSTResize(NIL);

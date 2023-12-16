@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  ComCtrls, UWRadioButton;
+  ComCtrls, UWRadioButton, LCLTranslator, procLocalize;
 
 type
 
@@ -78,15 +78,15 @@ uses
 
 procedure TfrmTranslate.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
+  //LoadLanguage(Self);
 
   FillComboWithGoogleLanguages(cboSourceLanguage);
   FillComboWithGoogleLanguages(cboTranslationLanguage, 44);
   cboTranslationLanguage.Items.Delete(0);
 
-  cboSourceLanguage.Items[0] := GetCommonString('Detect');
-  cboInput.Items.Add(GetLangString('Text'));
-  cboInput.Items.Add(GetLangString('Translation'));
+  cboSourceLanguage.Items[0] := lngDetect;
+  cboInput.Items.Add(lngasText);
+  cboInput.Items.Add(lngasTranslation);
 
   cboOutput.Items.Assign(cboInput.Items);
   cboInput.ItemIndex  := 0;
@@ -200,7 +200,7 @@ begin
     EnableControls(True);
   end
   else
-    ShowErrorMessageDialog(GetCommonString('NoInternetConnection'));
+    ShowErrorMessageDialog(lngNoInternetConnection);
 
   Close;
 end;
@@ -210,9 +210,9 @@ end;
 procedure TfrmTranslate.EnableControls(const AValue: Boolean);
 begin
   if not AValue then
-    btnClose.Caption := GetCommonString('btnCancel', 'CommonControls')
+    btnClose.Caption := lngbtnCancel
   else
-    btnClose.Caption := GetCommonString('btnClose', 'CommonControls');
+    btnClose.Caption := lngbtnClose;
 
   cboSourceLanguage.Enabled          := AValue;
   cboTranslationLanguage.Enabled     := AValue;

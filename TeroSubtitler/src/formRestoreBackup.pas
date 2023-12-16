@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLIntf,
-  LCLType, laz.VirtualTrees;
+  LCLType, laz.VirtualTrees, LCLTranslator,procLocalize;
 
 type
 
@@ -82,15 +82,9 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmRestoreBackup.FormCreate(Sender: TObject);
-var
-  FAppStringList: TAppStringList = NIL;
 begin
-  LoadLanguage(Self);
-
-  LanguageManager.GetAppStringList('RestoreBackupStrings', FAppStringList);
-  VSTAddColumn(VST, GetString(FAppStringList, 'DateTime'), 150);
-  VSTAddColumn(VST, GetString(FAppStringList, 'Filename'), 150);
-  FAppStringList.Free;
+  VSTAddColumn(VST, lngrbDateTime, 150);
+  VSTAddColumn(VST, lngrbFilename, 150);
 
   FList := FindAllFiles(BackupFolder, '*.tero', False);
   FList.CustomSort(@UTF8Compare);

@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, Dialogs, fgl, LazUTF8,
-  UWSubtitleAPI;
+  UWSubtitleAPI, LCLTranslator, procLocalize;
 
 type
 
@@ -64,14 +64,13 @@ type
     procedure FormShow(Sender: TObject);
     procedure lstSuggestionsSelectionChange(Sender: TObject; User: boolean);
   private
-    FWordMap     : TWordMap;
-    FChangeList  : TWordReplaceMap;
-    FLastPos     : Integer;
-    FLastLine    : Integer;
-    FSkipList    : TStrings;
-    FTempList    : TStrings;
-    FSource      : TSubtitleMode;
-    FCurrentLine : String;
+    FWordMap    : TWordMap;
+    FChangeList : TWordReplaceMap;
+    FLastPos    : Integer;
+    FLastLine   : Integer;
+    FSkipList   : TStrings;
+    FTempList   : TStrings;
+    FSource     : TSubtitleMode;
 
     procedure PopulateWordMap(const AText: String);
     procedure InitializeSpellAtLine(const ALine: Integer = 0);
@@ -102,18 +101,15 @@ uses
 
 procedure TfrmSpellCheck.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
-
   FWordMap    := TWordMap.Create;
   FChangeList := TWordReplaceMap.Create;
   FSkipList   := TStringList.Create;
   FTempList   := TStringList.Create;
 
-  FCurrentLine := lblCurrentLine.Caption;
   FillWithDictionaries(NIL, cboDictionary);
 
-  cboSource.AddItem(GetLangString('Text'), NIL);
-  cboSource.AddItem(GetLangString('Translation'), NIL);
+  cboSource.AddItem(lngasText, NIL);
+  cboSource.AddItem(lngasTranslation, NIL);
 
   if Workspace.TranslatorMode then
     cboSource.ItemIndex := 1
@@ -206,7 +202,7 @@ begin
 
   if ALine < (Subtitles.Count-1) then
   begin
-    lblCurrentLine.Caption := Format(FCurrentLine, [ALine+1]);
+    lblCurrentLine.Caption := Format(lngspCurrentLine, [ALine+1]);
     mmoNotFound.Text := GetSubtitleText(ALine, FSource);
     PopulateWordMap(mmoNotFound.Text);
   end;
@@ -267,10 +263,7 @@ begin
 
     if not FirstLoad then
     begin
-      with LanguageManager do
-        ShowMessageDialog(GetCommonString('SpellCheckFinished'));
-
-      //Close;
+        ShowMessageDialog(lngSpellCheckFinished);
     end;
   end;
 end;

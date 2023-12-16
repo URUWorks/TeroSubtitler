@@ -1,0 +1,11 @@
+{"version":1,"strings":[
+{"hash":102968339,"name":"tfrmshifttimes.caption","sourcebytes":[83,104,105,102,116,32,116,105,109,101,115],"value":"Shift times"},
+{"hash":4863637,"name":"tfrmshifttimes.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":4749113,"name":"tfrmshifttimes.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":89971140,"name":"tfrmshifttimes.lbloffset.caption","sourcebytes":[79,102,102,115,101,116],"value":"Offset"},
+{"hash":43,"name":"tfrmshifttimes.cbooffset.text","sourcebytes":[43],"value":"+"},
+{"hash":94004874,"name":"tfrmshifttimes.lblscope.caption","sourcebytes":[83,99,111,112,101,58],"value":"Scope:"},
+{"hash":52430339,"name":"tfrmshifttimes.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,116,104,101,32,115,117,98,116,105,116,108,101,115],"value":"All the subtitles"},
+{"hash":253276677,"name":"tfrmshifttimes.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,116,104,101,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101],"value":"From the selected subtitle"},
+{"hash":82358371,"name":"tfrmshifttimes.rbnonlyselectedsubtitles.caption","sourcebytes":[79,110,108,121,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101,115],"value":"Only selected subtitles"}
+]}

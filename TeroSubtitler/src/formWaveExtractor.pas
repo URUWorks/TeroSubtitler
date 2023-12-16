@@ -22,7 +22,7 @@ unit formWaveExtractor;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Dialogs, StdCtrls, ComCtrls;
+  Classes, SysUtils, Forms, Controls, Dialogs, StdCtrls, ComCtrls, LCLTranslator, procLocalize;
 
 type
 
@@ -70,7 +70,6 @@ uses
 
 procedure TfrmWaveExtractor.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
   FillComboWithAudioStreams(cboTrack);
   btnExtract.Enabled := (cboTrack.Items.Count > 0);
   CancelExtraction := False;
@@ -120,19 +119,19 @@ var
   AParamArray: TStringArray;
 begin
   if frmMain.MPV.FileName.StartsWith('http') then
-    ShowErrorMessageDialog(GetCommonString('FeatureNotAvailableFromURL'))
+    ShowErrorMessageDialog(lngFeatureNotAvailableFromURL)
   else if not FileExists(GetExtractAppFile) then
-    ShowErrorMessageDialog(Format(GetCommonString('ExtractAppError'), [ExtractFileName(GetExtractAppFile)]))
+    ShowErrorMessageDialog(Format(lngExtractAppError, [ExtractFileName(GetExtractAppFile)]))
   else if (Tools.FFmpeg_ParamsForAudioExtract <> '') then
   begin
     CancelExtraction       := False;
     btnExtract.Enabled     := False;
     //btnClose.Enabled       := False;
-    btnClose.Caption       := GetCommonString('btnCancel', 'CommonControls');
+    btnClose.Caption       := lngbtnCancel;
     lblWait.Visible        := True;
     lblStatus.Visible      := True;
     lblTimeElapsed.Visible := True;
-    lblStatus.Caption      := GetCommonString('Extracting');
+    lblStatus.Caption      := lngExtracting;
 
     Application.ProcessMessages;
     try
@@ -140,7 +139,7 @@ begin
       begin
         if not ForceDirectories(WaveformsFolder) then
         begin
-          ShowErrorMessageDialog(GetCommonString('WriteDenieded'));
+          ShowErrorMessageDialog(lngWriteDenieded);
           Exit;
         end;
       end;
@@ -170,7 +169,7 @@ begin
       lblTimeElapsed.Visible := False;
       btnExtract.Enabled     := True;
       //btnClose.Enabled       := True;
-      btnClose.Caption       := GetCommonString('btnClose', 'CommonControls');
+      btnClose.Caption       := lngbtnClose;
       Close;
     end;
   end

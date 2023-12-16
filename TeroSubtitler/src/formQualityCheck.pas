@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   laz.VirtualTrees, UWSystem.XMLLang, LCLIntf, LCLType, procQualityCheck,
-  procConventions;
+  procConventions, LCLTranslator,procLocalize;
 
 type
 
@@ -52,7 +52,6 @@ type
       var PaintInfo: THeaderPaintInfo; var Elements: THeaderPaintElements);
     procedure VSTResize(Sender: TObject);
   private
-    FAppStringList: TAppStringList;
     FProfiles: TProfiles;
     FList: TSubtitleCheckItemList;
     function GetRuleDescription(const ARules: TQualityCheckType): String;
@@ -82,17 +81,14 @@ procedure TfrmQualityCheck.FormCreate(Sender: TObject);
 var
   i: Integer;
 begin
-  LoadLanguage(Self);
-
   FProfiles := TProfiles.Create(ConventionsFileName);
   FillItemsWithConventions(cboRules.Items, FProfiles);
-  cboRules.Items.Insert(0, LanguageManager.GetAppString('Custom'));
+  cboRules.Items.Insert(0, lngasCustom);
 
   FList := NIL;
 
-  LanguageManager.GetAppStringList('QualityCheckStrings', FAppStringList);
-  VSTAddColumn(VST, GetString(FAppStringList, 'Index'), 50);
-  VSTAddColumn(VST, GetString(FAppStringList, 'Rule'), 50, taLeftJustify);
+  VSTAddColumn(VST, lngqcIndex, 50);
+  VSTAddColumn(VST, lngqcRule, 50, taLeftJustify);
 
   i := cboRules.Items.IndexOf(AppOptions.Conventions.Name);
   if i >= 0 then
@@ -109,7 +105,6 @@ procedure TfrmQualityCheck.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   FProfiles.Free;
-  FAppStringList.Free;
   if Assigned(FList) then
     FList.Free;
 
@@ -215,22 +210,16 @@ end;
 // -----------------------------------------------------------------------------
 
 function TfrmQualityCheck.GetRuleDescription(const ARules: TQualityCheckType): String;
-
-  procedure RuleDesc(ADesc: String);
-  begin
-    Result := GetString(FAppStringList, ADesc);
-  end;
-
 begin
   Result := '';
   case ARules of
-    qcCPS: RuleDesc('qcCPS');
-    qcWPM: RuleDesc('qcWPM');
-    qcCPL: RuleDesc('qcCPL');
-    qcMaximumLines: RuleDesc('qcMaximumLines');
-    qcMinimumDuration: RuleDesc('qcMinimumDuration');
-    qcMaximumDuration: RuleDesc('qcMaximumDuration');
-    qcGAP: RuleDesc('qcGAP');
+    qcCPS: Result := lngqcCPS;
+    qcWPM: Result := lngqcWPM;
+    qcCPL: Result := lngqcCPL;
+    qcMaximumLines: Result := lngqcMaximumLines;
+    qcMinimumDuration: Result := lngqcMinimumDuration;
+    qcMaximumDuration: Result := lngqcMaximumDuration;
+    qcGAP: Result := lngqcGAP;
   end;
 end;
 

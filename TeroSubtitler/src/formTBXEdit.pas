@@ -60,7 +60,7 @@ implementation
 
 uses
   procTypes, RegExpr, procWorkspace, procColorTheme, procConfig, Clipbrd,
-  UWSystem.XMLLang, formMain;
+  UWSystem.XMLLang, formMain, LCLTranslator;
 
 {$R *.lfm}
 
@@ -72,7 +72,6 @@ uses
 
 procedure TfrmTBXEdit.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
   edtOriginal.Text := frmMain.mmoText.SelText;
 end;
 

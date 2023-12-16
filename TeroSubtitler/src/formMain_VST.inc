@@ -24,7 +24,6 @@
 procedure TfrmMain.VSTDrawInitialize(const ADrawMode: TVSTDrawMode);
 var
   TextHeight: Integer;
-  FAppStringList: TAppStringList;
 begin
   VSTOptions.BackgroundBlock := NIL;
   VSTOptions.DrawMode := ADrawMode;
@@ -46,18 +45,15 @@ begin
       VST.OnAfterItemPaint  := @VSTAfterItemPaint;
       VST.OnDrawText        := @VSTDrawText;
 
-      FAppStringList := NIL;
-      LanguageManager.GetAppStringList('HeaderStrings', FAppStringList);
-      VSTAddColumn(VST, GetString(FAppStringList, 'Index'), 70, taCenter, actShowColumnNumber.Checked);
-      VSTAddColumn(VST, GetString(FAppStringList, 'Times'), 90, taCenter, actShowColumnTimes.Checked);
-      VSTAddColumn(VST, GetString(FAppStringList, 'Duration'), 70, taCenter, actShowColumnDuration.Checked);
-      VSTAddColumn(VST, GetString(FAppStringList, 'StyleAndActor'), 90, taCenter, actShowColumnStyleAndActor.Checked);
-      VSTAddColumn(VST, GetString(FAppStringList, 'Text'), 200, taLeftJustify);
-      VSTAddColumn(VST, GetString(FAppStringList, 'Translation'), 200, taLeftJustify, actTranslatorMode.Checked);
-      VSTAddColumn(VST, GetString(FAppStringList, 'CPS'), 50, taCenter, actShowColumnCPS.Checked);
-      VSTAddColumn(VST, GetString(FAppStringList, 'WPM'), 50, taCenter, actShowColumnWPM.Checked);
-      VSTAddColumn(VST, GetString(FAppStringList, 'CPL'), 50, taCenter, actShowColumnCPL.Checked);
-      FAppStringList.Free;
+      VSTAddColumn(VST, lnghIndex, 70, taCenter, actShowColumnNumber.Checked);
+      VSTAddColumn(VST, lnghTimes, 90, taCenter, actShowColumnTimes.Checked);
+      VSTAddColumn(VST, lnghDuration, 70, taCenter, actShowColumnDuration.Checked);
+      VSTAddColumn(VST, lnghStyleAndActor, 90, taCenter, actShowColumnStyleAndActor.Checked);
+      VSTAddColumn(VST, lnghText, 200, taLeftJustify);
+      VSTAddColumn(VST, lnghTranslation, 200, taLeftJustify, actTranslatorMode.Checked);
+      VSTAddColumn(VST, lnghCPS, 50, taCenter, actShowColumnCPS.Checked);
+      VSTAddColumn(VST, lnghWPM, 50, taCenter, actShowColumnWPM.Checked);
+      VSTAddColumn(VST, lnghCPL, 50, taCenter, actShowColumnCPL.Checked);
     end
     else
     begin // dmBlock
@@ -651,26 +647,26 @@ begin
   begin
     if ErrorType <> [] then
     begin
-      if etBadValues           in ErrorType then SetHintText(GetLangString('BadValues'));
-      if etTimeTooLong         in ErrorType then SetHintText(GetLangString('TimeTooLong'));
-      if etTimeTooShort        in ErrorType then SetHintText(GetLangString('TimeTooShort'));
-      if etPauseTooShort       in ErrorType then SetHintText(GetLangString('GapTooShort'));
-      if etMaxCPS              in ErrorType then SetHintText(GetLangString('MaxCPS'));
-      if etOverlappingWithPrev in ErrorType then SetHintText(GetLangString('OverlappingWithPrev'));
-      if etOverlappingWithNext in ErrorType then SetHintText(GetLangString('OverlappingWithNext'));
-      if etFixTags             in ErrorType then SetHintText(GetLangString('FixTags'));
-      if etEmpty               in ErrorType then SetHintText(GetLangString('Empty'));
-      if etUnbreak             in ErrorType then SetHintText(Format(GetLangString('Unbreak'), [AppOptions.Conventions.CPL]));
-      if etUnnecessarySpaces   in ErrorType then SetHintText(GetLangString('UnnecessarySpaces'));
-      if etUnnecessaryDots     in ErrorType then SetHintText(GetLangString('UnnecessaryDots'));
-      if etRepeatedChars       in ErrorType then SetHintText(GetLangString('RepeatedChars'));
-      if etProhibitedChars     in ErrorType then SetHintText(GetLangString('ProhibitedChars'));
-      if etHearingImpaired     in ErrorType then SetHintText(GetLangString('HearingImpaired'));
-      if etBreakLongLines      in ErrorType then SetHintText(GetLangString('BreakLongLines'));
-      if etRepeatedSubtitle    in ErrorType then SetHintText(GetLangString('RepeatedSubtitle'));
-      if etEllipsesSingleSmartCharacter in ErrorType then SetHintText(GetLangString('EllipsesSingleSmartCharacter'));
-      if etMaxLines            in ErrorType then SetHintText(GetLangString('MaxLines'));
-      if etOCR                 in ErrorType then SetHintText(GetLangString('OCR'));
+      if etBadValues           in ErrorType then SetHintText(lngasBadValues);
+      if etTimeTooLong         in ErrorType then SetHintText(lngasTimeTooLong);
+      if etTimeTooShort        in ErrorType then SetHintText(lngasTimeTooShort);
+      if etPauseTooShort       in ErrorType then SetHintText(lngasGapTooShort);
+      if etMaxCPS              in ErrorType then SetHintText(lngasMaxCPS);
+      if etOverlappingWithPrev in ErrorType then SetHintText(lngasOverlappingWithPrev);
+      if etOverlappingWithNext in ErrorType then SetHintText(lngasOverlappingWithNext);
+      if etFixTags             in ErrorType then SetHintText(lngfsetFixTags);
+      if etEmpty               in ErrorType then SetHintText(lngfsetEmpty);
+//TODO: Localize      if etUnbreak             in ErrorType then SetHintText(Format(lngfsetUnbreak), [AppOptions.Conventions.CPL]));
+      if etUnnecessarySpaces   in ErrorType then SetHintText(lngasUnnecessarySpaces);
+      if etUnnecessaryDots     in ErrorType then SetHintText(lngasUnnecessaryDots);
+      if etRepeatedChars       in ErrorType then SetHintText(lngasRepeatedChars);
+      if etProhibitedChars     in ErrorType then SetHintText(lngasProhibitedChars);
+      if etHearingImpaired     in ErrorType then SetHintText(lngasHearingImpaired);
+      if etBreakLongLines      in ErrorType then SetHintText(lngasBreakLongLines);
+      if etRepeatedSubtitle    in ErrorType then SetHintText(lngasRepeatedSubtitle);
+      if etEllipsesSingleSmartCharacter in ErrorType then SetHintText(lngasEllipsesSingleSmartCharacter);
+      if etMaxLines            in ErrorType then SetHintText(lngasMaxLines);
+      if etOCR                 in ErrorType then SetHintText(lngasOCR);
     end;
 
     if not Notes.IsEmpty then

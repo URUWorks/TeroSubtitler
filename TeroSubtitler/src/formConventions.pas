@@ -96,8 +96,7 @@ implementation
 
 
 uses
-  procTypes, RegExpr, procWorkspace, procColorTheme, procConfig,
-  UWSystem.XMLLang;
+  procTypes, RegExpr, procWorkspace, procColorTheme, procLocalize;
 
 {$R *.lfm}
 
@@ -109,7 +108,12 @@ uses
 
 procedure TfrmConventions.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
+  //LoadLanguage(Self);
+  btnAdd.Caption := lngbtnAdd;
+  btnRemove.Caption := lngbtnRemove;
+  btnUpdate.Caption := lngbtnUpdate;
+  btnClose.Caption := lngbtnClose;
+
   FList := NIL;
 end;
 

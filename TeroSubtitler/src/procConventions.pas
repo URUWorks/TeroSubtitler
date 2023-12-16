@@ -21,7 +21,7 @@ unit procConventions;
 
 interface
 
-uses Classes, SysUtils, FGL, laz2_XMLRead, laz2_DOM, laz2_XMLWrite;
+uses Classes, SysUtils, FGL, laz2_XMLRead, laz2_DOM, laz2_XMLWrite, LCLTranslator;
 
 type
 

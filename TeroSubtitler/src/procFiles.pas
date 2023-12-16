@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Controls, Dialogs, formMain, procTypes, UWSubtitleAPI,
-  UWSubtitleAPI.Formats;
+  UWSubtitleAPI.Formats, procLocalize;
 
 { Helpers }
 
@@ -253,7 +253,7 @@ begin
 
   if not FileExists(FileName) then
   begin
-    ShowErrorMessageDialog(GetCommonString('FileNotFound'));
+    ShowErrorMessageDialog(lngFileNotFound);
     Exit;
   end;
 
@@ -261,7 +261,7 @@ begin
   begin
     with frmMain.cboInputFPS do
     begin
-      ItemIndex := formCustomSelectDlg.ExecuteDialog('', GetCommonString('SelectFPSToUse'), Items, ItemIndex);
+      ItemIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectFPSToUse, Items, ItemIndex);
       _FPS := DefFPSList[ItemIndex];
       frmMain.cboInputFPSSelect(NIL);
     end;
@@ -344,7 +344,7 @@ begin
       frmMain.WindowState := wsNormal;
   end
   else
-    ShowErrorMessageDialog(GetCommonString('UnableToLoad'));
+    ShowErrorMessageDialog(lngUnableToLoad);
 end;
 
 // -----------------------------------------------------------------------------
@@ -373,7 +373,7 @@ begin
       UpdateValues(True);
     end
     else
-      ShowErrorMessageDialog(GetCommonString('UnableToLoad'));
+      ShowErrorMessageDialog(lngUnableToLoad);
   finally
     Subs.Free;
   end;
@@ -410,7 +410,7 @@ begin
       MRU.Add(FileName, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPV.IsPlaying);
   end
   else
-    ShowErrorMessageDialog(GetCommonString('SaveSubtitleError'));
+    ShowErrorMessageDialog(lngSaveSubtitleError);
 end;
 
 // -----------------------------------------------------------------------------
@@ -433,7 +433,7 @@ begin
   ATimeDate := FormatDateTime('yyyy-mm-dd_hh-nn-ss_', Now);
 
   if Subtitles.SaveToFile(BackupFolder+ATimeDate+ChangeFileExt(AFileName, '.tero'), AFPS, AEncoding, sfTeroSubtitler, smText) then
-    SetStatusBarText(GetCommonString('BackupSaved'));
+    SetStatusBarText(lngBackupSaved);
 end;
 
 // -----------------------------------------------------------------------------
@@ -466,7 +466,7 @@ begin
           MRU.Add(FileName, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPV.IsPlaying);
       end
       else
-        ShowErrorMessageDialog(GetLangString('SaveSubtitleError'));
+        ShowErrorMessageDialog(lngSaveSubtitleError);
     end;
   finally
     Subs.Free;
@@ -638,8 +638,8 @@ begin
   begin
     OD := TOpenDialog.Create(NIL);
     try
-      OD.Title   := GetCommonString('OpenFile');
-      OD.Filter  := Subtitles.FillDialogFilter(GetCommonString('AllSupportedFiles'));
+      OD.Title   := lngOpenFile;
+      OD.Filter  := Subtitles.FillDialogFilter(lngAllSupportedFiles);
       OD.Options := OD.Options + [ofFileMustExist];
 
       if OD.Execute then
@@ -686,7 +686,7 @@ begin
   begin
     SD := TSaveDialog.Create(NIL);
     try
-      SD.Title  := GetCommonString('SaveFile');
+      SD.Title  := lngSaveFile;
       SD.Filter := Subtitles.FillDialogFilter('');
       SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
       SD.FileName := {$IFDEF DARWIN}ChangeFileExt({$ENDIF}GetSuggestedFileNameForSave{$IFDEF DARWIN}, GetDefaultExtFromFilter(SD.FilterIndex, SD.Filter)){$ENDIF};
@@ -735,8 +735,8 @@ begin
     s := '';
     for i := 0 to Length(TVideoExts)-1 do s := s + '*' + TVideoExts[i] + ';';
 
-    OD.Title   := GetCommonString('OpenFile');
-    OD.Filter  := GetCommonString('AllSupportedFiles') + '|' + s;
+    OD.Title   := lngOpenFile;
+    OD.Filter  := lngAllSupportedFiles + '|' + s;
     OD.Options := OD.Options + [ofFileMustExist];
 
     if OD.Execute then
@@ -795,8 +795,8 @@ var
 begin
   OD := TOpenDialog.Create(NIL);
   try
-    OD.Title   := GetCommonString('OpenFile');
-    OD.Filter  := Subtitles.FillDialogFilter(GetCommonString('AllSupportedFiles'));
+    OD.Title   := lngOpenFile;
+    OD.Filter  := Subtitles.FillDialogFilter(lngAllSupportedFiles);
     OD.Options := OD.Options + [ofFileMustExist];
 
     if OD.Execute then
@@ -815,8 +815,8 @@ var
 begin
   OD := TOpenDialog.Create(NIL);
   try
-    OD.Title   := GetCommonString('OpenFile');
-    OD.Filter  := Subtitles.FillDialogFilter(GetCommonString('AllSupportedFiles'));
+    OD.Title   := lngOpenFile;
+    OD.Filter  := Subtitles.FillDialogFilter(lngAllSupportedFiles);
     OD.Options := OD.Options + [ofFileMustExist];
 
     if Workspace.TranslatorMode then
@@ -855,8 +855,8 @@ begin
   begin
     OD := TOpenDialog.Create(NIL);
     try
-      OD.Title   := GetCommonString('OpenFile');
-      OD.Filter  := Subtitles.FillDialogFilter(GetCommonString('AllSupportedFiles'));
+      OD.Title   := lngOpenFile;
+      OD.Filter  := Subtitles.FillDialogFilter(lngAllSupportedFiles);
       OD.Options := OD.Options + [ofFileMustExist];
 
       if OD.Execute then
@@ -878,7 +878,7 @@ var
 begin
   if GetSubtitleMarkedCount = 0 then
   begin
-    ShowErrorMessageDialog(GetCommonString('NoSubtitlesMarked'));
+    ShowErrorMessageDialog(lngNoSubtitlesMarked);
     Exit;
   end;
 
@@ -899,7 +899,7 @@ begin
   begin
     SD := TSaveDialog.Create(NIL);
     try
-      SD.Title  := GetCommonString('SaveFile');
+      SD.Title  := lngSaveFile;
       SD.Filter := Subtitles.FillDialogFilter('');
       SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
       SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
@@ -943,7 +943,7 @@ begin
   begin
     SD := TSaveDialog.Create(NIL);
     try
-      SD.Title  := GetCommonString('SaveFile');
+      SD.Title  := lngSaveFile;
       SD.Filter := 'TXT|*.txt';
       SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
       SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
@@ -1013,8 +1013,8 @@ var
 begin
   OD := TOpenDialog.Create(NIL);
   try
-    OD.Title   := GetCommonString('OpenFile');
-    OD.Filter  := GetCommonString('ProjectFile') + '|*' + TProjectExt;
+    OD.Title   := lngOpenFile;
+    OD.Filter  := lngProjectFile + '|*' + TProjectExt;
     OD.Options := OD.Options + [ofFileMustExist];
 
     if OD.Execute then
@@ -1038,8 +1038,8 @@ begin
 
   SD := TSaveDialog.Create(NIL);
   try
-    SD.Title   := GetCommonString('SaveFile');
-    SD.Filter  := GetCommonString('ProjectFile') + '|*' + TProjectExt;
+    SD.Title   := lngSaveFile;
+    SD.Filter  := lngProjectFile + '|*' + TProjectExt;
     SD.Options := [ofOverwritePrompt, ofEnableSizing];
     SD.FileName := ChangeFileExt('Project_' + ExtractFileName(SubtitleInfo.Text.FileName), '');
 
@@ -1091,8 +1091,8 @@ var
 begin
   OD := TOpenDialog.Create(NIL);
   try
-    OD.Title   := GetCommonString('OpenFile');
-    OD.Filter  := GetCommonString('AllSupportedFiles') + ' (*.txt)|' + '*.txt';
+    OD.Title   := lngOpenFile;
+    OD.Filter  := lngAllSupportedFiles + ' (*.txt)|' + '*.txt';
     OD.Options := OD.Options + [ofFileMustExist];
 
     if OD.Execute then
@@ -1112,8 +1112,8 @@ var
 begin
   SD := TSaveDialog.Create(NIL);
   try
-    SD.Title    := GetCommonString('SaveFile');
-    SD.Filter   := GetCommonString('AllSupportedFiles') + ' (*.txt)|' + '*.txt';
+    SD.Title    := lngSaveFile;
+    SD.Filter   := lngAllSupportedFiles + ' (*.txt)|' + '*.txt';
     SD.FileName := '';
     SD.Options  := [ofOverwritePrompt, ofEnableSizing];
     if SD.Execute then
@@ -1170,7 +1170,7 @@ begin
 
     if not VideoSupport then
     begin
-      ShowErrorMessageDialog(GetCommonString('WebVideoUnsupported'));
+      ShowErrorMessageDialog(lngWebVideoUnsupported);
       Exit;
     end;
 
@@ -1290,9 +1290,9 @@ begin
       if not MPV.IsLibMPVAvailable then
       begin
         if MPV.Error = -20 then
-          ShowErrorMessageDialog(GetCommonString('libMPVError')) // dll not found
+          ShowErrorMessageDialog(lnglibMPVError) // dll not found
         else
-          ShowErrorMessageDialog(GetCommonString('libMPVVersionError'));
+          ShowErrorMessageDialog(lnglibMPVVersionError);
       end;
 
     {$IFNDEF DARWIN}

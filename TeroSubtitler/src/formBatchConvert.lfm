@@ -181,16 +181,16 @@ object frmBatchConvert: TfrmBatchConvert
     Height = 15
     Top = 342
     Width = 50
-    Caption = 'From FPS'
+    Caption = 'Input FPS'
     ParentColor = False
   end
   object lblToFPS: TLabel
     Left = 7
     Height = 15
     Top = 371
-    Width = 34
+    Width = 54
     Anchors = [akLeft, akBottom]
-    Caption = 'To FPS'
+    Caption = 'Target FPS'
     ParentColor = False
   end
   object cboFromFPS: TComboBox

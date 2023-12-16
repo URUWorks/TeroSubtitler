@@ -57,7 +57,7 @@ var
 implementation
 
 uses
-  procTypes, procConfig, procWorkspace, UWSystem.XMLLang, procColorTheme;
+  procTypes, procWorkspace, UWSystem.XMLLang, procColorTheme, LCLTranslator;
 
 {$R *.lfm}
 
@@ -69,7 +69,6 @@ uses
 
 procedure TfrmCustomQuestionDlg.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
   lblTitle.Caption    := '';
   lblQuestion.Caption := '';
 end;

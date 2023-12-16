@@ -23,13 +23,14 @@ interface
 
 uses
   Classes, StdCtrls, Controls, ComCtrls, SysUtils, Menus, Forms, procTypes,
-  UWTimeEdit, UWMemo, UWSubtitleAPI, procColorTheme, ActnList, procConventions;
+  UWTimeEdit, UWMemo, UWSubtitleAPI, procColorTheme, ActnList, procConventions,
+  procLocalize, Dialogs;
 
 procedure CheckColorTheme(const AForm: TForm); overload;
 procedure CheckColorTheme; overload;
 
 procedure AddFPSToCombo(const FPS: Single; const Combo: TComboBox);
-procedure FillComboWithLanguageFiles(const Combo: TComboBox);
+procedure FillComboWithLanguages(const Combo: TComboBox; const aLngList: TStrings);
 procedure FillComboWithFPS(const Combo: TComboBox; const ADefault: Single = -1);
 procedure FillComboWithEncodings(const Combo: TComboBox);
 procedure FillComboWithFormats(const Combo: TComboBox);
@@ -141,6 +142,27 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure FillComboWithLanguages(const Combo: TComboBox; const aLngList: TStrings);
+var
+  SearchRec: TSearchRec;
+  Index: Integer = 0;
+  FileName: String;
+begin
+  if SysUtils.FindFirst(LanguageFolder + AppNameD + '*.po', faAnyFile, SearchRec) = 0 then
+  try
+    repeat
+      FileName := LanguageFolder + SearchRec.Name;
+      aLngList.Add(GetPOLanguage(FileName) + ';' + GetPOLanguageNameFromID(GetPOLanguage(Filename)));
+      Combo.Items.Add(GetPOLanguageNameFromID(GetPOLanguage(LanguageFolder + SearchRec.Name)));
+    until FindNext(SearchRec) <> 0;
+    combo.ItemIndex := Index;
+  finally
+    FindClose(SearchRec);
+  end;
+end;
+
+
+{OBSOLETE: Was for XML transaltions
 procedure FillComboWithLanguageFiles(const Combo: TComboBox);
 var
   SearchRec: TSearchRec;
@@ -153,7 +175,7 @@ begin
   finally
     FindClose(SearchRec);
   end;
-end;
+end;}
 
 // -----------------------------------------------------------------------------
 
@@ -736,7 +758,7 @@ begin
     with frmMain do
       if Workspace.TranslatorMode and (TUWSubtitleFormats(cboFormat.ItemIndex+1) <> sfTeroSubtitler) then
       begin
-        r := CustomQuestionDialog('CommonStrings', 'SourceModeWarning', 'ContinueAnyway', [dbYes, dbNo, dbCancel]);
+        r := CustomQuestionDialog(lngSourceModeWarning, lngContinueAnyway, [dbYes, dbNo, dbCancel]);
         case r of
           mrCancel : begin
                        frmMain.actListMode.Checked := True;
@@ -1158,9 +1180,9 @@ begin
       if l > 0 then
       begin
         if not Workspace.SMPTE then
-          s := GetLangString('VideoLen')
+          s := lngasVideoLen
         else
-          s := GetLangString('VideoLenSMPTE');
+          s := lngasVideoLenSMPTE;
 
         lblMediaLength.Caption := Format(s, [GetTimeStr(MPV.GetMediaLenInMs), SingleToStr(MPV.GetVideoFPS, FormatSettings)]);
       end
@@ -1271,7 +1293,7 @@ begin
     if VST.Enabled then
     begin
       if VST.SelectedCount > 1 then
-        s := Format(GetLangString('LineSelected'), [VST.SelectedCount, VST.TotalCount])
+        s := Format(lngasLineSelected, [VST.SelectedCount, VST.TotalCount])
       else if (VST.SelectedCount = 1) and (VSTFocusedNode(VST) >= 0) then
         s := Format('%d / %d', [VSTFocusedNode(VST)+1, VST.TotalCount])
       else
@@ -1291,24 +1313,24 @@ begin
     if (AIndex > -1) and (VST.SelectedCount = 1) then
     begin
       sCPS := Subtitles.TextCPS[AIndex, Conventions.CPSLineLenStrategy];
-      mmoText.LabelMemo.Caption := Format(GetLangString('TextChars'), [GetLengthForEachLine(Subtitles[AIndex].Text, '/', '='), sCPS], FormatSettings);
+      mmoText.LabelMemo.Caption := Format(lngasTextChars, [GetLengthForEachLine(Subtitles[AIndex].Text, '/', '='), sCPS], FormatSettings);
       mmoText.CPSBar.SetCPS(sCPS);
 
       if Workspace.TranslatorMode then
       begin
         tCPS := Subtitles.TranslationCPS[AIndex, Conventions.CPSLineLenStrategy];
-        mmoTranslation.LabelMemo.Caption := Format(GetLangString('TranslationChars'), [GetLengthForEachLine(Subtitles[AIndex].Translation, '/', '='), tCPS], FormatSettings);
+        mmoTranslation.LabelMemo.Caption := Format(lngasTranslationChars, [GetLengthForEachLine(Subtitles[AIndex].Translation, '/', '='), tCPS], FormatSettings);
         mmoTranslation.CPSBar.SetCPS(tCPS);
       end;
     end
     else
     begin
-      mmoText.LabelMemo.Caption := GetLangString('Text');
+      mmoText.LabelMemo.Caption := lngasText;
       mmoText.CPSBar.SetCPS(0);
 
       if Workspace.TranslatorMode then
       begin
-        mmoTranslation.LabelMemo.Caption := GetLangString('Translation');
+        mmoTranslation.LabelMemo.Caption := lngasTranslation;
         mmoTranslation.CPSBar.SetCPS(0);
       end;
     end;

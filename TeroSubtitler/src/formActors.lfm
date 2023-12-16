@@ -12,7 +12,6 @@ object frmActors: TfrmActors
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
   object edtActor: TEdit
     AnchorSideRight.Control = btnActorAdd
     Left = 8

@@ -22,7 +22,7 @@ unit formActors;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, StdCtrls, LCLType;
+  Classes, SysUtils, Forms, Controls, StdCtrls, LCLType, LCLTranslator;
 
 type
 
@@ -58,7 +58,7 @@ var
 implementation
 
 uses
-  procWorkspace, procConfig, procColorTheme, formMain;
+  procWorkspace, procColorTheme, formMain;
 
 {$R *.lfm}
 
@@ -70,7 +70,6 @@ uses
 
 procedure TfrmActors.FormCreate(Sender: TObject);
 begin
-  LoadLanguage(Self);
   lstActors.Items.Assign(frmMain.cboActor.Items);
 end;
 

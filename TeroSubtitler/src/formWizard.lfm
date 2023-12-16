@@ -1,12 +1,12 @@
 object frmWizard: TfrmWizard
   Left = 248
-  Height = 337
+  Height = 377
   Top = 116
   Width = 544
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Wizard'
-  ClientHeight = 337
+  Caption = 'Getting started wizard'
+  ClientHeight = 377
   ClientWidth = 544
   OnClose = FormClose
   OnCreate = FormCreate
@@ -16,11 +16,12 @@ object frmWizard: TfrmWizard
   object lyoPage0: TUWLayout
     Left = 0
     Height = 300
-    Top = 0
+    Top = 40
     Width = 544
+    Anchors = [akLeft]
     ClientHeight = 300
     ClientWidth = 544
-    TabOrder = 0
+    TabOrder = 1
     object imgLogo: TImage
       Left = 160
       Height = 33
@@ -49,7 +50,7 @@ object frmWizard: TfrmWizard
       Width = 544
       Alignment = taCenter
       AutoSize = False
-      Caption = 'In just a few steps you''ll be setup and ready for the best experience.'
+      Caption = 'In just a few steps, you''ll be setup and ready for the best subtitling experience.'
       ParentColor = False
       WordWrap = True
     end
@@ -61,7 +62,7 @@ object frmWizard: TfrmWizard
     AnchorSideBottom.Side = asrBottom
     Left = 445
     Height = 26
-    Top = 303
+    Top = 343
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 8
@@ -69,17 +70,18 @@ object frmWizard: TfrmWizard
     Caption = 'Next'
     Default = True
     OnClick = btnNextClick
-    TabOrder = 2
+    TabOrder = 3
   end
   object lyoPage1: TUWLayout
     Tag = 1
     Left = 0
     Height = 300
-    Top = 0
+    Top = 40
     Width = 544
+    Anchors = [akLeft]
     ClientHeight = 300
     ClientWidth = 544
-    TabOrder = 1
+    TabOrder = 2
     Visible = False
     object lbllibMPV: TLabel
       Left = 16
@@ -97,7 +99,7 @@ object frmWizard: TfrmWizard
       Top = 8
       Width = 515
       AutoSize = False
-      Caption = 'Required files'
+      Caption = 'For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you.'
       ParentColor = False
       WordWrap = True
     end
@@ -114,14 +116,13 @@ object frmWizard: TfrmWizard
       TabOrder = 0
     end
     object lblFFMPEG: TLabel
-      AnchorSideTop.Control = lblYTDLPDesc
       AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 15
       Top = 153
-      Width = 45
+      Width = 47
       BorderSpacing.Top = 8
-      Caption = 'ffmpeg:'
+      Caption = 'FFmpeg:'
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
@@ -158,7 +159,7 @@ object frmWizard: TfrmWizard
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = lblFFMPEG
       AnchorSideTop.Side = asrCenter
-      Left = 65
+      Left = 67
       Height = 15
       Top = 153
       Width = 3
@@ -168,32 +169,7 @@ object frmWizard: TfrmWizard
       ParentColor = False
       ParentFont = False
     end
-    object lbllibmpvDesc: TLabel
-      AnchorSideLeft.Control = lbllibMPV
-      AnchorSideTop.Control = lbllibMPV
-      AnchorSideTop.Side = asrBottom
-      Left = 16
-      Height = 15
-      Top = 88
-      Width = 3
-      BorderSpacing.Top = 4
-      Caption = ' '
-      ParentColor = False
-    end
-    object lblffmpegDesc: TLabel
-      AnchorSideLeft.Control = lblFFMPEG
-      AnchorSideTop.Control = lblFFMPEG
-      AnchorSideTop.Side = asrBottom
-      Left = 16
-      Height = 15
-      Top = 172
-      Width = 3
-      BorderSpacing.Top = 4
-      Caption = ' '
-      ParentColor = False
-    end
     object lblYTDLP: TLabel
-      AnchorSideTop.Control = lbllibmpvDesc
       AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 15
@@ -204,18 +180,6 @@ object frmWizard: TfrmWizard
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
-    end
-    object lblYTDLPDesc: TLabel
-      AnchorSideLeft.Control = lblYTDLP
-      AnchorSideTop.Control = lblYTDLP
-      AnchorSideTop.Side = asrBottom
-      Left = 16
-      Height = 15
-      Top = 130
-      Width = 3
-      BorderSpacing.Top = 4
-      Caption = ' '
-      ParentColor = False
     end
     object btnDownloadYTDLP: TButton
       AnchorSideLeft.Control = btnDownloadFFMPEG
@@ -243,20 +207,7 @@ object frmWizard: TfrmWizard
       ParentColor = False
       ParentFont = False
     end
-    object lblWhisperDesc: TLabel
-      AnchorSideLeft.Control = lblWhisper
-      AnchorSideTop.Control = lblWhisper
-      AnchorSideTop.Side = asrBottom
-      Left = 16
-      Height = 15
-      Top = 214
-      Width = 3
-      BorderSpacing.Top = 4
-      Caption = ' '
-      ParentColor = False
-    end
     object lblWhisper: TLabel
-      AnchorSideTop.Control = lblffmpegDesc
       AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 15
@@ -298,20 +249,7 @@ object frmWizard: TfrmWizard
       ParentColor = False
       ParentFont = False
     end
-    object lblFasterWhisperDesc: TLabel
-      AnchorSideLeft.Control = lblFasterWhisper
-      AnchorSideTop.Control = lblFasterWhisper
-      AnchorSideTop.Side = asrBottom
-      Left = 16
-      Height = 15
-      Top = 256
-      Width = 3
-      BorderSpacing.Top = 4
-      Caption = ' '
-      ParentColor = False
-    end
     object lblFasterWhisper: TLabel
-      AnchorSideTop.Control = lblWhisperDesc
       AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 15
@@ -353,5 +291,91 @@ object frmWizard: TfrmWizard
       ParentColor = False
       ParentFont = False
     end
+    object lbllibMPV_Hint: TLabel
+      AnchorSideLeft.Control = lbllibMPV
+      AnchorSideTop.Control = lbllibMPV
+      AnchorSideTop.Side = asrBottom
+      Left = 24
+      Height = 15
+      Top = 84
+      Width = 171
+      BorderSpacing.Left = 8
+      Caption = 'Essential, used for playing video.'
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblYTDLP_Hint: TLabel
+      AnchorSideLeft.Control = lblYTDLP
+      AnchorSideTop.Control = lblYTDLP
+      AnchorSideTop.Side = asrBottom
+      Left = 24
+      Height = 15
+      Top = 126
+      Width = 242
+      BorderSpacing.Left = 8
+      Caption = 'Optional, used for dowloading from YouTube.'
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblFFMPEG_Hint: TLabel
+      AnchorSideLeft.Control = lblFFMPEG
+      AnchorSideTop.Control = lblFFMPEG
+      AnchorSideTop.Side = asrBottom
+      Left = 24
+      Height = 15
+      Top = 168
+      Width = 270
+      BorderSpacing.Left = 8
+      Caption = 'Optional, used to extract audio and generate video.'
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblWhisper_Hint: TLabel
+      AnchorSideLeft.Control = lblWhisper
+      AnchorSideTop.Control = lblWhisper
+      AnchorSideTop.Side = asrBottom
+      Left = 24
+      Height = 15
+      Top = 210
+      Width = 202
+      BorderSpacing.Left = 8
+      Caption = 'Optional, used for speech recognition.'
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblFasterWhisper_Hint: TLabel
+      AnchorSideTop.Control = lblFasterWhisper
+      AnchorSideTop.Side = asrBottom
+      Left = 24
+      Height = 15
+      Top = 252
+      Width = 202
+      BorderSpacing.Left = 8
+      Caption = 'Optional, used for speech recognition.'
+      ParentColor = False
+      ParentFont = False
+    end
+  end
+  object lblLanguage: TLabel
+    AnchorSideTop.Control = cboLanguage
+    AnchorSideTop.Side = asrCenter
+    Left = 16
+    Height = 15
+    Top = 12
+    Width = 52
+    Caption = 'Language'
+    ParentColor = False
+    WordWrap = True
+  end
+  object cboLanguage: TComboBox
+    Left = 270
+    Height = 23
+    Top = 8
+    Width = 266
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 15
+    OnChange = cboLanguageChange
+    Style = csDropDownList
+    TabOrder = 0
   end
 end

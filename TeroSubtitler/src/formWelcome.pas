@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Buttons,
-  StdCtrls, UWFlatButton, UWCheckBox, LResources;
+  StdCtrls, UWFlatButton, UWCheckBox, LResources, LCLTranslator;
 
 type
 
@@ -73,7 +73,7 @@ var
 implementation
 
 uses
-  procTypes, procFiles, procColorTheme, procConfig, procForms, formMain,
+  procTypes, procFiles, procColorTheme, procForms, formMain,
   procWorkspace;
 
 {$R *.lfm}
@@ -89,7 +89,6 @@ var
   i, h : Integer;
   lbl  : TLabel;
 begin
-  LoadLanguage(Self, False);
   chkShowOnStartup.Checked := AppOptions.ShowWelcomeAtStartup;
 
   h := lblRecentFiles.Top + lblRecentFiles.Height + 16;
