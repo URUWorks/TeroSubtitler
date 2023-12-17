@@ -135,7 +135,7 @@ end;
 procedure ApplyDurationLimits(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^, frmDurationLimits do
-    SetSubtitleTime(Index, InitialTime + SetDurationLimits(Subtitles.Duration[Index], StrToInt(edtSetMinDuration.Text), StrToInt(edtSetMaxDuration.Text), chkSetMaxDuration.Checked, chkSetMinDuration.Checked), 1, False, False);
+    SetSubtitleTime(Index, InitialTime + SetDurationLimits(Subtitles.Duration[Index], StrToInt(edtSetMinDuration.Text), StrToInt(edtSetMaxDuration.Text), chkSetMaxDuration.Checked, chkSetMinDuration.Checked), TAG_CONTROL_FINALTIME, False, False);
 end;
 
 // -----------------------------------------------------------------------------

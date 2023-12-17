@@ -128,7 +128,7 @@ end;
 procedure ApplyAutomaticDurations(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^, frmAutomaticDurations do
-    SetSubtitleTime(Index, InitialTime + AutomaticDurations(Text, Subtitles.Duration[Index], StrToInt(edtChars.Text), StrToInt(edtWord.Text), StrToInt(edtLine.Text), TAutomaticDurationMode(cboCondition.ItemIndex)), 1, False, False);
+    SetSubtitleTime(Index, InitialTime + AutomaticDurations(Text, Subtitles.Duration[Index], StrToInt(edtChars.Text), StrToInt(edtWord.Text), StrToInt(edtLine.Text), TAutomaticDurationMode(cboCondition.ItemIndex)), TAG_CONTROL_FINALTIME, False, False);
 end;
 
 // -----------------------------------------------------------------------------
