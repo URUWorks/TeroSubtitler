@@ -46,10 +46,6 @@
         <UnitName Value="UWSystem.Process"/>
       </Item>
       <Item>
-        <Filename Value="UWSystem.XMLLang.pas"/>
-        <UnitName Value="UWSystem.XMLLang"/>
-      </Item>
-      <Item>
         <Filename Value="UWSubtitles.OCR.pas"/>
         <UnitName Value="UWSubtitles.OCR"/>
       </Item>

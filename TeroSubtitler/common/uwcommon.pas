@@ -10,10 +10,9 @@ interface
 uses
   UWSystem.Encoding, UWSystem.FileUtils, UWSystem.StrUtils, UWSystem.SysUtils, 
   UWSystem.TimeUtils, UWSystem.InetUtils, UWSystem.Globalization, 
-  UWSystem.Process, UWSystem.XMLLang, UWSubtitles.OCR, UWSubtitles.Utils, 
-  UWFiles.MRU, UWSpellcheck.Hunspell, UWTranslateAPI.Google, 
-  UWWindows.MenuTheming, UWWindows.DarkTheme, UWSystem.ThreadProcess, 
-  LazarusPackageIntf;
+  UWSystem.Process, UWSubtitles.OCR, UWSubtitles.Utils, UWFiles.MRU, 
+  UWSpellcheck.Hunspell, UWTranslateAPI.Google, UWWindows.MenuTheming, 
+  UWWindows.DarkTheme, UWSystem.ThreadProcess, LazarusPackageIntf;
 
 implementation
 
