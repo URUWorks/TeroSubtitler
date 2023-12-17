@@ -72,8 +72,6 @@ uses
 
 procedure TfrmTBX.FormCreate(Sender: TObject);
 begin
-  //LoadLanguage(Self);
-
   VSTAddColumn(VST, TBX.Langs^.SrcLang, 150, taLeftJustify);
   VSTAddColumn(VST, TBX.Langs^.DstLang, 150, taLeftJustify);
 end;

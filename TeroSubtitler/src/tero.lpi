@@ -19,7 +19,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\Languages"/>
-      <ExcludedIdentifiers Count="48">
+      <ExcludedIdentifiers Count="65">
         <Item1 Value="tfrmmain.caption"/>
         <Item2 Value="tfrmmain.lblseparatorfps.caption"/>
         <Item3 Value="tfrmmain.lblmedialength.caption"/>
@@ -68,6 +68,23 @@
         <Item46 Value="tfrmsettings.tlbmain_.caption"/>
         <Item47 Value="tfrmsettings.tlbvideo_.caption"/>
         <Item48 Value="tfrmsettings.tlbwaveform_.caption"/>
+        <Item49 Value="tfrmconventions.chkdotsonsplit.caption"/>
+        <Item50 Value="tfrmconventions.lblchaining.caption"/>
+        <Item51 Value="tfrmconventions.lblcpl.caption"/>
+        <Item52 Value="tfrmconventions.lblcps.caption"/>
+        <Item53 Value="tfrmconventions.lblcpsstrategy.caption"/>
+        <Item54 Value="tfrmconventions.lblmaxdurationms.caption"/>
+        <Item55 Value="tfrmconventions.lblmaxlinecount.caption"/>
+        <Item56 Value="tfrmconventions.lblmindurationms.caption"/>
+        <Item57 Value="tfrmconventions.lblname.caption"/>
+        <Item58 Value="tfrmconventions.lblnewsubtitlems.caption"/>
+        <Item59 Value="tfrmconventions.lblprohibitedchars.caption"/>
+        <Item60 Value="tfrmconventions.lblrepeatablechars.caption"/>
+        <Item61 Value="tfrmconventions.lblscsnaparea.caption"/>
+        <Item62 Value="tfrmconventions.lblscsnapincues.caption"/>
+        <Item63 Value="tfrmconventions.lblscsnapoutcues.caption"/>
+        <Item64 Value="tfrmconventions.lblsubtitlepausems.caption"/>
+        <Item65 Value="tfrmconventions.lblwpm.caption"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>

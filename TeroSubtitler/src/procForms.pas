@@ -332,7 +332,6 @@ begin
     frmSettings.ShowModal;
     if OldLang <> AppOptions.GUILanguage then
     begin
-      //LoadLanguage(frmMain);
       SetGUILanguage;
       UpdateCommonActionString;
       UpdateVideoLengthString;

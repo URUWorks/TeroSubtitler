@@ -78,8 +78,6 @@ uses
 
 procedure TfrmTranslate.FormCreate(Sender: TObject);
 begin
-  //LoadLanguage(Self);
-
   FillComboWithGoogleLanguages(cboSourceLanguage);
   FillComboWithGoogleLanguages(cboTranslationLanguage, 44);
   cboTranslationLanguage.Items.Delete(0);

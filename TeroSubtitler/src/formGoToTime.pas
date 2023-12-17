@@ -22,7 +22,8 @@ unit formGoToTime;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, UWTimeEdit;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, UWTimeEdit,
+  LCLTranslator;
 
 type
 
@@ -52,7 +53,7 @@ var
 implementation
 
 uses
-  formMain, procWorkspace, procMPV, LCLTranslator;
+  formMain, procWorkspace, procMPV;
 
 {$R *.lfm}
 

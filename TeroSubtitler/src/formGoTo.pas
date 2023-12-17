@@ -22,7 +22,8 @@ unit formGoTo;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  LCLTranslator;
 
 type
 
@@ -65,7 +66,7 @@ uses
 
 procedure TfrmGoTo.FormCreate(Sender: TObject);
 begin
-  //LoadLanguage(Self);
+  //
 end;
 
 // -----------------------------------------------------------------------------

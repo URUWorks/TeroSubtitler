@@ -24,7 +24,7 @@ unit formVideo;
 interface
 
 uses
-  Classes, Forms, Controls, LCLTranslator;
+  Classes, Forms, Controls;
 
 type
 

@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
-  UWLayout, UWCheckBox, procConventions;
+  UWLayout, UWCheckBox, procConventions, LCLTranslator;
 
 type
 
@@ -108,7 +108,6 @@ uses
 
 procedure TfrmConventions.FormCreate(Sender: TObject);
 begin
-  //LoadLanguage(Self);
   btnAdd.Caption := lngbtnAdd;
   btnRemove.Caption := lngbtnRemove;
   btnUpdate.Caption := lngbtnUpdate;
