@@ -116,20 +116,28 @@ var
   pc    : Cardinal;
 begin
   Result := Duration;
-  Apply  := False;
+  Apply  := True;
   pc     := UTF8Length(Text);
 
-  if (CharsValue > 0) and (pc > CharsValue) then Apply := True;
+  if (CharsValue > 0) and (pc <= CharsValue) then Apply := False;
 
-  if Expand then
+  if Apply then
   begin
-    if (MinMSecsDuration > 0) and (Duration < MinMSecsDuration) then Apply := True;
-    if Apply then Result := Duration + MSecsValue;
-  end
-  else
-  begin
-    if (MinMSecsDuration > 0) and (Duration > MinMSecsDuration) then Apply := True;
-    if Apply then Result := Duration - MSecsValue;
+    if (MinMSecsDuration > 0) then
+    begin
+      if (Expand and (Duration > MinMSecsDuration)) or (not Expand and (Duration < MinMSecsDuration)) then
+        Apply := False;
+    end;
+
+    if Apply then
+    begin
+      //TODO: Prevent overlapping
+
+      if Expand then
+        Result := Duration + MSecsValue
+      else
+        Result := Duration - MSecsValue;
+    end;
   end;
 end;
 
