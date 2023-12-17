@@ -142,7 +142,7 @@ end;
 procedure ApplyTimeExpander(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^, frmTimeExpander do
-    SetSubtitleTime(Index, InitialTime + TimeExpander(Text, Subtitles.Duration[Index], StrToInt(edtTime.Text), iff(chkSubtitle.Checked, StrToInt(edtSubtitleValue.Text), 0), iff(chkDuration.Checked, StrToInt(edtDurationValue.Text), 0), cboMode.ItemIndex = 0), 1, False, False);
+    SetSubtitleTime(Index, InitialTime + TimeExpander(Text, Subtitles.Duration[Index], StrToInt(edtTime.Text), iff(chkSubtitle.Checked, StrToInt(edtSubtitleValue.Text), 0), iff(chkDuration.Checked, StrToInt(edtDurationValue.Text), 0), cboMode.ItemIndex = 0), TAG_CONTROL_FINALTIME, False, False);
 end;
 
 // -----------------------------------------------------------------------------
