@@ -1,4 +1,5 @@
 1.0.1.4 (x.x.202x)
+- Fixed: Time expander/reducer doesn't work #208
 - Fixed: Unbreak lines wrong when new line starts with a dash #216 (thx CM630)
 - Improved: WebVTT color/voice tags
 - Improved: Localization switched from XML to PO (thx CM630)
