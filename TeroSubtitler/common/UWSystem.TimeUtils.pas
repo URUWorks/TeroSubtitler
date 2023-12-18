@@ -257,19 +257,13 @@ end;
 
 function TimeInFormat(const Time, Format: String): Boolean;
 begin
-  Result := False;
-
-  if StringToTime(Time) > 0 then
-  begin
-    if (Pos(':', Time) = Pos(':', Format)) and
-       (Pos('.', Time) = Pos('.', Format)) and
-       (Pos(',', Time) = Pos(',', Format)) and
-       (StringCount(':', Time) = StringCount(':', Format)) and
-       (StringCount('.', Time) = StringCount('.', Format)) and
-       (StringCount(',', Time) = StringCount(',', Format)) and
-       (Length(Time) = Length(Format)) then
-    Result := True;
-  end;
+  Result := (Pos(':', Time) = Pos(':', Format)) and
+    (Pos('.', Time) = Pos('.', Format)) and
+    (Pos(',', Time) = Pos(',', Format)) and
+    (StringCount(':', Time) = StringCount(':', Format)) and
+    (StringCount('.', Time) = StringCount('.', Format)) and
+    (StringCount(',', Time) = StringCount(',', Format)) and
+    (Length(Time) = Length(Format));
 end;
 
 // -----------------------------------------------------------------------------
