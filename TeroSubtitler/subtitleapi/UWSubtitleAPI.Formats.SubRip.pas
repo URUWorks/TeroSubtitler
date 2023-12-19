@@ -164,7 +164,7 @@ begin
           Inc(i);
           Text := '';
           while (i < SubtitleFile.Count) and (Pos(' --> ', SubtitleFile[i]) = 0) and
-            not IsInteger(SubtitleFile[i]) do
+            not SubtitleFile[i].IsEmpty do
           begin
             if Text <> '' then
               Text := Text + sLineBreak + SubtitleFile[i]
@@ -175,7 +175,7 @@ begin
           end;
 
           Text := HTMLTagsToTS(Text);
-          x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
+          x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
 
           if (ExtraInfo = NIL) and (X1 > 0) then
             Subtitles.ItemPointer[x]^.VAlign := TSubtitleVAlign(X1);
@@ -206,7 +206,7 @@ begin
   Count := 1;
   for i := FromItem to ToItem do
   begin
-    StringList.Add(IntToStr(Count), False);
+    StringList.Add(IntToStr(Count));
     Inc(Count);
     if Subtitles.ExtraInfo[i] <> NIL then
       with PSubRip_ExtraInfo(Subtitles.ExtraInfo[i])^ do
@@ -224,10 +224,10 @@ begin
         XY := '';
     end;
 
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss,zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss,zzz') + XY, False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss,zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss,zzz') + XY);
     Text := TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add(Text, False);
-    StringList.Add('', False);
+    StringList.Add(Text);
+    StringList.Add('');
   end;
 
   try
