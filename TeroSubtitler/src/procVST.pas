@@ -431,7 +431,7 @@ begin
           Item := Subtitles.ItemPointer[Run^.Index];
           if Assigned(Item) then
           begin
-            ti  := Item^.InitialTime - AppOptions.Conventions.NewSubtitleMs - Pause;
+            ti  := Range(Item^.InitialTime - AppOptions.Conventions.NewSubtitleMs - Pause, 0, Item^.InitialTime);
             tf  := ti + AppOptions.Conventions.NewSubtitleMs;
             SelArray[i] := InsertSubtitle(Run^.Index, ti, tf, '', '', False);
             Dec(i);
@@ -462,16 +462,16 @@ begin
       UndoInstance.IncrementUndoGroup;
     end;
   end
-  else // only one ?
+  else // only one
   begin
     pos := -1;
     i   := VSTFocusedNode(AVST);
 
-    if i > 0 then
+    if i >= 0 then
     begin
       if Before then
       begin
-        ti := Subtitles[i].InitialTime - AppOptions.Conventions.NewSubtitleMs - Pause;
+        ti := Range(Subtitles[i].InitialTime - AppOptions.Conventions.NewSubtitleMs - Pause, 0, Subtitles[i].InitialTime);
         pos := i;
       end
       else
@@ -480,7 +480,7 @@ begin
         pos := i+1;
       end;
     end
-    else if (i <> 0) and (Subtitles.Count > 0) then
+    else if (i < 0) and (Subtitles.Count > 0) then
       ti := Subtitles.Items[Subtitles.Count-1].FinalTime + Pause
     else
       ti := 0;
