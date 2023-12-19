@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: TeroSubtitler\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: sstpr в narod ru\n"
 "Language: bg_BG\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,6 +20,11 @@ msgid ""
 "Compiler version: %s\n"
 "Target CPU: %s"
 msgstr ""
+"версия %s\n"
+"\n"
+"Компилирано в %s на %s\n"
+"Версия на компилатора: %s\n"
+"Целеви процесор: %s"
 
 #: proclocalize.lngadditionalparams
 msgid "Additional params:"
@@ -47,11 +52,11 @@ msgstr "Нагласено"
 
 #: proclocalize.lngasellipsessinglesmartcharacter
 msgid "Ellipses dots instead of Unicode character"
-msgstr ""
+msgstr "Знак за многоточие, вместо знак от уникод"
 
 #: proclocalize.lngasempty
 msgid "Empty subtitle"
-msgstr "Празен надпис"
+msgstr "Празни надписи"
 
 #: proclocalize.lngasfixtags
 msgid "Invalid or incomplete tags"
@@ -67,13 +72,10 @@ msgstr "С увреден слух"
 
 #: proclocalize.lngasktoextractaudio
 msgid "Audio waveform was not found, do you want to extract it?"
-msgstr ""
+msgstr "Не е намерена звукова вълна, да се пробваме извлечем нещо?"
 
 #: proclocalize.lngasktosave
-#, object-pascal-format, fuzzy
-#| msgid ""
-#| "“%s“\n"
-#| "Do you wish to save it?"
+#, object-pascal-format
 msgid ""
 "“%s”\n"
 "\n"
@@ -85,7 +87,7 @@ msgstr ""
 #: proclocalize.lngaslineselected
 #, object-pascal-format
 msgid "%d lines selected / %d"
-msgstr ""
+msgstr "%d реда избрани / %d"
 
 #: proclocalize.lngasmarked
 msgid "Marked subtitle"
@@ -93,7 +95,7 @@ msgstr "Отбелязан надпис"
 
 #: proclocalize.lngasmaxcps
 msgid "Too many CPS"
-msgstr ""
+msgstr "Твърде много текст за указаното време"
 
 #: proclocalize.lngasmaxlines
 msgid "Maximum number of lines exceeded"
@@ -105,27 +107,27 @@ msgstr "Грешка при разпознаването на знаци"
 
 #: proclocalize.lngasoverlappingwithnext
 msgid "Overlapping with following subtitle"
-msgstr ""
+msgstr "Припокрива се със следващия надпис"
 
 #: proclocalize.lngasoverlappingwithprev
 msgid "Overlapping with previous subtitle"
-msgstr ""
+msgstr "Припокрива се с предходния надпис"
 
 #: proclocalize.lngasprohibitedchars
 msgid "Contains a prohibited character"
-msgstr ""
+msgstr "Съдържа забранен знак"
 
 #: proclocalize.lngasreadingvideofile
 msgid "Reading video file..."
-msgstr ""
+msgstr "Четене на видеофайл..."
 
 #: proclocalize.lngasrepeatedchars
 msgid "Repeated character"
-msgstr ""
+msgstr "Повтарящ се знак"
 
 #: proclocalize.lngasrepeatedsubtitle
 msgid "Repeated subtitle"
-msgstr ""
+msgstr "Повтарящ се надпис"
 
 #: proclocalize.lngastext
 msgctxt "proclocalize.lngastext"
@@ -153,12 +155,12 @@ msgstr "Превод"
 #: proclocalize.lngastranslationchars
 #, object-pascal-format
 msgid "Translation (%s characters at %.2f CPS):"
-msgstr ""
+msgstr "Превод (%s знака при %.2f знака в секунда):"
 
 #: proclocalize.lngasunbreak
 #, object-pascal-format
 msgid "Line breaks less than %d characters"
-msgstr ""
+msgstr "Пренасяне на реда при по-малко от %d знака"
 
 #: proclocalize.lngasunnecessarydots
 msgid "Unnecessary dots"
@@ -166,12 +168,12 @@ msgstr "Ненужни точки"
 
 #: proclocalize.lngasunnecessaryspaces
 msgid "Unnecessary spaces"
-msgstr "ненужни интервали"
+msgstr "Ненужни интервали"
 
 #: proclocalize.lngasvideolen
 #, object-pascal-format
 msgid "/ %s (%s FPS)"
-msgstr ""
+msgstr "/ %s (%s кадъра в секунда)"
 
 #: proclocalize.lngasvideolensmpte
 #, object-pascal-format
@@ -180,19 +182,18 @@ msgstr ""
 
 #: proclocalize.lngaswaveformtext
 msgid "Click here to use timeline"
-msgstr ""
+msgstr "Цъкнете тук за времева линия"
 
 #: proclocalize.lngbackupsaved
 msgid "Backup saved."
-msgstr ""
+msgstr "Запасяването е съхранено."
 
 #: proclocalize.lngbcfileformat
 msgctxt "proclocalize.lngbcfileformat"
 msgid "Format"
-msgstr ""
+msgstr "Оформление"
 
 #: proclocalize.lngbcfilename
-#, fuzzy
 msgctxt "proclocalize.lngbcfilename"
 msgid "File name"
 msgstr "Файлово име"
@@ -202,7 +203,6 @@ msgid "State"
 msgstr "Състояние"
 
 #: proclocalize.lngbtnadd
-#, fuzzy
 msgctxt "proclocalize.lngbtnadd"
 msgid "Add"
 msgstr "Добавяне"
@@ -224,14 +224,13 @@ msgstr "Отваряне"
 #: proclocalize.lngbtnremove
 msgctxt "proclocalize.lngbtnremove"
 msgid "Remove"
-msgstr ""
+msgstr "Премахване"
 
 #: proclocalize.lngbtnsave
 msgid "Save"
 msgstr "Съхраняване"
 
 #: proclocalize.lngbtnupdate
-#, fuzzy
 msgctxt "proclocalize.lngbtnupdate"
 msgid "Update"
 msgstr "Обновяване"
@@ -255,7 +254,8 @@ msgid "Auto-detect"
 msgstr "Самоустановяване"
 
 #: proclocalize.lngdetectdialogsegmentswarning
-msgid "Attempting to detect dialog segments deletes all subtitles from the list."
+msgid ""
+"Attempting to detect dialog segments deletes all subtitles from the list."
 msgstr ""
 
 #: proclocalize.lngentry
@@ -266,12 +266,12 @@ msgstr ""
 #: proclocalize.lngerrorexecuting
 #, object-pascal-format
 msgid "Error executing “%s”."
-msgstr ""
+msgstr "Грешка при изпълняване на“%s”."
 
 #: proclocalize.lngextractapperror
 #, object-pascal-format
 msgid "Unable to find “%s”."
-msgstr ""
+msgstr "“%s” не бе намерен."
 
 #: proclocalize.lngextracting
 msgid "Extracting..."
@@ -284,10 +284,11 @@ msgstr "Неуспех."
 #: proclocalize.lngfailedtodownload
 msgid "No content downloaded, missing file or no Internet connection."
 msgstr ""
+"Не е изтеглено съдържание, заради липсващ файл или връзка към интернет."
 
 #: proclocalize.lngfeaturenotavailablefromurl
 msgid "Function not available for online video."
-msgstr ""
+msgstr "Не се поддържа за мрежово видео."
 
 #: proclocalize.lngfilechanged
 msgid "File has not been saved."
@@ -303,27 +304,27 @@ msgstr "Файлът е съхранен успешно."
 
 #: proclocalize.lngfocenter
 msgid "Center"
-msgstr ""
+msgstr "В средата"
 
 #: proclocalize.lngfolatin
 msgid "Latin"
-msgstr ""
+msgstr "Латиница"
 
 #: proclocalize.lngfolatinarabic
 msgid "Latin/Arabic"
-msgstr ""
+msgstr "Латиница/ арабица"
 
 #: proclocalize.lngfolatincyrillic
 msgid "Latin/Cyrillic"
-msgstr ""
+msgstr "Латиница/ кирилица"
 
 #: proclocalize.lngfolatingreek
 msgid "Latin/Greek"
-msgstr ""
+msgstr "Латиница/ гърчица"
 
 #: proclocalize.lngfolatinhebrew
 msgid "Latin/Hebrew"
-msgstr ""
+msgstr "Латиница/ иврит"
 
 #: proclocalize.lngfoldernotempty
 msgid "The folder is not empty."
@@ -332,27 +333,27 @@ msgstr "Папката не е празна."
 #: proclocalize.lngfoleft
 msgctxt "proclocalize.lngfoleft"
 msgid "Left"
-msgstr ""
+msgstr "Отляво"
 
 #: proclocalize.lngfolevel1teletext
 msgid "Level-1 teletext"
-msgstr ""
+msgstr "Равнище-1 телетекст"
 
 #: proclocalize.lngfolevel2teletext
 msgid "Level-2 teletext"
-msgstr ""
+msgstr "Level-1 teletext"
 
 #: proclocalize.lngfoopensubtitling
 msgid "Open subtitling"
-msgstr ""
+msgstr "Отваряне на  надписи"
 
 #: proclocalize.lngforight
 msgid "Right"
-msgstr ""
+msgstr "Отдясно"
 
 #: proclocalize.lngfoundefined
 msgid "Undefined"
-msgstr ""
+msgstr "Неуказано"
 
 #: proclocalize.lngfsaction
 msgid "Action"
@@ -360,7 +361,7 @@ msgstr "Действие"
 
 #: proclocalize.lngfsaddspacing
 msgid "Add spacing"
-msgstr ""
+msgstr "Добавяне на разстояния"
 
 #: proclocalize.lngfsafter
 msgid "After"
@@ -372,27 +373,27 @@ msgstr "Текущо"
 
 #: proclocalize.lngfsetbadvalues
 msgid "Fix bad timing values"
-msgstr ""
+msgstr "Поправка на лоши времеви стойности"
 
 #: proclocalize.lngfsetbreaklonglines
 msgid "Break overlong lines"
-msgstr ""
+msgstr "Пренасяне на прекалено дълги редове"
 
 #: proclocalize.lngfsetchaining
 msgid "Chaining subtitles"
-msgstr ""
+msgstr "Наставяне на надписи"
 
 #: proclocalize.lngfsetcleanuptags
 msgid "Cleanup tags"
-msgstr ""
+msgstr "Разчистване на етикетите"
 
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
-msgstr ""
+msgstr "Преобразуване на знака за многоточие в знак на уникод"
 
 #: proclocalize.lngfsetempty
 msgid "Remove empty subtitles"
-msgstr ""
+msgstr "Премахване на празните надписи"
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
@@ -400,40 +401,40 @@ msgstr ""
 
 #: proclocalize.lngfsetfixtags
 msgid "Fix invalid tags"
-msgstr ""
+msgstr "Поправка на неправилни етикети"
 
 #: proclocalize.lngfsethearingimpaired
 msgid "Remove text for hearing impaired"
-msgstr ""
+msgstr "Премахване на текста за хора с увреден слух"
 
 #: proclocalize.lngfsetincompletehyphentext
 msgid "Remove incomplete hyphenated line"
-msgstr ""
+msgstr "Премахване на недовършен пренесен ред"
 
 #: proclocalize.lngfsetocr
 msgid "Fix common OCR errors"
-msgstr ""
+msgstr "Поправка на обичайни грешки от ОРЗ"
 
 #: proclocalize.lngfsetoverlapping
 msgid "Fix overlapping display times"
-msgstr ""
+msgstr "Поправка на застъпващи се времена"
 
 #: proclocalize.lngfsetprohibitedchars
 #, object-pascal-format
 msgid "Remove subtitles with %s"
-msgstr ""
+msgstr "Премахване на надписите съдъдържащи  „%s“"
 
 #: proclocalize.lngfsetremovespaceswithinbrackets
 msgid "Remove spaces within brackets"
-msgstr ""
+msgstr "Премахване на интервалите със скоби"
 
 #: proclocalize.lngfsetrepeatedchars
 msgid "Remove repeated characters"
-msgstr ""
+msgstr "Премахване на повтарящи се знаци"
 
 #: proclocalize.lngfsetrepeatedsubtitle
 msgid "Remove repeated subtitles"
-msgstr ""
+msgstr "Премахване на повтарящи се надписи"
 
 #: proclocalize.lngfsetsnaptoshotchanges
 msgid "Snap times to shot changes"
@@ -454,7 +455,7 @@ msgstr ""
 #: proclocalize.lngfsetspaceofopeninghyphen
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
-msgstr ""
+msgstr "Разстояние на началните тирета"
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -471,20 +472,20 @@ msgstr ""
 
 #: proclocalize.lngfsetunnecessarydots
 msgid "Remove unnecessary dots"
-msgstr ""
+msgstr "Премахване на ненужните точки"
 
 #: proclocalize.lngfsetunnecessaryspaces
 msgid "Remove unnecessary spaces"
-msgstr ""
+msgstr "Премахване на ненужните интервали"
 
 #: proclocalize.lngfsindex
 msgctxt "proclocalize.lngfsindex"
 msgid "#"
-msgstr ""
+msgstr "№"
 
 #: proclocalize.lngfsremovespacing
 msgid "Remove spacing"
-msgstr ""
+msgstr "Премахване на разстоянието"
 
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
@@ -497,34 +498,30 @@ msgid "CPS"
 msgstr ""
 
 #: proclocalize.lnghduration
-#, fuzzy
 msgctxt "proclocalize.lnghduration"
 msgid "Duration"
 msgstr "Продължителност"
 
 #: proclocalize.lnghindex
 msgid "#/Gap"
-msgstr ""
+msgstr "№/Междина"
 
 #: proclocalize.lnghstyleandactor
 msgctxt "proclocalize.lnghstyleandactor"
 msgid "Style/Actor"
-msgstr ""
+msgstr "Жанр/ артист"
 
 #: proclocalize.lnghtext
-#, fuzzy
 msgctxt "proclocalize.lnghtext"
 msgid "Text"
 msgstr "Текст"
 
 #: proclocalize.lnghtimes
-#, fuzzy
 msgctxt "proclocalize.lnghtimes"
 msgid "Times"
 msgstr "Времена"
 
 #: proclocalize.lnghtranslation
-#, fuzzy
 msgctxt "proclocalize.lnghtranslation"
 msgid "Translation"
 msgstr "Превод"
@@ -537,11 +534,15 @@ msgstr ""
 #: proclocalize.lngindex
 msgctxt "proclocalize.lngindex"
 msgid "#"
-msgstr ""
+msgstr "№"
 
 #: proclocalize.lnglibmpverror
-msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
+msgid ""
+"Unable to find the required libraries to run the embedded mpv player. Please "
+"download them."
 msgstr ""
+"Не бяха намерени библиотеките за възпроизвеждане на видео. Трябва да ги "
+"свалите."
 
 #: proclocalize.lnglibmpvglerror
 msgid "Failed to initialize mpv GL context."
@@ -550,13 +551,13 @@ msgstr ""
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
 msgstr ""
+"Грешка при работата с libmpv. Проверете дали е сложена правилната библиотека."
 
 #: proclocalize.lngline
 msgid "Line:"
-msgstr ""
+msgstr "Ред:"
 
 #: proclocalize.lngmrfind
-#, fuzzy
 msgctxt "proclocalize.lngmrfind"
 msgid "Find"
 msgstr "Търсене"
@@ -564,12 +565,12 @@ msgstr "Търсене"
 #: proclocalize.lngmrregexpr
 msgctxt "proclocalize.lngmrregexpr"
 msgid "R. Expression"
-msgstr ""
+msgstr "Обичаен израз"
 
 #: proclocalize.lngmrreplacewith
 msgctxt "proclocalize.lngmrreplacewith"
 msgid "Replace with"
-msgstr ""
+msgstr "Замяна с"
 
 #: proclocalize.lngmscontains
 msgctxt "proclocalize.lngmscontains"
@@ -579,7 +580,7 @@ msgstr "Съдържа"
 #: proclocalize.lngmsendswith
 msgctxt "proclocalize.lngmsendswith"
 msgid "Ends with"
-msgstr "Завършва с"
+msgstr "Завършва на"
 
 #: proclocalize.lngmsstartswith
 msgctxt "proclocalize.lngmsstartswith"
@@ -588,20 +589,17 @@ msgstr "Започва с"
 
 #: proclocalize.lngmultipletracksdetected
 msgid "Multiple tracks detected"
-msgstr ""
+msgstr "Открити са няколко пътечки"
 
 #: proclocalize.lngnewdurationall
-msgctxt "proclocalize.lngnewdurationall"
 msgid "New duration in all cases"
-msgstr ""
+msgstr "Нови продължителности за всички вслучаи"
 
 #: proclocalize.lngnewdurationgreater
-msgctxt "proclocalize.lngnewdurationgreater"
 msgid "New duration is greater than original"
 msgstr ""
 
 #: proclocalize.lngnewdurationsmaller
-msgctxt "proclocalize.lngnewdurationsmaller"
 msgid "New duration is smaller than original"
 msgstr ""
 
@@ -616,15 +614,15 @@ msgstr "Име"
 
 #: proclocalize.lngnewtime
 msgid "New time"
-msgstr ""
+msgstr "Ново време"
 
 #: proclocalize.lngnewversionfound
 msgid "A new version was found."
-msgstr ""
+msgstr "Намерено е ново издание."
 
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
-msgstr ""
+msgstr "Няма връзка с интернет."
 
 #: proclocalize.lngnoname
 msgid "no name"
@@ -636,15 +634,15 @@ msgstr "Използвате най-новото издание."
 
 #: proclocalize.lngnosubtitlesmarked
 msgid "There are no marked subtitles."
-msgstr ""
+msgstr "Няма отбелязани надписи."
 
 #: proclocalize.lngoldtime
 msgid "Old time"
-msgstr ""
+msgstr "Старо време"
 
 #: proclocalize.lngopencontainingfolder
 msgid "Open containing folder"
-msgstr ""
+msgstr "Отваряне на съдържащата папка"
 
 #: proclocalize.lngopenfile
 msgid "Open file"
@@ -652,17 +650,16 @@ msgstr "Отваряне на файл"
 
 #: proclocalize.lngopenvideofromurl
 msgid "Open video from"
-msgstr ""
+msgstr "Отваряне на видео от"
 
 #: proclocalize.lngoriginal
-#, fuzzy
 msgctxt "proclocalize.lngoriginal"
 msgid "Original"
 msgstr "Изходен"
 
 #: proclocalize.lngpercent
 msgid "Percent"
-msgstr ""
+msgstr "%"
 
 #: proclocalize.lngprojectfile
 msgid "Subtitle Translation Project"
@@ -670,15 +667,15 @@ msgstr ""
 
 #: proclocalize.lngpromptfordeletelines
 msgid "The selected lines will be deleted."
-msgstr ""
+msgstr "Избраните редове ще бъдат изтрити."
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
-msgstr ""
+msgstr "З/Р (знака на ред)"
 
 #: proclocalize.lngqccps
 msgid "CPS (characters-per-second)"
-msgstr ""
+msgstr "З/с (знака в секунда)"
 
 #: proclocalize.lngqcgap
 msgid "Gap Minimum duration"
@@ -691,15 +688,15 @@ msgstr ""
 
 #: proclocalize.lngqcmaximumduration
 msgid "Maximum duration"
-msgstr ""
+msgstr "Горна граница на продължителността"
 
 #: proclocalize.lngqcmaximumlines
 msgid "Maximum lines"
-msgstr ""
+msgstr "Максимален брой редове"
 
 #: proclocalize.lngqcminimumduration
 msgid "Minimum duration"
-msgstr ""
+msgstr "Долна граница на продължителността"
 
 #: proclocalize.lngqcrule
 msgid "Broken rule"
@@ -714,8 +711,6 @@ msgid "Date / Time"
 msgstr "Дата / време"
 
 #: proclocalize.lngrbfilename
-#, fuzzy
-#| msgid "Filename"
 msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
 msgstr "Файлово име"
@@ -726,7 +721,7 @@ msgstr "Съхраняване на файла"
 
 #: proclocalize.lngsavesubtitleerror
 msgid "Error trying to save the file."
-msgstr ""
+msgstr "Грешка при записа на файла."
 
 #: proclocalize.lngscedit
 msgctxt "proclocalize.lngscedit"
@@ -764,12 +759,12 @@ msgstr "Помощ"
 
 #: proclocalize.lngschhmmssff
 msgid "HH:MM:SS:FF"
-msgstr "Помощ"
+msgstr "HH:MM:SS:FF"
 
 #: proclocalize.lngschhmmsszzz
 msgctxt "proclocalize.lngschhmmsszzz"
 msgid "HH:MM:SS.ZZZ"
-msgstr ""
+msgstr "HH:MM:SS.ZZZ"
 
 #: proclocalize.lngscmilliseconds
 msgctxt "proclocalize.lngscmilliseconds"
@@ -792,7 +787,7 @@ msgstr "Текстови файлове"
 #: proclocalize.lngscsubtitle
 msgctxt "proclocalize.lngscsubtitle"
 msgid "Subtitle"
-msgstr "Надписи"
+msgstr "Надпис"
 
 #: proclocalize.lngsctexts
 msgctxt "proclocalize.lngsctexts"
@@ -838,11 +833,11 @@ msgstr "Избиране на к/с:"
 
 #: proclocalize.lngselectsheettouse
 msgid "Select sheet to use:"
-msgstr ""
+msgstr "Избиране на лист:"
 
 #: proclocalize.lngselecttracktouse
 msgid "Select the track to use:"
-msgstr ""
+msgstr "Избиране на пътечка:"
 
 #: proclocalize.lngshifttimeless
 #, object-pascal-format
@@ -862,7 +857,9 @@ msgid "Shortcut currently used in “%s”."
 msgstr ""
 
 #: proclocalize.lngsourcemodewarning
-msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
+msgid ""
+"Switching to source mode will change the format to “Tero Subtitler”, "
+"otherwise unsaved translations will be lost."
 msgstr ""
 
 #: proclocalize.lngspcurrentline
@@ -872,7 +869,7 @@ msgstr ""
 
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
-msgstr ""
+msgstr "Проверката на правописа е завършена."
 
 #: proclocalize.lngssappearance
 msgid "Appearance"
@@ -880,7 +877,7 @@ msgstr "Облик"
 
 #: proclocalize.lngssautomode
 msgid "Automatic"
-msgstr ""
+msgstr "Автоматично"
 
 #: proclocalize.lngssblockmode
 msgid "Block"
@@ -910,11 +907,11 @@ msgstr "Общо"
 
 #: proclocalize.lngsslightmode
 msgid "Light mode"
-msgstr ""
+msgstr "Списъчен режим"
 
 #: proclocalize.lngsslistmode
 msgid "List"
-msgstr ""
+msgstr "Списък"
 
 #: proclocalize.lngssmilliseconds
 msgctxt "proclocalize.lngssmilliseconds"
@@ -923,19 +920,19 @@ msgstr "Милисекунди"
 
 #: proclocalize.lngssmpv
 msgid "Video player"
-msgstr ""
+msgstr "Видео възпроизводител"
 
 #: proclocalize.lngssshortcutnone
 msgid "None"
-msgstr ""
+msgstr "Няма"
 
 #: proclocalize.lngssshortcuts
 msgid "Shortcuts"
-msgstr ""
+msgstr "Клавишни съчетания"
 
 #: proclocalize.lngsstoolbar
 msgid "Toolbar"
-msgstr ""
+msgstr "Лента с пособия"
 
 #: proclocalize.lngsstools
 msgctxt "proclocalize.lngsstools"
@@ -945,11 +942,14 @@ msgstr "Пособия"
 #: proclocalize.lngsubtitleendedat
 #, object-pascal-format
 msgid "Subtitle ended in %s"
-msgstr ""
+msgstr "Надписът завършва не „%s“"
 
 #: proclocalize.lngsubtitlehaserrorstofix
-msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
+msgid ""
+"The current subtitle set contains errors that are recommended to be "
+"resolved, but it can be saved."
 msgstr ""
+"Текущият преводен набор съдържа грешки. Препоръчително е да ги отстраните."
 
 #: proclocalize.lngsubtitlestartedat
 #, object-pascal-format
@@ -972,31 +972,29 @@ msgstr ""
 #: proclocalize.lngtefinaltime
 msgctxt "proclocalize.lngtefinaltime"
 msgid "Final time"
-msgstr ""
+msgstr "Крайно време"
 
 #: proclocalize.lngteindex
 msgctxt "proclocalize.lngteindex"
 msgid "Index"
-msgstr ""
+msgstr "Указател"
 
 #: proclocalize.lngteinitialtime
 msgctxt "proclocalize.lngteinitialtime"
 msgid "Initial time"
-msgstr ""
+msgstr "Начално време"
 
 #: proclocalize.lngtereduce
 msgctxt "proclocalize.lngtereduce"
 msgid "Reduce"
-msgstr ""
+msgstr "Намаляване"
 
 #: proclocalize.lngtetext
-#, fuzzy
 msgctxt "proclocalize.lngtetext"
 msgid "Text"
 msgstr "Текст"
 
 #: proclocalize.lngtetime
-#, fuzzy
 msgctxt "proclocalize.lngtetime"
 msgid "Time"
 msgstr "Време"
@@ -1014,14 +1012,13 @@ msgid "Exiting transcription mode will lose any unsaved changes."
 msgstr ""
 
 #: proclocalize.lngtranslated
-#, fuzzy
 msgctxt "proclocalize.lngtranslated"
 msgid "Translated"
-msgstr "преведен"
+msgstr "Преведено"
 
 #: proclocalize.lngtranslationfilechanged
 msgid "Translation file has not been saved."
-msgstr ""
+msgstr "Преводният файл не е съхранен."
 
 #: proclocalize.lngttip1
 #, object-pascal-format
@@ -1049,11 +1046,11 @@ msgstr ""
 
 #: proclocalize.lngurl
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
-msgstr ""
+msgstr "Създаването на видео бе неуспешно."
 
 #: proclocalize.lngwebvideounsupported
 msgid "The video format is not supported for playback in the web browser."
@@ -1074,30 +1071,26 @@ msgid "Close"
 msgstr "Затваряне"
 
 #: tfrmabout.caption
-#, fuzzy
-#| msgid "About..."
 msgctxt "tfrmabout.caption"
 msgid "About"
 msgstr "За..."
 
 #: tfrmabout.lbldonate.caption
-#, fuzzy
-#| msgid "Donate"
 msgctxt "tfrmabout.lbldonate.caption"
 msgid ""
 "If you like this software, please consider making a donation.\n"
 "Click here to do it."
-msgstr "Дарение"
+msgstr ""
 
 #: tfrmactors.btnactoradd.caption
 msgctxt "tfrmactors.btnactoradd.caption"
 msgid "+"
-msgstr "+"
+msgstr ""
 
 #: tfrmactors.btnactorremove.caption
 msgctxt "tfrmactors.btnactorremove.caption"
 msgid "-"
-msgstr "-"
+msgstr ""
 
 #: tfrmactors.btnapply.caption
 msgctxt "tfrmactors.btnapply.caption"
@@ -1112,7 +1105,7 @@ msgstr "Затваряне"
 #: tfrmactors.caption
 msgctxt "tfrmactors.caption"
 msgid "Actors"
-msgstr ""
+msgstr "Артисти"
 
 #: tfrmadjustsubtitle.btnapply.caption
 msgctxt "tfrmadjustsubtitle.btnapply.caption"
@@ -1127,12 +1120,12 @@ msgstr "Затваряне"
 #: tfrmadjustsubtitle.btnminus.caption
 msgctxt "tfrmadjustsubtitle.btnminus.caption"
 msgid "-"
-msgstr "-"
+msgstr ""
 
 #: tfrmadjustsubtitle.btnplus.caption
 msgctxt "tfrmadjustsubtitle.btnplus.caption"
 msgid "+"
-msgstr "+"
+msgstr ""
 
 #: tfrmadjustsubtitle.caption
 msgid "Adjust subtitle"
@@ -1144,7 +1137,7 @@ msgstr ""
 
 #: tfrmadjustsubtitle.lblindex.caption
 msgid "Subtitle #"
-msgstr ""
+msgstr "Надпис №"
 
 #: tfrmadjustsubtitle.lbllastspoken.caption
 msgid "Last spoken line"
@@ -1224,7 +1217,7 @@ msgstr "Сваляне"
 
 #: tfrmaudiototextmodel.caption
 msgid "Audio to text model"
-msgstr ""
+msgstr "Звук към текст"
 
 #: tfrmautomaticdurations.btnapply.caption
 msgctxt "tfrmautomaticdurations.btnapply.caption"
@@ -1253,7 +1246,6 @@ msgid "per line"
 msgstr "на ред"
 
 #: tfrmautomaticdurations.lblscope.caption
-#, fuzzy
 msgctxt "tfrmautomaticdurations.lblscope.caption"
 msgid "Scope:"
 msgstr "Обхват:"
@@ -1268,13 +1260,11 @@ msgid "All the subtitles"
 msgstr "Всички надписи"
 
 #: tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption
-#, fuzzy
 msgctxt "tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected subtitle"
 msgstr "От избрания надпис"
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
-#, fuzzy
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
 msgid "Only selected subtitles"
 msgstr "Само избраните надписи"
@@ -1295,7 +1285,6 @@ msgid "Close"
 msgstr "Затваряне"
 
 #: tfrmbatchconvert.btninvert.caption
-#, fuzzy
 msgctxt "tfrmbatchconvert.btninvert.caption"
 msgid "Invert"
 msgstr "Обръщане"
@@ -1306,7 +1295,6 @@ msgid "..."
 msgstr "..."
 
 #: tfrmbatchconvert.btnremove.caption
-#, fuzzy
 msgctxt "tfrmbatchconvert.btnremove.caption"
 msgid "Remove"
 msgstr "Премахване"
@@ -1314,7 +1302,7 @@ msgstr "Премахване"
 #: tfrmbatchconvert.btnscanfolder.caption
 msgctxt "tfrmbatchconvert.btnscanfolder.caption"
 msgid "Scan..."
-msgstr ""
+msgstr "Претърсване..."
 
 #: tfrmbatchconvert.btnselectall.caption
 msgctxt "tfrmbatchconvert.btnselectall.caption"
@@ -1333,14 +1321,13 @@ msgstr ""
 #: tfrmbatchconvert.lblformat.caption
 msgctxt "tfrmbatchconvert.lblformat.caption"
 msgid "Format"
-msgstr ""
+msgstr "Оформление"
 
 #: tfrmbatchconvert.lblfromfps.caption
 msgid "Input FPS"
 msgstr ""
 
 #: tfrmbatchconvert.lbloutput.caption
-#, fuzzy
 msgctxt "tfrmbatchconvert.lbloutput.caption"
 msgid "Output:"
 msgstr "Изход:"
@@ -1384,7 +1371,6 @@ msgid "Close"
 msgstr "Затваряне"
 
 #: tfrmconventions.btnremove.caption
-#, fuzzy
 msgctxt "tfrmconventions.btnremove.caption"
 msgid "Remove"
 msgstr "Премахване"
@@ -1414,7 +1400,6 @@ msgid "Convert case"
 msgstr ""
 
 #: tfrmconvertcase.lblscope.caption
-#, fuzzy
 msgctxt "tfrmconvertcase.lblscope.caption"
 msgid "Scope:"
 msgstr "Обхват:"
@@ -1425,13 +1410,11 @@ msgid "All the subtitles"
 msgstr "Всички надписи"
 
 #: tfrmconvertcase.rbnfromtheselectedsubtitle.caption
-#, fuzzy
 msgctxt "tfrmconvertcase.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected subtitle"
 msgstr "От избрания надпис"
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
-#, fuzzy
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
 msgid "Only selected subtitles"
 msgstr "Само избраните надписи"
@@ -1484,7 +1467,7 @@ msgstr "Файлово име"
 #: tfrmcustomfiledlg.lblformat.caption
 msgctxt "tfrmcustomfiledlg.lblformat.caption"
 msgid "Format"
-msgstr ""
+msgstr "Оформление"
 
 #: tfrmcustomfiledlg.lblfps.caption
 msgctxt "tfrmcustomfiledlg.lblfps.caption"
@@ -1533,17 +1516,15 @@ msgstr "Размер"
 #: tfrmcustomimageformat.lblfps.caption
 msgctxt "tfrmcustomimageformat.lblfps.caption"
 msgid "FPS"
-msgstr "К/С"
+msgstr "К/с"
 
 #: tfrmcustomimageformat.lblimagesize.caption
 msgid "Image size"
 msgstr "Размер на изображението"
 
 #: tfrmcustomimageformat.lblprefix.caption
-#, fuzzy
-#| msgid "Image prefix"
 msgid "Prefix"
-msgstr "Представка на изображението"
+msgstr "Представка"
 
 #: tfrmcustomimageformat.lblsafearea.caption
 msgctxt "tfrmcustomimageformat.lblsafearea.caption"
@@ -1558,7 +1539,7 @@ msgstr ""
 #: tfrmcustomimageformat.lblx.caption
 msgctxt "tfrmcustomimageformat.lblx.caption"
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: tfrmcustominputdlg.btncancel.caption
 msgctxt "tfrmcustominputdlg.btncancel.caption"
@@ -1635,7 +1616,7 @@ msgstr "Съхраняване..."
 
 #: tfrmcustomtextformat.caption
 msgid "Custom text format"
-msgstr ""
+msgstr "Нагласено оформление на текста"
 
 #: tfrmcustomtextformat.lblencoding.caption
 msgctxt "tfrmcustomtextformat.lblencoding.caption"
@@ -1649,7 +1630,7 @@ msgstr "Разширение"
 #: tfrmcustomtextformat.lblfps.caption
 msgctxt "tfrmcustomtextformat.lblfps.caption"
 msgid "FPS"
-msgstr "К/С"
+msgstr "К/с"
 
 #: tfrmcustomtextformat.lblnewlinechar.caption
 msgid "New line char"
@@ -1666,11 +1647,11 @@ msgstr "Разделител"
 
 #: tfrmcustomtextformat.lbltimecode.caption
 msgid "Time code"
-msgstr ""
+msgstr "Времеуказател"
 
 #: tfrmcustomtextformat.lbltimeformat.caption
 msgid "Time format"
-msgstr ""
+msgstr "Изписване на времето"
 
 #: tfrmcustomtextformat.lbltitle.caption
 msgctxt "tfrmcustomtextformat.lbltitle.caption"
@@ -1689,7 +1670,7 @@ msgstr "Затваряне"
 
 #: tfrmdelay.caption
 msgid "Set delay"
-msgstr ""
+msgstr "Задаване на забавяне"
 
 #: tfrmdelay.cbomode.text
 msgctxt "tfrmdelay.cbomode.text"
@@ -1697,7 +1678,6 @@ msgid "+"
 msgstr "+"
 
 #: tfrmdelay.lblscope.caption
-#, fuzzy
 msgctxt "tfrmdelay.lblscope.caption"
 msgid "Scope:"
 msgstr "Обхват:"
@@ -1708,20 +1688,18 @@ msgid "All the subtitles"
 msgstr "Всички надписи"
 
 #: tfrmdelay.rbnfromtheselectedsubtitle.caption
-#, fuzzy
 msgctxt "tfrmdelay.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected subtitle"
 msgstr "От избрания надпис"
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
-#, fuzzy
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
 msgid "Only selected subtitles"
 msgstr "Само избраните надписи"
 
 #: tfrmdownload.lbldownload.caption
 msgid "Downloading"
-msgstr "Сваля се..."
+msgstr "Сваляне"
 
 #: tfrmdurationlimits.btnapply.caption
 msgctxt "tfrmdurationlimits.btnapply.caption"
@@ -1735,18 +1713,17 @@ msgstr "Затваряне"
 
 #: tfrmdurationlimits.caption
 msgid "Duration limits"
-msgstr ""
+msgstr "Граници на продължителността"
 
 #: tfrmdurationlimits.chksetmaxduration.caption
 msgid "Set maximum duration (ms)"
-msgstr ""
+msgstr "Задаване на максимална продължителност в ms"
 
 #: tfrmdurationlimits.chksetminduration.caption
 msgid "Set minimum duration (ms)"
-msgstr ""
+msgstr "Задаване на минимална продължителност в ms"
 
 #: tfrmdurationlimits.lblscope.caption
-#, fuzzy
 msgctxt "tfrmdurationlimits.lblscope.caption"
 msgid "Scope:"
 msgstr "Обхват:"
@@ -1757,13 +1734,11 @@ msgid "All the subtitles"
 msgstr "Всички надписи"
 
 #: tfrmdurationlimits.rbnfromtheselectedsubtitle.caption
-#, fuzzy
 msgctxt "tfrmdurationlimits.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected subtitle"
 msgstr "От избрания надпис"
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
-#, fuzzy
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
 msgid "Only selected subtitles"
 msgstr "Само избраните надписи"
@@ -1804,12 +1779,12 @@ msgstr ""
 
 #: tfrmexportsup.lblvideores.caption
 msgid "Video resolution"
-msgstr ""
+msgstr "Разделителна способност"
 
 #: tfrmexportsup.lblx.caption
 msgctxt "tfrmexportsup.lblx.caption"
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: tfrmfindandreplace.btnclose.caption
 msgctxt "tfrmfindandreplace.btnclose.caption"
@@ -1840,14 +1815,10 @@ msgid "Replace all"
 msgstr "Замяна на всичко"
 
 #: tfrmfindandreplace.caption
-#, fuzzy
-#| msgid "Find & Replace"
 msgid "Find and replace"
 msgstr "Търсене и замяна"
 
 #: tfrmfindandreplace.chkcasesensitive.caption
-#, fuzzy
-#| msgid "Case sensitive"
 msgid "Case-sensitive"
 msgstr "Отчитане на гЛАвноСТта"
 
@@ -1857,12 +1828,12 @@ msgstr "Запазване на главността при замяна"
 
 #: tfrmfindandreplace.chkregularexpression.caption
 msgid "Use regular expression"
-msgstr ""
+msgstr "Ползване на обичайни изрази"
 
 #: tfrmfindandreplace.chkreplacewith.caption
 msgctxt "tfrmfindandreplace.chkreplacewith.caption"
 msgid "Replace with:"
-msgstr ""
+msgstr "Замяна с:"
 
 #: tfrmfindandreplace.chkwholeword.caption
 msgid "Whole word"
@@ -1870,10 +1841,9 @@ msgstr "Цяла дума"
 
 #: tfrmfindandreplace.lbloptions.caption
 msgid "Options:"
-msgstr ""
+msgstr "Възможности:"
 
 #: tfrmfindandreplace.lblscope.caption
-#, fuzzy
 msgctxt "tfrmfindandreplace.lblscope.caption"
 msgid "Scope:"
 msgstr "Обхват:"
@@ -1888,7 +1858,6 @@ msgid "All the subtitles"
 msgstr "Всички надписи"
 
 #: tfrmfindandreplace.rbnfromtheselectedsubtitle.caption
-#, fuzzy
 msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected subtitle"
 msgstr "От избрания надпис"
@@ -1905,11 +1874,11 @@ msgstr "Затваряне"
 
 #: tfrmfixsubtitles.caption
 msgid "Fix subtitles"
-msgstr ""
+msgstr "Поправка на надписите"
 
 #: tfrmfixsubtitles.lblconvention.caption
 msgid "Convention"
-msgstr ""
+msgstr "Условности"
 
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
@@ -1933,7 +1902,7 @@ msgstr "Затваряне"
 #: tfrmformatproperties.caption
 msgctxt "tfrmformatproperties.caption"
 msgid "Format properties"
-msgstr ""
+msgstr "Свойства на оформлението"
 
 #: tfrmformatproperties.chkvttusextimestamp.caption
 msgid "Use X-TIMESTAMP-MAP header"
@@ -1971,11 +1940,11 @@ msgstr "Език"
 
 #: tfrmformatproperties.lblaspositionx.caption
 msgid "Position X"
-msgstr ""
+msgstr "Положение по X"
 
 #: tfrmformatproperties.lblaspositiony.caption
 msgid "Position Y"
-msgstr ""
+msgstr "Положение по Y"
 
 #: tfrmformatproperties.lblaswidth.caption
 msgctxt "tfrmformatproperties.lblaswidth.caption"
@@ -1984,7 +1953,7 @@ msgstr "Ширина"
 
 #: tfrmformatproperties.lblcavenacomment.caption
 msgid "Comments"
-msgstr ""
+msgstr "Бележки"
 
 #: tfrmformatproperties.lblcavenalanguage.caption
 msgctxt "tfrmformatproperties.lblcavenalanguage.caption"
@@ -1993,15 +1962,15 @@ msgstr "Език"
 
 #: tfrmformatproperties.lblcavenaoriginaltitle.caption
 msgid "Original title"
-msgstr ""
+msgstr "Изходно заглавие"
 
 #: tfrmformatproperties.lblcavenatcstart.caption
 msgid "Start timecode"
-msgstr ""
+msgstr "Умен времеуказател"
 
 #: tfrmformatproperties.lblcavenatranslatedtitle.caption
 msgid "Translated title"
-msgstr ""
+msgstr "Преведено заглавие"
 
 #: tfrmformatproperties.lblcavenatranslator.caption
 msgid "Translator"
@@ -2009,7 +1978,7 @@ msgstr "Преводач"
 
 #: tfrmformatproperties.lbldvdauthor.caption
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #: tfrmformatproperties.lbldvdinfo.caption
 msgid "Info"
@@ -2027,19 +1996,19 @@ msgstr "Заглавие"
 
 #: tfrmformatproperties.lbldvdweb.caption
 msgid "Web"
-msgstr ""
+msgstr "Мрежа"
 
 #: tfrmformatproperties.lblebucct.caption
 msgid "Character code table"
-msgstr ""
+msgstr "Таблица със знакови набори"
 
 #: tfrmformatproperties.lblebuco.caption
 msgid "Country origin"
-msgstr ""
+msgstr "Държава на произход"
 
 #: tfrmformatproperties.lblebucpn.caption
 msgid "Code page number"
-msgstr ""
+msgstr "Страница на знаковия набор"
 
 #: tfrmformatproperties.lblebudfc.caption
 msgid "Disk format code"
@@ -2051,7 +2020,7 @@ msgstr ""
 
 #: tfrmformatproperties.lblebulc.caption
 msgid "Language code"
-msgstr ""
+msgstr "Код на езика"
 
 #: tfrmformatproperties.lblebundc.caption
 msgid "Max chars"
@@ -2086,7 +2055,7 @@ msgstr "..."
 
 #: tfrmgeneratevideo.caption
 msgid "Generate video"
-msgstr ""
+msgstr "Създаване на видео"
 
 #: tfrmgeneratevideo.chkbox.caption
 msgid "Box"
@@ -2094,7 +2063,7 @@ msgstr ""
 
 #: tfrmgeneratevideo.chkcrop.caption
 msgid "Crop"
-msgstr ""
+msgstr "Орязване"
 
 #: tfrmgeneratevideo.chkcut.caption
 msgctxt "tfrmgeneratevideo.chkcut.caption"
@@ -2107,7 +2076,7 @@ msgstr ""
 
 #: tfrmgeneratevideo.chkflip.caption
 msgid "Flip"
-msgstr ""
+msgstr "Обръщане"
 
 #: tfrmgeneratevideo.chkreencodeaudio.caption
 msgid "Re-encode"
@@ -2115,20 +2084,20 @@ msgstr ""
 
 #: tfrmgeneratevideo.chkrotate.caption
 msgid "Rotate"
-msgstr ""
+msgstr "Завъртане"
 
 #: tfrmgeneratevideo.lblaudiochannels.caption
 msgid "Channels"
-msgstr ""
+msgstr "Канали"
 
 #: tfrmgeneratevideo.lblaudioencoding.caption
 msgctxt "tfrmgeneratevideo.lblaudioencoding.caption"
 msgid "Codec"
-msgstr ""
+msgstr "Кодек"
 
 #: tfrmgeneratevideo.lblbitrate.caption
 msgid "Bit rate"
-msgstr ""
+msgstr "Битова плътност"
 
 #: tfrmgeneratevideo.lblcropheight.caption
 msgctxt "tfrmgeneratevideo.lblcropheight.caption"
@@ -2138,11 +2107,11 @@ msgstr "Височина"
 #: tfrmgeneratevideo.lblcropleft.caption
 msgctxt "tfrmgeneratevideo.lblcropleft.caption"
 msgid "Left"
-msgstr ""
+msgstr "Отляво"
 
 #: tfrmgeneratevideo.lblcroptop.caption
 msgid "Top"
-msgstr ""
+msgstr "Отгоре"
 
 #: tfrmgeneratevideo.lblcropwidth.caption
 msgctxt "tfrmgeneratevideo.lblcropwidth.caption"
@@ -2175,7 +2144,7 @@ msgstr "Размер"
 #: tfrmgeneratevideo.lblformat.caption
 msgctxt "tfrmgeneratevideo.lblformat.caption"
 msgid "Format"
-msgstr ""
+msgstr "Оформление"
 
 #: tfrmgeneratevideo.lblsamplerate.caption
 msgid "Sample rate"
@@ -2192,12 +2161,12 @@ msgstr "Разделителна способност"
 
 #: tfrmgeneratevideo.lblvideosubtype.caption
 msgid "Subtype"
-msgstr ""
+msgstr "Подвид"
 
 #: tfrmgeneratevideo.lblx.caption
 msgctxt "tfrmgeneratevideo.lblx.caption"
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: tfrmgeneratevideo.rdoaudio.caption
 msgctxt "tfrmgeneratevideo.rdoaudio.caption"
@@ -2206,11 +2175,9 @@ msgstr "Звук"
 
 #: tfrmgeneratevideo.rdoothers.caption
 msgid "Others"
-msgstr ""
+msgstr "Други"
 
 #: tfrmgeneratevideo.rdosubtitle.caption
-#, fuzzy
-#| msgid "Subtitle"
 msgctxt "tfrmgeneratevideo.rdosubtitle.caption"
 msgid "Subtitles"
 msgstr "Надписи"
@@ -2231,11 +2198,9 @@ msgid "Go"
 msgstr "Отиване"
 
 #: tfrmgoto.caption
-#, fuzzy
-#| msgid "Go to"
 msgctxt "tfrmgoto.caption"
 msgid "Go to line"
-msgstr "Отиване до"
+msgstr "Отиване на ред"
 
 #: tfrmgoto.lblnumber.caption
 msgid "Entry:"
@@ -2268,17 +2233,15 @@ msgstr "За..."
 #: tfrmmain.actactor.caption
 msgctxt "tfrmmain.actactor.caption"
 msgid "Actors"
-msgstr ""
+msgstr "Артисти"
 
 #: tfrmmain.actaddnote.caption
 msgid "Add note..."
 msgstr "Добавяне на бележка..."
 
 #: tfrmmain.actaddquotationmarks.caption
-#, fuzzy
-#| msgid "Add Quotation Marks"
 msgid "Add quotation marks"
-msgstr "Добавяне на питанки"
+msgstr "Добавяне на кавички"
 
 #: tfrmmain.actadjustsubtitle.caption
 msgid "Adjust subtitle..."
@@ -2305,16 +2268,14 @@ msgid "Align to right"
 msgstr "Подравняване вдясно"
 
 #: tfrmmain.actaudiototext.caption
-#, fuzzy
-#| msgid "Audio to text"
 msgctxt "tfrmmain.actaudiototext.caption"
 msgid "Audio to text..."
-msgstr "Звук към текст"
+msgstr "Звук към текст..."
 
 #: tfrmmain.actautobreaksubtitle.caption
 msgctxt "tfrmmain.actautobreaksubtitle.caption"
 msgid "Autobreak"
-msgstr ""
+msgstr "Самопренасяне"
 
 #: tfrmmain.actautobreaksubtitle.hint
 msgid "Split a long line into two or more lines"
@@ -2322,7 +2283,7 @@ msgstr ""
 
 #: tfrmmain.actautomaticduration.caption
 msgid "Automatic duration..."
-msgstr ""
+msgstr "Самоопределяне на продължителността..."
 
 #: tfrmmain.actbatchconvert.caption
 msgctxt "tfrmmain.actbatchconvert.caption"
@@ -2336,7 +2297,7 @@ msgstr ""
 
 #: tfrmmain.actcheckforupdates.caption
 msgid "Check for updates..."
-msgstr ""
+msgstr "Проверка за обновявания..."
 
 #: tfrmmain.actcloseapp.caption
 msgctxt "tfrmmain.actcloseapp.caption"
@@ -2345,7 +2306,7 @@ msgstr "Затваряне"
 
 #: tfrmmain.actclosesubtitle.caption
 msgid "Close subtitles"
-msgstr ""
+msgstr "Затваряне на надписите"
 
 #: tfrmmain.actclosevideo.caption
 msgid "Close video"
@@ -2358,15 +2319,15 @@ msgstr "Съчетаване на надписи"
 
 #: tfrmmain.actcombinesubtitles.hint
 msgid "Combines all the selected subtitles into one"
-msgstr ""
+msgstr "Съчетаване на всички избрани надписи в един"
 
 #: tfrmmain.actcompare.caption
 msgid "Compare..."
-msgstr ""
+msgstr "Сравняване..."
 
 #: tfrmmain.actconvertcase.caption
 msgid "Convert case..."
-msgstr ""
+msgstr "Преобразуване на глАВностТта..."
 
 #: tfrmmain.actcopy.caption
 msgctxt "tfrmmain.actcopy.caption"
@@ -2393,7 +2354,7 @@ msgstr "Изтриване на надпис(и)"
 
 #: tfrmmain.actdeletesubtitle.hint
 msgid "Delete selected subtitle(s)"
-msgstr ""
+msgstr "Изтриване на избраните надпис(и)"
 
 #: tfrmmain.actdetectdialogsegments.caption
 msgid "Detect dialog segments..."
@@ -2402,7 +2363,7 @@ msgstr ""
 #: tfrmmain.actdetectsilentzones.caption
 msgctxt "tfrmmain.actdetectsilentzones.caption"
 msgid "Detect silent zones"
-msgstr ""
+msgstr "Откриване на тихи откъси"
 
 #: tfrmmain.actdetectsilentzones.hint
 msgid "Click to refresh list"
@@ -2418,11 +2379,11 @@ msgstr ""
 
 #: tfrmmain.actendcueaddoneframe.caption
 msgid "Add one frame"
-msgstr ""
+msgstr "Добавяне на кадър"
 
 #: tfrmmain.actendcuesubtractoneframe.caption
 msgid "Subtract one frame"
-msgstr ""
+msgstr "Изваждане на кадър"
 
 #: tfrmmain.actexportcustomimageformat.caption
 msgid "Custom image format..."
@@ -2434,7 +2395,7 @@ msgstr ""
 
 #: tfrmmain.actexportmarkedsubtitles.caption
 msgid "Marked subtitles..."
-msgstr ""
+msgstr "Отбелязани на надписи..."
 
 #: tfrmmain.actexportsup.caption
 msgid "Blu-ray SUP..."
@@ -2442,7 +2403,7 @@ msgstr ""
 
 #: tfrmmain.actexporttextonly.caption
 msgid "Text only..."
-msgstr ""
+msgstr "Само текст..."
 
 #: tfrmmain.actextendlengthtonext.caption
 msgid "Extend final time to next"
@@ -2463,15 +2424,15 @@ msgstr "Търсене на следващо"
 
 #: tfrmmain.actfindprevious.caption
 msgid "Find previous"
-msgstr ""
+msgstr "Търсене на предходно"
 
 #: tfrmmain.actfixrtlpunctuation.caption
 msgid "Fix punctuation"
-msgstr ""
+msgstr "Поправка на препинанията"
 
 #: tfrmmain.actfixsubtitles.caption
 msgid "Fix subtitles..."
-msgstr ""
+msgstr "Поправка на надписите..."
 
 #: tfrmmain.actfontbold.caption
 msgctxt "tfrmmain.actfontbold.caption"
@@ -2509,8 +2470,6 @@ msgid "Format properties..."
 msgstr ""
 
 #: tfrmmain.actframesmode.caption
-#, fuzzy
-#| msgid "Frames mode"
 msgctxt "tfrmmain.actframesmode.caption"
 msgid "Frame mode"
 msgstr "Покадров режим"
@@ -2521,15 +2480,15 @@ msgstr ""
 
 #: tfrmmain.actgeneratevideo.caption
 msgid "Video with hardcoded subtitles..."
-msgstr ""
+msgstr "Видео с вградени надписи..."
 
 #: tfrmmain.actgoto.caption
 msgid "Go to line number..."
-msgstr ""
+msgstr "Отиване на ред..."
 
 #: tfrmmain.actgototime.caption
 msgid "Go to time..."
-msgstr ""
+msgstr "Отиване на време..."
 
 #: tfrmmain.acthelp.caption
 msgctxt "tfrmmain.acthelp.caption"
@@ -2537,10 +2496,8 @@ msgid "Help"
 msgstr "Помощ"
 
 #: tfrmmain.actimportsubtitles.caption
-#, fuzzy
-#| msgid "Import subtitles"
 msgid "Subtitles..."
-msgstr "Внасяне на надписи"
+msgstr "Надписи..."
 
 #: tfrmmain.actinsertcurrenttime.caption
 msgid "Insert current time"
@@ -2553,7 +2510,7 @@ msgstr ""
 #: tfrmmain.actinsertsubtitle.caption
 msgctxt "tfrmmain.actinsertsubtitle.caption"
 msgid "Insert subtitle"
-msgstr "Вмъкване на надпис на най-долния ред"
+msgstr "Вмъкване на надпис"
 
 #: tfrmmain.actinsertsubtitle.hint
 msgid "Insert a new subtitle after the current subtitle"
@@ -2603,28 +2560,28 @@ msgstr "Зареждане на надписи..."
 
 #: tfrmmain.actloadsubtitle.hint
 msgid "Load a subtitle file"
-msgstr ""
+msgstr "Зареждане на файл с надписи"
 
 #: tfrmmain.actloadtranscription.caption
 msgctxt "tfrmmain.actloadtranscription.caption"
 msgid "Transcription..."
-msgstr ""
+msgstr "Разписване..."
 
 #: tfrmmain.actloadtranslation.caption
 msgid "Load translation..."
-msgstr ""
+msgstr "Зареждане на превод..."
 
 #: tfrmmain.actloadvideo.caption
 msgid "Open video..."
-msgstr ""
+msgstr "Отваряне на видео..."
 
 #: tfrmmain.actloadvideo.hint
 msgid "Open a video file"
-msgstr ""
+msgstr "Отваряне на видео файл"
 
 #: tfrmmain.actloadvideofromurl.caption
 msgid "Open video from URL..."
-msgstr ""
+msgstr "Отваряне на видео от URL..."
 
 #: tfrmmain.actmarksubtitle.caption
 msgid "Mark subtitle(s)"
@@ -2633,12 +2590,12 @@ msgstr ""
 #: tfrmmain.actmediaaddsubtitle.caption
 msgctxt "tfrmmain.actmediaaddsubtitle.caption"
 msgid "Add subtitle"
-msgstr ""
+msgstr "Добавяне на надпис"
 
 #: tfrmmain.actmediaautoscroll.caption
 msgctxt "tfrmmain.actmediaautoscroll.caption"
 msgid "Update list on preview"
-msgstr ""
+msgstr "Обновяване на списъка при преглед"
 
 #: tfrmmain.actmediaback1min.caption
 msgid "Go back 1 minute"
@@ -2669,15 +2626,15 @@ msgstr "Напред"
 
 #: tfrmmain.actmediaforward1min.caption
 msgid "Forward 1 minute"
-msgstr ""
+msgstr "1 минута напред"
 
 #: tfrmmain.actmediaforward1sec.caption
 msgid "Forward 1 second"
-msgstr ""
+msgstr "1 секунда напред"
 
 #: tfrmmain.actmediamovesubtitle.caption
 msgid "Move subtitle"
-msgstr ""
+msgstr "Преместване на надписа"
 
 #: tfrmmain.actmedianextframe.caption
 msgctxt "tfrmmain.actmedianextframe.caption"
@@ -2710,8 +2667,6 @@ msgid "Play selection"
 msgstr "Възпроизвеждане на избраното"
 
 #: tfrmmain.actmediapreviousframe.caption
-#, fuzzy
-#| msgid "Prev frame"
 msgctxt "tfrmmain.actmediapreviousframe.caption"
 msgid "Previous frame"
 msgstr "Предходен кадър"
@@ -2774,7 +2729,7 @@ msgstr "Смаляване"
 #: tfrmmain.actmediazoomselection.caption
 msgctxt "tfrmmain.actmediazoomselection.caption"
 msgid "Zoom selection"
-msgstr ""
+msgstr "Вместване на избраното"
 
 #: tfrmmain.actmodifyselection.caption
 msgid "Modify selection..."
@@ -2782,7 +2737,7 @@ msgstr ""
 
 #: tfrmmain.actmultiplereplace.caption
 msgid "Multiple replace..."
-msgstr ""
+msgstr "Множествена замяна..."
 
 #: tfrmmain.actnewsubtitle.caption
 msgctxt "tfrmmain.actnewsubtitle.caption"
@@ -2823,7 +2778,7 @@ msgstr ""
 #: tfrmmain.actredo.caption
 msgctxt "tfrmmain.actredo.caption"
 msgid "Redo"
-msgstr ""
+msgstr "Повтаряне"
 
 #: tfrmmain.actredo.hint
 msgid "Redo last undo"
@@ -2847,7 +2802,7 @@ msgstr ""
 
 #: tfrmmain.actroundtimes.caption
 msgid "Round times"
-msgstr ""
+msgstr "Закръгляване на времената"
 
 #: tfrmmain.actsaveproject.caption
 msgid "Save project..."
@@ -2860,7 +2815,7 @@ msgstr "Съхраняване на надписите"
 
 #: tfrmmain.actsavesubtitle.hint
 msgid "Save current subtitle to file"
-msgstr ""
+msgstr "Съхраняване на текущите надписи във файл"
 
 #: tfrmmain.actsavesubtitleas.caption
 msgid "Save subtitle as..."
@@ -2873,27 +2828,27 @@ msgstr ""
 #: tfrmmain.actsavetranscription.caption
 msgctxt "tfrmmain.actsavetranscription.caption"
 msgid "Transcription..."
-msgstr ""
+msgstr "Разписване..."
 
 #: tfrmmain.actsavetranslation.caption
 msgid "Save translation"
-msgstr ""
+msgstr "Съхраняване на превода"
 
 #: tfrmmain.actsavetranslation.hint
 msgid "Save current translation to file"
-msgstr ""
+msgstr "Съхраняване на текущия превод във файл"
 
 #: tfrmmain.actsavetranslationas.caption
 msgid "Save translation as..."
-msgstr ""
+msgstr "Запазване на превода като..."
 
 #: tfrmmain.actsavetranslationas.hint
 msgid "Save current translation to a specific file"
-msgstr ""
+msgstr "Съхраняване на текущия превод в зададен файл"
 
 #: tfrmmain.actscreenshottofile.caption
 msgid "Screenshot to file"
-msgstr ""
+msgstr "Екранна снимка във файл"
 
 #: tfrmmain.actselectall.caption
 msgctxt "tfrmmain.actselectall.caption"
@@ -2999,7 +2954,7 @@ msgstr "Времена"
 #: tfrmmain.actshowcolumnwpm.caption
 msgctxt "tfrmmain.actshowcolumnwpm.caption"
 msgid "Words per minute"
-msgstr ""
+msgstr "Думи в минута"
 
 #: tfrmmain.actshowtoolbarencoding.caption
 msgctxt "tfrmmain.actshowtoolbarencoding.caption"
@@ -3009,12 +2964,12 @@ msgstr ""
 #: tfrmmain.actshowtoolbarformat.caption
 msgctxt "tfrmmain.actshowtoolbarformat.caption"
 msgid "Format"
-msgstr ""
+msgstr "Оформление"
 
 #: tfrmmain.actshowtoolbarfps.caption
 msgctxt "tfrmmain.actshowtoolbarfps.caption"
 msgid "FPS"
-msgstr "К/С"
+msgstr "К/с"
 
 #: tfrmmain.actshowtoolbarmain.caption
 msgctxt "tfrmmain.actshowtoolbarmain.caption"
@@ -3023,7 +2978,7 @@ msgstr ""
 
 #: tfrmmain.actsort.caption
 msgid "Sort"
-msgstr ""
+msgstr "Подреждане"
 
 #: tfrmmain.actsourcemode.caption
 msgctxt "tfrmmain.actsourcemode.caption"
@@ -3032,7 +2987,7 @@ msgstr "Изходен режим"
 
 #: tfrmmain.actspellcheck.caption
 msgid "Spell check..."
-msgstr ""
+msgstr "Правописна проверка..."
 
 #: tfrmmain.actsplitsubtitleatposition.caption
 msgid "Split line at cursor position"
@@ -3062,7 +3017,6 @@ msgid "Add..."
 msgstr "Добавяне..."
 
 #: tfrmmain.acttbxlist.caption
-#, fuzzy
 msgctxt "tfrmmain.acttbxlist.caption"
 msgid "List..."
 msgstr "Списък..."
@@ -3125,7 +3079,7 @@ msgstr ""
 
 #: tfrmmain.actunbreaksubtitle.caption
 msgid "Unbreak subtitle"
-msgstr ""
+msgstr "На  по-малко редове"
 
 #: tfrmmain.actundo.caption
 msgctxt "tfrmmain.actundo.caption"
@@ -3210,7 +3164,7 @@ msgstr ""
 #: tfrmmain.cboformat.hint
 msgctxt "tfrmmain.cboformat.hint"
 msgid "Format"
-msgstr ""
+msgstr "Оформление"
 
 #: tfrmmain.cbofps.hint
 msgid "Target FPS of subtitle file"
@@ -3229,7 +3183,6 @@ msgid "Current video position"
 msgstr ""
 
 #: tfrmmain.mnudictionary.caption
-#, fuzzy
 msgctxt "tfrmmain.mnudictionary.caption"
 msgid "Dictionary"
 msgstr "Речник"
@@ -3242,15 +3195,15 @@ msgstr "Обработка"
 #: tfrmmain.mnueditformat.caption
 msgctxt "tfrmmain.mnueditformat.caption"
 msgid "Format"
-msgstr ""
+msgstr "Оформление"
 
 #: tfrmmain.mnueditinsertsymbol.caption
 msgid "Insert unicode symbol"
-msgstr ""
+msgstr "Вмъкване на знак от уникод"
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
-msgstr ""
+msgstr "От дясно наляво"
 
 #: tfrmmain.mnueditsubtitles.caption
 msgctxt "tfrmmain.mnueditsubtitles.caption"
@@ -3282,7 +3235,7 @@ msgstr "Файл"
 
 #: tfrmmain.mnufileexport.caption
 msgid "Export"
-msgstr ""
+msgstr "Изнасяне"
 
 #: tfrmmain.mnufileimport.caption
 msgid "Import"
@@ -3314,13 +3267,11 @@ msgid "Tools"
 msgstr "Пособия"
 
 #: tfrmmain.mnutoolsterminology.caption
-#, fuzzy
 msgctxt "tfrmmain.mnutoolsterminology.caption"
 msgid "Terminology"
 msgstr "Понятия"
 
 #: tfrmmain.mnutoolstranslationmemory.caption
-#, fuzzy
 msgctxt "tfrmmain.mnutoolstranslationmemory.caption"
 msgid "Translation memory"
 msgstr "Преводна памет"
@@ -3363,10 +3314,9 @@ msgstr "Ленти с пособия"
 
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
-msgstr ""
+msgstr "Прозорци"
 
 #: tfrmmain.tedduration.hint
-#, fuzzy
 msgctxt "tfrmmain.tedduration.hint"
 msgid "Duration"
 msgstr "Продължителност"
@@ -3374,16 +3324,16 @@ msgstr "Продължителност"
 #: tfrmmain.tedfinal.hint
 msgctxt "tfrmmain.tedfinal.hint"
 msgid "Final time"
-msgstr ""
+msgstr "Крайно време"
 
 #: tfrmmain.tedinitial.hint
 msgctxt "tfrmmain.tedinitial.hint"
 msgid "Initial time"
-msgstr ""
+msgstr "Начално време"
 
 #: tfrmmain.tedpause.hint
 msgid "Pause"
-msgstr ""
+msgstr "Задържане"
 
 #: tfrmmodifyselection.btnapply.caption
 msgctxt "tfrmmodifyselection.btnapply.caption"
@@ -3446,7 +3396,7 @@ msgstr "Търсене:"
 #: tfrmmultiplereplace.lblreplace.caption
 msgctxt "tfrmmultiplereplace.lblreplace.caption"
 msgid "Replace with:"
-msgstr ""
+msgstr "Замяна с:"
 
 #: tfrmqualitycheck.btnclose.caption
 msgctxt "tfrmqualitycheck.btnclose.caption"
@@ -3467,7 +3417,6 @@ msgid "Close"
 msgstr "Затваряне"
 
 #: tfrmrestorebackup.btnrestore.caption
-#, fuzzy
 msgctxt "tfrmrestorebackup.btnrestore.caption"
 msgid "Restore"
 msgstr "Възстановяване"
@@ -3508,7 +3457,7 @@ msgstr "Прилагане"
 
 #: tfrmsettings.btnshortcutsave.caption
 msgid "Save as..."
-msgstr ""
+msgstr "Съхраняване като..."
 
 #: tfrmsettings.btnwhispercpp.caption
 msgctxt "tfrmsettings.btnwhispercpp.caption"
@@ -3619,7 +3568,7 @@ msgstr ""
 
 #: tfrmsettings.lblffmpeg.caption
 msgid "FFmpeg"
-msgstr ""
+msgstr "FFmpeg"
 
 #: tfrmsettings.lblframestep.caption
 msgid "Frame step"
@@ -3702,7 +3651,7 @@ msgstr ""
 
 #: tfrmsettings.lblshortcut.caption
 msgid "Shortcut"
-msgstr ""
+msgstr "Клавишно съчетание"
 
 #: tfrmsettings.lblshortcutcat.caption
 msgid "Category"
@@ -3714,7 +3663,7 @@ msgstr ""
 
 #: tfrmsettings.lblsubbackground.caption
 msgid "Background"
-msgstr ""
+msgstr "Подцветка"
 
 #: tfrmsettings.lblsubborder.caption
 msgid "Border"
@@ -3750,7 +3699,7 @@ msgstr ""
 
 #: tfrmsettings.lbltheme.caption
 msgid "Theme"
-msgstr ""
+msgstr "Разцветка"
 
 #: tfrmsettings.lbltimecodemode.caption
 msgid "Time code mode"
@@ -3772,7 +3721,6 @@ msgid "Video"
 msgstr "Видео"
 
 #: tfrmsettings.lbltoolbarwave.caption
-#, fuzzy
 msgctxt "tfrmsettings.lbltoolbarwave.caption"
 msgid "Waveform"
 msgstr "Вълна"
@@ -3806,7 +3754,7 @@ msgstr ""
 #: tfrmsettings.lblwpm.caption
 msgctxt "tfrmsettings.lblwpm.caption"
 msgid "Words per minute"
-msgstr ""
+msgstr "Думи в минута"
 
 #: tfrmsettings.lblytdlp.caption
 msgid "YT-DLP"
@@ -3831,10 +3779,9 @@ msgid "Shift times"
 msgstr ""
 
 #: tfrmshifttimes.cbooffset.text
-#, fuzzy
 msgctxt "tfrmshifttimes.cbooffset.text"
 msgid "+"
-msgstr "+"
+msgstr ""
 
 #: tfrmshifttimes.lbloffset.caption
 msgctxt "tfrmshifttimes.lbloffset.caption"
@@ -3842,7 +3789,6 @@ msgid "Offset"
 msgstr "Отместване"
 
 #: tfrmshifttimes.lblscope.caption
-#, fuzzy
 msgctxt "tfrmshifttimes.lblscope.caption"
 msgid "Scope:"
 msgstr "Обхват:"
@@ -3853,13 +3799,11 @@ msgid "All the subtitles"
 msgstr "Всички надписи"
 
 #: tfrmshifttimes.rbnfromtheselectedsubtitle.caption
-#, fuzzy
 msgctxt "tfrmshifttimes.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected subtitle"
 msgstr "От избрания надпис"
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
-#, fuzzy
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
 msgid "Only selected subtitles"
 msgstr "Само избраните надписи"
@@ -3875,7 +3819,6 @@ msgid "Close"
 msgstr "Затваряне"
 
 #: tfrmshotchanges.btndetect.caption
-#, fuzzy
 msgctxt "tfrmshotchanges.btndetect.caption"
 msgid "Detect"
 msgstr "Установяване"
@@ -3898,7 +3841,7 @@ msgstr ""
 #: tfrmshotchanges.cbooffset.text
 msgctxt "tfrmshotchanges.cbooffset.text"
 msgid "+"
-msgstr "+"
+msgstr ""
 
 #: tfrmshotchanges.lbldetectapp.caption
 msgid "App to detect"
@@ -3953,7 +3896,7 @@ msgstr "Пропускане на всички"
 
 #: tfrmspellcheck.caption
 msgid "Spell check"
-msgstr "Правописна проверка"
+msgstr "Проверка на правописа"
 
 #: tfrmspellcheck.lbldictionary.caption
 msgctxt "tfrmspellcheck.lbldictionary.caption"
@@ -3978,7 +3921,6 @@ msgid "Close"
 msgstr "Затваряне"
 
 #: tfrmtbx.caption
-#, fuzzy
 msgctxt "tfrmtbx.caption"
 msgid "Terminology"
 msgstr "Понятия"
@@ -4005,12 +3947,12 @@ msgstr "Бележки"
 #: tfrmtbxedit.lbloriginal.caption
 msgctxt "tfrmtbxedit.lbloriginal.caption"
 msgid "Original"
-msgstr "Изходен"
+msgstr "Изходно"
 
 #: tfrmtbxedit.lbltranslated.caption
 msgctxt "tfrmtbxedit.lbltranslated.caption"
 msgid "Translated"
-msgstr "преведен"
+msgstr "Преведено"
 
 #: tfrmtbxlist.btnclose.caption
 msgctxt "tfrmtbxlist.btnclose.caption"
@@ -4023,7 +3965,6 @@ msgid "Copy"
 msgstr "Запомняне"
 
 #: tfrmtbxlist.caption
-#, fuzzy
 msgctxt "tfrmtbxlist.caption"
 msgid "Terminology"
 msgstr "Понятия"
@@ -4054,15 +3995,11 @@ msgid "..."
 msgstr "..."
 
 #: tfrmtbxsettings.caption
-#, fuzzy
-#| msgid "Translation memory settings"
 msgctxt "tfrmtbxsettings.caption"
 msgid "Terminology settings"
-msgstr "Настройки на преводната памет"
+msgstr ""
 
 #: tfrmtbxsettings.lblfilename.caption
-#, fuzzy
-#| msgid "File name"
 msgctxt "tfrmtbxsettings.lblfilename.caption"
 msgid "Filename"
 msgstr "Файлово име"
@@ -4075,7 +4012,7 @@ msgstr "Изходен език"
 #: tfrmtbxsettings.lbltranslang.caption
 msgctxt "tfrmtbxsettings.lbltranslang.caption"
 msgid "Translation language"
-msgstr "Език на превода:"
+msgstr "Език на превода"
 
 #: tfrmtimeexpander.btnapply.caption
 msgctxt "tfrmtimeexpander.btnapply.caption"
@@ -4088,10 +4025,8 @@ msgid "Close"
 msgstr "Затваряне"
 
 #: tfrmtimeexpander.caption
-#, fuzzy
-#| msgid "Time expander"
 msgid "Time expander/reducer"
-msgstr "Времеувеличител"
+msgstr ""
 
 #: tfrmtimeexpander.chkduration.caption
 msgid "Only if duration is longer than"
@@ -4126,13 +4061,11 @@ msgid "All the subtitles"
 msgstr "Всички надписи"
 
 #: tfrmtimeexpander.rbnfromtheselectedsubtitle.caption
-#, fuzzy
 msgctxt "tfrmtimeexpander.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected subtitle"
 msgstr "От избрания надпис"
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
-#, fuzzy
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
 msgid "Only selected subtitles"
 msgstr "Само избраните надписи"
@@ -4285,10 +4218,8 @@ msgid "Extract..."
 msgstr "Извличане..."
 
 #: tfrmwaveextractor.caption
-#, fuzzy
-#| msgid "Wave extractor"
 msgid "Waveform extractor"
-msgstr "Извличане на звукова вълна"
+msgstr ""
 
 #: tfrmwaveextractor.lbltrack.caption
 msgid "Track:"
@@ -4352,42 +4283,34 @@ msgstr "Сваляне"
 #: tfrmwizard.btnnext.caption
 msgctxt "tfrmwizard.btnnext.caption"
 msgid "Next"
-msgstr "Напред"
+msgstr "Следващо"
 
 #: tfrmwizard.caption
-#, fuzzy
-#| msgid "Wizard"
 msgid "Getting started wizard"
-msgstr "Съветник"
+msgstr ""
 
 #: tfrmwizard.lblexperience.caption
-#, fuzzy
-#| msgid "In just a few steps you'll be setup and ready for the best experience."
-msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
-msgstr "Ще направите настройките само в няколко стъпки и ще сте готови за отлична работа."
+msgid ""
+"In just a few steps, you'll be setup and ready for the best subtitling "
+"experience."
+msgstr ""
 
 #: tfrmwizard.lblfasterwhisper.caption
 msgid "Faster-Whisper:"
 msgstr "Faster-Whisper:"
 
 #: tfrmwizard.lblfasterwhisper_hint.caption
-#, fuzzy
 msgctxt "tfrmwizard.lblfasterwhisper_hint.caption"
 msgid "Optional, used for speech recognition."
 msgstr "Незадължително, използва се за речево разпознаване."
 
 #: tfrmwizard.lblffmpeg.caption
-#, fuzzy
-#| msgid "ffmpeg:"
 msgid "FFmpeg:"
-msgstr "ffmpeg:"
+msgstr "FFmpeg:"
 
 #: tfrmwizard.lblffmpeg_hint.caption
-#, fuzzy
-#| msgid "Optional, used to extract audio and generate video"
-msgctxt "tfrmwizard.lblffmpeg_hint.caption"
 msgid "Optional, used to extract audio and generate video."
-msgstr "Незадължително, използва се за извличане на звук и създаване на видео"
+msgstr "Незадължително, използва се за извличане на звук и създаване на видео."
 
 #: tfrmwizard.lbllanguage.caption
 msgctxt "tfrmwizard.lbllanguage.caption"
@@ -4399,17 +4322,15 @@ msgid "libmpv: "
 msgstr "libmpv: "
 
 #: tfrmwizard.lbllibmpv_hint.caption
-#, fuzzy
-#| msgid "Essential, used for playing video"
-msgctxt "tfrmwizard.lbllibmpv_hint.caption"
 msgid "Essential, used for playing video."
-msgstr "Задължителен, използва се за възпроизвеждане на видео"
+msgstr "Задължително, използва се за възпроизвеждане на видео."
 
 #: tfrmwizard.lblrequiredfiles.caption
-#, fuzzy
-#| msgid "Required files"
-msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
-msgstr "Необходими файлове"
+msgid ""
+"For Tero Subtitler to function properly, the following libraries are "
+"necessary; if they are not found on your system, Tero Subtitler can download "
+"them for you."
+msgstr ""
 
 #: tfrmwizard.lblwelcome.caption
 msgid "Welcome to"
@@ -4429,9 +4350,193 @@ msgid "yt-dlp:"
 msgstr "yt-dlp:"
 
 #: tfrmwizard.lblytdlp_hint.caption
-#, fuzzy
-#| msgid "Optional, used for dowloading from youtube"
-msgctxt "tfrmwizard.lblytdlp_hint.caption"
 msgid "Optional, used for dowloading from YouTube."
 msgstr "Незадължително, ползва се за сваляне от Ютюб."
 
+#~ msgid "Common strings"
+#~ msgstr "Общи низове"
+
+#~ msgid "Continue Anyway"
+#~ msgstr "Продължаване въпреки това"
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtnapply"
+#~ msgid "Apply"
+#~ msgstr "Прилагане"
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtnchange"
+#~ msgid "Change"
+#~ msgstr "Промяна"
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtnchangeall"
+#~ msgid "Change all"
+#~ msgstr "Промяна на всички"
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtnexport"
+#~ msgid "Export..."
+#~ msgstr "Изнасяне..."
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtngo"
+#~ msgid "Go"
+#~ msgstr "Отиване"
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtnimport"
+#~ msgid "Import..."
+#~ msgstr "Внасяне..."
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtnno"
+#~ msgid "No"
+#~ msgstr "Не"
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtnopenfile"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtnselectall"
+#~ msgid "Select all"
+#~ msgstr "Избиране на всичко"
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtnskip"
+#~ msgid "Skip"
+#~ msgstr "Пропускане"
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtnskipall"
+#~ msgid "Skip all"
+#~ msgstr "Пропускане на всички"
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngbtnyes"
+#~ msgid "Yes"
+#~ msgstr "Да"
+
+#, fuzzy
+#~ msgctxt "proclocalize.lngrbnallthesubtitles"
+#~ msgid "All the subtitles"
+#~ msgstr "Всички надписи"
+
+#~ msgid "Donate"
+#~ msgstr "Дарение"
+
+#~ msgctxt "tfrmconventions.lblname.caption"
+#~ msgid "Name"
+#~ msgstr "Име"
+
+#~ msgctxt "tfrmconventions.lblnewsubtitlems.caption"
+#~ msgid "New subtitle (ms)"
+#~ msgstr "Нови надписи (ms)"
+
+#~ msgctxt "tfrmmain.etlb10.hint"
+#~ msgid "Align to right"
+#~ msgstr "Подравняване вдясно"
+
+#~ msgctxt "tfrmmain.etlb11.hint"
+#~ msgid "Align to none"
+#~ msgstr "Без подравняване"
+
+#~ msgctxt "tfrmmain.etlb2.hint"
+#~ msgid "Bold"
+#~ msgstr "Удебелен"
+
+#~ msgctxt "tfrmmain.etlb3.hint"
+#~ msgid "Italic"
+#~ msgstr "Наклонен"
+
+#~ msgctxt "tfrmmain.etlb4.hint"
+#~ msgid "Underline"
+#~ msgstr "Подчертан"
+
+#~ msgctxt "tfrmmain.etlb5.hint"
+#~ msgid "Strikeout"
+#~ msgstr "Зачертан"
+
+#~ msgctxt "tfrmmain.etlb6.hint"
+#~ msgid "Color..."
+#~ msgstr "Цвят..."
+
+#~ msgctxt "tfrmmain.etlb7.hint"
+#~ msgid "Clear"
+#~ msgstr "Изчистване"
+
+#~ msgctxt "tfrmmain.etlb8.hint"
+#~ msgid "Align to left"
+#~ msgstr "Подравняване вляво"
+
+#~ msgctxt "tfrmmain.etlb9.hint"
+#~ msgid "Align to center"
+#~ msgstr "Подравняване в средата"
+
+#~ msgctxt "tfrmmain.tlb0.hint"
+#~ msgid "New subtitle"
+#~ msgstr "Нови надписи"
+
+#~ msgctxt "tfrmmain.tlb12.hint"
+#~ msgid "Source mode"
+#~ msgstr "Изходен режим"
+
+#~ msgctxt "tfrmmain.tlb2.hint"
+#~ msgid "Save subtitle"
+#~ msgstr "Съхраняване на надписите"
+
+#~ msgctxt "tfrmmain.tlb3.hint"
+#~ msgid "Undo"
+#~ msgstr "Отмяна"
+
+#~ msgctxt "tfrmmain.tlb5.hint"
+#~ msgid "Cut"
+#~ msgstr "Изрязване"
+
+#~ msgctxt "tfrmmain.tlb6.hint"
+#~ msgid "Copy"
+#~ msgstr "Запомняне"
+
+#~ msgctxt "tfrmmain.tlb7.hint"
+#~ msgid "Paste"
+#~ msgstr "Поставяне"
+
+#~ msgctxt "tfrmmain.tlb8.hint"
+#~ msgid "Insert subtitle"
+#~ msgstr "Вмъкване на надпис"
+
+#~ msgctxt "tfrmmain.vtlb1.hint"
+#~ msgid "Stop"
+#~ msgstr "Спиране"
+
+#~ msgctxt "tfrmmain.vtlb11.hint"
+#~ msgid "End subtitle"
+#~ msgstr "Край на надписа"
+
+#~ msgctxt "tfrmmain.vtlb3.hint"
+#~ msgid "Playback rate"
+#~ msgstr "Скорост на възпроизвеждане"
+
+#~ msgctxt "tfrmmain.vtlb4.hint"
+#~ msgid "Rewind"
+#~ msgstr "Превъртане назад"
+
+#~ msgctxt "tfrmmain.vtlb7.hint"
+#~ msgid "Next frame"
+#~ msgstr "Следващ кадър"
+
+#~ msgctxt "tfrmmain.wtlb0.hint"
+#~ msgid "Play selection"
+#~ msgstr "Възпроизвеждане на избраното"
+
+#, fuzzy
+#~ msgctxt "tfrmmain.wtlb5.hint"
+#~ msgid "Zoom in"
+#~ msgstr "Увеличаване"
+
+#, fuzzy
+#~ msgctxt "tfrmmain.wtlb6.hint"
+#~ msgid "Zoom out"
+#~ msgstr "Смаляване"
