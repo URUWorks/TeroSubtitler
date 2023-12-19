@@ -128,7 +128,7 @@ begin
           FinalTime := InitialTime + 2000;
 
         if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
-          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
       end;
       Inc(i, c+1);
     end;
@@ -149,17 +149,17 @@ begin
 
   for i := FromItem to ToItem do
   begin
-    StringList.Add('-->> ' + AddChar('0', IntToStr(TimeToFrames(Subtitles.InitialTime[i], FPS)), 6), False);
+    StringList.Add('-->> ' + AddChar('0', IntToStr(TimeToFrames(Subtitles.InitialTime[i], FPS)), 6));
 
     TextSrc := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
     if StringCount(sLineBreak, TextSrc) = 0      then Text := TextSrc + sLineBreak
     else if StringCount(sLineBreak, TextSrc) = 1 then Text := TextSrc
     else if StringCount(sLineBreak, TextSrc) > 1 then Text := Copy(TextSrc, 0, Pos(sLineBreak, TextSrc) + 2) + ReplaceEnters(Copy(TextSrc, Pos(sLineBreak, TextSrc) + 2, Length(TextSrc)), ' ');
 
-    StringList.Add(Text, False);
-    StringList.Add('-->> ' + AddChar('0', IntToStr(TimeToFrames(Subtitles.FinalTime[i], FPS)), 6), False);
-    StringList.Add('', False);
-    StringList.Add('', False);
+    StringList.Add(Text);
+    StringList.Add('-->> ' + AddChar('0', IntToStr(TimeToFrames(Subtitles.FinalTime[i], FPS)), 6));
+    StringList.Add('');
+    StringList.Add('');
   end;
 
   try

@@ -121,12 +121,12 @@ var
 begin
   Result  := False;
 
-  StringList.Add('Subtitle File Mark:2C:\Untitled.avi', False);
+  StringList.Add('Subtitle File Mark:2C:\Untitled.avi');
 
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + '&' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz') + '#' + ReplaceEnters(Text, LineEnding, '<'), False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + '&' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz') + '#' + ReplaceEnters(Text, LineEnding, '<'));
   end;
 
   try

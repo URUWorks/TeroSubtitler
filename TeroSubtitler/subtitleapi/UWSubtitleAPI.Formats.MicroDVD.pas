@@ -165,7 +165,7 @@ begin
         Text := MicroDVDTagsToTS(Text);
 
         if (InitialTime >= 0) and (FinalTime > 0) then
-          Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
+          Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
       end;
     end;
   finally
@@ -192,7 +192,7 @@ begin
   begin
     DecimalSep       := DecimalSeparator;
     DecimalSeparator := '.';
-    StringList.Add(SysUtils.Format('{1}{1}%.3f', [FPS]), False);
+    StringList.Add(SysUtils.Format('{1}{1}%.3f', [FPS]));
     DecimalSeparator := DecimalSep;
   end;
 
@@ -206,7 +206,7 @@ begin
 
     Subtitles.Text[i] := TSTagsToMicroDVD(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
     StringList.Add('{' + IntToStr(TimeToFrames(Subtitles.InitialTime[i], FPS)) + '}{' + IntToStr(TimeToFrames(Subtitles.FinalTime[i], FPS)) + '}' +
-    XY + ReplaceEnters(Subtitles[i].Text), False);
+    XY + ReplaceEnters(Subtitles[i].Text));
   end;
 
   try

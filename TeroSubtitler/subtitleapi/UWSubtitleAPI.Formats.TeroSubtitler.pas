@@ -138,7 +138,7 @@ begin
                 Translation := ReplaceEnters(Node.ChildNodes.Item[i].TextContent, '|', sLineBreak);
             end;
 
-            i := Subtitles.Add(InitialTime, FinalTime, Text, Translation, NIL, False);
+            i := Subtitles.Add(InitialTime, FinalTime, Text, Translation, NIL);
 
             with Subtitles.ItemPointer[i]^ do
             begin

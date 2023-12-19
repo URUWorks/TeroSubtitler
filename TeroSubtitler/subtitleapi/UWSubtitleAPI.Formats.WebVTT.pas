@@ -423,7 +423,7 @@ begin
 
           // Final text
           Text := TagsToTS(HTMLTagsToTS(HTMLDecode(Text)));
-          x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
+          x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
           Subtitles.ItemPointer[x]^.Actor := Voice;
           Subtitles.ItemPointer[x]^.Align := TSubtitleHAlign(c);
           Subtitles.ItemPointer[x]^.VAlign := TSubtitleVAlign(v);
@@ -453,17 +453,17 @@ var
 begin
   Result := False;
 
-  StringList.Add('WEBVTT', False);
+  StringList.Add('WEBVTT');
 
   //ExtraTime := 0;
   with Subtitles.FormatProperties^.WebVTT do
     if UseXTIMESTAMP then
     begin
-      StringList.Add(SysUtils.Format('X-TIMESTAMP-MAP=MPEGTS:%d,LOCAL:%s', [MPEGTS, TimeToString(LOCAL, 'hh:mm:ss.zzz')]), False);
+      StringList.Add(SysUtils.Format('X-TIMESTAMP-MAP=MPEGTS:%d,LOCAL:%s', [MPEGTS, TimeToString(LOCAL, 'hh:mm:ss.zzz')]));
       //ExtraTime := LOCAL;
     end;
 
-  StringList.Add('', False);
+  StringList.Add('');
 
   for i := FromItem to ToItem do
   begin
@@ -491,15 +491,15 @@ begin
       end;
 
     if Subtitles.FormatProperties^.WebVTT.WriteCueIdentifiers then
-      StringList.Add((i+1).ToString, False);
+      StringList.Add((i+1).ToString);
 
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz') + Align, False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz') + ' --> ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz') + Align);
     Text := TSTagsToHTML(TSToTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])));
     if not Subtitles[i].Actor.IsEmpty then
       Text := '<v ' + Subtitles[i].Actor + '>' + Text + '</v>';
 
-    StringList.Add(Text, False);
-    StringList.Add('', False);
+    StringList.Add(Text);
+    StringList.Add('');
   end;
 
   SL := TStringList.Create;

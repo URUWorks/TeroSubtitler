@@ -192,7 +192,7 @@ begin
                 ExtraInfo^.JustificationCode := JustificationCode;
                 ExtraInfo^.CommentFlag       := CommentFlag;
 
-                Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo, False);
+                Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
               end;
             end;
           SetLength(TextBytes, 0);

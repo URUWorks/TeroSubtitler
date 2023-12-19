@@ -138,7 +138,7 @@ begin
         Dec(i);
 
         if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
-          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
       end;
       Inc(i);
     end;

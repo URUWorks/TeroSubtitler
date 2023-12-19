@@ -122,7 +122,7 @@ begin
           Dec(i);
 
           Text := HTMLTagsToTS(Text);
-          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
         end;
       end;
       Inc(i);
@@ -143,10 +143,10 @@ begin
 
   for i := FromItem to ToItem do
   begin
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'h:mm:ss.zzz') + ',' + TimeToString(Subtitles.FinalTime[i], 'h:mm:ss.zzz'), False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'h:mm:ss.zzz') + ',' + TimeToString(Subtitles.FinalTime[i], 'h:mm:ss.zzz'));
     Text := TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add(Text, False);
-    StringList.Add('', False);
+    StringList.Add(Text);
+    StringList.Add('');
   end;
 
   try

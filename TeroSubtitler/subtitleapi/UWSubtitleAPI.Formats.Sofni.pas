@@ -117,7 +117,7 @@ begin
 
         Text := HTMLTagsToTS(Text);
         if (InitialTime >= 0) and (FinalTime > 0) then
-          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
       end;
 
       Inc(i);
@@ -141,8 +141,8 @@ begin
   for i := FromItem to ToItem do
   begin
     Text := TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add(Text, False);
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.ff', FPS) + '\' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.ff', FPS), False);
+    StringList.Add(Text);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.ff', FPS) + '\' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.ff', FPS));
   end;
   StringList.Add('*END*');
   StringList.Add('...........\...........');

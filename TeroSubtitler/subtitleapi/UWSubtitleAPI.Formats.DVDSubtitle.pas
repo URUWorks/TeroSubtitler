@@ -137,31 +137,31 @@ begin
 
   with Subtitles.FormatProperties^.DVDSubtitle do
   begin
-    StringList.Add('{HEAD', False);
-    StringList.Add('DISCID=' + DiskId, False);
-    StringList.Add('DVDTITLE=' + DVDTitle, False);
-    StringList.Add('CODEPAGE=1250', False);
-    StringList.Add('FORMAT=ASCII', False);
-    StringList.Add('LANG=' + Language, False);
-    StringList.Add('TITLE=1', False);
-    StringList.Add('ORIGINAL=ORIGINAL', False);
-    StringList.Add('AUTHOR=' + Author, False);
-    StringList.Add('WEB=' + Web, False);
-    StringList.Add('INFO=' + Info, False);
-    StringList.Add('LICENSE=' + License, False);
-    StringList.Add('}', False);
+    StringList.Add('{HEAD');
+    StringList.Add('DISCID=' + DiskId);
+    StringList.Add('DVDTITLE=' + DVDTitle);
+    StringList.Add('CODEPAGE=1250');
+    StringList.Add('FORMAT=ASCII');
+    StringList.Add('LANG=' + Language);
+    StringList.Add('TITLE=1');
+    StringList.Add('ORIGINAL=ORIGINAL');
+    StringList.Add('AUTHOR=' + Author);
+    StringList.Add('WEB=' + Web);
+    StringList.Add('INFO=' + Info);
+    StringList.Add('LICENSE=' + License);
+    StringList.Add('}');
   end;
 
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
 
-    StringList.Add('{T ' + TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz'), False);
-    StringList.Add(Text, False);
-    StringList.Add('}', False);
-    StringList.Add('{T ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz'), False);
-    StringList.Add('', False);
-    StringList.Add('}', False);
+    StringList.Add('{T ' + TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz'));
+    StringList.Add(Text);
+    StringList.Add('}');
+    StringList.Add('{T ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz'));
+    StringList.Add('');
+    StringList.Add('}');
   end;
 
   try

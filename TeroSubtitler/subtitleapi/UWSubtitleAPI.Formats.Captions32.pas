@@ -111,7 +111,7 @@ begin
         if Txt <> '' then
           Text := Text + LineEnding + Txt;
 
-        Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+        Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
       end;
     end;
   finally
@@ -165,7 +165,7 @@ begin
         Text := AddCharR(' ', Text, 67);
     end;
 
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + ' , ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz') + ' , ' + Text, False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + ' , ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz') + ' , ' + Text);
   end;
 
   try

@@ -121,17 +121,17 @@ var
 begin
   Result  := False;
 
-  StringList.Add('#T100', False);
-  StringList.Add('', False);
-  StringList.Add('# Directive entries', False);
-  StringList.Add('#D', False);
-  for i := 1 to 29 do StringList.Add('#D'+IntToStr(i), False);
-  StringList.Add('', False);
+  StringList.Add('#T100');
+  StringList.Add('');
+  StringList.Add('# Directive entries');
+  StringList.Add('#D');
+  for i := 1 to 29 do StringList.Add('#D'+IntToStr(i));
+  StringList.Add('');
 
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'h:mm:ss.zz') + ' ' + TimeToString(Subtitles.FinalTime[i], 'h:mm:ss.zz') + ' {NTP} ' + ReplaceEnters(Text, LineEnding, '\n'), False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'h:mm:ss.zz') + ' ' + TimeToString(Subtitles.FinalTime[i], 'h:mm:ss.zz') + ' {NTP} ' + ReplaceEnters(Text, LineEnding, '\n'));
   end;
 
   try

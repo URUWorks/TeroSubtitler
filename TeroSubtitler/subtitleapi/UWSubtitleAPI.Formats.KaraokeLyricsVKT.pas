@@ -127,32 +127,32 @@ var
 begin
   Result  := False;
 
-  StringList.Add('# <HEAD>', False);
-  StringList.Add('# FRAME RATE=MP3', False);
-  StringList.Add('# CREATOR=Project author', False);
-  StringList.Add('# VIDEO SOURCE=C:\Untitled.avi', False);
+  StringList.Add('# <HEAD>');
+  StringList.Add('# FRAME RATE=MP3');
+  StringList.Add('# CREATOR=Project author');
+  StringList.Add('# VIDEO SOURCE=C:\Untitled.avi');
   // DATE
   DateSep         := SysUtils.FormatSettings.DateSeparator;
   DateFor         := SysUtils.FormatSettings.ShortDateFormat;
   SysUtils.FormatSettings.DateSeparator   := '-';
   SysUtils.FormatSettings.ShortDateFormat := 'yyyy/mm/dd';
-  StringList.Add('# DATE=' + DateToStr(Date), False);
+  StringList.Add('# DATE=' + DateToStr(Date));
   SysUtils.FormatSettings.DateSeparator   := DateSep;
   SysUtils.FormatSettings.ShortDateFormat := DateFor;
   //
-  StringList.Add('# </HEAD>', False);
-  StringList.Add('#', False);
+  StringList.Add('# </HEAD>');
+  StringList.Add('#');
 
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add('{' + IntToStr(Subtitles.InitialTime[i] div 10).PadLeft(5, '0') + ' ' + ReplaceEnters(Text, LineEnding, ' ') + '}', False);
+    StringList.Add('{' + IntToStr(Subtitles.InitialTime[i] div 10).PadLeft(5, '0') + ' ' + ReplaceEnters(Text, LineEnding, ' ') + '}');
     StringList.Add('{' + IntToStr(Subtitles.FinalTime[i] div 10).PadLeft(5, '0') + ' }');
   end;
 
-  StringList.Add('', False);
-  StringList.Add('#', False);
-  StringList.Add('# THE END.', False);
+  StringList.Add('');
+  StringList.Add('#');
+  StringList.Add('# THE END.');
 
   try
     StringList.SaveToFile(FileName, Encoding);

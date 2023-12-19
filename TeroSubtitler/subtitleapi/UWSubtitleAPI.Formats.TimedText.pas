@@ -170,7 +170,7 @@ begin
               Text := XMLExtractTextContent(Node.ChildNodes);
               Text := HTMLTagsToTS(ReplaceEnters(Text, '<br/>', LineEnding));
             end;
-            Subtitles.Add(Item, NIL, False);
+            Subtitles.Add(Item, NIL);
           end;
 
           Node := Node.NextSibling;

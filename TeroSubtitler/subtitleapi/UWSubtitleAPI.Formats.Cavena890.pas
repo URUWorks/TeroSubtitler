@@ -366,7 +366,7 @@ begin
           InitialTime := Trunc((1000.0 / FPS) * startFrame);
           FinalTime   := Trunc((1000.0 / FPS) * endFrame);
           Text        := (line1 + LineEnding + line2).Trim;
-          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
         end;
 
         lastNumber := Number;

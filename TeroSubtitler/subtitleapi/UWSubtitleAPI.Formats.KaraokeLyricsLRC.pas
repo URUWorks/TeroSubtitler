@@ -124,16 +124,16 @@ var
 begin
   Result  := False;
 
-  StringList.Add('[ti:Project title]', False);
-  StringList.Add('[ar:Project author]', False);
-  StringList.Add('[la:af]', False);
-  StringList.Add('Project title', False);
-  StringList.Add('', False);
+  StringList.Add('[ti:Project title]');
+  StringList.Add('[ar:Project author]');
+  StringList.Add('[la:af]');
+  StringList.Add('Project title');
+  StringList.Add('');
 
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add('[' + TimeToString(Subtitles.InitialTime[i], 'mm:ss.zz') + ']' + ReplaceEnters(Text, LineEnding, ' '), False);
+    StringList.Add('[' + TimeToString(Subtitles.InitialTime[i], 'mm:ss.zz') + ']' + ReplaceEnters(Text, LineEnding, ' '));
     StringList.Add('[' + TimeToString(Subtitles.FinalTime[i], 'mm:ss.zz') + ']');
   end;
 

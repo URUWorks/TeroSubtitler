@@ -204,7 +204,7 @@ begin
       [Count, #9,
        TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS), #9, //iff(Subtitles.TimeBase = stbMedia, TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz'), TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS)), #9,
        TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS), #9, //iff(Subtitles.TimeBase = stbMedia, TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz'), TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS)), #9,
-       TSTagsToHTML(TSVEncode(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])))]), False);
+       TSTagsToHTML(TSVEncode(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])))]));
     Inc(Count);
   end;
 

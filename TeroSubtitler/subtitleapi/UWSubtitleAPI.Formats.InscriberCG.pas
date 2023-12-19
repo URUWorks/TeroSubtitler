@@ -130,11 +130,11 @@ var
 begin
   Result  := False;
 
-  StringList.Add('@@9 Title', False);
-  StringList.Add('@@9 Created by URUWorks Tero Subtitler (uruworks.net)', False);
-  StringList.Add('@@9 STORY:', False);
-  StringList.Add('@@9 LANG: ENG', False);
-  for i := 1 to 4 do StringList.Add('@@9', False);
+  StringList.Add('@@9 Title');
+  StringList.Add('@@9 Created by URUWorks Tero Subtitler (uruworks.net)');
+  StringList.Add('@@9 STORY:');
+  StringList.Add('@@9 LANG: ENG');
+  for i := 1 to 4 do StringList.Add('@@9');
 
   for i := FromItem to ToItem do
   begin
@@ -144,7 +144,7 @@ begin
                 '<' + TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + '><'  +
                 TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz') + '>');
 
-    StringList.Add('', False);
+    StringList.Add('');
   end;
 
   try

@@ -142,30 +142,30 @@ var
 begin
   Result  := False;
 
-  StringList.Add('*NonDropFrame', False);
-  StringList.Add('*Width 32', False);
-  StringList.Add('', False);
+  StringList.Add('*NonDropFrame');
+  StringList.Add('*Width 32');
+  StringList.Add('');
   SubIndex := 1;
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
 
-    StringList.Add('** Caption Number '+ IntToStr(SubIndex), False);
-    StringList.Add('*PopOn', False);
-    StringList.Add('*T ' + TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz'), False);
-    StringList.Add('*BottomUp', False);
-    StringList.Add('*Lf01', False);
-    StringList.Add(Text, False);
-    StringList.Add('', False);
+    StringList.Add('** Caption Number '+ IntToStr(SubIndex));
+    StringList.Add('*PopOn');
+    StringList.Add('*T ' + TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz'));
+    StringList.Add('*BottomUp');
+    StringList.Add('*Lf01');
+    StringList.Add(Text);
+    StringList.Add('');
     Inc(SubIndex);
 
-    StringList.Add('** Caption Number '+ IntToStr(SubIndex), False);
-    StringList.Add('*PopOn', False);
-    StringList.Add('*T ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz'), False);
-    StringList.Add('*BottomUp', False);
-    StringList.Add('*Lf01', False);
-    StringList.Add('', False);
-    StringList.Add('', False);
+    StringList.Add('** Caption Number '+ IntToStr(SubIndex));
+    StringList.Add('*PopOn');
+    StringList.Add('*T ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz'));
+    StringList.Add('*BottomUp');
+    StringList.Add('*Lf01');
+    StringList.Add('');
+    StringList.Add('');
     Inc(SubIndex);
   end;
 

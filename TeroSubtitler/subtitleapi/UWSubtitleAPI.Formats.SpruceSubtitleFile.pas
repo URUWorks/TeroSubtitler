@@ -197,7 +197,7 @@ begin
         if UnderLined then Text := '{\u1}' + Text + '{\u0}';
 
         Text := STLTagsToTS(ReplaceEnters(Text, '|', LineEnding));
-        Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+        Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
       end;
     end;
   finally
@@ -216,39 +216,39 @@ begin
   StringList.Add('//Font select and font size');
   StringList.Add('$FontName       = Arial');
   StringList.Add('$FontSize       = 30');
-  StringList.Add('', False);
+  StringList.Add('');
   StringList.Add('//Character attributes (global)');
   StringList.Add('$Bold           = FALSE');
   StringList.Add('$UnderLined     = FALSE');
   StringList.Add('$Italic         = FALSE');
-  StringList.Add('', False);
+  StringList.Add('');
   StringList.Add('//Position Control');
   StringList.Add('$HorzAlign      = Center');
   StringList.Add('$VertAlign      = Bottom');
   StringList.Add('$XOffset        = 0');
   StringList.Add('$YOffset        = 0');
-  StringList.Add('', False);
+  StringList.Add('');
   StringList.Add('//Contrast Control');
   StringList.Add('$TextContrast           = 15');
   StringList.Add('$Outline1Contrast       = 8');
   StringList.Add('$Outline2Contrast       = 15');
   StringList.Add('$BackgroundContrast     = 0');
-  StringList.Add('', False);
+  StringList.Add('');
   StringList.Add('//Effects Control');
   StringList.Add('$ForceDisplay   = FALSE');
   StringList.Add('$FadeIn         = 0');
   StringList.Add('$FadeOut        = 0');
-  StringList.Add('', False);
+  StringList.Add('');
   StringList.Add('//Other Controls');
   StringList.Add('$TapeOffset          = FALSE');
   StringList.Add('//$SetFilePathToken  = <<:>>');
-  StringList.Add('', False);
+  StringList.Add('');
   StringList.Add('//Colors');
   StringList.Add('$ColorIndex1    = 0');
   StringList.Add('$ColorIndex2    = 1');
   StringList.Add('$ColorIndex3    = 2');
   StringList.Add('$ColorIndex4    = 3');
-  StringList.Add('', False);
+  StringList.Add('');
   StringList.Add('//Subtitles');
 
   for i := FromItem to ToItem do

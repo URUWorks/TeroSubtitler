@@ -129,7 +129,7 @@ begin
 
           Text := ReplaceString(Trim(Text), '\N', LineEnding);
 
-          a := Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+          a := Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
           Subtitles.ItemPointer[a]^.Actor := Actor;
         end;
       end;
@@ -149,19 +149,19 @@ var
 begin
   Result  := False;
 
-  StringList.Add('[Script Info]', False);
-  StringList.Add('ScriptType: v4.00+', False);
-//  StringList.Add('Collisions: ' + ASSAttributes.Collisions, False);
-//  StringList.Add('PlayResX: ' + IntToStr(ASSAttributes.PlayResX), False);
-//  StringList.Add('PlayResY: ' + IntToStr(ASSAttributes.PlayResY), False);
-//  StringList.Add('Timer: ' + ASSAttributes.Timer, False);
-  StringList.Add('', False);
-  StringList.Add('[V4+ Styles]', False);
-  StringList.Add(SSA_StyleFormat, False);
-  StringList.Add('Style: ' + Subtitles.FormatProperties^.SSA.DefaultStyleSettings, False);
-  StringList.Add('', False);
-  StringList.Add('[Events]', False);
-  StringList.Add(SSA_EventFormat, False);
+  StringList.Add('[Script Info]');
+  StringList.Add('ScriptType: v4.00+');
+//  StringList.Add('Collisions: ' + ASSAttributes.Collisions);
+//  StringList.Add('PlayResX: ' + IntToStr(ASSAttributes.PlayResX));
+//  StringList.Add('PlayResY: ' + IntToStr(ASSAttributes.PlayResY));
+//  StringList.Add('Timer: ' + ASSAttributes.Timer);
+  StringList.Add('');
+  StringList.Add('[V4+ Styles]');
+  StringList.Add(SSA_StyleFormat);
+  StringList.Add('Style: ' + Subtitles.FormatProperties^.SSA.DefaultStyleSettings);
+  StringList.Add('');
+  StringList.Add('[Events]');
+  StringList.Add(SSA_EventFormat);
 
   for i := FromItem to ToItem do
   begin
@@ -205,7 +205,7 @@ begin
     if not s.IsEmpty then
       Text := s + Text + '{\an0}';
 
-    StringList.Add('Dialogue: 0,' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.InitialTime[i], Subtitles.InitialTime[i] - 1), 'h:mm:ss.zz') + ',' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.FinalTime[i], Subtitles.FinalTime[i] - 1), 'h:mm:ss.zz') + ',Default,' + Subtitles[i].Actor + ',0000,0000,0000,,' + Text, False);
+    StringList.Add('Dialogue: 0,' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.InitialTime[i], Subtitles.InitialTime[i] - 1), 'h:mm:ss.zz') + ',' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.FinalTime[i], Subtitles.FinalTime[i] - 1), 'h:mm:ss.zz') + ',Default,' + Subtitles[i].Actor + ',0000,0000,0000,,' + Text);
   end;
 
   try

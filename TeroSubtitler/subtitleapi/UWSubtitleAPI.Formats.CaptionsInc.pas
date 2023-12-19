@@ -125,7 +125,7 @@ begin
         end;
 
         if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
-          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
       end;
     end;
   finally
@@ -142,15 +142,15 @@ var
 begin
   Result  := False;
 
-  StringList.Add('*Timecode type: PAL/EBU', False);
-  StringList.Add('', False);
+  StringList.Add('*Timecode type: PAL/EBU');
+  StringList.Add('');
 
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + ' ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz'), False);
-    StringList.Add('{0 [1 ' + ReplaceEnters(Text, LineEnding, ' '), False);
-    StringList.Add('', False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + ' ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz'));
+    StringList.Add('{0 [1 ' + ReplaceEnters(Text, LineEnding, ' '));
+    StringList.Add('');
   end;
 
   try

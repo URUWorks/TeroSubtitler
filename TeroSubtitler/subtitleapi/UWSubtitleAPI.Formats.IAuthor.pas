@@ -181,36 +181,36 @@ begin
     if Length(Copy(tmpNum,Pos('.',tmpNum)+1,Length(tmpNum))) < 2 then
       tmpNum := tmpNum + '0';
 
-    StringList.Add('BMPFILE: ' + ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), LineEnding, ' '), False);
-    StringList.Add('', False);
-    StringList.Add('STARTTIME: ' + tmpNum, False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Primary 0, 16, 128, 128',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Primary 1, 234, 128, 128',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Primary 2, 16, 128, 128',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Primary 3, 125, 128, 128',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Highlight 0, 16, 128, 128',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Highlight 1, 209, 146, 17',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Highlight 2, 81, 239, 91',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Highlight 3, 144, 35, 54',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s region 207, 170 to 432, 190',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s SETBLEND Primary 0, 15, 15, 15',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s SETBLEND Hightlight 0, 15, 15, 15',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s FIELDINDEX 0, 1',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add(SysUtils.Format('TIME: %s ENABLE_OGT',[tmpNum]), False);
-    StringList.Add('', False);
+    StringList.Add('BMPFILE: ' + ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), LineEnding, ' '));
+    StringList.Add('');
+    StringList.Add('STARTTIME: ' + tmpNum);
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Primary 0, 16, 128, 128',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Primary 1, 234, 128, 128',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Primary 2, 16, 128, 128',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Primary 3, 125, 128, 128',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Highlight 0, 16, 128, 128',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Highlight 1, 209, 146, 17',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Highlight 2, 81, 239, 91',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s SETCOLOR Highlight 3, 144, 35, 54',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s region 207, 170 to 432, 190',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s SETBLEND Primary 0, 15, 15, 15',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s SETBLEND Hightlight 0, 15, 15, 15',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s FIELDINDEX 0, 1',[tmpNum]));
+    StringList.Add('');
+    StringList.Add(SysUtils.Format('TIME: %s ENABLE_OGT',[tmpNum]));
+    StringList.Add('');
 
     sTime := Subtitles.FinalTime[i] / 1000;
     sTime := sTime - (256*(c-1));
@@ -222,10 +222,10 @@ begin
     if Length(Copy(tmpNum,Pos('.',tmpNum)+1,Length(tmpNum))) < 2 then
       tmpNum := tmpNum + '0';
 
-    StringList.Add(SysUtils.Format('TIME: %s DISABLE_OGT',[tmpNum]), False);
-    StringList.Add('', False);
-    StringList.Add('************ Page #' + IntToStr(i+1) + ' Finished ***************', False);
-    StringList.Add('', False);
+    StringList.Add(SysUtils.Format('TIME: %s DISABLE_OGT',[tmpNum]));
+    StringList.Add('');
+    StringList.Add('************ Page #' + IntToStr(i+1) + ' Finished ***************');
+    StringList.Add('');
   end;
 
   try

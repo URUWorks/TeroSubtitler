@@ -134,7 +134,7 @@ begin
         Dec(i);
 
         if (InitialTime >= 0) and (FinalTime > 0) then
-          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
       end;
       Inc(i);
     end;
@@ -152,7 +152,7 @@ begin
   Result  := False;
 
   StringList.Add('@ This file was written with Tero Subtitler');
-  StringList.Add('', False);
+  StringList.Add('');
   StringList.Add('<begin subtitles>');
 
   for i := FromItem to ToItem do
@@ -161,7 +161,7 @@ begin
       MSToHHMMSSFFMax(Subtitles.FinalTime[i], FPS));
 
     StringList.Add(RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])));
-    StringList.Add('', False);
+    StringList.Add('');
   end;
 
   StringList.Add('<end subtitles>');

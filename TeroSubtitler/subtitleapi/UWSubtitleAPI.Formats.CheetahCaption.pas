@@ -226,7 +226,7 @@ begin
           else
             FinalTime := InitialTime + CalculateOptimalDisplayMS(Text);
 
-          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL, False);
+          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
         end;
         if Len = 0 then Inc(Len);
         inc(i, Len);

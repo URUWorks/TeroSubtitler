@@ -159,8 +159,8 @@ begin
 //                   AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].FinalTime, FPS)), 2);
 
     StringList.Add(InitialTime + '  ' + FinalTime);
-    StringList.Add(Text, False);
-    StringList.Add('', False);
+    StringList.Add(Text);
+    StringList.Add('');
   end;
 
   try

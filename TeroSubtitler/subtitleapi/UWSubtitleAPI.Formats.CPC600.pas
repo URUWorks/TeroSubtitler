@@ -126,11 +126,11 @@ var
 begin
   Result  := False;
 
-  StringList.Add('~CPCC6.38~;UpperLower;PopOn;01;', False);
+  StringList.Add('~CPCC6.38~;UpperLower;PopOn;01;');
   for i := FromItem to ToItem do
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + '_0NEN_' + ReplaceString(Text, LineEnding, '\'), False);
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + '_0NEN_' + ReplaceString(Text, LineEnding, '\'));
     StringList.Add(TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz') + '_0NEN_');
   end;
 

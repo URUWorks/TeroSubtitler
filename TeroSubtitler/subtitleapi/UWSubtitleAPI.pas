@@ -54,8 +54,8 @@ type
     procedure LoadFromFile(const FileName: String; Encoding: TEncoding);
     procedure SaveToFile(const FileName: String; Encoding: TEncoding);
     procedure SaveToStream(Stream: TStream; Encoding: TEncoding);
-    function Add(const S: String; const Trim: Boolean = True): Integer;
-    procedure Insert(const Index: Integer; const S: String; const Trim: Boolean = True);
+    function Add(const S: String; const SkipEmptyLine: Boolean = False): Integer;
+    procedure Insert(const Index: Integer; const S: String; const SkipEmptyLine: Boolean = False);
     procedure Move(const CurIndex, NewIndex: Integer);
     procedure Delete(const Index: Integer);
     procedure Clear;
@@ -442,19 +442,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWStringList.Add(const S: String; const Trim: Boolean = True): Integer;
+function TUWStringList.Add(const S: String; const SkipEmptyLine: Boolean = False): Integer;
 begin
   Result := FCount;
-  Insert(Result, S, Trim);
+  Insert(Result, S, SkipEmptyLine);
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWStringList.Insert(const Index: Integer; const S: String; const Trim: Boolean = True);
+procedure TUWStringList.Insert(const Index: Integer; const S: String; const SkipEmptyLine: Boolean = False);
 var
   FLine: String;
 begin
-  if Trim then
+  if SkipEmptyLine then
   begin
     FLine := SysUtils.Trim(S);
     if FLine = '' then Exit;
