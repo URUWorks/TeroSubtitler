@@ -272,9 +272,9 @@ type
     FProfiles: TProfiles;
     FShortCutListIndex: array of Byte;
     FShortCutListCategory: TStrings;
+    FLngList: TStrings;
     {$IFDEF WINDOWS}
     FUpdateFileTypes: Boolean;
-    FLngList: TStrings;
     procedure PrepareToolbarAndImagelistIcos;
     procedure UpdateFileTypeAssociations;
     procedure FileTypeIconClick(Sender: TObject);
