@@ -1,4 +1,5 @@
 1.0.1.4 (x.x.202x)
+- Fixed: Wrong decimal separators #215
 - Fixed: Time expander/reducer doesn't work #208
 - Fixed: Unbreak lines wrong when new line starts with a dash #216 (thx CM630)
 - Fixed: Skip lines containing only numbers and/or zero times [SubtitleAPI/SubRip]
