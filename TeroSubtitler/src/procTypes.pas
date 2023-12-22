@@ -36,9 +36,14 @@ const
   UWDonateURL       = 'https://www.paypal.me/URUWorks';
   RootCfg           = 'tero';
 
-  DefTimeFormat     = 'hh:mm:ss.zzz';
+var
+
+  DefTimeFormat: String     = 'hh:mm:ss.zzz';
+  DefDurationFormat: String = 'mm:ss.zzz';
+
+const
+
   DefFramesFormat   = 'hh:mm:ss:ff';
-  DefDurationFormat = 'mm:ss.zzz';
   DefFPS            = 23.976;
   DefFPSList        : array[0..15] of Single = (8, 10, 12, 15, 16, 20, 23.976, 24, 25, 29.97, 30, 48, 50, 59.94, 60, 75);
 
@@ -341,7 +346,6 @@ type
     GUILanguage            : String;
     HunspellLanguage       : String;
     ShortCutPreset         : String;
-    FormatSettings         : TFormatSettings;
   end;
 
 var

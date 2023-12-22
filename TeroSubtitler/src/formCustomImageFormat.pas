@@ -257,7 +257,7 @@ begin
     LoadFromFile(CustomFormatFolder + cboScript.Items[cboScript.ItemIndex] + '.cfi');
     if Success then
     begin
-      FS := AppOptions.FormatSettings;
+      FS := FormatSettings;
       FS.DecimalSeparator := DecSeparator;
       cboFPS.Text := SingleToStr(FPS, FS);
       spnWidth.Value := Width;

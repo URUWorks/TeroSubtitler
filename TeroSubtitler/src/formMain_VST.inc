@@ -190,7 +190,7 @@ var
     if cps > AppOptions.Conventions.MaxCPS then
       TargetCanvas.Font.Color := clRed;
 
-    TargetCanvas.TextRect(R, R.Left, R.Top, Format('%.2f', [cps], AppOptions.FormatSettings), TS);
+    TargetCanvas.TextRect(R, R.Left, R.Top, Format('%.2f', [cps], FormatSettings), TS);
     TargetCanvas.Font.Color := c;
   end;
 
@@ -203,7 +203,7 @@ var
     else
       wpm := Subtitles.TranslationWPM[Node^.Index];
 
-    TargetCanvas.TextRect(R, R.Left, R.Top, Format('%.2f', [wpm], AppOptions.FormatSettings), TS);
+    TargetCanvas.TextRect(R, R.Left, R.Top, Format('%.2f', [wpm], FormatSettings), TS);
   end;
 
 begin
@@ -438,7 +438,7 @@ var
     else
       cps := Subtitles.TranslationCPS[Node^.Index, AppOptions.Conventions.CPSLineLenStrategy];
 
-    TargetCanvas.TextRect(rr, rr.Left, rr.Top, Format('%.2f', [cps], AppOptions.FormatSettings), TL);
+    TargetCanvas.TextRect(rr, rr.Left, rr.Top, Format('%.2f', [cps], FormatSettings), TL);
   end;
 
   procedure DrawWPM(const Original: Boolean);
@@ -450,7 +450,7 @@ var
     else
       wpm := Subtitles.TranslationWPM[Node^.Index];
 
-    TargetCanvas.TextRect(rr, rr.Left, rr.Top, Format('%.2f', [wpm], AppOptions.FormatSettings), TL);
+    TargetCanvas.TextRect(rr, rr.Left, rr.Top, Format('%.2f', [wpm], FormatSettings), TL);
   end;
 
 begin

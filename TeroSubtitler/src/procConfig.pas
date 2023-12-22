@@ -126,6 +126,10 @@ procedure DefaultValues;
 begin
   LastTickCount := 0;
 
+  DefTimeFormat     := Format('hh:mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator]);
+  DefDurationFormat := Format('mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator]);
+
+
   FillByte(Tools, SizeOf(TTools), 0);
   with Tools do
   begin
@@ -271,35 +275,31 @@ begin
     ShiftTimeMS            := 500;
     AutoBackupSeconds      := 300;
 
-    AutoLengthChar       := 60;
-    AutoLengthWord       := 50;
-    AutoLengthLine       := 50;
-    ExpandMs             := 1500;
-    ExpandChar           := 40;
-    ExpandLen            := 1000;
+    AutoLengthChar         := 60;
+    AutoLengthWord         := 50;
+    AutoLengthLine         := 50;
+    ExpandMs               := 1500;
+    ExpandChar             := 40;
+    ExpandLen              := 1000;
 
-    ShowWelcomeAtStartup  := True;
-    UseOwnFileDialog      := False;
-    AutoCheckErrors       := True;
-    AskForDeleteLines     := True;
-    AskForInputFPS        := False;
-    CheckErrorsBeforeSave := True;
-    TextToFind            := '';
-    WebSearchURL          := URL_WordReference;
-    GUILanguage           := GetOSLanguage;
-    HunspellLanguage      := 'en_US';
-    ShortCutPreset        := 'Tero.key';
-    // Our FormatSettings
-    FormatSettings                   := DefaultFormatSettings;
-    FormatSettings.DecimalSeparator  := '.';
-    FormatSettings.ThousandSeparator := FormatSettings.DecimalSeparator;
+    ShowWelcomeAtStartup   := True;
+    UseOwnFileDialog       := False;
+    AutoCheckErrors        := True;
+    AskForDeleteLines      := True;
+    AskForInputFPS         := False;
+    CheckErrorsBeforeSave  := True;
+    TextToFind             := '';
+    WebSearchURL           := URL_WordReference;
+    GUILanguage            := GetOSLanguage;
+    HunspellLanguage       := 'en_US';
+    ShortCutPreset         := 'Tero.key';
   end;
 
   with frmMain do
   begin
-    VST.Font.Size            := GetDefaultFontSize(VST.Font);
-    mmoText.Font.Size        := GetDefaultFontSize(mmoText.Font);
-    mmoTranslation.Font.Size := mmoText.Font.Size;
+    VST.Font.Size                  := GetDefaultFontSize(VST.Font);
+    mmoText.Font.Size              := GetDefaultFontSize(mmoText.Font);
+    mmoTranslation.Font.Size       := mmoText.Font.Size;
     actShowColumnNumber.Checked    := True;
     actShowColumnTimes.Checked     := True;
     actShowColumnDuration.Checked  := True;
@@ -414,7 +414,7 @@ begin
         WorkMode := TWorkMode(GetValue('WorkMode', Integer(WorkMode)));
         TranslatorMode := GetValue('TranslatorMode', TranslatorMode);
         SetTranslatorMode(TranslatorMode);
-        FPS.InputFPS := StrToSingle(GetValue('DefFPS', SingleToStr(FPS.InputFPS, FormatSettings)), 25, FormatSettings);
+        FPS.InputFPS := StrToSingle(ReplaceString(GetValue('DefFPS', SingleToStr(FPS.InputFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
         DefEncoding  := GetValue('DefEncoding', DefEncoding);
         DefFormat    := TUWSubtitleFormats(GetValue('DefFormat', Integer(DefFormat)));
         SetVideoPreview(GetValue('VideoPreview', False));
@@ -755,7 +755,7 @@ begin
         SetValue('ViewMode', Integer(ViewMode));
         SetValue('WorkMode', Integer(WorkMode));
         SetValue('TranslatorMode', TranslatorMode);
-        SetValue('DefFPS', SingleToStr(FPS.InputFPS, FormatSettings));
+        SetValue('DefFPS', SingleToStr(FPS.InputFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
         SetValue('DefEncoding', DefEncoding);
         SetValue('DefFormat', Integer(DefFormat));
         SetValue('VideoPreview', actVideoPreview.Checked);

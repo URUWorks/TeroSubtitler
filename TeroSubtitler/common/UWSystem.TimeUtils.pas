@@ -271,7 +271,7 @@ end;
 function TrimTimeString(Text: String): String;
 begin
   while (Length(Text) > 1) and (Text[1] in [Char('0'), Char(':')]) do
-    if (Text.CountChar('.') = 1) and (Text[3] <> Char('.')) or (Text.CountChar(':') > 1) then
+    if (Text.CountChar(FormatSettings.DecimalSeparator) = 1) and (Text[3] <> Char(FormatSettings.DecimalSeparator)) or (Text.CountChar(':') > 1) then
       Delete(Text, 1, 1)
     else
       Break;

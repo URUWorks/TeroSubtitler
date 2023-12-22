@@ -583,7 +583,7 @@ begin
   if Workspace.WorkMode <> TWorkMode(cboTimeCodeMode.ItemIndex) then
     SetWorkMode(TWorkMode(cboTimeCodeMode.ItemIndex));
 
-  Workspace.FPS.InputFPS := StrToFloatDef(cboDefaultFrameRate.Text, Workspace.FPS.OutputFPS, AppOptions.FormatSettings);
+  Workspace.FPS.InputFPS := StrToFloatDef(cboDefaultFrameRate.Text, Workspace.FPS.OutputFPS, FormatSettings);
   Workspace.DefEncoding  := cboDefaultFileEncoding.ItemIndex;
   Workspace.DefFormat    := TUWSubtitleFormats(cboDefaultFileFormat.ItemIndex+1);
   if SubtitleInfo.Text.FileName.IsEmpty then

@@ -264,7 +264,7 @@ begin
     begin
       if FileName.ToLower.EndsWith('.edl') or FileName.ToLower.EndsWith('.xml') then
       begin
-        edl := TEDL.Create('', '', GetFPS, AppOptions.FormatSettings);
+        edl := TEDL.Create('', '', GetFPS, FormatSettings);
         try
           if edl.GetXMLTrackList(FileName, ATracks) and (ATracks.Count > 1) then
             edl.ID := formCustomSelectDlg.ExecuteDialog(lngMultipleTracksDetected, lngSelectTrackToUse, ATracks);
@@ -326,7 +326,7 @@ begin
       begin
         if FileName.ToLower.EndsWith('.edl') or FileName.ToLower.EndsWith('.xml') then
         begin
-          edl := TEDL.Create(FileName, frmMain.MPV.FileName, GetFPS, AppOptions.FormatSettings);
+          edl := TEDL.Create(FileName, frmMain.MPV.FileName, GetFPS, FormatSettings);
           try
             x := 0;
             for i := 0 to mmoTimes.Lines.Count-1 do
@@ -445,7 +445,7 @@ begin
     begin
       AParamArray := FFMPEG_SCParams.Split(' ');
       for i := 0 to High(AParamArray) do
-        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%value'], [frmMain.MPV.FileName, FloatToStr(spnSensitivity.Value, AppOptions.FormatSettings)], []);
+        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%value'], [frmMain.MPV.FileName, FloatToStr(spnSensitivity.Value, FormatSettings)], []);
 
       if not FileExists(GetExtractAppFile) then
       begin
@@ -464,7 +464,7 @@ begin
             x := Pos(sc_timeid, sl[i]);
             if x > 0 then
             begin
-              sc := Round(StrToSingle(Copy(sl[i], x+sc_timeid.Length, Pos(' ', sl[i], x+1)-x-sc_timeid.Length).Replace(',', '.'), 0, AppOptions.FormatSettings)*1000);
+              sc := Round(StrToSingle(Copy(sl[i], x+sc_timeid.Length, Pos(' ', sl[i], x+1)-x-sc_timeid.Length).Replace(',', '.'), 0, FormatSettings)*1000);
               if sc > 0 then
                 mmoTimes.Lines.Add(IntToStr(sc));
             end;
@@ -480,7 +480,7 @@ begin
       outfile := ChangeFileExt(GetTempFileName, '.csv');
       AParamArray := SCENEDETECT_SCParams.Split(' ');
       for i := 0 to High(AParamArray) do
-        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%value'], [frmMain.MPV.FileName, outfile, FloatToStr(spnSensitivity.Value, AppOptions.FormatSettings)], []);
+        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%value'], [frmMain.MPV.FileName, outfile, FloatToStr(spnSensitivity.Value)], []);
 
       if not FileExists(GetExtractAppFile(False)) then
       begin

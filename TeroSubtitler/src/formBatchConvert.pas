@@ -123,8 +123,8 @@ begin
   cboToFPS.Items.Assign(cboFromFPS.Items);
 
   cboFormat.ItemIndex := Integer(sfSubRip)-1;
-  cboFromFPS.ItemIndex  := cboFromFPS.Items.IndexOf(SingleToStr(GetInputFPS, AppOptions.FormatSettings));
-  cboToFPS.ItemIndex    := cboToFPS.Items.IndexOf(SingleToStr(GetFPS, AppOptions.FormatSettings));
+  cboFromFPS.ItemIndex  := cboFromFPS.Items.IndexOf(SingleToStr(GetInputFPS, FormatSettings));
+  cboToFPS.ItemIndex    := cboToFPS.Items.IndexOf(SingleToStr(GetFPS, FormatSettings));
   cboEncoding.ItemIndex := Workspace.DefEncoding;
 
   VSTAddColumn(VST, lngbcFileName, 150);

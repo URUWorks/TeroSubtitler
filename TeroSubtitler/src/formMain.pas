@@ -1018,6 +1018,9 @@ begin
   mnuMemoFormat.Assign(mnuEditFormat);
   mnuVSTInsertSymbol.Assign(mnuEditInsertSymbol);
   mnuMemoInsertSymbol.Assign(mnuEditInsertSymbol);
+  // Media labels
+  lblMediaTime.Caption := '';
+  lblMediaLength.Caption := '';
   // Tag controls
   tedInitial.Tag     := TAG_CONTROL_INITIALTIME;
   tedFinal.Tag       := TAG_CONTROL_FINALTIME;
@@ -1278,9 +1281,9 @@ begin
   if Key = ',' then
     Key := '.';
 
-  if (Key = Chr(VK_RETURN)) and IsFloat(cboFPS.Text, AppOptions.FormatSettings) then
+  if (Key = Chr(VK_RETURN)) and IsFloat(cboFPS.Text, FormatSettings) then
   begin
-    AddFPSToCombo(SysUtils.StrToFloat(cboFPS.Text, AppOptions.FormatSettings), cboFPS);
+    AddFPSToCombo(SysUtils.StrToFloat(cboFPS.Text, FormatSettings), cboFPS);
     cboFPSSelect(Sender);
   end
   else if not CharInSet(Key, ['0'..'9', '.', Chr(VK_BACK)]) or

@@ -96,7 +96,7 @@ function CFReplaceBodyTags(const S, TimeFormat, FPS: String; const Item: TUWSubt
   function GetTime(const Time: Cardinal): String;
   begin
     if InFrames then
-      Result := IntToStr(TimeToFrames(Time, StrToSingle(FPS, Workspace.FPS.InputFPS, AppOptions.FormatSettings)))
+      Result := IntToStr(TimeToFrames(Time, StrToSingle(FPS, Workspace.FPS.InputFPS, FormatSettings)))
     else
       Result := iff(TimeFormat <> '', TimeToString(Time, TimeFormat), Time.ToString);
   end;

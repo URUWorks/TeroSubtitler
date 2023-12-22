@@ -138,7 +138,7 @@ var
 begin
   if FPS > 0 then
   begin
-    FPSStr := SingleToStr(FPS, AppOptions.FormatSettings);
+    FPSStr := SingleToStr(FPS, FormatSettings);
     Index := Combo.Items.IndexOf(FPSStr);
     if (Index = -1) and (FPSStr <> '') then
       Combo.ItemIndex := Combo.Items.Add(FPSStr);

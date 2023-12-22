@@ -156,7 +156,7 @@ begin
         NewLineChar  := edtNewLineChar.Text;
         TimeFormat   := edtTimeFormat.Text;
         DecSeparator := iff(edtSeparatorChar.Text <> '', edtSeparatorChar.Text[1], ',');
-        FPS          := StrToSingle(cboFPS.Text, Workspace.FPS.InputFPS, AppOptions.FormatSettings);
+        FPS          := StrToSingle(cboFPS.Text, Workspace.FPS.InputFPS, FormatSettings);
         Time         := cboTimeCode.ItemIndex = 0;
         ReadFormattingFromStrings(mmoSource.Lines);
 
@@ -200,7 +200,7 @@ begin
     LoadFromFile(CustomFormatFolder + cboScript.Items[cboScript.ItemIndex] + '.cft');
     if Success then
     begin
-      FS := AppOptions.FormatSettings;
+      FS := FormatSettings;
       FS.DecimalSeparator := DecSeparator;
 
       edtTitle.Text           := Name;

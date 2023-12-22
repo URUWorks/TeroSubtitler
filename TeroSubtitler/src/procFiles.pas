@@ -274,7 +274,7 @@ begin
     frmMain.cboFormat.ItemIndex := Integer(Subtitles.Format)-1;
     if (Subtitles.FrameRate > 0) then
     begin
-      frmMain.cboInputFPS.ItemIndex := frmMain.cboInputFPS.Items.IndexOf(SingleToStr(Subtitles.FrameRate, AppOptions.FormatSettings));
+      frmMain.cboInputFPS.ItemIndex := frmMain.cboInputFPS.Items.IndexOf(SingleToStr(Subtitles.FrameRate, FormatSettings));
       _FPS := Subtitles.FrameRate;
     end;
     frmMain.cboInputFPSSelect(NIL);

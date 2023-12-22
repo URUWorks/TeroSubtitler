@@ -564,9 +564,9 @@ end;
 procedure TUWTimeEdit.UpdateValue(const FireChangeEvent: Boolean = True);
 begin
   if FTimeMode = TUWTimeEditMode.temFrames then
-    Text := TimeToString(FValue, 'hh:mm:ss:ff', FFPS) //Text := MSToHHMMSSFFTime(FValue, FFPS)
+    Text := TimeToString(FValue, 'hh:mm:ss:ff', FFPS)
   else
-    Text := TimeToString(FValue, 'hh:mm:ss.zzz');
+    Text := TimeToString(FValue, Format('hh:mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator])); //Text := TimeToString(FValue, 'hh:mm:ss.zzz');
 
   if FireChangeEvent and Assigned(FChangeEvent) then FChangeEvent(Self, FValue);
 end;
