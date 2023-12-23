@@ -300,6 +300,9 @@ resourcestring
   lngTranslated = 'Translated';
   lngPercent = 'Percent';
 
+  //WizardStrings
+  lngwizLanguage = 'Language';
+
   //TipStrings
   lngtTip1 = 'Tip: Use <%s/%s> to go to previous/next subtitle';
   lngtTip2 = 'Tip: Use <%s> for a web word reference';
@@ -364,14 +367,15 @@ end;
 
 function GetGUILangIndex(const aLngList: TStrings; LangId: String): Integer;
 var
+  langs: TStringArray;
   i: Integer;
 begin
   Result := -1;
   for i := 0 to aLngList.Count-1 do
   begin
-    if Length(aLngList.Strings[i].Split([';'])) > 0 then
-      if LangId = aLngList.Strings[i].Split([';'])[0] then
-        Exit(i);
+    langs := aLngList.Strings[i].Split([';']);
+    if (Length(langs) > 0) and (LangId = langs[0]) then
+      Exit(i);
   end;
 end;
 

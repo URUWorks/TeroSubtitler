@@ -58,6 +58,7 @@ function SettingsFileName: String;
 function CurrentWorkFileName: String;
 function LanguageFolder: String;
 function LanguageFileName(Default: Boolean = False): String;
+function LanguageIDFromFileName(const AFileName: String): String;
 function ShortCutFolder: String;
 function ShortCutFileName: String;
 function OCRFolder: String;
@@ -112,7 +113,7 @@ uses
   RegExpr, formMain, XMLConf, UWSystem.Encoding, UWSystem.SysUtils, Dialogs,
   procDialogs, UWSubtitleAPI.Formats, MPVPlayer, procWorkspace, procColorTheme,
   LCLProc, UWSystem.Globalization, UWSystem.TimeUtils, libMPV.Client,
-  UWSpellcheck.Hunspell, procConventions, UWSystem.InetUtils,
+  UWSpellcheck.Hunspell, procConventions, UWSystem.InetUtils, lazfileutils,
   fileinfo, winpeimagereader, elfreader, machoreader,
   LCLIntf, UWSystem.StrUtils;
 
@@ -1200,12 +1201,16 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function DefaultDialect(Language: String): String;
+function DefaultDialect(Language: String; const ReturnFullFileName: Boolean = True): String;
 begin
-  Result := 'en_US';
-  if Language.StartsWith('es_') then Exit('es_UY');
   //English (USA) is default
+  Result := 'en_US';
+  if Language.StartsWith('es_') then Result := 'es_UY';
   //Other dialects might be added here
+
+  if ReturnFullFileName then
+    //Result := ConcatPaths([LanguageFolder, AppNameD, Result, '.po']);
+    Result := LanguageFolder + AppNameD + Result + '.po';
 end;
 
 // -----------------------------------------------------------------------------
@@ -1213,15 +1218,30 @@ end;
 function LanguageFileName(Default: Boolean = False): String;
 var
   LanguageFile: String;
+  LangID: String;
 begin
   Result := ''; //If no language is present, no localization will be loaded
-  if Default then
-    LanguageFile := LanguageFolder + AppNameD + GetOSLanguage + '.po'
-  else
-    LanguageFile := LanguageFolder + AppNameD + AppOptions.GUILanguage + '.po';
 
+  if Default then
+    LangID := GetOSLanguage(False)
+  else
+    LangID := AppOptions.GUILanguage;
+
+  LanguageFile := LanguageFolder + AppNameD + LangID + '.po';
   if FileExists(LanguageFile) then Exit(LanguageFile);
-  if FileExists(DefaultDialect(LanguageFile)) then Exit(DefaultDialect(LanguageFile));
+
+  LanguageFile := DefaultDialect(LangID);
+  if FileExists(LanguageFile) then Exit(LanguageFile);
+
+  LanguageFile := DefaultDialect('');
+  if FileExists(LanguageFile) then Exit(LanguageFile);
+end;
+
+// -----------------------------------------------------------------------------
+
+function LanguageIDFromFileName(const AFileName: String): String;
+begin
+  Result := Copy(ExtractFileNameOnly(AFileName), AppNameD.Length+1);
 end;
 
 // -----------------------------------------------------------------------------

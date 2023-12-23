@@ -1048,6 +1048,11 @@ msgstr "Error en la generación de vídeo."
 msgid "The video format is not supported for playback in the web browser."
 msgstr "El formato de vídeo no es compatible con la reproducción en navegador web."
 
+#: proclocalize.lngwizlanguage
+msgctxt "proclocalize.lngwizlanguage"
+msgid "Language"
+msgstr "Idioma"
+
 #: proclocalize.lngwritedenieded
 msgid "Write denied. Please check folder permissions."
 msgstr "Escritura denegada. Verifique los permisos de la carpeta."
@@ -4305,11 +4310,6 @@ msgctxt "tfrmwizard.lblffmpeg_hint.caption"
 msgid "Optional, used to extract audio and generate video."
 msgstr "Opcional, utilizado para extraer audio y generar video."
 
-#: tfrmwizard.lbllanguage.caption
-msgctxt "tfrmwizard.lbllanguage.caption"
-msgid "Language"
-msgstr "Idioma"
-
 #: tfrmwizard.lbllibmpv.caption
 msgid "libmpv: "
 msgstr "libmpv: "
@@ -4344,4 +4344,3 @@ msgstr "yt-dlp:"
 msgctxt "tfrmwizard.lblytdlp_hint.caption"
 msgid "Optional, used for dowloading from YouTube."
 msgstr "Opcional, utilizado para descargar desde YouTube."
-

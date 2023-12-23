@@ -1027,6 +1027,11 @@ msgstr ""
 msgid "The video format is not supported for playback in the web browser."
 msgstr ""
 
+#: proclocalize.lngwizlanguage
+msgctxt "proclocalize.lngwizlanguage"
+msgid "Language"
+msgstr ""
+
 #: proclocalize.lngwritedenieded
 msgid "Write denied. Please check folder permissions."
 msgstr ""
@@ -4279,11 +4284,6 @@ msgstr ""
 
 #: tfrmwizard.lblffmpeg_hint.caption
 msgid "Optional, used to extract audio and generate video."
-msgstr ""
-
-#: tfrmwizard.lbllanguage.caption
-msgctxt "tfrmwizard.lbllanguage.caption"
-msgid "Language"
 msgstr ""
 
 #: tfrmwizard.lbllibmpv.caption

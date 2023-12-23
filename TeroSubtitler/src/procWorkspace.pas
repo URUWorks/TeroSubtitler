@@ -151,16 +151,25 @@ procedure FillComboWithLanguages(const Combo: TComboBox; const aLngList: TString
 var
   SearchRec: TSearchRec;
   Index: Integer = 0;
+  x: Integer;
   FileName: String;
+  poLangID: String;
+  poLangName: String;
 begin
   if SysUtils.FindFirst(LanguageFolder + AppNameD + '*.po', faAnyFile, SearchRec) = 0 then
   try
+    Combo.Items.BeginUpdate;
     repeat
       FileName := LanguageFolder + SearchRec.Name;
-      aLngList.Add(GetPOLanguage(FileName) + ';' + GetPOLanguageNameFromID(GetPOLanguage(Filename)));
-      Combo.Items.Add(GetPOLanguageNameFromID(GetPOLanguage(LanguageFolder + SearchRec.Name)));
+      poLangID := GetPOLanguage(FileName);
+      poLangName := GetPOLanguageNameFromID(poLangID);
+      aLngList.Add(poLangID + ';' + poLangName);
+      x := Combo.Items.Add(poLangName);
+      if poLangID = AppOptions.GUILanguage then
+        Index := x;
     until FindNext(SearchRec) <> 0;
-    combo.ItemIndex := Index;
+    Combo.ItemIndex := Index;
+    Combo.Items.EndUpdate;
   finally
     FindClose(SearchRec);
   end;

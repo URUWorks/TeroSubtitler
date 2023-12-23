@@ -73,7 +73,6 @@ type
     FIndex: Integer;
     FLngList: TStrings;
     procedure SetPageStep(const AIndex: Integer);
-    procedure SetLanguage;
   public
   end;
 
@@ -175,9 +174,10 @@ begin
 
   lblLanguage.Visible := False;
   cboLanguage.Visible := False;
+
+  AppOptions.GUILanguage := LanguageIDFromFileName(LanguageFileName(True));
   FillComboWithLanguages(cboLanguage, FLngList);
-  GetGUILangIndex(FLngList, GetOSLanguage);
-  SetLanguage;
+  cboLanguageChange(NIL);
 end;
 
 // -----------------------------------------------------------------------------
@@ -241,21 +241,22 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmWizard.SetLanguage;
+procedure TfrmWizard.cboLanguageChange(Sender: TObject);
+var
+  langs: TStringArray;
 begin
-  if Length(FLngList.Strings[cboLanguage.ItemIndex].Split([';'])) > 0 then
-    AppOptions.GUILanguage := FLngList.Strings[cboLanguage.ItemIndex].Split([';'])[0]
+  langs := FLngList.Strings[cboLanguage.ItemIndex].Split([';']);
+  if Length(langs) > 0 then
+    AppOptions.GUILanguage := langs[0]
   else
     AppOptions.GUILanguage := 'en_US';
 
   SetGUILanguage;
-end;
 
-// -----------------------------------------------------------------------------
-
-procedure TfrmWizard.cboLanguageChange(Sender: TObject);
-begin
-  SetLanguage;
+  if lngwizLanguage <> 'Language' then
+    lblLanguage.Caption := 'Language / ' + lngwizLanguage
+  else
+    lblLanguage.Caption := lngwizLanguage;
 end;
 
 // -----------------------------------------------------------------------------
