@@ -37,7 +37,7 @@ function ISO_639_2NameToCode(const Name: String): AnsiString;
 function ISO_639_2CodeFromIndex(const idx: Integer): AnsiString;
 procedure ISO_639_2FillTStrings(const Items: TStrings);
 
-function GetOSLanguage: String;
+function GetOSLanguage(const AReplaceSeparator: Boolean = True): String;
 
 // -----------------------------------------------------------------------------
 
@@ -809,13 +809,16 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetOSLanguage: String;
+function GetOSLanguage(const AReplaceSeparator: Boolean = True): String;
 var
   Lang,            // es_ES
   SecLang: String; // es
 begin
   GetLanguageIDs(Lang, SecLang);
-  Result := Lang.Replace('_', '-'); // make compatible with our CultureInfo
+  if AReplaceSeparator then
+    Result := Lang.Replace('_', '-') // make compatible with our CultureInfo
+  else
+    Result := Lang;
 end;
 
 // -----------------------------------------------------------------------------
