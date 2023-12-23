@@ -219,7 +219,7 @@ begin
     else
     begin
       if Subtitles[i].VAlign = svaTop then
-        XY := 'X1:0'
+        XY := ' X1:0'
       else
         XY := '';
     end;
