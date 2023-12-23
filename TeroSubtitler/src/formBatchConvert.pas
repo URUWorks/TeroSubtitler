@@ -399,7 +399,7 @@ begin
       if  SubtitleAPI.LoadFromFile(FList[i]^.FileName, NIL, StrToFloatDef(cboFromFPS.Text, Workspace.FPS.OutputFPS, FormatSettings)) then
       begin
         if SubtitleAPI.SaveToFile(ConcatPaths([edtFolder.Text, ExtractFileName(FList[i]^.FileName)]), StrToFloatDef(cboToFPS.Text, Workspace.FPS.OutputFPS, FormatSettings),
-          TEncoding.GetEncoding(Encodings[cboEncoding.ItemIndex-1].CPID), TUWSubtitleFormats(cboFormat.ItemIndex+1), smText, -1, -1, True) then
+          TEncoding.GetEncoding(Encodings[cboEncoding.ItemIndex].CPID), TUWSubtitleFormats(cboFormat.ItemIndex+1), smText, -1, -1, True) then
         begin
           FList[i]^.Success := True;
 
