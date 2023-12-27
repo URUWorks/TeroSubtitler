@@ -25,12 +25,13 @@ unit procColorTheme;
 interface
 
 uses
-  Classes, SysUtils, Graphics, Forms, StdCtrls, ComCtrls, Controls, ExtCtrls,
-  Menus, Buttons, BGRABitmap, BGRABitmapTypes, UWLayout, UWMemo, UWTimeEdit,
-  UWFlatButton, UWSeekBar, UWStatusBar, UWCheckBox, UWRadioButton, UWHotKey,
-  laz.VirtualTrees, Spin, CheckLst, WAVDisplayer, ATSynEdit
-  {$IFDEF DARWIN}, CocoaAll, CocoaUtils{$ENDIF}
-  {$IFDEF WINDOWS}, Windows, Win32Proc, Registry{$ENDIF};
+  Classes, SysUtils, Graphics, Forms, ComCtrls, Controls, ExtCtrls,
+  Menus, Buttons, BGRABitmap, BGRABitmapTypes, UWLayout, UWMemo,
+  UWFlatButton, UWSeekBar, laz.VirtualTrees, WAVDisplayer, ATSynEdit
+  {$IFDEF DARWIN}, MacOSAll, CocoaAll, CocoaUtils{$ENDIF}
+  {$IFDEF WINDOWS}, Windows, Win32Proc, Registry,
+    StdCtrls, UWStatusBar, UWCheckBox, UWRadioButton, UWHotKey, UWTimeEdit,
+    Spin, CheckLst{$ENDIF};
 
 type
 
@@ -70,6 +71,7 @@ type
     procedure Apply(const AWave: TUWWaveformDisplayer; const AColorMode: TColorMode); overload;
     procedure Apply(const AMenu: TPopupMenu; const AColorMode: TColorMode; const AImageList: TImageList = NIL); overload;
     procedure Apply(const AToolbar: TToolbar; const AColorMode: TColorMode; const AImageList: TImageList = NIL); overload;
+    procedure Apply(const ACoolbar: TCoolbar; const AColorMode: TColorMode; const AImageList: TImageList = NIL); overload;
     {$IFDEF WINDOWS}
     procedure Apply(const AGroupBox: TGroupBox; const AColorMode: TColorMode; const AImageList: TImageList = NIL; const ARecursive: Boolean = True);
     procedure Apply(const AMemo: TMemo; const AColorMode: TColorMode); overload;
@@ -88,7 +90,6 @@ type
     procedure Apply(const AStatusBar: TUWStatusBar; const AColorMode: TColorMode); overload;
     procedure Apply(const AVST: TLazVirtualStringTree; const AColorMode: TColorMode); overload;
     procedure Apply(const ASplitter: TSplitter; const AColorMode: TColorMode); overload;
-    procedure Apply(const ACoolbar: TCoolbar; const AColorMode: TColorMode; const AImageList: TImageList = NIL); overload;
     procedure ToolBarDoPaintButton(Sender: TToolButton; State: Integer);
     procedure SplitterDoPaint(Sender: TObject);
     {$ENDIF}
@@ -127,7 +128,6 @@ uses
 
 {$IFDEF DARWIN}
 // True, if this app runs on macOS 10.14 Mojave or newer
-
 function IsMojaveOrNewer: Boolean;
 var
   minOsVer: NSOperatingSystemVersion;
@@ -143,16 +143,9 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetPrefString(const KeyName: String) : String;
-begin
-  Result := NSStringToString(NSUserDefaults.standardUserDefaults.stringForKey(NSStr(@KeyName[1])));
-end;
-
-// -----------------------------------------------------------------------------
-
 function IsMacOSDarkTheme: Boolean;
 begin
-  Result := Pos('DARK', UpperCase(GetPrefString('AppleInterfaceStyle'))) > 0;
+  Result := Pos('dark', LowerCase(CFStringToStr(CFStringRef(NSApp.effectiveAppearance.name)))) > 0;
 end;
 {$ENDIF}
 
@@ -199,7 +192,7 @@ var
   N: TColor;
 begin
   N := ColorToRGB(clWindow);
-  Result := (Red(N)<cMax) and (Green(N)<cMax) and (Blue(N)<cMax);
+  Result := (Red(N) < cMax) and (Green(N) < cMax) and (Blue(N) < cMax);
 end;
 
 // -----------------------------------------------------------------------------
@@ -372,6 +365,8 @@ begin
     Apply(TATSynEdit(Ctrl), AColorMode)
   else if Ctrl is TToolbar then
     Apply(TToolbar(Ctrl), AColorMode, AImageList)
+  else if Ctrl is TCoolbar then
+    Apply(TCoolbar(Ctrl), AColorMode, AImageList)
   {$IFDEF WINDOWS}
   else if (Ctrl is TGroupBox) then
     Apply(TGroupBox(Ctrl), AColorMode)
@@ -407,8 +402,6 @@ begin
     Apply(TLazVirtualStringTree(Ctrl), AColorMode)
   else if Ctrl is TSplitter then
     Apply(TSplitter(Ctrl), AColorMode)
-  else if Ctrl is TCoolbar then
-    Apply(TCoolbar(Ctrl), AColorMode, AImageList)
   {$ENDIF}
 end;
 
@@ -575,6 +568,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TColorTheme.Apply(const ACoolbar: TCoolbar; const AColorMode: TColorMode; const AImageList: TImageList = NIL);
+var
+  i: Integer;
+begin
+  ACoolbar.Themed := AColorMode = cmLight;
+  ACoolbar.Color  := Colors.Form;
+
+  for i := 0 to ACoolbar.ControlCount-1 do
+    ApplyToControl(ACoolbar.Controls[i], AColorMode, AImageList);
+end;
+
+// -----------------------------------------------------------------------------
+
 {$IFDEF WINDOWS}
 procedure TColorTheme.Apply(const ALabel: TLabel; const AColorMode: TColorMode);
 begin
@@ -729,21 +735,6 @@ procedure TColorTheme.Apply(const ASplitter: TSplitter; const AColorMode: TColor
 begin
   ASplitter.OnPaint := @SplitterDoPaint;
 end;
-
-// -----------------------------------------------------------------------------
-
-procedure TColorTheme.Apply(const ACoolbar: TCoolbar; const AColorMode: TColorMode; const AImageList: TImageList = NIL);
-var
-  i: Integer;
-begin
-  ACoolbar.Themed := AColorMode = cmLight;
-  ACoolbar.Color  := Colors.Form;
-
-  for i := 0 to ACoolbar.ControlCount-1 do
-    ApplyToControl(ACoolbar.Controls[i], AColorMode, AImageList);
-end;
-
-// -----------------------------------------------------------------------------
 {$ENDIF}
 
 // -----------------------------------------------------------------------------
