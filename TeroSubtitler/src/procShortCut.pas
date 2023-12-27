@@ -32,7 +32,7 @@ procedure SaveShortCutsToFile(const FileName: String; const AActionList: TAction
 implementation
 
 uses
-  fpjson, jsonparser, LCLProc;
+  fpjson, jsonparser, LCLProc, procDialogs, procLocalize;
 
 // -----------------------------------------------------------------------------
 
@@ -97,8 +97,17 @@ var
   s          : TJSONStringType;
   j          : TJSONData;
   i          : Integer;
+  path       : String;
 begin
   if not Assigned(AActionList) and (AActionList.ActionCount = 0) then Exit;
+
+  path := ExtractFilePath(FileName);
+  if not DirectoryExists(path) then
+    if not CreateDir(path) then
+    begin
+      ShowErrorMessageDialog(lngSaveSubtitleError);
+      Exit;
+    end;
 
   FileStream := TFileStream.Create(FileName, fmCreate);
   try
@@ -117,7 +126,11 @@ begin
 
       joData.Add('Shortcuts', jaData);
       s := joData.AsJSON;
-      FileStream.WriteBuffer(s[1], Length(s));
+      try
+        FileStream.WriteBuffer(s[1], Length(s));
+      except
+        ShowErrorMessageDialog(lngSaveSubtitleError);
+      end;
     finally
       joData.Free;
     end;

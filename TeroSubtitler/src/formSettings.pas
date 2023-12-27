@@ -910,7 +910,9 @@ begin
     begin
       SaveShortCutsToFile(f, frmMain.ActionList);
       cboShortCutPreset.ItemIndex := cboShortCutPreset.Items.Add(s);
-    end;
+    end
+    else
+      cboShortCutPreset.ItemIndex := cboShortCutPreset.Items.IndexOf(s);
   end;
 end;
 
