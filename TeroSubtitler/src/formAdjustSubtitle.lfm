@@ -12,7 +12,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object btnApply: TButton
     AnchorSideRight.Control = btnClose
     Left = 385
@@ -23,8 +23,8 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
     BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
-    OnClick = btnApplyClick
     TabOrder = 0
+    OnClick = btnApplyClick
   end
   object btnClose: TButton
     Left = 481
@@ -34,8 +34,8 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 1
+    OnClick = btnCloseClick
   end
   object lyoSimple: TUWLayout
     Left = 0
@@ -71,6 +71,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       FrameStep = 1
       TimeStep = 1
       TimeMode = temTime
+      OnTimeChange = tedFirstTimeChange
       Alignment = taCenter
       Constraints.MinHeight = 21
       Constraints.MinWidth = 80
@@ -103,6 +104,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       FrameStep = 1
       TimeStep = 1
       TimeMode = temTime
+      OnTimeChange = tedFirstTimeChange
       Alignment = taCenter
       Anchors = [akTop, akRight]
       Constraints.MinHeight = 21
@@ -145,8 +147,8 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 5
       Caption = '+'
-      OnClick = btnPlusClick
       TabOrder = 2
+      OnClick = btnPlusClick
     end
     object btnMinus: TButton
       Left = 534
@@ -155,8 +157,8 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       Width = 38
       Anchors = [akTop, akRight]
       Caption = '-'
-      OnClick = btnMinusClick
       TabOrder = 3
+      OnClick = btnMinusClick
     end
     object spnIndex: TSpinEdit
       Left = 269
@@ -200,6 +202,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       FrameStep = 1
       TimeStep = 1
       TimeMode = temTime
+      OnTimeChange = tedFirstTimeChange
       Alignment = taCenter
       Anchors = [akTop, akRight]
       Constraints.MinHeight = 21
@@ -216,9 +219,9 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
     Width = 18
     AutoSize = False
     Caption = 'Simple'
-    OnChange = rdoSimpleChange
     TabOrder = 4
     TabStop = False
+    OnChange = rdoSimpleChange
   end
   object rdoAdvanced: TUWRadioButton
     Left = 8
@@ -227,8 +230,8 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
     Width = 18
     AutoSize = False
     Caption = 'Advanced'
-    OnChange = rdoSimpleChange
     TabOrder = 5
     TabStop = False
+    OnChange = rdoSimpleChange
   end
 end

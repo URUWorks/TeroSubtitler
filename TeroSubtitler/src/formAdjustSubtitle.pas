@@ -56,6 +56,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure rdoSimpleChange(Sender: TObject);
     procedure spnIndexChange(Sender: TObject);
+    procedure tedFirstTimeChange(Sender: TObject; const NewTime: Cardinal);
     procedure VSTAdvancedHeaderDraw(Sender: TVTHeader;
       var PaintInfo: THeaderPaintInfo; const Elements: THeaderPaintElements);
     procedure VSTDrawText(Sender: TBaseVirtualTree; TargetCanvas: TCanvas;
@@ -231,6 +232,14 @@ procedure TfrmAdjustSubtitle.spnIndexChange(Sender: TObject);
 begin
   tedTime.Value := Subtitles[spnIndex.Value-1].InitialTime;
   VSTSelectNode(frmMain.VST, spnIndex.Value-1, True);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAdjustSubtitle.tedFirstTimeChange(Sender: TObject;
+  const NewTime: Cardinal);
+begin
+  frmMain.MPV.SetMediaPosInMs(TUWTimeEdit(Sender).Value);
 end;
 
 // -----------------------------------------------------------------------------
