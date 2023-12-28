@@ -252,10 +252,15 @@ begin
       while Assigned(Run) do
       begin
         for i := Low(AIdxs) to High(AIdxs) do
-        if AIdxs[i] = Run^.Index then
-        begin
-          Selected[Run] := True;
-        end;
+          if AIdxs[i] = Run^.Index then
+          begin
+            Selected[Run] := True;
+            if i = High(AIdxs) then
+            begin
+              FocusedNode := Run;
+              ScrollIntoView(Run, True);
+            end;
+          end;
         Run := GetNext(Run);
       end;
     end;
@@ -574,12 +579,17 @@ var
   s : TStringList;
   NodeArray : TNodeArray;
   Item : PUWSubtitleItem;
-  i, c, x, t1,t2 : Integer;
+  i, c, x, t1, t2, p : Integer;
+  changed : Boolean;
+  idxs : TIntegerDynArray;
 begin
   if AVST.SelectedCount > 0 then
   begin
+    changed := False;
+    p := 0;
     s := TStringList.Create;
     try
+      s.SkipLastLineBreak := True;
       NodeArray := AVST.GetSortedSelection(False);
       if NodeArray = NIL then Exit;
       for i := High(NodeArray) downto Low(NodeArray) do
@@ -590,28 +600,39 @@ begin
           with Item^, AppOptions.Conventions do
           begin
             SplitRegExpr('\|\|', DivideLines(Text, InitialTime, FinalTime, AppOptions.Conventions.DotsOnSplit, AppOptions.Conventions.CPL, GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames)), s);
-            DeleteSubtitle(x, False, False);
-
-            while s.Count >= 3 do
+            if s.Count >= 3 then
             begin
-              t1 := StrToIntDef(s[0], 0);
-              t2 := StrToIntDef(s[1], 0);
-              InsertSubtitle(x, t1, t2, FixIncompleteTags(s[2]), '', False, False);
-              for c := 1 to 3 do s.Delete(0);
-              inc(x);
+              changed := True;
+              DeleteSubtitle(x, False, False);
+
+              while s.Count >= 3 do
+              begin
+                Inc(p);
+                SetLength(idxs, p);
+                t1 := StrToIntDef(s[0], 0);
+                t2 := StrToIntDef(s[1], 0);
+                idxs[p-1] := InsertSubtitle(x, t1, t2, FixIncompleteTags(s[2]), '', False, False);
+                for c := 1 to 3 do s.Delete(0);
+                Inc(x);
+              end;
             end;
           end;
       end;
       NodeArray := NIL;
     finally
       s.Free;
+    end;
 
+    if changed then
+    begin
+      VSTSelectNodes(AVST, idxs, True);
+      SetLength(idxs, 0);
       UndoInstance.IncrementUndoGroup;
       SubtitleChanged(True, True);
       UpdateValues(True);
+      DoAutoCheckErrors;
     end;
   end;
-  DoAutoCheckErrors;
 end;
 
 // -----------------------------------------------------------------------------
