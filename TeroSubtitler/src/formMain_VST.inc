@@ -686,12 +686,6 @@ begin
   it := Subtitles.ItemPointer[VSTFocusedNode(VST)]^.InitialTime;
   MPV.SetMediaPosInMs(it);
 
-  if MPV.IsPaused then
-  begin
-    lblMediaTime.Tag     := TAG_CONTROL_UPDATE;
-    lblMediaTime.Caption := GetTimeStr(it);
-  end;
-
   FocusMemo;
 end;
 
