@@ -7,6 +7,9 @@
 - Fixed: Skip lines containing only numbers and/or zero times [SubtitleAPI/SubRip]
 - Fixed: Strange behavior when inserting subtitle on first line
 - Fixed: [macOS] Main toolbar appearance skipped in dark mode
+- Improved: Autobreak [Texts]
+- Improved: Divide subtitle [Subtitles]
+- Improved: Adjust subtitle [Timings]
 - Improved: WebVTT color/voice tags
 - Improved: Localization switched from XML to PO (thx CM630)
 - Added: Language selector in the first-run Wizard (thx CM630)
