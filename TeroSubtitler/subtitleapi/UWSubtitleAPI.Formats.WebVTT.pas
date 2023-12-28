@@ -423,7 +423,7 @@ begin
 
           // Final text
           Text := TagsToTS(HTMLTagsToTS(HTMLDecode(Text)));
-          x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
+          x := Subtitles.Add(InitialTime, FinalTime, Text.Trim, '', ExtraInfo);
           Subtitles.ItemPointer[x]^.Actor := Voice;
           Subtitles.ItemPointer[x]^.Align := TSubtitleHAlign(c);
           Subtitles.ItemPointer[x]^.VAlign := TSubtitleVAlign(v);
