@@ -199,13 +199,13 @@ end;
 
 function XMLExtractTextContent(const A: TDOMNodeList): String;
 var
-  I: integer;
+  I : Integer;
 begin
   Result := '';
   for I := 0 to A.Count-1 do
     Result := Result + DOMNodeToString(A[I]);
 
-  Result := XMLTagsToTS(XMLValueToStr(Result));
+  Result := XMLTagsToTS(XMLValueToStr(Result)).Trim;
 end;
 
 // -----------------------------------------------------------------------------
