@@ -50,6 +50,7 @@ function RemoveTagsFromText(const Text: String; const T0: Char = '<'; const T1: 
 function ReplaceWordString(const Text, Word, NewWord: String; const ReplaceAll: Boolean = False): String;
 procedure SplitStr(const Delimiter, Text: String; var Pieces: TStringList);
 procedure AnsiStringToAnsiChar(var Dest: array of AnsiChar; const Source: AnsiString);
+function WrapText(const AText: String; const AMaxChrsPerLine: Integer; const ABreakChar: String = sLineBreak): String;
 
 // -----------------------------------------------------------------------------
 
@@ -460,6 +461,39 @@ begin
 
   for i := 0 to MaxLen do
     Dest[i] := Source[i+1];
+end;
+
+// -----------------------------------------------------------------------------
+
+function WrapText(const AText: String; const AMaxChrsPerLine: Integer; const ABreakChar: String = sLineBreak): String;
+var
+  sl : TStringList;
+  i, w : Integer;
+begin
+  if AText.IsEmpty then Exit(AText);
+  Result := '';
+  sl := TStringList.Create;
+  try
+    sl.SkipLastLineBreak := True;
+    sl.AddDelimitedText(AText, ' ', True);
+    w := 0;
+    for i := 0 to sl.Count-1 do
+    begin
+      if w + UTF8Length(sl[i]) <= AMaxChrsPerLine then
+      begin
+        Result += sl[i] + ' ';
+        Inc(w, UTF8Length(sl[i]) + 1);
+      end
+      else
+      begin
+        Result := TrimRight(Result) + ABreakChar + sl[i] + ' ';
+        w := UTF8Length(sl[i]) + 1;
+      end;
+    end;
+    Result := TrimRight(Result);
+  finally
+    sl.Free;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
