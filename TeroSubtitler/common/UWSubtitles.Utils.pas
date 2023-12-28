@@ -374,12 +374,12 @@ end;
 
 function SmartLineAdjust(Text: String; const ChrsPerLine: Integer; const BreakChar: String = sLineBreak): String;
 var
-  l, l2, i : Integer;
-  s        : TStringList;
+  l, i : Integer;
+  s : TStringList;
 begin
   Result := Text;
   l := UTF8Length(Text);
-  if (Text = '') or ((l <= ChrsPerLine) and not AnsiContainsText(Text, '-')) then Exit;
+  if (Text = '') or (l <= ChrsPerLine) or ((l <= ChrsPerLine) and not AnsiContainsText(Text, '-')) then Exit;
 
   Text := RemoveUnnecessarySpaces(Text, BreakChar);
 
@@ -407,20 +407,7 @@ begin
     end;
   end
   else
-  begin
-    l2 := l div 2;
-    if l2 > (ChrsPerLine div 2) then l2 := ChrsPerLine;
-
-    while (Result[l2] <> ' ') and (l2 < l) do Inc(l2);
-
-    for i := l2-1 downto 1 do
-      if Result[i] = ' ' then
-      begin
-        Insert(BreakChar, Result, i);
-        Result := RemoveUnnecessarySpaces(Result, BreakChar);
-        Break;
-      end;
-  end;
+    Result := UWSystem.StrUtils.WrapText(Text, ChrsPerLine);
 end;
 
 // -----------------------------------------------------------------------------
@@ -480,12 +467,13 @@ begin
   dots   := False;
   s := TStringList.Create;
   try
+    s.SkipLastLineBreak := True;
     SplitRegExpr('\'+BreakChar, Text, s);
-    if s.Count = 0 then
+    if s.Count <= 1 then
     begin
       Text := AutoBreakSubtitle(Text, ChrsPerLine, BreakChar, False);
       SplitRegExpr('\'+BreakChar, Text, s);
-      if s.Count = 0 then Exit;
+      if s.Count <= 1 then Exit;
     end;
 
     duration := (FinalTime - InitialTime) div s.Count;
@@ -552,7 +540,7 @@ end;
 
 function SetMaximumLineLength(const Text: String; const MaxChrs: Integer; const BreakChar: String = sLineBreak): String;
 begin
-  Result := WrapText(UnbreakSubtitles(Text, BreakChar), BreakChar, [',', '.', ';', ':', '-', #9], MaxChrs);
+  Result := SysUtils.WrapText(UnbreakSubtitles(Text, BreakChar), BreakChar, [',', '.', ';', ':', '-', #9], MaxChrs);
 end;
 
 // -----------------------------------------------------------------------------
