@@ -3087,6 +3087,42 @@ msgstr ""
 msgid "Dock waveform"
 msgstr ""
 
+#: tfrmmain.actunicodectrllre.caption
+msgid "LRE (Start of Left-to-Right Embedding)"
+msgstr ""
+
+#: tfrmmain.actunicodectrllrm.caption
+msgid "LRM (Left-to-Right Mark )"
+msgstr ""
+
+#: tfrmmain.actunicodectrllro.caption
+msgid "LRO (Start of Left-to-Right Override)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlpdf.caption
+msgid "PDF (Pop Directorional Formatting)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlrle.caption
+msgid "RLE (Start of Right-to-Left Embedding)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlrlm.caption
+msgid "RLM (Right-to-Left Mark)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlrlo.caption
+msgid "RLO (Start of Right-to-Left Override)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlzwnj.caption
+msgid "ZWNJ (Zero Width Non-Joiner)"
+msgstr ""
+
+#: tfrmmain.actunicodezwj.caption
+msgid "ZWJ (Zero Width Joiner)"
+msgstr ""
+
 #: tfrmmain.actunmarksubtitle.caption
 msgid "Unmark subtitle(s)"
 msgstr ""
@@ -3187,7 +3223,7 @@ msgid "Format"
 msgstr ""
 
 #: tfrmmain.mnueditinsertsymbol.caption
-msgid "Insert unicode symbol"
+msgid "Insert Unicode symbol"
 msgstr ""
 
 #: tfrmmain.mnueditrtl.caption
@@ -3243,6 +3279,10 @@ msgstr ""
 #: tfrmmain.mnuhelp.caption
 msgctxt "tfrmmain.mnuhelp.caption"
 msgid "Help"
+msgstr ""
+
+#: tfrmmain.mnumemoinsertunicodecontrolchar.caption
+msgid "Insert Unicode control character"
 msgstr ""
 
 #: tfrmmain.mnuselect.caption

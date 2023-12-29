@@ -61,7 +61,7 @@ procedure SelectSubtitleAndFocusMemo(const NextSibiling: Boolean; const WaveToo:
 function GetSubtitleIndexAtTime(const MSecs: Cardinal): Integer;
 function GetSubtitleTextAtTime(const MSecs: Cardinal): String;
 
-procedure InsertMemoText(const AText: String);
+procedure InsertMemoText(const AText: String; const AVSTLoop: Boolean = True);
 
 procedure SetTextTag(const Tag: String);
 procedure SetTextCustomTag(const Tag: String);
@@ -658,7 +658,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure InsertMemoText(const AText: String);
+procedure InsertMemoText(const AText: String; const AVSTLoop: Boolean = True);
 var
   Memo : TUWMemo;
 begin

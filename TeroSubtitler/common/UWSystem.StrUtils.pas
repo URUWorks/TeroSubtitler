@@ -52,6 +52,21 @@ procedure SplitStr(const Delimiter, Text: String; var Pieces: TStringList);
 procedure AnsiStringToAnsiChar(var Dest: array of AnsiChar; const Source: AnsiString);
 function WrapText(const AText: String; const AMaxChrsPerLine: Integer; const ABreakChar: String = sLineBreak): String;
 
+function FixRTLwithUnicodeControlChars(const AText: String): String;
+function RemoveUnicodeControlChars(const AText: String): String;
+
+const
+  UCC_NBS  = WideChar(#$00A0); // NBS No-Break Space
+  UCC_LRM  = WideChar(#$200E); // LRM Left-to-Right Mark
+  UCC_RLM  = WideChar(#$200F); // RLM Right-to-Left Mark
+  UCC_ZWJ  = WideChar(#$200D); // ZWJ Zero Width Joiner
+  UCC_ZWNJ = WideChar(#$200C); // ZWNJ Zero Width Non-Joiner
+  UCC_LRE  = WideChar(#$202A); // LRE Start of Left-to-Right Embedding
+  UCC_RLE  = WideChar(#$202B); // RLE Start of Right-to-Left Embedding
+  UCC_LRO  = WideChar(#$202D); // LRO Start of Left-to-Right Override
+  UCC_RLO  = WideChar(#$202E); // RLO Start of Right-to-Left Override
+  UCC_PDF  = WideChar(#$202C); // PDF Pop Directorional Formatting
+
 // -----------------------------------------------------------------------------
 
 implementation
@@ -494,6 +509,29 @@ begin
   finally
     sl.Free;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function FixRTLwithUnicodeControlChars(const AText: String): String;
+begin
+  Result := UCC_RLE + AText.Replace(UCC_RLE, '').Replace(sLineBreak, sLineBreak + UCC_RLE);
+end;
+
+// -----------------------------------------------------------------------------
+
+function RemoveUnicodeControlChars(const AText: String): String;
+begin
+  Result := AText.Replace(UCC_NBS, '')
+    .Replace(UCC_LRM, '')
+    .Replace(UCC_RLM, '')
+    .Replace(UCC_ZWJ, '')
+    .Replace(UCC_ZWNJ, '')
+    .Replace(UCC_LRE, '')
+    .Replace(UCC_RLE, '')
+    .Replace(UCC_PDF, '')
+    .Replace(UCC_LRO, '')
+    .Replace(UCC_RLO, '');
 end;
 
 // -----------------------------------------------------------------------------

@@ -5,7 +5,7 @@ object frmMain: TfrmMain
   Width = 1124
   AllowDropFiles = True
   Caption = 'tero'
-  ClientHeight = 760
+  ClientHeight = 780
   ClientWidth = 1124
   Constraints.MinHeight = 400
   Constraints.MinWidth = 400
@@ -17,11 +17,11 @@ object frmMain: TfrmMain
   OnShow = FormShow
   Position = poMainFormCenter
   ShowHint = True
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object LayoutWaveform: TUWLayout
     Left = 0
     Height = 120
-    Top = 617
+    Top = 637
     Width = 1124
     Align = alBottom
     ClientHeight = 120
@@ -151,11 +151,11 @@ object frmMain: TfrmMain
   end
   object LayoutVideo: TUWLayout
     Left = 624
-    Height = 583
+    Height = 603
     Top = 29
     Width = 500
     Align = alRight
-    ClientHeight = 583
+    ClientHeight = 603
     ClientWidth = 500
     Constraints.MinHeight = 150
     Constraints.MinWidth = 150
@@ -163,7 +163,7 @@ object frmMain: TfrmMain
     object LayoutVideoControls: TUWLayout
       Left = 0
       Height = 36
-      Top = 547
+      Top = 567
       Width = 500
       Align = alBottom
       ClientHeight = 36
@@ -318,7 +318,7 @@ object frmMain: TfrmMain
     end
     object MPV: TMPVPlayer
       Left = 0
-      Height = 547
+      Height = 567
       Top = 0
       Width = 500
       Align = alClient
@@ -347,7 +347,7 @@ object frmMain: TfrmMain
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 612
+    Top = 632
     Width = 1124
     Align = alBottom
     AutoSnap = False
@@ -356,7 +356,7 @@ object frmMain: TfrmMain
   end
   object SplitterVideo: TSplitter
     Left = 619
-    Height = 583
+    Height = 603
     Top = 29
     Width = 5
     Align = alRight
@@ -366,29 +366,29 @@ object frmMain: TfrmMain
   end
   object LayoutSubtitles: TUWLayout
     Left = 0
-    Height = 583
+    Height = 603
     Top = 29
     Width = 619
     Align = alClient
-    ClientHeight = 583
+    ClientHeight = 603
     ClientWidth = 619
     Constraints.MinHeight = 150
     Constraints.MinWidth = 150
     TabOrder = 0
     object LayoutVST: TUWLayout
       Left = 0
-      Height = 583
+      Height = 603
       Top = 0
       Width = 619
       Align = alClient
-      ClientHeight = 583
+      ClientHeight = 603
       ClientWidth = 619
       TabOrder = 0
       OnResize = LayoutVSTResize
       object LayoutEditor: TUWLayout
         Left = 0
         Height = 139
-        Top = 444
+        Top = 464
         Width = 619
         Align = alBottom
         ClientHeight = 139
@@ -533,10 +533,10 @@ object frmMain: TfrmMain
             Top = 2
             Width = 118
             ItemHeight = 15
-            OnChange = cboActorChange
-            OnKeyDown = cboActorKeyDown
             TabOrder = 0
             TabStop = False
+            OnChange = cboActorChange
+            OnKeyDown = cboActorKeyDown
           end
           object btnActor: TUWFlatButton
             Left = 1
@@ -772,7 +772,7 @@ object frmMain: TfrmMain
       end
       object VST: TLazVirtualStringTree
         Left = 0
-        Height = 444
+        Height = 464
         Top = 0
         Width = 619
         Align = alClient
@@ -813,10 +813,10 @@ object frmMain: TfrmMain
         Top = 0
         Width = 174
         Align = alClient
-        OnChange = mmoSourceViewChange
         ScrollBars = ssAutoBoth
         TabOrder = 0
         WordWrap = False
+        OnChange = mmoSourceViewChange
       end
     end
     object LayoutTranscription: TUWLayout
@@ -831,7 +831,7 @@ object frmMain: TfrmMain
   object StatusBar: TUWStatusBar
     Left = 0
     Height = 23
-    Top = 737
+    Top = 757
     Width = 1124
     Panels = <    
       item
@@ -1075,10 +1075,10 @@ object frmMain: TfrmMain
         Top = 0
         Width = 90
         ItemHeight = 15
-        OnSelect = cboInputFPSSelect
         Style = csDropDownList
         TabOrder = 0
         TabStop = False
+        OnSelect = cboInputFPSSelect
       end
       object cboFPS: TComboBox
         Left = 94
@@ -1087,11 +1087,11 @@ object frmMain: TfrmMain
         Top = 0
         Width = 90
         ItemHeight = 15
-        OnKeyPress = cboFPSKeyPress
-        OnSelect = cboFPSSelect
         Style = csDropDownList
         TabOrder = 1
         TabStop = False
+        OnKeyPress = cboFPSKeyPress
+        OnSelect = cboFPSSelect
       end
       object lblSeparatorFPS: TLabel
         Left = 91
@@ -1130,10 +1130,10 @@ object frmMain: TfrmMain
         Top = 0
         Width = 180
         ItemHeight = 15
-        OnSelect = cboFormatSelect
         Style = csDropDownList
         TabOrder = 0
         TabStop = False
+        OnSelect = cboFormatSelect
       end
     end
     object ToolBarEncoding: TToolBar
@@ -1312,7 +1312,7 @@ object frmMain: TfrmMain
         Caption = '-'
       end
       object mnuEditInsertSymbol: TMenuItem
-        Caption = 'Insert unicode symbol'
+        Caption = 'Insert Unicode symbol'
       end
       object Separator5: TMenuItem
         Caption = '-'
@@ -3583,6 +3583,60 @@ object frmMain: TfrmMain
       Caption = 'Video with hardcoded subtitles...'
       OnExecute = actGenerateVideoExecute
     end
+    object actUnicodeCtrlLRM: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'LRM (Left-to-Right Mark )'
+      OnExecute = actUnicodeCtrlLRMExecute
+    end
+    object actUnicodeCtrlRLM: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'RLM (Right-to-Left Mark)'
+      OnExecute = actUnicodeCtrlRLMExecute
+    end
+    object actUnicodeZWJ: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'ZWJ (Zero Width Joiner)'
+      OnExecute = actUnicodeZWJExecute
+    end
+    object actUnicodeCtrlZWNJ: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'ZWNJ (Zero Width Non-Joiner)'
+      OnExecute = actUnicodeCtrlZWNJExecute
+    end
+    object actUnicodeCtrlLRE: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'LRE (Start of Left-to-Right Embedding)'
+      OnExecute = actUnicodeCtrlLREExecute
+    end
+    object actUnicodeCtrlRLE: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'RLE (Start of Right-to-Left Embedding)'
+      OnExecute = actUnicodeCtrlRLEExecute
+    end
+    object actUnicodeCtrlLRO: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'LRO (Start of Left-to-Right Override)'
+      OnExecute = actUnicodeCtrlLROExecute
+    end
+    object actUnicodeCtrlRLO: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'RLO (Start of Right-to-Left Override)'
+      OnExecute = actUnicodeCtrlRLOExecute
+    end
+    object actUnicodeCtrlPDF: TAction
+      Tag = 1
+      Category = 'Editor'
+      Caption = 'PDF (Pop Directorional Formatting)'
+      OnExecute = actUnicodeCtrlPDFExecute
+    end
   end
   object popDropInsert: TPopupMenu
     Images = ImageList_Default
@@ -3944,19 +3998,52 @@ object frmMain: TfrmMain
     object Separator28: TMenuItem
       Caption = '-'
     end
-    object mnuMemoFormat: TMenuItem
-      Caption = 'mnuMemoFormat'
-    end
-    object Separator49: TMenuItem
-      Caption = '-'
+    object MenuItem151: TMenuItem
+      Action = actAddQuotationMarks
     end
     object MenuItem107: TMenuItem
       Action = actSplitSubtitleAtPosition
     end
-    object MenuItem151: TMenuItem
-      Action = actAddQuotationMarks
+    object Separator49: TMenuItem
+      Caption = '-'
+    end
+    object mnuMemoFormat: TMenuItem
+      Caption = 'mnuMemoFormat'
+    end
+    object Separator54: TMenuItem
+      Caption = '-'
     end
     object mnuMemoInsertSymbol: TMenuItem
+    end
+    object mnuMemoInsertUnicodeControlChar: TMenuItem
+      Caption = 'Insert Unicode control character'
+      object MenuItem182: TMenuItem
+        Action = actUnicodeCtrlLRM
+      end
+      object MenuItem183: TMenuItem
+        Action = actUnicodeCtrlRLM
+      end
+      object MenuItem184: TMenuItem
+        Action = actUnicodeZWJ
+      end
+      object MenuItem185: TMenuItem
+        Action = actUnicodeCtrlZWNJ
+      end
+      object MenuItem186: TMenuItem
+        Action = actUnicodeCtrlLRE
+      end
+      object MenuItem187: TMenuItem
+        Action = actUnicodeCtrlRLE
+      end
+      object MenuItem188: TMenuItem
+        Action = actUnicodeCtrlLRO
+      end
+      object MenuItem189: TMenuItem
+        Action = actUnicodeCtrlRLO
+      end
+      object MenuItem190: TMenuItem
+        Action = actUnicodeCtrlPDF
+      end
     end
   end
   object popVideo: TPopupMenu

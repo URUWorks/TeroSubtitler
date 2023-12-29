@@ -1707,3 +1707,66 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actUnicodeCtrlLRMExecute(Sender: TObject);
+begin
+  InsertMemoText(UCC_LRM, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actUnicodeCtrlRLMExecute(Sender: TObject);
+begin
+  InsertMemoText(UCC_RLM, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actUnicodeZWJExecute(Sender: TObject);
+begin
+  InsertMemoText(UCC_ZWJ, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actUnicodeCtrlZWNJExecute(Sender: TObject);
+begin
+  InsertMemoText(UCC_ZWNJ, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actUnicodeCtrlLREExecute(Sender: TObject);
+begin
+  InsertMemoText(UCC_LRE, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actUnicodeCtrlRLEExecute(Sender: TObject);
+begin
+  InsertMemoText(UCC_RLE, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actUnicodeCtrlLROExecute(Sender: TObject);
+begin
+  InsertMemoText(UCC_LRO, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actUnicodeCtrlRLOExecute(Sender: TObject);
+begin
+  InsertMemoText(UCC_RLO, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actUnicodeCtrlPDFExecute(Sender: TObject);
+begin
+  InsertMemoText(UCC_PDF, False);
+end;
+
+// -----------------------------------------------------------------------------
+

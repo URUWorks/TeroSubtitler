@@ -20,7 +20,7 @@
 {"hash":84178580,"name":"tfrmmain.mnufileimport.caption","sourcebytes":[73,109,112,111,114,116],"value":"Import"},
 {"hash":80705172,"name":"tfrmmain.mnufileexport.caption","sourcebytes":[69,120,112,111,114,116],"value":"Export"},
 {"hash":310020,"name":"tfrmmain.mnuedit.caption","sourcebytes":[69,100,105,116],"value":"Edit"},
-{"hash":178214620,"name":"tfrmmain.mnueditinsertsymbol.caption","sourcebytes":[73,110,115,101,114,116,32,117,110,105,99,111,100,101,32,115,121,109,98,111,108],"value":"Insert unicode symbol"},
+{"hash":178215132,"name":"tfrmmain.mnueditinsertsymbol.caption","sourcebytes":[73,110,115,101,114,116,32,85,110,105,99,111,100,101,32,115,121,109,98,111,108],"value":"Insert Unicode symbol"},
 {"hash":184812723,"name":"tfrmmain.mnuedittimings.caption","sourcebytes":[84,105,109,105,110,103,115],"value":"Timings"},
 {"hash":205933301,"name":"tfrmmain.mnuedittimingsendcue.caption","sourcebytes":[69,110,100,32,67,117,101],"value":"End Cue"},
 {"hash":198347400,"name":"tfrmmain.mnuedittimingsextend.caption","sourcebytes":[69,120,116,101,110,100,32,108,101,110,103,116,104],"value":"Extend length"},
@@ -252,7 +252,17 @@
 {"hash":130055950,"name":"tfrmmain.actremovelinefromentry.caption","sourcebytes":[82,101,109,111,118,101,32,108,105,110,101,32,102,114,111,109,32,101,110,116,114,121,46,46,46],"value":"Remove line from entry..."},
 {"hash":185803669,"name":"tfrmmain.actscreenshottofile.caption","sourcebytes":[83,99,114,101,101,110,115,104,111,116,32,116,111,32,102,105,108,101],"value":"Screenshot to file"},
 {"hash":126205214,"name":"tfrmmain.actgeneratevideo.caption","sourcebytes":[86,105,100,101,111,32,119,105,116,104,32,104,97,114,100,99,111,100,101,100,32,115,117,98,116,105,116,108,101,115,46,46,46],"value":"Video with hardcoded subtitles..."},
+{"hash":218970681,"name":"tfrmmain.actunicodectrllrm.caption","sourcebytes":[76,82,77,32,40,76,101,102,116,45,116,111,45,82,105,103,104,116,32,77,97,114,107,32,41],"value":"LRM (Left-to-Right Mark )"},
+{"hash":251569817,"name":"tfrmmain.actunicodectrlrlm.caption","sourcebytes":[82,76,77,32,40,82,105,103,104,116,45,116,111,45,76,101,102,116,32,77,97,114,107,41],"value":"RLM (Right-to-Left Mark)"},
+{"hash":83405577,"name":"tfrmmain.actunicodezwj.caption","sourcebytes":[90,87,74,32,40,90,101,114,111,32,87,105,100,116,104,32,74,111,105,110,101,114,41],"value":"ZWJ (Zero Width Joiner)"},
+{"hash":136257625,"name":"tfrmmain.actunicodectrlzwnj.caption","sourcebytes":[90,87,78,74,32,40,90,101,114,111,32,87,105,100,116,104,32,78,111,110,45,74,111,105,110,101,114,41],"value":"ZWNJ (Zero Width Non-Joiner)"},
+{"hash":103011769,"name":"tfrmmain.actunicodectrllre.caption","sourcebytes":[76,82,69,32,40,83,116,97,114,116,32,111,102,32,76,101,102,116,45,116,111,45,82,105,103,104,116,32,69,109,98,101,100,100,105,110,103,41],"value":"LRE (Start of Left-to-Right Embedding)"},
+{"hash":253055209,"name":"tfrmmain.actunicodectrlrle.caption","sourcebytes":[82,76,69,32,40,83,116,97,114,116,32,111,102,32,82,105,103,104,116,45,116,111,45,76,101,102,116,32,69,109,98,101,100,100,105,110,103,41],"value":"RLE (Start of Right-to-Left Embedding)"},
+{"hash":101864857,"name":"tfrmmain.actunicodectrllro.caption","sourcebytes":[76,82,79,32,40,83,116,97,114,116,32,111,102,32,76,101,102,116,45,116,111,45,82,105,103,104,116,32,79,118,101,114,114,105,100,101,41],"value":"LRO (Start of Left-to-Right Override)"},
+{"hash":63372745,"name":"tfrmmain.actunicodectrlrlo.caption","sourcebytes":[82,76,79,32,40,83,116,97,114,116,32,111,102,32,82,105,103,104,116,45,116,111,45,76,101,102,116,32,79,118,101,114,114,105,100,101,41],"value":"RLO (Start of Right-to-Left Override)"},
+{"hash":161700265,"name":"tfrmmain.actunicodectrlpdf.caption","sourcebytes":[80,68,70,32,40,80,111,112,32,68,105,114,101,99,116,111,114,105,111,110,97,108,32,70,111,114,109,97,116,116,105,110,103,41],"value":"PDF (Pop Directorional Formatting)"},
 {"hash":261306372,"name":"tfrmmain.mnuvstformat.caption","sourcebytes":[109,110,117,86,83,84,70,111,114,109,97,116],"value":"mnuVSTFormat"},
 {"hash":184739641,"name":"tfrmmain.mnudictionary.caption","sourcebytes":[68,105,99,116,105,111,110,97,114,121],"value":"Dictionary"},
-{"hash":128765908,"name":"tfrmmain.mnumemoformat.caption","sourcebytes":[109,110,117,77,101,109,111,70,111,114,109,97,116],"value":"mnuMemoFormat"}
+{"hash":128765908,"name":"tfrmmain.mnumemoformat.caption","sourcebytes":[109,110,117,77,101,109,111,70,111,114,109,97,116],"value":"mnuMemoFormat"},
+{"hash":157454434,"name":"tfrmmain.mnumemoinsertunicodecontrolchar.caption","sourcebytes":[73,110,115,101,114,116,32,85,110,105,99,111,100,101,32,99,111,110,116,114,111,108,32,99,104,97,114,97,99,116,101,114],"value":"Insert Unicode control character"}
 ]}

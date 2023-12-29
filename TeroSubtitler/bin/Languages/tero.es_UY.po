@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: proclocalize.lngabversion
 #, object-pascal-format
@@ -3097,6 +3097,42 @@ msgstr "Acoplar vídeo"
 msgid "Dock waveform"
 msgstr "Acoplar forma de onda"
 
+#: tfrmmain.actunicodectrllre.caption
+msgid "LRE (Start of Left-to-Right Embedding)"
+msgstr "LRE (Comenzar incrustación de izquierda a derecha)"
+
+#: tfrmmain.actunicodectrllrm.caption
+msgid "LRM (Left-to-Right Mark )"
+msgstr "LRM (Marca de izquierda a derecha)"
+
+#: tfrmmain.actunicodectrllro.caption
+msgid "LRO (Start of Left-to-Right Override)"
+msgstr "LRO (Comenzar reemplazo de izquierda a derecha)"
+
+#: tfrmmain.actunicodectrlpdf.caption
+msgid "PDF (Pop Directorional Formatting)"
+msgstr "PDF (Formato direccional POP)"
+
+#: tfrmmain.actunicodectrlrle.caption
+msgid "RLE (Start of Right-to-Left Embedding)"
+msgstr "RLE (Comenzar incrustación de derecha a izquierda)"
+
+#: tfrmmain.actunicodectrlrlm.caption
+msgid "RLM (Right-to-Left Mark)"
+msgstr "RLM (Marca de derecha a izquierda)"
+
+#: tfrmmain.actunicodectrlrlo.caption
+msgid "RLO (Start of Right-to-Left Override)"
+msgstr "RLO (Comenzar reemplazo de derecha a izquierda)"
+
+#: tfrmmain.actunicodectrlzwnj.caption
+msgid "ZWNJ (Zero Width Non-Joiner)"
+msgstr "ZWNJ (Separador de longitud nula)"
+
+#: tfrmmain.actunicodezwj.caption
+msgid "ZWJ (Zero Width Joiner)"
+msgstr "ZWJ (Unión de longitud nula)"
+
 #: tfrmmain.actunmarksubtitle.caption
 msgid "Unmark subtitle(s)"
 msgstr "Desmarcar subtítulo(s)"
@@ -3197,7 +3233,7 @@ msgid "Format"
 msgstr "Formato"
 
 #: tfrmmain.mnueditinsertsymbol.caption
-msgid "Insert unicode symbol"
+msgid "Insert Unicode symbol"
 msgstr "Insertar símbolo Unicode"
 
 #: tfrmmain.mnueditrtl.caption
@@ -3254,6 +3290,10 @@ msgstr "Buscar"
 msgctxt "tfrmmain.mnuhelp.caption"
 msgid "Help"
 msgstr "Ayuda"
+
+#: tfrmmain.mnumemoinsertunicodecontrolchar.caption
+msgid "Insert Unicode control character"
+msgstr "Insertar caracteres de control Unicode"
 
 #: tfrmmain.mnuselect.caption
 msgctxt "tfrmmain.mnuselect.caption"

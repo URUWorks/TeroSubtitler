@@ -77,6 +77,15 @@ type
     actExportSUP: TAction;
     actCopyVideoPosToClipboard: TAction;
     actGenerateVideo: TAction;
+    actUnicodeCtrlLRM: TAction;
+    actUnicodeCtrlRLM: TAction;
+    actUnicodeZWJ: TAction;
+    actUnicodeCtrlZWNJ: TAction;
+    actUnicodeCtrlLRE: TAction;
+    actUnicodeCtrlRLE: TAction;
+    actUnicodeCtrlLRO: TAction;
+    actUnicodeCtrlRLO: TAction;
+    actUnicodeCtrlPDF: TAction;
     actScreenshotToFile: TAction;
     actRemoveLineFromEntry: TAction;
     actWebPreview: TAction;
@@ -313,6 +322,16 @@ type
     MenuItem179: TMenuItem;
     MenuItem180: TMenuItem;
     MenuItem181: TMenuItem;
+    MenuItem182: TMenuItem;
+    MenuItem183: TMenuItem;
+    MenuItem184: TMenuItem;
+    MenuItem185: TMenuItem;
+    MenuItem186: TMenuItem;
+    MenuItem187: TMenuItem;
+    MenuItem188: TMenuItem;
+    MenuItem189: TMenuItem;
+    MenuItem190: TMenuItem;
+    mnuMemoInsertUnicodeControlChar: TMenuItem;
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
     mnuFormatProperties: TMenuItem;
@@ -514,6 +533,7 @@ type
     Separator51: TMenuItem;
     Separator52: TMenuItem;
     Separator53: TMenuItem;
+    Separator54: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
@@ -945,6 +965,15 @@ type
     procedure actScreenshotToFileExecute(Sender: TObject);
     procedure actRemoveLineFromEntryExecute(Sender: TObject);
     procedure actGenerateVideoExecute(Sender: TObject);
+    procedure actUnicodeCtrlLRMExecute(Sender: TObject);
+    procedure actUnicodeCtrlRLMExecute(Sender: TObject);
+    procedure actUnicodeZWJExecute(Sender: TObject);
+    procedure actUnicodeCtrlZWNJExecute(Sender: TObject);
+    procedure actUnicodeCtrlLREExecute(Sender: TObject);
+    procedure actUnicodeCtrlRLEExecute(Sender: TObject);
+    procedure actUnicodeCtrlLROExecute(Sender: TObject);
+    procedure actUnicodeCtrlRLOExecute(Sender: TObject);
+    procedure actUnicodeCtrlPDFExecute(Sender: TObject);
   private
 
   public
