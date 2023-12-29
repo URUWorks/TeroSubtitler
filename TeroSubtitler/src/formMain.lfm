@@ -3920,6 +3920,12 @@ object frmMain: TfrmMain
     object Separator38: TMenuItem
       Caption = '-'
     end
+    object mnuAddNote: TMenuItem
+      Action = actAddNote
+    end
+    object mnuNoteSeparator: TMenuItem
+      Caption = '-'
+    end
     object MenuItem91: TMenuItem
       Action = actCut
     end
@@ -3929,12 +3935,6 @@ object frmMain: TfrmMain
     object MenuItem93: TMenuItem
       Action = actPaste
     end
-    object mnuNoteSeparator: TMenuItem
-      Caption = '-'
-    end
-    object mnuAddNote: TMenuItem
-      Action = actAddNote
-    end
     object Separator8: TMenuItem
       Caption = '-'
     end
@@ -3942,6 +3942,15 @@ object frmMain: TfrmMain
       Caption = 'mnuVSTFormat'
     end
     object Separator36: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem191: TMenuItem
+      Action = actExtendLengthToPrevious
+    end
+    object MenuItem192: TMenuItem
+      Action = actExtendLengthToNext
+    end
+    object Separator55: TMenuItem
       Caption = '-'
     end
     object MenuItem94: TMenuItem

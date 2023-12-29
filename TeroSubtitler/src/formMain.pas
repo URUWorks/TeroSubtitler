@@ -331,6 +331,8 @@ type
     MenuItem188: TMenuItem;
     MenuItem189: TMenuItem;
     MenuItem190: TMenuItem;
+    MenuItem191: TMenuItem;
+    MenuItem192: TMenuItem;
     mnuMemoInsertUnicodeControlChar: TMenuItem;
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
@@ -534,6 +536,7 @@ type
     Separator52: TMenuItem;
     Separator53: TMenuItem;
     Separator54: TMenuItem;
+    Separator55: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
