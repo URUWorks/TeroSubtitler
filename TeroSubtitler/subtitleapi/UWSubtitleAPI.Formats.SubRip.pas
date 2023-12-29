@@ -163,8 +163,10 @@ begin
         begin
           Inc(i);
           Text := '';
-          while (i < SubtitleFile.Count) and (Pos(' --> ', SubtitleFile[i]) = 0) and
-            not SubtitleFile[i].IsEmpty do
+
+          while (i < SubtitleFile.Count) and
+            ( (i = SubtitleFile.Count-1) or
+              ((i+1 < SubtitleFile.Count) and (Pos(' --> ', SubtitleFile[i+1]) = 0)) ) do
           begin
             if Text <> '' then
               Text := Text + sLineBreak + SubtitleFile[i]
