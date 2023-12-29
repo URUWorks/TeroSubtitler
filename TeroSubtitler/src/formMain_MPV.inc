@@ -172,7 +172,7 @@ begin
   else
   begin
     //MPV.ShowOverlayText(GetSubtitleTextAtTime(MPV.GetMediaPosInMs));
-    MPV.ShowText(GetSubtitleTextAtTime(MPV.GetMediaPosInMs), '');
+    MPV.ShowText(GetSubtitleTextAtTime(MPV.GetMediaPosInMs), 3600000, '');
   end;
 
   if SubtitleInfo.LastSubtitle.Selected <> SubtitleInfo.LastSubtitle.ShowIndex then
