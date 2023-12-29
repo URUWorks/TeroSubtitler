@@ -353,7 +353,7 @@ begin
       begin
         if MPVOptions.SubtitleHandleByMPV then
         begin
-          frmMain.MPV.ShowText('', '');
+          frmMain.MPV.ShowText('', 0, '');
           if MPVSaveSubtitleTempTrack then
             MPVLoadSubtitleTempTrack;
         end
