@@ -205,7 +205,7 @@ begin
   for I := 0 to A.Count-1 do
     Result := Result + DOMNodeToString(A[I]);
 
-  Result := XMLTagsToTS(XMLValueToStr(Result)).Trim;
+  Result := XMLTagsToTS(XMLValueToStr(Result));
 end;
 
 // -----------------------------------------------------------------------------
