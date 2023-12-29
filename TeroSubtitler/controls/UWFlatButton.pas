@@ -68,6 +68,7 @@ type
     property Action;
     property Align;
     property Anchors;
+    property BorderSpacing;
     property Color;
     property Cursor;
     property Enabled;
