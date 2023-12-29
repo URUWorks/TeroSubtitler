@@ -596,7 +596,7 @@ begin
         while not CharInSet(P^, [#0, #10, #13]) do Inc(P);
 
         SetString(S, Start, P - Start);
-        Add(S);
+        Add(S, True);
 
         if P^ = #13 then Inc(P);
         if P^ = #10 then Inc(P);
@@ -613,7 +613,7 @@ begin
         while (P^ <> #0) and (P <> LB) do Inc(P);
 
         SetString(S, Start, P - Start);
-        Add(S);
+        Add(S, True);
         if P = LB then Inc(P, LineBreakLen);
       end;
     end;
