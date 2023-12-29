@@ -13,6 +13,7 @@
 - Improved: Adjust subtitle [Timings]
 - Improved: WebVTT color/voice tags
 - Improved: Localization switched from XML to PO (thx CM630)
+- Added: Insert Unicode control character menu
 - Added: Language selector in the first-run Wizard (thx CM630)
 - Added: Bulgarian language (thx CM630)
 
