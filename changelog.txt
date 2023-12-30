@@ -1,21 +1,22 @@
 1.0.1.4 (x.x.202x)
-- Fixed: Cannot save shortcuts on windows #218
-- Fixed: Wrong encoding when saving [Batch Convert]
-- Fixed: Wrong decimal separators #215
-- Fixed: Time expander/reducer doesn't work #208
-- Fixed: Unbreak lines wrong when new line starts with a dash #216 (thx CM630)
-- Fixed: Video doesn't automatically stop at the end #40
-- Fixed: Skip lines containing only numbers and/or zero times [SubtitleAPI/SubRip]
-- Fixed: Strange behavior when inserting subtitle on first line
-- Fixed: [macOS] Main toolbar appearance skipped in dark mode
-- Improved: Autobreak [Texts]
-- Improved: Divide subtitle [Subtitles]
-- Improved: Adjust subtitle [Timings]
-- Improved: WebVTT color/voice tags
-- Improved: Localization switched from XML to PO (thx CM630)
-- Added: Insert Unicode control character menu
-- Added: Language selector in the first-run Wizard (thx CM630)
-- Added: Bulgarian language (thx CM630)
+- fixed: Cannot save shortcuts on windows #218
+- fixed: Wrong encoding when saving [Batch Convert]
+- fixed: Wrong decimal separators #215
+- fixed: Time expander/reducer doesn't work #208
+- fixed: Unbreak lines wrong when new line starts with a dash #216 (thx CM630)
+- fixed: Video doesn't automatically stop at the end #40
+- fixed: Skip lines containing only numbers and/or zero times [SubtitleAPI/SubRip]
+- fixed: Strange behavior when inserting subtitle on first line
+- fixed: [macOS] Main toolbar appearance skipped in dark mode
+- updated: Russian language (thx RoxMarty)
+- improved: Autobreak [Texts]
+- improved: Divide subtitle [Subtitles]
+- improved: Adjust subtitle [Timings]
+- improved: WebVTT color/voice tags
+- improved: Localization switched from XML to PO (thx CM630)
+- added: Insert Unicode control character menu
+- added: Language selector in the first-run Wizard (thx CM630)
+- added: Bulgarian language (thx CM630)
 
 1.0.1.3 (17.11.2023)
 - fixed: OCR scripts don't work #198
