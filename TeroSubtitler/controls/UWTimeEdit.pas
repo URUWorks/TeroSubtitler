@@ -111,6 +111,7 @@ type
     property Enabled;
     property Font;
     property HideSelection;
+    property Hint;
     property ParentBidiMode;
     property OnChangeBounds;
     property OnClick;
