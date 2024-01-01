@@ -158,6 +158,7 @@ begin
   begin
     Parent := Self;
     Align := alClient;
+    ClickOnSelChange := False;
     OnClick := @ListBoxClick;
   end;
 end;
@@ -315,6 +316,8 @@ begin
     VK_DOWN   : MoveUpOrDown(False);
     VK_RETURN : if Assigned(FormPopupList) then FormPopupList.CloseAndReturnAction;
     VK_ESCAPE : CloseFormPopupList;
+  else
+    inherited KeyDown(Key, Shift);
   end;
 end;
 
@@ -323,9 +326,9 @@ end;
 procedure TUWEditAction.Change;
 begin
   if not FUpdating then
-    FillListWithFilter(Text);
-
-  inherited Change;
+    FillListWithFilter(Text)
+  else
+    inherited Change;
 end;
 
 // -----------------------------------------------------------------------------
@@ -397,11 +400,22 @@ begin
       FormPopupList.Close
     else if not FormPopupList.Visible then
     begin
-      if FListBox.Items.Count < 10 then FormPopupList.Height := Self.Height * FListBox.Items.Count;
+      if FListBox.Items.Count < 10 then
+      {$IFDEF WINDOWS}
+      FormPopupList.Height := Self.Height * FListBox.Items.Count;
+      {$ELSE}
+      FormPopupList.Height := (Self.Height*2) * FListBox.Items.Count;
+      {$ENDIF}
+
       if Assigned(FOnPopupList) then FOnPopupList(FormPopupList);
-      //ShowWindow(FormPopupList.Handle, SW_SHOWNOACTIVATE);
-      FormPopupList.Visible := True;
-      if frm <> NIL then frm.SetFocus;
+      FormPopupList.Visible := True; //ShowWindow(FormPopupList.Handle, SW_SHOWNOACTIVATE);
+      if frm <> NIL then
+      begin
+        frm.SetFocus;
+        {$IFDEF DARWIN}
+        SelStart := SelLength; //without this it does not work correctly on macOS
+        {$ENDIF}
+      end;
     end;
   end;
 end;
