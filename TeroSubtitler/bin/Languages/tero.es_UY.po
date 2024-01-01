@@ -2979,6 +2979,10 @@ msgctxt "tfrmmain.actshowtoolbarmain.caption"
 msgid "Main"
 msgstr "Principal"
 
+#: tfrmmain.actshowtoolbarquickaction.caption
+msgid "Quick Action"
+msgstr "Acción rapida"
+
 #: tfrmmain.actsort.caption
 msgid "Sort"
 msgstr "Ordenar"
@@ -3225,6 +3229,11 @@ msgstr "FPS objetivo del archivo de subtítulos"
 msgid "FPS of the movie the opened subtitle file was made for"
 msgstr "FPS de la película para la que se creó el archivo de subtítulos abierto"
 
+#: tfrmmain.edtquickaction.hint
+msgctxt "tfrmmain.edtquickaction.hint"
+msgid "Quick Action Finder"
+msgstr "Buscador rápido de acciones"
+
 #: tfrmmain.lblmedialength.hint
 msgid "Video length and FPS"
 msgstr "Duración de vídeo y CPS"
@@ -3262,8 +3271,6 @@ msgid "Subtitles"
 msgstr "Subtítulos"
 
 #: tfrmmain.mnuedittexts.caption
-#, fuzzy
-#| msgid "Texts"
 msgctxt "tfrmmain.mnuedittexts.caption"
 msgid "Text"
 msgstr "Textos"
@@ -4402,4 +4409,3 @@ msgstr "yt-dlp:"
 msgctxt "tfrmwizard.lblytdlp_hint.caption"
 msgid "Optional, used for dowloading from YouTube."
 msgstr "Opcional, utilizado para descargar desde YouTube."
-

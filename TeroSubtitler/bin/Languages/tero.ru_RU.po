@@ -2973,6 +2973,10 @@ msgctxt "tfrmmain.actshowtoolbarmain.caption"
 msgid "Main"
 msgstr "Вкл/выкл главную панель инструментов"
 
+#: tfrmmain.actshowtoolbarquickaction.caption
+msgid "Quick Action"
+msgstr ""
+
 #: tfrmmain.actsort.caption
 msgid "Sort"
 msgstr "Сортировать"
@@ -3218,6 +3222,11 @@ msgstr "Конечное FPS файла субтитров"
 #: tfrmmain.cboinputfps.hint
 msgid "FPS of the movie the opened subtitle file was made for"
 msgstr "FPS видео для которого был создан файл субтитров"
+
+#: tfrmmain.edtquickaction.hint
+msgctxt "tfrmmain.edtquickaction.hint"
+msgid "Quick Action Finder"
+msgstr ""
 
 #: tfrmmain.lblmedialength.hint
 msgid "Video length and FPS"

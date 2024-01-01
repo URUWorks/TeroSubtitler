@@ -2969,6 +2969,10 @@ msgctxt "tfrmmain.actshowtoolbarmain.caption"
 msgid "Main"
 msgstr ""
 
+#: tfrmmain.actshowtoolbarquickaction.caption
+msgid "Quick Action"
+msgstr ""
+
 #: tfrmmain.actsort.caption
 msgid "Sort"
 msgstr ""
@@ -3213,6 +3217,11 @@ msgstr ""
 
 #: tfrmmain.cboinputfps.hint
 msgid "FPS of the movie the opened subtitle file was made for"
+msgstr ""
+
+#: tfrmmain.edtquickaction.hint
+msgctxt "tfrmmain.edtquickaction.hint"
+msgid "Quick Action Finder"
 msgstr ""
 
 #: tfrmmain.lblmedialength.hint
