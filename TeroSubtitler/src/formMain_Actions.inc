@@ -1585,28 +1585,35 @@ end;
 
 procedure TfrmMain.actShowToolbarMainExecute(Sender: TObject);
 begin
-  UpdateCoolBar(0, actShowToolbarMain.Checked);
+  UpdateCoolBar(ToolBarMain, actShowToolbarMain.Checked);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actShowToolbarFPSExecute(Sender: TObject);
 begin
-  UpdateCoolBar(1, actShowToolbarFPS.Checked);
+  UpdateCoolBar(ToolBarFPS, actShowToolbarFPS.Checked);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actShowToolbarFormatExecute(Sender: TObject);
 begin
-  UpdateCoolBar(2, actShowToolbarFormat.Checked);
+  UpdateCoolBar(ToolBarFormat, actShowToolbarFormat.Checked);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actShowToolbarEncodingExecute(Sender: TObject);
 begin
-  UpdateCoolBar(3, actShowToolbarEncoding.Checked);
+  UpdateCoolBar(ToolBarEncoding, actShowToolbarEncoding.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowToolbarQuickActionExecute(Sender: TObject);
+begin
+  UpdateCoolBar(ToolBarActions, actShowToolbarQuickAction.Checked);
 end;
 
 // -----------------------------------------------------------------------------

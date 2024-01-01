@@ -94,7 +94,7 @@ procedure UpdateValuesForSubtitle(const AIndex: Integer);
 procedure UpdateValues(const AInvalidate: Boolean = False);
 
 procedure UpdateToolBarButtons(const AOnlyDivider: Boolean);
-procedure UpdateCoolBar(const ABand: Integer; const AVisible: Boolean);
+procedure UpdateCoolBar(const ABandFromControl: TControl; const AVisible: Boolean);
 
 {$IFNDEF WINDOWS}
 procedure PrepareCustomControls(const AForm: TForm);
@@ -1514,14 +1514,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure UpdateCoolBar(const ABand: Integer; const AVisible: Boolean);
+procedure UpdateCoolBar(const ABandFromControl: TControl; const AVisible: Boolean);
 var
-  i, x: Integer;
+  i, x : Integer;
+  Band : TCoolBand;
 begin
   with frmMain do
   begin
-    if ABand > -1 then
-      CoolBarMain.Bands[ABand].Visible := AVisible;
+    if ABandFromControl <> NIL then
+    begin
+      Band := CoolBarMain.Bands.FindBand(ABandFromControl);
+      if Band <> NIL then
+        Band.Visible := AVisible;
+    end;
 
     x := 0;
     for i := 0 to CoolBarMain.Bands.Count-1 do

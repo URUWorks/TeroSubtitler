@@ -310,8 +310,9 @@ begin
     actCenterWaveformExecute(NIL);
     actShowToolBarMain.Checked     := True;
     actShowToolBarFPS.Checked      := True;
-    actShowToolBarFormat.Checked   := True;
-    actShowToolBarEncoding.Checked := True;
+    actShowToolBarFormat.Checked   := False;
+    actShowToolBarEncoding.Checked := False;
+    actShowToolbarQuickAction.Checked := True;
   end;
 
   {$IFDEF WINDOWS}
@@ -582,8 +583,9 @@ begin
         end;
         actShowToolBarMain.Checked     := GetValue('Main', True);
         actShowToolBarFPS.Checked      := GetValue('FPS', True);
-        actShowToolBarFormat.Checked   := GetValue('Format', True);
-        actShowToolBarEncoding.Checked := GetValue('Encoding', True);
+        actShowToolBarFormat.Checked   := GetValue('Format', False);
+        actShowToolBarEncoding.Checked := GetValue('Encoding', False);
+        actShowToolbarQuickAction.Checked := GetValue('QuickAction', True);
         CloseKey;
         for i := 0 to c-1 do
           for j := 0 to c-1 do
@@ -593,7 +595,7 @@ begin
               Break;
             end;
         SetLength(bands, 0);
-        UpdateCoolBar(-1, False);
+        UpdateCoolBar(NIL, False);
       end;
     end;
     // Format properties
@@ -886,6 +888,7 @@ begin
         SetValue('FPS', actShowToolBarFPS.Checked);
         SetValue('Format', actShowToolBarFormat.Checked);
         SetValue('Encoding', actShowToolBarEncoding.Checked);
+        SetValue('QuickAction', actShowToolbarQuickAction.Checked);
         CloseKey;
       end;
     end;

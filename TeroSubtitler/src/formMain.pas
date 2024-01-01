@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ComCtrls,
   StdCtrls, ExtCtrls, Types, UWLayout, WAVDisplayer, UWTimeEdit, UWMemo,
-  UWFlatButton, UWSeekBar, UWStatusBar, UWSubtitleAPI, BGRABitmap,
+  UWFlatButton, UWSeekBar, UWStatusBar, UWEditAction, UWSubtitleAPI, BGRABitmap,
   BGRABitmapTypes, UWSystem.TimeUtils, LCLIntf, LCLType, ActnList, Buttons,
   laz.VirtualTrees, MPVPlayer, UWSubtitleAPI.Formats, procTypes, procUndo,
   LCLTranslator, UWSystem.Globalization, procLocalize;
@@ -110,6 +110,7 @@ type
     actShowToolbarEncoding: TAction;
     actShowToolbarFormat: TAction;
     actShowToolbarFPS: TAction;
+    actShowToolbarQuickAction: TAction;
     actMediaVolumeMute: TAction;
     actMediaVolumeDown: TAction;
     actMediaVolumeUp: TAction;
@@ -333,6 +334,12 @@ type
     MenuItem190: TMenuItem;
     MenuItem191: TMenuItem;
     MenuItem192: TMenuItem;
+    MenuItem193: TMenuItem;
+    MenuItem194: TMenuItem;
+    MenuItem195: TMenuItem;
+    MenuItem196: TMenuItem;
+    MenuItem197: TMenuItem;
+    MenuItem198: TMenuItem;
     mnuMemoInsertUnicodeControlChar: TMenuItem;
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
@@ -484,7 +491,7 @@ type
     popMemo: TPopupMenu;
     popTranscription: TPopupMenu;
     popSilentZones: TPopupMenu;
-    PopupMenu1: TPopupMenu;
+    popCoolBarMain: TPopupMenu;
     popWAVE: TPopupMenu;
     popVideo: TPopupMenu;
     popVST: TPopupMenu;
@@ -579,6 +586,7 @@ type
     TimerAutoBackup: TTimer;
     TimerSubtitle: TTimer;
     TimerWaveform: TTimer;
+    ToolBarActions: TToolBar;
     ToolBarEncoding: TToolBar;
     ToolBarFPS: TToolBar;
     ToolBarFormat: TToolBar;
@@ -624,6 +632,7 @@ type
     tlbdiv0: TToolButton;
     etlb14: TToolButton;
     etlb6: TToolButton;
+    edtQuickAction: TUWEditAction;
     wtlb0: TToolButton;
     wtlb1: TToolButton;
     wtlb2: TToolButton;
@@ -687,6 +696,7 @@ type
     procedure cboFormatSelect(Sender: TObject);
     procedure cboActorChange(Sender: TObject);
     procedure cboActorKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edtQuickActionClickAction(Sender: TObject; const AAction: TAction);
     procedure MRUItemClick(Sender: TObject);
     procedure MRUOnChange(Sender: TObject);
     procedure PlayRateClick(Sender: TObject);
@@ -702,6 +712,9 @@ type
     procedure DoWAVEPopup(Sender: TObject);
     procedure DoAutoBackupTimer(Sender: TObject);
     procedure DoStatusTimer(Sender: TObject);
+    {$IFDEF WINDOWS}
+    procedure DoPopupQuickActionList(Sender: TObject);
+    {$ENDIF}
     {$IFDEF DARWIN}
     procedure DoSaveDialogTypeChange(Sender: TObject);
     {$ENDIF}
@@ -957,6 +970,7 @@ type
     procedure actShowToolbarFPSExecute(Sender: TObject);
     procedure actShowToolbarFormatExecute(Sender: TObject);
     procedure actShowToolbarEncodingExecute(Sender: TObject);
+    procedure actShowToolbarQuickActionExecute(Sender: TObject);
     procedure actSortExecute(Sender: TObject);
     procedure actExportCustomTextFormatExecute(Sender: TObject);
     procedure actExportCustomImageFormatExecute(Sender: TObject);
@@ -1087,6 +1101,11 @@ begin
   ForceDirectories(TerminologyFolder);
   ForceDirectories(WhisperModelsFolder);
   ForceDirectories(WhisperTranscriptionsFolder);
+
+  {$IFDEF WINDOWS}
+  edtQuickAction.OnPopupList := @DoPopupQuickActionList;
+  {$ENDIF}
+
   {$IFDEF DARWIN}
   // rsLine not working on macOS?
   SplitterVideo.ResizeStyle    := rsUpdate;
@@ -1618,6 +1637,22 @@ begin
     Key := 0;
   end;
 end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.edtQuickActionClickAction(Sender: TObject; const AAction: TAction);
+begin
+  if AAction <> NIL then AAction.Execute;
+end;
+
+// -----------------------------------------------------------------------------
+
+{$IFDEF WINDOWS}
+procedure TfrmMain.DoPopupQuickActionList(Sender: TObject);
+begin
+  CheckColorTheme(TForm(Sender));
+end;
+{$ENDIF}
 
 // -----------------------------------------------------------------------------
 

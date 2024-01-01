@@ -17,6 +17,8 @@ object frmMain: TfrmMain
   OnShow = FormShow
   Position = poMainFormCenter
   ShowHint = True
+  SnapOptions.SnapToMonitor = True
+  SnapOptions.SnapToForms = True
   LCLVersion = '3.0.0.3'
   object LayoutWaveform: TUWLayout
     Left = 0
@@ -151,11 +153,11 @@ object frmMain: TfrmMain
   end
   object LayoutVideo: TUWLayout
     Left = 624
-    Height = 603
-    Top = 29
+    Height = 573
+    Top = 59
     Width = 500
     Align = alRight
-    ClientHeight = 603
+    ClientHeight = 573
     ClientWidth = 500
     Constraints.MinHeight = 150
     Constraints.MinWidth = 150
@@ -163,7 +165,7 @@ object frmMain: TfrmMain
     object LayoutVideoControls: TUWLayout
       Left = 0
       Height = 36
-      Top = 567
+      Top = 537
       Width = 500
       Align = alBottom
       ClientHeight = 36
@@ -318,7 +320,7 @@ object frmMain: TfrmMain
     end
     object MPV: TMPVPlayer
       Left = 0
-      Height = 567
+      Height = 537
       Top = 0
       Width = 500
       Align = alClient
@@ -356,8 +358,8 @@ object frmMain: TfrmMain
   end
   object SplitterVideo: TSplitter
     Left = 619
-    Height = 603
-    Top = 29
+    Height = 573
+    Top = 59
     Width = 5
     Align = alRight
     AutoSnap = False
@@ -366,29 +368,29 @@ object frmMain: TfrmMain
   end
   object LayoutSubtitles: TUWLayout
     Left = 0
-    Height = 603
-    Top = 29
+    Height = 573
+    Top = 59
     Width = 619
     Align = alClient
-    ClientHeight = 603
+    ClientHeight = 573
     ClientWidth = 619
     Constraints.MinHeight = 150
     Constraints.MinWidth = 150
     TabOrder = 0
     object LayoutVST: TUWLayout
       Left = 0
-      Height = 603
+      Height = 573
       Top = 0
       Width = 619
       Align = alClient
-      ClientHeight = 603
+      ClientHeight = 573
       ClientWidth = 619
       TabOrder = 0
       OnResize = LayoutVSTResize
       object LayoutEditor: TUWLayout
         Left = 0
         Height = 139
-        Top = 464
+        Top = 434
         Width = 619
         Align = alBottom
         ClientHeight = 139
@@ -772,7 +774,7 @@ object frmMain: TfrmMain
       end
       object VST: TLazVirtualStringTree
         Left = 0
-        Height = 464
+        Height = 434
         Top = 0
         Width = 619
         Align = alClient
@@ -847,7 +849,7 @@ object frmMain: TfrmMain
   end
   object CoolBarMain: TCoolBar
     Left = 0
-    Height = 29
+    Height = 59
     Top = 0
     Width = 1124
     AutoSize = True
@@ -884,6 +886,14 @@ object frmMain: TfrmMain
         HorizontalOnly = True
         ParentBitmap = False
         Width = 211
+      end    
+      item
+        Break = False
+        Control = ToolBarActions
+        FixedBackground = False
+        HorizontalOnly = True
+        ParentBitmap = False
+        Width = 157
       end>
     EdgeBorders = []
     EdgeInner = esNone
@@ -891,6 +901,7 @@ object frmMain: TfrmMain
     GrabStyle = gsHorLines
     GrabWidth = 3
     HorizontalSpacing = 0
+    PopupMenu = popCoolBarMain
     ShowText = False
     object ToolBarMain: TToolBar
       AnchorSideLeft.Control = CoolBarMain
@@ -1167,6 +1178,34 @@ object frmMain: TfrmMain
         Style = csDropDownList
         TabOrder = 0
         TabStop = False
+      end
+    end
+    object ToolBarActions: TToolBar
+      AnchorSideLeft.Control = CoolBarMain
+      AnchorSideTop.Control = CoolBarMain
+      Left = 5
+      Height = 22
+      Top = 34
+      Width = 181
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 5
+      BorderSpacing.Top = 34
+      EdgeBorders = []
+      Images = ImageList_Default
+      TabOrder = 4
+      Transparent = True
+      Wrapable = False
+      object edtQuickAction: TUWEditAction
+        Left = 1
+        Height = 22
+        Hint = 'Quick Action Finder'
+        Top = 0
+        Width = 180
+        ActionList = ActionList
+        OnClickAction = edtQuickActionClickAction
+        AutoSize = False
+        TabOrder = 0
       end
     end
   end
@@ -1691,6 +1730,10 @@ object frmMain: TfrmMain
         end
         object MenuItem159: TMenuItem
           Action = actShowToolbarEncoding
+          AutoCheck = True
+        end
+        object MenuItem193: TMenuItem
+          Action = actShowToolbarQuickAction
           AutoCheck = True
         end
       end
@@ -3641,6 +3684,12 @@ object frmMain: TfrmMain
       Caption = 'PDF (Pop Directorional Formatting)'
       OnExecute = actUnicodeCtrlPDFExecute
     end
+    object actShowToolbarQuickAction: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Quick Action'
+      OnExecute = actShowToolbarQuickActionExecute
+    end
   end
   object popDropInsert: TPopupMenu
     Images = ImageList_Default
@@ -4152,5 +4201,29 @@ object frmMain: TfrmMain
   object popSilentZones: TPopupMenu
     Left = 88
     Top = 264
+  end
+  object popCoolBarMain: TPopupMenu
+    Left = 88
+    Top = 320
+    object MenuItem194: TMenuItem
+      Action = actShowToolbarMain
+      AutoCheck = True
+    end
+    object MenuItem195: TMenuItem
+      Action = actShowToolbarFPS
+      AutoCheck = True
+    end
+    object MenuItem196: TMenuItem
+      Action = actShowToolbarFormat
+      AutoCheck = True
+    end
+    object MenuItem197: TMenuItem
+      Action = actShowToolbarEncoding
+      AutoCheck = True
+    end
+    object MenuItem198: TMenuItem
+      Action = actShowToolbarQuickAction
+      AutoCheck = True
+    end
   end
 end

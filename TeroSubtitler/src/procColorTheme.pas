@@ -31,7 +31,7 @@ uses
   {$IFDEF DARWIN}, MacOSAll, CocoaAll, CocoaUtils{$ENDIF}
   {$IFDEF WINDOWS}, Windows, Win32Proc, Registry,
     StdCtrls, UWStatusBar, UWCheckBox, UWRadioButton, UWHotKey, UWTimeEdit,
-    Spin, CheckLst{$ENDIF};
+    UWEditAction, Spin, CheckLst{$ENDIF};
 
 type
 
@@ -76,6 +76,7 @@ type
     procedure Apply(const AGroupBox: TGroupBox; const AColorMode: TColorMode; const AImageList: TImageList = NIL; const ARecursive: Boolean = True);
     procedure Apply(const AMemo: TMemo; const AColorMode: TColorMode); overload;
     procedure Apply(const ATimeEdit: TUWTimeEdit; const AColorMode: TColorMode); overload;
+    procedure Apply(const AEditAction: TUWEditAction; const AColorMode: TColorMode); overload;
     procedure Apply(const ALabel: TLabel; const AColorMode: TColorMode); overload;
     procedure Apply(const ACombo: TComboBox; const AColorMode: TColorMode); overload;
     procedure Apply(const AEdit: TEdit; const AColorMode: TColorMode); overload;
@@ -374,6 +375,8 @@ begin
     Apply(TMemo(Ctrl), AColorMode)
   else if Ctrl is TUWTimeEdit then
     Apply(TUWTimeEdit(Ctrl), AColorMode)
+  else if Ctrl is TUWEditAction then
+    Apply(TUWEditAction(Ctrl), AColorMode)
   else if Ctrl is TLabel then
     Apply(TLabel(Ctrl), AColorMode)
   else if Ctrl is TComboBox then
@@ -534,13 +537,26 @@ end;
 {$IFDEF WINDOWS}
 procedure TColorTheme.Apply(const ATimeEdit: TUWTimeEdit; const AColorMode: TColorMode);
 begin
-  ATimeEdit.Color       := Colors.Window;
-  ATimeEdit.Font.Color  := Colors.Text;
+  ATimeEdit.Color      := Colors.Window;
+  ATimeEdit.Font.Color := Colors.Text;
 
   if AColorMode = cmLight then
     ATimeEdit.BorderStyle := bsSingle
   else
     ATimeEdit.BorderStyle := bsNone;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TColorTheme.Apply(const AEditAction: TUWEditAction; const AColorMode: TColorMode); overload;
+begin
+  AEditAction.Color      := Colors.Window;
+  AEditAction.Font.Color := Colors.Text;
+
+  if AColorMode = cmLight then
+    AEditAction.BorderStyle := bsSingle
+  else
+    AEditAction.BorderStyle := bsNone;
 end;
 {$ENDIF}
 
@@ -794,7 +810,9 @@ begin
     if Ctrl is TLabel then
       Apply(TLabel(Ctrl), AColorMode)
     else if Ctrl is TComboBox then
-      Apply(TComboBox(Ctrl), AColorMode);
+      Apply(TComboBox(Ctrl), AColorMode)
+    else if Ctrl is TUWEditAction then
+      Apply(TUWEditAction(Ctrl), AColorMode);
   end;
   {$ENDIF}
 end;
