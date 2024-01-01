@@ -33,22 +33,21 @@ type
 
   { TUWEditActionFormList }
 
-  TOnSelectActionEvent = procedure(Sender: TObject; const AAction: TAction) of object;
+  TOnClickActionEvent = procedure(Sender: TObject; const AAction: TAction) of object;
 
   TUWEditActionFormList = class(TCustomForm)
   private
-    FOnSelectActionEvent: TOnSelectActionEvent;
     FEditAction: TUWEditAction;
     FListBox: TListBox;
     procedure ListBoxClick(Sender: TObject);
     procedure DoActionEvent;
-    procedure CloseAndReturnAction;
     procedure UpdateText;
   protected
     procedure DoClose(var CloseAction: TCloseAction); override;
   public
     constructor CreateNew(AOwner: TComponent; Num: Integer = 0); override;
     destructor Destroy; override;
+    procedure CloseAndReturnAction;
     procedure MoveSelection(const APrevious: Boolean);
   end;
 
@@ -59,6 +58,8 @@ type
     FActionList : TActionList;
     FImages : TCustomImageList;
     FUpdating : Boolean;
+    FOnClickAction: TOnClickActionEvent;
+    FOnPopupList: TNotifyEvent;
     procedure FillListWithFilter(const AText: String);
     procedure CloseFormPopupList;
   protected
@@ -73,9 +74,12 @@ type
   published
     property ActionList : TActionList read FActionList write FActionList;
     property Images : TCustomImageList read FImages write FImages;
+    property OnClickAction : TOnClickActionEvent read FOnClickAction write FOnClickAction;
+    property OnPopupList : TNotifyEvent read FOnPopupList write FOnPopupList;
 
     property Align;
     property Alignment;
+    property AutoSize;
     property Anchors;
     property AutoSelect;
     property BorderSpacing;
@@ -90,6 +94,7 @@ type
     property Enabled;
     property Font;
     property HideSelection;
+    property Hint;
     property ParentBidiMode;
     property OnChange;
     property OnChangeBounds;
@@ -147,7 +152,6 @@ begin
   BorderStyle := bsNone;
   FormStyle := fsStayOnTop;
   ShowInTaskBar := stNever;
-  FOnSelectActionEvent := NIL;
   FEditAction := NIL;
   FListBox := TListBox.Create(Self);
   with FListBox do
@@ -162,7 +166,6 @@ end;
 
 destructor TUWEditActionFormList.Destroy;
 begin
-  FOnSelectActionEvent := NIL;
   FEditAction := NIL;
   FListBox.Free;
   FormPopupList := NIL;
@@ -183,11 +186,17 @@ end;
 
 procedure TUWEditActionFormList.ListBoxClick(Sender: TObject);
 begin
-  if TListBox(Sender).Items.Count > 0 then
-  begin
-    UpdateText;
-    CloseAndReturnAction;
-  end;
+  with TListBox(Sender) do
+    if Items.Count > 0 then
+    begin
+      if ItemAtPos(ScreenToClient(Mouse.CursorPos), True) <> -1 then
+      begin
+        UpdateText;
+        CloseAndReturnAction;
+      end
+      else
+        FEditAction.Text := '';
+    end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -195,8 +204,8 @@ end;
 procedure TUWEditActionFormList.DoActionEvent;
 begin
   with FEditAction do
-    if Assigned(FOnSelectActionEvent) and Assigned(FActionList) and (FListBox.ItemIndex >= 0) then
-      FOnSelectActionEvent(Self, TAction(FActionList.Actions[PtrUInt(FListBox.Items.Objects[FListBox.ItemIndex])]));
+    if Assigned(FOnClickAction) and Assigned(FActionList) and (FListBox.ItemIndex >= 0) then
+      FOnClickAction(Self, TAction(FActionList.Actions[PtrUInt(FListBox.Items.Objects[FListBox.ItemIndex])]));
 end;
 
 // -----------------------------------------------------------------------------
@@ -253,8 +262,11 @@ constructor TUWEditAction.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
+  AutoSize := False;
   FActionList := NIL;
   FUpdating := False;
+  FOnClickAction := NIL;
+  FOnPopupList := NIL;
 end;
 
 // -----------------------------------------------------------------------------
@@ -263,6 +275,8 @@ destructor TUWEditAction.Destroy;
 begin
   CloseFormPopupList;
   FActionList := NIL;
+  FOnClickAction := NIL;
+  FOnPopupList := NIL;
 
   inherited Destroy;
 end;
@@ -299,7 +313,7 @@ begin
   case Key of
     VK_UP     : MoveUpOrDown(True);
     VK_DOWN   : MoveUpOrDown(False);
-    VK_RETURN,
+    VK_RETURN : if Assigned(FormPopupList) then FormPopupList.CloseAndReturnAction;
     VK_ESCAPE : CloseFormPopupList;
   end;
 end;
@@ -336,7 +350,11 @@ begin
     xy := ControlToScreen(Point(0, ClientHeight));
     FormPopupList := TUWEditActionFormList.CreateNew(Application);
     FormPopupList.FEditAction := Self;
-    FormPopupList.SetBounds(xy.x, xy.y + BorderWidth, Width, Height * 10);
+    FormPopupList.SetBounds(xy.x, xy.y + BorderWidth, Width * 2, Height * 10);
+
+    if (FormPopupList.Left + FormPopupList.Width) > Screen.Width then
+      FormPopupList.Width := Screen.Width - FormPopupList.Left;
+
     frm := Screen.ActiveForm;
   end;
 
@@ -380,6 +398,7 @@ begin
     else if not FormPopupList.Visible then
     begin
       if FListBox.Items.Count < 10 then FormPopupList.Height := Self.Height * FListBox.Items.Count;
+      if Assigned(FOnPopupList) then FOnPopupList(FormPopupList);
       //ShowWindow(FormPopupList.Handle, SW_SHOWNOACTIVATE);
       FormPopupList.Visible := True;
       if frm <> NIL then frm.SetFocus;
