@@ -1,3 +1,8 @@
+1.0.1.5 (x.x.2024)
+- fixed: Wrong toolbar was shown/hidden from the view menu
+- added: Quick Action Finder
+- added: Snapping window
+
 1.0.1.4 (01.01.2024)
 - fixed: Cannot save shortcuts on windows #218
 - fixed: Wrong encoding when saving [Batch Convert]
