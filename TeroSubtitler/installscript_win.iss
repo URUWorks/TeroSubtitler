@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Tero Subtitler"
-#define MyAppVersion "1.0.1.2"
-#define ShortAppVersion "1012"
+#define MyAppVersion "1.0.1.4"
+#define ShortAppVersion "1014"
 #define MyAppPublisher "URUWorks"
 #define MyAppURL "https://github.com/URUWorks/TeroSubtitler/releases"
 #define MyAppExeName "tero.exe"
@@ -53,46 +53,12 @@ Source: "{#SourcePath}\bin\libhunspellx64.dll"; DestDir: "{app}"; Flags: ignorev
 Source: "{#SourcePath}\bin\libmpv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#SourcePath}\bin\libssl-1_1-x64.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#SourcePath}\bin\tero.cfs"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\OCR\Default.ocr"; DestDir: "{app}\OCR"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\OCR\English.ocr"; DestDir: "{app}\OCR"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\OCR\Spanish.ocr"; DestDir: "{app}\OCR"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Languages\en-US.xml"; DestDir: "{app}\Languages"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Languages\es-UY.xml"; DestDir: "{app}\Languages"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Languages\it-IT.xml"; DestDir: "{app}\Languages"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Languages\ru-RU.xml"; DestDir: "{app}\Languages"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\890.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\aqt.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\asc.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\ass.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\dfxp.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\itt.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\sbv.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\srt.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\ssa.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\stl.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\sub.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\vtt.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Icons\xas.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\en_US.aff"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\en_US.dic"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\es_UY.aff"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\es_UY.dic"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\it_IT.aff"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\it_IT.dic"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\ko_KR.aff"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\ko_KR.dic"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\pt_BR.aff"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\pt_BR.dic"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\pt_BR_README.txt"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\pt_PT (pos-AO 1990).aff"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\pt_PT (pos-AO 1990).dic"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\pt_PT (pre-AO 1990).aff"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\pt_PT (pre-AO 1990).dic"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\ru_RU.aff"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\Dictionaries\ru_RU.dic"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\CustomFormat\DoStudio.cfi"; DestDir: "{app}\CustomFormat"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\CustomFormat\HTML Example.cft"; DestDir: "{app}\CustomFormat"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\CustomFormat\Sonic Scenarist HDMV Authoring.cfi"; DestDir: "{app}\CustomFormat"; Flags: ignoreversion
+Source: "{#SourcePath}\bin\ShortCuts\*.key"; DestDir: "{app}\ShortCuts"; Flags: ignoreversion
+Source: "{#SourcePath}\bin\OCR\*.ocr"; DestDir: "{app}\OCR"; Flags: ignoreversion
+Source: "{#SourcePath}\bin\Languages\*.po"; DestDir: "{app}\Languages"; Flags: ignoreversion
+Source: "{#SourcePath}\bin\Icons\*.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
+Source: "{#SourcePath}\bin\Dictionaries\*.*"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
+Source: "{#SourcePath}\bin\CustomFormat\*.cfi"; DestDir: "{app}\CustomFormat"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
@@ -120,7 +86,7 @@ Root: HKCR; Subkey: ".vtt"; ValueData: "{#MyAppName}";  Flags: uninsdeletevalue;
 Root: HKCR; Subkey: ".webvtt"; ValueData: "{#MyAppName}";  Flags: uninsdeletevalue; ValueType: string;  ValueName: ""
 
 Root: HKCR; Subkey: "{#MyAppName}";                     ValueData: "Program {#MyAppName}";  Flags: uninsdeletekey;   ValueType: string;  ValueName: ""
-Root: HKCR; Subkey: "{#MyAppName}\DefaultIcon";             ValueData: "{app}\{#MyAppExeName},0";               ValueType: string;  ValueName: ""
+Root: HKCR; Subkey: "{#MyAppName}\DefaultIcon";         ValueData: "{app}\{#MyAppExeName},0";  ValueType: string;  ValueName: ""
 Root: HKCR; Subkey: "{#MyAppName}\shell\open\command";  ValueData: """{app}\{#MyAppExeName}"" ""%1""";  ValueType: string;  ValueName: ""
 
 [Icons]
