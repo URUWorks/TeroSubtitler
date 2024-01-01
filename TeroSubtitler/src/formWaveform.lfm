@@ -10,5 +10,7 @@ object frmWaveform: TfrmWaveform
   FormStyle = fsStayOnTop
   OnClose = FormClose
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  SnapOptions.SnapToMonitor = True
+  SnapOptions.SnapToForms = True
+  LCLVersion = '3.0.0.3'
 end
