@@ -3256,8 +3256,10 @@ msgid "Subtitles"
 msgstr "Субтитры"
 
 #: tfrmmain.mnuedittexts.caption
+#, fuzzy
+#| msgid "Texts"
 msgctxt "tfrmmain.mnuedittexts.caption"
-msgid "Texts"
+msgid "Text"
 msgstr "Тексты"
 
 #: tfrmmain.mnuedittimings.caption
@@ -4394,3 +4396,4 @@ msgstr ""
 msgctxt "tfrmwizard.lblytdlp_hint.caption"
 msgid "Optional, used for dowloading from YouTube."
 msgstr "Для скачивания с YouTube (необязательное)"
+

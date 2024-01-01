@@ -2433,6 +2433,10 @@ msgctxt "tfrmmain.actfontclear.caption"
 msgid "Clear"
 msgstr ""
 
+#: tfrmmain.actfontcolor.caption
+msgid "Set current font color"
+msgstr ""
+
 #: tfrmmain.actfontcolordlg.caption
 msgctxt "tfrmmain.actfontcolordlg.caption"
 msgid "Color..."
@@ -3028,6 +3032,18 @@ msgstr ""
 msgid "Set time code format to HH:MM:SS.ZZZ"
 msgstr ""
 
+#: tfrmmain.acttm1.caption
+msgid "Use text from position 1 (tm)"
+msgstr ""
+
+#: tfrmmain.acttm2.caption
+msgid "Use text from position 2 (tm)"
+msgstr ""
+
+#: tfrmmain.acttm3.caption
+msgid "Use text from position 3 (tm)"
+msgstr ""
+
 #: tfrmmain.acttranscriptionmode.caption
 msgctxt "tfrmmain.acttranscriptionmode.caption"
 msgid "Transcription mode"
@@ -3237,7 +3253,7 @@ msgstr ""
 
 #: tfrmmain.mnuedittexts.caption
 msgctxt "tfrmmain.mnuedittexts.caption"
-msgid "Texts"
+msgid "Text"
 msgstr ""
 
 #: tfrmmain.mnuedittimings.caption

@@ -1378,7 +1378,7 @@ object frmMain: TfrmMain
         end
       end
       object mnuEditTexts: TMenuItem
-        Caption = 'Texts'
+        Caption = 'Text'
         object MenuItem55: TMenuItem
           Action = actAutoBreakSubtitle
         end
@@ -2809,6 +2809,7 @@ object frmMain: TfrmMain
     object actFontColor: TAction
       Tag = 1
       Category = 'Editor'
+      Caption = 'Set current font color'
       OnExecute = actFontColorExecute
     end
     object actAlignToLeft: TAction
@@ -3089,16 +3090,19 @@ object frmMain: TfrmMain
     object actTM1: TAction
       Tag = 1
       Category = 'Tools'
+      Caption = 'Use text from position 1 (tm)'
       OnExecute = actTM1Execute
     end
     object actTM2: TAction
       Tag = 1
       Category = 'Tools'
+      Caption = 'Use text from position 2 (tm)'
       OnExecute = actTM2Execute
     end
     object actTM3: TAction
       Tag = 1
       Category = 'Tools'
+      Caption = 'Use text from position 3 (tm)'
       OnExecute = actTM3Execute
     end
     object actValidateTM: TAction
