@@ -78,6 +78,11 @@
         <HasRegisterProc Value="True"/>
         <UnitName Value="UWTextBox"/>
       </Item>
+      <Item>
+        <Filename Value="UWEditAction.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UWEditAction"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

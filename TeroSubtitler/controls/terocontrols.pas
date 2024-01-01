@@ -10,7 +10,7 @@ interface
 uses
   UWLayout, UWTimeEdit, WAVDisplayer, UWSeekBar, UWCPSBar, UWMemo, 
   UWFlatButton, UWStatusBar, UWCheckBox, UWRadioButton, UWGroupBox, UWHotKey, 
-  UWTextBox, LazarusPackageIntf;
+  UWTextBox, UWEditAction, LazarusPackageIntf;
 
 implementation
 
@@ -29,6 +29,7 @@ begin
   RegisterUnit('UWGroupBox', @UWGroupBox.Register);
   RegisterUnit('UWHotKey', @UWHotKey.Register);
   RegisterUnit('UWTextBox', @UWTextBox.Register);
+  RegisterUnit('UWEditAction', @UWEditAction.Register);
 end;
 
 initialization
