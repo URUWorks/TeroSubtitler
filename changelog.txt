@@ -1,4 +1,4 @@
-1.0.1.4 (x.x.202x)
+1.0.1.4 (01.01.2024)
 - fixed: Cannot save shortcuts on windows #218
 - fixed: Wrong encoding when saving [Batch Convert]
 - fixed: Wrong decimal separators #215
@@ -8,6 +8,7 @@
 - fixed: Skip lines containing only numbers and/or zero times [SubtitleAPI/SubRip]
 - fixed: Strange behavior when inserting subtitle on first line
 - fixed: [macOS] Main toolbar appearance skipped in dark mode
+- fixed: [Windows] Missing files in installation script
 - updated: Russian language (thx RoxMarty)
 - improved: Autobreak [Texts]
 - improved: Divide subtitle [Subtitles]
