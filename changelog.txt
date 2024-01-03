@@ -1,5 +1,6 @@
 1.0.1.5 (x.x.2024)
 - fixed: Wrong toolbar was shown/hidden from the view menu
+- updated: Brazilian Portuguese language (thx Gzushgshsh)
 - added: Quick Action Finder
 - added: Snapping window
 
