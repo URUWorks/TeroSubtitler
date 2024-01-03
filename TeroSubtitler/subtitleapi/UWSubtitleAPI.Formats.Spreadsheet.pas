@@ -107,20 +107,21 @@ end;
 
 function TUWSpreadsheet.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
 var
-  Workbook    : TsWorkbook;
-  Worksheet   : TsWorksheet;
-  col, row    : Cardinal;
+  Workbook : TsWorkbook;
+  Worksheet : TsWorksheet;
+  col, row : Cardinal;
   InitialTime : Integer;
-  FinalTime   : Integer;
-  Text, s     : String;
-  sl          : TStrings;
+  FinalTime : Integer;
+  Text : String;
+  sl : TStrings;
+  iIT, iFT, iT : Integer;
 begin
   Result := False;
 
   Workbook := TsWorkbook.Create;
   try
     Workbook.ReadFromFile(SubtitleFile.FileName);
-    if Workbook.GetWorksheetCount > 0 then
+    if Workbook.GetWorksheetCount > 2 then // Minimum columns required
     begin
       if Assigned(Subtitles.OnLoadDataFunc) and (Workbook.GetWorksheetCount > 1) then
       begin
@@ -137,37 +138,54 @@ begin
       else
         Worksheet := Workbook.GetFirstWorksheet;
 
+      // find necessary indexes
+      for row := 0 to Worksheet.GetLastRowIndex do
+      begin
+        iIT  := -1;
+        iFT  := -1;
+        iT   := -1;
+        Text := '';
+
+        for col := 0 to Worksheet.GetLastColIndex do
+        begin
+          Text := Worksheet.ReadAsText(row, col);
+          if not Text.IsEmpty then
+          begin
+            if StrToIntDef(Text, -1) > -1 then
+            begin
+            end
+            else if (StringToTime(Text, False, FPS) > 0) and (iIT = -1) and (iFT = -1) then
+            begin
+              iIT := col;
+            end
+            else if (StringToTime(Text, False, FPS) > 0) and (iFT = -1) and (iIT > -1) then
+            begin
+              iFT := col;
+            end
+            else if (iIT > 0) and (iFT > 0) and (iT < 0) then
+            begin
+              iT := col;
+            end;
+          end;
+        end;
+
+        if (iIT >= 0) and (iFT >= 0) and (iT >= 0) then Break;
+      end;
+
+      if (iIT < 0) and (iFT < 0) and (iT < 0) then Exit; // necessary indices were not found
+
       for row := 0 to Worksheet.GetLastRowIndex do
       begin
         InitialTime := -1;
         FinalTime   := -1;
         Text        := '';
-        for col := 0 to Worksheet.GetLastColIndex do
-        begin
-          s := Worksheet.ReadAsText(row, col);
-          if not s.IsEmpty then
-          begin
-            if StrToIntDef(s, -1) > -1 then
-            begin
-              //writeln('index: ' + s);
-            end
-            else if (StringToTime(s, False, FPS) > 0) and (InitialTime = -1) and (FinalTime = -1) then
-            begin
-              InitialTime := StringToTime(s, False, FPS);
-              //writeln('it: ' + s);
-            end
-            else if (StringToTime(s, False, FPS) > 0) and (FinalTime = -1) and (InitialTime > -1) then
-            begin
-              FinalTime := StringToTime(s, False, FPS);
-              //writeln('ft: ' + s);
-            end
-            else if (InitialTime > 0) and (FinalTime > 0) and Text.IsEmpty then
-            begin
-              Text := HTMLTagsToTS(s);
-              //writeln('text: ' + Text);
-            end;
-          end;
-        end;
+
+        InitialTime := StringToTime(Worksheet.ReadAsText(row, iIT), False, FPS);
+        FinalTime := StringToTime(Worksheet.ReadAsText(row, iFT), False, FPS);
+        Text := HTMLTagsToTS(Worksheet.ReadAsText(row, iT));
+
+        if (row < Worksheet.GetLastRowIndex) and Worksheet.ReadAsText(row+1, iIT).IsEmpty and Worksheet.ReadAsText(row+1, iFT).IsEmpty and not Worksheet.ReadAsText(row+1, iT).IsEmpty then
+          Text += sLineBreak + HTMLTagsToTS(Worksheet.ReadAsText(row+1, iT));
 
         if (InitialTime >= 0) and (FinalTime > 0) then
           Subtitles.Add(InitialTime, FinalTime, Text, '');

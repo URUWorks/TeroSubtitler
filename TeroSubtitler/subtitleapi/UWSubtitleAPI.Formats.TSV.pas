@@ -134,11 +134,12 @@ end;
 
 function TUWTSV.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
 var
-  CSVDoc      : TCSVDocument;
-  i, x        : Integer;
+  CSVDoc : TCSVDocument;
+  y, x,
+  iIT, iFT, iT : Integer;
   InitialTime : Integer;
-  FinalTime   : Integer;
-  Text        : String;
+  FinalTime : Integer;
+  Text : String;
 begin
   Result := False;
   CSVDoc := TCSVDocument.Create;
@@ -146,36 +147,51 @@ begin
     CSVDoc.Delimiter := #9;
     CSVDoc.CSVText := SubtitleFile.Text;
 
-    if CSVDoc.MaxColCount > 0 then
+    if CSVDoc.MaxColCount > 2 then // Minimum columns required
     begin
-      for i := 0 to CSVDoc.RowCount-1 do
+      // find necessary indexes
+      for y := 0 to CSVDoc.RowCount-1 do
+      begin
+        iIT := -1;
+        iFT := -1;
+        iT := -1;
+
+        for x := 0 to CSVDoc.MaxColCount-1 do
+        begin
+          if StrToIntDef(CSVDoc.Cells[x, y], -1) > -1 then
+          begin
+          end
+          else if (StringToTime(CSVDoc.Cells[x, y], False, FPS) > 0) and (iIT = -1) and (iFT = -1) then
+          begin
+            iIT := x;
+          end
+          else if (StringToTime(CSVDoc.Cells[x, y], False, FPS) > 0) and (iFT = -1) and (iIT > -1) then
+          begin
+            iFT := x;
+          end
+          else if (iIT > 0) and (iFT > 0) and (iT < 0) then
+          begin
+            iT := x;
+          end;
+        end;
+
+        if (iIT >= 0) and (iFT >= 0) and (iT >= 0) then Break;
+      end;
+
+      if (iIT < 0) and (iFT < 0) and (iT < 0) then Exit; // necessary indices were not found
+
+      for y := 0 to CSVDoc.RowCount-1 do
       begin
         InitialTime := -1;
         FinalTime   := -1;
         Text        := '';
 
-        for x := 0 to CSVDoc.MaxColCount-1 do
-        begin
-          if StrToIntDef(CSVDoc.Cells[x, i], -1) > -1 then
-          begin
-            //writeln('index: ' + CSVDoc.Cells[x, i]);
-          end
-          else if (StringToTime(CSVDoc.Cells[x, i], False, FPS) > 0) and (InitialTime = -1) and (FinalTime = -1) then
-          begin
-            InitialTime := StringToTime(CSVDoc.Cells[x, i], False, FPS);
-            //writeln('it: ' + IntToStr(InitialTime));
-          end
-          else if (StringToTime(CSVDoc.Cells[x, i], False, FPS) > 0) and (FinalTime = -1) and (InitialTime > -1) then
-          begin
-            FinalTime := StringToTime(CSVDoc.Cells[x, i], False, FPS);
-            //writeln('ft: ' + IntToStr(FinalTime));
-          end
-          else if (InitialTime > 0) and (FinalTime > 0) and Text.IsEmpty then
-          begin
-            Text := HTMLTagsToTS(TSVDecode(CSVDoc.Cells[x, i]));
-            //writeln('text: ' + Text);
-          end;
-        end;
+        InitialTime := StringToTime(CSVDoc.Cells[iIT, y], False, FPS);
+        FinalTime := StringToTime(CSVDoc.Cells[iFT, y], False, FPS);
+        Text := HTMLTagsToTS(CSVDoc.Cells[iT, y]);
+
+        if (y < CSVDoc.RowCount-1) and CSVDoc.Cells[iIT, y+1].IsEmpty and CSVDoc.Cells[iFT, y+1].IsEmpty and not CSVDoc.Cells[iT, y+1].IsEmpty then
+          Text += sLineBreak + HTMLTagsToTS(CSVDoc.Cells[iT, y+1]);
 
         if (InitialTime >= 0) and (FinalTime > 0) then
           Subtitles.Add(InitialTime, FinalTime, Text, '');
