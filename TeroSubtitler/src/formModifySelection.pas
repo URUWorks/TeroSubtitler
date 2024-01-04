@@ -78,6 +78,10 @@ begin
     rbnAddToCurrentSelection.Checked := True
   else
     rbnNewSelection.Checked := True;
+
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------

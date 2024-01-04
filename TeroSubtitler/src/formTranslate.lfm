@@ -12,7 +12,7 @@ object frmTranslate: TfrmTranslate
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object btnTranslate: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
@@ -24,8 +24,8 @@ object frmTranslate: TfrmTranslate
     BorderSpacing.Right = 5
     Caption = 'Translate'
     Default = True
-    OnClick = btnTranslateClick
     TabOrder = 7
+    OnClick = btnTranslateClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -41,8 +41,8 @@ object frmTranslate: TfrmTranslate
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 8
+    OnClick = btnCloseClick
   end
   object lblSourceLanguage: TLabel
     Left = 8
@@ -69,7 +69,7 @@ object frmTranslate: TfrmTranslate
     Left = 208
     Height = 15
     Top = 8
-    Width = 114
+    Width = 112
     Caption = 'Translation language:'
     ParentColor = False
   end

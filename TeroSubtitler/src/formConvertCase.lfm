@@ -12,7 +12,7 @@ object frmConvertCase: TfrmConvertCase
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object btnApply: TButton
     AnchorSideRight.Control = btnClose
     Left = 83
@@ -23,8 +23,8 @@ object frmConvertCase: TfrmConvertCase
     BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
-    OnClick = btnApplyClick
     TabOrder = 6
+    OnClick = btnApplyClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = lyoScope
@@ -36,8 +36,8 @@ object frmConvertCase: TfrmConvertCase
     Anchors = [akTop, akRight]
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 7
+    OnClick = btnCloseClick
   end
   object rdoSentenceType: TUWRadioButton
     Left = 16

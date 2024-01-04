@@ -114,6 +114,10 @@ begin
 
   spnIndexChange(Sender);
   rdoSimple.Checked := True;
+
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------

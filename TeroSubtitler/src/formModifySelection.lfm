@@ -12,7 +12,7 @@ object frmModifySelection: TfrmModifySelection
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object cboRule: TComboBox
     Left = 8
     Height = 23
@@ -39,8 +39,8 @@ object frmModifySelection: TfrmModifySelection
     BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
-    OnClick = btnApplyClick
     TabOrder = 5
+    OnClick = btnApplyClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -56,8 +56,8 @@ object frmModifySelection: TfrmModifySelection
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 6
+    OnClick = btnCloseClick
   end
   object rbnAddToCurrentSelection: TUWRadioButton
     Left = 8

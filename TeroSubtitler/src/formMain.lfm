@@ -3018,13 +3018,13 @@ object frmMain: TfrmMain
     object actSwapTexts: TAction
       Tag = 1
       Category = 'Text'
-      Caption = 'Swap texts'
+      Caption = 'Swap text'
       OnExecute = actSwapTextsExecute
     end
     object actReadTextsFromFile: TAction
       Tag = 1
       Category = 'Text'
-      Caption = 'Read texts from file...'
+      Caption = 'Read text from file...'
       OnExecute = actReadTextsFromFileExecute
     end
     object actSplitEntryAtPosition: TAction

@@ -12,7 +12,7 @@ object frmDelay: TfrmDelay
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object cboMode: TComboBox
     Left = 8
     Height = 23
@@ -39,8 +39,8 @@ object frmDelay: TfrmDelay
     BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
-    OnClick = btnApplyClick
     TabOrder = 4
+    OnClick = btnApplyClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -56,8 +56,8 @@ object frmDelay: TfrmDelay
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 5
+    OnClick = btnCloseClick
   end
   object rbnFromTheSelectedSubtitle: TUWRadioButton
     Left = 8

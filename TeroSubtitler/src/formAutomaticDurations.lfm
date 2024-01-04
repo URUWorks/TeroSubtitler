@@ -12,7 +12,7 @@ object frmAutomaticDurations: TfrmAutomaticDurations
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object lblCondition: TLabel
     Left = 8
     Height = 15
@@ -39,8 +39,8 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 2
+    OnClick = btnCloseClick
   end
   object btnApply: TButton
     AnchorSideRight.Control = btnClose
@@ -51,8 +51,8 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 5
     Caption = 'Apply'
-    OnClick = btnApplyClick
     TabOrder = 1
+    OnClick = btnApplyClick
   end
   object edtChars: TEdit
     Left = 142

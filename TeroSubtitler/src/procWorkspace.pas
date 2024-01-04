@@ -111,7 +111,7 @@ uses
   UWSubtitleAPI.Formats, MPVPlayer, character, LazUTF8, formTranslationMemory,
   UWSubtitleAPI.Tags, UWTranslateAPI.Google, procTranscription,
   formCustomQuestionDlg, UWSystem.TimeUtils, formTBX, procVST_Loops, procMPV
-  {$IFNDEF WINDOWS}, UWCheckBox, UWRadioButton{$ENDIF};
+  {$IFNDEF WINDOWS}, UWCheckBox, UWRadioButton, UWLayout{$ENDIF};
 
 // -----------------------------------------------------------------------------
 
@@ -1546,6 +1546,20 @@ end;
 
 {$IFNDEF WINDOWS}
 procedure PrepareCustomControls(const AForm: TForm);
+
+  procedure CheckControl(const C: TComponent);
+  var
+    i: Integer;
+  begin
+    for i := 0 to C.ComponentCount-1 do
+      if (C.Components[i] is TUWCheckBox) then
+        (C as TUWCheckBox).AutoSize := True
+      else if (C.Components[i] is TUWRadioButton) then
+        (C as TUWRadioButton).AutoSize := True
+      else if (C.Components[i] is TUWLayout) then
+        CheckControl(C.Components[i]);
+  end;
+
 var
   C: TComponent;
 begin
@@ -1553,7 +1567,9 @@ begin
     if (C is TUWCheckBox) then
       (C as TUWCheckBox).AutoSize := True
     else if (C is TUWRadioButton) then
-      (C as TUWRadioButton).AutoSize := True;
+      (C as TUWRadioButton).AutoSize := True
+    else if (C is TUWLayout) then
+      CheckControl(C);
 end;
 {$ENDIF}
 
