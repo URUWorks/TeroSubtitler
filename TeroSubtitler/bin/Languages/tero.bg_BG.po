@@ -731,6 +731,11 @@ msgstr "Обработчик"
 msgid "Edit Decision Lists"
 msgstr ""
 
+#: proclocalize.lngscentries
+msgctxt "proclocalize.lngscentries"
+msgid "Entries"
+msgstr ""
+
 #: proclocalize.lngscfile
 msgctxt "proclocalize.lngscfile"
 msgid "File"
@@ -777,11 +782,6 @@ msgstr "Избиране"
 #: proclocalize.lngscshotchanges
 msgid "Text files"
 msgstr "Текстови файлове"
-
-#: proclocalize.lngscsubtitle
-msgctxt "proclocalize.lngscsubtitle"
-msgid "Subtitle"
-msgstr "Надпис"
 
 #: proclocalize.lngsctexts
 msgctxt "proclocalize.lngsctexts"
@@ -1546,8 +1546,10 @@ msgid "Cancel"
 msgstr "Отказ"
 
 #: tfrmcustominputdlg.btnok.caption
+#, fuzzy
+#| msgid "Ok"
 msgctxt "tfrmcustominputdlg.btnok.caption"
-msgid "Ok"
+msgid "OK"
 msgstr "Добре"
 
 #: tfrmcustominputdlg.lblmessage.caption
@@ -1556,8 +1558,10 @@ msgid "Msg"
 msgstr "Съобщение"
 
 #: tfrmcustommessagedlg.btnok.caption
+#, fuzzy
+#| msgid "Ok"
 msgctxt "tfrmcustommessagedlg.btnok.caption"
-msgid "Ok"
+msgid "OK"
 msgstr "Добре"
 
 #: tfrmcustommessagedlg.lblmessage.caption
@@ -1594,8 +1598,10 @@ msgid "Cancel"
 msgstr "Отказ"
 
 #: tfrmcustomselectdlg.btnok.caption
+#, fuzzy
+#| msgid "Ok"
 msgctxt "tfrmcustomselectdlg.btnok.caption"
-msgid "Ok"
+msgid "OK"
 msgstr "Добре"
 
 #: tfrmcustomselectdlg.lblmessage.caption
@@ -2313,13 +2319,15 @@ msgstr "Затваряне на надписите"
 msgid "Close video"
 msgstr "Затваряне на видеото"
 
-#: tfrmmain.actcombinesubtitles.caption
-msgctxt "tfrmmain.actcombinesubtitles.caption"
-msgid "Combine subtitles"
-msgstr "Съчетаване на надписи"
+#: tfrmmain.actcombineentries.caption
+msgid "Combine entries"
+msgstr ""
 
-#: tfrmmain.actcombinesubtitles.hint
-msgid "Combines all the selected subtitles into one"
+#: tfrmmain.actcombineentries.hint
+#, fuzzy
+#| msgid "Combines all the selected subtitles into one"
+msgctxt "tfrmmain.actcombineentries.hint"
+msgid "Combines all the selected entries into one"
 msgstr "Съчетаване на всички избрани надписи в един"
 
 #: tfrmmain.actcompare.caption
@@ -2344,18 +2352,17 @@ msgctxt "tfrmmain.actcut.caption"
 msgid "Cut"
 msgstr "Изрязване"
 
+#: tfrmmain.actdeleteentry.caption
+msgid "Delete entries"
+msgstr ""
+
+#: tfrmmain.actdeleteentry.hint
+msgid "Delete selected entries"
+msgstr ""
+
 #: tfrmmain.actdeleteshotchange.caption
 msgid "Delete shot change(s)"
 msgstr ""
-
-#: tfrmmain.actdeletesubtitle.caption
-msgctxt "tfrmmain.actdeletesubtitle.caption"
-msgid "Delete subtitle(s)"
-msgstr "Изтриване на надпис(и)"
-
-#: tfrmmain.actdeletesubtitle.hint
-msgid "Delete selected subtitle(s)"
-msgstr "Изтриване на избраните надпис(и)"
 
 #: tfrmmain.actdetectdialogsegments.caption
 msgid "Detect dialog segments..."
@@ -2370,8 +2377,8 @@ msgstr "Откриване на тихи откъси"
 msgid "Click to refresh list"
 msgstr ""
 
-#: tfrmmain.actdividesubtitle.caption
-msgid "Divide subtitle"
+#: tfrmmain.actdivideentry.caption
+msgid "Divide entry"
 msgstr ""
 
 #: tfrmmain.actdurationlimits.caption
@@ -2488,7 +2495,9 @@ msgid "Video with hardcoded subtitles..."
 msgstr "Видео с вградени надписи..."
 
 #: tfrmmain.actgoto.caption
-msgid "Go to line number..."
+#, fuzzy
+#| msgid "Go to line number..."
+msgid "Go to line entry..."
 msgstr "Отиване на ред..."
 
 #: tfrmmain.actgototime.caption
@@ -2508,25 +2517,25 @@ msgstr "Надписи..."
 msgid "Insert current time"
 msgstr ""
 
+#: tfrmmain.actinsertentry.caption
+msgid "Insert entry"
+msgstr ""
+
+#: tfrmmain.actinsertentry.hint
+msgid "Insert a new entry after the current entry"
+msgstr ""
+
+#: tfrmmain.actinsertentrybefore.caption
+msgid "Insert entry before"
+msgstr ""
+
+#: tfrmmain.actinsertentrybefore.hint
+msgctxt "tfrmmain.actinsertentrybefore.hint"
+msgid "Insert entry before the current entry"
+msgstr ""
+
 #: tfrmmain.actinsertshotchange.caption
 msgid "Insert shot change"
-msgstr ""
-
-#: tfrmmain.actinsertsubtitle.caption
-msgctxt "tfrmmain.actinsertsubtitle.caption"
-msgid "Insert subtitle"
-msgstr "Вмъкване на надпис"
-
-#: tfrmmain.actinsertsubtitle.hint
-msgid "Insert a new subtitle after the current subtitle"
-msgstr ""
-
-#: tfrmmain.actinsertsubtitlebefore.caption
-msgid "Insert subtitle before"
-msgstr "Вмъкване на надпис отгоре"
-
-#: tfrmmain.actinsertsubtitlebefore.hint
-msgid "Insert subtitle before the current subtitle"
 msgstr ""
 
 #: tfrmmain.actinvertselection.caption
@@ -2588,8 +2597,8 @@ msgstr "Отваряне на видео файл"
 msgid "Open video from URL..."
 msgstr "Отваряне на видео от URL..."
 
-#: tfrmmain.actmarksubtitle.caption
-msgid "Mark subtitle(s)"
+#: tfrmmain.actmarkentry.caption
+msgid "Mark entry"
 msgstr ""
 
 #: tfrmmain.actmediaaddsubtitle.caption
@@ -2766,6 +2775,22 @@ msgstr "Поставяне"
 #: tfrmmain.actprevioussubtitle.caption
 msgctxt "tfrmmain.actprevioussubtitle.caption"
 msgid "Previous subtitle"
+msgstr ""
+
+#: tfrmmain.actpullfirstlinefromnextentry.caption
+msgid "Pull the first line from the next entry"
+msgstr ""
+
+#: tfrmmain.actpulllastlinefrompreviousentry.caption
+msgid "Pull the last line from the previous entry"
+msgstr ""
+
+#: tfrmmain.actpushfirstlinetopreviousentry.caption
+msgid "Push the first line to the previous entry"
+msgstr ""
+
+#: tfrmmain.actpushlastlinetonextentry.caption
+msgid "Push the last line to the next entry"
 msgstr ""
 
 #: tfrmmain.actqualitycheck.caption
@@ -2999,7 +3024,8 @@ msgstr "Изходен режим"
 msgid "Spell check..."
 msgstr "Правописна проверка..."
 
-#: tfrmmain.actsplitsubtitleatposition.caption
+#: tfrmmain.actsplitentryatposition.caption
+msgctxt "tfrmmain.actsplitentryatposition.caption"
 msgid "Split line at cursor position"
 msgstr ""
 
@@ -3099,9 +3125,9 @@ msgctxt "tfrmmain.acttranslatormode.caption"
 msgid "Translator mode"
 msgstr ""
 
-#: tfrmmain.actunbreaksubtitle.caption
-msgid "Unbreak subtitle"
-msgstr "На  по-малко редове"
+#: tfrmmain.actunbreakentry.caption
+msgid "Unbreak entry"
+msgstr ""
 
 #: tfrmmain.actundo.caption
 msgctxt "tfrmmain.actundo.caption"
@@ -3156,8 +3182,8 @@ msgstr ""
 msgid "ZWJ (Zero Width Joiner)"
 msgstr ""
 
-#: tfrmmain.actunmarksubtitle.caption
-msgid "Unmark subtitle(s)"
+#: tfrmmain.actunmarkentry.caption
+msgid "Unmark entry"
 msgstr ""
 
 #: tfrmmain.actvalidatetm.caption
@@ -3255,6 +3281,11 @@ msgctxt "tfrmmain.mnuedit.caption"
 msgid "Edit"
 msgstr "Обработка"
 
+#: tfrmmain.mnueditentries.caption
+msgctxt "tfrmmain.mnueditentries.caption"
+msgid "Entries"
+msgstr ""
+
 #: tfrmmain.mnueditformat.caption
 msgctxt "tfrmmain.mnueditformat.caption"
 msgid "Format"
@@ -3269,11 +3300,6 @@ msgstr "Вмъкване на знак от уникод"
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
 msgstr "От дясно наляво"
-
-#: tfrmmain.mnueditsubtitles.caption
-msgctxt "tfrmmain.mnueditsubtitles.caption"
-msgid "Subtitles"
-msgstr "Надписи"
 
 #: tfrmmain.mnuedittexts.caption
 #, fuzzy

@@ -726,6 +726,11 @@ msgstr ""
 msgid "Edit Decision Lists"
 msgstr ""
 
+#: proclocalize.lngscentries
+msgctxt "proclocalize.lngscentries"
+msgid "Entries"
+msgstr ""
+
 #: proclocalize.lngscfile
 msgctxt "proclocalize.lngscfile"
 msgid "File"
@@ -771,11 +776,6 @@ msgstr ""
 
 #: proclocalize.lngscshotchanges
 msgid "Text files"
-msgstr ""
-
-#: proclocalize.lngscsubtitle
-msgctxt "proclocalize.lngscsubtitle"
-msgid "Subtitle"
 msgstr ""
 
 #: proclocalize.lngsctexts
@@ -1537,7 +1537,7 @@ msgstr ""
 
 #: tfrmcustominputdlg.btnok.caption
 msgctxt "tfrmcustominputdlg.btnok.caption"
-msgid "Ok"
+msgid "OK"
 msgstr ""
 
 #: tfrmcustominputdlg.lblmessage.caption
@@ -1547,7 +1547,7 @@ msgstr ""
 
 #: tfrmcustommessagedlg.btnok.caption
 msgctxt "tfrmcustommessagedlg.btnok.caption"
-msgid "Ok"
+msgid "OK"
 msgstr ""
 
 #: tfrmcustommessagedlg.lblmessage.caption
@@ -1585,7 +1585,7 @@ msgstr ""
 
 #: tfrmcustomselectdlg.btnok.caption
 msgctxt "tfrmcustomselectdlg.btnok.caption"
-msgid "Ok"
+msgid "OK"
 msgstr ""
 
 #: tfrmcustomselectdlg.lblmessage.caption
@@ -2301,13 +2301,13 @@ msgstr ""
 msgid "Close video"
 msgstr ""
 
-#: tfrmmain.actcombinesubtitles.caption
-msgctxt "tfrmmain.actcombinesubtitles.caption"
-msgid "Combine subtitles"
+#: tfrmmain.actcombineentries.caption
+msgid "Combine entries"
 msgstr ""
 
-#: tfrmmain.actcombinesubtitles.hint
-msgid "Combines all the selected subtitles into one"
+#: tfrmmain.actcombineentries.hint
+msgctxt "tfrmmain.actcombineentries.hint"
+msgid "Combines all the selected entries into one"
 msgstr ""
 
 #: tfrmmain.actcompare.caption
@@ -2332,17 +2332,16 @@ msgctxt "tfrmmain.actcut.caption"
 msgid "Cut"
 msgstr ""
 
+#: tfrmmain.actdeleteentry.caption
+msgid "Delete entries"
+msgstr ""
+
+#: tfrmmain.actdeleteentry.hint
+msgid "Delete selected entries"
+msgstr ""
+
 #: tfrmmain.actdeleteshotchange.caption
 msgid "Delete shot change(s)"
-msgstr ""
-
-#: tfrmmain.actdeletesubtitle.caption
-msgctxt "tfrmmain.actdeletesubtitle.caption"
-msgid "Delete subtitle(s)"
-msgstr ""
-
-#: tfrmmain.actdeletesubtitle.hint
-msgid "Delete selected subtitle(s)"
 msgstr ""
 
 #: tfrmmain.actdetectdialogsegments.caption
@@ -2358,8 +2357,8 @@ msgstr ""
 msgid "Click to refresh list"
 msgstr ""
 
-#: tfrmmain.actdividesubtitle.caption
-msgid "Divide subtitle"
+#: tfrmmain.actdivideentry.caption
+msgid "Divide entry"
 msgstr ""
 
 #: tfrmmain.actdurationlimits.caption
@@ -2476,7 +2475,7 @@ msgid "Video with hardcoded subtitles..."
 msgstr ""
 
 #: tfrmmain.actgoto.caption
-msgid "Go to line number..."
+msgid "Go to line entry..."
 msgstr ""
 
 #: tfrmmain.actgototime.caption
@@ -2496,25 +2495,25 @@ msgstr ""
 msgid "Insert current time"
 msgstr ""
 
+#: tfrmmain.actinsertentry.caption
+msgid "Insert entry"
+msgstr ""
+
+#: tfrmmain.actinsertentry.hint
+msgid "Insert a new entry after the current entry"
+msgstr ""
+
+#: tfrmmain.actinsertentrybefore.caption
+msgid "Insert entry before"
+msgstr ""
+
+#: tfrmmain.actinsertentrybefore.hint
+msgctxt "tfrmmain.actinsertentrybefore.hint"
+msgid "Insert entry before the current entry"
+msgstr ""
+
 #: tfrmmain.actinsertshotchange.caption
 msgid "Insert shot change"
-msgstr ""
-
-#: tfrmmain.actinsertsubtitle.caption
-msgctxt "tfrmmain.actinsertsubtitle.caption"
-msgid "Insert subtitle"
-msgstr ""
-
-#: tfrmmain.actinsertsubtitle.hint
-msgid "Insert a new subtitle after the current subtitle"
-msgstr ""
-
-#: tfrmmain.actinsertsubtitlebefore.caption
-msgid "Insert subtitle before"
-msgstr ""
-
-#: tfrmmain.actinsertsubtitlebefore.hint
-msgid "Insert subtitle before the current subtitle"
 msgstr ""
 
 #: tfrmmain.actinvertselection.caption
@@ -2576,8 +2575,8 @@ msgstr ""
 msgid "Open video from URL..."
 msgstr ""
 
-#: tfrmmain.actmarksubtitle.caption
-msgid "Mark subtitle(s)"
+#: tfrmmain.actmarkentry.caption
+msgid "Mark entry"
 msgstr ""
 
 #: tfrmmain.actmediaaddsubtitle.caption
@@ -2754,6 +2753,22 @@ msgstr ""
 #: tfrmmain.actprevioussubtitle.caption
 msgctxt "tfrmmain.actprevioussubtitle.caption"
 msgid "Previous subtitle"
+msgstr ""
+
+#: tfrmmain.actpullfirstlinefromnextentry.caption
+msgid "Pull the first line from the next entry"
+msgstr ""
+
+#: tfrmmain.actpulllastlinefrompreviousentry.caption
+msgid "Pull the last line from the previous entry"
+msgstr ""
+
+#: tfrmmain.actpushfirstlinetopreviousentry.caption
+msgid "Push the first line to the previous entry"
+msgstr ""
+
+#: tfrmmain.actpushlastlinetonextentry.caption
+msgid "Push the last line to the next entry"
 msgstr ""
 
 #: tfrmmain.actqualitycheck.caption
@@ -2986,7 +3001,8 @@ msgstr ""
 msgid "Spell check..."
 msgstr ""
 
-#: tfrmmain.actsplitsubtitleatposition.caption
+#: tfrmmain.actsplitentryatposition.caption
+msgctxt "tfrmmain.actsplitentryatposition.caption"
 msgid "Split line at cursor position"
 msgstr ""
 
@@ -3086,8 +3102,8 @@ msgctxt "tfrmmain.acttranslatormode.caption"
 msgid "Translator mode"
 msgstr ""
 
-#: tfrmmain.actunbreaksubtitle.caption
-msgid "Unbreak subtitle"
+#: tfrmmain.actunbreakentry.caption
+msgid "Unbreak entry"
 msgstr ""
 
 #: tfrmmain.actundo.caption
@@ -3143,8 +3159,8 @@ msgstr ""
 msgid "ZWJ (Zero Width Joiner)"
 msgstr ""
 
-#: tfrmmain.actunmarksubtitle.caption
-msgid "Unmark subtitle(s)"
+#: tfrmmain.actunmarkentry.caption
+msgid "Unmark entry"
 msgstr ""
 
 #: tfrmmain.actvalidatetm.caption
@@ -3242,6 +3258,11 @@ msgctxt "tfrmmain.mnuedit.caption"
 msgid "Edit"
 msgstr ""
 
+#: tfrmmain.mnueditentries.caption
+msgctxt "tfrmmain.mnueditentries.caption"
+msgid "Entries"
+msgstr ""
+
 #: tfrmmain.mnueditformat.caption
 msgctxt "tfrmmain.mnueditformat.caption"
 msgid "Format"
@@ -3253,11 +3274,6 @@ msgstr ""
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
-msgstr ""
-
-#: tfrmmain.mnueditsubtitles.caption
-msgctxt "tfrmmain.mnueditsubtitles.caption"
-msgid "Subtitles"
 msgstr ""
 
 #: tfrmmain.mnuedittexts.caption

@@ -1416,6 +1416,11 @@ begin
           actSetDefaultGap.Enabled          := actExtendLengthToNext.Enabled;
           tedPause.Enabled                  := actSetDefaultGap.Enabled;
 
+          actPushFirstLineToPreviousEntry.Enabled  := actExtendLengthToPrevious.Enabled;
+          actPullLastLineFromPreviousEntry.Enabled := actPushFirstLineToPreviousEntry.Enabled;
+          actPushLastLineToNextEntry.Enabled       := actExtendLengthToNext.Enabled;
+          actPullFirstLineFromNextEntry.Enabled    := actPushLastLineToNextEntry.Enabled;
+
           cboActor.Tag  := 1;
           cboActor.Text := Subtitles[NodeIndex].Actor;
           cboActor.Tag  := 0;

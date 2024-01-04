@@ -255,8 +255,7 @@ msgid "Auto-detect"
 msgstr "Detecção automática"
 
 #: proclocalize.lngdetectdialogsegmentswarning
-msgid ""
-"Attempting to detect dialog segments deletes all subtitles from the list."
+msgid "Attempting to detect dialog segments deletes all subtitles from the list."
 msgstr "Tentar detectar segmentos de diálogo apaga todos as legendas da lista."
 
 #: proclocalize.lngentry
@@ -284,8 +283,7 @@ msgstr "Falhou."
 
 #: proclocalize.lngfailedtodownload
 msgid "No content downloaded, missing file or no Internet connection."
-msgstr ""
-"Conteúdo não baixado, arquivo não encontrado ou sem conexão com a internet."
+msgstr "Conteúdo não baixado, arquivo não encontrado ou sem conexão com a internet."
 
 #: proclocalize.lngfeaturenotavailablefromurl
 msgid "Function not available for online video."
@@ -538,12 +536,8 @@ msgid "#"
 msgstr "#"
 
 #: proclocalize.lnglibmpverror
-msgid ""
-"Unable to find the required libraries to run the embedded mpv player. Please "
-"download them."
-msgstr ""
-"Não foi possível encontrar a biblioteca necessária para executar o "
-"reprodutor de mídia mpv integrado (libmpv). Por favor faça o download dela."
+msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
+msgstr "Não foi possível encontrar a biblioteca necessária para executar o reprodutor de mídia mpv integrado (libmpv). Por favor faça o download dela."
 
 #: proclocalize.lnglibmpvglerror
 msgid "Failed to initialize mpv GL context."
@@ -551,9 +545,7 @@ msgstr "Falha ao iniciar mpv GL context."
 
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
-msgstr ""
-"Não foi possível iniciar a libmpv. Verifique se está com a biblioteca certa "
-"instalada."
+msgstr "Não foi possível iniciar a libmpv. Verifique se está com a biblioteca certa instalada."
 
 #: proclocalize.lngline
 msgid "Line:"
@@ -739,6 +731,11 @@ msgstr "Editor"
 msgid "Edit Decision Lists"
 msgstr "Lista de decisões de edição"
 
+#: proclocalize.lngscentries
+msgctxt "proclocalize.lngscentries"
+msgid "Entries"
+msgstr ""
+
 #: proclocalize.lngscfile
 msgctxt "proclocalize.lngscfile"
 msgid "File"
@@ -785,11 +782,6 @@ msgstr "Seleção"
 #: proclocalize.lngscshotchanges
 msgid "Text files"
 msgstr "Arquivos de texto"
-
-#: proclocalize.lngscsubtitle
-msgctxt "proclocalize.lngscsubtitle"
-msgid "Subtitle"
-msgstr "Legenda"
 
 #: proclocalize.lngsctexts
 msgctxt "proclocalize.lngsctexts"
@@ -859,12 +851,8 @@ msgid "Shortcut currently used in “%s”."
 msgstr "Atalho atualmente usando em \"%s\"."
 
 #: proclocalize.lngsourcemodewarning
-msgid ""
-"Switching to source mode will change the format to “Tero Subtitler”, "
-"otherwise unsaved translations will be lost."
-msgstr ""
-"Ao mudar para o modo fonte o formato será alterado para \"Tero Subtitler\", "
-"caso contrário, traduções não salvas serão perdidas."
+msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
+msgstr "Ao mudar para o modo fonte o formato será alterado para \"Tero Subtitler\", caso contrário, traduções não salvas serão perdidas."
 
 #: proclocalize.lngspcurrentline
 #, object-pascal-format
@@ -949,12 +937,8 @@ msgid "Subtitle ended in %s"
 msgstr "Legenda terminada em %s"
 
 #: proclocalize.lngsubtitlehaserrorstofix
-msgid ""
-"The current subtitle set contains errors that are recommended to be "
-"resolved, but it can be saved."
-msgstr ""
-"O conjunto de legendas atual contém erros que devem ser resolvidos, mas "
-"podem ser salvos."
+msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
+msgstr "O conjunto de legendas atual contém erros que devem ser resolvidos, mas podem ser salvos."
 
 #: proclocalize.lngsubtitlestartedat
 #, object-pascal-format
@@ -1068,8 +1052,7 @@ msgstr "Idioma"
 
 #: proclocalize.lngwritedenieded
 msgid "Write denied. Please check folder permissions."
-msgstr ""
-"Permissão de escrita negada. Por favor verifique as permissões da pasta."
+msgstr "Permissão de escrita negada. Por favor verifique as permissões da pasta."
 
 #: proclocalize.lngwritestatus
 #, object-pascal-format
@@ -1560,8 +1543,10 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: tfrmcustominputdlg.btnok.caption
+#, fuzzy
+#| msgid "Ok"
 msgctxt "tfrmcustominputdlg.btnok.caption"
-msgid "Ok"
+msgid "OK"
 msgstr "Ok"
 
 #: tfrmcustominputdlg.lblmessage.caption
@@ -1570,8 +1555,10 @@ msgid "Msg"
 msgstr "Msg"
 
 #: tfrmcustommessagedlg.btnok.caption
+#, fuzzy
+#| msgid "Ok"
 msgctxt "tfrmcustommessagedlg.btnok.caption"
-msgid "Ok"
+msgid "OK"
 msgstr "Ok"
 
 #: tfrmcustommessagedlg.lblmessage.caption
@@ -1608,8 +1595,10 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: tfrmcustomselectdlg.btnok.caption
+#, fuzzy
+#| msgid "Ok"
 msgctxt "tfrmcustomselectdlg.btnok.caption"
-msgid "Ok"
+msgid "OK"
 msgstr "Ok"
 
 #: tfrmcustomselectdlg.lblmessage.caption
@@ -2327,13 +2316,15 @@ msgstr "Fechar legendas"
 msgid "Close video"
 msgstr "Fechar vídeo"
 
-#: tfrmmain.actcombinesubtitles.caption
-msgctxt "tfrmmain.actcombinesubtitles.caption"
-msgid "Combine subtitles"
-msgstr "Combinar legendas"
+#: tfrmmain.actcombineentries.caption
+msgid "Combine entries"
+msgstr ""
 
-#: tfrmmain.actcombinesubtitles.hint
-msgid "Combines all the selected subtitles into one"
+#: tfrmmain.actcombineentries.hint
+#, fuzzy
+#| msgid "Combines all the selected subtitles into one"
+msgctxt "tfrmmain.actcombineentries.hint"
+msgid "Combines all the selected entries into one"
 msgstr "Combinar todas as legendas selecionadas"
 
 #: tfrmmain.actcompare.caption
@@ -2358,18 +2349,17 @@ msgctxt "tfrmmain.actcut.caption"
 msgid "Cut"
 msgstr "Cortar"
 
+#: tfrmmain.actdeleteentry.caption
+msgid "Delete entries"
+msgstr ""
+
+#: tfrmmain.actdeleteentry.hint
+msgid "Delete selected entries"
+msgstr ""
+
 #: tfrmmain.actdeleteshotchange.caption
 msgid "Delete shot change(s)"
 msgstr "Apagar mudança(s) de cena"
-
-#: tfrmmain.actdeletesubtitle.caption
-msgctxt "tfrmmain.actdeletesubtitle.caption"
-msgid "Delete subtitle(s)"
-msgstr "Apagar legenda(s)"
-
-#: tfrmmain.actdeletesubtitle.hint
-msgid "Delete selected subtitle(s)"
-msgstr "Apagar legenda(s) selecionada(s)"
 
 #: tfrmmain.actdetectdialogsegments.caption
 msgid "Detect dialog segments..."
@@ -2384,9 +2374,9 @@ msgstr "Detectar zonas de silêncio"
 msgid "Click to refresh list"
 msgstr "Clique para atualizar lista"
 
-#: tfrmmain.actdividesubtitle.caption
-msgid "Divide subtitle"
-msgstr "Dividir legenda"
+#: tfrmmain.actdivideentry.caption
+msgid "Divide entry"
+msgstr ""
 
 #: tfrmmain.actdurationlimits.caption
 msgid "Duration limits..."
@@ -2459,6 +2449,10 @@ msgctxt "tfrmmain.actfontclear.caption"
 msgid "Clear"
 msgstr "Limpar"
 
+#: tfrmmain.actfontcolor.caption
+msgid "Set current font color"
+msgstr ""
+
 #: tfrmmain.actfontcolordlg.caption
 msgctxt "tfrmmain.actfontcolordlg.caption"
 msgid "Color..."
@@ -2498,7 +2492,9 @@ msgid "Video with hardcoded subtitles..."
 msgstr "Vídeo com legendas queimadas por cima..."
 
 #: tfrmmain.actgoto.caption
-msgid "Go to line number..."
+#, fuzzy
+#| msgid "Go to line number..."
+msgid "Go to line entry..."
 msgstr "Ir para a linha número..."
 
 #: tfrmmain.actgototime.caption
@@ -2518,26 +2514,28 @@ msgstr "Legendas..."
 msgid "Insert current time"
 msgstr "Inserir tempo atual"
 
+#: tfrmmain.actinsertentry.caption
+msgid "Insert entry"
+msgstr ""
+
+#: tfrmmain.actinsertentry.hint
+msgid "Insert a new entry after the current entry"
+msgstr ""
+
+#: tfrmmain.actinsertentrybefore.caption
+msgid "Insert entry before"
+msgstr ""
+
+#: tfrmmain.actinsertentrybefore.hint
+#, fuzzy
+#| msgid "Insert subtitle before the current subtitle"
+msgctxt "tfrmmain.actinsertentrybefore.hint"
+msgid "Insert entry before the current entry"
+msgstr "Inserir legenda antes da atual"
+
 #: tfrmmain.actinsertshotchange.caption
 msgid "Insert shot change"
 msgstr "Inserir mudanças de plano"
-
-#: tfrmmain.actinsertsubtitle.caption
-msgctxt "tfrmmain.actinsertsubtitle.caption"
-msgid "Insert subtitle"
-msgstr "Inserir legenda"
-
-#: tfrmmain.actinsertsubtitle.hint
-msgid "Insert a new subtitle after the current subtitle"
-msgstr "Inserir uma nova legenda depois da legenda atual"
-
-#: tfrmmain.actinsertsubtitlebefore.caption
-msgid "Insert subtitle before"
-msgstr "Inserir legenda antes"
-
-#: tfrmmain.actinsertsubtitlebefore.hint
-msgid "Insert subtitle before the current subtitle"
-msgstr "Inserir legenda antes da atual"
 
 #: tfrmmain.actinvertselection.caption
 msgid "Invert selection"
@@ -2598,9 +2596,9 @@ msgstr "Abrir um arquivo de vídeo"
 msgid "Open video from URL..."
 msgstr "Abrir vídeo a partir de URL..."
 
-#: tfrmmain.actmarksubtitle.caption
-msgid "Mark subtitle(s)"
-msgstr "Marcar legenda(s)"
+#: tfrmmain.actmarkentry.caption
+msgid "Mark entry"
+msgstr ""
 
 #: tfrmmain.actmediaaddsubtitle.caption
 msgctxt "tfrmmain.actmediaaddsubtitle.caption"
@@ -2777,6 +2775,22 @@ msgstr "Colar"
 msgctxt "tfrmmain.actprevioussubtitle.caption"
 msgid "Previous subtitle"
 msgstr "Legenda anterior"
+
+#: tfrmmain.actpullfirstlinefromnextentry.caption
+msgid "Pull the first line from the next entry"
+msgstr ""
+
+#: tfrmmain.actpulllastlinefrompreviousentry.caption
+msgid "Pull the last line from the previous entry"
+msgstr ""
+
+#: tfrmmain.actpushfirstlinetopreviousentry.caption
+msgid "Push the first line to the previous entry"
+msgstr ""
+
+#: tfrmmain.actpushlastlinetonextentry.caption
+msgid "Push the last line to the next entry"
+msgstr ""
 
 #: tfrmmain.actqualitycheck.caption
 msgid "Quality check..."
@@ -2991,6 +3005,10 @@ msgctxt "tfrmmain.actshowtoolbarmain.caption"
 msgid "Main"
 msgstr "Principal"
 
+#: tfrmmain.actshowtoolbarquickaction.caption
+msgid "Quick Action"
+msgstr ""
+
 #: tfrmmain.actsort.caption
 msgid "Sort"
 msgstr "Ordenar"
@@ -3004,7 +3022,9 @@ msgstr "Modo fonte"
 msgid "Spell check..."
 msgstr "Revisão ortográfica..."
 
-#: tfrmmain.actsplitsubtitleatposition.caption
+#: tfrmmain.actsplitentryatposition.caption
+#, fuzzy
+msgctxt "tfrmmain.actsplitentryatposition.caption"
 msgid "Split line at cursor position"
 msgstr "Dividir linha na posição do cursor"
 
@@ -3054,6 +3074,18 @@ msgstr "Modo de tempo"
 msgid "Set time code format to HH:MM:SS.ZZZ"
 msgstr "Definir formado de código de tempo como HH:MM:SS:ZZZ"
 
+#: tfrmmain.acttm1.caption
+msgid "Use text from position 1 (tm)"
+msgstr ""
+
+#: tfrmmain.acttm2.caption
+msgid "Use text from position 2 (tm)"
+msgstr ""
+
+#: tfrmmain.acttm3.caption
+msgid "Use text from position 3 (tm)"
+msgstr ""
+
 #: tfrmmain.acttranscriptionmode.caption
 msgctxt "tfrmmain.acttranscriptionmode.caption"
 msgid "Transcription mode"
@@ -3092,9 +3124,9 @@ msgctxt "tfrmmain.acttranslatormode.caption"
 msgid "Translator mode"
 msgstr "Modo tradutor"
 
-#: tfrmmain.actunbreaksubtitle.caption
-msgid "Unbreak subtitle"
-msgstr "Apagar caracteres de quebra de linha"
+#: tfrmmain.actunbreakentry.caption
+msgid "Unbreak entry"
+msgstr ""
 
 #: tfrmmain.actundo.caption
 msgctxt "tfrmmain.actundo.caption"
@@ -3113,9 +3145,45 @@ msgstr "Acoplar vídeo"
 msgid "Dock waveform"
 msgstr "Acoplar forma de onda"
 
-#: tfrmmain.actunmarksubtitle.caption
-msgid "Unmark subtitle(s)"
-msgstr "Desmarcar legenda(s)"
+#: tfrmmain.actunicodectrllre.caption
+msgid "LRE (Start of Left-to-Right Embedding)"
+msgstr ""
+
+#: tfrmmain.actunicodectrllrm.caption
+msgid "LRM (Left-to-Right Mark )"
+msgstr ""
+
+#: tfrmmain.actunicodectrllro.caption
+msgid "LRO (Start of Left-to-Right Override)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlpdf.caption
+msgid "PDF (Pop Directorional Formatting)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlrle.caption
+msgid "RLE (Start of Right-to-Left Embedding)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlrlm.caption
+msgid "RLM (Right-to-Left Mark)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlrlo.caption
+msgid "RLO (Start of Right-to-Left Override)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlzwnj.caption
+msgid "ZWNJ (Zero Width Non-Joiner)"
+msgstr ""
+
+#: tfrmmain.actunicodezwj.caption
+msgid "ZWJ (Zero Width Joiner)"
+msgstr ""
+
+#: tfrmmain.actunmarkentry.caption
+msgid "Unmark entry"
+msgstr ""
 
 #: tfrmmain.actvalidatetm.caption
 msgid "Validate translation memory"
@@ -3189,6 +3257,10 @@ msgstr "FPS alvo do arquivo de legendas"
 msgid "FPS of the movie the opened subtitle file was made for"
 msgstr "FPS do filme para o qual o arquivo de legenda aberto foi criado"
 
+#: tfrmmain.edtquickaction.hint
+msgid "Quick Action Finder"
+msgstr ""
+
 #: tfrmmain.lblmedialength.hint
 msgid "Video length and FPS"
 msgstr "Duração de vídeo e FPS"
@@ -3207,27 +3279,31 @@ msgctxt "tfrmmain.mnuedit.caption"
 msgid "Edit"
 msgstr "Editar"
 
+#: tfrmmain.mnueditentries.caption
+msgctxt "tfrmmain.mnueditentries.caption"
+msgid "Entries"
+msgstr ""
+
 #: tfrmmain.mnueditformat.caption
 msgctxt "tfrmmain.mnueditformat.caption"
 msgid "Format"
 msgstr "Formato"
 
 #: tfrmmain.mnueditinsertsymbol.caption
-msgid "Insert unicode symbol"
+#, fuzzy
+#| msgid "Insert unicode symbol"
+msgid "Insert Unicode symbol"
 msgstr "Inserir símbolo Unicode"
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
 msgstr "Direita para esquerda"
 
-#: tfrmmain.mnueditsubtitles.caption
-msgctxt "tfrmmain.mnueditsubtitles.caption"
-msgid "Subtitles"
-msgstr "Legendas"
-
 #: tfrmmain.mnuedittexts.caption
+#, fuzzy
+#| msgid "Texts"
 msgctxt "tfrmmain.mnuedittexts.caption"
-msgid "Texts"
+msgid "Text"
 msgstr "Textos"
 
 #: tfrmmain.mnuedittimings.caption
@@ -3270,6 +3346,10 @@ msgstr "Procurar"
 msgctxt "tfrmmain.mnuhelp.caption"
 msgid "Help"
 msgstr "Ajuda"
+
+#: tfrmmain.mnumemoinsertunicodecontrolchar.caption
+msgid "Insert Unicode control character"
+msgstr ""
 
 #: tfrmmain.mnuselect.caption
 msgctxt "tfrmmain.mnuselect.caption"
@@ -4305,12 +4385,8 @@ msgid "Getting started wizard"
 msgstr "Assistente de configuração"
 
 #: tfrmwizard.lblexperience.caption
-msgid ""
-"In just a few steps, you'll be setup and ready for the best subtitling "
-"experience."
-msgstr ""
-"Em apenas alguns passos, tudo estará configurado e pronto para uma melhor "
-"experiência de legendagem."
+msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
+msgstr "Em apenas alguns passos, tudo estará configurado e pronto para uma melhor experiência de legendagem."
 
 #: tfrmwizard.lblfasterwhisper.caption
 msgid "Faster-Whisper:"
@@ -4338,14 +4414,8 @@ msgid "Essential, used for playing video."
 msgstr "Essencial, usado para reproduzir vídeo."
 
 #: tfrmwizard.lblrequiredfiles.caption
-msgid ""
-"For Tero Subtitler to function properly, the following libraries are "
-"necessary; if they are not found on your system, Tero Subtitler can download "
-"them for you."
-msgstr ""
-"Para o correto funcionamento do Tero Subtitler, as seguintes bibliotecas são "
-"necessárias; se elas não forem encontradas no seu sistema, Tero Subtitler "
-"pode baixá-las por você."
+msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
+msgstr "Para o correto funcionamento do Tero Subtitler, as seguintes bibliotecas são necessárias; se elas não forem encontradas no seu sistema, Tero Subtitler pode baixá-las por você."
 
 #: tfrmwizard.lblwelcome.caption
 msgid "Welcome to"
@@ -4367,3 +4437,4 @@ msgstr "yt-dlp:"
 #: tfrmwizard.lblytdlp_hint.caption
 msgid "Optional, used for dowloading from YouTube."
 msgstr "Opcional, usado para baixar do YouTube."
+
