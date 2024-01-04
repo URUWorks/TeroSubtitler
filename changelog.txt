@@ -4,6 +4,7 @@
 - fixed: Wrong toolbar was shown/hidden from the view menu
 - updated: Brazilian Portuguese language (thx Gzushgshsh)
 - added: Text functions to pull/push lines
+- added: Remove Unicode control characters
 - added: Quick Action Finder
 - added: Snapping window
 
