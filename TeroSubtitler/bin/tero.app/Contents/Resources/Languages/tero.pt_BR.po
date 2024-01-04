@@ -2798,7 +2798,9 @@ msgid "Quality check..."
 msgstr "Verificação de qualidade..."
 
 #: tfrmmain.actreadtextsfromfile.caption
-msgid "Read texts from file..."
+#, fuzzy
+#| msgid "Read texts from file..."
+msgid "Read text from file..."
 msgstr "Ler textos de a partir de um arquivo..."
 
 #: tfrmmain.actreadtimingsfromfile.caption
@@ -3034,7 +3036,9 @@ msgid "Split line at cursor position"
 msgstr "Dividir linha na posição do cursor"
 
 #: tfrmmain.actswaptexts.caption
-msgid "Swap texts"
+#, fuzzy
+#| msgid "Swap texts"
+msgid "Swap text"
 msgstr "Trocar textos"
 
 #: tfrmmain.actswapworkspace.caption
