@@ -45,20 +45,20 @@ procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer
 procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean); overload;
 procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AIdxs: TIntegerDynArray; const AClear: Boolean); overload;
 procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AFrom, ATo: Integer; const AClear: Boolean); overload;
-procedure VSTMarkSubtitles(const AVST: TLazVirtualStringTree; const Value: Boolean = True);
-procedure VSTJumpToNextMarkedSubtitle(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
-procedure VSTCopySubtitlesToClipboard(const AVST: TLazVirtualStringTree; const ACut: Boolean = False);
-procedure VSTPasteSubtitlesFromClipboard(const AVST: TLazVirtualStringTree);
-procedure VSTInsertSubtitles(const AVST: TLazVirtualStringTree; const Before: Boolean = False);
-procedure VSTDeleteSubtitles(const AVST: TLazVirtualStringTree);
-procedure VSTCombineSubtitles(const AVST: TLazVirtualStringTree);
-procedure VSTDivideSubtitles(const AVST: TLazVirtualStringTree);
+procedure VSTMarkEntries(const AVST: TLazVirtualStringTree; const Value: Boolean = True);
+procedure VSTJumpToNextMarkedEntry(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
+procedure VSTCopyEntriesToClipboard(const AVST: TLazVirtualStringTree; const ACut: Boolean = False);
+procedure VSTPasteEntriesFromClipboard(const AVST: TLazVirtualStringTree);
+procedure VSTInsertEntries(const AVST: TLazVirtualStringTree; const Before: Boolean = False);
+procedure VSTDeleteEntries(const AVST: TLazVirtualStringTree);
+procedure VSTCombineEntries(const AVST: TLazVirtualStringTree);
+procedure VSTDivideEntry(const AVST: TLazVirtualStringTree);
 
 function VSTFind(const FindText: String; const CaseSensitive: Boolean; const FindMode: TFindMode; const Replace: Boolean = False; const NewText: String = ''; const ReplaceAll: Boolean = False; const CasePreserve: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False): Boolean;
 procedure VSTFindPrevious(const CaseSensitive: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False);
 procedure VSTFindNext(const CaseSensitive: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False);
 procedure VSTDoLoop(const AVST: TLazVirtualStringTree; Proc: TVSTDoLoopProc; const Selection: TVSTDoLoopSelection = dlSelected; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
-procedure VSTMoveSubtitle(const AVST: TLazVirtualStringTree; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
+procedure VSTMoveEntry(const AVST: TLazVirtualStringTree; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
 
 procedure VSTAdjustSubtitles(const AdjSub: TAdjustSubtitles);
 procedure VSTSort(const AVST: TLazVirtualStringTree);
@@ -288,7 +288,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure VSTMarkSubtitles(const AVST: TLazVirtualStringTree; const Value: Boolean = True);
+procedure VSTMarkEntries(const AVST: TLazVirtualStringTree; const Value: Boolean = True);
 var
   Run : PVirtualNode;
 begin
@@ -309,7 +309,7 @@ end;
 
 //----------------------------------------------------------------------------------------------------------------------
 
-procedure VSTJumpToNextMarkedSubtitle(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
+procedure VSTJumpToNextMarkedEntry(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
 var
   Run : PVirtualNode;
 begin
@@ -343,7 +343,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure VSTCopySubtitlesToClipboard(const AVST: TLazVirtualStringTree; const ACut: Boolean = False);
+procedure VSTCopyEntriesToClipboard(const AVST: TLazVirtualStringTree; const ACut: Boolean = False);
 var
   Nodes : TNodeArray;
   I     : Integer;
@@ -365,7 +365,7 @@ begin
         end;
     finally
       Clipboard.AsText := s;
-      if ACut then VSTDeleteSubtitles(AVST);
+      if ACut then VSTDeleteEntries(AVST);
       AVST.EndUpdate;
       UpdateValues(True);
     end;
@@ -374,7 +374,7 @@ end;
 
 //----------------------------------------------------------------------------------------------------------------------
 
-procedure VSTPasteSubtitlesFromClipboard(const AVST: TLazVirtualStringTree);
+procedure VSTPasteEntriesFromClipboard(const AVST: TLazVirtualStringTree);
 var
   s      : TStringList;
   i, x   : Integer;
@@ -411,7 +411,7 @@ end;
 
 //----------------------------------------------------------------------------------------------------------------------
 
-procedure VSTInsertSubtitles(const AVST: TLazVirtualStringTree; const Before: Boolean = False);
+procedure VSTInsertEntries(const AVST: TLazVirtualStringTree; const Before: Boolean = False);
 var
   Run       : PVirtualNode;
   Item      : PUWSubtitleItem;
@@ -498,7 +498,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure VSTDeleteSubtitles(const AVST: TLazVirtualStringTree);
+procedure VSTDeleteEntries(const AVST: TLazVirtualStringTree);
 var
   Nodes : TNodeArray;
   I     : Integer;
@@ -523,7 +523,7 @@ end;
 
 //----------------------------------------------------------------------------------------------------------------------
 
-procedure VSTCombineSubtitles(const AVST: TLazVirtualStringTree);
+procedure VSTCombineEntries(const AVST: TLazVirtualStringTree);
 var
   Nodes  : TNodeArray;
   I, x   : Integer;
@@ -574,7 +574,7 @@ end;
 
 //----------------------------------------------------------------------------------------------------------------------
 
-procedure VSTDivideSubtitles(const AVST: TLazVirtualStringTree);
+procedure VSTDivideEntry(const AVST: TLazVirtualStringTree);
 var
   s : TStringList;
   NodeArray : TNodeArray;
@@ -851,7 +851,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure VSTMoveSubtitle(const AVST: TLazVirtualStringTree; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
+procedure VSTMoveEntry(const AVST: TLazVirtualStringTree; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
 var
   Item  : PUWSubtitleItem;
   Delay : Integer;

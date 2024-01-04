@@ -234,20 +234,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actInsertSubtitleBeforeExecute(Sender: TObject);
+procedure TfrmMain.actInsertEntryBeforeExecute(Sender: TObject);
 begin
   if Workspace.ViewMode = vmList then
-    VSTInsertSubtitles(VST, True)
+    VSTInsertEntries(VST, True)
   else if Workspace.ViewMode = vmSource then
     mmoSourceView.Lines.Insert(mmoSourceView.CaretPos.Y, '')
   else
     TranscriptionInsertAbove;
 end;
 
-procedure TfrmMain.actInsertSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actInsertEntryExecute(Sender: TObject);
 begin
   if Workspace.ViewMode = vmList then
-    VSTInsertSubtitles(VST)
+    VSTInsertEntries(VST)
   else if Workspace.ViewMode = vmSource then
     mmoSourceView.Lines.Insert(mmoSourceView.CaretPos.Y+1, '')
   else
@@ -256,17 +256,17 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actDeleteSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actDeleteEntryExecute(Sender: TObject);
 begin
   if Workspace.ViewMode = vmList then
   begin
     if AppOptions.AskForDeleteLines then
     begin
       if (MsgDeleteFiles = mrYes) then
-        VSTDeleteSubtitles(VST);
+        VSTDeleteEntries(VST);
     end
     else
-      VSTDeleteSubtitles(VST);
+      VSTDeleteEntries(VST);
   end
   else if Workspace.ViewMode = vmSource then
     mmoSourceView.CutToClipboard
@@ -572,7 +572,7 @@ end;
 procedure TfrmMain.actMediaMoveSubtitleExecute(Sender: TObject);
 begin
   if (MPV.GetMediaLenInMs > 0) and actVideoPreview.Checked and (VST.SelectedCount > 0) then
-    VSTMoveSubtitle(VST, True, True);
+    VSTMoveEntry(VST, True, True);
 end;
 
 // -----------------------------------------------------------------------------
@@ -713,9 +713,9 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actCombineSubtitlesExecute(Sender: TObject);
+procedure TfrmMain.actCombineEntriesExecute(Sender: TObject);
 begin
-  VSTCombineSubtitles(VST);
+  VSTCombineEntries(VST);
 end;
 
 // -----------------------------------------------------------------------------
@@ -924,7 +924,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actUnbreakSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actUnbreakEntryExecute(Sender: TObject);
 var
   Memo: TUWMemo;
 begin
@@ -960,23 +960,23 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actDivideSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actDivideEntryExecute(Sender: TObject);
 begin
-  VSTDivideSubtitles(VST);
+  VSTDivideEntry(VST);
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actMarkSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actMarkEntryExecute(Sender: TObject);
 begin
-  VSTMarkSubtitles(VST);
+  VSTMarkEntries(VST);
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actUnMarkSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actUnMarkEntryExecute(Sender: TObject);
 begin
-  VSTMarkSubtitles(VST, False);
+  VSTMarkEntries(VST, False);
 end;
 
 // -----------------------------------------------------------------------------
@@ -990,14 +990,14 @@ end;
 
 procedure TfrmMain.actJumpToNextMarkedExecute(Sender: TObject);
 begin
-  VSTJumpToNextMarkedSubtitle(VST);
+  VSTJumpToNextMarkedEntry(VST);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actJumpToPreviousMarkedExecute(Sender: TObject);
 begin
-  VSTJumpToNextMarkedSubtitle(VST, False);
+  VSTJumpToNextMarkedEntry(VST, False);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1141,7 +1141,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actSplitSubtitleAtPositionExecute(Sender: TObject);
+procedure TfrmMain.actSplitEntryAtPositionExecute(Sender: TObject);
 var
   Memo  : TUWMemo;
   idx   : Integer;
@@ -1703,6 +1703,34 @@ begin
       SetLength(numbers, 0);
     end;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actPushFirstLineToPreviousEntryExecute(Sender: TObject);
+begin
+  PushFirstLineToPreviousEntry(VSTFocusedNode(VST));
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actPushLastLineToNextEntryExecute(Sender: TObject);
+begin
+  PushLastLineToNextEntry(VSTFocusedNode(VST));
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actPullLastLineFromPreviousEntryExecute(Sender: TObject);
+begin
+  PullLastLineFromPreviousEntry(VSTFocusedNode(VST));
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actPullFirstLineFromNextEntryExecute(Sender: TObject);
+begin
+  PullFirstLineFromNextEntry(VSTFocusedNode(VST));
 end;
 
 // -----------------------------------------------------------------------------

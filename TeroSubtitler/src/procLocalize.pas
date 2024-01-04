@@ -275,7 +275,7 @@ resourcestring
   lngscFind = 'Find';
   lngscHelp = 'Help';
   lngscSelect = 'Select';
-  lngscSubtitle = 'Subtitle';
+  lngscEntries = 'Entries';
   lngscTexts = 'Texts';
   lngscTimings = 'Timings';
   lngscTools = 'Tools';
@@ -354,7 +354,7 @@ begin
   if aCategory = ResStringDefault(@lngscFind) then Exit(lngscFind);
   if aCategory = ResStringDefault(@lngscHelp) then Exit(lngscHelp);
   if aCategory = ResStringDefault(@lngscSelect) then Exit(lngscSelect);
-  if aCategory = ResStringDefault(@lngscSubtitle) then Exit(lngscSubtitle);
+  if aCategory = ResStringDefault(@lngscEntries) then Exit(lngscEntries);
   if aCategory = ResStringDefault(@lngscTexts) then Exit(lngscTexts);
   if aCategory = ResStringDefault(@lngscTimings) then Exit(lngscTimings);
   if aCategory = ResStringDefault(@lngscTools) then Exit(lngscTools);

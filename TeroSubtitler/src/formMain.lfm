@@ -985,19 +985,19 @@ object frmMain: TfrmMain
       object tlb8: TToolButton
         Left = 212
         Top = 0
-        Action = actInsertSubtitle
+        Action = actInsertEntry
         DropdownMenu = popDropInsert
         Style = tbsDropDown
       end
       object tlb9: TToolButton
         Left = 247
         Top = 0
-        Action = actCombineSubtitles
+        Action = actCombineEntries
       end
       object tlb10: TToolButton
         Left = 270
         Top = 0
-        Action = actDeleteSubtitle
+        Action = actDeleteEntry
       end
       object tlbdiv3: TToolButton
         Left = 293
@@ -1339,13 +1339,13 @@ object frmMain: TfrmMain
         Caption = '-'
       end
       object MenuItem14: TMenuItem
-        Action = actInsertSubtitleBefore
+        Action = actInsertEntryBefore
       end
       object MenuItem15: TMenuItem
-        Action = actInsertSubtitle
+        Action = actInsertEntry
       end
       object MenuItem16: TMenuItem
-        Action = actDeleteSubtitle
+        Action = actDeleteEntry
       end
       object Separator4: TMenuItem
         Caption = '-'
@@ -1425,7 +1425,7 @@ object frmMain: TfrmMain
           Action = actConvertCase
         end
         object MenuItem54: TMenuItem
-          Action = actUnbreakSubtitle
+          Action = actUnbreakEntry
         end
         object MenuItem56: TMenuItem
           Action = actSetMaximumLineLength
@@ -1436,8 +1436,23 @@ object frmMain: TfrmMain
         object MenuItem75: TMenuItem
           Action = actSwapTexts
         end
+        object Separator56: TMenuItem
+          Caption = '-'
+        end
         object MenuItem179: TMenuItem
           Action = actRemoveLineFromEntry
+        end
+        object MenuItem199: TMenuItem
+          Action = actPushFirstLineToPreviousEntry
+        end
+        object MenuItem200: TMenuItem
+          Action = actPushLastLineToNextEntry
+        end
+        object MenuItem202: TMenuItem
+          Action = actPullLastLineFromPreviousEntry
+        end
+        object MenuItem201: TMenuItem
+          Action = actPullFirstLineFromNextEntry
         end
         object Separator15: TMenuItem
           Caption = '-'
@@ -1458,13 +1473,13 @@ object frmMain: TfrmMain
           Action = actReadTextsFromFile
         end
       end
-      object mnuEditSubtitles: TMenuItem
-        Caption = 'Subtitles'
+      object mnuEditEntries: TMenuItem
+        Caption = 'Entries'
         object MenuItem62: TMenuItem
-          Action = actCombineSubtitles
+          Action = actCombineEntries
         end
         object MenuItem59: TMenuItem
-          Action = actDivideSubtitle
+          Action = actDivideEntry
         end
         object MenuItem165: TMenuItem
           Action = actSort
@@ -1482,10 +1497,10 @@ object frmMain: TfrmMain
           Caption = '-'
         end
         object MenuItem60: TMenuItem
-          Action = actMarkSubtitle
+          Action = actMarkEntry
         end
         object MenuItem61: TMenuItem
-          Action = actUnMarkSubtitle
+          Action = actUnMarkEntry
         end
       end
       object mnuEditFormat: TMenuItem
@@ -2710,11 +2725,11 @@ object frmMain: TfrmMain
       Caption = 'Convert case...'
       OnExecute = actConvertCaseExecute
     end
-    object actUnbreakSubtitle: TAction
+    object actUnbreakEntry: TAction
       Tag = 1
       Category = 'Texts'
-      Caption = 'Unbreak subtitle'
-      OnExecute = actUnbreakSubtitleExecute
+      Caption = 'Unbreak entry'
+      OnExecute = actUnbreakEntryExecute
     end
     object actSetMaximumLineLength: TAction
       Tag = 1
@@ -2734,33 +2749,33 @@ object frmMain: TfrmMain
       Caption = 'Fix punctuation'
       OnExecute = actFixRTLPunctuationExecute
     end
-    object actDivideSubtitle: TAction
+    object actDivideEntry: TAction
       Tag = 1
-      Category = 'Subtitle'
-      Caption = 'Divide subtitle'
-      OnExecute = actDivideSubtitleExecute
+      Category = 'Entries'
+      Caption = 'Divide entry'
+      OnExecute = actDivideEntryExecute
     end
-    object actMarkSubtitle: TAction
+    object actMarkEntry: TAction
       Tag = 1
-      Category = 'Subtitle'
-      Caption = 'Mark subtitle(s)'
-      OnExecute = actMarkSubtitleExecute
+      Category = 'Entries'
+      Caption = 'Mark entry'
+      OnExecute = actMarkEntryExecute
     end
-    object actUnMarkSubtitle: TAction
+    object actUnMarkEntry: TAction
       Tag = 1
-      Category = 'Subtitle'
-      Caption = 'Unmark subtitle(s)'
-      OnExecute = actUnMarkSubtitleExecute
+      Category = 'Entries'
+      Caption = 'Unmark entry'
+      OnExecute = actUnMarkEntryExecute
     end
     object actJumpToNextMarked: TAction
       Tag = 1
-      Category = 'Subtitle'
+      Category = 'Entries'
       Caption = 'Jump to next marked'
       OnExecute = actJumpToNextMarkedExecute
     end
     object actJumpToPreviousMarked: TAction
       Tag = 1
-      Category = 'Subtitle'
+      Category = 'Entries'
       Caption = 'Jump to previous marked'
       OnExecute = actJumpToPreviousMarkedExecute
     end
@@ -2773,7 +2788,7 @@ object frmMain: TfrmMain
     object actGoTo: TAction
       Tag = 1
       Category = 'Find'
-      Caption = 'Go to line number...'
+      Caption = 'Go to line entry...'
       OnExecute = actGoToExecute
     end
     object actSelectCurrentToBeginning: TAction
@@ -3009,11 +3024,11 @@ object frmMain: TfrmMain
       Caption = 'Read texts from file...'
       OnExecute = actReadTextsFromFileExecute
     end
-    object actSplitSubtitleAtPosition: TAction
+    object actSplitEntryAtPosition: TAction
       Tag = 1
       Category = 'Texts'
       Caption = 'Split line at cursor position'
-      OnExecute = actSplitSubtitleAtPositionExecute
+      OnExecute = actSplitEntryAtPositionExecute
     end
     object actInsertCurrentTime: TAction
       Tag = 4
@@ -3193,18 +3208,18 @@ object frmMain: TfrmMain
     end
     object actSort: TAction
       Tag = 1
-      Category = 'Subtitle'
+      Category = 'Entries'
       Caption = 'Sort'
       OnExecute = actSortExecute
     end
     object actSetAsDefaultFormat: TAction
-      Category = 'Subtitle'
+      Category = 'Entries'
       Caption = 'Set as default save format'
       ImageIndex = 67
       OnExecute = actSetAsDefaultFormatExecute
     end
     object actSetAsDefaultEncoding: TAction
-      Category = 'Subtitle'
+      Category = 'Entries'
       Caption = 'Set as default save encoding'
       ImageIndex = 66
       OnExecute = actSetAsDefaultEncodingExecute
@@ -3570,37 +3585,37 @@ object frmMain: TfrmMain
       Caption = 'Copy video position to clipboard'
       OnExecute = actCopyVideoPosToClipboardExecute
     end
-    object actInsertSubtitleBefore: TAction
+    object actInsertEntryBefore: TAction
       Tag = 17
       Category = 'Edit'
-      Caption = 'Insert subtitle before'
-      Hint = 'Insert subtitle before the current subtitle'
+      Caption = 'Insert entry before'
+      Hint = 'Insert entry before the current entry'
       ImageIndex = 9
-      OnExecute = actInsertSubtitleBeforeExecute
+      OnExecute = actInsertEntryBeforeExecute
     end
-    object actInsertSubtitle: TAction
+    object actInsertEntry: TAction
       Tag = 17
       Category = 'Edit'
-      Caption = 'Insert subtitle'
-      Hint = 'Insert a new subtitle after the current subtitle'
+      Caption = 'Insert entry'
+      Hint = 'Insert a new entry after the current entry'
       ImageIndex = 8
-      OnExecute = actInsertSubtitleExecute
+      OnExecute = actInsertEntryExecute
     end
-    object actDeleteSubtitle: TAction
+    object actDeleteEntry: TAction
       Tag = 17
       Category = 'Edit'
-      Caption = 'Delete subtitle(s)'
-      Hint = 'Delete selected subtitle(s)'
+      Caption = 'Delete entries'
+      Hint = 'Delete selected entries'
       ImageIndex = 10
-      OnExecute = actDeleteSubtitleExecute
+      OnExecute = actDeleteEntryExecute
     end
-    object actCombineSubtitles: TAction
+    object actCombineEntries: TAction
       Tag = 1
-      Category = 'Edit'
-      Caption = 'Combine subtitles'
-      Hint = 'Combines all the selected subtitles into one'
+      Category = 'Entries'
+      Caption = 'Combine entries'
+      Hint = 'Combines all the selected entries into one'
       ImageIndex = 63
-      OnExecute = actCombineSubtitlesExecute
+      OnExecute = actCombineEntriesExecute
     end
     object actSettings: TAction
       Category = 'Edit'
@@ -3614,6 +3629,7 @@ object frmMain: TfrmMain
       OnExecute = actFormatPropertiesExecute
     end
     object actRemoveLineFromEntry: TAction
+      Tag = 1
       Category = 'Texts'
       Caption = 'Remove line from entry...'
       OnExecute = actRemoveLineFromEntryExecute
@@ -3690,16 +3706,40 @@ object frmMain: TfrmMain
       Caption = 'Quick Action'
       OnExecute = actShowToolbarQuickActionExecute
     end
+    object actPushFirstLineToPreviousEntry: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Push the first line to the previous entry'
+      OnExecute = actPushFirstLineToPreviousEntryExecute
+    end
+    object actPushLastLineToNextEntry: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Push the last line to the next entry'
+      OnExecute = actPushLastLineToNextEntryExecute
+    end
+    object actPullLastLineFromPreviousEntry: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Pull the last line from the previous entry'
+      OnExecute = actPullLastLineFromPreviousEntryExecute
+    end
+    object actPullFirstLineFromNextEntry: TAction
+      Tag = 1
+      Category = 'Texts'
+      Caption = 'Pull the first line from the next entry'
+      OnExecute = actPullFirstLineFromNextEntryExecute
+    end
   end
   object popDropInsert: TPopupMenu
     Images = ImageList_Default
     Left = 27
     Top = 96
     object MenuItem2: TMenuItem
-      Action = actInsertSubtitle
+      Action = actInsertEntry
     end
     object MenuItem1: TMenuItem
-      Action = actInsertSubtitleBefore
+      Action = actInsertEntryBefore
     end
   end
   object popMRU: TPopupMenu
@@ -3957,13 +3997,13 @@ object frmMain: TfrmMain
     Left = 27
     Top = 376
     object MenuItem88: TMenuItem
-      Action = actInsertSubtitleBefore
+      Action = actInsertEntryBefore
     end
     object MenuItem89: TMenuItem
-      Action = actInsertSubtitle
+      Action = actInsertEntry
     end
     object MenuItem90: TMenuItem
-      Action = actDeleteSubtitle
+      Action = actDeleteEntry
     end
     object Separator22: TMenuItem
       Caption = '-'
@@ -4007,10 +4047,10 @@ object frmMain: TfrmMain
       Caption = '-'
     end
     object MenuItem94: TMenuItem
-      Action = actMarkSubtitle
+      Action = actMarkEntry
     end
     object MenuItem95: TMenuItem
-      Action = actUnMarkSubtitle
+      Action = actUnMarkEntry
     end
     object Separator50: TMenuItem
       Caption = '-'
@@ -4064,7 +4104,7 @@ object frmMain: TfrmMain
       Action = actAddQuotationMarks
     end
     object MenuItem107: TMenuItem
-      Action = actSplitSubtitleAtPosition
+      Action = actSplitEntryAtPosition
     end
     object Separator49: TMenuItem
       Caption = '-'
