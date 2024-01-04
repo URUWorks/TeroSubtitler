@@ -46,7 +46,7 @@ type
 
 implementation
 
-uses UWSubtitleAPI.Tags, fpSpreadsheet, fpsAllFormats, Math;
+uses UWSubtitleAPI.Tags, fpSpreadsheet, fpsAllFormats, fpsTypes, Math;
 
 // -----------------------------------------------------------------------------
 
@@ -208,6 +208,7 @@ var
   i         : Integer;
   Count     : Integer;
   WorkName  : String;
+  NewName   : String;
 begin
   Result  := False;
 
@@ -224,9 +225,15 @@ begin
       Worksheet.WriteText(Count, 1, TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS));
       Worksheet.WriteText(Count, 2, TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS));
       Worksheet.WriteText(Count, 3, TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])));
+      Inc(Count);
     end;
 
-    Workbook.WriteToFile(FileName, True);
+    NewName := FileName;
+    WorkName := LowerCase(ExtractFileExt(NewName));
+    if (WorkName <> STR_EXCEL_EXTENSION) or (WorkName <> STR_OOXML_EXCEL_EXTENSION) or (WorkName <> STR_OPENDOCUMENT_CALC_EXTENSION) then
+      NewName := ChangeFileExt(NewName, STR_EXCEL_EXTENSION);
+
+    Workbook.WriteToFile(NewName, True);
     Result := True;
   finally
     Workbook.Free;

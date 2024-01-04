@@ -104,7 +104,7 @@ uses
   procConfig, procDialogs, procWorkspace, procVST, procSubtitle, procUndo,
   UWSystem.Encoding, formCustomFileDlg, UWSystem.SysUtils, Forms, procMRU,
   UWSystem.StrUtils, procForms, procProjectFile, formCustomSelectDlg,
-  procFixSubtitles, LCLIntf, Base64
+  procFixSubtitles, LCLIntf, Base64, fpsTypes
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -385,6 +385,7 @@ procedure SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats;
 var
   _FPS      : Single;
   _Encoding : TEncoding;
+  S, ext : String;
 begin
   _FPS := AFPS;
   if _FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
@@ -396,18 +397,26 @@ begin
   else
     Subtitles.TimeBase := stbMedia;
 
-  if Subtitles.SaveToFile(FileName, _FPS, _Encoding, Format, SubtitleMode) then
+  S := FileName;
+  if Format = sfSpreadsheet then
+  begin
+    ext := LowerCase(ExtractFileExt(FileName));
+    if (ext <> STR_EXCEL_EXTENSION) or (ext <> STR_OOXML_EXCEL_EXTENSION) or (ext <> STR_OPENDOCUMENT_CALC_EXTENSION) then
+      S := ChangeFileExt(FileName, STR_EXCEL_EXTENSION)
+  end;
+
+  if Subtitles.SaveToFile(S, _FPS, _Encoding, Format, SubtitleMode) then
   begin
     if SubtitleMode = smText then
-      SubtitleInfo.Text.FileName := FileName
+      SubtitleInfo.Text.FileName := S
     else
-      SubtitleInfo.Translation.FileName := FileName;
+      SubtitleInfo.Translation.FileName := S;
 
     SubtitleChangedReset(SubtitleMode);
     RefreshAppTitle;
 
     with frmMain do
-      MRU.Add(FileName, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPV.IsPlaying);
+      MRU.Add(S, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPV.IsPlaying);
   end
   else
     ShowErrorMessageDialog(lngSaveSubtitleError);
