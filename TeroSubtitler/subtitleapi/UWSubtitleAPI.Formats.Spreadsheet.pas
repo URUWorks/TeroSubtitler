@@ -46,7 +46,7 @@ type
 
 implementation
 
-uses UWSubtitleAPI.Tags, fpSpreadsheet, fpsAllFormats;
+uses UWSubtitleAPI.Tags, fpSpreadsheet, fpsAllFormats, Math;
 
 // -----------------------------------------------------------------------------
 
@@ -121,7 +121,7 @@ begin
   Workbook := TsWorkbook.Create;
   try
     Workbook.ReadFromFile(SubtitleFile.FileName);
-    if Workbook.GetWorksheetCount > 2 then // Minimum columns required
+    if Workbook.GetWorksheetCount > 0 then
     begin
       if Assigned(Subtitles.OnLoadDataFunc) and (Workbook.GetWorksheetCount > 1) then
       begin
@@ -137,6 +137,8 @@ begin
       end
       else
         Worksheet := Workbook.GetFirstWorksheet;
+
+      if Worksheet.GetLastColIndex < 3 then Exit; // Minimum columns required
 
       // find necessary indexes
       for row := 0 to Worksheet.GetLastRowIndex do
@@ -205,12 +207,15 @@ var
   Worksheet : TsWorksheet;
   i         : Integer;
   Count     : Integer;
+  WorkName  : String;
 begin
   Result  := False;
 
   Workbook := TsWorkbook.Create;
   try
-    Worksheet := Workbook.AddWorksheet(ChangeFileExt(ExtractFileName(FileName), ''));
+    WorkName := ChangeFileExt(ExtractFileName(FileName), '');
+    SetLength(WorkName, Min(Length(WorkName), 31)); // The length must be less than or equal to 31 characters
+    Worksheet := Workbook.AddWorksheet(WorkName);
     //Worksheet := Workbook.AddWorksheet('Tero Subtitler');
     Count := 0;
     for i := FromItem to ToItem do
