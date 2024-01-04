@@ -10,7 +10,7 @@ object frmCustomInputDlg: TfrmCustomInputDlg
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object lblMessage: TLabel
     Left = 8
     Height = 15
@@ -27,7 +27,7 @@ object frmCustomInputDlg: TfrmCustomInputDlg
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 5
-    Caption = 'Ok'
+    Caption = 'OK'
     Default = True
     ModalResult = 1
     TabOrder = 1
@@ -49,8 +49,8 @@ object frmCustomInputDlg: TfrmCustomInputDlg
     Top = 28
     Width = 435
     Anchors = [akTop, akLeft, akRight, akBottom]
-    OnKeyDown = mmoInputKeyDown
     TabOrder = 0
+    OnKeyDown = mmoInputKeyDown
   end
   object lblHelp: TLabel
     Cursor = crHandPoint

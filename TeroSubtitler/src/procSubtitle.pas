@@ -32,7 +32,11 @@ procedure CopyCurrentVideoPosToClipboard;
 function InsertSubtitle(const Index: Integer; const Item: TUWSubtitleItem; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer; overload;
 function InsertSubtitle(const Index: Integer; const InitialTime, FinalTime: Integer; const Text, Translation: String; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer; overload;
 procedure DeleteSubtitle(const Index: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
-function DeleteLineFromText(const Index, ALine: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True): String;
+function DeleteLineFromText(const Index, ALine: Integer): String;
+procedure PushFirstLineToPreviousEntry(const Index: Integer);
+procedure PushLastLineToNextEntry(const Index: Integer);
+procedure PullLastLineFromPreviousEntry(const Index: Integer);
+procedure PullFirstLineFromNextEntry(const Index: Integer);
 procedure ClearSubtitles(const AutoIncrementUndo: Boolean = True);
 
 function CalcNewSubtitleFinalTime(const Index: Integer; const AInitialTime: Integer): Integer;
@@ -92,7 +96,7 @@ var
   Memo: TUWMemo;
 begin
   if frmMain.VST.Focused then
-    VSTCopySubtitlesToClipboard(frmMain.VST, ACut)
+    VSTCopyEntriesToClipboard(frmMain.VST, ACut)
   else
   begin
     Memo := GetMemoFocused;
@@ -113,7 +117,7 @@ var
   Memo: TUWMemo;
 begin
   if frmMain.VST.Focused then
-    VSTPasteSubtitlesFromClipboard(frmMain.VST)
+    VSTPasteEntriesFromClipboard(frmMain.VST)
   else
   begin
     Memo := GetMemoFocused;
@@ -192,7 +196,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function DeleteLineFromText(const Index, ALine: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True): String;
+function DeleteLineFromText(const Index, ALine: Integer): String;
 var
   sl : TStrings;
 begin
@@ -209,6 +213,114 @@ begin
       sl.Delete(ALine);
       Result := sl.Text;
     end;
+  finally
+    sl.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure PushFirstLineToPreviousEntry(const Index: Integer);
+var
+  sl : TStrings;
+begin
+  if not Subtitles.ValidIndex(Index) or (Index < 1) then Exit;
+  if Subtitles[Index].Text.IsEmpty then Exit;
+
+  sl := TStringList.Create;
+  try
+    sl.SkipLastLineBreak := True;
+    sl.Text := Subtitles[Index].Text;
+
+    SetSubtitleText(Index-1, Subtitles[Index-1].Text + sLineBreak + sl[0], smText, False, False, False);
+    sl.Delete(0);
+    SetSubtitleText(Index, sl.Text, smText, False, False, False);
+
+    UndoInstance.IncrementUndoGroup;
+    SubtitleChanged(True, False);
+    UpdateValues(True);
+    DoAutoCheckErrors;
+  finally
+    sl.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure PushLastLineToNextEntry(const Index: Integer);
+var
+  sl : TStrings;
+begin
+  if not Subtitles.ValidIndex(Index) or (Index = Subtitles.Count-1) then Exit;
+  if Subtitles[Index].Text.IsEmpty then Exit;
+
+  sl := TStringList.Create;
+  try
+    sl.SkipLastLineBreak := True;
+    sl.Text := Subtitles[Index].Text;
+
+    SetSubtitleText(Index+1, sl[sl.Count-1] + sLineBreak + Subtitles[Index+1].Text, smText, False, False, False);
+    sl.Delete(sl.Count-1);
+    SetSubtitleText(Index, sl.Text, smText, False, False, False);
+
+    UndoInstance.IncrementUndoGroup;
+    SubtitleChanged(True, False);
+    UpdateValues(True);
+    DoAutoCheckErrors;
+  finally
+    sl.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure PullLastLineFromPreviousEntry(const Index: Integer);
+var
+  sl : TStrings;
+begin
+  if not Subtitles.ValidIndex(Index) or (Index < 1) then Exit;
+  if Subtitles[Index-1].Text.IsEmpty then Exit;
+
+  sl := TStringList.Create;
+  try
+    sl.SkipLastLineBreak := True;
+    sl.Text := Subtitles[Index-1].Text;
+
+    SetSubtitleText(Index, sl[sl.Count-1] + sLineBreak + Subtitles[Index].Text, smText, False, False, False);
+    sl.Delete(sl.Count-1);
+    SetSubtitleText(Index-1, sl.Text, smText, False, False, False);
+
+    UndoInstance.IncrementUndoGroup;
+    SubtitleChanged(True, False);
+    UpdateValues(True);
+    DoAutoCheckErrors;
+  finally
+    sl.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure PullFirstLineFromNextEntry(const Index: Integer);
+var
+  sl : TStrings;
+begin
+  if not Subtitles.ValidIndex(Index) or (Index = Subtitles.Count-1) then Exit;
+  if Subtitles[Index+1].Text.IsEmpty then Exit;
+
+  sl := TStringList.Create;
+  try
+    sl.SkipLastLineBreak := True;
+    sl.Text := Subtitles[Index+1].Text;
+
+    SetSubtitleText(Index, Subtitles[Index].Text + sLineBreak + sl[0], smText, False, False, False);
+    sl.Delete(0);
+    SetSubtitleText(Index+1, sl.Text, smText, False, False, False);
+
+    UndoInstance.IncrementUndoGroup;
+    SubtitleChanged(True, False);
+    UpdateValues(True);
+    DoAutoCheckErrors;
   finally
     sl.Free;
   end;

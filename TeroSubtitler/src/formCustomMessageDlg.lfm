@@ -10,7 +10,7 @@ object frmCustomMessageDlg: TfrmCustomMessageDlg
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object btnOk: TButton
     Left = 301
     Height = 26
@@ -18,7 +18,7 @@ object frmCustomMessageDlg: TfrmCustomMessageDlg
     Width = 91
     Anchors = [akRight, akBottom]
     Cancel = True
-    Caption = 'Ok'
+    Caption = 'OK'
     Default = True
     ModalResult = 1
     TabOrder = 0

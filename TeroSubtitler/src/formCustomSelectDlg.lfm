@@ -11,7 +11,7 @@ object frmCustomSelectDlg: TfrmCustomSelectDlg
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object lblMessage: TLabel
     Left = 8
     Height = 15
@@ -29,7 +29,7 @@ object frmCustomSelectDlg: TfrmCustomSelectDlg
     Width = 91
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
-    Caption = 'Ok'
+    Caption = 'OK'
     Default = True
     ModalResult = 1
     TabOrder = 1

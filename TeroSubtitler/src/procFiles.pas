@@ -214,7 +214,7 @@ begin
       if CloseSubtitle(True) then
       begin
         EnableWorkArea;
-        if InsertEmptySubtitle then VSTInsertSubtitles(VST);
+        if InsertEmptySubtitle then VSTInsertEntries(VST);
       end;
     end
     else if LayoutSource.Visible then
