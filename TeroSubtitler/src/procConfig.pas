@@ -1109,8 +1109,8 @@ procedure UpdateCommonActionString;
 begin
   with frmMain do
     begin
-      actShiftTimeMore.Caption := lngShiftTimeMore;
-      actShiftTimeLess.Caption := lngShiftTimeLess;
+      actShiftTimeMore.Caption := Format(lngShiftTimeMore, [AppOptions.ShiftTimeMS]);
+      actShiftTimeLess.Caption := Format(lngShiftTimeLess, [AppOptions.ShiftTimeMS]);
     end;
 end;
 

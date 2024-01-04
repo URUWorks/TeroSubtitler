@@ -333,7 +333,6 @@ begin
     if OldLang <> AppOptions.GUILanguage then
     begin
       SetGUILanguage;
-      UpdateCommonActionString;
       UpdateVideoLengthString;
       RefreshAppTitle;
     end

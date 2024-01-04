@@ -276,7 +276,7 @@ resourcestring
   lngscHelp = 'Help';
   lngscSelect = 'Select';
   lngscEntries = 'Entries';
-  lngscTexts = 'Texts';
+  lngscText = 'Text';
   lngscTimings = 'Timings';
   lngscTools = 'Tools';
   lngscVideo = 'Video';
@@ -310,7 +310,7 @@ resourcestring
   lngtTip4 = 'Tip: Use <%s> dock/undock waveform window';
 
 function AppNameD: String;
-function LocalizeCategory(aCategory: String): String;
+function LocalizeCategory(const aCategory: String): String;
 function GetGUILangIndex(const aLngList: TStrings; LangId: String): Integer;
 function GetPOLanguage(const AFileName: String): String;
 function GetPOLanguageNameFromID(const LangID: String): String;
@@ -344,7 +344,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function LocalizeCategory(aCategory: String): String;
+function LocalizeCategory(const aCategory: String): String;
 begin
   Result := aCategory;
 
@@ -355,7 +355,7 @@ begin
   if aCategory = ResStringDefault(@lngscHelp) then Exit(lngscHelp);
   if aCategory = ResStringDefault(@lngscSelect) then Exit(lngscSelect);
   if aCategory = ResStringDefault(@lngscEntries) then Exit(lngscEntries);
-  if aCategory = ResStringDefault(@lngscTexts) then Exit(lngscTexts);
+  if aCategory = ResStringDefault(@lngscText) then Exit(lngscText);
   if aCategory = ResStringDefault(@lngscTimings) then Exit(lngscTimings);
   if aCategory = ResStringDefault(@lngscTools) then Exit(lngscTools);
   if aCategory = ResStringDefault(@lngscVideo) then Exit(lngscVideo);
@@ -428,6 +428,7 @@ var
   i: Integer;
 begin
   SetDefaultLang(AppOptions.GUILanguage, LanguageFolder);
+  UpdateCommonActionString;
 
   for i := 0 to frmMain.ActionList.ActionCount-1 do
     with TAction(frmMain.ActionList.Actions[i]) do

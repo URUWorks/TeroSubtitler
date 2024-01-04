@@ -905,14 +905,14 @@ end;
 
 procedure TfrmMain.actShiftTimeMoreExecute(Sender: TObject);
 begin
-  VSTDoLoop(frmMain.VST, @ApplyShiftTimeMore, dlSelected, True, True);
+  VSTDoLoop(VST, @ApplyShiftTimeMore, dlSelected, True, True);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actShiftTimeLessExecute(Sender: TObject);
 begin
-  VSTDoLoop(frmMain.VST, @ApplyShiftTimeLess, dlSelected, True, True);
+  VSTDoLoop(VST, @ApplyShiftTimeLess, dlSelected, True, True);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1731,6 +1731,19 @@ end;
 procedure TfrmMain.actPullFirstLineFromNextEntryExecute(Sender: TObject);
 begin
   PullFirstLineFromNextEntry(VSTFocusedNode(VST));
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actRemoveUnicodeControlCharsExecute(Sender: TObject);
+var
+  Memo: TUWMemo;
+begin
+  Memo := GetMemoFocused;
+  if Memo = NIL then
+    VSTDoLoop(VST, @ApplyRemoveUnicodeControlChars, dlSelected, True, True)
+  else
+    Memo.Text := RemoveUnicodeControlChars(Memo.Text);
 end;
 
 // -----------------------------------------------------------------------------

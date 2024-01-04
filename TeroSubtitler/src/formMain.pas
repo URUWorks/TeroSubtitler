@@ -77,6 +77,7 @@ type
     actExportSUP: TAction;
     actCopyVideoPosToClipboard: TAction;
     actGenerateVideo: TAction;
+    actRemoveUnicodeControlChars: TAction;
     actPullLastLineFromPreviousEntry: TAction;
     actPullFirstLineFromNextEntry: TAction;
     actPushLastLineToNextEntry: TAction;
@@ -348,6 +349,7 @@ type
     MenuItem200: TMenuItem;
     MenuItem201: TMenuItem;
     MenuItem202: TMenuItem;
+    MenuItem203: TMenuItem;
     mnuMemoInsertUnicodeControlChar: TMenuItem;
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
@@ -994,6 +996,7 @@ type
     procedure actPushLastLineToNextEntryExecute(Sender: TObject);
     procedure actPullLastLineFromPreviousEntryExecute(Sender: TObject);
     procedure actPullFirstLineFromNextEntryExecute(Sender: TObject);
+    procedure actRemoveUnicodeControlCharsExecute(Sender: TObject);
     procedure actGenerateVideoExecute(Sender: TObject);
     procedure actUnicodeCtrlLRMExecute(Sender: TObject);
     procedure actUnicodeCtrlRLMExecute(Sender: TObject);
@@ -1060,7 +1063,6 @@ begin
   LoadShortCutsFromFile(ShortCutFileName, ActionList);
   // Init language
   SetGUILanguage;
-  UpdateCommonActionString;
   RefreshAppTitle;
   // VST
   VSTDrawInitialize(VSTOptions.DrawMode);
@@ -1089,6 +1091,8 @@ begin
   mmoTranslation.Tag := TAG_CONTROL_TRANSLATION;
   // MPV
   PrepareMPV;
+  // QuickAction
+  edtQuickAction.LocalizeFunc := @LocalizeCategory;
   // MRU
   MRU := TMRU.Create(popMRU);
   MRU.OnMRUItemClick := @MRUItemClick;

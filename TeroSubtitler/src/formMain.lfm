@@ -1353,6 +1353,9 @@ object frmMain: TfrmMain
       object mnuEditInsertSymbol: TMenuItem
         Caption = 'Insert Unicode symbol'
       end
+      object MenuItem203: TMenuItem
+        Action = actRemoveUnicodeControlChars
+      end
       object Separator5: TMenuItem
         Caption = '-'
       end
@@ -2721,31 +2724,31 @@ object frmMain: TfrmMain
     end
     object actConvertCase: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Convert case...'
       OnExecute = actConvertCaseExecute
     end
     object actUnbreakEntry: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Unbreak entry'
       OnExecute = actUnbreakEntryExecute
     end
     object actSetMaximumLineLength: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Set maximum line length'
       OnExecute = actSetMaximumLineLengthExecute
     end
     object actReverseText: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Reverse text'
       OnExecute = actReverseTextExecute
     end
     object actFixRTLPunctuation: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Fix punctuation'
       OnExecute = actFixRTLPunctuationExecute
     end
@@ -2788,7 +2791,7 @@ object frmMain: TfrmMain
     object actGoTo: TAction
       Tag = 1
       Category = 'Find'
-      Caption = 'Go to line entry...'
+      Caption = 'Go to entry...'
       OnExecute = actGoToExecute
     end
     object actSelectCurrentToBeginning: TAction
@@ -3008,31 +3011,31 @@ object frmMain: TfrmMain
     end
     object actAddQuotationMarks: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Add quotation marks'
       OnExecute = actAddQuotationMarksExecute
     end
     object actSwapTexts: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Swap texts'
       OnExecute = actSwapTextsExecute
     end
     object actReadTextsFromFile: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Read texts from file...'
       OnExecute = actReadTextsFromFileExecute
     end
     object actSplitEntryAtPosition: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Split line at cursor position'
       OnExecute = actSplitEntryAtPositionExecute
     end
     object actInsertCurrentTime: TAction
       Tag = 4
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Insert current time'
       OnExecute = actInsertCurrentTimeExecute
     end
@@ -3630,7 +3633,7 @@ object frmMain: TfrmMain
     end
     object actRemoveLineFromEntry: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Remove line from entry...'
       OnExecute = actRemoveLineFromEntryExecute
     end
@@ -3649,7 +3652,7 @@ object frmMain: TfrmMain
     object actUnicodeCtrlLRM: TAction
       Tag = 1
       Category = 'Editor'
-      Caption = 'LRM (Left-to-Right Mark )'
+      Caption = 'LRM (Left-to-Right Mark)'
       OnExecute = actUnicodeCtrlLRMExecute
     end
     object actUnicodeCtrlRLM: TAction
@@ -3697,7 +3700,7 @@ object frmMain: TfrmMain
     object actUnicodeCtrlPDF: TAction
       Tag = 1
       Category = 'Editor'
-      Caption = 'PDF (Pop Directorional Formatting)'
+      Caption = 'PDF (Pop Directional Formatting)'
       OnExecute = actUnicodeCtrlPDFExecute
     end
     object actShowToolbarQuickAction: TAction
@@ -3708,27 +3711,33 @@ object frmMain: TfrmMain
     end
     object actPushFirstLineToPreviousEntry: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Push the first line to the previous entry'
       OnExecute = actPushFirstLineToPreviousEntryExecute
     end
     object actPushLastLineToNextEntry: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Push the last line to the next entry'
       OnExecute = actPushLastLineToNextEntryExecute
     end
     object actPullLastLineFromPreviousEntry: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Pull the last line from the previous entry'
       OnExecute = actPullLastLineFromPreviousEntryExecute
     end
     object actPullFirstLineFromNextEntry: TAction
       Tag = 1
-      Category = 'Texts'
+      Category = 'Text'
       Caption = 'Pull the first line from the next entry'
       OnExecute = actPullFirstLineFromNextEntryExecute
+    end
+    object actRemoveUnicodeControlChars: TAction
+      Tag = 1
+      Category = 'Text'
+      Caption = 'Remove Unicode control characters'
+      OnExecute = actRemoveUnicodeControlCharsExecute
     end
   end
   object popDropInsert: TPopupMenu

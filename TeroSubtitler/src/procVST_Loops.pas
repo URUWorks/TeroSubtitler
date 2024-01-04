@@ -63,6 +63,7 @@ procedure ApplyEndCueSubtractOneFrame(const Item: PUWSubtitleItem; const Index: 
 procedure ApplyRoundTimes(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplySwapTexts(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyUnicodeChar(const Item: PUWSubtitleItem; const Index: Integer);
+procedure ApplyRemoveUnicodeControlChars(const Item: PUWSubtitleItem; const Index: Integer);
 
 // -----------------------------------------------------------------------------
 
@@ -70,7 +71,7 @@ implementation
 
 uses
   StrUtils, formMain, procUndo, procSubtitle, procWorkspace, procFixSubtitles,
-  UWSubtitleAPI.Tags, UWSubtitles.Utils, UWSystem.TimeUtils;
+  UWSubtitleAPI.Tags, UWSubtitles.Utils, UWSystem.TimeUtils, UWSystem.StrUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -496,6 +497,14 @@ procedure ApplyUnicodeChar(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^, AppOptions do
     ApplyText(Item, Index, LastUnicodeChar + ' ' + Text, LastUnicodeChar + ' ' + Translation, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ApplyRemoveUnicodeControlChars(const Item: PUWSubtitleItem; const Index: Integer);
+begin
+  with Item^, AppOptions do
+    ApplyText(Item, Index, RemoveUnicodeControlChars(Text), RemoveUnicodeControlChars(Translation), False);
 end;
 
 // -----------------------------------------------------------------------------
