@@ -765,9 +765,9 @@ msgstr ""
 msgid "Text files"
 msgstr ""
 
-#: proclocalize.lngsctexts
-msgctxt "proclocalize.lngsctexts"
-msgid "Texts"
+#: proclocalize.lngsctext
+msgctxt "proclocalize.lngsctext"
+msgid "Text"
 msgstr ""
 
 #: proclocalize.lngsctimings
@@ -2462,7 +2462,7 @@ msgid "Video with hardcoded subtitles..."
 msgstr ""
 
 #: tfrmmain.actgoto.caption
-msgid "Go to line entry..."
+msgid "Go to entry..."
 msgstr ""
 
 #: tfrmmain.actgototime.caption
@@ -2781,6 +2781,10 @@ msgstr ""
 
 #: tfrmmain.actremovelinefromentry.caption
 msgid "Remove line from entry..."
+msgstr ""
+
+#: tfrmmain.actremoveunicodecontrolchars.caption
+msgid "Remove Unicode control characters"
 msgstr ""
 
 #: tfrmmain.actreplace.caption
@@ -3115,7 +3119,7 @@ msgid "LRE (Start of Left-to-Right Embedding)"
 msgstr ""
 
 #: tfrmmain.actunicodectrllrm.caption
-msgid "LRM (Left-to-Right Mark )"
+msgid "LRM (Left-to-Right Mark)"
 msgstr ""
 
 #: tfrmmain.actunicodectrllro.caption
@@ -3123,7 +3127,7 @@ msgid "LRO (Start of Left-to-Right Override)"
 msgstr ""
 
 #: tfrmmain.actunicodectrlpdf.caption
-msgid "PDF (Pop Directorional Formatting)"
+msgid "PDF (Pop Directional Formatting)"
 msgstr ""
 
 #: tfrmmain.actunicodectrlrle.caption

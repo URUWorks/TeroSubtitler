@@ -786,10 +786,10 @@ msgstr "Selección"
 msgid "Text files"
 msgstr "Archivos de texto"
 
-#: proclocalize.lngsctexts
-msgctxt "proclocalize.lngsctexts"
-msgid "Texts"
-msgstr "Textos"
+#: proclocalize.lngsctext
+msgctxt "proclocalize.lngsctext"
+msgid "Text"
+msgstr "Texto"
 
 #: proclocalize.lngsctimings
 msgctxt "proclocalize.lngsctimings"
@@ -2485,8 +2485,8 @@ msgid "Video with hardcoded subtitles..."
 msgstr "Vídeo con subtítulos incrustados..."
 
 #: tfrmmain.actgoto.caption
-msgid "Go to line entry..."
-msgstr "Ir al número de entrada..."
+msgid "Go to entry..."
+msgstr "Ir a la entrada..."
 
 #: tfrmmain.actgototime.caption
 msgid "Go to time..."
@@ -2805,6 +2805,10 @@ msgstr "Rehacer última acción"
 #: tfrmmain.actremovelinefromentry.caption
 msgid "Remove line from entry..."
 msgstr "Eliminar línea de la entrada..."
+
+#: tfrmmain.actremoveunicodecontrolchars.caption
+msgid "Remove Unicode control characters"
+msgstr "Eliminar caracteres de control Unicode"
 
 #: tfrmmain.actreplace.caption
 msgid "Replace..."
@@ -3138,7 +3142,7 @@ msgid "LRE (Start of Left-to-Right Embedding)"
 msgstr "LRE (Comenzar incrustación de izquierda a derecha)"
 
 #: tfrmmain.actunicodectrllrm.caption
-msgid "LRM (Left-to-Right Mark )"
+msgid "LRM (Left-to-Right Mark)"
 msgstr "LRM (Marca de izquierda a derecha)"
 
 #: tfrmmain.actunicodectrllro.caption
@@ -3146,7 +3150,7 @@ msgid "LRO (Start of Left-to-Right Override)"
 msgstr "LRO (Comenzar reemplazo de izquierda a derecha)"
 
 #: tfrmmain.actunicodectrlpdf.caption
-msgid "PDF (Pop Directorional Formatting)"
+msgid "PDF (Pop Directional Formatting)"
 msgstr "PDF (Formato direccional POP)"
 
 #: tfrmmain.actunicodectrlrle.caption

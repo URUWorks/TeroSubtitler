@@ -783,10 +783,11 @@ msgstr "Seleção"
 msgid "Text files"
 msgstr "Arquivos de texto"
 
-#: proclocalize.lngsctexts
-msgctxt "proclocalize.lngsctexts"
-msgid "Texts"
-msgstr "Textos"
+#: proclocalize.lngsctext
+#, fuzzy
+msgctxt "proclocalize.lngsctext"
+msgid "Text"
+msgstr "Texto"
 
 #: proclocalize.lngsctimings
 msgctxt "proclocalize.lngsctimings"
@@ -2494,7 +2495,7 @@ msgstr "Vídeo com legendas queimadas por cima..."
 #: tfrmmain.actgoto.caption
 #, fuzzy
 #| msgid "Go to line number..."
-msgid "Go to line entry..."
+msgid "Go to entry..."
 msgstr "Ir para a linha número..."
 
 #: tfrmmain.actgototime.caption
@@ -2816,6 +2817,10 @@ msgstr "Refazer a última ação"
 #: tfrmmain.actremovelinefromentry.caption
 msgid "Remove line from entry..."
 msgstr "Remover linha da entrada..."
+
+#: tfrmmain.actremoveunicodecontrolchars.caption
+msgid "Remove Unicode control characters"
+msgstr ""
 
 #: tfrmmain.actreplace.caption
 msgid "Replace..."
@@ -3150,7 +3155,7 @@ msgid "LRE (Start of Left-to-Right Embedding)"
 msgstr ""
 
 #: tfrmmain.actunicodectrllrm.caption
-msgid "LRM (Left-to-Right Mark )"
+msgid "LRM (Left-to-Right Mark)"
 msgstr ""
 
 #: tfrmmain.actunicodectrllro.caption
@@ -3158,7 +3163,7 @@ msgid "LRO (Start of Left-to-Right Override)"
 msgstr ""
 
 #: tfrmmain.actunicodectrlpdf.caption
-msgid "PDF (Pop Directorional Formatting)"
+msgid "PDF (Pop Directional Formatting)"
 msgstr ""
 
 #: tfrmmain.actunicodectrlrle.caption
