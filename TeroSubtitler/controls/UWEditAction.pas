@@ -34,6 +34,7 @@ type
   { TUWEditActionFormList }
 
   TOnClickActionEvent = procedure(Sender: TObject; const AAction: TAction) of object;
+  TLocalizeFunc = function(const AText: String): String;
 
   TUWEditActionFormList = class(TCustomForm)
   private
@@ -60,6 +61,7 @@ type
     FUpdating : Boolean;
     FOnClickAction: TOnClickActionEvent;
     FOnPopupList: TNotifyEvent;
+    FDoLocalize: TLocalizeFunc;
     procedure FillListWithFilter(const AText: String);
     procedure CloseFormPopupList;
   protected
@@ -71,6 +73,7 @@ type
     destructor Destroy; override;
     procedure BeginUpdate;
     procedure EndUpdate;
+    property LocalizeFunc : TLocalizeFunc read FDoLocalize write FDoLocalize;
   published
     property ActionList : TActionList read FActionList write FActionList;
     property Images : TCustomImageList read FImages write FImages;
@@ -268,6 +271,7 @@ begin
   FUpdating := False;
   FOnClickAction := NIL;
   FOnPopupList := NIL;
+  FDoLocalize := NIL;
 end;
 
 // -----------------------------------------------------------------------------
@@ -278,6 +282,7 @@ begin
   FActionList := NIL;
   FOnClickAction := NIL;
   FOnPopupList := NIL;
+  FDoLocalize := NIL;
 
   inherited Destroy;
 end;
@@ -381,7 +386,12 @@ begin
               s := Caption;
 
               if not Category.IsEmpty then
-                s := Format('[%s] %s', [Category, s]);
+              begin
+                if Assigned(FDoLocalize) then
+                  s := Format('[%s] %s', [FDoLocalize(Category), s])
+                else
+                  s := Format('[%s] %s', [Category, s]);
+              end;
 
               if ShortCut <> 0 then
                 s := Format('%s (%s)', [s, ShortCutToText(ShortCut)]);
