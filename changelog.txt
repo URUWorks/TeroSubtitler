@@ -4,6 +4,7 @@
 - fixed: Wrong toolbar was shown/hidden from the view menu
 - fixed: [macOS] Components with radio buttons display empty text in some functions
 - updated: Brazilian Portuguese language (thx Gzushgshsh)
+- updated: Whisper.CPP/Fast-Whisper
 - added: Text functions to pull/push lines
 - added: Remove Unicode control characters
 - added: Quick Action Finder
