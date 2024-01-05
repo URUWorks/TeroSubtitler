@@ -230,7 +230,7 @@ begin
 
     NewName := FileName;
     WorkName := LowerCase(ExtractFileExt(NewName));
-    if (WorkName <> STR_EXCEL_EXTENSION) or (WorkName <> STR_OOXML_EXCEL_EXTENSION) or (WorkName <> STR_OPENDOCUMENT_CALC_EXTENSION) then
+    if (WorkName <> STR_EXCEL_EXTENSION) and (WorkName <> STR_OOXML_EXCEL_EXTENSION) and (WorkName <> STR_OPENDOCUMENT_CALC_EXTENSION) then
       NewName := ChangeFileExt(NewName, STR_EXCEL_EXTENSION);
 
     Workbook.WriteToFile(NewName, True);

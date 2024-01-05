@@ -401,7 +401,7 @@ begin
   if Format = sfSpreadsheet then
   begin
     ext := LowerCase(ExtractFileExt(FileName));
-    if (ext <> STR_EXCEL_EXTENSION) or (ext <> STR_OOXML_EXCEL_EXTENSION) or (ext <> STR_OPENDOCUMENT_CALC_EXTENSION) then
+    if (ext <> STR_EXCEL_EXTENSION) and (ext <> STR_OOXML_EXCEL_EXTENSION) and (ext <> STR_OPENDOCUMENT_CALC_EXTENSION) then
       S := ChangeFileExt(FileName, STR_EXCEL_EXTENSION)
   end;
 
