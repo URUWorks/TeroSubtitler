@@ -49,7 +49,7 @@ type
     URL : String;
   end;
 
-  TModels = array[0..9] of TModelInfo;
+  TModels = array of TModelInfo;
 
 var
   frmAudioToTextModel: TfrmAudioToTextModel;
@@ -64,30 +64,44 @@ uses
 const
   Models: TModels =
   (
-    (Name: 'base'; Size: '148 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin'),
-    (Name: 'base.en'; Size: '148 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin'),
-    (Name: 'tiny'; Size: '78 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin'),
-    (Name: 'tiny.en'; Size: '78 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.en.bin'),
-    (Name: 'small'; Size: '488 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin'),
-    (Name: 'small.en'; Size: '488 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.en.bin'),
-    (Name: 'medium'; Size: '1.53 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin'),
-    (Name: 'medium.en'; Size: '1.53 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.en.bin'),
-    (Name: 'large'; Size: '3.1 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large.bin'),
-    (Name: 'large-v1'; Size: '3.1 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v1.bin')
+    (Name: 'base'; Size: '142 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin'),
+    (Name: 'base.en'; Size: '142 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin'),
+    (Name: 'base-q5_1'; Size: '60 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base-q5_1.bin'),
+    (Name: 'base.en-q5_1'; Size: '60 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en-q5_1.bin'),
+    (Name: 'tiny'; Size: '75 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin'),
+    (Name: 'tiny.en'; Size: '75 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.en.bin'),
+    (Name: 'tiny-q5_1'; Size: '33 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny-q5_1.bin'),
+    (Name: 'tiny.en-q5_1'; Size: '33 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.en-q5_1.bin'),
+    (Name: 'tiny.en-q8_0'; Size: '44 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.en-q8_0.bin'),
+    (Name: 'small'; Size: '466 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin'),
+    (Name: 'small.en'; Size: '466 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.en.bin'),
+    (Name: 'small-q5_1'; Size: '190 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small-q5_1.bin'),
+    (Name: 'small.en-q5_1'; Size: '190 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.en-q5_1.bin'),
+    (Name: 'medium'; Size: '1.5 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin'),
+    (Name: 'medium.en'; Size: '1.5 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.en.bin'),
+    (Name: 'medium-q5_0'; Size: '539 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium-q5_0.bin'),
+    (Name: 'medium.en-q5_0'; Size: '539 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.en-q5_0.bin'),
+    (Name: 'large'; Size: '2.9 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large.bin'),
+    (Name: 'large-v1'; Size: '2.9 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v1.bin'),
+    (Name: 'large-v2'; Size: '2.9 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v2.bin'),
+    (Name: 'large-v2-q5_0'; Size: '1.08 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v2-q5_0.bin'),
+    (Name: 'large-v3'; Size: '3.1 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3.bin'),
+    (Name: 'large-v3-q5_0'; Size: '1.08 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-q5_0.bin')
   );
 
   FasterModels: TModels =
   (
-    (Name: 'base'; Size: '148 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-base/resolve/main/'),
-    (Name: 'base.en'; Size: '148 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-base.en/resolve/main/'),
-    (Name: 'tiny'; Size: '78 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-tiny/resolve/main/'),
-    (Name: 'tiny.en'; Size: '78 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-tiny.en/resolve/main/'),
-    (Name: 'small'; Size: '488 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-small/resolve/main/'),
-    (Name: 'small.en'; Size: '488 MB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-small.en/resolve/main/'),
-    (Name: 'medium'; Size: '1.53 GB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-medium/resolve/main/'),
-    (Name: 'medium.en'; Size: '1.53 GB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-medium.en/resolve/main/'),
-    (Name: 'large-v1'; Size: '3.1 GB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-large-v1/resolve/main/'),
-    (Name: 'large-v2'; Size: '3.1 GB'; URL: 'https://huggingface.co/guillaumekln/faster-whisper-large-v2/resolve/main/')
+    (Name: 'base'; Size: '148 MB'; URL: 'https://huggingface.co/Systran/faster-whisper-base/resolve/main/'),
+    (Name: 'base.en'; Size: '148 MB'; URL: 'https://huggingface.co/Systran/faster-whisper-base.en/resolve/main/'),
+    (Name: 'tiny'; Size: '78 MB'; URL: 'https://huggingface.co/Systran/faster-whisper-tiny/resolve/main/'),
+    (Name: 'tiny.en'; Size: '78 MB'; URL: 'https://huggingface.co/Systran/faster-whisper-tiny.en/resolve/main/'),
+    (Name: 'small'; Size: '488 MB'; URL: 'https://huggingface.co/Systran/faster-whisper-small/resolve/main/'),
+    (Name: 'small.en'; Size: '488 MB'; URL: 'https://huggingface.co/Systran/faster-whisper-small.en/resolve/main/'),
+    (Name: 'medium'; Size: '1.53 GB'; URL: 'https://huggingface.co/Systran/faster-whisper-medium/resolve/main/'),
+    (Name: 'medium.en'; Size: '1.53 GB'; URL: 'https://huggingface.co/Systran/faster-whisper-medium.en/resolve/main/'),
+    (Name: 'large-v1'; Size: '3.1 GB'; URL: 'https://huggingface.co/Systran/faster-whisper-large-v1/resolve/main/'),
+    (Name: 'large-v2'; Size: '3.1 GB'; URL: 'https://huggingface.co/Systran/faster-whisper-large-v2/resolve/main/'),
+    (Name: 'large-v3'; Size: '3.1 GB'; URL: 'https://huggingface.co/Systran/faster-whisper-large-v3/resolve/main/')
   );
 
   FasterModelFiles: array[0..3] of String = ('model.bin', 'config.json', 'vocabulary.txt', 'tokenizer.json');
