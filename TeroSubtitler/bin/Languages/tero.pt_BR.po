@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: Tero Subtiler\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
@@ -9,7 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: proclocalize.lngabversion
 #, object-pascal-format
@@ -255,7 +257,8 @@ msgid "Auto-detect"
 msgstr "Detecção automática"
 
 #: proclocalize.lngdetectdialogsegmentswarning
-msgid "Attempting to detect dialog segments deletes all subtitles from the list."
+msgid ""
+"Attempting to detect dialog segments deletes all subtitles from the list."
 msgstr "Tentar detectar segmentos de diálogo apaga todos as legendas da lista."
 
 #: proclocalize.lngentry
@@ -283,7 +286,8 @@ msgstr "Falhou."
 
 #: proclocalize.lngfailedtodownload
 msgid "No content downloaded, missing file or no Internet connection."
-msgstr "Conteúdo não baixado, arquivo não encontrado ou sem conexão com a internet."
+msgstr ""
+"Conteúdo não baixado, arquivo não encontrado ou sem conexão com a internet."
 
 #: proclocalize.lngfeaturenotavailablefromurl
 msgid "Function not available for online video."
@@ -536,8 +540,12 @@ msgid "#"
 msgstr "#"
 
 #: proclocalize.lnglibmpverror
-msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
-msgstr "Não foi possível encontrar a biblioteca necessária para executar o reprodutor de mídia mpv integrado (libmpv). Por favor faça o download dela."
+msgid ""
+"Unable to find the required libraries to run the embedded mpv player. Please "
+"download them."
+msgstr ""
+"Não foi possível encontrar a biblioteca necessária para executar o "
+"reprodutor de mídia mpv integrado (libmpv). Por favor faça o download dela."
 
 #: proclocalize.lnglibmpvglerror
 msgid "Failed to initialize mpv GL context."
@@ -545,7 +553,9 @@ msgstr "Falha ao iniciar mpv GL context."
 
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
-msgstr "Não foi possível iniciar a libmpv. Verifique se está com a biblioteca certa instalada."
+msgstr ""
+"Não foi possível iniciar a libmpv. Verifique se está com a biblioteca certa "
+"instalada."
 
 #: proclocalize.lngline
 msgid "Line:"
@@ -866,8 +876,12 @@ msgid "Shortcut currently used in “%s”."
 msgstr "Atalho atualmente usando em \"%s\"."
 
 #: proclocalize.lngsourcemodewarning
-msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
-msgstr "Ao mudar para o modo fonte o formato será alterado para \"Tero Subtitler\", caso contrário, traduções não salvas serão perdidas."
+msgid ""
+"Switching to source mode will change the format to “Tero Subtitler”, "
+"otherwise unsaved translations will be lost."
+msgstr ""
+"Ao mudar para o modo fonte o formato será alterado para \"Tero Subtitler\", "
+"caso contrário, traduções não salvas serão perdidas."
 
 #: proclocalize.lngspcurrentline
 #, object-pascal-format
@@ -952,8 +966,12 @@ msgid "Subtitle ended in %s"
 msgstr "Legenda terminada em %s"
 
 #: proclocalize.lngsubtitlehaserrorstofix
-msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
-msgstr "O conjunto de legendas atual contém erros que devem ser resolvidos, mas podem ser salvos."
+msgid ""
+"The current subtitle set contains errors that are recommended to be "
+"resolved, but it can be saved."
+msgstr ""
+"O conjunto de legendas atual contém erros que devem ser resolvidos, mas "
+"podem ser salvos."
 
 #: proclocalize.lngsubtitlestartedat
 #, object-pascal-format
@@ -1067,7 +1085,8 @@ msgstr "Idioma"
 
 #: proclocalize.lngwritedenieded
 msgid "Write denied. Please check folder permissions."
-msgstr "Permissão de escrita negada. Por favor verifique as permissões da pasta."
+msgstr ""
+"Permissão de escrita negada. Por favor verifique as permissões da pasta."
 
 #: proclocalize.lngwritestatus
 #, object-pascal-format
@@ -3336,6 +3355,7 @@ msgid "FPS of the movie the opened subtitle file was made for"
 msgstr "FPS do filme para o qual o arquivo de legenda aberto foi criado"
 
 #: tfrmmain.edtquickaction.hint
+msgctxt "tfrmmain.edtquickaction.hint"
 msgid "Quick Action Finder"
 msgstr ""
 
@@ -4486,8 +4506,12 @@ msgid "Getting started wizard"
 msgstr "Assistente de configuração"
 
 #: tfrmwizard.lblexperience.caption
-msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
-msgstr "Em apenas alguns passos, tudo estará configurado e pronto para uma melhor experiência de legendagem."
+msgid ""
+"In just a few steps, you'll be setup and ready for the best subtitling "
+"experience."
+msgstr ""
+"Em apenas alguns passos, tudo estará configurado e pronto para uma melhor "
+"experiência de legendagem."
 
 #: tfrmwizard.lblfasterwhisper.caption
 msgid "Faster-Whisper:"
@@ -4515,8 +4539,14 @@ msgid "Essential, used for playing video."
 msgstr "Essencial, usado para reproduzir vídeo."
 
 #: tfrmwizard.lblrequiredfiles.caption
-msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
-msgstr "Para o correto funcionamento do Tero Subtitler, as seguintes bibliotecas são necessárias; se elas não forem encontradas no seu sistema, Tero Subtitler pode baixá-las por você."
+msgid ""
+"For Tero Subtitler to function properly, the following libraries are "
+"necessary; if they are not found on your system, Tero Subtitler can download "
+"them for you."
+msgstr ""
+"Para o correto funcionamento do Tero Subtitler, as seguintes bibliotecas são "
+"necessárias; se elas não forem encontradas no seu sistema, Tero Subtitler "
+"pode baixá-las por você."
 
 #: tfrmwizard.lblwelcome.caption
 msgctxt "tfrmwizard.lblwelcome.caption"
@@ -4539,4 +4569,3 @@ msgstr "yt-dlp:"
 #: tfrmwizard.lblytdlp_hint.caption
 msgid "Optional, used for dowloading from YouTube."
 msgstr "Opcional, usado para baixar do YouTube."
-
