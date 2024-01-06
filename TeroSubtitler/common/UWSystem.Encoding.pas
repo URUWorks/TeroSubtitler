@@ -183,7 +183,7 @@ function GetEncodingString(const CPID: Integer): String;
 function GetEncodingInteger(const CPName: String): Integer;
 function GetEncodingIndex(const CPID: Integer): Integer;
 
-function GetEncodingFromFile(const FileName: String): TEncoding;
+function GetEncodingFromFile(const FileName: String; const TryAnsiDetect: Boolean = True): TEncoding;
 
 // -----------------------------------------------------------------------------
 
@@ -380,7 +380,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetEncodingFromFile(const FileName: String): TEncoding;
+function GetEncodingFromFile(const FileName: String; const TryAnsiDetect: Boolean = True): TEncoding;
 var
   Stream      : TStream;
   Size        : Integer;
@@ -420,11 +420,12 @@ begin
         Result := TEncoding.UTF8
       else if CouldBeUTF8 then
         Result := TEncoding.UTF8
-      else
+      else if TryAnsiDetect then
         Result := DetectAnsiEncoding(BOM);
     end;
   finally
     Stream.Free;
+    SetLength(BOM, 0);
   end;
 end;
 
