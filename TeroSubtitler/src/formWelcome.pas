@@ -47,6 +47,7 @@ type
     lblOpenFile: TLabel;
     lblBatchConvert: TLabel;
     lblRecentFiles: TLabel;
+    lblWelcome: TLabel;
     shaBackground: TShape;
     fbnNewSubtitle: TUWFlatButton;
     fbnOpenSubtitle: TUWFlatButton;

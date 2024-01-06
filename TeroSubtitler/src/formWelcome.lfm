@@ -31,9 +31,11 @@ object frmWelcome: TfrmWelcome
     Pen.Width = 2
   end
   object imgLogo: TImage
+    AnchorSideTop.Control = lblWelcome
+    AnchorSideTop.Side = asrBottom
     Left = 19
     Height = 33
-    Top = 22
+    Top = 29
     Width = 226
     AutoSize = True
     Enabled = False
@@ -83,7 +85,7 @@ object frmWelcome: TfrmWelcome
     AnchorSideBottom.Side = asrBottom
     Left = 283
     Height = 15
-    Top = 40
+    Top = 47
     Width = 66
     Anchors = [akLeft, akBottom]
     BorderSpacing.Left = 19
@@ -292,6 +294,20 @@ object frmWelcome: TfrmWelcome
     Width = 245
     BorderSpacing.Top = 5
     Shape = bsTopLine
+  end
+  object lblWelcome: TLabel
+    AnchorSideLeft.Control = imgLogo
+    AnchorSideTop.Control = Owner
+    AnchorSideBottom.Control = imgLogo
+    Left = 19
+    Height = 15
+    Top = 14
+    Width = 68
+    BorderSpacing.Top = 14
+    Caption = 'Welcome to'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
   end
   object ImageList_Dark: TImageList
     Height = 32
