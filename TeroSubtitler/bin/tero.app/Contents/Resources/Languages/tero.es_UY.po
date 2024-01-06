@@ -720,6 +720,11 @@ msgstr "Guardar archivo"
 msgid "Error trying to save the file."
 msgstr "Error al intentar guardar el archivo."
 
+#: proclocalize.lngscaudiofilters
+msgctxt "proclocalize.lngscaudiofilters"
+msgid "Audio filters"
+msgstr "Filtros de audio"
+
 #: proclocalize.lngscedit
 msgctxt "proclocalize.lngscedit"
 msgid "Edit"
@@ -806,6 +811,11 @@ msgctxt "proclocalize.lngscvideo"
 msgid "Video"
 msgstr "Vídeo"
 
+#: proclocalize.lngscvideofilters
+msgctxt "proclocalize.lngscvideofilters"
+msgid "Video filters"
+msgstr "Filtros de vídeo"
+
 #: proclocalize.lngscview
 msgctxt "proclocalize.lngscview"
 msgid "View"
@@ -823,6 +833,10 @@ msgstr "XML"
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
 msgstr "¿Quieres ver la lista de cambios?"
+
+#: proclocalize.lngselectencodingtouse
+msgid "Select the Encoding to use:"
+msgstr "Seleccione la codificación a utilizar:"
 
 #: proclocalize.lngselectfpstouse
 msgid "Select FPS to use:"
@@ -2266,17 +2280,30 @@ msgctxt "tfrmmain.actaligntoright.caption"
 msgid "Align to right"
 msgstr "Alinear a la derecha"
 
+#: tfrmmain.actaudiofilterdialoguenhance.caption
+msgid "Dialogue enhance"
+msgstr "Mejorar diálogo"
+
+#: tfrmmain.actaudiofilterspeechnormalizer.caption
+msgid "Speech normalizer"
+msgstr "Normalizar el habla"
+
+#: tfrmmain.actaudiofiltersurround.caption
+msgid "Surround"
+msgstr "Envolvente"
+
 #: tfrmmain.actaudiototext.caption
 msgctxt "tfrmmain.actaudiototext.caption"
 msgid "Audio to text..."
 msgstr "Audio a texto..."
 
-#: tfrmmain.actautobreaksubtitle.caption
-msgctxt "tfrmmain.actautobreaksubtitle.caption"
+#: tfrmmain.actautobreakentry.caption
+msgctxt "tfrmmain.actautobreakentry.caption"
 msgid "Autobreak"
-msgstr "Dividir subtítulos automáticamente"
+msgstr "Dividir entradas automáticamente"
 
-#: tfrmmain.actautobreaksubtitle.hint
+#: tfrmmain.actautobreakentry.hint
+msgctxt "tfrmmain.actautobreakentry.hint"
 msgid "Split a long line into two or more lines"
 msgstr "Divide una línea larga en dos o más líneas"
 
@@ -2616,10 +2643,9 @@ msgstr "Velocidad de reproducción"
 msgid "Delete subtitle"
 msgstr "Borrar subtítulo"
 
-#: tfrmmain.actmediaendsubtitle.caption
-msgctxt "tfrmmain.actmediaendsubtitle.caption"
-msgid "End subtitle"
-msgstr "Fin del subtítulo"
+#: tfrmmain.actmediaendsubtitleentry.caption
+msgid "End entry"
+msgstr "Fin de entrada"
 
 #: tfrmmain.actmediaforward.caption
 msgctxt "tfrmmain.actmediaforward.caption"
@@ -2634,9 +2660,9 @@ msgstr "Adelantar 1 minuto"
 msgid "Forward 1 second"
 msgstr "Adelantar 1 segundo"
 
-#: tfrmmain.actmediamovesubtitle.caption
-msgid "Move subtitle"
-msgstr "Mover subtítulo"
+#: tfrmmain.actmediamovesubtitleentry.caption
+msgid "Move entry"
+msgstr "Mover entrada"
 
 #: tfrmmain.actmedianextframe.caption
 msgctxt "tfrmmain.actmedianextframe.caption"
@@ -2688,10 +2714,9 @@ msgctxt "tfrmmain.actmediasetinitialtime.caption"
 msgid "Set initial time"
 msgstr "Establecer tiempo inicial"
 
-#: tfrmmain.actmediastartsubtitle.caption
-msgctxt "tfrmmain.actmediastartsubtitle.caption"
-msgid "Start subtitle"
-msgstr "Iniciar subtítulo"
+#: tfrmmain.actmediastartsubtitleentry.caption
+msgid "Start entry"
+msgstr "Iniciar entrada"
 
 #: tfrmmain.actmediastop.caption
 msgctxt "tfrmmain.actmediastop.caption"
@@ -2869,8 +2894,8 @@ msgid "Save current translation to a specific file"
 msgstr "Guarda la traducción actual en archivo específico"
 
 #: tfrmmain.actscreenshottofile.caption
-msgid "Screenshot to file"
-msgstr "Capturar cuadro en archivo"
+msgid "Save screenshot"
+msgstr "Guardar captura de vídeo"
 
 #: tfrmmain.actselectall.caption
 msgctxt "tfrmmain.actselectall.caption"
@@ -2910,6 +2935,18 @@ msgstr "Sólo si la pausa es demasiado corta"
 #: tfrmmain.actsetdelay.caption
 msgid "Set delay..."
 msgstr "Establecer retraso..."
+
+#: tfrmmain.actsetguilayout0.caption
+msgid "Layout 0"
+msgstr "Diseño 0"
+
+#: tfrmmain.actsetguilayout1.caption
+msgid "Layout 1"
+msgstr "Diseño 1"
+
+#: tfrmmain.actsetguilayout2.caption
+msgid "Layout 2"
+msgstr "Diseño 2"
 
 #: tfrmmain.actsetmaximumlinelength.caption
 msgid "Set maximum line length"
@@ -3023,10 +3060,6 @@ msgstr "Dividir línea en la posición del cursor"
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
 msgstr "Intercambiar texto"
-
-#: tfrmmain.actswapworkspace.caption
-msgid "Swap video layout"
-msgstr "Intercambiar diseño de vídeo"
 
 #: tfrmmain.acttbx.caption
 msgctxt "tfrmmain.acttbx.caption"
@@ -3200,6 +3233,38 @@ msgctxt "tfrmmain.actvaligntotop.caption"
 msgid "Vertical align to top"
 msgstr "Alineación vertical arriba"
 
+#: tfrmmain.actvideofilterblur.caption
+msgid "Blur"
+msgstr "Difuminar"
+
+#: tfrmmain.actvideofilteredgeenhance.caption
+msgid "Edge enhance"
+msgstr "Mejora del borde"
+
+#: tfrmmain.actvideofilteremboss.caption
+msgid "Emboss"
+msgstr "Realzar"
+
+#: tfrmmain.actvideofilterhflip.caption
+msgid "Horizontal flip"
+msgstr "Volteo horizontal"
+
+#: tfrmmain.actvideofilternegative.caption
+msgid "Negative"
+msgstr "Negativo"
+
+#: tfrmmain.actvideofiltersharpen.caption
+msgid "Sharpen"
+msgstr "Afilar"
+
+#: tfrmmain.actvideofiltervflip.caption
+msgid "Vertical flip"
+msgstr "Volteo vertical"
+
+#: tfrmmain.actvideofiltervintage.caption
+msgid "Vintage"
+msgstr "Antiguo"
+
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
 msgid "Video preview"
@@ -3365,9 +3430,13 @@ msgctxt "tfrmmain.mnuvideo.caption"
 msgid "Video"
 msgstr "Vídeo"
 
-#: tfrmmain.mnuvideoaudio.caption
-msgctxt "tfrmmain.mnuvideoaudio.caption"
-msgid "Audio"
+#: tfrmmain.mnuvideoaudiofilters.caption
+msgctxt "tfrmmain.mnuvideoaudiofilters.caption"
+msgid "Audio filters"
+msgstr "Filtros de audio"
+
+#: tfrmmain.mnuvideoaudiostream.caption
+msgid "Audio stream"
 msgstr "Pista de audio"
 
 #: tfrmmain.mnuvideoplayback.caption
@@ -3378,6 +3447,11 @@ msgstr "Reproducción"
 msgctxt "tfrmmain.mnuvideosubtitles.caption"
 msgid "Subtitles"
 msgstr "Subtítulos"
+
+#: tfrmmain.mnuvideovideofilters.caption
+msgctxt "tfrmmain.mnuvideovideofilters.caption"
+msgid "Video filters"
+msgstr "Filtros de vídeo"
 
 #: tfrmmain.mnuvideovolume.caption
 msgid "Volume"
@@ -3399,6 +3473,10 @@ msgstr "Barra de herramientas"
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
 msgstr "Ventanas"
+
+#: tfrmmain.mnuworkspacelayout.caption
+msgid "Layouts"
+msgstr "Diseños"
 
 #: tfrmmain.tedduration.hint
 msgctxt "tfrmmain.tedduration.hint"
@@ -3581,6 +3659,10 @@ msgstr "Mostrar pausa en la línea de tiempo"
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
 msgid "Prompt when deleting subtitles"
 msgstr "Solicitud de eliminación de subtítulos"
+
+#: tfrmsettings.chkpromptforinputencoding.caption
+msgid "Prompt for Encoding before loading a file"
+msgstr "Solicitar codificación antes de cargar un archivo"
 
 #: tfrmsettings.chkpromptforinputfps.caption
 msgid "Prompt for FPS before loading a file"
@@ -4339,6 +4421,11 @@ msgctxt "tfrmwelcome.lblrecentfiles.caption"
 msgid "Recent files"
 msgstr "Archivos recientes"
 
+#: tfrmwelcome.lblwelcome.caption
+msgctxt "tfrmwelcome.lblwelcome.caption"
+msgid "Welcome to"
+msgstr "Bienvenido a"
+
 #: tfrmwizard.btndownload.caption
 msgctxt "tfrmwizard.btndownload.caption"
 msgid "Download"
@@ -4409,6 +4496,7 @@ msgid "For Tero Subtitler to function properly, the following libraries are nece
 msgstr "Para el correcto funcionamiento de Tero, son necesarias las siguientes bibliotecas; si no se encuentran en su sistema, Tero puede descargarlas por usted."
 
 #: tfrmwizard.lblwelcome.caption
+msgctxt "tfrmwizard.lblwelcome.caption"
 msgid "Welcome to"
 msgstr "Bienvenido a"
 

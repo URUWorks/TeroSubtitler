@@ -717,6 +717,11 @@ msgstr "Съхраняване на файла"
 msgid "Error trying to save the file."
 msgstr "Грешка при записа на файла."
 
+#: proclocalize.lngscaudiofilters
+msgctxt "proclocalize.lngscaudiofilters"
+msgid "Audio filters"
+msgstr ""
+
 #: proclocalize.lngscedit
 msgctxt "proclocalize.lngscedit"
 msgid "Edit"
@@ -804,6 +809,11 @@ msgctxt "proclocalize.lngscvideo"
 msgid "Video"
 msgstr "Видео"
 
+#: proclocalize.lngscvideofilters
+msgctxt "proclocalize.lngscvideofilters"
+msgid "Video filters"
+msgstr ""
+
 #: proclocalize.lngscview
 msgctxt "proclocalize.lngscview"
 msgid "View"
@@ -821,6 +831,10 @@ msgstr "XML"
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
 msgstr "Искате ли да видите описа на промените?"
+
+#: proclocalize.lngselectencodingtouse
+msgid "Select the Encoding to use:"
+msgstr ""
 
 #: proclocalize.lngselectfpstouse
 msgid "Select FPS to use:"
@@ -2275,17 +2289,31 @@ msgctxt "tfrmmain.actaligntoright.caption"
 msgid "Align to right"
 msgstr "Подравняване вдясно"
 
+#: tfrmmain.actaudiofilterdialoguenhance.caption
+msgid "Dialogue enhance"
+msgstr ""
+
+#: tfrmmain.actaudiofilterspeechnormalizer.caption
+msgid "Speech normalizer"
+msgstr ""
+
+#: tfrmmain.actaudiofiltersurround.caption
+msgid "Surround"
+msgstr ""
+
 #: tfrmmain.actaudiototext.caption
 msgctxt "tfrmmain.actaudiototext.caption"
 msgid "Audio to text..."
 msgstr "Звук към текст..."
 
-#: tfrmmain.actautobreaksubtitle.caption
-msgctxt "tfrmmain.actautobreaksubtitle.caption"
+#: tfrmmain.actautobreakentry.caption
+#, fuzzy
+msgctxt "tfrmmain.actautobreakentry.caption"
 msgid "Autobreak"
 msgstr "Самопренасяне"
 
-#: tfrmmain.actautobreaksubtitle.hint
+#: tfrmmain.actautobreakentry.hint
+msgctxt "tfrmmain.actautobreakentry.hint"
 msgid "Split a long line into two or more lines"
 msgstr ""
 
@@ -2629,10 +2657,9 @@ msgstr "Скорост на възпроизвеждане"
 msgid "Delete subtitle"
 msgstr ""
 
-#: tfrmmain.actmediaendsubtitle.caption
-msgctxt "tfrmmain.actmediaendsubtitle.caption"
-msgid "End subtitle"
-msgstr "Край на надписа"
+#: tfrmmain.actmediaendsubtitleentry.caption
+msgid "End entry"
+msgstr ""
 
 #: tfrmmain.actmediaforward.caption
 msgctxt "tfrmmain.actmediaforward.caption"
@@ -2647,9 +2674,9 @@ msgstr "1 минута напред"
 msgid "Forward 1 second"
 msgstr "1 секунда напред"
 
-#: tfrmmain.actmediamovesubtitle.caption
-msgid "Move subtitle"
-msgstr "Преместване на надписа"
+#: tfrmmain.actmediamovesubtitleentry.caption
+msgid "Move entry"
+msgstr ""
 
 #: tfrmmain.actmedianextframe.caption
 msgctxt "tfrmmain.actmedianextframe.caption"
@@ -2701,10 +2728,9 @@ msgctxt "tfrmmain.actmediasetinitialtime.caption"
 msgid "Set initial time"
 msgstr "Задаване на начално време"
 
-#: tfrmmain.actmediastartsubtitle.caption
-msgctxt "tfrmmain.actmediastartsubtitle.caption"
-msgid "Start subtitle"
-msgstr "Начало на надписа"
+#: tfrmmain.actmediastartsubtitleentry.caption
+msgid "Start entry"
+msgstr ""
 
 #: tfrmmain.actmediastop.caption
 msgctxt "tfrmmain.actmediastop.caption"
@@ -2882,7 +2908,9 @@ msgid "Save current translation to a specific file"
 msgstr "Съхраняване на текущия превод в зададен файл"
 
 #: tfrmmain.actscreenshottofile.caption
-msgid "Screenshot to file"
+#, fuzzy
+#| msgid "Screenshot to file"
+msgid "Save screenshot"
 msgstr "Екранна снимка във файл"
 
 #: tfrmmain.actselectall.caption
@@ -2922,6 +2950,18 @@ msgstr ""
 
 #: tfrmmain.actsetdelay.caption
 msgid "Set delay..."
+msgstr ""
+
+#: tfrmmain.actsetguilayout0.caption
+msgid "Layout 0"
+msgstr ""
+
+#: tfrmmain.actsetguilayout1.caption
+msgid "Layout 1"
+msgstr ""
+
+#: tfrmmain.actsetguilayout2.caption
+msgid "Layout 2"
 msgstr ""
 
 #: tfrmmain.actsetmaximumlinelength.caption
@@ -3036,10 +3076,6 @@ msgstr ""
 
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
-msgstr ""
-
-#: tfrmmain.actswapworkspace.caption
-msgid "Swap video layout"
 msgstr ""
 
 #: tfrmmain.acttbx.caption
@@ -3214,6 +3250,38 @@ msgctxt "tfrmmain.actvaligntotop.caption"
 msgid "Vertical align to top"
 msgstr ""
 
+#: tfrmmain.actvideofilterblur.caption
+msgid "Blur"
+msgstr ""
+
+#: tfrmmain.actvideofilteredgeenhance.caption
+msgid "Edge enhance"
+msgstr ""
+
+#: tfrmmain.actvideofilteremboss.caption
+msgid "Emboss"
+msgstr ""
+
+#: tfrmmain.actvideofilterhflip.caption
+msgid "Horizontal flip"
+msgstr ""
+
+#: tfrmmain.actvideofilternegative.caption
+msgid "Negative"
+msgstr ""
+
+#: tfrmmain.actvideofiltersharpen.caption
+msgid "Sharpen"
+msgstr ""
+
+#: tfrmmain.actvideofiltervflip.caption
+msgid "Vertical flip"
+msgstr ""
+
+#: tfrmmain.actvideofiltervintage.caption
+msgid "Vintage"
+msgstr ""
+
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
 msgid "Video preview"
@@ -3383,10 +3451,14 @@ msgctxt "tfrmmain.mnuvideo.caption"
 msgid "Video"
 msgstr "Видео"
 
-#: tfrmmain.mnuvideoaudio.caption
-msgctxt "tfrmmain.mnuvideoaudio.caption"
-msgid "Audio"
-msgstr "Звук"
+#: tfrmmain.mnuvideoaudiofilters.caption
+msgctxt "tfrmmain.mnuvideoaudiofilters.caption"
+msgid "Audio filters"
+msgstr ""
+
+#: tfrmmain.mnuvideoaudiostream.caption
+msgid "Audio stream"
+msgstr ""
 
 #: tfrmmain.mnuvideoplayback.caption
 msgid "Playback"
@@ -3396,6 +3468,11 @@ msgstr "Възпроизвеждане"
 msgctxt "tfrmmain.mnuvideosubtitles.caption"
 msgid "Subtitles"
 msgstr "Надписи"
+
+#: tfrmmain.mnuvideovideofilters.caption
+msgctxt "tfrmmain.mnuvideovideofilters.caption"
+msgid "Video filters"
+msgstr ""
 
 #: tfrmmain.mnuvideovolume.caption
 msgid "Volume"
@@ -3417,6 +3494,10 @@ msgstr "Ленти с пособия"
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
 msgstr "Прозорци"
+
+#: tfrmmain.mnuworkspacelayout.caption
+msgid "Layouts"
+msgstr ""
 
 #: tfrmmain.tedduration.hint
 msgctxt "tfrmmain.tedduration.hint"
@@ -3598,6 +3679,10 @@ msgstr ""
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
 msgid "Prompt when deleting subtitles"
+msgstr ""
+
+#: tfrmsettings.chkpromptforinputencoding.caption
+msgid "Prompt for Encoding before loading a file"
 msgstr ""
 
 #: tfrmsettings.chkpromptforinputfps.caption
@@ -4359,6 +4444,12 @@ msgctxt "tfrmwelcome.lblrecentfiles.caption"
 msgid "Recent files"
 msgstr "Скорошни файлове"
 
+#: tfrmwelcome.lblwelcome.caption
+#, fuzzy
+msgctxt "tfrmwelcome.lblwelcome.caption"
+msgid "Welcome to"
+msgstr "Привет от"
+
 #: tfrmwizard.btndownload.caption
 msgctxt "tfrmwizard.btndownload.caption"
 msgid "Download"
@@ -4427,6 +4518,7 @@ msgid "For Tero Subtitler to function properly, the following libraries are nece
 msgstr ""
 
 #: tfrmwizard.lblwelcome.caption
+msgctxt "tfrmwizard.lblwelcome.caption"
 msgid "Welcome to"
 msgstr "Привет от"
 
