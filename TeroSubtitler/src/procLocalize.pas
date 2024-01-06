@@ -92,6 +92,7 @@ resourcestring
   lngMultipleTracksDetected = 'Multiple tracks detected';
   lngSelectTrackToUse = 'Select the track to use:';
   lngSelectFPSToUse = 'Select FPS to use:';
+  lngSelectEncodingToUse = 'Select the Encoding to use:';
   lngSelectSheetToUse = 'Select sheet to use:';
   lngWriteStatus = 'Writing %d/%d';
   lngShortCutInUse = 'Shortcut currently used in “%s”.';
@@ -280,6 +281,8 @@ resourcestring
   lngscTimings = 'Timings';
   lngscTools = 'Tools';
   lngscVideo = 'Video';
+  lngscVideoFilters = 'Video filters';
+  lngscAudioFilters = 'Audio filters';
   lngscView = 'View';
   lngscWaveform = 'Waveform';
 
@@ -359,6 +362,8 @@ begin
   if aCategory = ResStringDefault(@lngscTimings) then Exit(lngscTimings);
   if aCategory = ResStringDefault(@lngscTools) then Exit(lngscTools);
   if aCategory = ResStringDefault(@lngscVideo) then Exit(lngscVideo);
+  if aCategory = ResStringDefault(@lngscVideoFilters) then Exit(lngscVideoFilters);
+  if aCategory = ResStringDefault(@lngscAudioFilters) then Exit(lngscAudioFilters);
   if aCategory = ResStringDefault(@lngscView) then Exit(lngscView);
   if aCategory = ResStringDefault(@lngscWaveform) then Exit(lngscWaveform);
 end;
