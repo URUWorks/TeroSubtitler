@@ -12,7 +12,7 @@ object frmGenerateVideo: TfrmGenerateVideo
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object btnClose: TButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
@@ -27,8 +27,8 @@ object frmGenerateVideo: TfrmGenerateVideo
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 6
+    OnClick = btnCloseClick
   end
   object btnGenerate: TButton
     AnchorSideTop.Control = btnClose
@@ -41,8 +41,8 @@ object frmGenerateVideo: TfrmGenerateVideo
     BorderSpacing.Right = 5
     Caption = 'Generate'
     Default = True
-    OnClick = btnGenerateClick
     TabOrder = 5
+    OnClick = btnGenerateClick
   end
   object VST: TLazVirtualStringTree
     Left = 8
@@ -114,9 +114,9 @@ object frmGenerateVideo: TfrmGenerateVideo
     Width = 357
     BorderSpacing.Top = 5
     ItemHeight = 15
-    OnSelect = cboFormatSelect
     Style = csDropDownList
     TabOrder = 0
+    OnSelect = cboFormatSelect
   end
   object lyoSubtitles: TUWLayout
     Left = 130
@@ -283,8 +283,8 @@ object frmGenerateVideo: TfrmGenerateVideo
       Width = 48
       BorderSpacing.Left = 5
       Caption = '...'
-      OnClick = btnResClick
       TabOrder = 2
+      OnClick = btnResClick
     end
     object cboVideoCodec: TComboBox
       AnchorSideRight.Side = asrBottom
@@ -293,9 +293,9 @@ object frmGenerateVideo: TfrmGenerateVideo
       Top = 80
       Width = 235
       ItemHeight = 15
-      OnSelect = cboVideoCodecSelect
       Style = csDropDownList
       TabOrder = 3
+      OnSelect = cboVideoCodecSelect
     end
     object lblVideoCodec: TLabel
       AnchorSideBottom.Control = cboVideoCodec
@@ -346,8 +346,8 @@ object frmGenerateVideo: TfrmGenerateVideo
       Width = 16
       AutoSize = False
       Caption = 'Re-encode'
-      OnClick = chkReEncodeAudioClick
       TabOrder = 0
+      OnClick = chkReEncodeAudioClick
     end
     object lblSampleRate: TLabel
       AnchorSideBottom.Control = cboSampleRate
@@ -444,9 +444,9 @@ object frmGenerateVideo: TfrmGenerateVideo
     AutoSize = False
     BorderSpacing.Top = 13
     Caption = 'Subtitles'
-    OnChange = rdoSubtitleChange
     TabOrder = 1
     TabStop = False
+    OnChange = rdoSubtitleChange
   end
   object rdoVideo: TUWRadioButton
     AnchorSideTop.Control = rdoSubtitle
@@ -458,9 +458,9 @@ object frmGenerateVideo: TfrmGenerateVideo
     AutoSize = False
     BorderSpacing.Top = 5
     Caption = 'Video'
-    OnChange = rdoVideoChange
     TabOrder = 2
     TabStop = False
+    OnChange = rdoVideoChange
   end
   object rdoAudio: TUWRadioButton
     AnchorSideTop.Control = rdoVideo
@@ -472,9 +472,9 @@ object frmGenerateVideo: TfrmGenerateVideo
     AutoSize = False
     BorderSpacing.Top = 5
     Caption = 'Audio'
-    OnChange = rdoAudioChange
     TabOrder = 3
     TabStop = False
+    OnChange = rdoAudioChange
   end
   object lyoOthers: TUWLayout
     Left = 130
@@ -491,8 +491,8 @@ object frmGenerateVideo: TfrmGenerateVideo
       Width = 16
       AutoSize = False
       Caption = 'Deinterlace'
-      OnClick = chkCutClick
       TabOrder = 0
+      OnClick = chkCutClick
     end
     object chkCut: TUWCheckBox
       Left = 0
@@ -501,8 +501,8 @@ object frmGenerateVideo: TfrmGenerateVideo
       Width = 16
       AutoSize = False
       Caption = 'Cut'
-      OnClick = chkCutClick
       TabOrder = 1
+      OnClick = chkCutClick
     end
     object lblCutFrom: TLabel
       AnchorSideTop.Control = chkCut
@@ -582,8 +582,8 @@ object frmGenerateVideo: TfrmGenerateVideo
       AutoSize = False
       BorderSpacing.Top = 10
       Caption = 'Crop'
-      OnClick = chkCropClick
       TabOrder = 6
+      OnClick = chkCropClick
     end
     object spnCropLeft: TSpinEdit
       AnchorSideTop.Control = lblCropLeft
@@ -683,8 +683,8 @@ object frmGenerateVideo: TfrmGenerateVideo
       AutoSize = False
       BorderSpacing.Top = 10
       Caption = 'Rotate'
-      OnClick = chkRotateClick
       TabOrder = 11
+      OnClick = chkRotateClick
     end
     object cboRotate: TComboBox
       AnchorSideTop.Control = chkRotate
@@ -721,9 +721,9 @@ object frmGenerateVideo: TfrmGenerateVideo
     AutoSize = False
     BorderSpacing.Top = 5
     Caption = 'Others'
-    OnChange = rdoOthersChange
     TabOrder = 4
     TabStop = False
+    OnChange = rdoOthersChange
   end
   object popRes: TPopupMenu
     Left = 632

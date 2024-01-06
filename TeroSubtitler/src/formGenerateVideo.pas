@@ -636,7 +636,7 @@ begin
   SetControlsEnabled(False);
 
   sub := ChangeFileExt(GetTempFileName, '.ass');
-  if Subtitles.SaveToFile(sub, Workspace.FPS.OutputFPS, TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID), sfAdvancedSubStationAlpha, smText) then
+  if Subtitles.SaveToFile(sub, Workspace.FPS.OutputFPS, TEncoding.UTF8, sfAdvancedSubStationAlpha, smText) then
   begin
     if chkReEncodeAudio.Checked then
     begin
