@@ -9,9 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 
 #: proclocalize.lngabversion
 #, object-pascal-format
@@ -251,10 +249,8 @@ msgid "Auto-detect"
 msgstr "Автоматически"
 
 #: proclocalize.lngdetectdialogsegmentswarning
-msgid ""
-"Attempting to detect dialog segments deletes all subtitles from the list."
-msgstr ""
-"При попытке обнаружить сегменты диалога все субтитры удаляются из списка."
+msgid "Attempting to detect dialog segments deletes all subtitles from the list."
+msgstr "При попытке обнаружить сегменты диалога все субтитры удаляются из списка."
 
 #: proclocalize.lngentry
 #, object-pascal-format
@@ -281,8 +277,7 @@ msgstr "Неудача."
 
 #: proclocalize.lngfailedtodownload
 msgid "No content downloaded, missing file or no Internet connection."
-msgstr ""
-"Не загружается содержимое, отсутствует файл или нет подключения к Интернету"
+msgstr "Не загружается содержимое, отсутствует файл или нет подключения к Интернету"
 
 #: proclocalize.lngfeaturenotavailablefromurl
 msgid "Function not available for online video."
@@ -535,9 +530,7 @@ msgid "#"
 msgstr ""
 
 #: proclocalize.lnglibmpverror
-msgid ""
-"Unable to find the required libraries to run the embedded mpv player. Please "
-"download them."
+msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
 msgstr "Отсутствуют библиотеки для встроенного mpv-плеера. Нужно скачать их."
 
 #: proclocalize.lnglibmpvglerror
@@ -546,9 +539,7 @@ msgstr "Не удалось инициализировать mpv GL контек
 
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
-msgstr ""
-"Не удалось инициализировать libmpv. Проверьте корректность установленных "
-"библиотек"
+msgstr "Не удалось инициализировать libmpv. Проверьте корректность установленных библиотек"
 
 #: proclocalize.lngline
 msgid "Line:"
@@ -589,16 +580,19 @@ msgid "Multiple tracks detected"
 msgstr "Обнаружено несколько дорожек"
 
 #: proclocalize.lngnewdurationall
+msgctxt "proclocalize.lngnewdurationall"
 msgid "New duration in all cases"
-msgstr ""
+msgstr "Новая длина всегда"
 
 #: proclocalize.lngnewdurationgreater
+msgctxt "proclocalize.lngnewdurationgreater"
 msgid "New duration is greater than original"
-msgstr ""
+msgstr "Новая длина большей исходной"
 
 #: proclocalize.lngnewdurationsmaller
+msgctxt "proclocalize.lngnewdurationsmaller"
 msgid "New duration is smaller than original"
-msgstr ""
+msgstr "Новая длина меньше исходной"
 
 #: proclocalize.lngnewshortcutpreset
 msgid "Enter a name for your shortcuts preset"
@@ -869,12 +863,8 @@ msgid "Shortcut currently used in “%s”."
 msgstr "Горячая клавиша уже используется: “%s”."
 
 #: proclocalize.lngsourcemodewarning
-msgid ""
-"Switching to source mode will change the format to “Tero Subtitler”, "
-"otherwise unsaved translations will be lost."
-msgstr ""
-"Переход в режим Исходного кода изменит формат \"Tero Subtitler\" и всё "
-"несохранённое будет потеряно."
+msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
+msgstr "Переход в режим Исходного кода изменит формат \"Tero Subtitler\" и всё несохранённое будет потеряно."
 
 #: proclocalize.lngspcurrentline
 #, object-pascal-format
@@ -959,12 +949,8 @@ msgid "Subtitle ended in %s"
 msgstr "Окончание субтитров: %s"
 
 #: proclocalize.lngsubtitlehaserrorstofix
-msgid ""
-"The current subtitle set contains errors that are recommended to be "
-"resolved, but it can be saved."
-msgstr ""
-"Текущий набор субтитров содержит ошибки, которые предлагается устранить, "
-"однако сохранение всё же возможно."
+msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
+msgstr "Текущий набор субтитров содержит ошибки, которые предлагается устранить, однако сохранение всё же возможно."
 
 #: proclocalize.lngsubtitlestartedat
 #, object-pascal-format
@@ -4488,11 +4474,8 @@ msgid "Getting started wizard"
 msgstr "Мастер подготовки к работе"
 
 #: tfrmwizard.lblexperience.caption
-msgid ""
-"In just a few steps, you'll be setup and ready for the best subtitling "
-"experience."
-msgstr ""
-"Всего за пару шагов вы настроите программу и сможете работать с субтитрами."
+msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
+msgstr "Всего за пару шагов вы настроите программу и сможете работать с субтитрами."
 
 #: tfrmwizard.lblfasterwhisper.caption
 msgid "Faster-Whisper:"
@@ -4508,25 +4491,22 @@ msgid "FFmpeg:"
 msgstr ""
 
 #: tfrmwizard.lblffmpeg_hint.caption
+msgctxt "tfrmwizard.lblffmpeg_hint.caption"
 msgid "Optional, used to extract audio and generate video."
-msgstr ""
+msgstr "Для извлечения аудио и генерации видео (необязательное)."
 
 #: tfrmwizard.lbllibmpv.caption
 msgid "libmpv: "
 msgstr ""
 
 #: tfrmwizard.lbllibmpv_hint.caption
+msgctxt "tfrmwizard.lbllibmpv_hint.caption"
 msgid "Essential, used for playing video."
-msgstr ""
+msgstr "Необходим для воспроизведения видео."
 
 #: tfrmwizard.lblrequiredfiles.caption
-msgid ""
-"For Tero Subtitler to function properly, the following libraries are "
-"necessary; if they are not found on your system, Tero Subtitler can download "
-"them for you."
-msgstr ""
-"Для правильной работы Tero Subtitler необходимы следующие библиотеки; если "
-"они не найдены в вашей системе, Tero Subtitler поможет вам их скачать."
+msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
+msgstr "Для правильной работы Tero Subtitler необходимы следующие библиотеки; если они не найдены в вашей системе, Tero Subtitler поможет вам их скачать."
 
 #: tfrmwizard.lblwelcome.caption
 msgctxt "tfrmwizard.lblwelcome.caption"
@@ -4547,29 +4527,7 @@ msgid "yt-dlp:"
 msgstr ""
 
 #: tfrmwizard.lblytdlp_hint.caption
+msgctxt "tfrmwizard.lblytdlp_hint.caption"
 msgid "Optional, used for dowloading from YouTube."
-msgstr ""
+msgstr "Для скачивания с YouTube (необязательное)"
 
-#~ msgctxt "proclocalize.lngnewdurationall"
-#~ msgid "New duration in all cases"
-#~ msgstr "Новая длина всегда"
-
-#~ msgctxt "proclocalize.lngnewdurationgreater"
-#~ msgid "New duration is greater than original"
-#~ msgstr "Новая длина большей исходной"
-
-#~ msgctxt "proclocalize.lngnewdurationsmaller"
-#~ msgid "New duration is smaller than original"
-#~ msgstr "Новая длина меньше исходной"
-
-#~ msgctxt "tfrmwizard.lblffmpeg_hint.caption"
-#~ msgid "Optional, used to extract audio and generate video."
-#~ msgstr "Для извлечения аудио и генерации видео (необязательное)."
-
-#~ msgctxt "tfrmwizard.lbllibmpv_hint.caption"
-#~ msgid "Essential, used for playing video."
-#~ msgstr "Необходим для воспроизведения видео."
-
-#~ msgctxt "tfrmwizard.lblytdlp_hint.caption"
-#~ msgid "Optional, used for dowloading from YouTube."
-#~ msgstr "Для скачивания с YouTube (необязательное)"
