@@ -569,7 +569,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actMediaMoveSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actMediaMoveSubtitleEntryExecute(Sender: TObject);
 begin
   if (MPV.GetMediaLenInMs > 0) and actVideoPreview.Checked and (VST.SelectedCount > 0) then
     VSTMoveEntry(VST, True, True);
@@ -594,7 +594,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actMediaStartSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actMediaStartSubtitleEntryExecute(Sender: TObject);
 begin
   if not (MPV.GetMediaLenInMs > 0) then Exit;
   with SubtitleInfo.LastSubtitle do
@@ -606,7 +606,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actMediaEndSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actMediaEndSubtitleEntryExecute(Sender: TObject);
 var
   i, l: Integer;
 begin
@@ -720,7 +720,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actAutoBreakSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actAutoBreakEntryExecute(Sender: TObject);
 var
   Memo: TUWMemo;
 begin
@@ -811,11 +811,11 @@ begin
   lblMediaTime.Caption   := '';
   lblMediaLength.Caption := '';
   sbrSeek.Position       := 0;
-  mnuVideoAudio.Clear;
+  mnuVideoAudioStream.Clear;
   popSilentZones.Items.Clear;
 
   mnuVideoPlayback.Enabled  := False;
-  mnuVideoAudio.Enabled     := False;
+  mnuVideoAudioStream.Enabled     := False;
   mnuVideoSubtitles.Enabled := False;
 
   timerSubtitle.Enabled := False;
@@ -1389,9 +1389,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actSwapWorkspaceExecute(Sender: TObject);
+procedure TfrmMain.actSetGUILayout0Execute(Sender: TObject);
 begin
-  SwapWorkspaceLayout;
+  SetWorkspaceLayout;
+end;
+
+procedure TfrmMain.actSetGUILayout1Execute(Sender: TObject);
+begin
+  SetWorkspaceLayout(1);
+end;
+
+procedure TfrmMain.actSetGUILayout2Execute(Sender: TObject);
+begin
+  SetWorkspaceLayout(2);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1814,6 +1824,83 @@ end;
 procedure TfrmMain.actUnicodeCtrlPDFExecute(Sender: TObject);
 begin
   InsertMemoText(UCC_PDF, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVideoFilterHFlipExecute(Sender: TObject);
+begin
+  MPVSetVideoFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVideoFilterNegativeExecute(Sender: TObject);
+begin
+  MPVSetVideoFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVideoFilterBlurExecute(Sender: TObject);
+begin
+  MPVSetVideoFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVideoFilterEdgeEnhanceExecute(Sender: TObject);
+begin
+  MPVSetVideoFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVideoFilterEmbossExecute(Sender: TObject);
+begin
+  MPVSetVideoFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVideoFilterSharpenExecute(Sender: TObject);
+begin
+  MPVSetVideoFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVideoFilterVFlipExecute(Sender: TObject);
+begin
+  MPVSetVideoFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVideoFilterVintageExecute(Sender: TObject);
+begin
+  MPVSetVideoFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actAudioFilterDialoguEnhanceExecute(Sender: TObject);
+begin
+  MPVSetAudioFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actAudioFilterSpeechNormalizerExecute(Sender: TObject);
+begin
+  MPVSetAudioFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actAudioFilterSurroundExecute(Sender: TObject);
+begin
+  MPVSetAudioFilters;
 end;
 
 // -----------------------------------------------------------------------------
