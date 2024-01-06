@@ -38,12 +38,16 @@ procedure MPVRemoveSubtitleTempTrack;
 function MPVSaveSubtitleTempTrack: Boolean;
 procedure MPVDeleteSubtitleTempTrack;
 function PrepareSSAStyleString: AnsiString;
+procedure MPVSetVideoFilters;
+procedure MPVSetAudioFilters;
+procedure MPVSetFilters;
 
 // -----------------------------------------------------------------------------
 
 implementation
 
-uses MPVPlayer, procConfig, UWSystem.Encoding, UWSystem.SysUtils;
+uses MPVPlayer, procConfig, UWSystem.Encoding, UWSystem.SysUtils,
+  MPVPlayer.Filters;
 
 // -----------------------------------------------------------------------------
 
@@ -243,11 +247,9 @@ end;
 
 function MPVSaveSubtitleTempTrack: Boolean;
 var
-  AFPS      : Single;
-  AEncoding : TEncoding;
+  AFPS : Single;
 begin
   AFPS      := Workspace.FPS.OutputFPS;
-  AEncoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID);
 
   if Workspace.WorkMode = wmTime then
     Subtitles.TimeBase := stbMedia
@@ -260,7 +262,7 @@ begin
   end;
 
   Subtitles.Tag := 1;
-  Result := Subtitles.SaveToFile(MPVTempSubFileName, AFPS, AEncoding, sfAdvancedSubStationAlpha, smText);
+  Result := Subtitles.SaveToFile(MPVTempSubFileName, AFPS, TEncoding.UTF8, sfAdvancedSubStationAlpha, smText);
   Subtitles.Tag := 0;
 end;
 
@@ -283,6 +285,55 @@ function PrepareSSAStyleString: AnsiString;
 begin
   with MPVOptions do
     Result := Format('Default,Arial,%d,%s,%s,%s,%s,0,0,0,0,100,100,0,0,1,1,1,2,10,10,10,1', [TextSize, CorrectColorFormat(TextColor), CorrectColorFormat(TextColor), CorrectColorFormat(TextBorderColor), CorrectColorFormat(TextBackgroundColor)]);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MPVSetVideoFilters;
+var
+  AVideoFilters: TMPVPlayerVideoFilters;
+begin
+  AVideoFilters := [];
+
+  with frmMain do
+  begin
+    if actVideoFilterHFlip.Checked then Include(AVideoFilters, vfHFlip);
+    if actVideoFilterVFlip.Checked then Include(AVideoFilters, vfVFlip);
+    if actVideoFilterSharpen.Checked then Include(AVideoFilters, vfSharpen);
+    if actVideoFilterBlur.Checked then Include(AVideoFilters, vfBlur);
+    if actVideoFilterEdgeEnhance.Checked then Include(AVideoFilters, vfEdgeEnhance);
+    if actVideoFilterEmboss.Checked then Include(AVideoFilters, vfEmboss);
+    if actVideoFilterNegative.Checked then Include(AVideoFilters, vfNegative);
+    if actVideoFilterVintage.Checked then Include(AVideoFilters, vfVintage);
+
+    MPV.SetVideoFilters(AVideoFilters);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MPVSetAudioFilters;
+var
+  AAudioFilters: TMPVPlayerAudioFilters;
+begin
+  AAudioFilters := [];
+
+  with frmMain do
+  begin
+    if actAudioFilterDialoguEnhance.Checked then Include(AAudioFilters, afDialoguEnhance);
+    if actAudioFilterSurround.Checked then Include(AAudioFilters, afSurround);
+    if actAudioFilterSpeechNormalizer.Checked then Include(AAudioFilters, afSpeechNormalizer);
+
+    MPV.SetAudioFilters(AAudioFilters);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MPVSetFilters;
+begin
+  MPVSetVideoFilters;
+  MPVSetAudioFilters;
 end;
 
 // -----------------------------------------------------------------------------
