@@ -52,7 +52,9 @@ type
     cboDefaultFrameRate: TComboBox;
     cboDefaultFileEncoding: TComboBox;
     chkPromptForInputFPS: TUWCheckBox;
+    chkPromptForInputEncoding: TUWCheckBox;
     chkPromptForSaveWithErrors: TUWCheckBox;
+    chkPromptForSaveWithErrors1: TUWCheckBox;
     chkSubtitleHandleByMPV: TUWCheckBox;
     chkSubBackground: TCheckBox;
     chkDotsOnSplit: TUWCheckBox;
@@ -402,6 +404,7 @@ begin
     chkDrawWaveformGAP.Checked          := frmMain.WAVE.DrawGAP;
     chkPromptForDeleteSubtitles.Checked := AskForDeleteLines;
     chkPromptForInputFPS.Checked        := AskForInputFPS;
+    chkPromptForInputEncoding.Checked   := AskForInputEncoding;
     chkPromptForSaveWithErrors.Checked  := CheckErrorsBeforeSave;
 
     cboTheme.ItemIndex := Integer(ColorThemeInstance.ColorMode);
@@ -541,8 +544,9 @@ begin
     frmMain.WAVE.DrawGAP   := chkDrawWaveformGAP.Checked;
     frmMain.mmoText.CPSBar.Visible        := chkShowCPSBar.Checked;
     frmMain.mmoTranslation.CPSBar.Visible := chkShowCPSBar.Checked;
-    AskForDeleteLines := chkPromptForDeleteSubtitles.Checked;
-    AskForInputFPS    := chkPromptForInputFPS.Checked;
+    AskForDeleteLines   := chkPromptForDeleteSubtitles.Checked;
+    AskForInputFPS      := chkPromptForInputFPS.Checked;
+    AskForInputEncoding := chkPromptForInputEncoding.Checked;
     CheckErrorsBeforeSave := chkPromptForSaveWithErrors.Checked;
   end; //with
 

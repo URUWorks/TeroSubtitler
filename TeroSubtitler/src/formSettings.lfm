@@ -13,7 +13,7 @@ object frmSettings: TfrmSettings
   OnShow = FormShow
   Position = poMainFormCenter
   ShowHint = True
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object btnClose: TButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
@@ -27,8 +27,8 @@ object frmSettings: TfrmSettings
     BorderSpacing.Right = 8
     BorderSpacing.Bottom = 8
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 0
+    OnClick = btnCloseClick
   end
   object lstTree: TListBox
     Left = 8
@@ -37,8 +37,8 @@ object frmSettings: TfrmSettings
     Width = 180
     ExtendedSelect = False
     ItemHeight = 0
-    OnSelectionChange = lstTreeSelectionChange
     TabOrder = 1
+    OnSelectionChange = lstTreeSelectionChange
   end
   object lyoGeneral: TUWLayout
     Left = 196
@@ -216,24 +216,24 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 19
-      Top = 401
+      Top = 422
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Interpret tags in list'
-      TabOrder = 14
+      TabOrder = 15
     end
     object chkDrawErrors: TUWCheckBox
       AnchorSideTop.Control = chkDrawTags
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 19
-      Top = 422
+      Top = 443
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Show errors in list'
-      TabOrder = 15
+      TabOrder = 16
     end
     object lblShiftTimeMs: TLabel
       Left = 0
@@ -295,24 +295,24 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 19
-      Top = 443
+      Top = 464
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Show gap in timeline'
-      TabOrder = 16
+      TabOrder = 17
     end
     object chkShowCPSBar: TUWCheckBox
       AnchorSideTop.Control = chkDrawWaveformGAP
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 19
-      Top = 464
+      Top = 485
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Show CPS bar'
-      TabOrder = 17
+      TabOrder = 18
     end
     object chkPromptForInputFPS: TUWCheckBox
       AnchorSideTop.Control = chkPromptForDeleteSubtitles
@@ -349,6 +349,18 @@ object frmSettings: TfrmSettings
       Value = 6000
     end
     object chkPromptForSaveWithErrors: TUWCheckBox
+      AnchorSideTop.Control = chkPromptForInputEncoding
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 19
+      Top = 401
+      Width = 18
+      AutoSize = False
+      BorderSpacing.Top = 2
+      Caption = 'Prompt when saving file with errors'
+      TabOrder = 14
+    end
+    object chkPromptForInputEncoding: TUWCheckBox
       AnchorSideTop.Control = chkPromptForInputFPS
       AnchorSideTop.Side = asrBottom
       Left = 0
@@ -357,7 +369,7 @@ object frmSettings: TfrmSettings
       Width = 18
       AutoSize = False
       BorderSpacing.Top = 2
-      Caption = 'Prompt when saving file with errors'
+      Caption = 'Prompt for Encoding before loading a file'
       TabOrder = 13
     end
   end
@@ -456,8 +468,8 @@ object frmSettings: TfrmSettings
       Top = 32
       Width = 268
       Anchors = [akTop, akLeft, akRight]
-      OnChange = spnConventionChange
       TabOrder = 2
+      OnChange = spnConventionChange
     end
     object edtProhibitedChars: TEdit
       Left = 248
@@ -465,8 +477,8 @@ object frmSettings: TfrmSettings
       Top = 64
       Width = 268
       Anchors = [akTop, akLeft, akRight]
-      OnChange = spnConventionChange
       TabOrder = 3
+      OnChange = spnConventionChange
     end
     object lblRepeatableChars: TLabel
       Left = 0
@@ -495,8 +507,8 @@ object frmSettings: TfrmSettings
       Width = 18
       AutoSize = False
       Caption = 'Add ''...'' on split subtitle'
-      OnChange = spnConventionChange
       TabOrder = 20
+      OnChange = spnConventionChange
     end
     object cboProfile: TComboBox
       AnchorSideRight.Control = btnProfile
@@ -507,9 +519,9 @@ object frmSettings: TfrmSettings
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 5
       ItemHeight = 15
-      OnSelect = cboProfileSelect
       Style = csDropDownList
       TabOrder = 0
+      OnSelect = cboProfileSelect
     end
     object lblProfile: TLabel
       Left = 0
@@ -530,8 +542,8 @@ object frmSettings: TfrmSettings
       Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
-      OnClick = btnProfileClick
       TabOrder = 1
+      OnClick = btnProfileClick
     end
     object lblMaxLineCount: TLabel
       Left = 0
@@ -631,9 +643,9 @@ object frmSettings: TfrmSettings
       Top = 260
       Width = 127
       ItemHeight = 15
-      OnChange = spnConventionChange
       Style = csDropDownList
       TabOrder = 11
+      OnChange = spnConventionChange
     end
     object edtCPSStrategy: TEdit
       AnchorSideTop.Side = asrCenter
@@ -641,8 +653,8 @@ object frmSettings: TfrmSettings
       Height = 23
       Top = 96
       Width = 268
-      OnChange = spnConventionChange
       TabOrder = 4
+      OnChange = spnConventionChange
     end
     object lblCPSStrategy: TLabel
       Left = 0
@@ -929,18 +941,18 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = cbnSubBackground
       AnchorSideTop.Side = asrCenter
       Left = 336
-      Height = 19
-      Top = 254
-      Width = 20
+      Height = 17
+      Top = 255
+      Width = 18
       TabOrder = 5
     end
     object chkSubShadow: TCheckBox
       AnchorSideTop.Control = cbnSubShadow
       AnchorSideTop.Side = asrCenter
       Left = 336
-      Height = 19
-      Top = 224
-      Width = 20
+      Height = 17
+      Top = 225
+      Width = 18
       TabOrder = 4
     end
     object lblWaveform: TLabel
@@ -1111,8 +1123,8 @@ object frmSettings: TfrmSettings
       Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
-      OnClick = btnFFMPEGClick
       TabOrder = 1
+      OnClick = btnFFMPEGClick
     end
     object lblSceneDetect: TLabel
       AnchorSideTop.Control = edtSceneDetect
@@ -1147,8 +1159,8 @@ object frmSettings: TfrmSettings
       Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
-      OnClick = btnSceneDetectClick
       TabOrder = 3
+      OnClick = btnSceneDetectClick
     end
     object lblWhisperCPP: TLabel
       AnchorSideTop.Control = edtWhisperCPP
@@ -1183,8 +1195,8 @@ object frmSettings: TfrmSettings
       Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
-      OnClick = btnWhisperCPPClick
       TabOrder = 5
+      OnClick = btnWhisperCPPClick
     end
     object lblYTDLP: TLabel
       AnchorSideTop.Control = edtYTDLP
@@ -1219,8 +1231,8 @@ object frmSettings: TfrmSettings
       Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
-      OnClick = btnYTDLPClick
       TabOrder = 9
+      OnClick = btnYTDLPClick
     end
     object lblFasterWhisper: TLabel
       AnchorSideTop.Control = edtFasterWhisper
@@ -1255,8 +1267,8 @@ object frmSettings: TfrmSettings
       Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
-      OnClick = btnFasterWhisperClick
       TabOrder = 7
+      OnClick = btnFasterWhisperClick
     end
   end
   object lyoShortcuts: TUWLayout
@@ -1276,10 +1288,10 @@ object frmSettings: TfrmSettings
       Anchors = [akTop, akLeft, akRight]
       ExtendedSelect = False
       ItemHeight = 0
-      OnSelectionChange = lstShortcutsSelectionChange
       ParentShowHint = False
       ShowHint = True
       TabOrder = 4
+      OnSelectionChange = lstShortcutsSelectionChange
     end
     object cboShortcutCat: TComboBox
       Left = 168
@@ -1288,9 +1300,9 @@ object frmSettings: TfrmSettings
       Width = 348
       Anchors = [akTop, akLeft, akRight]
       ItemHeight = 15
-      OnSelect = cboShortcutCatSelect
       Style = csDropDownList
       TabOrder = 3
+      OnSelect = cboShortcutCatSelect
     end
     object lblShortcutCat: TLabel
       Left = 0
@@ -1329,9 +1341,9 @@ object frmSettings: TfrmSettings
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 5
       ItemHeight = 15
-      OnSelect = cboShortCutPresetSelect
       Style = csDropDownList
       TabOrder = 0
+      OnSelect = cboShortCutPresetSelect
     end
     object lblShortCutPreset: TLabel
       Left = 0
@@ -1352,8 +1364,8 @@ object frmSettings: TfrmSettings
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 5
       Caption = 'Apply'
-      OnClick = btnShortCutApplyClick
       TabOrder = 1
+      OnClick = btnShortCutApplyClick
     end
     object btnShortCutSave: TButton
       AnchorSideTop.Control = btnShortCutApply
@@ -1363,8 +1375,8 @@ object frmSettings: TfrmSettings
       Width = 91
       Anchors = [akTop, akRight]
       Caption = 'Save as...'
-      OnClick = btnShortCutSaveClick
       TabOrder = 2
+      OnClick = btnShortCutSaveClick
     end
     object lblShortCutInUse: TLabel
       Left = 0
