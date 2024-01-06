@@ -39,6 +39,8 @@ function XMLExtractTextContent(const A: TDOMNodeList): String;
 function HTMLReplaceEntities(const Input: String): String;
 function HTMLDecode(const AStr: String): String;
 
+function IsBinaryFormat(const AFileName: String): Boolean;
+
 // -----------------------------------------------------------------------------
 
 implementation
@@ -334,4 +336,41 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function IsBinaryFormat(const AFileName: String): Boolean;
+var
+  Stream : TStream;
+  BOM    : TBytes;
+  Ext    : String;
+begin
+  Result := False;
+  if not FileExists(AFileName) then Exit;
+
+  Ext := LowerCase(ExtractFileExt(AFileName));
+  if (Ext = '.xls') or (Ext = '.xlsx') or (Ext = '.xls') or (Ext = '.890') or (Ext = '.cap') then
+    Exit(True);
+
+  Stream := TFileStream.Create(AFileName, fmOpenRead or fmShareDenyWrite);
+  try
+    SetLength(BOM, 39);
+    Size := Stream.Size - Stream.Position;
+    Stream.Position := 0;
+    Stream.Read(BOM[0], Length(BOM));
+
+    if (BOM[3] = 53) and (BOM[4] = 54) and (BOM[5] = $4C) and (BOM[8] = $2E) then // STL
+      Exit(True)
+    else if (BOM[0] = $D0) and (BOM[1] = $CF) and (BOM[2] = 11) and (BOM[3] = $E0) and (BOM[4] = $A1) and (BOM[5] = $B1) and (BOM[6] = $1A) and (BOM[7] = $E1) then // XLS
+      Exit(True)
+    else if (BOM[0] = 50) and (BOM[1] = $4B) and (BOM[2] = 03) and (BOM[3] = 04) then // ODS
+      Exit(True)
+    else if (BOM[0] = 0) and (BOM[1] = 0) and (BOM[2] = 03) and (BOM[3] = 04) and (BOM[38] = 0) and (BOM[39] = 0) then // 890
+      Exit(True)
+  finally
+    Stream.Free;
+    SetLength(BOM, 0);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 end.
+
