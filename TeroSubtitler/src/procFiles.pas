@@ -104,7 +104,7 @@ uses
   procConfig, procDialogs, procWorkspace, procVST, procSubtitle, procUndo,
   UWSystem.Encoding, formCustomFileDlg, UWSystem.SysUtils, Forms, procMRU,
   UWSystem.StrUtils, procForms, procProjectFile, formCustomSelectDlg,
-  procFixSubtitles, LCLIntf, Base64, fpsTypes
+  procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -238,6 +238,9 @@ var
   _FPS: Single;
   MRUInfoObject: TMRUInfoObject;
   VFisLoaded: Boolean;
+  _Encoding: TEncoding = NIL;
+  _EncIndex: Integer;
+  IsBinary: Boolean;
 begin
   {$IFDEF DARWIN}
   if not frmMain.Visible then
@@ -257,7 +260,31 @@ begin
     Exit;
   end;
 
-  if AppOptions.AskForInputFPS and (Subtitles.GetTimeBaseFromFile(FileName) = stbMedia) then //not Subtitles.IsSMPTESupported(Subtitles.GetFormatFromFile(FileName)) then
+  _Encoding := AEncoding;
+  IsBinary := IsBinaryFormat(FileName);
+
+  if (_Encoding = NIL) and AppOptions.AskForInputEncoding and not AppOptions.UseOwnFileDialog and not IsBinary then
+  begin
+    _Encoding := GetEncodingFromFile(FileName, False);
+
+    if _Encoding = NIL then
+    begin
+      _Encoding := GetEncodingFromFile(FileName, True);
+
+      with frmMain.cboEncoding do
+      begin
+        if _Encoding <> NIL then
+          _EncIndex := GetEncodingIndex(_Encoding.CodePage)
+        else
+          _EncIndex := 43; //Win1252
+
+        _EncIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectEncodingToUse, Items, _EncIndex);
+        _Encoding := TEncoding.GetEncoding(Encodings[_EncIndex].CPID);
+      end;
+    end;
+  end;
+
+  if AppOptions.AskForInputFPS and (Subtitles.GetTimeBaseFromFile(FileName) = stbMedia) and not AppOptions.UseOwnFileDialog and not IsBinary then //not Subtitles.IsSMPTESupported(Subtitles.GetFormatFromFile(FileName)) then
   begin
     with frmMain.cboInputFPS do
     begin
@@ -267,7 +294,7 @@ begin
     end;
   end;
 
-  if Subtitles.LoadFromFile(FileName, AEncoding, _FPS, AFormat) then
+  if Subtitles.LoadFromFile(FileName, _Encoding, _FPS, AFormat) then
   begin
     frmMain.VST.RootNodeCount := Subtitles.Count;
     frmMain.cboEncoding.ItemIndex := GetEncodingIndex(Subtitles.CodePage);
@@ -427,12 +454,10 @@ end;
 procedure SaveSubtitleAutoBackup;
 var
   AFPS      : Single;
-  AEncoding : TEncoding;
   AFileName : String;
   ATimeDate : String;
 begin
-  AFPS      := Workspace.FPS.OutputFPS;
-  AEncoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID);
+  AFPS := Workspace.FPS.OutputFPS;
 
   if SubtitleInfo.Text.FileName.IsEmpty then
     AFileName := 'noname'
@@ -441,7 +466,7 @@ begin
 
   ATimeDate := FormatDateTime('yyyy-mm-dd_hh-nn-ss_', Now);
 
-  if Subtitles.SaveToFile(BackupFolder+ATimeDate+ChangeFileExt(AFileName, '.tero'), AFPS, AEncoding, sfTeroSubtitler, smText) then
+  if Subtitles.SaveToFile(BackupFolder+ATimeDate+ChangeFileExt(AFileName, '.tero'), AFPS, TEncoding.UTF8, sfTeroSubtitler, smText) then
     SetStatusBarText(lngBackupSaved);
 end;
 
@@ -541,7 +566,7 @@ begin
       WAVE.LoadWaveFromFile(FileName)
     else
     begin // wave/peak file not found
-      WAVE.LoadWaveFromFile(GetMediaFileNameIfExists(FileName, TAudioExts));
+      WAVE.LoadWaveFromFile(GetMediaFileNameIfExists(FileName, TWaveformAudioExts));
     end;
 
     if WAVE.IsPeakDataLoaded then
@@ -743,6 +768,8 @@ begin
   try
     s := '';
     for i := 0 to Length(TVideoExts)-1 do s := s + '*' + TVideoExts[i] + ';';
+    for i := 0 to Length(TAudioExts)-1 do s := s + '*' + TAudioExts[i] + ';';
+    SetLength(s, s.Length-1);
 
     OD.Title   := lngOpenFile;
     OD.Filter  := lngAllSupportedFiles + '|' + s;
@@ -1246,9 +1273,9 @@ end;
 
 procedure DropFilesProcessFile(const FileName: String);
 begin
-  if IsValidMediaFileName(FileName, TVideoExts) then
+  if IsValidMediaFileName(FileName, TVideoExts) or IsValidMediaFileName(FileName, TAudioExts) then
     LoadVideo(FileName)
-  else if IsValidMediaFileName(FileName, TAudioExts) then
+  else if IsValidMediaFileName(FileName, TWaveformAudioExts) then
     LoadAudio(FileName)
   else
     LoadSubtitle(FileName);
