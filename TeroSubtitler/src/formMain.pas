@@ -77,6 +77,20 @@ type
     actExportSUP: TAction;
     actCopyVideoPosToClipboard: TAction;
     actGenerateVideo: TAction;
+    actAudioFilterDialoguEnhance: TAction;
+    actAudioFilterSurround: TAction;
+    actAudioFilterSpeechNormalizer: TAction;
+    actSetGUILayout0: TAction;
+    actSetGUILayout1: TAction;
+    actSetGUILayout2: TAction;
+    actVideoFilterHFlip: TAction;
+    actVideoFilterVFlip: TAction;
+    actVideoFilterSharpen: TAction;
+    actVideoFilterBlur: TAction;
+    actVideoFilterEdgeEnhance: TAction;
+    actVideoFilterEmboss: TAction;
+    actVideoFilterNegative: TAction;
+    actVideoFilterVintage: TAction;
     actRemoveUnicodeControlChars: TAction;
     actPullLastLineFromPreviousEntry: TAction;
     actPullFirstLineFromNextEntry: TAction;
@@ -100,7 +114,7 @@ type
     actJumpToPrevShotChange: TAction;
     actSaveProject: TAction;
     actLoadProject: TAction;
-    actMediaMoveSubtitle: TAction;
+    actMediaMoveSubtitleEntry: TAction;
     actLoadTranslation: TAction;
     actSort: TAction;
     actTBX: TAction;
@@ -129,7 +143,6 @@ type
     actSetAsDefaultFormat: TAction;
     actTranslationMemoryList: TAction;
     actViewShotChange: TAction;
-    actSwapWorkspace: TAction;
     actMediaDeleteSubtitle: TAction;
     actQualityCheck: TAction;
     actShotChanges: TAction;
@@ -192,7 +205,7 @@ type
     actSaveSubtitle: TAction;
     actLoadVideo: TAction;
     actSelectAll: TAction;
-    actAutoBreakSubtitle: TAction;
+    actAutoBreakEntry: TAction;
     actMediaZoomSelection: TAction;
     actMediaZoomOut: TAction;
     actMediaZoomIn: TAction;
@@ -201,8 +214,8 @@ type
     actMediaPlayBeforeSelection: TAction;
     actMediaPlayFromSelection: TAction;
     actMediaPlaySelection: TAction;
-    actMediaEndSubtitle: TAction;
-    actMediaStartSubtitle: TAction;
+    actMediaEndSubtitleEntry: TAction;
+    actMediaStartSubtitleEntry: TAction;
     actMediaSetFinalTime: TAction;
     actMediaSetInitialTime: TAction;
     actMediaNextFrame: TAction;
@@ -283,6 +296,9 @@ type
     MenuItem134: TMenuItem;
     MenuItem135: TMenuItem;
     MenuItem136: TMenuItem;
+    MenuItem215: TMenuItem;
+    MenuItem216: TMenuItem;
+    mnuWorkspaceLayout: TMenuItem;
     MenuItem137: TMenuItem;
     MenuItem138: TMenuItem;
     MenuItem139: TMenuItem;
@@ -350,6 +366,19 @@ type
     MenuItem201: TMenuItem;
     MenuItem202: TMenuItem;
     MenuItem203: TMenuItem;
+    MenuItem204: TMenuItem;
+    MenuItem205: TMenuItem;
+    MenuItem206: TMenuItem;
+    MenuItem207: TMenuItem;
+    MenuItem208: TMenuItem;
+    MenuItem209: TMenuItem;
+    MenuItem210: TMenuItem;
+    MenuItem211: TMenuItem;
+    MenuItem212: TMenuItem;
+    MenuItem213: TMenuItem;
+    MenuItem214: TMenuItem;
+    mnuVideoVideoFilters: TMenuItem;
+    mnuVideoAudioFilters: TMenuItem;
     mnuMemoInsertUnicodeControlChar: TMenuItem;
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
@@ -365,7 +394,6 @@ type
     mnuVideoVolume: TMenuItem;
     mnuToolsTerminology: TMenuItem;
     mnuMemoInsertSymbol: TMenuItem;
-    mnuVSTInsertSymbol: TMenuItem;
     mnuEditInsertSymbol: TMenuItem;
     MenuItem8: TMenuItem;
     mnuAbout: TMenuItem;
@@ -494,7 +522,7 @@ type
     mnuEditTexts: TMenuItem;
     mnuEditTimings: TMenuItem;
     mnuVideoPlayback: TMenuItem;
-    mnuVideoAudio: TMenuItem;
+    mnuVideoAudioStream: TMenuItem;
     mnuVideoSubtitles: TMenuItem;
     MenuItem32: TMenuItem;
     popLoopCount: TPopupMenu;
@@ -535,7 +563,6 @@ type
     Separator35: TMenuItem;
     Separator36: TMenuItem;
     Separator37: TMenuItem;
-    Separator38: TMenuItem;
     Separator39: TMenuItem;
     Separator40: TMenuItem;
     Separator41: TMenuItem;
@@ -691,6 +718,9 @@ type
     VST: TLazVirtualStringTree;
     WAVE: TUWWaveformDisplayer;
     // formMain
+    procedure actSetGUILayout0Execute(Sender: TObject);
+    procedure actSetGUILayout1Execute(Sender: TObject);
+    procedure actSetGUILayout2Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
@@ -861,11 +891,11 @@ type
     procedure actMediaForward1SecExecute(Sender: TObject);
     procedure actMediaBack1MinExecute(Sender: TObject);
     procedure actMediaForward1MinExecute(Sender: TObject);
-    procedure actMediaMoveSubtitleExecute(Sender: TObject);
+    procedure actMediaMoveSubtitleEntryExecute(Sender: TObject);
     procedure actMediaSetInitialTimeExecute(Sender: TObject);
     procedure actMediaSetFinalTimeExecute(Sender: TObject);
-    procedure actMediaStartSubtitleExecute(Sender: TObject);
-    procedure actMediaEndSubtitleExecute(Sender: TObject);
+    procedure actMediaStartSubtitleEntryExecute(Sender: TObject);
+    procedure actMediaEndSubtitleEntryExecute(Sender: TObject);
     procedure actMediaPlaySelectionExecute(Sender: TObject);
     procedure actMediaPlayFromSelectionExecute(Sender: TObject);
     procedure actMediaPlayBeforeSelectionExecute(Sender: TObject);
@@ -876,7 +906,7 @@ type
     procedure actMediaZoomOutExecute(Sender: TObject);
     procedure actMediaZoomSelectionExecute(Sender: TObject);
     procedure actCombineEntriesExecute(Sender: TObject);
-    procedure actAutoBreakSubtitleExecute(Sender: TObject);
+    procedure actAutoBreakEntryExecute(Sender: TObject);
     procedure actSelectAllExecute(Sender: TObject);
     procedure actInvertSelectionExecute(Sender: TObject);
     procedure actSelectCurrentToBeginningExecute(Sender: TObject);
@@ -953,7 +983,6 @@ type
     procedure actBatchConvertExecute(Sender: TObject);
     procedure actQualityCheckExecute(Sender: TObject);
     procedure actCompareExecute(Sender: TObject);
-    procedure actSwapWorkspaceExecute(Sender: TObject);
     procedure actInsertShotChangeExecute(Sender: TObject);
     procedure actDeleteShotChangeExecute(Sender: TObject);
     procedure actJumpToNextShotChangeExecute(Sender: TObject);
@@ -1007,6 +1036,17 @@ type
     procedure actUnicodeCtrlLROExecute(Sender: TObject);
     procedure actUnicodeCtrlRLOExecute(Sender: TObject);
     procedure actUnicodeCtrlPDFExecute(Sender: TObject);
+    procedure actVideoFilterBlurExecute(Sender: TObject);
+    procedure actVideoFilterEdgeEnhanceExecute(Sender: TObject);
+    procedure actVideoFilterEmbossExecute(Sender: TObject);
+    procedure actVideoFilterHFlipExecute(Sender: TObject);
+    procedure actVideoFilterNegativeExecute(Sender: TObject);
+    procedure actVideoFilterSharpenExecute(Sender: TObject);
+    procedure actVideoFilterVFlipExecute(Sender: TObject);
+    procedure actVideoFilterVintageExecute(Sender: TObject);
+    procedure actAudioFilterDialoguEnhanceExecute(Sender: TObject);
+    procedure actAudioFilterSpeechNormalizerExecute(Sender: TObject);
+    procedure actAudioFilterSurroundExecute(Sender: TObject);
   private
 
   public
@@ -1077,7 +1117,6 @@ begin
   FillMenuWithUnicodeSymbols(mnuEditInsertSymbol);
   mnuVSTFormat.Assign(mnuEditFormat);
   mnuMemoFormat.Assign(mnuEditFormat);
-  mnuVSTInsertSymbol.Assign(mnuEditInsertSymbol);
   mnuMemoInsertSymbol.Assign(mnuEditInsertSymbol);
   // Media labels
   lblMediaTime.Caption := '';
