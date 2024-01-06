@@ -47,11 +47,11 @@ const
   DefFPS            = 23.976;
   DefFPSList        : array[0..15] of Single = (8, 10, 12, 15, 16, 20, 23.976, 24, 25, 29.97, 30, 48, 50, 59.94, 60, 75);
 
-  TVideoExts : array[0..19] of String =
+  TVideoExts : array[0..21] of String =
   (
     '.avi', '.mp4', '.mpg', '.mpeg', '.mkv', '.webm', '.flv', '.ogv', '.ogg',
     '.mov', '.qt', '.wmv', '.rm', '.rmvb', '.asf', '.m4v', '.m4p', '.mpv',
-    '.mpe', '.nsv'
+    '.mpe', '.nsv', '.divx', '.vob'
   );
 
   TVideoWebExts : array[0..2] of String =
@@ -59,7 +59,13 @@ const
     '.mp4', '.ogg', '.webm'
   );
 
-  TAudioExts : array[0..1] of String =
+  TAudioExts : array[0..14] of String =
+  (
+    '.mp3', '.aac', '.flac', '.ac3', '.wma', '.ogg', '.mpa', '.m4a', '.m4b',
+    '.ape', '.aiff', '.mka', '.opus', '.adts', '.wav'
+  );
+
+  TWaveformAudioExts : array[0..1] of String =
   (
     '.wav', '.peak'
   );
@@ -211,6 +217,7 @@ type
     DefFormat      : TUWSubtitleFormats;
     MediaPlayMode  : TMediaPlayMode;
     Transcription  : TTranscription;
+    Layout         : Byte;
   end;
 
   { VST Proc }
@@ -339,6 +346,7 @@ type
     AutoCheckErrors        : Boolean;
     AskForDeleteLines      : Boolean;
     AskForInputFPS         : Boolean;
+    AskForInputEncoding    : Boolean;
     CheckErrorsBeforeSave  : Boolean;
     TextToFind             : String;
     LastUnicodeChar        : String;
