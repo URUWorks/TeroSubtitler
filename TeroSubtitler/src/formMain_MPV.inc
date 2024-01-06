@@ -37,6 +37,7 @@ var
 begin
   SetStatusBarText('');
   EnableActionsByTag([TAG_ACTION_VIDEO], True);
+  MPVSetFilters;
 
   SubtitleInfo.LastSubtitle.ShowIndex := 0;
   sbrSeek.Max := MPV.GetMediaLenInMs;
@@ -45,10 +46,10 @@ begin
   if Assigned(frmVideo) then
     frmVideo.Caption := ExtractFileName(MPV.FileName);
 
-  actCloseVideo.Enabled     := True;
-  mnuVideoPlayback.Enabled  := True;
-  mnuVideoAudio.Enabled     := True;
-  mnuVideoSubtitles.Enabled := True;
+  actCloseVideo.Enabled       := True;
+  mnuVideoPlayback.Enabled    := True;
+  mnuVideoAudioStream.Enabled := True;
+  mnuVideoSubtitles.Enabled   := True;
 
   MRUInfoObject := MRU.GetValues(SubtitleInfo.Text.FileName);
 
@@ -62,7 +63,7 @@ begin
   PrepareUnDockData(True);
 
   if (not WAVE.IsPeakDataLoaded and Assigned(MRUInfoObject) and not MRUInfoObject.WaveformFile.IsEmpty) or (not MPVOptions.UnDockData.WAVELoaded) then
-    LoadAudio(GetMediaFileNameIfExists(MPV.FileName, TAudioExts));
+    LoadAudio(GetMediaFileNameIfExists(MPV.FileName, TWaveformAudioExts));
 
   if not WAVE.IsPeakDataLoaded then
     WAVE.EmptyText := lngasWaveformText;
@@ -111,7 +112,7 @@ end;
 
 procedure TfrmMain.MPVAudioReconfig(Sender: TObject);
 begin
-  FillMenuWithAudioStreams(mnuVideoAudio);
+  FillMenuWithAudioStreams(mnuVideoAudioStream);
 end;
 
 // -----------------------------------------------------------------------------
