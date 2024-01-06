@@ -231,6 +231,7 @@ begin
     DefEncoding   := MaxEncodings-1; // utf-8
     DefFormat     := sfSubRip;
     Transcription.Memo := NIL;
+    Layout        := 0;
   end;
 
   FillByte(SubtitleInfo, SizeOf(TSubtitleInfo), 0);
@@ -288,6 +289,7 @@ begin
     AutoCheckErrors        := True;
     AskForDeleteLines      := True;
     AskForInputFPS         := False;
+    AskForInputEncoding    := True;
     CheckErrorsBeforeSave  := True;
     TextToFind             := '';
     WebSearchURL           := URL_WordReference;
@@ -401,6 +403,7 @@ begin
       UseOwnFileDialog := GetValue('UseOwnFileDialog', UseOwnFileDialog);
       AskForDeleteLines := GetValue('AskForDeleteLines', AskForDeleteLines);
       AskForInputFPS := GetValue('AskForInputFPS', AskForInputFPS);
+      AskForInputEncoding := GetValue('AskForInputEncoding', AskForInputEncoding);
       CheckErrorsBeforeSave := GetValue('CheckErrorsBeforeSave', CheckErrorsBeforeSave);
       WebSearchURL := GetValue('WebSearchURL', WebSearchURL);
       TextToFind := GetValue('TextToFind', TextToFind);
@@ -423,8 +426,8 @@ begin
         SetWaveformPreview(GetValue('AudioPreview', False));
         SetDockVideoWindow(GetValue('DockVideoControls', True));
         SetDockWaveformWindow(GetValue('DockAudioControls', True));
-        actSwapWorkspace.Checked := GetValue('SwapWorkspace', False);
-        SwapWorkspaceLayout;
+        Workspace.Layout := GetValue('Layout', 0);
+        SetWorkspaceLayout(Workspace.Layout);
         CloseKey;
       end;
 
@@ -718,6 +721,7 @@ begin
       SetValue('UseOwnFileDialog', UseOwnFileDialog);
       SetValue('AskForDeleteLines', AskForDeleteLines);
       SetValue('AskForInputFPS', AskForInputFPS);
+      SetValue('AskForInputEncoding', AskForInputEncoding);
       SetValue('CheckErrorsBeforeSave', CheckErrorsBeforeSave);
       SetValue('WebSearchURL', WebSearchURL);
       SetValue('TextToFind', TextToFind);
@@ -765,7 +769,7 @@ begin
         SetValue('AudioPreview', actWaveformPreview.Checked);
         SetValue('DockVideoControls', actUnDockVideo.Checked);
         SetValue('DockAudioControls', actUnDockWaveform.Checked);
-        SetValue('SwapWorkspace', actSwapWorkspace.Checked);
+        SetValue('Layout', Layout);
         CloseKey;
       end;
 
