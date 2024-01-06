@@ -104,7 +104,7 @@ begin
         actUnDockVideo.Checked := True;
 
         LayoutVideo.Parent    := frmMain;
-        SwapWorkspaceLayout;
+        SetWorkspaceLayout(Workspace.Layout);
         LayoutVideo.Visible   := actVideoPreview.Checked;
         SplitterVideo.Visible := actVideoPreview.Checked;
 

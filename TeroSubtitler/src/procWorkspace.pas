@@ -56,7 +56,7 @@ procedure EnableActionsByTag(const ATags: array of Integer; const AValue: Boolea
 procedure EnableTimerAutoBackup(const AValue: Boolean = True);
 procedure SetViewMode(const AViewMode: TViewMode);
 procedure SetTranslatorMode(const AValue: Boolean);
-procedure SwapWorkspaceLayout;
+procedure SetWorkspaceLayout(const AIndex: Byte = 0);
 procedure SetVideoPreview(const AValue: Boolean);
 procedure SetWaveformPreview(const AValue: Boolean);
 procedure SetDockVideoWindow(const AValue: Boolean);
@@ -857,23 +857,42 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure SwapWorkspaceLayout;
+procedure SetWorkspaceLayout(const AIndex: Byte = 0);
 begin
   with frmMain do
     if LayoutVideo.Parent = frmMain then
     begin
-      if actSwapWorkspace.Checked then
-      begin
-        LayoutVideo.Align   := alLeft;
-        SplitterVideo.Align := alLeft;
-        LayoutVideo.Left    := 0;
-      end
+      case AIndex of
+        1: begin
+             LayoutVideo.Align   := alLeft;
+             SplitterVideo.Align := alLeft;
+             LayoutVideo.Left    := 0;
+             actSetGUILayout0.Checked := False;
+             actSetGUILayout1.Checked := True;
+             actSetGUILayout2.Checked := False;
+           end;
+        2: begin
+             LayoutVideo.Align   := alTop;
+             SplitterVideo.Align := alTop;
+             LayoutVideo.Left    := 0;
+             actSetGUILayout0.Checked := False;
+             actSetGUILayout1.Checked := False;
+             actSetGUILayout2.Checked := True;
+           end;
       else
-      begin
         LayoutVideo.Align   := alRight;
         SplitterVideo.Align := alRight;
         SplitterVideo.Left  := 0;
+        actSetGUILayout0.Checked := True;
+        actSetGUILayout1.Checked := False;
+        actSetGUILayout2.Checked := False;
       end;
+      Workspace.Layout := AIndex;
+      {LayoutWaveform.Parent    := frmMain;
+      LayoutWaveform.Align     := alBottom;
+      LayoutWaveform.Visible   := actWaveformPreview.Checked;
+      SplitterWaveform.Visible := actWaveformPreview.Checked;
+      SplitterWaveform.Top     := 0;}
     end;
 end;
 
