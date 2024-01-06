@@ -737,7 +737,7 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWMPlayer2.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWNetflixTimedText.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSofni.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWSpreadsheet.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSpreadsheet.Create) ); // binary
   AList.Add( TUWSubtitleCustomFormat(TUWSpruceSubtitleFile.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubViewer.Create) );
