@@ -1398,6 +1398,51 @@ msgctxt "tfrmconventions.caption"
 msgid "Conventions"
 msgstr "Convenciones"
 
+#: tfrmconventions.lblmaxdurationms.caption
+msgctxt "tfrmconventions.lblmaxdurationms.caption"
+msgid "Max. duration (ms)"
+msgstr "Máx. duración (ms)"
+
+#: tfrmconventions.lblmaxlinecount.caption
+msgctxt "tfrmconventions.lblmaxlinecount.caption"
+msgid "Max. line count"
+msgstr "Máx. cantidad de líneas"
+
+#: tfrmconventions.lblmindurationms.caption
+msgctxt "tfrmconventions.lblmindurationms.caption"
+msgid "Min. duration / per word (ms)"
+msgstr "Mín. duración / por palabra (ms)"
+
+#: tfrmconventions.lblnewsubtitlems.caption
+msgctxt "tfrmconventions.lblnewsubtitlems.caption"
+msgid "New subtitle (ms)"
+msgstr "Nuevo subtítulo (ms)"
+
+#: tfrmconventions.lblprohibitedchars.caption
+msgctxt "tfrmconventions.lblprohibitedchars.caption"
+msgid "Prohibited characters"
+msgstr "Caracteres prohibidos"
+
+#: tfrmconventions.lblrepeatablechars.caption
+msgctxt "tfrmconventions.lblrepeatablechars.caption"
+msgid "Repeatable characters"
+msgstr "Caracteres repetibles"
+
+#: tfrmconventions.lblscsnapincues.caption
+msgctxt "tfrmconventions.lblscsnapincues.caption"
+msgid "Snap in cues after SC (frames)"
+msgstr "Ajustar entrada (fotogramas)"
+
+#: tfrmconventions.lblscsnapoutcues.caption
+msgctxt "tfrmconventions.lblscsnapoutcues.caption"
+msgid "Snap out cues before SC (frames)"
+msgstr "Ajustar salida (fotogramas)"
+
+#: tfrmconventions.lblsubtitlepausems.caption
+msgctxt "tfrmconventions.lblsubtitlepausems.caption"
+msgid "Min. gap"
+msgstr "Pausa mín. entre subtítulos"
+
 #: tfrmconvertcase.btnapply.caption
 msgctxt "tfrmconvertcase.btnapply.caption"
 msgid "Apply"
@@ -1901,6 +1946,20 @@ msgstr "Guión OCR"
 msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
 msgid "Spacing of opening hyphen"
 msgstr "Espaciado guión de apertura"
+
+#: tfrmfixsubtitles.mnudeselectall.caption
+msgid "Deselect all"
+msgstr "Deseleccionar todo"
+
+#: tfrmfixsubtitles.mnuinvertselection.caption
+msgctxt "tfrmfixsubtitles.mnuinvertselection.caption"
+msgid "Invert selection"
+msgstr "Invertir selección"
+
+#: tfrmfixsubtitles.mnuselectall.caption
+msgctxt "tfrmfixsubtitles.mnuselectall.caption"
+msgid "Select all"
+msgstr "Seleccionar todo"
 
 #: tfrmformatproperties.btnapply.caption
 msgctxt "tfrmformatproperties.btnapply.caption"
@@ -2554,6 +2613,7 @@ msgid "Insert shot change"
 msgstr "Insertar cambio de plano"
 
 #: tfrmmain.actinvertselection.caption
+msgctxt "tfrmmain.actinvertselection.caption"
 msgid "Invert selection"
 msgstr "Invertir selección"
 
@@ -3233,6 +3293,30 @@ msgctxt "tfrmmain.actvaligntotop.caption"
 msgid "Vertical align to top"
 msgstr "Alineación vertical arriba"
 
+#: tfrmmain.actvar169.caption
+msgid "AR 16:9"
+msgstr "RDP 16:9"
+
+#: tfrmmain.actvar1851.caption
+msgid "AR 1.85:1"
+msgstr "RDP 1.85:1"
+
+#: tfrmmain.actvar2351.caption
+msgid "AR 2.35:1"
+msgstr "RDP 2.35:1"
+
+#: tfrmmain.actvar43.caption
+msgid "AR 4:3"
+msgstr "RDP 4:3"
+
+#: tfrmmain.actvarcycle.caption
+msgid "Cycle Aspect Ratio"
+msgstr "Alternar relación de aspecto"
+
+#: tfrmmain.actvardefault.caption
+msgid "AR Default"
+msgstr "RDP Predeterminado"
+
 #: tfrmmain.actvideofilterblur.caption
 msgid "Blur"
 msgstr "Difuminar"
@@ -3429,6 +3513,10 @@ msgstr "Memoria de traducción"
 msgctxt "tfrmmain.mnuvideo.caption"
 msgid "Video"
 msgstr "Vídeo"
+
+#: tfrmmain.mnuvideoaspectratio.caption
+msgid "Aspect Ratio"
+msgstr "Relación de aspecto"
 
 #: tfrmmain.mnuvideoaudiofilters.caption
 msgctxt "tfrmmain.mnuvideoaudiofilters.caption"
@@ -4521,16 +4609,4 @@ msgstr "yt-dlp:"
 msgctxt "tfrmwizard.lblytdlp_hint.caption"
 msgid "Optional, used for dowloading from YouTube."
 msgstr "Opcional, utilizado para descargar desde YouTube."
-
-#: tfrmwizard.rdolayout0.caption
-msgid "rdoLayout0"
-msgstr ""
-
-#: tfrmwizard.rdolayout1.caption
-msgid "rdoLayout1"
-msgstr ""
-
-#: tfrmwizard.rdolayout2.caption
-msgid "rdoLayout2"
-msgstr ""
 
