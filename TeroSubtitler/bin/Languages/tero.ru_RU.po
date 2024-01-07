@@ -4473,6 +4473,10 @@ msgstr "Далее"
 msgid "Getting started wizard"
 msgstr "Мастер подготовки к работе"
 
+#: tfrmwizard.lblchooselayout.caption
+msgid "Choose layout:"
+msgstr ""
+
 #: tfrmwizard.lblexperience.caption
 msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
 msgstr "Всего за пару шагов вы настроите программу и сможете работать с субтитрами."
@@ -4530,4 +4534,16 @@ msgstr ""
 msgctxt "tfrmwizard.lblytdlp_hint.caption"
 msgid "Optional, used for dowloading from YouTube."
 msgstr "Для скачивания с YouTube (необязательное)"
+
+#: tfrmwizard.rdolayout0.caption
+msgid "rdoLayout0"
+msgstr ""
+
+#: tfrmwizard.rdolayout1.caption
+msgid "rdoLayout1"
+msgstr ""
+
+#: tfrmwizard.rdolayout2.caption
+msgid "rdoLayout2"
+msgstr ""
 
