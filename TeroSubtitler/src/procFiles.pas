@@ -213,6 +213,13 @@ begin
     begin
       if CloseSubtitle(True) then
       begin
+        if Workspace.WorkMode = wmFrames then // ask for FPS?
+          with frmMain.cboInputFPS do
+          begin
+            ItemIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectFPSToUse, Items, ItemIndex, True);
+            frmMain.cboInputFPSSelect(NIL);
+          end;
+
         EnableWorkArea;
         if InsertEmptySubtitle then VSTInsertEntries(VST);
       end;
@@ -252,7 +259,7 @@ begin
   if not CloseSubtitle(AutoLoadVideoFile) then Exit;
 
   _FPS := AFPS;
-  if _FPS = -1 then _FPS := Workspace.FPS.InputFPS;
+  if _FPS = -1 then _FPS := Workspace.FPS.DefFPS;
 
   if not FileExists(FileName) then
   begin
@@ -278,7 +285,7 @@ begin
         else
           _EncIndex := 43; //Win1252
 
-        _EncIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectEncodingToUse, Items, _EncIndex);
+        _EncIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectEncodingToUse, Items, _EncIndex, True);
         _Encoding := TEncoding.GetEncoding(Encodings[_EncIndex].CPID);
       end;
     end;
@@ -288,7 +295,7 @@ begin
   begin
     with frmMain.cboInputFPS do
     begin
-      ItemIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectFPSToUse, Items, ItemIndex);
+      ItemIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectFPSToUse, Items, ItemIndex, True);
       _FPS := DefFPSList[ItemIndex];
       frmMain.cboInputFPSSelect(NIL);
     end;
@@ -385,7 +392,7 @@ begin
   if Subtitles.Count = 0 then Exit;
 
   _FPS := AFPS;
-  if _FPS = -1 then _FPS := Workspace.FPS.InputFPS;
+  if _FPS = -1 then _FPS := Workspace.FPS.DefFPS;
 
   Subs := TUWSubtitles.Create;
   try
@@ -795,7 +802,7 @@ begin
   begin
     Sub := TUWSubtitles.Create;
     try
-      if Sub.LoadFromFile(AFileName, NIL, Workspace.FPS.InputFPS) then
+      if Sub.LoadFromFile(AFileName, NIL, Workspace.FPS.DefFPS) then
       begin
         if Sub.Count > Subtitles.Count then
           c := Subtitles.Count

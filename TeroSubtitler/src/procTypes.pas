@@ -210,6 +210,7 @@ type
     TranslatorMode : Boolean;
     SMPTE          : Boolean;
     FPS            : record        // used for conversions
+                       DefFPS    : Single;
                        InputFPS  : Single;
                        OutputFPS : Single;
                      end;

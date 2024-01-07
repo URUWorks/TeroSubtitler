@@ -226,8 +226,9 @@ begin
   with Workspace do
   begin
     SMPTE         := False;
-    FPS.InputFPS  := 23.976;
-    FPS.OutputFPS := FPS.InputFPS;
+    FPS.DefFPS    := 23.976;
+    FPS.InputFPS  := FPS.DefFPS;
+    FPS.OutputFPS := FPS.DefFPS;
     DefEncoding   := MaxEncodings-1; // utf-8
     DefFormat     := sfSubRip;
     Transcription.Memo := NIL;
@@ -288,7 +289,7 @@ begin
     UseOwnFileDialog       := False;
     AutoCheckErrors        := True;
     AskForDeleteLines      := True;
-    AskForInputFPS         := False;
+    AskForInputFPS         := True;
     AskForInputEncoding    := True;
     CheckErrorsBeforeSave  := True;
     TextToFind             := '';
@@ -419,7 +420,8 @@ begin
         WorkMode := TWorkMode(GetValue('WorkMode', Integer(WorkMode)));
         TranslatorMode := GetValue('TranslatorMode', TranslatorMode);
         SetTranslatorMode(TranslatorMode);
-        FPS.InputFPS := StrToSingle(ReplaceString(GetValue('DefFPS', SingleToStr(FPS.InputFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
+        FPS.DefFPS := StrToSingle(ReplaceString(GetValue('DefFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
+        FPS.InputFPS := FPS.DefFPS;
         DefEncoding  := GetValue('DefEncoding', DefEncoding);
         DefFormat    := TUWSubtitleFormats(GetValue('DefFormat', Integer(DefFormat)));
         SetVideoPreview(GetValue('VideoPreview', False));
@@ -762,7 +764,7 @@ begin
         SetValue('ViewMode', Integer(ViewMode));
         SetValue('WorkMode', Integer(WorkMode));
         SetValue('TranslatorMode', TranslatorMode);
-        SetValue('DefFPS', SingleToStr(FPS.InputFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
+        SetValue('DefFPS', SingleToStr(FPS.DefFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
         SetValue('DefEncoding', DefEncoding);
         SetValue('DefFormat', Integer(DefFormat));
         SetValue('VideoPreview', actVideoPreview.Checked);

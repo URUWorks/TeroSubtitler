@@ -343,7 +343,7 @@ begin
     FShortCutListCategory := TStringList.Create;
 
     FillComboWithLanguages(cboLanguage, FLngList);
-    FillComboWithFPS(cboDefaultFrameRate, Workspace.FPS.InputFPS);
+    FillComboWithFPS(cboDefaultFrameRate, Workspace.FPS.DefFPS);
     FillComboWithFormats(cboDefaultFileFormat);
     FillComboWithEncodings(cboDefaultFileEncoding);
     FillComboWithShortcuts;
@@ -587,7 +587,7 @@ begin
   if Workspace.WorkMode <> TWorkMode(cboTimeCodeMode.ItemIndex) then
     SetWorkMode(TWorkMode(cboTimeCodeMode.ItemIndex));
 
-  Workspace.FPS.InputFPS := StrToFloatDef(cboDefaultFrameRate.Text, Workspace.FPS.OutputFPS, FormatSettings);
+  Workspace.FPS.DefFPS := StrToFloatDef(cboDefaultFrameRate.Text, DefFPS, FormatSettings);
   Workspace.DefEncoding  := cboDefaultFileEncoding.ItemIndex;
   Workspace.DefFormat    := TUWSubtitleFormats(cboDefaultFileFormat.ItemIndex+1);
   if SubtitleInfo.Text.FileName.IsEmpty then
