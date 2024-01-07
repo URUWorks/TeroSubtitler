@@ -1389,23 +1389,6 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actSetGUILayout0Execute(Sender: TObject);
-begin
-  SetWorkspaceLayout;
-end;
-
-procedure TfrmMain.actSetGUILayout1Execute(Sender: TObject);
-begin
-  SetWorkspaceLayout(1);
-end;
-
-procedure TfrmMain.actSetGUILayout2Execute(Sender: TObject);
-begin
-  SetWorkspaceLayout(2);
-end;
-
-// -----------------------------------------------------------------------------
-
 procedure TfrmMain.actInsertShotChangeExecute(Sender: TObject);
 begin
   with WAVE do
@@ -1901,6 +1884,69 @@ end;
 procedure TfrmMain.actAudioFilterSurroundExecute(Sender: TObject);
 begin
   MPVSetAudioFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actSetGUILayout0Execute(Sender: TObject);
+begin
+  SetWorkspaceLayout;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actSetGUILayout1Execute(Sender: TObject);
+begin
+  SetWorkspaceLayout(1);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actSetGUILayout2Execute(Sender: TObject);
+begin
+  SetWorkspaceLayout(2);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVARDefaultExecute(Sender: TObject);
+begin
+  MPV.SetVideoAspectRatio(arDefault);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVAR43Execute(Sender: TObject);
+begin
+  MPV.SetVideoAspectRatio(ar4_3);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVAR169Execute(Sender: TObject);
+begin
+  MPV.SetVideoAspectRatio(ar16_9);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVAR1851Execute(Sender: TObject);
+begin
+  MPV.SetVideoAspectRatio(ar185_1);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVAR2351Execute(Sender: TObject);
+begin
+  MPV.SetVideoAspectRatio(ar235_1);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVARCycleExecute(Sender: TObject);
+begin
+  MPV.CycleVideoAspectRatio;
 end;
 
 // -----------------------------------------------------------------------------

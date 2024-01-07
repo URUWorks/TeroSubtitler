@@ -80,6 +80,12 @@ type
     actAudioFilterDialoguEnhance: TAction;
     actAudioFilterSurround: TAction;
     actAudioFilterSpeechNormalizer: TAction;
+    actVAR1851: TAction;
+    actVARCycle: TAction;
+    actVAR2351: TAction;
+    actVAR169: TAction;
+    actVAR43: TAction;
+    actVARDefault: TAction;
     actSetGUILayout0: TAction;
     actSetGUILayout1: TAction;
     actSetGUILayout2: TAction;
@@ -298,6 +304,13 @@ type
     MenuItem136: TMenuItem;
     MenuItem215: TMenuItem;
     MenuItem216: TMenuItem;
+    MenuItem217: TMenuItem;
+    mnuVideoAspectRatio: TMenuItem;
+    MenuItem218: TMenuItem;
+    MenuItem219: TMenuItem;
+    MenuItem220: TMenuItem;
+    MenuItem221: TMenuItem;
+    MenuItem222: TMenuItem;
     mnuWorkspaceLayout: TMenuItem;
     MenuItem137: TMenuItem;
     MenuItem138: TMenuItem;
@@ -718,9 +731,6 @@ type
     VST: TLazVirtualStringTree;
     WAVE: TUWWaveformDisplayer;
     // formMain
-    procedure actSetGUILayout0Execute(Sender: TObject);
-    procedure actSetGUILayout1Execute(Sender: TObject);
-    procedure actSetGUILayout2Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
@@ -1047,6 +1057,15 @@ type
     procedure actAudioFilterDialoguEnhanceExecute(Sender: TObject);
     procedure actAudioFilterSpeechNormalizerExecute(Sender: TObject);
     procedure actAudioFilterSurroundExecute(Sender: TObject);
+    procedure actSetGUILayout0Execute(Sender: TObject);
+    procedure actSetGUILayout1Execute(Sender: TObject);
+    procedure actSetGUILayout2Execute(Sender: TObject);
+    procedure actVARDefaultExecute(Sender: TObject);
+    procedure actVAR43Execute(Sender: TObject);
+    procedure actVAR169Execute(Sender: TObject);
+    procedure actVAR1851Execute(Sender: TObject);
+    procedure actVAR2351Execute(Sender: TObject);
+    procedure actVARCycleExecute(Sender: TObject);
   private
 
   public
