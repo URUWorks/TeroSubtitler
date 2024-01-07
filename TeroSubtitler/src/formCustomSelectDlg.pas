@@ -41,7 +41,7 @@ type
 
   end;
 
-function ExecuteDialog(const ACaption, APrompt: String; const AItems: TStrings; const ADefault: Integer = 0): Integer;
+function ExecuteDialog(const ACaption, APrompt: String; const AItems: TStrings; const ADefault: Integer = 0; const AOnlyOkButton: Boolean = False): Integer;
 
 var
   frmCustomSelectDlg: TfrmCustomSelectDlg;
@@ -75,7 +75,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function ExecuteDialog(const ACaption, APrompt: String; const AItems: TStrings; const ADefault: Integer = 0): Integer;
+function ExecuteDialog(const ACaption, APrompt: String; const AItems: TStrings; const ADefault: Integer = 0; const AOnlyOkButton: Boolean = False): Integer;
 begin
   with TfrmCustomSelectDlg.Create(NIL) do
   try
@@ -83,6 +83,12 @@ begin
     lblMessage.Caption := APrompt;
     cboSelect.Items.Assign(AItems);
     cboSelect.ItemIndex := ADefault;
+
+    if AOnlyOkButton then
+    begin
+      btnCancel.Hide;
+      btnOk.Left := btnCancel.Left
+    end;
 
     if ShowModal = mrOK then
       Result := cboSelect.ItemIndex
