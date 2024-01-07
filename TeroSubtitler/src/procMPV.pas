@@ -87,7 +87,6 @@ begin
       AddOption('osd-font-size=' + IntToStr(TextSize));
       AddOption('sub-font-size=' + IntToStr(TextSize));
       AddOption('osd-scale-by-window=yes');
-      AddOption('osd-scale-with-window=yes');
       AddOption('sub-scale-by-window=yes');
       AddOption('sub-scale-with-window=yes');
       AddOption('volume=' + IntToStr(Volume.Percent));
