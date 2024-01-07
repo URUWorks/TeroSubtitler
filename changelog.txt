@@ -8,7 +8,8 @@
 - updated: Brazilian Portuguese language (thx Gzushgshsh)
 - updated: Whisper.CPP/Fast-Whisper
 - added: GUI layouts
-- added: video/audio filters
+- added: Video Aspect Ratio
+- added: Video/Audio filters
 - added: Option to prompt for encoding before load a file
 - added: Text functions to pull/push lines
 - added: Remove Unicode control characters
