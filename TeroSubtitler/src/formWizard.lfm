@@ -11,14 +11,13 @@ object frmWizard: TfrmWizard
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  Position = poScreenCenter
+  LCLVersion = '3.0.0.3'
   object lyoPage0: TUWLayout
     Left = 0
     Height = 300
     Top = 40
     Width = 544
-    Anchors = [akLeft]
     ClientHeight = 300
     ClientWidth = 544
     TabOrder = 1
@@ -69,8 +68,8 @@ object frmWizard: TfrmWizard
     BorderSpacing.Bottom = 8
     Caption = 'Next'
     Default = True
-    OnClick = btnNextClick
     TabOrder = 3
+    OnClick = btnNextClick
   end
   object lyoPage1: TUWLayout
     Tag = 1
@@ -78,7 +77,6 @@ object frmWizard: TfrmWizard
     Height = 300
     Top = 40
     Width = 544
-    Anchors = [akLeft]
     ClientHeight = 300
     ClientWidth = 544
     TabOrder = 2
@@ -112,8 +110,8 @@ object frmWizard: TfrmWizard
       Top = 63
       Width = 91
       Caption = 'Download'
-      OnClick = btnDownloadClick
       TabOrder = 0
+      OnClick = btnDownloadClick
     end
     object lblFFMPEG: TLabel
       AnchorSideTop.Side = asrBottom
@@ -136,8 +134,8 @@ object frmWizard: TfrmWizard
       Top = 147
       Width = 91
       Caption = 'Download'
-      OnClick = btnDownloadFFMPEGClick
       TabOrder = 2
+      OnClick = btnDownloadFFMPEGClick
     end
     object lblLibMPVStatus: TLabel
       AnchorSideLeft.Control = lbllibMPV
@@ -190,8 +188,8 @@ object frmWizard: TfrmWizard
       Top = 105
       Width = 91
       Caption = 'Download'
-      OnClick = btnDownloadYTDLPClick
       TabOrder = 1
+      OnClick = btnDownloadYTDLPClick
     end
     object lblYTDLPStatus: TLabel
       AnchorSideLeft.Control = lblYTDLP
@@ -231,8 +229,8 @@ object frmWizard: TfrmWizard
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 8
       Caption = 'Download'
-      OnClick = btnDownloadWhisperClick
       TabOrder = 3
+      OnClick = btnDownloadWhisperClick
     end
     object lblWhisperStatus: TLabel
       AnchorSideLeft.Control = lblWhisper
@@ -273,8 +271,8 @@ object frmWizard: TfrmWizard
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 8
       Caption = 'Download'
-      OnClick = btnDownloadFasterWhisperClick
       TabOrder = 4
+      OnClick = btnDownloadFasterWhisperClick
     end
     object lblFasterWhisperStatus: TLabel
       AnchorSideLeft.Control = lblFasterWhisper
@@ -374,8 +372,107 @@ object frmWizard: TfrmWizard
     Width = 266
     Anchors = [akTop, akLeft, akRight]
     ItemHeight = 15
-    OnChange = cboLanguageChange
     Style = csDropDownList
     TabOrder = 0
+    OnChange = cboLanguageChange
+  end
+  object lyoPage2: TUWLayout
+    Tag = 2
+    Left = 0
+    Height = 300
+    Top = 40
+    Width = 544
+    ClientHeight = 300
+    ClientWidth = 544
+    TabOrder = 4
+    Visible = False
+    object lblChooseLayout: TLabel
+      Left = 16
+      Height = 40
+      Top = 8
+      Width = 515
+      AutoSize = False
+      Caption = 'Choose layout:'
+      ParentColor = False
+      WordWrap = True
+    end
+    object imgLayout0: TImage
+      Left = 16
+      Height = 32
+      Top = 69
+      Width = 32
+      AutoSize = True
+      Transparent = True
+    end
+    object imgLayout1: TImage
+      AnchorSideLeft.Control = imgLayout0
+      AnchorSideTop.Control = imgLayout0
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 32
+      Top = 111
+      Width = 32
+      AutoSize = True
+      BorderSpacing.Top = 10
+      Transparent = True
+    end
+    object imgLayout2: TImage
+      AnchorSideLeft.Control = imgLayout1
+      AnchorSideTop.Control = imgLayout1
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 32
+      Top = 153
+      Width = 32
+      AutoSize = True
+      BorderSpacing.Top = 10
+      Transparent = True
+    end
+    object rdoLayout0: TUWRadioButton
+      AnchorSideLeft.Control = imgLayout0
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = imgLayout0
+      AnchorSideTop.Side = asrCenter
+      Left = 58
+      Height = 23
+      Top = 74
+      Width = 18
+      AutoSize = False
+      BorderSpacing.Left = 10
+      Caption = 'rdoLayout0'
+      Checked = True
+      TabOrder = 2
+      State = cbChecked
+    end
+    object rdoLayout1: TUWRadioButton
+      AnchorSideLeft.Control = imgLayout1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = imgLayout1
+      AnchorSideTop.Side = asrCenter
+      Left = 58
+      Height = 23
+      Top = 116
+      Width = 18
+      AutoSize = False
+      BorderSpacing.Left = 10
+      Caption = 'rdoLayout1'
+      TabOrder = 0
+      TabStop = False
+    end
+    object rdoLayout2: TUWRadioButton
+      AnchorSideLeft.Control = imgLayout2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = imgLayout2
+      AnchorSideTop.Side = asrCenter
+      Left = 58
+      Height = 23
+      Top = 158
+      Width = 18
+      AutoSize = False
+      BorderSpacing.Left = 10
+      Caption = 'rdoLayout2'
+      TabOrder = 1
+      TabStop = False
+    end
   end
 end

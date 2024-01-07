@@ -23,7 +23,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  UWLayout, LCLTranslator, procLocalize, UWSystem.Globalization;
+  UWLayout, UWFlatButton, UWRadioButton, LCLTranslator, procLocalize,
+  UWSystem.Globalization;
 
 type
 
@@ -37,12 +38,16 @@ type
     btnNext: TButton;
     btnDownload: TButton;
     cboLanguage: TComboBox;
+    imgLayout0: TImage;
+    imgLayout1: TImage;
+    imgLayout2: TImage;
     imgLogo: TImage;
     lblFasterWhisper: TLabel;
     lblFasterWhisper_Hint: TLabel;
     lblFFMPEG_Hint: TLabel;
     lblLanguage: TLabel;
     lbllibMPV_Hint: TLabel;
+    lblChooseLayout: TLabel;
     lblWhisper_Hint: TLabel;
     lblWhisperStatus: TLabel;
     lblWhisper: TLabel;
@@ -59,6 +64,10 @@ type
     lblWelcome: TLabel;
     lyoPage0: TUWLayout;
     lyoPage1: TUWLayout;
+    lyoPage2: TUWLayout;
+    rdoLayout0: TUWRadioButton;
+    rdoLayout1: TUWRadioButton;
+    rdoLayout2: TUWRadioButton;
     procedure btnDownloadClick(Sender: TObject);
     procedure btnDownloadFFMPEGClick(Sender: TObject);
     procedure btnDownloadYTDLPClick(Sender: TObject);
@@ -72,7 +81,7 @@ type
   private
     FIndex: Integer;
     FLngList: TStrings;
-    procedure SetPageStep(const AIndex: Integer);
+    procedure SetPageStep;
   public
   end;
 
@@ -184,6 +193,15 @@ end;
 
 procedure TfrmWizard.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
+  if rdoLayout1.Checked then
+    Workspace.Layout := 1
+  else if rdoLayout2.Checked then
+    Workspace.Layout := 2
+  else
+    Workspace.Layout := 0;
+
+  SetWorkspaceLayout(Workspace.Layout);
+
   CloseAction := caFree;
   FLngList.Free;
   frmWizard := NIL;
@@ -199,11 +217,26 @@ begin
   png := TPortableNetworkGraphic.Create;
   try
     if ColorThemeInstance.GetRealColorMode = cmDark then
-      png.LoadFromLazarusResource('terosubtitler_dark')
+    begin
+      png.LoadFromLazarusResource('terosubtitler_dark');
+      imgLogo.Picture.Graphic := png;
+      png.LoadFromLazarusResource('guilayout0_dark');
+      imgLayout0.Picture.Graphic := png;
+      png.LoadFromLazarusResource('guilayout1_dark');
+      imgLayout1.Picture.Graphic := png;
+      png.LoadFromLazarusResource('guilayout2_dark');
+      imgLayout2.Picture.Graphic := png;
+    end
     else
+    begin
       png.LoadFromLazarusResource('terosubtitler');
-
-    imgLogo.Picture.Graphic := png;
+      png.LoadFromLazarusResource('guilayout0');
+      imgLayout0.Picture.Graphic := png;
+      png.LoadFromLazarusResource('guilayout1');
+      imgLayout1.Picture.Graphic := png;
+      png.LoadFromLazarusResource('guilayout2');
+      imgLayout2.Picture.Graphic := png;
+    end;
   finally
     png.Free;
   end;
@@ -211,32 +244,32 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmWizard.SetPageStep(const AIndex: Integer);
+procedure TfrmWizard.SetPageStep;
 var
   i: Integer;
 begin
-  FIndex := AIndex;
-  if AIndex = 2 then Close;
+  Inc(FIndex);
+  if FIndex = 3 then Close;
 
   for i := 0 to ControlCount-1 do
     if Controls[i] is TUWLayout then
       with TUWLayout(Controls[i]) do
       begin
-        if Tag = AIndex then
+        if Tag = FIndex then
           Visible := True
         else
           Visible := False
       end;
 
-  lblLanguage.Visible := AIndex = 1;
-  cboLanguage.Visible := AIndex = 1;
+  lblLanguage.Visible := (FIndex > 0);
+  cboLanguage.Visible := lblLanguage.Visible;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmWizard.btnNextClick(Sender: TObject);
 begin
-  SetPageStep(FIndex+1);
+  SetPageStep;
 end;
 
 // -----------------------------------------------------------------------------
