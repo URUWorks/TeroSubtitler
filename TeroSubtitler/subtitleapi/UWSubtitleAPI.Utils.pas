@@ -74,7 +74,7 @@ var
 begin
   if not Assigned(StringList) then Exit;
 
-  with TRegExpr.Create('<\?xml version="(.*?)"') do
+  {with TRegExpr.Create('<\?xml version="(.*?)"') do
   try
     if Exec(StringList.Text) then
     begin
@@ -83,9 +83,9 @@ begin
     end;
   finally
     Free;
-  end;
+  end;}
 
-  Stream := TStringStream.Create(StringList.Text);
+  Stream := TStringStream.Create(StringList.Text.Replace('& ', '&amp; '));
   try
     Stream.Position := 0;
     ReadXMLFile(XmlDoc, Stream, [xrfAllowSpecialCharsInAttributeValue, xrfPreserveWhiteSpace]);
@@ -352,7 +352,6 @@ begin
   Stream := TFileStream.Create(AFileName, fmOpenRead or fmShareDenyWrite);
   try
     SetLength(BOM, 39);
-    Size := Stream.Size - Stream.Position;
     Stream.Position := 0;
     Stream.Read(BOM[0], Length(BOM));
 
