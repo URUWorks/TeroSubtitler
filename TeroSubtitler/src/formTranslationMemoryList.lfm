@@ -11,6 +11,7 @@ object frmTranslationMemoryList: TfrmTranslationMemoryList
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
+  LCLVersion = '3.0.0.3'
   object VST: TLazVirtualStringTree
     Left = 8
     Height = 351
@@ -48,15 +49,15 @@ object frmTranslationMemoryList: TfrmTranslationMemoryList
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 2
+    OnClick = btnCloseClick
   end
   object lblTotal: TLabel
     AnchorSideTop.Control = lblFind
     Left = 8
     Height = 15
     Top = 372
-    Width = 30
+    Width = 28
     Caption = 'Total:'
     ParentColor = False
   end
@@ -64,12 +65,11 @@ object frmTranslationMemoryList: TfrmTranslationMemoryList
     AnchorSideLeft.Control = lblTotal
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = lblTotal
-    Left = 46
-    Height = 15
+    Left = 44
+    Height = 1
     Top = 372
-    Width = 6
+    Width = 1
     BorderSpacing.Left = 8
-    Caption = '0'
     ParentColor = False
   end
   object btnCopy: TButton
@@ -85,8 +85,8 @@ object frmTranslationMemoryList: TfrmTranslationMemoryList
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
     Caption = 'Copy'
-    OnClick = btnCopyClick
     TabOrder = 1
+    OnClick = btnCopyClick
   end
   object edtFind: TEdit
     AnchorSideTop.Control = btnCopy
@@ -97,8 +97,8 @@ object frmTranslationMemoryList: TfrmTranslationMemoryList
     Width = 180
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
-    OnChange = edtFindChange
     TabOrder = 0
+    OnChange = edtFindChange
   end
   object lblFind: TLabel
     AnchorSideTop.Control = edtFind

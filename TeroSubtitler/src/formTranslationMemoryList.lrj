@@ -2,7 +2,6 @@
 {"hash":34260793,"name":"tfrmtranslationmemorylist.caption","sourcebytes":[84,114,97,110,115,108,97,116,105,111,110,32,109,101,109,111,114,121],"value":"Translation memory"},
 {"hash":4863637,"name":"tfrmtranslationmemorylist.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
 {"hash":95856634,"name":"tfrmtranslationmemorylist.lbltotal.caption","sourcebytes":[84,111,116,97,108,58],"value":"Total:"},
-{"hash":48,"name":"tfrmtranslationmemorylist.lblcount.caption","sourcebytes":[48],"value":"0"},
 {"hash":304761,"name":"tfrmtranslationmemorylist.btncopy.caption","sourcebytes":[67,111,112,121],"value":"Copy"},
 {"hash":315460,"name":"tfrmtranslationmemorylist.lblfind.caption","sourcebytes":[70,105,110,100],"value":"Find"}
 ]}

@@ -17,7 +17,6 @@
 {"hash":32,"name":"tfrmwizard.lblwhisperstatus.caption","sourcebytes":[32],"value":" "},
 {"hash":94794250,"name":"tfrmwizard.lblfasterwhisper.caption","sourcebytes":[70,97,115,116,101,114,45,87,104,105,115,112,101,114,58],"value":"Faster-Whisper:"},
 {"hash":115683780,"name":"tfrmwizard.btndownloadfasterwhisper.caption","sourcebytes":[68,111,119,110,108,111,97,100],"value":"Download"},
-{"hash":32,"name":"tfrmwizard.lblfasterwhisperstatus.caption","sourcebytes":[32],"value":" "},
 {"hash":28610318,"name":"tfrmwizard.lbllibmpv_hint.caption","sourcebytes":[69,115,115,101,110,116,105,97,108,44,32,117,115,101,100,32,102,111,114,32,112,108,97,121,105,110,103,32,118,105,100,101,111,46],"value":"Essential, used for playing video."},
 {"hash":16067438,"name":"tfrmwizard.lblytdlp_hint.caption","sourcebytes":[79,112,116,105,111,110,97,108,44,32,117,115,101,100,32,102,111,114,32,100,111,119,108,111,97,100,105,110,103,32,102,114,111,109,32,89,111,117,84,117,98,101,46],"value":"Optional, used for dowloading from YouTube."},
 {"hash":77041326,"name":"tfrmwizard.lblffmpeg_hint.caption","sourcebytes":[79,112,116,105,111,110,97,108,44,32,117,115,101,100,32,116,111,32,101,120,116,114,97,99,116,32,97,117,100,105,111,32,97,110,100,32,103,101,110,101,114,97,116,101,32,118,105,100,101,111,46],"value":"Optional, used to extract audio and generate video."},

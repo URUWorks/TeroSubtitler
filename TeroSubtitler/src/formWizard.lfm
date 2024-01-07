@@ -280,11 +280,10 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Control = lblFasterWhisper
       AnchorSideTop.Side = asrCenter
       Left = 107
-      Height = 15
-      Top = 237
-      Width = 3
+      Height = 1
+      Top = 244
+      Width = 1
       BorderSpacing.Left = 4
-      Caption = ' '
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False

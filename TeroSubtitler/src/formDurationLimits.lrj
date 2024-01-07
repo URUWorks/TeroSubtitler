@@ -1,7 +1,5 @@
 {"version":1,"strings":[
 {"hash":262606707,"name":"tfrmdurationlimits.caption","sourcebytes":[68,117,114,97,116,105,111,110,32,108,105,109,105,116,115],"value":"Duration limits"},
-{"hash":49,"name":"tfrmdurationlimits.edtsetmaxduration.text","sourcebytes":[49],"value":"1"},
-{"hash":49,"name":"tfrmdurationlimits.edtsetminduration.text","sourcebytes":[49],"value":"1"},
 {"hash":4863637,"name":"tfrmdurationlimits.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
 {"hash":4749113,"name":"tfrmdurationlimits.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
 {"hash":176730633,"name":"tfrmdurationlimits.chksetmaxduration.caption","sourcebytes":[83,101,116,32,109,97,120,105,109,117,109,32,100,117,114,97,116,105,111,110,32,40,109,115,41],"value":"Set maximum duration (ms)"},

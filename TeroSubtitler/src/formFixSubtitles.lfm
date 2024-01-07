@@ -13,7 +13,7 @@ object frmFixSubtitles: TfrmFixSubtitles
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object lyoBottom: TUWLayout
     Left = 0
     Height = 42
@@ -33,8 +33,8 @@ object frmFixSubtitles: TfrmFixSubtitles
       BorderSpacing.Right = 5
       Caption = 'Apply'
       Default = True
-      OnClick = btnApplyClick
       TabOrder = 0
+      OnClick = btnApplyClick
     end
     object btnClose: TButton
       Left = 925
@@ -44,8 +44,8 @@ object frmFixSubtitles: TfrmFixSubtitles
       Anchors = [akTop, akRight]
       Cancel = True
       Caption = 'Close'
-      OnClick = btnCloseClick
       TabOrder = 1
+      OnClick = btnCloseClick
     end
   end
   object lyoLeft: TUWLayout
@@ -67,8 +67,8 @@ object frmFixSubtitles: TfrmFixSubtitles
       Anchors = [akTop, akLeft, akRight, akBottom]
       ExtendedSelect = False
       ItemHeight = 0
-      OnClickCheck = clbOptionsClickCheck
       TabOrder = 0
+      OnClickCheck = clbOptionsClickCheck
     end
     object lblConvention: TLabel
       Left = 8
@@ -86,9 +86,9 @@ object frmFixSubtitles: TfrmFixSubtitles
       Width = 188
       Anchors = [akLeft, akRight, akBottom]
       ItemHeight = 15
-      OnSelect = cboConventionSelect
       Style = csDropDownList
       TabOrder = 1
+      OnSelect = cboConventionSelect
     end
     object lblOCR: TLabel
       Left = 8
@@ -106,9 +106,9 @@ object frmFixSubtitles: TfrmFixSubtitles
       Width = 188
       Anchors = [akLeft, akRight, akBottom]
       ItemHeight = 15
-      OnChange = clbOptionsClickCheck
       Style = csDropDownList
       TabOrder = 2
+      OnChange = clbOptionsClickCheck
     end
     object lblSpacingHyphen: TLabel
       Left = 8
@@ -126,9 +126,9 @@ object frmFixSubtitles: TfrmFixSubtitles
       Width = 188
       Anchors = [akLeft, akRight, akBottom]
       ItemHeight = 15
-      OnChange = clbOptionsClickCheck
       Style = csDropDownList
       TabOrder = 3
+      OnChange = clbOptionsClickCheck
     end
   end
   object lyoClient: TUWLayout
@@ -176,15 +176,15 @@ object frmFixSubtitles: TfrmFixSubtitles
     Left = 432
     Top = 496
     object mnuSelectAll: TMenuItem
-      Caption = 'mnuSelectAll'
+      Caption = 'Select all'
       OnClick = mnuSelectAllClick
     end
     object mnuDeSelectAll: TMenuItem
-      Caption = 'mnuDeSelectAll'
+      Caption = 'Deselect all'
       OnClick = mnuDeSelectAllClick
     end
     object mnuInvertSelection: TMenuItem
-      Caption = 'mnuInvertSelection'
+      Caption = 'Invert selection'
       OnClick = mnuInvertSelectionClick
     end
   end

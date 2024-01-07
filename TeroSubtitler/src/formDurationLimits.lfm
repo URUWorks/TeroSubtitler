@@ -12,7 +12,7 @@ object frmDurationLimits: TfrmDurationLimits
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object edtSetMaxDuration: TEdit
     Left = 24
     Height = 23
@@ -21,7 +21,6 @@ object frmDurationLimits: TfrmDurationLimits
     Anchors = [akTop, akLeft, akRight]
     NumbersOnly = True
     TabOrder = 0
-    Text = '1'
   end
   object edtSetMinDuration: TEdit
     Left = 24
@@ -31,7 +30,6 @@ object frmDurationLimits: TfrmDurationLimits
     Anchors = [akTop, akLeft, akRight]
     NumbersOnly = True
     TabOrder = 1
-    Text = '1'
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -44,8 +42,8 @@ object frmDurationLimits: TfrmDurationLimits
     BorderSpacing.Right = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 8
+    OnClick = btnCloseClick
   end
   object btnApply: TButton
     AnchorSideRight.Control = btnClose
@@ -57,8 +55,8 @@ object frmDurationLimits: TfrmDurationLimits
     BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
-    OnClick = btnApplyClick
     TabOrder = 7
+    OnClick = btnApplyClick
   end
   object chkSetMaxDuration: TUWCheckBox
     Left = 8
@@ -68,9 +66,9 @@ object frmDurationLimits: TfrmDurationLimits
     AutoSize = False
     Caption = 'Set maximum duration (ms)'
     Checked = True
-    OnChange = chkSetMaxDurationChange
     State = cbChecked
     TabOrder = 2
+    OnChange = chkSetMaxDurationChange
   end
   object chkSetMinDuration: TUWCheckBox
     Left = 8
@@ -80,9 +78,9 @@ object frmDurationLimits: TfrmDurationLimits
     AutoSize = False
     Caption = 'Set minimum duration (ms)'
     Checked = True
-    OnChange = chkSetMinDurationChange
     State = cbChecked
     TabOrder = 3
+    OnChange = chkSetMinDurationChange
   end
   object rbnFromTheSelectedSubtitle: TUWRadioButton
     Left = 8
