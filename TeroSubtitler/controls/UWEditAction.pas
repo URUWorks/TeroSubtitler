@@ -40,7 +40,8 @@ type
   private
     FEditAction: TUWEditAction;
     FListBox: TListBox;
-    procedure ListBoxClick(Sender: TObject);
+    procedure ListBoxMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ListBoxMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure DoActionEvent;
     procedure UpdateText;
   protected
@@ -162,7 +163,8 @@ begin
     Parent := Self;
     Align := alClient;
     ClickOnSelChange := False;
-    OnClick := @ListBoxClick;
+    OnMouseDown := @ListBoxMouseDown;
+    OnMouseMove := @ListBoxMouseMove
   end;
 end;
 
@@ -188,19 +190,23 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWEditActionFormList.ListBoxClick(Sender: TObject);
+procedure TUWEditActionFormList.ListBoxMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  with TListBox(Sender) do
-    if Items.Count > 0 then
-    begin
-      if ItemAtPos(ScreenToClient(Mouse.CursorPos), True) <> -1 then
-      begin
-        UpdateText;
-        CloseAndReturnAction;
-      end
-      else
-        FEditAction.Text := '';
-    end;
+ if FListBox.GetIndexAtXY(X, Y) <> -1 then
+   CloseAndReturnAction
+ else
+   FEditAction.Text := '';
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWEditActionFormList.ListBoxMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+var
+  i: Integer;
+begin
+ i := FListBox.GetIndexAtXY(X, Y);
+ if i <> -1 then
+   FListBox.ItemIndex := i;
 end;
 
 // -----------------------------------------------------------------------------
@@ -208,14 +214,20 @@ end;
 procedure TUWEditActionFormList.DoActionEvent;
 begin
   with FEditAction do
+  begin
+    FEditAction.BeginUpdate;
+    FEditAction.Text := '';
+    FEditAction.EndUpdate;
     if Assigned(FOnClickAction) and Assigned(FActionList) and (FListBox.ItemIndex >= 0) then
       FOnClickAction(Self, TAction(FActionList.Actions[PtrUInt(FListBox.Items.Objects[FListBox.ItemIndex])]));
+  end;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TUWEditActionFormList.CloseAndReturnAction;
 begin
+  Hide;
   DoActionEvent;
   Close;
 end;
@@ -411,11 +423,11 @@ begin
     else if not FormPopupList.Visible then
     begin
       if FListBox.Items.Count < 10 then
-      {$IFDEF WINDOWS}
-      FormPopupList.Height := Self.Height * FListBox.Items.Count;
-      {$ELSE}
-      FormPopupList.Height := (Self.Height*2) * FListBox.Items.Count;
-      {$ENDIF}
+        {$IFDEF WINDOWS}
+        FormPopupList.Height := Self.Height * FListBox.Items.Count;
+        {$ELSE}
+        FormPopupList.Height := (Self.Height*2) * FListBox.Items.Count;
+        {$ENDIF}
 
       if Assigned(FOnPopupList) then FOnPopupList(FormPopupList);
       FormPopupList.Visible := True; //ShowWindow(FormPopupList.Handle, SW_SHOWNOACTIVATE);
@@ -434,6 +446,7 @@ end;
 
 procedure TUWEditAction.CloseFormPopupList;
 begin
+  Text := '';
   if Assigned(FormPopupList) then FormPopupList.Close;
 end;
 
