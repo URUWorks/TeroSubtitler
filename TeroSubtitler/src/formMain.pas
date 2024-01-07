@@ -1734,7 +1734,7 @@ function SAPILoadDataFunc(const AData: Pointer; const ADataClass: ShortString): 
 begin
   Result := 0;
   if ADataClass = 'TStringList' then
-    Result := formCustomSelectDlg.ExecuteDialog('', lngSelectSheetToUse, TStrings(AData), 0);
+    Result := formCustomSelectDlg.ExecuteDialog('', lngSelectSheetToUse, TStrings(AData), 0, True);
 end;
 
 // -----------------------------------------------------------------------------
