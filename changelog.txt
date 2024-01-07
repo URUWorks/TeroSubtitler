@@ -1,6 +1,8 @@
 1.0.1.5 (x.x.2024)
 - fixed: Crash when saving subtitles as spreadsheet with different extension #222
 - fixed: Only top line imported if across multiple lines in spreadsheet #220
+- fixed: Default input frame rate changes to that of loaded subtitle file #210
+- fixed: HTML Codes #153
 - fixed: Wrong toolbar was shown/hidden from the view menu
 - fixed: [macOS] Components with radio buttons display empty text in some functions
 - updated: Brazilian Portuguese language (thx Gzushgshsh)
