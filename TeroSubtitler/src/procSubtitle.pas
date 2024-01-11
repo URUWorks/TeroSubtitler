@@ -25,6 +25,9 @@ uses
   Classes, StdCtrls, SysUtils, Graphics, LazUTF8, procTypes, laz.VirtualTrees,
   UWSubtitleAPI, UWMemo, Types;
 
+type
+  TPushWordMode = (pwmUp, pwmDown, pwmToPrevious, pwmToNext);
+
 procedure CopyToClipboard(const ACut: Boolean = False);
 procedure PasteFromClipboard;
 procedure CopyCurrentVideoPosToClipboard;
@@ -37,6 +40,7 @@ procedure PushFirstLineToPreviousEntry(const Index: Integer);
 procedure PushLastLineToNextEntry(const Index: Integer);
 procedure PullLastLineFromPreviousEntry(const Index: Integer);
 procedure PullFirstLineFromNextEntry(const Index: Integer);
+procedure PushWord(const Index: Integer; const ALine: Integer; const AMode: TPushWordMode);
 procedure ClearSubtitles(const AutoIncrementUndo: Boolean = True);
 
 function CalcNewSubtitleFinalTime(const Index: Integer; const AInitialTime: Integer): Integer;
@@ -86,7 +90,7 @@ uses
   formMain, procVST, procUndo, procVST_Loops, procWorkspace, procFixSubtitles,
   UWSystem.Encoding, UWSystem.TimeUtils, UWSystem.StrUtils, procMPV,
   UWSubtitleAPI.Tags, UWSubtitleAPI.Formats, procTranscription,
-  UWSubtitles.Utils, Clipbrd;
+  UWSubtitles.Utils, Clipbrd, UWSystem.SysUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -321,6 +325,110 @@ begin
     SubtitleChanged(True, False);
     UpdateValues(True);
     DoAutoCheckErrors;
+  finally
+    sl.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure PushWord(const Index: Integer; const ALine: Integer; const AMode: TPushWordMode);
+var
+  sl : TStrings;
+  words : TStringArray;
+  i, ti, tf, pause : Integer;
+begin
+  if not Subtitles.ValidIndex(Index) or (ALine < 0) then Exit;
+  if Subtitles[Index].Text.IsEmpty then Exit;
+
+  sl := TStringList.Create;
+  try
+    sl.SkipLastLineBreak := True;
+    sl.Text := Subtitles[Index].Text;
+
+    if (AMode = pwmUp) or (AMode = pwmDown) then
+      words := sl[ALine].Split(' ')
+    else if (AMode = pwmToPrevious) then
+      words := sl[0].Split(' ')
+    else
+      words := sl[sl.Count-1].Split(' ');
+
+    if Length(words) > 0 then
+    begin
+      pause := GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames);
+
+      case AMode of
+        pwmUp,
+        pwmToPrevious : begin
+                          if AMode = pwmUp then
+                          begin
+                            sl[ALine] := Copy(sl[ALine], words[0].Length + 2);
+
+                            if ALine > 0 then
+                              sl[ALine-1] := sl[ALine-1] + ' ' + words[0]
+                            else
+                              sl.Insert(0, words[0]);
+
+                            SetSubtitleText(Index, sl.Text, smText, False, False, False);
+                          end
+                          else
+                          begin
+                            sl[0] := Copy(sl[0], words[0].Length + 2);
+
+                            if Index > 0 then
+                            begin
+                              SetSubtitleText(Index-1, Subtitles[Index-1].Text + ' ' + words[0], smText, False, False, False);
+                              SetSubtitleText(Index, sl.Text, smText, False, False, False);
+                            end
+                            else
+                            begin
+                              ti  := Range(Subtitles[Index].InitialTime - AppOptions.Conventions.NewSubtitleMs - Pause, 0, Subtitles[Index].InitialTime);
+                              tf  := ti + AppOptions.Conventions.NewSubtitleMs;
+
+                              SetSubtitleText(Index, sl.Text, smText, False, False, False);
+                              InsertSubtitle(Index, ti, tf, words[0], '', False, False);
+                            end;
+                          end;
+                        end;
+
+        pwmDown,
+        pwmToNext : begin
+                      i := Length(words)-1;
+                      sl[ALine] := Copy(sl[ALine], 1, sl[ALine].Length - (words[i].Length + 1));
+
+                      if AMode = pwmDown then
+                      begin
+                        if ALine < sl.Count-1 then
+                          sl[ALine+1] := words[i] + ' ' + sl[ALine+1]
+                        else
+                          sl.Add(words[i]);
+
+                        SetSubtitleText(Index, sl.Text, smText, False, False, False);
+                      end
+                      else
+                      begin
+                        if Index < Subtitles.Count-1 then
+                        begin
+                          SetSubtitleText(Index+1, words[i] + ' ' + Subtitles[Index+1].Text, smText, False, False, False);
+                          SetSubtitleText(Index, sl.Text, smText, False, False, False);
+                        end
+                        else
+                        begin
+                          ti  := Subtitles[Index].FinalTime + Pause;
+                          tf  := ti + AppOptions.Conventions.NewSubtitleMs;
+
+                          SetSubtitleText(Index, sl.Text, smText, False, False, False);
+                          InsertSubtitle(Index+1, ti, tf, words[i], '', False, False);
+                        end;
+                      end;
+                    end;
+      end;
+
+      UndoInstance.IncrementUndoGroup;
+      SubtitleChanged(True, False);
+      UpdateValues(True);
+      DoAutoCheckErrors;
+    end;
   finally
     sl.Free;
   end;
