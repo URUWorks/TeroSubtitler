@@ -391,14 +391,14 @@ object frmWizard: TfrmWizard
       Top = 8
       Width = 515
       AutoSize = False
-      Caption = 'Choose layout:'
+      Caption = 'Choose workspace layout and timecode mode:'
       ParentColor = False
       WordWrap = True
     end
     object imgLayout0: TImage
       Left = 16
       Height = 32
-      Top = 69
+      Top = 105
       Width = 32
       AutoSize = True
       Transparent = True
@@ -409,7 +409,7 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 32
-      Top = 111
+      Top = 147
       Width = 32
       AutoSize = True
       BorderSpacing.Top = 10
@@ -421,7 +421,7 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Side = asrBottom
       Left = 16
       Height = 32
-      Top = 153
+      Top = 189
       Width = 32
       AutoSize = True
       BorderSpacing.Top = 10
@@ -434,13 +434,13 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Side = asrCenter
       Left = 58
       Height = 23
-      Top = 74
+      Top = 110
       Width = 18
       AutoSize = False
       BorderSpacing.Left = 10
-      Caption = 'rdoLayout0'
+      Caption = 'Layout 0'
       Checked = True
-      TabOrder = 2
+      TabOrder = 1
       State = cbChecked
     end
     object rdoLayout1: TUWRadioButton
@@ -450,12 +450,12 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Side = asrCenter
       Left = 58
       Height = 23
-      Top = 116
+      Top = 152
       Width = 18
       AutoSize = False
       BorderSpacing.Left = 10
-      Caption = 'rdoLayout1'
-      TabOrder = 0
+      Caption = 'Layout 1'
+      TabOrder = 2
       TabStop = False
     end
     object rdoLayout2: TUWRadioButton
@@ -465,13 +465,22 @@ object frmWizard: TfrmWizard
       AnchorSideTop.Side = asrCenter
       Left = 58
       Height = 23
-      Top = 158
+      Top = 194
       Width = 18
       AutoSize = False
       BorderSpacing.Left = 10
-      Caption = 'rdoLayout2'
-      TabOrder = 1
+      Caption = 'Layout 2'
+      TabOrder = 3
       TabStop = False
+    end
+    object cboTimeCode: TComboBox
+      Left = 16
+      Height = 23
+      Top = 63
+      Width = 250
+      ItemHeight = 15
+      Style = csDropDownList
+      TabOrder = 0
     end
   end
 end

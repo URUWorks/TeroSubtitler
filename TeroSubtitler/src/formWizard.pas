@@ -38,6 +38,7 @@ type
     btnNext: TButton;
     btnDownload: TButton;
     cboLanguage: TComboBox;
+    cboTimeCode: TComboBox;
     imgLayout0: TImage;
     imgLayout1: TImage;
     imgLayout2: TImage;
@@ -186,7 +187,10 @@ begin
 
   AppOptions.GUILanguage := LanguageIDFromFileName(LanguageFileName(True));
   FillComboWithLanguages(cboLanguage, FLngList);
+  cboTimeCode.Items.Add('');
+  cboTimeCode.Items.Add('');
   cboLanguageChange(NIL);
+  cboTimeCode.ItemIndex := Integer(Workspace.WorkMode);
 end;
 
 // -----------------------------------------------------------------------------
@@ -201,6 +205,17 @@ begin
     Workspace.Layout := 0;
 
   SetWorkspaceLayout(Workspace.Layout);
+
+  if cboTimeCode.ItemIndex > 0 then
+  begin
+    if Workspace.WorkMode <> wmFrames then
+      SetWorkMode(wmFrames);
+  end
+  else
+  begin
+    if Workspace.WorkMode <> wmTime then
+      SetWorkMode(wmTime);
+  end;
 
   CloseAction := caFree;
   FLngList.Free;
@@ -290,6 +305,9 @@ begin
     lblLanguage.Caption := 'Language / ' + lngwizLanguage
   else
     lblLanguage.Caption := lngwizLanguage;
+
+  cboTimeCode.Items[0] := lngcfsTime;
+  cboTimeCode.Items[1] := lngcfsFrames;
 end;
 
 // -----------------------------------------------------------------------------
