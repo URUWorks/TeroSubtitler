@@ -1,8 +1,11 @@
 1.0.1.5 (x.x.2024)
+- fixed: Imported frame timings interpreted to milliseconds incorrectly #224
 - fixed: Crash when saving subtitles as spreadsheet with different extension #222
 - fixed: Only top line imported if across multiple lines in spreadsheet #220
 - fixed: Default input frame rate changes to that of loaded subtitle file #210
 - fixed: HTML Codes #153
+- fixed: Scroll list to entry in jump to next/previous marked
+- fixed: Faster-Whisper models list not updated after downloading
 - fixed: Wrong toolbar was shown/hidden from the view menu
 - fixed: [macOS] Components with radio buttons display empty text in some functions
 - updated: Brazilian Portuguese language (thx Gzushgshsh)
@@ -11,7 +14,9 @@
 - added: Video Aspect Ratio
 - added: Video/Audio filters
 - added: Option to prompt for encoding before load a file
+- added: Text functions to push word
 - added: Text functions to pull/push lines
+- added: Jump to next/previous without text
 - added: Remove Unicode control characters
 - added: Quick Action Finder
 - added: Snapping window
