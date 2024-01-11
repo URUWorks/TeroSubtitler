@@ -69,11 +69,13 @@ procedure SetSMPTEMode(const AValue: Boolean);
 procedure FocusMemo(const SelectText: Boolean = True);
 function GetMemoFocused: TUWMemo;
 function GetMemoWordUnderCaret(const Memo: TUWMemo; const SelectWord: Boolean = False): String;
+function GetMemoFocusedCaretLineY: Integer;
 function GetFPSFromString(const AValue: String; const ADefault: Single): Single;
 function GetInputFPS: Single;
 function GetFPS: Single;
 function GetDefPause: Integer;
 
+procedure SetFocusTimeEdit(const ATag: Byte);
 procedure SetActor;
 
 procedure UpdateVideoLengthString;
@@ -1137,6 +1139,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function GetMemoFocusedCaretLineY: Integer;
+var
+  Memo : TUWMemo;
+begin
+  Memo := GetMemoFocused;
+  if Memo = NIL then
+    Exit(-1)
+  else
+    Result := Memo.CaretPos.y;
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetFPSFromString(const AValue: String; const ADefault: Single): Single;
 begin
   with AppOptions do
@@ -1166,6 +1181,19 @@ begin
       Result := MinPause
     else
       Result := FramesToTime(MinPause, Workspace.FPS.OutputFPS);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SetFocusTimeEdit(const ATag: Byte);
+begin
+  if (Workspace.ViewMode = vmList) then
+  begin
+    if ATag = TAG_CONTROL_INITIALTIME then
+      frmMain.tedInitial.SetFocus
+    else
+      frmMain.tedFinal.SetFocus;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
