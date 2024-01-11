@@ -1002,6 +1002,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actJumpToNextEmptyExecute(Sender: TObject);
+begin
+  VSTJumpToNextEmptyEntry(VST);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actJumpToPreviousEmptyExecute(Sender: TObject);
+begin
+  VSTJumpToNextEmptyEntry(VST, False);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actEndCueAddOneFrameExecute(Sender: TObject);
 begin
   VSTDoLoop(VST, @ApplyEndCueAddOneFrame, dlSelected, True, True);
@@ -1741,6 +1755,34 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actPushWordUpExecute(Sender: TObject);
+begin
+  PushWord(VSTFocusedNode(VST), GetMemoFocusedCaretLineY, pwmUp);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actPushWordDownExecute(Sender: TObject);
+begin
+  PushWord(VSTFocusedNode(VST), GetMemoFocusedCaretLineY, pwmDown);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actPushWordToPreviousEntryExecute(Sender: TObject);
+begin
+  PushWord(VSTFocusedNode(VST), GetMemoFocusedCaretLineY, pwmToPrevious);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actPushWordToNextEntryExecute(Sender: TObject);
+begin
+  PushWord(VSTFocusedNode(VST), GetMemoFocusedCaretLineY, pwmToNext);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actGenerateVideoExecute(Sender: TObject);
 begin
   ShowGenerateVideo;
@@ -1947,6 +1989,20 @@ end;
 procedure TfrmMain.actVARCycleExecute(Sender: TObject);
 begin
   MPV.CycleVideoAspectRatio;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actFocusInitialTimeExecute(Sender: TObject);
+begin
+  SetFocusTimeEdit(TAG_CONTROL_INITIALTIME);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actFocusFinalTimeExecute(Sender: TObject);
+begin
+  SetFocusTimeEdit(TAG_CONTROL_FINALTIME);
 end;
 
 // -----------------------------------------------------------------------------
