@@ -47,6 +47,7 @@ procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AIdxs: TIntege
 procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AFrom, ATo: Integer; const AClear: Boolean); overload;
 procedure VSTMarkEntries(const AVST: TLazVirtualStringTree; const Value: Boolean = True);
 procedure VSTJumpToNextMarkedEntry(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
+procedure VSTJumpToNextEmptyEntry(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
 procedure VSTCopyEntriesToClipboard(const AVST: TLazVirtualStringTree; const ACut: Boolean = False);
 procedure VSTPasteEntriesFromClipboard(const AVST: TLazVirtualStringTree);
 procedure VSTInsertEntries(const AVST: TLazVirtualStringTree; const Before: Boolean = False);
@@ -330,6 +331,42 @@ begin
         begin
           ClearSelection;
           Selected[Run] := True;
+          ScrollIntoView(Run, False);
+          Break;
+        end;
+
+        if AForward then
+          Run := GetNext(Run)
+        else
+          Run := GetPrevious(Run);
+      end;
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure VSTJumpToNextEmptyEntry(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
+var
+  Run : PVirtualNode;
+begin
+  with AVST do
+    if TotalCount > 0 then
+    begin
+      Run := GetFirstSelected;
+      if not Assigned(Run) then Exit;
+
+      if AForward then
+        Run := GetFirstSelected^.NextSibling
+      else
+        Run := GetFirstSelected^.PrevSibling;
+
+      while Assigned(Run) do
+      begin
+        if Subtitles[Run^.Index].Text.IsEmpty then
+        begin
+          ClearSelection;
+          Selected[Run] := True;
+          ScrollIntoView(Run, False);
           Break;
         end;
 
