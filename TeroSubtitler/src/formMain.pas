@@ -80,6 +80,14 @@ type
     actAudioFilterDialoguEnhance: TAction;
     actAudioFilterSurround: TAction;
     actAudioFilterSpeechNormalizer: TAction;
+    actFocusInitialTime: TAction;
+    actFocusFinalTime: TAction;
+    actJumpToNextEmpty: TAction;
+    actJumpToPreviousEmpty: TAction;
+    actPushWordUp: TAction;
+    actPushWordDown: TAction;
+    actPushWordToPreviousEntry: TAction;
+    actPushWordToNextEntry: TAction;
     actVAR1851: TAction;
     actVARCycle: TAction;
     actVAR2351: TAction;
@@ -302,9 +310,24 @@ type
     MenuItem134: TMenuItem;
     MenuItem135: TMenuItem;
     MenuItem136: TMenuItem;
+    MenuItem179: TMenuItem;
+    MenuItem199: TMenuItem;
+    MenuItem200: TMenuItem;
+    MenuItem201: TMenuItem;
+    MenuItem202: TMenuItem;
+    MenuItem223: TMenuItem;
+    MenuItem224: TMenuItem;
+    MenuItem225: TMenuItem;
+    MenuItem226: TMenuItem;
+    MenuItem228: TMenuItem;
+    MenuItem229: TMenuItem;
+    MenuItem230: TMenuItem;
+    mnuTextWords: TMenuItem;
+    mnuTextLines: TMenuItem;
     MenuItem215: TMenuItem;
     MenuItem216: TMenuItem;
     MenuItem217: TMenuItem;
+    MenuItem227: TMenuItem;
     mnuVideoAspectRatio: TMenuItem;
     MenuItem218: TMenuItem;
     MenuItem219: TMenuItem;
@@ -354,7 +377,6 @@ type
     MenuItem176: TMenuItem;
     MenuItem177: TMenuItem;
     MenuItem178: TMenuItem;
-    MenuItem179: TMenuItem;
     MenuItem180: TMenuItem;
     MenuItem181: TMenuItem;
     MenuItem182: TMenuItem;
@@ -374,10 +396,6 @@ type
     MenuItem196: TMenuItem;
     MenuItem197: TMenuItem;
     MenuItem198: TMenuItem;
-    MenuItem199: TMenuItem;
-    MenuItem200: TMenuItem;
-    MenuItem201: TMenuItem;
-    MenuItem202: TMenuItem;
     MenuItem203: TMenuItem;
     MenuItem204: TMenuItem;
     MenuItem205: TMenuItem;
@@ -576,6 +594,7 @@ type
     Separator35: TMenuItem;
     Separator36: TMenuItem;
     Separator37: TMenuItem;
+    Separator38: TMenuItem;
     Separator39: TMenuItem;
     Separator40: TMenuItem;
     Separator41: TMenuItem;
@@ -731,6 +750,8 @@ type
     VST: TLazVirtualStringTree;
     WAVE: TUWWaveformDisplayer;
     // formMain
+    procedure actJumpToNextEmptyExecute(Sender: TObject);
+    procedure actJumpToPreviousEmptyExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
@@ -1036,6 +1057,10 @@ type
     procedure actPullLastLineFromPreviousEntryExecute(Sender: TObject);
     procedure actPullFirstLineFromNextEntryExecute(Sender: TObject);
     procedure actRemoveUnicodeControlCharsExecute(Sender: TObject);
+    procedure actPushWordUpExecute(Sender: TObject);
+    procedure actPushWordDownExecute(Sender: TObject);
+    procedure actPushWordToPreviousEntryExecute(Sender: TObject);
+    procedure actPushWordToNextEntryExecute(Sender: TObject);
     procedure actGenerateVideoExecute(Sender: TObject);
     procedure actUnicodeCtrlLRMExecute(Sender: TObject);
     procedure actUnicodeCtrlRLMExecute(Sender: TObject);
@@ -1066,6 +1091,8 @@ type
     procedure actVAR1851Execute(Sender: TObject);
     procedure actVAR2351Execute(Sender: TObject);
     procedure actVARCycleExecute(Sender: TObject);
+    procedure actFocusInitialTimeExecute(Sender: TObject);
+    procedure actFocusFinalTimeExecute(Sender: TObject);
   private
 
   public

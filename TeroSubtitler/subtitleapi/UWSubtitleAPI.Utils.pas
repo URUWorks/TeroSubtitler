@@ -35,9 +35,12 @@ function XMLFindNodeByName(const XmlDoc: TXMLDocument; const NodeName: String): 
 function XMLGetAttrValue(const ANode: TDOMNode; const AAttrName: String): String;
 function XMLHasAttribute(const ANode: TDOMNode; const AAttrName: String): Boolean;
 function XMLExtractTextContent(const A: TDOMNodeList): String;
+function XMLGetCorrectFPS(const AFPS: Single; AMultiplier: String): Single;
 
 function HTMLReplaceEntities(const Input: String): String;
 function HTMLDecode(const AStr: String): String;
+
+function SMPTEStringToMS(const ASMPTE: String; const AFPS: Single; const ADropFrame: Boolean = False): Integer;
 
 function IsBinaryFormat(const AFileName: String): Boolean;
 
@@ -211,6 +214,18 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
+
+function XMLGetCorrectFPS(const AFPS: Single; AMultiplier: String): Single;
+var
+  multiplier: TStringArray;
+begin
+  Result := AFPS;
+  multiplier := AMultiplier.Split(' ');
+  if Length(multiplier) = 2 then
+    Result := AFPS * (multiplier[0].ToInteger /  multiplier[1].ToInteger);
+end;
+
+// -----------------------------------------------------------------------------
 // Simple HTML decoding
 // Author: Colin J.D. Stewart
 // -----------------------------------------------------------------------------
@@ -332,6 +347,56 @@ begin
     '&Ouml;', '&Uuml;', '&szlig;'],
     [#13, #10, #10#13, '&', '"', '<', '>', ' ', 'ä', 'ö', 'ü', 'Ä',
     'Ö', 'Ü', 'ß'], [rfReplaceAll]);
+end;
+
+// -----------------------------------------------------------------------------
+
+function SMPTEStringToMS(const ASMPTE: String; const AFPS: Single; const ADropFrame: Boolean = False): Integer;
+var
+  DropFrame : Boolean;
+  ArraySMPTE : TStringArray;
+  DropFrames : Integer;
+  TotalFrames : Integer;
+  h, m, s, f : Integer;
+  TotalMinutes : Integer;
+begin
+  Result := 0;
+  DropFrame := ADropFrame;
+
+  ArraySMPTE := ASMPTE.Split(';');
+  if Length(ArraySMPTE) >= 2 then
+  begin
+    DropFrame := True;
+    f := ArraySMPTE[1].ToInteger;
+    ArraySMPTE := ASMPTE.Split(':');
+    h := ArraySMPTE[0].ToInteger;
+    m := ArraySMPTE[1].ToInteger;
+    s := Copy(ArraySMPTE[2], 1, Pos(';', ArraySMPTE[2])).ToInteger - 1;
+  end
+  else
+  begin
+    ArraySMPTE := ASMPTE.Split(':');
+    h := ArraySMPTE[0].ToInteger;
+    m := ArraySMPTE[1].ToInteger;
+    s := ArraySMPTE[2].ToInteger;
+    f := ArraySMPTE[3].ToInteger;
+  end;
+
+  // Drop frames is the 6% of the framerate rounded to the nearest number.
+  // I get the 0.06666 * framerate to calculate the drop frames from here https://www.davidheidelberger.com/2010/06/10/drop-frame-timecode/
+  if DropFrame then
+    DropFrames := Round(AFPS * 0.0666666)
+  else
+    DropFrames := 0;
+
+  try
+    TotalMinutes := (60 * h) div m
+  except
+    TotalMinutes := 0;
+  end;
+
+  TotalFrames := (((h * 3600) + (m * 60) + s) * Round(AFPS)) + f - (DropFrames * (TotalMinutes - (Trunc(TotalMinutes / 10))));
+  Result := Round((TotalFrames / AFPS ) * 1000);
 end;
 
 // -----------------------------------------------------------------------------

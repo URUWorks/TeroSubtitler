@@ -22,7 +22,7 @@ unit UWSubtitleAPI.Formats.ITunesTimedText;
 interface
 
 uses
-  Classes, SysUtils, StrUtils, UWSubtitleAPI, UWSystem.TimeUtils,
+  Classes, SysUtils, UWSubtitleAPI, UWSystem.TimeUtils,
   UWSubtitleAPI.Formats, laz2_XMLRead, laz2_DOM; // laz2_XMLWrite;
 
 type
@@ -97,17 +97,6 @@ end;
 // -----------------------------------------------------------------------------
 
 function TUWITunesTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
-
-  function GetTime(const S: String; const aFPS: Single): Integer;
-  begin
-    if AnsiEndsStr('t', S) then // ticks
-      Result := TicksToMSecs(StrToInt64(Copy(S, 0, Length(S)-1)))
-    else if AnsiEndsStr('s', S) then // seconds
-      Result := StrSecsToMSecs(Copy(S, 0, Length(S)-1).Replace(',', '.'))
-    else
-      Result := StringToTime(S, False, aFPS);
-  end;
-
 var
   XmlDoc : TXMLDocument;
   Node   : TDOMNode;
@@ -129,8 +118,8 @@ begin
         begin
           Subtitles.FrameRate := StrToFloatDef(XMLGetAttrValue(Node, 'ttp:frameRate'), FPS);
 
-          if XMLHasAttribute(Node, 'ttp:frameRateMultiplier') and XMLGetAttrValue(Node, 'ttp:frameRateMultiplier').StartsWith('999') then
-            Subtitles.FrameRate := Subtitles.FrameRate - (Subtitles.FrameRate * 0.001);
+          if XMLHasAttribute(Node, 'ttp:frameRateMultiplier') then
+            Subtitles.FrameRate := XMLGetCorrectFPS(Subtitles.FrameRate, XMLGetAttrValue(Node, 'ttp:frameRateMultiplier'));
         end;
 
         if XMLHasAttribute(Node, 'ttp:timeBase') then
@@ -160,9 +149,9 @@ begin
               end;
 
               if Node.Attributes.GetNamedItem('begin') <> NIL then
-                InitialTime := GetTime(Node.Attributes.GetNamedItem('begin').NodeValue, Subtitles.FrameRate);
+                InitialTime := SMPTEStringToMS(Node.Attributes.GetNamedItem('begin').NodeValue, Subtitles.FrameRate);
               if Node.Attributes.GetNamedItem('end') <> NIL then
-                FinalTime   := GetTime(Node.Attributes.GetNamedItem('end').NodeValue, Subtitles.FrameRate);
+                FinalTime   := SMPTEStringToMS(Node.Attributes.GetNamedItem('end').NodeValue, Subtitles.FrameRate);
 
               Text := XMLExtractTextContent(Node.ChildNodes);
               Text := HTMLTagsToTS(ReplaceEnters(Text, '<br/>', LineEnding));
