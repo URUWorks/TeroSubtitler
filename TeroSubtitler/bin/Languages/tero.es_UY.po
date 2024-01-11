@@ -2518,6 +2518,14 @@ msgstr "Corregir puntuación"
 msgid "Fix subtitles..."
 msgstr "Corregir subtítulos..."
 
+#: tfrmmain.actfocusfinaltime.caption
+msgid "Edit final time"
+msgstr "Editar tiempo final"
+
+#: tfrmmain.actfocusinitialtime.caption
+msgid "Edit initial time"
+msgstr "Editar tiempo inicial"
+
 #: tfrmmain.actfontbold.caption
 msgctxt "tfrmmain.actfontbold.caption"
 msgid "Bold"
@@ -2617,6 +2625,10 @@ msgctxt "tfrmmain.actinvertselection.caption"
 msgid "Invert selection"
 msgstr "Invertir selección"
 
+#: tfrmmain.actjumptonextempty.caption
+msgid "Jump to next without text"
+msgstr "Saltar al siguiente sin texto"
+
 #: tfrmmain.actjumptonextmarked.caption
 msgid "Jump to next marked"
 msgstr "Saltar a la siguiente marca"
@@ -2624,6 +2636,10 @@ msgstr "Saltar a la siguiente marca"
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
 msgstr "Saltar a cambio de plano siguiente"
+
+#: tfrmmain.actjumptopreviousempty.caption
+msgid "Jump to previous without text"
+msgstr "Saltar al anterior sin texto"
 
 #: tfrmmain.actjumptopreviousmarked.caption
 msgid "Jump to previous marked"
@@ -2866,6 +2882,22 @@ msgstr "Mover la primera línea a la entrada anterior"
 msgid "Push the last line to the next entry"
 msgstr "Mover la última línea a la siguiente entrada"
 
+#: tfrmmain.actpushworddown.caption
+msgid "Push the last word of the current line down"
+msgstr "Mover la última palabra de la línea actual hacia abajo"
+
+#: tfrmmain.actpushwordtonextentry.caption
+msgid "Push the last word to the next entry"
+msgstr "Mover la última palabra a la siguiente entrada"
+
+#: tfrmmain.actpushwordtopreviousentry.caption
+msgid "Push the first word to the previous entry"
+msgstr "Mover la primera palabra a la entrada anterior"
+
+#: tfrmmain.actpushwordup.caption
+msgid "Push the first word of the current line up"
+msgstr "Mover la primera palabra de la línea actual hacia arriba"
+
 #: tfrmmain.actqualitycheck.caption
 msgid "Quality check..."
 msgstr "Control de calidad..."
@@ -2997,14 +3029,17 @@ msgid "Set delay..."
 msgstr "Establecer retraso..."
 
 #: tfrmmain.actsetguilayout0.caption
+msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Layout 0"
 msgstr "Diseño 0"
 
 #: tfrmmain.actsetguilayout1.caption
+msgctxt "tfrmmain.actsetguilayout1.caption"
 msgid "Layout 1"
 msgstr "Diseño 1"
 
 #: tfrmmain.actsetguilayout2.caption
+msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Layout 2"
 msgstr "Diseño 2"
 
@@ -3294,28 +3329,28 @@ msgid "Vertical align to top"
 msgstr "Alineación vertical arriba"
 
 #: tfrmmain.actvar169.caption
-msgid "AR 16:9"
-msgstr "RDP 16:9"
+msgid "16:9"
+msgstr "16:9"
 
 #: tfrmmain.actvar1851.caption
-msgid "AR 1.85:1"
-msgstr "RDP 1.85:1"
+msgid "1.85:1"
+msgstr "1.85:1"
 
 #: tfrmmain.actvar2351.caption
-msgid "AR 2.35:1"
-msgstr "RDP 2.35:1"
+msgid "2.35:1"
+msgstr "2.35:1"
 
 #: tfrmmain.actvar43.caption
-msgid "AR 4:3"
-msgstr "RDP 4:3"
+msgid "4:3"
+msgstr "4:3"
 
 #: tfrmmain.actvarcycle.caption
 msgid "Cycle Aspect Ratio"
 msgstr "Alternar relación de aspecto"
 
 #: tfrmmain.actvardefault.caption
-msgid "AR Default"
-msgstr "RDP Predeterminado"
+msgid "Default"
+msgstr "Predeterminado"
 
 #: tfrmmain.actvideofilterblur.caption
 msgid "Blur"
@@ -3493,6 +3528,14 @@ msgstr "Insertar caracteres de control Unicode"
 msgctxt "tfrmmain.mnuselect.caption"
 msgid "Select"
 msgstr "Selección"
+
+#: tfrmmain.mnutextlines.caption
+msgid "Lines"
+msgstr "Líneas"
+
+#: tfrmmain.mnutextwords.caption
+msgid "Words"
+msgstr "Palabras"
 
 #: tfrmmain.mnutools.caption
 msgctxt "tfrmmain.mnutools.caption"
@@ -4549,8 +4592,8 @@ msgid "Getting started wizard"
 msgstr "Asistente de configuración"
 
 #: tfrmwizard.lblchooselayout.caption
-msgid "Choose layout:"
-msgstr "Elija el diseño:"
+msgid "Choose workspace layout and timecode mode:"
+msgstr "Elija el diseño del espacio de trabajo y el modo de código de tiempo:"
 
 #: tfrmwizard.lblexperience.caption
 msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
@@ -4610,3 +4653,17 @@ msgctxt "tfrmwizard.lblytdlp_hint.caption"
 msgid "Optional, used for dowloading from YouTube."
 msgstr "Opcional, utilizado para descargar desde YouTube."
 
+#: tfrmwizard.rdolayout0.caption
+msgctxt "tfrmwizard.rdolayout0.caption"
+msgid "Layout 0"
+msgstr "Diseño 0"
+
+#: tfrmwizard.rdolayout1.caption
+msgctxt "tfrmwizard.rdolayout1.caption"
+msgid "Layout 1"
+msgstr "Diseño 1"
+
+#: tfrmwizard.rdolayout2.caption
+msgctxt "tfrmwizard.rdolayout2.caption"
+msgid "Layout 2"
+msgstr "Diseño 2"

@@ -2508,6 +2508,14 @@ msgstr ""
 msgid "Fix subtitles..."
 msgstr ""
 
+#: tfrmmain.actfocusfinaltime.caption
+msgid "Edit final time"
+msgstr ""
+
+#: tfrmmain.actfocusinitialtime.caption
+msgid "Edit initial time"
+msgstr ""
+
 #: tfrmmain.actfontbold.caption
 msgctxt "tfrmmain.actfontbold.caption"
 msgid "Bold"
@@ -2607,12 +2615,20 @@ msgctxt "tfrmmain.actinvertselection.caption"
 msgid "Invert selection"
 msgstr ""
 
+#: tfrmmain.actjumptonextempty.caption
+msgid "Jump to next without text"
+msgstr ""
+
 #: tfrmmain.actjumptonextmarked.caption
 msgid "Jump to next marked"
 msgstr ""
 
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
+msgstr ""
+
+#: tfrmmain.actjumptopreviousempty.caption
+msgid "Jump to previous without text"
 msgstr ""
 
 #: tfrmmain.actjumptopreviousmarked.caption
@@ -2856,6 +2872,22 @@ msgstr ""
 msgid "Push the last line to the next entry"
 msgstr ""
 
+#: tfrmmain.actpushworddown.caption
+msgid "Push the last word of the current line down"
+msgstr ""
+
+#: tfrmmain.actpushwordtonextentry.caption
+msgid "Push the last word to the next entry"
+msgstr ""
+
+#: tfrmmain.actpushwordtopreviousentry.caption
+msgid "Push the first word to the previous entry"
+msgstr ""
+
+#: tfrmmain.actpushwordup.caption
+msgid "Push the first word of the current line up"
+msgstr ""
+
 #: tfrmmain.actqualitycheck.caption
 msgid "Quality check..."
 msgstr ""
@@ -2987,14 +3019,17 @@ msgid "Set delay..."
 msgstr ""
 
 #: tfrmmain.actsetguilayout0.caption
+msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Layout 0"
 msgstr ""
 
 #: tfrmmain.actsetguilayout1.caption
+msgctxt "tfrmmain.actsetguilayout1.caption"
 msgid "Layout 1"
 msgstr ""
 
 #: tfrmmain.actsetguilayout2.caption
+msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Layout 2"
 msgstr ""
 
@@ -3284,19 +3319,19 @@ msgid "Vertical align to top"
 msgstr ""
 
 #: tfrmmain.actvar169.caption
-msgid "AR 16:9"
+msgid "16:9"
 msgstr ""
 
 #: tfrmmain.actvar1851.caption
-msgid "AR 1.85:1"
+msgid "1.85:1"
 msgstr ""
 
 #: tfrmmain.actvar2351.caption
-msgid "AR 2.35:1"
+msgid "2.35:1"
 msgstr ""
 
 #: tfrmmain.actvar43.caption
-msgid "AR 4:3"
+msgid "4:3"
 msgstr ""
 
 #: tfrmmain.actvarcycle.caption
@@ -3304,7 +3339,7 @@ msgid "Cycle Aspect Ratio"
 msgstr ""
 
 #: tfrmmain.actvardefault.caption
-msgid "AR Default"
+msgid "Default"
 msgstr ""
 
 #: tfrmmain.actvideofilterblur.caption
@@ -3482,6 +3517,14 @@ msgstr ""
 #: tfrmmain.mnuselect.caption
 msgctxt "tfrmmain.mnuselect.caption"
 msgid "Select"
+msgstr ""
+
+#: tfrmmain.mnutextlines.caption
+msgid "Lines"
+msgstr ""
+
+#: tfrmmain.mnutextwords.caption
+msgid "Words"
 msgstr ""
 
 #: tfrmmain.mnutools.caption
@@ -4539,7 +4582,7 @@ msgid "Getting started wizard"
 msgstr ""
 
 #: tfrmwizard.lblchooselayout.caption
-msgid "Choose layout:"
+msgid "Choose workspace layout and timecode mode:"
 msgstr ""
 
 #: tfrmwizard.lblexperience.caption
@@ -4598,5 +4641,20 @@ msgstr ""
 #: tfrmwizard.lblytdlp_hint.caption
 msgctxt "tfrmwizard.lblytdlp_hint.caption"
 msgid "Optional, used for dowloading from YouTube."
+msgstr ""
+
+#: tfrmwizard.rdolayout0.caption
+msgctxt "tfrmwizard.rdolayout0.caption"
+msgid "Layout 0"
+msgstr ""
+
+#: tfrmwizard.rdolayout1.caption
+msgctxt "tfrmwizard.rdolayout1.caption"
+msgid "Layout 1"
+msgstr ""
+
+#: tfrmwizard.rdolayout2.caption
+msgctxt "tfrmwizard.rdolayout2.caption"
+msgid "Layout 2"
 msgstr ""
 
