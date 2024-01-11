@@ -60,6 +60,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
+    procedure RefreshModelsList;
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure OpenFolderClick(Sender: TObject);
   public
@@ -147,26 +148,15 @@ procedure TfrmAudioToText.btnModelClick(Sender: TObject);
 begin
   // model download
   ShowAudioToTextModels;
-  FillComboWithModels(cboModel);
+  RefreshModelsList;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmAudioToText.cboEngineSelect(Sender: TObject);
 begin
-  with Tools do
-  begin
-    WhisperEngine := TWhisperEngine(cboEngine.ItemIndex);
-
-    {rbnAddSubtitlesWhileTranscribing.Enabled := WhisperEngine = TWhisperEngine.WhisperCPP;
-    if not rbnAddSubtitlesWhileTranscribing.Enabled then
-      rbnLoadSubtitlesAfterTranscript.Checked := True;}
-
-    if WhisperEngine = TWhisperEngine.WhisperCPP then
-      FillComboWithModels(cboModel)
-    else
-      FillComboWithFasterModels(cboModel);
-  end;
+  Tools.WhisperEngine := TWhisperEngine(cboEngine.ItemIndex);
+  RefreshModelsList;
 end;
 
 // -----------------------------------------------------------------------------
@@ -461,6 +451,16 @@ begin
       Close;
     end;
   end
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAudioToText.RefreshModelsList;
+begin
+  if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
+    FillComboWithModels(cboModel)
+  else
+    FillComboWithFasterModels(cboModel);
 end;
 
 // -----------------------------------------------------------------------------

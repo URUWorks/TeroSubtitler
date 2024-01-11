@@ -12,6 +12,7 @@ object frmAudioToText: TfrmAudioToText
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
+  LCLVersion = '3.0.0.3'
   object lblLanguage: TLabel
     AnchorSideTop.Control = cboLanguage
     AnchorSideTop.Side = asrCenter
@@ -61,8 +62,8 @@ object frmAudioToText: TfrmAudioToText
     Top = 104
     Width = 48
     Caption = '...'
-    OnClick = btnModelClick
     TabOrder = 5
+    OnClick = btnModelClick
   end
   object btnGenerate: TButton
     AnchorSideTop.Control = btnClose
@@ -75,8 +76,8 @@ object frmAudioToText: TfrmAudioToText
     BorderSpacing.Right = 5
     Caption = 'Generate'
     Default = True
-    OnClick = btnGenerateClick
     TabOrder = 9
+    OnClick = btnGenerateClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -92,8 +93,8 @@ object frmAudioToText: TfrmAudioToText
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 10
+    OnClick = btnCloseClick
   end
   object lblTrack: TLabel
     AnchorSideTop.Control = cboTrack
@@ -211,9 +212,9 @@ object frmAudioToText: TfrmAudioToText
     Top = 72
     Width = 231
     ItemHeight = 15
-    OnSelect = cboEngineSelect
     Style = csDropDownList
     TabOrder = 2
+    OnSelect = cboEngineSelect
   end
   object lblEngine: TLabel
     AnchorSideTop.Control = cboEngine
@@ -233,7 +234,7 @@ object frmAudioToText: TfrmAudioToText
     Top = 72
     Width = 48
     Caption = '...'
-    OnClick = btnEngineClick
     TabOrder = 3
+    OnClick = btnEngineClick
   end
 end
