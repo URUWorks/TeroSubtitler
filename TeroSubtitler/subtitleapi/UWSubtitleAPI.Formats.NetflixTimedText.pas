@@ -104,6 +104,8 @@ function TUWNetflixTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; con
       Result := TicksToMSecs(StrToInt64(Copy(S, 0, Length(S)-1)))
     else if AnsiEndsStr('s', S) then // seconds
       Result := StrSecsToMSecs(Copy(S, 0, Length(S)-1).Replace(',', '.'))
+    else if TimeInFormat(S, 'hh:mm:ss:ff') or TimeInFormat(S, 'hh:mm:ss;ff') then
+      Result := SMPTEStringToMS(S, aFPS)
     else
       Result := StringToTime(S, False, aFPS);
   end;
@@ -129,8 +131,8 @@ begin
         begin
           Subtitles.FrameRate := StrToFloatDef(XMLGetAttrValue(Node, 'ttp:frameRate'), FPS);
 
-          if XMLHasAttribute(Node, 'ttp:frameRateMultiplier') and XMLGetAttrValue(Node, 'ttp:frameRateMultiplier').StartsWith('999') then
-            Subtitles.FrameRate := Subtitles.FrameRate - (Subtitles.FrameRate * 0.001);
+          if XMLHasAttribute(Node, 'ttp:frameRateMultiplier') then
+            Subtitles.FrameRate := XMLGetCorrectFPS(Subtitles.FrameRate, XMLGetAttrValue(Node, 'ttp:frameRateMultiplier'));
         end;
 
         if XMLHasAttribute(Node, 'ttp:timeBase') then
