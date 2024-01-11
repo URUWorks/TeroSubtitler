@@ -340,8 +340,6 @@ end;
 
 // -----------------------------------------------------------------------------
 
-
-
 function GetHours(const Time: Cardinal): Integer;
 var
   HH, MM, SS, MS: Word;
