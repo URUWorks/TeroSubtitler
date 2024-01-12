@@ -40,6 +40,7 @@ function ExtendLength(const NextInitialTime: Cardinal; const AGapMs: Cardinal): 
 function AutomaticDurations(const Text: String; const Duration, msPerChar, msPerWord, msPerLine: Cardinal; const Mode: TAutomaticDurationMode): Cardinal; // calculate the duration of subtitles using a simple formula
 procedure ShiftTime(const InitialTime, FinalTime, Value: Integer; out NewInitialTime, NewFinalTime: Integer); // Time to shift subtitle forwards/backwards
 procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Single; out NewInitialTime, NewFinalTime: Integer);
+function RoundTimeValue(const ATimeValue, AFactor: Integer; const ARoundUp: Boolean = False): Cardinal;
 
 { Texts }
 
@@ -185,6 +186,20 @@ procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Si
 begin
   NewInitialTime := RoundTimeWithFrames(InitialTime, AFPS);
   NewFinalTime   := RoundTimeWithFrames(FinalTime, AFPS);
+end;
+
+// -----------------------------------------------------------------------------
+
+function RoundTimeValue(const ATimeValue, AFactor: Integer; const ARoundUp: Boolean = False): Cardinal;
+var
+  ModValue : Integer;
+begin
+  ModValue := ATimeValue mod AFactor;
+
+  if (ModValue > 0) and (ARoundUp or (ModValue >= AFactor div 2)) then
+    ModValue := ModValue - AFactor;
+
+  Result := ATimeValue - ModValue;
 end;
 
 // -----------------------------------------------------------------------------
