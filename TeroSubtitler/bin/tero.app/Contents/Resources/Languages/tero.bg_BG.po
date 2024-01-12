@@ -1355,6 +1355,46 @@ msgstr "Папка"
 msgid "Target FPS"
 msgstr ""
 
+#: tfrmcharactermap.btnclose.caption
+#, fuzzy
+msgctxt "tfrmcharactermap.btnclose.caption"
+msgid "Close"
+msgstr "Затваряне"
+
+#: tfrmcharactermap.btncopy.caption
+#, fuzzy
+msgctxt "tfrmcharactermap.btncopy.caption"
+msgid "Copy"
+msgstr "Запомняне"
+
+#: tfrmcharactermap.btninsert.caption
+msgid "Insert"
+msgstr ""
+
+#: tfrmcharactermap.btnminus.caption
+#, fuzzy
+msgctxt "tfrmcharactermap.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmcharactermap.btnplus.caption
+#, fuzzy
+msgctxt "tfrmcharactermap.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmcharactermap.caption
+msgid "Character Map"
+msgstr ""
+
+#: tfrmcharactermap.lblfavorites.caption
+msgid "Favorites"
+msgstr ""
+
+#: tfrmcharactermap.lblunicoderange.caption
+msgid "Range"
+msgstr ""
+
 #: tfrmcompare.btnclose.caption
 msgctxt "tfrmcompare.btnclose.caption"
 msgid "Close"
@@ -2393,6 +2433,10 @@ msgctxt "tfrmmain.actcenterwaveform.caption"
 msgid "Center waveform"
 msgstr ""
 
+#: tfrmmain.actcharactermap.caption
+msgid "Character Map..."
+msgstr ""
+
 #: tfrmmain.actcheckforupdates.caption
 msgid "Check for updates..."
 msgstr "Проверка за обновявания..."
@@ -2957,7 +3001,9 @@ msgid "Reverse text"
 msgstr ""
 
 #: tfrmmain.actroundtimes.caption
-msgid "Round times"
+#, fuzzy
+#| msgid "Round times"
+msgid "Round times..."
 msgstr "Закръгляване на времената"
 
 #: tfrmmain.actsaveproject.caption
@@ -3486,11 +3532,9 @@ msgctxt "tfrmmain.mnueditformat.caption"
 msgid "Format"
 msgstr "Оформление"
 
-#: tfrmmain.mnueditinsertsymbol.caption
-#, fuzzy
-#| msgid "Insert unicode symbol"
-msgid "Insert Unicode symbol"
-msgstr "Вмъкване на знак от уникод"
+#: tfrmmain.mnueditinsertchar.caption
+msgid "Insert Unicode character"
+msgstr ""
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
@@ -3741,6 +3785,52 @@ msgstr "Възстановяване"
 #: tfrmrestorebackup.caption
 msgid "Restore backup"
 msgstr ""
+
+#: tfrmroundtime.btnapply.caption
+#, fuzzy
+msgctxt "tfrmroundtime.btnapply.caption"
+msgid "Apply"
+msgstr "Прилагане"
+
+#: tfrmroundtime.btnclose.caption
+#, fuzzy
+msgctxt "tfrmroundtime.btnclose.caption"
+msgid "Close"
+msgstr "Затваряне"
+
+#: tfrmroundtime.caption
+msgid "Round time"
+msgstr ""
+
+#: tfrmroundtime.lblmilliseconds.caption
+#, fuzzy
+msgctxt "tfrmroundtime.lblmilliseconds.caption"
+msgid "ms"
+msgstr "мс"
+
+#: tfrmroundtime.lblscope.caption
+#, fuzzy
+msgctxt "tfrmroundtime.lblscope.caption"
+msgid "Scope:"
+msgstr "Обхват:"
+
+#: tfrmroundtime.rbnallthesubtitles.caption
+#, fuzzy
+msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
+msgid "All the subtitles"
+msgstr "Всички надписи"
+
+#: tfrmroundtime.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+msgctxt "tfrmroundtime.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected subtitle"
+msgstr "От избрания надпис"
+
+#: tfrmroundtime.rbnonlyselectedsubtitles.caption
+#, fuzzy
+msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
+msgid "Only selected subtitles"
+msgstr "Само избраните надписи"
 
 #: tfrmsettings.btnclose.caption
 msgctxt "tfrmsettings.btnclose.caption"

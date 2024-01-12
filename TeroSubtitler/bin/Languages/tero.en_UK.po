@@ -1354,6 +1354,46 @@ msgstr "Folder"
 msgid "Target FPS"
 msgstr "Target FPS"
 
+#: tfrmcharactermap.btnclose.caption
+#, fuzzy
+msgctxt "tfrmcharactermap.btnclose.caption"
+msgid "Close"
+msgstr "Close"
+
+#: tfrmcharactermap.btncopy.caption
+#, fuzzy
+msgctxt "tfrmcharactermap.btncopy.caption"
+msgid "Copy"
+msgstr "Copy"
+
+#: tfrmcharactermap.btninsert.caption
+msgid "Insert"
+msgstr ""
+
+#: tfrmcharactermap.btnminus.caption
+#, fuzzy
+msgctxt "tfrmcharactermap.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmcharactermap.btnplus.caption
+#, fuzzy
+msgctxt "tfrmcharactermap.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmcharactermap.caption
+msgid "Character Map"
+msgstr ""
+
+#: tfrmcharactermap.lblfavorites.caption
+msgid "Favorites"
+msgstr ""
+
+#: tfrmcharactermap.lblunicoderange.caption
+msgid "Range"
+msgstr ""
+
 #: tfrmcompare.btnclose.caption
 msgctxt "tfrmcompare.btnclose.caption"
 msgid "Close"
@@ -2380,6 +2420,10 @@ msgctxt "tfrmmain.actcenterwaveform.caption"
 msgid "Center waveform"
 msgstr "Centre waveform"
 
+#: tfrmmain.actcharactermap.caption
+msgid "Character Map..."
+msgstr ""
+
 #: tfrmmain.actcheckforupdates.caption
 msgid "Check for updates..."
 msgstr "Check for updates..."
@@ -2940,7 +2984,9 @@ msgid "Reverse text"
 msgstr "Reverse text"
 
 #: tfrmmain.actroundtimes.caption
-msgid "Round times"
+#, fuzzy
+#| msgid "Round times"
+msgid "Round times..."
 msgstr "Round times"
 
 #: tfrmmain.actsaveproject.caption
@@ -3476,9 +3522,9 @@ msgctxt "tfrmmain.mnueditformat.caption"
 msgid "Format"
 msgstr "Format"
 
-#: tfrmmain.mnueditinsertsymbol.caption
-msgid "Insert Unicode symbol"
-msgstr "Insert Unicode symbol"
+#: tfrmmain.mnueditinsertchar.caption
+msgid "Insert Unicode character"
+msgstr ""
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
@@ -3727,6 +3773,52 @@ msgstr "Restore"
 #: tfrmrestorebackup.caption
 msgid "Restore backup"
 msgstr "Restore backup"
+
+#: tfrmroundtime.btnapply.caption
+#, fuzzy
+msgctxt "tfrmroundtime.btnapply.caption"
+msgid "Apply"
+msgstr "Apply"
+
+#: tfrmroundtime.btnclose.caption
+#, fuzzy
+msgctxt "tfrmroundtime.btnclose.caption"
+msgid "Close"
+msgstr "Close"
+
+#: tfrmroundtime.caption
+msgid "Round time"
+msgstr ""
+
+#: tfrmroundtime.lblmilliseconds.caption
+#, fuzzy
+msgctxt "tfrmroundtime.lblmilliseconds.caption"
+msgid "ms"
+msgstr "ms"
+
+#: tfrmroundtime.lblscope.caption
+#, fuzzy
+msgctxt "tfrmroundtime.lblscope.caption"
+msgid "Scope:"
+msgstr "Scope:"
+
+#: tfrmroundtime.rbnallthesubtitles.caption
+#, fuzzy
+msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
+msgid "All the subtitles"
+msgstr "All the subtitles"
+
+#: tfrmroundtime.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+msgctxt "tfrmroundtime.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected subtitle"
+msgstr "From the selected subtitle"
+
+#: tfrmroundtime.rbnonlyselectedsubtitles.caption
+#, fuzzy
+msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
+msgid "Only selected subtitles"
+msgstr "Only selected subtitles"
 
 #: tfrmsettings.btnclose.caption
 msgctxt "tfrmsettings.btnclose.caption"
