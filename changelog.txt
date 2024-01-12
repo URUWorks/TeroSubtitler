@@ -10,6 +10,8 @@
 - fixed: [macOS] Components with radio buttons display empty text in some functions
 - updated: Brazilian Portuguese language (thx Gzushgshsh)
 - updated: Whisper.CPP/Fast-Whisper
+- improved: Round Times [Timings]
+- added: Unicode Character Map
 - added: GUI layouts
 - added: Video Aspect Ratio
 - added: Video/Audio filters
