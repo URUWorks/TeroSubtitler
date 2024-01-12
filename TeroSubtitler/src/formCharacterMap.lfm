@@ -1,0 +1,217 @@
+object frmCharacterMap: TfrmCharacterMap
+  Left = 240
+  Height = 348
+  Top = 110
+  Width = 722
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Character Map'
+  ClientHeight = 348
+  ClientWidth = 722
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '3.0.0.3'
+  object lyoUnicode: TUWLayout
+    Left = 8
+    Height = 291
+    Top = 8
+    Width = 706
+    ClientHeight = 291
+    ClientWidth = 706
+    TabOrder = 0
+    object GridUnicode: TStringGrid
+      AnchorSideRight.Control = pnlUnicodeChar
+      AnchorSideBottom.Control = cboFavorites
+      AnchorSideBottom.Side = asrBottom
+      Left = 0
+      Height = 289
+      Top = 0
+      Width = 512
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      AutoFillColumns = True
+      BorderSpacing.Right = 8
+      Color = clDefault
+      ColCount = 16
+      DefaultColWidth = 16
+      DefaultDrawing = False
+      FixedCols = 0
+      FixedRows = 0
+      Flat = True
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goSmoothScroll]
+      RowCount = 15
+      TabOrder = 0
+      OnKeyPress = GridUnicodeKeyPress
+      OnPrepareCanvas = GridUnicodePrepareCanvas
+      OnSelectCell = GridUnicodeSelectCell
+      ColWidths = (
+        31
+        31
+        31
+        31
+        31
+        31
+        31
+        31
+        31
+        31
+        31
+        31
+        31
+        31
+        30
+        30
+      )
+    end
+    object pnlUnicodeChar: TPanel
+      Left = 520
+      Height = 152
+      Top = 0
+      Width = 186
+      Font.Height = -64
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+    end
+    object lblUnicodeCharInfo: TLabel
+      AnchorSideLeft.Control = pnlUnicodeChar
+      AnchorSideTop.Control = pnlUnicodeChar
+      AnchorSideTop.Side = asrBottom
+      Left = 520
+      Height = 1
+      Top = 157
+      Width = 1
+      BorderSpacing.Top = 5
+      ParentColor = False
+    end
+    object lblUnicodeRange: TLabel
+      AnchorSideLeft.Control = lblUnicodeCharInfo
+      AnchorSideTop.Side = asrBottom
+      Left = 520
+      Height = 15
+      Top = 188
+      Width = 33
+      Caption = 'Range'
+      ParentColor = False
+    end
+    object cboUnicodeRange: TComboBox
+      AnchorSideLeft.Control = lblUnicodeRange
+      AnchorSideTop.Control = lblUnicodeRange
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = pnlUnicodeChar
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 520
+      Height = 23
+      Top = 208
+      Width = 186
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 5
+      DropDownCount = 25
+      ItemHeight = 15
+      Style = csDropDownList
+      TabOrder = 2
+      OnSelect = cboUnicodeRangeSelect
+    end
+    object lblFavorites: TLabel
+      AnchorSideLeft.Control = cboUnicodeRange
+      AnchorSideTop.Control = cboUnicodeRange
+      AnchorSideTop.Side = asrBottom
+      Left = 520
+      Height = 15
+      Top = 246
+      Width = 47
+      BorderSpacing.Top = 15
+      Caption = 'Favorites'
+    end
+    object cboFavorites: TComboBox
+      AnchorSideLeft.Control = lblFavorites
+      AnchorSideTop.Control = lblFavorites
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = btnPlus
+      AnchorSideBottom.Side = asrBottom
+      Left = 520
+      Height = 23
+      Top = 266
+      Width = 100
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 5
+      BorderSpacing.Right = 5
+      DropDownCount = 25
+      ItemHeight = 15
+      Style = csDropDownList
+      TabOrder = 3
+      OnSelect = cboUnicodeRangeSelect
+    end
+    object btnPlus: TButton
+      AnchorSideTop.Control = btnMinus
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = btnMinus
+      Left = 625
+      Height = 23
+      Top = 266
+      Width = 38
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 5
+      Caption = '+'
+      TabOrder = 4
+      OnClick = btnPlusClick
+    end
+    object btnMinus: TButton
+      AnchorSideTop.Control = lblFavorites
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = cboUnicodeRange
+      AnchorSideRight.Side = asrBottom
+      Left = 668
+      Height = 23
+      Top = 266
+      Width = 38
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 5
+      Caption = '-'
+      TabOrder = 5
+      OnClick = btnMinusClick
+    end
+  end
+  object btnClose: TButton
+    AnchorSideTop.Control = lyoUnicode
+    AnchorSideTop.Side = asrBottom
+    Left = 623
+    Height = 26
+    Top = 314
+    Width = 91
+    BorderSpacing.Top = 15
+    Cancel = True
+    Caption = 'Close'
+    TabOrder = 3
+    OnClick = btnCloseClick
+  end
+  object btnInsert: TButton
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnClose
+    Left = 527
+    Height = 26
+    Top = 314
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
+    Caption = 'Insert'
+    TabOrder = 2
+    OnClick = btnInsertClick
+  end
+  object btnCopy: TButton
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnInsert
+    Left = 431
+    Height = 26
+    Top = 314
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
+    Caption = 'Copy'
+    Default = True
+    TabOrder = 1
+    OnClick = btnCopyClick
+  end
+end

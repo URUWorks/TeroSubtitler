@@ -82,6 +82,7 @@ type
     actAudioFilterSpeechNormalizer: TAction;
     actFocusInitialTime: TAction;
     actFocusFinalTime: TAction;
+    actCharacterMap: TAction;
     actJumpToNextEmpty: TAction;
     actJumpToPreviousEmpty: TAction;
     actPushWordUp: TAction;
@@ -322,6 +323,8 @@ type
     MenuItem228: TMenuItem;
     MenuItem229: TMenuItem;
     MenuItem230: TMenuItem;
+    Separator57: TMenuItem;
+    MenuItem233: TMenuItem;
     mnuTextWords: TMenuItem;
     mnuTextLines: TMenuItem;
     MenuItem215: TMenuItem;
@@ -425,7 +428,7 @@ type
     mnuVideoVolume: TMenuItem;
     mnuToolsTerminology: TMenuItem;
     mnuMemoInsertSymbol: TMenuItem;
-    mnuEditInsertSymbol: TMenuItem;
+    mnuEditInsertChar: TMenuItem;
     MenuItem8: TMenuItem;
     mnuAbout: TMenuItem;
     MenuItem110: TMenuItem;
@@ -656,7 +659,6 @@ type
     TimerAutoBackup: TTimer;
     TimerSubtitle: TTimer;
     TimerWaveform: TTimer;
-    ToolBarActions: TToolBar;
     ToolBarEncoding: TToolBar;
     ToolBarFPS: TToolBar;
     ToolBarFormat: TToolBar;
@@ -777,6 +779,7 @@ type
     procedure DoHunspellItemClick(Sender: TObject);
     procedure DoDictionaryItemClick(Sender: TObject);
     procedure DoUnicodeSymbolClick(Sender: TObject);
+    procedure DoInsertUnicodeChar(const C: TUTF8Char);
     procedure DoSilentZoneClick(Sender: TObject);
     procedure DoMemoPopup(Sender: TObject);
     procedure DoVSTPopup(Sender: TObject);
@@ -1093,6 +1096,7 @@ type
     procedure actVARCycleExecute(Sender: TObject);
     procedure actFocusInitialTimeExecute(Sender: TObject);
     procedure actFocusFinalTimeExecute(Sender: TObject);
+    procedure actCharacterMapExecute(Sender: TObject);
   private
 
   public
@@ -1160,10 +1164,10 @@ begin
   FillMenuWithPlayRate(popPlayRate);
   FillMenuWithLoopCount(popLoopCount);
   FillWithDictionaries(mnuDictionary, NIL);
-  FillMenuWithUnicodeSymbols(mnuEditInsertSymbol);
+  FillMenuWithUnicodeChars(mnuEditInsertChar);
   mnuVSTFormat.Assign(mnuEditFormat);
   mnuMemoFormat.Assign(mnuEditFormat);
-  mnuMemoInsertSymbol.Assign(mnuEditInsertSymbol);
+  mnuMemoInsertSymbol.Assign(mnuEditInsertChar);
   // Media labels
   lblMediaTime.Caption := '';
   lblMediaLength.Caption := '';
@@ -1279,6 +1283,7 @@ begin
   begin
     // Settings
     SaveSettings;
+    SetLength(AppOptions.UnicodeChars, 0);
     // Transcription
     TranscriptionUnInitializeControls;
     // TMX
@@ -1584,6 +1589,17 @@ begin
   with (Sender as TMenuItem), AppOptions do
   begin
     LastUnicodeChar := Caption;
+    InsertMemoText(LastUnicodeChar);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.DoInsertUnicodeChar(const C: TUTF8Char);
+begin
+  with AppOptions do
+  begin
+    LastUnicodeChar := C;
     InsertMemoText(LastUnicodeChar);
   end;
 end;

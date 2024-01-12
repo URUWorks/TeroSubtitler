@@ -887,7 +887,7 @@ object frmMain: TfrmMain
       end    
       item
         Break = False
-        Control = ToolBarActions
+        Control = edtQuickAction
         FixedBackground = False
         HorizontalOnly = True
         ParentBitmap = False
@@ -1178,33 +1178,20 @@ object frmMain: TfrmMain
         TabStop = False
       end
     end
-    object ToolBarActions: TToolBar
+    object edtQuickAction: TUWEditAction
       AnchorSideLeft.Control = CoolBarMain
       AnchorSideTop.Control = CoolBarMain
       Left = 5
       Height = 22
+      Hint = 'Quick Action Finder'
       Top = 34
-      Width = 181
-      Align = alNone
-      AutoSize = True
+      Width = 150
+      ActionList = ActionList
+      OnClickAction = edtQuickActionClickAction
+      AutoSize = False
       BorderSpacing.Left = 5
       BorderSpacing.Top = 34
-      EdgeBorders = []
-      Images = ImageList_Default
       TabOrder = 4
-      Transparent = True
-      Wrapable = False
-      object edtQuickAction: TUWEditAction
-        Left = 1
-        Height = 22
-        Hint = 'Quick Action Finder'
-        Top = 0
-        Width = 180
-        ActionList = ActionList
-        OnClickAction = edtQuickActionClickAction
-        AutoSize = False
-        TabOrder = 0
-      end
     end
   end
   object MainMenu: TMainMenu
@@ -1348,8 +1335,14 @@ object frmMain: TfrmMain
       object Separator4: TMenuItem
         Caption = '-'
       end
-      object mnuEditInsertSymbol: TMenuItem
-        Caption = 'Insert Unicode symbol'
+      object mnuEditInsertChar: TMenuItem
+        Caption = 'Insert Unicode character'
+        object Separator57: TMenuItem
+          Caption = '-'
+        end
+        object MenuItem233: TMenuItem
+          Action = actCharacterMap
+        end
       end
       object MenuItem203: TMenuItem
         Action = actRemoveUnicodeControlChars
@@ -3589,7 +3582,7 @@ object frmMain: TfrmMain
     object actRoundTimes: TAction
       Tag = 1
       Category = 'Timings'
-      Caption = 'Round times'
+      Caption = 'Round times...'
       OnExecute = actRoundTimesExecute
     end
     object actReadTimingsFromFile: TAction
@@ -3733,17 +3726,6 @@ object frmMain: TfrmMain
       Hint = 'Delete selected entries'
       ImageIndex = 10
       OnExecute = actDeleteEntryExecute
-    end
-    object actSettings: TAction
-      Category = 'Edit'
-      Caption = 'Settings...'
-      ImageIndex = 19
-      OnExecute = actSettingsExecute
-    end
-    object actFormatProperties: TAction
-      Category = 'Edit'
-      Caption = 'Format properties...'
-      OnExecute = actFormatPropertiesExecute
     end
     object actRemoveLineFromEntry: TAction
       Tag = 1
@@ -4065,6 +4047,23 @@ object frmMain: TfrmMain
       Hint = 'Combines all the selected entries into one'
       ImageIndex = 63
       OnExecute = actCombineEntriesExecute
+    end
+    object actCharacterMap: TAction
+      Tag = 1
+      Category = 'Edit'
+      Caption = 'Character Map...'
+      OnExecute = actCharacterMapExecute
+    end
+    object actSettings: TAction
+      Category = 'Edit'
+      Caption = 'Settings...'
+      ImageIndex = 19
+      OnExecute = actSettingsExecute
+    end
+    object actFormatProperties: TAction
+      Category = 'Edit'
+      Caption = 'Format properties...'
+      OnExecute = actFormatPropertiesExecute
     end
   end
   object popDropInsert: TPopupMenu

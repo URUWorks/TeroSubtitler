@@ -47,7 +47,7 @@ procedure FillMenuWithPlayRate(const AParent: TComponent);
 procedure FillMenuWithLoopCount(const AParent: TComponent);
 procedure FillMenuWithAudioStreams(const AParent: TComponent);
 procedure FillComboWithAudioStreams(const ACombo: TComboBox);
-procedure FillMenuWithUnicodeSymbols(const AParent: TComponent);
+procedure FillMenuWithUnicodeChars(const AParent: TComponent);
 procedure FillMenuWithSilentZone(const AParent: TComponent);
 
 function IsWorkAreaEnabled: Boolean;
@@ -583,24 +583,31 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure FillMenuWithUnicodeSymbols(const AParent: TComponent);
+procedure FillMenuWithUnicodeChars(const AParent: TComponent);
 var
   i: Integer;
   Item: TMenuItem;
 begin
   if AParent = NIL then Exit;
-  for i := 0 to Length(TUnicodeSymbols)-1 do
-  begin
-    Item := TMenuItem.Create(AParent);
-    Item.Caption := TUnicodeSymbols[i];
-    Item.OnClick := @frmMain.DoUnicodeSymbolClick;
-    if AParent is TPopupMenu then
-      with AParent as TPopupMenu do
-        Items.Add(Item)
-    else if AParent is TMenuItem then
-      with AParent as TMenuItem do
-        Add(Item);
-  end;
+
+  for i := TMenuItem(AParent).Count-1 downto 0 do
+    if TMenuItem(AParent).Items[i].Tag = 1 then
+      TMenuItem(AParent).Delete(i);
+
+  with AppOptions do
+    for i := Length(UnicodeChars)-1 downto 0 do
+    begin
+      Item := TMenuItem.Create(AParent);
+      Item.Caption := UnicodeChars[i];
+      Item.OnClick := @frmMain.DoUnicodeSymbolClick;
+      Item.Tag := 1;
+      if AParent is TPopupMenu then
+        with AParent as TPopupMenu do
+          Items.Insert(0, Item)
+      else if AParent is TMenuItem then
+        with AParent as TMenuItem do
+          Insert(0, Item);
+    end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -703,7 +710,7 @@ begin
     end;
 
     tlbValidate.Visible := TMX.Ready;
-    mnuEditInsertSymbol.Enabled := AValue;
+    mnuEditInsertChar.Enabled := AValue;
 
     // Backup Timer
     EnableTimerAutoBackup(AValue);

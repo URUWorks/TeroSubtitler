@@ -35,7 +35,9 @@ procedure ShowAutomaticDurations;
 procedure ShowTimeExpander;
 procedure ShowSetDelay;
 procedure ShowShiftTimes;
+procedure ShowRoundTime;
 procedure ShowConvertCase;
+procedure ShowCharacterMap;
 procedure ShowAdjustSubtitle;
 procedure ShowMultipleReplace;
 procedure ShowModifySelection;
@@ -84,8 +86,8 @@ uses
   formTBX, formTBXSettings, formTBXEdit, formWizard, formShiftTimes,
   formAudioToText, formAudioToTextModel, procTypes, procConfig, procWorkspace,
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
-  formActors, formExportSUP, formGenerateVideo, procMPV, LCLTranslator,
-  procLocalize;
+  formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
+  formRoundTime, LCLTranslator, procLocalize;
 
 // -----------------------------------------------------------------------------
 
@@ -236,6 +238,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure ShowRoundTime;
+begin
+  if frmRoundTime = NIL then
+  begin
+    frmRoundTime := TfrmRoundTime.Create(Application);
+    ShowForm(frmRoundTime);
+  end
+  else
+    frmRoundTime.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure ShowConvertCase;
 begin
   if frmConvertCase = NIL then
@@ -245,6 +260,20 @@ begin
   end
   else
     frmConvertCase.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowCharacterMap;
+begin
+  if frmCharacterMap = NIL then
+  begin
+    frmCharacterMap := TfrmCharacterMap.Create(Application);
+    frmCharacterMap.OnInsertCharacter := @frmMain.DoInsertUnicodeChar;
+    ShowForm(frmCharacterMap);
+  end
+  else
+    frmCharacterMap.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

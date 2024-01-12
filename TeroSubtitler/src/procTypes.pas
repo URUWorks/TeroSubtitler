@@ -22,7 +22,7 @@ unit procTypes;
 interface
 
 uses
-  Classes, SysUtils, Graphics, UWSubtitleAPI, UWSubtitleAPI.Formats,
+  Classes, SysUtils, Graphics, LCLType, UWSubtitleAPI, UWSubtitleAPI.Formats,
   BGRABitmap, procConventions, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procMRU,
   ATSynEdit;
 
@@ -79,7 +79,7 @@ const
 
   TBluRayExt = '.sup';
 
-  TUnicodeSymbols : array[0..8] of String =
+  TUnicodeChars : array[0..8] of TUTF8Char =
   (
     '♪', '♫', '©', '…', '‘', '’', '“', '”', '⹀' //, '♥'
   );
@@ -330,7 +330,7 @@ type
   { AppOptions }
 
   TAppOptions = record
-    CommonErrors            : TSubtitleErrorTypeSet;
+    CommonErrors           : TSubtitleErrorTypeSet;
     Conventions            : TProfileItem;
     ShiftTimeMS            : Cardinal;
     DefChangePlayRate      : Byte;
@@ -350,11 +350,12 @@ type
     AskForInputEncoding    : Boolean;
     CheckErrorsBeforeSave  : Boolean;
     TextToFind             : String;
-    LastUnicodeChar        : String;
+    LastUnicodeChar        : TUTF8Char;
     WebSearchURL           : String;
     GUILanguage            : String;
     HunspellLanguage       : String;
     ShortCutPreset         : String;
+    UnicodeChars           : array of TUTF8Char;
   end;
 
 var

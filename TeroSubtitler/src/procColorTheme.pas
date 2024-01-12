@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, Graphics, Forms, ComCtrls, Controls, ExtCtrls,
   Menus, Buttons, BGRABitmap, BGRABitmapTypes, UWLayout, UWMemo,
-  UWFlatButton, UWSeekBar, laz.VirtualTrees, WAVDisplayer, ATSynEdit
+  UWFlatButton, UWSeekBar, laz.VirtualTrees, WAVDisplayer, ATSynEdit, Grids
   {$IFDEF DARWIN}, MacOSAll, CocoaAll, CocoaUtils{$ENDIF}
   {$IFDEF WINDOWS}, Windows, Win32Proc, Registry,
     StdCtrls, UWStatusBar, UWCheckBox, UWRadioButton, UWHotKey, UWTimeEdit,
@@ -73,6 +73,8 @@ type
     procedure Apply(const AToolbar: TToolbar; const AColorMode: TColorMode; const AImageList: TImageList = NIL); overload;
     procedure Apply(const ACoolbar: TCoolbar; const AColorMode: TColorMode; const AImageList: TImageList = NIL); overload;
     {$IFDEF WINDOWS}
+    procedure Apply(const AStringGrid: TStringGrid; const AColorMode: TColorMode);
+    procedure Apply(const APanel: TPanel; const AColorMode: TColorMode);
     procedure Apply(const AGroupBox: TGroupBox; const AColorMode: TColorMode; const AImageList: TImageList = NIL; const ARecursive: Boolean = True);
     procedure Apply(const AMemo: TMemo; const AColorMode: TColorMode); overload;
     procedure Apply(const ATimeEdit: TUWTimeEdit; const AColorMode: TColorMode); overload;
@@ -369,6 +371,10 @@ begin
   else if Ctrl is TCoolbar then
     Apply(TCoolbar(Ctrl), AColorMode, AImageList)
   {$IFDEF WINDOWS}
+  else if (Ctrl is TStringGrid) then
+    Apply(TStringGrid(Ctrl), AColorMode)
+  else if (Ctrl is TPanel) then
+    Apply(TPanel(Ctrl), AColorMode)
   else if (Ctrl is TGroupBox) then
     Apply(TGroupBox(Ctrl), AColorMode)
   else if (Ctrl is TMemo) then
@@ -535,6 +541,32 @@ end;
 // -----------------------------------------------------------------------------
 
 {$IFDEF WINDOWS}
+procedure TColorTheme.Apply(const AStringGrid: TStringGrid; const AColorMode: TColorMode);
+begin
+  AStringGrid.Color      := Colors.Window;
+  AStringGrid.Font.Color := Colors.Text;
+
+  if AColorMode = cmLight then
+    AStringGrid.BorderStyle := bsSingle
+  else
+    AStringGrid.BorderStyle := bsNone;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TColorTheme.Apply(const APanel: TPanel; const AColorMode: TColorMode);
+begin
+  APanel.Color      := Colors.Window;
+  APanel.Font.Color := Colors.Text;
+
+  if AColorMode = cmLight then
+    APanel.BevelOuter := bvRaised
+  else
+    APanel.BevelOuter := bvNone;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TColorTheme.Apply(const ATimeEdit: TUWTimeEdit; const AColorMode: TColorMode);
 begin
   ATimeEdit.Color      := Colors.Window;

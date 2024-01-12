@@ -1030,7 +1030,7 @@ end;
 
 procedure TfrmMain.actRoundTimesExecute(Sender: TObject);
 begin
-  VSTDoLoop(VST, @ApplyRoundTimes, dlSelected, True, True);
+  ShowRoundTime; //VSTDoLoop(VST, @ApplyRoundTimes, dlSelected, True, True);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1620,7 +1620,7 @@ end;
 
 procedure TfrmMain.actShowToolbarQuickActionExecute(Sender: TObject);
 begin
-  UpdateCoolBar(ToolBarActions, actShowToolbarQuickAction.Checked);
+  UpdateCoolBar(edtQuickAction, actShowToolbarQuickAction.Checked);
 end;
 
 // -----------------------------------------------------------------------------
@@ -2003,6 +2003,13 @@ end;
 procedure TfrmMain.actFocusFinalTimeExecute(Sender: TObject);
 begin
   SetFocusTimeEdit(TAG_CONTROL_FINALTIME);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actCharacterMapExecute(Sender: TObject);
+begin
+  ShowCharacterMap;
 end;
 
 // -----------------------------------------------------------------------------

@@ -124,12 +124,13 @@ uses
 // -----------------------------------------------------------------------------
 
 procedure DefaultValues;
+var
+  i: Integer;
 begin
   LastTickCount := 0;
 
   DefTimeFormat     := Format('hh:mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator]);
   DefDurationFormat := Format('mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator]);
-
 
   FillByte(Tools, SizeOf(TTools), 0);
   with Tools do
@@ -297,6 +298,10 @@ begin
     GUILanguage            := GetOSLanguage;
     HunspellLanguage       := 'en_US';
     ShortCutPreset         := 'Tero.key';
+
+    SetLength(UnicodeChars, Length(TUnicodeChars));
+    for i := 0 to High(TUnicodeChars) do
+      UnicodeChars[i] := TUnicodeChars[i];
   end;
 
   with frmMain do
@@ -331,6 +336,8 @@ end;
 procedure LoadSettings;
 var
   i, j, c: Integer;
+  s: String;
+  sl: TStringList;
   bands: array of Byte;
 begin
   // Possibly first start
@@ -411,6 +418,29 @@ begin
       CommonErrors := TSubtitleErrorTypeSet(GetValue('CommonErrors', Integer(CommonErrors)));
       frmMain.mmoText.CPSBar.Visible := GetValue('ShowCPSBar', True);
       frmMain.mmoTranslation.CPSBar.Visible := frmMain.mmoText.CPSBar.Visible;
+      CloseKey;
+      // Unicode favorite chars
+      OpenKey('UnicodeChars');
+      i := 0;
+      sl := TStringList.Create;
+      try
+        sl.SkipLastLineBreak := True;
+        repeat
+          s := GetValue('Fav'+i.ToString, '');
+          if not s.IsEmpty then sl.Add(s);
+          Inc(i);
+        until s = '';
+      finally
+        if sl.Count > 0 then
+        begin
+          SetLength(UnicodeChars, sl.Count);
+          for i := 0 to sl.Count-1 do
+            UnicodeChars[i] := sl[i];
+
+          FillMenuWithUnicodeChars(frmMain.mnuEditInsertChar);
+        end;
+        sl.Free;
+      end;
       CloseKey;
 
       with Workspace, frmMain do
@@ -729,6 +759,11 @@ begin
       SetValue('TextToFind', TextToFind);
       SetValue('CommonErrors', Integer(CommonErrors));
       SetValue('ShowCPSBar', frmMain.mmoText.CPSBar.Visible);
+      CloseKey;
+      // Unicode favorite chars
+      OpenKey('UnicodeChars');
+      for i := 0 to Length(UnicodeChars)-1 do
+        SetValue('Fav'+i.ToString, UnicodeChars[i]);
       CloseKey;
 
       with Conventions do

@@ -1,0 +1,10 @@
+{"version":1,"strings":[
+{"hash":53269600,"name":"tfrmcharactermap.caption","sourcebytes":[67,104,97,114,97,99,116,101,114,32,77,97,112],"value":"Character Map"},
+{"hash":5801173,"name":"tfrmcharactermap.lblunicoderange.caption","sourcebytes":[82,97,110,103,101],"value":"Range"},
+{"hash":225003075,"name":"tfrmcharactermap.lblfavorites.caption","sourcebytes":[70,97,118,111,114,105,116,101,115],"value":"Favorites"},
+{"hash":43,"name":"tfrmcharactermap.btnplus.caption","sourcebytes":[43],"value":"+"},
+{"hash":45,"name":"tfrmcharactermap.btnminus.caption","sourcebytes":[45],"value":"-"},
+{"hash":4863637,"name":"tfrmcharactermap.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":84253844,"name":"tfrmcharactermap.btninsert.caption","sourcebytes":[73,110,115,101,114,116],"value":"Insert"},
+{"hash":304761,"name":"tfrmcharactermap.btncopy.caption","sourcebytes":[67,111,112,121],"value":"Copy"}
+]}

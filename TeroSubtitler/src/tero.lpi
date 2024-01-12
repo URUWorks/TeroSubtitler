@@ -749,6 +749,20 @@
         <Filename Value="procLocalize.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="formCharacterMap.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmCharacterMap"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
+      <Unit>
+        <Filename Value="formRoundTime.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmRoundTime"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
