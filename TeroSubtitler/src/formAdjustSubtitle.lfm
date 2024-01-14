@@ -1,13 +1,14 @@
 object frmAdjustSubtitle: TfrmAdjustSubtitle
   Left = 239
-  Height = 354
+  Height = 370
   Top = 115
   Width = 580
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Adjust subtitle'
-  ClientHeight = 354
+  ClientHeight = 370
   ClientWidth = 580
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -17,7 +18,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
     AnchorSideRight.Control = btnClose
     Left = 385
     Height = 26
-    Top = 320
+    Top = 336
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 5
@@ -29,7 +30,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
   object btnClose: TButton
     Left = 481
     Height = 26
-    Top = 320
+    Top = 336
     Width = 91
     Anchors = [akRight, akBottom]
     Cancel = True
@@ -38,31 +39,32 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
     OnClick = btnCloseClick
   end
   object lyoSimple: TUWLayout
+    AnchorSideTop.Control = rdoSimple
+    AnchorSideTop.Side = asrBottom
     Left = 0
-    Height = 32
-    Top = 32
+    Height = 56
+    Top = 27
     Width = 580
     Anchors = [akTop, akLeft, akRight]
-    ClientHeight = 32
+    ClientHeight = 56
     ClientWidth = 580
     TabOrder = 2
     object lblFirstSpoken: TLabel
       AnchorSideTop.Control = tedFirst
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = tedFirst
-      Left = 8
+      Left = 337
       Height = 15
       Top = 4
-      Width = 155
+      Width = 85
       Alignment = taRightJustify
-      Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
-      BorderSpacing.Right = 5
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 8
       Caption = 'First spoken line'
       ParentColor = False
     end
     object tedFirst: TUWTimeEdit
-      Left = 168
+      Left = 430
       Height = 23
       Top = 0
       Width = 104
@@ -73,6 +75,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       TimeMode = temTime
       OnTimeChange = tedFirstTimeChange
       Alignment = taCenter
+      Anchors = [akTop, akRight]
       Constraints.MinHeight = 21
       Constraints.MinWidth = 80
       Font.Style = [fsBold]
@@ -83,21 +86,22 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       AnchorSideTop.Control = tedLast
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = tedLast
-      Left = 293
+      Left = 338
       Height = 15
-      Top = 4
-      Width = 156
+      Top = 32
+      Width = 84
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
-      AutoSize = False
-      BorderSpacing.Right = 5
+      BorderSpacing.Right = 8
       Caption = 'Last spoken line'
       ParentColor = False
     end
     object tedLast: TUWTimeEdit
-      Left = 454
+      AnchorSideTop.Control = tedFirst
+      AnchorSideTop.Side = asrBottom
+      Left = 430
       Height = 23
-      Top = 0
+      Top = 28
       Width = 104
       Value = 0
       FPS = 25
@@ -107,17 +111,55 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       OnTimeChange = tedFirstTimeChange
       Alignment = taCenter
       Anchors = [akTop, akRight]
+      BorderSpacing.Top = 5
       Constraints.MinHeight = 21
       Constraints.MinWidth = 80
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
     end
+    object btnLast: TUWFlatButton
+      Tag = 1
+      AnchorSideTop.Control = btnPlus
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = btnPlus
+      Left = 549
+      Top = 28
+      ButtonStyle = True
+      HightlightColor = clBtnHighlight
+      BorderColor = clActiveCaption
+      CheckedColor = clInactiveBorder
+      Images = frmMain.ImageList_Default
+      ImageIndex = 92
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 5
+      Color = clBtnFace
+      OnClick = DropperClick
+    end
+    object btnFirst: TUWFlatButton
+      AnchorSideTop.Control = btnPlus
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = btnPlus
+      Left = 549
+      Top = 0
+      ButtonStyle = True
+      HightlightColor = clBtnHighlight
+      BorderColor = clActiveCaption
+      CheckedColor = clInactiveBorder
+      Images = frmMain.ImageList_Default
+      ImageIndex = 92
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 5
+      Color = clBtnFace
+      OnClick = DropperClick
+    end
   end
   object lyoAdvanced: TUWLayout
+    AnchorSideTop.Control = rdoAdvanced
+    AnchorSideTop.Side = asrBottom
     Left = 0
     Height = 208
-    Top = 104
+    Top = 112
     Width = 580
     Anchors = [akTop, akLeft, akRight]
     ClientHeight = 208
@@ -127,14 +169,13 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       AnchorSideTop.Control = spnIndex
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = spnIndex
-      Left = 8
+      Left = 191
       Height = 15
       Top = 180
-      Width = 256
+      Width = 50
       Alignment = taRightJustify
-      Anchors = [akTop, akLeft, akRight]
-      AutoSize = False
-      BorderSpacing.Right = 5
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 8
       Caption = 'Subtitle #'
       ParentColor = False
     end
@@ -161,7 +202,9 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       OnClick = btnMinusClick
     end
     object spnIndex: TSpinEdit
-      Left = 269
+      AnchorSideTop.Control = tedTime
+      AnchorSideRight.Control = tedTime
+      Left = 249
       Height = 23
       Top = 176
       Width = 90
@@ -193,7 +236,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       OnResize = VSTResize
     end
     object tedTime: TUWTimeEdit
-      Left = 366
+      Left = 344
       Height = 23
       Top = 176
       Width = 104
@@ -211,6 +254,24 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       ParentFont = False
       TabOrder = 1
     end
+    object btnSub: TUWFlatButton
+      Tag = 2
+      AnchorSideTop.Control = btnPlus
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = btnPlus
+      Left = 463
+      Top = 176
+      ButtonStyle = True
+      HightlightColor = clBtnHighlight
+      BorderColor = clActiveCaption
+      CheckedColor = clInactiveBorder
+      Images = frmMain.ImageList_Default
+      ImageIndex = 92
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 5
+      Color = clBtnFace
+      OnClick = DropperClick
+    end
   end
   object rdoSimple: TUWRadioButton
     Left = 8
@@ -224,11 +285,14 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
     OnChange = rdoSimpleChange
   end
   object rdoAdvanced: TUWRadioButton
+    AnchorSideTop.Control = lyoSimple
+    AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 19
-    Top = 80
+    Top = 93
     Width = 18
     AutoSize = False
+    BorderSpacing.Top = 10
     Caption = 'Advanced'
     TabOrder = 5
     TabStop = False

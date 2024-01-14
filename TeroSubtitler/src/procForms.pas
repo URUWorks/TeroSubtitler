@@ -270,7 +270,7 @@ begin
   begin
     frmCharacterMap := TfrmCharacterMap.Create(Application);
     frmCharacterMap.OnInsertCharacter := @frmMain.DoInsertUnicodeChar;
-    ShowForm(frmCharacterMap);
+    ShowForm(frmCharacterMap, False);
   end
   else
     frmCharacterMap.BringToFront;
@@ -283,7 +283,7 @@ begin
   if frmAdjustSubtitle = NIL then
   begin
     frmAdjustSubtitle := TfrmAdjustSubtitle.Create(Application);
-    ShowForm(frmAdjustSubtitle);
+    ShowForm(frmAdjustSubtitle, False);
   end
   else
     frmAdjustSubtitle.BringToFront;

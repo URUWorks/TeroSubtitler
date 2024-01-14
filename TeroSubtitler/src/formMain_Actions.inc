@@ -1030,7 +1030,7 @@ end;
 
 procedure TfrmMain.actRoundTimesExecute(Sender: TObject);
 begin
-  ShowRoundTime; //VSTDoLoop(VST, @ApplyRoundTimes, dlSelected, True, True);
+  ShowRoundTime;
 end;
 
 // -----------------------------------------------------------------------------

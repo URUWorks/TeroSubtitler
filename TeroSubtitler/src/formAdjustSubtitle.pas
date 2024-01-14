@@ -23,8 +23,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
-  laz.VirtualTrees, UWTimeEdit, UWLayout, UWRadioButton, procTypes, LCLIntf,
-  LCLType, LCLTranslator, procLocalize;
+  laz.VirtualTrees, UWTimeEdit, UWLayout, UWRadioButton, UWFlatButton,
+  procTypes, LCLIntf, LCLType, LCLTranslator, Buttons, procLocalize;
 
 type
 
@@ -35,6 +35,7 @@ type
     btnClose: TButton;
     btnPlus: TButton;
     btnMinus: TButton;
+    ImageList: TImageList;
     lblIndex: TLabel;
     lblFirstSpoken: TLabel;
     lblLastSpoken: TLabel;
@@ -46,6 +47,9 @@ type
     tedLast: TUWTimeEdit;
     lyoAdvanced: TUWLayout;
     tedTime: TUWTimeEdit;
+    btnSub: TUWFlatButton;
+    btnLast: TUWFlatButton;
+    btnFirst: TUWFlatButton;
     VST: TLazVirtualStringTree;
     procedure btnPlusClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
@@ -55,6 +59,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure rdoSimpleChange(Sender: TObject);
+    procedure DropperClick(Sender: TObject);
     procedure spnIndexChange(Sender: TObject);
     procedure tedFirstTimeChange(Sender: TObject; const NewTime: Cardinal);
     procedure VSTAdvancedHeaderDraw(Sender: TVTHeader;
@@ -228,6 +233,22 @@ procedure TfrmAdjustSubtitle.rdoSimpleChange(Sender: TObject);
 begin
   lyoSimple.Enabled   := rdoSimple.Checked;
   lyoAdvanced.Enabled := not lyoSimple.Enabled;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAdjustSubtitle.DropperClick(Sender: TObject);
+var
+  ms: Integer;
+begin
+  ms := frmMain.MPV.GetMediaPosInMs;
+  with TUWFlatButton(Sender) do
+    case Tag of
+      0: tedFirst.SetValueOnly(ms);
+      1: tedLast.SetValueOnly(ms);
+      else
+        tedTime.SetValueOnly(ms);
+    end;
 end;
 
 // -----------------------------------------------------------------------------
