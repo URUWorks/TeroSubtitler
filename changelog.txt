@@ -10,6 +10,7 @@
 - fixed: [macOS] Components with radio buttons display empty text in some functions
 - updated: Brazilian Portuguese language (thx Gzushgshsh)
 - updated: Whisper.CPP/Fast-Whisper
+- improved: Adjust subtitle function (Alt+L) - improved functionality #203
 - improved: Round Times [Timings]
 - added: Unicode Character Map
 - added: GUI layouts
