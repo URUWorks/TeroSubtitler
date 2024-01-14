@@ -60,7 +60,7 @@ procedure ApplyReverseText(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFixRTLPunctuation(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyEndCueAddOneFrame(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyEndCueSubtractOneFrame(const Item: PUWSubtitleItem; const Index: Integer);
-procedure ApplyRoundTimes(const Item: PUWSubtitleItem; const Index: Integer);
+procedure ApplyRoundTimesFPS(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplySwapTexts(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyUnicodeChar(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyRemoveUnicodeControlChars(const Item: PUWSubtitleItem; const Index: Integer);
@@ -472,7 +472,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure ApplyRoundTimes(const Item: PUWSubtitleItem; const Index: Integer);
+procedure ApplyRoundTimesFPS(const Item: PUWSubtitleItem; const Index: Integer);
 var
   it, ft: Integer;
 begin
