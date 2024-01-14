@@ -8,6 +8,7 @@ object frmCharacterMap: TfrmCharacterMap
   Caption = 'Character Map'
   ClientHeight = 348
   ClientWidth = 722
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
