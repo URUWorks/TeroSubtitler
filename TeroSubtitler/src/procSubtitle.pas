@@ -42,6 +42,7 @@ procedure PullLastLineFromPreviousEntry(const Index: Integer);
 procedure PullFirstLineFromNextEntry(const Index: Integer);
 procedure PushWord(const Index: Integer; const ALine: Integer; const AMode: TPushWordMode);
 procedure ClearSubtitles(const AutoIncrementUndo: Boolean = True);
+function SetEndCueOneFrame(const AFinalTime: Integer; const ASubtract: Boolean = False): Integer;
 
 function CalcNewSubtitleFinalTime(const Index: Integer; const AInitialTime: Integer): Integer;
 
@@ -77,8 +78,6 @@ procedure SetTextTagColor(const HexColor: String);
 
 procedure SetAlignTo(const AAlign: TSubtitleHAlign);
 procedure SetVAlignTo(const AVAlign: TSubtitleVAlign);
-
-function SetEndCueOneFrame(const AFinalTime: Integer; const ASubtract: Boolean = False): Integer;
 
 function GetSubtitleMarkedCount: Integer;
 
@@ -432,6 +431,16 @@ begin
   finally
     sl.Free;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function SetEndCueOneFrame(const AFinalTime: Integer; const ASubtract: Boolean = False): Integer;
+begin
+  if not ASubtract then
+    Result := AFinalTime + FramesToTime(1, Workspace.FPS.OutputFPS)
+  else
+    Result := AFinalTime - FramesToTime(1, Workspace.FPS.OutputFPS);
 end;
 
 // -----------------------------------------------------------------------------
@@ -807,7 +816,7 @@ begin
   if Subtitles.Count > 0 then
     for i := 0 to Subtitles.Count-1 do
       with Subtitles[i] do
-        if (InitialTime <= MSecs + 1) and (FinalTime > MSecs + 1) then
+        if (InitialTime <= MSecs) and (FinalTime > MSecs) then //if (InitialTime <= MSecs + 1) and (FinalTime > MSecs + 1) then
         begin
           Result := i;
           SubtitleInfo.LastSubtitle.ShowIndex := Result;
@@ -970,16 +979,6 @@ begin
       VSTDoLoop(VST, @ApplyVAlign)
     else
       Subtitles.ItemPointer[VSTFocusedNode(VST)]^.VAlign := AVAlign;
-end;
-
-// -----------------------------------------------------------------------------
-
-function SetEndCueOneFrame(const AFinalTime: Integer; const ASubtract: Boolean = False): Integer;
-begin
-  if not ASubtract then
-    Result := AFinalTime + FramesToTime(1, Workspace.FPS.OutputFPS)
-  else
-    Result := AFinalTime - FramesToTime(1, Workspace.FPS.OutputFPS);
 end;
 
 // -----------------------------------------------------------------------------
