@@ -3762,11 +3762,6 @@ msgstr ""
 msgid "Round time"
 msgstr ""
 
-#: tfrmroundtime.lblmilliseconds.caption
-msgctxt "tfrmroundtime.lblmilliseconds.caption"
-msgid "ms"
-msgstr ""
-
 #: tfrmroundtime.lblscope.caption
 msgctxt "tfrmroundtime.lblscope.caption"
 msgid "Scope:"
@@ -3785,6 +3780,14 @@ msgstr ""
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
 msgid "Only selected subtitles"
+msgstr ""
+
+#: tfrmroundtime.rdofps.caption
+msgid "Using FPS"
+msgstr ""
+
+#: tfrmroundtime.rdomilliseconds.caption
+msgid "Using Milliseconds"
 msgstr ""
 
 #: tfrmsettings.btnclose.caption

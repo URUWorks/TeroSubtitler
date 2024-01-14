@@ -3790,12 +3790,6 @@ msgstr "Close"
 msgid "Round time"
 msgstr ""
 
-#: tfrmroundtime.lblmilliseconds.caption
-#, fuzzy
-msgctxt "tfrmroundtime.lblmilliseconds.caption"
-msgid "ms"
-msgstr "ms"
-
 #: tfrmroundtime.lblscope.caption
 #, fuzzy
 msgctxt "tfrmroundtime.lblscope.caption"
@@ -3819,6 +3813,14 @@ msgstr "From the selected subtitle"
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
 msgid "Only selected subtitles"
 msgstr "Only selected subtitles"
+
+#: tfrmroundtime.rdofps.caption
+msgid "Using FPS"
+msgstr ""
+
+#: tfrmroundtime.rdomilliseconds.caption
+msgid "Using Milliseconds"
+msgstr ""
 
 #: tfrmsettings.btnclose.caption
 msgctxt "tfrmsettings.btnclose.caption"

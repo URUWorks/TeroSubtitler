@@ -3772,11 +3772,6 @@ msgstr "Cerrar"
 msgid "Round time"
 msgstr "Redondear tiempos"
 
-#: tfrmroundtime.lblmilliseconds.caption
-msgctxt "tfrmroundtime.lblmilliseconds.caption"
-msgid "ms"
-msgstr "ms"
-
 #: tfrmroundtime.lblscope.caption
 msgctxt "tfrmroundtime.lblscope.caption"
 msgid "Scope:"
@@ -3796,6 +3791,14 @@ msgstr "Desde el subtítulo seleccionado"
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
 msgid "Only selected subtitles"
 msgstr "Solo subtítulos seleccionados"
+
+#: tfrmroundtime.rdofps.caption
+msgid "Using FPS"
+msgstr "Usando FPS"
+
+#: tfrmroundtime.rdomilliseconds.caption
+msgid "Using Milliseconds"
+msgstr "Usando milisegundos"
 
 #: tfrmsettings.btnclose.caption
 msgctxt "tfrmsettings.btnclose.caption"
@@ -4746,3 +4749,4 @@ msgstr "Diseño 1"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Layout 2"
 msgstr "Diseño 2"
+
