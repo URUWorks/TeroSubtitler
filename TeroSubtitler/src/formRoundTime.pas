@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  Spin, UWRadioButton;
+  Spin, UWRadioButton, UWLayout;
 
 type
 
@@ -32,17 +32,21 @@ type
   TfrmRoundTime = class(TForm)
     btnApply: TButton;
     btnClose: TButton;
-    lblMilliseconds: TLabel;
+    cboFPS: TComboBox;
     lblScope: TLabel;
     rbnAllTheSubtitles: TUWRadioButton;
     rbnFromTheSelectedSubtitle: TUWRadioButton;
     rbnOnlySelectedSubtitles: TUWRadioButton;
     spnValue: TSpinEdit;
+    lyoModes: TUWLayout;
+    rdoFPS: TUWRadioButton;
+    rdoMilliseconds: TUWRadioButton;
     procedure btnApplyClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure rdoFPSChange(Sender: TObject);
   private
 
   public
@@ -59,7 +63,7 @@ implementation
 // -----------------------------------------------------------------------------
 
 uses procTypes, procVST, procSubtitle, procWorkspace, UWSubtitleAPI,
-  UWSubtitles.Utils, procConfig, formMain, LCLTranslator;
+  UWSubtitles.Utils, procConfig, formMain, LCLTranslator, procVST_Loops;
 
 {$R *.lfm}
 
@@ -78,6 +82,8 @@ begin
   else
     rbnAllTheSubtitles.Checked := True;
 
+  FillComboWithFPS(cboFPS, Workspace.FPS.InputFPS);
+
   {$IFNDEF WINDOWS}
   PrepareCustomControls(Self);
   {$ENDIF}
@@ -87,7 +93,7 @@ end;
 
 procedure TfrmRoundTime.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-  SaveFormSettings(Self, spnValue.Value.ToString);
+  SaveFormSettings(Self, Format('%d,%d,%d', [rdoFPS.Checked.ToInteger, cboFPS.ItemIndex, spnValue.Value]));
 
   CloseAction := caFree;
   frmRoundTime := NIL;
@@ -96,9 +102,30 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmRoundTime.FormShow(Sender: TObject);
+var
+  s: String;
+  b: Boolean;
+  AParamArray: TStringArray;
 begin
-  spnValue.Value := StrToIntDef(LoadFormSettings(Self), 500);
   CheckColorTheme(Self);
+
+  s := LoadFormSettings(Self);
+  if not s.IsEmpty then
+  begin
+    AParamArray := s.Split(',');
+    if Length(AParamArray) = 3 then
+    begin
+      b := AParamArray[0].ToBoolean;
+      if b then
+        rdoFPS.Checked := True
+      else
+        rdoMilliseconds.Checked := True;
+
+      cboFPS.ItemIndex := AParamArray[1].ToInteger;
+      spnValue.Value := AParamArray[2].ToInteger;
+    end;
+  end;
+  rdoFPSChange(NIL);
 end;
 
 // -----------------------------------------------------------------------------
@@ -110,7 +137,15 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure ApplyRoundTime(const Item: PUWSubtitleItem; const Index: Integer);
+procedure TfrmRoundTime.rdoFPSChange(Sender: TObject);
+begin
+  cboFPS.Enabled := rdoFPS.Checked;
+  spnValue.Enabled := rdoMilliseconds.Checked;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ApplyRoundTimeMs(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^, frmRoundTime do
     SetSubtitleTimes(Index, RoundTimeValue(InitialTime, spnValue.Value),
@@ -123,17 +158,18 @@ procedure TfrmRoundTime.btnApplyClick(Sender: TObject);
 var
   SelLoop: TVSTDoLoopSelection;
 begin
-  if spnValue.Value > 0 then
-  begin
-    if rbnAllTheSubtitles.Checked then
-      SelLoop := dlAll
-    else if rbnFromTheSelectedSubtitle.Checked then
-      SelLoop := dlCurrentToLast
-    else
-      SelLoop := dlSelected;
+  if rbnAllTheSubtitles.Checked then
+    SelLoop := dlAll
+  else if rbnFromTheSelectedSubtitle.Checked then
+    SelLoop := dlCurrentToLast
+  else
+    SelLoop := dlSelected;
 
-    VSTDoLoop(frmMain.VST, @ApplyRoundTime, SelLoop, True, True);
-  end;
+  if rdoFPS.Checked then
+    VSTDoLoop(frmMain.VST, @ApplyRoundTimesFPS, SelLoop, True, True)
+  else if spnValue.Value > 0 then
+    VSTDoLoop(frmMain.VST, @ApplyRoundTimeMs, SelLoop, True, True);
+
   Close;
 end;
 
