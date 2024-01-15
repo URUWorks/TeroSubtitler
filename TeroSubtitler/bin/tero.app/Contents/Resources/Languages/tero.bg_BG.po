@@ -254,7 +254,7 @@ msgid "Auto-detect"
 msgstr "Самоустановяване"
 
 #: proclocalize.lngdetectdialogsegmentswarning
-msgid "Attempting to detect dialog segments deletes all subtitles from the list."
+msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr ""
 
 #: proclocalize.lngentry
@@ -378,7 +378,9 @@ msgid "Break overlong lines"
 msgstr "Пренасяне на прекалено дълги редове"
 
 #: proclocalize.lngfsetchaining
-msgid "Chaining subtitles"
+#, fuzzy
+#| msgid "Chaining subtitles"
+msgid "Chaining entries"
 msgstr "Наставяне на надписи"
 
 #: proclocalize.lngfsetcleanuptags
@@ -390,7 +392,9 @@ msgid "Convert ellipsis dots to Unicode character"
 msgstr "Преобразуване на знака за многоточие в знак на уникод"
 
 #: proclocalize.lngfsetempty
-msgid "Remove empty subtitles"
+#, fuzzy
+#| msgid "Remove empty subtitles"
+msgid "Remove empty entries"
 msgstr "Премахване на празните надписи"
 
 #: proclocalize.lngfsetfixinterrobang
@@ -418,8 +422,9 @@ msgid "Fix overlapping display times"
 msgstr "Поправка на застъпващи се времена"
 
 #: proclocalize.lngfsetprohibitedchars
-#, object-pascal-format
-msgid "Remove subtitles with %s"
+#, object-pascal-format, fuzzy
+#| msgid "Remove subtitles with %s"
+msgid "Remove entries with %s"
 msgstr "Премахване на надписите съдъдържащи  „%s“"
 
 #: proclocalize.lngfsetremovespaceswithinbrackets
@@ -431,7 +436,9 @@ msgid "Remove repeated characters"
 msgstr "Премахване на повтарящи се знаци"
 
 #: proclocalize.lngfsetrepeatedsubtitle
-msgid "Remove repeated subtitles"
+#, fuzzy
+#| msgid "Remove repeated subtitles"
+msgid "Remove repeated entries"
 msgstr "Премахване на повтарящи се надписи"
 
 #: proclocalize.lngfsetsnaptoshotchanges
@@ -626,7 +633,9 @@ msgid "You're using the latest version."
 msgstr "Използвате най-новото издание."
 
 #: proclocalize.lngnosubtitlesmarked
-msgid "There are no marked subtitles."
+#, fuzzy
+#| msgid "There are no marked subtitles."
+msgid "There are no marked entries."
 msgstr "Няма отбелязани надписи."
 
 #: proclocalize.lngoldtime
@@ -947,8 +956,9 @@ msgid "Tools"
 msgstr "Пособия"
 
 #: proclocalize.lngsubtitleendedat
-#, object-pascal-format
-msgid "Subtitle ended in %s"
+#, object-pascal-format, fuzzy
+#| msgid "Subtitle ended in %s"
+msgid "Entry ended in %s"
 msgstr "Надписът завършва не „%s“"
 
 #: proclocalize.lngsubtitlehaserrorstofix
@@ -957,7 +967,7 @@ msgstr "Текущият преводен набор съдържа грешки
 
 #: proclocalize.lngsubtitlestartedat
 #, object-pascal-format
-msgid "Subtitle started at %s"
+msgid "Entry started at %s"
 msgstr ""
 
 #: proclocalize.lngsuccess
@@ -1269,18 +1279,24 @@ msgid "per word"
 msgstr "на дума"
 
 #: tfrmautomaticdurations.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmautomaticdurations.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Всички надписи"
 
 #: tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmbatchconvert.btnadd.caption
@@ -1505,18 +1521,24 @@ msgid "Scope:"
 msgstr "Обхват:"
 
 #: tfrmconvertcase.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmconvertcase.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Всички надписи"
 
 #: tfrmconvertcase.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmconvertcase.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From the selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmconvertcase.rdoinversetype.caption
@@ -1789,18 +1811,24 @@ msgid "Scope:"
 msgstr "Обхват:"
 
 #: tfrmdelay.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmdelay.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Всички надписи"
 
 #: tfrmdelay.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmdelay.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmdownload.lbldownload.caption
@@ -1835,18 +1863,24 @@ msgid "Scope:"
 msgstr "Обхват:"
 
 #: tfrmdurationlimits.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmdurationlimits.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Всички надписи"
 
 #: tfrmdurationlimits.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmdurationlimits.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From the selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmexportsup.btnclose.caption
@@ -1959,13 +1993,17 @@ msgid "Text to find:"
 msgstr "Текст за търсене:"
 
 #: tfrmfindandreplace.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmfindandreplace.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Всички надписи"
 
 #: tfrmfindandreplace.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmfixsubtitles.btnapply.caption
@@ -3799,7 +3837,7 @@ msgid "Close"
 msgstr "Затваряне"
 
 #: tfrmroundtime.caption
-msgid "Round time"
+msgid "Round times"
 msgstr ""
 
 #: tfrmroundtime.lblscope.caption
@@ -3810,20 +3848,23 @@ msgstr "Обхват:"
 
 #: tfrmroundtime.rbnallthesubtitles.caption
 #, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Всички надписи"
 
 #: tfrmroundtime.rbnfromtheselectedsubtitle.caption
 #, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmroundtime.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
 #, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmroundtime.rdofps.caption
@@ -3972,7 +4013,7 @@ msgid "Default input frame rate"
 msgstr ""
 
 #: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
-msgid "Dialog segments detection threshold (rms)"
+msgid "Dialogue segments detection threshold (rms)"
 msgstr ""
 
 #: tfrmsettings.lblfasterwhisper.caption
@@ -4208,18 +4249,24 @@ msgid "Scope:"
 msgstr "Обхват:"
 
 #: tfrmshifttimes.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Всички надписи"
 
 #: tfrmshifttimes.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmshifttimes.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmshotchanges.btnapply.caption
@@ -4471,18 +4518,24 @@ msgid "Scope:"
 msgstr "Обхват:"
 
 #: tfrmtimeexpander.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmtimeexpander.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Всички надписи"
 
 #: tfrmtimeexpander.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmtimeexpander.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmtranslate.btnclose.caption
@@ -4523,18 +4576,24 @@ msgid "Translation language:"
 msgstr "Език на превода:"
 
 #: tfrmtranslate.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmtranslate.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Всички надписи"
 
 #: tfrmtranslate.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmtranslate.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmtranslationmemory.btnclose.caption

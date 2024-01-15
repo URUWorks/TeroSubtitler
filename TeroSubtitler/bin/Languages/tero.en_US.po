@@ -247,7 +247,7 @@ msgid "Auto-detect"
 msgstr ""
 
 #: proclocalize.lngdetectdialogsegmentswarning
-msgid "Attempting to detect dialog segments deletes all subtitles from the list."
+msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr ""
 
 #: proclocalize.lngentry
@@ -371,7 +371,7 @@ msgid "Break overlong lines"
 msgstr ""
 
 #: proclocalize.lngfsetchaining
-msgid "Chaining subtitles"
+msgid "Chaining entries"
 msgstr ""
 
 #: proclocalize.lngfsetcleanuptags
@@ -383,7 +383,7 @@ msgid "Convert ellipsis dots to Unicode character"
 msgstr ""
 
 #: proclocalize.lngfsetempty
-msgid "Remove empty subtitles"
+msgid "Remove empty entries"
 msgstr ""
 
 #: proclocalize.lngfsetfixinterrobang
@@ -412,7 +412,7 @@ msgstr ""
 
 #: proclocalize.lngfsetprohibitedchars
 #, object-pascal-format
-msgid "Remove subtitles with %s"
+msgid "Remove entries with %s"
 msgstr ""
 
 #: proclocalize.lngfsetremovespaceswithinbrackets
@@ -424,7 +424,7 @@ msgid "Remove repeated characters"
 msgstr ""
 
 #: proclocalize.lngfsetrepeatedsubtitle
-msgid "Remove repeated subtitles"
+msgid "Remove repeated entries"
 msgstr ""
 
 #: proclocalize.lngfsetsnaptoshotchanges
@@ -622,7 +622,7 @@ msgid "You're using the latest version."
 msgstr ""
 
 #: proclocalize.lngnosubtitlesmarked
-msgid "There are no marked subtitles."
+msgid "There are no marked entries."
 msgstr ""
 
 #: proclocalize.lngoldtime
@@ -942,7 +942,7 @@ msgstr ""
 
 #: proclocalize.lngsubtitleendedat
 #, object-pascal-format
-msgid "Subtitle ended in %s"
+msgid "Entry ended in %s"
 msgstr ""
 
 #: proclocalize.lngsubtitlehaserrorstofix
@@ -951,7 +951,7 @@ msgstr ""
 
 #: proclocalize.lngsubtitlestartedat
 #, object-pascal-format
-msgid "Subtitle started at %s"
+msgid "Entry started at %s"
 msgstr ""
 
 #: proclocalize.lngsuccess
@@ -1259,17 +1259,17 @@ msgstr ""
 
 #: tfrmautomaticdurations.rbnallthesubtitles.caption
 msgctxt "tfrmautomaticdurations.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr ""
 
 #: tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr ""
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr ""
 
 #: tfrmbatchconvert.btnadd.caption
@@ -1490,17 +1490,17 @@ msgstr ""
 
 #: tfrmconvertcase.rbnallthesubtitles.caption
 msgctxt "tfrmconvertcase.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr ""
 
 #: tfrmconvertcase.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmconvertcase.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From the selected entry"
 msgstr ""
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr ""
 
 #: tfrmconvertcase.rdoinversetype.caption
@@ -1768,17 +1768,17 @@ msgstr ""
 
 #: tfrmdelay.rbnallthesubtitles.caption
 msgctxt "tfrmdelay.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr ""
 
 #: tfrmdelay.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmdelay.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr ""
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr ""
 
 #: tfrmdownload.lbldownload.caption
@@ -1814,17 +1814,17 @@ msgstr ""
 
 #: tfrmdurationlimits.rbnallthesubtitles.caption
 msgctxt "tfrmdurationlimits.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr ""
 
 #: tfrmdurationlimits.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmdurationlimits.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From the selected entry"
 msgstr ""
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr ""
 
 #: tfrmexportsup.btnclose.caption
@@ -1938,12 +1938,12 @@ msgstr ""
 
 #: tfrmfindandreplace.rbnallthesubtitles.caption
 msgctxt "tfrmfindandreplace.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr ""
 
 #: tfrmfindandreplace.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr ""
 
 #: tfrmfixsubtitles.btnapply.caption
@@ -3759,7 +3759,7 @@ msgid "Close"
 msgstr ""
 
 #: tfrmroundtime.caption
-msgid "Round time"
+msgid "Round times"
 msgstr ""
 
 #: tfrmroundtime.lblscope.caption
@@ -3769,17 +3769,17 @@ msgstr ""
 
 #: tfrmroundtime.rbnallthesubtitles.caption
 msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr ""
 
 #: tfrmroundtime.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmroundtime.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr ""
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr ""
 
 #: tfrmroundtime.rdofps.caption
@@ -3928,7 +3928,7 @@ msgid "Default input frame rate"
 msgstr ""
 
 #: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
-msgid "Dialog segments detection threshold (rms)"
+msgid "Dialogue segments detection threshold (rms)"
 msgstr ""
 
 #: tfrmsettings.lblfasterwhisper.caption
@@ -4164,17 +4164,17 @@ msgstr ""
 
 #: tfrmshifttimes.rbnallthesubtitles.caption
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr ""
 
 #: tfrmshifttimes.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmshifttimes.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr ""
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr ""
 
 #: tfrmshotchanges.btnapply.caption
@@ -4426,17 +4426,17 @@ msgstr ""
 
 #: tfrmtimeexpander.rbnallthesubtitles.caption
 msgctxt "tfrmtimeexpander.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr ""
 
 #: tfrmtimeexpander.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmtimeexpander.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr ""
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr ""
 
 #: tfrmtranslate.btnclose.caption
@@ -4478,17 +4478,17 @@ msgstr ""
 
 #: tfrmtranslate.rbnallthesubtitles.caption
 msgctxt "tfrmtranslate.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr ""
 
 #: tfrmtranslate.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmtranslate.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr ""
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr ""
 
 #: tfrmtranslationmemory.btnclose.caption

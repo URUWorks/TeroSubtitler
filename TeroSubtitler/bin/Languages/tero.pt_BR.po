@@ -255,7 +255,9 @@ msgid "Auto-detect"
 msgstr "Detecção automática"
 
 #: proclocalize.lngdetectdialogsegmentswarning
-msgid "Attempting to detect dialog segments deletes all subtitles from the list."
+#, fuzzy
+#| msgid "Attempting to detect dialog segments deletes all subtitles from the list."
+msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "Tentar detectar segmentos de diálogo apaga todos as legendas da lista."
 
 #: proclocalize.lngentry
@@ -379,7 +381,9 @@ msgid "Break overlong lines"
 msgstr "Quebrar linhas muito longas"
 
 #: proclocalize.lngfsetchaining
-msgid "Chaining subtitles"
+#, fuzzy
+#| msgid "Chaining subtitles"
+msgid "Chaining entries"
 msgstr "Encadeamento de legendas"
 
 #: proclocalize.lngfsetcleanuptags
@@ -391,7 +395,9 @@ msgid "Convert ellipsis dots to Unicode character"
 msgstr "Converter reticências para caractere Unicode"
 
 #: proclocalize.lngfsetempty
-msgid "Remove empty subtitles"
+#, fuzzy
+#| msgid "Remove empty subtitles"
+msgid "Remove empty entries"
 msgstr "Remover legendas vazias"
 
 #: proclocalize.lngfsetfixinterrobang
@@ -419,8 +425,9 @@ msgid "Fix overlapping display times"
 msgstr "Corrigir tempos de exibição sobrepostos"
 
 #: proclocalize.lngfsetprohibitedchars
-#, object-pascal-format
-msgid "Remove subtitles with %s"
+#, object-pascal-format, fuzzy
+#| msgid "Remove subtitles with %s"
+msgid "Remove entries with %s"
 msgstr "Remover legendas com %s"
 
 #: proclocalize.lngfsetremovespaceswithinbrackets
@@ -432,7 +439,9 @@ msgid "Remove repeated characters"
 msgstr "Remover caracteres repetidos"
 
 #: proclocalize.lngfsetrepeatedsubtitle
-msgid "Remove repeated subtitles"
+#, fuzzy
+#| msgid "Remove repeated subtitles"
+msgid "Remove repeated entries"
 msgstr "Remover legendas repetidas"
 
 #: proclocalize.lngfsetsnaptoshotchanges
@@ -627,7 +636,9 @@ msgid "You're using the latest version."
 msgstr "Você está usando a versão mais recente."
 
 #: proclocalize.lngnosubtitlesmarked
-msgid "There are no marked subtitles."
+#, fuzzy
+#| msgid "There are no marked subtitles."
+msgid "There are no marked entries."
 msgstr "Não há legendas marcadas."
 
 #: proclocalize.lngoldtime
@@ -947,8 +958,9 @@ msgid "Tools"
 msgstr "Ferramentas"
 
 #: proclocalize.lngsubtitleendedat
-#, object-pascal-format
-msgid "Subtitle ended in %s"
+#, object-pascal-format, fuzzy
+#| msgid "Subtitle ended in %s"
+msgid "Entry ended in %s"
 msgstr "Legenda terminada em %s"
 
 #: proclocalize.lngsubtitlehaserrorstofix
@@ -956,8 +968,9 @@ msgid "The current subtitle set contains errors that are recommended to be resol
 msgstr "O conjunto de legendas atual contém erros que devem ser resolvidos, mas podem ser salvos."
 
 #: proclocalize.lngsubtitlestartedat
-#, object-pascal-format
-msgid "Subtitle started at %s"
+#, object-pascal-format, fuzzy
+#| msgid "Subtitle started at %s"
+msgid "Entry started at %s"
 msgstr "Legenda começada em %s"
 
 #: proclocalize.lngsuccess
@@ -1266,18 +1279,24 @@ msgid "per word"
 msgstr "por palavra"
 
 #: tfrmautomaticdurations.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmautomaticdurations.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Todas as legendas"
 
 #: tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "A partir da legenda selecionada"
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Apenas legendas selecionadas"
 
 #: tfrmbatchconvert.btnadd.caption
@@ -1510,18 +1529,24 @@ msgid "Scope:"
 msgstr "Escopo:"
 
 #: tfrmconvertcase.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmconvertcase.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Todas as legendas"
 
 #: tfrmconvertcase.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmconvertcase.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From the selected entry"
 msgstr "A partir da legenda selecionada"
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Apenas legendas selecionadas"
 
 #: tfrmconvertcase.rdoinversetype.caption
@@ -1794,18 +1819,24 @@ msgid "Scope:"
 msgstr "Escopo:"
 
 #: tfrmdelay.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmdelay.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Todas as legendas"
 
 #: tfrmdelay.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmdelay.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "A partir da legenda selecionada"
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Apenas legendas selecionadas"
 
 #: tfrmdownload.lbldownload.caption
@@ -1840,18 +1871,24 @@ msgid "Scope:"
 msgstr "Escopo:"
 
 #: tfrmdurationlimits.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmdurationlimits.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Todas as legendas"
 
 #: tfrmdurationlimits.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmdurationlimits.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From the selected entry"
 msgstr "A partir da legenda selecionada"
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Apenas legendas selecionadas"
 
 #: tfrmexportsup.btnclose.caption
@@ -1966,13 +2003,17 @@ msgid "Text to find:"
 msgstr "Texto para procurar:"
 
 #: tfrmfindandreplace.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmfindandreplace.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Todas as legendas"
 
 #: tfrmfindandreplace.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "A partir da legenda selecionada"
 
 #: tfrmfixsubtitles.btnapply.caption
@@ -3810,7 +3851,7 @@ msgid "Close"
 msgstr "Fechar"
 
 #: tfrmroundtime.caption
-msgid "Round time"
+msgid "Round times"
 msgstr ""
 
 #: tfrmroundtime.lblscope.caption
@@ -3821,20 +3862,23 @@ msgstr "Escopo:"
 
 #: tfrmroundtime.rbnallthesubtitles.caption
 #, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Todas as legendas"
 
 #: tfrmroundtime.rbnfromtheselectedsubtitle.caption
 #, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmroundtime.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "A partir da legenda selecionada"
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
 #, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Apenas legendas selecionadas"
 
 #: tfrmroundtime.rdofps.caption
@@ -3983,7 +4027,9 @@ msgid "Default input frame rate"
 msgstr "Quadros por segundos de entrada padrão"
 
 #: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
-msgid "Dialog segments detection threshold (rms)"
+#, fuzzy
+#| msgid "Dialog segments detection threshold (rms)"
+msgid "Dialogue segments detection threshold (rms)"
 msgstr "Limite de detecção de segmentos de diálogo (rms)"
 
 #: tfrmsettings.lblfasterwhisper.caption
@@ -4218,18 +4264,24 @@ msgid "Scope:"
 msgstr "Escopo:"
 
 #: tfrmshifttimes.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Todas as legendas"
 
 #: tfrmshifttimes.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmshifttimes.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "A partir da legenda selecionada"
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Apenas legendas selecionadas"
 
 #: tfrmshotchanges.btnapply.caption
@@ -4480,18 +4532,24 @@ msgid "Scope:"
 msgstr "Escopo:"
 
 #: tfrmtimeexpander.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmtimeexpander.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Todas as legendas"
 
 #: tfrmtimeexpander.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmtimeexpander.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "A partir da legenda selecionada"
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Apenas legendas selecionadas"
 
 #: tfrmtranslate.btnclose.caption
@@ -4532,18 +4590,24 @@ msgid "Translation language:"
 msgstr "Idioma de tradução:"
 
 #: tfrmtranslate.rbnallthesubtitles.caption
+#, fuzzy
+#| msgid "All the subtitles"
 msgctxt "tfrmtranslate.rbnallthesubtitles.caption"
-msgid "All the subtitles"
+msgid "All entries"
 msgstr "Todas as legendas"
 
 #: tfrmtranslate.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+#| msgid "From the selected subtitle"
 msgctxt "tfrmtranslate.rbnfromtheselectedsubtitle.caption"
-msgid "From the selected subtitle"
+msgid "From selected entry"
 msgstr "A partir da legenda selecionada"
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected subtitles"
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
-msgid "Only selected subtitles"
+msgid "Only selected entries"
 msgstr "Apenas legendas selecionadas"
 
 #: tfrmtranslationmemory.btnclose.caption
