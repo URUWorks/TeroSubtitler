@@ -12,7 +12,7 @@ object frmFindAndReplace: TfrmFindAndReplace
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object lblTextToFind: TLabel
     Left = 8
     Height = 15
@@ -36,8 +36,8 @@ object frmFindAndReplace: TfrmFindAndReplace
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 14
+    OnClick = btnCloseClick
   end
   object btnFind: TButton
     AnchorSideRight.Control = btnClose
@@ -49,8 +49,8 @@ object frmFindAndReplace: TfrmFindAndReplace
     BorderSpacing.Right = 5
     Caption = 'Find'
     Default = True
-    OnClick = btnFindClick
     TabOrder = 13
+    OnClick = btnFindClick
   end
   object btnFindNext: TButton
     AnchorSideRight.Control = btnFind
@@ -61,8 +61,8 @@ object frmFindAndReplace: TfrmFindAndReplace
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
     Caption = 'Find next'
-    OnClick = btnFindNextClick
     TabOrder = 10
+    OnClick = btnFindNextClick
   end
   object btnFindPrev: TButton
     AnchorSideRight.Control = btnFindNext
@@ -73,8 +73,8 @@ object frmFindAndReplace: TfrmFindAndReplace
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
     Caption = 'Find prev'
-    OnClick = btnFindPrevClick
     TabOrder = 9
+    OnClick = btnFindPrevClick
   end
   object btnReplace: TButton
     Left = 325
@@ -82,8 +82,8 @@ object frmFindAndReplace: TfrmFindAndReplace
     Top = 280
     Width = 91
     Caption = 'Replace'
-    OnClick = btnReplaceClick
     TabOrder = 12
+    OnClick = btnReplaceClick
   end
   object btnReplaceAll: TButton
     Left = 229
@@ -91,24 +91,24 @@ object frmFindAndReplace: TfrmFindAndReplace
     Top = 280
     Width = 91
     Caption = 'Replace all'
-    OnClick = btnReplaceAllClick
     TabOrder = 11
+    OnClick = btnReplaceAllClick
   end
   object mmoTextToFind: TMemo
     Left = 133
     Height = 58
     Top = 12
     Width = 379
-    OnKeyDown = mmoTextToFindKeyDown
     TabOrder = 0
+    OnKeyDown = mmoTextToFindKeyDown
   end
   object mmoReplaceWith: TMemo
     Left = 133
     Height = 58
     Top = 80
     Width = 379
-    OnKeyDown = mmoReplaceWithKeyDown
     TabOrder = 1
+    OnKeyDown = mmoReplaceWithKeyDown
   end
   object chkReplaceWith: TUWCheckBox
     Left = 8
@@ -118,9 +118,9 @@ object frmFindAndReplace: TfrmFindAndReplace
     AutoSize = False
     Caption = 'Replace with:'
     Checked = True
-    OnChange = chkReplaceWithChange
     State = cbChecked
     TabOrder = 2
+    OnChange = chkReplaceWithChange
   end
   object chkCaseSensitive: TUWCheckBox
     Left = 213
@@ -155,7 +155,7 @@ object frmFindAndReplace: TfrmFindAndReplace
     Top = 267
     Width = 18
     AutoSize = False
-    Caption = 'From the selected subtitle'
+    Caption = 'From selected entry'
     TabOrder = 8
     TabStop = False
   end
@@ -165,7 +165,7 @@ object frmFindAndReplace: TfrmFindAndReplace
     Top = 248
     Width = 18
     AutoSize = False
-    Caption = 'All the subtitles'
+    Caption = 'All entries'
     TabOrder = 7
     TabStop = False
   end

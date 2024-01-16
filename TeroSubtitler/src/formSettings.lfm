@@ -332,7 +332,7 @@ object frmSettings: TfrmSettings
       Top = 228
       Width = 248
       AutoSize = False
-      Caption = 'Dialog segments detection threshold (rms)'
+      Caption = 'Dialogue segments detection threshold (rms)'
       ParentColor = False
       WordWrap = True
     end

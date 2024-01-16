@@ -103,7 +103,7 @@ object frmMain: TfrmMain
       object wtlb4: TToolButton
         Left = 110
         Top = 0
-        Action = actMediaAddSubtitle
+        Action = actMediaAddEntry
       end
       object wtlbdiv1: TToolButton
         Left = 133
@@ -2819,12 +2819,12 @@ object frmMain: TfrmMain
       ImageIndex = 53
       OnExecute = actMediaPlayAfterSelectionExecute
     end
-    object actMediaAddSubtitle: TAction
+    object actMediaAddEntry: TAction
       Tag = 8
       Category = 'Waveform'
-      Caption = 'Add subtitle'
+      Caption = 'Add entry'
       ImageIndex = 55
-      OnExecute = actMediaAddSubtitleExecute
+      OnExecute = actMediaAddEntryExecute
     end
     object actSelectAll: TAction
       Tag = 17
@@ -3109,12 +3109,12 @@ object frmMain: TfrmMain
       Caption = 'Go to time...'
       OnExecute = actGoToTimeExecute
     end
-    object actMediaDeleteSubtitle: TAction
+    object actMediaDeleteEntry: TAction
       Tag = 1
       Category = 'Waveform'
-      Caption = 'Delete subtitle'
+      Caption = 'Delete entry'
       ImageIndex = 10
-      OnExecute = actMediaDeleteSubtitleExecute
+      OnExecute = actMediaDeleteEntryExecute
     end
     object actMediaZoomIn: TAction
       Tag = 8
@@ -4508,10 +4508,10 @@ object frmMain: TfrmMain
       Caption = '-'
     end
     object MenuItem106: TMenuItem
-      Action = actMediaAddSubtitle
+      Action = actMediaAddEntry
     end
     object MenuItem134: TMenuItem
-      Action = actMediaDeleteSubtitle
+      Action = actMediaDeleteEntry
     end
     object Separator41: TMenuItem
       Caption = '-'

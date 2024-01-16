@@ -65,7 +65,7 @@ object frmDelay: TfrmDelay
     Top = 87
     Width = 18
     AutoSize = False
-    Caption = 'From the selected subtitle'
+    Caption = 'From selected entry'
     TabOrder = 2
     TabStop = False
   end
@@ -75,7 +75,7 @@ object frmDelay: TfrmDelay
     Top = 68
     Width = 18
     AutoSize = False
-    Caption = 'All the subtitles'
+    Caption = 'All entries'
     TabOrder = 1
     TabStop = False
   end
@@ -93,7 +93,7 @@ object frmDelay: TfrmDelay
     Top = 106
     Width = 18
     AutoSize = False
-    Caption = 'Only selected subtitles'
+    Caption = 'Only selected entries'
     TabOrder = 3
     TabStop = False
   end

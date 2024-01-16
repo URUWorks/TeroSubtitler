@@ -6,8 +6,8 @@
 {"hash":217144554,"name":"tfrmtranslate.lbltranslationlanguage.caption","sourcebytes":[84,114,97,110,115,108,97,116,105,111,110,32,108,97,110,103,117,97,103,101,58],"value":"Translation language:"},
 {"hash":84245626,"name":"tfrmtranslate.lblinput.caption","sourcebytes":[73,110,112,117,116,58],"value":"Input:"},
 {"hash":113998890,"name":"tfrmtranslate.lbloutput.caption","sourcebytes":[79,117,116,112,117,116,58],"value":"Output:"},
-{"hash":253276677,"name":"tfrmtranslate.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,116,104,101,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101],"value":"From the selected subtitle"},
-{"hash":52430339,"name":"tfrmtranslate.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,116,104,101,32,115,117,98,116,105,116,108,101,115],"value":"All the subtitles"},
+{"hash":30803705,"name":"tfrmtranslate.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,115,101,108,101,99,116,101,100,32,101,110,116,114,121],"value":"From selected entry"},
+{"hash":202613155,"name":"tfrmtranslate.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,101,110,116,114,105,101,115],"value":"All entries"},
 {"hash":94004874,"name":"tfrmtranslate.lblscope.caption","sourcebytes":[83,99,111,112,101,58],"value":"Scope:"},
-{"hash":82358371,"name":"tfrmtranslate.rbnonlyselectedsubtitles.caption","sourcebytes":[79,110,108,121,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101,115],"value":"Only selected subtitles"}
+{"hash":71759827,"name":"tfrmtranslate.rbnonlyselectedsubtitles.caption","sourcebytes":[79,110,108,121,32,115,101,108,101,99,116,101,100,32,101,110,116,114,105,101,115],"value":"Only selected entries"}
 ]}

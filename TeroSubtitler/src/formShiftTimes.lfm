@@ -106,7 +106,7 @@ object frmShiftTimes: TfrmShiftTimes
     Top = 69
     Width = 18
     AutoSize = False
-    Caption = 'All the subtitles'
+    Caption = 'All entries'
     TabOrder = 5
     TabStop = False
   end
@@ -116,7 +116,7 @@ object frmShiftTimes: TfrmShiftTimes
     Top = 88
     Width = 18
     AutoSize = False
-    Caption = 'From the selected subtitle'
+    Caption = 'From selected entry'
     TabOrder = 6
     TabStop = False
   end
@@ -126,7 +126,7 @@ object frmShiftTimes: TfrmShiftTimes
     Top = 107
     Width = 18
     AutoSize = False
-    Caption = 'Only selected subtitles'
+    Caption = 'Only selected entries'
     TabOrder = 7
     TabStop = False
   end

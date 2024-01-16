@@ -88,7 +88,7 @@ object frmDurationLimits: TfrmDurationLimits
     Top = 191
     Width = 18
     AutoSize = False
-    Caption = 'From the selected subtitle'
+    Caption = 'From the selected entry'
     TabOrder = 5
     TabStop = False
   end
@@ -98,7 +98,7 @@ object frmDurationLimits: TfrmDurationLimits
     Top = 172
     Width = 18
     AutoSize = False
-    Caption = 'All the subtitles'
+    Caption = 'All entries'
     TabOrder = 4
     TabStop = False
   end
@@ -116,7 +116,7 @@ object frmDurationLimits: TfrmDurationLimits
     Top = 210
     Width = 18
     AutoSize = False
-    Caption = 'Only selected subtitles'
+    Caption = 'Only selected entries'
     TabOrder = 6
     TabStop = False
   end

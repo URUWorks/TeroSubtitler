@@ -50,7 +50,7 @@ type
   private
 
   public
-
+    IsSMPTE: Boolean;
   end;
 
 var
@@ -63,7 +63,8 @@ implementation
 // -----------------------------------------------------------------------------
 
 uses procTypes, procVST, procSubtitle, procWorkspace, UWSubtitleAPI,
-  UWSubtitles.Utils, procConfig, formMain, LCLTranslator, procVST_Loops;
+  UWSubtitles.Utils, UWSystem.SysUtils, procConfig, formMain, LCLTranslator,
+  procVST_Loops;
 
 {$R *.lfm}
 
@@ -83,6 +84,7 @@ begin
     rbnAllTheSubtitles.Checked := True;
 
   FillComboWithFPS(cboFPS, Workspace.FPS.InputFPS);
+  IsSMPTE := not IsInteger(GetFPS) and (Workspace.WorkMode = wmFrames);
 
   {$IFNDEF WINDOWS}
   PrepareCustomControls(Self);
@@ -150,6 +152,19 @@ begin
   with Item^, frmRoundTime do
     SetSubtitleTimes(Index, RoundTimeValue(InitialTime, spnValue.Value),
       RoundTimeValue(FinalTime, spnValue.Value), False, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ApplyRoundTimesFPS(const Item: PUWSubtitleItem; const Index: Integer);
+var
+  it, ft: Integer;
+begin
+  with Item^, frmRoundTime do
+  begin
+    RoundFramesValue(InitialTime, FinalTime, Workspace.FPS.OutputFPS, it, ft, IsSMPTE);
+    SetSubtitleTimes(Index, it, ft, False, False);
+  end;
 end;
 
 // -----------------------------------------------------------------------------

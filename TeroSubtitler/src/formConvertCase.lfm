@@ -113,7 +113,7 @@ object frmConvertCase: TfrmConvertCase
       Top = 20
       Width = 18
       AutoSize = False
-      Caption = 'All the subtitles'
+      Caption = 'All entries'
       TabOrder = 0
       TabStop = False
     end
@@ -123,7 +123,7 @@ object frmConvertCase: TfrmConvertCase
       Top = 39
       Width = 18
       AutoSize = False
-      Caption = 'From the selected subtitle'
+      Caption = 'From the selected entry'
       TabOrder = 1
       TabStop = False
     end
@@ -133,7 +133,7 @@ object frmConvertCase: TfrmConvertCase
       Top = 58
       Width = 18
       AutoSize = False
-      Caption = 'Only selected subtitles'
+      Caption = 'Only selected entries'
       TabOrder = 2
       TabStop = False
     end

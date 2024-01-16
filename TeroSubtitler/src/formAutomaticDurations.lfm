@@ -118,7 +118,7 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     Width = 18
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = 'From the selected subtitle'
+    Caption = 'From selected entry'
     TabOrder = 6
     TabStop = False
   end
@@ -129,7 +129,7 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     Width = 18
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = 'All the subtitles'
+    Caption = 'All entries'
     TabOrder = 7
     TabStop = False
   end
@@ -149,7 +149,7 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     Width = 18
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = 'Only selected subtitles'
+    Caption = 'Only selected entries'
     TabOrder = 8
     TabStop = False
   end

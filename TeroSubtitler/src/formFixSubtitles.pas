@@ -165,7 +165,7 @@ begin
       AddOptionItem(etEllipsesSingleSmartCharacter, lngfsetEllipsesSingleSmartCharacter, GetValue('Option10', True));
       AddOptionItem(etProhibitedChars, Format(lngfsetProhibitedChars, [AppOptions.Conventions.ProhibitedChars]), GetValue('Option11', True));
       AddOptionItem(etHearingImpaired, lngfsetHearingImpaired, GetValue('Option12', True));
-      AddOptionItem(etRepeatedSubtitle, lngfsetRepeatedSubtitle, GetValue('Option13', True));
+      AddOptionItem(etRepeatedSubtitle, lngfsetRepeatedEntry, GetValue('Option13', True));
       AddOptionItem(etRepeatedChars, lngfsetRepeatedChars, GetValue('Option14', True));
       AddOptionItem(etIncompleteHyphenText, lngfsetIncompleteHyphenText, GetValue('Option15', True));
       AddOptionItem(etSpaceOfOpeningHyphen, lngfsetSpaceOfOpeningHyphen, GetValue('Option16', False));
@@ -201,7 +201,7 @@ begin
     AddOptionItem(etEllipsesSingleSmartCharacter, lngfsetEllipsesSingleSmartCharacter);
     AddOptionItem(etProhibitedChars, Format(lngfsetProhibitedChars, [AppOptions.Conventions.ProhibitedChars]));
     AddOptionItem(etHearingImpaired, lngfsetHearingImpaired);
-    AddOptionItem(etRepeatedSubtitle, lngfsetRepeatedSubtitle);
+    AddOptionItem(etRepeatedSubtitle, lngfsetRepeatedEntry);
     AddOptionItem(etRepeatedChars, lngfsetRepeatedChars);
     AddOptionItem(etIncompleteHyphenText, lngfsetIncompleteHyphenText);
     AddOptionItem(etSpaceOfOpeningHyphen, lngfsetSpaceOfOpeningHyphen);

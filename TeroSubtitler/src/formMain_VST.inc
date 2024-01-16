@@ -663,7 +663,7 @@ begin
       if etProhibitedChars     in ErrorType then SetHintText(lngasProhibitedChars);
       if etHearingImpaired     in ErrorType then SetHintText(lngasHearingImpaired);
       if etBreakLongLines      in ErrorType then SetHintText(lngasBreakLongLines);
-      if etRepeatedSubtitle    in ErrorType then SetHintText(lngasRepeatedSubtitle);
+      if etRepeatedSubtitle    in ErrorType then SetHintText(lngasRepeatedEntry);
       if etEllipsesSingleSmartCharacter in ErrorType then SetHintText(lngasEllipsesSingleSmartCharacter);
       if etMaxLines            in ErrorType then SetHintText(lngasMaxLines);
       if etOCR                 in ErrorType then SetHintText(lngasOCR);

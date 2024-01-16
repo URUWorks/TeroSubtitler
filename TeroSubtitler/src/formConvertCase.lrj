@@ -8,7 +8,7 @@
 {"hash":40898773,"name":"tfrmconvertcase.rdotitletype.caption","sourcebytes":[84,105,116,108,101,32,84,121,112,101],"value":"Title Type"},
 {"hash":26489909,"name":"tfrmconvertcase.rdoinversetype.caption","sourcebytes":[105,78,86,69,82,83,69,32,116,89,80,69],"value":"iNVERSE tYPE"},
 {"hash":94004874,"name":"tfrmconvertcase.lblscope.caption","sourcebytes":[83,99,111,112,101,58],"value":"Scope:"},
-{"hash":52430339,"name":"tfrmconvertcase.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,116,104,101,32,115,117,98,116,105,116,108,101,115],"value":"All the subtitles"},
-{"hash":253276677,"name":"tfrmconvertcase.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,116,104,101,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101],"value":"From the selected subtitle"},
-{"hash":82358371,"name":"tfrmconvertcase.rbnonlyselectedsubtitles.caption","sourcebytes":[79,110,108,121,32,115,101,108,101,99,116,101,100,32,115,117,98,116,105,116,108,101,115],"value":"Only selected subtitles"}
+{"hash":202613155,"name":"tfrmconvertcase.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,101,110,116,114,105,101,115],"value":"All entries"},
+{"hash":195302217,"name":"tfrmconvertcase.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,116,104,101,32,115,101,108,101,99,116,101,100,32,101,110,116,114,121],"value":"From the selected entry"},
+{"hash":71759827,"name":"tfrmconvertcase.rbnonlyselectedsubtitles.caption","sourcebytes":[79,110,108,121,32,115,101,108,101,99,116,101,100,32,101,110,116,114,105,101,115],"value":"Only selected entries"}
 ]}

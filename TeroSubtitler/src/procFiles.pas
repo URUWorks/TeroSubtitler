@@ -926,7 +926,7 @@ var
 begin
   if GetSubtitleMarkedCount = 0 then
   begin
-    ShowErrorMessageDialog(lngNoSubtitlesMarked);
+    ShowErrorMessageDialog(lngNoEntriesMarked);
     Exit;
   end;
 

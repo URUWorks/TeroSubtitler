@@ -50,7 +50,7 @@ resourcestring
   lngNoName = 'no name';
   lngWriteDenieded = 'Write denied. Please check folder permissions.';
   lngBackupSaved = 'Backup saved.';
-  lngNoSubtitlesMarked = 'There are no marked subtitles.';
+  lngNoEntriesMarked = 'There are no marked entries.';
   lngPromptForDeleteLines = 'The selected lines will be deleted.';
   lngShiftTimeMore = 'Shift %dms more';
   lngShiftTimeLess = 'Shift %dms less';
@@ -64,7 +64,7 @@ resourcestring
   lngExtractAppError = 'Unable to find “%s”.'; //TODO: LOCALIZE: Maybe the quotes are wrong
   lngExtracting = 'Extracting...';
   lngTranscribing = 'Transcribing...';
-  lngDetectDialogSegmentsWarning = 'Attempting to detect dialog segments deletes all subtitles from the list.';
+  lngDetectDialogSegmentsWarning = 'Attempting to detect dialogue segments deletes all entries from the list.';
   lngEntry = 'Entry %d';
   lnglibMPVError = 'Unable to find the required libraries to run the embedded mpv player. Please download them.';
   lnglibMPVglError = 'Failed to initialize mpv GL context.';
@@ -80,8 +80,8 @@ resourcestring
   lngNewShortCutPresetName = 'Name';
   lngFolderNotEmpty = 'The folder is not empty.';
   lngContinueAnyway = 'Continue?';
-  lngSubtitleStartedAt = 'Subtitle started at %s';
-  lngSubtitleEndedAt = 'Subtitle ended in %s';
+  lngEntryStartedAt = 'Entry started at %s';
+  lngEntryEndedAt = 'Entry ended in %s';
   lngFailed = 'Failed.';
   lngSuccess = 'Success.';
   lngNewVersionFound = 'A new version was found.';
@@ -108,16 +108,16 @@ resourcestring
   lngasTranslationChars = 'Translation (%s characters at %.2f CPS):';
   lngasTranslation = 'Translation';
   lngasLineSelected = '%d lines selected / %d';
-  lngasMarked = 'Marked subtitle';
+  lngasMarked = 'Marked entry';
   lngasBadValues = 'Bad values';
   lngasTimeTooLong = 'Duration too long';
   lngasTimeTooShort = 'Duration too short';
   lngasGapTooShort = 'Gap too short';
   lngasMaxCPS = 'Too many CPS';
-  lngasOverlappingWithPrev = 'Overlapping with previous subtitle';
-  lngasOverlappingWithNext = 'Overlapping with following subtitle';
+  lngasOverlappingWithPrev = 'Overlapping with previous entry';
+  lngasOverlappingWithNext = 'Overlapping with following entry';
   lngasFixTags = 'Invalid or incomplete tags';
-  lngasEmpty = 'Empty subtitle';
+  lngasEmpty = 'Empty entry';
   lngasUnbreak = 'Line breaks less than %d characters';
   lngasUnnecessarySpaces = 'Unnecessary spaces';
   lngasUnnecessaryDots = 'Unnecessary dots';
@@ -125,7 +125,7 @@ resourcestring
   lngasProhibitedChars = 'Contains a prohibited character';
   lngasHearingImpaired = 'Hearing impaired';
   lngasBreakLongLines = 'Line(s) too long';
-  lngasRepeatedSubtitle = 'Repeated subtitle';
+  lngasRepeatedEntry = 'Repeated entry';
   lngasEllipsesSingleSmartCharacter = 'Ellipses dots instead of Unicode character';
   lngasMaxLines = 'Maximum number of lines exceeded';
   lngasOCR = 'OCR error';
@@ -167,11 +167,11 @@ resourcestring
   lngfsetBadValues = 'Fix bad timing values';
   lngfsetUnbreak = 'Remove line breaks if %d characters not exceeded';
   lngfsetBreakLongLines = 'Break overlong lines';
-  lngfsetEmpty = 'Remove empty subtitles';
+  lngfsetEmpty = 'Remove empty entries';
   lngfsetEllipsesSingleSmartCharacter = 'Convert ellipsis dots to Unicode character';
-  lngfsetProhibitedChars = 'Remove subtitles with %s';
+  lngfsetProhibitedChars = 'Remove entries with %s';
   lngfsetHearingImpaired = 'Remove text for hearing impaired';
-  lngfsetRepeatedSubtitle = 'Remove repeated subtitles';
+  lngfsetRepeatedEntry = 'Remove repeated entries';
   lngfsetRepeatedChars = 'Remove repeated characters';
   lngfsetIncompleteHyphenText = 'Remove incomplete hyphenated line';
   lngfsetSpaceOfOpeningHyphen = 'Spacing of opening hyphen';
@@ -182,7 +182,7 @@ resourcestring
   lngfsetSnapToShotChangesInCue = 'Snap In Cue to shot change';
   lngfsetSnapToShotChangesOutCue = 'Snap Out Cue to shot change';
   lngfsetSnapToShotChangesInCueAway = 'Snap In Cue away from shot change';
-  lngfsetChaining = 'Chaining subtitles';
+  lngfsetChaining = 'Chaining entries';
   lngfsetCleanupTags = 'Cleanup tags';
   lngfsIndex = '#';
   lngfsAction = 'Action';
@@ -307,7 +307,7 @@ resourcestring
   lngwizLanguage = 'Language';
 
   //TipStrings
-  lngtTip1 = 'Tip: Use <%s/%s> to go to previous/next subtitle';
+  lngtTip1 = 'Tip: Use <%s/%s> to go to previous/next entry';
   lngtTip2 = 'Tip: Use <%s> for a web word reference';
   lngtTip3 = 'Tip: Use <%s> dock/undock video window';
   lngtTip4 = 'Tip: Use <%s> dock/undock waveform window';

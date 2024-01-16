@@ -51,8 +51,8 @@ end;
 
 procedure TfrmMain.WAVESelectionChange(Sender: TObject);
 begin
-  //actMediaAddSubtitle.Enabled   := not WAVE.SelectionIsEmpty and WAVE.IsOnlySelection;
-  actMediaZoomSelection.Enabled := actMediaAddSubtitle.Enabled;
+  //actMediaAddEntry.Enabled   := not WAVE.SelectionIsEmpty and WAVE.IsOnlySelection;
+  actMediaZoomSelection.Enabled := actMediaAddEntry.Enabled;
 {  if WAVE.SelectionIsEmpty then
     stbStatus.Panels[1].Text := ''
   else

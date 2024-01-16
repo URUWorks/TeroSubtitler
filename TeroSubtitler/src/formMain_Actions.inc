@@ -600,7 +600,7 @@ begin
   with SubtitleInfo.LastSubtitle do
   begin
     InitialTime := MPV.GetMediaPosInMs;
-    SetStatusBarText(Format(lngSubtitleStartedAt, [GetTimeStr(InitialTime, True)]));
+    SetStatusBarText(Format(lngEntryStartedAt, [GetTimeStr(InitialTime, True)]));
   end;
 end;
 
@@ -623,7 +623,7 @@ begin
       l := AppOptions.Conventions.MinDuration;
 
     InsertSubtitle(i, InitialTime, l, '', '');
-    SetStatusBarText(Format(lngSubtitleEndedAt, [GetTimeStr(l, True)]));
+    SetStatusBarText(Format(lngEntryEndedAt, [GetTimeStr(l, True)]));
   end;
 end;
 
@@ -657,7 +657,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actMediaAddSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actMediaAddEntryExecute(Sender: TObject);
 var
   i: Integer;
 begin
@@ -676,7 +676,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actMediaDeleteSubtitleExecute(Sender: TObject);
+procedure TfrmMain.actMediaDeleteEntryExecute(Sender: TObject);
 begin
   if WAVE.IsTimeLineEnabled and not WAVE.IsOnlySelection and (WAVE.SelectedItem <> NIL)then
   begin

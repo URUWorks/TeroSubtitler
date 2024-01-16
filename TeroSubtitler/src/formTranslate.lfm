@@ -153,7 +153,7 @@ object frmTranslate: TfrmTranslate
     Top = 159
     Width = 18
     AutoSize = False
-    Caption = 'From the selected subtitle'
+    Caption = 'From selected entry'
     TabOrder = 5
     TabStop = False
   end
@@ -163,7 +163,7 @@ object frmTranslate: TfrmTranslate
     Top = 140
     Width = 18
     AutoSize = False
-    Caption = 'All the subtitles'
+    Caption = 'All entries'
     TabOrder = 4
     TabStop = False
   end
@@ -181,7 +181,7 @@ object frmTranslate: TfrmTranslate
     Top = 178
     Width = 18
     AutoSize = False
-    Caption = 'Only selected subtitles'
+    Caption = 'Only selected entries'
     TabOrder = 6
     TabStop = False
   end

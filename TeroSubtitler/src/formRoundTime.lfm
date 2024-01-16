@@ -5,7 +5,7 @@ object frmRoundTime: TfrmRoundTime
   Width = 239
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Round time'
+  Caption = 'Round times'
   ClientHeight = 274
   ClientWidth = 239
   OnClose = FormClose
@@ -50,7 +50,7 @@ object frmRoundTime: TfrmRoundTime
     Top = 175
     Width = 18
     AutoSize = False
-    Caption = 'From the selected subtitle'
+    Caption = 'From selected entry'
     TabOrder = 2
     TabStop = False
   end
@@ -60,7 +60,7 @@ object frmRoundTime: TfrmRoundTime
     Top = 156
     Width = 18
     AutoSize = False
-    Caption = 'All the subtitles'
+    Caption = 'All entries'
     TabOrder = 1
     TabStop = False
   end
@@ -78,7 +78,7 @@ object frmRoundTime: TfrmRoundTime
     Top = 194
     Width = 18
     AutoSize = False
-    Caption = 'Only selected subtitles'
+    Caption = 'Only selected entries'
     TabOrder = 3
     TabStop = False
   end

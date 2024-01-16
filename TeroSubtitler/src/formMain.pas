@@ -158,7 +158,7 @@ type
     actSetAsDefaultFormat: TAction;
     actTranslationMemoryList: TAction;
     actViewShotChange: TAction;
-    actMediaDeleteSubtitle: TAction;
+    actMediaDeleteEntry: TAction;
     actQualityCheck: TAction;
     actShotChanges: TAction;
     actLoadTranscription: TAction;
@@ -224,7 +224,7 @@ type
     actMediaZoomSelection: TAction;
     actMediaZoomOut: TAction;
     actMediaZoomIn: TAction;
-    actMediaAddSubtitle: TAction;
+    actMediaAddEntry: TAction;
     actMediaPlayAfterSelection: TAction;
     actMediaPlayBeforeSelection: TAction;
     actMediaPlayFromSelection: TAction;
@@ -934,8 +934,8 @@ type
     procedure actMediaPlayFromSelectionExecute(Sender: TObject);
     procedure actMediaPlayBeforeSelectionExecute(Sender: TObject);
     procedure actMediaPlayAfterSelectionExecute(Sender: TObject);
-    procedure actMediaAddSubtitleExecute(Sender: TObject);
-    procedure actMediaDeleteSubtitleExecute(Sender: TObject);
+    procedure actMediaAddEntryExecute(Sender: TObject);
+    procedure actMediaDeleteEntryExecute(Sender: TObject);
     procedure actMediaZoomInExecute(Sender: TObject);
     procedure actMediaZoomOutExecute(Sender: TObject);
     procedure actMediaZoomSelectionExecute(Sender: TObject);
@@ -1679,7 +1679,7 @@ begin
   with WAVE do
     if IsTimeLineEnabled then
     begin
-      actMediaDeleteSubtitle.Enabled := SelectedItem <> NIL;
+      actMediaDeleteEntry.Enabled := SelectedItem <> NIL;
 
       if SelectionIsEmpty then
         actDeleteShotChange.Enabled := ContainsSceneChange(CursorPosMS, CursorPosMS)
