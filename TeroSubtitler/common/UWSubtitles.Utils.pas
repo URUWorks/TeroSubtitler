@@ -39,7 +39,7 @@ function TimeExpander(const Text: String; const Duration, MSecsValue, CharsValue
 function ExtendLength(const NextInitialTime: Cardinal; const AGapMs: Cardinal): Cardinal;
 function AutomaticDurations(const Text: String; const Duration, msPerChar, msPerWord, msPerLine: Cardinal; const Mode: TAutomaticDurationMode): Cardinal; // calculate the duration of subtitles using a simple formula
 procedure ShiftTime(const InitialTime, FinalTime, Value: Integer; out NewInitialTime, NewFinalTime: Integer); // Time to shift subtitle forwards/backwards
-procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Single; out NewInitialTime, NewFinalTime: Integer);
+procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Single; out NewInitialTime, NewFinalTime: Integer; const SMPTE: Boolean = False);
 function RoundTimeValue(const ATimeValue, AFactor: Integer; const ARoundUp: Boolean = False): Cardinal;
 
 { Texts }
@@ -182,10 +182,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Single; out NewInitialTime, NewFinalTime: Integer);
+procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Single; out NewInitialTime, NewFinalTime: Integer; const SMPTE: Boolean = False);
 begin
-  NewInitialTime := RoundTimeWithFrames(InitialTime, AFPS);
-  NewFinalTime   := RoundTimeWithFrames(FinalTime, AFPS);
+  if SMPTE then
+  begin
+    NewInitialTime := RoundTimeWithFrames(Round(InitialTime * 1.001), AFPS);
+    NewFinalTime   := RoundTimeWithFrames(Round(FinalTime * 1.001), AFPS);
+    NewInitialTime := Round(NewInitialTime / 1.001);
+    NewFinalTime   := Round(NewFinalTime / 1.001);
+  end
+  else
+  begin
+    NewInitialTime := RoundTimeWithFrames(InitialTime, AFPS);
+    NewFinalTime   := RoundTimeWithFrames(FinalTime, AFPS);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
