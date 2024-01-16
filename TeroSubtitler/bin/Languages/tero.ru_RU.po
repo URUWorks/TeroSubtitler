@@ -50,7 +50,9 @@ msgid "Ellipses dots instead of Unicode character"
 msgstr "Многоточие вместо юникодного символа"
 
 #: proclocalize.lngasempty
-msgid "Empty subtitle"
+#, fuzzy
+#| msgid "Empty subtitle"
+msgid "Empty entry"
 msgstr "Пустой субтитр"
 
 #: proclocalize.lngasfixtags
@@ -85,7 +87,9 @@ msgid "%d lines selected / %d"
 msgstr "%d строк выбрано / %d"
 
 #: proclocalize.lngasmarked
-msgid "Marked subtitle"
+#, fuzzy
+#| msgid "Marked subtitle"
+msgid "Marked entry"
 msgstr "Отмеченный субтитр"
 
 #: proclocalize.lngasmaxcps
@@ -101,11 +105,15 @@ msgid "OCR error"
 msgstr "Ошибка распознавания символов"
 
 #: proclocalize.lngasoverlappingwithnext
-msgid "Overlapping with following subtitle"
+#, fuzzy
+#| msgid "Overlapping with following subtitle"
+msgid "Overlapping with following entry"
 msgstr "Наложение на следующий субтитр"
 
 #: proclocalize.lngasoverlappingwithprev
-msgid "Overlapping with previous subtitle"
+#, fuzzy
+#| msgid "Overlapping with previous subtitle"
+msgid "Overlapping with previous entry"
 msgstr "Наложение на предыдущий субтитр"
 
 #: proclocalize.lngasprohibitedchars
@@ -120,9 +128,9 @@ msgstr "Прочтение видео файла..."
 msgid "Repeated character"
 msgstr "Повторяющийся символ"
 
-#: proclocalize.lngasrepeatedsubtitle
-msgid "Repeated subtitle"
-msgstr "Повторяющийся субтитр"
+#: proclocalize.lngasrepeatedentry
+msgid "Repeated entry"
+msgstr ""
 
 #: proclocalize.lngastext
 msgctxt "proclocalize.lngastext"
@@ -258,6 +266,18 @@ msgstr "При попытке обнаружить сегменты диалог
 #, object-pascal-format
 msgid "Entry %d"
 msgstr "Ввести %d"
+
+#: proclocalize.lngentryendedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentryendedat"
+msgid "Entry ended in %s"
+msgstr ""
+
+#: proclocalize.lngentrystartedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentrystartedat"
+msgid "Entry started at %s"
+msgstr ""
 
 #: proclocalize.lngerrorexecuting
 #, object-pascal-format
@@ -432,11 +452,10 @@ msgstr "Удалить пробелы в скобках"
 msgid "Remove repeated characters"
 msgstr "Удалить повторяющиеся символы"
 
-#: proclocalize.lngfsetrepeatedsubtitle
-#, fuzzy
-#| msgid "Remove repeated subtitles"
+#: proclocalize.lngfsetrepeatedentry
+msgctxt "proclocalize.lngfsetrepeatedentry"
 msgid "Remove repeated entries"
-msgstr "Удалить повторяющиеся субтитры"
+msgstr ""
 
 #: proclocalize.lngfsetsnaptoshotchanges
 msgid "Snap times to shot changes"
@@ -620,6 +639,11 @@ msgstr "Новое время"
 msgid "A new version was found."
 msgstr "Обнаружена новая версия."
 
+#: proclocalize.lngnoentriesmarked
+msgctxt "proclocalize.lngnoentriesmarked"
+msgid "There are no marked entries."
+msgstr ""
+
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
 msgstr "Нет подключения к Интернету"
@@ -631,12 +655,6 @@ msgstr "без названия"
 #: proclocalize.lngnonewversion
 msgid "You're using the latest version."
 msgstr "У вас уже последняя версия."
-
-#: proclocalize.lngnosubtitlesmarked
-#, fuzzy
-#| msgid "There are no marked subtitles."
-msgid "There are no marked entries."
-msgstr "Нет помеченных субтитров"
 
 #: proclocalize.lngoldtime
 msgid "Old time"
@@ -954,21 +972,9 @@ msgctxt "proclocalize.lngsstools"
 msgid "Tools"
 msgstr "Инструменты"
 
-#: proclocalize.lngsubtitleendedat
-#, object-pascal-format, fuzzy
-#| msgid "Subtitle ended in %s"
-msgid "Entry ended in %s"
-msgstr "Окончание субтитров: %s"
-
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "Текущий набор субтитров содержит ошибки, которые предлагается устранить, однако сохранение всё же возможно."
-
-#: proclocalize.lngsubtitlestartedat
-#, object-pascal-format, fuzzy
-#| msgid "Subtitle started at %s"
-msgid "Entry started at %s"
-msgstr "Начало субтитров: %s"
 
 #: proclocalize.lngsuccess
 msgid "Success."
@@ -1035,8 +1041,9 @@ msgid "Translation file has not been saved."
 msgstr "Файл перевода не сохранён"
 
 #: proclocalize.lngttip1
-#, object-pascal-format
-msgid "Tip: Use <%s/%s> to go to previous/next subtitle"
+#, object-pascal-format, fuzzy
+#| msgid "Tip: Use <%s/%s> to go to previous/next subtitle"
+msgid "Tip: Use <%s/%s> to go to previous/next entry"
 msgstr "Совет: нажмите <%s/%s> для перехода к предыдущему/следующему субтитру"
 
 #: proclocalize.lngttip2
@@ -2789,9 +2796,11 @@ msgstr "Открыть видео по ссылке..."
 msgid "Mark entry"
 msgstr ""
 
-#: tfrmmain.actmediaaddsubtitle.caption
-msgctxt "tfrmmain.actmediaaddsubtitle.caption"
-msgid "Add subtitle"
+#: tfrmmain.actmediaaddentry.caption
+#, fuzzy
+#| msgid "Add subtitle"
+msgctxt "tfrmmain.actmediaaddentry.caption"
+msgid "Add entry"
 msgstr "Добавить субтитр"
 
 #: tfrmmain.actmediaautoscroll.caption
@@ -2812,8 +2821,11 @@ msgctxt "tfrmmain.actmediachangeplayrate.caption"
 msgid "Playback rate"
 msgstr "Частота воспроизведения"
 
-#: tfrmmain.actmediadeletesubtitle.caption
-msgid "Delete subtitle"
+#: tfrmmain.actmediadeleteentry.caption
+#, fuzzy
+#| msgid "Delete subtitle"
+msgctxt "tfrmmain.actmediadeleteentry.caption"
+msgid "Delete entry"
 msgstr "Удалить субтитр"
 
 #: tfrmmain.actmediaendsubtitleentry.caption

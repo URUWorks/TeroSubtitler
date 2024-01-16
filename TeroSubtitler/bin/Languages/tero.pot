@@ -40,7 +40,7 @@ msgid "Ellipses dots instead of Unicode character"
 msgstr ""
 
 #: proclocalize.lngasempty
-msgid "Empty subtitle"
+msgid "Empty entry"
 msgstr ""
 
 #: proclocalize.lngasfixtags
@@ -73,7 +73,7 @@ msgid "%d lines selected / %d"
 msgstr ""
 
 #: proclocalize.lngasmarked
-msgid "Marked subtitle"
+msgid "Marked entry"
 msgstr ""
 
 #: proclocalize.lngasmaxcps
@@ -89,11 +89,11 @@ msgid "OCR error"
 msgstr ""
 
 #: proclocalize.lngasoverlappingwithnext
-msgid "Overlapping with following subtitle"
+msgid "Overlapping with following entry"
 msgstr ""
 
 #: proclocalize.lngasoverlappingwithprev
-msgid "Overlapping with previous subtitle"
+msgid "Overlapping with previous entry"
 msgstr ""
 
 #: proclocalize.lngasprohibitedchars
@@ -108,8 +108,8 @@ msgstr ""
 msgid "Repeated character"
 msgstr ""
 
-#: proclocalize.lngasrepeatedsubtitle
-msgid "Repeated subtitle"
+#: proclocalize.lngasrepeatedentry
+msgid "Repeated entry"
 msgstr ""
 
 #: proclocalize.lngastext
@@ -243,6 +243,18 @@ msgstr ""
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"
+msgstr ""
+
+#: proclocalize.lngentryendedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentryendedat"
+msgid "Entry ended in %s"
+msgstr ""
+
+#: proclocalize.lngentrystartedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentrystartedat"
+msgid "Entry started at %s"
 msgstr ""
 
 #: proclocalize.lngerrorexecuting
@@ -413,7 +425,8 @@ msgstr ""
 msgid "Remove repeated characters"
 msgstr ""
 
-#: proclocalize.lngfsetrepeatedsubtitle
+#: proclocalize.lngfsetrepeatedentry
+msgctxt "proclocalize.lngfsetrepeatedentry"
 msgid "Remove repeated entries"
 msgstr ""
 
@@ -596,6 +609,11 @@ msgstr ""
 msgid "A new version was found."
 msgstr ""
 
+#: proclocalize.lngnoentriesmarked
+msgctxt "proclocalize.lngnoentriesmarked"
+msgid "There are no marked entries."
+msgstr ""
+
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
 msgstr ""
@@ -606,10 +624,6 @@ msgstr ""
 
 #: proclocalize.lngnonewversion
 msgid "You're using the latest version."
-msgstr ""
-
-#: proclocalize.lngnosubtitlesmarked
-msgid "There are no marked entries."
 msgstr ""
 
 #: proclocalize.lngoldtime
@@ -927,18 +941,8 @@ msgctxt "proclocalize.lngsstools"
 msgid "Tools"
 msgstr ""
 
-#: proclocalize.lngsubtitleendedat
-#, object-pascal-format
-msgid "Entry ended in %s"
-msgstr ""
-
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
-msgstr ""
-
-#: proclocalize.lngsubtitlestartedat
-#, object-pascal-format
-msgid "Entry started at %s"
 msgstr ""
 
 #: proclocalize.lngsuccess
@@ -1007,7 +1011,7 @@ msgstr ""
 
 #: proclocalize.lngttip1
 #, object-pascal-format
-msgid "Tip: Use <%s/%s> to go to previous/next subtitle"
+msgid "Tip: Use <%s/%s> to go to previous/next entry"
 msgstr ""
 
 #: proclocalize.lngttip2
@@ -2709,9 +2713,9 @@ msgstr ""
 msgid "Mark entry"
 msgstr ""
 
-#: tfrmmain.actmediaaddsubtitle.caption
-msgctxt "tfrmmain.actmediaaddsubtitle.caption"
-msgid "Add subtitle"
+#: tfrmmain.actmediaaddentry.caption
+msgctxt "tfrmmain.actmediaaddentry.caption"
+msgid "Add entry"
 msgstr ""
 
 #: tfrmmain.actmediaautoscroll.caption
@@ -2732,8 +2736,9 @@ msgctxt "tfrmmain.actmediachangeplayrate.caption"
 msgid "Playback rate"
 msgstr ""
 
-#: tfrmmain.actmediadeletesubtitle.caption
-msgid "Delete subtitle"
+#: tfrmmain.actmediadeleteentry.caption
+msgctxt "tfrmmain.actmediadeleteentry.caption"
+msgid "Delete entry"
 msgstr ""
 
 #: tfrmmain.actmediaendsubtitleentry.caption

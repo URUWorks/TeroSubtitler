@@ -55,7 +55,9 @@ msgid "Ellipses dots instead of Unicode character"
 msgstr "Знак за многоточие, вместо знак от уникод"
 
 #: proclocalize.lngasempty
-msgid "Empty subtitle"
+#, fuzzy
+#| msgid "Empty subtitle"
+msgid "Empty entry"
 msgstr "Празни надписи"
 
 #: proclocalize.lngasfixtags
@@ -90,7 +92,9 @@ msgid "%d lines selected / %d"
 msgstr "%d реда избрани / %d"
 
 #: proclocalize.lngasmarked
-msgid "Marked subtitle"
+#, fuzzy
+#| msgid "Marked subtitle"
+msgid "Marked entry"
 msgstr "Отбелязан надпис"
 
 #: proclocalize.lngasmaxcps
@@ -106,11 +110,15 @@ msgid "OCR error"
 msgstr "Грешка при разпознаването на знаци"
 
 #: proclocalize.lngasoverlappingwithnext
-msgid "Overlapping with following subtitle"
+#, fuzzy
+#| msgid "Overlapping with following subtitle"
+msgid "Overlapping with following entry"
 msgstr "Припокрива се със следващия надпис"
 
 #: proclocalize.lngasoverlappingwithprev
-msgid "Overlapping with previous subtitle"
+#, fuzzy
+#| msgid "Overlapping with previous subtitle"
+msgid "Overlapping with previous entry"
 msgstr "Припокрива се с предходния надпис"
 
 #: proclocalize.lngasprohibitedchars
@@ -125,9 +133,9 @@ msgstr "Четене на видеофайл..."
 msgid "Repeated character"
 msgstr "Повтарящ се знак"
 
-#: proclocalize.lngasrepeatedsubtitle
-msgid "Repeated subtitle"
-msgstr "Повтарящ се надпис"
+#: proclocalize.lngasrepeatedentry
+msgid "Repeated entry"
+msgstr ""
 
 #: proclocalize.lngastext
 msgctxt "proclocalize.lngastext"
@@ -260,6 +268,18 @@ msgstr ""
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"
+msgstr ""
+
+#: proclocalize.lngentryendedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentryendedat"
+msgid "Entry ended in %s"
+msgstr ""
+
+#: proclocalize.lngentrystartedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentrystartedat"
+msgid "Entry started at %s"
 msgstr ""
 
 #: proclocalize.lngerrorexecuting
@@ -435,11 +455,10 @@ msgstr "Премахване на интервалите със скоби"
 msgid "Remove repeated characters"
 msgstr "Премахване на повтарящи се знаци"
 
-#: proclocalize.lngfsetrepeatedsubtitle
-#, fuzzy
-#| msgid "Remove repeated subtitles"
+#: proclocalize.lngfsetrepeatedentry
+msgctxt "proclocalize.lngfsetrepeatedentry"
 msgid "Remove repeated entries"
-msgstr "Премахване на повтарящи се надписи"
+msgstr ""
 
 #: proclocalize.lngfsetsnaptoshotchanges
 msgid "Snap times to shot changes"
@@ -620,6 +639,11 @@ msgstr "Ново време"
 msgid "A new version was found."
 msgstr "Намерено е ново издание."
 
+#: proclocalize.lngnoentriesmarked
+msgctxt "proclocalize.lngnoentriesmarked"
+msgid "There are no marked entries."
+msgstr ""
+
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
 msgstr "Няма връзка с интернет."
@@ -631,12 +655,6 @@ msgstr "без име"
 #: proclocalize.lngnonewversion
 msgid "You're using the latest version."
 msgstr "Използвате най-новото издание."
-
-#: proclocalize.lngnosubtitlesmarked
-#, fuzzy
-#| msgid "There are no marked subtitles."
-msgid "There are no marked entries."
-msgstr "Няма отбелязани надписи."
 
 #: proclocalize.lngoldtime
 msgid "Old time"
@@ -955,20 +973,9 @@ msgctxt "proclocalize.lngsstools"
 msgid "Tools"
 msgstr "Пособия"
 
-#: proclocalize.lngsubtitleendedat
-#, object-pascal-format, fuzzy
-#| msgid "Subtitle ended in %s"
-msgid "Entry ended in %s"
-msgstr "Надписът завършва не „%s“"
-
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "Текущият преводен набор съдържа грешки. Препоръчително е да ги отстраните."
-
-#: proclocalize.lngsubtitlestartedat
-#, object-pascal-format
-msgid "Entry started at %s"
-msgstr ""
 
 #: proclocalize.lngsuccess
 msgid "Success."
@@ -1036,7 +1043,7 @@ msgstr "Преводният файл не е съхранен."
 
 #: proclocalize.lngttip1
 #, object-pascal-format
-msgid "Tip: Use <%s/%s> to go to previous/next subtitle"
+msgid "Tip: Use <%s/%s> to go to previous/next entry"
 msgstr ""
 
 #: proclocalize.lngttip2
@@ -2791,9 +2798,11 @@ msgstr "Отваряне на видео от URL..."
 msgid "Mark entry"
 msgstr ""
 
-#: tfrmmain.actmediaaddsubtitle.caption
-msgctxt "tfrmmain.actmediaaddsubtitle.caption"
-msgid "Add subtitle"
+#: tfrmmain.actmediaaddentry.caption
+#, fuzzy
+#| msgid "Add subtitle"
+msgctxt "tfrmmain.actmediaaddentry.caption"
+msgid "Add entry"
 msgstr "Добавяне на надпис"
 
 #: tfrmmain.actmediaautoscroll.caption
@@ -2814,8 +2823,9 @@ msgctxt "tfrmmain.actmediachangeplayrate.caption"
 msgid "Playback rate"
 msgstr "Скорост на възпроизвеждане"
 
-#: tfrmmain.actmediadeletesubtitle.caption
-msgid "Delete subtitle"
+#: tfrmmain.actmediadeleteentry.caption
+msgctxt "tfrmmain.actmediadeleteentry.caption"
+msgid "Delete entry"
 msgstr ""
 
 #: tfrmmain.actmediaendsubtitleentry.caption

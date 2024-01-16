@@ -55,7 +55,9 @@ msgid "Ellipses dots instead of Unicode character"
 msgstr "Reticências no lugar de caractere Unicode"
 
 #: proclocalize.lngasempty
-msgid "Empty subtitle"
+#, fuzzy
+#| msgid "Empty subtitle"
+msgid "Empty entry"
 msgstr "Legenda vazia"
 
 #: proclocalize.lngasfixtags
@@ -91,7 +93,9 @@ msgid "%d lines selected / %d"
 msgstr "%d linhas selecionadas / %d"
 
 #: proclocalize.lngasmarked
-msgid "Marked subtitle"
+#, fuzzy
+#| msgid "Marked subtitle"
+msgid "Marked entry"
 msgstr "Legenda marcada"
 
 #: proclocalize.lngasmaxcps
@@ -107,11 +111,15 @@ msgid "OCR error"
 msgstr "Erro no OCR"
 
 #: proclocalize.lngasoverlappingwithnext
-msgid "Overlapping with following subtitle"
+#, fuzzy
+#| msgid "Overlapping with following subtitle"
+msgid "Overlapping with following entry"
 msgstr "Sobreposição com legenda seguinte"
 
 #: proclocalize.lngasoverlappingwithprev
-msgid "Overlapping with previous subtitle"
+#, fuzzy
+#| msgid "Overlapping with previous subtitle"
+msgid "Overlapping with previous entry"
 msgstr "Sobreposição com a legenda anterior"
 
 #: proclocalize.lngasprohibitedchars
@@ -126,9 +134,9 @@ msgstr "Lendo arquivo de vídeo."
 msgid "Repeated character"
 msgstr "Caracteres repetidos"
 
-#: proclocalize.lngasrepeatedsubtitle
-msgid "Repeated subtitle"
-msgstr "Legenda repetida"
+#: proclocalize.lngasrepeatedentry
+msgid "Repeated entry"
+msgstr ""
 
 #: proclocalize.lngastext
 msgctxt "proclocalize.lngastext"
@@ -264,6 +272,18 @@ msgstr "Tentar detectar segmentos de diálogo apaga todos as legendas da lista."
 #, object-pascal-format
 msgid "Entry %d"
 msgstr "Entrada %d"
+
+#: proclocalize.lngentryendedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentryendedat"
+msgid "Entry ended in %s"
+msgstr ""
+
+#: proclocalize.lngentrystartedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentrystartedat"
+msgid "Entry started at %s"
+msgstr ""
 
 #: proclocalize.lngerrorexecuting
 #, object-pascal-format
@@ -438,11 +458,10 @@ msgstr "Remover espaços entre parênteses"
 msgid "Remove repeated characters"
 msgstr "Remover caracteres repetidos"
 
-#: proclocalize.lngfsetrepeatedsubtitle
-#, fuzzy
-#| msgid "Remove repeated subtitles"
+#: proclocalize.lngfsetrepeatedentry
+msgctxt "proclocalize.lngfsetrepeatedentry"
 msgid "Remove repeated entries"
-msgstr "Remover legendas repetidas"
+msgstr ""
 
 #: proclocalize.lngfsetsnaptoshotchanges
 msgid "Snap times to shot changes"
@@ -623,6 +642,11 @@ msgstr "Novo tempo"
 msgid "A new version was found."
 msgstr "Uma nova versão foi encontrada."
 
+#: proclocalize.lngnoentriesmarked
+msgctxt "proclocalize.lngnoentriesmarked"
+msgid "There are no marked entries."
+msgstr ""
+
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
 msgstr "Sem conexão com a internet"
@@ -634,12 +658,6 @@ msgstr "sem nome"
 #: proclocalize.lngnonewversion
 msgid "You're using the latest version."
 msgstr "Você está usando a versão mais recente."
-
-#: proclocalize.lngnosubtitlesmarked
-#, fuzzy
-#| msgid "There are no marked subtitles."
-msgid "There are no marked entries."
-msgstr "Não há legendas marcadas."
 
 #: proclocalize.lngoldtime
 msgid "Old time"
@@ -957,21 +975,9 @@ msgctxt "proclocalize.lngsstools"
 msgid "Tools"
 msgstr "Ferramentas"
 
-#: proclocalize.lngsubtitleendedat
-#, object-pascal-format, fuzzy
-#| msgid "Subtitle ended in %s"
-msgid "Entry ended in %s"
-msgstr "Legenda terminada em %s"
-
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "O conjunto de legendas atual contém erros que devem ser resolvidos, mas podem ser salvos."
-
-#: proclocalize.lngsubtitlestartedat
-#, object-pascal-format, fuzzy
-#| msgid "Subtitle started at %s"
-msgid "Entry started at %s"
-msgstr "Legenda começada em %s"
 
 #: proclocalize.lngsuccess
 msgid "Success."
@@ -1038,8 +1044,9 @@ msgid "Translation file has not been saved."
 msgstr "As mudanças não foram salvas."
 
 #: proclocalize.lngttip1
-#, object-pascal-format
-msgid "Tip: Use <%s/%s> to go to previous/next subtitle"
+#, object-pascal-format, fuzzy
+#| msgid "Tip: Use <%s/%s> to go to previous/next subtitle"
+msgid "Tip: Use <%s/%s> to go to previous/next entry"
 msgstr "Dica: Use <%s/%s> para ir a legenda anterior/seguinte"
 
 #: proclocalize.lngttip2
@@ -2802,9 +2809,11 @@ msgstr "Abrir vídeo a partir de URL..."
 msgid "Mark entry"
 msgstr ""
 
-#: tfrmmain.actmediaaddsubtitle.caption
-msgctxt "tfrmmain.actmediaaddsubtitle.caption"
-msgid "Add subtitle"
+#: tfrmmain.actmediaaddentry.caption
+#, fuzzy
+#| msgid "Add subtitle"
+msgctxt "tfrmmain.actmediaaddentry.caption"
+msgid "Add entry"
 msgstr "Adicionar legenda"
 
 #: tfrmmain.actmediaautoscroll.caption
@@ -2825,8 +2834,11 @@ msgctxt "tfrmmain.actmediachangeplayrate.caption"
 msgid "Playback rate"
 msgstr "Velocidade de reprodução"
 
-#: tfrmmain.actmediadeletesubtitle.caption
-msgid "Delete subtitle"
+#: tfrmmain.actmediadeleteentry.caption
+#, fuzzy
+#| msgid "Delete subtitle"
+msgctxt "tfrmmain.actmediadeleteentry.caption"
+msgid "Delete entry"
 msgstr "Apagar legenda"
 
 #: tfrmmain.actmediaendsubtitleentry.caption

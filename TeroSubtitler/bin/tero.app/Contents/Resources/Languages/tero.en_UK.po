@@ -55,8 +55,8 @@ msgid "Ellipses dots instead of Unicode character"
 msgstr "Ellipses dots instead of Unicode character"
 
 #: proclocalize.lngasempty
-msgid "Empty subtitle"
-msgstr "Empty subtitle"
+msgid "Empty entry"
+msgstr "Empty entry"
 
 #: proclocalize.lngasfixtags
 msgid "Invalid or incomplete tags"
@@ -91,8 +91,8 @@ msgid "%d lines selected / %d"
 msgstr "%d lines selected / %d"
 
 #: proclocalize.lngasmarked
-msgid "Marked subtitle"
-msgstr "Marked subtitle"
+msgid "Marked entry"
+msgstr "Marked entry"
 
 #: proclocalize.lngasmaxcps
 msgid "Too many CPS"
@@ -107,12 +107,12 @@ msgid "OCR error"
 msgstr "OCR error"
 
 #: proclocalize.lngasoverlappingwithnext
-msgid "Overlapping with following subtitle"
-msgstr "Overlapping with following subtitle"
+msgid "Overlapping with following entry"
+msgstr "Overlapping with following entry"
 
 #: proclocalize.lngasoverlappingwithprev
-msgid "Overlapping with previous subtitle"
-msgstr "Overlapping with previous subtitle"
+msgid "Overlapping with previous entry"
+msgstr "Overlapping with previous entry"
 
 #: proclocalize.lngasprohibitedchars
 msgid "Contains a prohibited character"
@@ -126,9 +126,9 @@ msgstr "Reading video file..."
 msgid "Repeated character"
 msgstr "Repeated character"
 
-#: proclocalize.lngasrepeatedsubtitle
-msgid "Repeated subtitle"
-msgstr "Repeated subtitle"
+#: proclocalize.lngasrepeatedentry
+msgid "Repeated entry"
+msgstr ""
 
 #: proclocalize.lngastext
 msgctxt "proclocalize.lngastext"
@@ -262,6 +262,18 @@ msgstr "Attempting to detect dialogue segments deletes all entries from the list
 #, object-pascal-format
 msgid "Entry %d"
 msgstr "Entry %d"
+
+#: proclocalize.lngentryendedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentryendedat"
+msgid "Entry ended in %s"
+msgstr "Entry ended in %s"
+
+#: proclocalize.lngentrystartedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentrystartedat"
+msgid "Entry started at %s"
+msgstr "Entry started at %s"
 
 #: proclocalize.lngerrorexecuting
 #, object-pascal-format
@@ -431,7 +443,8 @@ msgstr "Remove spaces within brackets"
 msgid "Remove repeated characters"
 msgstr "Remove repeated characters"
 
-#: proclocalize.lngfsetrepeatedsubtitle
+#: proclocalize.lngfsetrepeatedentry
+msgctxt "proclocalize.lngfsetrepeatedentry"
 msgid "Remove repeated entries"
 msgstr "Remove repeated entries"
 
@@ -617,6 +630,11 @@ msgstr "New time"
 msgid "A new version was found."
 msgstr "A new version was found."
 
+#: proclocalize.lngnoentriesmarked
+msgctxt "proclocalize.lngnoentriesmarked"
+msgid "There are no marked entries."
+msgstr "There are no marked entries."
+
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
 msgstr "No Internet connection available"
@@ -628,10 +646,6 @@ msgstr "no name"
 #: proclocalize.lngnonewversion
 msgid "You're using the latest version."
 msgstr "You're using the latest version."
-
-#: proclocalize.lngnosubtitlesmarked
-msgid "There are no marked entries."
-msgstr "There are no marked entries."
 
 #: proclocalize.lngoldtime
 msgid "Old time"
@@ -948,19 +962,9 @@ msgctxt "proclocalize.lngsstools"
 msgid "Tools"
 msgstr "Tools"
 
-#: proclocalize.lngsubtitleendedat
-#, object-pascal-format
-msgid "Entry ended in %s"
-msgstr "Entry ended in %s"
-
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
-
-#: proclocalize.lngsubtitlestartedat
-#, object-pascal-format
-msgid "Entry started at %s"
-msgstr "Entry started at %s"
 
 #: proclocalize.lngsuccess
 msgid "Success."
@@ -1028,8 +1032,8 @@ msgstr "Translation file has not been saved."
 
 #: proclocalize.lngttip1
 #, object-pascal-format
-msgid "Tip: Use <%s/%s> to go to previous/next subtitle"
-msgstr "Tip: Use <%s/%s> to go to previous/next subtitle"
+msgid "Tip: Use <%s/%s> to go to previous/next entry"
+msgstr "Tip: Use <%s/%s> to go to previous/next entry"
 
 #: proclocalize.lngttip2
 #, object-pascal-format
@@ -2732,10 +2736,10 @@ msgstr "Open video from URL..."
 msgid "Mark entry"
 msgstr "Mark entry"
 
-#: tfrmmain.actmediaaddsubtitle.caption
-msgctxt "tfrmmain.actmediaaddsubtitle.caption"
-msgid "Add subtitle"
-msgstr "Add subtitle"
+#: tfrmmain.actmediaaddentry.caption
+msgctxt "tfrmmain.actmediaaddentry.caption"
+msgid "Add entry"
+msgstr "Add entry"
 
 #: tfrmmain.actmediaautoscroll.caption
 msgctxt "tfrmmain.actmediaautoscroll.caption"
@@ -2755,9 +2759,10 @@ msgctxt "tfrmmain.actmediachangeplayrate.caption"
 msgid "Playback rate"
 msgstr "Playback rate"
 
-#: tfrmmain.actmediadeletesubtitle.caption
-msgid "Delete subtitle"
-msgstr "Delete subtitle"
+#: tfrmmain.actmediadeleteentry.caption
+msgctxt "tfrmmain.actmediadeleteentry.caption"
+msgid "Delete entry"
+msgstr "Delete entry"
 
 #: tfrmmain.actmediaendsubtitleentry.caption
 msgid "End entry"

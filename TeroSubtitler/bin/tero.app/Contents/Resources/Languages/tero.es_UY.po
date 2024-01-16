@@ -55,8 +55,8 @@ msgid "Ellipses dots instead of Unicode character"
 msgstr "Puntos suspensivos en lugar de carácter inteligente"
 
 #: proclocalize.lngasempty
-msgid "Empty subtitle"
-msgstr "Subtítulo vacío"
+msgid "Empty entry"
+msgstr "Entrada vacío"
 
 #: proclocalize.lngasfixtags
 msgid "Invalid or incomplete tags"
@@ -91,8 +91,8 @@ msgid "%d lines selected / %d"
 msgstr "%d líneas seleccionadas / %d"
 
 #: proclocalize.lngasmarked
-msgid "Marked subtitle"
-msgstr "Subtítulo marcado"
+msgid "Marked entry"
+msgstr "Entrada marcada"
 
 #: proclocalize.lngasmaxcps
 msgid "Too many CPS"
@@ -107,12 +107,12 @@ msgid "OCR error"
 msgstr "Error de reconocimiento óptico de caracteres"
 
 #: proclocalize.lngasoverlappingwithnext
-msgid "Overlapping with following subtitle"
-msgstr "Superposición con el subtítulo siguiente"
+msgid "Overlapping with following entry"
+msgstr "Superposición con la siguiente entrada"
 
 #: proclocalize.lngasoverlappingwithprev
-msgid "Overlapping with previous subtitle"
-msgstr "Superposición con el subtítulo anterior"
+msgid "Overlapping with previous entry"
+msgstr "Superposición con la entrada anterior"
 
 #: proclocalize.lngasprohibitedchars
 msgid "Contains a prohibited character"
@@ -126,9 +126,9 @@ msgstr "Leyendo archivo de vídeo..."
 msgid "Repeated character"
 msgstr "Caracteres repetidos"
 
-#: proclocalize.lngasrepeatedsubtitle
-msgid "Repeated subtitle"
-msgstr "Subtítulo repetido"
+#: proclocalize.lngasrepeatedentry
+msgid "Repeated entry"
+msgstr "Entrada repetida"
 
 #: proclocalize.lngastext
 msgctxt "proclocalize.lngastext"
@@ -262,6 +262,18 @@ msgstr "Intentar detectar segmentos de diálogo elimina todos las entradas de la
 #, object-pascal-format
 msgid "Entry %d"
 msgstr "Entrada %d"
+
+#: proclocalize.lngentryendedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentryendedat"
+msgid "Entry ended in %s"
+msgstr "Entrada finalizada en %s"
+
+#: proclocalize.lngentrystartedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentrystartedat"
+msgid "Entry started at %s"
+msgstr "Entrada iniciada en %s"
 
 #: proclocalize.lngerrorexecuting
 #, object-pascal-format
@@ -431,7 +443,8 @@ msgstr "Eliminar espacios entre paréntesis"
 msgid "Remove repeated characters"
 msgstr "Eliminar caracteres repetidos"
 
-#: proclocalize.lngfsetrepeatedsubtitle
+#: proclocalize.lngfsetrepeatedentry
+msgctxt "proclocalize.lngfsetrepeatedentry"
 msgid "Remove repeated entries"
 msgstr "Eliminar entradas repetidas"
 
@@ -617,6 +630,11 @@ msgstr "Tiempo nuevo"
 msgid "A new version was found."
 msgstr "¡Se encontró una nueva versión!"
 
+#: proclocalize.lngnoentriesmarked
+msgctxt "proclocalize.lngnoentriesmarked"
+msgid "There are no marked entries."
+msgstr "No hay entradas marcadas."
+
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
 msgstr "No hay conexión a Internet disponible"
@@ -628,10 +646,6 @@ msgstr "sin nombre"
 #: proclocalize.lngnonewversion
 msgid "You're using the latest version."
 msgstr "Estás usando la última versión."
-
-#: proclocalize.lngnosubtitlesmarked
-msgid "There are no marked entries."
-msgstr "No hay entradas marcadas."
 
 #: proclocalize.lngoldtime
 msgid "Old time"
@@ -948,19 +962,9 @@ msgctxt "proclocalize.lngsstools"
 msgid "Tools"
 msgstr "Herramientas"
 
-#: proclocalize.lngsubtitleendedat
-#, object-pascal-format
-msgid "Entry ended in %s"
-msgstr "Entrada finalizada en %s"
-
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "El subtítulo actual contiene errores que se recomienda resolver, pero se puede guardar."
-
-#: proclocalize.lngsubtitlestartedat
-#, object-pascal-format
-msgid "Entry started at %s"
-msgstr "Entrada iniciada en %s"
 
 #: proclocalize.lngsuccess
 msgid "Success."
@@ -1028,8 +1032,8 @@ msgstr "La traducción ha cambiado."
 
 #: proclocalize.lngttip1
 #, object-pascal-format
-msgid "Tip: Use <%s/%s> to go to previous/next subtitle"
-msgstr "Consejo: utilice <%s/%s> para ir al subtítulo anterior/siguiente"
+msgid "Tip: Use <%s/%s> to go to previous/next entry"
+msgstr "Consejo: utilice <%s/%s> para ir a la entrada anterior/siguiente"
 
 #: proclocalize.lngttip2
 #, object-pascal-format
@@ -2732,10 +2736,10 @@ msgstr "Abrir vídeo desde URL..."
 msgid "Mark entry"
 msgstr "Marcar entrada"
 
-#: tfrmmain.actmediaaddsubtitle.caption
-msgctxt "tfrmmain.actmediaaddsubtitle.caption"
-msgid "Add subtitle"
-msgstr "Añadir subtítulo"
+#: tfrmmain.actmediaaddentry.caption
+msgctxt "tfrmmain.actmediaaddentry.caption"
+msgid "Add entry"
+msgstr "Añadir entrada"
 
 #: tfrmmain.actmediaautoscroll.caption
 msgctxt "tfrmmain.actmediaautoscroll.caption"
@@ -2755,9 +2759,10 @@ msgctxt "tfrmmain.actmediachangeplayrate.caption"
 msgid "Playback rate"
 msgstr "Velocidad de reproducción"
 
-#: tfrmmain.actmediadeletesubtitle.caption
-msgid "Delete subtitle"
-msgstr "Borrar subtítulo"
+#: tfrmmain.actmediadeleteentry.caption
+msgctxt "tfrmmain.actmediadeleteentry.caption"
+msgid "Delete entry"
+msgstr "Borrar entrada"
 
 #: tfrmmain.actmediaendsubtitleentry.caption
 msgid "End entry"
