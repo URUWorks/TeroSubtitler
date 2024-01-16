@@ -60,7 +60,6 @@ procedure ApplyReverseText(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFixRTLPunctuation(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyEndCueAddOneFrame(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyEndCueSubtractOneFrame(const Item: PUWSubtitleItem; const Index: Integer);
-procedure ApplyRoundTimesFPS(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplySwapTexts(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyUnicodeChar(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyRemoveUnicodeControlChars(const Item: PUWSubtitleItem; const Index: Integer);
@@ -468,19 +467,6 @@ procedure ApplyEndCueSubtractOneFrame(const Item: PUWSubtitleItem; const Index: 
 begin
   with Item^ do
     SetSubtitleTime(Index, SetEndCueOneFrame(FinalTime, True), frmMain.tedFinal.Tag, False, False);
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure ApplyRoundTimesFPS(const Item: PUWSubtitleItem; const Index: Integer);
-var
-  it, ft: Integer;
-begin
-  with Item^ do
-  begin
-    RoundFramesValue(InitialTime, FinalTime, Workspace.FPS.OutputFPS, it, ft);
-    SetSubtitleTimes(Index, it, ft, False, False);
-  end;
 end;
 
 // -----------------------------------------------------------------------------
