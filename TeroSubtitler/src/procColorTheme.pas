@@ -620,7 +620,7 @@ procedure TColorTheme.Apply(const ACoolbar: TCoolbar; const AColorMode: TColorMo
 var
   i: Integer;
 begin
-  ACoolbar.Themed := AColorMode = cmLight;
+  ACoolbar.Themed := False; //(AColorMode = cmLight);
   ACoolbar.Color  := Colors.Form;
 
   for i := 0 to ACoolbar.ControlCount-1 do
