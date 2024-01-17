@@ -20,6 +20,11 @@ msgid ""
 "Compiler version: %s\n"
 "Target CPU: %s"
 msgstr ""
+"версия %s\n"
+"\n"
+"Скомпилировано %s на %s\n"
+"Версия компилятора: %s\n"
+"Целевой центральный процессор: %s"
 
 #: proclocalize.lngadditionalparams
 msgid "Additional params:"
@@ -87,8 +92,6 @@ msgid "%d lines selected / %d"
 msgstr "%d строк выбрано / %d"
 
 #: proclocalize.lngasmarked
-#, fuzzy
-#| msgid "Marked subtitle"
 msgid "Marked entry"
 msgstr "Отмеченный субтитр"
 
@@ -130,7 +133,7 @@ msgstr "Повторяющийся символ"
 
 #: proclocalize.lngasrepeatedentry
 msgid "Repeated entry"
-msgstr ""
+msgstr "Повторяющиеся записи"
 
 #: proclocalize.lngastext
 msgctxt "proclocalize.lngastext"
@@ -271,13 +274,13 @@ msgstr "Ввести %d"
 #, object-pascal-format
 msgctxt "proclocalize.lngentryendedat"
 msgid "Entry ended in %s"
-msgstr ""
+msgstr "Запись закончена в %s"
 
 #: proclocalize.lngentrystartedat
 #, object-pascal-format
 msgctxt "proclocalize.lngentrystartedat"
 msgid "Entry started at %s"
-msgstr ""
+msgstr "Запись начата в %s"
 
 #: proclocalize.lngerrorexecuting
 #, object-pascal-format
@@ -439,7 +442,7 @@ msgid "Fix overlapping display times"
 msgstr "Исправить наложение субтитров по времени"
 
 #: proclocalize.lngfsetprohibitedchars
-#, object-pascal-format, fuzzy
+#, fuzzy, object-pascal-format
 #| msgid "Remove subtitles with %s"
 msgid "Remove entries with %s"
 msgstr "Удалить субтитры с символами: %s"
@@ -455,7 +458,7 @@ msgstr "Удалить повторяющиеся символы"
 #: proclocalize.lngfsetrepeatedentry
 msgctxt "proclocalize.lngfsetrepeatedentry"
 msgid "Remove repeated entries"
-msgstr ""
+msgstr "Удалить повторяющиеся записи"
 
 #: proclocalize.lngfsetsnaptoshotchanges
 msgid "Snap times to shot changes"
@@ -642,7 +645,7 @@ msgstr "Обнаружена новая версия."
 #: proclocalize.lngnoentriesmarked
 msgctxt "proclocalize.lngnoentriesmarked"
 msgid "There are no marked entries."
-msgstr ""
+msgstr "Отсутствуют помеченные записи."
 
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
@@ -746,7 +749,7 @@ msgstr "Ошибка сохранения файла"
 #: proclocalize.lngscaudiofilters
 msgctxt "proclocalize.lngscaudiofilters"
 msgid "Audio filters"
-msgstr ""
+msgstr "Аудиофильтры"
 
 #: proclocalize.lngscedit
 msgctxt "proclocalize.lngscedit"
@@ -765,7 +768,7 @@ msgstr "Решение редактировать список"
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"
 msgid "Entries"
-msgstr ""
+msgstr "Записи"
 
 #: proclocalize.lngscfile
 msgctxt "proclocalize.lngscfile"
@@ -838,7 +841,7 @@ msgstr "Видео"
 #: proclocalize.lngscvideofilters
 msgctxt "proclocalize.lngscvideofilters"
 msgid "Video filters"
-msgstr ""
+msgstr "Видеофильтры"
 
 #: proclocalize.lngscview
 msgctxt "proclocalize.lngscview"
@@ -860,7 +863,7 @@ msgstr "Открыть список изменений?"
 
 #: proclocalize.lngselectencodingtouse
 msgid "Select the Encoding to use:"
-msgstr ""
+msgstr "Выбрать нужную кодировку"
 
 #: proclocalize.lngselectfpstouse
 msgid "Select FPS to use:"
@@ -1041,7 +1044,7 @@ msgid "Translation file has not been saved."
 msgstr "Файл перевода не сохранён"
 
 #: proclocalize.lngttip1
-#, object-pascal-format, fuzzy
+#, fuzzy, object-pascal-format
 #| msgid "Tip: Use <%s/%s> to go to previous/next subtitle"
 msgid "Tip: Use <%s/%s> to go to previous/next entry"
 msgstr "Совет: нажмите <%s/%s> для перехода к предыдущему/следующему субтитру"
@@ -1389,7 +1392,7 @@ msgstr "Копировать"
 
 #: tfrmcharactermap.btninsert.caption
 msgid "Insert"
-msgstr ""
+msgstr "Вставить"
 
 #: tfrmcharactermap.btnminus.caption
 msgctxt "tfrmcharactermap.btnminus.caption"
@@ -1403,15 +1406,15 @@ msgstr ""
 
 #: tfrmcharactermap.caption
 msgid "Character Map"
-msgstr ""
+msgstr "Таблица символов"
 
 #: tfrmcharactermap.lblfavorites.caption
 msgid "Favorites"
-msgstr ""
+msgstr "Избранное"
 
 #: tfrmcharactermap.lblunicoderange.caption
 msgid "Range"
-msgstr ""
+msgstr "Область"
 
 #: tfrmcompare.btnclose.caption
 msgctxt "tfrmcompare.btnclose.caption"
@@ -1458,19 +1461,16 @@ msgid "Conventions"
 msgstr "Правила"
 
 #: tfrmconventions.lblmaxdurationms.caption
-#, fuzzy
 msgctxt "tfrmconventions.lblmaxdurationms.caption"
 msgid "Max. duration (ms)"
 msgstr "Макс. длина (мс)"
 
 #: tfrmconventions.lblmaxlinecount.caption
-#, fuzzy
 msgctxt "tfrmconventions.lblmaxlinecount.caption"
 msgid "Max. line count"
 msgstr "Макс. количество строк"
 
 #: tfrmconventions.lblmindurationms.caption
-#, fuzzy
 msgctxt "tfrmconventions.lblmindurationms.caption"
 msgid "Min. duration / per word (ms)"
 msgstr "Мин. длина 1 слова (мс)"
@@ -1506,7 +1506,6 @@ msgid "Snap out cues before SC (frames)"
 msgstr "Привязка реплик до SC (кадров)"
 
 #: tfrmconventions.lblsubtitlepausems.caption
-#, fuzzy
 msgctxt "tfrmconventions.lblsubtitlepausems.caption"
 msgid "Min. gap"
 msgstr "Мин. зазор"
@@ -1686,7 +1685,7 @@ msgstr ""
 #: tfrmcustominputdlg.lblmessage.caption
 msgctxt "tfrmcustominputdlg.lblmessage.caption"
 msgid "Msg"
-msgstr ""
+msgstr "Сообщение"
 
 #: tfrmcustommessagedlg.btnok.caption
 msgctxt "tfrmcustommessagedlg.btnok.caption"
@@ -1734,7 +1733,7 @@ msgstr ""
 #: tfrmcustomselectdlg.lblmessage.caption
 msgctxt "tfrmcustomselectdlg.lblmessage.caption"
 msgid "Msg"
-msgstr ""
+msgstr "Сообщение"
 
 #: tfrmcustomtextformat.btnclose.caption
 msgctxt "tfrmcustomtextformat.btnclose.caption"
@@ -2039,7 +2038,7 @@ msgstr "Интервал между нач. дефисами"
 
 #: tfrmfixsubtitles.mnudeselectall.caption
 msgid "Deselect all"
-msgstr ""
+msgstr "Отменить выбор"
 
 #: tfrmfixsubtitles.mnuinvertselection.caption
 #, fuzzy
@@ -2433,15 +2432,15 @@ msgstr "Выровнять по правому краю"
 
 #: tfrmmain.actaudiofilterdialoguenhance.caption
 msgid "Dialogue enhance"
-msgstr ""
+msgstr "Усилить диалог"
 
 #: tfrmmain.actaudiofilterspeechnormalizer.caption
 msgid "Speech normalizer"
-msgstr ""
+msgstr "Нормализовать громкость речи"
 
 #: tfrmmain.actaudiofiltersurround.caption
 msgid "Surround"
-msgstr ""
+msgstr "Окружение"
 
 #: tfrmmain.actaudiototext.caption
 msgctxt "tfrmmain.actaudiototext.caption"
@@ -2476,7 +2475,7 @@ msgstr "Центрировать аудиоволну"
 
 #: tfrmmain.actcharactermap.caption
 msgid "Character Map..."
-msgstr ""
+msgstr "Таблица символов..."
 
 #: tfrmmain.actcheckforupdates.caption
 msgid "Check for updates..."
@@ -2497,7 +2496,7 @@ msgstr "Закрыть видео"
 
 #: tfrmmain.actcombineentries.caption
 msgid "Combine entries"
-msgstr ""
+msgstr "Объединить записи"
 
 #: tfrmmain.actcombineentries.hint
 #, fuzzy
@@ -2530,11 +2529,11 @@ msgstr "Вырезать"
 
 #: tfrmmain.actdeleteentry.caption
 msgid "Delete entries"
-msgstr ""
+msgstr "Удалить записи"
 
 #: tfrmmain.actdeleteentry.hint
 msgid "Delete selected entries"
-msgstr ""
+msgstr "Удалить выбранные записи"
 
 #: tfrmmain.actdeleteshotchange.caption
 msgid "Delete shot change(s)"
@@ -2555,7 +2554,7 @@ msgstr "Нажмите для обновления списка"
 
 #: tfrmmain.actdivideentry.caption
 msgid "Divide entry"
-msgstr ""
+msgstr "Разделить запись"
 
 #: tfrmmain.actdurationlimits.caption
 msgid "Duration limits..."
@@ -2620,11 +2619,11 @@ msgstr "Исправить субтитры..."
 
 #: tfrmmain.actfocusfinaltime.caption
 msgid "Edit final time"
-msgstr ""
+msgstr "Изменить время конца"
 
 #: tfrmmain.actfocusinitialtime.caption
 msgid "Edit initial time"
-msgstr ""
+msgstr "Изменить время начала"
 
 #: tfrmmain.actfontbold.caption
 msgctxt "tfrmmain.actfontbold.caption"
@@ -2703,15 +2702,15 @@ msgstr "Вставить текущее время"
 
 #: tfrmmain.actinsertentry.caption
 msgid "Insert entry"
-msgstr ""
+msgstr "Вставить запись"
 
 #: tfrmmain.actinsertentry.hint
 msgid "Insert a new entry after the current entry"
-msgstr ""
+msgstr "Вставить новую запись после текущей"
 
 #: tfrmmain.actinsertentrybefore.caption
 msgid "Insert entry before"
-msgstr ""
+msgstr "Вставить запись перед"
 
 #: tfrmmain.actinsertentrybefore.hint
 #, fuzzy
@@ -2731,7 +2730,7 @@ msgstr "Обратить выделение"
 
 #: tfrmmain.actjumptonextempty.caption
 msgid "Jump to next without text"
-msgstr ""
+msgstr "Перейти к след. без текста"
 
 #: tfrmmain.actjumptonextmarked.caption
 msgid "Jump to next marked"
@@ -2743,7 +2742,7 @@ msgstr "Перейти к след. смене кадра"
 
 #: tfrmmain.actjumptopreviousempty.caption
 msgid "Jump to previous without text"
-msgstr ""
+msgstr "Вернуться к предыдущему без текста"
 
 #: tfrmmain.actjumptopreviousmarked.caption
 msgid "Jump to previous marked"
@@ -2794,7 +2793,7 @@ msgstr "Открыть видео по ссылке..."
 
 #: tfrmmain.actmarkentry.caption
 msgid "Mark entry"
-msgstr ""
+msgstr "Отметить вход"
 
 #: tfrmmain.actmediaaddentry.caption
 #, fuzzy
@@ -2830,7 +2829,7 @@ msgstr "Удалить субтитр"
 
 #: tfrmmain.actmediaendsubtitleentry.caption
 msgid "End entry"
-msgstr ""
+msgstr "Конец записи"
 
 #: tfrmmain.actmediaforward.caption
 msgctxt "tfrmmain.actmediaforward.caption"
@@ -2847,7 +2846,7 @@ msgstr "Вперёд на 1 секунду"
 
 #: tfrmmain.actmediamovesubtitleentry.caption
 msgid "Move entry"
-msgstr ""
+msgstr "Переместить запись"
 
 #: tfrmmain.actmedianextframe.caption
 msgctxt "tfrmmain.actmedianextframe.caption"
@@ -2901,7 +2900,7 @@ msgstr "Время начала"
 
 #: tfrmmain.actmediastartsubtitleentry.caption
 msgid "Start entry"
-msgstr ""
+msgstr "Начало записи"
 
 #: tfrmmain.actmediastop.caption
 msgctxt "tfrmmain.actmediastop.caption"
@@ -2977,35 +2976,35 @@ msgstr "Предыдущий субтитр"
 
 #: tfrmmain.actpullfirstlinefromnextentry.caption
 msgid "Pull the first line from the next entry"
-msgstr ""
+msgstr "Извлечь первую строку из след. записи"
 
 #: tfrmmain.actpulllastlinefrompreviousentry.caption
 msgid "Pull the last line from the previous entry"
-msgstr ""
+msgstr "Извлечь последнюю строку из пред. записи"
 
 #: tfrmmain.actpushfirstlinetopreviousentry.caption
 msgid "Push the first line to the previous entry"
-msgstr ""
+msgstr "Перенести первую строку на пред. запись"
 
 #: tfrmmain.actpushlastlinetonextentry.caption
 msgid "Push the last line to the next entry"
-msgstr ""
+msgstr "Перенести последнюю строку в след. запись"
 
 #: tfrmmain.actpushworddown.caption
 msgid "Push the last word of the current line down"
-msgstr ""
+msgstr "Перенести последнее слово текущей строки вниз"
 
 #: tfrmmain.actpushwordtonextentry.caption
 msgid "Push the last word to the next entry"
-msgstr ""
+msgstr "Перенести последнее слово в след. запись"
 
 #: tfrmmain.actpushwordtopreviousentry.caption
 msgid "Push the first word to the previous entry"
-msgstr ""
+msgstr "Перенести первое слово в пред. запись"
 
 #: tfrmmain.actpushwordup.caption
 msgid "Push the first word of the current line up"
-msgstr ""
+msgstr "Перенести первое слово текущей строки выше"
 
 #: tfrmmain.actqualitycheck.caption
 msgid "Quality check..."
@@ -3036,7 +3035,7 @@ msgstr "Удалить введённую строку из записи..."
 
 #: tfrmmain.actremoveunicodecontrolchars.caption
 msgid "Remove Unicode control characters"
-msgstr ""
+msgstr "Удалить управляющие символы Юникода"
 
 #: tfrmmain.actreplace.caption
 msgid "Replace..."
@@ -3051,10 +3050,8 @@ msgid "Reverse text"
 msgstr "Реверсивный текст"
 
 #: tfrmmain.actroundtimes.caption
-#, fuzzy
-#| msgid "Round times"
 msgid "Round times..."
-msgstr "Округление чисел"
+msgstr "Округление..."
 
 #: tfrmmain.actsaveproject.caption
 msgid "Save project..."
@@ -3146,17 +3143,17 @@ msgstr "Настроить задержку..."
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Layout 0"
-msgstr ""
+msgstr "Макет 0"
 
 #: tfrmmain.actsetguilayout1.caption
 msgctxt "tfrmmain.actsetguilayout1.caption"
 msgid "Layout 1"
-msgstr ""
+msgstr "Макет 1"
 
 #: tfrmmain.actsetguilayout2.caption
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Layout 2"
-msgstr ""
+msgstr "Макет 2"
 
 #: tfrmmain.actsetmaximumlinelength.caption
 msgid "Set maximum line length"
@@ -3247,7 +3244,7 @@ msgstr "Вкл/выкл главную панель инструментов"
 
 #: tfrmmain.actshowtoolbarquickaction.caption
 msgid "Quick Action"
-msgstr ""
+msgstr "Быстрые действия"
 
 #: tfrmmain.actsort.caption
 msgid "Sort"
@@ -3364,7 +3361,7 @@ msgstr "Режим перевода"
 
 #: tfrmmain.actunbreakentry.caption
 msgid "Unbreak entry"
-msgstr ""
+msgstr "Убрать разделение записи"
 
 #: tfrmmain.actundo.caption
 msgctxt "tfrmmain.actundo.caption"
@@ -3385,31 +3382,31 @@ msgstr "Отцепить окно аудио"
 
 #: tfrmmain.actunicodectrllre.caption
 msgid "LRE (Start of Left-to-Right Embedding)"
-msgstr ""
+msgstr "Л-П (начало записи слева-направо)"
 
 #: tfrmmain.actunicodectrllrm.caption
 msgid "LRM (Left-to-Right Mark)"
-msgstr ""
+msgstr "Л-П (метка слева-направо)"
 
 #: tfrmmain.actunicodectrllro.caption
 msgid "LRO (Start of Left-to-Right Override)"
-msgstr ""
+msgstr "Л-П (Начать переопределение слева-направо)"
 
 #: tfrmmain.actunicodectrlpdf.caption
 msgid "PDF (Pop Directional Formatting)"
-msgstr ""
+msgstr "Pop-направление форматирования"
 
 #: tfrmmain.actunicodectrlrle.caption
 msgid "RLE (Start of Right-to-Left Embedding)"
-msgstr ""
+msgstr "П-Л (начало вставки справа налево)"
 
 #: tfrmmain.actunicodectrlrlm.caption
 msgid "RLM (Right-to-Left Mark)"
-msgstr ""
+msgstr "П-Л (отметка справа налево)"
 
 #: tfrmmain.actunicodectrlrlo.caption
 msgid "RLO (Start of Right-to-Left Override)"
-msgstr ""
+msgstr "П-Л (начало переопределения справа налево)"
 
 #: tfrmmain.actunicodectrlzwnj.caption
 msgid "ZWNJ (Zero Width Non-Joiner)"
@@ -3421,7 +3418,7 @@ msgstr ""
 
 #: tfrmmain.actunmarkentry.caption
 msgid "Unmark entry"
-msgstr ""
+msgstr "Убрать пометку записи"
 
 #: tfrmmain.actvalidatetm.caption
 msgid "Validate translation memory"
@@ -3464,39 +3461,39 @@ msgstr ""
 
 #: tfrmmain.actvarcycle.caption
 msgid "Cycle Aspect Ratio"
-msgstr ""
+msgstr "Соотношение сторон цикла"
 
 #: tfrmmain.actvardefault.caption
 msgid "Default"
-msgstr ""
+msgstr "По-умолчанию"
 
 #: tfrmmain.actvideofilterblur.caption
 msgid "Blur"
-msgstr ""
+msgstr "Размытие"
 
 #: tfrmmain.actvideofilteredgeenhance.caption
 msgid "Edge enhance"
-msgstr ""
+msgstr "Усилить границу"
 
 #: tfrmmain.actvideofilteremboss.caption
 msgid "Emboss"
-msgstr ""
+msgstr "Тиснение"
 
 #: tfrmmain.actvideofilterhflip.caption
 msgid "Horizontal flip"
-msgstr ""
+msgstr "Отразить по горизонтали"
 
 #: tfrmmain.actvideofilternegative.caption
 msgid "Negative"
-msgstr ""
+msgstr "Отрицание"
 
 #: tfrmmain.actvideofiltersharpen.caption
 msgid "Sharpen"
-msgstr ""
+msgstr "Резкость"
 
 #: tfrmmain.actvideofiltervflip.caption
 msgid "Vertical flip"
-msgstr ""
+msgstr "Отразить по вертикали"
 
 #: tfrmmain.actvideofiltervintage.caption
 msgid "Vintage"
@@ -3554,7 +3551,7 @@ msgstr "FPS видео для которого был создан файл су
 #: tfrmmain.edtquickaction.hint
 msgctxt "tfrmmain.edtquickaction.hint"
 msgid "Quick Action Finder"
-msgstr ""
+msgstr "Поиск быстрых действий"
 
 #: tfrmmain.lblmedialength.hint
 msgid "Video length and FPS"
@@ -3577,7 +3574,7 @@ msgstr "Редактировать"
 #: tfrmmain.mnueditentries.caption
 msgctxt "tfrmmain.mnueditentries.caption"
 msgid "Entries"
-msgstr ""
+msgstr "Записи"
 
 #: tfrmmain.mnueditformat.caption
 msgctxt "tfrmmain.mnueditformat.caption"
@@ -3586,7 +3583,7 @@ msgstr "Форматирование текста"
 
 #: tfrmmain.mnueditinsertchar.caption
 msgid "Insert Unicode character"
-msgstr ""
+msgstr "Вставить символ Юникода"
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
@@ -3651,11 +3648,11 @@ msgstr "Выбрать"
 
 #: tfrmmain.mnutextlines.caption
 msgid "Lines"
-msgstr ""
+msgstr "Строки"
 
 #: tfrmmain.mnutextwords.caption
 msgid "Words"
-msgstr ""
+msgstr "Слова"
 
 #: tfrmmain.mnutools.caption
 msgctxt "tfrmmain.mnutools.caption"
@@ -3679,16 +3676,16 @@ msgstr "Видео"
 
 #: tfrmmain.mnuvideoaspectratio.caption
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "Соотношение сторон"
 
 #: tfrmmain.mnuvideoaudiofilters.caption
 msgctxt "tfrmmain.mnuvideoaudiofilters.caption"
 msgid "Audio filters"
-msgstr ""
+msgstr "Аудиофильтры"
 
 #: tfrmmain.mnuvideoaudiostream.caption
 msgid "Audio stream"
-msgstr ""
+msgstr "Аудио дорожка"
 
 #: tfrmmain.mnuvideoplayback.caption
 msgid "Playback"
@@ -3702,7 +3699,7 @@ msgstr "Субтитры"
 #: tfrmmain.mnuvideovideofilters.caption
 msgctxt "tfrmmain.mnuvideovideofilters.caption"
 msgid "Video filters"
-msgstr ""
+msgstr "Видеофильтры"
 
 #: tfrmmain.mnuvideovolume.caption
 msgid "Volume"
@@ -3727,7 +3724,7 @@ msgstr "Окна"
 
 #: tfrmmain.mnuworkspacelayout.caption
 msgid "Layouts"
-msgstr ""
+msgstr "Макеты"
 
 #: tfrmmain.tedduration.hint
 msgctxt "tfrmmain.tedduration.hint"
@@ -3852,7 +3849,7 @@ msgstr "Закрыть"
 
 #: tfrmroundtime.caption
 msgid "Round times"
-msgstr ""
+msgstr "Округление"
 
 #: tfrmroundtime.lblscope.caption
 #, fuzzy
@@ -3883,11 +3880,11 @@ msgstr "Только выделенным субтитрам"
 
 #: tfrmroundtime.rdofps.caption
 msgid "Using FPS"
-msgstr ""
+msgstr "Использовать FPS"
 
 #: tfrmroundtime.rdomilliseconds.caption
 msgid "Using Milliseconds"
-msgstr ""
+msgstr "Использовать миллисекунды"
 
 #: tfrmsettings.btnclose.caption
 msgctxt "tfrmsettings.btnclose.caption"
@@ -3964,7 +3961,7 @@ msgstr "Предупредить при удалении субтитров"
 
 #: tfrmsettings.chkpromptforinputencoding.caption
 msgid "Prompt for Encoding before loading a file"
-msgstr ""
+msgstr "Запрос кодировки при загрузке файла"
 
 #: tfrmsettings.chkpromptforinputfps.caption
 msgid "Prompt for FPS before loading a file"
@@ -4785,7 +4782,7 @@ msgstr "Мастер подготовки к работе"
 
 #: tfrmwizard.lblchooselayout.caption
 msgid "Choose workspace layout and timecode mode:"
-msgstr ""
+msgstr "Выбрать расположение рабочей области и режим таймкода:"
 
 #: tfrmwizard.lblexperience.caption
 msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
@@ -4848,15 +4845,14 @@ msgstr "Для скачивания с YouTube (необязательное)"
 #: tfrmwizard.rdolayout0.caption
 msgctxt "tfrmwizard.rdolayout0.caption"
 msgid "Layout 0"
-msgstr ""
+msgstr "Макет 0"
 
 #: tfrmwizard.rdolayout1.caption
 msgctxt "tfrmwizard.rdolayout1.caption"
 msgid "Layout 1"
-msgstr ""
+msgstr "Макет 1"
 
 #: tfrmwizard.rdolayout2.caption
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Layout 2"
-msgstr ""
-
+msgstr "Макет 2"
