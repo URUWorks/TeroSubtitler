@@ -438,9 +438,9 @@ end;
 function SetEndCueOneFrame(const AFinalTime: Integer; const ASubtract: Boolean = False): Integer;
 begin
   if not ASubtract then
-    Result := AFinalTime + FramesToTime(1, Workspace.FPS.OutputFPS)
+    Result := FramesToTime(TimeToFrames(AFinalTime, Workspace.FPS.OutputFPS)+1, Workspace.FPS.OutputFPS)
   else
-    Result := AFinalTime - FramesToTime(1, Workspace.FPS.OutputFPS);
+    Result := FramesToTime(TimeToFrames(AFinalTime, Workspace.FPS.OutputFPS)-1, Workspace.FPS.OutputFPS);
 end;
 
 // -----------------------------------------------------------------------------
