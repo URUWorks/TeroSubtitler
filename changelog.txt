@@ -5,6 +5,7 @@
 - fixed: Only top line imported if across multiple lines in spreadsheet #220
 - fixed: Default input frame rate changes to that of loaded subtitle file #210
 - fixed: HTML Codes #153
+- fixed: Lines missing within subtitles of imported SRT if there are no numbers and an empty line present before first entry [SubtitleAPI/SubRip]
 - fixed: Scroll list to entry in jump to next/previous marked
 - fixed: Faster-Whisper models list not updated after downloading
 - fixed: Wrong toolbar was shown/hidden from the view menu
