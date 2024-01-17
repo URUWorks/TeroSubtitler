@@ -1,4 +1,5 @@
 1.0.1.5 (x.x.2024)
+- fixed: Add one frame shouldn't always add 42 milliseconds to ZZZ #227
 - fixed: Imported frame timings interpreted to milliseconds incorrectly #224
 - fixed: Crash when saving subtitles as spreadsheet with different extension #222
 - fixed: Only top line imported if across multiple lines in spreadsheet #220
