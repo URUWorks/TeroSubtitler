@@ -176,6 +176,9 @@ begin
             Inc(i);
           end;
 
+          if Text.IsEmpty and not IsInteger(SubtitleFile[i]) then //
+            Text := SubtitleFile[i];
+
           Text := HTMLTagsToTS(Text);
           x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
 
