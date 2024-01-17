@@ -245,6 +245,7 @@ begin
     else
     begin
       png.LoadFromLazarusResource('terosubtitler');
+      imgLogo.Picture.Graphic := png;
       png.LoadFromLazarusResource('guilayout0');
       imgLayout0.Picture.Graphic := png;
       png.LoadFromLazarusResource('guilayout1');
