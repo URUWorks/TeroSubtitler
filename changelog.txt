@@ -11,6 +11,7 @@
 - fixed: Wrong toolbar was shown/hidden from the view menu
 - fixed: [macOS] Components with radio buttons display empty text in some functions
 - updated: Brazilian Portuguese language (thx Gzushgshsh)
+- updated: Bulgarian language (thx CM630)
 - updated: Russian language (thx RoxMarty)
 - updated: Whisper.CPP/Fast-Whisper
 - improved: Adjust subtitle function (Alt+L) - improved functionality #203
