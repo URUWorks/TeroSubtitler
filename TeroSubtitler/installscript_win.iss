@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Tero Subtitler"
-#define MyAppVersion "1.0.1.4"
-#define ShortAppVersion "1014"
+#define MyAppVersion "1.0.1.5"
+#define ShortAppVersion "1015"
 #define MyAppPublisher "URUWorks"
 #define MyAppURL "https://github.com/URUWorks/TeroSubtitler/releases"
 #define MyAppExeName "tero.exe"
@@ -58,7 +58,7 @@ Source: "{#SourcePath}\bin\OCR\*.ocr"; DestDir: "{app}\OCR"; Flags: ignoreversio
 Source: "{#SourcePath}\bin\Languages\*.po"; DestDir: "{app}\Languages"; Flags: ignoreversion
 Source: "{#SourcePath}\bin\Icons\*.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
 Source: "{#SourcePath}\bin\Dictionaries\*.*"; DestDir: "{app}\Dictionaries"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\CustomFormat\*.cfi"; DestDir: "{app}\CustomFormat"; Flags: ignoreversion
+Source: "{#SourcePath}\bin\CustomFormat\*.*"; DestDir: "{app}\CustomFormat"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
