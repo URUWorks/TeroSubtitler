@@ -783,10 +783,15 @@ begin
       SetValue('ShowCPSBar', frmMain.mmoText.CPSBar.Visible);
       CloseKey;
       // Unicode favorite chars
-      OpenKey('UnicodeChars');
-      for i := 0 to Length(UnicodeChars)-1 do
-        SetValue('Fav'+i.ToString, UnicodeChars[i]);
-      CloseKey;
+      if Length(UnicodeChars) > 0 then
+      begin
+        OpenKey('UnicodeChars');
+        for i := 0 to High(UnicodeChars) do
+          SetValue('Fav'+i.ToString, UnicodeChars[i]);
+        CloseKey;
+      end
+      else
+        DeletePath('UnicodeChars');
 
       with Conventions do
       begin
@@ -873,10 +878,15 @@ begin
         SetValue('Mute', Volume.Mute);
         CloseKey;
         // MPV Additional Options
-        OpenKey('MPVAdditionalOptions');
-        for i := 0 to Length(AdditionalOptions)-1 do
-          SetValue('opt'+i.ToString, AdditionalOptions[i]);
-        CloseKey;
+        if Length(AdditionalOptions) > 0 then
+        begin
+          OpenKey('MPVAdditionalOptions');
+          for i := 0 to High(AdditionalOptions) do
+            SetValue('opt'+i.ToString, AdditionalOptions[i]);
+          CloseKey;
+        end
+        else
+          DeletePath('MPVAdditionalOptions');
       end;
 
       with WAVEOptions do
