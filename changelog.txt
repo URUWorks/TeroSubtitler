@@ -1,3 +1,9 @@
+1.0.1.6 (x.x.2024)
+- fixed: [macOS/Linux] Layout name was not displayed in the wizard window
+- fixed: Repetead action in Text/Lines menu
+- updated: Russian language (thx RoxMarty)
+- added: Additional mpv options [Settings]
+
 1.0.1.5 (18.01.2024)
 - fixed: Add one frame shouldn't always add 42 milliseconds to ZZZ #227
 - fixed: Imported frame timings interpreted to milliseconds incorrectly #224
