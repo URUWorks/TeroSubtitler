@@ -1,6 +1,7 @@
 1.0.1.6 (x.x.2024)
 - fixed: [macOS/Linux] Layout name was not displayed in the wizard window
 - fixed: Repetead action in Text/Lines menu
+- fixed: Current video aspect was not checked
 - updated: Russian language (thx RoxMarty)
 - added: Additional mpv options [Settings]
 
