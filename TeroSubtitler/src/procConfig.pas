@@ -112,10 +112,9 @@ implementation
 uses
   RegExpr, formMain, XMLConf, UWSystem.Encoding, UWSystem.SysUtils, Dialogs,
   procDialogs, UWSubtitleAPI.Formats, MPVPlayer, procWorkspace, procColorTheme,
-  LCLProc, UWSystem.Globalization, UWSystem.TimeUtils, libMPV.Client,
+  LCLProc, UWSystem.Globalization, UWSystem.TimeUtils, libMPV.Client, procMPV,
   UWSpellcheck.Hunspell, procConventions, UWSystem.InetUtils, lazfileutils,
-  fileinfo, winpeimagereader, elfreader, machoreader,
-  LCLIntf, UWSystem.StrUtils;
+  fileinfo, winpeimagereader, elfreader, machoreader,LCLIntf, UWSystem.StrUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -216,6 +215,7 @@ begin
     Volume.Percent         := 75;
     Volume.Mute            := False;
     SetLength(AdditionalOptions, 0);
+    MPVSetVideoAspectRatio(arDefault);
   end;
 
   FillByte(WAVEOptions, SizeOf(TWAVEOptions), 0);
@@ -538,6 +538,8 @@ begin
         Volume.Percent   := GetValue('Volume', 75);
         Volume.Mute      := GetValue('Mute', False);
         actMediaVolumeMute.Checked := Volume.Mute;
+        Volume.Mute      := GetValue('Mute', False);
+        MPVSetVideoAspectRatio(TMPVPlayerVideoAspectRatio(GetValue('AspectRatio', 0)));
         CloseKey;
         // MPV Additional Options
         OpenKey('MPVAdditionalOptions');
@@ -876,6 +878,7 @@ begin
         SetValue('FrameStep', FrameStep);
         SetValue('Volume', Volume.Percent);
         SetValue('Mute', Volume.Mute);
+        SetValue('AspectRatio', Integer(MPV.AspectRatio));
         CloseKey;
         // MPV Additional Options
         if Length(AdditionalOptions) > 0 then

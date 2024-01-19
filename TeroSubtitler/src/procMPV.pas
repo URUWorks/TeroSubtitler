@@ -22,8 +22,8 @@ unit procMPV;
 interface
 
 uses
-  Classes, SysUtils, Graphics, Dialogs, procTypes, formMain,
-  UWSubtitleAPI, UWSubtitleAPI.Formats;
+  Classes, SysUtils, Graphics, Dialogs, ActnList, procTypes, formMain,
+  UWSubtitleAPI, UWSubtitleAPI.Formats, MPVPlayer;
 
 procedure PrepareMPV;
 procedure UpdateMPVOptions;
@@ -41,13 +41,14 @@ function PrepareSSAStyleString: AnsiString;
 procedure MPVSetVideoFilters;
 procedure MPVSetAudioFilters;
 procedure MPVSetFilters;
+procedure MPVSetVideoAspectRatio(const AValue: TMPVPlayerVideoAspectRatio);
+procedure MPVCycleVideoAspectRatio;
 
 // -----------------------------------------------------------------------------
 
 implementation
 
-uses MPVPlayer, procConfig, UWSystem.Encoding, UWSystem.SysUtils,
-  MPVPlayer.Filters;
+uses procConfig, UWSystem.Encoding, UWSystem.SysUtils, MPVPlayer.Filters;
 
 // -----------------------------------------------------------------------------
 
@@ -340,6 +341,60 @@ procedure MPVSetFilters;
 begin
   MPVSetVideoFilters;
   MPVSetAudioFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
+function VARtoAction(const AValue: TMPVPlayerVideoAspectRatio): TAction;
+begin
+  with frmMain do
+  begin
+    case AValue of
+      ar4_3   : Result := actVAR43;
+      ar16_9  : Result := actVAR169;
+      ar185_1 : Result := actVAR1851;
+      ar235_1 : Result := actVAR2351;
+    else
+      Result := actVARDefault;
+    end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure UncheckVARActions;
+begin
+  with frmMain do
+  begin
+    actVARDefault.Checked := False;
+    actVAR43.Checked := False;
+    actVAR169.Checked := False;
+    actVAR1851.Checked := False;
+    actVAR2351.Checked := False;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MPVSetVideoAspectRatio(const AValue: TMPVPlayerVideoAspectRatio);
+begin
+  with frmMain do
+  begin
+    UncheckVARActions;
+    MPV.SetVideoAspectRatio(AValue);
+    VARtoAction(MPV.AspectRatio).Checked := True;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MPVCycleVideoAspectRatio;
+begin
+  with frmMain do
+  begin
+    UncheckVARActions;
+    VARtoAction(MPV.CycleVideoAspectRatio).Checked := True;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
