@@ -55,8 +55,6 @@ msgid "Ellipses dots instead of Unicode character"
 msgstr "Многоточие вместо юникодного символа"
 
 #: proclocalize.lngasempty
-#, fuzzy
-#| msgid "Empty subtitle"
 msgid "Empty entry"
 msgstr "Пустой субтитр"
 
@@ -108,14 +106,10 @@ msgid "OCR error"
 msgstr "Ошибка распознавания символов"
 
 #: proclocalize.lngasoverlappingwithnext
-#, fuzzy
-#| msgid "Overlapping with following subtitle"
 msgid "Overlapping with following entry"
 msgstr "Наложение на следующий субтитр"
 
 #: proclocalize.lngasoverlappingwithprev
-#, fuzzy
-#| msgid "Overlapping with previous subtitle"
 msgid "Overlapping with previous entry"
 msgstr "Наложение на предыдущий субтитр"
 
@@ -133,7 +127,7 @@ msgstr "Повторяющийся символ"
 
 #: proclocalize.lngasrepeatedentry
 msgid "Repeated entry"
-msgstr "Повторяющиеся записи"
+msgstr "Повторяющиеся субтитры"
 
 #: proclocalize.lngastext
 msgctxt "proclocalize.lngastext"
@@ -260,8 +254,6 @@ msgid "Auto-detect"
 msgstr "Автоматически"
 
 #: proclocalize.lngdetectdialogsegmentswarning
-#, fuzzy
-#| msgid "Attempting to detect dialog segments deletes all subtitles from the list."
 msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "При попытке обнаружить сегменты диалога все субтитры удаляются из списка."
 
@@ -274,13 +266,13 @@ msgstr "Ввести %d"
 #, object-pascal-format
 msgctxt "proclocalize.lngentryendedat"
 msgid "Entry ended in %s"
-msgstr "Запись закончена в %s"
+msgstr "Субтитр закончен на %s"
 
 #: proclocalize.lngentrystartedat
 #, object-pascal-format
 msgctxt "proclocalize.lngentrystartedat"
 msgid "Entry started at %s"
-msgstr "Запись начата в %s"
+msgstr "Субтитр начат на %s"
 
 #: proclocalize.lngerrorexecuting
 #, object-pascal-format
@@ -351,7 +343,7 @@ msgstr "Папка не пуста"
 #: proclocalize.lngfoleft
 msgctxt "proclocalize.lngfoleft"
 msgid "Left"
-msgstr "По левому краю"
+msgstr "Влево"
 
 #: proclocalize.lngfolevel1teletext
 msgid "Level-1 teletext"
@@ -367,7 +359,7 @@ msgstr "Открытое субтитрование"
 
 #: proclocalize.lngforight
 msgid "Right"
-msgstr "По правому краю"
+msgstr "Вправо"
 
 #: proclocalize.lngfoundefined
 msgid "Undefined"
@@ -398,8 +390,6 @@ msgid "Break overlong lines"
 msgstr "Разбить длинные строки"
 
 #: proclocalize.lngfsetchaining
-#, fuzzy
-#| msgid "Chaining subtitles"
 msgid "Chaining entries"
 msgstr "Объединить субтитры"
 
@@ -412,8 +402,6 @@ msgid "Convert ellipsis dots to Unicode character"
 msgstr "Преобразование многоточия в юникодный символ"
 
 #: proclocalize.lngfsetempty
-#, fuzzy
-#| msgid "Remove empty subtitles"
 msgid "Remove empty entries"
 msgstr "Удалить пустые субтитры"
 
@@ -442,8 +430,7 @@ msgid "Fix overlapping display times"
 msgstr "Исправить наложение субтитров по времени"
 
 #: proclocalize.lngfsetprohibitedchars
-#, fuzzy, object-pascal-format
-#| msgid "Remove subtitles with %s"
+#, object-pascal-format
 msgid "Remove entries with %s"
 msgstr "Удалить субтитры с символами: %s"
 
@@ -458,7 +445,7 @@ msgstr "Удалить повторяющиеся символы"
 #: proclocalize.lngfsetrepeatedentry
 msgctxt "proclocalize.lngfsetrepeatedentry"
 msgid "Remove repeated entries"
-msgstr "Удалить повторяющиеся записи"
+msgstr "Удалить повторяющиеся субтитры"
 
 #: proclocalize.lngfsetsnaptoshotchanges
 msgid "Snap times to shot changes"
@@ -645,7 +632,7 @@ msgstr "Обнаружена новая версия."
 #: proclocalize.lngnoentriesmarked
 msgctxt "proclocalize.lngnoentriesmarked"
 msgid "There are no marked entries."
-msgstr "Отсутствуют помеченные записи."
+msgstr "Отсутствуют помеченные субтитры."
 
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
@@ -690,7 +677,7 @@ msgstr "Проект перевода субтитров"
 
 #: proclocalize.lngpromptfordeletelines
 msgid "The selected lines will be deleted."
-msgstr "Выбранные строки были удалены."
+msgstr "Выбранные строки будут удалены."
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -768,7 +755,7 @@ msgstr "Решение редактировать список"
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"
 msgid "Entries"
-msgstr "Записи"
+msgstr "Субтитры"
 
 #: proclocalize.lngscfile
 msgctxt "proclocalize.lngscfile"
@@ -818,7 +805,6 @@ msgid "Text files"
 msgstr "Текстовые файлы"
 
 #: proclocalize.lngsctext
-#, fuzzy
 msgctxt "proclocalize.lngsctext"
 msgid "Text"
 msgstr "Оригинал"
@@ -1044,8 +1030,7 @@ msgid "Translation file has not been saved."
 msgstr "Файл перевода не сохранён"
 
 #: proclocalize.lngttip1
-#, fuzzy, object-pascal-format
-#| msgid "Tip: Use <%s/%s> to go to previous/next subtitle"
+#, object-pascal-format
 msgid "Tip: Use <%s/%s> to go to previous/next entry"
 msgstr "Совет: нажмите <%s/%s> для перехода к предыдущему/следующему субтитру"
 
@@ -1286,22 +1271,16 @@ msgid "per word"
 msgstr "слову"
 
 #: tfrmautomaticdurations.rbnallthesubtitles.caption
-#, fuzzy
-#| msgid "All the subtitles"
 msgctxt "tfrmautomaticdurations.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Всем субтитрам"
 
 #: tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption
-#, fuzzy
-#| msgid "From the selected subtitle"
 msgctxt "tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "От текущего субтитра"
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected subtitles"
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Только выделенным субтитрам"
@@ -1379,13 +1358,11 @@ msgid "Target FPS"
 msgstr "Конечное FPS"
 
 #: tfrmcharactermap.btnclose.caption
-#, fuzzy
 msgctxt "tfrmcharactermap.btnclose.caption"
 msgid "Close"
 msgstr "Закрыть"
 
 #: tfrmcharactermap.btncopy.caption
-#, fuzzy
 msgctxt "tfrmcharactermap.btncopy.caption"
 msgid "Copy"
 msgstr "Копировать"
@@ -1476,31 +1453,26 @@ msgid "Min. duration / per word (ms)"
 msgstr "Мин. длина 1 слова (мс)"
 
 #: tfrmconventions.lblnewsubtitlems.caption
-#, fuzzy
 msgctxt "tfrmconventions.lblnewsubtitlems.caption"
 msgid "New subtitle (ms)"
 msgstr "Новый субтитр (мс)"
 
 #: tfrmconventions.lblprohibitedchars.caption
-#, fuzzy
 msgctxt "tfrmconventions.lblprohibitedchars.caption"
 msgid "Prohibited characters"
 msgstr "Запрещённые символы"
 
 #: tfrmconventions.lblrepeatablechars.caption
-#, fuzzy
 msgctxt "tfrmconventions.lblrepeatablechars.caption"
 msgid "Repeatable characters"
 msgstr "Повторяющиеся символы"
 
 #: tfrmconventions.lblscsnapincues.caption
-#, fuzzy
 msgctxt "tfrmconventions.lblscsnapincues.caption"
 msgid "Snap in cues after SC (frames)"
 msgstr "Привязка реплик после SC (кадров)"
 
 #: tfrmconventions.lblscsnapoutcues.caption
-#, fuzzy
 msgctxt "tfrmconventions.lblscsnapoutcues.caption"
 msgid "Snap out cues before SC (frames)"
 msgstr "Привязка реплик до SC (кадров)"
@@ -1530,22 +1502,16 @@ msgid "Scope:"
 msgstr "Применить:"
 
 #: tfrmconvertcase.rbnallthesubtitles.caption
-#, fuzzy
-#| msgid "All the subtitles"
 msgctxt "tfrmconvertcase.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Всем субтитрам"
 
 #: tfrmconvertcase.rbnfromtheselectedsubtitle.caption
-#, fuzzy
-#| msgid "From the selected subtitle"
 msgctxt "tfrmconvertcase.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected entry"
 msgstr "От текущего субтитра"
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected subtitles"
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Только выделенным субтитры"
@@ -1814,22 +1780,16 @@ msgid "Scope:"
 msgstr "Применить ко:"
 
 #: tfrmdelay.rbnallthesubtitles.caption
-#, fuzzy
-#| msgid "All the subtitles"
 msgctxt "tfrmdelay.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Всем субтитрам"
 
 #: tfrmdelay.rbnfromtheselectedsubtitle.caption
-#, fuzzy
-#| msgid "From the selected subtitle"
 msgctxt "tfrmdelay.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "От текущего субтитра"
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected subtitles"
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Только выделенным субтитрам"
@@ -1866,22 +1826,16 @@ msgid "Scope:"
 msgstr "Применить ко:"
 
 #: tfrmdurationlimits.rbnallthesubtitles.caption
-#, fuzzy
-#| msgid "All the subtitles"
 msgctxt "tfrmdurationlimits.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Всем субтитрами"
+msgstr "Всем субтитрам"
 
 #: tfrmdurationlimits.rbnfromtheselectedsubtitle.caption
-#, fuzzy
-#| msgid "From the selected subtitle"
 msgctxt "tfrmdurationlimits.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected entry"
-msgstr "От текущего субтитров"
+msgstr "От текущего субтитра"
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected subtitles"
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Только выделенным субтитрам"
@@ -1996,15 +1950,11 @@ msgid "Text to find:"
 msgstr "Найти текст:"
 
 #: tfrmfindandreplace.rbnallthesubtitles.caption
-#, fuzzy
-#| msgid "All the subtitles"
 msgctxt "tfrmfindandreplace.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Всем субтитрам"
 
 #: tfrmfindandreplace.rbnfromtheselectedsubtitle.caption
-#, fuzzy
-#| msgid "From the selected subtitle"
 msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "От текущего субтитра"
@@ -2041,13 +1991,11 @@ msgid "Deselect all"
 msgstr "Отменить выбор"
 
 #: tfrmfixsubtitles.mnuinvertselection.caption
-#, fuzzy
 msgctxt "tfrmfixsubtitles.mnuinvertselection.caption"
 msgid "Invert selection"
 msgstr "Обратить выделение"
 
 #: tfrmfixsubtitles.mnuselectall.caption
-#, fuzzy
 msgctxt "tfrmfixsubtitles.mnuselectall.caption"
 msgid "Select all"
 msgstr "Выбрать всё"
@@ -2448,13 +2396,11 @@ msgid "Audio to text..."
 msgstr "Преобразовать аудио в текст"
 
 #: tfrmmain.actautobreakentry.caption
-#, fuzzy
 msgctxt "tfrmmain.actautobreakentry.caption"
 msgid "Autobreak"
 msgstr "Авторазделение длинных строк"
 
 #: tfrmmain.actautobreakentry.hint
-#, fuzzy
 msgctxt "tfrmmain.actautobreakentry.hint"
 msgid "Split a long line into two or more lines"
 msgstr "Разделить длинную строку на две или более"
@@ -2496,11 +2442,9 @@ msgstr "Закрыть видео"
 
 #: tfrmmain.actcombineentries.caption
 msgid "Combine entries"
-msgstr "Объединить записи"
+msgstr "Объединить субтитры"
 
 #: tfrmmain.actcombineentries.hint
-#, fuzzy
-#| msgid "Combines all the selected subtitles into one"
 msgctxt "tfrmmain.actcombineentries.hint"
 msgid "Combines all the selected entries into one"
 msgstr "Объединить выбранные субтитры воедино"
@@ -2529,11 +2473,11 @@ msgstr "Вырезать"
 
 #: tfrmmain.actdeleteentry.caption
 msgid "Delete entries"
-msgstr "Удалить записи"
+msgstr "Удалить строку"
 
 #: tfrmmain.actdeleteentry.hint
 msgid "Delete selected entries"
-msgstr "Удалить выбранные записи"
+msgstr "Удалить выбранные субтитры"
 
 #: tfrmmain.actdeleteshotchange.caption
 msgid "Delete shot change(s)"
@@ -2554,7 +2498,7 @@ msgstr "Нажмите для обновления списка"
 
 #: tfrmmain.actdivideentry.caption
 msgid "Divide entry"
-msgstr "Разделить запись"
+msgstr "Разделить субтитры надвое"
 
 #: tfrmmain.actdurationlimits.caption
 msgid "Duration limits..."
@@ -2678,8 +2622,6 @@ msgid "Video with hardcoded subtitles..."
 msgstr "Создать видеоряд с хардсабом..."
 
 #: tfrmmain.actgoto.caption
-#, fuzzy
-#| msgid "Go to line number..."
 msgid "Go to entry..."
 msgstr "Перейти к строке номер..."
 
@@ -2702,19 +2644,17 @@ msgstr "Вставить текущее время"
 
 #: tfrmmain.actinsertentry.caption
 msgid "Insert entry"
-msgstr "Вставить запись"
+msgstr "Вставить строку субтитров после текущей"
 
 #: tfrmmain.actinsertentry.hint
 msgid "Insert a new entry after the current entry"
-msgstr "Вставить новую запись после текущей"
+msgstr "Вставить новый субтитр после текущего"
 
 #: tfrmmain.actinsertentrybefore.caption
 msgid "Insert entry before"
-msgstr "Вставить запись перед"
+msgstr "Вставить строку субтитров перед текущей"
 
 #: tfrmmain.actinsertentrybefore.hint
-#, fuzzy
-#| msgid "Insert subtitle before the current subtitle"
 msgctxt "tfrmmain.actinsertentrybefore.hint"
 msgid "Insert entry before the current entry"
 msgstr "Вставить субтитр до текущего"
@@ -2730,7 +2670,7 @@ msgstr "Обратить выделение"
 
 #: tfrmmain.actjumptonextempty.caption
 msgid "Jump to next without text"
-msgstr "Перейти к след. без текста"
+msgstr "Перейти к следующему субтитру без текста"
 
 #: tfrmmain.actjumptonextmarked.caption
 msgid "Jump to next marked"
@@ -2738,11 +2678,11 @@ msgstr "Перейти к следующей пометке"
 
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
-msgstr "Перейти к след. смене кадра"
+msgstr "Перейти к следующей смене кадра"
 
 #: tfrmmain.actjumptopreviousempty.caption
 msgid "Jump to previous without text"
-msgstr "Вернуться к предыдущему без текста"
+msgstr "Вернуться к предыдущему субтитру без текста"
 
 #: tfrmmain.actjumptopreviousmarked.caption
 msgid "Jump to previous marked"
@@ -2750,7 +2690,7 @@ msgstr "Перейти к предыдущей пометке"
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"
-msgstr "Перейти к пред. смене кадра"
+msgstr "Перейти к предыдущей смене кадра"
 
 #: tfrmmain.actlistmode.caption
 msgctxt "tfrmmain.actlistmode.caption"
@@ -2773,7 +2713,7 @@ msgstr "Открыть файл субтитров"
 #: tfrmmain.actloadtranscription.caption
 msgctxt "tfrmmain.actloadtranscription.caption"
 msgid "Transcription..."
-msgstr "Открыть транскрипцию..."
+msgstr "Транскрипция..."
 
 #: tfrmmain.actloadtranslation.caption
 msgid "Load translation..."
@@ -2793,14 +2733,12 @@ msgstr "Открыть видео по ссылке..."
 
 #: tfrmmain.actmarkentry.caption
 msgid "Mark entry"
-msgstr "Отметить вход"
+msgstr "Пометить строку"
 
 #: tfrmmain.actmediaaddentry.caption
-#, fuzzy
-#| msgid "Add subtitle"
 msgctxt "tfrmmain.actmediaaddentry.caption"
 msgid "Add entry"
-msgstr "Добавить субтитр"
+msgstr "Добавить строку субтитров"
 
 #: tfrmmain.actmediaautoscroll.caption
 msgctxt "tfrmmain.actmediaautoscroll.caption"
@@ -2821,15 +2759,13 @@ msgid "Playback rate"
 msgstr "Частота воспроизведения"
 
 #: tfrmmain.actmediadeleteentry.caption
-#, fuzzy
-#| msgid "Delete subtitle"
 msgctxt "tfrmmain.actmediadeleteentry.caption"
 msgid "Delete entry"
-msgstr "Удалить субтитр"
+msgstr "Удалить строку субтитров"
 
 #: tfrmmain.actmediaendsubtitleentry.caption
 msgid "End entry"
-msgstr "Конец записи"
+msgstr "Конец субтитра"
 
 #: tfrmmain.actmediaforward.caption
 msgctxt "tfrmmain.actmediaforward.caption"
@@ -2846,7 +2782,7 @@ msgstr "Вперёд на 1 секунду"
 
 #: tfrmmain.actmediamovesubtitleentry.caption
 msgid "Move entry"
-msgstr "Переместить запись"
+msgstr "Сдвинуть субтитр"
 
 #: tfrmmain.actmedianextframe.caption
 msgctxt "tfrmmain.actmedianextframe.caption"
@@ -2900,7 +2836,7 @@ msgstr "Время начала"
 
 #: tfrmmain.actmediastartsubtitleentry.caption
 msgid "Start entry"
-msgstr "Начало записи"
+msgstr "Начало субтитра"
 
 #: tfrmmain.actmediastop.caption
 msgctxt "tfrmmain.actmediastop.caption"
@@ -2976,43 +2912,41 @@ msgstr "Предыдущий субтитр"
 
 #: tfrmmain.actpullfirstlinefromnextentry.caption
 msgid "Pull the first line from the next entry"
-msgstr "Извлечь первую строку из след. записи"
+msgstr "Перенести сюда первую строку из следующего субтитра"
 
 #: tfrmmain.actpulllastlinefrompreviousentry.caption
 msgid "Pull the last line from the previous entry"
-msgstr "Извлечь последнюю строку из пред. записи"
+msgstr "Извлечь последнюю строку из предыдущих субтитров"
 
 #: tfrmmain.actpushfirstlinetopreviousentry.caption
 msgid "Push the first line to the previous entry"
-msgstr "Перенести первую строку на пред. запись"
+msgstr "Перенести первую строчку в предыдущий субтитр"
 
 #: tfrmmain.actpushlastlinetonextentry.caption
 msgid "Push the last line to the next entry"
-msgstr "Перенести последнюю строку в след. запись"
+msgstr "Перенести последнюю строчку в следующий субтитр"
 
 #: tfrmmain.actpushworddown.caption
 msgid "Push the last word of the current line down"
-msgstr "Перенести последнее слово текущей строки вниз"
+msgstr "Перенести последнее слово строкой ниже"
 
 #: tfrmmain.actpushwordtonextentry.caption
 msgid "Push the last word to the next entry"
-msgstr "Перенести последнее слово в след. запись"
+msgstr "Перенести последнее слово в следующий субтитр"
 
 #: tfrmmain.actpushwordtopreviousentry.caption
 msgid "Push the first word to the previous entry"
-msgstr "Перенести первое слово в пред. запись"
+msgstr "Перенести первое слово в предыдущий субтитр"
 
 #: tfrmmain.actpushwordup.caption
 msgid "Push the first word of the current line up"
-msgstr "Перенести первое слово текущей строки выше"
+msgstr "Перенести первое слово на строку выше"
 
 #: tfrmmain.actqualitycheck.caption
 msgid "Quality check..."
 msgstr "Проверка правил..."
 
 #: tfrmmain.actreadtextsfromfile.caption
-#, fuzzy
-#| msgid "Read texts from file..."
 msgid "Read text from file..."
 msgstr "Взять текст из файла..."
 
@@ -3031,7 +2965,7 @@ msgstr "Вернуть последнюю отмену"
 
 #: tfrmmain.actremovelinefromentry.caption
 msgid "Remove line from entry..."
-msgstr "Удалить введённую строку из записи..."
+msgstr "Удалить введённую строку из субтитра..."
 
 #: tfrmmain.actremoveunicodecontrolchars.caption
 msgid "Remove Unicode control characters"
@@ -3096,8 +3030,6 @@ msgid "Save current translation to a specific file"
 msgstr "Сохранить текущий перевод в конкретный файл"
 
 #: tfrmmain.actscreenshottofile.caption
-#, fuzzy
-#| msgid "Screenshot to file"
 msgid "Save screenshot"
 msgstr "Сохранить скриншот в файл"
 
@@ -3126,11 +3058,11 @@ msgstr "Настроить формат сохранения по-умолчан
 
 #: tfrmmain.actsetautomaticduration.caption
 msgid "Set automatic duration"
-msgstr "Настроить автодлину"
+msgstr "Активировать автодлину"
 
 #: tfrmmain.actsetdefaultgap.caption
 msgid "Set default gap"
-msgstr "Настроить промежуток по-умолчанию"
+msgstr "Активировать промежуток по-умолчанию"
 
 #: tfrmmain.actsetdefaultgap.hint
 msgid "Only if the gap is too short"
@@ -3157,7 +3089,7 @@ msgstr "Макет 2"
 
 #: tfrmmain.actsetmaximumlinelength.caption
 msgid "Set maximum line length"
-msgstr "Максимальная длина строки"
+msgstr "Активировать максимальную длину строки"
 
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
@@ -3260,16 +3192,13 @@ msgid "Spell check..."
 msgstr "Проверка орфографии"
 
 #: tfrmmain.actsplitentryatposition.caption
-#, fuzzy
 msgctxt "tfrmmain.actsplitentryatposition.caption"
 msgid "Split line at cursor position"
 msgstr "Разделить строку на месте курсора"
 
 #: tfrmmain.actswaptexts.caption
-#, fuzzy
-#| msgid "Swap texts"
 msgid "Swap text"
-msgstr "Поменять текст"
+msgstr "Поменять текст оригинала и перевода"
 
 #: tfrmmain.acttbx.caption
 msgctxt "tfrmmain.acttbx.caption"
@@ -3361,7 +3290,7 @@ msgstr "Режим перевода"
 
 #: tfrmmain.actunbreakentry.caption
 msgid "Unbreak entry"
-msgstr "Убрать разделение записи"
+msgstr "Убрать авторазделение строки"
 
 #: tfrmmain.actundo.caption
 msgctxt "tfrmmain.actundo.caption"
@@ -3418,7 +3347,7 @@ msgstr ""
 
 #: tfrmmain.actunmarkentry.caption
 msgid "Unmark entry"
-msgstr "Убрать пометку записи"
+msgstr "Убрать пометку строки"
 
 #: tfrmmain.actvalidatetm.caption
 msgid "Validate translation memory"
@@ -3461,7 +3390,7 @@ msgstr ""
 
 #: tfrmmain.actvarcycle.caption
 msgid "Cycle Aspect Ratio"
-msgstr "Соотношение сторон цикла"
+msgstr "Цикличное переключение соотношения сторон"
 
 #: tfrmmain.actvardefault.caption
 msgid "Default"
@@ -3485,7 +3414,7 @@ msgstr "Отразить по горизонтали"
 
 #: tfrmmain.actvideofilternegative.caption
 msgid "Negative"
-msgstr "Отрицание"
+msgstr "Негатив"
 
 #: tfrmmain.actvideofiltersharpen.caption
 msgid "Sharpen"
@@ -3574,7 +3503,7 @@ msgstr "Редактировать"
 #: tfrmmain.mnueditentries.caption
 msgctxt "tfrmmain.mnueditentries.caption"
 msgid "Entries"
-msgstr "Записи"
+msgstr "Субтитры"
 
 #: tfrmmain.mnueditformat.caption
 msgctxt "tfrmmain.mnueditformat.caption"
@@ -3590,8 +3519,6 @@ msgid "Right-to-left"
 msgstr "Справа налево"
 
 #: tfrmmain.mnuedittexts.caption
-#, fuzzy
-#| msgid "Texts"
 msgctxt "tfrmmain.mnuedittexts.caption"
 msgid "Text"
 msgstr "Тексты"
@@ -3836,13 +3763,11 @@ msgid "Restore backup"
 msgstr "Восстановить резервную копию"
 
 #: tfrmroundtime.btnapply.caption
-#, fuzzy
 msgctxt "tfrmroundtime.btnapply.caption"
 msgid "Apply"
 msgstr "Применить"
 
 #: tfrmroundtime.btnclose.caption
-#, fuzzy
 msgctxt "tfrmroundtime.btnclose.caption"
 msgid "Close"
 msgstr "Закрыть"
@@ -3852,28 +3777,21 @@ msgid "Round times"
 msgstr "Округление"
 
 #: tfrmroundtime.lblscope.caption
-#, fuzzy
 msgctxt "tfrmroundtime.lblscope.caption"
 msgid "Scope:"
 msgstr "Применить ко:"
 
 #: tfrmroundtime.rbnallthesubtitles.caption
-#, fuzzy
-#| msgid "All the subtitles"
 msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Всем субтитрам"
 
 #: tfrmroundtime.rbnfromtheselectedsubtitle.caption
-#, fuzzy
-#| msgid "From the selected subtitle"
 msgctxt "tfrmroundtime.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "От текущего субтитра"
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected subtitles"
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Только выделенным субтитрам"
@@ -4024,8 +3942,6 @@ msgid "Default input frame rate"
 msgstr "Частота кадров по-умолчанию:"
 
 #: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
-#, fuzzy
-#| msgid "Dialog segments detection threshold (rms)"
 msgid "Dialogue segments detection threshold (rms)"
 msgstr "Порог обнаружения диалога (среднеквадратичное)"
 
@@ -4261,22 +4177,16 @@ msgid "Scope:"
 msgstr "Применить к:"
 
 #: tfrmshifttimes.rbnallthesubtitles.caption
-#, fuzzy
-#| msgid "All the subtitles"
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Всем субтитрам"
 
 #: tfrmshifttimes.rbnfromtheselectedsubtitle.caption
-#, fuzzy
-#| msgid "From the selected subtitle"
 msgctxt "tfrmshifttimes.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "От текущего субтитра"
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected subtitles"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Только выбранным субтитрам"
@@ -4529,22 +4439,16 @@ msgid "Scope:"
 msgstr "Применить к:"
 
 #: tfrmtimeexpander.rbnallthesubtitles.caption
-#, fuzzy
-#| msgid "All the subtitles"
 msgctxt "tfrmtimeexpander.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Всем субтитрам"
 
 #: tfrmtimeexpander.rbnfromtheselectedsubtitle.caption
-#, fuzzy
-#| msgid "From the selected subtitle"
 msgctxt "tfrmtimeexpander.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "От текущего субтитра"
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected subtitles"
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Только к выбранным субтитрам"
@@ -4587,22 +4491,16 @@ msgid "Translation language:"
 msgstr "Язык перевода:"
 
 #: tfrmtranslate.rbnallthesubtitles.caption
-#, fuzzy
-#| msgid "All the subtitles"
 msgctxt "tfrmtranslate.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Всем субтитрам"
 
 #: tfrmtranslate.rbnfromtheselectedsubtitle.caption
-#, fuzzy
-#| msgid "From the selected subtitle"
 msgctxt "tfrmtranslate.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "От текущего субтитра"
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected subtitles"
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Только в выбранным субтитрам"
@@ -4741,7 +4639,6 @@ msgid "Recent files"
 msgstr "Последние открытые файлы"
 
 #: tfrmwelcome.lblwelcome.caption
-#, fuzzy
 msgctxt "tfrmwelcome.lblwelcome.caption"
 msgid "Welcome to"
 msgstr "Добро пожаловать"

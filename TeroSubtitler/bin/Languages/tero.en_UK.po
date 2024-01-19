@@ -26,6 +26,10 @@ msgstr ""
 "Compiler version: %s\n"
 "Target CPU: %s"
 
+#: proclocalize.lngadditionaloption
+msgid "Additional option"
+msgstr "Additional option"
+
 #: proclocalize.lngadditionalparams
 msgid "Additional params:"
 msgstr "Additional params:"
@@ -128,7 +132,7 @@ msgstr "Repeated character"
 
 #: proclocalize.lngasrepeatedentry
 msgid "Repeated entry"
-msgstr ""
+msgstr "Repeated entry"
 
 #: proclocalize.lngastext
 msgctxt "proclocalize.lngastext"
@@ -3820,6 +3824,16 @@ msgctxt "tfrmsettings.btnffmpeg.caption"
 msgid "..."
 msgstr "..."
 
+#: tfrmsettings.btnminus.caption
+msgctxt "tfrmsettings.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmsettings.btnplus.caption
+msgctxt "tfrmsettings.btnplus.caption"
+msgid "+"
+msgstr "+"
+
 #: tfrmsettings.btnprofile.caption
 msgctxt "tfrmsettings.btnprofile.caption"
 msgid "..."
@@ -3905,6 +3919,10 @@ msgstr "mpv handles subtitles for preview"
 #: tfrmsettings.chkuseownfiledialog.caption
 msgid "Use Tero file dialog"
 msgstr "Use Tero file dialogue"
+
+#: tfrmsettings.lbladditionalmpvoptions.caption
+msgid "Additional mpv options"
+msgstr "Additional mpv options"
 
 #: tfrmsettings.lblautobackup.caption
 msgid "Auto-backup every (minutes)"

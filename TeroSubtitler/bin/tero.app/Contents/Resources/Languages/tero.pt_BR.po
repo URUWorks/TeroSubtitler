@@ -26,6 +26,10 @@ msgstr ""
 "Versão do compilador: %s\n"
 "CPU alvo: %s"
 
+#: proclocalize.lngadditionaloption
+msgid "Additional option"
+msgstr ""
+
 #: proclocalize.lngadditionalparams
 msgid "Additional params:"
 msgstr "Parâmetros adicionais:"
@@ -3834,6 +3838,18 @@ msgctxt "tfrmsettings.btnffmpeg.caption"
 msgid "..."
 msgstr "..."
 
+#: tfrmsettings.btnminus.caption
+#, fuzzy
+msgctxt "tfrmsettings.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmsettings.btnplus.caption
+#, fuzzy
+msgctxt "tfrmsettings.btnplus.caption"
+msgid "+"
+msgstr "+"
+
 #: tfrmsettings.btnprofile.caption
 msgctxt "tfrmsettings.btnprofile.caption"
 msgid "..."
@@ -3919,6 +3935,10 @@ msgstr "Usar mpv para pré-visualização de legendas"
 #: tfrmsettings.chkuseownfiledialog.caption
 msgid "Use Tero file dialog"
 msgstr "Usar dialogo de arquivo do Tero"
+
+#: tfrmsettings.lbladditionalmpvoptions.caption
+msgid "Additional mpv options"
+msgstr ""
 
 #: tfrmsettings.lblautobackup.caption
 msgid "Auto-backup every (minutes)"
@@ -4765,3 +4785,4 @@ msgstr "Disposição 1"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Layout 2"
 msgstr "Disposição 2"
+
