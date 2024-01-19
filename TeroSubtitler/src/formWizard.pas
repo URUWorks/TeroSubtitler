@@ -191,6 +191,10 @@ begin
   cboTimeCode.Items.Add('');
   cboLanguageChange(NIL);
   cboTimeCode.ItemIndex := Integer(Workspace.WorkMode);
+
+  {$IFNDEF WINDOWS}
+  PrepareCustomControls(Self);
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------
