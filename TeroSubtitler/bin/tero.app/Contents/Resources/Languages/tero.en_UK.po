@@ -4772,3 +4772,4 @@ msgstr "Layout 1"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Layout 2"
 msgstr "Layout 2"
+

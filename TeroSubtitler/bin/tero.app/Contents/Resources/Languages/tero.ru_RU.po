@@ -26,6 +26,10 @@ msgstr ""
 "Версия компилятора: %s\n"
 "Целевой центральный процессор: %s"
 
+#: proclocalize.lngadditionaloption
+msgid "Additional option"
+msgstr ""
+
 #: proclocalize.lngadditionalparams
 msgid "Additional params:"
 msgstr "Дополнительные параметры:"
@@ -3819,6 +3823,16 @@ msgctxt "tfrmsettings.btnffmpeg.caption"
 msgid "..."
 msgstr ""
 
+#: tfrmsettings.btnminus.caption
+msgctxt "tfrmsettings.btnminus.caption"
+msgid "-"
+msgstr ""
+
+#: tfrmsettings.btnplus.caption
+msgctxt "tfrmsettings.btnplus.caption"
+msgid "+"
+msgstr ""
+
 #: tfrmsettings.btnprofile.caption
 msgctxt "tfrmsettings.btnprofile.caption"
 msgid "..."
@@ -3904,6 +3918,10 @@ msgstr "mpv обрабатывает субтитры для предпросм�
 #: tfrmsettings.chkuseownfiledialog.caption
 msgid "Use Tero file dialog"
 msgstr "Использовать диалоговое окно Tero"
+
+#: tfrmsettings.lbladditionalmpvoptions.caption
+msgid "Additional mpv options"
+msgstr ""
 
 #: tfrmsettings.lblautobackup.caption
 msgid "Auto-backup every (minutes)"
@@ -4753,3 +4771,4 @@ msgstr "Макет 1"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Layout 2"
 msgstr "Макет 2"
+
