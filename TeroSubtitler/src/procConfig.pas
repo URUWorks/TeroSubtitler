@@ -215,6 +215,7 @@ begin
     FrameStep              := 1;
     Volume.Percent         := 75;
     Volume.Mute            := False;
+    SetLength(AdditionalOptions, 0);
   end;
 
   FillByte(WAVEOptions, SizeOf(TWAVEOptions), 0);
@@ -538,6 +539,27 @@ begin
         Volume.Mute      := GetValue('Mute', False);
         actMediaVolumeMute.Checked := Volume.Mute;
         CloseKey;
+        // MPV Additional Options
+        OpenKey('MPVAdditionalOptions');
+        i := 0;
+        sl := TStringList.Create;
+        try
+          sl.SkipLastLineBreak := True;
+          repeat
+            s := GetValue('opt'+i.ToString, '');
+            if not s.IsEmpty then sl.Add(s);
+            Inc(i);
+          until s = '';
+        finally
+          if sl.Count > 0 then
+          begin
+            SetLength(AdditionalOptions, sl.Count);
+            for i := 0 to sl.Count-1 do
+              AdditionalOptions[i] := sl[i];
+          end;
+          sl.Free;
+        end;
+        CloseKey;
       end;
 
       with WAVEOptions do
@@ -849,6 +871,11 @@ begin
         SetValue('FrameStep', FrameStep);
         SetValue('Volume', Volume.Percent);
         SetValue('Mute', Volume.Mute);
+        CloseKey;
+        // MPV Additional Options
+        OpenKey('MPVAdditionalOptions');
+        for i := 0 to Length(AdditionalOptions)-1 do
+          SetValue('opt'+i.ToString, AdditionalOptions[i]);
         CloseKey;
       end;
 

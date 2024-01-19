@@ -1284,6 +1284,7 @@ begin
     // Settings
     SaveSettings;
     SetLength(AppOptions.UnicodeChars, 0);
+    SetLength(MPVOptions.AdditionalOptions, 0);
     // Transcription
     TranscriptionUnInitializeControls;
     // TMX

@@ -1454,6 +1454,57 @@ object frmSettings: TfrmSettings
       Caption = 'mpv handles subtitles for preview'
       TabOrder = 1
     end
+    object lblAdditionalMPVOptions: TLabel
+      AnchorSideTop.Control = lblFrameStep
+      AnchorSideTop.Side = asrBottom
+      Left = 2
+      Height = 15
+      Top = 127
+      Width = 246
+      AutoSize = False
+      BorderSpacing.Top = 19
+      Caption = 'Additional mpv options'
+      ParentColor = False
+    end
+    object btnPlus: TButton
+      AnchorSideTop.Control = lstMPVOptions
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 360
+      Width = 38
+      BorderSpacing.Top = 5
+      Caption = '+'
+      TabOrder = 5
+      OnClick = btnPlusClick
+    end
+    object btnMinus: TButton
+      AnchorSideLeft.Control = btnPlus
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = btnPlus
+      AnchorSideRight.Side = asrBottom
+      Left = 43
+      Height = 23
+      Top = 360
+      Width = 38
+      BorderSpacing.Left = 5
+      Caption = '-'
+      Enabled = False
+      TabOrder = 6
+      OnClick = btnMinusClick
+    end
+    object lstMPVOptions: TListBox
+      AnchorSideTop.Control = lblAdditionalMPVOptions
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 208
+      Top = 147
+      Width = 516
+      BorderSpacing.Top = 5
+      ExtendedSelect = False
+      ItemHeight = 0
+      TabOrder = 4
+    end
   end
   object lyoToolbar: TUWLayout
     Left = -328

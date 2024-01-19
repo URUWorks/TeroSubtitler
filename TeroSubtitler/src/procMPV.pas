@@ -52,6 +52,8 @@ uses MPVPlayer, procConfig, UWSystem.Encoding, UWSystem.SysUtils,
 // -----------------------------------------------------------------------------
 
 procedure PrepareMPV;
+var
+  i: Integer;
 begin
   with frmMain.MPV do
   begin
@@ -93,6 +95,11 @@ begin
       AddOption('mute=' + SysUtils.BoolToStr(Volume.Mute, 'yes', 'no'));
 
       //AddOption('log-file='+LogMPVFileName);
+
+      // Additional mpv options
+      if Length(AdditionalOptions) > 0 then
+        for i := 0 to High(AdditionalOptions) do
+          AddOption(AdditionalOptions[i]);
     end;
   end;
 end;

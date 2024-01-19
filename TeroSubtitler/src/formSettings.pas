@@ -24,7 +24,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
   ExtCtrls, UWLayout, UWCheckBox, UWHotKey, ActnList, procConventions, LCLProc,
-  ComCtrls, UWSubtitleAPI.Formats, LCLTranslator, procLocalize;
+  ComCtrls, UWSubtitleAPI.Formats, LCLTranslator, laz.VirtualTrees,
+  procLocalize;
 
 type
 
@@ -33,6 +34,8 @@ type
   TfrmSettings = class(TForm)
     btnClose: TButton;
     btnFFMPEG: TButton;
+    btnMinus: TButton;
+    btnPlus: TButton;
     btnSceneDetect: TButton;
     btnProfile: TButton;
     btnWhisperCPP: TButton;
@@ -80,6 +83,7 @@ type
     edtFasterWhisper: TEdit;
     edtYTDLP: TEdit;
     imlFileTypes: TImageList;
+    lblAdditionalMPVOptions: TLabel;
     lblListFontSize: TLabel;
     lblCPSStrategy: TLabel;
     lblTextBoxFontSize: TLabel;
@@ -107,6 +111,7 @@ type
     lblFrameStep: TLabel;
     lblWaveform: TLabel;
     lblToolBarWave: TLabel;
+    lstMPVOptions: TListBox;
     lyoFileTypeAssociations: TUWLayout;
     spnTextBoxFontSize: TSpinEdit;
     spnSCSnapArea: TSpinEdit;
@@ -254,6 +259,8 @@ type
     procedure btnCloseClick(Sender: TObject);
     procedure btnFasterWhisperClick(Sender: TObject);
     procedure btnFFMPEGClick(Sender: TObject);
+    procedure btnMinusClick(Sender: TObject);
+    procedure btnPlusClick(Sender: TObject);
     procedure btnProfileClick(Sender: TObject);
     procedure btnSceneDetectClick(Sender: TObject);
     procedure btnShortCutApplyClick(Sender: TObject);
@@ -426,6 +433,12 @@ begin
     cbnSubBackground.ButtonColor   := HexStrToColor(TextBackgroundColor);
     chkSubBackground.Checked       := UseTextBackgroundColor;
     spnSubSize.Value               := TextSize;
+
+    if Length(AdditionalOptions) > 0 then
+      for i := 0 to High(AdditionalOptions) do
+        lstMPVOptions.Items.Add(AdditionalOptions[i]);
+
+    btnMinus.Enabled := lstMPVOptions.Count > 0;
   end;
 
   with frmMain.WAVE do
@@ -569,6 +582,11 @@ begin
     TextBackgroundColor    := ColorToHexStr(cbnSubBackground.ButtonColor);
     UseTextBackgroundColor := chkSubBackground.Checked;
     TextSize               := spnSubSize.Value;
+
+    SetLength(AdditionalOptions, lstMPVOptions.Count);
+    if Length(AdditionalOptions) > 0 then
+      for i := 0 to High(AdditionalOptions) do
+        AdditionalOptions[i] := lstMPVOptions.Items[i];
   end;
 
   with frmMain.WAVE do
@@ -1032,6 +1050,29 @@ begin
   FUpdateFileTypes := True;
 end;
 {$ENDIF}
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.btnMinusClick(Sender: TObject);
+begin
+  if (lstMPVOptions.Count > 0) and (lstMPVOptions.ItemIndex >= 0) then
+    lstMPVOptions.Items.Delete(lstMPVOptions.ItemIndex);
+
+  btnMinus.Enabled := lstMPVOptions.Count > 0;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.btnPlusClick(Sender: TObject);
+var
+  s: String;
+begin
+  s := InputDialog(lngAdditionalOption, '', '');
+  if not s.IsEmpty and (Pos('=', s) > 0) then
+    lstMPVOptions.Items.Add(s);
+
+  btnMinus.Enabled := lstMPVOptions.Count > 0;
+end;
 
 // -----------------------------------------------------------------------------
 

@@ -101,6 +101,7 @@ resourcestring
   lngFileSavedSuccessfully = 'File saved successfully.';
   lngVideoGenerationFailed = 'Video generation failed.';
   lngOpenContainingFolder = 'Open containing folder';
+  lngAdditionalOption = 'Additional option';
 
   //AppStrings
   lngasTextChars = 'Text (%s characters at %.2f CPS):';

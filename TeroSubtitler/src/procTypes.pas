@@ -256,6 +256,7 @@ type
     SubtitleToShow         : TSubtitleMode;
     SeekTime               : Integer;
     FrameStep              : Byte;
+    AdditionalOptions      : array of String;
     UnDockData             : record  // procUnDockVideoControls
                                FileName        : String;
                                CurrentPosition : Integer;
