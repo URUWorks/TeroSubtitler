@@ -74,7 +74,7 @@
 - added: Faster-Whisper [Audio to text]
 - added: Additional engine parameters [Audio to text]
 - added: TikTok/YouTube-shorts [Conventions]
-- added: List/Text box font size [Settings]
+- added: Change font-size of editor Text + Display Time to subtitles? #185
 - added: Remove line from entry
 
 1.0.1.1 (16.9.2023)
