@@ -1408,44 +1408,56 @@ object frmSettings: TfrmSettings
       TabOrder = 0
     end
     object lblSeekTime: TLabel
+      AnchorSideTop.Control = chkUseHWDec
+      AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 15
-      Top = 60
+      Top = 79
       Width = 246
       AutoSize = False
+      BorderSpacing.Top = 18
       Caption = 'Seek time (ms)'
       ParentColor = False
     end
     object spnSeekTime: TSpinEdit
+      AnchorSideTop.Control = lblSeekTime
+      AnchorSideTop.Side = asrCenter
       Left = 248
       Height = 23
-      Top = 56
+      Top = 75
       Width = 80
       MaxValue = 10000
       MinValue = 100
-      TabOrder = 2
+      TabOrder = 3
       Value = 5000
     end
     object lblFrameStep: TLabel
+      AnchorSideTop.Control = spnFrameStep
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 93
+      Top = 112
       Width = 246
       AutoSize = False
       Caption = 'Frame step'
       ParentColor = False
     end
     object spnFrameStep: TSpinEdit
+      AnchorSideTop.Control = spnSeekTime
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 23
-      Top = 89
+      Top = 108
       Width = 80
+      BorderSpacing.Top = 10
       MaxValue = 60
       MinValue = 1
-      TabOrder = 3
+      TabOrder = 4
       Value = 1
     end
     object chkSubtitleHandleByMPV: TUWCheckBox
+      AnchorSideTop.Control = chkAutoPlay
+      AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 19
       Top = 23
@@ -1459,7 +1471,7 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 2
       Height = 15
-      Top = 127
+      Top = 146
       Width = 246
       AutoSize = False
       BorderSpacing.Top = 19
@@ -1471,11 +1483,11 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 23
-      Top = 360
+      Top = 379
       Width = 38
       BorderSpacing.Top = 5
       Caption = '+'
-      TabOrder = 5
+      TabOrder = 6
       OnClick = btnPlusClick
     end
     object btnMinus: TButton
@@ -1485,12 +1497,12 @@ object frmSettings: TfrmSettings
       AnchorSideRight.Side = asrBottom
       Left = 43
       Height = 23
-      Top = 360
+      Top = 379
       Width = 38
       BorderSpacing.Left = 5
       Caption = '-'
       Enabled = False
-      TabOrder = 6
+      TabOrder = 7
       OnClick = btnMinusClick
     end
     object lstMPVOptions: TListBox
@@ -1498,12 +1510,23 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 208
-      Top = 147
+      Top = 166
       Width = 516
       BorderSpacing.Top = 5
       ExtendedSelect = False
       ItemHeight = 0
-      TabOrder = 4
+      TabOrder = 5
+    end
+    object chkUseHWDec: TUWCheckBox
+      AnchorSideTop.Control = chkSubtitleHandleByMPV
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 19
+      Top = 42
+      Width = 18
+      AutoSize = False
+      Caption = 'Use hardware video decoding'
+      TabOrder = 2
     end
   end
   object lyoToolbar: TUWLayout

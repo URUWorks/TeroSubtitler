@@ -518,6 +518,7 @@ begin
       begin
         OpenKey('MPV');
         SubtitleHandleByMPV := GetValue('SubtitleHandleByMPV', SubtitleHandleByMPV);
+        MPV.UseHWDec := GetValue('UseHWDec', MPV.UseHWDec);
         AutoStartPlaying := GetValue('AutoStartPlaying', AutoStartPlaying);
         SubtitleToShow := TSubtitleMode(GetValue('SubtitleToShow', Integer(SubtitleToShow)));
         actMediaAutoScroll.Checked := GetValue('UpdateListOnPreview', actMediaAutoScroll.Checked);
@@ -859,6 +860,7 @@ begin
       begin
         OpenKey('MPV');
         SetValue('SubtitleHandleByMPV', SubtitleHandleByMPV);
+        SetValue('UseHWDec', MPV.UseHWDec);
         SetValue('AutoStartPlaying', AutoStartPlaying);
         SetValue('SubtitleToShow', Integer(SubtitleToShow));
         SetValue('UpdateListOnPreview', actMediaAutoScroll.Checked);
