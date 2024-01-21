@@ -8,7 +8,7 @@
 #define VersionMinor
 #define VersionRevision
 #define VersionBuild
-#define MyAppversion           GetVersionNumbersString('bin\tero.exe')
+#define MyAppversion           GetVersionNumbersString(SourcePath + "\bin\" + MyAppExeName)
 #define TestVersion            UnpackVersionComponents(StrToVersion(MyAppversion), VersionMajor, VersionMinor, VersionRevision, VersionBuild)
 #define ShortAppVersion        VersionMajor + VersionMinor + VersionRevision + VersionBuild
 #define MyAppPublisher         "URUWorks"
