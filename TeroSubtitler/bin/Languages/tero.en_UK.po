@@ -3916,6 +3916,10 @@ msgstr "Show splash window"
 msgid "mpv handles subtitles for preview"
 msgstr "mpv handles subtitles for preview"
 
+#: tfrmsettings.chkusehwdec.caption
+msgid "Use hardware video decoding"
+msgstr "Use hardware video decoding"
+
 #: tfrmsettings.chkuseownfiledialog.caption
 msgid "Use Tero file dialog"
 msgstr "Use Tero file dialogue"
@@ -4772,4 +4776,3 @@ msgstr "Layout 1"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Layout 2"
 msgstr "Layout 2"
-

@@ -3893,6 +3893,10 @@ msgstr ""
 msgid "mpv handles subtitles for preview"
 msgstr ""
 
+#: tfrmsettings.chkusehwdec.caption
+msgid "Use hardware video decoding"
+msgstr ""
+
 #: tfrmsettings.chkuseownfiledialog.caption
 msgid "Use Tero file dialog"
 msgstr ""

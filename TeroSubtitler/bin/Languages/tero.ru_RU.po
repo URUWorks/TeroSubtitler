@@ -3915,6 +3915,10 @@ msgstr "Показать заставку"
 msgid "mpv handles subtitles for preview"
 msgstr "mpv обрабатывает субтитры для предпросмотра"
 
+#: tfrmsettings.chkusehwdec.caption
+msgid "Use hardware video decoding"
+msgstr ""
+
 #: tfrmsettings.chkuseownfiledialog.caption
 msgid "Use Tero file dialog"
 msgstr "Использовать диалоговое окно Tero"

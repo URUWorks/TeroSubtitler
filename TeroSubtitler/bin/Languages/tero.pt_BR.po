@@ -3932,6 +3932,10 @@ msgstr "Mostrar janela inicial"
 msgid "mpv handles subtitles for preview"
 msgstr "Usar mpv para pré-visualização de legendas"
 
+#: tfrmsettings.chkusehwdec.caption
+msgid "Use hardware video decoding"
+msgstr ""
+
 #: tfrmsettings.chkuseownfiledialog.caption
 msgid "Use Tero file dialog"
 msgstr "Usar dialogo de arquivo do Tero"
