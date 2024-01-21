@@ -1,4 +1,5 @@
 1.0.1.6 (x.x.2024)
+- fixed: Crash after changing the divider size #217
 - fixed: [macOS/Linux] Layout name was not displayed in the wizard window
 - fixed: Repeated action in Text/Lines menu
 - fixed: Current video aspect was not checked
