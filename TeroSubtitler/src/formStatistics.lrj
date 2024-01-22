@@ -1,0 +1,5 @@
+{"version":1,"strings":[
+{"hash":185533731,"name":"tfrmstatistics.caption","sourcebytes":[83,116,97,116,105,115,116,105,99,115],"value":"Statistics"},
+{"hash":124337662,"name":"tfrmstatistics.btnexport.caption","sourcebytes":[69,120,112,111,114,116,46,46,46],"value":"Export..."},
+{"hash":4863637,"name":"tfrmstatistics.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

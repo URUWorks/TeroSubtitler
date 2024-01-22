@@ -83,6 +83,7 @@ type
     actFocusInitialTime: TAction;
     actFocusFinalTime: TAction;
     actCharacterMap: TAction;
+    actStatistics: TAction;
     actJumpToNextEmpty: TAction;
     actJumpToPreviousEmpty: TAction;
     actPushWordUp: TAction;
@@ -323,6 +324,7 @@ type
     MenuItem228: TMenuItem;
     MenuItem229: TMenuItem;
     MenuItem230: TMenuItem;
+    MenuItem231: TMenuItem;
     Separator57: TMenuItem;
     MenuItem233: TMenuItem;
     mnuTextWords: TMenuItem;
@@ -752,8 +754,6 @@ type
     VST: TLazVirtualStringTree;
     WAVE: TUWWaveformDisplayer;
     // formMain
-    procedure actJumpToNextEmptyExecute(Sender: TObject);
-    procedure actJumpToPreviousEmptyExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
@@ -1017,6 +1017,7 @@ type
     procedure actBatchConvertExecute(Sender: TObject);
     procedure actQualityCheckExecute(Sender: TObject);
     procedure actCompareExecute(Sender: TObject);
+    procedure actStatisticsExecute(Sender: TObject);
     procedure actInsertShotChangeExecute(Sender: TObject);
     procedure actDeleteShotChangeExecute(Sender: TObject);
     procedure actJumpToNextShotChangeExecute(Sender: TObject);
@@ -1097,6 +1098,8 @@ type
     procedure actFocusInitialTimeExecute(Sender: TObject);
     procedure actFocusFinalTimeExecute(Sender: TObject);
     procedure actCharacterMapExecute(Sender: TObject);
+    procedure actJumpToNextEmptyExecute(Sender: TObject);
+    procedure actJumpToPreviousEmptyExecute(Sender: TObject);
   private
 
   public

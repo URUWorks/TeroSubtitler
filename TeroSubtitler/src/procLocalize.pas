@@ -290,6 +290,29 @@ resourcestring
   //SpellCheckStrings
   lngspCurrentLine = '# %d';
 
+  //Statistics
+  lngstNumberOfEntries = 'Number of entries: %d';
+  lngstNumberOfWords = 'Number of words: %d';
+  lngstNumberOfCharacters = 'Number of characters: %d';
+  lngstEntriesWithoutText = 'Entries without text: %d';
+  lngstTotalDuration = 'Total duration: %s';
+  lngstTotalCharactersPerSecond = 'Total characters per second: %.2f';
+  lngstShortestLine = 'Shortest line: %d (#%d)';
+  lngstLongestLine = 'Longest line: %d (#%d)';
+  lngstLineLengthAverage = 'Line length average: %d';
+  lngstShortestDuration = 'Shortest duration: %s (#%d)';
+  lngstLongestDuration = 'Longest duration: %s (#%d)';
+  lngstDurationAverage = 'Duration average: %s';
+  lngstShortestCharactersPerSecond = 'Shortest characters per second: %.2f (#%d)';
+  lngstLongestCharactersPerSecond = 'Longest characters per second: %.2f (#%d)';
+  lngstCharactersPerSecondAverage = 'Characters per second average: %.2f';
+  lngstShortestWordsPerMinute = 'Shortest words per minute: %.2f (#%d)';
+  lngstLongestWordsPerMinute = 'Longest words per minute: %.2f (#%d)';
+  lngstWordsPerMinuteAverage = 'Words per minute average: %.2f';
+  lngstShortestGap = 'Shortest Gap: %s (#%d)';
+  lngstLongestGap = 'Longest Gap: %s (#%d)';
+  lngstGapAverage = 'Gap average: %s';
+
   //TimeExpanderStrings/CompareStrings
   lngteExpand = 'Expand';
   lngteReduce = 'Reduce';

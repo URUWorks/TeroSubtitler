@@ -59,6 +59,7 @@ procedure ShowAudioToTextModels;
 procedure ShowBatchConvert;
 procedure ShowQualityCheck;
 procedure ShowCompare;
+procedure ShowStatistics;
 procedure ShowCustomTextFormat;
 procedure ShowCustomImageFormat;
 procedure ShowExportSUP;
@@ -87,7 +88,7 @@ uses
   formAudioToText, formAudioToTextModel, procTypes, procConfig, procWorkspace,
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
   formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
-  formRoundTime, LCLTranslator, procLocalize;
+  formRoundTime, formStatistics, LCLTranslator, procLocalize;
 
 // -----------------------------------------------------------------------------
 
@@ -603,6 +604,19 @@ begin
   end
   else
     frmCompare.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowStatistics;
+begin
+  if frmStatistics = NIL then
+  begin
+    frmStatistics := TfrmStatistics.Create(Application);
+    ShowForm(frmStatistics);
+  end
+  else
+    frmStatistics.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

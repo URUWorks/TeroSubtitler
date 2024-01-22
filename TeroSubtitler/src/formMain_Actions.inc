@@ -1403,6 +1403,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actStatisticsExecute(Sender: TObject);
+begin
+  ShowStatistics;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actInsertShotChangeExecute(Sender: TObject);
 begin
   with WAVE do

@@ -1290,6 +1290,9 @@ object frmMain: TfrmMain
       object MenuItem135: TMenuItem
         Action = actCompare
       end
+      object MenuItem231: TMenuItem
+        Action = actStatistics
+      end
       object Separator39: TMenuItem
         Caption = '-'
       end
@@ -3700,17 +3703,6 @@ object frmMain: TfrmMain
       Caption = 'Compare...'
       OnExecute = actCompareExecute
     end
-    object actCloseSubtitle: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Close subtitles'
-      OnExecute = actCloseSubtitleExecute
-    end
-    object actCloseApp: TAction
-      Category = 'File'
-      Caption = 'Close'
-      OnExecute = actCloseAppExecute
-    end
     object actCopyVideoPosToClipboard: TAction
       Category = 'Edit'
       Caption = 'Copy video position to clipboard'
@@ -4077,6 +4069,23 @@ object frmMain: TfrmMain
       Category = 'Edit'
       Caption = 'Format properties...'
       OnExecute = actFormatPropertiesExecute
+    end
+    object actStatistics: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Statistics...'
+      OnExecute = actStatisticsExecute
+    end
+    object actCloseSubtitle: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Close subtitles'
+      OnExecute = actCloseSubtitleExecute
+    end
+    object actCloseApp: TAction
+      Category = 'File'
+      Caption = 'Close'
+      OnExecute = actCloseAppExecute
     end
   end
   object popDropInsert: TPopupMenu

@@ -1,0 +1,59 @@
+object frmStatistics: TfrmStatistics
+  Left = 256
+  Height = 400
+  Top = 127
+  Width = 400
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Statistics'
+  ClientHeight = 400
+  ClientWidth = 400
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '3.0.0.3'
+  object btnExport: TButton
+    AnchorSideRight.Control = btnClose
+    AnchorSideBottom.Control = btnClose
+    AnchorSideBottom.Side = asrBottom
+    Left = 205
+    Height = 26
+    Top = 366
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 5
+    Caption = 'Export...'
+    Default = True
+    TabOrder = 1
+    OnClick = btnExportClick
+  end
+  object btnClose: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 301
+    Height = 26
+    Top = 366
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Cancel = True
+    Caption = 'Close'
+    TabOrder = 2
+    OnClick = btnCloseClick
+  end
+  object mmoStatistics: TMemo
+    Left = 8
+    Height = 351
+    Top = 8
+    Width = 384
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ReadOnly = True
+    ScrollBars = ssAutoVertical
+    TabOrder = 0
+    WordWrap = False
+  end
+end
