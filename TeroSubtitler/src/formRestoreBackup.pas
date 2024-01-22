@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLIntf,
-  LCLType, laz.VirtualTrees, LCLTranslator,procLocalize;
+  LCLType, laz.VirtualTrees, LCLTranslator, procLocalize;
 
 type
 
