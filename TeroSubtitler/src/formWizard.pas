@@ -296,7 +296,8 @@ end;
 
 procedure TfrmWizard.cboLanguageChange(Sender: TObject);
 var
-  langs: TStringArray;
+  langs : TStringArray;
+  currIdx : Integer;
 begin
   langs := FLngList.Strings[cboLanguage.ItemIndex].Split([';']);
   if Length(langs) > 0 then
@@ -304,6 +305,7 @@ begin
   else
     AppOptions.GUILanguage := 'en_US';
 
+  currIdx := cboTimeCode.ItemIndex;
   SetGUILanguage;
 
   if lngwizLanguage <> 'Language' then
@@ -313,6 +315,7 @@ begin
 
   cboTimeCode.Items[0] := lngcfsTime;
   cboTimeCode.Items[1] := lngcfsFrames;
+  cboTimeCode.ItemIndex := currIdx;
 end;
 
 // -----------------------------------------------------------------------------
