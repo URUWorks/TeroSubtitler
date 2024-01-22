@@ -966,6 +966,111 @@ msgctxt "proclocalize.lngsstools"
 msgid "Tools"
 msgstr "Tools"
 
+#: proclocalize.lngstcharacterspersecondaverage
+#, object-pascal-format
+msgid "Characters per second average: %.2f"
+msgstr "Characters per second average: %.2f"
+
+#: proclocalize.lngstdurationaverage
+#, object-pascal-format
+msgid "Duration average: %s"
+msgstr "Duration average: %s"
+
+#: proclocalize.lngstentrieswithouttext
+#, object-pascal-format
+msgid "Entries without text: %d"
+msgstr "Entries without text: %d"
+
+#: proclocalize.lngstgapaverage
+#, object-pascal-format
+msgid "Gap average: %s"
+msgstr "Gap average: %s"
+
+#: proclocalize.lngstlinelengthaverage
+#, object-pascal-format
+msgid "Line length average: %d"
+msgstr "Line length average: %d"
+
+#: proclocalize.lngstlongestcharacterspersecond
+#, object-pascal-format
+msgid "Longest characters per second: %.2f (#%d)"
+msgstr "Longest characters per second: %.2f (#%d)"
+
+#: proclocalize.lngstlongestduration
+#, object-pascal-format
+msgid "Longest duration: %s (#%d)"
+msgstr "Longest duration: %s (#%d)"
+
+#: proclocalize.lngstlongestgap
+#, object-pascal-format
+msgid "Longest Gap: %s (#%d)"
+msgstr "Longest Gap: %s (#%d)"
+
+#: proclocalize.lngstlongestline
+#, object-pascal-format
+msgid "Longest line: %d (#%d)"
+msgstr "Longest line: %d (#%d)"
+
+#: proclocalize.lngstlongestwordsperminute
+#, object-pascal-format
+msgid "Longest words per minute: %.2f (#%d)"
+msgstr "Longest words per minute: %.2f (#%d)"
+
+#: proclocalize.lngstnumberofcharacters
+#, object-pascal-format
+msgid "Number of characters: %d"
+msgstr "Number of characters: %d"
+
+#: proclocalize.lngstnumberofentries
+#, object-pascal-format
+msgid "Number of entries: %d"
+msgstr "Number of entries: %d"
+
+#: proclocalize.lngstnumberofwords
+#, object-pascal-format
+msgid "Number of words: %d"
+msgstr "Number of words: %d"
+
+#: proclocalize.lngstshortestcharacterspersecond
+#, object-pascal-format
+msgid "Shortest characters per second: %.2f (#%d)"
+msgstr "Shortest characters per second: %.2f (#%d)"
+
+#: proclocalize.lngstshortestduration
+#, object-pascal-format
+msgid "Shortest duration: %s (#%d)"
+msgstr "Shortest duration: %s (#%d)"
+
+#: proclocalize.lngstshortestgap
+#, object-pascal-format
+msgid "Shortest Gap: %s (#%d)"
+msgstr "Shortest Gap: %s (#%d)"
+
+#: proclocalize.lngstshortestline
+#, object-pascal-format
+msgid "Shortest line: %d (#%d)"
+msgstr "Shortest line: %d (#%d)"
+
+#: proclocalize.lngstshortestwordsperminute
+#, object-pascal-format
+msgid "Shortest words per minute: %.2f (#%d)"
+msgstr "Shortest words per minute: %.2f (#%d)"
+
+#: proclocalize.lngsttotalcharacterspersecond
+#, object-pascal-format
+msgid "Total characters per second: %.2f"
+msgstr "Total characters per second: %.2f"
+
+#: proclocalize.lngsttotalduration
+#, object-pascal-format
+msgid "Total duration: %s"
+msgstr "Total duration: %s"
+
+#: proclocalize.lngstwordsperminuteaverage
+#, object-pascal-format
+msgid "Words per minute average: %.2f"
+msgstr "Words per minute average: %.2f"
+
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
@@ -3201,6 +3306,10 @@ msgctxt "tfrmmain.actsplitentryatposition.caption"
 msgid "Split line at cursor position"
 msgstr "Split line at cursor position"
 
+#: tfrmmain.actstatistics.caption
+msgid "Statistics..."
+msgstr "Statistics..."
+
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
 msgstr "Swap text"
@@ -4320,6 +4429,20 @@ msgstr "Source"
 #: tfrmspellcheck.lblsuggestions.caption
 msgid "Suggestions"
 msgstr "Suggestions"
+
+#: tfrmstatistics.btnclose.caption
+msgctxt "tfrmstatistics.btnclose.caption"
+msgid "Close"
+msgstr "Close"
+
+#: tfrmstatistics.btnexport.caption
+msgctxt "tfrmstatistics.btnexport.caption"
+msgid "Export..."
+msgstr "Export..."
+
+#: tfrmstatistics.caption
+msgid "Statistics"
+msgstr "Statistics"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"

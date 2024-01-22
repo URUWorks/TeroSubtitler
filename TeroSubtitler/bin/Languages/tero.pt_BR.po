@@ -963,6 +963,111 @@ msgctxt "proclocalize.lngsstools"
 msgid "Tools"
 msgstr "Ferramentas"
 
+#: proclocalize.lngstcharacterspersecondaverage
+#, object-pascal-format
+msgid "Characters per second average: %.2f"
+msgstr ""
+
+#: proclocalize.lngstdurationaverage
+#, object-pascal-format
+msgid "Duration average: %s"
+msgstr ""
+
+#: proclocalize.lngstentrieswithouttext
+#, object-pascal-format
+msgid "Entries without text: %d"
+msgstr ""
+
+#: proclocalize.lngstgapaverage
+#, object-pascal-format
+msgid "Gap average: %s"
+msgstr ""
+
+#: proclocalize.lngstlinelengthaverage
+#, object-pascal-format
+msgid "Line length average: %d"
+msgstr ""
+
+#: proclocalize.lngstlongestcharacterspersecond
+#, object-pascal-format
+msgid "Longest characters per second: %.2f (#%d)"
+msgstr ""
+
+#: proclocalize.lngstlongestduration
+#, object-pascal-format
+msgid "Longest duration: %s (#%d)"
+msgstr ""
+
+#: proclocalize.lngstlongestgap
+#, object-pascal-format
+msgid "Longest Gap: %s (#%d)"
+msgstr ""
+
+#: proclocalize.lngstlongestline
+#, object-pascal-format
+msgid "Longest line: %d (#%d)"
+msgstr ""
+
+#: proclocalize.lngstlongestwordsperminute
+#, object-pascal-format
+msgid "Longest words per minute: %.2f (#%d)"
+msgstr ""
+
+#: proclocalize.lngstnumberofcharacters
+#, object-pascal-format
+msgid "Number of characters: %d"
+msgstr ""
+
+#: proclocalize.lngstnumberofentries
+#, object-pascal-format
+msgid "Number of entries: %d"
+msgstr ""
+
+#: proclocalize.lngstnumberofwords
+#, object-pascal-format
+msgid "Number of words: %d"
+msgstr ""
+
+#: proclocalize.lngstshortestcharacterspersecond
+#, object-pascal-format
+msgid "Shortest characters per second: %.2f (#%d)"
+msgstr ""
+
+#: proclocalize.lngstshortestduration
+#, object-pascal-format
+msgid "Shortest duration: %s (#%d)"
+msgstr ""
+
+#: proclocalize.lngstshortestgap
+#, object-pascal-format
+msgid "Shortest Gap: %s (#%d)"
+msgstr ""
+
+#: proclocalize.lngstshortestline
+#, object-pascal-format
+msgid "Shortest line: %d (#%d)"
+msgstr ""
+
+#: proclocalize.lngstshortestwordsperminute
+#, object-pascal-format
+msgid "Shortest words per minute: %.2f (#%d)"
+msgstr ""
+
+#: proclocalize.lngsttotalcharacterspersecond
+#, object-pascal-format
+msgid "Total characters per second: %.2f"
+msgstr ""
+
+#: proclocalize.lngsttotalduration
+#, object-pascal-format
+msgid "Total duration: %s"
+msgstr ""
+
+#: proclocalize.lngstwordsperminuteaverage
+#, object-pascal-format
+msgid "Words per minute average: %.2f"
+msgstr ""
+
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "O conjunto de legendas atual contém erros que devem ser resolvidos, mas podem ser salvos."
@@ -3203,6 +3308,10 @@ msgctxt "tfrmmain.actsplitentryatposition.caption"
 msgid "Split line at cursor position"
 msgstr "Dividir linha na posição do cursor"
 
+#: tfrmmain.actstatistics.caption
+msgid "Statistics..."
+msgstr ""
+
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
 msgstr "Trocar textos"
@@ -4336,6 +4445,22 @@ msgstr "Fonte"
 #: tfrmspellcheck.lblsuggestions.caption
 msgid "Suggestions"
 msgstr "Sugestões"
+
+#: tfrmstatistics.btnclose.caption
+#, fuzzy
+msgctxt "tfrmstatistics.btnclose.caption"
+msgid "Close"
+msgstr "Fechar"
+
+#: tfrmstatistics.btnexport.caption
+#, fuzzy
+msgctxt "tfrmstatistics.btnexport.caption"
+msgid "Export..."
+msgstr "Exportar..."
+
+#: tfrmstatistics.caption
+msgid "Statistics"
+msgstr ""
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"
