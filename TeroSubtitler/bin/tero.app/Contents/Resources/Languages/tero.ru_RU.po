@@ -3182,18 +3182,24 @@ msgid "Set delay..."
 msgstr "Настроить задержку..."
 
 #: tfrmmain.actsetguilayout0.caption
+#, fuzzy
+#| msgid "Layout 0"
 msgctxt "tfrmmain.actsetguilayout0.caption"
-msgid "Layout 0"
+msgid "Layout 1"
 msgstr "Макет 0"
 
 #: tfrmmain.actsetguilayout1.caption
+#, fuzzy
+#| msgid "Layout 1"
 msgctxt "tfrmmain.actsetguilayout1.caption"
-msgid "Layout 1"
+msgid "Layout 2"
 msgstr "Макет 1"
 
 #: tfrmmain.actsetguilayout2.caption
+#, fuzzy
+#| msgid "Layout 2"
 msgctxt "tfrmmain.actsetguilayout2.caption"
-msgid "Layout 2"
+msgid "Layout 3"
 msgstr "Макет 2"
 
 #: tfrmmain.actsetmaximumlinelength.caption
@@ -4887,17 +4893,23 @@ msgid "Optional, used for dowloading from YouTube."
 msgstr "Для скачивания с YouTube (необязательное)"
 
 #: tfrmwizard.rdolayout0.caption
+#, fuzzy
+#| msgid "Layout 0"
 msgctxt "tfrmwizard.rdolayout0.caption"
-msgid "Layout 0"
+msgid "Layout 1"
 msgstr "Макет 0"
 
 #: tfrmwizard.rdolayout1.caption
+#, fuzzy
+#| msgid "Layout 1"
 msgctxt "tfrmwizard.rdolayout1.caption"
-msgid "Layout 1"
+msgid "Layout 2"
 msgstr "Макет 1"
 
 #: tfrmwizard.rdolayout2.caption
+#, fuzzy
+#| msgid "Layout 2"
 msgctxt "tfrmwizard.rdolayout2.caption"
-msgid "Layout 2"
+msgid "Layout 3"
 msgstr "Макет 2"
 

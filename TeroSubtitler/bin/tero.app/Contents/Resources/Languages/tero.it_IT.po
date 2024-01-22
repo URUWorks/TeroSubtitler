@@ -3181,18 +3181,24 @@ msgid "Set delay..."
 msgstr "Imposta ritardo…"
 
 #: tfrmmain.actsetguilayout0.caption
+#, fuzzy
+#| msgid "Layout 0"
 msgctxt "tfrmmain.actsetguilayout0.caption"
-msgid "Layout 0"
+msgid "Layout 1"
 msgstr "Disposizione 0"
 
 #: tfrmmain.actsetguilayout1.caption
+#, fuzzy
+#| msgid "Layout 1"
 msgctxt "tfrmmain.actsetguilayout1.caption"
-msgid "Layout 1"
+msgid "Layout 2"
 msgstr "Disposizione 1"
 
 #: tfrmmain.actsetguilayout2.caption
+#, fuzzy
+#| msgid "Layout 2"
 msgctxt "tfrmmain.actsetguilayout2.caption"
-msgid "Layout 2"
+msgid "Layout 3"
 msgstr "Disposizione 2"
 
 #: tfrmmain.actsetmaximumlinelength.caption
@@ -4883,17 +4889,23 @@ msgid "Optional, used for dowloading from YouTube."
 msgstr "Opzionale: utilizzato per scaricare filmati da YouTube."
 
 #: tfrmwizard.rdolayout0.caption
+#, fuzzy
+#| msgid "Layout 0"
 msgctxt "tfrmwizard.rdolayout0.caption"
-msgid "Layout 0"
+msgid "Layout 1"
 msgstr "Disposizione 0"
 
 #: tfrmwizard.rdolayout1.caption
+#, fuzzy
+#| msgid "Layout 1"
 msgctxt "tfrmwizard.rdolayout1.caption"
-msgid "Layout 1"
+msgid "Layout 2"
 msgstr "Disposizione 1"
 
 #: tfrmwizard.rdolayout2.caption
+#, fuzzy
+#| msgid "Layout 2"
 msgctxt "tfrmwizard.rdolayout2.caption"
-msgid "Layout 2"
+msgid "Layout 3"
 msgstr "Disposizione 2"
 

@@ -3184,18 +3184,18 @@ msgstr "Establecer retraso..."
 
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
-msgid "Layout 0"
-msgstr "Diseño 0"
-
-#: tfrmmain.actsetguilayout1.caption
-msgctxt "tfrmmain.actsetguilayout1.caption"
 msgid "Layout 1"
 msgstr "Diseño 1"
 
-#: tfrmmain.actsetguilayout2.caption
-msgctxt "tfrmmain.actsetguilayout2.caption"
+#: tfrmmain.actsetguilayout1.caption
+msgctxt "tfrmmain.actsetguilayout1.caption"
 msgid "Layout 2"
 msgstr "Diseño 2"
+
+#: tfrmmain.actsetguilayout2.caption
+msgctxt "tfrmmain.actsetguilayout2.caption"
+msgid "Layout 3"
+msgstr "Diseño 3"
 
 #: tfrmmain.actsetmaximumlinelength.caption
 msgid "Set maximum line length"
@@ -4887,15 +4887,15 @@ msgstr "Opcional, utilizado para descargar desde YouTube."
 
 #: tfrmwizard.rdolayout0.caption
 msgctxt "tfrmwizard.rdolayout0.caption"
-msgid "Layout 0"
-msgstr "Diseño 0"
-
-#: tfrmwizard.rdolayout1.caption
-msgctxt "tfrmwizard.rdolayout1.caption"
 msgid "Layout 1"
 msgstr "Diseño 1"
 
-#: tfrmwizard.rdolayout2.caption
-msgctxt "tfrmwizard.rdolayout2.caption"
+#: tfrmwizard.rdolayout1.caption
+msgctxt "tfrmwizard.rdolayout1.caption"
 msgid "Layout 2"
 msgstr "Diseño 2"
+
+#: tfrmwizard.rdolayout2.caption
+msgctxt "tfrmwizard.rdolayout2.caption"
+msgid "Layout 3"
+msgstr "Diseño 3"
