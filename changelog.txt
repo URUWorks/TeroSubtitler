@@ -5,6 +5,7 @@
 - fixed: Current video aspect was not checked
 - updated: Italian language (thx GitGianluc)
 - updated: Russian language (thx RoxMarty)
+- added: Subtitle statistics
 - added: Hardware video decoding option [Settings]
 - added: Additional mpv options [Settings]
 
