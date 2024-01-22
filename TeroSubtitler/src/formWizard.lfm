@@ -438,7 +438,7 @@ object frmWizard: TfrmWizard
       Width = 18
       AutoSize = False
       BorderSpacing.Left = 10
-      Caption = 'Layout 0'
+      Caption = 'Layout 1'
       Checked = True
       TabOrder = 1
       State = cbChecked
@@ -454,7 +454,7 @@ object frmWizard: TfrmWizard
       Width = 18
       AutoSize = False
       BorderSpacing.Left = 10
-      Caption = 'Layout 1'
+      Caption = 'Layout 2'
       TabOrder = 2
       TabStop = False
     end
@@ -469,7 +469,7 @@ object frmWizard: TfrmWizard
       Width = 18
       AutoSize = False
       BorderSpacing.Left = 10
-      Caption = 'Layout 2'
+      Caption = 'Layout 3'
       TabOrder = 3
       TabStop = False
     end

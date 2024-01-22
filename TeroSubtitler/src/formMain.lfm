@@ -3923,19 +3923,19 @@ object frmMain: TfrmMain
     end
     object actSetGUILayout0: TAction
       Category = 'View'
-      Caption = 'Layout 0'
+      Caption = 'Layout 1'
       ImageIndex = 81
       OnExecute = actSetGUILayout0Execute
     end
     object actSetGUILayout1: TAction
       Category = 'View'
-      Caption = 'Layout 1'
+      Caption = 'Layout 2'
       ImageIndex = 82
       OnExecute = actSetGUILayout1Execute
     end
     object actSetGUILayout2: TAction
       Category = 'View'
-      Caption = 'Layout 2'
+      Caption = 'Layout 3'
       ImageIndex = 83
       OnExecute = actSetGUILayout2Execute
     end

@@ -24,7 +24,7 @@
 {"hash":131471038,"name":"tfrmwizard.lblfasterwhisper_hint.caption","sourcebytes":[79,112,116,105,111,110,97,108,44,32,117,115,101,100,32,102,111,114,32,115,112,101,101,99,104,32,114,101,99,111,103,110,105,116,105,111,110,46],"value":"Optional, used for speech recognition."},
 {"hash":139375349,"name":"tfrmwizard.lbllanguage.caption","sourcebytes":[76,97,110,103,117,97,103,101],"value":"Language"},
 {"hash":81873930,"name":"tfrmwizard.lblchooselayout.caption","sourcebytes":[67,104,111,111,115,101,32,119,111,114,107,115,112,97,99,101,32,108,97,121,111,117,116,32,97,110,100,32,116,105,109,101,99,111,100,101,32,109,111,100,101,58],"value":"Choose workspace layout and timecode mode:"},
-{"hash":151438096,"name":"tfrmwizard.rdolayout0.caption","sourcebytes":[76,97,121,111,117,116,32,48],"value":"Layout 0"},
-{"hash":151438097,"name":"tfrmwizard.rdolayout1.caption","sourcebytes":[76,97,121,111,117,116,32,49],"value":"Layout 1"},
-{"hash":151438098,"name":"tfrmwizard.rdolayout2.caption","sourcebytes":[76,97,121,111,117,116,32,50],"value":"Layout 2"}
+{"hash":151438097,"name":"tfrmwizard.rdolayout0.caption","sourcebytes":[76,97,121,111,117,116,32,49],"value":"Layout 1"},
+{"hash":151438098,"name":"tfrmwizard.rdolayout1.caption","sourcebytes":[76,97,121,111,117,116,32,50],"value":"Layout 2"},
+{"hash":151438099,"name":"tfrmwizard.rdolayout2.caption","sourcebytes":[76,97,121,111,117,116,32,51],"value":"Layout 3"}
 ]}
