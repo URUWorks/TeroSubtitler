@@ -241,7 +241,7 @@ type
     procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
     procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
     procedure Click; override;
-    //procedure DblClick; override;
+    procedure DblClick; override;
     function DoMouseWheel(Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint): Boolean; override;
   public
     CustomColors: TCustomColors;
@@ -1435,16 +1435,19 @@ end;
 
 //------------------------------------------------------------------------------
 
-{procedure TUWWaveformDisplayer.DblClick;
-var
+procedure TUWWaveformDisplayer.DblClick;
+{var
   idx : Integer;
-  Sub : PUWSubtitleItem;
+  Sub : PUWSubtitleItem;}
 begin
-  inherited;
-
   if not IsTimeLineEnabled then Exit;
 
-  // Detect double click on start or stop timestamp
+  if Assigned(FOnTimeLineClickEvent) then
+    FOnTimeLineClickEvent(Self, FOldMouseDownX);
+
+{  // Detect double click on start or stop timestamp
+  inherited;
+
   if Assigned(FDynamicSelSub) then
   begin
     case FDynamicEditMode of
@@ -1472,8 +1475,8 @@ begin
     SetSelectedSubtitleItem(Sub, False, False);
     UpdateView([uvfSelection, uvfSubtitle]);
     if Assigned(FOnSelectedSubtitleItem) then FOnSelectedSubtitleItem(Self, FSubtitles.IndexOf(FSelectedSubtitle), FSelectedSubtitle^, False);
-  end;
-end;}
+  end;}
+end;
 
 //------------------------------------------------------------------------------
 
