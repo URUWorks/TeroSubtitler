@@ -309,8 +309,8 @@ resourcestring
   lngstShortestWordsPerMinute = 'Shortest words per minute: %.2f (#%d)';
   lngstLongestWordsPerMinute = 'Longest words per minute: %.2f (#%d)';
   lngstWordsPerMinuteAverage = 'Words per minute average: %.2f';
-  lngstShortestGap = 'Shortest Gap: %s (#%d)';
-  lngstLongestGap = 'Longest Gap: %s (#%d)';
+  lngstShortestGap = 'Shortest gap: %s (#%d)';
+  lngstLongestGap = 'Longest gap: %s (#%d)';
   lngstGapAverage = 'Gap average: %s';
 
   //TimeExpanderStrings/CompareStrings
