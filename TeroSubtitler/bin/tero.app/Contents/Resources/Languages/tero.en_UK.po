@@ -1003,8 +1003,8 @@ msgstr "Longest duration: %s (#%d)"
 
 #: proclocalize.lngstlongestgap
 #, object-pascal-format
-msgid "Longest Gap: %s (#%d)"
-msgstr "Longest Gap: %s (#%d)"
+msgid "Longest gap: %s (#%d)"
+msgstr "Longest gap: %s (#%d)"
 
 #: proclocalize.lngstlongestline
 #, object-pascal-format
@@ -1043,8 +1043,8 @@ msgstr "Shortest duration: %s (#%d)"
 
 #: proclocalize.lngstshortestgap
 #, object-pascal-format
-msgid "Shortest Gap: %s (#%d)"
-msgstr "Shortest Gap: %s (#%d)"
+msgid "Shortest gap: %s (#%d)"
+msgstr "Shortest gap: %s (#%d)"
 
 #: proclocalize.lngstshortestline
 #, object-pascal-format
@@ -2943,6 +2943,10 @@ msgstr "Set final time"
 msgctxt "tfrmmain.actmediasetinitialtime.caption"
 msgid "Set initial time"
 msgstr "Set initial time"
+
+#: tfrmmain.actmediasplitentryatcursorposition.caption
+msgid "Split at cursor position"
+msgstr "Split at cursor position"
 
 #: tfrmmain.actmediastartsubtitleentry.caption
 msgid "Start entry"
