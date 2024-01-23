@@ -389,11 +389,10 @@ begin
   else
     DropFrames := 0;
 
-  try
+  if m > 0 then
     TotalMinutes := (60 * h) div m
-  except
+  else
     TotalMinutes := 0;
-  end;
 
   TotalFrames := (((h * 3600) + (m * 60) + s) * Round(AFPS)) + f - (DropFrames * (TotalMinutes - (Trunc(TotalMinutes / 10))));
   Result := Round((TotalFrames / AFPS ) * 1000);
