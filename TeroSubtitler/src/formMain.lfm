@@ -790,9 +790,9 @@ object frmMain: TfrmMain
         TreeOptions.SelectionOptions = [toFullRowSelect, toMultiSelect, toSimpleDrawSelection]
         TreeOptions.StringOptions = []
         OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
-        OnChange = VSTChange
         OnContextPopup = VSTContextPopup
         OnDblClick = VSTDblClick
+        OnFocusChanged = VSTFocusChanged
         OnGetHint = VSTGetHint
         OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
         OnResize = VSTResize

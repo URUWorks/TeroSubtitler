@@ -206,10 +206,8 @@ begin
       while Assigned(Run) do
       begin
         if AIndex = Run^.Index then
-        begin
-          Result := Run;
-          Break;
-        end;
+          Exit(Run);
+
         Run := GetNext(Run);
       end;
     end;
@@ -227,13 +225,16 @@ end;
 procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean);
 begin
   if Assigned(ANode) then
-    with AVST do
-    begin
-      if AClear then ClearSelection;
-      FocusedNode     := ANode;
-      Selected[ANode] := True;
-      ScrollIntoView(ANode, True);
-    end;
+    with AVST, frmMain do
+      if FocusedNode <> ANode then
+      begin
+        if AClear then ClearSelection;
+        FocusedNode     := ANode;
+        Selected[ANode] := True;
+        ScrollIntoView(ANode, True);
+
+        VSTFocusChanged(AVST, ANode, 0);
+      end;
 end;
 
 // -----------------------------------------------------------------------------

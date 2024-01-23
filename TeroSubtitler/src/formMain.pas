@@ -803,6 +803,8 @@ type
     procedure VSTDrawInitialize(const ADrawMode: TVSTDrawMode);
     procedure VSTDrawErrors(TargetCanvas: TCanvas; CellRect: TRect; AIndex: Integer; AX: Integer = 4; AW: Integer = 18; ALeftMargin: Integer = 4; ABottomMargin: Integer = 18);
     procedure VSTDrawValidateIcon(TargetCanvas: TCanvas; CellRect: TRect; AX, AY, AIndex: Integer);
+    procedure VSTFocusChanged(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex);
     procedure VSTGetText(Sender: TBaseVirtualTree; Node: PVirtualNode;
       Column: TColumnIndex; TextType: TVSTTextType; var CellText: String);
     procedure VSTBeforeCellPaint(Sender: TBaseVirtualTree;
@@ -821,7 +823,6 @@ type
       var PaintInfo: THeaderPaintInfo; var Elements: THeaderPaintElements);
     procedure VSTAdvancedHeaderDraw(Sender: TVTHeader;
       var PaintInfo: THeaderPaintInfo; const Elements: THeaderPaintElements);
-    procedure VSTChange(Sender: TBaseVirtualTree; Node: PVirtualNode);
     procedure VSTGetHint(Sender: TBaseVirtualTree; Node: PVirtualNode;
       Column: TColumnIndex; var LineBreakStyle: TVTTooltipLineBreakStyle;
       var HintText: String);

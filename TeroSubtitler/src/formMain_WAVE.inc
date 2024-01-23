@@ -45,6 +45,7 @@ begin
 
   UndoInstance.AddUndo(utSubtitleChange, Index, Item);
   UpdateValues(True);
+  SubtitleChanged(True, Workspace.TranslatorMode);
 end;
 
 // -----------------------------------------------------------------------------

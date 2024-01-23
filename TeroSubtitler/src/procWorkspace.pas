@@ -673,10 +673,10 @@ begin
     sbrSeek.Enabled        := AValue;
     cboActor.Enabled       := AValue;
 
-    if frmMain.Visible and VST.Enabled and mmoText.Enabled and LayoutVST.Visible then
+    if frmMain.Visible and LayoutVST.Visible and VST.Enabled then
     begin
-      VSTSelectNode(VST, 0, True);
-      mmoText.SetFocus;
+      //VSTSelectNode(VST, 0, True);
+      if mmoText.Enabled then mmoText.SetFocus;
     end;
     UpdateCPSAndTexts(VSTFocusedNode(VST));
     UpdateStatusBar;
@@ -1196,9 +1196,9 @@ procedure SetFocusTimeEdit(const ATag: Byte);
 begin
   if (Workspace.ViewMode = vmList) then
   begin
-    if ATag = TAG_CONTROL_INITIALTIME then
+    if (ATag = TAG_CONTROL_INITIALTIME) and frmMain.tedInitial.Enabled then
       frmMain.tedInitial.SetFocus
-    else
+    else if (ATag = TAG_CONTROL_FINALTIME) and frmMain.tedFinal.Enabled then
       frmMain.tedFinal.SetFocus;
   end;
 end;

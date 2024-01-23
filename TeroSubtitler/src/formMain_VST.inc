@@ -621,9 +621,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.VSTChange(Sender: TBaseVirtualTree; Node: PVirtualNode);
+procedure TfrmMain.VSTFocusChanged(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex);
 begin
-  UpdateValues;
+  if VST.Enabled then UpdateValues;
 end;
 
 // -----------------------------------------------------------------------------
