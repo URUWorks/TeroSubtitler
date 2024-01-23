@@ -1081,7 +1081,7 @@ begin
 
       if Assigned(FSelectedSubtitle) then
       begin
-        FNeedToSortList := True;
+        //FNeedToSortList := True;
         FOldInitialTime := FSelectedSubtitle^.InitialTime;
         FOldFinalTime   := FSelectedSubtitle^.FinalTime;
 
