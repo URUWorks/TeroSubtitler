@@ -692,6 +692,42 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actMediaSplitEntryAtCursorPositionExecute(Sender: TObject);
+var
+  Idx, t1, t2 : Integer;
+  Item : TUWSubtitleItem;
+begin
+  Idx := WAVE.GetSubtitleIdxAtCursorPos;
+  if (Idx <> -1) then
+  begin
+    ClearSubtitleItem(Item);
+    Item.InitialTime := Subtitles[Idx].InitialTime;
+    Item.FinalTime   := Subtitles[Idx].FinalTime;
+    Item.Text        := Subtitles[Idx].Text;
+    Item.Translation := Subtitles[Idx].Translation;
+
+    t1 := WAVE.CursorPosMS - GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames);
+    t2 := WAVE.CursorPosMS;
+
+    // Make sure there is enough space for the blank time
+    if (t1 < Subtitles[Idx].InitialTime) or (t2 > Subtitles[Idx].FinalTime) then
+    begin
+      // no blank time
+      t1 := WAVE.CursorPosMS - 1;
+      t2 := WAVE.CursorPosMS;
+    end;
+    // Make sur there is no overlapping
+    if (t1 = t2) then
+      t1 := t1 - 1;
+
+    SetSubtitleTime(idx, t1, TAG_CONTROL_FINALTIME, False, False);
+    Item.InitialTime := t2;
+    InsertSubtitle(idx + 1, Item);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actMediaZoomInExecute(Sender: TObject);
 begin
   WAVE.ZoomIn;

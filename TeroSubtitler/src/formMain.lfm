@@ -3131,39 +3131,6 @@ object frmMain: TfrmMain
       ImageIndex = 10
       OnExecute = actMediaDeleteEntryExecute
     end
-    object actMediaZoomIn: TAction
-      Tag = 8
-      Category = 'Waveform'
-      Caption = 'Zoom in'
-      ImageIndex = 59
-      OnExecute = actMediaZoomInExecute
-    end
-    object actMediaZoomOut: TAction
-      Tag = 8
-      Category = 'Waveform'
-      Caption = 'Zoom out'
-      ImageIndex = 60
-      OnExecute = actMediaZoomOutExecute
-    end
-    object actMediaZoomSelection: TAction
-      Tag = 8
-      Category = 'Waveform'
-      Caption = 'Zoom selection'
-      ImageIndex = 61
-      OnExecute = actMediaZoomSelectionExecute
-    end
-    object actInsertShotChange: TAction
-      Tag = 8
-      Category = 'Waveform'
-      Caption = 'Insert shot change'
-      OnExecute = actInsertShotChangeExecute
-    end
-    object actDeleteShotChange: TAction
-      Tag = 8
-      Category = 'Waveform'
-      Caption = 'Delete shot change(s)'
-      OnExecute = actDeleteShotChangeExecute
-    end
     object actAddQuotationMarks: TAction
       Tag = 1
       Category = 'Text'
@@ -3560,41 +3527,6 @@ object frmMain: TfrmMain
       Caption = 'Custom image format...'
       OnExecute = actExportCustomImageFormatExecute
     end
-    object actJumpToNextShotChange: TAction
-      Tag = 8
-      Category = 'Waveform'
-      Caption = 'Jump to next shot change'
-      OnExecute = actJumpToNextShotChangeExecute
-    end
-    object actJumpToPrevShotChange: TAction
-      Tag = 8
-      Category = 'Waveform'
-      Caption = 'Jump to previous shot change'
-      OnExecute = actJumpToPrevShotChangeExecute
-    end
-    object actViewShotChange: TAction
-      Category = 'Waveform'
-      AutoCheck = True
-      Caption = 'Shot changes'
-      Hint = 'Enable/disable shot changes'
-      ImageIndex = 76
-      OnExecute = actViewShotChangeExecute
-    end
-    object actCenterWaveform: TAction
-      Category = 'Waveform'
-      AutoCheck = True
-      Caption = 'Center waveform'
-      ImageIndex = 75
-      OnExecute = actCenterWaveformExecute
-    end
-    object actDetectSilentZones: TAction
-      Tag = 8
-      Category = 'Waveform'
-      Caption = 'Detect silent zones'
-      Hint = 'Click to refresh list'
-      ImageIndex = 77
-      OnExecute = actDetectSilentZonesExecute
-    end
     object actRoundTimes: TAction
       Tag = 1
       Category = 'Timings'
@@ -3606,12 +3538,6 @@ object frmMain: TfrmMain
       Category = 'Timings'
       Caption = 'Read timings from file...'
       OnExecute = actReadTimingsFromFileExecute
-    end
-    object actDetectDialogSegments: TAction
-      Tag = 8
-      Category = 'Waveform'
-      Caption = 'Detect dialog segments...'
-      OnExecute = actDetectDialogSegmentsExecute
     end
     object actShowActorOnPreview: TAction
       Category = 'View'
@@ -4087,6 +4013,86 @@ object frmMain: TfrmMain
       Caption = 'Close'
       OnExecute = actCloseAppExecute
     end
+    object actMediaSplitEntryAtCursorPosition: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Split at cursor position'
+      OnExecute = actMediaSplitEntryAtCursorPositionExecute
+    end
+    object actMediaZoomIn: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Zoom in'
+      ImageIndex = 59
+      OnExecute = actMediaZoomInExecute
+    end
+    object actMediaZoomOut: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Zoom out'
+      ImageIndex = 60
+      OnExecute = actMediaZoomOutExecute
+    end
+    object actMediaZoomSelection: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Zoom selection'
+      ImageIndex = 61
+      OnExecute = actMediaZoomSelectionExecute
+    end
+    object actInsertShotChange: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Insert shot change'
+      OnExecute = actInsertShotChangeExecute
+    end
+    object actDeleteShotChange: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Delete shot change(s)'
+      OnExecute = actDeleteShotChangeExecute
+    end
+    object actJumpToNextShotChange: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Jump to next shot change'
+      OnExecute = actJumpToNextShotChangeExecute
+    end
+    object actJumpToPrevShotChange: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Jump to previous shot change'
+      OnExecute = actJumpToPrevShotChangeExecute
+    end
+    object actViewShotChange: TAction
+      Category = 'Waveform'
+      AutoCheck = True
+      Caption = 'Shot changes'
+      Hint = 'Enable/disable shot changes'
+      ImageIndex = 76
+      OnExecute = actViewShotChangeExecute
+    end
+    object actCenterWaveform: TAction
+      Category = 'Waveform'
+      AutoCheck = True
+      Caption = 'Center waveform'
+      ImageIndex = 75
+      OnExecute = actCenterWaveformExecute
+    end
+    object actDetectSilentZones: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Detect silent zones'
+      Hint = 'Click to refresh list'
+      ImageIndex = 77
+      OnExecute = actDetectSilentZonesExecute
+    end
+    object actDetectDialogSegments: TAction
+      Tag = 8
+      Category = 'Waveform'
+      Caption = 'Detect dialog segments...'
+      OnExecute = actDetectDialogSegmentsExecute
+    end
   end
   object popDropInsert: TPopupMenu
     Images = ImageList_Default
@@ -4533,6 +4539,9 @@ object frmMain: TfrmMain
     end
     object MenuItem134: TMenuItem
       Action = actMediaDeleteEntry
+    end
+    object MenuItem232: TMenuItem
+      Action = actMediaSplitEntryAtCursorPosition
     end
     object Separator41: TMenuItem
       Caption = '-'

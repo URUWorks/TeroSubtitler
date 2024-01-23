@@ -83,6 +83,7 @@ type
     actFocusInitialTime: TAction;
     actFocusFinalTime: TAction;
     actCharacterMap: TAction;
+    actMediaSplitEntryAtCursorPosition: TAction;
     actStatistics: TAction;
     actJumpToNextEmpty: TAction;
     actJumpToPreviousEmpty: TAction;
@@ -325,6 +326,7 @@ type
     MenuItem229: TMenuItem;
     MenuItem230: TMenuItem;
     MenuItem231: TMenuItem;
+    MenuItem232: TMenuItem;
     Separator57: TMenuItem;
     MenuItem233: TMenuItem;
     mnuTextWords: TMenuItem;
@@ -936,6 +938,7 @@ type
     procedure actMediaPlayAfterSelectionExecute(Sender: TObject);
     procedure actMediaAddEntryExecute(Sender: TObject);
     procedure actMediaDeleteEntryExecute(Sender: TObject);
+    procedure actMediaSplitEntryAtCursorPositionExecute(Sender: TObject);
     procedure actMediaZoomInExecute(Sender: TObject);
     procedure actMediaZoomOutExecute(Sender: TObject);
     procedure actMediaZoomSelectionExecute(Sender: TObject);
@@ -1686,9 +1689,15 @@ begin
       actMediaDeleteEntry.Enabled := SelectedItem <> NIL;
 
       if SelectionIsEmpty then
-        actDeleteShotChange.Enabled := ContainsSceneChange(CursorPosMS, CursorPosMS)
+      begin
+        actDeleteShotChange.Enabled := ContainsSceneChange(CursorPosMS, CursorPosMS);
+        actMediaSplitEntryAtCursorPosition.Enabled := False;
+      end
       else
+      begin
         actDeleteShotChange.Enabled := ContainsSceneChange(Selection.InitialTime, Selection.FinalTime);
+        actMediaSplitEntryAtCursorPosition.Enabled := not IsOnlySelection;
+      end;
     end;
 end;
 
