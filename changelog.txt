@@ -4,6 +4,7 @@
 - fixed: [macOS/Linux] Layout name was not displayed in the wizard window
 - fixed: Repeated action in Text/Lines menu
 - fixed: Current video aspect was not checked
+- fixed: No save prompt when quitting after editing entry in timeline
 - updated: Italian language (thx GitGianluc)
 - updated: Russian language (thx RoxMarty)
 - improved: Double-clicking timeline updates video position
