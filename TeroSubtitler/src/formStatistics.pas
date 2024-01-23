@@ -100,6 +100,7 @@ begin
     Title  := lngSaveFile;
     Filter := lngscShotChanges + ' (*.txt)|*.txt';
     FilterIndex := 0;
+    DefaultExt := '.txt';
     FileName := '';
     Options := [ofOverwritePrompt, ofEnableSizing];
     if Execute then
