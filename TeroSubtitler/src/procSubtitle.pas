@@ -538,7 +538,7 @@ begin
                                 Subtitles.FinalTime[Index] := Time;
                                 if AppOptions.AutoCheckErrors and (Subtitles.ValidIndex(Index+1)) then
                                   CheckErrors(Subtitles, Index+1, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
-                      end;
+                              end;
     TAG_CONTROL_DURATION    : Subtitles.Duration[Index] := Time;
     TAG_CONTROL_PAUSE       : Subtitles.Pause[Index]    := Time;
   end;
