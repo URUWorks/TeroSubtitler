@@ -101,10 +101,15 @@ begin
     Filter := lngscShotChanges + ' (*.txt)|*.txt';
     FilterIndex := 0;
     DefaultExt := '.txt';
-    FileName := '';
+    FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), DefaultExt);
     Options := [ofOverwritePrompt, ofEnableSizing];
     if Execute then
+    begin
+      if ExtractFileExt(FileName) <> DefaultExt then
+        ChangeFileExt(FileName, DefaultExt);
+
       mmoStatistics.Lines.SaveToFile(FileName);
+    end;
   finally
     Free;
   end;
