@@ -1,5 +1,6 @@
 1.0.1.6 (x.x.2024)
 - fixed: Crash after changing the divider size #217
+- fixed: Media buttons disabled after Audio to text
 - fixed: Changing language forgets value of Time/Frame selection in wizard window
 - fixed: [macOS/Linux] Layout name was not displayed in the wizard window
 - fixed: Repeated action in Text/Lines menu
@@ -10,6 +11,8 @@
 - improved: Gapping respected when moving entries on timeline
 - improved: Double-clicking timeline updates video position
 - added: Split entry at cursor position on timeline
+- added: Entries function to merge next/previous
+- added: Function to clear text
 - added: Subtitle statistics
 - added: Hardware video decoding option [Settings]
 - added: Additional mpv options [Settings]
