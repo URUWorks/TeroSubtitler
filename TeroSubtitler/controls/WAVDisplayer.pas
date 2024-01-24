@@ -1120,46 +1120,46 @@ begin
           begin
             i := FSubtitles.IndexOf(FSelectedSubtitle);
             if (i > 0) then
-              FMinSelTime := FSubtitles[i-1].FinalTime + 1
+              FMinSelTime := FSubtitles[i-1].FinalTime + FGAP
             else
               FMinSelTime := 0;
 
             if (i < FSubtitles.Count-1) then
-              FMaxSelTime := FSubtitles[i+1].InitialTime - 1
+              FMaxSelTime := FSubtitles[i+1].InitialTime - FGAP
             else
               FMaxSelTime := FLengthMS;
           end
           else
           begin
-            if(ACursorPosMs = FSelectedSubtitle^.InitialTime) then
+            if (ACursorPosMs = FSelectedSubtitle^.InitialTime) then
             begin
               if (i > 0) then
               begin
                 if not (ssAlt in Shift) then
-                  FMinSelTime := FSubtitles[i-1].FinalTime + 1
+                  FMinSelTime := FSubtitles[i-1].FinalTime + FGAP
                 else
                 begin
                   FPrevSubIdx := i-1;
-                  FMinSelTime := FSubtitles[FPrevSubIdx].InitialTime + (Dist*2)
+                  FMinSelTime := FSubtitles[FPrevSubIdx].InitialTime + FGAP
                 end;
                 x1 := TimeToPixel(FMinSelTime - FPositionMs);
               end;
-              FMaxSelTime := FSelectedSubtitle^.FinalTime - 1;
+              FMaxSelTime := FSelectedSubtitle^.FinalTime - FGAP;
               x2 := TimeToPixel(FMaxSelTime - FPositionMs);
             end
             else
             begin
               // TODO : better change stop when ovelapping on next sub ???
-              FMinSelTime := FSelectedSubtitle^.InitialTime + 1;
+              FMinSelTime := FSelectedSubtitle^.InitialTime + FGAP;
               x1 := TimeToPixel(FMinSelTime - FPositionMs);
               if(i < FSubtitles.Count) then
               begin
                 if not (ssAlt in Shift) then
-                  FMaxSelTime := FSubtitles[i].InitialTime - 1
+                  FMaxSelTime := FSubtitles[i].InitialTime - FGAP
                 else
                 begin
                   FNextSubIdx := i;
-                  FMaxSelTime := FSubtitles[FNextSubIdx].FinalTime - (Dist*2)
+                  FMaxSelTime := FSubtitles[FNextSubIdx].FinalTime - FGAP
                 end;
                 x2 := TimeToPixel(FMaxSelTime - FPositionMs);
               end;
@@ -1178,13 +1178,13 @@ begin
             // Selection only OUTSIDE subtitle range
             if (i > 0) then
             begin
-              FMinSelTime := FSubtitles[i-1].FinalTime  + 1;
+              FMinSelTime := FSubtitles[i-1].FinalTime  + FGAP;
               x1 := TimeToPixel(FMinSelTime - FPositionMs);
             end;
 
             if(i < FSubtitles.Count) then
             begin
-              FMaxSelTime := FSubtitles[i].InitialTime - 1;
+              FMaxSelTime := FSubtitles[i].InitialTime - FGAP;
               x2 := TimeToPixel(FMaxSelTime - FPositionMs);
             end;
           end;
