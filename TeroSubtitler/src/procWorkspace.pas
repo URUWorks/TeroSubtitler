@@ -689,12 +689,16 @@ begin
            Enabled := AValue
          else if Tag <> TAG_ACTION_ALWAYSENABLED then
          begin
-           //if (Tag and TAG_ACTION_VIDEO) = TAG_ACTION_VIDEO then
-           //  Enabled := actCloseVideo.Enabled
-           //else if (Tag and TAG_ACTION_AUDIO) = TAG_ACTION_AUDIO then
-           //  Enabled := WAVE.IsEnabled
-           //else
-             Enabled := False;
+           Enabled := False;
+
+           if AValue and MPVOptions.KeepVideoOpen then
+           begin
+             if ((Tag and TAG_ACTION_VIDEO) = TAG_ACTION_VIDEO) and MPV.Initialized then
+               Enabled := True;
+
+             if ((Tag and TAG_ACTION_AUDIO) = TAG_ACTION_AUDIO) and WAVE.IsTimeLineEnabled then
+               Enabled := True;
+           end;
          end;
        end;
     // Actions
@@ -1425,6 +1429,8 @@ begin
       actExtendLengthToNext.Enabled     := mmoText.Enabled;
       actSetAutomaticDuration.Enabled   := mmoText.Enabled;
       actSetDefaultGap.Enabled          := mmoText.Enabled;
+      actMergeWithNext.Enabled     := False;
+      actMergeWithPrevious.Enabled := False;
 
       if VST.SelectedCount = 0 then // zero selected
       begin
@@ -1474,6 +1480,9 @@ begin
           actPullLastLineFromPreviousEntry.Enabled := actPushFirstLineToPreviousEntry.Enabled;
           actPushLastLineToNextEntry.Enabled       := actExtendLengthToNext.Enabled;
           actPullFirstLineFromNextEntry.Enabled    := actPushLastLineToNextEntry.Enabled;
+
+          actMergeWithNext.Enabled     := actExtendLengthToNext.Enabled;
+          actMergeWithPrevious.Enabled := actExtendLengthToPrevious.Enabled;
 
           cboActor.Tag  := 1;
           cboActor.Text := Subtitles[NodeIndex].Actor;

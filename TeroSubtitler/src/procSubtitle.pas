@@ -41,6 +41,7 @@ procedure PushLastLineToNextEntry(const Index: Integer);
 procedure PullLastLineFromPreviousEntry(const Index: Integer);
 procedure PullFirstLineFromNextEntry(const Index: Integer);
 procedure PushWord(const Index: Integer; const ALine: Integer; const AMode: TPushWordMode);
+procedure MergeWithNext(const Index: Integer; const APrevious: Boolean = False);
 procedure ClearSubtitles(const AutoIncrementUndo: Boolean = True);
 function SetEndCueOneFrame(const AFinalTime: Integer; const ASubtract: Boolean = False): Integer;
 
@@ -432,6 +433,33 @@ begin
   finally
     sl.Free;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MergeWithNext(const Index: Integer; const APrevious: Boolean = False);
+begin
+  if not Subtitles.ValidIndex(Index) or
+    (APrevious and (Index <= 0)) or
+    (not APrevious and (Index >= Subtitles.Count-1)) then
+    Exit;
+
+  if APrevious then
+  begin
+    SetSubtitleTexts(Index-1, Subtitles.Text[Index-1] + sLineBreak + Subtitles.Text[Index], Subtitles.Translation[Index-1] + sLineBreak + Subtitles.Translation[Index], False, False, False);
+    SetSubtitleTime(Index-1, Subtitles[Index].FinalTime, TAG_CONTROL_FINALTIME, False, False);
+  end
+  else
+  begin
+    SetSubtitleTexts(Index+1, Subtitles[Index].Text + sLineBreak + Subtitles.Text[Index+1], Subtitles[Index].Translation + sLineBreak + Subtitles.Translation[Index+1], False, False, False);
+    SetSubtitleTime(Index+1, Subtitles[Index].InitialTime, TAG_CONTROL_INITIALTIME, False, False);
+  end;
+  DeleteSubtitle(Index, False, False);
+
+  UndoInstance.IncrementUndoGroup;
+  SubtitleChanged(True, True);
+  UpdateValues(True);
+  DoAutoCheckErrors;
 end;
 
 // -----------------------------------------------------------------------------
