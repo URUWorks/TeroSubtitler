@@ -966,107 +966,107 @@ msgstr "Strumenti"
 #: proclocalize.lngstcharacterspersecondaverage
 #, object-pascal-format
 msgid "Characters per second average: %.2f"
-msgstr ""
+msgstr "Media di caratteri al secondo: %.2f"
 
 #: proclocalize.lngstdurationaverage
 #, object-pascal-format
 msgid "Duration average: %s"
-msgstr ""
+msgstr "Durata media: %s"
 
 #: proclocalize.lngstentrieswithouttext
 #, object-pascal-format
 msgid "Entries without text: %d"
-msgstr ""
+msgstr "Elementi vuoti: %d"
 
 #: proclocalize.lngstgapaverage
 #, object-pascal-format
 msgid "Gap average: %s"
-msgstr ""
+msgstr "Intervallo medio: %s"
 
 #: proclocalize.lngstlinelengthaverage
 #, object-pascal-format
 msgid "Line length average: %d"
-msgstr ""
+msgstr "Lunghezza media delle righe: %d"
 
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
 msgid "Longest characters per second: %.2f (#%d)"
-msgstr ""
+msgstr "Caratteri più lunghi al secondo: %.2f (#%d)"
 
 #: proclocalize.lngstlongestduration
 #, object-pascal-format
 msgid "Longest duration: %s (#%d)"
-msgstr ""
+msgstr "Durata più estesa: %s (#%d)"
 
 #: proclocalize.lngstlongestgap
 #, object-pascal-format
 msgid "Longest gap: %s (#%d)"
-msgstr ""
+msgstr "Intervallo più esteso: %s (#%d)"
 
 #: proclocalize.lngstlongestline
 #, object-pascal-format
 msgid "Longest line: %d (#%d)"
-msgstr ""
+msgstr "Riga più estesa: %d (#%d)"
 
 #: proclocalize.lngstlongestwordsperminute
 #, object-pascal-format
 msgid "Longest words per minute: %.2f (#%d)"
-msgstr ""
+msgstr "Parole più lunghe al minuto: %.2f (#%d)"
 
 #: proclocalize.lngstnumberofcharacters
 #, object-pascal-format
 msgid "Number of characters: %d"
-msgstr ""
+msgstr "Numero di caratteri: %d"
 
 #: proclocalize.lngstnumberofentries
 #, object-pascal-format
 msgid "Number of entries: %d"
-msgstr ""
+msgstr "Numero di elementi: %d"
 
 #: proclocalize.lngstnumberofwords
 #, object-pascal-format
 msgid "Number of words: %d"
-msgstr ""
+msgstr "Numero di parole: %d"
 
 #: proclocalize.lngstshortestcharacterspersecond
 #, object-pascal-format
 msgid "Shortest characters per second: %.2f (#%d)"
-msgstr ""
+msgstr "Caratteri più brevi al secondo: %.2f (#%d)"
 
 #: proclocalize.lngstshortestduration
 #, object-pascal-format
 msgid "Shortest duration: %s (#%d)"
-msgstr ""
+msgstr "Durata più breve: %s (#%d)"
 
 #: proclocalize.lngstshortestgap
 #, object-pascal-format
 msgid "Shortest gap: %s (#%d)"
-msgstr ""
+msgstr "Intervallo più breve: %s (#%d)"
 
 #: proclocalize.lngstshortestline
 #, object-pascal-format
 msgid "Shortest line: %d (#%d)"
-msgstr ""
+msgstr "Riga più breve: %d (#%d)"
 
 #: proclocalize.lngstshortestwordsperminute
 #, object-pascal-format
 msgid "Shortest words per minute: %.2f (#%d)"
-msgstr ""
+msgstr "Parole più brevi al secondo: %.2f (#%d)"
 
 #: proclocalize.lngsttotalcharacterspersecond
 #, object-pascal-format
 msgid "Total characters per second: %.2f"
-msgstr ""
+msgstr "Totale di caratteri al secondo: %.2f"
 
 #: proclocalize.lngsttotalduration
 #, object-pascal-format
 msgid "Total duration: %s"
-msgstr ""
+msgstr "Durata totale: %s"
 
 #: proclocalize.lngstwordsperminuteaverage
 #, object-pascal-format
 msgid "Words per minute average: %.2f"
-msgstr ""
+msgstr "Media di parole al minuto: %.2f"
 
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
@@ -2944,7 +2944,7 @@ msgstr "Imposta tempistica iniziale"
 
 #: tfrmmain.actmediasplitentryatcursorposition.caption
 msgid "Split at cursor position"
-msgstr ""
+msgstr "Dividi in corrispondenza della posizione del cursore"
 
 #: tfrmmain.actmediastartsubtitleentry.caption
 msgid "Start entry"
@@ -3185,25 +3185,19 @@ msgid "Set delay..."
 msgstr "Imposta ritardo…"
 
 #: tfrmmain.actsetguilayout0.caption
-#, fuzzy
-#| msgid "Layout 0"
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Layout 1"
-msgstr "Disposizione 0"
-
-#: tfrmmain.actsetguilayout1.caption
-#, fuzzy
-#| msgid "Layout 1"
-msgctxt "tfrmmain.actsetguilayout1.caption"
-msgid "Layout 2"
 msgstr "Disposizione 1"
 
+#: tfrmmain.actsetguilayout1.caption
+msgctxt "tfrmmain.actsetguilayout1.caption"
+msgid "Layout 2"
+msgstr "Disposizione 2"
+
 #: tfrmmain.actsetguilayout2.caption
-#, fuzzy
-#| msgid "Layout 2"
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Layout 3"
-msgstr "Disposizione 2"
+msgstr "Disposizione 3"
 
 #: tfrmmain.actsetmaximumlinelength.caption
 msgid "Set maximum line length"
@@ -3316,7 +3310,7 @@ msgstr "Dividi la riga in corrispondenza del cursore"
 
 #: tfrmmain.actstatistics.caption
 msgid "Statistics..."
-msgstr ""
+msgstr "Statistiche…"
 
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
@@ -4035,7 +4029,7 @@ msgstr "mpv gestisce i sottotitoli nella visualizzazione dell’anteprima"
 
 #: tfrmsettings.chkusehwdec.caption
 msgid "Use hardware video decoding"
-msgstr ""
+msgstr "Usa la decodifica hardware del video"
 
 #: tfrmsettings.chkuseownfiledialog.caption
 msgid "Use Tero file dialog"
@@ -4439,20 +4433,18 @@ msgid "Suggestions"
 msgstr "Suggerimenti"
 
 #: tfrmstatistics.btnclose.caption
-#, fuzzy
 msgctxt "tfrmstatistics.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmstatistics.btnexport.caption
-#, fuzzy
 msgctxt "tfrmstatistics.btnexport.caption"
 msgid "Export..."
 msgstr "Esporta…"
 
 #: tfrmstatistics.caption
 msgid "Statistics"
-msgstr ""
+msgstr "Statistiche"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"
@@ -4893,23 +4885,16 @@ msgid "Optional, used for dowloading from YouTube."
 msgstr "Opzionale: utilizzato per scaricare filmati da YouTube."
 
 #: tfrmwizard.rdolayout0.caption
-#, fuzzy
-#| msgid "Layout 0"
 msgctxt "tfrmwizard.rdolayout0.caption"
 msgid "Layout 1"
-msgstr "Disposizione 0"
-
-#: tfrmwizard.rdolayout1.caption
-#, fuzzy
-#| msgid "Layout 1"
-msgctxt "tfrmwizard.rdolayout1.caption"
-msgid "Layout 2"
 msgstr "Disposizione 1"
 
-#: tfrmwizard.rdolayout2.caption
-#, fuzzy
-#| msgid "Layout 2"
-msgctxt "tfrmwizard.rdolayout2.caption"
-msgid "Layout 3"
+#: tfrmwizard.rdolayout1.caption
+msgctxt "tfrmwizard.rdolayout1.caption"
+msgid "Layout 2"
 msgstr "Disposizione 2"
 
+#: tfrmwizard.rdolayout2.caption
+msgctxt "tfrmwizard.rdolayout2.caption"
+msgid "Layout 3"
+msgstr "Disposizione 3"
