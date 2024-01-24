@@ -2537,6 +2537,10 @@ msgstr "Mapa de caracteres..."
 msgid "Check for updates..."
 msgstr "Buscar actualizaciones..."
 
+#: tfrmmain.actcleartext.caption
+msgid "Clear text"
+msgstr "Borrar texto"
+
 #: tfrmmain.actcloseapp.caption
 msgctxt "tfrmmain.actcloseapp.caption"
 msgid "Close"
@@ -2992,6 +2996,14 @@ msgctxt "tfrmmain.actmediazoomselection.caption"
 msgid "Zoom selection"
 msgstr "Selección de zoom"
 
+#: tfrmmain.actmergewithnext.caption
+msgid "Merge with next"
+msgstr "Fusionar con el siguiente"
+
+#: tfrmmain.actmergewithprevious.caption
+msgid "Merge with previous"
+msgstr "Fusionar con anterior"
+
 #: tfrmmain.actmodifyselection.caption
 msgid "Modify selection..."
 msgstr "Modificar selección..."
@@ -3188,18 +3200,18 @@ msgstr "Establecer retraso..."
 
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
-msgid "Layout 1"
-msgstr "Diseño 1"
+msgid "Classic"
+msgstr "Clásico"
 
 #: tfrmmain.actsetguilayout1.caption
 msgctxt "tfrmmain.actsetguilayout1.caption"
-msgid "Layout 2"
-msgstr "Diseño 2"
+msgid "Inverted"
+msgstr "Invertido"
 
 #: tfrmmain.actsetguilayout2.caption
 msgctxt "tfrmmain.actsetguilayout2.caption"
-msgid "Layout 3"
-msgstr "Diseño 3"
+msgid "Vertical"
+msgstr "Vertical"
 
 #: tfrmmain.actsetmaximumlinelength.caption
 msgid "Set maximum line length"
@@ -4891,16 +4903,16 @@ msgstr "Opcional, utilizado para descargar desde YouTube."
 
 #: tfrmwizard.rdolayout0.caption
 msgctxt "tfrmwizard.rdolayout0.caption"
-msgid "Layout 1"
-msgstr "Diseño 1"
+msgid "Classic"
+msgstr "Clásico"
 
 #: tfrmwizard.rdolayout1.caption
 msgctxt "tfrmwizard.rdolayout1.caption"
-msgid "Layout 2"
-msgstr "Diseño 2"
+msgid "Inverted"
+msgstr "Invertido"
 
 #: tfrmwizard.rdolayout2.caption
 msgctxt "tfrmwizard.rdolayout2.caption"
-msgid "Layout 3"
-msgstr "Diseño 3"
+msgid "Vertical"
+msgstr "Vertical"
 

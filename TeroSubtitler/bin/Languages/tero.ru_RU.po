@@ -2536,6 +2536,10 @@ msgstr "Таблица символов..."
 msgid "Check for updates..."
 msgstr "Проверить обновления..."
 
+#: tfrmmain.actcleartext.caption
+msgid "Clear text"
+msgstr ""
+
 #: tfrmmain.actcloseapp.caption
 msgctxt "tfrmmain.actcloseapp.caption"
 msgid "Close"
@@ -2991,6 +2995,14 @@ msgctxt "tfrmmain.actmediazoomselection.caption"
 msgid "Zoom selection"
 msgstr "Масштабировать"
 
+#: tfrmmain.actmergewithnext.caption
+msgid "Merge with next"
+msgstr ""
+
+#: tfrmmain.actmergewithprevious.caption
+msgid "Merge with previous"
+msgstr ""
+
 #: tfrmmain.actmodifyselection.caption
 msgid "Modify selection..."
 msgstr "Изменить выделенное..."
@@ -3189,21 +3201,21 @@ msgstr "Настроить задержку..."
 #, fuzzy
 #| msgid "Layout 0"
 msgctxt "tfrmmain.actsetguilayout0.caption"
-msgid "Layout 1"
+msgid "Classic"
 msgstr "Макет 0"
 
 #: tfrmmain.actsetguilayout1.caption
 #, fuzzy
 #| msgid "Layout 1"
 msgctxt "tfrmmain.actsetguilayout1.caption"
-msgid "Layout 2"
+msgid "Inverted"
 msgstr "Макет 1"
 
 #: tfrmmain.actsetguilayout2.caption
 #, fuzzy
 #| msgid "Layout 2"
 msgctxt "tfrmmain.actsetguilayout2.caption"
-msgid "Layout 3"
+msgid "Vertical"
 msgstr "Макет 2"
 
 #: tfrmmain.actsetmaximumlinelength.caption
@@ -4900,20 +4912,20 @@ msgstr "Для скачивания с YouTube (необязательное)"
 #, fuzzy
 #| msgid "Layout 0"
 msgctxt "tfrmwizard.rdolayout0.caption"
-msgid "Layout 1"
+msgid "Classic"
 msgstr "Макет 0"
 
 #: tfrmwizard.rdolayout1.caption
 #, fuzzy
 #| msgid "Layout 1"
 msgctxt "tfrmwizard.rdolayout1.caption"
-msgid "Layout 2"
+msgid "Inverted"
 msgstr "Макет 1"
 
 #: tfrmwizard.rdolayout2.caption
 #, fuzzy
 #| msgid "Layout 2"
 msgctxt "tfrmwizard.rdolayout2.caption"
-msgid "Layout 3"
+msgid "Vertical"
 msgstr "Макет 2"
 
