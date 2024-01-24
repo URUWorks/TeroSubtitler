@@ -29,6 +29,7 @@ procedure ApplyCheckErrorsTimesOnly(const Item: PUWSubtitleItem; const Index: In
 procedure ApplySetTextFromMemo(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplySetTranslationFromMemo(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyText(const Item: PUWSubtitleItem; const Index: Integer; const NewSubtitleText, NewSubtitleTranslation: String; const Resent: Boolean = True);
+procedure ApplyClearText(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyActor(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFontBold(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFontItalic(const Item: PUWSubtitleItem; const Index: Integer);
@@ -107,6 +108,14 @@ end;
 procedure ApplyText(const Item: PUWSubtitleItem; const Index: Integer; const NewSubtitleText, NewSubtitleTranslation: String; const Resent: Boolean = True);
 begin
   SetSubtitleTexts(Index, NewSubtitleText, NewSubtitleTranslation, False, False, Resent);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ApplyClearText(const Item: PUWSubtitleItem; const Index: Integer);
+begin
+  with Item^ do
+    ApplyText(Item, Index, '', '', False);
 end;
 
 // -----------------------------------------------------------------------------

@@ -228,13 +228,12 @@ procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtual
 begin
   if Assigned(ANode) then
     with AVST, frmMain do
-      if FocusedNode <> ANode then
-      begin
-        if AClear then ClearSelection;
-        FocusedNode     := ANode;
-        Selected[ANode] := True;
-        ScrollIntoView(ANode, True);
-      end;
+    begin
+      if AClear then ClearSelection;
+      FocusedNode     := ANode;
+      Selected[ANode] := True;
+      ScrollIntoView(ANode, True);
+    end;
 end;
 
 // -----------------------------------------------------------------------------

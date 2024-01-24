@@ -434,7 +434,7 @@ begin
               if FileExists(srtfile) then
               begin
                 ShowMessageDialog(lngFileSavedSuccessfully, '', lngOpenContainingFolder, @OpenFolderClick);
-                LoadSubtitle(srtfile, sfSubRip, NIL, -1, False);
+                LoadSubtitle(srtfile, sfSubRip, NIL, -1, True);
               end;
             end
             else

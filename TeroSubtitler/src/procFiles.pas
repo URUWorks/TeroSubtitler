@@ -31,9 +31,9 @@ function GetDefaultExtFromFilter(const AIndex: Integer; const AFilter: String): 
 
 { Subtitle files }
 
-function CloseSubtitle(const ACloseVideo: Boolean): Boolean;
+function CloseSubtitle(const AKeepVideoOpen: Boolean): Boolean;
 procedure NewSubtitle(const InsertEmptySubtitle: Boolean = True);
-procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AutoLoadVideoFile: Boolean = True; const AddToMRU: Boolean = True);
+procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AKeepVideoOpen: Boolean = False; const AVideoFile: String = ''; const AddToMRU: Boolean = True);
 procedure ImportSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 procedure SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 procedure SaveSubtitleAutoBackup;
@@ -152,7 +152,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function CloseSubtitle(const ACloseVideo: Boolean): Boolean;
+function CloseSubtitle(const AKeepVideoOpen: Boolean): Boolean;
 var
   r: Integer;
 begin
@@ -187,7 +187,7 @@ begin
     with frmMain do
       MRU.Update(SubtitleInfo.Text.FileName, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPV.IsPlaying);
 
-    if ACloseVideo then
+    if not AKeepVideoOpen then
       actCloseVideo.Execute;
 
     SubtitleInfo.Text.FileName := '';
@@ -197,7 +197,7 @@ begin
     Subtitles.Clear;
     mmoSourceView.Lines.Clear;
     UndoInstance.Clear;
-    EnableWorkArea(not ACloseVideo);
+    EnableWorkArea(False);
     RefreshAppTitle;
   end;
 
@@ -211,7 +211,7 @@ begin
   with frmMain do
     if LayoutVST.Visible then
     begin
-      if CloseSubtitle(True) then
+      if CloseSubtitle(False) then
       begin
         if Workspace.WorkMode = wmFrames then // ask for FPS?
           with frmMain.cboInputFPS do
@@ -227,7 +227,7 @@ begin
     end
     else if LayoutSource.Visible then
     begin
-      if CloseSubtitle(True) then
+      if CloseSubtitle(False) then
       begin
         EnableWorkArea;
         mmoSourceView.Clear;
@@ -241,7 +241,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AutoLoadVideoFile: Boolean = True; const AddToMRU: Boolean = True);
+procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AKeepVideoOpen: Boolean = False; const AVideoFile: String = ''; const AddToMRU: Boolean = True);
 var
   _FPS: Single;
   MRUInfoObject: TMRUInfoObject;
@@ -257,7 +257,9 @@ begin
     Application.ProcessMessages;
   end;
   {$ENDIF}
-  if not CloseSubtitle(AutoLoadVideoFile) then Exit;
+  if not CloseSubtitle(AKeepVideoOpen) then Exit;
+
+  MPVOptions.KeepVideoOpen := AKeepVideoOpen;
 
   _FPS := AFPS;
   if _FPS = -1 then _FPS := Workspace.FPS.DefFPS;
@@ -366,7 +368,7 @@ begin
     if Assigned(MRUInfoObject) then
     begin
       VSTSelectNode(frmMain.VST, MRUInfoObject.SelectedLine, True, True);
-      if not MRUInfoObject.VideoFile.IsEmpty then
+      if not MRUInfoObject.VideoFile.IsEmpty and not AKeepVideoOpen then
       begin
         VFisLoaded := True;
         LoadVideo(MRUInfoObject.VideoFile, MRUInfoObject.MPVPosition);
@@ -374,7 +376,9 @@ begin
       if not MRUInfoObject.WaveformFile.IsEmpty then LoadAudio(MRUInfoObject.WaveformFile);
     end;
 
-    if AutoLoadVideoFile and not VFisLoaded then LoadVideo(GetMediaFileNameIfExists(FileName, TVideoExts));
+    if not AVideoFile.IsEmpty then
+      LoadVideo(AVideoFile)
+    else if not AKeepVideoOpen and not VFisLoaded then LoadVideo(GetMediaFileNameIfExists(FileName, TVideoExts));
 
     if AddToMRU then
       with frmMain do
@@ -557,7 +561,10 @@ begin
   with frmMain do
     if FileExists(FileName) then
     begin
-      actCloseVideoExecute(NIL);
+      if not MPVOptions.KeepVideoOpen then
+        actCloseVideoExecute(NIL)
+      else
+        MPVOptions.KeepVideoOpen := False;
 
       if not actVideoPreview.Checked then
         actVideoPreview.Execute;
@@ -1020,7 +1027,7 @@ begin
   try
     if Ready then
     begin
-      LoadSubtitle(Original, sfInvalid, NIL, -1, False, False);
+      LoadSubtitle(Original, sfInvalid, NIL, -1, False, Movie, False);
       if Subtitles.Count > 0 then
         ReadSubtitleData(Translation, False, smTranslation);
 

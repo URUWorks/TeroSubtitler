@@ -132,7 +132,7 @@ end;
 
 procedure TfrmMain.actCloseSubtitleExecute(Sender: TObject);
 begin
-  CloseSubtitle(True);
+  CloseSubtitle(False);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1822,6 +1822,33 @@ end;
 procedure TfrmMain.actPushWordToNextEntryExecute(Sender: TObject);
 begin
   PushWord(VSTFocusedNode(VST), GetMemoFocusedCaretLineY, pwmToNext);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actMergeWithNextExecute(Sender: TObject);
+begin
+  MergeWithNext(VSTFocusedNode(VST));
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actMergeWithPreviousExecute(Sender: TObject);
+begin
+  MergeWithNext(VSTFocusedNode(VST), True);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actClearTextExecute(Sender: TObject);
+var
+  Memo : TUWMemo;
+begin
+  Memo := GetMemoFocused;
+  if Memo = NIL then
+    VSTDoLoop(VST, @ApplyClearText, dlSelected, True, True)
+  else
+    Memo.Text := '';
 end;
 
 // -----------------------------------------------------------------------------

@@ -83,6 +83,9 @@ type
     actFocusInitialTime: TAction;
     actFocusFinalTime: TAction;
     actCharacterMap: TAction;
+    actClearText: TAction;
+    actMergeWithNext: TAction;
+    actMergeWithPrevious: TAction;
     actMediaSplitEntryAtCursorPosition: TAction;
     actStatistics: TAction;
     actJumpToNextEmpty: TAction;
@@ -327,6 +330,9 @@ type
     MenuItem230: TMenuItem;
     MenuItem231: TMenuItem;
     MenuItem232: TMenuItem;
+    MenuItem234: TMenuItem;
+    MenuItem235: TMenuItem;
+    MenuItem236: TMenuItem;
     Separator57: TMenuItem;
     MenuItem233: TMenuItem;
     mnuTextWords: TMenuItem;
@@ -621,6 +627,7 @@ type
     Separator54: TMenuItem;
     Separator55: TMenuItem;
     Separator56: TMenuItem;
+    Separator58: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
@@ -1069,6 +1076,9 @@ type
     procedure actPushWordDownExecute(Sender: TObject);
     procedure actPushWordToPreviousEntryExecute(Sender: TObject);
     procedure actPushWordToNextEntryExecute(Sender: TObject);
+    procedure actMergeWithNextExecute(Sender: TObject);
+    procedure actMergeWithPreviousExecute(Sender: TObject);
+    procedure actClearTextExecute(Sender: TObject);
     procedure actGenerateVideoExecute(Sender: TObject);
     procedure actUnicodeCtrlLRMExecute(Sender: TObject);
     procedure actUnicodeCtrlRLMExecute(Sender: TObject);
@@ -1284,7 +1294,7 @@ begin
         CanClose := True;
   end
   else
-    CanClose := CloseSubtitle(True);
+    CanClose := CloseSubtitle(False);
 
   if CanClose then
   begin

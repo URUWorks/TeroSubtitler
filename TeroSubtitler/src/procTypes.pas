@@ -243,6 +243,7 @@ type
 
   TMPVOptions = record
     SubtitleHandleByMPV    : Boolean; // mpv handles the subtitle
+    KeepVideoOpen          : Boolean;
     TextColor              : String;
     TextBorderColor        : String;
     TextShadowColor        : String;
