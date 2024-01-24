@@ -787,7 +787,7 @@ object frmMain: TfrmMain
         TreeOptions.AutoOptions = [toAutoTristateTracking]
         TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
         TreeOptions.PaintOptions = [toHideFocusRect, toHideSelection, toShowDropmark, toThemeAware, toUseBlendedImages, toAlwaysHideSelection]
-        TreeOptions.SelectionOptions = [toFullRowSelect, toMultiSelect, toSimpleDrawSelection]
+        TreeOptions.SelectionOptions = [toFullRowSelect, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
         TreeOptions.StringOptions = []
         OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
         OnContextPopup = VSTContextPopup

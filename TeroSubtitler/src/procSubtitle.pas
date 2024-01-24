@@ -47,7 +47,8 @@ function SetEndCueOneFrame(const AFinalTime: Integer; const ASubtract: Boolean =
 function CalcNewSubtitleFinalTime(const Index: Integer; const AInitialTime: Integer): Integer;
 
 procedure SubtitleChanged(const AText, ATranslation: Boolean);
-procedure SubtitleChangedReset(const ASubtitleMode: TSubtitleMode);
+procedure SubtitleChangedReset(const ASubtitleMode: TSubtitleMode); overload;
+procedure SubtitleChangedReset; overload;
 procedure SetSubtitleTimes(const Index: Integer; const AInitialTime, AFinalTime: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
 procedure SetSubtitleTime(const Index: Integer; const Time: Integer; const Tag: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
 procedure SetSubtitleText(const Index: Integer; const Text: String; const SubtitleMode: TSubtitleMode = smText; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True; const Resent: Boolean = True);
@@ -503,6 +504,14 @@ begin
     SubtitleInfo.Text.Changed := False
   else
     SubtitleInfo.Translation.Changed := False;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SubtitleChangedReset;
+begin
+  SubtitleInfo.Text.Changed := False;
+  SubtitleInfo.Translation.Changed := False;
 end;
 
 // -----------------------------------------------------------------------------

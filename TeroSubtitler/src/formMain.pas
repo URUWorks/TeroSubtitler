@@ -1688,17 +1688,12 @@ begin
     if IsTimeLineEnabled then
     begin
       actMediaDeleteEntry.Enabled := SelectedItem <> NIL;
+      actMediaSplitEntryAtCursorPosition.Enabled := actMediaDeleteEntry.Enabled;
 
       if SelectionIsEmpty then
-      begin
-        actDeleteShotChange.Enabled := ContainsSceneChange(CursorPosMS, CursorPosMS);
-        actMediaSplitEntryAtCursorPosition.Enabled := False;
-      end
+        actDeleteShotChange.Enabled := ContainsSceneChange(CursorPosMS, CursorPosMS)
       else
-      begin
         actDeleteShotChange.Enabled := ContainsSceneChange(Selection.InitialTime, Selection.FinalTime);
-        actMediaSplitEntryAtCursorPosition.Enabled := not IsOnlySelection;
-      end;
     end;
 end;
 

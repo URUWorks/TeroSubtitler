@@ -192,7 +192,7 @@ begin
 
     SubtitleInfo.Text.FileName := '';
     SubtitleInfo.Translation.FileName := '';
-    SubtitleChanged(False, False);
+    SubtitleChangedReset;
     VST.RootNodeCount := 0;
     Subtitles.Clear;
     mmoSourceView.Lines.Clear;
@@ -222,6 +222,7 @@ begin
 
         EnableWorkArea;
         if InsertEmptySubtitle then VSTInsertEntries(VST);
+        VSTFocusChanged(NIL, NIL, 0);
       end;
     end
     else if LayoutSource.Visible then
@@ -364,7 +365,7 @@ begin
     MRUInfoObject := MRU.GetValues(FileName);
     if Assigned(MRUInfoObject) then
     begin
-      VSTSelectNode(frmMain.VST, MRUInfoObject.SelectedLine, True);
+      VSTSelectNode(frmMain.VST, MRUInfoObject.SelectedLine, True, True);
       if not MRUInfoObject.VideoFile.IsEmpty then
       begin
         VFisLoaded := True;

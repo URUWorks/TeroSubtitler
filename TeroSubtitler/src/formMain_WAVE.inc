@@ -21,7 +21,7 @@ procedure TfrmMain.WAVESelectedSubtitleItem(Sender: TObject;
   const Index: Integer; const SubtitleItem: TUWSubtitleItem;
   const IsDynamic: Boolean);
 begin
-  VSTSelectNode(VST, Index, True);
+  VSTSelectNode(VST, Index, True, True);
 end;
 
 // -----------------------------------------------------------------------------

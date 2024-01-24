@@ -41,7 +41,7 @@ function VSTFocusedNode(const AVST: TLazVirtualStringTree): Integer;
 function VSTLastSelectedNode(const AVST: TLazVirtualStringTree): PVirtualNode;
 function VSTLastSelectedNodeIndex(const AVST: TLazVirtualStringTree): Integer;
 function VSTGetNodeAtIndex(const AVST: TLazVirtualStringTree; const AIndex: Integer): PVirtualNode;
-procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer; const AClear: Boolean); overload;
+procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer; const AClear: Boolean; const AForceUpdate: Boolean = False);
 procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean); overload;
 procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AIdxs: TIntegerDynArray; const AClear: Boolean); overload;
 procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AFrom, ATo: Integer; const AClear: Boolean); overload;
@@ -215,9 +215,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer; const AClear: Boolean);
+procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer; const AClear: Boolean; const AForceUpdate: Boolean = False);
 begin
   VSTSelectNode(AVST, VSTGetNodeAtIndex(AVST, AIndex), AClear);
+  if AForceUpdate then
+    frmMain.VSTFocusChanged(NIL, NIL, 0);
 end;
 
 // -----------------------------------------------------------------------------
@@ -232,8 +234,6 @@ begin
         FocusedNode     := ANode;
         Selected[ANode] := True;
         ScrollIntoView(ANode, True);
-
-        VSTFocusChanged(AVST, ANode, 0);
       end;
 end;
 
@@ -876,8 +876,8 @@ begin
 
   if IncrementUndo then
   begin
-    UndoInstance.IncrementUndoGroup;
     SubtitleChanged(True, True);
+    UndoInstance.IncrementUndoGroup;
   end;
 
   if Refresh then
