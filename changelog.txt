@@ -7,6 +7,7 @@
 - fixed: No save prompt when quitting after editing entry in timeline
 - updated: Italian language (thx GitGianluc)
 - updated: Russian language (thx RoxMarty)
+- improved: Gapping respected when moving entries on timeline
 - improved: Double-clicking timeline updates video position
 - added: Split entry at cursor position on timeline
 - added: Subtitle statistics
