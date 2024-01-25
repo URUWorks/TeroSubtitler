@@ -84,6 +84,8 @@ type
     actFocusFinalTime: TAction;
     actCharacterMap: TAction;
     actClearText: TAction;
+    actJumpToNextNote: TAction;
+    actJumpToPreviousNote: TAction;
     actMergeWithNext: TAction;
     actMergeWithPrevious: TAction;
     actMediaSplitEntryAtCursorPosition: TAction;
@@ -333,6 +335,8 @@ type
     MenuItem234: TMenuItem;
     MenuItem235: TMenuItem;
     MenuItem236: TMenuItem;
+    MenuItem237: TMenuItem;
+    MenuItem238: TMenuItem;
     Separator57: TMenuItem;
     MenuItem233: TMenuItem;
     mnuTextWords: TMenuItem;
@@ -983,6 +987,8 @@ type
     procedure actAdjustSubtitleExecute(Sender: TObject);
     procedure actJumpToNextMarkedExecute(Sender: TObject);
     procedure actJumpToPreviousMarkedExecute(Sender: TObject);
+    procedure actJumpToNextNoteExecute(Sender: TObject);
+    procedure actJumpToPreviousNoteExecute(Sender: TObject);
     procedure actEndCueAddOneFrameExecute(Sender: TObject);
     procedure actEndCueSubtractOneFrameExecute(Sender: TObject);
     procedure actRoundTimesExecute(Sender: TObject);

@@ -1052,6 +1052,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actJumpToNextNoteExecute(Sender: TObject);
+begin
+  VSTJumpToNextNoteEntry(VST);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actJumpToPreviousNoteExecute(Sender: TObject);
+begin
+  VSTJumpToNextNoteEntry(VST, False);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actEndCueAddOneFrameExecute(Sender: TObject);
 begin
   VSTDoLoop(VST, @ApplyEndCueAddOneFrame, dlSelected, True, True);

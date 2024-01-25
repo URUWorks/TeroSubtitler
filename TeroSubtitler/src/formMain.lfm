@@ -1532,6 +1532,12 @@ object frmMain: TfrmMain
         object MenuItem65: TMenuItem
           Action = actJumpToPreviousMarked
         end
+        object MenuItem237: TMenuItem
+          Action = actJumpToNextNote
+        end
+        object MenuItem238: TMenuItem
+          Action = actJumpToPreviousNote
+        end
         object Separator17: TMenuItem
           Caption = '-'
         end
@@ -3962,32 +3968,6 @@ object frmMain: TfrmMain
       Caption = 'Jump to previous without text'
       OnExecute = actJumpToPreviousEmptyExecute
     end
-    object actSort: TAction
-      Tag = 1
-      Category = 'Entries'
-      Caption = 'Sort'
-      OnExecute = actSortExecute
-    end
-    object actSetAsDefaultFormat: TAction
-      Category = 'Entries'
-      Caption = 'Set as default save format'
-      ImageIndex = 67
-      OnExecute = actSetAsDefaultFormatExecute
-    end
-    object actSetAsDefaultEncoding: TAction
-      Category = 'Entries'
-      Caption = 'Set as default save encoding'
-      ImageIndex = 66
-      OnExecute = actSetAsDefaultEncodingExecute
-    end
-    object actCombineEntries: TAction
-      Tag = 1
-      Category = 'Entries'
-      Caption = 'Combine entries'
-      Hint = 'Combines all the selected entries into one'
-      ImageIndex = 63
-      OnExecute = actCombineEntriesExecute
-    end
     object actCharacterMap: TAction
       Tag = 1
       Category = 'Edit'
@@ -4102,6 +4082,51 @@ object frmMain: TfrmMain
       Caption = 'Detect dialog segments...'
       OnExecute = actDetectDialogSegmentsExecute
     end
+    object actClearText: TAction
+      Tag = 1
+      Category = 'Text'
+      Caption = 'Clear text'
+      ImageIndex = 95
+      OnExecute = actClearTextExecute
+    end
+    object actJumpToNextNote: TAction
+      Tag = 1
+      Category = 'Entries'
+      Caption = 'Jump to next note'
+      OnExecute = actJumpToNextNoteExecute
+    end
+    object actJumpToPreviousNote: TAction
+      Tag = 1
+      Category = 'Entries'
+      Caption = 'Jump to previous note'
+      OnExecute = actJumpToPreviousNoteExecute
+    end
+    object actSort: TAction
+      Tag = 1
+      Category = 'Entries'
+      Caption = 'Sort'
+      OnExecute = actSortExecute
+    end
+    object actSetAsDefaultFormat: TAction
+      Category = 'Entries'
+      Caption = 'Set as default save format'
+      ImageIndex = 67
+      OnExecute = actSetAsDefaultFormatExecute
+    end
+    object actSetAsDefaultEncoding: TAction
+      Category = 'Entries'
+      Caption = 'Set as default save encoding'
+      ImageIndex = 66
+      OnExecute = actSetAsDefaultEncodingExecute
+    end
+    object actCombineEntries: TAction
+      Tag = 1
+      Category = 'Entries'
+      Caption = 'Combine entries'
+      Hint = 'Combines all the selected entries into one'
+      ImageIndex = 63
+      OnExecute = actCombineEntriesExecute
+    end
     object actMergeWithNext: TAction
       Tag = 1
       Category = 'Entries'
@@ -4115,13 +4140,6 @@ object frmMain: TfrmMain
       Caption = 'Merge with previous'
       ImageIndex = 94
       OnExecute = actMergeWithPreviousExecute
-    end
-    object actClearText: TAction
-      Tag = 1
-      Category = 'Text'
-      Caption = 'Clear text'
-      ImageIndex = 95
-      OnExecute = actClearTextExecute
     end
   end
   object popDropInsert: TPopupMenu
