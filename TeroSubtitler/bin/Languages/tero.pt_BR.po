@@ -518,6 +518,14 @@ msgctxt "proclocalize.lnghduration"
 msgid "Duration"
 msgstr "Duração"
 
+#: proclocalize.lnghhmmssff
+msgid "SMPTE [HH:MM:SS:FF]"
+msgstr ""
+
+#: proclocalize.lnghhmmsszzz
+msgid "Media [HH:MM:SS.ZZZ]"
+msgstr ""
+
 #: proclocalize.lnghindex
 msgid "#/Gap"
 msgstr "#/Intervalo"

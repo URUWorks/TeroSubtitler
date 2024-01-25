@@ -518,6 +518,14 @@ msgctxt "proclocalize.lnghduration"
 msgid "Duration"
 msgstr "Duration"
 
+#: proclocalize.lnghhmmssff
+msgid "SMPTE [HH:MM:SS:FF]"
+msgstr "SMPTE [HH:MM:SS:FF]"
+
+#: proclocalize.lnghhmmsszzz
+msgid "Media [HH:MM:SS.ZZZ]"
+msgstr "Media [HH:MM:SS.ZZZ]"
+
 #: proclocalize.lnghindex
 msgid "#/Gap"
 msgstr "#/Gap"
@@ -2792,7 +2800,7 @@ msgstr "Jump to next marked"
 
 #: tfrmmain.actjumptonextnote.caption
 msgid "Jump to next note"
-msgstr ""
+msgstr "Jump to next note"
 
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
@@ -2808,7 +2816,7 @@ msgstr "Jump to previous marked"
 
 #: tfrmmain.actjumptopreviousnote.caption
 msgid "Jump to previous note"
-msgstr ""
+msgstr "Jump to previous note"
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"
@@ -4923,4 +4931,3 @@ msgstr "Inverted"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-

@@ -36,7 +36,7 @@ msgstr "Parámetros adicionales:"
 
 #: proclocalize.lngaddnote
 msgid "Add note"
-msgstr "Añadir nota"
+msgstr "Añadir anotación"
 
 #: proclocalize.lngallsupportedfiles
 msgid "All supported files"
@@ -517,6 +517,14 @@ msgstr "CPS"
 msgctxt "proclocalize.lnghduration"
 msgid "Duration"
 msgstr "Duración"
+
+#: proclocalize.lnghhmmssff
+msgid "SMPTE [HH:MM:SS:FF]"
+msgstr "SMPTE [HH:MM:SS:FF]"
+
+#: proclocalize.lnghhmmsszzz
+msgid "Media [HH:MM:SS.ZZZ]"
+msgstr "Medios [HH:MM:SS.ZZZ]"
 
 #: proclocalize.lnghindex
 msgid "#/Gap"
@@ -2458,7 +2466,7 @@ msgstr "Actores"
 
 #: tfrmmain.actaddnote.caption
 msgid "Add note..."
-msgstr "Añadir nota..."
+msgstr "Añadir anotación..."
 
 #: tfrmmain.actaddquotationmarks.caption
 msgid "Add quotation marks"
@@ -2792,7 +2800,7 @@ msgstr "Saltar a la siguiente marca"
 
 #: tfrmmain.actjumptonextnote.caption
 msgid "Jump to next note"
-msgstr ""
+msgstr "Saltar a la siguiente anotación"
 
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
@@ -2808,7 +2816,7 @@ msgstr "Saltar a la marca anterior"
 
 #: tfrmmain.actjumptopreviousnote.caption
 msgid "Jump to previous note"
-msgstr ""
+msgstr "Saltar a la anotación anterior"
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"
@@ -4923,4 +4931,3 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-
