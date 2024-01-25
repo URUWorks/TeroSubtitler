@@ -42,12 +42,13 @@ function VSTLastSelectedNode(const AVST: TLazVirtualStringTree): PVirtualNode;
 function VSTLastSelectedNodeIndex(const AVST: TLazVirtualStringTree): Integer;
 function VSTGetNodeAtIndex(const AVST: TLazVirtualStringTree; const AIndex: Integer): PVirtualNode;
 procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer; const AClear: Boolean; const AForceUpdate: Boolean = False);
-procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean); overload;
+procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean; const AForceUpdate: Boolean = False); overload;
 procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AIdxs: TIntegerDynArray; const AClear: Boolean); overload;
 procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AFrom, ATo: Integer; const AClear: Boolean); overload;
 procedure VSTMarkEntries(const AVST: TLazVirtualStringTree; const Value: Boolean = True);
 procedure VSTJumpToNextMarkedEntry(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
 procedure VSTJumpToNextEmptyEntry(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
+procedure VSTJumpToNextNoteEntry(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
 procedure VSTCopyEntriesToClipboard(const AVST: TLazVirtualStringTree; const ACut: Boolean = False);
 procedure VSTPasteEntriesFromClipboard(const AVST: TLazVirtualStringTree);
 procedure VSTInsertEntries(const AVST: TLazVirtualStringTree; const Before: Boolean = False);
@@ -217,14 +218,12 @@ end;
 
 procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer; const AClear: Boolean; const AForceUpdate: Boolean = False);
 begin
-  VSTSelectNode(AVST, VSTGetNodeAtIndex(AVST, AIndex), AClear);
-  if AForceUpdate then
-    frmMain.VSTFocusChanged(NIL, NIL, 0);
+  VSTSelectNode(AVST, VSTGetNodeAtIndex(AVST, AIndex), AClear, AForceUpdate);
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean);
+procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean; const AForceUpdate: Boolean = False);
 begin
   if Assigned(ANode) then
     with AVST, frmMain do
@@ -234,6 +233,9 @@ begin
       Selected[ANode] := True;
       ScrollIntoView(ANode, True);
     end;
+
+  if AForceUpdate then
+    frmMain.VSTFocusChanged(NIL, NIL, 0);
 end;
 
 // -----------------------------------------------------------------------------
@@ -329,9 +331,7 @@ begin
       begin
         if Subtitles[Run^.Index].Marked then
         begin
-          ClearSelection;
-          Selected[Run] := True;
-          ScrollIntoView(Run, False);
+          VSTSelectNode(AVST, Run, True, True);
           Break;
         end;
 
@@ -364,9 +364,40 @@ begin
       begin
         if Subtitles[Run^.Index].Text.IsEmpty then
         begin
-          ClearSelection;
-          Selected[Run] := True;
-          ScrollIntoView(Run, False);
+          VSTSelectNode(AVST, Run, True, True);
+          Break;
+        end;
+
+        if AForward then
+          Run := GetNext(Run)
+        else
+          Run := GetPrevious(Run);
+      end;
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure VSTJumpToNextNoteEntry(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
+var
+  Run : PVirtualNode;
+begin
+  with AVST do
+    if TotalCount > 0 then
+    begin
+      Run := GetFirstSelected;
+      if not Assigned(Run) then Exit;
+
+      if AForward then
+        Run := GetFirstSelected^.NextSibling
+      else
+        Run := GetFirstSelected^.PrevSibling;
+
+      while Assigned(Run) do
+      begin
+        if not Subtitles[Run^.Index].Notes.IsEmpty then
+        begin
+          VSTSelectNode(AVST, Run, True, True);
           Break;
         end;
 
