@@ -92,7 +92,7 @@ const
   swt_Strikeout = 's';
   swt_Color     = 'c';
 
-  UC_BOOKMARK = WideChar(#$2691);
+  UC_BOOKMARK = '🗭'; //WideChar(#$2691);
 
   TAG_CONTROL_NORMAL        = 0;
   TAG_CONTROL_UPDATE        = 1;

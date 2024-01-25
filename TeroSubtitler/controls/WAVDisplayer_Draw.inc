@@ -309,7 +309,7 @@ procedure TUWWaveformDisplayer.DrawSubtitleItem(const ABitmap: {$IFDEF USEBGRABI
       FTS.Layout := ALayout;
 
       if N <> '' then
-        TextRect(R, R.Left, R.Top, S + sLineBreak + sLineBreak + WideChar(#$2691) + ' ' + N, FTS)
+        TextRect(R, R.Left, R.Top, S + sLineBreak + sLineBreak + '🗭' + ' ' + N, FTS)
       else
         TextRect(R, R.Left, R.Top, S, FTS);
     end;
