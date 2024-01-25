@@ -2537,7 +2537,7 @@ msgstr "Controlla aggiornamenti…"
 
 #: tfrmmain.actcleartext.caption
 msgid "Clear text"
-msgstr ""
+msgstr "Cancella testo"
 
 #: tfrmmain.actcloseapp.caption
 msgctxt "tfrmmain.actcloseapp.caption"
@@ -2996,11 +2996,11 @@ msgstr "Zoom della selezione"
 
 #: tfrmmain.actmergewithnext.caption
 msgid "Merge with next"
-msgstr ""
+msgstr "Unisci al successivo"
 
 #: tfrmmain.actmergewithprevious.caption
 msgid "Merge with previous"
-msgstr ""
+msgstr "Unisci al precedente"
 
 #: tfrmmain.actmodifyselection.caption
 msgid "Modify selection..."
@@ -3197,25 +3197,19 @@ msgid "Set delay..."
 msgstr "Imposta ritardo…"
 
 #: tfrmmain.actsetguilayout0.caption
-#, fuzzy
-#| msgid "Layout 1"
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Classic"
-msgstr "Disposizione 1"
+msgstr "Classica"
 
 #: tfrmmain.actsetguilayout1.caption
-#, fuzzy
-#| msgid "Layout 2"
 msgctxt "tfrmmain.actsetguilayout1.caption"
 msgid "Inverted"
-msgstr "Disposizione 2"
+msgstr "Invertita"
 
 #: tfrmmain.actsetguilayout2.caption
-#, fuzzy
-#| msgid "Layout 3"
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
-msgstr "Disposizione 3"
+msgstr "Verticale"
 
 #: tfrmmain.actsetmaximumlinelength.caption
 msgid "Set maximum line length"
@@ -4903,23 +4897,16 @@ msgid "Optional, used for dowloading from YouTube."
 msgstr "Opzionale: utilizzato per scaricare filmati da YouTube."
 
 #: tfrmwizard.rdolayout0.caption
-#, fuzzy
-#| msgid "Layout 1"
 msgctxt "tfrmwizard.rdolayout0.caption"
 msgid "Classic"
-msgstr "Disposizione 1"
+msgstr "Classica"
 
 #: tfrmwizard.rdolayout1.caption
-#, fuzzy
-#| msgid "Layout 2"
 msgctxt "tfrmwizard.rdolayout1.caption"
 msgid "Inverted"
-msgstr "Disposizione 2"
+msgstr "Invertita"
 
 #: tfrmwizard.rdolayout2.caption
-#, fuzzy
-#| msgid "Layout 3"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
-msgstr "Disposizione 3"
-
+msgstr "Verticale"
