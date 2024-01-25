@@ -362,6 +362,8 @@ begin
     cboDefaultFileEncoding.ItemIndex := Workspace.DefEncoding;
     btnShortCutApply.Enabled := False;
 
+    cboTimeCodeMode.AddItem(lngHHMMSSZZZ, NIL);
+    cboTimeCodeMode.AddItem(lngHHMMSSFF, NIL);
     cboTheme.AddItem(lngssAutoMode, NIL);
     cboTheme.AddItem(lngssLightMode, NIL);
     cboTheme.AddItem(lngssDarkMode, NIL);

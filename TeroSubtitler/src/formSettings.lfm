@@ -93,17 +93,11 @@ object frmSettings: TfrmSettings
       Left = 248
       Height = 23
       Top = 64
-      Width = 134
+      Width = 268
       BorderSpacing.Top = 8
       ItemHeight = 15
-      ItemIndex = 0
-      Items.Strings = (
-        'HH:MM:SS.ZZZ'
-        'HH:MM:SS:FF'
-      )
       Style = csDropDownList
       TabOrder = 2
-      Text = 'HH:MM:SS.ZZZ'
     end
     object lblTimeCodeMode: TLabel
       Left = 0
@@ -151,7 +145,7 @@ object frmSettings: TfrmSettings
       Left = 248
       Height = 23
       Top = 128
-      Width = 134
+      Width = 268
       BorderSpacing.Top = 8
       ItemHeight = 15
       Style = csDropDownList
@@ -271,7 +265,7 @@ object frmSettings: TfrmSettings
       Left = 248
       Height = 23
       Top = 160
-      Width = 134
+      Width = 268
       BorderSpacing.Top = 8
       ItemHeight = 15
       Style = csDropDownList

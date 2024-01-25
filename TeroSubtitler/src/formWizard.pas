@@ -313,8 +313,8 @@ begin
   else
     lblLanguage.Caption := lngwizLanguage;
 
-  cboTimeCode.Items[0] := lngcfsTime;
-  cboTimeCode.Items[1] := lngcfsFrames;
+  cboTimeCode.Items[0] := lngHHMMSSZZZ;
+  cboTimeCode.Items[1] := lngHHMMSSFF;
   cboTimeCode.ItemIndex := currIdx;
 end;
 
