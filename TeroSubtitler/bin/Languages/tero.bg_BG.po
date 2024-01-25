@@ -2788,6 +2788,10 @@ msgstr "Прескачане до следващото място без тек�
 msgid "Jump to next marked"
 msgstr "Прескачане до следващото отбелязване"
 
+#: tfrmmain.actjumptonextnote.caption
+msgid "Jump to next note"
+msgstr ""
+
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
 msgstr "Прескачане до следващата промяна на снимането"
@@ -2799,6 +2803,10 @@ msgstr "Прескачане до предишното място без тек�
 #: tfrmmain.actjumptopreviousmarked.caption
 msgid "Jump to previous marked"
 msgstr "Прескачана до предишното отбелязване"
+
+#: tfrmmain.actjumptopreviousnote.caption
+msgid "Jump to previous note"
+msgstr ""
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"

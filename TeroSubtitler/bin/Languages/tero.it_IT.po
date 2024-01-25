@@ -2788,6 +2788,10 @@ msgstr "Passa all’elemento vuoto successivo"
 msgid "Jump to next marked"
 msgstr "Passa all’elemento contrassegnato successivo"
 
+#: tfrmmain.actjumptonextnote.caption
+msgid "Jump to next note"
+msgstr ""
+
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
 msgstr "Passa al cambio di inquadratura successivo"
@@ -2799,6 +2803,10 @@ msgstr "Passa all’elemento vuoto precedente"
 #: tfrmmain.actjumptopreviousmarked.caption
 msgid "Jump to previous marked"
 msgstr "Passa all’elemento contrassegnato precedente"
+
+#: tfrmmain.actjumptopreviousnote.caption
+msgid "Jump to previous note"
+msgstr ""
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"
@@ -4910,3 +4918,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+

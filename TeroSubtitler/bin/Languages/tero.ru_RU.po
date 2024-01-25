@@ -2789,6 +2789,10 @@ msgstr "Перейти к следующему субтитру без текс�
 msgid "Jump to next marked"
 msgstr "Перейти к следующей пометке"
 
+#: tfrmmain.actjumptonextnote.caption
+msgid "Jump to next note"
+msgstr ""
+
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
 msgstr "Перейти к следующей смене кадра"
@@ -2800,6 +2804,10 @@ msgstr "Вернуться к предыдущему субтитру без т�
 #: tfrmmain.actjumptopreviousmarked.caption
 msgid "Jump to previous marked"
 msgstr "Перейти к предыдущей пометке"
+
+#: tfrmmain.actjumptopreviousnote.caption
+msgid "Jump to previous note"
+msgstr ""
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"

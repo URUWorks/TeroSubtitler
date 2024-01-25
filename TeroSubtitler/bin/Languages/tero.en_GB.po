@@ -2790,6 +2790,10 @@ msgstr "Jump to next without text"
 msgid "Jump to next marked"
 msgstr "Jump to next marked"
 
+#: tfrmmain.actjumptonextnote.caption
+msgid "Jump to next note"
+msgstr ""
+
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
 msgstr "Jump to next shot change"
@@ -2801,6 +2805,10 @@ msgstr "Jump to previous without text"
 #: tfrmmain.actjumptopreviousmarked.caption
 msgid "Jump to previous marked"
 msgstr "Jump to previous marked"
+
+#: tfrmmain.actjumptopreviousnote.caption
+msgid "Jump to previous note"
+msgstr ""
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"

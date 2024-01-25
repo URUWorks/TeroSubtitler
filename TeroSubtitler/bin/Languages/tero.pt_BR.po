@@ -2792,6 +2792,10 @@ msgstr "Saltar para a próxima sem texto"
 msgid "Jump to next marked"
 msgstr "Saltar para a marcação seguinte"
 
+#: tfrmmain.actjumptonextnote.caption
+msgid "Jump to next note"
+msgstr ""
+
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
 msgstr "Saltar para a mudança de plano seguinte"
@@ -2803,6 +2807,10 @@ msgstr "Saltar para a anterior sem texto"
 #: tfrmmain.actjumptopreviousmarked.caption
 msgid "Jump to previous marked"
 msgstr "Saltar para a marcação anterior"
+
+#: tfrmmain.actjumptopreviousnote.caption
+msgid "Jump to previous note"
+msgstr ""
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"

@@ -2780,6 +2780,10 @@ msgstr ""
 msgid "Jump to next marked"
 msgstr ""
 
+#: tfrmmain.actjumptonextnote.caption
+msgid "Jump to next note"
+msgstr ""
+
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
 msgstr ""
@@ -2790,6 +2794,10 @@ msgstr ""
 
 #: tfrmmain.actjumptopreviousmarked.caption
 msgid "Jump to previous marked"
+msgstr ""
+
+#: tfrmmain.actjumptopreviousnote.caption
+msgid "Jump to previous note"
 msgstr ""
 
 #: tfrmmain.actjumptoprevshotchange.caption
