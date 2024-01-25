@@ -180,7 +180,7 @@ begin
   begin
     SubtitleInfo.LastSubtitle.Selected := SubtitleInfo.LastSubtitle.ShowIndex;
     if actMediaAutoScroll.Checked then
-      VSTSelectNode(VST, SubtitleInfo.LastSubtitle.Selected, True);
+      VSTSelectNode(VST, SubtitleInfo.LastSubtitle.Selected, True, True);
   end;
 
   TimerSubtitle.Enabled := True;
