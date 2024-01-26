@@ -154,7 +154,7 @@ resourcestring
   //BatchConvertStrings
   lngbcFileName = 'File name';
   lngbcFileFormat = 'Format';
-  lngbcFileState = 'State';
+  lngbcFileState = 'Status';
 
   //CustomFormatStrings
   lngcfsTime = 'Time';
