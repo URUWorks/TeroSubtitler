@@ -84,6 +84,8 @@ type
     actFocusFinalTime: TAction;
     actCharacterMap: TAction;
     actClearText: TAction;
+    actTextEffectTypewriter: TAction;
+    actTextEffectFlash: TAction;
     actJumpToNextNote: TAction;
     actJumpToPreviousNote: TAction;
     actMergeWithNext: TAction;
@@ -337,6 +339,9 @@ type
     MenuItem236: TMenuItem;
     MenuItem237: TMenuItem;
     MenuItem238: TMenuItem;
+    MenuItem239: TMenuItem;
+    MenuItem240: TMenuItem;
+    mnuTextEffects: TMenuItem;
     Separator57: TMenuItem;
     MenuItem233: TMenuItem;
     mnuTextWords: TMenuItem;
@@ -1120,6 +1125,8 @@ type
     procedure actCharacterMapExecute(Sender: TObject);
     procedure actJumpToNextEmptyExecute(Sender: TObject);
     procedure actJumpToPreviousEmptyExecute(Sender: TObject);
+    procedure actTextEffectFlashExecute(Sender: TObject);
+    procedure actTextEffectTypewriterExecute(Sender: TObject);
   private
 
   public

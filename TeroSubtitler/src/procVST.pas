@@ -66,13 +66,15 @@ procedure VSTAdjustSubtitles(const AdjSub: TAdjustSubtitles);
 procedure VSTSort(const AVST: TLazVirtualStringTree);
 
 procedure VSTDeleteLineFromEntry(const AVST: TLazVirtualStringTree; const ALines: TStringArray);
+procedure VSTTextEffect(const AVST: TLazVirtualStringTree; const AEffect: TTextEffect; const AParam1, AParam2: Integer);
 
 // -----------------------------------------------------------------------------
 
 implementation
 
 uses procWorkspace, procUndo, procSubtitle, Clipbrd, RegExpr, UWSubtitles.Utils,
-  UWSubtitleAPI, UWSystem.SysUtils, UWSystem.StrUtils, formMain, Math;
+  UWSubtitleAPI, UWSystem.SysUtils, UWSystem.StrUtils, formMain, Math, lazUTF8,
+  UWSubtitleAPI.Tags;
 
 // -----------------------------------------------------------------------------
 
@@ -628,8 +630,8 @@ begin
       for I := High(Nodes) downto 0 do
         DeleteSubtitle(Nodes[I]^.Index, False, False);
 
-      s  := CleanupTags(s, [swt_Bold, swt_Italic, swt_Underline, swt_Strikeout]);
-      st := CleanupTags(st, [swt_Bold, swt_Italic, swt_Underline, swt_Strikeout]);
+      s  := CleanupTags(s, [tst_Bold, tst_Italic, tst_Underline, tst_Strikeout]);
+      st := CleanupTags(st, [tst_Bold, tst_Italic, tst_Underline, tst_Strikeout]);
 
       InsertSubtitle(x, it, ft, s, st);
     finally
@@ -1093,6 +1095,88 @@ begin
 end;
 
 //----------------------------------------------------------------------------------------------------------------------
+
+procedure VSTTextEffect(const AVST: TLazVirtualStringTree; const AEffect: TTextEffect; const AParam1, AParam2: Integer);
+
+  function TextEffect(const Index, InitialTime, FinalTime: Integer; const Text, Translation: String; const Effect: TTextEffect; const Param1: Integer; Param2: Integer): Integer;
+  var
+    x       : Integer;
+    ITime   : Integer;
+    FTime   : Integer;
+    CurTime : Integer;
+    CharDur : Integer;
+    Pos1    : Byte;
+    SumLen  : Byte;
+    s       : String;
+  begin
+    x      := Index;
+    ITime  := InitialTime;
+    FTime  := FinalTime;
+    Result := 0;
+
+    case Effect of
+      fxFlash:
+      begin
+        repeat
+          CurTime := ITime + Param1;
+          if CurTime > FTime then CurTime := FTime;
+          Result := InsertSubtitle(x, ITime, CurTime, Text, Translation, False, False);
+          ITime := ITime + Param1 + Param2;
+          Inc(x);
+        until ITime >= FTime;
+      end;
+
+      fxTypewriter:
+      begin
+        CharDur := Rnd((FTime - ITime) / UTF8Length(RemoveTSTags(Text)));
+        SumLen  := UTF8Length(Text);
+
+        Pos1 := 0;
+        while (Pos1 < SumLen) do
+        begin
+          Inc(Pos1);
+          if((UTF8CompareStr(UTF8Copy(Text, Pos1, 1), #13) <> 0) and
+             (UTF8CompareStr(Copy(Text, Pos1, 1), #10) <> 0) and
+             (UTF8CompareStr(Copy(Text, Pos1, 1), ' ') <> 0)
+             ) or (Pos1 = SumLen) then // and (not IsTagPart(Text, Pos1))) or (Pos1 = SumLen) then
+          begin
+            s := FixTags(UTF8Copy(Text, 1, Pos1), tst_StartTag, tst_EndTag);
+            Result := InsertSubtitle(x, ITime, ITime+CharDur, s, Translation, False, False);
+            Inc(x);
+
+            if s = Text then Break; //avoid creating repeated subtitles
+
+            ITime := ITime + CharDur;
+          end;
+        end;
+        SetSubtitleTime(Result, FinalTime, TAG_CONTROL_FINALTIME, False, False);
+      end;
+    end;
+  end;
+
+var
+  FocNode : Integer;
+  NewNode : Integer;
+begin
+  FocNode := VSTFocusedNode(AVST);
+
+  if (FocNode >= 0) and not Subtitles.Text[FocNode].IsEmpty then
+  begin
+   NewNode := TextEffect(FocNode,
+                         Subtitles[FocNode].InitialTime,
+                         Subtitles[FocNode].FinalTime,
+                         Subtitles[FocNode].Text,
+                         Subtitles[FocNode].Translation,
+                         AEffect,
+                         AParam1,
+                         AParam2);
+
+    DeleteSubtitle(FocNode);
+    VSTSelectNode(AVST, NewNode, True);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
 
 end.
 
