@@ -3378,6 +3378,14 @@ msgctxt "tfrmmain.acttbxsettings.caption"
 msgid "Settings..."
 msgstr "Настройки..."
 
+#: tfrmmain.acttexteffectflash.caption
+msgid "Flash effect"
+msgstr ""
+
+#: tfrmmain.acttexteffecttypewriter.caption
+msgid "Typewriter effect"
+msgstr ""
+
 #: tfrmmain.acttimeexpander.caption
 msgid "Time expander/reducer..."
 msgstr ""
@@ -3725,6 +3733,10 @@ msgstr "Вмъкване на управляващ знак от уникод"
 msgctxt "tfrmmain.mnuselect.caption"
 msgid "Select"
 msgstr "Избиране"
+
+#: tfrmmain.mnutexteffects.caption
+msgid "Effects"
+msgstr ""
 
 #: tfrmmain.mnutextlines.caption
 msgid "Lines"

@@ -3378,6 +3378,14 @@ msgctxt "tfrmmain.acttbxsettings.caption"
 msgid "Settings..."
 msgstr "Настройки..."
 
+#: tfrmmain.acttexteffectflash.caption
+msgid "Flash effect"
+msgstr ""
+
+#: tfrmmain.acttexteffecttypewriter.caption
+msgid "Typewriter effect"
+msgstr ""
+
 #: tfrmmain.acttimeexpander.caption
 msgid "Time expander/reducer..."
 msgstr "Время растянуть/сжать..."
@@ -3725,6 +3733,10 @@ msgstr "Вставить управляющий символ юникода"
 msgctxt "tfrmmain.mnuselect.caption"
 msgid "Select"
 msgstr "Выбрать"
+
+#: tfrmmain.mnutexteffects.caption
+msgid "Effects"
+msgstr ""
 
 #: tfrmmain.mnutextlines.caption
 msgid "Lines"

@@ -3348,6 +3348,14 @@ msgctxt "tfrmmain.acttbxsettings.caption"
 msgid "Settings..."
 msgstr ""
 
+#: tfrmmain.acttexteffectflash.caption
+msgid "Flash effect"
+msgstr ""
+
+#: tfrmmain.acttexteffecttypewriter.caption
+msgid "Typewriter effect"
+msgstr ""
+
 #: tfrmmain.acttimeexpander.caption
 msgid "Time expander/reducer..."
 msgstr ""
@@ -3694,6 +3702,10 @@ msgstr ""
 #: tfrmmain.mnuselect.caption
 msgctxt "tfrmmain.mnuselect.caption"
 msgid "Select"
+msgstr ""
+
+#: tfrmmain.mnutexteffects.caption
+msgid "Effects"
 msgstr ""
 
 #: tfrmmain.mnutextlines.caption

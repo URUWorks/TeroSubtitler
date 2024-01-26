@@ -3371,6 +3371,14 @@ msgctxt "tfrmmain.acttbxsettings.caption"
 msgid "Settings..."
 msgstr "Settings..."
 
+#: tfrmmain.acttexteffectflash.caption
+msgid "Flash effect"
+msgstr "Flash effect"
+
+#: tfrmmain.acttexteffecttypewriter.caption
+msgid "Typewriter effect"
+msgstr "Typewriter effect"
+
 #: tfrmmain.acttimeexpander.caption
 msgid "Time expander/reducer..."
 msgstr "Time expander/reducer..."
@@ -3718,6 +3726,10 @@ msgstr "Insert Unicode control character"
 msgctxt "tfrmmain.mnuselect.caption"
 msgid "Select"
 msgstr "Select"
+
+#: tfrmmain.mnutexteffects.caption
+msgid "Effects"
+msgstr "Effects"
 
 #: tfrmmain.mnutextlines.caption
 msgid "Lines"
@@ -4931,4 +4943,3 @@ msgstr "Inverted"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-
