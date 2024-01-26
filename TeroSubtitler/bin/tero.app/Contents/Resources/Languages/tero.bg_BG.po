@@ -203,7 +203,9 @@ msgid "File name"
 msgstr "Файлово име"
 
 #: proclocalize.lngbcfilestate
-msgid "State"
+#, fuzzy
+#| msgid "State"
+msgid "Status"
 msgstr "Състояние"
 
 #: proclocalize.lngbtnadd
@@ -4818,11 +4820,15 @@ msgid "Exit"
 msgstr "Изход"
 
 #: tfrmwelcome.lblnewsubtitle.caption
-msgid "New empty subtitle"
+#, fuzzy
+#| msgid "New empty subtitle"
+msgid "New subtitle project"
 msgstr "Нови празни надписи"
 
 #: tfrmwelcome.lblnewtranscription.caption
-msgid "New transcription"
+#, fuzzy
+#| msgid "New transcription"
+msgid "New manual transcription"
 msgstr "Ново разписване"
 
 #: tfrmwelcome.lblopenfile.caption

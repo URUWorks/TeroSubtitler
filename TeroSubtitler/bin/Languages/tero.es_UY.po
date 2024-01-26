@@ -204,7 +204,7 @@ msgid "File name"
 msgstr "Nombre de archivo"
 
 #: proclocalize.lngbcfilestate
-msgid "State"
+msgid "Status"
 msgstr "Estado"
 
 #: proclocalize.lngbtnadd
@@ -1445,7 +1445,7 @@ msgstr "Seleccionar todo"
 
 #: tfrmbatchconvert.caption
 msgid "Batch convert"
-msgstr "Convertidor por lotes"
+msgstr "Conversión por lotes"
 
 #: tfrmbatchconvert.lblencoding.caption
 msgctxt "tfrmbatchconvert.lblencoding.caption"
@@ -2530,7 +2530,7 @@ msgstr "Duración automática..."
 #: tfrmmain.actbatchconvert.caption
 msgctxt "tfrmmain.actbatchconvert.caption"
 msgid "Batch convert..."
-msgstr "Convertirdor por lotes..."
+msgstr "Conversión por lotes..."
 
 #: tfrmmain.actcenterwaveform.caption
 msgctxt "tfrmmain.actcenterwaveform.caption"
@@ -4793,19 +4793,19 @@ msgstr "Mostrar al inicio"
 #: tfrmwelcome.lblbatchconvert.caption
 msgctxt "tfrmwelcome.lblbatchconvert.caption"
 msgid "Batch convert..."
-msgstr "Convertirdor por lotes..."
+msgstr "Conversión por lotes..."
 
 #: tfrmwelcome.lblexit.caption
 msgid "Exit"
 msgstr "Salir"
 
 #: tfrmwelcome.lblnewsubtitle.caption
-msgid "New empty subtitle"
-msgstr "Nuevo subtítulo vacío"
+msgid "New subtitle project"
+msgstr "Nuevo proyecto de subtítulos"
 
 #: tfrmwelcome.lblnewtranscription.caption
-msgid "New transcription"
-msgstr "Nueva transcripción"
+msgid "New manual transcription"
+msgstr "Nueva transcripción manual"
 
 #: tfrmwelcome.lblopenfile.caption
 msgid "Open file..."

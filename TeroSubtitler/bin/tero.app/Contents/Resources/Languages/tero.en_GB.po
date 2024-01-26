@@ -204,8 +204,8 @@ msgid "File name"
 msgstr "File name"
 
 #: proclocalize.lngbcfilestate
-msgid "State"
-msgstr "State"
+msgid "Status"
+msgstr "Status"
 
 #: proclocalize.lngbtnadd
 msgctxt "proclocalize.lngbtnadd"
@@ -4800,12 +4800,12 @@ msgid "Exit"
 msgstr "Exit"
 
 #: tfrmwelcome.lblnewsubtitle.caption
-msgid "New empty subtitle"
-msgstr "New empty subtitle"
+msgid "New subtitle project"
+msgstr "New subtitle project"
 
 #: tfrmwelcome.lblnewtranscription.caption
-msgid "New transcription"
-msgstr "New transcription"
+msgid "New manual transcription"
+msgstr "New manual transcription"
 
 #: tfrmwelcome.lblopenfile.caption
 msgid "Open file..."
@@ -4931,3 +4931,4 @@ msgstr "Inverted"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
+

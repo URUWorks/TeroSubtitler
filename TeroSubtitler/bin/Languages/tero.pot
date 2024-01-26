@@ -186,7 +186,7 @@ msgid "File name"
 msgstr ""
 
 #: proclocalize.lngbcfilestate
-msgid "State"
+msgid "Status"
 msgstr ""
 
 #: proclocalize.lngbtnadd
@@ -4777,11 +4777,11 @@ msgid "Exit"
 msgstr ""
 
 #: tfrmwelcome.lblnewsubtitle.caption
-msgid "New empty subtitle"
+msgid "New subtitle project"
 msgstr ""
 
 #: tfrmwelcome.lblnewtranscription.caption
-msgid "New transcription"
+msgid "New manual transcription"
 msgstr ""
 
 #: tfrmwelcome.lblopenfile.caption
