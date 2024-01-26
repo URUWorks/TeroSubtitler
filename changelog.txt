@@ -12,6 +12,7 @@
 - improved: Gapping respected when moving entries on timeline
 - improved: Double-clicking timeline updates video position
 - added: Split entry at cursor position on timeline
+- added: Text flash/typewriter effect
 - added: Jump to next/previous note
 - added: Entries function to merge next/previous
 - added: Function to clear text
