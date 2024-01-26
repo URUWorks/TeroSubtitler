@@ -84,13 +84,13 @@ const
     '♪', '♫', '©', '…', '‘', '’', '“', '”', '⹀' //, '♥'
   );
 
-  swt_StartTag  = '{';
-  swt_EndTag    = '}';
-  swt_Bold      = 'b';
-  swt_Italic    = 'i';
-  swt_Underline = 'u';
-  swt_Strikeout = 's';
-  swt_Color     = 'c';
+  tst_StartTag  = '{';
+  tst_EndTag    = '}';
+  tst_Bold      = 'b';
+  tst_Italic    = 'i';
+  tst_Underline = 'u';
+  tst_Strikeout = 's';
+  tst_Color     = 'c';
 
   UC_BOOKMARK = '🗭'; //WideChar(#$2691);
 
@@ -310,6 +310,10 @@ type
   end;
 
   TAdjustSubtitles = array of TAdjustItem;
+
+  { TTextEffect }
+
+  TTextEffect = (fxFlash, fxTypewriter);
 
   { SubtitleInfo }
 

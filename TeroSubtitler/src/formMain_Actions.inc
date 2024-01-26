@@ -332,7 +332,7 @@ begin
     if GetMemoFocused = NIL then
       VSTDoLoop(VST, @ApplyFontBold, dlSelected, True, True)
     else
-      SetTextTag(swt_Bold);
+      SetTextTag(tst_Bold);
   end;
 end;
 
@@ -345,7 +345,7 @@ begin
     if GetMemoFocused = NIL then
       VSTDoLoop(VST, @ApplyFontItalic, dlSelected, True, True)
     else
-      SetTextTag(swt_Italic);
+      SetTextTag(tst_Italic);
   end;
 end;
 
@@ -358,7 +358,7 @@ begin
     if GetMemoFocused = NIL then
       VSTDoLoop(VST, @ApplyFontUnderline, dlSelected, True, True)
     else
-      SetTextTag(swt_Underline);
+      SetTextTag(tst_Underline);
   end;
 end;
 
@@ -371,7 +371,7 @@ begin
     if GetMemoFocused = NIL then
       VSTDoLoop(VST, @ApplyFontStrikeout, dlSelected, True, True)
     else
-      SetTextTag(swt_Strikeout);
+      SetTextTag(tst_Strikeout);
   end;
 end;
 
@@ -2094,6 +2094,20 @@ end;
 procedure TfrmMain.actCharacterMapExecute(Sender: TObject);
 begin
   ShowCharacterMap;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actTextEffectTypewriterExecute(Sender: TObject);
+begin
+  VSTTextEffect(VST, fxTypewriter, 0, 0);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actTextEffectFlashExecute(Sender: TObject);
+begin
+  VSTTextEffect(VST, fxFlash, 250, 100);
 end;
 
 // -----------------------------------------------------------------------------

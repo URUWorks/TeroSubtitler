@@ -180,7 +180,7 @@ begin
       p := UTF8Pos(sArr[i], AText, p + l);
       l := UTF8Length(sArr[i]);
       s := UTF8Copy(AText, p-1, l+2);
-      if not s.StartsWith(swt_StartTag) and not s.EndsWith(swt_EndTag) then // skip possible Tero tags
+      if not s.StartsWith(tst_StartTag) and not s.EndsWith(tst_EndTag) then // skip possible Tero tags
       begin
         FWordMap.Add(p, sArr[i]);
       end;

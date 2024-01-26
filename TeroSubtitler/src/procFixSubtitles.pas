@@ -369,7 +369,7 @@ begin
       // Fix Tags
       if etFixTags in FErrors then
       begin
-        tmp := FixTags(FixedItem.Text, swt_StartTag, swt_EndTag);
+        tmp := FixTags(FixedItem.Text, tst_StartTag, tst_EndTag);
         if FixedItem.Text <> tmp then
         begin
           FixedItem.Text := tmp;
@@ -390,7 +390,7 @@ begin
       // Cleanup Tags
       if etCleanupTags in FErrors then
       begin
-        tmp := CleanupTags(FixedItem.Text, [swt_Bold, swt_Italic, swt_Underline, swt_Strikeout]);
+        tmp := CleanupTags(FixedItem.Text, [tst_Bold, tst_Italic, tst_Underline, tst_Strikeout]);
         if FixedItem.Text <> tmp then
         begin
           FixedItem.Text := tmp;
@@ -678,7 +678,7 @@ begin
     // Fix Tags
     if etFixTags in ErrorsToCheck then
     begin
-      s := FixTags(Text, swt_StartTag, swt_EndTag);
+      s := FixTags(Text, tst_StartTag, tst_EndTag);
       if Text <> s then
         Result := Result + [etFixTags];
     end;

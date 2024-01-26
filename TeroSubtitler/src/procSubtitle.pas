@@ -989,9 +989,9 @@ begin
 
   i := Memo.SelStart;
   if Memo.SelText <> '' then
-    Memo.SelText := Format('{\%s&%s&}%s{\%s}', [swt_Color, HexColor, Memo.SelText, swt_Color])
+    Memo.SelText := Format('{\%s&%s&}%s{\%s}', [tst_Color, HexColor, Memo.SelText, tst_Color])
   else
-    Memo.Text := Format('{\%s&%s&}%s{\%s}', [swt_Color, HexColor, Memo.Text, swt_Color]);
+    Memo.Text := Format('{\%s&%s&}%s{\%s}', [tst_Color, HexColor, Memo.Text, tst_Color]);
 
   Memo.SelStart := i+12;
 end;

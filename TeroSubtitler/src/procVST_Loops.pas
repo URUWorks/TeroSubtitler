@@ -136,8 +136,8 @@ var
 begin
   if Text <> '' then
   begin
-    sTag := swt_StartTag + '\' + Tag + '1' + swt_EndTag;
-    eTag := swt_StartTag + '\' + Tag + '0' + swt_EndTag;
+    sTag := tst_StartTag + '\' + Tag + '1' + tst_EndTag;
+    eTag := tst_StartTag + '\' + Tag + '0' + tst_EndTag;
 
     if AnsiStartsText(sTag, Text) and AnsiEndsText(eTag, Text) then
       Result := Copy(Text, Length(sTag)+1, Length(Text) - (Length(sTag)+Length(eTag)))
@@ -154,7 +154,7 @@ function ApplyTagColor(const Text: String; const Color: String): String;
 begin
   if Text <> '' then
     Result := Format('%s\%s&%s&%s%s%s\%s%s',
-      [swt_StartTag, swt_Color, Color, swt_EndTag, Text, swt_StartTag, swt_Color, swt_EndTag])
+      [tst_StartTag, tst_Color, Color, tst_EndTag, Text, tst_StartTag, tst_Color, tst_EndTag])
   else
     Result := '';
 end;
@@ -174,7 +174,7 @@ end;
 procedure ApplyFontBold(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^ do
-    ApplyText(Item, Index, ApplyTag(Text, swt_Bold), ApplyTag(Translation, swt_Bold), False);
+    ApplyText(Item, Index, ApplyTag(Text, tst_Bold), ApplyTag(Translation, tst_Bold), False);
 end;
 
 // -----------------------------------------------------------------------------
@@ -182,7 +182,7 @@ end;
 procedure ApplyFontItalic(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^ do
-    ApplyText(Item, Index, ApplyTag(Text, swt_Italic), ApplyTag(Translation, swt_Italic), False);
+    ApplyText(Item, Index, ApplyTag(Text, tst_Italic), ApplyTag(Translation, tst_Italic), False);
 end;
 
 // -----------------------------------------------------------------------------
@@ -190,7 +190,7 @@ end;
 procedure ApplyFontStrikeOut(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^ do
-    ApplyText(Item, Index, ApplyTag(Text, swt_StrikeOut), ApplyTag(Translation, swt_StrikeOut), False);
+    ApplyText(Item, Index, ApplyTag(Text, tst_StrikeOut), ApplyTag(Translation, tst_StrikeOut), False);
 end;
 
 // -----------------------------------------------------------------------------
@@ -198,7 +198,7 @@ end;
 procedure ApplyFontUnderline(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^ do
-    ApplyText(Item, Index, ApplyTag(Text, swt_Underline), ApplyTag(Translation, swt_Underline), False);
+    ApplyText(Item, Index, ApplyTag(Text, tst_Underline), ApplyTag(Translation, tst_Underline), False);
 end;
 
 // -----------------------------------------------------------------------------
