@@ -256,7 +256,7 @@ end;
 procedure TfrmAdjustSubtitle.spnIndexChange(Sender: TObject);
 begin
   tedTime.Value := Subtitles[spnIndex.Value-1].InitialTime;
-  VSTSelectNode(frmMain.VST, spnIndex.Value-1, True);
+  VSTSelectNode(frmMain.VST, spnIndex.Value-1, True, True);
 end;
 
 // -----------------------------------------------------------------------------

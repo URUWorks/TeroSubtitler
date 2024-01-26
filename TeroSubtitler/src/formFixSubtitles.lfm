@@ -9,6 +9,7 @@ object frmFixSubtitles: TfrmFixSubtitles
   ClientWidth = 1024
   Constraints.MinHeight = 200
   Constraints.MinWidth = 200
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

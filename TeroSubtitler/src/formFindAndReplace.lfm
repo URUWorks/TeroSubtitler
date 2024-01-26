@@ -8,6 +8,7 @@ object frmFindAndReplace: TfrmFindAndReplace
   Caption = 'Find and replace'
   ClientHeight = 346
   ClientWidth = 520
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

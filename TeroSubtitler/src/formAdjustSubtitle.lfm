@@ -120,9 +120,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
     end
     object btnLast: TUWFlatButton
       Tag = 1
-      AnchorSideTop.Control = btnPlus
       AnchorSideTop.Side = asrCenter
-      AnchorSideRight.Control = btnPlus
       Left = 549
       Top = 28
       ButtonStyle = True
@@ -137,9 +135,7 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
       OnClick = DropperClick
     end
     object btnFirst: TUWFlatButton
-      AnchorSideTop.Control = btnPlus
       AnchorSideTop.Side = asrCenter
-      AnchorSideRight.Control = btnPlus
       Left = 549
       Top = 0
       ButtonStyle = True

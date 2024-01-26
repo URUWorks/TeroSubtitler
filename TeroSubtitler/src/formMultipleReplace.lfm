@@ -8,11 +8,12 @@ object frmMultipleReplace: TfrmMultipleReplace
   Caption = 'Multiple replace'
   ClientHeight = 353
   ClientWidth = 490
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object edtFind: TEdit
     AnchorSideRight.Control = btnPlus
     Left = 112
@@ -21,8 +22,8 @@ object frmMultipleReplace: TfrmMultipleReplace
     Width = 284
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 5
-    OnChange = edtFindChange
     TabOrder = 0
+    OnChange = edtFindChange
   end
   object lblFind: TLabel
     Left = 8
@@ -49,8 +50,8 @@ object frmMultipleReplace: TfrmMultipleReplace
     Width = 370
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 8
-    OnChange = edtFindChange
     TabOrder = 1
+    OnChange = edtFindChange
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -66,8 +67,8 @@ object frmMultipleReplace: TfrmMultipleReplace
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 5
+    OnClick = btnCloseClick
   end
   object btnApply: TButton
     AnchorSideTop.Control = btnClose
@@ -80,8 +81,8 @@ object frmMultipleReplace: TfrmMultipleReplace
     BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
-    OnClick = btnApplyClick
     TabOrder = 4
+    OnClick = btnApplyClick
   end
   object btnPlus: TButton
     AnchorSideRight.Control = btnMinus
@@ -93,8 +94,8 @@ object frmMultipleReplace: TfrmMultipleReplace
     BorderSpacing.Right = 5
     Caption = '+'
     Enabled = False
-    OnClick = btnPlusClick
     TabOrder = 2
+    OnClick = btnPlusClick
   end
   object btnMinus: TButton
     AnchorSideRight.Control = Owner
@@ -107,8 +108,8 @@ object frmMultipleReplace: TfrmMultipleReplace
     BorderSpacing.Right = 8
     Caption = '-'
     Enabled = False
-    OnClick = btnMinusClick
     TabOrder = 3
+    OnClick = btnMinusClick
   end
   object VST: TLazVirtualStringTree
     Left = 8

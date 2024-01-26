@@ -8,6 +8,7 @@ object frmDelay: TfrmDelay
   Caption = 'Set delay'
   ClientHeight = 187
   ClientWidth = 239
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

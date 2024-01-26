@@ -8,6 +8,7 @@ object frmRoundTime: TfrmRoundTime
   Caption = 'Round times'
   ClientHeight = 274
   ClientWidth = 239
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

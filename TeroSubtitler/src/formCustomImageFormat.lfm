@@ -8,20 +8,21 @@ object frmCustomImageFormat: TfrmCustomImageFormat
   Caption = 'Custom image format'
   ClientHeight = 417
   ClientWidth = 723
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object cboScript: TComboBox
     Left = 8
     Height = 23
     Top = 28
     Width = 292
     ItemHeight = 15
-    OnSelect = cboScriptSelect
     Style = csDropDownList
     TabOrder = 0
+    OnSelect = cboScriptSelect
   end
   object lblScript: TLabel
     Left = 8
@@ -64,8 +65,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Caption = 'Save...'
     Default = True
     Enabled = False
-    OnClick = btnSaveClick
     TabOrder = 14
+    OnClick = btnSaveClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -81,8 +82,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 15
+    OnClick = btnCloseClick
   end
   object edtPrefix: TEdit
     Left = 8
@@ -125,8 +126,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Width = 75
     BorderSpacing.Left = 5
     Caption = '...'
-    OnClick = btnFolderClick
     TabOrder = 4
+    OnClick = btnFolderClick
   end
   object lblImageSize: TLabel
     Left = 400
@@ -226,9 +227,9 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Width = 235
     Anchors = [akTop, akLeft, akRight]
     ItemHeight = 15
-    OnSelect = cboFontSelect
     Style = csDropDownList
     TabOrder = 12
+    OnSelect = cboFontSelect
   end
   object lblFont: TLabel
     Left = 400
@@ -296,8 +297,8 @@ object frmCustomImageFormat: TfrmCustomImageFormat
     Width = 48
     BorderSpacing.Left = 5
     Caption = '...'
-    OnClick = btnResClick
     TabOrder = 7
+    OnClick = btnResClick
   end
   object popRes: TPopupMenu
     Left = 632

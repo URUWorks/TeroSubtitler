@@ -828,11 +828,11 @@ begin
   begin
     if NextSibiling then
     begin
-      if (VSTFocusedNode(VST) < Subtitles.Count) then VSTSelectNode(VST, VSTFocusedNode(VST)+1, True);
+      if (VSTFocusedNode(VST) < Subtitles.Count) then VSTSelectNode(VST, VSTFocusedNode(VST)+1, True, True);
     end
     else
     begin
-      if (VSTFocusedNode(VST) > 0) then VSTSelectNode(VST, VSTFocusedNode(VST)-1, True);
+      if (VSTFocusedNode(VST) > 0) then VSTSelectNode(VST, VSTFocusedNode(VST)-1, True, True);
     end;
 
     if WaveToo then

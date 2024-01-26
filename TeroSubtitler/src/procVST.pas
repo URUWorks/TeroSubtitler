@@ -559,7 +559,7 @@ begin
       ti := 0;
 
     tf := ti + AppOptions.Conventions.NewSubtitleMs;
-    VSTSelectNode(AVST, InsertSubtitle(pos, ti, tf, '', ''), True);
+    VSTSelectNode(AVST, InsertSubtitle(pos, ti, tf, '', ''), True, True);
   end;
   DoAutoCheckErrors;
 end;
@@ -754,7 +754,7 @@ begin
             if FoundText(Text) or FoundText(Translation) then
             begin
               Result := True;
-              VSTSelectNode(frmMain.VST, i, True);
+              VSTSelectNode(frmMain.VST, i, True, True);
               Break;
             end;
           end;
@@ -782,7 +782,7 @@ begin
           if FoundText(Text) or FoundText(Translation) then
           begin
             Result := True;
-            VSTSelectNode(frmMain.VST, i, True);
+            VSTSelectNode(frmMain.VST, i, True, True);
             if not Replace then // Only Find...
               Break
             else

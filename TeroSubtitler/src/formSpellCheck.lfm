@@ -8,11 +8,12 @@ object frmSpellCheck: TfrmSpellCheck
   Caption = 'Spell check'
   ClientHeight = 342
   ClientWidth = 466
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object lblDictionary: TLabel
     Left = 8
     Height = 15
@@ -27,10 +28,10 @@ object frmSpellCheck: TfrmSpellCheck
     Top = 8
     Width = 240
     ItemHeight = 15
-    OnChange = cboDictionaryChange
     Style = csDropDownList
     TabOrder = 0
     TabStop = False
+    OnChange = cboDictionaryChange
   end
   object lblNotFound: TLabel
     Left = 8
@@ -68,8 +69,8 @@ object frmSpellCheck: TfrmSpellCheck
     Width = 352
     ExtendedSelect = False
     ItemHeight = 0
-    OnSelectionChange = lstSuggestionsSelectionChange
     TabOrder = 3
+    OnSelectionChange = lstSuggestionsSelectionChange
   end
   object btnSkip: TButton
     Left = 367
@@ -77,8 +78,8 @@ object frmSpellCheck: TfrmSpellCheck
     Top = 100
     Width = 91
     Caption = 'Skip'
-    OnClick = btnSkipClick
     TabOrder = 5
+    OnClick = btnSkipClick
   end
   object btnSkipAll: TButton
     AnchorSideTop.Control = btnSkip
@@ -89,8 +90,8 @@ object frmSpellCheck: TfrmSpellCheck
     Width = 91
     BorderSpacing.Top = 5
     Caption = 'Skip all'
-    OnClick = btnSkipAllClick
     TabOrder = 6
+    OnClick = btnSkipAllClick
   end
   object btnAdd: TButton
     AnchorSideTop.Control = btnSkipAll
@@ -101,8 +102,8 @@ object frmSpellCheck: TfrmSpellCheck
     Width = 91
     BorderSpacing.Top = 5
     Caption = 'Add'
-    OnClick = btnAddClick
     TabOrder = 7
+    OnClick = btnAddClick
   end
   object btnChange: TButton
     Left = 367
@@ -110,8 +111,8 @@ object frmSpellCheck: TfrmSpellCheck
     Top = 216
     Width = 91
     Caption = 'Change'
-    OnClick = btnChangeClick
     TabOrder = 8
+    OnClick = btnChangeClick
   end
   object btnChangeAll: TButton
     AnchorSideTop.Control = btnChange
@@ -122,8 +123,8 @@ object frmSpellCheck: TfrmSpellCheck
     Width = 91
     BorderSpacing.Top = 5
     Caption = 'Change all'
-    OnClick = btnChangeAllClick
     TabOrder = 9
+    OnClick = btnChangeAllClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -139,8 +140,8 @@ object frmSpellCheck: TfrmSpellCheck
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 10
+    OnClick = btnCloseClick
   end
   object edtCustom: TEdit
     AnchorSideTop.Control = lstSuggestions
@@ -166,10 +167,10 @@ object frmSpellCheck: TfrmSpellCheck
     Top = 40
     Width = 240
     ItemHeight = 15
-    OnChange = cboSourceChange
     Style = csDropDownList
     TabOrder = 1
     TabStop = False
+    OnChange = cboSourceChange
   end
   object lblCurrentLine: TLabel
     Left = 210

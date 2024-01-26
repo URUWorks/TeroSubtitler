@@ -7,12 +7,13 @@ object frmDownload: TfrmDownload
   BorderStyle = bsSingle
   ClientHeight = 83
   ClientWidth = 400
+  FormStyle = fsStayOnTop
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object lblDownload: TLabel
     Left = 0
     Height = 32

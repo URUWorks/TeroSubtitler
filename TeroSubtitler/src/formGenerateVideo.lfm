@@ -8,6 +8,7 @@ object frmGenerateVideo: TfrmGenerateVideo
   Caption = 'Generate video'
   ClientHeight = 427
   ClientWidth = 373
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

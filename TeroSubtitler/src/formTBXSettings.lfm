@@ -8,11 +8,12 @@ object frmTBXSettings: TfrmTBXSettings
   Caption = 'Terminology settings'
   ClientHeight = 160
   ClientWidth = 523
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object edtOpenFile: TEdit
     AnchorSideRight.Control = btnOpenFile
     Left = 160
@@ -29,8 +30,8 @@ object frmTBXSettings: TfrmTBXSettings
     Top = 8
     Width = 48
     Caption = '...'
-    OnClick = btnOpenFileClick
     TabOrder = 1
+    OnClick = btnOpenFileClick
   end
   object lblSourceLang: TLabel
     Left = 8
@@ -85,8 +86,8 @@ object frmTBXSettings: TfrmTBXSettings
     BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
-    OnClick = btnApplyClick
     TabOrder = 4
+    OnClick = btnApplyClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -102,7 +103,7 @@ object frmTBXSettings: TfrmTBXSettings
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 5
+    OnClick = btnCloseClick
   end
 end

@@ -8,6 +8,7 @@ object frmAutomaticDurations: TfrmAutomaticDurations
   Caption = 'Automatic durations'
   ClientHeight = 307
   ClientWidth = 280
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

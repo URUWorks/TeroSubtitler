@@ -8,11 +8,12 @@ object frmRestoreBackup: TfrmRestoreBackup
   Caption = 'Restore backup'
   ClientHeight = 290
   ClientWidth = 580
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object btnRestore: TButton
     AnchorSideRight.Control = btnClose
     AnchorSideBottom.Control = btnClose
@@ -25,8 +26,8 @@ object frmRestoreBackup: TfrmRestoreBackup
     BorderSpacing.Right = 5
     Caption = 'Restore'
     Default = True
-    OnClick = btnRestoreClick
     TabOrder = 1
+    OnClick = btnRestoreClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -42,8 +43,8 @@ object frmRestoreBackup: TfrmRestoreBackup
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 2
+    OnClick = btnCloseClick
   end
   object VST: TLazVirtualStringTree
     Left = 8

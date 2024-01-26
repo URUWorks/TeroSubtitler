@@ -8,11 +8,12 @@ object frmShotChanges: TfrmShotChanges
   Caption = 'Shot changes'
   ClientHeight = 466
   ClientWidth = 490
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object btnApply: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
@@ -24,8 +25,8 @@ object frmShotChanges: TfrmShotChanges
     BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
-    OnClick = btnApplyClick
     TabOrder = 10
+    OnClick = btnApplyClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -41,8 +42,8 @@ object frmShotChanges: TfrmShotChanges
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 11
+    OnClick = btnCloseClick
   end
   object mmoTimes: TMemo
     Left = 8
@@ -50,10 +51,10 @@ object frmShotChanges: TfrmShotChanges
     Top = 8
     Width = 378
     Anchors = [akTop, akLeft, akRight]
-    OnChange = mmoTimesChange
     ReadOnly = True
     ScrollBars = ssAutoVertical
     TabOrder = 0
+    OnChange = mmoTimesChange
   end
   object lblTimeCodeIn: TLabel
     AnchorSideTop.Control = cboTimeCodeImport
@@ -72,8 +73,8 @@ object frmShotChanges: TfrmShotChanges
     Top = 8
     Width = 91
     Caption = 'Import...'
-    OnClick = btnImportClick
     TabOrder = 1
+    OnClick = btnImportClick
   end
   object btnDetect: TButton
     AnchorSideLeft.Control = btnClose
@@ -85,8 +86,8 @@ object frmShotChanges: TfrmShotChanges
     Width = 91
     BorderSpacing.Top = 5
     Caption = 'Detect'
-    OnClick = btnDetectClick
     TabOrder = 3
+    OnClick = btnDetectClick
   end
   object btnExport: TButton
     AnchorSideLeft.Control = btnClose
@@ -99,8 +100,8 @@ object frmShotChanges: TfrmShotChanges
     BorderSpacing.Top = 5
     Caption = 'Export...'
     Enabled = False
-    OnClick = btnExportClick
     TabOrder = 2
+    OnClick = btnExportClick
   end
   object lblIdle: TLabel
     AnchorSideTop.Control = btnApply

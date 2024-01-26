@@ -8,11 +8,12 @@ object frmExportSUP: TfrmExportSUP
   Caption = 'Blu-ray SUP'
   ClientHeight = 378
   ClientWidth = 651
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object btnSave: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
@@ -24,8 +25,8 @@ object frmExportSUP: TfrmExportSUP
     BorderSpacing.Right = 5
     Caption = 'Save...'
     Default = True
-    OnClick = btnSaveClick
     TabOrder = 9
+    OnClick = btnSaveClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -41,8 +42,8 @@ object frmExportSUP: TfrmExportSUP
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 10
+    OnClick = btnCloseClick
   end
   object lblVideoRes: TLabel
     Left = 8
@@ -141,9 +142,9 @@ object frmExportSUP: TfrmExportSUP
     Top = 28
     Width = 219
     ItemHeight = 15
-    OnSelect = cboFontSelect
     Style = csDropDownList
     TabOrder = 0
+    OnSelect = cboFontSelect
   end
   object lblFont: TLabel
     Left = 8
@@ -211,8 +212,8 @@ object frmExportSUP: TfrmExportSUP
     Width = 48
     BorderSpacing.Left = 5
     Caption = '...'
-    OnClick = btnResClick
     TabOrder = 4
+    OnClick = btnResClick
   end
   object popRes: TPopupMenu
     Left = 232

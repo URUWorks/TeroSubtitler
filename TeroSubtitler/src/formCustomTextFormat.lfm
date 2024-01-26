@@ -8,20 +8,21 @@ object frmCustomTextFormat: TfrmCustomTextFormat
   Caption = 'Custom text format'
   ClientHeight = 169
   ClientWidth = 389
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object cboScript: TComboBox
     Left = 8
     Height = 23
     Top = 28
     Width = 276
     ItemHeight = 15
-    OnSelect = cboScriptSelect
     Style = csDropDownList
     TabOrder = 0
+    OnSelect = cboScriptSelect
   end
   object lblScript: TLabel
     Left = 8
@@ -76,8 +77,8 @@ object frmCustomTextFormat: TfrmCustomTextFormat
     Caption = 'Save...'
     Default = True
     Enabled = False
-    OnClick = btnSaveClick
     TabOrder = 5
+    OnClick = btnSaveClick
   end
   object btnClose: TButton
     Left = 289
@@ -86,8 +87,8 @@ object frmCustomTextFormat: TfrmCustomTextFormat
     Width = 91
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 6
+    OnClick = btnCloseClick
   end
   object lyoEditor: TUWLayout
     Left = 392

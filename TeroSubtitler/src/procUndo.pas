@@ -153,7 +153,7 @@ begin
     begin
       ToList.Add(NewPUndo(utSubtitleChange, FromList.Last^.Index, Subtitles.Items[FromList.Last^.Index], FromList.Last^.Group));
       Subtitles.Items[FromList.Last^.Index] := FromList.Last^.Subtitle;
-      VSTSelectNode(VST, FromList.Last^.Index, False);
+      VSTSelectNode(VST, FromList.Last^.Index, False, True);
     end
     else if (FromList.Last^.UndoType = utInsertLine) and Subtitles.ValidIndex(FromList.Last^.Index) then
     begin
@@ -164,7 +164,7 @@ begin
     begin
       ToList.Add(NewPUndo(utInsertLine, FromList.Last^.Index, Subtitles.Items[FromList.Last^.Index], FromList.Last^.Group));
       Subtitles.Insert(FromList.Last^.Index, FromList.Last^.Subtitle, NIL);
-      VSTSelectNode(VST, FromList.Last^.Index, False);
+      VSTSelectNode(VST, FromList.Last^.Index, False, True);
     end;
 
     DeleteLastItem(FromList);
@@ -176,7 +176,7 @@ begin
         begin
           ToList.Add(NewPUndo(utSubtitleChange, FromList[i]^.Index, Subtitles.Items[FromList.Last^.Index], FromList[i]^.Group));
           Subtitles.Items[FromList[i]^.Index] := FromList[i]^.Subtitle;
-          VSTSelectNode(VST, FromList.Last^.Index, False);
+          VSTSelectNode(VST, FromList.Last^.Index, False, True);
         end
         else if (FromList.Last^.UndoType = utInsertLine) and Subtitles.ValidIndex(FromList[i]^.Index) then
         begin
@@ -187,7 +187,7 @@ begin
         begin
           ToList.Add(NewPUndo(utInsertLine, FromList[i]^.Index, Subtitles.Items[FromList.Last^.Index], FromList[i]^.Group));
           Subtitles.Insert(FromList[i]^.Index, FromList[i]^.Subtitle, NIL);
-          VSTSelectNode(VST, FromList[i]^.Index, False);
+          VSTSelectNode(VST, FromList[i]^.Index, False, True);
         end;
         DeleteLastItem(FromList);
       end

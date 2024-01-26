@@ -8,11 +8,12 @@ object frmGoTo: TfrmGoTo
   Caption = 'Go to line'
   ClientHeight = 93
   ClientWidth = 280
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object lblNumber: TLabel
     Left = 8
     Height = 15
@@ -28,9 +29,9 @@ object frmGoTo: TfrmGoTo
     Width = 264
     Anchors = [akTop, akLeft, akRight]
     NumbersOnly = True
-    OnChange = edtNumberChange
     TabOrder = 0
     Text = '0'
+    OnChange = edtNumberChange
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -46,8 +47,8 @@ object frmGoTo: TfrmGoTo
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 2
+    OnClick = btnCloseClick
   end
   object btnGo: TButton
     AnchorSideRight.Control = btnClose
@@ -59,7 +60,7 @@ object frmGoTo: TfrmGoTo
     BorderSpacing.Right = 5
     Caption = 'Go'
     Default = True
-    OnClick = btnGoClick
     TabOrder = 1
+    OnClick = btnGoClick
   end
 end

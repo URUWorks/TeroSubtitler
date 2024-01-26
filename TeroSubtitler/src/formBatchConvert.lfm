@@ -8,11 +8,12 @@ object frmBatchConvert: TfrmBatchConvert
   Caption = 'Batch convert'
   ClientHeight = 449
   ClientWidth = 600
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object VST: TLazVirtualStringTree
     Left = 7
     Height = 208
@@ -46,8 +47,8 @@ object frmBatchConvert: TfrmBatchConvert
     BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
-    OnClick = btnApplyClick
     TabOrder = 12
+    OnClick = btnApplyClick
   end
   object btnClose: TButton
     Left = 502
@@ -57,8 +58,8 @@ object frmBatchConvert: TfrmBatchConvert
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 13
+    OnClick = btnCloseClick
   end
   object btnScanFolder: TButton
     Left = 502
@@ -67,8 +68,8 @@ object frmBatchConvert: TfrmBatchConvert
     Width = 91
     Anchors = [akTop, akRight]
     Caption = 'Scan...'
-    OnClick = btnScanFolderClick
     TabOrder = 1
+    OnClick = btnScanFolderClick
   end
   object btnAdd: TButton
     Left = 502
@@ -77,8 +78,8 @@ object frmBatchConvert: TfrmBatchConvert
     Width = 91
     Anchors = [akTop, akRight]
     Caption = 'Add...'
-    OnClick = btnAddClick
     TabOrder = 2
+    OnClick = btnAddClick
   end
   object btnRemove: TButton
     Left = 502
@@ -88,8 +89,8 @@ object frmBatchConvert: TfrmBatchConvert
     Anchors = [akTop, akRight]
     Caption = 'Remove'
     Enabled = False
-    OnClick = btnRemoveClick
     TabOrder = 3
+    OnClick = btnRemoveClick
   end
   object btnSelectAll: TButton
     Left = 502
@@ -98,8 +99,8 @@ object frmBatchConvert: TfrmBatchConvert
     Width = 91
     Anchors = [akTop, akRight]
     Caption = 'Select all'
-    OnClick = btnSelectAllClick
     TabOrder = 4
+    OnClick = btnSelectAllClick
   end
   object btnInvert: TButton
     Left = 502
@@ -108,8 +109,8 @@ object frmBatchConvert: TfrmBatchConvert
     Width = 91
     Anchors = [akTop, akRight]
     Caption = 'Invert'
-    OnClick = btnInvertClick
     TabOrder = 5
+    OnClick = btnInvertClick
   end
   object lblOutput: TLabel
     Left = 8
@@ -220,8 +221,8 @@ object frmBatchConvert: TfrmBatchConvert
     Width = 48
     Anchors = [akRight, akBottom]
     Caption = '...'
-    OnClick = btnOpenFolderClick
     TabOrder = 7
+    OnClick = btnOpenFolderClick
   end
   object prbProgress: TProgressBar
     AnchorSideRight.Control = btnApply

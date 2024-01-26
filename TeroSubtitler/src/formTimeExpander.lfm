@@ -8,6 +8,7 @@ object frmTimeExpander: TfrmTimeExpander
   Caption = 'Time expander/reducer'
   ClientHeight = 329
   ClientWidth = 283
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

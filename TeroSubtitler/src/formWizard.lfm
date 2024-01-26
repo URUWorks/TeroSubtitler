@@ -8,6 +8,7 @@ object frmWizard: TfrmWizard
   Caption = 'Getting started wizard'
   ClientHeight = 377
   ClientWidth = 544
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

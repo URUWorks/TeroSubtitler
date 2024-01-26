@@ -7,12 +7,13 @@ object frmCompare: TfrmCompare
   Caption = 'Compare'
   ClientHeight = 481
   ClientWidth = 905
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object lyoFile1: TUWLayout
     Left = 0
     Height = 439
@@ -40,8 +41,8 @@ object frmCompare: TfrmCompare
       Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
-      OnClick = btnFile1Click
       TabOrder = 1
+      OnClick = btnFile1Click
     end
     object VST1: TLazVirtualStringTree
       AnchorSideTop.Control = edtFile1
@@ -99,8 +100,8 @@ object frmCompare: TfrmCompare
       Width = 48
       Anchors = [akTop, akRight]
       Caption = '...'
-      OnClick = btnFile1Click
       TabOrder = 1
+      OnClick = btnFile1Click
     end
     object VST2: TLazVirtualStringTree
       AnchorSideLeft.Side = asrCenter
@@ -149,8 +150,8 @@ object frmCompare: TfrmCompare
       Anchors = [akRight, akBottom]
       Cancel = True
       Caption = 'Close'
-      OnClick = btnCloseClick
       TabOrder = 0
+      OnClick = btnCloseClick
     end
   end
 end

@@ -193,7 +193,7 @@ begin
           it     := StringToTime(Copy(sl[i], 2, 12));
           ft     := StringToTime(Copy(sl[i], 19, 12));
           Output := Copy(sl[i], 35, sl[i].Length-34);
-          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True);
+          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True, True);
         end;
         // Progress
         if Pos('progress =', sl[i]) > 0 then
@@ -213,7 +213,7 @@ begin
           it     := StringToTime(Copy(sl[i], 2, 9), True);
           ft     := StringToTime(Copy(sl[i], 16, 9), True);
           Output := Copy(sl[i], 28);
-          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True);
+          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True, True);
         end;
       end;
     end;
@@ -253,7 +253,7 @@ begin
           it     := StringToTime(Copy(sl[i], 2, 12));
           ft     := StringToTime(Copy(sl[i], 19, 12));
           Output := Copy(sl[i], 35, sl[i].Length-34);
-          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True);
+          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True, True);
         end;
         // Progress
         if Pos('progress =', sl[i]) > 0 then
@@ -273,7 +273,7 @@ begin
           it     := StringToTime(Copy(sl[i], 2, 9), True);
           ft     := StringToTime(Copy(sl[i], 16, 9), True);
           Output := Copy(sl[i], 28);
-          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True);
+          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True, True);
         end;
       end;
     end;

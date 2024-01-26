@@ -8,6 +8,7 @@ object frmTranslate: TfrmTranslate
   Caption = 'Translate'
   ClientHeight = 258
   ClientWidth = 408
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

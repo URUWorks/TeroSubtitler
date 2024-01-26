@@ -8,11 +8,12 @@ object frmWaveExtractor: TfrmWaveExtractor
   Caption = 'Waveform extractor'
   ClientHeight = 169
   ClientWidth = 481
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object btnExtract: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
@@ -24,8 +25,8 @@ object frmWaveExtractor: TfrmWaveExtractor
     BorderSpacing.Right = 5
     Caption = 'Extract...'
     Default = True
-    OnClick = btnExtractClick
     TabOrder = 1
+    OnClick = btnExtractClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -41,8 +42,8 @@ object frmWaveExtractor: TfrmWaveExtractor
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 2
+    OnClick = btnCloseClick
   end
   object lblTrack: TLabel
     Left = 8

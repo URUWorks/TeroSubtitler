@@ -204,7 +204,7 @@ end;
 procedure TfrmQualityCheck.VSTDblClick(Sender: TObject);
 begin
   if FList.Count > 0 then
-    VSTSelectNode(frmMain.VST, FList[VSTFocusedNode(VST)].Index, True);
+    VSTSelectNode(frmMain.VST, FList[VSTFocusedNode(VST)].Index, True, True);
 end;
 
 // -----------------------------------------------------------------------------

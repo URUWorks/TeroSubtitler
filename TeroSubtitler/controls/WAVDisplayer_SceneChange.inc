@@ -54,12 +54,9 @@ begin
       s.LoadFromFile(AFileName);
       if s.Count > 0 then
       begin
-        isSmpte := False;
-        if ASMPTE and (s[0] = '-1') then
-        begin
+        isSmpte := ASMPTE and (s[0] = '-1');
+        if (s[0] = '-1') then
           s.Delete(0);
-          isSmpte := True;
-        end;
 
         SetLength(FSceneChangeList, s.Count);
 

@@ -675,7 +675,7 @@ begin
 
     if frmMain.Visible and LayoutVST.Visible and VST.Enabled then
     begin
-      //VSTSelectNode(VST, 0, True);
+      //VSTSelectNode(VST, 0, True, True);
       if mmoText.Enabled then mmoText.SetFocus;
     end;
     UpdateCPSAndTexts(VSTFocusedNode(VST));

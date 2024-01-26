@@ -8,6 +8,7 @@ object frmAudioToText: TfrmAudioToText
   Caption = 'Audio to text'
   ClientHeight = 339
   ClientWidth = 388
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

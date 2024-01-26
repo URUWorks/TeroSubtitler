@@ -7,6 +7,7 @@ object frmWelcome: TfrmWelcome
   BorderStyle = bsNone
   ClientHeight = 401
   ClientWidth = 720
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -51,9 +52,9 @@ object frmWelcome: TfrmWelcome
     Left = 65
     Height = 15
     Top = 109
-    Width = 110
+    Width = 114
     BorderSpacing.Left = 10
-    Caption = 'New empty subtitle'
+    Caption = 'New subtitle project'
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
@@ -276,9 +277,9 @@ object frmWelcome: TfrmWelcome
     Left = 65
     Height = 15
     Top = 157
-    Width = 100
+    Width = 143
     BorderSpacing.Left = 10
-    Caption = 'New transcription'
+    Caption = 'New manual transcription'
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False

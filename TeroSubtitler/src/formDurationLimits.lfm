@@ -8,6 +8,7 @@ object frmDurationLimits: TfrmDurationLimits
   Caption = 'Duration limits'
   ClientHeight = 289
   ClientWidth = 315
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

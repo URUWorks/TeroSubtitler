@@ -7,11 +7,12 @@ object frmTBXList: TfrmTBXList
   Caption = 'Terminology'
   ClientHeight = 400
   ClientWidth = 600
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object VST: TLazVirtualStringTree
     AnchorSideBottom.Control = btnClose
     Left = 8
@@ -51,8 +52,8 @@ object frmTBXList: TfrmTBXList
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 2
+    OnClick = btnCloseClick
   end
   object lblTotal: TLabel
     AnchorSideTop.Control = lblFind
@@ -88,8 +89,8 @@ object frmTBXList: TfrmTBXList
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
     Caption = 'Copy'
-    OnClick = btnCopyClick
     TabOrder = 1
+    OnClick = btnCopyClick
   end
   object edtFind: TEdit
     AnchorSideTop.Control = btnCopy
@@ -102,8 +103,8 @@ object frmTBXList: TfrmTBXList
     Width = 180
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
-    OnChange = edtFindChange
     TabOrder = 0
+    OnChange = edtFindChange
   end
   object lblFind: TLabel
     AnchorSideTop.Control = edtFind

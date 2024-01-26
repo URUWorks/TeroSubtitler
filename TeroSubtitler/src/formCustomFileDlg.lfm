@@ -7,10 +7,11 @@ object frmCustomFileDlg: TfrmCustomFileDlg
   BorderStyle = bsSingle
   ClientHeight = 222
   ClientWidth = 387
+  FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object edtFileName: TEdit
     AnchorSideRight.Control = btnOpenFile
     Left = 8
@@ -19,8 +20,8 @@ object frmCustomFileDlg: TfrmCustomFileDlg
     Width = 292
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 5
-    OnChange = edtFileNameChange
     TabOrder = 0
+    OnChange = edtFileNameChange
   end
   object btnOpenFile: TButton
     Left = 305
@@ -28,8 +29,8 @@ object frmCustomFileDlg: TfrmCustomFileDlg
     Top = 28
     Width = 75
     Caption = '...'
-    OnClick = btnOpenFileClick
     TabOrder = 1
+    OnClick = btnOpenFileClick
   end
   object lblFileName: TLabel
     Left = 8
@@ -45,9 +46,9 @@ object frmCustomFileDlg: TfrmCustomFileDlg
     Top = 84
     Width = 292
     ItemHeight = 15
-    OnSelect = cboFormatSelect
     Style = csDropDownList
     TabOrder = 2
+    OnSelect = cboFormatSelect
   end
   object lblFormat: TLabel
     Left = 8

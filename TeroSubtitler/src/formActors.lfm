@@ -8,10 +8,12 @@ object frmActors: TfrmActors
   Caption = 'Actors'
   ClientHeight = 369
   ClientWidth = 365
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
+  LCLVersion = '3.0.0.3'
   object edtActor: TEdit
     AnchorSideRight.Control = btnActorAdd
     Left = 8
@@ -20,8 +22,8 @@ object frmActors: TfrmActors
     Width = 263
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 5
-    OnKeyDown = edtActorKeyDown
     TabOrder = 0
+    OnKeyDown = edtActorKeyDown
   end
   object btnActorAdd: TButton
     AnchorSideRight.Control = btnActorRemove
@@ -32,8 +34,8 @@ object frmActors: TfrmActors
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
     Caption = '+'
-    OnClick = btnActorAddClick
     TabOrder = 1
+    OnClick = btnActorAddClick
   end
   object btnActorRemove: TButton
     Left = 319
@@ -41,8 +43,8 @@ object frmActors: TfrmActors
     Top = 8
     Width = 38
     Caption = '-'
-    OnClick = btnActorRemoveClick
     TabOrder = 2
+    OnClick = btnActorRemoveClick
   end
   object lstActors: TListBox
     AnchorSideTop.Control = edtActor
@@ -68,8 +70,8 @@ object frmActors: TfrmActors
     BorderSpacing.Right = 5
     Caption = 'Apply'
     Default = True
-    OnClick = btnApplyClick
     TabOrder = 4
+    OnClick = btnApplyClick
   end
   object btnClose: TButton
     Left = 266
@@ -78,7 +80,7 @@ object frmActors: TfrmActors
     Width = 91
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 5
+    OnClick = btnCloseClick
   end
 end

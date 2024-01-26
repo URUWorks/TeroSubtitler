@@ -8,6 +8,7 @@ object frmShiftTimes: TfrmShiftTimes
   Caption = 'Shift times'
   ClientHeight = 188
   ClientWidth = 293
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

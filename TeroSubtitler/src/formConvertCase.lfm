@@ -8,6 +8,7 @@ object frmConvertCase: TfrmConvertCase
   Caption = 'Convert case'
   ClientHeight = 266
   ClientWidth = 280
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

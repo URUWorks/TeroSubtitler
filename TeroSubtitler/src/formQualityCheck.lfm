@@ -8,11 +8,12 @@ object frmQualityCheck: TfrmQualityCheck
   Caption = 'Quality check'
   ClientHeight = 391
   ClientWidth = 572
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object lblRules: TLabel
     Left = 8
     Height = 15
@@ -27,9 +28,9 @@ object frmQualityCheck: TfrmQualityCheck
     Top = 8
     Width = 452
     ItemHeight = 15
-    OnChange = cboRulesChange
     Style = csDropDownList
     TabOrder = 0
+    OnChange = cboRulesChange
   end
   object VST: TLazVirtualStringTree
     Left = 8
@@ -69,7 +70,7 @@ object frmQualityCheck: TfrmQualityCheck
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 2
+    OnClick = btnCloseClick
   end
 end

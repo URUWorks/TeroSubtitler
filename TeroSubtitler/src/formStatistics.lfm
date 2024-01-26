@@ -8,6 +8,7 @@ object frmStatistics: TfrmStatistics
   Caption = 'Statistics'
   ClientHeight = 400
   ClientWidth = 400
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

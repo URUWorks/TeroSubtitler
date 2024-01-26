@@ -184,7 +184,7 @@ end;
 procedure TfrmTranslationMemoryList.edtFindChange(Sender: TObject);
 begin
   if VST.RootNodeCount > 0 then
-    VSTSelectNode(VST, TMX.Find(edtFind.Text), True);
+    VSTSelectNode(VST, TMX.Find(edtFind.Text), True, True);
 end;
 
 // -----------------------------------------------------------------------------

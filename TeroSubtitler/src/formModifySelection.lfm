@@ -8,6 +8,7 @@ object frmModifySelection: TfrmModifySelection
   Caption = 'Modify selection'
   ClientHeight = 169
   ClientWidth = 344
+  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
