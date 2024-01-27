@@ -368,7 +368,7 @@ begin
   HexColor := IntToHexStr(AColor, False, '#');
 
   if AGenerateTC then
-    DrawText := ' -vf drawtext="timecode=''00\:00\:00\:00'':r=' + fps + ':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=48:fontcolor=white"'
+    DrawText := ' -vf drawtext="timecode=''00\:00\:00\:00'':r=' + fps + ':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=48:fontcolor=white:box=1:boxcolor=black"'
   else
     DrawText := '';
 
