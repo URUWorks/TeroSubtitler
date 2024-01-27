@@ -1993,6 +1993,7 @@ msgid "Safe area pixels (left, top, right, bottom)"
 msgstr "Safe area pixels (left, top, right, bottom)"
 
 #: tfrmexportsup.lblvideores.caption
+msgctxt "tfrmexportsup.lblvideores.caption"
 msgid "Video resolution"
 msgstr "Video resolution"
 
@@ -2266,6 +2267,82 @@ msgstr "Cue time:"
 #: tfrmformatproperties.lblvttmpegts.caption
 msgid "MPEG-2 time:"
 msgstr "MPEG-2 time:"
+
+#: tfrmgenerateblankvideo.btnclose.caption
+#, fuzzy
+msgctxt "tfrmgenerateblankvideo.btnclose.caption"
+msgid "Close"
+msgstr "Close"
+
+#: tfrmgenerateblankvideo.btngenerate.caption
+msgid "Generate..."
+msgstr ""
+
+#: tfrmgenerateblankvideo.btnimage.caption
+#, fuzzy
+msgctxt "tfrmgenerateblankvideo.btnimage.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmgenerateblankvideo.btnres.caption
+#, fuzzy
+msgctxt "tfrmgenerateblankvideo.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmgenerateblankvideo.caption
+msgid "Generate blank video"
+msgstr ""
+
+#: tfrmgenerateblankvideo.chkgeneratetc.caption
+msgid "Generate time code"
+msgstr ""
+
+#: tfrmgenerateblankvideo.chkgeneratetone.caption
+msgid "Generate 1kHz Test Tone"
+msgstr ""
+
+#: tfrmgenerateblankvideo.lblbackground.caption
+#, fuzzy
+msgctxt "tfrmgenerateblankvideo.lblbackground.caption"
+msgid "Background"
+msgstr "Background"
+
+#: tfrmgenerateblankvideo.lblduration.caption
+#, fuzzy
+msgctxt "tfrmgenerateblankvideo.lblduration.caption"
+msgid "Duration"
+msgstr "Duration"
+
+#: tfrmgenerateblankvideo.lblfps.caption
+#, fuzzy
+msgctxt "tfrmgenerateblankvideo.lblfps.caption"
+msgid "FPS"
+msgstr "FPS"
+
+#: tfrmgenerateblankvideo.lblvideores.caption
+#, fuzzy
+msgctxt "tfrmgenerateblankvideo.lblvideores.caption"
+msgid "Video resolution"
+msgstr "Video resolution"
+
+#: tfrmgenerateblankvideo.lblx.caption
+#, fuzzy
+msgctxt "tfrmgenerateblankvideo.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmgenerateblankvideo.rdoimage.caption
+msgid "Image"
+msgstr ""
+
+#: tfrmgenerateblankvideo.rdosmptecolorbars.caption
+msgid "SMPTE color bars"
+msgstr ""
+
+#: tfrmgenerateblankvideo.rdosolidcolor.caption
+msgid "Solid color"
+msgstr ""
 
 #: tfrmgeneratevideo.btnclose.caption
 msgctxt "tfrmgeneratevideo.btnclose.caption"
@@ -2738,6 +2815,10 @@ msgstr "Frame mode"
 #: tfrmmain.actframesmode.hint
 msgid "Set time code format to HH:MM:SS:FF"
 msgstr "Set time code format to HH:MM:SS:FF"
+
+#: tfrmmain.actgenerateblankvideo.caption
+msgid "Generate blank video..."
+msgstr ""
 
 #: tfrmmain.actgeneratevideo.caption
 msgid "Video with hardcoded subtitles..."
@@ -4221,6 +4302,7 @@ msgid "Preset"
 msgstr "Preset"
 
 #: tfrmsettings.lblsubbackground.caption
+msgctxt "tfrmsettings.lblsubbackground.caption"
 msgid "Background"
 msgstr "Background"
 
@@ -4943,3 +5025,4 @@ msgstr "Inverted"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
+
