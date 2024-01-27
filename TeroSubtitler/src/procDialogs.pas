@@ -170,7 +170,7 @@ end;
 
 function MsgExportTextOnlyFormat: Integer;
 begin
-  Result := CustomQuestionDialog(lngTextFormatted, '', [dbYes, dbNo]);
+  Result := CustomQuestionDialog(lngTextFormatted, '', [dbYes, dbNo, dbCancel]);
 end;
 
 // -----------------------------------------------------------------------------
