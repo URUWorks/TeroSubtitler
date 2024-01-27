@@ -1861,6 +1861,7 @@ msgid "Separator"
 msgstr "Separador"
 
 #: tfrmcustomtextformat.lbltimecode.caption
+msgctxt "tfrmcustomtextformat.lbltimecode.caption"
 msgid "Time code"
 msgstr "Código de tiempo"
 
@@ -2292,12 +2293,13 @@ msgid "Generate blank video"
 msgstr "Generar video en blanco"
 
 #: tfrmgenerateblankvideo.chkgeneratetc.caption
-msgid "Generate time code"
-msgstr "Generar código de tiempo"
+msgctxt "tfrmgenerateblankvideo.chkgeneratetc.caption"
+msgid "Time code"
+msgstr "Código de tiempo"
 
 #: tfrmgenerateblankvideo.chkgeneratetone.caption
-msgid "Generate 1kHz Test Tone"
-msgstr "Generar tono de prueba de 1 kHz"
+msgid "1 kHz test tone"
+msgstr "Tono de prueba de 1 kHz"
 
 #: tfrmgenerateblankvideo.lblbackground.caption
 msgctxt "tfrmgenerateblankvideo.lblbackground.caption"
@@ -4936,6 +4938,10 @@ msgstr "Descargar"
 msgctxt "tfrmwizard.btnnext.caption"
 msgid "Next"
 msgstr "Siguiente"
+
+#: tfrmwizard.btnprevious.caption
+msgid "Back"
+msgstr "Atrás"
 
 #: tfrmwizard.caption
 msgid "Getting started wizard"
