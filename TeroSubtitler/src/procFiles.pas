@@ -977,10 +977,15 @@ var
   SD : TSaveDialog;
   CD : TfrmCustomFileDlg;
   Formatted: Boolean;
+  r : Integer;
 begin
   if Subtitles.Count = 0 then Exit;
 
-  Formatted := (MsgExportTextOnlyFormat = mrYes);
+  r := MsgExportTextOnlyFormat;
+  if r = mrCancel then
+    Exit
+  else
+    Formatted := (r = mrYes);
 
   if AppOptions.UseOwnFileDialog then
   begin
@@ -1000,7 +1005,7 @@ begin
     SD := TSaveDialog.Create(NIL);
     try
       SD.Title  := lngSaveFile;
-      SD.Filter := 'TXT|*.txt';
+      SD.Filter := lngscShotChanges + ' (*.txt)|*.txt';
       SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
       SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
