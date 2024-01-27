@@ -23,8 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  UWLayout, UWFlatButton, UWRadioButton, LCLTranslator, procLocalize,
-  UWSystem.Globalization;
+  UWLayout, UWRadioButton, LCLTranslator, procLocalize, UWSystem.Globalization;
 
 type
 
@@ -37,6 +36,7 @@ type
     btnDownloadYTDLP: TButton;
     btnNext: TButton;
     btnDownload: TButton;
+    btnPrevious: TButton;
     cboLanguage: TComboBox;
     cboTimeCode: TComboBox;
     imgLayout0: TImage;
@@ -75,6 +75,7 @@ type
     procedure btnDownloadWhisperClick(Sender: TObject);
     procedure btnDownloadFasterWhisperClick(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
+    procedure btnPreviousClick(Sender: TObject);
     procedure cboLanguageChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -82,7 +83,7 @@ type
   private
     FIndex: Integer;
     FLngList: TStrings;
-    procedure SetPageStep;
+    procedure SetPageStep(const AForward: Boolean = True);
   public
   end;
 
@@ -264,11 +265,15 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmWizard.SetPageStep;
+procedure TfrmWizard.SetPageStep(const AForward: Boolean = True);
 var
   i: Integer;
 begin
-  Inc(FIndex);
+  if AForward then
+    Inc(FIndex)
+  else
+    Dec(FIndex);
+
   if FIndex = 3 then Close;
 
   for i := 0 to ControlCount-1 do
@@ -281,7 +286,8 @@ begin
           Visible := False
       end;
 
-  lblLanguage.Visible := (FIndex > 0);
+  btnPrevious.Visible := (FIndex > 0);
+  lblLanguage.Visible := btnPrevious.Visible;
   cboLanguage.Visible := lblLanguage.Visible;
 end;
 
@@ -290,6 +296,13 @@ end;
 procedure TfrmWizard.btnNextClick(Sender: TObject);
 begin
   SetPageStep;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmWizard.btnPreviousClick(Sender: TObject);
+begin
+  SetPageStep(False);
 end;
 
 // -----------------------------------------------------------------------------
