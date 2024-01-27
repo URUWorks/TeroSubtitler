@@ -95,7 +95,7 @@ function ffmpegFolder: String;
 
 function GetDictionaryNameFromCaption(const AText: String): String;
 function GetExtractAppFile(const FFmpeg: Boolean = True): String;
-function GetAudioToTextAppFile: String;
+function GetAudioToTextAppFile(const AOriginalName: Boolean = False): String;
 function GetAudioToTextParams: String;
 {$IFDEF UNIX}
 function GetInstallFolder(const AFileName: String): String;
@@ -1654,12 +1654,22 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetAudioToTextAppFile: String;
+function GetAudioToTextAppFile(const AOriginalName: Boolean = False): String;
 begin
   if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
-    Result := Tools.WhisperCPP
+  begin
+    if AOriginalName then
+      Result := WHISPER_EXE
+    else
+      Result := Tools.WhisperCPP;
+  end
   else
-    Result := Tools.FasterWhisper;
+  begin
+    if AOriginalName then
+      Result := FASTERWHISPER_EXE
+    else
+      Result := Tools.FasterWhisper;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

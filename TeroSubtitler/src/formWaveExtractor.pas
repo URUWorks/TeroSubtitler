@@ -121,7 +121,7 @@ begin
   if frmMain.MPV.FileName.StartsWith('http') then
     ShowErrorMessageDialog(lngFeatureNotAvailableFromURL)
   else if not FileExists(GetExtractAppFile) then
-    ShowErrorMessageDialog(Format(lngExtractAppError, [ExtractFileName(GetExtractAppFile)]))
+    ShowErrorMessageDialog(Format(lngExtractAppError, [FFMPEG_EXE]))
   else if (Tools.FFmpeg_ParamsForAudioExtract <> '') then
   begin
     CancelExtraction       := False;

@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin, Menus,
-  ComCtrls, UWTimeEdit, UWRadioButton, UWCheckBox, procLocalize;
+  ComCtrls, UWTimeEdit, UWRadioButton, UWCheckBox, LCLIntf, procLocalize;
 
 type
 
@@ -61,8 +61,10 @@ type
     procedure FormShow(Sender: TObject);
   private
     FBackImage: String;
+    FSaveFolder: String;
     procedure ResItemClick(Sender: TObject);
     procedure SetControlsEnabled(const AValue: Boolean);
+    procedure OpenFolderClick(Sender: TObject);
   public
 
   end;
@@ -109,6 +111,7 @@ begin
 
   rdoSMPTEColorBars.Checked := True;
   FBackImage := '';
+  FSaveFolder := '';
 
   CancelGeneration := False;
 
@@ -227,17 +230,25 @@ begin
     Exit;
   end;
 
+  if not FileExists(GetExtractAppFile) then
+  begin
+    ShowErrorMessageDialog(Format(lngExtractAppError, [FFMPEG_EXE]));
+    Exit;
+  end;
+
   SD := TSaveDialog.Create(NIL);
   try
     SD.Title  := lngSaveFile;
     SD.Filter := lngAllSupportedFiles + ' (*.mp4)|*.mp4';
     SD.FilterIndex := 0;
     SD.Options := [ofOverwritePrompt, ofEnableSizing];
+    SD.FileName := lngNoName + '.mp4';
     if SD.Execute then
     begin
       SetControlsEnabled(False);
 
       SD.FileName := ChangeFileExt(SD.FileName, '.mp4');
+      FSaveFolder := ExtractFileDir(SD.FileName);
 
       if GenerateBlankVideo(SD.FileName, spnWidth.Value, spnHeight.Value,
          DefFPSList[cboFPS.ItemIndex], tedDuration.Value,
@@ -245,9 +256,12 @@ begin
          rdoSMPTEColorBars.Checked, rdoSolidColor.Checked, rdoImage.Checked,
          chkGenerateTC.Checked, chkGenerateTone.Checked,
          @ProcessCB) then
-          ShowMessageDialog(lngFileSavedSuccessfully)
-        else
-          ShowErrorMessageDialog(lngVideoGenerationFailed);
+      begin
+        prbProgress.Position := 100;
+        ShowMessageDialog(lngFileSavedSuccessfully, '', lngOpenContainingFolder, @OpenFolderClick)
+      end
+      else
+        ShowErrorMessageDialog(lngVideoGenerationFailed);
 
       SetControlsEnabled(True);
       //Close;
@@ -309,6 +323,13 @@ begin
     Cursor := crHourGlass
   else
     Cursor := crDefault;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmGenerateBlankVideo.OpenFolderClick(Sender: TObject);
+begin
+  OpenDocument(FSaveFolder);
 end;
 
 // -----------------------------------------------------------------------------

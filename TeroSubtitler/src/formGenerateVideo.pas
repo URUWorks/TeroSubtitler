@@ -605,7 +605,7 @@ begin
 
   if not FileExists(Tools.FFmpeg) then
   begin
-    ShowErrorMessageDialog(Format(lngExtractAppError, [ExtractFileName(Tools.FFmpeg)]));
+    ShowErrorMessageDialog(Format(lngExtractAppError, [FFMPEG_EXE]));
     Exit;
   end;
 
@@ -678,9 +678,12 @@ begin
       TFFAudioSampleRate[cboSampleRate.ItemIndex].Value,
       TFFAudioBitRate[cboBitRate.ItemIndex],
       @ProcessCB) then
-        ShowMessageDialog(lngFileSavedSuccessfully, '', lngOpenContainingFolder, @OpenFolderClick)
-      else
-        ShowErrorMessageDialog(lngVideoGenerationFailed);
+    begin
+      prbProgress.Position := 100;
+      ShowMessageDialog(lngFileSavedSuccessfully, '', lngOpenContainingFolder, @OpenFolderClick);
+    end
+    else
+      ShowErrorMessageDialog(lngVideoGenerationFailed);
 
     SetControlsEnabled(True);
     //Close;

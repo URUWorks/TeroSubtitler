@@ -299,9 +299,9 @@ begin
   if frmMain.MPV.FileName.StartsWith('http') then
     ShowErrorMessageDialog(lngFeatureNotAvailableFromURL)
   else if not FileExists(GetExtractAppFile) then
-    ShowErrorMessageDialog(Format(lngExtractAppError, [ExtractFileName(Tools.FFmpeg)]))
+    ShowErrorMessageDialog(Format(lngExtractAppError, [FFMPEG_EXE]))
   else if not FileExists(GetAudioToTextAppFile) then
-    ShowErrorMessageDialog(Format(lngExtractAppError, [ExtractFileName(GetAudioToTextAppFile)]))
+    ShowErrorMessageDialog(Format(lngExtractAppError, [ExtractFileName(GetAudioToTextAppFile(True))]))
   else if (Tools.FFmpeg_ParamsForAudioExtract <> '') and ((Tools.WhisperCPP_Params <> '') or (Tools.FasterWhisper_Params <> '')) and (cboModel.ItemIndex >= 0) then
   begin
     CancelProcess     := False;
@@ -433,6 +433,7 @@ begin
 
               if FileExists(srtfile) then
               begin
+                prbProgress.Position := 100;
                 ShowMessageDialog(lngFileSavedSuccessfully, '', lngOpenContainingFolder, @OpenFolderClick);
                 LoadSubtitle(srtfile, sfSubRip, NIL, -1, True);
               end;
