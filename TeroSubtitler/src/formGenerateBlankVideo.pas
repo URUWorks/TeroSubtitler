@@ -250,7 +250,7 @@ begin
           ShowErrorMessageDialog(lngVideoGenerationFailed);
 
       SetControlsEnabled(True);
-      Close;
+      //Close;
     end;
   finally
     SD.Free;
