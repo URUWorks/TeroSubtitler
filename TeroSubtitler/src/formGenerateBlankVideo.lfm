@@ -83,7 +83,7 @@ object frmGenerateBlankVideo: TfrmGenerateBlankVideo
     BorderSpacing.Right = 5
     Caption = 'Generate...'
     Default = True
-    TabOrder = 13
+    TabOrder = 12
     OnClick = btnGenerateClick
   end
   object btnClose: TButton
@@ -221,7 +221,7 @@ object frmGenerateBlankVideo: TfrmGenerateBlankVideo
     Width = 16
     AutoSize = False
     BorderSpacing.Top = 15
-    Caption = 'Generate time code'
+    Caption = 'Time code'
     TabOrder = 9
   end
   object prbProgress: TProgressBar
@@ -234,7 +234,7 @@ object frmGenerateBlankVideo: TfrmGenerateBlankVideo
     Width = 170
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 6
-    TabOrder = 12
+    TabOrder = 11
     Visible = False
   end
   object lblTimeElapsed: TLabel
@@ -273,8 +273,8 @@ object frmGenerateBlankVideo: TfrmGenerateBlankVideo
     Top = 251
     Width = 16
     AutoSize = False
-    Caption = 'Generate 1kHz Test Tone'
-    TabOrder = 11
+    Caption = '1 kHz test tone'
+    TabOrder = 10
   end
   object popRes: TPopupMenu
     Left = 200
