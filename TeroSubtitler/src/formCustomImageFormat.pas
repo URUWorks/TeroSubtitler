@@ -69,7 +69,6 @@ type
     procedure FormShow(Sender: TObject);
   private
     CustomFormat: TUWSubtitleCustomImageFormat;
-    StatusString: String;
     procedure ResItemClick(Sender: TObject);
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure SaveImageFile(const AFileName: String; const AIndex: Integer);
@@ -122,8 +121,6 @@ begin
     m.OnClick := @ResItemClick;
     popRes.Items.Add(m);
   end;
-
-  StatusString := lngWriteStatus;
 
   cboScriptSelect(NIL);
 
@@ -220,7 +217,7 @@ begin
 
               for i := 0 to Subtitles.Count-1 do
               begin
-                lblStatus.Caption := Format(StatusString, [i, Subtitles.Count]);
+                lblStatus.Caption := Format(lngWriteStatus, [i, Subtitles.Count]);
                 Application.ProcessMessages;
                 img := Format('%s%.4d.png', [edtPrefix.Text, i+1]);
                 Add(CFReplaceBodyTags(Body, TimeFormat, cboFPS.Text, Subtitles[i], not Time, sLineBreak, i+1, img, spnWidth.Value, spnHeight.Value));
