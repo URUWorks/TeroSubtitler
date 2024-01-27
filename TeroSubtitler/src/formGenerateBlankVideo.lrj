@@ -1,0 +1,17 @@
+{"version":1,"strings":[
+{"hash":106518159,"name":"tfrmgenerateblankvideo.caption","sourcebytes":[71,101,110,101,114,97,116,101,32,98,108,97,110,107,32,118,105,100,101,111],"value":"Generate blank video"},
+{"hash":170847518,"name":"tfrmgenerateblankvideo.lblvideores.caption","sourcebytes":[86,105,100,101,111,32,114,101,115,111,108,117,116,105,111,110],"value":"Video resolution"},
+{"hash":120,"name":"tfrmgenerateblankvideo.lblx.caption","sourcebytes":[120],"value":"x"},
+{"hash":12558,"name":"tfrmgenerateblankvideo.btnres.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":147310030,"name":"tfrmgenerateblankvideo.btngenerate.caption","sourcebytes":[71,101,110,101,114,97,116,101,46,46,46],"value":"Generate..."},
+{"hash":4863637,"name":"tfrmgenerateblankvideo.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":19283,"name":"tfrmgenerateblankvideo.lblfps.caption","sourcebytes":[70,80,83],"value":"FPS"},
+{"hash":210283758,"name":"tfrmgenerateblankvideo.lblduration.caption","sourcebytes":[68,117,114,97,116,105,111,110],"value":"Duration"},
+{"hash":32370148,"name":"tfrmgenerateblankvideo.lblbackground.caption","sourcebytes":[66,97,99,107,103,114,111,117,110,100],"value":"Background"},
+{"hash":104087954,"name":"tfrmgenerateblankvideo.rdosolidcolor.caption","sourcebytes":[83,111,108,105,100,32,99,111,108,111,114],"value":"Solid color"},
+{"hash":5257173,"name":"tfrmgenerateblankvideo.rdoimage.caption","sourcebytes":[73,109,97,103,101],"value":"Image"},
+{"hash":12558,"name":"tfrmgenerateblankvideo.btnimage.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":252556069,"name":"tfrmgenerateblankvideo.chkgeneratetc.caption","sourcebytes":[71,101,110,101,114,97,116,101,32,116,105,109,101,32,99,111,100,101],"value":"Generate time code"},
+{"hash":238395411,"name":"tfrmgenerateblankvideo.rdosmptecolorbars.caption","sourcebytes":[83,77,80,84,69,32,99,111,108,111,114,32,98,97,114,115],"value":"SMPTE color bars"},
+{"hash":224287029,"name":"tfrmgenerateblankvideo.chkgeneratetone.caption","sourcebytes":[71,101,110,101,114,97,116,101,32,49,107,72,122,32,84,101,115,116,32,84,111,110,101],"value":"Generate 1kHz Test Tone"}
+]}

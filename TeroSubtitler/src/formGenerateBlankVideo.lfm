@@ -1,0 +1,283 @@
+object frmGenerateBlankVideo: TfrmGenerateBlankVideo
+  Left = 236
+  Height = 362
+  Top = 115
+  Width = 235
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Generate blank video'
+  ClientHeight = 362
+  ClientWidth = 235
+  FormStyle = fsStayOnTop
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '3.0.0.3'
+  object lblVideoRes: TLabel
+    AnchorSideTop.Control = tedDuration
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 66
+    Width = 86
+    BorderSpacing.Top = 15
+    Caption = 'Video resolution'
+    ParentColor = False
+  end
+  object spnWidth: TSpinEdit
+    AnchorSideTop.Control = lblVideoRes
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 86
+    Width = 75
+    BorderSpacing.Top = 5
+    MaxValue = 7680
+    MinValue = 160
+    TabOrder = 2
+    Value = 1920
+  end
+  object lblX: TLabel
+    AnchorSideTop.Control = spnWidth
+    AnchorSideTop.Side = asrCenter
+    Left = 88
+    Height = 15
+    Top = 90
+    Width = 6
+    Caption = 'x'
+    ParentColor = False
+  end
+  object spnHeight: TSpinEdit
+    AnchorSideTop.Control = spnWidth
+    Left = 99
+    Height = 23
+    Top = 86
+    Width = 75
+    MaxValue = 4320
+    MinValue = 160
+    TabOrder = 3
+    Value = 1080
+  end
+  object btnRes: TButton
+    AnchorSideLeft.Control = spnHeight
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = spnHeight
+    Left = 179
+    Height = 23
+    Top = 86
+    Width = 48
+    BorderSpacing.Left = 5
+    Caption = '...'
+    TabOrder = 4
+    OnClick = btnResClick
+  end
+  object btnGenerate: TButton
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnClose
+    Left = 40
+    Height = 26
+    Top = 328
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
+    Caption = 'Generate...'
+    Default = True
+    TabOrder = 13
+    OnClick = btnGenerateClick
+  end
+  object btnClose: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 136
+    Height = 26
+    Top = 328
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Cancel = True
+    Caption = 'Close'
+    TabOrder = 14
+    OnClick = btnCloseClick
+  end
+  object cboFPS: TComboBox
+    AnchorSideLeft.Side = asrBottom
+    Left = 152
+    Height = 23
+    Top = 28
+    Width = 75
+    BorderSpacing.Left = 5
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object lblFPS: TLabel
+    Left = 152
+    Height = 15
+    Top = 8
+    Width = 19
+    Caption = 'FPS'
+    ParentColor = False
+  end
+  object lblDuration: TLabel
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 46
+    BorderSpacing.Top = 5
+    Caption = 'Duration'
+    ParentColor = False
+  end
+  object tedDuration: TUWTimeEdit
+    AnchorSideLeft.Control = lblDuration
+    AnchorSideTop.Control = lblDuration
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 28
+    Width = 120
+    Value = 60000
+    FPS = 25
+    FrameStep = 1
+    TimeStep = 1
+    TimeMode = temTime
+    Alignment = taCenter
+    BorderSpacing.Top = 5
+    Constraints.MinHeight = 21
+    Constraints.MinWidth = 90
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+  end
+  object lblBackground: TLabel
+    AnchorSideTop.Control = spnWidth
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 124
+    Width = 64
+    BorderSpacing.Top = 15
+    Caption = 'Background'
+    ParentColor = False
+  end
+  object rdoSolidColor: TUWRadioButton
+    AnchorSideTop.Control = rdoSMPTEColorBars
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 167
+    Width = 18
+    AutoSize = False
+    Caption = 'Solid color'
+    TabOrder = 6
+    TabStop = False
+  end
+  object rdoImage: TUWRadioButton
+    AnchorSideTop.Control = rdoSolidColor
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 190
+    Width = 18
+    AutoSize = False
+    Caption = 'Image'
+    TabOrder = 7
+    TabStop = False
+  end
+  object btnImage: TButton
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = rdoImage
+    AnchorSideTop.Side = asrCenter
+    Left = 179
+    Height = 23
+    Top = 190
+    Width = 48
+    Caption = '...'
+    TabOrder = 8
+    OnClick = btnImageClick
+  end
+  object cbnSolidColor: TColorButton
+    AnchorSideTop.Control = rdoSolidColor
+    AnchorSideTop.Side = asrCenter
+    Left = 179
+    Height = 25
+    Top = 166
+    Width = 48
+    BorderWidth = 2
+    ButtonColorSize = 16
+    ButtonColor = clSkyBlue
+    Flat = True
+  end
+  object chkGenerateTC: TUWCheckBox
+    AnchorSideTop.Control = rdoImage
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 228
+    Width = 16
+    AutoSize = False
+    BorderSpacing.Top = 15
+    Caption = 'Generate time code'
+    TabOrder = 9
+  end
+  object prbProgress: TProgressBar
+    AnchorSideTop.Control = lblTimeElapsed
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = lblTimeElapsed
+    Left = 8
+    Height = 8
+    Top = 293
+    Width = 170
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 6
+    TabOrder = 12
+    Visible = False
+  end
+  object lblTimeElapsed: TLabel
+    AnchorSideTop.Control = chkGenerateTone
+    AnchorSideTop.Side = asrBottom
+    Left = 184
+    Height = 17
+    Top = 289
+    Width = 43
+    Alignment = taRightJustify
+    Anchors = [akTop, akRight]
+    AutoSize = False
+    BorderSpacing.Top = 15
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object rdoSMPTEColorBars: TUWRadioButton
+    AnchorSideTop.Control = lblBackground
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 144
+    Width = 18
+    AutoSize = False
+    BorderSpacing.Top = 5
+    Caption = 'SMPTE color bars'
+    TabOrder = 5
+    TabStop = False
+  end
+  object chkGenerateTone: TUWCheckBox
+    AnchorSideTop.Control = chkGenerateTC
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 251
+    Width = 16
+    AutoSize = False
+    Caption = 'Generate 1kHz Test Tone'
+    TabOrder = 11
+  end
+  object popRes: TPopupMenu
+    Left = 200
+    Top = 56
+  end
+end

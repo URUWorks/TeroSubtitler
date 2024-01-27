@@ -1993,14 +1993,17 @@ object frmMain: TfrmMain
       object Separator52: TMenuItem
         Caption = '-'
       end
+      object MenuItem241: TMenuItem
+        Action = actGenerateBlankVideo
+      end
       object MenuItem8: TMenuItem
         Action = actShotChanges
       end
-      object MenuItem70: TMenuItem
-        Action = actAudioToText
-      end
       object MenuItem32: TMenuItem
         Action = actWaveExtract
+      end
+      object MenuItem70: TMenuItem
+        Action = actAudioToText
       end
       object MenuItem161: TMenuItem
         Action = actDetectDialogSegments
@@ -3889,42 +3892,6 @@ object frmMain: TfrmMain
       ImageIndex = 83
       OnExecute = actSetGUILayout2Execute
     end
-    object actVARDefault: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = 'Default'
-      OnExecute = actVARDefaultExecute
-    end
-    object actVAR43: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = '4:3'
-      OnExecute = actVAR43Execute
-    end
-    object actVAR169: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = '16:9'
-      OnExecute = actVAR169Execute
-    end
-    object actVAR1851: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = '1.85:1'
-      OnExecute = actVAR1851Execute
-    end
-    object actVAR2351: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = '2.35:1'
-      OnExecute = actVAR2351Execute
-    end
-    object actVARCycle: TAction
-      Tag = 4
-      Category = 'Video'
-      Caption = 'Cycle Aspect Ratio'
-      OnExecute = actVARCycleExecute
-    end
     object actPushWordUp: TAction
       Tag = 1
       Category = 'Text'
@@ -4161,6 +4128,48 @@ object frmMain: TfrmMain
       Category = 'Text'
       Caption = 'Typewriter effect'
       OnExecute = actTextEffectTypewriterExecute
+    end
+    object actGenerateBlankVideo: TAction
+      Tag = 1
+      Category = 'Video'
+      Caption = 'Generate blank video...'
+      OnExecute = actGenerateBlankVideoExecute
+    end
+    object actVARDefault: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Default'
+      OnExecute = actVARDefaultExecute
+    end
+    object actVAR43: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = '4:3'
+      OnExecute = actVAR43Execute
+    end
+    object actVAR169: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = '16:9'
+      OnExecute = actVAR169Execute
+    end
+    object actVAR1851: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = '1.85:1'
+      OnExecute = actVAR1851Execute
+    end
+    object actVAR2351: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = '2.35:1'
+      OnExecute = actVAR2351Execute
+    end
+    object actVARCycle: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Cycle Aspect Ratio'
+      OnExecute = actVARCycleExecute
     end
   end
   object popDropInsert: TPopupMenu

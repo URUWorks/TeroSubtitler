@@ -1874,6 +1874,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actGenerateBlankVideoExecute(Sender: TObject);
+begin
+  ShowGenerateBlankVideo;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actUnicodeCtrlLRMExecute(Sender: TObject);
 begin
   InsertMemoText(UCC_LRM, False);

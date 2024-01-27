@@ -75,6 +75,11 @@ const
     '.edl', '.shotchanges', '.xml'
   );
 
+  TImageExts : array[0..4] of String =
+  (
+    '.png', '.jpg', '.gif', '.tiff', '.bmp'
+  );
+
   TProjectExt = '.stp';
 
   TBluRayExt = '.sup';

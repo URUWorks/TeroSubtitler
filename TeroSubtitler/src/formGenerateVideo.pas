@@ -546,6 +546,7 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
+
 procedure TfrmGenerateVideo.OpenFolderClick(Sender: TObject);
 begin
   OpenDocument(ExtractFileDir(FOutputFileName));

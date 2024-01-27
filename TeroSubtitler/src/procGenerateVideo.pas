@@ -146,13 +146,14 @@ procedure FillComboWithFormats(const Combo: TComboBox);
 procedure FillComboWithRotate(const Combo: TComboBox);
 
 function GenerateVideoWithSubtitle(AVideoFileName, ASubtitleFileName, AOutputVideoFileName: String; AWidth, AHeight: Integer; AVideoCodec: String; AVideoProfile: Integer = -1; AExtra: String = ''; ACutFrom: Integer = -1; ACutTo: Integer = -1; AStyle: String = ''; AAudioCodec: String = ''; AAudioChannels: Integer = 2; AAudioSampleRate: Integer = 44100; AAudioBitRate: String = ''; const ACB: TOnDataReceived = NIL): Boolean;
+function GenerateBlankVideo(const AOutputVideoFileName: String; const AWidth, AHeight: Integer; const AFPS: Single; const ADuration: Integer; const AColor: Integer; const AImageFile: String; const ASMPTEBars: Boolean; const ASolidColor: Boolean; const AImage: Boolean; const AGenerateTC: Boolean; const AGenerateTone: Boolean; const ACB: TOnDataReceived = NIL): Boolean;
 
 // -----------------------------------------------------------------------------
 
 implementation
 
 uses
-  procTypes, procWorkspace, UWSystem.TimeUtils;
+  procTypes, procWorkspace, UWSystem.TimeUtils, UWSystem.SysUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -343,6 +344,55 @@ begin
       AParamArray[i] := StringsReplace(AParamArray[i],
         ['%input', '%extra', '%subtitle', '%output', '%%'],
         [AVideoFileName, AExtra, ASubtitleFileName, AOutputVideoFileName, ' '], [rfReplaceAll]);
+
+    ExecuteThreadProcess(Tools.FFmpeg, AParamArray, ACB);
+
+    Result := FileExists(AOutputVideoFileName) and (FileSize(AOutputVideoFileName) > 0);
+  finally
+    SetLength(AParamArray, 0);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function GenerateBlankVideo(const AOutputVideoFileName: String; const AWidth, AHeight: Integer; const AFPS: Single; const ADuration: Integer; const AColor: Integer; const AImageFile: String; const ASMPTEBars: Boolean; const ASolidColor: Boolean; const AImage: Boolean; const AGenerateTC: Boolean; const AGenerateTone: Boolean; const ACB: TOnDataReceived = NIL): Boolean;
+var
+  s, DrawText, GenTone, fps, HexColor : String;
+  AParamArray : TStringArray;
+  i : Integer;
+begin
+  Result := False;
+  if AOutputVideoFileName.IsEmpty then Exit;
+
+  fps := SingleToStr(AFPS, '.');
+  HexColor := IntToHexStr(AColor, False, '#');
+
+  if AGenerateTC then
+    DrawText := ' -vf drawtext="timecode=''00\:00\:00\:00'':r=' + fps + ':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=48:fontcolor=white"'
+  else
+    DrawText := '';
+
+  if AGenerateTone then
+    GenTone := ' -f lavfi -i "sine=frequency=1000:sample_rate=48000"'
+  else
+    GenTone := '';
+
+  if ASMPTEBars then
+    s := '-t %Duration -f lavfi -i "smptehdbars=rate=%fps:size=%VideoWidthx%VideoHeight"%GenTone -c:v libx264 -tune stillimage -shortest -s %VideoWidthx%VideoHeight%DrawText "%OutputFileName"'
+  else if AImage and not AImageFile.IsEmpty then
+    s := '-t %Duration -loop 1 -r %fps -i "%ImageFile"%GenTone -c:v libx264 -tune stillimage -shortest -s %VideoWidthx%VideoHeight%DrawText "%OutputFileName"'
+  else
+    s := '-t %Duration -f lavfi -i "color=c=%Color:r=%fps:s=%VideoWidthx%VideoHeight"%GenTone -c:v libx264 -tune stillimage -shortest -s %VideoWidthx%VideoHeight%DrawText "%OutputFileName"';
+
+  AParamArray := s.Split(' ', TStringSplitOptions.ExcludeEmpty);
+  try
+    if FileExists(AOutputVideoFileName) then
+      DeleteFile(AOutputVideoFileName);
+
+    for i := 0 to High(AParamArray) do
+      AParamArray[i] := StringsReplace(AParamArray[i],
+        ['%Duration', '%VideoWidth', '%VideoHeight', '%fps', '%ImageFile', '%Color', '%DrawText', '%GenTone', '%OutputFileName'],
+        [IntToStr(ADuration div 1000), AWidth.ToString, AHeight.ToString, fps, AImageFile, HexColor, DrawText, GenTone, AOutputVideoFileName], [rfReplaceAll]);
 
     ExecuteThreadProcess(Tools.FFmpeg, AParamArray, ACB);
 

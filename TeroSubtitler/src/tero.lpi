@@ -770,6 +770,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="formGenerateBlankVideo.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmGenerateBlankVideo"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

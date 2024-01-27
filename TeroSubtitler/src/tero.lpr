@@ -34,7 +34,7 @@ uses
   procFileTypes, formCustomTextFormat, formActors, formCustomSelectDlg,
   procProjectFile, formCustomImageFormat, procCustomFormat, procDialogs,
   formExportSUP, procSUP, formGenerateVideo, procGenerateVideo, procLocalize,
-  formCharacterMap, formRoundTime, formStatistics;
+  formCharacterMap, formRoundTime, formStatistics, formGenerateBlankVideo;
 
 {$R *.res}
 
