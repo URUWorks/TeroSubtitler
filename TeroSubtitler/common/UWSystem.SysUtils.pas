@@ -44,7 +44,8 @@ function IsInteger(const Value: Single): Boolean; overload;
 function IsFloat(Text: String; const FormatSettings: TFormatSettings): Boolean; overload;
 function IsFloat(Text: String): Boolean; overload;
 function StrToSingle(const S: String; const DefaultValue: Single; const AFormatSettings: TFormatSettings): Single;
-function SingleToStr(const Value: Single; const AFormatSettings: TFormatSettings; const AFormat: String = '0.###'): String;
+function SingleToStr(const Value: Single; const AFormatSettings: TFormatSettings; const AFormat: String = '0.###'): String; overload;
+function SingleToStr(const Value: Single; const ADecimalChar: Char; const AFormat: String = '0.###'): String; overload;
 function Single2SmallInt(const Value: Single): SmallInt;
 function BoolToStr(const Value: Boolean): String;
 function StringToBoolean(const S: String; const Default: Boolean = False): Boolean;
@@ -267,7 +268,19 @@ end;
 
 function SingleToStr(const Value: Single; const AFormatSettings: TFormatSettings; const AFormat: String = '0.###'): String;
 begin
-  Result := FormatFloat(AFormat, Value, AFormatSettings)
+  Result := FormatFloat(AFormat, Value, AFormatSettings);
+end;
+
+// -----------------------------------------------------------------------------
+
+function SingleToStr(const Value: Single; const ADecimalChar: Char; const AFormat: String = '0.###'): String;
+var
+  fs : TFormatSettings;
+begin
+  fs := DefaultFormatSettings;
+  fs.DecimalSeparator := ADecimalChar;
+
+  Result := FormatFloat(AFormat, Value, fs);
 end;
 
 // -----------------------------------------------------------------------------
