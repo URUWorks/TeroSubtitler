@@ -286,8 +286,8 @@ msgstr "Error al ejecutar \"%s\"."
 
 #: proclocalize.lngextractapperror
 #, object-pascal-format
-msgid "Unable to find “%s”."
-msgstr "No se puede encontrar \"%s\"."
+msgid "Unable to find “%s”. Check in settings if it is configured correctly."
+msgstr "No se puede encontrar \"%s\". Verifique en ajustes si está configurado correctamente."
 
 #: proclocalize.lngextracting
 msgid "Extracting..."
