@@ -384,6 +384,12 @@ begin
   else
     s := '-t %Duration -f lavfi -i "color=c=%Color:r=%fps:s=%VideoWidthx%VideoHeight"%GenTone -c:v libx264 -tune stillimage -shortest -s %VideoWidthx%VideoHeight%DrawText "%OutputFileName"';
 
+  s := StringsReplace(s, ['%DrawText', '%GenTone'], [DrawText, GenTone], [rfReplaceAll]);
+
+  {$IFNDEF WINDOWS}
+  s := s.Replace('"', '', [rfReplaceAll]);
+  {$ENDIF}
+
   AParamArray := s.Split(' ', TStringSplitOptions.ExcludeEmpty);
   try
     if FileExists(AOutputVideoFileName) then
@@ -391,8 +397,8 @@ begin
 
     for i := 0 to High(AParamArray) do
       AParamArray[i] := StringsReplace(AParamArray[i],
-        ['%Duration', '%VideoWidth', '%VideoHeight', '%fps', '%ImageFile', '%Color', '%DrawText', '%GenTone', '%OutputFileName'],
-        [IntToStr(ADuration div 1000), AWidth.ToString, AHeight.ToString, fps, AImageFile, HexColor, DrawText, GenTone, AOutputVideoFileName], [rfReplaceAll]);
+        ['%Duration', '%VideoWidth', '%VideoHeight', '%fps', '%ImageFile', '%Color', '%OutputFileName'],
+        [IntToStr(ADuration div 1000), AWidth.ToString, AHeight.ToString, fps, AImageFile, HexColor, AOutputVideoFileName], [rfReplaceAll]);
 
     ExecuteThreadProcess(Tools.FFmpeg, AParamArray, ACB);
 
