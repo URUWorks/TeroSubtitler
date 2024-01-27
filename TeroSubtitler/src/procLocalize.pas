@@ -61,7 +61,7 @@ resourcestring
   lngNoInternetConnection = 'No Internet connection available';
   lngFailedToDownload = 'No content downloaded, missing file or no Internet connection.';
   lngAskToExtractAudio = 'Audio waveform was not found, do you want to extract it?';
-  lngExtractAppError = 'Unable to find “%s”.'; //TODO: LOCALIZE: Maybe the quotes are wrong
+  lngExtractAppError = 'Unable to find “%s”. Check in settings if it is configured correctly.';
   lngExtracting = 'Extracting...';
   lngTranscribing = 'Transcribing...';
   lngDetectDialogSegmentsWarning = 'Attempting to detect dialogue segments deletes all entries from the list.';
