@@ -204,8 +204,6 @@ msgid "File name"
 msgstr "Nome file"
 
 #: proclocalize.lngbcfilestate
-#, fuzzy
-#| msgid "State"
 msgid "Status"
 msgstr "Stato"
 
@@ -287,10 +285,9 @@ msgid "Error executing “%s”."
 msgstr "Errore durante l’esecuzione di “%s”."
 
 #: proclocalize.lngextractapperror
-#, object-pascal-format, fuzzy
-#| msgid "Unable to find “%s”."
+#, object-pascal-format
 msgid "Unable to find “%s”. Check in settings if it is configured correctly."
-msgstr "Impossibile trovare “%s”."
+msgstr "Impossibile trovare “%s”. Verifica che il parametro sia configurato correttamente nelle impostazioni."
 
 #: proclocalize.lngextracting
 msgid "Extracting..."
@@ -523,11 +520,11 @@ msgstr "Durata"
 
 #: proclocalize.lnghhmmssff
 msgid "SMPTE [HH:MM:SS:FF]"
-msgstr ""
+msgstr "SMPTE [HH:MM:SS:FF]"
 
 #: proclocalize.lnghhmmsszzz
 msgid "Media [HH:MM:SS.ZZZ]"
-msgstr ""
+msgstr "Contenuto multimediale [HH:MM:SS.ZZZ]"
 
 #: proclocalize.lnghindex
 msgid "#/Gap"
@@ -2271,82 +2268,73 @@ msgid "MPEG-2 time:"
 msgstr "Tempo in formato MPEG-2:"
 
 #: tfrmgenerateblankvideo.btnclose.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmgenerateblankvideo.btngenerate.caption
 msgid "Generate..."
-msgstr ""
+msgstr "Genera…"
 
 #: tfrmgenerateblankvideo.btnimage.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.btnimage.caption"
 msgid "..."
 msgstr "…"
 
 #: tfrmgenerateblankvideo.btnres.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.btnres.caption"
 msgid "..."
 msgstr "…"
 
 #: tfrmgenerateblankvideo.caption
 msgid "Generate blank video"
-msgstr ""
+msgstr "Genera un video vuoto"
 
 #: tfrmgenerateblankvideo.chkgeneratetc.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.chkgeneratetc.caption"
 msgid "Time code"
 msgstr "Codice temporale"
 
 #: tfrmgenerateblankvideo.chkgeneratetone.caption
 msgid "1 kHz test tone"
-msgstr ""
+msgstr "Tono di prova a 1 kHz"
 
 #: tfrmgenerateblankvideo.lblbackground.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.lblbackground.caption"
 msgid "Background"
 msgstr "Sfondo"
 
 #: tfrmgenerateblankvideo.lblduration.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.lblduration.caption"
 msgid "Duration"
 msgstr "Durata"
 
 #: tfrmgenerateblankvideo.lblfps.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.lblfps.caption"
 msgid "FPS"
 msgstr "FPS"
 
 #: tfrmgenerateblankvideo.lblvideores.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.lblvideores.caption"
 msgid "Video resolution"
 msgstr "Risoluzione video"
 
 #: tfrmgenerateblankvideo.lblx.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.lblx.caption"
 msgid "x"
 msgstr "x"
 
 #: tfrmgenerateblankvideo.rdoimage.caption
 msgid "Image"
-msgstr ""
+msgstr "Immagine"
 
 #: tfrmgenerateblankvideo.rdosmptecolorbars.caption
 msgid "SMPTE color bars"
-msgstr ""
+msgstr "Barre colore SMPTE"
 
 #: tfrmgenerateblankvideo.rdosolidcolor.caption
 msgid "Solid color"
-msgstr ""
+msgstr "Colore piatto"
 
 #: tfrmgeneratevideo.btnclose.caption
 msgctxt "tfrmgeneratevideo.btnclose.caption"
@@ -2822,7 +2810,7 @@ msgstr "Imposta il formato del codice temporale su HH:MM:SS:FF"
 
 #: tfrmmain.actgenerateblankvideo.caption
 msgid "Generate blank video..."
-msgstr ""
+msgstr "Genera un video vuoto…"
 
 #: tfrmmain.actgeneratevideo.caption
 msgid "Video with hardcoded subtitles..."
@@ -2885,7 +2873,7 @@ msgstr "Passa all’elemento contrassegnato successivo"
 
 #: tfrmmain.actjumptonextnote.caption
 msgid "Jump to next note"
-msgstr ""
+msgstr "Passa alla nota successiva"
 
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
@@ -2901,7 +2889,7 @@ msgstr "Passa all’elemento contrassegnato precedente"
 
 #: tfrmmain.actjumptopreviousnote.caption
 msgid "Jump to previous note"
-msgstr ""
+msgstr "Passa alla nota precedente"
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"
@@ -3458,11 +3446,11 @@ msgstr "Impostazioni…"
 
 #: tfrmmain.acttexteffectflash.caption
 msgid "Flash effect"
-msgstr ""
+msgstr "Effetto lampo"
 
 #: tfrmmain.acttexteffecttypewriter.caption
 msgid "Typewriter effect"
-msgstr ""
+msgstr "Effetto macchina da scrivere"
 
 #: tfrmmain.acttimeexpander.caption
 msgid "Time expander/reducer..."
@@ -3814,7 +3802,7 @@ msgstr "Seleziona"
 
 #: tfrmmain.mnutexteffects.caption
 msgid "Effects"
-msgstr ""
+msgstr "Effetti"
 
 #: tfrmmain.mnutextlines.caption
 msgid "Lines"
@@ -4898,16 +4886,12 @@ msgid "Exit"
 msgstr "Esci"
 
 #: tfrmwelcome.lblnewsubtitle.caption
-#, fuzzy
-#| msgid "New empty subtitle"
 msgid "New subtitle project"
-msgstr "Nuovo sottotitolo vuoto"
+msgstr "Nuovo progetto di sottotitoli"
 
 #: tfrmwelcome.lblnewtranscription.caption
-#, fuzzy
-#| msgid "New transcription"
 msgid "New manual transcription"
-msgstr "Nuova trascrizione"
+msgstr "Nuova trascrizione manuale"
 
 #: tfrmwelcome.lblopenfile.caption
 msgid "Open file..."
@@ -4955,7 +4939,7 @@ msgstr "Procedi"
 
 #: tfrmwizard.btnprevious.caption
 msgid "Back"
-msgstr ""
+msgstr "Indietro"
 
 #: tfrmwizard.caption
 msgid "Getting started wizard"
@@ -5034,4 +5018,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
