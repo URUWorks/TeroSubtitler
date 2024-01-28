@@ -28,7 +28,7 @@ msgstr ""
 
 #: proclocalize.lngadditionaloption
 msgid "Additional option"
-msgstr ""
+msgstr "Дополнительные настройки"
 
 #: proclocalize.lngadditionalparams
 msgid "Additional params:"
@@ -286,7 +286,7 @@ msgid "Error executing “%s”."
 msgstr "Ошибка исполнения команды “%s"
 
 #: proclocalize.lngextractapperror
-#, object-pascal-format, fuzzy
+#, fuzzy, object-pascal-format
 #| msgid "Unable to find “%s”."
 msgid "Unable to find “%s”. Check in settings if it is configured correctly."
 msgstr "Не удаётся найти “%s”."
@@ -979,107 +979,107 @@ msgstr "Инструменты"
 #: proclocalize.lngstcharacterspersecondaverage
 #, object-pascal-format
 msgid "Characters per second average: %.2f"
-msgstr ""
+msgstr "Символов в секунду: %.2f"
 
 #: proclocalize.lngstdurationaverage
 #, object-pascal-format
 msgid "Duration average: %s"
-msgstr ""
+msgstr "Средняя продолжительность: %s"
 
 #: proclocalize.lngstentrieswithouttext
 #, object-pascal-format
 msgid "Entries without text: %d"
-msgstr ""
+msgstr "Субтитры без текста: %d"
 
 #: proclocalize.lngstgapaverage
 #, object-pascal-format
 msgid "Gap average: %s"
-msgstr ""
+msgstr "Усреднённый промежуток: %s"
 
 #: proclocalize.lngstlinelengthaverage
 #, object-pascal-format
 msgid "Line length average: %d"
-msgstr ""
+msgstr "Среднее значение длины строки: %d"
 
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
 msgid "Longest characters per second: %.2f (#%d)"
-msgstr ""
+msgstr "Самые длинные символы в секунду: %.2f (#%d)"
 
 #: proclocalize.lngstlongestduration
 #, object-pascal-format
 msgid "Longest duration: %s (#%d)"
-msgstr ""
+msgstr "Наибольшая продолжительность: %s (#%d)"
 
 #: proclocalize.lngstlongestgap
 #, object-pascal-format
 msgid "Longest gap: %s (#%d)"
-msgstr ""
+msgstr "Самый длинный промежуток: %s (#%d)"
 
 #: proclocalize.lngstlongestline
 #, object-pascal-format
 msgid "Longest line: %d (#%d)"
-msgstr ""
+msgstr "Самая длинная строка: %d (#%d)"
 
 #: proclocalize.lngstlongestwordsperminute
 #, object-pascal-format
 msgid "Longest words per minute: %.2f (#%d)"
-msgstr ""
+msgstr "Наибольшее количество слов в минуту: %.2f (#%d)"
 
 #: proclocalize.lngstnumberofcharacters
 #, object-pascal-format
 msgid "Number of characters: %d"
-msgstr ""
+msgstr "Число символов: %d"
 
 #: proclocalize.lngstnumberofentries
 #, object-pascal-format
 msgid "Number of entries: %d"
-msgstr ""
+msgstr "Число субтитров: %d"
 
 #: proclocalize.lngstnumberofwords
 #, object-pascal-format
 msgid "Number of words: %d"
-msgstr ""
+msgstr "Число слов: %d"
 
 #: proclocalize.lngstshortestcharacterspersecond
 #, object-pascal-format
 msgid "Shortest characters per second: %.2f (#%d)"
-msgstr ""
+msgstr "Самые короткие символы в секунду: %.2f (#%d)"
 
 #: proclocalize.lngstshortestduration
 #, object-pascal-format
 msgid "Shortest duration: %s (#%d)"
-msgstr ""
+msgstr "Наименьшая длительность: %s (#%d)"
 
 #: proclocalize.lngstshortestgap
 #, object-pascal-format
 msgid "Shortest gap: %s (#%d)"
-msgstr ""
+msgstr "Наименьший промежуток: %s (#%d)"
 
 #: proclocalize.lngstshortestline
 #, object-pascal-format
 msgid "Shortest line: %d (#%d)"
-msgstr ""
+msgstr "Наименьшая строка: %d (#%d)"
 
 #: proclocalize.lngstshortestwordsperminute
 #, object-pascal-format
 msgid "Shortest words per minute: %.2f (#%d)"
-msgstr ""
+msgstr "Наименьшее количество слов в минуту: %.2f (#%d)"
 
 #: proclocalize.lngsttotalcharacterspersecond
 #, object-pascal-format
 msgid "Total characters per second: %.2f"
-msgstr ""
+msgstr "Всего символов в секунду: %.2f"
 
 #: proclocalize.lngsttotalduration
 #, object-pascal-format
 msgid "Total duration: %s"
-msgstr ""
+msgstr "Общая продолжительность: %s"
 
 #: proclocalize.lngstwordsperminuteaverage
 #, object-pascal-format
 msgid "Words per minute average: %.2f"
-msgstr ""
+msgstr "В среднем слов в минуту: %.2f"
 
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
@@ -2279,7 +2279,7 @@ msgstr "Закрыть"
 
 #: tfrmgenerateblankvideo.btngenerate.caption
 msgid "Generate..."
-msgstr ""
+msgstr "Сгенерировать..."
 
 #: tfrmgenerateblankvideo.btnimage.caption
 msgctxt "tfrmgenerateblankvideo.btnimage.caption"
@@ -2293,7 +2293,7 @@ msgstr ""
 
 #: tfrmgenerateblankvideo.caption
 msgid "Generate blank video"
-msgstr ""
+msgstr "Создать пустое видео"
 
 #: tfrmgenerateblankvideo.chkgeneratetc.caption
 #, fuzzy
@@ -2303,7 +2303,7 @@ msgstr "Таймкод"
 
 #: tfrmgenerateblankvideo.chkgeneratetone.caption
 msgid "1 kHz test tone"
-msgstr ""
+msgstr "Тестовый тон 1 kHz"
 
 #: tfrmgenerateblankvideo.lblbackground.caption
 #, fuzzy
@@ -2335,15 +2335,15 @@ msgstr ""
 
 #: tfrmgenerateblankvideo.rdoimage.caption
 msgid "Image"
-msgstr ""
+msgstr "Изображение"
 
 #: tfrmgenerateblankvideo.rdosmptecolorbars.caption
 msgid "SMPTE color bars"
-msgstr ""
+msgstr "Цветные полосы SMPTE"
 
 #: tfrmgenerateblankvideo.rdosolidcolor.caption
 msgid "Solid color"
-msgstr ""
+msgstr "Однотонный цвет"
 
 #: tfrmgeneratevideo.btnclose.caption
 msgctxt "tfrmgeneratevideo.btnclose.caption"
@@ -2366,7 +2366,7 @@ msgstr "Генерировать видео"
 
 #: tfrmgeneratevideo.chkbox.caption
 msgid "Box"
-msgstr ""
+msgstr "Текстовое поле"
 
 #: tfrmgeneratevideo.chkcrop.caption
 msgid "Crop"
@@ -2625,7 +2625,7 @@ msgstr "Проверить обновления..."
 
 #: tfrmmain.actcleartext.caption
 msgid "Clear text"
-msgstr ""
+msgstr "Очистить текст"
 
 #: tfrmmain.actcloseapp.caption
 msgctxt "tfrmmain.actcloseapp.caption"
@@ -2819,7 +2819,7 @@ msgstr "Режим времени"
 
 #: tfrmmain.actgenerateblankvideo.caption
 msgid "Generate blank video..."
-msgstr ""
+msgstr "Создать пустое видео..."
 
 #: tfrmmain.actgeneratevideo.caption
 msgid "Video with hardcoded subtitles..."
@@ -2882,7 +2882,7 @@ msgstr "Перейти к следующей пометке"
 
 #: tfrmmain.actjumptonextnote.caption
 msgid "Jump to next note"
-msgstr ""
+msgstr "Перейти к следующей заметке"
 
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
@@ -2898,7 +2898,7 @@ msgstr "Перейти к предыдущей пометке"
 
 #: tfrmmain.actjumptopreviousnote.caption
 msgid "Jump to previous note"
-msgstr ""
+msgstr "Перейти к предыдущей заметке"
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"
@@ -3048,7 +3048,7 @@ msgstr "Время начала"
 
 #: tfrmmain.actmediasplitentryatcursorposition.caption
 msgid "Split at cursor position"
-msgstr ""
+msgstr "Разделить в месте курсора"
 
 #: tfrmmain.actmediastartsubtitleentry.caption
 msgid "Start entry"
@@ -3096,11 +3096,11 @@ msgstr "Масштабировать"
 
 #: tfrmmain.actmergewithnext.caption
 msgid "Merge with next"
-msgstr ""
+msgstr "Объединить со следующим"
 
 #: tfrmmain.actmergewithprevious.caption
 msgid "Merge with previous"
-msgstr ""
+msgstr "Объединить с предыдущим"
 
 #: tfrmmain.actmodifyselection.caption
 msgid "Modify selection..."
@@ -3428,7 +3428,7 @@ msgstr "Разделить строку на месте курсора"
 
 #: tfrmmain.actstatistics.caption
 msgid "Statistics..."
-msgstr ""
+msgstr "Статистика..."
 
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
@@ -3461,11 +3461,11 @@ msgstr "Настройки..."
 
 #: tfrmmain.acttexteffectflash.caption
 msgid "Flash effect"
-msgstr ""
+msgstr "Эффект вспышки"
 
 #: tfrmmain.acttexteffecttypewriter.caption
 msgid "Typewriter effect"
-msgstr ""
+msgstr "Эффект печатной машинки"
 
 #: tfrmmain.acttimeexpander.caption
 msgid "Time expander/reducer..."
@@ -3668,7 +3668,7 @@ msgstr "Отразить по вертикали"
 
 #: tfrmmain.actvideofiltervintage.caption
 msgid "Vintage"
-msgstr ""
+msgstr "Винтажный"
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
@@ -3817,7 +3817,7 @@ msgstr "Выбрать"
 
 #: tfrmmain.mnutexteffects.caption
 msgid "Effects"
-msgstr ""
+msgstr "Эффекты"
 
 #: tfrmmain.mnutextlines.caption
 msgid "Lines"
@@ -4159,7 +4159,7 @@ msgstr "mpv обрабатывает субтитры для предпросм�
 
 #: tfrmsettings.chkusehwdec.caption
 msgid "Use hardware video decoding"
-msgstr ""
+msgstr "Использовать аппаратное декодирование видео"
 
 #: tfrmsettings.chkuseownfiledialog.caption
 msgid "Use Tero file dialog"
@@ -4167,7 +4167,7 @@ msgstr "Использовать диалоговое окно Tero"
 
 #: tfrmsettings.lbladditionalmpvoptions.caption
 msgid "Additional mpv options"
-msgstr ""
+msgstr "Дополнительные параметры mpv"
 
 #: tfrmsettings.lblautobackup.caption
 msgid "Auto-backup every (minutes)"
@@ -4577,7 +4577,7 @@ msgstr "Экспорт..."
 
 #: tfrmstatistics.caption
 msgid "Statistics"
-msgstr ""
+msgstr "Статистика"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"
@@ -4960,7 +4960,7 @@ msgstr "Далее"
 
 #: tfrmwizard.btnprevious.caption
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 #: tfrmwizard.caption
 msgid "Getting started wizard"
@@ -5048,4 +5048,3 @@ msgstr "Макет 1"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Макет 2"
-
