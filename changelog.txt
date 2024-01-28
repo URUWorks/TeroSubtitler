@@ -7,6 +7,7 @@
 - fixed: Repeated action in Text/Lines menu
 - fixed: Current video aspect was not checked
 - fixed: No save prompt when quitting after editing entry in timeline
+- updated: Brazilian Portuguese language (thx Gzushgshsh)
 - updated: Italian language (thx GitGianluc)
 - updated: Russian language (thx RoxMarty)
 - improved: Added back button in the wizard
