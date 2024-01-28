@@ -1118,11 +1118,11 @@ procedure VSTTextEffect(const AVST: TLazVirtualStringTree; const AEffect: TTextE
       fxFlash:
       begin
         repeat
+          Inc(x);
           CurTime := ITime + Param1;
           if CurTime > FTime then CurTime := FTime;
           Result := InsertSubtitle(x, ITime, CurTime, Text, Translation, False, False);
           ITime := ITime + Param1 + Param2;
-          Inc(x);
         until ITime >= FTime;
       end;
 
@@ -1140,9 +1140,9 @@ procedure VSTTextEffect(const AVST: TLazVirtualStringTree; const AEffect: TTextE
              (UTF8CompareStr(Copy(Text, Pos1, 1), ' ') <> 0)
              ) or (Pos1 = SumLen) then // and (not IsTagPart(Text, Pos1))) or (Pos1 = SumLen) then
           begin
+            Inc(x);
             s := FixTags(UTF8Copy(Text, 1, Pos1), tst_StartTag, tst_EndTag);
             Result := InsertSubtitle(x, ITime, ITime+CharDur, s, Translation, False, False);
-            Inc(x);
 
             if s = Text then Break; //avoid creating repeated subtitles
 
@@ -1172,7 +1172,7 @@ begin
                          AParam2);
 
     DeleteSubtitle(FocNode);
-    VSTSelectNode(AVST, NewNode, True);
+    VSTSelectNode(AVST, NewNode-1, True);
   end;
 end;
 
