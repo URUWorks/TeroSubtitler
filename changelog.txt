@@ -1,4 +1,4 @@
-1.0.1.6 (x.x.2024)
+1.0.1.6 (29.01.2024)
 - fixed: Crash after changing the divider size #217
 - fixed: Dialogue invisible after minimising then maximising Tero Subtitler #47
 - fixed: Media buttons disabled after Audio to text
@@ -7,6 +7,7 @@
 - fixed: Repeated action in Text/Lines menu
 - fixed: Current video aspect was not checked
 - fixed: No save prompt when quitting after editing entry in timeline
+- updated: Bulgarian language (thx CM630)
 - updated: Brazilian Portuguese language (thx Gzushgshsh)
 - updated: Italian language (thx GitGianluc)
 - updated: Russian language (thx RoxMarty)
