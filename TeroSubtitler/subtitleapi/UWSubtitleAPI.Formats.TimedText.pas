@@ -91,7 +91,7 @@ var
 begin
   sExt := LowerCase(ExtractFileExt(SubtitleFile.FileName));
   if ((sExt = '.xml') or (sExt = '.ttml') or (sExt = '.tt') or (sExt = '.dfxp')) and
-    (Contains('<tt xml:', SubtitleFile[Row]) or Contains('</tt>', SubtitleFile[Row])) then
+    (Contains('<tt xml:', SubtitleFile[Row]) or Contains('<tt:tt', SubtitleFile[Row]) or Contains('</tt>', SubtitleFile[Row])) then
     Result := True
   else
     Result := False;
@@ -117,6 +117,7 @@ var
   XmlDoc : TXMLDocument;
   Node   : TDOMNode;
   Item   : TUWSubtitleItem;
+  prefix : String;
 begin
   Result := False;
   XmlDoc := NIL;
@@ -125,7 +126,12 @@ begin
   //ReadXMLFile(XmlDoc, SubtitleFile.FileName);
   if Assigned(XmlDoc) then
     try
-      Node := XMLFindNodeByName(XmlDoc, 'tt');
+      if Contains('<tt:tt', SubtitleFile.Text) then
+        prefix := 'tt:'
+      else
+        prefix := '';
+
+      Node := XMLFindNodeByName(XmlDoc, prefix+'tt');
       Subtitles.FrameRate := FPS;
 
       if Assigned(Node) then
@@ -147,7 +153,7 @@ begin
         end;
       end;
 
-      Node := XMLFindNodeByName(XmlDoc, 'p');
+      Node := XMLFindNodeByName(XmlDoc, prefix+'p');
       if Assigned(Node) then
         repeat
           if Node.HasAttributes then
@@ -170,7 +176,7 @@ begin
                 FinalTime   := GetTime(Node.Attributes.GetNamedItem('end').NodeValue, Subtitles.FrameRate);
 
               Text := XMLExtractTextContent(Node.ChildNodes);
-              Text := HTMLTagsToTS(ReplaceEnters(Text, '<br/>', LineEnding));
+              Text := HTMLTagsToTS(ReplaceEnters(Text, '<'+prefix+'br/>', LineEnding));
             end;
             Subtitles.Add(Item, NIL);
           end;
