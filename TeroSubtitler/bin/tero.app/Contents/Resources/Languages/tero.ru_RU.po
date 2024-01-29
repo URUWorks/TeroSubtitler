@@ -286,7 +286,7 @@ msgid "Error executing “%s”."
 msgstr "Ошибка исполнения команды “%s"
 
 #: proclocalize.lngextractapperror
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy
 #| msgid "Unable to find “%s”."
 msgid "Unable to find “%s”. Check in settings if it is configured correctly."
 msgstr "Не удаётся найти “%s”."
@@ -5048,3 +5048,4 @@ msgstr "Макет 1"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Макет 2"
+
