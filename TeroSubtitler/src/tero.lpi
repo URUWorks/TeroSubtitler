@@ -19,7 +19,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\Languages"/>
-      <ExcludedIdentifiers Count="78">
+      <ExcludedIdentifiers Count="81">
         <Item1 Value="tfrmmain.caption"/>
         <Item2 Value="tfrmmain.lblseparatorfps.caption"/>
         <Item3 Value="tfrmmain.lblmedialength.caption"/>
@@ -98,6 +98,9 @@
         <Item76 Value="ion"/>
         <Item77 Value="tfrmconventions.lblwpm.caption"/>
         <Item78 Value="tfrmwizard.lbllanguage.caption"/>
+        <Item79 Value="tfrmwizard.lblfasterwhisperstatus.captio"/>
+        <Item80 Value="n"/>
+        <Item81 Value="tfrmwizard.lblytdlpstatus.caption"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
