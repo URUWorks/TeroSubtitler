@@ -664,7 +664,7 @@ begin
       if NodeArray = NIL then Exit;
       for i := High(NodeArray) downto Low(NodeArray) do
       begin
-        x    := frmMain.VST.AbsoluteIndex(NodeArray[i]);
+        x    := AVST.AbsoluteIndex(NodeArray[i]);
         Item := Subtitles.ItemPointer[x];
         if Assigned(Item) then
           with Item^, AppOptions.Conventions do
@@ -688,7 +688,7 @@ begin
             end;
           end;
       end;
-      NodeArray := NIL;
+      SetLength(NodeArray, 0);
     finally
       s.Free;
     end;
@@ -1096,64 +1096,65 @@ end;
 
 //----------------------------------------------------------------------------------------------------------------------
 
-procedure VSTTextEffect(const AVST: TLazVirtualStringTree; const AEffect: TTextEffect; const AParam1, AParam2: Integer);
+function TextEffect(const Index, InitialTime, FinalTime: Integer; const Text, Translation: String; const Effect: TTextEffect; const Param1: Integer; Param2: Integer): Integer;
+var
+  x       : Integer;
+  ITime   : Integer;
+  FTime   : Integer;
+  CurTime : Integer;
+  CharDur : Integer;
+  Pos1    : Byte;
+  SumLen  : Byte;
+  s       : String;
+begin
+  x      := Index;
+  ITime  := InitialTime;
+  FTime  := FinalTime;
+  Result := 0;
 
-  function TextEffect(const Index, InitialTime, FinalTime: Integer; const Text, Translation: String; const Effect: TTextEffect; const Param1: Integer; Param2: Integer): Integer;
-  var
-    x       : Integer;
-    ITime   : Integer;
-    FTime   : Integer;
-    CurTime : Integer;
-    CharDur : Integer;
-    Pos1    : Byte;
-    SumLen  : Byte;
-    s       : String;
-  begin
-    x      := Index;
-    ITime  := InitialTime;
-    FTime  := FinalTime;
-    Result := 0;
+  case Effect of
+    fxFlash:
+    begin
+      repeat
+        Inc(x);
+        CurTime := ITime + Param1;
+        if CurTime > FTime then CurTime := FTime;
+        Result := InsertSubtitle(x, ITime, CurTime, Text, Translation, False, False);
+        ITime := ITime + Param1 + Param2;
+      until ITime >= FTime;
+    end;
 
-    case Effect of
-      fxFlash:
+    fxTypewriter:
+    begin
+      CharDur := Rnd((FTime - ITime) / UTF8Length(RemoveTSTags(Text)));
+      SumLen  := UTF8Length(Text);
+
+      Pos1 := 0;
+      while (Pos1 < SumLen) do
       begin
-        repeat
-          Inc(x);
-          CurTime := ITime + Param1;
-          if CurTime > FTime then CurTime := FTime;
-          Result := InsertSubtitle(x, ITime, CurTime, Text, Translation, False, False);
-          ITime := ITime + Param1 + Param2;
-        until ITime >= FTime;
-      end;
-
-      fxTypewriter:
-      begin
-        CharDur := Rnd((FTime - ITime) / UTF8Length(RemoveTSTags(Text)));
-        SumLen  := UTF8Length(Text);
-
-        Pos1 := 0;
-        while (Pos1 < SumLen) do
+        Inc(Pos1);
+        if((UTF8CompareStr(UTF8Copy(Text, Pos1, 1), #13) <> 0) and
+           (UTF8CompareStr(Copy(Text, Pos1, 1), #10) <> 0) and
+           (UTF8CompareStr(Copy(Text, Pos1, 1), ' ') <> 0)
+           ) or (Pos1 = SumLen) then // and (not IsTagPart(Text, Pos1))) or (Pos1 = SumLen) then
         begin
-          Inc(Pos1);
-          if((UTF8CompareStr(UTF8Copy(Text, Pos1, 1), #13) <> 0) and
-             (UTF8CompareStr(Copy(Text, Pos1, 1), #10) <> 0) and
-             (UTF8CompareStr(Copy(Text, Pos1, 1), ' ') <> 0)
-             ) or (Pos1 = SumLen) then // and (not IsTagPart(Text, Pos1))) or (Pos1 = SumLen) then
-          begin
-            Inc(x);
-            s := FixTags(UTF8Copy(Text, 1, Pos1), tst_StartTag, tst_EndTag);
-            Result := InsertSubtitle(x, ITime, ITime+CharDur, s, Translation, False, False);
+          Inc(x);
+          s := FixTags(UTF8Copy(Text, 1, Pos1), tst_StartTag, tst_EndTag);
+          Result := InsertSubtitle(x, ITime, ITime+CharDur, s, Translation, False, False);
 
-            if s = Text then Break; //avoid creating repeated subtitles
+          if s = Text then Break; //avoid creating repeated subtitles
 
-            ITime := ITime + CharDur;
-          end;
+          ITime := ITime + CharDur;
         end;
-        SetSubtitleTime(Result, FinalTime, TAG_CONTROL_FINALTIME, False, False);
       end;
+      SetSubtitleTime(Result, FinalTime, TAG_CONTROL_FINALTIME, False, False);
     end;
   end;
+end;
 
+//----------------------------------------------------------------------------------------------------------------------
+
+{procedure VSTTextEffect(const AVST: TLazVirtualStringTree; const AEffect: TTextEffect; const AParam1, AParam2: Integer);
 var
   FocNode : Integer;
   NewNode : Integer;
@@ -1173,6 +1174,53 @@ begin
 
     DeleteSubtitle(FocNode);
     VSTSelectNode(AVST, NewNode-1, True);
+  end;
+end;}
+
+// -----------------------------------------------------------------------------
+
+procedure VSTTextEffect(const AVST: TLazVirtualStringTree; const AEffect: TTextEffect; const AParam1, AParam2: Integer);
+var
+  FocNode, i, x, n : Integer;
+  OneSel : Boolean;
+  NodeArray : TNodeArray;
+begin
+  if AVST.SelectedCount > 0 then
+  begin
+    NodeArray := AVST.GetSortedSelection(False);
+    if NodeArray = NIL then Exit;
+    OneSel := (AVST.SelectedCount = 1);
+
+    FocNode := 0;
+    for i := High(NodeArray) downto Low(NodeArray) do
+    begin
+      x := AVST.AbsoluteIndex(NodeArray[i]);
+      if not Subtitles.Text[x].IsEmpty then
+      begin
+        n := TextEffect(x,
+               Subtitles[x].InitialTime,
+               Subtitles[x].FinalTime,
+               Subtitles[x].Text,
+               Subtitles[x].Translation,
+               AEffect,
+               AParam1,
+               AParam2);
+
+        DeleteSubtitle(x, False, False);
+        FocNode += n - 1;
+      end;
+    end;
+    SetLength(NodeArray, 0);
+
+    if OneSel then
+      VSTSelectNode(AVST, FocNode, True)
+    else
+      AVST.ClearSelection;
+
+    UndoInstance.IncrementUndoGroup;
+    SubtitleChanged(True, True);
+    UpdateValues(True);
+    DoAutoCheckErrors;
   end;
 end;
 
