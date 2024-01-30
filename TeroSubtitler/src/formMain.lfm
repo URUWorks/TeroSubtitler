@@ -4130,7 +4130,6 @@ object frmMain: TfrmMain
       OnExecute = actTextEffectTypewriterExecute
     end
     object actGenerateBlankVideo: TAction
-      Tag = 1
       Category = 'Video'
       Caption = 'Generate blank video...'
       OnExecute = actGenerateBlankVideoExecute
