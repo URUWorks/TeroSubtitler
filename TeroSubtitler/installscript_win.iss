@@ -10,7 +10,7 @@
 #define VersionBuild
 #define MyAppversion           GetVersionNumbersString(SourcePath + "\bin\" + MyAppExeName)
 #define TestVersion            UnpackVersionComponents(StrToVersion(MyAppversion), VersionMajor, VersionMinor, VersionRevision, VersionBuild)
-#define ShortAppVersion        VersionMajor + VersionMinor + VersionRevision + VersionBuild
+#define ShortAppVersion        str(VersionMajor) + str(VersionMinor) + str(VersionRevision) + str(VersionBuild)
 #define MyAppPublisher         "URUWorks"
 #define MyAppURL               "https://github.com/URUWorks/TeroSubtitler/releases"
 #define MyAppAssocName         MyAppName + " File"
