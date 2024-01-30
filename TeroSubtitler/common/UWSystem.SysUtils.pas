@@ -37,6 +37,7 @@ function Iff(const Condition: Boolean; const TruePart, FalsePart: Byte): Byte; o
 function Iff(const Condition: Boolean; const TruePart, FalsePart: Integer): Integer; overload;
 function Iff(const Condition: Boolean; const TruePart, FalsePart: Cardinal): Cardinal; overload;
 function Iff(const Condition: Boolean; const TruePart, FalsePart: Int64): Int64; overload;
+function Iff(const Condition: Boolean; const TruePart, FalsePart: Single): Single; overload;
 function Iff(const Condition: Boolean; const TruePart, FalsePart: Boolean): Boolean; overload;
 
 function IsInteger(const Value: String): Boolean; overload;
@@ -197,6 +198,16 @@ end;
 // -----------------------------------------------------------------------------
 
 function Iff(const Condition: Boolean; const TruePart, FalsePart: Int64): Int64;
+begin
+  if Condition then
+    Result := TruePart
+  else
+    Result := FalsePart;
+end;
+
+// -----------------------------------------------------------------------------
+
+function Iff(const Condition: Boolean; const TruePart, FalsePart: Single): Single;
 begin
   if Condition then
     Result := TruePart
