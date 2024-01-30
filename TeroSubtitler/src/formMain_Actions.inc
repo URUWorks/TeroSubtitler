@@ -412,7 +412,7 @@ begin
   if Workspace.ViewMode = vmList then
   begin
     if GetMemoFocused = NIL then
-      VSTDoLoop(VST, @ApplyFontColor)
+      VSTDoLoop(VST, @ApplyFontColor, dlSelected, True, True)
     else
       with SubtitleInfo do
         SetTextTagColor(Format('%s%s%s', [IntToHex(GetBValue(LastSubtitle.Color), 2),
@@ -984,14 +984,14 @@ end;
 
 procedure TfrmMain.actReverseTextExecute(Sender: TObject);
 begin
-  VSTDoLoop(VST, @ApplyReverseText);
+  VSTDoLoop(VST, @ApplyReverseText, dlSelected, True, True);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actFixRTLPunctuationExecute(Sender: TObject);
 begin
-  VSTDoLoop(VST, @ApplyFixRTLPunctuation);
+  VSTDoLoop(VST, @ApplyFixRTLPunctuation, dlSelected, True, True);
 end;
 
 // -----------------------------------------------------------------------------

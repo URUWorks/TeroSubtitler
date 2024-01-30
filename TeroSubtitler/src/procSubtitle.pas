@@ -934,7 +934,7 @@ begin
     if Memo <> NIL then
       Memo.SelText := AText
     else
-      VSTDoLoop(frmMain.VST, @ApplyUnicodeChar);
+      VSTDoLoop(frmMain.VST, @ApplyUnicodeChar, dlSelected, True, True);
   end
   else
   begin
@@ -999,23 +999,41 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure SetAlignTo(const AAlign: TSubtitleHAlign);
+var
+  p: PUWSubtitleItem;
 begin
   with frmMain do
     if GetMemoFocused = NIL then
-      VSTDoLoop(VST, @ApplyAlign)
+      VSTDoLoop(VST, @ApplyAlign, dlSelected, True, True)
     else
-      Subtitles.ItemPointer[VSTFocusedNode(VST)]^.Align := AAlign;
+    begin
+      p := Subtitles.ItemPointer[VSTFocusedNode(VST)];
+      if Assigned(p) then
+      begin
+        p^.Align := AAlign;
+        SubtitleChanged(True, True);
+      end;
+    end;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure SetVAlignTo(const AVAlign: TSubtitleVAlign);
+var
+  p: PUWSubtitleItem;
 begin
   with frmMain do
     if GetMemoFocused = NIL then
-      VSTDoLoop(VST, @ApplyVAlign)
+      VSTDoLoop(VST, @ApplyVAlign, dlSelected, True, True)
     else
-      Subtitles.ItemPointer[VSTFocusedNode(VST)]^.VAlign := AVAlign;
+    begin
+      p := Subtitles.ItemPointer[VSTFocusedNode(VST)];
+      if Assigned(p) then
+      begin
+        p^.VAlign := AVAlign;
+        SubtitleChanged(True, True);
+      end;
+    end;
 end;
 
 // -----------------------------------------------------------------------------

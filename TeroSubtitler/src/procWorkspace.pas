@@ -1210,14 +1210,21 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure SetActor;
+var
+  p: PUWSubtitleItem;
 begin
   with frmMain do
     if GetMemoFocused = NIL then
-      VSTDoLoop(VST, @ApplyActor)
+      VSTDoLoop(VST, @ApplyActor, dlSelected, True, True)
     else
     begin
-      Subtitles.ItemPointer[VSTFocusedNode(VST)]^.Actor := cboActor.Text;
-      UpdateValues(True);
+      p := Subtitles.ItemPointer[VSTFocusedNode(VST)];
+      if Assigned(p) then
+      begin
+        p^.Actor := cboActor.Text;
+        SubtitleChanged(True, True);
+        UpdateValues(True);
+      end;
     end;
 end;
 
