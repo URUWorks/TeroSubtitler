@@ -1,3 +1,6 @@
+1.0.1.7 (x.x.2024)
+-fixed: Wrong time values imported in a format variant [SubtitleAPI/TimedText]
+
 1.0.1.6 (29.01.2024)
 - fixed: Crash after changing the divider size #217
 - fixed: Dialogue invisible after minimising then maximising Tero Subtitler #47
