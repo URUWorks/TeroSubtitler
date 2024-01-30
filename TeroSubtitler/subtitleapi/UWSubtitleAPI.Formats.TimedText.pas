@@ -110,7 +110,7 @@ function TUWTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS:
     else if TimeInFormat(S, 'hh:mm:ss:ff') or TimeInFormat(S, 'hh:mm:ss;ff') then
       Result := SMPTEStringToMS(S, aFPS)
     else
-      Result := StringToTime(S, False, aFPS);
+      Result := StringToTime(S, False, iff(TimeInFormat(S, 'hh:mm:ss.zzz'), 0, aFPS));
   end;
 
 var
