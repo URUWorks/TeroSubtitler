@@ -256,7 +256,7 @@ function MPVSaveSubtitleTempTrack: Boolean;
 var
   AFPS : Single;
 begin
-  AFPS      := Workspace.FPS.OutputFPS;
+  AFPS := Workspace.FPS.OutputFPS;
 
   if Workspace.WorkMode = wmTime then
     Subtitles.TimeBase := stbMedia
@@ -291,7 +291,7 @@ function PrepareSSAStyleString: AnsiString;
 
 begin
   with MPVOptions do
-    Result := Format('Default,Arial,%d,%s,%s,%s,%s,0,0,0,0,100,100,0,0,1,1,1,2,10,10,10,1', [TextSize, CorrectColorFormat(TextColor), CorrectColorFormat(TextColor), CorrectColorFormat(TextBorderColor), CorrectColorFormat(TextBackgroundColor)]);
+    Result := Format('Default,Arial,%d,%s,%s,%s,%s,0,0,0,0,100,100,0,0,%d,1,1,2,10,10,10,1', [TextSize, CorrectColorFormat(TextColor), CorrectColorFormat(TextColor), CorrectColorFormat(TextBorderColor), CorrectColorFormat(TextBorderColor), iff(MPVOptions.UseTextBackgroundColor, 3, 1)]);
 end;
 
 // -----------------------------------------------------------------------------
