@@ -3613,7 +3613,7 @@ msgstr "2.35:1"
 
 #: tfrmmain.actvar43.caption
 msgid "4:3"
-msgstr "$:3"
+msgstr "4:3"
 
 #: tfrmmain.actvarcycle.caption
 msgid "Cycle Aspect Ratio"
@@ -5018,4 +5018,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
