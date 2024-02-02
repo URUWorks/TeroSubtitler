@@ -601,6 +601,10 @@ end;
 
 procedure SetSubtitleText(const Index: Integer; const Text: String; const SubtitleMode: TSubtitleMode = smText; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True; const Resent: Boolean = True);
 begin
+  if ((SubtitleMode = smText) and (Subtitles.Text[Index] = Text)) or
+    ((SubtitleMode = smTranslation) and (Subtitles.Translation[Index] = Text)) then
+    Exit;
+
   if Resent then
     UndoInstance.AddUndoIfNotResent(utSubtitleChange, Index, Subtitles[Index], AutoIncrementUndo)
   else
@@ -624,6 +628,9 @@ end;
 
 procedure SetSubtitleTexts(const Index: Integer; const Text: String; const Translation: String; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True; const Resent: Boolean = True);
 begin
+  if (Subtitles.Text[Index] = Text) and (Subtitles.Translation[Index] = Translation) then
+    Exit;
+
   if Resent then
     UndoInstance.AddUndoIfNotResent(utSubtitleChange, Index, Subtitles[Index], AutoIncrementUndo)
   else
@@ -650,6 +657,11 @@ end;
 
 procedure SetSubtitleValues(const Index: Integer; const AInitialTime, AFinalTime: Integer; const Text: String; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
 begin
+  if (Subtitles.InitialTime[Index] = AInitialTime) and
+     (Subtitles.FinalTime[Index] = AFinalTime) and
+     (Subtitles.Text[Index] = Text) then
+    Exit;
+
   UndoInstance.AddUndo(utSubtitleChange, Index, Subtitles[Index], AutoIncrementUndo);
 
   Subtitles.InitialTime[Index] := AInitialTime;

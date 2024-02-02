@@ -482,32 +482,43 @@ end;
 
 function WrapText(const AText: String; const AMaxChrsPerLine: Integer; const ABreakChar: String = sLineBreak): String;
 var
-  sl : TStringList;
-  i, w : Integer;
+  Words : TStringList;
+  CurrentLine : String;
+  i : Integer;
 begin
   if AText.IsEmpty then Exit(AText);
   Result := '';
-  sl := TStringList.Create;
+
+  Words := TStringList.Create;
   try
-    sl.SkipLastLineBreak := True;
-    sl.AddDelimitedText(AText, ' ', True);
-    w := 0;
-    for i := 0 to sl.Count-1 do
+    Words.SkipLastLineBreak := True;
+    Words.AddDelimitedText(AText, ' ', True);
+    CurrentLine := '';
+
+    for i := 0 to Words.Count-1 do
     begin
-      if w + UTF8Length(sl[i]) <= AMaxChrsPerLine then
+      if UTF8Length(CurrentLine + Words[i]) <= AMaxChrsPerLine then
       begin
-        Result += sl[i] + ' ';
-        Inc(w, UTF8Length(sl[i]) + 1);
+        if not CurrentLine.IsEmpty then
+          CurrentLine += ' ';
+
+        CurrentLine += Words[i];
       end
       else
       begin
-        Result := TrimRight(Result) + ABreakChar + sl[i] + ' ';
-        w := UTF8Length(sl[i]) + 1;
+        if Pos('-', Words[i]) > 0 then
+          CurrentLine := CurrentLine + ' ' + Words[i]
+        else
+        begin
+          Result += CurrentLine + ABreakChar;
+          CurrentLine := Words[i];
+        end;
       end;
     end;
-    Result := TrimRight(Result);
+
+    Result += CurrentLine;
   finally
-    sl.Free;
+    Words.Free;
   end;
 end;
 

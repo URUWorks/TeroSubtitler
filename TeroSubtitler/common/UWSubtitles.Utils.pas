@@ -448,19 +448,19 @@ end;
 function UnbreakSubtitles(const Text: String; const BreakChar: String = sLineBreak): String;
 var
   AllLines : Array of String;
-  Line : integer = 0;
+  Line : Integer = 0;
 begin
-  if Pos(BreakChar,Text) = 0 then
+  if Pos(BreakChar, Text) = 0 then
     Exit(Text);
 
-  if Pos('-',Text) = 0 then
+  if Pos('-', Text) = 0 then
     Exit(ReplaceString(Text, BreakChar, ' '));
 
   AllLines := Text.Split([BreakChar]);
   Result := AllLines[0];
 
  for Line := 1 to High(AllLines) do
-   if UTF8LeftStr(AllLines[Line],1)= '-' then
+   if UTF8LeftStr(AllLines[Line], 1)= '-' then
      Result := Result + BreakChar + AllLines[Line]
    else
      Result := Result + ' ' + AllLines[Line];
@@ -565,7 +565,8 @@ end;
 
 function SetMaximumLineLength(const Text: String; const MaxChrs: Integer; const BreakChar: String = sLineBreak): String;
 begin
-  Result := SysUtils.WrapText(UnbreakSubtitles(Text, BreakChar), BreakChar, [',', '.', ';', ':', '-', #9], MaxChrs);
+  //Result := WrapText(UnbreakSubtitles(Text, BreakChar), BreakChar, [' ', ',', '.', ';', ':', #9], MaxChrs);
+  Result := UWSystem.StrUtils.WrapText(UnbreakSubtitles(Text, BreakChar), MaxChrs);
 end;
 
 // -----------------------------------------------------------------------------

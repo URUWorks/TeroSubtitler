@@ -104,7 +104,8 @@ uses
   procConfig, procDialogs, procWorkspace, procVST, procSubtitle, procUndo,
   UWSystem.Encoding, formCustomFileDlg, UWSystem.SysUtils, Forms, procMRU,
   UWSystem.StrUtils, procForms, procProjectFile, formCustomSelectDlg,
-  procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils
+  procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils,
+  UWSubtitleAPI.Tags
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -546,7 +547,7 @@ begin
       txt.Add(iff(SubtitleMode = smText, Subtitles[i].Text, Subtitles[i].Translation) + sLineBreak);
 
     if not Formatted then
-      txt.Text := ReplaceEnters(txt.Text, sLineBreak, ' ');
+      txt.Text := ReplaceEnters(RemoveTSTags(txt.Text), sLineBreak, ' ');
 
     txt.SaveToFile(FileName, AEncoding);
   finally
@@ -1006,8 +1007,8 @@ begin
     try
       SD.Title  := lngSaveFile;
       SD.Filter := lngscShotChanges + ' (*.txt)|*.txt';
-      SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
-      SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
+      SD.FilterIndex := 0;
+      SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '.txt');
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
       if SD.Execute then
       begin
