@@ -1,3 +1,9 @@
 {"version":1,"strings":[
-{"hash":52216343,"name":"tfrmdownload.lbldownload.caption","sourcebytes":[68,111,119,110,108,111,97,100,105,110,103],"value":"Downloading"}
+{"hash":52216343,"name":"tfrmdownload.caption","sourcebytes":[68,111,119,110,108,111,97,100,105,110,103],"value":"Downloading"},
+{"hash":5046922,"name":"tfrmdownload.lblfile.caption","sourcebytes":[70,105,108,101,58],"value":"File:"},
+{"hash":94813050,"name":"tfrmdownload.lblspeed.caption","sourcebytes":[83,112,101,101,100,58],"value":"Speed:"},
+{"hash":42442682,"name":"tfrmdownload.lblelapsed.caption","sourcebytes":[69,108,97,112,115,101,100,58],"value":"Elapsed:"},
+{"hash":134318234,"name":"tfrmdownload.lblremaining.caption","sourcebytes":[82,101,109,97,105,110,105,110,103,58],"value":"Remaining:"},
+{"hash":77089212,"name":"tfrmdownload.btncancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":163615690,"name":"tfrmdownload.lblreceived.caption","sourcebytes":[82,101,99,101,105,118,101,100,58],"value":"Received:"}
 ]}

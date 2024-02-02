@@ -1765,30 +1765,25 @@ var
   sNew, sOld: String;
   FileVerInfo: TFileVersionInfo;
 begin
-  with TDownloader.Create do
-  try
-    if DownloadToString(ProgramUpdateURL, sNew) then
-    begin
-      FileVerInfo := TFileVersionInfo.Create(NIL);
-      try
-        FileVerInfo.ReadFileInfo;
-        sOld := FileVerInfo.VersionStrings.Values['FileVersion'];
-        if (sNew.Trim > sOld.Trim) then // New version available
-        begin
-          if CustomQuestionDialog(lngNewVersionFound, lngSeeChangeList, [dbYes, dbNo]) = mrYes then
-            OpenURL(ProgramReleaseURL);
-        end
-        else // you're using latest version
-          ShowMessageDialog(lngNoNewVersion);
-      finally
-        FileVerInfo.Free;
-      end;
-    end
-    else // no internet or file lost?
-      ShowErrorMessageDialog(lngFailedToDownload);
-  finally
-    Free;
-  end;
+  if DownloadToString(ProgramUpdateURL, sNew) then
+  begin
+    FileVerInfo := TFileVersionInfo.Create(NIL);
+    try
+      FileVerInfo.ReadFileInfo;
+      sOld := FileVerInfo.VersionStrings.Values['FileVersion'];
+      if (sNew.Trim > sOld.Trim) then // New version available
+      begin
+        if CustomQuestionDialog(lngNewVersionFound, lngSeeChangeList, [dbYes, dbNo]) = mrYes then
+          OpenURL(ProgramReleaseURL);
+      end
+      else // you're using latest version
+        ShowMessageDialog(lngNoNewVersion);
+    finally
+      FileVerInfo.Free;
+    end;
+  end
+  else // no internet or file lost?
+    ShowErrorMessageDialog(lngFailedToDownload);
 end;
 
 // -----------------------------------------------------------------------------

@@ -60,6 +60,7 @@ resourcestring
   lngTextFormatted = 'Export formatted text?';
   lngNoInternetConnection = 'No Internet connection available';
   lngFailedToDownload = 'No content downloaded, missing file or no Internet connection.';
+  lngDownloadCanceled = 'Download canceled by user.';
   lngAskToExtractAudio = 'Audio waveform was not found, do you want to extract it?';
   lngExtractAppError = 'Unable to find “%s”. Check in settings if it is configured correctly.';
   lngExtracting = 'Extracting...';

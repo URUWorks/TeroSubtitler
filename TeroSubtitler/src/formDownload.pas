@@ -29,24 +29,36 @@ type
 
   { TfrmDownload }
 
+  TDownloadResult = (dfCompleted, dfCanceled, dfError);
+
   TfrmDownload = class(TForm)
-    lblInfo: TLabel;
-    lblDownload: TLabel;
-    prbDownload: TProgressBar;
+    btnCancel: TButton;
+    lblFile: TLabel;
+    lblFileData: TLabel;
+    lblReceived: TLabel;
+    lblReceivedData: TLabel;
+    lblSpeedData: TLabel;
+    lblElapsedData: TLabel;
+    lblRemainingData: TLabel;
+    lblSpeed: TLabel;
+    lblElapsed: TLabel;
+    lblRemaining: TLabel;
+    procedure btnCancelClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
-    FDownloader: TDownloader;
-    FURL, FFolder: String;
-    FDownloaded: Boolean;
-    procedure DoOnWriteStream(Sender: TObject; APosition: Int64);
+    FDownloader: TDownload;
+    FURL, FLocalFile: String;
+    FDownloaded: TDownloadResult;
+    procedure DoOnDownloadProgress(Sender: TObject; const AFrom, ATo: String; const APos, ASize, AElapsed, ARemaining, ASpeed: LongInt);
+    procedure DoOnDownloadCompleted(Sender: TObject);
   public
-    function Execute(const AURL, AFolder: String): Boolean;
+    function Execute(const AURL, ALocalFile: String): TDownloadResult;
   end;
 
-function ShowDownloadDialog(const AURL, AFolder: String): Boolean;
+  function ShowDownloadDialog(const AURL, ALocalFile: String; const ADeleteFileOnCancel: Boolean = True): TDownloadResult;
 
 var
   frmDownload: TfrmDownload;
@@ -56,7 +68,8 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procDialogs, procColorTheme, Zipper;
+  procTypes, procWorkspace, procDialogs, procColorTheme, Zipper,
+  UWSystem.TimeUtils;
 
 {$R *.lfm}
 
@@ -90,14 +103,18 @@ end;
 
 procedure TfrmDownload.FormCreate(Sender: TObject);
 begin
-  FDownloader := TDownloader.Create;
+  FDownloader := TDownload.Create;
+  FDownloader.OnDownloadProgress := @DoOnDownloadProgress;
+  FDownloader.OnDownloadCompleted := @DoOnDownloadCompleted;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmDownload.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-  FDownloader.Free;
+  if Assigned(FDownloader) then
+    FDownloader.CancelDownload;
+
   CloseAction := caFree;
   frmDownload := NIL;
 end;
@@ -114,46 +131,89 @@ end;
 procedure TfrmDownload.FormActivate(Sender: TObject);
 begin
   Application.ProcessMessages;
-  if FDownloader.DownloadToFile(FURL, FFolder, @DoOnWriteStream) then
-  begin
-    FDownloaded := True;
-    if FFolder.EndsWith('.zip') then
-    begin
-      UnZipFile(FFolder, ExtractFileDir(FFolder));
-      DeleteFile(FFolder);
-    end;
-  end;
+  FDownloader.DownloadToFile(FURL, FLocalFile);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmDownload.btnCancelClick(Sender: TObject);
+begin
+  FDownloaded := dfCanceled;
   Close;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmDownload.DoOnWriteStream(Sender: TObject; APosition: Int64);
-begin
-  lblInfo.Caption := FDownloader.SizeToString(APosition);
-  Application.ProcessMessages;
-end;
-
-// -----------------------------------------------------------------------------
-
-function TfrmDownload.Execute(const AURL, AFolder: String): Boolean;
+function TfrmDownload.Execute(const AURL, ALocalFile: String): TDownloadResult;
 begin
   FURL        := AURL;
-  FFolder     := AFolder;
-  FDownloaded := False;
+  FLocalFile  := ALocalFile;
+  FDownloaded := dfError;
   ShowModal;
   Result := FDownloaded;
 end;
 
 // -----------------------------------------------------------------------------
 
-function ShowDownloadDialog(const AURL, AFolder: String): Boolean;
+procedure TfrmDownload.DoOnDownloadProgress(Sender: TObject; const AFrom, ATo: String; const APos, ASize, AElapsed, ARemaining, ASpeed: LongInt);
+begin
+  lblFileData.Caption := ExtractFileName(ATo);
+
+  lblSpeedData.Caption := FormatSpeed(ASpeed);
+  lblSpeedData.Update;
+
+  lblElapsedData.Caption := TimeToString(AElapsed);
+  lblElapsedData.Update;
+
+  if ASize > 0 then
+    lblRemainingData.Caption := TimeToString(ARemaining)
+  else
+    lblRemainingData.Caption := '';
+
+  lblRemainingData.Update;
+
+  if ASize > 0 then
+    lblReceivedData.Caption := FormatSize(APos) + ' / ' + FormatSize(ASize)
+  else
+    lblReceivedData.Caption := FormatSize(APos);
+
+  lblReceived.Update;
+
+  Application.ProcessMessages;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmDownload.DoOnDownloadCompleted(Sender: TObject);
+begin
+  FDownloaded := dfCompleted;
+  btnCancel.Enabled := False;
+
+  if FLocalFile.EndsWith('.zip') then
+  begin
+    UnZipFile(FLocalFile, ExtractFileDir(FLocalFile));
+    DeleteFile(FLocalFile);
+  end;
+
+  Close;
+end;
+
+// -----------------------------------------------------------------------------
+
+function ShowDownloadDialog(const AURL, ALocalFile: String; const ADeleteFileOnCancel: Boolean = True): TDownloadResult;
 begin
   with TfrmDownload.Create(NIL) do
   try
-    Result := Execute(AURL, AFolder);
-    if not Result then
-      ShowErrorMessageDialog(lngFailedToDownload);
+    Result := Execute(AURL, ALocalFile);
+    if Result = dfError then
+      ShowErrorMessageDialog(lngFailedToDownload)
+    else if Result = dfCanceled then
+    begin
+      if ADeleteFileOnCancel and FileExists(ALocalFile) then
+        DeleteFile(ALocalFile);
+
+      ShowErrorMessageDialog(lngDownloadCanceled);
+    end;
   finally
     Free;
   end;

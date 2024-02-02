@@ -38,7 +38,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
-
+    procedure SetControlsEnabled(const AValue: Boolean);
   public
 
   end;
@@ -59,7 +59,7 @@ var
 implementation
 
 uses
-  procWorkspace, procConfig, procTypes, formDownload;
+  procWorkspace, procConfig, procTypes, formDownload, UWSystem.InetUtils;
 
 const
   Models: TModels =
@@ -104,7 +104,7 @@ const
     (Name: 'large-v3'; Size: '3.1 GB'; URL: 'https://huggingface.co/Systran/faster-whisper-large-v3/resolve/main/')
   );
 
-  FasterModelFiles: array[0..3] of String = ('model.bin', 'config.json', 'vocabulary.txt', 'tokenizer.json');
+  FasterModelFiles: array[0..5] of String = ('config.json', 'model.bin', 'preprocessor_config.json', 'tokenizer.json', 'vocabulary.json', 'vocabulary.txt');
 
 var
   ModelsToUse: TModels;
@@ -170,24 +170,43 @@ end;
 
 procedure TfrmAudioToTextModel.btnDownloadClick(Sender: TObject);
 var
-  s, d: String;
+  s, d, f: String;
   i: Integer;
 begin
-  if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
-  begin
-    s := ConcatPaths([WhisperModelsFolder, ModelsToUse[cboModel.ItemIndex].Name+'.bin']);
-    ShowDownloadDialog(ModelsToUse[cboModel.ItemIndex].URL, s);
-  end
-  else
-  begin
-    d := ConcatPaths([WhisperModelsFolder, 'faster-whisper-' + ModelsToUse[cboModel.ItemIndex].Name]);
-    CreateDir(d);
-    for i := 0 to Length(FasterModelFiles)-1 do
+  SetControlsEnabled(False);
+  try
+    if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
     begin
-      s := ConcatPaths([d, FasterModelFiles[i]]);
-      ShowDownloadDialog(ModelsToUse[cboModel.ItemIndex].URL + FasterModelFiles[i], s);
+      s := ConcatPaths([WhisperModelsFolder, ModelsToUse[cboModel.ItemIndex].Name+'.bin']);
+      ShowDownloadDialog(ModelsToUse[cboModel.ItemIndex].URL, s);
+    end
+    else
+    begin
+      d := ConcatPaths([WhisperModelsFolder, 'faster-whisper-' + ModelsToUse[cboModel.ItemIndex].Name]);
+      CreateDir(d);
+      for i := 0 to Length(FasterModelFiles)-1 do
+      begin
+        s := ConcatPaths([d, FasterModelFiles[i]]);
+        f := ModelsToUse[cboModel.ItemIndex].URL + FasterModelFiles[i];
+        if FileExistsInServer(f) then
+        begin
+          if ShowDownloadDialog(f, s) <> dfCompleted then
+            Break;
+        end;
+      end;
     end;
+  finally
+    SetControlsEnabled(True);
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAudioToTextModel.SetControlsEnabled(const AValue: Boolean);
+begin
+  cboModel.Enabled := AValue;
+  btnDownload.Enabled := AValue;
+  btnClose.Enabled := AValue;
 end;
 
 // -----------------------------------------------------------------------------

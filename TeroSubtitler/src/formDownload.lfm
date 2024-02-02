@@ -1,11 +1,12 @@
 object frmDownload: TfrmDownload
   Left = 242
-  Height = 83
+  Height = 152
   Top = 113
   Width = 400
   BorderIcons = []
   BorderStyle = bsSingle
-  ClientHeight = 83
+  Caption = 'Downloading'
+  ClientHeight = 152
   ClientWidth = 400
   FormStyle = fsStayOnTop
   OnActivate = FormActivate
@@ -14,35 +15,115 @@ object frmDownload: TfrmDownload
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '3.0.0.3'
-  object lblDownload: TLabel
-    Left = 0
-    Height = 32
-    Top = 0
-    Width = 400
-    Alignment = taCenter
-    AutoSize = False
-    Caption = 'Downloading'
-    Font.Style = [fsBold]
-    Layout = tlCenter
-    ParentColor = False
-    ParentFont = False
-  end
-  object prbDownload: TProgressBar
+  object lblFile: TLabel
+    AnchorSideTop.Side = asrBottom
     Left = 8
-    Height = 8
-    Top = 64
-    Width = 384
-    Style = pbstMarquee
-    TabOrder = 0
+    Height = 15
+    Top = 8
+    Width = 21
+    BorderSpacing.Top = 10
+    Caption = 'File:'
   end
-  object lblInfo: TLabel
-    Left = 0
-    Height = 32
-    Top = 32
-    Width = 400
-    Alignment = taCenter
-    AutoSize = False
-    Layout = tlCenter
-    ParentColor = False
+  object lblSpeed: TLabel
+    AnchorSideLeft.Control = lblFile
+    AnchorSideTop.Control = lblFile
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 28
+    Width = 35
+    BorderSpacing.Top = 5
+    Caption = 'Speed:'
+  end
+  object lblElapsed: TLabel
+    AnchorSideLeft.Control = lblFile
+    AnchorSideTop.Control = lblSpeed
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 48
+    Width = 43
+    BorderSpacing.Top = 5
+    Caption = 'Elapsed:'
+  end
+  object lblRemaining: TLabel
+    AnchorSideLeft.Control = lblFile
+    AnchorSideTop.Control = lblElapsed
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 68
+    Width = 60
+    BorderSpacing.Top = 5
+    Caption = 'Remaining:'
+  end
+  object lblFileData: TLabel
+    AnchorSideTop.Control = lblFile
+    Left = 120
+    Height = 1
+    Top = 8
+    Width = 1
+  end
+  object lblSpeedData: TLabel
+    AnchorSideLeft.Control = lblFileData
+    AnchorSideTop.Control = lblSpeed
+    Left = 120
+    Height = 1
+    Top = 28
+    Width = 1
+  end
+  object lblElapsedData: TLabel
+    AnchorSideLeft.Control = lblFileData
+    AnchorSideTop.Control = lblElapsed
+    Left = 120
+    Height = 1
+    Top = 48
+    Width = 1
+  end
+  object lblRemainingData: TLabel
+    AnchorSideLeft.Control = lblFileData
+    AnchorSideTop.Control = lblRemaining
+    Left = 120
+    Height = 1
+    Top = 68
+    Width = 1
+  end
+  object btnCancel: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 301
+    Height = 26
+    Top = 118
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Cancel = True
+    Caption = 'Cancel'
+    TabOrder = 0
+    OnClick = btnCancelClick
+  end
+  object lblReceived: TLabel
+    AnchorSideLeft.Control = lblFile
+    AnchorSideTop.Control = lblRemaining
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 88
+    Width = 50
+    BorderSpacing.Top = 5
+    Caption = 'Received:'
+  end
+  object lblReceivedData: TLabel
+    AnchorSideLeft.Control = lblFileData
+    AnchorSideTop.Control = lblRemaining
+    AnchorSideTop.Side = asrBottom
+    Left = 120
+    Height = 1
+    Top = 88
+    Width = 1
+    BorderSpacing.Top = 5
   end
 end
