@@ -160,17 +160,11 @@ const
 
 function CallGoogleTranslate(const AURL: String): TJSONStringType;
 var
-  Client  : TDownloader;
   AString : String;
 begin
   Result := '';
-  Client := TDownloader.Create;
-  try
-    if Client.DownloadToString(AURL, AString) then
-      Result := AString;
-  finally
-    Client.Free;
-  end;
+  if DownloadToString(AURL, AString) then
+    Result := AString;
 end;
 
 // -----------------------------------------------------------------------------
