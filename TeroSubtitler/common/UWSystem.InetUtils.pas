@@ -20,17 +20,12 @@ unit UWSystem.InetUtils;
 
 {$mode objfpc}{$H+}
 
-{$IFDEF DARWIN}
-  {$modeswitch ObjectiveC1}
-{$ENDIF}
-
 // -----------------------------------------------------------------------------
 
 interface
 
 uses
-  Classes, SysUtils, fphttpclient, opensslsockets
-  {$IFDEF DARWIN}, CocoaAll{$ENDIF};
+  Classes, SysUtils, FileUtil, fphttpclient, opensslsockets;
 type
 
   { TCheckInternet }
@@ -59,30 +54,158 @@ type
     property OnWriteStream: TOnWriteStream read FOnWriteStream write FOnWriteStream;
   end;
 
-  { TDownloader }
+  { TDownload }
 
-  TDownloader = class
+  TOnDownloadProgress = procedure(Sender: TObject; const AFrom, ATo: String; const APos, ASize, AElapsed, ARemaining, ASpeed: LongInt) of object;
+  TOnDownloadError = procedure(Sender: TObject; const AErrMsg: String = '') of object;
+  TOnDownloadCompleted = TNotifyEvent;
+
+  TDownload = class(TThread)
   private
-    {$IFDEF DARWIN}
-    FTimeOut: Integer;
-    {$ELSE}
-    FHTTPClient: TFPHTTPClient;
-    {$ENDIF}
-    FMethod: String;
-    function DoRequest(const AURL: String; AStream: TStream; AOnWrite: TOnWriteStream = NIL): Boolean;
+    FFPHTTPClient: TFPHTTPClient;
+    FURL: String;
+    FLocalFile: String;
+    FRemaining: Integer;
+    FSpeed: Integer;
+    FStartTime: QWord;
+    FElapsed: QWord;
+    FTick: Qword;
+    FPos: Int64;
+    FSize: Int64;
+    FErrMsg: String;
+    FOnDownloadProgress: TOnDownloadProgress;
+    FOnDownloadError: TOnDownloadError;
+    FOnDownloadCompleted: TOnDownloadCompleted;
+    function GetContentLength: Boolean;
+    procedure DoOnDataReceived(Sender: TObject; const ContentLength, {%H-}CurrentPos: Int64);
+    procedure DoOnWriteStream(Sender: TObject; APos: Int64);
+    procedure DoOnDownloadProgress;
+    procedure DoOnDownloadError;
+    procedure DoOnDownloadCompleted;
+  protected
+    procedure Execute; override;
   public
     constructor Create;
     destructor Destroy; override;
-    function DownloadToFile(const AURL, AOutFileName: String; AOnWrite: TOnWriteStream = NIL): Boolean;
-    function DownloadToString(const AURL: String; out AString: String): Boolean;
-    function SizeToString(const Size: Int64): String;
+    procedure CancelDownload;
+    procedure DownloadToFile(const AURL, ALocalFile: String);
+  public
+    property OnDownloadProgress: TOnDownloadProgress read FOnDownloadProgress write FOnDownloadProgress;
+    property OnDownloadError: TOnDownloadError read FOnDownloadError write FOnDownloadError;
+    property OnDownloadCompleted: TOnDownloadCompleted read FOnDownloadCompleted write FOnDownloadCompleted;
   end;
 
+function FileExistsInServer(AURL: String): Boolean;
+function DownloadToString(AURL: String; out AString: String): Boolean;
 function IsInternetAlive: Boolean;
+
+// Helpers
+function FormatSize(const Size: Int64): String;
+function FormatSpeed(const Speed: LongInt): String;
 
 // -----------------------------------------------------------------------------
 
 implementation
+
+// -----------------------------------------------------------------------------
+
+{ Helpers }
+
+// -----------------------------------------------------------------------------
+
+function FormatSize(const Size: Int64): String;
+const
+  KB = 1024;
+  MB = KB * KB;
+  GB = KB * MB;
+begin
+  if Size < KB then
+    Result := FormatFloat('#,##0 Bytes', Size)
+  else if Size < MB then
+    Result := FormatFloat('#,##0.0 KB', Size / KB)
+  else if Size < GB then
+    Result := FormatFloat('#,##0.0 MB', Size / MB)
+  else
+    Result := FormatFloat('#,##0.0 GB', Size / GB);
+end;
+
+// -----------------------------------------------------------------------------
+
+function FormatSpeed(const Speed: LongInt): String;
+const
+  KB = 1024;
+  MB = KB * KB;
+  GB = KB * MB;
+begin
+  if Speed < KB then
+    Result := FormatFloat('#,##0 bits/s', Speed)
+  else if Speed < MB then
+    Result := FormatFloat('#,##0.0 kB/s', Speed / KB)
+  else if Speed < GB then
+    Result := FormatFloat('#,##0.0 MB/s', Speed / MB)
+  else
+    Result := FormatFloat('#,##0.0 GB/s', Speed / GB);
+end;
+
+// -----------------------------------------------------------------------------
+
+function FixProtocol(const AURL: String): String;
+begin
+  Result := AURL;
+  if (Pos('http://', Result) = 0) and (Pos('https://', Result) = 0) then
+    Result := 'https://' + Result;
+end;
+
+// -----------------------------------------------------------------------------
+
+function FileExistsInServer(AURL: String): Boolean;
+var
+  HTTPClient: TFPHTTPClient;
+begin
+  Result := False;
+  AURL := FixProtocol(AURL);
+  HTTPClient := TFPHTTPClient.Create(NIL);
+  try
+    HTTPClient.AllowRedirect := True;
+
+    try
+      HTTPClient.HTTPMethod('HEAD', AURL, NIL, []);
+    except
+      Exit;
+    end;
+
+    if HTTPClient.ResponseStatusCode = 404 then // file not exists
+      Exit;
+
+    Result := True;
+  finally
+    HTTPClient.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function DownloadToString(AURL: String; out AString: String): Boolean;
+var
+  HTTPClient: TFPHTTPClient;
+begin
+  Result := False;
+  AURL := FixProtocol(AURL);
+
+  HTTPClient := TFPHTTPClient.Create(NIL);
+  try
+    HTTPClient.AllowRedirect := True;
+    HTTPClient.AddHeader('User-Agent', 'Mozilla/5.0(compatible; fpweb)');
+    try
+      AString := HTTPClient.Get(AURL);
+      Result := True;
+    except
+      AString := '';
+    end;
+  finally
+    HTTPClient.Free;
+  end;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -129,7 +252,7 @@ end;
 
 destructor TDownloadStream.Destroy;
 begin
-  FStream := NIL;
+  FStream.Free;
   inherited Destroy;
 end;
 
@@ -160,145 +283,193 @@ end;
 procedure TDownloadStream.DoProgress;
 begin
   if Assigned(FOnWriteStream) then
-    FOnWriteStream(Self, Self.Position);
+    FOnWriteStream(Self, Position);
 end;
 
 // -----------------------------------------------------------------------------
 
-{ TDownloader }
+{ TDownload }
 
 // -----------------------------------------------------------------------------
 
-constructor TDownloader.Create;
+constructor TDownload.Create;
 begin
-  {$IFDEF DARWIN}
-  FTimeOut := 30;
-  {$ELSE}
-  FHTTPClient := TFPHTTPClient.Create(NIL);
-  {$ENDIF}
-  FMethod := 'GET';
+  inherited Create(True);
+  FreeOnTerminate := True;
+  FFPHTTPClient := TFPHTTPClient.Create(NIL);
 end;
 
 // -----------------------------------------------------------------------------
 
-destructor TDownloader.Destroy;
+destructor TDownload.Destroy;
 begin
-  {$IFNDEF DARWIN}
-  FHTTPClient.Free;
-  {$ENDIF}
+  FFPHTTPClient.Free;
   inherited Destroy;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TDownloader.DoRequest(const AURL: String; AStream: TStream; AOnWrite: TOnWriteStream = NIL): Boolean;
+procedure TDownload.DownloadToFile(const AURL, ALocalFile: String);
+begin
+  FURL := FixProtocol(AURL);
+  FLocalFile := ALocalFile;
+  Start;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TDownload.CancelDownload;
+begin
+  if Assigned(FFPHTTPClient) then
+    FFPHTTPClient.Terminate;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TDownload.DoOnDataReceived(Sender: TObject; const ContentLength, CurrentPos: Int64);
+begin
+  if ContentLength > 0 then
+    Abort;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TDownload.DoOnWriteStream(Sender: TObject; APos: Int64);
+begin
+  FElapsed := GetTickCount64 - FStartTime;
+  if FElapsed < 1000 then
+    Exit;
+
+  FPos := APos;
+  FSpeed := Round(FPos/FElapsed);
+
+  if FSpeed > 0 then
+    FRemaining := Round((FSize - FPos)/FSpeed);
+
+  if FElapsed >= FTick + 1 then
+  begin
+    FTick := FElapsed;
+    Synchronize(@DoOnDownloadProgress);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TDownload.DoOnDownloadProgress;
+begin
+  if Assigned(FOnDownloadProgress) then
+    FOnDownloadProgress(Self, FURL, FLocalFile, FPos, FSize, FElapsed, FRemaining, FSpeed);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TDownload.DoOnDownloadError;
+begin
+  if Assigned(FOnDownloadError) then
+    FOnDownloadError(Self, FErrMsg);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TDownload.DoOnDownloadCompleted;
+begin
+  if Assigned(FOnDownloadCompleted) then
+    FOnDownloadCompleted(Self);
+end;
+
+// -----------------------------------------------------------------------------
+
+function TDownload.GetContentLength: Boolean;
 var
-  {$IFDEF DARWIN}
-  urlRequest  : NSMutableURLRequest;
-  requestData : NSMutableData;
-  HdrNum      : Integer;
-  urlResponse : NSURLResponse;
-  error       : NSError;
-  urlData     : NSData;
-  {$ENDIF}
-  FDS: TDownloadStream;
+  SS: TStringStream;
+  HttpClient: TFPHTTPClient;
+  URL: String;
 begin
   Result := False;
-  if not Assigned(AStream) then Exit;
-
-  FDS := TDownloadStream.Create(AStream);
+  FSize := 0;
+  SS := TStringStream.Create('');
   try
-    FDS.FOnWriteStream := AOnWrite;
+    URL := FixProtocol(FURL);
+    HttpClient := TFPHTTPClient.Create(NIL);
     try
-      {$IFDEF DARWIN}
-      urlRequest := NSMutableURLRequest.requestWithURL_cachePolicy_timeoutInterval(
-                      NSURL.URLWithString(NSSTR(AURL)),
-                      NSURLRequestUseProtocolCachePolicy, FTimeOut);
+      HttpClient.AllowRedirect := True;
 
-      if FMethod <> '' then
-        urlRequest.setHTTPMethod(NSSTR(FMethod));
-
-      urlData := NSURLConnection.sendSynchronousRequest_returningResponse_error(
-                   urlRequest, @urlResponse, @error);
-
-      if not Assigned(urlData) then
+      HttpClient.HTTPMethod('HEAD', URL, NIL, []);
+      if HttpClient.ResponseStatusCode = 404 then // file not exists
         Exit;
 
-      FDS.Position := 0;
-      FDS.WriteBuffer(urlData.bytes^, urlData.length);
-      FDS.Position := 0;
-      {$ELSE}
-      FDS.Position := 0;
-      FHTTPClient.AllowRedirect := True;
-      FHTTPClient.HTTPMethod(FMethod, AURL, FDS, [200]);
-      {$ENDIF}
-
-      Result := FDS.Size > 0;
-    except
-      on E: Exception do
-      begin
-        //WriteLn('Exception occurred: ' +  E.ClassName +  sLineBreak +  E.Message);
+      HttpClient.OnDataReceived := @DoOnDataReceived;
+      HttpClient.ResponseHeaders.NameValueSeparator := ':';
+      try
+        HttpClient.HTTPMethod('GET', URL, SS, []);
+      except
       end;
+      if HttpClient.ResponseStatusCode = 200 then
+        FSize := StrToInt64Def(HttpClient.ResponseHeaders.Values['CONTENT-LENGTH'], 0);
+
+      Result := True;
+    finally
+      HttpClient.Free;
     end;
   finally
-    FDS.Free;
+    SS.Free
   end;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TDownloader.DownloadToFile(const AURL, AOutFileName: String; AOnWrite: TOnWriteStream = NIL): Boolean;
+procedure TDownload.Execute;
 var
-  Dir: String;
-  AStream: TFileStream;
+  DS: TDownloadStream;
+  Flags: Word;
 begin
-  Dir := ExtractFileDir(AOutFileName);
-  if not Dir.IsEmpty and not DirectoryExists(Dir) then
-    if not ForceDirectories(Dir) then
-      Exit(False);
+  FStartTime := GetTickCount64;
+  if GetContentLength then
+  begin
+    Flags := fmOpenWrite;
 
-  AStream := TFileStream.Create(AOutFileName, fmCreate);
-  try
-    Result := DoRequest(AURL, AStream, AOnWrite);
-  finally
-    AStream.Free;
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-function TDownloader.DownloadToString(const AURL: String; out AString: String): Boolean;
-var
-  AStream : TStringStream;
-begin
-  AStream := TStringStream.Create;
-  try
-    Result := DoRequest(AURL, AStream);
-    if Result then
-      AString := AStream.DataString
+    if not FileExists(FLocalFile) then
+    begin
+      FPos := 0;
+      Flags := Flags or fmCreate;
+    end
     else
-      AString := '';
-  finally
-    AStream.Free;
-  end;
-end;
+      FPos := FileUtil.FileSize(FLocalFile);
 
-// -----------------------------------------------------------------------------
+    DS := TDownloadStream.Create(TFileStream.Create(FLocalFile, Flags));
+    try
+      DS.FOnWriteStream := @DoOnWriteStream;
+      try
+        if (FPos > 0) and (FPos < FSize) then
+        begin
+          DS.Position := FPos;
+          FFPHTTPClient.AddHeader('Range', 'bytes=' + IntToStr(FPos) + '-' + IntToStr(FSize));
+        end;
 
-function TDownloader.SizeToString(const Size: Int64): String;
-const
-  KB = 1024;
-  MB = 1024 * KB;
-  GB = 1024 * MB;
-begin
-  if Size < KB then
-    Result := FormatFloat('#,##0 Bytes', Size)
-  else if Size < MB then
-    Result := FormatFloat('#,##0.0 KB', Size / KB)
-  else if Size < GB then
-    Result := FormatFloat('#,##0.0 MB', Size / MB)
+        FFPHTTPClient.AddHeader('User-Agent','Mozilla/5.0 (compatible; fpweb)');
+        FFPHTTPClient.AllowRedirect := True;
+        FFPHTTPClient.HTTPMethod('GET', FURL, DS, [200, 206]);
+        if not FFPHTTPClient.Terminated then
+        begin
+          Synchronize(@DoOnDownloadProgress);
+          Synchronize(@DoOnDownloadCompleted);
+        end;
+      except
+        on E: Exception do
+        begin
+          FErrMsg := E.Message;
+          Synchronize(@DoOnDownloadError);
+        end;
+      end;
+    finally
+      DS.Free
+    end;
+  end
   else
-    Result := FormatFloat('#,##0.0 GB', Size / GB);
+  begin
+    FErrMsg := '404';
+    Synchronize(@DoOnDownloadError);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
