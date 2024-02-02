@@ -262,6 +262,10 @@ msgstr "Detección automática"
 msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "Intentar detectar segmentos de diálogo elimina todos las entradas de la lista."
 
+#: proclocalize.lngdownloadcanceled
+msgid "Download canceled by user."
+msgstr "Descarga cancelada por el usuario."
+
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"
@@ -1913,9 +1917,35 @@ msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Solo entradas seleccionadas"
 
-#: tfrmdownload.lbldownload.caption
+#: tfrmdownload.btncancel.caption
+msgctxt "tfrmdownload.btncancel.caption"
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: tfrmdownload.caption
+msgctxt "tfrmdownload.caption"
 msgid "Downloading"
 msgstr "Descargando"
+
+#: tfrmdownload.lblelapsed.caption
+msgid "Elapsed:"
+msgstr "Transcurrido:"
+
+#: tfrmdownload.lblfile.caption
+msgid "File:"
+msgstr "Archivo:"
+
+#: tfrmdownload.lblreceived.caption
+msgid "Received:"
+msgstr "Recibido:"
+
+#: tfrmdownload.lblremaining.caption
+msgid "Remaining:"
+msgstr "Restante:"
+
+#: tfrmdownload.lblspeed.caption
+msgid "Speed:"
+msgstr "Velocidad:"
 
 #: tfrmdurationlimits.btnapply.caption
 msgctxt "tfrmdurationlimits.btnapply.caption"
@@ -5023,4 +5053,3 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-

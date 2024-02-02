@@ -263,6 +263,10 @@ msgstr "Автоматически"
 msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "При попытке обнаружить сегменты диалога все субтитры удаляются из списка."
 
+#: proclocalize.lngdownloadcanceled
+msgid "Download canceled by user."
+msgstr ""
+
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"
@@ -1915,9 +1919,37 @@ msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Только выделенным субтитрам"
 
-#: tfrmdownload.lbldownload.caption
+#: tfrmdownload.btncancel.caption
+#, fuzzy
+msgctxt "tfrmdownload.btncancel.caption"
+msgid "Cancel"
+msgstr "Отменить"
+
+#: tfrmdownload.caption
+#, fuzzy
+msgctxt "tfrmdownload.caption"
 msgid "Downloading"
 msgstr "Скачивание"
+
+#: tfrmdownload.lblelapsed.caption
+msgid "Elapsed:"
+msgstr ""
+
+#: tfrmdownload.lblfile.caption
+msgid "File:"
+msgstr ""
+
+#: tfrmdownload.lblreceived.caption
+msgid "Received:"
+msgstr ""
+
+#: tfrmdownload.lblremaining.caption
+msgid "Remaining:"
+msgstr ""
+
+#: tfrmdownload.lblspeed.caption
+msgid "Speed:"
+msgstr ""
 
 #: tfrmdurationlimits.btnapply.caption
 msgctxt "tfrmdurationlimits.btnapply.caption"
