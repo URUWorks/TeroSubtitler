@@ -108,7 +108,7 @@ begin
     begin
       if Profile.PauseInFrames then
       begin
-        if (Subtitles.Pause[i] < FramesToTime(Profile.MinPause, AFPS)) then
+        if (FramesToTime(Subtitles.PauseFrames[i, AFPS], AFPS) < FramesToTime(Profile.MinPause, AFPS)) then //if (Subtitles.Pause[i] < FramesToTime(Profile.MinPause, AFPS)) then
           AddQCItem(i, qcGAP);
       end
       else

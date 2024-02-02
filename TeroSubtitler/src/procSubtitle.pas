@@ -669,9 +669,7 @@ end;
 function GetCorrectTime(const ATime: Integer; AIsFrames: Boolean): Integer;
 begin
   if AIsFrames then
-  begin
-    Result := FramesToTime(ATime, Workspace.FPS.OutputFPS);
-  end
+    Result := FramesToTime(ATime, Workspace.FPS.OutputFPS)
   else
     Result := ATime;
 end;
@@ -679,15 +677,16 @@ end;
 // -----------------------------------------------------------------------------
 
 function GetCorrectPause(const AIndex: Integer): Integer;
-var
-  it, ft: Integer;
+//var
+//  it, ft: Integer;
 begin
   if Workspace.WorkMode = wmTime then
     Result := Subtitles.Pause[AIndex]
   else
   begin
-    RoundFramesValue(Subtitles[AIndex+1].InitialTime, Subtitles[AIndex].FinalTime, Workspace.FPS.OutputFPS, it, ft);
-    Result := it-ft;
+    Result := FramesToTime(Subtitles.PauseFrames[AIndex, Workspace.FPS.OutputFPS], Workspace.FPS.OutputFPS);
+//    RoundFramesValue(Subtitles[AIndex+1].InitialTime, Subtitles[AIndex].FinalTime, Workspace.FPS.OutputFPS, it, ft);
+//    Result := it-ft;
   end;
 end;
 
