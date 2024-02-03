@@ -3,6 +3,7 @@
 - fixed: Some properties are not reflected when "mpv handles subtitles for preview" option is active
 - updated: Italian language (thx GitGianluc)
 - improved: Audio to text: cancel download of model #22
+- added: Numbers next to each filter in Fix Subtitle to denote occurrences
 
 1.0.1.6 (29.01.2024)
 - fixed: Crash after changing the divider size #217
