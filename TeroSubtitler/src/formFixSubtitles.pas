@@ -38,6 +38,7 @@ type
     Error       : TSubtitleErrorType;
     Enabled     : Boolean;
     Description : String;
+    Count       : Integer;
   end;
 
   TfrmFixSubtitles = class(TForm)
@@ -50,6 +51,7 @@ type
     lblSpacingHyphen: TLabel;
     lblOCR: TLabel;
     lblConvention: TLabel;
+    lblTotalErrors: TLabel;
     mnuInvertSelection: TMenuItem;
     mnuDeSelectAll: TMenuItem;
     mnuSelectAll: TMenuItem;
@@ -88,12 +90,14 @@ type
 //    FAppStringList: TAppStringList;
     FProfiles: TProfiles;
     FProfile: PProfileItem;
-    procedure UpdateItemList;
+    procedure UpdateItemList(const AUpdateTotalCount: Boolean = True);
     function GetErrorStr(const AError: TSubtitleErrorTypeSet): String;
     function IsTimeFixed(const Item: TSubtitleInfoItem): Boolean;
     function GetFixedText(const Item: TSubtitleInfoItem): String;
     function GetText(const Index: Integer; const Item: TSubtitleInfoItem): String;
     procedure VSTSelect(const ASelectMode: TVSTSelectionMode);
+    procedure GetTotalErrorsCount;
+    procedure RefreshTotalErrorsCount(const AInfoList: TSubtitleInfoList);
   public
 
   end;
@@ -382,7 +386,7 @@ begin
   for i := 0 to clbOptions.Items.Count-1 do
     FOptions[i].Enabled := clbOptions.Checked[i];
 
-  UpdateItemList;
+  UpdateItemList(False);
 end;
 
 // -----------------------------------------------------------------------------
@@ -428,7 +432,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmFixSubtitles.UpdateItemList;
+procedure TfrmFixSubtitles.UpdateItemList(const AUpdateTotalCount: Boolean = True);
 var
   i: Integer;
 begin
@@ -438,6 +442,9 @@ begin
   try
     VST.RootNodeCount := 0;
     FList.ClearItems;
+
+    if AUpdateTotalCount then
+      GetTotalErrorsCount;
 
     for i := 0 to Length(FOptions)-1 do
       if FOptions[i].Enabled then FList.Errors := FList.Errors + [FOptions[i].Error];
@@ -609,6 +616,143 @@ begin
       end;
     VST.Invalidate;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmFixSubtitles.GetTotalErrorsCount;
+var
+  InfoList : TSubtitleInfoList;
+begin
+  InfoList := TSubtitleInfoList.Create(Subtitles);
+  try
+    InfoList.Errors := [etBadValues, etTimeTooLong,etTimeTooShort,
+      etPauseTooShort, etMaxCPS, etOverlapping, etFixTags, etEmpty, etUnbreak,
+      etUnnecessarySpaces, etUnnecessaryDots, etRepeatedChars, etProhibitedChars,
+      etHearingImpaired, etBreakLongLines, etRepeatedSubtitle, etEllipsesSingleSmartCharacter,
+      etOCR, etMaxLines, etIncompleteHyphenText, etSpaceOfOpeningHyphen, etRemoveSpacesWithinBrackets,
+      etFixInterrobang, etOverlappingWithPrev,  etOverlappingWithNext, etSnapToShotChanges,
+      etSnapToShotChangesInCue, etSnapToShotChangesOutCue, etSnapToShotChangesInCueAway,
+      etChaining, etCleanupTags];
+
+    if FProfile = NIL then
+      FProfile := @AppOptions.Conventions;
+
+    FProfile^.AddHyphenSpace := (cboSpacingHyphen.ItemIndex = 0);
+
+    if cboOCR.Items.Count > 0 then
+      InfoList.FixErrors(OCRFolder + cboOCR.Items[cboOCR.ItemIndex] + '.ocr', FProfile, frmMain.WAVE.GetSceneChangeList)
+    else
+      InfoList.FixErrors('', FProfile, frmMain.WAVE.GetSceneChangeList);
+
+    RefreshTotalErrorsCount(InfoList);
+  finally
+    InfoList.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmFixSubtitles.RefreshTotalErrorsCount(const AInfoList: TSubtitleInfoList);
+
+  procedure IncCount(const AId: Byte);
+  begin
+    FOptions[AId].Count := FOptions[AId].Count + 1;
+  end;
+
+  procedure UpdatedOption(const AId: Byte; const ADesc: String);
+  begin
+    with clbOptions, FOptions[AId] do
+      Items[AId] := Format('%s [%d]', [ADesc, Count]);
+  end;
+
+var
+  i, c: Integer;
+begin
+  for i := 0 to 22 do
+    FOptions[i].Count := 0;
+
+  if AInfoList.Count > 0 then
+    for i := 0 to AInfoList.Count-1 do
+      with AInfoList[i]^ do
+      begin
+        if etUnnecessarySpaces in ErrorsFixed then
+          IncCount(0)
+        else if etUnnecessaryDots in ErrorsFixed then
+          IncCount(1)
+        else if etFixTags in ErrorsFixed then
+          IncCount(2)
+        else if etTimeTooShort in ErrorsFixed then
+          IncCount(3)
+        else if etTimeTooLong in ErrorsFixed then
+          IncCount(4)
+        else if etOverlapping in ErrorsFixed then
+          IncCount(5)
+        else if etBadValues in ErrorsFixed then
+          IncCount(6)
+        else if etUnbreak in ErrorsFixed then
+          IncCount(7)
+        else if etBreakLongLines in ErrorsFixed then
+          IncCount(8)
+        else if etEmpty in ErrorsFixed then
+          IncCount(9)
+        else if etEllipsesSingleSmartCharacter in ErrorsFixed then
+          IncCount(10)
+        else if etProhibitedChars in ErrorsFixed then
+          IncCount(11)
+        else if etHearingImpaired in ErrorsFixed then
+          IncCount(12)
+        else if etRepeatedSubtitle in ErrorsFixed then
+          IncCount(13)
+        else if etRepeatedChars in ErrorsFixed then
+          IncCount(14)
+        else if etIncompleteHyphenText in ErrorsFixed then
+          IncCount(15)
+        else if etSpaceOfOpeningHyphen in ErrorsFixed then
+          IncCount(16)
+        else if etRemoveSpacesWithinBrackets in ErrorsFixed then
+          IncCount(17)
+        else if etFixInterrobang in ErrorsFixed then
+          IncCount(18)
+        else if etOCR in ErrorsFixed then
+          IncCount(19)
+        else if etSnapToShotChanges in ErrorsFixed then
+          IncCount(20)
+        else if etChaining in ErrorsFixed then
+          IncCount(21)
+        else if etCleanupTags in ErrorsFixed then
+          IncCount(22)
+      end;
+
+  UpdatedOption(0, lngfsetUnnecessarySpaces);
+  UpdatedOption(1, lngfsetUnnecessaryDots);
+  UpdatedOption(2, lngfsetFixTags);
+  UpdatedOption(3, lngfsetTimeTooShort);
+  UpdatedOption(4, lngfsetTimeTooLong);
+  UpdatedOption(5, lngfsetOverlapping);
+  UpdatedOption(6, lngfsetBadValues);
+  UpdatedOption(7, Format(lngfsetUnbreak, [AppOptions.Conventions.CPL]));
+  UpdatedOption(8, lngfsetBreakLongLines);
+  UpdatedOption(9, lngfsetEmpty);
+  UpdatedOption(10, lngfsetEllipsesSingleSmartCharacter);
+  UpdatedOption(11, Format(lngfsetProhibitedChars, [AppOptions.Conventions.ProhibitedChars]));
+  UpdatedOption(12, lngfsetHearingImpaired);
+  UpdatedOption(13, lngfsetRepeatedEntry);
+  UpdatedOption(14, lngfsetRepeatedChars);
+  UpdatedOption(15, lngfsetIncompleteHyphenText);
+  UpdatedOption(16, lngfsetSpaceOfOpeningHyphen);
+  UpdatedOption(17, lngfsetRemoveSpacesWithinBrackets);
+  UpdatedOption(18, lngfsetFixInterrobang);
+  UpdatedOption(19, lngfsetOCR);
+  UpdatedOption(20, lngfsetSnapToShotChanges);
+  UpdatedOption(21, lngfsetChaining);
+  UpdatedOption(22, lngfsetCleanupTags);
+
+  c := 0;
+  for i := 0 to 22 do
+    c += FOptions[i].Count;
+
+  lblTotalErrors.Caption := Format(lngfsTotalErrors, [c]);
 end;
 
 // -----------------------------------------------------------------------------

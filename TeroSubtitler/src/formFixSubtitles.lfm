@@ -48,6 +48,19 @@ object frmFixSubtitles: TfrmFixSubtitles
       TabOrder = 1
       OnClick = btnCloseClick
     end
+    object lblTotalErrors: TLabel
+      AnchorSideTop.Side = asrCenter
+      AnchorSideBottom.Control = btnApply
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 1
+      Top = 33
+      Width = 1
+      Anchors = [akLeft, akBottom]
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
   end
   object lyoLeft: TUWLayout
     Left = 0
@@ -109,7 +122,7 @@ object frmFixSubtitles: TfrmFixSubtitles
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 2
-      OnChange = clbOptionsClickCheck
+      OnChange = cboConventionSelect
     end
     object lblSpacingHyphen: TLabel
       Left = 8
@@ -129,7 +142,7 @@ object frmFixSubtitles: TfrmFixSubtitles
       ItemHeight = 15
       Style = csDropDownList
       TabOrder = 3
-      OnChange = clbOptionsClickCheck
+      OnChange = cboConventionSelect
     end
   end
   object lyoClient: TUWLayout
