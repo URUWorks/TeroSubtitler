@@ -103,7 +103,6 @@
 {"hash":263514030,"name":"tfrmmain.actsetdelay.caption","sourcebytes":[83,101,116,32,100,101,108,97,121,46,46,46],"value":"Set delay..."},
 {"hash":205896974,"name":"tfrmmain.actconvertcase.caption","sourcebytes":[67,111,110,118,101,114,116,32,99,97,115,101,46,46,46],"value":"Convert case..."},
 {"hash":19124409,"name":"tfrmmain.actunbreakentry.caption","sourcebytes":[85,110,98,114,101,97,107,32,101,110,116,114,121],"value":"Unbreak entry"},
-{"hash":200247320,"name":"tfrmmain.actsetmaximumlinelength.caption","sourcebytes":[83,101,116,32,109,97,120,105,109,117,109,32,108,105,110,101,32,108,101,110,103,116,104],"value":"Set maximum line length"},
 {"hash":217800804,"name":"tfrmmain.actreversetext.caption","sourcebytes":[82,101,118,101,114,115,101,32,116,101,120,116],"value":"Reverse text"},
 {"hash":29403134,"name":"tfrmmain.actfixrtlpunctuation.caption","sourcebytes":[70,105,120,32,112,117,110,99,116,117,97,116,105,111,110],"value":"Fix punctuation"},
 {"hash":64787513,"name":"tfrmmain.actdivideentry.caption","sourcebytes":[68,105,118,105,100,101,32,101,110,116,114,121],"value":"Divide entry"},

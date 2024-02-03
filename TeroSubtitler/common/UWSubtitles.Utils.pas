@@ -53,11 +53,10 @@ function HasProhibitedChars(Text, Chars: String): Boolean;
 function HasTooLongLine(Text: String; const MaxChars: Integer = 42): Boolean;
 function SmartLineAdjust(Text: String; const ChrsPerLine: Integer; const BreakChar: String = sLineBreak): String; // constrain subtitles bigger than three lines into two and adjust length of lines
 function AutoBreakSubtitle(Text: String; const ChrsPerLine: Integer; const BreakChar: String = sLineBreak; const UnbreakBefore: Boolean = True): String;
-function UnbreakSubtitles(const Text: String; const BreakChar: String = sLineBreak): String; // make subtitles be in one line
+function UnbreakSubtitles(const Text: String; const BreakChar: String = sLineBreak; const UnbreakDialog: Boolean = False): String;
 function UnbreakSubtitlesIfLessThanChars(const Text: String; const MaxChars: Integer; const BreakChar: String = sLineBreak): String;
 function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const AddDots: Boolean = False; const ChrsPerLine: Integer = 43; const Gap: Integer = 833; const BreakChar: String = sLineBreak): String;
 function DivideLinesAtPosition(Text: String; const InitialTime, FinalTime, Position: Cardinal; const Gap: Integer = 833): String;
-function SetMaximumLineLength(const Text: String; const MaxChrs: Integer; const BreakChar: String = sLineBreak): String; // splits the subtitle in N number of lines so that each of the lines is shorter than a maximum specified length
 function ReverseText(Text: String; const Enter: String = sLineBreak; const KeepLinesOrder: Boolean = True): String;
 function FixRTLPunctuation(const Text: String; const Delimiter: String = sLineBreak): String;
 function IsHearingImpaired(const Text: String): Boolean;
@@ -339,8 +338,8 @@ begin
   while AnsiContainsText(Result, '  ') do Result := ReplaceString(Result, '  ', ' ');
   while AnsiContainsText(Result, v1) do Result := ReplaceString(Result, v1, BreakChar);
   while AnsiContainsText(Result, v2) do Result := ReplaceString(Result, v2, BreakChar);
-  if AnsiEndsText(BreakChar, Result) then Result := Copy(Result, 1);
-  if AnsiStartsText(BreakChar, Result) then Delete(Result, 1, 1);
+  if AnsiEndsText(BreakChar, Result) then Result := Copy(Result, 1, UTF8Length(Result) - BreakChar.Length);
+  if AnsiStartsText(BreakChar, Result) then Delete(Result, 1, BreakChar.Length);
 end;
 
 // -----------------------------------------------------------------------------
@@ -404,7 +403,7 @@ var
 begin
   Result := Text;
   l := UTF8Length(Text);
-  if (Text = '') or (l <= ChrsPerLine) or ((l <= ChrsPerLine) and not AnsiContainsText(Text, '-')) then Exit;
+  if Text.IsEmpty or (l <= ChrsPerLine) or ((l <= ChrsPerLine) and not AnsiContainsText(Text, '-')) then Exit;
 
   Text := RemoveUnnecessarySpaces(Text, BreakChar);
 
@@ -413,18 +412,20 @@ begin
   begin
     s := TStringList.Create;
     try
-      SplitRegExpr('\-', Text, s);
+      s.SkipLastLineBreak := True;
+      s.AddDelimitedText(Text, '-', True);
       if s.Count > 0 then
       begin
-        if UTF8Pos('-', Text) > 1 then
-          Result := UTF8Copy(Text, 1, UTF8Pos('-', Text)-1) + BreakChar
-        else
-          Result := '';
+        Result := '';
+        for i := 0 to s.Count-1 do
+          if not s[i].IsEmpty then
+          begin
+            if i < s.Count-1 then
+              Result := Format('%s-%s%s', [Result, s[i], BreakChar])
+            else
+              Result := Format('%s-%s', [Result, s[i]]);
+          end;
 
-        for i := 1 to s.Count - 1 do
-        begin
-          Result := Format('%s-%s%s', [Result, s[i], BreakChar]);
-        end;
         Result := RemoveUnnecessarySpaces(Result, BreakChar);
       end;
     finally
@@ -439,13 +440,13 @@ end;
 
 function AutoBreakSubtitle(Text: String; const ChrsPerLine: Integer; const BreakChar: String = sLineBreak; const UnbreakBefore: Boolean = True): String;
 begin
-  if UnbreakBefore then Text := UnbreakSubtitles(Text, BreakChar);
+  if UnbreakBefore then Text := UnbreakSubtitles(Text, BreakChar, True);
   Result := SmartLineAdjust(Text, ChrsPerLine, BreakChar);
 end;
 
 // -----------------------------------------------------------------------------
 
-function UnbreakSubtitles(const Text: String; const BreakChar: String = sLineBreak): String;
+function UnbreakSubtitles(const Text: String; const BreakChar: String = sLineBreak; const UnbreakDialog: Boolean = False): String;
 var
   AllLines : Array of String;
   Line : Integer = 0;
@@ -453,7 +454,7 @@ begin
   if Pos(BreakChar, Text) = 0 then
     Exit(Text);
 
-  if Pos('-', Text) = 0 then
+  if (Pos('-', Text) = 0) or UnbreakDialog then
     Exit(ReplaceString(Text, BreakChar, ' '));
 
   AllLines := Text.Split([BreakChar]);
@@ -559,14 +560,6 @@ begin
   finally
     sl.Free;
   end;
-end;
-
-// -----------------------------------------------------------------------------
-
-function SetMaximumLineLength(const Text: String; const MaxChrs: Integer; const BreakChar: String = sLineBreak): String;
-begin
-  //Result := WrapText(UnbreakSubtitles(Text, BreakChar), BreakChar, [' ', ',', '.', ';', ':', #9], MaxChrs);
-  Result := UWSystem.StrUtils.WrapText(UnbreakSubtitles(Text, BreakChar), MaxChrs);
 end;
 
 // -----------------------------------------------------------------------------

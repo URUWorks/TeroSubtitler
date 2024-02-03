@@ -220,7 +220,6 @@ type
     actMarkEntry: TAction;
     actUnMarkEntry: TAction;
     actReverseText: TAction;
-    actSetMaximumLineLength: TAction;
     actUnbreakEntry: TAction;
     actShiftTimeLess: TAction;
     actShiftTimeMore: TAction;
@@ -525,7 +524,6 @@ type
     MenuItem53: TMenuItem;
     MenuItem54: TMenuItem;
     MenuItem55: TMenuItem;
-    MenuItem56: TMenuItem;
     MenuItem57: TMenuItem;
     MenuItem58: TMenuItem;
     MenuItem59: TMenuItem;
@@ -985,7 +983,6 @@ type
     procedure actShiftTimeLessExecute(Sender: TObject);
     procedure actConvertCaseExecute(Sender: TObject);
     procedure actUnbreakEntryExecute(Sender: TObject);
-    procedure actSetMaximumLineLengthExecute(Sender: TObject);
     procedure actReverseTextExecute(Sender: TObject);
     procedure actFixRTLPunctuationExecute(Sender: TObject);
     procedure actDivideEntryExecute(Sender: TObject);

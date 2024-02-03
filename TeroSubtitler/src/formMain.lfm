@@ -1436,9 +1436,6 @@ object frmMain: TfrmMain
         object MenuItem150: TMenuItem
           Action = actAddQuotationMarks
         end
-        object MenuItem56: TMenuItem
-          Action = actSetMaximumLineLength
-        end
         object MenuItem75: TMenuItem
           Action = actSwapTexts
         end
@@ -2914,12 +2911,6 @@ object frmMain: TfrmMain
       Category = 'Text'
       Caption = 'Unbreak entry'
       OnExecute = actUnbreakEntryExecute
-    end
-    object actSetMaximumLineLength: TAction
-      Tag = 1
-      Category = 'Text'
-      Caption = 'Set maximum line length'
-      OnExecute = actSetMaximumLineLengthExecute
     end
     object actReverseText: TAction
       Tag = 1

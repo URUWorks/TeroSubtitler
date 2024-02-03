@@ -56,7 +56,6 @@ procedure ApplyAutomaticDuration(const Item: PUWSubtitleItem; const Index: Integ
 procedure ApplyDefaultPause(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyShiftTimeMore(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyShiftTimeLess(const Item: PUWSubtitleItem; const Index: Integer);
-procedure ApplySetMaximumLineLength(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyReverseText(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFixRTLPunctuation(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyEndCueAddOneFrame(const Item: PUWSubtitleItem; const Index: Integer);
@@ -436,14 +435,6 @@ begin
     ShiftTime(InitialTime, FinalTime, -AppOptions.ShiftTimeMS, it, ft);
     SetSubtitleTimes(Index, it, ft, False, False);
   end;
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure ApplySetMaximumLineLength(const Item: PUWSubtitleItem; const Index: Integer);
-begin
-  with Item^, AppOptions.Conventions do
-    ApplyText(Item, Index, SetMaximumLineLength(Text, CPL), SetMaximumLineLength(Translation, CPL), False);
 end;
 
 // -----------------------------------------------------------------------------

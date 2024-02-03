@@ -975,13 +975,6 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actSetMaximumLineLengthExecute(Sender: TObject);
-begin
-  VSTDoLoop(VST, @ApplySetMaximumLineLength, dlSelected, True, True);
-end;
-
-// -----------------------------------------------------------------------------
-
 procedure TfrmMain.actReverseTextExecute(Sender: TObject);
 begin
   VSTDoLoop(VST, @ApplyReverseText, dlSelected, True, True);

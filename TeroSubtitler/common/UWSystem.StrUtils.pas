@@ -506,13 +506,8 @@ begin
       end
       else
       begin
-        if Pos('-', Words[i]) > 0 then
-          CurrentLine := CurrentLine + ' ' + Words[i]
-        else
-        begin
-          Result += CurrentLine + ABreakChar;
-          CurrentLine := Words[i];
-        end;
+        Result += CurrentLine + ABreakChar;
+        CurrentLine := Words[i];
       end;
     end;
 
