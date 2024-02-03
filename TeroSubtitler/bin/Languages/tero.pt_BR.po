@@ -509,6 +509,11 @@ msgstr "#"
 msgid "Remove spacing"
 msgstr "Remover espaçamento"
 
+#: proclocalize.lngfstotalerrors
+#, object-pascal-format
+msgid "Total errors: %d"
+msgstr ""
+
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
 msgid "CPL"
@@ -3339,10 +3344,6 @@ msgstr "Invertido"
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-
-#: tfrmmain.actsetmaximumlinelength.caption
-msgid "Set maximum line length"
-msgstr "Definir comprimento máximo de linha"
 
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"

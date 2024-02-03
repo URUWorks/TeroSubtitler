@@ -499,6 +499,11 @@ msgstr ""
 msgid "Remove spacing"
 msgstr ""
 
+#: proclocalize.lngfstotalerrors
+#, object-pascal-format
+msgid "Total errors: %d"
+msgstr ""
+
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
 msgid "CPL"
@@ -3322,10 +3327,6 @@ msgstr ""
 #: tfrmmain.actsetguilayout2.caption
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
-msgstr ""
-
-#: tfrmmain.actsetmaximumlinelength.caption
-msgid "Set maximum line length"
 msgstr ""
 
 #: tfrmmain.actsettings.caption
