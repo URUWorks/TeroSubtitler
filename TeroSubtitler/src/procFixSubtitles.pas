@@ -207,21 +207,6 @@ begin
 
       // -- Texts
 
-      // Hearing impaired
-      if etHearingImpaired in FErrors then
-      begin
-        if IsHearingImpaired(FixedItem.Text) then
-        begin
-          tmp := FixHearingImpaired(FixedItem.Text, sLineBreak);
-          if FixedItem.Text <> tmp then
-          begin
-            FixedItem.Text        := tmp;
-            FixedItem.ErrorsFixed := [etHearingImpaired];
-            Add(NewItem(FixedItem));
-          end;
-        end;
-      end;
-
       //ClearItem(FixedItem, i);
       // Repeated subtitle
       if etRepeatedSubtitle in FErrors then
@@ -362,6 +347,21 @@ begin
           FixedItem.Text := UnbreakSubtitlesIfLessThanChars(FixedItem.Text, Profile^.CPL);
           FixedItem.ErrorsFixed := [etUnbreak];
           Add(NewItem(FixedItem));
+        end;
+      end;
+
+      // Hearing impaired
+      if etHearingImpaired in FErrors then
+      begin
+        if IsHearingImpaired(FixedItem.Text) then
+        begin
+          tmp := FixHearingImpaired(FixedItem.Text, sLineBreak);
+          if FixedItem.Text <> tmp then
+          begin
+            FixedItem.Text        := tmp;
+            FixedItem.ErrorsFixed := [etHearingImpaired];
+            Add(NewItem(FixedItem));
+          end;
         end;
       end;
 

@@ -87,15 +87,16 @@ type
   private
     FOptions: array of TCustomErrorOption;
     FList: TSubtitleInfoList;
-//    FAppStringList: TAppStringList;
     FProfiles: TProfiles;
     FProfile: PProfileItem;
+    FTotalErrorCount: Integer;
     procedure UpdateItemList(const AUpdateTotalCount: Boolean = True);
     function GetErrorStr(const AError: TSubtitleErrorTypeSet): String;
     function IsTimeFixed(const Item: TSubtitleInfoItem): Boolean;
     function GetFixedText(const Item: TSubtitleInfoItem): String;
     function GetText(const Index: Integer; const Item: TSubtitleInfoItem): String;
     procedure VSTSelect(const ASelectMode: TVSTSelectionMode);
+    procedure CheckListSelect(const ASelectMode: TVSTSelectionMode);
     procedure GetTotalErrorsCount;
     procedure RefreshTotalErrorsCount(const AInfoList: TSubtitleInfoList);
   public
@@ -148,6 +149,7 @@ begin
   FProfiles := TProfiles.Create(ConventionsFileName);
   FillItemsWithConventions(cboConvention.Items, FProfiles);
   FillComboWithOCRScripts(cboOCR);
+  FTotalErrorCount := 0;
   cboConvention.Items.Insert(0, lngasCustom);
   if FileExists(SettingsFileName) then
   begin
@@ -458,6 +460,8 @@ begin
       FList.FixErrors(OCRFolder + cboOCR.Items[cboOCR.ItemIndex] + '.ocr', FProfile, frmMain.WAVE.GetSceneChangeList)
     else
       FList.FixErrors('', FProfile, frmMain.WAVE.GetSceneChangeList);
+
+    lblTotalErrors.Caption := Format(lngfsTotalErrors, [FTotalErrorCount, FList.Count]);
   finally
     VST.RootNodeCount := FList.Count;
     VST.EndUpdate;
@@ -570,21 +574,30 @@ end;
 
 procedure TfrmFixSubtitles.mnuSelectAllClick(Sender: TObject);
 begin
-  VSTSelect(vsmSelectAll);
+  if PopupMenuSelect.PopupComponent = VST then
+    VSTSelect(vsmSelectAll)
+  else
+    CheckListSelect(vsmSelectAll);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmFixSubtitles.mnuDeSelectAllClick(Sender: TObject);
 begin
-  VSTSelect(vsmDeSelectAll);
+  if PopupMenuSelect.PopupComponent = VST then
+    VSTSelect(vsmDeSelectAll)
+  else
+    CheckListSelect(vsmDeSelectAll);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmFixSubtitles.mnuInvertSelectionClick(Sender: TObject);
 begin
-  VSTSelect(vsmInvertSelection);
+  if PopupMenuSelect.PopupComponent = VST then
+    VSTSelect(vsmInvertSelection)
+  else
+    CheckListSelect(vsmInvertSelection);
 end;
 
 // -----------------------------------------------------------------------------
@@ -616,6 +629,26 @@ begin
       end;
     VST.Invalidate;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmFixSubtitles.CheckListSelect(const ASelectMode: TVSTSelectionMode);
+var
+  i: Integer;
+begin
+  for i := 0 to clbOptions.Items.Count-1 do
+  begin
+    case ASelectMode of
+      vsmSelectAll   : clbOptions.Checked[i] := True;
+      vsmDeSelectAll : clbOptions.Checked[i] := False;
+    else
+      clbOptions.Checked[i] := not clbOptions.Checked[i];
+    end;
+    FOptions[i].Enabled := clbOptions.Checked[i];
+  end;
+
+  UpdateItemList(False);
 end;
 
 // -----------------------------------------------------------------------------
@@ -667,9 +700,9 @@ procedure TfrmFixSubtitles.RefreshTotalErrorsCount(const AInfoList: TSubtitleInf
   end;
 
 var
-  i, c: Integer;
+  i: Integer;
 begin
-  for i := 0 to 22 do
+  for i := 0 to Length(FOptions)-1 do
     FOptions[i].Count := 0;
 
   if AInfoList.Count > 0 then
@@ -748,11 +781,9 @@ begin
   UpdatedOption(21, lngfsetChaining);
   UpdatedOption(22, lngfsetCleanupTags);
 
-  c := 0;
-  for i := 0 to 22 do
-    c += FOptions[i].Count;
-
-  lblTotalErrors.Caption := Format(lngfsTotalErrors, [c]);
+  FTotalErrorCount := 0;
+  for i := 0 to Length(FOptions)-1 do
+    FTotalErrorCount += FOptions[i].Count;
 end;
 
 // -----------------------------------------------------------------------------

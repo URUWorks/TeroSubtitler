@@ -194,7 +194,7 @@ resourcestring
   lngfsAfter = 'After';
   lngfsAddSpacing = 'Add spacing';
   lngfsRemoveSpacing = 'Remove spacing';
-  lngfsTotalErrors = 'Total errors: %d';
+  lngfsTotalErrors = 'Total errors: %d (displayed: %d)';
 
   //FormatPropertiesStrings
   lngfoCenter = 'Center';

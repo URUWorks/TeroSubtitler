@@ -717,15 +717,29 @@ end;
 // -----------------------------------------------------------------------------
 
 function GetInitialTimeStr(const Index: Integer; const Trim: Boolean = False): String;
+var
+  t: Integer;
 begin
-  Result := GetTimeStr(Subtitles[Index].InitialTime, Trim);
+  if Subtitles.ValidIndex(Index) then
+    t := Subtitles[Index].InitialTime
+  else
+    t := 0;
+
+  Result := GetTimeStr(t, Trim)
 end;
 
 // -----------------------------------------------------------------------------
 
 function GetFinalTimeStr(const Index: Integer; const Trim: Boolean = False): String;
+var
+  t: Integer;
 begin
-  Result := GetTimeStr(Subtitles[Index].FinalTime, Trim);
+  if Subtitles.ValidIndex(Index) then
+    t := Subtitles[Index].FinalTime
+  else
+    t := 0;
+
+  Result := GetTimeStr(t, Trim);
 end;
 
 // -----------------------------------------------------------------------------
