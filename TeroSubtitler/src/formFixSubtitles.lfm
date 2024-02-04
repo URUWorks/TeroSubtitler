@@ -81,6 +81,7 @@ object frmFixSubtitles: TfrmFixSubtitles
       Anchors = [akTop, akLeft, akRight, akBottom]
       ExtendedSelect = False
       ItemHeight = 0
+      PopupMenu = PopupMenuSelect
       TabOrder = 0
       OnClickCheck = clbOptionsClickCheck
     end
