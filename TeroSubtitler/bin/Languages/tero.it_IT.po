@@ -509,7 +509,7 @@ msgstr "Rimuovi spaziatura"
 
 #: proclocalize.lngfstotalerrors
 #, object-pascal-format
-msgid "Total errors: %d"
+msgid "Total errors: %d (displayed: %d)"
 msgstr ""
 
 #: proclocalize.lnghcpl

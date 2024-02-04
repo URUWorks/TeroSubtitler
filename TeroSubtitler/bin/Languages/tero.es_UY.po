@@ -509,8 +509,8 @@ msgstr "Quitar espacio"
 
 #: proclocalize.lngfstotalerrors
 #, object-pascal-format
-msgid "Total errors: %d"
-msgstr "Errores totales: %d"
+msgid "Total errors: %d (displayed: %d)"
+msgstr "Errores totales: %d (mostrados: %d)"
 
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
