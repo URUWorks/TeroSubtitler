@@ -148,10 +148,12 @@ type
     FSearchSkip       : Integer;
     FAutoSort         : Boolean;
     FReplaceEntity    : Boolean;
+    FIsRTL            : Boolean;
     FTag              : Byte;
     FTimeBase         : TSubtitleTimeBase;
     FFormatProperties : PFormatProperties;
     FLoadDataFunc     : TSubtitleLoadDataFunc;
+    procedure CheckIsRightToLeft;
     function GetCount: Integer;
     procedure SetFormat(const Format: TUWSubtitleFormats);
     function GetItem(Index: Integer): TUWSubtitleItem;
@@ -239,6 +241,7 @@ type
     property ExtraInfoType: TUWSubtitleExtraInfoType read FEIType write FEIType;
     property ExtraInfo[Index: Integer]: Pointer read GetExtraInfo write SetExtraInfo;
     property Header: Pointer read FHeader write FHeader;
+    property IsRightToLeft: Boolean read FIsRTL;
     property Tag: Byte read FTag write FTag;
     property ReplaceEntities: Boolean read FReplaceEntity write FReplaceEntity;
     property TimeBase: TSubtitleTimeBase read FTimeBase write FTimeBase;
@@ -778,6 +781,7 @@ begin
   FHeader        := NIL;
   FAutoSort      := True;
   FReplaceEntity := False;
+  FIsRTL         := False;
   FTag           := 0;
   FTimeBase      := stbMedia;
   FLoadDataFunc  := NIL;
@@ -1283,6 +1287,7 @@ end;
 
 procedure TUWSubtitles.Clear;
 begin
+  FIsRTL := False;
   if FList.Count <> 0 then
   begin
     FList.Clear;
@@ -1526,6 +1531,30 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TUWSubtitles.CheckIsRightToLeft;
+const
+  MaxLineCount = 20;
+
+var
+  i, c: Integer;
+begin
+  FIsRTL := False;
+
+  if Count = 0 then
+    Exit
+  else
+    c := Min(MaxLineCount, Count);
+
+  for i := 0 to c-1 do
+    if IsRightToLeftText(Text[i]) then
+    begin
+      FIsRTL := True;
+      Break;
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
 function TUWSubtitles.LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
 var
   AList   : TUWSubtitleCustomFormatList;
@@ -1581,6 +1610,7 @@ begin
         end;
     finally
       if FAutoSort then Sort;
+      CheckIsRightToLeft; //
       SubFile.Free;
     end;
   finally

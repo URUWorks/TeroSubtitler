@@ -57,7 +57,7 @@ function UnbreakSubtitles(const Text: String; const BreakChar: String = sLineBre
 function UnbreakSubtitlesIfLessThanChars(const Text: String; const MaxChars: Integer; const BreakChar: String = sLineBreak): String;
 function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const AddDots: Boolean = False; const ChrsPerLine: Integer = 43; const Gap: Integer = 833; const BreakChar: String = sLineBreak): String;
 function DivideLinesAtPosition(Text: String; const InitialTime, FinalTime, Position: Cardinal; const Gap: Integer = 833): String;
-function ReverseText(Text: String; const Enter: String = sLineBreak; const KeepLinesOrder: Boolean = True): String;
+function ReverseText(Text: String): String;
 function FixRTLPunctuation(const Text: String; const Delimiter: String = sLineBreak): String;
 function IsHearingImpaired(const Text: String): Boolean;
 function FixHearingImpaired(const Text: String; const Enter: String = sLineBreak): String;
@@ -78,6 +78,15 @@ implementation
 
 uses UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils,
   LazUTF8, LCLIntf;
+
+const
+  startTag: String = '{';
+  endTag: String = '}';
+  boldTag: String = 'b';
+  italicTag: String = 'i';
+  underlineTag: String = 'u';
+  strikeoutTag: String = 's';
+  colorTag: String = 'c';
 
 // -----------------------------------------------------------------------------
 
@@ -564,56 +573,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function ReverseText(Text: String; const Enter: String = sLineBreak; const KeepLinesOrder: Boolean = True): String;
-var
-  x, TotalLines, c   : Integer;
-  PosEnter, NewEnter : Integer;
+function ReverseText(Text: String): String;
 begin
-  try
-    if KeepLinesOrder then
-    begin
-      c := iff(Enter = #13#10, 1, 0);
-
-      SetLength(Result, UTF8Length(Text));
-      TotalLines := 0;
-      repeat
-        NewEnter := 0;
-        PosEnter := UTF8Pos(Enter, Text);
-
-        if PosEnter = 0 then
-          PosEnter := UTF8Length(Text)+1
-        else
-          NewEnter := PosEnter;
-
-        for x := 1 to PosEnter-1 do
-          Result[TotalLines+PosEnter-x] := Text[x];
-
-        if (NewEnter <> 0) then
-        begin
-          if (Enter = #13#10) then
-          begin
-            Result[TotalLines+NewEnter]   := #13;
-            Result[TotalLines+NewEnter+1] := #10;
-          end
-          else
-            Result[TotalLines+NewEnter]   := Enter[1];
-        end;
-
-        UTF8Delete(Text, 1, PosEnter+c);
-        Inc(TotalLines, PosEnter+c);
-      until Text = '';
-    end
-    else
-    begin
-      Result := '';
-      for x := 1 to UTF8Length(Text) do Result := Text[x] + Result;
-
-      if (Enter = #13#10) then
-        Result := ReplaceString(Result, #10#13, #13#10);
-    end;
-  except
-    Result := '';
-  end;
+  // TODO: Fix tags, etc
+  Result := UTF8ReverseString(Text);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1004,12 +967,6 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; 
       Exit;
     end;
   end;
-
-const
-  startTag: String = '{'; endTag: String = '}';
-  boldTag: String = 'b'; italicTag: String = 'i';
-  underlineTag: String = 'u'; strikeoutTag: String = 's';
-  colorTag: String = 'c';
 
 var
   x, y, idx,

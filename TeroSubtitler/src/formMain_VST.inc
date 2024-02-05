@@ -217,7 +217,7 @@ begin
 
   FillByte(TS, SizeOf(TTextStyle), 0);
   TS.EndEllipsis := True;
-  TS.RightToLeft := Application.IsRightToLeft;
+  TS.RightToLeft := Application.IsRightToLeft or Subtitles.IsRightToLeft; // is correct?
   R := CellRect;
   TextHeight := VST.Canvas.Font.GetTextHeight('W');
 
