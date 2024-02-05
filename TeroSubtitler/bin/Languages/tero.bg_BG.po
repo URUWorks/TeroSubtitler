@@ -2856,6 +2856,14 @@ msgstr "Видео с вградени надписи..."
 msgid "Go to entry..."
 msgstr "Отиване на надпис..."
 
+#: tfrmmain.actgotonextentryandplay.caption
+msgid "Go to next entry and play"
+msgstr ""
+
+#: tfrmmain.actgotopreviousentryandplay.caption
+msgid "Go to previous entry and play"
+msgstr ""
+
 #: tfrmmain.actgototime.caption
 msgid "Go to time..."
 msgstr "Отиване на време..."

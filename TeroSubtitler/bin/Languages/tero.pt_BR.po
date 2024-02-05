@@ -2863,6 +2863,14 @@ msgstr "Vídeo com legendas queimadas por cima..."
 msgid "Go to entry..."
 msgstr "Ir para a entrada..."
 
+#: tfrmmain.actgotonextentryandplay.caption
+msgid "Go to next entry and play"
+msgstr ""
+
+#: tfrmmain.actgotopreviousentryandplay.caption
+msgid "Go to previous entry and play"
+msgstr ""
+
 #: tfrmmain.actgototime.caption
 msgid "Go to time..."
 msgstr "Ir para o tempo..."

@@ -2857,6 +2857,14 @@ msgstr "Vídeo con subtítulos incrustados..."
 msgid "Go to entry..."
 msgstr "Ir a la entrada..."
 
+#: tfrmmain.actgotonextentryandplay.caption
+msgid "Go to next entry and play"
+msgstr "Ir a la siguiente entrada y reproducir"
+
+#: tfrmmain.actgotopreviousentryandplay.caption
+msgid "Go to previous entry and play"
+msgstr "Ir a la entrada anterior y reproducir"
+
 #: tfrmmain.actgototime.caption
 msgid "Go to time..."
 msgstr "Ir al tiempo de vídeo..."

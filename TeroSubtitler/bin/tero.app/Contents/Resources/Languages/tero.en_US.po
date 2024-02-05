@@ -2847,6 +2847,14 @@ msgstr ""
 msgid "Go to entry..."
 msgstr ""
 
+#: tfrmmain.actgotonextentryandplay.caption
+msgid "Go to next entry and play"
+msgstr ""
+
+#: tfrmmain.actgotopreviousentryandplay.caption
+msgid "Go to previous entry and play"
+msgstr ""
+
 #: tfrmmain.actgototime.caption
 msgid "Go to time..."
 msgstr ""
