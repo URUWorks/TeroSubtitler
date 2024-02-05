@@ -69,6 +69,7 @@ function GetMaxLinesOf(Text: String; const Separator: String = sLineBreak): Inte
 function GetLengthForEachLine(Text: String; const Separator: String = sLineBreak; const LastSeparator: String = sLineBreak): String;
 function GetLengthForEachLineIntArray(Text: String; const Separator: String = sLineBreak; const LastSeparator: String = sLineBreak): TIntegerDynArray;
 procedure SelectSubtitleAndFocusMemo(const NextSibiling: Boolean; const WaveToo: Boolean = False);
+procedure GoToNextEntryAndPlay(const NextSibiling: Boolean = True);
 function GetSubtitleIndexAtTime(const MSecs: Cardinal): Integer;
 function GetSubtitleTextAtTime(const MSecs: Cardinal): String;
 
@@ -864,6 +865,28 @@ begin
       VSTDblClick(NIL)
     else
       FocusMemo;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure GoToNextEntryAndPlay(const NextSibiling: Boolean = True);
+var
+  x: Integer;
+begin
+  with frmMain do
+  begin
+    SelectSubtitleAndFocusMemo(NextSibiling, True);
+    x := VSTFocusedNode(VST);
+
+    if x >= 0 then
+    begin
+      MPV.SetMediaPosInMs(Subtitles[x].InitialTime);
+      MPVOptions.EndTime := Subtitles[x].FinalTime;
+
+      if not MPV.IsPlaying then
+        MPV.Resume(True);
+    end;
   end;
 end;
 

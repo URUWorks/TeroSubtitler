@@ -85,6 +85,8 @@ type
     actCharacterMap: TAction;
     actClearText: TAction;
     actGenerateBlankVideo: TAction;
+    actGoToNextEntryAndPlay: TAction;
+    actGoToPreviousEntryAndPlay: TAction;
     actTextEffectTypewriter: TAction;
     actTextEffectFlash: TAction;
     actJumpToNextNote: TAction;
@@ -959,6 +961,8 @@ type
     procedure actMediaZoomInExecute(Sender: TObject);
     procedure actMediaZoomOutExecute(Sender: TObject);
     procedure actMediaZoomSelectionExecute(Sender: TObject);
+    procedure actGoToNextEntryAndPlayExecute(Sender: TObject);
+    procedure actGoToPreviousEntryAndPlayExecute(Sender: TObject);
     procedure actCombineEntriesExecute(Sender: TObject);
     procedure actAutoBreakEntryExecute(Sender: TObject);
     procedure actSelectAllExecute(Sender: TObject);

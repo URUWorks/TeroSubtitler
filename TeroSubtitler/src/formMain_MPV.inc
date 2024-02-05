@@ -163,17 +163,21 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.DoSubtitleTimer(Sender: TObject);
+var
+  mpvPos: Integer;
 begin
   TimerSubtitle.Enabled := False;
+  mpvPos := MPV.GetMediaPosInMs;
+
   if MPVOptions.SubtitleHandleByMPV then
   begin
     if actMediaAutoScroll.Checked then
-      GetSubtitleIndexAtTime(MPV.GetMediaPosInMs);
+      GetSubtitleIndexAtTime(mpvPos);
   end
   else
   begin
     //MPV.ShowOverlayText(GetSubtitleTextAtTime(MPV.GetMediaPosInMs));
-    MPV.ShowText(GetSubtitleTextAtTime(MPV.GetMediaPosInMs), 3600000, '');
+    MPV.ShowText(GetSubtitleTextAtTime(mpvPos), 3600000, '');
   end;
 
   if SubtitleInfo.LastSubtitle.Selected <> SubtitleInfo.LastSubtitle.ShowIndex then
@@ -181,6 +185,13 @@ begin
     SubtitleInfo.LastSubtitle.Selected := SubtitleInfo.LastSubtitle.ShowIndex;
     if actMediaAutoScroll.Checked then
       VSTSelectNode(VST, SubtitleInfo.LastSubtitle.Selected, True, True);
+  end;
+
+  if (MPVOptions.EndTime > 0) and (mpvPos >= MPVOptions.EndTime) then
+  begin
+    MPV.Pause;
+    MPV.SetMediaPosInMs(MPVOptions.EndTime);
+    MPVOptions.EndTime := 0;
   end;
 
   TimerSubtitle.Enabled := True;

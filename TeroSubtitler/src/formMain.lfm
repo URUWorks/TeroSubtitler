@@ -4161,6 +4161,18 @@ object frmMain: TfrmMain
       Caption = 'Cycle Aspect Ratio'
       OnExecute = actVARCycleExecute
     end
+    object actGoToNextEntryAndPlay: TAction
+      Tag = 4
+      Category = 'Entries'
+      Caption = 'Go to next entry and play'
+      OnExecute = actGoToNextEntryAndPlayExecute
+    end
+    object actGoToPreviousEntryAndPlay: TAction
+      Tag = 4
+      Category = 'Entries'
+      Caption = 'Go to previous entry and play'
+      OnExecute = actGoToPreviousEntryAndPlayExecute
+    end
   end
   object popDropInsert: TPopupMenu
     Images = ImageList_Default

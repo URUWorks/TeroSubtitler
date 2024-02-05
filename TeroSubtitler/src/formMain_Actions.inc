@@ -749,6 +749,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actGoToNextEntryAndPlayExecute(Sender: TObject);
+begin
+  GoToNextEntryAndPlay;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actGoToPreviousEntryAndPlayExecute(Sender: TObject);
+begin
+  GoToNextEntryAndPlay(False);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actCombineEntriesExecute(Sender: TObject);
 begin
   VSTCombineEntries(VST);
@@ -1240,10 +1254,19 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actAddNoteExecute(Sender: TObject);
+var
+  Idx: Integer;
 begin
   if VST.SelectedCount = 1 then
-    with Subtitles.ItemPointer[VSTFocusedNode(VST)]^ do
+  begin
+    Idx := VSTFocusedNode(VST);
+    with Subtitles.ItemPointer[Idx]^ do
+    begin
+      UndoInstance.AddUndo(utSubtitleChange, Idx, Subtitles[Idx]);
       Notes := InputDialog(lngAddNote, '', Notes, '', '', 135);
+      SubtitleChanged(True, True);
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
