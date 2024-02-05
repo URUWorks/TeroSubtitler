@@ -1,8 +1,10 @@
 1.0.1.7 (x.x.2024)
+- fixed: Persian text displays wrong in list view #244
 - fixed: Wrong time values imported in a format variant [SubtitleAPI/TimedText]
 - fixed: Some properties are not reflected when "mpv handles subtitles for preview" option is active
 - updated: Italian language (thx GitGianluc)
 - improved: Audio to text: cancel download of model #22
+- added: Shortcut configuration for next/previous line #246
 - added: Numbers next to each filter in Fix Subtitle to denote occurrences
 
 1.0.1.6 (29.01.2024)
