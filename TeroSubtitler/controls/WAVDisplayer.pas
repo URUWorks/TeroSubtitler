@@ -234,6 +234,7 @@ type
     procedure DrawSceneChange(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
     procedure DrawMinimumBlank(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
     procedure CalculateTimeDivisionStepMs;
+    function FrameStart(PosMs: Integer):integer;
   protected
     procedure Paint; override;
     procedure DoOnResize; override;
@@ -1212,6 +1213,14 @@ end;
 
 //------------------------------------------------------------------------------
 
+//Goes to the beginning of the frame im FF mode is enabled.
+function TUWWaveformDisplayer.FrameStart(PosMs: Integer):integer;
+begin
+  if FFPSTimeMode
+    then Result := RoundTimeWithFrames(PosMs, FFPS)
+    else Result := PosMs;
+end;
+
 procedure TUWWaveformDisplayer.MouseMove(Shift: TShiftState; X, Y: Integer);
 var
   ACursorPosMs      : Integer;
@@ -1256,7 +1265,8 @@ begin
       begin
         // Update selection
         if FDynamicEditMode <> demWhole then
-        begin
+        begin  //Move cursors
+          ACursorPosMS := FrameStart(ACursorPosMS);
           if (ACursorPosMS > FDynamicSelValueMs) then
           begin
             FDynamicSelection.InitialTime := FDynamicSelValueMs;
@@ -1279,11 +1289,12 @@ begin
                 FSubtitles.ItemPointer[FPrevSubIdx]^.FinalTime := ACursorPosMS - FGAP;
             end;
           end;
-        end
+        end //Move cursors
         else if (FDynamicEditMode = demWhole) and Assigned(FSelectedSubtitle) then
-        begin
+        begin  //Drag selection
           SubLen := Range(FOldFinalTime - FOldInitialTime, 0, FOldFinalTime);
           NewIT  := FOldInitialTime + ((PixelToTime(X) + FPositionMS) - FOldMouseDownX);
+          NewIT := FrameStart(NewIT);
           NewFT  := NewIT + SubLen;
 
           if FEnableMouseAntiOverlapping and not (ssAlt in Shift) then
@@ -1302,7 +1313,7 @@ begin
 
           FDynamicSelection.InitialTime := Range(NewIT, 0, FLengthMS-SubLen);
           FDynamicSelection.FinalTime   := Range(NewFT, SubLen, FLengthMS);
-        end;
+        end; //Drag selection
 
         if Assigned(FSelectedSubtitle) then
         begin
@@ -1420,7 +1431,7 @@ begin
     FMaxSelTime        := -1;
     FPrevSubIdx        := -1;
     FNextSubIdx        := -1;
-    FCursorMS          := PixelToTime(X) + FPositionMS;
+    FCursorMS          :=  FrameStart(PixelToTime(X) + FPositionMS);
 
     UpdateView([uvfSelection, uvfSubtitle]);
   end;
