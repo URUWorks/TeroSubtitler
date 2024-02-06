@@ -58,7 +58,6 @@ var
 begin
   with frmMain.MPV do
   begin
-    MPVOptions.EndTime := 0;
     {$IFNDEF LINUX}
     MPVFileName := libMPVFileName(False);
     {$ENDIF}

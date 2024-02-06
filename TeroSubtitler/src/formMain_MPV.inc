@@ -24,8 +24,16 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.MPVEndFile(ASender: TObject; AParam: Integer);
+begin
+  MPVOptions.EndTime := 0;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.MPVStartFile(Sender: TObject);
 begin
+  MPVOptions.EndTime := 0;
   SetStatusBarText(lngasReadingVideoFile);
 end;
 
