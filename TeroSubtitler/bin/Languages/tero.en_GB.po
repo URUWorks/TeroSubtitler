@@ -2857,6 +2857,14 @@ msgstr "Video with hardcoded subtitles..."
 msgid "Go to entry..."
 msgstr "Go to entry..."
 
+#: tfrmmain.actgotocurrententryfinaltime.caption
+msgid "Go to current entry final time"
+msgstr "Go to current entry final time"
+
+#: tfrmmain.actgotocurrententryinitialtime.caption
+msgid "Go to current entry initial time"
+msgstr "Go to current entry initial time"
+
 #: tfrmmain.actgotonextentryandplay.caption
 msgid "Go to next entry and play"
 msgstr "Go to next entry and play"

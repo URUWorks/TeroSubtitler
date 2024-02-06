@@ -2866,6 +2866,14 @@ msgstr "Создать видеоряд с хардсабом..."
 msgid "Go to entry..."
 msgstr "Перейти к строке номер..."
 
+#: tfrmmain.actgotocurrententryfinaltime.caption
+msgid "Go to current entry final time"
+msgstr ""
+
+#: tfrmmain.actgotocurrententryinitialtime.caption
+msgid "Go to current entry initial time"
+msgstr ""
+
 #: tfrmmain.actgotonextentryandplay.caption
 msgid "Go to next entry and play"
 msgstr ""

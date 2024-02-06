@@ -2847,6 +2847,14 @@ msgstr ""
 msgid "Go to entry..."
 msgstr ""
 
+#: tfrmmain.actgotocurrententryfinaltime.caption
+msgid "Go to current entry final time"
+msgstr ""
+
+#: tfrmmain.actgotocurrententryinitialtime.caption
+msgid "Go to current entry initial time"
+msgstr ""
+
 #: tfrmmain.actgotonextentryandplay.caption
 msgid "Go to next entry and play"
 msgstr ""
