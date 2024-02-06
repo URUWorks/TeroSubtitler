@@ -5,6 +5,7 @@
 - updated: Italian language (thx GitGianluc)
 - improved: Audio to text: cancel download of model #22
 - added: Shortcut configuration for next/previous line #246
+- added: Go to current entry initial/final time actions
 - added: Numbers next to each filter in Fix Subtitle to denote occurrences
 
 1.0.1.6 (29.01.2024)
