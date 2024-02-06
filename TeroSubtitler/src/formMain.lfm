@@ -337,6 +337,7 @@ object frmMain: TfrmMain
       RendererMode = rmEmbedding
       LogLevel = llStatus
       OnStartFile = MPVStartFile
+      OnEndFile = MPVEndFile
       OnFileLoaded = MPVFileLoaded
       OnAudioReconfig = MPVAudioReconfig
       OnPlay = MPVPlay
@@ -4172,6 +4173,18 @@ object frmMain: TfrmMain
       Category = 'Entries'
       Caption = 'Go to previous entry and play'
       OnExecute = actGoToPreviousEntryAndPlayExecute
+    end
+    object actGoToCurrentEntryInitialTime: TAction
+      Tag = 4
+      Category = 'Entries'
+      Caption = 'Go to current entry initial time'
+      OnExecute = actGoToCurrentEntryInitialTimeExecute
+    end
+    object actGoToCurrentEntryFinalTime: TAction
+      Tag = 4
+      Category = 'Entries'
+      Caption = 'Go to current entry final time'
+      OnExecute = actGoToCurrentEntryFinalTimeExecute
     end
   end
   object popDropInsert: TPopupMenu

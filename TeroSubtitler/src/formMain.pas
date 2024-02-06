@@ -87,6 +87,8 @@ type
     actGenerateBlankVideo: TAction;
     actGoToNextEntryAndPlay: TAction;
     actGoToPreviousEntryAndPlay: TAction;
+    actGoToCurrentEntryInitialTime: TAction;
+    actGoToCurrentEntryFinalTime: TAction;
     actTextEffectTypewriter: TAction;
     actTextEffectFlash: TAction;
     actJumpToNextNote: TAction;
@@ -864,6 +866,7 @@ type
     procedure DetectDialogSegments;
     // formMain_MPV
     procedure MPVClick(Sender: TObject);
+    procedure MPVEndFile(ASender: TObject; AParam: Integer);
     procedure MPVStartFile(Sender: TObject);
     procedure MPVFileLoaded(Sender: TObject);
     procedure MPVPause(Sender: TObject);
@@ -963,6 +966,8 @@ type
     procedure actMediaZoomSelectionExecute(Sender: TObject);
     procedure actGoToNextEntryAndPlayExecute(Sender: TObject);
     procedure actGoToPreviousEntryAndPlayExecute(Sender: TObject);
+    procedure actGoToCurrentEntryFinalTimeExecute(Sender: TObject);
+    procedure actGoToCurrentEntryInitialTimeExecute(Sender: TObject);
     procedure actCombineEntriesExecute(Sender: TObject);
     procedure actAutoBreakEntryExecute(Sender: TObject);
     procedure actSelectAllExecute(Sender: TObject);

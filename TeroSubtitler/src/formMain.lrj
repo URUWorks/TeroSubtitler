@@ -316,6 +316,8 @@
 {"hash":108872495,"name":"tfrmmain.actvarcycle.caption","sourcebytes":[67,121,99,108,101,32,65,115,112,101,99,116,32,82,97,116,105,111],"value":"Cycle Aspect Ratio"},
 {"hash":184947577,"name":"tfrmmain.actgotonextentryandplay.caption","sourcebytes":[71,111,32,116,111,32,110,101,120,116,32,101,110,116,114,121,32,97,110,100,32,112,108,97,121],"value":"Go to next entry and play"},
 {"hash":244001081,"name":"tfrmmain.actgotopreviousentryandplay.caption","sourcebytes":[71,111,32,116,111,32,112,114,101,118,105,111,117,115,32,101,110,116,114,121,32,97,110,100,32,112,108,97,121],"value":"Go to previous entry and play"},
+{"hash":172272725,"name":"tfrmmain.actgotocurrententryinitialtime.caption","sourcebytes":[71,111,32,116,111,32,99,117,114,114,101,110,116,32,101,110,116,114,121,32,105,110,105,116,105,97,108,32,116,105,109,101],"value":"Go to current entry initial time"},
+{"hash":158991989,"name":"tfrmmain.actgotocurrententryfinaltime.caption","sourcebytes":[71,111,32,116,111,32,99,117,114,114,101,110,116,32,101,110,116,114,121,32,102,105,110,97,108,32,116,105,109,101],"value":"Go to current entry final time"},
 {"hash":261306372,"name":"tfrmmain.mnuvstformat.caption","sourcebytes":[109,110,117,86,83,84,70,111,114,109,97,116],"value":"mnuVSTFormat"},
 {"hash":184739641,"name":"tfrmmain.mnudictionary.caption","sourcebytes":[68,105,99,116,105,111,110,97,114,121],"value":"Dictionary"},
 {"hash":128765908,"name":"tfrmmain.mnumemoformat.caption","sourcebytes":[109,110,117,77,101,109,111,70,111,114,109,97,116],"value":"mnuMemoFormat"},

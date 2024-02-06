@@ -763,6 +763,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actGoToCurrentEntryInitialTimeExecute(Sender: TObject);
+begin
+  GoToCurrentEntryTime;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actGoToCurrentEntryFinalTimeExecute(Sender: TObject);
+begin
+  GoToCurrentEntryTime(False);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actCombineEntriesExecute(Sender: TObject);
 begin
   VSTCombineEntries(VST);

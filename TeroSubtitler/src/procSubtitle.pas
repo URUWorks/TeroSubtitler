@@ -70,6 +70,7 @@ function GetLengthForEachLine(Text: String; const Separator: String = sLineBreak
 function GetLengthForEachLineIntArray(Text: String; const Separator: String = sLineBreak; const LastSeparator: String = sLineBreak): TIntegerDynArray;
 procedure SelectSubtitleAndFocusMemo(const NextSibiling: Boolean; const WaveToo: Boolean = False);
 procedure GoToNextEntryAndPlay(const NextSibiling: Boolean = True);
+procedure GoToCurrentEntryTime(const AInitialTime: Boolean = True);
 function GetSubtitleIndexAtTime(const MSecs: Cardinal): Integer;
 function GetSubtitleTextAtTime(const MSecs: Cardinal): String;
 
@@ -886,6 +887,28 @@ begin
 
       if not MPV.IsPlaying then
         MPV.Resume(True);
+    end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure GoToCurrentEntryTime(const AInitialTime: Boolean = True);
+var
+  x, t: Integer;
+begin
+  with frmMain do
+  begin
+    x := VSTFocusedNode(VST);
+
+    if x >= 0 then
+    begin
+      if AInitialTime then
+        t := Subtitles[x].InitialTime
+      else
+        t := Subtitles[x].FinalTime;
+
+      MPV.SetMediaPosInMs(t);
     end;
   end;
 end;
