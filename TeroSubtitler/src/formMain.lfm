@@ -4186,6 +4186,12 @@ object frmMain: TfrmMain
       Caption = 'Go to current entry final time'
       OnExecute = actGoToCurrentEntryFinalTimeExecute
     end
+    object actPlayCurrentEntry: TAction
+      Tag = 4
+      Category = 'Entries'
+      Caption = 'Play current entry'
+      OnExecute = actPlayCurrentEntryExecute
+    end
   end
   object popDropInsert: TPopupMenu
     Images = ImageList_Default
@@ -4485,6 +4491,24 @@ object frmMain: TfrmMain
     object mnuVSTFormat: TMenuItem
       Caption = 'mnuVSTFormat'
     end
+    object mnuVSTVideo: TMenuItem
+      Caption = 'Video'
+      object MenuItem56: TMenuItem
+        Action = actPlayCurrentEntry
+      end
+      object MenuItem242: TMenuItem
+        Action = actGoToCurrentEntryInitialTime
+      end
+      object MenuItem243: TMenuItem
+        Action = actGoToCurrentEntryFinalTime
+      end
+      object MenuItem244: TMenuItem
+        Action = actGoToNextEntryAndPlay
+      end
+      object MenuItem245: TMenuItem
+        Action = actGoToPreviousEntryAndPlay
+      end
+    end
     object Separator36: TMenuItem
       Caption = '-'
     end
@@ -4601,6 +4625,7 @@ object frmMain: TfrmMain
   end
   object popVideo: TPopupMenu
     Images = ImageList_Default
+    OnPopup = DoVideoPopup
     Left = 88
     Top = 96
     object MenuItem101: TMenuItem
@@ -4608,6 +4633,21 @@ object frmMain: TfrmMain
     end
     object MenuItem102: TMenuItem
       Action = actMediaStop
+    end
+    object Separator59: TMenuItem
+      Caption = '-'
+    end
+    object mnuVideoPopupAR: TMenuItem
+      Caption = 'mnuVideoPopupAR'
+    end
+    object mnuVideoPopupAS: TMenuItem
+      Caption = 'mnuVideoPopupAS'
+    end
+    object mnuVideoPopupAF: TMenuItem
+      Caption = 'mnuVideoPopupAF'
+    end
+    object mnuVideoPopupVF: TMenuItem
+      Caption = 'mnuVideoPopupVF'
     end
   end
   object popWAVE: TPopupMenu

@@ -71,7 +71,8 @@ function GetLengthForEachLineIntArray(Text: String; const Separator: String = sL
 procedure SelectSubtitleAndFocusMemo(const NextSibiling: Boolean; const WaveToo: Boolean = False);
 procedure GoToNextEntryAndPlay(const NextSibiling: Boolean = True);
 procedure GoToCurrentEntryTime(const AInitialTime: Boolean = True);
-function GetSubtitleIndexAtTime(const MSecs: Cardinal): Integer;
+procedure PlayCurrentEntry;
+function GetSubtitleIndexAtTime(MSecs: Cardinal): Integer;
 function GetSubtitleTextAtTime(const MSecs: Cardinal): String;
 
 procedure InsertMemoText(const AText: String; const AVSTLoop: Boolean = True);
@@ -915,7 +916,28 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetSubtitleIndexAtTime(const MSecs: Cardinal): Integer;
+procedure PlayCurrentEntry;
+var
+  x: Integer;
+begin
+  with frmMain do
+  begin
+    x := VSTFocusedNode(VST);
+
+    if x >= 0 then
+    begin
+      MPV.SetMediaPosInMs(Subtitles[x].InitialTime);
+      MPVOptions.EndTime := Subtitles[x].FinalTime;
+
+      if not MPV.IsPlaying then
+        MPV.Resume(True);
+    end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetSubtitleIndexAtTime(MSecs: Cardinal): Integer;
 var
   i: Integer;
 begin
@@ -924,12 +946,15 @@ begin
   if Subtitles.Count > 0 then
     for i := 0 to Subtitles.Count-1 do
       with Subtitles[i] do
-        if (InitialTime <= MSecs) and (FinalTime > MSecs) then //if (InitialTime <= MSecs + 1) and (FinalTime > MSecs + 1) then
+      begin
+        //MSecs += 1;
+        if (InitialTime <= MSecs) and (FinalTime > MSecs) then
         begin
           Result := i;
           SubtitleInfo.LastSubtitle.ShowIndex := Result;
           Break;
         end;
+      end;
 end;
 
 // -----------------------------------------------------------------------------

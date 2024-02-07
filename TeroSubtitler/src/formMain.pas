@@ -89,6 +89,7 @@ type
     actGoToPreviousEntryAndPlay: TAction;
     actGoToCurrentEntryInitialTime: TAction;
     actGoToCurrentEntryFinalTime: TAction;
+    actPlayCurrentEntry: TAction;
     actTextEffectTypewriter: TAction;
     actTextEffectFlash: TAction;
     actJumpToNextNote: TAction;
@@ -346,7 +347,18 @@ type
     MenuItem239: TMenuItem;
     MenuItem240: TMenuItem;
     MenuItem241: TMenuItem;
+    MenuItem242: TMenuItem;
+    MenuItem243: TMenuItem;
+    MenuItem244: TMenuItem;
+    MenuItem245: TMenuItem;
+    mnuVideoPopupAR: TMenuItem;
+    mnuVideoPopupAS: TMenuItem;
+    mnuVideoPopupAF: TMenuItem;
+    mnuVideoPopupVF: TMenuItem;
+    MenuItem56: TMenuItem;
+    mnuVSTVideo: TMenuItem;
     mnuTextEffects: TMenuItem;
+    Separator50: TMenuItem;
     Separator57: TMenuItem;
     MenuItem233: TMenuItem;
     mnuTextWords: TMenuItem;
@@ -633,7 +645,6 @@ type
     Separator47: TMenuItem;
     Separator48: TMenuItem;
     Separator49: TMenuItem;
-    Separator50: TMenuItem;
     Separator51: TMenuItem;
     Separator52: TMenuItem;
     Separator53: TMenuItem;
@@ -641,6 +652,7 @@ type
     Separator55: TMenuItem;
     Separator56: TMenuItem;
     Separator58: TMenuItem;
+    Separator59: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
@@ -807,6 +819,7 @@ type
     procedure DoVSTPopup(Sender: TObject);
     procedure DoTranscriptionPopup(Sender: TObject);
     procedure DoWAVEPopup(Sender: TObject);
+    procedure DoVideoPopup(Sender: TObject);
     procedure DoAutoBackupTimer(Sender: TObject);
     procedure DoStatusTimer(Sender: TObject);
     {$IFDEF WINDOWS}
@@ -968,6 +981,7 @@ type
     procedure actGoToPreviousEntryAndPlayExecute(Sender: TObject);
     procedure actGoToCurrentEntryFinalTimeExecute(Sender: TObject);
     procedure actGoToCurrentEntryInitialTimeExecute(Sender: TObject);
+    procedure actPlayCurrentEntryExecute(Sender: TObject);
     procedure actCombineEntriesExecute(Sender: TObject);
     procedure actAutoBreakEntryExecute(Sender: TObject);
     procedure actSelectAllExecute(Sender: TObject);
@@ -1703,6 +1717,7 @@ procedure TfrmMain.DoVSTPopup(Sender: TObject);
 begin
   mnuNoteSeparator.Visible := (VST.SelectedCount = 1);
   mnuAddNote.Visible       := mnuNoteSeparator.Visible;
+  mnuVSTVideo.Visible      := (VST.SelectedCount = 1) and MPV.IsMediaLoaded;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1727,6 +1742,16 @@ begin
       else
         actDeleteShotChange.Enabled := ContainsSceneChange(Selection.InitialTime, Selection.FinalTime);
     end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.DoVideoPopup(Sender: TObject);
+begin
+  mnuVideoPopupAR.Assign(mnuVideoAspectRatio);
+  mnuVideoPopupAS.Assign(mnuVideoAudioStream);
+  mnuVideoPopupAF.Assign(mnuVideoAudioFilters);
+  mnuVideoPopupVF.Assign(mnuVideoVideoFilters);
 end;
 
 // -----------------------------------------------------------------------------

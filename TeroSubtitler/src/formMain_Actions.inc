@@ -777,6 +777,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actPlayCurrentEntryExecute(Sender: TObject);
+begin
+  PlayCurrentEntry;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actCombineEntriesExecute(Sender: TObject);
 begin
   VSTCombineEntries(VST);
