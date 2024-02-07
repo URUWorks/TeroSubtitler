@@ -44,6 +44,7 @@ begin
   Item.FinalTime   := OldFinalTime;
 
   UndoInstance.AddUndo(utSubtitleChange, Index, Item);
+  DoAutoCheckErrors;
   UpdateValues(True);
   SubtitleChanged(True, Workspace.TranslatorMode);
 end;
