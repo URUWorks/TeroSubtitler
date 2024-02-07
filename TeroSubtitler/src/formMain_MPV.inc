@@ -136,11 +136,15 @@ procedure TfrmMain.MPVDoTimeChanged(const Time: Integer);
 begin
   if not sbrSeek.MouseIsDown then
   begin
-    sbrSeek.Position := Time;
-    if lblMediaTime.Tag = TAG_CONTROL_UPDATE then
-      lblMediaTime.Tag := TAG_CONTROL_NORMAL
-    else
-      lblMediaTime.Caption := GetTimeStr(Time);
+    if sbrSeek.Tag = TAG_CONTROL_NORMAL then
+    begin
+      sbrSeek.Position := Time;
+
+      if lblMediaTime.Tag = TAG_CONTROL_UPDATE then
+        lblMediaTime.Tag := TAG_CONTROL_NORMAL
+      else
+        lblMediaTime.Caption := GetTimeStr(Time);
+    end;
   end;
 end;
 
@@ -177,6 +181,13 @@ begin
   TimerSubtitle.Enabled := False;
   mpvPos := MPV.GetMediaPosInMs;
 
+  if (MPVOptions.EndTime > 0) and (mpvPos >= MPVOptions.EndTime-1) then
+  begin
+    MPV.Pause;
+    MPV.SetMediaPosInMs(MPVOptions.EndTime);
+    MPVOptions.EndTime := 0;
+  end;
+
   if MPVOptions.SubtitleHandleByMPV then
   begin
     if actMediaAutoScroll.Checked then
@@ -193,13 +204,6 @@ begin
     SubtitleInfo.LastSubtitle.Selected := SubtitleInfo.LastSubtitle.ShowIndex;
     if actMediaAutoScroll.Checked then
       VSTSelectNode(VST, SubtitleInfo.LastSubtitle.Selected, True, True);
-  end;
-
-  if (MPVOptions.EndTime > 0) and (mpvPos >= MPVOptions.EndTime) then
-  begin
-    MPV.Pause;
-    MPV.SetMediaPosInMs(MPVOptions.EndTime);
-    MPVOptions.EndTime := 0;
   end;
 
   TimerSubtitle.Enabled := True;
@@ -222,22 +226,37 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.sbrSeekMouseMove(Sender: TObject; Shift: TShiftState; X,
-  Y: Integer);
+procedure TfrmMain.sbrSeekMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+var
+  p: Integer;
 begin
-  with sbrSeek do
-    if MouseIsDown then
-      lblMediaTime.Caption := GetTimeStr(Range((X * Max) div Width, 0, Max))
-    else
-      //MPV.ShowText(GetTimeStr((X * Max) div Width));
-      MPV.ShowOverlayText(GetTimeStr((X * Max) div Width));
+  if MPV.IsMediaLoaded then
+    with sbrSeek do
+      if MouseIsDown then
+        lblMediaTime.Caption := GetTimeStr(Range((X * Max) div Width, 0, Max))
+      else
+      begin
+        p := Range((X * Max) div Width, 0, sbrSeek.Max);
+        MPV.ShowOverlayText(GetTimeStr(p));
+
+        if MPV.IsPaused and (ssCtrl in Shift) then
+        begin
+          sbrSeek.Tag := TAG_CONTROL_UPDATE;
+          MPVSeekTo(p);
+        end;
+      end;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.sbrSeekMouseLeave(Sender: TObject);
 begin
-  //MPV.ShowText('');
+  if sbrSeek.Tag = TAG_CONTROL_UPDATE then
+  begin
+    sbrSeek.Tag := TAG_CONTROL_NORMAL;
+    MPVSeekTo(sbrSeek.Position);
+  end;
+
   MPV.ShowOverlayText('');
 end;
 
