@@ -4,8 +4,11 @@
 - fixed: Some properties are not reflected when "mpv handles subtitles for preview" option is active
 - updated: Italian language (thx GitGianluc)
 - improved: Audio to text: cancel download of model #22
+- improved: Video context menu
 - added: Shortcut configuration for next/previous line #246
+- added: Holding Ctrl while moving the mouse over the seekbar previews the current video position
 - added: Go to current entry initial/final time actions
+- added: Play current entry action
 - added: Numbers next to each filter in Fix Subtitle to denote occurrences
 
 1.0.1.6 (29.01.2024)
