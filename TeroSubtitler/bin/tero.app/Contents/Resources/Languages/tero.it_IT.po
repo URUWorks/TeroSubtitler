@@ -264,7 +264,7 @@ msgstr "Tentando di rilevare le parti dialogate, tutti i sottotitoli in elenco s
 
 #: proclocalize.lngdownloadcanceled
 msgid "Download canceled by user."
-msgstr ""
+msgstr "Scaricamento annullato dall’utente."
 
 #: proclocalize.lngentry
 #, object-pascal-format
@@ -510,7 +510,7 @@ msgstr "Rimuovi spaziatura"
 #: proclocalize.lngfstotalerrors
 #, object-pascal-format
 msgid "Total errors: %d (displayed: %d)"
-msgstr ""
+msgstr "Errori totali: %d (visualizzati: %d)"
 
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
@@ -1921,36 +1921,34 @@ msgid "Only selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmdownload.btncancel.caption
-#, fuzzy
 msgctxt "tfrmdownload.btncancel.caption"
 msgid "Cancel"
 msgstr "Annulla"
 
 #: tfrmdownload.caption
-#, fuzzy
 msgctxt "tfrmdownload.caption"
 msgid "Downloading"
 msgstr "Scaricamento in corso"
 
 #: tfrmdownload.lblelapsed.caption
 msgid "Elapsed:"
-msgstr ""
+msgstr "Tempo trascorso:"
 
 #: tfrmdownload.lblfile.caption
 msgid "File:"
-msgstr ""
+msgstr "File:"
 
 #: tfrmdownload.lblreceived.caption
 msgid "Received:"
-msgstr ""
+msgstr "Dati ricevuti:"
 
 #: tfrmdownload.lblremaining.caption
 msgid "Remaining:"
-msgstr ""
+msgstr "Tempo rimanente:"
 
 #: tfrmdownload.lblspeed.caption
 msgid "Speed:"
-msgstr ""
+msgstr "Velocità:"
 
 #: tfrmdurationlimits.btnapply.caption
 msgctxt "tfrmdurationlimits.btnapply.caption"
@@ -2859,19 +2857,19 @@ msgstr "Vai all’elemento…"
 
 #: tfrmmain.actgotocurrententryfinaltime.caption
 msgid "Go to current entry final time"
-msgstr ""
+msgstr "Vai al punto finale dell’elemento corrente"
 
 #: tfrmmain.actgotocurrententryinitialtime.caption
 msgid "Go to current entry initial time"
-msgstr ""
+msgstr "Vai al punto iniziale dell’elemento corrente"
 
 #: tfrmmain.actgotonextentryandplay.caption
 msgid "Go to next entry and play"
-msgstr ""
+msgstr "Vai all’elemento successivo e riproduci"
 
 #: tfrmmain.actgotopreviousentryandplay.caption
 msgid "Go to previous entry and play"
-msgstr ""
+msgstr "Vai all’elemento precedente e riproduci"
 
 #: tfrmmain.actgototime.caption
 msgid "Go to time..."
@@ -5067,4 +5065,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
