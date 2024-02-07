@@ -452,7 +452,8 @@ begin
         TranslatorMode := GetValue('TranslatorMode', TranslatorMode);
         SetTranslatorMode(TranslatorMode);
         FPS.DefFPS := StrToSingle(ReplaceString(GetValue('DefFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
-        FPS.InputFPS := FPS.DefFPS;
+        FPS.InputFPS := StrToSingle(ReplaceString(GetValue('InputFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
+        FPS.OutputFPS := StrToSingle(ReplaceString(GetValue('OutputFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
         DefEncoding  := GetValue('DefEncoding', DefEncoding);
         DefFormat    := TUWSubtitleFormats(GetValue('DefFormat', Integer(DefFormat)));
         SetVideoPreview(GetValue('VideoPreview', False));
@@ -830,6 +831,8 @@ begin
         SetValue('WorkMode', Integer(WorkMode));
         SetValue('TranslatorMode', TranslatorMode);
         SetValue('DefFPS', SingleToStr(FPS.DefFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
+        SetValue('InputFPS', SingleToStr(FPS.InputFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
+        SetValue('OutputFPS', SingleToStr(FPS.OutputFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
         SetValue('DefEncoding', DefEncoding);
         SetValue('DefFormat', Integer(DefFormat));
         SetValue('VideoPreview', actVideoPreview.Checked);
