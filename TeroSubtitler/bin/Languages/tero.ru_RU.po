@@ -3182,6 +3182,10 @@ msgctxt "tfrmmain.actpaste.caption"
 msgid "Paste"
 msgstr "Вставить"
 
+#: tfrmmain.actplaycurrententry.caption
+msgid "Play current entry"
+msgstr ""
+
 #: tfrmmain.actprevioussubtitle.caption
 msgctxt "tfrmmain.actprevioussubtitle.caption"
 msgid "Previous subtitle"
@@ -3943,6 +3947,12 @@ msgstr "Панель инструментов"
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
 msgstr "Окна"
+
+#: tfrmmain.mnuvstvideo.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuvstvideo.caption"
+msgid "Video"
+msgstr "Видео"
 
 #: tfrmmain.mnuworkspacelayout.caption
 msgid "Layouts"

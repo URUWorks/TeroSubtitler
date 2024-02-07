@@ -3171,6 +3171,10 @@ msgctxt "tfrmmain.actpaste.caption"
 msgid "Paste"
 msgstr "Incolla"
 
+#: tfrmmain.actplaycurrententry.caption
+msgid "Play current entry"
+msgstr ""
+
 #: tfrmmain.actprevioussubtitle.caption
 msgctxt "tfrmmain.actprevioussubtitle.caption"
 msgid "Previous subtitle"
@@ -3926,6 +3930,12 @@ msgstr "Barre degli strumenti"
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
 msgstr "Finestre"
+
+#: tfrmmain.mnuvstvideo.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuvstvideo.caption"
+msgid "Video"
+msgstr "Filmato"
 
 #: tfrmmain.mnuworkspacelayout.caption
 msgid "Layouts"
@@ -5065,3 +5075,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+

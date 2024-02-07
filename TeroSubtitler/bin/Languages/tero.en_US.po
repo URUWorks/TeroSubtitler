@@ -3163,6 +3163,10 @@ msgctxt "tfrmmain.actpaste.caption"
 msgid "Paste"
 msgstr ""
 
+#: tfrmmain.actplaycurrententry.caption
+msgid "Play current entry"
+msgstr ""
+
 #: tfrmmain.actprevioussubtitle.caption
 msgctxt "tfrmmain.actprevioussubtitle.caption"
 msgid "Previous subtitle"
@@ -3917,6 +3921,11 @@ msgstr ""
 
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
+msgstr ""
+
+#: tfrmmain.mnuvstvideo.caption
+msgctxt "tfrmmain.mnuvstvideo.caption"
+msgid "Video"
 msgstr ""
 
 #: tfrmmain.mnuworkspacelayout.caption
