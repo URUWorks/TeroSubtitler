@@ -422,11 +422,13 @@ procedure TDownload.Execute;
 var
   DS: TDownloadStream;
   Flags: Word;
+  Success: Boolean;
 begin
   FStartTime := GetTickCount64;
   if GetContentLength then
   begin
     Flags := fmOpenWrite;
+    Success := False;
 
     if not FileExists(FLocalFile) then
     begin
@@ -450,11 +452,7 @@ begin
         FFPHTTPClient.AllowRedirect := True;
         FFPHTTPClient.HTTPMethod('GET', FURL, DS, [200, 206]);
         if not FFPHTTPClient.Terminated then
-        begin
-          FreeAndNil(DS);
-          Synchronize(@DoOnDownloadProgress);
-          Synchronize(@DoOnDownloadCompleted);
-        end;
+          Success := True;
       except
         on E: Exception do
         begin
@@ -463,8 +461,13 @@ begin
         end;
       end;
     finally
-      if Assigned(DS) then
-        DS.Free
+      DS.Free
+    end;
+
+    if Success then
+    begin
+      Synchronize(@DoOnDownloadProgress);
+      Synchronize(@DoOnDownloadCompleted);
     end;
   end
   else
