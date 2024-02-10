@@ -53,7 +53,7 @@ implementation
 
 uses
   procTypes, procWorkspace, procSubtitle, UWSystem.StrUtils, procColorTheme,
-  Math;
+  Math, UWSubtitleAPI.Tags;
 
 {$R *.lfm}
 
@@ -156,9 +156,9 @@ begin
     if Subtitles.Text[i].IsEmpty then
       Inc(EntriesWithoutText);
 
-    NumberOfWords += WordCount(Subtitles.Text[i]);
+    NumberOfWords += WordCount(RemoveTSTags(Subtitles.Text[i]));
 
-    l := UTF8Length(Subtitles.Text[i]);
+    l := GetTextLength(Subtitles.Text[i]);
     ShortestLine := Min(l, ShortestLine);
     if ShortestLine = l then ShortestLineIdx := i+1;
     LongestLine := Max(l, LongestLine);

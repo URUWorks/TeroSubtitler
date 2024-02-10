@@ -68,6 +68,7 @@ function GetSubtitleText(const Index: Integer; const SubtitleMode: TSubtitleMode
 function GetMaxLinesOf(Text: String; const Separator: String = sLineBreak): Integer;
 function GetLengthForEachLine(Text: String; const Separator: String = sLineBreak; const LastSeparator: String = sLineBreak): String;
 function GetLengthForEachLineIntArray(Text: String; const Separator: String = sLineBreak; const LastSeparator: String = sLineBreak): TIntegerDynArray;
+function GetTextLength(const Text: String): Integer;
 procedure SelectSubtitleAndFocusMemo(const NextSibiling: Boolean; const WaveToo: Boolean = False);
 procedure GoToNextEntryAndPlay(const NextSibiling: Boolean = True);
 procedure GoToCurrentEntryTime(const AInitialTime: Boolean = True);
@@ -846,6 +847,13 @@ begin
     for i := 0 to High(sArray) do
       Result[i] := sArray[i].ToInteger;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetTextLength(const Text: String): Integer;
+begin
+  Result := UTF8Length(RemoveTSTags(Text));
 end;
 
 // -----------------------------------------------------------------------------
