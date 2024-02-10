@@ -955,7 +955,9 @@ begin
     for i := 0 to Subtitles.Count-1 do
       with Subtitles[i] do
       begin
-        //MSecs += 1;
+        if not MPVOptions.SubtitleHandleByMPV and (Workspace.WorkMode = wmFrames) then
+          MSecs += 1;
+
         if (InitialTime <= MSecs) and (FinalTime > MSecs) then
         begin
           Result := i;
