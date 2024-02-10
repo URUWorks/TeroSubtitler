@@ -43,6 +43,7 @@ procedure MPVSetAudioFilters;
 procedure MPVSetFilters;
 procedure MPVSetVideoAspectRatio(const AValue: TMPVPlayerVideoAspectRatio);
 procedure MPVCycleVideoAspectRatio;
+procedure MPVSetPanAndScan(const AValue: Boolean);
 
 // -----------------------------------------------------------------------------
 
@@ -396,6 +397,17 @@ begin
   begin
     UncheckVARActions;
     VARtoAction(MPV.CycleVideoAspectRatio).Checked := True;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MPVSetPanAndScan(const AValue: Boolean);
+begin
+  with frmMain do
+  begin
+    actPanAndScan.Checked := AValue;
+    MPV.mpv_set_option_string_('panscan=' + IntToStr(iff(AValue, 1, 0)));
   end;
 end;
 

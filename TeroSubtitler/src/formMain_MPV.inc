@@ -46,6 +46,7 @@ begin
   SetStatusBarText('');
   EnableActionsByTag([TAG_ACTION_VIDEO], True);
   MPVSetFilters;
+  MPVSetPanAndScan(actPanAndScan.Checked);
 
   SubtitleInfo.LastSubtitle.ShowIndex := 0;
   sbrSeek.Max := MPV.GetMediaLenInMs;

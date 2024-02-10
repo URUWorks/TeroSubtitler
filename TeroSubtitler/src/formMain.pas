@@ -90,6 +90,7 @@ type
     actGoToCurrentEntryInitialTime: TAction;
     actGoToCurrentEntryFinalTime: TAction;
     actDistributeEntriesEvenly: TAction;
+    actPanAndScan: TAction;
     actVideoFilterDeinterlace: TAction;
     actPlayCurrentEntry: TAction;
     actTextEffectTypewriter: TAction;
@@ -355,6 +356,7 @@ type
     MenuItem245: TMenuItem;
     MenuItem246: TMenuItem;
     MenuItem247: TMenuItem;
+    MenuItem248: TMenuItem;
     mnuVideoPopupAR: TMenuItem;
     mnuVideoPopupAS: TMenuItem;
     mnuVideoPopupAF: TMenuItem;
@@ -376,7 +378,6 @@ type
     MenuItem219: TMenuItem;
     MenuItem220: TMenuItem;
     MenuItem221: TMenuItem;
-    MenuItem222: TMenuItem;
     mnuWorkspaceLayout: TMenuItem;
     MenuItem137: TMenuItem;
     MenuItem138: TMenuItem;
@@ -1148,6 +1149,7 @@ type
     procedure actVAR1851Execute(Sender: TObject);
     procedure actVAR2351Execute(Sender: TObject);
     procedure actVARCycleExecute(Sender: TObject);
+    procedure actPanAndScanExecute(Sender: TObject);
     procedure actFocusInitialTimeExecute(Sender: TObject);
     procedure actFocusFinalTimeExecute(Sender: TObject);
     procedure actCharacterMapExecute(Sender: TObject);

@@ -2128,6 +2128,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actPanAndScanExecute(Sender: TObject);
+begin
+  MPVSetPanAndScan(not actPanAndScan.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actFocusInitialTimeExecute(Sender: TObject);
 begin
   SetFocusTimeEdit(TAG_CONTROL_INITIALTIME);

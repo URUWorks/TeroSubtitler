@@ -1928,8 +1928,8 @@ object frmMain: TfrmMain
         object Separator38: TMenuItem
           Caption = '-'
         end
-        object MenuItem222: TMenuItem
-          Action = actVARCycle
+        object MenuItem248: TMenuItem
+          Action = actPanAndScan
         end
       end
       object mnuVideoAudioStream: TMenuItem
@@ -4211,6 +4211,12 @@ object frmMain: TfrmMain
       AutoCheck = True
       Caption = 'Deinterlace'
       OnExecute = actVideoFilterDeinterlaceExecute
+    end
+    object actPanAndScan: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Pan-and-scan'
+      OnExecute = actPanAndScanExecute
     end
   end
   object popDropInsert: TPopupMenu
