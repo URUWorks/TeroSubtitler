@@ -6,6 +6,7 @@
 - improved: Audio to text: cancel download of model #22
 - improved: Video context menu
 - added: Distribute entries evenly
+- added: Pan-and-scan
 - added: Deinterlace filter
 - added: Shortcut configuration for next/previous line #246
 - added: Holding Ctrl while moving the mouse over the seekbar previews the current video position
