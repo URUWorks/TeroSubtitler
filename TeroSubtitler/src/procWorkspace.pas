@@ -1432,12 +1432,13 @@ begin
       tedFinal.Enabled       := mmoText.Enabled;
       tedPause.Enabled       := mmoText.Enabled;
       tedDuration.Enabled    := mmoText.Enabled;
-      actExtendLengthToPrevious.Enabled := mmoText.Enabled;
-      actExtendLengthToNext.Enabled     := mmoText.Enabled;
-      actSetAutomaticDuration.Enabled   := mmoText.Enabled;
-      actSetDefaultGap.Enabled          := mmoText.Enabled;
-      actMergeWithNext.Enabled     := False;
-      actMergeWithPrevious.Enabled := False;
+      actExtendLengthToPrevious.Enabled  := mmoText.Enabled;
+      actExtendLengthToNext.Enabled      := mmoText.Enabled;
+      actSetAutomaticDuration.Enabled    := mmoText.Enabled;
+      actSetDefaultGap.Enabled           := mmoText.Enabled;
+      actMergeWithNext.Enabled           := False;
+      actMergeWithPrevious.Enabled       := False;
+      actDistributeEntriesEvenly.Enabled := False;
 
       if VST.SelectedCount = 0 then // zero selected
       begin
@@ -1512,10 +1513,11 @@ begin
           actVAlignToMiddle.Checked := False;
           actVAlignToTop.Checked    := False;
 
-          actExtendLengthToPrevious.Enabled := True;
-          actExtendLengthToNext.Enabled     := True;
-          actSetDefaultGap.Enabled          := NodeIndex < Subtitles.Count-1;
-          tedPause.Enabled                  := actSetDefaultGap.Enabled;
+          actExtendLengthToPrevious.Enabled  := True;
+          actExtendLengthToNext.Enabled      := True;
+          actSetDefaultGap.Enabled           := NodeIndex < Subtitles.Count-1;
+          tedPause.Enabled                   := actSetDefaultGap.Enabled;
+          actDistributeEntriesEvenly.Enabled := True;
         end;
         actAutomaticDuration.Enabled := True;
       end;

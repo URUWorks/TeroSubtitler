@@ -68,6 +68,8 @@ procedure VSTSort(const AVST: TLazVirtualStringTree);
 procedure VSTDeleteLineFromEntry(const AVST: TLazVirtualStringTree; const ALines: TStringArray);
 procedure VSTTextEffect(const AVST: TLazVirtualStringTree; const AEffect: TTextEffect; const AParam1, AParam2: Integer);
 
+procedure VSTDistributeEntriesEvenly(const AVST: TLazVirtualStringTree);
+
 // -----------------------------------------------------------------------------
 
 implementation
@@ -1216,6 +1218,51 @@ begin
       VSTSelectNode(AVST, FocNode, True)
     else
       AVST.ClearSelection;
+
+    UndoInstance.IncrementUndoGroup;
+    SubtitleChanged(True, True);
+    UpdateValues(True);
+    DoAutoCheckErrors;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure VSTDistributeEntriesEvenly(const AVST: TLazVirtualStringTree);
+var
+  NodeArray : TNodeArray;
+  i, x, gap, dur, newDur, totLen, prevTime : Integer;
+begin
+  if AVST.SelectedCount > 0 then
+  begin
+    NodeArray := AVST.GetSortedSelection(False);
+    if NodeArray = NIL then Exit;
+
+    gap := GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames);
+    dur := (Subtitles[AVST.AbsoluteIndex(NodeArray[High(NodeArray)])].FinalTime - Subtitles[AVST.AbsoluteIndex(NodeArray[Low(NodeArray)])].InitialTime) - (gap * High(NodeArray));
+    totLen := 0;
+
+    for i := Low(NodeArray) to High(NodeArray) do
+    begin
+      x := AVST.AbsoluteIndex(NodeArray[i]);
+      if not Subtitles.Text[x].IsEmpty then
+        totLen += GetTextLength(Subtitles.Text[x]);
+    end;
+
+    prevTime := Subtitles[AVST.AbsoluteIndex(NodeArray[Low(NodeArray)])].InitialTime - gap;
+
+    for i := Low(NodeArray) to High(NodeArray) do
+    begin
+      x := AVST.AbsoluteIndex(NodeArray[i]);
+      if not Subtitles.Text[x].IsEmpty then
+      begin
+        newDur := Round( (GetTextLength(Subtitles.Text[x]) / totLen) * dur );
+        SetSubtitleTimes(x, prevTime + gap, prevTime + gap + newDur, False, False);
+        prevTime := prevTime + gap + newDur;
+      end;
+    end;
+
+    SetLength(NodeArray, 0);
 
     UndoInstance.IncrementUndoGroup;
     SubtitleChanged(True, True);
