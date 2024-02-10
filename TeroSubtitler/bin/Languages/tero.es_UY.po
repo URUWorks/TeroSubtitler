@@ -2406,6 +2406,7 @@ msgid "Cut"
 msgstr "Cortar"
 
 #: tfrmgeneratevideo.chkdeinterlace.caption
+msgctxt "tfrmgeneratevideo.chkdeinterlace.caption"
 msgid "Deinterlace"
 msgstr "Desentrelazar"
 
@@ -2723,6 +2724,10 @@ msgstr "Detectar zonas de silencio"
 #: tfrmmain.actdetectsilentzones.hint
 msgid "Click to refresh list"
 msgstr "Clic para refrescar la lista"
+
+#: tfrmmain.actdistributeentriesevenly.caption
+msgid "Distribute entries evenly"
+msgstr "Distribuir entradas uniformemente"
 
 #: tfrmmain.actdivideentry.caption
 msgid "Divide entry"
@@ -3679,6 +3684,11 @@ msgstr "Predeterminado"
 #: tfrmmain.actvideofilterblur.caption
 msgid "Blur"
 msgstr "Difuminar"
+
+#: tfrmmain.actvideofilterdeinterlace.caption
+msgctxt "tfrmmain.actvideofilterdeinterlace.caption"
+msgid "Deinterlace"
+msgstr "Desentrelazar"
 
 #: tfrmmain.actvideofilteredgeenhance.caption
 msgid "Edge enhance"
