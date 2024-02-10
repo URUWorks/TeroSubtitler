@@ -451,6 +451,7 @@ begin
         FFPHTTPClient.HTTPMethod('GET', FURL, DS, [200, 206]);
         if not FFPHTTPClient.Terminated then
         begin
+          FreeAndNil(DS);
           Synchronize(@DoOnDownloadProgress);
           Synchronize(@DoOnDownloadCompleted);
         end;
@@ -462,7 +463,8 @@ begin
         end;
       end;
     finally
-      DS.Free
+      if Assigned(DS) then
+        DS.Free
     end;
   end
   else
