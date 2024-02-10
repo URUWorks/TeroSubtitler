@@ -197,8 +197,11 @@ begin
     VST.RootNodeCount := 0;
     Subtitles.Clear;
     mmoSourceView.Lines.Clear;
+    mmoText.Clear;
+    mmoTranslation.Clear;
     UndoInstance.Clear;
     EnableWorkArea(False);
+    UpdateValues(True);
     RefreshAppTitle;
   end;
 
