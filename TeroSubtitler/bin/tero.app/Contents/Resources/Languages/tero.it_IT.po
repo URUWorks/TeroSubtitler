@@ -77,7 +77,7 @@ msgstr "Non udenti"
 
 #: proclocalize.lngasktoextractaudio
 msgid "Audio waveform was not found, do you want to extract it?"
-msgstr "Forma d’onda dell’audio non trovata, si desidera estrarla?"
+msgstr "Forma d’onda dell’audio non trovata, vuoi estrarla?"
 
 #: proclocalize.lngasktosave
 #, object-pascal-format
@@ -86,9 +86,9 @@ msgid ""
 "\n"
 "Do you wish to save it?"
 msgstr ""
-"“%s”\n"
+"File: '%s'\n"
 "\n"
-"Si desidera salvarlo?"
+"Vuoi salvare il file?"
 
 #: proclocalize.lngaslineselected
 #, object-pascal-format
@@ -306,7 +306,9 @@ msgstr "Operazione non riuscita."
 
 #: proclocalize.lngfailedtodownload
 msgid "No content downloaded, missing file or no Internet connection."
-msgstr "Nessun contenuto è stato scaricato: file mancante o connessione Internet assente."
+msgstr ""
+"Nessun contenuto è stato scaricato.\n"
+"File mancante o connessione internet assente."
 
 #: proclocalize.lngfeaturenotavailablefromurl
 msgid "Function not available for online video."
@@ -545,7 +547,7 @@ msgstr "#/intervallo"
 #: proclocalize.lnghstyleandactor
 msgctxt "proclocalize.lnghstyleandactor"
 msgid "Style/Actor"
-msgstr "Stile/Attore"
+msgstr "Stile/attore"
 
 #: proclocalize.lnghtext
 msgctxt "proclocalize.lnghtext"
@@ -580,7 +582,7 @@ msgstr ""
 
 #: proclocalize.lnglibmpvglerror
 msgid "Failed to initialize mpv GL context."
-msgstr "Inizializzazione del contesto grafico GL di mpv non riuscita."
+msgstr "Inizializzazione contesto grafico GL di mpv non riuscita."
 
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
@@ -618,11 +620,11 @@ msgstr "Termina con"
 #: proclocalize.lngmsstartswith
 msgctxt "proclocalize.lngmsstartswith"
 msgid "Starts with"
-msgstr "Comincia con"
+msgstr "Inizia con"
 
 #: proclocalize.lngmultipletracksdetected
 msgid "Multiple tracks detected"
-msgstr "Più tracce rilevate"
+msgstr "Rilevate tracce multiple"
 
 #: proclocalize.lngnewdurationall
 msgid "New duration in all cases"
@@ -630,15 +632,15 @@ msgstr "Nuova durata in tutti i casi"
 
 #: proclocalize.lngnewdurationgreater
 msgid "New duration is greater than original"
-msgstr "La nuova durata è più estesa dell’originale"
+msgstr "La nuova durata è maggiore di quella originale"
 
 #: proclocalize.lngnewdurationsmaller
 msgid "New duration is smaller than original"
-msgstr "La nuova durata è più breve dell’originale"
+msgstr "La nuova durata è minore di quella originale"
 
 #: proclocalize.lngnewshortcutpreset
 msgid "Enter a name for your shortcuts preset"
-msgstr "Specifica un nome per l’insieme di scorciatoie preimpostate"
+msgstr "Inserisci un nome per il profilo scorciatoie"
 
 #: proclocalize.lngnewshortcutpresetname
 msgctxt "proclocalize.lngnewshortcutpresetname"
@@ -647,7 +649,7 @@ msgstr "Nome"
 
 #: proclocalize.lngnewtime
 msgid "New time"
-msgstr "Nuova tempistica"
+msgstr "Nuovo tempo"
 
 #: proclocalize.lngnewversionfound
 msgid "A new version was found."
@@ -660,7 +662,7 @@ msgstr "Non sono presenti elementi contrassegnati."
 
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
-msgstr "Connessione Internet assente"
+msgstr "Connessione internet assente"
 
 #: proclocalize.lngnoname
 msgid "no name"
@@ -668,15 +670,15 @@ msgstr "senza nome"
 
 #: proclocalize.lngnonewversion
 msgid "You're using the latest version."
-msgstr "È in uso la versione più recente del software."
+msgstr "Questa versione del programma è aggiornata."
 
 #: proclocalize.lngoldtime
 msgid "Old time"
-msgstr "Tempistica precedente"
+msgstr "Tempo precedente"
 
 #: proclocalize.lngopencontainingfolder
 msgid "Open containing folder"
-msgstr "Apri la cartella di destinazione"
+msgstr "Apri cartella destinazione"
 
 #: proclocalize.lngopenfile
 msgid "Open file"
@@ -684,7 +686,7 @@ msgstr "Apri file"
 
 #: proclocalize.lngopenvideofromurl
 msgid "Open video from"
-msgstr "Apri filmato da"
+msgstr "Apri video"
 
 #: proclocalize.lngoriginal
 msgctxt "proclocalize.lngoriginal"
@@ -697,15 +699,15 @@ msgstr "Percentuale"
 
 #: proclocalize.lngprojectfile
 msgid "Subtitle Translation Project"
-msgstr "Progetto di traduzione di sottotitoli"
+msgstr "Progetto traduzione sottotitoli"
 
 #: proclocalize.lngpromptfordeletelines
 msgid "The selected lines will be deleted."
-msgstr "Le linee selezionate verranno cancellate."
+msgstr "Le linee selezionate verranno eliminate."
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
-msgstr "CPR (caratteri per linea)"
+msgstr "CPL (caratteri per linea)"
 
 #: proclocalize.lngqccps
 msgid "CPS (characters-per-second)"
@@ -713,7 +715,7 @@ msgstr "CPS (caratteri per secondo)"
 
 #: proclocalize.lngqcgap
 msgid "Gap Minimum duration"
-msgstr "Durata minima dell’intervallo"
+msgstr "Durata minima intervallo"
 
 #: proclocalize.lngqcindex
 msgctxt "proclocalize.lngqcindex"
@@ -726,7 +728,7 @@ msgstr "Durata massima"
 
 #: proclocalize.lngqcmaximumlines
 msgid "Maximum lines"
-msgstr "Massimo di linee"
+msgstr "N. massimo linee"
 
 #: proclocalize.lngqcminimumduration
 msgid "Minimum duration"
@@ -734,7 +736,7 @@ msgstr "Durata minima"
 
 #: proclocalize.lngqcrule
 msgid "Broken rule"
-msgstr "Norma infranta"
+msgstr "Regola infranta"
 
 #: proclocalize.lngqcwpm
 msgid "WPM (words-per-minute)"
@@ -742,7 +744,7 @@ msgstr "PPM (parole per minuto)"
 
 #: proclocalize.lngrbdatetime
 msgid "Date / Time"
-msgstr "Data / Ora"
+msgstr "Data/ora"
 
 #: proclocalize.lngrbfilename
 msgctxt "proclocalize.lngrbfilename"
@@ -770,11 +772,11 @@ msgstr "Modifica"
 #: proclocalize.lngsceditor
 msgctxt "proclocalize.lngsceditor"
 msgid "Editor"
-msgstr "Aspetto del testo"
+msgstr "Editor"
 
 #: proclocalize.lngscedl
 msgid "Edit Decision Lists"
-msgstr "Modifica gli elenchi di decisioni"
+msgstr "Modifica elenchi decisioni"
 
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"
@@ -803,12 +805,12 @@ msgstr "Aiuto"
 
 #: proclocalize.lngschhmmssff
 msgid "HH:MM:SS:FF"
-msgstr "HH:MM:SS:FF"
+msgstr "OO:MM:SS:FF"
 
 #: proclocalize.lngschhmmsszzz
 msgctxt "proclocalize.lngschhmmsszzz"
 msgid "HH:MM:SS.ZZZ"
-msgstr "HH:MM:SS.ZZZ"
+msgstr "OO:MM:SS.ZZZ"
 
 #: proclocalize.lngscmilliseconds
 msgctxt "proclocalize.lngscmilliseconds"
@@ -826,7 +828,7 @@ msgstr "Seleziona"
 
 #: proclocalize.lngscshotchanges
 msgid "Text files"
-msgstr "File di testo"
+msgstr "File testo"
 
 #: proclocalize.lngsctext
 msgctxt "proclocalize.lngsctext"
@@ -846,7 +848,7 @@ msgstr "Strumenti"
 #: proclocalize.lngscvideo
 msgctxt "proclocalize.lngscvideo"
 msgid "Video"
-msgstr "Filmato"
+msgstr "Video"
 
 #: proclocalize.lngscvideofilters
 msgctxt "proclocalize.lngscvideofilters"
@@ -869,23 +871,23 @@ msgstr "XML"
 
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
-msgstr "Si desidera consultare il registro delle modifiche?"
+msgstr "Vuoi visualizzare l'elenco novità?"
 
 #: proclocalize.lngselectencodingtouse
 msgid "Select the Encoding to use:"
-msgstr "Selezionare la codifica da utilizzare:"
+msgstr "Seleziona la codifica da usare:"
 
 #: proclocalize.lngselectfpstouse
 msgid "Select FPS to use:"
-msgstr "Selezionare i FPS da utilizzare:"
+msgstr "Seleziona i FPS da usare:"
 
 #: proclocalize.lngselectsheettouse
 msgid "Select sheet to use:"
-msgstr "Selezionare il foglio da utilizzare:"
+msgstr "Seleziona il foglio da usare:"
 
 #: proclocalize.lngselecttracktouse
 msgid "Select the track to use:"
-msgstr "Selezionare la traccia da utilizzare:"
+msgstr "Seleziona la traccia da usare:"
 
 #: proclocalize.lngshifttimeless
 #, object-pascal-format
@@ -915,7 +917,7 @@ msgstr "# %d"
 
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
-msgstr "Controllo ortografico terminato."
+msgstr "Controllo ortografico completato."
 
 #: proclocalize.lngssappearance
 msgid "Appearance"
@@ -949,7 +951,7 @@ msgstr "Fotogrammi"
 
 #: proclocalize.lngssgeneral
 msgid "General"
-msgstr "Generali"
+msgstr "Generale"
 
 #: proclocalize.lngsslightmode
 msgid "Light mode"
@@ -978,7 +980,7 @@ msgstr "Scorciatoie"
 
 #: proclocalize.lngsstoolbar
 msgid "Toolbar"
-msgstr "Barra degli strumenti"
+msgstr "Barra strumenti"
 
 #: proclocalize.lngsstools
 msgctxt "proclocalize.lngsstools"
@@ -988,7 +990,7 @@ msgstr "Strumenti"
 #: proclocalize.lngstcharacterspersecondaverage
 #, object-pascal-format
 msgid "Characters per second average: %.2f"
-msgstr "Media di caratteri al secondo: %.2f"
+msgstr "Media caratteri per secondo: %.2f"
 
 #: proclocalize.lngstdurationaverage
 #, object-pascal-format
@@ -1008,32 +1010,32 @@ msgstr "Intervallo medio: %s"
 #: proclocalize.lngstlinelengthaverage
 #, object-pascal-format
 msgid "Line length average: %d"
-msgstr "Lunghezza media delle linee: %d"
+msgstr "Lunghezza media linee: %d"
 
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
 msgid "Longest characters per second: %.2f (#%d)"
-msgstr "Caratteri più lunghi al secondo: %.2f (#%d)"
+msgstr "Caratteri per secondo (massimo): %.2f (#%d)"
 
 #: proclocalize.lngstlongestduration
 #, object-pascal-format
 msgid "Longest duration: %s (#%d)"
-msgstr "Durata più estesa: %s (#%d)"
+msgstr "Durata massima: %s (#%d)"
 
 #: proclocalize.lngstlongestgap
 #, object-pascal-format
 msgid "Longest gap: %s (#%d)"
-msgstr "Intervallo più esteso: %s (#%d)"
+msgstr "Intervallo massimo: %s (#%d)"
 
 #: proclocalize.lngstlongestline
 #, object-pascal-format
 msgid "Longest line: %d (#%d)"
-msgstr "Riga più estesa: %d (#%d)"
+msgstr "Lunghezza linea (massima): %d (#%d)"
 
 #: proclocalize.lngstlongestwordsperminute
 #, object-pascal-format
 msgid "Longest words per minute: %.2f (#%d)"
-msgstr "Parole più lunghe al minuto: %.2f (#%d)"
+msgstr "Parole per minuto (massimo): %.2f (#%d)"
 
 #: proclocalize.lngstnumberofcharacters
 #, object-pascal-format
@@ -1053,32 +1055,32 @@ msgstr "Numero di parole: %d"
 #: proclocalize.lngstshortestcharacterspersecond
 #, object-pascal-format
 msgid "Shortest characters per second: %.2f (#%d)"
-msgstr "Caratteri più brevi al secondo: %.2f (#%d)"
+msgstr "Caratteri per secondo (minimo): %.2f (#%d)"
 
 #: proclocalize.lngstshortestduration
 #, object-pascal-format
 msgid "Shortest duration: %s (#%d)"
-msgstr "Durata più breve: %s (#%d)"
+msgstr "Durata minima: %s (#%d)"
 
 #: proclocalize.lngstshortestgap
 #, object-pascal-format
 msgid "Shortest gap: %s (#%d)"
-msgstr "Intervallo più breve: %s (#%d)"
+msgstr "Intervallo minimo: %s (#%d)"
 
 #: proclocalize.lngstshortestline
 #, object-pascal-format
 msgid "Shortest line: %d (#%d)"
-msgstr "Riga più breve: %d (#%d)"
+msgstr "Lunghezza linea (minima): %d (#%d)"
 
 #: proclocalize.lngstshortestwordsperminute
 #, object-pascal-format
 msgid "Shortest words per minute: %.2f (#%d)"
-msgstr "Parole più brevi al secondo: %.2f (#%d)"
+msgstr "Parole per secondo (minimo): %.2f (#%d)"
 
 #: proclocalize.lngsttotalcharacterspersecond
 #, object-pascal-format
 msgid "Total characters per second: %.2f"
-msgstr "Totale di caratteri al secondo: %.2f"
+msgstr "Totale caratteri per secondo: %.2f"
 
 #: proclocalize.lngsttotalduration
 #, object-pascal-format
@@ -1092,7 +1094,7 @@ msgstr "Media di parole al minuto: %.2f"
 
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
-msgstr "L’attuale insieme di sottotitoli contiene errori che si raccomanda di risolvere, ma è possibile salvarlo."
+msgstr "L’attuale insieme di sottotitoli contiene errori che ti suggeriamo di corregere, ma è possibile salvare il file."
 
 #: proclocalize.lngsuccess
 msgid "Success."
@@ -1110,17 +1112,17 @@ msgstr "Espandi"
 #: proclocalize.lngtefinaltime
 msgctxt "proclocalize.lngtefinaltime"
 msgid "Final time"
-msgstr "Tempistica finale"
+msgstr "Tempo finale"
 
 #: proclocalize.lngteindex
 msgctxt "proclocalize.lngteindex"
 msgid "Index"
-msgstr "Numero"
+msgstr "Indice"
 
 #: proclocalize.lngteinitialtime
 msgctxt "proclocalize.lngteinitialtime"
 msgid "Initial time"
-msgstr "Tempistica iniziale"
+msgstr "Tempo iniziale"
 
 #: proclocalize.lngtereduce
 msgctxt "proclocalize.lngtereduce"
@@ -1135,11 +1137,11 @@ msgstr "Testo"
 #: proclocalize.lngtetime
 msgctxt "proclocalize.lngtetime"
 msgid "Time"
-msgstr "Tempistica"
+msgstr "Tempo"
 
 #: proclocalize.lngtextformatted
 msgid "Export formatted text?"
-msgstr "Esportare il testo formattato?"
+msgstr "Vuoi esportare il testo formattato?"
 
 #: proclocalize.lngtranscribing
 msgid "Transcribing..."
@@ -1156,7 +1158,7 @@ msgstr "Tradotto"
 
 #: proclocalize.lngtranslationfilechanged
 msgid "Translation file has not been saved."
-msgstr "Il file della traduzione non è stato salvato."
+msgstr "Il file traduzione non è stato salvato."
 
 #: proclocalize.lngttip1
 #, object-pascal-format
@@ -1166,17 +1168,17 @@ msgstr "Suggerimento: usa <%s/%s> per passare all’elemento precedente/successi
 #: proclocalize.lngttip2
 #, object-pascal-format
 msgid "Tip: Use <%s> for a web word reference"
-msgstr "Suggerimento: usa <%s> per cercare la definizione di una parola in Rete"
+msgstr "Suggerimento: usa <%s> per cercare la definizione di una parola in internet"
 
 #: proclocalize.lngttip3
 #, object-pascal-format
 msgid "Tip: Use <%s> dock/undock video window"
-msgstr "Suggerimento: usa <%s> per agganciare/sganciare il riquadro dei controlli video"
+msgstr "Suggerimento: usa <%s> per agganciare/sganciare il riquadro controlli video"
 
 #: proclocalize.lngttip4
 #, object-pascal-format
 msgid "Tip: Use <%s> dock/undock waveform window"
-msgstr "Suggerimento: usa <%s> per agganciare/sganciare il riquadro della forma d’onda"
+msgstr "Suggerimento: usa <%s> per agganciare/sganciare il riquadro forma d’onda"
 
 #: proclocalize.lngunabletoload
 msgid "Error loading file, unrecognized format."
@@ -1203,7 +1205,7 @@ msgstr "Lingua"
 msgid "Write denied. Please check folder permissions."
 msgstr ""
 "Scrittura non consentita. \n"
-"Verifica i permessi sulla cartella."
+"Verifica i permessi della cartella."
 
 #: proclocalize.lngwritestatus
 #, object-pascal-format
@@ -1228,7 +1230,7 @@ msgid ""
 msgstr ""
 "Se questa applicazione ti piace,\n"
 "prendi in considerazione la possibilità di fare una donazione.\n"
-"Per farla, clicca qui."
+"Per fare una donazione, fai clic qui."
 
 #: tfrmactors.btnactoradd.caption
 msgctxt "tfrmactors.btnactoradd.caption"
@@ -1253,7 +1255,7 @@ msgstr "Chiudi"
 #: tfrmactors.caption
 msgctxt "tfrmactors.caption"
 msgid "Actors"
-msgstr "Interpreti"
+msgstr "Attori"
 
 #: tfrmadjustsubtitle.btnapply.caption
 msgctxt "tfrmadjustsubtitle.btnapply.caption"
@@ -1293,7 +1295,7 @@ msgstr "Ultima battuta pronunciata"
 
 #: tfrmadjustsubtitle.rdoadvanced.caption
 msgid "Advanced"
-msgstr "Avanzato"
+msgstr "Avanzate"
 
 #: tfrmadjustsubtitle.rdosimple.caption
 msgid "Simple"
@@ -1351,7 +1353,7 @@ msgstr "Aggiungi sottotitoli durante la trascrizione"
 
 #: tfrmaudiototext.rbnloadsubtitlesaftertranscript.caption
 msgid "Load subtitles after transcription"
-msgstr "Carica sottotitoli al termine della trascrizione"
+msgstr "Carica sottotitoli a trascrizione completata"
 
 #: tfrmaudiototextmodel.btnclose.caption
 msgctxt "tfrmaudiototextmodel.btnclose.caption"
@@ -1361,11 +1363,11 @@ msgstr "Chiudi"
 #: tfrmaudiototextmodel.btndownload.caption
 msgctxt "tfrmaudiototextmodel.btndownload.caption"
 msgid "Download"
-msgstr "Scarica"
+msgstr "Download"
 
 #: tfrmaudiototextmodel.caption
 msgid "Audio to text model"
-msgstr "Modelli di conversione da audio a testo"
+msgstr "Modelli conversione da audio a testo"
 
 #: tfrmautomaticdurations.btnapply.caption
 msgctxt "tfrmautomaticdurations.btnapply.caption"
@@ -1435,7 +1437,7 @@ msgstr "Chiudi"
 #: tfrmbatchconvert.btninvert.caption
 msgctxt "tfrmbatchconvert.btninvert.caption"
 msgid "Invert"
-msgstr "Selezione inversa"
+msgstr "Inverti"
 
 #: tfrmbatchconvert.btnopenfolder.caption
 msgctxt "tfrmbatchconvert.btnopenfolder.caption"
@@ -1450,7 +1452,7 @@ msgstr "Rimuovi"
 #: tfrmbatchconvert.btnscanfolder.caption
 msgctxt "tfrmbatchconvert.btnscanfolder.caption"
 msgid "Scan..."
-msgstr "Scansiona..."
+msgstr "Scansione..."
 
 #: tfrmbatchconvert.btnselectall.caption
 msgctxt "tfrmbatchconvert.btnselectall.caption"
@@ -1459,7 +1461,7 @@ msgstr "Seleziona tutto"
 
 #: tfrmbatchconvert.caption
 msgid "Batch convert"
-msgstr "Conversione in blocco"
+msgstr "Conversione batch"
 
 #: tfrmbatchconvert.lblencoding.caption
 msgctxt "tfrmbatchconvert.lblencoding.caption"
@@ -1473,7 +1475,7 @@ msgstr "Formato"
 
 #: tfrmbatchconvert.lblfromfps.caption
 msgid "Input FPS"
-msgstr "FPS di ingresso"
+msgstr "FPS sorgente"
 
 #: tfrmbatchconvert.lbloutput.caption
 msgctxt "tfrmbatchconvert.lbloutput.caption"
@@ -1487,7 +1489,7 @@ msgstr "Cartella"
 
 #: tfrmbatchconvert.lbltofps.caption
 msgid "Target FPS"
-msgstr "FPS di destinazione"
+msgstr "FPS destinazione"
 
 #: tfrmcharactermap.btnclose.caption
 msgctxt "tfrmcharactermap.btnclose.caption"
@@ -1577,12 +1579,12 @@ msgstr "Durata max. (ms)"
 #: tfrmconventions.lblmaxlinecount.caption
 msgctxt "tfrmconventions.lblmaxlinecount.caption"
 msgid "Max. line count"
-msgstr "Conteggio max. linea"
+msgstr "N. max linee"
 
 #: tfrmconventions.lblmindurationms.caption
 msgctxt "tfrmconventions.lblmindurationms.caption"
 msgid "Min. duration / per word (ms)"
-msgstr "Durata min. / per parola (ms)"
+msgstr "Durata min./per parola (ms)"
 
 #: tfrmconventions.lblnewsubtitlems.caption
 msgctxt "tfrmconventions.lblnewsubtitlems.caption"
@@ -1602,12 +1604,12 @@ msgstr "Caratteri ripetibili"
 #: tfrmconventions.lblscsnapincues.caption
 msgctxt "tfrmconventions.lblscsnapincues.caption"
 msgid "Snap in cues after SC (frames)"
-msgstr "Àncora i punti di entrata dopo il c.i. (fotogrammi)"
+msgstr "Àncora punti di ungresso dopo il c.i. (fotogrammi)"
 
 #: tfrmconventions.lblscsnapoutcues.caption
 msgctxt "tfrmconventions.lblscsnapoutcues.caption"
 msgid "Snap out cues before SC (frames)"
-msgstr "Àncora i punti di uscita prima del c.i. (fotogrammi)"
+msgstr "Àncora punti di uscita prima del c.i. (fotogrammi)"
 
 #: tfrmconventions.lblsubtitlepausems.caption
 msgctxt "tfrmconventions.lblsubtitlepausems.caption"
@@ -1662,7 +1664,7 @@ msgstr "Modalità frase"
 
 #: tfrmconvertcase.rdotitletype.caption
 msgid "Title Type"
-msgstr "Solo Iniziali Maiuscole"
+msgstr "Tipo titolo"
 
 #: tfrmconvertcase.rdouppercase.caption
 msgid "UPPERCASE"
@@ -1725,7 +1727,7 @@ msgstr "Salva..."
 
 #: tfrmcustomimageformat.caption
 msgid "Custom image format"
-msgstr "Formato di immagine personalizzato"
+msgstr "Formato immagine personalizzato"
 
 #: tfrmcustomimageformat.lblfolder.caption
 msgctxt "tfrmcustomimageformat.lblfolder.caption"
@@ -1735,7 +1737,7 @@ msgstr "Cartella"
 #: tfrmcustomimageformat.lblfont.caption
 msgctxt "tfrmcustomimageformat.lblfont.caption"
 msgid "Font"
-msgstr "Carattere"
+msgstr "Font"
 
 #: tfrmcustomimageformat.lblfontsize.caption
 msgctxt "tfrmcustomimageformat.lblfontsize.caption"
@@ -1749,7 +1751,7 @@ msgstr "FPS"
 
 #: tfrmcustomimageformat.lblimagesize.caption
 msgid "Image size"
-msgstr "Dimensione dell’immagine"
+msgstr "Dimensione immagine"
 
 #: tfrmcustomimageformat.lblprefix.caption
 msgid "Prefix"
@@ -1758,12 +1760,12 @@ msgstr "Prefisso"
 #: tfrmcustomimageformat.lblsafearea.caption
 msgctxt "tfrmcustomimageformat.lblsafearea.caption"
 msgid "Safe area pixels (left, top, right, bottom)"
-msgstr "Margini di abbondanza in pixel (sinistro, superiore, destro, inferiore)"
+msgstr "Margini sicurezza area in pixel (sinistro, superiore, destro, inferiore)"
 
 #: tfrmcustomimageformat.lblscript.caption
 msgctxt "tfrmcustomimageformat.lblscript.caption"
 msgid "Script"
-msgstr "Trascrizione"
+msgstr "Script"
 
 #: tfrmcustomimageformat.lblx.caption
 msgctxt "tfrmcustomimageformat.lblx.caption"
@@ -1863,12 +1865,12 @@ msgstr "FPS"
 
 #: tfrmcustomtextformat.lblnewlinechar.caption
 msgid "New line char"
-msgstr "Carattere per nuova linea"
+msgstr "Carattere nuova linea"
 
 #: tfrmcustomtextformat.lblscript.caption
 msgctxt "tfrmcustomtextformat.lblscript.caption"
 msgid "Script"
-msgstr "Trascrizione"
+msgstr "Script"
 
 #: tfrmcustomtextformat.lblseparatorchar.caption
 msgid "Separator"
@@ -1881,7 +1883,7 @@ msgstr "Codice temporale"
 
 #: tfrmcustomtextformat.lbltimeformat.caption
 msgid "Time format"
-msgstr "Formato delle tempistiche"
+msgstr "Formato ora"
 
 #: tfrmcustomtextformat.lbltitle.caption
 msgctxt "tfrmcustomtextformat.lbltitle.caption"
@@ -1900,7 +1902,7 @@ msgstr "Chiudi"
 
 #: tfrmdelay.caption
 msgid "Set delay"
-msgstr "Impostazione ritardo"
+msgstr "Imposta ritardo"
 
 #: tfrmdelay.cbomode.text
 msgctxt "tfrmdelay.cbomode.text"
@@ -1935,7 +1937,7 @@ msgstr "Annulla"
 #: tfrmdownload.caption
 msgctxt "tfrmdownload.caption"
 msgid "Downloading"
-msgstr "Scaricamento in corso"
+msgstr "Download"
 
 #: tfrmdownload.lblelapsed.caption
 msgid "Elapsed:"
@@ -1969,15 +1971,15 @@ msgstr "Chiudi"
 
 #: tfrmdurationlimits.caption
 msgid "Duration limits"
-msgstr "Limiti di durata"
+msgstr "Limiti durata"
 
 #: tfrmdurationlimits.chksetmaxduration.caption
 msgid "Set maximum duration (ms)"
-msgstr "Imposta la durata massima (ms)"
+msgstr "Imposta durata massima (ms)"
 
 #: tfrmdurationlimits.chksetminduration.caption
 msgid "Set minimum duration (ms)"
-msgstr "Imposta la durata minima (ms)"
+msgstr "Imposta durata minima (ms)"
 
 #: tfrmdurationlimits.lblscope.caption
 msgctxt "tfrmdurationlimits.lblscope.caption"
@@ -2016,12 +2018,12 @@ msgstr "Salva..."
 
 #: tfrmexportsup.caption
 msgid "Blu-ray SUP"
-msgstr "Formato .sup per Blu-ray"
+msgstr "Formato .sup Blu-ray"
 
 #: tfrmexportsup.lblfont.caption
 msgctxt "tfrmexportsup.lblfont.caption"
 msgid "Font"
-msgstr "Carattere"
+msgstr "Font"
 
 #: tfrmexportsup.lblfontsize.caption
 msgctxt "tfrmexportsup.lblfontsize.caption"
@@ -2031,7 +2033,7 @@ msgstr "Dimensione"
 #: tfrmexportsup.lblsafearea.caption
 msgctxt "tfrmexportsup.lblsafearea.caption"
 msgid "Safe area pixels (left, top, right, bottom)"
-msgstr "Margini di abbondanza in pixel (sinistro, superiore, destro, inferiore)"
+msgstr "Area di sicurezza in pixel (sinistro, superiore, destro, inferiore)"
 
 #: tfrmexportsup.lblvideores.caption
 msgctxt "tfrmexportsup.lblvideores.caption"
@@ -2081,11 +2083,11 @@ msgstr "Sensibile alle maiuscole"
 
 #: tfrmfindandreplace.chkpreservecaseonreplace.caption
 msgid "Preserve case on replace"
-msgstr "Mantieni le maiuscole nella sostituzione"
+msgstr "Mantieni maiuscole nella sostituzione"
 
 #: tfrmfindandreplace.chkregularexpression.caption
 msgid "Use regular expression"
-msgstr "Usa espressioni regolari"
+msgstr "Usa espressione regolare"
 
 #: tfrmfindandreplace.chkreplacewith.caption
 msgctxt "tfrmfindandreplace.chkreplacewith.caption"
@@ -2139,12 +2141,12 @@ msgstr "Convenzioni"
 
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
-msgstr "Trascrizione OCR"
+msgstr "Script OCR"
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
 msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
 msgid "Spacing of opening hyphen"
-msgstr "Spaziatura del trattino di apertura"
+msgstr "Spaziatura trattino di apertura"
 
 #: tfrmfixsubtitles.mnudeselectall.caption
 msgid "Deselect all"
@@ -2173,15 +2175,15 @@ msgstr "Chiudi"
 #: tfrmformatproperties.caption
 msgctxt "tfrmformatproperties.caption"
 msgid "Format properties"
-msgstr "Proprietà del formato"
+msgstr "Proprietà formato"
 
 #: tfrmformatproperties.chkvttusextimestamp.caption
 msgid "Use X-TIMESTAMP-MAP header"
-msgstr "Utilizza l’intestazione X-TIMESTAMP-MAP"
+msgstr "Usa intestazione X-TIMESTAMP-MAP"
 
 #: tfrmformatproperties.chkvttwritecueidentifiers.caption
 msgid "Write cue identifiers"
-msgstr "Includi gli identificatori dei blocchi di testo"
+msgstr "Includi identificatori blocchi testo"
 
 #: tfrmformatproperties.lblasalignment.caption
 msgid "Alignment"
@@ -2189,15 +2191,15 @@ msgstr "Allineamento"
 
 #: tfrmformatproperties.lblasfontcolor.caption
 msgid "Font color"
-msgstr "Colore dei caratteri"
+msgstr "Colore font"
 
 #: tfrmformatproperties.lblasfontname.caption
 msgid "Font name"
-msgstr "Nome dei caratteri"
+msgstr "Nome font"
 
 #: tfrmformatproperties.lblasfontsize.caption
 msgid "Font size"
-msgstr "Dimensione dei caratteri"
+msgstr "Dimensione font"
 
 #: tfrmformatproperties.lblasheight.caption
 msgctxt "tfrmformatproperties.lblasheight.caption"
@@ -2237,7 +2239,7 @@ msgstr "Titolo originale"
 
 #: tfrmformatproperties.lblcavenatcstart.caption
 msgid "Start timecode"
-msgstr "Codice temporale di inizio"
+msgstr "Timecode iniziale"
 
 #: tfrmformatproperties.lblcavenatranslatedtitle.caption
 msgid "Translated title"
@@ -2253,7 +2255,7 @@ msgstr "Autore"
 
 #: tfrmformatproperties.lbldvdinfo.caption
 msgid "Info"
-msgstr "Informazioni"
+msgstr "Info"
 
 #: tfrmformatproperties.lbldvdlanguage.caption
 msgctxt "tfrmformatproperties.lbldvdlanguage.caption"
@@ -2271,43 +2273,43 @@ msgstr "Sito web"
 
 #: tfrmformatproperties.lblebucct.caption
 msgid "Character code table"
-msgstr "Tabella della mappa caratteri"
+msgstr "Tabella mappa caratteri"
 
 #: tfrmformatproperties.lblebuco.caption
 msgid "Country origin"
-msgstr "Paese d’origine"
+msgstr "Nazione d’origine"
 
 #: tfrmformatproperties.lblebucpn.caption
 msgid "Code page number"
-msgstr "Numero della tabella dei caratteri"
+msgstr "Numero codice pagina"
 
 #: tfrmformatproperties.lblebudfc.caption
 msgid "Disk format code"
-msgstr "Codice del formato del disco"
+msgstr "Codice formato disco"
 
 #: tfrmformatproperties.lblebudsc.caption
 msgid "Display standard code"
-msgstr "Mostra il codice standard"
+msgstr "Codice standard visualizzazione"
 
 #: tfrmformatproperties.lblebulc.caption
 msgid "Language code"
-msgstr "Codice della lingua"
+msgstr "Codice lingua"
 
 #: tfrmformatproperties.lblebundc.caption
 msgid "Max chars"
-msgstr "Numero massimo di caratteri"
+msgstr "N. max caratteri"
 
 #: tfrmformatproperties.lblebundr.caption
 msgid "Max rows"
-msgstr "Numero massimo di linee"
+msgstr "N. max linee"
 
 #: tfrmformatproperties.lblvttlocal.caption
 msgid "Cue time:"
-msgstr "Marcatore di comparsa del sottotitolo:"
+msgstr "Tempo taglio:"
 
 #: tfrmformatproperties.lblvttmpegts.caption
 msgid "MPEG-2 time:"
-msgstr "Tempo in formato MPEG-2:"
+msgstr "Tempo MPEG-2:"
 
 #: tfrmgenerateblankvideo.btnclose.caption
 msgctxt "tfrmgenerateblankvideo.btnclose.caption"
@@ -2330,12 +2332,12 @@ msgstr "..."
 
 #: tfrmgenerateblankvideo.caption
 msgid "Generate blank video"
-msgstr "Genera un video vuoto"
+msgstr "Genera video vuoto"
 
 #: tfrmgenerateblankvideo.chkgeneratetc.caption
 msgctxt "tfrmgenerateblankvideo.chkgeneratetc.caption"
 msgid "Time code"
-msgstr "Codice temporale"
+msgstr "Time code"
 
 #: tfrmgenerateblankvideo.chkgeneratetone.caption
 msgid "1 kHz test tone"
@@ -2438,7 +2440,7 @@ msgstr "Codifica"
 
 #: tfrmgeneratevideo.lblbitrate.caption
 msgid "Bit rate"
-msgstr "Velocità di trasmissione in bit"
+msgstr "Velocità trasmissione in bit"
 
 #: tfrmgeneratevideo.lblcropheight.caption
 msgctxt "tfrmgeneratevideo.lblcropheight.caption"
@@ -2452,7 +2454,7 @@ msgstr "Sinistra"
 
 #: tfrmgeneratevideo.lblcroptop.caption
 msgid "Top"
-msgstr "In alto"
+msgstr "Alto"
 
 #: tfrmgeneratevideo.lblcropwidth.caption
 msgctxt "tfrmgeneratevideo.lblcropwidth.caption"
@@ -2470,7 +2472,7 @@ msgstr "A"
 #: tfrmgeneratevideo.lblfont.caption
 msgctxt "tfrmgeneratevideo.lblfont.caption"
 msgid "Font"
-msgstr "In alto"
+msgstr "Font"
 
 #: tfrmgeneratevideo.lblfontcolor.caption
 msgctxt "tfrmgeneratevideo.lblfontcolor.caption"
@@ -2489,12 +2491,12 @@ msgstr "Formato"
 
 #: tfrmgeneratevideo.lblsamplerate.caption
 msgid "Sample rate"
-msgstr "Frequenza di campionamento"
+msgstr "Frequenza campionamento"
 
 #: tfrmgeneratevideo.lblvideocodec.caption
 msgctxt "tfrmgeneratevideo.lblvideocodec.caption"
 msgid "Codec"
-msgstr "Codifica"
+msgstr "Codec"
 
 #: tfrmgeneratevideo.lblvideores.caption
 msgid "Resolution"
@@ -2545,7 +2547,7 @@ msgstr "Vai alla linea"
 
 #: tfrmgoto.lblnumber.caption
 msgid "Entry:"
-msgstr "Numero:"
+msgstr "Elemento:"
 
 #: tfrmgototime.btnclose.caption
 msgctxt "tfrmgototime.btnclose.caption"
@@ -2564,7 +2566,7 @@ msgstr "Vai a"
 
 #: tfrmgototime.lbltime.caption
 msgid "Time:"
-msgstr "Tempistica:"
+msgstr "Tempo:"
 
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
@@ -2574,7 +2576,7 @@ msgstr "Info sul programma..."
 #: tfrmmain.actactor.caption
 msgctxt "tfrmmain.actactor.caption"
 msgid "Actors"
-msgstr "Interpreti"
+msgstr "Attori"
 
 #: tfrmmain.actaddnote.caption
 msgid "Add note..."
@@ -2610,15 +2612,15 @@ msgstr "Allinea a destra"
 
 #: tfrmmain.actaudiofilterdialoguenhance.caption
 msgid "Dialogue enhance"
-msgstr "Potenziamento dei dialoghi"
+msgstr "Potenziamento dialoghi"
 
 #: tfrmmain.actaudiofilterspeechnormalizer.caption
 msgid "Speech normalizer"
-msgstr "Normalizzazione del parlato"
+msgstr "Normalizzazione parlato"
 
 #: tfrmmain.actaudiofiltersurround.caption
 msgid "Surround"
-msgstr "Audio avvolgente"
+msgstr "Surround"
 
 #: tfrmmain.actaudiototext.caption
 msgctxt "tfrmmain.actaudiototext.caption"
@@ -2672,7 +2674,7 @@ msgstr "Chiudi sottotitoli"
 
 #: tfrmmain.actclosevideo.caption
 msgid "Close video"
-msgstr "Chiudi filmato"
+msgstr "Chiudi video"
 
 #: tfrmmain.actcombineentries.caption
 msgid "Combine entries"
@@ -2698,7 +2700,7 @@ msgstr "Copia"
 
 #: tfrmmain.actcopyvideopostoclipboard.caption
 msgid "Copy video position to clipboard"
-msgstr "Copia la tempistica della posizione del video negli appunti"
+msgstr "Copia posizione video negli appunti"
 
 #: tfrmmain.actcut.caption
 msgctxt "tfrmmain.actcut.caption"
@@ -2711,11 +2713,11 @@ msgstr "Elimina elementi"
 
 #: tfrmmain.actdeleteentry.hint
 msgid "Delete selected entries"
-msgstr "Elimina gli elementi selezionati"
+msgstr "Elimina elementi selezionati"
 
 #: tfrmmain.actdeleteshotchange.caption
 msgid "Delete shot change(s)"
-msgstr "Elimina un cambio di inquadratura"
+msgstr "Elimina cambi inquadratura"
 
 #: tfrmmain.actdetectdialogsegments.caption
 msgid "Detect dialog segments..."
@@ -2728,7 +2730,7 @@ msgstr "Rileva zone di silenzio"
 
 #: tfrmmain.actdetectsilentzones.hint
 msgid "Click to refresh list"
-msgstr "Fare clic per aggiornare l’elenco"
+msgstr "Fai clic per aggiornare l’elenco"
 
 #: tfrmmain.actdistributeentriesevenly.caption
 msgid "Distribute entries evenly"
@@ -2752,7 +2754,7 @@ msgstr "Rimuovi un fotogramma"
 
 #: tfrmmain.actexportcustomimageformat.caption
 msgid "Custom image format..."
-msgstr "Formato di immagine personalizzato…"
+msgstr "Formato immagine personalizzato…"
 
 #: tfrmmain.actexportcustomtextformat.caption
 msgid "Custom text format..."
@@ -2764,7 +2766,7 @@ msgstr "Sottotitoli contrassegnati..."
 
 #: tfrmmain.actexportsup.caption
 msgid "Blu-ray SUP..."
-msgstr "Formato .sup per Blu-ray..."
+msgstr "Formato .sup Blu-ray..."
 
 #: tfrmmain.actexporttextonly.caption
 msgid "Text only..."
@@ -2772,11 +2774,11 @@ msgstr "Solo testo..."
 
 #: tfrmmain.actextendlengthtonext.caption
 msgid "Extend final time to next"
-msgstr "Estendi il tempo di fine al successivo"
+msgstr "Estendi tempo finale al successivo"
 
 #: tfrmmain.actextendlengthtoprevious.caption
 msgid "Extend initial time to previous"
-msgstr "Estendi il tempo di inizio al precedente"
+msgstr "Estendi tempo iniziale al precedente"
 
 #: tfrmmain.actfind.caption
 msgid "Find..."
@@ -2797,15 +2799,15 @@ msgstr "Correggi punteggiatura"
 
 #: tfrmmain.actfixsubtitles.caption
 msgid "Fix subtitles..."
-msgstr "Correzione sottotitoli..."
+msgstr "Correggi sottotitoli..."
 
 #: tfrmmain.actfocusfinaltime.caption
 msgid "Edit final time"
-msgstr "Modifica tempistica finale"
+msgstr "Modifica tempo finale"
 
 #: tfrmmain.actfocusinitialtime.caption
 msgid "Edit initial time"
-msgstr "Modifica tempistica iniziale"
+msgstr "Modifica tempo iniziale"
 
 #: tfrmmain.actfontbold.caption
 msgctxt "tfrmmain.actfontbold.caption"
@@ -2819,7 +2821,7 @@ msgstr "Cancella"
 
 #: tfrmmain.actfontcolor.caption
 msgid "Set current font color"
-msgstr "Imposta il colore del testo"
+msgstr "Imposta colore attuale testo"
 
 #: tfrmmain.actfontcolordlg.caption
 msgctxt "tfrmmain.actfontcolordlg.caption"
@@ -2853,7 +2855,7 @@ msgstr "Modalità fotogramma"
 
 #: tfrmmain.actframesmode.hint
 msgid "Set time code format to HH:MM:SS:FF"
-msgstr "Imposta il formato del codice temporale su HH:MM:SS:FF"
+msgstr "Imposta formato codice temporale a OO:MM:SS:FF"
 
 #: tfrmmain.actgenerateblankvideo.caption
 msgid "Generate blank video..."
@@ -2861,7 +2863,7 @@ msgstr "Genera video vuoto..."
 
 #: tfrmmain.actgeneratevideo.caption
 msgid "Video with hardcoded subtitles..."
-msgstr "Video con sottotitoli impressi..."
+msgstr "Video con sottotitoli incorporati..."
 
 #: tfrmmain.actgoto.caption
 msgid "Go to entry..."
@@ -2869,11 +2871,11 @@ msgstr "Vai all’elemento..."
 
 #: tfrmmain.actgotocurrententryfinaltime.caption
 msgid "Go to current entry final time"
-msgstr "Vai al punto finale dell’elemento corrente"
+msgstr "Vai al punto finale elemento attuale"
 
 #: tfrmmain.actgotocurrententryinitialtime.caption
 msgid "Go to current entry initial time"
-msgstr "Vai al punto iniziale dell’elemento corrente"
+msgstr "Vai al punto iniziale elemento attuale"
 
 #: tfrmmain.actgotonextentryandplay.caption
 msgid "Go to next entry and play"
@@ -2898,7 +2900,7 @@ msgstr "Sottotitoli..."
 
 #: tfrmmain.actinsertcurrenttime.caption
 msgid "Insert current time"
-msgstr "Inserisci tempistica attuale"
+msgstr "Inserisci tempo attuale"
 
 #: tfrmmain.actinsertentry.caption
 msgid "Insert entry"
@@ -2915,11 +2917,11 @@ msgstr "Inserisci elemento prima"
 #: tfrmmain.actinsertentrybefore.hint
 msgctxt "tfrmmain.actinsertentrybefore.hint"
 msgid "Insert entry before the current entry"
-msgstr "Inserisci un elemento prima di quello attuale"
+msgstr "Inserisci elemento prima di quello attuale"
 
 #: tfrmmain.actinsertshotchange.caption
 msgid "Insert shot change"
-msgstr "Inserisci un cambio di inquadratura"
+msgstr "Inserisci cambio inquadratura"
 
 #: tfrmmain.actinvertselection.caption
 msgctxt "tfrmmain.actinvertselection.caption"
@@ -2928,35 +2930,35 @@ msgstr "Inverti selezione"
 
 #: tfrmmain.actjumptonextempty.caption
 msgid "Jump to next without text"
-msgstr "Passa all’elemento vuoto successivo"
+msgstr "Vai all’elemento vuoto successivo"
 
 #: tfrmmain.actjumptonextmarked.caption
 msgid "Jump to next marked"
-msgstr "Passa all’elemento contrassegnato successivo"
+msgstr "Vai all’elemento contrassegnato successivo"
 
 #: tfrmmain.actjumptonextnote.caption
 msgid "Jump to next note"
-msgstr "Passa alla nota successiva"
+msgstr "Vai alla nota successiva"
 
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
-msgstr "Passa al cambio di inquadratura successivo"
+msgstr "Vai al cambio inquadratura successivo"
 
 #: tfrmmain.actjumptopreviousempty.caption
 msgid "Jump to previous without text"
-msgstr "Passa all’elemento vuoto precedente"
+msgstr "Vai all’elemento vuoto precedente"
 
 #: tfrmmain.actjumptopreviousmarked.caption
 msgid "Jump to previous marked"
-msgstr "Passa all’elemento contrassegnato precedente"
+msgstr "Vai all’elemento contrassegnato precedente"
 
 #: tfrmmain.actjumptopreviousnote.caption
 msgid "Jump to previous note"
-msgstr "Passa alla nota precedente"
+msgstr "Vai alla nota precedente"
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"
-msgstr "Passa al cambio di inquadratura precedente"
+msgstr "Vai al cambio inquadratura precedente"
 
 #: tfrmmain.actlistmode.caption
 msgctxt "tfrmmain.actlistmode.caption"
@@ -2974,7 +2976,7 @@ msgstr "Carica sottotitoli..."
 
 #: tfrmmain.actloadsubtitle.hint
 msgid "Load a subtitle file"
-msgstr "Carica un file di sottotitoli"
+msgstr "Carica file sottotitoli"
 
 #: tfrmmain.actloadtranscription.caption
 msgctxt "tfrmmain.actloadtranscription.caption"
@@ -2987,7 +2989,7 @@ msgstr "Carica traduzione..."
 
 #: tfrmmain.actloadvideo.caption
 msgid "Open video..."
-msgstr "Apri filmato..."
+msgstr "Apri video..."
 
 #: tfrmmain.actloadvideo.hint
 msgid "Open a video file"
@@ -2995,7 +2997,7 @@ msgstr "Apri un file video"
 
 #: tfrmmain.actloadvideofromurl.caption
 msgid "Open video from URL..."
-msgstr "Apri filmato da URL..."
+msgstr "Apri video da URL..."
 
 #: tfrmmain.actmarkentry.caption
 msgid "Mark entry"
@@ -3009,7 +3011,7 @@ msgstr "Aggiungi elemento"
 #: tfrmmain.actmediaautoscroll.caption
 msgctxt "tfrmmain.actmediaautoscroll.caption"
 msgid "Update list on preview"
-msgstr "Scorri l’elenco in simultanea con l’anteprima"
+msgstr "Aggiorna elenco durante anteprima"
 
 #: tfrmmain.actmediaback1min.caption
 msgid "Go back 1 minute"
@@ -3022,7 +3024,7 @@ msgstr "Vai indietro di 1 secondo"
 #: tfrmmain.actmediachangeplayrate.caption
 msgctxt "tfrmmain.actmediachangeplayrate.caption"
 msgid "Playback rate"
-msgstr "Velocità di riproduzione"
+msgstr "Velocità riproduzione"
 
 #: tfrmmain.actmediadeleteentry.caption
 msgctxt "tfrmmain.actmediadeleteentry.caption"
@@ -3058,27 +3060,27 @@ msgstr "Fotogramma successivo"
 #: tfrmmain.actmediaplay.caption
 msgctxt "tfrmmain.actmediaplay.caption"
 msgid "Play/Pause"
-msgstr "Riproduci/Pausa"
+msgstr "Riproduci/pausa"
 
 #: tfrmmain.actmediaplayafterselection.caption
 msgctxt "tfrmmain.actmediaplayafterselection.caption"
 msgid "Play after selection"
-msgstr "Riproduci dopo il punto di selezione"
+msgstr "Riproduci dopo la selezione"
 
 #: tfrmmain.actmediaplaybeforeselection.caption
 msgctxt "tfrmmain.actmediaplaybeforeselection.caption"
 msgid "Play before selection"
-msgstr "Riproduci prima del punto di selezione"
+msgstr "Riproduci prima della selezione"
 
 #: tfrmmain.actmediaplayfromselection.caption
 msgctxt "tfrmmain.actmediaplayfromselection.caption"
 msgid "Play from selection"
-msgstr "Riproduci a partire dal punto di selezione"
+msgstr "Riproduci a partire dalla selezione"
 
 #: tfrmmain.actmediaplayselection.caption
 msgctxt "tfrmmain.actmediaplayselection.caption"
 msgid "Play selection"
-msgstr "Riproduci la selezione"
+msgstr "Riproduci selezione"
 
 #: tfrmmain.actmediapreviousframe.caption
 msgctxt "tfrmmain.actmediapreviousframe.caption"
@@ -3093,16 +3095,16 @@ msgstr "Indietro"
 #: tfrmmain.actmediasetfinaltime.caption
 msgctxt "tfrmmain.actmediasetfinaltime.caption"
 msgid "Set final time"
-msgstr "Imposta tempistica finale"
+msgstr "Imposta tempo finale"
 
 #: tfrmmain.actmediasetinitialtime.caption
 msgctxt "tfrmmain.actmediasetinitialtime.caption"
 msgid "Set initial time"
-msgstr "Imposta tempistica iniziale"
+msgstr "Imposta tempo iniziale"
 
 #: tfrmmain.actmediasplitentryatcursorposition.caption
 msgid "Split at cursor position"
-msgstr "Dividi in corrispondenza della posizione del cursore"
+msgstr "Dividi alla posizione del cursore"
 
 #: tfrmmain.actmediastartsubtitleentry.caption
 msgid "Start entry"
@@ -3115,23 +3117,23 @@ msgstr "Stop"
 
 #: tfrmmain.actmediasubsizedec.caption
 msgid "Reduce video font size"
-msgstr "Riduci la dimensione del testo nel video"
+msgstr "Riduci dimensione font testo nel video"
 
 #: tfrmmain.actmediasubsizeinc.caption
 msgid "Increase video font size"
-msgstr "Aumenta la dimensione del testo nel video"
+msgstr "Aumenta dimensione font testo nel video"
 
 #: tfrmmain.actmediavolumedown.caption
 msgid "Down"
-msgstr "Abbassa"
+msgstr "Diminuisci volume"
 
 #: tfrmmain.actmediavolumemute.caption
 msgid "Mute"
-msgstr "Silenzia"
+msgstr "Audio OFF"
 
 #: tfrmmain.actmediavolumeup.caption
 msgid "Up"
-msgstr "Alza"
+msgstr "Aumenta volume"
 
 #: tfrmmain.actmediazoomin.caption
 msgctxt "tfrmmain.actmediazoomin.caption"
@@ -3146,7 +3148,7 @@ msgstr "Riduci zoom"
 #: tfrmmain.actmediazoomselection.caption
 msgctxt "tfrmmain.actmediazoomselection.caption"
 msgid "Zoom selection"
-msgstr "Zoom della selezione"
+msgstr "Zoom selezione"
 
 #: tfrmmain.actmergewithnext.caption
 msgid "Merge with next"
@@ -3171,7 +3173,7 @@ msgstr "Nuovo sottotitolo"
 
 #: tfrmmain.actnewsubtitle.hint
 msgid "Start a new subtitle project"
-msgstr "Avvia un nuovo progetto di sottotitoli"
+msgstr "Avvia un nuovo progetto sottotitoli"
 
 #: tfrmmain.actnextsubtitle.caption
 msgctxt "tfrmmain.actnextsubtitle.caption"
@@ -3198,11 +3200,11 @@ msgstr "Sottotitolo precedente"
 
 #: tfrmmain.actpullfirstlinefromnextentry.caption
 msgid "Pull the first line from the next entry"
-msgstr "Accorpa qui alla fine la prima linea dell’elemento successivo"
+msgstr "Incolla qui alla fine la prima linea dell’elemento successivo"
 
 #: tfrmmain.actpulllastlinefrompreviousentry.caption
 msgid "Pull the last line from the previous entry"
-msgstr "Accorpa qui all’inizio l’ultima linea dell’elemento precedente"
+msgstr "Incolla qui all’inizio l’ultima linea dell’elemento precedente"
 
 #: tfrmmain.actpushfirstlinetopreviousentry.caption
 msgid "Push the first line to the previous entry"
@@ -3238,7 +3240,7 @@ msgstr "Leggi testo da file..."
 
 #: tfrmmain.actreadtimingsfromfile.caption
 msgid "Read timings from file..."
-msgstr "Leggi tempistiche da file..."
+msgstr "Leggi tempi da file..."
 
 #: tfrmmain.actredo.caption
 msgctxt "tfrmmain.actredo.caption"
@@ -3247,7 +3249,7 @@ msgstr "Ripeti"
 
 #: tfrmmain.actredo.hint
 msgid "Redo last undo"
-msgstr "Ripeti l’ultima azione annullata"
+msgstr "Ripeti ultima azione annullata"
 
 #: tfrmmain.actremovelinefromentry.caption
 msgid "Remove line from entry..."
@@ -3271,7 +3273,7 @@ msgstr "Testo a rovescio"
 
 #: tfrmmain.actroundtimes.caption
 msgid "Round times..."
-msgstr "Arrotonda tempistiche..."
+msgstr "Arrotonda tempi..."
 
 #: tfrmmain.actsaveproject.caption
 msgid "Save project..."
@@ -3284,7 +3286,7 @@ msgstr "Salva sottotitoli"
 
 #: tfrmmain.actsavesubtitle.hint
 msgid "Save current subtitle to file"
-msgstr "Salva gli attuali sottotitoli in un file"
+msgstr "Salva sottotitoli attuali in un file"
 
 #: tfrmmain.actsavesubtitleas.caption
 msgid "Save subtitle as..."
@@ -3292,7 +3294,7 @@ msgstr "Salva sottotitoli come..."
 
 #: tfrmmain.actsavesubtitleas.hint
 msgid "Save current subtitle to a specific file"
-msgstr "Salva gli attuali sottotitoli in un formato specifico di file"
+msgstr "Salva sottotitoliattuali  in un formato file specifico"
 
 #: tfrmmain.actsavetranscription.caption
 msgctxt "tfrmmain.actsavetranscription.caption"
@@ -3305,7 +3307,7 @@ msgstr "Salva traduzione"
 
 #: tfrmmain.actsavetranslation.hint
 msgid "Save current translation to file"
-msgstr "Salva l’attuale traduzione in un file"
+msgstr "Salva traduzione attuale in un file"
 
 #: tfrmmain.actsavetranslationas.caption
 msgid "Save translation as..."
@@ -3313,11 +3315,11 @@ msgstr "Salva traduzione come..."
 
 #: tfrmmain.actsavetranslationas.hint
 msgid "Save current translation to a specific file"
-msgstr "Salva l’attuale traduzione in un formato specifico di file"
+msgstr "Salva traduzione attuale in un formato file specifico"
 
 #: tfrmmain.actscreenshottofile.caption
 msgid "Save screenshot"
-msgstr "Salva un’istantanea dello schermo"
+msgstr "Salva schermata"
 
 #: tfrmmain.actselectall.caption
 msgctxt "tfrmmain.actselectall.caption"
@@ -3335,12 +3337,12 @@ msgstr "Seleziona da qui fino alla fine"
 #: tfrmmain.actsetasdefaultencoding.caption
 msgctxt "tfrmmain.actsetasdefaultencoding.caption"
 msgid "Set as default save encoding"
-msgstr "Imposta come codifica di salvataggio predefinita"
+msgstr "Imposta come codifica salvataggio predefinita"
 
 #: tfrmmain.actsetasdefaultformat.caption
 msgctxt "tfrmmain.actsetasdefaultformat.caption"
 msgid "Set as default save format"
-msgstr "Imposta come formato di salvataggio predefinito"
+msgstr "Imposta come formato salvataggio predefinito"
 
 #: tfrmmain.actsetautomaticduration.caption
 msgid "Set automatic duration"
@@ -3392,7 +3394,7 @@ msgstr "Sposta di %dms in avanti"
 
 #: tfrmmain.actshifttimes.caption
 msgid "Shift times..."
-msgstr "Sposta tempistiche..."
+msgstr "Sposta tempi..."
 
 #: tfrmmain.actshotchanges.caption
 msgid "Shot changes..."
@@ -3400,7 +3402,7 @@ msgstr "Cambi inquadratura..."
 
 #: tfrmmain.actshowactoronpreview.caption
 msgid "Display Actor on Preview"
-msgstr "Mostra interprete nell’anteprima"
+msgstr "Attore nell’anteprima"
 
 #: tfrmmain.actshowcolumncpl.caption
 msgctxt "tfrmmain.actshowcolumncpl.caption"
@@ -3419,17 +3421,17 @@ msgstr "Durata"
 
 #: tfrmmain.actshowcolumnnumber.caption
 msgid "Number/GAP"
-msgstr "Numero/Intervallo"
+msgstr "Numero/intervallo"
 
 #: tfrmmain.actshowcolumnstyleandactor.caption
 msgctxt "tfrmmain.actshowcolumnstyleandactor.caption"
 msgid "Style/Actor"
-msgstr "Stile/Interprete"
+msgstr "Stile/attore"
 
 #: tfrmmain.actshowcolumntimes.caption
 msgctxt "tfrmmain.actshowcolumntimes.caption"
 msgid "Times"
-msgstr "Tempistiche"
+msgstr "Tempi"
 
 #: tfrmmain.actshowcolumnwpm.caption
 msgctxt "tfrmmain.actshowcolumnwpm.caption"
@@ -3484,7 +3486,7 @@ msgstr "Statistiche..."
 
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
-msgstr "Scambia posizione del testo"
+msgstr "Scambia testo"
 
 #: tfrmmain.acttbx.caption
 msgctxt "tfrmmain.acttbx.caption"
@@ -3513,7 +3515,7 @@ msgstr "Impostazioni..."
 
 #: tfrmmain.acttexteffectflash.caption
 msgid "Flash effect"
-msgstr "Effetto lampo"
+msgstr "Effetto flash"
 
 #: tfrmmain.acttexteffecttypewriter.caption
 msgid "Typewriter effect"
@@ -3521,7 +3523,7 @@ msgstr "Effetto macchina da scrivere"
 
 #: tfrmmain.acttimeexpander.caption
 msgid "Time expander/reducer..."
-msgstr "Dilata/espandi tempistiche..."
+msgstr "Aumenta/diminuisci tempi..."
 
 #: tfrmmain.acttimemode.caption
 msgctxt "tfrmmain.acttimemode.caption"
@@ -3530,19 +3532,19 @@ msgstr "Modalità tempo"
 
 #: tfrmmain.acttimemode.hint
 msgid "Set time code format to HH:MM:SS.ZZZ"
-msgstr "Imposta il formato del codice temporale su HH:MM:SS.ZZZ"
+msgstr "Imposta formato timecode a OO:MM:SS.ZZZ"
 
 #: tfrmmain.acttm1.caption
 msgid "Use text from position 1 (tm)"
-msgstr "Utilizza il testo dalla posizione 1 (tm)"
+msgstr "Usa testo dalla posizione 1 (tm)"
 
 #: tfrmmain.acttm2.caption
 msgid "Use text from position 2 (tm)"
-msgstr "Utilizza il testo dalla posizione 2 (tm)"
+msgstr "Usa testo dalla posizione 2 (tm)"
 
 #: tfrmmain.acttm3.caption
 msgid "Use text from position 3 (tm)"
-msgstr "Utilizza il testo dalla posizione 3 (tm)"
+msgstr "Usa testo dalla posizione 3 (tm)"
 
 #: tfrmmain.acttranscriptionmode.caption
 msgctxt "tfrmmain.acttranscriptionmode.caption"
@@ -3551,7 +3553,7 @@ msgstr "Modalità trascrizione"
 
 #: tfrmmain.acttranscriptionmode.hint
 msgid "Enable free-write mode"
-msgstr "Abilita la modalità di scrittura libera"
+msgstr "Abilita modalità di scrittura a mano libera"
 
 #: tfrmmain.acttranslate.caption
 msgid "Auto translate..."
@@ -3589,7 +3591,7 @@ msgstr "Disattiva a capo automatico nell’elemento"
 #: tfrmmain.actundo.caption
 msgctxt "tfrmmain.actundo.caption"
 msgid "Undo"
-msgstr "Annulla"
+msgstr "Annulla azione"
 
 #: tfrmmain.actundo.hint
 msgid "Undo last action"
@@ -3597,15 +3599,15 @@ msgstr "Annulla l’ultima azione"
 
 #: tfrmmain.actundockvideo.caption
 msgid "Dock video"
-msgstr "Aggancia il riquadro dei controlli video"
+msgstr "Aggancia riquadro controlli video"
 
 #: tfrmmain.actundockwaveform.caption
 msgid "Dock waveform"
-msgstr "Aggancia il riquadro della forma d’onda"
+msgstr "Aggancia riquadro forma d’onda"
 
 #: tfrmmain.actunicodectrllre.caption
 msgid "LRE (Start of Left-to-Right Embedding)"
-msgstr "LRE (inizio del testo da-sinistra-a-destra incorporato)"
+msgstr "LRE (inizio testo da-sinistra-a-destra incorporato)"
 
 #: tfrmmain.actunicodectrllrm.caption
 msgid "LRM (Left-to-Right Mark)"
@@ -3613,15 +3615,15 @@ msgstr "LRM (carattere da-sinistra-a-destra)"
 
 #: tfrmmain.actunicodectrllro.caption
 msgid "LRO (Start of Left-to-Right Override)"
-msgstr "LRO (inizio del testo da-sinistra-a-destra disabilitato)"
+msgstr "LRO (inizio testo da-sinistra-a-destra disabilitato)"
 
 #: tfrmmain.actunicodectrlpdf.caption
 msgid "PDF (Pop Directional Formatting)"
-msgstr "PDF (ripristino della formattazione direzionale)"
+msgstr "PDF (ripristino formattazione direzionale)"
 
 #: tfrmmain.actunicodectrlrle.caption
 msgid "RLE (Start of Right-to-Left Embedding)"
-msgstr "RLE (inizio del testo da-destra-a-sinistra incorporato)"
+msgstr "RLE (inizio testo da-destra-a-sinistra incorporato)"
 
 #: tfrmmain.actunicodectrlrlm.caption
 msgid "RLM (Right-to-Left Mark)"
@@ -3629,15 +3631,15 @@ msgstr "RLM (carattere da-destra-a-sinistra)"
 
 #: tfrmmain.actunicodectrlrlo.caption
 msgid "RLO (Start of Right-to-Left Override)"
-msgstr "RLO (inizio del testo da-destra-a-sinistra disabilitato)"
+msgstr "RLO (inizio testo da-destra-a-sinistra disabilitato)"
 
 #: tfrmmain.actunicodectrlzwnj.caption
 msgid "ZWNJ (Zero Width Non-Joiner)"
-msgstr "ZWNJ (carattere di mancata unione a larghezza zero)"
+msgstr "ZWNJ (carattere mancata unione a larghezza zero)"
 
 #: tfrmmain.actunicodezwj.caption
 msgid "ZWJ (Zero Width Joiner)"
-msgstr "ZWJ (carattere di unione a larghezza zero)"
+msgstr "ZWJ (carattere unione a larghezza zero)"
 
 #: tfrmmain.actunmarkentry.caption
 msgid "Unmark entry"
@@ -3645,7 +3647,7 @@ msgstr "Decontrassegna elemento"
 
 #: tfrmmain.actvalidatetm.caption
 msgid "Validate translation memory"
-msgstr "Convalida memoria di traduzione"
+msgstr "Convalida memoria traduzione"
 
 #: tfrmmain.actvalidatetm.hint
 msgid "Validates and advances to the next"
@@ -3684,7 +3686,7 @@ msgstr "4:3"
 
 #: tfrmmain.actvarcycle.caption
 msgid "Cycle Aspect Ratio"
-msgstr "Mostra i formati in sequenza"
+msgstr "Visualizza formati in sequenza"
 
 #: tfrmmain.actvardefault.caption
 msgid "Default"
@@ -3714,7 +3716,7 @@ msgstr "Riflessione orizzontale"
 
 #: tfrmmain.actvideofilternegative.caption
 msgid "Negative"
-msgstr "Immagine al negativo"
+msgstr "Immagine in negativo"
 
 #: tfrmmain.actvideofiltersharpen.caption
 msgid "Sharpen"
@@ -3736,11 +3738,11 @@ msgstr "Anteprima video"
 #: tfrmmain.actviewshotchange.caption
 msgctxt "tfrmmain.actviewshotchange.caption"
 msgid "Shot changes"
-msgstr "Cambi di inquadratura"
+msgstr "Cambi inquadratura"
 
 #: tfrmmain.actviewshotchange.hint
 msgid "Enable/disable shot changes"
-msgstr "Abilita/disabilita i cambi di inquadratura"
+msgstr "Abilita/disabilita cambi inquadratura"
 
 #: tfrmmain.actwaveextract.caption
 msgid "Extract waveform..."
@@ -3749,7 +3751,7 @@ msgstr "Estrai forma d’onda..."
 #: tfrmmain.actwaveformpreview.caption
 msgctxt "tfrmmain.actwaveformpreview.caption"
 msgid "Waveform preview"
-msgstr "Anteprima della forma d’onda"
+msgstr "Anteprima forma d’onda"
 
 #: tfrmmain.actwebpreview.caption
 msgid "Web Preview..."
@@ -3771,24 +3773,24 @@ msgstr "Formato"
 
 #: tfrmmain.cbofps.hint
 msgid "Target FPS of subtitle file"
-msgstr "FPS di destinazione del file di sottotitoli"
+msgstr "FPS destinazione file sottotitoli"
 
 #: tfrmmain.cboinputfps.hint
 msgid "FPS of the movie the opened subtitle file was made for"
-msgstr "FPS del filmato per il quale il file di sottotitoli attualmente aperto è stato creato"
+msgstr "FPS del filmato per il quale il file sottotitoli attualmente aperto è stato creato"
 
 #: tfrmmain.edtquickaction.hint
 msgctxt "tfrmmain.edtquickaction.hint"
 msgid "Quick Action Finder"
-msgstr "Barra di ricerca delle azioni rapide"
+msgstr "Barra di ricerca azioni rapide"
 
 #: tfrmmain.lblmedialength.hint
 msgid "Video length and FPS"
-msgstr "Durata del video e FPS"
+msgstr "Durata video e FPS"
 
 #: tfrmmain.lblmediatime.hint
 msgid "Current video position"
-msgstr "Posizione attuale del video"
+msgstr "Posizione attuale video"
 
 #: tfrmmain.mnudictionary.caption
 msgctxt "tfrmmain.mnudictionary.caption"
@@ -3826,7 +3828,7 @@ msgstr "Testo"
 #: tfrmmain.mnuedittimings.caption
 msgctxt "tfrmmain.mnuedittimings.caption"
 msgid "Timings"
-msgstr "Tempistiche"
+msgstr "Tempi"
 
 #: tfrmmain.mnuedittimingsendcue.caption
 msgid "End Cue"
@@ -3834,7 +3836,7 @@ msgstr "Marcatore finale"
 
 #: tfrmmain.mnuedittimingsextend.caption
 msgid "Extend length"
-msgstr "Estendi lunghezza"
+msgstr "Aumenta lunghezza"
 
 #: tfrmmain.mnufile.caption
 msgctxt "tfrmmain.mnufile.caption"
@@ -3879,7 +3881,7 @@ msgstr "Effetti"
 
 #: tfrmmain.mnutextlines.caption
 msgid "Lines"
-msgstr "Righe"
+msgstr "Linee"
 
 #: tfrmmain.mnutextwords.caption
 msgid "Words"
@@ -3898,7 +3900,7 @@ msgstr "Glossario"
 #: tfrmmain.mnutoolstranslationmemory.caption
 msgctxt "tfrmmain.mnutoolstranslationmemory.caption"
 msgid "Translation memory"
-msgstr "Memoria di traduzione"
+msgstr "Memoria traduzione"
 
 #: tfrmmain.mnuvideo.caption
 msgctxt "tfrmmain.mnuvideo.caption"
@@ -3947,7 +3949,7 @@ msgstr "Colonne"
 
 #: tfrmmain.mnuviewtoolbars.caption
 msgid "Toolbars"
-msgstr "Barre degli strumenti"
+msgstr "Barre strumenti"
 
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
@@ -3960,7 +3962,7 @@ msgstr "Video"
 
 #: tfrmmain.mnuworkspacelayout.caption
 msgid "Layouts"
-msgstr "Disposizioni"
+msgstr "Layout interfaccia"
 
 #: tfrmmain.tedduration.hint
 msgctxt "tfrmmain.tedduration.hint"
@@ -3970,12 +3972,12 @@ msgstr "Durata"
 #: tfrmmain.tedfinal.hint
 msgctxt "tfrmmain.tedfinal.hint"
 msgid "Final time"
-msgstr "Tempistica finale"
+msgstr "Tempo finale"
 
 #: tfrmmain.tedinitial.hint
 msgctxt "tfrmmain.tedinitial.hint"
 msgid "Initial time"
-msgstr "Tempistica iniziale"
+msgstr "Tempo iniziale"
 
 #: tfrmmain.tedpause.hint
 msgid "Pause"
@@ -4055,7 +4057,7 @@ msgstr "Controllo qualità"
 
 #: tfrmqualitycheck.lblrules.caption
 msgid "Rules"
-msgstr "Norme"
+msgstr "Regole"
 
 #: tfrmrestorebackup.btnclose.caption
 msgctxt "tfrmrestorebackup.btnclose.caption"
@@ -4083,12 +4085,12 @@ msgstr "Chiudi"
 
 #: tfrmroundtime.caption
 msgid "Round times"
-msgstr "Arrotonda tempistiche"
+msgstr "Arrotonda tempi"
 
 #: tfrmroundtime.lblscope.caption
 msgctxt "tfrmroundtime.lblscope.caption"
 msgid "Scope:"
-msgstr "Destinazione:"
+msgstr "Scopo:"
 
 #: tfrmroundtime.rbnallthesubtitles.caption
 msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
@@ -4107,11 +4109,11 @@ msgstr "Solo elementi selezionati"
 
 #: tfrmroundtime.rdofps.caption
 msgid "Using FPS"
-msgstr "Utilizzando i FPS"
+msgstr "Usando i FPS"
 
 #: tfrmroundtime.rdomilliseconds.caption
 msgid "Using Milliseconds"
-msgstr "Utilizzando i millisecondi"
+msgstr "Usando i millisecondi"
 
 #: tfrmsettings.btnclose.caption
 msgctxt "tfrmsettings.btnclose.caption"
@@ -4182,51 +4184,51 @@ msgstr "Aggiungi ’...’ in corrispondenza della divisione di un sottotitolo"
 
 #: tfrmsettings.chkdrawerrors.caption
 msgid "Show errors in list"
-msgstr "Mostra gli errori nell’elenco"
+msgstr "Visualizza errori nell’elenco"
 
 #: tfrmsettings.chkdrawtags.caption
 msgid "Interpret tags in list"
-msgstr "Interpreta i tag nell’elenco"
+msgstr "Interpreta tag nell’elenco"
 
 #: tfrmsettings.chkdrawwaveformgap.caption
 msgid "Show gap in timeline"
-msgstr "Mostra intervallo nella linea del tempo"
+msgstr "Visualizza intervallo nella timeline"
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
 msgid "Prompt when deleting subtitles"
-msgstr "Mostra un avviso quando si rimuovono sottotitoli"
+msgstr "Visualizza un avviso quando si rimuovono sottotitoli"
 
 #: tfrmsettings.chkpromptforinputencoding.caption
 msgid "Prompt for Encoding before loading a file"
-msgstr "Mostra un avviso sulla codifica prima di caricare un file"
+msgstr "Visualizza un avviso sulla codifica prima di caricare un file"
 
 #: tfrmsettings.chkpromptforinputfps.caption
 msgid "Prompt for FPS before loading a file"
-msgstr "Mostra un avviso sui FPS prima di caricare un file"
+msgstr "Visualizza un avviso sui FPS prima di caricare un file"
 
 #: tfrmsettings.chkpromptforsavewitherrors.caption
 msgid "Prompt when saving file with errors"
-msgstr "Mostra un avviso al salvataggio di un file che presenta errori"
+msgstr "Visualizza un avviso al salvataggio di un file che presenta errori"
 
 #: tfrmsettings.chkshowcpsbar.caption
 msgid "Show CPS bar"
-msgstr "Mostra la barra CPS"
+msgstr "Visualizza barra CPS"
 
 #: tfrmsettings.chkshowsplashwindow.caption
 msgid "Show splash window"
-msgstr "Mostra la schermata di avvio"
+msgstr "Visualizza schermata di avvio"
 
 #: tfrmsettings.chksubtitlehandlebympv.caption
 msgid "mpv handles subtitles for preview"
-msgstr "mpv gestisce i sottotitoli nella visualizzazione dell’anteprima"
+msgstr "Gestisci sottotitoli nell'anteprima con mpv"
 
 #: tfrmsettings.chkusehwdec.caption
 msgid "Use hardware video decoding"
-msgstr "Usa la decodifica hardware del video"
+msgstr "Usa decodifica hardware video"
 
 #: tfrmsettings.chkuseownfiledialog.caption
 msgid "Use Tero file dialog"
-msgstr "Usa finestra di dialogo di Tero per i file"
+msgstr "Usa finestra di dialogo Tero"
 
 #: tfrmsettings.lbladditionalmpvoptions.caption
 msgid "Additional mpv options"
@@ -4254,7 +4256,7 @@ msgstr "Caratteri per secondo"
 #: tfrmsettings.lblcpsstrategy.caption
 msgctxt "tfrmsettings.lblcpsstrategy.caption"
 msgid "Chars excluded from CPS count"
-msgstr "Caratteri esclusi dal conteggio dei CPS"
+msgstr "Caratteri esclusi dal conteggio CPS"
 
 #: tfrmsettings.lbldefaultfileencoding.caption
 msgid "Default file encoding"
@@ -4266,11 +4268,11 @@ msgstr "Formato file predefinito"
 
 #: tfrmsettings.lbldefaultframerate.caption
 msgid "Default input frame rate"
-msgstr "Frequenza fotogrammi di ingresso predefinita"
+msgstr "Frequenza fotogrammi sorgente predefinita"
 
 #: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
 msgid "Dialogue segments detection threshold (rms)"
-msgstr "Soglia di rilevamento per le parti dialogate (rms)"
+msgstr "Soglia rilevamento parti dialogate (rms)"
 
 #: tfrmsettings.lblfasterwhisper.caption
 msgid "Faster-Whisper"
@@ -4282,7 +4284,7 @@ msgstr "FFmpeg"
 
 #: tfrmsettings.lblframestep.caption
 msgid "Frame step"
-msgstr "Intervallo fotogrammi"
+msgstr "Step fotogrammi"
 
 #: tfrmsettings.lbllanguage.caption
 msgctxt "tfrmsettings.lbllanguage.caption"
@@ -4291,7 +4293,7 @@ msgstr "Lingua"
 
 #: tfrmsettings.lbllistfontsize.caption
 msgid "List font size"
-msgstr "Dimensione del carattere per l’elenco"
+msgstr "Dimensione font elenco"
 
 #: tfrmsettings.lbllistmode.caption
 msgctxt "tfrmsettings.lbllistmode.caption"
@@ -4306,12 +4308,12 @@ msgstr "Durata max. (ms)"
 #: tfrmsettings.lblmaxlinecount.caption
 msgctxt "tfrmsettings.lblmaxlinecount.caption"
 msgid "Max. line count"
-msgstr "Conteggio max. linea"
+msgstr "N. max linee"
 
 #: tfrmsettings.lblmindurationms.caption
 msgctxt "tfrmsettings.lblmindurationms.caption"
 msgid "Min. duration / per word (ms)"
-msgstr "Durata min. / per parola (ms)"
+msgstr "Durata min./per parola (ms)"
 
 #: tfrmsettings.lblnewsubtitlems.caption
 msgctxt "tfrmsettings.lblnewsubtitlems.caption"
@@ -4339,29 +4341,29 @@ msgstr "PySceneDetect"
 #: tfrmsettings.lblscsnaparea.caption
 msgctxt "tfrmsettings.lblscsnaparea.caption"
 msgid "Shot change snap / threshold (frames)"
-msgstr "Ancoraggio per i cambi di scena / entrata (fotogrammi)"
+msgstr "Ancoraggio/soglia cambi scena (fotogrammi)"
 
 #: tfrmsettings.lblscsnapincues.caption
 msgctxt "tfrmsettings.lblscsnapincues.caption"
 msgid "Snap in cues after SC (frames)"
-msgstr "Àncora i punti di entrata dopo il c.i. (fotogrammi)"
+msgstr "Àncora punti di ingresso dopo il c.i. (fotogrammi)"
 
 #: tfrmsettings.lblscsnapoutcues.caption
 msgctxt "tfrmsettings.lblscsnapoutcues.caption"
 msgid "Snap out cues before SC (frames)"
-msgstr "Àncora i punti di uscita prima del c.i. (fotogrammi)"
+msgstr "Àncora punti di uscita prima del c.i. (fotogrammi)"
 
 #: tfrmsettings.lblseektime.caption
 msgid "Seek time (ms)"
-msgstr "Ricerca tempistica (ms)"
+msgstr "Tempo ricerca (ms)"
 
 #: tfrmsettings.lblshifttimems.caption
 msgid "Shift time (ms)"
-msgstr "Sposta tempistiche (ms)"
+msgstr "Sposta tempo (ms)"
 
 #: tfrmsettings.lblshortcut.caption
 msgid "Shortcut"
-msgstr "Scorciatoie da tastiera"
+msgstr "Scorciatoie"
 
 #: tfrmsettings.lblshortcutcat.caption
 msgid "Category"
@@ -4369,7 +4371,7 @@ msgstr "Categoria"
 
 #: tfrmsettings.lblshortcutpreset.caption
 msgid "Preset"
-msgstr "Preimpostazioni"
+msgstr "Profilo"
 
 #: tfrmsettings.lblsubbackground.caption
 msgctxt "tfrmsettings.lblsubbackground.caption"
@@ -4406,7 +4408,7 @@ msgstr "Sottotitoli"
 
 #: tfrmsettings.lbltextboxfontsize.caption
 msgid "Text box font size"
-msgstr "Dimensione del carattere per i riquadri di testo"
+msgstr "Dimensione font riquadri testo"
 
 #: tfrmsettings.lbltheme.caption
 msgid "Theme"
@@ -4414,12 +4416,12 @@ msgstr "Tema"
 
 #: tfrmsettings.lbltimecodemode.caption
 msgid "Time code mode"
-msgstr "Modalità codice temporale"
+msgstr "Modalità time code"
 
 #: tfrmsettings.lbltoolbareditor.caption
 msgctxt "tfrmsettings.lbltoolbareditor.caption"
 msgid "Editor"
-msgstr "Aspetto del testo"
+msgstr "Editor"
 
 #: tfrmsettings.lbltoolbarmain.caption
 msgctxt "tfrmsettings.lbltoolbarmain.caption"
@@ -4429,7 +4431,7 @@ msgstr "Principale"
 #: tfrmsettings.lbltoolbarvideo.caption
 msgctxt "tfrmsettings.lbltoolbarvideo.caption"
 msgid "Video"
-msgstr "Filmato"
+msgstr "Video"
 
 #: tfrmsettings.lbltoolbarwave.caption
 msgctxt "tfrmsettings.lbltoolbarwave.caption"
@@ -4443,7 +4445,7 @@ msgstr "Colore"
 
 #: tfrmsettings.lblwaveend.caption
 msgid "End line"
-msgstr "Riga finale"
+msgstr "Linea finale"
 
 #: tfrmsettings.lblwaveform.caption
 msgctxt "tfrmsettings.lblwaveform.caption"
@@ -4452,11 +4454,11 @@ msgstr "Forma d’onda"
 
 #: tfrmsettings.lblwavestart.caption
 msgid "Start line"
-msgstr "Riga iniziale"
+msgstr "Linea iniziale"
 
 #: tfrmsettings.lblwebreference.caption
 msgid "Web reference"
-msgstr "Definizione online"
+msgstr "Referenza online"
 
 #: tfrmsettings.lblwhispercpp.caption
 msgid "Whisper.cpp"
@@ -4487,7 +4489,7 @@ msgstr "Chiudi"
 
 #: tfrmshifttimes.caption
 msgid "Shift times"
-msgstr "Sposta tempistiche"
+msgstr "Sposta tempi"
 
 #: tfrmshifttimes.cbooffset.text
 msgctxt "tfrmshifttimes.cbooffset.text"
@@ -4497,12 +4499,12 @@ msgstr "+"
 #: tfrmshifttimes.lbloffset.caption
 msgctxt "tfrmshifttimes.lbloffset.caption"
 msgid "Offset"
-msgstr "Scostamento"
+msgstr "Offset"
 
 #: tfrmshifttimes.lblscope.caption
 msgctxt "tfrmshifttimes.lblscope.caption"
 msgid "Scope:"
-msgstr "Destinazione:"
+msgstr "Scopo:"
 
 #: tfrmshifttimes.rbnallthesubtitles.caption
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
@@ -4547,7 +4549,7 @@ msgstr "Importa..."
 #: tfrmshotchanges.caption
 msgctxt "tfrmshotchanges.caption"
 msgid "Shot changes"
-msgstr "Cambi di inquadratura"
+msgstr "Cambi inquadratura"
 
 #: tfrmshotchanges.cbooffset.text
 msgctxt "tfrmshotchanges.cbooffset.text"
@@ -4556,24 +4558,24 @@ msgstr "+"
 
 #: tfrmshotchanges.lbldetectapp.caption
 msgid "App to detect"
-msgstr "Applicazione per il rilevamento"
+msgstr "Applica per rilevare"
 
 #: tfrmshotchanges.lbloffset.caption
 msgctxt "tfrmshotchanges.lbloffset.caption"
 msgid "Offset"
-msgstr "Scostamento"
+msgstr "Offset"
 
 #: tfrmshotchanges.lblsensitivity.caption
 msgid "Detection sensitivity"
-msgstr "Sensibilità di rilevamento"
+msgstr "Sensibilità rilevamento"
 
 #: tfrmshotchanges.lbltimecodein.caption
 msgid "Time code for import"
-msgstr "Codice temporale per l’importazione"
+msgstr "Time code per l’importazione"
 
 #: tfrmshotchanges.lbltimecodeout.caption
 msgid "Time code for export"
-msgstr "Codice temporale per l’esportazione"
+msgstr "Time code per l’esportazione"
 
 #: tfrmspellcheck.btnadd.caption
 msgctxt "tfrmspellcheck.btnadd.caption"
@@ -4722,7 +4724,7 @@ msgstr "..."
 #: tfrmtbxsettings.caption
 msgctxt "tfrmtbxsettings.caption"
 msgid "Terminology settings"
-msgstr "Impostazioni del glossario"
+msgstr "Impostazioni glossario"
 
 #: tfrmtbxsettings.lblfilename.caption
 msgctxt "tfrmtbxsettings.lblfilename.caption"
@@ -4737,7 +4739,7 @@ msgstr "Lingua originale"
 #: tfrmtbxsettings.lbltranslang.caption
 msgctxt "tfrmtbxsettings.lbltranslang.caption"
 msgid "Translation language"
-msgstr "Lingua della traduzione"
+msgstr "Lingua traduzione"
 
 #: tfrmtimeexpander.btnapply.caption
 msgctxt "tfrmtimeexpander.btnapply.caption"
@@ -4751,7 +4753,7 @@ msgstr "Chiudi"
 
 #: tfrmtimeexpander.caption
 msgid "Time expander/reducer"
-msgstr "Dilatatore/riduttore delle tempistiche"
+msgstr "Aumenta/riduci tempi"
 
 #: tfrmtimeexpander.chkduration.caption
 msgid "Only if duration is longer than"
@@ -4778,7 +4780,7 @@ msgstr "ms"
 #: tfrmtimeexpander.lblscope.caption
 msgctxt "tfrmtimeexpander.lblscope.caption"
 msgid "Scope:"
-msgstr "Destinazione:"
+msgstr "Scopo:"
 
 #: tfrmtimeexpander.rbnallthesubtitles.caption
 msgctxt "tfrmtimeexpander.rbnallthesubtitles.caption"
@@ -4812,25 +4814,25 @@ msgstr "Traduzione"
 
 #: tfrmtranslate.lblinput.caption
 msgid "Input:"
-msgstr "Ingresso:"
+msgstr "Sorgente:"
 
 #: tfrmtranslate.lbloutput.caption
 msgctxt "tfrmtranslate.lbloutput.caption"
 msgid "Output:"
-msgstr "Risultato:"
+msgstr "Destinazione:"
 
 #: tfrmtranslate.lblscope.caption
 msgctxt "tfrmtranslate.lblscope.caption"
 msgid "Scope:"
-msgstr "Destinazione:"
+msgstr "Scopo:"
 
 #: tfrmtranslate.lblsourcelanguage.caption
 msgid "Source language:"
-msgstr "Lingua originale:"
+msgstr "Lingua sorgente:"
 
 #: tfrmtranslate.lbltranslationlanguage.caption
 msgid "Translation language:"
-msgstr "Lingua della traduzione:"
+msgstr "Lingua traduzione:"
 
 #: tfrmtranslate.rbnallthesubtitles.caption
 msgctxt "tfrmtranslate.rbnallthesubtitles.caption"
@@ -4860,7 +4862,7 @@ msgstr "Copia"
 #: tfrmtranslationmemory.btnuse.caption
 msgctxt "tfrmtranslationmemory.btnuse.caption"
 msgid "Use"
-msgstr "Utilizza"
+msgstr "Usa"
 
 #: tfrmtranslationmemory.btnvalidate.caption
 msgctxt "tfrmtranslationmemory.btnvalidate.caption"
@@ -4870,7 +4872,7 @@ msgstr "Convalida"
 #: tfrmtranslationmemory.caption
 msgctxt "tfrmtranslationmemory.caption"
 msgid "Translation memory"
-msgstr "Memoria di traduzione"
+msgstr "Memoria traduzione"
 
 #: tfrmtranslationmemorylist.btnclose.caption
 msgctxt "tfrmtranslationmemorylist.btnclose.caption"
@@ -4885,7 +4887,7 @@ msgstr "Copia"
 #: tfrmtranslationmemorylist.caption
 msgctxt "tfrmtranslationmemorylist.caption"
 msgid "Translation memory"
-msgstr "Memoria di traduzione"
+msgstr "Memoria traduzione"
 
 #: tfrmtranslationmemorylist.lblfind.caption
 msgctxt "tfrmtranslationmemorylist.lblfind.caption"
@@ -4915,7 +4917,7 @@ msgstr "..."
 #: tfrmtranslationmemorysettings.caption
 msgctxt "tfrmtranslationmemorysettings.caption"
 msgid "Translation memory settings"
-msgstr "Impostazioni della memoria di traduzione"
+msgstr "Impostazioni memoria traduzione"
 
 #: tfrmtranslationmemorysettings.lblfilename.caption
 msgctxt "tfrmtranslationmemorysettings.lblfilename.caption"
@@ -4925,12 +4927,12 @@ msgstr "Nome file"
 #: tfrmtranslationmemorysettings.lblsourcelang.caption
 msgctxt "tfrmtranslationmemorysettings.lblsourcelang.caption"
 msgid "Source language"
-msgstr "Lingua originale"
+msgstr "Lingua sorgente"
 
 #: tfrmtranslationmemorysettings.lbltranslang.caption
 msgctxt "tfrmtranslationmemorysettings.lbltranslang.caption"
 msgid "Translation language"
-msgstr "Lingua della traduzione"
+msgstr "Lingua traduzione"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
@@ -4944,7 +4946,7 @@ msgstr "Estrai..."
 
 #: tfrmwaveextractor.caption
 msgid "Waveform extractor"
-msgstr "Estrattore della forma d’onda"
+msgstr "Estrattore forma d’onda"
 
 #: tfrmwaveextractor.lbltrack.caption
 msgid "Track:"
@@ -4952,7 +4954,7 @@ msgstr "Traccia:"
 
 #: tfrmwelcome.chkshowonstartup.caption
 msgid "Show on startup"
-msgstr "Mostra all’avvio"
+msgstr "Visualizza all’avvio"
 
 #: tfrmwelcome.lblbatchconvert.caption
 msgctxt "tfrmwelcome.lblbatchconvert.caption"
@@ -4965,7 +4967,7 @@ msgstr "Esci"
 
 #: tfrmwelcome.lblnewsubtitle.caption
 msgid "New subtitle project"
-msgstr "Nuovo progetto di sottotitoli"
+msgstr "Nuovo progetto sottotitoli"
 
 #: tfrmwelcome.lblnewtranscription.caption
 msgid "New manual transcription"
@@ -4983,37 +4985,37 @@ msgstr "File recenti"
 #: tfrmwelcome.lblwelcome.caption
 msgctxt "tfrmwelcome.lblwelcome.caption"
 msgid "Welcome to"
-msgstr "Benvenuti in"
+msgstr "Benvenuto in"
 
 #: tfrmwizard.btndownload.caption
 msgctxt "tfrmwizard.btndownload.caption"
 msgid "Download"
-msgstr "Scarica"
+msgstr "Download"
 
 #: tfrmwizard.btndownloadfasterwhisper.caption
 msgctxt "tfrmwizard.btndownloadfasterwhisper.caption"
 msgid "Download"
-msgstr "Scarica"
+msgstr "Download"
 
 #: tfrmwizard.btndownloadffmpeg.caption
 msgctxt "tfrmwizard.btndownloadffmpeg.caption"
 msgid "Download"
-msgstr "Scarica"
+msgstr "Download"
 
 #: tfrmwizard.btndownloadwhisper.caption
 msgctxt "tfrmwizard.btndownloadwhisper.caption"
 msgid "Download"
-msgstr "Scarica"
+msgstr "Download"
 
 #: tfrmwizard.btndownloadytdlp.caption
 msgctxt "tfrmwizard.btndownloadytdlp.caption"
 msgid "Download"
-msgstr "Scarica"
+msgstr "Download"
 
 #: tfrmwizard.btnnext.caption
 msgctxt "tfrmwizard.btnnext.caption"
 msgid "Next"
-msgstr "Procedi"
+msgstr "Avanti"
 
 #: tfrmwizard.btnprevious.caption
 msgid "Back"
@@ -5021,11 +5023,11 @@ msgstr "Indietro"
 
 #: tfrmwizard.caption
 msgid "Getting started wizard"
-msgstr "Assistente di avvio"
+msgstr "Procedura guidata iniziale"
 
 #: tfrmwizard.lblchooselayout.caption
 msgid "Choose workspace layout and timecode mode:"
-msgstr "Scegli la disposizione dello spazio di lavoro e la modalità codice temporale:"
+msgstr "Scegli la disposizione dello spazio di lavoro e la modalità time code:"
 
 #: tfrmwizard.lblexperience.caption
 msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
@@ -5038,7 +5040,7 @@ msgstr "Faster-Whisper:"
 #: tfrmwizard.lblfasterwhisper_hint.caption
 msgctxt "tfrmwizard.lblfasterwhisper_hint.caption"
 msgid "Optional, used for speech recognition."
-msgstr "Opzionale: utilizzato per il riconoscimento del parlato."
+msgstr "Opzionale: usato per il riconoscimento del parlato."
 
 #: tfrmwizard.lblffmpeg.caption
 msgid "FFmpeg:"
@@ -5046,7 +5048,7 @@ msgstr "FFmpeg:"
 
 #: tfrmwizard.lblffmpeg_hint.caption
 msgid "Optional, used to extract audio and generate video."
-msgstr "Opzionale: utilizzato per l’estrazione delle tracce audio e la generazione dei video."
+msgstr "Opzionale: usato per l’estrazione delle tracce audio e la generazione dei video."
 
 #: tfrmwizard.lbllibmpv.caption
 msgid "libmpv: "
@@ -5058,12 +5060,12 @@ msgstr "Essenziale: utilizzato per la riproduzione dei video."
 
 #: tfrmwizard.lblrequiredfiles.caption
 msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
-msgstr "Per il corretto funzionamento di Tero Subtitler, sono necessarie le seguenti librerie; se non dovessero essere presenti nel tuo sistema, Tero Subtitler può scaricarle per te."
+msgstr "Per il corretto funzionamento di Tero Subtitler, sono necessarie le seguenti librerie; se non dovessero essere presenti nel sistema, Tero Subtitler può scaricarle in autonomia."
 
 #: tfrmwizard.lblwelcome.caption
 msgctxt "tfrmwizard.lblwelcome.caption"
 msgid "Welcome to"
-msgstr "Benvenuti in"
+msgstr "Benvenuto in"
 
 #: tfrmwizard.lblwhisper.caption
 msgid "Whisper.cpp:"
@@ -5072,7 +5074,7 @@ msgstr "Whisper.cpp:"
 #: tfrmwizard.lblwhisper_hint.caption
 msgctxt "tfrmwizard.lblwhisper_hint.caption"
 msgid "Optional, used for speech recognition."
-msgstr "Opzionale: utilizzato per il riconoscimento del parlato."
+msgstr "Opzionale: usato per il riconoscimento del parlato."
 
 #: tfrmwizard.lblytdlp.caption
 msgid "yt-dlp:"
@@ -5080,7 +5082,7 @@ msgstr "yt-dlp:"
 
 #: tfrmwizard.lblytdlp_hint.caption
 msgid "Optional, used for dowloading from YouTube."
-msgstr "Opzionale: utilizzato per scaricare filmati da YouTube."
+msgstr "Opzionale: usato per scaricare filmati da YouTube."
 
 #: tfrmwizard.rdolayout0.caption
 msgctxt "tfrmwizard.rdolayout0.caption"
