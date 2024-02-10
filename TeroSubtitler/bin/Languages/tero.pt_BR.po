@@ -3179,6 +3179,10 @@ msgctxt "tfrmmain.actnextsubtitle.caption"
 msgid "Next subtitle"
 msgstr "Legenda seguinte"
 
+#: tfrmmain.actpanandscan.caption
+msgid "Pan-and-scan"
+msgstr ""
+
 #: tfrmmain.actpaste.caption
 msgctxt "tfrmmain.actpaste.caption"
 msgid "Paste"
