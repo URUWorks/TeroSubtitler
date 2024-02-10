@@ -3796,61 +3796,12 @@ object frmMain: TfrmMain
       Caption = 'Remove Unicode control characters'
       OnExecute = actRemoveUnicodeControlCharsExecute
     end
-    object actVideoFilterHFlip: TAction
-      Tag = 4
-      Category = 'Video filters'
-      AutoCheck = True
-      Caption = 'Horizontal flip'
-      OnExecute = actVideoFilterHFlipExecute
-    end
-    object actVideoFilterVFlip: TAction
-      Tag = 4
-      Category = 'Video filters'
-      AutoCheck = True
-      Caption = 'Vertical flip'
-      OnExecute = actVideoFilterVFlipExecute
-    end
-    object actVideoFilterSharpen: TAction
-      Tag = 4
-      Category = 'Video filters'
-      AutoCheck = True
-      Caption = 'Sharpen'
-      OnExecute = actVideoFilterSharpenExecute
-    end
     object actVideoFilterBlur: TAction
       Tag = 4
       Category = 'Video filters'
       AutoCheck = True
       Caption = 'Blur'
       OnExecute = actVideoFilterBlurExecute
-    end
-    object actVideoFilterEdgeEnhance: TAction
-      Tag = 4
-      Category = 'Video filters'
-      AutoCheck = True
-      Caption = 'Edge enhance'
-      OnExecute = actVideoFilterEdgeEnhanceExecute
-    end
-    object actVideoFilterEmboss: TAction
-      Tag = 4
-      Category = 'Video filters'
-      AutoCheck = True
-      Caption = 'Emboss'
-      OnExecute = actVideoFilterEmbossExecute
-    end
-    object actVideoFilterNegative: TAction
-      Tag = 4
-      Category = 'Video filters'
-      AutoCheck = True
-      Caption = 'Negative'
-      OnExecute = actVideoFilterNegativeExecute
-    end
-    object actVideoFilterVintage: TAction
-      Tag = 4
-      Category = 'Video filters'
-      AutoCheck = True
-      Caption = 'Vintage'
-      OnExecute = actVideoFilterVintageExecute
     end
     object actAudioFilterDialoguEnhance: TAction
       Tag = 4
@@ -4211,6 +4162,55 @@ object frmMain: TfrmMain
       AutoCheck = True
       Caption = 'Deinterlace'
       OnExecute = actVideoFilterDeinterlaceExecute
+    end
+    object actVideoFilterEdgeEnhance: TAction
+      Tag = 4
+      Category = 'Video filters'
+      AutoCheck = True
+      Caption = 'Edge enhance'
+      OnExecute = actVideoFilterEdgeEnhanceExecute
+    end
+    object actVideoFilterEmboss: TAction
+      Tag = 4
+      Category = 'Video filters'
+      AutoCheck = True
+      Caption = 'Emboss'
+      OnExecute = actVideoFilterEmbossExecute
+    end
+    object actVideoFilterHFlip: TAction
+      Tag = 4
+      Category = 'Video filters'
+      AutoCheck = True
+      Caption = 'Horizontal flip'
+      OnExecute = actVideoFilterHFlipExecute
+    end
+    object actVideoFilterNegative: TAction
+      Tag = 4
+      Category = 'Video filters'
+      AutoCheck = True
+      Caption = 'Negative'
+      OnExecute = actVideoFilterNegativeExecute
+    end
+    object actVideoFilterSharpen: TAction
+      Tag = 4
+      Category = 'Video filters'
+      AutoCheck = True
+      Caption = 'Sharpen'
+      OnExecute = actVideoFilterSharpenExecute
+    end
+    object actVideoFilterVFlip: TAction
+      Tag = 4
+      Category = 'Video filters'
+      AutoCheck = True
+      Caption = 'Vertical flip'
+      OnExecute = actVideoFilterVFlipExecute
+    end
+    object actVideoFilterVintage: TAction
+      Tag = 4
+      Category = 'Video filters'
+      AutoCheck = True
+      Caption = 'Vintage'
+      OnExecute = actVideoFilterVintageExecute
     end
     object actPanAndScan: TAction
       Tag = 4

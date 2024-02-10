@@ -75,7 +75,7 @@ begin
         if Comp <> NIL then
         begin
           s := joItem.Get('Key', '');
-          Comp.ShortCut := TextToShortCut(s);
+          Comp.ShortCut := TextToShortCutRaw(s);
         end;
       end;
     finally
@@ -119,7 +119,7 @@ begin
           if ShortCut <> 0 then
           begin
             s := '{"Action" : "' + Name +
-                 '", "Key" : "'  + ShortCutToText(ShortCut) + '"}';
+                 '", "Key" : "'  + ShortCutToTextRaw(ShortCut) + '"}';
             j := GetJSON(s);
             jaData.Add(j);
           end;
