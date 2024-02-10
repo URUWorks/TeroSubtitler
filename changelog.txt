@@ -4,6 +4,7 @@
 - fixed: Wrong time values imported in a format variant [SubtitleAPI/TimedText]
 - fixed: Some properties are not reflected when "mpv handles subtitles for preview" option is active
 - updated: Italian language (thx GitGianluc)
+- improved: UI - More space in Settings and increase string width #253
 - improved: Audio to text: cancel download of model #22
 - improved: Video context menu
 - added: Distribute entries evenly
