@@ -662,6 +662,10 @@ begin
     mmoSourceView.Enabled  := AValue;
     mmoText.Enabled        := AValue;
     mmoTranslation.Enabled := AValue;
+    {$IFDEF DARWIN}
+    mmoText.ReadOnly        := not AValue;
+    mmoTranslation.ReadOnly := not AValue;
+    {$ENDIF}
     btnInitialTime.Enabled := AValue;
     btnFinalTime.Enabled   := AValue;
     btnDuration.Enabled    := AValue;
