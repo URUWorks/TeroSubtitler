@@ -2037,6 +2037,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actVideoFilterDeinterlaceExecute(Sender: TObject);
+begin
+  MPVSetVideoFilters;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actAudioFilterDialoguEnhanceExecute(Sender: TObject);
 begin
   MPVSetAudioFilters;
@@ -2152,6 +2159,13 @@ end;
 procedure TfrmMain.actTextEffectFlashExecute(Sender: TObject);
 begin
   VSTTextEffect(VST, fxFlash, 250, 100);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actDistributeEntriesEvenlyExecute(Sender: TObject);
+begin
+  VSTDistributeEntriesEvenly(VST);
 end;
 
 // -----------------------------------------------------------------------------

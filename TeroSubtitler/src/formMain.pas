@@ -89,6 +89,8 @@ type
     actGoToPreviousEntryAndPlay: TAction;
     actGoToCurrentEntryInitialTime: TAction;
     actGoToCurrentEntryFinalTime: TAction;
+    actDistributeEntriesEvenly: TAction;
+    actVideoFilterDeinterlace: TAction;
     actPlayCurrentEntry: TAction;
     actTextEffectTypewriter: TAction;
     actTextEffectFlash: TAction;
@@ -351,6 +353,8 @@ type
     MenuItem243: TMenuItem;
     MenuItem244: TMenuItem;
     MenuItem245: TMenuItem;
+    MenuItem246: TMenuItem;
+    MenuItem247: TMenuItem;
     mnuVideoPopupAR: TMenuItem;
     mnuVideoPopupAS: TMenuItem;
     mnuVideoPopupAF: TMenuItem;
@@ -1131,6 +1135,7 @@ type
     procedure actVideoFilterSharpenExecute(Sender: TObject);
     procedure actVideoFilterVFlipExecute(Sender: TObject);
     procedure actVideoFilterVintageExecute(Sender: TObject);
+    procedure actVideoFilterDeinterlaceExecute(Sender: TObject);
     procedure actAudioFilterDialoguEnhanceExecute(Sender: TObject);
     procedure actAudioFilterSpeechNormalizerExecute(Sender: TObject);
     procedure actAudioFilterSurroundExecute(Sender: TObject);
@@ -1150,6 +1155,7 @@ type
     procedure actJumpToPreviousEmptyExecute(Sender: TObject);
     procedure actTextEffectFlashExecute(Sender: TObject);
     procedure actTextEffectTypewriterExecute(Sender: TObject);
+    procedure actDistributeEntriesEvenlyExecute(Sender: TObject);
   private
 
   public

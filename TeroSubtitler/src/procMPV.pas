@@ -313,6 +313,7 @@ begin
     if actVideoFilterEmboss.Checked then Include(AVideoFilters, vfEmboss);
     if actVideoFilterNegative.Checked then Include(AVideoFilters, vfNegative);
     if actVideoFilterVintage.Checked then Include(AVideoFilters, vfVintage);
+    if actVideoFilterDeinterlace.Checked then Include(AVideoFilters, vfDeinterlace);
 
     MPV.SetVideoFilters(AVideoFilters);
   end;

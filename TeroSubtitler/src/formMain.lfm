@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
-  Left = 238
+  Left = 237
   Height = 780
   Top = 115
-  Width = 1124
+  Width = 1125
   AllowDropFiles = True
   Caption = 'tero'
   ClientHeight = 780
-  ClientWidth = 1124
+  ClientWidth = 1125
   Constraints.MinHeight = 400
   Constraints.MinWidth = 400
   Menu = MainMenu
@@ -24,10 +24,10 @@ object frmMain: TfrmMain
     Left = 0
     Height = 120
     Top = 637
-    Width = 1124
+    Width = 1125
     Align = alBottom
     ClientHeight = 120
-    ClientWidth = 1124
+    ClientWidth = 1125
     Constraints.MaxHeight = 200
     Constraints.MinHeight = 100
     Constraints.MinWidth = 100
@@ -36,7 +36,7 @@ object frmMain: TfrmMain
       Left = 0
       Height = 94
       Top = 26
-      Width = 1124
+      Width = 1125
       MinimumBlank = 30
       EmptyText = 'Click to add waveform'
       FPS = 25
@@ -60,7 +60,7 @@ object frmMain: TfrmMain
     object ToolBarWaveform: TToolBar
       AnchorSideLeft.Side = asrCenter
       AnchorSideRight.Side = asrCenter
-      Left = 417
+      Left = 418
       Height = 22
       Top = 0
       Width = 293
@@ -152,7 +152,7 @@ object frmMain: TfrmMain
     end
   end
   object LayoutVideo: TUWLayout
-    Left = 624
+    Left = 625
     Height = 573
     Top = 59
     Width = 500
@@ -351,14 +351,14 @@ object frmMain: TfrmMain
     Left = 0
     Height = 5
     Top = 632
-    Width = 1124
+    Width = 1125
     Align = alBottom
     AutoSnap = False
     ResizeAnchor = akBottom
     ResizeStyle = rsLine
   end
   object SplitterVideo: TSplitter
-    Left = 619
+    Left = 620
     Height = 573
     Top = 59
     Width = 5
@@ -371,10 +371,10 @@ object frmMain: TfrmMain
     Left = 0
     Height = 573
     Top = 59
-    Width = 619
+    Width = 620
     Align = alClient
     ClientHeight = 573
-    ClientWidth = 619
+    ClientWidth = 620
     Constraints.MinHeight = 150
     Constraints.MinWidth = 150
     TabOrder = 0
@@ -382,20 +382,20 @@ object frmMain: TfrmMain
       Left = 0
       Height = 573
       Top = 0
-      Width = 619
+      Width = 620
       Align = alClient
       ClientHeight = 573
-      ClientWidth = 619
+      ClientWidth = 620
       TabOrder = 0
       OnResize = LayoutVSTResize
       object LayoutEditor: TUWLayout
         Left = 0
         Height = 139
         Top = 434
-        Width = 619
+        Width = 620
         Align = alBottom
         ClientHeight = 139
-        ClientWidth = 619
+        ClientWidth = 620
         TabOrder = 1
         object LayoutEditorTimes: TUWLayout
           Left = 0
@@ -558,10 +558,10 @@ object frmMain: TfrmMain
           Left = 148
           Height = 139
           Top = 0
-          Width = 471
+          Width = 472
           Align = alClient
           ClientHeight = 139
-          ClientWidth = 471
+          ClientWidth = 472
           TabOrder = 0
           object mmoText: TUWMemo
             Left = 0
@@ -651,7 +651,7 @@ object frmMain: TfrmMain
             Left = 0
             Height = 22
             Top = 2
-            Width = 471
+            Width = 472
             AutoSize = True
             BorderSpacing.Top = 2
             EdgeBorders = []
@@ -775,7 +775,7 @@ object frmMain: TfrmMain
         Left = 0
         Height = 434
         Top = 0
-        Width = 619
+        Width = 620
         Align = alClient
         Header.AutoSizeIndex = -1
         Header.Columns = <>
@@ -833,7 +833,7 @@ object frmMain: TfrmMain
     Left = 0
     Height = 23
     Top = 757
-    Width = 1124
+    Width = 1125
     Panels = <    
       item
         Bevel = pbNone
@@ -850,7 +850,7 @@ object frmMain: TfrmMain
     Left = 0
     Height = 59
     Top = 0
-    Width = 1124
+    Width = 1125
     AutoSize = True
     BandBorderStyle = bsNone
     Bands = <    
@@ -1518,6 +1518,9 @@ object frmMain: TfrmMain
         object MenuItem59: TMenuItem
           Action = actDivideEntry
         end
+        object MenuItem246: TMenuItem
+          Action = actDistributeEntriesEvenly
+        end
         object Separator16: TMenuItem
           Caption = '-'
         end
@@ -1949,20 +1952,12 @@ object frmMain: TfrmMain
       end
       object mnuVideoVideoFilters: TMenuItem
         Caption = 'Video filters'
-        object MenuItem207: TMenuItem
-          Action = actVideoFilterHFlip
-          AutoCheck = True
-        end
-        object MenuItem208: TMenuItem
-          Action = actVideoFilterVFlip
-          AutoCheck = True
-        end
-        object MenuItem209: TMenuItem
-          Action = actVideoFilterSharpen
-          AutoCheck = True
-        end
         object MenuItem210: TMenuItem
           Action = actVideoFilterBlur
+          AutoCheck = True
+        end
+        object MenuItem247: TMenuItem
+          Action = actVideoFilterDeinterlace
           AutoCheck = True
         end
         object MenuItem211: TMenuItem
@@ -1973,8 +1968,20 @@ object frmMain: TfrmMain
           Action = actVideoFilterEmboss
           AutoCheck = True
         end
+        object MenuItem207: TMenuItem
+          Action = actVideoFilterHFlip
+          AutoCheck = True
+        end
         object MenuItem213: TMenuItem
           Action = actVideoFilterNegative
+          AutoCheck = True
+        end
+        object MenuItem209: TMenuItem
+          Action = actVideoFilterSharpen
+          AutoCheck = True
+        end
+        object MenuItem208: TMenuItem
+          Action = actVideoFilterVFlip
           AutoCheck = True
         end
         object MenuItem214: TMenuItem
@@ -4191,6 +4198,19 @@ object frmMain: TfrmMain
       Category = 'Entries'
       Caption = 'Play current entry'
       OnExecute = actPlayCurrentEntryExecute
+    end
+    object actDistributeEntriesEvenly: TAction
+      Tag = 1
+      Category = 'Entries'
+      Caption = 'Distribute entries evenly'
+      OnExecute = actDistributeEntriesEvenlyExecute
+    end
+    object actVideoFilterDeinterlace: TAction
+      Tag = 4
+      Category = 'Video filters'
+      AutoCheck = True
+      Caption = 'Deinterlace'
+      OnExecute = actVideoFilterDeinterlaceExecute
     end
   end
   object popDropInsert: TPopupMenu

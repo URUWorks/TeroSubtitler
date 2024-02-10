@@ -319,6 +319,8 @@
 {"hash":172272725,"name":"tfrmmain.actgotocurrententryinitialtime.caption","sourcebytes":[71,111,32,116,111,32,99,117,114,114,101,110,116,32,101,110,116,114,121,32,105,110,105,116,105,97,108,32,116,105,109,101],"value":"Go to current entry initial time"},
 {"hash":158991989,"name":"tfrmmain.actgotocurrententryfinaltime.caption","sourcebytes":[71,111,32,116,111,32,99,117,114,114,101,110,116,32,101,110,116,114,121,32,102,105,110,97,108,32,116,105,109,101],"value":"Go to current entry final time"},
 {"hash":164715177,"name":"tfrmmain.actplaycurrententry.caption","sourcebytes":[80,108,97,121,32,99,117,114,114,101,110,116,32,101,110,116,114,121],"value":"Play current entry"},
+{"hash":28612473,"name":"tfrmmain.actdistributeentriesevenly.caption","sourcebytes":[68,105,115,116,114,105,98,117,116,101,32,101,110,116,114,105,101,115,32,101,118,101,110,108,121],"value":"Distribute entries evenly"},
+{"hash":176416709,"name":"tfrmmain.actvideofilterdeinterlace.caption","sourcebytes":[68,101,105,110,116,101,114,108,97,99,101],"value":"Deinterlace"},
 {"hash":261306372,"name":"tfrmmain.mnuvstformat.caption","sourcebytes":[109,110,117,86,83,84,70,111,114,109,97,116],"value":"mnuVSTFormat"},
 {"hash":6093503,"name":"tfrmmain.mnuvstvideo.caption","sourcebytes":[86,105,100,101,111],"value":"Video"},
 {"hash":184739641,"name":"tfrmmain.mnudictionary.caption","sourcebytes":[68,105,99,116,105,111,110,97,114,121],"value":"Dictionary"},
