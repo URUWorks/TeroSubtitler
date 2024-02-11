@@ -101,7 +101,7 @@ implementation
 
 uses
   procTypes, procWorkspace, procConfig, procColorTheme, formDownload,
-  UWSystem.SysUtils {$IFDEF DARWIN}, UWSystem.SysUtils{$ENDIF};
+  UWSystem.SysUtils;
 
 {$R *.lfm}
 
