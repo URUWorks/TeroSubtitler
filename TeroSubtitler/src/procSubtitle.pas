@@ -952,12 +952,13 @@ begin
   Result := -1;
 
   if Subtitles.Count > 0 then
+  begin
+    if not MPVOptions.SubtitleHandleByMPV and (Workspace.WorkMode = wmFrames) then
+      MSecs += 1;
+
     for i := 0 to Subtitles.Count-1 do
       with Subtitles[i] do
       begin
-        if not MPVOptions.SubtitleHandleByMPV and (Workspace.WorkMode = wmFrames) then
-          MSecs += 1;
-
         if (InitialTime <= MSecs) and (FinalTime > MSecs) then
         begin
           Result := i;
@@ -965,6 +966,7 @@ begin
           Break;
         end;
       end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
