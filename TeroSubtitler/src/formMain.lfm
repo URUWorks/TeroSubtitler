@@ -4218,6 +4218,12 @@ object frmMain: TfrmMain
       Caption = 'Pan-and-scan'
       OnExecute = actPanAndScanExecute
     end
+    object actVideoInformation: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Information...'
+      OnExecute = actVideoInformationExecute
+    end
   end
   object popDropInsert: TPopupMenu
     Images = ImageList_Default
@@ -4674,6 +4680,12 @@ object frmMain: TfrmMain
     end
     object mnuVideoPopupVF: TMenuItem
       Caption = 'mnuVideoPopupVF'
+    end
+    object Separator60: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem222: TMenuItem
+      Action = actVideoInformation
     end
   end
   object popWAVE: TPopupMenu

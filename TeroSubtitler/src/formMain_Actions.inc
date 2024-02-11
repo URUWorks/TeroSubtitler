@@ -2135,6 +2135,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actVideoInformationExecute(Sender: TObject);
+begin
+  MPVShowVideoInformation;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actFocusInitialTimeExecute(Sender: TObject);
 begin
   SetFocusTimeEdit(TAG_CONTROL_INITIALTIME);

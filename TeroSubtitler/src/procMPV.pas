@@ -44,12 +44,14 @@ procedure MPVSetFilters;
 procedure MPVSetVideoAspectRatio(const AValue: TMPVPlayerVideoAspectRatio);
 procedure MPVCycleVideoAspectRatio;
 procedure MPVSetPanAndScan(const AValue: Boolean);
+procedure MPVShowVideoInformation;
 
 // -----------------------------------------------------------------------------
 
 implementation
 
-uses procConfig, UWSystem.Encoding, UWSystem.SysUtils, MPVPlayer.Filters;
+uses procConfig, UWSystem.Encoding, UWSystem.SysUtils, MPVPlayer.Filters,
+  procSubtitle, formCustomMessageDlg, procLocalize;
 
 // -----------------------------------------------------------------------------
 
@@ -409,6 +411,62 @@ begin
     actPanAndScan.Checked := AValue;
     MPV.mpv_set_option_string_('panscan=' + IntToStr(iff(AValue, 1, 0)));
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MPVShowVideoInformation;
+var
+  s: String;
+  i, tl, tas, tvs, tss: Integer;
+begin
+  with frmMain do
+    if MPV.IsMediaLoaded then
+    begin
+      tl  := Length(MPV.TrackList);
+      tas := 0;
+      tvs := 0;
+      tss := 0;
+      if tl > 0 then
+      begin
+        for i := 0 to tl-1 do
+        begin
+          if MPV.TrackList[i].Kind = ttAudio then
+            Inc(tas)
+          else if MPV.TrackList[i].Kind = ttVideo then
+            Inc(tvs)
+          else if MPV.TrackList[i].Kind = ttSubtitle then
+            Inc(tss);
+        end;
+      end;
+
+      with TfrmCustomMessageDlg.Create(NIL) do
+      try
+        lblMessage.Font.Style := [];
+        lblMessage.Alignment := taLeftJustify;
+
+        s := Format(
+               lngviFile + LineEnding +
+               lngviDuration + LineEnding +
+               lngviFPS + LineEnding +
+               lngviResolution + LineEnding +
+               lngviVideoTracks + LineEnding +
+               lngviAudioTracks + LineEnding +
+               lngviSubtitleTracks,
+               [ExtractFileName(MPV.FileName),
+               GetTimeStr(MPV.GetMediaLenInMs), MPV.GetVideoTotalFrames,
+               SingleToStr(MPV.GetVideoFPS, FormatSettings),
+               MPV.GetVideoWidth, MPV.GetVideoHeight,
+               tvs,
+               tas,
+               tss
+               ]);
+
+        Execute(s, '', imInformation);
+      finally
+        Free;
+      end;
+    end;
 end;
 
 // -----------------------------------------------------------------------------

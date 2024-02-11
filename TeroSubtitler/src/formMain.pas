@@ -90,6 +90,7 @@ type
     actGoToCurrentEntryInitialTime: TAction;
     actGoToCurrentEntryFinalTime: TAction;
     actDistributeEntriesEvenly: TAction;
+    actVideoInformation: TAction;
     actPanAndScan: TAction;
     actVideoFilterDeinterlace: TAction;
     actPlayCurrentEntry: TAction;
@@ -333,6 +334,7 @@ type
     MenuItem200: TMenuItem;
     MenuItem201: TMenuItem;
     MenuItem202: TMenuItem;
+    MenuItem222: TMenuItem;
     MenuItem223: TMenuItem;
     MenuItem224: TMenuItem;
     MenuItem225: TMenuItem;
@@ -658,6 +660,7 @@ type
     Separator56: TMenuItem;
     Separator58: TMenuItem;
     Separator59: TMenuItem;
+    Separator60: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
@@ -1150,6 +1153,7 @@ type
     procedure actVAR2351Execute(Sender: TObject);
     procedure actVARCycleExecute(Sender: TObject);
     procedure actPanAndScanExecute(Sender: TObject);
+    procedure actVideoInformationExecute(Sender: TObject);
     procedure actFocusInitialTimeExecute(Sender: TObject);
     procedure actFocusFinalTimeExecute(Sender: TObject);
     procedure actCharacterMapExecute(Sender: TObject);

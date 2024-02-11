@@ -331,6 +331,15 @@ resourcestring
   lngTranslated = 'Translated';
   lngPercent = 'Percent';
 
+  //VideoInfoStrings
+  lngviFile = 'File: %s';
+  lngviDuration = 'Duration: %s (%d frames)';
+  lngviFPS = 'FPS: %s';
+  lngviResolution = 'Resolution: %dx%d';
+  lngviVideoTracks = 'Video tracks: %d';
+  lngviAudioTracks = 'Audio tracks: %d';
+  lngviSubtitleTracks = 'Subtitle tracks: %d';
+
   //WizardStrings
   lngwizLanguage = 'Language';
 
