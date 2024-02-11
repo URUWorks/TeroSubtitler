@@ -84,6 +84,11 @@ type
     FIndex: Integer;
     FLngList: TStrings;
     procedure SetPageStep(const AForward: Boolean = True);
+    function CheckState_libMPV: Boolean;
+    function CheckState_ytdlp: Boolean;
+    function CheckState_ffmpeg: Boolean;
+    function CheckState_whispercpp: Boolean;
+    function CheckState_fasterwhisper: Boolean;
   public
   end;
 
@@ -95,8 +100,8 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procConfig, procColorTheme, formDownload
-  {$IFDEF DARWIN}, UWSystem.SysUtils{$ENDIF};
+  procTypes, procWorkspace, procConfig, procColorTheme, formDownload,
+  UWSystem.SysUtils {$IFDEF DARWIN}, UWSystem.SysUtils{$ENDIF};
 
 {$R *.lfm}
 
@@ -123,65 +128,11 @@ begin
   btnDownloadFasterWhisper.Visible := False;
   {$ENDIF};
 
-  // libMPV
-  if FileExists(libMPVFileName) then
-  begin
-    btnDownload.Enabled := False;
-    lblLibMPVStatus.Caption := lngSuccess;
-  end
-  else
-  begin
-    btnDownload.Enabled := True;
-    lblLibMPVStatus.Caption := lngFailed;
-  end;
-
-  // yt-dlp
-  if FileExists(YTDLPFileName) then
-  begin
-    btnDownloadYTDLP.Enabled := False;
-    lblYTDLPStatus.Caption := lngSuccess;
-  end
-  else
-  begin
-    btnDownloadYTDLP.Enabled := True;
-    lblYTDLPStatus.Caption := lngFailed;
-  end;
-
-  // ffmpeg
-  if FileExists(ffmpegFileName) then
-  begin
-    btnDownloadFFMPEG.Enabled := False;
-    lblFFMPEGStatus.Caption := lngSuccess;
-  end
-  else
-  begin
-    btnDownloadFFMPEG.Enabled := True;
-    lblFFMPEGStatus.Caption := lngFailed;
-  end;
-
-  // whisper.cpp
-  if FileExists(WhisperFileName) then
-  begin
-    btnDownloadWhisper.Enabled := False;
-    lblWhisperStatus.Caption := lngSuccess;
-  end
-  else
-  begin
-    btnDownloadWhisper.Enabled := True;
-    lblWhisperStatus.Caption := lngFailed;
-  end;
-
-  // faster-whisper
-  if FileExists(Tools.FasterWhisper) then
-  begin
-    btnDownloadFasterWhisper.Enabled := False;
-    lblFasterWhisperStatus.Caption := lngSuccess;
-  end
-  else
-  begin
-    btnDownloadFasterWhisper.Enabled := True;
-    lblFasterWhisperStatus.Caption := lngFailed;
-  end;
+  CheckState_libMPV;
+  CheckState_ytdlp;
+  CheckState_ffmpeg;
+  CheckState_whispercpp;
+  CheckState_fasterwhisper;
 
   lblLanguage.Visible := False;
   cboLanguage.Visible := False;
@@ -308,6 +259,12 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmWizard.cboLanguageChange(Sender: TObject);
+
+  procedure FixStateLang(const ALabel: TLabel);
+  begin
+    ALabel.Caption := iff(ALabel.Tag = 1, lngSuccess, lngFailed);
+  end;
+
 var
   langs : TStringArray;
   currIdx : Integer;
@@ -329,6 +286,12 @@ begin
   cboTimeCode.Items[0] := lngHHMMSSZZZ;
   cboTimeCode.Items[1] := lngHHMMSSFF;
   cboTimeCode.ItemIndex := currIdx;
+
+  FixStateLang(lblLibMPVStatus);
+  FixStateLang(lblYTDLPStatus);
+  FixStateLang(lblFFMPEGStatus);
+  FixStateLang(lblWhisperStatus);
+  FixStateLang(lblFasterWhisperStatus);
 end;
 
 // -----------------------------------------------------------------------------
@@ -336,11 +299,7 @@ end;
 procedure TfrmWizard.btnDownloadClick(Sender: TObject);
 begin
   ShowDownloadDialog(URL_LIBMPV, ConcatPaths([libmpvFolder, 'libmpv.zip']));
-  if FileExists(libMPVFileName) then
-  begin
-    btnDownload.Enabled := False;
-    lblLibMPVStatus.Caption := lngSuccess;
-  end;
+  CheckState_libMPV;
 end;
 
 // -----------------------------------------------------------------------------
@@ -354,9 +313,8 @@ begin
   {$ENDIF}
   if FileExists(ConcatPaths([YTDLPFolder, YTDLP_EXE])) then
   begin
-    btnDownloadYTDLP.Enabled := False;
-    Tools.YTDLP              := ConcatPaths([YTDLPFolder, YTDLP_EXE]);
-    lblYTDLPStatus.Caption   := lngSuccess;
+    Tools.YTDLP := ConcatPaths([YTDLPFolder, YTDLP_EXE]);
+    CheckState_ytdlp;
   end;
 end;
 
@@ -372,9 +330,8 @@ begin
   ShowDownloadDialog(URL_FFMPEG, ConcatPaths([ffmpegFolder, 'ffmpeg.zip']));
   if FileExists(ConcatPaths([ffmpegFolder, FFMPEG_EXE])) then
   begin
-    btnDownloadFFMPEG.Enabled := False;
-    Tools.FFmpeg              := ConcatPaths([ffmpegFolder, FFMPEG_EXE]);
-    lblFFMPEGStatus.Caption   := lngSuccess;
+    Tools.FFmpeg := ConcatPaths([ffmpegFolder, FFMPEG_EXE]);
+    CheckState_ffmpeg;
   end;
 end;
 
@@ -389,9 +346,8 @@ begin
   {$ENDIF}
   if FileExists(ConcatPaths([WhisperFolder, WHISPER_EXE])) then
   begin
-    btnDownloadWhisper.Enabled := False;
-    Tools.WhisperCPP           := ConcatPaths([WhisperFolder, WHISPER_EXE]);
-    lblWhisperStatus.Caption   := lngSuccess;
+    Tools.WhisperCPP := ConcatPaths([WhisperFolder, WHISPER_EXE]);
+    CheckState_whispercpp;
   end;
 end;
 
@@ -407,10 +363,109 @@ begin
   {$ENDIF}
   if FileExists(ConcatPaths([WhisperFolder, FASTERWHISPER_EXE])) then
   begin
-    btnDownloadFasterWhisper.Enabled := False;
-    Tools.FasterWhisper              := ConcatPaths([WhisperFolder, FASTERWHISPER_EXE]);
-    lblFasterWhisperStatus.Caption   := lngSuccess;
+    Tools.FasterWhisper := ConcatPaths([WhisperFolder, FASTERWHISPER_EXE]);
+    CheckState_fasterwhisper;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmWizard.CheckState_libMPV: Boolean;
+begin
+  // libMPV
+  if FileExists(libMPVFileName) then
+  begin
+    btnDownload.Enabled := False;
+    lblLibMPVStatus.Caption := lngSuccess;
+    lblLibMPVStatus.Tag := 1;
+  end
+  else
+  begin
+    btnDownload.Enabled := True;
+    lblLibMPVStatus.Caption := lngFailed;
+    lblLibMPVStatus.Tag := -1;
+  end;
+  Result := not btnDownload.Enabled;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmWizard.CheckState_ytdlp: Boolean;
+begin
+  // yt-dlp
+  if FileExists(YTDLPFileName) then
+  begin
+    btnDownloadYTDLP.Enabled := False;
+    lblYTDLPStatus.Caption := lngSuccess;
+    lblYTDLPStatus.Tag := 1;
+  end
+  else
+  begin
+    btnDownloadYTDLP.Enabled := True;
+    lblYTDLPStatus.Caption := lngFailed;
+    lblYTDLPStatus.Tag := -1;
+  end;
+  Result := not btnDownloadYTDLP.Enabled;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmWizard.CheckState_ffmpeg: Boolean;
+begin
+  // ffmpeg
+  if FileExists(ffmpegFileName) then
+  begin
+    btnDownloadFFMPEG.Enabled := False;
+    lblFFMPEGStatus.Caption := lngSuccess;
+    lblFFMPEGStatus.Tag := 1;
+  end
+  else
+  begin
+    btnDownloadFFMPEG.Enabled := True;
+    lblFFMPEGStatus.Caption := lngFailed;
+    lblFFMPEGStatus.Tag := -1;
+  end;
+  Result := not btnDownloadFFMPEG.Enabled;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmWizard.CheckState_whispercpp: Boolean;
+begin
+  // whisper.cpp
+  if FileExists(WhisperFileName) then
+  begin
+    btnDownloadWhisper.Enabled := False;
+    lblWhisperStatus.Caption := lngSuccess;
+    lblWhisperStatus.Tag := 1;
+  end
+  else
+  begin
+    btnDownloadWhisper.Enabled := True;
+    lblWhisperStatus.Caption := lngFailed;
+    lblWhisperStatus.Tag := -1;
+  end;
+  Result := not btnDownloadWhisper.Enabled;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmWizard.CheckState_fasterwhisper: Boolean;
+begin
+  // faster-whisper
+  if FileExists(Tools.FasterWhisper) then
+  begin
+    btnDownloadFasterWhisper.Enabled := False;
+    lblFasterWhisperStatus.Caption := lngSuccess;
+    lblFasterWhisperStatus.Tag := 1;
+  end
+  else
+  begin
+    btnDownloadFasterWhisper.Enabled := True;
+    lblFasterWhisperStatus.Caption := lngFailed;
+    lblFasterWhisperStatus.Tag := -1;
+  end;
+  Result := not btnDownloadFasterWhisper.Enabled;
 end;
 
 // -----------------------------------------------------------------------------
