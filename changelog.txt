@@ -3,10 +3,12 @@
 - fixed: [macOS] Disable text box if there is no subtitle #39
 - fixed: Wrong time values imported in a format variant [SubtitleAPI/TimedText]
 - fixed: Some properties are not reflected when "mpv handles subtitles for preview" option is active
-- updated: Italian language (thx GitGianluc)
+- fixed: Changed language not reflected in the state of the libraries in the wizard window
+- updated: Italian language (thx GitGianluc/bovirus)
 - improved: UI - More space in Settings and increase string width #253
 - improved: Audio to text: cancel download of model #22
 - improved: Video context menu
+- added: Video information
 - added: Distribute entries evenly
 - added: Pan-and-scan
 - added: Deinterlace filter
@@ -14,7 +16,7 @@
 - added: Holding Ctrl while moving the mouse over the seekbar previews the current video position
 - added: Go to current entry initial/final time actions
 - added: Play current entry action
-- added: Numbers next to each filter in Fix Subtitle to denote occurrences
+- added: Numbers next to each filter in Fix Subtitles to denote occurrences
 
 1.0.1.6 (29.01.2024)
 - fixed: Crash after changing the divider size #217
