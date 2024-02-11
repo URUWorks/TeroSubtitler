@@ -1186,9 +1186,44 @@ msgstr "Ошибка загрузки, нераспознанный формат
 msgid "URL"
 msgstr "Ссылка"
 
+#: proclocalize.lngviaudiotracks
+#, object-pascal-format
+msgid "Audio tracks: %d"
+msgstr ""
+
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
 msgstr "Сбой генерации видео"
+
+#: proclocalize.lngviduration
+#, object-pascal-format
+msgid "Duration: %s (%d frames)"
+msgstr ""
+
+#: proclocalize.lngvifile
+#, object-pascal-format
+msgid "File: %s"
+msgstr ""
+
+#: proclocalize.lngvifps
+#, object-pascal-format
+msgid "FPS: %s"
+msgstr ""
+
+#: proclocalize.lngviresolution
+#, object-pascal-format
+msgid "Resolution: %dx%d"
+msgstr ""
+
+#: proclocalize.lngvisubtitletracks
+#, object-pascal-format
+msgid "Subtitle tracks: %d"
+msgstr ""
+
+#: proclocalize.lngvivideotracks
+#, object-pascal-format
+msgid "Video tracks: %d"
+msgstr ""
 
 #: proclocalize.lngwebvideounsupported
 msgid "The video format is not supported for playback in the web browser."
@@ -3737,6 +3772,10 @@ msgstr "Отразить по вертикали"
 #: tfrmmain.actvideofiltervintage.caption
 msgid "Vintage"
 msgstr "Винтажный"
+
+#: tfrmmain.actvideoinformation.caption
+msgid "Information..."
+msgstr ""
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"

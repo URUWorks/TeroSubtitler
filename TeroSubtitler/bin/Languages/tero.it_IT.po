@@ -260,11 +260,8 @@ msgid "Auto-detect"
 msgstr "Rilevamento automatico"
 
 #: proclocalize.lngdetectdialogsegmentswarning
-msgid ""
-"Attempting to detect dialogue segments deletes all entries from the list."
-msgstr ""
-"Tentando di rilevare le parti con dialoghi, tutti i sottotitoli in elenco "
-"saranno eliminati."
+msgid "Attempting to detect dialogue segments deletes all entries from the list."
+msgstr "Tentando di rilevare le parti con dialoghi, tutti i sottotitoli in elenco saranno eliminati."
 
 #: proclocalize.lngdownloadcanceled
 msgid "Download canceled by user."
@@ -578,12 +575,9 @@ msgid "#"
 msgstr "#"
 
 #: proclocalize.lnglibmpverror
-msgid ""
-"Unable to find the required libraries to run the embedded mpv player. Please "
-"download them."
+msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
 msgstr ""
-"Impossibile trovare le librerie necessarie al funzionamento del riproduttore "
-"mpv incorporato. \n"
+"Impossibile trovare le librerie necessarie al funzionamento del riproduttore mpv incorporato. \n"
 "Scarica le librerie necessarie."
 
 #: proclocalize.lnglibmpvglerror
@@ -592,9 +586,7 @@ msgstr "Inizializzazione contesto grafico GL di mpv non riuscita."
 
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
-msgstr ""
-"Impossibile inizializzare libmpv; verifica che sia stata installata la "
-"libreria corretta."
+msgstr "Impossibile inizializzare libmpv; verifica che sia stata installata la libreria corretta."
 
 #: proclocalize.lngline
 msgid "Line:"
@@ -915,12 +907,8 @@ msgid "Shortcut currently used in “%s”."
 msgstr "Scorciatoia attualmente in uso per “%s”."
 
 #: proclocalize.lngsourcemodewarning
-msgid ""
-"Switching to source mode will change the format to “Tero Subtitler”, "
-"otherwise unsaved translations will be lost."
-msgstr ""
-"Passando alla modalità sorgente, il formato del file sarà modificato in "
-"“Tero Subtitler”; altrimenti, tutte le traduzioni non salvate verranno perse."
+msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
+msgstr "Passando alla modalità sorgente, il formato del file sarà modificato in “Tero Subtitler”; altrimenti, tutte le traduzioni non salvate verranno perse."
 
 #: proclocalize.lngspcurrentline
 #, object-pascal-format
@@ -1105,12 +1093,8 @@ msgid "Words per minute average: %.2f"
 msgstr "Media di parole al minuto: %.2f"
 
 #: proclocalize.lngsubtitlehaserrorstofix
-msgid ""
-"The current subtitle set contains errors that are recommended to be "
-"resolved, but it can be saved."
-msgstr ""
-"L’attuale insieme di sottotitoli contiene errori che ti suggeriamo di "
-"corregere, ma è possibile salvare il file."
+msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
+msgstr "L’attuale insieme di sottotitoli contiene errori che ti suggeriamo di corregere, ma è possibile salvare il file."
 
 #: proclocalize.lngsuccess
 msgid "Success."
@@ -1165,9 +1149,7 @@ msgstr "Trascrizione..."
 
 #: proclocalize.lngtranscriptionmodeexit
 msgid "Exiting transcription mode will lose any unsaved changes."
-msgstr ""
-"L’uscita dalla modalità trascrizione causerà la perdita di tutte le "
-"modifiche non salvate."
+msgstr "L’uscita dalla modalità trascrizione causerà la perdita di tutte le modifiche non salvate."
 
 #: proclocalize.lngtranslated
 msgctxt "proclocalize.lngtranslated"
@@ -1181,26 +1163,22 @@ msgstr "Questo file traduzione non è stato salvato."
 #: proclocalize.lngttip1
 #, object-pascal-format
 msgid "Tip: Use <%s/%s> to go to previous/next entry"
-msgstr ""
-"Suggerimento: usa <%s/%s> per passare all’elemento precedente/successivo"
+msgstr "Suggerimento: usa <%s/%s> per passare all’elemento precedente/successivo"
 
 #: proclocalize.lngttip2
 #, object-pascal-format
 msgid "Tip: Use <%s> for a web word reference"
-msgstr ""
-"Suggerimento: usa <%s> per cercare la definizione di una parola in internet"
+msgstr "Suggerimento: usa <%s> per cercare la definizione di una parola in internet"
 
 #: proclocalize.lngttip3
 #, object-pascal-format
 msgid "Tip: Use <%s> dock/undock video window"
-msgstr ""
-"Suggerimento: usa <%s> per agganciare/sganciare il riquadro controlli video"
+msgstr "Suggerimento: usa <%s> per agganciare/sganciare il riquadro controlli video"
 
 #: proclocalize.lngttip4
 #, object-pascal-format
 msgid "Tip: Use <%s> dock/undock waveform window"
-msgstr ""
-"Suggerimento: usa <%s> per agganciare/sganciare il riquadro forma d’onda"
+msgstr "Suggerimento: usa <%s> per agganciare/sganciare il riquadro forma d’onda"
 
 #: proclocalize.lngunabletoload
 msgid "Error loading file, unrecognized format."
@@ -1210,15 +1188,48 @@ msgstr "Errore nel caricamento del file: formato non riconosciuto."
 msgid "URL"
 msgstr "URL"
 
+#: proclocalize.lngviaudiotracks
+#, object-pascal-format
+msgid "Audio tracks: %d"
+msgstr ""
+
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
 msgstr "Errore nella creazione del video."
 
+#: proclocalize.lngviduration
+#, object-pascal-format
+msgid "Duration: %s (%d frames)"
+msgstr ""
+
+#: proclocalize.lngvifile
+#, object-pascal-format
+msgid "File: %s"
+msgstr ""
+
+#: proclocalize.lngvifps
+#, object-pascal-format
+msgid "FPS: %s"
+msgstr ""
+
+#: proclocalize.lngviresolution
+#, object-pascal-format
+msgid "Resolution: %dx%d"
+msgstr ""
+
+#: proclocalize.lngvisubtitletracks
+#, object-pascal-format
+msgid "Subtitle tracks: %d"
+msgstr ""
+
+#: proclocalize.lngvivideotracks
+#, object-pascal-format
+msgid "Video tracks: %d"
+msgstr ""
+
 #: proclocalize.lngwebvideounsupported
 msgid "The video format is not supported for playback in the web browser."
-msgstr ""
-"L’attuale formato video non è supportato per la riproduzione all’interno di "
-"un browser web."
+msgstr "L’attuale formato video non è supportato per la riproduzione all’interno di un browser web."
 
 #: proclocalize.lngwizlanguage
 msgctxt "proclocalize.lngwizlanguage"
@@ -1784,8 +1795,7 @@ msgstr "Prefisso"
 #: tfrmcustomimageformat.lblsafearea.caption
 msgctxt "tfrmcustomimageformat.lblsafearea.caption"
 msgid "Safe area pixels (left, top, right, bottom)"
-msgstr ""
-"Margini sicurezza area in pixel (sinistro, superiore, destro, inferiore)"
+msgstr "Margini sicurezza area in pixel (sinistro, superiore, destro, inferiore)"
 
 #: tfrmcustomimageformat.lblscript.caption
 msgctxt "tfrmcustomimageformat.lblscript.caption"
@@ -3754,6 +3764,10 @@ msgstr "Riflessione verticale"
 msgid "Vintage"
 msgstr "Effetto anticato"
 
+#: tfrmmain.actvideoinformation.caption
+msgid "Information..."
+msgstr ""
+
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
 msgid "Video preview"
@@ -3801,9 +3815,7 @@ msgstr "FPS destinazione file sottotitoli"
 
 #: tfrmmain.cboinputfps.hint
 msgid "FPS of the movie the opened subtitle file was made for"
-msgstr ""
-"FPS del filmato per il quale il file sottotitoli attualmente aperto è stato "
-"creato"
+msgstr "FPS del filmato per il quale il file sottotitoli attualmente aperto è stato creato"
 
 #: tfrmmain.edtquickaction.hint
 msgctxt "tfrmmain.edtquickaction.hint"
@@ -5056,12 +5068,8 @@ msgid "Choose workspace layout and timecode mode:"
 msgstr "Scegli la disposizione dello spazio di lavoro e la modalità time code:"
 
 #: tfrmwizard.lblexperience.caption
-msgid ""
-"In just a few steps, you'll be setup and ready for the best subtitling "
-"experience."
-msgstr ""
-"In pochi semplici passaggi, sarai guidato e pronto per la migliore "
-"esperienza di sottotitolazione."
+msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
+msgstr "In pochi semplici passaggi, sarai guidato e pronto per la migliore esperienza di sottotitolazione."
 
 #: tfrmwizard.lblfasterwhisper.caption
 msgid "Faster-Whisper:"
@@ -5078,9 +5086,7 @@ msgstr "FFmpeg:"
 
 #: tfrmwizard.lblffmpeg_hint.caption
 msgid "Optional, used to extract audio and generate video."
-msgstr ""
-"Opzionale: usata per l’estrazione delle tracce audio e la generazione dei "
-"video."
+msgstr "Opzionale: usata per l’estrazione delle tracce audio e la generazione dei video."
 
 #: tfrmwizard.lbllibmpv.caption
 msgid "libmpv: "
@@ -5091,13 +5097,9 @@ msgid "Essential, used for playing video."
 msgstr "Essenziale: usata per la riproduzione dei video."
 
 #: tfrmwizard.lblrequiredfiles.caption
-msgid ""
-"For Tero Subtitler to function properly, the following libraries are "
-"necessary; if they are not found on your system, Tero Subtitler can download "
-"them for you."
+msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
 msgstr ""
-"Per il corretto funzionamento di Tero Subtitler, sono necessarie alcune "
-"librerie.\n"
+"Per il corretto funzionamento di Tero Subtitler, sono necessarie alcune librerie.\n"
 "Se non sono presenti nel sistema, Tero Subtitler può scaricarle in autonomia."
 
 #: tfrmwizard.lblwelcome.caption
@@ -5137,5 +5139,3 @@ msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
 
-#~ msgid "Deinterlace"
-#~ msgstr "Deinterlaccia"
