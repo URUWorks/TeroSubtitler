@@ -103,6 +103,9 @@ procedure Register;
 
 implementation
 
+uses
+  LCLStrConsts;
+
 // -----------------------------------------------------------------------------
 
 constructor TUWHotKey.Create(AOwner: TComponent);
@@ -184,8 +187,8 @@ end;
 
 function ShortCutToTextEx(const AShortCut: TShortCut): String;
 begin
-  Result := ShortCutToText(AShortCut){$IFDEF DARWIN}.Replace('Meta', #$2318){$ENDIF};
-  if Result = 'Unknown' then Result := '';
+  Result := ShortCutToText(AShortCut){$IFDEF DARWIN}.Replace(Copy(SmkcMeta, 1, Pos('+', SmkcMeta)-1), #$2318){$ENDIF};
+  if Result = ifsVK_UNKNOWN then Result := '';
 end;
 
 // -----------------------------------------------------------------------------
