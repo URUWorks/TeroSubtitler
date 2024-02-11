@@ -107,20 +107,6 @@ end;
 
 // -----------------------------------------------------------------------------
 
-{//OBSOLETE: NonPO
-function CustomQuestionDialog(const ASectionName, Title, Caption: String; const AButtons: TCustomDlgButtons = []): Integer;
-var
-  sl: TAppStringList = NIL;
-begin
-  Result := 0;
-  if LanguageManager.GetAppStringList(ASectionName, sl) then
-  try
-    Result := formCustomQuestionDlg.ShowQuestionDialog(GetString(sl, Title), GetString(sl, Caption), ProgramName, AButtons);
-  finally
-    FreeAndNil(sl);
-  end;
-end;}
-
 function CustomQuestionDialog(Title, Caption: String; const AButtons: TCustomDlgButtons = []): Integer;
 begin
     Result := formCustomQuestionDlg.ShowQuestionDialog(Title, Caption, ProgramName, AButtons);
