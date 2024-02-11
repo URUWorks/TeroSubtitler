@@ -22,7 +22,8 @@ unit formCustomMessageDlg;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, LCLTranslator;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
+  LCLTranslator;
 
 type
 
@@ -52,7 +53,7 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procColorTheme;
+  procTypes, procWorkspace, procColorTheme, UWSystem.StrUtils;
 
 {$R *.lfm}
 
@@ -65,6 +66,7 @@ uses
 procedure TfrmCustomMessageDlg.FormCreate(Sender: TObject);
 begin
   lblMessage.Caption := '';
+  Constraints.MinHeight := Height;
 end;
 
 // -----------------------------------------------------------------------------
@@ -77,6 +79,8 @@ end;
 // -----------------------------------------------------------------------------
 
 function TfrmCustomMessageDlg.Execute(const AMessage: String; const ACaption: String = ''; const AIcon: TIconMode = imQuestion; const ACustomAction: String = ''; const ACustomActionClick: TNotifyEvent = NIL): Integer;
+var
+  c: Integer;
 begin
   if ColorThemeInstance.GetRealColorMode = cmDark then
   begin
@@ -102,6 +106,9 @@ begin
   lblCustomAction.Caption := ACustomAction;
   lblCustomAction.OnClick := ACustomActionClick;
   lblCustomAction.Visible := ACustomActionClick <> NIL;
+
+  c := LineCount(AMessage, LineEnding);
+  Height := (c * lblCustomAction.Canvas.TextHeight('Aj')) + (Height - lblCustomAction.Height);
 
   Result := ShowModal;
 end;
