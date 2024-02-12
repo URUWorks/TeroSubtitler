@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  UWRadioButton, UWCheckBox, LCLIntf, LCLTranslator, procLocalize;
+  UWRadioButton, UWCheckBox, LCLIntf, LCLTranslator, Spin, procLocalize;
 
 type
 
@@ -51,6 +51,10 @@ type
     rbnAddSubtitlesWhileTranscribing: TUWRadioButton;
     rbnLoadSubtitlesAfterTranscript: TUWRadioButton;
     chkTranslate: TUWCheckBox;
+    spnMaxLineLength: TSpinEdit;
+    spnMaxLineCount: TSpinEdit;
+    chkMaxLineLength: TUWCheckBox;
+    chkMaxLineCount: TUWCheckBox;
     procedure btnCloseClick(Sender: TObject);
     procedure btnEngineClick(Sender: TObject);
     procedure btnGenerateClick(Sender: TObject);
@@ -59,10 +63,12 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure rbnAddSubtitlesWhileTranscribingChange(Sender: TObject);
   private
     procedure RefreshModelsList;
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure OpenFolderClick(Sender: TObject);
+    procedure CheckEngineOptions;
   public
 
   end;
@@ -97,6 +103,8 @@ begin
   cboLanguage.Items[0] := lngDetect;
   btnGenerate.Enabled := (cboTrack.Items.Count > 0);
   CancelProcess := False;
+  spnMaxLineLength.Value := AppOptions.Conventions.CPL;
+  spnMaxLineCount.Value := AppOptions.Conventions.MaxLines;
   cboEngineSelect(NIL);
 
   {$IFNDEF WINDOWS}
@@ -157,6 +165,15 @@ procedure TfrmAudioToText.cboEngineSelect(Sender: TObject);
 begin
   Tools.WhisperEngine := TWhisperEngine(cboEngine.ItemIndex);
   RefreshModelsList;
+  CheckEngineOptions;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAudioToText.rbnAddSubtitlesWhileTranscribingChange(Sender: TObject
+  );
+begin
+  CheckEngineOptions;
 end;
 
 // -----------------------------------------------------------------------------
@@ -221,6 +238,8 @@ begin
     sl.Free;
   end;
 end;
+
+// -----------------------------------------------------------------------------
 
 procedure ThreadProcessCBTime(const ATime: Double);
 begin
@@ -343,6 +362,9 @@ begin
             if chkTranslate.Checked then
               ss.Insert(ss.IndexOf(' -osrt'), ' -tr');
 
+            if chkMaxLineLength.Checked then
+              ss.Insert(ss.IndexOf(' -osrt'), ' -ml ' + IntToStr(spnMaxLineLength.Value));
+
             if not Tools.WhisperCPP_Additional.IsEmpty then
               ss := ss + ' ' + Tools.WhisperCPP_Additional;
 
@@ -356,6 +378,17 @@ begin
 
             if chkTranslate.Checked then
               ss := ss + ' --task translate';
+
+            if chkMaxLineLength.Checked or chkMaxLineCount.Checked then
+            begin
+              ss := ss + ' --sentence';
+
+              if chkMaxLineLength.Checked then
+                ss := ss + ' --max_line_width ' + IntToStr(spnMaxLineLength.Value);
+
+              if chkMaxLineCount.Checked then
+                ss := ss + ' --max_line_count ' + IntToStr(spnMaxLineCount.Value);
+            end;
 
             if not Tools.FasterWhisper_Additional.IsEmpty then
               ss := ss + ' ' + Tools.FasterWhisper_Additional;
@@ -483,6 +516,8 @@ begin
   cboLanguage.Enabled := AValue;
   cboModel.Enabled    := AValue;
 
+  chkTranslate.Enabled := AValue;
+
   rbnAddSubtitlesWhileTranscribing.Enabled := AValue;
   rbnLoadSubtitlesAfterTranscript.Enabled  := AValue;
 
@@ -493,11 +528,16 @@ begin
   begin
     btnClose.Caption := lngbtnClose;
     btnClose.Tag := 0;
+    CheckEngineOptions;
   end
   else
   begin
     btnClose.Caption := lngbtnCancel;
     btnClose.Tag := 1;
+    chkMaxLineLength.Enabled := False;
+    spnMaxLineLength.Enabled := False;
+    chkMaxLineCount.Enabled  := False;
+    spnMaxLineCount.Enabled  := False;
   end;
 end;
 
@@ -506,6 +546,26 @@ end;
 procedure TfrmAudioToText.OpenFolderClick(Sender: TObject);
 begin
   OpenDocument(WhisperTranscriptionsFolder);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAudioToText.CheckEngineOptions;
+begin
+  if Tools.WhisperEngine = WhisperCPP then
+  begin
+    chkMaxLineLength.Enabled := True;
+    spnMaxLineLength.Enabled := True;
+    chkMaxLineCount.Enabled  := False;
+    spnMaxLineCount.Enabled  := False;
+  end
+  else
+  begin
+    chkMaxLineLength.Enabled := rbnLoadSubtitlesAfterTranscript.Checked;
+    spnMaxLineLength.Enabled := chkMaxLineLength.Enabled;
+    chkMaxLineCount.Enabled  := chkMaxLineLength.Enabled;
+    spnMaxLineCount.Enabled  := chkMaxLineLength.Enabled;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

@@ -10,5 +10,7 @@
 {"hash":62290958,"name":"tfrmaudiototext.rbnloadsubtitlesaftertranscript.caption","sourcebytes":[76,111,97,100,32,115,117,98,116,105,116,108,101,115,32,97,102,116,101,114,32,116,114,97,110,115,99,114,105,112,116,105,111,110],"value":"Load subtitles after transcription"},
 {"hash":91053608,"name":"tfrmaudiototext.chktranslate.caption","sourcebytes":[84,114,97,110,115,108,97,116,101,32,116,111,32,208,149,110,103,108,105,115,104],"value":"Translate to \u0415nglish"},
 {"hash":80011333,"name":"tfrmaudiototext.lblengine.caption","sourcebytes":[69,110,103,105,110,101],"value":"Engine"},
-{"hash":12558,"name":"tfrmaudiototext.btnengine.caption","sourcebytes":[46,46,46],"value":"..."}
+{"hash":12558,"name":"tfrmaudiototext.btnengine.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":198594104,"name":"tfrmaudiototext.chkmaxlinelength.caption","sourcebytes":[77,97,120,105,109,117,109,32,108,105,110,101,32,108,101,110,103,116,104],"value":"Maximum line length"},
+{"hash":161975380,"name":"tfrmaudiototext.chkmaxlinecount.caption","sourcebytes":[77,97,120,105,109,117,109,32,108,105,110,101,32,99,111,117,110,116],"value":"Maximum line count"}
 ]}
