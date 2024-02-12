@@ -749,12 +749,12 @@ begin
           IncCount(18)
         else if etOCR in ErrorsFixed then
           IncCount(19)
-        else if etSnapToShotChanges in ErrorsFixed then
+        else if (etSnapToShotChanges in ErrorsFixed) or (etSnapToShotChangesInCue in ErrorsFixed) or (etSnapToShotChangesInCueAway in ErrorsFixed) or (etSnapToShotChangesOutCue in ErrorsFixed) then
           IncCount(20)
         else if etChaining in ErrorsFixed then
           IncCount(21)
         else if etCleanupTags in ErrorsFixed then
-          IncCount(22)
+          IncCount(22);
       end;
 
   UpdatedOption(0, lngfsetUnnecessarySpaces);

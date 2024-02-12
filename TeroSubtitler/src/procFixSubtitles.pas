@@ -513,17 +513,17 @@ begin
         end;
       end;
 
-
       //ClearItem(FixedItem, i);
       // Snap to shot changes
       if (etSnapToShotChanges in FErrors) and (AShotChanges <> NIL) and (Length(AShotChanges) > 0) then
       begin
+        FixedItem.ErrorsFixed := [];
         // In Cue
         ShotCut := FindBestShotCutMs(AShotChanges, FixedItem.InitialTime);
         if ShotCut >= 0 then
         begin
           if (Abs(ShotCut - FixedItem.InitialTime) < ThresholdMs) and (Subtitles.Duration[i] >= Profile^.MinDuration) and
-             (i-1 >= 0) and (ShotCut > Subtitles[i-1].FinalTime + Profile^.MinPause) then //and (FixedItem.InitialTime < ShotCut) then
+             (i-1 >= 0) and (ShotCut > Subtitles[i-1].FinalTime + GapMs) then //and (FixedItem.InitialTime < ShotCut) then
           begin
             SnapAway := True;
             z := FixedItem.InitialTime;
@@ -553,13 +553,13 @@ begin
         if ShotCut >= 0 then
         begin
           if (Abs(ShotCut - FixedItem.FinalTime) < ThresholdMs) and (Subtitles.Duration[i] >= Profile^.MinDuration) and
-             (i+1 < Subtitles.Count) and (ShotCut - OutCue < Subtitles[i+1].InitialTime - Profile^.MinPause) then //and (FixedItem.FinalTime > ShotCut) then
+             (i+1 < Subtitles.Count) and (ShotCut - OutCue < Subtitles[i+1].InitialTime - GapMs) then //and (FixedItem.FinalTime > ShotCut) then
           begin
             z := FixedItem.FinalTime;
 
             if (Abs(ShotCut - FixedItem.FinalTime) <= SnapMs) then
               z := ShotCut - OutCue
-            else if (ShotCut + ThresholdMs) <= (Subtitles[i+1].InitialTime - Profile^.MinPause) then
+            else if (ShotCut + ThresholdMs) <= (Subtitles[i+1].InitialTime - GapMs) then
               z := ShotCut + ThresholdMs;
 
             if (FixedItem.FinalTime <> z) and (Abs(FixedItem.FinalTime - z) >= FramesToTime(1, Workspace.FPS.OutputFPS)) then
