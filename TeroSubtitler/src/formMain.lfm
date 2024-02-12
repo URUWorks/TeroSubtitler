@@ -1844,6 +1844,9 @@ object frmMain: TfrmMain
       object MenuItem27: TMenuItem
         Action = actCloseVideo
       end
+      object MenuItem249: TMenuItem
+        Action = actVideoInformation
+      end
       object Separator9: TMenuItem
         Caption = '-'
       end
