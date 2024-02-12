@@ -9,6 +9,7 @@
 - improved: UI - More space in Settings and increase string width #253
 - improved: Audio to text: cancel download of model #22
 - improved: Video context menu
+- added: Controlling the length of the Whisper.cpp generated text segments #248
 - added: Video information
 - added: Distribute entries evenly
 - added: Pan-and-scan
