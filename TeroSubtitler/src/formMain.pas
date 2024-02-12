@@ -359,6 +359,7 @@ type
     MenuItem246: TMenuItem;
     MenuItem247: TMenuItem;
     MenuItem248: TMenuItem;
+    MenuItem249: TMenuItem;
     mnuVideoPopupAR: TMenuItem;
     mnuVideoPopupAS: TMenuItem;
     mnuVideoPopupAF: TMenuItem;
