@@ -343,10 +343,10 @@ procedure FillComboWithModels(const Combo: TComboBox);
 var
   SearchRec: TSearchRec;
 begin
+  Combo.Items.Clear;
   if SysUtils.FindFirst(WhisperModelsFolder + '*.bin', faAnyFile, SearchRec) = 0 then
   try
     Combo.Items.BeginUpdate;
-    Combo.Items.Clear;
     repeat
       Combo.Items.Add(ChangeFileExt(SearchRec.Name, ''));
     until FindNext(SearchRec) <> 0;
