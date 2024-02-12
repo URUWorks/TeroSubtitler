@@ -1350,6 +1350,16 @@ msgctxt "tfrmaudiototext.caption"
 msgid "Audio to text"
 msgstr "Звук към текст"
 
+#: tfrmaudiototext.chkmaxlinecount.caption
+msgctxt "tfrmaudiototext.chkmaxlinecount.caption"
+msgid "Maximum line count"
+msgstr ""
+
+#: tfrmaudiototext.chkmaxlinelength.caption
+msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
+msgid "Maximum line length"
+msgstr ""
+
 #: tfrmaudiototext.chktranslate.caption
 msgid "Translate to Еnglish"
 msgstr "Превод на английски"

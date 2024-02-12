@@ -1187,7 +1187,7 @@ msgstr "URL"
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
 msgid "Audio tracks: %d"
-msgstr ""
+msgstr "Audio tracks: %d"
 
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
@@ -1196,32 +1196,32 @@ msgstr "Video generation failed."
 #: proclocalize.lngviduration
 #, object-pascal-format
 msgid "Duration: %s (%d frames)"
-msgstr ""
+msgstr "Duration: %s (%d frames)"
 
 #: proclocalize.lngvifile
 #, object-pascal-format
 msgid "File: %s"
-msgstr ""
+msgstr "File: %s"
 
 #: proclocalize.lngvifps
 #, object-pascal-format
 msgid "FPS: %s"
-msgstr ""
+msgstr "FPS: %s"
 
 #: proclocalize.lngviresolution
 #, object-pascal-format
 msgid "Resolution: %dx%d"
-msgstr ""
+msgstr "Resolution: %dx%d"
 
 #: proclocalize.lngvisubtitletracks
 #, object-pascal-format
 msgid "Subtitle tracks: %d"
-msgstr ""
+msgstr "Subtitle tracks: %d"
 
 #: proclocalize.lngvivideotracks
 #, object-pascal-format
 msgid "Video tracks: %d"
-msgstr ""
+msgstr "Video tracks: %d"
 
 #: proclocalize.lngwebvideounsupported
 msgid "The video format is not supported for playback in the web browser."
@@ -1353,6 +1353,16 @@ msgstr "..."
 msgctxt "tfrmaudiototext.caption"
 msgid "Audio to text"
 msgstr "Audio to text"
+
+#: tfrmaudiototext.chkmaxlinecount.caption
+msgctxt "tfrmaudiototext.chkmaxlinecount.caption"
+msgid "Maximum line count"
+msgstr "Maximum line count"
+
+#: tfrmaudiototext.chkmaxlinelength.caption
+msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
+msgid "Maximum line length"
+msgstr "Maximum line length"
 
 #: tfrmaudiototext.chktranslate.caption
 msgid "Translate to Еnglish"
@@ -3759,7 +3769,7 @@ msgstr "Vintage"
 
 #: tfrmmain.actvideoinformation.caption
 msgid "Information..."
-msgstr ""
+msgstr "Information..."
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
@@ -5132,4 +5142,3 @@ msgstr "Inverted"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-
