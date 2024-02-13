@@ -58,6 +58,7 @@ type
     chkPromptForInputEncoding: TUWCheckBox;
     chkPromptForSaveWithErrors: TUWCheckBox;
     chkPromptForSaveWithErrors1: TUWCheckBox;
+    chkWriteBOM: TUWCheckBox;
     chkSubtitleHandleByMPV: TUWCheckBox;
     chkSubBackground: TCheckBox;
     chkDotsOnSplit: TUWCheckBox;
@@ -411,6 +412,7 @@ begin
     chkDrawTags.Checked                 := VSTOptions.DrawTags;
     chkDrawErrors.Checked               := VSTOptions.DrawErrors;
     chkShowCPSBar.Checked               := frmMain.mmoText.CPSBar.Visible;
+    chkWriteBOM.Checked                 := Subtitles.WriteBOM;
     chkDrawWaveformGAP.Checked          := frmMain.WAVE.DrawGAP;
     chkPromptForDeleteSubtitles.Checked := AskForDeleteLines;
     chkPromptForInputFPS.Checked        := AskForInputFPS;
@@ -561,6 +563,7 @@ begin
     frmMain.WAVE.DrawGAP   := chkDrawWaveformGAP.Checked;
     frmMain.mmoText.CPSBar.Visible        := chkShowCPSBar.Checked;
     frmMain.mmoTranslation.CPSBar.Visible := chkShowCPSBar.Checked;
+    Subtitles.WriteBOM := chkWriteBOM.Checked;
     AskForDeleteLines   := chkPromptForDeleteSubtitles.Checked;
     AskForInputFPS      := chkPromptForInputFPS.Checked;
     AskForInputEncoding := chkPromptForInputEncoding.Checked;

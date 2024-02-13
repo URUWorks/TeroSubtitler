@@ -146,6 +146,7 @@ type
     FSearchStartAt    : Integer;
     FSearchIdx        : Integer;
     FSearchSkip       : Integer;
+    FWriteBOM         : Boolean;
     FAutoSort         : Boolean;
     FReplaceEntity    : Boolean;
     FIsRTL            : Boolean;
@@ -221,6 +222,7 @@ type
     property Format: TUWSubtitleFormats read FFormat write SetFormat;
     property CodePage: Integer read FCodePage;
     property FrameRate: Single read FFPS write FFPS;
+    property WriteBOM: Boolean read FWriteBOM write FWriteBOM;
     property AutoSort: Boolean read FAutoSort write FAutoSort; // Auto sort subtitles on load
     property Items[Index: Integer]: TUWSubtitleItem read GetItem write PutItem; default;
     property ItemPointer[Index: Integer]: PUWSubtitleItem read GetItemPointer;
@@ -255,7 +257,7 @@ type
   private
     FStringList: TUWStringList;
   public
-    constructor Create;
+    constructor Create(const AShouldWriteBOM: Boolean = False);
     destructor Destroy; override;
     function Name: String; virtual;
     function Format: TUWSubtitleFormats; virtual;
@@ -396,7 +398,7 @@ begin
   Stream := TFileStream.Create(FileName, fmCreate);
   try
     if FWriteBOM and (Length(Preamble) > 0) then
-      Stream.WriteBuffer(Preamble, Length(Preamble));
+      Stream.WriteBuffer(Preamble[0], Length(Preamble));
 
     Stream.WriteBuffer(Buffer[0], Length(Buffer));
   finally
@@ -702,52 +704,52 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure InitializeSubtitleFormats(var AList: TUWSubtitleCustomFormatList);
+procedure InitializeSubtitleFormats(var AList: TUWSubtitleCustomFormatList; const AShouldWriteBOM: Boolean);
 begin
   if AList = NIL then AList := TUWSubtitleCustomFormatList.Create;
 
-  AList.Add( TUWSubtitleCustomFormat(TUWABCiView.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWAdobeEncoreDVD.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWAdvancedSubstationAlpha.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWAdvancedSubtitles.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWAQTitle.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWAvidCaption.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWCaptions32.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWCaptionsInc.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWCavena890.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWCheetah.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWCheetahCaption.Create) ); // binary
-  AList.Add( TUWSubtitleCustomFormat(TUWCPC600.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWCSV.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWDKS.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWDRTIC.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWDVDJunior.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWDVDSubtitleSystem.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWDVDSubtitle.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWEBU.Create) ); // binary
-  AList.Add( TUWSubtitleCustomFormat(TUWFABSubtitler.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWGPACTTXT.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWIAuthor.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWInscriberCG.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWITunesTimedText.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWJACOSub.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWKaraokeLyricsLRC.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWKaraokeLyricsVKT.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWMacDVDStudioPro.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWMacSUB.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWMicroDVD.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWMPlayer.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWMPlayer2.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWNetflixTimedText.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWSofni.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWSpreadsheet.Create) ); // binary
-  AList.Add( TUWSubtitleCustomFormat(TUWSpruceSubtitleFile.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWSubViewer.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWTeroSubtitler.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWTimedText.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWTSV.Create) );
-  AList.Add( TUWSubtitleCustomFormat(TUWWebVTT.Create) );
+  AList.Add( TUWSubtitleCustomFormat(TUWABCiView.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWAdobeEncoreDVD.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWAdvancedSubstationAlpha.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWAdvancedSubtitles.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWAQTitle.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWAvidCaption.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWCaptions32.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWCaptionsInc.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWCavena890.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWCheetah.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWCheetahCaption.Create(AShouldWriteBOM)) ); // binary
+  AList.Add( TUWSubtitleCustomFormat(TUWCPC600.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWCSV.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWDKS.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWDRTIC.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWDVDJunior.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWDVDSubtitleSystem.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWDVDSubtitle.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWEBU.Create(AShouldWriteBOM)) ); // binary
+  AList.Add( TUWSubtitleCustomFormat(TUWFABSubtitler.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWGPACTTXT.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWIAuthor.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWInscriberCG.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWITunesTimedText.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWJACOSub.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWKaraokeLyricsLRC.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWKaraokeLyricsVKT.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWMacDVDStudioPro.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWMacSUB.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWMicroDVD.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWMPlayer.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWMPlayer2.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWNetflixTimedText.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSofni.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSpreadsheet.Create(AShouldWriteBOM)) ); // binary
+  AList.Add( TUWSubtitleCustomFormat(TUWSpruceSubtitleFile.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSubViewer.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWTeroSubtitler.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWTimedText.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWTSV.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWWebVTT.Create(AShouldWriteBOM)) );
 end;
 
 // -----------------------------------------------------------------------------
@@ -779,6 +781,7 @@ begin
   FSearchIdx     := 0;
   FSearchSkip    := 0;
   FHeader        := NIL;
+  FWriteBOM      := False;
   FAutoSort      := True;
   FReplaceEntity := False;
   FIsRTL         := False;
@@ -1478,7 +1481,7 @@ var
   i, f    : Integer;
 begin
   Result := sfInvalid;
-  InitializeSubtitleFormats(AList);
+  InitializeSubtitleFormats(AList, WriteBOM);
   try
     SubFile := TUWStringList.Create(AFileName);
     try
@@ -1564,7 +1567,7 @@ var
 begin
   Result := False;
   AList  := NIL;
-  InitializeSubtitleFormats(AList);
+  InitializeSubtitleFormats(AList, WriteBOM);
   try
     SubFile := TUWStringList.Create(FileName, Encoding, NameIsFile);
     try
@@ -1635,7 +1638,7 @@ var
 begin
   Result := False;
   AList  := NIL;
-  InitializeSubtitleFormats(AList);
+  InitializeSubtitleFormats(AList, WriteBOM);
   try
     for f := 0 to AList.Count-1 do
       if AList[f].Format = Format then
@@ -1664,7 +1667,7 @@ var
 begin
   Result := '';
   AList  := NIL;
-  InitializeSubtitleFormats(AList);
+  InitializeSubtitleFormats(AList, WriteBOM);
   try
     for f := 0 to AList.Count-1 do
       if AList[f].Format = Format then
@@ -1691,7 +1694,7 @@ begin
   Result := '';
   Exts   := '';
   AList  := NIL;
-  InitializeSubtitleFormats(AList);
+  InitializeSubtitleFormats(AList, WriteBOM);
   try
     for f := 0 to AList.Count-1 do
     begin
@@ -1734,7 +1737,7 @@ var
 begin
   Result := '';
   AList  := NIL;
-  InitializeSubtitleFormats(AList);
+  InitializeSubtitleFormats(AList, WriteBOM);
   try
     for f := 0 to AList.Count-1 do
       if (AList[f].Format = AFormat) then
@@ -1804,9 +1807,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
-constructor TUWSubtitleCustomFormat.Create;
+constructor TUWSubtitleCustomFormat.Create(const AShouldWriteBOM: Boolean = False);
 begin
   FStringList := TUWStringList.Create;
+  FStringList.WriteBOM := AShouldWriteBOM;
 end;
 
 // -----------------------------------------------------------------------------

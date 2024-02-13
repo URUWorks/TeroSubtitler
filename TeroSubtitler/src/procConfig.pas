@@ -419,6 +419,7 @@ begin
       CommonErrors := TSubtitleErrorTypeSet(GetValue('CommonErrors', Integer(CommonErrors)));
       frmMain.mmoText.CPSBar.Visible := GetValue('ShowCPSBar', True);
       frmMain.mmoTranslation.CPSBar.Visible := frmMain.mmoText.CPSBar.Visible;
+      Subtitles.WriteBOM := GetValue('WriteBOMOnSave', False);
       CloseKey;
       // Unicode favorite chars
       OpenKey('UnicodeChars');
@@ -785,6 +786,7 @@ begin
       SetValue('TextToFind', TextToFind);
       SetValue('CommonErrors', Integer(CommonErrors));
       SetValue('ShowCPSBar', frmMain.mmoText.CPSBar.Visible);
+      SetValue('WriteBOMOnSave', Subtitles.WriteBOM);
       CloseKey;
       // Unicode favorite chars
       if Length(UnicodeChars) > 0 then

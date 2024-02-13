@@ -37,7 +37,7 @@ type
     function ToRepl(ARegExpr: TRegExpr): RegExprString;
     function TSToTags(const Text: String): String;
   public
-    constructor Create;
+    constructor Create(const AShouldWriteBOM: Boolean = False);
     destructor Destroy; override;
     function Name: String; override;
     function Format: TUWSubtitleFormats; override;
@@ -126,11 +126,11 @@ const
 
 // -----------------------------------------------------------------------------
 
-constructor TUWWebVTT.Create;
+constructor TUWWebVTT.Create(const AShouldWriteBOM: Boolean = False);
 var
   i: Integer;
 begin
-  inherited Create;
+  inherited Create(AShouldWriteBOM);
 
   FColors := TStringList.Create;
   FColors.Duplicates := dupIgnore;

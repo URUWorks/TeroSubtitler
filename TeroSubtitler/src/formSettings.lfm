@@ -368,6 +368,18 @@ object frmSettings: TfrmSettings
       Caption = 'Prompt for Encoding before loading a file'
       TabOrder = 13
     end
+    object chkWriteBOM: TUWCheckBox
+      AnchorSideTop.Control = chkShowCPSBar
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 19
+      Top = 506
+      Width = 18
+      AutoSize = False
+      BorderSpacing.Top = 2
+      Caption = 'Write BOM on save'
+      TabOrder = 19
+    end
   end
   object lyoConventions: TUWLayout
     Left = -508
