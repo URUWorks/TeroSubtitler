@@ -4291,6 +4291,10 @@ msgstr "Usar decodificação de vídeo por hardware"
 msgid "Use Tero file dialog"
 msgstr "Usar dialogo de arquivo do Tero"
 
+#: tfrmsettings.chkwritebom.caption
+msgid "Write BOM on save"
+msgstr ""
+
 #: tfrmsettings.lbladditionalmpvoptions.caption
 msgid "Additional mpv options"
 msgstr "Opções adicionas do mpv"

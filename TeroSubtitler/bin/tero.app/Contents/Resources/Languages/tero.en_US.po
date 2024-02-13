@@ -4261,6 +4261,10 @@ msgstr ""
 msgid "Use Tero file dialog"
 msgstr ""
 
+#: tfrmsettings.chkwritebom.caption
+msgid "Write BOM on save"
+msgstr ""
+
 #: tfrmsettings.lbladditionalmpvoptions.caption
 msgid "Additional mpv options"
 msgstr ""

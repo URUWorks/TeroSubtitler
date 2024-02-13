@@ -4288,6 +4288,10 @@ msgstr "Использовать аппаратное декодирование
 msgid "Use Tero file dialog"
 msgstr "Использовать диалоговое окно Tero"
 
+#: tfrmsettings.chkwritebom.caption
+msgid "Write BOM on save"
+msgstr ""
+
 #: tfrmsettings.lbladditionalmpvoptions.caption
 msgid "Additional mpv options"
 msgstr "Дополнительные параметры mpv"
