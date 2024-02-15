@@ -3476,6 +3476,10 @@ msgctxt "tfrmmain.actshowcolumnwpm.caption"
 msgid "Words per minute"
 msgstr "Palabras por minuto"
 
+#: tfrmmain.actshowthumbnails.caption
+msgid "Show thumbnails"
+msgstr "Mostrar miniaturas"
+
 #: tfrmmain.actshowtoolbarencoding.caption
 msgctxt "tfrmmain.actshowtoolbarencoding.caption"
 msgid "Encoding"
@@ -4488,18 +4492,14 @@ msgctxt "tfrmsettings.lblwavecolor.caption"
 msgid "Color"
 msgstr "Color"
 
-#: tfrmsettings.lblwaveend.caption
-msgid "End line"
-msgstr "Línea final"
+#: tfrmsettings.lblwaveentry.caption
+msgid "Entry"
+msgstr "Entrada"
 
 #: tfrmsettings.lblwaveform.caption
 msgctxt "tfrmsettings.lblwaveform.caption"
 msgid "Waveform"
 msgstr "Forma de onda"
-
-#: tfrmsettings.lblwavestart.caption
-msgid "Start line"
-msgstr "Línea de inicio"
 
 #: tfrmsettings.lblwebreference.caption
 msgid "Web reference"
@@ -5146,3 +5146,4 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
+
