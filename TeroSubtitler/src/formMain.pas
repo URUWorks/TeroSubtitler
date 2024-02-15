@@ -90,6 +90,7 @@ type
     actGoToCurrentEntryInitialTime: TAction;
     actGoToCurrentEntryFinalTime: TAction;
     actDistributeEntriesEvenly: TAction;
+    actShowThumbnails: TAction;
     actVideoInformation: TAction;
     actPanAndScan: TAction;
     actVideoFilterDeinterlace: TAction;
@@ -360,6 +361,7 @@ type
     MenuItem247: TMenuItem;
     MenuItem248: TMenuItem;
     MenuItem249: TMenuItem;
+    MenuItem250: TMenuItem;
     mnuVideoPopupAR: TMenuItem;
     mnuVideoPopupAS: TMenuItem;
     mnuVideoPopupAF: TMenuItem;
@@ -662,6 +664,7 @@ type
     Separator58: TMenuItem;
     Separator59: TMenuItem;
     Separator60: TMenuItem;
+    Separator61: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
     Separator7: TMenuItem;
@@ -886,6 +889,9 @@ type
     procedure WAVETimeLineClick(Sender: TObject; const Time: Integer);
     procedure GoToNextShotChange(const APrevious: Boolean = False);
     procedure DetectDialogSegments;
+    procedure GenerateThumbnails;
+    procedure FreeThumbnails;
+    procedure DoThumbnailsDone(Sender: TObject);
     // formMain_MPV
     procedure MPVClick(Sender: TObject);
     procedure MPVEndFile(ASender: TObject; AParam: Integer);
@@ -1081,6 +1087,7 @@ type
     procedure actSetAsDefaultFormatExecute(Sender: TObject);
     procedure actDetectSilentZonesExecute(Sender: TObject);
     procedure actDetectDialogSegmentsExecute(Sender: TObject);
+    procedure actShowThumbnailsExecute(Sender: TObject);
     procedure actTBXExecute(Sender: TObject);
     procedure actTBXListExecute(Sender: TObject);
     procedure actTBXSettingsExecute(Sender: TObject);
@@ -1185,8 +1192,8 @@ uses
   procConfig, procDialogs, procWorkspace, procVST, procVST_Loops,
   procUnDockVideoControls, procColorTheme, procFiles, procMPV, procSubtitle,
   procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.SysUtils,
-  UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX,
-  formCustomQuestionDlg, formCustomSelectDlg ;
+  UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procThumbnails,
+  formCustomQuestionDlg, formCustomSelectDlg;
 
 {$R *.lfm}
 
@@ -1246,6 +1253,8 @@ begin
   mmoTranslation.Tag := TAG_CONTROL_TRANSLATION;
   // MPV
   PrepareMPV;
+  // WAVE
+  WAVE.DefaultThumbnail.LoadFromLazarusResource('video_countdown');
   // QuickAction
   edtQuickAction.LocalizeFunc := @LocalizeCategory;
   // MRU
@@ -1367,6 +1376,8 @@ begin
     // VST
     VST.RootNodeCount := 0;
     if Assigned(VSTOptions.BackgroundBlock) then VSTOptions.BackgroundBlock.Free;
+    // Thumbnails
+    FreeThumbnails;
     // Unlink Subtitles
     WAVE.Subtitles := NIL;
     // Free SubtitleAPI

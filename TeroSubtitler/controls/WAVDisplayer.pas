@@ -48,6 +48,8 @@ uses
 
 type
 
+  TThumbnails = array of TBitmap;
+
   PPeak = ^TPeak;
   TPeak = record
     Max : SmallInt;
@@ -87,8 +89,6 @@ type
     Text,
     Cursor,
     PlayCursor,
-    ItemIT,
-    ItemFT,
     Item,
     ItemSelected,
     SceneChange: {$IFDEF USEBGRABITMAP}TBGRAPixel{$ELSE}TColor{$ENDIF};
@@ -149,6 +149,10 @@ type
     FDynamicSelValueMs : Integer;
     FNeedToSortList    : Boolean;
 
+    FDrawThumbnails    : Boolean;
+    FThumbnails        : TThumbnails;
+    FDefaultThumbnail  : TBitmap;
+
     FGAP               : Integer; // Minimum blank between subtitle in ms
     FDrawGAP           : Boolean;
     FSnappingEnabled   : Boolean;
@@ -196,7 +200,11 @@ type
 
     function PixelToTime(const Pixel: Integer): Integer;
     function TimeToPixel(const Time: Integer): Integer;
-    function GetWAVECanvasHeight: Integer;
+    function GetCorrectTimePos(const PosMs: Integer): Integer;
+    function GetCanvasHeight: Integer;
+    function GetSubCanvasHeight: Integer;
+    function GetSubCanvasY: Integer;
+    function GetWAVECanvasY: Integer;
 
     function IsTimeLineClicked(const XY: Integer): Boolean;
 
@@ -227,6 +235,7 @@ type
     procedure DrawTimeLine(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
     procedure DrawItemsCanvas(const ACompleteDraw: Boolean = False);
     procedure DrawSubtitleItem(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
+    procedure DrawThumbnails(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
     procedure DrawSelection(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
     procedure DrawCursor(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
     procedure DrawPlayCursor(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
@@ -234,7 +243,6 @@ type
     procedure DrawSceneChange(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
     procedure DrawMinimumBlank(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
     procedure CalculateTimeDivisionStepMs;
-    function FrameStart(PosMs: Integer):integer;
   protected
     procedure Paint; override;
     procedure DoOnResize; override;
@@ -297,6 +305,8 @@ type
     property SelectedItem: PUWSubtitleItem read FSelectedSubtitle;
     property IsMouseDown: Boolean read FMouseIsDown;
     property SubTextStyle: TTextStyle read FTS write FTS;
+    property Thumbnails: TThumbnails read FThumbnails write FThumbnails;
+    property DefaultThumbnail: TBitmap read FDefaultThumbnail;
   published
     property Subtitles                     : TUWSubtitles                 read FSubtitles                    write FSubtitles;
     property MinimumBlank                  : Integer                      read FGAP                          write FGAP;
@@ -308,6 +318,7 @@ type
     property CenterPlayCursor              : Boolean                      read FCenterPlay                   write FCenterPlay;
     property SceneChangeEnabled            : Boolean                      read FSceneChangeEnabled           write SetSceneChangeEnabled;
     property DrawGAP                       : Boolean                      read FDrawGAP                      write FDrawGAP;
+    property DrawThumbnail                 : Boolean                      read FDrawThumbnails               write FDrawThumbnails;
     property SilentZones                   : TZonesList                   read FSilentZones;
     property SavePeakToFile                : Boolean                      read FSavePeakToFile               write FSavePeakToFile;
     property OnCustomDrawSubtitleItem      : TCustomDrawSubtitleEvent     read FOnCustomDrawSubtitleItem     write FOnCustomDrawSubtitleItem;
@@ -339,11 +350,18 @@ type
 
 procedure Register;
 
+const
+  DefaultThumbnailsCount = 100;
+
 // -----------------------------------------------------------------------------
 
 implementation
 
-uses UWSystem.TimeUtils, UWSystem.SysUtils;
+uses
+  UWSystem.TimeUtils, UWSystem.SysUtils;
+
+const
+  DefaultPageSizeMS = 10000; // 5000
 
 // -----------------------------------------------------------------------------
 
@@ -426,7 +444,7 @@ begin
 
   FLengthMS        := 0;
   FPositionMS      := 0;
-  FPageSizeMS      := 5000;
+  FPageSizeMS      := DefaultPageSizeMS;
   FPeakDataLoaded  := False;
   FSavePeakToFile  := True;
   FVerticalScaling := 85;
@@ -444,6 +462,10 @@ begin
   FGAP             := 30;
   FMinBlankInfo1   := TMinBlankInfo.Create;
   FMinBlankInfo2   := TMinBlankInfo.Create;
+
+  FDrawThumbnails   := False;
+  FThumbnails       := NIL;
+  FDefaultThumbnail := TBitmap.Create;
 
   FDynamicSelection.InitialTime := 0;
   FDynamicSelection.FinalTime   := 0;
@@ -487,7 +509,7 @@ begin
   FFPS             := 25;
   FFPSTimeMode     := False;
   FDrawSubdivision := True;
-  FEmptyText   := 'Click to add waveform';
+  FEmptyText       := '';
 
   with CustomColors do
   begin
@@ -497,10 +519,8 @@ begin
     Text         := {$IFDEF USEBGRABITMAP}BGRA{$ELSE}RGBToColor{$ENDIF}(224, 224, 224);
     PlayCursor   := {$IFDEF USEBGRABITMAP}BGRA{$ELSE}RGBToColor{$ENDIF}(255, 255, 255);
     Cursor       := {$IFDEF USEBGRABITMAP}BGRA{$ELSE}RGBToColor{$ENDIF}(230, 230, 0);
-    ItemIT       := {$IFDEF USEBGRABITMAP}BGRA{$ELSE}RGBToColor{$ENDIF}(0, 120, 0);
-    ItemFT       := {$IFDEF USEBGRABITMAP}BGRA{$ELSE}RGBToColor{$ENDIF}(150, 10, 10);
-    Item         := {$IFDEF USEBGRABITMAP}BGRA(255, 255, 255, 20){$ELSE}RGBToColor(255, 255, 255){$ENDIF};
-    ItemSelected := {$IFDEF USEBGRABITMAP}BGRA(255, 255, 255, 21){$ELSE}RGBToColor(255, 255, 255){$ENDIF};
+    Item         := {$IFDEF USEBGRABITMAP}BGRA{$ELSE}RGBToColor{$ENDIF}(0, 35, 65);
+    ItemSelected := {$IFDEF USEBGRABITMAP}BGRA{$ELSE}RGBToColor{$ENDIF}(255, 255, 255);
     SceneChange  := {$IFDEF USEBGRABITMAP}BGRA{$ELSE}RGBToColor{$ENDIF}(200, 100, 40);
   end;
 
@@ -548,6 +568,7 @@ begin
 
   ClearZoneList(FSilentZones);
 
+  FDefaultThumbnail.Free;
   FBackBufferItems.Free;
   FBackBufferWAVE.Free;
   FBackBuffer.Free;
@@ -604,16 +625,47 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWWaveformDisplayer.GetWAVECanvasHeight: Integer;
+function TUWWaveformDisplayer.GetCorrectTimePos(const PosMs: Integer): Integer;
+begin
+  if FFPSTimeMode then
+    Result := RoundTimeWithFrames(PosMs, FFPS)
+  else
+    Result := PosMs;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWWaveformDisplayer.GetCanvasHeight: Integer;
 begin
   Result := Height - FScrollBar.Height;
 end;
 
 //------------------------------------------------------------------------------
 
+function TUWWaveformDisplayer.GetSubCanvasHeight: Integer;
+begin
+  Result := GetCanvasHeight div iff(FDrawThumbnails, 3, 2);
+end;
+
+//------------------------------------------------------------------------------
+
+function TUWWaveformDisplayer.GetSubCanvasY: Integer;
+begin
+  Result := GetSubCanvasHeight * iff(FDrawThumbnails, 1, 0);
+end;
+
+//------------------------------------------------------------------------------
+
+function TUWWaveformDisplayer.GetWAVECanvasY: Integer;
+begin
+  Result := GetSubCanvasHeight * iff(FDrawThumbnails, 2, 1);
+end;
+
+//------------------------------------------------------------------------------
+
 function TUWWaveformDisplayer.IsTimeLineClicked(const XY: Integer): Boolean;
 begin
-  Result := InRange(XY, GetWAVECanvasHeight - FTimeLineHeight,  GetWAVECanvasHeight);
+  Result := InRange(XY, GetCanvasHeight - FTimeLineHeight,  GetCanvasHeight);
 end;
 
 //------------------------------------------------------------------------------
@@ -733,23 +785,17 @@ begin
   Result := False;
 
   if (Idx > 0) then
-  begin
-    ChangedInStep := FMinBlankInfo1.SetInfo(FSubtitles.ItemPointer[Idx - 1], mbipStop);
-  end
+    ChangedInStep := FMinBlankInfo1.SetInfo(FSubtitles.ItemPointer[Idx - 1], mbipStop)
   else
-  begin
     ChangedInStep := FMinBlankInfo1.SetInfo(nil, mbipInvalid);
-  end;
+
   Result := Result or ChangedInStep;
 
   if (Idx < FSubtitles.Count-1) then
-  begin
-    ChangedInStep := FMinBlankInfo2.SetInfo(FSubtitles.ItemPointer[Idx + 1], mbipStart);
-  end
+    ChangedInStep := FMinBlankInfo2.SetInfo(FSubtitles.ItemPointer[Idx + 1], mbipStart)
   else
-  begin
     ChangedInStep := FMinBlankInfo2.SetInfo(NIL, mbipInvalid);
-  end;
+
   Result := Result or ChangedInStep;
 end;
 
@@ -937,15 +983,13 @@ function TUWWaveformDisplayer.CheckSubtitleItemForDynamicSelection(const Subtitl
   const CursorPosMS, SubtitleSelWindow, X, Y: Integer): Boolean;
 var
   NewDynamicEditMode : TDynamicEditMode;
-  CanvasHeight       : Integer;
 begin
   Result             := False;
   NewDynamicEditMode := demNone;
 
   if (((Subtitle.FinalTime - Subtitle.InitialTime) / SubtitleSelWindow) > 2) then
   begin
-    CanvasHeight := GetWAVECanvasHeight;
-    if (Y > 0) and (Y < CanvasHeight) then
+    if (Y > GetSubCanvasY) and (Y < GetSubCanvasY+GetSubCanvasHeight) then
     begin
       if (Abs(CursorPosMs - Subtitle.InitialTime) < SubtitleSelWindow) then
       begin
@@ -1213,14 +1257,6 @@ end;
 
 //------------------------------------------------------------------------------
 
-//Goes to the beginning of the frame im FF mode is enabled.
-function TUWWaveformDisplayer.FrameStart(PosMs: Integer):integer;
-begin
-  if FFPSTimeMode
-    then Result := RoundTimeWithFrames(PosMs, FFPS)
-    else Result := PosMs;
-end;
-
 procedure TUWWaveformDisplayer.MouseMove(Shift: TShiftState; X, Y: Integer);
 var
   ACursorPosMs      : Integer;
@@ -1266,7 +1302,7 @@ begin
         // Update selection
         if FDynamicEditMode <> demWhole then
         begin  //Move cursors
-          ACursorPosMS := FrameStart(ACursorPosMS);
+          ACursorPosMS := GetCorrectTimePos(ACursorPosMS);
           if (ACursorPosMS > FDynamicSelValueMs) then
           begin
             FDynamicSelection.InitialTime := FDynamicSelValueMs;
@@ -1294,7 +1330,7 @@ begin
         begin  //Drag selection
           SubLen := Range(FOldFinalTime - FOldInitialTime, 0, FOldFinalTime);
           NewIT  := FOldInitialTime + ((PixelToTime(X) + FPositionMS) - FOldMouseDownX);
-          NewIT := FrameStart(NewIT);
+          NewIT := GetCorrectTimePos(NewIT);
           NewFT  := NewIT + SubLen;
 
           if FEnableMouseAntiOverlapping and not (ssAlt in Shift) then
@@ -1372,26 +1408,24 @@ begin
       end;
 
       // Check selection
-      if not SelectionIsEmpty then
+{      if not SelectionIsEmpty then
       begin
         SubtitleSelWindow := PixelToTime(4);
         if (SubtitleSelWindow < 1) then SubtitleSelWindow := 1;
         if CheckSubtitleItemForDynamicSelection(FDynamicSelection, ACursorPosMS, SubtitleSelWindow, X, Y) then Exit;
-      end;
+      end;}
     end;
 
     if SetMinBlankAt(ACursorPosMs) then
     begin
       Include(UpdateFlags, uvfSubtitle);
     end;
-    Cursor           := crDefault;
-    FDynamicEditMode := demNone;
+    Cursor            := crDefault;
+    FDynamicEditMode  := demNone;
     FDynamicSelOldSub := FDynamicSelSub;
-    FDynamicSelSub   := NIL;
+    FDynamicSelSub    := NIL;
     if (FDynamicSelSub <> FDynamicSelOldSub) then
-    begin
       Include(UpdateFlags, uvfSubtitle);
-    end;
   end;
 
   UpdateView(UpdateFlags);
@@ -1431,7 +1465,7 @@ begin
     FMaxSelTime        := -1;
     FPrevSubIdx        := -1;
     FNextSubIdx        := -1;
-    FCursorMS          :=  FrameStart(PixelToTime(X) + FPositionMS);
+    FCursorMS          :=  GetCorrectTimePos(PixelToTime(X) + FPositionMS);
 
     UpdateView([uvfSelection, uvfSubtitle]);
   end;
@@ -1676,7 +1710,7 @@ begin
     WAVFile.Free;
   end;
 
-  FPageSizeMS := 5000;
+  FPageSizeMS := DefaultPageSizeMS;
   SetLengthMS(LengthMS);
   FPeakDataLoaded := True;
   FFileName := PeakFileName;
@@ -1779,7 +1813,7 @@ begin
     begin
       {$IFDEF USEBGRABITMAP}
       FBackBuffer.TextRect(
-        Rect(FBackBuffer.ClipRect.Left, FBackBuffer.ClipRect.Top, FBackBuffer.ClipRect.Right, GetWAVECanvasHeight),
+        Rect(FBackBuffer.ClipRect.Left, FBackBuffer.ClipRect.Top, FBackBuffer.ClipRect.Right, FBackBuffer.ClipRect.Bottom),
         FEmptyText, taCenter, tlCenter, CustomColors.Text);
       {$ELSE}
       FTS.Alignment := taCenter;
@@ -1809,6 +1843,9 @@ begin
     FOldPageSizeMs := FPageSizeMs;
 
     DrawTimeLine(FBackBufferWAVE);
+
+    if FDrawThumbnails then
+      DrawThumbnails(FBackBufferWAVE, 0, GetSubCanvasHeight);
   end
   else if (uvfPosition in UpdateViewFlags) then
   begin
@@ -1819,6 +1856,9 @@ begin
     FOldPageSizeMs := FPageSizeMs;
 
     DrawTimeLine(FBackBufferWAVE);
+
+    if FDrawThumbnails then
+      DrawThumbnails(FBackBufferWAVE, 0, GetSubCanvasHeight);
   end;
 
   if (uvfPageSize in UpdateViewFlags) or (uvfSubtitle in UpdateViewFlags) then
@@ -1841,6 +1881,9 @@ end;
 //------------------------------------------------------------------------------
 
 procedure TUWWaveformDisplayer.ZoomSubtitle(const Subtitle: TUWSubtitleItem);
+const
+  MaxZoom = 200;
+
 var
   NewPosition, NewPageSize : Integer;
   UpdateFlags              : TUpdateViewFlags;
@@ -1848,9 +1891,9 @@ begin
   if (Subtitle.InitialTime >= Subtitle.FinalTime) then Exit;
 
   NewPageSize := Subtitle.FinalTime - Subtitle.InitialTime;
-  if (NewPageSize < 200) then
+  if (NewPageSize < MaxZoom) then
   begin
-    NewPageSize := 200; // Zoom to 200ms max
+    NewPageSize := MaxZoom; // Zoom to max ms
     NewPosition := Subtitle.InitialTime + ((Subtitle.FinalTime - Subtitle.InitialTime - NewPageSize) div 2);
   end
   else

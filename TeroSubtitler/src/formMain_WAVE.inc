@@ -139,7 +139,6 @@ procedure TfrmMain.DetectDialogSegments;
 var
   DialogList: TZonesList;
   i, x: Integer;
-  //s: String;
 begin
   if not WAVE.IsPeakDataLoaded then
     actWaveExtract.Execute;
@@ -147,8 +146,6 @@ begin
   if WAVE.IsPeakDataLoaded and (CustomQuestionDialog(lngDetectDialogSegmentsWarning, lngContinueAnyway, [dbYes, dbNo]) = mrYes) then
     if WAVE.DetectZoneList(DialogList, False, AppOptions.DialogSegmentThreshold) then
     try
-      //s := GetCommonString('Entry');
-
       UndoInstance.IncrementUndoGroup;
       ClearSubtitles(False);
       x := 0;
@@ -168,6 +165,67 @@ begin
     finally
       WAVE.ClearZoneList(DialogList);
     end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.GenerateThumbnails;
+var
+  i : Integer;
+  gt : TGenerateThumbnails;
+begin
+  if not FileExists(GetExtractAppFile) then
+  begin
+    ShowErrorMessageDialog(Format(lngExtractAppError, [FFMPEG_EXE]));
+    Exit;
+  end;
+
+  with WAVEOptions do
+  begin
+    if ThumbnailsInProcess then Exit;
+
+    if Length(Thumbnails) = 0 then
+    begin
+      SetLength(Thumbnails, DefaultThumbnailsCount);
+      for i := 0 to DefaultThumbnailsCount-1 do
+        Thumbnails[i] := TBitmap.Create;
+    end;
+
+    ThumbnailsInProcess := True;
+    gt := TGenerateThumbnails.Create(MPV.FileName, mpv.GetMediaLenInMs, @DoThumbnailsDone);
+    gt.Start;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.FreeThumbnails;
+var
+  i: Integer;
+begin
+  if WAVE.Thumbnails <> NIL then
+    WAVE.Thumbnails := NIL;
+
+  with WAVEOptions do
+    if (Length(Thumbnails) > 0) and not ThumbnailsInProcess then
+    begin
+      for i := 0 to Length(Thumbnails)-1 do
+        Thumbnails[i].Free;
+
+      SetLength(Thumbnails, 0);
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.DoThumbnailsDone(Sender: TObject);
+begin
+  WAVE.Thumbnails := WAVEOptions.Thumbnails;
+  WAVE.DoUpdate;
+
+  with WAVEOptions do
+    if ThumbnailsInProcess then
+      ThumbnailsInProcess := False;
 end;
 
 // -----------------------------------------------------------------------------

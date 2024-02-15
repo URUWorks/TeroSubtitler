@@ -323,6 +323,7 @@
 {"hash":218474373,"name":"tfrmmain.actvideofiltervintage.caption","sourcebytes":[86,105,110,116,97,103,101],"value":"Vintage"},
 {"hash":18647806,"name":"tfrmmain.actpanandscan.caption","sourcebytes":[80,97,110,45,97,110,100,45,115,99,97,110],"value":"Pan-and-scan"},
 {"hash":238331790,"name":"tfrmmain.actvideoinformation.caption","sourcebytes":[73,110,102,111,114,109,97,116,105,111,110,46,46,46],"value":"Information..."},
+{"hash":86215267,"name":"tfrmmain.actshowthumbnails.caption","sourcebytes":[83,104,111,119,32,116,104,117,109,98,110,97,105,108,115],"value":"Show thumbnails"},
 {"hash":261306372,"name":"tfrmmain.mnuvstformat.caption","sourcebytes":[109,110,117,86,83,84,70,111,114,109,97,116],"value":"mnuVSTFormat"},
 {"hash":6093503,"name":"tfrmmain.mnuvstvideo.caption","sourcebytes":[86,105,100,101,111],"value":"Video"},
 {"hash":184739641,"name":"tfrmmain.mnudictionary.caption","sourcebytes":[68,105,99,116,105,111,110,97,114,121],"value":"Dictionary"},

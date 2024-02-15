@@ -80,7 +80,6 @@ var
   Middle               : Integer;
   PeakMax, PeakMin     : Integer;
   i                    : Integer;
-  Rect1                : TRect;
   RectHeight           : Integer;
 begin
   {$IFDEF USEBGRABITMAP}
@@ -95,6 +94,10 @@ begin
 
   with ABitmap.{$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF} do
   begin
+    //Pen.Color := CustomColors.ItemIT;
+    Pen.Style := psDot;
+    Line(0, GetWAVECanvasY, Width, GetWAVECanvasY);
+
     PeaksPerPixelScaled := (((FPageSizeMS / 1000.0) * FWaveFormat.nSamplesPerSec) / FSamplesPerPeak) / Width;
     StartPositionInPeaks := ((FPositionMS / 1000.0) * FWaveFormat.nSamplesPerSec) / FSamplesPerPeak;
 
@@ -126,13 +129,8 @@ begin
       end;
     end;
 
-    Rect1        := ClientRect;
-    Rect1.Left   := x1_update;
-    Rect1.Right  := x2_update;
-    Rect1.Bottom := Rect1.Bottom - FScrollBar.Height;
-
-    RectHeight := Rect1.Bottom - Rect1.Top;
-    Middle     := Rect1.Top + (RectHeight div 2);
+    RectHeight := GetSubCanvasHeight;
+    Middle     := GetWAVECanvasY + (RectHeight div 2);
 
     // Wave
     Pen.{$IFDEF USEBGRABITMAP}BGRAColor{$ELSE}Color{$ENDIF} := CustomColors.Waveform;
@@ -251,10 +249,10 @@ begin
     {$ENDIF}
     // Draw Subtitle Items
     //FBackBufferItems.FontStyle := [TFontStyle.fsBold];
-    y1 := 0;
-    y2 := GetWAVECanvasHeight;
+    y1 := GetSubCanvasY;
+    y2 := y1 + GetSubCanvasHeight;
     DrawMinimumBlank(FBackBufferItems, y1, y2);
-    DrawSceneChange(FBackBufferItems, y1, y2);
+    DrawSceneChange(FBackBufferItems, GetWAVECanvasY, GetWAVECanvasY + GetSubCanvasHeight);
     DrawSubtitleItem(FBackBufferItems, y1, y2);
 
     {$IFDEF USEBGRABITMAP}
@@ -289,16 +287,6 @@ end;
 
 procedure TUWWaveformDisplayer.DrawSubtitleItem(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
 
-  {procedure _TextOut(const X, Y: Integer; const S: String);
-  begin
-    with ABitmap.Canvas do
-    begin
-      Font.Size := 8;
-      Font.Color := CustomColors.Text;
-      TextOut(X, Y, S);
-    end;
-  end;}
-
   procedure _TextOut(const R: TRect; const S, N: String; ALayout: TTextLayout);
   begin
     with ABitmap.{$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF} do
@@ -319,22 +307,18 @@ const
   TextMargin = 4;
 
 var
-  i        : Integer;
-  r        : TUWSubtitleItem;
+  i : Integer;
+  r : TUWSubtitleItem;
   x1, x2,
-  y1, y2   : Integer;
-  yy1, yy2 : Integer;
-  ShowStart, ShowStop, FullHLines : Boolean;
+  y1, y2 : Integer;
+  FullHLines : Boolean;
   CustomDrawRect : TRect;
-//  sTime     : String;
 begin
   with ABitmap do
   begin
     FTS.Alignment := taLeftJustify;
     y1  := ATop;
-    y2  := ABottom - FScrollBar.Height;
-    yy1 := ATop;
-    yy2 := ABottom;
+    y2  := ABottom;
 
     for i := 0 to FSubtitles.Count-1 do
     begin
@@ -349,59 +333,10 @@ begin
         x2 := TimeToPixel(r.FinalTime - FPositionMS);
 
       if x1 > Width then Break;
-
-      ShowStart  := (x1 <> -1);
-      ShowStop   := (x2 <> -1) and (x2 <> x1);
       FullHLines := (r.InitialTime < FPositionMS) and (r.FinalTime > FPositionMS + FPageSizeMS);
-
-      //Canvas.Pen.Mode  := pmCopy;
-      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Width := 2;
-
-      // Paint start time
-      if ShowStart then
-      begin
-        //if (FDynamicEditMode = demInitial) and (FDynamicSelSub = @r) then
-        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Style := psSolid;
-        //else
-          //Canvas.Pen.Style := psDot;
-
-        {$IFDEF USEBGRABITMAP}CanvasBGRA.Pen.BGRAColor{$ELSE}Canvas.Pen.Color{$ENDIF} := CustomColors.ItemIT;
-        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x1, yy1, x1, yy2);
-
-        {z := x2;
-        if z = -1 then z := FBackBuffer.Width-1;
-        if (z - x1) > 70 then
-        begin
-          Canvas.Brush.Style := bsClear;
-          sTime := TrimTimeString(TimeToString(r.InitialTime, 'h:mm:ss.zzz'));
-          _TextOut(x1+4, y2, sTime);
-        end;}
-      end;
-
-      // Paint stop time
-      if ShowStop then
-      begin
-        //if (FDynamicEditMode = demFinal) and (FDynamicSelSub = @r) then
-        //  Canvas.Pen.Style := psSolid
-        //else
-        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Style := psDash;
-
-        {$IFDEF USEBGRABITMAP}CanvasBGRA.Pen.BGRAColor{$ELSE}Canvas.Pen.Color{$ENDIF} := CustomColors.ItemFT;
-        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x2, yy1, x2, yy2);
-
-        {z := x1;
-        if z = -1 then z := 0;
-        if (x2 - z) > 140 then
-        begin
-          Canvas.Brush.Style := bsClear;
-          sTime := TrimTimeString(TimeToString(r.FinalTime, 'h:mm:ss.zzz'));
-          _TextOut(x2-4-Canvas.TextWidth(sTime), y2, sTime);
-        end;}
-      end;
 
       {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Width := 1;
 
-      // Draw the top and bottom horizontal lines
       if FullHLines then
       begin
         x1 := 0;
@@ -415,20 +350,13 @@ begin
         else if (x2 = -1) then
           x2 := Width-1;
 
-        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Style := psSolid;
-
-        // Draw top h-line
-        //Canvas.Line(x1, y1, x2, y1);
-        // Draw bottom h-line
-        //Canvas.Line(x1, y2, x2, y2);
-
         {$IFDEF USEBGRABITMAP}
-        ABitmap.FillRect(x1, y1, x2, yy2, CustomColors.Item, dmDrawWithTransparency);
+        ABitmap.FillRect(x1, y1, x2, y2, CustomColors.Item, dmDrawWithTransparency);
         {$ELSE}
-        DrawAlphaRect(ABitmap, x1, x2, y1, yy2, CustomColors.Item);
+        ABitmap.Canvas.Brush.Color := CustomColors.Item; //DrawAlphaRect(ABitmap, x1, x2, y1, y2, CustomColors.Item);
+        Canvas.FillRect(x1, y1, x2, y2);
         {$ENDIF}
 
-        // Custom draw
         if ((x2 - x1) > 10) then
         begin
           CustomDrawRect.Top    := y1+TextMargin;
@@ -436,7 +364,7 @@ begin
           CustomDrawRect.Right  := x2-TextMargin;
           CustomDrawRect.Bottom := y2-TextMargin;
 
-          if Assigned(FOnCustomDrawSubtitleItem) then
+          if Assigned(FOnCustomDrawSubtitleItem) then // Custom draw
             FOnCustomDrawSubtitleItem(Self, Canvas, i, r, CustomDrawRect)
           else
           begin
@@ -446,10 +374,9 @@ begin
             else
               FTS.Alignment := taLeftJustify;
             end;
-            _TextOut(CustomDrawRect, RemoveTSTags(Subtitles[i].Text), Subtitles[i].Notes, tlTop);
 
+            _TextOut(CustomDrawRect, RemoveTSTags(Subtitles[i].Text), Subtitles[i].Notes, tlTop);
             FTS.Alignment := taLeftJustify;
-            //_TextOut(CustomDrawRect, '#' + IntToStr(i+1) +'  ' + TimeToString(Subtitles.Duration[i], 'h:mm:ss.zzz', FFPS, True), '', tlBottom);
 
             if not FFPSTimeMode then
               _TextOut(CustomDrawRect, '#' + IntToStr(i+1) + '  ' + TimeMSToShortString(Subtitles.Duration[i], 1), '', tlBottom)
@@ -464,18 +391,60 @@ end;
 
 //------------------------------------------------------------------------------
 
+{ DrawThumbnails }
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.DrawThumbnails(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
+var
+  thumb, c, i, w, h, x, p : Integer;
+  ar : Double;
+  r : TRect;
+  ready : Boolean;
+begin
+  ready := Assigned(FThumbnails) and (Length(FThumbnails) = DefaultThumbnailsCount);
+  if not ready and (FDefaultThumbnail.Handle = 0) then Exit;
+
+  if ready then
+    ar := FThumbnails[0].Width / FThumbnails[0].Height
+  else
+    ar := FDefaultThumbnail.Width / FDefaultThumbnail.Height;
+
+  h := GetSubCanvasHeight;
+  w := Round(h * ar);
+  if w <= 0 then w := 1;
+  c := (Width div w);
+  x := 0;
+  Constrain(c, 0, DefaultThumbnailsCount-1);
+  p := PixelToTime(w);
+
+  for i := 0 to c do
+  begin
+    thumb := Round((FPositionMS + (p*i)) / (FLengthMS / DefaultThumbnailsCount));
+    Constrain(thumb, 0, DefaultThumbnailsCount-1);
+
+    r := Rect(x, 0, x+w, h);
+
+    if ready and (FThumbnails[thumb].Width > 0) then
+      ABitmap.Canvas.StretchDraw(r, FThumbnails[thumb])
+    else
+      ABitmap.Canvas.StretchDraw(r, FDefaultThumbnail);
+
+    x += w;
+    if x > Width then Break;
+  end;
+end;
+
+//------------------------------------------------------------------------------
+
 { DrawSelection }
 
 //------------------------------------------------------------------------------
 
 procedure TUWWaveformDisplayer.DrawSelection(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
 var
-  x1, x2       : Integer;
-  CanvasHeight : Integer;
-  SelRect      : TRect;
+  x1, x2 : Integer;
 begin
-  CanvasHeight := GetWAVECanvasHeight;
-
   // Selection
   if (FDynamicSelection.FinalTime > 0) then
     with ABitmap do
@@ -494,7 +463,7 @@ begin
         if (FDynamicSelection.InitialTime >= FPositionMS) and
            (FDynamicSelection.InitialTime <= FPositionMS + FPageSizeMS) then
         begin
-          {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x1, 0, x1, CanvasHeight);
+          {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x1, GetSubCanvasY, x1, GetSubCanvasY+GetSubCanvasHeight);
         end;
       end
       else
@@ -503,22 +472,17 @@ begin
         Constrain(x2, 0, Width);
         if (x1 <> x2) then
         begin
-          SelRect           := ClientRect;
-          SelRect.Left      := x1;
-          SelRect.Right     := x2+1;
-          SelRect.Bottom    := SelRect.Bottom - FScrollBar.Height;
-
           if FSelectedSubtitle = NIL then
             {$IFDEF USEBGRABITMAP}
-            ABitmap.FillRect(SelRect, CustomColors.Item, dmDrawWithTransparency)
+            ABitmap.FillRect(x1, GetWAVECanvasY, x2, GetWAVECanvasY+GetSubCanvasHeight, CustomColors.ItemSelected, dmDrawWithTransparency, 3070)
             {$ELSE}
-            DrawAlphaRect(ABitmap, SelRect.Left, SelRect.Right, SelRect.Top, SelRect.Bottom, CustomColors.Item)
+            DrawAlphaRect(ABitmap, x1, x2, GetWAVECanvasY, GetWAVECanvasY+GetSubCanvasHeight, CustomColors.ItemSelected)
             {$ENDIF}
           else
             {$IFDEF USEBGRABITMAP}
-            ABitmap.FillRect(SelRect, CustomColors.ItemSelected, dmDrawWithTransparency);
+            ABitmap.FillRect(x1, GetSubCanvasY, x2, GetSubCanvasY+GetSubCanvasHeight, CustomColors.ItemSelected, dmDrawWithTransparency, 3070);
             {$ELSE}
-            DrawAlphaRect(ABitmap, SelRect.Left, SelRect.Right, SelRect.Top, SelRect.Bottom, CustomColors.ItemSelected);
+            DrawAlphaRect(ABitmap, x1, x2, GetSubCanvasY, GetSubCanvasY+GetSubCanvasHeight, CustomColors.ItemSelected);
             {$ENDIF}
         end;
       end;
@@ -545,7 +509,7 @@ begin
       {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Width := 1;
 
       x := TimeToPixel(FCursorMS - FPositionMS);
-      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, 0, x, GetWAVECanvasHeight);
+      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, 0, x, GetCanvasHeight);
     end;
 end;
 
@@ -570,7 +534,7 @@ begin
       {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Width := 1;
 
       x := TimeToPixel(FPlayCursorMS - FPositionMS);
-      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, 0, x, GetWAVECanvasHeight);
+      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, 0, x, GetCanvasHeight);
     end;
 end;
 
@@ -596,8 +560,8 @@ begin
       i := 0;
       while i < {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Width do
       begin
-        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(i, 0, i, GetWAVECanvasHeight);
-        inc(i, 30);
+        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(i, 0, i, GetCanvasHeight);
+        Inc(i, 30);
       end;
     end
     else
@@ -607,10 +571,10 @@ begin
       begin
         // Draw main division
         x := TimeToPixel(p - FPositionMS);
-        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, 0, x, GetWAVECanvasHeight);
+        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, 0, x, GetCanvasHeight);
 
         x1 := x + TimeToPixel(FStepMs div 2);
-        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x1, 0, x1, GetWAVECanvasHeight);
+        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x1, 0, x1, GetCanvasHeight);
 
         p := p + FStepMs;
       end;
@@ -634,7 +598,7 @@ begin
       //CanvasBGRA.Brush.Style := bsSolid;
       //CanvasBGRA.Pen.Style   := psSolid;
       {$IFDEF USEBGRABITMAP}CanvasBGRA.Pen.BGRAColor{$ELSE}Canvas.Pen.Color{$ENDIF} := CustomColors.SceneChange;
-      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Width     := 1;
+      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Width := 1;
 
       for i := Low(FSceneChangeList) to High(FSceneChangeList) do
       begin

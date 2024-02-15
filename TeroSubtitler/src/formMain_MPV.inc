@@ -94,6 +94,9 @@ begin
 
   UpdateVideoLengthString;
   RefreshAppTitle;
+
+  if WAVE.DrawThumbnail then
+    GenerateThumbnails;
 end;
 
 // -----------------------------------------------------------------------------

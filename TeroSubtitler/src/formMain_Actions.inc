@@ -877,6 +877,7 @@ begin
   MPV.Close;
   WAVE.EmptyText := '';
   WAVE.Close;
+  FreeThumbnails;
   actCloseVideo.Enabled  := False;
   actWaveExtract.Enabled := False;
   lblMediaTime.Caption   := '';
@@ -1573,6 +1574,17 @@ end;
 procedure TfrmMain.actDetectDialogSegmentsExecute(Sender: TObject);
 begin
   DetectDialogSegments;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowThumbnailsExecute(Sender: TObject);
+begin
+  WAVE.DrawThumbnail := actShowThumbnails.Checked;
+  WAVE.DoUpdate;
+
+  if WAVE.DrawThumbnail and (WAVE.Thumbnails = NIL) then
+    GenerateThumbnails;
 end;
 
 // -----------------------------------------------------------------------------

@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Graphics, LCLType, UWSubtitleAPI, UWSubtitleAPI.Formats,
   BGRABitmap, procConventions, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procMRU,
-  ATSynEdit;
+  WAVDisplayer, ATSynEdit;
 
 const
 
@@ -131,6 +131,7 @@ const
   FFMPEG_Params        = '-i "%input" -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y "%output"';
   FFMPEG_SCParams      = '-hide_banner -i "%input" -vf "select=''gt(scene,%value)'',showinfo" -f null -';
   FFMPEG_VideoEncoding = '-i "%input" -vf "%extrasubtitles=''%subtitle'':force_style=''%style''" -s %widthx%height %videosettings %audiosettings -y -hide_banner "%output"';
+  FFMPEG_Thumbnail     = '-ss %timestr -i "%input" -frames:v 1 -update 1 -s 90x58 -y -hide_banner "%output"';
 
   YTDLP_EXE = 'yt-dlp.exe';
 
@@ -157,6 +158,7 @@ const
   //FFMPEG_Params        = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y %output';
   FFMPEG_SCParams      = '-hide_banner -i %input -vf select=''gt(scene,%value)'',showinfo -f null -';
   FFMPEG_VideoEncoding = '-i %input -vf %extrasubtitles=''%subtitle'':force_style=''%style'' -s %widthx%height %videosettings %audiosettings -y -hide_banner %output';
+  FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -s 90x58 -y -hide_banner %output';
 
   YTDLP_EXE = 'yt-dlp_linux_aarch64';
 
@@ -183,6 +185,7 @@ const
   //FFMPEG_Params        = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y %output';
   FFMPEG_SCParams      = '-hide_banner -i %input -vf select=''gt(scene,%value)'',showinfo -f null -';
   FFMPEG_VideoEncoding = '-i %input -vf %extrasubtitles=''%subtitle'':force_style=''%style'' -s %widthx%height %videosettings %audiosettings -y -hide_banner %output';
+  FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -s 90x58 -y -hide_banner %output';
 
   YTDLP_EXE = 'yt-dlp_macos';
 
@@ -279,7 +282,9 @@ type
   { TWAVEOptions }
 
   TWAVEOptions = record
-    LoopCount : Byte;
+    LoopCount           : Byte;
+    Thumbnails          : TThumbnails;
+    ThumbnailsInProcess : Boolean;
   end;
 
   { TTools }

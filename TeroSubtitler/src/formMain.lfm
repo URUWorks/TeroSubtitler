@@ -4227,6 +4227,12 @@ object frmMain: TfrmMain
       Caption = 'Information...'
       OnExecute = actVideoInformationExecute
     end
+    object actShowThumbnails: TAction
+      Category = 'Waveform'
+      AutoCheck = True
+      Caption = 'Show thumbnails'
+      OnExecute = actShowThumbnailsExecute
+    end
   end
   object popDropInsert: TPopupMenu
     Images = ImageList_Default
@@ -4731,6 +4737,13 @@ object frmMain: TfrmMain
     end
     object MenuItem138: TMenuItem
       Action = actDeleteShotChange
+    end
+    object Separator61: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem250: TMenuItem
+      Action = actShowThumbnails
+      AutoCheck = True
     end
   end
   object TimerAutoBackup: TTimer
