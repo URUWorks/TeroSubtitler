@@ -1005,17 +1005,17 @@ object frmSettings: TfrmSettings
       ButtonColor = 12080128
       Flat = True
     end
-    object lblWaveStart: TLabel
-      AnchorSideTop.Control = cbnWaveStart
+    object lblWaveEntry: TLabel
+      AnchorSideTop.Control = cbnWaveEntry
       AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
       Top = 384
-      Width = 46
-      Caption = 'Start line'
+      Width = 27
+      Caption = 'Entry'
       ParentColor = False
     end
-    object cbnWaveStart: TColorButton
+    object cbnWaveEntry: TColorButton
       AnchorSideTop.Control = cbnWaveColor
       AnchorSideTop.Side = asrBottom
       Left = 248
@@ -1025,30 +1025,7 @@ object frmSettings: TfrmSettings
       BorderSpacing.Top = 5
       BorderWidth = 2
       ButtonColorSize = 16
-      ButtonColor = 30720
-      Flat = True
-    end
-    object lblWaveEnd: TLabel
-      AnchorSideTop.Control = cbnWaveEnd
-      AnchorSideTop.Side = asrCenter
-      Left = 0
-      Height = 15
-      Top = 414
-      Width = 42
-      Caption = 'End line'
-      ParentColor = False
-    end
-    object cbnWaveEnd: TColorButton
-      AnchorSideTop.Control = cbnWaveStart
-      AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 25
-      Top = 409
-      Width = 80
-      BorderSpacing.Top = 5
-      BorderWidth = 2
-      ButtonColorSize = 16
-      ButtonColor = 658070
+      ButtonColor = 3618615
       Flat = True
     end
     object lblListFontSize: TLabel
@@ -1099,7 +1076,7 @@ object frmSettings: TfrmSettings
     end
   end
   object lyoTools: TUWLayout
-    Left = -508
+    Left = -504
     Height = 546
     Top = 328
     Width = 696
@@ -1110,13 +1087,16 @@ object frmSettings: TfrmSettings
     object lblFFMPEG: TLabel
       AnchorSideTop.Control = edtFFMPEG
       AnchorSideTop.Side = asrCenter
+      Cursor = crHandPoint
       Left = 0
       Height = 15
       Top = 4
-      Width = 246
-      AutoSize = False
+      Width = 43
       Caption = 'FFmpeg'
+      Font.Style = [fsUnderline]
       ParentColor = False
+      ParentFont = False
+      OnClick = lblFFMPEGClick
     end
     object edtFFMPEG: TEdit
       AnchorSideRight.Control = btnFFMPEG
@@ -1143,13 +1123,16 @@ object frmSettings: TfrmSettings
     object lblSceneDetect: TLabel
       AnchorSideTop.Control = edtSceneDetect
       AnchorSideTop.Side = asrCenter
+      Cursor = crHandPoint
       Left = 0
       Height = 15
       Top = 35
-      Width = 246
-      AutoSize = False
+      Width = 78
       Caption = 'PySceneDetect'
+      Font.Style = [fsUnderline]
       ParentColor = False
+      ParentFont = False
+      OnClick = lblSceneDetectClick
     end
     object edtSceneDetect: TEdit
       AnchorSideTop.Control = edtFFMPEG
@@ -1179,13 +1162,16 @@ object frmSettings: TfrmSettings
     object lblWhisperCPP: TLabel
       AnchorSideTop.Control = edtWhisperCPP
       AnchorSideTop.Side = asrCenter
+      Cursor = crHandPoint
       Left = 0
       Height = 15
       Top = 66
-      Width = 246
-      AutoSize = False
+      Width = 66
       Caption = 'Whisper.cpp'
+      Font.Style = [fsUnderline]
       ParentColor = False
+      ParentFont = False
+      OnClick = lblWhisperCPPClick
     end
     object edtWhisperCPP: TEdit
       AnchorSideTop.Control = edtSceneDetect
@@ -1215,13 +1201,16 @@ object frmSettings: TfrmSettings
     object lblYTDLP: TLabel
       AnchorSideTop.Control = edtYTDLP
       AnchorSideTop.Side = asrCenter
+      Cursor = crHandPoint
       Left = 0
       Height = 15
       Top = 128
-      Width = 246
-      AutoSize = False
+      Width = 39
       Caption = 'YT-DLP'
+      Font.Style = [fsUnderline]
       ParentColor = False
+      ParentFont = False
+      OnClick = lblYTDLPClick
     end
     object edtYTDLP: TEdit
       AnchorSideTop.Control = edtFasterWhisper
@@ -1251,13 +1240,16 @@ object frmSettings: TfrmSettings
     object lblFasterWhisper: TLabel
       AnchorSideTop.Control = edtFasterWhisper
       AnchorSideTop.Side = asrCenter
+      Cursor = crHandPoint
       Left = 0
       Height = 15
       Top = 97
-      Width = 246
-      AutoSize = False
+      Width = 79
       Caption = 'Faster-Whisper'
+      Font.Style = [fsUnderline]
       ParentColor = False
+      ParentFont = False
+      OnClick = lblFasterWhisperClick
     end
     object edtFasterWhisper: TEdit
       AnchorSideTop.Control = edtWhisperCPP

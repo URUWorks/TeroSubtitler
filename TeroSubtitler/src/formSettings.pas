@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin,
   ExtCtrls, UWLayout, UWCheckBox, UWHotKey, ActnList, procConventions, LCLProc,
-  ComCtrls, UWSubtitleAPI.Formats, LCLTranslator, laz.VirtualTrees,
+  ComCtrls, UWSubtitleAPI.Formats, LCLTranslator, laz.VirtualTrees, LCLIntf,
   procLocalize;
 
 type
@@ -44,8 +44,7 @@ type
     btnShortCutApply: TButton;
     btnShortCutSave: TButton;
     cbnWaveColor: TColorButton;
-    cbnWaveStart: TColorButton;
-    cbnWaveEnd: TColorButton;
+    cbnWaveEntry: TColorButton;
     cboDefaultFileFormat: TComboBox;
     cboLanguage: TComboBox;
     cboShortCutPreset: TComboBox;
@@ -100,9 +99,8 @@ type
     lblChaining: TLabel;
     lblShortCutInUse: TLabel;
     lblShortCutPreset: TLabel;
-    lblWaveStart: TLabel;
+    lblWaveEntry: TLabel;
     lblWaveColor: TLabel;
-    lblWaveEnd: TLabel;
     lblSubSize: TLabel;
     lblSubColor: TLabel;
     lblSubBorder: TLabel;
@@ -276,6 +274,11 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure hkShortcutChange(Sender: TObject);
+    procedure lblFasterWhisperClick(Sender: TObject);
+    procedure lblFFMPEGClick(Sender: TObject);
+    procedure lblSceneDetectClick(Sender: TObject);
+    procedure lblWhisperCPPClick(Sender: TObject);
+    procedure lblYTDLPClick(Sender: TObject);
     procedure lstShortcutsSelectionChange(Sender: TObject; User: boolean);
     procedure lstTreeSelectionChange(Sender: TObject; User: boolean);
     procedure spnConventionChange(Sender: TObject);
@@ -450,8 +453,7 @@ begin
   with frmMain.WAVE do
   begin
     cbnWaveColor.ButtonColor := CustomColors.Waveform;
-    cbnWaveStart.ButtonColor := CustomColors.ItemIT;
-    cbnWaveEnd.ButtonColor   := CustomColors.ItemFT;
+    cbnWaveEntry.ButtonColor := CustomColors.Item;
   end;
 
   edtFFMPEG.Text := Tools.FFmpeg;
@@ -600,8 +602,7 @@ begin
   with frmMain.WAVE do
   begin
     CustomColors.Waveform := cbnWaveColor.ButtonColor;
-    CustomColors.ItemIT   := cbnWaveStart.ButtonColor;
-    CustomColors.ItemFT   := cbnWaveEnd.ButtonColor;
+    CustomColors.Item     := cbnWaveEntry.ButtonColor;
   end;
 
   Tools.FFmpeg := edtFFMPEG.Text;
@@ -915,6 +916,41 @@ begin
         lstShortcuts.Items[lstShortcuts.ItemIndex] := Caption + ' [' + ShortCutToTextEx(ShortCut) + ']'; //cboShortcutCatSelect(NIL);
         btnShortCutApply.Enabled := True;
       end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.lblFasterWhisperClick(Sender: TObject);
+begin
+  OpenURL('https://github.com/Purfview/whisper-standalone-win');
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.lblFFMPEGClick(Sender: TObject);
+begin
+  OpenURL('https://ffmpeg.org');
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.lblSceneDetectClick(Sender: TObject);
+begin
+  OpenURL('https://www.scenedetect.com');
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.lblWhisperCPPClick(Sender: TObject);
+begin
+  OpenURL('https://github.com/ggerganov/whisper.cpp');
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.lblYTDLPClick(Sender: TObject);
+begin
+  OpenURL('https://github.com/yt-dlp/yt-dlp');
 end;
 
 // -----------------------------------------------------------------------------
