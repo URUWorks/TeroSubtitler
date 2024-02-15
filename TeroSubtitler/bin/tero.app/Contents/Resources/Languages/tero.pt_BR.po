@@ -1093,15 +1093,15 @@ msgid "The current subtitle set contains errors that are recommended to be resol
 msgstr "O conjunto de legendas atual contém erros que devem ser resolvidos, mas podem ser salvos."
 
 #: proclocalize.lngsubtitlespecificationerror
-msgid "The current subtitle does not meet the specifications of the format to be saved."
+msgid "The current subtitles do not meet the specifications of the format to be saved."
 msgstr ""
 
 #: proclocalize.lngsubtitlespecificationerroralign
-msgid "There are entries with vertical alignment that are not allowed."
+msgid "There are entries with vertical alignment which are not allowed."
 msgstr ""
 
 #: proclocalize.lngsubtitlespecificationerrorbr
-msgid "There are entries that exceed the line break."
+msgid "There are entries which exceed the line break."
 msgstr ""
 
 #: proclocalize.lngsubtitlespecificationerrorfps

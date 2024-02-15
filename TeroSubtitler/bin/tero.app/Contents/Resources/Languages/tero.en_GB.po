@@ -1093,16 +1093,16 @@ msgid "The current subtitle set contains errors that are recommended to be resol
 msgstr "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 
 #: proclocalize.lngsubtitlespecificationerror
-msgid "The current subtitle does not meet the specifications of the format to be saved."
-msgstr "The current subtitle does not meet the specifications of the format to be saved."
+msgid "The current subtitles do not meet the specifications of the format to be saved."
+msgstr "The current subtitles do not meet the specifications of the format to be saved."
 
 #: proclocalize.lngsubtitlespecificationerroralign
-msgid "There are entries with vertical alignment that are not allowed."
-msgstr "There are entries with vertical alignment that are not allowed."
+msgid "There are entries with vertical alignment which are not allowed."
+msgstr "There are entries with vertical alignment which are not allowed."
 
 #: proclocalize.lngsubtitlespecificationerrorbr
-msgid "There are entries that exceed the line break."
-msgstr "There are entries that exceed the line break."
+msgid "There are entries which exceed the line break."
+msgstr "There are entries which exceed the line break."
 
 #: proclocalize.lngsubtitlespecificationerrorfps
 msgid "Current frame rate does not match."
@@ -5117,4 +5117,3 @@ msgstr "Inverted"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-
