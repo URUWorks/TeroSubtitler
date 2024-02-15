@@ -297,7 +297,7 @@ procedure TUWWaveformDisplayer.DrawSubtitleItem(const ABitmap: {$IFDEF USEBGRABI
       FTS.Layout := ALayout;
 
       if N <> '' then
-        TextRect(R, R.Left, R.Top, S + sLineBreak + sLineBreak + '🗭' + ' ' + N, FTS)
+        TextRect(R, R.Left, R.Top, S + sLineBreak + sLineBreak + '🗭', FTS) //TextRect(R, R.Left, R.Top, S + sLineBreak + sLineBreak + '🗭' + ' ' + N, FTS)
       else
         TextRect(R, R.Left, R.Top, S, FTS);
     end;
@@ -378,10 +378,13 @@ begin
             _TextOut(CustomDrawRect, RemoveTSTags(Subtitles[i].Text), Subtitles[i].Notes, tlTop);
             FTS.Alignment := taLeftJustify;
 
-            if not FFPSTimeMode then
-              _TextOut(CustomDrawRect, '#' + IntToStr(i+1) + '  ' + TimeMSToShortString(Subtitles.Duration[i], 1), '', tlBottom)
-            else
-              _TextOut(CustomDrawRect, '#' + IntToStr(i+1) + '  ' + TimeMSToShortStringFrames(Subtitles.Duration[i], 1, FFPS), '', tlBottom);
+            if (CustomDrawRect.Height > (FTimeLineHeight*2)) and (Pos(LineEnding, Subtitles[i].Text) = 0) then // prevent text overlap
+            begin
+              if not FFPSTimeMode then
+                _TextOut(CustomDrawRect, '#' + IntToStr(i+1) + '  ' + TimeMSToShortString(Subtitles.Duration[i], 1), '', tlBottom)
+              else
+                _TextOut(CustomDrawRect, '#' + IntToStr(i+1) + '  ' + TimeMSToShortStringFrames(Subtitles.Duration[i], 1, FFPS), '', tlBottom);
+            end;
           end;
         end;
       end;
