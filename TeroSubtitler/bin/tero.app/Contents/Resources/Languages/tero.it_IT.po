@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 10.02.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 15.02.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
@@ -1191,7 +1191,7 @@ msgstr "URL"
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
 msgid "Audio tracks: %d"
-msgstr ""
+msgstr "Tracce audio: %d"
 
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
@@ -1200,32 +1200,32 @@ msgstr "Errore nella creazione del video."
 #: proclocalize.lngviduration
 #, object-pascal-format
 msgid "Duration: %s (%d frames)"
-msgstr ""
+msgstr "Durata: %s (%d fotogrammi)"
 
 #: proclocalize.lngvifile
 #, object-pascal-format
 msgid "File: %s"
-msgstr ""
+msgstr "File: %s"
 
 #: proclocalize.lngvifps
 #, object-pascal-format
 msgid "FPS: %s"
-msgstr ""
+msgstr "FPS: %s"
 
 #: proclocalize.lngviresolution
 #, object-pascal-format
 msgid "Resolution: %dx%d"
-msgstr ""
+msgstr "Risoluzione: %dx%d"
 
 #: proclocalize.lngvisubtitletracks
 #, object-pascal-format
 msgid "Subtitle tracks: %d"
-msgstr ""
+msgstr "Tracce sottotitoli: %d"
 
 #: proclocalize.lngvivideotracks
 #, object-pascal-format
 msgid "Video tracks: %d"
-msgstr ""
+msgstr "Tracce video: %d"
 
 #: proclocalize.lngwebvideounsupported
 msgid "The video format is not supported for playback in the web browser."
@@ -1364,12 +1364,12 @@ msgstr "Da audio a testo"
 #: tfrmaudiototext.chkmaxlinecount.caption
 msgctxt "tfrmaudiototext.chkmaxlinecount.caption"
 msgid "Maximum line count"
-msgstr ""
+msgstr "N. massimo linee"
 
 #: tfrmaudiototext.chkmaxlinelength.caption
 msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
 msgid "Maximum line length"
-msgstr ""
+msgstr "Lunghezza massima linea"
 
 #: tfrmaudiototext.chktranslate.caption
 msgid "Translate to Еnglish"
@@ -3776,7 +3776,7 @@ msgstr "Effetto anticato"
 
 #: tfrmmain.actvideoinformation.caption
 msgid "Information..."
-msgstr ""
+msgstr "Informazioni..."
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
@@ -4280,7 +4280,7 @@ msgstr "Usa finestra di dialogo Tero"
 
 #: tfrmsettings.chkwritebom.caption
 msgid "Write BOM on save"
-msgstr ""
+msgstr "Scrivi BOM nel salvataggio"
 
 #: tfrmsettings.lbladditionalmpvoptions.caption
 msgid "Additional mpv options"
@@ -5152,4 +5152,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
