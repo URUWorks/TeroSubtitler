@@ -1092,6 +1092,22 @@ msgstr "Words per minute average: %.2f"
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 
+#: proclocalize.lngsubtitlespecificationerror
+msgid "The current subtitle does not meet the specifications of the format to be saved."
+msgstr "The current subtitle does not meet the specifications of the format to be saved."
+
+#: proclocalize.lngsubtitlespecificationerroralign
+msgid "There are entries with vertical alignment that are not allowed."
+msgstr "There are entries with vertical alignment that are not allowed."
+
+#: proclocalize.lngsubtitlespecificationerrorbr
+msgid "There are entries that exceed the line break."
+msgstr "There are entries that exceed the line break."
+
+#: proclocalize.lngsubtitlespecificationerrorfps
+msgid "Current frame rate does not match."
+msgstr "Current frame rate does not match."
+
 #: proclocalize.lngsuccess
 msgid "Success."
 msgstr "Success."
