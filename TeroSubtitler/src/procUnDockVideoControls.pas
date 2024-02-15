@@ -130,8 +130,9 @@ begin
       frmWaveform := TfrmWaveform.Create(Application);
       frmWaveform.Caption := ExtractFileName(WAVE.FileName);
       SplitterWaveform.Hide;
-      LayoutWaveform.Parent   := frmWaveform;
-      LayoutWaveform.Align    := alClient;
+      LayoutWaveform.Parent := frmWaveform;
+      LayoutWaveform.Align  := alClient;
+      LayoutWaveform.Constraints.MaxHeight := 0;
       frmWaveform.Constraints := LayoutWaveform.Constraints;
       CheckColorTheme(frmWaveform);
       LoadFormSettings(frmWaveform);
@@ -156,6 +157,7 @@ begin
 
         LayoutWaveform.Parent    := frmMain;
         LayoutWaveform.Align     := alBottom;
+        LayoutWaveform.Constraints.MaxHeight := 300;
         LayoutWaveform.Visible   := actWaveformPreview.Checked;
         SplitterWaveform.Visible := actWaveformPreview.Checked;
         SplitterWaveform.Top     := 0;

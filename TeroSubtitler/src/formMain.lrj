@@ -8,6 +8,8 @@
 {"hash":132350069,"name":"tfrmmain.tedfinal.hint","sourcebytes":[70,105,110,97,108,32,116,105,109,101],"value":"Final time"},
 {"hash":210283758,"name":"tfrmmain.tedduration.hint","sourcebytes":[68,117,114,97,116,105,111,110],"value":"Duration"},
 {"hash":5672085,"name":"tfrmmain.tedpause.hint","sourcebytes":[80,97,117,115,101],"value":"Pause"},
+{"hash":71609476,"name":"tfrmmain.mmotext.labelmemo.caption","sourcebytes":[109,109,111,84,101,120,116],"value":"mmoText"},
+{"hash":241381198,"name":"tfrmmain.mmotranslation.labelmemo.caption","sourcebytes":[109,109,111,84,114,97,110,115,108,97,116,105,111,110],"value":"mmoTranslation"},
 {"hash":243632098,"name":"tfrmmain.cboinputfps.hint","sourcebytes":[70,80,83,32,111,102,32,116,104,101,32,109,111,118,105,101,32,116,104,101,32,111,112,101,110,101,100,32,115,117,98,116,105,116,108,101,32,102,105,108,101,32,119,97,115,32,109,97,100,101,32,102,111,114],"value":"FPS of the movie the opened subtitle file was made for"},
 {"hash":88349397,"name":"tfrmmain.cbofps.hint","sourcebytes":[84,97,114,103,101,116,32,70,80,83,32,111,102,32,115,117,98,116,105,116,108,101,32,102,105,108,101],"value":"Target FPS of subtitle file"},
 {"hash":32,"name":"tfrmmain.lblseparatorfps.caption","sourcebytes":[32],"value":" "},
