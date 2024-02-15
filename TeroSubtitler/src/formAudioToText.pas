@@ -321,6 +321,8 @@ begin
     ShowErrorMessageDialog(Format(lngExtractAppError, [FFMPEG_EXE]))
   else if not FileExists(GetAudioToTextAppFile) then
     ShowErrorMessageDialog(Format(lngExtractAppError, [ExtractFileName(GetAudioToTextAppFile(True))]))
+  else if cboModel.Items.Count = 0 then
+    btnModel.SetFocus
   else if (Tools.FFmpeg_ParamsForAudioExtract <> '') and ((Tools.WhisperCPP_Params <> '') or (Tools.FasterWhisper_Params <> '')) and (cboModel.ItemIndex >= 0) then
   begin
     CancelProcess     := False;
