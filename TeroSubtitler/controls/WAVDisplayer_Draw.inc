@@ -216,8 +216,8 @@ begin
       // Draw text
       {$IFDEF USEBGRABITMAP}CanvasBGRA.Font.BGRAColor{$ELSE}Canvas.Font.Color{$ENDIF} := CustomColors.Text;
       {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.TextOut(x1, PosRect.Top, PosString);
-      // Draw subdivision?
-      if FDrawSubdivision then
+      // Draw subdivision
+      if not FFPSTimeMode then
       begin
         x2 := x + TimeToPixel(FStepMs div 2);
         {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x2, PosRect.Bottom -4, x2, PosRect.Bottom);
@@ -576,8 +576,11 @@ begin
         x := TimeToPixel(p - FPositionMS);
         {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, 0, x, GetCanvasHeight);
 
-        x1 := x + TimeToPixel(FStepMs div 2);
-        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x1, 0, x1, GetCanvasHeight);
+        if not FFPSTimeMode then
+        begin
+          x1 := x + TimeToPixel(FStepMs div 2);
+          {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x1, 0, x1, GetCanvasHeight);
+        end;
 
         p := p + FStepMs;
       end;

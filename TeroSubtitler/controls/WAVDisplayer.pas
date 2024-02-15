@@ -125,7 +125,6 @@ type
     FFileName        : String;
     FFPS             : Single;
     FFPSTimeMode     : Boolean;
-    FDrawSubdivision : Boolean;
 
     FLengthMS      : Integer;
     FPositionMS    : Integer;
@@ -506,10 +505,9 @@ begin
   FTS.SingleLine  := False;
   //FTS.EndEllipsis := True;
 
-  FFPS             := 25;
-  FFPSTimeMode     := False;
-  FDrawSubdivision := True;
-  FEmptyText       := '';
+  FFPS         := 25;
+  FFPSTimeMode := False;
+  FEmptyText   := '';
 
   with CustomColors do
   begin
@@ -620,7 +618,12 @@ begin
   if not IsTimeLineEnabled then
     Result := 0
   else
-    Result := Round(Time / (FPageSizeMs / Width));
+  begin
+    if FFPSTimeMode then
+      Result := Round(GetCorrectTimePos(Time) / (FPageSizeMs / Width))
+    else
+      Result := Round(Time / (FPageSizeMs / Width));
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -837,11 +840,9 @@ end;
 
 procedure TUWWaveformDisplayer.CalculateTimeDivisionStepMs;
 var
-  MaxPosStep, FrameLen: Integer;
+  MaxPosStep : Integer;
 begin
   // Do some little calculation to try to show "round" time
-  FDrawSubdivision := True;
-
   if FFPSTimeMode then
   begin
     MaxPosStep := Round(Width / (Canvas.TextWidth('0:00:00:00') * 2));
@@ -849,15 +850,8 @@ begin
     if FStepMs = 0 then FStepMs := 1;
 
     FStepLog := Trunc(Power(10, Trunc(Log10(FStepMs))));
-    FStepMs  := FStepMs div FStepLog * FStepLog;
-
-    FrameLen := FramesToTime(1, FFPS);
-
-    if (FStepMs < (FrameLen*2)) then
-    begin
-      FDrawSubdivision := False;
-      FStepMs := FrameLen;
-    end
+    FStepMs  := GetCorrectTimePos(FStepMs div FStepLog * FStepLog);
+    if FStepMs = 0 then FStepMs := 1;
   end
   else
   begin
@@ -1886,7 +1880,7 @@ const
 
 var
   NewPosition, NewPageSize : Integer;
-  UpdateFlags              : TUpdateViewFlags;
+  UpdateFlags : TUpdateViewFlags;
 begin
   if (Subtitle.InitialTime >= Subtitle.FinalTime) then Exit;
 
