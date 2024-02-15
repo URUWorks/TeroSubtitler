@@ -429,6 +429,40 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function AllowSaveFormat(const AFormat: TUWSubtitleFormats): Boolean;
+var
+  F : AnsiString;
+  i : Integer;
+begin
+  Result := False;
+
+  if AFormat = sfITunesTimedText then
+  begin
+    F := SingleToStr(Workspace.FPS.OutputFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.');
+    if ((F <> '29.97') and (F <> '25') and (F <> '24') and (F <> '23.976')) then
+    begin
+      ShowErrorMessageDialog(Format('%s%s%s', [lngSubtitleSpecificationError, LineEnding+LineEnding, lngSubtitleSpecificationErrorFPS]), '', False, False);
+      Exit;
+    end;
+
+    for i := 0 to Subtitles.Count-1 do
+      if LineCount(Subtitles[i].Text, LineEnding) > 2 then
+      begin
+        ShowErrorMessageDialog(Format('%s%s%s', [lngSubtitleSpecificationError, LineEnding+LineEnding, lngSubtitleSpecificationErrorBR]), '', False, False);
+        Exit;
+      end
+      else if (Subtitles[i].VAlign = svaCenter) then
+      begin
+        ShowErrorMessageDialog(Format('%s%s%s', [lngSubtitleSpecificationError, LineEnding+LineEnding, lngSubtitleSpecificationErrorAlign]), '', False, False);
+        Exit;
+      end;
+  end;
+
+  Result := True;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 var
   _FPS      : Single;
@@ -732,10 +766,8 @@ begin
     CD := TfrmCustomFileDlg.Create(NIL);
     try
       CD.FileName := GetSuggestedFileNameForSave;
-      if CD.Execute(dmSave) then
-      begin
-        SaveSubtitle(CD.FileName, CD.Format, SubtitleMode, CD.Encoding, CD.FPS);
-      end;
+      if CD.Execute(dmSave) and AllowSaveFormat(TUWSubtitleFormats(SD.FilterIndex)) then
+        SaveSubtitle(CD.FileName, CD.Format, SubtitleMode, CD.Encoding, CD.FPS)
     finally
       CD.Free;
     end;
@@ -753,10 +785,8 @@ begin
       {$ENDIF}
 
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
-      if SD.Execute then
-      begin
+      if SD.Execute and AllowSaveFormat(TUWSubtitleFormats(SD.FilterIndex)) then
         SaveSubtitle(SD.FileName, TUWSubtitleFormats(SD.FilterIndex), SubtitleMode);
-      end;
     finally
       SD.Free;
     end;

@@ -57,6 +57,10 @@ resourcestring
   lngTranscriptionModeExit = 'Exiting transcription mode will lose any unsaved changes.';
   lngSourceModeWarning = 'Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost.';
   lngSubtitleHasErrorsToFix = 'The current subtitle set contains errors that are recommended to be resolved, but it can be saved.';
+  lngSubtitleSpecificationError = 'The current subtitle does not meet the specifications of the format to be saved.';
+  lngSubtitleSpecificationErrorFPS = 'Current frame rate does not match.';
+  lngSubtitleSpecificationErrorBR = 'There are entries that exceed the line break.';
+  lngSubtitleSpecificationErrorAlign = 'There are entries with vertical alignment that are not allowed.';
   lngTextFormatted = 'Export formatted text?';
   lngNoInternetConnection = 'No Internet connection available';
   lngFailedToDownload = 'No content downloaded, missing file or no Internet connection.';
