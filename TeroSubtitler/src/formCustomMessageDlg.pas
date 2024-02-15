@@ -42,7 +42,7 @@ type
   private
 
   public
-    function Execute(const AMessage: String; const ACaption: String = ''; const AIcon: TIconMode = imQuestion; const ACustomAction: String = ''; const ACustomActionClick: TNotifyEvent = NIL): Integer;
+    function Execute(const AMessage: String; const ACaption: String = ''; const AIcon: TIconMode = imQuestion; const ABold: Boolean = True; const ACenter: Boolean = True; const ACustomAction: String = ''; const ACustomActionClick: TNotifyEvent = NIL): Integer;
   end;
 
 var
@@ -78,7 +78,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TfrmCustomMessageDlg.Execute(const AMessage: String; const ACaption: String = ''; const AIcon: TIconMode = imQuestion; const ACustomAction: String = ''; const ACustomActionClick: TNotifyEvent = NIL): Integer;
+function TfrmCustomMessageDlg.Execute(const AMessage: String; const ACaption: String = ''; const AIcon: TIconMode = imQuestion; const ABold: Boolean = True; const ACenter: Boolean = True; const ACustomAction: String = ''; const ACustomActionClick: TNotifyEvent = NIL): Integer;
 var
   c: Integer;
 begin
@@ -101,6 +101,12 @@ begin
     Caption := ProgramName
   else
     Caption := ACaption;
+
+  if not ABold then
+    lblMessage.Font.Style := [];
+
+  if not ACenter then
+    lblMessage.Alignment := taLeftJustify;
 
   lblMessage.Caption := AMessage;
   lblCustomAction.Caption := ACustomAction;
