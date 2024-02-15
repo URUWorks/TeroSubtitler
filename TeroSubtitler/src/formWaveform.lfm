@@ -1,12 +1,10 @@
 object frmWaveform: TfrmWaveform
   Left = 249
-  Height = 90
+  Height = 100
   Top = 131
   Width = 400
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
-  Constraints.MinHeight = 90
-  Constraints.MinWidth = 400
   FormStyle = fsStayOnTop
   OnClose = FormClose
   Position = poMainFormCenter
