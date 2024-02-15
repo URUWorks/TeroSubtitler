@@ -1,12 +1,14 @@
 1.0.1.7 (x.x.2024)
 - fixed: Persian text displays wrong in list view #244
 - fixed: No BOM in UTF-8 files. #213
+- fixed: Whisper.cpp and Faster-Whisper on Mac (arm) #193
 - fixed: [macOS] Disable text box if there is no subtitle #39
 - fixed: Wrong time values imported in a format variant [SubtitleAPI/TimedText]
 - fixed: Some properties are not reflected when "mpv handles subtitles for preview" option is active
 - fixed: Changed language not reflected in the state of the libraries in the wizard window
 - fixed: Minimum gapping not respected when applying snap times to shot changes
 - updated: Italian language (thx GitGianluc/bovirus)
+- improved: Changed the appearance of the timeline
 - improved: UI - More space in Settings and increase string width #253
 - improved: Audio to text: cancel download of model #22
 - improved: Video context menu
