@@ -1611,51 +1611,6 @@ msgctxt "tfrmconventions.caption"
 msgid "Conventions"
 msgstr "Правила"
 
-#: tfrmconventions.lblmaxdurationms.caption
-msgctxt "tfrmconventions.lblmaxdurationms.caption"
-msgid "Max. duration (ms)"
-msgstr "Макс. длина (мс)"
-
-#: tfrmconventions.lblmaxlinecount.caption
-msgctxt "tfrmconventions.lblmaxlinecount.caption"
-msgid "Max. line count"
-msgstr "Макс. количество строк"
-
-#: tfrmconventions.lblmindurationms.caption
-msgctxt "tfrmconventions.lblmindurationms.caption"
-msgid "Min. duration / per word (ms)"
-msgstr "Мин. длина 1 слова (мс)"
-
-#: tfrmconventions.lblnewsubtitlems.caption
-msgctxt "tfrmconventions.lblnewsubtitlems.caption"
-msgid "New subtitle (ms)"
-msgstr "Новый субтитр (мс)"
-
-#: tfrmconventions.lblprohibitedchars.caption
-msgctxt "tfrmconventions.lblprohibitedchars.caption"
-msgid "Prohibited characters"
-msgstr "Запрещённые символы"
-
-#: tfrmconventions.lblrepeatablechars.caption
-msgctxt "tfrmconventions.lblrepeatablechars.caption"
-msgid "Repeatable characters"
-msgstr "Повторяющиеся символы"
-
-#: tfrmconventions.lblscsnapincues.caption
-msgctxt "tfrmconventions.lblscsnapincues.caption"
-msgid "Snap in cues after SC (frames)"
-msgstr "Привязка реплик после SC (кадров)"
-
-#: tfrmconventions.lblscsnapoutcues.caption
-msgctxt "tfrmconventions.lblscsnapoutcues.caption"
-msgid "Snap out cues before SC (frames)"
-msgstr "Привязка реплик до SC (кадров)"
-
-#: tfrmconventions.lblsubtitlepausems.caption
-msgctxt "tfrmconventions.lblsubtitlepausems.caption"
-msgid "Min. gap"
-msgstr "Мин. зазор"
-
 #: tfrmconvertcase.btnapply.caption
 msgctxt "tfrmconvertcase.btnapply.caption"
 msgid "Apply"

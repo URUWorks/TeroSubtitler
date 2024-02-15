@@ -1609,53 +1609,6 @@ msgctxt "tfrmconventions.caption"
 msgid "Conventions"
 msgstr "Convenções"
 
-#: tfrmconventions.lblmaxdurationms.caption
-msgctxt "tfrmconventions.lblmaxdurationms.caption"
-msgid "Max. duration (ms)"
-msgstr "Duração máx. (ms)"
-
-#: tfrmconventions.lblmaxlinecount.caption
-msgctxt "tfrmconventions.lblmaxlinecount.caption"
-msgid "Max. line count"
-msgstr "Máx. de linhas"
-
-#: tfrmconventions.lblmindurationms.caption
-msgctxt "tfrmconventions.lblmindurationms.caption"
-msgid "Min. duration / per word (ms)"
-msgstr "Duração mín. / por palavra (ms)"
-
-#: tfrmconventions.lblnewsubtitlems.caption
-msgctxt "tfrmconventions.lblnewsubtitlems.caption"
-msgid "New subtitle (ms)"
-msgstr "Nova legenda (ms)"
-
-#: tfrmconventions.lblprohibitedchars.caption
-msgctxt "tfrmconventions.lblprohibitedchars.caption"
-msgid "Prohibited characters"
-msgstr "Caracteres proibidos"
-
-#: tfrmconventions.lblrepeatablechars.caption
-msgctxt "tfrmconventions.lblrepeatablechars.caption"
-msgid "Repeatable characters"
-msgstr "Caracteres repetíveis"
-
-#: tfrmconventions.lblscsnapincues.caption
-#, fuzzy
-msgctxt "tfrmconventions.lblscsnapincues.caption"
-msgid "Snap in cues after SC (frames)"
-msgstr "Ajustar entrada (quadros)"
-
-#: tfrmconventions.lblscsnapoutcues.caption
-#, fuzzy
-msgctxt "tfrmconventions.lblscsnapoutcues.caption"
-msgid "Snap out cues before SC (frames)"
-msgstr "Ajustar saída (quadros)"
-
-#: tfrmconventions.lblsubtitlepausems.caption
-msgctxt "tfrmconventions.lblsubtitlepausems.caption"
-msgid "Min. gap"
-msgstr "Mín. de intervalo"
-
 #: tfrmconvertcase.btnapply.caption
 msgctxt "tfrmconvertcase.btnapply.caption"
 msgid "Apply"

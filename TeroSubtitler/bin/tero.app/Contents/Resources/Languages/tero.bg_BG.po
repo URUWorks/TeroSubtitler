@@ -1605,51 +1605,6 @@ msgctxt "tfrmconventions.caption"
 msgid "Conventions"
 msgstr "Условности"
 
-#: tfrmconventions.lblmaxdurationms.caption
-msgctxt "tfrmconventions.lblmaxdurationms.caption"
-msgid "Max. duration (ms)"
-msgstr "Продължителност под (ms)"
-
-#: tfrmconventions.lblmaxlinecount.caption
-msgctxt "tfrmconventions.lblmaxlinecount.caption"
-msgid "Max. line count"
-msgstr "Редове до"
-
-#: tfrmconventions.lblmindurationms.caption
-msgctxt "tfrmconventions.lblmindurationms.caption"
-msgid "Min. duration / per word (ms)"
-msgstr "Продължителност под/ на дума (мс)"
-
-#: tfrmconventions.lblnewsubtitlems.caption
-msgctxt "tfrmconventions.lblnewsubtitlems.caption"
-msgid "New subtitle (ms)"
-msgstr "Нови надпис (ms)"
-
-#: tfrmconventions.lblprohibitedchars.caption
-msgctxt "tfrmconventions.lblprohibitedchars.caption"
-msgid "Prohibited characters"
-msgstr "Забранени знаци"
-
-#: tfrmconventions.lblrepeatablechars.caption
-msgctxt "tfrmconventions.lblrepeatablechars.caption"
-msgid "Repeatable characters"
-msgstr "Повтарящи се знаци"
-
-#: tfrmconventions.lblscsnapincues.caption
-msgctxt "tfrmconventions.lblscsnapincues.caption"
-msgid "Snap in cues after SC (frames)"
-msgstr ""
-
-#: tfrmconventions.lblscsnapoutcues.caption
-msgctxt "tfrmconventions.lblscsnapoutcues.caption"
-msgid "Snap out cues before SC (frames)"
-msgstr ""
-
-#: tfrmconventions.lblsubtitlepausems.caption
-msgctxt "tfrmconventions.lblsubtitlepausems.caption"
-msgid "Min. gap"
-msgstr "Междина поне"
-
 #: tfrmconvertcase.btnapply.caption
 msgctxt "tfrmconvertcase.btnapply.caption"
 msgid "Apply"
