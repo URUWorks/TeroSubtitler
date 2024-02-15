@@ -2,6 +2,7 @@
 - fixed: Persian text displays wrong in list view #244
 - fixed: No BOM in UTF-8 files. #213
 - fixed: Whisper.cpp and Faster-Whisper on Mac (arm) #193
+- fixed: Don’t allow export of iTT if it breaches specification #158
 - fixed: [macOS] Disable text box if there is no subtitle #39
 - fixed: Wrong time values imported in a format variant [SubtitleAPI/TimedText]
 - fixed: Some properties are not reflected when "mpv handles subtitles for preview" option is active
