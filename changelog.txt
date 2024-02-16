@@ -12,7 +12,10 @@
 - updated: Italian language (thx GitGianluc/bovirus)
 - improved: Changed the appearance of the timeline
 - improved: UI - More space in Settings and increase string width #253
+- improved: Add conventions for Prime Video #159
+- improved: Conventions: Disney #49
 - improved: Audio to text: cancel download of model #22
+- improved: Add more Netflix profiles in Conventions #9
 - improved: Video context menu
 - added: Controlling the length of the Whisper.cpp generated text segments #248
 - added: Video information
