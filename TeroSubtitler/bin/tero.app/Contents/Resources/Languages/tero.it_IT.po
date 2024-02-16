@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 15.02.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 16.02.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: GitGianluc\n"
+"Last-Translator: bovirus <bovirus@gmail.comn>\n"
+"Language-Team: GitGianluc e bovirus\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1098,19 +1098,19 @@ msgstr "L’attuale insieme di sottotitoli contiene errori che ti suggeriamo di 
 
 #: proclocalize.lngsubtitlespecificationerror
 msgid "The current subtitles do not meet the specifications of the format to be saved."
-msgstr ""
+msgstr "I sottotitoli attuali non soddisfano le specifiche del formato da salvare."
 
 #: proclocalize.lngsubtitlespecificationerroralign
 msgid "There are entries with vertical alignment which are not allowed."
-msgstr ""
+msgstr "Ci sono elementi con allineamento verticale che non è consentito."
 
 #: proclocalize.lngsubtitlespecificationerrorbr
 msgid "There are entries which exceed the line break."
-msgstr ""
+msgstr "Ci sono elementi che superano l'interruzione di riga."
 
 #: proclocalize.lngsubtitlespecificationerrorfps
 msgid "Current frame rate does not match."
-msgstr ""
+msgstr "La frequenza fotogrammi attuale non corrisponde."
 
 #: proclocalize.lngsuccess
 msgid "Success."
@@ -3456,7 +3456,7 @@ msgstr "Parole per minuto"
 
 #: tfrmmain.actshowthumbnails.caption
 msgid "Show thumbnails"
-msgstr ""
+msgstr "Visualizza miniature"
 
 #: tfrmmain.actshowtoolbarencoding.caption
 msgctxt "tfrmmain.actshowtoolbarencoding.caption"
@@ -4472,7 +4472,7 @@ msgstr "Colore"
 
 #: tfrmsettings.lblwaveentry.caption
 msgid "Entry"
-msgstr ""
+msgstr "Elemento"
 
 #: tfrmsettings.lblwaveform.caption
 msgctxt "tfrmsettings.lblwaveform.caption"
@@ -5123,4 +5123,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
