@@ -1001,13 +1001,12 @@ begin
         FDynamicEditTimeMs := Subtitle.InitialTime;
       end;
     end;
+
+    if (NewDynamicEditMode = demWhole) then
+      Cursor := crHandPoint
+    else if (NewDynamicEditMode = demInitial) or (NewDynamicEditMode = demFinal) then
+      Cursor := crHSplit;
   end;
-
-  if (NewDynamicEditMode = demWhole) then
-    Cursor := crHandPoint;
-
-  if (NewDynamicEditMode = demInitial) or (NewDynamicEditMode = demFinal) then
-    Cursor := crHSplit;
 
   if (NewDynamicEditMode <> demNone) then
   begin
@@ -1027,10 +1026,10 @@ begin
   if (FDynamicSelSub <> FDynamicSelOldSub) then
   begin
     if Assigned(FDynamicSelSub) and (NewDynamicEditMode <> demNone) then
-    begin
-      SetMinBlankAt(FDynamicSelSub^.InitialTime)
-    end;
-    UpdateView([uvfSubtitle]);
+      SetMinBlankAt(FDynamicSelSub^.InitialTime);
+
+    if FDrawGAP then
+      UpdateView([uvfSubtitle]);
   end;
 end;
 
@@ -1286,9 +1285,7 @@ begin
       begin
         Dist := FindCorrectedSnappingPoint(ACursorPosMS);
         if (Dist <> -1) then
-        begin
           ACursorPosMS := Dist;
-        end;
       end;
 
       if (FDynamicSelValueMs <> -1) and (FDynamicSelValueMs <> ACursorPosMS) then
@@ -1321,7 +1318,7 @@ begin
           end;
         end //Move cursors
         else if (FDynamicEditMode = demWhole) and Assigned(FSelectedSubtitle) then
-        begin  //Drag selection
+        begin //Drag selection
           SubLen := Range(FOldFinalTime - FOldInitialTime, 0, FOldFinalTime);
           NewIT  := FOldInitialTime + ((PixelToTime(X) + FPositionMS) - FOldMouseDownX);
           NewIT := GetCorrectTimePos(NewIT);
@@ -1402,7 +1399,7 @@ begin
       end;
 
       // Check selection
-{      if not SelectionIsEmpty then
+     {if not SelectionIsEmpty then
       begin
         SubtitleSelWindow := PixelToTime(4);
         if (SubtitleSelWindow < 1) then SubtitleSelWindow := 1;
@@ -1411,13 +1408,13 @@ begin
     end;
 
     if SetMinBlankAt(ACursorPosMs) then
-    begin
       Include(UpdateFlags, uvfSubtitle);
-    end;
+
     Cursor            := crDefault;
     FDynamicEditMode  := demNone;
     FDynamicSelOldSub := FDynamicSelSub;
     FDynamicSelSub    := NIL;
+
     if (FDynamicSelSub <> FDynamicSelOldSub) then
       Include(UpdateFlags, uvfSubtitle);
   end;

@@ -176,9 +176,9 @@ end;
 
 procedure TUWWaveformDisplayer.DrawTimeLine(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
 var
-  PosRect      : TRect;
-  PosString    : String;
-  p, x, x1, x2 : Integer;
+  PosRect : TRect;
+  PosString : String;
+  p, x, x1, x2, oldx : Integer;
 begin
   if not IsTimeLineEnabled then Exit;
 
@@ -201,6 +201,7 @@ begin
 
     // Draw background
     {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Brush.Style := bsClear;
+    oldx := -1;
     p := (FPositionMS div FStepMs * FStepMs);
     while (p < FPositionMS + FPageSizeMS) do
     begin
@@ -215,7 +216,11 @@ begin
       x1 := x + 3; //x - (CanvasBGRA.TextWidth(PosString) div 2);
       // Draw text
       {$IFDEF USEBGRABITMAP}CanvasBGRA.Font.BGRAColor{$ELSE}Canvas.Font.Color{$ENDIF} := CustomColors.Text;
-      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.TextOut(x1, PosRect.Top, PosString);
+      if oldx <> x1 then
+      begin
+        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.TextOut(x1, PosRect.Top, PosString);
+        oldx := x1;
+      end;
       // Draw subdivision
       if not FFPSTimeMode then
       begin

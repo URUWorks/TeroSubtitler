@@ -192,7 +192,7 @@ begin
     end;
 
     ThumbnailsInProcess := True;
-    gt := TGenerateThumbnails.Create(MPV.FileName, mpv.GetMediaLenInMs, @DoThumbnailsDone);
+    gt := TGenerateThumbnails.Create(MPV.FileName, mpv.GetMediaLenInMs, gtmArray, @DoThumbnailsDone);
     gt.Start;
   end;
 end;
