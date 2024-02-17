@@ -49,7 +49,7 @@ msgstr "Valori errati"
 
 #: proclocalize.lngasbreaklonglines
 msgid "Line(s) too long"
-msgstr "Liena/e troppo estesa/e"
+msgstr "Linea/e troppo estesa/e"
 
 #: proclocalize.lngascustom
 msgid "Custom"
