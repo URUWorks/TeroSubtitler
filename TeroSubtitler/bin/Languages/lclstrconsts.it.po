@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lcstrconts - versione 11.02.2024\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-02-11 11:40+0100\n"
+"PO-Revision-Date: 2024-02-17 14:36+0100\n"
 "Last-Translator: Giuliano Colla <giuliano.colla@fastwebnet.it>\n"
 "Language-Team: Lazarus\n"
 "Language: it\n"
@@ -565,7 +565,7 @@ msgstr "Info Guida in linea su direttiva '%s' non trovata."
 #: lclstrconsts.rshelphelpfordirectivenotfoundindatabase
 #, object-pascal-format
 msgid "Help for directive \"%s\" not found in Database \"%s\"."
-msgstr "Info Guida in liena su direttiva '%s' non trovata nel file '%s'."
+msgstr "Info Guida in linea su direttiva '%s' non trovata nel file '%s'."
 
 #: lclstrconsts.rshelphelpkeywordnotfound
 #, object-pascal-format
