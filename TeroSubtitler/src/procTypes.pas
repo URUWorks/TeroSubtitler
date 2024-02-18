@@ -43,9 +43,9 @@ var
 
 const
 
-  DefFramesFormat   = 'hh:mm:ss:ff';
-  DefFPS            = 23.976;
-  DefFPSList        : array[0..15] of Single = (8, 10, 12, 15, 16, 20, 23.976, 24, 25, 29.97, 30, 48, 50, 59.94, 60, 75);
+  DefFramesFormat = 'hh:mm:ss:ff';
+  DefFPS          = 23.976;
+  DefFPSList      : array[0..12] of Single = (23.976, 24, 25, 29.97, 30, 47.952, 48, 50, 59.94, 60, 75, 100, 120);
 
   TVideoExts : array[0..21] of String =
   (
