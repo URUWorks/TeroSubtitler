@@ -4,6 +4,7 @@
 - fixed: Whisper.cpp and Faster-Whisper on Mac (arm) #193
 - fixed: Don’t allow export of iTT if it breaches specification #158
 - fixed: [macOS] Disable text box if there is no subtitle #39
+- fixed: Toolbar: don't allow buttons to encroach others when repositioning #27
 - fixed: Better grid in timeline #6
 - fixed: Wrong time values imported in a format variant [SubtitleAPI/TimedText]
 - fixed: Some properties are not reflected when "mpv handles subtitles for preview" option is active
@@ -11,6 +12,7 @@
 - fixed: Minimum gapping not respected when applying snap times to shot changes
 - updated: Italian language (thx GitGianluc/bovirus)
 - improved: Changed the appearance of the timeline
+- improved: Toolbars and user interface
 - improved: UI - More space in Settings and increase string width #253
 - improved: Add conventions for Prime Video #159
 - improved: Conventions: Disney #49
