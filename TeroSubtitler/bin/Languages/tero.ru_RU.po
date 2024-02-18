@@ -948,6 +948,7 @@ msgid "Frames"
 msgstr "Кадры"
 
 #: proclocalize.lngssgeneral
+msgctxt "proclocalize.lngssgeneral"
 msgid "General"
 msgstr "Основные"
 
@@ -975,10 +976,6 @@ msgstr "Не выбрано"
 #: proclocalize.lngssshortcuts
 msgid "Shortcuts"
 msgstr "Горячие клавиши"
-
-#: proclocalize.lngsstoolbar
-msgid "Toolbar"
-msgstr "Панель инструментов"
 
 #: proclocalize.lngsstools
 msgctxt "proclocalize.lngsstools"
@@ -2199,6 +2196,7 @@ msgid "Write cue identifiers"
 msgstr "Записать идентификаторы реплик"
 
 #: tfrmformatproperties.lblasalignment.caption
+msgctxt "tfrmformatproperties.lblasalignment.caption"
 msgid "Alignment"
 msgstr "Выравнивание"
 
@@ -2535,6 +2533,7 @@ msgid "Audio"
 msgstr "Аудио"
 
 #: tfrmgeneratevideo.rdoothers.caption
+msgctxt "tfrmgeneratevideo.rdoothers.caption"
 msgid "Others"
 msgstr "Остальное"
 
@@ -3462,6 +3461,39 @@ msgctxt "tfrmmain.actshowcolumnwpm.caption"
 msgid "Words per minute"
 msgstr "Слов в минуту"
 
+#: tfrmmain.actshoweditortoolbaralignment.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbaralignment.caption"
+msgid "Alignment"
+msgstr "Выравнивание"
+
+#: tfrmmain.actshoweditortoolbarbasic.caption
+msgid "Basic"
+msgstr ""
+
+#: tfrmmain.actshoweditortoolbarentry.caption
+msgctxt "tfrmmain.actshoweditortoolbarentry.caption"
+msgid "Entry"
+msgstr ""
+
+#: tfrmmain.actshoweditortoolbarformat.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarformat.caption"
+msgid "Format"
+msgstr "Формат"
+
+#: tfrmmain.actshoweditortoolbarlines.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarlines.caption"
+msgid "Lines"
+msgstr "Строки"
+
+#: tfrmmain.actshoweditortoolbarwords.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarwords.caption"
+msgid "Words"
+msgstr "Слова"
+
 #: tfrmmain.actshowthumbnails.caption
 msgid "Show thumbnails"
 msgstr ""
@@ -3470,6 +3502,17 @@ msgstr ""
 msgctxt "tfrmmain.actshowtoolbarencoding.caption"
 msgid "Encoding"
 msgstr "Кодировка"
+
+#: tfrmmain.actshowtoolbarentry.caption
+msgctxt "tfrmmain.actshowtoolbarentry.caption"
+msgid "Entry"
+msgstr ""
+
+#: tfrmmain.actshowtoolbarfile.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowtoolbarfile.caption"
+msgid "File"
+msgstr "Файл"
 
 #: tfrmmain.actshowtoolbarformat.caption
 msgctxt "tfrmmain.actshowtoolbarformat.caption"
@@ -3481,14 +3524,63 @@ msgctxt "tfrmmain.actshowtoolbarfps.caption"
 msgid "FPS"
 msgstr ""
 
-#: tfrmmain.actshowtoolbarmain.caption
-msgctxt "tfrmmain.actshowtoolbarmain.caption"
-msgid "Main"
-msgstr "Вкл/выкл главную панель инструментов"
+#: tfrmmain.actshowtoolbargeneral.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowtoolbargeneral.caption"
+msgid "General"
+msgstr "Основные"
 
 #: tfrmmain.actshowtoolbarquickaction.caption
 msgid "Quick Action"
 msgstr "Быстрые действия"
+
+#: tfrmmain.actshowtoolbarview.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowtoolbarview.caption"
+msgid "View"
+msgstr "Вид"
+
+#: tfrmmain.actshowvideotoolbarcontrols.caption
+msgctxt "tfrmmain.actshowvideotoolbarcontrols.caption"
+msgid "Controls"
+msgstr ""
+
+#: tfrmmain.actshowvideotoolbarentry.caption
+msgctxt "tfrmmain.actshowvideotoolbarentry.caption"
+msgid "Entry"
+msgstr ""
+
+#: tfrmmain.actshowvideotoolbarother.caption
+msgctxt "tfrmmain.actshowvideotoolbarother.caption"
+msgid "Other"
+msgstr ""
+
+#: tfrmmain.actshowwaveformtoolbarcontrols.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarcontrols.caption"
+msgid "Controls"
+msgstr ""
+
+#: tfrmmain.actshowwaveformtoolbarentry.caption
+#, fuzzy
+#| msgid "Edit"
+msgctxt "tfrmmain.actshowwaveformtoolbarentry.caption"
+msgid "Entry"
+msgstr "Редактировать"
+
+#: tfrmmain.actshowwaveformtoolbarother.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
+msgid "Other"
+msgstr ""
+
+#: tfrmmain.actshowwaveformtoolbarshotchanges.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowwaveformtoolbarshotchanges.caption"
+msgid "Shot changes"
+msgstr "Смена кадра"
+
+#: tfrmmain.actshowwaveformtoolbarzoom.caption
+msgid "Zoom"
+msgstr ""
 
 #: tfrmmain.actsort.caption
 msgid "Sort"
@@ -3912,10 +4004,12 @@ msgid "Effects"
 msgstr "Эффекты"
 
 #: tfrmmain.mnutextlines.caption
+msgctxt "tfrmmain.mnutextlines.caption"
 msgid "Lines"
 msgstr "Строки"
 
 #: tfrmmain.mnutextwords.caption
+msgctxt "tfrmmain.mnutextwords.caption"
 msgid "Words"
 msgstr "Слова"
 
@@ -3940,7 +4034,9 @@ msgid "Video"
 msgstr "Видео"
 
 #: tfrmmain.mnuvideoaspectratio.caption
-msgid "Aspect Ratio"
+#, fuzzy
+#| msgid "Aspect Ratio"
+msgid "Aspect ratio"
 msgstr "Соотношение сторон"
 
 #: tfrmmain.mnuvideoaudiofilters.caption
@@ -3979,9 +4075,33 @@ msgstr "Вид"
 msgid "Columns"
 msgstr "Колонки"
 
+#: tfrmmain.mnuviewtoolbareditor.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbareditor.caption"
+msgid "Editor"
+msgstr "Редактор"
+
+#: tfrmmain.mnuviewtoolbarmain.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbarmain.caption"
+msgid "Main"
+msgstr "Основная панель"
+
 #: tfrmmain.mnuviewtoolbars.caption
 msgid "Toolbars"
 msgstr "Панель инструментов"
+
+#: tfrmmain.mnuviewtoolbarvideo.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
+msgid "Video"
+msgstr "Видео"
+
+#: tfrmmain.mnuviewtoolbarwaveform.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbarwaveform.caption"
+msgid "Waveform"
+msgstr "Аудиоволна"
 
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
@@ -4481,6 +4601,7 @@ msgid "Color"
 msgstr "Цвет"
 
 #: tfrmsettings.lblwaveentry.caption
+msgctxt "tfrmsettings.lblwaveentry.caption"
 msgid "Entry"
 msgstr ""
 

@@ -950,6 +950,7 @@ msgid "Frames"
 msgstr "Fotogrammi"
 
 #: proclocalize.lngssgeneral
+msgctxt "proclocalize.lngssgeneral"
 msgid "General"
 msgstr "Generale"
 
@@ -977,10 +978,6 @@ msgstr "Nessuno"
 #: proclocalize.lngssshortcuts
 msgid "Shortcuts"
 msgstr "Scorciatoie"
-
-#: proclocalize.lngsstoolbar
-msgid "Toolbar"
-msgstr "Barra strumenti"
 
 #: proclocalize.lngsstools
 msgctxt "proclocalize.lngsstools"
@@ -2202,6 +2199,7 @@ msgid "Write cue identifiers"
 msgstr "Includi identificatori blocchi testo"
 
 #: tfrmformatproperties.lblasalignment.caption
+msgctxt "tfrmformatproperties.lblasalignment.caption"
 msgid "Alignment"
 msgstr "Allineamento"
 
@@ -2533,6 +2531,7 @@ msgid "Audio"
 msgstr "Audio"
 
 #: tfrmgeneratevideo.rdoothers.caption
+msgctxt "tfrmgeneratevideo.rdoothers.caption"
 msgid "Others"
 msgstr "Altri"
 
@@ -3454,6 +3453,40 @@ msgctxt "tfrmmain.actshowcolumnwpm.caption"
 msgid "Words per minute"
 msgstr "Parole per minuto"
 
+#: tfrmmain.actshoweditortoolbaralignment.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbaralignment.caption"
+msgid "Alignment"
+msgstr "Allineamento"
+
+#: tfrmmain.actshoweditortoolbarbasic.caption
+msgid "Basic"
+msgstr ""
+
+#: tfrmmain.actshoweditortoolbarentry.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarentry.caption"
+msgid "Entry"
+msgstr "Elemento"
+
+#: tfrmmain.actshoweditortoolbarformat.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarformat.caption"
+msgid "Format"
+msgstr "Formato"
+
+#: tfrmmain.actshoweditortoolbarlines.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarlines.caption"
+msgid "Lines"
+msgstr "Linee"
+
+#: tfrmmain.actshoweditortoolbarwords.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarwords.caption"
+msgid "Words"
+msgstr "Parole"
+
 #: tfrmmain.actshowthumbnails.caption
 msgid "Show thumbnails"
 msgstr "Visualizza miniature"
@@ -3462,6 +3495,18 @@ msgstr "Visualizza miniature"
 msgctxt "tfrmmain.actshowtoolbarencoding.caption"
 msgid "Encoding"
 msgstr "Codifica"
+
+#: tfrmmain.actshowtoolbarentry.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowtoolbarentry.caption"
+msgid "Entry"
+msgstr "Elemento"
+
+#: tfrmmain.actshowtoolbarfile.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowtoolbarfile.caption"
+msgid "File"
+msgstr "File"
 
 #: tfrmmain.actshowtoolbarformat.caption
 msgctxt "tfrmmain.actshowtoolbarformat.caption"
@@ -3473,14 +3518,63 @@ msgctxt "tfrmmain.actshowtoolbarfps.caption"
 msgid "FPS"
 msgstr "FPS"
 
-#: tfrmmain.actshowtoolbarmain.caption
-msgctxt "tfrmmain.actshowtoolbarmain.caption"
-msgid "Main"
-msgstr "Principale"
+#: tfrmmain.actshowtoolbargeneral.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowtoolbargeneral.caption"
+msgid "General"
+msgstr "Generale"
 
 #: tfrmmain.actshowtoolbarquickaction.caption
 msgid "Quick Action"
 msgstr "Azione rapida"
+
+#: tfrmmain.actshowtoolbarview.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowtoolbarview.caption"
+msgid "View"
+msgstr "Visualizza"
+
+#: tfrmmain.actshowvideotoolbarcontrols.caption
+msgctxt "tfrmmain.actshowvideotoolbarcontrols.caption"
+msgid "Controls"
+msgstr ""
+
+#: tfrmmain.actshowvideotoolbarentry.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowvideotoolbarentry.caption"
+msgid "Entry"
+msgstr "Elemento"
+
+#: tfrmmain.actshowvideotoolbarother.caption
+msgctxt "tfrmmain.actshowvideotoolbarother.caption"
+msgid "Other"
+msgstr ""
+
+#: tfrmmain.actshowwaveformtoolbarcontrols.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarcontrols.caption"
+msgid "Controls"
+msgstr ""
+
+#: tfrmmain.actshowwaveformtoolbarentry.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowwaveformtoolbarentry.caption"
+msgid "Entry"
+msgstr "Elemento"
+
+#: tfrmmain.actshowwaveformtoolbarother.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
+msgid "Other"
+msgstr ""
+
+#: tfrmmain.actshowwaveformtoolbarshotchanges.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowwaveformtoolbarshotchanges.caption"
+msgid "Shot changes"
+msgstr "Cambi inquadratura"
+
+#: tfrmmain.actshowwaveformtoolbarzoom.caption
+msgid "Zoom"
+msgstr ""
 
 #: tfrmmain.actsort.caption
 msgid "Sort"
@@ -3903,10 +3997,12 @@ msgid "Effects"
 msgstr "Effetti"
 
 #: tfrmmain.mnutextlines.caption
+msgctxt "tfrmmain.mnutextlines.caption"
 msgid "Lines"
 msgstr "Linee"
 
 #: tfrmmain.mnutextwords.caption
+msgctxt "tfrmmain.mnutextwords.caption"
 msgid "Words"
 msgstr "Parole"
 
@@ -3931,7 +4027,9 @@ msgid "Video"
 msgstr "Video"
 
 #: tfrmmain.mnuvideoaspectratio.caption
-msgid "Aspect Ratio"
+#, fuzzy
+#| msgid "Aspect Ratio"
+msgid "Aspect ratio"
 msgstr "Formato"
 
 #: tfrmmain.mnuvideoaudiofilters.caption
@@ -3970,9 +4068,33 @@ msgstr "Visualizza"
 msgid "Columns"
 msgstr "Colonne"
 
+#: tfrmmain.mnuviewtoolbareditor.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbareditor.caption"
+msgid "Editor"
+msgstr "Editor"
+
+#: tfrmmain.mnuviewtoolbarmain.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbarmain.caption"
+msgid "Main"
+msgstr "Principale"
+
 #: tfrmmain.mnuviewtoolbars.caption
 msgid "Toolbars"
 msgstr "Barre strumenti"
+
+#: tfrmmain.mnuviewtoolbarvideo.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
+msgid "Video"
+msgstr "Video"
+
+#: tfrmmain.mnuviewtoolbarwaveform.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbarwaveform.caption"
+msgid "Waveform"
+msgstr "Forma d’onda"
 
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
@@ -4471,6 +4593,7 @@ msgid "Color"
 msgstr "Colore"
 
 #: tfrmsettings.lblwaveentry.caption
+msgctxt "tfrmsettings.lblwaveentry.caption"
 msgid "Entry"
 msgstr "Elemento"
 
@@ -5123,3 +5246,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+
