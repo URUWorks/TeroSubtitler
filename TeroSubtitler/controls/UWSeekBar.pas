@@ -80,6 +80,7 @@ type
 
     property Align;
     property Anchors;
+    property BorderSpacing;
     property Cursor;
     property Enabled;
     property Width;
