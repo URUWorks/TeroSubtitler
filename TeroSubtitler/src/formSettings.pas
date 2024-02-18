@@ -334,7 +334,6 @@ begin
       Add(lngssGeneral);
       Add(lngssConventions);
       Add(lngssAppearance);
-      Add(lngssToolbar);
       Add(lngssShortcuts);
       Add(lngssMPV);
       Add(lngssTools);
@@ -477,32 +476,6 @@ begin
   hkShortcut.HotKey := 0;
   {$IFNDEF WINDOWS}
   cboTheme.Enabled := False;
-  {$ENDIF}
-
-  with frmMain do
-  begin
-    // Main
-    for i := 0 to tlbMain_.ButtonCount-1 do
-      if tlbMain_.Buttons[i].Visible and (tlbMain_.Buttons[i].Style = tbsCheck) then
-        tlbMain_.Buttons[i].Down := ToolBarMain.Buttons[i].Visible;
-
-    // Editor toolbar
-    for i := 0 to tlbEditor_.ButtonCount-1 do
-      if tlbEditor_.Buttons[i].Visible and (tlbEditor_.Buttons[i].Style = tbsCheck) then
-        tlbEditor_.Buttons[i].Down := ToolBarEditor.Buttons[i].Visible;
-
-    // Video toolbar
-    for i := 0 to tlbVideo_.ButtonCount-1 do
-      if tlbVideo_.Buttons[i].Visible and (tlbVideo_.Buttons[i].Style = tbsCheck) then
-        tlbVideo_.Buttons[i].Down := ToolBarVideo.Buttons[i].Visible;
-
-    // Wave toolbar
-    for i := 0 to tlbWaveform_.ButtonCount-1 do
-      if tlbWaveform_.Buttons[i].Visible and (tlbWaveform_.Buttons[i].Style = tbsCheck) then
-        tlbWaveform_.Buttons[i].Down := ToolBarWaveform.Buttons[i].Visible;
-  end;
-
-  {$IFNDEF WINDOWS}
   PrepareCustomControls(Self);
   {$ENDIF}
 end;
@@ -620,33 +593,6 @@ begin
   if SubtitleInfo.Text.FileName.IsEmpty then
     frmMain.cboFormat.ItemIndex := Integer(Workspace.DefFormat)-1;
 
-  with frmMain do
-  begin
-    // Main
-    for i := 0 to tlbMain_.ButtonCount-1 do
-      if tlbMain_.Buttons[i].Visible and (tlbMain_.Buttons[i].Style = tbsCheck) then
-        ToolBarMain.Buttons[i].Visible := tlbMain_.Buttons[i].Down;
-
-    // Editor toolbar
-    for i := 0 to tlbEditor_.ButtonCount-1 do
-      if tlbEditor_.Buttons[i].Visible and (tlbEditor_.Buttons[i].Style = tbsCheck) then
-        ToolBarEditor.Buttons[i].Visible := tlbEditor_.Buttons[i].Down;
-
-    // Video toolbar
-    for i := 0 to tlbVideo_.ButtonCount-1 do
-      if tlbVideo_.Buttons[i].Visible and (tlbVideo_.Buttons[i].Style = tbsCheck) then
-        ToolBarVideo.Buttons[i].Visible := tlbVideo_.Buttons[i].Down;
-
-    // Wave toolbar
-    for i := 0 to tlbWaveform_.ButtonCount-1 do
-      if tlbWaveform_.Buttons[i].Visible and (tlbWaveform_.Buttons[i].Style = tbsCheck) then
-        ToolBarWaveform.Buttons[i].Visible := tlbWaveform_.Buttons[i].Down;
-
-    // Dividers
-    UpdateToolBarButtons(True);
-  end;
-  UpdateToolBarButtons(False);
-
   if not IsWorkAreaEnabled then // Only change if work area is disabled
   begin
     frmMain.cboInputFPS.ItemIndex := cboDefaultFrameRate.ItemIndex;
@@ -714,12 +660,11 @@ begin
     0: SetLayoutPage(lyoGeneral);
     1: SetLayoutPage(lyoConventions);
     2: SetLayoutPage(lyoAppearance);
-    3: SetLayoutPage(lyoToolbar);
-    4: SetLayoutPage(lyoShortcuts);
-    5: SetLayoutPage(lyoMPV);
-    6: SetLayoutPage(lyoTools);
+    3: SetLayoutPage(lyoShortcuts);
+    4: SetLayoutPage(lyoMPV);
+    5: SetLayoutPage(lyoTools);
     {$IFDEF WINDOWS}
-    7: SetLayoutPage(lyoFileTypeAssociations);
+    6: SetLayoutPage(lyoFileTypeAssociations);
     {$ENDIF}
   end;
 end;

@@ -254,7 +254,6 @@ resourcestring
   lngssGeneral = 'General';
   lngssConventions = 'Conventions';
   lngssAppearance = 'Appearance';
-  lngssToolbar = 'Toolbar';
   lngssShortcuts = 'Shortcuts';
   lngssMPV = 'Video player';
   lngssTools = 'Tools';

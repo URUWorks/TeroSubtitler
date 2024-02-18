@@ -53,6 +53,8 @@ end;
 
 procedure TfrmMain.WAVESelectionChange(Sender: TObject);
 begin
+  DoWAVEPopup(NIL);
+
   //actMediaAddEntry.Enabled   := not WAVE.SelectionIsEmpty and WAVE.IsOnlySelection;
   actMediaZoomSelection.Enabled := actMediaAddEntry.Enabled;
 {  if WAVE.SelectionIsEmpty then

@@ -317,11 +317,34 @@ begin
     //actViewShotChangeExecute(NIL);
     actCenterWaveform.Checked      := True;
     actCenterWaveformExecute(NIL);
-    actShowToolBarMain.Checked     := True;
-    actShowToolBarFPS.Checked      := True;
-    actShowToolBarFormat.Checked   := False;
-    actShowToolBarEncoding.Checked := False;
+    actShowToolBarFile.Checked        := True;
+    actShowToolBarGeneral.Checked     := True;
+    actShowToolBarEntry.Checked       := True;
+    actShowToolBarView.Checked        := False;
+    actShowToolBarFPS.Checked         := True;
+    actShowToolBarFormat.Checked      := False;
+    actShowToolBarEncoding.Checked    := False;
     actShowToolbarQuickAction.Checked := True;
+    actShowWaveformToolbarControls.Checked    := True;
+    actShowWaveformToolbarEntry.Checked       := True;
+    actShowWaveformToolbarZoom.Checked        := True;
+    actShowWaveformToolbarShotchanges.Checked := False;
+    actShowWaveformToolbarOther.Checked       := False;
+    actShowEditorToolbarBasic.Checked     := True;
+    actShowEditorToolbarFormat.Checked    := True;
+    actShowEditorToolbarAlignment.Checked := True;
+    actShowEditorToolbarEntry.Checked     := False;
+    actShowEditorToolbarLines.Checked     := False;
+    actShowEditorToolbarWords.Checked     := False;
+    actShowVideoToolbarControls.Checked := True;
+    actShowVideoToolbarEntry.Checked    := True;
+    actShowVideoToolbarOther.Checked    := False;
+
+    // Toolbar: don't allow buttons to encroach others when repositioning #27
+    SetCoolBarMinWidth(CoolBarMain);
+    SetCoolBarMinWidth(CoolBarEditor);
+    SetCoolBarMinWidth(CoolBarWaveform);
+    SetCoolBarMinWidth(CoolBarVideo);
   end;
 
   {$IFDEF WINDOWS}
@@ -354,32 +377,43 @@ begin
 
     with frmMain do
     begin
-      tlb9.Hide;
-      tlb11.Hide;
-      tlb12.Hide;
-      tlb13.Hide;
-      tlb14.Hide;
-      tlb15.Hide;
-      tlb16.Hide;
-      tlb17.Hide;
-      tlb18.Hide;
-      etlb5.Hide;
-      vtlb8.Hide;
-      vtlb9.Hide;
-      vtlb10.Hide;
-      vtlb11.Hide;
-      wtlb1.Hide;
-      wtlb2.Hide;
-      wtlb3.Hide;
-      wtlb7.Hide;
-      wtlb8.Hide;
-      wtlb9.Hide;
-      wtlb10.Hide;
+      CoolbarMain.BeginUpdate;
+      CoolBarMain.AutosizeBands;
+      UpdateCoolBar(CoolbarMain, ToolBarMainFile, actShowToolBarFile.Checked);
+      UpdateCoolBar(CoolbarMain, ToolBarMainGeneral, actShowToolBarGeneral.Checked);
+      UpdateCoolBar(CoolbarMain, ToolBarMainEntry, actShowToolBarEntry.Checked);
+      UpdateCoolBar(CoolbarMain, ToolBarMainView, actShowToolBarView.Checked);
+      UpdateCoolBar(CoolbarMain, ToolBarFPS, actShowToolBarFPS.Checked);
+      UpdateCoolBar(CoolbarMain, ToolBarFormat, actShowToolBarFormat.Checked);
+      UpdateCoolBar(CoolbarMain, ToolBarEncoding, actShowToolBarEncoding.Checked);
+      UpdateCoolBar(CoolbarMain, edtQuickAction, actShowToolbarQuickAction.Checked);
+      CoolbarMain.EndUpdate;
 
-      UpdateToolBarButtons(True);
-      CoolBarMain.Bands[0].AutosizeWidth;
-      CoolBarMain.Bands[1].AutosizeWidth;
-      CoolBarMain.Bands[2].AutosizeWidth;
+      CoolbarWaveform.BeginUpdate;
+      CoolbarWaveform.AutosizeBands;
+      UpdateCoolBar(CoolbarWaveform, ToolBarWaveformControls, actShowWaveformToolbarControls.Checked);
+      UpdateCoolBar(CoolbarWaveform, ToolBarWaveformEntry, actShowWaveformToolbarEntry.Checked);
+      UpdateCoolBar(CoolbarWaveform, ToolBarWaveformZoom, actShowWaveformToolbarZoom.Checked);
+      UpdateCoolBar(CoolbarWaveform, ToolBarWaveformShotchanges, actShowWaveformToolbarShotchanges.Checked);
+      UpdateCoolBar(CoolbarWaveform, ToolBarWaveformOther, actShowWaveformToolbarOther.Checked);
+      CoolbarWaveform.EndUpdate;
+
+      CoolbarEditor.BeginUpdate;
+      CoolbarEditor.AutosizeBands;
+      UpdateCoolBar(CoolbarEditor, ToolBarEditorBasic, actShowEditorToolbarBasic.Checked);
+      UpdateCoolBar(CoolbarEditor, ToolBarEditorFormat, actShowEditorToolbarFormat.Checked);
+      UpdateCoolBar(CoolbarEditor, ToolBarEditorAlignment, actShowEditorToolbarAlignment.Checked);
+      UpdateCoolBar(CoolbarEditor, ToolBarEditorEntry, actShowEditorToolbarEntry.Checked);
+      UpdateCoolBar(CoolbarEditor, ToolBarEditorLines, actShowEditorToolbarLines.Checked);
+      UpdateCoolBar(CoolbarEditor, ToolBarEditorWords, actShowEditorToolbarWords.Checked);
+      CoolbarEditor.EndUpdate;
+
+      CoolbarVideo.BeginUpdate;
+      CoolbarVideo.AutosizeBands;
+      UpdateCoolBar(CoolbarVideo, ToolBarVideoControls, actShowVideoToolbarControls.Checked);
+      UpdateCoolBar(CoolbarVideo, ToolBarVideoEntry, actShowVideoToolbarEntry.Checked);
+      UpdateCoolBar(CoolbarVideo, ToolBarVideoOther, actShowVideoToolbarOther.Checked);
+      CoolbarVideo.EndUpdate;
 
       LayoutVideo.Width := Width div 2;
     end;
@@ -611,27 +645,7 @@ begin
         mmoTranslation.Font.Size := mmoText.Font.Size;
         CloseKey;
 
-        OpenKey('ToolBars');
-          OpenKey('Main');
-          for i := 0 to ToolBarMain.ButtonCount-1 do
-            ToolBarMain.Buttons[i].Visible := GetValue('id'+i.ToString, True);
-          CloseKey;
-          OpenKey('Editor');
-          for i := 0 to ToolBarEditor.ButtonCount-1 do
-            ToolBarEditor.Buttons[i].Visible := GetValue('id'+i.ToString, True);
-          CloseKey;
-          OpenKey('Video');
-          for i := 0 to ToolBarVideo.ButtonCount-1 do
-            ToolBarVideo.Buttons[i].Visible := GetValue('id'+i.ToString, True);
-          CloseKey;
-          OpenKey('Waveform');
-          for i := 0 to ToolBarWaveform.ButtonCount-1 do
-            ToolBarWaveform.Buttons[i].Visible := GetValue('id'+i.ToString, True);
-          CloseKey;
-        CloseKey;
-        UpdateToolBarButtons(True);
-
-        OpenKey('CoolBars');
+        OpenKey('CoolBarMain');
         c := CoolBarMain.Bands.Count;
         SetLength(bands, c);
         for i := 0 to c-1 do
@@ -643,12 +657,16 @@ begin
           bands[i] := GetValue('Pos', i);
           CloseKey;
         end;
-        actShowToolBarMain.Checked     := GetValue('Main', True);
-        actShowToolBarFPS.Checked      := GetValue('FPS', True);
-        actShowToolBarFormat.Checked   := GetValue('Format', False);
-        actShowToolBarEncoding.Checked := GetValue('Encoding', False);
+        actShowToolBarFile.Checked        := GetValue('File', True);
+        actShowToolBarGeneral.Checked     := GetValue('General', True);
+        actShowToolBarEntry.Checked       := GetValue('Entry', True);
+        actShowToolBarView.Checked        := GetValue('View', False);
+        actShowToolBarFPS.Checked         := GetValue('FPS', True);
+        actShowToolBarFormat.Checked      := GetValue('Format', False);
+        actShowToolBarEncoding.Checked    := GetValue('Encoding', False);
         actShowToolbarQuickAction.Checked := GetValue('QuickAction', True);
         CloseKey;
+
         for i := 0 to c-1 do
           for j := 0 to c-1 do
             if bands[j] = i then
@@ -657,7 +675,94 @@ begin
               Break;
             end;
         SetLength(bands, 0);
-        UpdateCoolBar(NIL, False);
+
+        OpenKey('CoolBarWaveform');
+        c := CoolbarWaveform.Bands.Count;
+        SetLength(bands, c);
+        for i := 0 to c-1 do
+        begin
+          OpenKey('Id'+CoolBarWaveform.Bands[i].ID.ToString);
+          CoolBarWaveform.Bands[i].Break := GetValue('Break', False);
+          CoolBarWaveform.Bands[i].Visible := GetValue('Visible', True);
+          CoolBarWaveform.Bands[i].Width := GetValue('Width', CoolBarWaveform.Bands[i].Width);
+          bands[i] := GetValue('Pos', i);
+          CloseKey;
+        end;
+        actShowWaveformToolbarControls.Checked    := GetValue('WaveformControls', True);
+        actShowWaveformToolbarEntry.Checked       := GetValue('WaveformEntry', True);
+        actShowWaveformToolbarZoom.Checked        := GetValue('WaveformZoom', True);
+        actShowWaveformToolbarShotchanges.Checked := GetValue('WaveformShotchanges', False);
+        actShowWaveformToolbarOther.Checked       := GetValue('WaveformOther', False);
+        CloseKey;
+
+        for i := 0 to c-1 do
+          for j := 0 to c-1 do
+            if bands[j] = i then
+            begin
+              CoolbarWaveform.Bands.FindItemID(j).Index := i;
+              Break;
+            end;
+        SetLength(bands, 0);
+
+        OpenKey('CoolBarEditor');
+        c := CoolbarEditor.Bands.Count;
+        SetLength(bands, c);
+        for i := 0 to c-1 do
+        begin
+          OpenKey('Id'+CoolbarEditor.Bands[i].ID.ToString);
+          CoolbarEditor.Bands[i].Break := GetValue('Break', False);
+          CoolbarEditor.Bands[i].Visible := GetValue('Visible', True);
+          CoolbarEditor.Bands[i].Width := GetValue('Width', CoolbarEditor.Bands[i].Width);
+          bands[i] := GetValue('Pos', i);
+          CloseKey;
+        end;
+        actShowEditorToolbarBasic.Checked     := GetValue('EditorBasic', True);
+        actShowEditorToolbarFormat.Checked    := GetValue('EditorFormat', True);
+        actShowEditorToolbarAlignment.Checked := GetValue('EditorAlignment', True);
+        actShowEditorToolbarEntry.Checked     := GetValue('EditorEntry', False);
+        actShowEditorToolbarLines.Checked     := GetValue('EditorLines', False);
+        actShowEditorToolbarWords.Checked     := GetValue('EditorWords', False);
+        CloseKey;
+
+        for i := 0 to c-1 do
+          for j := 0 to c-1 do
+            if bands[j] = i then
+            begin
+              CoolbarEditor.Bands.FindItemID(j).Index := i;
+              Break;
+            end;
+        SetLength(bands, 0);
+
+        OpenKey('CoolBarVideo');
+        c := CoolbarVideo.Bands.Count;
+        SetLength(bands, c);
+        for i := 0 to c-1 do
+        begin
+          OpenKey('Id'+CoolbarVideo.Bands[i].ID.ToString);
+          CoolbarVideo.Bands[i].Break := GetValue('Break', False);
+          CoolbarVideo.Bands[i].Visible := GetValue('Visible', True);
+          CoolbarVideo.Bands[i].Width := GetValue('Width', CoolbarVideo.Bands[i].Width);
+          bands[i] := GetValue('Pos', i);
+          CloseKey;
+        end;
+        actShowVideoToolbarControls.Checked := GetValue('VideoControls', True);
+        actShowVideoToolbarEntry.Checked    := GetValue('VideoEntry', True);
+        actShowVideoToolbarOther.Checked    := GetValue('VideoOther', False);
+        CloseKey;
+
+        for i := 0 to c-1 do
+          for j := 0 to c-1 do
+            if bands[j] = i then
+            begin
+              CoolbarEditor.Bands.FindItemID(j).Index := i;
+              Break;
+            end;
+        SetLength(bands, 0);
+
+        UpdateCoolBar(CoolbarMain, NIL, False);
+        UpdateCoolBar(CoolbarWaveform, NIL, False);
+        UpdateCoolBar(CoolbarEditor, NIL, False);
+        UpdateCoolBar(CoolbarVideo, NIL, False);
       end;
     end;
     // Format properties
@@ -943,26 +1048,7 @@ begin
         SetValue('TextBoxFontSize', mmoText.Font.Size);
         CloseKey;
 
-        OpenKey('ToolBars');
-          OpenKey('Main');
-          for i := 0 to ToolBarMain.ButtonCount-1 do
-            SetValue('id'+i.ToString, ToolBarMain.Buttons[i].Visible);
-          CloseKey;
-          OpenKey('Editor');
-          for i := 0 to ToolBarEditor.ButtonCount-1 do
-            SetValue('id'+i.ToString, ToolBarEditor.Buttons[i].Visible);
-          CloseKey;
-          OpenKey('Video');
-          for i := 0 to ToolBarVideo.ButtonCount-1 do
-            SetValue('id'+i.ToString, ToolBarVideo.Buttons[i].Visible);
-          CloseKey;
-          OpenKey('Waveform');
-          for i := 0 to ToolBarWaveform.ButtonCount-1 do
-            SetValue('id'+i.ToString, ToolBarWaveform.Buttons[i].Visible);
-          CloseKey;
-        CloseKey;
-
-        OpenKey('CoolBars');
+        OpenKey('CoolBarMain');
         for i := 0 to CoolBarMain.Bands.Count-1 do
         begin
           OpenKey('Id'+CoolBarMain.Bands[i].ID.ToString);
@@ -972,11 +1058,64 @@ begin
           SetValue('Pos', i);
           CloseKey;
         end;
-        SetValue('Main', actShowToolBarMain.Checked);
+        SetValue('File', actShowToolBarFile.Checked);
+        SetValue('General', actShowToolBarGeneral.Checked);
+        SetValue('Entry', actShowToolBarEntry.Checked);
+        SetValue('View', actShowToolBarView.Checked);
         SetValue('FPS', actShowToolBarFPS.Checked);
         SetValue('Format', actShowToolBarFormat.Checked);
         SetValue('Encoding', actShowToolBarEncoding.Checked);
         SetValue('QuickAction', actShowToolbarQuickAction.Checked);
+        CloseKey;
+
+        OpenKey('CoolBarWaveform');
+        for i := 0 to CoolBarWaveform.Bands.Count-1 do
+        begin
+          OpenKey('Id'+CoolBarWaveform.Bands[i].ID.ToString);
+          SetValue('Break', CoolBarWaveform.Bands[i].Break);
+          SetValue('Visible', CoolBarWaveform.Bands[i].Visible);
+          SetValue('Width', CoolBarWaveform.Bands[i].Width);
+          SetValue('Pos', i);
+          CloseKey;
+        end;
+        SetValue('WaveformControls', actShowWaveformToolbarControls.Checked);
+        SetValue('WaveformEntry', actShowWaveformToolbarEntry.Checked);
+        SetValue('WaveformZoom', actShowWaveformToolbarZoom.Checked);
+        SetValue('WaveformShotchanges', actShowWaveformToolbarShotchanges.Checked);
+        SetValue('WaveformOther', actShowWaveformToolbarOther.Checked);
+        CloseKey;
+
+        OpenKey('CoolBarEditor');
+        for i := 0 to CoolBarEditor.Bands.Count-1 do
+        begin
+          OpenKey('Id'+CoolBarEditor.Bands[i].ID.ToString);
+          SetValue('Break', CoolBarEditor.Bands[i].Break);
+          SetValue('Visible', CoolBarEditor.Bands[i].Visible);
+          SetValue('Width', CoolBarEditor.Bands[i].Width);
+          SetValue('Pos', i);
+          CloseKey;
+        end;
+        SetValue('EditorBasic', actShowEditorToolbarBasic.Checked);
+        SetValue('EditorFormat', actShowEditorToolbarFormat.Checked);
+        SetValue('EditorAlignment', actShowEditorToolbarAlignment.Checked);
+        SetValue('EditorEntry', actShowEditorToolbarEntry.Checked);
+        SetValue('EditorLines', actShowEditorToolbarLines.Checked);
+        SetValue('EditorWords', actShowEditorToolbarWords.Checked);
+        CloseKey;
+
+        OpenKey('CoolBarVideo');
+        for i := 0 to CoolBarVideo.Bands.Count-1 do
+        begin
+          OpenKey('Id'+CoolBarVideo.Bands[i].ID.ToString);
+          SetValue('Break', CoolBarVideo.Bands[i].Break);
+          SetValue('Visible', CoolBarVideo.Bands[i].Visible);
+          SetValue('Width', CoolBarVideo.Bands[i].Width);
+          SetValue('Pos', i);
+          CloseKey;
+        end;
+        SetValue('VideoControls', actShowVideoToolbarControls.Checked);
+        SetValue('VideoEntry', actShowVideoToolbarEntry.Checked);
+        SetValue('VideoOther', actShowVideoToolbarOther.Checked);
         CloseKey;
       end;
     end;

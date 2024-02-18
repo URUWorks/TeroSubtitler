@@ -1696,37 +1696,156 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actShowToolbarMainExecute(Sender: TObject);
+procedure TfrmMain.actShowToolbarFileExecute(Sender: TObject);
 begin
-  UpdateCoolBar(ToolBarMain, actShowToolbarMain.Checked);
+  UpdateCoolBar(CoolbarMain, ToolBarMainFile, actShowToolbarFile.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowToolbarGeneralExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolbarMain, ToolBarMainGeneral, actShowToolbarGeneral.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowToolbarEntryExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolbarMain, ToolBarMainEntry, actShowToolbarEntry.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowToolbarViewExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolbarMain, ToolBarMainView, actShowToolbarView.Checked);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actShowToolbarFPSExecute(Sender: TObject);
 begin
-  UpdateCoolBar(ToolBarFPS, actShowToolbarFPS.Checked);
+  UpdateCoolBar(CoolbarMain, ToolBarFPS, actShowToolbarFPS.Checked);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actShowToolbarFormatExecute(Sender: TObject);
 begin
-  UpdateCoolBar(ToolBarFormat, actShowToolbarFormat.Checked);
+  UpdateCoolBar(CoolbarMain, ToolBarFormat, actShowToolbarFormat.Checked);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actShowToolbarEncodingExecute(Sender: TObject);
 begin
-  UpdateCoolBar(ToolBarEncoding, actShowToolbarEncoding.Checked);
+  UpdateCoolBar(CoolbarMain, ToolBarEncoding, actShowToolbarEncoding.Checked);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.actShowToolbarQuickActionExecute(Sender: TObject);
 begin
-  UpdateCoolBar(edtQuickAction, actShowToolbarQuickAction.Checked);
+  UpdateCoolBar(CoolbarMain, edtQuickAction, actShowToolbarQuickAction.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowWaveformToolbarControlsExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolbarWaveform, ToolBarWaveformControls, actShowWaveformToolbarControls.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowWaveformToolbarEntryExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolbarWaveform, ToolBarWaveformEntry, actShowWaveformToolbarEntry.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowWaveformToolbarZoomExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolbarWaveform, ToolBarWaveformZoom, actShowWaveformToolbarZoom.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowWaveformToolbarShotchangesExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolbarWaveform, ToolBarWaveformShotchanges, actShowWaveformToolbarShotchanges.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowWaveformToolbarOtherExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolbarWaveform, ToolBarWaveformOther, actShowWaveformToolbarOther.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowEditorToolbarBasicExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolBarEditor, ToolBarEditorBasic, actShowEditorToolbarBasic.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowEditorToolbarFormatExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolBarEditor, ToolBarEditorFormat, actShowEditorToolbarFormat.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowEditorToolbarAlignmentExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolBarEditor, ToolBarEditorAlignment, actShowEditorToolbarAlignment.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowEditorToolbarEntryExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolBarEditor, ToolBarEditorEntry, actShowEditorToolbarEntry.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowEditorToolbarLinesExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolBarEditor, ToolBarEditorLines, actShowEditorToolbarLines.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowEditorToolbarWordsExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolBarEditor, ToolBarEditorWords, actShowEditorToolbarWords.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowVideoToolbarControlsExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolBarVideo, ToolBarVideoControls, actShowVideoToolbarControls.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowVideoToolbarEntryExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolBarVideo, ToolBarVideoEntry, actShowVideoToolbarEntry.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowVideoToolbarOtherExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolBarVideo, ToolBarVideoOther, actShowVideoToolbarOther.Checked);
 end;
 
 // -----------------------------------------------------------------------------

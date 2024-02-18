@@ -95,8 +95,8 @@ procedure UpdateCPSAndTexts(const AIndex: Integer);
 procedure UpdateValuesForSubtitle(const AIndex: Integer);
 procedure UpdateValues(const AInvalidate: Boolean = False);
 
-procedure UpdateToolBarButtons(const AOnlyDivider: Boolean);
-procedure UpdateCoolBar(const ABandFromControl: TControl; const AVisible: Boolean);
+procedure SetCoolBarMinWidth(const ACoolbar: TCoolbar);
+procedure UpdateCoolBar(const ACoolbar: TCoolbar; const ABandFromControl: TControl; const AVisible: Boolean);
 
 {$IFNDEF WINDOWS}
 procedure PrepareCustomControls(const AForm: TForm);
@@ -887,6 +887,7 @@ begin
              actSetGUILayout0.Checked := False;
              actSetGUILayout1.Checked := True;
              actSetGUILayout2.Checked := False;
+             LayoutVideo.Width := Width div 2;
            end;
         2: begin
              LayoutVideo.Align   := alTop;
@@ -895,6 +896,7 @@ begin
              actSetGUILayout0.Checked := False;
              actSetGUILayout1.Checked := False;
              actSetGUILayout2.Checked := True;
+             LayoutVideo.Height := Height div iff((LayoutWaveform.Parent = frmMain) and actWaveformPreview.Checked, 3, 2);
            end;
       else
         LayoutVideo.Align   := alRight;
@@ -903,6 +905,7 @@ begin
         actSetGUILayout0.Checked := True;
         actSetGUILayout1.Checked := False;
         actSetGUILayout2.Checked := False;
+        LayoutVideo.Width := Width div 2;
       end;
       Workspace.Layout := AIndex;
       {LayoutWaveform.Parent    := frmMain;
@@ -1542,60 +1545,18 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure UpdateToolBarButtons(const AOnlyDivider: Boolean);
-
-  procedure SetToolButtonPos(const AToolBar: TToolBar);
-  var
-    i: Integer;
-  begin
-    with AToolBar do
-    begin
-      BeginUpdate;
-      AutoSize := False;
-      for i := ButtonCount-1 downto 0 do
-        if Buttons[i].Visible then
-          Buttons[i].Left := -1;
-      AutoSize := True;
-      EndUpdate;
-    end;
-  end;
-
+procedure SetCoolBarMinWidth(const ACoolbar: TCoolbar);
+var
+  i : Integer;
 begin
-  with frmMain do
-    if AOnlyDivider then
-    begin
-      tlbdiv0.Visible  := tlb3.Visible or tlb4.Visible;
-      tlbdiv1.Visible  := tlb5.Visible or tlb6.Visible or tlb7.Visible;
-      tlbdiv2.Visible  := tlb8.Visible or tlb9.Visible or tlb10.Visible;
-      tlbdiv3.Visible  := tlb11.Visible or tlb12.Visible or tlb13.Visible;
-      tlbdiv4.Visible  := tlb14.Visible or tlb15.Visible or tlb16.Visible;
-      tlbdiv5.Visible  := tlb17.Visible or tlb18.Visible;
-
-      etlbdiv0.Visible := etlb2.Visible or etlb3.Visible or etlb4.Visible or etlb5.Visible or etlb6.Visible;
-      etlbdiv1.Visible := etlb7.Visible or etlb8.Visible or etlb9.Visible or etlb10.Visible;
-      etlbdiv2.Visible := etlb11.Visible or etlb12.Visible or etlb13.Visible;
-      etlbdiv3.Visible := etlb14.Visible or tlbValidate.Visible;
-
-      vtlbdiv0.Visible := vtlb2.Visible or vtlb3.Visible;
-      vtlbdiv1.Visible := vtlb4.Visible or vtlb5.Visible or vtlb6.Visible or vtlb7.Visible;
-      vtlbdiv2.Visible := vtlb8.Visible or vtlb9.Visible or vtlb10.Visible or vtlb11.Visible;
-
-      wtlbdiv0.Visible := wtlb4.Visible;
-      wtlbdiv1.Visible := wtlb5.Visible or wtlb6.Visible or wtlb7.Visible;
-      wtlbdiv2.Visible := wtlb8.Visible or wtlb9.Visible or wtlb10.Visible;
-    end
-    else
-    begin
-      SetToolButtonPos(ToolBarMain);
-      SetToolButtonPos(ToolBarEditor);
-      SetToolButtonPos(ToolBarVideo);
-      SetToolButtonPos(ToolBarWaveform);
-    end;
+  for i := 0 to ACoolbar.Bands.Count-1 do
+    if ACoolbar.Bands[i].Control <> NIL then
+      ACoolbar.Bands[i].MinWidth := ACoolbar.Bands[i].Control.Width + (ACoolbar.GrabWidth * 2);
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure UpdateCoolBar(const ABandFromControl: TControl; const AVisible: Boolean);
+procedure UpdateCoolBar(const ACoolbar: TCoolbar; const ABandFromControl: TControl; const AVisible: Boolean);
 var
   i, x : Integer;
   Band : TCoolBand;
@@ -1604,17 +1565,17 @@ begin
   begin
     if ABandFromControl <> NIL then
     begin
-      Band := CoolBarMain.Bands.FindBand(ABandFromControl);
+      Band := ACoolbar.Bands.FindBand(ABandFromControl);
       if Band <> NIL then
         Band.Visible := AVisible;
     end;
 
     x := 0;
-    for i := 0 to CoolBarMain.Bands.Count-1 do
-      if CoolBarMain.Bands[i].Visible then
+    for i := 0 to ACoolbar.Bands.Count-1 do
+      if ACoolbar.Bands[i].Visible then
         Inc(x);
 
-    CoolBarMain.Visible := x > 0;
+    ACoolbar.Visible := x > 0;
   end;
 end;
 
