@@ -6,6 +6,7 @@
 - fixed: [macOS] Disable text box if there is no subtitle #39
 - fixed: Toolbar: don't allow buttons to encroach others when repositioning #27
 - fixed: Better grid in timeline #6
+- fixed: Duplicate text in tooltips
 - fixed: Wrong time values imported in a format variant [SubtitleAPI/TimedText]
 - fixed: Some properties are not reflected when "mpv handles subtitles for preview" option is active
 - fixed: Changed language not reflected in the state of the libraries in the wizard window
