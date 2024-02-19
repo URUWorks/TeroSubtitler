@@ -1348,13 +1348,14 @@ function GetRandomTipString: String;
 var
   rndTip: Integer;
 begin
+  Result := '';
   rndTip := Random(3)+1;
   with frmMain do
     case rndTip of
-      1: Result := Format(lngtTip1, [ShortCutToTextEx(actPreviousSubtitle.ShortCut), ShortCutToTextEx(actNextSubtitle.ShortCut)]);
-      2: Result := Format(lngtTip2, [ShortCutToTextEx(actWebReference.ShortCut)]);
-      3: Result := Format(lngtTip3, [ShortCutToTextEx(actUnDockVideo.ShortCut)]);
-      4: Result := Format(lngtTip4, [ShortCutToTextEx(actUnDockWaveform.ShortCut)]);
+      1: if (actPreviousSubtitle.ShortCut <> 0) and (actNextSubtitle.ShortCut <> 0) then Result := Format(lngtTip1, [ShortCutToTextEx(actPreviousSubtitle.ShortCut), ShortCutToTextEx(actNextSubtitle.ShortCut)]);
+      2: if (actWebReference.ShortCut <> 0) then Result := Format(lngtTip2, [ShortCutToTextEx(actWebReference.ShortCut)]);
+      3: if (actUnDockVideo.ShortCut <> 0) then Result := Format(lngtTip3, [ShortCutToTextEx(actUnDockVideo.ShortCut)]);
+      4: if (actUnDockWaveform.ShortCut <> 0) then Result := Format(lngtTip4, [ShortCutToTextEx(actUnDockWaveform.ShortCut)]);
     end;
   SetStatusBarText(Result);
 end;
