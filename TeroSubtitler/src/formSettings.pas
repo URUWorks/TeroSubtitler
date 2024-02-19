@@ -377,8 +377,6 @@ begin
 
   with AppOptions do
   begin
-    cboLanguage.ItemIndex := GetGUILangIndex(FLngList,GUILanguage);
-
     edtWebReference.Text := WebSearchURL;
     with Conventions do
     begin
@@ -488,7 +486,7 @@ var
 begin
   with AppOptions do
   begin
-   if Length(FLngList.Strings[cboLanguage.ItemIndex].Split([';'])) > 0 then
+   if (cboLanguage.ItemIndex >= 0) and (Length(FLngList.Strings[cboLanguage.ItemIndex].Split([';'])) > 0) then
       GUILanguage := FLngList.Strings[cboLanguage.ItemIndex].Split([';'])[0]
     else
       GUILanguage := 'en_US';
@@ -587,9 +585,9 @@ begin
   if Workspace.WorkMode <> TWorkMode(cboTimeCodeMode.ItemIndex) then
     SetWorkMode(TWorkMode(cboTimeCodeMode.ItemIndex));
 
-  Workspace.FPS.DefFPS := StrToFloatDef(cboDefaultFrameRate.Text, DefFPS, FormatSettings);
-  Workspace.DefEncoding  := cboDefaultFileEncoding.ItemIndex;
-  Workspace.DefFormat    := TUWSubtitleFormats(cboDefaultFileFormat.ItemIndex+1);
+  Workspace.FPS.DefFPS  := StrToFloatDef(cboDefaultFrameRate.Text, DefFPS, FormatSettings);
+  Workspace.DefEncoding := cboDefaultFileEncoding.ItemIndex;
+  Workspace.DefFormat   := TUWSubtitleFormats(cboDefaultFileFormat.ItemIndex+1);
   if SubtitleInfo.Text.FileName.IsEmpty then
     frmMain.cboFormat.ItemIndex := Integer(Workspace.DefFormat)-1;
 

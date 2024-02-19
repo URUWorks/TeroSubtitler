@@ -82,7 +82,14 @@ begin
     Caption := ACaption;
     lblMessage.Caption := APrompt;
     cboSelect.Items.Assign(AItems);
-    cboSelect.ItemIndex := ADefault;
+
+    if cboSelect.Items.Count > 0 then
+    begin
+      if ADefault >= 0 then
+        cboSelect.ItemIndex := ADefault
+      else
+        cboSelect.ItemIndex := 0;
+    end;
 
     if AOnlyOkButton then
     begin

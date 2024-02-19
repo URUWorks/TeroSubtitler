@@ -192,6 +192,10 @@ begin
 
     if ADefault > -1 then
       ItemIndex := Items.IndexOf(SingleToStr(ADefault, FormatSettings));
+
+    if ItemIndex < 0 then
+      ItemIndex := 0;
+
     Items.EndUpdate;
   end;
 end;

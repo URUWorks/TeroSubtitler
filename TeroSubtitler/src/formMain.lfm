@@ -323,10 +323,10 @@ object frmMain: TfrmMain
         ShowButton = False
         Max = 1000
         Position = 0
-        BackColor = 13882323
-        FillColor = 13997662
-        ButtonColor = 6908265
-        BtnDownColor = 10061943
+        BackColor = clGray
+        FillColor = 10841658
+        ButtonColor = 10841658
+        BtnDownColor = 13997662
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 2
         BorderSpacing.Right = 8
