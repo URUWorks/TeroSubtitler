@@ -258,9 +258,9 @@ begin
       BtnHighlight   := clBtnFace;
       BtnChecked     := clBtnShadow;
       Window         := clWindow;
-      SeekBack       := $D3D3D3;
-      SeekFill       := clHighlight;
-      SeekBtn        := $696969;
+      SeekBack       := clGray; //$D3D3D3;
+      SeekFill       := clHighlight; //$00A56E3A;
+      SeekBtn        := $00A56E3A; //$696969;
       ItemBackground := clMenu;
       ItemHeader     := clInactiveCaption;
       ItemSelHeader  := clActiveCaption;
@@ -274,9 +274,9 @@ begin
       BtnHighlight   := RGBToColor(240,240,240);
       BtnChecked     := RGBToColor(160,160,160);
       Window         := RGBToColor(255,255,255);
-      SeekBack       := $D3D3D3;
+      SeekBack       := clGray; //$D3D3D3;
       SeekFill       := RGBToColor(0,120,215);
-      SeekBtn        := $696969;
+      SeekBtn        := $00A56E3A; //$696969;
       ItemBackground := RGBToColor(240,240,240);
       ItemHeader     := RGBToColor(191,205,219);
       ItemSelHeader  := RGBToColor(153,180,209);
