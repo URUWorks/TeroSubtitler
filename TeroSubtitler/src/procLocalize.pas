@@ -472,6 +472,10 @@ procedure SetGUILanguage;
 var
   i: Integer;
 begin
+  for i := 0 to frmMain.ActionList.ActionCount-1 do
+    with TAction(frmMain.ActionList.Actions[i]) do
+      Hint := '';
+
   SetDefaultLang(AppOptions.GUILanguage, LanguageFolder);
   UpdateCommonActionString;
 
