@@ -1,4 +1,5 @@
 1.0.1.7 (x.x.2024)
+- fixed: Error on saving custom shortcut #260
 - fixed: Persian text displays wrong in list view #244
 - fixed: No BOM in UTF-8 files. #213
 - fixed: Whisper.cpp and Faster-Whisper on Mac (arm) #193
