@@ -119,10 +119,10 @@ begin
   FShowButton   := False;
   FMouseIsDown  := False;
 
-  FBackColor    := $D3D3D3;
+  FBackColor    := clGray; //$D3D3D3;
   FFillColor    := RGBToColor(0, 84, 184);
-  FButtonColor  := $696969;
-  FBtnDownColor := $998877;
+  FButtonColor  := $00A56E3A; //$696969;
+  FBtnDownColor := $00D5965E; //$998877;
 
   Constraints.MinWidth  := 10;
   Constraints.MinHeight := 2;
