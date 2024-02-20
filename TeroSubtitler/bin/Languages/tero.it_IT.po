@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 16.02.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 20.02.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -3454,35 +3454,30 @@ msgid "Words per minute"
 msgstr "Parole per minuto"
 
 #: tfrmmain.actshoweditortoolbaralignment.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbaralignment.caption"
 msgid "Alignment"
 msgstr "Allineamento"
 
 #: tfrmmain.actshoweditortoolbarbasic.caption
 msgid "Basic"
-msgstr ""
+msgstr "Base"
 
 #: tfrmmain.actshoweditortoolbarentry.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarentry.caption"
 msgid "Entry"
 msgstr "Elemento"
 
 #: tfrmmain.actshoweditortoolbarformat.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarformat.caption"
 msgid "Format"
 msgstr "Formato"
 
 #: tfrmmain.actshoweditortoolbarlines.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarlines.caption"
 msgid "Lines"
 msgstr "Linee"
 
 #: tfrmmain.actshoweditortoolbarwords.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarwords.caption"
 msgid "Words"
 msgstr "Parole"
@@ -3497,13 +3492,11 @@ msgid "Encoding"
 msgstr "Codifica"
 
 #: tfrmmain.actshowtoolbarentry.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowtoolbarentry.caption"
 msgid "Entry"
 msgstr "Elemento"
 
 #: tfrmmain.actshowtoolbarfile.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowtoolbarfile.caption"
 msgid "File"
 msgstr "File"
@@ -3519,7 +3512,6 @@ msgid "FPS"
 msgstr "FPS"
 
 #: tfrmmain.actshowtoolbargeneral.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowtoolbargeneral.caption"
 msgid "General"
 msgstr "Generale"
@@ -3529,7 +3521,6 @@ msgid "Quick Action"
 msgstr "Azione rapida"
 
 #: tfrmmain.actshowtoolbarview.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowtoolbarview.caption"
 msgid "View"
 msgstr "Visualizza"
@@ -3537,10 +3528,9 @@ msgstr "Visualizza"
 #: tfrmmain.actshowvideotoolbarcontrols.caption
 msgctxt "tfrmmain.actshowvideotoolbarcontrols.caption"
 msgid "Controls"
-msgstr ""
+msgstr "Controlli"
 
 #: tfrmmain.actshowvideotoolbarentry.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowvideotoolbarentry.caption"
 msgid "Entry"
 msgstr "Elemento"
@@ -3548,15 +3538,14 @@ msgstr "Elemento"
 #: tfrmmain.actshowvideotoolbarother.caption
 msgctxt "tfrmmain.actshowvideotoolbarother.caption"
 msgid "Other"
-msgstr ""
+msgstr "Altro"
 
 #: tfrmmain.actshowwaveformtoolbarcontrols.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarcontrols.caption"
 msgid "Controls"
-msgstr ""
+msgstr "Controlli"
 
 #: tfrmmain.actshowwaveformtoolbarentry.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowwaveformtoolbarentry.caption"
 msgid "Entry"
 msgstr "Elemento"
@@ -3564,17 +3553,16 @@ msgstr "Elemento"
 #: tfrmmain.actshowwaveformtoolbarother.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
 msgid "Other"
-msgstr ""
+msgstr "Altro"
 
 #: tfrmmain.actshowwaveformtoolbarshotchanges.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowwaveformtoolbarshotchanges.caption"
 msgid "Shot changes"
 msgstr "Cambi inquadratura"
 
 #: tfrmmain.actshowwaveformtoolbarzoom.caption
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: tfrmmain.actsort.caption
 msgid "Sort"
@@ -4027,8 +4015,6 @@ msgid "Video"
 msgstr "Video"
 
 #: tfrmmain.mnuvideoaspectratio.caption
-#, fuzzy
-#| msgid "Aspect Ratio"
 msgid "Aspect ratio"
 msgstr "Formato"
 
@@ -4069,13 +4055,11 @@ msgid "Columns"
 msgstr "Colonne"
 
 #: tfrmmain.mnuviewtoolbareditor.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbareditor.caption"
 msgid "Editor"
 msgstr "Editor"
 
 #: tfrmmain.mnuviewtoolbarmain.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbarmain.caption"
 msgid "Main"
 msgstr "Principale"
@@ -4085,13 +4069,11 @@ msgid "Toolbars"
 msgstr "Barre strumenti"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
 msgid "Video"
 msgstr "Video"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbarwaveform.caption"
 msgid "Waveform"
 msgstr "Forma d’onda"
@@ -5246,4 +5228,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
