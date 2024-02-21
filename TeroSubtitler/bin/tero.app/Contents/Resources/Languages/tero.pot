@@ -3867,11 +3867,6 @@ msgstr ""
 msgid "Current video position"
 msgstr ""
 
-#: tfrmmain.mnudictionary.caption
-msgctxt "tfrmmain.mnudictionary.caption"
-msgid "Dictionary"
-msgstr ""
-
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
 msgid "Edit"

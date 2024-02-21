@@ -3890,11 +3890,6 @@ msgstr "Video length and FPS"
 msgid "Current video position"
 msgstr "Current video position"
 
-#: tfrmmain.mnudictionary.caption
-msgctxt "tfrmmain.mnudictionary.caption"
-msgid "Dictionary"
-msgstr "Dictionary"
-
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
 msgid "Edit"
