@@ -731,7 +731,7 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWGPACTTXT.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWIAuthor.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWInscriberCG.Create(AShouldWriteBOM)) );
-  AList.Add( TUWSubtitleCustomFormat(TUWITunesTimedText.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWITunesTimedText.Create(False)) ); //"Important: The iTT file must not contain a byte-order mark (BOM)."
   AList.Add( TUWSubtitleCustomFormat(TUWJACOSub.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWKaraokeLyricsLRC.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWKaraokeLyricsVKT.Create(AShouldWriteBOM)) );
