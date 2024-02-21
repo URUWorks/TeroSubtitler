@@ -1,4 +1,5 @@
 1.0.1.7 (x.x.2024)
+- fixed: CPL breach not flagged in Fix Subtitles #261
 - fixed: Error on saving custom shortcut #260
 - fixed: Persian text displays wrong in list view #244
 - fixed: No BOM in UTF-8 files. #213
@@ -14,6 +15,7 @@
 - fixed: Minimum gapping not respected when applying snap times to shot changes
 - updated: Italian language (thx GitGianluc/bovirus)
 - improved: Changed the appearance of the timeline
+- improved: Moved dictionary selector to status bar
 - improved: Toolbars and user interface
 - improved: UI - More space in Settings and increase string width #253
 - improved: Add conventions for Prime Video #159
