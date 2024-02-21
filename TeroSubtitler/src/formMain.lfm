@@ -1253,11 +1253,16 @@ object frmMain: TfrmMain
         Width = 250
       end    
       item
-        Alignment = taRightJustify
         Bevel = pbNone
         Width = 200
+      end    
+      item
+        Alignment = taRightJustify
+        Bevel = pbNone
+        Width = 150
       end>
     SimplePanel = False
+    OnMouseUp = StatusBarMouseUp
   end
   object CoolBarMain: TCoolBar
     Left = 0
@@ -5286,12 +5291,6 @@ object frmMain: TfrmMain
     object mnuHunspellSeparator: TMenuItem
       Caption = '-'
     end
-    object mnuDictionary: TMenuItem
-      Caption = 'Dictionary'
-    end
-    object Separator24: TMenuItem
-      Caption = '-'
-    end
     object MenuItem96: TMenuItem
       Action = actWebReference
     end
@@ -5586,5 +5585,9 @@ object frmMain: TfrmMain
       Action = actShowVideoToolbarOther
       AutoCheck = True
     end
+  end
+  object popDictionaries: TPopupMenu
+    Left = 152
+    Top = 376
   end
 end

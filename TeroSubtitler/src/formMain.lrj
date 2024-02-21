@@ -349,7 +349,6 @@
 {"hash":5004185,"name":"tfrmmain.actshowvideotoolbarentry.caption","sourcebytes":[69,110,116,114,121],"value":"Entry"},
 {"hash":261306372,"name":"tfrmmain.mnuvstformat.caption","sourcebytes":[109,110,117,86,83,84,70,111,114,109,97,116],"value":"mnuVSTFormat"},
 {"hash":6093503,"name":"tfrmmain.mnuvstvideo.caption","sourcebytes":[86,105,100,101,111],"value":"Video"},
-{"hash":184739641,"name":"tfrmmain.mnudictionary.caption","sourcebytes":[68,105,99,116,105,111,110,97,114,121],"value":"Dictionary"},
 {"hash":128765908,"name":"tfrmmain.mnumemoformat.caption","sourcebytes":[109,110,117,77,101,109,111,70,111,114,109,97,116],"value":"mnuMemoFormat"},
 {"hash":157454434,"name":"tfrmmain.mnumemoinsertunicodecontrolchar.caption","sourcebytes":[73,110,115,101,114,116,32,85,110,105,99,111,100,101,32,99,111,110,116,114,111,108,32,99,104,97,114,97,99,116,101,114],"value":"Insert Unicode control character"},
 {"hash":229123186,"name":"tfrmmain.mnuvideopopupar.caption","sourcebytes":[109,110,117,86,105,100,101,111,80,111,112,117,112,65,82],"value":"mnuVideoPopupAR"},

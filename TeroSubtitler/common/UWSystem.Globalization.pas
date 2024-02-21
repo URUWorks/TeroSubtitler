@@ -26,7 +26,7 @@ interface
 uses
   SysUtils, Classes;
 
-function GetCultureDisplayName(const CultureName: AnsiString): String;
+function GetCultureDisplayName(CultureName: AnsiString): String;
 function GetCultureName(const Index: Integer): String; overload;
 function GetCultureName(const ADisplayName: String): String; overload;
 function GetCultureShortName(const Index: Integer): String;
@@ -681,14 +681,15 @@ const
 
 // -----------------------------------------------------------------------------
 
-function GetCultureDisplayName(const CultureName: AnsiString): String;
+function GetCultureDisplayName(CultureName: AnsiString): String;
 var
   i: Integer;
 begin
   Result := '';
+  CultureName := AnsiLowerCase(CultureName.Replace('_', '-'));
 
   for i := 0 to MaxCultureItems-1 do
-    if AnsiLowerCase(CultureInfo[i].CultureName) = AnsiLowerCase(CultureName) then
+    if AnsiLowerCase(CultureInfo[i].CultureName) = CultureName then
     begin
       Result := CultureInfo[i].DisplayName;
       Break;

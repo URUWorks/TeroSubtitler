@@ -42,7 +42,7 @@ procedure FillComboWithWhisperEngines(const ACombo: TComboBox; const AIndex: Int
 procedure FillComboWithModels(const Combo: TComboBox);
 procedure FillComboWithFasterModels(const Combo: TComboBox);
 procedure FillComboWithCustomFormat(const Combo: TComboBox; const AExtension: String = '*.cft');
-procedure FillWithDictionaries(const AMenu: TMenuItem; const ACombo: TComboBox);
+procedure FillWithDictionaries(const AParent: TComponent; const ACombo: TComboBox);
 procedure FillMenuWithPlayRate(const AParent: TComponent);
 procedure FillMenuWithLoopCount(const AParent: TComponent);
 procedure FillMenuWithAudioStreams(const AParent: TComponent);
@@ -90,7 +90,7 @@ procedure SetStatusBarText(const AText: String; const APanelIndex: Integer = 0; 
 
 procedure DoAutoCheckErrors(const AAll: Boolean = True; const ARefresh: Boolean = False);
 
-procedure UpdateStatusBar;
+procedure UpdateStatusBar(const AUpdateDictionary: Boolean = False);
 procedure UpdateCPSAndTexts(const AIndex: Integer);
 procedure UpdateValuesForSubtitle(const AIndex: Integer);
 procedure UpdateValues(const AInvalidate: Boolean = False);
@@ -419,7 +419,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure FillWithDictionaries(const AMenu: TMenuItem; const ACombo: TComboBox);
+procedure FillWithDictionaries(const AParent: TComponent; const ACombo: TComboBox);
 var
   SearchRec : TSearchRec;
   mnu       : TMenuItem;
@@ -431,7 +431,7 @@ begin
     x := 0;
     repeat
       s := ChangeFileExt(SearchRec.Name, '');
-      if AMenu <> NIL then
+      if AParent <> NIL then
       begin
         l := Pos(' ', s);
         if l > 0 then
@@ -439,15 +439,21 @@ begin
         else
           s1 := s;
 
-        mnu         := TMenuItem.Create(AMenu);
+        mnu         := TMenuItem.Create(AParent);
         mnu.Name    := 'dic_' + IntToStr(x);
-        mnu.Caption := Trim(GetCultureDisplayName(ReplaceString(s1, '_', '-')) + ' [' + s + ']');
+        mnu.Caption := Trim(GetCultureDisplayName(s1) + ' [' + s + ']');
         mnu.OnClick := @frmMain.DoDictionaryItemClick;
         if s = AppOptions.HunspellLanguage then
           mnu.Checked := True
         else
           mnu.Checked := False;
-        AMenu.Insert(x, mnu);
+
+        if AParent is TPopupMenu then
+          with AParent as TPopupMenu do
+            Items.Add(mnu)
+        else if AParent is TMenuItem then
+          with AParent as TMenuItem do
+            Add(mnu);
       end
       else if ACombo <> NIL then
       begin
@@ -1358,23 +1364,33 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure UpdateStatusBar;
+procedure UpdateStatusBar(const AUpdateDictionary: Boolean = False);
 var
   s: String;
 begin
   s := '';
   with frmMain do
-    if VST.Enabled then
+    if not AUpdateDictionary then
     begin
-      if VST.SelectedCount > 1 then
-        s := Format(lngasLineSelected, [VST.SelectedCount, VST.TotalCount])
-      else if (VST.SelectedCount = 1) and (VSTFocusedNode(VST) >= 0) then
-        s := Format('%d / %d', [VSTFocusedNode(VST)+1, VST.TotalCount])
-      else
-        s := IntToStr(VST.TotalCount);
-    end;
+      if VST.Enabled then
+      begin
+        if VST.SelectedCount > 1 then
+          s := Format(lngasLineSelected, [VST.SelectedCount, VST.TotalCount])
+        else if (VST.SelectedCount = 1) and (VSTFocusedNode(VST) >= 0) then
+          s := Format('%d / %d', [VSTFocusedNode(VST)+1, VST.TotalCount])
+        else
+          s := IntToStr(VST.TotalCount);
+      end;
+      SetStatusBarText(s + '     ', 2);
+    end
+    else
+    begin
+      s := AppOptions.HunspellLanguage;
+      if Pos(' ', s) > 0 then
+        s := Copy(s, 1, Pos(' ', s)-1);
 
-  SetStatusBarText(s + '     ', 1);
+      SetStatusBarText(GetCultureDisplayName(s), 1, False);
+    end;
 end;
 
 // -----------------------------------------------------------------------------

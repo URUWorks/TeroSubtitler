@@ -457,6 +457,7 @@ type
     popCoolBarWaveform: TPopupMenu;
     popCoolBarEditor: TPopupMenu;
     popCoolBarVideo: TPopupMenu;
+    popDictionaries: TPopupMenu;
     Separator50: TMenuItem;
     Separator57: TMenuItem;
     MenuItem233: TMenuItem;
@@ -674,7 +675,6 @@ type
     MenuItem97: TMenuItem;
     MenuItem98: TMenuItem;
     MenuItem99: TMenuItem;
-    mnuDictionary: TMenuItem;
     mnuHunspellSeparator: TMenuItem;
     mnuViewColumns: TMenuItem;
     mnuEditTimingsExtend: TMenuItem;
@@ -711,7 +711,6 @@ type
     Separator22: TMenuItem;
     mnuNoteSeparator: TMenuItem;
     Separator23: TMenuItem;
-    Separator24: TMenuItem;
     Separator25: TMenuItem;
     Separator26: TMenuItem;
     Separator27: TMenuItem;
@@ -894,6 +893,8 @@ type
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure LayoutVSTResize(Sender: TObject);
+    procedure StatusBarMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure tedTimeChange(Sender: TObject; const NewTime: Cardinal);
     procedure UndoChanged(const ChangeType: TUndoChangeType);
     procedure mmoTextChange(Sender: TObject);
@@ -1341,7 +1342,7 @@ begin
   FillComboWithFormats(cboFormat);
   FillMenuWithPlayRate(popPlayRate);
   FillMenuWithLoopCount(popLoopCount);
-  FillWithDictionaries(mnuDictionary, NIL);
+  FillWithDictionaries(popDictionaries, NIL);
   FillMenuWithUnicodeChars(mnuEditInsertChar);
   mnuVSTFormat.Assign(mnuEditFormat);
   mnuMemoFormat.Assign(mnuEditFormat);
@@ -1443,6 +1444,7 @@ begin
   lblMediaTime.Width := lblMediaTime.Canvas.TextWidth('00:00:00.000');
   SetWorkMode(Workspace.WorkMode);
   EnableWorkArea(False);
+  UpdateStatusBar(True);
   CheckColorTheme(Self);
 end;
 
@@ -1499,8 +1501,14 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.FormResize(Sender: TObject);
+var
+  i, c: Integer;
 begin
-  StatusBar.Panels[0].Width := ClientWidth - StatusBar.Panels[1].Width;
+  c := 0;
+  for i := 1 to StatusBar.Panels.Count-1 do
+    c += StatusBar.Panels[i].Width;
+
+  StatusBar.Panels[0].Width := ClientWidth - c;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1540,6 +1548,25 @@ begin
   end
   else
     mmoText.Width := NewWidth;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.StatusBarMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+  idx : Integer;
+  p : TPoint;
+begin
+  if Button = mbLeft then
+  begin
+    idx := StatusBar.GetPanelIndexAt(X, Y);
+    if idx = 1 then
+    begin
+      p := StatusBar.ClientToScreen(Point(X, Y));
+      popDictionaries.PopUp(p.X, p.Y);
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1758,12 +1785,13 @@ begin
   // select dictionary
   if AppOptions.HunspellLanguage <> (Sender as TMenuItem).Caption then
   begin
-    for i := 0 to mnuDictionary.Count-1 do mnuDictionary.Items[i].Checked := False;
+    for i := 0 to popDictionaries.Items.Count-1 do popDictionaries.Items[i].Checked := False;
 
     (Sender as TMenuItem).Checked := True;
     AppOptions.HunspellLanguage := GetDictionaryNameFromCaption((Sender as TMenuItem).Caption);
 
     HunspellInstance.LoadDictionary(DictionariesFolder+AppOptions.HunspellLanguage+'.aff', DictionariesFolder+AppOptions.HunspellLanguage+'.dic');
+    UpdateStatusBar(True);
   end;
 end;
 

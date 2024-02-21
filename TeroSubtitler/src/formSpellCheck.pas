@@ -132,11 +132,11 @@ begin
   FTempList.Free;
 
   with frmMain do
-    for i := 0 to mnuDictionary.Count-1 do
-      if mnuDictionary.Items[i].Caption = cboDictionary.Text then
-        mnuDictionary.Items[i].Checked := True
+    for i := 0 to popDictionaries.Items.Count-1 do
+      if popDictionaries.Items[i].Caption = cboDictionary.Text then
+        popDictionaries.Items[i].Checked := True
       else
-        mnuDictionary.Items[i].Checked := False;
+        popDictionaries.Items[i].Checked := False;
 
   CloseAction := caFree;
   frmSpellCheck := NIL;
