@@ -497,7 +497,7 @@ begin
 
     for i := 0 to Words.Count-1 do
     begin
-      if UTF8Length(CurrentLine + Words[i]) <= AMaxChrsPerLine then
+      if UTF8Length(CurrentLine + Words[i]) < AMaxChrsPerLine then //CPL breach not flagged in Fix Subtitles #261
       begin
         if not CurrentLine.IsEmpty then
           CurrentLine += ' ';

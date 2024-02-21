@@ -407,12 +407,11 @@ end;
 
 function SmartLineAdjust(Text: String; const ChrsPerLine: Integer; const BreakChar: String = sLineBreak): String;
 var
-  l, i : Integer;
+  i : Integer;
   s : TStringList;
 begin
   Result := Text;
-  l := UTF8Length(Text);
-  if Text.IsEmpty or (l <= ChrsPerLine) or ((l <= ChrsPerLine) and not AnsiContainsText(Text, '-')) then Exit;
+  if Text.IsEmpty or (UTF8Length(Text) <= ChrsPerLine) then Exit;
 
   Text := RemoveUnnecessarySpaces(Text, BreakChar);
 
