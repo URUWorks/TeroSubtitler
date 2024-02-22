@@ -67,6 +67,8 @@ begin
 
       ZeroArray.Clear;
       joData := TJSONObject(Data);
+      if not Assigned(joData) then Exit; //Access violation #266
+
       jaData := joData.Get('Shortcuts', ZeroArray);
       for i := 0 to jaData.Count-1 do
       begin
