@@ -1,4 +1,5 @@
 1.0.1.7 (x.x.2024)
+- fixed: Access violation #266
 - fixed: CPL breach not flagged in Fix Subtitles #261
 - fixed: Error on saving custom shortcut #260
 - fixed: Persian text displays wrong in list view #244
