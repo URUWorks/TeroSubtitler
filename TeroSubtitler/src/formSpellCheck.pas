@@ -329,6 +329,7 @@ begin
   begin
     AppOptions.HunspellLanguage := GetDictionaryNameFromCaption(cboDictionary.Text);
     HunspellInstance.LoadDictionary(DictionariesFolder+AppOptions.HunspellLanguage+'.aff', DictionariesFolder+AppOptions.HunspellLanguage+'.dic');
+    UpdateStatusBar(True);
 
     InitializeSpellAtLine;
     DoSpell;
