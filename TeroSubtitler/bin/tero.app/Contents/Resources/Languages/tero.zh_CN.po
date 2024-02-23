@@ -1,0 +1,5027 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tero Subtitler\n"
+"POT-Creation-Date: 2024-02-23\n"
+"PO-Revision-Date: 2024-02-23 22:49+0800\n"
+"Last-Translator: Little-data\n"
+"Language-Team: Little-data\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: proclocalize.lngabversion
+#, object-pascal-format
+msgid ""
+"version %s\n"
+"\n"
+"Compiled at %s on %s\n"
+"Compiler version: %s\n"
+"Target CPU: %s"
+msgstr ""
+"版本 %s\n"
+"\n"
+"编译于 %s 在 %s\n"
+"编译器版本： %s\n"
+"目标CPU平台： %s"
+
+#: proclocalize.lngadditionaloption
+msgid "Additional option"
+msgstr "附加选项"
+
+#: proclocalize.lngadditionalparams
+msgid "Additional params:"
+msgstr "附加参数："
+
+#: proclocalize.lngaddnote
+msgid "Add note"
+msgstr "添加笔记"
+
+#: proclocalize.lngallsupportedfiles
+msgid "All supported files"
+msgstr "所有支持的文件"
+
+#: proclocalize.lngasbadvalues
+msgid "Bad values"
+msgstr "非法值"
+
+#: proclocalize.lngasbreaklonglines
+msgid "Line(s) too long"
+msgstr "行数过长"
+
+#: proclocalize.lngascustom
+msgid "Custom"
+msgstr "自定义"
+
+#: proclocalize.lngasellipsessinglesmartcharacter
+msgid "Ellipses dots instead of Unicode character"
+msgstr "用椭圆点代替 Unicode 字符"
+
+#: proclocalize.lngasempty
+msgid "Empty entry"
+msgstr "空条目"
+
+#: proclocalize.lngasfixtags
+msgid "Invalid or incomplete tags"
+msgstr "无效或不完整的标签"
+
+#: proclocalize.lngasgaptooshort
+msgid "Gap too short"
+msgstr "间距太短"
+
+#: proclocalize.lngashearingimpaired
+msgid "Hearing impaired"
+msgstr "不可见"
+
+#: proclocalize.lngasktoextractaudio
+msgid "Audio waveform was not found, do you want to extract it?"
+msgstr "未找到音频波形，是否要提取？"
+
+#: proclocalize.lngasktosave
+#, object-pascal-format
+msgid ""
+"“%s”\n"
+"\n"
+"Do you wish to save it?"
+msgstr ""
+"“%s”\n"
+"\n"
+"想要保存它吗？"
+
+#: proclocalize.lngaslineselected
+#, object-pascal-format
+msgid "%d lines selected / %d"
+msgstr "%d 行被选中 / %d"
+
+#: proclocalize.lngasmarked
+msgid "Marked entry"
+msgstr "标记条目"
+
+#: proclocalize.lngasmaxcps
+msgid "Too many CPS"
+msgstr "每秒字符太多"
+
+#: proclocalize.lngasmaxlines
+msgid "Maximum number of lines exceeded"
+msgstr "超过最大行数"
+
+#: proclocalize.lngasocr
+msgid "OCR error"
+msgstr "OCR 出错"
+
+#: proclocalize.lngasoverlappingwithnext
+msgid "Overlapping with following entry"
+msgstr "与以下条目重叠"
+
+#: proclocalize.lngasoverlappingwithprev
+msgid "Overlapping with previous entry"
+msgstr "与以上条目重叠"
+
+#: proclocalize.lngasprohibitedchars
+msgid "Contains a prohibited character"
+msgstr "包含禁用字符"
+
+#: proclocalize.lngasreadingvideofile
+msgid "Reading video file..."
+msgstr "读取视频文件中..."
+
+#: proclocalize.lngasrepeatedchars
+msgid "Repeated character"
+msgstr "重复字符"
+
+#: proclocalize.lngasrepeatedentry
+msgid "Repeated entry"
+msgstr "重复条目"
+
+#: proclocalize.lngastext
+msgctxt "proclocalize.lngastext"
+msgid "Text"
+msgstr "文本"
+
+#: proclocalize.lngastextchars
+#, object-pascal-format
+msgid "Text (%s characters at %.2f CPS):"
+msgstr "文本 (%s 字符以 %.2f 每秒字符):"
+
+#: proclocalize.lngastimetoolong
+msgid "Duration too long"
+msgstr "持续时间过长"
+
+#: proclocalize.lngastimetooshort
+msgid "Duration too short"
+msgstr "持续时间过短"
+
+#: proclocalize.lngastranslation
+msgctxt "proclocalize.lngastranslation"
+msgid "Translation"
+msgstr "翻译"
+
+#: proclocalize.lngastranslationchars
+#, object-pascal-format
+msgid "Translation (%s characters at %.2f CPS):"
+msgstr "译文 (%s 字符以 %.2f 每秒字符):"
+
+#: proclocalize.lngasunbreak
+#, object-pascal-format
+msgid "Line breaks less than %d characters"
+msgstr "换行小于 %d 字符"
+
+#: proclocalize.lngasunnecessarydots
+msgid "Unnecessary dots"
+msgstr "不必要的逗点"
+
+#: proclocalize.lngasunnecessaryspaces
+msgid "Unnecessary spaces"
+msgstr "不必要的空格"
+
+#: proclocalize.lngasvideolen
+#, object-pascal-format
+msgid "/ %s (%s FPS)"
+msgstr ""
+
+#: proclocalize.lngasvideolensmpte
+#, object-pascal-format
+msgid "/ %s (%s FPS/SMPTE)"
+msgstr ""
+
+#: proclocalize.lngaswaveformtext
+msgid "Click here to use timeline"
+msgstr "点这里使用时间轴"
+
+#: proclocalize.lngbackupsaved
+msgid "Backup saved."
+msgstr "备份已保存。"
+
+#: proclocalize.lngbcfileformat
+msgctxt "proclocalize.lngbcfileformat"
+msgid "Format"
+msgstr "样式"
+
+#: proclocalize.lngbcfilename
+msgctxt "proclocalize.lngbcfilename"
+msgid "File name"
+msgstr "文件名"
+
+#: proclocalize.lngbcfilestate
+msgid "Status"
+msgstr "状态"
+
+#: proclocalize.lngbtnadd
+msgctxt "proclocalize.lngbtnadd"
+msgid "Add"
+msgstr "添加"
+
+#: proclocalize.lngbtncancel
+msgctxt "proclocalize.lngbtncancel"
+msgid "Cancel"
+msgstr "取消"
+
+#: proclocalize.lngbtnclose
+msgctxt "proclocalize.lngbtnclose"
+msgid "Close"
+msgstr "关闭"
+
+#: proclocalize.lngbtnload
+msgid "Open"
+msgstr "打开"
+
+#: proclocalize.lngbtnremove
+msgctxt "proclocalize.lngbtnremove"
+msgid "Remove"
+msgstr "移除"
+
+#: proclocalize.lngbtnsave
+msgid "Save"
+msgstr "保存"
+
+#: proclocalize.lngbtnupdate
+msgctxt "proclocalize.lngbtnupdate"
+msgid "Update"
+msgstr "更新"
+
+#: proclocalize.lngcfsframes
+msgctxt "proclocalize.lngcfsframes"
+msgid "Frames"
+msgstr "帧"
+
+#: proclocalize.lngcfstime
+msgctxt "proclocalize.lngcfstime"
+msgid "Time"
+msgstr "时间"
+
+#: proclocalize.lngcontinueanyway
+msgid "Continue?"
+msgstr "要继续吗？"
+
+#: proclocalize.lngdetect
+msgid "Auto-detect"
+msgstr "自动检测"
+
+#: proclocalize.lngdetectdialogsegmentswarning
+msgid "Attempting to detect dialogue segments deletes all entries from the list."
+msgstr "试图检测对话片段时，会删除列表中的所有条目。"
+
+#: proclocalize.lngentry
+#, object-pascal-format
+msgid "Entry %d"
+msgstr "条目 %d"
+
+#: proclocalize.lngentryendedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentryendedat"
+msgid "Entry ended in %s"
+msgstr "条目结束于 %s"
+
+#: proclocalize.lngentrystartedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentrystartedat"
+msgid "Entry started at %s"
+msgstr "条目开始于 %s"
+
+#: proclocalize.lngerrorexecuting
+#, object-pascal-format
+msgid "Error executing “%s”."
+msgstr "执行“%s”出错。"
+
+#: proclocalize.lngextractapperror
+#, object-pascal-format
+msgid "Unable to find “%s”. Check in settings if it is configured correctly."
+msgstr "无法找到“%s”。请在设置中检查配置是否正确。"
+
+#: proclocalize.lngextracting
+msgid "Extracting..."
+msgstr "提取中..."
+
+#: proclocalize.lngfailed
+msgid "Failed."
+msgstr "不存在。"
+
+#: proclocalize.lngfailedtodownload
+msgid "No content downloaded, missing file or no Internet connection."
+msgstr "未下载内容、文件丢失或无网络连接。"
+
+#: proclocalize.lngfeaturenotavailablefromurl
+msgid "Function not available for online video."
+msgstr "该功能不适用于在线视频。"
+
+#: proclocalize.lngfilechanged
+msgid "File has not been saved."
+msgstr "文件未保存。"
+
+#: proclocalize.lngfilenotfound
+msgid "File cannot be found."
+msgstr "找不到文件。"
+
+#: proclocalize.lngfilesavedsuccessfully
+msgid "File saved successfully."
+msgstr "成功保存文件。"
+
+#: proclocalize.lngfocenter
+msgid "Center"
+msgstr "中央"
+
+#: proclocalize.lngfolatin
+msgid "Latin"
+msgstr ""
+
+#: proclocalize.lngfolatinarabic
+msgid "Latin/Arabic"
+msgstr ""
+
+#: proclocalize.lngfolatincyrillic
+msgid "Latin/Cyrillic"
+msgstr ""
+
+#: proclocalize.lngfolatingreek
+msgid "Latin/Greek"
+msgstr ""
+
+#: proclocalize.lngfolatinhebrew
+msgid "Latin/Hebrew"
+msgstr ""
+
+#: proclocalize.lngfoldernotempty
+msgid "The folder is not empty."
+msgstr "文件夹不是空的。"
+
+#: proclocalize.lngfoleft
+msgctxt "proclocalize.lngfoleft"
+msgid "Left"
+msgstr "靠左"
+
+#: proclocalize.lngfolevel1teletext
+msgid "Level-1 teletext"
+msgstr "一级文字"
+
+#: proclocalize.lngfolevel2teletext
+msgid "Level-2 teletext"
+msgstr "二级文字"
+
+#: proclocalize.lngfoopensubtitling
+msgid "Open subtitling"
+msgstr "打开字幕处理"
+
+#: proclocalize.lngforight
+msgid "Right"
+msgstr "靠右"
+
+#: proclocalize.lngfoundefined
+msgid "Undefined"
+msgstr "未定义"
+
+#: proclocalize.lngfsaction
+msgid "Action"
+msgstr "动作"
+
+#: proclocalize.lngfsaddspacing
+msgid "Add spacing"
+msgstr "添加间距"
+
+#: proclocalize.lngfsafter
+msgid "After"
+msgstr "之后"
+
+#: proclocalize.lngfscurrent
+msgid "Current"
+msgstr "当前"
+
+#: proclocalize.lngfsetbadvalues
+msgid "Fix bad timing values"
+msgstr "修复错误的时间值"
+
+#: proclocalize.lngfsetbreaklonglines
+msgid "Break overlong lines"
+msgstr "断开过长的行"
+
+#: proclocalize.lngfsetchaining
+msgid "Chaining entries"
+msgstr "连锁条目"
+
+#: proclocalize.lngfsetcleanuptags
+msgid "Cleanup tags"
+msgstr "清理标签"
+
+#: proclocalize.lngfsetellipsessinglesmartcharacter
+msgid "Convert ellipsis dots to Unicode character"
+msgstr "将省略号点转换为 Unicode 字符"
+
+#: proclocalize.lngfsetempty
+msgid "Remove empty entries"
+msgstr "移除空行"
+
+#: proclocalize.lngfsetfixinterrobang
+msgid "Fix interrobang: !? -> ?!"
+msgstr "修复标点： !? -> ?!"
+
+#: proclocalize.lngfsetfixtags
+msgid "Fix invalid tags"
+msgstr "修复无效标签"
+
+#: proclocalize.lngfsethearingimpaired
+msgid "Remove text for hearing impaired"
+msgstr "移除看不到的条目"
+
+#: proclocalize.lngfsetincompletehyphentext
+msgid "Remove incomplete hyphenated line"
+msgstr "删除不完整的连字符行"
+
+#: proclocalize.lngfsetocr
+msgid "Fix common OCR errors"
+msgstr "修复常见的OCR错误"
+
+#: proclocalize.lngfsetoverlapping
+msgid "Fix overlapping display times"
+msgstr "修复显示时间重叠"
+
+#: proclocalize.lngfsetprohibitedchars
+#, object-pascal-format
+msgid "Remove entries with %s"
+msgstr "删除带有 %s"
+
+#: proclocalize.lngfsetremovespaceswithinbrackets
+msgid "Remove spaces within brackets"
+msgstr "删除括号内的空格"
+
+#: proclocalize.lngfsetrepeatedchars
+msgid "Remove repeated characters"
+msgstr "删除重复字符"
+
+#: proclocalize.lngfsetrepeatedentry
+msgctxt "proclocalize.lngfsetrepeatedentry"
+msgid "Remove repeated entries"
+msgstr "删除重复条目"
+
+#: proclocalize.lngfsetsnaptoshotchanges
+msgid "Snap times to shot changes"
+msgstr ""
+
+#: proclocalize.lngfsetsnaptoshotchangesincue
+msgid "Snap In Cue to shot change"
+msgstr ""
+
+#: proclocalize.lngfsetsnaptoshotchangesincueaway
+msgid "Snap In Cue away from shot change"
+msgstr ""
+
+#: proclocalize.lngfsetsnaptoshotchangesoutcue
+msgid "Snap Out Cue to shot change"
+msgstr ""
+
+#: proclocalize.lngfsetspaceofopeninghyphen
+msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
+msgid "Spacing of opening hyphen"
+msgstr "开头连字符间距"
+
+#: proclocalize.lngfsettimetoolong
+msgid "Fix durations too long"
+msgstr "修复时间过长"
+
+#: proclocalize.lngfsettimetooshort
+msgid "Fix durations too short"
+msgstr "修复时间过长短"
+
+#: proclocalize.lngfsetunbreak
+#, object-pascal-format
+msgid "Remove line breaks if %d characters not exceeded"
+msgstr "如果未超过 %d 字符，则删除换行符"
+
+#: proclocalize.lngfsetunnecessarydots
+msgid "Remove unnecessary dots"
+msgstr "移除不必要的点"
+
+#: proclocalize.lngfsetunnecessaryspaces
+msgid "Remove unnecessary spaces"
+msgstr "移除不必要的空格"
+
+#: proclocalize.lngfsindex
+msgctxt "proclocalize.lngfsindex"
+msgid "#"
+msgstr ""
+
+#: proclocalize.lngfsremovespacing
+msgid "Remove spacing"
+msgstr "移除空格"
+
+#: proclocalize.lnghcpl
+msgctxt "proclocalize.lnghcpl"
+msgid "CPL"
+msgstr "每行字符数"
+
+#: proclocalize.lnghcps
+msgctxt "proclocalize.lnghcps"
+msgid "CPS"
+msgstr "每秒字符数"
+
+#: proclocalize.lnghduration
+msgctxt "proclocalize.lnghduration"
+msgid "Duration"
+msgstr "持续时间"
+
+#: proclocalize.lnghhmmssff
+msgid "SMPTE [HH:MM:SS:FF]"
+msgstr ""
+
+#: proclocalize.lnghhmmsszzz
+msgid "Media [HH:MM:SS.ZZZ]"
+msgstr ""
+
+#: proclocalize.lnghindex
+msgid "#/Gap"
+msgstr ""
+
+#: proclocalize.lnghstyleandactor
+msgctxt "proclocalize.lnghstyleandactor"
+msgid "Style/Actor"
+msgstr "样式/说话人"
+
+#: proclocalize.lnghtext
+msgctxt "proclocalize.lnghtext"
+msgid "Text"
+msgstr "文本"
+
+#: proclocalize.lnghtimes
+msgctxt "proclocalize.lnghtimes"
+msgid "Times"
+msgstr "时间"
+
+#: proclocalize.lnghtranslation
+msgctxt "proclocalize.lnghtranslation"
+msgid "Translation"
+msgstr "译文"
+
+#: proclocalize.lnghwpm
+msgctxt "proclocalize.lnghwpm"
+msgid "WPM"
+msgstr "每分钟字数"
+
+#: proclocalize.lngindex
+msgctxt "proclocalize.lngindex"
+msgid "#"
+msgstr ""
+
+#: proclocalize.lnglibmpverror
+msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
+msgstr "无法找到运行嵌入式 mpv 播放器所需的库。请下载。"
+
+#: proclocalize.lnglibmpvglerror
+msgid "Failed to initialize mpv GL context."
+msgstr "初始化 mpv GL 内容失败。"
+
+#: proclocalize.lnglibmpvversionerror
+msgid "Could not initialize libmpv. Check if the right library was installed."
+msgstr "无法初始化 libmpv。检查是否安装了正确的库。"
+
+#: proclocalize.lngline
+msgid "Line:"
+msgstr "行："
+
+#: proclocalize.lngmrfind
+msgctxt "proclocalize.lngmrfind"
+msgid "Find"
+msgstr "查找"
+
+#: proclocalize.lngmrregexpr
+msgctxt "proclocalize.lngmrregexpr"
+msgid "R. Expression"
+msgstr ""
+
+#: proclocalize.lngmrreplacewith
+msgctxt "proclocalize.lngmrreplacewith"
+msgid "Replace with"
+msgstr "替换为"
+
+#: proclocalize.lngmscontains
+msgctxt "proclocalize.lngmscontains"
+msgid "Contains"
+msgstr "包含"
+
+#: proclocalize.lngmsendswith
+msgctxt "proclocalize.lngmsendswith"
+msgid "Ends with"
+msgstr "结束于"
+
+#: proclocalize.lngmsstartswith
+msgctxt "proclocalize.lngmsstartswith"
+msgid "Starts with"
+msgstr "开始于"
+
+#: proclocalize.lngmultipletracksdetected
+msgid "Multiple tracks detected"
+msgstr "检测到多条轨道"
+
+#: proclocalize.lngnewdurationall
+msgctxt "proclocalize.lngnewdurationall"
+msgid "New duration in all cases"
+msgstr "所有情况下的新持续时间"
+
+#: proclocalize.lngnewdurationgreater
+msgctxt "proclocalize.lngnewdurationgreater"
+msgid "New duration is greater than original"
+msgstr "新的持续时间长于原来的持续时间"
+
+#: proclocalize.lngnewdurationsmaller
+msgctxt "proclocalize.lngnewdurationsmaller"
+msgid "New duration is smaller than original"
+msgstr "新的持续时间短于原来的持续时间"
+
+#: proclocalize.lngnewshortcutpreset
+msgid "Enter a name for your shortcuts preset"
+msgstr "输入快捷方式预设的名称"
+
+#: proclocalize.lngnewshortcutpresetname
+msgctxt "proclocalize.lngnewshortcutpresetname"
+msgid "Name"
+msgstr "名称"
+
+#: proclocalize.lngnewtime
+msgid "New time"
+msgstr "新时间"
+
+#: proclocalize.lngnewversionfound
+msgid "A new version was found."
+msgstr "发现新版本。"
+
+#: proclocalize.lngnoentriesmarked
+msgctxt "proclocalize.lngnoentriesmarked"
+msgid "There are no marked entries."
+msgstr "没有标记的条目。"
+
+#: proclocalize.lngnointernetconnection
+msgid "No Internet connection available"
+msgstr "无网络链接"
+
+#: proclocalize.lngnoname
+msgid "no name"
+msgstr "没有名称"
+
+#: proclocalize.lngnonewversion
+msgid "You're using the latest version."
+msgstr "已经是最新版了。"
+
+#: proclocalize.lngoldtime
+msgid "Old time"
+msgstr "旧时间"
+
+#: proclocalize.lngopencontainingfolder
+msgid "Open containing folder"
+msgstr "打开包含的文件夹"
+
+#: proclocalize.lngopenfile
+msgid "Open file"
+msgstr "打开文件"
+
+#: proclocalize.lngopenvideofromurl
+msgid "Open video from"
+msgstr "打开视频..."
+
+#: proclocalize.lngoriginal
+msgctxt "proclocalize.lngoriginal"
+msgid "Original"
+msgstr "原始"
+
+#: proclocalize.lngpercent
+msgid "Percent"
+msgstr "百分比"
+
+#: proclocalize.lngprojectfile
+msgid "Subtitle Translation Project"
+msgstr "字幕翻译项目"
+
+#: proclocalize.lngpromptfordeletelines
+msgid "The selected lines will be deleted."
+msgstr "选定的行将被删除。"
+
+#: proclocalize.lngqccpl
+msgid "CPL (characters-per-line)"
+msgstr "CPL（每行字符数）"
+
+#: proclocalize.lngqccps
+msgid "CPS (characters-per-second)"
+msgstr "CPS（每秒字符数）"
+
+#: proclocalize.lngqcgap
+msgid "Gap Minimum duration"
+msgstr "差距 最短持续时间"
+
+#: proclocalize.lngqcindex
+msgctxt "proclocalize.lngqcindex"
+msgid "#"
+msgstr ""
+
+#: proclocalize.lngqcmaximumduration
+msgid "Maximum duration"
+msgstr "最大持续时间"
+
+#: proclocalize.lngqcmaximumlines
+msgid "Maximum lines"
+msgstr "最大行数"
+
+#: proclocalize.lngqcminimumduration
+msgid "Minimum duration"
+msgstr "最小持续时间"
+
+#: proclocalize.lngqcrule
+msgid "Broken rule"
+msgstr "无效规则"
+
+#: proclocalize.lngqcwpm
+msgid "WPM (words-per-minute)"
+msgstr "WPM（每分钟字数）"
+
+#: proclocalize.lngrbdatetime
+msgid "Date / Time"
+msgstr "日期/时间"
+
+#: proclocalize.lngrbfilename
+msgctxt "proclocalize.lngrbfilename"
+msgid "File name"
+msgstr "文件名"
+
+#: proclocalize.lngsavefile
+msgid "Save file"
+msgstr "保存文件"
+
+#: proclocalize.lngsavesubtitleerror
+msgid "Error trying to save the file."
+msgstr "尝试保存文件时出现问题。"
+
+#: proclocalize.lngscaudiofilters
+msgctxt "proclocalize.lngscaudiofilters"
+msgid "Audio filters"
+msgstr "音频过滤"
+
+#: proclocalize.lngscedit
+msgctxt "proclocalize.lngscedit"
+msgid "Edit"
+msgstr "编辑"
+
+#: proclocalize.lngsceditor
+msgctxt "proclocalize.lngsceditor"
+msgid "Editor"
+msgstr "编辑器"
+
+#: proclocalize.lngscedl
+msgid "Edit Decision Lists"
+msgstr "编辑判定列表"
+
+#: proclocalize.lngscentries
+msgctxt "proclocalize.lngscentries"
+msgid "Entries"
+msgstr "条目"
+
+#: proclocalize.lngscfile
+msgctxt "proclocalize.lngscfile"
+msgid "File"
+msgstr "文件"
+
+#: proclocalize.lngscfind
+msgctxt "proclocalize.lngscfind"
+msgid "Find"
+msgstr "查找"
+
+#: proclocalize.lngscframes
+msgctxt "proclocalize.lngscframes"
+msgid "Frames"
+msgstr "帧"
+
+#: proclocalize.lngschelp
+msgctxt "proclocalize.lngschelp"
+msgid "Help"
+msgstr "帮助"
+
+#: proclocalize.lngschhmmssff
+msgid "HH:MM:SS:FF"
+msgstr ""
+
+#: proclocalize.lngschhmmsszzz
+msgctxt "proclocalize.lngschhmmsszzz"
+msgid "HH:MM:SS.ZZZ"
+msgstr ""
+
+#: proclocalize.lngscmilliseconds
+msgctxt "proclocalize.lngscmilliseconds"
+msgid "Milliseconds"
+msgstr "毫秒"
+
+#: proclocalize.lngscseconds
+msgid "Seconds"
+msgstr "秒"
+
+#: proclocalize.lngscselect
+msgctxt "proclocalize.lngscselect"
+msgid "Select"
+msgstr "选择"
+
+#: proclocalize.lngscshotchanges
+msgid "Text files"
+msgstr "文本文件"
+
+#: proclocalize.lngsctext
+msgctxt "proclocalize.lngsctext"
+msgid "Text"
+msgstr "文本"
+
+#: proclocalize.lngsctimings
+msgctxt "proclocalize.lngsctimings"
+msgid "Timings"
+msgstr "计时"
+
+#: proclocalize.lngsctools
+msgctxt "proclocalize.lngsctools"
+msgid "Tools"
+msgstr "工具"
+
+#: proclocalize.lngscvideo
+msgctxt "proclocalize.lngscvideo"
+msgid "Video"
+msgstr "视频"
+
+#: proclocalize.lngscvideofilters
+msgctxt "proclocalize.lngscvideofilters"
+msgid "Video filters"
+msgstr "视频过滤"
+
+#: proclocalize.lngscview
+msgctxt "proclocalize.lngscview"
+msgid "View"
+msgstr "视图"
+
+#: proclocalize.lngscwaveform
+msgctxt "proclocalize.lngscwaveform"
+msgid "Waveform"
+msgstr "音频波形"
+
+#: proclocalize.lngscxml
+msgid "XML"
+msgstr ""
+
+#: proclocalize.lngseechangelist
+msgid "Do you want to see the changelog?"
+msgstr "要查看更新日志吗？"
+
+#: proclocalize.lngselectencodingtouse
+msgid "Select the Encoding to use:"
+msgstr "选择要使用的编码："
+
+#: proclocalize.lngselectfpstouse
+msgid "Select FPS to use:"
+msgstr "选择要使用的帧率："
+
+#: proclocalize.lngselectsheettouse
+msgid "Select sheet to use:"
+msgstr "选择要使用的工作表："
+
+#: proclocalize.lngselecttracktouse
+msgid "Select the track to use:"
+msgstr "选择要使用的轨道："
+
+#: proclocalize.lngshifttimeless
+#, object-pascal-format
+msgctxt "proclocalize.lngshifttimeless"
+msgid "Shift %dms less"
+msgstr "减少平移 %dms"
+
+#: proclocalize.lngshifttimemore
+#, object-pascal-format
+msgctxt "proclocalize.lngshifttimemore"
+msgid "Shift %dms more"
+msgstr "增加平移 %dms"
+
+#: proclocalize.lngshortcutinuse
+#, object-pascal-format
+msgid "Shortcut currently used in “%s”."
+msgstr "当前在\"%s \"中使用的快捷方式。"
+
+#: proclocalize.lngsourcemodewarning
+msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
+msgstr "切换到源码模式后，格式将变为 \"Tero Subtitler\"，否则未保存的翻译将丢失。"
+
+#: proclocalize.lngspcurrentline
+#, object-pascal-format
+msgid "# %d"
+msgstr ""
+
+#: proclocalize.lngspellcheckfinished
+msgid "Spell check finished."
+msgstr "拼写检查完成。"
+
+#: proclocalize.lngssappearance
+msgid "Appearance"
+msgstr "外观"
+
+#: proclocalize.lngssautomode
+msgid "Automatic"
+msgstr "跟随系统"
+
+#: proclocalize.lngssblockmode
+msgid "Block"
+msgstr "区块"
+
+#: proclocalize.lngssconventions
+msgctxt "proclocalize.lngssconventions"
+msgid "Conventions"
+msgstr "转换"
+
+#: proclocalize.lngssdarkmode
+msgid "Dark mode"
+msgstr "深色模式"
+
+#: proclocalize.lngssfiletypeassociations
+msgid "File types"
+msgstr "文件类型"
+
+#: proclocalize.lngssframes
+msgctxt "proclocalize.lngssframes"
+msgid "Frames"
+msgstr "帧"
+
+#: proclocalize.lngssgeneral
+msgid "General"
+msgstr "常规"
+
+#: proclocalize.lngsslightmode
+msgid "Light mode"
+msgstr "浅色模式"
+
+#: proclocalize.lngsslistmode
+msgid "List"
+msgstr "列表"
+
+#: proclocalize.lngssmilliseconds
+msgctxt "proclocalize.lngssmilliseconds"
+msgid "Milliseconds"
+msgstr "毫秒"
+
+#: proclocalize.lngssmpv
+msgid "Video player"
+msgstr "视频播放器"
+
+#: proclocalize.lngssshortcutnone
+msgid "None"
+msgstr "无"
+
+#: proclocalize.lngssshortcuts
+msgid "Shortcuts"
+msgstr "快捷方式"
+
+#: proclocalize.lngsstoolbar
+msgid "Toolbar"
+msgstr "工具栏"
+
+#: proclocalize.lngsstools
+msgctxt "proclocalize.lngsstools"
+msgid "Tools"
+msgstr "工具"
+
+#: proclocalize.lngstcharacterspersecondaverage
+#, object-pascal-format
+msgid "Characters per second average: %.2f"
+msgstr "平均每秒字符数：%.2f"
+
+#: proclocalize.lngstdurationaverage
+#, object-pascal-format
+msgid "Duration average: %s"
+msgstr "平均持续时间：%s"
+
+#: proclocalize.lngstentrieswithouttext
+#, object-pascal-format
+msgid "Entries without text: %d"
+msgstr "无文本的条目：%d"
+
+#: proclocalize.lngstgapaverage
+#, object-pascal-format
+msgid "Gap average: %s"
+msgstr "平均间距：%s"
+
+#: proclocalize.lngstlinelengthaverage
+#, object-pascal-format
+msgid "Line length average: %d"
+msgstr "平均行长%d"
+
+#: proclocalize.lngstlongestcharacterspersecond
+#, object-pascal-format
+msgid "Longest characters per second: %.2f (#%d)"
+msgstr "每秒最长字符数：%.2f (#%d)"
+
+#: proclocalize.lngstlongestduration
+#, object-pascal-format
+msgid "Longest duration: %s (#%d)"
+msgstr "最长持续时间：%s (#%d)"
+
+#: proclocalize.lngstlongestgap
+#, object-pascal-format
+msgid "Longest gap: %s (#%d)"
+msgstr "最长间距：%s (#%d)"
+
+#: proclocalize.lngstlongestline
+#, object-pascal-format
+msgid "Longest line: %d (#%d)"
+msgstr "最长行：%d (#%d)"
+
+#: proclocalize.lngstlongestwordsperminute
+#, object-pascal-format
+msgid "Longest words per minute: %.2f (#%d)"
+msgstr "每分钟最长字数：%.2f (#%d)"
+
+#: proclocalize.lngstnumberofcharacters
+#, object-pascal-format
+msgid "Number of characters: %d"
+msgstr "字符数：%d"
+
+#: proclocalize.lngstnumberofentries
+#, object-pascal-format
+msgid "Number of entries: %d"
+msgstr "条目数：%d"
+
+#: proclocalize.lngstnumberofwords
+#, object-pascal-format
+msgid "Number of words: %d"
+msgstr "单词数：%d"
+
+#: proclocalize.lngstshortestcharacterspersecond
+#, object-pascal-format
+msgid "Shortest characters per second: %.2f (#%d)"
+msgstr "每秒最短字符数：%.2f (#%d)"
+
+#: proclocalize.lngstshortestduration
+#, object-pascal-format
+msgid "Shortest duration: %s (#%d)"
+msgstr "最短持续时间：%s (#%d)"
+
+#: proclocalize.lngstshortestgap
+#, object-pascal-format
+msgid "Shortest gap: %s (#%d)"
+msgstr "最短间距：%s (#%d)"
+
+#: proclocalize.lngstshortestline
+#, object-pascal-format
+msgid "Shortest line: %d (#%d)"
+msgstr "最短行：%d (#%d)"
+
+#: proclocalize.lngstshortestwordsperminute
+#, object-pascal-format
+msgid "Shortest words per minute: %.2f (#%d)"
+msgstr "每分钟最短字数：%.2f (#%d)"
+
+#: proclocalize.lngsttotalcharacterspersecond
+#, object-pascal-format
+msgid "Total characters per second: %.2f"
+msgstr "每秒总字符数：%.2f"
+
+#: proclocalize.lngsttotalduration
+#, object-pascal-format
+msgid "Total duration: %s"
+msgstr "总持续时间：%s"
+
+#: proclocalize.lngstwordsperminuteaverage
+#, object-pascal-format
+msgid "Words per minute average: %.2f"
+msgstr "平均每分钟单词数：%.2f"
+
+#: proclocalize.lngsubtitlehaserrorstofix
+msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
+msgstr "当前字幕组合包含建议解决的错误，但可以保存。"
+
+#: proclocalize.lngsuccess
+msgid "Success."
+msgstr "存在。"
+
+#: proclocalize.lngsupportedsites
+msgid "Supported sites"
+msgstr "支持的站点"
+
+#: proclocalize.lngteexpand
+msgctxt "proclocalize.lngteexpand"
+msgid "Expand"
+msgstr "展开"
+
+#: proclocalize.lngtefinaltime
+msgctxt "proclocalize.lngtefinaltime"
+msgid "Final time"
+msgstr "最终时间"
+
+#: proclocalize.lngteindex
+msgctxt "proclocalize.lngteindex"
+msgid "Index"
+msgstr "索引"
+
+#: proclocalize.lngteinitialtime
+msgctxt "proclocalize.lngteinitialtime"
+msgid "Initial time"
+msgstr "初始时间"
+
+#: proclocalize.lngtereduce
+msgctxt "proclocalize.lngtereduce"
+msgid "Reduce"
+msgstr "减少"
+
+#: proclocalize.lngtetext
+msgctxt "proclocalize.lngtetext"
+msgid "Text"
+msgstr "文本"
+
+#: proclocalize.lngtetime
+msgctxt "proclocalize.lngtetime"
+msgid "Time"
+msgstr "时间"
+
+#: proclocalize.lngtextformatted
+msgid "Export formatted text?"
+msgstr "导出格式化文本？"
+
+#: proclocalize.lngtranscribing
+msgid "Transcribing..."
+msgstr "转录..."
+
+#: proclocalize.lngtranscriptionmodeexit
+msgid "Exiting transcription mode will lose any unsaved changes."
+msgstr "退出转录模式将丢失任何未保存的更改。"
+
+#: proclocalize.lngtranslated
+msgctxt "proclocalize.lngtranslated"
+msgid "Translated"
+msgstr "翻译"
+
+#: proclocalize.lngtranslationfilechanged
+msgid "Translation file has not been saved."
+msgstr "翻译文件未保存。"
+
+#: proclocalize.lngttip1
+#, object-pascal-format
+msgid "Tip: Use <%s/%s> to go to previous/next entry"
+msgstr "提示：使用<%s/%s>转到上一个/下一个字幕"
+
+#: proclocalize.lngttip2
+#, object-pascal-format
+msgid "Tip: Use <%s> for a web word reference"
+msgstr "提示：使用<%s>来在网络上查询单词"
+
+#: proclocalize.lngttip3
+#, object-pascal-format
+msgid "Tip: Use <%s> dock/undock video window"
+msgstr "提示：使用<%s>锁定/解锁视频停靠窗口"
+
+#: proclocalize.lngttip4
+#, object-pascal-format
+msgid "Tip: Use <%s> dock/undock waveform window"
+msgstr "提示：使用<%s>锁定/解锁音频停靠窗口"
+
+#: proclocalize.lngunabletoload
+msgid "Error loading file, unrecognized format."
+msgstr "载入文件错误，格式无法识别。"
+
+#: proclocalize.lngurl
+msgid "URL"
+msgstr ""
+
+#: proclocalize.lngvideogenerationfailed
+msgid "Video generation failed."
+msgstr "视频生成失败。"
+
+#: proclocalize.lngwebvideounsupported
+msgid "The video format is not supported for playback in the web browser."
+msgstr "不支持在网络浏览器中播放这种视频格式。"
+
+#: proclocalize.lngwizlanguage
+msgctxt "proclocalize.lngwizlanguage"
+msgid "Language"
+msgstr "语言"
+
+#: proclocalize.lngwritedenieded
+msgid "Write denied. Please check folder permissions."
+msgstr "写入被拒绝，请确保有写入文件夹的权限。"
+
+#: proclocalize.lngwritestatus
+#, object-pascal-format
+msgid "Writing %d/%d"
+msgstr "写入中 %d/%d"
+
+#: tfrmabout.btnclose.caption
+msgctxt "tfrmabout.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmabout.caption
+msgctxt "tfrmabout.caption"
+msgid "About"
+msgstr "关于"
+
+#: tfrmabout.lbldonate.caption
+msgctxt "tfrmabout.lbldonate.caption"
+msgid ""
+"If you like this software, please consider making a donation.\n"
+"Click here to do it."
+msgstr ""
+"如果您喜欢这个软件，请考虑捐款。\n"
+"单击此处进行捐赠。"
+
+#: tfrmactors.btnactoradd.caption
+msgctxt "tfrmactors.btnactoradd.caption"
+msgid "+"
+msgstr ""
+
+#: tfrmactors.btnactorremove.caption
+msgctxt "tfrmactors.btnactorremove.caption"
+msgid "-"
+msgstr ""
+
+#: tfrmactors.btnapply.caption
+msgctxt "tfrmactors.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmactors.btnclose.caption
+msgctxt "tfrmactors.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmactors.caption
+msgctxt "tfrmactors.caption"
+msgid "Actors"
+msgstr "说话人"
+
+#: tfrmadjustsubtitle.btnapply.caption
+msgctxt "tfrmadjustsubtitle.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmadjustsubtitle.btnclose.caption
+msgctxt "tfrmadjustsubtitle.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmadjustsubtitle.btnminus.caption
+msgctxt "tfrmadjustsubtitle.btnminus.caption"
+msgid "-"
+msgstr ""
+
+#: tfrmadjustsubtitle.btnplus.caption
+msgctxt "tfrmadjustsubtitle.btnplus.caption"
+msgid "+"
+msgstr ""
+
+#: tfrmadjustsubtitle.caption
+msgid "Adjust subtitle"
+msgstr "调整字幕"
+
+#: tfrmadjustsubtitle.lblfirstspoken.caption
+msgid "First spoken line"
+msgstr "第一句"
+
+#: tfrmadjustsubtitle.lblindex.caption
+msgid "Subtitle #"
+msgstr "字幕 #"
+
+#: tfrmadjustsubtitle.lbllastspoken.caption
+msgid "Last spoken line"
+msgstr "最后一句"
+
+#: tfrmadjustsubtitle.rdoadvanced.caption
+msgid "Advanced"
+msgstr "高级"
+
+#: tfrmadjustsubtitle.rdosimple.caption
+msgid "Simple"
+msgstr "简单"
+
+#: tfrmaudiototext.btnclose.caption
+msgctxt "tfrmaudiototext.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmaudiototext.btnengine.caption
+msgctxt "tfrmaudiototext.btnengine.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmaudiototext.btngenerate.caption
+msgctxt "tfrmaudiototext.btngenerate.caption"
+msgid "Generate"
+msgstr "常规"
+
+#: tfrmaudiototext.btnmodel.caption
+msgctxt "tfrmaudiototext.btnmodel.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmaudiototext.caption
+msgctxt "tfrmaudiototext.caption"
+msgid "Audio to text"
+msgstr "语音转文字"
+
+#: tfrmaudiototext.chktranslate.caption
+msgid "Translate to Еnglish"
+msgstr "翻译为Еnglish"
+
+#: tfrmaudiototext.lblengine.caption
+msgid "Engine"
+msgstr "引擎"
+
+#: tfrmaudiototext.lbllanguage.caption
+msgctxt "tfrmaudiototext.lbllanguage.caption"
+msgid "Language"
+msgstr "语言"
+
+#: tfrmaudiototext.lblmodel.caption
+msgid "Model"
+msgstr "模型"
+
+#: tfrmaudiototext.lbltrack.caption
+msgid "Track"
+msgstr "轨道"
+
+#: tfrmaudiototext.rbnaddsubtitleswhiletranscribing.caption
+msgid "Add subtitles while transcribing"
+msgstr "在转录时添加字幕"
+
+#: tfrmaudiototext.rbnloadsubtitlesaftertranscript.caption
+msgid "Load subtitles after transcription"
+msgstr "转录后加载字幕"
+
+#: tfrmaudiototextmodel.btnclose.caption
+msgctxt "tfrmaudiototextmodel.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmaudiototextmodel.btndownload.caption
+msgctxt "tfrmaudiototextmodel.btndownload.caption"
+msgid "Download"
+msgstr "下载"
+
+#: tfrmaudiototextmodel.caption
+msgid "Audio to text model"
+msgstr "语音转文字模型"
+
+#: tfrmautomaticdurations.btnapply.caption
+msgctxt "tfrmautomaticdurations.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmautomaticdurations.btnclose.caption
+msgctxt "tfrmautomaticdurations.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmautomaticdurations.caption
+msgid "Automatic durations"
+msgstr "自动持续时间"
+
+#: tfrmautomaticdurations.lblchars.caption
+msgid "per character"
+msgstr "每字符"
+
+#: tfrmautomaticdurations.lblcondition.caption
+msgid "Apply if:"
+msgstr "应用："
+
+#: tfrmautomaticdurations.lblline.caption
+msgid "per line"
+msgstr "每行"
+
+#: tfrmautomaticdurations.lblscope.caption
+msgctxt "tfrmautomaticdurations.lblscope.caption"
+msgid "Scope:"
+msgstr "范围："
+
+#: tfrmautomaticdurations.lblword.caption
+msgid "per word"
+msgstr "每单词"
+
+#: tfrmautomaticdurations.rbnallthesubtitles.caption
+msgctxt "tfrmautomaticdurations.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "所有条目"
+
+#: tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "从选择的条目开始"
+
+#: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "仅限选择的条目"
+
+#: tfrmbatchconvert.btnadd.caption
+msgctxt "tfrmbatchconvert.btnadd.caption"
+msgid "Add..."
+msgstr "添加..."
+
+#: tfrmbatchconvert.btnapply.caption
+msgctxt "tfrmbatchconvert.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmbatchconvert.btnclose.caption
+msgctxt "tfrmbatchconvert.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmbatchconvert.btninvert.caption
+msgctxt "tfrmbatchconvert.btninvert.caption"
+msgid "Invert"
+msgstr "全不选"
+
+#: tfrmbatchconvert.btnopenfolder.caption
+msgctxt "tfrmbatchconvert.btnopenfolder.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmbatchconvert.btnremove.caption
+msgctxt "tfrmbatchconvert.btnremove.caption"
+msgid "Remove"
+msgstr "移除"
+
+#: tfrmbatchconvert.btnscanfolder.caption
+msgctxt "tfrmbatchconvert.btnscanfolder.caption"
+msgid "Scan..."
+msgstr "扫描..."
+
+#: tfrmbatchconvert.btnselectall.caption
+msgctxt "tfrmbatchconvert.btnselectall.caption"
+msgid "Select all"
+msgstr "全选"
+
+#: tfrmbatchconvert.caption
+msgid "Batch convert"
+msgstr "批量转换"
+
+#: tfrmbatchconvert.lblencoding.caption
+msgctxt "tfrmbatchconvert.lblencoding.caption"
+msgid "Encoding"
+msgstr "编码"
+
+#: tfrmbatchconvert.lblformat.caption
+msgctxt "tfrmbatchconvert.lblformat.caption"
+msgid "Format"
+msgstr "格式"
+
+#: tfrmbatchconvert.lblfromfps.caption
+msgid "Input FPS"
+msgstr "输入帧率"
+
+#: tfrmbatchconvert.lbloutput.caption
+msgctxt "tfrmbatchconvert.lbloutput.caption"
+msgid "Output:"
+msgstr "输出："
+
+#: tfrmbatchconvert.lbloutputfolder.caption
+msgctxt "tfrmbatchconvert.lbloutputfolder.caption"
+msgid "Folder"
+msgstr "文件夹"
+
+#: tfrmbatchconvert.lbltofps.caption
+msgid "Target FPS"
+msgstr "目标帧率"
+
+#: tfrmcharactermap.btnclose.caption
+msgctxt "tfrmcharactermap.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmcharactermap.btncopy.caption
+msgctxt "tfrmcharactermap.btncopy.caption"
+msgid "Copy"
+msgstr "复制"
+
+#: tfrmcharactermap.btninsert.caption
+msgid "Insert"
+msgstr "插入"
+
+#: tfrmcharactermap.btnminus.caption
+msgctxt "tfrmcharactermap.btnminus.caption"
+msgid "-"
+msgstr ""
+
+#: tfrmcharactermap.btnplus.caption
+msgctxt "tfrmcharactermap.btnplus.caption"
+msgid "+"
+msgstr ""
+
+#: tfrmcharactermap.caption
+msgid "Character Map"
+msgstr "字符映射"
+
+#: tfrmcharactermap.lblfavorites.caption
+msgid "Favorites"
+msgstr "收藏夹"
+
+#: tfrmcharactermap.lblunicoderange.caption
+msgid "Range"
+msgstr "范围"
+
+#: tfrmcompare.btnclose.caption
+msgctxt "tfrmcompare.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmcompare.btnfile1.caption
+msgctxt "tfrmcompare.btnfile1.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmcompare.btnfile2.caption
+msgctxt "tfrmcompare.btnfile2.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmcompare.caption
+msgid "Compare"
+msgstr "比较"
+
+#: tfrmconventions.btnadd.caption
+msgctxt "tfrmconventions.btnadd.caption"
+msgid "Add"
+msgstr "添加"
+
+#: tfrmconventions.btnclose.caption
+msgctxt "tfrmconventions.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmconventions.btnremove.caption
+msgctxt "tfrmconventions.btnremove.caption"
+msgid "Remove"
+msgstr "移除"
+
+#: tfrmconventions.btnupdate.caption
+msgctxt "tfrmconventions.btnupdate.caption"
+msgid "Update"
+msgstr "更新"
+
+#: tfrmconventions.caption
+msgctxt "tfrmconventions.caption"
+msgid "Conventions"
+msgstr "转换"
+
+#: tfrmconventions.lblmaxdurationms.caption
+msgctxt "tfrmconventions.lblmaxdurationms.caption"
+msgid "Max. duration (ms)"
+msgstr "最大持续时间 (ms)"
+
+#: tfrmconventions.lblmaxlinecount.caption
+msgctxt "tfrmconventions.lblmaxlinecount.caption"
+msgid "Max. line count"
+msgstr "最大行数"
+
+#: tfrmconventions.lblmindurationms.caption
+msgctxt "tfrmconventions.lblmindurationms.caption"
+msgid "Min. duration / per word (ms)"
+msgstr "最小持续时间/每个单词（ms）"
+
+#: tfrmconventions.lblnewsubtitlems.caption
+msgctxt "tfrmconventions.lblnewsubtitlems.caption"
+msgid "New subtitle (ms)"
+msgstr "新字幕（ms）"
+
+#: tfrmconventions.lblprohibitedchars.caption
+msgctxt "tfrmconventions.lblprohibitedchars.caption"
+msgid "Prohibited characters"
+msgstr "禁止使用的字符"
+
+#: tfrmconventions.lblrepeatablechars.caption
+msgctxt "tfrmconventions.lblrepeatablechars.caption"
+msgid "Repeatable characters"
+msgstr "可重复字符"
+
+#: tfrmconventions.lblscsnapincues.caption
+msgctxt "tfrmconventions.lblscsnapincues.caption"
+msgid "Snap in cues after SC (frames)"
+msgstr ""
+
+#: tfrmconventions.lblscsnapoutcues.caption
+msgctxt "tfrmconventions.lblscsnapoutcues.caption"
+msgid "Snap out cues before SC (frames)"
+msgstr ""
+
+#: tfrmconventions.lblsubtitlepausems.caption
+msgctxt "tfrmconventions.lblsubtitlepausems.caption"
+msgid "Min. gap"
+msgstr "最小间距"
+
+#: tfrmconvertcase.btnapply.caption
+msgctxt "tfrmconvertcase.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmconvertcase.btnclose.caption
+msgctxt "tfrmconvertcase.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmconvertcase.caption
+msgid "Convert case"
+msgstr "转换器"
+
+#: tfrmconvertcase.lblscope.caption
+msgctxt "tfrmconvertcase.lblscope.caption"
+msgid "Scope:"
+msgstr "范围："
+
+#: tfrmconvertcase.rbnallthesubtitles.caption
+msgctxt "tfrmconvertcase.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "所有条目"
+
+#: tfrmconvertcase.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmconvertcase.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "从选择的条目开始"
+
+#: tfrmconvertcase.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "仅限选择的条目"
+
+#: tfrmconvertcase.rdoinversetype.caption
+msgid "iNVERSE tYPE"
+msgstr "单词开头字母小写，其余大写"
+
+#: tfrmconvertcase.rdolowercase.caption
+msgid "lowercase"
+msgstr "小写"
+
+#: tfrmconvertcase.rdosentencetype.caption
+msgid "Sentence type"
+msgstr "句型"
+
+#: tfrmconvertcase.rdotitletype.caption
+msgid "Title Type"
+msgstr "标题类型"
+
+#: tfrmconvertcase.rdouppercase.caption
+msgid "UPPERCASE"
+msgstr "大写"
+
+#: tfrmcustomfiledlg.btnapply.caption
+msgctxt "tfrmcustomfiledlg.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmcustomfiledlg.btncancel.caption
+msgctxt "tfrmcustomfiledlg.btncancel.caption"
+msgid "Cancel"
+msgstr "取消"
+
+#: tfrmcustomfiledlg.btnopenfile.caption
+msgctxt "tfrmcustomfiledlg.btnopenfile.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmcustomfiledlg.lblencoding.caption
+msgctxt "tfrmcustomfiledlg.lblencoding.caption"
+msgid "Encoding"
+msgstr "编码"
+
+#: tfrmcustomfiledlg.lblfilename.caption
+msgctxt "tfrmcustomfiledlg.lblfilename.caption"
+msgid "Filename"
+msgstr "文件名"
+
+#: tfrmcustomfiledlg.lblformat.caption
+msgctxt "tfrmcustomfiledlg.lblformat.caption"
+msgid "Format"
+msgstr "格式"
+
+#: tfrmcustomfiledlg.lblfps.caption
+msgctxt "tfrmcustomfiledlg.lblfps.caption"
+msgid "FPS"
+msgstr "帧率"
+
+#: tfrmcustomimageformat.btnclose.caption
+msgctxt "tfrmcustomimageformat.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmcustomimageformat.btnfolder.caption
+msgctxt "tfrmcustomimageformat.btnfolder.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmcustomimageformat.btnres.caption
+msgctxt "tfrmcustomimageformat.btnres.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmcustomimageformat.btnsave.caption
+msgctxt "tfrmcustomimageformat.btnsave.caption"
+msgid "Save..."
+msgstr "保存..."
+
+#: tfrmcustomimageformat.caption
+msgid "Custom image format"
+msgstr "自定义图片格式"
+
+#: tfrmcustomimageformat.lblfolder.caption
+msgctxt "tfrmcustomimageformat.lblfolder.caption"
+msgid "Folder"
+msgstr "文件夹"
+
+#: tfrmcustomimageformat.lblfont.caption
+msgctxt "tfrmcustomimageformat.lblfont.caption"
+msgid "Font"
+msgstr "字体"
+
+#: tfrmcustomimageformat.lblfontsize.caption
+msgctxt "tfrmcustomimageformat.lblfontsize.caption"
+msgid "Size"
+msgstr "大小"
+
+#: tfrmcustomimageformat.lblfps.caption
+msgctxt "tfrmcustomimageformat.lblfps.caption"
+msgid "FPS"
+msgstr "帧率"
+
+#: tfrmcustomimageformat.lblimagesize.caption
+msgid "Image size"
+msgstr "图片大小"
+
+#: tfrmcustomimageformat.lblprefix.caption
+msgid "Prefix"
+msgstr "前缀"
+
+#: tfrmcustomimageformat.lblsafearea.caption
+msgctxt "tfrmcustomimageformat.lblsafearea.caption"
+msgid "Safe area pixels (left, top, right, bottom)"
+msgstr "安全区域像素（左、上、右、下）"
+
+#: tfrmcustomimageformat.lblscript.caption
+msgctxt "tfrmcustomimageformat.lblscript.caption"
+msgid "Script"
+msgstr "脚本"
+
+#: tfrmcustomimageformat.lblx.caption
+msgctxt "tfrmcustomimageformat.lblx.caption"
+msgid "x"
+msgstr ""
+
+#: tfrmcustominputdlg.btncancel.caption
+msgctxt "tfrmcustominputdlg.btncancel.caption"
+msgid "Cancel"
+msgstr "取消"
+
+#: tfrmcustominputdlg.btnok.caption
+msgctxt "tfrmcustominputdlg.btnok.caption"
+msgid "OK"
+msgstr ""
+
+#: tfrmcustominputdlg.lblmessage.caption
+msgctxt "tfrmcustominputdlg.lblmessage.caption"
+msgid "Msg"
+msgstr "消息"
+
+#: tfrmcustommessagedlg.btnok.caption
+msgctxt "tfrmcustommessagedlg.btnok.caption"
+msgid "OK"
+msgstr ""
+
+#: tfrmcustommessagedlg.lblmessage.caption
+msgid "Message"
+msgstr "消息"
+
+#: tfrmcustomquestiondlg.btncancel.caption
+msgctxt "tfrmcustomquestiondlg.btncancel.caption"
+msgid "Cancel"
+msgstr "取消"
+
+#: tfrmcustomquestiondlg.btnno.caption
+msgctxt "tfrmcustomquestiondlg.btnno.caption"
+msgid "No"
+msgstr "否"
+
+#: tfrmcustomquestiondlg.btnyes.caption
+msgctxt "tfrmcustomquestiondlg.btnyes.caption"
+msgid "Yes"
+msgstr "是"
+
+#: tfrmcustomquestiondlg.lblquestion.caption
+msgid "Question"
+msgstr "问题"
+
+#: tfrmcustomquestiondlg.lbltitle.caption
+msgctxt "tfrmcustomquestiondlg.lbltitle.caption"
+msgid "Title"
+msgstr "标题"
+
+#: tfrmcustomselectdlg.btncancel.caption
+msgctxt "tfrmcustomselectdlg.btncancel.caption"
+msgid "Cancel"
+msgstr "取消"
+
+#: tfrmcustomselectdlg.btnok.caption
+msgctxt "tfrmcustomselectdlg.btnok.caption"
+msgid "OK"
+msgstr ""
+
+#: tfrmcustomselectdlg.lblmessage.caption
+msgctxt "tfrmcustomselectdlg.lblmessage.caption"
+msgid "Msg"
+msgstr "消息"
+
+#: tfrmcustomtextformat.btnclose.caption
+msgctxt "tfrmcustomtextformat.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmcustomtextformat.btnsave.caption
+msgctxt "tfrmcustomtextformat.btnsave.caption"
+msgid "Save..."
+msgstr "保存..."
+
+#: tfrmcustomtextformat.caption
+msgid "Custom text format"
+msgstr "自定义字体样式"
+
+#: tfrmcustomtextformat.lblencoding.caption
+msgctxt "tfrmcustomtextformat.lblencoding.caption"
+msgid "Encoding"
+msgstr "编码"
+
+#: tfrmcustomtextformat.lblextension.caption
+msgid "Extension"
+msgstr "扩展"
+
+#: tfrmcustomtextformat.lblfps.caption
+msgctxt "tfrmcustomtextformat.lblfps.caption"
+msgid "FPS"
+msgstr "帧率"
+
+#: tfrmcustomtextformat.lblnewlinechar.caption
+msgid "New line char"
+msgstr "新行字符"
+
+#: tfrmcustomtextformat.lblscript.caption
+msgctxt "tfrmcustomtextformat.lblscript.caption"
+msgid "Script"
+msgstr "脚本"
+
+#: tfrmcustomtextformat.lblseparatorchar.caption
+msgid "Separator"
+msgstr "分离器"
+
+#: tfrmcustomtextformat.lbltimecode.caption
+msgctxt "tfrmcustomtextformat.lbltimecode.caption"
+msgid "Time code"
+msgstr "时间码"
+
+#: tfrmcustomtextformat.lbltimeformat.caption
+msgid "Time format"
+msgstr "时间格式"
+
+#: tfrmcustomtextformat.lbltitle.caption
+msgctxt "tfrmcustomtextformat.lbltitle.caption"
+msgid "Title"
+msgstr "标题"
+
+#: tfrmdelay.btnapply.caption
+msgctxt "tfrmdelay.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmdelay.btnclose.caption
+msgctxt "tfrmdelay.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmdelay.caption
+msgid "Set delay"
+msgstr "设置延迟"
+
+#: tfrmdelay.cbomode.text
+msgctxt "tfrmdelay.cbomode.text"
+msgid "+"
+msgstr ""
+
+#: tfrmdelay.lblscope.caption
+msgctxt "tfrmdelay.lblscope.caption"
+msgid "Scope:"
+msgstr "范围："
+
+#: tfrmdelay.rbnallthesubtitles.caption
+msgctxt "tfrmdelay.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "所有条目"
+
+#: tfrmdelay.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmdelay.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "从选择的条目开始"
+
+#: tfrmdelay.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "仅限选择的条目"
+
+#: tfrmdownload.lbldownload.caption
+msgid "Downloading"
+msgstr "下载中..."
+
+#: tfrmdurationlimits.btnapply.caption
+msgctxt "tfrmdurationlimits.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmdurationlimits.btnclose.caption
+msgctxt "tfrmdurationlimits.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmdurationlimits.caption
+msgid "Duration limits"
+msgstr "持续时间限制"
+
+#: tfrmdurationlimits.chksetmaxduration.caption
+msgid "Set maximum duration (ms)"
+msgstr "设置最长持续时间（ms）"
+
+#: tfrmdurationlimits.chksetminduration.caption
+msgid "Set minimum duration (ms)"
+msgstr "设置最短持续时间（ms）"
+
+#: tfrmdurationlimits.lblscope.caption
+msgctxt "tfrmdurationlimits.lblscope.caption"
+msgid "Scope:"
+msgstr "范围："
+
+#: tfrmdurationlimits.rbnallthesubtitles.caption
+msgctxt "tfrmdurationlimits.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "所有条目"
+
+#: tfrmdurationlimits.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmdurationlimits.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "从选择的条目开始"
+
+#: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "仅限选择的条目"
+
+#: tfrmexportsup.btnclose.caption
+msgctxt "tfrmexportsup.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmexportsup.btnres.caption
+msgctxt "tfrmexportsup.btnres.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmexportsup.btnsave.caption
+msgctxt "tfrmexportsup.btnsave.caption"
+msgid "Save..."
+msgstr "保存..."
+
+#: tfrmexportsup.caption
+msgid "Blu-ray SUP"
+msgstr ""
+
+#: tfrmexportsup.lblfont.caption
+msgctxt "tfrmexportsup.lblfont.caption"
+msgid "Font"
+msgstr "字体"
+
+#: tfrmexportsup.lblfontsize.caption
+msgctxt "tfrmexportsup.lblfontsize.caption"
+msgid "Size"
+msgstr "大小"
+
+#: tfrmexportsup.lblsafearea.caption
+msgctxt "tfrmexportsup.lblsafearea.caption"
+msgid "Safe area pixels (left, top, right, bottom)"
+msgstr "安全区域像素（左、上、右、下）"
+
+#: tfrmexportsup.lblvideores.caption
+msgctxt "tfrmexportsup.lblvideores.caption"
+msgid "Video resolution"
+msgstr "视频分辨率"
+
+#: tfrmexportsup.lblx.caption
+msgctxt "tfrmexportsup.lblx.caption"
+msgid "x"
+msgstr ""
+
+#: tfrmfindandreplace.btnclose.caption
+msgctxt "tfrmfindandreplace.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmfindandreplace.btnfind.caption
+msgctxt "tfrmfindandreplace.btnfind.caption"
+msgid "Find"
+msgstr "查找"
+
+#: tfrmfindandreplace.btnfindnext.caption
+msgctxt "tfrmfindandreplace.btnfindnext.caption"
+msgid "Find next"
+msgstr "查找下一个"
+
+#: tfrmfindandreplace.btnfindprev.caption
+msgid "Find prev"
+msgstr "查找上一个"
+
+#: tfrmfindandreplace.btnreplace.caption
+msgctxt "tfrmfindandreplace.btnreplace.caption"
+msgid "Replace"
+msgstr "替换"
+
+#: tfrmfindandreplace.btnreplaceall.caption
+msgid "Replace all"
+msgstr "替换全部"
+
+#: tfrmfindandreplace.caption
+msgid "Find and replace"
+msgstr "查找和替换"
+
+#: tfrmfindandreplace.chkcasesensitive.caption
+msgid "Case-sensitive"
+msgstr "区分大小写"
+
+#: tfrmfindandreplace.chkpreservecaseonreplace.caption
+msgid "Preserve case on replace"
+msgstr "保存替换的字母"
+
+#: tfrmfindandreplace.chkregularexpression.caption
+msgid "Use regular expression"
+msgstr "使用正则表达式"
+
+#: tfrmfindandreplace.chkreplacewith.caption
+msgctxt "tfrmfindandreplace.chkreplacewith.caption"
+msgid "Replace with:"
+msgstr "替换为："
+
+#: tfrmfindandreplace.chkwholeword.caption
+msgid "Whole word"
+msgstr "匹配全词"
+
+#: tfrmfindandreplace.lbloptions.caption
+msgid "Options:"
+msgstr "选项："
+
+#: tfrmfindandreplace.lblscope.caption
+msgctxt "tfrmfindandreplace.lblscope.caption"
+msgid "Scope:"
+msgstr "范围："
+
+#: tfrmfindandreplace.lbltexttofind.caption
+msgid "Text to find:"
+msgstr "文本查找："
+
+#: tfrmfindandreplace.rbnallthesubtitles.caption
+msgctxt "tfrmfindandreplace.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "所有条目"
+
+#: tfrmfindandreplace.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "从选择的条目开始"
+
+#: tfrmfixsubtitles.btnapply.caption
+msgctxt "tfrmfixsubtitles.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmfixsubtitles.btnclose.caption
+msgctxt "tfrmfixsubtitles.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmfixsubtitles.caption
+msgid "Fix subtitles"
+msgstr "修复字幕"
+
+#: tfrmfixsubtitles.lblconvention.caption
+msgid "Convention"
+msgstr "转换"
+
+#: tfrmfixsubtitles.lblocr.caption
+msgid "OCR Script"
+msgstr "OCR脚本"
+
+#: tfrmfixsubtitles.lblspacinghyphen.caption
+msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
+msgid "Spacing of opening hyphen"
+msgstr "开头连字符的间距"
+
+#: tfrmfixsubtitles.mnudeselectall.caption
+msgid "Deselect all"
+msgstr "全不选"
+
+#: tfrmfixsubtitles.mnuinvertselection.caption
+msgctxt "tfrmfixsubtitles.mnuinvertselection.caption"
+msgid "Invert selection"
+msgstr "反选"
+
+#: tfrmfixsubtitles.mnuselectall.caption
+msgctxt "tfrmfixsubtitles.mnuselectall.caption"
+msgid "Select all"
+msgstr "全选"
+
+#: tfrmformatproperties.btnapply.caption
+msgctxt "tfrmformatproperties.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmformatproperties.btnclose.caption
+msgctxt "tfrmformatproperties.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmformatproperties.caption
+msgctxt "tfrmformatproperties.caption"
+msgid "Format properties"
+msgstr "样式属性"
+
+#: tfrmformatproperties.chkvttusextimestamp.caption
+msgid "Use X-TIMESTAMP-MAP header"
+msgstr "使用 X-TIMESTAMP-MAP 标头"
+
+#: tfrmformatproperties.chkvttwritecueidentifiers.caption
+msgid "Write cue identifiers"
+msgstr "编写cue标识符"
+
+#: tfrmformatproperties.lblasalignment.caption
+msgid "Alignment"
+msgstr "对齐"
+
+#: tfrmformatproperties.lblasfontcolor.caption
+msgid "Font color"
+msgstr "字体颜色"
+
+#: tfrmformatproperties.lblasfontname.caption
+msgid "Font name"
+msgstr "字体名称"
+
+#: tfrmformatproperties.lblasfontsize.caption
+msgid "Font size"
+msgstr "字体大小"
+
+#: tfrmformatproperties.lblasheight.caption
+msgctxt "tfrmformatproperties.lblasheight.caption"
+msgid "Height"
+msgstr "高"
+
+#: tfrmformatproperties.lblaslanguage.caption
+msgctxt "tfrmformatproperties.lblaslanguage.caption"
+msgid "Language"
+msgstr "语言"
+
+#: tfrmformatproperties.lblaspositionx.caption
+msgid "Position X"
+msgstr "X 轴位置"
+
+#: tfrmformatproperties.lblaspositiony.caption
+msgid "Position Y"
+msgstr "Y 轴位置"
+
+#: tfrmformatproperties.lblaswidth.caption
+msgctxt "tfrmformatproperties.lblaswidth.caption"
+msgid "Width"
+msgstr "宽"
+
+#: tfrmformatproperties.lblcavenacomment.caption
+msgid "Comments"
+msgstr "注释"
+
+#: tfrmformatproperties.lblcavenalanguage.caption
+msgctxt "tfrmformatproperties.lblcavenalanguage.caption"
+msgid "Language"
+msgstr "语言"
+
+#: tfrmformatproperties.lblcavenaoriginaltitle.caption
+msgid "Original title"
+msgstr "原始标题"
+
+#: tfrmformatproperties.lblcavenatcstart.caption
+msgid "Start timecode"
+msgstr "起始时间码"
+
+#: tfrmformatproperties.lblcavenatranslatedtitle.caption
+msgid "Translated title"
+msgstr "翻译的标题"
+
+#: tfrmformatproperties.lblcavenatranslator.caption
+msgid "Translator"
+msgstr "译者"
+
+#: tfrmformatproperties.lbldvdauthor.caption
+msgid "Author"
+msgstr "作者"
+
+#: tfrmformatproperties.lbldvdinfo.caption
+msgid "Info"
+msgstr "信息"
+
+#: tfrmformatproperties.lbldvdlanguage.caption
+msgctxt "tfrmformatproperties.lbldvdlanguage.caption"
+msgid "Language"
+msgstr "语言"
+
+#: tfrmformatproperties.lbldvdtitle.caption
+msgctxt "tfrmformatproperties.lbldvdtitle.caption"
+msgid "Title"
+msgstr "标题"
+
+#: tfrmformatproperties.lbldvdweb.caption
+msgid "Web"
+msgstr "网址"
+
+#: tfrmformatproperties.lblebucct.caption
+msgid "Character code table"
+msgstr "字符编码表"
+
+#: tfrmformatproperties.lblebuco.caption
+msgid "Country origin"
+msgstr "原籍国"
+
+#: tfrmformatproperties.lblebucpn.caption
+msgid "Code page number"
+msgstr "代码页码"
+
+#: tfrmformatproperties.lblebudfc.caption
+msgid "Disk format code"
+msgstr "磁盘格式编码"
+
+#: tfrmformatproperties.lblebudsc.caption
+msgid "Display standard code"
+msgstr "显示标准代码"
+
+#: tfrmformatproperties.lblebulc.caption
+msgid "Language code"
+msgstr "语言代码"
+
+#: tfrmformatproperties.lblebundc.caption
+msgid "Max chars"
+msgstr "最大字符数"
+
+#: tfrmformatproperties.lblebundr.caption
+msgid "Max rows"
+msgstr "最大行数"
+
+#: tfrmformatproperties.lblvttlocal.caption
+msgid "Cue time:"
+msgstr ""
+
+#: tfrmformatproperties.lblvttmpegts.caption
+msgid "MPEG-2 time:"
+msgstr ""
+
+#: tfrmgenerateblankvideo.btnclose.caption
+msgctxt "tfrmgenerateblankvideo.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmgenerateblankvideo.btngenerate.caption
+msgid "Generate..."
+msgstr "生成..."
+
+#: tfrmgenerateblankvideo.btnimage.caption
+msgctxt "tfrmgenerateblankvideo.btnimage.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmgenerateblankvideo.btnres.caption
+msgctxt "tfrmgenerateblankvideo.btnres.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmgenerateblankvideo.caption
+msgid "Generate blank video"
+msgstr "生成空白视频"
+
+#: tfrmgenerateblankvideo.chkgeneratetc.caption
+msgctxt "tfrmgenerateblankvideo.chkgeneratetc.caption"
+msgid "Time code"
+msgstr "时间码"
+
+#: tfrmgenerateblankvideo.chkgeneratetone.caption
+msgid "1 kHz test tone"
+msgstr "1 kHz测试音"
+
+#: tfrmgenerateblankvideo.lblbackground.caption
+msgctxt "tfrmgenerateblankvideo.lblbackground.caption"
+msgid "Background"
+msgstr "背景"
+
+#: tfrmgenerateblankvideo.lblduration.caption
+msgctxt "tfrmgenerateblankvideo.lblduration.caption"
+msgid "Duration"
+msgstr "持续时间"
+
+#: tfrmgenerateblankvideo.lblfps.caption
+msgctxt "tfrmgenerateblankvideo.lblfps.caption"
+msgid "FPS"
+msgstr "帧率"
+
+#: tfrmgenerateblankvideo.lblvideores.caption
+msgctxt "tfrmgenerateblankvideo.lblvideores.caption"
+msgid "Video resolution"
+msgstr "视频分辨率"
+
+#: tfrmgenerateblankvideo.lblx.caption
+msgctxt "tfrmgenerateblankvideo.lblx.caption"
+msgid "x"
+msgstr ""
+
+#: tfrmgenerateblankvideo.rdoimage.caption
+msgid "Image"
+msgstr "图像"
+
+#: tfrmgenerateblankvideo.rdosmptecolorbars.caption
+msgid "SMPTE color bars"
+msgstr "SMPTE 色条"
+
+#: tfrmgenerateblankvideo.rdosolidcolor.caption
+msgid "Solid color"
+msgstr "纯色"
+
+#: tfrmgeneratevideo.btnclose.caption
+msgctxt "tfrmgeneratevideo.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmgeneratevideo.btngenerate.caption
+msgctxt "tfrmgeneratevideo.btngenerate.caption"
+msgid "Generate"
+msgstr "生成"
+
+#: tfrmgeneratevideo.btnres.caption
+msgctxt "tfrmgeneratevideo.btnres.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmgeneratevideo.caption
+msgid "Generate video"
+msgstr "生成视频"
+
+#: tfrmgeneratevideo.chkbox.caption
+msgid "Box"
+msgstr ""
+
+#: tfrmgeneratevideo.chkcrop.caption
+msgid "Crop"
+msgstr ""
+
+#: tfrmgeneratevideo.chkcut.caption
+msgctxt "tfrmgeneratevideo.chkcut.caption"
+msgid "Cut"
+msgstr "剪切"
+
+#: tfrmgeneratevideo.chkdeinterlace.caption
+msgid "Deinterlace"
+msgstr "去隔行扫描"
+
+#: tfrmgeneratevideo.chkflip.caption
+msgid "Flip"
+msgstr "翻转"
+
+#: tfrmgeneratevideo.chkreencodeaudio.caption
+msgid "Re-encode"
+msgstr "重新编码"
+
+#: tfrmgeneratevideo.chkrotate.caption
+msgid "Rotate"
+msgstr "旋转"
+
+#: tfrmgeneratevideo.lblaudiochannels.caption
+msgid "Channels"
+msgstr "频道"
+
+#: tfrmgeneratevideo.lblaudioencoding.caption
+msgctxt "tfrmgeneratevideo.lblaudioencoding.caption"
+msgid "Codec"
+msgstr "编解码器"
+
+#: tfrmgeneratevideo.lblbitrate.caption
+msgid "Bit rate"
+msgstr "比特率"
+
+#: tfrmgeneratevideo.lblcropheight.caption
+msgctxt "tfrmgeneratevideo.lblcropheight.caption"
+msgid "Height"
+msgstr "高"
+
+#: tfrmgeneratevideo.lblcropleft.caption
+msgctxt "tfrmgeneratevideo.lblcropleft.caption"
+msgid "Left"
+msgstr "靠左"
+
+#: tfrmgeneratevideo.lblcroptop.caption
+msgid "Top"
+msgstr "顶部"
+
+#: tfrmgeneratevideo.lblcropwidth.caption
+msgctxt "tfrmgeneratevideo.lblcropwidth.caption"
+msgid "Width"
+msgstr "宽"
+
+#: tfrmgeneratevideo.lblcutfrom.caption
+msgid "From"
+msgstr "从"
+
+#: tfrmgeneratevideo.lblcutto.caption
+msgid "To"
+msgstr "到"
+
+#: tfrmgeneratevideo.lblfont.caption
+msgctxt "tfrmgeneratevideo.lblfont.caption"
+msgid "Font"
+msgstr "字体"
+
+#: tfrmgeneratevideo.lblfontcolor.caption
+msgctxt "tfrmgeneratevideo.lblfontcolor.caption"
+msgid "Color"
+msgstr "颜色"
+
+#: tfrmgeneratevideo.lblfontsize.caption
+msgctxt "tfrmgeneratevideo.lblfontsize.caption"
+msgid "Size"
+msgstr "大小"
+
+#: tfrmgeneratevideo.lblformat.caption
+msgctxt "tfrmgeneratevideo.lblformat.caption"
+msgid "Format"
+msgstr "样式"
+
+#: tfrmgeneratevideo.lblsamplerate.caption
+msgid "Sample rate"
+msgstr "采样率"
+
+#: tfrmgeneratevideo.lblvideocodec.caption
+msgctxt "tfrmgeneratevideo.lblvideocodec.caption"
+msgid "Codec"
+msgstr "编解码器"
+
+#: tfrmgeneratevideo.lblvideores.caption
+msgid "Resolution"
+msgstr "分辨率"
+
+#: tfrmgeneratevideo.lblvideosubtype.caption
+msgid "Subtype"
+msgstr "类型"
+
+#: tfrmgeneratevideo.lblx.caption
+msgctxt "tfrmgeneratevideo.lblx.caption"
+msgid "x"
+msgstr ""
+
+#: tfrmgeneratevideo.rdoaudio.caption
+msgctxt "tfrmgeneratevideo.rdoaudio.caption"
+msgid "Audio"
+msgstr "音频"
+
+#: tfrmgeneratevideo.rdoothers.caption
+msgid "Others"
+msgstr "其他"
+
+#: tfrmgeneratevideo.rdosubtitle.caption
+msgctxt "tfrmgeneratevideo.rdosubtitle.caption"
+msgid "Subtitles"
+msgstr "字幕"
+
+#: tfrmgeneratevideo.rdovideo.caption
+msgctxt "tfrmgeneratevideo.rdovideo.caption"
+msgid "Video"
+msgstr "视频"
+
+#: tfrmgoto.btnclose.caption
+msgctxt "tfrmgoto.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmgoto.btngo.caption
+msgctxt "tfrmgoto.btngo.caption"
+msgid "Go"
+msgstr "转到"
+
+#: tfrmgoto.caption
+msgctxt "tfrmgoto.caption"
+msgid "Go to line"
+msgstr "转到行"
+
+#: tfrmgoto.lblnumber.caption
+msgid "Entry:"
+msgstr "条目："
+
+#: tfrmgototime.btnclose.caption
+msgctxt "tfrmgototime.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmgototime.btngo.caption
+msgctxt "tfrmgototime.btngo.caption"
+msgid "Go"
+msgstr "转到"
+
+#: tfrmgototime.caption
+msgctxt "tfrmgototime.caption"
+msgid "Go to"
+msgstr "转到"
+
+#: tfrmgototime.lbltime.caption
+msgid "Time:"
+msgstr "时间："
+
+#: tfrmmain.actabout.caption
+msgctxt "tfrmmain.actabout.caption"
+msgid "About..."
+msgstr "关于..."
+
+#: tfrmmain.actactor.caption
+msgctxt "tfrmmain.actactor.caption"
+msgid "Actors"
+msgstr "说话人"
+
+#: tfrmmain.actaddnote.caption
+msgid "Add note..."
+msgstr "添加笔记..."
+
+#: tfrmmain.actaddquotationmarks.caption
+msgid "Add quotation marks"
+msgstr "添加引用标记"
+
+#: tfrmmain.actadjustsubtitle.caption
+msgid "Adjust subtitle..."
+msgstr "调整字幕..."
+
+#: tfrmmain.actaligntocenter.caption
+msgctxt "tfrmmain.actaligntocenter.caption"
+msgid "Align to center"
+msgstr "对齐到中央"
+
+#: tfrmmain.actaligntoleft.caption
+msgctxt "tfrmmain.actaligntoleft.caption"
+msgid "Align to left"
+msgstr "对齐到左边"
+
+#: tfrmmain.actaligntonone.caption
+msgctxt "tfrmmain.actaligntonone.caption"
+msgid "Align to none"
+msgstr "无对齐"
+
+#: tfrmmain.actaligntoright.caption
+msgctxt "tfrmmain.actaligntoright.caption"
+msgid "Align to right"
+msgstr "对齐到右边"
+
+#: tfrmmain.actaudiofilterdialoguenhance.caption
+msgid "Dialogue enhance"
+msgstr "对话增强"
+
+#: tfrmmain.actaudiofilterspeechnormalizer.caption
+msgid "Speech normalizer"
+msgstr "语音规范化"
+
+#: tfrmmain.actaudiofiltersurround.caption
+msgid "Surround"
+msgstr "环绕"
+
+#: tfrmmain.actaudiototext.caption
+msgctxt "tfrmmain.actaudiototext.caption"
+msgid "Audio to text..."
+msgstr "语音转文字..."
+
+#: tfrmmain.actautobreakentry.caption
+msgctxt "tfrmmain.actautobreakentry.caption"
+msgid "Autobreak"
+msgstr "自动换行"
+
+#: tfrmmain.actautobreakentry.hint
+msgctxt "tfrmmain.actautobreakentry.hint"
+msgid "Split a long line into two or more lines"
+msgstr "将长行分割成两行或多行"
+
+#: tfrmmain.actautomaticduration.caption
+msgid "Automatic duration..."
+msgstr "自动持续时间..."
+
+#: tfrmmain.actbatchconvert.caption
+msgctxt "tfrmmain.actbatchconvert.caption"
+msgid "Batch convert..."
+msgstr "批量转换..."
+
+#: tfrmmain.actcenterwaveform.caption
+msgctxt "tfrmmain.actcenterwaveform.caption"
+msgid "Center waveform"
+msgstr "中央波形"
+
+#: tfrmmain.actcharactermap.caption
+msgid "Character Map..."
+msgstr "字符映射..."
+
+#: tfrmmain.actcheckforupdates.caption
+msgid "Check for updates..."
+msgstr "检查更新..."
+
+#: tfrmmain.actcleartext.caption
+msgid "Clear text"
+msgstr "清空文本"
+
+#: tfrmmain.actcloseapp.caption
+msgctxt "tfrmmain.actcloseapp.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmmain.actclosesubtitle.caption
+msgid "Close subtitles"
+msgstr "关闭字幕"
+
+#: tfrmmain.actclosevideo.caption
+msgid "Close video"
+msgstr "关闭视频"
+
+#: tfrmmain.actcombineentries.caption
+msgid "Combine entries"
+msgstr "合并条目"
+
+#: tfrmmain.actcombineentries.hint
+msgctxt "tfrmmain.actcombineentries.hint"
+msgid "Combines all the selected entries into one"
+msgstr "将所有选中的条目合并为一个"
+
+#: tfrmmain.actcompare.caption
+msgid "Compare..."
+msgstr "比较..."
+
+#: tfrmmain.actconvertcase.caption
+msgid "Convert case..."
+msgstr "转换..."
+
+#: tfrmmain.actcopy.caption
+msgctxt "tfrmmain.actcopy.caption"
+msgid "Copy"
+msgstr "复制"
+
+#: tfrmmain.actcopyvideopostoclipboard.caption
+msgid "Copy video position to clipboard"
+msgstr "将视频位置复制到剪贴板"
+
+#: tfrmmain.actcut.caption
+msgctxt "tfrmmain.actcut.caption"
+msgid "Cut"
+msgstr "剪切"
+
+#: tfrmmain.actdeleteentry.caption
+msgid "Delete entries"
+msgstr "删除条目"
+
+#: tfrmmain.actdeleteentry.hint
+msgid "Delete selected entries"
+msgstr "删除所选条目"
+
+#: tfrmmain.actdeleteshotchange.caption
+msgid "Delete shot change(s)"
+msgstr ""
+
+#: tfrmmain.actdetectdialogsegments.caption
+msgid "Detect dialog segments..."
+msgstr "检测对话片段..."
+
+#: tfrmmain.actdetectsilentzones.caption
+msgctxt "tfrmmain.actdetectsilentzones.caption"
+msgid "Detect silent zones"
+msgstr "检测静音区"
+
+#: tfrmmain.actdetectsilentzones.hint
+msgid "Click to refresh list"
+msgstr "点击刷新列表"
+
+#: tfrmmain.actdivideentry.caption
+msgid "Divide entry"
+msgstr "分割条目"
+
+#: tfrmmain.actdurationlimits.caption
+msgid "Duration limits..."
+msgstr "持续时间限制..."
+
+#: tfrmmain.actendcueaddoneframe.caption
+msgid "Add one frame"
+msgstr "添加一帧"
+
+#: tfrmmain.actendcuesubtractoneframe.caption
+msgid "Subtract one frame"
+msgstr "减去一帧"
+
+#: tfrmmain.actexportcustomimageformat.caption
+msgid "Custom image format..."
+msgstr "自定义图片格式..."
+
+#: tfrmmain.actexportcustomtextformat.caption
+msgid "Custom text format..."
+msgstr "自定义文本格式..."
+
+#: tfrmmain.actexportmarkedsubtitles.caption
+msgid "Marked subtitles..."
+msgstr "标记字幕..."
+
+#: tfrmmain.actexportsup.caption
+msgid "Blu-ray SUP..."
+msgstr ""
+
+#: tfrmmain.actexporttextonly.caption
+msgid "Text only..."
+msgstr "仅文本..."
+
+#: tfrmmain.actextendlengthtonext.caption
+msgid "Extend final time to next"
+msgstr "将最后时间延长至下一个"
+
+#: tfrmmain.actextendlengthtoprevious.caption
+msgid "Extend initial time to previous"
+msgstr "将开始时间延长至上一个"
+
+#: tfrmmain.actfind.caption
+msgid "Find..."
+msgstr "查找..."
+
+#: tfrmmain.actfindnext.caption
+msgctxt "tfrmmain.actfindnext.caption"
+msgid "Find next"
+msgstr "查找下一个"
+
+#: tfrmmain.actfindprevious.caption
+msgid "Find previous"
+msgstr "查找上一个"
+
+#: tfrmmain.actfixrtlpunctuation.caption
+msgid "Fix punctuation"
+msgstr "修正标点符号"
+
+#: tfrmmain.actfixsubtitles.caption
+msgid "Fix subtitles..."
+msgstr "修复字幕..."
+
+#: tfrmmain.actfocusfinaltime.caption
+msgid "Edit final time"
+msgstr "编辑最后时间"
+
+#: tfrmmain.actfocusinitialtime.caption
+msgid "Edit initial time"
+msgstr "编辑开始时间"
+
+#: tfrmmain.actfontbold.caption
+msgctxt "tfrmmain.actfontbold.caption"
+msgid "Bold"
+msgstr "粗体"
+
+#: tfrmmain.actfontclear.caption
+msgctxt "tfrmmain.actfontclear.caption"
+msgid "Clear"
+msgstr "无样式"
+
+#: tfrmmain.actfontcolor.caption
+msgid "Set current font color"
+msgstr "设置当前字体颜色"
+
+#: tfrmmain.actfontcolordlg.caption
+msgctxt "tfrmmain.actfontcolordlg.caption"
+msgid "Color..."
+msgstr "颜色..."
+
+#: tfrmmain.actfontitalic.caption
+msgctxt "tfrmmain.actfontitalic.caption"
+msgid "Italic"
+msgstr "斜体"
+
+#: tfrmmain.actfontstrikeout.caption
+msgctxt "tfrmmain.actfontstrikeout.caption"
+msgid "Strikeout"
+msgstr "删除线"
+
+#: tfrmmain.actfontunderline.caption
+msgctxt "tfrmmain.actfontunderline.caption"
+msgid "Underline"
+msgstr "下划线"
+
+#: tfrmmain.actformatproperties.caption
+msgctxt "tfrmmain.actformatproperties.caption"
+msgid "Format properties..."
+msgstr "样式属性..."
+
+#: tfrmmain.actframesmode.caption
+msgctxt "tfrmmain.actframesmode.caption"
+msgid "Frame mode"
+msgstr "帧模式"
+
+#: tfrmmain.actframesmode.hint
+msgid "Set time code format to HH:MM:SS:FF"
+msgstr "将时间码格式设置为HH:MM:SS:FF"
+
+#: tfrmmain.actgenerateblankvideo.caption
+msgid "Generate blank video..."
+msgstr "生成空白视频..."
+
+#: tfrmmain.actgeneratevideo.caption
+msgid "Video with hardcoded subtitles..."
+msgstr "带有硬编码字幕的视频..."
+
+#: tfrmmain.actgoto.caption
+msgid "Go to entry..."
+msgstr "转到条目..."
+
+#: tfrmmain.actgototime.caption
+msgid "Go to time..."
+msgstr "转到时间..."
+
+#: tfrmmain.acthelp.caption
+msgctxt "tfrmmain.acthelp.caption"
+msgid "Help"
+msgstr "帮助"
+
+#: tfrmmain.actimportsubtitles.caption
+msgid "Subtitles..."
+msgstr "字幕..."
+
+#: tfrmmain.actinsertcurrenttime.caption
+msgid "Insert current time"
+msgstr "插入当前时间"
+
+#: tfrmmain.actinsertentry.caption
+msgid "Insert entry"
+msgstr "插入条目"
+
+#: tfrmmain.actinsertentry.hint
+msgid "Insert a new entry after the current entry"
+msgstr "在当前条目后插入新条目"
+
+#: tfrmmain.actinsertentrybefore.caption
+msgid "Insert entry before"
+msgstr "在条目前插入"
+
+#: tfrmmain.actinsertentrybefore.hint
+msgctxt "tfrmmain.actinsertentrybefore.hint"
+msgid "Insert entry before the current entry"
+msgstr "在当前条目之前插入条目"
+
+#: tfrmmain.actinsertshotchange.caption
+msgid "Insert shot change"
+msgstr ""
+
+#: tfrmmain.actinvertselection.caption
+msgctxt "tfrmmain.actinvertselection.caption"
+msgid "Invert selection"
+msgstr "反向选择"
+
+#: tfrmmain.actjumptonextempty.caption
+msgid "Jump to next without text"
+msgstr "跳转到下一个，不带文本"
+
+#: tfrmmain.actjumptonextmarked.caption
+msgid "Jump to next marked"
+msgstr "跳转到下一个标记"
+
+#: tfrmmain.actjumptonextnote.caption
+msgid "Jump to next note"
+msgstr "跳转到下一个笔记"
+
+#: tfrmmain.actjumptonextshotchange.caption
+msgid "Jump to next shot change"
+msgstr ""
+
+#: tfrmmain.actjumptopreviousempty.caption
+msgid "Jump to previous without text"
+msgstr "跳转到上一个，不带文本"
+
+#: tfrmmain.actjumptopreviousmarked.caption
+msgid "Jump to previous marked"
+msgstr "跳转到上一个标记"
+
+#: tfrmmain.actjumptopreviousnote.caption
+msgid "Jump to previous note"
+msgstr "跳转到上一个笔记"
+
+#: tfrmmain.actjumptoprevshotchange.caption
+msgid "Jump to previous shot change"
+msgstr ""
+
+#: tfrmmain.actlistmode.caption
+msgctxt "tfrmmain.actlistmode.caption"
+msgid "List mode"
+msgstr "列表模式"
+
+#: tfrmmain.actloadproject.caption
+msgid "Load project..."
+msgstr "载入项目..."
+
+#: tfrmmain.actloadsubtitle.caption
+msgctxt "tfrmmain.actloadsubtitle.caption"
+msgid "Load subtitle..."
+msgstr "载入字幕..."
+
+#: tfrmmain.actloadsubtitle.hint
+msgid "Load a subtitle file"
+msgstr "载入字幕文件"
+
+#: tfrmmain.actloadtranscription.caption
+msgctxt "tfrmmain.actloadtranscription.caption"
+msgid "Transcription..."
+msgstr "转录..."
+
+#: tfrmmain.actloadtranslation.caption
+msgid "Load translation..."
+msgstr "载入翻译..."
+
+#: tfrmmain.actloadvideo.caption
+msgid "Open video..."
+msgstr "打开视频..."
+
+#: tfrmmain.actloadvideo.hint
+msgid "Open a video file"
+msgstr "打开视频文件"
+
+#: tfrmmain.actloadvideofromurl.caption
+msgid "Open video from URL..."
+msgstr "从 URL 打开视频..."
+
+#: tfrmmain.actmarkentry.caption
+msgid "Mark entry"
+msgstr "标记条目"
+
+#: tfrmmain.actmediaaddentry.caption
+msgctxt "tfrmmain.actmediaaddentry.caption"
+msgid "Add entry"
+msgstr "添加条目"
+
+#: tfrmmain.actmediaautoscroll.caption
+msgctxt "tfrmmain.actmediaautoscroll.caption"
+msgid "Update list on preview"
+msgstr "预览时更新列表"
+
+#: tfrmmain.actmediaback1min.caption
+msgid "Go back 1 minute"
+msgstr "后退 1 分钟"
+
+#: tfrmmain.actmediaback1sec.caption
+msgid "Go back 1 second"
+msgstr "后退 1 秒"
+
+#: tfrmmain.actmediachangeplayrate.caption
+msgctxt "tfrmmain.actmediachangeplayrate.caption"
+msgid "Playback rate"
+msgstr "播放速度"
+
+#: tfrmmain.actmediadeleteentry.caption
+msgctxt "tfrmmain.actmediadeleteentry.caption"
+msgid "Delete entry"
+msgstr "删除条目"
+
+#: tfrmmain.actmediaendsubtitleentry.caption
+msgid "End entry"
+msgstr "结束条目"
+
+#: tfrmmain.actmediaforward.caption
+msgctxt "tfrmmain.actmediaforward.caption"
+msgid "Forward"
+msgstr "向前"
+
+#: tfrmmain.actmediaforward1min.caption
+msgid "Forward 1 minute"
+msgstr "前进 1 分钟"
+
+#: tfrmmain.actmediaforward1sec.caption
+msgid "Forward 1 second"
+msgstr "前进 1 秒"
+
+#: tfrmmain.actmediamovesubtitleentry.caption
+msgid "Move entry"
+msgstr "移动条目"
+
+#: tfrmmain.actmedianextframe.caption
+msgctxt "tfrmmain.actmedianextframe.caption"
+msgid "Next frame"
+msgstr "下一帧"
+
+#: tfrmmain.actmediaplay.caption
+msgctxt "tfrmmain.actmediaplay.caption"
+msgid "Play/Pause"
+msgstr "播放/暂停"
+
+#: tfrmmain.actmediaplayafterselection.caption
+msgctxt "tfrmmain.actmediaplayafterselection.caption"
+msgid "Play after selection"
+msgstr "在选区后播放"
+
+#: tfrmmain.actmediaplaybeforeselection.caption
+msgctxt "tfrmmain.actmediaplaybeforeselection.caption"
+msgid "Play before selection"
+msgstr "在选区前播放"
+
+#: tfrmmain.actmediaplayfromselection.caption
+msgctxt "tfrmmain.actmediaplayfromselection.caption"
+msgid "Play from selection"
+msgstr "从选区播放"
+
+#: tfrmmain.actmediaplayselection.caption
+msgctxt "tfrmmain.actmediaplayselection.caption"
+msgid "Play selection"
+msgstr "播放选区"
+
+#: tfrmmain.actmediapreviousframe.caption
+msgctxt "tfrmmain.actmediapreviousframe.caption"
+msgid "Previous frame"
+msgstr "上一帧"
+
+#: tfrmmain.actmediarewind.caption
+msgctxt "tfrmmain.actmediarewind.caption"
+msgid "Rewind"
+msgstr "向后"
+
+#: tfrmmain.actmediasetfinaltime.caption
+msgctxt "tfrmmain.actmediasetfinaltime.caption"
+msgid "Set final time"
+msgstr "设定最终时间"
+
+#: tfrmmain.actmediasetinitialtime.caption
+msgctxt "tfrmmain.actmediasetinitialtime.caption"
+msgid "Set initial time"
+msgstr "设定开始时间"
+
+#: tfrmmain.actmediasplitentryatcursorposition.caption
+msgid "Split at cursor position"
+msgstr "在光标位置分割"
+
+#: tfrmmain.actmediastartsubtitleentry.caption
+msgid "Start entry"
+msgstr "开始条目"
+
+#: tfrmmain.actmediastop.caption
+msgctxt "tfrmmain.actmediastop.caption"
+msgid "Stop"
+msgstr "停止"
+
+#: tfrmmain.actmediasubsizedec.caption
+msgid "Reduce video font size"
+msgstr "缩小视频字体大小"
+
+#: tfrmmain.actmediasubsizeinc.caption
+msgid "Increase video font size"
+msgstr "增大视频字体大小"
+
+#: tfrmmain.actmediavolumedown.caption
+msgid "Down"
+msgstr "降低"
+
+#: tfrmmain.actmediavolumemute.caption
+msgid "Mute"
+msgstr "静音"
+
+#: tfrmmain.actmediavolumeup.caption
+msgid "Up"
+msgstr "增加"
+
+#: tfrmmain.actmediazoomin.caption
+msgctxt "tfrmmain.actmediazoomin.caption"
+msgid "Zoom in"
+msgstr "放大"
+
+#: tfrmmain.actmediazoomout.caption
+msgctxt "tfrmmain.actmediazoomout.caption"
+msgid "Zoom out"
+msgstr "缩小"
+
+#: tfrmmain.actmediazoomselection.caption
+msgctxt "tfrmmain.actmediazoomselection.caption"
+msgid "Zoom selection"
+msgstr "放大选择"
+
+#: tfrmmain.actmergewithnext.caption
+msgid "Merge with next"
+msgstr "与下一个合并"
+
+#: tfrmmain.actmergewithprevious.caption
+msgid "Merge with previous"
+msgstr "与上一个合并"
+
+#: tfrmmain.actmodifyselection.caption
+msgid "Modify selection..."
+msgstr "修改选择..."
+
+#: tfrmmain.actmultiplereplace.caption
+msgid "Multiple replace..."
+msgstr "多重替换..."
+
+#: tfrmmain.actnewsubtitle.caption
+msgctxt "tfrmmain.actnewsubtitle.caption"
+msgid "New subtitle"
+msgstr "新字幕"
+
+#: tfrmmain.actnewsubtitle.hint
+msgid "Start a new subtitle project"
+msgstr "新建字幕工程"
+
+#: tfrmmain.actnextsubtitle.caption
+msgctxt "tfrmmain.actnextsubtitle.caption"
+msgid "Next subtitle"
+msgstr "下个字幕"
+
+#: tfrmmain.actpaste.caption
+msgctxt "tfrmmain.actpaste.caption"
+msgid "Paste"
+msgstr "粘贴"
+
+#: tfrmmain.actprevioussubtitle.caption
+msgctxt "tfrmmain.actprevioussubtitle.caption"
+msgid "Previous subtitle"
+msgstr "上个字幕"
+
+#: tfrmmain.actpullfirstlinefromnextentry.caption
+msgid "Pull the first line from the next entry"
+msgstr "从下一个条目中提取第一行"
+
+#: tfrmmain.actpulllastlinefrompreviousentry.caption
+msgid "Pull the last line from the previous entry"
+msgstr "从上一个条目中提取最后一行"
+
+#: tfrmmain.actpushfirstlinetopreviousentry.caption
+msgid "Push the first line to the previous entry"
+msgstr "将第一行推到上一个条目"
+
+#: tfrmmain.actpushlastlinetonextentry.caption
+msgid "Push the last line to the next entry"
+msgstr "将最后一行推至下一个条目"
+
+#: tfrmmain.actpushworddown.caption
+msgid "Push the last word of the current line down"
+msgstr "将当前行的最后一个字向下推移"
+
+#: tfrmmain.actpushwordtonextentry.caption
+msgid "Push the last word to the next entry"
+msgstr "将最后一个字推到下一个条目"
+
+#: tfrmmain.actpushwordtopreviousentry.caption
+msgid "Push the first word to the previous entry"
+msgstr "将第一个字推到上一个条目"
+
+#: tfrmmain.actpushwordup.caption
+msgid "Push the first word of the current line up"
+msgstr "将当前行的第一个字推上去"
+
+#: tfrmmain.actqualitycheck.caption
+msgid "Quality check..."
+msgstr "品质检查..."
+
+#: tfrmmain.actreadtextsfromfile.caption
+msgid "Read text from file..."
+msgstr "从文件中读取文本..."
+
+#: tfrmmain.actreadtimingsfromfile.caption
+msgid "Read timings from file..."
+msgstr "从文件中读取计时..."
+
+#: tfrmmain.actredo.caption
+msgctxt "tfrmmain.actredo.caption"
+msgid "Redo"
+msgstr "重做"
+
+#: tfrmmain.actredo.hint
+msgid "Redo last undo"
+msgstr "重做上次撤销的操作"
+
+#: tfrmmain.actremovelinefromentry.caption
+msgid "Remove line from entry..."
+msgstr "从条目中处移除一行..."
+
+#: tfrmmain.actremoveunicodecontrolchars.caption
+msgid "Remove Unicode control characters"
+msgstr "移除 Unicode 控制字符"
+
+#: tfrmmain.actreplace.caption
+msgid "Replace..."
+msgstr "替换..."
+
+#: tfrmmain.actrestorebackup.caption
+msgid "Restore backup..."
+msgstr "还原备份..."
+
+#: tfrmmain.actreversetext.caption
+msgid "Reverse text"
+msgstr "反转文字"
+
+#: tfrmmain.actroundtimes.caption
+msgid "Round times..."
+msgstr ""
+
+#: tfrmmain.actsaveproject.caption
+msgid "Save project..."
+msgstr "保存项目..."
+
+#: tfrmmain.actsavesubtitle.caption
+msgctxt "tfrmmain.actsavesubtitle.caption"
+msgid "Save subtitle"
+msgstr "保存字幕"
+
+#: tfrmmain.actsavesubtitle.hint
+msgid "Save current subtitle to file"
+msgstr "将当前字幕保存到文件"
+
+#: tfrmmain.actsavesubtitleas.caption
+msgid "Save subtitle as..."
+msgstr "保存字幕为..."
+
+#: tfrmmain.actsavesubtitleas.hint
+msgid "Save current subtitle to a specific file"
+msgstr "将当前字幕保存到特定文件"
+
+#: tfrmmain.actsavetranscription.caption
+msgctxt "tfrmmain.actsavetranscription.caption"
+msgid "Transcription..."
+msgstr "转录..."
+
+#: tfrmmain.actsavetranslation.caption
+msgid "Save translation"
+msgstr "保存翻译"
+
+#: tfrmmain.actsavetranslation.hint
+msgid "Save current translation to file"
+msgstr "将当前翻译保存到文件"
+
+#: tfrmmain.actsavetranslationas.caption
+msgid "Save translation as..."
+msgstr "将译文另存为..."
+
+#: tfrmmain.actsavetranslationas.hint
+msgid "Save current translation to a specific file"
+msgstr "将当前翻译保存到特定文件"
+
+#: tfrmmain.actscreenshottofile.caption
+msgid "Save screenshot"
+msgstr "保存屏幕截图"
+
+#: tfrmmain.actselectall.caption
+msgctxt "tfrmmain.actselectall.caption"
+msgid "Select all"
+msgstr "全选"
+
+#: tfrmmain.actselectcurrenttobeginning.caption
+msgid "Select current to beginning"
+msgstr "选择当前到开始"
+
+#: tfrmmain.actselectcurrenttoend.caption
+msgid "Select current to end"
+msgstr "选择当前到结束"
+
+#: tfrmmain.actsetasdefaultencoding.caption
+msgctxt "tfrmmain.actsetasdefaultencoding.caption"
+msgid "Set as default save encoding"
+msgstr "设置为默认保存编码"
+
+#: tfrmmain.actsetasdefaultformat.caption
+msgctxt "tfrmmain.actsetasdefaultformat.caption"
+msgid "Set as default save format"
+msgstr "设置为默认保存格式"
+
+#: tfrmmain.actsetautomaticduration.caption
+msgid "Set automatic duration"
+msgstr "设置自动持续时间"
+
+#: tfrmmain.actsetdefaultgap.caption
+msgid "Set default gap"
+msgstr "设置默认间距"
+
+#: tfrmmain.actsetdefaultgap.hint
+msgid "Only if the gap is too short"
+msgstr "只有在间距太短的情况下"
+
+#: tfrmmain.actsetdelay.caption
+msgid "Set delay..."
+msgstr "设置延迟..."
+
+#: tfrmmain.actsetguilayout0.caption
+msgctxt "tfrmmain.actsetguilayout0.caption"
+msgid "Classic"
+msgstr "经典"
+
+#: tfrmmain.actsetguilayout1.caption
+msgctxt "tfrmmain.actsetguilayout1.caption"
+msgid "Inverted"
+msgstr "反向"
+
+#: tfrmmain.actsetguilayout2.caption
+msgctxt "tfrmmain.actsetguilayout2.caption"
+msgid "Vertical"
+msgstr "纵向"
+
+#: tfrmmain.actsetmaximumlinelength.caption
+msgid "Set maximum line length"
+msgstr "设置最大行长"
+
+#: tfrmmain.actsettings.caption
+msgctxt "tfrmmain.actsettings.caption"
+msgid "Settings..."
+msgstr "设置..."
+
+#: tfrmmain.actshifttimeless.caption
+#, object-pascal-format
+msgctxt "tfrmmain.actshifttimeless.caption"
+msgid "Shift %dms less"
+msgstr "减少平移 %dms"
+
+#: tfrmmain.actshifttimemore.caption
+#, object-pascal-format
+msgctxt "tfrmmain.actshifttimemore.caption"
+msgid "Shift %dms more"
+msgstr "增加平移 %dms"
+
+#: tfrmmain.actshifttimes.caption
+msgid "Shift times..."
+msgstr "平移时间..."
+
+#: tfrmmain.actshotchanges.caption
+msgid "Shot changes..."
+msgstr ""
+
+#: tfrmmain.actshowactoronpreview.caption
+msgid "Display Actor on Preview"
+msgstr "预览时显示说话人"
+
+#: tfrmmain.actshowcolumncpl.caption
+msgctxt "tfrmmain.actshowcolumncpl.caption"
+msgid "Characters per line"
+msgstr "每行字符数"
+
+#: tfrmmain.actshowcolumncps.caption
+msgctxt "tfrmmain.actshowcolumncps.caption"
+msgid "Characters per second"
+msgstr "每秒字符数"
+
+#: tfrmmain.actshowcolumnduration.caption
+msgctxt "tfrmmain.actshowcolumnduration.caption"
+msgid "Duration"
+msgstr "持续时间"
+
+#: tfrmmain.actshowcolumnnumber.caption
+msgid "Number/GAP"
+msgstr ""
+
+#: tfrmmain.actshowcolumnstyleandactor.caption
+msgctxt "tfrmmain.actshowcolumnstyleandactor.caption"
+msgid "Style/Actor"
+msgstr "样式/说话人"
+
+#: tfrmmain.actshowcolumntimes.caption
+msgctxt "tfrmmain.actshowcolumntimes.caption"
+msgid "Times"
+msgstr "时间"
+
+#: tfrmmain.actshowcolumnwpm.caption
+msgctxt "tfrmmain.actshowcolumnwpm.caption"
+msgid "Words per minute"
+msgstr "每分钟字数"
+
+#: tfrmmain.actshowtoolbarencoding.caption
+msgctxt "tfrmmain.actshowtoolbarencoding.caption"
+msgid "Encoding"
+msgstr "编码"
+
+#: tfrmmain.actshowtoolbarformat.caption
+msgctxt "tfrmmain.actshowtoolbarformat.caption"
+msgid "Format"
+msgstr "样式"
+
+#: tfrmmain.actshowtoolbarfps.caption
+msgctxt "tfrmmain.actshowtoolbarfps.caption"
+msgid "FPS"
+msgstr "帧率"
+
+#: tfrmmain.actshowtoolbarmain.caption
+msgctxt "tfrmmain.actshowtoolbarmain.caption"
+msgid "Main"
+msgstr "主要"
+
+#: tfrmmain.actshowtoolbarquickaction.caption
+msgid "Quick Action"
+msgstr ""
+
+#: tfrmmain.actsort.caption
+msgid "Sort"
+msgstr ""
+
+#: tfrmmain.actsourcemode.caption
+msgctxt "tfrmmain.actsourcemode.caption"
+msgid "Source mode"
+msgstr "源码模式"
+
+#: tfrmmain.actspellcheck.caption
+msgid "Spell check..."
+msgstr "拼写检查..."
+
+#: tfrmmain.actsplitentryatposition.caption
+msgctxt "tfrmmain.actsplitentryatposition.caption"
+msgid "Split line at cursor position"
+msgstr "在光标位置分行"
+
+#: tfrmmain.actstatistics.caption
+msgid "Statistics..."
+msgstr "统计数据..."
+
+#: tfrmmain.actswaptexts.caption
+msgid "Swap text"
+msgstr "交换文本"
+
+#: tfrmmain.acttbx.caption
+msgctxt "tfrmmain.acttbx.caption"
+msgid "Show..."
+msgstr "显示..."
+
+#: tfrmmain.acttbxclose.caption
+msgctxt "tfrmmain.acttbxclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmmain.acttbxedit.caption
+msgctxt "tfrmmain.acttbxedit.caption"
+msgid "Add..."
+msgstr "添加..."
+
+#: tfrmmain.acttbxlist.caption
+msgctxt "tfrmmain.acttbxlist.caption"
+msgid "List..."
+msgstr "列表..."
+
+#: tfrmmain.acttbxsettings.caption
+msgctxt "tfrmmain.acttbxsettings.caption"
+msgid "Settings..."
+msgstr "设置..."
+
+#: tfrmmain.acttexteffectflash.caption
+msgid "Flash effect"
+msgstr "闪光效果"
+
+#: tfrmmain.acttexteffecttypewriter.caption
+msgid "Typewriter effect"
+msgstr "打字机效果"
+
+#: tfrmmain.acttimeexpander.caption
+msgid "Time expander/reducer..."
+msgstr "时间扩展/减少..."
+
+#: tfrmmain.acttimemode.caption
+msgctxt "tfrmmain.acttimemode.caption"
+msgid "Time mode"
+msgstr "时间模式"
+
+#: tfrmmain.acttimemode.hint
+msgid "Set time code format to HH:MM:SS.ZZZ"
+msgstr "将时间码格式设置为HH:MM:SS.ZZZ"
+
+#: tfrmmain.acttm1.caption
+msgid "Use text from position 1 (tm)"
+msgstr "使用位置 1 的文本 (tm)"
+
+#: tfrmmain.acttm2.caption
+msgid "Use text from position 2 (tm)"
+msgstr "使用位置 2 的文本 (tm)"
+
+#: tfrmmain.acttm3.caption
+msgid "Use text from position 3 (tm)"
+msgstr "使用位置 3 的文本 (tm)"
+
+#: tfrmmain.acttranscriptionmode.caption
+msgctxt "tfrmmain.acttranscriptionmode.caption"
+msgid "Transcription mode"
+msgstr "转录模式"
+
+#: tfrmmain.acttranscriptionmode.hint
+msgid "Enable free-write mode"
+msgstr "启用自由写入模式"
+
+#: tfrmmain.acttranslate.caption
+msgid "Auto translate..."
+msgstr "自动翻译..."
+
+#: tfrmmain.acttranslationmemory.caption
+msgctxt "tfrmmain.acttranslationmemory.caption"
+msgid "Show..."
+msgstr "显示..."
+
+#: tfrmmain.acttranslationmemoryclose.caption
+msgctxt "tfrmmain.acttranslationmemoryclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmmain.acttranslationmemorylist.caption
+msgctxt "tfrmmain.acttranslationmemorylist.caption"
+msgid "List..."
+msgstr "列表..."
+
+#: tfrmmain.acttranslationmemorysettings.caption
+msgctxt "tfrmmain.acttranslationmemorysettings.caption"
+msgid "Settings..."
+msgstr "设置..."
+
+#: tfrmmain.acttranslatormode.caption
+msgctxt "tfrmmain.acttranslatormode.caption"
+msgid "Translator mode"
+msgstr "翻译模式"
+
+#: tfrmmain.actunbreakentry.caption
+msgid "Unbreak entry"
+msgstr "取消断开条目"
+
+#: tfrmmain.actundo.caption
+msgctxt "tfrmmain.actundo.caption"
+msgid "Undo"
+msgstr "撤销"
+
+#: tfrmmain.actundo.hint
+msgid "Undo last action"
+msgstr "撤销上次操作"
+
+#: tfrmmain.actundockvideo.caption
+msgid "Dock video"
+msgstr "停靠视频"
+
+#: tfrmmain.actundockwaveform.caption
+msgid "Dock waveform"
+msgstr "停靠音频"
+
+#: tfrmmain.actunicodectrllre.caption
+msgid "LRE (Start of Left-to-Right Embedding)"
+msgstr ""
+
+#: tfrmmain.actunicodectrllrm.caption
+msgid "LRM (Left-to-Right Mark)"
+msgstr ""
+
+#: tfrmmain.actunicodectrllro.caption
+msgid "LRO (Start of Left-to-Right Override)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlpdf.caption
+msgid "PDF (Pop Directional Formatting)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlrle.caption
+msgid "RLE (Start of Right-to-Left Embedding)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlrlm.caption
+msgid "RLM (Right-to-Left Mark)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlrlo.caption
+msgid "RLO (Start of Right-to-Left Override)"
+msgstr ""
+
+#: tfrmmain.actunicodectrlzwnj.caption
+msgid "ZWNJ (Zero Width Non-Joiner)"
+msgstr ""
+
+#: tfrmmain.actunicodezwj.caption
+msgid "ZWJ (Zero Width Joiner)"
+msgstr ""
+
+#: tfrmmain.actunmarkentry.caption
+msgid "Unmark entry"
+msgstr "取消标记条目"
+
+#: tfrmmain.actvalidatetm.caption
+msgid "Validate translation memory"
+msgstr "验证翻译存储器"
+
+#: tfrmmain.actvalidatetm.hint
+msgid "Validates and advances to the next"
+msgstr "验证并进入下一个"
+
+#: tfrmmain.actvaligntobottom.caption
+msgctxt "tfrmmain.actvaligntobottom.caption"
+msgid "Vertical align to bottom"
+msgstr "垂直对齐至底部"
+
+#: tfrmmain.actvaligntomiddle.caption
+msgctxt "tfrmmain.actvaligntomiddle.caption"
+msgid "Vertical align to middle"
+msgstr "垂直对齐到中间"
+
+#: tfrmmain.actvaligntotop.caption
+msgctxt "tfrmmain.actvaligntotop.caption"
+msgid "Vertical align to top"
+msgstr "垂直对齐到顶部"
+
+#: tfrmmain.actvar169.caption
+msgid "16:9"
+msgstr ""
+
+#: tfrmmain.actvar1851.caption
+msgid "1.85:1"
+msgstr ""
+
+#: tfrmmain.actvar2351.caption
+msgid "2.35:1"
+msgstr ""
+
+#: tfrmmain.actvar43.caption
+msgid "4:3"
+msgstr ""
+
+#: tfrmmain.actvarcycle.caption
+msgid "Cycle Aspect Ratio"
+msgstr "循环长宽比"
+
+#: tfrmmain.actvardefault.caption
+msgid "Default"
+msgstr "默认"
+
+#: tfrmmain.actvideofilterblur.caption
+msgid "Blur"
+msgstr "模糊"
+
+#: tfrmmain.actvideofilteredgeenhance.caption
+msgid "Edge enhance"
+msgstr "边缘增强"
+
+#: tfrmmain.actvideofilteremboss.caption
+msgid "Emboss"
+msgstr "凹凸纹"
+
+#: tfrmmain.actvideofilterhflip.caption
+msgid "Horizontal flip"
+msgstr "水平翻转"
+
+#: tfrmmain.actvideofilternegative.caption
+msgid "Negative"
+msgstr ""
+
+#: tfrmmain.actvideofiltersharpen.caption
+msgid "Sharpen"
+msgstr "锐化"
+
+#: tfrmmain.actvideofiltervflip.caption
+msgid "Vertical flip"
+msgstr "垂直翻转"
+
+#: tfrmmain.actvideofiltervintage.caption
+msgid "Vintage"
+msgstr "复古"
+
+#: tfrmmain.actvideopreview.caption
+msgctxt "tfrmmain.actvideopreview.caption"
+msgid "Video preview"
+msgstr "视频预览"
+
+#: tfrmmain.actviewshotchange.caption
+msgctxt "tfrmmain.actviewshotchange.caption"
+msgid "Shot changes"
+msgstr ""
+
+#: tfrmmain.actviewshotchange.hint
+msgid "Enable/disable shot changes"
+msgstr ""
+
+#: tfrmmain.actwaveextract.caption
+msgid "Extract waveform..."
+msgstr "提取波形..."
+
+#: tfrmmain.actwaveformpreview.caption
+msgctxt "tfrmmain.actwaveformpreview.caption"
+msgid "Waveform preview"
+msgstr "波形预览"
+
+#: tfrmmain.actwebpreview.caption
+msgid "Web Preview..."
+msgstr "网络预览..."
+
+#: tfrmmain.actwebreference.caption
+msgid "Web reference..."
+msgstr "网络参考..."
+
+#: tfrmmain.cboencoding.hint
+msgctxt "tfrmmain.cboencoding.hint"
+msgid "Encoding"
+msgstr "编码"
+
+#: tfrmmain.cboformat.hint
+msgctxt "tfrmmain.cboformat.hint"
+msgid "Format"
+msgstr "格式"
+
+#: tfrmmain.cbofps.hint
+msgid "Target FPS of subtitle file"
+msgstr "字幕文件的目标帧率"
+
+#: tfrmmain.cboinputfps.hint
+msgid "FPS of the movie the opened subtitle file was made for"
+msgstr "打开的字幕文件所对应电影的帧率"
+
+#: tfrmmain.edtquickaction.hint
+msgctxt "tfrmmain.edtquickaction.hint"
+msgid "Quick Action Finder"
+msgstr ""
+
+#: tfrmmain.lblmedialength.hint
+msgid "Video length and FPS"
+msgstr "视频长度和帧率"
+
+#: tfrmmain.lblmediatime.hint
+msgid "Current video position"
+msgstr "当前视频位置"
+
+#: tfrmmain.mnudictionary.caption
+msgctxt "tfrmmain.mnudictionary.caption"
+msgid "Dictionary"
+msgstr "字典"
+
+#: tfrmmain.mnuedit.caption
+msgctxt "tfrmmain.mnuedit.caption"
+msgid "Edit"
+msgstr "编辑"
+
+#: tfrmmain.mnueditentries.caption
+msgctxt "tfrmmain.mnueditentries.caption"
+msgid "Entries"
+msgstr "条目"
+
+#: tfrmmain.mnueditformat.caption
+msgctxt "tfrmmain.mnueditformat.caption"
+msgid "Format"
+msgstr "样式"
+
+#: tfrmmain.mnueditinsertchar.caption
+msgid "Insert Unicode character"
+msgstr "插入 Unicode 字符"
+
+#: tfrmmain.mnueditrtl.caption
+msgid "Right-to-left"
+msgstr ""
+
+#: tfrmmain.mnuedittexts.caption
+msgctxt "tfrmmain.mnuedittexts.caption"
+msgid "Text"
+msgstr "文本"
+
+#: tfrmmain.mnuedittimings.caption
+msgctxt "tfrmmain.mnuedittimings.caption"
+msgid "Timings"
+msgstr "计时"
+
+#: tfrmmain.mnuedittimingsendcue.caption
+msgid "End Cue"
+msgstr ""
+
+#: tfrmmain.mnuedittimingsextend.caption
+msgid "Extend length"
+msgstr "延长长度"
+
+#: tfrmmain.mnufile.caption
+msgctxt "tfrmmain.mnufile.caption"
+msgid "File"
+msgstr "文件"
+
+#: tfrmmain.mnufileexport.caption
+msgid "Export"
+msgstr "导出"
+
+#: tfrmmain.mnufileimport.caption
+msgid "Import"
+msgstr "导入"
+
+#: tfrmmain.mnufilemru.caption
+msgctxt "tfrmmain.mnufilemru.caption"
+msgid "Recent files"
+msgstr "最近文件"
+
+#: tfrmmain.mnufind.caption
+msgctxt "tfrmmain.mnufind.caption"
+msgid "Find"
+msgstr "查找"
+
+#: tfrmmain.mnuhelp.caption
+msgctxt "tfrmmain.mnuhelp.caption"
+msgid "Help"
+msgstr "帮助"
+
+#: tfrmmain.mnumemoinsertunicodecontrolchar.caption
+msgid "Insert Unicode control character"
+msgstr "插入 Unicode 控制字符"
+
+#: tfrmmain.mnuselect.caption
+msgctxt "tfrmmain.mnuselect.caption"
+msgid "Select"
+msgstr "选择"
+
+#: tfrmmain.mnutexteffects.caption
+msgid "Effects"
+msgstr "效果"
+
+#: tfrmmain.mnutextlines.caption
+msgid "Lines"
+msgstr "行"
+
+#: tfrmmain.mnutextwords.caption
+msgid "Words"
+msgstr "单词"
+
+#: tfrmmain.mnutools.caption
+msgctxt "tfrmmain.mnutools.caption"
+msgid "Tools"
+msgstr "工具"
+
+#: tfrmmain.mnutoolsterminology.caption
+msgctxt "tfrmmain.mnutoolsterminology.caption"
+msgid "Terminology"
+msgstr "术语"
+
+#: tfrmmain.mnutoolstranslationmemory.caption
+msgctxt "tfrmmain.mnutoolstranslationmemory.caption"
+msgid "Translation memory"
+msgstr "翻译存储器"
+
+#: tfrmmain.mnuvideo.caption
+msgctxt "tfrmmain.mnuvideo.caption"
+msgid "Video"
+msgstr "视频"
+
+#: tfrmmain.mnuvideoaspectratio.caption
+msgid "Aspect Ratio"
+msgstr "宽高比"
+
+#: tfrmmain.mnuvideoaudiofilters.caption
+msgctxt "tfrmmain.mnuvideoaudiofilters.caption"
+msgid "Audio filters"
+msgstr "视音频过滤"
+
+#: tfrmmain.mnuvideoaudiostream.caption
+msgid "Audio stream"
+msgstr "音频流"
+
+#: tfrmmain.mnuvideoplayback.caption
+msgid "Playback"
+msgstr "播放"
+
+#: tfrmmain.mnuvideosubtitles.caption
+msgctxt "tfrmmain.mnuvideosubtitles.caption"
+msgid "Subtitles"
+msgstr "字幕"
+
+#: tfrmmain.mnuvideovideofilters.caption
+msgctxt "tfrmmain.mnuvideovideofilters.caption"
+msgid "Video filters"
+msgstr "视频过滤"
+
+#: tfrmmain.mnuvideovolume.caption
+msgid "Volume"
+msgstr "音量"
+
+#: tfrmmain.mnuview.caption
+msgctxt "tfrmmain.mnuview.caption"
+msgid "View"
+msgstr "视图"
+
+#: tfrmmain.mnuviewcolumns.caption
+msgid "Columns"
+msgstr "栏目"
+
+#: tfrmmain.mnuviewtoolbars.caption
+msgid "Toolbars"
+msgstr "工具栏"
+
+#: tfrmmain.mnuviewwindows.caption
+msgid "Windows"
+msgstr "窗口"
+
+#: tfrmmain.mnuworkspacelayout.caption
+msgid "Layouts"
+msgstr "布局"
+
+#: tfrmmain.tedduration.hint
+msgctxt "tfrmmain.tedduration.hint"
+msgid "Duration"
+msgstr "持续时间"
+
+#: tfrmmain.tedfinal.hint
+msgctxt "tfrmmain.tedfinal.hint"
+msgid "Final time"
+msgstr "最终时间"
+
+#: tfrmmain.tedinitial.hint
+msgctxt "tfrmmain.tedinitial.hint"
+msgid "Initial time"
+msgstr "初始时间"
+
+#: tfrmmain.tedpause.hint
+msgid "Pause"
+msgstr "暂停"
+
+#: tfrmmodifyselection.btnapply.caption
+msgctxt "tfrmmodifyselection.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmmodifyselection.btnclose.caption
+msgctxt "tfrmmodifyselection.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmmodifyselection.caption
+msgid "Modify selection"
+msgstr "修改选区"
+
+#: tfrmmodifyselection.rbnaddtocurrentselection.caption
+msgid "Add to current selection"
+msgstr "添加到当前选择"
+
+#: tfrmmodifyselection.rbnnewselection.caption
+msgid "New selection"
+msgstr "新选区"
+
+#: tfrmmodifyselection.rbnsubtractfromcurrentselection.caption
+msgid "Subtract from current selection"
+msgstr "从当前选择中减去"
+
+#: tfrmmultiplereplace.btnapply.caption
+msgctxt "tfrmmultiplereplace.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmmultiplereplace.btnclose.caption
+msgctxt "tfrmmultiplereplace.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmmultiplereplace.btnminus.caption
+msgctxt "tfrmmultiplereplace.btnminus.caption"
+msgid "-"
+msgstr ""
+
+#: tfrmmultiplereplace.btnplus.caption
+msgctxt "tfrmmultiplereplace.btnplus.caption"
+msgid "+"
+msgstr ""
+
+#: tfrmmultiplereplace.caption
+msgid "Multiple replace"
+msgstr "多重替换"
+
+#: tfrmmultiplereplace.chkre.caption
+msgid "Regular expression"
+msgstr "正则表达式"
+
+#: tfrmmultiplereplace.lblfind.caption
+msgid "Find:"
+msgstr "查找："
+
+#: tfrmmultiplereplace.lblreplace.caption
+msgctxt "tfrmmultiplereplace.lblreplace.caption"
+msgid "Replace with:"
+msgstr "替换为："
+
+#: tfrmqualitycheck.btnclose.caption
+msgctxt "tfrmqualitycheck.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmqualitycheck.caption
+msgid "Quality check"
+msgstr "品质检查"
+
+#: tfrmqualitycheck.lblrules.caption
+msgid "Rules"
+msgstr "规则"
+
+#: tfrmrestorebackup.btnclose.caption
+msgctxt "tfrmrestorebackup.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmrestorebackup.btnrestore.caption
+msgctxt "tfrmrestorebackup.btnrestore.caption"
+msgid "Restore"
+msgstr "还原"
+
+#: tfrmrestorebackup.caption
+msgid "Restore backup"
+msgstr "还原备份"
+
+#: tfrmroundtime.btnapply.caption
+msgctxt "tfrmroundtime.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmroundtime.btnclose.caption
+msgctxt "tfrmroundtime.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmroundtime.caption
+msgid "Round times"
+msgstr ""
+
+#: tfrmroundtime.lblscope.caption
+msgctxt "tfrmroundtime.lblscope.caption"
+msgid "Scope:"
+msgstr "范围："
+
+#: tfrmroundtime.rbnallthesubtitles.caption
+msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "所有条目"
+
+#: tfrmroundtime.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmroundtime.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "从选择的条目开始"
+
+#: tfrmroundtime.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "仅限选定条目"
+
+#: tfrmroundtime.rdofps.caption
+msgid "Using FPS"
+msgstr "使用帧率"
+
+#: tfrmroundtime.rdomilliseconds.caption
+msgid "Using Milliseconds"
+msgstr "使用毫秒"
+
+#: tfrmsettings.btnclose.caption
+msgctxt "tfrmsettings.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmsettings.btnfasterwhisper.caption
+msgctxt "tfrmsettings.btnfasterwhisper.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmsettings.btnffmpeg.caption
+msgctxt "tfrmsettings.btnffmpeg.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmsettings.btnminus.caption
+msgctxt "tfrmsettings.btnminus.caption"
+msgid "-"
+msgstr ""
+
+#: tfrmsettings.btnplus.caption
+msgctxt "tfrmsettings.btnplus.caption"
+msgid "+"
+msgstr ""
+
+#: tfrmsettings.btnprofile.caption
+msgctxt "tfrmsettings.btnprofile.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmsettings.btnscenedetect.caption
+msgctxt "tfrmsettings.btnscenedetect.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmsettings.btnshortcutapply.caption
+msgctxt "tfrmsettings.btnshortcutapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmsettings.btnshortcutsave.caption
+msgid "Save as..."
+msgstr "保存为..."
+
+#: tfrmsettings.btnwhispercpp.caption
+msgctxt "tfrmsettings.btnwhispercpp.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmsettings.btnytdlp.caption
+msgctxt "tfrmsettings.btnytdlp.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmsettings.caption
+msgid "Settings"
+msgstr "设置"
+
+#: tfrmsettings.chkautoplay.caption
+msgid "Autoplay on video load"
+msgstr "视频加载后自动播放"
+
+#: tfrmsettings.chkdotsonsplit.caption
+msgctxt "tfrmsettings.chkdotsonsplit.caption"
+msgid "Add '...' on split subtitle"
+msgstr "在分割字幕中添加 '...' "
+
+#: tfrmsettings.chkdrawerrors.caption
+msgid "Show errors in list"
+msgstr "在列表中显示错误"
+
+#: tfrmsettings.chkdrawtags.caption
+msgid "Interpret tags in list"
+msgstr "解释列表中的标签"
+
+#: tfrmsettings.chkdrawwaveformgap.caption
+msgid "Show gap in timeline"
+msgstr "显示时间轴上的间距"
+
+#: tfrmsettings.chkpromptfordeletesubtitles.caption
+msgid "Prompt when deleting subtitles"
+msgstr "删除字幕时提示"
+
+#: tfrmsettings.chkpromptforinputencoding.caption
+msgid "Prompt for Encoding before loading a file"
+msgstr "加载文件前提示编码"
+
+#: tfrmsettings.chkpromptforinputfps.caption
+msgid "Prompt for FPS before loading a file"
+msgstr "加载文件前提示帧率"
+
+#: tfrmsettings.chkpromptforsavewitherrors.caption
+msgid "Prompt when saving file with errors"
+msgstr "保存文件时提示错误"
+
+#: tfrmsettings.chkshowcpsbar.caption
+msgid "Show CPS bar"
+msgstr "显示 每秒字符数 栏"
+
+#: tfrmsettings.chkshowsplashwindow.caption
+msgid "Show splash window"
+msgstr "显示欢迎窗口"
+
+#: tfrmsettings.chksubtitlehandlebympv.caption
+msgid "mpv handles subtitles for preview"
+msgstr "mpv 处理预览字幕"
+
+#: tfrmsettings.chkusehwdec.caption
+msgid "Use hardware video decoding"
+msgstr "使用硬解视频解码"
+
+#: tfrmsettings.chkuseownfiledialog.caption
+msgid "Use Tero file dialog"
+msgstr "使用 Tero 文件对话框"
+
+#: tfrmsettings.lbladditionalmpvoptions.caption
+msgid "Additional mpv options"
+msgstr "其他 mpv 选项"
+
+#: tfrmsettings.lblautobackup.caption
+msgid "Auto-backup every (minutes)"
+msgstr "每（分钟）自动备份一次"
+
+#: tfrmsettings.lblchaining.caption
+msgctxt "tfrmsettings.lblchaining.caption"
+msgid "Chaining (frames)"
+msgstr "连锁（帧）"
+
+#: tfrmsettings.lblcpl.caption
+msgctxt "tfrmsettings.lblcpl.caption"
+msgid "Characters per line"
+msgstr "每行字符数"
+
+#: tfrmsettings.lblcps.caption
+msgctxt "tfrmsettings.lblcps.caption"
+msgid "Characters per second"
+msgstr "每秒字符数"
+
+#: tfrmsettings.lblcpsstrategy.caption
+msgctxt "tfrmsettings.lblcpsstrategy.caption"
+msgid "Chars excluded from CPS count"
+msgstr "不计入 每秒字符数 计数的字符"
+
+#: tfrmsettings.lbldefaultfileencoding.caption
+msgid "Default file encoding"
+msgstr "默认文件编码"
+
+#: tfrmsettings.lbldefaultfileformat.caption
+msgid "Default file format"
+msgstr "默认文件格式"
+
+#: tfrmsettings.lbldefaultframerate.caption
+msgid "Default input frame rate"
+msgstr "默认输入帧率"
+
+#: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
+msgid "Dialogue segments detection threshold (rms)"
+msgstr "对话片段检测阈值（均方根值）"
+
+#: tfrmsettings.lblfasterwhisper.caption
+msgid "Faster-Whisper"
+msgstr ""
+
+#: tfrmsettings.lblffmpeg.caption
+msgid "FFmpeg"
+msgstr ""
+
+#: tfrmsettings.lblframestep.caption
+msgid "Frame step"
+msgstr ""
+
+#: tfrmsettings.lbllanguage.caption
+msgctxt "tfrmsettings.lbllanguage.caption"
+msgid "Language"
+msgstr "语言"
+
+#: tfrmsettings.lbllistfontsize.caption
+msgid "List font size"
+msgstr "列表字体大小"
+
+#: tfrmsettings.lbllistmode.caption
+msgctxt "tfrmsettings.lbllistmode.caption"
+msgid "List mode"
+msgstr "列表模式"
+
+#: tfrmsettings.lblmaxdurationms.caption
+msgctxt "tfrmsettings.lblmaxdurationms.caption"
+msgid "Max. duration (ms)"
+msgstr "最大持续时间（毫秒）"
+
+#: tfrmsettings.lblmaxlinecount.caption
+msgctxt "tfrmsettings.lblmaxlinecount.caption"
+msgid "Max. line count"
+msgstr "最大行数"
+
+#: tfrmsettings.lblmindurationms.caption
+msgctxt "tfrmsettings.lblmindurationms.caption"
+msgid "Min. duration / per word (ms)"
+msgstr "最小持续时间/每个字（毫秒）"
+
+#: tfrmsettings.lblnewsubtitlems.caption
+msgctxt "tfrmsettings.lblnewsubtitlems.caption"
+msgid "New subtitle (ms)"
+msgstr "新字幕（毫秒）"
+
+#: tfrmsettings.lblprofile.caption
+msgid "Profile"
+msgstr "简介"
+
+#: tfrmsettings.lblprohibitedchars.caption
+msgctxt "tfrmsettings.lblprohibitedchars.caption"
+msgid "Prohibited characters"
+msgstr "禁止使用的字符"
+
+#: tfrmsettings.lblrepeatablechars.caption
+msgctxt "tfrmsettings.lblrepeatablechars.caption"
+msgid "Repeatable characters"
+msgstr "可重复字符"
+
+#: tfrmsettings.lblscenedetect.caption
+msgid "PySceneDetect"
+msgstr ""
+
+#: tfrmsettings.lblscsnaparea.caption
+msgctxt "tfrmsettings.lblscsnaparea.caption"
+msgid "Shot change snap / threshold (frames)"
+msgstr ""
+
+#: tfrmsettings.lblscsnapincues.caption
+msgctxt "tfrmsettings.lblscsnapincues.caption"
+msgid "Snap in cues after SC (frames)"
+msgstr ""
+
+#: tfrmsettings.lblscsnapoutcues.caption
+msgctxt "tfrmsettings.lblscsnapoutcues.caption"
+msgid "Snap out cues before SC (frames)"
+msgstr ""
+
+#: tfrmsettings.lblseektime.caption
+msgid "Seek time (ms)"
+msgstr "寻找时间（毫秒）"
+
+#: tfrmsettings.lblshifttimems.caption
+msgid "Shift time (ms)"
+msgstr "平移时间（毫秒）"
+
+#: tfrmsettings.lblshortcut.caption
+msgid "Shortcut"
+msgstr "快捷方式"
+
+#: tfrmsettings.lblshortcutcat.caption
+msgid "Category"
+msgstr "类别"
+
+#: tfrmsettings.lblshortcutpreset.caption
+msgid "Preset"
+msgstr "预设"
+
+#: tfrmsettings.lblsubbackground.caption
+msgctxt "tfrmsettings.lblsubbackground.caption"
+msgid "Background"
+msgstr "背景"
+
+#: tfrmsettings.lblsubborder.caption
+msgid "Border"
+msgstr "边框"
+
+#: tfrmsettings.lblsubcolor.caption
+msgctxt "tfrmsettings.lblsubcolor.caption"
+msgid "Color"
+msgstr "颜色"
+
+#: tfrmsettings.lblsubshadow.caption
+msgid "Shadow"
+msgstr "阴影"
+
+#: tfrmsettings.lblsubsize.caption
+msgctxt "tfrmsettings.lblsubsize.caption"
+msgid "Size"
+msgstr "大小"
+
+#: tfrmsettings.lblsubtitlepausems.caption
+msgctxt "tfrmsettings.lblsubtitlepausems.caption"
+msgid "Min. gap"
+msgstr "最小间距"
+
+#: tfrmsettings.lblsubtitles.caption
+msgctxt "tfrmsettings.lblsubtitles.caption"
+msgid "Subtitles"
+msgstr "字幕"
+
+#: tfrmsettings.lbltextboxfontsize.caption
+msgid "Text box font size"
+msgstr "文本框字体大小"
+
+#: tfrmsettings.lbltheme.caption
+msgid "Theme"
+msgstr "主题"
+
+#: tfrmsettings.lbltimecodemode.caption
+msgid "Time code mode"
+msgstr "时间码模式"
+
+#: tfrmsettings.lbltoolbareditor.caption
+msgctxt "tfrmsettings.lbltoolbareditor.caption"
+msgid "Editor"
+msgstr "编辑器"
+
+#: tfrmsettings.lbltoolbarmain.caption
+msgctxt "tfrmsettings.lbltoolbarmain.caption"
+msgid "Main"
+msgstr "主要"
+
+#: tfrmsettings.lbltoolbarvideo.caption
+msgctxt "tfrmsettings.lbltoolbarvideo.caption"
+msgid "Video"
+msgstr "视频"
+
+#: tfrmsettings.lbltoolbarwave.caption
+msgctxt "tfrmsettings.lbltoolbarwave.caption"
+msgid "Waveform"
+msgstr "音频波形"
+
+#: tfrmsettings.lblwavecolor.caption
+msgctxt "tfrmsettings.lblwavecolor.caption"
+msgid "Color"
+msgstr "颜色"
+
+#: tfrmsettings.lblwaveend.caption
+msgid "End line"
+msgstr "结束行"
+
+#: tfrmsettings.lblwaveform.caption
+msgctxt "tfrmsettings.lblwaveform.caption"
+msgid "Waveform"
+msgstr "音频波形"
+
+#: tfrmsettings.lblwavestart.caption
+msgid "Start line"
+msgstr "起始行"
+
+#: tfrmsettings.lblwebreference.caption
+msgid "Web reference"
+msgstr "网络参考"
+
+#: tfrmsettings.lblwhispercpp.caption
+msgid "Whisper.cpp"
+msgstr ""
+
+#: tfrmsettings.lblwpm.caption
+msgctxt "tfrmsettings.lblwpm.caption"
+msgid "Words per minute"
+msgstr "每分钟字数"
+
+#: tfrmsettings.lblytdlp.caption
+msgid "YT-DLP"
+msgstr ""
+
+#: tfrmsettings.lblzerotodisable.caption
+msgid "(0 to disable)"
+msgstr "(0 表示禁用）"
+
+#: tfrmshifttimes.btnapply.caption
+msgctxt "tfrmshifttimes.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmshifttimes.btnclose.caption
+msgctxt "tfrmshifttimes.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmshifttimes.caption
+msgid "Shift times"
+msgstr "平移时间"
+
+#: tfrmshifttimes.cbooffset.text
+msgctxt "tfrmshifttimes.cbooffset.text"
+msgid "+"
+msgstr ""
+
+#: tfrmshifttimes.lbloffset.caption
+msgctxt "tfrmshifttimes.lbloffset.caption"
+msgid "Offset"
+msgstr "偏移量"
+
+#: tfrmshifttimes.lblscope.caption
+msgctxt "tfrmshifttimes.lblscope.caption"
+msgid "Scope:"
+msgstr "范围："
+
+#: tfrmshifttimes.rbnallthesubtitles.caption
+msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "所有条目"
+
+#: tfrmshifttimes.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmshifttimes.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "从选择的条目开始"
+
+#: tfrmshifttimes.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "仅限选择的条目"
+
+#: tfrmshotchanges.btnapply.caption
+msgctxt "tfrmshotchanges.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmshotchanges.btnclose.caption
+msgctxt "tfrmshotchanges.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmshotchanges.btndetect.caption
+msgctxt "tfrmshotchanges.btndetect.caption"
+msgid "Detect"
+msgstr "检测"
+
+#: tfrmshotchanges.btnexport.caption
+msgctxt "tfrmshotchanges.btnexport.caption"
+msgid "Export..."
+msgstr "导出..."
+
+#: tfrmshotchanges.btnimport.caption
+msgctxt "tfrmshotchanges.btnimport.caption"
+msgid "Import..."
+msgstr "导入..."
+
+#: tfrmshotchanges.caption
+msgctxt "tfrmshotchanges.caption"
+msgid "Shot changes"
+msgstr ""
+
+#: tfrmshotchanges.cbooffset.text
+msgctxt "tfrmshotchanges.cbooffset.text"
+msgid "+"
+msgstr ""
+
+#: tfrmshotchanges.lbldetectapp.caption
+msgid "App to detect"
+msgstr "检测应用程序"
+
+#: tfrmshotchanges.lbloffset.caption
+msgctxt "tfrmshotchanges.lbloffset.caption"
+msgid "Offset"
+msgstr "偏移量"
+
+#: tfrmshotchanges.lblsensitivity.caption
+msgid "Detection sensitivity"
+msgstr "检测灵敏度"
+
+#: tfrmshotchanges.lbltimecodein.caption
+msgid "Time code for import"
+msgstr "导入时间码"
+
+#: tfrmshotchanges.lbltimecodeout.caption
+msgid "Time code for export"
+msgstr "导出时间码"
+
+#: tfrmspellcheck.btnadd.caption
+msgctxt "tfrmspellcheck.btnadd.caption"
+msgid "Add"
+msgstr "添加"
+
+#: tfrmspellcheck.btnchange.caption
+msgctxt "tfrmspellcheck.btnchange.caption"
+msgid "Change"
+msgstr "更改"
+
+#: tfrmspellcheck.btnchangeall.caption
+msgctxt "tfrmspellcheck.btnchangeall.caption"
+msgid "Change all"
+msgstr "更改所有"
+
+#: tfrmspellcheck.btnclose.caption
+msgctxt "tfrmspellcheck.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmspellcheck.btnskip.caption
+msgctxt "tfrmspellcheck.btnskip.caption"
+msgid "Skip"
+msgstr "跳过"
+
+#: tfrmspellcheck.btnskipall.caption
+msgctxt "tfrmspellcheck.btnskipall.caption"
+msgid "Skip all"
+msgstr "跳过所有"
+
+#: tfrmspellcheck.caption
+msgid "Spell check"
+msgstr "拼写检查"
+
+#: tfrmspellcheck.lbldictionary.caption
+msgctxt "tfrmspellcheck.lbldictionary.caption"
+msgid "Dictionary"
+msgstr "字典"
+
+#: tfrmspellcheck.lblnotfound.caption
+msgid "Not found"
+msgstr "找不到"
+
+#: tfrmspellcheck.lblsource.caption
+msgid "Source"
+msgstr "来源"
+
+#: tfrmspellcheck.lblsuggestions.caption
+msgid "Suggestions"
+msgstr "建议"
+
+#: tfrmstatistics.btnclose.caption
+msgctxt "tfrmstatistics.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmstatistics.btnexport.caption
+msgctxt "tfrmstatistics.btnexport.caption"
+msgid "Export..."
+msgstr "导出..."
+
+#: tfrmstatistics.caption
+msgid "Statistics"
+msgstr "统计"
+
+#: tfrmtbx.btnclose.caption
+msgctxt "tfrmtbx.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmtbx.caption
+msgctxt "tfrmtbx.caption"
+msgid "Terminology"
+msgstr "术语"
+
+#: tfrmtbxedit.btnadd.caption
+msgctxt "tfrmtbxedit.btnadd.caption"
+msgid "Add"
+msgstr "添加"
+
+#: tfrmtbxedit.btnclose.caption
+msgctxt "tfrmtbxedit.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmtbxedit.caption
+msgctxt "tfrmtbxedit.caption"
+msgid "Terminology"
+msgstr "术语"
+
+#: tfrmtbxedit.lblnotes.caption
+msgid "Notes"
+msgstr "笔记"
+
+#: tfrmtbxedit.lbloriginal.caption
+msgctxt "tfrmtbxedit.lbloriginal.caption"
+msgid "Original"
+msgstr "原始"
+
+#: tfrmtbxedit.lbltranslated.caption
+msgctxt "tfrmtbxedit.lbltranslated.caption"
+msgid "Translated"
+msgstr "翻译"
+
+#: tfrmtbxlist.btnclose.caption
+msgctxt "tfrmtbxlist.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmtbxlist.btncopy.caption
+msgctxt "tfrmtbxlist.btncopy.caption"
+msgid "Copy"
+msgstr "复制"
+
+#: tfrmtbxlist.caption
+msgctxt "tfrmtbxlist.caption"
+msgid "Terminology"
+msgstr "术语"
+
+#: tfrmtbxlist.lblfind.caption
+msgctxt "tfrmtbxlist.lblfind.caption"
+msgid "Find"
+msgstr "查找"
+
+#: tfrmtbxlist.lbltotal.caption
+msgctxt "tfrmtbxlist.lbltotal.caption"
+msgid "Total:"
+msgstr "总计："
+
+#: tfrmtbxsettings.btnapply.caption
+msgctxt "tfrmtbxsettings.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmtbxsettings.btnclose.caption
+msgctxt "tfrmtbxsettings.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmtbxsettings.btnopenfile.caption
+msgctxt "tfrmtbxsettings.btnopenfile.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmtbxsettings.caption
+msgctxt "tfrmtbxsettings.caption"
+msgid "Terminology settings"
+msgstr "术语设置"
+
+#: tfrmtbxsettings.lblfilename.caption
+msgctxt "tfrmtbxsettings.lblfilename.caption"
+msgid "Filename"
+msgstr "文件名"
+
+#: tfrmtbxsettings.lblsourcelang.caption
+msgctxt "tfrmtbxsettings.lblsourcelang.caption"
+msgid "Source language"
+msgstr "源语言"
+
+#: tfrmtbxsettings.lbltranslang.caption
+msgctxt "tfrmtbxsettings.lbltranslang.caption"
+msgid "Translation language"
+msgstr "翻译语言"
+
+#: tfrmtimeexpander.btnapply.caption
+msgctxt "tfrmtimeexpander.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmtimeexpander.btnclose.caption
+msgctxt "tfrmtimeexpander.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmtimeexpander.caption
+msgid "Time expander/reducer"
+msgstr "时间扩展/减少"
+
+#: tfrmtimeexpander.chkduration.caption
+msgid "Only if duration is longer than"
+msgstr "只有当持续时间超过"
+
+#: tfrmtimeexpander.chksubtitle.caption
+msgid "Only if subtitle is longer than"
+msgstr "仅当字幕长度超过"
+
+#: tfrmtimeexpander.lblchars.caption
+msgid "characters"
+msgstr "字符"
+
+#: tfrmtimeexpander.lblms.caption
+msgctxt "tfrmtimeexpander.lblms.caption"
+msgid "ms"
+msgstr ""
+
+#: tfrmtimeexpander.lblms1.caption
+msgctxt "tfrmtimeexpander.lblms1.caption"
+msgid "ms"
+msgstr ""
+
+#: tfrmtimeexpander.lblscope.caption
+msgctxt "tfrmtimeexpander.lblscope.caption"
+msgid "Scope:"
+msgstr "范围："
+
+#: tfrmtimeexpander.rbnallthesubtitles.caption
+msgctxt "tfrmtimeexpander.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "所有条目"
+
+#: tfrmtimeexpander.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmtimeexpander.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "从选择的条目开始"
+
+#: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "仅限选择的条目"
+
+#: tfrmtranslate.btnclose.caption
+msgctxt "tfrmtranslate.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmtranslate.btntranslate.caption
+msgctxt "tfrmtranslate.btntranslate.caption"
+msgid "Translate"
+msgstr "翻译"
+
+#: tfrmtranslate.caption
+msgctxt "tfrmtranslate.caption"
+msgid "Translate"
+msgstr "翻译"
+
+#: tfrmtranslate.lblinput.caption
+msgid "Input:"
+msgstr "输入："
+
+#: tfrmtranslate.lbloutput.caption
+msgctxt "tfrmtranslate.lbloutput.caption"
+msgid "Output:"
+msgstr "输出："
+
+#: tfrmtranslate.lblscope.caption
+msgctxt "tfrmtranslate.lblscope.caption"
+msgid "Scope:"
+msgstr "范围："
+
+#: tfrmtranslate.lblsourcelanguage.caption
+msgid "Source language:"
+msgstr "源语言："
+
+#: tfrmtranslate.lbltranslationlanguage.caption
+msgid "Translation language:"
+msgstr "翻译语言："
+
+#: tfrmtranslate.rbnallthesubtitles.caption
+msgctxt "tfrmtranslate.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "所有条目"
+
+#: tfrmtranslate.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmtranslate.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "从选定条目"
+
+#: tfrmtranslate.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "仅限选定条目"
+
+#: tfrmtranslationmemory.btnclose.caption
+msgctxt "tfrmtranslationmemory.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmtranslationmemory.btncopy.caption
+msgctxt "tfrmtranslationmemory.btncopy.caption"
+msgid "Copy"
+msgstr "复制"
+
+#: tfrmtranslationmemory.btnuse.caption
+msgctxt "tfrmtranslationmemory.btnuse.caption"
+msgid "Use"
+msgstr "使用"
+
+#: tfrmtranslationmemory.btnvalidate.caption
+msgctxt "tfrmtranslationmemory.btnvalidate.caption"
+msgid "Validate"
+msgstr "验证"
+
+#: tfrmtranslationmemory.caption
+msgctxt "tfrmtranslationmemory.caption"
+msgid "Translation memory"
+msgstr "翻译存储器"
+
+#: tfrmtranslationmemorylist.btnclose.caption
+msgctxt "tfrmtranslationmemorylist.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmtranslationmemorylist.btncopy.caption
+msgctxt "tfrmtranslationmemorylist.btncopy.caption"
+msgid "Copy"
+msgstr "复制"
+
+#: tfrmtranslationmemorylist.caption
+msgctxt "tfrmtranslationmemorylist.caption"
+msgid "Translation memory"
+msgstr "翻译存储器"
+
+#: tfrmtranslationmemorylist.lblfind.caption
+msgctxt "tfrmtranslationmemorylist.lblfind.caption"
+msgid "Find"
+msgstr "查找"
+
+#: tfrmtranslationmemorylist.lbltotal.caption
+msgctxt "tfrmtranslationmemorylist.lbltotal.caption"
+msgid "Total:"
+msgstr "总计："
+
+#: tfrmtranslationmemorysettings.btnapply.caption
+msgctxt "tfrmtranslationmemorysettings.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmtranslationmemorysettings.btnclose.caption
+msgctxt "tfrmtranslationmemorysettings.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmtranslationmemorysettings.btnopenfile.caption
+msgctxt "tfrmtranslationmemorysettings.btnopenfile.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmtranslationmemorysettings.caption
+msgctxt "tfrmtranslationmemorysettings.caption"
+msgid "Translation memory settings"
+msgstr "翻译存储器设置"
+
+#: tfrmtranslationmemorysettings.lblfilename.caption
+msgctxt "tfrmtranslationmemorysettings.lblfilename.caption"
+msgid "File name"
+msgstr "文件名"
+
+#: tfrmtranslationmemorysettings.lblsourcelang.caption
+msgctxt "tfrmtranslationmemorysettings.lblsourcelang.caption"
+msgid "Source language"
+msgstr "源语言"
+
+#: tfrmtranslationmemorysettings.lbltranslang.caption
+msgctxt "tfrmtranslationmemorysettings.lbltranslang.caption"
+msgid "Translation language"
+msgstr "翻译语言"
+
+#: tfrmwaveextractor.btnclose.caption
+msgctxt "tfrmwaveextractor.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmwaveextractor.btnextract.caption
+msgctxt "tfrmwaveextractor.btnextract.caption"
+msgid "Extract..."
+msgstr "提取..."
+
+#: tfrmwaveextractor.caption
+msgid "Waveform extractor"
+msgstr "音频波形提取"
+
+#: tfrmwaveextractor.lbltrack.caption
+msgid "Track:"
+msgstr "轨道："
+
+#: tfrmwelcome.chkshowonstartup.caption
+msgid "Show on startup"
+msgstr "启动时显示该界面"
+
+#: tfrmwelcome.lblbatchconvert.caption
+msgctxt "tfrmwelcome.lblbatchconvert.caption"
+msgid "Batch convert..."
+msgstr "批量转换..."
+
+#: tfrmwelcome.lblexit.caption
+msgid "Exit"
+msgstr "退出"
+
+#: tfrmwelcome.lblnewsubtitle.caption
+msgid "New subtitle project"
+msgstr "新建字幕工程"
+
+#: tfrmwelcome.lblnewtranscription.caption
+msgid "New manual transcription"
+msgstr "新建翻译工程"
+
+#: tfrmwelcome.lblopenfile.caption
+msgid "Open file..."
+msgstr "打开文件..."
+
+#: tfrmwelcome.lblrecentfiles.caption
+msgctxt "tfrmwelcome.lblrecentfiles.caption"
+msgid "Recent files"
+msgstr "最近文件"
+
+#: tfrmwelcome.lblwelcome.caption
+msgctxt "tfrmwelcome.lblwelcome.caption"
+msgid "Welcome to"
+msgstr "欢迎来到"
+
+#: tfrmwizard.btndownload.caption
+msgctxt "tfrmwizard.btndownload.caption"
+msgid "Download"
+msgstr "下载"
+
+#: tfrmwizard.btndownloadfasterwhisper.caption
+msgctxt "tfrmwizard.btndownloadfasterwhisper.caption"
+msgid "Download"
+msgstr "下载"
+
+#: tfrmwizard.btndownloadffmpeg.caption
+msgctxt "tfrmwizard.btndownloadffmpeg.caption"
+msgid "Download"
+msgstr "下载"
+
+#: tfrmwizard.btndownloadwhisper.caption
+msgctxt "tfrmwizard.btndownloadwhisper.caption"
+msgid "Download"
+msgstr "下载"
+
+#: tfrmwizard.btndownloadytdlp.caption
+msgctxt "tfrmwizard.btndownloadytdlp.caption"
+msgid "Download"
+msgstr "下载"
+
+#: tfrmwizard.btnnext.caption
+msgctxt "tfrmwizard.btnnext.caption"
+msgid "Next"
+msgstr "下一个"
+
+#: tfrmwizard.btnprevious.caption
+msgid "Back"
+msgstr "返回"
+
+#: tfrmwizard.caption
+msgid "Getting started wizard"
+msgstr "开始向导"
+
+#: tfrmwizard.lblchooselayout.caption
+msgid "Choose workspace layout and timecode mode:"
+msgstr "选择工作区布局和时间编码模式："
+
+#: tfrmwizard.lblexperience.caption
+msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
+msgstr "只需几步，您就可以完成设置，获得最佳字幕制作体验。"
+
+#: tfrmwizard.lblfasterwhisper.caption
+msgid "Faster-Whisper:"
+msgstr ""
+
+#: tfrmwizard.lblfasterwhisper_hint.caption
+msgctxt "tfrmwizard.lblfasterwhisper_hint.caption"
+msgid "Optional, used for speech recognition."
+msgstr "可选项，用于语音识别。"
+
+#: tfrmwizard.lblffmpeg.caption
+msgid "FFmpeg:"
+msgstr ""
+
+#: tfrmwizard.lblffmpeg_hint.caption
+msgctxt "tfrmwizard.lblffmpeg_hint.caption"
+msgid "Optional, used to extract audio and generate video."
+msgstr "可选项，用于提取音频和生成视频。"
+
+#: tfrmwizard.lbllibmpv.caption
+msgid "libmpv: "
+msgstr ""
+
+#: tfrmwizard.lbllibmpv_hint.caption
+msgctxt "tfrmwizard.lbllibmpv_hint.caption"
+msgid "Essential, used for playing video."
+msgstr "必不可少，用于播放视频。"
+
+#: tfrmwizard.lblrequiredfiles.caption
+msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
+msgstr ""
+"为使 Tero Subtitler 正常运行，需要使用以下库\n"
+"如果您的系统中没有这些库，Tero Subtitler 可以为您下载。"
+
+#: tfrmwizard.lblwelcome.caption
+msgctxt "tfrmwizard.lblwelcome.caption"
+msgid "Welcome to"
+msgstr "欢迎来到"
+
+#: tfrmwizard.lblwhisper.caption
+msgid "Whisper.cpp:"
+msgstr ""
+
+#: tfrmwizard.lblwhisper_hint.caption
+msgctxt "tfrmwizard.lblwhisper_hint.caption"
+msgid "Optional, used for speech recognition."
+msgstr "可选项，用于语音识别。"
+
+#: tfrmwizard.lblytdlp.caption
+msgid "yt-dlp:"
+msgstr ""
+
+#: tfrmwizard.lblytdlp_hint.caption
+msgctxt "tfrmwizard.lblytdlp_hint.caption"
+msgid "Optional, used for dowloading from YouTube."
+msgstr "可选项，用于从 YouTube 下载。"
+
+#: tfrmwizard.rdolayout0.caption
+msgctxt "tfrmwizard.rdolayout0.caption"
+msgid "Classic"
+msgstr "经典"
+
+#: tfrmwizard.rdolayout1.caption
+msgctxt "tfrmwizard.rdolayout1.caption"
+msgid "Inverted"
+msgstr "反转"
+
+#: tfrmwizard.rdolayout2.caption
+msgctxt "tfrmwizard.rdolayout2.caption"
+msgid "Vertical"
+msgstr "纵向"
