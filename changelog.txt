@@ -24,6 +24,7 @@
 - improved: Audio to text: cancel download of model #22
 - improved: Add more Netflix profiles in Conventions #9
 - improved: Video context menu
+- added: Chinese Simplified language (thx Little-data)
 - added: Controlling the length of the Whisper.cpp generated text segments #248
 - added: Video information
 - added: Distribute entries evenly
