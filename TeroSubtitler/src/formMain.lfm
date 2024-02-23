@@ -3442,6 +3442,7 @@ object frmMain: TfrmMain
       Tag = 8
       Category = 'Waveform'
       Caption = 'Play selection'
+      Hint = 'Click on the arrow to select playback repetitions'
       ImageIndex = 51
       OnExecute = actMediaPlaySelectionExecute
     end

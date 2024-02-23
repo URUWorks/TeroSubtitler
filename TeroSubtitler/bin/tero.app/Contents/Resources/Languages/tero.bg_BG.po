@@ -3089,6 +3089,10 @@ msgctxt "tfrmmain.actmediaplayselection.caption"
 msgid "Play selection"
 msgstr "Възпроизвеждане на избраното"
 
+#: tfrmmain.actmediaplayselection.hint
+msgid "Click on the arrow to select playback repetitions"
+msgstr ""
+
 #: tfrmmain.actmediapreviousframe.caption
 msgctxt "tfrmmain.actmediapreviousframe.caption"
 msgid "Previous frame"

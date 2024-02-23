@@ -262,6 +262,10 @@ msgstr "自动检测"
 msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "试图检测对话片段时，会删除列表中的所有条目。"
 
+#: proclocalize.lngdownloadcanceled
+msgid "Download canceled by user."
+msgstr ""
+
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"
@@ -502,6 +506,11 @@ msgstr ""
 #: proclocalize.lngfsremovespacing
 msgid "Remove spacing"
 msgstr "移除空格"
+
+#: proclocalize.lngfstotalerrors
+#, object-pascal-format
+msgid "Total errors: %d (displayed: %d)"
+msgstr ""
 
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
@@ -937,6 +946,7 @@ msgid "Frames"
 msgstr "帧"
 
 #: proclocalize.lngssgeneral
+msgctxt "proclocalize.lngssgeneral"
 msgid "General"
 msgstr "常规"
 
@@ -964,10 +974,6 @@ msgstr "无"
 #: proclocalize.lngssshortcuts
 msgid "Shortcuts"
 msgstr "快捷方式"
-
-#: proclocalize.lngsstoolbar
-msgid "Toolbar"
-msgstr "工具栏"
 
 #: proclocalize.lngsstools
 msgctxt "proclocalize.lngsstools"
@@ -1083,6 +1089,22 @@ msgstr "平均每分钟单词数：%.2f"
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "当前字幕组合包含建议解决的错误，但可以保存。"
 
+#: proclocalize.lngsubtitlespecificationerror
+msgid "The current subtitles do not meet the specifications of the format to be saved."
+msgstr ""
+
+#: proclocalize.lngsubtitlespecificationerroralign
+msgid "There are entries with vertical alignment which are not allowed."
+msgstr ""
+
+#: proclocalize.lngsubtitlespecificationerrorbr
+msgid "There are entries which exceed the line break."
+msgstr ""
+
+#: proclocalize.lngsubtitlespecificationerrorfps
+msgid "Current frame rate does not match."
+msgstr ""
+
 #: proclocalize.lngsuccess
 msgid "Success."
 msgstr "存在。"
@@ -1175,9 +1197,44 @@ msgstr "载入文件错误，格式无法识别。"
 msgid "URL"
 msgstr ""
 
+#: proclocalize.lngviaudiotracks
+#, object-pascal-format
+msgid "Audio tracks: %d"
+msgstr ""
+
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
 msgstr "视频生成失败。"
+
+#: proclocalize.lngviduration
+#, object-pascal-format
+msgid "Duration: %s (%d frames)"
+msgstr ""
+
+#: proclocalize.lngvifile
+#, object-pascal-format
+msgid "File: %s"
+msgstr ""
+
+#: proclocalize.lngvifps
+#, object-pascal-format
+msgid "FPS: %s"
+msgstr ""
+
+#: proclocalize.lngviresolution
+#, object-pascal-format
+msgid "Resolution: %dx%d"
+msgstr ""
+
+#: proclocalize.lngvisubtitletracks
+#, object-pascal-format
+msgid "Subtitle tracks: %d"
+msgstr ""
+
+#: proclocalize.lngvivideotracks
+#, object-pascal-format
+msgid "Video tracks: %d"
+msgstr ""
 
 #: proclocalize.lngwebvideounsupported
 msgid "The video format is not supported for playback in the web browser."
@@ -1309,6 +1366,14 @@ msgstr ""
 msgctxt "tfrmaudiototext.caption"
 msgid "Audio to text"
 msgstr "语音转文字"
+
+#: tfrmaudiototext.chkmaxlinecount.caption
+msgid "Maximum line count"
+msgstr ""
+
+#: tfrmaudiototext.chkmaxlinelength.caption
+msgid "Maximum line length"
+msgstr ""
 
 #: tfrmaudiototext.chktranslate.caption
 msgid "Translate to Еnglish"
@@ -1554,51 +1619,6 @@ msgstr "更新"
 msgctxt "tfrmconventions.caption"
 msgid "Conventions"
 msgstr "转换"
-
-#: tfrmconventions.lblmaxdurationms.caption
-msgctxt "tfrmconventions.lblmaxdurationms.caption"
-msgid "Max. duration (ms)"
-msgstr "最大持续时间 (ms)"
-
-#: tfrmconventions.lblmaxlinecount.caption
-msgctxt "tfrmconventions.lblmaxlinecount.caption"
-msgid "Max. line count"
-msgstr "最大行数"
-
-#: tfrmconventions.lblmindurationms.caption
-msgctxt "tfrmconventions.lblmindurationms.caption"
-msgid "Min. duration / per word (ms)"
-msgstr "最小持续时间/每个单词（ms）"
-
-#: tfrmconventions.lblnewsubtitlems.caption
-msgctxt "tfrmconventions.lblnewsubtitlems.caption"
-msgid "New subtitle (ms)"
-msgstr "新字幕（ms）"
-
-#: tfrmconventions.lblprohibitedchars.caption
-msgctxt "tfrmconventions.lblprohibitedchars.caption"
-msgid "Prohibited characters"
-msgstr "禁止使用的字符"
-
-#: tfrmconventions.lblrepeatablechars.caption
-msgctxt "tfrmconventions.lblrepeatablechars.caption"
-msgid "Repeatable characters"
-msgstr "可重复字符"
-
-#: tfrmconventions.lblscsnapincues.caption
-msgctxt "tfrmconventions.lblscsnapincues.caption"
-msgid "Snap in cues after SC (frames)"
-msgstr ""
-
-#: tfrmconventions.lblscsnapoutcues.caption
-msgctxt "tfrmconventions.lblscsnapoutcues.caption"
-msgid "Snap out cues before SC (frames)"
-msgstr ""
-
-#: tfrmconventions.lblsubtitlepausems.caption
-msgctxt "tfrmconventions.lblsubtitlepausems.caption"
-msgid "Min. gap"
-msgstr "最小间距"
 
 #: tfrmconvertcase.btnapply.caption
 msgctxt "tfrmconvertcase.btnapply.caption"
@@ -1913,9 +1933,37 @@ msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "仅限选择的条目"
 
-#: tfrmdownload.lbldownload.caption
+#: tfrmdownload.btncancel.caption
+#, fuzzy
+msgctxt "tfrmdownload.btncancel.caption"
+msgid "Cancel"
+msgstr "取消"
+
+#: tfrmdownload.caption
+#, fuzzy
+msgctxt "tfrmdownload.caption"
 msgid "Downloading"
 msgstr "下载中..."
+
+#: tfrmdownload.lblelapsed.caption
+msgid "Elapsed:"
+msgstr ""
+
+#: tfrmdownload.lblfile.caption
+msgid "File:"
+msgstr ""
+
+#: tfrmdownload.lblreceived.caption
+msgid "Received:"
+msgstr ""
+
+#: tfrmdownload.lblremaining.caption
+msgid "Remaining:"
+msgstr ""
+
+#: tfrmdownload.lblspeed.caption
+msgid "Speed:"
+msgstr ""
 
 #: tfrmdurationlimits.btnapply.caption
 msgctxt "tfrmdurationlimits.btnapply.caption"
@@ -2144,6 +2192,7 @@ msgid "Write cue identifiers"
 msgstr "编写cue标识符"
 
 #: tfrmformatproperties.lblasalignment.caption
+msgctxt "tfrmformatproperties.lblasalignment.caption"
 msgid "Alignment"
 msgstr "对齐"
 
@@ -2371,6 +2420,7 @@ msgid "Cut"
 msgstr "剪切"
 
 #: tfrmgeneratevideo.chkdeinterlace.caption
+msgctxt "tfrmgeneratevideo.chkdeinterlace.caption"
 msgid "Deinterlace"
 msgstr "去隔行扫描"
 
@@ -2689,6 +2739,10 @@ msgstr "检测静音区"
 msgid "Click to refresh list"
 msgstr "点击刷新列表"
 
+#: tfrmmain.actdistributeentriesevenly.caption
+msgid "Distribute entries evenly"
+msgstr ""
+
 #: tfrmmain.actdivideentry.caption
 msgid "Divide entry"
 msgstr "分割条目"
@@ -2821,6 +2875,22 @@ msgstr "带有硬编码字幕的视频..."
 #: tfrmmain.actgoto.caption
 msgid "Go to entry..."
 msgstr "转到条目..."
+
+#: tfrmmain.actgotocurrententryfinaltime.caption
+msgid "Go to current entry final time"
+msgstr ""
+
+#: tfrmmain.actgotocurrententryinitialtime.caption
+msgid "Go to current entry initial time"
+msgstr ""
+
+#: tfrmmain.actgotonextentryandplay.caption
+msgid "Go to next entry and play"
+msgstr ""
+
+#: tfrmmain.actgotopreviousentryandplay.caption
+msgid "Go to previous entry and play"
+msgstr ""
 
 #: tfrmmain.actgototime.caption
 msgid "Go to time..."
@@ -3019,6 +3089,10 @@ msgctxt "tfrmmain.actmediaplayselection.caption"
 msgid "Play selection"
 msgstr "播放选区"
 
+#: tfrmmain.actmediaplayselection.hint
+msgid "Click on the arrow to select playback repetitions"
+msgstr ""
+
 #: tfrmmain.actmediapreviousframe.caption
 msgctxt "tfrmmain.actmediapreviousframe.caption"
 msgid "Previous frame"
@@ -3117,10 +3191,18 @@ msgctxt "tfrmmain.actnextsubtitle.caption"
 msgid "Next subtitle"
 msgstr "下个字幕"
 
+#: tfrmmain.actpanandscan.caption
+msgid "Pan-and-scan"
+msgstr ""
+
 #: tfrmmain.actpaste.caption
 msgctxt "tfrmmain.actpaste.caption"
 msgid "Paste"
 msgstr "粘贴"
+
+#: tfrmmain.actplaycurrententry.caption
+msgid "Play current entry"
+msgstr ""
 
 #: tfrmmain.actprevioussubtitle.caption
 msgctxt "tfrmmain.actprevioussubtitle.caption"
@@ -3304,10 +3386,6 @@ msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
 msgstr "纵向"
 
-#: tfrmmain.actsetmaximumlinelength.caption
-msgid "Set maximum line length"
-msgstr "设置最大行长"
-
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
 msgid "Settings..."
@@ -3371,10 +3449,58 @@ msgctxt "tfrmmain.actshowcolumnwpm.caption"
 msgid "Words per minute"
 msgstr "每分钟字数"
 
+#: tfrmmain.actshoweditortoolbaralignment.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbaralignment.caption"
+msgid "Alignment"
+msgstr "对齐"
+
+#: tfrmmain.actshoweditortoolbarbasic.caption
+msgid "Basic"
+msgstr ""
+
+#: tfrmmain.actshoweditortoolbarentry.caption
+msgctxt "tfrmmain.actshoweditortoolbarentry.caption"
+msgid "Entry"
+msgstr ""
+
+#: tfrmmain.actshoweditortoolbarformat.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarformat.caption"
+msgid "Format"
+msgstr "样式"
+
+#: tfrmmain.actshoweditortoolbarlines.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarlines.caption"
+msgid "Lines"
+msgstr "行"
+
+#: tfrmmain.actshoweditortoolbarwords.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarwords.caption"
+msgid "Words"
+msgstr "单词"
+
+#: tfrmmain.actshowthumbnails.caption
+msgid "Show thumbnails"
+msgstr ""
+
 #: tfrmmain.actshowtoolbarencoding.caption
 msgctxt "tfrmmain.actshowtoolbarencoding.caption"
 msgid "Encoding"
 msgstr "编码"
+
+#: tfrmmain.actshowtoolbarentry.caption
+msgctxt "tfrmmain.actshowtoolbarentry.caption"
+msgid "Entry"
+msgstr ""
+
+#: tfrmmain.actshowtoolbarfile.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowtoolbarfile.caption"
+msgid "File"
+msgstr "文件"
 
 #: tfrmmain.actshowtoolbarformat.caption
 msgctxt "tfrmmain.actshowtoolbarformat.caption"
@@ -3386,13 +3512,59 @@ msgctxt "tfrmmain.actshowtoolbarfps.caption"
 msgid "FPS"
 msgstr "帧率"
 
-#: tfrmmain.actshowtoolbarmain.caption
-msgctxt "tfrmmain.actshowtoolbarmain.caption"
-msgid "Main"
-msgstr "主要"
+#: tfrmmain.actshowtoolbargeneral.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowtoolbargeneral.caption"
+msgid "General"
+msgstr "常规"
 
 #: tfrmmain.actshowtoolbarquickaction.caption
 msgid "Quick Action"
+msgstr ""
+
+#: tfrmmain.actshowtoolbarview.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowtoolbarview.caption"
+msgid "View"
+msgstr "视图"
+
+#: tfrmmain.actshowvideotoolbarcontrols.caption
+msgctxt "tfrmmain.actshowvideotoolbarcontrols.caption"
+msgid "Controls"
+msgstr ""
+
+#: tfrmmain.actshowvideotoolbarentry.caption
+msgctxt "tfrmmain.actshowvideotoolbarentry.caption"
+msgid "Entry"
+msgstr ""
+
+#: tfrmmain.actshowvideotoolbarother.caption
+msgctxt "tfrmmain.actshowvideotoolbarother.caption"
+msgid "Other"
+msgstr ""
+
+#: tfrmmain.actshowwaveformtoolbarcontrols.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarcontrols.caption"
+msgid "Controls"
+msgstr ""
+
+#: tfrmmain.actshowwaveformtoolbarentry.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarentry.caption"
+msgid "Entry"
+msgstr ""
+
+#: tfrmmain.actshowwaveformtoolbarother.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
+msgid "Other"
+msgstr ""
+
+#: tfrmmain.actshowwaveformtoolbarshotchanges.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarshotchanges.caption"
+msgid "Shot changes"
+msgstr ""
+
+#: tfrmmain.actshowwaveformtoolbarzoom.caption
+msgid "Zoom"
 msgstr ""
 
 #: tfrmmain.actsort.caption
@@ -3629,6 +3801,12 @@ msgstr "默认"
 msgid "Blur"
 msgstr "模糊"
 
+#: tfrmmain.actvideofilterdeinterlace.caption
+#, fuzzy
+msgctxt "tfrmmain.actvideofilterdeinterlace.caption"
+msgid "Deinterlace"
+msgstr "去隔行扫描"
+
 #: tfrmmain.actvideofilteredgeenhance.caption
 msgid "Edge enhance"
 msgstr "边缘增强"
@@ -3656,6 +3834,10 @@ msgstr "垂直翻转"
 #: tfrmmain.actvideofiltervintage.caption
 msgid "Vintage"
 msgstr "复古"
+
+#: tfrmmain.actvideoinformation.caption
+msgid "Information..."
+msgstr ""
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
@@ -3718,11 +3900,6 @@ msgstr "视频长度和帧率"
 #: tfrmmain.lblmediatime.hint
 msgid "Current video position"
 msgstr "当前视频位置"
-
-#: tfrmmain.mnudictionary.caption
-msgctxt "tfrmmain.mnudictionary.caption"
-msgid "Dictionary"
-msgstr "字典"
 
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
@@ -3807,10 +3984,12 @@ msgid "Effects"
 msgstr "效果"
 
 #: tfrmmain.mnutextlines.caption
+msgctxt "tfrmmain.mnutextlines.caption"
 msgid "Lines"
 msgstr "行"
 
 #: tfrmmain.mnutextwords.caption
+msgctxt "tfrmmain.mnutextwords.caption"
 msgid "Words"
 msgstr "单词"
 
@@ -3835,7 +4014,9 @@ msgid "Video"
 msgstr "视频"
 
 #: tfrmmain.mnuvideoaspectratio.caption
-msgid "Aspect Ratio"
+#, fuzzy
+#| msgid "Aspect Ratio"
+msgid "Aspect ratio"
 msgstr "宽高比"
 
 #: tfrmmain.mnuvideoaudiofilters.caption
@@ -3874,13 +4055,43 @@ msgstr "视图"
 msgid "Columns"
 msgstr "栏目"
 
+#: tfrmmain.mnuviewtoolbareditor.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbareditor.caption"
+msgid "Editor"
+msgstr "编辑器"
+
+#: tfrmmain.mnuviewtoolbarmain.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbarmain.caption"
+msgid "Main"
+msgstr "主要"
+
 #: tfrmmain.mnuviewtoolbars.caption
 msgid "Toolbars"
 msgstr "工具栏"
 
+#: tfrmmain.mnuviewtoolbarvideo.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
+msgid "Video"
+msgstr "视频"
+
+#: tfrmmain.mnuviewtoolbarwaveform.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbarwaveform.caption"
+msgid "Waveform"
+msgstr "音频波形"
+
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
 msgstr "窗口"
+
+#: tfrmmain.mnuvstvideo.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuvstvideo.caption"
+msgid "Video"
+msgstr "视频"
 
 #: tfrmmain.mnuworkspacelayout.caption
 msgid "Layouts"
@@ -4152,6 +4363,10 @@ msgstr "使用硬解视频解码"
 msgid "Use Tero file dialog"
 msgstr "使用 Tero 文件对话框"
 
+#: tfrmsettings.chkwritebom.caption
+msgid "Write BOM on save"
+msgstr ""
+
 #: tfrmsettings.lbladditionalmpvoptions.caption
 msgid "Additional mpv options"
 msgstr "其他 mpv 选项"
@@ -4365,18 +4580,15 @@ msgctxt "tfrmsettings.lblwavecolor.caption"
 msgid "Color"
 msgstr "颜色"
 
-#: tfrmsettings.lblwaveend.caption
-msgid "End line"
-msgstr "结束行"
+#: tfrmsettings.lblwaveentry.caption
+msgctxt "tfrmsettings.lblwaveentry.caption"
+msgid "Entry"
+msgstr ""
 
 #: tfrmsettings.lblwaveform.caption
 msgctxt "tfrmsettings.lblwaveform.caption"
 msgid "Waveform"
 msgstr "音频波形"
-
-#: tfrmsettings.lblwavestart.caption
-msgid "Start line"
-msgstr "起始行"
 
 #: tfrmsettings.lblwebreference.caption
 msgid "Web reference"
@@ -5025,3 +5237,4 @@ msgstr "反转"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "纵向"
+

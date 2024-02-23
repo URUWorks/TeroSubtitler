@@ -3090,6 +3090,10 @@ msgctxt "tfrmmain.actmediaplayselection.caption"
 msgid "Play selection"
 msgstr "Play selection"
 
+#: tfrmmain.actmediaplayselection.hint
+msgid "Click on the arrow to select playback repetitions"
+msgstr "Click on the arrow to select playback repetitions"
+
 #: tfrmmain.actmediapreviousframe.caption
 msgctxt "tfrmmain.actmediapreviousframe.caption"
 msgid "Previous frame"
@@ -5217,4 +5221,3 @@ msgstr "Inverted"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-

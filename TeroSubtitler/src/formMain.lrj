@@ -97,6 +97,7 @@
 {"hash":93118532,"name":"tfrmmain.actmediarewind.caption","sourcebytes":[82,101,119,105,110,100],"value":"Rewind"},
 {"hash":225040580,"name":"tfrmmain.actmediaforward.caption","sourcebytes":[70,111,114,119,97,114,100],"value":"Forward"},
 {"hash":3265678,"name":"tfrmmain.actmediaplayselection.caption","sourcebytes":[80,108,97,121,32,115,101,108,101,99,116,105,111,110],"value":"Play selection"},
+{"hash":123174995,"name":"tfrmmain.actmediaplayselection.hint","sourcebytes":[67,108,105,99,107,32,111,110,32,116,104,101,32,97,114,114,111,119,32,116,111,32,115,101,108,101,99,116,32,112,108,97,121,98,97,99,107,32,114,101,112,101,116,105,116,105,111,110,115],"value":"Click on the arrow to select playback repetitions"},
 {"hash":47014254,"name":"tfrmmain.actmediaplayfromselection.caption","sourcebytes":[80,108,97,121,32,102,114,111,109,32,115,101,108,101,99,116,105,111,110],"value":"Play from selection"},
 {"hash":210438926,"name":"tfrmmain.actmediaplaybeforeselection.caption","sourcebytes":[80,108,97,121,32,98,101,102,111,114,101,32,115,101,108,101,99,116,105,111,110],"value":"Play before selection"},
 {"hash":183874942,"name":"tfrmmain.actmediaplayafterselection.caption","sourcebytes":[80,108,97,121,32,97,102,116,101,114,32,115,101,108,101,99,116,105,111,110],"value":"Play after selection"},
