@@ -176,8 +176,11 @@ end;
 procedure TfrmStreamExtractor.VSTInitNode(Sender: TBaseVirtualTree; ParentNode,
   Node: PVirtualNode; var InitialStates: TVirtualNodeInitStates);
 begin
-  Node^.CheckType  := ctTriStateCheckBox;
-  Node^.CheckState := csUncheckedNormal;
+  if FList[Node^.Index]^.Output <> '' then
+  begin
+    Node^.CheckType  := ctTriStateCheckBox;
+    Node^.CheckState := csUncheckedNormal;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -438,6 +441,8 @@ begin
           begin
             if Info^.Codec.Contains('mpeg1') then
               Info^.Output := 'mpg'
+            else if Info^.Codec.Contains('prores') then
+                Info^.Output := 'mov'
             else
               Info^.Output := 'mp4';
           end
@@ -447,6 +452,8 @@ begin
               Info^.Output := 'mp3'
             else if Info^.Codec.Contains('mp2') then
               Info^.Output := 'mp2'
+            else if Info^.Codec.Contains('pcm') then
+              Info^.Output := 'wav'
             else
               Info^.Output := 'aac';
           end
