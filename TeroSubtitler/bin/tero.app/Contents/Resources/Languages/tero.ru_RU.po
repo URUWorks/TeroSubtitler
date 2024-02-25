@@ -265,7 +265,7 @@ msgstr "При попытке обнаружить сегменты диалог
 
 #: proclocalize.lngdownloadcanceled
 msgid "Download canceled by user."
-msgstr ""
+msgstr "Скачивание прервано пользователем."
 
 #: proclocalize.lngentry
 #, object-pascal-format
@@ -290,7 +290,7 @@ msgid "Error executing “%s”."
 msgstr "Ошибка исполнения команды “%s"
 
 #: proclocalize.lngextractapperror
-#, object-pascal-format, fuzzy
+#, fuzzy, object-pascal-format
 #| msgid "Unable to find “%s”."
 msgid "Unable to find “%s”. Check in settings if it is configured correctly."
 msgstr "Не удаётся найти “%s”."
@@ -512,7 +512,7 @@ msgstr "Удалить интервал"
 #: proclocalize.lngfstotalerrors
 #, object-pascal-format
 msgid "Total errors: %d (displayed: %d)"
-msgstr ""
+msgstr "Всего ошибок: %d (отображено: %d)"
 
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
@@ -869,7 +869,7 @@ msgstr ""
 
 #: proclocalize.lngseanalyzingfile
 msgid "Analyzing file..."
-msgstr ""
+msgstr "Анализ файла..."
 
 #: proclocalize.lngsecodec
 #, fuzzy
@@ -1121,19 +1121,19 @@ msgstr "Текущий набор субтитров содержит ошибк
 
 #: proclocalize.lngsubtitlespecificationerror
 msgid "The current subtitles do not meet the specifications of the format to be saved."
-msgstr ""
+msgstr "Текущие субтитры не соответствуют спецификациям сохраняемого формата."
 
 #: proclocalize.lngsubtitlespecificationerroralign
 msgid "There are entries with vertical alignment which are not allowed."
-msgstr ""
+msgstr "Есть субтитры с вертикальным выравниванием, которое невозможно."
 
 #: proclocalize.lngsubtitlespecificationerrorbr
 msgid "There are entries which exceed the line break."
-msgstr ""
+msgstr "Есть субтитры, которые выходят за пределы переноса строки"
 
 #: proclocalize.lngsubtitlespecificationerrorfps
 msgid "Current frame rate does not match."
-msgstr ""
+msgstr "Текущая частота кадров не совпадает."
 
 #: proclocalize.lngsuccess
 msgid "Success."
@@ -1230,19 +1230,19 @@ msgstr "Ссылка"
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
 msgid "Audio tracks: %d"
-msgstr ""
+msgstr "Аудиодорожки: %d"
 
 #: proclocalize.lngvideoerroraoinitfailed
 msgid "Initializing the audio output failed."
-msgstr ""
+msgstr "Не удаётся определить аудиовыход."
 
 #: proclocalize.lngvideoerrornothingtoplay
 msgid "There was no audio or video stream to play."
-msgstr ""
+msgstr "Отсутствует видео или аудиопоток для воспроизведения."
 
 #: proclocalize.lngvideoerrorvoinitfailed
 msgid "Initializing the video output failed."
-msgstr ""
+msgstr "Не удаётся определить видеовыход."
 
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
@@ -1251,12 +1251,12 @@ msgstr "Сбой генерации видео"
 #: proclocalize.lngviduration
 #, object-pascal-format
 msgid "Duration: %s (%d frames)"
-msgstr ""
+msgstr "Продолжительность: %s (%d кадров)"
 
 #: proclocalize.lngvifile
 #, object-pascal-format
 msgid "File: %s"
-msgstr ""
+msgstr "Файл: %s"
 
 #: proclocalize.lngvifps
 #, object-pascal-format
@@ -1266,17 +1266,17 @@ msgstr ""
 #: proclocalize.lngviresolution
 #, object-pascal-format
 msgid "Resolution: %dx%d"
-msgstr ""
+msgstr "Разрешение: %dx%d"
 
 #: proclocalize.lngvisubtitletracks
 #, object-pascal-format
 msgid "Subtitle tracks: %d"
-msgstr ""
+msgstr "Дорожки субтитров: %d"
 
 #: proclocalize.lngvivideotracks
 #, object-pascal-format
 msgid "Video tracks: %d"
-msgstr ""
+msgstr "Видеодорожки: %d"
 
 #: proclocalize.lngwebvideounsupported
 msgid "The video format is not supported for playback in the web browser."
@@ -1412,12 +1412,12 @@ msgstr "Преобразовать аудио в текст"
 #: tfrmaudiototext.chkmaxlinecount.caption
 msgctxt "tfrmaudiototext.chkmaxlinecount.caption"
 msgid "Maximum line count"
-msgstr ""
+msgstr "Максимальное число строк"
 
 #: tfrmaudiototext.chkmaxlinelength.caption
 msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
 msgid "Maximum line length"
-msgstr ""
+msgstr "Максимальная длина строки"
 
 #: tfrmaudiototext.chktranslate.caption
 msgid "Translate to Еnglish"
@@ -1991,23 +1991,23 @@ msgstr "Скачивание"
 
 #: tfrmdownload.lblelapsed.caption
 msgid "Elapsed:"
-msgstr ""
+msgstr "Прошло:"
 
 #: tfrmdownload.lblfile.caption
 msgid "File:"
-msgstr ""
+msgstr "Файл:"
 
 #: tfrmdownload.lblreceived.caption
 msgid "Received:"
-msgstr ""
+msgstr "Передано:"
 
 #: tfrmdownload.lblremaining.caption
 msgid "Remaining:"
-msgstr ""
+msgstr "Осталось:"
 
 #: tfrmdownload.lblspeed.caption
 msgid "Speed:"
-msgstr ""
+msgstr "Скорость:"
 
 #: tfrmdurationlimits.btnapply.caption
 msgctxt "tfrmdurationlimits.btnapply.caption"
@@ -2792,7 +2792,7 @@ msgstr "Нажмите для обновления списка"
 
 #: tfrmmain.actdistributeentriesevenly.caption
 msgid "Distribute entries evenly"
-msgstr ""
+msgstr "Распределите субтитры равномерно"
 
 #: tfrmmain.actdivideentry.caption
 msgid "Divide entry"
@@ -2929,19 +2929,19 @@ msgstr "Перейти к строке номер..."
 
 #: tfrmmain.actgotocurrententryfinaltime.caption
 msgid "Go to current entry final time"
-msgstr ""
+msgstr "Перейти к финальной части субтитра"
 
 #: tfrmmain.actgotocurrententryinitialtime.caption
 msgid "Go to current entry initial time"
-msgstr ""
+msgstr "Перейти к начальной части субтитра"
 
 #: tfrmmain.actgotonextentryandplay.caption
 msgid "Go to next entry and play"
-msgstr ""
+msgstr "Перейти к следующему субтитру и воспроизвести"
 
 #: tfrmmain.actgotopreviousentryandplay.caption
 msgid "Go to previous entry and play"
-msgstr ""
+msgstr "Перейсти к предыдущему субтитру и воспроизвести"
 
 #: tfrmmain.actgototime.caption
 msgid "Go to time..."
@@ -3142,7 +3142,7 @@ msgstr "Играть выделенное"
 
 #: tfrmmain.actmediaplayselection.hint
 msgid "Click on the arrow to select playback repetitions"
-msgstr ""
+msgstr "Нажмите на стрелку, чтоб включить повтор вопроизведения"
 
 #: tfrmmain.actmediapreviousframe.caption
 msgctxt "tfrmmain.actmediapreviousframe.caption"
@@ -3253,7 +3253,7 @@ msgstr "Вставить"
 
 #: tfrmmain.actplaycurrententry.caption
 msgid "Play current entry"
-msgstr ""
+msgstr "Воспроизвести текущий субтитр"
 
 #: tfrmmain.actprevioussubtitle.caption
 msgctxt "tfrmmain.actprevioussubtitle.caption"
@@ -3541,7 +3541,7 @@ msgstr "Слова"
 
 #: tfrmmain.actshowthumbnails.caption
 msgid "Show thumbnails"
-msgstr ""
+msgstr "Показать миниатюры"
 
 #: tfrmmain.actshowtoolbarencoding.caption
 msgctxt "tfrmmain.actshowtoolbarencoding.caption"
@@ -3625,7 +3625,7 @@ msgstr "Смена кадра"
 
 #: tfrmmain.actshowwaveformtoolbarzoom.caption
 msgid "Zoom"
-msgstr ""
+msgstr "Увеличение"
 
 #: tfrmmain.actsort.caption
 msgid "Sort"
@@ -3651,7 +3651,7 @@ msgstr "Статистика..."
 
 #: tfrmmain.actstreamextractor.caption
 msgid "Stream extractor..."
-msgstr ""
+msgstr "Извлечь поток..."
 
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
@@ -3901,7 +3901,7 @@ msgstr "Винтажный"
 
 #: tfrmmain.actvideoinformation.caption
 msgid "Information..."
-msgstr ""
+msgstr "Информация..."
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
@@ -4429,7 +4429,7 @@ msgstr "Использовать диалоговое окно Tero"
 
 #: tfrmsettings.chkwritebom.caption
 msgid "Write BOM on save"
-msgstr ""
+msgstr "Записать BOM при сохранении"
 
 #: tfrmsettings.lbladditionalmpvoptions.caption
 msgid "Additional mpv options"
@@ -4850,7 +4850,7 @@ msgstr "Закрыть"
 
 #: tfrmstreamextractor.btnextract.caption
 msgid "Extract"
-msgstr ""
+msgstr "Извлечь"
 
 #: tfrmstreamextractor.btnfile.caption
 msgctxt "tfrmstreamextractor.btnfile.caption"
@@ -4864,7 +4864,7 @@ msgstr ""
 
 #: tfrmstreamextractor.caption
 msgid "Stream extractor"
-msgstr ""
+msgstr "Извлечь поток"
 
 #: tfrmstreamextractor.lblfile.caption
 #, fuzzy
@@ -5348,4 +5348,3 @@ msgstr "Макет 1"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Макет 2"
-
