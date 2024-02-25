@@ -869,9 +869,33 @@ msgstr "Forma d’onda"
 msgid "XML"
 msgstr "XML"
 
+#: proclocalize.lngseanalyzingfile
+msgid "Analyzing file..."
+msgstr ""
+
+#: proclocalize.lngsecodec
+#, fuzzy
+msgctxt "proclocalize.lngsecodec"
+msgid "Codec"
+msgstr "Codifica"
+
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
 msgstr "Vuoi visualizzare l'elenco novità?"
+
+#: proclocalize.lngseid
+msgid "Id"
+msgstr ""
+
+#: proclocalize.lngsekind
+msgid "Kind"
+msgstr ""
+
+#: proclocalize.lngselanguage
+#, fuzzy
+msgctxt "proclocalize.lngselanguage"
+msgid "Language"
+msgstr "Lingua"
 
 #: proclocalize.lngselectencodingtouse
 msgid "Select the Encoding to use:"
@@ -888,6 +912,10 @@ msgstr "Seleziona il foglio da usare:"
 #: proclocalize.lngselecttracktouse
 msgid "Select the track to use:"
 msgstr "Seleziona la traccia da usare:"
+
+#: proclocalize.lngseoutput
+msgid "Output"
+msgstr ""
 
 #: proclocalize.lngshifttimeless
 #, object-pascal-format
@@ -1205,6 +1233,18 @@ msgstr "URL"
 #, object-pascal-format
 msgid "Audio tracks: %d"
 msgstr "Tracce audio: %d"
+
+#: proclocalize.lngvideoerroraoinitfailed
+msgid "Initializing the audio output failed."
+msgstr ""
+
+#: proclocalize.lngvideoerrornothingtoplay
+msgid "There was no audio or video stream to play."
+msgstr ""
+
+#: proclocalize.lngvideoerrorvoinitfailed
+msgid "Initializing the video output failed."
+msgstr ""
 
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
@@ -2268,6 +2308,7 @@ msgid "Author"
 msgstr "Autore"
 
 #: tfrmformatproperties.lbldvdinfo.caption
+msgctxt "tfrmformatproperties.lbldvdinfo.caption"
 msgid "Info"
 msgstr "Info"
 
@@ -3590,6 +3631,10 @@ msgstr "Dividi la linea in corrispondenza del cursore"
 msgid "Statistics..."
 msgstr "Statistiche..."
 
+#: tfrmmain.actstreamextractor.caption
+msgid "Stream extractor..."
+msgstr ""
+
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
 msgstr "Scambia testo"
@@ -4768,6 +4813,45 @@ msgstr "Esporta..."
 #: tfrmstatistics.caption
 msgid "Statistics"
 msgstr "Statistiche"
+
+#: tfrmstreamextractor.btnclose.caption
+#, fuzzy
+msgctxt "tfrmstreamextractor.btnclose.caption"
+msgid "Close"
+msgstr "Chiudi"
+
+#: tfrmstreamextractor.btnextract.caption
+msgid "Extract"
+msgstr ""
+
+#: tfrmstreamextractor.btnfile.caption
+#, fuzzy
+msgctxt "tfrmstreamextractor.btnfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmstreamextractor.btnfolder.caption
+#, fuzzy
+msgctxt "tfrmstreamextractor.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmstreamextractor.caption
+msgid "Stream extractor"
+msgstr ""
+
+#: tfrmstreamextractor.lblfile.caption
+#, fuzzy
+msgctxt "tfrmstreamextractor.lblfile.caption"
+msgid "File"
+msgstr "File"
+
+#: tfrmstreamextractor.lblfolder.caption
+#, fuzzy
+#| msgid "Folder"
+msgctxt "tfrmstreamextractor.lblfolder.caption"
+msgid "Output folder"
+msgstr "Cartella"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"

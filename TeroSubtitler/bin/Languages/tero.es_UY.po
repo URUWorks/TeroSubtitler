@@ -865,9 +865,31 @@ msgstr "Forma de onda"
 msgid "XML"
 msgstr "XML"
 
+#: proclocalize.lngseanalyzingfile
+msgid "Analyzing file..."
+msgstr "Analizando archivo..."
+
+#: proclocalize.lngsecodec
+msgctxt "proclocalize.lngsecodec"
+msgid "Codec"
+msgstr "Codificación"
+
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
 msgstr "¿Quieres ver la lista de cambios?"
+
+#: proclocalize.lngseid
+msgid "Id"
+msgstr "Id"
+
+#: proclocalize.lngsekind
+msgid "Kind"
+msgstr "Tipo"
+
+#: proclocalize.lngselanguage
+msgctxt "proclocalize.lngselanguage"
+msgid "Language"
+msgstr "Idioma"
 
 #: proclocalize.lngselectencodingtouse
 msgid "Select the Encoding to use:"
@@ -884,6 +906,10 @@ msgstr "Seleccione la hoja a utilizar:"
 #: proclocalize.lngselecttracktouse
 msgid "Select the track to use:"
 msgstr "Seleccione la pista a utilizar:"
+
+#: proclocalize.lngseoutput
+msgid "Output"
+msgstr "Salida"
 
 #: proclocalize.lngshifttimeless
 #, object-pascal-format
@@ -1201,6 +1227,18 @@ msgstr "URL"
 #, object-pascal-format
 msgid "Audio tracks: %d"
 msgstr "Pistas de audio: %d"
+
+#: proclocalize.lngvideoerroraoinitfailed
+msgid "Initializing the audio output failed."
+msgstr "Error al inicializar la salida de audio."
+
+#: proclocalize.lngvideoerrornothingtoplay
+msgid "There was no audio or video stream to play."
+msgstr "No hay ninguna pista de audio o video para reproducir."
+
+#: proclocalize.lngvideoerrorvoinitfailed
+msgid "Initializing the video output failed."
+msgstr "Error al inicializar la salida de vídeo."
 
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
@@ -2261,6 +2299,7 @@ msgid "Author"
 msgstr "Autor"
 
 #: tfrmformatproperties.lbldvdinfo.caption
+msgctxt "tfrmformatproperties.lbldvdinfo.caption"
 msgid "Info"
 msgstr "Información"
 
@@ -3583,6 +3622,10 @@ msgstr "Dividir línea en la posición del cursor"
 msgid "Statistics..."
 msgstr "Estadísticas..."
 
+#: tfrmmain.actstreamextractor.caption
+msgid "Stream extractor..."
+msgstr "Extractor de pistas..."
+
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
 msgstr "Intercambiar texto"
@@ -4761,6 +4804,39 @@ msgstr "Exportar..."
 #: tfrmstatistics.caption
 msgid "Statistics"
 msgstr "Estadísticas"
+
+#: tfrmstreamextractor.btnclose.caption
+msgctxt "tfrmstreamextractor.btnclose.caption"
+msgid "Close"
+msgstr "Cerrar"
+
+#: tfrmstreamextractor.btnextract.caption
+msgid "Extract"
+msgstr "Extraer"
+
+#: tfrmstreamextractor.btnfile.caption
+msgctxt "tfrmstreamextractor.btnfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmstreamextractor.btnfolder.caption
+msgctxt "tfrmstreamextractor.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmstreamextractor.caption
+msgid "Stream extractor"
+msgstr "Extractor de pistas"
+
+#: tfrmstreamextractor.lblfile.caption
+msgctxt "tfrmstreamextractor.lblfile.caption"
+msgid "File"
+msgstr "Archivo"
+
+#: tfrmstreamextractor.lblfolder.caption
+msgctxt "tfrmstreamextractor.lblfolder.caption"
+msgid "Output folder"
+msgstr "Carpeta de salida"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"

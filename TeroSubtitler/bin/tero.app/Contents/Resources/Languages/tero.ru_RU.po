@@ -867,9 +867,33 @@ msgstr "Аудиоволна"
 msgid "XML"
 msgstr ""
 
+#: proclocalize.lngseanalyzingfile
+msgid "Analyzing file..."
+msgstr ""
+
+#: proclocalize.lngsecodec
+#, fuzzy
+msgctxt "proclocalize.lngsecodec"
+msgid "Codec"
+msgstr "Кодек"
+
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
 msgstr "Открыть список изменений?"
+
+#: proclocalize.lngseid
+msgid "Id"
+msgstr ""
+
+#: proclocalize.lngsekind
+msgid "Kind"
+msgstr ""
+
+#: proclocalize.lngselanguage
+#, fuzzy
+msgctxt "proclocalize.lngselanguage"
+msgid "Language"
+msgstr "Язык"
 
 #: proclocalize.lngselectencodingtouse
 msgid "Select the Encoding to use:"
@@ -886,6 +910,10 @@ msgstr "Выбрать лист:"
 #: proclocalize.lngselecttracktouse
 msgid "Select the track to use:"
 msgstr "Выбрать дорожку:"
+
+#: proclocalize.lngseoutput
+msgid "Output"
+msgstr ""
 
 #: proclocalize.lngshifttimeless
 #, object-pascal-format
@@ -1202,6 +1230,18 @@ msgstr "Ссылка"
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
 msgid "Audio tracks: %d"
+msgstr ""
+
+#: proclocalize.lngvideoerroraoinitfailed
+msgid "Initializing the audio output failed."
+msgstr ""
+
+#: proclocalize.lngvideoerrornothingtoplay
+msgid "There was no audio or video stream to play."
+msgstr ""
+
+#: proclocalize.lngvideoerrorvoinitfailed
+msgid "Initializing the video output failed."
 msgstr ""
 
 #: proclocalize.lngvideogenerationfailed
@@ -2265,6 +2305,7 @@ msgid "Author"
 msgstr "Автор"
 
 #: tfrmformatproperties.lbldvdinfo.caption
+msgctxt "tfrmformatproperties.lbldvdinfo.caption"
 msgid "Info"
 msgstr "Инфо"
 
@@ -3608,6 +3649,10 @@ msgstr "Разделить строку на месте курсора"
 msgid "Statistics..."
 msgstr "Статистика..."
 
+#: tfrmmain.actstreamextractor.caption
+msgid "Stream extractor..."
+msgstr ""
+
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
 msgstr "Поменять текст оригинала и перевода"
@@ -4796,6 +4841,43 @@ msgstr "Экспорт..."
 #: tfrmstatistics.caption
 msgid "Statistics"
 msgstr "Статистика"
+
+#: tfrmstreamextractor.btnclose.caption
+#, fuzzy
+msgctxt "tfrmstreamextractor.btnclose.caption"
+msgid "Close"
+msgstr "Закрыть"
+
+#: tfrmstreamextractor.btnextract.caption
+msgid "Extract"
+msgstr ""
+
+#: tfrmstreamextractor.btnfile.caption
+msgctxt "tfrmstreamextractor.btnfile.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmstreamextractor.btnfolder.caption
+msgctxt "tfrmstreamextractor.btnfolder.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmstreamextractor.caption
+msgid "Stream extractor"
+msgstr ""
+
+#: tfrmstreamextractor.lblfile.caption
+#, fuzzy
+msgctxt "tfrmstreamextractor.lblfile.caption"
+msgid "File"
+msgstr "Файл"
+
+#: tfrmstreamextractor.lblfolder.caption
+#, fuzzy
+#| msgid "Folder"
+msgctxt "tfrmstreamextractor.lblfolder.caption"
+msgid "Output folder"
+msgstr "Папка"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"

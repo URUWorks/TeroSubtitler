@@ -865,9 +865,33 @@ msgstr "音频波形"
 msgid "XML"
 msgstr ""
 
+#: proclocalize.lngseanalyzingfile
+msgid "Analyzing file..."
+msgstr ""
+
+#: proclocalize.lngsecodec
+#, fuzzy
+msgctxt "proclocalize.lngsecodec"
+msgid "Codec"
+msgstr "编解码器"
+
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
 msgstr "要查看更新日志吗？"
+
+#: proclocalize.lngseid
+msgid "Id"
+msgstr ""
+
+#: proclocalize.lngsekind
+msgid "Kind"
+msgstr ""
+
+#: proclocalize.lngselanguage
+#, fuzzy
+msgctxt "proclocalize.lngselanguage"
+msgid "Language"
+msgstr "语言"
 
 #: proclocalize.lngselectencodingtouse
 msgid "Select the Encoding to use:"
@@ -884,6 +908,10 @@ msgstr "选择要使用的工作表："
 #: proclocalize.lngselecttracktouse
 msgid "Select the track to use:"
 msgstr "选择要使用的轨道："
+
+#: proclocalize.lngseoutput
+msgid "Output"
+msgstr ""
 
 #: proclocalize.lngshifttimeless
 #, object-pascal-format
@@ -1200,6 +1228,18 @@ msgstr ""
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
 msgid "Audio tracks: %d"
+msgstr ""
+
+#: proclocalize.lngvideoerroraoinitfailed
+msgid "Initializing the audio output failed."
+msgstr ""
+
+#: proclocalize.lngvideoerrornothingtoplay
+msgid "There was no audio or video stream to play."
+msgstr ""
+
+#: proclocalize.lngvideoerrorvoinitfailed
+msgid "Initializing the video output failed."
 msgstr ""
 
 #: proclocalize.lngvideogenerationfailed
@@ -2261,6 +2301,7 @@ msgid "Author"
 msgstr "作者"
 
 #: tfrmformatproperties.lbldvdinfo.caption
+msgctxt "tfrmformatproperties.lbldvdinfo.caption"
 msgid "Info"
 msgstr "信息"
 
@@ -3589,6 +3630,10 @@ msgstr "在光标位置分行"
 msgid "Statistics..."
 msgstr "统计数据..."
 
+#: tfrmmain.actstreamextractor.caption
+msgid "Stream extractor..."
+msgstr ""
+
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
 msgstr "交换文本"
@@ -4775,6 +4820,43 @@ msgstr "导出..."
 #: tfrmstatistics.caption
 msgid "Statistics"
 msgstr "统计"
+
+#: tfrmstreamextractor.btnclose.caption
+#, fuzzy
+msgctxt "tfrmstreamextractor.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmstreamextractor.btnextract.caption
+msgid "Extract"
+msgstr ""
+
+#: tfrmstreamextractor.btnfile.caption
+msgctxt "tfrmstreamextractor.btnfile.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmstreamextractor.btnfolder.caption
+msgctxt "tfrmstreamextractor.btnfolder.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmstreamextractor.caption
+msgid "Stream extractor"
+msgstr ""
+
+#: tfrmstreamextractor.lblfile.caption
+#, fuzzy
+msgctxt "tfrmstreamextractor.lblfile.caption"
+msgid "File"
+msgstr "文件"
+
+#: tfrmstreamextractor.lblfolder.caption
+#, fuzzy
+#| msgid "Folder"
+msgctxt "tfrmstreamextractor.lblfolder.caption"
+msgid "Output folder"
+msgstr "文件夹"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"

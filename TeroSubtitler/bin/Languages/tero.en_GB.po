@@ -865,9 +865,31 @@ msgstr "Waveform"
 msgid "XML"
 msgstr "XML"
 
+#: proclocalize.lngseanalyzingfile
+msgid "Analyzing file..."
+msgstr "Analyzing file..."
+
+#: proclocalize.lngsecodec
+msgctxt "proclocalize.lngsecodec"
+msgid "Codec"
+msgstr "Codec"
+
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
 msgstr "Do you want to see the changelog?"
+
+#: proclocalize.lngseid
+msgid "Id"
+msgstr "Id"
+
+#: proclocalize.lngsekind
+msgid "Kind"
+msgstr "Kind"
+
+#: proclocalize.lngselanguage
+msgctxt "proclocalize.lngselanguage"
+msgid "Language"
+msgstr "Language"
 
 #: proclocalize.lngselectencodingtouse
 msgid "Select the Encoding to use:"
@@ -884,6 +906,10 @@ msgstr "Select sheet to use:"
 #: proclocalize.lngselecttracktouse
 msgid "Select the track to use:"
 msgstr "Select the track to use:"
+
+#: proclocalize.lngseoutput
+msgid "Output"
+msgstr "Output"
 
 #: proclocalize.lngshifttimeless
 #, object-pascal-format
@@ -1201,6 +1227,18 @@ msgstr "URL"
 #, object-pascal-format
 msgid "Audio tracks: %d"
 msgstr "Audio tracks: %d"
+
+#: proclocalize.lngvideoerroraoinitfailed
+msgid "Initializing the audio output failed."
+msgstr "Initializing the audio output failed."
+
+#: proclocalize.lngvideoerrornothingtoplay
+msgid "There was no audio or video stream to play."
+msgstr "There was no audio or video stream to play."
+
+#: proclocalize.lngvideoerrorvoinitfailed
+msgid "Initializing the video output failed."
+msgstr "Initializing the video output failed."
 
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
@@ -2261,6 +2299,7 @@ msgid "Author"
 msgstr "Author"
 
 #: tfrmformatproperties.lbldvdinfo.caption
+msgctxt "tfrmformatproperties.lbldvdinfo.caption"
 msgid "Info"
 msgstr "Info"
 
@@ -3583,6 +3622,10 @@ msgstr "Split line at cursor position"
 msgid "Statistics..."
 msgstr "Statistics..."
 
+#: tfrmmain.actstreamextractor.caption
+msgid "Stream extractor..."
+msgstr "Stream extractor..."
+
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
 msgstr "Swap text"
@@ -4761,6 +4804,39 @@ msgstr "Export..."
 #: tfrmstatistics.caption
 msgid "Statistics"
 msgstr "Statistics"
+
+#: tfrmstreamextractor.btnclose.caption
+msgctxt "tfrmstreamextractor.btnclose.caption"
+msgid "Close"
+msgstr "Close"
+
+#: tfrmstreamextractor.btnextract.caption
+msgid "Extract"
+msgstr "Extract"
+
+#: tfrmstreamextractor.btnfile.caption
+msgctxt "tfrmstreamextractor.btnfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmstreamextractor.btnfolder.caption
+msgctxt "tfrmstreamextractor.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmstreamextractor.caption
+msgid "Stream extractor"
+msgstr "Stream extractor"
+
+#: tfrmstreamextractor.lblfile.caption
+msgctxt "tfrmstreamextractor.lblfile.caption"
+msgid "File"
+msgstr "File"
+
+#: tfrmstreamextractor.lblfolder.caption
+msgctxt "tfrmstreamextractor.lblfolder.caption"
+msgid "Output folder"
+msgstr "Output folder"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"

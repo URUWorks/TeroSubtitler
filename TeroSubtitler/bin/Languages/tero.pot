@@ -844,8 +844,30 @@ msgstr ""
 msgid "XML"
 msgstr ""
 
+#: proclocalize.lngseanalyzingfile
+msgid "Analyzing file..."
+msgstr ""
+
+#: proclocalize.lngsecodec
+msgctxt "proclocalize.lngsecodec"
+msgid "Codec"
+msgstr ""
+
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
+msgstr ""
+
+#: proclocalize.lngseid
+msgid "Id"
+msgstr ""
+
+#: proclocalize.lngsekind
+msgid "Kind"
+msgstr ""
+
+#: proclocalize.lngselanguage
+msgctxt "proclocalize.lngselanguage"
+msgid "Language"
 msgstr ""
 
 #: proclocalize.lngselectencodingtouse
@@ -862,6 +884,10 @@ msgstr ""
 
 #: proclocalize.lngselecttracktouse
 msgid "Select the track to use:"
+msgstr ""
+
+#: proclocalize.lngseoutput
+msgid "Output"
 msgstr ""
 
 #: proclocalize.lngshifttimeless
@@ -1179,6 +1205,18 @@ msgstr ""
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
 msgid "Audio tracks: %d"
+msgstr ""
+
+#: proclocalize.lngvideoerroraoinitfailed
+msgid "Initializing the audio output failed."
+msgstr ""
+
+#: proclocalize.lngvideoerrornothingtoplay
+msgid "There was no audio or video stream to play."
+msgstr ""
+
+#: proclocalize.lngvideoerrorvoinitfailed
+msgid "Initializing the video output failed."
 msgstr ""
 
 #: proclocalize.lngvideogenerationfailed
@@ -2238,6 +2276,7 @@ msgid "Author"
 msgstr ""
 
 #: tfrmformatproperties.lbldvdinfo.caption
+msgctxt "tfrmformatproperties.lbldvdinfo.caption"
 msgid "Info"
 msgstr ""
 
@@ -3560,6 +3599,10 @@ msgstr ""
 msgid "Statistics..."
 msgstr ""
 
+#: tfrmmain.actstreamextractor.caption
+msgid "Stream extractor..."
+msgstr ""
+
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
 msgstr ""
@@ -4737,6 +4780,39 @@ msgstr ""
 
 #: tfrmstatistics.caption
 msgid "Statistics"
+msgstr ""
+
+#: tfrmstreamextractor.btnclose.caption
+msgctxt "tfrmstreamextractor.btnclose.caption"
+msgid "Close"
+msgstr ""
+
+#: tfrmstreamextractor.btnextract.caption
+msgid "Extract"
+msgstr ""
+
+#: tfrmstreamextractor.btnfile.caption
+msgctxt "tfrmstreamextractor.btnfile.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmstreamextractor.btnfolder.caption
+msgctxt "tfrmstreamextractor.btnfolder.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmstreamextractor.caption
+msgid "Stream extractor"
+msgstr ""
+
+#: tfrmstreamextractor.lblfile.caption
+msgctxt "tfrmstreamextractor.lblfile.caption"
+msgid "File"
+msgstr ""
+
+#: tfrmstreamextractor.lblfolder.caption
+msgctxt "tfrmstreamextractor.lblfolder.caption"
+msgid "Output folder"
 msgstr ""
 
 #: tfrmtbx.btnclose.caption
