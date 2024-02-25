@@ -65,6 +65,7 @@ procedure ShowCustomImageFormat;
 procedure ShowExportSUP;
 procedure ShowGenerateVideo;
 procedure ShowGenerateBlankVideo;
+procedure ShowStreamExtractor;
 procedure ShowTBXSettings;
 procedure ShowTBX;
 procedure ShowTBXList;
@@ -89,8 +90,8 @@ uses
   formAudioToText, formAudioToTextModel, procTypes, procConfig, procWorkspace,
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
   formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
-  formRoundTime, formStatistics, formGenerateBlankVideo, LCLTranslator,
-  procLocalize;
+  formRoundTime, formStatistics, formGenerateBlankVideo, formStreamExtractor,
+  LCLTranslator, procLocalize;
 
 // -----------------------------------------------------------------------------
 
@@ -684,6 +685,19 @@ begin
   end
   else
     frmGenerateBlankVideo.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowStreamExtractor;
+begin
+  if frmStreamExtractor = NIL then
+  begin
+    frmStreamExtractor := TfrmStreamExtractor.Create(Application);
+    ShowForm(frmStreamExtractor);
+  end
+  else
+    frmStreamExtractor.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

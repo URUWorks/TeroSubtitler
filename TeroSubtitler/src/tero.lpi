@@ -773,6 +773,13 @@
         <Filename Value="procThumbnails.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="formStreamExtractor.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmStreamExtractor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

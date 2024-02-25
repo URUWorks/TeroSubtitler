@@ -105,6 +105,9 @@ resourcestring
   lngLine = 'Line:';
   lngFileSavedSuccessfully = 'File saved successfully.';
   lngVideoGenerationFailed = 'Video generation failed.';
+  lngVideoErrorAOInitFailed = 'Initializing the audio output failed.';
+  lngVideoErrorVOInitFailed = 'Initializing the video output failed.';
+  lngVideoErrorNothingToPlay = 'There was no audio or video stream to play.';
   lngOpenContainingFolder = 'Open containing folder';
   lngAdditionalOption = 'Additional option';
   lngHHMMSSZZZ = 'Media [HH:MM:SS.ZZZ]';
@@ -319,6 +322,14 @@ resourcestring
   lngstShortestGap = 'Shortest gap: %s (#%d)';
   lngstLongestGap = 'Longest gap: %s (#%d)';
   lngstGapAverage = 'Gap average: %s';
+
+  //StreamExtractor
+  lngseID = 'Id';
+  lngseKind = 'Kind';
+  lngseLanguage = 'Language';
+  lngseCodec = 'Codec';
+  lngseOutput = 'Output';
+  lngseAnalyzingFile = 'Analyzing file...';
 
   //TimeExpanderStrings/CompareStrings
   lngteExpand = 'Expand';

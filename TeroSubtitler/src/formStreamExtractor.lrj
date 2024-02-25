@@ -1,0 +1,9 @@
+{"version":1,"strings":[
+{"hash":16608786,"name":"tfrmstreamextractor.caption","sourcebytes":[83,116,114,101,97,109,32,101,120,116,114,97,99,116,111,114],"value":"Stream extractor"},
+{"hash":217810916,"name":"tfrmstreamextractor.btnextract.caption","sourcebytes":[69,120,116,114,97,99,116],"value":"Extract"},
+{"hash":4863637,"name":"tfrmstreamextractor.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":2053874,"name":"tfrmstreamextractor.lblfolder.caption","sourcebytes":[79,117,116,112,117,116,32,102,111,108,100,101,114],"value":"Output folder"},
+{"hash":12558,"name":"tfrmstreamextractor.btnfolder.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":315429,"name":"tfrmstreamextractor.lblfile.caption","sourcebytes":[70,105,108,101],"value":"File"},
+{"hash":12558,"name":"tfrmstreamextractor.btnfile.caption","sourcebytes":[46,46,46],"value":"..."}
+]}

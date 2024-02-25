@@ -90,6 +90,7 @@ type
     actGoToCurrentEntryInitialTime: TAction;
     actGoToCurrentEntryFinalTime: TAction;
     actDistributeEntriesEvenly: TAction;
+    actStreamExtractor: TAction;
     actShowToolbarGeneral: TAction;
     actShowToolbarEntry: TAction;
     actShowToolbarView: TAction;
@@ -395,6 +396,7 @@ type
     MenuItem281: TMenuItem;
     MenuItem282: TMenuItem;
     MenuItem283: TMenuItem;
+    MenuItem284: TMenuItem;
     mnuViewToolbarVideo: TMenuItem;
     mnuViewToolbarWaveform: TMenuItem;
     mnuViewToolbarEditor: TMenuItem;
@@ -983,7 +985,7 @@ type
     procedure DoThumbnailsDone(Sender: TObject);
     // formMain_MPV
     procedure MPVClick(Sender: TObject);
-    procedure MPVEndFile(ASender: TObject; AParam: Integer);
+    procedure MPVEndFile(ASender: TObject; AReason, AError: Integer);
     procedure MPVStartFile(Sender: TObject);
     procedure MPVFileLoaded(Sender: TObject);
     procedure MPVPause(Sender: TObject);
@@ -1276,6 +1278,7 @@ type
     procedure actTextEffectFlashExecute(Sender: TObject);
     procedure actTextEffectTypewriterExecute(Sender: TObject);
     procedure actDistributeEntriesEvenlyExecute(Sender: TObject);
+    procedure actStreamExtractorExecute(Sender: TObject);
   private
 
   public
@@ -1299,7 +1302,7 @@ uses
   procUnDockVideoControls, procColorTheme, procFiles, procMPV, procSubtitle,
   procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.SysUtils,
   UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procThumbnails,
-  formCustomQuestionDlg, formCustomSelectDlg;
+  formCustomQuestionDlg, formCustomSelectDlg, libMPV.Client;
 
 {$R *.lfm}
 

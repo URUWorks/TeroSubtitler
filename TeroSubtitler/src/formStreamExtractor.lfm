@@ -1,0 +1,180 @@
+object frmStreamExtractor: TfrmStreamExtractor
+  Left = 240
+  Height = 290
+  Top = 118
+  Width = 580
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Stream extractor'
+  ClientHeight = 290
+  ClientWidth = 580
+  FormStyle = fsStayOnTop
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '3.0.0.3'
+  object btnExtract: TButton
+    AnchorSideRight.Control = btnClose
+    AnchorSideBottom.Control = btnClose
+    AnchorSideBottom.Side = asrBottom
+    Left = 385
+    Height = 26
+    Top = 256
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 5
+    Caption = 'Extract'
+    Default = True
+    Enabled = False
+    TabOrder = 5
+    OnClick = btnExtractClick
+  end
+  object btnClose: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 481
+    Height = 26
+    Top = 256
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Cancel = True
+    Caption = 'Close'
+    TabOrder = 6
+    OnClick = btnCloseClick
+  end
+  object VST: TLazVirtualStringTree
+    AnchorSideTop.Control = edtFolder
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = btnClose
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = btnClose
+    Left = 8
+    Height = 178
+    Top = 70
+    Width = 564
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Top = 8
+    BorderSpacing.Bottom = 8
+    Header.AutoSizeIndex = 0
+    Header.Columns = <>
+    Header.MainColumn = -1
+    Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+    TabOrder = 4
+    TreeOptions.AutoOptions = [toAutoTristateTracking]
+    TreeOptions.MiscOptions = [toCheckSupport, toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+    TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+    TreeOptions.StringOptions = []
+    OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+    OnChecked = VSTChecked
+    OnDrawText = VSTDrawText
+    OnGetText = VSTGetText
+    OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+    OnInitNode = VSTInitNode
+    OnResize = VSTResize
+  end
+  object edtFolder: TEdit
+    AnchorSideTop.Control = btnFolder
+    AnchorSideRight.Control = btnFolder
+    Left = 120
+    Height = 23
+    Top = 39
+    Width = 399
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 10
+    BorderSpacing.Right = 5
+    ReadOnly = True
+    TabOrder = 2
+  end
+  object lblFolder: TLabel
+    AnchorSideLeft.Control = VST
+    AnchorSideTop.Control = edtFolder
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 43
+    Width = 72
+    Caption = 'Output folder'
+  end
+  object btnFolder: TButton
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = btnFile
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = btnClose
+    AnchorSideRight.Side = asrBottom
+    Left = 524
+    Height = 23
+    Top = 39
+    Width = 48
+    Anchors = [akTop, akRight]
+    BorderSpacing.Top = 8
+    Caption = '...'
+    TabOrder = 3
+    OnClick = btnFolderClick
+  end
+  object edtFile: TEdit
+    AnchorSideTop.Control = btnFile
+    AnchorSideRight.Control = btnFile
+    Left = 120
+    Height = 23
+    Top = 8
+    Width = 399
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 10
+    BorderSpacing.Right = 5
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object lblFile: TLabel
+    AnchorSideLeft.Control = VST
+    AnchorSideTop.Control = edtFile
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 18
+    Caption = 'File'
+  end
+  object btnFile: TButton
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideRight.Control = btnClose
+    AnchorSideRight.Side = asrBottom
+    Left = 524
+    Height = 23
+    Top = 8
+    Width = 48
+    Anchors = [akTop, akRight]
+    Caption = '...'
+    TabOrder = 1
+    OnClick = btnFileClick
+  end
+  object lblState: TLabel
+    AnchorSideTop.Control = btnClose
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 1
+    Top = 269
+    Width = 1
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object prbProgress: TProgressBar
+    AnchorSideLeft.Control = VST
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = btnExtract
+    Left = 8
+    Height = 8
+    Top = 269
+    Width = 367
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 10
+    Step = 1
+    TabOrder = 7
+    Visible = False
+  end
+end

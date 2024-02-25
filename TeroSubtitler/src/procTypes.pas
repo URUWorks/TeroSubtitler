@@ -132,6 +132,11 @@ const
   FFMPEG_SCParams      = '-hide_banner -i "%input" -vf "select=''gt(scene,%value)'',showinfo" -f null -';
   FFMPEG_VideoEncoding = '-i "%input" -vf "%extrasubtitles=''%subtitle'':force_style=''%style''" -s %widthx%height %videosettings %audiosettings -y -hide_banner "%output"';
   FFMPEG_Thumbnail     = '-ss %timestr -i "%input" -frames:v 1 -update 1 -s 90x58 -pix_fmt rgb565 -y -hide_banner "%output"';
+  FFMPEG_Info          = '-hide_banner -i "%input"';
+  FFMPEG_ExtractStream = '-hide_banner -i "%input" -map 0:%trackid -c copy -y "%output"';
+
+  FFPROBE_EXE          = 'ffprobe.exe';
+  FFPROBE_Params       = '-v quiet -print_format json -show_format -show_streams "%input"';
 
   YTDLP_EXE = 'yt-dlp.exe';
 
@@ -159,6 +164,11 @@ const
   FFMPEG_SCParams      = '-hide_banner -i %input -vf select=''gt(scene,%value)'',showinfo -f null -';
   FFMPEG_VideoEncoding = '-i %input -vf %extrasubtitles=''%subtitle'':force_style=''%style'' -s %widthx%height %videosettings %audiosettings -y -hide_banner %output';
   FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -s 90x58 -pix_fmt rgb565 -y -hide_banner %output';
+  FFMPEG_Info          = '-hide_banner -i %input';
+  FFMPEG_ExtractStream = '-hide_banner -i %input -map 0:%trackid -c copy -y %output';
+
+  FFPROBE_EXE          = 'ffprobe';
+  FFPROBE_Params       = '-v quiet -print_format json -show_format -show_streams %input';
 
   YTDLP_EXE = 'yt-dlp_linux_aarch64';
 
@@ -186,6 +196,11 @@ const
   FFMPEG_SCParams      = '-hide_banner -i %input -vf select=''gt(scene,%value)'',showinfo -f null -';
   FFMPEG_VideoEncoding = '-i %input -vf %extrasubtitles=''%subtitle'':force_style=''%style'' -s %widthx%height %videosettings %audiosettings -y -hide_banner %output';
   FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -s 90x58 -pix_fmt rgb565 -y -hide_banner %output';
+  FFMPEG_Info          = '-hide_banner -i %input';
+  FFMPEG_ExtractStream = '-hide_banner -i %input -map 0:%trackid -c copy -y %output';
+
+  FFPROBE_EXE          = 'ffprobe';
+  FFPROBE_Params       = '-v quiet -print_format json -show_format -show_streams %input';
 
   YTDLP_EXE = 'yt-dlp_macos';
 

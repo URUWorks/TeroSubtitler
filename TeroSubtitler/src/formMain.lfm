@@ -2140,6 +2140,9 @@ object frmMain: TfrmMain
       object MenuItem109: TMenuItem
         Action = actBatchConvert
       end
+      object MenuItem284: TMenuItem
+        Action = actStreamExtractor
+      end
       object Separator33: TMenuItem
         Caption = '-'
       end
@@ -4938,6 +4941,11 @@ object frmMain: TfrmMain
       AutoCheck = True
       Caption = 'Entry'
       OnExecute = actShowVideoToolbarEntryExecute
+    end
+    object actStreamExtractor: TAction
+      Category = 'Tools'
+      Caption = 'Stream extractor...'
+      OnExecute = actStreamExtractorExecute
     end
   end
   object popDropInsert: TPopupMenu

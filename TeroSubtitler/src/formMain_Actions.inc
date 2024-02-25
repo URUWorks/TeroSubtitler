@@ -2315,3 +2315,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actStreamExtractorExecute(Sender: TObject);
+begin
+  ShowStreamExtractor;
+end;
+
+// -----------------------------------------------------------------------------
+

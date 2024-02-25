@@ -348,6 +348,7 @@
 {"hash":106664595,"name":"tfrmmain.actshowvideotoolbarcontrols.caption","sourcebytes":[67,111,110,116,114,111,108,115],"value":"Controls"},
 {"hash":5680834,"name":"tfrmmain.actshowvideotoolbarother.caption","sourcebytes":[79,116,104,101,114],"value":"Other"},
 {"hash":5004185,"name":"tfrmmain.actshowvideotoolbarentry.caption","sourcebytes":[69,110,116,114,121],"value":"Entry"},
+{"hash":115433694,"name":"tfrmmain.actstreamextractor.caption","sourcebytes":[83,116,114,101,97,109,32,101,120,116,114,97,99,116,111,114,46,46,46],"value":"Stream extractor..."},
 {"hash":261306372,"name":"tfrmmain.mnuvstformat.caption","sourcebytes":[109,110,117,86,83,84,70,111,114,109,97,116],"value":"mnuVSTFormat"},
 {"hash":6093503,"name":"tfrmmain.mnuvstvideo.caption","sourcebytes":[86,105,100,101,111],"value":"Video"},
 {"hash":128765908,"name":"tfrmmain.mnumemoformat.caption","sourcebytes":[109,110,117,77,101,109,111,70,111,114,109,97,116],"value":"mnuMemoFormat"},
