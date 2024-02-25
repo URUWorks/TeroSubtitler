@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: proclocalize.lngabversion
 #, object-pascal-format
@@ -266,7 +266,7 @@ msgstr "Tentar detectar segmentos de diálogo apaga todos as entradas da lista."
 
 #: proclocalize.lngdownloadcanceled
 msgid "Download canceled by user."
-msgstr ""
+msgstr "Download cancelado pelo usuário."
 
 #: proclocalize.lngentry
 #, object-pascal-format
@@ -512,7 +512,7 @@ msgstr "Remover espaçamento"
 #: proclocalize.lngfstotalerrors
 #, object-pascal-format
 msgid "Total errors: %d (displayed: %d)"
-msgstr ""
+msgstr "Erros totais: %d (mostrados: %d)"
 
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
@@ -534,7 +534,6 @@ msgid "SMPTE [HH:MM:SS:FF]"
 msgstr "SMPTE [HH:MM:SS:FF]"
 
 #: proclocalize.lnghhmmsszzz
-#, fuzzy
 msgid "Media [HH:MM:SS.ZZZ]"
 msgstr "Media [HH:MM:SS.ZZZ]"
 
@@ -867,13 +866,12 @@ msgstr "XML"
 
 #: proclocalize.lngseanalyzingfile
 msgid "Analyzing file..."
-msgstr ""
+msgstr "Analisando arquivo..."
 
 #: proclocalize.lngsecodec
-#, fuzzy
 msgctxt "proclocalize.lngsecodec"
 msgid "Codec"
-msgstr "Codec"
+msgstr "Codificação"
 
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
@@ -881,14 +879,13 @@ msgstr "Quer ver o registro de mudanças?"
 
 #: proclocalize.lngseid
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: proclocalize.lngsekind
 msgid "Kind"
-msgstr ""
+msgstr "Tipo"
 
 #: proclocalize.lngselanguage
-#, fuzzy
 msgctxt "proclocalize.lngselanguage"
 msgid "Language"
 msgstr "Idioma"
@@ -911,7 +908,7 @@ msgstr "Selecione a faixa a ser usada:"
 
 #: proclocalize.lngseoutput
 msgid "Output"
-msgstr ""
+msgstr "Saída"
 
 #: proclocalize.lngshifttimeless
 #, object-pascal-format
@@ -1119,19 +1116,19 @@ msgstr "O conjunto de legendas atual contém erros que devem ser resolvidos, mas
 
 #: proclocalize.lngsubtitlespecificationerror
 msgid "The current subtitles do not meet the specifications of the format to be saved."
-msgstr ""
+msgstr "As legendas atuais não correspondem às especificações do formato a ser salvo."
 
 #: proclocalize.lngsubtitlespecificationerroralign
 msgid "There are entries with vertical alignment which are not allowed."
-msgstr ""
+msgstr "Existem entradas com alinhamentos verticais que não são permitidos."
 
 #: proclocalize.lngsubtitlespecificationerrorbr
 msgid "There are entries which exceed the line break."
-msgstr ""
+msgstr "Existem entradas que excedem a quebra de linha."
 
 #: proclocalize.lngsubtitlespecificationerrorfps
 msgid "Current frame rate does not match."
-msgstr ""
+msgstr "A taxa de quadros atual não corresponde."
 
 #: proclocalize.lngsuccess
 msgid "Success."
@@ -1228,19 +1225,19 @@ msgstr "URL"
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
 msgid "Audio tracks: %d"
-msgstr ""
+msgstr "Faixas de áudio: %d"
 
 #: proclocalize.lngvideoerroraoinitfailed
 msgid "Initializing the audio output failed."
-msgstr ""
+msgstr "A inicialização da saída de áudio falhou."
 
 #: proclocalize.lngvideoerrornothingtoplay
 msgid "There was no audio or video stream to play."
-msgstr ""
+msgstr "Não há faixa áudio ou vídeo para reproduzir."
 
 #: proclocalize.lngvideoerrorvoinitfailed
 msgid "Initializing the video output failed."
-msgstr ""
+msgstr "A inicialização da saída de vídeo falhou."
 
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
@@ -1249,32 +1246,32 @@ msgstr "Erro na geração de vídeo."
 #: proclocalize.lngviduration
 #, object-pascal-format
 msgid "Duration: %s (%d frames)"
-msgstr ""
+msgstr "Duração: %s (%d quadros)"
 
 #: proclocalize.lngvifile
 #, object-pascal-format
 msgid "File: %s"
-msgstr ""
+msgstr "Arquivo: %s"
 
 #: proclocalize.lngvifps
 #, object-pascal-format
 msgid "FPS: %s"
-msgstr ""
+msgstr "FPS: %s"
 
 #: proclocalize.lngviresolution
 #, object-pascal-format
 msgid "Resolution: %dx%d"
-msgstr ""
+msgstr "Resolução: %dx%d"
 
 #: proclocalize.lngvisubtitletracks
 #, object-pascal-format
 msgid "Subtitle tracks: %d"
-msgstr ""
+msgstr "Faixa de legenda: %d"
 
 #: proclocalize.lngvivideotracks
 #, object-pascal-format
 msgid "Video tracks: %d"
-msgstr ""
+msgstr "Faixa de vídeo: %d"
 
 #: proclocalize.lngwebvideounsupported
 msgid "The video format is not supported for playback in the web browser."
@@ -1410,12 +1407,12 @@ msgstr "Áudio para texto"
 #: tfrmaudiototext.chkmaxlinecount.caption
 msgctxt "tfrmaudiototext.chkmaxlinecount.caption"
 msgid "Maximum line count"
-msgstr ""
+msgstr "Contagem máxima de linhas"
 
 #: tfrmaudiototext.chkmaxlinelength.caption
 msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
 msgid "Maximum line length"
-msgstr ""
+msgstr "Comprimento máximo de linha"
 
 #: tfrmaudiototext.chktranslate.caption
 msgid "Translate to Еnglish"
@@ -1976,36 +1973,34 @@ msgid "Only selected entries"
 msgstr "Apenas entradas selecionadas"
 
 #: tfrmdownload.btncancel.caption
-#, fuzzy
 msgctxt "tfrmdownload.btncancel.caption"
 msgid "Cancel"
 msgstr "Cancelar"
 
 #: tfrmdownload.caption
-#, fuzzy
 msgctxt "tfrmdownload.caption"
 msgid "Downloading"
 msgstr "Baixando"
 
 #: tfrmdownload.lblelapsed.caption
 msgid "Elapsed:"
-msgstr ""
+msgstr "Decorrido:"
 
 #: tfrmdownload.lblfile.caption
 msgid "File:"
-msgstr ""
+msgstr "Arquivo:"
 
 #: tfrmdownload.lblreceived.caption
 msgid "Received:"
-msgstr ""
+msgstr "Recebido:"
 
 #: tfrmdownload.lblremaining.caption
 msgid "Remaining:"
-msgstr ""
+msgstr "Restando:"
 
 #: tfrmdownload.lblspeed.caption
 msgid "Speed:"
-msgstr ""
+msgstr "Velocidade:"
 
 #: tfrmdurationlimits.btnapply.caption
 msgctxt "tfrmdurationlimits.btnapply.caption"
@@ -2787,7 +2782,7 @@ msgstr "Clique para atualizar lista"
 
 #: tfrmmain.actdistributeentriesevenly.caption
 msgid "Distribute entries evenly"
-msgstr ""
+msgstr "Distribuir entradas uniformemente"
 
 #: tfrmmain.actdivideentry.caption
 msgid "Divide entry"
@@ -2924,19 +2919,19 @@ msgstr "Ir para a entrada..."
 
 #: tfrmmain.actgotocurrententryfinaltime.caption
 msgid "Go to current entry final time"
-msgstr ""
+msgstr "Ir para o tempo final da entrada atual"
 
 #: tfrmmain.actgotocurrententryinitialtime.caption
 msgid "Go to current entry initial time"
-msgstr ""
+msgstr "Ir para o tempo inicial da entrada atual"
 
 #: tfrmmain.actgotonextentryandplay.caption
 msgid "Go to next entry and play"
-msgstr ""
+msgstr "Ir para entrada seguinte e reproduzir"
 
 #: tfrmmain.actgotopreviousentryandplay.caption
 msgid "Go to previous entry and play"
-msgstr ""
+msgstr "Ir para entrada anterior e reproduzir"
 
 #: tfrmmain.actgototime.caption
 msgid "Go to time..."
@@ -3137,7 +3132,7 @@ msgstr "Reproduzir seleção"
 
 #: tfrmmain.actmediaplayselection.hint
 msgid "Click on the arrow to select playback repetitions"
-msgstr ""
+msgstr "Use as setas para selecionar o número de repetições"
 
 #: tfrmmain.actmediapreviousframe.caption
 msgctxt "tfrmmain.actmediapreviousframe.caption"
@@ -3238,8 +3233,9 @@ msgid "Next subtitle"
 msgstr "Legenda seguinte"
 
 #: tfrmmain.actpanandscan.caption
+#, fuzzy
 msgid "Pan-and-scan"
-msgstr ""
+msgstr "Varredura panorâmica"
 
 #: tfrmmain.actpaste.caption
 msgctxt "tfrmmain.actpaste.caption"
@@ -3248,7 +3244,7 @@ msgstr "Colar"
 
 #: tfrmmain.actplaycurrententry.caption
 msgid "Play current entry"
-msgstr ""
+msgstr "Reproduzir entrada atual"
 
 #: tfrmmain.actprevioussubtitle.caption
 msgctxt "tfrmmain.actprevioussubtitle.caption"
@@ -3496,41 +3492,37 @@ msgid "Words per minute"
 msgstr "Plavras por minuto"
 
 #: tfrmmain.actshoweditortoolbaralignment.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbaralignment.caption"
 msgid "Alignment"
 msgstr "Alinhamento"
 
 #: tfrmmain.actshoweditortoolbarbasic.caption
 msgid "Basic"
-msgstr ""
+msgstr "Básico"
 
 #: tfrmmain.actshoweditortoolbarentry.caption
 msgctxt "tfrmmain.actshoweditortoolbarentry.caption"
 msgid "Entry"
-msgstr ""
+msgstr "Entrada"
 
 #: tfrmmain.actshoweditortoolbarformat.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarformat.caption"
 msgid "Format"
 msgstr "Formato"
 
 #: tfrmmain.actshoweditortoolbarlines.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarlines.caption"
 msgid "Lines"
 msgstr "Linhas"
 
 #: tfrmmain.actshoweditortoolbarwords.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarwords.caption"
 msgid "Words"
 msgstr "Palavras"
 
 #: tfrmmain.actshowthumbnails.caption
 msgid "Show thumbnails"
-msgstr ""
+msgstr "Mostrar miniaturas"
 
 #: tfrmmain.actshowtoolbarencoding.caption
 msgctxt "tfrmmain.actshowtoolbarencoding.caption"
@@ -3540,10 +3532,9 @@ msgstr "Codificação"
 #: tfrmmain.actshowtoolbarentry.caption
 msgctxt "tfrmmain.actshowtoolbarentry.caption"
 msgid "Entry"
-msgstr ""
+msgstr "Entrada"
 
 #: tfrmmain.actshowtoolbarfile.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowtoolbarfile.caption"
 msgid "File"
 msgstr "Arquivo"
@@ -3559,7 +3550,6 @@ msgid "FPS"
 msgstr "FPS"
 
 #: tfrmmain.actshowtoolbargeneral.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowtoolbargeneral.caption"
 msgid "General"
 msgstr "Geral"
@@ -3569,7 +3559,6 @@ msgid "Quick Action"
 msgstr "Ação rápida"
 
 #: tfrmmain.actshowtoolbarview.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowtoolbarview.caption"
 msgid "View"
 msgstr "Visualização"
@@ -3577,34 +3566,32 @@ msgstr "Visualização"
 #: tfrmmain.actshowvideotoolbarcontrols.caption
 msgctxt "tfrmmain.actshowvideotoolbarcontrols.caption"
 msgid "Controls"
-msgstr ""
+msgstr "Controles"
 
 #: tfrmmain.actshowvideotoolbarentry.caption
 msgctxt "tfrmmain.actshowvideotoolbarentry.caption"
 msgid "Entry"
-msgstr ""
+msgstr "Entrada"
 
 #: tfrmmain.actshowvideotoolbarother.caption
 msgctxt "tfrmmain.actshowvideotoolbarother.caption"
 msgid "Other"
-msgstr ""
+msgstr "Outro"
 
 #: tfrmmain.actshowwaveformtoolbarcontrols.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarcontrols.caption"
 msgid "Controls"
-msgstr ""
+msgstr "Controles"
 
 #: tfrmmain.actshowwaveformtoolbarentry.caption
-#, fuzzy
-#| msgid "Edit"
 msgctxt "tfrmmain.actshowwaveformtoolbarentry.caption"
 msgid "Entry"
-msgstr "Editar"
+msgstr "Entrada"
 
 #: tfrmmain.actshowwaveformtoolbarother.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
 msgid "Other"
-msgstr ""
+msgstr "Outro"
 
 #: tfrmmain.actshowwaveformtoolbarshotchanges.caption
 #, fuzzy
@@ -3614,7 +3601,7 @@ msgstr "Mudanças de cena"
 
 #: tfrmmain.actshowwaveformtoolbarzoom.caption
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: tfrmmain.actsort.caption
 msgid "Sort"
@@ -3640,7 +3627,7 @@ msgstr "Estatísticas..."
 
 #: tfrmmain.actstreamextractor.caption
 msgid "Stream extractor..."
-msgstr ""
+msgstr "Extrator de faixa..."
 
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
@@ -3672,7 +3659,6 @@ msgid "Settings..."
 msgstr "Configurações..."
 
 #: tfrmmain.acttexteffectflash.caption
-#, fuzzy
 msgid "Flash effect"
 msgstr "Efeito de flash"
 
@@ -3903,7 +3889,7 @@ msgstr "Vintage"
 
 #: tfrmmain.actvideoinformation.caption
 msgid "Information..."
-msgstr ""
+msgstr "Informação..."
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
@@ -4079,8 +4065,6 @@ msgid "Video"
 msgstr "Vídeo"
 
 #: tfrmmain.mnuvideoaspectratio.caption
-#, fuzzy
-#| msgid "Aspect Ratio"
 msgid "Aspect ratio"
 msgstr "Proporção"
 
@@ -4121,13 +4105,11 @@ msgid "Columns"
 msgstr "Colunas"
 
 #: tfrmmain.mnuviewtoolbareditor.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbareditor.caption"
 msgid "Editor"
 msgstr "Editor"
 
 #: tfrmmain.mnuviewtoolbarmain.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbarmain.caption"
 msgid "Main"
 msgstr "Principal"
@@ -4137,13 +4119,11 @@ msgid "Toolbars"
 msgstr "Barra de ferramentas"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
 msgid "Video"
 msgstr "Vídeo"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbarwaveform.caption"
 msgid "Waveform"
 msgstr "Forma de onda"
@@ -4153,7 +4133,6 @@ msgid "Windows"
 msgstr "Janelas"
 
 #: tfrmmain.mnuvstvideo.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuvstvideo.caption"
 msgid "Video"
 msgstr "Vídeo"
@@ -4430,7 +4409,7 @@ msgstr "Usar dialogo de arquivo do Tero"
 
 #: tfrmsettings.chkwritebom.caption
 msgid "Write BOM on save"
-msgstr ""
+msgstr "Escrever BOM ao salvar"
 
 #: tfrmsettings.lbladditionalmpvoptions.caption
 msgid "Additional mpv options"
@@ -4648,7 +4627,7 @@ msgstr "Cor"
 #: tfrmsettings.lblwaveentry.caption
 msgctxt "tfrmsettings.lblwaveentry.caption"
 msgid "Entry"
-msgstr ""
+msgstr "Entrada"
 
 #: tfrmsettings.lblwaveform.caption
 msgctxt "tfrmsettings.lblwaveform.caption"
@@ -4842,43 +4821,37 @@ msgid "Statistics"
 msgstr "Estatísticas"
 
 #: tfrmstreamextractor.btnclose.caption
-#, fuzzy
 msgctxt "tfrmstreamextractor.btnclose.caption"
 msgid "Close"
 msgstr "Fechar"
 
 #: tfrmstreamextractor.btnextract.caption
 msgid "Extract"
-msgstr ""
+msgstr "Extrair"
 
 #: tfrmstreamextractor.btnfile.caption
-#, fuzzy
 msgctxt "tfrmstreamextractor.btnfile.caption"
 msgid "..."
 msgstr "..."
 
 #: tfrmstreamextractor.btnfolder.caption
-#, fuzzy
 msgctxt "tfrmstreamextractor.btnfolder.caption"
 msgid "..."
 msgstr "..."
 
 #: tfrmstreamextractor.caption
 msgid "Stream extractor"
-msgstr ""
+msgstr "Extrator de faixa"
 
 #: tfrmstreamextractor.lblfile.caption
-#, fuzzy
 msgctxt "tfrmstreamextractor.lblfile.caption"
 msgid "File"
 msgstr "Arquivo"
 
 #: tfrmstreamextractor.lblfolder.caption
-#, fuzzy
-#| msgid "Folder"
 msgctxt "tfrmstreamextractor.lblfolder.caption"
 msgid "Output folder"
-msgstr "Pasta"
+msgstr "Pasta de saída"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"
@@ -5336,4 +5309,3 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-
