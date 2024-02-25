@@ -16,6 +16,7 @@
 - fixed: Changed language not reflected in the state of the libraries in the wizard window
 - fixed: Minimum gapping not respected when applying snap times to shot changes
 - updated: Italian language (thx GitGianluc/bovirus)
+- updated: Russian language (thx RoxMarty)
 - improved: Changed the appearance of the timeline
 - improved: Moved dictionary selector to status bar
 - improved: Toolbars and user interface
