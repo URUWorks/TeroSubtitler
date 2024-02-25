@@ -1,4 +1,5 @@
 1.0.1.7 (x.x.2024)
+- fixed: Crash error on Settings exit #271
 - fixed: Access violation #266
 - fixed: CPL breach not flagged in Fix Subtitles #261
 - fixed: Error on saving custom shortcut #260
@@ -26,6 +27,7 @@
 - improved: Video context menu
 - added: Chinese Simplified language (thx Little-data)
 - added: Controlling the length of the Whisper.cpp generated text segments #248
+- added: Stream extractor
 - added: Video information
 - added: Distribute entries evenly
 - added: Pan-and-scan
