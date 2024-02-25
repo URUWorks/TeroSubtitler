@@ -24,9 +24,28 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.MPVEndFile(ASender: TObject; AParam: Integer);
+procedure TfrmMain.MPVEndFile(ASender: TObject; AReason, AError: Integer);
 begin
   MPVOptions.EndTime := 0;
+  SetStatusBarText('');
+
+  if AReason = MPV_END_FILE_REASON_ERROR then
+  begin
+    case AError of
+      // Generic error on loading.
+      //MPV_ERROR_LOADING_FAILED: ShowErrorMessageDialog(lngUnableToLoad);
+      // Initializing the audio output failed.
+      MPV_ERROR_AO_INIT_FAILED: ShowErrorMessageDialog(lngVideoErrorAOInitFailed);
+      // Initializing the video output failed.
+      MPV_ERROR_VO_INIT_FAILED: ShowErrorMessageDialog(lngVideoErrorVOInitFailed);
+      // There was no audio or video data to play.
+      MPV_ERROR_NOTHING_TO_PLAY: ShowErrorMessageDialog(lngVideoErrorNothingToPlay);
+      // The file format could not be determined, or the file was too broken to open it.
+      //MPV_ERROR_UNKNOWN_FORMAT: ShowErrorMessageDialog(lngUnableToLoad);
+    else
+      ShowErrorMessageDialog(lngUnableToLoad);
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
