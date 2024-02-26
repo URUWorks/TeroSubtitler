@@ -95,7 +95,7 @@ end;
 
 procedure TfrmWaveExtractor.btnCloseClick(Sender: TObject);
 begin
-  if btnExtract.Enabled then
+  if cboTrack.Enabled then
     Close
   else
     CancelExtraction := True;
@@ -126,8 +126,8 @@ begin
   begin
     CancelExtraction       := False;
     btnExtract.Enabled     := False;
-    //btnClose.Enabled       := False;
     btnClose.Caption       := lngbtnCancel;
+    cboTrack.Enabled       := False;
     lblWait.Visible        := True;
     lblStatus.Visible      := True;
     lblTimeElapsed.Visible := True;
@@ -168,8 +168,8 @@ begin
       lblStatus.Visible      := False;
       lblTimeElapsed.Visible := False;
       btnExtract.Enabled     := True;
-      //btnClose.Enabled       := True;
       btnClose.Caption       := lngbtnClose;
+      cboTrack.Enabled       := True;
       Close;
     end;
   end
