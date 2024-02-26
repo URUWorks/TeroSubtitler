@@ -84,10 +84,146 @@ implementation
 uses
   procWorkspace, procConfig, procDialogs, procTypes, UWSystem.TimeUtils,
   formMain, UWSystem.Process, procFiles, procForms, StrUtils,
-  UWTranslateAPI.Google, procSubtitle, procVST, UWSubtitleAPI.Formats,
-  UWSystem.SysUtils, UWSystem.ThreadProcess;
+  procSubtitle, procVST, UWSubtitleAPI.Formats, UWSystem.SysUtils,
+  UWSystem.ThreadProcess;
+
+type
+
+  TCultureInfo = record
+    CultureName : AnsiString;
+    DisplayName : String;
+  end;
+
+const
+
+  MaxCultureItems = 101;
+  CultureInfo: array[0..MaxCultureItems-1] of TCultureInfo =
+  (
+    (CultureName: 'auto'; DisplayName: 'Detect'),
+    (CultureName: 'en'; DisplayName: 'English'),
+    (CultureName: 'zh'; DisplayName: 'Chinese'),
+    (CultureName: 'de'; DisplayName: 'German'),
+    (CultureName: 'es'; DisplayName: 'Spanish'),
+    (CultureName: 'ru'; DisplayName: 'Russian'),
+    (CultureName: 'ko'; DisplayName: 'Korean'),
+    (CultureName: 'fr'; DisplayName: 'French'),
+    (CultureName: 'ja'; DisplayName: 'Japanese'),
+    (CultureName: 'pt'; DisplayName: 'Portuguese'),
+    (CultureName: 'tr'; DisplayName: 'Turkish'),
+    (CultureName: 'pl'; DisplayName: 'Polish'),
+    (CultureName: 'ca'; DisplayName: 'Catalan'),
+    (CultureName: 'nl'; DisplayName: 'Dutch'),
+    (CultureName: 'ar'; DisplayName: 'Arabic'),
+    (CultureName: 'sv'; DisplayName: 'Swedish'),
+    (CultureName: 'it'; DisplayName: 'Italian'),
+    (CultureName: 'id'; DisplayName: 'Indonesian'),
+    (CultureName: 'hi'; DisplayName: 'Hindi'),
+    (CultureName: 'fi'; DisplayName: 'Finnish'),
+    (CultureName: 'vi'; DisplayName: 'Vietnamese'),
+    (CultureName: 'he'; DisplayName: 'Hebrew'),
+    (CultureName: 'uk'; DisplayName: 'Ukrainian'),
+    (CultureName: 'el'; DisplayName: 'Greek'),
+    (CultureName: 'ms'; DisplayName: 'Malay'),
+    (CultureName: 'cs'; DisplayName: 'Czech'),
+    (CultureName: 'ro'; DisplayName: 'Romanian'),
+    (CultureName: 'da'; DisplayName: 'Danish'),
+    (CultureName: 'hu'; DisplayName: 'Hungarian'),
+    (CultureName: 'ta'; DisplayName: 'Tamil'),
+    (CultureName: 'no'; DisplayName: 'Norwegian'),
+    (CultureName: 'th'; DisplayName: 'Thai'),
+    (CultureName: 'ur'; DisplayName: 'Urdu'),
+    (CultureName: 'hr'; DisplayName: 'Croatian'),
+    (CultureName: 'bg'; DisplayName: 'Bulgarian'),
+    (CultureName: 'lt'; DisplayName: 'Lithuanian'),
+    (CultureName: 'la'; DisplayName: 'Latin'),
+    (CultureName: 'mi'; DisplayName: 'Maori'),
+    (CultureName: 'ml'; DisplayName: 'Malayalam'),
+    (CultureName: 'cy'; DisplayName: 'Welsh'),
+    (CultureName: 'sk'; DisplayName: 'Slovak'),
+    (CultureName: 'te'; DisplayName: 'Telugu'),
+    (CultureName: 'fa'; DisplayName: 'Persian'),
+    (CultureName: 'lv'; DisplayName: 'Latvian'),
+    (CultureName: 'bn'; DisplayName: 'Bengali'),
+    (CultureName: 'sr'; DisplayName: 'Serbian'),
+    (CultureName: 'az'; DisplayName: 'Azerbaijani'),
+    (CultureName: 'sl'; DisplayName: 'Slovenian'),
+    (CultureName: 'kn'; DisplayName: 'Kannada'),
+    (CultureName: 'et'; DisplayName: 'Estonian'),
+    (CultureName: 'mk'; DisplayName: 'Macedonian'),
+    (CultureName: 'br'; DisplayName: 'Breton'),
+    (CultureName: 'eu'; DisplayName: 'Basque'),
+    (CultureName: 'is'; DisplayName: 'Icelandic'),
+    (CultureName: 'hy'; DisplayName: 'Armenian'),
+    (CultureName: 'ne'; DisplayName: 'Nepali'),
+    (CultureName: 'mn'; DisplayName: 'Mongolian'),
+    (CultureName: 'bs'; DisplayName: 'Bosnian'),
+    (CultureName: 'kk'; DisplayName: 'Kazakh'),
+    (CultureName: 'sq'; DisplayName: 'Albanian'),
+    (CultureName: 'sw'; DisplayName: 'Swahili'),
+    (CultureName: 'gl'; DisplayName: 'Galician'),
+    (CultureName: 'mr'; DisplayName: 'Marathi'),
+    (CultureName: 'pa'; DisplayName: 'Punjabi'),
+    (CultureName: 'si'; DisplayName: 'Sinhala'),
+    (CultureName: 'km'; DisplayName: 'Khmer'),
+    (CultureName: 'sn'; DisplayName: 'Shona'),
+    (CultureName: 'yo'; DisplayName: 'Yoruba'),
+    (CultureName: 'so'; DisplayName: 'Somali'),
+    (CultureName: 'af'; DisplayName: 'Afrikaans'),
+    (CultureName: 'oc'; DisplayName: 'Occitan'),
+    (CultureName: 'ka'; DisplayName: 'Georgian'),
+    (CultureName: 'be'; DisplayName: 'Belarusian'),
+    (CultureName: 'tg'; DisplayName: 'Tajik'),
+    (CultureName: 'sd'; DisplayName: 'Sindhi'),
+    (CultureName: 'gu'; DisplayName: 'Gujarati'),
+    (CultureName: 'am'; DisplayName: 'Amharic'),
+    (CultureName: 'yi'; DisplayName: 'Yiddish'),
+    (CultureName: 'lo'; DisplayName: 'Lao'),
+    (CultureName: 'uz'; DisplayName: 'Uzbek'),
+    (CultureName: 'fo'; DisplayName: 'Faroese'),
+    (CultureName: 'ht'; DisplayName: 'Haitian creole'),
+    (CultureName: 'ps'; DisplayName: 'Pashto'),
+    (CultureName: 'tk'; DisplayName: 'Turkmen'),
+    (CultureName: 'nn'; DisplayName: 'Nynorsk'),
+    (CultureName: 'mt'; DisplayName: 'Maltese'),
+    (CultureName: 'sa'; DisplayName: 'Sanskrit'),
+    (CultureName: 'lb'; DisplayName: 'Luxembourgish'),
+    (CultureName: 'my'; DisplayName: 'Myanmar'),
+    (CultureName: 'bo'; DisplayName: 'Tibetan'),
+    (CultureName: 'tl'; DisplayName: 'Tagalog'),
+    (CultureName: 'mg'; DisplayName: 'Malagasy'),
+    (CultureName: 'as'; DisplayName: 'Assamese'),
+    (CultureName: 'tt'; DisplayName: 'Tatar'),
+    (CultureName: 'haw'; DisplayName: 'Hawaiian'),
+    (CultureName: 'ln'; DisplayName: 'Lingala'),
+    (CultureName: 'ha'; DisplayName: 'Hausa'),
+    (CultureName: 'ba'; DisplayName: 'Bashkir'),
+    (CultureName: 'jw'; DisplayName: 'Javanese'),
+    (CultureName: 'su'; DisplayName: 'Sundanese'),
+    (CultureName: 'yue'; DisplayName: 'Cantonese')
+  );
 
 {$R *.lfm}
+
+// -----------------------------------------------------------------------------
+
+{ Helpers }
+
+// -----------------------------------------------------------------------------
+
+procedure FillComboWithWhisperLanguages(const Combo: TCombobox; const Index: Integer = 0);
+var
+  i: Integer;
+begin
+  with Combo do
+  begin
+    Items.BeginUpdate;
+    Clear;
+    for i := 0 to Length(CultureInfo)-1 do
+      Items.Add(CultureInfo[i].DisplayName);
+    ItemIndex := Index;
+    Items.EndUpdate;
+  end;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -98,7 +234,7 @@ uses
 procedure TfrmAudioToText.FormCreate(Sender: TObject);
 begin
   FillComboWithWhisperEngines(cboEngine, Integer(Tools.WhisperEngine));
-  FillComboWithGoogleLanguages(cboLanguage, 0);
+  FillComboWithWhisperLanguages(cboLanguage, 0);
   FillComboWithAudioStreams(cboTrack);
   cboLanguage.Items[0] := lngDetect;
   btnGenerate.Enabled := (cboTrack.Items.Count > 0);
@@ -354,7 +490,7 @@ begin
         begin
           // do transcribe, main -m models/ggml-base.en.bin -l en -osrt -of outputfile.srt -f samples/jfk.wav
           ss := GetAudioToTextParams;
-          cn := GoogleTranslateLocale[cboLanguage.ItemIndex];
+          cn := CultureInfo[cboLanguage.ItemIndex].CultureName;
 
           if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
           begin
