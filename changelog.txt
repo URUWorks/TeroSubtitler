@@ -1,4 +1,6 @@
 1.0.1.7 (x.x.2024)
+- fixed: Extract waveform window #275
+- fixed: Audio to text non auto-choose error #274
 - fixed: Crash error on Settings exit #271
 - fixed: Access violation #266
 - fixed: CPL breach not flagged in Fix Subtitles #261
