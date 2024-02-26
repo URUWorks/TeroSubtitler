@@ -132,8 +132,16 @@ begin
 
   with frmMain.WAVE do
     if Length(GetSceneChangeList) > 0 then
-      for i := 0 to High(GetSceneChangeList) do
-        mmoTimes.Lines.Add(GetSceneChangeList[i].ToString);
+    begin
+      mmoTimes.Lines.BeginUpdate;
+      try
+        for i := 0 to High(GetSceneChangeList) do
+          mmoTimes.Lines.Add(GetSceneChangeList[i].ToString);
+      finally
+        mmoTimes.Lines.EndUpdate;
+        mmoTimesChange(NIL);
+      end;
+    end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -171,7 +179,7 @@ end;
 
 procedure TfrmShotChanges.mmoTimesChange(Sender: TObject);
 begin
-  btnExport.Enabled := btnDetect.Enabled and (mmoTimes.Lines.Count > 0);
+  btnExport.Enabled := (mmoTimes.Lines.Count > 0);
 end;
 
 // -----------------------------------------------------------------------------
@@ -390,7 +398,6 @@ begin
   lblIdle.Visible := not AValue;
   mmoTimes.Enabled := AValue;
   btnImport.Enabled := AValue;
-  btnExport.Enabled := AValue;
   btnDetect.Enabled := AValue;
   cboDetectApp.Enabled := AValue;
   cboTimeCodeImport.Enabled := AValue;
@@ -404,11 +411,13 @@ begin
   begin
     btnClose.Caption := lngbtnClose;
     btnClose.Tag := 0;
+    mmoTimesChange(NIL);
   end
   else
   begin
     btnClose.Caption := lngbtnCancel;
     btnClose.Tag := 1;
+    btnExport.Enabled := False;
   end;
 end;
 
@@ -445,7 +454,7 @@ begin
     begin
       AParamArray := FFMPEG_SCParams.Split(' ');
       for i := 0 to High(AParamArray) do
-        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%value'], [frmMain.MPV.FileName, FloatToStr(spnSensitivity.Value, FormatSettings)], []);
+        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%value'], [frmMain.MPV.FileName, StringReplace(FloatToStr(spnSensitivity.Value, FormatSettings), FormatSettings.DecimalSeparator, '.', [])], []);
 
       if not FileExists(GetExtractAppFile) then
       begin
@@ -457,6 +466,7 @@ begin
 
         if ExecuteAppLoop(GetExtractAppFile, AParamArray, sl, @RunApp_CB) and (sl.Count > 0) then
         try
+          //writeln(sl.Text);
           mmoTimes.Lines.BeginUpdate;
           mmoTimes.Clear;
           for i := 0 to sl.Count-1 do
@@ -464,7 +474,7 @@ begin
             x := Pos(sc_timeid, sl[i]);
             if x > 0 then
             begin
-              sc := Round(StrToSingle(Copy(sl[i], x+sc_timeid.Length, Pos(' ', sl[i], x+1)-x-sc_timeid.Length).Replace(',', '.'), 0, FormatSettings)*1000);
+              sc := Round(StrToSingle(Copy(sl[i], x+sc_timeid.Length, Pos(' ', sl[i], x+1)-x-sc_timeid.Length).Replace('.', FormatSettings.DecimalSeparator), 0, FormatSettings)*1000);
               if sc > 0 then
                 mmoTimes.Lines.Add(IntToStr(sc));
             end;
