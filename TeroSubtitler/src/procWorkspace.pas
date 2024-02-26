@@ -543,7 +543,7 @@ begin
         if frmMain.MPV.TrackList[i].Lang <> '' then s := s + frmMain.MPV.TrackList[i].Lang + ', ';
         if frmMain.MPV.TrackList[i].Decoder <> '' then s := s + frmMain.MPV.TrackList[i].Decoder;
         //if frmMain.MPV.TrackList[i].Codec <> '' then s := s + ' [' + frmMain.MPV.TrackList[i].Codec + ']';
-        //if frmMain.MPV.TrackList[i].Channels <> '' then s := s + ' [' + frmMain.MPV.TrackList[i].Channels + ']';
+        if frmMain.MPV.TrackList[i].Channels <> '' then s := s + ' [' + frmMain.MPV.TrackList[i].Channels + ']';
 
         Item.Caption := s;
         Item.Tag := frmMain.MPV.TrackList[i].ID;
@@ -582,6 +582,7 @@ begin
           if frmMain.MPV.TrackList[i].Title <> '' then s := s + frmMain.MPV.TrackList[i].Title + ', ';
           if frmMain.MPV.TrackList[i].Lang <> '' then s := s + frmMain.MPV.TrackList[i].Lang + ', ';
           if frmMain.MPV.TrackList[i].Decoder <> '' then s := s + frmMain.MPV.TrackList[i].Decoder;
+          if frmMain.MPV.TrackList[i].Channels <> '' then s := s + ' [' + frmMain.MPV.TrackList[i].Channels + ']';
           Items.Add(s);
         end;
       end;
