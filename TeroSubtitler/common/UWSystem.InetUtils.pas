@@ -423,9 +423,17 @@ var
   DS: TDownloadStream;
   Flags: Word;
   Success: Boolean;
+  Dir: String;
 begin
   FStartTime := GetTickCount64;
-  if GetContentLength then
+
+  Dir := ExtractFileDir(FLocalFile);
+  if not DirectoryExists(Dir) and not CreateDir(Dir) then
+  begin
+    FErrMsg := '-1';
+    Synchronize(@DoOnDownloadError);
+  end
+  else if GetContentLength then
   begin
     Flags := fmOpenWrite;
     Success := False;
