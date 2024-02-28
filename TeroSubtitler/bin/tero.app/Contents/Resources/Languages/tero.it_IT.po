@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 20.02.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 28.02.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -871,10 +871,9 @@ msgstr "XML"
 
 #: proclocalize.lngseanalyzingfile
 msgid "Analyzing file..."
-msgstr ""
+msgstr "Analisi file..."
 
 #: proclocalize.lngsecodec
-#, fuzzy
 msgctxt "proclocalize.lngsecodec"
 msgid "Codec"
 msgstr "Codifica"
@@ -885,14 +884,13 @@ msgstr "Vuoi visualizzare l'elenco novità?"
 
 #: proclocalize.lngseid
 msgid "Id"
-msgstr ""
+msgstr "ID"
 
 #: proclocalize.lngsekind
 msgid "Kind"
-msgstr ""
+msgstr "Tipo"
 
 #: proclocalize.lngselanguage
-#, fuzzy
 msgctxt "proclocalize.lngselanguage"
 msgid "Language"
 msgstr "Lingua"
@@ -915,7 +913,7 @@ msgstr "Seleziona la traccia da usare:"
 
 #: proclocalize.lngseoutput
 msgid "Output"
-msgstr ""
+msgstr "Output"
 
 #: proclocalize.lngshifttimeless
 #, object-pascal-format
@@ -1236,15 +1234,15 @@ msgstr "Tracce audio: %d"
 
 #: proclocalize.lngvideoerroraoinitfailed
 msgid "Initializing the audio output failed."
-msgstr ""
+msgstr "Inizializzazione uscita audio non riuscita."
 
 #: proclocalize.lngvideoerrornothingtoplay
 msgid "There was no audio or video stream to play."
-msgstr ""
+msgstr "Non c'era alcun flusso audio o video da riprodurre."
 
 #: proclocalize.lngvideoerrorvoinitfailed
 msgid "Initializing the video output failed."
-msgstr ""
+msgstr "Inizializzazione uscita video non riuscita."
 
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
@@ -3140,7 +3138,7 @@ msgstr "Riproduci selezione"
 
 #: tfrmmain.actmediaplayselection.hint
 msgid "Click on the arrow to select playback repetitions"
-msgstr ""
+msgstr "Fai clic sulla freccia per selezionare le ripetizioni di riproduzione"
 
 #: tfrmmain.actmediapreviousframe.caption
 msgctxt "tfrmmain.actmediapreviousframe.caption"
@@ -3633,7 +3631,7 @@ msgstr "Statistiche..."
 
 #: tfrmmain.actstreamextractor.caption
 msgid "Stream extractor..."
-msgstr ""
+msgstr "Estrattore flusso..."
 
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
@@ -4815,43 +4813,37 @@ msgid "Statistics"
 msgstr "Statistiche"
 
 #: tfrmstreamextractor.btnclose.caption
-#, fuzzy
 msgctxt "tfrmstreamextractor.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmstreamextractor.btnextract.caption
 msgid "Extract"
-msgstr ""
+msgstr "Estrai"
 
 #: tfrmstreamextractor.btnfile.caption
-#, fuzzy
 msgctxt "tfrmstreamextractor.btnfile.caption"
 msgid "..."
 msgstr "..."
 
 #: tfrmstreamextractor.btnfolder.caption
-#, fuzzy
 msgctxt "tfrmstreamextractor.btnfolder.caption"
 msgid "..."
 msgstr "..."
 
 #: tfrmstreamextractor.caption
 msgid "Stream extractor"
-msgstr ""
+msgstr "Estrattore flusso"
 
 #: tfrmstreamextractor.lblfile.caption
-#, fuzzy
 msgctxt "tfrmstreamextractor.lblfile.caption"
 msgid "File"
 msgstr "File"
 
 #: tfrmstreamextractor.lblfolder.caption
-#, fuzzy
-#| msgid "Folder"
 msgctxt "tfrmstreamextractor.lblfolder.caption"
 msgid "Output folder"
-msgstr "Cartella"
+msgstr "Cartella destinazione"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"
@@ -5311,4 +5303,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
