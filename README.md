@@ -1,6 +1,7 @@
 # ![TeroSubtitler](share/terosubtitler_logo.png)
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
-![TS downloads](https://img.shields.io/github/downloads/URUWorks/TeroSubtitler/total.svg)
+[![TS release](https://img.shields.io/github/v/release/URUWorks/TeroSubtitler?style=badge&sort=semver)](https://github.com/URUWorks/TeroSubtitler/releases)
+[![TS downloads](https://img.shields.io/github/downloads/URUWorks/TeroSubtitler/total.svg)](https://github.com/URUWorks/TeroSubtitler/releases)
 [![discord](https://img.shields.io/badge/Discord-blue)](https://discord.gg/EqzXEa8pHK)
 [![ko-fi](https://img.shields.io/badge/Ko--fi-F16061?logo=ko-fi&logoColor=white)](https://ko-fi.com/uruworks)
 
