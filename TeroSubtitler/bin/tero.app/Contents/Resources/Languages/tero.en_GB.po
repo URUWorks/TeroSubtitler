@@ -3426,6 +3426,10 @@ msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
 
+#: tfrmmain.actsetpauses.caption
+msgid "Set pauses..."
+msgstr "Set pauses..."
+
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
 msgid "Settings..."
@@ -4207,6 +4211,64 @@ msgstr "Find:"
 msgctxt "tfrmmultiplereplace.lblreplace.caption"
 msgid "Replace with:"
 msgstr "Replace with:"
+
+#: tfrmpauses.btnapply.caption
+msgctxt "tfrmpauses.btnapply.caption"
+msgid "Apply"
+msgstr "Apply"
+
+#: tfrmpauses.btnclose.caption
+msgctxt "tfrmpauses.btnclose.caption"
+msgid "Close"
+msgstr "Close"
+
+#: tfrmpauses.caption
+msgid "Set pauses"
+msgstr "Set pauses"
+
+#: tfrmpauses.lblduration.caption
+msgid "Shorten duration of:"
+msgstr "Shorten duration of:"
+
+#: tfrmpauses.lblgap.caption
+msgid "Gap value:"
+msgstr "Gap value:"
+
+#: tfrmpauses.lblscope.caption
+msgctxt "tfrmpauses.lblscope.caption"
+msgid "Scope:"
+msgstr "Scope:"
+
+#: tfrmpauses.rbnallthesubtitles.caption
+msgctxt "tfrmpauses.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "All entries"
+
+#: tfrmpauses.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmpauses.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "From the selected entry"
+
+#: tfrmpauses.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Only selected entries"
+
+#: tfrmpauses.rdobothentries.caption
+msgid "Both entries equally"
+msgstr "Both entries equally"
+
+#: tfrmpauses.rdoentrywithlesscps.caption
+msgid "Entry with less CPS"
+msgstr "Entry with less CPS"
+
+#: tfrmpauses.rdofirstentry.caption
+msgid "First entry only"
+msgstr "First entry only"
+
+#: tfrmpauses.rdosecondentry.caption
+msgid "Second entry only"
+msgstr "Second entry only"
 
 #: tfrmqualitycheck.btnclose.caption
 msgctxt "tfrmqualitycheck.btnclose.caption"

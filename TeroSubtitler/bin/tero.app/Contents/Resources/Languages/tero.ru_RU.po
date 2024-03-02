@@ -203,8 +203,6 @@ msgid "File name"
 msgstr "Имя файла"
 
 #: proclocalize.lngbcfilestate
-#, fuzzy
-#| msgid "State"
 msgid "Status"
 msgstr "Состояние"
 
@@ -290,10 +288,9 @@ msgid "Error executing “%s”."
 msgstr "Ошибка исполнения команды “%s"
 
 #: proclocalize.lngextractapperror
-#, fuzzy, object-pascal-format
-#| msgid "Unable to find “%s”."
+#, object-pascal-format
 msgid "Unable to find “%s”. Check in settings if it is configured correctly."
-msgstr "Не удаётся найти “%s”."
+msgstr "Не удаётся найти “%s”. Проверьте настройки."
 
 #: proclocalize.lngextracting
 msgid "Extracting..."
@@ -872,7 +869,6 @@ msgid "Analyzing file..."
 msgstr "Анализ файла..."
 
 #: proclocalize.lngsecodec
-#, fuzzy
 msgctxt "proclocalize.lngsecodec"
 msgid "Codec"
 msgstr "Кодек"
@@ -890,7 +886,6 @@ msgid "Kind"
 msgstr ""
 
 #: proclocalize.lngselanguage
-#, fuzzy
 msgctxt "proclocalize.lngselanguage"
 msgid "Language"
 msgstr "Язык"
@@ -1048,12 +1043,12 @@ msgstr "Наибольшая продолжительность: %s (#%d)"
 #: proclocalize.lngstlongestgap
 #, object-pascal-format
 msgid "Longest gap: %s (#%d)"
-msgstr "Самый длинный промежуток: %s (#%d)"
+msgstr "Наибольший промежуток: %s (#%d)"
 
 #: proclocalize.lngstlongestline
 #, object-pascal-format
 msgid "Longest line: %d (#%d)"
-msgstr "Самая длинная строка: %d (#%d)"
+msgstr "Наибольшая строка: %d (#%d)"
 
 #: proclocalize.lngstlongestwordsperminute
 #, object-pascal-format
@@ -1063,17 +1058,17 @@ msgstr "Наибольшее количество слов в минуту: %.2f
 #: proclocalize.lngstnumberofcharacters
 #, object-pascal-format
 msgid "Number of characters: %d"
-msgstr "Число символов: %d"
+msgstr "Всего символов: %d"
 
 #: proclocalize.lngstnumberofentries
 #, object-pascal-format
 msgid "Number of entries: %d"
-msgstr "Число субтитров: %d"
+msgstr "Всего субтитров: %d"
 
 #: proclocalize.lngstnumberofwords
 #, object-pascal-format
 msgid "Number of words: %d"
-msgstr "Число слов: %d"
+msgstr "Всего слов: %d"
 
 #: proclocalize.lngstshortestcharacterspersecond
 #, object-pascal-format
@@ -1083,7 +1078,7 @@ msgstr "Самые короткие символы в секунду: %.2f (#%d)
 #: proclocalize.lngstshortestduration
 #, object-pascal-format
 msgid "Shortest duration: %s (#%d)"
-msgstr "Наименьшая длительность: %s (#%d)"
+msgstr "Наименьшая продолжительность: %s (#%d)"
 
 #: proclocalize.lngstshortestgap
 #, object-pascal-format
@@ -1978,13 +1973,11 @@ msgid "Only selected entries"
 msgstr "Только выделенным субтитрам"
 
 #: tfrmdownload.btncancel.caption
-#, fuzzy
 msgctxt "tfrmdownload.btncancel.caption"
 msgid "Cancel"
 msgstr "Отменить"
 
 #: tfrmdownload.caption
-#, fuzzy
 msgctxt "tfrmdownload.caption"
 msgid "Downloading"
 msgstr "Скачивание"
@@ -2364,7 +2357,6 @@ msgid "MPEG-2 time:"
 msgstr "Время MPEG-2:"
 
 #: tfrmgenerateblankvideo.btnclose.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.btnclose.caption"
 msgid "Close"
 msgstr "Закрыть"
@@ -2388,7 +2380,6 @@ msgid "Generate blank video"
 msgstr "Создать пустое видео"
 
 #: tfrmgenerateblankvideo.chkgeneratetc.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.chkgeneratetc.caption"
 msgid "Time code"
 msgstr "Таймкод"
@@ -2398,13 +2389,11 @@ msgid "1 kHz test tone"
 msgstr "Тестовый тон 1 kHz"
 
 #: tfrmgenerateblankvideo.lblbackground.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.lblbackground.caption"
 msgid "Background"
 msgstr "Задний фон"
 
 #: tfrmgenerateblankvideo.lblduration.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.lblduration.caption"
 msgid "Duration"
 msgstr "Продолжительность"
@@ -2415,7 +2404,6 @@ msgid "FPS"
 msgstr ""
 
 #: tfrmgenerateblankvideo.lblvideores.caption
-#, fuzzy
 msgctxt "tfrmgenerateblankvideo.lblvideores.caption"
 msgid "Video resolution"
 msgstr "Разрешение видео"
@@ -3423,25 +3411,23 @@ msgid "Set delay..."
 msgstr "Настроить задержку..."
 
 #: tfrmmain.actsetguilayout0.caption
-#, fuzzy
-#| msgid "Layout 0"
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Classic"
-msgstr "Макет 0"
+msgstr "Классический"
 
 #: tfrmmain.actsetguilayout1.caption
-#, fuzzy
-#| msgid "Layout 1"
 msgctxt "tfrmmain.actsetguilayout1.caption"
 msgid "Inverted"
-msgstr "Макет 1"
+msgstr "Инвертированный"
 
 #: tfrmmain.actsetguilayout2.caption
-#, fuzzy
-#| msgid "Layout 2"
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
-msgstr "Макет 2"
+msgstr "Вертикальный"
+
+#: tfrmmain.actsetpauses.caption
+msgid "Set pauses..."
+msgstr ""
 
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
@@ -3507,7 +3493,6 @@ msgid "Words per minute"
 msgstr "Слов в минуту"
 
 #: tfrmmain.actshoweditortoolbaralignment.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbaralignment.caption"
 msgid "Alignment"
 msgstr "Выравнивание"
@@ -3517,24 +3502,22 @@ msgid "Basic"
 msgstr ""
 
 #: tfrmmain.actshoweditortoolbarentry.caption
+#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarentry.caption"
 msgid "Entry"
-msgstr ""
+msgstr "Субтитры"
 
 #: tfrmmain.actshoweditortoolbarformat.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarformat.caption"
 msgid "Format"
 msgstr "Формат"
 
 #: tfrmmain.actshoweditortoolbarlines.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarlines.caption"
 msgid "Lines"
 msgstr "Строки"
 
 #: tfrmmain.actshoweditortoolbarwords.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarwords.caption"
 msgid "Words"
 msgstr "Слова"
@@ -3549,12 +3532,12 @@ msgid "Encoding"
 msgstr "Кодировка"
 
 #: tfrmmain.actshowtoolbarentry.caption
+#, fuzzy
 msgctxt "tfrmmain.actshowtoolbarentry.caption"
 msgid "Entry"
-msgstr ""
+msgstr "Субтитры"
 
 #: tfrmmain.actshowtoolbarfile.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowtoolbarfile.caption"
 msgid "File"
 msgstr "Файл"
@@ -3570,7 +3553,6 @@ msgid "FPS"
 msgstr ""
 
 #: tfrmmain.actshowtoolbargeneral.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowtoolbargeneral.caption"
 msgid "General"
 msgstr "Основные"
@@ -3580,7 +3562,6 @@ msgid "Quick Action"
 msgstr "Быстрые действия"
 
 #: tfrmmain.actshowtoolbarview.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowtoolbarview.caption"
 msgid "View"
 msgstr "Вид"
@@ -3591,9 +3572,10 @@ msgid "Controls"
 msgstr ""
 
 #: tfrmmain.actshowvideotoolbarentry.caption
+#, fuzzy
 msgctxt "tfrmmain.actshowvideotoolbarentry.caption"
 msgid "Entry"
-msgstr ""
+msgstr "Субтитры"
 
 #: tfrmmain.actshowvideotoolbarother.caption
 msgctxt "tfrmmain.actshowvideotoolbarother.caption"
@@ -3606,11 +3588,9 @@ msgid "Controls"
 msgstr ""
 
 #: tfrmmain.actshowwaveformtoolbarentry.caption
-#, fuzzy
-#| msgid "Edit"
 msgctxt "tfrmmain.actshowwaveformtoolbarentry.caption"
 msgid "Entry"
-msgstr "Редактировать"
+msgstr "Субтитры"
 
 #: tfrmmain.actshowwaveformtoolbarother.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
@@ -3618,7 +3598,6 @@ msgid "Other"
 msgstr ""
 
 #: tfrmmain.actshowwaveformtoolbarshotchanges.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowwaveformtoolbarshotchanges.caption"
 msgid "Shot changes"
 msgstr "Смена кадра"
@@ -3866,7 +3845,6 @@ msgid "Blur"
 msgstr "Размытие"
 
 #: tfrmmain.actvideofilterdeinterlace.caption
-#, fuzzy
 msgctxt "tfrmmain.actvideofilterdeinterlace.caption"
 msgid "Deinterlace"
 msgstr "Деинтерлейс"
@@ -4078,8 +4056,6 @@ msgid "Video"
 msgstr "Видео"
 
 #: tfrmmain.mnuvideoaspectratio.caption
-#, fuzzy
-#| msgid "Aspect Ratio"
 msgid "Aspect ratio"
 msgstr "Соотношение сторон"
 
@@ -4120,13 +4096,11 @@ msgid "Columns"
 msgstr "Колонки"
 
 #: tfrmmain.mnuviewtoolbareditor.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbareditor.caption"
 msgid "Editor"
 msgstr "Редактор"
 
 #: tfrmmain.mnuviewtoolbarmain.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbarmain.caption"
 msgid "Main"
 msgstr "Основная панель"
@@ -4136,13 +4110,11 @@ msgid "Toolbars"
 msgstr "Панель инструментов"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
 msgid "Video"
 msgstr "Видео"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuviewtoolbarwaveform.caption"
 msgid "Waveform"
 msgstr "Аудиоволна"
@@ -4152,7 +4124,6 @@ msgid "Windows"
 msgstr "Окна"
 
 #: tfrmmain.mnuvstvideo.caption
-#, fuzzy
 msgctxt "tfrmmain.mnuvstvideo.caption"
 msgid "Video"
 msgstr "Видео"
@@ -4242,6 +4213,70 @@ msgstr "Найти:"
 msgctxt "tfrmmultiplereplace.lblreplace.caption"
 msgid "Replace with:"
 msgstr "Заменить:"
+
+#: tfrmpauses.btnapply.caption
+#, fuzzy
+msgctxt "tfrmpauses.btnapply.caption"
+msgid "Apply"
+msgstr "Применить"
+
+#: tfrmpauses.btnclose.caption
+#, fuzzy
+msgctxt "tfrmpauses.btnclose.caption"
+msgid "Close"
+msgstr "Закрыть"
+
+#: tfrmpauses.caption
+msgid "Set pauses"
+msgstr ""
+
+#: tfrmpauses.lblduration.caption
+msgid "Shorten duration of:"
+msgstr ""
+
+#: tfrmpauses.lblgap.caption
+msgid "Gap value:"
+msgstr ""
+
+#: tfrmpauses.lblscope.caption
+#, fuzzy
+msgctxt "tfrmpauses.lblscope.caption"
+msgid "Scope:"
+msgstr "Применить ко:"
+
+#: tfrmpauses.rbnallthesubtitles.caption
+#, fuzzy
+msgctxt "tfrmpauses.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Всем субтитрам"
+
+#: tfrmpauses.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+msgctxt "tfrmpauses.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "От текущего субтитра"
+
+#: tfrmpauses.rbnonlyselectedsubtitles.caption
+#, fuzzy
+msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Только выделенным субтитрам"
+
+#: tfrmpauses.rdobothentries.caption
+msgid "Both entries equally"
+msgstr ""
+
+#: tfrmpauses.rdoentrywithlesscps.caption
+msgid "Entry with less CPS"
+msgstr ""
+
+#: tfrmpauses.rdofirstentry.caption
+msgid "First entry only"
+msgstr ""
+
+#: tfrmpauses.rdosecondentry.caption
+msgid "Second entry only"
+msgstr ""
 
 #: tfrmqualitycheck.btnclose.caption
 msgctxt "tfrmqualitycheck.btnclose.caption"
@@ -4645,9 +4680,10 @@ msgid "Color"
 msgstr "Цвет"
 
 #: tfrmsettings.lblwaveentry.caption
+#, fuzzy
 msgctxt "tfrmsettings.lblwaveentry.caption"
 msgid "Entry"
-msgstr ""
+msgstr "Субтитры"
 
 #: tfrmsettings.lblwaveform.caption
 msgctxt "tfrmsettings.lblwaveform.caption"
@@ -4827,13 +4863,11 @@ msgid "Suggestions"
 msgstr "Варианты"
 
 #: tfrmstatistics.btnclose.caption
-#, fuzzy
 msgctxt "tfrmstatistics.btnclose.caption"
 msgid "Close"
 msgstr "Закрыть"
 
 #: tfrmstatistics.btnexport.caption
-#, fuzzy
 msgctxt "tfrmstatistics.btnexport.caption"
 msgid "Export..."
 msgstr "Экспорт..."
@@ -4843,7 +4877,6 @@ msgid "Statistics"
 msgstr "Статистика"
 
 #: tfrmstreamextractor.btnclose.caption
-#, fuzzy
 msgctxt "tfrmstreamextractor.btnclose.caption"
 msgid "Close"
 msgstr "Закрыть"
@@ -4867,14 +4900,11 @@ msgid "Stream extractor"
 msgstr "Извлечь поток"
 
 #: tfrmstreamextractor.lblfile.caption
-#, fuzzy
 msgctxt "tfrmstreamextractor.lblfile.caption"
 msgid "File"
 msgstr "Файл"
 
 #: tfrmstreamextractor.lblfolder.caption
-#, fuzzy
-#| msgid "Folder"
 msgctxt "tfrmstreamextractor.lblfolder.caption"
 msgid "Output folder"
 msgstr "Папка"
@@ -5203,14 +5233,10 @@ msgid "Exit"
 msgstr "Выход"
 
 #: tfrmwelcome.lblnewsubtitle.caption
-#, fuzzy
-#| msgid "New empty subtitle"
 msgid "New subtitle project"
-msgstr "Новый пустой субтитр"
+msgstr "Новый проект субтитров"
 
 #: tfrmwelcome.lblnewtranscription.caption
-#, fuzzy
-#| msgid "New transcription"
 msgid "New manual transcription"
 msgstr "Новый транскрипт"
 
@@ -5329,22 +5355,17 @@ msgid "Optional, used for dowloading from YouTube."
 msgstr "Для скачивания с YouTube (необязательное)"
 
 #: tfrmwizard.rdolayout0.caption
-#, fuzzy
-#| msgid "Layout 0"
 msgctxt "tfrmwizard.rdolayout0.caption"
 msgid "Classic"
-msgstr "Макет 0"
+msgstr "Классический"
 
 #: tfrmwizard.rdolayout1.caption
-#, fuzzy
-#| msgid "Layout 1"
 msgctxt "tfrmwizard.rdolayout1.caption"
 msgid "Inverted"
-msgstr "Макет 1"
+msgstr "Инвертированный"
 
 #: tfrmwizard.rdolayout2.caption
-#, fuzzy
-#| msgid "Layout 2"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
-msgstr "Макет 2"
+msgstr "Вертикальный"
+
