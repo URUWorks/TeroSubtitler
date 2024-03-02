@@ -1,3 +1,7 @@
+1.0.1.8 (x.x.2024)
+- updated: Russian language (thx RoxMarty)
+- added: Set pauses #276
+
 1.0.1.7 (1.3.2024)
 - fixed: Extract waveform window #275
 - fixed: Audio to text non auto-choose error #274
