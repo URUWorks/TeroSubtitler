@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 28.02.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 02.03.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -3435,7 +3435,7 @@ msgstr "Verticale"
 
 #: tfrmmain.actsetpauses.caption
 msgid "Set pauses..."
-msgstr ""
+msgstr "Imposta pause..."
 
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
@@ -4220,68 +4220,62 @@ msgid "Replace with:"
 msgstr "Sostituisci con:"
 
 #: tfrmpauses.btnapply.caption
-#, fuzzy
 msgctxt "tfrmpauses.btnapply.caption"
 msgid "Apply"
 msgstr "Applica"
 
 #: tfrmpauses.btnclose.caption
-#, fuzzy
 msgctxt "tfrmpauses.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmpauses.caption
 msgid "Set pauses"
-msgstr ""
+msgstr "Imposta pause"
 
 #: tfrmpauses.lblduration.caption
 msgid "Shorten duration of:"
-msgstr ""
+msgstr "Riduci la durata di:"
 
 #: tfrmpauses.lblgap.caption
 msgid "Gap value:"
-msgstr ""
+msgstr "Valore gap:"
 
 #: tfrmpauses.lblscope.caption
-#, fuzzy
 msgctxt "tfrmpauses.lblscope.caption"
 msgid "Scope:"
-msgstr "Destinazione:"
+msgstr "Scopo:"
 
 #: tfrmpauses.rbnallthesubtitles.caption
-#, fuzzy
 msgctxt "tfrmpauses.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Tutti gli elementi"
 
 #: tfrmpauses.rbnfromtheselectedsubtitle.caption
-#, fuzzy
 msgctxt "tfrmpauses.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmpauses.rbnonlyselectedsubtitles.caption
-#, fuzzy
 msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmpauses.rdobothentries.caption
 msgid "Both entries equally"
-msgstr ""
+msgstr "Entrambe gli elementi allo stesso modo"
 
 #: tfrmpauses.rdoentrywithlesscps.caption
 msgid "Entry with less CPS"
-msgstr ""
+msgstr "Elemento con meno CPS"
 
 #: tfrmpauses.rdofirstentry.caption
 msgid "First entry only"
-msgstr ""
+msgstr "Solo primo elemento"
 
 #: tfrmpauses.rdosecondentry.caption
 msgid "Second entry only"
-msgstr ""
+msgstr "Solo secondo elemento"
 
 #: tfrmqualitycheck.btnclose.caption
 msgctxt "tfrmqualitycheck.btnclose.caption"
@@ -5371,4 +5365,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
