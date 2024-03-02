@@ -90,6 +90,7 @@ type
     actGoToCurrentEntryInitialTime: TAction;
     actGoToCurrentEntryFinalTime: TAction;
     actDistributeEntriesEvenly: TAction;
+    actSetPauses: TAction;
     actStreamExtractor: TAction;
     actShowToolbarGeneral: TAction;
     actShowToolbarEntry: TAction;
@@ -397,6 +398,7 @@ type
     MenuItem282: TMenuItem;
     MenuItem283: TMenuItem;
     MenuItem284: TMenuItem;
+    MenuItem285: TMenuItem;
     mnuViewToolbarVideo: TMenuItem;
     mnuViewToolbarWaveform: TMenuItem;
     mnuViewToolbarEditor: TMenuItem;
@@ -1131,6 +1133,7 @@ type
     procedure actExtendLengthToPreviousExecute(Sender: TObject);
     procedure actSetAutomaticDurationExecute(Sender: TObject);
     procedure actSetDefaultGapExecute(Sender: TObject);
+    procedure actSetPausesExecute(Sender: TObject);
     procedure actSwapTextsExecute(Sender: TObject);
     procedure actShowColumnNumberExecute(Sender: TObject);
     procedure actShowColumnTimesExecute(Sender: TObject);

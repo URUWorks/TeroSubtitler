@@ -1156,6 +1156,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actSetPausesExecute(Sender: TObject);
+begin
+  ShowSetPauses;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actSwapTextsExecute(Sender: TObject);
 begin
   VSTDoLoop(VST, @ApplySwapTexts, dlSelected, True, True);

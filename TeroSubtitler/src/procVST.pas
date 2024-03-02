@@ -69,6 +69,7 @@ procedure VSTDeleteLineFromEntry(const AVST: TLazVirtualStringTree; const ALines
 procedure VSTTextEffect(const AVST: TLazVirtualStringTree; const AEffect: TTextEffect; const AParam1, AParam2: Integer);
 
 procedure VSTDistributeEntriesEvenly(const AVST: TLazVirtualStringTree);
+procedure VSTSetPauses(const AVST: TLazVirtualStringTree; const Pause: Integer; const Mode: TVSTSetPausesMode; const Selection: TVSTDoLoopSelection = dlSelected; const AFrom: Integer = 0; const ATo: Integer = 1);
 
 // -----------------------------------------------------------------------------
 
@@ -1269,6 +1270,85 @@ begin
     UpdateValues(True);
     DoAutoCheckErrors;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure VSTSetPauses(const AVST: TLazVirtualStringTree; const Pause: Integer; const Mode: TVSTSetPausesMode; const Selection: TVSTDoLoopSelection = dlSelected; const AFrom: Integer = 0; const ATo: Integer = 1);
+
+  procedure SetPauseValue(const AIndex: Integer);
+  var
+    IT2, FT1 : Integer;
+  begin
+    FT1 := Subtitles[AIndex].FinalTime;
+    IT2 := Subtitles[AIndex+1].InitialTime;
+
+    if (IT2 - FT1) < Pause then
+      case Mode of
+        spmFirst  : SetSubtitleTime(AIndex, IT2-Pause, TAG_CONTROL_FINALTIME, False, False);
+        spmSecond : SetSubtitleTime(AIndex+1, FT1+Pause, TAG_CONTROL_INITIALTIME, False, False);
+        spmBoth   : begin
+                      SetSubtitleTime(AIndex, FT1-((IT2-FT1) div 2), TAG_CONTROL_FINALTIME, False, False);
+                      SetSubtitleTime(AIndex+1, Subtitles[AIndex].FinalTime + Pause, TAG_CONTROL_INITIALTIME, False, False);
+                    end;
+        spmCPS    : if Subtitles.TextCPS[AIndex+1, AppOptions.Conventions.CPSLineLenStrategy] < Subtitles.TextCPS[AIndex, AppOptions.Conventions.CPSLineLenStrategy] then
+                      SetSubtitleTime(AIndex, IT2-Pause, TAG_CONTROL_FINALTIME, False, False)
+                    else
+                      SetSubtitleTime(AIndex+1, FT1+Pause, TAG_CONTROL_INITIALTIME, False, False);
+      end;
+  end;
+
+var
+  Item    : PUWSubtitleItem;
+  i, c, x : Integer;
+  Run     : PVirtualNode;
+begin
+  if AVST.RootNodeCount < 2 then Exit;
+
+  if Selection <> dlSelected then
+  begin
+    c := 0;
+    x := Subtitles.Count-2;
+
+    if (Selection = dlRange) then
+    begin
+      c := AFrom;
+      x := ATo;
+    end
+    else if (Selection = dlCurrentToLast) then
+      c := Range(VSTFocusedNode(AVST), 0, Subtitles.Count-2);
+
+    if x < c then
+      x := AVST.RootNodeCount-2;
+
+    for i := c to x do
+    begin
+      Item := Subtitles.ItemPointer[i];
+      if Assigned(Item) then
+      begin
+        if (Selection <> dlMarked) or ((Selection = dlMarked) and Item^.Marked) then
+          SetPauseValue(i);
+      end;
+    end;
+  end
+  else
+  begin
+    i := 0;
+    Run := AVST.GetFirstSelected;
+    while Assigned(Run) do
+    begin
+      Item := Subtitles.ItemPointer[Run^.Index];
+      if Assigned(Item) then
+        SetPauseValue(Run^.Index);
+
+      Run := AVST.GetNextSelected(Run);
+    end;
+  end;
+
+  SubtitleChanged(True, True);
+  UndoInstance.IncrementUndoGroup;
+  DoAutoCheckErrors;
+  UpdateValues(True);
 end;
 
 // -----------------------------------------------------------------------------

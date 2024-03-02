@@ -1,0 +1,179 @@
+object frmPauses: TfrmPauses
+  Left = 243
+  Height = 322
+  Top = 121
+  Width = 280
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Set pauses'
+  ClientHeight = 322
+  ClientWidth = 280
+  FormStyle = fsStayOnTop
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '3.2.0.0'
+  object btnApply: TButton
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnClose
+    Left = 83
+    Height = 26
+    Top = 288
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
+    Caption = 'Apply'
+    Default = True
+    TabOrder = 6
+    OnClick = btnApplyClick
+  end
+  object btnClose: TButton
+    AnchorSideRight.Control = lyoScope
+    AnchorSideRight.Side = asrBottom
+    Left = 179
+    Height = 26
+    Top = 288
+    Width = 91
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Close'
+    TabOrder = 7
+    OnClick = btnCloseClick
+  end
+  object rdoFirstEntry: TUWRadioButton
+    AnchorSideTop.Control = lblDuration
+    AnchorSideTop.Side = asrBottom
+    Left = 16
+    Height = 19
+    Top = 92
+    Width = 18
+    AutoSize = False
+    BorderSpacing.Top = 8
+    Caption = 'First entry only'
+    Checked = True
+    TabOrder = 1
+    State = cbChecked
+  end
+  object rdoSecondEntry: TUWRadioButton
+    AnchorSideTop.Control = rdoFirstEntry
+    AnchorSideTop.Side = asrBottom
+    Left = 16
+    Height = 19
+    Top = 111
+    Width = 18
+    AutoSize = False
+    Caption = 'Second entry only'
+    TabOrder = 2
+    TabStop = False
+  end
+  object rdoBothEntries: TUWRadioButton
+    AnchorSideTop.Control = rdoSecondEntry
+    AnchorSideTop.Side = asrBottom
+    Left = 16
+    Height = 19
+    Top = 130
+    Width = 18
+    AutoSize = False
+    Caption = 'Both entries equally'
+    TabOrder = 3
+    TabStop = False
+  end
+  object rdoEntryWithLessCPS: TUWRadioButton
+    AnchorSideTop.Control = rdoBothEntries
+    AnchorSideTop.Side = asrBottom
+    Left = 16
+    Height = 19
+    Top = 149
+    Width = 18
+    AutoSize = False
+    Caption = 'Entry with less CPS'
+    TabOrder = 4
+    TabStop = False
+  end
+  object lyoScope: TUWLayout
+    Left = 16
+    Height = 96
+    Top = 184
+    Width = 254
+    Anchors = [akLeft, akRight, akBottom]
+    ClientHeight = 96
+    ClientWidth = 254
+    TabOrder = 5
+    object lblScope: TLabel
+      Left = 0
+      Height = 15
+      Top = 0
+      Width = 35
+      Caption = 'Scope:'
+      ParentColor = False
+    end
+    object rbnAllTheSubtitles: TUWRadioButton
+      Left = 0
+      Height = 19
+      Top = 20
+      Width = 18
+      AutoSize = False
+      Caption = 'All entries'
+      TabOrder = 0
+      TabStop = False
+    end
+    object rbnFromTheSelectedSubtitle: TUWRadioButton
+      Left = 0
+      Height = 19
+      Top = 39
+      Width = 18
+      AutoSize = False
+      Caption = 'From the selected entry'
+      TabOrder = 1
+      TabStop = False
+    end
+    object rbnOnlySelectedSubtitles: TUWRadioButton
+      Left = 0
+      Height = 19
+      Top = 58
+      Width = 18
+      AutoSize = False
+      Caption = 'Only selected entries'
+      TabOrder = 2
+      TabStop = False
+    end
+  end
+  object lblGap: TLabel
+    Left = 16
+    Height = 15
+    Top = 8
+    Width = 55
+    Caption = 'Gap value:'
+  end
+  object lblDuration: TLabel
+    AnchorSideTop.Control = tedGap
+    AnchorSideTop.Side = asrBottom
+    Left = 16
+    Height = 15
+    Top = 69
+    Width = 106
+    BorderSpacing.Top = 15
+    Caption = 'Shorten duration of:'
+  end
+  object tedGap: TUWTimeEdit
+    AnchorSideTop.Control = lblGap
+    AnchorSideTop.Side = asrBottom
+    Left = 16
+    Height = 23
+    Top = 31
+    Width = 108
+    Value = 0
+    FPS = 25
+    FrameStep = 1
+    TimeStep = 1
+    TimeMode = temTime
+    Alignment = taCenter
+    BorderSpacing.Top = 8
+    Constraints.MinHeight = 21
+    Constraints.MinWidth = 90
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+  end
+end

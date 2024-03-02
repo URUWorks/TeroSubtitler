@@ -20,7 +20,7 @@ object frmMain: TfrmMain
   ShowHint = True
   SnapOptions.SnapToMonitor = True
   SnapOptions.SnapToForms = True
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object LayoutWaveform: TUWLayout
     Left = 0
     Height = 120
@@ -1853,6 +1853,9 @@ object frmMain: TfrmMain
         end
         object MenuItem149: TMenuItem
           Action = actRoundTimes
+        end
+        object MenuItem285: TMenuItem
+          Action = actSetPauses
         end
         object Separator13: TMenuItem
           Caption = '-'
@@ -4158,18 +4161,6 @@ object frmMain: TfrmMain
       Caption = 'Custom image format...'
       OnExecute = actExportCustomImageFormatExecute
     end
-    object actRoundTimes: TAction
-      Tag = 1
-      Category = 'Timings'
-      Caption = 'Round times...'
-      OnExecute = actRoundTimesExecute
-    end
-    object actReadTimingsFromFile: TAction
-      Tag = 1
-      Category = 'Timings'
-      Caption = 'Read timings from file...'
-      OnExecute = actReadTimingsFromFileExecute
-    end
     object actShowActorOnPreview: TAction
       Category = 'View'
       AutoCheck = True
@@ -4432,18 +4423,6 @@ object frmMain: TfrmMain
       Caption = 'Push the last word to the next entry'
       ImageIndex = 91
       OnExecute = actPushWordToNextEntryExecute
-    end
-    object actFocusInitialTime: TAction
-      Tag = 1
-      Category = 'Timings'
-      Caption = 'Edit initial time'
-      OnExecute = actFocusInitialTimeExecute
-    end
-    object actFocusFinalTime: TAction
-      Tag = 1
-      Category = 'Timings'
-      Caption = 'Edit final time'
-      OnExecute = actFocusFinalTimeExecute
     end
     object actJumpToNextEmpty: TAction
       Tag = 1
@@ -4946,6 +4925,36 @@ object frmMain: TfrmMain
       Category = 'Tools'
       Caption = 'Stream extractor...'
       OnExecute = actStreamExtractorExecute
+    end
+    object actSetPauses: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Set pauses...'
+      OnExecute = actSetPausesExecute
+    end
+    object actRoundTimes: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Round times...'
+      OnExecute = actRoundTimesExecute
+    end
+    object actReadTimingsFromFile: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Read timings from file...'
+      OnExecute = actReadTimingsFromFileExecute
+    end
+    object actFocusInitialTime: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Edit initial time'
+      OnExecute = actFocusInitialTimeExecute
+    end
+    object actFocusFinalTime: TAction
+      Tag = 1
+      Category = 'Timings'
+      Caption = 'Edit final time'
+      OnExecute = actFocusFinalTimeExecute
     end
   end
   object popDropInsert: TPopupMenu

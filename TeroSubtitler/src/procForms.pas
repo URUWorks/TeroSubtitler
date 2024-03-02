@@ -36,6 +36,7 @@ procedure ShowTimeExpander;
 procedure ShowSetDelay;
 procedure ShowShiftTimes;
 procedure ShowRoundTime;
+procedure ShowSetPauses;
 procedure ShowConvertCase;
 procedure ShowCharacterMap;
 procedure ShowAdjustSubtitle;
@@ -91,7 +92,7 @@ uses
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
   formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
   formRoundTime, formStatistics, formGenerateBlankVideo, formStreamExtractor,
-  LCLTranslator, procLocalize;
+  formPauses, LCLTranslator, procLocalize;
 
 // -----------------------------------------------------------------------------
 
@@ -251,6 +252,19 @@ begin
   end
   else
     frmRoundTime.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowSetPauses;
+begin
+  if frmPauses = NIL then
+  begin
+    frmPauses := TfrmPauses.Create(Application);
+    ShowForm(frmPauses);
+  end
+  else
+    frmPauses.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

@@ -249,6 +249,7 @@ type
   TVSTDoLoopProc      = procedure(const Item: PUWSubtitleItem; const Index: Integer);
   TVSTDoLoopProcCB    = procedure(const CurrentItem, TotalCount: Integer; var Cancel: Boolean);
   TVSTDoLoopSelection = (dlAll, dlSelected, dlCurrentToLast, dlMarked, dlRange);
+  TVSTSetPausesMode   = (spmFirst, spmSecond, spmBoth, spmCPS);
 
   { VST Options }
 

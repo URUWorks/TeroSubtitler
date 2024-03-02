@@ -1,0 +1,15 @@
+{"version":1,"strings":[
+{"hash":124605859,"name":"tfrmpauses.caption","sourcebytes":[83,101,116,32,112,97,117,115,101,115],"value":"Set pauses"},
+{"hash":4749113,"name":"tfrmpauses.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmpauses.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":64303641,"name":"tfrmpauses.rdofirstentry.caption","sourcebytes":[70,105,114,115,116,32,101,110,116,114,121,32,111,110,108,121],"value":"First entry only"},
+{"hash":227171561,"name":"tfrmpauses.rdosecondentry.caption","sourcebytes":[83,101,99,111,110,100,32,101,110,116,114,121,32,111,110,108,121],"value":"Second entry only"},
+{"hash":28235929,"name":"tfrmpauses.rdobothentries.caption","sourcebytes":[66,111,116,104,32,101,110,116,114,105,101,115,32,101,113,117,97,108,108,121],"value":"Both entries equally"},
+{"hash":250902083,"name":"tfrmpauses.rdoentrywithlesscps.caption","sourcebytes":[69,110,116,114,121,32,119,105,116,104,32,108,101,115,115,32,67,80,83],"value":"Entry with less CPS"},
+{"hash":94004874,"name":"tfrmpauses.lblscope.caption","sourcebytes":[83,99,111,112,101,58],"value":"Scope:"},
+{"hash":202613155,"name":"tfrmpauses.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,101,110,116,114,105,101,115],"value":"All entries"},
+{"hash":195302217,"name":"tfrmpauses.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,116,104,101,32,115,101,108,101,99,116,101,100,32,101,110,116,114,121],"value":"From the selected entry"},
+{"hash":71759827,"name":"tfrmpauses.rbnonlyselectedsubtitles.caption","sourcebytes":[79,110,108,121,32,115,101,108,101,99,116,101,100,32,101,110,116,114,105,101,115],"value":"Only selected entries"},
+{"hash":130343850,"name":"tfrmpauses.lblgap.caption","sourcebytes":[71,97,112,32,118,97,108,117,101,58],"value":"Gap value:"},
+{"hash":127226538,"name":"tfrmpauses.lblduration.caption","sourcebytes":[83,104,111,114,116,101,110,32,100,117,114,97,116,105,111,110,32,111,102,58],"value":"Shorten duration of:"}
+]}
