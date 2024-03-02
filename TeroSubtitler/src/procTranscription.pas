@@ -65,7 +65,6 @@ begin
       //Memo.OptMouse2ClickOpensURL := False;
       //Memo.OptMouseClickOpensURL  := True;
       Memo.OptFoldEnabled         := False;
-      Memo.OptFoldCacheEnabled    := False;
       Memo.OptFoldTooltipVisible  := False;
       Memo.OnClickLink            := @MemoClickLink;
       Memo.OnContextPopup         := @MemoContextPopup;
