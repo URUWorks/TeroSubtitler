@@ -1,6 +1,7 @@
 1.0.1.8 (x.x.2024)
+- updated: Italian language (thx GitGianluc/bovirus)
 - updated: Russian language (thx RoxMarty)
-- added: Set pauses #276
+- added: Set gapping #276
 
 1.0.1.7 (1.3.2024)
 - fixed: Extract waveform window #275
