@@ -357,7 +357,7 @@ begin
   Text := Encoding.GetString(Buffer);
   if (GetStringCount(Text, _CroatianAndSerbian) > MinCount) or
      (GetStringCount(Text, _CzechAndSlovak) > MinCount) or
-     (GetStringCount(Text, _Czech) > MinCount) or
+     //(GetStringCount(Text, _Czech) > MinCount) or
      (GetStringCount(Text, _Polish) > MinCount) or
      (GetStringCount(Text, _Hungarian) > MinCount) or
      (GetStringCount(Text, ['să', 'şi', 'văzut', 'regulă', 'găsit', 'viaţă']) > 99) then
@@ -375,14 +375,14 @@ begin
     // Hebrew
     if (GetStringCount(Enc.GetString(Buffer), _Hebrew) > 10) then
     begin
-      Exit(Encoding);
+      Exit(Enc);
     end;
     Exit(Encoding);
   end;
   // Hebrew
   if (GetStringCount(Enc.GetString(Buffer), _Hebrew) > 5) then
   begin
-    Exit(Encoding);
+    Exit(Enc);
   end;
 end;
 
