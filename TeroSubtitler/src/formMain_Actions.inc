@@ -1156,7 +1156,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actSetPausesExecute(Sender: TObject);
+procedure TfrmMain.actSetGappingExecute(Sender: TObject);
 begin
   ShowSetPauses;
 end;

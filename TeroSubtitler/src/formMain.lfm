@@ -1845,6 +1845,9 @@ object frmMain: TfrmMain
         object MenuItem49: TMenuItem
           Action = actSetDelay
         end
+        object MenuItem285: TMenuItem
+          Action = actSetGapping
+        end
         object MenuItem69: TMenuItem
           Action = actShiftTimes
         end
@@ -1853,9 +1856,6 @@ object frmMain: TfrmMain
         end
         object MenuItem149: TMenuItem
           Action = actRoundTimes
-        end
-        object MenuItem285: TMenuItem
-          Action = actSetPauses
         end
         object Separator13: TMenuItem
           Caption = '-'
@@ -4926,11 +4926,11 @@ object frmMain: TfrmMain
       Caption = 'Stream extractor...'
       OnExecute = actStreamExtractorExecute
     end
-    object actSetPauses: TAction
+    object actSetGapping: TAction
       Tag = 1
       Category = 'Timings'
-      Caption = 'Set pauses...'
-      OnExecute = actSetPausesExecute
+      Caption = 'Set gapping...'
+      OnExecute = actSetGappingExecute
     end
     object actRoundTimes: TAction
       Tag = 1

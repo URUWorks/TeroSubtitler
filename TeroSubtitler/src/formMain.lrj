@@ -345,7 +345,7 @@
 {"hash":5680834,"name":"tfrmmain.actshowvideotoolbarother.caption","sourcebytes":[79,116,104,101,114],"value":"Other"},
 {"hash":5004185,"name":"tfrmmain.actshowvideotoolbarentry.caption","sourcebytes":[69,110,116,114,121],"value":"Entry"},
 {"hash":115433694,"name":"tfrmmain.actstreamextractor.caption","sourcebytes":[83,116,114,101,97,109,32,101,120,116,114,97,99,116,111,114,46,46,46],"value":"Stream extractor..."},
-{"hash":89798622,"name":"tfrmmain.actsetpauses.caption","sourcebytes":[83,101,116,32,112,97,117,115,101,115,46,46,46],"value":"Set pauses..."},
+{"hash":178413294,"name":"tfrmmain.actsetgapping.caption","sourcebytes":[83,101,116,32,103,97,112,112,105,110,103,46,46,46],"value":"Set gapping..."},
 {"hash":184042302,"name":"tfrmmain.actroundtimes.caption","sourcebytes":[82,111,117,110,100,32,116,105,109,101,115,46,46,46],"value":"Round times..."},
 {"hash":45094862,"name":"tfrmmain.actreadtimingsfromfile.caption","sourcebytes":[82,101,97,100,32,116,105,109,105,110,103,115,32,102,114,111,109,32,102,105,108,101,46,46,46],"value":"Read timings from file..."},
 {"hash":20387493,"name":"tfrmmain.actfocusinitialtime.caption","sourcebytes":[69,100,105,116,32,105,110,105,116,105,97,108,32,116,105,109,101],"value":"Edit initial time"},

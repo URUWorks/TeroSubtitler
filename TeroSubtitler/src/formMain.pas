@@ -90,7 +90,7 @@ type
     actGoToCurrentEntryInitialTime: TAction;
     actGoToCurrentEntryFinalTime: TAction;
     actDistributeEntriesEvenly: TAction;
-    actSetPauses: TAction;
+    actSetGapping: TAction;
     actStreamExtractor: TAction;
     actShowToolbarGeneral: TAction;
     actShowToolbarEntry: TAction;
@@ -1133,7 +1133,7 @@ type
     procedure actExtendLengthToPreviousExecute(Sender: TObject);
     procedure actSetAutomaticDurationExecute(Sender: TObject);
     procedure actSetDefaultGapExecute(Sender: TObject);
-    procedure actSetPausesExecute(Sender: TObject);
+    procedure actSetGappingExecute(Sender: TObject);
     procedure actSwapTextsExecute(Sender: TObject);
     procedure actShowColumnNumberExecute(Sender: TObject);
     procedure actShowColumnTimesExecute(Sender: TObject);

@@ -1601,15 +1601,29 @@ end;
 // -----------------------------------------------------------------------------
 
 function libMPVFileName(const AFullRoot: Boolean = True): String;
+{$IFNDEF LINUX}
+var
+  i: Byte;
+{$ENDIF LINUX}
 begin
-  if AFullRoot then
-    {$IFDEF LINUX}
-    Result := GetInstallFolder(LIBMPV_DLL_NAME)
+  {$IFDEF LINUX}
+  Result := GetInstallFolder(LIBMPV_DLL_NAME + '.so');
+  {$ELSE}
+  for i := Low(LIBMPV_DLL_VER) to High(LIBMPV_DLL_VER) do
+  begin
+    {$IFDEF WINDOWS}
+    Result := ConcatPaths([libmpvFolder, LIBMPV_DLL_NAME + LIBMPV_DLL_VER[i] + '.dll']);
     {$ELSE}
-    Result := ConcatPaths([libmpvFolder, LIBMPV_DLL_NAME])
-    {$ENDIF}
-  else
-    Result := LIBMPV_DLL_NAME;
+    Result := ConcatPaths([libmpvFolder, LIBMPV_DLL_NAME + LIBMPV_DLL_VER[i] + '.dylib']);
+    {$ENDIF WINDOWS}
+
+    if FileExists(Result) then
+      Break;
+  end;
+  {$ENDIF LINUX}
+
+  if not AFullRoot then
+    Result := ExtractFileName(Result);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1833,7 +1847,7 @@ end;
 function GetInstallFolder(const AFileName: String): String;
 const
   {$IFDEF LINUX}
-  pathLst : array[0..8] of string = (
+  pathLst : array[0..8] of String = (
     '/usr/bin',
     '/bin',
     '/usr/local/bin',
@@ -1845,7 +1859,7 @@ const
     '/usr/lib/x86_64-linux-gnu'
   );
   {$ELSE}
-  pathLst : array[0..3] of string = (
+  pathLst : array[0..3] of String = (
     '/usr/local/bin',
     '/opt/local/bin',
     '/usr/local/lib',
@@ -1854,14 +1868,14 @@ const
   {$ENDIF}
 var
   pathIdx : Integer;
-  pathStr : string;
+  pathStr : String;
   sr      : TSearchRec;
   re      : Integer;
 begin
   for pathIdx := Low(pathLst) to High(pathLst) do
   begin
     pathStr := pathLst[pathIdx];
-    if not DirectoryExists(pathStr) then continue;
+    if not DirectoryExists(pathStr) then Continue;
     // look for file
     if FileExists(pathStr + PathDelim + AFileName) then
     begin

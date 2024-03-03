@@ -5,7 +5,7 @@ object frmPauses: TfrmPauses
   Width = 280
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Set pauses'
+  Caption = 'Set gapping'
   ClientHeight = 322
   ClientWidth = 280
   FormStyle = fsStayOnTop
@@ -143,8 +143,8 @@ object frmPauses: TfrmPauses
     Left = 16
     Height = 15
     Top = 8
-    Width = 55
-    Caption = 'Gap value:'
+    Width = 31
+    Caption = 'Value:'
   end
   object lblDuration: TLabel
     AnchorSideTop.Control = tedGap
