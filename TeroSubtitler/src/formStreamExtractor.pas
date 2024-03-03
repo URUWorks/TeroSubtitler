@@ -38,6 +38,7 @@ type
     Language: String;
     Codec: String;
     Output: String;
+    Convert: Boolean;
   end;
 
   TStreamInfoList = specialize TFPGList<PStreamInfo>;
@@ -323,7 +324,11 @@ begin
         begin
           s := Format('%s_%d_%s.%s', [ChangeFileExt(ExtractFileName(edtFile.Text), ''), FList[i]^.Id, FList[i]^.Kind, FList[i]^.Output]);
           s := ConcatPaths([edtFolder.Text, s]);
-          AParamArray := FFMPEG_ExtractStream.Split(' ');
+
+          if FList[i]^.Convert then
+            AParamArray := StringReplace(FFMPEG_ExtractStream, '-c copy', '', []).Split(' ')
+          else
+            AParamArray := FFMPEG_ExtractStream.Split(' ');
 
           for x := 0 to High(AParamArray) do
             AParamArray[x] := StringsReplace(AParamArray[x],
@@ -425,13 +430,15 @@ begin
         if Length(AParamArray) >= 4 then
         begin
           New(Info);
-          Info^.Checked  := False;
-            if Pos('[', AParamArray[1]) > 0 then
-              Info^.Id := StrToIntDef(Copy(AParamArray[1], Pos(':', AParamArray[1])+1, Pos('[', AParamArray[1])-Pos(':', AParamArray[1])-1), -1)
-            else if Pos('(', AParamArray[1]) > 0 then
-              Info^.Id := StrToIntDef(Copy(AParamArray[1], Pos(':', AParamArray[1])+1, Pos('(', AParamArray[1])-Pos(':', AParamArray[1])-1), -1)
-            else
-              Info^.Id := StrToIntDef(Copy(AParamArray[1], Pos(':', AParamArray[1])+1, Length(AParamArray[1])-Pos(':', AParamArray[1])-1), -1);
+          Info^.Checked := False;
+          Info^.Convert := False;
+
+          if Pos('[', AParamArray[1]) > 0 then
+            Info^.Id := StrToIntDef(Copy(AParamArray[1], Pos(':', AParamArray[1])+1, Pos('[', AParamArray[1])-Pos(':', AParamArray[1])-1), -1)
+          else if Pos('(', AParamArray[1]) > 0 then
+            Info^.Id := StrToIntDef(Copy(AParamArray[1], Pos(':', AParamArray[1])+1, Pos('(', AParamArray[1])-Pos(':', AParamArray[1])-1), -1)
+          else
+            Info^.Id := StrToIntDef(Copy(AParamArray[1], Pos(':', AParamArray[1])+1, Length(AParamArray[1])-Pos(':', AParamArray[1])-1), -1);
 
           Info^.Kind     := Copy(AParamArray[2], 1, Pos(':', AParamArray[2])-1);
           Info^.Codec    := iff(AParamArray[3].EndsWith(','), Copy(AParamArray[3], 1, Length(AParamArray[3])-1), AParamArray[3]);
@@ -463,8 +470,13 @@ begin
               Info^.Output := 'sup'
             else if Info^.Codec.Contains('vtt') then
               Info^.Output := 'vtt'
+            else if Info^.Codec.Contains('subrip') then
+              Info^.Output := 'srt'
             else
-              Info^.Output := 'srt';
+            begin
+              Info^.Output  := 'srt';
+              Info^.Convert := True;
+            end;
           end
           else
             Info^.Output := '';
