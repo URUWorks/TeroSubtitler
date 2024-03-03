@@ -3412,6 +3412,10 @@ msgstr "只有在间距太短的情况下"
 msgid "Set delay..."
 msgstr "设置延迟..."
 
+#: tfrmmain.actsetgapping.caption
+msgid "Set gapping..."
+msgstr ""
+
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Classic"
@@ -3426,10 +3430,6 @@ msgstr "反向"
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
 msgstr "纵向"
-
-#: tfrmmain.actsetpauses.caption
-msgid "Set pauses..."
-msgstr ""
 
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
@@ -4241,7 +4241,7 @@ msgid "Close"
 msgstr "关闭"
 
 #: tfrmpauses.caption
-msgid "Set pauses"
+msgid "Set gapping"
 msgstr ""
 
 #: tfrmpauses.lblduration.caption
@@ -4249,7 +4249,7 @@ msgid "Shorten duration of:"
 msgstr ""
 
 #: tfrmpauses.lblgap.caption
-msgid "Gap value:"
+msgid "Value:"
 msgstr ""
 
 #: tfrmpauses.lblscope.caption

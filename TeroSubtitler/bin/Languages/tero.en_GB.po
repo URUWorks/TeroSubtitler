@@ -3411,6 +3411,10 @@ msgstr "Only if the gap is too short"
 msgid "Set delay..."
 msgstr "Set delay..."
 
+#: tfrmmain.actsetgapping.caption
+msgid "Set gapping..."
+msgstr "Set gapping..."
+
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Classic"
@@ -3425,10 +3429,6 @@ msgstr "Inverted"
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-
-#: tfrmmain.actsetpauses.caption
-msgid "Set pauses..."
-msgstr "Set pauses..."
 
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
@@ -4223,16 +4223,16 @@ msgid "Close"
 msgstr "Close"
 
 #: tfrmpauses.caption
-msgid "Set pauses"
-msgstr "Set pauses"
+msgid "Set gapping"
+msgstr "Set gapping"
 
 #: tfrmpauses.lblduration.caption
 msgid "Shorten duration of:"
 msgstr "Shorten duration of:"
 
 #: tfrmpauses.lblgap.caption
-msgid "Gap value:"
-msgstr "Gap value:"
+msgid "Value:"
+msgstr "Value:"
 
 #: tfrmpauses.lblscope.caption
 msgctxt "tfrmpauses.lblscope.caption"

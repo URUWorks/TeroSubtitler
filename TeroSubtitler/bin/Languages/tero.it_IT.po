@@ -3418,6 +3418,10 @@ msgstr "Solo se l’intervallo è troppo breve"
 msgid "Set delay..."
 msgstr "Imposta ritardo..."
 
+#: tfrmmain.actsetgapping.caption
+msgid "Set gapping..."
+msgstr ""
+
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Classic"
@@ -3432,10 +3436,6 @@ msgstr "Invertita"
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
-#: tfrmmain.actsetpauses.caption
-msgid "Set pauses..."
-msgstr "Imposta pause..."
 
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
@@ -4230,7 +4230,9 @@ msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmpauses.caption
-msgid "Set pauses"
+#, fuzzy
+#| msgid "Set pauses"
+msgid "Set gapping"
 msgstr "Imposta pause"
 
 #: tfrmpauses.lblduration.caption
@@ -4238,7 +4240,9 @@ msgid "Shorten duration of:"
 msgstr "Riduci la durata di:"
 
 #: tfrmpauses.lblgap.caption
-msgid "Gap value:"
+#, fuzzy
+#| msgid "Gap value:"
+msgid "Value:"
 msgstr "Valore gap:"
 
 #: tfrmpauses.lblscope.caption
@@ -5365,3 +5369,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+

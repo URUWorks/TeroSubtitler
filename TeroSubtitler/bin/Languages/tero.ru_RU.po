@@ -3410,6 +3410,10 @@ msgstr "Только если промежуток коротковат"
 msgid "Set delay..."
 msgstr "Настроить задержку..."
 
+#: tfrmmain.actsetgapping.caption
+msgid "Set gapping..."
+msgstr ""
+
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Classic"
@@ -3424,10 +3428,6 @@ msgstr "Инвертированный"
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
 msgstr "Вертикальный"
-
-#: tfrmmain.actsetpauses.caption
-msgid "Set pauses..."
-msgstr ""
 
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
@@ -4227,7 +4227,7 @@ msgid "Close"
 msgstr "Закрыть"
 
 #: tfrmpauses.caption
-msgid "Set pauses"
+msgid "Set gapping"
 msgstr ""
 
 #: tfrmpauses.lblduration.caption
@@ -4235,7 +4235,7 @@ msgid "Shorten duration of:"
 msgstr ""
 
 #: tfrmpauses.lblgap.caption
-msgid "Gap value:"
+msgid "Value:"
 msgstr ""
 
 #: tfrmpauses.lblscope.caption

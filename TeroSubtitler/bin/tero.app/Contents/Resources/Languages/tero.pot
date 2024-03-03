@@ -3388,6 +3388,10 @@ msgstr ""
 msgid "Set delay..."
 msgstr ""
 
+#: tfrmmain.actsetgapping.caption
+msgid "Set gapping..."
+msgstr ""
+
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Classic"
@@ -3401,10 +3405,6 @@ msgstr ""
 #: tfrmmain.actsetguilayout2.caption
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
-msgstr ""
-
-#: tfrmmain.actsetpauses.caption
-msgid "Set pauses..."
 msgstr ""
 
 #: tfrmmain.actsettings.caption
@@ -4200,7 +4200,7 @@ msgid "Close"
 msgstr ""
 
 #: tfrmpauses.caption
-msgid "Set pauses"
+msgid "Set gapping"
 msgstr ""
 
 #: tfrmpauses.lblduration.caption
@@ -4208,7 +4208,7 @@ msgid "Shorten duration of:"
 msgstr ""
 
 #: tfrmpauses.lblgap.caption
-msgid "Gap value:"
+msgid "Value:"
 msgstr ""
 
 #: tfrmpauses.lblscope.caption

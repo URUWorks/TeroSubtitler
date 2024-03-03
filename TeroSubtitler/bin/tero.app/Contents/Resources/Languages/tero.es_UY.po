@@ -3411,6 +3411,10 @@ msgstr "Sólo si la pausa es demasiado corta"
 msgid "Set delay..."
 msgstr "Establecer retraso..."
 
+#: tfrmmain.actsetgapping.caption
+msgid "Set gapping..."
+msgstr "Establecer pausas..."
+
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Classic"
@@ -3425,10 +3429,6 @@ msgstr "Invertido"
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-
-#: tfrmmain.actsetpauses.caption
-msgid "Set pauses..."
-msgstr "Establecer pausas..."
 
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
@@ -4223,7 +4223,7 @@ msgid "Close"
 msgstr "Cerrar"
 
 #: tfrmpauses.caption
-msgid "Set pauses"
+msgid "Set gapping"
 msgstr "Establecer pausas"
 
 #: tfrmpauses.lblduration.caption
@@ -4231,8 +4231,8 @@ msgid "Shorten duration of:"
 msgstr "Acortar la duración de:"
 
 #: tfrmpauses.lblgap.caption
-msgid "Gap value:"
-msgstr "Valor de la pausa:"
+msgid "Value:"
+msgstr "Valor:"
 
 #: tfrmpauses.lblscope.caption
 msgctxt "tfrmpauses.lblscope.caption"

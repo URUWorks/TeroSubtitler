@@ -3412,6 +3412,10 @@ msgstr "Само, ако междината е прекалено голяма"
 msgid "Set delay..."
 msgstr "Забавяне..."
 
+#: tfrmmain.actsetgapping.caption
+msgid "Set gapping..."
+msgstr ""
+
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Classic"
@@ -3426,10 +3430,6 @@ msgstr "Обърната"
 msgctxt "tfrmmain.actsetguilayout2.caption"
 msgid "Vertical"
 msgstr "Отвесна"
-
-#: tfrmmain.actsetpauses.caption
-msgid "Set pauses..."
-msgstr ""
 
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
@@ -4246,7 +4246,7 @@ msgid "Close"
 msgstr "Затваряне"
 
 #: tfrmpauses.caption
-msgid "Set pauses"
+msgid "Set gapping"
 msgstr ""
 
 #: tfrmpauses.lblduration.caption
@@ -4254,7 +4254,7 @@ msgid "Shorten duration of:"
 msgstr ""
 
 #: tfrmpauses.lblgap.caption
-msgid "Gap value:"
+msgid "Value:"
 msgstr ""
 
 #: tfrmpauses.lblscope.caption
