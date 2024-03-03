@@ -1,4 +1,5 @@
 1.0.1.8 (x.x.2024)
+- fixed: Extraction of subtitle script from video #283
 - updated: Italian language (thx GitGianluc/bovirus)
 - updated: Russian language (thx RoxMarty)
 - added: Set gapping #276
