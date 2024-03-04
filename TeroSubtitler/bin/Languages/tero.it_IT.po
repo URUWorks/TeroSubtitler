@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 02.03.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 04.03.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -3420,7 +3420,7 @@ msgstr "Imposta ritardo..."
 
 #: tfrmmain.actsetgapping.caption
 msgid "Set gapping..."
-msgstr ""
+msgstr "Imposta gap..."
 
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
@@ -4230,20 +4230,16 @@ msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmpauses.caption
-#, fuzzy
-#| msgid "Set pauses"
 msgid "Set gapping"
-msgstr "Imposta pause"
+msgstr "Imposta gap"
 
 #: tfrmpauses.lblduration.caption
 msgid "Shorten duration of:"
 msgstr "Riduci la durata di:"
 
 #: tfrmpauses.lblgap.caption
-#, fuzzy
-#| msgid "Gap value:"
 msgid "Value:"
-msgstr "Valore gap:"
+msgstr "Valore:"
 
 #: tfrmpauses.lblscope.caption
 msgctxt "tfrmpauses.lblscope.caption"
@@ -5369,4 +5365,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
