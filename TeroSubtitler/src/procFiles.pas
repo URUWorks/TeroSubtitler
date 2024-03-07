@@ -105,7 +105,7 @@ uses
   UWSystem.Encoding, formCustomFileDlg, UWSystem.SysUtils, Forms, procMRU,
   UWSystem.StrUtils, procForms, procProjectFile, formCustomSelectDlg,
   procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils,
-  UWSubtitleAPI.Tags
+  UWSubtitleAPI.Tags, formCustomSelectDlgWithPreview
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -292,7 +292,8 @@ begin
         else
           _EncIndex := 43; //Win1252
 
-        _EncIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectEncodingToUse, Items, _EncIndex, True);
+        //_EncIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectEncodingToUse, Items, _EncIndex, True);
+        _EncIndex := formCustomSelectDlgWithPreview.ExecuteDialog('', lngSelectEncodingToUse, Items, FileName,_EncIndex, True);
         _Encoding := TEncoding.GetEncoding(Encodings[_EncIndex].CPID);
       end;
     end;
