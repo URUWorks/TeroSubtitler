@@ -40,7 +40,7 @@ function TSToMacDVDTags(const Text: String): String;
 
 implementation
 
-uses UWSystem.StrUtils, RegExpr;
+uses UWSystem.StrUtils, UWSystem.SysUtils, RegExpr;
 
 // -----------------------------------------------------------------------------
 
@@ -105,14 +105,18 @@ end;
 // -----------------------------------------------------------------------------
 
 function HTMLTagsToTS(const Text: String): String;
+var
+  hasColorTag: Boolean;
 begin
   Result := Text;
   if Result.IsEmpty then Exit;
 
+  hasColorTag := Pos('<font color="', Result) > 0;
   Result := ReplaceString(Result, 'color="#', 'color="');
   Result := ReplaceRegExpr('<font color="(.*?|var)">', Result, '{\\c&$1&}', True);
+  Result := ReplaceRegExpr('<font (.*?)>', Result, '', True);
   Result := ReplaceHTMLTagColor(Result);
-  Result := ReplaceString(Result, '</font>', '{\c}');
+  Result := ReplaceString(Result, '</font>', iff(hasColorTag, '{\c}', ''));
   Result := ReplaceString(Result, '<b>', '{\b1}');
   Result := ReplaceString(Result, '<i>', '{\i1}');
   Result := ReplaceString(Result, '<u>', '{\u1}');
