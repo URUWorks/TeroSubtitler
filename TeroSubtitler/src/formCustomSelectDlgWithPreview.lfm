@@ -1,0 +1,94 @@
+object frmCustomSelectDlgWithPreview: TfrmCustomSelectDlgWithPreview
+  Left = 244
+  Height = 400
+  Top = 118
+  Width = 600
+  BorderIcons = []
+  BorderStyle = bsSingle
+  ClientHeight = 400
+  ClientWidth = 600
+  FormStyle = fsStayOnTop
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '3.2.0.0'
+  object lblMessage: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 23
+    Caption = 'Msg'
+    ParentColor = False
+  end
+  object btnOk: TButton
+    AnchorSideRight.Control = btnCancel
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 405
+    Height = 26
+    Top = 366
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 5
+    BorderSpacing.Bottom = 8
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 2
+  end
+  object btnCancel: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 501
+    Height = 26
+    Top = 366
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 3
+  end
+  object lstItems: TListBox
+    AnchorSideLeft.Control = lblMessage
+    AnchorSideTop.Control = lblMessage
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = btnOk
+    Left = 8
+    Height = 327
+    Top = 31
+    Width = 224
+    Anchors = [akTop, akLeft, akBottom]
+    BorderSpacing.Top = 8
+    BorderSpacing.Bottom = 8
+    ExtendedSelect = False
+    ItemHeight = 0
+    TabOrder = 0
+    OnSelectionChange = lstItemsSelectionChange
+  end
+  object mmoPreview: TMemo
+    AnchorSideLeft.Control = lstItems
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = lstItems
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = lstItems
+    AnchorSideBottom.Side = asrBottom
+    Left = 240
+    Height = 327
+    Top = 31
+    Width = 352
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    ReadOnly = True
+    ScrollBars = ssAutoVertical
+    TabOrder = 1
+    WordWrap = False
+  end
+end
