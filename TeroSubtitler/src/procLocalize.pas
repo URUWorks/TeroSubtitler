@@ -324,8 +324,8 @@ resourcestring
   lngstGapAverage = 'Gap average: %s';
 
   //StreamExtractor
-  lngseID = 'Id';
-  lngseKind = 'Kind';
+  lngseID = 'ID';
+  lngseKind = 'Type';
   lngseLanguage = 'Language';
   lngseCodec = 'Codec';
   lngseOutput = 'Output';
