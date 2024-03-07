@@ -321,7 +321,7 @@ begin
   FCount     := 0;
   FCapacity  := 0;
   FLineBreak := sLineBreak;
-  FWriteBOM  := False;
+  FWriteBOM  := True;
 
   if not FileName.IsEmpty then
   begin
@@ -781,7 +781,7 @@ begin
   FSearchIdx     := 0;
   FSearchSkip    := 0;
   FHeader        := NIL;
-  FWriteBOM      := False;
+  FWriteBOM      := True;
   FAutoSort      := True;
   FReplaceEntity := False;
   FIsRTL         := False;
