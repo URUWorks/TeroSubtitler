@@ -878,11 +878,11 @@ msgid "Do you want to see the changelog?"
 msgstr "Открыть список изменений?"
 
 #: proclocalize.lngseid
-msgid "Id"
+msgid "ID"
 msgstr ""
 
 #: proclocalize.lngsekind
-msgid "Kind"
+msgid "Type"
 msgstr ""
 
 #: proclocalize.lngselanguage
@@ -1825,11 +1825,6 @@ msgctxt "tfrmcustominputdlg.btnok.caption"
 msgid "OK"
 msgstr ""
 
-#: tfrmcustominputdlg.lblmessage.caption
-msgctxt "tfrmcustominputdlg.lblmessage.caption"
-msgid "Msg"
-msgstr "Сообщение"
-
 #: tfrmcustommessagedlg.btnok.caption
 msgctxt "tfrmcustommessagedlg.btnok.caption"
 msgid "OK"
@@ -1873,10 +1868,16 @@ msgctxt "tfrmcustomselectdlg.btnok.caption"
 msgid "OK"
 msgstr ""
 
-#: tfrmcustomselectdlg.lblmessage.caption
-msgctxt "tfrmcustomselectdlg.lblmessage.caption"
-msgid "Msg"
-msgstr "Сообщение"
+#: tfrmcustomselectdlgwithpreview.btncancel.caption
+#, fuzzy
+msgctxt "tfrmcustomselectdlgwithpreview.btncancel.caption"
+msgid "Cancel"
+msgstr "Отменить"
+
+#: tfrmcustomselectdlgwithpreview.btnok.caption
+msgctxt "tfrmcustomselectdlgwithpreview.btnok.caption"
+msgid "OK"
+msgstr ""
 
 #: tfrmcustomtextformat.btnclose.caption
 msgctxt "tfrmcustomtextformat.btnclose.caption"

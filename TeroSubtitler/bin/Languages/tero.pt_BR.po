@@ -878,11 +878,15 @@ msgid "Do you want to see the changelog?"
 msgstr "Quer ver o registro de mudanças?"
 
 #: proclocalize.lngseid
-msgid "Id"
+#, fuzzy
+#| msgid "Id"
+msgid "ID"
 msgstr "Id"
 
 #: proclocalize.lngsekind
-msgid "Kind"
+#, fuzzy
+#| msgid "Kind"
+msgid "Type"
 msgstr "Tipo"
 
 #: proclocalize.lngselanguage
@@ -1825,11 +1829,6 @@ msgctxt "tfrmcustominputdlg.btnok.caption"
 msgid "OK"
 msgstr "OK"
 
-#: tfrmcustominputdlg.lblmessage.caption
-msgctxt "tfrmcustominputdlg.lblmessage.caption"
-msgid "Msg"
-msgstr "Msg"
-
 #: tfrmcustommessagedlg.btnok.caption
 msgctxt "tfrmcustommessagedlg.btnok.caption"
 msgid "OK"
@@ -1873,10 +1872,17 @@ msgctxt "tfrmcustomselectdlg.btnok.caption"
 msgid "OK"
 msgstr "OK"
 
-#: tfrmcustomselectdlg.lblmessage.caption
-msgctxt "tfrmcustomselectdlg.lblmessage.caption"
-msgid "Msg"
-msgstr "Msg"
+#: tfrmcustomselectdlgwithpreview.btncancel.caption
+#, fuzzy
+msgctxt "tfrmcustomselectdlgwithpreview.btncancel.caption"
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: tfrmcustomselectdlgwithpreview.btnok.caption
+#, fuzzy
+msgctxt "tfrmcustomselectdlgwithpreview.btnok.caption"
+msgid "OK"
+msgstr "OK"
 
 #: tfrmcustomtextformat.btnclose.caption
 msgctxt "tfrmcustomtextformat.btnclose.caption"

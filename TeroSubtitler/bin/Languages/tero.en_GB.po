@@ -879,12 +879,12 @@ msgid "Do you want to see the changelog?"
 msgstr "Do you want to see the changelog?"
 
 #: proclocalize.lngseid
-msgid "Id"
-msgstr "Id"
+msgid "ID"
+msgstr "ID"
 
 #: proclocalize.lngsekind
-msgid "Kind"
-msgstr "Kind"
+msgid "Type"
+msgstr "Type"
 
 #: proclocalize.lngselanguage
 msgctxt "proclocalize.lngselanguage"
@@ -1826,11 +1826,6 @@ msgctxt "tfrmcustominputdlg.btnok.caption"
 msgid "OK"
 msgstr "OK"
 
-#: tfrmcustominputdlg.lblmessage.caption
-msgctxt "tfrmcustominputdlg.lblmessage.caption"
-msgid "Msg"
-msgstr "Msg"
-
 #: tfrmcustommessagedlg.btnok.caption
 msgctxt "tfrmcustommessagedlg.btnok.caption"
 msgid "OK"
@@ -1874,10 +1869,17 @@ msgctxt "tfrmcustomselectdlg.btnok.caption"
 msgid "OK"
 msgstr "OK"
 
-#: tfrmcustomselectdlg.lblmessage.caption
-msgctxt "tfrmcustomselectdlg.lblmessage.caption"
-msgid "Msg"
-msgstr "Msg"
+#: tfrmcustomselectdlgwithpreview.btncancel.caption
+#, fuzzy
+msgctxt "tfrmcustomselectdlgwithpreview.btncancel.caption"
+msgid "Cancel"
+msgstr "Cancel"
+
+#: tfrmcustomselectdlgwithpreview.btnok.caption
+#, fuzzy
+msgctxt "tfrmcustomselectdlgwithpreview.btnok.caption"
+msgid "OK"
+msgstr "OK"
 
 #: tfrmcustomtextformat.btnclose.caption
 msgctxt "tfrmcustomtextformat.btnclose.caption"
@@ -5359,3 +5361,4 @@ msgstr "Inverted"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
+
