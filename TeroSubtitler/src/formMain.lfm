@@ -43,7 +43,7 @@ object frmMain: TfrmMain
       FPS = 25
       FPSTimeMode = False
       CenterPlayCursor = False
-      SceneChangeEnabled = True
+      SceneChangeEnabled = False
       DrawGAP = False
       DrawThumbnail = False
       SavePeakToFile = True
