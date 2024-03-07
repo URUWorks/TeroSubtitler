@@ -11,13 +11,19 @@ object frmCustomMessageDlg: TfrmCustomMessageDlg
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnOk: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
     Left = 301
     Height = 26
-    Top = 87
+    Top = 86
     Width = 91
     Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'OK'
     Default = True
@@ -31,13 +37,18 @@ object frmCustomMessageDlg: TfrmCustomMessageDlg
     Width = 32
   end
   object lblMessage: TLabel
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = btnOk
     Left = 64
-    Height = 63
+    Height = 62
     Top = 16
     Width = 328
     Alignment = taCenter
     Anchors = [akTop, akLeft, akRight, akBottom]
     AutoSize = False
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
     Caption = 'Message'
     Font.Style = [fsBold]
     ParentColor = False
@@ -45,13 +56,15 @@ object frmCustomMessageDlg: TfrmCustomMessageDlg
     WordWrap = True
   end
   object lblCustomAction: TLabel
+    AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = btnOk
     AnchorSideTop.Side = asrCenter
     Cursor = crHandPoint
     Left = 8
     Height = 1
-    Top = 100
+    Top = 99
     Width = 1
+    BorderSpacing.Left = 8
     ParentColor = False
   end
   object ImageList: TImageList

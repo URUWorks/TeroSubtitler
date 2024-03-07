@@ -80,7 +80,7 @@ end;
 
 function TfrmCustomMessageDlg.Execute(const AMessage: String; const ACaption: String = ''; const AIcon: TIconMode = imQuestion; const ABold: Boolean = True; const ACenter: Boolean = True; const ACustomAction: String = ''; const ACustomActionClick: TNotifyEvent = NIL): Integer;
 var
-  c: Integer;
+  c, h: Integer;
 begin
   if ColorThemeInstance.GetRealColorMode = cmDark then
   begin
@@ -111,10 +111,11 @@ begin
   lblMessage.Caption := AMessage;
   lblCustomAction.Caption := ACustomAction;
   lblCustomAction.OnClick := ACustomActionClick;
-  lblCustomAction.Visible := ACustomActionClick <> NIL;
+  lblCustomAction.Visible := not ACustomAction.IsEmpty and (ACustomActionClick <> NIL);
 
   c := LineCount(AMessage, LineEnding);
-  Height := (c * lblCustomAction.Canvas.TextHeight('Aj')) + (Height - lblCustomAction.Height);
+  h := lblCustomAction.Canvas.TextHeight('Aj');
+  Height := (c * h) + ((Height - lblMessage.Height) + h);
 
   Result := ShowModal;
 end;
