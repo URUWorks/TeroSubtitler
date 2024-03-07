@@ -19,7 +19,7 @@
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="..\bin\Languages"/>
-      <ExcludedIdentifiers Count="70">
+      <ExcludedIdentifiers Count="73">
         <Item1 Value="tfrmmain.caption"/>
         <Item2 Value="tfrmmain.lblseparatorfps.caption"/>
         <Item3 Value="tfrmmain.lblmedialength.caption"/>
@@ -90,6 +90,9 @@
         <Item68 Value="tfrmmain.mnuVideoPopupAS.caption"/>
         <Item69 Value="tfrmmain.mnuVideoPopupAF.caption"/>
         <Item70 Value="tfrmmain.mnuVideoPopupVF.caption"/>
+        <Item71 Value="tfrmcustominputdlg.lblmessage.caption"/>
+        <Item72 Value="tfrmcustomselectdlg.lblmessage.caption"/>
+        <Item73 Value="tfrmCustomSelectDlgWithPreview.lblmessage.caption"/>
       </ExcludedIdentifiers>
     </i18n>
     <VersionInfo>
@@ -784,6 +787,13 @@
         <Filename Value="formPauses.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmPauses"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
+      <Unit>
+        <Filename Value="formCustomSelectDlgWithPreview.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmCustomSelectDlgWithPreview"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
