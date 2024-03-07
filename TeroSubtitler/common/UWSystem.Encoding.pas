@@ -308,6 +308,129 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function IsUTF16_NewLineChars(const Buffer: TBytes; out ShouldBeUTF16: Boolean): Boolean;
+var
+  le_control_chars, be_control_chars, size, i : Integer;
+  ch1, ch2 : Byte;
+begin
+  Result := False;
+  ShouldBeUTF16 := False;
+
+  le_control_chars := 0;
+  be_control_chars := 0;
+  size := Length(Buffer)-1;
+  if size < 2 then Exit;
+
+  i := 0;
+  while (i < size) do
+  begin
+    ch1 := Buffer[i];
+    Inc(i);
+    ch2 := Buffer[i];
+    Inc(i);
+
+    if ch1 = 0 then
+    begin
+      if (ch2 = $0A) or (ch2 = $0D) then
+        Inc(be_control_chars);
+    end
+    else if ch2 = 0 then
+    begin
+      if (ch1 = $0A) or (ch1 = $0D) then
+        Inc(le_control_chars);
+    end;
+
+    // If we are getting both LE and BE control chars then this file is not utf16
+    if (le_control_chars > 0) and (be_control_chars > 0) then
+      Exit;
+  end;
+
+  if (le_control_chars > 0) then
+  begin
+    ShouldBeUTF16 := True;
+    Exit(True); //UTF16 LE
+  end
+  else if (be_control_chars > 0) then
+    ShouldBeUTF16 := True; //UTF16 BE
+end;
+
+// -----------------------------------------------------------------------------
+
+function IsUTF16_ASCII(const Buffer: TBytes; out ShouldBeUTF16: Boolean): Boolean;
+const
+  utf16_expected_null_percent_   = 70;
+  utf16_unexpected_null_percent_ = 10;
+
+var
+  num_odd_nulls, num_even_nulls, size, i : Integer;
+  even_null_threshold, odd_null_threshold,
+  expected_null_threshold, unexpected_null_threshold : Double;
+begin
+  Result := False;
+  ShouldBeUTF16 := False;
+
+  num_odd_nulls := 0;
+  num_even_nulls := 0;
+  size := Length(Buffer);
+
+  // Get even nulls
+  i := 0;
+  while (i < size) do
+  begin
+    if Buffer[i] = 0 then
+      Inc(num_even_nulls);
+
+    Inc(i, 2);
+  end;
+
+  // Get odd nulls
+  i := 1;
+  while (i < size) do
+  begin
+    if Buffer[i] = 0 then
+      Inc(num_odd_nulls);
+
+    Inc(i, 2);
+  end;
+
+  even_null_threshold       := (num_even_nulls * 2.0) / size;
+  odd_null_threshold        := (num_odd_nulls * 2.0) / size;
+  expected_null_threshold   := utf16_expected_null_percent_ / 100.0;
+  unexpected_null_threshold := utf16_unexpected_null_percent_ / 100.0;
+
+  // Lots of odd nulls, low number of even nulls
+  if (even_null_threshold < unexpected_null_threshold) and (odd_null_threshold > expected_null_threshold) then
+  begin
+    ShouldBeUTF16 := True;
+    Exit(True); //UTF16 LE;
+  end;
+
+  // Lots of even nulls, low number of odd nulls
+  if (odd_null_threshold < unexpected_null_threshold) and (even_null_threshold > expected_null_threshold) then
+    ShouldBeUTF16 := True; //UTF16 BE;
+end;
+
+// -----------------------------------------------------------------------------
+
+function ContainNulls(const Buffer: TBytes): Boolean; // True = Binary (assume nulls can't appear in ANSI/ASCII/UTF8 text files)
+var
+  size, i : Integer;
+begin
+  Result := False;
+  size := Length(Buffer);
+
+  i := 0;
+  while (i < size) do
+  begin
+    if Buffer[i] = 0 then
+      Exit(True);
+
+    Inc(i);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetStringCount(const ASourceString: String; const AWords: array of String): Integer;
 begin
   Result := RE_StringCount('\b(' + String.Join('|', AWords) + ')\b', ASourceString);
@@ -390,10 +513,10 @@ end;
 
 function GetEncodingFromFile(const FileName: String; const TryAnsiDetect: Boolean = True): TEncoding;
 var
-  Stream      : TStream;
-  Size        : Integer;
-  BOM         : TBytes;
-  CouldBeUTF8 : Boolean;
+  Stream     : TStream;
+  Size       : Integer;
+  BOM        : TBytes;
+  CouldBeUTF : Boolean;
 begin
   Result := NIL;
   if not FileExists(FileName) then Exit;
@@ -405,17 +528,17 @@ begin
     Stream.Position := 0;
     Stream.Read(BOM[0], Length(BOM));
 
-    if (BOM[0] = $EF) and (BOM[1] = $BB) and (BOM[2] = $BF) then
+    if (BOM[0] = $EF) and (BOM[1] = $BB) and (BOM[2] = $BF) then // UTF-8
        Result := TEncoding.UTF8
-    else if (BOM[0] = $FF) and (BOM[1] = $FE) and (BOM[2] = 0) and (BOM[3] = 0) then
-       Result := TEncoding.GetEncoding(12000) // UTF32 (LE)
-    else if (BOM[0] = $FF) and (BOM[1] = $FE) then
+    else if (BOM[0] = $FF) and (BOM[1] = $FE) and (BOM[2] = 0) and (BOM[3] = 0) then // UTF-32 (LE)
+       Result := TEncoding.GetEncoding(12000)
+    else if (BOM[0] = $FF) and (BOM[1] = $FE) then // UTF-16 (LE)
        Result := TEncoding.Unicode
-    else if (BOM[0] = $FE) and (BOM[1] = $FF) then
+    else if (BOM[0] = $FE) and (BOM[1] = $FF) then // UTF-16 (BE)
        Result := TEncoding.BigEndianUnicode
-    else if (BOM[0] = 0) and (BOM[1] = 0) and (BOM[2] = $FE) and (BOM[3] = $FF) then
-       Result := TEncoding.GetEncoding(12001) // UTF32 (BE)
-    else if (BOM[0] = $2B) and (BOM[1] = $2F) and (BOM[2] = $76) and ((BOM[3] = $38) or (BOM[3] = $39) or (BOM[3] = $2B) or (BOM[3] = $2F)) then
+    else if (BOM[0] = 0) and (BOM[1] = 0) and (BOM[2] = $FE) and (BOM[3] = $FF) then // UTF-32 (BE)
+       Result := TEncoding.GetEncoding(12001)
+    else if (BOM[0] = $2B) and (BOM[1] = $2F) and (BOM[2] = $76) and ((BOM[3] = $38) or (BOM[3] = $39) or (BOM[3] = $2B) or (BOM[3] = $2F)) then // UTF-7
        Result := TEncoding.UTF7
     else if Size > Length(BOM) then
     begin
@@ -424,10 +547,18 @@ begin
       SetLength(BOM, Size);
       Stream.Read(BOM[0], Size);
 
-      if IsUTF8(BOM, CouldBeUTF8) then
+      if IsUTF8(BOM, CouldBeUTF) then
         Result := TEncoding.UTF8
-      else if CouldBeUTF8 then
+      else if CouldBeUTF then
         Result := TEncoding.UTF8
+      else if IsUTF16_NewLineChars(BOM, CouldBeUTF) then
+        Result := TEncoding.Unicode
+      else if CouldBeUTF then
+        Result := TEncoding.BigEndianUnicode
+      else if IsUTF16_ASCII(BOM, CouldBeUTF) then
+        Result := TEncoding.Unicode
+      else if CouldBeUTF then
+        Result := TEncoding.BigEndianUnicode
       else if TryAnsiDetect then
         Result := DetectAnsiEncoding(BOM);
     end;
