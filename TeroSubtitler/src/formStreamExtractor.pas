@@ -110,7 +110,7 @@ uses
 
 procedure TfrmStreamExtractor.FormCreate(Sender: TObject);
 begin
-  VSTAddColumn(VST, lngseID, 60);
+  VSTAddColumn(VST, lngseID, 50, taRightJustify);
   VSTAddColumn(VST, lngseKind, 100);
   VSTAddColumn(VST, lngseLanguage, 100);
   VSTAddColumn(VST, lngseCodec, 100);
@@ -227,8 +227,8 @@ end;
 procedure TfrmStreamExtractor.btnFileClick(Sender: TObject);
 begin
   edtFile.Text := GetFileFromOpenDialog(edtFile.Text);
-  AllowToExtract;
   ScanFile(edtFile.Text);
+  AllowToExtract;
 end;
 
 // -----------------------------------------------------------------------------
@@ -242,7 +242,7 @@ begin
     if Execute then
       edtFolder.Text := FileName;
 
-    btnExtract.Enabled := FileExists(edtFile.Text);
+    AllowToExtract;
   finally
     Free;
   end;
@@ -326,7 +326,7 @@ begin
           s := ConcatPaths([edtFolder.Text, s]);
 
           if FList[i]^.Convert then
-            AParamArray := StringReplace(FFMPEG_ExtractStream, '-c copy', '', []).Split(' ')
+            AParamArray := StringReplace(FFMPEG_ExtractStream, '-c copy ', '', []).Split(' ')
           else
             AParamArray := FFMPEG_ExtractStream.Split(' ');
 
@@ -413,7 +413,7 @@ begin
     AParamArray[i] := StringReplace(AParamArray[i], '%input', AFileName, []);
 
   ExecuteAppLoop(Tools.FFmpeg, AParamArray, Output);
-  writeln(output.Text);
+  //writeln(output.Text);
 
   try
     prbProgress.Max := 0;
