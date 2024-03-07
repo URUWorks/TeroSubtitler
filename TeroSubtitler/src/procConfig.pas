@@ -313,8 +313,8 @@ begin
     actShowColumnNumber.Checked    := True;
     actShowColumnTimes.Checked     := True;
     actShowColumnDuration.Checked  := True;
-    //actViewShotChange.Checked      := False;
-    //actViewShotChangeExecute(NIL);
+    actViewShotChange.Checked      := False;
+    actViewShotChangeExecute(NIL);
     actCenterWaveform.Checked      := True;
     actCenterWaveformExecute(NIL);
     actShowToolBarFile.Checked        := True;
@@ -346,6 +346,8 @@ begin
     SetCoolBarMinWidth(CoolBarWaveform);
     SetCoolBarMinWidth(CoolBarVideo);
   end;
+
+  Subtitles.WriteBOM := True;
 
   {$IFDEF WINDOWS}
   frmMain.MPV.RendererMode := rmEmbedding;
@@ -453,7 +455,7 @@ begin
       CommonErrors := TSubtitleErrorTypeSet(GetValue('CommonErrors', Integer(CommonErrors)));
       frmMain.mmoText.CPSBar.Visible := GetValue('ShowCPSBar', True);
       frmMain.mmoTranslation.CPSBar.Visible := frmMain.mmoText.CPSBar.Visible;
-      Subtitles.WriteBOM := GetValue('WriteBOMOnSave', False);
+      Subtitles.WriteBOM := GetValue('WriteBOMOnSave', True);
       CloseKey;
       // Unicode favorite chars
       OpenKey('UnicodeChars');
