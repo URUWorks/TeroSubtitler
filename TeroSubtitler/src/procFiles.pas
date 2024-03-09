@@ -582,7 +582,7 @@ begin
   txt := TUWStringList.Create;
   try
     for i := 0 to Subtitles.Count-1 do
-      txt.Add(iff(SubtitleMode = smText, Subtitles[i].Text, Subtitles[i].Translation) + sLineBreak);
+      txt.Add(iff(SubtitleMode = smText, Subtitles[i].Text, Subtitles[i].Translation));
 
     if not Formatted then
       txt.Text := ReplaceEnters(RemoveTSTags(txt.Text), sLineBreak, ' ');
@@ -1299,6 +1299,7 @@ var
 begin
   {$IFDEF DARWIN}
   if frmWelcome <> NIL then frmWelcome.Close;
+  Application.ProcessMessages;
   {$ENDIF}
 
   for c := 0 to Length(FileNames)-1 do
