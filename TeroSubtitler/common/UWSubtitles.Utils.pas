@@ -1059,7 +1059,7 @@ begin
       end
       else
       // Enter char?
-      if (CurrChar = sLineBreak) or (CurrChar = #13) then
+      if CurrChar = {$IFDEF WINDOWS}#10{$ELSE}sLineBreak{$ENDIF} then
       begin
         Inc(y, MaxCharHeight);
         x := ARect.Left;
