@@ -1,4 +1,6 @@
 1.0.1.8 (x.x.2024)
+- fixed: Whitespace in exported unformatted text #285
+- fixed: Start centre appears when opening Tero with millisecond-based file #284
 - fixed: Extraction of subtitle script from video #283
 - fixed: Error detecting UTF16 files without BOM
 - fixed: Shot changes initially appear in timeline despite being unticked in menu
