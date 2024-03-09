@@ -13,7 +13,7 @@ object frmShotChanges: TfrmShotChanges
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnApply: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose

@@ -130,6 +130,8 @@ begin
   FCancel := False;
   FSMPTE  := False;
 
+  btnDetect.Enabled := frmMain.MPV.IsMediaLoaded;
+
   with frmMain.WAVE do
     if Length(GetSceneChangeList) > 0 then
     begin

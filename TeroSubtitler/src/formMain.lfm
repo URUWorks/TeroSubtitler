@@ -4064,7 +4064,7 @@ object frmMain: TfrmMain
       OnExecute = actAudioToTextExecute
     end
     object actShotChanges: TAction
-      Tag = 4
+      Tag = 1
       Category = 'Video'
       Caption = 'Shot changes...'
       OnExecute = actShotChangesExecute
