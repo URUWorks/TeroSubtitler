@@ -14,7 +14,7 @@ object frmSettings: TfrmSettings
   OnShow = FormShow
   Position = poMainFormCenter
   ShowHint = True
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnClose: TButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
@@ -384,7 +384,7 @@ object frmSettings: TfrmSettings
   object lyoConventions: TUWLayout
     Left = -508
     Height = 546
-    Top = 200
+    Top = 232
     Width = 696
     ClientHeight = 546
     ClientWidth = 696
