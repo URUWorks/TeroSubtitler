@@ -30,6 +30,8 @@ function GetCultureDisplayName(CultureName: AnsiString): String;
 function GetCultureName(const Index: Integer): String; overload;
 function GetCultureName(const ADisplayName: String): String; overload;
 function GetCultureShortName(const Index: Integer): String;
+function GetCultureIndex(const ACultureName: String): Integer;
+function GetCultureShortIndex(const ACultureName: String): Integer;
 procedure FillCultureTStrings(const Items: TStrings);
 
 function ISO_639_2CodeToName(const Code: AnsiString): AnsiString;
@@ -729,6 +731,34 @@ begin
   Result := GetCultureName(Index);
   if not Result.IsEmpty then
     Result := Copy(Result, 1, Pos('-', Result)-1);
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetCultureIndex(const ACultureName: String): Integer;
+var
+  i : Integer;
+  s : String;
+begin
+  Result := 0;
+  s := AnsiLowerCase(ACultureName);
+
+  for i := 0 to MaxCultureItems-1 do
+    if AnsiLowerCase(CultureInfo[i].CultureName) = s then
+      Exit(i);
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetCultureShortIndex(const ACultureName: String): Integer;
+var
+  i: Integer;
+begin
+  Result := 0;
+
+  for i := 0 to MaxCultureItems-1 do
+    if AnsiLowerCase(Copy(CultureInfo[i].CultureName, 1, Pos('-', CultureInfo[i].CultureName)-1)) = AnsiLowerCase(ACultureName) then
+      Exit(i);
 end;
 
 // -----------------------------------------------------------------------------
