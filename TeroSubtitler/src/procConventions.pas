@@ -86,7 +86,7 @@ type
 
 implementation
 
-uses UWSubtitleAPI.Utils;
+uses UWSubtitleAPI.Utils, LazUTF8;
 
 // -----------------------------------------------------------------------------
 
@@ -287,13 +287,16 @@ end;
 
 function TProfiles.AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
 var
-  Item: PProfileItem;
-  i: Integer;
+  s : String;
+  Item : PProfileItem;
+  i : Integer;
 begin
   Result := -1;
 
+  s := UTF8LowerCase(AName);
+
   for i := 0 to FList.Count-1 do
-    if FList.Items[i]^.Name = AName then
+    if UTF8LowerCase(FList.Items[i]^.Name) = s then
       if not AUpdate or (i <> AUpdateIndex) then
         Exit;
 
