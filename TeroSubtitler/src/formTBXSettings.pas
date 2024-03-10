@@ -58,7 +58,7 @@ var
 implementation
 
 uses
-  procWorkspace, UWSystem.Globalization, procTypes;
+  procWorkspace, UWSystem.Globalization, procTypes, procConfig, procForms;
 
 {$R *.lfm}
 
@@ -73,9 +73,17 @@ begin
   FillCultureTStrings(cboSourceLang.Items);
   cboTransLang.Items.Assign(cboSourceLang.Items);
 
-  //TODO: Localize = Maybe nothing to do
-  cboSourceLang.ItemIndex := 49;  // eng
-  cboTransLang.ItemIndex  := 120; // spa
+  edtOpenFile.Text := TBX.FileName;
+
+  if TBX.Langs^.SrcLang <> '' then
+    cboSourceLang.ItemIndex := GetCultureIndex(TBX.Langs^.SrcLang)
+  else
+    cboSourceLang.ItemIndex := 49; // eng
+
+  if TBX.Langs^.DstLang <> '' then
+    cboTransLang.ItemIndex := GetCultureIndex(TBX.Langs^.DstLang)
+  else
+    cboTransLang.ItemIndex := 120; // spa
 end;
 
 // -----------------------------------------------------------------------------
@@ -110,8 +118,16 @@ begin
   OD := TOpenDialog.Create(NIL);
   try
     OD.Title   := lngOpenFile;
-    OD.Filter  := lngAllSupportedFiles + '(*.tbx)|*.tbx';
+    OD.Filter  := lngAllSupportedFiles + ' (*.tbx)|*.tbx';
     OD.Options := [ofCreatePrompt, ofOverwritePrompt];
+
+    if edtOpenFile.Text <> '' then
+    begin
+      OD.FileName   := ExtractFileName(edtOpenFile.Text);
+      OD.InitialDir := ExtractFileDir(edtOpenFile.Text);
+    end
+    else
+      OD.InitialDir := TerminologyFolder;
 
     if OD.Execute then
     begin
@@ -128,12 +144,29 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmTBXSettings.btnApplyClick(Sender: TObject);
+var
+  s: String;
 begin
   TBX.Header^.lang   := GetCultureName(cboSourceLang.ItemIndex);
-  TBX.Langs^.SrcLang := GetCultureShortName(cboSourceLang.ItemIndex);
-  TBX.Langs^.DstLang := GetCultureShortName(cboTransLang.ItemIndex);
-  TBX.LoadFromFile(edtOpenFile.Text);
-  Close;
+  TBX.Langs^.SrcLang := GetCultureName(cboSourceLang.ItemIndex);
+  TBX.Langs^.DstLang := GetCultureName(cboTransLang.ItemIndex);
+  //TBX.Langs^.SrcLang := GetCultureShortName(cboSourceLang.ItemIndex);
+  //TBX.Langs^.DstLang := GetCultureShortName(cboTransLang.ItemIndex);
+
+  if edtOpenFile.Text <> '' then
+  begin
+    s := edtOpenFile.Text;
+
+    if not FileExists(s) and (ExtractFileDir(s) = '') then
+      s := ConcatPaths([TerminologyFolder, ChangeFileExt(s, '.tbx')]);
+
+    TBX.LoadFromFile(s);
+
+    ShowTBX;
+    Close;
+  end
+  else
+    edtOpenFile.SetFocus;
 end;
 
 // -----------------------------------------------------------------------------

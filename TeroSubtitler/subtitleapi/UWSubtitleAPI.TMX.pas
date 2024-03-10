@@ -81,6 +81,7 @@ type
     destructor Destroy; override;
     procedure Clear;
     procedure Close;
+    procedure Save;
     procedure LoadFromFile(const AFileName: String);
     function SaveToFile(const AFileName: String): Boolean;
     function AddItem(const Original, Translated, Notes: String; const AllowDuplicate: Boolean = False): Integer;
@@ -761,10 +762,16 @@ end;
 
 procedure TUWTMX.Close;
 begin
+  Save;
+  Clear;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTMX.Save;
+begin
   if FChanged then
     SaveToFile(FFileName);
-
-  Clear;
 end;
 
 // -----------------------------------------------------------------------------

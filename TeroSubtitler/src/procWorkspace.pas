@@ -83,6 +83,8 @@ procedure UpdateVideoLengthString;
 procedure GetTranslationMemoryAtIndex(const Index: Integer);
 procedure CheckForTranslationMemory(const AIndex: Integer);
 procedure CheckForTerminology(const AIndex: Integer);
+procedure CloseTranslationMemory;
+procedure CloseTerminology;
 
 procedure RefreshAppTitle;
 
@@ -1310,6 +1312,22 @@ begin
     TBX.FindAllTerms(Subtitles[AIndex].Text);
     frmTBX.UpdateTermList;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure CloseTranslationMemory;
+begin
+  if (frmTranslationMemory <> NIL) then frmTranslationMemory.Close;
+  TMX.Close;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure CloseTerminology;
+begin
+  if (frmTBX <> NIL) then frmTBX.Close;
+  TBX.Close;
 end;
 
 // -----------------------------------------------------------------------------

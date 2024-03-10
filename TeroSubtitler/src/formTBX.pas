@@ -60,7 +60,7 @@ var
 implementation
 
 uses
-  procTypes, procVST, procWorkspace, procColorTheme, procConfig;
+  procTypes, procVST, procWorkspace, procColorTheme, procConfig, formMain;
 
 {$R *.lfm}
 
@@ -91,6 +91,7 @@ procedure TfrmTBX.FormShow(Sender: TObject);
 begin
   LoadFormSettings(Self);
   CheckColorTheme(Self);
+  CheckForTerminology(VSTFocusedNode(frmMain.VST));
 end;
 
 // -----------------------------------------------------------------------------

@@ -22,7 +22,8 @@ unit formTranslationMemorySettings;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLTranslator, procLocalize;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  LCLTranslator, procLocalize;
 
 type
 
@@ -58,7 +59,8 @@ var
 implementation
 
 uses
-  procWorkspace, UWSystem.Globalization, procTypes;
+  procWorkspace, UWSystem.Globalization, procTypes, procConfig, procForms,
+  UWSubtitleAPI.TMX, formMain;
 
 {$R *.lfm}
 
@@ -73,9 +75,17 @@ begin
   FillCultureTStrings(cboSourceLang.Items);
   cboTransLang.Items.Assign(cboSourceLang.Items);
 
-  //TODO: Localize = Maybe nothing to do
-  cboSourceLang.ItemIndex := 49;  // eng
-  cboTransLang.ItemIndex  := 120; // spa
+  edtOpenFile.Text := TMX.FileName;
+
+  if TMX.Langs^.SrcLang <> '' then
+    cboSourceLang.ItemIndex := GetCultureIndex(TMX.Langs^.SrcLang)
+  else
+    cboSourceLang.ItemIndex := 49; // eng
+
+  if TMX.Langs^.DstLang <> '' then
+    cboTransLang.ItemIndex := GetCultureIndex(TMX.Langs^.DstLang)
+  else
+    cboTransLang.ItemIndex := 120; // spa
 end;
 
 // -----------------------------------------------------------------------------
@@ -110,8 +120,16 @@ begin
   OD := TOpenDialog.Create(NIL);
   try
     OD.Title   := lngOpenFile;
-    OD.Filter  := lngAllSupportedFiles + '(*.tmx)|*.tmx';
+    OD.Filter  := lngAllSupportedFiles + ' (*.tmx)|*.tmx';
     OD.Options := [ofCreatePrompt, ofOverwritePrompt];
+
+    if edtOpenFile.Text <> '' then
+    begin
+      OD.FileName   := ExtractFileName(edtOpenFile.Text);
+      OD.InitialDir := ExtractFileDir(edtOpenFile.Text);
+    end
+    else
+      OD.InitialDir := TranslationMemoryFolder;
 
     if OD.Execute then
     begin
@@ -128,13 +146,36 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmTranslationMemorySettings.btnApplyClick(Sender: TObject);
+var
+  s : String;
+  hdr : TUWTMXHeader;
 begin
   TMX.Langs^.SrcLang := GetCultureName(cboSourceLang.ItemIndex);
   TMX.Langs^.DstLang := GetCultureName(cboTransLang.ItemIndex);
-  TMX.LoadFromFile(edtOpenFile.Text);
 
-  //ShowTranslationMemory;
-  Close;
+  if edtOpenFile.Text <> '' then
+  begin
+    s := edtOpenFile.Text;
+
+    if not FileExists(s) and (ExtractFileDir(s) = '') then
+      s := ConcatPaths([TranslationMemoryFolder, ChangeFileExt(s, '.tmx')]);
+
+    TMX.LoadFromFile(s);
+
+    hdr := TMX.Header;
+    hdr.creationtool := ProgramName;
+    TMX.Header := hdr;
+
+    ShowTranslationMemory;
+    if not Workspace.TranslatorMode then
+      frmMain.actTranslatorMode.Execute
+    else
+      frmMain.VST.Invalidate;
+
+    Close;
+  end
+  else
+    edtOpenFile.SetFocus;
 end;
 
 // -----------------------------------------------------------------------------

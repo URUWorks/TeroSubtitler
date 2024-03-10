@@ -13,7 +13,7 @@ object frmTBXSettings: TfrmTBXSettings
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object edtOpenFile: TEdit
     AnchorSideRight.Control = btnOpenFile
     Left = 160

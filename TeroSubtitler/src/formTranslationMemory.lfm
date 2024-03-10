@@ -12,7 +12,7 @@ object frmTranslationMemory: TfrmTranslationMemory
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.2.0.0'
   object VST: TLazVirtualStringTree
     AnchorSideRight.Control = btnClose
     AnchorSideBottom.Control = Owner
@@ -50,8 +50,8 @@ object frmTranslationMemory: TfrmTranslationMemory
     Anchors = [akTop, akRight]
     Caption = 'Copy'
     Default = True
-    OnClick = btnCopyClick
     TabOrder = 1
+    OnClick = btnCopyClick
   end
   object btnValidate: TButton
     AnchorSideTop.Control = btnCopy
@@ -63,8 +63,8 @@ object frmTranslationMemory: TfrmTranslationMemory
     Anchors = [akTop, akRight]
     BorderSpacing.Top = 5
     Caption = 'Validate'
-    OnClick = btnValidateClick
     TabOrder = 2
+    OnClick = btnValidateClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -80,8 +80,8 @@ object frmTranslationMemory: TfrmTranslationMemory
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 4
+    OnClick = btnCloseClick
   end
   object btnUse: TButton
     AnchorSideTop.Control = btnValidate
@@ -93,7 +93,7 @@ object frmTranslationMemory: TfrmTranslationMemory
     Anchors = [akTop, akRight]
     BorderSpacing.Top = 5
     Caption = 'Use'
-    OnClick = btnUseClick
     TabOrder = 3
+    OnClick = btnUseClick
   end
 end

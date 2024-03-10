@@ -12,7 +12,7 @@ object frmTBX: TfrmTBX
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.2.0.0'
   object VST: TLazVirtualStringTree
     AnchorSideRight.Control = btnClose
     AnchorSideBottom.Control = btnClose
@@ -54,7 +54,7 @@ object frmTBX: TfrmTBX
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 1
+    OnClick = btnCloseClick
   end
 end

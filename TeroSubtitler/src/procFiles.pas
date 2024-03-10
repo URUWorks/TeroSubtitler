@@ -191,6 +191,9 @@ begin
     if not AKeepVideoOpen then
       actCloseVideo.Execute;
 
+    CloseTranslationMemory;
+    CloseTerminology;
+
     SubtitleInfo.Text.FileName := '';
     SubtitleInfo.Translation.FileName := '';
     SubtitleChangedReset;

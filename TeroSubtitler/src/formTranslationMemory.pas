@@ -204,7 +204,10 @@ procedure TfrmTranslationMemory.btnUseClick(Sender: TObject);
 begin
   if Assigned(VST.FocusedNode) then
     with VST.FocusedNode^ do
+    begin
+      Subtitles.ItemPointer[VSTFocusedNode(frmMain.VST)]^.Data := TMX.IndexFromMap(Index)+1;
       frmMain.mmoTranslation.Text := GetItemAtIndex(Index);
+    end;
 end;
 
 // -----------------------------------------------------------------------------
