@@ -115,7 +115,7 @@ begin
 
   c := LineCount(AMessage, LineEnding);
   h := lblCustomAction.Canvas.TextHeight('Aj');
-  Height := (c * h) + ((Height - lblMessage.Height) + h);
+  Height := (c*h) + ((Height - lblMessage.Height) + {$IFDEF WINDOWS}h{$ELSE}(h*2){$ENDIF});
 
   Result := ShowModal;
 end;
