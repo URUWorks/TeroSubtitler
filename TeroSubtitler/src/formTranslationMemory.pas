@@ -234,8 +234,7 @@ end;
 
 procedure TfrmTranslationMemory.FindSimilary(const AText: String);
 begin
-  VST.RootNodeCount := TMX.FindSimilary(AText);
-  VST.Invalidate;
+  TMX.FindSimilary(AText);
 end;
 
 // -----------------------------------------------------------------------------

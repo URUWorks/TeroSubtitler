@@ -49,7 +49,7 @@ type
   private
 
   public
-    procedure UpdateTermList;
+
   end;
 
 var
@@ -157,14 +157,6 @@ begin
   wCols := (VST.Width - (GetSystemMetrics(SM_CXVSCROLL)+(VST.Header.Columns.Count*2))) div (VST.Header.Columns.Count);
   for c := 0 to VST.Header.Columns.Count-1 do
     VST.Header.Columns[c].Width := wCols;
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure TfrmTBX.UpdateTermList;
-begin
-  VST.RootNodeCount := Length(TBX.FoundList);
-  VST.Invalidate;
 end;
 
 // -----------------------------------------------------------------------------
