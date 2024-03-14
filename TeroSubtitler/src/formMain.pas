@@ -933,6 +933,10 @@ type
     {$IFDEF DARWIN}
     procedure DoSaveDialogTypeChange(Sender: TObject);
     {$ENDIF}
+    // TMX
+    procedure TMXOnFindFinished(Sender: TObject; const ACount: Integer);
+    // TBX
+    procedure TBXOnFindFinished(Sender: TObject; const ACount: Integer);
     // Memo (ATSynEdit)
     procedure MemoClickLink(Sender: TObject; const ALink: String);
     procedure MemoContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
@@ -1305,7 +1309,8 @@ uses
   procUnDockVideoControls, procColorTheme, procFiles, procMPV, procSubtitle,
   procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.SysUtils,
   UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procThumbnails,
-  formCustomQuestionDlg, formCustomSelectDlg, libMPV.Client;
+  formCustomQuestionDlg, formCustomSelectDlg, formTranslationMemory, formTBX,
+  libMPV.Client;
 
 {$R *.lfm}
 
@@ -1377,9 +1382,9 @@ begin
   // Actors
   LoadActors;
   // TMX
-  TMX := TUWTMX.Create('');
+  TMX := TUWTMX.Create('', '', '', @TMXOnFindFinished);
   // TBX
-  TBX := TUWTBX.Create('');
+  TBX := TUWTBX.Create('', '', '', @TBXOnFindFinished);
   // Hunspell
   if not HunspellInstance.Ready then
     HunspellInstance.LoadHunspell(HunspellFileName);
@@ -2016,6 +2021,38 @@ begin
   end;
 end;
 {$ENDIF}
+
+// -----------------------------------------------------------------------------
+
+{ TMX }
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.TMXOnFindFinished(Sender: TObject; const ACount: Integer);
+begin
+  if Assigned(frmTranslationMemory) then
+    with frmTranslationMemory do
+    begin
+      VST.RootNodeCount := ACount;
+      VST.Invalidate;
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
+{ TBX }
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.TBXOnFindFinished(Sender: TObject; const ACount: Integer);
+begin
+  if Assigned(frmTBX) then
+    with frmTBX do
+    begin
+      VST.RootNodeCount := ACount;
+      VST.Invalidate;
+    end;
+end;
 
 // -----------------------------------------------------------------------------
 
