@@ -43,20 +43,21 @@ type
   private
     FOnWriteStream: TOnWriteStream;
     FStream: TStream;
+    procedure DoOnWrite;
   public
     constructor Create(AStream: TStream);
     destructor Destroy; override;
     function Read(var Buffer; Count: LongInt): LongInt; override;
     function Write(const Buffer; Count: LongInt): LongInt; override;
     function Seek(Offset: LongInt; Origin: Word): LongInt; override;
-    procedure DoProgress;
+    function Seek(const Offset: Int64; Origin: TSeekOrigin): Int64; override;
   published
     property OnWriteStream: TOnWriteStream read FOnWriteStream write FOnWriteStream;
   end;
 
   { TDownload }
 
-  TOnDownloadProgress = procedure(Sender: TObject; const AFrom, ATo: String; const APos, ASize, AElapsed, ARemaining, ASpeed: LongInt) of object;
+  TOnDownloadProgress = procedure(Sender: TObject; const AFrom, ATo: String; const APos, ASize: Int64; const AElapsed, ARemaining, ASpeed: LongInt) of object;
   TOnDownloadError = procedure(Sender: TObject; const AErrMsg: String = '') of object;
   TOnDownloadCompleted = TNotifyEvent;
 
@@ -65,11 +66,11 @@ type
     FFPHTTPClient: TFPHTTPClient;
     FURL: String;
     FLocalFile: String;
-    FRemaining: Integer;
-    FSpeed: Integer;
     FStartTime: QWord;
     FElapsed: QWord;
-    FTick: Qword;
+    FRemaining: Integer;
+    FSpeed: Integer;
+    FTick: QWord;
     FPos: Int64;
     FSize: Int64;
     FErrMsg: String;
@@ -195,7 +196,7 @@ begin
   HTTPClient := TFPHTTPClient.Create(NIL);
   try
     HTTPClient.AllowRedirect := True;
-    HTTPClient.AddHeader('User-Agent', 'Mozilla/5.0(compatible; fpweb)');
+    HTTPClient.AddHeader('User-Agent', 'Mozilla/5.0 (compatible; fpweb)');
     try
       AString := HTTPClient.Get(AURL);
       Result := True;
@@ -268,7 +269,14 @@ end;
 function TDownloadStream.Write(const Buffer; Count: LongInt): LongInt;
 begin
   Result := FStream.Write(Buffer, Count);
-  DoProgress;
+  DoOnWrite;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TDownloadStream.Seek(const Offset: Int64; Origin: TSeekOrigin): Int64;
+begin
+  Result := FStream.Seek(Offset, Origin);
 end;
 
 // -----------------------------------------------------------------------------
@@ -280,7 +288,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TDownloadStream.DoProgress;
+procedure TDownloadStream.DoOnWrite;
 begin
   if Assigned(FOnWriteStream) then
     FOnWriteStream(Self, Position);
@@ -340,11 +348,14 @@ begin
   if FElapsed < 1000 then
     Exit;
 
+  FElapsed := FElapsed div 1000;
   FPos := APos;
-  FSpeed := Round(FPos/FElapsed);
+  FSpeed := Round(FPos / FElapsed);
 
   if FSpeed > 0 then
-    FRemaining := Round((FSize - FPos)/FSpeed);
+    FRemaining := Round((FSize - FPos) / FSpeed)
+  else
+    FRemaining := 0;
 
   if FElapsed >= FTick + 1 then
   begin
@@ -404,10 +415,12 @@ begin
         HttpClient.HTTPMethod('GET', URL, SS, []);
       except
       end;
-      if HttpClient.ResponseStatusCode = 200 then
-        FSize := StrToInt64Def(HttpClient.ResponseHeaders.Values['CONTENT-LENGTH'], 0);
 
-      Result := True;
+      if HttpClient.ResponseStatusCode = 200 then
+      begin
+        FSize := StrToInt64Def(HttpClient.ResponseHeaders.Values['CONTENT-LENGTH'], 0);
+        Result := True;
+      end;
     finally
       HttpClient.Free;
     end;
@@ -456,7 +469,7 @@ begin
           FFPHTTPClient.AddHeader('Range', 'bytes=' + IntToStr(FPos) + '-' + IntToStr(FSize));
         end;
 
-        FFPHTTPClient.AddHeader('User-Agent','Mozilla/5.0 (compatible; fpweb)');
+        FFPHTTPClient.AddHeader('User-Agent', 'Mozilla/5.0 (compatible; fpweb)');
         FFPHTTPClient.AllowRedirect := True;
         FFPHTTPClient.HTTPMethod('GET', FURL, DS, [200, 206]);
         if not FFPHTTPClient.Terminated then

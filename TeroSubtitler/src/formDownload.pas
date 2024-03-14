@@ -52,7 +52,7 @@ type
     FDownloader: TDownload;
     FURL, FLocalFile: String;
     FDownloaded: TDownloadResult;
-    procedure DoOnDownloadProgress(Sender: TObject; const AFrom, ATo: String; const APos, ASize, AElapsed, ARemaining, ASpeed: LongInt);
+    procedure DoOnDownloadProgress(Sender: TObject; const AFrom, ATo: String; const APos, ASize: Int64; const AElapsed, ARemaining, ASpeed: LongInt);
     procedure DoOnDownloadCompleted(Sender: TObject);
   public
     function Execute(const AURL, ALocalFile: String): TDownloadResult;
@@ -68,8 +68,8 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procDialogs, procColorTheme, Zipper,
-  UWSystem.TimeUtils;
+  procTypes, procWorkspace, procDialogs, procColorTheme, UWSystem.TimeUtils,
+  Zipper;
 
 {$R *.lfm}
 
@@ -155,21 +155,17 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmDownload.DoOnDownloadProgress(Sender: TObject; const AFrom, ATo: String; const APos, ASize, AElapsed, ARemaining, ASpeed: LongInt);
+procedure TfrmDownload.DoOnDownloadProgress(Sender: TObject; const AFrom, ATo: String; const APos, ASize: Int64; const AElapsed, ARemaining, ASpeed: LongInt);
 begin
   lblFileData.Caption := ExtractFileName(ATo);
 
   lblSpeedData.Caption := FormatSpeed(ASpeed);
   lblSpeedData.Update;
 
-  lblElapsedData.Caption := TimeToString(AElapsed);
+  lblElapsedData.Caption := TimeToString(AElapsed * 1000);
   lblElapsedData.Update;
 
-  if ASize > 0 then
-    lblRemainingData.Caption := TimeToString(ARemaining)
-  else
-    lblRemainingData.Caption := '';
-
+  lblRemainingData.Caption := TimeToString(ARemaining * 1000);
   lblRemainingData.Update;
 
   if ASize > 0 then
