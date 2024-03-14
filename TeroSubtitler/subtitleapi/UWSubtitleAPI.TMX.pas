@@ -64,20 +64,41 @@ type
 
   TUWTMXMap = specialize TFPGMap<Double, Integer>; // Ratio, Index
 
+  { TUWTMXThread }
+
+  TUWTMXOnFindFinished = procedure(Sender: TObject; const ACount: Integer) of Object;
+
+  TUWTMX = class;
+
+  TUWTMXThread = class(TThread)
+  private
+    FTMX: TUWTMX;
+    procedure DoOnFindFinished;
+    procedure DoOnTerminated(Sender: TObject);
+  protected
+    procedure Execute; override;
+  public
+    constructor Create(const ATMX: TUWTMX);
+    destructor Destroy; override;
+  end;
+
   { TUWTMX }
 
   TUWTMX = class
   private
     FFileName : String;
+    FFind     : String;
     FChanged  : Boolean;
     FHeader   : TUWTMXHeader;
     FLangs    : TUWTMXItemInfo;
     FList     : TUWTMXList;
     FMap      : TUWTMXMap;
     FPercent  : Single;
+    FThread   : TUWTMXThread;
+    FOnFindFinished : TUWTMXOnFindFinished;
     function GetLangPointer: PUWTMXItemInfo;
   public
-    constructor Create(const AFileName: String; ASrcLang: String = ''; ADstLang: String = '');
+    constructor Create(const AFileName: String; ASrcLang: String = ''; ADstLang: String = ''; AOnFindFinished: TUWTMXOnFindFinished = NIL);
     destructor Destroy; override;
     procedure Clear;
     procedure Close;
@@ -85,18 +106,21 @@ type
     procedure LoadFromFile(const AFileName: String);
     function SaveToFile(const AFileName: String): Boolean;
     function AddItem(const Original, Translated, Notes: String; const AllowDuplicate: Boolean = False): Integer;
-    function FindSimilary(const AText: String): Integer; // fill Map with results
+    procedure FindSimilary(const AText: String); // fill Map with results
     function ItemFromMap(const AIndex: Integer): TUWTMXItem;
     function IndexFromMap(const AIndex: Integer): Integer;
     function Ready: Boolean;
     function FillMapWithIndex(const AIndex: Integer): Integer;
     function Find(AText: String): Integer;
+    procedure Cancel;
     property FileName     : String         read FFileName write FFileName;
     property Items        : TUWTMXList     read FList;
     property Map          : TUWTMXMap      read FMap;
     property Langs        : PUWTMXItemInfo read GetLangPointer;
     property Header       : TUWTMXHeader   read FHeader write FHeader;
     property SimilPercent : Single         read FPercent;
+  public
+    property OnFindFinished : TUWTMXOnFindFinished read FOnFindFinished write FOnFindFinished;
   end;
 
 // -----------------------------------------------------------------------------
@@ -702,11 +726,82 @@ end;
 
 // -----------------------------------------------------------------------------
 
+{ TUWTMXThread }
+
+// -----------------------------------------------------------------------------
+
+constructor TUWTMXThread.Create(const ATMX: TUWTMX);
+begin
+  inherited Create(True);
+  FreeOnTerminate := True;
+  OnTerminate := @DoOnTerminated;
+  FTMX := ATMX;
+  Start;
+end;
+
+// -----------------------------------------------------------------------------
+
+destructor TUWTMXThread.Destroy;
+begin
+  FTMX := NIL;
+  inherited Destroy;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTMXThread.DoOnFindFinished;
+begin
+  if Assigned(FTMX) then
+    with FTMX do
+      if Assigned(FOnFindFinished) then
+        FOnFindFinished(FTMX, FMap.Count);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTMXThread.DoOnTerminated(Sender: TObject);
+begin
+  if Assigned(FTMX) then
+    FTMX.FThread := NIL;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTMXThread.Execute;
+var
+  i: Integer;
+  Percent: Double;
+begin
+  if Assigned(FTMX) then
+    with FTMX do
+    begin
+      FMap.Clear;
+
+      if (FList.Count > 0) and (FFind <> '') then
+      begin
+        for i := 0 to FList.Count-1 do
+          if not Terminated then
+          begin
+            Percent := StrSimilarityRatio(FFind, FList.Items[i]^.Original);
+            if Percent > FPercent then
+            begin
+              FMap.Add(Percent, i);
+              if FMap.Count >= 5 then
+                Break;
+            end;
+          end;
+      end;
+      Synchronize(@DoOnFindFinished);
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
 { TUWTMX }
 
 // -----------------------------------------------------------------------------
 
-constructor TUWTMX.Create(const AFileName: String; ASrcLang: String = ''; ADstLang: String = '');
+constructor TUWTMX.Create(const AFileName: String; ASrcLang: String = ''; ADstLang: String = ''; AOnFindFinished: TUWTMXOnFindFinished = NIL);
 begin
   FillByte(FHeader, SizeOf(TUWTMXHeader), 0);
   if ASrcLang.IsEmpty then ASrcLang := 'en-US';
@@ -721,8 +816,12 @@ begin
   FMap.Sorted := True;
 
   FFileName := '';
+  FFind     := '';
   FChanged  := False;
   FPercent  := 0.65;
+
+  FThread         := NIL;
+  FOnFindFinished := AOnFindFinished;
 
   if AFileName <> '' then LoadFromFile(AFileName);
 end;
@@ -735,6 +834,7 @@ begin
   FList.Free;
   FMap.Clear;
   FMap.Free;
+
   inherited Destroy;
 end;
 
@@ -963,29 +1063,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTMX.FindSimilary(const AText: String): Integer;
-var
-  i: Integer;
-  Percent: Double;
+procedure TUWTMX.FindSimilary(const AText: String);
 begin
-  Result := 0;
-  FMap.Clear;
-
-  if (FList.Count > 0) and (AText <> '') then
-  begin
-    for i := 0 to FList.Count-1 do
-    begin
-      Percent := StrSimilarityRatio(AText, FList.Items[i]^.Original);
-      if Percent > FPercent then
-      begin
-        FMap.Add(Percent, i);
-        if FMap.Count >= 5 then
-          Break;
-      end;
-    end;
-
-    Result := FMap.Count;
-  end;
+  Cancel;
+  FFind   := AText;
+  FThread := TUWTMXThread.Create(Self);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1054,6 +1136,18 @@ begin
       end;
     end;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTMX.Cancel;
+begin
+  if Assigned(FThread) then
+    with FThread do
+    begin
+      Terminate;
+      WaitFor;
+    end;
 end;
 
 // -----------------------------------------------------------------------------

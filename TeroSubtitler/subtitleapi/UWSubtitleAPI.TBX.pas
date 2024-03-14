@@ -55,20 +55,41 @@ type
 
   TUWTBXList = specialize TFPGList<PUWTBXItem>;
 
+  { TUWTBXThread }
+
+  TUWTBXOnFindFinished = procedure(Sender: TObject; const ACount: Integer) of Object;
+
+  TUWTBX = class;
+
+  TUWTBXThread = class(TThread)
+  private
+    FTBX: TUWTBX;
+    procedure DoOnFindFinished;
+    procedure DoOnTerminated(Sender: TObject);
+  protected
+    procedure Execute; override;
+  public
+    constructor Create(const ATBX: TUWTBX);
+    destructor Destroy; override;
+  end;
+
   { TUWTBX }
 
   TUWTBX = class
   private
     FFileName  : String;
+    FFind      : String;
     FChanged   : Boolean;
     FHeader    : TUWTBXHeader;
     FLangs     : TUWTBXItemInfo;
     FList      : TUWTBXList;
-    FFoundList :  TIntegerDynArray;
+    FFoundList : TIntegerDynArray;
+    FThread    : TUWTBXThread;
+    FOnFindFinished : TUWTBXOnFindFinished;
     function GetLangPointer: PUWTBXItemInfo;
     function GetHeaderPointer: PUWTBXHeader;
   public
-    constructor Create(const AFileName: String; ASrcLang: String = ''; ADstLang: String = '');
+    constructor Create(const AFileName: String; ASrcLang: String = ''; ADstLang: String = ''; AOnFindFinished: TUWTBXOnFindFinished = NIL);
     destructor Destroy; override;
     procedure Clear;
     procedure Close;
@@ -78,12 +99,15 @@ type
     function AddItem(const Original, Translated, Notes: String; const AllowDuplicate: Boolean = False): Integer;
     function Ready: Boolean;
     function Find(AText: String): Integer;
-    function FindAllTerms(const AText: String): Boolean;
+    procedure FindAllTerms(const AText: String);
+    procedure Cancel;
     property FileName  : String           read FFileName write FFileName;
     property Items     : TUWTBXList       read FList;
     property Langs     : PUWTBXItemInfo   read GetLangPointer;
     property Header    : PUWTBXHeader     read GetHeaderPointer;
     property FoundList : TIntegerDynArray read FFoundList;
+  public
+    property OnFindFinished : TUWTBXOnFindFinished read FOnFindFinished write FOnFindFinished;
   end;
 
 // -----------------------------------------------------------------------------
@@ -110,11 +134,81 @@ end;
 
 // -----------------------------------------------------------------------------
 
+{ TUWTBXThread }
+
+// -----------------------------------------------------------------------------
+
+constructor TUWTBXThread.Create(const ATBX: TUWTBX);
+begin
+  inherited Create(True);
+  FreeOnTerminate := True;
+  OnTerminate := @DoOnTerminated;
+  FTBX := ATBX;
+  Start;
+end;
+
+// -----------------------------------------------------------------------------
+
+destructor TUWTBXThread.Destroy;
+begin
+  FTBX := NIL;
+  inherited Destroy;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTBXThread.DoOnFindFinished;
+begin
+  if Assigned(FTBX) then
+    with FTBX do
+      if Assigned(FOnFindFinished) then
+        FOnFindFinished(FTBX, Length(FTBX.FoundList));
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTBXThread.DoOnTerminated(Sender: TObject);
+begin
+  if Assigned(FTBX) then
+    FTBX.FThread := NIL;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTBXThread.Execute;
+var
+  i, c : Integer;
+  w : TStringArray;
+begin
+  if Assigned(FTBX) then
+    with FTBX do
+    begin
+      SetLength(FFoundList, 0);
+
+      if not FFind.IsEmpty and Ready and (FList.Count > 0) then
+      begin
+        w := FFind.Split([' ',',','.',';','/','\',':','''','"','`','(',')','[',']','{','}']);
+        for i := 0 to High(w) do
+        begin
+          c := Find(w[i]);
+          if (c > -1) then
+          begin
+            SetLength(FFoundList, Length(FFoundList)+1);
+            FFoundList[High(FFoundList)] := c;
+          end;
+        end;
+      end;
+      Synchronize(@DoOnFindFinished);
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
 { TUWTBX }
 
 // -----------------------------------------------------------------------------
 
-constructor TUWTBX.Create(const AFileName: String; ASrcLang: String = ''; ADstLang: String = '');
+constructor TUWTBX.Create(const AFileName: String; ASrcLang: String = ''; ADstLang: String = ''; AOnFindFinished: TUWTBXOnFindFinished = NIL);
 begin
   FillByte(FHeader, SizeOf(TUWTBXHeader), 0);
   if ASrcLang.IsEmpty then ASrcLang := 'en-US'; //'en';
@@ -126,8 +220,12 @@ begin
   FList := TUWTBXList.Create;
 
   FFileName := '';
+  FFind     := '';
   FChanged  := False;
   SetLength(FFoundList, 0);
+
+  FThread         := NIL;
+  FOnFindFinished := AOnFindFinished;
 
   if AFileName <> '' then LoadFromFile(AFileName);
 end;
@@ -424,28 +522,23 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTBX.FindAllTerms(const AText: String): Boolean;
-var
-  i, c : Integer;
-  w : TStringArray;
+procedure TUWTBX.FindAllTerms(const AText: String);
 begin
-  Result := False;
-  SetLength(FFoundList, 0);
+  Cancel;
+  FFind   := AText;
+  FThread := TUWTBXThread.Create(Self);
+end;
 
-  if not AText.IsEmpty and Ready and (FList.Count > 0) then
-  begin
-    w := AText.Split([' ',',','.',';','/','\',':','''','"','`','(',')','[',']','{','}']);
-    for i := 0 to High(w) do
+// -----------------------------------------------------------------------------
+
+procedure TUWTBX.Cancel;
+begin
+  if Assigned(FThread) then
+    with FThread do
     begin
-      c := Find(w[i]);
-      if (c > -1) then
-      begin
-        SetLength(FFoundList, Length(FFoundList)+1);
-        FFoundList[High(FFoundList)] := c;
-      end;
+      Terminate;
+      WaitFor;
     end;
-    Result := (Length(FFoundList) > 0);
-  end;
 end;
 
 // -----------------------------------------------------------------------------
