@@ -1308,10 +1308,7 @@ end;
 procedure CheckForTerminology(const AIndex: Integer);
 begin
   if (frmTBX <> NIL) then
-  begin
     TBX.FindAllTerms(Subtitles[AIndex].Text);
-    frmTBX.UpdateTermList;
-  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1509,6 +1506,9 @@ begin
         tedFinal.SetValueOnly(Subtitles[LastIndex].FinalTime);
         if VST.SelectedCount = 1 then
         begin
+          if VST.FocusedNode <> NIL then
+            NodeIndex := VST.FocusedNode^.Index;
+
           tedDuration.SetValueOnly(Subtitles.Duration[NodeIndex]);
           tedPause.SetValueOnly(Subtitles.Pause[NodeIndex]);
           mmoText.Text        := Subtitles[NodeIndex].Text;
