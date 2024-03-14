@@ -116,6 +116,23 @@ uses
 
 // -----------------------------------------------------------------------------
 
+function CheckIfValidFileName(const AFileName: String): Boolean;
+var
+  d: String;
+begin
+  Result := False;
+  if not AFileName.IsEmpty then
+  begin
+    d := ExtractFileDir(AFileName);
+    if DirectoryExists(d) then
+      Exit(True)
+    else
+      Exit(CreateDir(d));
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetSuggestedFileNameForSave: String;
 begin
   Result := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
@@ -491,7 +508,7 @@ begin
       S := ChangeFileExt(FileName, STR_EXCEL_EXTENSION)
   end;
 
-  if Subtitles.SaveToFile(S, _FPS, _Encoding, Format, SubtitleMode) then
+  if CheckIfValidFileName(S) and Subtitles.SaveToFile(S, _FPS, _Encoding, Format, SubtitleMode) then
   begin
     if SubtitleMode = smText then
       SubtitleInfo.Text.FileName := S
@@ -590,7 +607,10 @@ begin
     if not Formatted then
       txt.Text := ReplaceEnters(RemoveTSTags(txt.Text), sLineBreak, ' ');
 
-    txt.SaveToFile(FileName, AEncoding);
+    if CheckIfValidFileName(FileName) then
+      txt.SaveToFile(FileName, AEncoding)
+    else
+      ShowErrorMessageDialog(lngSaveSubtitleError);
   finally
     txt.Free;
   end;
