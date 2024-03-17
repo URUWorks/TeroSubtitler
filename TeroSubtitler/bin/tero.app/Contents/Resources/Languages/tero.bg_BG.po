@@ -3744,6 +3744,10 @@ msgctxt "tfrmmain.acttranslatormode.caption"
 msgid "Translator mode"
 msgstr ""
 
+#: tfrmmain.acttts.caption
+msgid "Text to speech..."
+msgstr ""
+
 #: tfrmmain.actunbreakentry.caption
 msgid "Unbreak entry"
 msgstr "На  по-малко редове"
@@ -4491,6 +4495,10 @@ msgstr ""
 msgid "Additional mpv options"
 msgstr "Допълнителни възможности на MPV"
 
+#: tfrmsettings.lblapi_tts.caption
+msgid "ElevenLabs API key"
+msgstr ""
+
 #: tfrmsettings.lblautobackup.caption
 msgid "Auto-backup every (minutes)"
 msgstr ""
@@ -4681,26 +4689,6 @@ msgstr "Разцветка"
 #: tfrmsettings.lbltimecodemode.caption
 msgid "Time code mode"
 msgstr ""
-
-#: tfrmsettings.lbltoolbareditor.caption
-msgctxt "tfrmsettings.lbltoolbareditor.caption"
-msgid "Editor"
-msgstr "Обработчик"
-
-#: tfrmsettings.lbltoolbarmain.caption
-msgctxt "tfrmsettings.lbltoolbarmain.caption"
-msgid "Main"
-msgstr ""
-
-#: tfrmsettings.lbltoolbarvideo.caption
-msgctxt "tfrmsettings.lbltoolbarvideo.caption"
-msgid "Video"
-msgstr "Видео"
-
-#: tfrmsettings.lbltoolbarwave.caption
-msgctxt "tfrmsettings.lbltoolbarwave.caption"
-msgid "Waveform"
-msgstr "Вълна"
 
 #: tfrmsettings.lblwavecolor.caption
 msgctxt "tfrmsettings.lblwavecolor.caption"
@@ -5233,6 +5221,60 @@ msgstr "Изходен език"
 msgctxt "tfrmtranslationmemorysettings.lbltranslang.caption"
 msgid "Translation language"
 msgstr "Език на превода"
+
+#: tfrmtts.btnclose.caption
+#, fuzzy
+msgctxt "tfrmtts.btnclose.caption"
+msgid "Close"
+msgstr "Затваряне"
+
+#: tfrmtts.btnfolder.caption
+#, fuzzy
+msgctxt "tfrmtts.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtts.btngenerate.caption
+#, fuzzy
+msgctxt "tfrmtts.btngenerate.caption"
+msgid "Generate"
+msgstr "Създаване"
+
+#: tfrmtts.caption
+msgid "Text to speech"
+msgstr ""
+
+#: tfrmtts.lblfolder.caption
+msgid "Folder:"
+msgstr ""
+
+#: tfrmtts.lblscope.caption
+#, fuzzy
+msgctxt "tfrmtts.lblscope.caption"
+msgid "Scope:"
+msgstr "Обхват:"
+
+#: tfrmtts.lblvoice.caption
+msgid "Voice:"
+msgstr ""
+
+#: tfrmtts.rbnallthesubtitles.caption
+#, fuzzy
+msgctxt "tfrmtts.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Всички надписи"
+
+#: tfrmtts.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+msgctxt "tfrmtts.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "От избрания надпис"
+
+#: tfrmtts.rbnonlyselectedsubtitles.caption
+#, fuzzy
+msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Само избраните надписи"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"

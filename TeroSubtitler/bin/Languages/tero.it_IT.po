@@ -3737,6 +3737,10 @@ msgctxt "tfrmmain.acttranslatormode.caption"
 msgid "Translator mode"
 msgstr "Modalità traduzione"
 
+#: tfrmmain.acttts.caption
+msgid "Text to speech..."
+msgstr ""
+
 #: tfrmmain.actunbreakentry.caption
 msgid "Unbreak entry"
 msgstr "Disattiva a capo automatico nell’elemento"
@@ -4469,6 +4473,10 @@ msgstr "Scrivi BOM nel salvataggio"
 msgid "Additional mpv options"
 msgstr "Parametri mpv aggiuntivi"
 
+#: tfrmsettings.lblapi_tts.caption
+msgid "ElevenLabs API key"
+msgstr ""
+
 #: tfrmsettings.lblautobackup.caption
 msgid "Auto-backup every (minutes)"
 msgstr "Backup automatico ogni (minuti)"
@@ -4652,26 +4660,6 @@ msgstr "Tema"
 #: tfrmsettings.lbltimecodemode.caption
 msgid "Time code mode"
 msgstr "Modalità time code"
-
-#: tfrmsettings.lbltoolbareditor.caption
-msgctxt "tfrmsettings.lbltoolbareditor.caption"
-msgid "Editor"
-msgstr "Editor"
-
-#: tfrmsettings.lbltoolbarmain.caption
-msgctxt "tfrmsettings.lbltoolbarmain.caption"
-msgid "Main"
-msgstr "Principale"
-
-#: tfrmsettings.lbltoolbarvideo.caption
-msgctxt "tfrmsettings.lbltoolbarvideo.caption"
-msgid "Video"
-msgstr "Video"
-
-#: tfrmsettings.lbltoolbarwave.caption
-msgctxt "tfrmsettings.lbltoolbarwave.caption"
-msgid "Waveform"
-msgstr "Forma d’onda"
 
 #: tfrmsettings.lblwavecolor.caption
 msgctxt "tfrmsettings.lblwavecolor.caption"
@@ -5199,6 +5187,60 @@ msgctxt "tfrmtranslationmemorysettings.lbltranslang.caption"
 msgid "Translation language"
 msgstr "Lingua traduzione"
 
+#: tfrmtts.btnclose.caption
+#, fuzzy
+msgctxt "tfrmtts.btnclose.caption"
+msgid "Close"
+msgstr "Chiudi"
+
+#: tfrmtts.btnfolder.caption
+#, fuzzy
+msgctxt "tfrmtts.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtts.btngenerate.caption
+#, fuzzy
+msgctxt "tfrmtts.btngenerate.caption"
+msgid "Generate"
+msgstr "Genera"
+
+#: tfrmtts.caption
+msgid "Text to speech"
+msgstr ""
+
+#: tfrmtts.lblfolder.caption
+msgid "Folder:"
+msgstr ""
+
+#: tfrmtts.lblscope.caption
+#, fuzzy
+msgctxt "tfrmtts.lblscope.caption"
+msgid "Scope:"
+msgstr "Destinazione:"
+
+#: tfrmtts.lblvoice.caption
+msgid "Voice:"
+msgstr ""
+
+#: tfrmtts.rbnallthesubtitles.caption
+#, fuzzy
+msgctxt "tfrmtts.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Tutti gli elementi"
+
+#: tfrmtts.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+msgctxt "tfrmtts.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Dall’elemento selezionato"
+
+#: tfrmtts.rbnonlyselectedsubtitles.caption
+#, fuzzy
+msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Solo elementi selezionati"
+
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
 msgid "Close"
@@ -5365,3 +5407,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+

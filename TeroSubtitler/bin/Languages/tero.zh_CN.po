@@ -3739,6 +3739,10 @@ msgctxt "tfrmmain.acttranslatormode.caption"
 msgid "Translator mode"
 msgstr "翻译模式"
 
+#: tfrmmain.acttts.caption
+msgid "Text to speech..."
+msgstr ""
+
 #: tfrmmain.actunbreakentry.caption
 msgid "Unbreak entry"
 msgstr "取消断开条目"
@@ -4485,6 +4489,10 @@ msgstr ""
 msgid "Additional mpv options"
 msgstr "其他 mpv 选项"
 
+#: tfrmsettings.lblapi_tts.caption
+msgid "ElevenLabs API key"
+msgstr ""
+
 #: tfrmsettings.lblautobackup.caption
 msgid "Auto-backup every (minutes)"
 msgstr "每（分钟）自动备份一次"
@@ -4668,26 +4676,6 @@ msgstr "主题"
 #: tfrmsettings.lbltimecodemode.caption
 msgid "Time code mode"
 msgstr "时间码模式"
-
-#: tfrmsettings.lbltoolbareditor.caption
-msgctxt "tfrmsettings.lbltoolbareditor.caption"
-msgid "Editor"
-msgstr "编辑器"
-
-#: tfrmsettings.lbltoolbarmain.caption
-msgctxt "tfrmsettings.lbltoolbarmain.caption"
-msgid "Main"
-msgstr "主要"
-
-#: tfrmsettings.lbltoolbarvideo.caption
-msgctxt "tfrmsettings.lbltoolbarvideo.caption"
-msgid "Video"
-msgstr "视频"
-
-#: tfrmsettings.lbltoolbarwave.caption
-msgctxt "tfrmsettings.lbltoolbarwave.caption"
-msgid "Waveform"
-msgstr "音频波形"
 
 #: tfrmsettings.lblwavecolor.caption
 msgctxt "tfrmsettings.lblwavecolor.caption"
@@ -5218,6 +5206,59 @@ msgstr "源语言"
 msgctxt "tfrmtranslationmemorysettings.lbltranslang.caption"
 msgid "Translation language"
 msgstr "翻译语言"
+
+#: tfrmtts.btnclose.caption
+#, fuzzy
+msgctxt "tfrmtts.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmtts.btnfolder.caption
+msgctxt "tfrmtts.btnfolder.caption"
+msgid "..."
+msgstr ""
+
+#: tfrmtts.btngenerate.caption
+#, fuzzy
+msgctxt "tfrmtts.btngenerate.caption"
+msgid "Generate"
+msgstr "常规"
+
+#: tfrmtts.caption
+msgid "Text to speech"
+msgstr ""
+
+#: tfrmtts.lblfolder.caption
+msgid "Folder:"
+msgstr ""
+
+#: tfrmtts.lblscope.caption
+#, fuzzy
+msgctxt "tfrmtts.lblscope.caption"
+msgid "Scope:"
+msgstr "范围："
+
+#: tfrmtts.lblvoice.caption
+msgid "Voice:"
+msgstr ""
+
+#: tfrmtts.rbnallthesubtitles.caption
+#, fuzzy
+msgctxt "tfrmtts.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "所有条目"
+
+#: tfrmtts.rbnfromtheselectedsubtitle.caption
+#, fuzzy
+msgctxt "tfrmtts.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "从选择的条目开始"
+
+#: tfrmtts.rbnonlyselectedsubtitles.caption
+#, fuzzy
+msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "仅限选择的条目"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
