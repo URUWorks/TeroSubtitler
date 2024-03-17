@@ -9,6 +9,7 @@
 - fixed: Shot changes initially appear in timeline despite being unticked in menu
 - updated: Italian language (thx GitGianluc/bovirus)
 - updated: Russian language (thx RoxMarty)
+- added: Text to speech
 - added: Set gapping #276
 
 1.0.1.7 (1.3.2024)
