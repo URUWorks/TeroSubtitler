@@ -77,6 +77,10 @@
         <Filename Value="UWSystem.ThreadProcess.pas"/>
         <UnitName Value="UWSystem.ThreadProcess"/>
       </Item>
+      <Item>
+        <Filename Value="UWSystem.TextToSpeech.pas"/>
+        <UnitName Value="UWSystem.TextToSpeech"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

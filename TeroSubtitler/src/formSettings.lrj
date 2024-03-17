@@ -63,6 +63,7 @@
 {"hash":12558,"name":"tfrmsettings.btnytdlp.caption","sourcebytes":[46,46,46],"value":"..."},
 {"hash":89810722,"name":"tfrmsettings.lblfasterwhisper.caption","sourcebytes":[70,97,115,116,101,114,45,87,104,105,115,112,101,114],"value":"Faster-Whisper"},
 {"hash":12558,"name":"tfrmsettings.btnfasterwhisper.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":28198985,"name":"tfrmsettings.lblapi_tts.caption","sourcebytes":[69,108,101,118,101,110,76,97,98,115,32,65,80,73,32,107,101,121],"value":"ElevenLabs API key"},
 {"hash":145482249,"name":"tfrmsettings.lblshortcutcat.caption","sourcebytes":[67,97,116,101,103,111,114,121],"value":"Category"},
 {"hash":258584404,"name":"tfrmsettings.lblshortcut.caption","sourcebytes":[83,104,111,114,116,99,117,116],"value":"Shortcut"},
 {"hash":91802052,"name":"tfrmsettings.lblshortcutpreset.caption","sourcebytes":[80,114,101,115,101,116],"value":"Preset"},
@@ -76,13 +77,5 @@
 {"hash":144884963,"name":"tfrmsettings.lbladditionalmpvoptions.caption","sourcebytes":[65,100,100,105,116,105,111,110,97,108,32,109,112,118,32,111,112,116,105,111,110,115],"value":"Additional mpv options"},
 {"hash":43,"name":"tfrmsettings.btnplus.caption","sourcebytes":[43],"value":"+"},
 {"hash":45,"name":"tfrmsettings.btnminus.caption","sourcebytes":[45],"value":"-"},
-{"hash":250288903,"name":"tfrmsettings.chkusehwdec.caption","sourcebytes":[85,115,101,32,104,97,114,100,119,97,114,101,32,118,105,100,101,111,32,100,101,99,111,100,105,110,103],"value":"Use hardware video decoding"},
-{"hash":342014,"name":"tfrmsettings.lbltoolbarmain.caption","sourcebytes":[77,97,105,110],"value":"Main"},
-{"hash":79367010,"name":"tfrmsettings.lbltoolbareditor.caption","sourcebytes":[69,100,105,116,111,114],"value":"Editor"},
-{"hash":6093503,"name":"tfrmsettings.lbltoolbarvideo.caption","sourcebytes":[86,105,100,101,111],"value":"Video"},
-{"hash":147575645,"name":"tfrmsettings.lbltoolbarwave.caption","sourcebytes":[87,97,118,101,102,111,114,109],"value":"Waveform"},
-{"hash":41122191,"name":"tfrmsettings.tlbmain_.caption","sourcebytes":[116,108,98,77,97,105,110,95],"value":"tlbMain_"},
-{"hash":196551711,"name":"tfrmsettings.tlbeditor_.caption","sourcebytes":[116,108,98,69,100,105,116,111,114,95],"value":"tlbEditor_"},
-{"hash":131060079,"name":"tfrmsettings.tlbvideo_.caption","sourcebytes":[116,108,98,86,105,100,101,111,95],"value":"tlbVideo_"},
-{"hash":185538223,"name":"tfrmsettings.tlbwaveform_.caption","sourcebytes":[116,108,98,87,97,118,101,102,111,114,109,95],"value":"tlbWaveform_"}
+{"hash":250288903,"name":"tfrmsettings.chkusehwdec.caption","sourcebytes":[85,115,101,32,104,97,114,100,119,97,114,101,32,118,105,100,101,111,32,100,101,99,111,100,105,110,103],"value":"Use hardware video decoding"}
 ]}

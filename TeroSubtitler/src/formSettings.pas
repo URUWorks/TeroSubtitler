@@ -78,6 +78,7 @@ type
     cbnSubShadow: TColorButton;
     cbnSubBackground: TColorButton;
     cboPauseMode: TComboBox;
+    edtAPI_TTS: TEdit;
     edtCPSStrategy: TEdit;
     edtSceneDetect: TEdit;
     edtWhisperCPP: TEdit;
@@ -110,7 +111,6 @@ type
     lblSeekTime: TLabel;
     lblFrameStep: TLabel;
     lblWaveform: TLabel;
-    lblToolBarWave: TLabel;
     lstMPVOptions: TListBox;
     lyoFileTypeAssociations: TUWLayout;
     spnTextBoxFontSize: TSpinEdit;
@@ -124,16 +124,11 @@ type
     spnSeekTime: TSpinEdit;
     spnFrameStep: TSpinEdit;
     spnListFontSize: TSpinEdit;
-    tlbMain_: TToolBar;
-    tlbEditor_: TToolBar;
     edtFFMPEG: TEdit;
     edtWebReference: TEdit;
     edtRepeatableChars: TEdit;
     edtProhibitedChars: TEdit;
-    tlbVideo_: TToolBar;
-    lblToolBarVideo: TLabel;
-    lblToolBarMain: TLabel;
-    lblToolBarEditor: TLabel;
+    lblAPI_TTS: TLabel;
     lblZeroToDisable: TLabel;
     lblDefaultFileFormat: TLabel;
     lblWPM: TLabel;
@@ -179,83 +174,7 @@ type
     spnWPM: TSpinEdit;
     spnCPL: TSpinEdit;
     lyoMPV: TUWLayout;
-    lyoToolbar: TUWLayout;
-    tlbWaveform_: TToolBar;
     tlbFileTypeIco: TToolBar;
-    ToolButton1: TToolButton;
-    ToolButton10: TToolButton;
-    ToolButton11: TToolButton;
-    ToolButton12: TToolButton;
-    ToolButton13: TToolButton;
-    ToolButton14: TToolButton;
-    ToolButton15: TToolButton;
-    ToolButton16: TToolButton;
-    ToolButton17: TToolButton;
-    ToolButton18: TToolButton;
-    ToolButton19: TToolButton;
-    ToolButton2: TToolButton;
-    ToolButton20: TToolButton;
-    ToolButton21: TToolButton;
-    ToolButton22: TToolButton;
-    ToolButton23: TToolButton;
-    ToolButton24: TToolButton;
-    ToolButton25: TToolButton;
-    ToolButton26: TToolButton;
-    ToolButton27: TToolButton;
-    ToolButton28: TToolButton;
-    ToolButton29: TToolButton;
-    ToolButton3: TToolButton;
-    ToolButton30: TToolButton;
-    ToolButton31: TToolButton;
-    ToolButton32: TToolButton;
-    ToolButton33: TToolButton;
-    ToolButton34: TToolButton;
-    ToolButton35: TToolButton;
-    ToolButton36: TToolButton;
-    ToolButton37: TToolButton;
-    ToolButton38: TToolButton;
-    ToolButton39: TToolButton;
-    ToolButton4: TToolButton;
-    ToolButton40: TToolButton;
-    ToolButton41: TToolButton;
-    ToolButton42: TToolButton;
-    ToolButton43: TToolButton;
-    ToolButton44: TToolButton;
-    ToolButton45: TToolButton;
-    ToolButton46: TToolButton;
-    ToolButton47: TToolButton;
-    ToolButton48: TToolButton;
-    ToolButton49: TToolButton;
-    ToolButton5: TToolButton;
-    ToolButton50: TToolButton;
-    ToolButton51: TToolButton;
-    ToolButton52: TToolButton;
-    ToolButton53: TToolButton;
-    ToolButton54: TToolButton;
-    ToolButton55: TToolButton;
-    ToolButton56: TToolButton;
-    ToolButton57: TToolButton;
-    ToolButton58: TToolButton;
-    ToolButton59: TToolButton;
-    ToolButton6: TToolButton;
-    ToolButton60: TToolButton;
-    ToolButton61: TToolButton;
-    ToolButton62: TToolButton;
-    ToolButton63: TToolButton;
-    ToolButton64: TToolButton;
-    ToolButton65: TToolButton;
-    ToolButton66: TToolButton;
-    ToolButton67: TToolButton;
-    ToolButton68: TToolButton;
-    ToolButton69: TToolButton;
-    ToolButton7: TToolButton;
-    ToolButton70: TToolButton;
-    ToolButton71: TToolButton;
-    ToolButton72: TToolButton;
-    ToolButton73: TToolButton;
-    ToolButton74: TToolButton;
-    ToolButton8: TToolButton;
-    ToolButton9: TToolButton;
     procedure btnCloseClick(Sender: TObject);
     procedure btnFasterWhisperClick(Sender: TObject);
     procedure btnFFMPEGClick(Sender: TObject);
@@ -274,6 +193,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure hkShortcutChange(Sender: TObject);
+    procedure lblAPI_TTSClick(Sender: TObject);
     procedure lblFasterWhisperClick(Sender: TObject);
     procedure lblFFMPEGClick(Sender: TObject);
     procedure lblSceneDetectClick(Sender: TObject);
@@ -458,6 +378,7 @@ begin
   edtWhisperCPP.Text := Tools.WhisperCPP;
   edtFasterWhisper.Text := Tools.FasterWhisper;
   edtYTDLP.Text := Tools.YTDLP;
+  edtAPI_TTS.Text := Tools.API_KEY_TTS;
 
   cboTimeCodeMode.ItemIndex := Integer(Workspace.WorkMode);
   cboListMode.ItemIndex := Integer(VSTOptions.DrawMode);
@@ -581,6 +502,7 @@ begin
   Tools.WhisperCPP := edtWhisperCPP.Text;
   Tools.FasterWhisper := edtFasterWhisper.Text;
   Tools.YTDLP := edtYTDLP.Text;
+  Tools.API_KEY_TTS := edtAPI_TTS.Text;
 
   if Workspace.WorkMode <> TWorkMode(cboTimeCodeMode.ItemIndex) then
     SetWorkMode(TWorkMode(cboTimeCodeMode.ItemIndex));
@@ -859,6 +781,13 @@ begin
         lstShortcuts.Items[lstShortcuts.ItemIndex] := Caption + ' [' + ShortCutToTextEx(ShortCut) + ']'; //cboShortcutCatSelect(NIL);
         btnShortCutApply.Enabled := True;
       end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.lblAPI_TTSClick(Sender: TObject);
+begin
+  OpenURL('https://elevenlabs.io/sign-up');
 end;
 
 // -----------------------------------------------------------------------------

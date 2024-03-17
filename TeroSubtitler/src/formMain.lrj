@@ -350,6 +350,7 @@
 {"hash":45094862,"name":"tfrmmain.actreadtimingsfromfile.caption","sourcebytes":[82,101,97,100,32,116,105,109,105,110,103,115,32,102,114,111,109,32,102,105,108,101,46,46,46],"value":"Read timings from file..."},
 {"hash":20387493,"name":"tfrmmain.actfocusinitialtime.caption","sourcebytes":[69,100,105,116,32,105,110,105,116,105,97,108,32,116,105,109,101],"value":"Edit initial time"},
 {"hash":125905861,"name":"tfrmmain.actfocusfinaltime.caption","sourcebytes":[69,100,105,116,32,102,105,110,97,108,32,116,105,109,101],"value":"Edit final time"},
+{"hash":62006798,"name":"tfrmmain.acttts.caption","sourcebytes":[84,101,120,116,32,116,111,32,115,112,101,101,99,104,46,46,46],"value":"Text to speech..."},
 {"hash":261306372,"name":"tfrmmain.mnuvstformat.caption","sourcebytes":[109,110,117,86,83,84,70,111,114,109,97,116],"value":"mnuVSTFormat"},
 {"hash":6093503,"name":"tfrmmain.mnuvstvideo.caption","sourcebytes":[86,105,100,101,111],"value":"Video"},
 {"hash":128765908,"name":"tfrmmain.mnumemoformat.caption","sourcebytes":[109,110,117,77,101,109,111,70,111,114,109,97,116],"value":"mnuMemoFormat"},

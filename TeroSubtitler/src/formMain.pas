@@ -90,6 +90,7 @@ type
     actGoToCurrentEntryInitialTime: TAction;
     actGoToCurrentEntryFinalTime: TAction;
     actDistributeEntriesEvenly: TAction;
+    actTTS: TAction;
     actSetGapping: TAction;
     actStreamExtractor: TAction;
     actShowToolbarGeneral: TAction;
@@ -399,6 +400,7 @@ type
     MenuItem283: TMenuItem;
     MenuItem284: TMenuItem;
     MenuItem285: TMenuItem;
+    MenuItem286: TMenuItem;
     mnuViewToolbarVideo: TMenuItem;
     mnuViewToolbarWaveform: TMenuItem;
     mnuViewToolbarEditor: TMenuItem;
@@ -1286,6 +1288,7 @@ type
     procedure actTextEffectTypewriterExecute(Sender: TObject);
     procedure actDistributeEntriesEvenlyExecute(Sender: TObject);
     procedure actStreamExtractorExecute(Sender: TObject);
+    procedure actTTSExecute(Sender: TObject);
   private
 
   public

@@ -1,0 +1,12 @@
+{"version":1,"strings":[
+{"hash":189807400,"name":"tfrmtts.caption","sourcebytes":[84,101,120,116,32,116,111,32,115,112,101,101,99,104],"value":"Text to speech"},
+{"hash":206343285,"name":"tfrmtts.btngenerate.caption","sourcebytes":[71,101,110,101,114,97,116,101],"value":"Generate"},
+{"hash":4863637,"name":"tfrmtts.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":97909130,"name":"tfrmtts.lblvoice.caption","sourcebytes":[86,111,105,99,101,58],"value":"Voice:"},
+{"hash":224570394,"name":"tfrmtts.lblfolder.caption","sourcebytes":[70,111,108,100,101,114,58],"value":"Folder:"},
+{"hash":30803705,"name":"tfrmtts.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,115,101,108,101,99,116,101,100,32,101,110,116,114,121],"value":"From selected entry"},
+{"hash":202613155,"name":"tfrmtts.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,101,110,116,114,105,101,115],"value":"All entries"},
+{"hash":94004874,"name":"tfrmtts.lblscope.caption","sourcebytes":[83,99,111,112,101,58],"value":"Scope:"},
+{"hash":71759827,"name":"tfrmtts.rbnonlyselectedsubtitles.caption","sourcebytes":[79,110,108,121,32,115,101,108,101,99,116,101,100,32,101,110,116,114,105,101,115],"value":"Only selected entries"},
+{"hash":12558,"name":"tfrmtts.btnfolder.caption","sourcebytes":[46,46,46],"value":"..."}
+]}

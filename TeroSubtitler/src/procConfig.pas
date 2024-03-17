@@ -632,6 +632,8 @@ begin
         FasterWhisper_Additional := GetValue('FasterWhisper_Additional', FasterWhisper_Additional);
         WhisperEngine := TWhisperEngine(GetValue('WhisperEngine', 0));
         YTDLP := GetValue('YTDLP', YTDLP);
+
+        API_KEY_TTS := GetValue('API_KEY_TTS', '');
         CloseKey;
       end;
 
@@ -1033,6 +1035,8 @@ begin
         SetValue('FasterWhisper_Additional', FasterWhisper_Additional);
         SetValue('WhisperEngine', Integer(WhisperEngine));
         SetValue('YTDLP', YTDLP);
+
+        SetValue('API_KEY_TTS', API_KEY_TTS);
         CloseKey;
       end;
 

@@ -36,7 +36,7 @@ uses
   formExportSUP, procSUP, formGenerateVideo, procGenerateVideo, procLocalize,
   formCharacterMap, formRoundTime, formStatistics, formGenerateBlankVideo,
   procThumbnails, formStreamExtractor, formPauses,
-  formCustomSelectDlgWithPreview;
+  formCustomSelectDlgWithPreview, formTTS;
 
 {$R *.res}
 

@@ -12,7 +12,8 @@ uses
   UWSystem.TimeUtils, UWSystem.InetUtils, UWSystem.Globalization, 
   UWSystem.Process, UWSubtitles.OCR, UWSubtitles.Utils, UWFiles.MRU, 
   UWSpellcheck.Hunspell, UWTranslateAPI.Google, UWWindows.MenuTheming, 
-  UWWindows.DarkTheme, UWSystem.ThreadProcess, LazarusPackageIntf;
+  UWWindows.DarkTheme, UWSystem.ThreadProcess, UWSystem.TextToSpeech, 
+  LazarusPackageIntf;
 
 implementation
 

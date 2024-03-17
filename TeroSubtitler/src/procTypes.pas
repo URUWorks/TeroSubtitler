@@ -327,6 +327,8 @@ type
     YTDLP : String;
 
     WhisperEngine : TWhisperEngine;
+
+    API_KEY_TTS : String;
   end;
 
   { TAdjustSubtitles }

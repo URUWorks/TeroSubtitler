@@ -67,6 +67,7 @@ procedure ShowExportSUP;
 procedure ShowGenerateVideo;
 procedure ShowGenerateBlankVideo;
 procedure ShowStreamExtractor;
+procedure ShowTTS;
 procedure ShowTBXSettings;
 procedure ShowTBX;
 procedure ShowTBXList;
@@ -92,7 +93,7 @@ uses
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
   formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
   formRoundTime, formStatistics, formGenerateBlankVideo, formStreamExtractor,
-  formPauses, LCLTranslator, procLocalize;
+  formPauses, formTTS, LCLTranslator, procLocalize;
 
 // -----------------------------------------------------------------------------
 
@@ -712,6 +713,19 @@ begin
   end
   else
     frmStreamExtractor.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowTTS;
+begin
+  if frmTTS = NIL then
+  begin
+    frmTTS := TfrmTTS.Create(Application);
+    ShowForm(frmTTS);
+  end
+  else
+    frmTTS.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

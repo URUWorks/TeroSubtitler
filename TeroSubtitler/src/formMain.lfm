@@ -2146,6 +2146,9 @@ object frmMain: TfrmMain
       object MenuItem284: TMenuItem
         Action = actStreamExtractor
       end
+      object MenuItem286: TMenuItem
+        Action = actTTS
+      end
       object Separator33: TMenuItem
         Caption = '-'
       end
@@ -4955,6 +4958,12 @@ object frmMain: TfrmMain
       Category = 'Timings'
       Caption = 'Edit final time'
       OnExecute = actFocusFinalTimeExecute
+    end
+    object actTTS: TAction
+      Tag = 1
+      Category = 'Tools'
+      Caption = 'Text to speech...'
+      OnExecute = actTTSExecute
     end
   end
   object popDropInsert: TPopupMenu
