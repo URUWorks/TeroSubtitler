@@ -893,6 +893,7 @@ type
     wtlb44: TToolButton;
     wtlb46: TToolButton;
     // formMain
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
@@ -1464,6 +1465,42 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  // Settings
+  SaveSettings;
+  SetLength(AppOptions.UnicodeChars, 0);
+  SetLength(MPVOptions.AdditionalOptions, 0);
+  // Transcription
+  TranscriptionUnInitializeControls;
+  // TMX
+  TMX.Free;
+  // TBX
+  TBX.Free;
+  // MRU
+  MRU.SaveToXML(MRUFileName);
+  MRU.Free;
+  // Actors
+  SaveActors;
+  // MPV
+  MPV.Close;
+  // VST
+  VST.RootNodeCount := 0;
+  if Assigned(VSTOptions.BackgroundBlock) then VSTOptions.BackgroundBlock.Free;
+  // Thumbnails
+  FreeThumbnails;
+  // Unlink Subtitles
+  WAVE.Subtitles := NIL;
+  // Free SubtitleAPI
+  Subtitles.Free;
+  // Temp subtitle
+  MPVDeleteSubtitleTempTrack;
+  // Temp Web preview file
+  if FileExists(WebPreviewTempFileName) then DeleteFile(WebPreviewTempFileName);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   if (Workspace.ViewMode = vmTranscription) then
@@ -1476,40 +1513,6 @@ begin
   end
   else
     CanClose := CloseSubtitle(False);
-
-  if CanClose then
-  begin
-    // Settings
-    SaveSettings;
-    SetLength(AppOptions.UnicodeChars, 0);
-    SetLength(MPVOptions.AdditionalOptions, 0);
-    // Transcription
-    TranscriptionUnInitializeControls;
-    // TMX
-    TMX.Free;
-    // TBX
-    TBX.Free;
-    // MRU
-    MRU.SaveToXML(MRUFileName);
-    MRU.Free;
-    // Actors
-    SaveActors;
-    // MPV
-    MPV.Close;
-    // VST
-    VST.RootNodeCount := 0;
-    if Assigned(VSTOptions.BackgroundBlock) then VSTOptions.BackgroundBlock.Free;
-    // Thumbnails
-    FreeThumbnails;
-    // Unlink Subtitles
-    WAVE.Subtitles := NIL;
-    // Free SubtitleAPI
-    Subtitles.Free;
-    // Temp subtitle
-    MPVDeleteSubtitleTempTrack;
-    // Temp Web preview file
-    if FileExists(WebPreviewTempFileName) then DeleteFile(WebPreviewTempFileName);
-  end;
 end;
 
 // -----------------------------------------------------------------------------
