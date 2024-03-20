@@ -684,6 +684,15 @@ msgstr "打开文件"
 msgid "Open video from"
 msgstr "打开视频..."
 
+#: proclocalize.lngoperationcompleted
+msgid "Operation completed."
+msgstr ""
+
+#: proclocalize.lngoperationfailed
+#, object-pascal-format
+msgid "Job %d/%d fail with code %d."
+msgstr ""
+
 #: proclocalize.lngoriginal
 msgctxt "proclocalize.lngoriginal"
 msgid "Original"
@@ -5224,6 +5233,10 @@ msgctxt "tfrmtts.btngenerate.caption"
 msgid "Generate"
 msgstr "常规"
 
+#: tfrmtts.btnpreview.caption
+msgid "Preview"
+msgstr ""
+
 #: tfrmtts.caption
 msgid "Text to speech"
 msgstr ""
@@ -5238,8 +5251,16 @@ msgctxt "tfrmtts.lblscope.caption"
 msgid "Scope:"
 msgstr "范围："
 
+#: tfrmtts.lblstability.caption
+msgid "Stability:"
+msgstr ""
+
 #: tfrmtts.lblvoice.caption
 msgid "Voice:"
+msgstr ""
+
+#: tfrmtts.lnlsimilarityboost.caption
+msgid "Similarity boost:"
 msgstr ""
 
 #: tfrmtts.rbnallthesubtitles.caption

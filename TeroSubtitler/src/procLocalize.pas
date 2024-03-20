@@ -104,6 +104,8 @@ resourcestring
   lngAdditionalParams = 'Additional params:';
   lngLine = 'Line:';
   lngFileSavedSuccessfully = 'File saved successfully.';
+  lngOperationFailed = 'Job %d/%d fail with code %d.';
+  lngOperationCompleted = 'Operation completed.';
   lngVideoGenerationFailed = 'Video generation failed.';
   lngVideoErrorAOInitFailed = 'Initializing the audio output failed.';
   lngVideoErrorVOInitFailed = 'Initializing the video output failed.';
