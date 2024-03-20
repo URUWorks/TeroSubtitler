@@ -23,18 +23,23 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  ComCtrls, UWRadioButton, UWSystem.TextToSpeech, LCLTranslator, procLocalize;
+  ComCtrls, UWRadioButton, UWSystem.TextToSpeech, LCLTranslator, Spin, LCLIntf,
+  procLocalize;
 
 type
 
   { TfrmTTS }
 
   TfrmTTS = class(TForm)
+    btnPreview: TButton;
     btnFolder: TButton;
     btnGenerate: TButton;
     btnClose: TButton;
     cboVoice: TComboBox;
     edtFolder: TEdit;
+    lblStability: TLabel;
+    spnSimilarityBoost: TFloatSpinEdit;
+    lnlSimilarityBoost: TLabel;
     lblFolder: TLabel;
     lblScope: TLabel;
     lblVoice: TLabel;
@@ -42,19 +47,23 @@ type
     rbnAllTheSubtitles: TUWRadioButton;
     rbnFromTheSelectedSubtitle: TUWRadioButton;
     rbnOnlySelectedSubtitles: TUWRadioButton;
+    spnStability: TFloatSpinEdit;
     procedure btnFolderClick(Sender: TObject);
     procedure btnGenerateClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
+    procedure btnPreviewClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
     TTS: TTextToSpeech;
+    //MPV: TMPVPlayer;
     procedure EnableControls(const AValue: Boolean);
-    procedure DoError(Sender: TObject; const Error, CurrentJob: Integer);
+    procedure DoError(Sender: TObject; const ErrorDesc: String; const ErrorID, CurrentJob: Integer);
     procedure DoProgress(Sender: TObject; const Index, Total: Integer);
     procedure DoTerminate(Sender: TObject);
     procedure FillComboWithVoices;
+    procedure OpenFolderClick(Sender: TObject);
   public
 
   end;
@@ -68,8 +77,8 @@ var
 implementation
 
 uses
-  procWorkspace, procTypes, procVST, procConfig, procDialogs,
-  UWSystem.InetUtils, UWTranslateAPI.Google, UWSubtitleAPI, formMain;
+  procWorkspace, procTypes, procVST, procDialogs, UWSystem.InetUtils,
+  UWTranslateAPI.Google, UWSubtitleAPI, formMain;
 
 {$R *.lfm}
 
@@ -96,7 +105,14 @@ begin
   TTS.OnTerminate := @DoTerminate;
 
   btnGenerate.Enabled := TTS.api_key <> '';
+  btnPreview.Enabled := btnGenerate.Enabled;
   FillComboWithVoices;
+
+  {MPV := TMPVPlayer.Create(Self);
+  MPV.Parent := Self;
+  MPV.Top := Height + 50;
+  MPV.LogLevel := llNo;
+  MPV.AutoStartPlayback := True;}
 
   {$IFNDEF WINDOWS}
   PrepareCustomControls(Self);
@@ -108,6 +124,7 @@ end;
 procedure TfrmTTS.FormClose(Sender: TObject; var CloseAction: TCloseAction
   );
 begin
+  //MPV.Free;
   TTS.Free;
   CloseAction := caFree;
   frmTTS := NIL;
@@ -132,6 +149,25 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmTTS.btnPreviewClick(Sender: TObject);
+var
+  s: String;
+begin
+  if IsInternetAlive then
+  begin
+    s := ChangeFileExt(GetTempFileName, '.mp3');
+{    if TTS.Make('You are using Tero Subtitler!', s, TTS.Voices[cboVoice.ItemIndex]^.ID, spnSimilarityBoost.Value, spnStability.Value) then
+    begin
+      if MPV.IsMediaLoaded then MPV.Close;
+      MPV.Play(s);
+    end;}
+  end
+  else
+    ShowErrorMessageDialog(lngNoInternetConnection);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure ApplyJobTTS(const Item: PUWSubtitleItem; const Index: Integer);
 var
   job: PJobInfo;
@@ -140,6 +176,8 @@ begin
   job^.Text := Item^.Text;
   job^.FileName := ConcatPaths([frmTTS.edtFolder.Text, 'Entry' + IntToStr(Index+1) + '.mp3']);
   job^.VoiceID := frmTTS.TTS.Voices[frmTTS.cboVoice.ItemIndex]^.ID;
+  job^.Similarity := frmTTS.spnSimilarityBoost.Value;
+  job^.Stability := frmTTS.spnStability.Value;
   frmTTS.TTS.Jobs.Add(job);
 end;
 
@@ -167,6 +205,18 @@ begin
     CancelJobs := False;
     prbTranslate.Position := 0;
     EnableControls(False);
+
+    if TTS.Finished then
+    begin
+      Application.ProcessMessages;
+      TTS.Free;
+      TTS := TTextToSpeech.Create(Tools.API_KEY_TTS);
+      TTS.OnJobsError := @DoError;
+      TTS.OnJobsProgress := @DoProgress;
+      TTS.OnTerminate := @DoTerminate;
+      TTS.GetVoices;
+    end;
+
     VSTDoLoop(frmMain.VST, @ApplyJobTTS, SelLoop, False);
     TTS.DoJobs;
   end
@@ -205,13 +255,17 @@ begin
   rbnFromTheSelectedSubtitle.Enabled := AValue;
   rbnOnlySelectedSubtitles.Enabled   := AValue;
   btnGenerate.Enabled                := AValue;
+  spnSimilarityBoost.Enabled         := AValue;
+  spnStability.Enabled               := AValue;
+  btnPreview.Enabled                 := AValue;
   prbTranslate.Visible               := not AValue;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmTTS.DoError(Sender: TObject; const Error, CurrentJob: Integer);
+procedure TfrmTTS.DoError(Sender: TObject; const ErrorDesc: String; const ErrorID, CurrentJob: Integer);
 begin
+  ShowErrorMessageDialog(Format(lngOperationFailed, [CurrentJob, TTS.Jobs.Count, ErrorID]));
 end;
 
 // -----------------------------------------------------------------------------
@@ -226,8 +280,11 @@ end;
 
 procedure TfrmTTS.DoTerminate(Sender: TObject);
 begin
+  if TTS.Jobs.Count > 0 then
+    ShowMessageDialog(lngOperationCompleted, '', lngOpenContainingFolder, @OpenFolderClick);
+
   EnableControls(True);
-  Close;
+  //Close;
 end;
 
 // -----------------------------------------------------------------------------
@@ -250,6 +307,13 @@ begin
 
     Items.EndUpdate;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmTTS.OpenFolderClick(Sender: TObject);
+begin
+  OpenDocument(edtFolder.Text);
 end;
 
 // -----------------------------------------------------------------------------
