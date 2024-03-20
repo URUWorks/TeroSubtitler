@@ -61,12 +61,7 @@ var
 begin
   with frmMain.MPV do
   begin
-//    {$IFNDEF LINUX}
-//    MPVFileName := libMPVFileName(False);
-//    {$ENDIF}
-//    {$IFDEF DARWIN}
     YTDLPFileName := procConfig.YTDLPFileName;
-//    {$ENDIF}
     LogLevel := llNo;
     AutoStartPlayback := False;
     SMPTEMode := Workspace.SMPTE;
