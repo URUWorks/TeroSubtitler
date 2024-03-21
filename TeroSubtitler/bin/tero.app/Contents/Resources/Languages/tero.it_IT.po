@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 08.03.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 21.03.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -690,12 +690,12 @@ msgstr "Apri video"
 
 #: proclocalize.lngoperationcompleted
 msgid "Operation completed."
-msgstr ""
+msgstr "Operazione completata."
 
 #: proclocalize.lngoperationfailed
 #, object-pascal-format
 msgid "Job %d/%d fail with code %d."
-msgstr ""
+msgstr "Attività %d/%d non riuscita con codice errore %d."
 
 #: proclocalize.lngoriginal
 msgctxt "proclocalize.lngoriginal"
@@ -3748,7 +3748,7 @@ msgstr "Modalità traduzione"
 
 #: tfrmmain.acttts.caption
 msgid "Text to speech..."
-msgstr ""
+msgstr "Sintesi vocale..."
 
 #: tfrmmain.actunbreakentry.caption
 msgid "Unbreak entry"
@@ -4484,7 +4484,7 @@ msgstr "Parametri mpv aggiuntivi"
 
 #: tfrmsettings.lblapi_tts.caption
 msgid "ElevenLabs API key"
-msgstr ""
+msgstr "Chiave API ElevenLabs"
 
 #: tfrmsettings.lblautobackup.caption
 msgid "Auto-backup every (minutes)"
@@ -5197,67 +5197,60 @@ msgid "Translation language"
 msgstr "Lingua traduzione"
 
 #: tfrmtts.btnclose.caption
-#, fuzzy
 msgctxt "tfrmtts.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmtts.btnfolder.caption
-#, fuzzy
 msgctxt "tfrmtts.btnfolder.caption"
 msgid "..."
 msgstr "..."
 
 #: tfrmtts.btngenerate.caption
-#, fuzzy
 msgctxt "tfrmtts.btngenerate.caption"
 msgid "Generate"
 msgstr "Genera"
 
 #: tfrmtts.btnpreview.caption
 msgid "Preview"
-msgstr ""
+msgstr "Anteprima"
 
 #: tfrmtts.caption
 msgid "Text to speech"
-msgstr ""
+msgstr "Sintesi vocale"
 
 #: tfrmtts.lblfolder.caption
 msgid "Folder:"
-msgstr ""
+msgstr "Cartella:"
 
 #: tfrmtts.lblscope.caption
-#, fuzzy
 msgctxt "tfrmtts.lblscope.caption"
 msgid "Scope:"
-msgstr "Destinazione:"
+msgstr "Scopo:"
 
 #: tfrmtts.lblstability.caption
 msgid "Stability:"
-msgstr ""
+msgstr "Stabilità:"
 
 #: tfrmtts.lblvoice.caption
 msgid "Voice:"
-msgstr ""
+msgstr "Voce:"
 
 #: tfrmtts.lnlsimilarityboost.caption
 msgid "Similarity boost:"
-msgstr ""
+msgstr "Incremento somiglianza:"
 
 #: tfrmtts.rbnallthesubtitles.caption
-#, fuzzy
 msgctxt "tfrmtts.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Tutti gli elementi"
 
 #: tfrmtts.rbnfromtheselectedsubtitle.caption
-#, fuzzy
 msgctxt "tfrmtts.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmtts.rbnonlyselectedsubtitles.caption
-#, fuzzy
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Solo elementi selezionati"
@@ -5428,4 +5421,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
