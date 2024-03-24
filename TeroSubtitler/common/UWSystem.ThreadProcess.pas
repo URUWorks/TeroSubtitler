@@ -34,9 +34,7 @@ type
     FFileName  : String;
     FParams    : TStringArray;
     FOnProcess : TOnDataReceived;
-    FOnDone    : TNotifyEvent;
     procedure DataReceived;
-    procedure Done;
   protected
     procedure Execute; override;
   public
@@ -65,7 +63,7 @@ begin
   FParams          := AParams;
   TerminateProcess := False;
   FOnProcess       := AOnDataReceived;
-  FOnDone          := AOnDone;
+  OnTerminate      := AOnDone;
   OutputString     := '';
   TimeElapsed      := 0;
   FreeOnTerminate  := True;
@@ -119,7 +117,8 @@ begin
         // Note that all read(...) calls will block except for the last one, which returns 0 (zero).
         BytesRead := AProcess.Output.Read(Buffer, BUF_SIZE);
         SetLength(OutputString, BytesRead);
-        Move(Buffer[1], OutputString[1], BytesRead);
+        if BytesRead > 0 then
+          Move(Buffer[1], OutputString[1], BytesRead);
 
         if Assigned(FOnProcess) then
           Synchronize(@DataReceived);
@@ -134,8 +133,6 @@ begin
   finally
     // The process has finished so it can be cleaned up
     AProcess.Free;
-    if Assigned(FOnDone) then
-      Synchronize(@Done);
   end;
 end;
 
@@ -145,14 +142,6 @@ procedure TUWThreadProcess.DataReceived;
 begin
   if Assigned(FOnProcess) then
     FOnProcess(OutputString, TerminateProcess);
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure TUWThreadProcess.Done;
-begin
-  if Assigned(FOnDone) then
-    FOnDone(Self);
 end;
 
 // -----------------------------------------------------------------------------
