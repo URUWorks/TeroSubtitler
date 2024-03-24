@@ -13,7 +13,7 @@ uses
   UWSystem.Process, UWSubtitles.OCR, UWSubtitles.Utils, UWFiles.MRU, 
   UWSpellcheck.Hunspell, UWTranslateAPI.Google, UWWindows.MenuTheming, 
   UWWindows.DarkTheme, UWSystem.ThreadProcess, UWSystem.TextToSpeech, 
-  LazarusPackageIntf;
+  UWFiles.MPEGAudio, LazarusPackageIntf;
 
 implementation
 
