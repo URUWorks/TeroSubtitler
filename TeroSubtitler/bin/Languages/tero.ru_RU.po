@@ -190,7 +190,7 @@ msgstr "Нажать сюда для работы с таймлайном"
 
 #: proclocalize.lngbackupsaved
 msgid "Backup saved."
-msgstr "Резервная копия создана"
+msgstr "Резервная копия создана."
 
 #: proclocalize.lngbcfileformat
 msgctxt "proclocalize.lngbcfileformat"
@@ -285,7 +285,7 @@ msgstr "Субтитр начат на %s"
 #: proclocalize.lngerrorexecuting
 #, object-pascal-format
 msgid "Error executing “%s”."
-msgstr "Ошибка исполнения команды “%s"
+msgstr "Ошибка исполнения команды “%s."
 
 #: proclocalize.lngextractapperror
 #, object-pascal-format
@@ -302,23 +302,23 @@ msgstr "Неудача."
 
 #: proclocalize.lngfailedtodownload
 msgid "No content downloaded, missing file or no Internet connection."
-msgstr "Не загружается содержимое, отсутствует файл или нет подключения к Интернету"
+msgstr "Не загружается содержимое, отсутствует файл или нет подключения к Интернету."
 
 #: proclocalize.lngfeaturenotavailablefromurl
 msgid "Function not available for online video."
-msgstr "Функция недоступна для онлайн видео"
+msgstr "Функция недоступна для онлайн видео."
 
 #: proclocalize.lngfilechanged
 msgid "File has not been saved."
-msgstr "Файл не сохранился"
+msgstr "Файл не сохранён."
 
 #: proclocalize.lngfilenotfound
 msgid "File cannot be found."
-msgstr "Файл не найден"
+msgstr "Файл не найден."
 
 #: proclocalize.lngfilesavedsuccessfully
 msgid "File saved successfully."
-msgstr "Файл сохранился"
+msgstr "Файл сохранён."
 
 #: proclocalize.lngfocenter
 msgid "Center"
@@ -346,7 +346,7 @@ msgstr "Латынь/Иврит"
 
 #: proclocalize.lngfoldernotempty
 msgid "The folder is not empty."
-msgstr "Папка не пуста"
+msgstr "Папка не пуста."
 
 #: proclocalize.lngfoleft
 msgctxt "proclocalize.lngfoleft"
@@ -532,7 +532,7 @@ msgstr ""
 
 #: proclocalize.lnghhmmsszzz
 msgid "Media [HH:MM:SS.ZZZ]"
-msgstr ""
+msgstr "Медиа [ЧЧ:ММ:СС.мск]"
 
 #: proclocalize.lnghindex
 msgid "#/Gap"
@@ -574,11 +574,11 @@ msgstr "Отсутствуют библиотеки для встроенног�
 
 #: proclocalize.lnglibmpvglerror
 msgid "Failed to initialize mpv GL context."
-msgstr "Не удалось инициализировать mpv GL контекст"
+msgstr "Не удалось инициализировать mpv GL контекст."
 
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
-msgstr "Не удалось инициализировать libmpv. Проверьте корректность установленных библиотек"
+msgstr "Не удалось инициализировать libmpv. Проверьте корректность установленных библиотек."
 
 #: proclocalize.lngline
 msgid "Line:"
@@ -681,20 +681,20 @@ msgstr "Открыть файл"
 
 #: proclocalize.lngopenvideofromurl
 msgid "Open video from"
-msgstr "Открыть видео..."
+msgstr "Открыть видео"
 
 #: proclocalize.lngoperationcancelled
 msgid "Operation cancelled."
-msgstr ""
+msgstr "Операция отменена."
 
 #: proclocalize.lngoperationcompleted
 msgid "Operation completed."
-msgstr ""
+msgstr "Операция выполнена."
 
 #: proclocalize.lngoperationfailed
 #, object-pascal-format
 msgid "Job %d/%d fail with code %d."
-msgstr ""
+msgstr "Задание %d/%d завершилось с ошибкой %d."
 
 #: proclocalize.lngoriginal
 msgctxt "proclocalize.lngoriginal"
@@ -765,7 +765,7 @@ msgstr "Сохранить"
 
 #: proclocalize.lngsavesubtitleerror
 msgid "Error trying to save the file."
-msgstr "Ошибка сохранения файла"
+msgstr "Ошибка сохранения файла."
 
 #: proclocalize.lngscaudiofilters
 msgctxt "proclocalize.lngscaudiofilters"
@@ -905,7 +905,7 @@ msgstr "Язык"
 
 #: proclocalize.lngselectencodingtouse
 msgid "Select the Encoding to use:"
-msgstr "Выбрать нужную кодировку"
+msgstr "Выбрать нужную кодировку:"
 
 #: proclocalize.lngselectfpstouse
 msgid "Select FPS to use:"
@@ -921,7 +921,7 @@ msgstr "Выбрать дорожку:"
 
 #: proclocalize.lngseoutput
 msgid "Output"
-msgstr ""
+msgstr "Выход"
 
 #: proclocalize.lngshifttimeless
 #, object-pascal-format
@@ -1137,7 +1137,7 @@ msgstr "Есть субтитры с вертикальным выравнива
 
 #: proclocalize.lngsubtitlespecificationerrorbr
 msgid "There are entries which exceed the line break."
-msgstr "Есть субтитры, которые выходят за пределы переноса строки"
+msgstr "Есть субтитры, которые выходят за пределы переноса строки."
 
 #: proclocalize.lngsubtitlespecificationerrorfps
 msgid "Current frame rate does not match."
@@ -1205,7 +1205,7 @@ msgstr "Переведено"
 
 #: proclocalize.lngtranslationfilechanged
 msgid "Translation file has not been saved."
-msgstr "Файл перевода не сохранён"
+msgstr "Файл перевода не сохранён."
 
 #: proclocalize.lngttip1
 #, object-pascal-format
@@ -1237,11 +1237,11 @@ msgstr "Ссылка"
 
 #: proclocalize.lngvdgeneratingtts
 msgid "Generating text to speech..."
-msgstr ""
+msgstr "Преобразовать текст в речь..."
 
 #: proclocalize.lngvdgeneratingvideo
 msgid "Generating video dubbing..."
-msgstr ""
+msgstr "Создать дубляж видео"
 
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
@@ -1262,7 +1262,7 @@ msgstr "Не удаётся определить видеовыход."
 
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
-msgstr "Сбой генерации видео"
+msgstr "Сбой генерации видео."
 
 #: proclocalize.lngviduration
 #, object-pascal-format
@@ -1296,7 +1296,7 @@ msgstr "Видеодорожки: %d"
 
 #: proclocalize.lngwebvideounsupported
 msgid "The video format is not supported for playback in the web browser."
-msgstr "Формат видео не поддерживается для воспроизведения в веб-браузере"
+msgstr "Формат видео не поддерживается для воспроизведения в веб-браузере."
 
 #: proclocalize.lngwizlanguage
 msgctxt "proclocalize.lngwizlanguage"
@@ -1305,7 +1305,7 @@ msgstr "Язык"
 
 #: proclocalize.lngwritedenieded
 msgid "Write denied. Please check folder permissions."
-msgstr "Нет разрешения на запись в эту папку"
+msgstr "Нет разрешения на запись в эту папку."
 
 #: proclocalize.lngwritestatus
 #, object-pascal-format
@@ -1890,7 +1890,6 @@ msgid "OK"
 msgstr ""
 
 #: tfrmcustomselectdlgwithpreview.btncancel.caption
-#, fuzzy
 msgctxt "tfrmcustomselectdlgwithpreview.btncancel.caption"
 msgid "Cancel"
 msgstr "Отменить"
@@ -2079,7 +2078,7 @@ msgstr ""
 #: tfrmexportsup.btnsave.caption
 msgctxt "tfrmexportsup.btnsave.caption"
 msgid "Save..."
-msgstr "Сохранить"
+msgstr "Сохранить..."
 
 #: tfrmexportsup.caption
 msgid "Blu-ray SUP"
@@ -2634,12 +2633,12 @@ msgstr "Перейти к"
 
 #: tfrmgototime.lbltime.caption
 msgid "Time:"
-msgstr "Время"
+msgstr "Время:"
 
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
 msgid "About..."
-msgstr "О программе Tero Subtitler"
+msgstr "О программе Tero Subtitler..."
 
 #: tfrmmain.actactor.caption
 msgctxt "tfrmmain.actactor.caption"
@@ -2648,7 +2647,7 @@ msgstr "Актёры"
 
 #: tfrmmain.actaddnote.caption
 msgid "Add note..."
-msgstr "Добавить заметку"
+msgstr "Добавить заметку..."
 
 #: tfrmmain.actaddquotationmarks.caption
 msgid "Add quotation marks"
@@ -2693,7 +2692,7 @@ msgstr "Окружение"
 #: tfrmmain.actaudiototext.caption
 msgctxt "tfrmmain.actaudiototext.caption"
 msgid "Audio to text..."
-msgstr "Преобразовать аудио в текст"
+msgstr "Преобразовать аудио в текст..."
 
 #: tfrmmain.actautobreakentry.caption
 msgctxt "tfrmmain.actautobreakentry.caption"
@@ -2707,7 +2706,7 @@ msgstr "Разделить длинную строку на две или бол
 
 #: tfrmmain.actautomaticduration.caption
 msgid "Automatic duration..."
-msgstr "Автодлина"
+msgstr "Автодлина..."
 
 #: tfrmmain.actbatchconvert.caption
 msgctxt "tfrmmain.actbatchconvert.caption"
@@ -2759,7 +2758,7 @@ msgstr "Сравнить субтитры..."
 
 #: tfrmmain.actconvertcase.caption
 msgid "Convert case..."
-msgstr "Преобразовать регистр"
+msgstr "Преобразовать регистр..."
 
 #: tfrmmain.actcopy.caption
 msgctxt "tfrmmain.actcopy.caption"
@@ -2826,7 +2825,7 @@ msgstr "Настроить формат экспорта изображений.
 
 #: tfrmmain.actexportcustomtextformat.caption
 msgid "Custom text format..."
-msgstr "Выбрать формат текста"
+msgstr "Выбрать формат текста..."
 
 #: tfrmmain.actexportmarkedsubtitles.caption
 msgid "Marked subtitles..."
@@ -3434,7 +3433,7 @@ msgstr "Настроить задержку..."
 
 #: tfrmmain.actsetgapping.caption
 msgid "Set gapping..."
-msgstr ""
+msgstr "Установить зазор..."
 
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
@@ -3470,7 +3469,7 @@ msgstr "Сдвинуть %dms вперёд"
 
 #: tfrmmain.actshifttimes.caption
 msgid "Shift times..."
-msgstr "Сдвиг по времени"
+msgstr "Сдвиг по времени..."
 
 #: tfrmmain.actshotchanges.caption
 msgid "Shot changes..."
@@ -3521,10 +3520,9 @@ msgstr "Выравнивание"
 
 #: tfrmmain.actshoweditortoolbarbasic.caption
 msgid "Basic"
-msgstr ""
+msgstr "Основное"
 
 #: tfrmmain.actshoweditortoolbarentry.caption
-#, fuzzy
 msgctxt "tfrmmain.actshoweditortoolbarentry.caption"
 msgid "Entry"
 msgstr "Субтитры"
@@ -3554,7 +3552,6 @@ msgid "Encoding"
 msgstr "Кодировка"
 
 #: tfrmmain.actshowtoolbarentry.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowtoolbarentry.caption"
 msgid "Entry"
 msgstr "Субтитры"
@@ -3591,10 +3588,9 @@ msgstr "Вид"
 #: tfrmmain.actshowvideotoolbarcontrols.caption
 msgctxt "tfrmmain.actshowvideotoolbarcontrols.caption"
 msgid "Controls"
-msgstr ""
+msgstr "Управление"
 
 #: tfrmmain.actshowvideotoolbarentry.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowvideotoolbarentry.caption"
 msgid "Entry"
 msgstr "Субтитры"
@@ -3602,12 +3598,12 @@ msgstr "Субтитры"
 #: tfrmmain.actshowvideotoolbarother.caption
 msgctxt "tfrmmain.actshowvideotoolbarother.caption"
 msgid "Other"
-msgstr ""
+msgstr "Остальное"
 
 #: tfrmmain.actshowwaveformtoolbarcontrols.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarcontrols.caption"
 msgid "Controls"
-msgstr ""
+msgstr "Управление"
 
 #: tfrmmain.actshowwaveformtoolbarentry.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarentry.caption"
@@ -3617,7 +3613,7 @@ msgstr "Субтитры"
 #: tfrmmain.actshowwaveformtoolbarother.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
 msgid "Other"
-msgstr ""
+msgstr "остальное"
 
 #: tfrmmain.actshowwaveformtoolbarshotchanges.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarshotchanges.caption"
@@ -3639,7 +3635,7 @@ msgstr "Режим исходного кода"
 
 #: tfrmmain.actspellcheck.caption
 msgid "Spell check..."
-msgstr "Проверка орфографии"
+msgstr "Проверка орфографии..."
 
 #: tfrmmain.actsplitentryatposition.caption
 msgctxt "tfrmmain.actsplitentryatposition.caption"
@@ -3756,7 +3752,7 @@ msgstr "Режим перевода"
 
 #: tfrmmain.acttts.caption
 msgid "Text to speech..."
-msgstr ""
+msgstr "Текст в речь..."
 
 #: tfrmmain.actunbreakentry.caption
 msgid "Unbreak entry"
@@ -3868,7 +3864,7 @@ msgstr "По-умолчанию"
 
 #: tfrmmain.actvideodubbing.caption
 msgid "Dubbing..."
-msgstr ""
+msgstr "Дубляж..."
 
 #: tfrmmain.actvideofilterblur.caption
 msgid "Blur"
@@ -3940,7 +3936,7 @@ msgstr "Предпросмотр видео в браузере..."
 
 #: tfrmmain.actwebreference.caption
 msgid "Web reference..."
-msgstr "Ссылка на онлайн словарь WebReference:"
+msgstr "Ссылка на онлайн словарь WebReference..."
 
 #: tfrmmain.cboencoding.hint
 msgctxt "tfrmmain.cboencoding.hint"
@@ -4245,68 +4241,62 @@ msgid "Replace with:"
 msgstr "Заменить:"
 
 #: tfrmpauses.btnapply.caption
-#, fuzzy
 msgctxt "tfrmpauses.btnapply.caption"
 msgid "Apply"
 msgstr "Применить"
 
 #: tfrmpauses.btnclose.caption
-#, fuzzy
 msgctxt "tfrmpauses.btnclose.caption"
 msgid "Close"
 msgstr "Закрыть"
 
 #: tfrmpauses.caption
 msgid "Set gapping"
-msgstr ""
+msgstr "Установить зазор"
 
 #: tfrmpauses.lblduration.caption
 msgid "Shorten duration of:"
-msgstr ""
+msgstr "Сократить длительность до:"
 
 #: tfrmpauses.lblgap.caption
 msgid "Value:"
-msgstr ""
+msgstr "Значение:"
 
 #: tfrmpauses.lblscope.caption
-#, fuzzy
 msgctxt "tfrmpauses.lblscope.caption"
 msgid "Scope:"
 msgstr "Применить ко:"
 
 #: tfrmpauses.rbnallthesubtitles.caption
-#, fuzzy
 msgctxt "tfrmpauses.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Всем субтитрам"
 
 #: tfrmpauses.rbnfromtheselectedsubtitle.caption
-#, fuzzy
 msgctxt "tfrmpauses.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected entry"
 msgstr "От текущего субтитра"
 
 #: tfrmpauses.rbnonlyselectedsubtitles.caption
-#, fuzzy
 msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Только выделенным субтитрам"
 
 #: tfrmpauses.rdobothentries.caption
 msgid "Both entries equally"
-msgstr ""
+msgstr "Оба субтитра идентичны"
 
 #: tfrmpauses.rdoentrywithlesscps.caption
 msgid "Entry with less CPS"
-msgstr ""
+msgstr "Начать с меньшим числом символов-в-секунду"
 
 #: tfrmpauses.rdofirstentry.caption
 msgid "First entry only"
-msgstr ""
+msgstr "Только первичное значение"
 
 #: tfrmpauses.rdosecondentry.caption
 msgid "Second entry only"
-msgstr ""
+msgstr "Только вторичное значение"
 
 #: tfrmqualitycheck.btnclose.caption
 msgctxt "tfrmqualitycheck.btnclose.caption"
@@ -4530,15 +4520,15 @@ msgstr "Исключить эти \"символы в секунду\""
 
 #: tfrmsettings.lbldefaultfileencoding.caption
 msgid "Default file encoding"
-msgstr "Кодировка по-умолчанию:"
+msgstr "Кодировка по-умолчанию"
 
 #: tfrmsettings.lbldefaultfileformat.caption
 msgid "Default file format"
-msgstr "Формат субтитров по-умолчанию:"
+msgstr "Формат субтитров по-умолчанию"
 
 #: tfrmsettings.lbldefaultframerate.caption
 msgid "Default input frame rate"
-msgstr "Частота кадров по-умолчанию:"
+msgstr "Частота кадров по-умолчанию"
 
 #: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
 msgid "Dialogue segments detection threshold (rms)"
@@ -4546,11 +4536,11 @@ msgstr "Порог обнаружения диалога (среднеквадр
 
 #: tfrmsettings.lblfasterwhisper.caption
 msgid "Faster-Whisper"
-msgstr "Путь к Faster-Whisper:"
+msgstr "Путь к Faster-Whisper"
 
 #: tfrmsettings.lblffmpeg.caption
 msgid "FFmpeg"
-msgstr "Путь к FFmpeg:"
+msgstr "Путь к FFmpeg"
 
 #: tfrmsettings.lblframestep.caption
 msgid "Frame step"
@@ -4606,7 +4596,7 @@ msgstr "Повторяющиеся символы"
 
 #: tfrmsettings.lblscenedetect.caption
 msgid "PySceneDetect"
-msgstr "Путь к PySceneDetect:"
+msgstr "Путь к PySceneDetect"
 
 #: tfrmsettings.lblscsnaparea.caption
 msgctxt "tfrmsettings.lblscsnaparea.caption"
@@ -4686,7 +4676,7 @@ msgstr "Тема"
 
 #: tfrmsettings.lbltimecodemode.caption
 msgid "Time code mode"
-msgstr "Режим таймкода:"
+msgstr "Режим таймкода"
 
 #: tfrmsettings.lblwavecolor.caption
 msgctxt "tfrmsettings.lblwavecolor.caption"
@@ -4694,7 +4684,6 @@ msgid "Color"
 msgstr "Цвет"
 
 #: tfrmsettings.lblwaveentry.caption
-#, fuzzy
 msgctxt "tfrmsettings.lblwaveentry.caption"
 msgid "Entry"
 msgstr "Субтитры"
@@ -4706,7 +4695,7 @@ msgstr "Аудиоволна"
 
 #: tfrmsettings.lblwebreference.caption
 msgid "Web reference"
-msgstr "Ссылка на онлайн словарь WebReference:"
+msgstr "Ссылка на онлайн словарь WebReference"
 
 #: tfrmsettings.lblwhispercpp.caption
 msgid "Whisper.cpp"
@@ -4870,7 +4859,7 @@ msgstr "Не найдено"
 
 #: tfrmspellcheck.lblsource.caption
 msgid "Source"
-msgstr "Что проверить:"
+msgstr "Что проверить"
 
 #: tfrmspellcheck.lblsuggestions.caption
 msgid "Suggestions"
@@ -5216,7 +5205,6 @@ msgid "Translation language"
 msgstr "Язык перевода"
 
 #: tfrmtts.btnclose.caption
-#, fuzzy
 msgctxt "tfrmtts.btnclose.caption"
 msgid "Close"
 msgstr "Закрыть"
@@ -5227,25 +5215,23 @@ msgid "..."
 msgstr ""
 
 #: tfrmtts.btngenerate.caption
-#, fuzzy
 msgctxt "tfrmtts.btngenerate.caption"
 msgid "Generate"
 msgstr "Преобразовать"
 
 #: tfrmtts.btnpreview.caption
 msgid "Preview"
-msgstr ""
+msgstr "Предпросмотр"
 
 #: tfrmtts.caption
 msgid "Text to speech"
-msgstr ""
+msgstr "Текст в речь"
 
 #: tfrmtts.lblfolder.caption
 msgid "Folder:"
-msgstr ""
+msgstr "Папка:"
 
 #: tfrmtts.lblscope.caption
-#, fuzzy
 msgctxt "tfrmtts.lblscope.caption"
 msgid "Scope:"
 msgstr "Применить ко:"
@@ -5253,70 +5239,65 @@ msgstr "Применить ко:"
 #: tfrmtts.lblsimilarityboost.caption
 msgctxt "tfrmtts.lblsimilarityboost.caption"
 msgid "Similarity boost:"
-msgstr ""
+msgstr "Повысить схожесть"
 
 #: tfrmtts.lblstability.caption
 msgctxt "tfrmtts.lblstability.caption"
 msgid "Stability:"
-msgstr ""
+msgstr "Устойчивость:"
 
 #: tfrmtts.lblvoice.caption
 msgctxt "tfrmtts.lblvoice.caption"
 msgid "Voice:"
-msgstr ""
+msgstr "Голос:"
 
 #: tfrmtts.rbnallthesubtitles.caption
-#, fuzzy
 msgctxt "tfrmtts.rbnallthesubtitles.caption"
 msgid "All entries"
 msgstr "Всем субтитрам"
 
 #: tfrmtts.rbnfromtheselectedsubtitle.caption
-#, fuzzy
 msgctxt "tfrmtts.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "От текущего субтитра"
 
 #: tfrmtts.rbnonlyselectedsubtitles.caption
-#, fuzzy
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Только выделенным субтитрам"
 
 #: tfrmvideodubbing.btnclose.caption
-#, fuzzy
 msgctxt "tfrmvideodubbing.btnclose.caption"
 msgid "Close"
 msgstr "Закрыть"
 
 #: tfrmvideodubbing.btngenerate.caption
-#, fuzzy
 msgctxt "tfrmvideodubbing.btngenerate.caption"
 msgid "Generate"
 msgstr "Преобразовать"
 
 #: tfrmvideodubbing.caption
 msgid "Video dubbing"
-msgstr ""
+msgstr "Видео дубляж"
 
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
-msgstr ""
+msgstr "Основной голос"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
 msgid "Similarity boost:"
-msgstr ""
+msgstr "Повысить схожесть:"
 
 #: tfrmvideodubbing.lblstability.caption
 msgctxt "tfrmvideodubbing.lblstability.caption"
 msgid "Stability:"
-msgstr ""
+msgstr "Устойчивость:"
 
 #: tfrmvideodubbing.lblvoice.caption
 msgctxt "tfrmvideodubbing.lblvoice.caption"
 msgid "Voice:"
-msgstr ""
+msgstr "Голос:"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
@@ -5485,4 +5466,3 @@ msgstr "Инвертированный"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Вертикальный"
-
