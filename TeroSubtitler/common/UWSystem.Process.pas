@@ -30,7 +30,7 @@ type
   TUWProcessCBEx = procedure(Output: String; var Cancel: Boolean);
 
 function ExecuteApp(const AAppFileName: String; const AParams: TStringArray; const AHidden: Boolean = True; const AWaitOnExit: Boolean = True; const ACB: TUWProcessCB = NIL): Boolean;
-function ExecuteAppEx(const AAppFileName: String; const AParams: TStringArray; const ACB: TUWProcessCBEx = NIL): Boolean;
+function ExecuteAppEx(const AAppFileName: String; const AParams: TStringArray; AEnvironment: TStringArray = NIL; const ACB: TUWProcessCBEx = NIL): Boolean;
 
 function ExecuteAppLoop(const AAppFileName: String; const AParams: TStringArray; var Output: TStringList; const ACB: TOnRunCommandEvent = NIL): Boolean;
 
@@ -90,7 +90,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function ExecuteAppEx(const AAppFileName: String; const AParams: TStringArray; const ACB: TUWProcessCBEx = NIL): Boolean;
+function ExecuteAppEx(const AAppFileName: String; const AParams: TStringArray; AEnvironment: TStringArray = NIL; const ACB: TUWProcessCBEx = NIL): Boolean;
 const
   BUF_SIZE = 2048; // Buffer size for reading the output in chunks
 
@@ -114,6 +114,11 @@ begin
     // this program, preventing it from reading the output data of the process.
     AProcess.Options := [poUsePipes, poStderrToOutPut];
 
+    // Environment
+    if AEnvironment <> NIL then
+      for i := 0 to High(AEnvironment) do
+        AProcess.Environment.Add(AEnvironment[i]);
+
     // Params
     for i := 0 to High(AParams) do
       AProcess.Parameters.Add(AParams[i]);
@@ -129,13 +134,16 @@ begin
         // Note that all read(...) calls will block except for the last one, which returns 0 (zero).
         BytesRead := AProcess.Output.Read(Buffer, BUF_SIZE);
         SetLength(s, BytesRead);
-        Move(Buffer[1], s[1], BytesRead);
-        //
-        if Assigned(ACB) then
+        if BytesRead > 0 then
         begin
-          ACB(s, ACancel);
-          Application.ProcessMessages;
-          if ACancel then AProcess.Terminate(-1);
+          Move(Buffer[1], s[1], BytesRead);
+          if Assigned(ACB) then
+          begin
+            Application.ProcessMessages;
+            Sleep(100);
+            ACB(s, ACancel);
+            if ACancel then AProcess.Terminate(-1);
+          end;
         end;
       until BytesRead = 0; // Stop if no more data is available
 
@@ -143,7 +151,6 @@ begin
     except
       on e: Exception do
       begin
-        Result := False;
       end;
     end;
   finally
