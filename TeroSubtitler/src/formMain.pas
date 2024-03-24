@@ -90,6 +90,7 @@ type
     actGoToCurrentEntryInitialTime: TAction;
     actGoToCurrentEntryFinalTime: TAction;
     actDistributeEntriesEvenly: TAction;
+    actVideoDubbing: TAction;
     actTTS: TAction;
     actSetGapping: TAction;
     actStreamExtractor: TAction;
@@ -401,6 +402,7 @@ type
     MenuItem284: TMenuItem;
     MenuItem285: TMenuItem;
     MenuItem286: TMenuItem;
+    MenuItem287: TMenuItem;
     mnuViewToolbarVideo: TMenuItem;
     mnuViewToolbarWaveform: TMenuItem;
     mnuViewToolbarEditor: TMenuItem;
@@ -1290,6 +1292,7 @@ type
     procedure actDistributeEntriesEvenlyExecute(Sender: TObject);
     procedure actStreamExtractorExecute(Sender: TObject);
     procedure actTTSExecute(Sender: TObject);
+    procedure actVideoDubbingExecute(Sender: TObject);
   private
 
   public

@@ -2571,6 +2571,9 @@ object frmMain: TfrmMain
       object MenuItem241: TMenuItem
         Action = actGenerateBlankVideo
       end
+      object MenuItem287: TMenuItem
+        Action = actVideoDubbing
+      end
       object MenuItem8: TMenuItem
         Action = actShotChanges
       end
@@ -4965,6 +4968,12 @@ object frmMain: TfrmMain
       Category = 'Tools'
       Caption = 'Text to speech...'
       OnExecute = actTTSExecute
+    end
+    object actVideoDubbing: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Dubbing...'
+      OnExecute = actVideoDubbingExecute
     end
   end
   object popDropInsert: TPopupMenu

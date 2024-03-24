@@ -105,6 +105,7 @@ resourcestring
   lngLine = 'Line:';
   lngFileSavedSuccessfully = 'File saved successfully.';
   lngOperationFailed = 'Job %d/%d fail with code %d.';
+  lngOperationCancelled = 'Operation cancelled.';
   lngOperationCompleted = 'Operation completed.';
   lngVideoGenerationFailed = 'Video generation failed.';
   lngVideoErrorAOInitFailed = 'Initializing the audio output failed.';
@@ -346,6 +347,10 @@ resourcestring
   lngOriginal = 'Original';
   lngTranslated = 'Translated';
   lngPercent = 'Percent';
+
+  //VideoDubbingStrings
+  lngvdGeneratingTTS = 'Generating text to speech...';
+  lngvdGeneratingVideo = 'Generating video dubbing...';
 
   //VideoInfoStrings
   lngviFile = 'File: %s';

@@ -804,6 +804,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="formVideoDubbing.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmVideoDubbing"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
