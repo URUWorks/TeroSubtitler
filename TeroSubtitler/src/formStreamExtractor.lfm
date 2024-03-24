@@ -13,7 +13,7 @@ object frmStreamExtractor: TfrmStreamExtractor
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnExtract: TButton
     AnchorSideRight.Control = btnClose
     AnchorSideBottom.Control = btnClose

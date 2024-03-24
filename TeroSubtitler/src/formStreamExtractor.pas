@@ -83,6 +83,7 @@ type
     procedure SetStateText(const AText: String);
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure ScanFile(const AFileName: String);
+    procedure OpenFolderClick(Sender: TObject);
   public
 
   end;
@@ -335,11 +336,12 @@ begin
               ['%input', '%output', '%trackid'],
               [edtFile.Text, s, IntToStr(FList[i]^.Id)], []);
 
-          r := ExecuteAppEx(Tools.FFmpeg, AParamArray, @ThreadProcessCB);
+          r := ExecuteAppEx(Tools.FFmpeg, AParamArray, NIL, @ThreadProcessCB);
         end;
 
       if r then
-        ShowMessageDialog(lngFileSavedSuccessfully);
+        ShowMessageDialog(lngOperationCompleted, '', lngOpenContainingFolder, @OpenFolderClick);
+
     finally
       SetControlsEnabled(True);
     end;
@@ -494,89 +496,12 @@ begin
   end;
 end;
 
-{procedure TfrmStreamExtractor.ScanFile(const AFileName: String);
-var
-  i : Integer;
-  AParamArray : TStringArray;
-  Output : TStringList = NIL;
-  Parser : TJSONParser;
-  Data : TJSONData;
-  joData,
-  joItem,
-  joItem2 : TJSONObject;
-  jaData,
-  ZeroArray : TJSONArray;
-  s, ff : String;
-  Info : PStreamInfo;
+// -----------------------------------------------------------------------------
+
+procedure TfrmStreamExtractor.OpenFolderClick(Sender: TObject);
 begin
-  if AFileName.IsEmpty then Exit;
-
-  ff := ConcatPaths([ExtractFileDir(Tools.FFmpeg), FFPROBE_EXE]);
-  if not FileExists(ff) then
-  begin
-    ShowErrorMessageDialog(Format(lngExtractAppError, [ff]));
-    Exit;
-  end;
-
-  VST.RootNodeCount := 0;
-  FList.Clear;
-
-  AParamArray := FFPROBE_Params.Split(' ');
-  for i := 0 to High(AParamArray) do
-    AParamArray[i] := StringReplace(AParamArray[i], '%input', AFileName, [rfReplaceAll]);
-
-  ExecuteAppLoop(ff, AParamArray, Output);
-  writeln(output.Text);
-
-  Parser := TJSONParser.Create(Output.Text);
-  ZeroArray := TJSONArray.Create;
-  try
-    try
-      Data := Parser.Parse;
-    except
-      Exit;
-    end;
-
-    ZeroArray.Clear;
-    joData := TJSONObject(Data);
-    if not Assigned(joData) then Exit;
-
-    jaData := joData.Get('streams', ZeroArray);
-    for i := 0 to jaData.Count-1 do
-    begin
-      joItem := jaData.Objects[i];
-
-      New(Info);
-      Info^.Checked  := False;
-      Info^.Id       := joItem.Get('index', -1);
-      Info^.Kind     := joItem.Get('codec_type', '');
-      Info^.Codec    := joItem.Get('codec_name', '');
-      Info^.Duration := joItem.Get('duration', '');
-
-      if Info^.Duration <> '' then
-        Info^.Duration := TimeToString(Round(StrToSingle(Info^.Duration.Replace('.', FormatSettings.DecimalSeparator) , 0, FormatSettings)*1000));
-
-      joItem2 := joitem.Objects['tags'];
-      if Assigned(joItem2) then
-      begin
-        if Info^.Duration = '' then
-        begin
-          s := joItem2.Get('DURATION-eng', '');
-          Info^.Duration := Copy(s, 1, Pos('.', s)-1);
-        end;
-        Info^.Language := joItem2.Get('language', '');
-      end;
-
-      FList.Add(Info);
-    end;
-  finally
-    Output.Free;
-    ZeroArray.Free;
-    FreeAndNil(Parser);
-  end;
-
-  VST.RootNodeCount := FList.Count;
-end;}
+  OpenDocument(edtFolder.Text);
+end;
 
 // -----------------------------------------------------------------------------
 
