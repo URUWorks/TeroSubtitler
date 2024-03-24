@@ -81,6 +81,10 @@
         <Filename Value="UWSystem.TextToSpeech.pas"/>
         <UnitName Value="UWSystem.TextToSpeech"/>
       </Item>
+      <Item>
+        <Filename Value="UWFiles.MPEGAudio.pas"/>
+        <UnitName Value="UWFiles.MPEGAudio"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>
