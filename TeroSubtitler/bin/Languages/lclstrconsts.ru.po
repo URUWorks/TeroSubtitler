@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
-"Last-Translator: Maxim Ganetsky <maxkill@mail.ru>\n"
 "Project-Id-Version: lazaruside\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2024-03-24 17:56+0300\n"
+"Last-Translator: Maxim Ganetsky <maxkill@mail.ru>\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-07-22 00:58+0300\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Language: ru\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: lclstrconsts.hhshelpbrowsernotexecutable
 #, object-pascal-format
@@ -313,7 +313,7 @@ msgstr "Файл должен существовать"
 #: lclstrconsts.rsfdfilenotexist
 #, object-pascal-format
 msgid "The file \"%s\" does not exist."
-msgstr "Файл \"%s\" не существует"
+msgstr "Файл \"%s\" не существует."
 
 #: lclstrconsts.rsfdfilereadonly
 #, object-pascal-format
@@ -592,7 +592,7 @@ msgstr "Справка для данной темы не найдена"
 #: lclstrconsts.rshelpnotregistered
 #, object-pascal-format
 msgid "%s: Not registered"
-msgstr "%s: Не зарегистрирован"
+msgstr "%s: не зарегистрирован"
 
 #: lclstrconsts.rshelpselectorerror
 msgid "Help Selector Error"
@@ -1470,4 +1470,3 @@ msgstr "Размер"
 #: lclstrconsts.sshellctrlstype
 msgid "Type"
 msgstr "Тип"
-
