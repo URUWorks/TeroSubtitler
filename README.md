@@ -24,6 +24,7 @@ Tero Subtitler is an open source, cross-platform, and free subtitle editing soft
 - Export subtitles to Blu-ray SUP
 - Generate blank video
 - Generate video with hardcoded subtitles
+- Video dubbing
 - And much more
 
 ### [mpv](https://mpv.io/) playback engine
