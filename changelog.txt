@@ -11,6 +11,7 @@
 - updated: Russian language (thx RoxMarty)
 - added: Text to speech
 - added: Set gapping #276
+- added: TTS using elevenlabsTTS for dubbing feature #232
 
 1.0.1.7 (1.3.2024)
 - fixed: Extract waveform window #275
