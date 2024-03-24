@@ -92,7 +92,7 @@ uses
   UWSubtitleAPI, procVST, procSubtitle, procTypes, RegExpr, procWorkspace,
   procColorTheme, procDialogs, procLocalize, UWSystem.InetUtils, FileUtil,
   UWSubtitleAPI.Tags, UWSystem.Process, UWSystem.TimeUtils, procConfig,
-  formMain;
+  formMain, UWSystem.SysUtils, UWFiles.MPEGAudio;
 
 {$R *.lfm}
 
@@ -425,10 +425,22 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmVideoDubbing.GenerateVideoFile;
+
+  function GetTempo(const AFileName: String; const ADesiredLength: Integer): String;
+  begin
+    with TUWMPEGAudioTag.Create(AFileName) do
+    try
+      Result := SingleToStr(Duration / ADesiredLength, '.');
+    finally
+      Free;
+    end;
+  end;
+
 var
   AParamArray : TStringArray;
   i, c : Integer;
   sl : TStringList;
+  tracks, ids : String;
 begin
   lblStatus.Caption := lngvdGeneratingVideo;
   lblStatus.Update;
@@ -445,23 +457,26 @@ begin
     sl.Add(frmMain.MPV.FileName);
     {$ENDIF}
 
+    tracks := '';
+    ids := '';
     c := 0;
     for i := 0 to TTS.Jobs.Count-1 do
       if FileExists(TTS.Jobs[i]^.FileName) then
       begin
         Inc(c);
-        sl.Add('-itsoffset');
-        sl.Add(IntToStr(Subtitles[i].InitialTime div 1000));
         sl.Add('-i');
         {$IFDEF WINDOWS}
         sl.Add('"'+TTS.Jobs[i]^.FileName+'"');
         {$ELSE}
         sl.Add(TTS.Jobs[i]^.FileName);
         {$ENDIF}
+        tracks += Format('[%d]adelay=delays=%d:all=1[%da];', [c, Subtitles[i].InitialTime, c]);
+        //tracks += Format('[%d]adelay=delays=%d:all=1,atempo=%s[%da];', [c, Subtitles[i].InitialTime, GetTempo(TTS.Jobs[i]^.FileName, Subtitles.Duration[i]), c]);
+        ids += Format('[%da]', [c]);
       end;
 
     sl.Add('-filter_complex');
-    sl.Add('amix=inputs=' + IntToStr(c) + '[a]');
+    sl.Add(tracks + ids + 'amix=inputs=' + IntToStr(c) + '[a]');
     sl.Add('-map');
     sl.Add('0:v');
     sl.Add('-map');
