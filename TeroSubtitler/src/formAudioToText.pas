@@ -329,8 +329,10 @@ var
   s : String;
 begin
   ATerminate := CancelProcess;
-  //writeln(output);
-  Application.ProcessMessages;
+  if Output.IsEmpty then Exit;
+  //Sleep(100);
+  //WriteLn(Output);
+  //Application.ProcessMessages;
   // process output received
   sl := TStringList.Create;
   try
@@ -381,60 +383,6 @@ procedure ThreadProcessCBTime(const ATime: Double);
 begin
   if Tools.WhisperEngine <> WhisperCPP then
     frmAudioToText.lblTimeElapsed.Caption := TimeToString(Trunc(ATime)*1000, 'mm:ss');
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure ProcessCBEx(Output: String; var Cancel: Boolean);
-var
-  sl : TStringList;
-  i, it, ft : Integer;
-  s : String;
-begin
-  Cancel := CancelProcess;
-  Application.ProcessMessages;
-  // process output received
-  sl := TStringList.Create;
-  try
-    sl.Text := Output;
-
-    for i := 0 to sl.Count-1 do
-    begin
-      if Tools.WhisperEngine = WhisperCPP then
-      begin
-        // Subtitle info
-        if Pos('-->', sl[i]) = 15 then
-        begin
-          it     := StringToTime(Copy(sl[i], 2, 12));
-          ft     := StringToTime(Copy(sl[i], 19, 12));
-          Output := Copy(sl[i], 35, sl[i].Length-34);
-          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True, True);
-        end;
-        // Progress
-        if Pos('progress =', sl[i]) > 0 then
-        begin
-          it := sl[i].LastIndexOf(' ');
-          ft := sl[i].Length-it;
-          s  := Copy(sl[i], it+1, ft-1).Trim;
-          frmAudioToText.prbProgress.Position   := s.ToInteger;
-          frmAudioToText.lblTimeElapsed.Caption := s + '%';
-        end;
-      end
-      else
-      begin
-        // Subtitle info
-        if Pos('-->', sl[i]) = 12 then
-        begin
-          it     := StringToTime(Copy(sl[i], 2, 9), True);
-          ft     := StringToTime(Copy(sl[i], 16, 9), True);
-          Output := Copy(sl[i], 28);
-          VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True, True);
-        end;
-      end;
-    end;
-  finally
-    sl.Free;
-  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -558,7 +506,7 @@ begin
 
           if rbnAddSubtitlesWhileTranscribing.Checked then //and rbnAddSubtitlesWhileTranscribing.Enabled then
           begin
-            //if ExecuteAppEx(GetAudioToTextAppFile, AParamArray, @ProcessCBEx) then
+            //if ExecuteAppEx(GetAudioToTextAppFile, AParamArray, AEnvironment, @ThreadProcessCB) then
             if ExecuteThreadProcess(GetAudioToTextAppFile, AParamArray, AEnvironment, @ThreadProcessCB, @ThreadProcessCBTime) then
             begin
               // delete wave file
