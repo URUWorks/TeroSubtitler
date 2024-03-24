@@ -33,6 +33,7 @@ type
     Text,
     VoiceID,
     FileName : String;
+    VoiceIndex : Integer;
     Stability,
     Similarity : Single;
   end;
@@ -71,7 +72,7 @@ type
 
   { TTextToSpeech }
 
-  TOnJobsError = procedure(Sender: TObject; const ErrorDesc: String; const ErrorID, CurrentJob: Integer) of object;
+  TOnJobsError = procedure(Sender: TObject; const ErrorDesc: String; const ErrorID, CurrentJob: Integer; var Cancel: Boolean) of object;
   TOnJobsProgress = procedure(Sender: TObject; const Index, Total: Integer) of object;
 
   TTextToSpeech = class(TThread)
@@ -84,6 +85,7 @@ type
     FCurrentJob : Integer;
     FError      : Integer;
     FErrorDesc  : String;
+    FCancel     : Boolean;
     FOnJobsError: TOnJobsError;
     FOnJobsProgress: TOnJobsProgress;
     function ParseVoices(const JSON: String): Boolean;
@@ -173,6 +175,7 @@ begin
   Fxi_api_key := xi_api_key;
   FError := 0;
   FErrorDesc := '';
+  FCancel := False;
 end;
 
 // -----------------------------------------------------------------------------
@@ -304,7 +307,7 @@ begin
     sta := ReplaceString(SingleToStr(stability, FormatSettings, '0.#'), FormatSettings.DecimalSeparator, '.');
 
     PostData := TStringStream.Create(
-      '{"text":"' + StringReplace(Text.Trim, sLineBreak, '. ', [rfReplaceAll]) +
+      '{"text":"' + StringToJSONString(StringReplace(Text.Trim, sLineBreak, '. ', [rfReplaceAll])) +
       //'","model_id":"eleven_multilingual_v1"}'
       '","model_id":"eleven_multilingual_v1","voice_settings":{"stability":' + sta + ',"similarity_boost":' + sim + '}}'
       , TEncoding.UTF8);
@@ -332,7 +335,14 @@ begin
           else
             FError := JOB_ERROR_Uknown;
 
-          FErrorDesc := GetData.ToString;
+          with TStringStream.Create do
+          try
+            LoadFromStream(GetData);
+            FErrorDesc := DataString;
+          finally
+            Free;
+          end;
+
           GetData.SaveToFile(ChangeFileExt(FileName, '.log'));
         end;
       except
@@ -405,6 +415,7 @@ begin
         end;
       end;
     end;
+    if FCancel then Exit;
   end;
 end;
 
@@ -413,7 +424,7 @@ end;
 procedure TTextToSpeech.DoOnJobsError;
 begin
   if Assigned(FOnJobsError) then
-    FOnJobsError(Self, FErrorDesc, FError, FCurrentJob+1);
+    FOnJobsError(Self, FErrorDesc, FError, FCurrentJob+1, FCancel);
 end;
 
 // -----------------------------------------------------------------------------
