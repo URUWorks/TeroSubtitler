@@ -39,7 +39,7 @@ type
     edtFolder: TEdit;
     lblStability: TLabel;
     spnSimilarityBoost: TFloatSpinEdit;
-    lnlSimilarityBoost: TLabel;
+    lblSimilarityBoost: TLabel;
     lblFolder: TLabel;
     lblScope: TLabel;
     lblVoice: TLabel;
@@ -59,7 +59,7 @@ type
     TTS: TTextToSpeech;
     //MPV: TMPVPlayer;
     procedure EnableControls(const AValue: Boolean);
-    procedure DoError(Sender: TObject; const ErrorDesc: String; const ErrorID, CurrentJob: Integer);
+    procedure DoError(Sender: TObject; const ErrorDesc: String; const ErrorID, CurrentJob: Integer; var Cancel: Boolean);
     procedure DoProgress(Sender: TObject; const Index, Total: Integer);
     procedure DoTerminate(Sender: TObject);
     procedure FillComboWithVoices;
@@ -78,7 +78,7 @@ implementation
 
 uses
   procWorkspace, procTypes, procVST, procDialogs, UWSystem.InetUtils,
-  UWTranslateAPI.Google, UWSubtitleAPI, formMain;
+  UWTranslateAPI.Google, UWSubtitleAPI, UWSubtitleAPI.Tags, formMain;
 
 {$R *.lfm}
 
@@ -173,9 +173,10 @@ var
   job: PJobInfo;
 begin
   New(job);
-  job^.Text := Item^.Text;
+  job^.Text := RemoveTSTags(Item^.Text);
   job^.FileName := ConcatPaths([frmTTS.edtFolder.Text, 'Entry' + IntToStr(Index+1) + '.mp3']);
   job^.VoiceID := frmTTS.TTS.Voices[frmTTS.cboVoice.ItemIndex]^.ID;
+  job^.VoiceIndex := 0;
   job^.Similarity := frmTTS.spnSimilarityBoost.Value;
   job^.Stability := frmTTS.spnStability.Value;
   frmTTS.TTS.Jobs.Add(job);
@@ -263,9 +264,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmTTS.DoError(Sender: TObject; const ErrorDesc: String; const ErrorID, CurrentJob: Integer);
+procedure TfrmTTS.DoError(Sender: TObject; const ErrorDesc: String; const ErrorID, CurrentJob: Integer; var Cancel: Boolean);
 begin
   ShowErrorMessageDialog(Format(lngOperationFailed, [CurrentJob, TTS.Jobs.Count, ErrorID]));
+  Cancel := ErrorDesc.Contains('quota_exceeded');
 end;
 
 // -----------------------------------------------------------------------------
@@ -284,7 +286,6 @@ begin
     ShowMessageDialog(lngOperationCompleted, '', lngOpenContainingFolder, @OpenFolderClick);
 
   EnableControls(True);
-  //Close;
 end;
 
 // -----------------------------------------------------------------------------

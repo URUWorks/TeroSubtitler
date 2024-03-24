@@ -170,7 +170,7 @@ object frmTTS: TfrmTTS
     OnClick = btnFolderClick
   end
   object spnSimilarityBoost: TFloatSpinEdit
-    AnchorSideTop.Control = lnlSimilarityBoost
+    AnchorSideTop.Control = lblSimilarityBoost
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = edtFolder
     AnchorSideRight.Side = asrBottom
@@ -185,7 +185,7 @@ object frmTTS: TfrmTTS
     TabOrder = 3
     Value = 1
   end
-  object lnlSimilarityBoost: TLabel
+  object lblSimilarityBoost: TLabel
     AnchorSideTop.Control = edtFolder
     AnchorSideTop.Side = asrBottom
     Left = 9
