@@ -684,6 +684,10 @@ msgstr "打开文件"
 msgid "Open video from"
 msgstr "打开视频..."
 
+#: proclocalize.lngoperationcancelled
+msgid "Operation cancelled."
+msgstr ""
+
 #: proclocalize.lngoperationcompleted
 msgid "Operation completed."
 msgstr ""
@@ -1232,6 +1236,14 @@ msgstr "载入文件错误，格式无法识别。"
 
 #: proclocalize.lngurl
 msgid "URL"
+msgstr ""
+
+#: proclocalize.lngvdgeneratingtts
+msgid "Generating text to speech..."
+msgstr ""
+
+#: proclocalize.lngvdgeneratingvideo
+msgid "Generating video dubbing..."
 msgstr ""
 
 #: proclocalize.lngviaudiotracks
@@ -3860,6 +3872,10 @@ msgstr "循环长宽比"
 msgid "Default"
 msgstr "默认"
 
+#: tfrmmain.actvideodubbing.caption
+msgid "Dubbing..."
+msgstr ""
+
 #: tfrmmain.actvideofilterblur.caption
 msgid "Blur"
 msgstr "模糊"
@@ -5251,16 +5267,19 @@ msgctxt "tfrmtts.lblscope.caption"
 msgid "Scope:"
 msgstr "范围："
 
+#: tfrmtts.lblsimilarityboost.caption
+msgctxt "tfrmtts.lblsimilarityboost.caption"
+msgid "Similarity boost:"
+msgstr ""
+
 #: tfrmtts.lblstability.caption
+msgctxt "tfrmtts.lblstability.caption"
 msgid "Stability:"
 msgstr ""
 
 #: tfrmtts.lblvoice.caption
+msgctxt "tfrmtts.lblvoice.caption"
 msgid "Voice:"
-msgstr ""
-
-#: tfrmtts.lnlsimilarityboost.caption
-msgid "Similarity boost:"
 msgstr ""
 
 #: tfrmtts.rbnallthesubtitles.caption
@@ -5280,6 +5299,41 @@ msgstr "从选择的条目开始"
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "仅限选择的条目"
+
+#: tfrmvideodubbing.btnclose.caption
+#, fuzzy
+msgctxt "tfrmvideodubbing.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmvideodubbing.btngenerate.caption
+#, fuzzy
+msgctxt "tfrmvideodubbing.btngenerate.caption"
+msgid "Generate"
+msgstr "常规"
+
+#: tfrmvideodubbing.caption
+msgid "Video dubbing"
+msgstr ""
+
+#: tfrmvideodubbing.chkglobalvoice.caption
+msgid "Global voice"
+msgstr ""
+
+#: tfrmvideodubbing.lblsimilarityboost.caption
+msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
+msgid "Similarity boost:"
+msgstr ""
+
+#: tfrmvideodubbing.lblstability.caption
+msgctxt "tfrmvideodubbing.lblstability.caption"
+msgid "Stability:"
+msgstr ""
+
+#: tfrmvideodubbing.lblvoice.caption
+msgctxt "tfrmvideodubbing.lblvoice.caption"
+msgid "Voice:"
+msgstr ""
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"

@@ -684,6 +684,10 @@ msgstr "Abrir archivo"
 msgid "Open video from"
 msgstr "Abrir vídeo desde"
 
+#: proclocalize.lngoperationcancelled
+msgid "Operation cancelled."
+msgstr "Operación cancelada."
+
 #: proclocalize.lngoperationcompleted
 msgid "Operation completed."
 msgstr "Operación completada."
@@ -1231,6 +1235,14 @@ msgstr "Error al cargar el archivo, formato no reconocido."
 #: proclocalize.lngurl
 msgid "URL"
 msgstr "URL"
+
+#: proclocalize.lngvdgeneratingtts
+msgid "Generating text to speech..."
+msgstr "Generando texto a voz..."
+
+#: proclocalize.lngvdgeneratingvideo
+msgid "Generating video dubbing..."
+msgstr "Generando doblaje de vídeo..."
 
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
@@ -3851,6 +3863,10 @@ msgstr "Alternar relación de aspecto"
 msgid "Default"
 msgstr "Predeterminado"
 
+#: tfrmmain.actvideodubbing.caption
+msgid "Dubbing..."
+msgstr "Doblaje..."
+
 #: tfrmmain.actvideofilterblur.caption
 msgid "Blur"
 msgstr "Difuminar"
@@ -5221,17 +5237,20 @@ msgctxt "tfrmtts.lblscope.caption"
 msgid "Scope:"
 msgstr "Alcance:"
 
+#: tfrmtts.lblsimilarityboost.caption
+msgctxt "tfrmtts.lblsimilarityboost.caption"
+msgid "Similarity boost:"
+msgstr "Aumento de similitud:"
+
 #: tfrmtts.lblstability.caption
+msgctxt "tfrmtts.lblstability.caption"
 msgid "Stability:"
 msgstr "Estabilidad:"
 
 #: tfrmtts.lblvoice.caption
+msgctxt "tfrmtts.lblvoice.caption"
 msgid "Voice:"
 msgstr "Voz:"
-
-#: tfrmtts.lnlsimilarityboost.caption
-msgid "Similarity boost:"
-msgstr "Aumento de similitud:"
 
 #: tfrmtts.rbnallthesubtitles.caption
 msgctxt "tfrmtts.rbnallthesubtitles.caption"
@@ -5247,6 +5266,39 @@ msgstr "Desde la entrada seleccionada"
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Solo entradas seleccionadas"
+
+#: tfrmvideodubbing.btnclose.caption
+msgctxt "tfrmvideodubbing.btnclose.caption"
+msgid "Close"
+msgstr "Cerrar"
+
+#: tfrmvideodubbing.btngenerate.caption
+msgctxt "tfrmvideodubbing.btngenerate.caption"
+msgid "Generate"
+msgstr "Generar"
+
+#: tfrmvideodubbing.caption
+msgid "Video dubbing"
+msgstr "Doblaje de vídeo"
+
+#: tfrmvideodubbing.chkglobalvoice.caption
+msgid "Global voice"
+msgstr "Voz global"
+
+#: tfrmvideodubbing.lblsimilarityboost.caption
+msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
+msgid "Similarity boost:"
+msgstr "Aumento de similitud:"
+
+#: tfrmvideodubbing.lblstability.caption
+msgctxt "tfrmvideodubbing.lblstability.caption"
+msgid "Stability:"
+msgstr "Estabilidad:"
+
+#: tfrmvideodubbing.lblvoice.caption
+msgctxt "tfrmvideodubbing.lblvoice.caption"
+msgid "Voice:"
+msgstr "Voz:"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"

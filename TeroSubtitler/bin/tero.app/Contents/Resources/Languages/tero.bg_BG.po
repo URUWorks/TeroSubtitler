@@ -680,6 +680,10 @@ msgstr "Отваряне на файл"
 msgid "Open video from"
 msgstr "Отваряне на видео от"
 
+#: proclocalize.lngoperationcancelled
+msgid "Operation cancelled."
+msgstr ""
+
 #: proclocalize.lngoperationcompleted
 msgid "Operation completed."
 msgstr ""
@@ -1229,6 +1233,14 @@ msgstr "Грешка при зареждане на файла, форматът
 #: proclocalize.lngurl
 msgid "URL"
 msgstr "URL"
+
+#: proclocalize.lngvdgeneratingtts
+msgid "Generating text to speech..."
+msgstr ""
+
+#: proclocalize.lngvdgeneratingvideo
+msgid "Generating video dubbing..."
+msgstr ""
 
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
@@ -3865,6 +3877,10 @@ msgstr ""
 msgid "Default"
 msgstr "Подразбирано"
 
+#: tfrmmain.actvideodubbing.caption
+msgid "Dubbing..."
+msgstr ""
+
 #: tfrmmain.actvideofilterblur.caption
 msgid "Blur"
 msgstr "Замъгляване"
@@ -5267,16 +5283,19 @@ msgctxt "tfrmtts.lblscope.caption"
 msgid "Scope:"
 msgstr "Обхват:"
 
+#: tfrmtts.lblsimilarityboost.caption
+msgctxt "tfrmtts.lblsimilarityboost.caption"
+msgid "Similarity boost:"
+msgstr ""
+
 #: tfrmtts.lblstability.caption
+msgctxt "tfrmtts.lblstability.caption"
 msgid "Stability:"
 msgstr ""
 
 #: tfrmtts.lblvoice.caption
+msgctxt "tfrmtts.lblvoice.caption"
 msgid "Voice:"
-msgstr ""
-
-#: tfrmtts.lnlsimilarityboost.caption
-msgid "Similarity boost:"
 msgstr ""
 
 #: tfrmtts.rbnallthesubtitles.caption
@@ -5296,6 +5315,41 @@ msgstr "От избрания надпис"
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Само избраните надписи"
+
+#: tfrmvideodubbing.btnclose.caption
+#, fuzzy
+msgctxt "tfrmvideodubbing.btnclose.caption"
+msgid "Close"
+msgstr "Затваряне"
+
+#: tfrmvideodubbing.btngenerate.caption
+#, fuzzy
+msgctxt "tfrmvideodubbing.btngenerate.caption"
+msgid "Generate"
+msgstr "Създаване"
+
+#: tfrmvideodubbing.caption
+msgid "Video dubbing"
+msgstr ""
+
+#: tfrmvideodubbing.chkglobalvoice.caption
+msgid "Global voice"
+msgstr ""
+
+#: tfrmvideodubbing.lblsimilarityboost.caption
+msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
+msgid "Similarity boost:"
+msgstr ""
+
+#: tfrmvideodubbing.lblstability.caption
+msgctxt "tfrmvideodubbing.lblstability.caption"
+msgid "Stability:"
+msgstr ""
+
+#: tfrmvideodubbing.lblvoice.caption
+msgctxt "tfrmvideodubbing.lblvoice.caption"
+msgid "Voice:"
+msgstr ""
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
