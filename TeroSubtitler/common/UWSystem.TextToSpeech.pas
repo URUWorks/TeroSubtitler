@@ -115,11 +115,11 @@ type
   end;
 
 const
-
   JOB_ERROR_InvalidDir = -1;
   JOB_ERROR_TTS = -2;
-  JOB_ERROR_Exception = -3;
-  JOB_ERROR_Uknown = -4;
+  JOB_ERROR_QuotaExceeded = -3;
+  JOB_ERROR_Exception = -4;
+  JOB_ERROR_Uknown = -5;
 
 // -----------------------------------------------------------------------------
 
@@ -308,7 +308,6 @@ begin
 
     PostData := TStringStream.Create(
       '{"text":"' + StringToJSONString(StringReplace(Text.Trim, sLineBreak, '. ', [rfReplaceAll])) +
-      //'","model_id":"eleven_multilingual_v1"}'
       '","model_id":"eleven_multilingual_v1","voice_settings":{"stability":' + sta + ',"similarity_boost":' + sim + '}}'
       , TEncoding.UTF8);
     try
@@ -330,11 +329,6 @@ begin
         end
         else
         begin
-          if (ResponseStatusCode = 422) then
-            FError := JOB_ERROR_TTS
-          else
-            FError := JOB_ERROR_Uknown;
-
           with TStringStream.Create do
           try
             LoadFromStream(GetData);
@@ -342,6 +336,13 @@ begin
           finally
             Free;
           end;
+
+          if FErrorDesc.Contains('quota_exceeded') then
+            FError := JOB_ERROR_QuotaExceeded
+          else if (ResponseStatusCode = 422) then
+            FError := JOB_ERROR_TTS
+          else
+            FError := JOB_ERROR_Uknown;
 
           GetData.SaveToFile(ChangeFileExt(FileName, '.log'));
         end;
