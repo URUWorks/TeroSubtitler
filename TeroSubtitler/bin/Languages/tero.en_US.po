@@ -5311,6 +5311,10 @@ msgctxt "tfrmvideodubbing.lblvoice.caption"
 msgid "Voice:"
 msgstr ""
 
+#: tfrmvideodubbing.lblvolume.caption
+msgid "Volume %:"
+msgstr ""
+
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
 msgid "Close"
