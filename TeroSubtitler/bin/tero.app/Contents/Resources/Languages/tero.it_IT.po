@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 21.03.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 25.03.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -690,7 +690,7 @@ msgstr "Apri video"
 
 #: proclocalize.lngoperationcancelled
 msgid "Operation cancelled."
-msgstr ""
+msgstr "Operazione annullata."
 
 #: proclocalize.lngoperationcompleted
 msgid "Operation completed."
@@ -1242,11 +1242,11 @@ msgstr "URL"
 
 #: proclocalize.lngvdgeneratingtts
 msgid "Generating text to speech..."
-msgstr ""
+msgstr "Generazione sintesi vocale..."
 
 #: proclocalize.lngvdgeneratingvideo
 msgid "Generating video dubbing..."
-msgstr ""
+msgstr "Generazione doppiaggio video..."
 
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
@@ -3872,7 +3872,7 @@ msgstr "Predefinito"
 
 #: tfrmmain.actvideodubbing.caption
 msgid "Dubbing..."
-msgstr ""
+msgstr "Doppiaggio..."
 
 #: tfrmmain.actvideofilterblur.caption
 msgid "Blur"
@@ -5245,7 +5245,6 @@ msgid "Scope:"
 msgstr "Scopo:"
 
 #: tfrmtts.lblsimilarityboost.caption
-#, fuzzy
 msgctxt "tfrmtts.lblsimilarityboost.caption"
 msgid "Similarity boost:"
 msgstr "Incremento somiglianza:"
@@ -5276,39 +5275,34 @@ msgid "Only selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmvideodubbing.btnclose.caption
-#, fuzzy
 msgctxt "tfrmvideodubbing.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmvideodubbing.btngenerate.caption
-#, fuzzy
 msgctxt "tfrmvideodubbing.btngenerate.caption"
 msgid "Generate"
 msgstr "Genera"
 
 #: tfrmvideodubbing.caption
 msgid "Video dubbing"
-msgstr ""
+msgstr "Doppiaggio video"
 
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
-msgstr ""
+msgstr "Voce globale"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
-#, fuzzy
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
 msgid "Similarity boost:"
 msgstr "Incremento somiglianza:"
 
 #: tfrmvideodubbing.lblstability.caption
-#, fuzzy
 msgctxt "tfrmvideodubbing.lblstability.caption"
 msgid "Stability:"
 msgstr "Stabilità:"
 
 #: tfrmvideodubbing.lblvoice.caption
-#, fuzzy
 msgctxt "tfrmvideodubbing.lblvoice.caption"
 msgid "Voice:"
 msgstr "Voce:"
@@ -5479,4 +5473,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
