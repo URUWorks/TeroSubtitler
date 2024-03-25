@@ -37,12 +37,14 @@ type
     cboVoice: TComboBox;
     chkBackgroundMusic: TUWCheckBox;
     edtBackgroundMusic: TEdit;
+    lblVolume: TLabel;
     lblTime: TLabel;
     lblStatus: TLabel;
     lblStability: TLabel;
     lblTimeElapsed: TLabel;
     lblVoice: TLabel;
     lblSimilarityBoost: TLabel;
+    spnVolume: TSpinEdit;
     spnSimilarityBoost: TFloatSpinEdit;
     spnStability: TFloatSpinEdit;
     chkGlobalVoice: TUWCheckBox;
@@ -196,6 +198,7 @@ procedure TfrmVideoDubbing.chkBackgroundMusicChange(Sender: TObject);
 begin
   edtBackgroundMusic.Enabled := chkBackgroundMusic.Checked;
   btnBackgroundMusic.Enabled := chkBackgroundMusic.Checked;
+  spnVolume.Enabled := chkBackgroundMusic.Checked;
 end;
 
 // -----------------------------------------------------------------------------
@@ -378,6 +381,7 @@ begin
     VST.Enabled := False;
     edtBackgroundMusic.Enabled := False;
     btnBackgroundMusic.Enabled := False;
+    spnVolume.Enabled := False;
   end;
 
   lblStatus.Caption := '';
@@ -581,7 +585,7 @@ begin
       {$ELSE}
       sl.Add(MusicFileName);
       {$ENDIF}
-      tracks += Format('[%d]volume=0.08[%da];', [c, c]);
+      tracks += Format('[%d]volume=%s[%da];', [c, SingleToStr(spnVolume.Value / 100, '.'), c]);
       ids += Format('[%da]', [c]);
     end;
 
@@ -589,7 +593,7 @@ begin
     if chkSubtitleTrack.Checked then
     begin
       s := ConcatPaths([TempDir, 's.srt']);
-      if GenerateSubtitleFile(s) then //if Subtitles.SaveToFile(s, 0, TEncoding.UTF8, sfSubRip, smText) then
+      if GenerateSubtitleFile(s) then
       begin
         sub := True;
         sl.Add('-i');
