@@ -349,8 +349,10 @@ resourcestring
   lngPercent = 'Percent';
 
   //VideoDubbingStrings
+  lngvdVoice = 'Voice';
   lngvdGeneratingTTS = 'Generating text to speech...';
   lngvdGeneratingVideo = 'Generating video dubbing...';
+  lngvdQuotaExceeded = 'We couldn''t process this request because you''ve exceeded your quota.';
 
   //VideoInfoStrings
   lngviFile = 'File: %s';
