@@ -189,6 +189,7 @@ type
     constructor Create;
     destructor Destroy; override;
     function ValidIndex(const Index: Integer): Boolean;
+    procedure Assign(Source: TUWSubtitles);
     function Add(const AInitialTime, AFinalTime: TUWTimeCode; const AText, ATranslation: String; const AExtraInfo: Pointer = NIL; const SkipInvalidValues: Boolean = False): Integer; overload;
     function Add(const Item: TUWSubtitleItem; const ExtraInfo: Pointer = NIL; const SkipInvalidValues: Boolean = False): Integer; overload;
     procedure Insert(const Index: Integer; const AInitialTime, AFinalTime: TUWTimeCode; const AText, ATranslation: String; const ExtraInfo: Pointer = NIL; const SkipInvalidValues: Boolean = False); overload;
@@ -820,6 +821,19 @@ end;
 function TUWSubtitles.ValidIndex(const Index: Integer): Boolean;
 begin
   Result := (Index >= 0) and (Index < FList.Count);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWSubtitles.Assign(Source: TUWSubtitles);
+var
+  i: Integer;
+begin
+  Clear;
+  for i := 0 to Source.Count-1 do
+  begin
+    Add(Source[i]);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
