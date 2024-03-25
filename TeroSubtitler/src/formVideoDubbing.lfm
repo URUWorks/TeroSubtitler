@@ -4,10 +4,11 @@ object frmVideoDubbing: TfrmVideoDubbing
   Top = 118
   Width = 680
   BorderIcons = []
-  BorderStyle = bsSingle
   Caption = 'Video dubbing'
   ClientHeight = 350
   ClientWidth = 680
+  Constraints.MinHeight = 280
+  Constraints.MinWidth = 640
   FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
@@ -28,7 +29,7 @@ object frmVideoDubbing: TfrmVideoDubbing
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    TabOrder = 6
+    TabOrder = 10
     OnClick = btnCloseClick
   end
   object btnGenerate: TButton
@@ -42,7 +43,7 @@ object frmVideoDubbing: TfrmVideoDubbing
     BorderSpacing.Right = 5
     Caption = 'Generate'
     Default = True
-    TabOrder = 5
+    TabOrder = 9
     OnClick = btnGenerateClick
   end
   object VST: TLazVirtualStringTree
@@ -61,14 +62,13 @@ object frmVideoDubbing: TfrmVideoDubbing
     Header.Columns = <>
     Header.MainColumn = -1
     Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
-    TabOrder = 4
+    TabOrder = 8
     TreeOptions.AutoOptions = [toAutoTristateTracking]
     TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
     TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
     TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
     TreeOptions.StringOptions = []
     OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
-    OnChange = VSTChange
     OnDrawText = VSTDrawText
     OnFocusChanged = VSTFocusChanged
     OnGetText = VSTGetText
@@ -154,14 +154,15 @@ object frmVideoDubbing: TfrmVideoDubbing
     Caption = 'Stability:'
   end
   object chkGlobalVoice: TUWCheckBox
-    AnchorSideLeft.Control = VST
-    AnchorSideBottom.Control = VST
-    Left = 272
+    AnchorSideLeft.Control = lblStability
+    AnchorSideTop.Control = lblStability
+    AnchorSideTop.Side = asrBottom
+    Left = 9
     Height = 23
-    Top = 5
+    Top = 130
     Width = 16
-    Anchors = [akLeft, akBottom]
     AutoSize = False
+    BorderSpacing.Top = 15
     Caption = 'Global voice'
     TabOrder = 3
     OnChange = chkGlobalVoiceChange
@@ -187,5 +188,57 @@ object frmVideoDubbing: TfrmVideoDubbing
     Width = 1
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 10
+  end
+  object chkSubtitleTrack: TUWCheckBox
+    AnchorSideTop.Control = chkGlobalVoice
+    AnchorSideTop.Side = asrBottom
+    Left = 9
+    Height = 23
+    Top = 153
+    Width = 16
+    AutoSize = False
+    Caption = 'Subtitle track'
+    TabOrder = 4
+  end
+  object chkBackgroundMusic: TUWCheckBox
+    AnchorSideLeft.Control = chkSubtitleTrack
+    AnchorSideTop.Control = chkSubtitleTrack
+    AnchorSideTop.Side = asrBottom
+    Left = 9
+    Height = 23
+    Top = 176
+    Width = 16
+    AutoSize = False
+    Caption = 'Background music'
+    TabOrder = 5
+    OnChange = chkBackgroundMusicChange
+  end
+  object edtBackgroundMusic: TEdit
+    AnchorSideLeft.Control = chkBackgroundMusic
+    AnchorSideTop.Control = chkBackgroundMusic
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = btnBackgroundMusic
+    Left = 9
+    Height = 23
+    Top = 204
+    Width = 202
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Top = 5
+    BorderSpacing.Right = 5
+    TabOrder = 6
+  end
+  object btnBackgroundMusic: TButton
+    AnchorSideTop.Control = edtBackgroundMusic
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = VST
+    Left = 216
+    Height = 23
+    Top = 204
+    Width = 48
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 8
+    Caption = '...'
+    TabOrder = 7
+    OnClick = btnBackgroundMusicClick
   end
 end

@@ -32,8 +32,11 @@ type
 
   TfrmVideoDubbing = class(TForm)
     btnClose: TButton;
+    btnBackgroundMusic: TButton;
     btnGenerate: TButton;
     cboVoice: TComboBox;
+    chkBackgroundMusic: TUWCheckBox;
+    edtBackgroundMusic: TEdit;
     lblTime: TLabel;
     lblStatus: TLabel;
     lblStability: TLabel;
@@ -43,17 +46,19 @@ type
     spnSimilarityBoost: TFloatSpinEdit;
     spnStability: TFloatSpinEdit;
     chkGlobalVoice: TUWCheckBox;
+    chkSubtitleTrack: TUWCheckBox;
     VST: TLazVirtualStringTree;
+    procedure btnBackgroundMusicClick(Sender: TObject);
     procedure btnGenerateClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure cboVoiceChange(Sender: TObject);
+    procedure chkBackgroundMusicChange(Sender: TObject);
     procedure chkGlobalVoiceChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure VSTAdvancedHeaderDraw(Sender: TVTHeader;
       var PaintInfo: THeaderPaintInfo; const Elements: THeaderPaintElements);
-    procedure VSTChange(Sender: TBaseVirtualTree; Node: PVirtualNode);
     procedure VSTDrawText(Sender: TBaseVirtualTree; TargetCanvas: TCanvas;
       Node: PVirtualNode; Column: TColumnIndex; const CellText: String;
       const CellRect: TRect; var DefaultDraw: Boolean);
@@ -67,6 +72,7 @@ type
   private
     TTS: TTextToSpeech;
     TempDir: String;
+    MusicFileName: String;
     OutputFileName: String;
     procedure EnableControls(const AValue: Boolean);
     procedure DoError(Sender: TObject; const ErrorDesc: String; const ErrorID, CurrentJob: Integer; var Cancel: Boolean);
@@ -75,6 +81,8 @@ type
     procedure FillComboWithVoices;
     procedure OpenFolderClick(Sender: TObject);
     procedure SetJobTTS;
+    function GenerateSubtitleFile(const AFileName: String): Boolean;
+    function GenerateAudioFile: Boolean;
     procedure GenerateVideoFile;
   public
 
@@ -92,7 +100,8 @@ uses
   UWSubtitleAPI, procVST, procSubtitle, procTypes, RegExpr, procWorkspace,
   procColorTheme, procDialogs, procLocalize, UWSystem.InetUtils, FileUtil,
   UWSubtitleAPI.Tags, UWSystem.Process, UWSystem.TimeUtils, procConfig,
-  formMain, UWSystem.SysUtils, UWFiles.MPEGAudio;
+  formMain, UWSystem.SysUtils, UWFiles.MPEGAudio, UWSubtitleAPI.Formats,
+  StrUtils;
 
 {$R *.lfm}
 
@@ -105,7 +114,8 @@ uses
 procedure TfrmVideoDubbing.FormCreate(Sender: TObject);
 begin
   VSTAddColumn(VST, '#', 50);
-  VSTAddColumn(VST, lnghTimes, 80);
+  VSTAddColumn(VST, lngvdVoice, 70);
+  VSTAddColumn(VST, lnghTimes, 90);
   VSTAddColumn(VST, lnghText, 100, taLeftJustify);
 
   TTS := TTextToSpeech.Create(Tools.API_KEY_TTS);
@@ -117,14 +127,15 @@ begin
   if not DirectoryExists(TempDir) then
     CreateDir(TempDir);
 
+  FillComboWithVoices;
+  SetJobTTS;
+
   VST.RootNodeCount := Subtitles.Count;
   chkGlobalVoice.Checked := True;
   chkGlobalVoiceChange(NIL);
+  chkBackgroundMusicChange(NIL);
 
   btnGenerate.Enabled := (TTS.api_key <> '') and frmMain.MPV.HasVideoTrack;
-  FillComboWithVoices;
-
-  SetJobTTS;
 
   {$IFNDEF WINDOWS}
   PrepareCustomControls(Self);
@@ -166,6 +177,7 @@ end;
 procedure TfrmVideoDubbing.cboVoiceChange(Sender: TObject);
 begin
   if Assigned(VST.FocusedNode) and (cboVoice.Tag = 0) then
+  begin
     with TTS.Jobs[VST.FocusedNode^.Index]^ do
     begin
       VoiceID := TTS.Voices[cboVoice.ItemIndex]^.ID;
@@ -173,6 +185,17 @@ begin
       Similarity := spnSimilarityBoost.Value;
       Stability := spnStability.Value;
     end;
+    if not chkGlobalVoice.Checked then
+      VST.InvalidateNode(VST.FocusedNode);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmVideoDubbing.chkBackgroundMusicChange(Sender: TObject);
+begin
+  edtBackgroundMusic.Enabled := chkBackgroundMusic.Checked;
+  btnBackgroundMusic.Enabled := chkBackgroundMusic.Checked;
 end;
 
 // -----------------------------------------------------------------------------
@@ -236,8 +259,9 @@ procedure TfrmVideoDubbing.VSTGetText(Sender: TBaseVirtualTree;
 begin
   case Column of
     0: CellText := IntToStr(Node^.Index+1);
-    1: CellText := GetInitialTimeStr(Node^.Index);
-    2: CellText := Subtitles[Node^.Index].Text;
+    1: CellText := iff((TTS.Voices.Count > 0) and (TTS.Jobs.Count > 0), TTS.Voices[TTS.Jobs[Node^.Index]^.VoiceIndex]^.Name, '');
+    2: CellText := GetInitialTimeStr(Node^.Index);
+    3: CellText := Subtitles[Node^.Index].Text;
   end;
 end;
 
@@ -246,15 +270,7 @@ end;
 procedure TfrmVideoDubbing.VSTResize(Sender: TObject);
 begin
   with VST.Header do
-    Columns[2].Width := (VST.Width - Columns[1].Width - Columns[0].Width - (GetSystemMetrics(SM_CXVSCROLL)+Columns.Count));
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure TfrmVideoDubbing.VSTChange(Sender: TBaseVirtualTree;
-  Node: PVirtualNode);
-begin
-
+    Columns[3].Width := (VST.Width - Columns[2].Width - Columns[1].Width - Columns[0].Width - (GetSystemMetrics(SM_CXVSCROLL)+Columns.Count));
 end;
 
 // -----------------------------------------------------------------------------
@@ -268,6 +284,7 @@ begin
   try
     SD.Title   := lngSaveFile;
     SD.Options := [ofOverwritePrompt, ofEnableSizing];
+    SD.Filter  := lngAllSupportedFiles + '|' + '*' + ExtractFileExt(frmMain.MPV.FileName);
     SD.FileName := 'dubbing_' + ExtractFileName(frmMain.MPV.FileName);
 
     if SD.Execute then
@@ -314,19 +331,54 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmVideoDubbing.btnBackgroundMusicClick(Sender: TObject);
+var
+  OD : TOpenDialog;
+  i  : Integer;
+  s  : String;
+begin
+  OD := TOpenDialog.Create(NIL);
+  try
+    s := '';
+    for i := 0 to Length(TAudioExts)-1 do s := s + '*' + TAudioExts[i] + ';';
+    SetLength(s, s.Length-1);
+
+    OD.Title   := lngOpenFile;
+    OD.Filter  := lngAllSupportedFiles + '|' + s;
+    OD.Options := OD.Options + [ofFileMustExist];
+
+    if OD.Execute then
+      edtBackgroundMusic.Text := OD.FileName;
+  finally
+    OD.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmVideoDubbing.EnableControls(const AValue: Boolean);
 begin
-  if not AValue then
-    btnClose.Caption := lngbtnCancel
-  else
-    btnClose.Caption := lngbtnClose;
-
   cboVoice.Enabled           := AValue;
   btnGenerate.Enabled        := AValue;
   spnSimilarityBoost.Enabled := AValue;
   spnStability.Enabled       := AValue;
   chkGlobalVoice.Enabled     := AValue;
-  chkGlobalVoiceChange(NIL);
+  chkSubtitleTrack.Enabled   := AValue;
+  chkBackgroundMusic.Enabled := AValue;
+
+  if AValue then
+  begin
+    btnClose.Caption := lngbtnClose;
+    chkGlobalVoiceChange(NIL);
+    chkBackgroundMusicChange(NIL);
+  end
+  else
+  begin
+    btnClose.Caption := lngbtnCancel;
+    VST.Enabled := False;
+    edtBackgroundMusic.Enabled := False;
+    btnBackgroundMusic.Enabled := False;
+  end;
 
   lblStatus.Caption := '';
   lblTimeElapsed.Caption := '';
@@ -336,12 +388,11 @@ end;
 
 procedure TfrmVideoDubbing.DoError(Sender: TObject; const ErrorDesc: String; const ErrorID, CurrentJob: Integer; var Cancel: Boolean);
 begin
-  Cancel := ErrorDesc.Contains('quota_exceeded');
-  if Cancel  then
-  begin
-    CancelJobs := True;
+  CancelJobs := True;
+  if (ErrorID = JOB_ERROR_QuotaExceeded) then
+    ShowErrorMessageDialog(lngvdQuotaExceeded)
+  else
     ShowErrorMessageDialog(Format(lngOperationFailed, [CurrentJob, TTS.Jobs.Count, ErrorID]));
-  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -406,7 +457,8 @@ begin
     New(job);
     job^.Text := RemoveTSTags(Subtitles[i].Text);
     job^.FileName := ConcatPaths([TempDir, IntToStr(i+1) + '.mp3']);
-    job^.VoiceID := TTS.Voices[cboVoice.ItemIndex]^.ID;
+    if (TTS.Jobs.Count > 0) and (cboVoice.ItemIndex >= 0) then
+      job^.VoiceID := TTS.Voices[cboVoice.ItemIndex]^.ID;
     job^.VoiceIndex := cboVoice.ItemIndex;
     job^.Similarity := spnSimilarityBoost.Value;
     job^.Stability := spnStability.Value;
@@ -420,6 +472,39 @@ procedure ProcessCB(const TimeElapsed: Double; var Cancel: Boolean);
 begin
   frmVideoDubbing.lblTimeElapsed.Caption := TimeToString(Trunc(TimeElapsed)*1000, 'mm:ss');
   Cancel := CancelJobs;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmVideoDubbing.GenerateSubtitleFile(const AFileName: String): Boolean;
+var
+  Subs : TUWSubtitles;
+begin
+  Subs := TUWSubtitles.Create;
+  try
+    Subs.Assign(Subtitles);
+    Subs.Add(frmMain.MPV.GetMediaLenInMs-1, frmMain.MPV.GetMediaLenInMs, ' ', '');
+    Result := Subs.SaveToFile(AFileName, 0, TEncoding.UTF8, sfSubRip, smText);
+  finally
+    Subs.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmVideoDubbing.GenerateAudioFile: Boolean;
+var
+  AParamArray : TStringArray;
+  i : Integer;
+begin
+  lblStatus.Caption := lngExtracting;
+  lblStatus.Update;
+
+  AParamArray := FFMPEG_Karaoke.Split(' ');
+  for i := 0 to High(AParamArray) do
+    AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output'], [frmMain.MPV.FileName, MusicFileName], []);
+
+  Result := ExecuteApp(GetExtractAppFile, AParamArray, True, True, @ProcessCB);
 end;
 
 // -----------------------------------------------------------------------------
@@ -440,8 +525,20 @@ var
   AParamArray : TStringArray;
   i, c : Integer;
   sl : TStringList;
-  tracks, ids : String;
+  tracks, ids, s : String;
+  sub : Boolean;
 begin
+  if chkBackgroundMusic.Checked then
+  begin
+    if (edtBackgroundMusic.Text = '') then
+    begin
+      MusicFileName := ConcatPaths([TempDir, 'a.mp3']);
+      GenerateAudioFile;
+    end
+    else
+      MusicFileName := edtBackgroundMusic.Text;
+  end;
+
   lblStatus.Caption := lngvdGeneratingVideo;
   lblStatus.Update;
 
@@ -475,6 +572,35 @@ begin
         ids += Format('[%da]', [c]);
       end;
 
+    if chkBackgroundMusic.Checked and FileExists(MusicFileName) then
+    begin
+      Inc(c);
+      sl.Add('-i');
+      {$IFDEF WINDOWS}
+      sl.Add('"'+MusicFileName+'"');
+      {$ELSE}
+      sl.Add(MusicFileName);
+      {$ENDIF}
+      tracks += Format('[%d]volume=0.08[%da];', [c, c]);
+      ids += Format('[%da]', [c]);
+    end;
+
+    sub := False;
+    if chkSubtitleTrack.Checked then
+    begin
+      s := ConcatPaths([TempDir, 's.srt']);
+      if GenerateSubtitleFile(s) then //if Subtitles.SaveToFile(s, 0, TEncoding.UTF8, sfSubRip, smText) then
+      begin
+        sub := True;
+        sl.Add('-i');
+        {$IFDEF WINDOWS}
+        sl.Add('"'+s+'"');
+        {$ELSE}
+        sl.Add(s);
+        {$ENDIF}
+      end;
+    end;
+
     sl.Add('-filter_complex');
     sl.Add(tracks + ids + 'amix=inputs=' + IntToStr(c) + '[a]');
     sl.Add('-map');
@@ -483,10 +609,20 @@ begin
     sl.Add('[a]');
     sl.Add('-c:v');
     sl.Add('copy');
+    sl.Add('-shortest');
     sl.Add('-async');
     sl.Add('1');
     sl.Add('-c:a');
     sl.Add('aac');
+
+    if sub then
+    begin
+      sl.Add('-map');
+      sl.Add(IntToStr(c+1)+':s');
+      sl.Add('-c:s');
+      sl.Add('mov_text');
+    end;
+
     {$IFDEF WINDOWS}
     sl.Add('"'+OutputFileName+'"');
     {$ELSE}
