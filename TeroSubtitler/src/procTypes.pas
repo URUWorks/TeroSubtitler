@@ -134,6 +134,7 @@ const
   FFMPEG_Thumbnail     = '-ss %timestr -i "%input" -frames:v 1 -update 1 -s 90x58 -pix_fmt rgb565 -y -hide_banner "%output"';
   FFMPEG_Info          = '-hide_banner -i "%input"';
   FFMPEG_ExtractStream = '-hide_banner -i "%input" -map 0:%trackid -c copy -y "%output"';
+  FFMPEG_Karaoke       = '-hide_banner -i "%input" -af pan=''stereo|c0=c0|c1=-1*c1'' -ac 1 -y "%output"';
 
   FFPROBE_EXE          = 'ffprobe.exe';
   FFPROBE_Params       = '-v quiet -print_format json -show_format -show_streams "%input"';
@@ -166,6 +167,7 @@ const
   FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -s 90x58 -pix_fmt rgb565 -y -hide_banner %output';
   FFMPEG_Info          = '-hide_banner -i %input';
   FFMPEG_ExtractStream = '-hide_banner -i %input -map 0:%trackid -c copy -y %output';
+  FFMPEG_Karaoke       = '-hide_banner -i %input -af pan=''stereo|c0=c0|c1=-1*c1'' -ac 1 -y %output';
 
   FFPROBE_EXE          = 'ffprobe';
   FFPROBE_Params       = '-v quiet -print_format json -show_format -show_streams %input';
@@ -198,6 +200,7 @@ const
   FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -s 90x58 -pix_fmt rgb565 -y -hide_banner %output';
   FFMPEG_Info          = '-hide_banner -i %input';
   FFMPEG_ExtractStream = '-hide_banner -i %input -map 0:%trackid -c copy -y %output';
+  FFMPEG_Karaoke       = '-hide_banner -i %input -af pan=''stereo|c0=c0|c1=-1*c1'' -ac 1 -y %output';
 
   FFPROBE_EXE          = 'ffprobe';
   FFPROBE_Params       = '-v quiet -print_format json -show_format -show_streams %input';
