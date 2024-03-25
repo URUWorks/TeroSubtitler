@@ -1246,6 +1246,14 @@ msgstr ""
 msgid "Generating video dubbing..."
 msgstr ""
 
+#: proclocalize.lngvdquotaexceeded
+msgid "We couldn't process this request because you've exceeded your quota."
+msgstr ""
+
+#: proclocalize.lngvdvoice
+msgid "Voice"
+msgstr ""
+
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
 msgid "Audio tracks: %d"
@@ -5300,6 +5308,11 @@ msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "仅限选择的条目"
 
+#: tfrmvideodubbing.btnbackgroundmusic.caption
+msgctxt "tfrmvideodubbing.btnbackgroundmusic.caption"
+msgid "..."
+msgstr ""
+
 #: tfrmvideodubbing.btnclose.caption
 #, fuzzy
 msgctxt "tfrmvideodubbing.btnclose.caption"
@@ -5316,8 +5329,16 @@ msgstr "常规"
 msgid "Video dubbing"
 msgstr ""
 
+#: tfrmvideodubbing.chkbackgroundmusic.caption
+msgid "Background music"
+msgstr ""
+
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
+msgstr ""
+
+#: tfrmvideodubbing.chksubtitletrack.caption
+msgid "Subtitle track"
 msgstr ""
 
 #: tfrmvideodubbing.lblsimilarityboost.caption

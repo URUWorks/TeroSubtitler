@@ -1244,6 +1244,14 @@ msgstr "Generando texto a voz..."
 msgid "Generating video dubbing..."
 msgstr "Generando doblaje de vídeo..."
 
+#: proclocalize.lngvdquotaexceeded
+msgid "We couldn't process this request because you've exceeded your quota."
+msgstr "No pudimos procesar esta solicitud porque excedió su cuota."
+
+#: proclocalize.lngvdvoice
+msgid "Voice"
+msgstr "Voz"
+
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
 msgid "Audio tracks: %d"
@@ -5267,6 +5275,11 @@ msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Solo entradas seleccionadas"
 
+#: tfrmvideodubbing.btnbackgroundmusic.caption
+msgctxt "tfrmvideodubbing.btnbackgroundmusic.caption"
+msgid "..."
+msgstr "..."
+
 #: tfrmvideodubbing.btnclose.caption
 msgctxt "tfrmvideodubbing.btnclose.caption"
 msgid "Close"
@@ -5281,9 +5294,17 @@ msgstr "Generar"
 msgid "Video dubbing"
 msgstr "Doblaje de vídeo"
 
+#: tfrmvideodubbing.chkbackgroundmusic.caption
+msgid "Background music"
+msgstr "Música de fondo"
+
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
 msgstr "Voz global"
+
+#: tfrmvideodubbing.chksubtitletrack.caption
+msgid "Subtitle track"
+msgstr "Pista de subtítulos"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
