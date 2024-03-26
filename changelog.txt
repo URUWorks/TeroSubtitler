@@ -9,6 +9,8 @@
 - fixed: Shot changes initially appear in timeline despite being unticked in menu
 - updated: Italian language (thx GitGianluc/bovirus)
 - updated: Russian language (thx RoxMarty)
+- updated: Google translate languages
+- improved: Toolbars and user interface
 - added: Text to speech
 - added: Set gapping #276
 - added: TTS using elevenlabsTTS for dubbing feature #232
