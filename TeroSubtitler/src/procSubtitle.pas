@@ -157,11 +157,10 @@ begin
   UndoInstance.AddUndo(utInsertLine, Result, Item, AutoIncrementUndo);
 
   frmMain.VST.RootNodeCount := Subtitles.Count;
+  SubtitleChanged(True, True);
+
   if AUpdate then
-  begin
     UpdateValues(True);
-    SubtitleChanged(True, True);
-  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -196,11 +195,10 @@ begin
 
   Subtitles.Delete(Index);
   frmMain.VST.RootNodeCount := Subtitles.Count;
+  SubtitleChanged(True, True);
+
   if AUpdate then
-  begin
     UpdateValues(True);
-    SubtitleChanged(True, True);
-  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -557,11 +555,11 @@ begin
 
   Subtitles.InitialTime[Index] := AInitialTime;
   Subtitles.FinalTime[Index]   := AFinalTime;
+  SubtitleChanged(True, True);
 
   if AUpdate then
   begin
-    SubtitleChanged(True, True);
-    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
+    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes], NIL, ClearTimesErrors(Subtitles.ItemPointer[Index]^.ErrorType));
     UpdateCPSAndTexts(Index);
     if frmMain.VST.SelectedCount = 1 then frmMain.VST.Invalidate;
   end;
@@ -575,13 +573,9 @@ begin
 
   case Tag of
     TAG_CONTROL_INITIALTIME : Subtitles.InitialTime[Index] := Time;
-    TAG_CONTROL_FINALTIME   : begin
-                                Subtitles.FinalTime[Index] := Time;
-                                if AppOptions.AutoCheckErrors and (Subtitles.ValidIndex(Index+1)) then
-                                  CheckErrors(Subtitles, Index+1, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
-                              end;
-    TAG_CONTROL_DURATION    : Subtitles.Duration[Index] := Time;
-    TAG_CONTROL_PAUSE       : Subtitles.Pause[Index]    := Time;
+    TAG_CONTROL_FINALTIME   : Subtitles.FinalTime[Index]   := Time;
+    TAG_CONTROL_DURATION    : Subtitles.Duration[Index]    := Time;
+    TAG_CONTROL_PAUSE       : Subtitles.Pause[Index]       := Time;
   end;
 
   case Tag of
@@ -592,10 +586,11 @@ begin
     end;
   end;
 
+  SubtitleChanged(True, True);
+
   if AUpdate then
   begin
-    SubtitleChanged(True, True);
-    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes]);
+    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes], NIL, ClearTimesErrors(Subtitles.ItemPointer[Index]^.ErrorType));
     UpdateCPSAndTexts(Index);
     if frmMain.VST.SelectedCount = 1 then frmMain.VST.Invalidate;
   end;
@@ -619,9 +614,10 @@ begin
   else
     Subtitles.Translation[Index] := Text;
 
+  SubtitleChanged(SubtitleMode = smText, SubtitleMode = smTranslation);
+
   if AUpdate then
   begin
-    SubtitleChanged(SubtitleMode = smText, SubtitleMode = smTranslation);
     if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, SubtitleMode, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts]);
     UpdateCPSAndTexts(Index);
     frmMain.VST.Invalidate;
@@ -642,10 +638,10 @@ begin
 
   Subtitles.Text[Index]        := Text;
   Subtitles.Translation[Index] := Translation;
+  SubtitleChanged(True, True);
 
   if AUpdate then
   begin
-    SubtitleChanged(True, True);
     if AppOptions.AutoCheckErrors then
     begin
       Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts]);

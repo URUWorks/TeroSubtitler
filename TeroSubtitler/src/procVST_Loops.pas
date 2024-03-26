@@ -85,7 +85,7 @@ end;
 
 procedure ApplyCheckErrorsTimesOnly(const Item: PUWSubtitleItem; const Index: Integer);
 begin
-  Item^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors, AppOptions.Conventions, [cmTimes]);
+  Item^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors, AppOptions.Conventions, [cmTimes], NIL, ClearTimesErrors(Item^.ErrorType));
 end;
 
 // -----------------------------------------------------------------------------

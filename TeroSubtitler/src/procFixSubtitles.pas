@@ -61,8 +61,9 @@ type
   TCheckMethodType    = (cmTimes, cmTexts);
   TCheckMethodTypeSet = set of TCheckMethodType;
 
-function CheckErrors(const Subtitles: TUWSubtitles; const Index: Integer; const SubtitleMode: TSubtitleMode; const ErrorsToCheck: TSubtitleErrorTypeSet; const Options: TProfileItem; const ACheckMethod: TCheckMethodTypeSet; const OCR: TUWOCRScript = NIL): TSubtitleErrorTypeSet;
+function CheckErrors(const Subtitles: TUWSubtitles; const Index: Integer; const SubtitleMode: TSubtitleMode; const ErrorsToCheck: TSubtitleErrorTypeSet; const Options: TProfileItem; const ACheckMethod: TCheckMethodTypeSet; const OCR: TUWOCRScript = NIL; const ADefault: TSubtitleErrorTypeSet = []): TSubtitleErrorTypeSet;
 function NeedToCheckErrors(const Subtitles: TUWSubtitles): Boolean;
+function ClearTimesErrors(const AValue: TSubtitleErrorTypeSet): TSubtitleErrorTypeSet;
 
 // -----------------------------------------------------------------------------
 
@@ -607,11 +608,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function CheckErrors(const Subtitles: TUWSubtitles; const Index: Integer; const SubtitleMode: TSubtitleMode; const ErrorsToCheck: TSubtitleErrorTypeSet; const Options: TProfileItem; const ACheckMethod: TCheckMethodTypeSet; const OCR: TUWOCRScript = NIL): TSubtitleErrorTypeSet;
+function CheckErrors(const Subtitles: TUWSubtitles; const Index: Integer; const SubtitleMode: TSubtitleMode; const ErrorsToCheck: TSubtitleErrorTypeSet; const Options: TProfileItem; const ACheckMethod: TCheckMethodTypeSet; const OCR: TUWOCRScript = NIL; const ADefault: TSubtitleErrorTypeSet = []): TSubtitleErrorTypeSet;
 var
   Text, s, t: String;
 begin
-  Result := [];
+  Result := ADefault;
+
   if not Assigned(Subtitles) or (Subtitles.Count < 1) or (Index > Subtitles.Count) then Exit;
 
   if cmTexts in ACheckMethod then
@@ -807,6 +809,13 @@ begin
         Break;
       end;
     end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function ClearTimesErrors(const AValue: TSubtitleErrorTypeSet): TSubtitleErrorTypeSet;
+begin
+  Result := AValue - [etTimeTooShort, etTimeTooLong, etBadValues, etPauseTooShort, etMaxCPS, etOverlapping];
 end;
 
 // -----------------------------------------------------------------------------
