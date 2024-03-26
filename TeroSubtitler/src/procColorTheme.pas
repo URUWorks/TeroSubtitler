@@ -844,7 +844,9 @@ begin
     else if Ctrl is TComboBox then
       Apply(TComboBox(Ctrl), AColorMode)
     else if Ctrl is TUWEditAction then
-      Apply(TUWEditAction(Ctrl), AColorMode);
+      Apply(TUWEditAction(Ctrl), AColorMode)
+    else if Ctrl is TUWSeekBar then
+      Apply(TUWSeekBar(Ctrl), AColorMode);
   end;
   {$ENDIF}
 end;

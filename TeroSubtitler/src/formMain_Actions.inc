@@ -1698,6 +1698,7 @@ end;
 procedure TfrmMain.actMediaVolumeMuteExecute(Sender: TObject);
 begin
   MPVOptions.Volume.Mute := not MPVOptions.Volume.Mute;
+  UpdateMuteIcon;
   MPV.SetAudioMute(MPVOptions.Volume.Mute);
 end;
 
@@ -1853,6 +1854,13 @@ end;
 procedure TfrmMain.actShowVideoToolbarOtherExecute(Sender: TObject);
 begin
   UpdateCoolBar(CoolBarVideo, ToolBarVideoOther, actShowVideoToolbarOther.Checked);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actShowVideoToolbarVolumeExecute(Sender: TObject);
+begin
+  UpdateCoolBar(CoolBarVideo, ToolBarVideoVolume, actShowVideoToolbarVolume.Checked);
 end;
 
 // -----------------------------------------------------------------------------

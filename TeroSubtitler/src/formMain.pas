@@ -90,6 +90,7 @@ type
     actGoToCurrentEntryInitialTime: TAction;
     actGoToCurrentEntryFinalTime: TAction;
     actDistributeEntriesEvenly: TAction;
+    actShowVideoToolbarVolume: TAction;
     actVideoDubbing: TAction;
     actTTS: TAction;
     actSetGapping: TAction;
@@ -403,6 +404,8 @@ type
     MenuItem285: TMenuItem;
     MenuItem286: TMenuItem;
     MenuItem287: TMenuItem;
+    MenuItem288: TMenuItem;
+    MenuItem289: TMenuItem;
     mnuViewToolbarVideo: TMenuItem;
     mnuViewToolbarWaveform: TMenuItem;
     mnuViewToolbarEditor: TMenuItem;
@@ -466,6 +469,7 @@ type
     popCoolBarEditor: TPopupMenu;
     popCoolBarVideo: TPopupMenu;
     popDictionaries: TPopupMenu;
+    sbrVolume: TUWSeekBar;
     Separator50: TMenuItem;
     Separator57: TMenuItem;
     MenuItem233: TMenuItem;
@@ -853,6 +857,7 @@ type
     edtQuickAction: TUWEditAction;
     ToolBarVideoOther: TToolBar;
     ToolBarVideoEntry: TToolBar;
+    ToolBarVideoVolume: TToolBar;
     ToolBarWaveformControls: TToolBar;
     ToolBarWaveformEntry: TToolBar;
     ToolBarWaveformOther: TToolBar;
@@ -868,6 +873,7 @@ type
     tlb3: TToolButton;
     vtlb14: TToolButton;
     vtlb15: TToolButton;
+    vtlb16: TToolButton;
     vtlb24: TToolButton;
     vtlb25: TToolButton;
     vtlb26: TToolButton;
@@ -1018,6 +1024,7 @@ type
     procedure sbrSeekMouseLeave(Sender: TObject);
     procedure sbrSeekMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
+    procedure sbrVolumeChange(Sender: TObject);
     // formMain_Actions
     procedure actAboutExecute(Sender: TObject);
     procedure actHelpExecute(Sender: TObject);
@@ -1227,6 +1234,7 @@ type
     procedure actShowVideoToolbarControlsExecute(Sender: TObject);
     procedure actShowVideoToolbarEntryExecute(Sender: TObject);
     procedure actShowVideoToolbarOtherExecute(Sender: TObject);
+    procedure actShowVideoToolbarVolumeExecute(Sender: TObject);
     procedure actSortExecute(Sender: TObject);
     procedure actExportCustomTextFormatExecute(Sender: TObject);
     procedure actExportCustomImageFormatExecute(Sender: TObject);

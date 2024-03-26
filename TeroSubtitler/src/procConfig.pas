@@ -339,6 +339,7 @@ begin
     actShowVideoToolbarControls.Checked := True;
     actShowVideoToolbarEntry.Checked    := True;
     actShowVideoToolbarOther.Checked    := False;
+    actShowVideoToolbarVolume.Checked   := False;
 
     // Toolbar: don't allow buttons to encroach others when repositioning #27
     SetCoolBarMinWidth(CoolBarMain);
@@ -415,6 +416,7 @@ begin
       UpdateCoolBar(CoolbarVideo, ToolBarVideoControls, actShowVideoToolbarControls.Checked);
       UpdateCoolBar(CoolbarVideo, ToolBarVideoEntry, actShowVideoToolbarEntry.Checked);
       UpdateCoolBar(CoolbarVideo, ToolBarVideoOther, actShowVideoToolbarOther.Checked);
+      UpdateCoolBar(CoolbarVideo, ToolBarVideoVolume, actShowVideoToolbarVolume.Checked);
       CoolbarVideo.EndUpdate;
 
       LayoutVideo.Width := Width div 2;
@@ -576,8 +578,9 @@ begin
         FrameStep        := GetValue('FrameStep', 1);
         Volume.Percent   := GetValue('Volume', 75);
         Volume.Mute      := GetValue('Mute', False);
+        sbrVolume.Position := Volume.Percent;
         actMediaVolumeMute.Checked := Volume.Mute;
-        Volume.Mute      := GetValue('Mute', False);
+        UpdateMuteIcon;
         MPVSetVideoAspectRatio(TMPVPlayerVideoAspectRatio(GetValue('AspectRatio', 0)));
         CloseKey;
         // MPV Additional Options
@@ -752,6 +755,7 @@ begin
         actShowVideoToolbarControls.Checked := GetValue('VideoControls', True);
         actShowVideoToolbarEntry.Checked    := GetValue('VideoEntry', True);
         actShowVideoToolbarOther.Checked    := GetValue('VideoOther', False);
+        actShowVideoToolbarVolume.Checked   := GetValue('VideoVolume', False);
         CloseKey;
 
         for i := 0 to c-1 do
@@ -1122,6 +1126,7 @@ begin
         SetValue('VideoControls', actShowVideoToolbarControls.Checked);
         SetValue('VideoEntry', actShowVideoToolbarEntry.Checked);
         SetValue('VideoOther', actShowVideoToolbarOther.Checked);
+        SetValue('VideoVolume', actShowVideoToolbarVolume.Checked);
         CloseKey;
       end;
     end;

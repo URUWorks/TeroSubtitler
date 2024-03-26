@@ -79,6 +79,7 @@ procedure SetFocusTimeEdit(const ATag: Byte);
 procedure SetActor;
 
 procedure UpdateVideoLengthString;
+procedure UpdateMuteIcon;
 
 procedure GetTranslationMemoryAtIndex(const Index: Integer);
 procedure CheckForTranslationMemory(const AIndex: Integer);
@@ -1274,6 +1275,16 @@ begin
     end
     else
       lblMediaLength.Caption := '';
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure UpdateMuteIcon;
+begin
+  if MPVOptions.Volume.Mute then
+    frmMain.actMediaVolumeMute.ImageIndex := 103
+  else
+    frmMain.actMediaVolumeMute.ImageIndex := 62;
 end;
 
 // -----------------------------------------------------------------------------
