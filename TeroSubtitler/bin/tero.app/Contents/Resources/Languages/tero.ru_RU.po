@@ -1241,15 +1241,15 @@ msgstr "Преобразовать текст в речь..."
 
 #: proclocalize.lngvdgeneratingvideo
 msgid "Generating video dubbing..."
-msgstr "Создать дубляж видео"
+msgstr "Создать дубляж видео..."
 
 #: proclocalize.lngvdquotaexceeded
 msgid "We couldn't process this request because you've exceeded your quota."
-msgstr ""
+msgstr "Мы не смогли обработать этот запрос, потому что вы превысили свою квоту."
 
 #: proclocalize.lngvdvoice
 msgid "Voice"
-msgstr ""
+msgstr "Голос"
 
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
@@ -3621,7 +3621,7 @@ msgstr "Субтитры"
 #: tfrmmain.actshowwaveformtoolbarother.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
 msgid "Other"
-msgstr "остальное"
+msgstr "Остальное"
 
 #: tfrmmain.actshowwaveformtoolbarshotchanges.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarshotchanges.caption"
@@ -5247,7 +5247,7 @@ msgstr "Применить ко:"
 #: tfrmtts.lblsimilarityboost.caption
 msgctxt "tfrmtts.lblsimilarityboost.caption"
 msgid "Similarity boost:"
-msgstr "Повысить схожесть"
+msgstr "Повысить схожесть:"
 
 #: tfrmtts.lblstability.caption
 msgctxt "tfrmtts.lblstability.caption"
@@ -5295,7 +5295,7 @@ msgstr "Видео дубляж"
 
 #: tfrmvideodubbing.chkbackgroundmusic.caption
 msgid "Background music"
-msgstr ""
+msgstr "Фоновая музыка"
 
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
@@ -5303,7 +5303,7 @@ msgstr "Основной голос"
 
 #: tfrmvideodubbing.chksubtitletrack.caption
 msgid "Subtitle track"
-msgstr ""
+msgstr "Дорожка субтитров"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
@@ -5322,7 +5322,7 @@ msgstr "Голос:"
 
 #: tfrmvideodubbing.lblvolume.caption
 msgid "Volume %:"
-msgstr ""
+msgstr "Громкость %:"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
@@ -5491,4 +5491,3 @@ msgstr "Инвертированный"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Вертикальный"
-
