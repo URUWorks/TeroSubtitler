@@ -283,6 +283,8 @@ var
   SD : TSaveDialog;
   i : Integer;
 begin
+  CancelJobs := False;
+
   SD := TSaveDialog.Create(NIL);
   try
     SD.Title   := lngSaveFile;
@@ -300,7 +302,6 @@ begin
 
   if IsInternetAlive then
   begin
-    CancelJobs := False;
     EnableControls(False);
 
     lblStatus.Caption := lngvdGeneratingTTS;
@@ -315,6 +316,7 @@ begin
       TTS.OnJobsProgress := @DoProgress;
       TTS.OnTerminate := @DoTerminate;
       TTS.GetVoices;
+      SetJobTTS;
     end;
 
     if chkGlobalVoice.Checked then
