@@ -177,13 +177,13 @@ msgstr "Espacios innecesarios"
 
 #: proclocalize.lngasvideolen
 #, object-pascal-format
-msgid "/ %s (%s FPS)"
-msgstr "/ %s (%s FPS)"
+msgid "%s (%s FPS)"
+msgstr "%s (%s FPS)"
 
 #: proclocalize.lngasvideolensmpte
 #, object-pascal-format
-msgid "/ %s (%s FPS/SMPTE)"
-msgstr "/ %s (%s FPS/SMPTE)"
+msgid "%s (%s FPS/SMPTE)"
+msgstr "%s (%s FPS/SMPTE)"
 
 #: proclocalize.lngaswaveformtext
 msgid "Click here to use timeline"

@@ -159,12 +159,12 @@ msgstr ""
 
 #: proclocalize.lngasvideolen
 #, object-pascal-format
-msgid "/ %s (%s FPS)"
+msgid "%s (%s FPS)"
 msgstr ""
 
 #: proclocalize.lngasvideolensmpte
 #, object-pascal-format
-msgid "/ %s (%s FPS/SMPTE)"
+msgid "%s (%s FPS/SMPTE)"
 msgstr ""
 
 #: proclocalize.lngaswaveformtext
