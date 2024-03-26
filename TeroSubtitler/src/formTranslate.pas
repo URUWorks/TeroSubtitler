@@ -79,7 +79,7 @@ uses
 procedure TfrmTranslate.FormCreate(Sender: TObject);
 begin
   FillComboWithGoogleLanguages(cboSourceLanguage);
-  FillComboWithGoogleLanguages(cboTranslationLanguage, 44);
+  FillComboWithGoogleLanguages(cboTranslationLanguage, 109);
   cboTranslationLanguage.Items.Delete(0);
 
   cboSourceLanguage.Items[0] := lngDetect;
@@ -159,8 +159,9 @@ begin
       1: s1 := Translation;
     end;
 
-    s2 := GoogleTranslateText(s1, GoogleTranslateLocale[cboSourceLanguage.ItemIndex],
-      GoogleTranslateLocale[cboTranslationLanguage.ItemIndex+1]);
+    s2 := GoogleTranslateText(s1,
+      GoogleCultureInfo[cboSourceLanguage.ItemIndex].CultureName,
+      GoogleCultureInfo[cboTranslationLanguage.ItemIndex+1].CultureName);
 
     case cboOutput.ItemIndex of
       0: Text        := s2;

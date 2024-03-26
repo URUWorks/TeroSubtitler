@@ -274,8 +274,8 @@ begin
   begin
     Items.BeginUpdate;
     Clear;
-    for i := 0 to Length(GoogleTranslateName)-1 do
-      Items.Add(GoogleTranslateName[i]);
+    for i := 0 to MaxGoogleCultureCount-1 do
+      Items.Add(GoogleCultureInfo[i].DisplayName);
     ItemIndex := Index;
     Items.EndUpdate;
   end;

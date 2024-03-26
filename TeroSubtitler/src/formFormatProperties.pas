@@ -141,7 +141,7 @@ begin
     Items.BeginUpdate;
     Clear;
     for i := 0 to Length(LanguageId)-1 do
-      Items.Add(GoogleTranslateName[GoogleGetLanguageIndex(LanguageId[i].ShortName)]);
+      Items.Add(GoogleCultureInfo[GoogleGetLanguageIndex(LanguageId[i].ShortName)].DisplayName);
     Items.EndUpdate;
   end;
 end;
@@ -293,7 +293,7 @@ begin
   // Advanced Subtitles
   with Subtitles.FormatProperties^.AdvancedSubtitles do
   begin
-    Language := GoogleTranslateLocale[cboASLanguage.ItemIndex+1];
+    Language := GoogleCultureInfo[cboASLanguage.ItemIndex+1].DisplayName;
     FontName := edtASFontName.Text;
     FontSize := spnASFontSize.Value;
     FontColor := Integer(cbnASFontColor.ButtonColor);
@@ -320,7 +320,7 @@ begin
     Author := edtDVDAuthor.Text;
     Info := edtDVDInfo.Text;
     Web := edtDVDWeb.Text;
-    Language := GoogleTranslateLocale[cboDVDLanguage.ItemIndex+1];
+    Language := GoogleCultureInfo[cboDVDLanguage.ItemIndex+1].CultureName;
   end;
   // EBU
   with Subtitles.FormatProperties^.EBU do
