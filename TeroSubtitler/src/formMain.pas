@@ -865,6 +865,7 @@ type
     ToolButton5: TToolButton;
     ToolButton6: TToolButton;
     LayoutEditorMemo: TUWLayout;
+    tlb3: TToolButton;
     vtlb14: TToolButton;
     vtlb15: TToolButton;
     vtlb24: TToolButton;

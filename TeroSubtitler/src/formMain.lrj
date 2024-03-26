@@ -1,7 +1,7 @@
 {"version":1,"strings":[
 {"hash":502927,"name":"tfrmmain.caption","sourcebytes":[116,101,114,111],"value":"tero"},
 {"hash":61142483,"name":"tfrmmain.lblmedialength.hint","sourcebytes":[86,105,100,101,111,32,108,101,110,103,116,104,32,97,110,100,32,70,80,83],"value":"Video length and FPS"},
-{"hash":235062032,"name":"tfrmmain.lblmedialength.caption","sourcebytes":[47,32,48,48,58,48,48,58,48,48,46,48,48,48],"value":"/ 00:00:00.000"},
+{"hash":235061248,"name":"tfrmmain.lblmedialength.caption","sourcebytes":[48,48,58,48,48,58,48,48,46,48,48,48],"value":"00:00:00.000"},
 {"hash":34305054,"name":"tfrmmain.lblmediatime.hint","sourcebytes":[67,117,114,114,101,110,116,32,118,105,100,101,111,32,112,111,115,105,116,105,111,110],"value":"Current video position"},
 {"hash":235061248,"name":"tfrmmain.lblmediatime.caption","sourcebytes":[48,48,58,48,48,58,48,48,46,48,48,48],"value":"00:00:00.000"},
 {"hash":48408261,"name":"tfrmmain.tedinitial.hint","sourcebytes":[73,110,105,116,105,97,108,32,116,105,109,101],"value":"Initial time"},
