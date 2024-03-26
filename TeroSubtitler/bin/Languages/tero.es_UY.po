@@ -3609,6 +3609,11 @@ msgctxt "tfrmmain.actshowvideotoolbarother.caption"
 msgid "Other"
 msgstr "Otros"
 
+#: tfrmmain.actshowvideotoolbarvolume.caption
+msgctxt "tfrmmain.actshowvideotoolbarvolume.caption"
+msgid "Volume"
+msgstr "Volumen"
+
 #: tfrmmain.actshowwaveformtoolbarcontrols.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarcontrols.caption"
 msgid "Controls"
@@ -4118,6 +4123,7 @@ msgid "Video filters"
 msgstr "Filtros de vídeo"
 
 #: tfrmmain.mnuvideovolume.caption
+msgctxt "tfrmmain.mnuvideovolume.caption"
 msgid "Volume"
 msgstr "Volumen"
 
