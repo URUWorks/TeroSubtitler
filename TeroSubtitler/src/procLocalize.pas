@@ -144,8 +144,8 @@ resourcestring
   lngasMaxLines = 'Maximum number of lines exceeded';
   lngasOCR = 'OCR error';
   lngasWaveformText = 'Click here to use timeline';
-  lngasVideoLen = '/ %s (%s FPS)';
-  lngasVideoLenSMPTE = '/ %s (%s FPS/SMPTE)';
+  lngasVideoLen = '%s (%s FPS)';
+  lngasVideoLenSMPTE = '%s (%s FPS/SMPTE)';
   lngasReadingVideoFile = 'Reading video file...';
   lngasCustom = 'Custom';
 
