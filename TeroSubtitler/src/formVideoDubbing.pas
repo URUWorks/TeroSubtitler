@@ -461,7 +461,7 @@ begin
     New(job);
     job^.Text := RemoveTSTags(Subtitles[i].Text);
     job^.FileName := ConcatPaths([TempDir, IntToStr(i+1) + '.mp3']);
-    if (TTS.Jobs.Count > 0) and (cboVoice.ItemIndex >= 0) then
+    if (TTS.Voices.Count > 0) and (cboVoice.ItemIndex >= 0) then
       job^.VoiceID := TTS.Voices[cboVoice.ItemIndex]^.ID;
     job^.VoiceIndex := cboVoice.ItemIndex;
     job^.Similarity := spnSimilarityBoost.Value;
@@ -618,6 +618,12 @@ begin
     sl.Add('1');
     sl.Add('-c:a');
     sl.Add('aac');
+
+    if chkBackgroundMusic.Checked then
+    begin
+      sl.Add('-ac');
+      sl.Add('2');
+    end;
 
     if sub then
     begin
