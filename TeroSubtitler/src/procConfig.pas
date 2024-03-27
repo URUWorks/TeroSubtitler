@@ -339,7 +339,7 @@ begin
     actShowVideoToolbarControls.Checked := True;
     actShowVideoToolbarEntry.Checked    := True;
     actShowVideoToolbarOther.Checked    := False;
-    actShowVideoToolbarVolume.Checked   := False;
+    actShowVideoToolbarVolume.Checked   := True;
 
     // Toolbar: don't allow buttons to encroach others when repositioning #27
     SetCoolBarMinWidth(CoolBarMain);
