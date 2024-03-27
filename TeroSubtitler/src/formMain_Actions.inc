@@ -1681,7 +1681,8 @@ begin
   Inc(MPVOptions.Volume.Percent, 5);
   if MPVOptions.Volume.Percent > 100 then
     MPVOptions.Volume.Percent := 100;
-  MPV.SetAudioVolume(MPVOptions.Volume.Percent);
+
+  sbrVolume.Position := MPVOptions.Volume.Percent; //MPV.SetAudioVolume(MPVOptions.Volume.Percent);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1690,7 +1691,8 @@ procedure TfrmMain.actMediaVolumeDownExecute(Sender: TObject);
 begin
   if MPVOptions.Volume.Percent >= 5 then
     Dec(MPVOptions.Volume.Percent, 5);
-  MPV.SetAudioVolume(MPVOptions.Volume.Percent);
+
+  sbrVolume.Position := MPVOptions.Volume.Percent; //MPV.SetAudioVolume(MPVOptions.Volume.Percent);
 end;
 
 // -----------------------------------------------------------------------------
