@@ -188,6 +188,8 @@ procedure TfrmTTS.btnGenerateClick(Sender: TObject);
 var
   SelLoop: TVSTDoLoopSelection;
 begin
+  CancelJobs := False;
+
   if edtFolder.Text = '' then
   begin
     btnFolder.SetFocus;
@@ -203,7 +205,6 @@ begin
 
   if IsInternetAlive then
   begin
-    CancelJobs := False;
     prbTranslate.Position := 0;
     EnableControls(False);
 
@@ -266,8 +267,14 @@ end;
 
 procedure TfrmTTS.DoError(Sender: TObject; const ErrorDesc: String; const ErrorID, CurrentJob: Integer; var Cancel: Boolean);
 begin
-  ShowErrorMessageDialog(Format(lngOperationFailed, [CurrentJob, TTS.Jobs.Count, ErrorID]));
-  Cancel := ErrorDesc.Contains('quota_exceeded');
+  Cancel := (ErrorID = JOB_ERROR_QuotaExceeded);
+  if Cancel then
+  begin
+    ShowErrorMessageDialog(lngvdQuotaExceeded);
+    CancelJobs := True;
+  end
+  else
+    ShowErrorMessageDialog(Format(lngOperationFailed, [CurrentJob, TTS.Jobs.Count, ErrorID]));
 end;
 
 // -----------------------------------------------------------------------------
@@ -282,7 +289,9 @@ end;
 
 procedure TfrmTTS.DoTerminate(Sender: TObject);
 begin
-  if TTS.Jobs.Count > 0 then
+  if CancelJobs then
+    ShowErrorMessageDialog(lngOperationCancelled)
+  else if TTS.Jobs.Count > 0 then
     ShowMessageDialog(lngOperationCompleted, '', lngOpenContainingFolder, @OpenFolderClick);
 
   EnableControls(True);
