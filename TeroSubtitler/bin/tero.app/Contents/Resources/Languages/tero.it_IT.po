@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 25.03.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 27.03.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -177,16 +177,14 @@ msgid "Unnecessary spaces"
 msgstr "Spazi non necessari"
 
 #: proclocalize.lngasvideolen
-#, object-pascal-format, fuzzy
-#| msgid "/ %s (%s FPS)"
+#, object-pascal-format
 msgid "%s (%s FPS)"
-msgstr "/ %s (%s FPS)"
+msgstr "%s (%s FPS)"
 
 #: proclocalize.lngasvideolensmpte
-#, object-pascal-format, fuzzy
-#| msgid "/ %s (%s FPS/SMPTE)"
+#, object-pascal-format
 msgid "%s (%s FPS/SMPTE)"
-msgstr "/ %s (%s FPS/SMPTE)"
+msgstr "%s (%s FPS/SMPTE)"
 
 #: proclocalize.lngaswaveformtext
 msgid "Click here to use timeline"
@@ -1252,11 +1250,11 @@ msgstr "Generazione doppiaggio video..."
 
 #: proclocalize.lngvdquotaexceeded
 msgid "We couldn't process this request because you've exceeded your quota."
-msgstr ""
+msgstr "Non è stato possibile elaborare questa richiesta perché hai superato la tua quota."
 
 #: proclocalize.lngvdvoice
 msgid "Voice"
-msgstr ""
+msgstr "Voce"
 
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
@@ -3619,7 +3617,6 @@ msgid "Other"
 msgstr "Altro"
 
 #: tfrmmain.actshowvideotoolbarvolume.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowvideotoolbarvolume.caption"
 msgid "Volume"
 msgstr "Volume"
@@ -5292,7 +5289,6 @@ msgid "Only selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmvideodubbing.btnbackgroundmusic.caption
-#, fuzzy
 msgctxt "tfrmvideodubbing.btnbackgroundmusic.caption"
 msgid "..."
 msgstr "..."
@@ -5313,7 +5309,7 @@ msgstr "Doppiaggio video"
 
 #: tfrmvideodubbing.chkbackgroundmusic.caption
 msgid "Background music"
-msgstr ""
+msgstr "Musica sottofondo"
 
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
@@ -5321,7 +5317,7 @@ msgstr "Voce globale"
 
 #: tfrmvideodubbing.chksubtitletrack.caption
 msgid "Subtitle track"
-msgstr ""
+msgstr "Traccia sottotioli"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
@@ -5340,7 +5336,7 @@ msgstr "Voce:"
 
 #: tfrmvideodubbing.lblvolume.caption
 msgid "Volume %:"
-msgstr ""
+msgstr "% volume"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
@@ -5508,4 +5504,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
