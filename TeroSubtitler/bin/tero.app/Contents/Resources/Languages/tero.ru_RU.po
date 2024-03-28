@@ -3609,7 +3609,6 @@ msgid "Other"
 msgstr "Остальное"
 
 #: tfrmmain.actshowvideotoolbarvolume.caption
-#, fuzzy
 msgctxt "tfrmmain.actshowvideotoolbarvolume.caption"
 msgid "Volume"
 msgstr "Громкость"
@@ -5498,4 +5497,3 @@ msgstr "Инвертированный"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Вертикальный"
-
