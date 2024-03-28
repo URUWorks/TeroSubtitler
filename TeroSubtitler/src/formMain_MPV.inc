@@ -289,6 +289,7 @@ procedure TfrmMain.sbrVolumeChange(Sender: TObject);
 begin
   MPVOptions.Volume.Percent := Byte(sbrVolume.Position);
   MPV.SetAudioVolume(MPVOptions.Volume.Percent);
+  sbrVolume.Hint := IntToStr(MPVOptions.Volume.Percent) + '%';
 end;
 
 // -----------------------------------------------------------------------------
