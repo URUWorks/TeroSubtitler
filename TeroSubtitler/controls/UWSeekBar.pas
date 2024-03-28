@@ -83,6 +83,7 @@ type
     property BorderSpacing;
     property Cursor;
     property Enabled;
+    property Hint;
     property Width;
     property Height;
     property PopupMenu;
@@ -272,10 +273,6 @@ begin
     CheckNewPosition(X);
 
   inherited;
-//  else
-//  begin
-//    Hint := CheckXValue(X).ToString;
-//  end;
 end;
 
 //------------------------------------------------------------------------------
