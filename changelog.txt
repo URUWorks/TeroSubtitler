@@ -1,4 +1,4 @@
-1.0.1.8 (x.x.2024)
+1.0.1.8 (28.3.2024)
 - fixed: Multi-line text pasted from external source appears on list with gap in-between #288
 - fixed: Whitespace in exported unformatted text #285
 - fixed: [macOS] Start centre appears when opening Tero with millisecond-based file #284
