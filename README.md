@@ -47,6 +47,10 @@ For the automatic transcription of audio to subtitles.
 
 Auto-translation API.
 
+### [ElevenLabs TTS](https://elevenlabs.io/)
+
+for video dubbing.
+
 ## Compiling
 
 [Lazarus IDE](https://www.lazarus-ide.org/).
