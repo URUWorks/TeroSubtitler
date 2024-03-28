@@ -606,7 +606,7 @@ object frmMain: TfrmMain
           Width = 50
           ShowButton = False
           Max = 100
-          Position = 0
+          Position = 75
           BackColor = clGray
           FillColor = 10841658
           ButtonColor = 10841658
