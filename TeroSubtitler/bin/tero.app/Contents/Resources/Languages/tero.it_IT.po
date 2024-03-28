@@ -4554,7 +4554,7 @@ msgstr "Frequenza fotogrammi sorgente predefinita"
 
 #: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
 msgid "Dialogue segments detection threshold (rms)"
-msgstr "Soglia rilevamento parti dialogate (rms)"
+msgstr "Soglia rilevamento parti con dialoghi (rms)"
 
 #: tfrmsettings.lblfasterwhisper.caption
 msgid "Faster-Whisper"
@@ -4645,7 +4645,7 @@ msgstr "Sposta tempo (ms)"
 
 #: tfrmsettings.lblshortcut.caption
 msgid "Shortcut"
-msgstr "Scorciatoie"
+msgstr "Scorciatoia"
 
 #: tfrmsettings.lblshortcutcat.caption
 msgid "Category"
