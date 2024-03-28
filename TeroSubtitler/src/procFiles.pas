@@ -493,7 +493,8 @@ begin
   _FPS := AFPS;
   if _FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
   _Encoding := AEncoding;
-  if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
+  //if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
+  if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
 
   if Workspace.SMPTE then
     Subtitles.TimeBase := stbSMPTE
@@ -558,7 +559,8 @@ begin
   _FPS := AFPS;
   if _FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
   _Encoding := AEncoding;
-  if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
+  //if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
+  if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
 
   Subs := TUWSubtitles.Create;
   try
@@ -597,7 +599,8 @@ begin
   _FPS := AFPS;
   if _FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
   _Encoding := AEncoding;
-  if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
+  //if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
+  if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
 
   txt := TUWStringList.Create;
   try
@@ -1107,7 +1110,7 @@ end;
 procedure SaveProject(const FileName: String);
 begin
   if FileName.IsEmpty then Exit;
-  with TProjectFile.Create(FileName, False) do
+  with TProjectFile.Create(ChangeFileExt(FileName, TProjectExt), False) do
   try
     Original    := SubtitleInfo.Text.FileName;
     Translation := SubtitleInfo.Translation.FileName;
@@ -1160,7 +1163,7 @@ begin
     SD.Title   := lngSaveFile;
     SD.Filter  := lngProjectFile + '|*' + TProjectExt;
     SD.Options := [ofOverwritePrompt, ofEnableSizing];
-    SD.FileName := ChangeFileExt('Project_' + ExtractFileName(SubtitleInfo.Text.FileName), '');
+    SD.FileName := ChangeFileExt('Project_' + ExtractFileName(SubtitleInfo.Text.FileName), TProjectExt);
 
     if SD.Execute then
       SaveProject(SD.FileName);
