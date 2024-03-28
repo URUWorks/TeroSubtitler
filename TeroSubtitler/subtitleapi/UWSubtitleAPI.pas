@@ -54,6 +54,7 @@ type
     procedure LoadFromFile(const FileName: String; Encoding: TEncoding);
     procedure SaveToFile(const FileName: String; Encoding: TEncoding);
     procedure SaveToStream(Stream: TStream; Encoding: TEncoding);
+    function ValidIndex(const Index: Integer): Boolean;
     function Add(const S: String; const SkipEmptyLine: Boolean = False): Integer;
     procedure Insert(const Index: Integer; const S: String; const SkipEmptyLine: Boolean = False);
     procedure Move(const CurIndex, NewIndex: Integer);
@@ -434,16 +435,27 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function TUWStringList.ValidIndex(const Index: Integer): Boolean;
+begin
+  Result := (Index >= 0) and (Index < FCount);
+end;
+
+// -----------------------------------------------------------------------------
+
 function TUWStringList.Get(Index: Integer): String;
 begin
-  if (Index >= 0) or (Index < FCount) then Result := FList^[Index];
+  if ValidIndex(Index) then
+    Result := FList^[Index]
+  else
+    Result := '';
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TUWStringList.Put(Index: Integer; const S: String);
 begin
-  if (Index >= 0) or (Index < FCount) then FList^[Index] := S;
+  if ValidIndex(Index) then
+    FList^[Index] := S;
 end;
 
 // -----------------------------------------------------------------------------
