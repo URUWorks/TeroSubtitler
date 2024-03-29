@@ -1467,8 +1467,8 @@ begin
   {$ENDIF}
 
   // update workspace
-  lblMediaTime.AutoSize := False;
-  lblMediaTime.Width := lblMediaTime.Canvas.TextWidth('00:00:00.000');
+  //lblMediaTime.AutoSize := False;
+  //lblMediaTime.Width := lblMediaTime.Canvas.TextWidth('00:00:00.000');
   SetWorkMode(Workspace.WorkMode);
   EnableWorkArea(False);
   UpdateStatusBar(True);
