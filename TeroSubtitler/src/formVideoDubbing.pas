@@ -132,11 +132,11 @@ begin
   FillComboWithVoices;
   SetJobTTS;
 
-  VST.RootNodeCount := Subtitles.Count;
   chkGlobalVoice.Checked := True;
   chkGlobalVoiceChange(NIL);
   chkBackgroundMusicChange(NIL);
 
+  VST.RootNodeCount := Subtitles.Count;
   btnGenerate.Enabled := (TTS.api_key <> '') and frmMain.MPV.HasVideoTrack;
 
   {$IFNDEF WINDOWS}
@@ -262,7 +262,10 @@ procedure TfrmVideoDubbing.VSTGetText(Sender: TBaseVirtualTree;
 begin
   case Column of
     0: CellText := IntToStr(Node^.Index+1);
-    1: CellText := iff((TTS.Voices.Count > 0) and (TTS.Jobs.Count > 0), TTS.Voices[TTS.Jobs[Node^.Index]^.VoiceIndex]^.Name, '');
+    1: if (TTS.Voices.Count > 0) and (TTS.Jobs.Count > 0) and (TTS.Jobs[Node^.Index]^.VoiceIndex >= 0) then
+         CellText := TTS.Voices[TTS.Jobs[Node^.Index]^.VoiceIndex]^.Name
+       else
+         CellText := '';
     2: CellText := GetInitialTimeStr(Node^.Index);
     3: CellText := Subtitles[Node^.Index].Text;
   end;

@@ -204,8 +204,9 @@ var
   Info : PVoiceInfo;
 begin
   Result := False;
-  if JSON.IsEmpty then Exit;
   FVoices.Clear;
+
+  if JSON.IsEmpty then Exit;
 
   Parser := TJSONParser.Create(JSON);
   ZeroArray := TJSONArray.Create;
@@ -260,19 +261,20 @@ begin
     Voices := TStringList.Create;
 
   Voices.Clear;
-  with FFPHTTPClient do
-  begin
-    RequestHeaders.Clear;
-    AddHeader('Accept', 'application/json');
-    AddHeader('Content-Type', 'application/json');
-    AddHeader('xi-api-key', Fxi_api_key);
-    AllowRedirect := True;
-    try
-      Get(elevenlabs_url_Voices, Voices);
-      Result := Voices.Count > 0;
-    except
+  if not Fxi_api_key.IsEmpty then
+    with FFPHTTPClient do
+    begin
+      RequestHeaders.Clear;
+      AddHeader('Accept', 'application/json');
+      AddHeader('Content-Type', 'application/json');
+      AddHeader('xi-api-key', Fxi_api_key);
+      AllowRedirect := True;
+      try
+        Get(elevenlabs_url_Voices, Voices);
+        Result := Voices.Count > 0;
+      except
+      end;
     end;
-  end;
 end;
 
 // -----------------------------------------------------------------------------
