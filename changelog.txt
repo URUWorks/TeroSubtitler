@@ -1,4 +1,5 @@
 1.0.1.9 (x.x.2024)
+- fixed: Access violation in video dubbing without the API key
 - fixed: Initial volume value
 - fixed: Default encoding was not used when saving
 - fixed: Entry range check [SubtitleAPI]
