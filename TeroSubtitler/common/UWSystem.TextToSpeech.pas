@@ -35,7 +35,9 @@ type
     FileName : String;
     VoiceIndex : Integer;
     Stability,
-    Similarity : Single;
+    Similarity,
+    Style : Single;
+    Boost : Boolean;
   end;
 
   TJobList = specialize TFPGList<PJobInfo>;
@@ -58,6 +60,10 @@ type
 
   TVoiceList = specialize TFPGList<PVoiceInfo>;
 
+  { TModel }
+
+  TModel = (emMultilingual_v1, emMultilingual_v2);
+
   { TOutput_format }
 
   TOutput_format =
@@ -78,16 +84,17 @@ type
   TTextToSpeech = class(TThread)
   private
     { Private declarations }
-    FFPHTTPClient: TFPHTTPClient;
+    FFPHTTPClient : TFPHTTPClient;
     FJobs : TJobList;
     FVoices : TVoiceList;
     Fxi_api_key : String;
+    FModel : TModel;
     FCurrentJob : Integer;
-    FError      : Integer;
-    FErrorDesc  : String;
-    FCancel     : Boolean;
-    FOnJobsError: TOnJobsError;
-    FOnJobsProgress: TOnJobsProgress;
+    FError : Integer;
+    FErrorDesc : String;
+    FCancel : Boolean;
+    FOnJobsError : TOnJobsError;
+    FOnJobsProgress : TOnJobsProgress;
     function ParseVoices(const JSON: String): Boolean;
     function GetVoices(out Voices: TStringList): Boolean;
     procedure DoOnJobsError;
@@ -100,12 +107,13 @@ type
     constructor Create(const xi_api_key: String = '');
     destructor Destroy; override;
     function GetVoices: Boolean; overload;
-    function Make(const Text, FileName, voice_id: String; const similarity_boost: Single = 1.0; const stability: Single = 1.0; const output_format: TOutput_format = mp3_44100_128): Boolean;
-    function Make(const Text, FileName: String; const voice_info: TVoiceInfo; const similarity_boost: Single = 1.0; const stability: Single = 1.0; const output_format: TOutput_format = mp3_44100_128): Boolean; overload;
-    function Make(const Text, FileName: String; const voice_index: Integer; const similarity_boost: Single = 1.0; const stability: Single = 1.0; const output_format: TOutput_format = mp3_44100_128): Boolean; overload;
+    function Make(const Text, FileName, voice_id: String; const similarity_boost: Single = 0.75; const stability: Single = 0.5; const style: Single = 0; const boost: Boolean = True; const output_format: TOutput_format = mp3_44100_128): Boolean;
+    function Make(const Text, FileName: String; const voice_info: TVoiceInfo; const similarity_boost: Single = 0.75; const stability: Single = 0.5; const style: Single = 0; const boost: Boolean = True; const output_format: TOutput_format = mp3_44100_128): Boolean; overload;
+    function Make(const Text, FileName: String; const voice_index: Integer; const similarity_boost: Single = 0.75; const stability: Single = 0.5; const style: Single = 0; const boost: Boolean = True; const output_format: TOutput_format = mp3_44100_128): Boolean; overload;
     procedure CancelJobs;
     procedure DoJobs;
     property api_key : String read Fxi_api_key write Fxi_api_key;
+    property Model : TModel read FModel write FModel;
     property Jobs : TJobList read FJobs write FJobs;
     property Voices : TVoiceList read FVoices;
   public
@@ -131,6 +139,12 @@ uses
 const
   elevenlabs_url_Voices = 'https://api.elevenlabs.io/v1/voices';
   elevenlabs_url_TextToSpeech = 'https://api.elevenlabs.io/v1/text-to-speech/';
+
+  TModel_str : array[0..1] of String =
+  (
+    'eleven_multilingual_v1', // recommended.
+    'eleven_multilingual_v2'
+  );
 
   TOutput_format_str : array[0..5] of String =
   (
@@ -173,6 +187,7 @@ begin
   FJobs := TJobList.Create;
   FVoices := TVoiceList.Create;
   Fxi_api_key := xi_api_key;
+  FModel := emMultilingual_v2;
   FError := 0;
   FErrorDesc := '';
   FCancel := False;
@@ -289,9 +304,9 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TTextToSpeech.Make(const Text, FileName, voice_id: String; const similarity_boost: Single = 1.0; const stability: Single = 1.0; const output_format: TOutput_format = mp3_44100_128): Boolean;
+function TTextToSpeech.Make(const Text, FileName, voice_id: String; const similarity_boost: Single = 0.75; const stability: Single = 0.5; const style: Single = 0; const boost: Boolean = True; const output_format: TOutput_format = mp3_44100_128): Boolean;
 var
-  url, sim, sta : String;
+  url, sim, sta, sty, boo : String;
   PostData : TStringStream;
   GetData : TMemoryStream;
 begin
@@ -305,12 +320,18 @@ begin
     AddHeader('xi-api-key', Fxi_api_key);
     AllowRedirect := True;
 
-    sim := ReplaceString(SingleToStr(similarity_boost, FormatSettings, '0.#'), FormatSettings.DecimalSeparator, '.');
-    sta := ReplaceString(SingleToStr(stability, FormatSettings, '0.#'), FormatSettings.DecimalSeparator, '.');
+    sim := SingleToStr(similarity_boost, '.', '0.#');
+    sta := SingleToStr(stability, '.', '0.#');
+    sty := SingleToStr(style, '.', '0.#');
+    boo := iff(boost, 'true', 'false');
 
     PostData := TStringStream.Create(
       '{"text":"' + StringToJSONString(StringReplace(Text.Trim, sLineBreak, '. ', [rfReplaceAll])) +
-      '","model_id":"eleven_multilingual_v1","voice_settings":{"stability":' + sta + ',"similarity_boost":' + sim + '}}'
+      '","model_id":"' + TModel_str[Integer(FModel)] +
+      '","voice_settings":{"stability":' + sta +
+      ',"similarity_boost":' + sim +
+      ',"style":' + sty +
+      ',"use_speaker_boost":' + boo + '}}'
       , TEncoding.UTF8);
     try
       RequestBody := PostData;
@@ -364,18 +385,18 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TTextToSpeech.Make(const Text, FileName: String; const voice_info: TVoiceInfo; const similarity_boost: Single = 1.0; const stability: Single = 1.0; const output_format: TOutput_format = mp3_44100_128): Boolean;
+function TTextToSpeech.Make(const Text, FileName: String; const voice_info: TVoiceInfo; const similarity_boost: Single = 0.75; const stability: Single = 0.5; const style: Single = 0; const boost: Boolean = True; const output_format: TOutput_format = mp3_44100_128): Boolean;
 begin
-  Result := Make(Text, FileName, voice_info.ID, similarity_boost, stability, output_format);
+  Result := Make(Text, FileName, voice_info.ID, similarity_boost, stability, style, boost, output_format);
 end;
 
 // -----------------------------------------------------------------------------
 
-function TTextToSpeech.Make(const Text, FileName: String; const voice_index: Integer; const similarity_boost: Single = 1.0; const stability: Single = 1.0; const output_format: TOutput_format = mp3_44100_128): Boolean; overload;
+function TTextToSpeech.Make(const Text, FileName: String; const voice_index: Integer; const similarity_boost: Single = 0.75; const stability: Single = 0.5; const style: Single = 0; const boost: Boolean = True; const output_format: TOutput_format = mp3_44100_128): Boolean; overload;
 begin
   Result := False;
   if (FVoices.Count > 0) and InRange(voice_index, 0, FVoices.Count-1) then
-    Result := Make(Text, FileName, FVoices[voice_index]^.ID, similarity_boost, stability, output_format);
+    Result := Make(Text, FileName, FVoices[voice_index]^.ID, similarity_boost, stability, style, boost, output_format);
 end;
 
 // -----------------------------------------------------------------------------

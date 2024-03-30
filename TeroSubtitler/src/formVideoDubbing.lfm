@@ -1,11 +1,11 @@
 object frmVideoDubbing: TfrmVideoDubbing
   Left = 239
-  Height = 350
+  Height = 361
   Top = 118
   Width = 680
   BorderIcons = []
   Caption = 'Video dubbing'
-  ClientHeight = 350
+  ClientHeight = 361
   ClientWidth = 680
   Constraints.MinHeight = 280
   Constraints.MinWidth = 640
@@ -22,14 +22,14 @@ object frmVideoDubbing: TfrmVideoDubbing
     AnchorSideBottom.Side = asrBottom
     Left = 581
     Height = 26
-    Top = 316
+    Top = 327
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 8
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    TabOrder = 11
+    TabOrder = 13
     OnClick = btnCloseClick
   end
   object btnGenerate: TButton
@@ -37,13 +37,13 @@ object frmVideoDubbing: TfrmVideoDubbing
     AnchorSideRight.Control = btnClose
     Left = 485
     Height = 26
-    Top = 316
+    Top = 327
     Width = 91
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
     Caption = 'Generate'
     Default = True
-    TabOrder = 10
+    TabOrder = 12
     OnClick = btnGenerateClick
   end
   object VST: TLazVirtualStringTree
@@ -52,7 +52,7 @@ object frmVideoDubbing: TfrmVideoDubbing
     AnchorSideTop.Control = cboVoice
     AnchorSideBottom.Control = btnGenerate
     Left = 272
-    Height = 280
+    Height = 291
     Top = 28
     Width = 400
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -62,7 +62,7 @@ object frmVideoDubbing: TfrmVideoDubbing
     Header.Columns = <>
     Header.MainColumn = -1
     Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
-    TabOrder = 9
+    TabOrder = 11
     TreeOptions.AutoOptions = [toAutoTristateTracking]
     TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
     TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
@@ -105,43 +105,9 @@ object frmVideoDubbing: TfrmVideoDubbing
     Left = 9
     Height = 15
     Top = 66
-    Width = 85
+    Width = 98
     BorderSpacing.Top = 15
-    Caption = 'Similarity boost:'
-  end
-  object spnSimilarityBoost: TFloatSpinEdit
-    AnchorSideTop.Control = lblSimilarityBoost
-    AnchorSideTop.Side = asrCenter
-    AnchorSideRight.Control = cboVoice
-    AnchorSideRight.Side = asrBottom
-    Left = 204
-    Height = 23
-    Top = 62
-    Width = 60
-    Anchors = [akTop, akRight]
-    DecimalPlaces = 1
-    MaxValue = 1
-    MinValue = -1
-    OnChange = cboVoiceChange
-    TabOrder = 1
-    Value = 1
-  end
-  object spnStability: TFloatSpinEdit
-    AnchorSideTop.Control = lblStability
-    AnchorSideTop.Side = asrCenter
-    AnchorSideRight.Control = spnSimilarityBoost
-    AnchorSideRight.Side = asrBottom
-    Left = 204
-    Height = 23
-    Top = 96
-    Width = 60
-    Anchors = [akTop, akRight]
-    DecimalPlaces = 1
-    MaxValue = 1
-    MinValue = -1
-    OnChange = cboVoiceChange
-    TabOrder = 2
-    Value = 1
+    Caption = 'Similarity boost %:'
   end
   object lblStability: TLabel
     AnchorSideTop.Control = spnSimilarityBoost
@@ -149,22 +115,21 @@ object frmVideoDubbing: TfrmVideoDubbing
     Left = 9
     Height = 15
     Top = 100
-    Width = 45
+    Width = 58
     BorderSpacing.Top = 15
-    Caption = 'Stability:'
+    Caption = 'Stability %:'
   end
   object chkGlobalVoice: TUWCheckBox
     AnchorSideLeft.Control = lblStability
-    AnchorSideTop.Control = lblStability
+    AnchorSideTop.Control = chkBoost
     AnchorSideTop.Side = asrBottom
     Left = 9
     Height = 23
-    Top = 130
+    Top = 191
     Width = 16
     AutoSize = False
-    BorderSpacing.Top = 15
     Caption = 'Global voice'
-    TabOrder = 3
+    TabOrder = 5
     OnChange = chkGlobalVoiceChange
   end
   object lblStatus: TLabel
@@ -173,7 +138,7 @@ object frmVideoDubbing: TfrmVideoDubbing
     AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 1
-    Top = 329
+    Top = 340
     Width = 1
     Font.Style = [fsBold]
     ParentFont = False
@@ -184,7 +149,7 @@ object frmVideoDubbing: TfrmVideoDubbing
     AnchorSideRight.Control = btnGenerate
     Left = 474
     Height = 1
-    Top = 329
+    Top = 340
     Width = 1
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 10
@@ -194,11 +159,11 @@ object frmVideoDubbing: TfrmVideoDubbing
     AnchorSideTop.Side = asrBottom
     Left = 9
     Height = 23
-    Top = 153
+    Top = 214
     Width = 16
     AutoSize = False
     Caption = 'Subtitle track'
-    TabOrder = 4
+    TabOrder = 6
   end
   object chkBackgroundMusic: TUWCheckBox
     AnchorSideLeft.Control = chkSubtitleTrack
@@ -206,11 +171,11 @@ object frmVideoDubbing: TfrmVideoDubbing
     AnchorSideTop.Side = asrBottom
     Left = 9
     Height = 23
-    Top = 176
+    Top = 237
     Width = 16
     AutoSize = False
     Caption = 'Background music'
-    TabOrder = 5
+    TabOrder = 7
     OnChange = chkBackgroundMusicChange
   end
   object edtBackgroundMusic: TEdit
@@ -220,12 +185,12 @@ object frmVideoDubbing: TfrmVideoDubbing
     AnchorSideRight.Control = btnBackgroundMusic
     Left = 9
     Height = 23
-    Top = 204
+    Top = 265
     Width = 202
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Top = 5
     BorderSpacing.Right = 5
-    TabOrder = 6
+    TabOrder = 8
   end
   object btnBackgroundMusic: TButton
     AnchorSideTop.Control = edtBackgroundMusic
@@ -233,12 +198,12 @@ object frmVideoDubbing: TfrmVideoDubbing
     AnchorSideRight.Control = VST
     Left = 216
     Height = 23
-    Top = 204
+    Top = 265
     Width = 48
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 8
     Caption = '...'
-    TabOrder = 7
+    TabOrder = 9
     OnClick = btnBackgroundMusicClick
   end
   object spnVolume: TSpinEdit
@@ -246,15 +211,15 @@ object frmVideoDubbing: TfrmVideoDubbing
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = edtBackgroundMusic
     AnchorSideRight.Side = asrBottom
-    Left = 151
+    Left = 131
     Height = 23
-    Top = 235
-    Width = 60
+    Top = 296
+    Width = 80
     Anchors = [akTop, akRight]
     BorderSpacing.Top = 8
     MaxValue = 200
     MinValue = 10
-    TabOrder = 8
+    TabOrder = 10
     Value = 90
   end
   object lblVolume: TLabel
@@ -263,8 +228,78 @@ object frmVideoDubbing: TfrmVideoDubbing
     AnchorSideTop.Side = asrCenter
     Left = 9
     Height = 15
-    Top = 239
+    Top = 300
     Width = 56
     Caption = 'Volume %:'
+  end
+  object spnSimilarityBoost: TSpinEdit
+    AnchorSideTop.Control = lblSimilarityBoost
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = cboVoice
+    AnchorSideRight.Side = asrBottom
+    Left = 184
+    Height = 23
+    Top = 62
+    Width = 80
+    Anchors = [akTop, akRight]
+    MaxValue = 100
+    OnChange = cboVoiceChange
+    TabOrder = 1
+    Value = 75
+  end
+  object spnStability: TSpinEdit
+    AnchorSideTop.Control = lblStability
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = spnSimilarityBoost
+    AnchorSideRight.Side = asrBottom
+    Left = 184
+    Height = 23
+    Top = 96
+    Width = 80
+    Anchors = [akTop, akRight]
+    MaxValue = 100
+    OnChange = cboVoiceChange
+    TabOrder = 2
+    Value = 50
+  end
+  object spnStyle: TSpinEdit
+    AnchorSideTop.Control = lblStyle
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = spnStability
+    AnchorSideRight.Side = asrBottom
+    Left = 184
+    Height = 23
+    Top = 130
+    Width = 80
+    Anchors = [akTop, akRight]
+    MaxValue = 100
+    OnChange = cboVoiceChange
+    TabOrder = 3
+  end
+  object lblStyle: TLabel
+    AnchorSideTop.Control = spnStability
+    AnchorSideTop.Side = asrBottom
+    Left = 9
+    Height = 15
+    Top = 134
+    Width = 113
+    BorderSpacing.Top = 15
+    Caption = 'Style exaggeration %:'
+  end
+  object chkBoost: TUWCheckBox
+    AnchorSideLeft.Control = lblStyle
+    AnchorSideTop.Control = spnStyle
+    AnchorSideTop.Side = asrBottom
+    Left = 9
+    Height = 23
+    Top = 168
+    Width = 16
+    AutoSize = False
+    BorderSpacing.Top = 15
+    Caption = 'Speaker boost'
+    Checked = True
+    State = cbChecked
+    TabOrder = 4
+    OnChange = cboVoiceChange
   end
 end

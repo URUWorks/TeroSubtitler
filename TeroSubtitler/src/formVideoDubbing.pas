@@ -36,7 +36,9 @@ type
     btnGenerate: TButton;
     cboVoice: TComboBox;
     chkBackgroundMusic: TUWCheckBox;
+    chkBoost: TUWCheckBox;
     edtBackgroundMusic: TEdit;
+    lblStyle: TLabel;
     lblVolume: TLabel;
     lblTime: TLabel;
     lblStatus: TLabel;
@@ -44,9 +46,10 @@ type
     lblTimeElapsed: TLabel;
     lblVoice: TLabel;
     lblSimilarityBoost: TLabel;
+    spnSimilarityBoost: TSpinEdit;
+    spnStability: TSpinEdit;
+    spnStyle: TSpinEdit;
     spnVolume: TSpinEdit;
-    spnSimilarityBoost: TFloatSpinEdit;
-    spnStability: TFloatSpinEdit;
     chkGlobalVoice: TUWCheckBox;
     chkSubtitleTrack: TUWCheckBox;
     VST: TLazVirtualStringTree;
@@ -184,8 +187,10 @@ begin
     begin
       VoiceID := TTS.Voices[cboVoice.ItemIndex]^.ID;
       VoiceIndex := cboVoice.ItemIndex;
-      Similarity := spnSimilarityBoost.Value;
-      Stability := spnStability.Value;
+      Similarity := spnSimilarityBoost.Value / 100;
+      Stability := spnStability.Value / 100;
+      Style := spnStyle.Value / 100;
+      Boost := chkBoost.Checked;
     end;
     if not chkGlobalVoice.Checked then
       VST.InvalidateNode(VST.FocusedNode);
@@ -249,8 +254,10 @@ procedure TfrmVideoDubbing.VSTFocusChanged(Sender: TBaseVirtualTree;
 begin
   cboVoice.Tag := 1;
   cboVoice.ItemIndex := TTS.Jobs[Node^.Index]^.VoiceIndex;
-  spnSimilarityBoost.Value := TTS.Jobs[Node^.Index]^.Similarity;
-  spnStability.Value := TTS.Jobs[Node^.Index]^.Stability;
+  spnSimilarityBoost.Value := TTS.Jobs[Node^.Index]^.Similarity * 100;
+  spnStability.Value := TTS.Jobs[Node^.Index]^.Stability * 100;
+  spnStyle.Value := TTS.Jobs[Node^.Index]^.Style * 100;
+  chkBoost.Checked := TTS.Jobs[Node^.Index]^.Boost;
   cboVoice.Tag := 0
 end;
 
@@ -327,8 +334,10 @@ begin
       begin
         TTS.Jobs[i]^.VoiceID := TTS.Voices[cboVoice.ItemIndex]^.ID;
         TTS.Jobs[i]^.VoiceIndex := cboVoice.ItemIndex;
-        TTS.Jobs[i]^.Similarity := spnSimilarityBoost.Value;
-        TTS.Jobs[i]^.Stability := spnStability.Value;
+        TTS.Jobs[i]^.Similarity := spnSimilarityBoost.Value / 100;
+        TTS.Jobs[i]^.Stability := spnStability.Value / 100;
+        TTS.Jobs[i]^.Style := spnStyle.Value / 100;
+        TTS.Jobs[i]^.Boost := chkBoost.Checked;
       end;
 
     TTS.DoJobs;
@@ -370,6 +379,8 @@ begin
   btnGenerate.Enabled        := AValue;
   spnSimilarityBoost.Enabled := AValue;
   spnStability.Enabled       := AValue;
+  spnStyle.Enabled           := AValue;
+  chkBoost.Enabled           := AValue;
   chkGlobalVoice.Enabled     := AValue;
   chkSubtitleTrack.Enabled   := AValue;
   chkBackgroundMusic.Enabled := AValue;
@@ -469,8 +480,10 @@ begin
     if (TTS.Voices.Count > 0) and (cboVoice.ItemIndex >= 0) then
       job^.VoiceID := TTS.Voices[cboVoice.ItemIndex]^.ID;
     job^.VoiceIndex := cboVoice.ItemIndex;
-    job^.Similarity := spnSimilarityBoost.Value;
-    job^.Stability := spnStability.Value;
+    job^.Similarity := spnSimilarityBoost.Value / 100;
+    job^.Stability := spnStability.Value / 100;
+    job^.Style := spnStyle.Value / 100;
+    job^.Boost := chkBoost.Checked;
     TTS.Jobs.Add(job);
   end;
 end;

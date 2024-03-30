@@ -1,12 +1,12 @@
 object frmTTS: TfrmTTS
   Left = 241
-  Height = 350
+  Height = 403
   Top = 121
   Width = 408
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Text to speech'
-  ClientHeight = 350
+  ClientHeight = 403
   ClientWidth = 408
   FormStyle = fsStayOnTop
   OnClose = FormClose
@@ -19,13 +19,13 @@ object frmTTS: TfrmTTS
     AnchorSideRight.Control = btnClose
     Left = 213
     Height = 26
-    Top = 316
+    Top = 369
     Width = 91
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 5
     Caption = 'Generate'
     Default = True
-    TabOrder = 9
+    TabOrder = 11
     OnClick = btnGenerateClick
   end
   object btnClose: TButton
@@ -35,14 +35,14 @@ object frmTTS: TfrmTTS
     AnchorSideBottom.Side = asrBottom
     Left = 309
     Height = 26
-    Top = 316
+    Top = 369
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 8
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    TabOrder = 10
+    TabOrder = 12
     OnClick = btnCloseClick
   end
   object lblVoice: TLabel
@@ -87,12 +87,12 @@ object frmTTS: TfrmTTS
     AnchorSideBottom.Control = btnGenerate
     Left = 8
     Height = 8
-    Top = 296
+    Top = 349
     Width = 392
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Bottom = 12
     ParentColor = False
-    TabOrder = 11
+    TabOrder = 13
     Visible = False
   end
   object rbnFromTheSelectedSubtitle: TUWRadioButton
@@ -100,11 +100,11 @@ object frmTTS: TfrmTTS
     AnchorSideTop.Side = asrBottom
     Left = 9
     Height = 19
-    Top = 247
+    Top = 296
     Width = 18
     AutoSize = False
     Caption = 'From selected entry'
-    TabOrder = 6
+    TabOrder = 8
     TabStop = False
   end
   object rbnAllTheSubtitles: TUWRadioButton
@@ -112,19 +112,22 @@ object frmTTS: TfrmTTS
     AnchorSideTop.Side = asrBottom
     Left = 9
     Height = 19
-    Top = 228
+    Top = 277
     Width = 18
     AutoSize = False
     BorderSpacing.Top = 5
     Caption = 'All entries'
-    TabOrder = 5
+    TabOrder = 7
     TabStop = False
   end
   object lblScope: TLabel
+    AnchorSideTop.Control = chkBoost
+    AnchorSideTop.Side = asrBottom
     Left = 9
     Height = 15
-    Top = 208
+    Top = 257
     Width = 35
+    BorderSpacing.Top = 15
     Caption = 'Scope:'
     ParentColor = False
   end
@@ -133,11 +136,11 @@ object frmTTS: TfrmTTS
     AnchorSideTop.Side = asrBottom
     Left = 9
     Height = 19
-    Top = 266
+    Top = 315
     Width = 18
     AutoSize = False
     Caption = 'Only selected entries'
-    TabOrder = 7
+    TabOrder = 9
     TabStop = False
   end
   object edtFolder: TEdit
@@ -170,7 +173,42 @@ object frmTTS: TfrmTTS
     TabOrder = 2
     OnClick = btnFolderClick
   end
-  object spnSimilarityBoost: TFloatSpinEdit
+  object lblSimilarityBoost: TLabel
+    AnchorSideTop.Control = edtFolder
+    AnchorSideTop.Side = asrBottom
+    Left = 9
+    Height = 15
+    Top = 132
+    Width = 98
+    BorderSpacing.Top = 30
+    Caption = 'Similarity boost %:'
+  end
+  object lblStability: TLabel
+    AnchorSideTop.Control = spnSimilarityBoost
+    AnchorSideTop.Side = asrBottom
+    Left = 9
+    Height = 15
+    Top = 161
+    Width = 58
+    BorderSpacing.Top = 10
+    Caption = 'Stability %:'
+  end
+  object btnPreview: TButton
+    AnchorSideTop.Control = btnGenerate
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = btnGenerate
+    Left = 117
+    Height = 26
+    Top = 369
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
+    Caption = 'Preview'
+    TabOrder = 10
+    Visible = False
+    OnClick = btnPreviewClick
+  end
+  object spnSimilarityBoost: TSpinEdit
     AnchorSideTop.Control = lblSimilarityBoost
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = edtFolder
@@ -180,61 +218,57 @@ object frmTTS: TfrmTTS
     Top = 128
     Width = 134
     Anchors = [akTop, akLeft, akRight]
-    DecimalPlaces = 1
-    MaxValue = 1
-    MinValue = -1
+    MaxValue = 100
     TabOrder = 3
-    Value = 1
+    Value = 75
   end
-  object lblSimilarityBoost: TLabel
-    AnchorSideTop.Control = edtFolder
-    AnchorSideTop.Side = asrBottom
-    Left = 9
-    Height = 15
-    Top = 132
-    Width = 85
-    BorderSpacing.Top = 30
-    Caption = 'Similarity boost:'
-  end
-  object lblStability: TLabel
-    AnchorSideTop.Control = spnSimilarityBoost
-    AnchorSideTop.Side = asrBottom
-    Left = 9
-    Height = 15
-    Top = 161
-    Width = 45
-    BorderSpacing.Top = 10
-    Caption = 'Stability:'
-  end
-  object spnStability: TFloatSpinEdit
+  object spnStability: TSpinEdit
     AnchorSideTop.Control = lblStability
     AnchorSideTop.Side = asrCenter
-    AnchorSideRight.Control = spnSimilarityBoost
     AnchorSideRight.Side = asrBottom
     Left = 213
     Height = 23
     Top = 157
     Width = 134
     Anchors = [akTop, akLeft, akRight]
-    DecimalPlaces = 1
-    MaxValue = 1
-    MinValue = -1
+    MaxValue = 100
     TabOrder = 4
-    Value = 1
+    Value = 50
   end
-  object btnPreview: TButton
-    AnchorSideTop.Control = btnGenerate
+  object lblStyle: TLabel
+    AnchorSideTop.Control = spnStability
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 190
+    Width = 113
+    BorderSpacing.Top = 10
+    Caption = 'Style exaggeration %:'
+  end
+  object spnStyle: TSpinEdit
+    AnchorSideTop.Control = lblStyle
     AnchorSideTop.Side = asrCenter
-    AnchorSideRight.Control = btnGenerate
-    Left = 117
-    Height = 26
-    Top = 316
-    Width = 91
-    Anchors = [akTop, akRight]
-    BorderSpacing.Right = 5
-    Caption = 'Preview'
-    TabOrder = 8
-    Visible = False
-    OnClick = btnPreviewClick
+    AnchorSideRight.Side = asrBottom
+    Left = 212
+    Height = 23
+    Top = 186
+    Width = 134
+    Anchors = [akTop, akLeft, akRight]
+    MaxValue = 100
+    TabOrder = 5
+  end
+  object chkBoost: TUWCheckBox
+    AnchorSideTop.Control = spnStyle
+    AnchorSideTop.Side = asrBottom
+    Left = 213
+    Height = 23
+    Top = 219
+    Width = 16
+    AutoSize = False
+    BorderSpacing.Top = 10
+    Caption = 'Speaker boost'
+    Checked = True
+    State = cbChecked
+    TabOrder = 6
   end
 end

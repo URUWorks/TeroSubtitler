@@ -23,8 +23,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  ComCtrls, UWRadioButton, UWSystem.TextToSpeech, LCLTranslator, Spin, LCLIntf,
-  procLocalize;
+  ComCtrls, UWRadioButton, UWCheckBox, UWSystem.TextToSpeech, LCLTranslator,
+  Spin, LCLIntf, procLocalize;
 
 type
 
@@ -38,16 +38,19 @@ type
     cboVoice: TComboBox;
     edtFolder: TEdit;
     lblStability: TLabel;
-    spnSimilarityBoost: TFloatSpinEdit;
     lblSimilarityBoost: TLabel;
     lblFolder: TLabel;
     lblScope: TLabel;
+    lblStyle: TLabel;
     lblVoice: TLabel;
     prbTranslate: TProgressBar;
     rbnAllTheSubtitles: TUWRadioButton;
     rbnFromTheSelectedSubtitle: TUWRadioButton;
     rbnOnlySelectedSubtitles: TUWRadioButton;
-    spnStability: TFloatSpinEdit;
+    spnSimilarityBoost: TSpinEdit;
+    spnStability: TSpinEdit;
+    spnStyle: TSpinEdit;
+    chkBoost: TUWCheckBox;
     procedure btnFolderClick(Sender: TObject);
     procedure btnGenerateClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -177,8 +180,10 @@ begin
   job^.FileName := ConcatPaths([frmTTS.edtFolder.Text, 'Entry' + IntToStr(Index+1) + '.mp3']);
   job^.VoiceID := frmTTS.TTS.Voices[frmTTS.cboVoice.ItemIndex]^.ID;
   job^.VoiceIndex := 0;
-  job^.Similarity := frmTTS.spnSimilarityBoost.Value;
-  job^.Stability := frmTTS.spnStability.Value;
+  job^.Similarity := frmTTS.spnSimilarityBoost.Value / 100;
+  job^.Stability := frmTTS.spnStability.Value / 100;
+  job^.Style := frmTTS.spnStyle.Value / 100;
+  job^.Boost := frmTTS.chkBoost.Checked;
   frmTTS.TTS.Jobs.Add(job);
 end;
 
@@ -259,6 +264,8 @@ begin
   btnGenerate.Enabled                := AValue;
   spnSimilarityBoost.Enabled         := AValue;
   spnStability.Enabled               := AValue;
+  spnStyle.Enabled                   := AValue;
+  chkBoost.Enabled                   := AValue;
   btnPreview.Enabled                 := AValue;
   prbTranslate.Visible               := not AValue;
 end;

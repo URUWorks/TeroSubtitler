@@ -3,11 +3,13 @@
 {"hash":4863637,"name":"tfrmvideodubbing.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
 {"hash":206343285,"name":"tfrmvideodubbing.btngenerate.caption","sourcebytes":[71,101,110,101,114,97,116,101],"value":"Generate"},
 {"hash":97909130,"name":"tfrmvideodubbing.lblvoice.caption","sourcebytes":[86,111,105,99,101,58],"value":"Voice:"},
-{"hash":73885130,"name":"tfrmvideodubbing.lblsimilarityboost.caption","sourcebytes":[83,105,109,105,108,97,114,105,116,121,32,98,111,111,115,116,58],"value":"Similarity boost:"},
-{"hash":151560634,"name":"tfrmvideodubbing.lblstability.caption","sourcebytes":[83,116,97,98,105,108,105,116,121,58],"value":"Stability:"},
+{"hash":124114666,"name":"tfrmvideodubbing.lblsimilarityboost.caption","sourcebytes":[83,105,109,105,108,97,114,105,116,121,32,98,111,111,115,116,32,37,58],"value":"Similarity boost %:"},
+{"hash":144821130,"name":"tfrmvideodubbing.lblstability.caption","sourcebytes":[83,116,97,98,105,108,105,116,121,32,37,58],"value":"Stability %:"},
 {"hash":178259941,"name":"tfrmvideodubbing.chkglobalvoice.caption","sourcebytes":[71,108,111,98,97,108,32,118,111,105,99,101],"value":"Global voice"},
 {"hash":216045339,"name":"tfrmvideodubbing.chksubtitletrack.caption","sourcebytes":[83,117,98,116,105,116,108,101,32,116,114,97,99,107],"value":"Subtitle track"},
 {"hash":127476755,"name":"tfrmvideodubbing.chkbackgroundmusic.caption","sourcebytes":[66,97,99,107,103,114,111,117,110,100,32,109,117,115,105,99],"value":"Background music"},
 {"hash":12558,"name":"tfrmvideodubbing.btnbackgroundmusic.caption","sourcebytes":[46,46,46],"value":"..."},
-{"hash":63123434,"name":"tfrmvideodubbing.lblvolume.caption","sourcebytes":[86,111,108,117,109,101,32,37,58],"value":"Volume %:"}
+{"hash":63123434,"name":"tfrmvideodubbing.lblvolume.caption","sourcebytes":[86,111,108,117,109,101,32,37,58],"value":"Volume %:"},
+{"hash":220265514,"name":"tfrmvideodubbing.lblstyle.caption","sourcebytes":[83,116,121,108,101,32,101,120,97,103,103,101,114,97,116,105,111,110,32,37,58],"value":"Style exaggeration %:"},
+{"hash":235202356,"name":"tfrmvideodubbing.chkboost.caption","sourcebytes":[83,112,101,97,107,101,114,32,98,111,111,115,116],"value":"Speaker boost"}
 ]}
