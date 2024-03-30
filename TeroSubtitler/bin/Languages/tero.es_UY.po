@@ -5242,6 +5242,11 @@ msgstr "Prueba"
 msgid "Text to speech"
 msgstr "Texto a voz"
 
+#: tfrmtts.chkboost.caption
+msgctxt "tfrmtts.chkboost.caption"
+msgid "Speaker boost"
+msgstr "Impulso del altavoz"
+
 #: tfrmtts.lblfolder.caption
 msgid "Folder:"
 msgstr "Carpeta:"
@@ -5253,13 +5258,18 @@ msgstr "Alcance:"
 
 #: tfrmtts.lblsimilarityboost.caption
 msgctxt "tfrmtts.lblsimilarityboost.caption"
-msgid "Similarity boost:"
-msgstr "Aumento de similitud:"
+msgid "Similarity boost %:"
+msgstr "Aumento de similitud %:"
 
 #: tfrmtts.lblstability.caption
 msgctxt "tfrmtts.lblstability.caption"
-msgid "Stability:"
-msgstr "Estabilidad:"
+msgid "Stability %:"
+msgstr "Estabilidad %:"
+
+#: tfrmtts.lblstyle.caption
+msgctxt "tfrmtts.lblstyle.caption"
+msgid "Style exaggeration %:"
+msgstr "Exageración de estilo %:"
 
 #: tfrmtts.lblvoice.caption
 msgctxt "tfrmtts.lblvoice.caption"
@@ -5304,6 +5314,11 @@ msgstr "Doblaje de vídeo"
 msgid "Background music"
 msgstr "Música de fondo"
 
+#: tfrmvideodubbing.chkboost.caption
+msgctxt "tfrmvideodubbing.chkboost.caption"
+msgid "Speaker boost"
+msgstr "Impulso del altavoz"
+
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
 msgstr "Voz global"
@@ -5314,13 +5329,18 @@ msgstr "Pista de subtítulos"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
-msgid "Similarity boost:"
-msgstr "Aumento de similitud:"
+msgid "Similarity boost %:"
+msgstr "Aumento de similitud %:"
 
 #: tfrmvideodubbing.lblstability.caption
 msgctxt "tfrmvideodubbing.lblstability.caption"
-msgid "Stability:"
-msgstr "Estabilidad:"
+msgid "Stability %:"
+msgstr "Estabilidad %:"
+
+#: tfrmvideodubbing.lblstyle.caption
+msgctxt "tfrmvideodubbing.lblstyle.caption"
+msgid "Style exaggeration %:"
+msgstr "Exageración de estilo %:"
 
 #: tfrmvideodubbing.lblvoice.caption
 msgctxt "tfrmvideodubbing.lblvoice.caption"

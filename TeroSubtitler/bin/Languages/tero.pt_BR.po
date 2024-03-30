@@ -5275,6 +5275,11 @@ msgstr ""
 msgid "Text to speech"
 msgstr ""
 
+#: tfrmtts.chkboost.caption
+msgctxt "tfrmtts.chkboost.caption"
+msgid "Speaker boost"
+msgstr ""
+
 #: tfrmtts.lblfolder.caption
 msgid "Folder:"
 msgstr ""
@@ -5287,12 +5292,17 @@ msgstr "Escopo:"
 
 #: tfrmtts.lblsimilarityboost.caption
 msgctxt "tfrmtts.lblsimilarityboost.caption"
-msgid "Similarity boost:"
+msgid "Similarity boost %:"
 msgstr ""
 
 #: tfrmtts.lblstability.caption
 msgctxt "tfrmtts.lblstability.caption"
-msgid "Stability:"
+msgid "Stability %:"
+msgstr ""
+
+#: tfrmtts.lblstyle.caption
+msgctxt "tfrmtts.lblstyle.caption"
+msgid "Style exaggeration %:"
 msgstr ""
 
 #: tfrmtts.lblvoice.caption
@@ -5344,6 +5354,11 @@ msgstr ""
 msgid "Background music"
 msgstr ""
 
+#: tfrmvideodubbing.chkboost.caption
+msgctxt "tfrmvideodubbing.chkboost.caption"
+msgid "Speaker boost"
+msgstr ""
+
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
 msgstr ""
@@ -5354,12 +5369,17 @@ msgstr ""
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
-msgid "Similarity boost:"
+msgid "Similarity boost %:"
 msgstr ""
 
 #: tfrmvideodubbing.lblstability.caption
 msgctxt "tfrmvideodubbing.lblstability.caption"
-msgid "Stability:"
+msgid "Stability %:"
+msgstr ""
+
+#: tfrmvideodubbing.lblstyle.caption
+msgctxt "tfrmvideodubbing.lblstyle.caption"
+msgid "Style exaggeration %:"
 msgstr ""
 
 #: tfrmvideodubbing.lblvoice.caption

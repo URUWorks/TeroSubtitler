@@ -5249,6 +5249,11 @@ msgstr "Anteprima"
 msgid "Text to speech"
 msgstr "Sintesi vocale"
 
+#: tfrmtts.chkboost.caption
+msgctxt "tfrmtts.chkboost.caption"
+msgid "Speaker boost"
+msgstr ""
+
 #: tfrmtts.lblfolder.caption
 msgid "Folder:"
 msgstr "Cartella:"
@@ -5259,14 +5264,23 @@ msgid "Scope:"
 msgstr "Scopo:"
 
 #: tfrmtts.lblsimilarityboost.caption
+#, fuzzy
+#| msgid "Similarity boost:"
 msgctxt "tfrmtts.lblsimilarityboost.caption"
-msgid "Similarity boost:"
+msgid "Similarity boost %:"
 msgstr "Incremento somiglianza:"
 
 #: tfrmtts.lblstability.caption
+#, fuzzy
+#| msgid "Stability:"
 msgctxt "tfrmtts.lblstability.caption"
-msgid "Stability:"
+msgid "Stability %:"
 msgstr "Stabilità:"
+
+#: tfrmtts.lblstyle.caption
+msgctxt "tfrmtts.lblstyle.caption"
+msgid "Style exaggeration %:"
+msgstr ""
 
 #: tfrmtts.lblvoice.caption
 msgctxt "tfrmtts.lblvoice.caption"
@@ -5311,6 +5325,11 @@ msgstr "Doppiaggio video"
 msgid "Background music"
 msgstr "Musica sottofondo"
 
+#: tfrmvideodubbing.chkboost.caption
+msgctxt "tfrmvideodubbing.chkboost.caption"
+msgid "Speaker boost"
+msgstr ""
+
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
 msgstr "Voce globale"
@@ -5320,14 +5339,23 @@ msgid "Subtitle track"
 msgstr "Traccia sottotioli"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
+#, fuzzy
+#| msgid "Similarity boost:"
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
-msgid "Similarity boost:"
+msgid "Similarity boost %:"
 msgstr "Incremento somiglianza:"
 
 #: tfrmvideodubbing.lblstability.caption
+#, fuzzy
+#| msgid "Stability:"
 msgctxt "tfrmvideodubbing.lblstability.caption"
-msgid "Stability:"
+msgid "Stability %:"
 msgstr "Stabilità:"
+
+#: tfrmvideodubbing.lblstyle.caption
+msgctxt "tfrmvideodubbing.lblstyle.caption"
+msgid "Style exaggeration %:"
+msgstr ""
 
 #: tfrmvideodubbing.lblvoice.caption
 msgctxt "tfrmvideodubbing.lblvoice.caption"
@@ -5504,3 +5532,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+
