@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 27.03.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 29.03.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -5252,7 +5252,7 @@ msgstr "Sintesi vocale"
 #: tfrmtts.chkboost.caption
 msgctxt "tfrmtts.chkboost.caption"
 msgid "Speaker boost"
-msgstr ""
+msgstr "Potenziamento altoparlanti"
 
 #: tfrmtts.lblfolder.caption
 msgid "Folder:"
@@ -5264,23 +5264,19 @@ msgid "Scope:"
 msgstr "Scopo:"
 
 #: tfrmtts.lblsimilarityboost.caption
-#, fuzzy
-#| msgid "Similarity boost:"
 msgctxt "tfrmtts.lblsimilarityboost.caption"
 msgid "Similarity boost %:"
-msgstr "Incremento somiglianza:"
+msgstr "% incremento somiglianza:"
 
 #: tfrmtts.lblstability.caption
-#, fuzzy
-#| msgid "Stability:"
 msgctxt "tfrmtts.lblstability.caption"
 msgid "Stability %:"
-msgstr "Stabilità:"
+msgstr "% stabilità:"
 
 #: tfrmtts.lblstyle.caption
 msgctxt "tfrmtts.lblstyle.caption"
 msgid "Style exaggeration %:"
-msgstr ""
+msgstr "Esagerazione stile %:"
 
 #: tfrmtts.lblvoice.caption
 msgctxt "tfrmtts.lblvoice.caption"
@@ -5328,7 +5324,7 @@ msgstr "Musica sottofondo"
 #: tfrmvideodubbing.chkboost.caption
 msgctxt "tfrmvideodubbing.chkboost.caption"
 msgid "Speaker boost"
-msgstr ""
+msgstr "Potenziamento altoparlanti"
 
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
@@ -5339,23 +5335,19 @@ msgid "Subtitle track"
 msgstr "Traccia sottotioli"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
-#, fuzzy
-#| msgid "Similarity boost:"
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
 msgid "Similarity boost %:"
-msgstr "Incremento somiglianza:"
+msgstr "% incremento somiglianza:"
 
 #: tfrmvideodubbing.lblstability.caption
-#, fuzzy
-#| msgid "Stability:"
 msgctxt "tfrmvideodubbing.lblstability.caption"
 msgid "Stability %:"
-msgstr "Stabilità:"
+msgstr "% stabilità:"
 
 #: tfrmvideodubbing.lblstyle.caption
 msgctxt "tfrmvideodubbing.lblstyle.caption"
 msgid "Style exaggeration %:"
-msgstr ""
+msgstr "Esagerazione stile %:"
 
 #: tfrmvideodubbing.lblvoice.caption
 msgctxt "tfrmvideodubbing.lblvoice.caption"
@@ -5364,7 +5356,7 @@ msgstr "Voce:"
 
 #: tfrmvideodubbing.lblvolume.caption
 msgid "Volume %:"
-msgstr "% volume"
+msgstr "% volume:"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
@@ -5532,4 +5524,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
