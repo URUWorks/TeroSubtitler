@@ -101,7 +101,7 @@ implementation
 
 uses
   procTypes, procWorkspace, procConfig, procColorTheme, formDownload,
-  UWSystem.SysUtils;
+  UWSystem.SysUtils, UWSpellcheck.Hunspell, formMain;
 
 {$R *.lfm}
 
@@ -152,6 +152,8 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmWizard.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+var
+  i : Integer;
 begin
   if rdoLayout1.Checked then
     Workspace.Layout := 1
@@ -171,6 +173,17 @@ begin
   begin
     if Workspace.WorkMode <> wmTime then
       SetWorkMode(wmTime);
+  end;
+
+  if (AppOptions.HunspellLanguage <> AppOptions.GUILanguage) and FileExists(DictionariesFolder+AppOptions.GUILanguage + '.dic') and FileExists(DictionariesFolder+AppOptions.GUILanguage + '.aff') then
+  begin
+    AppOptions.HunspellLanguage := AppOptions.GUILanguage;
+    UpdateStatusBar(True);
+    HunspellInstance.LoadDictionary(DictionariesFolder+AppOptions.HunspellLanguage+'.aff', DictionariesFolder+AppOptions.HunspellLanguage+'.dic');
+
+    with frmMain do
+      for i := 0 to popDictionaries.Items.Count-1 do
+        popDictionaries.Items[i].Checked := (AppOptions.HunspellLanguage = GetDictionaryNameFromCaption(popDictionaries.Items[i].Caption));
   end;
 
   CloseAction := caFree;
