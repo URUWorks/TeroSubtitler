@@ -106,7 +106,7 @@ uses
   procColorTheme, procDialogs, procLocalize, UWSystem.InetUtils, FileUtil,
   UWSubtitleAPI.Tags, UWSystem.Process, UWSystem.TimeUtils, procConfig,
   formMain, UWSystem.SysUtils, UWFiles.MPEGAudio, UWSubtitleAPI.Formats,
-  StrUtils;
+  StrUtils, Math;
 
 {$R *.lfm}
 
@@ -152,6 +152,8 @@ end;
 procedure TfrmVideoDubbing.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
+  SaveFormSettings(Self, Format('%d,%d,%d,%d,%d,%d,%d,%d', [cboVoice.ItemIndex, spnSimilarityBoost.Value, spnStability.Value, spnStyle.Value, Integer(chkBoost.Checked), Integer(chkSubtitleTrack.Checked), Integer(chkBackgroundMusic.Checked), spnVolume.Value]));
+
   if DirectoryExists(TempDir) and DeleteDirectory(TempDir, True) then
     RemoveDir(TempDir);
 
@@ -163,8 +165,29 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmVideoDubbing.FormShow(Sender: TObject);
+var
+  s: String;
+  AParamArray: TStringArray;
 begin
   CheckColorTheme(Self);
+  s := LoadFormSettings(Self);
+  if not s.IsEmpty then
+  begin
+    AParamArray := s.Split(',');
+    if Length(AParamArray) = 8 then
+    begin
+      if InRange(AParamArray[0].ToInteger, 0, cboVoice.Items.Count-1) then
+        cboVoice.ItemIndex := AParamArray[0].ToInteger;
+
+      spnSimilarityBoost.Value := AParamArray[1].ToInteger;
+      spnStability.Value := AParamArray[2].ToInteger;
+      spnStyle.Value := AParamArray[3].ToInteger;
+      chkBoost.Checked := Boolean(AParamArray[4].ToInteger);
+      chkSubtitleTrack.Checked := Boolean(AParamArray[5].ToInteger);
+      chkBackgroundMusic.Checked := Boolean(AParamArray[6].ToInteger);
+      spnVolume.Value := AParamArray[7].ToInteger;
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

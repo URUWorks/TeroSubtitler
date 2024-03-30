@@ -81,7 +81,8 @@ implementation
 
 uses
   procWorkspace, procTypes, procVST, procDialogs, UWSystem.InetUtils,
-  UWTranslateAPI.Google, UWSubtitleAPI, UWSubtitleAPI.Tags, formMain;
+  UWTranslateAPI.Google, UWSubtitleAPI, UWSubtitleAPI.Tags, formMain,
+  procConfig, Math;
 
 {$R *.lfm}
 
@@ -127,6 +128,8 @@ end;
 procedure TfrmTTS.FormClose(Sender: TObject; var CloseAction: TCloseAction
   );
 begin
+  SaveFormSettings(Self, Format('%d,%d,%d,%d,%d', [cboVoice.ItemIndex, spnSimilarityBoost.Value, spnStability.Value, spnStyle.Value, Integer(chkBoost.Checked)]));
+
   //MPV.Free;
   TTS.Free;
   CloseAction := caFree;
@@ -136,8 +139,26 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmTTS.FormShow(Sender: TObject);
+var
+  s: String;
+  AParamArray: TStringArray;
 begin
   CheckColorTheme(Self);
+  s := LoadFormSettings(Self);
+  if not s.IsEmpty then
+  begin
+    AParamArray := s.Split(',');
+    if Length(AParamArray) = 5 then
+    begin
+      if InRange(AParamArray[0].ToInteger, 0, cboVoice.Items.Count-1) then
+        cboVoice.ItemIndex := AParamArray[0].ToInteger;
+
+      spnSimilarityBoost.Value := AParamArray[1].ToInteger;
+      spnStability.Value := AParamArray[2].ToInteger;
+      spnStyle.Value := AParamArray[3].ToInteger;
+      chkBoost.Checked := Boolean(AParamArray[4].ToInteger);
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
