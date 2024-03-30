@@ -5244,7 +5244,7 @@ msgstr "Текст в речь"
 #: tfrmtts.chkboost.caption
 msgctxt "tfrmtts.chkboost.caption"
 msgid "Speaker boost"
-msgstr ""
+msgstr "Усиление говорящего"
 
 #: tfrmtts.lblfolder.caption
 msgid "Folder:"
@@ -5256,23 +5256,19 @@ msgid "Scope:"
 msgstr "Применить ко:"
 
 #: tfrmtts.lblsimilarityboost.caption
-#, fuzzy
-#| msgid "Similarity boost:"
 msgctxt "tfrmtts.lblsimilarityboost.caption"
 msgid "Similarity boost %:"
-msgstr "Повысить схожесть:"
+msgstr "Повысить схожесть %:"
 
 #: tfrmtts.lblstability.caption
-#, fuzzy
-#| msgid "Stability:"
 msgctxt "tfrmtts.lblstability.caption"
 msgid "Stability %:"
-msgstr "Устойчивость:"
+msgstr "Устойчивость %:"
 
 #: tfrmtts.lblstyle.caption
 msgctxt "tfrmtts.lblstyle.caption"
 msgid "Style exaggeration %:"
-msgstr ""
+msgstr "Преувеличение стиля %:"
 
 #: tfrmtts.lblvoice.caption
 msgctxt "tfrmtts.lblvoice.caption"
@@ -5320,7 +5316,7 @@ msgstr "Фоновая музыка"
 #: tfrmvideodubbing.chkboost.caption
 msgctxt "tfrmvideodubbing.chkboost.caption"
 msgid "Speaker boost"
-msgstr ""
+msgstr "Усиление говорящего"
 
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
@@ -5331,23 +5327,19 @@ msgid "Subtitle track"
 msgstr "Дорожка субтитров"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
-#, fuzzy
-#| msgid "Similarity boost:"
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
 msgid "Similarity boost %:"
-msgstr "Повысить схожесть:"
+msgstr "Повысить схожесть %:"
 
 #: tfrmvideodubbing.lblstability.caption
-#, fuzzy
-#| msgid "Stability:"
 msgctxt "tfrmvideodubbing.lblstability.caption"
 msgid "Stability %:"
-msgstr "Устойчивость:"
+msgstr "Устойчивость %:"
 
 #: tfrmvideodubbing.lblstyle.caption
 msgctxt "tfrmvideodubbing.lblstyle.caption"
 msgid "Style exaggeration %:"
-msgstr ""
+msgstr "Преувеличение стиля %:"
 
 #: tfrmvideodubbing.lblvoice.caption
 msgctxt "tfrmvideodubbing.lblvoice.caption"
@@ -5525,4 +5517,3 @@ msgstr "Инвертированный"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Вертикальный"
-
