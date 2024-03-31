@@ -8,12 +8,11 @@ object frmCustomTextFormat: TfrmCustomTextFormat
   Caption = 'Custom text format'
   ClientHeight = 169
   ClientWidth = 389
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object cboScript: TComboBox
     Left = 8
     Height = 23

@@ -8,7 +8,6 @@ object frmTBXSettings: TfrmTBXSettings
   Caption = 'Terminology settings'
   ClientHeight = 160
   ClientWidth = 523
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

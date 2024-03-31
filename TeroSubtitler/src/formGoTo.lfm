@@ -8,12 +8,11 @@ object frmGoTo: TfrmGoTo
   Caption = 'Go to line'
   ClientHeight = 93
   ClientWidth = 280
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lblNumber: TLabel
     Left = 8
     Height = 15

@@ -8,12 +8,11 @@ object frmFindAndReplace: TfrmFindAndReplace
   Caption = 'Find and replace'
   ClientHeight = 346
   ClientWidth = 520
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lblTextToFind: TLabel
     Left = 8
     Height = 15

@@ -8,12 +8,11 @@ object frmAudioToTextModel: TfrmAudioToTextModel
   Caption = 'Audio to text model'
   ClientHeight = 90
   ClientWidth = 346
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object cboModel: TComboBox
     AnchorSideRight.Control = btnDownload
     Left = 8

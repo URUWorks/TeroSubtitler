@@ -9,12 +9,11 @@ object frmFixSubtitles: TfrmFixSubtitles
   ClientWidth = 1024
   Constraints.MinHeight = 200
   Constraints.MinWidth = 200
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lyoBottom: TUWLayout
     Left = 0
     Height = 42

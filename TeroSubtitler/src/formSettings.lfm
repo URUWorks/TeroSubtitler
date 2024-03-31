@@ -8,7 +8,6 @@ object frmSettings: TfrmSettings
   Caption = 'Settings'
   ClientHeight = 593
   ClientWidth = 900
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

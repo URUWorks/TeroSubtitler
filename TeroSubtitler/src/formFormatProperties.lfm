@@ -8,12 +8,11 @@ object frmFormatProperties: TfrmFormatProperties
   Caption = 'Format properties'
   ClientHeight = 361
   ClientWidth = 368
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lyoWebVTT: TUWLayout
     Left = 8
     Height = 280

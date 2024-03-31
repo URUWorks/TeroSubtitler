@@ -8,7 +8,6 @@ object frmShotChanges: TfrmShotChanges
   Caption = 'Shot changes'
   ClientHeight = 466
   ClientWidth = 490
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

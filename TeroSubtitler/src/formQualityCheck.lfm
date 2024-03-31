@@ -8,12 +8,11 @@ object frmQualityCheck: TfrmQualityCheck
   Caption = 'Quality check'
   ClientHeight = 391
   ClientWidth = 572
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lblRules: TLabel
     Left = 8
     Height = 15

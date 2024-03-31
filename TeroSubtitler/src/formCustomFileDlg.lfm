@@ -7,11 +7,10 @@ object frmCustomFileDlg: TfrmCustomFileDlg
   BorderStyle = bsSingle
   ClientHeight = 222
   ClientWidth = 387
-  FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object edtFileName: TEdit
     AnchorSideRight.Control = btnOpenFile
     Left = 8

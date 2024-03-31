@@ -8,12 +8,11 @@ object frmStatistics: TfrmStatistics
   Caption = 'Statistics'
   ClientHeight = 400
   ClientWidth = 400
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnExport: TButton
     AnchorSideRight.Control = btnClose
     AnchorSideBottom.Control = btnClose

@@ -8,12 +8,11 @@ object frmGenerateBlankVideo: TfrmGenerateBlankVideo
   Caption = 'Generate blank video'
   ClientHeight = 362
   ClientWidth = 235
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lblVideoRes: TLabel
     AnchorSideTop.Control = tedDuration
     AnchorSideTop.Side = asrBottom

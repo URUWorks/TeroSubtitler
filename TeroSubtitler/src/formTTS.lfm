@@ -8,7 +8,6 @@ object frmTTS: TfrmTTS
   Caption = 'Text to speech'
   ClientHeight = 403
   ClientWidth = 408
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

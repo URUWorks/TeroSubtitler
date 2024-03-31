@@ -9,7 +9,6 @@ object frmVideoDubbing: TfrmVideoDubbing
   ClientWidth = 680
   Constraints.MinHeight = 280
   Constraints.MinWidth = 640
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

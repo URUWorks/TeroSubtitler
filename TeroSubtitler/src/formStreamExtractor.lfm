@@ -8,7 +8,6 @@ object frmStreamExtractor: TfrmStreamExtractor
   Caption = 'Stream extractor'
   ClientHeight = 290
   ClientWidth = 580
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

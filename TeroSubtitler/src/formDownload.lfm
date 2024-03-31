@@ -8,13 +8,12 @@ object frmDownload: TfrmDownload
   Caption = 'Downloading'
   ClientHeight = 152
   ClientWidth = 400
-  FormStyle = fsStayOnTop
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lblFile: TLabel
     AnchorSideTop.Side = asrBottom
     Left = 8

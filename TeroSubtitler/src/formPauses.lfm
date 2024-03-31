@@ -8,7 +8,6 @@ object frmPauses: TfrmPauses
   Caption = 'Set gapping'
   ClientHeight = 322
   ClientWidth = 280
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

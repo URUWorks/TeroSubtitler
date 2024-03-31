@@ -8,12 +8,11 @@ object frmCharacterMap: TfrmCharacterMap
   Caption = 'Character Map'
   ClientHeight = 348
   ClientWidth = 722
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lyoUnicode: TUWLayout
     Left = 8
     Height = 291

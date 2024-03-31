@@ -8,12 +8,11 @@ object frmRestoreBackup: TfrmRestoreBackup
   Caption = 'Restore backup'
   ClientHeight = 290
   ClientWidth = 580
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnRestore: TButton
     AnchorSideRight.Control = btnClose
     AnchorSideBottom.Control = btnClose

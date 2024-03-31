@@ -8,12 +8,11 @@ object frmWizard: TfrmWizard
   Caption = 'Getting started wizard'
   ClientHeight = 377
   ClientWidth = 544
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lyoPage0: TUWLayout
     Left = 0
     Height = 300

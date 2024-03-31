@@ -8,12 +8,11 @@ object frmAdjustSubtitle: TfrmAdjustSubtitle
   Caption = 'Adjust subtitle'
   ClientHeight = 370
   ClientWidth = 580
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnApply: TButton
     AnchorSideRight.Control = btnClose
     Left = 385

@@ -8,12 +8,11 @@ object frmExportSUP: TfrmExportSUP
   Caption = 'Blu-ray SUP'
   ClientHeight = 378
   ClientWidth = 651
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnSave: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose

@@ -7,11 +7,10 @@ object frmCustomQuestionDlg: TfrmCustomQuestionDlg
   BorderStyle = bsSingle
   ClientHeight = 170
   ClientWidth = 431
-  FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnCancel: TButton
     Left = 331
     Height = 26

@@ -7,12 +7,11 @@ object frmTBXEdit: TfrmTBXEdit
   Caption = 'Terminology'
   ClientHeight = 142
   ClientWidth = 428
-  FormStyle = fsSystemStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.2.0.0'
   object btnAdd: TButton
     Left = 329
     Height = 23
@@ -20,8 +19,8 @@ object frmTBXEdit: TfrmTBXEdit
     Width = 91
     Caption = 'Add'
     Default = True
-    OnClick = btnAddClick
     TabOrder = 3
+    OnClick = btnAddClick
   end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
@@ -37,8 +36,8 @@ object frmTBXEdit: TfrmTBXEdit
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    OnClick = btnCloseClick
     TabOrder = 4
+    OnClick = btnCloseClick
   end
   object lblOriginal: TLabel
     AnchorSideTop.Control = edtOriginal

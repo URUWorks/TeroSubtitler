@@ -8,12 +8,11 @@ object frmConventions: TfrmConventions
   Caption = 'Conventions'
   ClientHeight = 596
   ClientWidth = 1000
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnClose: TButton
     Left = 901
     Height = 26

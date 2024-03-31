@@ -1434,9 +1434,9 @@ begin
   AboutMenu.Action := actAbout;
   AppMenu.Add(AboutMenu); {Add About as item in application menu}
 
-  SepMenu := TMenuItem.Create(Self);
-  SepMenu.Caption := '-';
-  AppMenu.Add(SepMenu); {Add - as item in application menu}
+  //SepMenu := TMenuItem.Create(Self);
+  //SepMenu.Caption := '-';
+  //AppMenu.Add(SepMenu); {Add - as item in application menu}
 
   AppUpdate := TMenuItem.Create(Self);
   AppUpdate.Action := actCheckForUpdates;
@@ -2031,12 +2031,12 @@ end;
 {$IFDEF DARWIN}
 procedure TfrmMain.DoSaveDialogTypeChange(Sender: TObject);
 begin
-  if Sender = NIL then Exit;
-  with TSaveDialog(Sender) do
-  begin
-    DefaultExt := GetDefaultExtFromFilter(FilterIndex, Filter);
-    FileName := ChangeFileExt(FileName, DefaultExt);
-  end;
+  if Sender <> NIL then
+    with TSaveDialog(Sender) do
+    begin
+      DefaultExt := GetDefaultExtFromFilter(FilterIndex, Filter);
+      FileName := ChangeFileExt(FileName, DefaultExt);
+    end;
 end;
 {$ENDIF}
 

@@ -7,13 +7,12 @@ object frmCompare: TfrmCompare
   Caption = 'Compare'
   ClientHeight = 481
   ClientWidth = 905
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lyoFile1: TUWLayout
     Left = 0
     Height = 439

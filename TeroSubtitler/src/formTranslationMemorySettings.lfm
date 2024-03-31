@@ -8,7 +8,6 @@ object frmTranslationMemorySettings: TfrmTranslationMemorySettings
   Caption = 'Translation memory settings'
   ClientHeight = 160
   ClientWidth = 523
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

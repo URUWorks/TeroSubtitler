@@ -8,12 +8,11 @@ object frmSpellCheck: TfrmSpellCheck
   Caption = 'Spell check'
   ClientHeight = 342
   ClientWidth = 466
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lblDictionary: TLabel
     Left = 8
     Height = 15

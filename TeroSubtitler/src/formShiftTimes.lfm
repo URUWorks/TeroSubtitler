@@ -8,12 +8,11 @@ object frmShiftTimes: TfrmShiftTimes
   Caption = 'Shift times'
   ClientHeight = 188
   ClientWidth = 293
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnClose: TButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom

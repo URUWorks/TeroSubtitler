@@ -8,12 +8,11 @@ object frmTimeExpander: TfrmTimeExpander
   Caption = 'Time expander/reducer'
   ClientHeight = 329
   ClientWidth = 283
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object cboMode: TComboBox
     Left = 8
     Height = 23

@@ -8,12 +8,11 @@ object frmDurationLimits: TfrmDurationLimits
   Caption = 'Duration limits'
   ClientHeight = 289
   ClientWidth = 315
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object edtSetMaxDuration: TEdit
     Left = 24
     Height = 23

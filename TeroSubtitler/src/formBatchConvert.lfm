@@ -8,12 +8,11 @@ object frmBatchConvert: TfrmBatchConvert
   Caption = 'Batch convert'
   ClientHeight = 449
   ClientWidth = 600
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object VST: TLazVirtualStringTree
     Left = 7
     Height = 208

@@ -8,12 +8,11 @@ object frmTranslate: TfrmTranslate
   Caption = 'Translate'
   ClientHeight = 258
   ClientWidth = 408
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object btnTranslate: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose

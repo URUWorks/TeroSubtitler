@@ -8,12 +8,11 @@ object frmCustomImageFormat: TfrmCustomImageFormat
   Caption = 'Custom image format'
   ClientHeight = 417
   ClientWidth = 723
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object cboScript: TComboBox
     Left = 8
     Height = 23

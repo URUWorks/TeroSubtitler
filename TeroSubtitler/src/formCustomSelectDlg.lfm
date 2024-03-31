@@ -7,11 +7,10 @@ object frmCustomSelectDlg: TfrmCustomSelectDlg
   BorderStyle = bsSingle
   ClientHeight = 95
   ClientWidth = 450
-  FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object lblMessage: TLabel
     Left = 8
     Height = 15

@@ -8,12 +8,11 @@ object frmAbout: TfrmAbout
   Caption = 'About'
   ClientHeight = 316
   ClientWidth = 380
-  FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '3.2.0.0'
   object imgLogo: TImage
     Left = 76
     Height = 33
