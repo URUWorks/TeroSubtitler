@@ -5245,7 +5245,7 @@ msgstr "Texto a voz"
 #: tfrmtts.chkboost.caption
 msgctxt "tfrmtts.chkboost.caption"
 msgid "Speaker boost"
-msgstr "Impulso del altavoz"
+msgstr "Refuerzo de voz"
 
 #: tfrmtts.lblfolder.caption
 msgid "Folder:"
@@ -5317,7 +5317,7 @@ msgstr "Música de fondo"
 #: tfrmvideodubbing.chkboost.caption
 msgctxt "tfrmvideodubbing.chkboost.caption"
 msgid "Speaker boost"
-msgstr "Impulso del altavoz"
+msgstr "Refuerzo de voz"
 
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
