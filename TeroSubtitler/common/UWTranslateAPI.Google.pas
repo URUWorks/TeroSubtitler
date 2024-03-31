@@ -181,8 +181,7 @@ const
 implementation
 
 const
-  GoogleTranslateURL = 'https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=rw&dt=rm&dt=ss&dt=t&dt=at&dt=qc&q=%s&sl=%s&tl=%s';
-
+  GoogleTranslateURL = 'https://translate.googleapis.com/translate_a/single?client=gtx&q=%s&sl=%s&tl=%s&dt=t&ie=UTF-8&oe=UTF-8';
 
 // -----------------------------------------------------------------------------
 
