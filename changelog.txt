@@ -1,5 +1,6 @@
 1.0.1.9 (x.x.2024)
 - fixed: Interface Italian - Bottom info set as English #298
+- fixed: Auto translate null value
 - fixed: Access violation in video dubbing without the API key
 - fixed: Initial volume value
 - fixed: Default encoding was not used when saving
