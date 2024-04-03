@@ -127,8 +127,9 @@ type
 { Helpers }
 
 function FormatToName(const AFormat: TUWSubtitleFormats; const ARemoveSpaces: Boolean = False): String;
+function NameToFormat(const FormatName: String; const ARemoveSpaces: Boolean = False): TUWSubtitleFormats;
 function IndexToName(const FormatIndex: ShortInt): String;
-function NameToIndex(const FormatName: String): ShortInt;
+function NameToIndex(const FormatName: String; const ARemoveSpaces: Boolean = False): ShortInt;
 function SubtitleEncoding(const Encoding: Integer): TEncoding;
 procedure AddFormatsToStrings(var AStrings: TStrings);
 
@@ -150,6 +151,13 @@ end;
 
 //------------------------------------------------------------------------------
 
+function NameToFormat(const FormatName: String; const ARemoveSpaces: Boolean = False): TUWSubtitleFormats;
+begin
+  Result := TUWSubtitleFormats(NameToIndex(FormatName, ARemoveSpaces));
+end;
+
+//------------------------------------------------------------------------------
+
 function IndexToName(const FormatIndex: ShortInt): String;
 begin
   Result := '';
@@ -159,14 +167,22 @@ end;
 
 //------------------------------------------------------------------------------
 
-function NameToIndex(const FormatName: String): ShortInt;
+function NameToIndex(const FormatName: String; const ARemoveSpaces: Boolean = False): ShortInt;
 var
   i: ShortInt;
+  s: String;
 begin
   Result := 0;
   for i := Low(TUWSubtitleFormatsName) to High(TUWSubtitleFormatsName) do
-    if LowerCase(FormatName) = AnsiLowerCase(TUWSubtitleFormatsName[i]) then
+  begin
+    s := FormatName.ToLower;
+
+    if ARemoveSpaces then
+      s := s.Replace(' ', '');
+
+    if s = AnsiLowerCase(TUWSubtitleFormatsName[i]) then
       Result := i;
+  end;
 end;
 
 //------------------------------------------------------------------------------
