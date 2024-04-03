@@ -105,7 +105,8 @@ uses
   UWSystem.Encoding, formCustomFileDlg, UWSystem.SysUtils, Forms, procMRU,
   UWSystem.StrUtils, procForms, procProjectFile, formCustomSelectDlg,
   procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils,
-  UWSubtitleAPI.Tags, formCustomSelectDlgWithPreview
+  UWSubtitleAPI.Tags, UWTranslateAPI.Google, formCustomSelectDlgWithPreview,
+  FileUtil
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -1375,20 +1376,135 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure CommandLineProcess;
+const
+  csPrefix  = '-';
+  csHelp = 'help';
+  csConvert = 'convert';
+  csTranslate = 'translate';
+
 var
-  i: Byte;
+  s : String;
+  fps : Single;
+  i, c : Integer;
+  Sub : TUWSubtitles;
+  sl : TStringList;
 begin
   // Command line parameters reading
   if ParamCount > 0 then
   begin
     // Subtitle file
     if FileExists(ParamStr(1)) then
-      LoadSubtitle(ParamStr(1));
+      LoadSubtitle(ParamStr(1))
+    else
+    begin // commands
+      Sub := TUWSubtitles.Create;
+      try
+        s := ParamStr(1).ToLower;
+        if (s = csPrefix+csHelp) then // -help
+        begin
+          WriteLn( 'Usage:' + LineEnding + LineEnding +
+            csPrefix+csConvert + ' inputfile outputfile format [fps]' + LineEnding +
+            csPrefix+csTranslate + ' inputfile outputfile srclang dstlang format [fps]' + LineEnding
+          );
+        end
+        else if (s = csPrefix+csConvert) then // -convert inputfile outputfile format [fps]
+        begin
+          if (ParamCount > 3) then
+          begin
+            if ParamCount = 5 then
+              fps := StrToSingle(ParamStr(5), Workspace.FPS.DefFPS)
+            else
+              fps := Workspace.FPS.DefFPS;
 
-    // Others params
-    for i := 1 to ParamCount do
-    begin
-      //ParamStr(i);
+            s := ExtractFileName(ParamStr(2));
+            if s.StartsWith('*') then
+            begin
+              sl := FindAllFiles(ExtractFileDir(ParamStr(2)), ExtractFileName(ParamStr(2)));
+              try
+                if sl.Count > 0 then
+                begin
+                  WriteLn('Convert files: ' + IntToStr(sl.Count));
+                  for i := 0 to sl.Count-1 do
+                  begin
+                    WriteLn(' i: ' + sl[i]);
+                    if Sub.LoadFromFile(sl[i], NIL, fps) then
+                    begin
+                      s := ConcatPaths([ParamStr(3), ChangeFileExt(ExtractFileName(sl[i]), '_'+ParamStr(4)) + '.x']);
+                      if Sub.SaveToFile(s, fps, TEncoding.UTF8, NameToFormat(ParamStr(4), True), smText, -1, -1, True) then
+                      begin
+                        //WriteLn(' o: ' + s);
+                        WriteLn(lngSuccess);
+                      end
+                      else
+                        WriteLn(lngFailed);
+                    end
+                    else
+                      WriteLn(lngFailed);
+                  end;
+                end;
+              finally
+                sl.Free;
+              end;
+            end
+            else if Sub.LoadFromFile(ParamStr(2), NIL, fps) then
+              Sub.SaveToFile(ParamStr(3), fps, TEncoding.UTF8, NameToFormat(ParamStr(4), True), smText);
+          end;
+        end
+        else if (s = csPrefix+csTranslate) then // -translate inputfile outputfile srclang dstlang format [fps]
+        begin
+          if (ParamCount > 5) then
+          begin
+            if ParamCount = 7 then
+              fps := StrToSingle(ParamStr(5), Workspace.FPS.DefFPS)
+            else
+              fps := Workspace.FPS.DefFPS;
+
+            s := ExtractFileName(ParamStr(2));
+            if s.StartsWith('*') then
+            begin
+              sl := FindAllFiles(ExtractFileDir(ParamStr(2)), ExtractFileName(ParamStr(2)));
+              try
+                if sl.Count > 0 then
+                begin
+                  WriteLn('Translate files: ' + IntToStr(sl.Count));
+                  for i := 0 to sl.Count-1 do
+                  begin
+                    WriteLn(' i: ' + sl[i]);
+                    if Sub.LoadFromFile(sl[i], NIL, fps) then
+                    begin
+                      for c := 0 to Sub.Count-1 do
+                        Sub.ItemPointer[c]^.Translation := GoogleTranslateText(Sub[c].Text, ParamStr(4), ParamStr(5));
+
+                      s := ConcatPaths([ParamStr(3), ChangeFileExt(ExtractFileName(sl[i]), '') + '_' + UpperCase(ParamStr(5)) + '.x']);
+                      if Sub.SaveToFile(s, fps, TEncoding.UTF8, NameToFormat(ParamStr(6), True), smTranslation, -1, -1, True) then
+                      begin
+                        //WriteLn(' o: ' + s);
+                        WriteLn(lngSuccess);
+                      end
+                      else
+                        WriteLn(lngFailed);
+                    end
+                    else
+                      WriteLn(lngFailed);
+                  end;
+                end;
+              finally
+                sl.Free;
+              end;
+            end
+            else if Sub.LoadFromFile(ParamStr(2), NIL, fps) then
+            begin
+              for i := 0 to Sub.Count-1 do
+                Sub.ItemPointer[i]^.Translation := GoogleTranslateText(Sub[i].Text, ParamStr(4), ParamStr(5));
+
+              Sub.SaveToFile(ParamStr(3), fps, TEncoding.UTF8, NameToFormat(ParamStr(6), True), smTranslation);
+            end;
+          end;
+        end;
+      finally
+        Sub.Free;
+        Application.Terminate;
+      end;
     end;
   end;
 end;
@@ -1418,19 +1534,22 @@ begin
           ShowErrorMessageDialog(lnglibMPVVersionError);
       end;
 
-    {$IFNDEF DARWIN}
+    //{$IFNDEF DARWIN}
     // check commandline
     CommandLineProcess;
-    {$ENDIF}
+    //{$ENDIF}
 
-    // Welcome form
-    if AppOptions.ShowWelcomeAtStartup and not frmMain.VST.Enabled then
-      ShowWelcome
-    {$IFDEF DARWIN}
-    else
-    {$ELSE};
-    {$ENDIF}
-    Application.ShowMainForm := True;
+    if not Application.Terminated then
+    begin
+      // Welcome form
+      if AppOptions.ShowWelcomeAtStartup and not frmMain.VST.Enabled then
+        ShowWelcome
+      {$IFDEF DARWIN}
+      else
+      {$ELSE};
+      {$ENDIF}
+      Application.ShowMainForm := True;
+    end;
   end;
 end;
 
