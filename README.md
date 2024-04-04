@@ -4,6 +4,7 @@
 [![TS downloads](https://img.shields.io/github/downloads/URUWorks/TeroSubtitler/total.svg)](https://github.com/URUWorks/TeroSubtitler/releases)
 [![discord](https://img.shields.io/badge/Discord-blue)](https://discord.gg/EqzXEa8pHK)
 [![ko-fi](https://img.shields.io/badge/Ko--fi-F16061?logo=ko-fi&logoColor=white)](https://ko-fi.com/uruworks)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)]([https://www.paypal.com/donate?hosted_button_id=JF5BEQE3YQGH2](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=uruworks@gmail.com&lc=US&item_name=Donate+to+URUWorks+Tero+Subtitler&no_note=0&cn=&curency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted))
 
 Tero Subtitler is an open source, cross-platform, and free subtitle editing software.
 
