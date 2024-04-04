@@ -8,6 +8,7 @@
 - improved: Video dubbing
 - improved: Command line
 - updated: Faster-Whisper
+- added: Faster-Whisper distilled models
 
 1.0.1.8 (28.3.2024)
 - fixed: Multi-line text pasted from external source appears on list with gap in-between #288
