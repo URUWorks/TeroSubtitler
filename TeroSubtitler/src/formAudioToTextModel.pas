@@ -101,7 +101,11 @@ const
     (Name: 'medium.en'; Size: '1.53 GB'; URL: 'https://huggingface.co/Systran/faster-whisper-medium.en/resolve/main/'),
     (Name: 'large-v1'; Size: '3.1 GB'; URL: 'https://huggingface.co/Systran/faster-whisper-large-v1/resolve/main/'),
     (Name: 'large-v2'; Size: '3.1 GB'; URL: 'https://huggingface.co/Systran/faster-whisper-large-v2/resolve/main/'),
-    (Name: 'large-v3'; Size: '3.1 GB'; URL: 'https://huggingface.co/Systran/faster-whisper-large-v3/resolve/main/')
+    (Name: 'large-v3'; Size: '3.1 GB'; URL: 'https://huggingface.co/Systran/faster-whisper-large-v3/resolve/main/'),
+    (Name: 'distil-small.en'; Size: '334 MB'; URL: 'https://huggingface.co/Systran/faster-distil-whisper-small.en/resolve/main/'),
+    (Name: 'distil-medium.en'; Size: '789 MB'; URL: 'https://huggingface.co/Systran/faster-distil-whisper-medium.en/resolve/main/'),
+    (Name: 'distil-large-v2'; Size: '1.51 GB'; URL: 'https://huggingface.co/Systran/faster-distil-whisper-large-v2/resolve/main/'),
+    (Name: 'distil-large-v3'; Size: '1.51 GB'; URL: 'https://huggingface.co/Systran/faster-distil-whisper-large-v3/resolve/main/')
   );
 
   FasterModelFiles: array[0..5] of String = ('config.json', 'model.bin', 'preprocessor_config.json', 'tokenizer.json', 'vocabulary.json', 'vocabulary.txt');
