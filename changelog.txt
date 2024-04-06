@@ -1,4 +1,4 @@
-1.0.1.9 (x.x.2024)
+1.0.1.9 (6.4.2024)
 - fixed: Interface Italian - Bottom info set as English #298
 - fixed: Auto translate null value
 - fixed: Access violation in video dubbing without the API key
@@ -6,7 +6,7 @@
 - fixed: Default encoding was not used when saving
 - fixed: Entry range check [SubtitleAPI]
 - improved: Video dubbing
-- improved: Command line
+- improved: [Windows] Command line
 - updated: Faster-Whisper
 - added: Faster-Whisper distilled models
 
