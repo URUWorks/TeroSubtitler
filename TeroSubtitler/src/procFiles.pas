@@ -1534,10 +1534,10 @@ begin
           ShowErrorMessageDialog(lnglibMPVVersionError);
       end;
 
-    //{$IFNDEF DARWIN}
+    {$IFNDEF DARWIN}
     // check commandline
     CommandLineProcess;
-    //{$ENDIF}
+    {$ENDIF}
 
     if not Application.Terminated then
     begin
