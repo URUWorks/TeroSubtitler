@@ -25,9 +25,6 @@ uses
   Classes, UWSubtitleAPI, laz2_DOM, laz2_XMLRead, laz2_XMLWrite, SysUtils,
   StrUtils;
 
-procedure SetWord(var ADest: array of Byte; const ASource: Integer);
-procedure SetDWord(var ADest: array of Byte; const ASource: Integer);
-
 procedure StringsToXML(var XmlDoc: TXMLDocument; const StringList: TUWStringList);
 procedure XMLToStrings(const XmlDoc: TXMLDocument; const StringList: TUWStringList; const ReplaceEntities: Boolean = True);
 
@@ -50,24 +47,6 @@ implementation
 
 uses
   UWSubtitleAPI.Tags, UWSystem.StrUtils, RegExpr;
-
-// -----------------------------------------------------------------------------
-
-procedure SetWord(var ADest: array of Byte; const ASource: Integer);
-begin
-  ADest[0] := Byte(ASource shr 8);
-  ADest[1] := Byte(ASource);
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure SetDWord(var ADest: array of Byte; const ASource: Integer);
-begin
-  ADest[0] := Byte(ASource shr 24);
-  ADest[1] := Byte(ASource shr 16);
-  ADest[2] := Byte(ASource shr 8);
-  ADest[3] := Byte(ASource);
-end;
 
 // -----------------------------------------------------------------------------
 
