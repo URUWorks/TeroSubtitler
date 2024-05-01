@@ -235,7 +235,9 @@ begin
         WriteSUPDisplaySet(fs, n,
           Subtitles[i].InitialTime, Subtitles[i].FinalTime,
           buf.Bitmap, spnWidth.Value, spnHeight.Value,
-          Rect(spnLeft.Value, spnTop.Value, spnRight.Value, spnBottom.Value));
+          Rect(spnLeft.Value, spnTop.Value, spnRight.Value, spnBottom.Value),
+          HAlignToAlignment(Subtitles[i].Align),
+          VAlignToAlignment(Subtitles[i].VAlign));
         Inc(n, 2);
 
         lblStatus.Caption := Format(StatusString, [i, Subtitles.Count]);

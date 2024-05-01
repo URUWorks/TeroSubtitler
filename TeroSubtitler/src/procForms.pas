@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2024 URUWorks, uruworks@gmail.com.
  *}
 
 unit procForms;
@@ -95,7 +95,8 @@ uses
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
   formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
   formRoundTime, formStatistics, formGenerateBlankVideo, formStreamExtractor,
-  formPauses, formTTS, formVideoDubbing, LCLTranslator, procLocalize;
+  formPauses, formTTS, formVideoDubbing, formImportSUP, LCLTranslator,
+  procLocalize;
 
 // -----------------------------------------------------------------------------
 
@@ -682,7 +683,13 @@ end;
 
 procedure ShowImportSUP;
 begin
-  //
+  if frmImportSUP = NIL then
+  begin
+    frmImportSUP := TfrmImportSUP.Create(Application);
+    ShowForm(frmImportSUP);
+  end
+  else
+    frmImportSUP.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

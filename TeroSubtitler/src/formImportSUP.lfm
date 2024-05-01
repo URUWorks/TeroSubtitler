@@ -1,0 +1,99 @@
+object frmImportSUP: TfrmImportSUP
+  Left = 256
+  Height = 459
+  Top = 127
+  Width = 650
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Import Blu-ray SUP'
+  ClientHeight = 459
+  ClientWidth = 650
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '3.2.0.0'
+  object btnImport: TButton
+    AnchorSideRight.Control = btnClose
+    AnchorSideBottom.Control = btnClose
+    AnchorSideBottom.Side = asrBottom
+    Left = 455
+    Height = 26
+    Top = 425
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 5
+    Caption = 'Import'
+    Default = True
+    TabOrder = 1
+    OnClick = btnImportClick
+  end
+  object btnClose: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 551
+    Height = 26
+    Top = 425
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Cancel = True
+    Caption = 'Close'
+    TabOrder = 2
+    OnClick = btnCloseClick
+  end
+  object VST: TLazVirtualStringTree
+    Left = 8
+    Height = 240
+    Top = 8
+    Width = 634
+    Anchors = [akTop, akLeft, akRight]
+    Header.AutoSizeIndex = 0
+    Header.Columns = <>
+    Header.MainColumn = -1
+    Header.Options = [hoColumnResize, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+    TabOrder = 0
+    TreeOptions.AutoOptions = [toAutoTristateTracking]
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toWheelPanning, toFullRowDrag]
+    TreeOptions.PaintOptions = [toHideFocusRect, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+    TreeOptions.StringOptions = []
+    OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
+    OnDblClick = VSTDblClick
+    OnDrawText = VSTDrawText
+    OnFocusChanged = VSTFocusChanged
+    OnGetText = VSTGetText
+    OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
+    OnResize = VSTResize
+  end
+  object pnlSUP: TPanel
+    Left = 8
+    Height = 145
+    Top = 255
+    Width = 634
+    Anchors = [akTop, akLeft, akRight]
+    BevelOuter = bvNone
+    BorderStyle = bsSingle
+    ClientHeight = 141
+    ClientWidth = 630
+    Color = clScrollBar
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 3
+    object imgSUP: TImage
+      Left = 0
+      Height = 141
+      Top = 0
+      Width = 630
+      AntialiasingMode = amOn
+      Align = alClient
+      Center = True
+      Proportional = True
+      Stretch = True
+      Transparent = True
+    end
+  end
+end
