@@ -2646,6 +2646,22 @@ msgstr "转到"
 msgid "Time:"
 msgstr "时间："
 
+#: tfrmimportsup.btnclose.caption
+#, fuzzy
+msgctxt "tfrmimportsup.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmimportsup.btnimport.caption
+#, fuzzy
+msgctxt "tfrmimportsup.btnimport.caption"
+msgid "Import"
+msgstr "导入"
+
+#: tfrmimportsup.caption
+msgid "Import Blu-ray SUP"
+msgstr ""
+
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
 msgid "About..."
@@ -4051,6 +4067,7 @@ msgid "Export"
 msgstr "导出"
 
 #: tfrmmain.mnufileimport.caption
+msgctxt "tfrmmain.mnufileimport.caption"
 msgid "Import"
 msgstr "导入"
 

@@ -2644,6 +2644,20 @@ msgstr "Ir al"
 msgid "Time:"
 msgstr "Tiempo:"
 
+#: tfrmimportsup.btnclose.caption
+msgctxt "tfrmimportsup.btnclose.caption"
+msgid "Close"
+msgstr "Cerrar"
+
+#: tfrmimportsup.btnimport.caption
+msgctxt "tfrmimportsup.btnimport.caption"
+msgid "Import"
+msgstr "Importar"
+
+#: tfrmimportsup.caption
+msgid "Import Blu-ray SUP"
+msgstr "Importar Blu-ray SUP"
+
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
 msgid "About..."
@@ -2976,7 +2990,6 @@ msgid "Subtitles..."
 msgstr "Subtítulos..."
 
 #: tfrmmain.actimportsup.caption
-#, fuzzy
 msgctxt "tfrmmain.actimportsup.caption"
 msgid "Blu-ray SUP..."
 msgstr "Blu-ray SUP..."
@@ -4041,6 +4054,7 @@ msgid "Export"
 msgstr "Exportar"
 
 #: tfrmmain.mnufileimport.caption
+msgctxt "tfrmmain.mnufileimport.caption"
 msgid "Import"
 msgstr "Importar"
 
@@ -5525,4 +5539,3 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-

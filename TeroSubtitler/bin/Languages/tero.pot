@@ -2621,6 +2621,20 @@ msgstr ""
 msgid "Time:"
 msgstr ""
 
+#: tfrmimportsup.btnclose.caption
+msgctxt "tfrmimportsup.btnclose.caption"
+msgid "Close"
+msgstr ""
+
+#: tfrmimportsup.btnimport.caption
+msgctxt "tfrmimportsup.btnimport.caption"
+msgid "Import"
+msgstr ""
+
+#: tfrmimportsup.caption
+msgid "Import Blu-ray SUP"
+msgstr ""
+
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
 msgid "About..."
@@ -4017,6 +4031,7 @@ msgid "Export"
 msgstr ""
 
 #: tfrmmain.mnufileimport.caption
+msgctxt "tfrmmain.mnufileimport.caption"
 msgid "Import"
 msgstr ""
 
