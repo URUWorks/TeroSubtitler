@@ -283,6 +283,8 @@ type
   procedure ClearSubtitleItem(var Item: TUWSubtitleItem);
   function GetColorCPS(const CPS: Double; const Default: Cardinal): Cardinal;
   function GetSubtitleFileFormat(AFileName: String): TUWSubtitleFormats;
+  function HAlignToAlignment(const HAlign: TSubtitleHAlign): TAlignment;
+  function VAlignToAlignment(const VAlign: TSubtitleVAlign): TVerticalAlignment;
 
 // -----------------------------------------------------------------------------
 
@@ -1975,6 +1977,30 @@ begin
       Result := Sub.Format;
   finally
     Sub.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function HAlignToAlignment(const HAlign: TSubtitleHAlign): TAlignment;
+begin
+  case HAlign of
+    shaRight  : Result := taRightJustify;
+    shaCenter : Result := taCenter;
+  else
+    Result := taLeftJustify;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function VAlignToAlignment(const VAlign: TSubtitleVAlign): TVerticalAlignment;
+begin
+  case VAlign of
+    svaTop    : Result := taAlignTop;
+    svaCenter : Result := taVerticalCenter;
+  else
+    Result := taAlignBottom;
   end;
 end;
 
