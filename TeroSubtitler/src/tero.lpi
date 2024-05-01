@@ -249,6 +249,9 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="UW_BlurayPGSParser"/>
+      </Item>
+      <Item>
         <PackageName Value="atsynedit_package"/>
       </Item>
       <Item>
@@ -724,10 +727,6 @@
         <ComponentName Value="frmExportSUP"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit>
-      <Unit>
-        <Filename Value="procSUP.pas"/>
-        <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="formGenerateVideo.pas"/>

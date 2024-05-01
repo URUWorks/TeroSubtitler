@@ -73,7 +73,8 @@ var
 implementation
 
 uses
-  procWorkspace, procTypes, UWSystem.Encoding, procCustomFormat, procSUP;
+  procWorkspace, procTypes, UWSystem.Encoding, procCustomFormat,
+  BlurayPGSParser;
 
 {$R *.lfm}
 
@@ -231,7 +232,10 @@ begin
       for i := 0 to Subtitles.Count-1 do
       begin
         buf.DrawBuffer(Subtitles[i].Text);
-        WriteSUPFrame(fs, Subtitles, i, n, buf.Bitmap, spnWidth.Value, spnHeight.Value, Rect(spnLeft.Value, spnTop.Value, spnRight.Value, spnBottom.Value));
+        WriteSUPDisplaySet(fs, n,
+          Subtitles[i].InitialTime, Subtitles[i].FinalTime,
+          buf.Bitmap, spnWidth.Value, spnHeight.Value,
+          Rect(spnLeft.Value, spnTop.Value, spnRight.Value, spnBottom.Value));
         Inc(n, 2);
 
         lblStatus.Caption := Format(StatusString, [i, Subtitles.Count]);
