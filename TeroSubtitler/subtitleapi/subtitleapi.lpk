@@ -45,10 +45,6 @@
         <Filename Value="UWSubtitleAPI.CustomFormat.pas"/>
         <UnitName Value="UWSubtitleAPI.CustomFormat"/>
       </Item>
-      <Item>
-        <Filename Value="UWSubtitleAPI.SUP.pas"/>
-        <UnitName Value="UWSubtitleAPI.SUP"/>
-      </Item>
     </Files>
     <RequiredPkgs>
       <Item>
