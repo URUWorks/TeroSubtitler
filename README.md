@@ -58,6 +58,7 @@ for video dubbing.
 
 ### Internal packages required to compile
 
+- [UW Blu-ray PGS Parser](https://github.com/URUWorks/UW_BlurayPGSParser)
 - [UW Common units](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/common)
 - [UW Subtitle API](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/subtitleapi)
 - [UW Tero controls](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/controls)
