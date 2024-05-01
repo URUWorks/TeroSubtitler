@@ -2848,6 +2848,7 @@ msgid "Marked subtitles..."
 msgstr "Sottotitoli contrassegnati..."
 
 #: tfrmmain.actexportsup.caption
+msgctxt "tfrmmain.actexportsup.caption"
 msgid "Blu-ray SUP..."
 msgstr "Formato .sup Blu-ray..."
 
@@ -2980,6 +2981,12 @@ msgstr "Aiuto"
 #: tfrmmain.actimportsubtitles.caption
 msgid "Subtitles..."
 msgstr "Sottotitoli..."
+
+#: tfrmmain.actimportsup.caption
+#, fuzzy
+msgctxt "tfrmmain.actimportsup.caption"
+msgid "Blu-ray SUP..."
+msgstr "Formato .sup Blu-ray..."
 
 #: tfrmmain.actinsertcurrenttime.caption
 msgid "Insert current time"
@@ -5524,3 +5531,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+

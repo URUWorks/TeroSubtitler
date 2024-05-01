@@ -2850,6 +2850,7 @@ msgid "Marked subtitles..."
 msgstr "Legendas marcadas..."
 
 #: tfrmmain.actexportsup.caption
+msgctxt "tfrmmain.actexportsup.caption"
 msgid "Blu-ray SUP..."
 msgstr "Blu-ray SUP..."
 
@@ -2982,6 +2983,12 @@ msgstr "Ajuda"
 #: tfrmmain.actimportsubtitles.caption
 msgid "Subtitles..."
 msgstr "Legendas..."
+
+#: tfrmmain.actimportsup.caption
+#, fuzzy
+msgctxt "tfrmmain.actimportsup.caption"
+msgid "Blu-ray SUP..."
+msgstr "Blu-ray SUP..."
 
 #: tfrmmain.actinsertcurrenttime.caption
 msgid "Insert current time"

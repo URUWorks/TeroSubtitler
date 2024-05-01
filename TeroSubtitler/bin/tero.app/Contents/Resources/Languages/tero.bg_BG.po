@@ -2845,6 +2845,7 @@ msgid "Marked subtitles..."
 msgstr "Отбелязани на надписи..."
 
 #: tfrmmain.actexportsup.caption
+msgctxt "tfrmmain.actexportsup.caption"
 msgid "Blu-ray SUP..."
 msgstr ""
 
@@ -2977,6 +2978,11 @@ msgstr "Помощ"
 #: tfrmmain.actimportsubtitles.caption
 msgid "Subtitles..."
 msgstr "Надписи..."
+
+#: tfrmmain.actimportsup.caption
+msgctxt "tfrmmain.actimportsup.caption"
+msgid "Blu-ray SUP..."
+msgstr ""
 
 #: tfrmmain.actinsertcurrenttime.caption
 msgid "Insert current time"
