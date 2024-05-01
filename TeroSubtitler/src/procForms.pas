@@ -64,6 +64,7 @@ procedure ShowStatistics;
 procedure ShowCustomTextFormat;
 procedure ShowCustomImageFormat;
 procedure ShowExportSUP;
+procedure ShowImportSUP;
 procedure ShowGenerateVideo;
 procedure ShowGenerateBlankVideo;
 procedure ShowStreamExtractor;
@@ -675,6 +676,13 @@ begin
   end
   else
     frmExportSUP.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowImportSUP;
+begin
+  //
 end;
 
 // -----------------------------------------------------------------------------

@@ -1780,6 +1780,9 @@ object frmMain: TfrmMain
         object MenuItem126: TMenuItem
           Action = actLoadTranscription
         end
+        object MenuItem290: TMenuItem
+          Action = actImportSUP
+        end
       end
       object mnuFileExport: TMenuItem
         Caption = 'Export'
@@ -4311,11 +4314,6 @@ object frmMain: TfrmMain
       Caption = 'Blu-ray SUP...'
       OnExecute = actExportSUPExecute
     end
-    object actCompare: TAction
-      Category = 'File'
-      Caption = 'Compare...'
-      OnExecute = actCompareExecute
-    end
     object actCopyVideoPosToClipboard: TAction
       Category = 'Edit'
       Caption = 'Copy video position to clipboard'
@@ -4535,23 +4533,6 @@ object frmMain: TfrmMain
       Category = 'Edit'
       Caption = 'Format properties...'
       OnExecute = actFormatPropertiesExecute
-    end
-    object actStatistics: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Statistics...'
-      OnExecute = actStatisticsExecute
-    end
-    object actCloseSubtitle: TAction
-      Tag = 1
-      Category = 'File'
-      Caption = 'Close subtitles'
-      OnExecute = actCloseSubtitleExecute
-    end
-    object actCloseApp: TAction
-      Category = 'File'
-      Caption = 'Close'
-      OnExecute = actCloseAppExecute
     end
     object actMediaSplitEntryAtCursorPosition: TAction
       Tag = 8
@@ -5056,6 +5037,33 @@ object frmMain: TfrmMain
       AutoCheck = True
       Caption = 'Volume'
       OnExecute = actShowVideoToolbarVolumeExecute
+    end
+    object actImportSUP: TAction
+      Category = 'File'
+      Caption = 'Blu-ray SUP...'
+      OnExecute = actImportSUPExecute
+    end
+    object actCompare: TAction
+      Category = 'File'
+      Caption = 'Compare...'
+      OnExecute = actCompareExecute
+    end
+    object actStatistics: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Statistics...'
+      OnExecute = actStatisticsExecute
+    end
+    object actCloseSubtitle: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Close subtitles'
+      OnExecute = actCloseSubtitleExecute
+    end
+    object actCloseApp: TAction
+      Category = 'File'
+      Caption = 'Close'
+      OnExecute = actCloseAppExecute
     end
   end
   object popDropInsert: TPopupMenu

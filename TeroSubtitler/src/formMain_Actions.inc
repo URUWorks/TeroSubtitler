@@ -1895,6 +1895,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actImportSUPExecute(Sender: TObject);
+begin
+  ShowImportSUP;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actActorExecute(Sender: TObject);
 begin
   ShowActors;
