@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 29.03.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 02.05.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -2652,20 +2652,18 @@ msgid "Time:"
 msgstr "Tempo:"
 
 #: tfrmimportsup.btnclose.caption
-#, fuzzy
 msgctxt "tfrmimportsup.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmimportsup.btnimport.caption
-#, fuzzy
 msgctxt "tfrmimportsup.btnimport.caption"
 msgid "Import"
 msgstr "Importa"
 
 #: tfrmimportsup.caption
 msgid "Import Blu-ray SUP"
-msgstr ""
+msgstr "Importa .sup Blu-ray"
 
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
@@ -2999,7 +2997,6 @@ msgid "Subtitles..."
 msgstr "Sottotitoli..."
 
 #: tfrmmain.actimportsup.caption
-#, fuzzy
 msgctxt "tfrmmain.actimportsup.caption"
 msgid "Blu-ray SUP..."
 msgstr "Formato .sup Blu-ray..."
