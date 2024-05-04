@@ -52,6 +52,10 @@ Auto-translation API.
 
 for video dubbing.
 
+### [Tesseract](https://github.com/tesseract-ocr/tesseract/)
+
+Open Source OCR Engine.
+
 ## Compiling
 
 [Lazarus IDE](https://www.lazarus-ide.org/).
