@@ -2654,9 +2654,22 @@ msgctxt "tfrmimportsup.btnimport.caption"
 msgid "Import"
 msgstr "Importar"
 
+#: tfrmimportsup.btnlanguage.caption
+msgctxt "tfrmimportsup.btnlanguage.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmimportsup.btnocr.caption
+msgid "OCR"
+msgstr "OCR"
+
 #: tfrmimportsup.caption
 msgid "Import Blu-ray SUP"
 msgstr "Importar Blu-ray SUP"
+
+#: tfrmimportsup.lbllanguage.caption
+msgid "Language:"
+msgstr "Idioma:"
 
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
@@ -4447,6 +4460,11 @@ msgstr "Aplicar"
 msgid "Save as..."
 msgstr "Guardar..."
 
+#: tfrmsettings.btntesseract.caption
+msgctxt "tfrmsettings.btntesseract.caption"
+msgid "..."
+msgstr "..."
+
 #: tfrmsettings.btnwhispercpp.caption
 msgctxt "tfrmsettings.btnwhispercpp.caption"
 msgid "..."
@@ -4701,6 +4719,10 @@ msgstr "Pausa mín. entre subtítulos"
 msgctxt "tfrmsettings.lblsubtitles.caption"
 msgid "Subtitles"
 msgstr "Subtítulos"
+
+#: tfrmsettings.lbltesseract.caption
+msgid "Tesseract"
+msgstr "Tesseract"
 
 #: tfrmsettings.lbltextboxfontsize.caption
 msgid "Text box font size"
