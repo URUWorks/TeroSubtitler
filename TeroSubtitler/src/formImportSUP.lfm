@@ -1,31 +1,32 @@
 object frmImportSUP: TfrmImportSUP
   Left = 256
-  Height = 459
+  Height = 425
   Top = 127
-  Width = 650
+  Width = 496
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Import Blu-ray SUP'
-  ClientHeight = 459
-  ClientWidth = 650
+  ClientHeight = 425
+  ClientWidth = 496
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '3.2.0.0'
   object btnImport: TButton
+    AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = btnClose
     AnchorSideBottom.Control = btnClose
     AnchorSideBottom.Side = asrBottom
-    Left = 455
+    Left = 301
     Height = 26
-    Top = 425
+    Top = 391
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 5
     Caption = 'Import'
     Default = True
-    TabOrder = 1
+    TabOrder = 5
     OnClick = btnImportClick
   end
   object btnClose: TButton
@@ -33,24 +34,29 @@ object frmImportSUP: TfrmImportSUP
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 551
+    Left = 397
     Height = 26
-    Top = 425
+    Top = 391
     Width = 91
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 8
     BorderSpacing.Bottom = 8
     Cancel = True
     Caption = 'Close'
-    TabOrder = 2
+    TabOrder = 6
     OnClick = btnCloseClick
   end
   object VST: TLazVirtualStringTree
+    AnchorSideTop.Control = pnlSUP
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = btnClose
     Left = 8
-    Height = 240
-    Top = 8
-    Width = 634
-    Anchors = [akTop, akLeft, akRight]
+    Height = 203
+    Top = 183
+    Width = 480
+    Anchors = [akTop, akLeft, akBottom]
+    BorderSpacing.Top = 5
+    BorderSpacing.Bottom = 5
     Header.AutoSizeIndex = 0
     Header.Columns = <>
     Header.MainColumn = -1
@@ -70,30 +76,86 @@ object frmImportSUP: TfrmImportSUP
     OnResize = VSTResize
   end
   object pnlSUP: TPanel
+    AnchorSideTop.Control = cboLanguage
+    AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 145
-    Top = 255
-    Width = 634
-    Anchors = [akTop, akLeft, akRight]
+    Top = 33
+    Width = 480
+    BorderSpacing.Top = 5
     BevelOuter = bvNone
-    BorderStyle = bsSingle
-    ClientHeight = 141
-    ClientWidth = 630
+    ClientHeight = 145
+    ClientWidth = 480
     Color = clScrollBar
     ParentBackground = False
     ParentColor = False
     TabOrder = 3
     object imgSUP: TImage
       Left = 0
-      Height = 141
+      Height = 145
       Top = 0
-      Width = 630
-      AntialiasingMode = amOn
+      Width = 480
       Align = alClient
       Center = True
       Proportional = True
       Stretch = True
       Transparent = True
     end
+  end
+  object lblLanguage: TLabel
+    AnchorSideTop.Control = cboLanguage
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 9
+    Width = 55
+    Caption = 'Language:'
+    ParentColor = False
+  end
+  object cboLanguage: TComboBox
+    AnchorSideLeft.Control = lblLanguage
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = btnLanguage
+    Left = 68
+    Height = 23
+    Top = 5
+    Width = 367
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 5
+    BorderSpacing.Top = 5
+    BorderSpacing.Right = 5
+    ItemHeight = 15
+    ReadOnly = True
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object btnLanguage: TButton
+    AnchorSideTop.Control = cboLanguage
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = btnClose
+    AnchorSideRight.Side = asrBottom
+    Left = 440
+    Height = 23
+    Top = 5
+    Width = 48
+    Anchors = [akTop, akRight]
+    Caption = '...'
+    TabOrder = 2
+  end
+  object btnOCR: TButton
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = btnImport
+    AnchorSideBottom.Control = btnClose
+    AnchorSideBottom.Side = asrBottom
+    Left = 205
+    Height = 26
+    Top = 391
+    Width = 91
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 5
+    Caption = 'OCR'
+    TabOrder = 4
+    OnClick = btnImportClick
   end
 end

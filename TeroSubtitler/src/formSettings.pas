@@ -43,6 +43,7 @@ type
     btnYTDLP: TButton;
     btnShortCutApply: TButton;
     btnShortCutSave: TButton;
+    btnTesseract: TButton;
     cbnWaveColor: TColorButton;
     cbnWaveEntry: TColorButton;
     cboDefaultFileFormat: TComboBox;
@@ -84,6 +85,7 @@ type
     edtWhisperCPP: TEdit;
     edtFasterWhisper: TEdit;
     edtYTDLP: TEdit;
+    edtTesseract: TEdit;
     imlFileTypes: TImageList;
     lblAdditionalMPVOptions: TLabel;
     lblListFontSize: TLabel;
@@ -111,6 +113,7 @@ type
     lblSeekTime: TLabel;
     lblFrameStep: TLabel;
     lblWaveform: TLabel;
+    lblTesseract: TLabel;
     lstMPVOptions: TListBox;
     lyoFileTypeAssociations: TUWLayout;
     spnTextBoxFontSize: TSpinEdit;
@@ -184,6 +187,7 @@ type
     procedure btnSceneDetectClick(Sender: TObject);
     procedure btnShortCutApplyClick(Sender: TObject);
     procedure btnShortCutSaveClick(Sender: TObject);
+    procedure btnTesseractClick(Sender: TObject);
     procedure btnWhisperCPPClick(Sender: TObject);
     procedure btnYTDLPClick(Sender: TObject);
     procedure cboProfileSelect(Sender: TObject);
@@ -197,6 +201,7 @@ type
     procedure lblFasterWhisperClick(Sender: TObject);
     procedure lblFFMPEGClick(Sender: TObject);
     procedure lblSceneDetectClick(Sender: TObject);
+    procedure lblTesseractClick(Sender: TObject);
     procedure lblWhisperCPPClick(Sender: TObject);
     procedure lblYTDLPClick(Sender: TObject);
     procedure lstShortcutsSelectionChange(Sender: TObject; User: boolean);
@@ -378,6 +383,7 @@ begin
   edtWhisperCPP.Text := Tools.WhisperCPP;
   edtFasterWhisper.Text := Tools.FasterWhisper;
   edtYTDLP.Text := Tools.YTDLP;
+  edtTesseract.Text := Tools.Tesseract;
   edtAPI_TTS.Text := Tools.API_KEY_TTS;
 
   cboTimeCodeMode.ItemIndex := Integer(Workspace.WorkMode);
@@ -502,6 +508,7 @@ begin
   Tools.WhisperCPP := edtWhisperCPP.Text;
   Tools.FasterWhisper := edtFasterWhisper.Text;
   Tools.YTDLP := edtYTDLP.Text;
+  Tools.Tesseract := edtTesseract.Text;
   Tools.API_KEY_TTS := edtAPI_TTS.Text;
 
   if Workspace.WorkMode <> TWorkMode(cboTimeCodeMode.ItemIndex) then
@@ -622,6 +629,13 @@ end;
 procedure TfrmSettings.btnYTDLPClick(Sender: TObject);
 begin
   edtYTDLP.Text := GetFileFromOpenDialog(edtYTDLP.Text);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.btnTesseractClick(Sender: TObject);
+begin
+  edtTesseract.Text := GetFileFromOpenDialog(edtTesseract.Text);
 end;
 
 // -----------------------------------------------------------------------------
@@ -823,6 +837,13 @@ end;
 procedure TfrmSettings.lblYTDLPClick(Sender: TObject);
 begin
   OpenURL('https://github.com/yt-dlp/yt-dlp');
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.lblTesseractClick(Sender: TObject);
+begin
+  OpenURL('https://github.com/tesseract-ocr/tesseract');
 end;
 
 // -----------------------------------------------------------------------------

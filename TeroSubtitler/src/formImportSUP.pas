@@ -31,9 +31,13 @@ type
   { TfrmImportSUP }
 
   TfrmImportSUP = class(TForm)
+    btnOCR: TButton;
+    btnLanguage: TButton;
     btnImport: TButton;
     btnClose: TButton;
+    cboLanguage: TComboBox;
     imgSUP: TImage;
+    lblLanguage: TLabel;
     pnlSUP: TPanel;
     VST: TLazVirtualStringTree;
     procedure btnCloseClick(Sender: TObject);
@@ -80,17 +84,14 @@ uses
 // -----------------------------------------------------------------------------
 
 procedure TfrmImportSUP.FormCreate(Sender: TObject);
-//var
-//  TextHeight: Integer;
 begin
-  VSTAddColumn(VST, lngIndex, 55);
+  VSTAddColumn(VST, lngIndex, 50);
   VSTAddColumn(VST, lnghTimes, 90);
-  //VSTAddColumn(VST, lnghDuration, 60);
-  VSTAddColumn(VST, lnghText, 200, taLeftJustify);
+  VSTAddColumn(VST, lnghDuration, 70);
+  VSTAddColumn(VST, lnghText, 100, taLeftJustify);
 
-  //TextHeight := VST.Canvas.Font.GetTextHeight('W');
-  //VST.DefaultNodeHeight := (TextHeight*2);
-  //VST.Header.Height     := TextHeight+4;
+  VST.DefaultNodeHeight := VST.Canvas.Font.GetTextHeight('W')*3;
+  VST.UpdateRanges;
 
   FList := TBlurayPGSParser.Create;
 
@@ -104,6 +105,8 @@ begin
 
   VST.RootNodeCount := FList.DisplaySets.Count;
   btnImport.Enabled := VST.RootNodeCount > 0;
+
+  btnOCR.Enabled := FileExists(Tools.Tesseract);
 
   if btnImport.Enabled then
     VSTSelectNode(VST, 0, True, True);
@@ -173,8 +176,42 @@ end;
 procedure TfrmImportSUP.VSTDrawText(Sender: TBaseVirtualTree;
   TargetCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex;
   const CellText: String; const CellRect: TRect; var DefaultDraw: Boolean);
+var
+  TS : TTextStyle;
+  it, ft: Integer;
 begin
-  DefaultDraw := True;
+  DefaultDraw := False;
+  TargetCanvas.Brush.Style := bsClear;
+
+  if vsSelected in Node^.States then
+    TargetCanvas.Font.Color := ColorThemeInstance.Colors.HighlightText
+  else
+    TargetCanvas.Font.Color := ColorThemeInstance.Colors.Text;
+
+  FillByte(TS, SizeOf(TTextStyle), 0);
+  TS.EndEllipsis := True;
+  TS.RightToLeft := Application.IsRightToLeft or Subtitles.IsRightToLeft; // is correct?
+  TS.Layout := tlTop;
+
+  if FList.DisplaySets.Count > 0 then
+  begin
+    case Column of
+      0: begin
+           TS.Alignment := taCenter;
+           TargetCanvas.TextRect(CellRect, CellRect.Left, CellRect.Top, '#' + (Node^.Index+1).ToString, TS);
+         end;
+      1: begin
+           TS.Alignment := taCenter;
+           TargetCanvas.TextRect(CellRect, CellRect.Left, CellRect.Top, GetTimeStr(FList.DisplaySets[Node^.Index]^.InCue) + sLineBreak + GetTimeStr(FList.DisplaySets[Node^.Index]^.OutCue), TS);
+         end;
+      2: begin
+           TS.Alignment := taCenter;
+           RoundFramesValue(FList.DisplaySets[Node^.Index]^.InCue, FList.DisplaySets[Node^.Index]^.OutCue, Workspace.FPS.OutputFPS, it, ft);
+           TargetCanvas.TextRect(CellRect, CellRect.Left, CellRect.Top, GetTimeStr(ft-it, True), TS);
+         end;
+//      3: CellText := '';            TS.Alignment := taLeftJustify;
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -199,35 +236,24 @@ end;
 procedure TfrmImportSUP.VSTGetText(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
   var CellText: String);
-var
-  it, ft: Integer;
 begin
-  if FList.DisplaySets.Count > 0 then
-  begin
-    case Column of
-      0: CellText := IntToStr(Node^.Index+1);
-      1: CellText := GetTimeStr(FList.DisplaySets[Node^.Index]^.InCue) + '->' + GetTimeStr(FList.DisplaySets[Node^.Index]^.OutCue);
-//      2: begin
-//           RoundFramesValue(FList.DisplaySets[Node^.Index]^.InCue, FList.DisplaySets[Node^.Index]^.OutCue, Workspace.FPS.OutputFPS, it, ft);
-//           CellText := GetTimeStr(ft-it, True);
-//         end;
-      2: CellText := '';
-    end;
-  end;
+  CellText := ' ';
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmImportSUP.VSTResize(Sender: TObject);
 var
-  c, wCols, ClientW: Integer;
+  i, NewWidth: Integer;
 begin
   if VST.Header.Columns.Count > 0 then
   begin
-    ClientW := VST.Width - VST.Header.Columns[0].Width - (GetSystemMetrics(SM_CXVSCROLL)+VST.Header.Columns.Count-1);
-    wCols := ClientW div (VST.Header.Columns.Count-1);
-    for c := 1 to VST.Header.Columns.Count-1 do
-      VST.Header.Columns[c].Width := wCols;
+    NewWidth := 0;
+    for i := 0 to 2 do
+      NewWidth := NewWidth + VST.Header.Columns[i].Width;
+
+    NewWidth := (VST.Width-NewWidth) - (GetSystemMetrics(SM_CXVSCROLL)+5);
+    VST.Header.Columns[3].Width := NewWidth;
   end;
 end;
 

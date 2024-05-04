@@ -1276,22 +1276,66 @@ object frmSettings: TfrmSettings
       OnClick = btnFasterWhisperClick
     end
     object edtAPI_TTS: TEdit
+      AnchorSideTop.Control = edtTesseract
+      AnchorSideTop.Side = asrBottom
       Left = 248
       Height = 23
-      Top = 179
+      Top = 194
       Width = 448
-      TabOrder = 10
+      BorderSpacing.Top = 16
+      TabOrder = 12
     end
     object lblAPI_TTS: TLabel
+      AnchorSideTop.Control = edtAPI_TTS
+      AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 15
-      Top = 183
+      Top = 198
       Width = 100
       Caption = 'ElevenLabs API key'
       Font.Style = [fsUnderline]
       ParentColor = False
       ParentFont = False
       OnClick = lblAPI_TTSClick
+    end
+    object lblTesseract: TLabel
+      AnchorSideTop.Control = edtTesseract
+      AnchorSideTop.Side = asrCenter
+      Cursor = crHandPoint
+      Left = 0
+      Height = 15
+      Top = 159
+      Width = 47
+      Caption = 'Tesseract'
+      Font.Style = [fsUnderline]
+      ParentColor = False
+      ParentFont = False
+      OnClick = lblTesseractClick
+    end
+    object edtTesseract: TEdit
+      AnchorSideTop.Control = edtYTDLP
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = btnTesseract
+      Left = 248
+      Height = 23
+      Top = 155
+      Width = 395
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 5
+      TabOrder = 10
+    end
+    object btnTesseract: TButton
+      AnchorSideTop.Control = edtTesseract
+      AnchorSideTop.Side = asrCenter
+      Left = 648
+      Height = 23
+      Top = 155
+      Width = 48
+      Anchors = [akTop, akRight]
+      Caption = '...'
+      TabOrder = 11
+      OnClick = btnTesseractClick
     end
   end
   object lyoShortcuts: TUWLayout

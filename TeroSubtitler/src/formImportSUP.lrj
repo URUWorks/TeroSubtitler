@@ -1,5 +1,8 @@
 {"version":1,"strings":[
 {"hash":197532272,"name":"tfrmimportsup.caption","sourcebytes":[73,109,112,111,114,116,32,66,108,117,45,114,97,121,32,83,85,80],"value":"Import Blu-ray SUP"},
 {"hash":84178580,"name":"tfrmimportsup.btnimport.caption","sourcebytes":[73,109,112,111,114,116],"value":"Import"},
-{"hash":4863637,"name":"tfrmimportsup.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+{"hash":4863637,"name":"tfrmimportsup.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":82521866,"name":"tfrmimportsup.lbllanguage.caption","sourcebytes":[76,97,110,103,117,97,103,101,58],"value":"Language:"},
+{"hash":12558,"name":"tfrmimportsup.btnlanguage.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":21378,"name":"tfrmimportsup.btnocr.caption","sourcebytes":[79,67,82],"value":"OCR"}
 ]}

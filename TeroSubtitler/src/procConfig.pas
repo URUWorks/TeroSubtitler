@@ -179,6 +179,8 @@ begin
       YTDLP := GetInstallFolder(YTDLP_EXE);
     {$ENDIF}
 
+    Tesseract := '';
+
     FFmpeg_ParamsForAudioExtract := FFMPEG_Params;
     FFmpeg_ParamsForShotChanges  := FFMPEG_SCParams;
     FFmpeg_ParamsForWhisper      := WHISPER_ffParams;

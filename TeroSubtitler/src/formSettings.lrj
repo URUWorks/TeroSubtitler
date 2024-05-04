@@ -64,6 +64,8 @@
 {"hash":89810722,"name":"tfrmsettings.lblfasterwhisper.caption","sourcebytes":[70,97,115,116,101,114,45,87,104,105,115,112,101,114],"value":"Faster-Whisper"},
 {"hash":12558,"name":"tfrmsettings.btnfasterwhisper.caption","sourcebytes":[46,46,46],"value":"..."},
 {"hash":28198985,"name":"tfrmsettings.lblapi_tts.caption","sourcebytes":[69,108,101,118,101,110,76,97,98,115,32,65,80,73,32,107,101,121],"value":"ElevenLabs API key"},
+{"hash":178052452,"name":"tfrmsettings.lbltesseract.caption","sourcebytes":[84,101,115,115,101,114,97,99,116],"value":"Tesseract"},
+{"hash":12558,"name":"tfrmsettings.btntesseract.caption","sourcebytes":[46,46,46],"value":"..."},
 {"hash":145482249,"name":"tfrmsettings.lblshortcutcat.caption","sourcebytes":[67,97,116,101,103,111,114,121],"value":"Category"},
 {"hash":258584404,"name":"tfrmsettings.lblshortcut.caption","sourcebytes":[83,104,111,114,116,99,117,116],"value":"Shortcut"},
 {"hash":91802052,"name":"tfrmsettings.lblshortcutpreset.caption","sourcebytes":[80,114,101,115,101,116],"value":"Preset"},

@@ -328,6 +328,7 @@ type
     FasterWhisper_Additional : String;
 
     YTDLP : String;
+    Tesseract : String;
 
     WhisperEngine : TWhisperEngine;
 
