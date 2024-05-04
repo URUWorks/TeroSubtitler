@@ -1,5 +1,6 @@
 1.0.2.0 (x.x.2024)
-- improved: PGS
+- improved: SUP Export
+- added: Import a .SUP blu-ray #281
 
 1.0.1.9 (6.4.2024)
 - fixed: Interface Italian - Bottom info set as English #298
