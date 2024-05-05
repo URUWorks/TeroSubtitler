@@ -214,6 +214,9 @@ begin
 
         prbProgress.Position := c;
         if CancelProcess then Exit;
+
+        if FList.DisplaySets[c]^.Text <> '' then Continue;
+
         Application.ProcessMessages;
 
         s := ChangeFileExt(GetTempFileName, '.png');

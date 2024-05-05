@@ -4,10 +4,11 @@ object frmImportSUP: TfrmImportSUP
   Top = 127
   Width = 496
   BorderIcons = []
-  BorderStyle = bsSingle
   Caption = 'Import Blu-ray SUP'
   ClientHeight = 425
   ClientWidth = 496
+  Constraints.MinHeight = 400
+  Constraints.MinWidth = 400
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -54,7 +55,7 @@ object frmImportSUP: TfrmImportSUP
     Height = 203
     Top = 183
     Width = 480
-    Anchors = [akTop, akLeft, akBottom]
+    Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Top = 5
     BorderSpacing.Bottom = 5
     Header.AutoSizeIndex = 0
@@ -81,6 +82,7 @@ object frmImportSUP: TfrmImportSUP
     Height = 145
     Top = 33
     Width = 480
+    Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Top = 5
     BevelOuter = bvNone
     ClientHeight = 145

@@ -64,6 +64,7 @@ uses
 
 procedure TfrmImportSUPLanguages.FormCreate(Sender: TObject);
 begin
+  cboLanguages.Sorted := True;
   FillTStringsWithLanguages(cboLanguages.Items);
   if cboLanguages.Items.Count > 0 then cboLanguages.ItemIndex := 0;
 end;
@@ -102,7 +103,7 @@ var
 begin
   SetControlsEnabled(False);
   try
-    s := CultureNameFromIndex(cboLanguages.ItemIndex)+'.traineddata';
+    s := DisplayNameToCultureName(cboLanguages.Text)+'.traineddata';
     filename := ConcatPaths([TessDataFolder, s]);
     ShowDownloadDialog(URL + s, filename);
   finally

@@ -257,6 +257,7 @@ begin
 
     Combo.Items.BeginUpdate;
     try
+      Combo.Items.Clear;
       Combo.Sorted := True;
 
       for i := 0 to TessFiles.Count-1 do
