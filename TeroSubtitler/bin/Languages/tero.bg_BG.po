@@ -2678,6 +2678,22 @@ msgstr ""
 msgid "Language:"
 msgstr ""
 
+#: tfrmimportsuplanguages.btnclose.caption
+#, fuzzy
+msgctxt "tfrmimportsuplanguages.btnclose.caption"
+msgid "Close"
+msgstr "Затваряне"
+
+#: tfrmimportsuplanguages.btndownload.caption
+#, fuzzy
+msgctxt "tfrmimportsuplanguages.btndownload.caption"
+msgid "Download"
+msgstr "Сваляне"
+
+#: tfrmimportsuplanguages.caption
+msgid "Tesseract languages"
+msgstr ""
+
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
 msgid "About..."

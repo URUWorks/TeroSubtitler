@@ -2671,6 +2671,20 @@ msgstr "Import Blu-ray SUP"
 msgid "Language:"
 msgstr "Language:"
 
+#: tfrmimportsuplanguages.btnclose.caption
+msgctxt "tfrmimportsuplanguages.btnclose.caption"
+msgid "Close"
+msgstr "Close"
+
+#: tfrmimportsuplanguages.btndownload.caption
+msgctxt "tfrmimportsuplanguages.btndownload.caption"
+msgid "Download"
+msgstr "Download"
+
+#: tfrmimportsuplanguages.caption
+msgid "Tesseract languages"
+msgstr "Tesseract languages"
+
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
 msgid "About..."

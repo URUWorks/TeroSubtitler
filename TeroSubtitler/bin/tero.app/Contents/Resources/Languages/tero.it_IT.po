@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 02.05.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 05.05.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -2662,14 +2662,13 @@ msgid "Import"
 msgstr "Importa"
 
 #: tfrmimportsup.btnlanguage.caption
-#, fuzzy
 msgctxt "tfrmimportsup.btnlanguage.caption"
 msgid "..."
 msgstr "..."
 
 #: tfrmimportsup.btnocr.caption
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: tfrmimportsup.caption
 msgid "Import Blu-ray SUP"
@@ -2677,6 +2676,22 @@ msgstr "Importa .sup Blu-ray"
 
 #: tfrmimportsup.lbllanguage.caption
 msgid "Language:"
+msgstr "Lingua:"
+
+#: tfrmimportsuplanguages.btnclose.caption
+#, fuzzy
+msgctxt "tfrmimportsuplanguages.btnclose.caption"
+msgid "Close"
+msgstr "Chiudi"
+
+#: tfrmimportsuplanguages.btndownload.caption
+#, fuzzy
+msgctxt "tfrmimportsuplanguages.btndownload.caption"
+msgid "Download"
+msgstr "Download"
+
+#: tfrmimportsuplanguages.caption
+msgid "Tesseract languages"
 msgstr ""
 
 #: tfrmmain.actabout.caption
@@ -4469,7 +4484,6 @@ msgid "Save as..."
 msgstr "Salva come..."
 
 #: tfrmsettings.btntesseract.caption
-#, fuzzy
 msgctxt "tfrmsettings.btntesseract.caption"
 msgid "..."
 msgstr "..."
@@ -4731,7 +4745,7 @@ msgstr "Sottotitoli"
 
 #: tfrmsettings.lbltesseract.caption
 msgid "Tesseract"
-msgstr ""
+msgstr "Tesseract"
 
 #: tfrmsettings.lbltextboxfontsize.caption
 msgid "Text box font size"

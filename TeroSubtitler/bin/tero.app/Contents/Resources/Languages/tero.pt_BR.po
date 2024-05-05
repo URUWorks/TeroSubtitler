@@ -2683,6 +2683,22 @@ msgstr ""
 msgid "Language:"
 msgstr ""
 
+#: tfrmimportsuplanguages.btnclose.caption
+#, fuzzy
+msgctxt "tfrmimportsuplanguages.btnclose.caption"
+msgid "Close"
+msgstr "Fechar"
+
+#: tfrmimportsuplanguages.btndownload.caption
+#, fuzzy
+msgctxt "tfrmimportsuplanguages.btndownload.caption"
+msgid "Download"
+msgstr "Download"
+
+#: tfrmimportsuplanguages.caption
+msgid "Tesseract languages"
+msgstr ""
+
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
 msgid "About..."
