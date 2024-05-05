@@ -1,0 +1,5 @@
+{"version":1,"strings":[
+{"hash":159806323,"name":"tfrmimportsuplanguages.caption","sourcebytes":[84,101,115,115,101,114,97,99,116,32,108,97,110,103,117,97,103,101,115],"value":"Tesseract languages"},
+{"hash":115683780,"name":"tfrmimportsuplanguages.btndownload.caption","sourcebytes":[68,111,119,110,108,111,97,100],"value":"Download"},
+{"hash":4863637,"name":"tfrmimportsuplanguages.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

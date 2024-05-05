@@ -1,0 +1,53 @@
+object frmImportSUPLanguages: TfrmImportSUPLanguages
+  Left = 239
+  Height = 90
+  Top = 118
+  Width = 346
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Tesseract languages'
+  ClientHeight = 90
+  ClientWidth = 346
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '3.2.0.0'
+  object cboLanguages: TComboBox
+    AnchorSideRight.Control = btnDownload
+    Left = 8
+    Height = 23
+    Top = 8
+    Width = 235
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 5
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object btnDownload: TButton
+    AnchorSideLeft.Control = cboLanguages
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = cboLanguages
+    AnchorSideTop.Side = asrCenter
+    Left = 248
+    Height = 26
+    Top = 6
+    Width = 91
+    Anchors = [akTop]
+    BorderSpacing.Left = 5
+    Caption = 'Download'
+    TabOrder = 1
+    OnClick = btnDownloadClick
+  end
+  object btnClose: TButton
+    Left = 248
+    Height = 26
+    Top = 56
+    Width = 91
+    Cancel = True
+    Caption = 'Close'
+    TabOrder = 2
+    OnClick = btnCloseClick
+  end
+end

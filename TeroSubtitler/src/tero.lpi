@@ -812,6 +812,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="formImportSUPLanguages.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmImportSUPLanguages"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

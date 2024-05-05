@@ -68,7 +68,6 @@ object frmImportSUP: TfrmImportSUP
     TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
     TreeOptions.StringOptions = []
     OnAdvancedHeaderDraw = VSTAdvancedHeaderDraw
-    OnDblClick = VSTDblClick
     OnDrawText = VSTDrawText
     OnFocusChanged = VSTFocusChanged
     OnGetText = VSTGetText
@@ -142,6 +141,7 @@ object frmImportSUP: TfrmImportSUP
     Anchors = [akTop, akRight]
     Caption = '...'
     TabOrder = 2
+    OnClick = btnLanguageClick
   end
   object btnOCR: TButton
     AnchorSideTop.Side = asrCenter
@@ -156,6 +156,20 @@ object frmImportSUP: TfrmImportSUP
     BorderSpacing.Right = 5
     Caption = 'OCR'
     TabOrder = 4
-    OnClick = btnImportClick
+    OnClick = btnOCRClick
+  end
+  object prbProgress: TProgressBar
+    AnchorSideTop.Control = btnClose
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = btnOCR
+    Left = 8
+    Height = 8
+    Top = 400
+    Width = 192
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 5
+    Step = 1
+    TabOrder = 7
+    Visible = False
   end
 end

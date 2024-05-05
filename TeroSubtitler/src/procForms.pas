@@ -65,6 +65,7 @@ procedure ShowCustomTextFormat;
 procedure ShowCustomImageFormat;
 procedure ShowExportSUP;
 procedure ShowImportSUP;
+procedure ShowImportSUPLanguages;
 procedure ShowGenerateVideo;
 procedure ShowGenerateBlankVideo;
 procedure ShowStreamExtractor;
@@ -95,8 +96,8 @@ uses
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
   formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
   formRoundTime, formStatistics, formGenerateBlankVideo, formStreamExtractor,
-  formPauses, formTTS, formVideoDubbing, formImportSUP, LCLTranslator,
-  procLocalize;
+  formPauses, formTTS, formVideoDubbing, formImportSUP, formImportSUPLanguages,
+  LCLTranslator, procLocalize;
 
 // -----------------------------------------------------------------------------
 
@@ -690,6 +691,19 @@ begin
   end
   else
     frmImportSUP.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowImportSUPLanguages;
+begin
+  if frmImportSUPLanguages = NIL then
+  begin
+    frmImportSUPLanguages := TfrmImportSUPLanguages.Create(Application);
+    ShowForm(frmImportSUPLanguages);
+  end
+  else
+    frmImportSUPLanguages.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

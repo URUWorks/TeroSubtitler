@@ -58,9 +58,11 @@ type
     procedure FormShow(Sender: TObject);
   private
     StatusString: String;
+    SaveFolder: String;
     procedure ResItemClick(Sender: TObject);
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure WriteSUPFile(const AFileName: String);
+    procedure OpenFolderClick(Sender: TObject);
   public
 
   end;
@@ -73,8 +75,8 @@ var
 implementation
 
 uses
-  procWorkspace, procTypes, UWSystem.Encoding, procCustomFormat,
-  BlurayPGSParser;
+  procWorkspace, procTypes, UWSystem.Encoding, procCustomFormat, procDialogs,
+  BlurayPGSParser, LCLIntf;
 
 {$R *.lfm}
 
@@ -107,6 +109,7 @@ begin
   end;
 
   StatusString := lngWriteStatus;
+  SaveFolder := '';
 
   lblStatus.Hide;
 end;
@@ -159,12 +162,14 @@ begin
     if SD.Execute then
     begin
       SetControlsEnabled(False);
+      SaveFolder := ExtractFileDir(SD.FileName);
       lblStatus.Show;
       ttbPreview.Hide;
 
       WriteSUPFile(SD.FileName);
 
       SetControlsEnabled(True);
+      ShowMessageDialog(lngFileSavedSuccessfully, '', lngOpenContainingFolder, @OpenFolderClick);
       Close;
     end;
   finally
@@ -253,6 +258,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmExportSUP.OpenFolderClick(Sender: TObject);
+begin
+  OpenDocument(SaveFolder);
+end;
+
+// -----------------------------------------------------------------------------
 
 end.
 

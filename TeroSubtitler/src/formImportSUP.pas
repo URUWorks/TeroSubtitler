@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLIntf,
-  LCLType, laz.VirtualTrees, LCLTranslator, ExtCtrls, procLocalize,
+  LCLType, laz.VirtualTrees, LCLTranslator, ExtCtrls, ComCtrls, procLocalize,
   BlurayPGSParser;
 
 type
@@ -39,15 +39,17 @@ type
     imgSUP: TImage;
     lblLanguage: TLabel;
     pnlSUP: TPanel;
+    prbProgress: TProgressBar;
     VST: TLazVirtualStringTree;
     procedure btnCloseClick(Sender: TObject);
     procedure btnImportClick(Sender: TObject);
+    procedure btnLanguageClick(Sender: TObject);
+    procedure btnOCRClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure VSTAdvancedHeaderDraw(Sender: TVTHeader;
       var PaintInfo: THeaderPaintInfo; const Elements: THeaderPaintElements);
-    procedure VSTDblClick(Sender: TObject);
     procedure VSTDrawText(Sender: TBaseVirtualTree; TargetCanvas: TCanvas;
       Node: PVirtualNode; Column: TColumnIndex; const CellText: String;
       const CellRect: TRect; var DefaultDraw: Boolean);
@@ -60,12 +62,15 @@ type
     procedure VSTResize(Sender: TObject);
   private
     FList: TBlurayPGSParser;
+    procedure CheckButtons;
+    procedure SetControlsEnabled(const AValue: Boolean);
   public
-
+    CurrentJob: Integer;
   end;
 
 var
   frmImportSUP: TfrmImportSUP;
+  CancelProcess: Boolean;
 
 // -----------------------------------------------------------------------------
 
@@ -73,7 +78,8 @@ implementation
 
 uses
   procTypes, procWorkspace, procVST, procColorTheme, FileUtil, procSubtitle,
-  UWSubtitleAPI.Formats, UWSubtitles.Utils, BGRABitmap;
+  UWSubtitleAPI.Formats, UWSubtitles.Utils, BGRABitmap, procTesseract,
+  procConfig, procForms, UWSystem.Process, StrUtils;
 
 {$R *.lfm}
 
@@ -97,6 +103,10 @@ begin
 
   with TOpenDialog.Create(Self) do
   try
+    Title   := lngOpenFile;
+    Filter  := lngAllSupportedFiles + ' (*.sup)|*.sup';
+    Options := [ofPathMustExist, ofFileMustExist];
+
     if Execute then
       FList.Parse(FileName);
   finally
@@ -104,12 +114,15 @@ begin
   end;
 
   VST.RootNodeCount := FList.DisplaySets.Count;
-  btnImport.Enabled := VST.RootNodeCount > 0;
+  prbProgress.Max   := VST.RootNodeCount;
+  FillComboWithAvailableLanguages(TessDataFolder, cboLanguage);
 
-  btnOCR.Enabled := FileExists(Tools.Tesseract);
+  CheckButtons;
 
   if btnImport.Enabled then
     VSTSelectNode(VST, 0, True, True);
+
+  CancelProcess := False;
 end;
 
 // -----------------------------------------------------------------------------
@@ -133,16 +146,92 @@ end;
 
 procedure TfrmImportSUP.btnCloseClick(Sender: TObject);
 begin
-  Close;
+  if btnClose.Tag = 0 then
+    Close
+  else
+    CancelProcess := True;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmImportSUP.btnImportClick(Sender: TObject);
+var
+  i: Integer;
 begin
-  if (VST.RootNodeCount > 0) and (VST.SelectedCount = 1) then
+  if (VST.RootNodeCount > 0) then
   begin
+    ClearSubtitles(False);
+    for i := FList.DisplaySets.Count-1 downto 0 do
+      InsertSubtitle(0, FList.DisplaySets[i]^.InCue, FList.DisplaySets[i]^.OutCue, FList.DisplaySets[i]^.Text, '', i = 0, i = 0);
+
     Close;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmImportSUP.btnLanguageClick(Sender: TObject);
+begin
+  ShowImportSUPLanguages;
+  FillComboWithAvailableLanguages(TessDataFolder, cboLanguage);
+  CheckButtons;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TessCB(Output: String; var Cancel: Boolean);
+begin
+  //writeln(Output);
+  Cancel := CancelProcess;
+  if Output.IsEmpty then Exit;
+
+  with frmImportSUP do
+  begin
+    FList.DisplaySets[CurrentJob]^.Text := Trim(Output);
+    VSTSelectNode(VST, CurrentJob, True);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmImportSUP.btnOCRClick(Sender: TObject);
+var
+  i, c: Integer;
+  params: TStringArray;
+  s, lang: String;
+begin
+  CancelProcess := False;
+  if FList.DisplaySets.Count > 0 then
+  begin
+    SetControlsEnabled(False);
+    try
+      lang := DisplayNameToCultureName(cboLanguage.Text);
+      if lang.IsEmpty then lang := 'eng';
+
+      for c := 0 to FList.DisplaySets.Count-1 do
+      begin
+        CurrentJob := c;
+
+        prbProgress.Position := c;
+        if CancelProcess then Exit;
+        Application.ProcessMessages;
+
+        s := ChangeFileExt(GetTempFileName, '.png');
+        if not FList.SaveBitmapToFile(c, s, False) then
+          Continue;
+
+        params := Tesseract_Params.Split(' ');
+        for i := 0 to High(params) do
+          params[i] := StringsReplace(params[i], ['%input', '%lang'], [s, lang], []);
+
+        ExecuteAppEx(Tools.Tesseract, params, NIL, @TessCB);
+      end;
+
+      if FileExists(s) then
+        DeleteFile(s);
+    finally
+      SetControlsEnabled(True);
+    end;
   end;
 end;
 
@@ -209,7 +298,10 @@ begin
            RoundFramesValue(FList.DisplaySets[Node^.Index]^.InCue, FList.DisplaySets[Node^.Index]^.OutCue, Workspace.FPS.OutputFPS, it, ft);
            TargetCanvas.TextRect(CellRect, CellRect.Left, CellRect.Top, GetTimeStr(ft-it, True), TS);
          end;
-//      3: CellText := '';            TS.Alignment := taLeftJustify;
+      3: begin
+           TS.Alignment := taLeftJustify;
+           TargetCanvas.TextRect(CellRect, CellRect.Left, CellRect.Top, FList.DisplaySets[Node^.Index]^.Text, TS);
+         end;
     end;
   end;
 end;
@@ -259,9 +351,36 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmImportSUP.VSTDblClick(Sender: TObject);
+procedure TfrmImportSUP.CheckButtons;
 begin
-  btnImport.Click;
+  btnImport.Enabled := VST.RootNodeCount > 0;
+  btnOCR.Enabled := FileExists(Tools.Tesseract) and (cboLanguage.Items.Count > 0);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmImportSUP.SetControlsEnabled(const AValue: Boolean);
+begin
+  prbProgress.Position := 0;
+
+  VST.Enabled         := AValue;
+  btnOCR.Enabled      := False;
+  btnImport.Enabled   := False;
+  cboLanguage.Enabled := AValue;
+  btnLanguage.Enabled := AValue;
+  prbProgress.Visible := not AValue;
+
+  if AValue then
+  begin
+    btnClose.Caption := lngbtnClose;
+    btnClose.Tag := 0;
+    CheckButtons;
+  end
+  else
+  begin
+    btnClose.Caption := lngbtnCancel;
+    btnClose.Tag := 1;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

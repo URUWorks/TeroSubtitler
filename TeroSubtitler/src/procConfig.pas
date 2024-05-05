@@ -89,6 +89,7 @@ function WhisperFolder: String;
 function WhisperFileName: String;
 function WhisperModelsFolder: String;
 function WhisperTranscriptionsFolder: String;
+function TessDataFolder: String;
 function libmpvFolder: String;
 function YTDLPFolder: String;
 function ffmpegFolder: String;
@@ -637,6 +638,7 @@ begin
         FasterWhisper_Additional := GetValue('FasterWhisper_Additional', FasterWhisper_Additional);
         WhisperEngine := TWhisperEngine(GetValue('WhisperEngine', 0));
         YTDLP := GetValue('YTDLP', YTDLP);
+        Tesseract := GetValue('Tesseract', Tesseract);
 
         API_KEY_TTS := GetValue('API_KEY_TTS', '');
         CloseKey;
@@ -1041,6 +1043,7 @@ begin
         SetValue('FasterWhisper_Additional', FasterWhisper_Additional);
         SetValue('WhisperEngine', Integer(WhisperEngine));
         SetValue('YTDLP', YTDLP);
+        SetValue('Tesseract', Tesseract);
 
         SetValue('API_KEY_TTS', API_KEY_TTS);
         CloseKey;
@@ -1764,6 +1767,13 @@ end;
 function WhisperTranscriptionsFolder: String;
 begin
   Result := IncludeTrailingPathDelimiter(ConcatPaths([WhisperFolder, 'Transcriptions']));
+end;
+
+// -----------------------------------------------------------------------------
+
+function TessDataFolder: String;
+begin
+  Result := ConcatPaths([ExtractFileDir(Tools.Tesseract), 'tessdata']);
 end;
 
 // -----------------------------------------------------------------------------

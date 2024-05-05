@@ -150,6 +150,9 @@ const
 
   SCENEDETECT_EXE      = 'scenedetect.exe';
   SCENEDETECT_SCParams = '-i "%input" list-scenes -f "%output" -q';
+
+  TESSERACT_EXE    = 'tesseract.exe';
+  TESSERACT_Params = '"%input" - -l %lang -c debug_file=/dev/null';
   {$ENDIF}
   {$IFDEF LINUX}
   URL_FFMPEG = '';
@@ -183,6 +186,9 @@ const
 
   SCENEDETECT_EXE      = 'scenedetect';
   SCENEDETECT_SCParams = '-i %input list-scenes -f %output -q';
+
+  TESSERACT_EXE    = 'tesseract';
+  TESSERACT_Params = '%input - -l %lang -c debug_file=/dev/null';
   {$ENDIF}
   {$IFDEF DARWIN}
   URL_FFMPEG = 'https://github.com/URUWorks/additional-files/raw/main/ffmpeg/ffmpeg_macos64.zip';
@@ -216,6 +222,9 @@ const
 
   SCENEDETECT_EXE      = 'scenedetect';
   SCENEDETECT_SCParams = '-i %input list-scenes -f %output -q';
+
+  TESSERACT_EXE    = 'tesseract';
+  TESSERACT_Params = '%input - -l %lang -c debug_file=/dev/null';
   {$ENDIF}
 
 type
