@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 05.05.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 06.05.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -2679,20 +2679,18 @@ msgid "Language:"
 msgstr "Lingua:"
 
 #: tfrmimportsuplanguages.btnclose.caption
-#, fuzzy
 msgctxt "tfrmimportsuplanguages.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmimportsuplanguages.btndownload.caption
-#, fuzzy
 msgctxt "tfrmimportsuplanguages.btndownload.caption"
 msgid "Download"
 msgstr "Download"
 
 #: tfrmimportsuplanguages.caption
 msgid "Tesseract languages"
-msgstr ""
+msgstr "Lingue Tesseract"
 
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
@@ -5583,4 +5581,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
