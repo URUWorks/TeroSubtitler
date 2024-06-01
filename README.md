@@ -5,6 +5,7 @@
 [![discord](https://img.shields.io/badge/Discord-blue)](https://discord.gg/EqzXEa8pHK)
 [![ko-fi](https://img.shields.io/badge/Ko--fi-F16061?logo=ko-fi&logoColor=white)](https://ko-fi.com/uruworks)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=uruworks@gmail.com&lc=US&item_name=URUWorks+Tero+Subtitler&no_note=0&cn=&currency_code=USD&amount=10&tax=0&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted)
+[![Github-Sponsors](https://img.shields.io/badge/Sponsor-30363D?&logo=GitHub-Sponsors)](https://github.com/sponsors/URUWorks)
 
 Tero Subtitler is an open source, cross-platform, and free subtitle editing software.
 
@@ -99,6 +100,7 @@ We appreciate any donation, no matter how small, to help cover the costs of deve
  
 [![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=uruworks@gmail.com&lc=US&item_name=URUWorks+Tero+Subtitler&no_note=0&cn=&currency_code=USD&amount=10&tax=0&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted)
 [![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/uruworks)
+[![Github-Sponsors](https://img.shields.io/badge/Sponsor-30363D?&logo=GitHub-Sponsors)](https://github.com/sponsors/URUWorks)
 
 ## Special thanks 
 
