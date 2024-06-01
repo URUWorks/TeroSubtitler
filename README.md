@@ -100,7 +100,7 @@ We appreciate any donation, no matter how small, to help cover the costs of deve
  
 [![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=uruworks@gmail.com&lc=US&item_name=URUWorks+Tero+Subtitler&no_note=0&cn=&currency_code=USD&amount=10&tax=0&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted)
 [![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/uruworks)
-[![Github-Sponsors](https://img.shields.io/badge/Sponsor-30363D?&logo=GitHub-Sponsors)](https://github.com/sponsors/URUWorks)
+[![Github-Sponsors](https://user-images.githubusercontent.com/4967343/89290185-5e893700-d650-11ea-8942-4579b2c96c2c.png)](https://github.com/sponsors/URUWorks)
 
 ## Special thanks 
 
