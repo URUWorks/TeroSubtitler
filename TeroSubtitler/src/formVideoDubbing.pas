@@ -569,8 +569,8 @@ procedure TfrmVideoDubbing.GenerateVideoFile;
 var
   AParamArray : TStringArray;
   i, c : Integer;
-  sl : TStringList;
-  tracks, ids, s : String;
+  sl, fcs : TStringList;
+  tracks, ids, s, fcs_file : String;
   sub : Boolean;
 begin
   if chkBackgroundMusic.Checked then
@@ -646,8 +646,31 @@ begin
       end;
     end;
 
-    sl.Add('-filter_complex');
-    sl.Add(tracks + ids + 'amix=inputs=' + IntToStr(c) + '[a]');
+    // filter complex file
+    fcs_file := ConcatPaths([TempDir, 'fcs.txt']);
+    fcs := TStringList.Create;
+    try
+      fcs.Text := tracks + ids + 'amix=inputs=' + IntToStr(c) + '[a]';
+      fcs.SaveToFile(fcs_file);
+    finally
+      fcs.Free;
+    end;
+
+    if FileExists(fcs_file) then
+    begin
+      sl.Add('-/filter_complex');
+      {$IFDEF WINDOWS}
+      sl.Add('"'+fcs_file+'"');
+      {$ELSE}
+      sl.Add(fcs_file);
+      {$ENDIF}
+    end
+    else
+    begin
+      sl.Add('-filter_complex');
+      sl.Add(tracks + ids + 'amix=inputs=' + IntToStr(c) + '[a]');
+    end;
+
     sl.Add('-map');
     sl.Add('0:v');
     sl.Add('-map');
