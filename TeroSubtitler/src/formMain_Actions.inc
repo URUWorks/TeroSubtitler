@@ -244,6 +244,8 @@ begin
     TranscriptionInsertAbove;
 end;
 
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actInsertEntryExecute(Sender: TObject);
 begin
   if Workspace.ViewMode = vmList then
