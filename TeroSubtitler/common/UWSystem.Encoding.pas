@@ -188,12 +188,13 @@ function GetEncodingIndex(const CPID: Integer): Integer;
 function GetEncodingFromFile(const FileName: String; const TryAnsiDetect: Boolean = True): TEncoding;
 
 function IsRightToLeftText(const AText: String): Boolean;
+function IsRightToLeftByUCC(const AText: String): Boolean;
 
 // -----------------------------------------------------------------------------
 
 implementation
 
-uses RegExpr;
+uses RegExpr, LazUTF8;
 
 const
   _Russian: array of String = ('что', 'быть', 'весь', 'этот', 'один', 'такой', '[Ээч]?то', '[Нн]е', '[ТтМмбв]ы', 'Да', '[Нн]ет', 'Он', 'его', 'тебя', 'как', 'меня', 'Но', 'всё', 'мне', 'вас', 'знаю', 'ещё', 'за', 'нас', 'чтобы', 'был', 'Я', '[Bb]тор.*', 'Держ.*');
@@ -205,11 +206,12 @@ const
   _Czech: array of String = ('.*[Řř].*', '.*[ůě].*', '[Bb]ýt', '[Jj]sem', '[Jj]si', '[Jj]á', '[Mm]ít', '[Aa]no', '[Nn]e',  '[Nn]ic', '[Dd]en', '[Jj]en', '[Cc]o', '[Jj]ak[o]?', '[Nn]ebo',  '[Pp]ři', '[Pp]ro', '[Pp]řed.*', '[Jj](ít|du|de|deme|dou)', '[Mm]ezi',  '[Jj]eště', '[Čč]lověk', '[Pp]odle', '[Dd]alší', 'přejděte', 'používat', 'obrázky', 'obrázek', 'vašem', 'vygenerovat');
   _Polish: array of String = ('Czy', 'ale', 'ty', 'siê', 'się', 'jest', 'mnie', 'Proszę', 'życie', 'statku', 'życia', 'Czyli', 'Wszystko', 'Wiem', 'Przepraszam', 'dobrze', 'chciałam', 'Dziękuję', 'Żołnierzyk', 'Łowca', 'został', 'stało', 'dolarów', 'wiadomości', 'Dobrze', 'będzie', 'Dzień', 'przyszłość', 'Uratowałaś', 'Cześć', 'Trzeba', 'zginąć', 'walczyć', 'ludzkość', 'maszyny', 'Jeszcze', 'okrążenie', 'wyścigu', 'porządku', 'detektywie', 'przebieralni', 'który', 'śmierci', 'zabić', 'wiedźminie', 'przeznaczenie');
   _Hungarian: array of String = ('hogy', 'lesz', 'tudom', 'vagy', 'mondtam', 'még', 'vagyok', 'csak', 'Hát', 'felesége', 'Csak', 'utána', 'jött', 'Miért', 'Akkor', 'magát', 'holnap', 'Tudja', 'Köszönöm', 'élet', 'Örvendek', 'vissza', 'hogy', 'tudom', 'Rendben', 'Istenem', 'Gyerünk', 'értem', 'vagyok', 'hiszem', 'történt', 'rendben', 'olyan', 'őket', 'vannak', 'mindig', 'Kérlek', 'Gyere', 'kicsim', 'vagyunk');
-  _Latvian: array of String = ('labrīt', 'labdien', 'sveiki', 'labvakar!', 'atā', 'redzēšanos', 'nē', 'jā', 'varbūt', 'labi', 'paldies', 'lūdzu', 'atvainojiet', 'žēl', 'kā', 'jums', 'klājas', 'dzīvo', 'kopā', 'runājat');
+  _Latvian: array of String = ('Paldies', 'neesmu ', 'nezinu', 'viòð', 'viņš', 'viņu', 'kungs', 'esmu', 'Viņš', 'Velns', 'viņa', 'dievs', 'Pagaidi', 'varonis', 'agrāk', 'varbūt');
   _Arabic: array of String = ('من', 'هل', 'لا', 'في', 'لقد', 'ما', 'ماذا', 'يا', 'هذا', 'إلى', 'على', 'أنا', 'أنت', 'حسناً', 'أيها', 'كان', 'كيف', 'يكون', 'هذه', 'هذان', 'الذي', 'التي', 'الذين', 'هناك', 'هنالك');
   //_Hebrew: array of String = ('אתה', 'אולי', 'הוא', 'בסדר', 'יודע', 'טוב');
   _Hebrew: array of String = ('אתה', 'אולי', 'הוא', 'בסדר', 'יודע', 'טוב', 'אֶת', 'שֶׁל', 'עַל', 'הוּא', 'אֲשֶׁר', 'הִיא', 'הַמְלֶט', 'נָסִיךְ', 'הֲלֹא', 'עוֹד', 'אֵין', 'אֲנִי', 'זֹאת', 'וְלֹא', 'כָּךְ', 'הִנֵּה', 'מְאֹד', 'אֲדוֹנִי');
   _Farsi: array of String = ('این', 'برای', 'اون', 'سیب', 'کال', 'رو', 'خيلي', 'آره', 'بود', 'اون', 'نيست', 'اينجا', 'باشه', 'سلام', 'ميکني', 'داري', 'چيزي', 'چرا', 'خوبه');
+  _Turkish: array of String = ('için', 'Tamam', 'Hayır', 'benim', 'daha', 'deðil', 'önce', 'lazým', 'çalýþýyor', 'Aldırma', 'burada', 'efendim', 'şey', 'çok', 'Çok', 'için', 'Merhaba', 'Evet', 'kötü', 'musun', 'güzel', 'çünkü', 'büyük', 'Bebeğim', 'olduğunu', 'istiyorum', 'değilsin', 'bilmiyorum', 'otursana', 'Selam', 'Tabii','konuda','istiyor','Tetekkürler', 'istemiyorum', 'Gerçekte');
 
 // -----------------------------------------------------------------------------
 
@@ -505,6 +507,14 @@ begin
   begin
     Exit(Enc);
   end;
+
+  // Turkish
+  Enc := TEncoding.GetEncoding(1254);
+  Text := Encoding.GetString(Buffer);
+  if (GetStringCount(Text, _Turkish) > MinCount) then
+  begin
+    Exit(Enc);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -573,6 +583,32 @@ begin
   Result := (GetStringCount(AText, _Arabic) > 0) or
     (GetStringCount(AText, _Hebrew) > 0) or
     (GetStringCount(AText, _Farsi) > 0);
+end;
+
+// -----------------------------------------------------------------------------
+
+function IsRightToLeftByUCC(const AText: String): Boolean;
+var
+  CurP: PChar;
+  CodePoint: Cardinal;
+  CharLen: Integer;
+begin
+  Result := False;
+  if AText.IsEmpty then Exit;
+  CurP := PChar(AText);
+  while CurP^ <> #0 do
+  begin
+    CodePoint := UTF8CodepointToUnicode(CurP, CharLen);
+    {if ((CodePoint >= $0590) and (CodePoint <= $05FF)) or    // Hebrew
+       ((CodePoint >= $0600) and (CodePoint <= $06FF)) or    // Arabic
+       ((CodePoint >= $0700) and (CodePoint <= $074F)) or    // Syriac
+       ((CodePoint >= $0780) and (CodePoint <= $07BF)) or    // Thaana
+       ((CodePoint >= $07C0) and (CodePoint <= $07FF)) then  // N'Ko}
+    if (CodePoint >= $0590) and (CodePoint <= $08FF) then
+      Exit(True);
+
+    Inc(CurP, CharLen);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
