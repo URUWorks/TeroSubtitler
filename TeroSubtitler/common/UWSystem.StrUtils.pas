@@ -28,7 +28,7 @@ uses
 
 function Contains(const AFind, ASource: String): Boolean;
 
-function ReplaceString(const S, OldPattern, NewPattern: String; ReplaceAll: Boolean = True; IgnoreCase: Boolean = True): String;
+function ReplaceString(const S, OldPattern, NewPattern: String; ReplaceAll: Boolean = True; IgnoreCase: Boolean = False): String;
 function ReplaceEnters(const S: String; const OldPattern: String = sLineBreak; const NewPattern: String = '|'): String;
 function StringCount(const AFindString, ASourceString: String): Integer;
 function StringsCount(const ASourceString: String; const AFindString: array of String): Integer;
@@ -80,7 +80,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function ReplaceString(const S, OldPattern, NewPattern: String; ReplaceAll: Boolean = True; IgnoreCase: Boolean = True): String;
+function ReplaceString(const S, OldPattern, NewPattern: String; ReplaceAll: Boolean = True; IgnoreCase: Boolean = False): String;
 var
   Flags : TReplaceFlags;
 begin

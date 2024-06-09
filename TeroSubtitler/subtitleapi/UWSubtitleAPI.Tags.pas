@@ -113,10 +113,13 @@ begin
 
   hasColorTag := Pos('<font color="', Result) > 0;
   Result := ReplaceString(Result, 'color="#', 'color="');
-  Result := ReplaceRegExpr('<font color="(.*?|var)">', Result, '{\\c&$1&}', True);
-  Result := ReplaceRegExpr('<font (.*?)>', Result, '', True);
-  Result := ReplaceHTMLTagColor(Result);
-  Result := ReplaceString(Result, '</font>', iff(hasColorTag, '{\c}', ''));
+  if Pos('<font ', Result) > 0 then
+  begin
+    Result := ReplaceRegExpr('<font color="(.*?|var)">', Result, '{\\c&$1&}', True);
+    Result := ReplaceRegExpr('<font (.*?)>', Result, '', True);
+    Result := ReplaceHTMLTagColor(Result);
+    Result := ReplaceString(Result, '</font>', iff(hasColorTag, '{\c}', ''));
+  end;
   Result := ReplaceString(Result, '<b>', '{\b1}');
   Result := ReplaceString(Result, '<i>', '{\i1}');
   Result := ReplaceString(Result, '<u>', '{\u1}');
