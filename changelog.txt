@@ -1,4 +1,6 @@
 1.0.2.0 (x.x.2024)
+- fixed: letter trimming of italic subtitles in Turkish #315
+- fixed: ERROR ffmpeg.exe dubbing video with elevenlabs #305
 - improved: SUP Export
 - added: Import a .SUP blu-ray #281
 
