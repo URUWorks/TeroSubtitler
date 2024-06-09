@@ -217,7 +217,7 @@ begin
 
   FillByte(TS, SizeOf(TTextStyle), 0);
   TS.EndEllipsis := True;
-  TS.RightToLeft := Application.IsRightToLeft or Subtitles.IsRightToLeft; // is correct?
+  //TS.RightToLeft := Application.IsRightToLeft or Subtitles.IsRightToLeft; // is correct?
   R := CellRect;
   TextHeight := VST.Canvas.Font.GetTextHeight('W');
 
@@ -290,7 +290,7 @@ begin
     4: begin
          // Text
          if VSTOptions.DrawTags then
-           DrawASSText(TargetCanvas, R, Subtitles[Node^.Index].Text, TS.RightToLeft)
+           DrawASSText(TargetCanvas, R, Subtitles[Node^.Index].Text)
          else
          begin
            TS.Alignment := taLeftJustify;
@@ -303,7 +303,7 @@ begin
          // Translation
          R.Right := (R.Right - 16);
          if VSTOptions.DrawTags then
-           DrawASSText(TargetCanvas, R, Subtitles[Node^.Index].Translation, TS.RightToLeft)
+           DrawASSText(TargetCanvas, R, Subtitles[Node^.Index].Translation)
          else
          begin
            TS.Alignment := taLeftJustify;
