@@ -70,13 +70,13 @@ function RemoveSpacesWithinBrackets(const Text: String): String;
 
 { Draw }
 
-procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; const RTL: Boolean = False);
+procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String);
 
 // -----------------------------------------------------------------------------
 
 implementation
 
-uses UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils,
+uses UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.TimeUtils, UWSystem.Encoding,
   LazUTF8, LCLIntf;
 
 const
@@ -918,7 +918,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String; const RTL: Boolean = False);
+procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String);
 
   function CloseTag(const ATag: String): String;
   begin
@@ -978,111 +978,112 @@ var
   PrevFontColour  : TColor;
   NeedBreak       : Boolean;
 begin
-    if RTL then Text := ReverseText(Text);
+  if IsRightToLeftByUCC(Text) then
+    Text := ReverseText(Text);
 
-    NeedBreak        := False;
-    PrevFontColour   := ACanvas.Font.Color;
-    x                := ARect.Left;
-    y                := ARect.Top;
-    idx              := 1;
+  NeedBreak        := False;
+  PrevFontColour   := ACanvas.Font.Color;
+  x                := ARect.Left;
+  y                := ARect.Top;
+  idx              := 1;
 
-    MaxCharHeight := ACanvas.TextHeight('Aj');
+  MaxCharHeight := ACanvas.TextHeight('Aj');
 
-    while idx <= UTF8Length(Text) do
+  while idx <= UTF8Length(Text) do
+  begin
+    CurrChar := UTF8Copy(Text, idx, 1);
+    // Is this a start tag?
+    if UTF8CompareStr(CurrChar, startTag) = 0 then
     begin
-      CurrChar := UTF8Copy(Text, idx, 1);
-      // Is this a start tag?
-      if UTF8CompareStr(CurrChar, startTag) = 0 then
+      Tag := '';
+      Inc(idx);
+
+      // Find the end of the tag
+      while (UTF8CompareStr(UTF8Copy(Text, idx, 1), endTag) <> 0) and (idx <= UTF8Length(Text)) do
       begin
-        Tag := '';
+        Tag := Concat(Tag, (UTF8Copy(Text, idx, 1)));
         Inc(idx);
-
-        // Find the end of the tag
-        while (UTF8CompareStr(UTF8Copy(Text, idx, 1), endTag) <> 0) and (idx <= UTF8Length(Text)) do
+      end;
+      // Simple tags
+      if UTF8Copy(Tag, 1, 1) = '\' then
+      begin
+        TagTmp  := UTF8Copy(Tag, 2, 1);
+        TagTmpX := UTF8RightStr(Tag, 1);
+        if Length(Tag) = 3 then
         begin
-          Tag := Concat(Tag, (UTF8Copy(Text, idx, 1)));
-          Inc(idx);
-        end;
-        // Simple tags
-        if UTF8Copy(Tag, 1, 1) = '\' then
+          // Starting tags
+          if TagTmpX = '1' then
+          begin
+            if TagTmp = boldTag then
+              ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsBold]
+            else if TagTmp = italicTag then
+              ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsItalic]
+            else if TagTmp = underlineTag then
+              ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsUnderline]
+            else if TagTmp = strikeoutTag then
+              ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsStrikeout]
+          end;
+          // Closing tags
+          if TagTmpX = '0' then
+          begin
+            if TagTmp = boldTag then
+              ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsBold]
+            else if TagTmp = italicTag then
+              ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsItalic]
+            else if TagTmp = UnderlineTag then
+              ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsUnderline]
+            else if TagTmp = strikeoutTag then
+              ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsStrikeout]
+          end;
+        end
+        else
+        // Tags with values
         begin
-          TagTmp  := UTF8Copy(Tag, 2, 1);
-          TagTmpX := UTF8RightStr(Tag, 1);
-          if Length(Tag) = 3 then
-          begin
-            // Starting tags
-            if TagTmpX = '1' then
-            begin
-              if TagTmp = boldTag then
-                ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsBold]
-              else if TagTmp = italicTag then
-                ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsItalic]
-              else if TagTmp = underlineTag then
-                ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsUnderline]
-              else if TagTmp = strikeoutTag then
-                ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsStrikeout]
-            end;
-            // Closing tags
-            if TagTmpX = '0' then
-            begin
-              if TagTmp = boldTag then
-                ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsBold]
-              else if TagTmp = italicTag then
-                ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsItalic]
-              else if TagTmp = UnderlineTag then
-                ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsUnderline]
-              else if TagTmp = strikeoutTag then
-                ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsStrikeout]
-            end;
-          end
-          else
-          // Tags with values
-          begin
-            if TagTmp = colorTag then
-              ACanvas.Font.Color := PrevFontColour;
+          if TagTmp = colorTag then
+            ACanvas.Font.Color := PrevFontColour;
 
-            // Get the tag value (everything after ':')
-            TagValue := GetTagValue(Tag, TagID);
-            if TagValue <> '' then
+          // Get the tag value (everything after ':')
+          TagValue := GetTagValue(Tag, TagID);
+          if TagValue <> '' then
+          begin
+            if TagID = colorTag then
             begin
-              if TagID = colorTag then
-              begin
-                PrevFontColour := ACanvas.Font.Color;
-                try
-                  ACanvas.Font.Color := BGRHex2Color(TagValue);
-                except
-                end;
+              PrevFontColour := ACanvas.Font.Color;
+              try
+                ACanvas.Font.Color := BGRHex2Color(TagValue);
+              except
               end;
             end;
           end;
         end;
-      end
-      else
-      // Enter char?
-      if CurrChar = {$IFDEF WINDOWS}#10{$ELSE}sLineBreak{$ENDIF} then
-      begin
-        Inc(y, MaxCharHeight);
-        x := ARect.Left;
-      end
-      // Draw the character if it's not a ctrl char
-      else if (CurrChar >= #32) then
-      begin
-        CharWidth := ACanvas.TextWidth(CurrChar);
-
-        if (x + CharWidth > ARect.Right) then // too long line!!
-          NeedBreak := True;
-
-        if not NeedBreak and (y < ARect.Bottom) then
-        begin
-          ACanvas.Brush.Style := bsClear;
-          ACanvas.TextOut(x, y, CurrChar);
-        end;
-
-        x := x + CharWidth;
-        NeedBreak := False;
       end;
-      Inc(idx);
+    end
+    else
+    // Enter char?
+    if CurrChar = {$IFDEF WINDOWS}#10{$ELSE}sLineBreak{$ENDIF} then
+    begin
+      Inc(y, MaxCharHeight);
+      x := ARect.Left;
+    end
+    // Draw the character if it's not a ctrl char
+    else if (CurrChar >= #32) then
+    begin
+      CharWidth := ACanvas.TextWidth(CurrChar);
+
+      if (x + CharWidth > ARect.Right) then // too long line!!
+        NeedBreak := True;
+
+      if not NeedBreak and (y < ARect.Bottom) then
+      begin
+        ACanvas.Brush.Style := bsClear;
+        ACanvas.TextOut(x, y, CurrChar);
+      end;
+
+      x := x + CharWidth;
+      NeedBreak := False;
     end;
+    Inc(idx);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
