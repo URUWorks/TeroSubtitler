@@ -1,0 +1,6 @@
+[submodule "use/UW_BlurayPGSParser"]
+	path = use/UW_BlurayPGSParser
+	url = git@github.com:URUWorks/UW_BlurayPGSParser.git
+[submodule "use/UW_MPVPlayer"]
+	path = use/UW_MPVPlayer
+	url = git@github.com:URUWorks/UW_MPVPlayer.git
