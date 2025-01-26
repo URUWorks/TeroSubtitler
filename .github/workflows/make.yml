@@ -1,0 +1,42 @@
+---
+name: Make
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - master
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Build
+        shell: bash
+        run: |
+          set -xeuo pipefail
+          sudo bash -c '
+            apt-get update
+            apt-get install -y lazarus
+          ' >/dev/null
+          instantfpc -Fu/usr/lib/lazarus/*/components/lazutils \
+            -B '.github/workflows/make.pas' build
