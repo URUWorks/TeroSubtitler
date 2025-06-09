@@ -612,7 +612,7 @@ begin
         {$ELSE}
         sl.Add(TTS.Jobs[i]^.FileName);
         {$ENDIF}
-        tracks += Format('[%d]adelay=delays=%d:all=1[%da];', [c, Subtitles[i].InitialTime, c]);
+        tracks += Format('[%d]adelay=delays=%d:all=1,volume=1[%da];', [c, Subtitles[i].InitialTime, c]);
         //tracks += Format('[%d]adelay=delays=%d:all=1,atempo=%s[%da];', [c, Subtitles[i].InitialTime, GetTempo(TTS.Jobs[i]^.FileName, Subtitles.Duration[i]), c]);
         ids += Format('[%da]', [c]);
       end;
