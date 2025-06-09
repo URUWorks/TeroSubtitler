@@ -54,7 +54,7 @@ type
 implementation
 
 uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Utils;
+  UWSystem.SysUtils, UWSubtitleAPI.Utils, LazStringUtils;
 
 {
 This format allows for time notation of hours, minutes, seconds and milliseconds,
@@ -393,7 +393,7 @@ begin
           Text := '';
           //while (i < SubtitleFile.Count) and (Pos(' --> ', SubtitleFile[i]) = 0) and (SubtitleFile[i] <> '') do
           while (i < SubtitleFile.Count) and (Pos(' --> ', SubtitleFile[i]) = 0) and
-            not IsInteger(SubtitleFile[i]) do
+            not IsNumeric(SubtitleFile[i]) do
           begin
             if Text <> '' then
               Text := Text + sLineBreak + SubtitleFile[i]
