@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023-2024 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2025 URUWorks, uruworks@gmail.com.
  *}
 
 unit formMain;
