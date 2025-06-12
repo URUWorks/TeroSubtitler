@@ -719,7 +719,7 @@ begin
     PosEnter := UTF8Pos(Enter, B);
     if (PosEnter > 0) and (UTF8Copy(B, 1, PosEnter-1).Trim = '-') then
     begin
-      UTF8Delete(B, 1, PosEnter+UTF8Length(Enter));
+      UTF8Delete(B, 1, PosEnter+UTF8Length(Enter)-1);
     end;
 
     if (UTF8Pos(Enter, B) = 0) and (UTF8Copy(B, 1, 1) = '-') then
