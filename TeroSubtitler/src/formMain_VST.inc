@@ -351,7 +351,7 @@ begin
                  TargetCanvas.Font.Color := clRed;
 
                TargetCanvas.TextRect(R, R.Left, R.Top, iArray[i].ToString, TS);
-               R.Top := TextHeight;
+               R.Top += TextHeight;
                TargetCanvas.Font.Color := c;
              end;
              TS.Alignment := taLeftJustify;
@@ -365,7 +365,7 @@ begin
                TargetCanvas.Font.Color := clRed;
 
              TargetCanvas.TextRect(R, R.Left, R.Top, iArray[i].ToString, TS);
-             R.Top := TextHeight;
+             R.Top += TextHeight;
              TargetCanvas.Font.Color := c;
            end;
 
