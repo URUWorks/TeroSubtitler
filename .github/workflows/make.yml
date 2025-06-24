@@ -17,78 +17,31 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  make:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 120
     strategy:
       matrix:
         os:
+          - macos-latest
           - ubuntu-latest
           - windows-latest
-          - macos-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: true
 
-      - name: Build
-        if: runner.os == 'Linux'
+      - name: Build on Unix
+        if: runner.os != 'Windows'
         shell: bash
         run: |
-          set -xeuo pipefail
-          sudo bash -c '
-            apt-get update
-            apt-get install -y lazarus
-          ' >/dev/null
-          declare -rx INSTANTFPCOPTIONS=-Fu/usr/lib/lazarus/*/components/lazutils
+          source '.github/workflows/setup.sh'
           instantfpc '.github/workflows/make.pas' build
-
-      - name: Build
-        if: runner.os == 'Macos'
-        shell: python
-        run: |
-          """https://macappstore.org/lazarus"""
-          import os
-          import subprocess
-          subprocess.run(
-              "openssl version -a".split(),
-              check=True,
-          )
-          OPENSSL=subprocess.run(
-              "brew --prefix openssl@1.1".split(),
-              check=True,
-              capture_output=True,
-          ).stdout.decode().strip("\n")
-          os.environ["PATH"] += f":{OPENSSL}/bin"
-          os.environ["DYLD_LIBRARY_PATH"] = f"{OPENSSL}/lib"
-          subprocess.run(
-              "brew install --cask lazarus".split(),
-              check=True,
-              capture_output=True,
-          )
-          os.environ["INSTANTFPCOPTIONS"] = "-Fu/Applications/Lazarus/components/lazutils"
-          subprocess.run(
-              "instantfpc .github/workflows/make.pas build".split(),
-              check=True,
-          )
 
       - name: Build on Windows
         if: runner.os == 'Windows'
         shell: powershell
         run: |
-          $ErrorActionPreference = 'stop'
-          Set-PSDebug -Strict
-          New-Variable -Option Constant -Name VAR -Value @{
-            Uri = 'https://is.gd/Yuk8a1'
-            OutFile = (New-TemporaryFile).FullName + '.exe'
-          }
-          Invoke-WebRequest @VAR
-          & $VAR.OutFile.Replace('Temp', 'Temp\.') /SP- /VERYSILENT /NORESTART `
-            /SUPPRESSMSGBOXES | Out-Null
-          $Env:PATH+=';C:\Lazarus'
-          (Get-Command 'lazbuild').Source | Out-Host
-          $Env:PATH+=';C:\Lazarus\fpc\3.2.2\bin\x86_64-win64'
-          (Get-Command 'instantfpc').Source | Out-Host
-          $Env:INSTANTFPCOPTIONS='-FuC:\Lazarus\components\lazutils'
-          instantfpc '.github\workflows\make.pas' build
+          pwsh -File '.github/workflows/setup.ps1'
