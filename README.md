@@ -109,4 +109,5 @@ Scott Napier,
 Serenella Massidda,
 Martin Keary,
 Casper Jeukendrup,
+Pedro Caires,
 and all users of our software!
