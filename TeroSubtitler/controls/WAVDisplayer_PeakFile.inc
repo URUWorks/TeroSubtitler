@@ -52,135 +52,124 @@ end;
 
 procedure TUWWaveformDisplayer.CreatePeakTab(WAVFile: TUWWAVEFile);
 var
-  Buffer8                : TByteDynArray;
-  Buffer16               : TSmallIntDynArray;
-  Buffer32               : TSingleDynArray;
-  i, j                   : Integer;
+  Buffer8   : TByteDynArray;
+  Buffer16  : TSmallIntDynArray;
+  Buffer32  : TSingleDynArray;
+  i, j      : Integer;
   PeakMax, PeakMin       : SmallInt;
   PeakMax8, PeakMin8     : Byte;
   PeakMax32, PeakMin32   : Single;
   PeakMaxMax, PeakMinMin : SmallInt;
   MaxAbsoluteValue       : Integer;
   NormFactor             : Double;
+  ReadSize               : Integer;
 begin
   if Assigned(FOnPeakCreation) then FOnPeakCreation(Self, pcetStart, 0);
 
-  // Get 1 peak value every ~10ms
   FSamplesPerPeak := WAVFile.SamplesPerSecond div 100;
-  FPeakTabSize    := Ceil((WAVFile.SamplesCount / FSamplesPerPeak) / WAVFile.Channels);
-  // Allocate the big peak tab
-  FPeakTab := NIL;
+  FPeakTabSize := Ceil((WAVFile.SamplesCount / FSamplesPerPeak) / WAVFile.Channels);
   SetLength(FPeakTab, FPeakTabSize);
-
-// WAV Data format  Maximum value    Minimum value	    Midpoint value
-//     8-bit PCM	  255 (0xFF)       0	                128 (0x80)
-//     16-bit PCM	  32,767 (0x7FFF)  - 32,768 (0x8000)	0
 
   PeakMaxMax := -32768;
   PeakMinMin := 32767;
 
-  if (WAVFile.BitsPerSample = 8) then
+  if WAVFile.BitsPerSample = 8 then
   begin
-    // Allocate the small buffer
     SetLength(Buffer8, FSamplesPerPeak * WAVFile.Channels);
-    for i := 0 to FPeakTabSize-1 do
+    for i := 0 to FPeakTabSize - 1 do
     begin
-      FillByte(Buffer8[0], FSamplesPerPeak * SizeOf(Shortint) * WAVFile.Channels, 0);
-      WAVFile.Read(@Buffer8[0], FSamplesPerPeak * SizeOf(Shortint) * WAVFile.Channels);
+      ReadSize := WAVFile.Read(@Buffer8[0], Length(Buffer8));
+      if ReadSize <= 0 then Break;
+
       PeakMax8 := 0;
       PeakMin8 := 255;
-      for j := 0 to (FSamplesPerPeak * WAVFile.Channels)-1 do
+      for j := 0 to ReadSize - 1 do
       begin
-        if Buffer8[j] > PeakMax8 then
-          PeakMax8 := Buffer8[j];
-        if Buffer8[j] < PeakMin8 then
-          PeakMin8 := Buffer8[j];
+        if Buffer8[j] > PeakMax8 then PeakMax8 := Buffer8[j];
+        if Buffer8[j] < PeakMin8 then PeakMin8 := Buffer8[j];
       end;
-      // Convert 8 bits to 16 bits
-      PeakMax := ((PeakMax8 - 128) shl 8);
-      PeakMin := ((PeakMin8 - 128) shl 8);
+
+      PeakMax := (PeakMax8 - 128) shl 8;
+      PeakMin := (PeakMin8 - 128) shl 8;
 
       FPeakTab[i].Max := PeakMax;
       FPeakTab[i].Min := PeakMin;
 
-      if (PeakMax > PeakMaxMax) then
-        PeakMaxMax := PeakMax;
-      if (PeakMin < PeakMinMin) then
-        PeakMinMin := PeakMin;
+      if PeakMax > PeakMaxMax then PeakMaxMax := PeakMax;
+      if PeakMin < PeakMinMin then PeakMinMin := PeakMin;
 
       if Assigned(FOnPeakCreation) then
-        FOnPeakCreation(Self, pcetProgress, (i*100) div Integer(FPeakTabSize));
+        FOnPeakCreation(Self, pcetProgress, (i * 100) div FPeakTabSize);
     end;
   end
-  else if (WAVFile.BitsPerSample = 16) then
+  else if WAVFile.BitsPerSample = 16 then
   begin
-    // Allocate the small buffer
     SetLength(Buffer16, FSamplesPerPeak * WAVFile.Channels);
-    for i := 0 to FPeakTabSize-1 do
+    for i := 0 to FPeakTabSize - 1 do
     begin
-      FillByte(Buffer16[0], FSamplesPerPeak * SizeOf(SmallInt) * WAVFile.Channels, 0);
-      WAVFile.Read(@Buffer16[0], FSamplesPerPeak * SizeOf(SmallInt) * WAVFile.Channels);
+      ReadSize := WAVFile.Read(@Buffer16[0], Length(Buffer16) * SizeOf(SmallInt));
+      if ReadSize <= 0 then Break;
+
       PeakMax := -32768;
       PeakMin := 32767;
-      for j := 0 to (FSamplesPerPeak * WAVFile.Channels)-1 do
+      for j := 0 to (ReadSize div SizeOf(SmallInt)) - 1 do
       begin
-        if Buffer16[j] > PeakMax then
-          PeakMax := Buffer16[j];
-        if Buffer16[j] < PeakMin then
-          PeakMin := Buffer16[j];
+        if Buffer16[j] > PeakMax then PeakMax := Buffer16[j];
+        if Buffer16[j] < PeakMin then PeakMin := Buffer16[j];
       end;
+
       FPeakTab[i].Max := PeakMax;
       FPeakTab[i].Min := PeakMin;
 
-      if PeakMax > PeakMaxMax then
-        PeakMaxMax := PeakMax;
-      if PeakMin < PeakMinMin then
-        PeakMinMin := PeakMin;
+      if PeakMax > PeakMaxMax then PeakMaxMax := PeakMax;
+      if PeakMin < PeakMinMin then PeakMinMin := PeakMin;
 
       if Assigned(FOnPeakCreation) then
-        FOnPeakCreation(Self, pcetProgress, (i*100) div Integer(FPeakTabSize));
+        FOnPeakCreation(Self, pcetProgress, (i * 100) div FPeakTabSize);
     end;
   end
-  else if (WAVFile.BitsPerSample = 32) then
+  else if WAVFile.BitsPerSample = 32 then
   begin
-    // Allocate the small buffer
     SetLength(Buffer32, FSamplesPerPeak * WAVFile.Channels);
-    for i := 0 to FPeakTabSize-1 do
+    for i := 0 to FPeakTabSize - 1 do
     begin
-      FillByte(Buffer32[0], FSamplesPerPeak * SizeOf(SmallInt) * WAVFile.Channels, 0);
-      WAVFile.Read(@Buffer32[0], FSamplesPerPeak * SizeOf(Single) * WAVFile.Channels);
+      ReadSize := WAVFile.Read(@Buffer32[0], Length(Buffer32) * SizeOf(Single));
+      if ReadSize <= 0 then Break;
+
       PeakMax32 := -1.0;
       PeakMin32 := 1.0;
-      for j:=0 to (FSamplesPerPeak * WAVFile.Channels)-1 do
+      for j := 0 to (ReadSize div SizeOf(Single)) - 1 do
       begin
-        if Buffer32[j] > PeakMax32 then
-          PeakMax32 := Buffer32[j];
-        if Buffer32[j] < PeakMin32 then
-          PeakMin32 := Buffer32[j];
+        if Buffer32[j] > PeakMax32 then PeakMax32 := Buffer32[j];
+        if Buffer32[j] < PeakMin32 then PeakMin32 := Buffer32[j];
       end;
-      // Convert 32 bits float to 16 bits integer
+
       PeakMax := Single2SmallInt(PeakMax32);
       PeakMin := Single2SmallInt(PeakMin32);
 
       FPeakTab[i].Max := PeakMax;
       FPeakTab[i].Min := PeakMin;
 
-      if PeakMax > PeakMaxMax then
-        PeakMaxMax := PeakMax;
-      if PeakMin < PeakMinMin then
-        PeakMinMin := PeakMin;
+      if PeakMax > PeakMaxMax then PeakMaxMax := PeakMax;
+      if PeakMin < PeakMinMin then PeakMinMin := PeakMin;
 
       if Assigned(FOnPeakCreation) then
-        FOnPeakCreation(Self, pcetProgress, (i*100) div Integer(FPeakTabSize));
+        FOnPeakCreation(Self, pcetProgress, (i * 100) div FPeakTabSize);
     end;
   end;
-  // Calc. normalize factor
+
   MaxAbsoluteValue := Max(Abs(PeakMaxMax), Abs(PeakMinMin));
-  NormFactor := 32768.0 / MaxAbsoluteValue;
-  // Normalize peak tab
+  if MaxAbsoluteValue > 0 then
+    NormFactor := 32768.0 / MaxAbsoluteValue
+  else
+    NormFactor := 1.0;
+
   NormalizePeakTab(NormFactor);
-  Buffer8  := NIL;
-  Buffer16 := NIL;
+
+  Buffer8 := nil;
+  Buffer16 := nil;
+  Buffer32 := nil;
+
   if Assigned(FOnPeakCreation) then FOnPeakCreation(Self, pcetStop, 0);
 end;
 
@@ -188,31 +177,36 @@ end;
 
 function TUWWaveformDisplayer.NormalizePeakTab(NormFactor: Double): Boolean;
 var
-  i, MaxAbsoluteValue, Value : Integer;
+  i, MaxAbsoluteValue, Value: Integer;
 begin
   Result := False;
 
-  if (NormFactor = -1) then
+  if NormFactor = -1 then
   begin
     MaxAbsoluteValue := 0;
+
     // First pass, calculate normalization factor
-    for i := 0 to FPeakTabSize-1 do
+    for i := 0 to FPeakTabSize - 1 do
     begin
-      Value := FPeakTab[i].Max;
-      if (Value > MaxAbsoluteValue) then
+      Value := Abs(FPeakTab[i].Max);
+      if Value > MaxAbsoluteValue then
         MaxAbsoluteValue := Value;
 
-      Value := -FPeakTab[i].Min;
-      if (Value > MaxAbsoluteValue) then
+      Value := Abs(FPeakTab[i].Min);
+      if Value > MaxAbsoluteValue then
         MaxAbsoluteValue := Value;
     end;
+
+    if MaxAbsoluteValue = 0 then
+      Exit(False);
+
     NormFactor := 32768.0 / MaxAbsoluteValue;
   end;
 
-  if (NormFactor > 1.1) then
+  // Normalize if the factor differs significantly from 1
+  if Abs(NormFactor - 1.0) > 0.01 then
   begin
-    // Apply normalization factor
-    for i := 0 to FPeakTabSize-1 do
+    for i := 0 to FPeakTabSize - 1 do
     begin
       FPeakTab[i].Max := Round(FPeakTab[i].Max * NormFactor);
       FPeakTab[i].Min := Round(FPeakTab[i].Min * NormFactor);
