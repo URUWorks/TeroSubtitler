@@ -27,7 +27,7 @@ uses
   UWFlatButton, UWSeekBar, UWStatusBar, UWEditAction, UWSubtitleAPI, BGRABitmap,
   BGRABitmapTypes, UWSystem.TimeUtils, LCLIntf, LCLType, ActnList, Buttons,
   laz.VirtualTrees, MPVPlayer, UWSubtitleAPI.Formats, procTypes, procUndo,
-  LCLTranslator, UWSystem.Globalization, procLocalize;
+  LCLTranslator, UWSystem.Globalization, procLocalize, LMessages;
 
 type
 
@@ -909,6 +909,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
     procedure FormResize(Sender: TObject);
+    procedure FormShortCut(var Msg: TLMKey; var Handled: Boolean);
     procedure FormShow(Sender: TObject);
     procedure LayoutVSTResize(Sender: TObject);
     procedure StatusBarMouseUp(Sender: TObject; Button: TMouseButton;
@@ -1543,13 +1544,27 @@ begin
   StatusBar.Panels[0].Width := ClientWidth - c;
 end;
 
-// -----------------------------------------------------------------------------
-
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
   LoadFormSettings(Self);
   // Show random tip
   SetStatusBarText(GetRandomTipString, 0, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.FormShortCut(var Msg: TLMKey; var Handled: Boolean);
+var
+  NumChar: Char;
+begin
+  Handled := False;
+  if ((Screen.ActiveControl is TUWMemo) or (Screen.ActiveControl is TUWEditAction))
+    and (Msg.CharCode in [VK_NUMPAD0..VK_NUMPAD9]) and (KeyDataToShiftState(Msg.KeyData) = []) then
+  begin
+    NumChar := Chr(Ord('0') + (Msg.CharCode - VK_NUMPAD0));
+    PostMessage(Screen.ActiveControl.Handle, LM_CHAR, Ord(NumChar), 0);
+    Handled := True;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

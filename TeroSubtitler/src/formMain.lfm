@@ -22,24 +22,25 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   OnDropFiles = FormDropFiles
   OnResize = FormResize
+  OnShortCut = FormShortCut
   OnShow = FormShow
   object LayoutWaveform: TUWLayout
     Left = 0
     Height = 150
-    Top = 607
-    Width = 1150
+    Top = 796
+    Width = 1438
     Align = alBottom
     ClientHeight = 150
-    ClientWidth = 1150
+    ClientWidth = 1438
     Constraints.MaxHeight = 375
     Constraints.MinHeight = 125
     Constraints.MinWidth = 125
     TabOrder = 2
     object WAVE: TUWWaveformDisplayer
       Left = 0
-      Height = 92
+      Height = 116
       Top = 0
-      Width = 1150
+      Width = 1438
       MinimumBlank = 30
       EmptyText = 'Click to add waveform'
       FPS = 25
@@ -63,9 +64,9 @@ object frmMain: TfrmMain
     end
     object CoolBarWaveform: TCoolBar
       Left = 0
-      Height = 28
-      Top = 92
-      Width = 1150
+      Height = 34
+      Top = 116
+      Width = 1438
       Align = alBottom
       AutoSize = True
       BandBorderStyle = bsNone
@@ -118,11 +119,11 @@ object frmMain: TfrmMain
         Left = 5
         Height = 28
         Top = 3
-        Width = 103
+        Width = 132
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 6
-        BorderSpacing.Top = 4
+        BorderSpacing.Left = 5
+        BorderSpacing.Top = 3
         BorderSpacing.Bottom = 1
         EdgeBorders = []
         Images = ImageList_Default
@@ -147,7 +148,7 @@ object frmMain: TfrmMain
           Action = actMediaPlayBeforeSelection
         end
         object wtlb3: TToolButton
-          Left = 102
+          Left = 103
           Top = 0
           Action = actMediaPlayAfterSelection
         end
@@ -158,11 +159,11 @@ object frmMain: TfrmMain
         Left = 115
         Height = 28
         Top = 3
-        Width = 63
+        Width = 88
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 144
-        BorderSpacing.Top = 4
+        BorderSpacing.Left = 115
+        BorderSpacing.Top = 3
         BorderSpacing.Bottom = 1
         EdgeBorders = []
         Images = ImageList_Default
@@ -191,11 +192,11 @@ object frmMain: TfrmMain
         Left = 185
         Height = 28
         Top = 3
-        Width = 73
+        Width = 88
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 231
-        BorderSpacing.Top = 4
+        BorderSpacing.Left = 185
+        BorderSpacing.Top = 3
         BorderSpacing.Bottom = 1
         EdgeBorders = []
         Images = ImageList_Default
@@ -224,11 +225,11 @@ object frmMain: TfrmMain
         Left = 265
         Height = 28
         Top = 3
-        Width = 113
+        Width = 146
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 331
-        BorderSpacing.Top = 4
+        BorderSpacing.Left = 265
+        BorderSpacing.Top = 3
         BorderSpacing.Bottom = 1
         EdgeBorders = []
         Images = ImageList_Default
@@ -256,7 +257,7 @@ object frmMain: TfrmMain
           Action = actJumpToPrevShotChange
         end
         object ToolButton5: TToolButton
-          Left = 116
+          Left = 117
           Top = 0
           Action = actJumpToNextShotChange
         end
@@ -267,11 +268,11 @@ object frmMain: TfrmMain
         Left = 385
         Height = 28
         Top = 3
-        Width = 150
+        Width = 74
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 481
-        BorderSpacing.Top = 4
+        BorderSpacing.Left = 385
+        BorderSpacing.Top = 3
         BorderSpacing.Bottom = 1
         EdgeBorders = []
         Images = ImageList_Default
@@ -294,24 +295,24 @@ object frmMain: TfrmMain
     end
   end
   object LayoutVideo: TUWLayout
-    Left = 525
-    Height = 573
-    Top = 59
+    Left = 813
+    Height = 756
+    Top = 34
     Width = 625
     Align = alRight
-    ClientHeight = 573
+    ClientHeight = 756
     ClientWidth = 625
     Constraints.MinHeight = 188
     Constraints.MinWidth = 188
     TabOrder = 1
     object LayoutVideoClient: TUWLayout
       Left = 0
-      Height = 545
+      Height = 722
       Top = 0
-      Width = 500
+      Width = 625
       Align = alClient
-      ClientHeight = 545
-      ClientWidth = 500
+      ClientHeight = 722
+      ClientWidth = 625
       TabOrder = 0
       object sbrSeek: TUWSeekBar
         AnchorSideLeft.Control = lblMediaTime
@@ -319,10 +320,10 @@ object frmMain: TfrmMain
         AnchorSideTop.Control = lblMediaLength
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = lblMediaLength
-        Left = 110
+        Left = 113
         Height = 9
-        Top = 658
-        Width = 324
+        Top = 698
+        Width = 399
         ShowButton = False
         Max = 1000
         Position = 0
@@ -343,11 +344,11 @@ object frmMain: TfrmMain
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = LayoutVideoClient
         AnchorSideBottom.Side = asrBottom
-        Left = 420
-        Height = 15
+        Left = 522
+        Height = 20
         Hint = 'Video length and FPS'
-        Top = 522
-        Width = 72
+        Top = 692
+        Width = 93
         Alignment = taRightJustify
         Anchors = [akRight, akBottom]
         BorderSpacing.Right = 10
@@ -364,10 +365,10 @@ object frmMain: TfrmMain
         AnchorSideTop.Control = lblMediaLength
         AnchorSideTop.Side = asrCenter
         Left = 10
-        Height = 15
+        Height = 20
         Hint = 'Current video position'
-        Top = 652
-        Width = 72
+        Top = 692
+        Width = 93
         Alignment = taRightJustify
         BorderSpacing.Left = 10
         Caption = '00:00:00.000'
@@ -384,9 +385,9 @@ object frmMain: TfrmMain
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = lblMediaLength
         Left = 0
-        Height = 514
+        Height = 682
         Top = 0
-        Width = 500
+        Width = 625
         Anchors = [akTop, akLeft, akRight, akBottom]
         BorderSpacing.Bottom = 10
         BevelOuter = bvNone
@@ -417,9 +418,9 @@ object frmMain: TfrmMain
     end
     object CoolBarVideo: TCoolBar
       Left = 0
-      Height = 28
-      Top = 545
-      Width = 500
+      Height = 34
+      Top = 722
+      Width = 625
       Align = alBottom
       AutoSize = True
       BandBorderStyle = bsNone
@@ -467,11 +468,11 @@ object frmMain: TfrmMain
         Left = 5
         Height = 28
         Top = 3
-        Width = 138
+        Width = 175
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 6
-        BorderSpacing.Top = 4
+        BorderSpacing.Left = 5
+        BorderSpacing.Top = 3
         EdgeBorders = []
         Images = ImageList_Default
         TabOrder = 0
@@ -493,7 +494,7 @@ object frmMain: TfrmMain
           Action = actMediaRewind
         end
         object vtlb5: TToolButton
-          Left = 116
+          Left = 117
           Top = 0
           Action = actMediaForward
         end
@@ -503,7 +504,7 @@ object frmMain: TfrmMain
           Action = actMediaPreviousFrame
         end
         object vtlb7: TToolButton
-          Left = 145
+          Left = 146
           Top = 0
           Action = actMediaNextFrame
         end
@@ -515,11 +516,11 @@ object frmMain: TfrmMain
         Left = 150
         Height = 28
         Top = 3
-        Width = 58
+        Width = 74
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 188
-        BorderSpacing.Top = 4
+        BorderSpacing.Left = 150
+        BorderSpacing.Top = 3
         EdgeBorders = []
         Images = ImageList_Default
         TabOrder = 1
@@ -545,11 +546,11 @@ object frmMain: TfrmMain
         Left = 215
         Height = 28
         Top = 3
-        Width = 92
+        Width = 117
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 269
-        BorderSpacing.Top = 4
+        BorderSpacing.Left = 215
+        BorderSpacing.Top = 3
         EdgeBorders = []
         Images = ImageList_Default
         TabOrder = 2
@@ -583,11 +584,11 @@ object frmMain: TfrmMain
         Left = 314
         Height = 28
         Top = 3
-        Width = 150
+        Width = 92
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 392
-        BorderSpacing.Top = 4
+        BorderSpacing.Left = 314
+        BorderSpacing.Top = 3
         EdgeBorders = []
         Images = ImageList_Default
         TabOrder = 3
@@ -621,17 +622,17 @@ object frmMain: TfrmMain
     Cursor = crVSplit
     Left = 0
     Height = 6
-    Top = 631
-    Width = 1150
+    Top = 790
+    Width = 1438
     Align = alBottom
     AutoSnap = False
     ResizeAnchor = akBottom
     ResizeStyle = rsLine
   end
   object SplitterVideo: TSplitter
-    Left = 644
-    Height = 573
-    Top = 59
+    Left = 807
+    Height = 756
+    Top = 34
     Width = 6
     Align = alRight
     AutoSnap = False
@@ -640,42 +641,42 @@ object frmMain: TfrmMain
   end
   object LayoutSubtitles: TUWLayout
     Left = 0
-    Height = 573
-    Top = 59
-    Width = 645
+    Height = 756
+    Top = 34
+    Width = 807
     Align = alClient
-    ClientHeight = 573
-    ClientWidth = 645
+    ClientHeight = 756
+    ClientWidth = 807
     Constraints.MinHeight = 188
     Constraints.MinWidth = 188
     TabOrder = 0
     object LayoutVST: TUWLayout
       Left = 0
-      Height = 573
+      Height = 756
       Top = 0
-      Width = 645
+      Width = 807
       Align = alClient
-      ClientHeight = 573
-      ClientWidth = 645
+      ClientHeight = 756
+      ClientWidth = 807
       TabOrder = 0
       OnResize = LayoutVSTResize
       object LayoutEditor: TUWLayout
         Left = 0
         Height = 174
-        Top = 399
-        Width = 645
+        Top = 582
+        Width = 807
         Align = alBottom
         ClientHeight = 174
-        ClientWidth = 645
+        ClientWidth = 807
         Constraints.MinHeight = 174
         TabOrder = 1
         object LayoutEditorTimes: TUWLayout
           Left = 0
-          Height = 139
+          Height = 174
           Top = 0
           Width = 185
           Align = alLeft
-          ClientHeight = 139
+          ClientHeight = 174
           ClientWidth = 185
           TabOrder = 1
           object tedInitial: TUWTimeEdit
@@ -747,7 +748,7 @@ object frmMain: TfrmMain
           object btnDuration: TUWFlatButton
             Left = 1
             Height = 29
-            Top = 108
+            Top = 109
             Width = 29
             ButtonStyle = True
             HightlightColor = clBtnHighlight
@@ -762,7 +763,7 @@ object frmMain: TfrmMain
             Left = 30
             Height = 29
             Hint = 'Duration'
-            Top = 108
+            Top = 109
             Width = 130
             Value = 0
             FPS = 25
@@ -812,10 +813,10 @@ object frmMain: TfrmMain
           end
           object cboActor: TComboBox
             Left = 30
-            Height = 23
+            Height = 28
             Top = 2
             Width = 148
-            ItemHeight = 15
+            ItemHeight = 20
             TabOrder = 0
             TabStop = False
             OnChange = cboActorChange
@@ -837,19 +838,19 @@ object frmMain: TfrmMain
           end
         end
         object LayoutEditorClient: TUWLayout
-          Left = 148
-          Height = 139
+          Left = 185
+          Height = 174
           Top = 0
-          Width = 497
+          Width = 622
           Align = alClient
-          ClientHeight = 139
-          ClientWidth = 497
+          ClientHeight = 174
+          ClientWidth = 622
           TabOrder = 0
           object CoolBarEditor: TCoolBar
             Left = 0
-            Height = 58
+            Height = 70
             Top = 0
-            Width = 497
+            Width = 622
             AutoSize = True
             BandBorderStyle = bsNone
             Bands = <            
@@ -901,11 +902,11 @@ object frmMain: TfrmMain
               Left = 5
               Height = 28
               Top = 3
-              Width = 46
+              Width = 59
               Align = alNone
               AutoSize = True
-              BorderSpacing.Left = 6
-              BorderSpacing.Top = 4
+              BorderSpacing.Left = 5
+              BorderSpacing.Top = 3
               EdgeBorders = []
               Images = ImageList_Default
               TabOrder = 0
@@ -928,11 +929,11 @@ object frmMain: TfrmMain
               Left = 58
               Height = 28
               Top = 3
-              Width = 140
+              Width = 175
               Align = alNone
               AutoSize = True
-              BorderSpacing.Left = 72
-              BorderSpacing.Top = 4
+              BorderSpacing.Left = 58
+              BorderSpacing.Top = 3
               EdgeBorders = []
               Images = ImageList_Default
               TabOrder = 1
@@ -959,12 +960,12 @@ object frmMain: TfrmMain
                 Action = actFontStrikeout
               end
               object etlb22: TToolButton
-                Left = 116
+                Left = 117
                 Top = 0
                 Action = actFontColorDlg
               end
               object etlb23: TToolButton
-                Left = 145
+                Left = 146
                 Top = 0
                 Action = actFontClear
               end
@@ -975,11 +976,11 @@ object frmMain: TfrmMain
               Left = 205
               Height = 28
               Top = 3
-              Width = 165
+              Width = 209
               Align = alNone
               AutoSize = True
-              BorderSpacing.Left = 256
-              BorderSpacing.Top = 4
+              BorderSpacing.Left = 205
+              BorderSpacing.Top = 3
               EdgeBorders = []
               Images = ImageList_Default
               TabOrder = 2
@@ -1006,8 +1007,8 @@ object frmMain: TfrmMain
                 Action = actAlignToNone
               end
               object etlbdiv6: TToolButton
-                Left = 116
-                Height = 6
+                Left = 117
+                Height = 28
                 Top = 0
                 Style = tbsDivider
               end
@@ -1033,11 +1034,11 @@ object frmMain: TfrmMain
               Left = 377
               Height = 28
               Top = 3
-              Width = 51
+              Width = 59
               Align = alNone
               AutoSize = True
-              BorderSpacing.Left = 471
-              BorderSpacing.Top = 4
+              BorderSpacing.Left = 377
+              BorderSpacing.Top = 3
               EdgeBorders = []
               Images = ImageList_Default
               TabOrder = 3
@@ -1058,14 +1059,14 @@ object frmMain: TfrmMain
             object ToolBarEditorLines: TToolBar
               AnchorSideLeft.Control = CoolBarEditor
               AnchorSideTop.Control = CoolBarEditor
-              Left = 5
+              Left = 435
               Height = 28
-              Top = 39
-              Width = 93
+              Top = 3
+              Width = 117
               Align = alNone
               AutoSize = True
-              BorderSpacing.Left = 6
-              BorderSpacing.Top = 41
+              BorderSpacing.Left = 435
+              BorderSpacing.Top = 3
               EdgeBorders = []
               Images = ImageList_Default
               TabOrder = 4
@@ -1095,14 +1096,14 @@ object frmMain: TfrmMain
             object ToolBarEditorWords: TToolBar
               AnchorSideLeft.Control = CoolBarEditor
               AnchorSideTop.Control = CoolBarEditor
-              Left = 105
+              Left = 5
               Height = 28
               Top = 39
-              Width = 93
+              Width = 117
               Align = alNone
               AutoSize = True
-              BorderSpacing.Left = 131
-              BorderSpacing.Top = 41
+              BorderSpacing.Left = 5
+              BorderSpacing.Top = 39
               EdgeBorders = []
               Images = ImageList_Default
               TabOrder = 5
@@ -1132,16 +1133,16 @@ object frmMain: TfrmMain
           end
           object LayoutEditorMemo: TUWLayout
             Left = 0
-            Height = 81
-            Top = 58
-            Width = 497
+            Height = 104
+            Top = 70
+            Width = 622
             Align = alClient
-            ClientHeight = 81
-            ClientWidth = 497
+            ClientHeight = 104
+            ClientWidth = 622
             TabOrder = 1
             object mmoTranslation: TUWMemo
               Left = 270
-              Height = 41
+              Height = 64
               Top = 38
               Width = 260
               LabelMemo.AnchorSideLeft.Control = mmoTranslation
@@ -1149,11 +1150,11 @@ object frmMain: TfrmMain
               LabelMemo.AnchorSideRight.Side = asrBottom
               LabelMemo.AnchorSideBottom.Control = mmoTranslation
               LabelMemo.Left = 270
-              LabelMemo.Height = 15
-              LabelMemo.Top = 12
-              LabelMemo.Width = 208
+              LabelMemo.Height = 20
+              LabelMemo.Top = 15
+              LabelMemo.Width = 260
               LabelMemo.Anchors = [akLeft, akRight, akBottom]
-              LabelMemo.BorderSpacing.Bottom = 4
+              LabelMemo.BorderSpacing.Bottom = 3
               LabelMemo.Caption = 'mmoTranslation'
               LabelMemo.FocusControl = mmoTranslation
               LabelMemo.ParentColor = False
@@ -1166,8 +1167,8 @@ object frmMain: TfrmMain
               CPSBar.Cursor = crArrow
               CPSBar.Left = 270
               CPSBar.Height = 4
-              CPSBar.Top = 99
-              CPSBar.Width = 208
+              CPSBar.Top = 102
+              CPSBar.Width = 260
               CPSBar.Max = 27
               CPSBar.BackColor = clBtnFace
               CPSBar.BorderColor = clInactiveBorder
@@ -1186,7 +1187,7 @@ object frmMain: TfrmMain
             end
             object mmoText: TUWMemo
               Left = 0
-              Height = 41
+              Height = 64
               Top = 38
               Width = 260
               LabelMemo.AnchorSideLeft.Control = mmoText
@@ -1194,11 +1195,11 @@ object frmMain: TfrmMain
               LabelMemo.AnchorSideRight.Side = asrBottom
               LabelMemo.AnchorSideBottom.Control = mmoText
               LabelMemo.Left = 0
-              LabelMemo.Height = 15
-              LabelMemo.Top = 12
-              LabelMemo.Width = 208
+              LabelMemo.Height = 20
+              LabelMemo.Top = 15
+              LabelMemo.Width = 260
               LabelMemo.Anchors = [akLeft, akRight, akBottom]
-              LabelMemo.BorderSpacing.Bottom = 4
+              LabelMemo.BorderSpacing.Bottom = 3
               LabelMemo.Caption = 'mmoText'
               LabelMemo.FocusControl = mmoText
               LabelMemo.ParentColor = False
@@ -1210,8 +1211,8 @@ object frmMain: TfrmMain
               CPSBar.Cursor = crArrow
               CPSBar.Left = 0
               CPSBar.Height = 4
-              CPSBar.Top = 99
-              CPSBar.Width = 208
+              CPSBar.Top = 102
+              CPSBar.Width = 260
               CPSBar.Max = 27
               CPSBar.BackColor = clBtnFace
               CPSBar.BorderColor = clInactiveBorder
@@ -1232,9 +1233,9 @@ object frmMain: TfrmMain
       end
       object VST: TLazVirtualStringTree
         Left = 0
-        Height = 429
+        Height = 576
         Top = 0
-        Width = 645
+        Width = 807
         Align = alClient
         Constraints.MinHeight = 125
         Header.AutoSizeIndex = -1
@@ -1262,8 +1263,8 @@ object frmMain: TfrmMain
         Cursor = crVSplit
         Left = 0
         Height = 6
-        Top = 428
-        Width = 645
+        Top = 576
+        Width = 807
         Align = alBottom
         AutoSnap = False
         ResizeAnchor = akBottom
@@ -1281,9 +1282,9 @@ object frmMain: TfrmMain
       Visible = False
       object mmoSourceView: TMemo
         Left = 0
-        Height = 133
+        Height = 166
         Top = 0
-        Width = 174
+        Width = 218
         Align = alClient
         ScrollBars = ssAutoBoth
         TabOrder = 0
@@ -1302,9 +1303,9 @@ object frmMain: TfrmMain
   end
   object StatusBar: TUWStatusBar
     Left = 0
-    Height = 23
-    Top = 757
-    Width = 1150
+    Height = 29
+    Top = 946
+    Width = 1438
     Panels = <    
       item
         Bevel = pbNone
@@ -1324,9 +1325,9 @@ object frmMain: TfrmMain
   end
   object CoolBarMain: TCoolBar
     Left = 0
-    Height = 59
+    Height = 34
     Top = 0
-    Width = 1150
+    Width = 1438
     AutoSize = True
     BandBorderStyle = bsNone
     Bands = <    
@@ -1401,11 +1402,11 @@ object frmMain: TfrmMain
       Left = 5
       Height = 28
       Top = 3
-      Width = 98
+      Width = 132
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 6
-      BorderSpacing.Top = 4
+      BorderSpacing.Left = 5
+      BorderSpacing.Top = 3
       BorderSpacing.Bottom = 1
       EdgeBorders = []
       EdgeInner = esNone
@@ -1427,7 +1428,7 @@ object frmMain: TfrmMain
         Style = tbsDropDown
       end
       object tlb2: TToolButton
-        Left = 102
+        Left = 103
         Top = 0
         Action = actSaveSubtitle
       end
@@ -1441,13 +1442,13 @@ object frmMain: TfrmMain
       AnchorSideLeft.Control = CoolBarMain
       AnchorSideTop.Control = CoolBarMain
       Left = 524
-      Height = 23
-      Top = 5
-      Width = 184
+      Height = 28
+      Top = 3
+      Width = 229
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 655
-      BorderSpacing.Top = 4
+      BorderSpacing.Left = 524
+      BorderSpacing.Top = 3
       EdgeBorders = []
       Images = ImageList_Default
       TabOrder = 1
@@ -1455,23 +1456,23 @@ object frmMain: TfrmMain
       Wrapable = False
       object cboInputFPS: TComboBox
         Left = 1
-        Height = 23
+        Height = 28
         Hint = 'FPS of the movie the opened subtitle file was made for'
         Top = 0
         Width = 112
-        ItemHeight = 15
+        ItemHeight = 20
         Style = csDropDownList
         TabOrder = 0
         TabStop = False
         OnSelect = cboInputFPSSelect
       end
       object cboFPS: TComboBox
-        Left = 118
-        Height = 23
+        Left = 117
+        Height = 28
         Hint = 'Target FPS of subtitle file'
         Top = 0
         Width = 112
-        ItemHeight = 15
+        ItemHeight = 20
         Style = csDropDownList
         TabOrder = 1
         TabStop = False
@@ -1479,10 +1480,10 @@ object frmMain: TfrmMain
         OnSelect = cboFPSSelect
       end
       object lblSeparatorFPS: TLabel
-        Left = 114
-        Height = 15
+        Left = 113
+        Height = 20
         Top = 0
-        Width = 3
+        Width = 4
         Caption = ' '
         ParentColor = False
       end
@@ -1493,11 +1494,11 @@ object frmMain: TfrmMain
       Left = 715
       Height = 28
       Top = 3
-      Width = 204
+      Width = 255
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 894
-      BorderSpacing.Top = 4
+      BorderSpacing.Left = 715
+      BorderSpacing.Top = 3
       EdgeBorders = []
       Images = ImageList_Default
       TabOrder = 2
@@ -1510,11 +1511,11 @@ object frmMain: TfrmMain
       end
       object cboFormat: TComboBox
         Left = 30
-        Height = 23
+        Height = 28
         Hint = 'Format'
         Top = 0
         Width = 225
-        ItemHeight = 15
+        ItemHeight = 20
         Style = csDropDownList
         TabOrder = 0
         TabStop = False
@@ -1527,11 +1528,11 @@ object frmMain: TfrmMain
       Left = 926
       Height = 28
       Top = 3
-      Width = 204
+      Width = 255
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 1158
-      BorderSpacing.Top = 4
+      BorderSpacing.Left = 926
+      BorderSpacing.Top = 3
       EdgeBorders = []
       Images = ImageList_Default
       TabOrder = 3
@@ -1544,11 +1545,11 @@ object frmMain: TfrmMain
       end
       object cboEncoding: TComboBox
         Left = 30
-        Height = 23
+        Height = 28
         Hint = 'Encoding'
         Top = 0
         Width = 225
-        ItemHeight = 15
+        ItemHeight = 20
         Style = csDropDownList
         TabOrder = 0
         TabStop = False
@@ -1557,16 +1558,16 @@ object frmMain: TfrmMain
     object edtQuickAction: TUWEditAction
       AnchorSideLeft.Control = CoolBarMain
       AnchorSideTop.Control = CoolBarMain
-      Left = 5
+      Left = 1137
       Height = 28
       Hint = 'Quick Action Finder'
-      Top = 39
+      Top = 3
       Width = 150
       ActionList = ActionList
       OnClickAction = edtQuickActionClickAction
       AutoSize = False
-      BorderSpacing.Left = 6
-      BorderSpacing.Top = 42
+      BorderSpacing.Left = 1137
+      BorderSpacing.Top = 3
       TabOrder = 4
     end
     object ToolBarMainGeneral: TToolBar
@@ -1575,11 +1576,11 @@ object frmMain: TfrmMain
       Left = 110
       Height = 28
       Top = 3
-      Width = 119
+      Width = 151
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 138
-      BorderSpacing.Top = 4
+      BorderSpacing.Left = 110
+      BorderSpacing.Top = 3
       BorderSpacing.Bottom = 1
       EdgeBorders = []
       EdgeInner = esNone
@@ -1600,17 +1601,17 @@ object frmMain: TfrmMain
       end
       object tlbdiv7: TToolButton
         Left = 59
-        Height = 6
+        Height = 28
         Top = 0
         Style = tbsDivider
       end
       object tlb26: TToolButton
-        Left = 65
+        Left = 64
         Top = 0
         Action = actCut
       end
       object tlb27: TToolButton
-        Left = 94
+        Left = 93
         Top = 0
         Action = actCopy
       end
@@ -1626,11 +1627,11 @@ object frmMain: TfrmMain
       Left = 236
       Height = 28
       Top = 3
-      Width = 81
+      Width = 103
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 295
-      BorderSpacing.Top = 4
+      BorderSpacing.Left = 236
+      BorderSpacing.Top = 3
       BorderSpacing.Bottom = 1
       EdgeBorders = []
       EdgeInner = esNone
@@ -1663,11 +1664,11 @@ object frmMain: TfrmMain
       Left = 324
       Height = 28
       Top = 3
-      Width = 193
+      Width = 243
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 405
-      BorderSpacing.Top = 4
+      BorderSpacing.Left = 324
+      BorderSpacing.Top = 3
       BorderSpacing.Bottom = 1
       EdgeBorders = []
       EdgeInner = esNone
@@ -1696,12 +1697,12 @@ object frmMain: TfrmMain
       end
       object tlbdiv11: TToolButton
         Left = 88
-        Height = 6
+        Height = 28
         Top = 0
         Style = tbsDivider
       end
       object tlb43: TToolButton
-        Left = 94
+        Left = 93
         Top = 0
         Action = actTranslatorMode
       end
@@ -1717,18 +1718,18 @@ object frmMain: TfrmMain
       end
       object tlbdiv12: TToolButton
         Left = 180
-        Height = 6
+        Height = 28
         Top = 0
         Style = tbsDivider
       end
       object tlb46: TToolButton
-        Left = 186
+        Left = 185
         Top = 0
         Action = actTimeMode
         Style = tbsCheck
       end
       object tlb47: TToolButton
-        Left = 215
+        Left = 214
         Top = 0
         Action = actFramesMode
         Style = tbsCheck
