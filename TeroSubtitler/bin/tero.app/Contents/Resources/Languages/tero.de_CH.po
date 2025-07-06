@@ -1,0 +1,5608 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tero Subtitler (Übersetzung 04.07.2025)\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: cutegitcat\n"
+"Language-Team: cutegitcat\n"
+"Language: de_CH\n"
+"MIME-Version: 1.1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: proclocalize.lngabversion
+#, object-pascal-format
+msgid ""
+"version %s\n"
+"\n"
+"Compiled at %s on %s\n"
+"Compiler version: %s\n"
+"Target CPU: %s"
+msgstr ""
+"Version %s\n"
+"\n"
+"Kompiliert am %s auf %s\n"
+"Kompiliererversion: %s\n"
+"Ziel-CPU: %s"
+
+#: proclocalize.lngadditionaloption
+msgid "Additional option"
+msgstr "Zusätzliche Option"
+
+#: proclocalize.lngadditionalparams
+msgid "Additional params:"
+msgstr "Zusätzliche Parameter:"
+
+#: proclocalize.lngaddnote
+msgid "Add note"
+msgstr "Anmerkung hinzufügen"
+
+#: proclocalize.lngallsupportedfiles
+msgid "All supported files"
+msgstr "Alle unterstützten Dateien"
+
+#: proclocalize.lngasbadvalues
+msgid "Bad values"
+msgstr "Ungültige Werte"
+
+#: proclocalize.lngasbreaklonglines
+msgid "Line(s) too long"
+msgstr "Zeile(n) zu lang"
+
+#: proclocalize.lngascustom
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+#: proclocalize.lngasellipsessinglesmartcharacter
+msgid "Ellipses dots instead of Unicode character"
+msgstr "Auslassungspunkte anstelle des Unicode-Zeichens"
+
+#: proclocalize.lngasempty
+msgid "Empty entry"
+msgstr "Leerer Eintrag"
+
+#: proclocalize.lngasfixtags
+msgid "Invalid or incomplete tags"
+msgstr "Ungültige oder unvollständige Tags"
+
+#: proclocalize.lngasgaptooshort
+msgid "Gap too short"
+msgstr "Abstand zu kurz"
+
+#: proclocalize.lngashearingimpaired
+msgid "Hearing impaired"
+msgstr "Gehörlos/Hörbehindert"
+
+#: proclocalize.lngasktoextractaudio
+msgid "Audio waveform was not found, do you want to extract it?"
+msgstr "Audio-/Ton-Wellenform nicht gefunden. Möchtest du sie extrahieren?"
+
+#: proclocalize.lngasktosave
+#, object-pascal-format
+msgid ""
+"“%s”\n"
+"\n"
+"Do you wish to save it?"
+msgstr ""
+"„%s“\n"
+"\n"
+"Möchtest du speichern?"
+
+#: proclocalize.lngaslineselected
+#, object-pascal-format, fuzzy
+#| msgid "%d lines selected / %d"
+msgid "%d entries selected / %d"
+msgstr "%d Zeilen ausgewählt / %d"
+
+#: proclocalize.lngasmarked
+msgid "Marked entry"
+msgstr "Markierter Eintrag"
+
+#: proclocalize.lngasmaxcps
+msgid "Too many CPS"
+msgstr "Zu viele Zeichen pro Sekunde (ZPS)"
+
+#: proclocalize.lngasmaxlines
+msgid "Maximum number of lines exceeded"
+msgstr "Maximale Zeilenzahl überschritten"
+
+#: proclocalize.lngasocr
+msgid "OCR error"
+msgstr "Fehler bei Texterkennung (OCR)"
+
+#: proclocalize.lngasoverlappingwithnext
+msgid "Overlapping with following entry"
+msgstr "Überschneidung mit folgendem Eintrag"
+
+#: proclocalize.lngasoverlappingwithprev
+msgid "Overlapping with previous entry"
+msgstr "Überschneidung mit vorherigem Eintrag"
+
+#: proclocalize.lngasprohibitedchars
+msgid "Contains a prohibited character"
+msgstr "Enthält ein unzulässiges Zeichen"
+
+#: proclocalize.lngasreadingvideofile
+msgid "Reading video file..."
+msgstr "Videodatei wird gelesen ..."
+
+#: proclocalize.lngasrepeatedchars
+msgid "Repeated character"
+msgstr "Wiederholtes Zeichen"
+
+#: proclocalize.lngasrepeatedentry
+msgid "Repeated entry"
+msgstr "Doppelter Eintrag"
+
+#: proclocalize.lngastext
+msgctxt "proclocalize.lngastext"
+msgid "Text"
+msgstr "Text"
+
+#: proclocalize.lngastextchars
+#, object-pascal-format
+msgid "Text (%s characters at %.2f CPS):"
+msgstr "Text (%s Zeichen bei %.2f ZPS):"
+
+#: proclocalize.lngastimetoolong
+msgid "Duration too long"
+msgstr "Dauer zu lang"
+
+#: proclocalize.lngastimetooshort
+msgid "Duration too short"
+msgstr "Dauer zu kurz"
+
+#: proclocalize.lngastranslation
+msgctxt "proclocalize.lngastranslation"
+msgid "Translation"
+msgstr "Übersetzung"
+
+#: proclocalize.lngastranslationchars
+#, object-pascal-format
+msgid "Translation (%s characters at %.2f CPS):"
+msgstr "Übersetzung (%s Zeichen bei %.2f ZPS):"
+
+#: proclocalize.lngasunbreak
+#, object-pascal-format
+msgid "Line breaks less than %d characters"
+msgstr "Zeilenumbrüche bei weniger als %d Zeichen"
+
+#: proclocalize.lngasunnecessarydots
+msgid "Unnecessary dots"
+msgstr "Unnötige Punkte"
+
+#: proclocalize.lngasunnecessaryspaces
+msgid "Unnecessary spaces"
+msgstr "Unnötige Leerzeichen"
+
+#: proclocalize.lngasvideolen
+#, object-pascal-format
+msgid "%s (%s FPS)"
+msgstr "%s (%s BPS)"
+
+#: proclocalize.lngasvideolensmpte
+#, object-pascal-format
+msgid "%s (%s FPS/SMPTE)"
+msgstr "%s (%s BPS/EBU-TC)"
+
+#: proclocalize.lngaswaveformtext
+msgid "Click here to use timeline"
+msgstr "Hier klicken, um die Zeitleiste zu benutzen"
+
+#: proclocalize.lngbackupsaved
+msgid "Backup saved."
+msgstr "Sicherung gespeichert."
+
+#: proclocalize.lngbcfileformat
+msgctxt "proclocalize.lngbcfileformat"
+msgid "Format"
+msgstr "Format"
+
+#: proclocalize.lngbcfilename
+msgctxt "proclocalize.lngbcfilename"
+msgid "File name"
+msgstr "Dateiname"
+
+#: proclocalize.lngbcfilestate
+msgid "Status"
+msgstr "Status"
+
+#: proclocalize.lngbtnadd
+msgctxt "proclocalize.lngbtnadd"
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: proclocalize.lngbtncancel
+msgctxt "proclocalize.lngbtncancel"
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: proclocalize.lngbtnclose
+msgctxt "proclocalize.lngbtnclose"
+msgid "Close"
+msgstr "Schliessen"
+
+#: proclocalize.lngbtnload
+msgid "Open"
+msgstr "Öffnen"
+
+#: proclocalize.lngbtnremove
+msgctxt "proclocalize.lngbtnremove"
+msgid "Remove"
+msgstr "Entfernen"
+
+#: proclocalize.lngbtnsave
+msgid "Save"
+msgstr "Speichern"
+
+#: proclocalize.lngbtnupdate
+msgctxt "proclocalize.lngbtnupdate"
+msgid "Update"
+msgstr "Aktualisierung"
+
+#: proclocalize.lngcfsframes
+msgctxt "proclocalize.lngcfsframes"
+msgid "Frames"
+msgstr "Bilder (Frames)"
+
+#: proclocalize.lngcfstime
+msgctxt "proclocalize.lngcfstime"
+msgid "Time"
+msgstr "Zeit"
+
+#: proclocalize.lngcontinueanyway
+msgid "Continue?"
+msgstr "Trotzdem fortfahren?"
+
+#: proclocalize.lngdetect
+msgid "Auto-detect"
+msgstr "Automatisch erkennen"
+
+#: proclocalize.lngdetectdialogsegmentswarning
+msgid "Attempting to detect dialogue segments deletes all entries from the list."
+msgstr "Das Erkennen von Dialogstellen löscht alle Einträge aus der Liste."
+
+#: proclocalize.lngdownloadcanceled
+msgid "Download canceled by user."
+msgstr "Download vom Benutzer abgebrochen."
+
+#: proclocalize.lngentry
+#, object-pascal-format
+msgid "Entry %d"
+msgstr "Eintrag %d"
+
+#: proclocalize.lngentryendedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentryendedat"
+msgid "Entry ended in %s"
+msgstr "Eintrag endete um %s"
+
+#: proclocalize.lngentrystartedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentrystartedat"
+msgid "Entry started at %s"
+msgstr "Eintrag begann um %s"
+
+#: proclocalize.lngerrorexecuting
+#, object-pascal-format
+msgid "Error executing “%s”."
+msgstr "Fehler beim Ausführen von „%s“."
+
+#: proclocalize.lngextractapperror
+#, object-pascal-format
+msgid "Unable to find “%s”. Check in settings if it is configured correctly."
+msgstr ""
+"Konnte nicht gefunden werden: '%s'. \n"
+"Bitte in den Einstellungen überprüfen, ob alles richtig eingerichtet ist."
+
+#: proclocalize.lngextracting
+msgid "Extracting..."
+msgstr "Wird extrahiert ..."
+
+#: proclocalize.lngfailed
+msgid "Failed."
+msgstr "Fehlgeschlagen."
+
+#: proclocalize.lngfailedtodownload
+msgid "No content downloaded, missing file or no Internet connection."
+msgstr ""
+"Kein Inhalt heruntergeladen.\n"
+"Datei fehlt oder keine Internetverbindung."
+
+#: proclocalize.lngfeaturenotavailablefromurl
+msgid "Function not available for online video."
+msgstr "Funktion für Online-Videos nicht verfügbar."
+
+#: proclocalize.lngfilechanged
+msgid "File has not been saved."
+msgstr "Die Datei wurde nicht gespeichert."
+
+#: proclocalize.lngfilenotfound
+msgid "File cannot be found."
+msgstr "Datei wurde nicht gefunden."
+
+#: proclocalize.lngfilesavedsuccessfully
+msgid "File saved successfully."
+msgstr "Datei erfolgreich gespeichert."
+
+#: proclocalize.lngfocenter
+msgid "Center"
+msgstr "Zentriert"
+
+#: proclocalize.lngfolatin
+msgid "Latin"
+msgstr "Lateinisch"
+
+#: proclocalize.lngfolatinarabic
+msgid "Latin/Arabic"
+msgstr "Lateinisch/Arabisch"
+
+#: proclocalize.lngfolatincyrillic
+msgid "Latin/Cyrillic"
+msgstr "Lateinisch/Kyrillisch"
+
+#: proclocalize.lngfolatingreek
+msgid "Latin/Greek"
+msgstr "Lateinisch/Griechisch"
+
+#: proclocalize.lngfolatinhebrew
+msgid "Latin/Hebrew"
+msgstr "Lateinisch/Hebräisch"
+
+#: proclocalize.lngfoldernotempty
+msgid "The folder is not empty."
+msgstr "Der Ordner ist nicht leer."
+
+#: proclocalize.lngfoleft
+msgctxt "proclocalize.lngfoleft"
+msgid "Left"
+msgstr "Links"
+
+#: proclocalize.lngfolevel1teletext
+msgid "Level-1 teletext"
+msgstr "Teletext Stufe 1"
+
+#: proclocalize.lngfolevel2teletext
+msgid "Level-2 teletext"
+msgstr "Teletext Stufe 2"
+
+#: proclocalize.lngfoopensubtitling
+msgid "Open subtitling"
+msgstr "Offene Untertitel"
+
+#: proclocalize.lngforight
+msgid "Right"
+msgstr "Rechts"
+
+#: proclocalize.lngfoundefined
+msgid "Undefined"
+msgstr "Nicht definiert"
+
+#: proclocalize.lngfsaction
+msgid "Action"
+msgstr "Handlung"
+
+#: proclocalize.lngfsaddspacing
+msgid "Add spacing"
+msgstr "Abstand hinzufügen"
+
+#: proclocalize.lngfsafter
+msgid "After"
+msgstr "Nach"
+
+#: proclocalize.lngfscurrent
+msgid "Current"
+msgstr "Aktuell"
+
+#: proclocalize.lngfsetbadvalues
+msgid "Fix bad timing values"
+msgstr "Fehlerhafte Zeitangaben korrigieren"
+
+#: proclocalize.lngfsetbreaklonglines
+msgid "Break overlong lines"
+msgstr "Zu lange Zeilen umbrechen"
+
+#: proclocalize.lngfsetchaining
+msgid "Chaining entries"
+msgstr "Einträge verketten"
+
+#: proclocalize.lngfsetcleanuptags
+msgid "Cleanup tags"
+msgstr "Tags bereinigen"
+
+#: proclocalize.lngfsetellipsessinglesmartcharacter
+msgid "Convert ellipsis dots to Unicode character"
+msgstr "Auslassungspunkte in Unicode-Zeichen umwandeln"
+
+#: proclocalize.lngfsetempty
+msgid "Remove empty entries"
+msgstr "Leere Einträge entfernen"
+
+#: proclocalize.lngfsetfixinterrobang
+msgid "Fix interrobang: !? -> ?!"
+msgstr "Satzzeichenfolge korrigieren: !? -> ?!"
+
+#: proclocalize.lngfsetfixtags
+msgid "Fix invalid tags"
+msgstr "Ungültige Tags korrigieren"
+
+#: proclocalize.lngfsethearingimpaired
+msgid "Remove text for hearing impaired"
+msgstr "Texte für gehörlose/hörbehinderte Personen entfernen"
+
+#: proclocalize.lngfsetincompletehyphentext
+msgid "Remove incomplete hyphenated line"
+msgstr "Unvollständige Silbentrennung entfernen"
+
+#: proclocalize.lngfsetocr
+msgid "Fix common OCR errors"
+msgstr "Häufige OCR-Fehler korrigieren"
+
+#: proclocalize.lngfsetoverlapping
+msgid "Fix overlapping display times"
+msgstr "Überschneidende Anzeigezeiten korrigieren"
+
+#: proclocalize.lngfsetprohibitedchars
+#, object-pascal-format
+msgid "Remove entries with %s"
+msgstr "Einträge mit %s entfernen"
+
+#: proclocalize.lngfsetremovespaceswithinbrackets
+msgid "Remove spaces within brackets"
+msgstr "Leerzeichen in Klammern entfernen"
+
+#: proclocalize.lngfsetrepeatedchars
+msgid "Remove repeated characters"
+msgstr "Wiederholte Zeichen entfernen"
+
+#: proclocalize.lngfsetrepeatedentry
+msgctxt "proclocalize.lngfsetrepeatedentry"
+msgid "Remove repeated entries"
+msgstr "Doppelte Einträge entfernen"
+
+#: proclocalize.lngfsetsnaptoshotchanges
+msgid "Snap times to shot changes"
+msgstr "Zeitpunkte an Szenenwechsel anpassen"
+
+#: proclocalize.lngfsetsnaptoshotchangesincue
+msgid "Snap In Cue to shot change"
+msgstr "Startzeitpunkt an Szenenwechsel anpassen"
+
+#: proclocalize.lngfsetsnaptoshotchangesincueaway
+msgid "Snap In Cue away from shot change"
+msgstr "Startzeitpunkt vom Szenenwechsel weg verschieben"
+
+#: proclocalize.lngfsetsnaptoshotchangesoutcue
+msgid "Snap Out Cue to shot change"
+msgstr "Endzeitpunkt an Szenenwechsel anpassen"
+
+#: proclocalize.lngfsetspaceofopeninghyphen
+msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
+msgid "Spacing of opening hyphen"
+msgstr "Abstand beim Trennstrich am Zeilenanfang"
+
+#: proclocalize.lngfsettimetoolong
+msgid "Fix durations too long"
+msgstr "Zu lange Dauer korrigieren"
+
+#: proclocalize.lngfsettimetooshort
+msgid "Fix durations too short"
+msgstr "Zu kurze Dauer korrigieren"
+
+#: proclocalize.lngfsetunbreak
+#, object-pascal-format
+msgid "Remove line breaks if %d characters not exceeded"
+msgstr "Zeilenumbruch entfernen, wenn weniger als %d Zeichen"
+
+#: proclocalize.lngfsetunnecessarydots
+msgid "Remove unnecessary dots"
+msgstr "Unnötige Punkte entfernen"
+
+#: proclocalize.lngfsetunnecessaryspaces
+msgid "Remove unnecessary spaces"
+msgstr "Unnötige Leerzeichen entfernen"
+
+#: proclocalize.lngfsindex
+msgctxt "proclocalize.lngfsindex"
+msgid "#"
+msgstr "#"
+
+#: proclocalize.lngfsremovespacing
+msgid "Remove spacing"
+msgstr "Abstände entfernen"
+
+#: proclocalize.lngfstotalerrors
+#, object-pascal-format
+msgid "Total errors: %d (displayed: %d)"
+msgstr "Fehler insgesamt: %d (angezeigt: %d)"
+
+#: proclocalize.lnghcpl
+msgctxt "proclocalize.lnghcpl"
+msgid "CPL"
+msgstr "ZPZ"
+
+#: proclocalize.lnghcps
+msgctxt "proclocalize.lnghcps"
+msgid "CPS"
+msgstr "ZPS"
+
+#: proclocalize.lnghduration
+msgctxt "proclocalize.lnghduration"
+msgid "Duration"
+msgstr "Dauer"
+
+#: proclocalize.lnghhmmssff
+#, fuzzy
+#| msgid "SMPTE [HH:MM:ss:FF]"
+msgid "SMPTE [HH:MM:SS:FF]"
+msgstr "EBU-Zeitcode [St:Mi:Se:Bi]"
+
+#: proclocalize.lnghhmmsszzz
+#, fuzzy
+#| msgid "Media [HH:MM:ss.ZZZ]"
+msgid "Media [HH:MM:SS.ZZZ]"
+msgstr "Multimediale Zeitcode [St:Mi:Se.ZZZ]"
+
+#: proclocalize.lnghindex
+msgid "#/Gap"
+msgstr "#/Abstand"
+
+#: proclocalize.lnghstyleandactor
+msgctxt "proclocalize.lnghstyleandactor"
+msgid "Style/Actor"
+msgstr "Stil/Sprecher"
+
+#: proclocalize.lnghtext
+msgctxt "proclocalize.lnghtext"
+msgid "Text"
+msgstr "Text"
+
+#: proclocalize.lnghtimes
+msgctxt "proclocalize.lnghtimes"
+msgid "Times"
+msgstr "Zeiten"
+
+#: proclocalize.lnghtranslation
+msgctxt "proclocalize.lnghtranslation"
+msgid "Translation"
+msgstr "Übersetzung"
+
+#: proclocalize.lnghwpm
+msgctxt "proclocalize.lnghwpm"
+msgid "WPM"
+msgstr "WPM"
+
+#: proclocalize.lngindex
+msgctxt "proclocalize.lngindex"
+msgid "#"
+msgstr "#"
+
+#: proclocalize.lnglibmpverror
+msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
+msgstr ""
+"Die benötigten Bibliotheken für den eingebetteten mpv-Player wurden nicht gefunden. \n"
+"Bitte lade sie herunter."
+
+#: proclocalize.lnglibmpvglerror
+msgid "Failed to initialize mpv GL context."
+msgstr "Grafikumgebung (GL) von mpv konnte nicht gestartet werden."
+
+#: proclocalize.lnglibmpvversionerror
+msgid "Could not initialize libmpv. Check if the right library was installed."
+msgstr "libmpv konnte nicht gestartet werden. Bitte prüfe, ob die richtige Bibliothek installiert ist."
+
+#: proclocalize.lngline
+msgid "Line:"
+msgstr "Zeile:"
+
+#: proclocalize.lngmrfind
+msgctxt "proclocalize.lngmrfind"
+msgid "Find"
+msgstr "Suchen"
+
+#: proclocalize.lngmrregexpr
+msgctxt "proclocalize.lngmrregexpr"
+msgid "R. Expression"
+msgstr "Regulärer Ausdruck"
+
+#: proclocalize.lngmrreplacewith
+msgctxt "proclocalize.lngmrreplacewith"
+msgid "Replace with"
+msgstr "Ersetzen durch"
+
+#: proclocalize.lngmscontains
+msgctxt "proclocalize.lngmscontains"
+msgid "Contains"
+msgstr "Enthält"
+
+#: proclocalize.lngmsendswith
+msgctxt "proclocalize.lngmsendswith"
+msgid "Ends with"
+msgstr "Endet mit"
+
+#: proclocalize.lngmsstartswith
+msgctxt "proclocalize.lngmsstartswith"
+msgid "Starts with"
+msgstr "Beginnt mit"
+
+#: proclocalize.lngmultipletracksdetected
+msgid "Multiple tracks detected"
+msgstr "Mehrere Ton- oder Untertitelspuren erkannt"
+
+#: proclocalize.lngnewdurationall
+msgid "New duration in all cases"
+msgstr "Neue Dauer in allen Fällen"
+
+#: proclocalize.lngnewdurationgreater
+msgid "New duration is greater than original"
+msgstr "Neue Dauer ist länger als die ursprüngliche"
+
+#: proclocalize.lngnewdurationsmaller
+msgid "New duration is smaller than original"
+msgstr "Neue Dauer ist kürzer als die ursprüngliche"
+
+#: proclocalize.lngnewshortcutpreset
+msgid "Enter a name for your shortcuts preset"
+msgstr "Bitte gib einen Namen für das Tastenkombinationen-Profil ein."
+
+#: proclocalize.lngnewshortcutpresetname
+msgctxt "proclocalize.lngnewshortcutpresetname"
+msgid "Name"
+msgstr "Name"
+
+#: proclocalize.lngnewtime
+msgid "New time"
+msgstr "Neue Zeit"
+
+#: proclocalize.lngnewversionfound
+msgid "A new version was found."
+msgstr "Eine neue Version wurde gefunden."
+
+#: proclocalize.lngnoentriesmarked
+msgctxt "proclocalize.lngnoentriesmarked"
+msgid "There are no marked entries."
+msgstr "Keine markierten Einträge vorhanden."
+
+#: proclocalize.lngnointernetconnection
+msgid "No Internet connection available"
+msgstr "Keine Internetverbindung verfügbar"
+
+#: proclocalize.lngnoname
+msgid "no name"
+msgstr "kein Name"
+
+#: proclocalize.lngnonewversion
+msgid "You're using the latest version."
+msgstr "Du verwendest die aktuelle Version."
+
+#: proclocalize.lngoldtime
+msgid "Old time"
+msgstr "Vorherige Zeit"
+
+#: proclocalize.lngopencontainingfolder
+msgid "Open containing folder"
+msgstr "Zielordner öffnen"
+
+#: proclocalize.lngopenfile
+msgid "Open file"
+msgstr "Datei öffnen"
+
+#: proclocalize.lngopenvideofromurl
+msgid "Open video from"
+msgstr "Video öffnen von"
+
+#: proclocalize.lngoperationcancelled
+msgid "Operation cancelled."
+msgstr "Vorgang abgebrochen."
+
+#: proclocalize.lngoperationcompleted
+msgid "Operation completed."
+msgstr "Vorgang abgeschlossen."
+
+#: proclocalize.lngoperationfailed
+#, object-pascal-format
+msgid "Job %d/%d fail with code %d."
+msgstr "Vorgang %d/%d fehlgeschlagen mit Fehlercode %d."
+
+#: proclocalize.lngoriginal
+msgctxt "proclocalize.lngoriginal"
+msgid "Original"
+msgstr "Original"
+
+#: proclocalize.lngpercent
+msgid "Percent"
+msgstr "Prozent"
+
+#: proclocalize.lngprojectfile
+msgid "Subtitle Translation Project"
+msgstr "Untertitel-Übersetzungsprojekt"
+
+#: proclocalize.lngpromptfordeletelines
+#, fuzzy
+#| msgid "The selected lines will be deleted."
+msgid "The selected entries will be deleted."
+msgstr "Die ausgewählten Zeilen werden gelöscht."
+
+#: proclocalize.lngqccpl
+msgid "CPL (characters-per-line)"
+msgstr "ZPZ (Zeichen pro Zeile)"
+
+#: proclocalize.lngqccps
+msgid "CPS (characters-per-second)"
+msgstr "ZPS (Zeichen pro Sekunde)"
+
+#: proclocalize.lngqcgap
+msgid "Gap Minimum duration"
+msgstr "Mindestabstand"
+
+#: proclocalize.lngqcindex
+msgctxt "proclocalize.lngqcindex"
+msgid "#"
+msgstr "#"
+
+#: proclocalize.lngqcmaximumduration
+msgid "Maximum duration"
+msgstr "Maximale Dauer"
+
+#: proclocalize.lngqcmaximumlines
+msgid "Maximum lines"
+msgstr "Maximale Zeilenanzahl"
+
+#: proclocalize.lngqcminimumduration
+msgid "Minimum duration"
+msgstr "Minimale Dauer"
+
+#: proclocalize.lngqcrule
+msgid "Broken rule"
+msgstr "Regel verletzt"
+
+#: proclocalize.lngqcwpm
+msgid "WPM (words-per-minute)"
+msgstr "WPM (Wörter pro Minute)"
+
+#: proclocalize.lngrbdatetime
+msgid "Date / Time"
+msgstr "Datum / Uhrzeit"
+
+#: proclocalize.lngrbfilename
+msgctxt "proclocalize.lngrbfilename"
+msgid "File name"
+msgstr "Dateiname"
+
+#: proclocalize.lngsavefile
+msgid "Save file"
+msgstr "Datei speichern"
+
+#: proclocalize.lngsavesubtitleerror
+msgid "Error trying to save the file."
+msgstr "Fehler beim Speichern der Datei."
+
+#: proclocalize.lngscaudiofilters
+msgctxt "proclocalize.lngscaudiofilters"
+msgid "Audio filters"
+msgstr "Audio-/Tonfilter"
+
+#: proclocalize.lngscedit
+msgctxt "proclocalize.lngscedit"
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: proclocalize.lngsceditor
+msgctxt "proclocalize.lngsceditor"
+msgid "Editor"
+msgstr "Bearbeitungsfenster"
+
+#: proclocalize.lngscedl
+msgid "Edit Decision Lists"
+msgstr "Schnittlisten bearbeiten"
+
+#: proclocalize.lngscentries
+msgctxt "proclocalize.lngscentries"
+msgid "Entries"
+msgstr "Einträge"
+
+#: proclocalize.lngscfile
+msgctxt "proclocalize.lngscfile"
+msgid "File"
+msgstr "Datei"
+
+#: proclocalize.lngscfind
+msgctxt "proclocalize.lngscfind"
+msgid "Find"
+msgstr "Suchen"
+
+#: proclocalize.lngscframes
+msgctxt "proclocalize.lngscframes"
+msgid "Frames"
+msgstr "Einzelbilder"
+
+#: proclocalize.lngschelp
+msgctxt "proclocalize.lngschelp"
+msgid "Help"
+msgstr "Hilfe"
+
+#: proclocalize.lngschhmmssff
+#, fuzzy
+#| msgid "HH:MM:ss:FF"
+msgid "HH:MM:SS:FF"
+msgstr "St:Mi:Se:Bi"
+
+#: proclocalize.lngschhmmsszzz
+#, fuzzy
+#| msgid "HH:MM:ss.ZZZ"
+msgctxt "proclocalize.lngschhmmsszzz"
+msgid "HH:MM:SS.ZZZ"
+msgstr "St:Mi:Se.ZZZ"
+
+#: proclocalize.lngscmilliseconds
+msgctxt "proclocalize.lngscmilliseconds"
+msgid "Milliseconds"
+msgstr "Millisekunden"
+
+#: proclocalize.lngscseconds
+msgid "Seconds"
+msgstr "Sekunden"
+
+#: proclocalize.lngscselect
+msgctxt "proclocalize.lngscselect"
+msgid "Select"
+msgstr "Auswählen"
+
+#: proclocalize.lngscshotchanges
+msgid "Text files"
+msgstr "Textdateien"
+
+#: proclocalize.lngsctext
+msgctxt "proclocalize.lngsctext"
+msgid "Text"
+msgstr "Text"
+
+#: proclocalize.lngsctimings
+msgctxt "proclocalize.lngsctimings"
+msgid "Timings"
+msgstr "Zeitangaben"
+
+#: proclocalize.lngsctools
+msgctxt "proclocalize.lngsctools"
+msgid "Tools"
+msgstr "Werkzeuge"
+
+#: proclocalize.lngscvideo
+msgctxt "proclocalize.lngscvideo"
+msgid "Video"
+msgstr "Video"
+
+#: proclocalize.lngscvideofilters
+msgctxt "proclocalize.lngscvideofilters"
+msgid "Video filters"
+msgstr "Videofilter"
+
+#: proclocalize.lngscview
+msgctxt "proclocalize.lngscview"
+msgid "View"
+msgstr "Ansicht"
+
+#: proclocalize.lngscwaveform
+msgctxt "proclocalize.lngscwaveform"
+msgid "Waveform"
+msgstr "Wellenform"
+
+#: proclocalize.lngscxml
+msgid "XML"
+msgstr "XML"
+
+#: proclocalize.lngseanalyzingfile
+msgid "Analyzing file..."
+msgstr "Datei wird analysiert ..."
+
+#: proclocalize.lngsecodec
+msgctxt "proclocalize.lngsecodec"
+msgid "Codec"
+msgstr "Codec"
+
+#: proclocalize.lngseechangelist
+msgid "Do you want to see the changelog?"
+msgstr "Möchtest du die Änderungsübersicht ansehen?"
+
+#: proclocalize.lngseid
+msgid "ID"
+msgstr "ID"
+
+#: proclocalize.lngsekind
+msgid "Type"
+msgstr "Typ"
+
+#: proclocalize.lngselanguage
+msgctxt "proclocalize.lngselanguage"
+msgid "Language"
+msgstr "Sprache"
+
+#: proclocalize.lngselectencodingtouse
+msgid "Select the Encoding to use:"
+msgstr "Bitte Zeichencodierung auswählen:"
+
+#: proclocalize.lngselectfpstouse
+msgid "Select FPS to use:"
+msgstr "Bildrate (BPS) auswählen:"
+
+#: proclocalize.lngselectsheettouse
+msgid "Select sheet to use:"
+msgstr "Tabelle auswählen:"
+
+#: proclocalize.lngselecttracktouse
+msgid "Select the track to use:"
+msgstr "Spur auswählen:"
+
+#: proclocalize.lngseoutput
+msgid "Output"
+msgstr "Ausgabe"
+
+#: proclocalize.lngshifttimeless
+#, object-pascal-format
+msgctxt "proclocalize.lngshifttimeless"
+msgid "Shift %dms less"
+msgstr "%d ms zurückverschieben"
+
+#: proclocalize.lngshifttimemore
+#, object-pascal-format
+msgctxt "proclocalize.lngshifttimemore"
+msgid "Shift %dms more"
+msgstr "%d ms nach vorne verschieben"
+
+#: proclocalize.lngshortcutinuse
+#, object-pascal-format
+msgid "Shortcut currently used in “%s”."
+msgstr "Die Tastenkombination wird bereits in „%s” verwendet."
+
+#: proclocalize.lngsourcemodewarning
+msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
+msgstr "Beim Wechsel in den Quelltext-Modus wird das Format auf “Tero Subtitler” geändert. Nicht gespeicherte Übersetzungen gehen sonst verloren."
+
+#: proclocalize.lngspcurrentline
+#, object-pascal-format
+msgid "# %d"
+msgstr "# %d"
+
+#: proclocalize.lngspellcheckfinished
+msgid "Spell check finished."
+msgstr "Rechtschreibprüfung abgeschlossen."
+
+#: proclocalize.lngssappearance
+msgid "Appearance"
+msgstr "Darstellung"
+
+#: proclocalize.lngssautomode
+msgid "Automatic"
+msgstr "Automatisch"
+
+#: proclocalize.lngssblockmode
+msgid "Block"
+msgstr "Block"
+
+#: proclocalize.lngssconventions
+msgctxt "proclocalize.lngssconventions"
+msgid "Conventions"
+msgstr "Regeln"
+
+#: proclocalize.lngssdarkmode
+msgid "Dark mode"
+msgstr "Dunkler Modus"
+
+#: proclocalize.lngssfiletypeassociations
+msgid "File types"
+msgstr "Dateitypen"
+
+#: proclocalize.lngssframes
+msgctxt "proclocalize.lngssframes"
+msgid "Frames"
+msgstr "Einzelbilder"
+
+#: proclocalize.lngssgeneral
+msgctxt "proclocalize.lngssgeneral"
+msgid "General"
+msgstr "Allgemein"
+
+#: proclocalize.lngsslightmode
+msgid "Light mode"
+msgstr "Heller Modus"
+
+#: proclocalize.lngsslistmode
+msgid "List"
+msgstr "Liste"
+
+#: proclocalize.lngssmilliseconds
+msgctxt "proclocalize.lngssmilliseconds"
+msgid "Milliseconds"
+msgstr "Millisekunden"
+
+#: proclocalize.lngssmpv
+msgid "Video player"
+msgstr "Videoplayer"
+
+#: proclocalize.lngssshortcutnone
+msgid "None"
+msgstr "Keiner"
+
+#: proclocalize.lngssshortcuts
+msgid "Shortcuts"
+msgstr "Tastenkombination"
+
+#: proclocalize.lngsstools
+msgctxt "proclocalize.lngsstools"
+msgid "Tools"
+msgstr "Werkzeuge"
+
+#: proclocalize.lngstcharacterspersecondaverage
+#, object-pascal-format
+msgid "Characters per second average: %.2f"
+msgstr "Durchschnittliche Zeichen pro Sekunde (ZPS): %.2f"
+
+#: proclocalize.lngstdurationaverage
+#, object-pascal-format
+msgid "Duration average: %s"
+msgstr "Durchschnittliche Dauer: %s"
+
+#: proclocalize.lngstentrieswithouttext
+#, object-pascal-format
+msgid "Entries without text: %d"
+msgstr "Einträge ohne Text: %d"
+
+#: proclocalize.lngstgapaverage
+#, object-pascal-format
+msgid "Gap average: %s"
+msgstr "Durchschnittliche Pause: %s"
+
+#: proclocalize.lngstlinelengthaverage
+#, object-pascal-format
+msgid "Line length average: %d"
+msgstr "Durchschnittliche Zeilenlänge: %d"
+
+#: proclocalize.lngstlongestcharacterspersecond
+#, object-pascal-format
+msgid "Longest characters per second: %.2f (#%d)"
+msgstr "Höchste Zeichen pro Sekunde (ZPS): %.2f (#%d)"
+
+#: proclocalize.lngstlongestduration
+#, object-pascal-format
+msgid "Longest duration: %s (#%d)"
+msgstr "Längste Dauer: %s (#%d)"
+
+#: proclocalize.lngstlongestgap
+#, object-pascal-format
+msgid "Longest gap: %s (#%d)"
+msgstr "Längste Pause: %s (#%d)"
+
+#: proclocalize.lngstlongestline
+#, object-pascal-format
+msgid "Longest line: %d (#%d)"
+msgstr "Längste Zeile: %d (#%d)"
+
+#: proclocalize.lngstlongestwordsperminute
+#, object-pascal-format
+msgid "Longest words per minute: %.2f (#%d)"
+msgstr "Höchste Wörter pro Minute (WPM): %.2f (#%d)"
+
+#: proclocalize.lngstnumberofcharacters
+#, object-pascal-format
+msgid "Number of characters: %d"
+msgstr "Anzahl der Zeichen: %d"
+
+#: proclocalize.lngstnumberofentries
+#, object-pascal-format
+msgid "Number of entries: %d"
+msgstr "Anzahl der Einträge: %d"
+
+#: proclocalize.lngstnumberofwords
+#, object-pascal-format
+msgid "Number of words: %d"
+msgstr "Anzahl der Wörter: %d"
+
+#: proclocalize.lngstshortestcharacterspersecond
+#, object-pascal-format
+msgid "Shortest characters per second: %.2f (#%d)"
+msgstr "Niedrigste Zeichen pro Sekunde (ZPS): %.2f (#%d)"
+
+#: proclocalize.lngstshortestduration
+#, object-pascal-format
+msgid "Shortest duration: %s (#%d)"
+msgstr "Kürzeste Dauer: %s (#%d)"
+
+#: proclocalize.lngstshortestgap
+#, object-pascal-format
+msgid "Shortest gap: %s (#%d)"
+msgstr "Kürzeste Pause: %s (#%d)"
+
+#: proclocalize.lngstshortestline
+#, object-pascal-format
+msgid "Shortest line: %d (#%d)"
+msgstr "Kürzeste Zeile: %d (#%d)"
+
+#: proclocalize.lngstshortestwordsperminute
+#, object-pascal-format
+msgid "Shortest words per minute: %.2f (#%d)"
+msgstr "Niedrigste Wörter pro Minute (WPM): %.2f (#%d)"
+
+#: proclocalize.lngsttotalcharacterspersecond
+#, object-pascal-format
+msgid "Total characters per second: %.2f"
+msgstr "Gesamtanzahl Zeichen pro Sekunde (ZPS): %.2f"
+
+#: proclocalize.lngsttotalduration
+#, object-pascal-format
+msgid "Total duration: %s"
+msgstr "Gesamtdauer: %s"
+
+#: proclocalize.lngstwordsperminuteaverage
+#, object-pascal-format
+msgid "Words per minute average: %.2f"
+msgstr "Durchschnittliche Wörter pro Minute (WPM): %.2f"
+
+#: proclocalize.lngsubtitlehaserrorstofix
+msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
+msgstr "Das aktuelle Untertitel-Set enthält Fehler, deren Behebung empfohlen wird, aber es kann gespeichert werden."
+
+#: proclocalize.lngsubtitlespecificationerror
+msgid "The current subtitles do not meet the specifications of the format to be saved."
+msgstr "Die aktuellen Untertitel entsprechen nicht den Vorgaben des zu speichernden Formats."
+
+#: proclocalize.lngsubtitlespecificationerroralign
+msgid "There are entries with vertical alignment which are not allowed."
+msgstr "Es gibt Einträge mit vertikaler Textausrichtung, die nicht erlaubt ist."
+
+#: proclocalize.lngsubtitlespecificationerrorbr
+msgid "There are entries which exceed the line break."
+msgstr "Einige Einträge überschreiten den zulässigen Zeilenumbruch."
+
+#: proclocalize.lngsubtitlespecificationerrorfps
+msgid "Current frame rate does not match."
+msgstr "Die aktuelle Bildrate stimmt nicht überein."
+
+#: proclocalize.lngsuccess
+msgid "Success."
+msgstr "Erfolg."
+
+#: proclocalize.lngsupportedsites
+msgid "Supported sites"
+msgstr "Unterstützte Seiten"
+
+#: proclocalize.lngteexpand
+msgctxt "proclocalize.lngteexpand"
+msgid "Expand"
+msgstr "Erweitern"
+
+#: proclocalize.lngtefinaltime
+msgctxt "proclocalize.lngtefinaltime"
+msgid "Final time"
+msgstr "Endzeit"
+
+#: proclocalize.lngteindex
+msgctxt "proclocalize.lngteindex"
+msgid "Index"
+msgstr "Index"
+
+#: proclocalize.lngteinitialtime
+msgctxt "proclocalize.lngteinitialtime"
+msgid "Initial time"
+msgstr "Startzeit"
+
+#: proclocalize.lngtereduce
+msgctxt "proclocalize.lngtereduce"
+msgid "Reduce"
+msgstr "Reduzieren"
+
+#: proclocalize.lngtetext
+msgctxt "proclocalize.lngtetext"
+msgid "Text"
+msgstr "Text"
+
+#: proclocalize.lngtetime
+msgctxt "proclocalize.lngtetime"
+msgid "Time"
+msgstr "Zeit"
+
+#: proclocalize.lngtextformatted
+msgid "Export formatted text?"
+msgstr "Formatierten Text exportieren?"
+
+#: proclocalize.lngtranscribing
+msgid "Transcribing..."
+msgstr "Transkription läuft..."
+
+#: proclocalize.lngtranscriptionmodeexit
+msgid "Exiting transcription mode will lose any unsaved changes."
+msgstr "Das Verlassen des Transkriptionsmodus verwirft nicht gespeicherte Änderungen."
+
+#: proclocalize.lngtranslated
+msgctxt "proclocalize.lngtranslated"
+msgid "Translated"
+msgstr "Übersetzt"
+
+#: proclocalize.lngtranslationfilechanged
+msgid "Translation file has not been saved."
+msgstr "Die Übersetzungsdatei wurde nicht gespeichert."
+
+#: proclocalize.lngttip1
+#, object-pascal-format
+msgid "Tip: Use <%s/%s> to go to previous/next entry"
+msgstr "Tipp: Verwende <%s/%s>, um zum vorherigen/nächsten Eintrag zu springen"
+
+#: proclocalize.lngttip2
+#, object-pascal-format
+msgid "Tip: Use <%s> for a web word reference"
+msgstr "Tipp: Verwende <%s>, um eine Online-Wortreferenz zu öffnen"
+
+#: proclocalize.lngttip3
+#, object-pascal-format
+msgid "Tip: Use <%s> dock/undock video window"
+msgstr "Tipp: Verwende <%s>, um das Video-Fenster anzudocken/abzudocken"
+
+#: proclocalize.lngttip4
+#, object-pascal-format
+msgid "Tip: Use <%s> dock/undock waveform window"
+msgstr "Tipp: Verwende <%s>, um das Wellenform-Fenster anzudocken/abzudocken"
+
+#: proclocalize.lngunabletoload
+msgid "Error loading file, unrecognized format."
+msgstr "Fehler beim Laden der Datei: Unbekanntes Format."
+
+#: proclocalize.lngurl
+msgid "URL"
+msgstr "URL"
+
+#: proclocalize.lngvdgeneratingtts
+msgid "Generating text to speech..."
+msgstr "Text-zu-Sprache wird generiert..."
+
+#: proclocalize.lngvdgeneratingvideo
+msgid "Generating video dubbing..."
+msgstr "Video-Synchronisierung wird erstellt..."
+
+#: proclocalize.lngvdquotaexceeded
+msgid "We couldn't process this request because you've exceeded your quota."
+msgstr "Die Anfrage konnte nicht verarbeitet werden, da dein Kontingent überschritten wurde."
+
+#: proclocalize.lngvdvoice
+msgid "Voice"
+msgstr "Stimme"
+
+#: proclocalize.lngviaudiotracks
+#, object-pascal-format
+msgid "Audio tracks: %d"
+msgstr "Audio-/Tonspuren: %d"
+
+#: proclocalize.lngvideoerroraoinitfailed
+msgid "Initializing the audio output failed."
+msgstr "Initialisierung der Audio-/Tonausgabe fehlgeschlagen."
+
+#: proclocalize.lngvideoerrornothingtoplay
+msgid "There was no audio or video stream to play."
+msgstr "Kein Audio-/Ton- oder Videostream zum Abspielen vorhanden."
+
+#: proclocalize.lngvideoerrorvoinitfailed
+msgid "Initializing the video output failed."
+msgstr "Initialisierung der Videoausgabe fehlgeschlagen."
+
+#: proclocalize.lngvideogenerationfailed
+msgid "Video generation failed."
+msgstr "Videoerstellung fehlgeschlagen."
+
+#: proclocalize.lngviduration
+#, object-pascal-format
+msgid "Duration: %s (%d frames)"
+msgstr "Dauer: %s (%d Bilder)"
+
+#: proclocalize.lngvifile
+#, object-pascal-format
+msgid "File: %s"
+msgstr "Datei: %s"
+
+#: proclocalize.lngvifps
+#, object-pascal-format
+msgid "FPS: %s"
+msgstr "BPS: %s"
+
+#: proclocalize.lngviresolution
+#, object-pascal-format
+msgid "Resolution: %dx%d"
+msgstr "Auflösung: %dx%d"
+
+#: proclocalize.lngvisubtitletracks
+#, object-pascal-format
+msgid "Subtitle tracks: %d"
+msgstr "Untertitelspuren: %d"
+
+#: proclocalize.lngvivideotracks
+#, object-pascal-format
+msgid "Video tracks: %d"
+msgstr "Videospuren: %d"
+
+#: proclocalize.lngwebvideounsupported
+msgid "The video format is not supported for playback in the web browser."
+msgstr "Das Videoformat wird vom Webbrowser nicht unterstützt."
+
+#: proclocalize.lngwizlanguage
+msgctxt "proclocalize.lngwizlanguage"
+msgid "Language"
+msgstr "Sprache"
+
+#: proclocalize.lngwritedenieded
+msgid "Write denied. Please check folder permissions."
+msgstr ""
+"Schreibvorgang verweigert. \n"
+"Bitte überprüfe die Ordnerberechtigungen."
+
+#: proclocalize.lngwritestatus
+#, object-pascal-format
+msgid "Writing %d/%d"
+msgstr "Schreibe %d/%d"
+
+#: tfrmabout.btnclose.caption
+msgctxt "tfrmabout.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmabout.caption
+msgctxt "tfrmabout.caption"
+msgid "About"
+msgstr "Info"
+
+#: tfrmabout.lbldonate.caption
+msgctxt "tfrmabout.lbldonate.caption"
+msgid ""
+"If you like this software, please consider making a donation.\n"
+"Click here to do it."
+msgstr ""
+"Wenn Ihnen diese Software gefällt,\n"
+"ziehen Sie bitte eine Spende in Betracht.\n"
+"Klicken Sie hier, um zu spenden."
+
+#: tfrmactors.btnactoradd.caption
+msgctxt "tfrmactors.btnactoradd.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmactors.btnactorremove.caption
+msgctxt "tfrmactors.btnactorremove.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmactors.btnapply.caption
+msgctxt "tfrmactors.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmactors.btnclose.caption
+msgctxt "tfrmactors.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmactors.caption
+msgctxt "tfrmactors.caption"
+msgid "Actors"
+msgstr "Sprecher"
+
+#: tfrmadjustsubtitle.btnapply.caption
+msgctxt "tfrmadjustsubtitle.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmadjustsubtitle.btnclose.caption
+msgctxt "tfrmadjustsubtitle.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmadjustsubtitle.btnminus.caption
+msgctxt "tfrmadjustsubtitle.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmadjustsubtitle.btnplus.caption
+msgctxt "tfrmadjustsubtitle.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmadjustsubtitle.caption
+msgid "Adjust subtitle"
+msgstr "Untertitel anpassen"
+
+#: tfrmadjustsubtitle.lblfirstspoken.caption
+msgid "First spoken line"
+msgstr "Erste gesprochene Zeile"
+
+#: tfrmadjustsubtitle.lblindex.caption
+msgid "Subtitle #"
+msgstr "Untertitel #"
+
+#: tfrmadjustsubtitle.lbllastspoken.caption
+msgid "Last spoken line"
+msgstr "Letzte gesprochene Zeile"
+
+#: tfrmadjustsubtitle.rdoadvanced.caption
+msgid "Advanced"
+msgstr "Erweitert"
+
+#: tfrmadjustsubtitle.rdosimple.caption
+msgid "Simple"
+msgstr "Einfach"
+
+#: tfrmaudiototext.btnclose.caption
+msgctxt "tfrmaudiototext.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmaudiototext.btnengine.caption
+msgctxt "tfrmaudiototext.btnengine.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmaudiototext.btngenerate.caption
+msgctxt "tfrmaudiototext.btngenerate.caption"
+msgid "Generate"
+msgstr "Erzeugen"
+
+#: tfrmaudiototext.btnmodel.caption
+msgctxt "tfrmaudiototext.btnmodel.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmaudiototext.caption
+msgctxt "tfrmaudiototext.caption"
+msgid "Audio to text"
+msgstr "Audio/Ton zu Text"
+
+#: tfrmaudiototext.chkmaxlinecount.caption
+msgctxt "tfrmaudiototext.chkmaxlinecount.caption"
+msgid "Maximum line count"
+msgstr "Maximale Zeilenzahl"
+
+#: tfrmaudiototext.chkmaxlinelength.caption
+msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
+msgid "Maximum line length"
+msgstr "Maximale Zeilenlänge"
+
+#: tfrmaudiototext.chktranslate.caption
+msgid "Translate to Еnglish"
+msgstr "Ins Englische übersetzen"
+
+#: tfrmaudiototext.lblengine.caption
+msgid "Engine"
+msgstr "Engine"
+
+#: tfrmaudiototext.lbllanguage.caption
+msgctxt "tfrmaudiototext.lbllanguage.caption"
+msgid "Language"
+msgstr "Sprache"
+
+#: tfrmaudiototext.lblmodel.caption
+msgid "Model"
+msgstr "Modell"
+
+#: tfrmaudiototext.lbltrack.caption
+msgid "Track"
+msgstr "Spur"
+
+#: tfrmaudiototext.rbnaddsubtitleswhiletranscribing.caption
+msgid "Add subtitles while transcribing"
+msgstr "Untertitel während der Transkription hinzufügen"
+
+#: tfrmaudiototext.rbnloadsubtitlesaftertranscript.caption
+msgid "Load subtitles after transcription"
+msgstr "Untertitel nach der Transkription laden"
+
+#: tfrmaudiototextmodel.btnclose.caption
+msgctxt "tfrmaudiototextmodel.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmaudiototextmodel.btndownload.caption
+msgctxt "tfrmaudiototextmodel.btndownload.caption"
+msgid "Download"
+msgstr "Herunterladen"
+
+#: tfrmaudiototextmodel.caption
+msgid "Audio to text model"
+msgstr "Modell: Audio/Ton zu Text"
+
+#: tfrmautomaticdurations.btnapply.caption
+msgctxt "tfrmautomaticdurations.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmautomaticdurations.btnclose.caption
+msgctxt "tfrmautomaticdurations.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmautomaticdurations.caption
+msgid "Automatic durations"
+msgstr "Automatische Dauer"
+
+#: tfrmautomaticdurations.lblchars.caption
+msgid "per character"
+msgstr "pro Zeichen"
+
+#: tfrmautomaticdurations.lblcondition.caption
+msgid "Apply if:"
+msgstr "Übernehmen, wenn:"
+
+#: tfrmautomaticdurations.lblline.caption
+msgid "per line"
+msgstr "pro Zeile"
+
+#: tfrmautomaticdurations.lblscope.caption
+msgctxt "tfrmautomaticdurations.lblscope.caption"
+msgid "Scope:"
+msgstr "Geltungsbereich:"
+
+#: tfrmautomaticdurations.lblword.caption
+msgid "per word"
+msgstr "pro Wort"
+
+#: tfrmautomaticdurations.rbnallthesubtitles.caption
+msgctxt "tfrmautomaticdurations.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Alle Einträge"
+
+#: tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Ab gewähltem Eintrag"
+
+#: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Nur ausgewählte Einträge"
+
+#: tfrmbatchconvert.btnadd.caption
+msgctxt "tfrmbatchconvert.btnadd.caption"
+msgid "Add..."
+msgstr "Hinzufügen..."
+
+#: tfrmbatchconvert.btnapply.caption
+msgctxt "tfrmbatchconvert.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmbatchconvert.btnclose.caption
+msgctxt "tfrmbatchconvert.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmbatchconvert.btninvert.caption
+msgctxt "tfrmbatchconvert.btninvert.caption"
+msgid "Invert"
+msgstr "Invertieren"
+
+#: tfrmbatchconvert.btnopenfolder.caption
+msgctxt "tfrmbatchconvert.btnopenfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmbatchconvert.btnremove.caption
+msgctxt "tfrmbatchconvert.btnremove.caption"
+msgid "Remove"
+msgstr "Entfernen"
+
+#: tfrmbatchconvert.btnscanfolder.caption
+msgctxt "tfrmbatchconvert.btnscanfolder.caption"
+msgid "Scan..."
+msgstr "Scannen..."
+
+#: tfrmbatchconvert.btnselectall.caption
+msgctxt "tfrmbatchconvert.btnselectall.caption"
+msgid "Select all"
+msgstr "Alle auswählen"
+
+#: tfrmbatchconvert.caption
+msgid "Batch convert"
+msgstr "Stapelkonvertierung"
+
+#: tfrmbatchconvert.lblencoding.caption
+msgctxt "tfrmbatchconvert.lblencoding.caption"
+msgid "Encoding"
+msgstr "Kodierung"
+
+#: tfrmbatchconvert.lblformat.caption
+msgctxt "tfrmbatchconvert.lblformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmbatchconvert.lblfromfps.caption
+msgid "Input FPS"
+msgstr "Eingabe-BPS"
+
+#: tfrmbatchconvert.lbloutput.caption
+msgctxt "tfrmbatchconvert.lbloutput.caption"
+msgid "Output:"
+msgstr "Ausgabe:"
+
+#: tfrmbatchconvert.lbloutputfolder.caption
+msgctxt "tfrmbatchconvert.lbloutputfolder.caption"
+msgid "Folder"
+msgstr "Ordner"
+
+#: tfrmbatchconvert.lbltofps.caption
+#, fuzzy
+#| msgid "Output FPS"
+msgid "Target FPS"
+msgstr "Ausgabe-BPS"
+
+#: tfrmcharactermap.btnclose.caption
+msgctxt "tfrmcharactermap.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmcharactermap.btncopy.caption
+msgctxt "tfrmcharactermap.btncopy.caption"
+msgid "Copy"
+msgstr "Kopieren"
+
+#: tfrmcharactermap.btninsert.caption
+msgid "Insert"
+msgstr "Einfügen"
+
+#: tfrmcharactermap.btnminus.caption
+msgctxt "tfrmcharactermap.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmcharactermap.btnplus.caption
+msgctxt "tfrmcharactermap.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmcharactermap.caption
+msgid "Character Map"
+msgstr "Zeichentabelle"
+
+#: tfrmcharactermap.lblfavorites.caption
+msgid "Favorites"
+msgstr "Favoriten"
+
+#: tfrmcharactermap.lblunicoderange.caption
+msgid "Range"
+msgstr "Bereich"
+
+#: tfrmcompare.btnclose.caption
+msgctxt "tfrmcompare.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmcompare.btnfile1.caption
+msgctxt "tfrmcompare.btnfile1.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcompare.btnfile2.caption
+msgctxt "tfrmcompare.btnfile2.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcompare.caption
+msgid "Compare"
+msgstr "Vergleichen"
+
+#: tfrmconventions.btnadd.caption
+msgctxt "tfrmconventions.btnadd.caption"
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: tfrmconventions.btnclose.caption
+msgctxt "tfrmconventions.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmconventions.btnremove.caption
+msgctxt "tfrmconventions.btnremove.caption"
+msgid "Remove"
+msgstr "Entfernen"
+
+#: tfrmconventions.btnupdate.caption
+msgctxt "tfrmconventions.btnupdate.caption"
+msgid "Update"
+msgstr "Aktualisierung"
+
+#: tfrmconventions.caption
+msgctxt "tfrmconventions.caption"
+msgid "Conventions"
+msgstr "Konventionen"
+
+#: tfrmconvertcase.btnapply.caption
+msgctxt "tfrmconvertcase.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmconvertcase.btnclose.caption
+msgctxt "tfrmconvertcase.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmconvertcase.caption
+msgid "Convert case"
+msgstr "Gross-/Kleinschreibung umwandeln"
+
+#: tfrmconvertcase.lblscope.caption
+msgctxt "tfrmconvertcase.lblscope.caption"
+msgid "Scope:"
+msgstr "Bereich:"
+
+#: tfrmconvertcase.rbnallthesubtitles.caption
+msgctxt "tfrmconvertcase.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Alle Einträge"
+
+#: tfrmconvertcase.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmconvertcase.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "Vom ausgewählten Eintrag"
+
+#: tfrmconvertcase.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Nur ausgewählte Einträge"
+
+#: tfrmconvertcase.rdoinversetype.caption
+msgid "iNVERSE tYPE"
+msgstr "iNVERSFORMAT"
+
+#: tfrmconvertcase.rdolowercase.caption
+msgid "lowercase"
+msgstr "kleingeschrieben"
+
+#: tfrmconvertcase.rdosentencetype.caption
+msgid "Sentence type"
+msgstr "Satzformat"
+
+#: tfrmconvertcase.rdotitletype.caption
+msgid "Title Type"
+msgstr "Titelformat"
+
+#: tfrmconvertcase.rdouppercase.caption
+msgid "UPPERCASE"
+msgstr "GROssGESCHRIEBEN"
+
+#: tfrmcustomfiledlg.btnapply.caption
+msgctxt "tfrmcustomfiledlg.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmcustomfiledlg.btncancel.caption
+msgctxt "tfrmcustomfiledlg.btncancel.caption"
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: tfrmcustomfiledlg.btnopenfile.caption
+msgctxt "tfrmcustomfiledlg.btnopenfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcustomfiledlg.lblencoding.caption
+msgctxt "tfrmcustomfiledlg.lblencoding.caption"
+msgid "Encoding"
+msgstr "Kodierung"
+
+#: tfrmcustomfiledlg.lblfilename.caption
+msgctxt "tfrmcustomfiledlg.lblfilename.caption"
+msgid "Filename"
+msgstr "Dateiname"
+
+#: tfrmcustomfiledlg.lblformat.caption
+msgctxt "tfrmcustomfiledlg.lblformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmcustomfiledlg.lblfps.caption
+msgctxt "tfrmcustomfiledlg.lblfps.caption"
+msgid "FPS"
+msgstr "BPS"
+
+#: tfrmcustomimageformat.btnclose.caption
+msgctxt "tfrmcustomimageformat.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmcustomimageformat.btnfolder.caption
+msgctxt "tfrmcustomimageformat.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcustomimageformat.btnres.caption
+msgctxt "tfrmcustomimageformat.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcustomimageformat.btnsave.caption
+msgctxt "tfrmcustomimageformat.btnsave.caption"
+msgid "Save..."
+msgstr "Speichern..."
+
+#: tfrmcustomimageformat.caption
+msgid "Custom image format"
+msgstr "Benutzerdefiniertes Bildformat"
+
+#: tfrmcustomimageformat.lblfolder.caption
+msgctxt "tfrmcustomimageformat.lblfolder.caption"
+msgid "Folder"
+msgstr "Ordner"
+
+#: tfrmcustomimageformat.lblfont.caption
+msgctxt "tfrmcustomimageformat.lblfont.caption"
+msgid "Font"
+msgstr "Schriftart"
+
+#: tfrmcustomimageformat.lblfontsize.caption
+msgctxt "tfrmcustomimageformat.lblfontsize.caption"
+msgid "Size"
+msgstr "Grösse"
+
+#: tfrmcustomimageformat.lblfps.caption
+msgctxt "tfrmcustomimageformat.lblfps.caption"
+msgid "FPS"
+msgstr "BPS"
+
+#: tfrmcustomimageformat.lblimagesize.caption
+msgid "Image size"
+msgstr "Bildgrösse"
+
+#: tfrmcustomimageformat.lblprefix.caption
+msgid "Prefix"
+msgstr "Präfix"
+
+#: tfrmcustomimageformat.lblsafearea.caption
+msgctxt "tfrmcustomimageformat.lblsafearea.caption"
+msgid "Safe area pixels (left, top, right, bottom)"
+msgstr "Sicherheitsabstand in Pixeln (links, oben, rechts, unten)"
+
+#: tfrmcustomimageformat.lblscript.caption
+msgctxt "tfrmcustomimageformat.lblscript.caption"
+msgid "Script"
+msgstr "Skript"
+
+#: tfrmcustomimageformat.lblx.caption
+msgctxt "tfrmcustomimageformat.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmcustominputdlg.btncancel.caption
+msgctxt "tfrmcustominputdlg.btncancel.caption"
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: tfrmcustominputdlg.btnok.caption
+msgctxt "tfrmcustominputdlg.btnok.caption"
+msgid "OK"
+msgstr "OK"
+
+#: tfrmcustommessagedlg.btnok.caption
+msgctxt "tfrmcustommessagedlg.btnok.caption"
+msgid "OK"
+msgstr "OK"
+
+#: tfrmcustommessagedlg.lblmessage.caption
+msgid "Message"
+msgstr "Nachricht"
+
+#: tfrmcustomquestiondlg.btncancel.caption
+msgctxt "tfrmcustomquestiondlg.btncancel.caption"
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: tfrmcustomquestiondlg.btnno.caption
+msgctxt "tfrmcustomquestiondlg.btnno.caption"
+msgid "No"
+msgstr "Nein"
+
+#: tfrmcustomquestiondlg.btnyes.caption
+msgctxt "tfrmcustomquestiondlg.btnyes.caption"
+msgid "Yes"
+msgstr "Ja"
+
+#: tfrmcustomquestiondlg.lblquestion.caption
+msgid "Question"
+msgstr "Frage"
+
+#: tfrmcustomquestiondlg.lbltitle.caption
+msgctxt "tfrmcustomquestiondlg.lbltitle.caption"
+msgid "Title"
+msgstr "Titel"
+
+#: tfrmcustomselectdlg.btncancel.caption
+msgctxt "tfrmcustomselectdlg.btncancel.caption"
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: tfrmcustomselectdlg.btnok.caption
+msgctxt "tfrmcustomselectdlg.btnok.caption"
+msgid "OK"
+msgstr "OK"
+
+#: tfrmcustomselectdlgwithpreview.btncancel.caption
+msgctxt "tfrmcustomselectdlgwithpreview.btncancel.caption"
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: tfrmcustomselectdlgwithpreview.btnok.caption
+msgctxt "tfrmcustomselectdlgwithpreview.btnok.caption"
+msgid "OK"
+msgstr "OK"
+
+#: tfrmcustomtextformat.btnclose.caption
+msgctxt "tfrmcustomtextformat.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmcustomtextformat.btnsave.caption
+msgctxt "tfrmcustomtextformat.btnsave.caption"
+msgid "Save..."
+msgstr "Speichern..."
+
+#: tfrmcustomtextformat.caption
+msgid "Custom text format"
+msgstr "Benutzerdefiniertes Textformat"
+
+#: tfrmcustomtextformat.lblencoding.caption
+msgctxt "tfrmcustomtextformat.lblencoding.caption"
+msgid "Encoding"
+msgstr "Kodierung"
+
+#: tfrmcustomtextformat.lblextension.caption
+msgid "Extension"
+msgstr "Erweiterung"
+
+#: tfrmcustomtextformat.lblfps.caption
+msgctxt "tfrmcustomtextformat.lblfps.caption"
+msgid "FPS"
+msgstr "BPS"
+
+#: tfrmcustomtextformat.lblnewlinechar.caption
+msgid "New line char"
+msgstr "Zeilenumbruch-Zeichen"
+
+#: tfrmcustomtextformat.lblscript.caption
+msgctxt "tfrmcustomtextformat.lblscript.caption"
+msgid "Script"
+msgstr "Skript"
+
+#: tfrmcustomtextformat.lblseparatorchar.caption
+msgid "Separator"
+msgstr "Trennzeichen"
+
+#: tfrmcustomtextformat.lbltimecode.caption
+msgctxt "tfrmcustomtextformat.lbltimecode.caption"
+msgid "Time code"
+msgstr "Zeitcode"
+
+#: tfrmcustomtextformat.lbltimeformat.caption
+msgid "Time format"
+msgstr "Zeitformat"
+
+#: tfrmcustomtextformat.lbltitle.caption
+msgctxt "tfrmcustomtextformat.lbltitle.caption"
+msgid "Title"
+msgstr "Titel"
+
+#: tfrmdelay.btnapply.caption
+msgctxt "tfrmdelay.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmdelay.btnclose.caption
+msgctxt "tfrmdelay.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmdelay.caption
+msgid "Set delay"
+msgstr "Verzögerung einstellen"
+
+#: tfrmdelay.cbomode.text
+msgctxt "tfrmdelay.cbomode.text"
+msgid "+"
+msgstr "+"
+
+#: tfrmdelay.lblscope.caption
+msgctxt "tfrmdelay.lblscope.caption"
+msgid "Scope:"
+msgstr "Bereich:"
+
+#: tfrmdelay.rbnallthesubtitles.caption
+msgctxt "tfrmdelay.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Alle Einträge"
+
+#: tfrmdelay.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmdelay.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Ab ausgewähltem Eintrag"
+
+#: tfrmdelay.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Nur ausgewählte Einträge"
+
+#: tfrmdownload.btncancel.caption
+msgctxt "tfrmdownload.btncancel.caption"
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: tfrmdownload.caption
+msgctxt "tfrmdownload.caption"
+msgid "Downloading"
+msgstr "Wird heruntergeladen"
+
+#: tfrmdownload.lblelapsed.caption
+msgid "Elapsed:"
+msgstr "Vergangen:"
+
+#: tfrmdownload.lblfile.caption
+msgid "File:"
+msgstr "Datei:"
+
+#: tfrmdownload.lblreceived.caption
+msgid "Received:"
+msgstr "Empfangen:"
+
+#: tfrmdownload.lblremaining.caption
+msgid "Remaining:"
+msgstr "Verbleibend:"
+
+#: tfrmdownload.lblspeed.caption
+msgid "Speed:"
+msgstr "Geschwindigkeit:"
+
+#: tfrmdurationlimits.btnapply.caption
+msgctxt "tfrmdurationlimits.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmdurationlimits.btnclose.caption
+msgctxt "tfrmdurationlimits.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmdurationlimits.caption
+msgid "Duration limits"
+msgstr "Dauerbegrenzungen"
+
+#: tfrmdurationlimits.chksetmaxduration.caption
+msgid "Set maximum duration (ms)"
+msgstr "Maximale Dauer festlegen (ms)"
+
+#: tfrmdurationlimits.chksetminduration.caption
+msgid "Set minimum duration (ms)"
+msgstr "Minimale Dauer festlegen (ms)"
+
+#: tfrmdurationlimits.lblscope.caption
+msgctxt "tfrmdurationlimits.lblscope.caption"
+msgid "Scope:"
+msgstr "Geltungsbereich:"
+
+#: tfrmdurationlimits.rbnallthesubtitles.caption
+msgctxt "tfrmdurationlimits.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Alle Einträge"
+
+#: tfrmdurationlimits.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmdurationlimits.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "Ab ausgewähltem Eintrag"
+
+#: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Nur ausgewählte Einträge"
+
+#: tfrmexportsup.btnclose.caption
+msgctxt "tfrmexportsup.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmexportsup.btnres.caption
+msgctxt "tfrmexportsup.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmexportsup.btnsave.caption
+msgctxt "tfrmexportsup.btnsave.caption"
+msgid "Save..."
+msgstr "Speichern..."
+
+#: tfrmexportsup.caption
+msgid "Blu-ray SUP"
+msgstr "Blu-ray SUP"
+
+#: tfrmexportsup.lblfont.caption
+msgctxt "tfrmexportsup.lblfont.caption"
+msgid "Font"
+msgstr "Schriftart"
+
+#: tfrmexportsup.lblfontsize.caption
+msgctxt "tfrmexportsup.lblfontsize.caption"
+msgid "Size"
+msgstr "Grösse"
+
+#: tfrmexportsup.lblsafearea.caption
+msgctxt "tfrmexportsup.lblsafearea.caption"
+msgid "Safe area pixels (left, top, right, bottom)"
+msgstr "Sicherheitsbereich in Pixel (links, oben, rechts, unten)"
+
+#: tfrmexportsup.lblvideores.caption
+msgctxt "tfrmexportsup.lblvideores.caption"
+msgid "Video resolution"
+msgstr "Videoauflösung"
+
+#: tfrmexportsup.lblx.caption
+msgctxt "tfrmexportsup.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmfindandreplace.btnclose.caption
+msgctxt "tfrmfindandreplace.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmfindandreplace.btnfind.caption
+msgctxt "tfrmfindandreplace.btnfind.caption"
+msgid "Find"
+msgstr "Suchen"
+
+#: tfrmfindandreplace.btnfindnext.caption
+msgctxt "tfrmfindandreplace.btnfindnext.caption"
+msgid "Find next"
+msgstr "Weitersuchen"
+
+#: tfrmfindandreplace.btnfindprev.caption
+msgid "Find prev"
+msgstr "Vorheriger"
+
+#: tfrmfindandreplace.btnreplace.caption
+msgctxt "tfrmfindandreplace.btnreplace.caption"
+msgid "Replace"
+msgstr "Ersetzen"
+
+#: tfrmfindandreplace.btnreplaceall.caption
+msgid "Replace all"
+msgstr "Alle ersetzen"
+
+#: tfrmfindandreplace.caption
+msgid "Find and replace"
+msgstr "Suchen und Ersetzen"
+
+#: tfrmfindandreplace.chkcasesensitive.caption
+msgid "Case-sensitive"
+msgstr "Gross-/Kleinschreibung beachten"
+
+#: tfrmfindandreplace.chkpreservecaseonreplace.caption
+msgid "Preserve case on replace"
+msgstr "Gross-/Kleinschreibung beim Ersetzen beibehalten"
+
+#: tfrmfindandreplace.chkregularexpression.caption
+msgid "Use regular expression"
+msgstr "Regulären Ausdruck verwenden"
+
+#: tfrmfindandreplace.chkreplacewith.caption
+msgctxt "tfrmfindandreplace.chkreplacewith.caption"
+msgid "Replace with:"
+msgstr "Ersetzen durch:"
+
+#: tfrmfindandreplace.chkwholeword.caption
+msgid "Whole word"
+msgstr "Ganzes Wort"
+
+#: tfrmfindandreplace.lbloptions.caption
+msgid "Options:"
+msgstr "Optionen:"
+
+#: tfrmfindandreplace.lblscope.caption
+msgctxt "tfrmfindandreplace.lblscope.caption"
+msgid "Scope:"
+msgstr "Geltungsbereich:"
+
+#: tfrmfindandreplace.lbltexttofind.caption
+msgid "Text to find:"
+msgstr "Zu suchender Text:"
+
+#: tfrmfindandreplace.rbnallthesubtitles.caption
+msgctxt "tfrmfindandreplace.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Alle Einträge"
+
+#: tfrmfindandreplace.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Ab ausgewähltem Eintrag"
+
+#: tfrmfixsubtitles.btnapply.caption
+msgctxt "tfrmfixsubtitles.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmfixsubtitles.btnclose.caption
+msgctxt "tfrmfixsubtitles.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmfixsubtitles.caption
+msgid "Fix subtitles"
+msgstr "Untertitel korrigieren"
+
+#: tfrmfixsubtitles.lblconvention.caption
+msgid "Convention"
+msgstr "Konvention"
+
+#: tfrmfixsubtitles.lblocr.caption
+msgid "OCR Script"
+msgstr "OCR-Skript"
+
+#: tfrmfixsubtitles.lblspacinghyphen.caption
+msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
+msgid "Spacing of opening hyphen"
+msgstr "Abstand nach öffnendem Gedankenstrich"
+
+#: tfrmfixsubtitles.mnudeselectall.caption
+msgid "Deselect all"
+msgstr "Alle abwählen"
+
+#: tfrmfixsubtitles.mnuinvertselection.caption
+msgctxt "tfrmfixsubtitles.mnuinvertselection.caption"
+msgid "Invert selection"
+msgstr "Auswahl umkehren"
+
+#: tfrmfixsubtitles.mnuselectall.caption
+msgctxt "tfrmfixsubtitles.mnuselectall.caption"
+msgid "Select all"
+msgstr "Alle auswählen"
+
+#: tfrmformatproperties.btnapply.caption
+msgctxt "tfrmformatproperties.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmformatproperties.btnclose.caption
+msgctxt "tfrmformatproperties.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmformatproperties.caption
+msgctxt "tfrmformatproperties.caption"
+msgid "Format properties"
+msgstr "Format-Eigenschaften"
+
+#: tfrmformatproperties.chkvttusextimestamp.caption
+msgid "Use X-TIMESTAMP-MAP header"
+msgstr "X-TIMESTAMP-MAP-Header verwenden"
+
+#: tfrmformatproperties.chkvttwritecueidentifiers.caption
+msgid "Write cue identifiers"
+msgstr "Cue-Identifikatoren schreiben"
+
+#: tfrmformatproperties.lblasalignment.caption
+msgctxt "tfrmformatproperties.lblasalignment.caption"
+msgid "Alignment"
+msgstr "Textausrichtung"
+
+#: tfrmformatproperties.lblasfontcolor.caption
+msgid "Font color"
+msgstr "Schriftfarbe"
+
+#: tfrmformatproperties.lblasfontname.caption
+msgid "Font name"
+msgstr "Schriftart"
+
+#: tfrmformatproperties.lblasfontsize.caption
+msgid "Font size"
+msgstr "Schriftgrösse"
+
+#: tfrmformatproperties.lblasheight.caption
+msgctxt "tfrmformatproperties.lblasheight.caption"
+msgid "Height"
+msgstr "Höhe"
+
+#: tfrmformatproperties.lblaslanguage.caption
+msgctxt "tfrmformatproperties.lblaslanguage.caption"
+msgid "Language"
+msgstr "Sprache"
+
+#: tfrmformatproperties.lblaspositionx.caption
+msgid "Position X"
+msgstr "Position X"
+
+#: tfrmformatproperties.lblaspositiony.caption
+msgid "Position Y"
+msgstr "Position Y"
+
+#: tfrmformatproperties.lblaswidth.caption
+msgctxt "tfrmformatproperties.lblaswidth.caption"
+msgid "Width"
+msgstr "Breite"
+
+#: tfrmformatproperties.lblcavenacomment.caption
+msgid "Comments"
+msgstr "Kommentare"
+
+#: tfrmformatproperties.lblcavenalanguage.caption
+msgctxt "tfrmformatproperties.lblcavenalanguage.caption"
+msgid "Language"
+msgstr "Sprache"
+
+#: tfrmformatproperties.lblcavenaoriginaltitle.caption
+msgid "Original title"
+msgstr "Originaltitel"
+
+#: tfrmformatproperties.lblcavenatcstart.caption
+msgid "Start timecode"
+msgstr "Start-Zeitcode"
+
+#: tfrmformatproperties.lblcavenatranslatedtitle.caption
+msgid "Translated title"
+msgstr "Übersetzter Titel"
+
+#: tfrmformatproperties.lblcavenatranslator.caption
+msgid "Translator"
+msgstr "Übersetzer"
+
+#: tfrmformatproperties.lbldvdauthor.caption
+msgid "Author"
+msgstr "Autor"
+
+#: tfrmformatproperties.lbldvdinfo.caption
+msgctxt "tfrmformatproperties.lbldvdinfo.caption"
+msgid "Info"
+msgstr "Info"
+
+#: tfrmformatproperties.lbldvdlanguage.caption
+msgctxt "tfrmformatproperties.lbldvdlanguage.caption"
+msgid "Language"
+msgstr "Sprache"
+
+#: tfrmformatproperties.lbldvdtitle.caption
+msgctxt "tfrmformatproperties.lbldvdtitle.caption"
+msgid "Title"
+msgstr "Titel"
+
+#: tfrmformatproperties.lbldvdweb.caption
+msgid "Web"
+msgstr "Webseite"
+
+#: tfrmformatproperties.lblebucct.caption
+msgid "Character code table"
+msgstr "Zeichencodetabelle"
+
+#: tfrmformatproperties.lblebuco.caption
+msgid "Country origin"
+msgstr "Herkunftsland"
+
+#: tfrmformatproperties.lblebucpn.caption
+msgid "Code page number"
+msgstr "Codepage-Nummer"
+
+#: tfrmformatproperties.lblebudfc.caption
+msgid "Disk format code"
+msgstr "Diskformat-Code"
+
+#: tfrmformatproperties.lblebudsc.caption
+msgid "Display standard code"
+msgstr "Anzeigestandard-Code"
+
+#: tfrmformatproperties.lblebulc.caption
+msgid "Language code"
+msgstr "Sprachcode"
+
+#: tfrmformatproperties.lblebundc.caption
+msgid "Max chars"
+msgstr "Max. Zeichen"
+
+#: tfrmformatproperties.lblebundr.caption
+msgid "Max rows"
+msgstr "Max. Zeilen"
+
+#: tfrmformatproperties.lblvttlocal.caption
+msgid "Cue time:"
+msgstr "Cue-Zeit:"
+
+#: tfrmformatproperties.lblvttmpegts.caption
+msgid "MPEG-2 time:"
+msgstr "MPEG-2-Zeit:"
+
+#: tfrmgenerateblankvideo.btnclose.caption
+msgctxt "tfrmgenerateblankvideo.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmgenerateblankvideo.btngenerate.caption
+msgid "Generate..."
+msgstr "Generieren..."
+
+#: tfrmgenerateblankvideo.btnimage.caption
+msgctxt "tfrmgenerateblankvideo.btnimage.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmgenerateblankvideo.btnres.caption
+msgctxt "tfrmgenerateblankvideo.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmgenerateblankvideo.caption
+msgid "Generate blank video"
+msgstr "Leeres Video generieren"
+
+#: tfrmgenerateblankvideo.chkgeneratetc.caption
+msgctxt "tfrmgenerateblankvideo.chkgeneratetc.caption"
+msgid "Time code"
+msgstr "Zeitcode"
+
+#: tfrmgenerateblankvideo.chkgeneratetone.caption
+msgid "1 kHz test tone"
+msgstr "1-kHz-Testton"
+
+#: tfrmgenerateblankvideo.lblbackground.caption
+msgctxt "tfrmgenerateblankvideo.lblbackground.caption"
+msgid "Background"
+msgstr "Hintergrund"
+
+#: tfrmgenerateblankvideo.lblduration.caption
+msgctxt "tfrmgenerateblankvideo.lblduration.caption"
+msgid "Duration"
+msgstr "Dauer"
+
+#: tfrmgenerateblankvideo.lblfps.caption
+msgctxt "tfrmgenerateblankvideo.lblfps.caption"
+msgid "FPS"
+msgstr "BPS"
+
+#: tfrmgenerateblankvideo.lblvideores.caption
+msgctxt "tfrmgenerateblankvideo.lblvideores.caption"
+msgid "Video resolution"
+msgstr "Videoauflösung"
+
+#: tfrmgenerateblankvideo.lblx.caption
+msgctxt "tfrmgenerateblankvideo.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmgenerateblankvideo.rdoimage.caption
+msgid "Image"
+msgstr "Bild"
+
+#: tfrmgenerateblankvideo.rdosmptecolorbars.caption
+msgid "SMPTE color bars"
+msgstr "SMPTE-Farbtestbild"
+
+#: tfrmgenerateblankvideo.rdosolidcolor.caption
+msgid "Solid color"
+msgstr "Volltonfarbe"
+
+#: tfrmgeneratevideo.btnclose.caption
+msgctxt "tfrmgeneratevideo.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmgeneratevideo.btngenerate.caption
+msgctxt "tfrmgeneratevideo.btngenerate.caption"
+msgid "Generate"
+msgstr "Generieren"
+
+#: tfrmgeneratevideo.btnres.caption
+msgctxt "tfrmgeneratevideo.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmgeneratevideo.caption
+msgid "Generate video"
+msgstr "Video generieren"
+
+#: tfrmgeneratevideo.chkbox.caption
+msgid "Box"
+msgstr "Rahmen"
+
+#: tfrmgeneratevideo.chkcrop.caption
+msgid "Crop"
+msgstr "Zuschneiden"
+
+#: tfrmgeneratevideo.chkcut.caption
+msgctxt "tfrmgeneratevideo.chkcut.caption"
+msgid "Cut"
+msgstr "Schneiden"
+
+#: tfrmgeneratevideo.chkdeinterlace.caption
+msgctxt "tfrmgeneratevideo.chkdeinterlace.caption"
+msgid "Deinterlace"
+msgstr "Deinterlacen"
+
+#: tfrmgeneratevideo.chkflip.caption
+msgid "Flip"
+msgstr "Spiegeln"
+
+#: tfrmgeneratevideo.chkreencodeaudio.caption
+msgid "Re-encode"
+msgstr "Neu codieren"
+
+#: tfrmgeneratevideo.chkrotate.caption
+msgid "Rotate"
+msgstr "Drehen"
+
+#: tfrmgeneratevideo.lblaudiochannels.caption
+msgid "Channels"
+msgstr "Kanäle"
+
+#: tfrmgeneratevideo.lblaudioencoding.caption
+msgctxt "tfrmgeneratevideo.lblaudioencoding.caption"
+msgid "Codec"
+msgstr "Codec"
+
+#: tfrmgeneratevideo.lblbitrate.caption
+msgid "Bit rate"
+msgstr "Bitrate"
+
+#: tfrmgeneratevideo.lblcropheight.caption
+msgctxt "tfrmgeneratevideo.lblcropheight.caption"
+msgid "Height"
+msgstr "Höhe"
+
+#: tfrmgeneratevideo.lblcropleft.caption
+msgctxt "tfrmgeneratevideo.lblcropleft.caption"
+msgid "Left"
+msgstr "Links"
+
+#: tfrmgeneratevideo.lblcroptop.caption
+msgid "Top"
+msgstr "Oben"
+
+#: tfrmgeneratevideo.lblcropwidth.caption
+msgctxt "tfrmgeneratevideo.lblcropwidth.caption"
+msgid "Width"
+msgstr "Breite"
+
+#: tfrmgeneratevideo.lblcutfrom.caption
+msgid "From"
+msgstr "Von"
+
+#: tfrmgeneratevideo.lblcutto.caption
+msgid "To"
+msgstr "Bis"
+
+#: tfrmgeneratevideo.lblfont.caption
+msgctxt "tfrmgeneratevideo.lblfont.caption"
+msgid "Font"
+msgstr "Schriftart"
+
+#: tfrmgeneratevideo.lblfontcolor.caption
+msgctxt "tfrmgeneratevideo.lblfontcolor.caption"
+msgid "Color"
+msgstr "Farbe"
+
+#: tfrmgeneratevideo.lblfontsize.caption
+msgctxt "tfrmgeneratevideo.lblfontsize.caption"
+msgid "Size"
+msgstr "Grösse"
+
+#: tfrmgeneratevideo.lblformat.caption
+msgctxt "tfrmgeneratevideo.lblformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmgeneratevideo.lblsamplerate.caption
+msgid "Sample rate"
+msgstr "Abtastrate"
+
+#: tfrmgeneratevideo.lblvideocodec.caption
+msgctxt "tfrmgeneratevideo.lblvideocodec.caption"
+msgid "Codec"
+msgstr "Codec"
+
+#: tfrmgeneratevideo.lblvideores.caption
+msgid "Resolution"
+msgstr "Auflösung"
+
+#: tfrmgeneratevideo.lblvideosubtype.caption
+msgid "Subtype"
+msgstr "Untertyp"
+
+#: tfrmgeneratevideo.lblx.caption
+msgctxt "tfrmgeneratevideo.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmgeneratevideo.rdoaudio.caption
+msgctxt "tfrmgeneratevideo.rdoaudio.caption"
+msgid "Audio"
+msgstr "Audio/Ton"
+
+#: tfrmgeneratevideo.rdoothers.caption
+msgctxt "tfrmgeneratevideo.rdoothers.caption"
+msgid "Others"
+msgstr "Sonstiges"
+
+#: tfrmgeneratevideo.rdosubtitle.caption
+msgctxt "tfrmgeneratevideo.rdosubtitle.caption"
+msgid "Subtitles"
+msgstr "Untertitel"
+
+#: tfrmgeneratevideo.rdovideo.caption
+msgctxt "tfrmgeneratevideo.rdovideo.caption"
+msgid "Video"
+msgstr "Video"
+
+#: tfrmgoto.btnclose.caption
+msgctxt "tfrmgoto.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmgoto.btngo.caption
+msgctxt "tfrmgoto.btngo.caption"
+msgid "Go"
+msgstr "Gehe zu"
+
+#: tfrmgoto.caption
+msgctxt "tfrmgoto.caption"
+msgid "Go to line"
+msgstr "Gehe zu Zeile"
+
+#: tfrmgoto.lblnumber.caption
+msgid "Entry:"
+msgstr "Eintrag:"
+
+#: tfrmgototime.btnclose.caption
+msgctxt "tfrmgototime.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmgototime.btngo.caption
+msgctxt "tfrmgototime.btngo.caption"
+msgid "Go"
+msgstr "Gehe zu"
+
+#: tfrmgototime.caption
+msgctxt "tfrmgototime.caption"
+msgid "Go to"
+msgstr "Gehe zu"
+
+#: tfrmgototime.lbltime.caption
+msgid "Time:"
+msgstr "Zeit:"
+
+#: tfrmimportsup.btnclose.caption
+#, fuzzy
+msgctxt "tfrmimportsup.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmimportsup.btnimport.caption
+#, fuzzy
+msgctxt "tfrmimportsup.btnimport.caption"
+msgid "Import"
+msgstr "Importieren"
+
+#: tfrmimportsup.btnlanguage.caption
+#, fuzzy
+msgctxt "tfrmimportsup.btnlanguage.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmimportsup.btnocr.caption
+msgid "OCR"
+msgstr ""
+
+#: tfrmimportsup.caption
+msgid "Import Blu-ray SUP"
+msgstr ""
+
+#: tfrmimportsup.lbllanguage.caption
+msgid "Language:"
+msgstr ""
+
+#: tfrmimportsuplanguages.btnclose.caption
+#, fuzzy
+msgctxt "tfrmimportsuplanguages.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmimportsuplanguages.btndownload.caption
+#, fuzzy
+msgctxt "tfrmimportsuplanguages.btndownload.caption"
+msgid "Download"
+msgstr "Herunterladen"
+
+#: tfrmimportsuplanguages.caption
+msgid "Tesseract languages"
+msgstr ""
+
+#: tfrmmain.actabout.caption
+msgctxt "tfrmmain.actabout.caption"
+msgid "About..."
+msgstr "Info..."
+
+#: tfrmmain.actactor.caption
+msgctxt "tfrmmain.actactor.caption"
+msgid "Actors"
+msgstr "Sprecher"
+
+#: tfrmmain.actaddnote.caption
+msgid "Add note..."
+msgstr "Anmerkung hinzufügen..."
+
+#: tfrmmain.actaddquotationmarks.caption
+msgid "Add quotation marks"
+msgstr "Anführungszeichen hinzufügen"
+
+#: tfrmmain.actadjustsubtitle.caption
+msgid "Adjust subtitle..."
+msgstr "Untertitel anpassen..."
+
+#: tfrmmain.actaligntocenter.caption
+msgctxt "tfrmmain.actaligntocenter.caption"
+msgid "Align to center"
+msgstr "Zentriert ausrichten"
+
+#: tfrmmain.actaligntoleft.caption
+msgctxt "tfrmmain.actaligntoleft.caption"
+msgid "Align to left"
+msgstr "Links ausrichten"
+
+#: tfrmmain.actaligntonone.caption
+msgctxt "tfrmmain.actaligntonone.caption"
+msgid "Align to none"
+msgstr "Keine Textausrichtung"
+
+#: tfrmmain.actaligntoright.caption
+msgctxt "tfrmmain.actaligntoright.caption"
+msgid "Align to right"
+msgstr "Rechts ausrichten"
+
+#: tfrmmain.actaudiofilterdialoguenhance.caption
+msgid "Dialogue enhance"
+msgstr "Dialogverstärkung"
+
+#: tfrmmain.actaudiofilterspeechnormalizer.caption
+msgid "Speech normalizer"
+msgstr "Sprach-Normalisierung"
+
+#: tfrmmain.actaudiofiltersurround.caption
+msgid "Surround"
+msgstr "Surround"
+
+#: tfrmmain.actaudiototext.caption
+msgctxt "tfrmmain.actaudiototext.caption"
+msgid "Audio to text..."
+msgstr "Audio/Ton in Text..."
+
+#: tfrmmain.actautobreakentry.caption
+msgctxt "tfrmmain.actautobreakentry.caption"
+msgid "Autobreak"
+msgstr "Automatischer Zeilenumbruch"
+
+#: tfrmmain.actautobreakentry.hint
+msgctxt "tfrmmain.actautobreakentry.hint"
+msgid "Split a long line into two or more lines"
+msgstr "Lange Zeile in zwei oder mehr Zeilen aufteilen"
+
+#: tfrmmain.actautomaticduration.caption
+msgid "Automatic duration..."
+msgstr "Automatische Dauer..."
+
+#: tfrmmain.actbatchconvert.caption
+msgctxt "tfrmmain.actbatchconvert.caption"
+msgid "Batch convert..."
+msgstr "Stapelkonvertierung..."
+
+#: tfrmmain.actcenterwaveform.caption
+msgctxt "tfrmmain.actcenterwaveform.caption"
+msgid "Center waveform"
+msgstr "Wellenform zentrieren"
+
+#: tfrmmain.actcharactermap.caption
+msgid "Character Map..."
+msgstr "Zeichentabelle..."
+
+#: tfrmmain.actcheckforupdates.caption
+msgid "Check for updates..."
+msgstr "Nach Aktualisierung suchen..."
+
+#: tfrmmain.actcleartext.caption
+msgid "Clear text"
+msgstr "Text löschen"
+
+#: tfrmmain.actcloseapp.caption
+msgctxt "tfrmmain.actcloseapp.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmmain.actclosesubtitle.caption
+msgid "Close subtitles"
+msgstr "Untertitel schliessen"
+
+#: tfrmmain.actclosevideo.caption
+msgid "Close video"
+msgstr "Video schliessen"
+
+#: tfrmmain.actcombineentries.caption
+msgid "Combine entries"
+msgstr "Einträge zusammenführen"
+
+#: tfrmmain.actcombineentries.hint
+msgctxt "tfrmmain.actcombineentries.hint"
+msgid "Combines all the selected entries into one"
+msgstr "Fügt alle ausgewählten Einträge zu einem zusammen"
+
+#: tfrmmain.actcompare.caption
+msgid "Compare..."
+msgstr "Vergleichen..."
+
+#: tfrmmain.actconvertcase.caption
+msgid "Convert case..."
+msgstr "Gross-/Kleinschreibung ändern..."
+
+#: tfrmmain.actcopy.caption
+msgctxt "tfrmmain.actcopy.caption"
+msgid "Copy"
+msgstr "Kopieren"
+
+#: tfrmmain.actcopyvideopostoclipboard.caption
+msgid "Copy video position to clipboard"
+msgstr "Videoposition in die Zwischenablage kopieren"
+
+#: tfrmmain.actcut.caption
+msgctxt "tfrmmain.actcut.caption"
+msgid "Cut"
+msgstr "Ausschneiden"
+
+#: tfrmmain.actdeleteentry.caption
+msgid "Delete entries"
+msgstr "Einträge löschen"
+
+#: tfrmmain.actdeleteentry.hint
+msgid "Delete selected entries"
+msgstr "Ausgewählte Einträge löschen"
+
+#: tfrmmain.actdeleteshotchange.caption
+msgid "Delete shot change(s)"
+msgstr "Kamerawechsel löschen"
+
+#: tfrmmain.actdetectdialogsegments.caption
+msgid "Detect dialog segments..."
+msgstr "Dialogsegmente erkennen..."
+
+#: tfrmmain.actdetectsilentzones.caption
+msgctxt "tfrmmain.actdetectsilentzones.caption"
+msgid "Detect silent zones"
+msgstr "Stille Zonen erkennen"
+
+#: tfrmmain.actdetectsilentzones.hint
+msgid "Click to refresh list"
+msgstr "Klicken, um Liste zu aktualisieren"
+
+#: tfrmmain.actdistributeentriesevenly.caption
+msgid "Distribute entries evenly"
+msgstr "Einträge gleichmässig verteilen"
+
+#: tfrmmain.actdivideentry.caption
+msgid "Divide entry"
+msgstr "Eintrag teilen"
+
+#: tfrmmain.actdurationlimits.caption
+msgid "Duration limits..."
+msgstr "Dauergrenzen..."
+
+#: tfrmmain.actendcueaddoneframe.caption
+msgid "Add one frame"
+msgstr "Ein Bild hinzufügen"
+
+#: tfrmmain.actendcuesubtractoneframe.caption
+msgid "Subtract one frame"
+msgstr "Ein Bild entfernen"
+
+#: tfrmmain.actexportcustomimageformat.caption
+msgid "Custom image format..."
+msgstr "Benutzerdefiniertes Bildformat..."
+
+#: tfrmmain.actexportcustomtextformat.caption
+msgid "Custom text format..."
+msgstr "Benutzerdefiniertes Textformat..."
+
+#: tfrmmain.actexportmarkedsubtitles.caption
+msgid "Marked subtitles..."
+msgstr "Markierte Untertitel..."
+
+#: tfrmmain.actexportsup.caption
+msgctxt "tfrmmain.actexportsup.caption"
+msgid "Blu-ray SUP..."
+msgstr "Blu-ray SUP..."
+
+#: tfrmmain.actexporttextonly.caption
+msgid "Text only..."
+msgstr "Nur Text..."
+
+#: tfrmmain.actextendlengthtonext.caption
+msgid "Extend final time to next"
+msgstr "Endzeit auf nächsten Eintrag verlängern"
+
+#: tfrmmain.actextendlengthtoprevious.caption
+msgid "Extend initial time to previous"
+msgstr "Startzeit auf vorherigen Eintrag verlängern"
+
+#: tfrmmain.actfind.caption
+msgid "Find..."
+msgstr "Suchen..."
+
+#: tfrmmain.actfindnext.caption
+msgctxt "tfrmmain.actfindnext.caption"
+msgid "Find next"
+msgstr "Nächstes suchen"
+
+#: tfrmmain.actfindprevious.caption
+msgid "Find previous"
+msgstr "Vorheriges suchen"
+
+#: tfrmmain.actfixrtlpunctuation.caption
+msgid "Fix punctuation"
+msgstr "Interpunktion korrigieren"
+
+#: tfrmmain.actfixsubtitles.caption
+msgid "Fix subtitles..."
+msgstr "Untertitel korrigieren..."
+
+#: tfrmmain.actfocusfinaltime.caption
+msgid "Edit final time"
+msgstr "Endzeit bearbeiten"
+
+#: tfrmmain.actfocusinitialtime.caption
+msgid "Edit initial time"
+msgstr "Startzeit bearbeiten"
+
+#: tfrmmain.actfontbold.caption
+msgctxt "tfrmmain.actfontbold.caption"
+msgid "Bold"
+msgstr "Fett"
+
+#: tfrmmain.actfontclear.caption
+msgctxt "tfrmmain.actfontclear.caption"
+msgid "Clear"
+msgstr "Löschen"
+
+#: tfrmmain.actfontcolor.caption
+msgid "Set current font color"
+msgstr "Aktuelle Schriftfarbe festlegen"
+
+#: tfrmmain.actfontcolordlg.caption
+msgctxt "tfrmmain.actfontcolordlg.caption"
+msgid "Color..."
+msgstr "Farbe..."
+
+#: tfrmmain.actfontitalic.caption
+msgctxt "tfrmmain.actfontitalic.caption"
+msgid "Italic"
+msgstr "Kursiv"
+
+#: tfrmmain.actfontstrikeout.caption
+msgctxt "tfrmmain.actfontstrikeout.caption"
+msgid "Strikeout"
+msgstr "Durchgestrichen"
+
+#: tfrmmain.actfontunderline.caption
+msgctxt "tfrmmain.actfontunderline.caption"
+msgid "Underline"
+msgstr "Unterstreichen"
+
+#: tfrmmain.actformatproperties.caption
+msgctxt "tfrmmain.actformatproperties.caption"
+msgid "Format properties..."
+msgstr "Formateigenschaften..."
+
+#: tfrmmain.actframesmode.caption
+msgctxt "tfrmmain.actframesmode.caption"
+msgid "Frame mode"
+msgstr "Bildmodus"
+
+#: tfrmmain.actframesmode.hint
+#, fuzzy
+#| msgid "Set time code format to HH:MM:ss:FF"
+msgid "Set time code format to HH:MM:SS:FF"
+msgstr "Zeitcode-Format auf St:Mi:Se:Bi setzen"
+
+#: tfrmmain.actgenerateblankvideo.caption
+msgid "Generate blank video..."
+msgstr "Leeres Video erzeugen..."
+
+#: tfrmmain.actgeneratevideo.caption
+msgid "Video with hardcoded subtitles..."
+msgstr "Video mit eingebrannten Untertiteln..."
+
+#: tfrmmain.actgoto.caption
+msgid "Go to entry..."
+msgstr "Zum Eintrag gehen..."
+
+#: tfrmmain.actgotocurrententryfinaltime.caption
+msgid "Go to current entry final time"
+msgstr "Zum Endzeitpunkt des aktuellen Eintrags gehen"
+
+#: tfrmmain.actgotocurrententryinitialtime.caption
+msgid "Go to current entry initial time"
+msgstr "Zum Startzeitpunkt des aktuellen Eintrags gehen"
+
+#: tfrmmain.actgotonextentryandplay.caption
+msgid "Go to next entry and play"
+msgstr "Zum nächsten Eintrag gehen und abspielen"
+
+#: tfrmmain.actgotopreviousentryandplay.caption
+msgid "Go to previous entry and play"
+msgstr "Zum vorherigen Eintrag gehen und abspielen"
+
+#: tfrmmain.actgototime.caption
+msgid "Go to time..."
+msgstr "Zu Zeitposition gehen..."
+
+#: tfrmmain.acthelp.caption
+msgctxt "tfrmmain.acthelp.caption"
+msgid "Help"
+msgstr "Hilfe"
+
+#: tfrmmain.actimportsubtitles.caption
+msgid "Subtitles..."
+msgstr "Untertitel..."
+
+#: tfrmmain.actimportsup.caption
+#, fuzzy
+msgctxt "tfrmmain.actimportsup.caption"
+msgid "Blu-ray SUP..."
+msgstr "Blu-ray SUP..."
+
+#: tfrmmain.actinsertcurrenttime.caption
+msgid "Insert current time"
+msgstr "Aktuelle Zeit einfügen"
+
+#: tfrmmain.actinsertentry.caption
+msgid "Insert entry"
+msgstr "Eintrag einfügen"
+
+#: tfrmmain.actinsertentry.hint
+msgid "Insert a new entry after the current entry"
+msgstr "Neuen Eintrag nach dem aktuellen Eintrag einfügen"
+
+#: tfrmmain.actinsertentrybefore.caption
+msgid "Insert entry before"
+msgstr "Eintrag davor einfügen"
+
+#: tfrmmain.actinsertentrybefore.hint
+msgctxt "tfrmmain.actinsertentrybefore.hint"
+msgid "Insert entry before the current entry"
+msgstr "Neuen Eintrag vor dem aktuellen Eintrag einfügen"
+
+#: tfrmmain.actinsertshotchange.caption
+msgid "Insert shot change"
+msgstr "Kamerawechsel einfügen"
+
+#: tfrmmain.actinvertselection.caption
+msgctxt "tfrmmain.actinvertselection.caption"
+msgid "Invert selection"
+msgstr "Auswahl umkehren"
+
+#: tfrmmain.actjumptonextempty.caption
+msgid "Jump to next without text"
+msgstr "Zum nächsten leeren Eintrag springen"
+
+#: tfrmmain.actjumptonextmarked.caption
+msgid "Jump to next marked"
+msgstr "Zum nächsten markierten Eintrag springen"
+
+#: tfrmmain.actjumptonextnote.caption
+msgid "Jump to next note"
+msgstr "Zur nächsten Anmerkung springen"
+
+#: tfrmmain.actjumptonextshotchange.caption
+msgid "Jump to next shot change"
+msgstr "Zum nächsten Kamerawechsel springen"
+
+#: tfrmmain.actjumptopreviousempty.caption
+msgid "Jump to previous without text"
+msgstr "Zum vorherigen leeren Eintrag springen"
+
+#: tfrmmain.actjumptopreviousmarked.caption
+msgid "Jump to previous marked"
+msgstr "Zum vorherigen markierten Eintrag springen"
+
+#: tfrmmain.actjumptopreviousnote.caption
+msgid "Jump to previous note"
+msgstr "Zur vorherigen Anmerkung springen"
+
+#: tfrmmain.actjumptoprevshotchange.caption
+msgid "Jump to previous shot change"
+msgstr "Zum vorherigen Kamerawechsel springen"
+
+#: tfrmmain.actlistmode.caption
+msgctxt "tfrmmain.actlistmode.caption"
+msgid "List mode"
+msgstr "Listenmodus"
+
+#: tfrmmain.actloadproject.caption
+msgid "Load project..."
+msgstr "Projekt laden..."
+
+#: tfrmmain.actloadsubtitle.caption
+msgctxt "tfrmmain.actloadsubtitle.caption"
+msgid "Load subtitle..."
+msgstr "Untertitel laden..."
+
+#: tfrmmain.actloadsubtitle.hint
+msgid "Load a subtitle file"
+msgstr "Eine Untertiteldatei laden"
+
+#: tfrmmain.actloadtranscription.caption
+msgctxt "tfrmmain.actloadtranscription.caption"
+msgid "Transcription..."
+msgstr "Transkription..."
+
+#: tfrmmain.actloadtranslation.caption
+msgid "Load translation..."
+msgstr "Übersetzung laden..."
+
+#: tfrmmain.actloadvideo.caption
+msgid "Open video..."
+msgstr "Video öffnen..."
+
+#: tfrmmain.actloadvideo.hint
+msgid "Open a video file"
+msgstr "Eine Videodatei öffnen"
+
+#: tfrmmain.actloadvideofromurl.caption
+msgid "Open video from URL..."
+msgstr "Video über URL öffnen..."
+
+#: tfrmmain.actmarkentry.caption
+msgid "Mark entry"
+msgstr "Eintrag markieren"
+
+#: tfrmmain.actmediaaddentry.caption
+msgctxt "tfrmmain.actmediaaddentry.caption"
+msgid "Add entry"
+msgstr "Eintrag hinzufügen"
+
+#: tfrmmain.actmediaautoscroll.caption
+msgctxt "tfrmmain.actmediaautoscroll.caption"
+msgid "Update list on preview"
+msgstr "Liste bei Vorschau aktualisieren"
+
+#: tfrmmain.actmediaback1min.caption
+msgid "Go back 1 minute"
+msgstr "1 Minute zurückspringen"
+
+#: tfrmmain.actmediaback1sec.caption
+msgid "Go back 1 second"
+msgstr "1 Sekunde zurückspringen"
+
+#: tfrmmain.actmediachangeplayrate.caption
+msgctxt "tfrmmain.actmediachangeplayrate.caption"
+msgid "Playback rate"
+msgstr "Wiedergabegeschwindigkeit"
+
+#: tfrmmain.actmediadeleteentry.caption
+msgctxt "tfrmmain.actmediadeleteentry.caption"
+msgid "Delete entry"
+msgstr "Eintrag löschen"
+
+#: tfrmmain.actmediaendsubtitleentry.caption
+msgid "End entry"
+msgstr "Eintrag beenden"
+
+#: tfrmmain.actmediaforward.caption
+msgctxt "tfrmmain.actmediaforward.caption"
+msgid "Forward"
+msgstr "Vorwärts"
+
+#: tfrmmain.actmediaforward1min.caption
+msgid "Forward 1 minute"
+msgstr "1 Minute vorspringen"
+
+#: tfrmmain.actmediaforward1sec.caption
+msgid "Forward 1 second"
+msgstr "1 Sekunde vorspringen"
+
+#: tfrmmain.actmediamovesubtitleentry.caption
+msgid "Move entry"
+msgstr "Eintrag verschieben"
+
+#: tfrmmain.actmedianextframe.caption
+msgctxt "tfrmmain.actmedianextframe.caption"
+msgid "Next frame"
+msgstr "Nächstes Bild"
+
+#: tfrmmain.actmediaplay.caption
+msgctxt "tfrmmain.actmediaplay.caption"
+msgid "Play/Pause"
+msgstr "Abspielen/Pause"
+
+#: tfrmmain.actmediaplayafterselection.caption
+msgctxt "tfrmmain.actmediaplayafterselection.caption"
+msgid "Play after selection"
+msgstr "Nach Auswahl abspielen"
+
+#: tfrmmain.actmediaplaybeforeselection.caption
+msgctxt "tfrmmain.actmediaplaybeforeselection.caption"
+msgid "Play before selection"
+msgstr "Vor Auswahl abspielen"
+
+#: tfrmmain.actmediaplayfromselection.caption
+msgctxt "tfrmmain.actmediaplayfromselection.caption"
+msgid "Play from selection"
+msgstr "Ab Auswahl abspielen"
+
+#: tfrmmain.actmediaplayselection.caption
+msgctxt "tfrmmain.actmediaplayselection.caption"
+msgid "Play selection"
+msgstr "Auswahl abspielen"
+
+#: tfrmmain.actmediaplayselection.hint
+msgid "Click on the arrow to select playback repetitions"
+msgstr "Auf den Pfeil klicken, um Wiederholungen der Wiedergabe auszuwählen"
+
+#: tfrmmain.actmediapreviousframe.caption
+msgctxt "tfrmmain.actmediapreviousframe.caption"
+msgid "Previous frame"
+msgstr "Vorheriges Bild"
+
+#: tfrmmain.actmediarewind.caption
+msgctxt "tfrmmain.actmediarewind.caption"
+msgid "Rewind"
+msgstr "Zurückspulen"
+
+#: tfrmmain.actmediasetfinaltime.caption
+msgctxt "tfrmmain.actmediasetfinaltime.caption"
+msgid "Set final time"
+msgstr "Endzeit festlegen"
+
+#: tfrmmain.actmediasetinitialtime.caption
+msgctxt "tfrmmain.actmediasetinitialtime.caption"
+msgid "Set initial time"
+msgstr "Startzeit festlegen"
+
+#: tfrmmain.actmediasplitentryatcursorposition.caption
+msgid "Split at cursor position"
+msgstr "An Cursorposition teilen"
+
+#: tfrmmain.actmediastartsubtitleentry.caption
+msgid "Start entry"
+msgstr "Eintrag starten"
+
+#: tfrmmain.actmediastop.caption
+msgctxt "tfrmmain.actmediastop.caption"
+msgid "Stop"
+msgstr "Stopp"
+
+#: tfrmmain.actmediasubsizedec.caption
+msgid "Reduce video font size"
+msgstr "Schriftgrösse im Video verkleinern"
+
+#: tfrmmain.actmediasubsizeinc.caption
+msgid "Increase video font size"
+msgstr "Schriftgrösse im Video vergrössern"
+
+#: tfrmmain.actmediavolumedown.caption
+msgid "Down"
+msgstr "Lautstärke verringern"
+
+#: tfrmmain.actmediavolumemute.caption
+msgid "Mute"
+msgstr "Stumm"
+
+#: tfrmmain.actmediavolumeup.caption
+msgid "Up"
+msgstr "Lautstärke erhöhen"
+
+#: tfrmmain.actmediazoomin.caption
+msgctxt "tfrmmain.actmediazoomin.caption"
+msgid "Zoom in"
+msgstr "Vergrössern"
+
+#: tfrmmain.actmediazoomout.caption
+msgctxt "tfrmmain.actmediazoomout.caption"
+msgid "Zoom out"
+msgstr "Verkleinern"
+
+#: tfrmmain.actmediazoomselection.caption
+msgctxt "tfrmmain.actmediazoomselection.caption"
+msgid "Zoom selection"
+msgstr "Auswahl Vergrösserung"
+
+#: tfrmmain.actmergewithnext.caption
+msgid "Merge with next"
+msgstr "Mit folgendem Eintrag zusammenfügen"
+
+#: tfrmmain.actmergewithprevious.caption
+msgid "Merge with previous"
+msgstr "Mit vorherigem Eintrag zusammenfügen"
+
+#: tfrmmain.actmodifyselection.caption
+msgid "Modify selection..."
+msgstr "Auswahl bearbeiten..."
+
+#: tfrmmain.actmultiplereplace.caption
+msgid "Multiple replace..."
+msgstr "Mehrfach ersetzen..."
+
+#: tfrmmain.actnewsubtitle.caption
+msgctxt "tfrmmain.actnewsubtitle.caption"
+msgid "New subtitle"
+msgstr "Neuer Untertitel"
+
+#: tfrmmain.actnewsubtitle.hint
+msgid "Start a new subtitle project"
+msgstr "Ein neues Untertitelprojekt starten"
+
+#: tfrmmain.actnextsubtitle.caption
+msgctxt "tfrmmain.actnextsubtitle.caption"
+msgid "Next subtitle"
+msgstr "Nächster Untertitel"
+
+#: tfrmmain.actpanandscan.caption
+msgid "Pan-and-scan"
+msgstr "Schwenken und Ausschneiden"
+
+#: tfrmmain.actpaste.caption
+msgctxt "tfrmmain.actpaste.caption"
+msgid "Paste"
+msgstr "Einfügen"
+
+#: tfrmmain.actplaycurrententry.caption
+msgid "Play current entry"
+msgstr "Aktuellen Eintrag abspielen"
+
+#: tfrmmain.actprevioussubtitle.caption
+msgctxt "tfrmmain.actprevioussubtitle.caption"
+msgid "Previous subtitle"
+msgstr "Vorheriger Untertitel"
+
+#: tfrmmain.actpullfirstlinefromnextentry.caption
+msgid "Pull the first line from the next entry"
+msgstr "Erste Zeile des nächsten Eintrags hier einfügen"
+
+#: tfrmmain.actpulllastlinefrompreviousentry.caption
+msgid "Pull the last line from the previous entry"
+msgstr "Letzte Zeile des vorherigen Eintrags hier einfügen"
+
+#: tfrmmain.actpushfirstlinetopreviousentry.caption
+msgid "Push the first line to the previous entry"
+msgstr "Erste Zeile zum vorherigen Eintrag verschieben"
+
+#: tfrmmain.actpushlastlinetonextentry.caption
+msgid "Push the last line to the next entry"
+msgstr "Letzte Zeile zum nächsten Eintrag verschieben"
+
+#: tfrmmain.actpushworddown.caption
+msgid "Push the last word of the current line down"
+msgstr "Letztes Wort der aktuellen Zeile nach unten verschieben"
+
+#: tfrmmain.actpushwordtonextentry.caption
+msgid "Push the last word to the next entry"
+msgstr "Letztes Wort zum nächsten Eintrag verschieben"
+
+#: tfrmmain.actpushwordtopreviousentry.caption
+msgid "Push the first word to the previous entry"
+msgstr "Erstes Wort zum vorherigen Eintrag verschieben"
+
+#: tfrmmain.actpushwordup.caption
+msgid "Push the first word of the current line up"
+msgstr "Erstes Wort der aktuellen Zeile nach oben verschieben"
+
+#: tfrmmain.actqualitycheck.caption
+msgid "Quality check..."
+msgstr "Qualitätskontrolle..."
+
+#: tfrmmain.actreadtextsfromfile.caption
+msgid "Read text from file..."
+msgstr "Text aus Datei lesen..."
+
+#: tfrmmain.actreadtimingsfromfile.caption
+msgid "Read timings from file..."
+msgstr "Zeitangaben aus Datei lesen..."
+
+#: tfrmmain.actredo.caption
+msgctxt "tfrmmain.actredo.caption"
+msgid "Redo"
+msgstr "Wiederholen"
+
+#: tfrmmain.actredo.hint
+msgid "Redo last undo"
+msgstr "Letzte Rückgängig-Handlung wiederholen"
+
+#: tfrmmain.actremovelinefromentry.caption
+msgid "Remove line from entry..."
+msgstr "Zeile aus Eintrag entfernen..."
+
+#: tfrmmain.actremoveunicodecontrolchars.caption
+msgid "Remove Unicode control characters"
+msgstr "Unicode-Steuerzeichen entfernen"
+
+#: tfrmmain.actreplace.caption
+msgid "Replace..."
+msgstr "Ersetzen..."
+
+#: tfrmmain.actrestorebackup.caption
+msgid "Restore backup..."
+msgstr "Sicherung wiederherstellen..."
+
+#: tfrmmain.actreversetext.caption
+msgid "Reverse text"
+msgstr "Text umkehren"
+
+#: tfrmmain.actroundtimes.caption
+msgid "Round times..."
+msgstr "Zeiten runden..."
+
+#: tfrmmain.actsaveproject.caption
+msgid "Save project..."
+msgstr "Projekt speichern..."
+
+#: tfrmmain.actsavesubtitle.caption
+msgctxt "tfrmmain.actsavesubtitle.caption"
+msgid "Save subtitle"
+msgstr "Untertitel speichern"
+
+#: tfrmmain.actsavesubtitle.hint
+msgid "Save current subtitle to file"
+msgstr "Aktuelle Untertitel in Datei speichern"
+
+#: tfrmmain.actsavesubtitleas.caption
+msgid "Save subtitle as..."
+msgstr "Untertitel speichern unter..."
+
+#: tfrmmain.actsavesubtitleas.hint
+msgid "Save current subtitle to a specific file"
+msgstr "Aktuelle Untertitel in bestimmter Datei speichern"
+
+#: tfrmmain.actsavetranscription.caption
+msgctxt "tfrmmain.actsavetranscription.caption"
+msgid "Transcription..."
+msgstr "Transkription..."
+
+#: tfrmmain.actsavetranslation.caption
+msgid "Save translation"
+msgstr "Übersetzung speichern"
+
+#: tfrmmain.actsavetranslation.hint
+msgid "Save current translation to file"
+msgstr "Aktuelle Übersetzung in Datei speichern"
+
+#: tfrmmain.actsavetranslationas.caption
+msgid "Save translation as..."
+msgstr "Übersetzung speichern unter..."
+
+#: tfrmmain.actsavetranslationas.hint
+msgid "Save current translation to a specific file"
+msgstr "Aktuelle Übersetzung in bestimmter Datei speichern"
+
+#: tfrmmain.actscreenshottofile.caption
+msgid "Save screenshot"
+msgstr "Bildschirmfoto speichern"
+
+#: tfrmmain.actselectall.caption
+msgctxt "tfrmmain.actselectall.caption"
+msgid "Select all"
+msgstr "Alles auswählen"
+
+#: tfrmmain.actselectcurrenttobeginning.caption
+msgid "Select current to beginning"
+msgstr "Von hier bis zum Anfang auswählen"
+
+#: tfrmmain.actselectcurrenttoend.caption
+msgid "Select current to end"
+msgstr "Von hier bis zum Ende auswählen"
+
+#: tfrmmain.actsetasdefaultencoding.caption
+msgctxt "tfrmmain.actsetasdefaultencoding.caption"
+msgid "Set as default save encoding"
+msgstr "Als Standard-Zeichencodierung für Speicherung festlegen"
+
+#: tfrmmain.actsetasdefaultformat.caption
+msgctxt "tfrmmain.actsetasdefaultformat.caption"
+msgid "Set as default save format"
+msgstr "Als Standard-Speicherformat festlegen"
+
+#: tfrmmain.actsetautomaticduration.caption
+msgid "Set automatic duration"
+msgstr "Automatische Dauer festlegen"
+
+#: tfrmmain.actsetdefaultgap.caption
+msgid "Set default gap"
+msgstr "Standard-Zeitabstand festlegen"
+
+#: tfrmmain.actsetdefaultgap.hint
+msgid "Only if the gap is too short"
+msgstr "Nur wenn der Abstand zu kurz ist"
+
+#: tfrmmain.actsetdelay.caption
+msgid "Set delay..."
+msgstr "Verzögerung einstellen..."
+
+#: tfrmmain.actsetgapping.caption
+msgid "Set gapping..."
+msgstr "Abstände einstellen..."
+
+#: tfrmmain.actsetguilayout0.caption
+msgctxt "tfrmmain.actsetguilayout0.caption"
+msgid "Classic"
+msgstr "Klassisch"
+
+#: tfrmmain.actsetguilayout1.caption
+msgctxt "tfrmmain.actsetguilayout1.caption"
+msgid "Inverted"
+msgstr "Invertiert"
+
+#: tfrmmain.actsetguilayout2.caption
+msgctxt "tfrmmain.actsetguilayout2.caption"
+msgid "Vertical"
+msgstr "Vertikal"
+
+#: tfrmmain.actsettings.caption
+msgctxt "tfrmmain.actsettings.caption"
+msgid "Settings..."
+msgstr "Einstellungen..."
+
+#: tfrmmain.actshifttimeless.caption
+#, object-pascal-format
+msgctxt "tfrmmain.actshifttimeless.caption"
+msgid "Shift %dms less"
+msgstr "Zeit um %d ms zurückverschieben"
+
+#: tfrmmain.actshifttimemore.caption
+#, object-pascal-format
+msgctxt "tfrmmain.actshifttimemore.caption"
+msgid "Shift %dms more"
+msgstr "Zeit um %d ms vorschieben"
+
+#: tfrmmain.actshifttimes.caption
+msgid "Shift times..."
+msgstr "Zeiten verschieben..."
+
+#: tfrmmain.actshotchanges.caption
+msgid "Shot changes..."
+msgstr "Kamerawechsel..."
+
+#: tfrmmain.actshowactoronpreview.caption
+msgid "Display Actor on Preview"
+msgstr "Sprecher in Vorschau anzeigen"
+
+#: tfrmmain.actshowcolumncpl.caption
+msgctxt "tfrmmain.actshowcolumncpl.caption"
+msgid "Characters per line"
+msgstr "Zeichen pro Zeile (ZPZ)"
+
+#: tfrmmain.actshowcolumncps.caption
+msgctxt "tfrmmain.actshowcolumncps.caption"
+msgid "Characters per second"
+msgstr "Zeichen pro Sekunde (ZPS)"
+
+#: tfrmmain.actshowcolumnduration.caption
+msgctxt "tfrmmain.actshowcolumnduration.caption"
+msgid "Duration"
+msgstr "Dauer"
+
+#: tfrmmain.actshowcolumnnumber.caption
+msgid "Number/GAP"
+msgstr "Nummer/Abstand"
+
+#: tfrmmain.actshowcolumnstyleandactor.caption
+msgctxt "tfrmmain.actshowcolumnstyleandactor.caption"
+msgid "Style/Actor"
+msgstr "Stil/Sprecher"
+
+#: tfrmmain.actshowcolumntimes.caption
+msgctxt "tfrmmain.actshowcolumntimes.caption"
+msgid "Times"
+msgstr "Zeiten"
+
+#: tfrmmain.actshowcolumnwpm.caption
+msgctxt "tfrmmain.actshowcolumnwpm.caption"
+msgid "Words per minute"
+msgstr "Wörter pro Minute (WPM)"
+
+#: tfrmmain.actshoweditortoolbaralignment.caption
+msgctxt "tfrmmain.actshoweditortoolbaralignment.caption"
+msgid "Alignment"
+msgstr "Textausrichtung"
+
+#: tfrmmain.actshoweditortoolbarbasic.caption
+msgid "Basic"
+msgstr "Grundfunktionen"
+
+#: tfrmmain.actshoweditortoolbarentry.caption
+msgctxt "tfrmmain.actshoweditortoolbarentry.caption"
+msgid "Entry"
+msgstr "Eintrag"
+
+#: tfrmmain.actshoweditortoolbarformat.caption
+msgctxt "tfrmmain.actshoweditortoolbarformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmmain.actshoweditortoolbarlines.caption
+msgctxt "tfrmmain.actshoweditortoolbarlines.caption"
+msgid "Lines"
+msgstr "Zeilen"
+
+#: tfrmmain.actshoweditortoolbarwords.caption
+msgctxt "tfrmmain.actshoweditortoolbarwords.caption"
+msgid "Words"
+msgstr "Wörter"
+
+#: tfrmmain.actshowthumbnails.caption
+msgid "Show thumbnails"
+msgstr "Vorschaubilder anzeigen"
+
+#: tfrmmain.actshowtoolbarencoding.caption
+msgctxt "tfrmmain.actshowtoolbarencoding.caption"
+msgid "Encoding"
+msgstr "Codierung"
+
+#: tfrmmain.actshowtoolbarentry.caption
+msgctxt "tfrmmain.actshowtoolbarentry.caption"
+msgid "Entry"
+msgstr "Eintrag"
+
+#: tfrmmain.actshowtoolbarfile.caption
+msgctxt "tfrmmain.actshowtoolbarfile.caption"
+msgid "File"
+msgstr "Datei"
+
+#: tfrmmain.actshowtoolbarformat.caption
+msgctxt "tfrmmain.actshowtoolbarformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmmain.actshowtoolbarfps.caption
+msgctxt "tfrmmain.actshowtoolbarfps.caption"
+msgid "FPS"
+msgstr "BPS"
+
+#: tfrmmain.actshowtoolbargeneral.caption
+msgctxt "tfrmmain.actshowtoolbargeneral.caption"
+msgid "General"
+msgstr "Allgemein"
+
+#: tfrmmain.actshowtoolbarquickaction.caption
+msgid "Quick Action"
+msgstr "Schnellhandlung"
+
+#: tfrmmain.actshowtoolbarview.caption
+msgctxt "tfrmmain.actshowtoolbarview.caption"
+msgid "View"
+msgstr "Ansicht"
+
+#: tfrmmain.actshowvideotoolbarcontrols.caption
+msgctxt "tfrmmain.actshowvideotoolbarcontrols.caption"
+msgid "Controls"
+msgstr "Steuerelemente"
+
+#: tfrmmain.actshowvideotoolbarentry.caption
+msgctxt "tfrmmain.actshowvideotoolbarentry.caption"
+msgid "Entry"
+msgstr "Eintrag"
+
+#: tfrmmain.actshowvideotoolbarother.caption
+msgctxt "tfrmmain.actshowvideotoolbarother.caption"
+msgid "Other"
+msgstr "Weitere"
+
+#: tfrmmain.actshowvideotoolbarvolume.caption
+msgctxt "tfrmmain.actshowvideotoolbarvolume.caption"
+msgid "Volume"
+msgstr "Lautstärke"
+
+#: tfrmmain.actshowwaveformtoolbarcontrols.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarcontrols.caption"
+msgid "Controls"
+msgstr "Steuerelemente"
+
+#: tfrmmain.actshowwaveformtoolbarentry.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarentry.caption"
+msgid "Entry"
+msgstr "Eintrag"
+
+#: tfrmmain.actshowwaveformtoolbarother.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
+msgid "Other"
+msgstr "Weitere"
+
+#: tfrmmain.actshowwaveformtoolbarshotchanges.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarshotchanges.caption"
+msgid "Shot changes"
+msgstr "Szenenwechsel"
+
+#: tfrmmain.actshowwaveformtoolbarzoom.caption
+msgid "Zoom"
+msgstr "Vergrösserung"
+
+#: tfrmmain.actsort.caption
+msgid "Sort"
+msgstr "Sortieren"
+
+#: tfrmmain.actsourcemode.caption
+msgctxt "tfrmmain.actsourcemode.caption"
+msgid "Source mode"
+msgstr "Quellmodus"
+
+#: tfrmmain.actspellcheck.caption
+msgid "Spell check..."
+msgstr "Rechtschreibprüfung..."
+
+#: tfrmmain.actsplitentryatposition.caption
+msgctxt "tfrmmain.actsplitentryatposition.caption"
+msgid "Split line at cursor position"
+msgstr "Zeile an Cursorposition teilen"
+
+#: tfrmmain.actstatistics.caption
+msgid "Statistics..."
+msgstr "Statistik..."
+
+#: tfrmmain.actstreamextractor.caption
+msgid "Stream extractor..."
+msgstr "Stream-Extraktor..."
+
+#: tfrmmain.actswaptexts.caption
+msgid "Swap text"
+msgstr "Text vertauschen"
+
+#: tfrmmain.acttbx.caption
+msgctxt "tfrmmain.acttbx.caption"
+msgid "Show..."
+msgstr "Anzeigen..."
+
+#: tfrmmain.acttbxclose.caption
+msgctxt "tfrmmain.acttbxclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmmain.acttbxedit.caption
+msgctxt "tfrmmain.acttbxedit.caption"
+msgid "Add..."
+msgstr "Hinzufügen..."
+
+#: tfrmmain.acttbxlist.caption
+msgctxt "tfrmmain.acttbxlist.caption"
+msgid "List..."
+msgstr "Liste..."
+
+#: tfrmmain.acttbxsettings.caption
+msgctxt "tfrmmain.acttbxsettings.caption"
+msgid "Settings..."
+msgstr "Einstellungen..."
+
+#: tfrmmain.acttexteffectflash.caption
+msgid "Flash effect"
+msgstr "Blitz-Effekt"
+
+#: tfrmmain.acttexteffecttypewriter.caption
+msgid "Typewriter effect"
+msgstr "Schreibmaschinen-Effekt"
+
+#: tfrmmain.acttimeexpander.caption
+msgid "Time expander/reducer..."
+msgstr "Zeit dehnen/kürzen..."
+
+#: tfrmmain.acttimemode.caption
+msgctxt "tfrmmain.acttimemode.caption"
+msgid "Time mode"
+msgstr "Zeitmodus"
+
+#: tfrmmain.acttimemode.hint
+#, fuzzy
+#| msgid "Set time code format to HH:MM:ss.ZZZ"
+msgid "Set time code format to HH:MM:SS.ZZZ"
+msgstr "Zeitformat auf St:Mi:Se.ZZZ setzen"
+
+#: tfrmmain.acttm1.caption
+msgid "Use text from position 1 (tm)"
+msgstr "Text aus Position 1 verwenden (tm)"
+
+#: tfrmmain.acttm2.caption
+msgid "Use text from position 2 (tm)"
+msgstr "Text aus Position 2 verwenden (tm)"
+
+#: tfrmmain.acttm3.caption
+msgid "Use text from position 3 (tm)"
+msgstr "Text aus Position 3 verwenden (tm)"
+
+#: tfrmmain.acttranscriptionmode.caption
+msgctxt "tfrmmain.acttranscriptionmode.caption"
+msgid "Transcription mode"
+msgstr "Transkriptionsmodus"
+
+#: tfrmmain.acttranscriptionmode.hint
+msgid "Enable free-write mode"
+msgstr "Freies Schreiben aktivieren"
+
+#: tfrmmain.acttranslate.caption
+msgid "Auto translate..."
+msgstr "Automatisch übersetzen..."
+
+#: tfrmmain.acttranslationmemory.caption
+msgctxt "tfrmmain.acttranslationmemory.caption"
+msgid "Show..."
+msgstr "Anzeigen..."
+
+#: tfrmmain.acttranslationmemoryclose.caption
+msgctxt "tfrmmain.acttranslationmemoryclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmmain.acttranslationmemorylist.caption
+msgctxt "tfrmmain.acttranslationmemorylist.caption"
+msgid "List..."
+msgstr "Liste..."
+
+#: tfrmmain.acttranslationmemorysettings.caption
+msgctxt "tfrmmain.acttranslationmemorysettings.caption"
+msgid "Settings..."
+msgstr "Einstellungen..."
+
+#: tfrmmain.acttranslatormode.caption
+msgctxt "tfrmmain.acttranslatormode.caption"
+msgid "Translator mode"
+msgstr "Übersetzermodus"
+
+#: tfrmmain.acttts.caption
+msgid "Text to speech..."
+msgstr "Text-zu-Sprache..."
+
+#: tfrmmain.actunbreakentry.caption
+msgid "Unbreak entry"
+msgstr "Zeilenumbruch im Eintrag aufheben"
+
+#: tfrmmain.actundo.caption
+msgctxt "tfrmmain.actundo.caption"
+msgid "Undo"
+msgstr "Rückgängig"
+
+#: tfrmmain.actundo.hint
+msgid "Undo last action"
+msgstr "Letzte Handlung rückgängig machen"
+
+#: tfrmmain.actundockvideo.caption
+msgid "Dock video"
+msgstr "Videofenster andocken"
+
+#: tfrmmain.actundockwaveform.caption
+msgid "Dock waveform"
+msgstr "Wellenform andocken"
+
+#: tfrmmain.actunicodectrllre.caption
+msgid "LRE (Start of Left-to-Right Embedding)"
+msgstr "LRE (Beginn eingebetteter Text von links nach rechts)"
+
+#: tfrmmain.actunicodectrllrm.caption
+msgid "LRM (Left-to-Right Mark)"
+msgstr "LRM (Markierung links-nach-rechts)"
+
+#: tfrmmain.actunicodectrllro.caption
+msgid "LRO (Start of Left-to-Right Override)"
+msgstr "LRO (Beginn überschreibender Text von links nach rechts)"
+
+#: tfrmmain.actunicodectrlpdf.caption
+msgid "PDF (Pop Directional Formatting)"
+msgstr "PDF (Rückkehr zur Richtungsformatierung)"
+
+#: tfrmmain.actunicodectrlrle.caption
+msgid "RLE (Start of Right-to-Left Embedding)"
+msgstr "RLE (Start Einbettung von rechts nach links)"
+
+#: tfrmmain.actunicodectrlrlm.caption
+msgid "RLM (Right-to-Left Mark)"
+msgstr "RLM (Markierung für rechts-nach-links-Schrift)"
+
+#: tfrmmain.actunicodectrlrlo.caption
+msgid "RLO (Start of Right-to-Left Override)"
+msgstr "RLO (Start erzwungene Schreibrichtung von rechts nach links)"
+
+#: tfrmmain.actunicodectrlzwnj.caption
+msgid "ZWNJ (Zero Width Non-Joiner)"
+msgstr "ZWNJ (Trennzeichen ohne Breite)"
+
+#: tfrmmain.actunicodezwj.caption
+msgid "ZWJ (Zero Width Joiner)"
+msgstr "ZWJ (Verbindungszeichen ohne Breite)"
+
+#: tfrmmain.actunmarkentry.caption
+msgid "Unmark entry"
+msgstr "Markierung entfernen"
+
+#: tfrmmain.actvalidatetm.caption
+msgid "Validate translation memory"
+msgstr "Übersetzungsspeicher prüfen"
+
+#: tfrmmain.actvalidatetm.hint
+msgid "Validates and advances to the next"
+msgstr "Prüfen und zum nächsten Eintrag wechseln"
+
+#: tfrmmain.actvaligntobottom.caption
+msgctxt "tfrmmain.actvaligntobottom.caption"
+msgid "Vertical align to bottom"
+msgstr "Vertikal unten ausrichten"
+
+#: tfrmmain.actvaligntomiddle.caption
+msgctxt "tfrmmain.actvaligntomiddle.caption"
+msgid "Vertical align to middle"
+msgstr "Vertikal mittig ausrichten"
+
+#: tfrmmain.actvaligntotop.caption
+msgctxt "tfrmmain.actvaligntotop.caption"
+msgid "Vertical align to top"
+msgstr "Vertikal oben ausrichten"
+
+#: tfrmmain.actvar169.caption
+msgid "16:9"
+msgstr "16:9"
+
+#: tfrmmain.actvar1851.caption
+msgid "1.85:1"
+msgstr "1.85:1"
+
+#: tfrmmain.actvar2351.caption
+msgid "2.35:1"
+msgstr "2.35:1"
+
+#: tfrmmain.actvar43.caption
+msgid "4:3"
+msgstr "4:3"
+
+#: tfrmmain.actvarcycle.caption
+msgid "Cycle Aspect Ratio"
+msgstr "Bildformate durchschalten"
+
+#: tfrmmain.actvardefault.caption
+msgid "Default"
+msgstr "Standard"
+
+#: tfrmmain.actvideodubbing.caption
+msgid "Dubbing..."
+msgstr "Vertonung..."
+
+#: tfrmmain.actvideofilterblur.caption
+msgid "Blur"
+msgstr "Weichzeichnen"
+
+#: tfrmmain.actvideofilterdeinterlace.caption
+msgctxt "tfrmmain.actvideofilterdeinterlace.caption"
+msgid "Deinterlace"
+msgstr "Zeilenflimmern entfernen"
+
+#: tfrmmain.actvideofilteredgeenhance.caption
+msgid "Edge enhance"
+msgstr "Kanten betonen"
+
+#: tfrmmain.actvideofilteremboss.caption
+msgid "Emboss"
+msgstr "Relief-Effekt"
+
+#: tfrmmain.actvideofilterhflip.caption
+msgid "Horizontal flip"
+msgstr "Horizontal spiegeln"
+
+#: tfrmmain.actvideofilternegative.caption
+msgid "Negative"
+msgstr "Negativbild"
+
+#: tfrmmain.actvideofiltersharpen.caption
+msgid "Sharpen"
+msgstr "Bild schärfen"
+
+#: tfrmmain.actvideofiltervflip.caption
+msgid "Vertical flip"
+msgstr "Vertikal spiegeln"
+
+#: tfrmmain.actvideofiltervintage.caption
+msgid "Vintage"
+msgstr "Retro-Effekt"
+
+#: tfrmmain.actvideoinformation.caption
+msgid "Information..."
+msgstr "Informationen..."
+
+#: tfrmmain.actvideopreview.caption
+msgctxt "tfrmmain.actvideopreview.caption"
+msgid "Video preview"
+msgstr "Video-Vorschau"
+
+#: tfrmmain.actviewshotchange.caption
+msgctxt "tfrmmain.actviewshotchange.caption"
+msgid "Shot changes"
+msgstr "Szenenwechsel"
+
+#: tfrmmain.actviewshotchange.hint
+msgid "Enable/disable shot changes"
+msgstr "Szenenwechsel ein- oder ausschalten"
+
+#: tfrmmain.actwaveextract.caption
+msgid "Extract waveform..."
+msgstr "Wellenform extrahieren..."
+
+#: tfrmmain.actwaveformpreview.caption
+msgctxt "tfrmmain.actwaveformpreview.caption"
+msgid "Waveform preview"
+msgstr "Wellenform-Vorschau"
+
+#: tfrmmain.actwebpreview.caption
+msgid "Web Preview..."
+msgstr "Web-Vorschau..."
+
+#: tfrmmain.actwebreference.caption
+msgid "Web reference..."
+msgstr "Webverweis..."
+
+#: tfrmmain.cboencoding.hint
+msgctxt "tfrmmain.cboencoding.hint"
+msgid "Encoding"
+msgstr "Zeichencodierung"
+
+#: tfrmmain.cboformat.hint
+msgctxt "tfrmmain.cboformat.hint"
+msgid "Format"
+msgstr "Dateiformat"
+
+#: tfrmmain.cbofps.hint
+msgid "Target FPS of subtitle file"
+msgstr "Ziel-Bildrate für Untertiteldatei (BPS)"
+
+#: tfrmmain.cboinputfps.hint
+msgid "FPS of the movie the opened subtitle file was made for"
+msgstr "Bildrate des Films, für den die aktuelle Untertiteldatei erstellt wurde"
+
+#: tfrmmain.edtquickaction.hint
+msgctxt "tfrmmain.edtquickaction.hint"
+msgid "Quick Action Finder"
+msgstr "Schnellsuche für Befehle"
+
+#: tfrmmain.lblmedialength.hint
+msgid "Video length and FPS"
+msgstr "Videolänge und Bildrate (BPS)"
+
+#: tfrmmain.lblmediatime.hint
+msgid "Current video position"
+msgstr "Aktuelle Position im Video"
+
+#: tfrmmain.mnuedit.caption
+msgctxt "tfrmmain.mnuedit.caption"
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: tfrmmain.mnueditentries.caption
+msgctxt "tfrmmain.mnueditentries.caption"
+msgid "Entries"
+msgstr "Einträge"
+
+#: tfrmmain.mnueditformat.caption
+msgctxt "tfrmmain.mnueditformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmmain.mnueditinsertchar.caption
+msgid "Insert Unicode character"
+msgstr "Unicode-Zeichen einfügen"
+
+#: tfrmmain.mnueditrtl.caption
+msgid "Right-to-left"
+msgstr "Rechts-nach-links-Schrift"
+
+#: tfrmmain.mnuedittexts.caption
+msgctxt "tfrmmain.mnuedittexts.caption"
+msgid "Text"
+msgstr "Text"
+
+#: tfrmmain.mnuedittimings.caption
+msgctxt "tfrmmain.mnuedittimings.caption"
+msgid "Timings"
+msgstr "Zeitangaben"
+
+#: tfrmmain.mnuedittimingsendcue.caption
+msgid "End Cue"
+msgstr "Endmarkierung"
+
+#: tfrmmain.mnuedittimingsextend.caption
+msgid "Extend length"
+msgstr "Dauer verlängern"
+
+#: tfrmmain.mnufile.caption
+msgctxt "tfrmmain.mnufile.caption"
+msgid "File"
+msgstr "Datei"
+
+#: tfrmmain.mnufileexport.caption
+msgid "Export"
+msgstr "Exportieren"
+
+#: tfrmmain.mnufileimport.caption
+msgctxt "tfrmmain.mnufileimport.caption"
+msgid "Import"
+msgstr "Importieren"
+
+#: tfrmmain.mnufilemru.caption
+msgctxt "tfrmmain.mnufilemru.caption"
+msgid "Recent files"
+msgstr "Zuletzt geöffnete Dateien"
+
+#: tfrmmain.mnufind.caption
+msgctxt "tfrmmain.mnufind.caption"
+msgid "Find"
+msgstr "Suchen"
+
+#: tfrmmain.mnuhelp.caption
+msgctxt "tfrmmain.mnuhelp.caption"
+msgid "Help"
+msgstr "Hilfe"
+
+#: tfrmmain.mnumemoinsertunicodecontrolchar.caption
+msgid "Insert Unicode control character"
+msgstr "Unicode-Steuerzeichen einfügen"
+
+#: tfrmmain.mnuselect.caption
+msgctxt "tfrmmain.mnuselect.caption"
+msgid "Select"
+msgstr "Auswählen"
+
+#: tfrmmain.mnutexteffects.caption
+msgid "Effects"
+msgstr "Texteffekte"
+
+#: tfrmmain.mnutextlines.caption
+msgctxt "tfrmmain.mnutextlines.caption"
+msgid "Lines"
+msgstr "Zeilen"
+
+#: tfrmmain.mnutextwords.caption
+msgctxt "tfrmmain.mnutextwords.caption"
+msgid "Words"
+msgstr "Wörter"
+
+#: tfrmmain.mnutools.caption
+msgctxt "tfrmmain.mnutools.caption"
+msgid "Tools"
+msgstr "Werkzeuge"
+
+#: tfrmmain.mnutoolsterminology.caption
+msgctxt "tfrmmain.mnutoolsterminology.caption"
+msgid "Terminology"
+msgstr "Begriffe"
+
+#: tfrmmain.mnutoolstranslationmemory.caption
+msgctxt "tfrmmain.mnutoolstranslationmemory.caption"
+msgid "Translation memory"
+msgstr "Übersetzungsspeicher"
+
+#: tfrmmain.mnuvideo.caption
+msgctxt "tfrmmain.mnuvideo.caption"
+msgid "Video"
+msgstr "Video"
+
+#: tfrmmain.mnuvideoaspectratio.caption
+msgid "Aspect ratio"
+msgstr "Seitenverhältnis"
+
+#: tfrmmain.mnuvideoaudiofilters.caption
+msgctxt "tfrmmain.mnuvideoaudiofilters.caption"
+msgid "Audio filters"
+msgstr "Audio-/Tonfilter"
+
+#: tfrmmain.mnuvideoaudiostream.caption
+msgid "Audio stream"
+msgstr "Audio-/Tonspur"
+
+#: tfrmmain.mnuvideoplayback.caption
+msgid "Playback"
+msgstr "Wiedergabe"
+
+#: tfrmmain.mnuvideosubtitles.caption
+msgctxt "tfrmmain.mnuvideosubtitles.caption"
+msgid "Subtitles"
+msgstr "Untertitel"
+
+#: tfrmmain.mnuvideovideofilters.caption
+msgctxt "tfrmmain.mnuvideovideofilters.caption"
+msgid "Video filters"
+msgstr "Videofilter"
+
+#: tfrmmain.mnuvideovolume.caption
+msgctxt "tfrmmain.mnuvideovolume.caption"
+msgid "Volume"
+msgstr "Lautstärke"
+
+#: tfrmmain.mnuview.caption
+msgctxt "tfrmmain.mnuview.caption"
+msgid "View"
+msgstr "Ansicht"
+
+#: tfrmmain.mnuviewcolumns.caption
+msgid "Columns"
+msgstr "Spalten"
+
+#: tfrmmain.mnuviewtoolbareditor.caption
+msgctxt "tfrmmain.mnuviewtoolbareditor.caption"
+msgid "Editor"
+msgstr "Bearbeitungsfenster"
+
+#: tfrmmain.mnuviewtoolbarmain.caption
+msgctxt "tfrmmain.mnuviewtoolbarmain.caption"
+msgid "Main"
+msgstr "Hauptleiste"
+
+#: tfrmmain.mnuviewtoolbars.caption
+msgid "Toolbars"
+msgstr "Werkzeugleiste"
+
+#: tfrmmain.mnuviewtoolbarvideo.caption
+msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
+msgid "Video"
+msgstr "Video"
+
+#: tfrmmain.mnuviewtoolbarwaveform.caption
+msgctxt "tfrmmain.mnuviewtoolbarwaveform.caption"
+msgid "Waveform"
+msgstr "Wellenform"
+
+#: tfrmmain.mnuviewwindows.caption
+msgid "Windows"
+msgstr "Fenster"
+
+#: tfrmmain.mnuvstvideo.caption
+msgctxt "tfrmmain.mnuvstvideo.caption"
+msgid "Video"
+msgstr "Video"
+
+#: tfrmmain.mnuworkspacelayout.caption
+msgid "Layouts"
+msgstr "Arbeitsbereich-Layout"
+
+#: tfrmmain.tedduration.hint
+msgctxt "tfrmmain.tedduration.hint"
+msgid "Duration"
+msgstr "Dauer"
+
+#: tfrmmain.tedfinal.hint
+msgctxt "tfrmmain.tedfinal.hint"
+msgid "Final time"
+msgstr "Endzeit"
+
+#: tfrmmain.tedinitial.hint
+msgctxt "tfrmmain.tedinitial.hint"
+msgid "Initial time"
+msgstr "Startzeit"
+
+#: tfrmmain.tedpause.hint
+msgid "Pause"
+msgstr "Pause"
+
+#: tfrmmodifyselection.btnapply.caption
+msgctxt "tfrmmodifyselection.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmmodifyselection.btnclose.caption
+msgctxt "tfrmmodifyselection.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmmodifyselection.caption
+msgid "Modify selection"
+msgstr "Auswahl ändern"
+
+#: tfrmmodifyselection.rbnaddtocurrentselection.caption
+msgid "Add to current selection"
+msgstr "Zur aktuellen Auswahl hinzufügen"
+
+#: tfrmmodifyselection.rbnnewselection.caption
+msgid "New selection"
+msgstr "Neue Auswahl"
+
+#: tfrmmodifyselection.rbnsubtractfromcurrentselection.caption
+msgid "Subtract from current selection"
+msgstr "Von aktueller Auswahl entfernen"
+
+#: tfrmmultiplereplace.btnapply.caption
+msgctxt "tfrmmultiplereplace.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmmultiplereplace.btnclose.caption
+msgctxt "tfrmmultiplereplace.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmmultiplereplace.btnminus.caption
+msgctxt "tfrmmultiplereplace.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmmultiplereplace.btnplus.caption
+msgctxt "tfrmmultiplereplace.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmmultiplereplace.caption
+msgid "Multiple replace"
+msgstr "Mehrere Ersetzungen"
+
+#: tfrmmultiplereplace.chkre.caption
+msgid "Regular expression"
+msgstr "Regulärer Ausdruck"
+
+#: tfrmmultiplereplace.lblfind.caption
+msgid "Find:"
+msgstr "Suchen:"
+
+#: tfrmmultiplereplace.lblreplace.caption
+msgctxt "tfrmmultiplereplace.lblreplace.caption"
+msgid "Replace with:"
+msgstr "Ersetzen durch:"
+
+#: tfrmpauses.btnapply.caption
+msgctxt "tfrmpauses.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmpauses.btnclose.caption
+msgctxt "tfrmpauses.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmpauses.caption
+msgid "Set gapping"
+msgstr "Pausen einstellen"
+
+#: tfrmpauses.lblduration.caption
+msgid "Shorten duration of:"
+msgstr "Dauer verkürzen um:"
+
+#: tfrmpauses.lblgap.caption
+msgid "Value:"
+msgstr "Wert:"
+
+#: tfrmpauses.lblscope.caption
+msgctxt "tfrmpauses.lblscope.caption"
+msgid "Scope:"
+msgstr "Bereich:"
+
+#: tfrmpauses.rbnallthesubtitles.caption
+msgctxt "tfrmpauses.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Alle Einträge"
+
+#: tfrmpauses.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmpauses.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "Ab gewähltem Eintrag"
+
+#: tfrmpauses.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Nur gewählte Einträge"
+
+#: tfrmpauses.rdobothentries.caption
+msgid "Both entries equally"
+msgstr "Beide Einträge gleichmässig"
+
+#: tfrmpauses.rdoentrywithlesscps.caption
+msgid "Entry with less CPS"
+msgstr "Eintrag mit weniger ZPS"
+
+#: tfrmpauses.rdofirstentry.caption
+msgid "First entry only"
+msgstr "Nur erster Eintrag"
+
+#: tfrmpauses.rdosecondentry.caption
+msgid "Second entry only"
+msgstr "Nur zweiter Eintrag"
+
+#: tfrmqualitycheck.btnclose.caption
+msgctxt "tfrmqualitycheck.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmqualitycheck.caption
+msgid "Quality check"
+msgstr "Qualitätsprüfung"
+
+#: tfrmqualitycheck.lblrules.caption
+msgid "Rules"
+msgstr "Regeln"
+
+#: tfrmrestorebackup.btnclose.caption
+msgctxt "tfrmrestorebackup.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmrestorebackup.btnrestore.caption
+msgctxt "tfrmrestorebackup.btnrestore.caption"
+msgid "Restore"
+msgstr "Wiederherstellen"
+
+#: tfrmrestorebackup.caption
+msgid "Restore backup"
+msgstr "Sicherung wiederherstellen"
+
+#: tfrmroundtime.btnapply.caption
+msgctxt "tfrmroundtime.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmroundtime.btnclose.caption
+msgctxt "tfrmroundtime.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmroundtime.caption
+msgid "Round times"
+msgstr "Zeiten runden"
+
+#: tfrmroundtime.lblscope.caption
+msgctxt "tfrmroundtime.lblscope.caption"
+msgid "Scope:"
+msgstr "Bereich:"
+
+#: tfrmroundtime.rbnallthesubtitles.caption
+msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Alle Einträge"
+
+#: tfrmroundtime.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmroundtime.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Ab gewähltem Eintrag"
+
+#: tfrmroundtime.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Nur gewählte Einträge"
+
+#: tfrmroundtime.rdofps.caption
+msgid "Using FPS"
+msgstr "Mit BPS"
+
+#: tfrmroundtime.rdomilliseconds.caption
+msgid "Using Milliseconds"
+msgstr "Mit Millisekunden"
+
+#: tfrmsettings.btnclose.caption
+msgctxt "tfrmsettings.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmsettings.btnfasterwhisper.caption
+msgctxt "tfrmsettings.btnfasterwhisper.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnffmpeg.caption
+msgctxt "tfrmsettings.btnffmpeg.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnminus.caption
+msgctxt "tfrmsettings.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmsettings.btnplus.caption
+msgctxt "tfrmsettings.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmsettings.btnprofile.caption
+msgctxt "tfrmsettings.btnprofile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnscenedetect.caption
+msgctxt "tfrmsettings.btnscenedetect.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnshortcutapply.caption
+msgctxt "tfrmsettings.btnshortcutapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmsettings.btnshortcutsave.caption
+msgid "Save as..."
+msgstr "Speichern unter..."
+
+#: tfrmsettings.btntesseract.caption
+#, fuzzy
+msgctxt "tfrmsettings.btntesseract.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnwhispercpp.caption
+msgctxt "tfrmsettings.btnwhispercpp.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnytdlp.caption
+msgctxt "tfrmsettings.btnytdlp.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.caption
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: tfrmsettings.chkautoplay.caption
+msgid "Autoplay on video load"
+msgstr "Video automatisch abspielen beim Laden"
+
+#: tfrmsettings.chkdotsonsplit.caption
+msgctxt "tfrmsettings.chkdotsonsplit.caption"
+msgid "Add '...' on split subtitle"
+msgstr "Füge '...' bei geteiltem Untertitel hinzu"
+
+#: tfrmsettings.chkdrawerrors.caption
+msgid "Show errors in list"
+msgstr "Fehler in der Liste anzeigen"
+
+#: tfrmsettings.chkdrawtags.caption
+msgid "Interpret tags in list"
+msgstr "Tags in der Liste anzeigen und erkennen"
+
+#: tfrmsettings.chkdrawwaveformgap.caption
+msgid "Show gap in timeline"
+msgstr "Lücke in der Zeitachse anzeigen"
+
+#: tfrmsettings.chkpromptfordeletesubtitles.caption
+msgid "Prompt when deleting subtitles"
+msgstr "Fragen vor dem Löschen von Untertiteln"
+
+#: tfrmsettings.chkpromptforinputencoding.caption
+msgid "Prompt for Encoding before loading a file"
+msgstr "Nach Zeichencodierung fragen vor dem Laden"
+
+#: tfrmsettings.chkpromptforinputfps.caption
+msgid "Prompt for FPS before loading a file"
+msgstr "Nach BPS fragen vor dem Laden der Datei"
+
+#: tfrmsettings.chkpromptforsavewitherrors.caption
+msgid "Prompt when saving file with errors"
+msgstr "Warnung beim Speichern mit Fehlern"
+
+#: tfrmsettings.chkshowcpsbar.caption
+msgid "Show CPS bar"
+msgstr "ZPS-Anzeige anzeigen"
+
+#: tfrmsettings.chkshowsplashwindow.caption
+msgid "Show splash window"
+msgstr "Startfenster anzeigen"
+
+#: tfrmsettings.chksubtitlehandlebympv.caption
+msgid "mpv handles subtitles for preview"
+msgstr "mpv zeigt Untertitel in der Vorschau"
+
+#: tfrmsettings.chkusehwdec.caption
+msgid "Use hardware video decoding"
+msgstr "Hardware zur Videowiedergabe nutzen"
+
+#: tfrmsettings.chkuseownfiledialog.caption
+msgid "Use Tero file dialog"
+msgstr "Tero-Dateiauswahl verwenden"
+
+#: tfrmsettings.chkwritebom.caption
+msgid "Write BOM on save"
+msgstr "BOM beim Speichern schreiben"
+
+#: tfrmsettings.lbladditionalmpvoptions.caption
+msgid "Additional mpv options"
+msgstr "Weitere mpv-Einstellungen"
+
+#: tfrmsettings.lblapi_tts.caption
+msgid "ElevenLabs API key"
+msgstr "API-Schlüssel für ElevenLabs"
+
+#: tfrmsettings.lblautobackup.caption
+msgid "Auto-backup every (minutes)"
+msgstr "Automatisch sichern alle (Minuten)"
+
+#: tfrmsettings.lblchaining.caption
+msgctxt "tfrmsettings.lblchaining.caption"
+msgid "Chaining (frames)"
+msgstr "Verketten (Bilder)"
+
+#: tfrmsettings.lblcpl.caption
+msgctxt "tfrmsettings.lblcpl.caption"
+msgid "Characters per line"
+msgstr "Zeichen pro Zeile (ZPZ)"
+
+#: tfrmsettings.lblcps.caption
+msgctxt "tfrmsettings.lblcps.caption"
+msgid "Characters per second"
+msgstr "Zeichen pro Sekunde (ZPS)"
+
+#: tfrmsettings.lblcpsstrategy.caption
+msgctxt "tfrmsettings.lblcpsstrategy.caption"
+msgid "Chars excluded from CPS count"
+msgstr "Zeichen, die nicht bei ZPS zählen"
+
+#: tfrmsettings.lbldefaultfileencoding.caption
+msgid "Default file encoding"
+msgstr "Standard-Zeichencodierung"
+
+#: tfrmsettings.lbldefaultfileformat.caption
+msgid "Default file format"
+msgstr "Standard-Dateiformat"
+
+#: tfrmsettings.lbldefaultframerate.caption
+msgid "Default input frame rate"
+msgstr "Standard-Bildrate der Quelle"
+
+#: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
+msgid "Dialogue segments detection threshold (rms)"
+msgstr "Empfindlichkeit zur Spracherkennung (rms)"
+
+#: tfrmsettings.lblfasterwhisper.caption
+msgid "Faster-Whisper"
+msgstr "Faster-Whisper"
+
+#: tfrmsettings.lblffmpeg.caption
+msgid "FFmpeg"
+msgstr "FFmpeg"
+
+#: tfrmsettings.lblframestep.caption
+msgid "Frame step"
+msgstr "Schrittweite in Bildern"
+
+#: tfrmsettings.lbllanguage.caption
+msgctxt "tfrmsettings.lbllanguage.caption"
+msgid "Language"
+msgstr "Sprache"
+
+#: tfrmsettings.lbllistfontsize.caption
+msgid "List font size"
+msgstr "Schriftgrösse der Liste"
+
+#: tfrmsettings.lbllistmode.caption
+msgctxt "tfrmsettings.lbllistmode.caption"
+msgid "List mode"
+msgstr "Listenansicht"
+
+#: tfrmsettings.lblmaxdurationms.caption
+msgctxt "tfrmsettings.lblmaxdurationms.caption"
+msgid "Max. duration (ms)"
+msgstr "Maximale Dauer (ms)"
+
+#: tfrmsettings.lblmaxlinecount.caption
+msgctxt "tfrmsettings.lblmaxlinecount.caption"
+msgid "Max. line count"
+msgstr "Maximale Zeilenanzahl"
+
+#: tfrmsettings.lblmindurationms.caption
+msgctxt "tfrmsettings.lblmindurationms.caption"
+msgid "Min. duration / per word (ms)"
+msgstr "Minimale Dauer pro Wort (ms)"
+
+#: tfrmsettings.lblnewsubtitlems.caption
+msgctxt "tfrmsettings.lblnewsubtitlems.caption"
+msgid "New subtitle (ms)"
+msgstr "Neuer Untertitel (ms)"
+
+#: tfrmsettings.lblprofile.caption
+msgid "Profile"
+msgstr "Profil"
+
+#: tfrmsettings.lblprohibitedchars.caption
+msgctxt "tfrmsettings.lblprohibitedchars.caption"
+msgid "Prohibited characters"
+msgstr "Nicht erlaubte Zeichen"
+
+#: tfrmsettings.lblrepeatablechars.caption
+msgctxt "tfrmsettings.lblrepeatablechars.caption"
+msgid "Repeatable characters"
+msgstr "Wiederholbare Zeichen"
+
+#: tfrmsettings.lblscenedetect.caption
+msgid "PySceneDetect"
+msgstr "PySceneDetect"
+
+#: tfrmsettings.lblscsnaparea.caption
+msgctxt "tfrmsettings.lblscsnaparea.caption"
+msgid "Shot change snap / threshold (frames)"
+msgstr "Szenenwechsel: Anker/Sensitivität (Bilder)"
+
+#: tfrmsettings.lblscsnapincues.caption
+msgctxt "tfrmsettings.lblscsnapincues.caption"
+msgid "Snap in cues after SC (frames)"
+msgstr "Einstiegspunkt nach Szenenwechsel (Bilder)"
+
+#: tfrmsettings.lblscsnapoutcues.caption
+msgctxt "tfrmsettings.lblscsnapoutcues.caption"
+msgid "Snap out cues before SC (frames)"
+msgstr "Ausstiegspunkt vor Szenenwechsel (Bilder)"
+
+#: tfrmsettings.lblseektime.caption
+msgid "Seek time (ms)"
+msgstr "Suchzeit (ms)"
+
+#: tfrmsettings.lblshifttimems.caption
+msgid "Shift time (ms)"
+msgstr "Zeitverschiebung (ms)"
+
+#: tfrmsettings.lblshortcut.caption
+msgid "Shortcut"
+msgstr "Tastenkombination"
+
+#: tfrmsettings.lblshortcutcat.caption
+msgid "Category"
+msgstr "Kategorie"
+
+#: tfrmsettings.lblshortcutpreset.caption
+msgid "Preset"
+msgstr "Voreinstellung"
+
+#: tfrmsettings.lblsubbackground.caption
+msgctxt "tfrmsettings.lblsubbackground.caption"
+msgid "Background"
+msgstr "Hintergrund"
+
+#: tfrmsettings.lblsubborder.caption
+msgid "Border"
+msgstr "Rahmen"
+
+#: tfrmsettings.lblsubcolor.caption
+msgctxt "tfrmsettings.lblsubcolor.caption"
+msgid "Color"
+msgstr "Farbe"
+
+#: tfrmsettings.lblsubshadow.caption
+msgid "Shadow"
+msgstr "Schatten"
+
+#: tfrmsettings.lblsubsize.caption
+msgctxt "tfrmsettings.lblsubsize.caption"
+msgid "Size"
+msgstr "Grösse"
+
+#: tfrmsettings.lblsubtitlepausems.caption
+msgctxt "tfrmsettings.lblsubtitlepausems.caption"
+msgid "Min. gap"
+msgstr "Mindestabstand"
+
+#: tfrmsettings.lblsubtitles.caption
+msgctxt "tfrmsettings.lblsubtitles.caption"
+msgid "Subtitles"
+msgstr "Untertitel"
+
+#: tfrmsettings.lbltesseract.caption
+msgid "Tesseract"
+msgstr ""
+
+#: tfrmsettings.lbltextboxfontsize.caption
+msgid "Text box font size"
+msgstr "Schriftgrösse im Texteingabefeld"
+
+#: tfrmsettings.lbltheme.caption
+msgid "Theme"
+msgstr "Design"
+
+#: tfrmsettings.lbltimecodemode.caption
+msgid "Time code mode"
+msgstr "Zeitcode-Modus"
+
+#: tfrmsettings.lblwavecolor.caption
+msgctxt "tfrmsettings.lblwavecolor.caption"
+msgid "Color"
+msgstr "Farbe"
+
+#: tfrmsettings.lblwaveentry.caption
+msgctxt "tfrmsettings.lblwaveentry.caption"
+msgid "Entry"
+msgstr "Eintrag"
+
+#: tfrmsettings.lblwaveform.caption
+msgctxt "tfrmsettings.lblwaveform.caption"
+msgid "Waveform"
+msgstr "Wellenform"
+
+#: tfrmsettings.lblwebreference.caption
+msgid "Web reference"
+msgstr "Webreferenz"
+
+#: tfrmsettings.lblwhispercpp.caption
+msgid "Whisper.cpp"
+msgstr "Whisper.cpp"
+
+#: tfrmsettings.lblwpm.caption
+msgctxt "tfrmsettings.lblwpm.caption"
+msgid "Words per minute"
+msgstr "Wörter pro Minute (WPM)"
+
+#: tfrmsettings.lblytdlp.caption
+msgid "YT-DLP"
+msgstr "YT-DLP"
+
+#: tfrmsettings.lblzerotodisable.caption
+msgid "(0 to disable)"
+msgstr "(0 zum Deaktivieren)"
+
+#: tfrmshifttimes.btnapply.caption
+msgctxt "tfrmshifttimes.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmshifttimes.btnclose.caption
+msgctxt "tfrmshifttimes.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmshifttimes.caption
+msgid "Shift times"
+msgstr "Zeiten verschieben"
+
+#: tfrmshifttimes.cbooffset.text
+msgctxt "tfrmshifttimes.cbooffset.text"
+msgid "+"
+msgstr "+"
+
+#: tfrmshifttimes.lbloffset.caption
+msgctxt "tfrmshifttimes.lbloffset.caption"
+msgid "Offset"
+msgstr "Zeitverschiebung"
+
+#: tfrmshifttimes.lblscope.caption
+msgctxt "tfrmshifttimes.lblscope.caption"
+msgid "Scope:"
+msgstr "Bereich:"
+
+#: tfrmshifttimes.rbnallthesubtitles.caption
+msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Alle Einträge"
+
+#: tfrmshifttimes.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmshifttimes.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Ab ausgewähltem Eintrag"
+
+#: tfrmshifttimes.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Nur ausgewählte Einträge"
+
+#: tfrmshotchanges.btnapply.caption
+msgctxt "tfrmshotchanges.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmshotchanges.btnclose.caption
+msgctxt "tfrmshotchanges.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmshotchanges.btndetect.caption
+msgctxt "tfrmshotchanges.btndetect.caption"
+msgid "Detect"
+msgstr "Erkennen"
+
+#: tfrmshotchanges.btnexport.caption
+msgctxt "tfrmshotchanges.btnexport.caption"
+msgid "Export..."
+msgstr "Exportieren..."
+
+#: tfrmshotchanges.btnimport.caption
+msgctxt "tfrmshotchanges.btnimport.caption"
+msgid "Import..."
+msgstr "Importieren..."
+
+#: tfrmshotchanges.caption
+msgctxt "tfrmshotchanges.caption"
+msgid "Shot changes"
+msgstr "Kamerawechsel"
+
+#: tfrmshotchanges.cbooffset.text
+msgctxt "tfrmshotchanges.cbooffset.text"
+msgid "+"
+msgstr "+"
+
+#: tfrmshotchanges.lbldetectapp.caption
+msgid "App to detect"
+msgstr "Programm zur Erkennung"
+
+#: tfrmshotchanges.lbloffset.caption
+msgctxt "tfrmshotchanges.lbloffset.caption"
+msgid "Offset"
+msgstr "Zeitverschiebung"
+
+#: tfrmshotchanges.lblsensitivity.caption
+msgid "Detection sensitivity"
+msgstr "Empfindlichkeit der Erkennung"
+
+#: tfrmshotchanges.lbltimecodein.caption
+msgid "Time code for import"
+msgstr "Zeitcode für den Import"
+
+#: tfrmshotchanges.lbltimecodeout.caption
+msgid "Time code for export"
+msgstr "Zeitcode für den Export"
+
+#: tfrmspellcheck.btnadd.caption
+msgctxt "tfrmspellcheck.btnadd.caption"
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: tfrmspellcheck.btnchange.caption
+msgctxt "tfrmspellcheck.btnchange.caption"
+msgid "Change"
+msgstr "Ändern"
+
+#: tfrmspellcheck.btnchangeall.caption
+msgctxt "tfrmspellcheck.btnchangeall.caption"
+msgid "Change all"
+msgstr "Alles ändern"
+
+#: tfrmspellcheck.btnclose.caption
+msgctxt "tfrmspellcheck.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmspellcheck.btnskip.caption
+msgctxt "tfrmspellcheck.btnskip.caption"
+msgid "Skip"
+msgstr "Überspringen"
+
+#: tfrmspellcheck.btnskipall.caption
+msgctxt "tfrmspellcheck.btnskipall.caption"
+msgid "Skip all"
+msgstr "Alle überspringen"
+
+#: tfrmspellcheck.caption
+msgid "Spell check"
+msgstr "Rechtschreibprüfung"
+
+#: tfrmspellcheck.lbldictionary.caption
+msgctxt "tfrmspellcheck.lbldictionary.caption"
+msgid "Dictionary"
+msgstr "Wörterbuch"
+
+#: tfrmspellcheck.lblnotfound.caption
+msgid "Not found"
+msgstr "Nicht gefunden"
+
+#: tfrmspellcheck.lblsource.caption
+msgid "Source"
+msgstr "Quelle"
+
+#: tfrmspellcheck.lblsuggestions.caption
+msgid "Suggestions"
+msgstr "Vorschläge"
+
+#: tfrmstatistics.btnclose.caption
+msgctxt "tfrmstatistics.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmstatistics.btnexport.caption
+msgctxt "tfrmstatistics.btnexport.caption"
+msgid "Export..."
+msgstr "Exportieren..."
+
+#: tfrmstatistics.caption
+msgid "Statistics"
+msgstr "Statistik"
+
+#: tfrmstreamextractor.btnclose.caption
+msgctxt "tfrmstreamextractor.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmstreamextractor.btnextract.caption
+msgid "Extract"
+msgstr "Extrahieren"
+
+#: tfrmstreamextractor.btnfile.caption
+msgctxt "tfrmstreamextractor.btnfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmstreamextractor.btnfolder.caption
+msgctxt "tfrmstreamextractor.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmstreamextractor.caption
+msgid "Stream extractor"
+msgstr "Datenstrom-Extraktor"
+
+#: tfrmstreamextractor.lblfile.caption
+msgctxt "tfrmstreamextractor.lblfile.caption"
+msgid "File"
+msgstr "Datei"
+
+#: tfrmstreamextractor.lblfolder.caption
+msgctxt "tfrmstreamextractor.lblfolder.caption"
+msgid "Output folder"
+msgstr "Ausgabeordner"
+
+#: tfrmtbx.btnclose.caption
+msgctxt "tfrmtbx.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmtbx.caption
+msgctxt "tfrmtbx.caption"
+msgid "Terminology"
+msgstr "Begriffe"
+
+#: tfrmtbxedit.btnadd.caption
+msgctxt "tfrmtbxedit.btnadd.caption"
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: tfrmtbxedit.btnclose.caption
+msgctxt "tfrmtbxedit.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmtbxedit.caption
+msgctxt "tfrmtbxedit.caption"
+msgid "Terminology"
+msgstr "Begriffe"
+
+#: tfrmtbxedit.lblnotes.caption
+msgid "Notes"
+msgstr "Anmerkung"
+
+#: tfrmtbxedit.lbloriginal.caption
+msgctxt "tfrmtbxedit.lbloriginal.caption"
+msgid "Original"
+msgstr "Original"
+
+#: tfrmtbxedit.lbltranslated.caption
+msgctxt "tfrmtbxedit.lbltranslated.caption"
+msgid "Translated"
+msgstr "Übersetzung"
+
+#: tfrmtbxlist.btnclose.caption
+msgctxt "tfrmtbxlist.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmtbxlist.btncopy.caption
+msgctxt "tfrmtbxlist.btncopy.caption"
+msgid "Copy"
+msgstr "Kopieren"
+
+#: tfrmtbxlist.caption
+msgctxt "tfrmtbxlist.caption"
+msgid "Terminology"
+msgstr "Begriffe"
+
+#: tfrmtbxlist.lblfind.caption
+msgctxt "tfrmtbxlist.lblfind.caption"
+msgid "Find"
+msgstr "Suchen"
+
+#: tfrmtbxlist.lbltotal.caption
+msgctxt "tfrmtbxlist.lbltotal.caption"
+msgid "Total:"
+msgstr "Total:"
+
+#: tfrmtbxsettings.btnapply.caption
+msgctxt "tfrmtbxsettings.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmtbxsettings.btnclose.caption
+msgctxt "tfrmtbxsettings.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmtbxsettings.btnopenfile.caption
+msgctxt "tfrmtbxsettings.btnopenfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtbxsettings.caption
+msgctxt "tfrmtbxsettings.caption"
+msgid "Terminology settings"
+msgstr "Begriffe-Einstellungen"
+
+#: tfrmtbxsettings.lblfilename.caption
+msgctxt "tfrmtbxsettings.lblfilename.caption"
+msgid "Filename"
+msgstr "Dateiname"
+
+#: tfrmtbxsettings.lblsourcelang.caption
+msgctxt "tfrmtbxsettings.lblsourcelang.caption"
+msgid "Source language"
+msgstr "Ausgangssprache"
+
+#: tfrmtbxsettings.lbltranslang.caption
+msgctxt "tfrmtbxsettings.lbltranslang.caption"
+msgid "Translation language"
+msgstr "Zielsprache"
+
+#: tfrmtimeexpander.btnapply.caption
+msgctxt "tfrmtimeexpander.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmtimeexpander.btnclose.caption
+msgctxt "tfrmtimeexpander.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmtimeexpander.caption
+msgid "Time expander/reducer"
+msgstr "Zeit anpassen"
+
+#: tfrmtimeexpander.chkduration.caption
+msgid "Only if duration is longer than"
+msgstr "Nur wenn die Dauer länger ist als"
+
+#: tfrmtimeexpander.chksubtitle.caption
+msgid "Only if subtitle is longer than"
+msgstr "Nur wenn der Untertitel länger ist als"
+
+#: tfrmtimeexpander.lblchars.caption
+msgid "characters"
+msgstr "Zeichen"
+
+#: tfrmtimeexpander.lblms.caption
+msgctxt "tfrmtimeexpander.lblms.caption"
+msgid "ms"
+msgstr "ms"
+
+#: tfrmtimeexpander.lblms1.caption
+msgctxt "tfrmtimeexpander.lblms1.caption"
+msgid "ms"
+msgstr "ms"
+
+#: tfrmtimeexpander.lblscope.caption
+msgctxt "tfrmtimeexpander.lblscope.caption"
+msgid "Scope:"
+msgstr "Bereich:"
+
+#: tfrmtimeexpander.rbnallthesubtitles.caption
+msgctxt "tfrmtimeexpander.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Alle Einträge"
+
+#: tfrmtimeexpander.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmtimeexpander.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Ab gewähltem Eintrag"
+
+#: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Nur gewählte Einträge"
+
+#: tfrmtranslate.btnclose.caption
+msgctxt "tfrmtranslate.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmtranslate.btntranslate.caption
+msgctxt "tfrmtranslate.btntranslate.caption"
+msgid "Translate"
+msgstr "Übersetzen"
+
+#: tfrmtranslate.caption
+msgctxt "tfrmtranslate.caption"
+msgid "Translate"
+msgstr "Übersetzung"
+
+#: tfrmtranslate.lblinput.caption
+msgid "Input:"
+msgstr "Quelle:"
+
+#: tfrmtranslate.lbloutput.caption
+msgctxt "tfrmtranslate.lbloutput.caption"
+msgid "Output:"
+msgstr "Ausgabe:"
+
+#: tfrmtranslate.lblscope.caption
+msgctxt "tfrmtranslate.lblscope.caption"
+msgid "Scope:"
+msgstr "Bereich:"
+
+#: tfrmtranslate.lblsourcelanguage.caption
+msgid "Source language:"
+msgstr "Ausgangssprache:"
+
+#: tfrmtranslate.lbltranslationlanguage.caption
+msgid "Translation language:"
+msgstr "Zielsprache:"
+
+#: tfrmtranslate.rbnallthesubtitles.caption
+msgctxt "tfrmtranslate.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Alle Einträge"
+
+#: tfrmtranslate.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmtranslate.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Ab gewähltem Eintrag"
+
+#: tfrmtranslate.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Nur gewählte Einträge"
+
+#: tfrmtranslationmemory.btnclose.caption
+msgctxt "tfrmtranslationmemory.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmtranslationmemory.btncopy.caption
+msgctxt "tfrmtranslationmemory.btncopy.caption"
+msgid "Copy"
+msgstr "Kopieren"
+
+#: tfrmtranslationmemory.btnuse.caption
+msgctxt "tfrmtranslationmemory.btnuse.caption"
+msgid "Use"
+msgstr "Verwenden"
+
+#: tfrmtranslationmemory.btnvalidate.caption
+msgctxt "tfrmtranslationmemory.btnvalidate.caption"
+msgid "Validate"
+msgstr "Validieren"
+
+#: tfrmtranslationmemory.caption
+msgctxt "tfrmtranslationmemory.caption"
+msgid "Translation memory"
+msgstr "Übersetzungsspeicher"
+
+#: tfrmtranslationmemorylist.btnclose.caption
+msgctxt "tfrmtranslationmemorylist.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmtranslationmemorylist.btncopy.caption
+msgctxt "tfrmtranslationmemorylist.btncopy.caption"
+msgid "Copy"
+msgstr "Kopieren"
+
+#: tfrmtranslationmemorylist.caption
+msgctxt "tfrmtranslationmemorylist.caption"
+msgid "Translation memory"
+msgstr "Übersetzungsspeicher"
+
+#: tfrmtranslationmemorylist.lblfind.caption
+msgctxt "tfrmtranslationmemorylist.lblfind.caption"
+msgid "Find"
+msgstr "Suchen"
+
+#: tfrmtranslationmemorylist.lbltotal.caption
+msgctxt "tfrmtranslationmemorylist.lbltotal.caption"
+msgid "Total:"
+msgstr "Total:"
+
+#: tfrmtranslationmemorysettings.btnapply.caption
+msgctxt "tfrmtranslationmemorysettings.btnapply.caption"
+msgid "Apply"
+msgstr "Übernehmen"
+
+#: tfrmtranslationmemorysettings.btnclose.caption
+msgctxt "tfrmtranslationmemorysettings.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmtranslationmemorysettings.btnopenfile.caption
+msgctxt "tfrmtranslationmemorysettings.btnopenfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtranslationmemorysettings.caption
+msgctxt "tfrmtranslationmemorysettings.caption"
+msgid "Translation memory settings"
+msgstr "Einstellungen Übersetzungsspeicher"
+
+#: tfrmtranslationmemorysettings.lblfilename.caption
+msgctxt "tfrmtranslationmemorysettings.lblfilename.caption"
+msgid "File name"
+msgstr "Dateiname"
+
+#: tfrmtranslationmemorysettings.lblsourcelang.caption
+msgctxt "tfrmtranslationmemorysettings.lblsourcelang.caption"
+msgid "Source language"
+msgstr "Ausgangssprache"
+
+#: tfrmtranslationmemorysettings.lbltranslang.caption
+msgctxt "tfrmtranslationmemorysettings.lbltranslang.caption"
+msgid "Translation language"
+msgstr "Zielsprache"
+
+#: tfrmtts.btnclose.caption
+msgctxt "tfrmtts.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmtts.btnfolder.caption
+msgctxt "tfrmtts.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtts.btngenerate.caption
+msgctxt "tfrmtts.btngenerate.caption"
+msgid "Generate"
+msgstr "Erzeugen"
+
+#: tfrmtts.btnpreview.caption
+msgid "Preview"
+msgstr "Vorschau"
+
+#: tfrmtts.caption
+msgid "Text to speech"
+msgstr "Text-zu-Sprache"
+
+#: tfrmtts.chkboost.caption
+msgctxt "tfrmtts.chkboost.caption"
+msgid "Speaker boost"
+msgstr "Lautsprecherverstärkung"
+
+#: tfrmtts.lblfolder.caption
+msgid "Folder:"
+msgstr "Ordner:"
+
+#: tfrmtts.lblscope.caption
+msgctxt "tfrmtts.lblscope.caption"
+msgid "Scope:"
+msgstr "Bereich:"
+
+#: tfrmtts.lblsimilarityboost.caption
+msgctxt "tfrmtts.lblsimilarityboost.caption"
+msgid "Similarity boost %:"
+msgstr "Ähnlichkeitsverstärkung %:"
+
+#: tfrmtts.lblstability.caption
+msgctxt "tfrmtts.lblstability.caption"
+msgid "Stability %:"
+msgstr "Stabilität %:"
+
+#: tfrmtts.lblstyle.caption
+msgctxt "tfrmtts.lblstyle.caption"
+msgid "Style exaggeration %:"
+msgstr "Stilübertreibung %:"
+
+#: tfrmtts.lblvoice.caption
+msgctxt "tfrmtts.lblvoice.caption"
+msgid "Voice:"
+msgstr "Stimme:"
+
+#: tfrmtts.rbnallthesubtitles.caption
+msgctxt "tfrmtts.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Alle Einträge"
+
+#: tfrmtts.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmtts.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Vom ausgewählten Eintrag"
+
+#: tfrmtts.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Nur ausgewählte Einträge"
+
+#: tfrmvideodubbing.btnbackgroundmusic.caption
+msgctxt "tfrmvideodubbing.btnbackgroundmusic.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmvideodubbing.btnclose.caption
+msgctxt "tfrmvideodubbing.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmvideodubbing.btngenerate.caption
+msgctxt "tfrmvideodubbing.btngenerate.caption"
+msgid "Generate"
+msgstr "Erzeugen"
+
+#: tfrmvideodubbing.caption
+msgid "Video dubbing"
+msgstr "Videonachvertonung"
+
+#: tfrmvideodubbing.chkbackgroundmusic.caption
+msgid "Background music"
+msgstr "Hintergrundmusik"
+
+#: tfrmvideodubbing.chkboost.caption
+msgctxt "tfrmvideodubbing.chkboost.caption"
+msgid "Speaker boost"
+msgstr "Lautsprecherverstärkung"
+
+#: tfrmvideodubbing.chkglobalvoice.caption
+msgid "Global voice"
+msgstr "Globale Stimme"
+
+#: tfrmvideodubbing.chksubtitletrack.caption
+msgid "Subtitle track"
+msgstr "Untertitelspur"
+
+#: tfrmvideodubbing.lblsimilarityboost.caption
+msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
+msgid "Similarity boost %:"
+msgstr "Ähnlichkeit erhöhen %:"
+
+#: tfrmvideodubbing.lblstability.caption
+msgctxt "tfrmvideodubbing.lblstability.caption"
+msgid "Stability %:"
+msgstr "Stabilität %:"
+
+#: tfrmvideodubbing.lblstyle.caption
+msgctxt "tfrmvideodubbing.lblstyle.caption"
+msgid "Style exaggeration %:"
+msgstr "Stilverstärkung %:"
+
+#: tfrmvideodubbing.lblvoice.caption
+msgctxt "tfrmvideodubbing.lblvoice.caption"
+msgid "Voice:"
+msgstr "Stimme:"
+
+#: tfrmvideodubbing.lblvolume.caption
+msgid "Volume %:"
+msgstr "Lautstärke %:"
+
+#: tfrmwaveextractor.btnclose.caption
+msgctxt "tfrmwaveextractor.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmwaveextractor.btnextract.caption
+msgctxt "tfrmwaveextractor.btnextract.caption"
+msgid "Extract..."
+msgstr "Extrahieren..."
+
+#: tfrmwaveextractor.caption
+msgid "Waveform extractor"
+msgstr "Tonspur-Extractor"
+
+#: tfrmwaveextractor.lbltrack.caption
+msgid "Track:"
+msgstr "Spur:"
+
+#: tfrmwelcome.chkshowonstartup.caption
+msgid "Show on startup"
+msgstr "Beim Start anzeigen"
+
+#: tfrmwelcome.lblbatchconvert.caption
+msgctxt "tfrmwelcome.lblbatchconvert.caption"
+msgid "Batch convert..."
+msgstr "Mehrere Dateien umwandeln..."
+
+#: tfrmwelcome.lblexit.caption
+msgid "Exit"
+msgstr "Beenden"
+
+#: tfrmwelcome.lblnewsubtitle.caption
+msgid "New subtitle project"
+msgstr "Neues Untertitel-Projekt"
+
+#: tfrmwelcome.lblnewtranscription.caption
+msgid "New manual transcription"
+msgstr "Neue manuelle Transkription"
+
+#: tfrmwelcome.lblopenfile.caption
+msgid "Open file..."
+msgstr "Datei öffnen..."
+
+#: tfrmwelcome.lblrecentfiles.caption
+msgctxt "tfrmwelcome.lblrecentfiles.caption"
+msgid "Recent files"
+msgstr "Zuletzt verwendete Dateien"
+
+#: tfrmwelcome.lblwelcome.caption
+msgctxt "tfrmwelcome.lblwelcome.caption"
+msgid "Welcome to"
+msgstr "Willkommen bei"
+
+#: tfrmwizard.btndownload.caption
+msgctxt "tfrmwizard.btndownload.caption"
+msgid "Download"
+msgstr "Herunterladen"
+
+#: tfrmwizard.btndownloadfasterwhisper.caption
+msgctxt "tfrmwizard.btndownloadfasterwhisper.caption"
+msgid "Download"
+msgstr "Herunterladen"
+
+#: tfrmwizard.btndownloadffmpeg.caption
+msgctxt "tfrmwizard.btndownloadffmpeg.caption"
+msgid "Download"
+msgstr "Herunterladen"
+
+#: tfrmwizard.btndownloadwhisper.caption
+msgctxt "tfrmwizard.btndownloadwhisper.caption"
+msgid "Download"
+msgstr "Herunterladen"
+
+#: tfrmwizard.btndownloadytdlp.caption
+msgctxt "tfrmwizard.btndownloadytdlp.caption"
+msgid "Download"
+msgstr "Herunterladen"
+
+#: tfrmwizard.btnnext.caption
+msgctxt "tfrmwizard.btnnext.caption"
+msgid "Next"
+msgstr "Weiter"
+
+#: tfrmwizard.btnprevious.caption
+msgid "Back"
+msgstr "Zurück"
+
+#: tfrmwizard.caption
+msgid "Getting started wizard"
+msgstr "Einrichtungsassistent"
+
+#: tfrmwizard.lblchooselayout.caption
+msgid "Choose workspace layout and timecode mode:"
+msgstr "Wähle das Layout und den Zeitcode-Modus für deine Arbeitsfläche:"
+
+#: tfrmwizard.lblexperience.caption
+msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
+msgstr "In wenigen Schritten bist du startklar für das beste Untertitel-Erlebnis."
+
+#: tfrmwizard.lblfasterwhisper.caption
+msgid "Faster-Whisper:"
+msgstr "Faster-Whisper:"
+
+#: tfrmwizard.lblfasterwhisper_hint.caption
+msgctxt "tfrmwizard.lblfasterwhisper_hint.caption"
+msgid "Optional, used for speech recognition."
+msgstr "Optional: Wird für Spracherkennung verwendet."
+
+#: tfrmwizard.lblffmpeg.caption
+msgid "FFmpeg:"
+msgstr "FFmpeg:"
+
+#: tfrmwizard.lblffmpeg_hint.caption
+msgid "Optional, used to extract audio and generate video."
+msgstr "Optional: Wird verwendet, um Audio/Ton zu extrahieren und Videos zu erstellen."
+
+#: tfrmwizard.lbllibmpv.caption
+msgid "libmpv: "
+msgstr "libmpv: "
+
+#: tfrmwizard.lbllibmpv_hint.caption
+msgid "Essential, used for playing video."
+msgstr "Wichtig: Wird benötigt, um Videos abzuspielen."
+
+#: tfrmwizard.lblrequiredfiles.caption
+msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
+msgstr ""
+"Damit Tero Subtitler richtig funktioniert, sind die folgenden Bibliotheken nötig.\n"
+"Falls sie auf deinem System fehlen, kann Tero Subtitler sie automatisch herunterladen."
+
+#: tfrmwizard.lblwelcome.caption
+msgctxt "tfrmwizard.lblwelcome.caption"
+msgid "Welcome to"
+msgstr "Willkommen bei"
+
+#: tfrmwizard.lblwhisper.caption
+msgid "Whisper.cpp:"
+msgstr "Whisper.cpp:"
+
+#: tfrmwizard.lblwhisper_hint.caption
+msgctxt "tfrmwizard.lblwhisper_hint.caption"
+msgid "Optional, used for speech recognition."
+msgstr "Optional: Wird für Spracherkennung verwendet."
+
+#: tfrmwizard.lblytdlp.caption
+msgid "yt-dlp:"
+msgstr "yt-dlp:"
+
+#: tfrmwizard.lblytdlp_hint.caption
+msgid "Optional, used for dowloading from YouTube."
+msgstr "Optional: Wird verwendet, um Videos von YouTube herunterzuladen."
+
+#: tfrmwizard.rdolayout0.caption
+msgctxt "tfrmwizard.rdolayout0.caption"
+msgid "Classic"
+msgstr "Klassisch"
+
+#: tfrmwizard.rdolayout1.caption
+msgctxt "tfrmwizard.rdolayout1.caption"
+msgid "Inverted"
+msgstr "Umgekehrt"
+
+#: tfrmwizard.rdolayout2.caption
+msgctxt "tfrmwizard.rdolayout2.caption"
+msgid "Vertical"
+msgstr "Vertikal"
+
