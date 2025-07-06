@@ -56,16 +56,16 @@ var
 begin
   if not Assigned(StringList) then Exit;
 
-  {with TRegExpr.Create('<\?xml version="(.*?)"') do
+  with TRegExpr.Create('<\?xml version="(.*?)"') do
   try
-    if Exec(StringList.Text) then
+    if Exec(StringList[0]) then
     begin
       if Match[1].Length > 3 then
-        StringList.Text := Replace(InputString, '<?xml version="1.0"', True);
+        StringList[0] := Replace(InputString, '<?xml version="1.0"', True);
     end;
   finally
     Free;
-  end;}
+  end;
 
   Stream := TStringStream.Create(StringList.Text.Replace('& ', '&amp; '));
   try
