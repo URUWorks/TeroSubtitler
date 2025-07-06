@@ -151,6 +151,7 @@ type
     FDrawThumbnails    : Boolean;
     FThumbnails        : TThumbnails;
     FDefaultThumbnail  : TBitmap;
+    FStretchThumbnails : Boolean;
 
     FGAP               : Integer; // Minimum blank between subtitle in ms
     FDrawGAP           : Boolean;
@@ -320,6 +321,7 @@ type
     property DrawThumbnail                 : Boolean                      read FDrawThumbnails               write FDrawThumbnails;
     property SilentZones                   : TZonesList                   read FSilentZones;
     property SavePeakToFile                : Boolean                      read FSavePeakToFile               write FSavePeakToFile;
+    property StretchThumbnails             : Boolean                      read FStretchThumbnails            write FStretchThumbnails;
     property OnCustomDrawSubtitleItem      : TCustomDrawSubtitleEvent     read FOnCustomDrawSubtitleItem     write FOnCustomDrawSubtitleItem;
     property OnCursorChange                : TNotifyEvent                 read FOnCursorChange               write FOnCursorChange;
     property OnPlayCursorChange            : TNotifyEvent                 read FOnPlayCursorChange           write FOnPlayCursorChange;
@@ -465,6 +467,7 @@ begin
   FDrawThumbnails   := False;
   FThumbnails       := NIL;
   FDefaultThumbnail := TBitmap.Create;
+  StretchThumbnails := False;
 
   FDynamicSelection.InitialTime := 0;
   FDynamicSelection.FinalTime   := 0;

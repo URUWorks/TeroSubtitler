@@ -403,43 +403,71 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure TUWWaveformDisplayer.DrawThumbnails(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
+procedure TUWWaveformDisplayer.DrawThumbnails( const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
 var
-  thumb, c, i, w, h, x, p : Integer;
-  ar : Double;
-  r : TRect;
-  ready : Boolean;
+  i, h, x1, x2, w: Integer;
+  tStart, tEnd, ar: Double;
+  r: TRect;
+  ready: Boolean;
 begin
   ready := Assigned(FThumbnails) and (Length(FThumbnails) = DefaultThumbnailsCount);
   if not ready and (FDefaultThumbnail.Handle = 0) then Exit;
 
-  if ready then
-    ar := FThumbnails[0].Width / FThumbnails[0].Height
-  else
-    ar := FDefaultThumbnail.Width / FDefaultThumbnail.Height;
+  h := ABottom - ATop;
+  if h <= 0 then Exit;
 
-  h := GetSubCanvasHeight;
-  w := Round(h * ar);
-  if w <= 0 then w := 1;
-  c := (Width div w);
-  x := 0;
-  Constrain(c, 0, DefaultThumbnailsCount-1);
-  p := PixelToTime(w);
-
-  for i := 0 to c do
+  // Calcular aspecto (solo si no estiramos)
+  if not FStretchThumbnails then
   begin
-    thumb := Round((FPositionMS + (p*i)) / (FLengthMS / DefaultThumbnailsCount));
-    Constrain(thumb, 0, DefaultThumbnailsCount-1);
-
-    r := Rect(x, 0, x+w, h);
-
-    if ready and (FThumbnails[thumb].Width > 0) then
-      ABitmap.Canvas.StretchDraw(r, FThumbnails[thumb])
+    if ready then
+      ar := FThumbnails[0].Width / FThumbnails[0].Height
     else
-      ABitmap.Canvas.StretchDraw(r, FDefaultThumbnail);
+      ar := FDefaultThumbnail.Width / FDefaultThumbnail.Height;
 
-    x += w;
-    if x > Width then Break;
+    w := Round(h * ar);
+    if w <= 0 then w := 1;
+
+    // Dibujar repitiendo miniaturas
+    x1 := 0;
+    while x1 < Width do
+    begin
+      tStart := (FPositionMS + (x1 * FPageSizeMs / Width)); // tiempo en ms en esta posición
+
+      i := Trunc((tStart * DefaultThumbnailsCount) / FLengthMS);
+      Constrain(i, 0, DefaultThumbnailsCount - 1);
+
+      r := Rect(x1, ATop, x1 + w, ABottom);
+
+      if ready and (FThumbnails[i].Width > 0) then
+        ABitmap.Canvas.StretchDraw(r, FThumbnails[i])
+      else
+        ABitmap.Canvas.StretchDraw(r, FDefaultThumbnail);
+
+      x1 += w;
+    end;
+  end
+  else
+  begin
+    // Dibujar estirando miniaturas
+    for i := 0 to DefaultThumbnailsCount - 1 do
+    begin
+      tStart := (i     * FLengthMS) / DefaultThumbnailsCount;
+      tEnd   := ((i+1) * FLengthMS) / DefaultThumbnailsCount;
+
+      if (tEnd < FPositionMS) or (tStart > FPositionMS + FPageSizeMs) then
+        Continue;
+
+      x1 := Round((tStart - FPositionMS) * Width / FPageSizeMs);
+      x2 := Round((tEnd   - FPositionMS) * Width / FPageSizeMs);
+      if x2 <= x1 then x2 := x1 + 1;
+
+      r := Rect(x1, ATop, x2, ABottom);
+
+      if ready and (FThumbnails[i].Width > 0) then
+        ABitmap.Canvas.StretchDraw(r, FThumbnails[i])
+      else
+        ABitmap.Canvas.StretchDraw(r, FDefaultThumbnail);
+    end;
   end;
 end;
 
