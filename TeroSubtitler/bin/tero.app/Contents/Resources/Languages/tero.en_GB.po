@@ -90,8 +90,9 @@ msgstr ""
 "Do you wish to save it?"
 
 #: proclocalize.lngaslineselected
-#, object-pascal-format
-msgid "%d lines selected / %d"
+#, object-pascal-format, fuzzy
+#| msgid "%d lines selected / %d"
+msgid "%d entries selected / %d"
 msgstr "%d lines selected / %d"
 
 #: proclocalize.lngasmarked
@@ -711,7 +712,9 @@ msgid "Subtitle Translation Project"
 msgstr "Subtitle Translation Project"
 
 #: proclocalize.lngpromptfordeletelines
-msgid "The selected lines will be deleted."
+#, fuzzy
+#| msgid "The selected lines will be deleted."
+msgid "The selected entries will be deleted."
 msgstr "The selected lines will be deleted."
 
 #: proclocalize.lngqccpl

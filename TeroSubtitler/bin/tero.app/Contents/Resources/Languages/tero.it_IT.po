@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 05.05.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione v. 06.05.2024)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.comn>\n"
@@ -91,8 +91,9 @@ msgstr ""
 "Vuoi salvare il file?"
 
 #: proclocalize.lngaslineselected
-#, object-pascal-format
-msgid "%d lines selected / %d"
+#, object-pascal-format, fuzzy
+#| msgid "%d lines selected / %d"
+msgid "%d entries selected / %d"
 msgstr "%d linee selezionate / %d"
 
 #: proclocalize.lngasmarked
@@ -715,7 +716,9 @@ msgid "Subtitle Translation Project"
 msgstr "Progetto traduzione sottotitoli"
 
 #: proclocalize.lngpromptfordeletelines
-msgid "The selected lines will be deleted."
+#, fuzzy
+#| msgid "The selected lines will be deleted."
+msgid "The selected entries will be deleted."
 msgstr "Le linee selezionate verranno eliminate."
 
 #: proclocalize.lngqccpl
@@ -2679,20 +2682,18 @@ msgid "Language:"
 msgstr "Lingua:"
 
 #: tfrmimportsuplanguages.btnclose.caption
-#, fuzzy
 msgctxt "tfrmimportsuplanguages.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmimportsuplanguages.btndownload.caption
-#, fuzzy
 msgctxt "tfrmimportsuplanguages.btndownload.caption"
 msgid "Download"
 msgstr "Download"
 
 #: tfrmimportsuplanguages.caption
 msgid "Tesseract languages"
-msgstr ""
+msgstr "Lingue Tesseract"
 
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"

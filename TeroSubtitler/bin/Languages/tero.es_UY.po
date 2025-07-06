@@ -90,8 +90,9 @@ msgstr ""
 "¿Desea guardar los cambios?"
 
 #: proclocalize.lngaslineselected
-#, object-pascal-format
-msgid "%d lines selected / %d"
+#, object-pascal-format, fuzzy
+#| msgid "%d lines selected / %d"
+msgid "%d entries selected / %d"
 msgstr "%d líneas seleccionadas / %d"
 
 #: proclocalize.lngasmarked
@@ -711,7 +712,9 @@ msgid "Subtitle Translation Project"
 msgstr "Proyecto de traducción de subtítulos"
 
 #: proclocalize.lngpromptfordeletelines
-msgid "The selected lines will be deleted."
+#, fuzzy
+#| msgid "The selected lines will be deleted."
+msgid "The selected entries will be deleted."
 msgstr "Las líneas seleccionadas serán eliminadas."
 
 #: proclocalize.lngqccpl
@@ -5575,3 +5578,4 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
+
