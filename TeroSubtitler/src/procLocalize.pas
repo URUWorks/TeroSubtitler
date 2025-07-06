@@ -51,7 +51,7 @@ resourcestring
   lngWriteDenieded = 'Write denied. Please check folder permissions.';
   lngBackupSaved = 'Backup saved.';
   lngNoEntriesMarked = 'There are no marked entries.';
-  lngPromptForDeleteLines = 'The selected lines will be deleted.';
+  lngPromptForDeleteLines = 'The selected entries will be deleted.';
   lngShiftTimeMore = 'Shift %dms more';
   lngShiftTimeLess = 'Shift %dms less';
   lngTranscriptionModeExit = 'Exiting transcription mode will lose any unsaved changes.';
@@ -121,7 +121,7 @@ resourcestring
   lngasText = 'Text';
   lngasTranslationChars = 'Translation (%s characters at %.2f CPS):';
   lngasTranslation = 'Translation';
-  lngasLineSelected = '%d lines selected / %d';
+  lngasLineSelected = '%d entries selected / %d';
   lngasMarked = 'Marked entry';
   lngasBadValues = 'Bad values';
   lngasTimeTooLong = 'Duration too long';
