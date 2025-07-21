@@ -1,12 +1,12 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (Übersetzung 08.07.2025)\n"
+"Project-Id-Version: Tero Subtitler (Översättning: 2025-07-08)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: cutegitcat\n"
 "Language-Team: cutegitcat\n"
-"Language: de_CH\n"
-"MIME-Version: 1.2\n"
+"Language: sv_SE\n"
+"MIME-Version: 1.1\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
@@ -23,61 +23,61 @@ msgid ""
 msgstr ""
 "Version %s\n"
 "\n"
-"Kompiliert am %s auf %s\n"
-"Kompiliererversion: %s\n"
-"Ziel-CPU: %s"
+"Kompilerad på %s till %s\n"
+"Version av kompilator: %s\n"
+"Mål CPU: %s"
 
 #: proclocalize.lngadditionaloption
 msgid "Additional option"
-msgstr "Zusätzliche Option"
+msgstr "Ytterligare alternativ"
 
 #: proclocalize.lngadditionalparams
 msgid "Additional params:"
-msgstr "Zusätzliche Parameter:"
+msgstr "Ytterligare parametrar:"
 
 #: proclocalize.lngaddnote
 msgid "Add note"
-msgstr "Anmerkung hinzufügen"
+msgstr "Lägg till anteckning"
 
 #: proclocalize.lngallsupportedfiles
 msgid "All supported files"
-msgstr "Alle unterstützten Dateien"
+msgstr "Alla filer som stöds"
 
 #: proclocalize.lngasbadvalues
 msgid "Bad values"
-msgstr "Ungültige Werte"
+msgstr "Ogiltiga värden"
 
 #: proclocalize.lngasbreaklonglines
 msgid "Line(s) too long"
-msgstr "Zeile(n) zu lang"
+msgstr "Rad(er) för lång(a)"
 
 #: proclocalize.lngascustom
 msgid "Custom"
-msgstr "Benutzerdefiniert"
+msgstr "Anpassad"
 
 #: proclocalize.lngasellipsessinglesmartcharacter
 msgid "Ellipses dots instead of Unicode character"
-msgstr "Auslassungspunkte anstelle des Unicode-Zeichens"
+msgstr "Punktserie i stället för Unicode-tecken"
 
 #: proclocalize.lngasempty
 msgid "Empty entry"
-msgstr "Leerer Eintrag"
+msgstr "Tom post"
 
 #: proclocalize.lngasfixtags
 msgid "Invalid or incomplete tags"
-msgstr "Ungültige oder unvollständige Tags"
+msgstr "Ogiltiga eller ofullständiga taggar"
 
 #: proclocalize.lngasgaptooshort
 msgid "Gap too short"
-msgstr "Abstand/Lücke zu kurz"
+msgstr "Mellanrum/Lucka är för kort"
 
 #: proclocalize.lngashearingimpaired
 msgid "Hearing impaired"
-msgstr "Gehörlos/Hörbehindert"
+msgstr "Döv/Hörselskadad"
 
 #: proclocalize.lngasktoextractaudio
 msgid "Audio waveform was not found, do you want to extract it?"
-msgstr "Audio-/Ton-Wellenform nicht gefunden. Möchtest du sie extrahieren?"
+msgstr "Ljudvåg hittades inte. Vill du ta fram den?"
 
 #: proclocalize.lngasktosave
 #, object-pascal-format
@@ -86,54 +86,54 @@ msgid ""
 "\n"
 "Do you wish to save it?"
 msgstr ""
-"„%s“\n"
+"”%s”\n"
 "\n"
-"Möchtest du speichern?"
+"Vill du spara?"
 
 #: proclocalize.lngaslineselected
 #, object-pascal-format
 msgid "%d lines selected / %d"
-msgstr "%d Zeilen ausgewählt / %d"
+msgstr "%d rader valda / %d"
 
 #: proclocalize.lngasmarked
 msgid "Marked entry"
-msgstr "Markierter Eintrag"
+msgstr "Markerad post"
 
 #: proclocalize.lngasmaxcps
 msgid "Too many CPS"
-msgstr "Zu viele Zeichen pro Sekunde (ZPS)"
+msgstr "För många tecken per sekund (TPS)"
 
 #: proclocalize.lngasmaxlines
 msgid "Maximum number of lines exceeded"
-msgstr "Maximale Zeilenzahl überschritten"
+msgstr "Maximalt antal rader överskridet"
 
 #: proclocalize.lngasocr
 msgid "OCR error"
-msgstr "Fehler bei Texterkennung (OCR)"
+msgstr "Fel vid textigenkänning"
 
 #: proclocalize.lngasoverlappingwithnext
 msgid "Overlapping with following entry"
-msgstr "Überschneidung mit folgendem Eintrag"
+msgstr "Överlappning med nästa post"
 
 #: proclocalize.lngasoverlappingwithprev
 msgid "Overlapping with previous entry"
-msgstr "Überschneidung mit vorherigem Eintrag"
+msgstr "Överlappning med föregående post"
 
 #: proclocalize.lngasprohibitedchars
 msgid "Contains a prohibited character"
-msgstr "Enthält ein unzulässiges Zeichen"
+msgstr "Innehåller ett otillåtet tecken"
 
 #: proclocalize.lngasreadingvideofile
 msgid "Reading video file..."
-msgstr "Videodatei wird gelesen ..."
+msgstr "Läser videofil ..."
 
 #: proclocalize.lngasrepeatedchars
 msgid "Repeated character"
-msgstr "Wiederholtes Zeichen"
+msgstr "Upprepat tecken"
 
 #: proclocalize.lngasrepeatedentry
 msgid "Repeated entry"
-msgstr "Doppelter Eintrag"
+msgstr "Upprepad post"
 
 #: proclocalize.lngastext
 msgctxt "proclocalize.lngastext"
@@ -143,38 +143,38 @@ msgstr "Text"
 #: proclocalize.lngastextchars
 #, object-pascal-format
 msgid "Text (%s characters at %.2f CPS):"
-msgstr "Text (%s Zeichen bei %.2f ZPS):"
+msgstr "Text (%s tecken med %.2f TPS):"
 
 #: proclocalize.lngastimetoolong
 msgid "Duration too long"
-msgstr "Dauer zu lang"
+msgstr "Tidslängden är för lång"
 
 #: proclocalize.lngastimetooshort
 msgid "Duration too short"
-msgstr "Dauer zu kurz"
+msgstr "Tidslängden är för kort"
 
 #: proclocalize.lngastranslation
 msgctxt "proclocalize.lngastranslation"
 msgid "Translation"
-msgstr "Übersetzung"
+msgstr "Översättning"
 
 #: proclocalize.lngastranslationchars
 #, object-pascal-format
 msgid "Translation (%s characters at %.2f CPS):"
-msgstr "Übersetzung (%s Zeichen bei %.2f ZPS):"
+msgstr "Översättning (%s tecken med %.2f TPS):"
 
 #: proclocalize.lngasunbreak
 #, object-pascal-format
 msgid "Line breaks less than %d characters"
-msgstr "Zeilenumbrüche bei weniger als %d Zeichen"
+msgstr "Radbrytning vid färre än %d tecken"
 
 #: proclocalize.lngasunnecessarydots
 msgid "Unnecessary dots"
-msgstr "Unnötige Punkte"
+msgstr "Onödiga punkter"
 
 #: proclocalize.lngasunnecessaryspaces
 msgid "Unnecessary spaces"
-msgstr "Unnötige Leerzeichen"
+msgstr "Onödiga mellanslag"
 
 #: proclocalize.lngasvideolen
 #, object-pascal-format
@@ -188,11 +188,11 @@ msgstr "%s (%s BPS/EBU-TC)"
 
 #: proclocalize.lngaswaveformtext
 msgid "Click here to use timeline"
-msgstr "Hier klicken, um die Zeitleiste zu benutzen"
+msgstr "Klicka här för att använda tidslinjen"
 
 #: proclocalize.lngbackupsaved
 msgid "Backup saved."
-msgstr "Sicherung gespeichert."
+msgstr "Säkerhetskopia sparad."
 
 #: proclocalize.lngbcfileformat
 msgctxt "proclocalize.lngbcfileformat"
@@ -202,7 +202,7 @@ msgstr "Format"
 #: proclocalize.lngbcfilename
 msgctxt "proclocalize.lngbcfilename"
 msgid "File name"
-msgstr "Dateiname"
+msgstr "Filnamn"
 
 #: proclocalize.lngbcfilestate
 msgid "Status"
@@ -211,35 +211,35 @@ msgstr "Status"
 #: proclocalize.lngbtnadd
 msgctxt "proclocalize.lngbtnadd"
 msgid "Add"
-msgstr "Hinzufügen"
+msgstr "Lägg till"
 
 #: proclocalize.lngbtncancel
 msgctxt "proclocalize.lngbtncancel"
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Avbryt"
 
 #: proclocalize.lngbtnclose
 msgctxt "proclocalize.lngbtnclose"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: proclocalize.lngbtnload
 msgid "Open"
-msgstr "Öffnen"
+msgstr "Öppna"
 
 #: proclocalize.lngbtnremove
 msgctxt "proclocalize.lngbtnremove"
 msgid "Remove"
-msgstr "Entfernen"
+msgstr "Ta bort"
 
 #: proclocalize.lngbtnsave
 msgid "Save"
-msgstr "Speichern"
+msgstr "Spara"
 
 #: proclocalize.lngbtnupdate
 msgctxt "proclocalize.lngbtnupdate"
 msgid "Update"
-msgstr "Aktualisierung"
+msgstr "Uppdatera"
 
 #: proclocalize.lngcfsframes
 msgctxt "proclocalize.lngcfsframes"
@@ -249,259 +249,259 @@ msgstr "Bilder (Frames)"
 #: proclocalize.lngcfstime
 msgctxt "proclocalize.lngcfstime"
 msgid "Time"
-msgstr "Zeit"
+msgstr "Tid"
 
 #: proclocalize.lngcontinueanyway
 msgid "Continue?"
-msgstr "Trotzdem fortfahren?"
+msgstr "Fortsätta ändå?"
 
 #: proclocalize.lngdetect
 msgid "Auto-detect"
-msgstr "Automatisch erkennen"
+msgstr "Identifiera automatiskt"
 
 #: proclocalize.lngdetectdialogsegmentswarning
 msgid "Attempting to detect dialogue segments deletes all entries from the list."
-msgstr "Das Erkennen von Dialogstellen löscht alle Einträge aus der Liste."
+msgstr "Att identifiera dialogavsnitt raderar alla poster i listan."
 
 #: proclocalize.lngdownloadcanceled
 msgid "Download canceled by user."
-msgstr "Download vom Benutzer abgebrochen."
+msgstr "Hämtning avbröts av användaren."
 
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"
-msgstr "Eintrag %d"
+msgstr "Post %d"
 
 #: proclocalize.lngentryendedat
 #, object-pascal-format
 msgctxt "proclocalize.lngentryendedat"
 msgid "Entry ended in %s"
-msgstr "Eintrag endete um %s"
+msgstr "Posten slutade vid %s"
 
 #: proclocalize.lngentrystartedat
 #, object-pascal-format
 msgctxt "proclocalize.lngentrystartedat"
 msgid "Entry started at %s"
-msgstr "Eintrag begann um %s"
+msgstr "Posten började vid %s"
 
 #: proclocalize.lngerrorexecuting
 #, object-pascal-format
 msgid "Error executing “%s”."
-msgstr "Fehler beim Ausführen von “%s”."
+msgstr "Fel vid körning av ”%s”."
 
 #: proclocalize.lngextractapperror
 #, object-pascal-format
 msgid "Unable to find “%s”. Check in settings if it is configured correctly."
 msgstr ""
-"Konnte nicht gefunden werden: “%s”. \n"
-"Bitte in den Einstellungen überprüfen, ob alles richtig eingerichtet ist."
+"Det gick inte att hitta “%s”.\n"
+"Kontrollera i inställningarna att allt är rätt inställt."
 
 #: proclocalize.lngextracting
 msgid "Extracting..."
-msgstr "Wird extrahiert ..."
+msgstr "Extraherar ..."
 
 #: proclocalize.lngfailed
 msgid "Failed."
-msgstr "Fehlgeschlagen."
+msgstr "Misslyckades."
 
 #: proclocalize.lngfailedtodownload
 msgid "No content downloaded, missing file or no Internet connection."
 msgstr ""
-"Kein Inhalt heruntergeladen.\n"
-"Datei fehlt oder keine Internetverbindung."
+"Inget innehåll kunde hämtas.\n"
+"Filen saknas eller ingen internetanslutning."
 
 #: proclocalize.lngfeaturenotavailablefromurl
 msgid "Function not available for online video."
-msgstr "Funktion für Online-Videos nicht verfügbar."
+msgstr "Funktionen är inte tillgänglig för nätvideor."
 
 #: proclocalize.lngfilechanged
 msgid "File has not been saved."
-msgstr "Die Datei wurde nicht gespeichert."
+msgstr "Filen har inte sparats."
 
 #: proclocalize.lngfilenotfound
 msgid "File cannot be found."
-msgstr "Datei wurde nicht gefunden."
+msgstr "Filen kunde inte hittas."
 
 #: proclocalize.lngfilesavedsuccessfully
 msgid "File saved successfully."
-msgstr "Datei erfolgreich gespeichert."
+msgstr "Filen har sparats."
 
 #: proclocalize.lngfocenter
 msgid "Center"
-msgstr "Zentriert"
+msgstr "Centrera"
 
 #: proclocalize.lngfolatin
 msgid "Latin"
-msgstr "Lateinisch"
+msgstr "Latinsk"
 
 #: proclocalize.lngfolatinarabic
 msgid "Latin/Arabic"
-msgstr "Lateinisch/Arabisch"
+msgstr "Latinsk/Arabisk"
 
 #: proclocalize.lngfolatincyrillic
 msgid "Latin/Cyrillic"
-msgstr "Lateinisch/Kyrillisch"
+msgstr "Latinsk/Kyrillisk"
 
 #: proclocalize.lngfolatingreek
 msgid "Latin/Greek"
-msgstr "Lateinisch/Griechisch"
+msgstr "Latinsk/Grekisk"
 
 #: proclocalize.lngfolatinhebrew
 msgid "Latin/Hebrew"
-msgstr "Lateinisch/Hebräisch"
+msgstr "Latinsk/Hebreisk"
 
 #: proclocalize.lngfoldernotempty
 msgid "The folder is not empty."
-msgstr "Der Ordner ist nicht leer."
+msgstr "Mappen är inte tom."
 
 #: proclocalize.lngfoleft
 msgctxt "proclocalize.lngfoleft"
 msgid "Left"
-msgstr "Links"
+msgstr "Vänster"
 
 #: proclocalize.lngfolevel1teletext
 msgid "Level-1 teletext"
-msgstr "Teletext Stufe 1"
+msgstr "Text-TV nivå 1"
 
 #: proclocalize.lngfolevel2teletext
 msgid "Level-2 teletext"
-msgstr "Teletext Stufe 2"
+msgstr "Text-TV nivå 2"
 
 #: proclocalize.lngfoopensubtitling
 msgid "Open subtitling"
-msgstr "Offene Untertitel"
+msgstr "Öppna undertexter"
 
 #: proclocalize.lngforight
 msgid "Right"
-msgstr "Rechts"
+msgstr "Höger"
 
 #: proclocalize.lngfoundefined
 msgid "Undefined"
-msgstr "Nicht definiert"
+msgstr "Odefinierad"
 
 #: proclocalize.lngfsaction
 msgid "Action"
-msgstr "Handlung"
+msgstr "Åtgärd"
 
 #: proclocalize.lngfsaddspacing
 msgid "Add spacing"
-msgstr "Abstand hinzufügen"
+msgstr "Lägg till mellanrum"
 
 #: proclocalize.lngfsafter
 msgid "After"
-msgstr "Nach"
+msgstr "Efter"
 
 #: proclocalize.lngfscurrent
 msgid "Current"
-msgstr "Aktuell"
+msgstr "Nuvarande"
 
 #: proclocalize.lngfsetbadvalues
 msgid "Fix bad timing values"
-msgstr "Fehlerhafte Zeitangaben korrigieren"
+msgstr "Rätta felaktiga tidsvärden"
 
 #: proclocalize.lngfsetbreaklonglines
 msgid "Break overlong lines"
-msgstr "Zu lange Zeilen umbrechen"
+msgstr "Bryt upp för långa rader"
 
 #: proclocalize.lngfsetchaining
 msgid "Chaining entries"
-msgstr "Einträge verketten"
+msgstr "Länka samman poster"
 
 #: proclocalize.lngfsetcleanuptags
 msgid "Cleanup tags"
-msgstr "Tags bereinigen"
+msgstr "Rensa taggar"
 
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
-msgstr "Auslassungspunkte in Unicode-Zeichen umwandeln"
+msgstr "Omvandla utelämningspunkter till Unicode-tecken"
 
 #: proclocalize.lngfsetempty
 msgid "Remove empty entries"
-msgstr "Leere Einträge entfernen"
+msgstr "Ta bort tomma poster"
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
-msgstr "Satzzeichenfolge korrigieren: !? -> ?!"
+msgstr "Korrigera blandade skiljetecken: !? -> ?!"
 
 #: proclocalize.lngfsetfixtags
 msgid "Fix invalid tags"
-msgstr "Ungültige Tags korrigieren"
+msgstr "Rätta ogiltiga taggar"
 
 #: proclocalize.lngfsethearingimpaired
 msgid "Remove text for hearing impaired"
-msgstr "Texte für gehörlose/hörbehinderte Personen entfernen"
+msgstr "Ta bort text för döva och hörselskadade"
 
 #: proclocalize.lngfsetincompletehyphentext
 msgid "Remove incomplete hyphenated line"
-msgstr "Unvollständige Silbentrennung entfernen"
+msgstr "Ta bort ofullständig avstavningsrad"
 
 #: proclocalize.lngfsetocr
 msgid "Fix common OCR errors"
-msgstr "Häufige OCR-Fehler korrigieren"
+msgstr "Korrigera vanliga OCR-fel"
 
 #: proclocalize.lngfsetoverlapping
 msgid "Fix overlapping display times"
-msgstr "Überschneidende Anzeigezeiten korrigieren"
+msgstr "Korrigera överlappande visningstider"
 
 #: proclocalize.lngfsetprohibitedchars
 #, object-pascal-format
 msgid "Remove entries with %s"
-msgstr "Einträge mit %s entfernen"
+msgstr "Ta bort poster med %s"
 
 #: proclocalize.lngfsetremovespaceswithinbrackets
 msgid "Remove spaces within brackets"
-msgstr "Leerzeichen in Klammern entfernen"
+msgstr "Ta bort mellanslag inom parenteser"
 
 #: proclocalize.lngfsetrepeatedchars
 msgid "Remove repeated characters"
-msgstr "Wiederholte Zeichen entfernen"
+msgstr "Ta bort upprepade tecken"
 
 #: proclocalize.lngfsetrepeatedentry
 msgctxt "proclocalize.lngfsetrepeatedentry"
 msgid "Remove repeated entries"
-msgstr "Doppelte Einträge entfernen"
+msgstr "Ta bort dubbla poster"
 
 #: proclocalize.lngfsetsnaptoshotchanges
 msgid "Snap times to shot changes"
-msgstr "Zeitpunkte an Szenenwechsel anpassen"
+msgstr "Justera tider till scenbyten"
 
 #: proclocalize.lngfsetsnaptoshotchangesincue
 msgid "Snap In Cue to shot change"
-msgstr "Startzeitpunkt an Szenenwechsel anpassen"
+msgstr "Justera starttid till scenbyte"
 
 #: proclocalize.lngfsetsnaptoshotchangesincueaway
 msgid "Snap In Cue away from shot change"
-msgstr "Startzeitpunkt vom Szenenwechsel weg verschieben"
+msgstr "Flytta starttid bort från scenbyte"
 
 #: proclocalize.lngfsetsnaptoshotchangesoutcue
 msgid "Snap Out Cue to shot change"
-msgstr "Endzeitpunkt an Szenenwechsel anpassen"
+msgstr "Justera sluttid till scenbyte"
 
 #: proclocalize.lngfsetspaceofopeninghyphen
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
-msgstr "Abstand beim Trennstrich am Zeilenanfang"
+msgstr "Mellanrum vid inledande avstavning"
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
-msgstr "Zu lange Dauer korrigieren"
+msgstr "Korrigera för lång varaktighet"
 
 #: proclocalize.lngfsettimetooshort
 msgid "Fix durations too short"
-msgstr "Zu kurze Dauer korrigieren"
+msgstr "Korrigera för korta visningstider"
 
 #: proclocalize.lngfsetunbreak
 #, object-pascal-format
 msgid "Remove line breaks if %d characters not exceeded"
-msgstr "Zeilenumbruch entfernen, wenn weniger als %d Zeichen"
+msgstr "Ta bort radbrytning om färre än %d tecken"
 
 #: proclocalize.lngfsetunnecessarydots
 msgid "Remove unnecessary dots"
-msgstr "Unnötige Punkte entfernen"
+msgstr "Ta bort onödiga punkter"
 
 #: proclocalize.lngfsetunnecessaryspaces
 msgid "Remove unnecessary spaces"
-msgstr "Unnötige Leerzeichen entfernen"
+msgstr "Ta bort onödiga blanksteg"
 
 #: proclocalize.lngfsindex
 msgctxt "proclocalize.lngfsindex"
@@ -510,44 +510,44 @@ msgstr "#"
 
 #: proclocalize.lngfsremovespacing
 msgid "Remove spacing"
-msgstr "Abstände entfernen"
+msgstr "Ta bort mellanrum"
 
 #: proclocalize.lngfstotalerrors
 #, object-pascal-format
 msgid "Total errors: %d (displayed: %d)"
-msgstr "Fehler insgesamt: %d (angezeigt: %d)"
+msgstr "Totalt antal fel: %d (visade: %d)"
 
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
 msgid "CPL"
-msgstr "ZPZ"
+msgstr "TPR"
 
 #: proclocalize.lnghcps
 msgctxt "proclocalize.lnghcps"
 msgid "CPS"
-msgstr "ZPS"
+msgstr "TPS"
 
 #: proclocalize.lnghduration
 msgctxt "proclocalize.lnghduration"
 msgid "Duration"
-msgstr "Dauer"
+msgstr "Varaktighet"
 
 #: proclocalize.lnghhmmssff
 msgid "SMPTE [HH:MM:ss:FF]"
-msgstr "EBU-Zeitcode [St:Mi:Se:Bi]"
+msgstr "EBU-tidskod [Ti:Mi:Se:Bi]"
 
 #: proclocalize.lnghhmmsszzz
 msgid "Media [HH:MM:ss.ZZZ]"
-msgstr "Multimediale Zeitcode [St:Mi:Se.ZZZ]"
+msgstr "Multimediatidskod [Ti:Mi:Se.ZZZ]"
 
 #: proclocalize.lnghindex
 msgid "#/Gap"
-msgstr "#/Abstand/Lücke"
+msgstr "#/Mellanrum/Lucka"
 
 #: proclocalize.lnghstyleandactor
 msgctxt "proclocalize.lnghstyleandactor"
 msgid "Style/Actor"
-msgstr "Stil/Sprecher"
+msgstr "Stil/Talare"
 
 #: proclocalize.lnghtext
 msgctxt "proclocalize.lnghtext"
@@ -557,17 +557,17 @@ msgstr "Text"
 #: proclocalize.lnghtimes
 msgctxt "proclocalize.lnghtimes"
 msgid "Times"
-msgstr "Zeiten"
+msgstr "Tider"
 
 #: proclocalize.lnghtranslation
 msgctxt "proclocalize.lnghtranslation"
 msgid "Translation"
-msgstr "Übersetzung"
+msgstr "Översättning"
 
 #: proclocalize.lnghwpm
 msgctxt "proclocalize.lnghwpm"
 msgid "WPM"
-msgstr "WPM"
+msgstr "OPM"
 
 #: proclocalize.lngindex
 msgctxt "proclocalize.lngindex"
@@ -577,129 +577,129 @@ msgstr "#"
 #: proclocalize.lnglibmpverror
 msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
 msgstr ""
-"Die benötigten Bibliotheken für den eingebetteten mpv-Player wurden nicht gefunden. \n"
-"Bitte lade sie herunter."
+"Kunde inte hitta de bibliotek som krävs för att köra den inbäddade mpv-spelaren.\n"
+"Vänligen ladda ner dem."
 
 #: proclocalize.lnglibmpvglerror
 msgid "Failed to initialize mpv GL context."
-msgstr "Grafikumgebung (GL) von mpv konnte nicht gestartet werden."
+msgstr "Kunde inte starta grafikmiljön (GL) för mpv."
 
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
-msgstr "libmpv konnte nicht gestartet werden. Bitte prüfe, ob die richtige Bibliothek installiert ist."
+msgstr "Kunde inte starta libmpv. Kontrollera att rätt bibliotek är installerat."
 
 #: proclocalize.lngline
 msgid "Line:"
-msgstr "Zeile:"
+msgstr "Rad:"
 
 #: proclocalize.lngmrfind
 msgctxt "proclocalize.lngmrfind"
 msgid "Find"
-msgstr "Suchen"
+msgstr "Sök"
 
 #: proclocalize.lngmrregexpr
 msgctxt "proclocalize.lngmrregexpr"
 msgid "R. Expression"
-msgstr "Regulärer Ausdruck"
+msgstr "Reguljärt uttryck"
 
 #: proclocalize.lngmrreplacewith
 msgctxt "proclocalize.lngmrreplacewith"
 msgid "Replace with"
-msgstr "Ersetzen durch"
+msgstr "Ersätt med"
 
 #: proclocalize.lngmscontains
 msgctxt "proclocalize.lngmscontains"
 msgid "Contains"
-msgstr "Enthält"
+msgstr "Innehåller"
 
 #: proclocalize.lngmsendswith
 msgctxt "proclocalize.lngmsendswith"
 msgid "Ends with"
-msgstr "Endet mit"
+msgstr "Slutar med"
 
 #: proclocalize.lngmsstartswith
 msgctxt "proclocalize.lngmsstartswith"
 msgid "Starts with"
-msgstr "Beginnt mit"
+msgstr "Börjar med"
 
 #: proclocalize.lngmultipletracksdetected
 msgid "Multiple tracks detected"
-msgstr "Mehrere Ton- oder Untertitelspuren erkannt"
+msgstr "Flera ljud- eller textspår upptäckta"
 
 #: proclocalize.lngnewdurationall
 msgid "New duration in all cases"
-msgstr "Neue Dauer in allen Fällen"
+msgstr "Ny varaktighet i alla fall"
 
 #: proclocalize.lngnewdurationgreater
 msgid "New duration is greater than original"
-msgstr "Neue Dauer ist länger als die ursprüngliche"
+msgstr "Ny varaktighet är längre än den ursprungliga"
 
 #: proclocalize.lngnewdurationsmaller
 msgid "New duration is smaller than original"
-msgstr "Neue Dauer ist kürzer als die ursprüngliche"
+msgstr "Ny varaktighet är kortare än den ursprungliga"
 
 #: proclocalize.lngnewshortcutpreset
 msgid "Enter a name for your shortcuts preset"
-msgstr "Bitte gib einen Namen für das Tastenkombinationen-Profil ein."
+msgstr "Ange ett namn för din profil för kortkommandon på tangentbordet."
 
 #: proclocalize.lngnewshortcutpresetname
 msgctxt "proclocalize.lngnewshortcutpresetname"
 msgid "Name"
-msgstr "Name"
+msgstr "Namn"
 
 #: proclocalize.lngnewtime
 msgid "New time"
-msgstr "Neue Zeit"
+msgstr "Ny tid"
 
 #: proclocalize.lngnewversionfound
 msgid "A new version was found."
-msgstr "Eine neue Version wurde gefunden."
+msgstr "En ny version har hittats."
 
 #: proclocalize.lngnoentriesmarked
 msgctxt "proclocalize.lngnoentriesmarked"
 msgid "There are no marked entries."
-msgstr "Keine markierten Einträge vorhanden."
+msgstr "Inga markerade poster finns."
 
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
-msgstr "Keine Internetverbindung verfügbar"
+msgstr "Ingen internetanslutning tillgänglig"
 
 #: proclocalize.lngnoname
 msgid "no name"
-msgstr "kein Name"
+msgstr "inget namn"
 
 #: proclocalize.lngnonewversion
 msgid "You're using the latest version."
-msgstr "Du verwendest die aktuelle Version."
+msgstr "Du använder den senaste versionen."
 
 #: proclocalize.lngoldtime
 msgid "Old time"
-msgstr "Vorherige Zeit"
+msgstr "Tidigare tid"
 
 #: proclocalize.lngopencontainingfolder
 msgid "Open containing folder"
-msgstr "Zielordner öffnen"
+msgstr "Öppna målmapp"
 
 #: proclocalize.lngopenfile
 msgid "Open file"
-msgstr "Datei öffnen"
+msgstr "Öppna fil"
 
 #: proclocalize.lngopenvideofromurl
 msgid "Open video from"
-msgstr "Video öffnen von"
+msgstr "Öppna video från"
 
 #: proclocalize.lngoperationcancelled
 msgid "Operation cancelled."
-msgstr "Vorgang abgebrochen."
+msgstr "Åtgärden avbröts."
 
 #: proclocalize.lngoperationcompleted
 msgid "Operation completed."
-msgstr "Vorgang abgeschlossen."
+msgstr "Åtgärden slutförd."
 
 #: proclocalize.lngoperationfailed
 #, object-pascal-format
 msgid "Job %d/%d fail with code %d."
-msgstr "Vorgang %d/%d fehlgeschlagen mit Fehlercode %d."
+msgstr "Åtgärd %d/%d misslyckades med felkod %d."
 
 #: proclocalize.lngoriginal
 msgctxt "proclocalize.lngoriginal"
@@ -708,27 +708,27 @@ msgstr "Original"
 
 #: proclocalize.lngpercent
 msgid "Percent"
-msgstr "Prozent"
+msgstr "Procent"
 
 #: proclocalize.lngprojectfile
 msgid "Subtitle Translation Project"
-msgstr "Untertitel-Übersetzungsprojekt"
+msgstr "Projekt för undertextöversättning"
 
 #: proclocalize.lngpromptfordeletelines
 msgid "The selected lines will be deleted."
-msgstr "Die ausgewählten Zeilen werden gelöscht."
+msgstr "De markerade raderna kommer att tas bort."
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
-msgstr "ZPZ (Zeichen pro Zeile)"
+msgstr "TPR (tecken per rad)"
 
 #: proclocalize.lngqccps
 msgid "CPS (characters-per-second)"
-msgstr "ZPS (Zeichen pro Sekunde)"
+msgstr "TPS (tecken per sekund)"
 
 #: proclocalize.lngqcgap
 msgid "Gap Minimum duration"
-msgstr "Mindestabstand/-lücke"
+msgstr "Minsta mellanrum/lucka"
 
 #: proclocalize.lngqcindex
 msgctxt "proclocalize.lngqcindex"
@@ -737,111 +737,111 @@ msgstr "#"
 
 #: proclocalize.lngqcmaximumduration
 msgid "Maximum duration"
-msgstr "Maximale Dauer"
+msgstr "Maximal varaktighet"
 
 #: proclocalize.lngqcmaximumlines
 msgid "Maximum lines"
-msgstr "Maximale Zeilenanzahl"
+msgstr "Maximalt antal rader"
 
 #: proclocalize.lngqcminimumduration
 msgid "Minimum duration"
-msgstr "Minimale Dauer"
+msgstr "Minimal varaktighet"
 
 #: proclocalize.lngqcrule
 msgid "Broken rule"
-msgstr "Regel verletzt"
+msgstr "Regelbrist"
 
 #: proclocalize.lngqcwpm
 msgid "WPM (words-per-minute)"
-msgstr "WPM (Wörter pro Minute)"
+msgstr "OPM (ord per minut)"
 
 #: proclocalize.lngrbdatetime
 msgid "Date / Time"
-msgstr "Datum / Uhrzeit"
+msgstr "Datum / Tid"
 
 #: proclocalize.lngrbfilename
 msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
-msgstr "Dateiname"
+msgstr "Filnamn"
 
 #: proclocalize.lngsavefile
 msgid "Save file"
-msgstr "Datei speichern"
+msgstr "Spara fil"
 
 #: proclocalize.lngsavesubtitleerror
 msgid "Error trying to save the file."
-msgstr "Fehler beim Speichern der Datei."
+msgstr "Fel vid försök att spara filen."
 
 #: proclocalize.lngscaudiofilters
 msgctxt "proclocalize.lngscaudiofilters"
 msgid "Audio filters"
-msgstr "Audio-/Tonfilter"
+msgstr "Ljudfilter"
 
 #: proclocalize.lngscedit
 msgctxt "proclocalize.lngscedit"
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "Redigera"
 
 #: proclocalize.lngsceditor
 msgctxt "proclocalize.lngsceditor"
 msgid "Editor"
-msgstr "Bearbeitungsfenster"
+msgstr "Redigeringsfönster"
 
 #: proclocalize.lngscedl
 msgid "Edit Decision Lists"
-msgstr "Schnittlisten bearbeiten"
+msgstr "Redigera klipplistor"
 
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"
 msgid "Entries"
-msgstr "Einträge"
+msgstr "Poster"
 
 #: proclocalize.lngscfile
 msgctxt "proclocalize.lngscfile"
 msgid "File"
-msgstr "Datei"
+msgstr "Fil"
 
 #: proclocalize.lngscfind
 msgctxt "proclocalize.lngscfind"
 msgid "Find"
-msgstr "Suchen"
+msgstr "Sök"
 
 #: proclocalize.lngscframes
 msgctxt "proclocalize.lngscframes"
 msgid "Frames"
-msgstr "Einzelbilder"
+msgstr "Bildrutor"
 
 #: proclocalize.lngschelp
 msgctxt "proclocalize.lngschelp"
 msgid "Help"
-msgstr "Hilfe"
+msgstr "Hjälp"
 
 #: proclocalize.lngschhmmssff
 msgid "HH:MM:ss:FF"
-msgstr "St:Mi:Se:Bi"
+msgstr "Ti:Mi:Se:Bi"
 
 #: proclocalize.lngschhmmsszzz
 msgctxt "proclocalize.lngschhmmsszzz"
 msgid "HH:MM:ss.ZZZ"
-msgstr "St:Mi:Se.ZZZ"
+msgstr "Ti:Mi:Se.ZZZ"
 
 #: proclocalize.lngscmilliseconds
 msgctxt "proclocalize.lngscmilliseconds"
 msgid "Milliseconds"
-msgstr "Millisekunden"
+msgstr "Millisekunder"
 
 #: proclocalize.lngscseconds
 msgid "Seconds"
-msgstr "Sekunden"
+msgstr "Sekunder"
 
 #: proclocalize.lngscselect
 msgctxt "proclocalize.lngscselect"
 msgid "Select"
-msgstr "Auswählen"
+msgstr "Välj"
 
 #: proclocalize.lngscshotchanges
 msgid "Text files"
-msgstr "Textdateien"
+msgstr "Textfiler"
 
 #: proclocalize.lngsctext
 msgctxt "proclocalize.lngsctext"
@@ -851,12 +851,12 @@ msgstr "Text"
 #: proclocalize.lngsctimings
 msgctxt "proclocalize.lngsctimings"
 msgid "Timings"
-msgstr "Zeitangaben"
+msgstr "Tidsangivelser"
 
 #: proclocalize.lngsctools
 msgctxt "proclocalize.lngsctools"
 msgid "Tools"
-msgstr "Werkzeuge"
+msgstr "Verktyg"
 
 #: proclocalize.lngscvideo
 msgctxt "proclocalize.lngscvideo"
@@ -871,12 +871,12 @@ msgstr "Videofilter"
 #: proclocalize.lngscview
 msgctxt "proclocalize.lngscview"
 msgid "View"
-msgstr "Ansicht"
+msgstr "Visa"
 
 #: proclocalize.lngscwaveform
 msgctxt "proclocalize.lngscwaveform"
 msgid "Waveform"
-msgstr "Wellenform"
+msgstr "Vågform"
 
 #: proclocalize.lngscxml
 msgid "XML"
@@ -884,16 +884,16 @@ msgstr "XML"
 
 #: proclocalize.lngseanalyzingfile
 msgid "Analyzing file..."
-msgstr "Datei wird analysiert ..."
+msgstr "Analyserar fil …"
 
 #: proclocalize.lngsecodec
 msgctxt "proclocalize.lngsecodec"
 msgid "Codec"
-msgstr "Codec"
+msgstr "Kodek"
 
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
-msgstr "Möchtest du die Änderungsübersicht ansehen?"
+msgstr "Vill du visa ändringsloggen?"
 
 #: proclocalize.lngseid
 msgid "ID"
@@ -906,48 +906,48 @@ msgstr "Typ"
 #: proclocalize.lngselanguage
 msgctxt "proclocalize.lngselanguage"
 msgid "Language"
-msgstr "Sprache"
+msgstr "Språk"
 
 #: proclocalize.lngselectencodingtouse
 msgid "Select the Encoding to use:"
-msgstr "Bitte Zeichencodierung auswählen:"
+msgstr "Välj teckenkodning att använda:"
 
 #: proclocalize.lngselectfpstouse
 msgid "Select FPS to use:"
-msgstr "Bildrate (BPS) auswählen:"
+msgstr "Välj BPS (bilder per sekund):"
 
 #: proclocalize.lngselectsheettouse
 msgid "Select sheet to use:"
-msgstr "Tabelle auswählen:"
+msgstr "Välj blad att använda:"
 
 #: proclocalize.lngselecttracktouse
 msgid "Select the track to use:"
-msgstr "Spur auswählen:"
+msgstr "Välj spår att använda:"
 
 #: proclocalize.lngseoutput
 msgid "Output"
-msgstr "Ausgabe"
+msgstr "Utdata"
 
 #: proclocalize.lngshifttimeless
 #, object-pascal-format
 msgctxt "proclocalize.lngshifttimeless"
 msgid "Shift %dms less"
-msgstr "%d ms zurückverschieben"
+msgstr "Förskjut med %d ms bakåt"
 
 #: proclocalize.lngshifttimemore
 #, object-pascal-format
 msgctxt "proclocalize.lngshifttimemore"
 msgid "Shift %dms more"
-msgstr "%d ms nach vorne verschieben"
+msgstr "Förskjut med %d ms framåt"
 
 #: proclocalize.lngshortcutinuse
 #, object-pascal-format
 msgid "Shortcut currently used in “%s”."
-msgstr "Die Tastenkombination wird bereits in “%s” verwendet."
+msgstr "Genväg används redan i “%s”."
 
 #: proclocalize.lngsourcemodewarning
 msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
-msgstr "Beim Wechsel in den Quelltext-Modus wird das Format auf “Tero Subtitler” geändert. Nicht gespeicherte Übersetzungen gehen sonst verloren."
+msgstr "Om du växlar till källäge ändras formatet till “Tero Subtitler”. Osparade översättningar går annars förlorade."
 
 #: proclocalize.lngspcurrentline
 #, object-pascal-format
@@ -956,15 +956,15 @@ msgstr "# %d"
 
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
-msgstr "Rechtschreibprüfung abgeschlossen."
+msgstr "Stavningskontrollen är klar."
 
 #: proclocalize.lngssappearance
 msgid "Appearance"
-msgstr "Darstellung"
+msgstr "Utseende"
 
 #: proclocalize.lngssautomode
 msgid "Automatic"
-msgstr "Automatisch"
+msgstr "Automatiskt"
 
 #: proclocalize.lngssblockmode
 msgid "Block"
@@ -973,198 +973,198 @@ msgstr "Block"
 #: proclocalize.lngssconventions
 msgctxt "proclocalize.lngssconventions"
 msgid "Conventions"
-msgstr "Konventionen"
+msgstr "Konventioner"
 
 #: proclocalize.lngssdarkmode
 msgid "Dark mode"
-msgstr "Dunkler Modus"
+msgstr "Mörkt läge"
 
 #: proclocalize.lngssfiletypeassociations
 msgid "File types"
-msgstr "Dateitypen"
+msgstr "Filtyper"
 
 #: proclocalize.lngssframes
 msgctxt "proclocalize.lngssframes"
 msgid "Frames"
-msgstr "Einzelbilder"
+msgstr "Bilder"
 
 #: proclocalize.lngssgeneral
 msgctxt "proclocalize.lngssgeneral"
 msgid "General"
-msgstr "Allgemein"
+msgstr "Allmänt"
 
 #: proclocalize.lngsslightmode
 msgid "Light mode"
-msgstr "Heller Modus"
+msgstr "Ljust läge"
 
 #: proclocalize.lngsslistmode
 msgid "List"
-msgstr "Liste"
+msgstr "Lista"
 
 #: proclocalize.lngssmilliseconds
 msgctxt "proclocalize.lngssmilliseconds"
 msgid "Milliseconds"
-msgstr "Millisekunden"
+msgstr "Millisekunder"
 
 #: proclocalize.lngssmpv
 msgid "Video player"
-msgstr "Videoplayer"
+msgstr "Videospelare"
 
 #: proclocalize.lngssshortcutnone
 msgid "None"
-msgstr "Keiner"
+msgstr "Ingen"
 
 #: proclocalize.lngssshortcuts
 msgid "Shortcuts"
-msgstr "Tastenkombination"
+msgstr "Kortkommando"
 
 #: proclocalize.lngsstools
 msgctxt "proclocalize.lngsstools"
 msgid "Tools"
-msgstr "Werkzeuge"
+msgstr "Verktyg"
 
 #: proclocalize.lngstcharacterspersecondaverage
 #, object-pascal-format
 msgid "Characters per second average: %.2f"
-msgstr "Durchschnittliche Zeichen pro Sekunde (ZPS): %.2f"
+msgstr "Genomsnittligt antal tecken per sekund: %.2f"
 
 #: proclocalize.lngstdurationaverage
 #, object-pascal-format
 msgid "Duration average: %s"
-msgstr "Durchschnittliche Dauer: %s"
+msgstr "Genomsnittlig varaktighet: %s"
 
 #: proclocalize.lngstentrieswithouttext
 #, object-pascal-format
 msgid "Entries without text: %d"
-msgstr "Einträge ohne Text: %d"
+msgstr "Rader utan text: %d"
 
 #: proclocalize.lngstgapaverage
 #, object-pascal-format
 msgid "Gap average: %s"
-msgstr "Durchschnittliche Abstände: %s"
+msgstr "Genomsnittligt mellanrum/lucka: %s"
 
 #: proclocalize.lngstlinelengthaverage
 #, object-pascal-format
 msgid "Line length average: %d"
-msgstr "Durchschnittliche Zeilenlänge: %d"
+msgstr "Genomsnittlig radrängd: %d"
 
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
 msgid "Longest characters per second: %.2f (#%d)"
-msgstr "Höchste Zeichen pro Sekunde (ZPS): %.2f (#%d)"
+msgstr "Högsta tecken per sekund: %.2f (#%d)"
 
 #: proclocalize.lngstlongestduration
 #, object-pascal-format
 msgid "Longest duration: %s (#%d)"
-msgstr "Längste Dauer: %s (#%d)"
+msgstr "Längsta varaktighet: %s (#%d)"
 
 #: proclocalize.lngstlongestgap
 #, object-pascal-format
 msgid "Longest gap: %s (#%d)"
-msgstr "Längste Abstände: %s (#%d)"
+msgstr "Längsta mellanrum/lucka: %s (#%d)"
 
 #: proclocalize.lngstlongestline
 #, object-pascal-format
 msgid "Longest line: %d (#%d)"
-msgstr "Längste Zeile: %d (#%d)"
+msgstr "Längsta rad: %d (#%d)"
 
 #: proclocalize.lngstlongestwordsperminute
 #, object-pascal-format
 msgid "Longest words per minute: %.2f (#%d)"
-msgstr "Höchste Wörter pro Minute (WPM): %.2f (#%d)"
+msgstr "Högsta antal ord per minut: %.2f (#%d)"
 
 #: proclocalize.lngstnumberofcharacters
 #, object-pascal-format
 msgid "Number of characters: %d"
-msgstr "Anzahl der Zeichen: %d"
+msgstr "Antal tecken: %d"
 
 #: proclocalize.lngstnumberofentries
 #, object-pascal-format
 msgid "Number of entries: %d"
-msgstr "Anzahl der Einträge: %d"
+msgstr "Antal rader: %d"
 
 #: proclocalize.lngstnumberofwords
 #, object-pascal-format
 msgid "Number of words: %d"
-msgstr "Anzahl der Wörter: %d"
+msgstr "Antal ord: %d"
 
 #: proclocalize.lngstshortestcharacterspersecond
 #, object-pascal-format
 msgid "Shortest characters per second: %.2f (#%d)"
-msgstr "Niedrigste Zeichen pro Sekunde (ZPS): %.2f (#%d)"
+msgstr "Lägsta tecken per sekund: %.2f (#%d)"
 
 #: proclocalize.lngstshortestduration
 #, object-pascal-format
 msgid "Shortest duration: %s (#%d)"
-msgstr "Kürzeste Dauer: %s (#%d)"
+msgstr "Kortaste varaktighet: %s (#%d)"
 
 #: proclocalize.lngstshortestgap
 #, object-pascal-format
 msgid "Shortest gap: %s (#%d)"
-msgstr "Kürzeste Abstand/Lücke: %s (#%d)"
+msgstr "Kortaste mellanrum/lucka: %s (#%d)"
 
 #: proclocalize.lngstshortestline
 #, object-pascal-format
 msgid "Shortest line: %d (#%d)"
-msgstr "Kürzeste Zeile: %d (#%d)"
+msgstr "Kortaste rad: %d (#%d)"
 
 #: proclocalize.lngstshortestwordsperminute
 #, object-pascal-format
 msgid "Shortest words per minute: %.2f (#%d)"
-msgstr "Niedrigste Wörter pro Minute (WPM): %.2f (#%d)"
+msgstr "Lägsta antal ord per minut: %.2f (#%d)"
 
 #: proclocalize.lngsttotalcharacterspersecond
 #, object-pascal-format
 msgid "Total characters per second: %.2f"
-msgstr "Gesamtanzahl Zeichen pro Sekunde (ZPS): %.2f"
+msgstr "Totalt antal tecken per sekund: %.2f"
 
 #: proclocalize.lngsttotalduration
 #, object-pascal-format
 msgid "Total duration: %s"
-msgstr "Gesamtdauer: %s"
+msgstr "Total varaktighet: %s"
 
 #: proclocalize.lngstwordsperminuteaverage
 #, object-pascal-format
 msgid "Words per minute average: %.2f"
-msgstr "Durchschnittliche Wörter pro Minute (WPM): %.2f"
+msgstr "Genomsnittligt antal ord per minut: %.2f"
 
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
-msgstr "Das aktuelle Untertitel-Set enthält Fehler, deren Behebung empfohlen wird, aber es kann gespeichert werden."
+msgstr "Det aktuella undertextsetet innehåller fel som bör åtgärdas, men det kan sparas ändå."
 
 #: proclocalize.lngsubtitlespecificationerror
 msgid "The current subtitles do not meet the specifications of the format to be saved."
-msgstr "Die aktuellen Untertitel entsprechen nicht den Vorgaben des zu speichernden Formats."
+msgstr "De aktuella undertexterna uppfyller inte kraven för det format som ska sparas."
 
 #: proclocalize.lngsubtitlespecificationerroralign
 msgid "There are entries with vertical alignment which are not allowed."
-msgstr "Es gibt Einträge mit vertikaler Textausrichtung, die nicht erlaubt ist."
+msgstr "Det finns rader med vertikal justering som inte är tillåten."
 
 #: proclocalize.lngsubtitlespecificationerrorbr
 msgid "There are entries which exceed the line break."
-msgstr "Einige Einträge überschreiten den zulässigen Zeilenumbruch."
+msgstr "Vissa rader överskrider tillåten radbrytning."
 
 #: proclocalize.lngsubtitlespecificationerrorfps
 msgid "Current frame rate does not match."
-msgstr "Die aktuelle Bildrate stimmt nicht überein."
+msgstr "Den aktuella bildfrekvensen stämmer inte överens."
 
 #: proclocalize.lngsuccess
 msgid "Success."
-msgstr "Erfolg."
+msgstr "Lyckades."
 
 #: proclocalize.lngsupportedsites
 msgid "Supported sites"
-msgstr "Unterstützte Seiten"
+msgstr "Webbplatser som stöds"
 
 #: proclocalize.lngteexpand
 msgctxt "proclocalize.lngteexpand"
 msgid "Expand"
-msgstr "Erweitern"
+msgstr "Expandera"
 
 #: proclocalize.lngtefinaltime
 msgctxt "proclocalize.lngtefinaltime"
 msgid "Final time"
-msgstr "Endzeit"
+msgstr "Sluttid"
 
 #: proclocalize.lngteindex
 msgctxt "proclocalize.lngteindex"
@@ -1174,12 +1174,12 @@ msgstr "Index"
 #: proclocalize.lngteinitialtime
 msgctxt "proclocalize.lngteinitialtime"
 msgid "Initial time"
-msgstr "Startzeit"
+msgstr "Starttid"
 
 #: proclocalize.lngtereduce
 msgctxt "proclocalize.lngtereduce"
 msgid "Reduce"
-msgstr "Reduzieren"
+msgstr "Minska"
 
 #: proclocalize.lngtetext
 msgctxt "proclocalize.lngtetext"
@@ -1189,52 +1189,52 @@ msgstr "Text"
 #: proclocalize.lngtetime
 msgctxt "proclocalize.lngtetime"
 msgid "Time"
-msgstr "Zeit"
+msgstr "Tid"
 
 #: proclocalize.lngtextformatted
 msgid "Export formatted text?"
-msgstr "Formatierten Text exportieren?"
+msgstr "Exportera formaterad text?"
 
 #: proclocalize.lngtranscribing
 msgid "Transcribing..."
-msgstr "Transkription läuft..."
+msgstr "Transkriberar..."
 
 #: proclocalize.lngtranscriptionmodeexit
 msgid "Exiting transcription mode will lose any unsaved changes."
-msgstr "Das Verlassen des Transkriptionsmodus verwirft nicht gespeicherte Änderungen."
+msgstr "Om du lämnar transkriptionsläget går osparade ändringar förlorade."
 
 #: proclocalize.lngtranslated
 msgctxt "proclocalize.lngtranslated"
 msgid "Translated"
-msgstr "Übersetzt"
+msgstr "Översatt"
 
 #: proclocalize.lngtranslationfilechanged
 msgid "Translation file has not been saved."
-msgstr "Die Übersetzungsdatei wurde nicht gespeichert."
+msgstr "Översättningsfilen har inte sparats."
 
 #: proclocalize.lngttip1
 #, object-pascal-format
 msgid "Tip: Use <%s/%s> to go to previous/next entry"
-msgstr "Tipp: Verwende <%s/%s>, um zum vorherigen/nächsten Eintrag zu springen"
+msgstr "Tips: Använd <%s/%s> för att gå till föregående/nästa rad"
 
 #: proclocalize.lngttip2
 #, object-pascal-format
 msgid "Tip: Use <%s> for a web word reference"
-msgstr "Tipp: Verwende <%s>, um eine Online-Wortreferenz zu öffnen"
+msgstr "Tips: Använd <%s> för att slå upp ett ord på webben"
 
 #: proclocalize.lngttip3
 #, object-pascal-format
 msgid "Tip: Use <%s> dock/undock video window"
-msgstr "Tipp: Verwende <%s>, um das Video-Fenster anzudocken/abzudocken"
+msgstr "Tips: Använd <%s> för att fästa/lossa videofönstret"
 
 #: proclocalize.lngttip4
 #, object-pascal-format
 msgid "Tip: Use <%s> dock/undock waveform window"
-msgstr "Tipp: Verwende <%s>, um das Wellenform-Fenster anzudocken/abzudocken"
+msgstr "Tips: Använd <%s> för att fästa/lossa vågformsfönstret"
 
 #: proclocalize.lngunabletoload
 msgid "Error loading file, unrecognized format."
-msgstr "Fehler beim Laden der Datei: Unbekanntes Format."
+msgstr "Fel vid inläsning av fil: Okänt format."
 
 #: proclocalize.lngurl
 msgid "URL"
@@ -1242,50 +1242,50 @@ msgstr "URL"
 
 #: proclocalize.lngvdgeneratingtts
 msgid "Generating text to speech..."
-msgstr "Text-zu-Sprache wird generiert..."
+msgstr "Skapar text-till-tal..."
 
 #: proclocalize.lngvdgeneratingvideo
 msgid "Generating video dubbing..."
-msgstr "Video-Synchronisierung wird erstellt..."
+msgstr "Skapar videosynkronisering..."
 
 #: proclocalize.lngvdquotaexceeded
 msgid "We couldn't process this request because you've exceeded your quota."
-msgstr "Die Anfrage konnte nicht verarbeitet werden, da dein Kontingent überschritten wurde."
+msgstr "Begäran kunde inte behandlas eftersom din kvot har överskridits."
 
 #: proclocalize.lngvdvoice
 msgid "Voice"
-msgstr "Stimme"
+msgstr "Röst"
 
 #: proclocalize.lngviaudiotracks
 #, object-pascal-format
 msgid "Audio tracks: %d"
-msgstr "Audio-/Tonspuren: %d"
+msgstr "Ljudspår: %d"
 
 #: proclocalize.lngvideoerroraoinitfailed
 msgid "Initializing the audio output failed."
-msgstr "Initialisierung der Audio-/Tonausgabe fehlgeschlagen."
+msgstr "Det gick inte att initiera ljudutgången."
 
 #: proclocalize.lngvideoerrornothingtoplay
 msgid "There was no audio or video stream to play."
-msgstr "Kein Audio-/Ton- oder Videostream zum Abspielen vorhanden."
+msgstr "Det finns inget ljud- eller videoström att spela upp."
 
 #: proclocalize.lngvideoerrorvoinitfailed
 msgid "Initializing the video output failed."
-msgstr "Initialisierung der Videoausgabe fehlgeschlagen."
+msgstr "Det gick inte att initiera videoutgången."
 
 #: proclocalize.lngvideogenerationfailed
 msgid "Video generation failed."
-msgstr "Videoerstellung fehlgeschlagen."
+msgstr "Videogenerering misslyckades."
 
 #: proclocalize.lngviduration
 #, object-pascal-format
 msgid "Duration: %s (%d frames)"
-msgstr "Dauer: %s (%d Bilder)"
+msgstr "Varaktighet: %s (%d bildrutor)"
 
 #: proclocalize.lngvifile
 #, object-pascal-format
 msgid "File: %s"
-msgstr "Datei: %s"
+msgstr "Fil: %s"
 
 #: proclocalize.lngvifps
 #, object-pascal-format
@@ -1295,47 +1295,47 @@ msgstr "BPS: %s"
 #: proclocalize.lngviresolution
 #, object-pascal-format
 msgid "Resolution: %dx%d"
-msgstr "Auflösung: %dx%d"
+msgstr "Upplösning: %dx%d"
 
 #: proclocalize.lngvisubtitletracks
 #, object-pascal-format
 msgid "Subtitle tracks: %d"
-msgstr "Untertitelspuren: %d"
+msgstr "Undertextspår: %d"
 
 #: proclocalize.lngvivideotracks
 #, object-pascal-format
 msgid "Video tracks: %d"
-msgstr "Videospuren: %d"
+msgstr "Videospår: %d"
 
 #: proclocalize.lngwebvideounsupported
 msgid "The video format is not supported for playback in the web browser."
-msgstr "Das Videoformat wird vom Webbrowser nicht unterstützt."
+msgstr "Videoformatet stöds inte för uppspelning i webbläsaren."
 
 #: proclocalize.lngwizlanguage
 msgctxt "proclocalize.lngwizlanguage"
 msgid "Language"
-msgstr "Sprache"
+msgstr "Språk"
 
 #: proclocalize.lngwritedenieded
 msgid "Write denied. Please check folder permissions."
 msgstr ""
-"Schreibvorgang verweigert. \n"
-"Bitte überprüfe die Ordnerberechtigungen."
+"Skrivning nekad. \n"
+"Kontrollera mappens behörigheter."
 
 #: proclocalize.lngwritestatus
 #, object-pascal-format
 msgid "Writing %d/%d"
-msgstr "Schreibe %d/%d"
+msgstr "Skriver %d/%d"
 
 #: tfrmabout.btnclose.caption
 msgctxt "tfrmabout.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmabout.caption
 msgctxt "tfrmabout.caption"
 msgid "About"
-msgstr "Info"
+msgstr "Om"
 
 #: tfrmabout.lbldonate.caption
 msgctxt "tfrmabout.lbldonate.caption"
@@ -1343,9 +1343,9 @@ msgid ""
 "If you like this software, please consider making a donation.\n"
 "Click here to do it."
 msgstr ""
-"Wenn Ihnen diese Software gefällt,\n"
-"ziehen Sie bitte eine Spende in Betracht.\n"
-"Klicken Sie hier, um zu spenden."
+"Om du gillar det här programmet,\n"
+"överväg att göra en donation.\n"
+"Klicka här för att donera."
 
 #: tfrmactors.btnactoradd.caption
 msgctxt "tfrmactors.btnactoradd.caption"
@@ -1360,27 +1360,27 @@ msgstr "-"
 #: tfrmactors.btnapply.caption
 msgctxt "tfrmactors.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmactors.btnclose.caption
 msgctxt "tfrmactors.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmactors.caption
 msgctxt "tfrmactors.caption"
 msgid "Actors"
-msgstr "Sprecher"
+msgstr "Talare"
 
 #: tfrmadjustsubtitle.btnapply.caption
 msgctxt "tfrmadjustsubtitle.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmadjustsubtitle.btnclose.caption
 msgctxt "tfrmadjustsubtitle.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmadjustsubtitle.btnminus.caption
 msgctxt "tfrmadjustsubtitle.btnminus.caption"
@@ -1394,32 +1394,32 @@ msgstr "+"
 
 #: tfrmadjustsubtitle.caption
 msgid "Adjust subtitle"
-msgstr "Untertitel anpassen"
+msgstr "Justera undertext"
 
 #: tfrmadjustsubtitle.lblfirstspoken.caption
 msgid "First spoken line"
-msgstr "Erste gesprochene Zeile"
+msgstr "Första talade raden"
 
 #: tfrmadjustsubtitle.lblindex.caption
 msgid "Subtitle #"
-msgstr "Untertitel #"
+msgstr "Undertext #"
 
 #: tfrmadjustsubtitle.lbllastspoken.caption
 msgid "Last spoken line"
-msgstr "Letzte gesprochene Zeile"
+msgstr "Sista talade raden"
 
 #: tfrmadjustsubtitle.rdoadvanced.caption
 msgid "Advanced"
-msgstr "Erweitert"
+msgstr "Avancerat"
 
 #: tfrmadjustsubtitle.rdosimple.caption
 msgid "Simple"
-msgstr "Einfach"
+msgstr "Enkelt"
 
 #: tfrmaudiototext.btnclose.caption
 msgctxt "tfrmaudiototext.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmaudiototext.btnengine.caption
 msgctxt "tfrmaudiototext.btnengine.caption"
@@ -1429,7 +1429,7 @@ msgstr "..."
 #: tfrmaudiototext.btngenerate.caption
 msgctxt "tfrmaudiototext.btngenerate.caption"
 msgid "Generate"
-msgstr "Erzeugen"
+msgstr "Generera"
 
 #: tfrmaudiototext.btnmodel.caption
 msgctxt "tfrmaudiototext.btnmodel.caption"
@@ -1439,21 +1439,21 @@ msgstr "..."
 #: tfrmaudiototext.caption
 msgctxt "tfrmaudiototext.caption"
 msgid "Audio to text"
-msgstr "Audio/Ton zu Text"
+msgstr "Ljud till text"
 
 #: tfrmaudiototext.chkmaxlinecount.caption
 msgctxt "tfrmaudiototext.chkmaxlinecount.caption"
 msgid "Maximum line count"
-msgstr "Maximale Zeilenzahl"
+msgstr "Maximalt antal rader"
 
 #: tfrmaudiototext.chkmaxlinelength.caption
 msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
 msgid "Maximum line length"
-msgstr "Maximale Zeilenlänge"
+msgstr "Maximal radlängd"
 
 #: tfrmaudiototext.chktranslate.caption
 msgid "Translate to Еnglish"
-msgstr "Ins Englische übersetzen"
+msgstr "Översätt till engelska"
 
 #: tfrmaudiototext.lblengine.caption
 msgid "Engine"
@@ -1462,7 +1462,7 @@ msgstr "Motor"
 #: tfrmaudiototext.lbllanguage.caption
 msgctxt "tfrmaudiototext.lbllanguage.caption"
 msgid "Language"
-msgstr "Sprache"
+msgstr "Språk"
 
 #: tfrmaudiototext.lblmodel.caption
 msgid "Model"
@@ -1470,99 +1470,99 @@ msgstr "Modell"
 
 #: tfrmaudiototext.lbltrack.caption
 msgid "Track"
-msgstr "Spur"
+msgstr "Spår"
 
 #: tfrmaudiototext.rbnaddsubtitleswhiletranscribing.caption
 msgid "Add subtitles while transcribing"
-msgstr "Untertitel während der Transkription hinzufügen"
+msgstr "Lägg till undertexter under transkriberingen"
 
 #: tfrmaudiototext.rbnloadsubtitlesaftertranscript.caption
 msgid "Load subtitles after transcription"
-msgstr "Untertitel nach der Transkription laden"
+msgstr "Ladda undertexter efter transkribering"
 
 #: tfrmaudiototextmodel.btnclose.caption
 msgctxt "tfrmaudiototextmodel.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmaudiototextmodel.btndownload.caption
 msgctxt "tfrmaudiototextmodel.btndownload.caption"
 msgid "Download"
-msgstr "Herunterladen"
+msgstr "Ladda ned"
 
 #: tfrmaudiototextmodel.caption
 msgid "Audio to text model"
-msgstr "Modell: Audio/Ton zu Text"
+msgstr "Modell: Ljud till text"
 
 #: tfrmautomaticdurations.btnapply.caption
 msgctxt "tfrmautomaticdurations.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmautomaticdurations.btnclose.caption
 msgctxt "tfrmautomaticdurations.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmautomaticdurations.caption
 msgid "Automatic durations"
-msgstr "Automatische Dauer"
+msgstr "Automatisk varaktighet"
 
 #: tfrmautomaticdurations.lblchars.caption
 msgid "per character"
-msgstr "pro Zeichen"
+msgstr "per tecken"
 
 #: tfrmautomaticdurations.lblcondition.caption
 msgid "Apply if:"
-msgstr "Übernehmen, wenn:"
+msgstr "Verkställ om:"
 
 #: tfrmautomaticdurations.lblline.caption
 msgid "per line"
-msgstr "pro Zeile"
+msgstr "per rad"
 
 #: tfrmautomaticdurations.lblscope.caption
 msgctxt "tfrmautomaticdurations.lblscope.caption"
 msgid "Scope:"
-msgstr "Bereich:"
+msgstr "Omfång:"
 
 #: tfrmautomaticdurations.lblword.caption
 msgid "per word"
-msgstr "pro Wort"
+msgstr "per ord"
 
 #: tfrmautomaticdurations.rbnallthesubtitles.caption
 msgctxt "tfrmautomaticdurations.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Alle Einträge"
+msgstr "Alla poster"
 
 #: tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
-msgstr "Ab gewähltem Eintrag"
+msgstr "Från vald post"
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
-msgstr "Nur ausgewählte Einträge"
+msgstr "Endast valda poster"
 
 #: tfrmbatchconvert.btnadd.caption
 msgctxt "tfrmbatchconvert.btnadd.caption"
 msgid "Add..."
-msgstr "Hinzufügen..."
+msgstr "Lägg till..."
 
 #: tfrmbatchconvert.btnapply.caption
 msgctxt "tfrmbatchconvert.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmbatchconvert.btnclose.caption
 msgctxt "tfrmbatchconvert.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmbatchconvert.btninvert.caption
 msgctxt "tfrmbatchconvert.btninvert.caption"
 msgid "Invert"
-msgstr "Invertieren"
+msgstr "Invertera"
 
 #: tfrmbatchconvert.btnopenfolder.caption
 msgctxt "tfrmbatchconvert.btnopenfolder.caption"
@@ -1572,26 +1572,26 @@ msgstr "..."
 #: tfrmbatchconvert.btnremove.caption
 msgctxt "tfrmbatchconvert.btnremove.caption"
 msgid "Remove"
-msgstr "Entfernen"
+msgstr "Ta bort"
 
 #: tfrmbatchconvert.btnscanfolder.caption
 msgctxt "tfrmbatchconvert.btnscanfolder.caption"
 msgid "Scan..."
-msgstr "Scannen..."
+msgstr "Skanna..."
 
 #: tfrmbatchconvert.btnselectall.caption
 msgctxt "tfrmbatchconvert.btnselectall.caption"
 msgid "Select all"
-msgstr "Alle auswählen"
+msgstr "Markera alla"
 
 #: tfrmbatchconvert.caption
 msgid "Batch convert"
-msgstr "Stapelkonvertierung"
+msgstr "Batchkonvertering"
 
 #: tfrmbatchconvert.lblencoding.caption
 msgctxt "tfrmbatchconvert.lblencoding.caption"
 msgid "Encoding"
-msgstr "Kodierung"
+msgstr "Kodning"
 
 #: tfrmbatchconvert.lblformat.caption
 msgctxt "tfrmbatchconvert.lblformat.caption"
@@ -1600,35 +1600,35 @@ msgstr "Format"
 
 #: tfrmbatchconvert.lblfromfps.caption
 msgid "Input FPS"
-msgstr "Eingabe-BPS"
+msgstr "Ingångs-BPS"
 
 #: tfrmbatchconvert.lbloutput.caption
 msgctxt "tfrmbatchconvert.lbloutput.caption"
 msgid "Output:"
-msgstr "Ausgabe:"
+msgstr "Utdata:"
 
 #: tfrmbatchconvert.lbloutputfolder.caption
 msgctxt "tfrmbatchconvert.lbloutputfolder.caption"
 msgid "Folder"
-msgstr "Ordner"
+msgstr "Mapp"
 
 #: tfrmbatchconvert.lbltofps.caption
 msgid "Output FPS"
-msgstr "Ausgabe-BPS"
+msgstr "Utgångs-BPS"
 
 #: tfrmcharactermap.btnclose.caption
 msgctxt "tfrmcharactermap.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmcharactermap.btncopy.caption
 msgctxt "tfrmcharactermap.btncopy.caption"
 msgid "Copy"
-msgstr "Kopieren"
+msgstr "Kopiera"
 
 #: tfrmcharactermap.btninsert.caption
 msgid "Insert"
-msgstr "Einfügen"
+msgstr "Infoga"
 
 #: tfrmcharactermap.btnminus.caption
 msgctxt "tfrmcharactermap.btnminus.caption"
@@ -1642,20 +1642,20 @@ msgstr "+"
 
 #: tfrmcharactermap.caption
 msgid "Character Map"
-msgstr "Zeichentabelle"
+msgstr "Teckentabell"
 
 #: tfrmcharactermap.lblfavorites.caption
 msgid "Favorites"
-msgstr "Favoriten"
+msgstr "Favoriter"
 
 #: tfrmcharactermap.lblunicoderange.caption
 msgid "Range"
-msgstr "Bereich"
+msgstr "Område"
 
 #: tfrmcompare.btnclose.caption
 msgctxt "tfrmcompare.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmcompare.btnfile1.caption
 msgctxt "tfrmcompare.btnfile1.caption"
@@ -1669,78 +1669,78 @@ msgstr "..."
 
 #: tfrmcompare.caption
 msgid "Compare"
-msgstr "Vergleichen"
+msgstr "Jämför"
 
 #: tfrmconventions.btnadd.caption
 msgctxt "tfrmconventions.btnadd.caption"
 msgid "Add"
-msgstr "Hinzufügen"
+msgstr "Lägg till"
 
 #: tfrmconventions.btnclose.caption
 msgctxt "tfrmconventions.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmconventions.btnremove.caption
 msgctxt "tfrmconventions.btnremove.caption"
 msgid "Remove"
-msgstr "Entfernen"
+msgstr "Ta bort"
 
 #: tfrmconventions.btnupdate.caption
 msgctxt "tfrmconventions.btnupdate.caption"
 msgid "Update"
-msgstr "Aktualisierung"
+msgstr "Uppdatera"
 
 #: tfrmconventions.caption
 msgctxt "tfrmconventions.caption"
 msgid "Conventions"
-msgstr "Konventionen"
+msgstr "Konventioner"
 
 #: tfrmconvertcase.btnapply.caption
 msgctxt "tfrmconvertcase.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmconvertcase.btnclose.caption
 msgctxt "tfrmconvertcase.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmconvertcase.caption
 msgid "Convert case"
-msgstr "Gross-/Kleinschreibung umwandeln"
+msgstr "Ändra skiftläge"
 
 #: tfrmconvertcase.lblscope.caption
 msgctxt "tfrmconvertcase.lblscope.caption"
 msgid "Scope:"
-msgstr "Bereich:"
+msgstr "Omfång:"
 
 #: tfrmconvertcase.rbnallthesubtitles.caption
 msgctxt "tfrmconvertcase.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Alle Einträge"
+msgstr "Alla poster"
 
 #: tfrmconvertcase.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmconvertcase.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected entry"
-msgstr "Vom ausgewählten Eintrag"
+msgstr "Från vald post"
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
-msgstr "Nur ausgewählte Einträge"
+msgstr "Endast valda poster"
 
 #: tfrmconvertcase.rdoinversetype.caption
 msgid "iNVERSE tYPE"
-msgstr "uMGEKEHRTER fORMAT"
+msgstr "oMVÄNT sKIFTLÄGE"
 
 #: tfrmconvertcase.rdolowercase.caption
 msgid "lowercase"
-msgstr "kleingeschrieben"
+msgstr "små bokstäver"
 
 #: tfrmconvertcase.rdosentencetype.caption
 msgid "Sentence type"
-msgstr "Satzformat"
+msgstr "Meningsformat"
 
 #: tfrmconvertcase.rdotitletype.caption
 msgid "Title Type"
@@ -1748,17 +1748,17 @@ msgstr "Titelformat"
 
 #: tfrmconvertcase.rdouppercase.caption
 msgid "UPPERCASE"
-msgstr "GROSSGESCHRIEBEN"
+msgstr "STORA BOKSTÄVER"
 
 #: tfrmcustomfiledlg.btnapply.caption
 msgctxt "tfrmcustomfiledlg.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmcustomfiledlg.btncancel.caption
 msgctxt "tfrmcustomfiledlg.btncancel.caption"
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Avbryt"
 
 #: tfrmcustomfiledlg.btnopenfile.caption
 msgctxt "tfrmcustomfiledlg.btnopenfile.caption"
@@ -1768,12 +1768,12 @@ msgstr "..."
 #: tfrmcustomfiledlg.lblencoding.caption
 msgctxt "tfrmcustomfiledlg.lblencoding.caption"
 msgid "Encoding"
-msgstr "Kodierung"
+msgstr "Kodning"
 
 #: tfrmcustomfiledlg.lblfilename.caption
 msgctxt "tfrmcustomfiledlg.lblfilename.caption"
 msgid "Filename"
-msgstr "Dateiname"
+msgstr "Filnamn"
 
 #: tfrmcustomfiledlg.lblformat.caption
 msgctxt "tfrmcustomfiledlg.lblformat.caption"
@@ -1788,7 +1788,7 @@ msgstr "BPS"
 #: tfrmcustomimageformat.btnclose.caption
 msgctxt "tfrmcustomimageformat.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmcustomimageformat.btnfolder.caption
 msgctxt "tfrmcustomimageformat.btnfolder.caption"
@@ -1803,26 +1803,26 @@ msgstr "..."
 #: tfrmcustomimageformat.btnsave.caption
 msgctxt "tfrmcustomimageformat.btnsave.caption"
 msgid "Save..."
-msgstr "Speichern..."
+msgstr "Spara..."
 
 #: tfrmcustomimageformat.caption
 msgid "Custom image format"
-msgstr "Benutzerdefiniertes Bildformat"
+msgstr "Anpassat bildformat"
 
 #: tfrmcustomimageformat.lblfolder.caption
 msgctxt "tfrmcustomimageformat.lblfolder.caption"
 msgid "Folder"
-msgstr "Ordner"
+msgstr "Mapp"
 
 #: tfrmcustomimageformat.lblfont.caption
 msgctxt "tfrmcustomimageformat.lblfont.caption"
 msgid "Font"
-msgstr "Schriftart"
+msgstr "Typsnitt"
 
 #: tfrmcustomimageformat.lblfontsize.caption
 msgctxt "tfrmcustomimageformat.lblfontsize.caption"
 msgid "Size"
-msgstr "Grösse"
+msgstr "Storlek"
 
 #: tfrmcustomimageformat.lblfps.caption
 msgctxt "tfrmcustomimageformat.lblfps.caption"
@@ -1831,16 +1831,16 @@ msgstr "BPS"
 
 #: tfrmcustomimageformat.lblimagesize.caption
 msgid "Image size"
-msgstr "Bildgrösse"
+msgstr "Bildstorlek"
 
 #: tfrmcustomimageformat.lblprefix.caption
 msgid "Prefix"
-msgstr "Präfix"
+msgstr "Prefix"
 
 #: tfrmcustomimageformat.lblsafearea.caption
 msgctxt "tfrmcustomimageformat.lblsafearea.caption"
 msgid "Safe area pixels (left, top, right, bottom)"
-msgstr "Sicherheitsabstand in Pixeln (links, oben, rechts, unten)"
+msgstr "Säkerhetsområde i pixlar (vänster, övre, höger, nedre)"
 
 #: tfrmcustomimageformat.lblscript.caption
 msgctxt "tfrmcustomimageformat.lblscript.caption"
@@ -1855,7 +1855,7 @@ msgstr "x"
 #: tfrmcustominputdlg.btncancel.caption
 msgctxt "tfrmcustominputdlg.btncancel.caption"
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Avbryt"
 
 #: tfrmcustominputdlg.btnok.caption
 msgctxt "tfrmcustominputdlg.btnok.caption"
@@ -1869,17 +1869,17 @@ msgstr "OK"
 
 #: tfrmcustommessagedlg.lblmessage.caption
 msgid "Message"
-msgstr "Nachricht"
+msgstr "Meddelande"
 
 #: tfrmcustomquestiondlg.btncancel.caption
 msgctxt "tfrmcustomquestiondlg.btncancel.caption"
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Avbryt"
 
 #: tfrmcustomquestiondlg.btnno.caption
 msgctxt "tfrmcustomquestiondlg.btnno.caption"
 msgid "No"
-msgstr "Nein"
+msgstr "Nej"
 
 #: tfrmcustomquestiondlg.btnyes.caption
 msgctxt "tfrmcustomquestiondlg.btnyes.caption"
@@ -1888,7 +1888,7 @@ msgstr "Ja"
 
 #: tfrmcustomquestiondlg.lblquestion.caption
 msgid "Question"
-msgstr "Frage"
+msgstr "Fråga"
 
 #: tfrmcustomquestiondlg.lbltitle.caption
 msgctxt "tfrmcustomquestiondlg.lbltitle.caption"
@@ -1898,7 +1898,7 @@ msgstr "Titel"
 #: tfrmcustomselectdlg.btncancel.caption
 msgctxt "tfrmcustomselectdlg.btncancel.caption"
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Avbryt"
 
 #: tfrmcustomselectdlg.btnok.caption
 msgctxt "tfrmcustomselectdlg.btnok.caption"
@@ -1908,7 +1908,7 @@ msgstr "OK"
 #: tfrmcustomselectdlgwithpreview.btncancel.caption
 msgctxt "tfrmcustomselectdlgwithpreview.btncancel.caption"
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Avbryt"
 
 #: tfrmcustomselectdlgwithpreview.btnok.caption
 msgctxt "tfrmcustomselectdlgwithpreview.btnok.caption"
@@ -1918,25 +1918,25 @@ msgstr "OK"
 #: tfrmcustomtextformat.btnclose.caption
 msgctxt "tfrmcustomtextformat.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmcustomtextformat.btnsave.caption
 msgctxt "tfrmcustomtextformat.btnsave.caption"
 msgid "Save..."
-msgstr "Speichern..."
+msgstr "Spara..."
 
 #: tfrmcustomtextformat.caption
 msgid "Custom text format"
-msgstr "Benutzerdefiniertes Textformat"
+msgstr "Anpassat textformat"
 
 #: tfrmcustomtextformat.lblencoding.caption
 msgctxt "tfrmcustomtextformat.lblencoding.caption"
 msgid "Encoding"
-msgstr "Kodierung"
+msgstr "Kodning"
 
 #: tfrmcustomtextformat.lblextension.caption
 msgid "Extension"
-msgstr "Erweiterung"
+msgstr "Filändelse"
 
 #: tfrmcustomtextformat.lblfps.caption
 msgctxt "tfrmcustomtextformat.lblfps.caption"
@@ -1945,7 +1945,7 @@ msgstr "BPS"
 
 #: tfrmcustomtextformat.lblnewlinechar.caption
 msgid "New line char"
-msgstr "Zeilenumbruch-Zeichen"
+msgstr "Radbrytningstecken"
 
 #: tfrmcustomtextformat.lblscript.caption
 msgctxt "tfrmcustomtextformat.lblscript.caption"
@@ -1954,16 +1954,16 @@ msgstr "Skript"
 
 #: tfrmcustomtextformat.lblseparatorchar.caption
 msgid "Separator"
-msgstr "Trennzeichen"
+msgstr "Avgränsare"
 
 #: tfrmcustomtextformat.lbltimecode.caption
 msgctxt "tfrmcustomtextformat.lbltimecode.caption"
 msgid "Time code"
-msgstr "Zeitcode"
+msgstr "Tidskod"
 
 #: tfrmcustomtextformat.lbltimeformat.caption
 msgid "Time format"
-msgstr "Zeitformat"
+msgstr "Tidsformat"
 
 #: tfrmcustomtextformat.lbltitle.caption
 msgctxt "tfrmcustomtextformat.lbltitle.caption"
@@ -1973,16 +1973,16 @@ msgstr "Titel"
 #: tfrmdelay.btnapply.caption
 msgctxt "tfrmdelay.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmdelay.btnclose.caption
 msgctxt "tfrmdelay.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmdelay.caption
 msgid "Set delay"
-msgstr "Verzögerung einstellen"
+msgstr "Ange fördröjning"
 
 #: tfrmdelay.cbomode.text
 msgctxt "tfrmdelay.cbomode.text"
@@ -1992,99 +1992,99 @@ msgstr "+"
 #: tfrmdelay.lblscope.caption
 msgctxt "tfrmdelay.lblscope.caption"
 msgid "Scope:"
-msgstr "Bereich:"
+msgstr "Omfattning:"
 
 #: tfrmdelay.rbnallthesubtitles.caption
 msgctxt "tfrmdelay.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Alle Einträge"
+msgstr "Alla poster"
 
 #: tfrmdelay.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmdelay.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
-msgstr "Ab ausgewähltem Eintrag"
+msgstr "Från vald post"
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
-msgstr "Nur ausgewählte Einträge"
+msgstr "Endast valda poster"
 
 #: tfrmdownload.btncancel.caption
 msgctxt "tfrmdownload.btncancel.caption"
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Avbryt"
 
 #: tfrmdownload.caption
 msgctxt "tfrmdownload.caption"
 msgid "Downloading"
-msgstr "Wird heruntergeladen"
+msgstr "Laddar ned"
 
 #: tfrmdownload.lblelapsed.caption
 msgid "Elapsed:"
-msgstr "Vergangen:"
+msgstr "Tid som gått:"
 
 #: tfrmdownload.lblfile.caption
 msgid "File:"
-msgstr "Datei:"
+msgstr "Fil:"
 
 #: tfrmdownload.lblreceived.caption
 msgid "Received:"
-msgstr "Empfangen:"
+msgstr "Mottaget:"
 
 #: tfrmdownload.lblremaining.caption
 msgid "Remaining:"
-msgstr "Verbleibend:"
+msgstr "Återstår:"
 
 #: tfrmdownload.lblspeed.caption
 msgid "Speed:"
-msgstr "Geschwindigkeit:"
+msgstr "Hastighet:"
 
 #: tfrmdurationlimits.btnapply.caption
 msgctxt "tfrmdurationlimits.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmdurationlimits.btnclose.caption
 msgctxt "tfrmdurationlimits.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmdurationlimits.caption
 msgid "Duration limits"
-msgstr "Dauerbegrenzungen"
+msgstr "Tidsgränser"
 
 #: tfrmdurationlimits.chksetmaxduration.caption
 msgid "Set maximum duration (ms)"
-msgstr "Maximale Dauer festlegen (ms)"
+msgstr "Ange maximal längd (ms)"
 
 #: tfrmdurationlimits.chksetminduration.caption
 msgid "Set minimum duration (ms)"
-msgstr "Minimale Dauer festlegen (ms)"
+msgstr "Ange minimal längd (ms)"
 
 #: tfrmdurationlimits.lblscope.caption
 msgctxt "tfrmdurationlimits.lblscope.caption"
 msgid "Scope:"
-msgstr "Bereich:"
+msgstr "Omfattning:"
 
 #: tfrmdurationlimits.rbnallthesubtitles.caption
 msgctxt "tfrmdurationlimits.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Alle Einträge"
+msgstr "Alla poster"
 
 #: tfrmdurationlimits.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmdurationlimits.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected entry"
-msgstr "Ab ausgewähltem Eintrag"
+msgstr "Från vald post"
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
-msgstr "Nur ausgewählte Einträge"
+msgstr "Endast valda poster"
 
 #: tfrmexportsup.btnclose.caption
 msgctxt "tfrmexportsup.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmexportsup.btnres.caption
 msgctxt "tfrmexportsup.btnres.caption"
@@ -2094,7 +2094,7 @@ msgstr "..."
 #: tfrmexportsup.btnsave.caption
 msgctxt "tfrmexportsup.btnsave.caption"
 msgid "Save..."
-msgstr "Speichern..."
+msgstr "Spara..."
 
 #: tfrmexportsup.caption
 msgid "Blu-ray SUP"
@@ -2103,22 +2103,22 @@ msgstr "Blu-ray SUP"
 #: tfrmexportsup.lblfont.caption
 msgctxt "tfrmexportsup.lblfont.caption"
 msgid "Font"
-msgstr "Schriftart"
+msgstr "Teckensnitt"
 
 #: tfrmexportsup.lblfontsize.caption
 msgctxt "tfrmexportsup.lblfontsize.caption"
 msgid "Size"
-msgstr "Grösse"
+msgstr "Storlek"
 
 #: tfrmexportsup.lblsafearea.caption
 msgctxt "tfrmexportsup.lblsafearea.caption"
 msgid "Safe area pixels (left, top, right, bottom)"
-msgstr "Sicherheitsbereich in Pixel (links, oben, rechts, unten)"
+msgstr "Säkerhetsmarginal i pixlar (vänster, topp, höger, botten)"
 
 #: tfrmexportsup.lblvideores.caption
 msgctxt "tfrmexportsup.lblvideores.caption"
 msgid "Video resolution"
-msgstr "Videoauflösung"
+msgstr "Video­upplösning"
 
 #: tfrmexportsup.lblx.caption
 msgctxt "tfrmexportsup.lblx.caption"
@@ -2128,92 +2128,92 @@ msgstr "x"
 #: tfrmfindandreplace.btnclose.caption
 msgctxt "tfrmfindandreplace.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmfindandreplace.btnfind.caption
 msgctxt "tfrmfindandreplace.btnfind.caption"
 msgid "Find"
-msgstr "Suchen"
+msgstr "Sök"
 
 #: tfrmfindandreplace.btnfindnext.caption
 msgctxt "tfrmfindandreplace.btnfindnext.caption"
 msgid "Find next"
-msgstr "Weitersuchen"
+msgstr "Sök nästa"
 
 #: tfrmfindandreplace.btnfindprev.caption
 msgid "Find prev"
-msgstr "Vorheriger"
+msgstr "Föregående"
 
 #: tfrmfindandreplace.btnreplace.caption
 msgctxt "tfrmfindandreplace.btnreplace.caption"
 msgid "Replace"
-msgstr "Ersetzen"
+msgstr "Ersätt"
 
 #: tfrmfindandreplace.btnreplaceall.caption
 msgid "Replace all"
-msgstr "Alle ersetzen"
+msgstr "Ersätt alla"
 
 #: tfrmfindandreplace.caption
 msgid "Find and replace"
-msgstr "Suchen und Ersetzen"
+msgstr "Sök och ersätt"
 
 #: tfrmfindandreplace.chkcasesensitive.caption
 msgid "Case-sensitive"
-msgstr "Gross-/Kleinschreibung beachten"
+msgstr "Skiftlägeskänslig"
 
 #: tfrmfindandreplace.chkpreservecaseonreplace.caption
 msgid "Preserve case on replace"
-msgstr "Gross-/Kleinschreibung beim Ersetzen beibehalten"
+msgstr "Behåll skiftläge vid ersättning"
 
 #: tfrmfindandreplace.chkregularexpression.caption
 msgid "Use regular expression"
-msgstr "Regulären Ausdruck verwenden"
+msgstr "Använd reguljärt uttryck"
 
 #: tfrmfindandreplace.chkreplacewith.caption
 msgctxt "tfrmfindandreplace.chkreplacewith.caption"
 msgid "Replace with:"
-msgstr "Ersetzen durch:"
+msgstr "Ersätt med:"
 
 #: tfrmfindandreplace.chkwholeword.caption
 msgid "Whole word"
-msgstr "Ganzes Wort"
+msgstr "Hela ordet"
 
 #: tfrmfindandreplace.lbloptions.caption
 msgid "Options:"
-msgstr "Optionen:"
+msgstr "Alternativ:"
 
 #: tfrmfindandreplace.lblscope.caption
 msgctxt "tfrmfindandreplace.lblscope.caption"
 msgid "Scope:"
-msgstr "Bereich:"
+msgstr "Omfattning:"
 
 #: tfrmfindandreplace.lbltexttofind.caption
 msgid "Text to find:"
-msgstr "Zu suchender Text:"
+msgstr "Text att söka efter:"
 
 #: tfrmfindandreplace.rbnallthesubtitles.caption
 msgctxt "tfrmfindandreplace.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Alle Einträge"
+msgstr "Alla poster"
 
 #: tfrmfindandreplace.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
-msgstr "Ab ausgewähltem Eintrag"
+msgstr "Från vald post"
 
 #: tfrmfixsubtitles.btnapply.caption
 msgctxt "tfrmfixsubtitles.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmfixsubtitles.btnclose.caption
 msgctxt "tfrmfixsubtitles.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmfixsubtitles.caption
 msgid "Fix subtitles"
-msgstr "Untertitel korrigieren"
+msgstr "Korrigera undertexter"
 
 #: tfrmfixsubtitles.lblconvention.caption
 msgid "Convention"
@@ -2221,76 +2221,76 @@ msgstr "Konvention"
 
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
-msgstr "OCR-Skript"
+msgstr "OCR-skript"
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
 msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
 msgid "Spacing of opening hyphen"
-msgstr "Abstand nach öffnendem Gedankenstrich"
+msgstr "Avstånd efter inledande tankstreck"
 
 #: tfrmfixsubtitles.mnudeselectall.caption
 msgid "Deselect all"
-msgstr "Alle abwählen"
+msgstr "Avmarkera alla"
 
 #: tfrmfixsubtitles.mnuinvertselection.caption
 msgctxt "tfrmfixsubtitles.mnuinvertselection.caption"
 msgid "Invert selection"
-msgstr "Auswahl umkehren"
+msgstr "Invertera val"
 
 #: tfrmfixsubtitles.mnuselectall.caption
 msgctxt "tfrmfixsubtitles.mnuselectall.caption"
 msgid "Select all"
-msgstr "Alle auswählen"
+msgstr "Markera alla"
 
 #: tfrmformatproperties.btnapply.caption
 msgctxt "tfrmformatproperties.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmformatproperties.btnclose.caption
 msgctxt "tfrmformatproperties.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmformatproperties.caption
 msgctxt "tfrmformatproperties.caption"
 msgid "Format properties"
-msgstr "Format-Eigenschaften"
+msgstr "Formategenskaper"
 
 #: tfrmformatproperties.chkvttusextimestamp.caption
 msgid "Use X-TIMESTAMP-MAP header"
-msgstr "X-TIMESTAMP-MAP-Header verwenden"
+msgstr "Använd X-TIMESTAMP-MAP-header"
 
 #: tfrmformatproperties.chkvttwritecueidentifiers.caption
 msgid "Write cue identifiers"
-msgstr "Cue-Identifikatoren schreiben"
+msgstr "Skriv cue-identifikatorer"
 
 #: tfrmformatproperties.lblasalignment.caption
 msgctxt "tfrmformatproperties.lblasalignment.caption"
 msgid "Alignment"
-msgstr "Textausrichtung"
+msgstr "Justering"
 
 #: tfrmformatproperties.lblasfontcolor.caption
 msgid "Font color"
-msgstr "Schriftfarbe"
+msgstr "Textfärg"
 
 #: tfrmformatproperties.lblasfontname.caption
 msgid "Font name"
-msgstr "Schriftart"
+msgstr "Teckensnittsnamn"
 
 #: tfrmformatproperties.lblasfontsize.caption
 msgid "Font size"
-msgstr "Schriftgrösse"
+msgstr "Teckenstorlek"
 
 #: tfrmformatproperties.lblasheight.caption
 msgctxt "tfrmformatproperties.lblasheight.caption"
 msgid "Height"
-msgstr "Höhe"
+msgstr "Höjd"
 
 #: tfrmformatproperties.lblaslanguage.caption
 msgctxt "tfrmformatproperties.lblaslanguage.caption"
 msgid "Language"
-msgstr "Sprache"
+msgstr "Språk"
 
 #: tfrmformatproperties.lblaspositionx.caption
 msgid "Position X"
@@ -2303,16 +2303,16 @@ msgstr "Position Y"
 #: tfrmformatproperties.lblaswidth.caption
 msgctxt "tfrmformatproperties.lblaswidth.caption"
 msgid "Width"
-msgstr "Breite"
+msgstr "Bredd"
 
 #: tfrmformatproperties.lblcavenacomment.caption
 msgid "Comments"
-msgstr "Kommentare"
+msgstr "Kommentarer"
 
 #: tfrmformatproperties.lblcavenalanguage.caption
 msgctxt "tfrmformatproperties.lblcavenalanguage.caption"
 msgid "Language"
-msgstr "Sprache"
+msgstr "Språk"
 
 #: tfrmformatproperties.lblcavenaoriginaltitle.caption
 msgid "Original title"
@@ -2320,19 +2320,19 @@ msgstr "Originaltitel"
 
 #: tfrmformatproperties.lblcavenatcstart.caption
 msgid "Start timecode"
-msgstr "Start-Zeitcode"
+msgstr "Starttidkod"
 
 #: tfrmformatproperties.lblcavenatranslatedtitle.caption
 msgid "Translated title"
-msgstr "Übersetzter Titel"
+msgstr "Översatt titel"
 
 #: tfrmformatproperties.lblcavenatranslator.caption
 msgid "Translator"
-msgstr "Übersetzer"
+msgstr "Översättare"
 
 #: tfrmformatproperties.lbldvdauthor.caption
 msgid "Author"
-msgstr "Autor"
+msgstr "Författare"
 
 #: tfrmformatproperties.lbldvdinfo.caption
 msgctxt "tfrmformatproperties.lbldvdinfo.caption"
@@ -2342,7 +2342,7 @@ msgstr "Info"
 #: tfrmformatproperties.lbldvdlanguage.caption
 msgctxt "tfrmformatproperties.lbldvdlanguage.caption"
 msgid "Language"
-msgstr "Sprache"
+msgstr "Språk"
 
 #: tfrmformatproperties.lbldvdtitle.caption
 msgctxt "tfrmformatproperties.lbldvdtitle.caption"
@@ -2351,56 +2351,56 @@ msgstr "Titel"
 
 #: tfrmformatproperties.lbldvdweb.caption
 msgid "Web"
-msgstr "Webseite"
+msgstr "Webbplats"
 
 #: tfrmformatproperties.lblebucct.caption
 msgid "Character code table"
-msgstr "Zeichencodetabelle"
+msgstr "Teckenkodtabell"
 
 #: tfrmformatproperties.lblebuco.caption
 msgid "Country origin"
-msgstr "Herkunftsland"
+msgstr "Ursprungsland"
 
 #: tfrmformatproperties.lblebucpn.caption
 msgid "Code page number"
-msgstr "Codepage-Nummer"
+msgstr "Kodsidnummer"
 
 #: tfrmformatproperties.lblebudfc.caption
 msgid "Disk format code"
-msgstr "Diskformat-Code"
+msgstr "Diskformatkod"
 
 #: tfrmformatproperties.lblebudsc.caption
 msgid "Display standard code"
-msgstr "Anzeigestandard-Code"
+msgstr "Visningsstandardkod"
 
 #: tfrmformatproperties.lblebulc.caption
 msgid "Language code"
-msgstr "Sprachcode"
+msgstr "Språkkod"
 
 #: tfrmformatproperties.lblebundc.caption
 msgid "Max chars"
-msgstr "Max. Zeichen"
+msgstr "Max tecken"
 
 #: tfrmformatproperties.lblebundr.caption
 msgid "Max rows"
-msgstr "Max. Zeilen"
+msgstr "Max rader"
 
 #: tfrmformatproperties.lblvttlocal.caption
 msgid "Cue time:"
-msgstr "Cue-Zeit:"
+msgstr "Cue-tid:"
 
 #: tfrmformatproperties.lblvttmpegts.caption
 msgid "MPEG-2 time:"
-msgstr "MPEG-2-Zeit:"
+msgstr "MPEG-2-tid:"
 
 #: tfrmgenerateblankvideo.btnclose.caption
 msgctxt "tfrmgenerateblankvideo.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmgenerateblankvideo.btngenerate.caption
 msgid "Generate..."
-msgstr "Generieren..."
+msgstr "Generera..."
 
 #: tfrmgenerateblankvideo.btnimage.caption
 msgctxt "tfrmgenerateblankvideo.btnimage.caption"
@@ -2414,26 +2414,26 @@ msgstr "..."
 
 #: tfrmgenerateblankvideo.caption
 msgid "Generate blank video"
-msgstr "Leeres Video generieren"
+msgstr "Skapa tom video"
 
 #: tfrmgenerateblankvideo.chkgeneratetc.caption
 msgctxt "tfrmgenerateblankvideo.chkgeneratetc.caption"
 msgid "Time code"
-msgstr "Zeitcode"
+msgstr "Tidskod"
 
 #: tfrmgenerateblankvideo.chkgeneratetone.caption
 msgid "1 kHz test tone"
-msgstr "1-kHz-Testton"
+msgstr "1 kHz ljudtest"
 
 #: tfrmgenerateblankvideo.lblbackground.caption
 msgctxt "tfrmgenerateblankvideo.lblbackground.caption"
 msgid "Background"
-msgstr "Hintergrund"
+msgstr "Bakgrund"
 
 #: tfrmgenerateblankvideo.lblduration.caption
 msgctxt "tfrmgenerateblankvideo.lblduration.caption"
 msgid "Duration"
-msgstr "Dauer"
+msgstr "Varaktighet"
 
 #: tfrmgenerateblankvideo.lblfps.caption
 msgctxt "tfrmgenerateblankvideo.lblfps.caption"
@@ -2443,7 +2443,7 @@ msgstr "BPS"
 #: tfrmgenerateblankvideo.lblvideores.caption
 msgctxt "tfrmgenerateblankvideo.lblvideores.caption"
 msgid "Video resolution"
-msgstr "Videoauflösung"
+msgstr "Videoupplösning"
 
 #: tfrmgenerateblankvideo.lblx.caption
 msgctxt "tfrmgenerateblankvideo.lblx.caption"
@@ -2456,21 +2456,21 @@ msgstr "Bild"
 
 #: tfrmgenerateblankvideo.rdosmptecolorbars.caption
 msgid "SMPTE color bars"
-msgstr "SMPTE-Farbtestbild"
+msgstr "SMPTE-färgprovbild"
 
 #: tfrmgenerateblankvideo.rdosolidcolor.caption
 msgid "Solid color"
-msgstr "Volltonfarbe"
+msgstr "Enfärgad"
 
 #: tfrmgeneratevideo.btnclose.caption
 msgctxt "tfrmgeneratevideo.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmgeneratevideo.btngenerate.caption
 msgctxt "tfrmgeneratevideo.btngenerate.caption"
 msgid "Generate"
-msgstr "Generieren"
+msgstr "Skapa"
 
 #: tfrmgeneratevideo.btnres.caption
 msgctxt "tfrmgeneratevideo.btnres.caption"
@@ -2479,41 +2479,41 @@ msgstr "..."
 
 #: tfrmgeneratevideo.caption
 msgid "Generate video"
-msgstr "Video generieren"
+msgstr "Skapa video"
 
 #: tfrmgeneratevideo.chkbox.caption
 msgid "Box"
-msgstr "Rahmen"
+msgstr "Ram"
 
 #: tfrmgeneratevideo.chkcrop.caption
 msgid "Crop"
-msgstr "Zuschneiden"
+msgstr "Skörd"
 
 #: tfrmgeneratevideo.chkcut.caption
 msgctxt "tfrmgeneratevideo.chkcut.caption"
 msgid "Cut"
-msgstr "Schneiden"
+msgstr "Klipp"
 
 #: tfrmgeneratevideo.chkdeinterlace.caption
 msgctxt "tfrmgeneratevideo.chkdeinterlace.caption"
 msgid "Deinterlace"
-msgstr "Deinterlacen"
+msgstr "Avfläta"
 
 #: tfrmgeneratevideo.chkflip.caption
 msgid "Flip"
-msgstr "Spiegeln"
+msgstr "Vänd"
 
 #: tfrmgeneratevideo.chkreencodeaudio.caption
 msgid "Re-encode"
-msgstr "Neu codieren"
+msgstr "Omkoda"
 
 #: tfrmgeneratevideo.chkrotate.caption
 msgid "Rotate"
-msgstr "Drehen"
+msgstr "Rotera"
 
 #: tfrmgeneratevideo.lblaudiochannels.caption
 msgid "Channels"
-msgstr "Kanäle"
+msgstr "Kanaler"
 
 #: tfrmgeneratevideo.lblaudioencoding.caption
 msgctxt "tfrmgeneratevideo.lblaudioencoding.caption"
@@ -2522,49 +2522,49 @@ msgstr "Codec"
 
 #: tfrmgeneratevideo.lblbitrate.caption
 msgid "Bit rate"
-msgstr "Bitrate"
+msgstr "Bithastighet"
 
 #: tfrmgeneratevideo.lblcropheight.caption
 msgctxt "tfrmgeneratevideo.lblcropheight.caption"
 msgid "Height"
-msgstr "Höhe"
+msgstr "Höjd"
 
 #: tfrmgeneratevideo.lblcropleft.caption
 msgctxt "tfrmgeneratevideo.lblcropleft.caption"
 msgid "Left"
-msgstr "Links"
+msgstr "Vänster"
 
 #: tfrmgeneratevideo.lblcroptop.caption
 msgid "Top"
-msgstr "Oben"
+msgstr "Överkant"
 
 #: tfrmgeneratevideo.lblcropwidth.caption
 msgctxt "tfrmgeneratevideo.lblcropwidth.caption"
 msgid "Width"
-msgstr "Breite"
+msgstr "Bredd"
 
 #: tfrmgeneratevideo.lblcutfrom.caption
 msgid "From"
-msgstr "Von"
+msgstr "Från"
 
 #: tfrmgeneratevideo.lblcutto.caption
 msgid "To"
-msgstr "Bis"
+msgstr "Till"
 
 #: tfrmgeneratevideo.lblfont.caption
 msgctxt "tfrmgeneratevideo.lblfont.caption"
 msgid "Font"
-msgstr "Schriftart"
+msgstr "Teckensnitt"
 
 #: tfrmgeneratevideo.lblfontcolor.caption
 msgctxt "tfrmgeneratevideo.lblfontcolor.caption"
 msgid "Color"
-msgstr "Farbe"
+msgstr "Färg"
 
 #: tfrmgeneratevideo.lblfontsize.caption
 msgctxt "tfrmgeneratevideo.lblfontsize.caption"
 msgid "Size"
-msgstr "Grösse"
+msgstr "Storlek"
 
 #: tfrmgeneratevideo.lblformat.caption
 msgctxt "tfrmgeneratevideo.lblformat.caption"
@@ -2573,7 +2573,7 @@ msgstr "Format"
 
 #: tfrmgeneratevideo.lblsamplerate.caption
 msgid "Sample rate"
-msgstr "Abtastrate"
+msgstr "Samplingsfrekvens"
 
 #: tfrmgeneratevideo.lblvideocodec.caption
 msgctxt "tfrmgeneratevideo.lblvideocodec.caption"
@@ -2582,11 +2582,11 @@ msgstr "Codec"
 
 #: tfrmgeneratevideo.lblvideores.caption
 msgid "Resolution"
-msgstr "Auflösung"
+msgstr "Upplösning"
 
 #: tfrmgeneratevideo.lblvideosubtype.caption
 msgid "Subtype"
-msgstr "Untertyp"
+msgstr "Undertyp"
 
 #: tfrmgeneratevideo.lblx.caption
 msgctxt "tfrmgeneratevideo.lblx.caption"
@@ -2596,17 +2596,17 @@ msgstr "x"
 #: tfrmgeneratevideo.rdoaudio.caption
 msgctxt "tfrmgeneratevideo.rdoaudio.caption"
 msgid "Audio"
-msgstr "Audio/Ton"
+msgstr "Ljud"
 
 #: tfrmgeneratevideo.rdoothers.caption
 msgctxt "tfrmgeneratevideo.rdoothers.caption"
 msgid "Others"
-msgstr "Sonstiges"
+msgstr "Övrigt"
 
 #: tfrmgeneratevideo.rdosubtitle.caption
 msgctxt "tfrmgeneratevideo.rdosubtitle.caption"
 msgid "Subtitles"
-msgstr "Untertitel"
+msgstr "Textning"
 
 #: tfrmgeneratevideo.rdovideo.caption
 msgctxt "tfrmgeneratevideo.rdovideo.caption"
@@ -2616,236 +2616,236 @@ msgstr "Video"
 #: tfrmgoto.btnclose.caption
 msgctxt "tfrmgoto.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmgoto.btngo.caption
 msgctxt "tfrmgoto.btngo.caption"
 msgid "Go"
-msgstr "Gehe zu"
+msgstr "Gå till"
 
 #: tfrmgoto.caption
 msgctxt "tfrmgoto.caption"
 msgid "Go to line"
-msgstr "Gehe zu Zeile"
+msgstr "Gå till rad"
 
 #: tfrmgoto.lblnumber.caption
 msgid "Entry:"
-msgstr "Eintrag:"
+msgstr "Post:"
 
 #: tfrmgototime.btnclose.caption
 msgctxt "tfrmgototime.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmgototime.btngo.caption
 msgctxt "tfrmgototime.btngo.caption"
 msgid "Go"
-msgstr "Gehe zu"
+msgstr "Gå"
 
 #: tfrmgototime.caption
 msgctxt "tfrmgototime.caption"
 msgid "Go to"
-msgstr "Gehe zu"
+msgstr "Gå till"
 
 #: tfrmgototime.lbltime.caption
 msgid "Time:"
-msgstr "Zeit:"
+msgstr "Tid:"
 
 #: tfrmmain.actabout.caption
 msgctxt "tfrmmain.actabout.caption"
 msgid "About..."
-msgstr "Info..."
+msgstr "Om..."
 
 #: tfrmmain.actactor.caption
 msgctxt "tfrmmain.actactor.caption"
 msgid "Actors"
-msgstr "Sprecher"
+msgstr "Talare"
 
 #: tfrmmain.actaddnote.caption
 msgid "Add note..."
-msgstr "Anmerkung hinzufügen..."
+msgstr "Lägg till anteckning..."
 
 #: tfrmmain.actaddquotationmarks.caption
 msgid "Add quotation marks"
-msgstr "Anführungszeichen hinzufügen"
+msgstr "Lägg till citattecken"
 
 #: tfrmmain.actadjustsubtitle.caption
 msgid "Adjust subtitle..."
-msgstr "Untertitel anpassen..."
+msgstr "Justera undertext..."
 
 #: tfrmmain.actaligntocenter.caption
 msgctxt "tfrmmain.actaligntocenter.caption"
 msgid "Align to center"
-msgstr "Zentriert ausrichten"
+msgstr "Centrera"
 
 #: tfrmmain.actaligntoleft.caption
 msgctxt "tfrmmain.actaligntoleft.caption"
 msgid "Align to left"
-msgstr "Links ausrichten"
+msgstr "Vänsterjustera"
 
 #: tfrmmain.actaligntonone.caption
 msgctxt "tfrmmain.actaligntonone.caption"
 msgid "Align to none"
-msgstr "Keine Textausrichtung"
+msgstr "Ingen justering"
 
 #: tfrmmain.actaligntoright.caption
 msgctxt "tfrmmain.actaligntoright.caption"
 msgid "Align to right"
-msgstr "Rechts ausrichten"
+msgstr "Högerjustera"
 
 #: tfrmmain.actaudiofilterdialoguenhance.caption
 msgid "Dialogue enhance"
-msgstr "Dialogverstärkung"
+msgstr "Förstärk dialog"
 
 #: tfrmmain.actaudiofilterspeechnormalizer.caption
 msgid "Speech normalizer"
-msgstr "Sprach-Normalisierung"
+msgstr "Talnormalisering"
 
 #: tfrmmain.actaudiofiltersurround.caption
 msgid "Surround"
-msgstr "Raumklang"
+msgstr "Surroundljud"
 
 #: tfrmmain.actaudiototext.caption
 msgctxt "tfrmmain.actaudiototext.caption"
 msgid "Audio to text..."
-msgstr "Audio/Ton in Text..."
+msgstr "Ljud till text..."
 
 #: tfrmmain.actautobreakentry.caption
 msgctxt "tfrmmain.actautobreakentry.caption"
 msgid "Autobreak"
-msgstr "Automatischer Zeilenumbruch"
+msgstr "Automatisk radbrytning"
 
 #: tfrmmain.actautobreakentry.hint
 msgctxt "tfrmmain.actautobreakentry.hint"
 msgid "Split a long line into two or more lines"
-msgstr "Lange Zeile in zwei oder mehr Zeilen aufteilen"
+msgstr "Dela upp lång rad i flera rader"
 
 #: tfrmmain.actautomaticduration.caption
 msgid "Automatic duration..."
-msgstr "Automatische Dauer..."
+msgstr "Automatisk varaktighet..."
 
 #: tfrmmain.actbatchconvert.caption
 msgctxt "tfrmmain.actbatchconvert.caption"
 msgid "Batch convert..."
-msgstr "Stapelkonvertierung..."
+msgstr "Batchkonvertera..."
 
 #: tfrmmain.actcenterwaveform.caption
 msgctxt "tfrmmain.actcenterwaveform.caption"
 msgid "Center waveform"
-msgstr "Wellenform zentrieren"
+msgstr "Centrera vågform"
 
 #: tfrmmain.actcharactermap.caption
 msgid "Character Map..."
-msgstr "Zeichentabelle..."
+msgstr "Teckentabell..."
 
 #: tfrmmain.actcheckforupdates.caption
 msgid "Check for updates..."
-msgstr "Nach Aktualisierung suchen..."
+msgstr "Sök efter uppdateringar..."
 
 #: tfrmmain.actcleartext.caption
 msgid "Clear text"
-msgstr "Text löschen"
+msgstr "Rensa text"
 
 #: tfrmmain.actcloseapp.caption
 msgctxt "tfrmmain.actcloseapp.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmmain.actclosesubtitle.caption
 msgid "Close subtitles"
-msgstr "Untertitel schliessen"
+msgstr "Stäng textning"
 
 #: tfrmmain.actclosevideo.caption
 msgid "Close video"
-msgstr "Video schliessen"
+msgstr "Stäng video"
 
 #: tfrmmain.actcombineentries.caption
 msgid "Combine entries"
-msgstr "Einträge zusammenführen"
+msgstr "Slå ihop poster"
 
 #: tfrmmain.actcombineentries.hint
 msgctxt "tfrmmain.actcombineentries.hint"
 msgid "Combines all the selected entries into one"
-msgstr "Fügt alle ausgewählten Einträge zu einem zusammen"
+msgstr "Slår ihop alla valda poster till en"
 
 #: tfrmmain.actcompare.caption
 msgid "Compare..."
-msgstr "Vergleichen..."
+msgstr "Jämför..."
 
 #: tfrmmain.actconvertcase.caption
 msgid "Convert case..."
-msgstr "Gross-/Kleinschreibung ändern..."
+msgstr "Ändra skiftläge..."
 
 #: tfrmmain.actcopy.caption
 msgctxt "tfrmmain.actcopy.caption"
 msgid "Copy"
-msgstr "Kopieren"
+msgstr "Kopiera"
 
 #: tfrmmain.actcopyvideopostoclipboard.caption
 msgid "Copy video position to clipboard"
-msgstr "Videoposition in die Zwischenablage kopieren"
+msgstr "Kopiera videoposition till urklipp"
 
 #: tfrmmain.actcut.caption
 msgctxt "tfrmmain.actcut.caption"
 msgid "Cut"
-msgstr "Ausschneiden"
+msgstr "Klipp ut"
 
 #: tfrmmain.actdeleteentry.caption
 msgid "Delete entries"
-msgstr "Einträge löschen"
+msgstr "Ta bort poster"
 
 #: tfrmmain.actdeleteentry.hint
 msgid "Delete selected entries"
-msgstr "Ausgewählte Einträge löschen"
+msgstr "Ta bort markerade poster"
 
 #: tfrmmain.actdeleteshotchange.caption
 msgid "Delete shot change(s)"
-msgstr "Kamerawechsel löschen"
+msgstr "Ta bort bildväxling(ar)"
 
 #: tfrmmain.actdetectdialogsegments.caption
 msgid "Detect dialog segments..."
-msgstr "Dialogsegmente erkennen..."
+msgstr "Identifiera dialogsegment..."
 
 #: tfrmmain.actdetectsilentzones.caption
 msgctxt "tfrmmain.actdetectsilentzones.caption"
 msgid "Detect silent zones"
-msgstr "Stille Zonen erkennen"
+msgstr "Identifiera tysta partier"
 
 #: tfrmmain.actdetectsilentzones.hint
 msgid "Click to refresh list"
-msgstr "Klicken, um Liste zu aktualisieren"
+msgstr "Klicka för att uppdatera listan"
 
 #: tfrmmain.actdistributeentriesevenly.caption
 msgid "Distribute entries evenly"
-msgstr "Einträge gleichmässig verteilen"
+msgstr "Fördela poster jämnt"
 
 #: tfrmmain.actdivideentry.caption
 msgid "Divide entry"
-msgstr "Eintrag teilen"
+msgstr "Dela post"
 
 #: tfrmmain.actdurationlimits.caption
 msgid "Duration limits..."
-msgstr "Dauergrenzen..."
+msgstr "Tidsgränser..."
 
 #: tfrmmain.actendcueaddoneframe.caption
 msgid "Add one frame"
-msgstr "Ein Bild hinzufügen"
+msgstr "Lägg till en bildruta"
 
 #: tfrmmain.actendcuesubtractoneframe.caption
 msgid "Subtract one frame"
-msgstr "Ein Bild entfernen"
+msgstr "Ta bort en bildruta"
 
 #: tfrmmain.actexportcustomimageformat.caption
 msgid "Custom image format..."
-msgstr "Benutzerdefiniertes Bildformat..."
+msgstr "Anpassat bildformat..."
 
 #: tfrmmain.actexportcustomtextformat.caption
 msgid "Custom text format..."
-msgstr "Benutzerdefiniertes Textformat..."
+msgstr "Anpassat textformat..."
 
 #: tfrmmain.actexportmarkedsubtitles.caption
 msgid "Marked subtitles..."
-msgstr "Markierte Untertitel..."
+msgstr "Markerade undertexter..."
 
 #: tfrmmain.actexportsup.caption
 msgid "Blu-ray SUP..."
@@ -2853,213 +2853,213 @@ msgstr "Blu-ray SUP..."
 
 #: tfrmmain.actexporttextonly.caption
 msgid "Text only..."
-msgstr "Nur Text..."
+msgstr "Endast text..."
 
 #: tfrmmain.actextendlengthtonext.caption
 msgid "Extend final time to next"
-msgstr "Endzeit auf nächsten Eintrag verlängern"
+msgstr "Förläng sluttid till nästa post"
 
 #: tfrmmain.actextendlengthtoprevious.caption
 msgid "Extend initial time to previous"
-msgstr "Startzeit auf vorherigen Eintrag verlängern"
+msgstr "Förläng starttid till föregående post"
 
 #: tfrmmain.actfind.caption
 msgid "Find..."
-msgstr "Suchen..."
+msgstr "Sök..."
 
 #: tfrmmain.actfindnext.caption
 msgctxt "tfrmmain.actfindnext.caption"
 msgid "Find next"
-msgstr "Nächstes suchen"
+msgstr "Sök nästa"
 
 #: tfrmmain.actfindprevious.caption
 msgid "Find previous"
-msgstr "Vorheriges suchen"
+msgstr "Sök föregående"
 
 #: tfrmmain.actfixrtlpunctuation.caption
 msgid "Fix punctuation"
-msgstr "Interpunktion korrigieren"
+msgstr "Korrigera skiljetecken"
 
 #: tfrmmain.actfixsubtitles.caption
 msgid "Fix subtitles..."
-msgstr "Untertitel korrigieren..."
+msgstr "Korrigera undertexter..."
 
 #: tfrmmain.actfocusfinaltime.caption
 msgid "Edit final time"
-msgstr "Endzeit bearbeiten"
+msgstr "Redigera sluttid"
 
 #: tfrmmain.actfocusinitialtime.caption
 msgid "Edit initial time"
-msgstr "Startzeit bearbeiten"
+msgstr "Redigera starttid"
 
 #: tfrmmain.actfontbold.caption
 msgctxt "tfrmmain.actfontbold.caption"
 msgid "Bold"
-msgstr "Fett"
+msgstr "Fet stil"
 
 #: tfrmmain.actfontclear.caption
 msgctxt "tfrmmain.actfontclear.caption"
 msgid "Clear"
-msgstr "Löschen"
+msgstr "Rensa"
 
 #: tfrmmain.actfontcolor.caption
 msgid "Set current font color"
-msgstr "Aktuelle Schriftfarbe festlegen"
+msgstr "Ange aktuell textfärg"
 
 #: tfrmmain.actfontcolordlg.caption
 msgctxt "tfrmmain.actfontcolordlg.caption"
 msgid "Color..."
-msgstr "Farbe..."
+msgstr "Färg..."
 
 #: tfrmmain.actfontitalic.caption
 msgctxt "tfrmmain.actfontitalic.caption"
 msgid "Italic"
-msgstr "Kursiv"
+msgstr "Kursiv stil"
 
 #: tfrmmain.actfontstrikeout.caption
 msgctxt "tfrmmain.actfontstrikeout.caption"
 msgid "Strikeout"
-msgstr "Durchgestrichen"
+msgstr "Genomstruken"
 
 #: tfrmmain.actfontunderline.caption
 msgctxt "tfrmmain.actfontunderline.caption"
 msgid "Underline"
-msgstr "Unterstreichen"
+msgstr "Understruken"
 
 #: tfrmmain.actformatproperties.caption
 msgctxt "tfrmmain.actformatproperties.caption"
 msgid "Format properties..."
-msgstr "Formateigenschaften..."
+msgstr "Formategenskaper..."
 
 #: tfrmmain.actframesmode.caption
 msgctxt "tfrmmain.actframesmode.caption"
 msgid "Frame mode"
-msgstr "Bildmodus"
+msgstr "Bildruteläge"
 
 #: tfrmmain.actframesmode.hint
 msgid "Set time code format to HH:MM:ss:FF"
-msgstr "Zeitcode-Format auf St:Mi:Se:Bi setzen"
+msgstr "Ange tidskodformat till Ti:Mi:Se:Bi"
 
 #: tfrmmain.actgenerateblankvideo.caption
 msgid "Generate blank video..."
-msgstr "Leeres Video erzeugen..."
+msgstr "Skapa tom video..."
 
 #: tfrmmain.actgeneratevideo.caption
 msgid "Video with hardcoded subtitles..."
-msgstr "Video mit eingebrannten Untertiteln..."
+msgstr "Video med inbrända undertexter..."
 
 #: tfrmmain.actgoto.caption
 msgid "Go to entry..."
-msgstr "Zum Eintrag gehen..."
+msgstr "Gå till post..."
 
 #: tfrmmain.actgotocurrententryfinaltime.caption
 msgid "Go to current entry final time"
-msgstr "Zum Endzeitpunkt des aktuellen Eintrags gehen"
+msgstr "Gå till aktuell posts sluttid"
 
 #: tfrmmain.actgotocurrententryinitialtime.caption
 msgid "Go to current entry initial time"
-msgstr "Zum Startzeitpunkt des aktuellen Eintrags gehen"
+msgstr "Gå till aktuell posts starttid"
 
 #: tfrmmain.actgotonextentryandplay.caption
 msgid "Go to next entry and play"
-msgstr "Zum nächsten Eintrag gehen und abspielen"
+msgstr "Gå till nästa post och spela upp"
 
 #: tfrmmain.actgotopreviousentryandplay.caption
 msgid "Go to previous entry and play"
-msgstr "Zum vorherigen Eintrag gehen und abspielen"
+msgstr "Gå till föregående post och spela upp"
 
 #: tfrmmain.actgototime.caption
 msgid "Go to time..."
-msgstr "Zu Zeitposition gehen..."
+msgstr "Gå till tid..."
 
 #: tfrmmain.acthelp.caption
 msgctxt "tfrmmain.acthelp.caption"
 msgid "Help"
-msgstr "Hilfe"
+msgstr "Hjälp"
 
 #: tfrmmain.actimportsubtitles.caption
 msgid "Subtitles..."
-msgstr "Untertitel..."
+msgstr "Textning..."
 
 #: tfrmmain.actinsertcurrenttime.caption
 msgid "Insert current time"
-msgstr "Aktuelle Zeit einfügen"
+msgstr "Infoga aktuell tid"
 
 #: tfrmmain.actinsertentry.caption
 msgid "Insert entry"
-msgstr "Eintrag einfügen"
+msgstr "Infoga post"
 
 #: tfrmmain.actinsertentry.hint
 msgid "Insert a new entry after the current entry"
-msgstr "Neuen Eintrag nach dem aktuellen Eintrag einfügen"
+msgstr "Infoga en ny post efter den aktuella"
 
 #: tfrmmain.actinsertentrybefore.caption
 msgid "Insert entry before"
-msgstr "Eintrag davor einfügen"
+msgstr "Infoga post före"
 
 #: tfrmmain.actinsertentrybefore.hint
 msgctxt "tfrmmain.actinsertentrybefore.hint"
 msgid "Insert entry before the current entry"
-msgstr "Neuen Eintrag vor dem aktuellen Eintrag einfügen"
+msgstr "Infoga en ny post före den aktuella"
 
 #: tfrmmain.actinsertshotchange.caption
 msgid "Insert shot change"
-msgstr "Kamerawechsel einfügen"
+msgstr "Infoga kamerabyte"
 
 #: tfrmmain.actinvertselection.caption
 msgctxt "tfrmmain.actinvertselection.caption"
 msgid "Invert selection"
-msgstr "Auswahl umkehren"
+msgstr "Invertera markering"
 
 #: tfrmmain.actjumptonextempty.caption
 msgid "Jump to next without text"
-msgstr "Zum nächsten leeren Eintrag springen"
+msgstr "Hoppa till nästa utan text"
 
 #: tfrmmain.actjumptonextmarked.caption
 msgid "Jump to next marked"
-msgstr "Zum nächsten markierten Eintrag springen"
+msgstr "Hoppa till nästa markerade"
 
 #: tfrmmain.actjumptonextnote.caption
 msgid "Jump to next note"
-msgstr "Zur nächsten Anmerkung springen"
+msgstr "Hoppa till nästa anteckning"
 
 #: tfrmmain.actjumptonextshotchange.caption
 msgid "Jump to next shot change"
-msgstr "Zum nächsten Kamerawechsel springen"
+msgstr "Hoppa till nästa kamerabyte"
 
 #: tfrmmain.actjumptopreviousempty.caption
 msgid "Jump to previous without text"
-msgstr "Zum vorherigen leeren Eintrag springen"
+msgstr "Hoppa till föregående utan text"
 
 #: tfrmmain.actjumptopreviousmarked.caption
 msgid "Jump to previous marked"
-msgstr "Zum vorherigen markierten Eintrag springen"
+msgstr "Hoppa till föregående markerade"
 
 #: tfrmmain.actjumptopreviousnote.caption
 msgid "Jump to previous note"
-msgstr "Zur vorherigen Anmerkung springen"
+msgstr "Hoppa till föregående anteckning"
 
 #: tfrmmain.actjumptoprevshotchange.caption
 msgid "Jump to previous shot change"
-msgstr "Zum vorherigen Kamerawechsel springen"
+msgstr "Hoppa till föregående kamerabyte"
 
 #: tfrmmain.actlistmode.caption
 msgctxt "tfrmmain.actlistmode.caption"
 msgid "List mode"
-msgstr "Listenmodus"
+msgstr "Listläge"
 
 #: tfrmmain.actloadproject.caption
 msgid "Load project..."
-msgstr "Projekt laden..."
+msgstr "Ladda projekt..."
 
 #: tfrmmain.actloadsubtitle.caption
 msgctxt "tfrmmain.actloadsubtitle.caption"
 msgid "Load subtitle..."
-msgstr "Untertitel laden..."
+msgstr "Ladda undertexter..."
 
 #: tfrmmain.actloadsubtitle.hint
 msgid "Load a subtitle file"
-msgstr "Eine Untertiteldatei laden"
+msgstr "Ladda en undertextfil"
 
 #: tfrmmain.actloadtranscription.caption
 msgctxt "tfrmmain.actloadtranscription.caption"
@@ -3068,134 +3068,134 @@ msgstr "Transkription..."
 
 #: tfrmmain.actloadtranslation.caption
 msgid "Load translation..."
-msgstr "Übersetzung laden..."
+msgstr "Ladda översättning..."
 
 #: tfrmmain.actloadvideo.caption
 msgid "Open video..."
-msgstr "Video öffnen..."
+msgstr "Öppna video..."
 
 #: tfrmmain.actloadvideo.hint
 msgid "Open a video file"
-msgstr "Eine Videodatei öffnen"
+msgstr "Öppna en videofil"
 
 #: tfrmmain.actloadvideofromurl.caption
 msgid "Open video from URL..."
-msgstr "Video über URL öffnen..."
+msgstr "Öppna video via URL..."
 
 #: tfrmmain.actmarkentry.caption
 msgid "Mark entry"
-msgstr "Eintrag markieren"
+msgstr "Markera post"
 
 #: tfrmmain.actmediaaddentry.caption
 msgctxt "tfrmmain.actmediaaddentry.caption"
 msgid "Add entry"
-msgstr "Eintrag hinzufügen"
+msgstr "Lägg till post"
 
 #: tfrmmain.actmediaautoscroll.caption
 msgctxt "tfrmmain.actmediaautoscroll.caption"
 msgid "Update list on preview"
-msgstr "Liste bei Vorschau aktualisieren"
+msgstr "Uppdatera lista vid förhandsvisning"
 
 #: tfrmmain.actmediaback1min.caption
 msgid "Go back 1 minute"
-msgstr "1 Minute zurückspringen"
+msgstr "Spola tillbaka 1 minut"
 
 #: tfrmmain.actmediaback1sec.caption
 msgid "Go back 1 second"
-msgstr "1 Sekunde zurückspringen"
+msgstr "Spola tillbaka 1 sekund"
 
 #: tfrmmain.actmediachangeplayrate.caption
 msgctxt "tfrmmain.actmediachangeplayrate.caption"
 msgid "Playback rate"
-msgstr "Wiedergabegeschwindigkeit"
+msgstr "Uppspelningshastighet"
 
 #: tfrmmain.actmediadeleteentry.caption
 msgctxt "tfrmmain.actmediadeleteentry.caption"
 msgid "Delete entry"
-msgstr "Eintrag löschen"
+msgstr "Ta bort post"
 
 #: tfrmmain.actmediaendsubtitleentry.caption
 msgid "End entry"
-msgstr "Eintrag beenden"
+msgstr "Avsluta post"
 
 #: tfrmmain.actmediaforward.caption
 msgctxt "tfrmmain.actmediaforward.caption"
 msgid "Forward"
-msgstr "Vorwärts"
+msgstr "Framåt"
 
 #: tfrmmain.actmediaforward1min.caption
 msgid "Forward 1 minute"
-msgstr "1 Minute vorspringen"
+msgstr "Spola framåt 1 minut"
 
 #: tfrmmain.actmediaforward1sec.caption
 msgid "Forward 1 second"
-msgstr "1 Sekunde vorspringen"
+msgstr "Spola framåt 1 sekund"
 
 #: tfrmmain.actmediamovesubtitleentry.caption
 msgid "Move entry"
-msgstr "Eintrag verschieben"
+msgstr "Flytta post"
 
 #: tfrmmain.actmedianextframe.caption
 msgctxt "tfrmmain.actmedianextframe.caption"
 msgid "Next frame"
-msgstr "Nächstes Bild"
+msgstr "Nästa bildruta"
 
 #: tfrmmain.actmediaplay.caption
 msgctxt "tfrmmain.actmediaplay.caption"
 msgid "Play/Pause"
-msgstr "Abspielen/Pause"
+msgstr "Spela/Pausa"
 
 #: tfrmmain.actmediaplayafterselection.caption
 msgctxt "tfrmmain.actmediaplayafterselection.caption"
 msgid "Play after selection"
-msgstr "Nach Auswahl abspielen"
+msgstr "Spela efter markering"
 
 #: tfrmmain.actmediaplaybeforeselection.caption
 msgctxt "tfrmmain.actmediaplaybeforeselection.caption"
 msgid "Play before selection"
-msgstr "Vor Auswahl abspielen"
+msgstr "Spela före markering"
 
 #: tfrmmain.actmediaplayfromselection.caption
 msgctxt "tfrmmain.actmediaplayfromselection.caption"
 msgid "Play from selection"
-msgstr "Ab Auswahl abspielen"
+msgstr "Spela från markering"
 
 #: tfrmmain.actmediaplayselection.caption
 msgctxt "tfrmmain.actmediaplayselection.caption"
 msgid "Play selection"
-msgstr "Auswahl abspielen"
+msgstr "Spela markering"
 
 #: tfrmmain.actmediaplayselection.hint
 msgid "Click on the arrow to select playback repetitions"
-msgstr "Auf den Pfeil klicken, um Wiederholungen der Wiedergabe auszuwählen"
+msgstr "Klicka på pilen för att välja upprepningar av uppspelningen"
 
 #: tfrmmain.actmediapreviousframe.caption
 msgctxt "tfrmmain.actmediapreviousframe.caption"
 msgid "Previous frame"
-msgstr "Vorheriges Bild"
+msgstr "Föregående bildruta"
 
 #: tfrmmain.actmediarewind.caption
 msgctxt "tfrmmain.actmediarewind.caption"
 msgid "Rewind"
-msgstr "Zurückspulen"
+msgstr "Spola tillbaka"
 
 #: tfrmmain.actmediasetfinaltime.caption
 msgctxt "tfrmmain.actmediasetfinaltime.caption"
 msgid "Set final time"
-msgstr "Endzeit festlegen"
+msgstr "Ange sluttid"
 
 #: tfrmmain.actmediasetinitialtime.caption
 msgctxt "tfrmmain.actmediasetinitialtime.caption"
 msgid "Set initial time"
-msgstr "Startzeit festlegen"
+msgstr "Ange starttid"
 
 #: tfrmmain.actmediasplitentryatcursorposition.caption
 msgid "Split at cursor position"
-msgstr "An Cursorposition teilen"
+msgstr "Dela vid markörens position"
 
 #: tfrmmain.actmediastartsubtitleentry.caption
 msgid "Start entry"
-msgstr "Eintrag starten"
+msgstr "Starta post"
 
 #: tfrmmain.actmediastop.caption
 msgctxt "tfrmmain.actmediastop.caption"
@@ -3204,184 +3204,184 @@ msgstr "Stopp"
 
 #: tfrmmain.actmediasubsizedec.caption
 msgid "Reduce video font size"
-msgstr "Schriftgrösse im Video verkleinern"
+msgstr "Minska textstorleken i videon"
 
 #: tfrmmain.actmediasubsizeinc.caption
 msgid "Increase video font size"
-msgstr "Schriftgrösse im Video vergrössern"
+msgstr "Öka textstorleken i videon"
 
 #: tfrmmain.actmediavolumedown.caption
 msgid "Down"
-msgstr "Lautstärke verringern"
+msgstr "Sänk volymen"
 
 #: tfrmmain.actmediavolumemute.caption
 msgid "Mute"
-msgstr "Stumm"
+msgstr "Tyst"
 
 #: tfrmmain.actmediavolumeup.caption
 msgid "Up"
-msgstr "Lautstärke erhöhen"
+msgstr "Höj volymen"
 
 #: tfrmmain.actmediazoomin.caption
 msgctxt "tfrmmain.actmediazoomin.caption"
 msgid "Zoom in"
-msgstr "Vergrössern"
+msgstr "Zooma in"
 
 #: tfrmmain.actmediazoomout.caption
 msgctxt "tfrmmain.actmediazoomout.caption"
 msgid "Zoom out"
-msgstr "Verkleinern"
+msgstr "Zooma ut"
 
 #: tfrmmain.actmediazoomselection.caption
 msgctxt "tfrmmain.actmediazoomselection.caption"
 msgid "Zoom selection"
-msgstr "Auswahl Vergrösserung"
+msgstr "Zooma markering"
 
 #: tfrmmain.actmergewithnext.caption
 msgid "Merge with next"
-msgstr "Mit folgendem Eintrag zusammenfügen"
+msgstr "Slå ihop med nästa"
 
 #: tfrmmain.actmergewithprevious.caption
 msgid "Merge with previous"
-msgstr "Mit vorherigem Eintrag zusammenfügen"
+msgstr "Slå ihop med föregående"
 
 #: tfrmmain.actmodifyselection.caption
 msgid "Modify selection..."
-msgstr "Auswahl bearbeiten..."
+msgstr "Redigera markering..."
 
 #: tfrmmain.actmultiplereplace.caption
 msgid "Multiple replace..."
-msgstr "Mehrfach ersetzen..."
+msgstr "Flera ersättningar..."
 
 #: tfrmmain.actnewsubtitle.caption
 msgctxt "tfrmmain.actnewsubtitle.caption"
 msgid "New subtitle"
-msgstr "Neuer Untertitel"
+msgstr "Ny undertext"
 
 #: tfrmmain.actnewsubtitle.hint
 msgid "Start a new subtitle project"
-msgstr "Ein neues Untertitelprojekt starten"
+msgstr "Starta ett nytt undertextprojekt"
 
 #: tfrmmain.actnextsubtitle.caption
 msgctxt "tfrmmain.actnextsubtitle.caption"
 msgid "Next subtitle"
-msgstr "Nächster Untertitel"
+msgstr "Nästa undertext"
 
 #: tfrmmain.actpanandscan.caption
 msgid "Pan-and-scan"
-msgstr "Schwenken und Ausschneiden"
+msgstr "Panorera och beskära"
 
 #: tfrmmain.actpaste.caption
 msgctxt "tfrmmain.actpaste.caption"
 msgid "Paste"
-msgstr "Einfügen"
+msgstr "Klistra in"
 
 #: tfrmmain.actplaycurrententry.caption
 msgid "Play current entry"
-msgstr "Aktuellen Eintrag abspielen"
+msgstr "Spela aktuell post"
 
 #: tfrmmain.actprevioussubtitle.caption
 msgctxt "tfrmmain.actprevioussubtitle.caption"
 msgid "Previous subtitle"
-msgstr "Vorheriger Untertitel"
+msgstr "Föregående undertext"
 
 #: tfrmmain.actpullfirstlinefromnextentry.caption
 msgid "Pull the first line from the next entry"
-msgstr "Erste Zeile des nächsten Eintrags hier einfügen"
+msgstr "Dra första raden från nästa post"
 
 #: tfrmmain.actpulllastlinefrompreviousentry.caption
 msgid "Pull the last line from the previous entry"
-msgstr "Letzte Zeile des vorherigen Eintrags hier einfügen"
+msgstr "Dra sista raden från föregående post"
 
 #: tfrmmain.actpushfirstlinetopreviousentry.caption
 msgid "Push the first line to the previous entry"
-msgstr "Erste Zeile zum vorherigen Eintrag verschieben"
+msgstr "Skicka första raden till föregående post"
 
 #: tfrmmain.actpushlastlinetonextentry.caption
 msgid "Push the last line to the next entry"
-msgstr "Letzte Zeile zum nächsten Eintrag verschieben"
+msgstr "Skicka sista raden till nästa post"
 
 #: tfrmmain.actpushworddown.caption
 msgid "Push the last word of the current line down"
-msgstr "Letztes Wort der aktuellen Zeile nach unten verschieben"
+msgstr "Flytta sista ordet på raden nedåt"
 
 #: tfrmmain.actpushwordtonextentry.caption
 msgid "Push the last word to the next entry"
-msgstr "Letztes Wort zum nächsten Eintrag verschieben"
+msgstr "Flytta sista ordet till nästa post"
 
 #: tfrmmain.actpushwordtopreviousentry.caption
 msgid "Push the first word to the previous entry"
-msgstr "Erstes Wort zum vorherigen Eintrag verschieben"
+msgstr "Flytta första ordet till föregående post"
 
 #: tfrmmain.actpushwordup.caption
 msgid "Push the first word of the current line up"
-msgstr "Erstes Wort der aktuellen Zeile nach oben verschieben"
+msgstr "Flytta första ordet på raden uppåt"
 
 #: tfrmmain.actqualitycheck.caption
 msgid "Quality check..."
-msgstr "Qualitätskontrolle..."
+msgstr "Kvalitetskontroll..."
 
 #: tfrmmain.actreadtextsfromfile.caption
 msgid "Read text from file..."
-msgstr "Text aus Datei lesen..."
+msgstr "Läs text från fil..."
 
 #: tfrmmain.actreadtimingsfromfile.caption
 msgid "Read timings from file..."
-msgstr "Zeitangaben aus Datei lesen..."
+msgstr "Läs tidpunkter från fil..."
 
 #: tfrmmain.actredo.caption
 msgctxt "tfrmmain.actredo.caption"
 msgid "Redo"
-msgstr "Wiederholen"
+msgstr "Gör om"
 
 #: tfrmmain.actredo.hint
 msgid "Redo last undo"
-msgstr "Letzte Rückgängig-Handlung wiederholen"
+msgstr "Upprepa senaste ångring"
 
 #: tfrmmain.actremovelinefromentry.caption
 msgid "Remove line from entry..."
-msgstr "Zeile aus Eintrag entfernen..."
+msgstr "Ta bort rad från posten..."
 
 #: tfrmmain.actremoveunicodecontrolchars.caption
 msgid "Remove Unicode control characters"
-msgstr "Unicode-Steuerzeichen entfernen"
+msgstr "Ta bort Unicode-styrtecken"
 
 #: tfrmmain.actreplace.caption
 msgid "Replace..."
-msgstr "Ersetzen..."
+msgstr "Ersätt..."
 
 #: tfrmmain.actrestorebackup.caption
 msgid "Restore backup..."
-msgstr "Sicherung wiederherstellen..."
+msgstr "Återställ säkerhetskopia..."
 
 #: tfrmmain.actreversetext.caption
 msgid "Reverse text"
-msgstr "Text umkehren"
+msgstr "Vänd texten"
 
 #: tfrmmain.actroundtimes.caption
 msgid "Round times..."
-msgstr "Zeiten runden..."
+msgstr "Avrunda tider..."
 
 #: tfrmmain.actsaveproject.caption
 msgid "Save project..."
-msgstr "Projekt speichern..."
+msgstr "Spara projekt..."
 
 #: tfrmmain.actsavesubtitle.caption
 msgctxt "tfrmmain.actsavesubtitle.caption"
 msgid "Save subtitle"
-msgstr "Untertitel speichern"
+msgstr "Spara undertext"
 
 #: tfrmmain.actsavesubtitle.hint
 msgid "Save current subtitle to file"
-msgstr "Aktuelle Untertitel in Datei speichern"
+msgstr "Spara aktuell undertext till fil"
 
 #: tfrmmain.actsavesubtitleas.caption
 msgid "Save subtitle as..."
-msgstr "Untertitel speichern unter..."
+msgstr "Spara undertext som..."
 
 #: tfrmmain.actsavesubtitleas.hint
 msgid "Save current subtitle to a specific file"
-msgstr "Aktuelle Untertitel in bestimmter Datei speichern"
+msgstr "Spara aktuell undertext till en specifik fil"
 
 #: tfrmmain.actsavetranscription.caption
 msgctxt "tfrmmain.actsavetranscription.caption"
@@ -3390,76 +3390,76 @@ msgstr "Transkription..."
 
 #: tfrmmain.actsavetranslation.caption
 msgid "Save translation"
-msgstr "Übersetzung speichern"
+msgstr "Spara översättning"
 
 #: tfrmmain.actsavetranslation.hint
 msgid "Save current translation to file"
-msgstr "Aktuelle Übersetzung in Datei speichern"
+msgstr "Spara aktuell översättning till fil"
 
 #: tfrmmain.actsavetranslationas.caption
 msgid "Save translation as..."
-msgstr "Übersetzung speichern unter..."
+msgstr "Spara översättning som..."
 
 #: tfrmmain.actsavetranslationas.hint
 msgid "Save current translation to a specific file"
-msgstr "Aktuelle Übersetzung in bestimmter Datei speichern"
+msgstr "Spara aktuell översättning till en specifik fil"
 
 #: tfrmmain.actscreenshottofile.caption
 msgid "Save screenshot"
-msgstr "Bildschirmfoto speichern"
+msgstr "Spara skärmbild"
 
 #: tfrmmain.actselectall.caption
 msgctxt "tfrmmain.actselectall.caption"
 msgid "Select all"
-msgstr "Alles auswählen"
+msgstr "Markera allt"
 
 #: tfrmmain.actselectcurrenttobeginning.caption
 msgid "Select current to beginning"
-msgstr "Von hier bis zum Anfang auswählen"
+msgstr "Markera från aktuell till början"
 
 #: tfrmmain.actselectcurrenttoend.caption
 msgid "Select current to end"
-msgstr "Von hier bis zum Ende auswählen"
+msgstr "Markera från aktuell till slutet"
 
 #: tfrmmain.actsetasdefaultencoding.caption
 msgctxt "tfrmmain.actsetasdefaultencoding.caption"
 msgid "Set as default save encoding"
-msgstr "Als Standard-Zeichencodierung für Speicherung festlegen"
+msgstr "Ange som standardkodning för sparande"
 
 #: tfrmmain.actsetasdefaultformat.caption
 msgctxt "tfrmmain.actsetasdefaultformat.caption"
 msgid "Set as default save format"
-msgstr "Als Standard-Speicherformat festlegen"
+msgstr "Ange som standardsparformat"
 
 #: tfrmmain.actsetautomaticduration.caption
 msgid "Set automatic duration"
-msgstr "Automatische Dauer festlegen"
+msgstr "Ange automatisk varaktighet"
 
 #: tfrmmain.actsetdefaultgap.caption
 msgid "Set default gap"
-msgstr "Standard-Zeitabstand/-Lücke festlegen"
+msgstr "Ange standardmellanrum/-lucka"
 
 #: tfrmmain.actsetdefaultgap.hint
 msgid "Only if the gap is too short"
-msgstr "Nur wenn der Abstand/Lücke zu kurz ist"
+msgstr "Endast om mellanrum/lucka är för kort"
 
 #: tfrmmain.actsetdelay.caption
 msgid "Set delay..."
-msgstr "Verzögerung einstellen..."
+msgstr "Ange fördröjning..."
 
 #: tfrmmain.actsetgapping.caption
 msgid "Set gapping..."
-msgstr "Abstände einstellen..."
+msgstr "Justera mellanrum..."
 
 #: tfrmmain.actsetguilayout0.caption
 msgctxt "tfrmmain.actsetguilayout0.caption"
 msgid "Classic"
-msgstr "Klassisch"
+msgstr "Klassisk"
 
 #: tfrmmain.actsetguilayout1.caption
 msgctxt "tfrmmain.actsetguilayout1.caption"
 msgid "Inverted"
-msgstr "Invertiert"
+msgstr "Inverterad"
 
 #: tfrmmain.actsetguilayout2.caption
 msgctxt "tfrmmain.actsetguilayout2.caption"
@@ -3469,79 +3469,79 @@ msgstr "Vertikal"
 #: tfrmmain.actsettings.caption
 msgctxt "tfrmmain.actsettings.caption"
 msgid "Settings..."
-msgstr "Einstellungen..."
+msgstr "Inställningar..."
 
 #: tfrmmain.actshifttimeless.caption
 #, object-pascal-format
 msgctxt "tfrmmain.actshifttimeless.caption"
 msgid "Shift %dms less"
-msgstr "Zeit um %d ms zurückverschieben"
+msgstr "Skjut tiden %d ms bakåt"
 
 #: tfrmmain.actshifttimemore.caption
 #, object-pascal-format
 msgctxt "tfrmmain.actshifttimemore.caption"
 msgid "Shift %dms more"
-msgstr "Zeit um %d ms vorschieben"
+msgstr "Skjut tiden %d ms framåt"
 
 #: tfrmmain.actshifttimes.caption
 msgid "Shift times..."
-msgstr "Zeiten verschieben..."
+msgstr "Skjut tider..."
 
 #: tfrmmain.actshotchanges.caption
 msgid "Shot changes..."
-msgstr "Kamerawechsel..."
+msgstr "Klippbyten..."
 
 #: tfrmmain.actshowactoronpreview.caption
 msgid "Display Actor on Preview"
-msgstr "Sprecher in Vorschau anzeigen"
+msgstr "Visa talare i förhandsgranskning"
 
 #: tfrmmain.actshowcolumncpl.caption
 msgctxt "tfrmmain.actshowcolumncpl.caption"
 msgid "Characters per line"
-msgstr "Zeichen pro Zeile (ZPZ)"
+msgstr "Tecken per rad (TPR)"
 
 #: tfrmmain.actshowcolumncps.caption
 msgctxt "tfrmmain.actshowcolumncps.caption"
 msgid "Characters per second"
-msgstr "Zeichen pro Sekunde (ZPS)"
+msgstr "Tecken per sekund (TPS)"
 
 #: tfrmmain.actshowcolumnduration.caption
 msgctxt "tfrmmain.actshowcolumnduration.caption"
 msgid "Duration"
-msgstr "Dauer"
+msgstr "Varaktighet"
 
 #: tfrmmain.actshowcolumnnumber.caption
 msgid "Number/GAP"
-msgstr "Nummer/Abstand/Lücke"
+msgstr "Nummer/Mellanrum/Lucka"
 
 #: tfrmmain.actshowcolumnstyleandactor.caption
 msgctxt "tfrmmain.actshowcolumnstyleandactor.caption"
 msgid "Style/Actor"
-msgstr "Stil/Sprecher"
+msgstr "Stil/Talare"
 
 #: tfrmmain.actshowcolumntimes.caption
 msgctxt "tfrmmain.actshowcolumntimes.caption"
 msgid "Times"
-msgstr "Zeiten"
+msgstr "Tider"
 
 #: tfrmmain.actshowcolumnwpm.caption
 msgctxt "tfrmmain.actshowcolumnwpm.caption"
 msgid "Words per minute"
-msgstr "Wörter pro Minute (WPM)"
+msgstr "Ord per minut (OPM)"
 
 #: tfrmmain.actshoweditortoolbaralignment.caption
 msgctxt "tfrmmain.actshoweditortoolbaralignment.caption"
 msgid "Alignment"
-msgstr "Textausrichtung"
+msgstr "Justering"
 
 #: tfrmmain.actshoweditortoolbarbasic.caption
 msgid "Basic"
-msgstr "Grundfunktionen"
+msgstr "Grundläggande"
 
 #: tfrmmain.actshoweditortoolbarentry.caption
 msgctxt "tfrmmain.actshoweditortoolbarentry.caption"
 msgid "Entry"
-msgstr "Eintrag"
+msgstr "Post"
 
 #: tfrmmain.actshoweditortoolbarformat.caption
 msgctxt "tfrmmain.actshoweditortoolbarformat.caption"
@@ -3551,31 +3551,31 @@ msgstr "Format"
 #: tfrmmain.actshoweditortoolbarlines.caption
 msgctxt "tfrmmain.actshoweditortoolbarlines.caption"
 msgid "Lines"
-msgstr "Zeilen"
+msgstr "Rader"
 
 #: tfrmmain.actshoweditortoolbarwords.caption
 msgctxt "tfrmmain.actshoweditortoolbarwords.caption"
 msgid "Words"
-msgstr "Wörter"
+msgstr "Ord"
 
 #: tfrmmain.actshowthumbnails.caption
 msgid "Show thumbnails"
-msgstr "Vorschaubilder anzeigen"
+msgstr "Visa miniatyrbilder"
 
 #: tfrmmain.actshowtoolbarencoding.caption
 msgctxt "tfrmmain.actshowtoolbarencoding.caption"
 msgid "Encoding"
-msgstr "Codierung"
+msgstr "Kodning"
 
 #: tfrmmain.actshowtoolbarentry.caption
 msgctxt "tfrmmain.actshowtoolbarentry.caption"
 msgid "Entry"
-msgstr "Eintrag"
+msgstr "Post"
 
 #: tfrmmain.actshowtoolbarfile.caption
 msgctxt "tfrmmain.actshowtoolbarfile.caption"
 msgid "File"
-msgstr "Datei"
+msgstr "Fil"
 
 #: tfrmmain.actshowtoolbarformat.caption
 msgctxt "tfrmmain.actshowtoolbarformat.caption"
@@ -3590,78 +3590,78 @@ msgstr "BPS"
 #: tfrmmain.actshowtoolbargeneral.caption
 msgctxt "tfrmmain.actshowtoolbargeneral.caption"
 msgid "General"
-msgstr "Allgemein"
+msgstr "Allmänt"
 
 #: tfrmmain.actshowtoolbarquickaction.caption
 msgid "Quick Action"
-msgstr "Schnellhandlung"
+msgstr "Snabbåtgärd"
 
 #: tfrmmain.actshowtoolbarview.caption
 msgctxt "tfrmmain.actshowtoolbarview.caption"
 msgid "View"
-msgstr "Ansicht"
+msgstr "Visa"
 
 #: tfrmmain.actshowvideotoolbarcontrols.caption
 msgctxt "tfrmmain.actshowvideotoolbarcontrols.caption"
 msgid "Controls"
-msgstr "Steuerelemente"
+msgstr "Kontroller"
 
 #: tfrmmain.actshowvideotoolbarentry.caption
 msgctxt "tfrmmain.actshowvideotoolbarentry.caption"
 msgid "Entry"
-msgstr "Eintrag"
+msgstr "Post"
 
 #: tfrmmain.actshowvideotoolbarother.caption
 msgctxt "tfrmmain.actshowvideotoolbarother.caption"
 msgid "Other"
-msgstr "Weitere"
+msgstr "Övrigt"
 
 #: tfrmmain.actshowvideotoolbarvolume.caption
 msgctxt "tfrmmain.actshowvideotoolbarvolume.caption"
 msgid "Volume"
-msgstr "Lautstärke"
+msgstr "Volym"
 
 #: tfrmmain.actshowwaveformtoolbarcontrols.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarcontrols.caption"
 msgid "Controls"
-msgstr "Steuerelemente"
+msgstr "Kontroller"
 
 #: tfrmmain.actshowwaveformtoolbarentry.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarentry.caption"
 msgid "Entry"
-msgstr "Eintrag"
+msgstr "Post"
 
 #: tfrmmain.actshowwaveformtoolbarother.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
 msgid "Other"
-msgstr "Weitere"
+msgstr "Övrigt"
 
 #: tfrmmain.actshowwaveformtoolbarshotchanges.caption
 msgctxt "tfrmmain.actshowwaveformtoolbarshotchanges.caption"
 msgid "Shot changes"
-msgstr "Szenenwechsel"
+msgstr "Scenbyten"
 
 #: tfrmmain.actshowwaveformtoolbarzoom.caption
 msgid "Zoom"
-msgstr "Vergrösserung"
+msgstr "Zooma"
 
 #: tfrmmain.actsort.caption
 msgid "Sort"
-msgstr "Sortieren"
+msgstr "Sortera"
 
 #: tfrmmain.actsourcemode.caption
 msgctxt "tfrmmain.actsourcemode.caption"
 msgid "Source mode"
-msgstr "Quellmodus"
+msgstr "Källäge"
 
 #: tfrmmain.actspellcheck.caption
 msgid "Spell check..."
-msgstr "Rechtschreibprüfung..."
+msgstr "Stavningskontroll..."
 
 #: tfrmmain.actsplitentryatposition.caption
 msgctxt "tfrmmain.actsplitentryatposition.caption"
 msgid "Split line at cursor position"
-msgstr "Zeile an Cursorposition teilen"
+msgstr "Dela raden vid markörens position"
 
 #: tfrmmain.actstatistics.caption
 msgid "Statistics..."
@@ -3669,195 +3669,195 @@ msgstr "Statistik..."
 
 #: tfrmmain.actstreamextractor.caption
 msgid "Stream extractor..."
-msgstr "Stream-Extraktor..."
+msgstr "Strömextraktor..."
 
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
-msgstr "Text vertauschen"
+msgstr "Byt text"
 
 #: tfrmmain.acttbx.caption
 msgctxt "tfrmmain.acttbx.caption"
 msgid "Show..."
-msgstr "Anzeigen..."
+msgstr "Visa..."
 
 #: tfrmmain.acttbxclose.caption
 msgctxt "tfrmmain.acttbxclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmmain.acttbxedit.caption
 msgctxt "tfrmmain.acttbxedit.caption"
 msgid "Add..."
-msgstr "Hinzufügen..."
+msgstr "Lägg till..."
 
 #: tfrmmain.acttbxlist.caption
 msgctxt "tfrmmain.acttbxlist.caption"
 msgid "List..."
-msgstr "Liste..."
+msgstr "Lista..."
 
 #: tfrmmain.acttbxsettings.caption
 msgctxt "tfrmmain.acttbxsettings.caption"
 msgid "Settings..."
-msgstr "Einstellungen..."
+msgstr "Inställningar..."
 
 #: tfrmmain.acttexteffectflash.caption
 msgid "Flash effect"
-msgstr "Blitz-Effekt"
+msgstr "Blixteffekt"
 
 #: tfrmmain.acttexteffecttypewriter.caption
 msgid "Typewriter effect"
-msgstr "Schreibmaschinen-Effekt"
+msgstr "Skrivmaskinseffekt"
 
 #: tfrmmain.acttimeexpander.caption
 msgid "Time expander/reducer..."
-msgstr "Zeit dehnen/kürzen..."
+msgstr "Tidsförlängning/-förkortning..."
 
 #: tfrmmain.acttimemode.caption
 msgctxt "tfrmmain.acttimemode.caption"
 msgid "Time mode"
-msgstr "Zeitmodus"
+msgstr "Tidsläge"
 
 #: tfrmmain.acttimemode.hint
 msgid "Set time code format to HH:MM:ss.ZZZ"
-msgstr "Zeitformat auf St:Mi:Se.ZZZ setzen"
+msgstr "Ställ in tidsformatet till Ti:Mi:Se.ZZZ"
 
 #: tfrmmain.acttm1.caption
 msgid "Use text from position 1 (tm)"
-msgstr "Text aus Position 1 verwenden (tm)"
+msgstr "Använd text från position 1 (tm)"
 
 #: tfrmmain.acttm2.caption
 msgid "Use text from position 2 (tm)"
-msgstr "Text aus Position 2 verwenden (tm)"
+msgstr "Använd text från position 2 (tm)"
 
 #: tfrmmain.acttm3.caption
 msgid "Use text from position 3 (tm)"
-msgstr "Text aus Position 3 verwenden (tm)"
+msgstr "Använd text från position 3 (tm)"
 
 #: tfrmmain.acttranscriptionmode.caption
 msgctxt "tfrmmain.acttranscriptionmode.caption"
 msgid "Transcription mode"
-msgstr "Transkriptionsmodus"
+msgstr "Transkriptionsläge"
 
 #: tfrmmain.acttranscriptionmode.hint
 msgid "Enable free-write mode"
-msgstr "Freies Schreiben aktivieren"
+msgstr "Aktivera fritt skrivläge"
 
 #: tfrmmain.acttranslate.caption
 msgid "Auto translate..."
-msgstr "Automatisch übersetzen..."
+msgstr "Översätt automatiskt..."
 
 #: tfrmmain.acttranslationmemory.caption
 msgctxt "tfrmmain.acttranslationmemory.caption"
 msgid "Show..."
-msgstr "Anzeigen..."
+msgstr "Visa..."
 
 #: tfrmmain.acttranslationmemoryclose.caption
 msgctxt "tfrmmain.acttranslationmemoryclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmmain.acttranslationmemorylist.caption
 msgctxt "tfrmmain.acttranslationmemorylist.caption"
 msgid "List..."
-msgstr "Liste..."
+msgstr "Lista..."
 
 #: tfrmmain.acttranslationmemorysettings.caption
 msgctxt "tfrmmain.acttranslationmemorysettings.caption"
 msgid "Settings..."
-msgstr "Einstellungen..."
+msgstr "Inställningar..."
 
 #: tfrmmain.acttranslatormode.caption
 msgctxt "tfrmmain.acttranslatormode.caption"
 msgid "Translator mode"
-msgstr "Übersetzermodus"
+msgstr "Översättarläge"
 
 #: tfrmmain.acttts.caption
 msgid "Text to speech..."
-msgstr "Text-zu-Sprache..."
+msgstr "Text till tal..."
 
 #: tfrmmain.actunbreakentry.caption
 msgid "Unbreak entry"
-msgstr "Zeilenumbruch im Eintrag aufheben"
+msgstr "Ta bort radbrytning i post"
 
 #: tfrmmain.actundo.caption
 msgctxt "tfrmmain.actundo.caption"
 msgid "Undo"
-msgstr "Rückgängig"
+msgstr "Ångra"
 
 #: tfrmmain.actundo.hint
 msgid "Undo last action"
-msgstr "Letzte Handlung rückgängig machen"
+msgstr "Ångra senaste åtgärden"
 
 #: tfrmmain.actundockvideo.caption
 msgid "Dock video"
-msgstr "Videofenster andocken"
+msgstr "Fäst videofönstret"
 
 #: tfrmmain.actundockwaveform.caption
 msgid "Dock waveform"
-msgstr "Wellenform andocken"
+msgstr "Fäst vågform"
 
 #: tfrmmain.actunicodectrllre.caption
 msgid "LRE (Start of Left-to-Right Embedding)"
-msgstr "LRE (Beginn eingebetteter Text von links nach rechts)"
+msgstr "LRE (Start för inbäddning vänster-till-höger)"
 
 #: tfrmmain.actunicodectrllrm.caption
 msgid "LRM (Left-to-Right Mark)"
-msgstr "LRM (Markierung links-nach-rechts)"
+msgstr "LRM (Vänster-till-höger-märke)"
 
 #: tfrmmain.actunicodectrllro.caption
 msgid "LRO (Start of Left-to-Right Override)"
-msgstr "LRO (Beginn überschreibender Text von links nach rechts)"
+msgstr "LRO (Start för åsidosättning vänster-till-höger)"
 
 #: tfrmmain.actunicodectrlpdf.caption
 msgid "PDF (Pop Directional Formatting)"
-msgstr "PDF (Rückkehr zur Richtungsformatierung)"
+msgstr "PDF (Avsluta riktningsformatering)"
 
 #: tfrmmain.actunicodectrlrle.caption
 msgid "RLE (Start of Right-to-Left Embedding)"
-msgstr "RLE (Start Einbettung von rechts nach links)"
+msgstr "RLE (Start för inbäddning höger-till-vänster)"
 
 #: tfrmmain.actunicodectrlrlm.caption
 msgid "RLM (Right-to-Left Mark)"
-msgstr "RLM (Markierung für rechts-nach-links-Schrift)"
+msgstr "RLM (Höger-till-vänster-märke)"
 
 #: tfrmmain.actunicodectrlrlo.caption
 msgid "RLO (Start of Right-to-Left Override)"
-msgstr "RLO (Start erzwungene Schreibrichtung von rechts nach links)"
+msgstr "RLO (Start för åsidosättning höger-till-vänster)"
 
 #: tfrmmain.actunicodectrlzwnj.caption
 msgid "ZWNJ (Zero Width Non-Joiner)"
-msgstr "ZWNJ (Trennzeichen ohne Breite)"
+msgstr "ZWNJ (Nollbredds icke-fogare)"
 
 #: tfrmmain.actunicodezwj.caption
 msgid "ZWJ (Zero Width Joiner)"
-msgstr "ZWJ (Verbindungszeichen ohne Breite)"
+msgstr "ZWJ (Nollbredds fogare)"
 
 #: tfrmmain.actunmarkentry.caption
 msgid "Unmark entry"
-msgstr "Markierung entfernen"
+msgstr "Avmarkera post"
 
 #: tfrmmain.actvalidatetm.caption
 msgid "Validate translation memory"
-msgstr "Übersetzungsspeicher prüfen"
+msgstr "Validera översättningsminne"
 
 #: tfrmmain.actvalidatetm.hint
 msgid "Validates and advances to the next"
-msgstr "Prüfen und zum nächsten Eintrag wechseln"
+msgstr "Validerar och går vidare till nästa"
 
 #: tfrmmain.actvaligntobottom.caption
 msgctxt "tfrmmain.actvaligntobottom.caption"
 msgid "Vertical align to bottom"
-msgstr "Vertikal unten ausrichten"
+msgstr "Justera lodrätt längst ned"
 
 #: tfrmmain.actvaligntomiddle.caption
 msgctxt "tfrmmain.actvaligntomiddle.caption"
 msgid "Vertical align to middle"
-msgstr "Vertikal mittig ausrichten"
+msgstr "Justera lodrätt i mitten"
 
 #: tfrmmain.actvaligntotop.caption
 msgctxt "tfrmmain.actvaligntotop.caption"
 msgid "Vertical align to top"
-msgstr "Vertikal oben ausrichten"
+msgstr "Justera lodrätt längst upp"
 
 #: tfrmmain.actvar169.caption
 msgid "16:9"
@@ -3877,7 +3877,7 @@ msgstr "4:3"
 
 #: tfrmmain.actvarcycle.caption
 msgid "Cycle Aspect Ratio"
-msgstr "Bildformate durchschalten"
+msgstr "Växla bildförhållande"
 
 #: tfrmmain.actvardefault.caption
 msgid "Default"
@@ -3885,120 +3885,120 @@ msgstr "Standard"
 
 #: tfrmmain.actvideodubbing.caption
 msgid "Dubbing..."
-msgstr "Vertonung..."
+msgstr "Dubbning..."
 
 #: tfrmmain.actvideofilterblur.caption
 msgid "Blur"
-msgstr "Weichzeichnen"
+msgstr "Oskärpa"
 
 #: tfrmmain.actvideofilterdeinterlace.caption
 msgctxt "tfrmmain.actvideofilterdeinterlace.caption"
 msgid "Deinterlace"
-msgstr "Zeilenflimmern entfernen"
+msgstr "Avfläta"
 
 #: tfrmmain.actvideofilteredgeenhance.caption
 msgid "Edge enhance"
-msgstr "Kanten betonen"
+msgstr "Förstärk kanter"
 
 #: tfrmmain.actvideofilteremboss.caption
 msgid "Emboss"
-msgstr "Relief-Effekt"
+msgstr "Reliefeffekt"
 
 #: tfrmmain.actvideofilterhflip.caption
 msgid "Horizontal flip"
-msgstr "Horizontal spiegeln"
+msgstr "Vänd horisontellt"
 
 #: tfrmmain.actvideofilternegative.caption
 msgid "Negative"
-msgstr "Negativbild"
+msgstr "Negativ"
 
 #: tfrmmain.actvideofiltersharpen.caption
 msgid "Sharpen"
-msgstr "Bild schärfen"
+msgstr "Skärpa"
 
 #: tfrmmain.actvideofiltervflip.caption
 msgid "Vertical flip"
-msgstr "Vertikal spiegeln"
+msgstr "Vänd vertikalt"
 
 #: tfrmmain.actvideofiltervintage.caption
 msgid "Vintage"
-msgstr "Retro-Effekt"
+msgstr "Retroeffekt"
 
 #: tfrmmain.actvideoinformation.caption
 msgid "Information..."
-msgstr "Informationen..."
+msgstr "Information..."
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
 msgid "Video preview"
-msgstr "Video-Vorschau"
+msgstr "Förhandsvisning av video"
 
 #: tfrmmain.actviewshotchange.caption
 msgctxt "tfrmmain.actviewshotchange.caption"
 msgid "Shot changes"
-msgstr "Szenenwechsel"
+msgstr "Scenbyten"
 
 #: tfrmmain.actviewshotchange.hint
 msgid "Enable/disable shot changes"
-msgstr "Szenenwechsel ein- oder ausschalten"
+msgstr "Aktivera/inaktivera scenbyten"
 
 #: tfrmmain.actwaveextract.caption
 msgid "Extract waveform..."
-msgstr "Wellenform extrahieren..."
+msgstr "Extrahera vågform..."
 
 #: tfrmmain.actwaveformpreview.caption
 msgctxt "tfrmmain.actwaveformpreview.caption"
 msgid "Waveform preview"
-msgstr "Wellenform-Vorschau"
+msgstr "Förhandsvisning av vågform"
 
 #: tfrmmain.actwebpreview.caption
 msgid "Web Preview..."
-msgstr "Web-Vorschau..."
+msgstr "Förhandsvisning på webben..."
 
 #: tfrmmain.actwebreference.caption
 msgid "Web reference..."
-msgstr "Webverweis..."
+msgstr "Webbreferens..."
 
 #: tfrmmain.cboencoding.hint
 msgctxt "tfrmmain.cboencoding.hint"
 msgid "Encoding"
-msgstr "Zeichencodierung"
+msgstr "Kodning"
 
 #: tfrmmain.cboformat.hint
 msgctxt "tfrmmain.cboformat.hint"
 msgid "Format"
-msgstr "Dateiformat"
+msgstr "Format"
 
 #: tfrmmain.cbofps.hint
 msgid "Target FPS of subtitle file"
-msgstr "Ziel-Bildrate für Untertiteldatei (BPS)"
+msgstr "Målfrekvens (BPS) för undertextfil"
 
 #: tfrmmain.cboinputfps.hint
 msgid "FPS of the movie the opened subtitle file was made for"
-msgstr "Bildrate des Films, für den die aktuelle Untertiteldatei erstellt wurde"
+msgstr "Bildfrekvens för filmen som undertextfilen är gjord för"
 
 #: tfrmmain.edtquickaction.hint
 msgctxt "tfrmmain.edtquickaction.hint"
 msgid "Quick Action Finder"
-msgstr "Schnellsuche für Befehle"
+msgstr "Snabbsökningsverktyg"
 
 #: tfrmmain.lblmedialength.hint
 msgid "Video length and FPS"
-msgstr "Videolänge und Bildrate (BPS)"
+msgstr "Videolängd och bildfrekvens (BPS)"
 
 #: tfrmmain.lblmediatime.hint
 msgid "Current video position"
-msgstr "Aktuelle Position im Video"
+msgstr "Aktuell videoposition"
 
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "Redigera"
 
 #: tfrmmain.mnueditentries.caption
 msgctxt "tfrmmain.mnueditentries.caption"
 msgid "Entries"
-msgstr "Einträge"
+msgstr "Poster"
 
 #: tfrmmain.mnueditformat.caption
 msgctxt "tfrmmain.mnueditformat.caption"
@@ -4007,11 +4007,11 @@ msgstr "Format"
 
 #: tfrmmain.mnueditinsertchar.caption
 msgid "Insert Unicode character"
-msgstr "Unicode-Zeichen einfügen"
+msgstr "Infoga Unicode-tecken"
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
-msgstr "Rechts-nach-links-Schrift"
+msgstr "Höger-till-vänster"
 
 #: tfrmmain.mnuedittexts.caption
 msgctxt "tfrmmain.mnuedittexts.caption"
@@ -4021,81 +4021,81 @@ msgstr "Text"
 #: tfrmmain.mnuedittimings.caption
 msgctxt "tfrmmain.mnuedittimings.caption"
 msgid "Timings"
-msgstr "Zeitangaben"
+msgstr "Tidsinställningar"
 
 #: tfrmmain.mnuedittimingsendcue.caption
 msgid "End Cue"
-msgstr "Endmarkierung"
+msgstr "Slutmarkering"
 
 #: tfrmmain.mnuedittimingsextend.caption
 msgid "Extend length"
-msgstr "Dauer verlängern"
+msgstr "Förläng varaktighet"
 
 #: tfrmmain.mnufile.caption
 msgctxt "tfrmmain.mnufile.caption"
 msgid "File"
-msgstr "Datei"
+msgstr "Fil"
 
 #: tfrmmain.mnufileexport.caption
 msgid "Export"
-msgstr "Exportieren"
+msgstr "Exportera"
 
 #: tfrmmain.mnufileimport.caption
 msgid "Import"
-msgstr "Importieren"
+msgstr "Importera"
 
 #: tfrmmain.mnufilemru.caption
 msgctxt "tfrmmain.mnufilemru.caption"
 msgid "Recent files"
-msgstr "Zuletzt geöffnete Dateien"
+msgstr "Senaste filer"
 
 #: tfrmmain.mnufind.caption
 msgctxt "tfrmmain.mnufind.caption"
 msgid "Find"
-msgstr "Suchen"
+msgstr "Sök"
 
 #: tfrmmain.mnuhelp.caption
 msgctxt "tfrmmain.mnuhelp.caption"
 msgid "Help"
-msgstr "Hilfe"
+msgstr "Hjälp"
 
 #: tfrmmain.mnumemoinsertunicodecontrolchar.caption
 msgid "Insert Unicode control character"
-msgstr "Unicode-Steuerzeichen einfügen"
+msgstr "Infoga Unicode-styrtecken"
 
 #: tfrmmain.mnuselect.caption
 msgctxt "tfrmmain.mnuselect.caption"
 msgid "Select"
-msgstr "Auswählen"
+msgstr "Markera"
 
 #: tfrmmain.mnutexteffects.caption
 msgid "Effects"
-msgstr "Texteffekte"
+msgstr "Effekter"
 
 #: tfrmmain.mnutextlines.caption
 msgctxt "tfrmmain.mnutextlines.caption"
 msgid "Lines"
-msgstr "Zeilen"
+msgstr "Rader"
 
 #: tfrmmain.mnutextwords.caption
 msgctxt "tfrmmain.mnutextwords.caption"
 msgid "Words"
-msgstr "Wörter"
+msgstr "Ord"
 
 #: tfrmmain.mnutools.caption
 msgctxt "tfrmmain.mnutools.caption"
 msgid "Tools"
-msgstr "Werkzeuge"
+msgstr "Verktyg"
 
 #: tfrmmain.mnutoolsterminology.caption
 msgctxt "tfrmmain.mnutoolsterminology.caption"
 msgid "Terminology"
-msgstr "Begriffe"
+msgstr "Terminologi"
 
 #: tfrmmain.mnutoolstranslationmemory.caption
 msgctxt "tfrmmain.mnutoolstranslationmemory.caption"
 msgid "Translation memory"
-msgstr "Übersetzungsspeicher"
+msgstr "Översättningsminne"
 
 #: tfrmmain.mnuvideo.caption
 msgctxt "tfrmmain.mnuvideo.caption"
@@ -4104,25 +4104,25 @@ msgstr "Video"
 
 #: tfrmmain.mnuvideoaspectratio.caption
 msgid "Aspect ratio"
-msgstr "Seitenverhältnis"
+msgstr "Bildförhållande"
 
 #: tfrmmain.mnuvideoaudiofilters.caption
 msgctxt "tfrmmain.mnuvideoaudiofilters.caption"
 msgid "Audio filters"
-msgstr "Audio-/Tonfilter"
+msgstr "Ljudfilter"
 
 #: tfrmmain.mnuvideoaudiostream.caption
 msgid "Audio stream"
-msgstr "Audio-/Tonspur"
+msgstr "Ljudström"
 
 #: tfrmmain.mnuvideoplayback.caption
 msgid "Playback"
-msgstr "Wiedergabe"
+msgstr "Uppspelning"
 
 #: tfrmmain.mnuvideosubtitles.caption
 msgctxt "tfrmmain.mnuvideosubtitles.caption"
 msgid "Subtitles"
-msgstr "Untertitel"
+msgstr "Undertexter"
 
 #: tfrmmain.mnuvideovideofilters.caption
 msgctxt "tfrmmain.mnuvideovideofilters.caption"
@@ -4132,44 +4132,44 @@ msgstr "Videofilter"
 #: tfrmmain.mnuvideovolume.caption
 msgctxt "tfrmmain.mnuvideovolume.caption"
 msgid "Volume"
-msgstr "Lautstärke"
+msgstr "Volym"
 
 #: tfrmmain.mnuview.caption
 msgctxt "tfrmmain.mnuview.caption"
 msgid "View"
-msgstr "Ansicht"
+msgstr "Visa"
 
 #: tfrmmain.mnuviewcolumns.caption
 msgid "Columns"
-msgstr "Spalten"
+msgstr "Kolumner"
 
 #: tfrmmain.mnuviewtoolbareditor.caption
 msgctxt "tfrmmain.mnuviewtoolbareditor.caption"
 msgid "Editor"
-msgstr "Bearbeitungsfenster"
+msgstr "Redigerare"
 
 #: tfrmmain.mnuviewtoolbarmain.caption
 msgctxt "tfrmmain.mnuviewtoolbarmain.caption"
 msgid "Main"
-msgstr "Hauptleiste"
+msgstr "Huvudverktygsfält"
 
 #: tfrmmain.mnuviewtoolbars.caption
 msgid "Toolbars"
-msgstr "Werkzeugleiste"
+msgstr "Verktygsfält"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
 msgid "Video"
-msgstr "Video"
+msgstr "Videoverktygsfält"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
 msgctxt "tfrmmain.mnuviewtoolbarwaveform.caption"
 msgid "Waveform"
-msgstr "Wellenform"
+msgstr "Vågform"
 
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
-msgstr "Fenster"
+msgstr "Fönster"
 
 #: tfrmmain.mnuvstvideo.caption
 msgctxt "tfrmmain.mnuvstvideo.caption"
@@ -4178,62 +4178,62 @@ msgstr "Video"
 
 #: tfrmmain.mnuworkspacelayout.caption
 msgid "Layouts"
-msgstr "Arbeitsbereich-Layout"
+msgstr "Arbetsyte-layout"
 
 #: tfrmmain.tedduration.hint
 msgctxt "tfrmmain.tedduration.hint"
 msgid "Duration"
-msgstr "Dauer"
+msgstr "Varaktighet"
 
 #: tfrmmain.tedfinal.hint
 msgctxt "tfrmmain.tedfinal.hint"
 msgid "Final time"
-msgstr "Endzeit"
+msgstr "Sluttid"
 
 #: tfrmmain.tedinitial.hint
 msgctxt "tfrmmain.tedinitial.hint"
 msgid "Initial time"
-msgstr "Startzeit"
+msgstr "Starttid"
 
 #: tfrmmain.tedpause.hint
 msgid "Pause"
-msgstr "Pause"
+msgstr "Paus"
 
 #: tfrmmodifyselection.btnapply.caption
 msgctxt "tfrmmodifyselection.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmmodifyselection.btnclose.caption
 msgctxt "tfrmmodifyselection.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmmodifyselection.caption
 msgid "Modify selection"
-msgstr "Auswahl ändern"
+msgstr "Ändra markering"
 
 #: tfrmmodifyselection.rbnaddtocurrentselection.caption
 msgid "Add to current selection"
-msgstr "Zur aktuellen Auswahl hinzufügen"
+msgstr "Lägg till i aktuell markering"
 
 #: tfrmmodifyselection.rbnnewselection.caption
 msgid "New selection"
-msgstr "Neue Auswahl"
+msgstr "Ny markering"
 
 #: tfrmmodifyselection.rbnsubtractfromcurrentselection.caption
 msgid "Subtract from current selection"
-msgstr "Von aktueller Auswahl entfernen"
+msgstr "Ta bort från aktuell markering"
 
 #: tfrmmultiplereplace.btnapply.caption
 msgctxt "tfrmmultiplereplace.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmmultiplereplace.btnclose.caption
 msgctxt "tfrmmultiplereplace.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmmultiplereplace.btnminus.caption
 msgctxt "tfrmmultiplereplace.btnminus.caption"
@@ -4247,152 +4247,152 @@ msgstr "+"
 
 #: tfrmmultiplereplace.caption
 msgid "Multiple replace"
-msgstr "Mehrere Ersetzungen"
+msgstr "Flera ersättningar"
 
 #: tfrmmultiplereplace.chkre.caption
 msgid "Regular expression"
-msgstr "Regulärer Ausdruck"
+msgstr "Reguljärt uttryck"
 
 #: tfrmmultiplereplace.lblfind.caption
 msgid "Find:"
-msgstr "Suchen:"
+msgstr "Sök:"
 
 #: tfrmmultiplereplace.lblreplace.caption
 msgctxt "tfrmmultiplereplace.lblreplace.caption"
 msgid "Replace with:"
-msgstr "Ersetzen durch:"
+msgstr "Ersätt med:"
 
 #: tfrmpauses.btnapply.caption
 msgctxt "tfrmpauses.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmpauses.btnclose.caption
 msgctxt "tfrmpauses.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmpauses.caption
 msgid "Set gapping"
-msgstr "Pausen einstellen"
+msgstr "Justera pauser"
 
 #: tfrmpauses.lblduration.caption
 msgid "Shorten duration of:"
-msgstr "Dauer verkürzen um:"
+msgstr "Förkorta varaktighet med:"
 
 #: tfrmpauses.lblgap.caption
 msgid "Value:"
-msgstr "Wert:"
+msgstr "Värde:"
 
 #: tfrmpauses.lblscope.caption
 msgctxt "tfrmpauses.lblscope.caption"
 msgid "Scope:"
-msgstr "Bereich:"
+msgstr "Omfattning:"
 
 #: tfrmpauses.rbnallthesubtitles.caption
 msgctxt "tfrmpauses.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Alle Einträge"
+msgstr "Alla poster"
 
 #: tfrmpauses.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmpauses.rbnfromtheselectedsubtitle.caption"
 msgid "From the selected entry"
-msgstr "Ab gewähltem Eintrag"
+msgstr "Från vald post"
 
 #: tfrmpauses.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
-msgstr "Nur gewählte Einträge"
+msgstr "Endast valda poster"
 
 #: tfrmpauses.rdobothentries.caption
 msgid "Both entries equally"
-msgstr "Beide Einträge gleichmässig"
+msgstr "Båda posterna lika mycket"
 
 #: tfrmpauses.rdoentrywithlesscps.caption
 msgid "Entry with less CPS"
-msgstr "Eintrag mit weniger ZPS"
+msgstr "Post med färre TPS"
 
 #: tfrmpauses.rdofirstentry.caption
 msgid "First entry only"
-msgstr "Nur erster Eintrag"
+msgstr "Endast första posten"
 
 #: tfrmpauses.rdosecondentry.caption
 msgid "Second entry only"
-msgstr "Nur zweiter Eintrag"
+msgstr "Endast andra posten"
 
 #: tfrmqualitycheck.btnclose.caption
 msgctxt "tfrmqualitycheck.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmqualitycheck.caption
 msgid "Quality check"
-msgstr "Qualitätsprüfung"
+msgstr "Kvalitetskontroll"
 
 #: tfrmqualitycheck.lblrules.caption
 msgid "Rules"
-msgstr "Regeln"
+msgstr "Regler"
 
 #: tfrmrestorebackup.btnclose.caption
 msgctxt "tfrmrestorebackup.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmrestorebackup.btnrestore.caption
 msgctxt "tfrmrestorebackup.btnrestore.caption"
 msgid "Restore"
-msgstr "Wiederherstellen"
+msgstr "Återställ"
 
 #: tfrmrestorebackup.caption
 msgid "Restore backup"
-msgstr "Sicherung wiederherstellen"
+msgstr "Återställ säkerhetskopia"
 
 #: tfrmroundtime.btnapply.caption
 msgctxt "tfrmroundtime.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmroundtime.btnclose.caption
 msgctxt "tfrmroundtime.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmroundtime.caption
 msgid "Round times"
-msgstr "Zeiten runden"
+msgstr "Avrunda tider"
 
 #: tfrmroundtime.lblscope.caption
 msgctxt "tfrmroundtime.lblscope.caption"
 msgid "Scope:"
-msgstr "Bereich:"
+msgstr "Omfattning:"
 
 #: tfrmroundtime.rbnallthesubtitles.caption
 msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Alle Einträge"
+msgstr "Alla poster"
 
 #: tfrmroundtime.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmroundtime.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
-msgstr "Ab gewähltem Eintrag"
+msgstr "Från vald post"
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
-msgstr "Nur gewählte Einträge"
+msgstr "Endast valda poster"
 
 #: tfrmroundtime.rdofps.caption
 msgid "Using FPS"
-msgstr "Mit BPS"
+msgstr "Med BPS"
 
 #: tfrmroundtime.rdomilliseconds.caption
 msgid "Using Milliseconds"
-msgstr "Mit Millisekunden"
+msgstr "Med millisekunder"
 
 #: tfrmsettings.btnclose.caption
 msgctxt "tfrmsettings.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmsettings.btnfasterwhisper.caption
 msgctxt "tfrmsettings.btnfasterwhisper.caption"
@@ -4427,11 +4427,11 @@ msgstr "..."
 #: tfrmsettings.btnshortcutapply.caption
 msgctxt "tfrmsettings.btnshortcutapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmsettings.btnshortcutsave.caption
 msgid "Save as..."
-msgstr "Speichern unter..."
+msgstr "Spara som..."
 
 #: tfrmsettings.btnwhispercpp.caption
 msgctxt "tfrmsettings.btnwhispercpp.caption"
@@ -4445,116 +4445,116 @@ msgstr "..."
 
 #: tfrmsettings.caption
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr "Inställningar"
 
 #: tfrmsettings.chkautoplay.caption
 msgid "Autoplay on video load"
-msgstr "Video automatisch abspielen beim Laden"
+msgstr "Spela upp automatiskt vid videoladdning"
 
 #: tfrmsettings.chkdotsonsplit.caption
 msgctxt "tfrmsettings.chkdotsonsplit.caption"
 msgid "Add '...' on split subtitle"
-msgstr "Füge '...' bei geteiltem Untertitel hinzu"
+msgstr "Lägg till '...' vid delad undertext"
 
 #: tfrmsettings.chkdrawerrors.caption
 msgid "Show errors in list"
-msgstr "Fehler in der Liste anzeigen"
+msgstr "Visa fel i listan"
 
 #: tfrmsettings.chkdrawtags.caption
 msgid "Interpret tags in list"
-msgstr "Tags in der Liste anzeigen und erkennen"
+msgstr "Tolka taggar i listan"
 
 #: tfrmsettings.chkdrawwaveformgap.caption
 msgid "Show gap in timeline"
-msgstr "Abstand/Lücke in der Zeitachse anzeigen"
+msgstr "Visa mellanrum/lucka i tidslinjen"
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
 msgid "Prompt when deleting subtitles"
-msgstr "Fragen vor dem Löschen von Untertiteln"
+msgstr "Bekräfta innan undertexter tas bort"
 
 #: tfrmsettings.chkpromptforinputencoding.caption
 msgid "Prompt for Encoding before loading a file"
-msgstr "Nach Zeichencodierung fragen vor dem Laden"
+msgstr "Fråga efter kodning innan filen laddas"
 
 #: tfrmsettings.chkpromptforinputfps.caption
 msgid "Prompt for FPS before loading a file"
-msgstr "Nach BPS fragen vor dem Laden der Datei"
+msgstr "Fråga efter BPS innan filen laddas"
 
 #: tfrmsettings.chkpromptforsavewitherrors.caption
 msgid "Prompt when saving file with errors"
-msgstr "Warnung beim Speichern mit Fehlern"
+msgstr "Varning vid sparande med fel"
 
 #: tfrmsettings.chkshowcpsbar.caption
 msgid "Show CPS bar"
-msgstr "ZPS-Anzeige anzeigen"
+msgstr "Visa TPS-fält"
 
 #: tfrmsettings.chkshowsplashwindow.caption
 msgid "Show splash window"
-msgstr "Startfenster anzeigen"
+msgstr "Visa startfönster"
 
 #: tfrmsettings.chksubtitlehandlebympv.caption
 msgid "mpv handles subtitles for preview"
-msgstr "mpv zeigt Untertitel in der Vorschau"
+msgstr "mpv visar undertexter i förhandsvisning"
 
 #: tfrmsettings.chkusehwdec.caption
 msgid "Use hardware video decoding"
-msgstr "Hardware zur Videowiedergabe nutzen"
+msgstr "Använd hårdvaruavkodning"
 
 #: tfrmsettings.chkuseownfiledialog.caption
 msgid "Use Tero file dialog"
-msgstr "Tero-Dateiauswahl verwenden"
+msgstr "Använd Tero-fildialog"
 
 #: tfrmsettings.chkwritebom.caption
 msgid "Write BOM on save"
-msgstr "BOM beim Speichern schreiben"
+msgstr "Skriv BOM vid sparande"
 
 #: tfrmsettings.lbladditionalmpvoptions.caption
 msgid "Additional mpv options"
-msgstr "Weitere mpv-Einstellungen"
+msgstr "Ytterligare mpv-inställningar"
 
 #: tfrmsettings.lblapi_tts.caption
 msgid "ElevenLabs API key"
-msgstr "API-Schlüssel für ElevenLabs"
+msgstr "API-nyckel för ElevenLabs"
 
 #: tfrmsettings.lblautobackup.caption
 msgid "Auto-backup every (minutes)"
-msgstr "Automatisch sichern alle (Minuten)"
+msgstr "Autospara var (minuter)"
 
 #: tfrmsettings.lblchaining.caption
 msgctxt "tfrmsettings.lblchaining.caption"
 msgid "Chaining (frames)"
-msgstr "Verketten (Bilder)"
+msgstr "Kedjning (bilder)"
 
 #: tfrmsettings.lblcpl.caption
 msgctxt "tfrmsettings.lblcpl.caption"
 msgid "Characters per line"
-msgstr "Zeichen pro Zeile (ZPZ)"
+msgstr "Tecken per rad (TPR)"
 
 #: tfrmsettings.lblcps.caption
 msgctxt "tfrmsettings.lblcps.caption"
 msgid "Characters per second"
-msgstr "Zeichen pro Sekunde (ZPS)"
+msgstr "Tecken per sekund (TPS)"
 
 #: tfrmsettings.lblcpsstrategy.caption
 msgctxt "tfrmsettings.lblcpsstrategy.caption"
 msgid "Chars excluded from CPS count"
-msgstr "Zeichen, die nicht bei ZPS zählen"
+msgstr "Tecken som inte räknas i TPS"
 
 #: tfrmsettings.lbldefaultfileencoding.caption
 msgid "Default file encoding"
-msgstr "Standard-Zeichencodierung"
+msgstr "Standardfilkodning"
 
 #: tfrmsettings.lbldefaultfileformat.caption
 msgid "Default file format"
-msgstr "Standard-Dateiformat"
+msgstr "Standardfilformat"
 
 #: tfrmsettings.lbldefaultframerate.caption
 msgid "Default input frame rate"
-msgstr "Standard-Bildrate der Quelle"
+msgstr "Standardbildfrekvens (inmatning)"
 
 #: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
 msgid "Dialogue segments detection threshold (rms)"
-msgstr "Empfindlichkeit zur Spracherkennung (rms)"
+msgstr "Tröskel för taligenkänning (rms)"
 
 #: tfrmsettings.lblfasterwhisper.caption
 msgid "Faster-Whisper"
@@ -4566,41 +4566,41 @@ msgstr "FFmpeg"
 
 #: tfrmsettings.lblframestep.caption
 msgid "Frame step"
-msgstr "Schrittweite in Bildern"
+msgstr "Bildsteg"
 
 #: tfrmsettings.lbllanguage.caption
 msgctxt "tfrmsettings.lbllanguage.caption"
 msgid "Language"
-msgstr "Sprache"
+msgstr "Språk"
 
 #: tfrmsettings.lbllistfontsize.caption
 msgid "List font size"
-msgstr "Schriftgrösse der Liste"
+msgstr "Textstorlek i listan"
 
 #: tfrmsettings.lbllistmode.caption
 msgctxt "tfrmsettings.lbllistmode.caption"
 msgid "List mode"
-msgstr "Listenansicht"
+msgstr "Listläge"
 
 #: tfrmsettings.lblmaxdurationms.caption
 msgctxt "tfrmsettings.lblmaxdurationms.caption"
 msgid "Max. duration (ms)"
-msgstr "Maximale Dauer (ms)"
+msgstr "Maximal varaktighet (ms)"
 
 #: tfrmsettings.lblmaxlinecount.caption
 msgctxt "tfrmsettings.lblmaxlinecount.caption"
 msgid "Max. line count"
-msgstr "Maximale Zeilenanzahl"
+msgstr "Maximalt antal rader"
 
 #: tfrmsettings.lblmindurationms.caption
 msgctxt "tfrmsettings.lblmindurationms.caption"
 msgid "Min. duration / per word (ms)"
-msgstr "Minimale Dauer pro Wort (ms)"
+msgstr "Minimal varaktighet per ord (ms)"
 
 #: tfrmsettings.lblnewsubtitlems.caption
 msgctxt "tfrmsettings.lblnewsubtitlems.caption"
 msgid "New subtitle (ms)"
-msgstr "Neuer Untertitel (ms)"
+msgstr "Ny undertext (ms)"
 
 #: tfrmsettings.lblprofile.caption
 msgid "Profile"
@@ -4609,12 +4609,12 @@ msgstr "Profil"
 #: tfrmsettings.lblprohibitedchars.caption
 msgctxt "tfrmsettings.lblprohibitedchars.caption"
 msgid "Prohibited characters"
-msgstr "Nicht erlaubte Zeichen"
+msgstr "Otillåtna tecken"
 
 #: tfrmsettings.lblrepeatablechars.caption
 msgctxt "tfrmsettings.lblrepeatablechars.caption"
 msgid "Repeatable characters"
-msgstr "Wiederholbare Zeichen"
+msgstr "Upprepningsbara tecken"
 
 #: tfrmsettings.lblscenedetect.caption
 msgid "PySceneDetect"
@@ -4623,101 +4623,101 @@ msgstr "PySceneDetect"
 #: tfrmsettings.lblscsnaparea.caption
 msgctxt "tfrmsettings.lblscsnaparea.caption"
 msgid "Shot change snap / threshold (frames)"
-msgstr "Szenenwechsel: Anker/Sensitivität (Bilder)"
+msgstr "Scenbyte: fäste/tröskel (bilder)"
 
 #: tfrmsettings.lblscsnapincues.caption
 msgctxt "tfrmsettings.lblscsnapincues.caption"
 msgid "Snap in cues after SC (frames)"
-msgstr "Einstiegspunkt nach Szenenwechsel (Bilder)"
+msgstr "Startpunkt efter scenbyte (bilder)"
 
 #: tfrmsettings.lblscsnapoutcues.caption
 msgctxt "tfrmsettings.lblscsnapoutcues.caption"
 msgid "Snap out cues before SC (frames)"
-msgstr "Ausstiegspunkt vor Szenenwechsel (Bilder)"
+msgstr "Slutpunkt före scenbyte (bilder)"
 
 #: tfrmsettings.lblseektime.caption
 msgid "Seek time (ms)"
-msgstr "Suchzeit (ms)"
+msgstr "Sökningstid (ms)"
 
 #: tfrmsettings.lblshifttimems.caption
 msgid "Shift time (ms)"
-msgstr "Zeitverschiebung (ms)"
+msgstr "Tidsförskjutning (ms)"
 
 #: tfrmsettings.lblshortcut.caption
 msgid "Shortcut"
-msgstr "Tastenkombination"
+msgstr "Genväg"
 
 #: tfrmsettings.lblshortcutcat.caption
 msgid "Category"
-msgstr "Kategorie"
+msgstr "Kategori"
 
 #: tfrmsettings.lblshortcutpreset.caption
 msgid "Preset"
-msgstr "Voreinstellung"
+msgstr "Förinställning"
 
 #: tfrmsettings.lblsubbackground.caption
 msgctxt "tfrmsettings.lblsubbackground.caption"
 msgid "Background"
-msgstr "Hintergrund"
+msgstr "Bakgrund"
 
 #: tfrmsettings.lblsubborder.caption
 msgid "Border"
-msgstr "Rahmen"
+msgstr "Kantlinje"
 
 #: tfrmsettings.lblsubcolor.caption
 msgctxt "tfrmsettings.lblsubcolor.caption"
 msgid "Color"
-msgstr "Farbe"
+msgstr "Färg"
 
 #: tfrmsettings.lblsubshadow.caption
 msgid "Shadow"
-msgstr "Schatten"
+msgstr "Skugga"
 
 #: tfrmsettings.lblsubsize.caption
 msgctxt "tfrmsettings.lblsubsize.caption"
 msgid "Size"
-msgstr "Grösse"
+msgstr "Storlek"
 
 #: tfrmsettings.lblsubtitlepausems.caption
 msgctxt "tfrmsettings.lblsubtitlepausems.caption"
 msgid "Min. gap"
-msgstr "Mindestabstand/-lücke"
+msgstr "Minsta paus"
 
 #: tfrmsettings.lblsubtitles.caption
 msgctxt "tfrmsettings.lblsubtitles.caption"
 msgid "Subtitles"
-msgstr "Untertitel"
+msgstr "Undertexter"
 
 #: tfrmsettings.lbltextboxfontsize.caption
 msgid "Text box font size"
-msgstr "Schriftgrösse im Texteingabefeld"
+msgstr "Textstorlek i textrutan"
 
 #: tfrmsettings.lbltheme.caption
 msgid "Theme"
-msgstr "Thema"
+msgstr "Tema"
 
 #: tfrmsettings.lbltimecodemode.caption
 msgid "Time code mode"
-msgstr "Zeitcode-Modus"
+msgstr "Tidskodsläge"
 
 #: tfrmsettings.lblwavecolor.caption
 msgctxt "tfrmsettings.lblwavecolor.caption"
 msgid "Color"
-msgstr "Farbe"
+msgstr "Färg"
 
 #: tfrmsettings.lblwaveentry.caption
 msgctxt "tfrmsettings.lblwaveentry.caption"
 msgid "Entry"
-msgstr "Eintrag"
+msgstr "Inlägg"
 
 #: tfrmsettings.lblwaveform.caption
 msgctxt "tfrmsettings.lblwaveform.caption"
 msgid "Waveform"
-msgstr "Wellenform"
+msgstr "Vågform"
 
 #: tfrmsettings.lblwebreference.caption
 msgid "Web reference"
-msgstr "Webreferenz"
+msgstr "Webbreferens"
 
 #: tfrmsettings.lblwhispercpp.caption
 msgid "Whisper.cpp"
@@ -4726,7 +4726,7 @@ msgstr "Whisper.cpp"
 #: tfrmsettings.lblwpm.caption
 msgctxt "tfrmsettings.lblwpm.caption"
 msgid "Words per minute"
-msgstr "Wörter pro Minute (WPM)"
+msgstr "Ord per minut (OPM)"
 
 #: tfrmsettings.lblytdlp.caption
 msgid "YT-DLP"
@@ -4734,21 +4734,21 @@ msgstr "YT-DLP"
 
 #: tfrmsettings.lblzerotodisable.caption
 msgid "(0 to disable)"
-msgstr "(0 zum Deaktivieren)"
+msgstr "(0 för att inaktivera)"
 
 #: tfrmshifttimes.btnapply.caption
 msgctxt "tfrmshifttimes.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmshifttimes.btnclose.caption
 msgctxt "tfrmshifttimes.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmshifttimes.caption
 msgid "Shift times"
-msgstr "Zeiten verschieben"
+msgstr "Flytta tider"
 
 #: tfrmshifttimes.cbooffset.text
 msgctxt "tfrmshifttimes.cbooffset.text"
@@ -4758,57 +4758,57 @@ msgstr "+"
 #: tfrmshifttimes.lbloffset.caption
 msgctxt "tfrmshifttimes.lbloffset.caption"
 msgid "Offset"
-msgstr "Zeitverschiebung"
+msgstr "Förskjutning"
 
 #: tfrmshifttimes.lblscope.caption
 msgctxt "tfrmshifttimes.lblscope.caption"
 msgid "Scope:"
-msgstr "Bereich:"
+msgstr "Omfattning:"
 
 #: tfrmshifttimes.rbnallthesubtitles.caption
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Alle Einträge"
+msgstr "Alla poster"
 
 #: tfrmshifttimes.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmshifttimes.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
-msgstr "Ab ausgewähltem Eintrag"
+msgstr "Från vald post"
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
-msgstr "Nur ausgewählte Einträge"
+msgstr "Endast valda poster"
 
 #: tfrmshotchanges.btnapply.caption
 msgctxt "tfrmshotchanges.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmshotchanges.btnclose.caption
 msgctxt "tfrmshotchanges.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmshotchanges.btndetect.caption
 msgctxt "tfrmshotchanges.btndetect.caption"
 msgid "Detect"
-msgstr "Erkennen"
+msgstr "Identifiera"
 
 #: tfrmshotchanges.btnexport.caption
 msgctxt "tfrmshotchanges.btnexport.caption"
 msgid "Export..."
-msgstr "Exportieren..."
+msgstr "Exportera..."
 
 #: tfrmshotchanges.btnimport.caption
 msgctxt "tfrmshotchanges.btnimport.caption"
 msgid "Import..."
-msgstr "Importieren..."
+msgstr "Importera..."
 
 #: tfrmshotchanges.caption
 msgctxt "tfrmshotchanges.caption"
 msgid "Shot changes"
-msgstr "Kamerawechsel"
+msgstr "Bildbyten"
 
 #: tfrmshotchanges.cbooffset.text
 msgctxt "tfrmshotchanges.cbooffset.text"
@@ -4817,85 +4817,85 @@ msgstr "+"
 
 #: tfrmshotchanges.lbldetectapp.caption
 msgid "App to detect"
-msgstr "Programm zur Erkennung"
+msgstr "Program för att identifiera"
 
 #: tfrmshotchanges.lbloffset.caption
 msgctxt "tfrmshotchanges.lbloffset.caption"
 msgid "Offset"
-msgstr "Zeitverschiebung"
+msgstr "Förskjutning"
 
 #: tfrmshotchanges.lblsensitivity.caption
 msgid "Detection sensitivity"
-msgstr "Empfindlichkeit der Erkennung"
+msgstr "Känslighet för identifiering"
 
 #: tfrmshotchanges.lbltimecodein.caption
 msgid "Time code for import"
-msgstr "Zeitcode für den Import"
+msgstr "Tidskod för import"
 
 #: tfrmshotchanges.lbltimecodeout.caption
 msgid "Time code for export"
-msgstr "Zeitcode für den Export"
+msgstr "Tidskod för export"
 
 #: tfrmspellcheck.btnadd.caption
 msgctxt "tfrmspellcheck.btnadd.caption"
 msgid "Add"
-msgstr "Hinzufügen"
+msgstr "Lägg till"
 
 #: tfrmspellcheck.btnchange.caption
 msgctxt "tfrmspellcheck.btnchange.caption"
 msgid "Change"
-msgstr "Ändern"
+msgstr "Ändra"
 
 #: tfrmspellcheck.btnchangeall.caption
 msgctxt "tfrmspellcheck.btnchangeall.caption"
 msgid "Change all"
-msgstr "Alles ändern"
+msgstr "Ändra alla"
 
 #: tfrmspellcheck.btnclose.caption
 msgctxt "tfrmspellcheck.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmspellcheck.btnskip.caption
 msgctxt "tfrmspellcheck.btnskip.caption"
 msgid "Skip"
-msgstr "Überspringen"
+msgstr "Hoppa över"
 
 #: tfrmspellcheck.btnskipall.caption
 msgctxt "tfrmspellcheck.btnskipall.caption"
 msgid "Skip all"
-msgstr "Alle überspringen"
+msgstr "Hoppa över alla"
 
 #: tfrmspellcheck.caption
 msgid "Spell check"
-msgstr "Rechtschreibprüfung"
+msgstr "Stavningskontroll"
 
 #: tfrmspellcheck.lbldictionary.caption
 msgctxt "tfrmspellcheck.lbldictionary.caption"
 msgid "Dictionary"
-msgstr "Wörterbuch"
+msgstr "Ordbok"
 
 #: tfrmspellcheck.lblnotfound.caption
 msgid "Not found"
-msgstr "Nicht gefunden"
+msgstr "Hittades inte"
 
 #: tfrmspellcheck.lblsource.caption
 msgid "Source"
-msgstr "Quelle"
+msgstr "Källa"
 
 #: tfrmspellcheck.lblsuggestions.caption
 msgid "Suggestions"
-msgstr "Vorschläge"
+msgstr "Förslag"
 
 #: tfrmstatistics.btnclose.caption
 msgctxt "tfrmstatistics.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmstatistics.btnexport.caption
 msgctxt "tfrmstatistics.btnexport.caption"
 msgid "Export..."
-msgstr "Exportieren..."
+msgstr "Exportera..."
 
 #: tfrmstatistics.caption
 msgid "Statistics"
@@ -4904,11 +4904,11 @@ msgstr "Statistik"
 #: tfrmstreamextractor.btnclose.caption
 msgctxt "tfrmstreamextractor.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmstreamextractor.btnextract.caption
 msgid "Extract"
-msgstr "Extrahieren"
+msgstr "Extrahera"
 
 #: tfrmstreamextractor.btnfile.caption
 msgctxt "tfrmstreamextractor.btnfile.caption"
@@ -4922,46 +4922,46 @@ msgstr "..."
 
 #: tfrmstreamextractor.caption
 msgid "Stream extractor"
-msgstr "Datenstrom-Extraktor"
+msgstr "Strömextrahering"
 
 #: tfrmstreamextractor.lblfile.caption
 msgctxt "tfrmstreamextractor.lblfile.caption"
 msgid "File"
-msgstr "Datei"
+msgstr "Fil"
 
 #: tfrmstreamextractor.lblfolder.caption
 msgctxt "tfrmstreamextractor.lblfolder.caption"
 msgid "Output folder"
-msgstr "Ausgabeordner"
+msgstr "Utdatakatalog"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmtbx.caption
 msgctxt "tfrmtbx.caption"
 msgid "Terminology"
-msgstr "Begriffe"
+msgstr "Terminologi"
 
 #: tfrmtbxedit.btnadd.caption
 msgctxt "tfrmtbxedit.btnadd.caption"
 msgid "Add"
-msgstr "Hinzufügen"
+msgstr "Lägg till"
 
 #: tfrmtbxedit.btnclose.caption
 msgctxt "tfrmtbxedit.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmtbxedit.caption
 msgctxt "tfrmtbxedit.caption"
 msgid "Terminology"
-msgstr "Begriffe"
+msgstr "Terminologi"
 
 #: tfrmtbxedit.lblnotes.caption
 msgid "Notes"
-msgstr "Anmerkung"
+msgstr "Anteckningar"
 
 #: tfrmtbxedit.lbloriginal.caption
 msgctxt "tfrmtbxedit.lbloriginal.caption"
@@ -4971,42 +4971,42 @@ msgstr "Original"
 #: tfrmtbxedit.lbltranslated.caption
 msgctxt "tfrmtbxedit.lbltranslated.caption"
 msgid "Translated"
-msgstr "Übersetzung"
+msgstr "Översättning"
 
 #: tfrmtbxlist.btnclose.caption
 msgctxt "tfrmtbxlist.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmtbxlist.btncopy.caption
 msgctxt "tfrmtbxlist.btncopy.caption"
 msgid "Copy"
-msgstr "Kopieren"
+msgstr "Kopiera"
 
 #: tfrmtbxlist.caption
 msgctxt "tfrmtbxlist.caption"
 msgid "Terminology"
-msgstr "Begriffe"
+msgstr "Terminologi"
 
 #: tfrmtbxlist.lblfind.caption
 msgctxt "tfrmtbxlist.lblfind.caption"
 msgid "Find"
-msgstr "Suchen"
+msgstr "Sök"
 
 #: tfrmtbxlist.lbltotal.caption
 msgctxt "tfrmtbxlist.lbltotal.caption"
 msgid "Total:"
-msgstr "Total:"
+msgstr "Totalt:"
 
 #: tfrmtbxsettings.btnapply.caption
 msgctxt "tfrmtbxsettings.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmtbxsettings.btnclose.caption
 msgctxt "tfrmtbxsettings.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmtbxsettings.btnopenfile.caption
 msgctxt "tfrmtbxsettings.btnopenfile.caption"
@@ -5016,48 +5016,48 @@ msgstr "..."
 #: tfrmtbxsettings.caption
 msgctxt "tfrmtbxsettings.caption"
 msgid "Terminology settings"
-msgstr "Begriffe-Einstellungen"
+msgstr "Terminologiinställningar"
 
 #: tfrmtbxsettings.lblfilename.caption
 msgctxt "tfrmtbxsettings.lblfilename.caption"
 msgid "Filename"
-msgstr "Dateiname"
+msgstr "Filnamn"
 
 #: tfrmtbxsettings.lblsourcelang.caption
 msgctxt "tfrmtbxsettings.lblsourcelang.caption"
 msgid "Source language"
-msgstr "Ausgangssprache"
+msgstr "Källspråk"
 
 #: tfrmtbxsettings.lbltranslang.caption
 msgctxt "tfrmtbxsettings.lbltranslang.caption"
 msgid "Translation language"
-msgstr "Zielsprache"
+msgstr "Målspråk"
 
 #: tfrmtimeexpander.btnapply.caption
 msgctxt "tfrmtimeexpander.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmtimeexpander.btnclose.caption
 msgctxt "tfrmtimeexpander.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmtimeexpander.caption
 msgid "Time expander/reducer"
-msgstr "Zeit anpassen"
+msgstr "Tidsjustering"
 
 #: tfrmtimeexpander.chkduration.caption
 msgid "Only if duration is longer than"
-msgstr "Nur wenn die Dauer länger ist als"
+msgstr "Endast om varaktigheten är längre än"
 
 #: tfrmtimeexpander.chksubtitle.caption
 msgid "Only if subtitle is longer than"
-msgstr "Nur wenn der Untertitel länger ist als"
+msgstr "Endast om undertexten är längre än"
 
 #: tfrmtimeexpander.lblchars.caption
 msgid "characters"
-msgstr "Zeichen"
+msgstr "tecken"
 
 #: tfrmtimeexpander.lblms.caption
 msgctxt "tfrmtimeexpander.lblms.caption"
@@ -5072,134 +5072,134 @@ msgstr "ms"
 #: tfrmtimeexpander.lblscope.caption
 msgctxt "tfrmtimeexpander.lblscope.caption"
 msgid "Scope:"
-msgstr "Bereich:"
+msgstr "Omfång:"
 
 #: tfrmtimeexpander.rbnallthesubtitles.caption
 msgctxt "tfrmtimeexpander.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Alle Einträge"
+msgstr "Alla poster"
 
 #: tfrmtimeexpander.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmtimeexpander.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
-msgstr "Ab gewähltem Eintrag"
+msgstr "Från vald post"
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
-msgstr "Nur gewählte Einträge"
+msgstr "Endast valda poster"
 
 #: tfrmtranslate.btnclose.caption
 msgctxt "tfrmtranslate.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmtranslate.btntranslate.caption
 msgctxt "tfrmtranslate.btntranslate.caption"
 msgid "Translate"
-msgstr "Übersetzen"
+msgstr "Översätt"
 
 #: tfrmtranslate.caption
 msgctxt "tfrmtranslate.caption"
 msgid "Translate"
-msgstr "Übersetzung"
+msgstr "Översättning"
 
 #: tfrmtranslate.lblinput.caption
 msgid "Input:"
-msgstr "Quelle:"
+msgstr "Inmatning:"
 
 #: tfrmtranslate.lbloutput.caption
 msgctxt "tfrmtranslate.lbloutput.caption"
 msgid "Output:"
-msgstr "Ausgabe:"
+msgstr "Utmatning:"
 
 #: tfrmtranslate.lblscope.caption
 msgctxt "tfrmtranslate.lblscope.caption"
 msgid "Scope:"
-msgstr "Bereich:"
+msgstr "Omfång:"
 
 #: tfrmtranslate.lblsourcelanguage.caption
 msgid "Source language:"
-msgstr "Ausgangssprache:"
+msgstr "Källspråk:"
 
 #: tfrmtranslate.lbltranslationlanguage.caption
 msgid "Translation language:"
-msgstr "Zielsprache:"
+msgstr "Målspråk:"
 
 #: tfrmtranslate.rbnallthesubtitles.caption
 msgctxt "tfrmtranslate.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Alle Einträge"
+msgstr "Alla poster"
 
 #: tfrmtranslate.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmtranslate.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
-msgstr "Ab gewähltem Eintrag"
+msgstr "Från vald post"
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
-msgstr "Nur gewählte Einträge"
+msgstr "Endast valda poster"
 
 #: tfrmtranslationmemory.btnclose.caption
 msgctxt "tfrmtranslationmemory.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmtranslationmemory.btncopy.caption
 msgctxt "tfrmtranslationmemory.btncopy.caption"
 msgid "Copy"
-msgstr "Kopieren"
+msgstr "Kopiera"
 
 #: tfrmtranslationmemory.btnuse.caption
 msgctxt "tfrmtranslationmemory.btnuse.caption"
 msgid "Use"
-msgstr "Verwenden"
+msgstr "Använd"
 
 #: tfrmtranslationmemory.btnvalidate.caption
 msgctxt "tfrmtranslationmemory.btnvalidate.caption"
 msgid "Validate"
-msgstr "Validieren"
+msgstr "Validera"
 
 #: tfrmtranslationmemory.caption
 msgctxt "tfrmtranslationmemory.caption"
 msgid "Translation memory"
-msgstr "Übersetzungsspeicher"
+msgstr "Översättningsminne"
 
 #: tfrmtranslationmemorylist.btnclose.caption
 msgctxt "tfrmtranslationmemorylist.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmtranslationmemorylist.btncopy.caption
 msgctxt "tfrmtranslationmemorylist.btncopy.caption"
 msgid "Copy"
-msgstr "Kopieren"
+msgstr "Kopiera"
 
 #: tfrmtranslationmemorylist.caption
 msgctxt "tfrmtranslationmemorylist.caption"
 msgid "Translation memory"
-msgstr "Übersetzungsspeicher"
+msgstr "Översättningsminne"
 
 #: tfrmtranslationmemorylist.lblfind.caption
 msgctxt "tfrmtranslationmemorylist.lblfind.caption"
 msgid "Find"
-msgstr "Suchen"
+msgstr "Sök"
 
 #: tfrmtranslationmemorylist.lbltotal.caption
 msgctxt "tfrmtranslationmemorylist.lbltotal.caption"
 msgid "Total:"
-msgstr "Total:"
+msgstr "Totalt:"
 
 #: tfrmtranslationmemorysettings.btnapply.caption
 msgctxt "tfrmtranslationmemorysettings.btnapply.caption"
 msgid "Apply"
-msgstr "Übernehmen"
+msgstr "Verkställ"
 
 #: tfrmtranslationmemorysettings.btnclose.caption
 msgctxt "tfrmtranslationmemorysettings.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmtranslationmemorysettings.btnopenfile.caption
 msgctxt "tfrmtranslationmemorysettings.btnopenfile.caption"
@@ -5209,27 +5209,27 @@ msgstr "..."
 #: tfrmtranslationmemorysettings.caption
 msgctxt "tfrmtranslationmemorysettings.caption"
 msgid "Translation memory settings"
-msgstr "Einstellungen Übersetzungsspeicher"
+msgstr "Inställningar för översättningsminne"
 
 #: tfrmtranslationmemorysettings.lblfilename.caption
 msgctxt "tfrmtranslationmemorysettings.lblfilename.caption"
 msgid "File name"
-msgstr "Dateiname"
+msgstr "Filnamn"
 
 #: tfrmtranslationmemorysettings.lblsourcelang.caption
 msgctxt "tfrmtranslationmemorysettings.lblsourcelang.caption"
 msgid "Source language"
-msgstr "Ausgangssprache"
+msgstr "Källspråk"
 
 #: tfrmtranslationmemorysettings.lbltranslang.caption
 msgctxt "tfrmtranslationmemorysettings.lbltranslang.caption"
 msgid "Translation language"
-msgstr "Zielsprache"
+msgstr "Målspråk"
 
 #: tfrmtts.btnclose.caption
 msgctxt "tfrmtts.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmtts.btnfolder.caption
 msgctxt "tfrmtts.btnfolder.caption"
@@ -5239,64 +5239,64 @@ msgstr "..."
 #: tfrmtts.btngenerate.caption
 msgctxt "tfrmtts.btngenerate.caption"
 msgid "Generate"
-msgstr "Erzeugen"
+msgstr "Skapa"
 
 #: tfrmtts.btnpreview.caption
 msgid "Preview"
-msgstr "Vorschau"
+msgstr "Förhandsvisa"
 
 #: tfrmtts.caption
 msgid "Text to speech"
-msgstr "Text-zu-Sprache"
+msgstr "Text till tal"
 
 #: tfrmtts.chkboost.caption
 msgctxt "tfrmtts.chkboost.caption"
 msgid "Speaker boost"
-msgstr "Lautsprecherverstärkung"
+msgstr "Förstärkt tal"
 
 #: tfrmtts.lblfolder.caption
 msgid "Folder:"
-msgstr "Ordner:"
+msgstr "Mapp:"
 
 #: tfrmtts.lblscope.caption
 msgctxt "tfrmtts.lblscope.caption"
 msgid "Scope:"
-msgstr "Bereich:"
+msgstr "Omfattning:"
 
 #: tfrmtts.lblsimilarityboost.caption
 msgctxt "tfrmtts.lblsimilarityboost.caption"
 msgid "Similarity boost %:"
-msgstr "Ähnlichkeitsverstärkung %:"
+msgstr "Likhetsförstärkning %:"
 
 #: tfrmtts.lblstability.caption
 msgctxt "tfrmtts.lblstability.caption"
 msgid "Stability %:"
-msgstr "Stabilität %:"
+msgstr "Stabilitet %:"
 
 #: tfrmtts.lblstyle.caption
 msgctxt "tfrmtts.lblstyle.caption"
 msgid "Style exaggeration %:"
-msgstr "Stilübertreibung %:"
+msgstr "Stilöverdrift %:"
 
 #: tfrmtts.lblvoice.caption
 msgctxt "tfrmtts.lblvoice.caption"
 msgid "Voice:"
-msgstr "Stimme:"
+msgstr "Röst:"
 
 #: tfrmtts.rbnallthesubtitles.caption
 msgctxt "tfrmtts.rbnallthesubtitles.caption"
 msgid "All entries"
-msgstr "Alle Einträge"
+msgstr "Alla poster"
 
 #: tfrmtts.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmtts.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
-msgstr "Vom ausgewählten Eintrag"
+msgstr "Från vald post"
 
 #: tfrmtts.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
-msgstr "Nur ausgewählte Einträge"
+msgstr "Endast valda poster"
 
 #: tfrmvideodubbing.btnbackgroundmusic.caption
 msgctxt "tfrmvideodubbing.btnbackgroundmusic.caption"
@@ -5306,156 +5306,156 @@ msgstr "..."
 #: tfrmvideodubbing.btnclose.caption
 msgctxt "tfrmvideodubbing.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmvideodubbing.btngenerate.caption
 msgctxt "tfrmvideodubbing.btngenerate.caption"
 msgid "Generate"
-msgstr "Erzeugen"
+msgstr "Skapa"
 
 #: tfrmvideodubbing.caption
 msgid "Video dubbing"
-msgstr "Videonachvertonung"
+msgstr "Ljudläggning av video"
 
 #: tfrmvideodubbing.chkbackgroundmusic.caption
 msgid "Background music"
-msgstr "Hintergrundmusik"
+msgstr "Bakgrundsmusik"
 
 #: tfrmvideodubbing.chkboost.caption
 msgctxt "tfrmvideodubbing.chkboost.caption"
 msgid "Speaker boost"
-msgstr "Lautsprecherverstärkung"
+msgstr "Förstärkt tal"
 
 #: tfrmvideodubbing.chkglobalvoice.caption
 msgid "Global voice"
-msgstr "Globale Stimme"
+msgstr "Global röst"
 
 #: tfrmvideodubbing.chksubtitletrack.caption
 msgid "Subtitle track"
-msgstr "Untertitelspur"
+msgstr "Undertextspår"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
 msgid "Similarity boost %:"
-msgstr "Ähnlichkeit erhöhen %:"
+msgstr "Likhetsförstärkning %:"
 
 #: tfrmvideodubbing.lblstability.caption
 msgctxt "tfrmvideodubbing.lblstability.caption"
 msgid "Stability %:"
-msgstr "Stabilität %:"
+msgstr "Stabilitet %:"
 
 #: tfrmvideodubbing.lblstyle.caption
 msgctxt "tfrmvideodubbing.lblstyle.caption"
 msgid "Style exaggeration %:"
-msgstr "Stilverstärkung %:"
+msgstr "Stilöverdrift %:"
 
 #: tfrmvideodubbing.lblvoice.caption
 msgctxt "tfrmvideodubbing.lblvoice.caption"
 msgid "Voice:"
-msgstr "Stimme:"
+msgstr "Röst:"
 
 #: tfrmvideodubbing.lblvolume.caption
 msgid "Volume %:"
-msgstr "Lautstärke %:"
+msgstr "Volym %:"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Stäng"
 
 #: tfrmwaveextractor.btnextract.caption
 msgctxt "tfrmwaveextractor.btnextract.caption"
 msgid "Extract..."
-msgstr "Extrahieren..."
+msgstr "Extrahera..."
 
 #: tfrmwaveextractor.caption
 msgid "Waveform extractor"
-msgstr "Tonspur-Extractor"
+msgstr "Ljudspårsextraherare"
 
 #: tfrmwaveextractor.lbltrack.caption
 msgid "Track:"
-msgstr "Spur:"
+msgstr "Spår:"
 
 #: tfrmwelcome.chkshowonstartup.caption
 msgid "Show on startup"
-msgstr "Beim Start anzeigen"
+msgstr "Visa vid start"
 
 #: tfrmwelcome.lblbatchconvert.caption
 msgctxt "tfrmwelcome.lblbatchconvert.caption"
 msgid "Batch convert..."
-msgstr "Mehrere Dateien umwandeln..."
+msgstr "Konvertera flera filer..."
 
 #: tfrmwelcome.lblexit.caption
 msgid "Exit"
-msgstr "Beenden"
+msgstr "Avsluta"
 
 #: tfrmwelcome.lblnewsubtitle.caption
 msgid "New subtitle project"
-msgstr "Neues Untertitel-Projekt"
+msgstr "Nytt undertextprojekt"
 
 #: tfrmwelcome.lblnewtranscription.caption
 msgid "New manual transcription"
-msgstr "Neue manuelle Transkription"
+msgstr "Ny manuell transkription"
 
 #: tfrmwelcome.lblopenfile.caption
 msgid "Open file..."
-msgstr "Datei öffnen..."
+msgstr "Öppna fil..."
 
 #: tfrmwelcome.lblrecentfiles.caption
 msgctxt "tfrmwelcome.lblrecentfiles.caption"
 msgid "Recent files"
-msgstr "Zuletzt verwendete Dateien"
+msgstr "Senaste filer"
 
 #: tfrmwelcome.lblwelcome.caption
 msgctxt "tfrmwelcome.lblwelcome.caption"
 msgid "Welcome to"
-msgstr "Willkommen bei"
+msgstr "Välkommen till"
 
 #: tfrmwizard.btndownload.caption
 msgctxt "tfrmwizard.btndownload.caption"
 msgid "Download"
-msgstr "Herunterladen"
+msgstr "Ladda ned"
 
 #: tfrmwizard.btndownloadfasterwhisper.caption
 msgctxt "tfrmwizard.btndownloadfasterwhisper.caption"
 msgid "Download"
-msgstr "Herunterladen"
+msgstr "Ladda ned"
 
 #: tfrmwizard.btndownloadffmpeg.caption
 msgctxt "tfrmwizard.btndownloadffmpeg.caption"
 msgid "Download"
-msgstr "Herunterladen"
+msgstr "Ladda ned"
 
 #: tfrmwizard.btndownloadwhisper.caption
 msgctxt "tfrmwizard.btndownloadwhisper.caption"
 msgid "Download"
-msgstr "Herunterladen"
+msgstr "Ladda ned"
 
 #: tfrmwizard.btndownloadytdlp.caption
 msgctxt "tfrmwizard.btndownloadytdlp.caption"
 msgid "Download"
-msgstr "Herunterladen"
+msgstr "Ladda ned"
 
 #: tfrmwizard.btnnext.caption
 msgctxt "tfrmwizard.btnnext.caption"
 msgid "Next"
-msgstr "Weiter"
+msgstr "Nästa"
 
 #: tfrmwizard.btnprevious.caption
 msgid "Back"
-msgstr "Zurück"
+msgstr "Tillbaka"
 
 #: tfrmwizard.caption
 msgid "Getting started wizard"
-msgstr "Einrichtungsassistent"
+msgstr "Kom igång-guide"
 
 #: tfrmwizard.lblchooselayout.caption
 msgid "Choose workspace layout and timecode mode:"
-msgstr "Wähle das Layout und den Zeitcode-Modus für deine Arbeitsfläche:"
+msgstr "Välj arbetslayout och tidskodsläge:"
 
 #: tfrmwizard.lblexperience.caption
 msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
-msgstr "In wenigen Schritten bist du startklar für das beste Untertitel-Erlebnis."
+msgstr "På bara några steg är du redo för den bästa upplevelsen av textning."
 
 #: tfrmwizard.lblfasterwhisper.caption
 msgid "Faster-Whisper:"
@@ -5464,7 +5464,7 @@ msgstr "Faster-Whisper:"
 #: tfrmwizard.lblfasterwhisper_hint.caption
 msgctxt "tfrmwizard.lblfasterwhisper_hint.caption"
 msgid "Optional, used for speech recognition."
-msgstr "Optional: Wird für Spracherkennung verwendet."
+msgstr "Valfritt: används för taligenkänning."
 
 #: tfrmwizard.lblffmpeg.caption
 msgid "FFmpeg:"
@@ -5472,7 +5472,7 @@ msgstr "FFmpeg:"
 
 #: tfrmwizard.lblffmpeg_hint.caption
 msgid "Optional, used to extract audio and generate video."
-msgstr "Optional: Wird verwendet, um Audio/Ton zu extrahieren und Videos zu erstellen."
+msgstr "Valfritt: används för att extrahera ljud och skapa video."
 
 #: tfrmwizard.lbllibmpv.caption
 msgid "libmpv: "
@@ -5480,18 +5480,18 @@ msgstr "libmpv: "
 
 #: tfrmwizard.lbllibmpv_hint.caption
 msgid "Essential, used for playing video."
-msgstr "Wichtig: Wird benötigt, um Videos abzuspielen."
+msgstr "Obligatoriskt: används för att spela upp video."
 
 #: tfrmwizard.lblrequiredfiles.caption
 msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
 msgstr ""
-msgstr "Damit Tero Subtitler richtig funktioniert, sind die folgenden Bibliotheken nötig.\n"
-"Falls sie auf deinem System fehlen, kann Tero Subtitler sie automatisch herunterladen."
+"För att Tero Subtitler ska fungera korrekt krävs följande bibliotek.\n"
+"Om de saknas på ditt system kan Tero Subtitler ladda ned dem automatiskt."
 
 #: tfrmwizard.lblwelcome.caption
 msgctxt "tfrmwizard.lblwelcome.caption"
 msgid "Welcome to"
-msgstr "Willkommen bei"
+msgstr "Välkommen till"
 
 #: tfrmwizard.lblwhisper.caption
 msgid "Whisper.cpp:"
@@ -5500,7 +5500,7 @@ msgstr "Whisper.cpp:"
 #: tfrmwizard.lblwhisper_hint.caption
 msgctxt "tfrmwizard.lblwhisper_hint.caption"
 msgid "Optional, used for speech recognition."
-msgstr "Optional: Wird für Spracherkennung verwendet."
+msgstr "Valfritt: används för taligenkänning."
 
 #: tfrmwizard.lblytdlp.caption
 msgid "yt-dlp:"
@@ -5508,17 +5508,17 @@ msgstr "yt-dlp:"
 
 #: tfrmwizard.lblytdlp_hint.caption
 msgid "Optional, used for dowloading from YouTube."
-msgstr "Optional: Wird verwendet, um Videos von YouTube herunterzuladen."
+msgstr "Valfritt: används för att ladda ned från YouTube."
 
 #: tfrmwizard.rdolayout0.caption
 msgctxt "tfrmwizard.rdolayout0.caption"
 msgid "Classic"
-msgstr "Klassisch"
+msgstr "Klassisk"
 
 #: tfrmwizard.rdolayout1.caption
 msgctxt "tfrmwizard.rdolayout1.caption"
 msgid "Inverted"
-msgstr "Umgekehrt"
+msgstr "Omvänt"
 
 #: tfrmwizard.rdolayout2.caption
 msgctxt "tfrmwizard.rdolayout2.caption"
