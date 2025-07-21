@@ -12,6 +12,7 @@
 - improved: Video thumbnails
 - added: Import a .SUP blu-ray #281
 - added: German language (thx cutegitcat)
+- added: Swedish language (thx cutegitcat)
 
 1.0.1.9 (6.4.2024)
 - fixed: Interface Italian - Bottom info set as English #298
