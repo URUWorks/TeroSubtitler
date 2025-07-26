@@ -2,6 +2,7 @@
 - fixed: [macOS] Crash when closing Tero Subtitler while playing a video in some cases
 - fixed: iTT won't load if indicated version isn't 1.0 [SubtitleAPI]
 - fixed: Impossible to type a number from the numeric keypad in the edit box when shortcuts (0-9) are assigned
+- fixed: Text after dot truncated in file name when saving #385
 - fixed: Characters truncated or misrepresented in Fix Subtitles #344
 - fixed: Characters truncated when removing text for hearing impaired if entry begins with and features one hyphen #339
 - fixed: Entry beginning with dollar sign appears blank in opened WebVTT #326
