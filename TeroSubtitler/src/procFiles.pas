@@ -807,7 +807,7 @@ begin
       SD.Title  := lngSaveFile;
       SD.Filter := Subtitles.FillDialogFilter('');
       SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
-      SD.FileName := {$IFDEF DARWIN}ChangeFileExt({$ENDIF}GetSuggestedFileNameForSave{$IFDEF DARWIN}, GetDefaultExtFromFilter(SD.FilterIndex, SD.Filter)){$ENDIF};
+      SD.FileName := GetSuggestedFileNameForSave{$IFDEF DARWIN}+GetDefaultExtFromFilter(SD.FilterIndex, SD.Filter){$ENDIF};
       {$IFDEF DARWIN}
       SD.OnTypeChange := @frmMain.DoSaveDialogTypeChange;
       {$ENDIF}
