@@ -496,6 +496,7 @@ var
   i, ft, duration : Cardinal;
   dots            : Boolean;
   str             : String;
+  Ellipsis        : String = '...'; //Todo: Make localiseable
 begin
   Result := '';
   dots   := False;
@@ -516,7 +517,7 @@ begin
     if AddDots and not AnsiEndsText(',', s[0]) and not AnsiEndsText('.', s[0]) then
     begin
       dots := True;
-      str  := s[0]+'...';
+      str  := s[0] + Ellipsis;
     end
     else
       str := s[0];
@@ -525,10 +526,14 @@ begin
 
     for i := 1 to s.Count - 1 do
     begin
-      if (i = 1) and dots and not AnsiStartsText('-', s[1]) then
-        str := '...'+s[i]
-      else
-        str := s[i];
+      str := s[i];
+      if dots then
+      begin
+        if (i > 0) and not AnsiStartsText('-', s[i])
+          then str := Ellipsis + str;
+        if (i < s.Count - 1)
+          then str := str + Ellipsis;
+      end; //if dots
 
       ft := ft + Gap;
       Result := Format('%s%d||%d||%s||', [Result, ft, ft + duration, str]);
