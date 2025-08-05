@@ -22,7 +22,7 @@ unit UWSystem.SysUtils;
 interface
 
 uses
-  SysUtils, Math, LCLIntf, Graphics, Types
+  SysUtils, Math, LCLIntf, Forms, Graphics, Types
   {$IFDEF DARWIN}, Unix, sysctl{$ENDIF};
 
 // -----------------------------------------------------------------------------
@@ -597,7 +597,8 @@ end;
 
 function GetDefaultFontSize(const AFont: TFont): Integer;
 begin
-  Result := Round((- GetFontData(AFont.Handle).Height * 72 / AFont.PixelsPerInch));
+  Result := Round(Abs(GetFontData(AFont.Handle).Height) * 72 / Screen.PixelsPerInch);
+  //Result := AFont.Size;
 end;
 
 // -----------------------------------------------------------------------------
