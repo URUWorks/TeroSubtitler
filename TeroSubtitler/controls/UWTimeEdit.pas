@@ -53,6 +53,7 @@ type
     procedure SetValue(const NewValue: Integer);
     procedure UpdateValue(const FireChangeEvent: Boolean = True);
     procedure SetSel(const Start, Len: Integer);
+    procedure IncFrame(const Increment: Boolean);
     procedure DoTimeDown;
     procedure DoTimeUp;
     procedure UpDownClick(Sender: TObject; Button: TUDBtnType);
@@ -155,7 +156,7 @@ implementation
 //------------------------------------------------------------------------------
 
 uses
-  UWSystem.SysUtils, UWSystem.TimeUtils;
+  UWSystem.SysUtils, UWSystem.TimeUtils, Math;
 
 const
   OneSecond = 1000;
@@ -420,6 +421,24 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TUWTimeEdit.IncFrame(const Increment: Boolean);
+var
+  Wpart : Integer = 0; //WholePart
+  Fpart : Integer = 0; //Fraction part
+  Frames : Integer = 0;
+begin
+  Wpart := Trunc(FValue/1000)*1000;
+  Fpart := FValue - Wpart;
+  Frames := Trunc(Fpart*FFPS/1000);
+
+  if not Increment then
+    Value := Wpart + Ceil((Frames-1)*1000/FFPS) + Ceil(100/FFPS) //Add 10 % of the frame duration, to make sure that the control will stay within the frame.
+  else
+    Value := Wpart + Ceil((Frames+1.1)*1000/FFPS);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TUWTimeEdit.DoTimeDown;
 
   procedure DecHour;
@@ -467,11 +486,12 @@ procedure TUWTimeEdit.DoTimeDown;
 
   procedure DecFrame;
   begin
-    if FValue > FramesToTime(FFrameStep, FFPS) then
+    {if FValue > FramesToTime(FFrameStep, FFPS) then
       Value := FValue - FramesToTime(FFrameStep, FFPS)
     else
-      Value := 0;
+      Value := 0;}
 
+    IncFrame(False);
     SetSel(9, 2);
   end;
 
@@ -530,7 +550,8 @@ begin
              end
              else
              begin
-               Value := FValue + FramesToTime(FFrameStep, FFPS);
+               //Value := FValue + FramesToTime(FFrameStep, FFPS);
+               IncFrame(True);
                SetSel(9, 2);
              end;
   end;
