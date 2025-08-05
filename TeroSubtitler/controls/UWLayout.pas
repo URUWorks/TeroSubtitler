@@ -101,7 +101,7 @@ begin
   FCompStyle   := csPanel;
   ControlStyle := ControlStyle + [csAcceptsControls, csCaptureMouse,
     csClickEvents, csDoubleClicks, csReplicatable,
-    csNoFocus, csAutoSize0x0]
+    csNoFocus, csAutoSize0x0, csParentBackground]
     - [csOpaque];
 
   with GetControlClassDefaultSize do
