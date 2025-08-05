@@ -67,6 +67,9 @@ function FixIncompleteOpenedHyphen(const Text: String): String;
 function SpacingOfOpeningHyphen(const Text: String; const AddSpace: Boolean): String;
 function FixInterrobang(Text: String): String;
 function RemoveSpacesWithinBrackets(const Text: String): String;
+function StraightToCurlyQuotes(const Text: String): String;
+function CurlyToStraightQuotes(const Text: String): String;
+function FixBrackets(const Text: String): String;
 
 { Draw }
 
@@ -903,6 +906,180 @@ function RemoveSpacesWithinBrackets(const Text: String): String;
 begin
   Result := RemoveSpacesWithinCustomBrackets(Text, '[', ']');
   Result := RemoveSpacesWithinCustomBrackets(Result, '(', ')');
+end;
+
+// -----------------------------------------------------------------------------
+
+function StraightToCurlyQuotes(const Text: String): String;
+var
+  i: Integer;
+  Ch: String;
+  Output: String;
+  InDoubleQuote, InSingleQuote: Boolean;
+begin
+  Output := '';
+  InDoubleQuote := False;
+  InSingleQuote := False;
+
+  for i := 1 to UTF8Length(Text) do
+  begin
+    Ch := UTF8Copy(Text, i, 1);
+
+    if Ch = '"' then
+    begin
+      if not InDoubleQuote then
+        Output += #$201C  // “
+      else
+        Output += #$201D; // ”
+      InDoubleQuote := not InDoubleQuote;
+    end
+    else if Ch = '''' then
+    begin
+      if not InSingleQuote then
+        Output += #$2018  // ‘
+      else
+        Output += #$2019; // ’
+      InSingleQuote := not InSingleQuote;
+    end
+    else
+      Output += Ch;
+  end;
+
+  Result := Output;
+end;
+
+// -----------------------------------------------------------------------------
+
+function CurlyToStraightQuotes(const Text: String): String;
+var
+  i: Integer;
+  Ch: String;
+  Output: String;
+begin
+  Output := '';
+  for i := 1 to UTF8Length(Text) do
+  begin
+    Ch := UTF8Copy(Text, i, 1);
+
+    if (Ch = #$2018) or (Ch = #$2019) then
+      Output += ''''
+    else if (Ch = #$201C) or (Ch = #$201D) then
+      Output += '"'
+    else
+      Output += Ch;
+  end;
+
+  Result := Output;
+end;
+
+// -----------------------------------------------------------------------------
+
+function FixBrackets(const Text: String): String;
+const
+  Opens: array[1..4] of Char = ('(', '[', '{', '<');
+  Closes: array[1..4] of Char = (')', ']', '}', '>');
+
+var
+  Stack: array of Integer;  // Guarda el índice del bracket de apertura
+  StackPos: Integer;
+  i, j, idx: Integer;
+  Ch, NextCh: String;
+  Output: String;
+  Skip: array of Boolean;
+begin
+  SetLength(Stack, 0);
+  SetLength(Skip, UTF8Length(Text) + 1); // Para eliminar brackets vacíos
+  for i := 1 to Length(Skip) do Skip[i] := False;
+
+  Output := '';
+  StackPos := 0;
+  i := 1;
+  while i <= UTF8Length(Text) do
+  begin
+    Ch := UTF8Copy(Text, i, 1);
+
+    // 1. Brackets invertidos ]texto[ -> [texto]
+    // Busca patrón ]...[
+    if (Ch = ']') or (Ch = ')') or (Ch = '}') or (Ch = '>') then
+    begin
+      // Busca si más adelante hay el bracket abierto correspondiente antes de uno de cierre
+      for j := i + 1 to UTF8Length(Text) do
+      begin
+        NextCh := UTF8Copy(Text, j, 1);
+        idx := -1;
+        if (Ch = ']') and (NextCh = '[') then idx := 2;
+        if (Ch = ')') and (NextCh = '(') then idx := 1;
+        if (Ch = '}') and (NextCh = '{') then idx := 3;
+        if (Ch = '>') and (NextCh = '<') then idx := 4;
+        if idx <> -1 then
+        begin
+          // Intercambia
+          Skip[i] := True; // Elimina el bracket de cierre invertido
+          Skip[j] := True; // Elimina el bracket de apertura invertido
+          Output += Opens[idx] + UTF8Copy(Text, i + 1, j - i - 1) + Closes[idx];
+          i := j; // Salta hasta después del bracket de apertura invertido
+          Break;
+        end
+        else if (NextCh = ']') or (NextCh = ')') or (NextCh = '}') or (NextCh = '>') then
+          Break; // Otro bracket de cierre, no corregimos
+      end;
+    end
+
+    // 2. Mismatched: <ejemplo} -> <ejemplo>
+    else if (Ch = '(') or (Ch = '[') or (Ch = '{') or (Ch = '<') then
+    begin
+      // Busca el cierre
+      idx := -1;
+      for j := 1 to 4 do
+        if Ch = Opens[j] then
+        begin
+          idx := j;
+          Break;
+        end;
+      if idx <> -1 then
+      begin
+        StackPos := StackPos + 1;
+        SetLength(Stack, StackPos);
+        Stack[StackPos - 1] := idx; // Guarda el tipo de bracket abierto
+        Output += Ch;
+      end;
+    end
+    else if (Ch = ')') or (Ch = ']') or (Ch = '}') or (Ch = '>') then
+    begin
+      idx := -1;
+      for j := 1 to 4 do
+        if Ch = Closes[j] then
+        begin
+          idx := j;
+          Break;
+        end;
+      if (StackPos > 0) and (Stack[StackPos - 1] <> idx) then
+        Output[Length(Output)] := Closes[Stack[StackPos - 1]] // Corrige mismatched
+      else
+        Output += Ch;
+      if StackPos > 0 then
+        Dec(StackPos);
+    end
+
+    // 3. Brackets vacíos: () [] {} <> -> se eliminan
+    else
+    begin
+      // Mira hacia atrás si hay bracket abierto y siguiente char es bracket cerrado
+      if (Length(Output) > 0) and
+         ((Output[Length(Output)] in ['(', '[', '{', '<']) and
+         (i <= UTF8Length(Text)) and
+         ((UTF8Copy(Text, i, 1) = ')') or (UTF8Copy(Text, i, 1) = ']') or (UTF8Copy(Text, i, 1) = '}') or (UTF8Copy(Text, i, 1) = '>'))) then
+      begin
+        Output := Copy(Output, 1, Length(Output)-1); // Elimina el bracket abierto
+        Inc(i); // Salta el bracket cerrado
+        Continue;
+      end;
+      Output += Ch;
+    end;
+    Inc(i);
+  end;
+
+  Result := Output;
 end;
 
 // -----------------------------------------------------------------------------
