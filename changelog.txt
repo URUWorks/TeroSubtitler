@@ -2,7 +2,9 @@
 - fixed: [macOS] Crash when closing Tero Subtitler while playing a video in some cases
 - fixed: iTT won't load if indicated version isn't 1.0 [SubtitleAPI]
 - fixed: Impossible to type a number from the numeric keypad in the edit box when shortcuts (0-9) are assigned
+- fixed: Directional arrows sometimes skip/repeat digits in SMPTE mode #394
 - fixed: Divide Entry puts ellipsis only on the first entries #392
+- fixed: Select all doesn't function if focus is on preview #391
 - fixed: Text after dot truncated in file name when saving #385
 - fixed: Characters truncated or misrepresented in Fix Subtitles #344
 - fixed: Characters truncated when removing text for hearing impaired if entry begins with and features one hyphen #339
@@ -12,6 +14,7 @@
 - fixed: ERROR ffmpeg.exe dubbing video with elevenlabs #305
 - improved: SUP Export
 - improved: Video thumbnails
+- updated: Lazarus 4.2
 - added: Import a .SUP blu-ray #281
 - added: German language (thx cutegitcat)
 - added: Swedish language (thx cutegitcat)
