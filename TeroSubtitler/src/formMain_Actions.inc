@@ -814,15 +814,13 @@ var
 begin
   if Workspace.ViewMode = vmList then
   begin
-    if VST.Focused then
+    Memo := GetMemoFocused;
+    if Memo <> NIL then
+      Memo.SelectAll
+    else
     begin
       VST.SelectAll(False);
       UpdateValues;
-    end
-    else
-    begin
-      Memo := GetMemoFocused;
-      if Memo <> NIL then Memo.SelectAll;
     end;
   end
   else if Workspace.ViewMode = vmSource then
