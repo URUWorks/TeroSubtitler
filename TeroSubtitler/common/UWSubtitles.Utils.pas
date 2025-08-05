@@ -55,7 +55,7 @@ function SmartLineAdjust(Text: String; const ChrsPerLine: Integer; const BreakCh
 function AutoBreakSubtitle(Text: String; const ChrsPerLine: Integer; const BreakChar: String = sLineBreak; const UnbreakBefore: Boolean = True): String;
 function UnbreakSubtitles(const Text: String; const BreakChar: String = sLineBreak; const UnbreakDialog: Boolean = False): String;
 function UnbreakSubtitlesIfLessThanChars(const Text: String; const MaxChars: Integer; const BreakChar: String = sLineBreak): String;
-function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const AddDots: Boolean = False; const ChrsPerLine: Integer = 43; const Gap: Integer = 833; const BreakChar: String = sLineBreak): String;
+function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const AddDots: Boolean = False; const ChrsPerLine: Integer = 43; const Gap: Integer = 833; const BreakChar: String = sLineBreak; const Ellipsis: String = '...'): String;
 function DivideLinesAtPosition(Text: String; const InitialTime, FinalTime, Position: Cardinal; const Gap: Integer = 833): String;
 function ReverseText(Text: String): String;
 function FixRTLPunctuation(const Text: String; const Delimiter: String = sLineBreak): String;
@@ -493,13 +493,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const AddDots: Boolean = False; const ChrsPerLine: Integer = 43; const Gap: Integer = 833; const BreakChar: String = sLineBreak): String;
+function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const AddDots: Boolean = False; const ChrsPerLine: Integer = 43; const Gap: Integer = 833; const BreakChar: String = sLineBreak; const Ellipsis: String = '...'): String;
 var
-  s               : TStringList;
-  i, ft, duration : Cardinal;
-  dots            : Boolean;
-  str             : String;
-  Ellipsis        : String = '...'; //Todo: Make localiseable
+  s: TStringList;
+  i, startt, endt, duration, N: Cardinal;
+  dots: Boolean;
+  str: String;
+  TotalTime: Integer;
+  GapReal: Integer;
 begin
   Result := '';
   dots   := False;
@@ -514,33 +515,42 @@ begin
       if s.Count <= 1 then Exit;
     end;
 
-    duration := (FinalTime - InitialTime) div s.Count;
-    ft       := InitialTime + duration;
+    N := s.Count;
+    if N = 0 then Exit;
 
-    if AddDots and not AnsiEndsText(',', s[0]) and not AnsiEndsText('.', s[0]) then
+    TotalTime := FinalTime - InitialTime;
+
+    if N = 1 then
     begin
-      dots := True;
-      str  := s[0] + Ellipsis;
+      duration := TotalTime;
+      GapReal := 0;
     end
     else
-      str := s[0];
-
-    Result := Format('%d||%d||%s||', [InitialTime, ft, str]);
-
-    for i := 1 to s.Count - 1 do
     begin
-      str := s[i];
-      if dots then
-      begin
-        if (i > 0) and not AnsiStartsText('-', s[i])
-          then str := Ellipsis + str;
-        if (i < s.Count - 1)
-          then str := str + Ellipsis;
-      end; //if dots
+      duration := (TotalTime - (N - 1) * Gap) div N;
+      if duration < 1 then duration := 1;
+      GapReal := (TotalTime - N * duration) div (N - 1);
+    end;
 
-      ft := ft + Gap;
-      Result := Format('%s%d||%d||%s||', [Result, ft, ft + duration, str]);
-      ft := ft + duration;
+    startt := InitialTime;
+
+    for i := 0 to N - 1 do
+    begin
+      if i = N - 1 then
+        endt := FinalTime
+      else
+        endt := startt + duration;
+
+      str := s[i];
+      if AddDots and (i = 0) and not AnsiEndsText(',', str) and not AnsiEndsText('.', str) then
+        str := str + Ellipsis
+      else if AddDots and (i > 0) then
+        str := Ellipsis + str;
+
+      Result := Result + Format('%d||%d||%s||', [startt, endt, str]);
+
+      if i < N - 1 then
+        startt := endt + GapReal;
     end;
   finally
     s.Free;
