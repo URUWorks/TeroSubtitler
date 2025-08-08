@@ -202,6 +202,7 @@ begin
     Width     := 14;
     Height    := Self.Height;
     Increment := 1;
+    Wrap      := True;
     Flat      := True;
     Visible   := False;
     OnClick   := @UpDownClick;
