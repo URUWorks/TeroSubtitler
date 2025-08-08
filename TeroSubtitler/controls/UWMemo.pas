@@ -51,6 +51,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    procedure PasteFromClipboard; override;
   published
     property LabelMemo     : TLabel    read FLabel;
     property CPSBar        : TUWCPSBar read FCPSBar;
@@ -125,6 +126,9 @@ procedure Register;
 
 implementation
 
+uses
+  Clipbrd, LazUTF8, LCLIntf;
+
 //------------------------------------------------------------------------------
 
 constructor TUWMemo.Create(AOwner: TComponent);
@@ -159,6 +163,46 @@ begin
   FreeAndNIL(FCPSBar);
 
   inherited Destroy;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWMemo.PasteFromClipboard;
+  {$ifdef Darwin}
+  procedure FixClipboardLineEndings;
+  const
+    // Unicode separators UTF-8
+    LS = #$E2#$80#$A8; // U+2028
+    PS = #$E2#$80#$A9; // U+2029
+  var
+    S, N: String;
+  begin
+    if not Clipboard.HasFormat(PredefinedClipboardFormat(pcfText)) then
+      Exit;
+
+    S := Clipboard.AsText;
+    if S = '' then Exit;
+
+    N := S;
+    // CRLF -> LF
+    N := UTF8StringReplace(N, #13#10, #10, [rfReplaceAll]);
+    // CR -> LF
+    N := UTF8StringReplace(N, #13,    #10, [rfReplaceAll]);
+    // Unicode LS/PS -> LF
+    N := UTF8StringReplace(N, LS,     #10, [rfReplaceAll]);
+    N := UTF8StringReplace(N, PS,     #10, [rfReplaceAll]);
+
+    if N <> S then
+      Clipboard.AsText := N;
+  end;
+  {$endif}
+
+begin
+  {$ifdef Darwin}
+  FixClipboardLineEndings;
+  {$endif}
+
+  inherited PasteFromClipboard;
 end;
 
 // -----------------------------------------------------------------------------
