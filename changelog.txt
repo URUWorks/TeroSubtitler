@@ -3,6 +3,7 @@
 - fixed: iTT won't load if indicated version isn't 1.0 [SubtitleAPI]
 - fixed: Impossible to type a number from the numeric keypad in the edit box when shortcuts (0-9) are assigned
 - fixed: Multi-line text pasted from external source appears on list as one line #400
+- fixed: Shot change markers misaligned in timeline if imported whilst in media mode #398
 - fixed: End time changes when dividing entry #397
 - fixed: Clicking up eventually decreases numbers in time code #395
 - fixed: Directional arrows sometimes skip/repeat digits in SMPTE mode #394
