@@ -74,6 +74,7 @@ type
     procedure Clear;
     procedure Close;
     function Ready: Boolean;
+    function IsSMPTE: Boolean;
     procedure LoadFromFile(const AFileName: String);
     function SaveToFile(const AFileName: String): Boolean;
     function SaveToFileXML(const AFileName: String): Boolean;
@@ -180,6 +181,13 @@ end;
 function TEDL.Ready: Boolean;
 begin
   Result := (FFileName <> '');
+end;
+
+// -----------------------------------------------------------------------------
+
+function TEDL.IsSMPTE: Boolean;
+begin
+  Result := not IsInteger(FFPS);
 end;
 
 // -----------------------------------------------------------------------------

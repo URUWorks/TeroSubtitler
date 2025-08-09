@@ -292,9 +292,9 @@ begin
           end;
           cboTimeCodeImport.ItemIndex := tcMilliseconds;
         finally
+          FSMPTE := edl.IsSMPTE;
           edl.Free;
           if Assigned(ATracks) then ATracks.Free;
-          FSMPTE := True;
         end;
       end
       else
