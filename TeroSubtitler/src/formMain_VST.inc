@@ -47,7 +47,7 @@ begin
 
       VSTAddColumn(VST, lnghIndex, 70, taCenter, actShowColumnNumber.Checked);
       VSTAddColumn(VST, lnghTimes, 90, taCenter, actShowColumnTimes.Checked);
-      VSTAddColumn(VST, lnghDuration, 70, taCenter, actShowColumnDuration.Checked);
+      VSTAddColumn(VST, lnghDuration, 90, taCenter, actShowColumnDuration.Checked);
       VSTAddColumn(VST, lnghStyleAndActor, 90, taCenter, actShowColumnStyleAndActor.Checked);
       VSTAddColumn(VST, lnghText, 200, taLeftJustify);
       VSTAddColumn(VST, lnghTranslation, 200, taLeftJustify, actTranslatorMode.Checked);

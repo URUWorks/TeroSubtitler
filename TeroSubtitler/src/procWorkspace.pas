@@ -1601,7 +1601,7 @@ var
 begin
   for i := 0 to ACoolbar.Bands.Count-1 do
     if ACoolbar.Bands[i].Control <> NIL then
-      ACoolbar.Bands[i].MinWidth := ACoolbar.Bands[i].Control.Width + (ACoolbar.GrabWidth * 2);
+      ACoolbar.Bands[i].MinWidth := ACoolbar.ScaleFormTo96(ACoolbar.Bands[i].Control.Width + (ACoolbar.GrabWidth * 2));
 end;
 
 // -----------------------------------------------------------------------------

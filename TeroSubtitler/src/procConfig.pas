@@ -648,8 +648,8 @@ begin
       begin
         OpenKey(Name);
         SetBounds(GetValue('X', Left), GetValue('Y', Top), GetValue('W', Width), GetValue('H', Height));
-        LayoutVideo.Width := GetValue('VW', LayoutVideo.Width);
-        LayoutWaveform.Height := GetValue('WF', LayoutWaveform.Height);
+        LayoutVideo.Width := Scale96ToForm(GetValue('VW', LayoutVideo.Width));
+        LayoutWaveform.Height := Scale96ToForm(GetValue('WF', LayoutWaveform.Height));
         VST.Font.Size := GetValue('VSTFontSize', VST.Font.Size);
         VST.Header.Font.Size := VST.Font.Size;
         mmoText.Font.Size := GetValue('TextBoxFontSize', mmoText.Font.Size);
@@ -1056,8 +1056,8 @@ begin
         SetValue('Y', Top);
         SetValue('W', Width);
         SetValue('H', Height);
-        SetValue('VW', LayoutVideo.Width);
-        SetValue('WF', LayoutWaveform.Height);
+        SetValue('VW', ScaleFormTo96(LayoutVideo.Width));
+        SetValue('WF', ScaleFormTo96(LayoutWaveform.Height));
         SetValue('State', Integer(WindowState));
         SetValue('VSTFontSize', VST.Font.Size);
         SetValue('TextBoxFontSize', mmoText.Font.Size);
