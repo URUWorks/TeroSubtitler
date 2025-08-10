@@ -912,6 +912,8 @@ type
     procedure FormShortCut(var Msg: TLMKey; var Handled: Boolean);
     procedure FormShow(Sender: TObject);
     procedure LayoutVSTResize(Sender: TObject);
+    procedure StatusBarMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
     procedure StatusBarMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure tedTimeChange(Sender: TObject; const NewTime: Cardinal);
@@ -1595,6 +1597,21 @@ begin
   end
   else
     mmoText.Width := NewWidth;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.StatusBarMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+var
+  idx : Integer;
+begin
+  idx := StatusBar.GetPanelIndexAt(X, Y);
+  case idx of
+    1: StatusBar.Hint := lngsbSpellCheckerLanguage;
+    else
+      StatusBar.Hint := '';
+  end;
 end;
 
 // -----------------------------------------------------------------------------

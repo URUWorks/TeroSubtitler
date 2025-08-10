@@ -16,7 +16,7 @@ object frmMain: TfrmMain
   ShowHint = True
   SnapOptions.SnapToMonitor = True
   SnapOptions.SnapToForms = True
-  LCLVersion = '4.0.0.4'
+  LCLVersion = '4.2.0.0'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -50,6 +50,7 @@ object frmMain: TfrmMain
       DrawGAP = False
       DrawThumbnail = False
       SavePeakToFile = True
+      StretchThumbnails = False
       OnSelectionChange = WAVESelectionChange
       OnSelectedSubtitleItem = WAVESelectedSubtitleItem
       OnSelectedSubtitleItemChange = WAVESelectedSubtitleItemChange
@@ -74,36 +75,37 @@ object frmMain: TfrmMain
         item
           Break = False
           Control = ToolBarWaveformControls
-          MinWidth = 30
+          MinWidth = 135
           ParentBitmap = False
-          Width = 110
+          Width = 135
         end      
         item
           Break = False
           Control = ToolBarWaveformEntry
-          MinWidth = 30
+          MinWidth = 66
           ParentBitmap = False
-          Width = 70
+          Width = 66
         end      
         item
           Break = False
           Control = ToolBarWaveformZoom
-          MinWidth = 30
+          MinWidth = 76
           ParentBitmap = False
-          Width = 80
+          Width = 76
         end      
         item
           Break = False
           Control = ToolBarWaveformShotchanges
-          MinWidth = 30
+          MinWidth = 116
           ParentBitmap = False
-          Width = 120
+          Width = 116
         end      
         item
           Break = False
           Control = ToolBarWaveformOther
+          MinWidth = 153
           ParentBitmap = False
-          Width = 157
+          Width = 153
         end>
       EdgeBorders = []
       EdgeInner = esNone
@@ -156,13 +158,13 @@ object frmMain: TfrmMain
       object ToolBarWaveformEntry: TToolBar
         AnchorSideLeft.Control = CoolBarWaveform
         AnchorSideTop.Control = CoolBarWaveform
-        Left = 115
+        Left = 140
         Height = 28
         Top = 3
         Width = 88
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 115
+        BorderSpacing.Left = 140
         BorderSpacing.Top = 3
         BorderSpacing.Bottom = 1
         EdgeBorders = []
@@ -189,13 +191,13 @@ object frmMain: TfrmMain
       object ToolBarWaveformZoom: TToolBar
         AnchorSideLeft.Control = CoolBarWaveform
         AnchorSideTop.Control = CoolBarWaveform
-        Left = 185
+        Left = 206
         Height = 28
         Top = 3
         Width = 88
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 185
+        BorderSpacing.Left = 206
         BorderSpacing.Top = 3
         BorderSpacing.Bottom = 1
         EdgeBorders = []
@@ -222,13 +224,13 @@ object frmMain: TfrmMain
       object ToolBarWaveformShotchanges: TToolBar
         AnchorSideLeft.Control = CoolBarWaveform
         AnchorSideTop.Control = CoolBarWaveform
-        Left = 265
+        Left = 282
         Height = 28
         Top = 3
         Width = 146
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 265
+        BorderSpacing.Left = 282
         BorderSpacing.Top = 3
         BorderSpacing.Bottom = 1
         EdgeBorders = []
@@ -265,13 +267,13 @@ object frmMain: TfrmMain
       object ToolBarWaveformOther: TToolBar
         AnchorSideLeft.Control = CoolBarWaveform
         AnchorSideTop.Control = CoolBarWaveform
-        Left = 385
+        Left = 398
         Height = 28
         Top = 3
         Width = 74
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 385
+        BorderSpacing.Left = 398
         BorderSpacing.Top = 3
         BorderSpacing.Bottom = 1
         EdgeBorders = []
@@ -428,28 +430,28 @@ object frmMain: TfrmMain
         item
           Break = False
           Control = ToolBarVideoControls
-          MinWidth = 145
+          MinWidth = 178
           ParentBitmap = False
-          Width = 145
+          Width = 178
         end      
         item
           Break = False
           Control = ToolBarVideoOther
-          MinWidth = 65
+          MinWidth = 61
           ParentBitmap = False
           Width = 65
         end      
         item
           Break = False
           Control = ToolBarVideoEntry
-          MinWidth = 99
+          MinWidth = 95
           ParentBitmap = False
-          Width = 99
+          Width = 95
         end      
         item
           Break = False
           Control = ToolBarVideoVolume
-          MinWidth = 157
+          MinWidth = 153
           ParentBitmap = False
           Width = 157
         end>
@@ -513,13 +515,13 @@ object frmMain: TfrmMain
         AnchorSideLeft.Control = CoolBarVideo
         AnchorSideTop.Control = CoolBarVideo
         AnchorSideRight.Side = asrCenter
-        Left = 150
+        Left = 183
         Height = 28
         Top = 3
         Width = 74
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 150
+        BorderSpacing.Left = 183
         BorderSpacing.Top = 3
         EdgeBorders = []
         Images = ImageList_Default
@@ -543,13 +545,13 @@ object frmMain: TfrmMain
         AnchorSideLeft.Control = CoolBarVideo
         AnchorSideTop.Control = CoolBarVideo
         AnchorSideRight.Side = asrCenter
-        Left = 215
+        Left = 248
         Height = 28
         Top = 3
         Width = 117
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 215
+        BorderSpacing.Left = 248
         BorderSpacing.Top = 3
         EdgeBorders = []
         Images = ImageList_Default
@@ -581,13 +583,13 @@ object frmMain: TfrmMain
         AnchorSideLeft.Control = CoolBarVideo
         AnchorSideTop.Control = CoolBarVideo
         AnchorSideRight.Side = asrCenter
-        Left = 314
+        Left = 343
         Height = 28
         Top = 3
         Width = 92
         Align = alNone
         AutoSize = True
-        BorderSpacing.Left = 314
+        BorderSpacing.Left = 343
         BorderSpacing.Top = 3
         EdgeBorders = []
         Images = ImageList_Default
@@ -857,36 +859,38 @@ object frmMain: TfrmMain
               item
                 Break = False
                 Control = ToolBarEditorBasic
-                MinWidth = 53
-                Width = 53
+                MinWidth = 62
+                Width = 62
               end            
               item
                 Break = False
                 Control = ToolBarEditorFormat
-                MinWidth = 147
-                Width = 147
+                MinWidth = 143
+                Width = 143
               end            
               item
                 Break = False
                 Control = ToolBarEditorAlignment
-                MinWidth = 172
-                Width = 172
+                MinWidth = 168
+                Width = 168
               end            
               item
                 Break = False
                 Control = ToolBarEditorEntry
-                MinWidth = 58
-                Width = 58
+                MinWidth = 62
+                Width = 62
               end            
               item
                 Break = False
                 Control = ToolBarEditorLines
-                Width = 100
+                MinWidth = 96
+                Width = 96
               end            
               item
                 Break = False
                 Control = ToolBarEditorWords
-                Width = 100
+                MinWidth = 120
+                Width = 120
               end>
             EdgeBorders = []
             EdgeInner = esNone
@@ -926,13 +930,13 @@ object frmMain: TfrmMain
             object ToolBarEditorFormat: TToolBar
               AnchorSideLeft.Control = CoolBarEditor
               AnchorSideTop.Control = CoolBarEditor
-              Left = 58
+              Left = 67
               Height = 28
               Top = 3
               Width = 175
               Align = alNone
               AutoSize = True
-              BorderSpacing.Left = 58
+              BorderSpacing.Left = 67
               BorderSpacing.Top = 3
               EdgeBorders = []
               Images = ImageList_Default
@@ -973,13 +977,13 @@ object frmMain: TfrmMain
             object ToolBarEditorAlignment: TToolBar
               AnchorSideLeft.Control = CoolBarEditor
               AnchorSideTop.Control = CoolBarEditor
-              Left = 205
+              Left = 210
               Height = 28
               Top = 3
               Width = 209
               Align = alNone
               AutoSize = True
-              BorderSpacing.Left = 205
+              BorderSpacing.Left = 210
               BorderSpacing.Top = 3
               EdgeBorders = []
               Images = ImageList_Default
@@ -1031,13 +1035,13 @@ object frmMain: TfrmMain
             object ToolBarEditorEntry: TToolBar
               AnchorSideLeft.Control = CoolBarEditor
               AnchorSideTop.Control = CoolBarEditor
-              Left = 377
+              Left = 378
               Height = 28
               Top = 3
               Width = 59
               Align = alNone
               AutoSize = True
-              BorderSpacing.Left = 377
+              BorderSpacing.Left = 378
               BorderSpacing.Top = 3
               EdgeBorders = []
               Images = ImageList_Default
@@ -1059,13 +1063,13 @@ object frmMain: TfrmMain
             object ToolBarEditorLines: TToolBar
               AnchorSideLeft.Control = CoolBarEditor
               AnchorSideTop.Control = CoolBarEditor
-              Left = 435
+              Left = 440
               Height = 28
               Top = 3
               Width = 117
               Align = alNone
               AutoSize = True
-              BorderSpacing.Left = 435
+              BorderSpacing.Left = 440
               BorderSpacing.Top = 3
               EdgeBorders = []
               Images = ImageList_Default
@@ -1321,6 +1325,7 @@ object frmMain: TfrmMain
         Width = 188
       end>
     SimplePanel = False
+    OnMouseMove = StatusBarMouseMove
     OnMouseUp = StatusBarMouseUp
   end
   object CoolBarMain: TCoolBar
@@ -1336,14 +1341,15 @@ object frmMain: TfrmMain
         Control = ToolBarMainFile
         FixedBackground = False
         HorizontalOnly = True
-        MinWidth = 105
+        MinWidth = 135
         ParentBitmap = False
-        Width = 105
+        Width = 135
       end    
       item
         Break = False
         Control = ToolBarMainGeneral
-        Width = 126
+        MinWidth = 154
+        Width = 154
       end    
       item
         Break = False
@@ -1354,37 +1360,42 @@ object frmMain: TfrmMain
       item
         Break = False
         Control = ToolBarMainView
-        Width = 200
+        MinWidth = 196
+        Width = 196
       end    
       item
         Break = False
         Control = ToolBarFPS
         FixedBackground = False
         HorizontalOnly = True
+        MinWidth = 187
         ParentBitmap = False
-        Width = 191
+        Width = 187
       end    
       item
         Break = False
         Control = ToolBarFormat
         FixedBackground = False
         HorizontalOnly = True
+        MinWidth = 207
         ParentBitmap = False
-        Width = 211
+        Width = 207
       end    
       item
         Break = False
         Control = ToolBarEncoding
         FixedBackground = False
         HorizontalOnly = True
+        MinWidth = 207
         ParentBitmap = False
-        Width = 211
+        Width = 207
       end    
       item
         Break = False
         Control = edtQuickAction
         FixedBackground = False
         HorizontalOnly = True
+        MinWidth = 157
         ParentBitmap = False
         Width = 157
       end>
@@ -1441,13 +1452,13 @@ object frmMain: TfrmMain
     object ToolBarFPS: TToolBar
       AnchorSideLeft.Control = CoolBarMain
       AnchorSideTop.Control = CoolBarMain
-      Left = 524
+      Left = 578
       Height = 28
       Top = 3
       Width = 229
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 524
+      BorderSpacing.Left = 578
       BorderSpacing.Top = 3
       EdgeBorders = []
       Images = ImageList_Default
@@ -1491,13 +1502,13 @@ object frmMain: TfrmMain
     object ToolBarFormat: TToolBar
       AnchorSideLeft.Control = CoolBarMain
       AnchorSideTop.Control = CoolBarMain
-      Left = 715
+      Left = 765
       Height = 28
       Top = 3
       Width = 255
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 715
+      BorderSpacing.Left = 765
       BorderSpacing.Top = 3
       EdgeBorders = []
       Images = ImageList_Default
@@ -1525,13 +1536,13 @@ object frmMain: TfrmMain
     object ToolBarEncoding: TToolBar
       AnchorSideLeft.Control = CoolBarMain
       AnchorSideTop.Control = CoolBarMain
-      Left = 926
+      Left = 972
       Height = 28
       Top = 3
       Width = 255
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 926
+      BorderSpacing.Left = 972
       BorderSpacing.Top = 3
       EdgeBorders = []
       Images = ImageList_Default
@@ -1558,7 +1569,7 @@ object frmMain: TfrmMain
     object edtQuickAction: TUWEditAction
       AnchorSideLeft.Control = CoolBarMain
       AnchorSideTop.Control = CoolBarMain
-      Left = 1137
+      Left = 1179
       Height = 28
       Hint = 'Quick Action Finder'
       Top = 3
@@ -1566,20 +1577,20 @@ object frmMain: TfrmMain
       ActionList = ActionList
       OnClickAction = edtQuickActionClickAction
       AutoSize = False
-      BorderSpacing.Left = 1137
+      BorderSpacing.Left = 1179
       BorderSpacing.Top = 3
       TabOrder = 4
     end
     object ToolBarMainGeneral: TToolBar
       AnchorSideLeft.Control = CoolBarMain
       AnchorSideTop.Control = CoolBarMain
-      Left = 110
+      Left = 140
       Height = 28
       Top = 3
       Width = 151
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 110
+      BorderSpacing.Left = 140
       BorderSpacing.Top = 3
       BorderSpacing.Bottom = 1
       EdgeBorders = []
@@ -1624,13 +1635,13 @@ object frmMain: TfrmMain
     object ToolBarMainEntry: TToolBar
       AnchorSideLeft.Control = CoolBarMain
       AnchorSideTop.Control = CoolBarMain
-      Left = 236
+      Left = 294
       Height = 28
       Top = 3
       Width = 103
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 236
+      BorderSpacing.Left = 294
       BorderSpacing.Top = 3
       BorderSpacing.Bottom = 1
       EdgeBorders = []
@@ -1661,13 +1672,13 @@ object frmMain: TfrmMain
     object ToolBarMainView: TToolBar
       AnchorSideLeft.Control = CoolBarMain
       AnchorSideTop.Control = CoolBarMain
-      Left = 324
+      Left = 382
       Height = 28
       Top = 3
       Width = 243
       Align = alNone
       AutoSize = True
-      BorderSpacing.Left = 324
+      BorderSpacing.Left = 382
       BorderSpacing.Top = 3
       BorderSpacing.Bottom = 1
       EdgeBorders = []
