@@ -867,7 +867,8 @@ end;
 
 procedure TfrmMain.actLoadVideoExecute(Sender: TObject);
 begin
-  LoadVideoWithDialog;
+  if LoadVideoWithDialog
+    then MPV.Stop;
 end;
 
 // -----------------------------------------------------------------------------

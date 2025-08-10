@@ -50,7 +50,7 @@ function LoadShotChangesFileName(const FileName: String): Boolean;
 procedure LoadSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 procedure SaveSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 procedure SaveCurrentSubtitle(const SubtitleMode: TSubtitleMode = smText);
-procedure LoadVideoWithDialog;
+function LoadVideoWithDialog: boolean;
 procedure ReadSubtitleData(const AFileName: String; const OnlyTimings: Boolean; const SubtitleMode: TSubtitleMode = smText; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 procedure ReadTimingsFromFileWithDialog;
 procedure ReadTextsFromFileWithDialog;
@@ -840,12 +840,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure LoadVideoWithDialog;
+function LoadVideoWithDialog : boolean;
 var
   OD : TOpenDialog;
   i  : Integer;
   s  : String;
 begin
+  Result := False;
   OD := TOpenDialog.Create(NIL);
   try
     s := '';
@@ -860,6 +861,7 @@ begin
     if OD.Execute then
     begin
       LoadVideo(OD.FileName);
+      Result := True;
     end;
   finally
     OD.Free;
