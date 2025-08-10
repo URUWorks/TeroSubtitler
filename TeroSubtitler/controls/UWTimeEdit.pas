@@ -83,6 +83,7 @@ type
     procedure MouseEnter; override;
     procedure MouseLeave; override;
     {$ENDIF}
+    procedure DblClick; override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -169,6 +170,8 @@ const
 constructor TUWTimeEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+
+  ControlStyle := ControlStyle - [csDoubleClicks];
 
   Constraints.MinWidth  := 90;
   Constraints.MinHeight := 21;
@@ -690,6 +693,13 @@ procedure TUWTimeEdit.Loaded;
 begin
   inherited Loaded;
   DoPositionSpin;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTimeEdit.DblClick;
+begin
+  // ignorar
 end;
 
 // -----------------------------------------------------------------------------
