@@ -772,6 +772,10 @@ msgstr "Salva file"
 msgid "Error trying to save the file."
 msgstr "Errore nel tentativo di salvataggio del file."
 
+#: proclocalize.lngsbspellcheckerlanguage
+msgid "Spell checker language"
+msgstr ""
+
 #: proclocalize.lngscaudiofilters
 msgctxt "proclocalize.lngscaudiofilters"
 msgid "Audio filters"
@@ -5581,3 +5585,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+
