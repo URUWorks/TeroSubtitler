@@ -1368,6 +1368,7 @@ begin
   RefreshAppTitle;
   // VST
   VSTDrawInitialize(VSTOptions.DrawMode);
+  LoadSettings(True);
   // Prepare combos and menus
   FillComboWithFPS(cboInputFPS, Workspace.FPS.InputFPS);
   FillComboWithFPS(cboFPS, Workspace.FPS.InputFPS);
