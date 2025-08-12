@@ -480,11 +480,57 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function StripRTFTags(const S: String): String;
+var
+  i, n, segStart: Integer;
+  R: String;
+begin
+  R := '';
+  n := UTF8Length(S);
+  segStart := 1;
+  i := 1;
+  while i <= n do
+  begin
+    // Tag: {\...}
+    if (UTF8Copy(S, i, 1) = '{') and (i < n) and (UTF8Copy(S, i+1, 1) = '\') then
+    begin
+      // Copiar lo visible previo
+      if i > segStart then
+        R += UTF8Copy(S, segStart, i - segStart);
+
+      // Saltar el tag completo hasta el primer '}'
+      Inc(i, 2);
+      while (i <= n) and (UTF8Copy(S, i, 1) <> '}') do
+        Inc(i);
+
+      if (i <= n) then Inc(i); // pasar '}'
+      segStart := i; // nuevo segmento visible
+    end
+    else
+      Inc(i);
+  end;
+
+  // Copiar lo visible restante
+  if segStart <= n then
+    R += UTF8Copy(S, segStart, n - segStart + 1);
+
+  Result := R;
+end;
+
+// -----------------------------------------------------------------------------
+
+function VisibleLenNoRTF(const S: String): Integer;
+begin
+  Result := UTF8Length(StripRTFTags(S));
+end;
+
+// -----------------------------------------------------------------------------
+
 function WrapText(const AText: String; const AMaxChrsPerLine: Integer; const ABreakChar: String = sLineBreak): String;
 var
-  Words : TStringList;
-  CurrentLine : String;
-  i : Integer;
+  Words: TStringList;
+  CurrentLine, W: String;
+  i, curVis, wVis, spaceVis: Integer;
 begin
   if AText.IsEmpty then Exit(AText);
   Result := '';
@@ -492,26 +538,38 @@ begin
   Words := TStringList.Create;
   try
     Words.SkipLastLineBreak := True;
-    Words.AddDelimitedText(AText, ' ', True);
-    CurrentLine := '';
+    Words.Delimiter := ' ';
+    Words.StrictDelimiter := True;
+    Words.DelimitedText := AText;
 
-    for i := 0 to Words.Count-1 do
+    CurrentLine := '';
+    for i := 0 to Words.Count - 1 do
     begin
-      if UTF8Length(CurrentLine + Words[i]) < AMaxChrsPerLine then //CPL breach not flagged in Fix Subtitles #261
+      W := Words[i];
+      curVis   := VisibleLenNoRTF(CurrentLine);
+      wVis     := VisibleLenNoRTF(W);
+      spaceVis := Ord(not CurrentLine.IsEmpty); // 1 not empty
+
+      if (curVis + spaceVis + wVis) <= AMaxChrsPerLine then
       begin
         if not CurrentLine.IsEmpty then
           CurrentLine += ' ';
-
-        CurrentLine += Words[i];
+        CurrentLine += W;
       end
       else
       begin
-        Result += CurrentLine + ABreakChar;
-        CurrentLine := Words[i];
+        // copy line if not empty
+        if not CurrentLine.IsEmpty then
+        begin
+          Result += CurrentLine + ABreakChar;
+          CurrentLine := '';
+        end;
+        CurrentLine := W;
       end;
     end;
 
-    Result += CurrentLine;
+    if not CurrentLine.IsEmpty then
+      Result += CurrentLine;
   finally
     Words.Free;
   end;
