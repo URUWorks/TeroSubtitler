@@ -43,17 +43,16 @@ type
     {$ENDIF}
     FTimeMode    : TUWTimeEditMode;
     FValue       : Integer;
-    FFPS         : Single;
+    FFPS         : Double;
     FTimeStep    : Word;
     FFrameStep   : Word;
     FChangeEvent : TUWTimeEditChangeEvent;
-    procedure SetFPS(const AFPS: Single);
+    procedure SetFPS(const AFPS: Double);
     procedure SetTimeMode(const ATimeMode: TUWTimeEditMode);
     procedure SetValueFromString(const S: String);
     procedure SetValue(const NewValue: Integer);
     procedure UpdateValue(const FireChangeEvent: Boolean = True);
     procedure SetSel(const Start, Len: Integer);
-    procedure IncFrame(const Increment: Boolean);
     procedure DoTimeDown;
     procedure DoTimeUp;
     procedure UpDownClick(Sender: TObject; Button: TUDBtnType);
@@ -88,11 +87,11 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure SetValueOnly(const NewValue: Integer);
-    procedure SetFPSValueOnly(const AFPS: Single);
+    procedure SetFPSValueOnly(const AFPS: Double);
     procedure ReAdjustWidth;
   published
     property Value        : Integer                read FValue       write SetValue;
-    property FPS          : Single                 read FFPS         write SetFPS;
+    property FPS          : Double                 read FFPS         write SetFPS;
     property FrameStep    : Word                   read FFrameStep   write FFrameStep;
     property TimeStep     : Word                   read FTimeStep    write FTimeStep;
     property TimeMode     : TUWTimeEditMode        read FTimeMode    write SetTimeMode;
@@ -425,24 +424,6 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTimeEdit.IncFrame(const Increment: Boolean);
-var
-  Wpart : Integer = 0; //WholePart
-  Fpart : Integer = 0; //Fraction part
-  Frames : Integer = 0;
-begin
-  Wpart := Trunc(FValue/1000)*1000;
-  Fpart := FValue - Wpart;
-  Frames := Trunc(Fpart*FFPS/1000);
-
-  if not Increment then
-    Value := Wpart + Ceil((Frames-1)*1000/FFPS) + Ceil(100/FFPS) //Add 10 % of the frame duration, to make sure that the control will stay within the frame.
-  else
-    Value := Wpart + Ceil((Frames+1.1)*1000/FFPS);
-end;
-
-// -----------------------------------------------------------------------------
-
 procedure TUWTimeEdit.DoTimeDown;
 
   procedure DecHour;
@@ -490,12 +471,11 @@ procedure TUWTimeEdit.DoTimeDown;
 
   procedure DecFrame;
   begin
-    {if FValue > FramesToTime(FFrameStep, FFPS) then
-      Value := FValue - FramesToTime(FFrameStep, FFPS)
-    else
-      Value := 0;}
+    FValue := TimeToFrames(FValue, FFPS);
+    if FValue > FFrameStep then
+      Dec(FValue, FFrameStep);
 
-    IncFrame(False);
+    Value := FramesToTime(FValue, FFPS);
     SetSel(9, 2);
   end;
 
@@ -554,8 +534,9 @@ begin
              end
              else
              begin
-               //Value := FValue + FramesToTime(FFrameStep, FFPS);
-               IncFrame(True);
+               FValue := TimeToFrames(FValue, FFPS);
+               Inc(FValue, FFrameStep);
+               Value := FramesToTime(FValue, FFPS);
                SetSel(9, 2);
              end;
   end;
@@ -599,7 +580,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTimeEdit.SetFPS(const AFPS: Single);
+procedure TUWTimeEdit.SetFPS(const AFPS: Double);
 begin
   FFPS := AFPS;
   UpdateValue;
@@ -607,7 +588,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTimeEdit.SetFPSValueOnly(const AFPS: Single);
+procedure TUWTimeEdit.SetFPSValueOnly(const AFPS: Double);
 begin
   FFPS := AFPS;
 end;
