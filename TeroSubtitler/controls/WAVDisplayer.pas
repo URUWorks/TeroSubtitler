@@ -123,7 +123,7 @@ type
     FBackBufferItems : {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF};
 
     FFileName        : String;
-    FFPS             : Single;
+    FFPS             : Double;
     FFPSTimeMode     : Boolean;
 
     FLengthMS      : Integer;
@@ -312,7 +312,7 @@ type
     property MinimumBlank                  : Integer                      read FGAP                          write FGAP;
     property EmptyText                     : String                       read FEmptyText                    write SetEmptyText;
     property FileName                      : String                       read FFileName;
-    property FPS                           : Single                       read FFPS                          write FFPS;
+    property FPS                           : Double                       read FFPS                          write FFPS;
     property FPSTimeMode                   : Boolean                      read FFPSTimeMode                  write FFPSTimeMode;
     property CursorPosMS                   : Integer                      read FCursorMS;
     property CenterPlayCursor              : Boolean                      read FCenterPlay                   write FCenterPlay;

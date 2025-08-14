@@ -36,8 +36,8 @@ type
     function IsTextBased: Boolean; override;
     function HasStyleSupport: Boolean; override;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
-    function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; override;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
+    function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean; override;
+    function SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
   end;
 
 // -----------------------------------------------------------------------------
@@ -49,7 +49,7 @@ uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSystem.SysUtils,
 
 // -----------------------------------------------------------------------------
 
-function DecodeTime(const Bytes: TBytes; const Index: Integer; const FPS: Single): Integer;
+function DecodeTime(const Bytes: TBytes; const Index: Integer; const FPS: Double): Integer;
 begin
   Result := EncodeTime(Bytes[Index], Bytes[Index + 1], Bytes[Index + 2], FramesToTime(Bytes[Index + 3], FPS));
 end;
@@ -63,7 +63,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure WriteTime(const Stream: TStream; const Time: Cardinal; const FPS: Single);
+procedure WriteTime(const Stream: TStream; const Time: Cardinal; const FPS: Double);
 var
   HH, MM, SS, MS: Word;
 begin
@@ -129,7 +129,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCheetahCaption.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
+function TUWCheetahCaption.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
 
   function IsLatinChar(const AByte: Byte): Integer;
   var
@@ -244,7 +244,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWCheetahCaption.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWCheetahCaption.SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   Stream       : TStream;
   i, j, c, idx : Integer;
