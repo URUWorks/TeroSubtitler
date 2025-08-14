@@ -584,6 +584,7 @@ begin
       frmMain.tedDuration.SetValueOnly(Subtitles.Duration[Index]);
       frmMain.tedPause.SetValueOnly(Subtitles.Pause[Index]);
     end;
+    TAG_CONTROL_DURATION: frmMain.tedFinal.SetValueOnly(Subtitles[Index].FinalTime);
   end;
 
   SubtitleChanged(True, True);
