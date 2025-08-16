@@ -45,7 +45,7 @@ begin
       VST.OnAfterItemPaint  := @VSTAfterItemPaint;
       VST.OnDrawText        := @VSTDrawText;
 
-      VSTAddColumn(VST, lnghIndex, 70, taCenter, actShowColumnNumber.Checked);
+      VSTAddColumn(VST, lnghIndex, 80, taCenter, actShowColumnNumber.Checked);
       VSTAddColumn(VST, lnghTimes, 120, taCenter, actShowColumnTimes.Checked);
       VSTAddColumn(VST, lnghDuration, 90, taCenter, actShowColumnDuration.Checked);
       VSTAddColumn(VST, lnghStyleAndActor, 90, taCenter, actShowColumnStyleAndActor.Checked);
