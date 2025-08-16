@@ -1101,6 +1101,8 @@ begin
   VSTDoLoop(VST, @ApplyEndCueAddOneFrame, dlSelected, True, True);
 end;
 
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actEndCueSubtractOneFrameExecute(Sender: TObject);
 begin
   VSTDoLoop(VST, @ApplyEndCueSubtractOneFrame, dlSelected, True, True);
