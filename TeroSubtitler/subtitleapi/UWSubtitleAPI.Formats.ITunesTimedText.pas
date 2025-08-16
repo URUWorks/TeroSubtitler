@@ -122,9 +122,9 @@ begin
             Subtitles.FrameRate := XMLGetCorrectFPS(Subtitles.FrameRate, XMLGetAttrValue(Node, 'ttp:frameRateMultiplier'));
         end;
 
-        if XMLHasAttribute(Node, 'ttp:timeBase') then
+        if XMLHasAttribute(Node, 'ttp:timeBase') and XMLHasAttribute(Node, 'ttp:dropMode') then
         begin
-          if XMLGetAttrValue(Node, 'ttp:timeBase') = 'smpte' then
+          if (XMLGetAttrValue(Node, 'ttp:timeBase') = 'smpte') then //and (XMLGetAttrValue(Node, 'ttp:dropMode') <> 'nonDrop') then
             Subtitles.TimeBase := stbSMPTE
           else
             Subtitles.TimeBase := stbMedia;
