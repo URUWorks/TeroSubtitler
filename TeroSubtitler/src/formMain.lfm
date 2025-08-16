@@ -371,7 +371,6 @@ object frmMain: TfrmMain
         Hint = 'Current video position'
         Top = 692
         Width = 93
-        Alignment = taRightJustify
         BorderSpacing.Left = 10
         Caption = '00:00:00.000'
         Font.Style = [fsBold]
