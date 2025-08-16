@@ -467,11 +467,18 @@ end;
 // -----------------------------------------------------------------------------
 
 function SetEndCueOneFrame(const AFinalTime: Integer; const ASubtract: Boolean = False): Integer;
+var
+  f: Double;
 begin
-  if not ASubtract then
-    Result := FramesToTime(TimeToFrames(AFinalTime, Workspace.FPS.OutputFPS)+1, Workspace.FPS.OutputFPS)
+  if (Subtitles.TimeBase = stbSMPTE) and Workspace.SMPTE then
+    f := NormalizeFPS(Workspace.FPS.OutputFPS)
   else
-    Result := FramesToTime(TimeToFrames(AFinalTime, Workspace.FPS.OutputFPS)-1, Workspace.FPS.OutputFPS);
+    f := Workspace.FPS.OutputFPS;
+
+  if not ASubtract then
+    Result := FramesToTime(TimeToFrames(AFinalTime, f)+1, f)
+  else
+    Result := FramesToTime(TimeToFrames(AFinalTime, f)-1, f);
 end;
 
 // -----------------------------------------------------------------------------

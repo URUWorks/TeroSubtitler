@@ -44,6 +44,7 @@ type
     FTimeMode    : TUWTimeEditMode;
     FValue       : Integer;
     FFPS         : Double;
+    FSMPTE       : Boolean;
     FTimeStep    : Word;
     FFrameStep   : Word;
     FChangeEvent : TUWTimeEditChangeEvent;
@@ -89,6 +90,7 @@ type
     procedure SetValueOnly(const NewValue: Integer);
     procedure SetFPSValueOnly(const AFPS: Double);
     procedure ReAdjustWidth;
+    property SMPTE        : Boolean                read FSMPTE       write FSMPTE;
   published
     property Value        : Integer                read FValue       write SetValue;
     property FPS          : Double                 read FFPS         write SetFPS;
@@ -166,6 +168,10 @@ const
 
 // -----------------------------------------------------------------------------
 
+{ TUWTimeEdit }
+
+// -----------------------------------------------------------------------------
+
 constructor TUWTimeEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
@@ -177,6 +183,7 @@ begin
   Width      := 90;
   Height     := 23;
   FFPS       := 25;
+  FSMPTE     := False;
   FValue     := 0;
   FTimeStep  := 1;
   FFrameStep := 1;
@@ -470,14 +477,34 @@ procedure TUWTimeEdit.DoTimeDown;
   end;
 
   procedure DecFrame;
+  var
+    f: Double;
   begin
-    FValue := TimeToFrames(FValue, FFPS);
+    if FSMPTE then
+      f := NormalizeFPS(FFPS)
+    else
+      f := FFPS;
+
+    FValue := TimeToFrames(FValue, f);
     if FValue > FFrameStep then
       Dec(FValue, FFrameStep);
 
-    Value := FramesToTime(FValue, FFPS);
+    Value := FramesToTime(FValue, f);
     SetSel(9, 2);
   end;
+
+  {procedure DecFrame;
+  var
+    delta: Int64;
+  begin
+    delta := FramesToDeltaMs(FFrameStep, FFPS);
+    if FValue >= delta then
+      Value := FValue - delta
+    else
+      Value := 0;
+
+    SetSel(9, 2);
+  end;}
 
 begin
   if FValue > 0 then
@@ -505,6 +532,8 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWTimeEdit.DoTimeUp;
+var
+  f: Double;
 begin
   if SelLength <= 1 then
   begin
@@ -534,9 +563,15 @@ begin
              end
              else
              begin
-               FValue := TimeToFrames(FValue, FFPS);
+               if FSMPTE then
+                 f := NormalizeFPS(FFPS)
+               else
+                 f := FFPS;
+
+               //Value := FValue + FramesToDeltaMs(FFrameStep, FFPS);
+               FValue := TimeToFrames(FValue, f);
                Inc(FValue, FFrameStep);
-               Value := FramesToTime(FValue, FFPS);
+               Value := FramesToTime(FValue, f);
                SetSel(9, 2);
              end;
   end;

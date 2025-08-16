@@ -1011,9 +1011,13 @@ begin
     for i := 0 to ComponentCount-1 do
       if Components[i] is TUWTimeEdit then
         with (Components[i] as TUWTimeEdit) do
+        begin
           SetFPSValueOnly(Workspace.FPS.OutputFPS);
+          SMPTE := (Subtitles.TimeBase = stbSMPTE);
+        end;
 
     WAVE.FPS := Workspace.FPS.OutputFPS;
+    WAVE.SMPTE := (Subtitles.TimeBase = stbSMPTE);
   end;
 end;
 
@@ -1050,12 +1054,18 @@ begin
         Workspace.WorkMode    := wmTime;
         actTimeMode.Checked   := True;
         actFramesMode.Checked := False;
+        {$IFDEF DARWIN}
+        lblMediaTime.Width := lblMediaTime.Canvas.TextWidth(DefTimeFormat) + 4;
+        {$ENDIF}
       end
       else
       begin
         Workspace.WorkMode    := wmFrames;
         actFramesMode.Checked := True;
         actTimeMode.Checked   := False;
+        {$IFDEF DARWIN}
+        lblMediaTime.Width := lblMediaTime.Canvas.TextWidth(DefFramesFormat) + 4;
+        {$ENDIF}
       end;
 
       UpdateVideoLengthString;

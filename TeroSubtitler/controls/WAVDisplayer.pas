@@ -125,6 +125,7 @@ type
     FFileName        : String;
     FFPS             : Double;
     FFPSTimeMode     : Boolean;
+    FSMPTE           : Boolean;
 
     FLengthMS      : Integer;
     FPositionMS    : Integer;
@@ -307,6 +308,7 @@ type
     property SubTextStyle: TTextStyle read FTS write FTS;
     property Thumbnails: TThumbnails read FThumbnails write FThumbnails;
     property DefaultThumbnail: TBitmap read FDefaultThumbnail;
+    property SMPTE: Boolean read FSMPTE write FSMPTE;
   published
     property Subtitles                     : TUWSubtitles                 read FSubtitles                    write FSubtitles;
     property MinimumBlank                  : Integer                      read FGAP                          write FGAP;
@@ -510,6 +512,7 @@ begin
 
   FFPS         := 25;
   FFPSTimeMode := False;
+  FSMPTE       := False;
   FEmptyText   := '';
 
   with CustomColors do
@@ -634,7 +637,12 @@ end;
 function TUWWaveformDisplayer.GetCorrectTimePos(const PosMs: Integer): Integer;
 begin
   if FFPSTimeMode then
-    Result := RoundTimeWithFrames(PosMs, FFPS)
+  begin
+    if FSMPTE then
+      Result := RoundTimeWithFrames(PosMs, NormalizeFPS(FFPS))
+    else
+      Result := RoundTimeWithFrames(PosMs, FFPS);
+  end
   else
     Result := PosMs;
 end;
