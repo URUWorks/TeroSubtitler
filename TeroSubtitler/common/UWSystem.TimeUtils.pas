@@ -26,12 +26,13 @@ uses
 
 // -----------------------------------------------------------------------------
 
+function NormalizeFPS(const FPS: Double): Double;
 function EncodeTime(const Hour, Min, Secs, MSecs: Word): Integer;
 procedure DecodeTime(const Time: Cardinal; out Hour, Min, Secs, MSecs: Word);
 function TimeToFrames(const Time: Cardinal; const FPS: Double): Cardinal;
 function TimeToFramesMaxFPS(const Time: Cardinal; const FPS: Double): Cardinal;
 function FramesToTime(const Frames: Cardinal; FPS: Double): Cardinal;
-function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Double): Cardinal;
+function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Double): Integer;
 function TimeToString(const Time: Cardinal; TimeFormat: String = 'hh:mm:ss'; const FPS: Double = 25; const ATrim: Boolean = False): String;
 function StringToTime(const Time: String; const NoHours: Boolean = False; const FPS: Double = 0): Cardinal;
 function TimeInFormat(const Time, Format: String): Boolean;
@@ -58,7 +59,27 @@ function CalculateOptimalDisplayMSEx(const Text: String; const CPS: Double = 14.
 
 implementation
 
-//------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+function NormalizeFPS(const FPS: Double): Double;
+const
+  TOL = 0.02; // tolerancia (ajustable)
+begin
+  Result := FPS; // por defecto sin cambios
+
+  // NTSC -> nominal
+  if Abs(FPS - 23.976) < TOL then Exit(24.0);
+  if Abs(FPS - 29.97)  < TOL then Exit(30.0);
+  if Abs(FPS - 59.94)  < TOL then Exit(60.0);
+  if Abs(FPS - 119.88) < TOL then Exit(120.0);
+  if Abs(FPS - 239.76) < TOL then Exit(240.0);
+
+  // Si ya es entero dentro de tolerancia
+  if Abs(FPS - Round(FPS)) < TOL then
+    Exit(Round(FPS));
+end;
+
+// -----------------------------------------------------------------------------
 
 function EncodeTime(const Hour, Min, Secs, MSecs: Word): Integer;
 begin
@@ -113,9 +134,9 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Double): Cardinal;
+function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Double): Integer;
 begin
-  Result := FramesToTime(TimeToFrames(ATimeMS, AFPS), AFPS)
+  Result := FramesToTime(TimeToFrames(ATimeMS, AFPS), AFPS);
 end;
 
 // -----------------------------------------------------------------------------
