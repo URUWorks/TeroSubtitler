@@ -965,7 +965,7 @@ begin
   begin
     Result := FList[Index]^.InitialTime;
     if FTimeBase = stbSMPTE then
-      Result := Round(Result * 1.001);
+      Result := SMPTEConversion(Result);
   end;
 end;
 
@@ -1003,7 +1003,7 @@ begin
   begin
     Result := FList[Index]^.FinalTime;
     if FTimeBase = stbSMPTE then
-      Result := Round(Result * 1.001);
+      Result := SMPTEConversion(Result);
   end;
 end;
 
@@ -1797,18 +1797,25 @@ procedure TUWSubtitles.ConvertTimesToSMPTE(const AValue: Boolean);
 var
   i: Integer;
 begin
-  for i := 0 to Count-1 do
+  for i := 0 to Count - 1 do
     with FList[i]^ do
+    begin
       if not AValue then
       begin
-        InitialTime := Round(InitialTime * 1.001);
-        FinalTime   := Round(FinalTime * 1.001);
+        InitialTime := SMPTEConversion(InitialTime);
+        FinalTime   := SMPTEConversion(FinalTime);
       end
       else
       begin
-        InitialTime := Round(InitialTime / 1.001);
-        FinalTime   := Round(FinalTime / 1.001);
+        InitialTime := SMPTEConversion(InitialTime, False);
+        FinalTime   := SMPTEConversion(FinalTime, False);
       end;
+    end;
+
+  if not AValue then
+    FTimeBase := stbMedia
+  else
+    FTimeBase := stbSMPTE;
 end;
 
 // -----------------------------------------------------------------------------
