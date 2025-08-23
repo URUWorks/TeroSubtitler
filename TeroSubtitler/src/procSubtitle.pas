@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, StdCtrls, SysUtils, Graphics, LazUTF8, procTypes, laz.VirtualTrees,
-  UWSubtitleAPI, UWMemo, Types;
+  UWSubtitleAPI, UWMemo, UWTimeEdit, Types;
 
 type
   TPushWordMode = (pwmUp, pwmDown, pwmToPrevious, pwmToNext);
@@ -124,6 +124,7 @@ end;
 procedure PasteFromClipboard;
 var
   Memo: TUWMemo;
+  TimeEdit: TUWTimeEdit;
 begin
   if frmMain.VST.Focused then
     VSTPasteEntriesFromClipboard(frmMain.VST)
@@ -132,6 +133,10 @@ begin
     Memo := GetMemoFocused;
     if Memo <> NIL then
       Memo.PasteFromClipboard;
+
+    TimeEdit := GetTimeEditFocused;
+    if TimeEdit <> NIL then
+      TimeEdit.PasteFromClipboard;
   end;
 end;
 
@@ -467,18 +472,8 @@ end;
 // -----------------------------------------------------------------------------
 
 function SetEndCueOneFrame(const AFinalTime: Integer; const ASubtract: Boolean = False): Integer;
-var
-  f: Double;
 begin
-  if (Subtitles.TimeBase = stbSMPTE) and Workspace.SMPTE then
-    f := NormalizeFPS(Workspace.FPS.OutputFPS)
-  else
-    f := Workspace.FPS.OutputFPS;
-
-  if not ASubtract then
-    Result := FramesToTime(TimeToFrames(AFinalTime, f)+1, f)
-  else
-    Result := FramesToTime(TimeToFrames(AFinalTime, f)-1, f);
+  Result := IncDecFrame(AFinalTime, Workspace.FPS.OutputFPS, 1, Workspace.SMPTE, not ASubtract);
 end;
 
 // -----------------------------------------------------------------------------
@@ -626,7 +621,7 @@ begin
 
   if AUpdate then
   begin
-    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, SubtitleMode, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts]);
+    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, SubtitleMode, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes, cmTexts]);
     UpdateCPSAndTexts(Index);
     frmMain.VST.Invalidate;
   end;

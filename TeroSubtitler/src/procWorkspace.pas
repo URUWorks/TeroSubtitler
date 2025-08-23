@@ -75,6 +75,7 @@ function GetInputFPS: Single;
 function GetFPS: Single;
 function GetDefPause: Integer;
 
+function GetTimeEditFocused: TUWTimeEdit;
 procedure SetFocusTimeEdit(const ATag: Byte);
 procedure SetActor;
 
@@ -1044,30 +1045,31 @@ begin
           begin
             FPS      := Workspace.FPS.OutputFPS;
             TimeMode := TUWTimeEditMode(Mode);
+            SMPTE    := (Subtitles.TimeBase = stbSMPTE);
           end;
 
       WAVE.FPS := Workspace.FPS.OutputFPS;
       WAVE.FPSTimeMode := (Mode = wmFrames);
+      WAVE.SMPTE := (Subtitles.TimeBase = stbSMPTE);
 
       if Mode = wmTime then
       begin
         Workspace.WorkMode    := wmTime;
         actTimeMode.Checked   := True;
         actFramesMode.Checked := False;
-        {$IFDEF DARWIN}
-        lblMediaTime.Width := lblMediaTime.Canvas.TextWidth(DefTimeFormat) + 4;
-        {$ENDIF}
       end
       else
       begin
         Workspace.WorkMode    := wmFrames;
         actFramesMode.Checked := True;
         actTimeMode.Checked   := False;
-        {$IFDEF DARWIN}
-        lblMediaTime.Width := lblMediaTime.Canvas.TextWidth(DefFramesFormat) + 4;
-        {$ENDIF}
       end;
 
+      if MPV.IsMediaLoaded and MPV.IsPaused then
+        lblMediaTime.Caption := GetTimeStr(MPV.GetMediaPosInMs);
+      {$IFDEF DARWIN}
+      lblMediaTime.AdjustSize;
+      {$ENDIF}
       UpdateVideoLengthString;
 
       if AUpdate then UpdateValues(True); // update times
@@ -1223,6 +1225,23 @@ begin
       Result := MinPause
     else
       Result := FramesToTime(MinPause, Workspace.FPS.OutputFPS);
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetTimeEditFocused: TUWTimeEdit;
+begin
+  with frmMain do
+    if tedInitial.Focused then
+      Result := tedInitial
+    else if tedFinal.Focused then
+      Result := tedFinal
+    else if tedDuration.Focused then
+      Result := tedDuration
+    else if tedPause.Focused then
+      Result := tedPause
+    else
+      Result := NIL;
 end;
 
 // -----------------------------------------------------------------------------

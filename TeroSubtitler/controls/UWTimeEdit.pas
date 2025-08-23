@@ -25,7 +25,7 @@ unit UWTimeEdit;
 interface
 
 uses
-  Classes, Controls, StdCtrls, ComCtrls, LCLType, LMessages, SysUtils,
+  Classes, Controls, StdCtrls, ComCtrls, LCLType, LMessages, SysUtils, Forms,
   Graphics, LazarusPackageIntf;
 
 type
@@ -87,6 +87,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    procedure PasteFromClipboard; override;
     procedure SetValueOnly(const NewValue: Integer);
     procedure SetFPSValueOnly(const AFPS: Double);
     procedure ReAdjustWidth;
@@ -155,10 +156,8 @@ procedure Register;
 
 implementation
 
-//------------------------------------------------------------------------------
-
 uses
-  UWSystem.SysUtils, UWSystem.TimeUtils, Math;
+  UWSystem.SysUtils, UWSystem.TimeUtils, Math, Clipbrd, LCLIntf;
 
 const
   OneSecond = 1000;
@@ -275,6 +274,21 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TUWTimeEdit.PasteFromClipboard;
+var
+  S: String;
+begin
+  if not Clipboard.HasFormat(PredefinedClipboardFormat(pcfText)) then
+    Exit;
+
+  S := Clipboard.AsText;
+  if S = '' then Exit;
+
+  Value := StringToTime(S);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TUWTimeEdit.SetSel(const Start, Len: Integer);
 begin
   SelStart  := Start;
@@ -320,6 +334,10 @@ var
 
   FMINMASK : String;
   FMAXMASK : String;
+
+  Msg      : TLMKey;
+  Frm      : TCustomForm;
+  isSC     : Boolean = False;
 begin
   if Key = VK_ESCAPE then Exit;
 
@@ -368,14 +386,28 @@ begin
        VK_UP   : DoTimeUp;
        VK_DOWN : DoTimeDown;
     else
-      KeyChar := Chr(Key);
       SelSt   := SelStart;
       s       := Text;
 
-      if CharInSet(KeyChar, [#96..#105]) then // numpad 0-9
-        KeyChar := Chr(Key - 48)
-      else if not CharInSet(KeyChar, [#48..#57]) then // 0-9
+      if (Key >= VK_0) and (Key <= VK_9)
+        and not (ssCtrl in Shift) and not (ssAlt in Shift) and not (ssMeta in Shift) then
+        KeyChar := Chr(Ord('0') + (Key - VK_0))
+      else if (Key >= VK_NUMPAD0) and (Key <= VK_NUMPAD9)
+              and not (ssCtrl in Shift) and not (ssAlt in Shift) and not (ssMeta in Shift) then
+        KeyChar := Chr(Ord('0') + (Key - VK_NUMPAD0))
+      else
+      begin
+        Frm := GetParentForm(Self);
+        if Assigned(Frm) then
+        begin
+          Msg.Msg      := LM_KEYDOWN;
+          Msg.CharCode := Key;
+          Msg.KeyData  := 0;
+          Msg.Unused   := 0;
+          isSC := Frm.IsShortCut(Msg);
+        end;
         Exit;
+      end;
 
       if (FTimeMode = TUWTimeEditMode.temTime) then
       begin
@@ -424,7 +456,9 @@ begin
 
     if Assigned(FChangeEvent) then FChangeEvent(Self, FValue);
   finally
-    Key := VK_UNKNOWN;
+    if not isSC then
+      Key := VK_UNKNOWN;
+
     inherited KeyDown(Key, Shift);
   end;
 end;
@@ -480,31 +514,9 @@ procedure TUWTimeEdit.DoTimeDown;
   var
     f: Double;
   begin
-    if FSMPTE then
-      f := NormalizeFPS(FFPS)
-    else
-      f := FFPS;
-
-    FValue := TimeToFrames(FValue, f);
-    if FValue > FFrameStep then
-      Dec(FValue, FFrameStep);
-
-    Value := FramesToTime(FValue, f);
+    Value := IncDecFrame(FValue, FFPS, FFrameStep, FSMPTE, False);
     SetSel(9, 2);
   end;
-
-  {procedure DecFrame;
-  var
-    delta: Int64;
-  begin
-    delta := FramesToDeltaMs(FFrameStep, FFPS);
-    if FValue >= delta then
-      Value := FValue - delta
-    else
-      Value := 0;
-
-    SetSel(9, 2);
-  end;}
 
 begin
   if FValue > 0 then
@@ -563,15 +575,7 @@ begin
              end
              else
              begin
-               if FSMPTE then
-                 f := NormalizeFPS(FFPS)
-               else
-                 f := FFPS;
-
-               //Value := FValue + FramesToDeltaMs(FFrameStep, FFPS);
-               FValue := TimeToFrames(FValue, f);
-               Inc(FValue, FFrameStep);
-               Value := FramesToTime(FValue, f);
+               Value := IncDecFrame(FValue, FFPS, FFrameStep, FSMPTE);
                SetSel(9, 2);
              end;
   end;

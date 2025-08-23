@@ -1682,6 +1682,7 @@ begin
       if VST.SelectedCount = 1 then
       begin
         SetSubtitleText(VSTFocusedNode(VST), Text, TSubtitleMode(TAG_CONTROL_TEXT - Tag));
+        if WAVE.IsTimeLineEnabled and not MPV.IsPlaying then WAVE.DoUpdate; // Would it be better to repaint only if it is visible on the timeline?
         if (GetTickCount - LastTickCount) > 700 then // only if > 700ms
         begin
           CheckForTerminology(VSTFocusedNode(VST));
@@ -1959,6 +1960,7 @@ begin
     if IsTimeLineEnabled then
     begin
       actMediaDeleteEntry.Enabled := SelectedItem <> NIL;
+      actMediaAddEntry.Enabled := Subtitles.IndexOf(WAVE.CursorPosMS) < 0;
       actMediaSplitEntryAtCursorPosition.Enabled := actMediaDeleteEntry.Enabled;
 
       if SelectionIsEmpty then

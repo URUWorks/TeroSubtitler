@@ -639,7 +639,7 @@ begin
   if FFPSTimeMode then
   begin
     if FSMPTE then
-      Result := RoundTimeWithFrames(PosMs, NormalizeFPS(FFPS))
+      Result := IncDecFrame(PosMs, FFPS, 0, FSMPTE) //RoundTimeWithFrames(PosMs, NormalizeFPS(FFPS))
     else
       Result := RoundTimeWithFrames(PosMs, FFPS);
   end
