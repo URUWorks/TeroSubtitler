@@ -3,6 +3,12 @@
 - fixed: iTT won't load if indicated version isn't 1.0 [SubtitleAPI]
 - fixed: Impossible to type a number from the numeric keypad in the edit box when shortcuts (0-9) are assigned
 - fixed: Adjusting duration doesn't update final time immediately
+- fixed: Select all, copy, and paste time code #418
+- fixed: No prompt for FPS when creating a project in media mode #417
+- fixed: Icon for CPS breach only appears in unedited file #412
+- fixed: Add entry overlaps existing one #405
+- fixed: Entered text doesn't immediately appear on timeline #404
+- fixed: Shortcuts have no effect when cursor is in time code area #403
 - fixed: MPV does not stop on loading a new video #401
 - fixed: Multi-line text pasted from external source appears on list as one line #400
 - fixed: Formatting only retained in first and final entries if more than two generated in division #399
@@ -28,6 +34,7 @@
 - improved: SUP Export
 - improved: Video thumbnails
 - updated: Lazarus 4.2
+- updated: Italian language (thx bovirus)
 - added: Import a .SUP blu-ray #281
 - added: German language (thx cutegitcat)
 - added: Swedish language (thx cutegitcat)
