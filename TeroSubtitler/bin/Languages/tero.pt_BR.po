@@ -772,6 +772,16 @@ msgstr "Salvar Arquivo"
 msgid "Error trying to save the file."
 msgstr "Erro ao tentar salvar o arquivo."
 
+#: proclocalize.lngsavesubtitles
+msgid "Save subtitles"
+msgstr ""
+
+#: proclocalize.lngsavetranslation
+#, fuzzy
+msgctxt "proclocalize.lngsavetranslation"
+msgid "Save translation"
+msgstr "Salvar tradução"
+
 #: proclocalize.lngsbspellcheckerlanguage
 msgid "Spell checker language"
 msgstr ""
@@ -3452,6 +3462,7 @@ msgid "Transcription..."
 msgstr "Salvar transcrição..."
 
 #: tfrmmain.actsavetranslation.caption
+msgctxt "tfrmmain.actsavetranslation.caption"
 msgid "Save translation"
 msgstr "Salvar tradução"
 
