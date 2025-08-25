@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: proclocalize.lngabversion
 #, object-pascal-format
@@ -90,8 +90,7 @@ msgstr ""
 "¿Desea guardar los cambios?"
 
 #: proclocalize.lngaslineselected
-#, object-pascal-format, fuzzy
-#| msgid "%d lines selected / %d"
+#, object-pascal-format
 msgid "%d entries selected / %d"
 msgstr "%d líneas seleccionadas / %d"
 
@@ -712,8 +711,6 @@ msgid "Subtitle Translation Project"
 msgstr "Proyecto de traducción de subtítulos"
 
 #: proclocalize.lngpromptfordeletelines
-#, fuzzy
-#| msgid "The selected lines will be deleted."
 msgid "The selected entries will be deleted."
 msgstr "Las líneas seleccionadas serán eliminadas."
 
@@ -770,6 +767,10 @@ msgstr "Guardar archivo"
 #: proclocalize.lngsavesubtitleerror
 msgid "Error trying to save the file."
 msgstr "Error al intentar guardar el archivo."
+
+#: proclocalize.lngsbspellcheckerlanguage
+msgid "Spell checker language"
+msgstr "Idioma del corrector ortográfico"
 
 #: proclocalize.lngscaudiofilters
 msgctxt "proclocalize.lngscaudiofilters"
@@ -5578,4 +5579,3 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-

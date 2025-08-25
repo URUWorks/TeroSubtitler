@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 06.05.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione 18.08.2025)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: bovirus <bovirus@gmail.comn>\n"
+"Last-Translator: bovirus <bovirus@gmail.com>\n"
 "Language-Team: GitGianluc e bovirus\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: proclocalize.lngabversion
@@ -91,10 +91,9 @@ msgstr ""
 "Vuoi salvare il file?"
 
 #: proclocalize.lngaslineselected
-#, object-pascal-format, fuzzy
-#| msgid "%d lines selected / %d"
+#, object-pascal-format
 msgid "%d entries selected / %d"
-msgstr "%d linee selezionate / %d"
+msgstr "%d voci selezionate / %d"
 
 #: proclocalize.lngasmarked
 msgid "Marked entry"
@@ -716,10 +715,8 @@ msgid "Subtitle Translation Project"
 msgstr "Progetto traduzione sottotitoli"
 
 #: proclocalize.lngpromptfordeletelines
-#, fuzzy
-#| msgid "The selected lines will be deleted."
 msgid "The selected entries will be deleted."
-msgstr "Le linee selezionate verranno eliminate."
+msgstr "Le voci selezionate verranno eliminate."
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -774,6 +771,10 @@ msgstr "Salva file"
 #: proclocalize.lngsavesubtitleerror
 msgid "Error trying to save the file."
 msgstr "Errore nel tentativo di salvataggio del file."
+
+#: proclocalize.lngsbspellcheckerlanguage
+msgid "Spell checker language"
+msgstr "Lingua controllo ortografico"
 
 #: proclocalize.lngscaudiofilters
 msgctxt "proclocalize.lngscaudiofilters"
@@ -5584,4 +5585,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-

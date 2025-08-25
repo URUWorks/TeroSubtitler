@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione v. 07.07.2024)\n"
+"Project-Id-Version: Tero Subtitler (traduzione 18.08.2025)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -771,6 +771,10 @@ msgstr "Salva file"
 #: proclocalize.lngsavesubtitleerror
 msgid "Error trying to save the file."
 msgstr "Errore nel tentativo di salvataggio del file."
+
+#: proclocalize.lngsbspellcheckerlanguage
+msgid "Spell checker language"
+msgstr "Lingua controllo ortografico"
 
 #: proclocalize.lngscaudiofilters
 msgctxt "proclocalize.lngscaudiofilters"

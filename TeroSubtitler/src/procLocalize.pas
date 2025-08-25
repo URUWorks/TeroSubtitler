@@ -326,6 +326,9 @@ resourcestring
   lngstLongestGap = 'Longest gap: %s (#%d)';
   lngstGapAverage = 'Gap average: %s';
 
+  //StatusBar
+  lngsbSpellCheckerLanguage = 'Spell checker language';
+
   //StreamExtractor
   lngseID = 'ID';
   lngseKind = 'Type';

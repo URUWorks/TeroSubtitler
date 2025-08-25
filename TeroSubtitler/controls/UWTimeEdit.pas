@@ -25,7 +25,7 @@ unit UWTimeEdit;
 interface
 
 uses
-  Classes, Controls, StdCtrls, ComCtrls, LCLType, LMessages, SysUtils,
+  Classes, Controls, StdCtrls, ComCtrls, LCLType, LMessages, SysUtils, Forms,
   Graphics, LazarusPackageIntf;
 
 type
@@ -43,17 +43,17 @@ type
     {$ENDIF}
     FTimeMode    : TUWTimeEditMode;
     FValue       : Integer;
-    FFPS         : Single;
+    FFPS         : Double;
+    FSMPTE       : Boolean;
     FTimeStep    : Word;
     FFrameStep   : Word;
     FChangeEvent : TUWTimeEditChangeEvent;
-    procedure SetFPS(const AFPS: Single);
+    procedure SetFPS(const AFPS: Double);
     procedure SetTimeMode(const ATimeMode: TUWTimeEditMode);
     procedure SetValueFromString(const S: String);
     procedure SetValue(const NewValue: Integer);
     procedure UpdateValue(const FireChangeEvent: Boolean = True);
     procedure SetSel(const Start, Len: Integer);
-    procedure IncFrame(const Increment: Boolean);
     procedure DoTimeDown;
     procedure DoTimeUp;
     procedure UpDownClick(Sender: TObject; Button: TUDBtnType);
@@ -83,15 +83,18 @@ type
     procedure MouseEnter; override;
     procedure MouseLeave; override;
     {$ENDIF}
+    procedure DblClick; override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    procedure PasteFromClipboard; override;
     procedure SetValueOnly(const NewValue: Integer);
-    procedure SetFPSValueOnly(const AFPS: Single);
+    procedure SetFPSValueOnly(const AFPS: Double);
     procedure ReAdjustWidth;
+    property SMPTE        : Boolean                read FSMPTE       write FSMPTE;
   published
     property Value        : Integer                read FValue       write SetValue;
-    property FPS          : Single                 read FFPS         write SetFPS;
+    property FPS          : Double                 read FFPS         write SetFPS;
     property FrameStep    : Word                   read FFrameStep   write FFrameStep;
     property TimeStep     : Word                   read FTimeStep    write FTimeStep;
     property TimeMode     : TUWTimeEditMode        read FTimeMode    write SetTimeMode;
@@ -153,10 +156,8 @@ procedure Register;
 
 implementation
 
-//------------------------------------------------------------------------------
-
 uses
-  UWSystem.SysUtils, UWSystem.TimeUtils, Math;
+  UWSystem.SysUtils, UWSystem.TimeUtils, Math, Clipbrd, LCLIntf;
 
 const
   OneSecond = 1000;
@@ -166,15 +167,22 @@ const
 
 // -----------------------------------------------------------------------------
 
+{ TUWTimeEdit }
+
+// -----------------------------------------------------------------------------
+
 constructor TUWTimeEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+
+  ControlStyle := ControlStyle - [csDoubleClicks];
 
   Constraints.MinWidth  := 90;
   Constraints.MinHeight := 21;
   Width      := 90;
   Height     := 23;
   FFPS       := 25;
+  FSMPTE     := False;
   FValue     := 0;
   FTimeStep  := 1;
   FFrameStep := 1;
@@ -266,6 +274,21 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TUWTimeEdit.PasteFromClipboard;
+var
+  S: String;
+begin
+  if not Clipboard.HasFormat(PredefinedClipboardFormat(pcfText)) then
+    Exit;
+
+  S := Clipboard.AsText;
+  if S = '' then Exit;
+
+  Value := StringToTime(S);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TUWTimeEdit.SetSel(const Start, Len: Integer);
 begin
   SelStart  := Start;
@@ -311,6 +334,10 @@ var
 
   FMINMASK : String;
   FMAXMASK : String;
+
+  Msg      : TLMKey;
+  Frm      : TCustomForm;
+  isSC     : Boolean = False;
 begin
   if Key = VK_ESCAPE then Exit;
 
@@ -359,14 +386,28 @@ begin
        VK_UP   : DoTimeUp;
        VK_DOWN : DoTimeDown;
     else
-      KeyChar := Chr(Key);
       SelSt   := SelStart;
       s       := Text;
 
-      if CharInSet(KeyChar, [#96..#105]) then // numpad 0-9
-        KeyChar := Chr(Key - 48)
-      else if not CharInSet(KeyChar, [#48..#57]) then // 0-9
+      if (Key >= VK_0) and (Key <= VK_9)
+        and not (ssCtrl in Shift) and not (ssAlt in Shift) and not (ssMeta in Shift) then
+        KeyChar := Chr(Ord('0') + (Key - VK_0))
+      else if (Key >= VK_NUMPAD0) and (Key <= VK_NUMPAD9)
+              and not (ssCtrl in Shift) and not (ssAlt in Shift) and not (ssMeta in Shift) then
+        KeyChar := Chr(Ord('0') + (Key - VK_NUMPAD0))
+      else
+      begin
+        Frm := GetParentForm(Self);
+        if Assigned(Frm) then
+        begin
+          Msg.Msg      := LM_KEYDOWN;
+          Msg.CharCode := Key;
+          Msg.KeyData  := 0;
+          Msg.Unused   := 0;
+          isSC := Frm.IsShortCut(Msg);
+        end;
         Exit;
+      end;
 
       if (FTimeMode = TUWTimeEditMode.temTime) then
       begin
@@ -415,27 +456,11 @@ begin
 
     if Assigned(FChangeEvent) then FChangeEvent(Self, FValue);
   finally
-    Key := VK_UNKNOWN;
+    if not isSC then
+      Key := VK_UNKNOWN;
+
     inherited KeyDown(Key, Shift);
   end;
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure TUWTimeEdit.IncFrame(const Increment: Boolean);
-var
-  Wpart : Integer = 0; //WholePart
-  Fpart : Integer = 0; //Fraction part
-  Frames : Integer = 0;
-begin
-  Wpart := Trunc(FValue/1000)*1000;
-  Fpart := FValue - Wpart;
-  Frames := Trunc(Fpart*FFPS/1000);
-
-  if not Increment then
-    Value := Wpart + Ceil((Frames-1)*1000/FFPS) + Ceil(100/FFPS) //Add 10 % of the frame duration, to make sure that the control will stay within the frame.
-  else
-    Value := Wpart + Ceil((Frames+1.1)*1000/FFPS);
 end;
 
 // -----------------------------------------------------------------------------
@@ -486,13 +511,10 @@ procedure TUWTimeEdit.DoTimeDown;
   end;
 
   procedure DecFrame;
+  var
+    f: Double;
   begin
-    {if FValue > FramesToTime(FFrameStep, FFPS) then
-      Value := FValue - FramesToTime(FFrameStep, FFPS)
-    else
-      Value := 0;}
-
-    IncFrame(False);
+    Value := IncDecFrame(FValue, FFPS, FFrameStep, FSMPTE, False);
     SetSel(9, 2);
   end;
 
@@ -522,6 +544,8 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWTimeEdit.DoTimeUp;
+var
+  f: Double;
 begin
   if SelLength <= 1 then
   begin
@@ -551,8 +575,7 @@ begin
              end
              else
              begin
-               //Value := FValue + FramesToTime(FFrameStep, FFPS);
-               IncFrame(True);
+               Value := IncDecFrame(FValue, FFPS, FFrameStep, FSMPTE);
                SetSel(9, 2);
              end;
   end;
@@ -596,7 +619,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTimeEdit.SetFPS(const AFPS: Single);
+procedure TUWTimeEdit.SetFPS(const AFPS: Double);
 begin
   FFPS := AFPS;
   UpdateValue;
@@ -604,7 +627,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTimeEdit.SetFPSValueOnly(const AFPS: Single);
+procedure TUWTimeEdit.SetFPSValueOnly(const AFPS: Double);
 begin
   FFPS := AFPS;
 end;
@@ -690,6 +713,13 @@ procedure TUWTimeEdit.Loaded;
 begin
   inherited Loaded;
   DoPositionSpin;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTimeEdit.DblClick;
+begin
+  // ignorar
 end;
 
 // -----------------------------------------------------------------------------

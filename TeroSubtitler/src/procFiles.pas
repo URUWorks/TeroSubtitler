@@ -238,7 +238,7 @@ begin
     begin
       if CloseSubtitle(False) then
       begin
-        if Workspace.WorkMode = wmFrames then // ask for FPS?
+        //if Workspace.WorkMode = wmFrames then // ask for FPS?
           with frmMain.cboInputFPS do
           begin
             ItemIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectFPSToUse, Items, ItemIndex, True);

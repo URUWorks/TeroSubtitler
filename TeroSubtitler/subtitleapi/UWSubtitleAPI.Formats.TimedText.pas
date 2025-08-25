@@ -37,8 +37,8 @@ type
     function IsTimeBased: Boolean; override;
     function HasStyleSupport: Boolean; override;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
-    function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; override;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
+    function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean; override;
+    function SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
   end;
 
 // -----------------------------------------------------------------------------
@@ -99,9 +99,9 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
+function TUWTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
 
-  function GetTime(const S: String; const aFPS: Single): Integer;
+  function GetTime(const S: String; const aFPS: Double): Integer;
   begin
     if AnsiEndsStr('t', S) then // ticks
       Result := TicksToMSecs(StrToInt64(Copy(S, 0, Length(S)-1)))
@@ -191,7 +191,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWTimedText.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWTimedText.SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   XmlDoc : TXMLDocument;
   Root, Element, Node, SubNode : TDOMNode;

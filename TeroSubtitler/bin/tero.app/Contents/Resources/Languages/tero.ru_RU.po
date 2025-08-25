@@ -770,6 +770,10 @@ msgstr "Сохранить"
 msgid "Error trying to save the file."
 msgstr "Ошибка сохранения файла."
 
+#: proclocalize.lngsbspellcheckerlanguage
+msgid "Spell checker language"
+msgstr ""
+
 #: proclocalize.lngscaudiofilters
 msgctxt "proclocalize.lngscaudiofilters"
 msgid "Audio filters"

@@ -75,6 +75,7 @@ function GetInputFPS: Single;
 function GetFPS: Single;
 function GetDefPause: Integer;
 
+function GetTimeEditFocused: TUWTimeEdit;
 procedure SetFocusTimeEdit(const ATag: Byte);
 procedure SetActor;
 
@@ -1011,9 +1012,13 @@ begin
     for i := 0 to ComponentCount-1 do
       if Components[i] is TUWTimeEdit then
         with (Components[i] as TUWTimeEdit) do
+        begin
           SetFPSValueOnly(Workspace.FPS.OutputFPS);
+          SMPTE := (Subtitles.TimeBase = stbSMPTE);
+        end;
 
     WAVE.FPS := Workspace.FPS.OutputFPS;
+    WAVE.SMPTE := (Subtitles.TimeBase = stbSMPTE);
   end;
 end;
 
@@ -1040,10 +1045,12 @@ begin
           begin
             FPS      := Workspace.FPS.OutputFPS;
             TimeMode := TUWTimeEditMode(Mode);
+            SMPTE    := (Subtitles.TimeBase = stbSMPTE);
           end;
 
       WAVE.FPS := Workspace.FPS.OutputFPS;
       WAVE.FPSTimeMode := (Mode = wmFrames);
+      WAVE.SMPTE := (Subtitles.TimeBase = stbSMPTE);
 
       if Mode = wmTime then
       begin
@@ -1058,6 +1065,11 @@ begin
         actTimeMode.Checked   := False;
       end;
 
+      if MPV.IsMediaLoaded and MPV.IsPaused then
+        lblMediaTime.Caption := GetTimeStr(MPV.GetMediaPosInMs);
+      {$IFDEF DARWIN}
+      lblMediaTime.AdjustSize;
+      {$ENDIF}
       UpdateVideoLengthString;
 
       if AUpdate then UpdateValues(True); // update times
@@ -1213,6 +1225,23 @@ begin
       Result := MinPause
     else
       Result := FramesToTime(MinPause, Workspace.FPS.OutputFPS);
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetTimeEditFocused: TUWTimeEdit;
+begin
+  with frmMain do
+    if tedInitial.Focused then
+      Result := tedInitial
+    else if tedFinal.Focused then
+      Result := tedFinal
+    else if tedDuration.Focused then
+      Result := tedDuration
+    else if tedPause.Focused then
+      Result := tedPause
+    else
+      Result := NIL;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1601,7 +1630,7 @@ var
 begin
   for i := 0 to ACoolbar.Bands.Count-1 do
     if ACoolbar.Bands[i].Control <> NIL then
-      ACoolbar.Bands[i].MinWidth := ACoolbar.Bands[i].Control.Width + (ACoolbar.GrabWidth * 2);
+      ACoolbar.Bands[i].MinWidth := ACoolbar.ScaleFormTo96(ACoolbar.Bands[i].Control.Width + (ACoolbar.GrabWidth * 2));
 end;
 
 // -----------------------------------------------------------------------------

@@ -137,7 +137,7 @@ type
   TUWSubtitles = class
   private
     FFormat           : TUWSubtitleFormats;
-    FFPS              : Single;
+    FFPS              : Double;
     FEIType           : TUWSubtitleExtraInfoType;
     FList             : TUWSubtitleItemList;
     FExtraInfo        : TList;
@@ -167,16 +167,16 @@ type
     procedure PutTranslation(Index: Integer; const S: String);
     function GetInitialTime(Index: Integer): TUWTimeCode;
     procedure PutInitialTime(Index: Integer; const Time: TUWTimeCode);
-    function GetInitialFrames(Index: Integer; FPS: Single): Integer;
+    function GetInitialFrames(Index: Integer; FPS: Double): Integer;
     function GetFinalTime(Index: Integer): TUWTimeCode;
     procedure PutFinalTime(Index: Integer; const Time: TUWTimeCode);
-    function GetFinalFrames(Index: Integer; FPS: Single): Integer;
+    function GetFinalFrames(Index: Integer; FPS: Double): Integer;
     function GetDuration(Index: Integer): TUWTimeCode;
     procedure PutDuration(Index: Integer; const Time: TUWTimeCode);
-    function GetDurationFrames(Index: Integer; FPS: Single): Integer;
+    function GetDurationFrames(Index: Integer; FPS: Double): Integer;
     function GetPause(Index: Integer): TUWTimeCode;
     procedure PutPause(Index: Integer; const Time: TUWTimeCode);
-    function GetPauseFrames(Index: Integer; FPS: Single): Integer;
+    function GetPauseFrames(Index: Integer; FPS: Double): Integer;
     function GetExtraInfo(Index: Integer): Pointer;
     procedure SetExtraInfo(Index: Integer; const P: Pointer);
     function GetStringCPS(Index: Integer; const IsOriginal: Boolean; const SkipChars: String = ''): Double;
@@ -211,19 +211,19 @@ type
     function IsEqualItem(const I1, I2: TUWSubtitleItem): Boolean;
     function GetFormatFromFile(const AFileName: String): TUWSubtitleFormats;
     function GetTimeBaseFromFile(const AFileName: String): TSubtitleTimeBase;
-    function LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
-    function LoadFromString(const S: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
-    function SaveToFile(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1; const FixFileName: Boolean = False): Boolean;
-    function SaveToString(const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): String;
+    function LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Double; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
+    function LoadFromString(const S: String; Encoding: TEncoding; const FPS: Double; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
+    function SaveToFile(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1; const FixFileName: Boolean = False): Boolean;
+    function SaveToString(const FPS: Double; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): String;
     function FillDialogFilter(AllSupportedText: String = 'All supported files'): String;
     function FixFileNameExtension(const AFileName: String; const AFormat: TUWSubtitleFormats): String;
-    procedure DoFPSConversion(const AOldFPS, ANewFPS: Single);
+    procedure DoFPSConversion(const AOldFPS, ANewFPS: Double);
     procedure ConvertTimesToSMPTE(const AValue: Boolean);
     function IsSMPTESupported(const AFormat: TUWSubtitleFormats = sfInvalid): Boolean;
     property Count: Integer read GetCount;
     property Format: TUWSubtitleFormats read FFormat write SetFormat;
     property CodePage: Integer read FCodePage;
-    property FrameRate: Single read FFPS write FFPS;
+    property FrameRate: Double read FFPS write FFPS;
     property WriteBOM: Boolean read FWriteBOM write FWriteBOM;
     property AutoSort: Boolean read FAutoSort write FAutoSort; // Auto sort subtitles on load
     property Items[Index: Integer]: TUWSubtitleItem read GetItem write PutItem; default;
@@ -231,13 +231,13 @@ type
     property Text[Index: Integer]: String read GetText write PutText;
     property Translation[Index: Integer]: String read GetTranslation write PutTranslation;
     property InitialTime[Index: Integer]: TUWTimeCode read GetInitialTime write PutInitialTime;
-    property InitialFrames[Index: Integer; FPS: Single]: Integer read GetInitialFrames;
+    property InitialFrames[Index: Integer; FPS: Double]: Integer read GetInitialFrames;
     property FinalTime[Index: Integer]: TUWTimeCode read GetFinalTime write PutFinalTime;
-    property FinalFrames[Index: Integer; FPS: Single]: Integer read GetFinalFrames;
+    property FinalFrames[Index: Integer; FPS: Double]: Integer read GetFinalFrames;
     property Duration[Index: Integer]: TUWTimeCode read GetDuration write PutDuration;
-    property DurationFrames[Index: Integer; FPS: Single]: Integer read GetDurationFrames;
+    property DurationFrames[Index: Integer; FPS: Double]: Integer read GetDurationFrames;
     property Pause[Index: Integer]: TUWTimeCode read GetPause write PutPause;
-    property PauseFrames[Index: Integer; FPS: Single]: Integer read GetPauseFrames;
+    property PauseFrames[Index: Integer; FPS: Double]: Integer read GetPauseFrames;
     property TextCPS[Index: Integer; SkipChars: String]: Double read GetTextCPS;
     property TranslationCPS[Index: Integer; const SkipChars: String]: Double read GetTranslationCPS;
     property TextWPM[Index: Integer]: Double read GetTextWPM;
@@ -269,8 +269,8 @@ type
     function IsTextBased: Boolean; virtual;
     function HasStyleSupport: Boolean; virtual;
     function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; virtual;
-    function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean; virtual;
-    function SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; virtual;
+    function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean; virtual;
+    function SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; virtual;
     property StringList: TUWStringList read FStringList write FStringList;
   end;
 
@@ -965,7 +965,7 @@ begin
   begin
     Result := FList[Index]^.InitialTime;
     if FTimeBase = stbSMPTE then
-      Result := Round(Result * 1.001);
+      Result := SMPTEConversion(Result);
   end;
 end;
 
@@ -985,7 +985,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.GetInitialFrames(Index: Integer; FPS: Single): Integer;
+function TUWSubtitles.GetInitialFrames(Index: Integer; FPS: Double): Integer;
 begin
   Result := 0;
 
@@ -1003,7 +1003,7 @@ begin
   begin
     Result := FList[Index]^.FinalTime;
     if FTimeBase = stbSMPTE then
-      Result := Round(Result * 1.001);
+      Result := SMPTEConversion(Result);
   end;
 end;
 
@@ -1023,7 +1023,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.GetFinalFrames(Index: Integer; FPS: Single): Integer;
+function TUWSubtitles.GetFinalFrames(Index: Integer; FPS: Double): Integer;
 begin
   Result := 0;
 
@@ -1057,7 +1057,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.GetDurationFrames(Index: Integer; FPS: Single): Integer;
+function TUWSubtitles.GetDurationFrames(Index: Integer; FPS: Double): Integer;
 begin
   Result := 0;
 
@@ -1094,7 +1094,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.GetPauseFrames(Index: Integer; FPS: Single): Integer;
+function TUWSubtitles.GetPauseFrames(Index: Integer; FPS: Double): Integer;
 begin
   Result := 0;
 
@@ -1586,12 +1586,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
+function TUWSubtitles.LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Double; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
 var
   AList   : TUWSubtitleCustomFormatList;
   SubFile : TUWStringList;
   i, f    : Integer;
-  AFPS    : Single;
+  AFPS    : Double;
 begin
   Result := False;
   AList  := NIL;
@@ -1651,14 +1651,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.LoadFromString(const S: String; Encoding: TEncoding; const FPS: Single; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
+function TUWSubtitles.LoadFromString(const S: String; Encoding: TEncoding; const FPS: Double; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
 begin
   Result := LoadFromFile(S, Encoding, FPS, Format, ClearAll, False);
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.SaveToFile(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1; const FixFileName: Boolean = False): Boolean;
+function TUWSubtitles.SaveToFile(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1; const FixFileName: Boolean = False): Boolean;
 var
   AList      : TUWSubtitleCustomFormatList;
   f          : Integer;
@@ -1687,7 +1687,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.SaveToString(const FPS: Single; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): String;
+function TUWSubtitles.SaveToString(const FPS: Double; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): String;
 var
   AList      : TUWSubtitleCustomFormatList;
   f          : Integer;
@@ -1777,7 +1777,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWSubtitles.DoFPSConversion(const AOldFPS, ANewFPS: Single);
+procedure TUWSubtitles.DoFPSConversion(const AOldFPS, ANewFPS: Double);
 var
   i, it, ft : Integer;
 begin
@@ -1797,18 +1797,25 @@ procedure TUWSubtitles.ConvertTimesToSMPTE(const AValue: Boolean);
 var
   i: Integer;
 begin
-  for i := 0 to Count-1 do
+  for i := 0 to Count - 1 do
     with FList[i]^ do
+    begin
       if not AValue then
       begin
-        InitialTime := Round(InitialTime * 1.001);
-        FinalTime   := Round(FinalTime * 1.001);
+        InitialTime := SMPTEConversion(InitialTime);
+        FinalTime   := SMPTEConversion(FinalTime);
       end
       else
       begin
-        InitialTime := Round(InitialTime / 1.001);
-        FinalTime   := Round(FinalTime / 1.001);
+        InitialTime := SMPTEConversion(InitialTime, False);
+        FinalTime   := SMPTEConversion(FinalTime, False);
       end;
+    end;
+
+  if not AValue then
+    FTimeBase := stbMedia
+  else
+    FTimeBase := stbSMPTE;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1909,14 +1916,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitleCustomFormat.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Single; var Subtitles: TUWSubtitles): Boolean;
+function TUWSubtitleCustomFormat.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
 begin
   Result := False;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitleCustomFormat.SaveSubtitle(const FileName: String; const FPS: Single; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWSubtitleCustomFormat.SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 begin
   Result := False;
 end;

@@ -912,6 +912,8 @@ type
     procedure FormShortCut(var Msg: TLMKey; var Handled: Boolean);
     procedure FormShow(Sender: TObject);
     procedure LayoutVSTResize(Sender: TObject);
+    procedure StatusBarMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
     procedure StatusBarMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure tedTimeChange(Sender: TObject; const NewTime: Cardinal);
@@ -1366,6 +1368,7 @@ begin
   RefreshAppTitle;
   // VST
   VSTDrawInitialize(VSTOptions.DrawMode);
+  LoadSettings(True);
   // Prepare combos and menus
   FillComboWithFPS(cboInputFPS, Workspace.FPS.InputFPS);
   FillComboWithFPS(cboFPS, Workspace.FPS.InputFPS);
@@ -1468,11 +1471,11 @@ begin
   //mnuFormatProperties.Visible := False;
   mnuSettings.Visible         := False;
   mnuExit.Visible             := False;
+
+  lblMediaTime.AutoSize := False;
   {$ENDIF}
 
   // update workspace
-  //lblMediaTime.AutoSize := False;
-  //lblMediaTime.Width := lblMediaTime.Canvas.TextWidth('00:00:00.000');
   SetWorkMode(Workspace.WorkMode);
   EnableWorkArea(False);
   UpdateStatusBar(True);
@@ -1599,6 +1602,21 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.StatusBarMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+var
+  idx : Integer;
+begin
+  idx := StatusBar.GetPanelIndexAt(X, Y);
+  case idx of
+    1: StatusBar.Hint := lngsbSpellCheckerLanguage;
+    else
+      StatusBar.Hint := '';
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.StatusBarMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 var
@@ -1664,6 +1682,7 @@ begin
       if VST.SelectedCount = 1 then
       begin
         SetSubtitleText(VSTFocusedNode(VST), Text, TSubtitleMode(TAG_CONTROL_TEXT - Tag));
+        if WAVE.IsTimeLineEnabled and not MPV.IsPlaying then WAVE.DoUpdate; // Would it be better to repaint only if it is visible on the timeline?
         if (GetTickCount - LastTickCount) > 700 then // only if > 700ms
         begin
           CheckForTerminology(VSTFocusedNode(VST));
@@ -1941,6 +1960,7 @@ begin
     if IsTimeLineEnabled then
     begin
       actMediaDeleteEntry.Enabled := SelectedItem <> NIL;
+      actMediaAddEntry.Enabled := Subtitles.IndexOf(WAVE.CursorPosMS) < 0;
       actMediaSplitEntryAtCursorPosition.Enabled := actMediaDeleteEntry.Enabled;
 
       if SelectionIsEmpty then

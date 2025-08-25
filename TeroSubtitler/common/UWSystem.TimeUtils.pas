@@ -26,19 +26,25 @@ uses
 
 // -----------------------------------------------------------------------------
 
+type
+  TRoundMode = (rmFloor, rmCeil, rmNearest);
+
+function SMPTEConversion(const ATimeMS: Integer; const AValue: Boolean = True; const Mode: TRoundMode = rmNearest): Integer;
+function NormalizeFPS(const FPS: Double): Double;
 function EncodeTime(const Hour, Min, Secs, MSecs: Word): Integer;
 procedure DecodeTime(const Time: Cardinal; out Hour, Min, Secs, MSecs: Word);
-function TimeToFrames(const Time: Cardinal; const FPS: Single): Cardinal;
-function TimeToFramesMaxFPS(const Time: Cardinal; const FPS: Single): Cardinal;
-function FramesToTime(const Frames: Cardinal; FPS: Single): Cardinal;
-function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Single): Cardinal;
-function TimeToString(const Time: Cardinal; TimeFormat: String = 'hh:mm:ss'; const FPS: Single = 25; const ATrim: Boolean = False): String;
-function StringToTime(const Time: String; const NoHours: Boolean = False; const FPS: Single = 0): Cardinal;
+function TimeToFrames(const Time: Cardinal; const FPS: Double): Cardinal;
+function TimeToFramesMaxFPS(const Time: Cardinal; const FPS: Double): Cardinal;
+function FramesToTime(const Frames: Cardinal; FPS: Double): Cardinal;
+function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Double; const AAddFrame: Integer = 0): Integer;
+function IncDecFrame(const ATimeMS: Integer; const AFPS: Double; const AStep: Byte = 1; const ASMPTE: Boolean = False; const AIncrement: Boolean = True): Integer;
+function TimeToString(const Time: Cardinal; TimeFormat: String = 'hh:mm:ss'; const FPS: Double = 25; const ATrim: Boolean = False): String;
+function StringToTime(const Time: String; const NoHours: Boolean = False; const FPS: Double = 0): Cardinal;
 function TimeInFormat(const Time, Format: String): Boolean;
 function TrimTimeString(Text: String): String;
-function MSToHHMMSSFFTime(const Time: Integer; const FPS: Single; const FramesSeparator: Char = ':'): String;
-function MSToHHMMSSFFMax(const Time: Integer; const FPS: Single; const FramesSeparator: Char = ':'): String;
-function HHMMSSFFTimeToMS(const Time: String; const FPS: Single): Integer;
+function MSToHHMMSSFFTime(const Time: Integer; const FPS: Double; const FramesSeparator: Char = ':'): String;
+function MSToHHMMSSFFMax(const Time: Integer; const FPS: Double; const FramesSeparator: Char = ':'): String;
+function HHMMSSFFTimeToMS(const Time: String; const FPS: Double): Integer;
 function RefTimeToMSecs(const RefTime: Int64): Cardinal;
 function MSecsToRefTime(const MSecs: Cardinal): Int64;
 function TicksToMSecs(const Ticks: Int64; const TicksPerSecond: Integer = 10000): Integer;
@@ -47,10 +53,10 @@ function GetHours(const Time: Cardinal): Integer;
 function GetMinutes(const Time: Cardinal): Integer;
 function GetSeconds(const Time: Cardinal): Integer;
 function GetMSecs(const Time: Cardinal): Integer;
-function GetMSecsInFrames(const Time: Cardinal; const FPS: Single): Integer;
+function GetMSecsInFrames(const Time: Cardinal; const FPS: Double): Integer;
 function GetDateAndTime(Format: String = 'hh:mm:ss, dd/mm/yyyy'): String;
 function TimeMSToShortString(const TimeMS: Cardinal; const Precision: Cardinal): String;
-function TimeMSToShortStringFrames(const TimeMS: Cardinal; const Precision: Cardinal; const AFPS: Single = 25): String;
+function TimeMSToShortStringFrames(const TimeMS: Cardinal; const Precision: Cardinal; const AFPS: Double = 25): String;
 function CalculateOptimalDisplayMS(const Text: String): Cardinal;
 function CalculateOptimalDisplayMSEx(const Text: String; const CPS: Double = 14.7; const MinDisplay: Cardinal = 1000; const MaxDisplay: Cardinal = 8000): Double;
 
@@ -58,7 +64,127 @@ function CalculateOptimalDisplayMSEx(const Text: String; const CPS: Double = 14.
 
 implementation
 
-//------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+// -------------------------------------------------------------
+// Helpers MulDiv
+// -------------------------------------------------------------
+
+function MulDivFloorI64(const A, B, C: Int64): Int64; inline;
+begin
+  // Floor((A*B)/C)
+  Result := (A * B) div C;
+end;
+
+// -----------------------------------------------------------------------------
+
+function MulDivCeilI64(const A, B, C: Int64): Int64; inline;
+begin
+  // Ceil((A*B)/C)
+  Result := (A * B + C - 1) div C;
+end;
+
+// -----------------------------------------------------------------------------
+
+function MulDivRoundI64(const A, B, C: Int64): Int64; inline;
+begin
+  // Round((A*B)/C)
+  Result := (A * B + C div 2) div C;
+end;
+
+// -----------------------------------------------------------------------------
+
+function SMPTEConversion(const ATimeMS: Integer; const AValue: Boolean = True; const Mode: TRoundMode = rmNearest): Integer;
+begin
+  case Mode of
+    rmFloor : begin
+                if AValue then
+                  Result := MulDivFloorI64(ATimeMS, 1001, 1000)
+                else
+                  Result := MulDivFloorI64(ATimeMS, 1000, 1001);
+              end;
+    rmCeil  : begin
+                if AValue then
+                  Result := MulDivCeilI64(ATimeMS, 1001, 1000)
+                else
+                  Result := MulDivCeilI64(ATimeMS, 1000, 1001);
+              end;
+  else // rmNearest
+    if AValue then
+      Result := MulDivRoundI64(ATimeMS, 1001, 1000) // *1.001
+    else
+      Result := MulDivRoundI64(ATimeMS, 1000, 1001); // /1.001
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure FPSToRational(const FPS: Double; out N, D: Int64);
+const
+  TOL = 1e-3; // 0.001
+begin
+  if Abs(FPS - 24000/1001)  < TOL then begin N := 24000;  D := 1001 end else // 23.976
+  if Abs(FPS - 30000/1001)  < TOL then begin N := 30000;  D := 1001 end else // 29.970
+  if Abs(FPS - 60000/1001)  < TOL then begin N := 60000;  D := 1001 end else // 59.94
+  if Abs(FPS - 120000/1001) < TOL then begin N := 120000; D := 1001 end else
+  if Abs(FPS - 240000/1001) < TOL then begin N := 240000; D := 1001 end else
+  begin
+    N := Round(FPS);
+    D := 1;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TimeToFramesI64(const TimeMS: Int64; const N, D: Int64; const Mode: TRoundMode): Int64; inline;
+var
+  Den: Int64;
+begin
+  Den := 1000 * D; // (TimeMS * N) / (1000*D)
+  case Mode of
+    rmFloor : Result := MulDivFloorI64(TimeMS, N, Den);
+    rmCeil  : Result := MulDivCeilI64 (TimeMS, N, Den);
+  else // rmNearest
+    Result := MulDivRoundI64(TimeMS, N, Den);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function FramesToTimeI64(const Frames: Int64; const N, D: Int64; const Mode: TRoundMode): Int64; inline;
+var
+  Num: Int64;
+begin
+  Num := 1000 * D; // (frames * 1000*D) / N
+  case Mode of
+    rmFloor : Result := MulDivFloorI64(Frames, Num, N); // inicio del frame
+    rmCeil  : Result := MulDivCeilI64 (Frames, Num, N); // fin del frame
+  else // rmNearest
+    Result := MulDivRoundI64(Frames, Num, N);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function NormalizeFPS(const FPS: Double): Double;
+const
+  TOL = 0.02; // tolerancia
+begin
+  Result := FPS; // por defecto sin cambios
+
+  // NTSC -> nominal
+  if Abs(FPS - 23.976) <= TOL then Exit(24.0);
+  if Abs(FPS - 29.97)  <= TOL then Exit(30.0);
+  if Abs(FPS - 59.94)  <= TOL then Exit(60.0);
+  if Abs(FPS - 119.88) <= TOL then Exit(120.0);
+  if Abs(FPS - 239.76) <= TOL then Exit(240.0);
+
+  // Si ya es entero dentro de tolerancia
+  if Abs(FPS - Round(FPS)) <= TOL then
+    Exit(Round(FPS));
+end;
+
+// -----------------------------------------------------------------------------
 
 function EncodeTime(const Hour, Min, Secs, MSecs: Word): Integer;
 begin
@@ -87,14 +213,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TimeToFrames(const Time: Cardinal; const FPS: Single): Cardinal;
+function TimeToFrames(const Time: Cardinal; const FPS: Double): Cardinal;
 begin
   Result := Round((Time * FPS) / 1000.0);
 end;
 
 // -----------------------------------------------------------------------------
 
-function TimeToFramesMaxFPS(const Time: Cardinal; const FPS: Single): Cardinal;
+function TimeToFramesMaxFPS(const Time: Cardinal; const FPS: Double): Cardinal;
 begin
   Result := Round((Time * FPS) / 1000.0);
   if Result >= Trunc(FPS) then
@@ -103,7 +229,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function FramesToTime(const Frames: Cardinal; FPS: Single): Cardinal;
+function FramesToTime(const Frames: Cardinal; FPS: Double): Cardinal;
 begin
   if FPS > 0 then
     Result := Round((Frames * 1000.0) / FPS)
@@ -111,16 +237,65 @@ begin
     Result := 0;
 end;
 
+{function FramesToTime(const Frames: Cardinal; FPS: Double): Cardinal;
+begin
+  if Abs(FPS - 23.976) < 0.001 then
+    Result := Round((Frames * 1001.0) / 24.0)
+  else if Abs(FPS - 29.97) < 0.001 then
+    Result := Round((Frames * 1001.0) / 30.0)
+  else if Abs(FPS - 59.94) < 0.001 then
+    Result := Round((Frames * 1001.0) / 60.0)
+  else
+  begin
+    if FPS > 0 then
+      Result := Round((Frames * 1000.0) / FPS)
+    else
+      Result := 0;
+  end;
+end;}
+
 // -----------------------------------------------------------------------------
 
-function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Single): Cardinal;
+function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Double; const AAddFrame: Integer = 0): Integer;
+//var
+//  tmp: Double;
 begin
-  Result := FramesToTime(TimeToFrames(ATimeMS, AFPS), AFPS)
+  Result := FramesToTime(TimeToFrames(ATimeMS, AFPS) + AAddFrame, AFPS);
+//  tmp := (ATimeMS / 1000.0 * AFPS) + AAddFrame;
+//  tmp := tmp / AFPS * 1000.0;
+//  Result := Round(tmp);
 end;
 
 // -----------------------------------------------------------------------------
 
-function TimeToString(const Time: Cardinal; TimeFormat: String = 'hh:mm:ss'; const FPS: Single = 25; const ATrim: Boolean = False): String;
+function IncDecFrame(const ATimeMS: Integer; const AFPS: Double; const AStep: Byte = 1; const ASMPTE: Boolean = False; const AIncrement: Boolean = True): Integer;
+var
+  tmp, frames, scaleFactor: Double;
+begin
+  if ASMPTE then
+    scaleFactor := 1001.0 / 1000.0
+  else
+    scaleFactor := 1.0;
+
+  tmp := ATimeMS * scaleFactor;
+  frames := tmp / 1000.0 * AFPS;
+
+  if AIncrement then
+    frames := frames + AStep
+  else
+  begin
+    if frames >= AStep then
+      frames := frames - AStep
+    else
+      frames := 0;
+  end;
+
+  tmp := frames / AFPS * 1000.0;
+  Result := Round(tmp / scaleFactor);
+end;
+// -----------------------------------------------------------------------------
+
+function TimeToString(const Time: Cardinal; TimeFormat: String = 'hh:mm:ss'; const FPS: Double = 25; const ATrim: Boolean = False): String;
 var
   Hour, Min, Sec, MSec : Word;
   Count, tmp           : Cardinal;
@@ -171,7 +346,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function StringToTime(const Time: String; const NoHours: Boolean = False; const FPS: Single = 0): Cardinal;
+function StringToTime(const Time: String; const NoHours: Boolean = False; const FPS: Double = 0): Cardinal;
 var
   H, M, S, Z, i                : Integer;
   PCount, PFirst, PSec, PThird : Integer;
@@ -282,7 +457,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function MSToHHMMSSFFTime(const Time: Integer; const FPS: Single; const FramesSeparator: Char = ':'): String;
+function MSToHHMMSSFFTime(const Time: Integer; const FPS: Double; const FramesSeparator: Char = ':'): String;
 begin
   Result := TimeToString(Time, 'hh' + FramesSeparator + 'mm' + FramesSeparator + 'ss');
   Result := Result + FramesSeparator + AddChar('0', IntToStr(TimeToFrames(Time - StringToTime(Result), FPS)), 2);
@@ -290,7 +465,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function MSToHHMMSSFFMax(const Time: Integer; const FPS: Single; const FramesSeparator: Char = ':'): String;
+function MSToHHMMSSFFMax(const Time: Integer; const FPS: Double; const FramesSeparator: Char = ':'): String;
 begin
   Result := TimeToString(Time, 'hh' + FramesSeparator + 'mm' + FramesSeparator + 'ss');
   Result := Result + FramesSeparator + AddChar('0', IntToStr(TimeToFramesMaxFPS(Time - StringToTime(Result), FPS)), 2);
@@ -298,7 +473,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function HHMMSSFFTimeToMS(const Time: String; const FPS: Single): Integer;
+function HHMMSSFFTimeToMS(const Time: String; const FPS: Double): Integer;
 begin
   if StringToTime(Time) = 0 then
     Result := 0
@@ -381,7 +556,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetMSecsInFrames(const Time: Cardinal; const FPS: Single): Integer;
+function GetMSecsInFrames(const Time: Cardinal; const FPS: Double): Integer;
 var
   HH, MM, SS, MS: Word;
 begin
@@ -430,7 +605,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TimeMSToShortStringFrames(const TimeMS: Cardinal; const Precision: Cardinal; const AFPS: Single = 25): String;
+function TimeMSToShortStringFrames(const TimeMS: Cardinal; const Precision: Cardinal; const AFPS: Double = 25): String;
 var
   hour, min, sec, ms: Cardinal;
 begin

@@ -33,7 +33,7 @@ uses
 { Settings }
 
 procedure DefaultValues;
-procedure LoadSettings;
+procedure LoadSettings(const OnlyVSTColumnsSize: Boolean = False);
 procedure SaveSettings;
 
 function LoadFormSettings(const AForm: TForm): String;
@@ -363,7 +363,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure LoadSettings;
+procedure LoadSettings(const OnlyVSTColumnsSize: Boolean = False);
 var
   i, j, c: Integer;
   s: String;
@@ -373,6 +373,8 @@ begin
   // Possibly first start
   if not FileExists(SettingsFileName) then
   begin
+    if OnlyVSTColumnsSize then Exit;
+
     SetVideoPreview(False);
     SetWaveformPreview(False);
     AppOptions.GUILanguage := GetOSLanguage;
@@ -431,6 +433,22 @@ begin
   with TXMLConfig.Create(NIL) do
   try
     FileName := SettingsFileName;
+
+    if OnlyVSTColumnsSize then
+    begin
+      with VSTOptions, frmMain, VST do
+      begin
+        OpenKey('VST');
+        if (DrawMode = dmList) and (Header.Columns.Count > 0) then
+        begin
+          for i := 0 to Header.Columns.Count-1 do
+            Header.Columns[i].Width := Scale96ToForm(GetValue('Column' + IntToStr(i), 100));
+        end;
+        CloseKey;
+      end;
+      Exit;
+    end;
+
     with AppOptions do
     begin
       OpenKey('Settings');
@@ -648,8 +666,8 @@ begin
       begin
         OpenKey(Name);
         SetBounds(GetValue('X', Left), GetValue('Y', Top), GetValue('W', Width), GetValue('H', Height));
-        LayoutVideo.Width := GetValue('VW', LayoutVideo.Width);
-        LayoutWaveform.Height := GetValue('WF', LayoutWaveform.Height);
+        LayoutVideo.Width := Scale96ToForm(GetValue('VW', LayoutVideo.Width));
+        LayoutWaveform.Height := Scale96ToForm(GetValue('WF', LayoutWaveform.Height));
         VST.Font.Size := GetValue('VSTFontSize', VST.Font.Size);
         VST.Header.Font.Size := VST.Font.Size;
         mmoText.Font.Size := GetValue('TextBoxFontSize', mmoText.Font.Size);
@@ -962,7 +980,7 @@ begin
         CloseKey;
       end;
 
-      with VSTOptions, frmMain do
+      with VSTOptions, frmMain, VST do
       begin
         OpenKey('VST');
         SetValue('DrawErrors', DrawErrors);
@@ -975,6 +993,13 @@ begin
         SetValue('ColumnCPS', actShowColumnCPS.Checked);
         SetValue('ColumnWPM', actShowColumnWPM.Checked);
         SetValue('ColumnCPL', actShowColumnCPL.Checked);
+
+        if (DrawMode = dmList) and (Header.Columns.Count > 0) then
+        begin
+          for i := 0 to Header.Columns.Count-1 do
+            SetValue('Column' + IntToStr(i), ScaleFormTo96(Header.Columns[i].Width));
+        end;
+
         CloseKey;
       end;
 
@@ -1056,8 +1081,8 @@ begin
         SetValue('Y', Top);
         SetValue('W', Width);
         SetValue('H', Height);
-        SetValue('VW', LayoutVideo.Width);
-        SetValue('WF', LayoutWaveform.Height);
+        SetValue('VW', ScaleFormTo96(LayoutVideo.Width));
+        SetValue('WF', ScaleFormTo96(LayoutWaveform.Height));
         SetValue('State', Integer(WindowState));
         SetValue('VSTFontSize', VST.Font.Size);
         SetValue('TextBoxFontSize', mmoText.Font.Size);

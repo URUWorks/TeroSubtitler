@@ -45,7 +45,7 @@ const
 
   DefFramesFormat = 'hh:mm:ss:ff';
   DefFPS          = 23.976;
-  DefFPSList      : array[0..12] of Single = (23.976, 24, 25, 29.97, 30, 47.952, 48, 50, 59.94, 60, 75, 100, 120);
+  DefFPSList      : array[0..12] of Double = (23.976, 24.0, 25.0, 29.97, 30.0, 47.952, 48.0, 50.0, 59.94, 60.0, 75.0, 100.0, 120.0);
 
   TVideoExts : array[0..21] of String =
   (
@@ -245,9 +245,9 @@ type
     TranslatorMode : Boolean;
     SMPTE          : Boolean;
     FPS            : record        // used for conversions
-                       DefFPS    : Single;
-                       InputFPS  : Single;
-                       OutputFPS : Single;
+                       DefFPS    : Double;
+                       InputFPS  : Double;
+                       OutputFPS : Double;
                      end;
     DefEncoding    : Integer;
     DefFormat      : TUWSubtitleFormats;

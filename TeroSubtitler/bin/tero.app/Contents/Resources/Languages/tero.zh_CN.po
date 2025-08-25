@@ -768,6 +768,10 @@ msgstr "保存文件"
 msgid "Error trying to save the file."
 msgstr "尝试保存文件时出现问题。"
 
+#: proclocalize.lngsbspellcheckerlanguage
+msgid "Spell checker language"
+msgstr ""
+
 #: proclocalize.lngscaudiofilters
 msgctxt "proclocalize.lngscaudiofilters"
 msgid "Audio filters"

@@ -123,8 +123,9 @@ type
     FBackBufferItems : {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF};
 
     FFileName        : String;
-    FFPS             : Single;
+    FFPS             : Double;
     FFPSTimeMode     : Boolean;
+    FSMPTE           : Boolean;
 
     FLengthMS      : Integer;
     FPositionMS    : Integer;
@@ -307,12 +308,13 @@ type
     property SubTextStyle: TTextStyle read FTS write FTS;
     property Thumbnails: TThumbnails read FThumbnails write FThumbnails;
     property DefaultThumbnail: TBitmap read FDefaultThumbnail;
+    property SMPTE: Boolean read FSMPTE write FSMPTE;
   published
     property Subtitles                     : TUWSubtitles                 read FSubtitles                    write FSubtitles;
     property MinimumBlank                  : Integer                      read FGAP                          write FGAP;
     property EmptyText                     : String                       read FEmptyText                    write SetEmptyText;
     property FileName                      : String                       read FFileName;
-    property FPS                           : Single                       read FFPS                          write FFPS;
+    property FPS                           : Double                       read FFPS                          write FFPS;
     property FPSTimeMode                   : Boolean                      read FFPSTimeMode                  write FFPSTimeMode;
     property CursorPosMS                   : Integer                      read FCursorMS;
     property CenterPlayCursor              : Boolean                      read FCenterPlay                   write FCenterPlay;
@@ -510,6 +512,7 @@ begin
 
   FFPS         := 25;
   FFPSTimeMode := False;
+  FSMPTE       := False;
   FEmptyText   := '';
 
   with CustomColors do
@@ -634,7 +637,12 @@ end;
 function TUWWaveformDisplayer.GetCorrectTimePos(const PosMs: Integer): Integer;
 begin
   if FFPSTimeMode then
-    Result := RoundTimeWithFrames(PosMs, FFPS)
+  begin
+    if FSMPTE then
+      Result := IncDecFrame(PosMs, FFPS, 0, FSMPTE) //RoundTimeWithFrames(PosMs, NormalizeFPS(FFPS))
+    else
+      Result := RoundTimeWithFrames(PosMs, FFPS);
+  end
   else
     Result := PosMs;
 end;

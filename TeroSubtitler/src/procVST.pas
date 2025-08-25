@@ -671,25 +671,26 @@ begin
         Item := Subtitles.ItemPointer[x];
         if Assigned(Item) then
           with Item^, AppOptions.Conventions do
-          begin
-            SplitRegExpr('\|\|', DivideLines(Text, InitialTime, FinalTime, AppOptions.Conventions.DotsOnSplit, AppOptions.Conventions.CPL, GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames)), s);
-            if s.Count >= 3 then
+            if GetTextLength(Text) > AppOptions.Conventions.CPL then
             begin
-              changed := True;
-              DeleteSubtitle(x, False, False);
-
-              while s.Count >= 3 do
+              SplitRegExpr('\|\|', DivideLines(Text, InitialTime, FinalTime, AppOptions.Conventions.DotsOnSplit, AppOptions.Conventions.CPL, GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames)), s);
+              if s.Count >= 3 then
               begin
-                Inc(p);
-                SetLength(idxs, p);
-                t1 := StrToIntDef(s[0], 0);
-                t2 := StrToIntDef(s[1], 0);
-                idxs[p-1] := InsertSubtitle(x, t1, t2, FixIncompleteTags(s[2]), '', False, False);
-                for c := 1 to 3 do s.Delete(0);
-                Inc(x);
+                changed := True;
+                DeleteSubtitle(x, False, False);
+
+                while s.Count >= 3 do
+                begin
+                  Inc(p);
+                  SetLength(idxs, p);
+                  t1 := StrToIntDef(s[0], 0);
+                  t2 := StrToIntDef(s[1], 0);
+                  idxs[p-1] := InsertSubtitle(x, t1, t2, FixIncompleteTags(s[2]), '', False, False);
+                  for c := 1 to 3 do s.Delete(0);
+                  Inc(x);
+                end;
               end;
             end;
-          end;
       end;
       SetLength(NodeArray, 0);
     finally
