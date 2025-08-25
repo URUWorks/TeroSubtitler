@@ -12,7 +12,7 @@ Tero Subtitler is an open source, cross-platform, and free subtitle editing soft
 ## Features
 
 - User-friendly and multi-language interface
-- Fully fledged editing with SMPTE and MEDIA modes
+- Fully fledged editing with SMPTE and Media modes
 - Support for various subtitle formats
 - Multi-level undo/redo
 - Search and replace
