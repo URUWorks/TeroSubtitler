@@ -947,7 +947,7 @@ type
     {$IFDEF WINDOWS}
     procedure DoPopupQuickActionList(Sender: TObject);
     {$ENDIF}
-    {$IFDEF DARWIN}
+    {$IFDEF UNIX}
     procedure DoSaveDialogTypeChange(Sender: TObject);
     {$ENDIF}
     // TMX
@@ -2066,14 +2066,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-{$IFDEF DARWIN}
+{$IFDEF UNIX}
 procedure TfrmMain.DoSaveDialogTypeChange(Sender: TObject);
 begin
-  if Sender <> NIL then
+  if (Sender <> NIL) then
     with TSaveDialog(Sender) do
     begin
       DefaultExt := GetDefaultExtFromFilter(FilterIndex, Filter);
-      FileName := ChangeFileExt(FileName, DefaultExt);
+      {$ifdef darwin}ChangeFileExt(FileName, DefaultExt);{$endif}
     end;
 end;
 {$ENDIF}

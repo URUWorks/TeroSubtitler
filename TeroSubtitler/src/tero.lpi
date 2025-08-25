@@ -193,7 +193,7 @@
             <LinkSmart Value="True"/>
             <Options>
               <PassLinkerOptions Value="True"/>
-              <LinkerOptions Value="-rpath @executable_path/../Frameworks"/>
+              <LinkerOptions Value="-rpath @executable_path\..\Frameworks"/>
               <Win32>
                 <GraphicApplication Value="True"/>
               </Win32>
@@ -226,7 +226,7 @@
             <LinkSmart Value="True"/>
             <Options>
               <PassLinkerOptions Value="True"/>
-              <LinkerOptions Value="-rpath @executable_path/../Frameworks"/>
+              <LinkerOptions Value="-rpath @executable_path\..\Frameworks"/>
               <Win32>
                 <GraphicApplication Value="True"/>
               </Win32>
