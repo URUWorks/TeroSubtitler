@@ -71,7 +71,7 @@ type
     procedure AdjustClientRect(var ARect: TRect); override;
     {$ENDIF}
     procedure DoContextPopup(MousePos: TPoint; var Handled: Boolean); override;
-    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
     procedure KeyDown(var Key: Word; Shift: TShiftState); override;
     function DoMouseWheel(Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint): Boolean; override;
     procedure CMVisibleChanged(var Msg: TLMessage); message CM_VISIBLECHANGED;
@@ -297,7 +297,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTimeEdit.MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TUWTimeEdit.MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   // 01 34 67 901
   //   2  5  8
