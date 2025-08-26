@@ -1,1 +1,8 @@
 *.lps
+*.ppu
+*.o
+/TeroSubtitler/bin/tero.cfg
+/TeroSubtitler/common/lib/
+/TeroSubtitler/controls/lib/
+/TeroSubtitler/subtitleapi/lib/
+/TeroSubtitler/bin/tero

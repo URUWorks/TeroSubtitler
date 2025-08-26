@@ -772,6 +772,16 @@ msgstr "Salva file"
 msgid "Error trying to save the file."
 msgstr "Errore nel tentativo di salvataggio del file."
 
+#: proclocalize.lngsavesubtitles
+msgid "Save subtitles"
+msgstr ""
+
+#: proclocalize.lngsavetranslation
+#, fuzzy
+msgctxt "proclocalize.lngsavetranslation"
+msgid "Save translation"
+msgstr "Salva traduzione"
+
 #: proclocalize.lngsbspellcheckerlanguage
 msgid "Spell checker language"
 msgstr "Lingua controllo ortografico"
@@ -3440,6 +3450,7 @@ msgid "Transcription..."
 msgstr "Trascrizione..."
 
 #: tfrmmain.actsavetranslation.caption
+msgctxt "tfrmmain.actsavetranslation.caption"
 msgid "Save translation"
 msgstr "Salva traduzione"
 
@@ -5585,3 +5596,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+

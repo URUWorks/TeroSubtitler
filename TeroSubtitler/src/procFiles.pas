@@ -22,8 +22,8 @@ unit procFiles;
 interface
 
 uses
-  Classes, SysUtils, Controls, Dialogs, formMain, procTypes, UWSubtitleAPI,
-  UWSubtitleAPI.Formats, procLocalize;
+  Classes, SysUtils, Controls, Dialogs, formMain, procTypes, LazFileUtils,
+  UWSubtitleAPI, UWSubtitleAPI.Formats, procLocalize;
 
 { Helpers }
 
@@ -503,7 +503,7 @@ begin
     Subtitles.TimeBase := stbMedia;
 
   S := FileName;
-  if Format = sfSpreadsheet then
+  if (Format = sfSpreadsheet) then
   begin
     ext := LowerCase(ExtractFileExt(FileName));
     if (ext <> STR_EXCEL_EXTENSION) and (ext <> STR_OOXML_EXCEL_EXTENSION) and (ext <> STR_OPENDOCUMENT_CALC_EXTENSION) then
@@ -512,7 +512,7 @@ begin
 
   if CheckIfValidFileName(S) and Subtitles.SaveToFile(S, _FPS, _Encoding, Format, SubtitleMode) then
   begin
-    if SubtitleMode = smText then
+    if (SubtitleMode = smText) then
       SubtitleInfo.Text.FileName := S
     else
       SubtitleInfo.Translation.FileName := S;
@@ -522,6 +522,7 @@ begin
 
     with frmMain do
       MRU.Add(S, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPV.IsPlaying);
+    {$ifdef linux}Subtitles.Format := Format;{$endif} //СМ630: I do not understand how it works on other OSes without this
   end
   else
     ShowErrorMessageDialog(lngSaveSubtitleError);
@@ -804,11 +805,15 @@ begin
   begin
     SD := TSaveDialog.Create(NIL);
     try
-      SD.Title  := lngSaveFile;
+      if (SubtitleMode = smText)
+        then SD.Title  := lngSaveSubtitles
+        else SD.Title  := lngSaveTranslation;
+      if (MRU.Items.Count > 0) then
+        SD.InitialDir := ExtractFileDir(MRU.Items[0{MRU.Items.Count -1}]);
       SD.Filter := Subtitles.FillDialogFilter('');
       SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
       SD.FileName := GetSuggestedFileNameForSave{$IFDEF DARWIN}+GetDefaultExtFromFilter(SD.FilterIndex, SD.Filter){$ENDIF};
-      {$IFDEF DARWIN}
+      {$IFDEF UNIX}
       SD.OnTypeChange := @frmMain.DoSaveDialogTypeChange;
       {$ENDIF}
 
@@ -827,7 +832,7 @@ procedure SaveCurrentSubtitle(const SubtitleMode: TSubtitleMode = smText);
 var
   s: String;
 begin
-  if SubtitleMode = smText then
+  if (SubtitleMode = smText) then
     s := SubtitleInfo.Text.FileName
   else
     s := SubtitleInfo.Translation.FileName;

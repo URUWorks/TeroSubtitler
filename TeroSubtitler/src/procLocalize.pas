@@ -39,6 +39,8 @@ resourcestring
   //CommonStrings
   lngOpenFile = 'Open file';
   lngSaveFile = 'Save file';
+  lngSaveSubtitles = 'Save subtitles';
+  lngSaveTranslation = 'Save translation';
   lngAllSupportedFiles = 'All supported files';
   lngProjectFile = 'Subtitle Translation Project';
   lngUnableToLoad = 'Error loading file, unrecognized format.';
