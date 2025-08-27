@@ -1382,7 +1382,7 @@ begin
   else
   begin
     Constrain(X, 0, Width);
-    ACursorPosMS := PixelToTime(X) + FPositionMS;
+    ACursorPosMS := PixelToTime(X) + GetCorrectTimePos(FPositionMS);
 
     // "Dynamic selection"
     if (Shift = []) or (ssAlt in Shift) then
