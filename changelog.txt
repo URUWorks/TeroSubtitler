@@ -22,9 +22,11 @@
 - fixed: Text after dot truncated in file name when saving #385
 - fixed: Formatting added to CPL count internally when dividing one-line entries #384
 - fixed: Gapping not respected when dividing subtitle if final split entry adjacent to existing #383
+- fixed: Formatting changes don’t apply to text with and after same formatting tags when full entry is selected #372
 - fixed: Netflix profile shouldn't generate an ellipsis when dividing entries #371
 - fixed: Seek bar changes size during playback #364
 - fixed: No information for the language selector in the status bar #360
+- fixed: Linux Mint Cinnamon: Wrong behaviour of time controls #359
 - fixed: Linux Mint Cinnamon: Extensions are not added to newly created files #357
 - fixed: Characters truncated or misrepresented in Fix Subtitles #344
 - fixed: Characters truncated when removing text for hearing impaired if entry begins with and features one hyphen #339
