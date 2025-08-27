@@ -22,6 +22,7 @@
 - fixed: Text after dot truncated in file name when saving #385
 - fixed: Formatting added to CPL count internally when dividing one-line entries #384
 - fixed: Gapping not respected when dividing subtitle if final split entry adjacent to existing #383
+- fixed: Cursor indicator incorrect in timeline in SMPTE at some zoom levels #379
 - fixed: Formatting changes don’t apply to text with and after same formatting tags when full entry is selected #372
 - fixed: Netflix profile shouldn't generate an ellipsis when dividing entries #371
 - fixed: Seek bar changes size during playback #364
