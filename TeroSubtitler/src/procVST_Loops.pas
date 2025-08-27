@@ -22,7 +22,8 @@ unit procVST_Loops;
 interface
 
 uses
-  Classes, SysUtils, LCLIntf, UWSubtitleAPI, procTypes;
+  Classes, SysUtils, LCLIntf, LazUTF8,
+  UWSubtitleAPI, procTypes;
 
 procedure ApplyCheckErrors(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyCheckErrorsTimesOnly(const Item: PUWSubtitleItem; const Index: Integer);
@@ -141,7 +142,11 @@ begin
     if AnsiStartsText(sTag, Text) and AnsiEndsText(eTag, Text) then
       Result := Copy(Text, Length(sTag)+1, Length(Text) - (Length(sTag)+Length(eTag)))
     else
-      Result := sTag + Text + eTag;
+    begin
+      Result := UTF8StringReplace(Text,sTag,'',[rfReplaceAll,rfIgnoreCase]);
+      Result := UTF8StringReplace(Result,eTag,'',[rfReplaceAll,rfIgnoreCase]);
+      Result := sTag + Result + eTag;
+    end;
   end
   else
     Result := '';
