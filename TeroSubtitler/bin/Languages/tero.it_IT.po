@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler (traduzione 18.08.2025)\n"
+"Project-Id-Version: Tero Subtitler - IT - 26.08.2025)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: proclocalize.lngabversion
@@ -774,10 +774,9 @@ msgstr "Errore nel tentativo di salvataggio del file."
 
 #: proclocalize.lngsavesubtitles
 msgid "Save subtitles"
-msgstr ""
+msgstr "Salva sottotitoli"
 
 #: proclocalize.lngsavetranslation
-#, fuzzy
 msgctxt "proclocalize.lngsavetranslation"
 msgid "Save translation"
 msgstr "Salva traduzione"
@@ -5596,4 +5595,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
