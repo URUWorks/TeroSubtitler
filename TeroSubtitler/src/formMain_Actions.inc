@@ -193,7 +193,9 @@ end;
 
 procedure TfrmMain.actCutExecute(Sender: TObject);
 begin
-  if Workspace.ViewMode = vmList then
+  if edtQuickAction.Focused then
+    edtQuickAction.CutToClipboard
+  else if Workspace.ViewMode = vmList then
     CopyToClipboard(True)
   else if Workspace.ViewMode = vmSource then
     mmoSourceView.CutToClipboard
@@ -205,7 +207,9 @@ end;
 
 procedure TfrmMain.actCopyExecute(Sender: TObject);
 begin
-  if Workspace.ViewMode = vmList then
+  if edtQuickAction.Focused then
+    edtQuickAction.CopyToClipboard
+  else if Workspace.ViewMode = vmList then
     CopyToClipboard
   else if Workspace.ViewMode = vmSource then
     mmoSourceView.CopyToClipboard
@@ -217,7 +221,9 @@ end;
 
 procedure TfrmMain.actPasteExecute(Sender: TObject);
 begin
-  if Workspace.ViewMode = vmList then
+  if edtQuickAction.Focused then
+    edtQuickAction.PasteFromClipboard
+  else if Workspace.ViewMode = vmList then
     PasteFromClipboard
   else if Workspace.ViewMode = vmSource then
     mmoSourceView.PasteFromClipboard
@@ -812,7 +818,9 @@ procedure TfrmMain.actSelectAllExecute(Sender: TObject);
 var
   Memo: TUWMemo;
 begin
-  if Workspace.ViewMode = vmList then
+  if edtQuickAction.Focused then
+    edtQuickAction.SelectAll
+  else if Workspace.ViewMode = vmList then
   begin
     Memo := GetMemoFocused;
     if Memo <> NIL then
