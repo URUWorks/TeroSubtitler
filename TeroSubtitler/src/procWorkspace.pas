@@ -1589,8 +1589,8 @@ begin
         begin
           tedDuration.SetValueOnly(Range(tedFinal.Value - tedInitial.Value, 0, tedFinal.Value));
           tedPause.SetValueOnly(0);
-          mmoText.Text              := '';
-          mmoTranslation.Text       := '';
+          //mmoText.Text              := ''; //moved to VSTFocusChanged
+          //mmoTranslation.Text       := '';
           actAlignToNone.Checked    := False;
           actAlignToLeft.Checked    := False;
           actAlignToCenter.Checked  := False;

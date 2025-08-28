@@ -624,7 +624,20 @@ end;
 procedure TfrmMain.VSTFocusChanged(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Column: TColumnIndex);
 begin
-  if VST.Enabled then UpdateValues;
+  if VST.Enabled then
+  begin
+    VSTBeginUpdate(VST);
+    try
+      if VST.SelectedCount > 1 then
+      begin
+        mmoText.Text        := '';
+        mmoTranslation.Text := '';
+      end;
+      UpdateValues;
+    finally
+      VSTEndUpdate(VST);
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
