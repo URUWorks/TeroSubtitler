@@ -179,6 +179,8 @@ end;
 // -----------------------------------------------------------------------------
 
 function XMLTagsToTS(const Text: String): String;
+const
+  unknowTagExpr = '(?i)<span[^>]*style="[^"]*">(.*?)</span>';
 begin
   Result := Text;
   if Result.IsEmpty then Exit;
@@ -188,7 +190,9 @@ begin
   Result := ReplaceRegExpr('<span (s|.*S)tyle="underline">(.*?)<\/span>', Result, '{\\u1}$2{\\u0}', True);
   Result := ReplaceRegExpr('<span (s|.*S)tyle="strikeout">(.*?)<\/span>', Result, '{\\s1}$2{\\s0}', True);
   // unsupported tags for now
-  Result := ReplaceRegExpr('<span (s|.*S)tyle=".*">(.*?)<\/span>', Result, '$2', True);
+  repeat
+    Result := ReplaceRegExpr(unknowTagExpr, Result, '$1', True);
+  until not ExecRegExpr(unknowTagExpr, Result);
 end;
 
 // -----------------------------------------------------------------------------
