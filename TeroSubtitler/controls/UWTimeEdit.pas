@@ -71,7 +71,7 @@ type
     procedure AdjustClientRect(var ARect: TRect); override;
     {$ENDIF}
     procedure DoContextPopup(MousePos: TPoint; var Handled: Boolean); override;
-    {$IFDEF LINUX}
+    {$IFDEF UNIX}
     procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
     {$ELSE}
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
@@ -91,6 +91,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    procedure CopyToClipboard; override;
     procedure PasteFromClipboard; override;
     procedure SetValueOnly(const NewValue: Integer);
     procedure SetFPSValueOnly(const AFPS: Double);
@@ -278,6 +279,16 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TUWTimeEdit.CopyToClipboard;
+begin
+  if FTimeMode = TUWTimeEditMode.temFrames then
+    Clipboard.AsText := TimeToString(FValue, 'hh:mm:ss:ff', FFPS)
+  else
+    Clipboard.AsText := TimeToString(FValue, Format('hh:mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator]));
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TUWTimeEdit.PasteFromClipboard;
 var
   S: String;
@@ -300,7 +311,7 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
-{$IFDEF LINUX}
+{$IFDEF UNIX}
 procedure TUWTimeEdit.MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 {$ELSE}
 procedure TUWTimeEdit.MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -315,13 +326,12 @@ begin
      0..1  : SetSel(0, 2);
      3..4  : SetSel(3, 2);
      6..7  : SetSel(6, 2);
-     9..12 : SetSel(9, 3);
      2, 5  : SetSel(SelStart + 1, 2);
   else
     if FTimeMode = TUWTimeEditMode.temTime then
-      SetSel(SelStart + 1, 3)
+      SetSel(9, 3)
     else
-      SetSel(SelStart + 1, 2);
+      SetSel(9, 2);
   end;
 
   Abort;

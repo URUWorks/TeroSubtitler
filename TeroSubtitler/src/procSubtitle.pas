@@ -103,6 +103,7 @@ uses
 procedure CopyToClipboard(const ACut: Boolean = False);
 var
   Memo: TUWMemo;
+  TimeEdit: TUWTimeEdit;
 begin
   if frmMain.VST.Focused then
     VSTCopyEntriesToClipboard(frmMain.VST, ACut)
@@ -115,6 +116,12 @@ begin
         Memo.CutToClipboard
       else
         Memo.CopyToClipboard;
+    end
+    else
+    begin
+      TimeEdit := GetTimeEditFocused;
+      if TimeEdit <> NIL then
+        TimeEdit.CopyToClipboard;
     end;
   end;
 end;
@@ -132,11 +139,13 @@ begin
   begin
     Memo := GetMemoFocused;
     if Memo <> NIL then
-      Memo.PasteFromClipboard;
-
-    TimeEdit := GetTimeEditFocused;
-    if TimeEdit <> NIL then
-      TimeEdit.PasteFromClipboard;
+      Memo.PasteFromClipboard
+    else
+    begin
+      TimeEdit := GetTimeEditFocused;
+      if TimeEdit <> NIL then
+        TimeEdit.PasteFromClipboard;
+    end;
   end;
 end;
 
