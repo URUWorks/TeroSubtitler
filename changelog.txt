@@ -4,6 +4,7 @@
 - fixed: Impossible to type a number from the numeric keypad in the edit box when shortcuts (0-9) are assigned
 - fixed: Adjusting duration doesn't update final time immediately
 - fixed: Unable to select all in QuickActions #424
+- fixed: Thumbnails make multi-line entries appear truncated in the timeline #422
 - fixed: Whitespace in translated entries with formatting #419
 - fixed: Select all, copy, and paste time code #418
 - fixed: No prompt for FPS when creating a project in media mode #417
@@ -19,12 +20,12 @@
 - fixed: Rounding errors in milliseconds when adjusting times by clicking arrows or pressing directional keys in SMPTE mode #396
 - fixed: Clicking up eventually decreases numbers in time code #395
 - fixed: Directional arrows sometimes skip/repeat digits in SMPTE mode #394
+- fixed: Double-clicking seconds or milliseconds in media mode selects both #393
 - fixed: Divide Entry puts ellipsis only on the first entries #392
 - fixed: Select all doesn't function if focus is on preview #391
 - fixed: Text after dot truncated in file name when saving #385
 - fixed: Formatting added to CPL count internally when dividing one-line entries #384
 - fixed: Gapping not respected when dividing subtitle if final split entry adjacent to existing #383
-- fixed: Cursor indicator incorrect in timeline in SMPTE at some zoom levels #379
 - fixed: Formatting changes don’t apply to text with and after same formatting tags when full entry is selected #372
 - fixed: Netflix profile shouldn't generate an ellipsis when dividing entries #371
 - fixed: Characters overwrite when typed if multiple entries selected #370
