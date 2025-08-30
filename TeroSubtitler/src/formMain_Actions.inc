@@ -1601,8 +1601,19 @@ begin
   WAVE.DrawThumbnail := actShowThumbnails.Checked;
   WAVE.DoUpdate;
 
-  if WAVE.DrawThumbnail and (WAVE.Thumbnails = NIL) then
+  if WAVE.DrawThumbnail then
+  begin
+    if LayoutWaveform.Height < 150 then
+      LayoutWaveform.Height := 210;
+
+    // if I only change the height the order is messed up :S
+    StatusBar.Top        := 0;
+    LayoutWaveform.Top   := 0;
+    SplitterWaveform.Top := 0;
+
+    if (WAVE.Thumbnails = NIL) then
     GenerateThumbnails;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
