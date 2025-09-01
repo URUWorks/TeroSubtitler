@@ -32,6 +32,7 @@
 - fixed: Seek bar changes size during playback #364
 - fixed: No information for the language selector in the status bar #360
 - fixed: Linux Mint Cinnamon: Wrong behaviour of time controls #359
+- fixed: Last path not used when saving a file #358
 - fixed: Linux Mint Cinnamon: Extensions are not added to newly created files #357
 - fixed: Characters truncated or misrepresented in Fix Subtitles #344
 - fixed: Characters truncated when removing text for hearing impaired if entry begins with and features one hyphen #339
