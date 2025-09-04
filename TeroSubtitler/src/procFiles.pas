@@ -781,6 +781,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function AppendExtension(FileName : String; Extension : String): String;
+begin
+  if FileName.EndsWith(Extension)
+    then Result := FileName
+    else Result := FileName + Extension;
+end;
+
 procedure SaveSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 var
   SD : TSaveDialog;
@@ -819,8 +826,12 @@ begin
 
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
       if SD.Execute and AllowSaveFormat(TUWSubtitleFormats(SD.FilterIndex)) then
+      begin
+        {$ifdef Linux}SD.FileName := AppendExtension(SD.FileName,SD.DefaultExt);{$endif}
         SaveSubtitle(SD.FileName, TUWSubtitleFormats(SD.FilterIndex), SubtitleMode);
+       end;
     finally
+      frmMain.cboFormat.ItemIndex := Integer(Subtitles.Format)-1;
       SD.Free;
     end;
   end;
