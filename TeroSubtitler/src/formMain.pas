@@ -408,6 +408,7 @@ type
     MenuItem288: TMenuItem;
     MenuItem289: TMenuItem;
     MenuItem290: TMenuItem;
+    MenuItem291: TMenuItem;
     mnuViewToolbarVideo: TMenuItem;
     mnuViewToolbarWaveform: TMenuItem;
     mnuViewToolbarEditor: TMenuItem;
@@ -912,6 +913,7 @@ type
     procedure FormShortCut(var Msg: TLMKey; var Handled: Boolean);
     procedure FormShow(Sender: TObject);
     procedure LayoutVSTResize(Sender: TObject);
+    procedure MenuItem291Click(Sender: TObject);
     procedure StatusBarMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure StatusBarMouseUp(Sender: TObject; Button: TMouseButton;

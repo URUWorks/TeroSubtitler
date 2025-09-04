@@ -70,6 +70,7 @@ function RemoveSpacesWithinBrackets(const Text: String): String;
 function StraightToCurlyQuotes(const Text: String): String;
 function CurlyToStraightQuotes(const Text: String): String;
 function FixBrackets(const Text: String): String;
+function RemoveLeadingChar(const Text: String; const LeadCharsPrimary: array of String; const LeadCharsSecondary: array of String): String;
 
 { Draw }
 
@@ -489,6 +490,44 @@ begin
     Result := UnbreakSubtitles(Text, BreakChar)
   else
     Result := Text;
+end;
+
+// -----------------------------------------------------------------------------
+
+//LeadCharsPrimary - the main characters that needs to me removed. Only its FIRST occurence is removed
+//LeadCharsSecondary - some other characters that shall be removed, like leading sapces. All leading occurences are removed
+function RemoveLeadingChar(const Text: String; const LeadCharsPrimary: array of String; const LeadCharsSecondary: array of String): String;
+var
+  IsLeadChar : Boolean = False;
+  CharIndex : integer = 1;
+  LeadIndex : integer = 0;
+  LastLead : integer = 0;
+  LeadChar : String = '';
+  IsPrimary : Boolean = False;
+  PrimaryFound : Boolean = False;
+begin
+  Result := Text;
+  if Length(LeadCharsPrimary) = 0 then exit;
+  if (Text = '') then exit;
+  for CharIndex:= 1 to UTF8Length(Result) do
+  begin
+    IsLeadChar := False;
+    for LeadIndex := 0 to (high (LeadCharsPrimary) + Length(LeadCharsSecondary)) do
+    begin
+      IsPrimary := (LeadIndex < Length(LeadCharsPrimary));
+      LeadChar := SysUtils.BoolToStr(IsPrimary,LeadCharsPrimary[LeadIndex],LeadCharsSecondary[LeadIndex - Length(LeadCharsPrimary)]);
+      if (LeadChar = UTF8Copy(Result,CharIndex,1)) then
+      begin
+        IsLeadChar := True;
+        if (IsPrimary = True) and (PrimaryFound = True) then begin IsLeadChar := False; break; end;
+        inc(LastLead);
+        if (IsPrimary = True) then PrimaryFound := True;
+      end; //LeadChar
+    end; //for LeadIndex
+    if (IsLeadChar = False) then break;
+  end; //for CharIndex
+  if (LastLead < 1) then exit;
+  Result := UTF8Copy(Result,LastLead + 1,MaxInt);
 end;
 
 // -----------------------------------------------------------------------------
