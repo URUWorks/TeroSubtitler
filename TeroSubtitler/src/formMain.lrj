@@ -26,6 +26,7 @@
 {"hash":205933301,"name":"tfrmmain.mnuedittimingsendcue.caption","sourcebytes":[69,110,100,32,67,117,101],"value":"End Cue"},
 {"hash":198347400,"name":"tfrmmain.mnuedittimingsextend.caption","sourcebytes":[69,120,116,101,110,100,32,108,101,110,103,116,104],"value":"Extend length"},
 {"hash":371956,"name":"tfrmmain.mnuedittexts.caption","sourcebytes":[84,101,120,116],"value":"Text"},
+{"hash":258497987,"name":"tfrmmain.menuitem291.caption","sourcebytes":[82,101,109,111,118,101,32,108,101,97,100,105,110,103,32,104,121,112,104,101,110,115],"value":"Remove leading hyphens"},
 {"hash":5440707,"name":"tfrmmain.mnutextlines.caption","sourcebytes":[76,105,110,101,115],"value":"Lines"},
 {"hash":6187187,"name":"tfrmmain.mnutextwords.caption","sourcebytes":[87,111,114,100,115],"value":"Words"},
 {"hash":67099844,"name":"tfrmmain.mnueditrtl.caption","sourcebytes":[82,105,103,104,116,45,116,111,45,108,101,102,116],"value":"Right-to-left"},

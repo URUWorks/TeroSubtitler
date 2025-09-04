@@ -39,6 +39,7 @@ procedure ApplyFontUnderline(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFontColor(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFontClear(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyAddQuotationMarks(const Item: PUWSubtitleItem; const Index: Integer);
+procedure ApplyRemoveLeadingChar(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyAlign(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyVAlign(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplySetTimeInitialFromSpin(const Item: PUWSubtitleItem; const Index: Integer);
@@ -230,10 +231,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
+
+
 procedure ApplyAddQuotationMarks(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^ do
     ApplyText(Item, Index, ApplyCustomTag(Text, '"'), ApplyCustomTag(Translation, '"'), False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ApplyRemoveLeadingChar(const Item: PUWSubtitleItem; const Index: Integer);
+begin
+  with Item^ do
+    ApplyText(Item, Index, RemoveLeadingChar(Text,['-'],[' ']), RemoveLeadingChar(Translation,['-'],[' ']), False);
 end;
 
 // -----------------------------------------------------------------------------

@@ -444,6 +444,23 @@ end;
 
 // -----------------------------------------------------------------------------
 
+
+
+procedure TfrmMain.MenuItem291Click(Sender: TObject);
+var
+  Memo: TUWMemo;
+begin
+  Memo := GetMemoFocused;
+  if Memo = NIL then
+    VSTDoLoop(VST, @ApplyRemoveLeadingChar, dlSelected, True, True)
+  else
+  begin
+    Memo.Text := RemoveLeadingChar (Memo.Text,['-'],[' ']);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actAlignToLeftExecute(Sender: TObject);
 begin
   SetAlignTo(shaLeft);
