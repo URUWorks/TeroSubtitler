@@ -779,6 +779,16 @@ msgstr "Spara fil"
 msgid "Error trying to save the file."
 msgstr "Fel vid försök att spara filen."
 
+#: proclocalize.lngsavesubtitles
+msgid "Save subtitles"
+msgstr ""
+
+#: proclocalize.lngsavetranslation
+#, fuzzy
+msgctxt "proclocalize.lngsavetranslation"
+msgid "Save translation"
+msgstr "Spara översättning"
+
 #: proclocalize.lngsbspellcheckerlanguage
 msgid "Spell checker language"
 msgstr ""
@@ -3461,6 +3471,7 @@ msgid "Transcription..."
 msgstr "Transkription..."
 
 #: tfrmmain.actsavetranslation.caption
+msgctxt "tfrmmain.actsavetranslation.caption"
 msgid "Save translation"
 msgstr "Spara översättning"
 
@@ -4063,6 +4074,10 @@ msgstr "Videolängd och bildfrekvens (BPS)"
 #: tfrmmain.lblmediatime.hint
 msgid "Current video position"
 msgstr "Aktuell videoposition"
+
+#: tfrmmain.menuitem291.caption
+msgid "Remove leading hyphens"
+msgstr ""
 
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"

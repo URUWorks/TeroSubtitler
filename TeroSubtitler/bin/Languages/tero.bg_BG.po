@@ -4049,6 +4049,10 @@ msgstr "Дължина на видеото и к/с"
 msgid "Current video position"
 msgstr "Текущо положение във видеото"
 
+#: tfrmmain.menuitem291.caption
+msgid "Remove leading hyphens"
+msgstr ""
+
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
 msgid "Edit"

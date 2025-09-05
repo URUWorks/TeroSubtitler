@@ -4051,6 +4051,10 @@ msgstr "Durata video e FPS"
 msgid "Current video position"
 msgstr "Posizione attuale video"
 
+#: tfrmmain.menuitem291.caption
+msgid "Remove leading hyphens"
+msgstr ""
+
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
 msgid "Edit"
@@ -5595,3 +5599,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+

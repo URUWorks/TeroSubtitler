@@ -4057,6 +4057,10 @@ msgstr "视频长度和帧率"
 msgid "Current video position"
 msgstr "当前视频位置"
 
+#: tfrmmain.menuitem291.caption
+msgid "Remove leading hyphens"
+msgstr ""
+
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
 msgid "Edit"

@@ -770,10 +770,9 @@ msgstr "Error al intentar guardar el archivo."
 
 #: proclocalize.lngsavesubtitles
 msgid "Save subtitles"
-msgstr ""
+msgstr "Guardar subtítulos"
 
 #: proclocalize.lngsavetranslation
-#, fuzzy
 msgctxt "proclocalize.lngsavetranslation"
 msgid "Save translation"
 msgstr "Guardar traducción"
@@ -4045,6 +4044,10 @@ msgstr "Duración de vídeo y CPS"
 msgid "Current video position"
 msgstr "Posición actual de vídeo"
 
+#: tfrmmain.menuitem291.caption
+msgid "Remove leading hyphens"
+msgstr "Eliminar los guiones iniciales"
+
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
 msgid "Edit"
@@ -5590,4 +5593,3 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-

@@ -770,17 +770,16 @@ msgstr "Error trying to save the file."
 
 #: proclocalize.lngsavesubtitles
 msgid "Save subtitles"
-msgstr ""
+msgstr "Save subtitles"
 
 #: proclocalize.lngsavetranslation
-#, fuzzy
 msgctxt "proclocalize.lngsavetranslation"
 msgid "Save translation"
 msgstr "Save translation"
 
 #: proclocalize.lngsbspellcheckerlanguage
 msgid "Spell checker language"
-msgstr ""
+msgstr "Spell checker language"
 
 #: proclocalize.lngscaudiofilters
 msgctxt "proclocalize.lngscaudiofilters"
@@ -4045,6 +4044,10 @@ msgstr "Video length and FPS"
 msgid "Current video position"
 msgstr "Current video position"
 
+#: tfrmmain.menuitem291.caption
+msgid "Remove leading hyphens"
+msgstr "Remove leading hyphens"
+
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
 msgid "Edit"
@@ -5590,4 +5593,3 @@ msgstr "Inverted"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-

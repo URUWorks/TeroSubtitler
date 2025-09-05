@@ -767,6 +767,16 @@ msgstr "Съхраняване на файла"
 msgid "Error trying to save the file."
 msgstr "Грешка при записа на файла."
 
+#: proclocalize.lngsavesubtitles
+msgid "Save subtitles"
+msgstr ""
+
+#: proclocalize.lngsavetranslation
+#, fuzzy
+msgctxt "proclocalize.lngsavetranslation"
+msgid "Save translation"
+msgstr "Съхраняване на превода"
+
 #: proclocalize.lngsbspellcheckerlanguage
 msgid "Spell checker language"
 msgstr ""
@@ -3437,6 +3447,7 @@ msgid "Transcription..."
 msgstr "Разписване..."
 
 #: tfrmmain.actsavetranslation.caption
+msgctxt "tfrmmain.actsavetranslation.caption"
 msgid "Save translation"
 msgstr "Съхраняване на превода"
 
@@ -4037,6 +4048,10 @@ msgstr "Дължина на видеото и к/с"
 #: tfrmmain.lblmediatime.hint
 msgid "Current video position"
 msgstr "Текущо положение във видеото"
+
+#: tfrmmain.menuitem291.caption
+msgid "Remove leading hyphens"
+msgstr ""
 
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
