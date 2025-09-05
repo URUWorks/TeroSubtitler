@@ -3,6 +3,7 @@
 - fixed: iTT won't load if indicated version isn't 1.0 [SubtitleAPI]
 - fixed: Impossible to type a number from the numeric keypad in the edit box when shortcuts (0-9) are assigned
 - fixed: Adjusting duration doesn't update final time immediately
+- fixed: [Linux] Mint Cinnamon: Extention not added if the filename contains a dot #429
 - fixed: Unable to select all in QuickActions #424
 - fixed: Thumbnails make multi-line entries appear truncated in the timeline #422
 - fixed: Whitespace in translated entries with formatting #419
@@ -31,9 +32,9 @@
 - fixed: Characters overwrite when typed if multiple entries selected #370
 - fixed: Seek bar changes size during playback #364
 - fixed: No information for the language selector in the status bar #360
-- fixed: Linux Mint Cinnamon: Wrong behaviour of time controls #359
+- fixed: [Linux] Mint Cinnamon: Wrong behaviour of time controls #359
 - fixed: Last path not used when saving a file #358
-- fixed: Linux Mint Cinnamon: Extensions are not added to newly created files #357
+- fixed: [Linux] Mint Cinnamon: Extensions are not added to newly created files #357
 - fixed: Characters truncated or misrepresented in Fix Subtitles #344
 - fixed: Characters truncated when removing text for hearing impaired if entry begins with and features one hyphen #339
 - fixed: Inner spans in EBU-TT-D XML files are lost upon import #329
@@ -45,6 +46,7 @@
 - improved: Video thumbnails
 - updated: Lazarus 4.2
 - updated: Italian language (thx bovirus)
+- added: Remove leading hyphens #434
 - added: Import a .SUP blu-ray #281
 - added: German language (thx cutegitcat)
 - added: Swedish language (thx cutegitcat)
