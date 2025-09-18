@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 26.08.2025)\n"
+"Project-Id-Version: Tero Subtitler - IT - 07.09.2025)\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -4053,7 +4053,7 @@ msgstr "Posizione attuale video"
 
 #: tfrmmain.menuitem291.caption
 msgid "Remove leading hyphens"
-msgstr ""
+msgstr "Rimuovi trattini principali"
 
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
@@ -5599,4 +5599,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
