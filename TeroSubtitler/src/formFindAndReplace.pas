@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  LCLType, UWCheckBox, UWRadioButton, LCLTranslator;
+  LCLType, UWCheckBox, UWRadioButton, LCLTranslator, procTypes;
 
 type
 
@@ -43,11 +43,17 @@ type
     chkReplaceWith: TUWCheckBox;
     lblOptions: TLabel;
     lblScope: TLabel;
+    lblSource: TLabel;
     lblTextToFind: TLabel;
     mmoTextToFind: TMemo;
     mmoReplaceWith: TMemo;
+    pnlLocation: TPanel;
+    pnlScope: TPanel;
+    rbnText: TRadioButton;
     rbnAllTheSubtitles: TUWRadioButton;
     rbnFromTheSelectedSubtitle: TUWRadioButton;
+    rbnTranslation: TRadioButton;
+    rbnSearchBoth: TRadioButton;
     procedure btnCloseClick(Sender: TObject);
     procedure btnFindClick(Sender: TObject);
     procedure btnFindNextClick(Sender: TObject);
@@ -58,14 +64,12 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure mmoReplaceWithKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure mmoTextToFindKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure mmoReplaceWithKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure mmoTextToFindKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
 
   public
-
+    function FindSource: TFindSource;
   end;
 
 var
@@ -101,14 +105,14 @@ end;
 
 procedure TfrmFindAndReplace.FormCreate(Sender: TObject);
 begin
-  btnReplaceAll.Top := btnFindNext.Top;
-  btnReplace.Top    := btnReplaceAll.Top;
   chkReplaceWithChange(Sender);
 
   if (frmMain.VST.SelectedCount = 1) then
     rbnFromTheSelectedSubtitle.Checked := True
   else
     rbnAllTheSubtitles.Checked := True;
+
+  rbnSearchBoth.Checked := True;
 
   {$IFNDEF WINDOWS}
   PrepareCustomControls(Self);
@@ -134,6 +138,13 @@ var
   AParamArray: TStringArray;
 begin
   CheckColorTheme(Self);
+  Height := 440;
+
+  //I did not understand why these do not get their values from the IDE
+  pnlLocation.Color := Color;
+  pnlScope.Color := Color;
+  pnlLocation.BevelColor := Color;
+  pnlScope.BevelColor := Color;
 
   s := LoadFormSettings(Self);
   if not s.IsEmpty then
@@ -188,6 +199,8 @@ begin
   begin
     mmoReplaceWith.Enabled := Checked;
 
+    btnReplaceAll.Top      := btnClose.Top;  //NOTE: btnReplaceAll.Top := does NOT work properly in GTK if set any other place
+    btnReplace.Top         := btnClose.Top;
     btnReplaceAll.Visible  := Checked;
     btnReplace.Visible     := Checked;
     btnFindNext.Visible    := not Checked;
@@ -198,11 +211,17 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function TfrmFindAndReplace.FindSource: TFindSource;
+begin
+  Result := fsTextAndTranslation;
+  if frmFindAndReplace.rbnText.Checked then exit (fsText);
+  if frmFindAndReplace.rbnTranslation.Checked then exit (fsTranslation);
+end;
+
 procedure TfrmFindAndReplace.btnFindClick(Sender: TObject);
 begin
-  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, fmBegin, False, '',
+  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, fmBegin, FindSource, False, '',
     False, False, chkWholeWord.Checked, chkRegularExpression.Checked);
-
   //Close;
 end;
 
@@ -226,7 +245,7 @@ end;
 
 procedure TfrmFindAndReplace.btnReplaceAllClick(Sender: TObject);
 begin
-  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, FindModeFromBoolean(rbnAllTheSubtitles.Checked),
+  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, FindModeFromBoolean(rbnAllTheSubtitles.Checked), FindSource,
     True, mmoReplaceWith.Text, True, chkPreserveCaseOnReplace.Checked, chkWholeWord.Checked, chkRegularExpression.Checked);
 
   //Close;
@@ -236,7 +255,7 @@ end;
 
 procedure TfrmFindAndReplace.btnReplaceClick(Sender: TObject);
 begin
-  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, FindModeFromBoolean(rbnAllTheSubtitles.Checked),
+  VSTFind(mmoTextToFind.Text, chkCaseSensitive.Checked, FindModeFromBoolean(rbnAllTheSubtitles.Checked), FindSource,
     True, mmoReplaceWith.Text, False, chkPreserveCaseOnReplace.Checked, chkRegularExpression.Checked);
 
   //Close;

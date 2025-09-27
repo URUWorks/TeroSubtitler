@@ -56,7 +56,7 @@ procedure VSTDeleteEntries(const AVST: TLazVirtualStringTree);
 procedure VSTCombineEntries(const AVST: TLazVirtualStringTree);
 procedure VSTDivideEntry(const AVST: TLazVirtualStringTree);
 
-function VSTFind(const FindText: String; const CaseSensitive: Boolean; const FindMode: TFindMode; const Replace: Boolean = False; const NewText: String = ''; const ReplaceAll: Boolean = False; const CasePreserve: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False): Boolean;
+function VSTFind(const FindText: String; const CaseSensitive: Boolean; const FindMode: TFindMode; const FindLocation: TFindSource; const Replace: Boolean = False; const NewText: String = ''; const ReplaceAll: Boolean = False; const CasePreserve: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False): Boolean;
 procedure VSTFindPrevious(const CaseSensitive: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False);
 procedure VSTFindNext(const CaseSensitive: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False);
 procedure VSTDoLoop(const AVST: TLazVirtualStringTree; Proc: TVSTDoLoopProc; const Selection: TVSTDoLoopSelection = dlSelected; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
@@ -77,7 +77,7 @@ implementation
 
 uses procWorkspace, procUndo, procSubtitle, Clipbrd, RegExpr, UWSubtitles.Utils,
   UWSubtitleAPI, UWSystem.SysUtils, UWSystem.StrUtils, formMain, Math, lazUTF8,
-  UWSubtitleAPI.Tags;
+  UWSubtitleAPI.Tags, formFindAndReplace;
 
 // -----------------------------------------------------------------------------
 
@@ -711,7 +711,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function VSTFind(const FindText: String; const CaseSensitive: Boolean; const FindMode: TFindMode; const Replace: Boolean = False; const NewText: String = ''; const ReplaceAll: Boolean = False; const CasePreserve: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False): Boolean;
+function VSTFind(const FindText: String; const CaseSensitive: Boolean; const FindMode: TFindMode; const FindLocation: TFindSource; const Replace: Boolean = False; const NewText: String = ''; const ReplaceAll: Boolean = False; const CasePreserve: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False): Boolean;
 
   function FoundText(const S: String): Boolean;
   var
@@ -739,6 +739,16 @@ function VSTFind(const FindText: String; const CaseSensitive: Boolean; const Fin
     end;
   end;
 
+
+  function Found(const Location: TFindSource; const Text: string; const Translation: string): Boolean;
+  begin
+    Result := False;
+    if (Location = fsText) or (Location = fsTextAndTranslation)
+      then if FoundText(Text) then Exit(True);
+    if (Location = fsTranslation) or (Location = fsTextAndTranslation)
+          then if FoundText(Translation) then Exit(True);
+  end;
+
 var
   Item : PUWSubtitleItem;
   i, c : Integer;
@@ -746,6 +756,7 @@ var
 begin
   Result := False;
   AppOptions.TextToFind := FindText;
+  if FindText = '' then exit;
 
   if Subtitles.Count > 0 then
   begin
@@ -757,7 +768,7 @@ begin
         if Assigned(Item) then
           with Item^ do
           begin
-            if FoundText(Text) or FoundText(Translation) then
+            if Found(FindLocation,Text,Translation) then
             begin
               Result := True;
               VSTSelectNode(frmMain.VST, i, True, True);
@@ -775,7 +786,6 @@ begin
       i := VSTFocusedNode(frmMain.VST);
       if FindMode = fmNext then
         Inc(i);
-
       c := Range(i, 0, Subtitles.Count-1);
     end;
 
@@ -785,7 +795,7 @@ begin
       if Assigned(Item) then
         with Item^ do
         begin
-          if FoundText(Text) or FoundText(Translation) then
+          if Found(FindLocation,Text,Translation) then
           begin
             Result := True;
             VSTSelectNode(frmMain.VST, i, True, True);
@@ -793,26 +803,26 @@ begin
               Break
             else
             begin // Find & Replace...
-              if FoundText(Text) then
-              begin
-                if not RE then
-                  s := ReplaceString(Text, FindText, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False)
-                else
-                  s := ReplaceRegExpr(FindText, Text, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False);
-
-                SetSubtitleText(i, s, smText, False, False, False);
-              end;
-              if FoundText(Translation) then
-              begin
-                if not RE then
-                  s := ReplaceString(Translation, FindText, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False)
-                else
-                  s := ReplaceRegExpr(FindText, Translation, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False);
-
-                SetSubtitleText(i, s, smTranslation, False, False, False);
-              end;
+              if (FindLocation = fsText) or (FindLocation = fsTextAndTranslation) then
+                if FoundText(Text) then
+                begin
+                  if not RE then
+                    s := ReplaceString(Text, FindText, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False)
+                  else
+                    s := ReplaceRegExpr(FindText, Text, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False);
+                  SetSubtitleText(i, s, smText, False, False, False);
+                end; //if FoundText(Text)
+              if (FindLocation = fsTranslation) or (FindLocation = fsTextAndTranslation) then
+                if FoundText(Translation) then
+                begin
+                  if not RE then
+                    s := ReplaceString(Translation, FindText, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False)
+                  else
+                    s := ReplaceRegExpr(FindText, Translation, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False);
+                  SetSubtitleText(i, s, smTranslation, False, False, False);
+                end; //FoundText(Translation)
               if not ReplaceAll then Break;
-            end;
+            end; // Find & Replace...
           end;
         end;
     end;
@@ -836,7 +846,7 @@ end;
 procedure VSTFindPrevious(const CaseSensitive: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False);
 begin
   with AppOptions do
-    if TextToFind <> '' then VSTFind(TextToFind, CaseSensitive, fmBackward, False, '', False, False, WholeWord, RE);
+    if TextToFind <> '' then VSTFind(TextToFind, CaseSensitive, fmBackward, frmFindAndReplace.FindSource, False, '', False, False, WholeWord, RE);
 end;
 
 // -----------------------------------------------------------------------------
@@ -844,7 +854,7 @@ end;
 procedure VSTFindNext(const CaseSensitive: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False);
 begin
   with AppOptions do
-    if TextToFind <> '' then VSTFind(TextToFind, CaseSensitive, fmNext, False, '', False, False, WholeWord, RE);
+    if TextToFind <> '' then VSTFind(TextToFind, CaseSensitive, fmNext, frmFindAndReplace.FindSource, False, '', False, False, WholeWord, RE);
 end;
 
 // -----------------------------------------------------------------------------
