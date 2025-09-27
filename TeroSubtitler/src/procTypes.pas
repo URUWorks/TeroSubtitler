@@ -234,6 +234,7 @@ type
   TWorkMode = (wmTime, wmFrames);
   TViewMode = (vmList, vmSource, vmTranscription);
   TMediaPlayMode = (mpmAll, mpmSelection, mpmFromSelection, mpmBeforeSelection, mpmAfterSelection);
+  TFindSource = (fsText, fsTranslation, fsTextAndTranslation);
 
   TTranscription = record
     Memo: TATSynEdit;
