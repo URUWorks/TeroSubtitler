@@ -813,6 +813,11 @@ msgctxt "proclocalize.lngschhmmsszzz"
 msgid "HH:MM:SS.ZZZ"
 msgstr ""
 
+#: proclocalize.lngscmedia
+msgctxt "proclocalize.lngscmedia"
+msgid "Media"
+msgstr ""
+
 #: proclocalize.lngscmilliseconds
 msgctxt "proclocalize.lngscmilliseconds"
 msgid "Milliseconds"
@@ -846,11 +851,6 @@ msgctxt "proclocalize.lngsctools"
 msgid "Tools"
 msgstr ""
 
-#: proclocalize.lngscvideo
-msgctxt "proclocalize.lngscvideo"
-msgid "Video"
-msgstr ""
-
 #: proclocalize.lngscvideofilters
 msgctxt "proclocalize.lngscvideofilters"
 msgid "Video filters"
@@ -863,7 +863,7 @@ msgstr ""
 
 #: proclocalize.lngscwaveform
 msgctxt "proclocalize.lngscwaveform"
-msgid "Waveform"
+msgid "Timeline"
 msgstr ""
 
 #: proclocalize.lngscxml
@@ -876,7 +876,7 @@ msgstr ""
 
 #: proclocalize.lngsecodec
 msgctxt "proclocalize.lngsecodec"
-msgid "Codec"
+msgid "Format"
 msgstr ""
 
 #: proclocalize.lngseechangelist
@@ -897,7 +897,7 @@ msgid "Language"
 msgstr ""
 
 #: proclocalize.lngselectencodingtouse
-msgid "Select the Encoding to use:"
+msgid "Select encoding:"
 msgstr ""
 
 #: proclocalize.lngselectfpstouse
@@ -2775,12 +2775,12 @@ msgctxt "tfrmmain.actcloseapp.caption"
 msgid "Close"
 msgstr ""
 
-#: tfrmmain.actclosesubtitle.caption
-msgid "Close subtitles"
+#: tfrmmain.actclosemedia.caption
+msgid "Close media"
 msgstr ""
 
-#: tfrmmain.actclosevideo.caption
-msgid "Close video"
+#: tfrmmain.actclosesubtitle.caption
+msgid "Close subtitles"
 msgstr ""
 
 #: tfrmmain.actcombineentries.caption
@@ -3078,6 +3078,19 @@ msgctxt "tfrmmain.actlistmode.caption"
 msgid "List mode"
 msgstr ""
 
+#: tfrmmain.actloadmedia.caption
+msgid "Open media..."
+msgstr ""
+
+#: tfrmmain.actloadmedia.hint
+msgctxt "tfrmmain.actloadmedia.hint"
+msgid "Open a media file"
+msgstr ""
+
+#: tfrmmain.actloadmediafromurl.caption
+msgid "Open media from URL..."
+msgstr ""
+
 #: tfrmmain.actloadproject.caption
 msgid "Load project..."
 msgstr ""
@@ -3098,18 +3111,6 @@ msgstr ""
 
 #: tfrmmain.actloadtranslation.caption
 msgid "Load translation..."
-msgstr ""
-
-#: tfrmmain.actloadvideo.caption
-msgid "Open video..."
-msgstr ""
-
-#: tfrmmain.actloadvideo.hint
-msgid "Open a video file"
-msgstr ""
-
-#: tfrmmain.actloadvideofromurl.caption
-msgid "Open video from URL..."
 msgstr ""
 
 #: tfrmmain.actmarkentry.caption
@@ -3285,7 +3286,7 @@ msgstr ""
 
 #: tfrmmain.actnewsubtitle.caption
 msgctxt "tfrmmain.actnewsubtitle.caption"
-msgid "New subtitle"
+msgid "New project"
 msgstr ""
 
 #: tfrmmain.actnewsubtitle.hint
@@ -3743,6 +3744,11 @@ msgstr ""
 msgid "Time expander/reducer..."
 msgstr ""
 
+#: tfrmmain.acttimeline.caption
+msgctxt "tfrmmain.acttimeline.caption"
+msgid "Timeline"
+msgstr ""
+
 #: tfrmmain.acttimemode.caption
 msgctxt "tfrmmain.acttimemode.caption"
 msgid "Time mode"
@@ -3977,11 +3983,6 @@ msgstr ""
 msgid "Extract waveform..."
 msgstr ""
 
-#: tfrmmain.actwaveformpreview.caption
-msgctxt "tfrmmain.actwaveformpreview.caption"
-msgid "Waveform preview"
-msgstr ""
-
 #: tfrmmain.actwebpreview.caption
 msgid "Web Preview..."
 msgstr ""
@@ -4135,7 +4136,7 @@ msgstr ""
 
 #: tfrmmain.mnuvideo.caption
 msgctxt "tfrmmain.mnuvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr ""
 
 #: tfrmmain.mnuvideoaspectratio.caption
@@ -4232,7 +4233,7 @@ msgid "Initial time"
 msgstr ""
 
 #: tfrmmain.tedpause.hint
-msgid "Pause"
+msgid "Gap"
 msgstr ""
 
 #: tfrmmodifyselection.btnapply.caption

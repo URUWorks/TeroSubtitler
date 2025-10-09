@@ -156,7 +156,7 @@ begin
 
       if FileExists(s) and frmMain.WAVE.LoadWaveFromFile(s) then
       begin
-        if not frmMain.actWaveformPreview.Checked then frmMain.actWaveformPreview.Execute;
+        if not frmMain.actTimeline.Checked then frmMain.actTimeline.Execute;
         EnableActionsByTag([TAG_ACTION_AUDIO], True);
 
         DeleteFile(s);

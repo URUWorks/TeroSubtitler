@@ -74,7 +74,7 @@ begin
   if Assigned(frmVideo) then
     frmVideo.Caption := ExtractFileName(MPV.FileName);
 
-  actCloseVideo.Enabled       := True;
+  actCloseMedia.Enabled       := True;
   mnuVideoPlayback.Enabled    := True;
   mnuVideoAudioStream.Enabled := True;
   mnuVideoSubtitles.Enabled   := True;

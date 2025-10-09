@@ -668,7 +668,7 @@ begin
       if etMaxCPS              in ErrorType then SetHintText(lngasMaxCPS);
       if etOverlappingWithPrev in ErrorType then SetHintText(lngasOverlappingWithPrev);
       if etOverlappingWithNext in ErrorType then SetHintText(lngasOverlappingWithNext);
-      if etFixTags             in ErrorType then SetHintText(lngfsetFixTags);
+      if etFixTags             in ErrorType then SetHintText(lngasFixTags);
       if etEmpty               in ErrorType then SetHintText(lngfsetEmpty);
       if etUnbreak             in ErrorType then SetHintText(Format(lngfsetUnbreak, [AppOptions.Conventions.CPL]));
       if etUnnecessarySpaces   in ErrorType then SetHintText(lngasUnnecessarySpaces);

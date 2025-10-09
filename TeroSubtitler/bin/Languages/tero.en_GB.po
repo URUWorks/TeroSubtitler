@@ -834,6 +834,11 @@ msgctxt "proclocalize.lngschhmmsszzz"
 msgid "HH:MM:SS.ZZZ"
 msgstr "HH:MM:SS.ZZZ"
 
+#: proclocalize.lngscmedia
+msgctxt "proclocalize.lngscmedia"
+msgid "Media"
+msgstr "Media"
+
 #: proclocalize.lngscmilliseconds
 msgctxt "proclocalize.lngscmilliseconds"
 msgid "Milliseconds"
@@ -867,11 +872,6 @@ msgctxt "proclocalize.lngsctools"
 msgid "Tools"
 msgstr "Tools"
 
-#: proclocalize.lngscvideo
-msgctxt "proclocalize.lngscvideo"
-msgid "Video"
-msgstr "Video"
-
 #: proclocalize.lngscvideofilters
 msgctxt "proclocalize.lngscvideofilters"
 msgid "Video filters"
@@ -884,8 +884,8 @@ msgstr "View"
 
 #: proclocalize.lngscwaveform
 msgctxt "proclocalize.lngscwaveform"
-msgid "Waveform"
-msgstr "Waveform"
+msgid "Timeline"
+msgstr "Timeline"
 
 #: proclocalize.lngscxml
 msgid "XML"
@@ -897,8 +897,8 @@ msgstr "Analyzing file..."
 
 #: proclocalize.lngsecodec
 msgctxt "proclocalize.lngsecodec"
-msgid "Codec"
-msgstr "Codec"
+msgid "Format"
+msgstr "Format"
 
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
@@ -918,8 +918,8 @@ msgid "Language"
 msgstr "Language"
 
 #: proclocalize.lngselectencodingtouse
-msgid "Select the Encoding to use:"
-msgstr "Select the Encoding to use:"
+msgid "Select encoding:"
+msgstr "Select encoding:"
 
 #: proclocalize.lngselectfpstouse
 msgid "Select FPS to use:"
@@ -2798,13 +2798,13 @@ msgctxt "tfrmmain.actcloseapp.caption"
 msgid "Close"
 msgstr "Close"
 
+#: tfrmmain.actclosemedia.caption
+msgid "Close media"
+msgstr "Close media"
+
 #: tfrmmain.actclosesubtitle.caption
 msgid "Close subtitles"
 msgstr "Close subtitles"
-
-#: tfrmmain.actclosevideo.caption
-msgid "Close video"
-msgstr "Close video"
 
 #: tfrmmain.actcombineentries.caption
 msgid "Combine entries"
@@ -3101,6 +3101,19 @@ msgctxt "tfrmmain.actlistmode.caption"
 msgid "List mode"
 msgstr "List mode"
 
+#: tfrmmain.actloadmedia.caption
+msgid "Open media..."
+msgstr "Open media..."
+
+#: tfrmmain.actloadmedia.hint
+msgctxt "tfrmmain.actloadmedia.hint"
+msgid "Open a media file"
+msgstr "Open a media file"
+
+#: tfrmmain.actloadmediafromurl.caption
+msgid "Open media from URL..."
+msgstr "Open media from URL..."
+
 #: tfrmmain.actloadproject.caption
 msgid "Load project..."
 msgstr "Load project..."
@@ -3122,18 +3135,6 @@ msgstr "Transcription..."
 #: tfrmmain.actloadtranslation.caption
 msgid "Load translation..."
 msgstr "Load translation..."
-
-#: tfrmmain.actloadvideo.caption
-msgid "Open video..."
-msgstr "Open video..."
-
-#: tfrmmain.actloadvideo.hint
-msgid "Open a video file"
-msgstr "Open a video file"
-
-#: tfrmmain.actloadvideofromurl.caption
-msgid "Open video from URL..."
-msgstr "Open video from URL..."
 
 #: tfrmmain.actmarkentry.caption
 msgid "Mark entry"
@@ -3308,8 +3309,8 @@ msgstr "Multiple replace..."
 
 #: tfrmmain.actnewsubtitle.caption
 msgctxt "tfrmmain.actnewsubtitle.caption"
-msgid "New subtitle"
-msgstr "New subtitle"
+msgid "New project"
+msgstr "New project"
 
 #: tfrmmain.actnewsubtitle.hint
 msgid "Start a new subtitle project"
@@ -3766,6 +3767,11 @@ msgstr "Typewriter effect"
 msgid "Time expander/reducer..."
 msgstr "Time expander/reducer..."
 
+#: tfrmmain.acttimeline.caption
+msgctxt "tfrmmain.acttimeline.caption"
+msgid "Timeline"
+msgstr "Timeline"
+
 #: tfrmmain.acttimemode.caption
 msgctxt "tfrmmain.acttimemode.caption"
 msgid "Time mode"
@@ -4000,11 +4006,6 @@ msgstr "Enable/disable shot changes"
 msgid "Extract waveform..."
 msgstr "Extract waveform..."
 
-#: tfrmmain.actwaveformpreview.caption
-msgctxt "tfrmmain.actwaveformpreview.caption"
-msgid "Waveform preview"
-msgstr "Waveform preview"
-
 #: tfrmmain.actwebpreview.caption
 msgid "Web Preview..."
 msgstr "Web Preview..."
@@ -4158,8 +4159,8 @@ msgstr "Translation memory"
 
 #: tfrmmain.mnuvideo.caption
 msgctxt "tfrmmain.mnuvideo.caption"
-msgid "Video"
-msgstr "Video"
+msgid "Media"
+msgstr "Media"
 
 #: tfrmmain.mnuvideoaspectratio.caption
 msgid "Aspect ratio"
@@ -4255,8 +4256,8 @@ msgid "Initial time"
 msgstr "Initial time"
 
 #: tfrmmain.tedpause.hint
-msgid "Pause"
-msgstr "Pause"
+msgid "Gap"
+msgstr "Gap"
 
 #: tfrmmodifyselection.btnapply.caption
 msgctxt "tfrmmodifyselection.btnapply.caption"

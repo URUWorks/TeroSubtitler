@@ -834,6 +834,11 @@ msgctxt "proclocalize.lngschhmmsszzz"
 msgid "HH:MM:SS.ZZZ"
 msgstr "HH:MM:SS.ZZZ"
 
+#: proclocalize.lngscmedia
+msgctxt "proclocalize.lngscmedia"
+msgid "Media"
+msgstr ""
+
 #: proclocalize.lngscmilliseconds
 msgctxt "proclocalize.lngscmilliseconds"
 msgid "Milliseconds"
@@ -867,11 +872,6 @@ msgctxt "proclocalize.lngsctools"
 msgid "Tools"
 msgstr "Пособия"
 
-#: proclocalize.lngscvideo
-msgctxt "proclocalize.lngscvideo"
-msgid "Video"
-msgstr "Видео"
-
 #: proclocalize.lngscvideofilters
 msgctxt "proclocalize.lngscvideofilters"
 msgid "Video filters"
@@ -883,8 +883,10 @@ msgid "View"
 msgstr "Изглед"
 
 #: proclocalize.lngscwaveform
+#, fuzzy
+#| msgid "Waveform"
 msgctxt "proclocalize.lngscwaveform"
-msgid "Waveform"
+msgid "Timeline"
 msgstr "Вълна"
 
 #: proclocalize.lngscxml
@@ -896,8 +898,10 @@ msgid "Analyzing file..."
 msgstr "Разбор на файл..."
 
 #: proclocalize.lngsecodec
+#, fuzzy
+#| msgid "Codec"
 msgctxt "proclocalize.lngsecodec"
-msgid "Codec"
+msgid "Format"
 msgstr "Кодек"
 
 #: proclocalize.lngseechangelist
@@ -918,7 +922,9 @@ msgid "Language"
 msgstr "Език"
 
 #: proclocalize.lngselectencodingtouse
-msgid "Select the Encoding to use:"
+#, fuzzy
+#| msgid "Select the Encoding to use:"
+msgid "Select encoding:"
 msgstr "Изберете знаков набор:"
 
 #: proclocalize.lngselectfpstouse
@@ -2803,13 +2809,13 @@ msgctxt "tfrmmain.actcloseapp.caption"
 msgid "Close"
 msgstr "Затваряне"
 
+#: tfrmmain.actclosemedia.caption
+msgid "Close media"
+msgstr ""
+
 #: tfrmmain.actclosesubtitle.caption
 msgid "Close subtitles"
 msgstr "Затваряне на надписите"
-
-#: tfrmmain.actclosevideo.caption
-msgid "Close video"
-msgstr "Затваряне на видеото"
 
 #: tfrmmain.actcombineentries.caption
 msgid "Combine entries"
@@ -3106,6 +3112,21 @@ msgctxt "tfrmmain.actlistmode.caption"
 msgid "List mode"
 msgstr "Списъчен режим"
 
+#: tfrmmain.actloadmedia.caption
+msgid "Open media..."
+msgstr ""
+
+#: tfrmmain.actloadmedia.hint
+#, fuzzy
+#| msgid "Open a video file"
+msgctxt "tfrmmain.actloadmedia.hint"
+msgid "Open a media file"
+msgstr "Отваряне на видео файл"
+
+#: tfrmmain.actloadmediafromurl.caption
+msgid "Open media from URL..."
+msgstr ""
+
 #: tfrmmain.actloadproject.caption
 msgid "Load project..."
 msgstr "Зареждане на проект..."
@@ -3127,18 +3148,6 @@ msgstr "Разписване..."
 #: tfrmmain.actloadtranslation.caption
 msgid "Load translation..."
 msgstr "Зареждане на превод..."
-
-#: tfrmmain.actloadvideo.caption
-msgid "Open video..."
-msgstr "Отваряне на видео..."
-
-#: tfrmmain.actloadvideo.hint
-msgid "Open a video file"
-msgstr "Отваряне на видео файл"
-
-#: tfrmmain.actloadvideofromurl.caption
-msgid "Open video from URL..."
-msgstr "Отваряне на видео от URL..."
 
 #: tfrmmain.actmarkentry.caption
 msgid "Mark entry"
@@ -3312,8 +3321,10 @@ msgid "Multiple replace..."
 msgstr "Множествена замяна..."
 
 #: tfrmmain.actnewsubtitle.caption
+#, fuzzy
+#| msgid "New subtitle"
 msgctxt "tfrmmain.actnewsubtitle.caption"
-msgid "New subtitle"
+msgid "New project"
 msgstr "Нови надписи"
 
 #: tfrmmain.actnewsubtitle.hint
@@ -3771,6 +3782,11 @@ msgstr "Машинопис"
 msgid "Time expander/reducer..."
 msgstr ""
 
+#: tfrmmain.acttimeline.caption
+msgctxt "tfrmmain.acttimeline.caption"
+msgid "Timeline"
+msgstr ""
+
 #: tfrmmain.acttimemode.caption
 msgctxt "tfrmmain.acttimemode.caption"
 msgid "Time mode"
@@ -4005,11 +4021,6 @@ msgstr "Вкл/ изкл на промените на снимането"
 msgid "Extract waveform..."
 msgstr "Извличане на вълна..."
 
-#: tfrmmain.actwaveformpreview.caption
-msgctxt "tfrmmain.actwaveformpreview.caption"
-msgid "Waveform preview"
-msgstr "Преглед на вълнова крива"
-
 #: tfrmmain.actwebpreview.caption
 msgid "Web Preview..."
 msgstr "Мрежов преглед..."
@@ -4162,8 +4173,10 @@ msgid "Translation memory"
 msgstr "Преводна памет"
 
 #: tfrmmain.mnuvideo.caption
+#, fuzzy
+#| msgid "Video"
 msgctxt "tfrmmain.mnuvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "Видео"
 
 #: tfrmmain.mnuvideoaspectratio.caption
@@ -4260,7 +4273,9 @@ msgid "Initial time"
 msgstr "Начално време"
 
 #: tfrmmain.tedpause.hint
-msgid "Pause"
+#, fuzzy
+#| msgid "Pause"
+msgid "Gap"
 msgstr "Задържане"
 
 #: tfrmmodifyselection.btnapply.caption

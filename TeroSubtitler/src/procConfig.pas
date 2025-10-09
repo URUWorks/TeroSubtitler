@@ -973,7 +973,7 @@ begin
         SetValue('DefEncoding', DefEncoding);
         SetValue('DefFormat', Integer(DefFormat));
         SetValue('VideoPreview', actVideoPreview.Checked);
-        SetValue('AudioPreview', actWaveformPreview.Checked);
+        SetValue('AudioPreview', actTimeline.Checked);
         SetValue('DockVideoControls', actUnDockVideo.Checked);
         SetValue('DockAudioControls', actUnDockWaveform.Checked);
         SetValue('Layout', Layout);

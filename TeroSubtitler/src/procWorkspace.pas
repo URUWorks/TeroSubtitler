@@ -723,7 +723,7 @@ begin
     // Actions
     actUndo.Enabled := False;
     actRedo.Enabled := False;
-    actCloseVideo.Enabled := MPV.GetMediaLenInMs > 0;
+    actCloseMedia.Enabled := MPV.GetMediaLenInMs > 0;
 
     // Find
     if AValue then
@@ -911,7 +911,7 @@ begin
              actSetGUILayout0.Checked := False;
              actSetGUILayout1.Checked := False;
              actSetGUILayout2.Checked := True;
-             LayoutVideo.Height := Height div iff((LayoutWaveform.Parent = frmMain) and actWaveformPreview.Checked, 3, 2);
+             LayoutVideo.Height := Height div iff((LayoutWaveform.Parent = frmMain) and actTimeline.Checked, 3, 2);
            end;
       else
         LayoutVideo.Align   := alRight;
@@ -957,17 +957,17 @@ begin
   with frmMain do
     if not Assigned(frmWaveform) then
     begin
-      LayoutWaveform.Top         := 0;
-      SplitterWaveform.Top       := 0;
-      actWaveformPreview.Checked := AValue;
-      LayoutWaveform.Visible     := AValue;
-      SplitterWaveform.Visible   := AValue;
+      LayoutWaveform.Top       := 0;
+      SplitterWaveform.Top     := 0;
+      actTimeline.Checked      := AValue;
+      LayoutWaveform.Visible   := AValue;
+      SplitterWaveform.Visible := AValue;
     end
     else
     begin
-      actWaveformPreview.Checked := AValue;
-      LayoutWaveform.Visible     := AValue;
-      frmWaveform.Visible        := AValue;
+      actTimeline.Checked    := AValue;
+      LayoutWaveform.Visible := AValue;
+      frmWaveform.Visible    := AValue;
     end;
 end;
 

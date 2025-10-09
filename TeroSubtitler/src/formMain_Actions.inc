@@ -74,9 +74,9 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actWaveformPreviewExecute(Sender: TObject);
+procedure TfrmMain.actTimelineExecute(Sender: TObject);
 begin
-  SetWaveformPreview(not actWaveformPreview.Checked);
+  SetWaveformPreview(not actTimeline.Checked);
 end;
 
 // -----------------------------------------------------------------------------
@@ -890,7 +890,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actLoadVideoExecute(Sender: TObject);
+procedure TfrmMain.actLoadMediaExecute(Sender: TObject);
 begin
   if LoadVideoWithDialog
     then MPV.Stop;
@@ -898,13 +898,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actCloseVideoExecute(Sender: TObject);
+procedure TfrmMain.actCloseMediaExecute(Sender: TObject);
 begin
   MPV.Close;
   WAVE.EmptyText := '';
   WAVE.Close;
   FreeThumbnails;
-  actCloseVideo.Enabled  := False;
+  actCloseMedia.Enabled  := False;
   actWaveExtract.Enabled := False;
   lblMediaTime.Caption   := '';
   lblMediaLength.Caption := '';
@@ -1328,7 +1328,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.actLoadVideoFromURLExecute(Sender: TObject);
+procedure TfrmMain.actLoadMediaFromURLExecute(Sender: TObject);
 var
   s: String;
 begin

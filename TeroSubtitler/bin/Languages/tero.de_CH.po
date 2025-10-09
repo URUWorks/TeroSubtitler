@@ -850,6 +850,11 @@ msgctxt "proclocalize.lngschhmmsszzz"
 msgid "HH:MM:SS.ZZZ"
 msgstr "St:Mi:Se.ZZZ"
 
+#: proclocalize.lngscmedia
+msgctxt "proclocalize.lngscmedia"
+msgid "Media"
+msgstr ""
+
 #: proclocalize.lngscmilliseconds
 msgctxt "proclocalize.lngscmilliseconds"
 msgid "Milliseconds"
@@ -883,11 +888,6 @@ msgctxt "proclocalize.lngsctools"
 msgid "Tools"
 msgstr "Werkzeuge"
 
-#: proclocalize.lngscvideo
-msgctxt "proclocalize.lngscvideo"
-msgid "Video"
-msgstr "Video"
-
 #: proclocalize.lngscvideofilters
 msgctxt "proclocalize.lngscvideofilters"
 msgid "Video filters"
@@ -899,8 +899,10 @@ msgid "View"
 msgstr "Ansicht"
 
 #: proclocalize.lngscwaveform
+#, fuzzy
+#| msgid "Waveform"
 msgctxt "proclocalize.lngscwaveform"
-msgid "Waveform"
+msgid "Timeline"
 msgstr "Wellenform"
 
 #: proclocalize.lngscxml
@@ -912,8 +914,10 @@ msgid "Analyzing file..."
 msgstr "Datei wird analysiert ..."
 
 #: proclocalize.lngsecodec
+#, fuzzy
+#| msgid "Codec"
 msgctxt "proclocalize.lngsecodec"
-msgid "Codec"
+msgid "Format"
 msgstr "Codec"
 
 #: proclocalize.lngseechangelist
@@ -934,7 +938,9 @@ msgid "Language"
 msgstr "Sprache"
 
 #: proclocalize.lngselectencodingtouse
-msgid "Select the Encoding to use:"
+#, fuzzy
+#| msgid "Select the Encoding to use:"
+msgid "Select encoding:"
 msgstr "Bitte Zeichencodierung auswählen:"
 
 #: proclocalize.lngselectfpstouse
@@ -2824,13 +2830,13 @@ msgctxt "tfrmmain.actcloseapp.caption"
 msgid "Close"
 msgstr "Schliessen"
 
+#: tfrmmain.actclosemedia.caption
+msgid "Close media"
+msgstr ""
+
 #: tfrmmain.actclosesubtitle.caption
 msgid "Close subtitles"
 msgstr "Untertitel schliessen"
-
-#: tfrmmain.actclosevideo.caption
-msgid "Close video"
-msgstr "Video schliessen"
 
 #: tfrmmain.actcombineentries.caption
 msgid "Combine entries"
@@ -3130,6 +3136,21 @@ msgctxt "tfrmmain.actlistmode.caption"
 msgid "List mode"
 msgstr "Listenmodus"
 
+#: tfrmmain.actloadmedia.caption
+msgid "Open media..."
+msgstr ""
+
+#: tfrmmain.actloadmedia.hint
+#, fuzzy
+#| msgid "Open a video file"
+msgctxt "tfrmmain.actloadmedia.hint"
+msgid "Open a media file"
+msgstr "Eine Videodatei öffnen"
+
+#: tfrmmain.actloadmediafromurl.caption
+msgid "Open media from URL..."
+msgstr ""
+
 #: tfrmmain.actloadproject.caption
 msgid "Load project..."
 msgstr "Projekt laden..."
@@ -3151,18 +3172,6 @@ msgstr "Transkription..."
 #: tfrmmain.actloadtranslation.caption
 msgid "Load translation..."
 msgstr "Übersetzung laden..."
-
-#: tfrmmain.actloadvideo.caption
-msgid "Open video..."
-msgstr "Video öffnen..."
-
-#: tfrmmain.actloadvideo.hint
-msgid "Open a video file"
-msgstr "Eine Videodatei öffnen"
-
-#: tfrmmain.actloadvideofromurl.caption
-msgid "Open video from URL..."
-msgstr "Video über URL öffnen..."
 
 #: tfrmmain.actmarkentry.caption
 msgid "Mark entry"
@@ -3336,8 +3345,10 @@ msgid "Multiple replace..."
 msgstr "Mehrfach ersetzen..."
 
 #: tfrmmain.actnewsubtitle.caption
+#, fuzzy
+#| msgid "New subtitle"
 msgctxt "tfrmmain.actnewsubtitle.caption"
-msgid "New subtitle"
+msgid "New project"
 msgstr "Neuer Untertitel"
 
 #: tfrmmain.actnewsubtitle.hint
@@ -3795,6 +3806,11 @@ msgstr "Schreibmaschinen-Effekt"
 msgid "Time expander/reducer..."
 msgstr "Zeit dehnen/kürzen..."
 
+#: tfrmmain.acttimeline.caption
+msgctxt "tfrmmain.acttimeline.caption"
+msgid "Timeline"
+msgstr ""
+
 #: tfrmmain.acttimemode.caption
 msgctxt "tfrmmain.acttimemode.caption"
 msgid "Time mode"
@@ -4031,11 +4047,6 @@ msgstr "Szenenwechsel ein- oder ausschalten"
 msgid "Extract waveform..."
 msgstr "Wellenform extrahieren..."
 
-#: tfrmmain.actwaveformpreview.caption
-msgctxt "tfrmmain.actwaveformpreview.caption"
-msgid "Waveform preview"
-msgstr "Wellenform-Vorschau"
-
 #: tfrmmain.actwebpreview.caption
 msgid "Web Preview..."
 msgstr "Web-Vorschau..."
@@ -4188,8 +4199,10 @@ msgid "Translation memory"
 msgstr "Übersetzungsspeicher"
 
 #: tfrmmain.mnuvideo.caption
+#, fuzzy
+#| msgid "Video"
 msgctxt "tfrmmain.mnuvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "Video"
 
 #: tfrmmain.mnuvideoaspectratio.caption
@@ -4286,7 +4299,9 @@ msgid "Initial time"
 msgstr "Startzeit"
 
 #: tfrmmain.tedpause.hint
-msgid "Pause"
+#, fuzzy
+#| msgid "Pause"
+msgid "Gap"
 msgstr "Pause"
 
 #: tfrmmodifyselection.btnapply.caption

@@ -207,7 +207,7 @@ begin
       MRU.Update(SubtitleInfo.Text.FileName, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPV.IsPlaying);
 
     if not AKeepVideoOpen then
-      actCloseVideo.Execute;
+      actCloseMedia.Execute;
 
     CloseTranslationMemory;
     CloseTerminology;
@@ -629,7 +629,7 @@ begin
     if FileExists(FileName) then
     begin
       if not MPVOptions.KeepVideoOpen then
-        actCloseVideoExecute(NIL)
+        actCloseMediaExecute(NIL)
       else
         MPVOptions.KeepVideoOpen := False;
 
@@ -662,9 +662,9 @@ begin
       EnableActionsByTag([TAG_ACTION_AUDIO], True);
     end;
 
-    if (WAVE.IsPeakDataLoaded and not actWaveformPreview.Checked) or
-       (not WAVE.IsPeakDataLoaded and actWaveformPreview.Checked) then
-      actWaveformPreview.Execute;
+    if (WAVE.IsPeakDataLoaded and not actTimeline.Checked) or
+       (not WAVE.IsPeakDataLoaded and actTimeline.Checked) then
+      actTimeline.Execute;
   end;
 end;
 

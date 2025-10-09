@@ -835,6 +835,11 @@ msgctxt "proclocalize.lngschhmmsszzz"
 msgid "HH:MM:SS.ZZZ"
 msgstr ""
 
+#: proclocalize.lngscmedia
+msgctxt "proclocalize.lngscmedia"
+msgid "Media"
+msgstr ""
+
 #: proclocalize.lngscmilliseconds
 msgctxt "proclocalize.lngscmilliseconds"
 msgid "Milliseconds"
@@ -868,11 +873,6 @@ msgctxt "proclocalize.lngsctools"
 msgid "Tools"
 msgstr "工具"
 
-#: proclocalize.lngscvideo
-msgctxt "proclocalize.lngscvideo"
-msgid "Video"
-msgstr "视频"
-
 #: proclocalize.lngscvideofilters
 msgctxt "proclocalize.lngscvideofilters"
 msgid "Video filters"
@@ -884,8 +884,10 @@ msgid "View"
 msgstr "视图"
 
 #: proclocalize.lngscwaveform
+#, fuzzy
+#| msgid "Waveform"
 msgctxt "proclocalize.lngscwaveform"
-msgid "Waveform"
+msgid "Timeline"
 msgstr "音频波形"
 
 #: proclocalize.lngscxml
@@ -897,8 +899,10 @@ msgid "Analyzing file..."
 msgstr "分析文件..."
 
 #: proclocalize.lngsecodec
+#, fuzzy
+#| msgid "Codec"
 msgctxt "proclocalize.lngsecodec"
-msgid "Codec"
+msgid "Format"
 msgstr "编解码器"
 
 #: proclocalize.lngseechangelist
@@ -919,7 +923,9 @@ msgid "Language"
 msgstr "语言"
 
 #: proclocalize.lngselectencodingtouse
-msgid "Select the Encoding to use:"
+#, fuzzy
+#| msgid "Select the Encoding to use:"
+msgid "Select encoding:"
 msgstr "选择要使用的编码："
 
 #: proclocalize.lngselectfpstouse
@@ -2803,13 +2809,13 @@ msgctxt "tfrmmain.actcloseapp.caption"
 msgid "Close"
 msgstr "关闭"
 
+#: tfrmmain.actclosemedia.caption
+msgid "Close media"
+msgstr ""
+
 #: tfrmmain.actclosesubtitle.caption
 msgid "Close subtitles"
 msgstr "关闭字幕"
-
-#: tfrmmain.actclosevideo.caption
-msgid "Close video"
-msgstr "关闭视频"
 
 #: tfrmmain.actcombineentries.caption
 msgid "Combine entries"
@@ -3111,6 +3117,21 @@ msgctxt "tfrmmain.actlistmode.caption"
 msgid "List mode"
 msgstr "列表模式"
 
+#: tfrmmain.actloadmedia.caption
+msgid "Open media..."
+msgstr ""
+
+#: tfrmmain.actloadmedia.hint
+#, fuzzy
+#| msgid "Open a video file"
+msgctxt "tfrmmain.actloadmedia.hint"
+msgid "Open a media file"
+msgstr "打开视频文件"
+
+#: tfrmmain.actloadmediafromurl.caption
+msgid "Open media from URL..."
+msgstr ""
+
 #: tfrmmain.actloadproject.caption
 msgid "Load project..."
 msgstr "载入项目..."
@@ -3132,18 +3153,6 @@ msgstr "转录..."
 #: tfrmmain.actloadtranslation.caption
 msgid "Load translation..."
 msgstr "载入翻译..."
-
-#: tfrmmain.actloadvideo.caption
-msgid "Open video..."
-msgstr "打开视频..."
-
-#: tfrmmain.actloadvideo.hint
-msgid "Open a video file"
-msgstr "打开视频文件"
-
-#: tfrmmain.actloadvideofromurl.caption
-msgid "Open video from URL..."
-msgstr "从 URL 打开视频..."
 
 #: tfrmmain.actmarkentry.caption
 msgid "Mark entry"
@@ -3318,8 +3327,10 @@ msgid "Multiple replace..."
 msgstr "多重替换..."
 
 #: tfrmmain.actnewsubtitle.caption
+#, fuzzy
+#| msgid "New subtitle"
 msgctxt "tfrmmain.actnewsubtitle.caption"
-msgid "New subtitle"
+msgid "New project"
 msgstr "新字幕"
 
 #: tfrmmain.actnewsubtitle.hint
@@ -3779,6 +3790,11 @@ msgstr "打字机效果"
 msgid "Time expander/reducer..."
 msgstr "时间扩展/减少..."
 
+#: tfrmmain.acttimeline.caption
+msgctxt "tfrmmain.acttimeline.caption"
+msgid "Timeline"
+msgstr ""
+
 #: tfrmmain.acttimemode.caption
 msgctxt "tfrmmain.acttimemode.caption"
 msgid "Time mode"
@@ -4013,11 +4029,6 @@ msgstr ""
 msgid "Extract waveform..."
 msgstr "提取波形..."
 
-#: tfrmmain.actwaveformpreview.caption
-msgctxt "tfrmmain.actwaveformpreview.caption"
-msgid "Waveform preview"
-msgstr "波形预览"
-
 #: tfrmmain.actwebpreview.caption
 msgid "Web Preview..."
 msgstr "网络预览..."
@@ -4170,8 +4181,10 @@ msgid "Translation memory"
 msgstr "翻译存储器"
 
 #: tfrmmain.mnuvideo.caption
+#, fuzzy
+#| msgid "Video"
 msgctxt "tfrmmain.mnuvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "视频"
 
 #: tfrmmain.mnuvideoaspectratio.caption
@@ -4268,7 +4281,9 @@ msgid "Initial time"
 msgstr "初始时间"
 
 #: tfrmmain.tedpause.hint
-msgid "Pause"
+#, fuzzy
+#| msgid "Pause"
+msgid "Gap"
 msgstr "暂停"
 
 #: tfrmmodifyselection.btnapply.caption

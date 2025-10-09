@@ -51,7 +51,7 @@ type
     actAlignToRight: TAction;
     actAlignToNone: TAction;
     actCombineEntries: TAction;
-    actCloseVideo: TAction;
+    actCloseMedia: TAction;
     actFixSubtitles: TAction;
     actFontColorDlg: TAction;
     actFontColor: TAction;
@@ -231,7 +231,7 @@ type
     actAddNote: TAction;
     actHelp: TAction;
     actTranslate: TAction;
-    actLoadVideoFromURL: TAction;
+    actLoadMediaFromURL: TAction;
     actSplitEntryAtPosition: TAction;
     actWebReference: TAction;
     actShowColumnCPL: TAction;
@@ -260,7 +260,7 @@ type
     actTimeExpander: TAction;
     actSaveTranslation: TAction;
     actSaveSubtitle: TAction;
-    actLoadVideo: TAction;
+    actLoadMedia: TAction;
     actSelectAll: TAction;
     actAutoBreakEntry: TAction;
     actMediaZoomSelection: TAction;
@@ -295,7 +295,7 @@ type
     actSourceMode: TAction;
     actUnDockWaveform: TAction;
     actVideoPreview: TAction;
-    actWaveformPreview: TAction;
+    actTimeline: TAction;
     actTranslatorMode: TAction;
     actUnDockVideo: TAction;
     actReplace: TAction;
@@ -1041,7 +1041,7 @@ type
     procedure actTranscriptionModeExecute(Sender: TObject);
     procedure actTranslatorModeExecute(Sender: TObject);
     procedure actVideoPreviewExecute(Sender: TObject);
-    procedure actWaveformPreviewExecute(Sender: TObject);
+    procedure actTimelineExecute(Sender: TObject);
     procedure actNewSubtitleExecute(Sender: TObject);
     procedure actLoadSubtitleExecute(Sender: TObject);
     procedure actLoadTranslationExecute(Sender: TObject);
@@ -1121,8 +1121,8 @@ type
     procedure actSelectCurrentToBeginningExecute(Sender: TObject);
     procedure actSelectCurrentToEndExecute(Sender: TObject);
     procedure actModifySelectionExecute(Sender: TObject);
-    procedure actLoadVideoExecute(Sender: TObject);
-    procedure actCloseVideoExecute(Sender: TObject);
+    procedure actLoadMediaExecute(Sender: TObject);
+    procedure actCloseMediaExecute(Sender: TObject);
     procedure actFindExecute(Sender: TObject);
     procedure actFindNextExecute(Sender: TObject);
     procedure actFindPreviousExecute(Sender: TObject);
@@ -1169,7 +1169,7 @@ type
     procedure actWebReferenceExecute(Sender: TObject);
     procedure actSplitEntryAtPositionExecute(Sender: TObject);
     procedure actAddNoteExecute(Sender: TObject);
-    procedure actLoadVideoFromURLExecute(Sender: TObject);
+    procedure actLoadMediaFromURLExecute(Sender: TObject);
     procedure actTranslateExecute(Sender: TObject);
     procedure actWaveExtractExecute(Sender: TObject);
     procedure actSettingsExecute(Sender: TObject);

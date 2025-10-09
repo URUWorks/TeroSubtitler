@@ -137,7 +137,7 @@ begin
       CheckColorTheme(frmWaveform);
       LoadFormSettings(frmWaveform);
 
-      if actWaveformPreview.Checked then
+      if actTimeline.Checked then
         frmWaveform.Show;
     end;
 end;
@@ -158,8 +158,8 @@ begin
         LayoutWaveform.Parent    := frmMain;
         LayoutWaveform.Align     := alBottom;
         LayoutWaveform.Constraints.MaxHeight := 300;
-        LayoutWaveform.Visible   := actWaveformPreview.Checked;
-        SplitterWaveform.Visible := actWaveformPreview.Checked;
+        LayoutWaveform.Visible   := actTimeline.Checked;
+        SplitterWaveform.Visible := actTimeline.Checked;
         SplitterWaveform.Top     := 0;
       end;
   end;
