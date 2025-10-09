@@ -42,6 +42,7 @@
 - fixed: Letter trimming of italic subtitles in Turkish #315
 - fixed: Numbers overlap in CPL column if three or more lines in entry and a breach #311
 - fixed: ERROR ffmpeg.exe dubbing video with elevenlabs #305
+- improved: Select source in search
 - improved: SUP Export
 - improved: Video thumbnails
 - updated: Lazarus 4.2
