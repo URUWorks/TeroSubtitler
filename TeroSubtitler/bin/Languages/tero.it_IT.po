@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 26.08.2025)\n"
+"Project-Id-Version: Tero Subtitler - IT - 10.10.2025\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -841,7 +841,7 @@ msgstr "OO:MM:SS.ZZZ"
 #: proclocalize.lngscmedia
 msgctxt "proclocalize.lngscmedia"
 msgid "Media"
-msgstr ""
+msgstr "Media"
 
 #: proclocalize.lngscmilliseconds
 msgctxt "proclocalize.lngscmilliseconds"
@@ -887,11 +887,9 @@ msgid "View"
 msgstr "Visualizza"
 
 #: proclocalize.lngscwaveform
-#, fuzzy
-#| msgid "Waveform"
 msgctxt "proclocalize.lngscwaveform"
 msgid "Timeline"
-msgstr "Forma d’onda"
+msgstr "Timeline"
 
 #: proclocalize.lngscxml
 msgid "XML"
@@ -902,11 +900,9 @@ msgid "Analyzing file..."
 msgstr "Analisi file..."
 
 #: proclocalize.lngsecodec
-#, fuzzy
-#| msgid "Codec"
 msgctxt "proclocalize.lngsecodec"
 msgid "Format"
-msgstr "Codifica"
+msgstr "Formato"
 
 #: proclocalize.lngseechangelist
 msgid "Do you want to see the changelog?"
@@ -926,10 +922,8 @@ msgid "Language"
 msgstr "Lingua"
 
 #: proclocalize.lngselectencodingtouse
-#, fuzzy
-#| msgid "Select the Encoding to use:"
 msgid "Select encoding:"
-msgstr "Seleziona la codifica da usare:"
+msgstr "Seleziona codifica:"
 
 #: proclocalize.lngselectfpstouse
 msgid "Select FPS to use:"
@@ -2813,7 +2807,7 @@ msgstr "Chiudi"
 
 #: tfrmmain.actclosemedia.caption
 msgid "Close media"
-msgstr ""
+msgstr "Chiudi media"
 
 #: tfrmmain.actclosesubtitle.caption
 msgid "Close subtitles"
@@ -3116,18 +3110,16 @@ msgstr "Modalità elenco"
 
 #: tfrmmain.actloadmedia.caption
 msgid "Open media..."
-msgstr ""
+msgstr "Apri media..."
 
 #: tfrmmain.actloadmedia.hint
-#, fuzzy
-#| msgid "Open a video file"
 msgctxt "tfrmmain.actloadmedia.hint"
 msgid "Open a media file"
-msgstr "Apri un file video"
+msgstr "Apri file media"
 
 #: tfrmmain.actloadmediafromurl.caption
 msgid "Open media from URL..."
-msgstr ""
+msgstr "Apri media da URL..."
 
 #: tfrmmain.actloadproject.caption
 msgid "Load project..."
@@ -3323,11 +3315,9 @@ msgid "Multiple replace..."
 msgstr "Sostituzioni multiple..."
 
 #: tfrmmain.actnewsubtitle.caption
-#, fuzzy
-#| msgid "New subtitle"
 msgctxt "tfrmmain.actnewsubtitle.caption"
 msgid "New project"
-msgstr "Nuovo sottotitolo"
+msgstr "Nuovo progetto"
 
 #: tfrmmain.actnewsubtitle.hint
 msgid "Start a new subtitle project"
@@ -3787,7 +3777,7 @@ msgstr "Aumenta/diminuisci tempi..."
 #: tfrmmain.acttimeline.caption
 msgctxt "tfrmmain.acttimeline.caption"
 msgid "Timeline"
-msgstr ""
+msgstr "Timeline"
 
 #: tfrmmain.acttimemode.caption
 msgctxt "tfrmmain.acttimemode.caption"
@@ -4064,7 +4054,7 @@ msgstr "Posizione attuale video"
 
 #: tfrmmain.menuitem291.caption
 msgid "Remove leading hyphens"
-msgstr ""
+msgstr "Rimuovi trattini iniziali"
 
 #: tfrmmain.mnuedit.caption
 msgctxt "tfrmmain.mnuedit.caption"
@@ -4175,11 +4165,10 @@ msgid "Translation memory"
 msgstr "Memoria traduzione"
 
 #: tfrmmain.mnuvideo.caption
-#, fuzzy
 #| msgid "Video"
 msgctxt "tfrmmain.mnuvideo.caption"
 msgid "Media"
-msgstr "Video"
+msgstr "Media"
 
 #: tfrmmain.mnuvideoaspectratio.caption
 msgid "Aspect ratio"
@@ -4275,10 +4264,8 @@ msgid "Initial time"
 msgstr "Tempo iniziale"
 
 #: tfrmmain.tedpause.hint
-#, fuzzy
-#| msgid "Pause"
 msgid "Gap"
-msgstr "Pausa"
+msgstr "Gap"
 
 #: tfrmmodifyselection.btnapply.caption
 msgctxt "tfrmmodifyselection.btnapply.caption"
@@ -5614,4 +5601,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
