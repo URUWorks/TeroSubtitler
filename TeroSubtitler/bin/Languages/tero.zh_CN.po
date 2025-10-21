@@ -123,7 +123,9 @@ msgid "Contains a prohibited character"
 msgstr "包含禁用字符"
 
 #: proclocalize.lngasreadingvideofile
-msgid "Reading video file..."
+#, fuzzy
+#| msgid "Reading video file..."
+msgid "Reading media file..."
 msgstr "读取视频文件中..."
 
 #: proclocalize.lngasrepeatedchars
@@ -259,8 +261,7 @@ msgid "Auto-detect"
 msgstr "自动检测"
 
 #: proclocalize.lngdetectdialogsegmentswarning
-msgid ""
-"Attempting to detect dialogue segments deletes all entries from the list."
+msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "试图检测对话片段时，会删除列表中的所有条目。"
 
 #: proclocalize.lngdownloadcanceled
@@ -307,7 +308,9 @@ msgid "No content downloaded, missing file or no Internet connection."
 msgstr "未下载内容、文件丢失或无网络连接。"
 
 #: proclocalize.lngfeaturenotavailablefromurl
-msgid "Function not available for online video."
+#, fuzzy
+#| msgid "Function not available for online video."
+msgid "Function not available for online media."
 msgstr "该功能不适用于在线视频。"
 
 #: proclocalize.lngfilechanged
@@ -571,9 +574,7 @@ msgid "#"
 msgstr ""
 
 #: proclocalize.lnglibmpverror
-msgid ""
-"Unable to find the required libraries to run the embedded mpv player. Please "
-"download them."
+msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
 msgstr "无法找到运行嵌入式 mpv 播放器所需的库。请下载。"
 
 #: proclocalize.lnglibmpvglerror
@@ -684,7 +685,9 @@ msgid "Open file"
 msgstr "打开文件"
 
 #: proclocalize.lngopenvideofromurl
-msgid "Open video from"
+#, fuzzy
+#| msgid "Open video from"
+msgid "Open media from"
 msgstr "打开视频"
 
 #: proclocalize.lngoperationcancelled
@@ -958,11 +961,8 @@ msgid "Shortcut currently used in “%s”."
 msgstr "当前在\"%s \"中使用的快捷方式。"
 
 #: proclocalize.lngsourcemodewarning
-msgid ""
-"Switching to source mode will change the format to “Tero Subtitler”, "
-"otherwise unsaved translations will be lost."
-msgstr ""
-"切换到源码模式后，格式将变为 \"Tero Subtitler\"，否则未保存的翻译将丢失。"
+msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
+msgstr "切换到源码模式后，格式将变为 \"Tero Subtitler\"，否则未保存的翻译将丢失。"
 
 #: proclocalize.lngspcurrentline
 #, object-pascal-format
@@ -1022,7 +1022,9 @@ msgid "Milliseconds"
 msgstr "毫秒"
 
 #: proclocalize.lngssmpv
-msgid "Video player"
+#, fuzzy
+#| msgid "Video player"
+msgid "Media player"
 msgstr "视频播放器"
 
 #: proclocalize.lngssshortcutnone
@@ -1144,15 +1146,11 @@ msgid "Words per minute average: %.2f"
 msgstr "平均每分钟单词数：%.2f"
 
 #: proclocalize.lngsubtitlehaserrorstofix
-msgid ""
-"The current subtitle set contains errors that are recommended to be "
-"resolved, but it can be saved."
+msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "当前字幕组合包含建议解决的错误，但可以保存。"
 
 #: proclocalize.lngsubtitlespecificationerror
-msgid ""
-"The current subtitles do not meet the specifications of the format to be "
-"saved."
+msgid "The current subtitles do not meet the specifications of the format to be saved."
 msgstr "当前字幕不符合要保存格式的标准。"
 
 #: proclocalize.lngsubtitlespecificationerroralign
@@ -1242,8 +1240,9 @@ msgid "Tip: Use <%s> for a web word reference"
 msgstr "提示：使用<%s>来在网络上查询单词"
 
 #: proclocalize.lngttip3
-#, object-pascal-format
-msgid "Tip: Use <%s> dock/undock video window"
+#, object-pascal-format, fuzzy
+#| msgid "Tip: Use <%s> dock/undock video window"
+msgid "Tip: Use <%s> dock/undock media window"
 msgstr "提示：使用<%s>锁定/解锁视频停靠窗口"
 
 #: proclocalize.lngttip4
@@ -1327,7 +1326,9 @@ msgid "Video tracks: %d"
 msgstr "视频轨：%d"
 
 #: proclocalize.lngwebvideounsupported
-msgid "The video format is not supported for playback in the web browser."
+#, fuzzy
+#| msgid "The video format is not supported for playback in the web browser."
+msgid "The media format is not supported for playback in the web browser."
 msgstr "不支持在网络浏览器中播放这种视频格式。"
 
 #: proclocalize.lngwizlanguage
@@ -3859,7 +3860,9 @@ msgid "Undo last action"
 msgstr "撤销上次操作"
 
 #: tfrmmain.actundockvideo.caption
-msgid "Dock video"
+#, fuzzy
+#| msgid "Dock video"
+msgid "Dock media"
 msgstr "停靠视频"
 
 #: tfrmmain.actundockwaveform.caption
@@ -3999,8 +4002,10 @@ msgid "Information..."
 msgstr "信息..."
 
 #: tfrmmain.actvideopreview.caption
+#, fuzzy
+#| msgid "Video preview"
 msgctxt "tfrmmain.actvideopreview.caption"
-msgid "Video preview"
+msgid "Media preview"
 msgstr "视频预览"
 
 #: tfrmmain.actviewshotchange.caption
@@ -4228,8 +4233,10 @@ msgid "Toolbars"
 msgstr "工具栏"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
+#, fuzzy
+#| msgid "Video"
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "视频"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
@@ -4523,7 +4530,9 @@ msgid "Settings"
 msgstr "设置"
 
 #: tfrmsettings.chkautoplay.caption
-msgid "Autoplay on video load"
+#, fuzzy
+#| msgid "Autoplay on video load"
+msgid "Autoplay on media load"
 msgstr "视频加载后自动播放"
 
 #: tfrmsettings.chkdotsonsplit.caption
@@ -5533,9 +5542,7 @@ msgid "Choose workspace layout and timecode mode:"
 msgstr "选择工作区布局和时间编码模式："
 
 #: tfrmwizard.lblexperience.caption
-msgid ""
-"In just a few steps, you'll be setup and ready for the best subtitling "
-"experience."
+msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
 msgstr "只需几步，您就可以完成设置，获得最佳字幕制作体验。"
 
 #: tfrmwizard.lblfasterwhisper.caption
@@ -5566,10 +5573,7 @@ msgid "Essential, used for playing video."
 msgstr "必不可少，用于播放视频。"
 
 #: tfrmwizard.lblrequiredfiles.caption
-msgid ""
-"For Tero Subtitler to function properly, the following libraries are "
-"necessary; if they are not found on your system, Tero Subtitler can download "
-"them for you."
+msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
 msgstr ""
 "为使 Tero Subtitler 正常运行，需要使用以下库\n"
 "如果您的系统中没有这些库，Tero Subtitler 可以为您下载。"
@@ -5611,3 +5615,4 @@ msgstr "反转"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "纵向"
+

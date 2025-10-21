@@ -125,7 +125,9 @@ msgid "Contains a prohibited character"
 msgstr "Innehåller ett otillåtet tecken"
 
 #: proclocalize.lngasreadingvideofile
-msgid "Reading video file..."
+#, fuzzy
+#| msgid "Reading video file..."
+msgid "Reading media file..."
 msgstr "Läser videofil ..."
 
 #: proclocalize.lngasrepeatedchars
@@ -312,7 +314,9 @@ msgstr ""
 "Filen saknas eller ingen internetanslutning."
 
 #: proclocalize.lngfeaturenotavailablefromurl
-msgid "Function not available for online video."
+#, fuzzy
+#| msgid "Function not available for online video."
+msgid "Function not available for online media."
 msgstr "Funktionen är inte tillgänglig för nätvideor."
 
 #: proclocalize.lngfilechanged
@@ -690,7 +694,9 @@ msgid "Open file"
 msgstr "Öppna fil"
 
 #: proclocalize.lngopenvideofromurl
-msgid "Open video from"
+#, fuzzy
+#| msgid "Open video from"
+msgid "Open media from"
 msgstr "Öppna video från"
 
 #: proclocalize.lngoperationcancelled
@@ -1038,7 +1044,9 @@ msgid "Milliseconds"
 msgstr "Millisekunder"
 
 #: proclocalize.lngssmpv
-msgid "Video player"
+#, fuzzy
+#| msgid "Video player"
+msgid "Media player"
 msgstr "Videospelare"
 
 #: proclocalize.lngssshortcutnone
@@ -1254,8 +1262,9 @@ msgid "Tip: Use <%s> for a web word reference"
 msgstr "Tips: Använd <%s> för att slå upp ett ord på webben"
 
 #: proclocalize.lngttip3
-#, object-pascal-format
-msgid "Tip: Use <%s> dock/undock video window"
+#, object-pascal-format, fuzzy
+#| msgid "Tip: Use <%s> dock/undock video window"
+msgid "Tip: Use <%s> dock/undock media window"
 msgstr "Tips: Använd <%s> för att fästa/lossa videofönstret"
 
 #: proclocalize.lngttip4
@@ -1339,7 +1348,9 @@ msgid "Video tracks: %d"
 msgstr "Videospår: %d"
 
 #: proclocalize.lngwebvideounsupported
-msgid "The video format is not supported for playback in the web browser."
+#, fuzzy
+#| msgid "The video format is not supported for playback in the web browser."
+msgid "The media format is not supported for playback in the web browser."
 msgstr "Videoformatet stöds inte för uppspelning i webbläsaren."
 
 #: proclocalize.lngwizlanguage
@@ -3890,7 +3901,9 @@ msgid "Undo last action"
 msgstr "Ångra senaste åtgärden"
 
 #: tfrmmain.actundockvideo.caption
-msgid "Dock video"
+#, fuzzy
+#| msgid "Dock video"
+msgid "Dock media"
 msgstr "Fäst videofönstret"
 
 #: tfrmmain.actundockwaveform.caption
@@ -4030,8 +4043,10 @@ msgid "Information..."
 msgstr "Information..."
 
 #: tfrmmain.actvideopreview.caption
+#, fuzzy
+#| msgid "Video preview"
 msgctxt "tfrmmain.actvideopreview.caption"
-msgid "Video preview"
+msgid "Media preview"
 msgstr "Förhandsvisning av video"
 
 #: tfrmmain.actviewshotchange.caption
@@ -4261,8 +4276,10 @@ msgid "Toolbars"
 msgstr "Verktygsfält"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
+#, fuzzy
+#| msgid "Video"
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "Videoverktygsfält"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
@@ -4559,7 +4576,9 @@ msgid "Settings"
 msgstr "Inställningar"
 
 #: tfrmsettings.chkautoplay.caption
-msgid "Autoplay on video load"
+#, fuzzy
+#| msgid "Autoplay on video load"
+msgid "Autoplay on media load"
 msgstr "Spela upp automatiskt vid videoladdning"
 
 #: tfrmsettings.chkdotsonsplit.caption

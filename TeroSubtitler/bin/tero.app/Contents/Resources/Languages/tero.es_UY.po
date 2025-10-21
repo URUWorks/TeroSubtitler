@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #: proclocalize.lngabversion
 #, object-pascal-format
@@ -123,8 +123,8 @@ msgid "Contains a prohibited character"
 msgstr "Contiene caracteres prohibidos"
 
 #: proclocalize.lngasreadingvideofile
-msgid "Reading video file..."
-msgstr "Leyendo archivo de vídeo..."
+msgid "Reading media file..."
+msgstr "Leyendo archivo de medios..."
 
 #: proclocalize.lngasrepeatedchars
 msgid "Repeated character"
@@ -306,7 +306,7 @@ msgid "No content downloaded, missing file or no Internet connection."
 msgstr "No hay contenido descargado, falta un archivo o no hay conexión a Internet."
 
 #: proclocalize.lngfeaturenotavailablefromurl
-msgid "Function not available for online video."
+msgid "Function not available for online media."
 msgstr "Función no disponible para video en línea."
 
 #: proclocalize.lngfilechanged
@@ -681,8 +681,8 @@ msgid "Open file"
 msgstr "Abrir archivo"
 
 #: proclocalize.lngopenvideofromurl
-msgid "Open video from"
-msgstr "Abrir vídeo desde"
+msgid "Open media from"
+msgstr "Abrir medio desde"
 
 #: proclocalize.lngoperationcancelled
 msgid "Operation cancelled."
@@ -834,6 +834,11 @@ msgctxt "proclocalize.lngschhmmsszzz"
 msgid "HH:MM:SS.ZZZ"
 msgstr "HH:MM:SS.ZZZ"
 
+#: proclocalize.lngscmedia
+msgctxt "proclocalize.lngscmedia"
+msgid "Media"
+msgstr "Medio"
+
 #: proclocalize.lngscmilliseconds
 msgctxt "proclocalize.lngscmilliseconds"
 msgid "Milliseconds"
@@ -867,11 +872,6 @@ msgctxt "proclocalize.lngsctools"
 msgid "Tools"
 msgstr "Herramientas"
 
-#: proclocalize.lngscvideo
-msgctxt "proclocalize.lngscvideo"
-msgid "Video"
-msgstr "Vídeo"
-
 #: proclocalize.lngscvideofilters
 msgctxt "proclocalize.lngscvideofilters"
 msgid "Video filters"
@@ -884,8 +884,8 @@ msgstr "Ver"
 
 #: proclocalize.lngscwaveform
 msgctxt "proclocalize.lngscwaveform"
-msgid "Waveform"
-msgstr "Forma de onda"
+msgid "Timeline"
+msgstr "Línea de tiempo"
 
 #: proclocalize.lngscxml
 msgid "XML"
@@ -897,7 +897,7 @@ msgstr "Analizando archivo..."
 
 #: proclocalize.lngsecodec
 msgctxt "proclocalize.lngsecodec"
-msgid "Codec"
+msgid "Format"
 msgstr "Codificación"
 
 #: proclocalize.lngseechangelist
@@ -918,8 +918,8 @@ msgid "Language"
 msgstr "Idioma"
 
 #: proclocalize.lngselectencodingtouse
-msgid "Select the Encoding to use:"
-msgstr "Seleccione la codificación a utilizar:"
+msgid "Select encoding:"
+msgstr "Seleccione codificación:"
 
 #: proclocalize.lngselectfpstouse
 msgid "Select FPS to use:"
@@ -1016,7 +1016,7 @@ msgid "Milliseconds"
 msgstr "Milisegundos"
 
 #: proclocalize.lngssmpv
-msgid "Video player"
+msgid "Media player"
 msgstr "Reproductor"
 
 #: proclocalize.lngssshortcutnone
@@ -1233,8 +1233,8 @@ msgstr "Consejo: utilice <%s> para una referencia de palabra web"
 
 #: proclocalize.lngttip3
 #, object-pascal-format
-msgid "Tip: Use <%s> dock/undock video window"
-msgstr "Consejo: utilice <%s> acoplar/desacoplar ventana de vídeo"
+msgid "Tip: Use <%s> dock/undock media window"
+msgstr "Consejo: utilice <%s> acoplar/desacoplar ventana de medios"
 
 #: proclocalize.lngttip4
 #, object-pascal-format
@@ -1317,7 +1317,7 @@ msgid "Video tracks: %d"
 msgstr "Pistas de vídeo: %d"
 
 #: proclocalize.lngwebvideounsupported
-msgid "The video format is not supported for playback in the web browser."
+msgid "The media format is not supported for playback in the web browser."
 msgstr "El formato de vídeo no es compatible con la reproducción en navegador web."
 
 #: proclocalize.lngwizlanguage
@@ -2798,13 +2798,13 @@ msgctxt "tfrmmain.actcloseapp.caption"
 msgid "Close"
 msgstr "Cerrar"
 
+#: tfrmmain.actclosemedia.caption
+msgid "Close media"
+msgstr "Cerra media"
+
 #: tfrmmain.actclosesubtitle.caption
 msgid "Close subtitles"
 msgstr "Cerrar subtítulos"
-
-#: tfrmmain.actclosevideo.caption
-msgid "Close video"
-msgstr "Cerrar vídeo"
 
 #: tfrmmain.actcombineentries.caption
 msgid "Combine entries"
@@ -3101,6 +3101,19 @@ msgctxt "tfrmmain.actlistmode.caption"
 msgid "List mode"
 msgstr "Modo de lista"
 
+#: tfrmmain.actloadmedia.caption
+msgid "Open media..."
+msgstr "Cargar medio..."
+
+#: tfrmmain.actloadmedia.hint
+msgctxt "tfrmmain.actloadmedia.hint"
+msgid "Open a media file"
+msgstr "Abrir un archivo de medios"
+
+#: tfrmmain.actloadmediafromurl.caption
+msgid "Open media from URL..."
+msgstr "Cargar medio desde URL..."
+
 #: tfrmmain.actloadproject.caption
 msgid "Load project..."
 msgstr "Abrir proyecto..."
@@ -3122,18 +3135,6 @@ msgstr "Transcripción..."
 #: tfrmmain.actloadtranslation.caption
 msgid "Load translation..."
 msgstr "Abrir traducción..."
-
-#: tfrmmain.actloadvideo.caption
-msgid "Open video..."
-msgstr "Abrir vídeo..."
-
-#: tfrmmain.actloadvideo.hint
-msgid "Open a video file"
-msgstr "Abrir un archivo de vídeo"
-
-#: tfrmmain.actloadvideofromurl.caption
-msgid "Open video from URL..."
-msgstr "Abrir vídeo desde URL..."
 
 #: tfrmmain.actmarkentry.caption
 msgid "Mark entry"
@@ -3308,8 +3309,8 @@ msgstr "Reemplazo múltiple..."
 
 #: tfrmmain.actnewsubtitle.caption
 msgctxt "tfrmmain.actnewsubtitle.caption"
-msgid "New subtitle"
-msgstr "Nuevo subtítulo"
+msgid "New project"
+msgstr "Nuevo proyecto"
 
 #: tfrmmain.actnewsubtitle.hint
 msgid "Start a new subtitle project"
@@ -3766,6 +3767,11 @@ msgstr "Efecto máquina de escribir"
 msgid "Time expander/reducer..."
 msgstr "Expandir/reducir tiempo..."
 
+#: tfrmmain.acttimeline.caption
+msgctxt "tfrmmain.acttimeline.caption"
+msgid "Timeline"
+msgstr "Línea de tiempo"
+
 #: tfrmmain.acttimemode.caption
 msgctxt "tfrmmain.acttimemode.caption"
 msgid "Time mode"
@@ -3843,7 +3849,7 @@ msgid "Undo last action"
 msgstr "Deshacer última acción"
 
 #: tfrmmain.actundockvideo.caption
-msgid "Dock video"
+msgid "Dock media"
 msgstr "Acoplar vídeo"
 
 #: tfrmmain.actundockwaveform.caption
@@ -3984,7 +3990,7 @@ msgstr "Información..."
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
-msgid "Video preview"
+msgid "Media preview"
 msgstr "Vista previa de vídeo"
 
 #: tfrmmain.actviewshotchange.caption
@@ -3999,11 +4005,6 @@ msgstr "Habilita/deshabilita los cambios de plano"
 #: tfrmmain.actwaveextract.caption
 msgid "Extract waveform..."
 msgstr "Extraer forma de onda..."
-
-#: tfrmmain.actwaveformpreview.caption
-msgctxt "tfrmmain.actwaveformpreview.caption"
-msgid "Waveform preview"
-msgstr "Vista previa de forma de onda"
 
 #: tfrmmain.actwebpreview.caption
 msgid "Web Preview..."
@@ -4158,8 +4159,8 @@ msgstr "Memoria de traducción"
 
 #: tfrmmain.mnuvideo.caption
 msgctxt "tfrmmain.mnuvideo.caption"
-msgid "Video"
-msgstr "Vídeo"
+msgid "Media"
+msgstr "Medio"
 
 #: tfrmmain.mnuvideoaspectratio.caption
 msgid "Aspect ratio"
@@ -4218,7 +4219,7 @@ msgstr "Barra de herramientas"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "Vídeo"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
@@ -4255,7 +4256,7 @@ msgid "Initial time"
 msgstr "Tiempo inicial"
 
 #: tfrmmain.tedpause.hint
-msgid "Pause"
+msgid "Gap"
 msgstr "Pausa"
 
 #: tfrmmodifyselection.btnapply.caption
@@ -4512,7 +4513,7 @@ msgid "Settings"
 msgstr "Ajustes"
 
 #: tfrmsettings.chkautoplay.caption
-msgid "Autoplay on video load"
+msgid "Autoplay on media load"
 msgstr "Reproducción automática al cargar vídeo"
 
 #: tfrmsettings.chkdotsonsplit.caption

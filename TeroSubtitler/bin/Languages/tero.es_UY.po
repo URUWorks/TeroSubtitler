@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #: proclocalize.lngabversion
 #, object-pascal-format
@@ -123,8 +123,8 @@ msgid "Contains a prohibited character"
 msgstr "Contiene caracteres prohibidos"
 
 #: proclocalize.lngasreadingvideofile
-msgid "Reading video file..."
-msgstr "Leyendo archivo de vídeo..."
+msgid "Reading media file..."
+msgstr "Leyendo archivo de medios..."
 
 #: proclocalize.lngasrepeatedchars
 msgid "Repeated character"
@@ -306,7 +306,7 @@ msgid "No content downloaded, missing file or no Internet connection."
 msgstr "No hay contenido descargado, falta un archivo o no hay conexión a Internet."
 
 #: proclocalize.lngfeaturenotavailablefromurl
-msgid "Function not available for online video."
+msgid "Function not available for online media."
 msgstr "Función no disponible para video en línea."
 
 #: proclocalize.lngfilechanged
@@ -681,8 +681,8 @@ msgid "Open file"
 msgstr "Abrir archivo"
 
 #: proclocalize.lngopenvideofromurl
-msgid "Open video from"
-msgstr "Abrir vídeo desde"
+msgid "Open media from"
+msgstr "Abrir medio desde"
 
 #: proclocalize.lngoperationcancelled
 msgid "Operation cancelled."
@@ -1016,7 +1016,7 @@ msgid "Milliseconds"
 msgstr "Milisegundos"
 
 #: proclocalize.lngssmpv
-msgid "Video player"
+msgid "Media player"
 msgstr "Reproductor"
 
 #: proclocalize.lngssshortcutnone
@@ -1233,8 +1233,8 @@ msgstr "Consejo: utilice <%s> para una referencia de palabra web"
 
 #: proclocalize.lngttip3
 #, object-pascal-format
-msgid "Tip: Use <%s> dock/undock video window"
-msgstr "Consejo: utilice <%s> acoplar/desacoplar ventana de vídeo"
+msgid "Tip: Use <%s> dock/undock media window"
+msgstr "Consejo: utilice <%s> acoplar/desacoplar ventana de medios"
 
 #: proclocalize.lngttip4
 #, object-pascal-format
@@ -1317,7 +1317,7 @@ msgid "Video tracks: %d"
 msgstr "Pistas de vídeo: %d"
 
 #: proclocalize.lngwebvideounsupported
-msgid "The video format is not supported for playback in the web browser."
+msgid "The media format is not supported for playback in the web browser."
 msgstr "El formato de vídeo no es compatible con la reproducción en navegador web."
 
 #: proclocalize.lngwizlanguage
@@ -3849,7 +3849,7 @@ msgid "Undo last action"
 msgstr "Deshacer última acción"
 
 #: tfrmmain.actundockvideo.caption
-msgid "Dock video"
+msgid "Dock media"
 msgstr "Acoplar vídeo"
 
 #: tfrmmain.actundockwaveform.caption
@@ -3990,7 +3990,7 @@ msgstr "Información..."
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
-msgid "Video preview"
+msgid "Media preview"
 msgstr "Vista previa de vídeo"
 
 #: tfrmmain.actviewshotchange.caption
@@ -4219,7 +4219,7 @@ msgstr "Barra de herramientas"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "Vídeo"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
@@ -4513,7 +4513,7 @@ msgid "Settings"
 msgstr "Ajustes"
 
 #: tfrmsettings.chkautoplay.caption
-msgid "Autoplay on video load"
+msgid "Autoplay on media load"
 msgstr "Reproducción automática al cargar vídeo"
 
 #: tfrmsettings.chkdotsonsplit.caption

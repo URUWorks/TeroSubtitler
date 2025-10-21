@@ -1,88 +1,89 @@
 object frmSettings: TfrmSettings
   Left = 235
-  Height = 593
+  Height = 741
   Top = 115
-  Width = 900
+  Width = 1125
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Settings'
-  ClientHeight = 593
-  ClientWidth = 900
+  ClientHeight = 741
+  ClientWidth = 1125
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  ShowHint = True
+  LCLVersion = '4.2.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  ShowHint = True
-  LCLVersion = '3.2.0.0'
   object btnClose: TButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 801
-    Height = 26
-    Top = 559
-    Width = 91
+    Left = 1001
+    Height = 32
+    Top = 699
+    Width = 114
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
+    BorderSpacing.Right = 10
+    BorderSpacing.Bottom = 10
     Caption = 'Close'
     TabOrder = 0
     OnClick = btnCloseClick
   end
   object lstTree: TListBox
-    Left = 8
-    Height = 546
-    Top = 8
-    Width = 180
+    Left = 10
+    Height = 682
+    Top = 10
+    Width = 225
     ExtendedSelect = False
     ItemHeight = 0
     TabOrder = 1
     OnSelectionChange = lstTreeSelectionChange
   end
   object lyoGeneral: TUWLayout
-    Left = 196
-    Height = 546
-    Top = 8
-    Width = 696
-    ClientHeight = 546
-    ClientWidth = 696
+    Left = 245
+    Height = 682
+    Top = 10
+    Width = 870
+    ClientHeight = 682
+    ClientWidth = 870
     TabOrder = 2
     object lblLanguage: TLabel
       Left = 0
-      Height = 30
-      Top = 4
-      Width = 346
+      Height = 38
+      Top = 5
+      Width = 432
       AutoSize = False
       Caption = 'Language'
       ParentColor = False
       WordWrap = True
     end
     object cboLanguage: TComboBox
-      Left = 348
-      Height = 23
+      Left = 435
+      Height = 28
       Top = 0
-      Width = 348
+      Width = 435
       Anchors = [akTop, akLeft, akRight]
-      ItemHeight = 15
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 0
     end
     object edtWebReference: TEdit
       AnchorSideTop.Side = asrBottom
-      Left = 348
-      Height = 23
-      Top = 32
-      Width = 348
+      Left = 435
+      Height = 28
+      Top = 40
+      Width = 435
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Top = 8
+      BorderSpacing.Top = 10
       TabOrder = 1
     end
     object lblWebReference: TLabel
       Left = 0
-      Height = 30
-      Top = 36
-      Width = 346
+      Height = 38
+      Top = 45
+      Width = 432
       AutoSize = False
       Caption = 'Web reference'
       ParentColor = False
@@ -90,21 +91,21 @@ object frmSettings: TfrmSettings
     end
     object cboTimeCodeMode: TComboBox
       AnchorSideTop.Side = asrBottom
-      Left = 348
-      Height = 23
-      Top = 64
-      Width = 348
+      Left = 435
+      Height = 28
+      Top = 80
+      Width = 435
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Top = 8
-      ItemHeight = 15
+      BorderSpacing.Top = 10
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 2
     end
     object lblTimeCodeMode: TLabel
       Left = 0
-      Height = 30
-      Top = 68
-      Width = 346
+      Height = 38
+      Top = 85
+      Width = 432
       AutoSize = False
       Caption = 'Time code mode'
       ParentColor = False
@@ -112,9 +113,9 @@ object frmSettings: TfrmSettings
     end
     object lblDefaultFrameRate: TLabel
       Left = 0
-      Height = 30
-      Top = 100
-      Width = 346
+      Height = 38
+      Top = 125
+      Width = 432
       AutoSize = False
       Caption = 'Default input frame rate'
       ParentColor = False
@@ -122,20 +123,20 @@ object frmSettings: TfrmSettings
     end
     object cboDefaultFrameRate: TComboBox
       AnchorSideTop.Side = asrBottom
-      Left = 348
-      Height = 23
-      Top = 96
-      Width = 174
-      BorderSpacing.Top = 8
-      ItemHeight = 15
+      Left = 435
+      Height = 28
+      Top = 120
+      Width = 218
+      BorderSpacing.Top = 10
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 3
     end
     object lblDefaultFileEncoding: TLabel
       Left = 0
-      Height = 30
-      Top = 132
-      Width = 346
+      Height = 38
+      Top = 165
+      Width = 432
       AutoSize = False
       Caption = 'Default file encoding'
       ParentColor = False
@@ -143,20 +144,20 @@ object frmSettings: TfrmSettings
     end
     object cboDefaultFileEncoding: TComboBox
       AnchorSideTop.Side = asrBottom
-      Left = 348
-      Height = 23
-      Top = 128
-      Width = 348
-      BorderSpacing.Top = 8
-      ItemHeight = 15
+      Left = 435
+      Height = 28
+      Top = 160
+      Width = 435
+      BorderSpacing.Top = 10
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 4
     end
     object lblAutoBackup: TLabel
       Left = 0
-      Height = 30
-      Top = 260
-      Width = 346
+      Height = 38
+      Top = 325
+      Width = 432
       AutoSize = False
       Caption = 'Auto-backup every (minutes)'
       ParentColor = False
@@ -164,20 +165,20 @@ object frmSettings: TfrmSettings
     end
     object spnAutoBackupMinutes: TSpinEdit
       AnchorSideTop.Side = asrBottom
-      Left = 348
-      Height = 23
-      Top = 256
-      Width = 80
-      BorderSpacing.Top = 8
+      Left = 435
+      Height = 28
+      Top = 320
+      Width = 100
+      BorderSpacing.Top = 10
       MaxValue = 30
       TabOrder = 8
       Value = 5
     end
     object chkShowSplashWindow: TUWCheckBox
       Left = 0
-      Height = 19
-      Top = 296
-      Width = 18
+      Height = 24
+      Top = 370
+      Width = 22
       AutoSize = False
       Caption = 'Show splash window'
       TabOrder = 9
@@ -186,9 +187,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkShowSplashWindow
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 317
-      Width = 18
+      Height = 24
+      Top = 396
+      Width = 22
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Use Tero file dialog'
@@ -198,9 +199,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkUseOwnFileDialog
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 338
-      Width = 18
+      Height = 24
+      Top = 422
+      Width = 22
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Prompt when deleting subtitles'
@@ -210,9 +211,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkPromptForSaveWithErrors
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 422
-      Width = 18
+      Height = 24
+      Top = 526
+      Width = 22
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Interpret tags in list'
@@ -222,9 +223,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkDrawTags
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 443
-      Width = 18
+      Height = 24
+      Top = 552
+      Width = 22
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Show errors in list'
@@ -232,9 +233,9 @@ object frmSettings: TfrmSettings
     end
     object lblShiftTimeMs: TLabel
       Left = 0
-      Height = 30
-      Top = 196
-      Width = 346
+      Height = 38
+      Top = 245
+      Width = 432
       AutoSize = False
       Caption = 'Shift time (ms)'
       ParentColor = False
@@ -242,20 +243,20 @@ object frmSettings: TfrmSettings
     end
     object spnShiftTimeMs: TSpinEdit
       AnchorSideTop.Side = asrBottom
-      Left = 348
-      Height = 23
-      Top = 192
-      Width = 80
-      BorderSpacing.Top = 8
+      Left = 435
+      Height = 28
+      Top = 240
+      Width = 100
+      BorderSpacing.Top = 10
       MaxValue = 10000
       TabOrder = 6
       Value = 500
     end
     object lblDefaultFileFormat: TLabel
       Left = 0
-      Height = 30
-      Top = 164
-      Width = 346
+      Height = 38
+      Top = 205
+      Width = 432
       AutoSize = False
       Caption = 'Default file format'
       ParentColor = False
@@ -263,12 +264,12 @@ object frmSettings: TfrmSettings
     end
     object cboDefaultFileFormat: TComboBox
       AnchorSideTop.Side = asrBottom
-      Left = 348
-      Height = 23
-      Top = 160
-      Width = 174
-      BorderSpacing.Top = 8
-      ItemHeight = 15
+      Left = 435
+      Height = 28
+      Top = 200
+      Width = 218
+      BorderSpacing.Top = 10
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 5
     end
@@ -277,11 +278,11 @@ object frmSettings: TfrmSettings
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = spnAutoBackupMinutes
       AnchorSideTop.Side = asrCenter
-      Left = 433
-      Height = 15
-      Top = 260
-      Width = 68
-      BorderSpacing.Left = 5
+      Left = 541
+      Height = 20
+      Top = 324
+      Width = 88
+      BorderSpacing.Left = 6
       Caption = '(0 to disable)'
       ParentColor = False
     end
@@ -289,9 +290,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkDrawErrors
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 464
-      Width = 18
+      Height = 24
+      Top = 578
+      Width = 22
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Show gap in timeline'
@@ -301,9 +302,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkDrawWaveformGAP
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 485
-      Width = 18
+      Height = 24
+      Top = 604
+      Width = 22
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Show CPS bar'
@@ -313,9 +314,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkPromptForDeleteSubtitles
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 359
-      Width = 18
+      Height = 24
+      Top = 448
+      Width = 22
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Prompt for FPS before loading a file'
@@ -323,9 +324,9 @@ object frmSettings: TfrmSettings
     end
     object lblDialogSegmentsDetectionThreshold: TLabel
       Left = 0
-      Height = 30
-      Top = 228
-      Width = 346
+      Height = 38
+      Top = 285
+      Width = 432
       AutoSize = False
       Caption = 'Dialogue segments detection threshold (rms)'
       ParentColor = False
@@ -333,11 +334,11 @@ object frmSettings: TfrmSettings
     end
     object spnDetectDialogSegment: TSpinEdit
       AnchorSideTop.Side = asrBottom
-      Left = 348
-      Height = 23
-      Top = 224
-      Width = 80
-      BorderSpacing.Top = 8
+      Left = 435
+      Height = 28
+      Top = 280
+      Width = 100
+      BorderSpacing.Top = 10
       MaxValue = 32767
       MinValue = 100
       TabOrder = 7
@@ -347,9 +348,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkPromptForInputEncoding
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 401
-      Width = 18
+      Height = 24
+      Top = 500
+      Width = 22
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Prompt when saving file with errors'
@@ -359,9 +360,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkPromptForInputFPS
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 380
-      Width = 18
+      Height = 24
+      Top = 474
+      Width = 22
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Prompt for Encoding before loading a file'
@@ -371,9 +372,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkShowCPSBar
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 506
-      Width = 18
+      Height = 24
+      Top = 630
+      Width = 22
       AutoSize = False
       BorderSpacing.Top = 2
       Caption = 'Write BOM on save'
@@ -381,117 +382,117 @@ object frmSettings: TfrmSettings
     end
   end
   object lyoConventions: TUWLayout
-    Left = -508
-    Height = 546
-    Top = 232
-    Width = 696
-    ClientHeight = 546
-    ClientWidth = 696
+    Left = -635
+    Height = 682
+    Top = 290
+    Width = 870
+    ClientHeight = 682
+    ClientWidth = 870
     TabOrder = 3
     Visible = False
     object lblNewSubtitleMs: TLabel
       Left = 0
-      Height = 30
-      Top = 132
-      Width = 346
+      Height = 38
+      Top = 165
+      Width = 432
       AutoSize = False
       Caption = 'New subtitle (ms)'
       ParentColor = False
       WordWrap = True
     end
     object spnNewSubtitleMs: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 128
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 160
+      Width = 100
       MaxValue = 5000
-      OnChange = spnConventionChange
       TabOrder = 5
       Value = 1000
+      OnChange = spnConventionChange
     end
     object lblMinDurationMs: TLabel
       Left = 0
-      Height = 30
-      Top = 164
-      Width = 346
+      Height = 38
+      Top = 205
+      Width = 432
       AutoSize = False
       Caption = 'Min. duration / per word (ms)'
       ParentColor = False
       WordWrap = True
     end
     object spnMinDurationMs: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 160
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 200
+      Width = 100
       MaxValue = 5000
-      OnChange = spnConventionChange
       TabOrder = 6
       Value = 1000
+      OnChange = spnConventionChange
     end
     object lblMaxDurationMs: TLabel
       Left = 0
-      Height = 30
-      Top = 200
-      Width = 346
+      Height = 38
+      Top = 250
+      Width = 432
       AutoSize = False
       Caption = 'Max. duration (ms)'
       ParentColor = False
       WordWrap = True
     end
     object spnMaxDurationMs: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 196
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 245
+      Width = 100
       MaxValue = 10000
-      OnChange = spnConventionChange
       TabOrder = 8
       Value = 8000
+      OnChange = spnConventionChange
     end
     object lblSubtitlePauseMs: TLabel
       Left = 0
-      Height = 30
-      Top = 264
-      Width = 346
+      Height = 38
+      Top = 330
+      Width = 432
       AutoSize = False
       Caption = 'Min. gap'
       ParentColor = False
       WordWrap = True
     end
     object spnSubtitlePauseMs: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 260
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 325
+      Width = 100
       MaxValue = 10000
-      OnChange = spnConventionChange
       TabOrder = 10
       Value = 200
+      OnChange = spnConventionChange
     end
     object edtRepeatableChars: TEdit
-      Left = 348
-      Height = 23
-      Top = 32
-      Width = 348
+      Left = 435
+      Height = 28
+      Top = 40
+      Width = 435
       Anchors = [akTop, akLeft, akRight]
       TabOrder = 2
       OnChange = spnConventionChange
     end
     object edtProhibitedChars: TEdit
-      Left = 348
-      Height = 23
-      Top = 64
-      Width = 348
+      Left = 435
+      Height = 28
+      Top = 80
+      Width = 435
       Anchors = [akTop, akLeft, akRight]
       TabOrder = 3
       OnChange = spnConventionChange
     end
     object lblRepeatableChars: TLabel
       Left = 0
-      Height = 30
-      Top = 36
-      Width = 346
+      Height = 38
+      Top = 45
+      Width = 432
       AutoSize = False
       Caption = 'Repeatable characters'
       ParentColor = False
@@ -499,9 +500,9 @@ object frmSettings: TfrmSettings
     end
     object lblProhibitedChars: TLabel
       Left = 0
-      Height = 30
-      Top = 68
-      Width = 346
+      Height = 38
+      Top = 85
+      Width = 432
       AutoSize = False
       Caption = 'Prohibited characters'
       ParentColor = False
@@ -509,9 +510,9 @@ object frmSettings: TfrmSettings
     end
     object chkDotsOnSplit: TUWCheckBox
       Left = 0
-      Height = 19
-      Top = 520
-      Width = 18
+      Height = 24
+      Top = 650
+      Width = 22
       AutoSize = False
       Caption = 'Add ''...'' on split subtitle'
       TabOrder = 20
@@ -519,22 +520,22 @@ object frmSettings: TfrmSettings
     end
     object cboProfile: TComboBox
       AnchorSideRight.Control = btnProfile
-      Left = 348
-      Height = 23
+      Left = 435
+      Height = 28
       Top = 0
-      Width = 295
+      Width = 369
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Right = 5
-      ItemHeight = 15
+      BorderSpacing.Right = 6
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 0
       OnSelect = cboProfileSelect
     end
     object lblProfile: TLabel
       Left = 0
-      Height = 30
-      Top = 4
-      Width = 346
+      Height = 38
+      Top = 5
+      Width = 432
       AutoSize = False
       Caption = 'Profile'
       ParentColor = False
@@ -543,10 +544,10 @@ object frmSettings: TfrmSettings
     object btnProfile: TButton
       AnchorSideTop.Control = cboProfile
       AnchorSideTop.Side = asrCenter
-      Left = 648
-      Height = 23
+      Left = 810
+      Height = 29
       Top = 0
-      Width = 48
+      Width = 60
       Anchors = [akTop, akRight]
       Caption = '...'
       TabOrder = 1
@@ -554,120 +555,120 @@ object frmSettings: TfrmSettings
     end
     object lblMaxLineCount: TLabel
       Left = 0
-      Height = 30
-      Top = 232
-      Width = 346
+      Height = 38
+      Top = 290
+      Width = 432
       AutoSize = False
       Caption = 'Max. line count'
       ParentColor = False
       WordWrap = True
     end
     object spnMaxLineCount: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 228
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 285
+      Width = 100
       MaxValue = 10
-      OnChange = spnConventionChange
       TabOrder = 9
       Value = 2
+      OnChange = spnConventionChange
     end
     object lblCPS: TLabel
       Left = 0
-      Height = 30
-      Top = 296
-      Width = 346
+      Height = 38
+      Top = 370
+      Width = 432
       AutoSize = False
       Caption = 'Characters per second'
       ParentColor = False
       WordWrap = True
     end
     object spnCPS: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 292
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 365
+      Width = 100
       MaxValue = 1000
-      OnChange = spnConventionChange
       TabOrder = 12
       Value = 15
+      OnChange = spnConventionChange
     end
     object lblWPM: TLabel
       Left = 0
-      Height = 30
-      Top = 328
-      Width = 346
+      Height = 38
+      Top = 410
+      Width = 432
       AutoSize = False
       Caption = 'Words per minute'
       ParentColor = False
       WordWrap = True
     end
     object spnWPM: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 324
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 405
+      Width = 100
       MaxValue = 1000
-      OnChange = spnConventionChange
       TabOrder = 13
       Value = 180
+      OnChange = spnConventionChange
     end
     object spnCPL: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 356
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 445
+      Width = 100
       MaxValue = 500
-      OnChange = spnConventionChange
       TabOrder = 14
       Value = 37
+      OnChange = spnConventionChange
     end
     object lblCPL: TLabel
       Left = 0
-      Height = 30
-      Top = 360
-      Width = 346
+      Height = 38
+      Top = 450
+      Width = 432
       AutoSize = False
       Caption = 'Characters per line'
       ParentColor = False
       WordWrap = True
     end
     object spnMinDurationPerWord: TSpinEdit
-      Left = 433
-      Height = 23
-      Top = 160
-      Width = 80
+      Left = 541
+      Height = 28
+      Top = 200
+      Width = 100
       MaxValue = 5000
-      OnChange = spnConventionChange
       TabOrder = 7
       Value = 300
+      OnChange = spnConventionChange
     end
     object cboPauseMode: TComboBox
       AnchorSideTop.Control = spnSubtitlePauseMs
       AnchorSideTop.Side = asrCenter
-      Left = 433
-      Height = 23
-      Top = 260
-      Width = 174
-      ItemHeight = 15
+      Left = 541
+      Height = 28
+      Top = 325
+      Width = 218
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 11
       OnChange = spnConventionChange
     end
     object edtCPSStrategy: TEdit
       AnchorSideTop.Side = asrCenter
-      Left = 348
-      Height = 23
-      Top = 96
-      Width = 348
+      Left = 435
+      Height = 28
+      Top = 120
+      Width = 435
       TabOrder = 4
       OnChange = spnConventionChange
     end
     object lblCPSStrategy: TLabel
       Left = 0
-      Height = 30
-      Top = 100
-      Width = 346
+      Height = 38
+      Top = 125
+      Width = 432
       AutoSize = False
       Caption = 'Chars excluded from CPS count'
       ParentColor = False
@@ -675,88 +676,88 @@ object frmSettings: TfrmSettings
     end
     object lblSCSnapArea: TLabel
       Left = 0
-      Height = 30
-      Top = 392
-      Width = 346
+      Height = 38
+      Top = 490
+      Width = 432
       AutoSize = False
       Caption = 'Shot change snap / threshold (frames)'
       ParentColor = False
       WordWrap = True
     end
     object spnSCSnapArea: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 388
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 485
+      Width = 100
       MaxValue = 20
-      OnChange = spnConventionChange
       TabOrder = 15
       Value = 7
+      OnChange = spnConventionChange
     end
     object lblSCSnapInCues: TLabel
       Left = 0
-      Height = 30
-      Top = 424
-      Width = 346
+      Height = 38
+      Top = 530
+      Width = 432
       AutoSize = False
       Caption = 'Snap in cues after SC (frames)'
       ParentColor = False
       WordWrap = True
     end
     object spnSCSnapInCues: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 420
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 525
+      Width = 100
       MaxValue = 15
-      OnChange = spnConventionChange
       TabOrder = 17
+      OnChange = spnConventionChange
     end
     object lblSCSnapOutCues: TLabel
       Left = 0
-      Height = 30
-      Top = 456
-      Width = 346
+      Height = 38
+      Top = 570
+      Width = 432
       AutoSize = False
       Caption = 'Snap out cues before SC (frames)'
       ParentColor = False
       WordWrap = True
     end
     object spnSCSnapOutCues: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 452
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 565
+      Width = 100
       MaxValue = 15
-      OnChange = spnConventionChange
       TabOrder = 18
       Value = 2
+      OnChange = spnConventionChange
     end
     object spnSCSnapThreshold: TSpinEdit
-      Left = 433
-      Height = 23
-      Top = 388
-      Width = 80
+      Left = 541
+      Height = 28
+      Top = 485
+      Width = 100
       MaxValue = 20
-      OnChange = spnConventionChange
       TabOrder = 16
       Value = 11
+      OnChange = spnConventionChange
     end
     object spnChaining: TSpinEdit
-      Left = 348
-      Height = 23
-      Top = 484
-      Width = 80
+      Left = 435
+      Height = 28
+      Top = 605
+      Width = 100
       MaxValue = 30
-      OnChange = spnConventionChange
       TabOrder = 19
       Value = 12
+      OnChange = spnConventionChange
     end
     object lblChaining: TLabel
       Left = 0
-      Height = 30
-      Top = 488
-      Width = 346
+      Height = 38
+      Top = 610
+      Width = 432
       AutoSize = False
       Caption = 'Chaining (frames)'
       ParentColor = False
@@ -764,32 +765,32 @@ object frmSettings: TfrmSettings
     end
   end
   object lyoAppearance: TUWLayout
-    Left = -508
-    Height = 546
-    Top = 264
-    Width = 696
-    ClientHeight = 546
-    ClientWidth = 696
+    Left = -635
+    Height = 682
+    Top = 330
+    Width = 870
+    ClientHeight = 682
+    ClientWidth = 870
     TabOrder = 4
     Visible = False
     object lblTheme: TLabel
       AnchorSideTop.Control = cboTheme
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 4
-      Width = 246
+      Height = 19
+      Top = 5
+      Width = 308
       AutoSize = False
       Caption = 'Theme'
       ParentColor = False
     end
     object cboTheme: TComboBox
-      Left = 248
-      Height = 23
+      Left = 310
+      Height = 28
       Top = 0
-      Width = 448
+      Width = 560
       Anchors = [akTop, akLeft, akRight]
-      ItemHeight = 15
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 0
     end
@@ -797,9 +798,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = cboListMode
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 35
-      Width = 246
+      Height = 19
+      Top = 43
+      Width = 308
       AutoSize = False
       Caption = 'List mode'
       ParentColor = False
@@ -807,13 +808,13 @@ object frmSettings: TfrmSettings
     object cboListMode: TComboBox
       AnchorSideTop.Control = cboTheme
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 23
-      Top = 31
-      Width = 448
+      Left = 310
+      Height = 28
+      Top = 38
+      Width = 560
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Top = 8
-      ItemHeight = 15
+      BorderSpacing.Top = 10
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 1
     end
@@ -821,10 +822,10 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = spnTextBoxFontSize
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 15
-      Top = 136
-      Width = 49
-      BorderSpacing.Top = 20
+      Height = 20
+      Top = 167
+      Width = 61
+      BorderSpacing.Top = 25
       Caption = 'Subtitles'
       Font.Style = [fsBold]
       ParentColor = False
@@ -834,22 +835,22 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = cbnSub
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 166
-      Width = 29
+      Height = 20
+      Top = 204
+      Width = 36
       Caption = 'Color'
       ParentColor = False
     end
     object cbnSub: TColorButton
       AnchorSideTop.Control = lblSubtitles
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 25
-      Top = 161
-      Width = 80
-      BorderSpacing.Top = 10
+      Left = 310
+      Height = 31
+      Top = 199
+      Width = 100
+      BorderSpacing.Top = 12
       BorderWidth = 2
-      ButtonColorSize = 16
+      ButtonColorSize = 20
       ButtonColor = clWhite
       Flat = True
     end
@@ -857,22 +858,22 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = cbnSubBorder
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 196
-      Width = 35
+      Height = 20
+      Top = 241
+      Width = 45
       Caption = 'Border'
       ParentColor = False
     end
     object cbnSubBorder: TColorButton
       AnchorSideTop.Control = cbnSub
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 25
-      Top = 191
-      Width = 80
-      BorderSpacing.Top = 5
+      Left = 310
+      Height = 31
+      Top = 236
+      Width = 100
+      BorderSpacing.Top = 6
       BorderWidth = 2
-      ButtonColorSize = 16
+      ButtonColorSize = 20
       ButtonColor = clBlack
       Flat = True
     end
@@ -880,44 +881,44 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = cbnSubShadow
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 226
-      Width = 42
+      Height = 20
+      Top = 278
+      Width = 53
       Caption = 'Shadow'
       ParentColor = False
     end
     object cbnSubShadow: TColorButton
       AnchorSideTop.Control = cbnSubBorder
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 25
-      Top = 221
-      Width = 80
-      BorderSpacing.Top = 5
+      Left = 310
+      Height = 31
+      Top = 273
+      Width = 100
+      BorderSpacing.Top = 6
       BorderWidth = 2
-      ButtonColorSize = 16
+      ButtonColorSize = 20
       ButtonColor = clBlack
       Flat = True
     end
     object lblSubBackground: TLabel
       AnchorSideTop.Control = cbnSubBackground
       Left = 0
-      Height = 15
-      Top = 251
-      Width = 64
+      Height = 20
+      Top = 310
+      Width = 79
       Caption = 'Background'
       ParentColor = False
     end
     object cbnSubBackground: TColorButton
       AnchorSideTop.Control = cbnSubShadow
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 25
-      Top = 251
-      Width = 80
-      BorderSpacing.Top = 5
+      Left = 310
+      Height = 31
+      Top = 310
+      Width = 100
+      BorderSpacing.Top = 6
       BorderWidth = 2
-      ButtonColorSize = 16
+      ButtonColorSize = 20
       ButtonColor = clBlack
       Flat = True
     end
@@ -925,20 +926,20 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = spnSubSize
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 285
-      Width = 20
+      Height = 20
+      Top = 351
+      Width = 27
       Caption = 'Size'
       ParentColor = False
     end
     object spnSubSize: TSpinEdit
       AnchorSideTop.Control = cbnSubBackground
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 23
-      Top = 281
-      Width = 80
-      BorderSpacing.Top = 5
+      Left = 310
+      Height = 28
+      Top = 347
+      Width = 100
+      BorderSpacing.Top = 6
       MaxValue = 150
       MinValue = 1
       TabOrder = 6
@@ -949,11 +950,11 @@ object frmSettings: TfrmSettings
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = cbnSubBackground
       AnchorSideTop.Side = asrCenter
-      Left = 333
-      Height = 17
-      Top = 255
-      Width = 18
-      BorderSpacing.Left = 5
+      Left = 416
+      Height = 20
+      Top = 315
+      Width = 21
+      BorderSpacing.Left = 6
       TabOrder = 5
     end
     object chkSubShadow: TCheckBox
@@ -961,21 +962,21 @@ object frmSettings: TfrmSettings
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = cbnSubShadow
       AnchorSideTop.Side = asrCenter
-      Left = 333
-      Height = 17
-      Top = 225
-      Width = 18
-      BorderSpacing.Left = 5
+      Left = 416
+      Height = 20
+      Top = 278
+      Width = 21
+      BorderSpacing.Left = 6
       TabOrder = 4
     end
     object lblWaveform: TLabel
       AnchorSideTop.Control = spnSubSize
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 15
-      Top = 324
-      Width = 60
-      BorderSpacing.Top = 20
+      Height = 20
+      Top = 400
+      Width = 73
+      BorderSpacing.Top = 25
       Caption = 'Waveform'
       Font.Style = [fsBold]
       ParentColor = False
@@ -985,22 +986,22 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = cbnWaveColor
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 354
-      Width = 29
+      Height = 20
+      Top = 437
+      Width = 36
       Caption = 'Color'
       ParentColor = False
     end
     object cbnWaveColor: TColorButton
       AnchorSideTop.Control = lblWaveform
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 25
-      Top = 349
-      Width = 80
-      BorderSpacing.Top = 10
+      Left = 310
+      Height = 31
+      Top = 432
+      Width = 100
+      BorderSpacing.Top = 12
       BorderWidth = 2
-      ButtonColorSize = 16
+      ButtonColorSize = 20
       ButtonColor = 12080128
       Flat = True
     end
@@ -1008,22 +1009,22 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = cbnWaveEntry
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 384
-      Width = 27
+      Height = 20
+      Top = 474
+      Width = 33
       Caption = 'Entry'
       ParentColor = False
     end
     object cbnWaveEntry: TColorButton
       AnchorSideTop.Control = cbnWaveColor
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 25
-      Top = 379
-      Width = 80
-      BorderSpacing.Top = 5
+      Left = 310
+      Height = 31
+      Top = 469
+      Width = 100
+      BorderSpacing.Top = 6
       BorderWidth = 2
-      ButtonColorSize = 16
+      ButtonColorSize = 20
       ButtonColor = 3618615
       Flat = True
     end
@@ -1031,20 +1032,20 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = spnListFontSize
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 66
-      Width = 65
+      Height = 20
+      Top = 80
+      Width = 82
       Caption = 'List font size'
       ParentColor = False
     end
     object spnListFontSize: TSpinEdit
       AnchorSideTop.Control = cboListMode
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 23
-      Top = 62
-      Width = 80
-      BorderSpacing.Top = 8
+      Left = 310
+      Height = 28
+      Top = 76
+      Width = 100
+      BorderSpacing.Top = 10
       MaxValue = 60
       MinValue = 8
       TabOrder = 2
@@ -1053,11 +1054,11 @@ object frmSettings: TfrmSettings
     object spnTextBoxFontSize: TSpinEdit
       AnchorSideTop.Control = spnListFontSize
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 23
-      Top = 93
-      Width = 80
-      BorderSpacing.Top = 8
+      Left = 310
+      Height = 28
+      Top = 114
+      Width = 100
+      BorderSpacing.Top = 10
       MaxValue = 60
       MinValue = 8
       TabOrder = 3
@@ -1067,20 +1068,20 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = spnTextBoxFontSize
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 97
-      Width = 91
+      Height = 20
+      Top = 118
+      Width = 116
       Caption = 'Text box font size'
       ParentColor = False
     end
   end
   object lyoTools: TUWLayout
-    Left = -508
-    Height = 546
-    Top = 328
-    Width = 696
-    ClientHeight = 546
-    ClientWidth = 696
+    Left = -635
+    Height = 682
+    Top = 410
+    Width = 870
+    ClientHeight = 682
+    ClientWidth = 870
     TabOrder = 5
     Visible = False
     object lblFFMPEG: TLabel
@@ -1088,9 +1089,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Cursor = crHandPoint
       Left = 0
-      Height = 15
+      Height = 20
       Top = 4
-      Width = 43
+      Width = 53
       Caption = 'FFmpeg'
       Font.Style = [fsUnderline]
       ParentColor = False
@@ -1099,21 +1100,21 @@ object frmSettings: TfrmSettings
     end
     object edtFFMPEG: TEdit
       AnchorSideRight.Control = btnFFMPEG
-      Left = 248
-      Height = 23
+      Left = 310
+      Height = 28
       Top = 0
-      Width = 395
+      Width = 494
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Right = 5
+      BorderSpacing.Right = 6
       TabOrder = 0
     end
     object btnFFMPEG: TButton
       AnchorSideTop.Control = edtFFMPEG
       AnchorSideTop.Side = asrCenter
-      Left = 648
-      Height = 23
+      Left = 810
+      Height = 29
       Top = 0
-      Width = 48
+      Width = 60
       Anchors = [akTop, akRight]
       Caption = '...'
       TabOrder = 1
@@ -1124,9 +1125,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Cursor = crHandPoint
       Left = 0
-      Height = 15
-      Top = 35
-      Width = 78
+      Height = 20
+      Top = 42
+      Width = 98
       Caption = 'PySceneDetect'
       Font.Style = [fsUnderline]
       ParentColor = False
@@ -1138,21 +1139,21 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = edtFFMPEG
       AnchorSideRight.Side = asrBottom
-      Left = 248
-      Height = 23
-      Top = 31
-      Width = 395
+      Left = 310
+      Height = 28
+      Top = 38
+      Width = 494
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Top = 8
+      BorderSpacing.Top = 10
       TabOrder = 2
     end
     object btnSceneDetect: TButton
       AnchorSideTop.Control = edtSceneDetect
       AnchorSideTop.Side = asrCenter
-      Left = 648
-      Height = 23
-      Top = 31
-      Width = 48
+      Left = 810
+      Height = 29
+      Top = 38
+      Width = 60
       Anchors = [akTop, akRight]
       Caption = '...'
       TabOrder = 3
@@ -1163,9 +1164,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Cursor = crHandPoint
       Left = 0
-      Height = 15
-      Top = 66
-      Width = 66
+      Height = 20
+      Top = 80
+      Width = 82
       Caption = 'Whisper.cpp'
       Font.Style = [fsUnderline]
       ParentColor = False
@@ -1176,22 +1177,22 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = edtSceneDetect
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = btnWhisperCPP
-      Left = 248
-      Height = 23
-      Top = 62
-      Width = 395
+      Left = 310
+      Height = 28
+      Top = 76
+      Width = 494
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Top = 8
-      BorderSpacing.Right = 5
+      BorderSpacing.Top = 10
+      BorderSpacing.Right = 6
       TabOrder = 4
     end
     object btnWhisperCPP: TButton
       AnchorSideTop.Control = edtWhisperCPP
       AnchorSideTop.Side = asrCenter
-      Left = 648
-      Height = 23
-      Top = 62
-      Width = 48
+      Left = 810
+      Height = 29
+      Top = 76
+      Width = 60
       Anchors = [akTop, akRight]
       Caption = '...'
       TabOrder = 5
@@ -1202,9 +1203,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Cursor = crHandPoint
       Left = 0
-      Height = 15
-      Top = 128
-      Width = 39
+      Height = 20
+      Top = 156
+      Width = 48
       Caption = 'YT-DLP'
       Font.Style = [fsUnderline]
       ParentColor = False
@@ -1215,22 +1216,22 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = edtFasterWhisper
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = btnYTDLP
-      Left = 248
-      Height = 23
-      Top = 124
-      Width = 395
+      Left = 310
+      Height = 28
+      Top = 152
+      Width = 494
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Top = 8
-      BorderSpacing.Right = 5
+      BorderSpacing.Top = 10
+      BorderSpacing.Right = 6
       TabOrder = 8
     end
     object btnYTDLP: TButton
       AnchorSideTop.Control = edtYTDLP
       AnchorSideTop.Side = asrCenter
-      Left = 648
-      Height = 23
-      Top = 124
-      Width = 48
+      Left = 810
+      Height = 29
+      Top = 152
+      Width = 60
       Anchors = [akTop, akRight]
       Caption = '...'
       TabOrder = 9
@@ -1241,9 +1242,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Cursor = crHandPoint
       Left = 0
-      Height = 15
-      Top = 97
-      Width = 79
+      Height = 20
+      Top = 118
+      Width = 98
       Caption = 'Faster-Whisper'
       Font.Style = [fsUnderline]
       ParentColor = False
@@ -1254,22 +1255,22 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = edtWhisperCPP
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = btnFasterWhisper
-      Left = 248
-      Height = 23
-      Top = 93
-      Width = 395
+      Left = 310
+      Height = 28
+      Top = 114
+      Width = 494
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Top = 8
-      BorderSpacing.Right = 5
+      BorderSpacing.Top = 10
+      BorderSpacing.Right = 6
       TabOrder = 6
     end
     object btnFasterWhisper: TButton
       AnchorSideTop.Control = edtFasterWhisper
       AnchorSideTop.Side = asrCenter
-      Left = 648
-      Height = 23
-      Top = 93
-      Width = 48
+      Left = 810
+      Height = 29
+      Top = 114
+      Width = 60
       Anchors = [akTop, akRight]
       Caption = '...'
       TabOrder = 7
@@ -1278,20 +1279,20 @@ object frmSettings: TfrmSettings
     object edtAPI_TTS: TEdit
       AnchorSideTop.Control = edtTesseract
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 23
-      Top = 194
-      Width = 448
-      BorderSpacing.Top = 16
+      Left = 310
+      Height = 28
+      Top = 238
+      Width = 560
+      BorderSpacing.Top = 20
       TabOrder = 12
     end
     object lblAPI_TTS: TLabel
       AnchorSideTop.Control = edtAPI_TTS
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 198
-      Width = 100
+      Height = 20
+      Top = 242
+      Width = 125
       Caption = 'ElevenLabs API key'
       Font.Style = [fsUnderline]
       ParentColor = False
@@ -1303,9 +1304,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Cursor = crHandPoint
       Left = 0
-      Height = 15
-      Top = 159
-      Width = 47
+      Height = 20
+      Top = 194
+      Width = 60
       Caption = 'Tesseract'
       Font.Style = [fsUnderline]
       ParentColor = False
@@ -1316,22 +1317,22 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = edtYTDLP
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = btnTesseract
-      Left = 248
-      Height = 23
-      Top = 155
-      Width = 395
+      Left = 310
+      Height = 28
+      Top = 190
+      Width = 494
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Top = 8
-      BorderSpacing.Right = 5
+      BorderSpacing.Top = 10
+      BorderSpacing.Right = 6
       TabOrder = 10
     end
     object btnTesseract: TButton
       AnchorSideTop.Control = edtTesseract
       AnchorSideTop.Side = asrCenter
-      Left = 648
-      Height = 23
-      Top = 155
-      Width = 48
+      Left = 810
+      Height = 29
+      Top = 190
+      Width = 60
       Anchors = [akTop, akRight]
       Caption = '...'
       TabOrder = 11
@@ -1339,19 +1340,19 @@ object frmSettings: TfrmSettings
     end
   end
   object lyoShortcuts: TUWLayout
-    Left = -508
-    Height = 546
-    Top = 392
-    Width = 696
-    ClientHeight = 546
-    ClientWidth = 696
+    Left = -635
+    Height = 682
+    Top = 490
+    Width = 870
+    ClientHeight = 682
+    ClientWidth = 870
     TabOrder = 6
     Visible = False
     object lstShortcuts: TListBox
       Left = 0
-      Height = 427
-      Top = 64
-      Width = 696
+      Height = 534
+      Top = 80
+      Width = 870
       Anchors = [akTop, akLeft, akRight]
       ExtendedSelect = False
       ItemHeight = 0
@@ -1361,30 +1362,30 @@ object frmSettings: TfrmSettings
       OnSelectionChange = lstShortcutsSelectionChange
     end
     object cboShortcutCat: TComboBox
-      Left = 168
-      Height = 23
-      Top = 32
-      Width = 528
+      Left = 210
+      Height = 28
+      Top = 40
+      Width = 660
       Anchors = [akTop, akLeft, akRight]
-      ItemHeight = 15
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 3
       OnSelect = cboShortcutCatSelect
     end
     object lblShortcutCat: TLabel
       Left = 0
-      Height = 15
-      Top = 36
-      Width = 48
+      Height = 20
+      Top = 45
+      Width = 60
       Caption = 'Category'
       ParentColor = False
     end
     object hkShortcut: TUWHotKey
       AnchorSideLeft.Control = cboShortcutCat
-      Left = 168
-      Height = 23
-      Top = 500
-      Width = 527
+      Left = 210
+      Height = 29
+      Top = 625
+      Width = 659
       EmptyText = 'None'
       HotKey = 0
       Anchors = [akTop, akLeft, akRight]
@@ -1393,30 +1394,30 @@ object frmSettings: TfrmSettings
     end
     object lblShortcut: TLabel
       Left = 0
-      Height = 15
-      Top = 504
-      Width = 45
+      Height = 20
+      Top = 630
+      Width = 55
       Caption = 'Shortcut'
       ParentColor = False
     end
     object cboShortCutPreset: TComboBox
       AnchorSideRight.Control = btnShortCutApply
-      Left = 168
-      Height = 23
+      Left = 210
+      Height = 28
       Top = 0
-      Width = 336
+      Width = 420
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Right = 5
-      ItemHeight = 15
+      BorderSpacing.Right = 6
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 0
       OnSelect = cboShortCutPresetSelect
     end
     object lblShortCutPreset: TLabel
       Left = 0
-      Height = 15
-      Top = 4
-      Width = 32
+      Height = 20
+      Top = 5
+      Width = 40
       Caption = 'Preset'
       ParentColor = False
     end
@@ -1424,22 +1425,22 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = cboShortCutPreset
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = btnShortCutSave
-      Left = 509
-      Height = 23
+      Left = 636
+      Height = 29
       Top = 0
-      Width = 91
+      Width = 114
       Anchors = [akTop, akRight]
-      BorderSpacing.Right = 5
+      BorderSpacing.Right = 6
       Caption = 'Apply'
       TabOrder = 1
       OnClick = btnShortCutApplyClick
     end
     object btnShortCutSave: TButton
       AnchorSideTop.Control = btnShortCutApply
-      Left = 605
-      Height = 23
+      Left = 756
+      Height = 29
       Top = 0
-      Width = 91
+      Width = 114
       Anchors = [akTop, akRight]
       Caption = 'Save as...'
       TabOrder = 2
@@ -1447,9 +1448,9 @@ object frmSettings: TfrmSettings
     end
     object lblShortCutInUse: TLabel
       Left = 0
-      Height = 15
-      Top = 528
-      Width = 3
+      Height = 20
+      Top = 660
+      Width = 4
       Caption = ' '
       Font.Style = [fsBold]
       ParentColor = False
@@ -1457,42 +1458,42 @@ object frmSettings: TfrmSettings
     end
   end
   object lyoMPV: TUWLayout
-    Left = -508
-    Height = 546
-    Top = 456
-    Width = 696
-    ClientHeight = 546
-    ClientWidth = 696
+    Left = -635
+    Height = 682
+    Top = 570
+    Width = 870
+    ClientHeight = 682
+    ClientWidth = 870
     TabOrder = 7
     Visible = False
     object chkAutoPlay: TUWCheckBox
       Left = 0
-      Height = 19
-      Top = 4
-      Width = 18
+      Height = 24
+      Top = 5
+      Width = 22
       AutoSize = False
-      Caption = 'Autoplay on video load'
+      Caption = 'Autoplay on media load'
       TabOrder = 0
     end
     object lblSeekTime: TLabel
       AnchorSideTop.Control = chkUseHWDec
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 15
-      Top = 79
-      Width = 246
+      Height = 19
+      Top = 99
+      Width = 308
       AutoSize = False
-      BorderSpacing.Top = 18
+      BorderSpacing.Top = 22
       Caption = 'Seek time (ms)'
       ParentColor = False
     end
     object spnSeekTime: TSpinEdit
       AnchorSideTop.Control = lblSeekTime
       AnchorSideTop.Side = asrCenter
-      Left = 248
-      Height = 23
-      Top = 75
-      Width = 80
+      Left = 310
+      Height = 28
+      Top = 94
+      Width = 100
       MaxValue = 10000
       MinValue = 100
       TabOrder = 3
@@ -1502,9 +1503,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = spnFrameStep
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 15
-      Top = 112
-      Width = 246
+      Height = 19
+      Top = 139
+      Width = 308
       AutoSize = False
       Caption = 'Frame step'
       ParentColor = False
@@ -1512,11 +1513,11 @@ object frmSettings: TfrmSettings
     object spnFrameStep: TSpinEdit
       AnchorSideTop.Control = spnSeekTime
       AnchorSideTop.Side = asrBottom
-      Left = 248
-      Height = 23
-      Top = 108
-      Width = 80
-      BorderSpacing.Top = 10
+      Left = 310
+      Height = 28
+      Top = 134
+      Width = 100
+      BorderSpacing.Top = 12
       MaxValue = 60
       MinValue = 1
       TabOrder = 4
@@ -1526,9 +1527,9 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkAutoPlay
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 23
-      Width = 18
+      Height = 24
+      Top = 29
+      Width = 22
       AutoSize = False
       Caption = 'mpv handles subtitles for preview'
       TabOrder = 1
@@ -1537,11 +1538,11 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = lblFrameStep
       AnchorSideTop.Side = asrBottom
       Left = 2
-      Height = 15
-      Top = 146
-      Width = 246
+      Height = 19
+      Top = 182
+      Width = 308
       AutoSize = False
-      BorderSpacing.Top = 19
+      BorderSpacing.Top = 24
       Caption = 'Additional mpv options'
       ParentColor = False
     end
@@ -1549,10 +1550,10 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = lstMPVOptions
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 23
-      Top = 379
-      Width = 38
-      BorderSpacing.Top = 5
+      Height = 29
+      Top = 473
+      Width = 48
+      BorderSpacing.Top = 6
       Caption = '+'
       TabOrder = 6
       OnClick = btnPlusClick
@@ -1562,11 +1563,11 @@ object frmSettings: TfrmSettings
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = btnPlus
       AnchorSideRight.Side = asrBottom
-      Left = 43
-      Height = 23
-      Top = 379
-      Width = 38
-      BorderSpacing.Left = 5
+      Left = 54
+      Height = 29
+      Top = 473
+      Width = 48
+      BorderSpacing.Left = 6
       Caption = '-'
       Enabled = False
       TabOrder = 7
@@ -1576,10 +1577,10 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = lblAdditionalMPVOptions
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 208
-      Top = 166
-      Width = 695
-      BorderSpacing.Top = 5
+      Height = 260
+      Top = 207
+      Width = 869
+      BorderSpacing.Top = 6
       ExtendedSelect = False
       ItemHeight = 0
       TabOrder = 5
@@ -1588,31 +1589,31 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Control = chkSubtitleHandleByMPV
       AnchorSideTop.Side = asrBottom
       Left = 0
-      Height = 19
-      Top = 42
-      Width = 18
+      Height = 24
+      Top = 53
+      Width = 22
       AutoSize = False
       Caption = 'Use hardware video decoding'
       TabOrder = 2
     end
   end
   object lyoFileTypeAssociations: TUWLayout
-    Left = -508
-    Height = 546
-    Top = 512
-    Width = 696
-    ClientHeight = 546
-    ClientWidth = 696
+    Left = -635
+    Height = 682
+    Top = 640
+    Width = 870
+    ClientHeight = 682
+    ClientWidth = 870
     TabOrder = 8
     Visible = False
     object tlbFileTypeIco: TToolBar
       Left = 0
-      Height = 480
+      Height = 600
       Top = 0
-      Width = 480
+      Width = 600
       Align = alNone
-      ButtonHeight = 48
-      ButtonWidth = 48
+      ButtonHeight = 60
+      ButtonWidth = 60
       EdgeBorders = []
       EdgeInner = esNone
       EdgeOuter = esNone
@@ -1624,7 +1625,7 @@ object frmSettings: TfrmSettings
     Height = 48
     Scaled = True
     Width = 48
-    Left = 416
-    Top = 560
+    Left = 520
+    Top = 700
   end
 end

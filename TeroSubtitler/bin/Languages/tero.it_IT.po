@@ -124,7 +124,9 @@ msgid "Contains a prohibited character"
 msgstr "Contiene un carattere non consentito"
 
 #: proclocalize.lngasreadingvideofile
-msgid "Reading video file..."
+#, fuzzy
+#| msgid "Reading video file..."
+msgid "Reading media file..."
 msgstr "Lettura file video..."
 
 #: proclocalize.lngasrepeatedchars
@@ -311,7 +313,9 @@ msgstr ""
 "File mancante o connessione internet assente."
 
 #: proclocalize.lngfeaturenotavailablefromurl
-msgid "Function not available for online video."
+#, fuzzy
+#| msgid "Function not available for online video."
+msgid "Function not available for online media."
 msgstr "Funzione non disponibile per i video online."
 
 #: proclocalize.lngfilechanged
@@ -685,7 +689,9 @@ msgid "Open file"
 msgstr "Apri file"
 
 #: proclocalize.lngopenvideofromurl
-msgid "Open video from"
+#, fuzzy
+#| msgid "Open video from"
+msgid "Open media from"
 msgstr "Apri video"
 
 #: proclocalize.lngoperationcancelled
@@ -1020,7 +1026,9 @@ msgid "Milliseconds"
 msgstr "Millisecondi"
 
 #: proclocalize.lngssmpv
-msgid "Video player"
+#, fuzzy
+#| msgid "Video player"
+msgid "Media player"
 msgstr "Riproduttore video"
 
 #: proclocalize.lngssshortcutnone
@@ -1236,8 +1244,9 @@ msgid "Tip: Use <%s> for a web word reference"
 msgstr "Suggerimento: usa <%s> per cercare la definizione di una parola in internet"
 
 #: proclocalize.lngttip3
-#, object-pascal-format
-msgid "Tip: Use <%s> dock/undock video window"
+#, object-pascal-format, fuzzy
+#| msgid "Tip: Use <%s> dock/undock video window"
+msgid "Tip: Use <%s> dock/undock media window"
 msgstr "Suggerimento: usa <%s> per agganciare/sganciare il riquadro controlli video"
 
 #: proclocalize.lngttip4
@@ -1321,7 +1330,9 @@ msgid "Video tracks: %d"
 msgstr "Tracce video: %d"
 
 #: proclocalize.lngwebvideounsupported
-msgid "The video format is not supported for playback in the web browser."
+#, fuzzy
+#| msgid "The video format is not supported for playback in the web browser."
+msgid "The media format is not supported for playback in the web browser."
 msgstr "L’attuale formato video non è supportato per la riproduzione all’interno di un browser web."
 
 #: proclocalize.lngwizlanguage
@@ -3856,7 +3867,9 @@ msgid "Undo last action"
 msgstr "Annulla l’ultima azione"
 
 #: tfrmmain.actundockvideo.caption
-msgid "Dock video"
+#, fuzzy
+#| msgid "Dock video"
+msgid "Dock media"
 msgstr "Aggancia riquadro controlli video"
 
 #: tfrmmain.actundockwaveform.caption
@@ -3996,8 +4009,10 @@ msgid "Information..."
 msgstr "Informazioni..."
 
 #: tfrmmain.actvideopreview.caption
+#, fuzzy
+#| msgid "Video preview"
 msgctxt "tfrmmain.actvideopreview.caption"
-msgid "Video preview"
+msgid "Media preview"
 msgstr "Anteprima video"
 
 #: tfrmmain.actviewshotchange.caption
@@ -4165,7 +4180,6 @@ msgid "Translation memory"
 msgstr "Memoria traduzione"
 
 #: tfrmmain.mnuvideo.caption
-#| msgid "Video"
 msgctxt "tfrmmain.mnuvideo.caption"
 msgid "Media"
 msgstr "Media"
@@ -4226,8 +4240,10 @@ msgid "Toolbars"
 msgstr "Barre strumenti"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
+#, fuzzy
+#| msgid "Video"
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "Video"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
@@ -4521,7 +4537,9 @@ msgid "Settings"
 msgstr "Impostazioni"
 
 #: tfrmsettings.chkautoplay.caption
-msgid "Autoplay on video load"
+#, fuzzy
+#| msgid "Autoplay on video load"
+msgid "Autoplay on media load"
 msgstr "Riproduci automaticamente al caricamento del video"
 
 #: tfrmsettings.chkdotsonsplit.caption
@@ -5601,3 +5619,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+

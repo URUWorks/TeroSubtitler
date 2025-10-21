@@ -79,10 +79,10 @@ resourcestring
   lngSpellCheckFinished = 'Spell check finished.';
   lngDetect = 'Auto-detect';
   lngAddNote = 'Add note';
-  lngOpenVideoFromURL = 'Open video from';
+  lngOpenVideoFromURL = 'Open media from';
   lngURL = 'URL';
   lngSupportedSites = 'Supported sites';
-  lngWebVideoUnsupported = 'The video format is not supported for playback in the web browser.';
+  lngWebVideoUnsupported = 'The media format is not supported for playback in the web browser.';
   lngNewShortCutPreset = 'Enter a name for your shortcuts preset';
   lngNewShortCutPresetName = 'Name';
   lngFolderNotEmpty = 'The folder is not empty.';
@@ -95,7 +95,7 @@ resourcestring
   lngSeeChangeList = 'Do you want to see the changelog?';
   lngNoNewVersion = 'You''re using the latest version.';
   lngErrorExecuting = 'Error executing “%s”.';
-  lngFeatureNotAvailableFromURL = 'Function not available for online video.';
+  lngFeatureNotAvailableFromURL = 'Function not available for online media.';
   lngMultipleTracksDetected = 'Multiple tracks detected';
   lngSelectTrackToUse = 'Select the track to use:';
   lngSelectFPSToUse = 'Select FPS to use:';
@@ -148,7 +148,7 @@ resourcestring
   lngasWaveformText = 'Click here to use timeline';
   lngasVideoLen = '%s (%s FPS)';
   lngasVideoLenSMPTE = '%s (%s FPS/SMPTE)';
-  lngasReadingVideoFile = 'Reading video file...';
+  lngasReadingVideoFile = 'Reading media file...';
   lngasCustom = 'Custom';
 
   //AboutStrings
@@ -263,7 +263,7 @@ resourcestring
   lngssConventions = 'Conventions';
   lngssAppearance = 'Appearance';
   lngssShortcuts = 'Shortcuts';
-  lngssMPV = 'Video player';
+  lngssMPV = 'Media player';
   lngssTools = 'Tools';
   lngssFileTypeAssociations = 'File types';
   lngssAutoMode = 'Automatic';
@@ -374,7 +374,7 @@ resourcestring
   //TipStrings
   lngtTip1 = 'Tip: Use <%s/%s> to go to previous/next entry';
   lngtTip2 = 'Tip: Use <%s> for a web word reference';
-  lngtTip3 = 'Tip: Use <%s> dock/undock video window';
+  lngtTip3 = 'Tip: Use <%s> dock/undock media window';
   lngtTip4 = 'Tip: Use <%s> dock/undock waveform window';
 
 function AppNameD: String;

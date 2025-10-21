@@ -123,7 +123,9 @@ msgid "Contains a prohibited character"
 msgstr "Запрещённые символы"
 
 #: proclocalize.lngasreadingvideofile
-msgid "Reading video file..."
+#, fuzzy
+#| msgid "Reading video file..."
+msgid "Reading media file..."
 msgstr "Прочтение видео файла..."
 
 #: proclocalize.lngasrepeatedchars
@@ -306,7 +308,9 @@ msgid "No content downloaded, missing file or no Internet connection."
 msgstr "Не загружается содержимое, отсутствует файл или нет подключения к Интернету."
 
 #: proclocalize.lngfeaturenotavailablefromurl
-msgid "Function not available for online video."
+#, fuzzy
+#| msgid "Function not available for online video."
+msgid "Function not available for online media."
 msgstr "Функция недоступна для онлайн видео."
 
 #: proclocalize.lngfilechanged
@@ -681,7 +685,9 @@ msgid "Open file"
 msgstr "Открыть файл"
 
 #: proclocalize.lngopenvideofromurl
-msgid "Open video from"
+#, fuzzy
+#| msgid "Open video from"
+msgid "Open media from"
 msgstr "Открыть видео"
 
 #: proclocalize.lngoperationcancelled
@@ -1025,7 +1031,9 @@ msgid "Milliseconds"
 msgstr "Миллисекунды"
 
 #: proclocalize.lngssmpv
-msgid "Video player"
+#, fuzzy
+#| msgid "Video player"
+msgid "Media player"
 msgstr "Видеоплеер"
 
 #: proclocalize.lngssshortcutnone
@@ -1241,8 +1249,9 @@ msgid "Tip: Use <%s> for a web word reference"
 msgstr "Совет: нажмите <%s> для перехода на онлайн словарь WebReference"
 
 #: proclocalize.lngttip3
-#, object-pascal-format
-msgid "Tip: Use <%s> dock/undock video window"
+#, object-pascal-format, fuzzy
+#| msgid "Tip: Use <%s> dock/undock video window"
+msgid "Tip: Use <%s> dock/undock media window"
 msgstr "Совет: нажмите <%s> чтоб сцепить/отцепить окно видео"
 
 #: proclocalize.lngttip4
@@ -1326,7 +1335,9 @@ msgid "Video tracks: %d"
 msgstr "Видеодорожки: %d"
 
 #: proclocalize.lngwebvideounsupported
-msgid "The video format is not supported for playback in the web browser."
+#, fuzzy
+#| msgid "The video format is not supported for playback in the web browser."
+msgid "The media format is not supported for playback in the web browser."
 msgstr "Формат видео не поддерживается для воспроизведения в веб-браузере."
 
 #: proclocalize.lngwizlanguage
@@ -3866,7 +3877,9 @@ msgid "Undo last action"
 msgstr "Отменить последнее действие"
 
 #: tfrmmain.actundockvideo.caption
-msgid "Dock video"
+#, fuzzy
+#| msgid "Dock video"
+msgid "Dock media"
 msgstr "Отцепить окно видео"
 
 #: tfrmmain.actundockwaveform.caption
@@ -4006,8 +4019,10 @@ msgid "Information..."
 msgstr "Информация..."
 
 #: tfrmmain.actvideopreview.caption
+#, fuzzy
+#| msgid "Video preview"
 msgctxt "tfrmmain.actvideopreview.caption"
-msgid "Video preview"
+msgid "Media preview"
 msgstr "Видеоряд"
 
 #: tfrmmain.actviewshotchange.caption
@@ -4237,8 +4252,10 @@ msgid "Toolbars"
 msgstr "Панель инструментов"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
+#, fuzzy
+#| msgid "Video"
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "Видео"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
@@ -4534,7 +4551,9 @@ msgid "Settings"
 msgstr "Настройки общие"
 
 #: tfrmsettings.chkautoplay.caption
-msgid "Autoplay on video load"
+#, fuzzy
+#| msgid "Autoplay on video load"
+msgid "Autoplay on media load"
 msgstr "Автовоспроизведение видео при открытии"
 
 #: tfrmsettings.chkdotsonsplit.caption

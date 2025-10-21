@@ -125,7 +125,9 @@ msgid "Contains a prohibited character"
 msgstr "Innehåller ett otillåtet tecken"
 
 #: proclocalize.lngasreadingvideofile
-msgid "Reading video file..."
+#, fuzzy
+#| msgid "Reading video file..."
+msgid "Reading media file..."
 msgstr "Läser videofil ..."
 
 #: proclocalize.lngasrepeatedchars
@@ -312,7 +314,9 @@ msgstr ""
 "Filen saknas eller ingen internetanslutning."
 
 #: proclocalize.lngfeaturenotavailablefromurl
-msgid "Function not available for online video."
+#, fuzzy
+#| msgid "Function not available for online video."
+msgid "Function not available for online media."
 msgstr "Funktionen är inte tillgänglig för nätvideor."
 
 #: proclocalize.lngfilechanged
@@ -690,7 +694,9 @@ msgid "Open file"
 msgstr "Öppna fil"
 
 #: proclocalize.lngopenvideofromurl
-msgid "Open video from"
+#, fuzzy
+#| msgid "Open video from"
+msgid "Open media from"
 msgstr "Öppna video från"
 
 #: proclocalize.lngoperationcancelled
@@ -850,6 +856,11 @@ msgctxt "proclocalize.lngschhmmsszzz"
 msgid "HH:MM:SS.ZZZ"
 msgstr "Ti:Mi:Se.ZZZ"
 
+#: proclocalize.lngscmedia
+msgctxt "proclocalize.lngscmedia"
+msgid "Media"
+msgstr ""
+
 #: proclocalize.lngscmilliseconds
 msgctxt "proclocalize.lngscmilliseconds"
 msgid "Milliseconds"
@@ -883,11 +894,6 @@ msgctxt "proclocalize.lngsctools"
 msgid "Tools"
 msgstr "Verktyg"
 
-#: proclocalize.lngscvideo
-msgctxt "proclocalize.lngscvideo"
-msgid "Video"
-msgstr "Video"
-
 #: proclocalize.lngscvideofilters
 msgctxt "proclocalize.lngscvideofilters"
 msgid "Video filters"
@@ -899,8 +905,10 @@ msgid "View"
 msgstr "Visa"
 
 #: proclocalize.lngscwaveform
+#, fuzzy
+#| msgid "Waveform"
 msgctxt "proclocalize.lngscwaveform"
-msgid "Waveform"
+msgid "Timeline"
 msgstr "Vågform"
 
 #: proclocalize.lngscxml
@@ -912,8 +920,10 @@ msgid "Analyzing file..."
 msgstr "Analyserar fil …"
 
 #: proclocalize.lngsecodec
+#, fuzzy
+#| msgid "Codec"
 msgctxt "proclocalize.lngsecodec"
-msgid "Codec"
+msgid "Format"
 msgstr "Kodek"
 
 #: proclocalize.lngseechangelist
@@ -934,7 +944,9 @@ msgid "Language"
 msgstr "Språk"
 
 #: proclocalize.lngselectencodingtouse
-msgid "Select the Encoding to use:"
+#, fuzzy
+#| msgid "Select the Encoding to use:"
+msgid "Select encoding:"
 msgstr "Välj teckenkodning att använda:"
 
 #: proclocalize.lngselectfpstouse
@@ -1032,7 +1044,9 @@ msgid "Milliseconds"
 msgstr "Millisekunder"
 
 #: proclocalize.lngssmpv
-msgid "Video player"
+#, fuzzy
+#| msgid "Video player"
+msgid "Media player"
 msgstr "Videospelare"
 
 #: proclocalize.lngssshortcutnone
@@ -1248,8 +1262,9 @@ msgid "Tip: Use <%s> for a web word reference"
 msgstr "Tips: Använd <%s> för att slå upp ett ord på webben"
 
 #: proclocalize.lngttip3
-#, object-pascal-format
-msgid "Tip: Use <%s> dock/undock video window"
+#, object-pascal-format, fuzzy
+#| msgid "Tip: Use <%s> dock/undock video window"
+msgid "Tip: Use <%s> dock/undock media window"
 msgstr "Tips: Använd <%s> för att fästa/lossa videofönstret"
 
 #: proclocalize.lngttip4
@@ -1333,7 +1348,9 @@ msgid "Video tracks: %d"
 msgstr "Videospår: %d"
 
 #: proclocalize.lngwebvideounsupported
-msgid "The video format is not supported for playback in the web browser."
+#, fuzzy
+#| msgid "The video format is not supported for playback in the web browser."
+msgid "The media format is not supported for playback in the web browser."
 msgstr "Videoformatet stöds inte för uppspelning i webbläsaren."
 
 #: proclocalize.lngwizlanguage
@@ -2824,13 +2841,13 @@ msgctxt "tfrmmain.actcloseapp.caption"
 msgid "Close"
 msgstr "Stäng"
 
+#: tfrmmain.actclosemedia.caption
+msgid "Close media"
+msgstr ""
+
 #: tfrmmain.actclosesubtitle.caption
 msgid "Close subtitles"
 msgstr "Stäng textning"
-
-#: tfrmmain.actclosevideo.caption
-msgid "Close video"
-msgstr "Stäng video"
 
 #: tfrmmain.actcombineentries.caption
 msgid "Combine entries"
@@ -3130,6 +3147,21 @@ msgctxt "tfrmmain.actlistmode.caption"
 msgid "List mode"
 msgstr "Listläge"
 
+#: tfrmmain.actloadmedia.caption
+msgid "Open media..."
+msgstr ""
+
+#: tfrmmain.actloadmedia.hint
+#, fuzzy
+#| msgid "Open a video file"
+msgctxt "tfrmmain.actloadmedia.hint"
+msgid "Open a media file"
+msgstr "Öppna en videofil"
+
+#: tfrmmain.actloadmediafromurl.caption
+msgid "Open media from URL..."
+msgstr ""
+
 #: tfrmmain.actloadproject.caption
 msgid "Load project..."
 msgstr "Ladda projekt..."
@@ -3151,18 +3183,6 @@ msgstr "Transkription..."
 #: tfrmmain.actloadtranslation.caption
 msgid "Load translation..."
 msgstr "Ladda översättning..."
-
-#: tfrmmain.actloadvideo.caption
-msgid "Open video..."
-msgstr "Öppna video..."
-
-#: tfrmmain.actloadvideo.hint
-msgid "Open a video file"
-msgstr "Öppna en videofil"
-
-#: tfrmmain.actloadvideofromurl.caption
-msgid "Open video from URL..."
-msgstr "Öppna video via URL..."
 
 #: tfrmmain.actmarkentry.caption
 msgid "Mark entry"
@@ -3336,8 +3356,10 @@ msgid "Multiple replace..."
 msgstr "Flera ersättningar..."
 
 #: tfrmmain.actnewsubtitle.caption
+#, fuzzy
+#| msgid "New subtitle"
 msgctxt "tfrmmain.actnewsubtitle.caption"
-msgid "New subtitle"
+msgid "New project"
 msgstr "Ny undertext"
 
 #: tfrmmain.actnewsubtitle.hint
@@ -3795,6 +3817,11 @@ msgstr "Skrivmaskinseffekt"
 msgid "Time expander/reducer..."
 msgstr "Tidsförlängning/-förkortning..."
 
+#: tfrmmain.acttimeline.caption
+msgctxt "tfrmmain.acttimeline.caption"
+msgid "Timeline"
+msgstr ""
+
 #: tfrmmain.acttimemode.caption
 msgctxt "tfrmmain.acttimemode.caption"
 msgid "Time mode"
@@ -3874,7 +3901,9 @@ msgid "Undo last action"
 msgstr "Ångra senaste åtgärden"
 
 #: tfrmmain.actundockvideo.caption
-msgid "Dock video"
+#, fuzzy
+#| msgid "Dock video"
+msgid "Dock media"
 msgstr "Fäst videofönstret"
 
 #: tfrmmain.actundockwaveform.caption
@@ -4014,8 +4043,10 @@ msgid "Information..."
 msgstr "Information..."
 
 #: tfrmmain.actvideopreview.caption
+#, fuzzy
+#| msgid "Video preview"
 msgctxt "tfrmmain.actvideopreview.caption"
-msgid "Video preview"
+msgid "Media preview"
 msgstr "Förhandsvisning av video"
 
 #: tfrmmain.actviewshotchange.caption
@@ -4030,11 +4061,6 @@ msgstr "Aktivera/inaktivera scenbyten"
 #: tfrmmain.actwaveextract.caption
 msgid "Extract waveform..."
 msgstr "Extrahera vågform..."
-
-#: tfrmmain.actwaveformpreview.caption
-msgctxt "tfrmmain.actwaveformpreview.caption"
-msgid "Waveform preview"
-msgstr "Förhandsvisning av vågform"
 
 #: tfrmmain.actwebpreview.caption
 msgid "Web Preview..."
@@ -4188,8 +4214,10 @@ msgid "Translation memory"
 msgstr "Översättningsminne"
 
 #: tfrmmain.mnuvideo.caption
+#, fuzzy
+#| msgid "Video"
 msgctxt "tfrmmain.mnuvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "Video"
 
 #: tfrmmain.mnuvideoaspectratio.caption
@@ -4248,8 +4276,10 @@ msgid "Toolbars"
 msgstr "Verktygsfält"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
+#, fuzzy
+#| msgid "Video"
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "Videoverktygsfält"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
@@ -4286,7 +4316,9 @@ msgid "Initial time"
 msgstr "Starttid"
 
 #: tfrmmain.tedpause.hint
-msgid "Pause"
+#, fuzzy
+#| msgid "Pause"
+msgid "Gap"
 msgstr "Paus"
 
 #: tfrmmodifyselection.btnapply.caption
@@ -4544,7 +4576,9 @@ msgid "Settings"
 msgstr "Inställningar"
 
 #: tfrmsettings.chkautoplay.caption
-msgid "Autoplay on video load"
+#, fuzzy
+#| msgid "Autoplay on video load"
+msgid "Autoplay on media load"
 msgstr "Spela upp automatiskt vid videoladdning"
 
 #: tfrmsettings.chkdotsonsplit.caption

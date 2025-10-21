@@ -72,7 +72,7 @@
 {"hash":4749113,"name":"tfrmsettings.btnshortcutapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
 {"hash":124639694,"name":"tfrmsettings.btnshortcutsave.caption","sourcebytes":[83,97,118,101,32,97,115,46,46,46],"value":"Save as..."},
 {"hash":32,"name":"tfrmsettings.lblshortcutinuse.caption","sourcebytes":[32],"value":" "},
-{"hash":6880548,"name":"tfrmsettings.chkautoplay.caption","sourcebytes":[65,117,116,111,112,108,97,121,32,111,110,32,118,105,100,101,111,32,108,111,97,100],"value":"Autoplay on video load"},
+{"hash":189278516,"name":"tfrmsettings.chkautoplay.caption","sourcebytes":[65,117,116,111,112,108,97,121,32,111,110,32,109,101,100,105,97,32,108,111,97,100],"value":"Autoplay on media load"},
 {"hash":147827497,"name":"tfrmsettings.lblseektime.caption","sourcebytes":[83,101,101,107,32,116,105,109,101,32,40,109,115,41],"value":"Seek time (ms)"},
 {"hash":57897536,"name":"tfrmsettings.lblframestep.caption","sourcebytes":[70,114,97,109,101,32,115,116,101,112],"value":"Frame step"},
 {"hash":32797479,"name":"tfrmsettings.chksubtitlehandlebympv.caption","sourcebytes":[109,112,118,32,104,97,110,100,108,101,115,32,115,117,98,116,105,116,108,101,115,32,102,111,114,32,112,114,101,118,105,101,119],"value":"mpv handles subtitles for preview"},

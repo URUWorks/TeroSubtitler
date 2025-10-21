@@ -115,7 +115,7 @@ msgid "Contains a prohibited character"
 msgstr ""
 
 #: proclocalize.lngasreadingvideofile
-msgid "Reading video file..."
+msgid "Reading media file..."
 msgstr ""
 
 #: proclocalize.lngasrepeatedchars
@@ -298,7 +298,7 @@ msgid "No content downloaded, missing file or no Internet connection."
 msgstr ""
 
 #: proclocalize.lngfeaturenotavailablefromurl
-msgid "Function not available for online video."
+msgid "Function not available for online media."
 msgstr ""
 
 #: proclocalize.lngfilechanged
@@ -673,7 +673,7 @@ msgid "Open file"
 msgstr ""
 
 #: proclocalize.lngopenvideofromurl
-msgid "Open video from"
+msgid "Open media from"
 msgstr ""
 
 #: proclocalize.lngoperationcancelled
@@ -1008,7 +1008,7 @@ msgid "Milliseconds"
 msgstr ""
 
 #: proclocalize.lngssmpv
-msgid "Video player"
+msgid "Media player"
 msgstr ""
 
 #: proclocalize.lngssshortcutnone
@@ -1225,7 +1225,7 @@ msgstr ""
 
 #: proclocalize.lngttip3
 #, object-pascal-format
-msgid "Tip: Use <%s> dock/undock video window"
+msgid "Tip: Use <%s> dock/undock media window"
 msgstr ""
 
 #: proclocalize.lngttip4
@@ -1309,7 +1309,7 @@ msgid "Video tracks: %d"
 msgstr ""
 
 #: proclocalize.lngwebvideounsupported
-msgid "The video format is not supported for playback in the web browser."
+msgid "The media format is not supported for playback in the web browser."
 msgstr ""
 
 #: proclocalize.lngwizlanguage
@@ -3839,7 +3839,7 @@ msgid "Undo last action"
 msgstr ""
 
 #: tfrmmain.actundockvideo.caption
-msgid "Dock video"
+msgid "Dock media"
 msgstr ""
 
 #: tfrmmain.actundockwaveform.caption
@@ -3980,7 +3980,7 @@ msgstr ""
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
-msgid "Video preview"
+msgid "Media preview"
 msgstr ""
 
 #: tfrmmain.actviewshotchange.caption
@@ -4209,7 +4209,7 @@ msgstr ""
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr ""
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
@@ -4503,7 +4503,7 @@ msgid "Settings"
 msgstr ""
 
 #: tfrmsettings.chkautoplay.caption
-msgid "Autoplay on video load"
+msgid "Autoplay on media load"
 msgstr ""
 
 #: tfrmsettings.chkdotsonsplit.caption

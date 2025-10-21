@@ -372,6 +372,7 @@ object frmMain: TfrmMain
         Top = 692
         Width = 93
         BorderSpacing.Left = 10
+        BorderSpacing.Right = 10
         Caption = '00:00:00.000'
         Font.Style = [fsBold]
         Layout = tlCenter
@@ -979,7 +980,7 @@ object frmMain: TfrmMain
               Left = 210
               Height = 28
               Top = 3
-              Width = 210
+              Width = 209
               Align = alNone
               AutoSize = True
               BorderSpacing.Left = 210
@@ -1016,17 +1017,17 @@ object frmMain: TfrmMain
                 Style = tbsDivider
               end
               object etlb34: TToolButton
-                Left = 123
+                Left = 122
                 Top = 0
                 Action = actVAlignToBottom
               end
               object etlb35: TToolButton
-                Left = 152
+                Left = 151
                 Top = 0
                 Action = actVAlignToMiddle
               end
               object etlb36: TToolButton
-                Left = 181
+                Left = 180
                 Top = 0
                 Action = actVAlignToTop
               end
@@ -1154,10 +1155,10 @@ object frmMain: TfrmMain
               LabelMemo.AnchorSideBottom.Control = mmoTranslation
               LabelMemo.Left = 270
               LabelMemo.Height = 20
-              LabelMemo.Top = 14
+              LabelMemo.Top = 15
               LabelMemo.Width = 260
               LabelMemo.Anchors = [akLeft, akRight, akBottom]
-              LabelMemo.BorderSpacing.Bottom = 4
+              LabelMemo.BorderSpacing.Bottom = 3
               LabelMemo.Caption = 'mmoTranslation'
               LabelMemo.FocusControl = mmoTranslation
               LabelMemo.ParentColor = False
@@ -1199,10 +1200,10 @@ object frmMain: TfrmMain
               LabelMemo.AnchorSideBottom.Control = mmoText
               LabelMemo.Left = 0
               LabelMemo.Height = 20
-              LabelMemo.Top = 14
+              LabelMemo.Top = 15
               LabelMemo.Width = 260
               LabelMemo.Anchors = [akLeft, akRight, akBottom]
-              LabelMemo.BorderSpacing.Bottom = 4
+              LabelMemo.BorderSpacing.Bottom = 3
               LabelMemo.Caption = 'mmoText'
               LabelMemo.FocusControl = mmoText
               LabelMemo.ParentColor = False
@@ -1586,7 +1587,7 @@ object frmMain: TfrmMain
       Left = 140
       Height = 28
       Top = 3
-      Width = 152
+      Width = 151
       Align = alNone
       AutoSize = True
       BorderSpacing.Left = 140
@@ -1616,17 +1617,17 @@ object frmMain: TfrmMain
         Style = tbsDivider
       end
       object tlb26: TToolButton
-        Left = 65
+        Left = 64
         Top = 0
         Action = actCut
       end
       object tlb27: TToolButton
-        Left = 94
+        Left = 93
         Top = 0
         Action = actCopy
       end
       object tlb28: TToolButton
-        Left = 123
+        Left = 122
         Top = 0
         Action = actPaste
       end
@@ -1674,7 +1675,7 @@ object frmMain: TfrmMain
       Left = 382
       Height = 28
       Top = 3
-      Width = 245
+      Width = 243
       Align = alNone
       AutoSize = True
       BorderSpacing.Left = 382
@@ -1712,34 +1713,34 @@ object frmMain: TfrmMain
         Style = tbsDivider
       end
       object tlb43: TToolButton
-        Left = 94
+        Left = 93
         Top = 0
         Action = actTranslatorMode
       end
       object tlb44: TToolButton
-        Left = 123
+        Left = 122
         Top = 0
         Action = actVideoPreview
       end
       object tlb45: TToolButton
-        Left = 152
+        Left = 151
         Top = 0
         Action = actTimeline
       end
       object tlbdiv12: TToolButton
-        Left = 181
+        Left = 180
         Height = 28
         Top = 0
         Style = tbsDivider
       end
       object tlb46: TToolButton
-        Left = 187
+        Left = 185
         Top = 0
         Action = actTimeMode
         Style = tbsCheck
       end
       object tlb47: TToolButton
-        Left = 216
+        Left = 214
         Top = 0
         Action = actFramesMode
         Style = tbsCheck
@@ -2439,7 +2440,7 @@ object frmMain: TfrmMain
           end
         end
         object mnuViewToolbarVideo: TMenuItem
-          Caption = 'Video'
+          Caption = 'Media'
           object MenuItem281: TMenuItem
             Action = actShowVideoToolbarControls
             AutoCheck = True
@@ -3420,7 +3421,7 @@ object frmMain: TfrmMain
     end
     object actVideoPreview: TAction
       Category = 'View'
-      Caption = 'Video preview'
+      Caption = 'Media preview'
       Checked = True
       ImageIndex = 15
       OnExecute = actVideoPreviewExecute
@@ -3434,7 +3435,7 @@ object frmMain: TfrmMain
     end
     object actUnDockVideo: TAction
       Category = 'View'
-      Caption = 'Dock video'
+      Caption = 'Dock media'
       Checked = True
       OnExecute = actUnDockVideoExecute
     end

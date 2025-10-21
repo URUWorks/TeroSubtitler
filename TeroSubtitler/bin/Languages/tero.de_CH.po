@@ -125,7 +125,9 @@ msgid "Contains a prohibited character"
 msgstr "Enthält ein unzulässiges Zeichen"
 
 #: proclocalize.lngasreadingvideofile
-msgid "Reading video file..."
+#, fuzzy
+#| msgid "Reading video file..."
+msgid "Reading media file..."
 msgstr "Videodatei wird gelesen ..."
 
 #: proclocalize.lngasrepeatedchars
@@ -312,7 +314,9 @@ msgstr ""
 "Datei fehlt oder keine Internetverbindung."
 
 #: proclocalize.lngfeaturenotavailablefromurl
-msgid "Function not available for online video."
+#, fuzzy
+#| msgid "Function not available for online video."
+msgid "Function not available for online media."
 msgstr "Funktion für Online-Videos nicht verfügbar."
 
 #: proclocalize.lngfilechanged
@@ -690,7 +694,9 @@ msgid "Open file"
 msgstr "Datei öffnen"
 
 #: proclocalize.lngopenvideofromurl
-msgid "Open video from"
+#, fuzzy
+#| msgid "Open video from"
+msgid "Open media from"
 msgstr "Video öffnen von"
 
 #: proclocalize.lngoperationcancelled
@@ -1038,7 +1044,9 @@ msgid "Milliseconds"
 msgstr "Millisekunden"
 
 #: proclocalize.lngssmpv
-msgid "Video player"
+#, fuzzy
+#| msgid "Video player"
+msgid "Media player"
 msgstr "Videoplayer"
 
 #: proclocalize.lngssshortcutnone
@@ -1254,8 +1262,9 @@ msgid "Tip: Use <%s> for a web word reference"
 msgstr "Tipp: Verwende <%s>, um eine Online-Wortreferenz zu öffnen"
 
 #: proclocalize.lngttip3
-#, object-pascal-format
-msgid "Tip: Use <%s> dock/undock video window"
+#, object-pascal-format, fuzzy
+#| msgid "Tip: Use <%s> dock/undock video window"
+msgid "Tip: Use <%s> dock/undock media window"
 msgstr "Tipp: Verwende <%s>, um das Video-Fenster anzudocken/abzudocken"
 
 #: proclocalize.lngttip4
@@ -1339,7 +1348,9 @@ msgid "Video tracks: %d"
 msgstr "Videospuren: %d"
 
 #: proclocalize.lngwebvideounsupported
-msgid "The video format is not supported for playback in the web browser."
+#, fuzzy
+#| msgid "The video format is not supported for playback in the web browser."
+msgid "The media format is not supported for playback in the web browser."
 msgstr "Das Videoformat wird vom Webbrowser nicht unterstützt."
 
 #: proclocalize.lngwizlanguage
@@ -3890,7 +3901,9 @@ msgid "Undo last action"
 msgstr "Letzte Handlung rückgängig machen"
 
 #: tfrmmain.actundockvideo.caption
-msgid "Dock video"
+#, fuzzy
+#| msgid "Dock video"
+msgid "Dock media"
 msgstr "Videofenster andocken"
 
 #: tfrmmain.actundockwaveform.caption
@@ -4030,8 +4043,10 @@ msgid "Information..."
 msgstr "Informationen..."
 
 #: tfrmmain.actvideopreview.caption
+#, fuzzy
+#| msgid "Video preview"
 msgctxt "tfrmmain.actvideopreview.caption"
-msgid "Video preview"
+msgid "Media preview"
 msgstr "Video-Vorschau"
 
 #: tfrmmain.actviewshotchange.caption
@@ -4261,8 +4276,10 @@ msgid "Toolbars"
 msgstr "Werkzeugleiste"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
+#, fuzzy
+#| msgid "Video"
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
-msgid "Video"
+msgid "Media"
 msgstr "Video"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
@@ -4559,7 +4576,9 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 #: tfrmsettings.chkautoplay.caption
-msgid "Autoplay on video load"
+#, fuzzy
+#| msgid "Autoplay on video load"
+msgid "Autoplay on media load"
 msgstr "Video automatisch abspielen beim Laden"
 
 #: tfrmsettings.chkdotsonsplit.caption
