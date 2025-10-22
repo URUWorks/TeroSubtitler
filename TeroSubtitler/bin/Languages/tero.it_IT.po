@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 10.10.2025\n"
+"Project-Id-Version: Tero Subtitler - IT - 22.10.2025\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: proclocalize.lngabversion
@@ -124,10 +124,8 @@ msgid "Contains a prohibited character"
 msgstr "Contiene un carattere non consentito"
 
 #: proclocalize.lngasreadingvideofile
-#, fuzzy
-#| msgid "Reading video file..."
 msgid "Reading media file..."
-msgstr "Lettura file video..."
+msgstr "Lettura file media..."
 
 #: proclocalize.lngasrepeatedchars
 msgid "Repeated character"
@@ -313,10 +311,8 @@ msgstr ""
 "File mancante o connessione internet assente."
 
 #: proclocalize.lngfeaturenotavailablefromurl
-#, fuzzy
-#| msgid "Function not available for online video."
 msgid "Function not available for online media."
-msgstr "Funzione non disponibile per i video online."
+msgstr "Funzione non disponibile per i media online."
 
 #: proclocalize.lngfilechanged
 msgid "File has not been saved."
@@ -689,10 +685,8 @@ msgid "Open file"
 msgstr "Apri file"
 
 #: proclocalize.lngopenvideofromurl
-#, fuzzy
-#| msgid "Open video from"
 msgid "Open media from"
-msgstr "Apri video"
+msgstr "Apri media da"
 
 #: proclocalize.lngoperationcancelled
 msgid "Operation cancelled."
@@ -1026,10 +1020,8 @@ msgid "Milliseconds"
 msgstr "Millisecondi"
 
 #: proclocalize.lngssmpv
-#, fuzzy
-#| msgid "Video player"
 msgid "Media player"
-msgstr "Riproduttore video"
+msgstr "Riproduttore media"
 
 #: proclocalize.lngssshortcutnone
 msgid "None"
@@ -1244,10 +1236,9 @@ msgid "Tip: Use <%s> for a web word reference"
 msgstr "Suggerimento: usa <%s> per cercare la definizione di una parola in internet"
 
 #: proclocalize.lngttip3
-#, object-pascal-format, fuzzy
-#| msgid "Tip: Use <%s> dock/undock video window"
+#, object-pascal-format
 msgid "Tip: Use <%s> dock/undock media window"
-msgstr "Suggerimento: usa <%s> per agganciare/sganciare il riquadro controlli video"
+msgstr "Suggerimento: usa <%s> per agganciare/sganciare la finestra media"
 
 #: proclocalize.lngttip4
 #, object-pascal-format
@@ -1330,10 +1321,8 @@ msgid "Video tracks: %d"
 msgstr "Tracce video: %d"
 
 #: proclocalize.lngwebvideounsupported
-#, fuzzy
-#| msgid "The video format is not supported for playback in the web browser."
 msgid "The media format is not supported for playback in the web browser."
-msgstr "L’attuale formato video non è supportato per la riproduzione all’interno di un browser web."
+msgstr "L’attuale formato media non è supportato per la riproduzione all’interno di un browser web."
 
 #: proclocalize.lngwizlanguage
 msgctxt "proclocalize.lngwizlanguage"
@@ -3867,10 +3856,8 @@ msgid "Undo last action"
 msgstr "Annulla l’ultima azione"
 
 #: tfrmmain.actundockvideo.caption
-#, fuzzy
-#| msgid "Dock video"
 msgid "Dock media"
-msgstr "Aggancia riquadro controlli video"
+msgstr "Aggancia media"
 
 #: tfrmmain.actundockwaveform.caption
 msgid "Dock waveform"
@@ -4009,11 +3996,9 @@ msgid "Information..."
 msgstr "Informazioni..."
 
 #: tfrmmain.actvideopreview.caption
-#, fuzzy
-#| msgid "Video preview"
 msgctxt "tfrmmain.actvideopreview.caption"
 msgid "Media preview"
-msgstr "Anteprima video"
+msgstr "Anteprima media"
 
 #: tfrmmain.actviewshotchange.caption
 msgctxt "tfrmmain.actviewshotchange.caption"
@@ -4240,11 +4225,9 @@ msgid "Toolbars"
 msgstr "Barre strumenti"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
-#, fuzzy
-#| msgid "Video"
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
 msgid "Media"
-msgstr "Video"
+msgstr "Media"
 
 #: tfrmmain.mnuviewtoolbarwaveform.caption
 msgctxt "tfrmmain.mnuviewtoolbarwaveform.caption"
@@ -4537,10 +4520,8 @@ msgid "Settings"
 msgstr "Impostazioni"
 
 #: tfrmsettings.chkautoplay.caption
-#, fuzzy
-#| msgid "Autoplay on video load"
 msgid "Autoplay on media load"
-msgstr "Riproduci automaticamente al caricamento del video"
+msgstr "Riproduci automaticamente al caricamento del media"
 
 #: tfrmsettings.chkdotsonsplit.caption
 msgctxt "tfrmsettings.chkdotsonsplit.caption"
@@ -5619,4 +5600,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
