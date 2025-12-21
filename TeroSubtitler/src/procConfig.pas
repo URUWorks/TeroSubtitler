@@ -1521,9 +1521,9 @@ end;
 function ShortCutFolder: String;
 begin
   {$IFDEF DARWIN}
-  Result := GetCustomFolderPath('Resources/ShortCuts/');
+  Result := GetCustomFolderPath('Resources/Shortcuts/');
   {$ELSE}
-  Result := GetCustomFolderPath('ShortCuts');
+  Result := GetCustomFolderPath('Shortcuts');
   {$ENDIF}
 end;
 
