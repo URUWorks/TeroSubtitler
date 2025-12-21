@@ -1,4 +1,4 @@
-1.0.2.0 (x.x.2025)
+1.0.2.0 (21.12.2025)
 - fixed: [macOS] Crash when closing Tero Subtitler while playing a video in some cases
 - fixed: iTT won't load if indicated version isn't 1.0 [SubtitleAPI]
 - fixed: Impossible to type a number from the numeric keypad in the edit box when shortcuts (0-9) are assigned
