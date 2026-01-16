@@ -724,87 +724,96 @@ end;
 
 function FixHearingImpaired(const Text: String; const Enter: String = sLineBreak): String;
 
-  function RHearingImpairedBetweenChar(Line, AChar: String): String;
+  // Función auxiliar interna para limpiar rangos [...] (...)
+  procedure RemoveRange(var Line: String; const OpenChar, CloseChar: String);
   var
-    a, b: Integer;
+    P1, P2: Integer;
   begin
-    Result := Line;
     repeat
-      a := UTF8Pos(AChar, Result);
-      b := UTF8Pos(AChar, Result, a+1);
-      if (a > 0) and (b > 0) then UTF8Delete(Result, a, b);
-    until (a = 0) or (b = 0);
-  end;
+      P1 := UTF8Pos(OpenChar, Line);
+      if P1 = 0 then Break;
 
-  function RHearingImpairedBetweenChars(Line, AChar, BChar: String): String;
-  begin
-    Result := Line;
-    while (UTF8Pos(AChar, Result) > 0) and (UTF8Pos(BChar, Result) > UTF8Pos(AChar, Result)) do
-    begin
-      if UTF8Copy(Result, UTF8Pos(BChar, Result) + 1, 1) = ':' then UTF8Delete(Result, UTF8Pos(BChar, Result) + 1, 1);
-      UTF8Delete(Result, UTF8Pos(AChar, Result), UTF8Pos(BChar, Result) - UTF8Pos(AChar, Result) + 1);
-    end;
-  end;
+      P2 := UTF8Pos(CloseChar, Line, P1 + 1);
+      if P2 = 0 then Break;
 
-  function RHearingImpaired(Line: String): String;
-  begin
-    Result := RHearingImpairedBetweenChars(Line, '(', ')');
-    Result := RHearingImpairedBetweenChars(Result, '[', ']');
-    Result := StringsReplace(Result, ['♪', '♫'], ['', ''], [rfReplaceAll]);
+      // Detectar si hay dos puntos después del cierre (ej: "[Música]:")
+      if (UTF8Length(Line) > P2) and (UTF8Copy(Line, P2 + 1, 1) = ':') then
+        UTF8Delete(Line, P1, P2 - P1 + 2)
+      else
+        UTF8Delete(Line, P1, P2 - P1 + 1);
+    until False;
   end;
 
 var
-  PosEnter : Integer;
-  A, B     : String;
-  sl       : TStrings;
-  i        : Integer;
+  sl: TStringList;
+  i: Integer;
+  Line: String;
 begin
   Result := '';
-  if Text <> '' then
-  begin
-    A := Text;
-    B := '';
-    PosEnter := UTF8Pos(Enter, A);
-    while PosEnter > 0 do
+  if Text = '' then Exit;
+
+  sl := TStringList.Create;
+  try
+    // 1. NORMALIZACIÓN DE ENTER
+    sl.LineBreak := Enter;
+    sl.Text := Text;
+
+    // 2. PROCESAMIENTO
+    for i := sl.Count-1 downto 0 do
     begin
-      B        := B + RHearingImpaired(UTF8Copy(A, 1, PosEnter-1)) + Enter;
-      A        := UTF8Copy(A, PosEnter + UTF8Length(Enter), UTF8Length(A));
-      PosEnter := UTF8Pos(Enter, A);
+      Line := sl[i];
+
+      // Limpieza de etiquetas y símbolos
+      RemoveRange(Line, '(', ')');
+      RemoveRange(Line, '[', ']');
+      Line := StringReplace(Line, '♪', '', [rfReplaceAll]);
+      Line := StringReplace(Line, '♫', '', [rfReplaceAll]);
+
+      // Limpiar espacios dobles residuales
+      while Pos('  ', Line) > 0 do
+        Line := StringReplace(Line, '  ', ' ', [rfReplaceAll]);
+
+      Line := Trim(Line);
+
+      // CASO A: Si la línea quedó vacía o es solo un guión suelto -> Borrar
+      if (Line = '') or (Line = '-') then
+      begin
+        sl.Delete(i);
+        Continue;
+      end;
+
+      // CASO B: Si quedó un guión pegado al texto (error de OCR/Rip) -> Separar
+      // Ej: "-Hola" -> "- Hola"
+      if (UTF8Copy(Line, 1, 1) = '-') and (UTF8Length(Line) > 1) and (UTF8Copy(Line, 2, 1) <> ' ') then
+      begin
+         UTF8Insert(' ', Line, 2);
+      end;
+
+      sl[i] := Line;
     end;
-    B := RemoveUnnecessarySpaces(RHearingImpaired(B + RHearingImpaired(A)));
 
-    PosEnter := UTF8Pos(Enter, B);
-    if (PosEnter > 0) and (UTF8Copy(B, 1, PosEnter-1).Trim = '-') then
+    // 3. CASO C: REGLA DEL HABLANTE SOLITARIO
+    // Si tras borrar las líneas de ruidos solo queda 1 línea, y esa línea
+    // tiene guión de diálogo, debemos quitarlo.
+    if sl.Count = 1 then
     begin
-      UTF8Delete(B, 1, PosEnter+UTF8Length(Enter)-1);
-    end;
-
-    if (UTF8Pos(Enter, B) = 0) and (UTF8Copy(B, 1, 1) = '-') then
-    begin
-      UTF8Delete(B, 1, 1);
-      Result := RemoveUnnecessarySpaces(B);
-    end
-    else
-      Result := B;
-
-    // remnants after Remove Text for Hearing Impaired
-    if Result <> Text then
-    begin
-      sl := TStringList.Create;
-      try
-        sl.Text := Result;
-        if sl.Count > 0 then
-          for i := sl.Count-1 downto 0 do
-          begin
-            A := sl[i].Trim;
-            if (A.IsEmpty) or (A.StartsWith('-') and (UTF8Length(A) = 1)) then
-              sl.Delete(i);
-          end;
-        Result := sl.Text.Trim;
-      finally
-        sl.Free;
+      Line := sl[0];
+      if (UTF8Length(Line) > 0) and (UTF8Copy(Line, 1, 1) = '-') then
+      begin
+        UTF8Delete(Line, 1, 1); // Borrar guión
+        sl[0] := Trim(Line);    // Quitar espacio sobrante inicial
       end;
     end;
+
+    // 4. RECONSTRUCCIÓN
+    Result := sl.Text.Trim;
+
+    // Si el usuario pidió un 'Enter' específico diferente al del sistema,
+    // restauramos ese formato en el resultado final.
+    if (Enter <> sLineBreak) then
+      Result := StringReplace(Result, sLineBreak, Enter, [rfReplaceAll]);
+  finally
+    sl.Free;
   end;
 end;
 
