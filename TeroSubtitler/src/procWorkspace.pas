@@ -1395,11 +1395,42 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure SetStatusBarText(const AText: String; const APanelIndex: Integer = 0; const AUseTimer: Boolean = True);
+var
+  i, LTotalFixed, LPanelWidth: Integer;
 begin
   with frmMain do
   begin
+    if (StatusBar = NIL) or (not StatusBar.HandleAllocated) then Exit;
+    if (APanelIndex < 0) or (APanelIndex >= StatusBar.Panels.Count) then Exit;
+
     TimerStatus.Enabled := False;
     StatusBar.Panels[APanelIndex].Text := AText;
+
+    StatusBar.BeginUpdate;
+    try
+      LTotalFixed := 0;
+
+      for i := 1 to StatusBar.Panels.Count - 1 do
+      begin
+        if StatusBar.Panels[i].Text <> '' then
+          LPanelWidth := StatusBar.Canvas.TextWidth(StatusBar.Panels[i].Text) + 40
+        else
+          LPanelWidth := 40;
+
+        StatusBar.Panels[i].Width := LPanelWidth;
+        LTotalFixed := LTotalFixed + LPanelWidth;
+      end;
+
+      LPanelWidth := StatusBar.ClientWidth - LTotalFixed;
+
+      if LPanelWidth < 0 then LPanelWidth := 0;
+
+      StatusBar.Panels[0].Width := LPanelWidth;
+
+    finally
+      StatusBar.EndUpdate;
+    end;
+
     if not AText.IsEmpty and AUseTimer then
       TimerStatus.Enabled := True;
   end;
