@@ -1067,9 +1067,7 @@ begin
 
       if MPV.IsMediaLoaded and MPV.IsPaused then
         lblMediaTime.Caption := GetTimeStr(MPV.GetMediaPosInMs);
-      {$IFDEF DARWIN}
-      lblMediaTime.AdjustSize;
-      {$ENDIF}
+
       UpdateVideoLengthString;
 
       if AUpdate then UpdateValues(True); // update times
@@ -1301,6 +1299,12 @@ begin
       end
       else
         lblMediaLength.Caption := '';
+
+      {$IFDEF DARWIN}
+      //lblMediaTime.AdjustSize;
+      lblMediaTime.AutoSize := True;
+      lblMediaTime.AutoSize := False;
+      {$ENDIF}
     end
     else
       lblMediaLength.Caption := '';
