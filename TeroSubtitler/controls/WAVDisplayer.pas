@@ -988,31 +988,46 @@ function TUWWaveformDisplayer.CheckSubtitleItemForDynamicSelection(const Subtitl
   const CursorPosMS, SubtitleSelWindow, X, Y: Integer): Boolean;
 var
   NewDynamicEditMode : TDynamicEditMode;
+  VisualStartX, VisualEndX, Sensitivity: Integer;
 begin
   Result             := False;
   NewDynamicEditMode := demNone;
+  Sensitivity        := 6; // Sensibilidad visual fija (6px)
 
-  if (((Subtitle.FinalTime - Subtitle.InitialTime) / SubtitleSelWindow) > 2) then
+  // 1. Obtener coordenadas visuales EXACTAS (incluye el ajuste de frames si está activo)
+  VisualStartX := TimeToPixel(Subtitle.InitialTime - FPositionMS);
+  VisualEndX   := TimeToPixel(Subtitle.FinalTime - FPositionMS);
+
+  if (Y > GetSubCanvasY) and (Y < GetSubCanvasY+GetSubCanvasHeight) then
   begin
-    if (Y > GetSubCanvasY) and (Y < GetSubCanvasY+GetSubCanvasHeight) then
+    // 2. Detección basada puramente en PÍXELES
+    // Borde Inicial
+    if (Abs(X - VisualStartX) <= Sensitivity) then
     begin
-      if (Abs(CursorPosMs - Subtitle.InitialTime) < SubtitleSelWindow) then
-      begin
-        NewDynamicEditMode := demInitial;
-        FDynamicEditTimeMs := Subtitle.InitialTime;
-      end
-      else if (Abs(Subtitle.FinalTime - CursorPosMs) < SubtitleSelWindow) then
-      begin
-        NewDynamicEditMode := demFinal;
-        FDynamicEditTimeMs := Subtitle.FinalTime;
-      end
-      else if (CursorPosMs >= Subtitle.InitialTime) and (CursorPosMs <= Subtitle.FinalTime) then
-      begin
-        NewDynamicEditMode := demWhole;
-        FDynamicEditTimeMs := Subtitle.InitialTime;
-      end;
+      NewDynamicEditMode := demInitial;
+      FDynamicEditTimeMs := Subtitle.InitialTime;
+    end
+    // Borde Final
+    else if (Abs(X - VisualEndX) <= Sensitivity) then
+    begin
+      NewDynamicEditMode := demFinal;
+      FDynamicEditTimeMs := Subtitle.FinalTime;
+    end
+    // Cuerpo del subtítulo (Click central)
+    else if (X > VisualStartX + Sensitivity) and (X < VisualEndX - Sensitivity) then
+    begin
+      NewDynamicEditMode := demWhole;
+      FDynamicEditTimeMs := Subtitle.InitialTime;
+    end
+    // Caso especial: Subtítulos muy pequeños donde no caben los bordes
+    else if ((VisualEndX - VisualStartX) <= (Sensitivity * 2)) and
+            (X >= VisualStartX) and (X <= VisualEndX) then
+    begin
+      NewDynamicEditMode := demWhole;
+      FDynamicEditTimeMs := Subtitle.InitialTime;
     end;
 
+    // Asignar cursor
     if (NewDynamicEditMode = demWhole) then
       Cursor := crHandPoint
     else if (NewDynamicEditMode = demInitial) or (NewDynamicEditMode = demFinal) then
@@ -1022,7 +1037,6 @@ begin
   if (NewDynamicEditMode <> demNone) then
   begin
     Result := True;
-
     FDynamicEditMode := NewDynamicEditMode;
     FDynamicSelOldSub := FDynamicSelSub;
 
@@ -1038,7 +1052,6 @@ begin
   begin
     if Assigned(FDynamicSelSub) and (NewDynamicEditMode <> demNone) then
       SetMinBlankAt(FDynamicSelSub^.InitialTime);
-
     if FDrawGAP then
       UpdateView([uvfSubtitle]);
   end;
@@ -1388,8 +1401,11 @@ begin
     if (Shift = []) or (ssAlt in Shift) then
     begin
       // Find a subtitle under the mouse
-      SubtitleSelWindow := PixelToTime(4);
+      SubtitleSelWindow := PixelToTime(6);
       if (SubtitleSelWindow < 1) then SubtitleSelWindow := 1;
+
+      if FFPSTimeMode and (FFPS > 0) then
+        SubtitleSelWindow := Max(SubtitleSelWindow, Round(1000 / FFPS) + 2);
 
       // First pass : check only inside sub
       SubtitleUnder := FSubtitles.FindFirstPointer(ACursorPosMS, 0);
@@ -1400,8 +1416,12 @@ begin
       end;
 
       // 2nd pass : Wider search
-      SubtitleSelWindow := PixelToTime(2);
+      SubtitleSelWindow := PixelToTime(4);
       if (SubtitleSelWindow < 1) then SubtitleSelWindow := 1;
+
+      if FFPSTimeMode and (FFPS > 0) then
+        SubtitleSelWindow := Max(SubtitleSelWindow, Round(1000 / FFPS) + 2);
+
       SubtitleUnder := FSubtitles.FindFirstPointer(ACursorPosMS, SubtitleSelWindow);
       while Assigned(SubtitleUnder) do
       begin
