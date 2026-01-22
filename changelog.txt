@@ -4,6 +4,9 @@
 - fixed: Dual event hyphen remains upon removal of hearing impaired text if bottom entry only has text within brackets #455
 - fixed: Timecode truncated for current video position #453
 - fixed: Cursor indicator incorrect in timeline in SMPTE at some zoom levels #379
+- fixed: Visual freezing during playback at the start and end of subtitles #347
+- fixed: [macOS] Crash when trying to resize video preview #229
+- improved: Speed and performance optimizations
 
 1.0.2.0 (21.12.2025)
 - fixed: [macOS] Crash when closing Tero Subtitler while playing a video in some cases
