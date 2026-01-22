@@ -413,8 +413,8 @@ begin
     lblStatus.Caption := lngExtracting;
     SetControlsEnabled(False);
 
-    TimerSub := frmMain.TimerSubtitle.Enabled;
-    frmMain.TimerSubtitle.Enabled := False;
+    TimerSub := frmMain.TimerPlayback.Enabled;
+    frmMain.TimerPlayback.Enabled := False;
 
     isPlaying := frmMain.MPV.IsPlaying;
     if isPlaying then
@@ -529,7 +529,7 @@ begin
                   if WAVE.IsTimeLineEnabled then
                     EnableActionsByTag([TAG_ACTION_AUDIO], True);
                 end;
-                TimerSubtitle.Enabled := TimerSub;
+                TimerPlayback.Enabled := TimerSub;
                 if isPlaying then MPV.Resume;
               end;
             end

@@ -67,21 +67,6 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.DoWaveformTimer(Sender: TObject);
-begin
-  if WAVE.IsMouseDown then Exit;
-  TimerWaveform.Enabled := False;
-
-  if WAVE.IsTimeLineEnabled then
-  begin
-    WAVE.SetPlayCursorMS(MPV.GetMediaPosInMs);
-  end;
-
-  TimerWaveform.Enabled := True;
-end;
-
-// -----------------------------------------------------------------------------
-
 procedure TfrmMain.WAVEClick(Sender: TObject);
 begin
   if (MPV.GetMediaLenInMs > 0) then

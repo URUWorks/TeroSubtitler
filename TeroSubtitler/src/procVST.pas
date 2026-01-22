@@ -201,22 +201,43 @@ end;
 
 function VSTGetNodeAtIndex(const AVST: TLazVirtualStringTree; const AIndex: Integer): PVirtualNode;
 var
-  Run : PVirtualNode;
+  Run: PVirtualNode;
 begin
   Result := NIL;
 
+  if (AIndex < 0) or (AIndex >= AVST.RootNodeCount) then Exit;
+
   with AVST do
-    if TotalCount > 0 then
+  begin
+    if AIndex > (RootNodeCount div 2) then
     begin
+      // --- BÚSQUEDA INVERSA
+      Run := GetLast;
+      while Assigned(Run) do
+      begin
+        if Run^.Index = AIndex then
+          Exit(Run)
+        else if Run^.Index < AIndex then
+          Exit(NIL);
+
+        Run := GetPrevious(Run);
+      end;
+    end
+    else
+    begin
+      // --- BÚSQUEDA NORMAL
       Run := GetFirst;
       while Assigned(Run) do
       begin
-        if AIndex = Run^.Index then
-          Exit(Run);
+        if Run^.Index = AIndex then
+          Exit(Run)
+        else if Run^.Index > AIndex then
+          Exit(NIL);
 
         Run := GetNext(Run);
       end;
     end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -247,31 +268,47 @@ end;
 
 procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AIdxs: TIntegerDynArray; const AClear: Boolean);
 var
-  Run : PVirtualNode;
-  i   : Integer;
+  Run: PVirtualNode;
+  i: Integer;
+  NodeToFocus: PVirtualNode;
 begin
   if Length(AIdxs) = 0 then Exit;
 
-  with AVST do
-    if TotalCount > 0 then
+  AVST.BeginUpdate;
+  try
+    if AVST.TotalCount > 0 then
     begin
-      if AClear then ClearSelection;
-      Run := GetFirst;
+      if AClear then AVST.ClearSelection;
+
+      NodeToFocus := nil;
+      Run := AVST.GetFirst;
+
       while Assigned(Run) do
       begin
         for i := Low(AIdxs) to High(AIdxs) do
+        begin
           if AIdxs[i] = Run^.Index then
           begin
-            Selected[Run] := True;
+            AVST.Selected[Run] := True;
+
             if i = High(AIdxs) then
-            begin
-              FocusedNode := Run;
-              ScrollIntoView(Run, True);
-            end;
+              NodeToFocus := Run;
+
+            Break;
           end;
-        Run := GetNext(Run);
+        end;
+        Run := AVST.GetNext(Run);
+      end;
+
+      if Assigned(NodeToFocus) then
+      begin
+        AVST.FocusedNode := NodeToFocus;
+        AVST.ScrollIntoView(NodeToFocus, True);
       end;
     end;
+  finally
+    AVST.EndUpdate;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

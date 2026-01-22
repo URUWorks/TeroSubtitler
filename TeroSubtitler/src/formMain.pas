@@ -802,8 +802,7 @@ type
     tedInitial: TUWTimeEdit;
     TimerStatus: TTimer;
     TimerAutoBackup: TTimer;
-    TimerSubtitle: TTimer;
-    TimerWaveform: TTimer;
+    TimerPlayback: TTimer;
     tlb24: TToolButton;
     tlb25: TToolButton;
     tlb26: TToolButton;
@@ -1000,7 +999,6 @@ type
       const Index: Integer; const OldInitialTime, OldFinalTime: Integer;
       const NeedSort: Boolean);
     procedure WAVESelectionChange(Sender: TObject);
-    procedure DoWaveformTimer(Sender: TObject);
     procedure WAVEClick(Sender: TObject);
     procedure WAVETimeLineClick(Sender: TObject; const Time: Integer);
     procedure GoToNextShotChange(const APrevious: Boolean = False);
@@ -1023,7 +1021,7 @@ type
       MousePos: TPoint; var Handled: Boolean);
     procedure MPVMouseWheelUp(Sender: TObject; Shift: TShiftState;
       MousePos: TPoint; var Handled: Boolean);
-    procedure DoSubtitleTimer(Sender: TObject);
+    procedure DoPlaybackTimer(Sender: TObject);
     procedure sbrSeekMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure sbrSeekMouseUp(Sender: TObject; Button: TMouseButton;

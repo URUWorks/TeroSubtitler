@@ -916,8 +916,7 @@ begin
   mnuVideoAudioStream.Enabled     := False;
   mnuVideoSubtitles.Enabled := False;
 
-  timerSubtitle.Enabled := False;
-  timerWaveform.Enabled := False;
+  TimerPlayback.Enabled := False;
 
   EnableActionsByTag([TAG_ACTION_VIDEO, TAG_ACTION_AUDIO], False);
 end;

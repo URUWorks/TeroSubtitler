@@ -5112,21 +5112,14 @@ object frmMain: TfrmMain
     Left = 34
     Top = 260
   end
-  object TimerWaveform: TTimer
-    Enabled = False
-    Interval = 40
-    OnTimer = DoWaveformTimer
-    Left = 680
-    Top = 120
-  end
   object popLoopCount: TPopupMenu
     Left = 34
     Top = 330
   end
-  object TimerSubtitle: TTimer
+  object TimerPlayback: TTimer
     Enabled = False
-    Interval = 17
-    OnTimer = DoSubtitleTimer
+    Interval = 40
+    OnTimer = DoPlaybackTimer
     Left = 680
     Top = 200
   end

@@ -74,13 +74,17 @@ var
   x, y1, y2            : Integer;
   x1_update, x2_update,
   x_optim              : Integer;
-  x_scaled             : Cardinal;
+  x_scaled, Next_x_scaled : Integer;
   PeaksPerPixelScaled  : Double;
   StartPositionInPeaks : Double;
+  CurrentPeakPos       : Double;
   Middle               : Integer;
   PeakMax, PeakMin     : Integer;
   i                    : Integer;
   RectHeight           : Integer;
+  WavePoints           : array of TPoint;
+  PointIdx, TotalPoints: Integer;
+  ScaleFactorY         : Double;
 begin
   {$IFDEF USEBGRABITMAP}
   ABitmap.Fill(CustomColors.Background);
@@ -92,78 +96,129 @@ begin
 
   if not FPeakDataLoaded then Exit;
 
+  // Preparar area de dibujo
+  {$IFDEF USEBGRABITMAP}
+  //Pen.Color := CustomColors.ItemIT; // Comentado en original
+  ABitmap.CanvasBGRA.Pen.Style := psDot;
+  ABitmap.CanvasBGRA.Line(0, GetWAVECanvasY, Width, GetWAVECanvasY);
+  {$ELSE}
+  ABitmap.Canvas.Pen.Style := psDot;
+  ABitmap.Canvas.Line(0, GetWAVECanvasY, Width, GetWAVECanvasY);
+  {$ENDIF}
+
+  // Calculos previos
+  PeaksPerPixelScaled := (((FPageSizeMS / 1000.0) * FWaveFormat.nSamplesPerSec) / FSamplesPerPeak) / Width;
+  StartPositionInPeaks := ((FPositionMS / 1000.0) * FWaveFormat.nSamplesPerSec) / FSamplesPerPeak;
+
+  x1_update := 0;
+  x2_update := Width;
+
+  if TryOptimize and (FOldPageSizeMs = FPageSizeMs) then
+  begin
+    // Calculate intersection between old and new view
+    if (FPositionMs > FOldPositionMs) then
+    begin
+      x_optim   := TimeToPixel(FPositionMs - FOldPositionMs);
+      x2_update := Width;
+      x1_update := x2_update - x_optim;
+      Constrain(x1_update, 0, Width);
+      if (x1_update <> 0) then
+        {$IFDEF USEBGRABITMAP}
+        ABitmap.CanvasBGRA.CopyRect(Rect(0, 0, x1_update, Height), ABitmap, Rect(x_optim, 0, x1_update, Height));
+        {$ELSE}
+        ABitmap.Canvas.CopyRect(Rect(0, 0, x1_update, Height), ABitmap.Canvas, Rect(x_optim, 0, x1_update, Height));
+        {$ENDIF}
+    end
+    else
+    begin
+      x_optim   := TimeToPixel(FOldPositionMs - FPositionMs);
+      x1_update := 0;
+      x2_update := x_optim;
+      Constrain(x2_update, 0, Width);
+
+      if (x2_update <> Width) then
+        {$IFDEF USEBGRABITMAP}
+        ABitmap.CanvasBGRA.CopyRect(Rect(x_optim, 0, Width-x_optim, Height), ABitmap, Rect(0, 0, Width-x_optim, Height));
+        {$ELSE}
+        ABitmap.Canvas.CopyRect(Rect(x_optim, 0, Width-x_optim, Height), ABitmap.Canvas, Rect(0, 0, Width-x_optim, Height));
+        {$ENDIF}
+    end;
+  end;
+
+  if x1_update >= x2_update then Exit;
+
+  RectHeight := GetSubCanvasHeight;
+  Middle     := GetWAVECanvasY + (RectHeight div 2);
+
+  // Pre-calcular factor de escala Y
+  ScaleFactorY := (FVerticalScaling * RectHeight) / (100.0 * 65536.0);
+
+  // Preparar array de puntos para Polygon
+  // Necesitamos (Ancho * 2) puntos: ida por arriba, vuelta por abajo
+  TotalPoints := (x2_update - x1_update);
+  SetLength(WavePoints, (TotalPoints * 2));
+
+  CurrentPeakPos := (x1_update * PeaksPerPixelScaled) + StartPositionInPeaks;
+  PointIdx := 0;
+
+  for x := x1_update to x2_update - 1 do
+  begin
+    x_scaled := Round(CurrentPeakPos);
+    if (x_scaled >= FPeakTabSize) then x_scaled := FPeakTabSize - 1;
+
+    // Calcular el siguiente indice para el bucle interno
+    CurrentPeakPos := CurrentPeakPos + PeaksPerPixelScaled;
+    Next_x_scaled := Round(CurrentPeakPos);
+    if Next_x_scaled > FPeakTabSize then Next_x_scaled := FPeakTabSize;
+    if Next_x_scaled <= x_scaled then Next_x_scaled := x_scaled + 1;
+
+    // Buscar Min/Max en el rango
+    PeakMax := FPeakTab[x_scaled].Max;
+    PeakMin := FPeakTab[x_scaled].Min;
+
+    // Bucle interno optimizado (se ejecuta solo si hay más de 1 muestra por pixel)
+    if Next_x_scaled > x_scaled + 1 then
+    begin
+      for i := x_scaled + 1 to Next_x_scaled - 1 do
+      begin
+        if FPeakTab[i].Max > PeakMax then PeakMax := FPeakTab[i].Max;
+        if FPeakTab[i].Min < PeakMin then PeakMin := FPeakTab[i].Min;
+      end;
+    end;
+
+    // Calcular coordenadas Y usando el factor pre-calculado
+    y1 := Round(PeakMax * ScaleFactorY);
+    y2 := Round(PeakMin * ScaleFactorY);
+
+    // Guardar puntos en el array
+    // Parte superior (indice 0 hacia adelante)
+    WavePoints[PointIdx] := Point(x, Middle - y1);
+    // Parte inferior (indice Final hacia atrás)
+    WavePoints[Length(WavePoints) - 1 - PointIdx] := Point(x, Middle - y2);
+
+    Inc(PointIdx);
+  end;
+
+  // Dibujar el Poligono completo
   with ABitmap.{$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF} do
   begin
-    //Pen.Color := CustomColors.ItemIT;
-    Pen.Style := psDot;
-    Line(0, GetWAVECanvasY, Width, GetWAVECanvasY);
+    {$IFDEF USEBGRABITMAP}
+    Brush.BGRAColor := CustomColors.Waveform;
+    Pen.BGRAColor   := CustomColors.Waveform;
+    {$ELSE}
+    Brush.Color := CustomColors.Waveform;
+    Pen.Color   := CustomColors.Waveform;
+    {$ENDIF}
+    Brush.Style := bsSolid;
+    Pen.Style   := psSolid;
 
-    PeaksPerPixelScaled := (((FPageSizeMS / 1000.0) * FWaveFormat.nSamplesPerSec) / FSamplesPerPeak) / Width;
-    StartPositionInPeaks := ((FPositionMS / 1000.0) * FWaveFormat.nSamplesPerSec) / FSamplesPerPeak;
+    Polygon(WavePoints);
 
-    x1_update := 0;
-    x2_update := Width;
+    // Restaurar brush para otros dibujos
+    Brush.Style := bsClear;
 
-    if TryOptimize and (FOldPageSizeMs = FPageSizeMs) then
-    begin
-      // Calculate intersection between old and new view, and update only the new part
-      if (FPositionMs > FOldPositionMs) then
-      begin
-        x_optim   := TimeToPixel(FPositionMs - FOldPositionMs);
-        x2_update := Width;
-        x1_update := x2_update - x_optim;
-        Constrain(x1_update, 0, Width);
-
-        if (x1_update <> 0) then
-          CopyRect(Rect(0, 0, x1_update, Height), ABitmap{$IFNDEF USEBGRABITMAP}.Canvas{$ENDIF}, Rect(x_optim, 0, x1_update, Height));
-      end
-      else
-      begin
-        x_optim   := TimeToPixel(FOldPositionMs - FPositionMs);
-        x1_update := 0;
-        x2_update := x_optim;
-        Constrain(x2_update, 0, Width);
-
-        if (x2_update <> Width) then
-          CopyRect(Rect(x_optim, 0, Width-x_optim, Height), ABitmap{$IFNDEF USEBGRABITMAP}.Canvas{$ENDIF}, Rect(0, 0, Width-x_optim, Height));
-      end;
-    end;
-
-    RectHeight := GetSubCanvasHeight;
-    Middle     := GetWAVECanvasY + (RectHeight div 2);
-
-    // Wave
-    Pen.{$IFDEF USEBGRABITMAP}BGRAColor{$ELSE}Color{$ENDIF} := CustomColors.Waveform;
-    Pen.Style := psSolid;
-    Pen.Mode  := pmCopy;
-
-    for x := x1_update to x2_update do
-    begin
-      x_scaled := Round((x * PeaksPerPixelScaled) + StartPositionInPeaks);
-
-      if (x_scaled >= FPeakTabSize) then
-        x_scaled := FPeakTabSize - 1;
-
-      // calculate peak from x_scaled to next x_scaled
-      PeakMax := FPeakTab[x_scaled].Max;
-      PeakMin := FPeakTab[x_scaled].Min;
-      for i := x_scaled+1 to Min(Round(((x+1)*PeaksPerPixelScaled)+StartPositionInPeaks), FPeakTabSize)-1 do
-      begin
-        if FPeakTab[i].Max > PeakMax then
-          PeakMax := FPeakTab[i].Max;
-
-        if FPeakTab[i].Min < PeakMin then
-          PeakMin := FPeakTab[i].Min;
-      end;
-
-      y1 := Round((((PeakMax * FVerticalScaling) / 100) * RectHeight) / 65536);
-      y2 := Round((((PeakMin * FVerticalScaling) / 100) * RectHeight) / 65536);
-
-      Line(x, Middle-y1, x, Middle-y2);
-    end;
-
-    // zero line
-    //Pen.BGRAColor := CustomColors.Waveform;
+    // Zero line
+    Pen.Color := CustomColors.Waveform;
     Line(0, Middle, Width, Middle);
   end;
 end;
@@ -300,9 +355,8 @@ procedure TUWWaveformDisplayer.DrawSubtitleItem(const ABitmap: {$IFDEF USEBGRABI
       Font.Style := [fsBold];
       {$IFDEF USEBGRABITMAP}Font.BGRAColor{$ELSE}Font.Color{$ENDIF} := CustomColors.Text;
       FTS.Layout := ALayout;
-
       if N <> '' then
-        TextRect(R, R.Left, R.Top, S + sLineBreak + sLineBreak + '🗭', FTS) //TextRect(R, R.Left, R.Top, S + sLineBreak + sLineBreak + '🗭' + ' ' + N, FTS)
+        TextRect(R, R.Left, R.Top, S + sLineBreak + sLineBreak + '🗭', FTS)
       else
         TextRect(R, R.Left, R.Top, S, FTS);
     end;
@@ -312,33 +366,67 @@ const
   TextMargin = 4;
 
 var
-  i : Integer;
+  i, StartIdx : Integer;
   r : TUWSubtitleItem;
   x1, x2,
   y1, y2 : Integer;
   FullHLines : Boolean;
   CustomDrawRect : TRect;
+  ViewEndTime : Integer;
 begin
+  if FSubtitles.Count = 0 then Exit;
+
   with ABitmap do
   begin
     FTS.Alignment := taLeftJustify;
     y1  := ATop;
     y2  := ABottom;
+    ViewEndTime := FPositionMS + FPageSizeMS;
 
-    for i := 0 to FSubtitles.Count-1 do
+    // OPTIMIZACIÓN: Búsqueda Binaria del inicio
+    // En lugar de empezar en 0, buscamos dónde empieza la vista actual.
+    // Usamos FindInsertPos para obtener un indice aproximado.
+    StartIdx := FSubtitles.FindInsertPos(FPositionMS, -1);
+
+    // Retrocedemos uno o dos items por seguridad, por si hay un subtítulo
+    // que empezó antes de FPositionMS pero termina dentro de la pantalla.
+    if StartIdx > 0 then Dec(StartIdx);
+    if (StartIdx > 0) and (FSubtitles[StartIdx].FinalTime < FPositionMS) then
+       // Si aun retrocediendo estamos atrás, avanzamos para no procesar de más
+       Inc(StartIdx);
+
+    if StartIdx < 0 then StartIdx := 0;
+    if StartIdx >= FSubtitles.Count then Exit;
+    // ---------------------------------------------------
+
+    for i := StartIdx to FSubtitles.Count-1 do
     begin
       r  := FSubtitles[i];
+
+      // OPTIMIZACIÓN: Salida temprana
+      // Si el subtítulo empieza después de que termina la vista,
+      // y como la lista está ordenada, ya no hay nada más que dibujar.
+      if r.InitialTime > ViewEndTime then Break;
+      // ----------------------------------------------------
+
+      // Si el subtítulo termina antes de que empiece la vista, continuamos
+      // (Esto maneja el caso de solapamientos en el StartIdx)
+      if r.FinalTime < FPositionMS then Continue;
+
       x1 := -1;
       x2 := -1;
 
-      if (r.InitialTime >= FPositionMS) and (r.InitialTime <= FPositionMS + FPageSizeMS) then
+      if (r.InitialTime >= FPositionMS) and (r.InitialTime <= ViewEndTime) then
         x1 := TimeToPixel(r.InitialTime - FPositionMS);
 
-      if (r.FinalTime >= FPositionMS) and (r.FinalTime <= FPositionMS + FPageSizeMS) then
+      if (r.FinalTime >= FPositionMS) and (r.FinalTime <= ViewEndTime) then
         x2 := TimeToPixel(r.FinalTime - FPositionMS);
 
+      // La comprobación de x1 > Width ya no es estrictamente necesaria gracias al Break de arriba,
+      // pero la mantenemos por seguridad visual.
       if x1 > Width then Break;
-      FullHLines := (r.InitialTime < FPositionMS) and (r.FinalTime > FPositionMS + FPageSizeMS);
+
+      FullHLines := (r.InitialTime < FPositionMS) and (r.FinalTime > ViewEndTime);
 
       {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Width := 1;
 
@@ -350,18 +438,18 @@ begin
 
       if ((x1 <> -1) or (x2 <> -1)) then
       begin
-        if (x1 = -1) then
-          x1 := 0
-        else if (x2 = -1) then
-          x2 := Width-1;
+        if (x1 = -1) then x1 := 0
+        else if (x2 = -1) then x2 := Width-1;
 
+        // Dibujar Fondo
         {$IFDEF USEBGRABITMAP}
         ABitmap.FillRect(x1, y1, x2, y2, CustomColors.Item, dmDrawWithTransparency);
         {$ELSE}
-        ABitmap.Canvas.Brush.Color := CustomColors.Item; //DrawAlphaRect(ABitmap, x1, x2, y1, y2, CustomColors.Item);
+        ABitmap.Canvas.Brush.Color := CustomColors.Item;
         Canvas.FillRect(x1, y1, x2, y2);
         {$ENDIF}
 
+        // Dibujar Texto (Solo si hay espacio suficiente)
         if ((x2 - x1) > 10) then
         begin
           CustomDrawRect.Top    := y1+TextMargin;
@@ -369,7 +457,7 @@ begin
           CustomDrawRect.Right  := x2-TextMargin;
           CustomDrawRect.Bottom := y2-TextMargin;
 
-          if Assigned(FOnCustomDrawSubtitleItem) then // Custom draw
+          if Assigned(FOnCustomDrawSubtitleItem) then
             FOnCustomDrawSubtitleItem(Self, Canvas, i, r, CustomDrawRect)
           else
           begin
@@ -383,7 +471,7 @@ begin
             _TextOut(CustomDrawRect, RemoveTSTags(Subtitles[i].Text), Subtitles[i].Notes, tlTop);
             FTS.Alignment := taLeftJustify;
 
-            if (CustomDrawRect.Height > (FTimeLineHeight*2)) and (Pos(LineEnding, Subtitles[i].Text) = 0) then // prevent text overlap
+            if (CustomDrawRect.Height > (FTimeLineHeight*2)) and (Pos(LineEnding, Subtitles[i].Text) = 0) then
             begin
               if not FFPSTimeMode then
                 _TextOut(CustomDrawRect, '#' + IntToStr(i+1) + '  ' + TimeMSToShortString(Subtitles.Duration[i], 1), '', tlBottom)

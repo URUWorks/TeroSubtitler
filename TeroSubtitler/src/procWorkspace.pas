@@ -24,7 +24,7 @@ interface
 uses
   Classes, StdCtrls, Controls, ComCtrls, SysUtils, Menus, Forms, procTypes,
   UWTimeEdit, UWMemo, UWSubtitleAPI, procColorTheme, ActnList, procConventions,
-  procLocalize, Dialogs;
+  procLocalize, Dialogs, Types;
 
 procedure CheckColorTheme(const AForm: TForm); overload;
 procedure CheckColorTheme; overload;
@@ -101,6 +101,8 @@ procedure UpdateValues(const AInvalidate: Boolean = False);
 
 procedure SetCoolBarMinWidth(const ACoolbar: TCoolbar);
 procedure UpdateCoolBar(const ACoolbar: TCoolbar; const ABandFromControl: TControl; const AVisible: Boolean);
+
+procedure ShowCustomHint(const Text: String);
 
 {$IFNDEF WINDOWS}
 procedure PrepareCustomControls(const AForm: TForm);
@@ -1302,8 +1304,12 @@ begin
 
       {$IFDEF DARWIN}
       //lblMediaTime.AdjustSize;
+      if lblMediaTime.Tag = TAG_CONTROL_NORMAL then
+        lblMediaTime.Caption := GetTimeStr(MPV.GetMediaPosInMs);
+
       lblMediaTime.AutoSize := True;
       lblMediaTime.AutoSize := False;
+      lblMediaTime.Width := lblMediaTime.Width + 3;
       {$ENDIF}
     end
     else
@@ -1690,6 +1696,65 @@ begin
         Inc(x);
 
     ACoolbar.Visible := x > 0;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowCustomHint(const Text: String);
+var
+  R: TRect;
+  P: TPoint;
+begin
+  with Workspace do
+  begin
+    // 1. Limpieza si no hay texto
+    if Text = '' then
+    begin
+      if (HintWindow <> NIL) and HintWindow.Visible then
+      begin
+        HintWindow.ReleaseHandle;
+        FreeAndNil(HintWindow);
+      end;
+      HintText := '';
+      Exit;
+    end;
+
+    // 2. Si el texto es idéntico salir
+    if (HintWindow <> NIL) and (HintText = Text) then Exit;
+
+    HintText := Text;
+
+    // 3. Crear instancia si no existe
+    if HintWindow = nil then
+    begin
+      HintWindow := THintWindow.Create(Application);
+      HintWindow.Color := Application.HintColor;
+    end;
+
+    // 4. Calcular el nuevo rectángulo
+    R := HintWindow.CalcHintRect(Screen.DesktopWidth, HintText, NIL);
+    P := Mouse.CursorPos;
+    OffsetRect(R, P.X + 16, P.Y + 16);
+
+    // Ajuste por si se sale de la pantalla a la derecha
+    if R.Right > Screen.DesktopWidth then
+      OffsetRect(R, -(R.Width + 20), 0);
+
+    if HintWindow.Visible then
+    begin
+      // Si ya es visible, solo actualizamos el texto interno,
+      // movemos la ventana y pedimos un repintado.
+      HintWindow.Caption := HintText;
+      HintWindow.BoundsRect := R;
+      HintWindow.Invalidate;
+      HintWindow.Update;
+    end
+    else
+    begin
+      // Solo usamos ActivateHint si la ventana estaba oculta.
+      HintWindow.ActivateHint(R, HintText);
+    end;
   end;
 end;
 

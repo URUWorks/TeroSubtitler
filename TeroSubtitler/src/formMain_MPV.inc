@@ -96,8 +96,7 @@ begin
   if not WAVE.IsPeakDataLoaded then
     WAVE.EmptyText := lngasWaveformText;
 
-  timerSubtitle.Enabled := True;
-  timerWaveform.Enabled := True;
+  TimerPlayback.Enabled := True;
 
   if MPVOptions.SubtitleHandleByMPV then
   begin
@@ -197,39 +196,62 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmMain.DoSubtitleTimer(Sender: TObject);
+procedure TfrmMain.DoPlaybackTimer(Sender: TObject);
 var
-  mpvPos: Integer;
+  CurrentPos: Integer;
+  CurrentText: String;
 begin
-  TimerSubtitle.Enabled := False;
-  mpvPos := MPV.GetMediaPosInMs;
+  (Sender as TTimer).Enabled := False;
 
-  if (MPVOptions.EndTime > 0) and (mpvPos >= MPVOptions.EndTime-1) then
-  begin
-    MPV.Pause;
-    MPV.SetMediaPosInMs(MPVOptions.EndTime);
-    MPVOptions.EndTime := 0;
+  try
+    // 1. OBTENER TIEMPO
+    CurrentPos := MPV.GetMediaPosInMs;
+
+    // ---------------------------------------------------------
+    // A. LÓGICA DE CONTROL (Loop / Auto-Pause)
+    // ---------------------------------------------------------
+    if (MPVOptions.EndTime > 0) and (CurrentPos >= MPVOptions.EndTime-1) then
+    begin
+      MPV.Pause;
+      MPV.SetMediaPosInMs(MPVOptions.EndTime);
+      MPVOptions.EndTime := 0;
+      CurrentPos := MPVOptions.EndTime;
+    end;
+
+    // ---------------------------------------------------------
+    // B. ACTUALIZAR WAVEFORM
+    // ---------------------------------------------------------
+    if (not WAVE.IsMouseDown) and WAVE.IsTimeLineEnabled then
+      WAVE.SetPlayCursorMS(CurrentPos);
+
+    // ---------------------------------------------------------
+    // C. ACTUALIZAR SUBTÍTULOS Y OVERLAY
+    // ---------------------------------------------------------
+    if MPVOptions.SubtitleHandleByMPV then
+    begin
+      if actMediaAutoScroll.Checked then
+        GetSubtitleIndexAtTime(CurrentPos);
+    end
+    else
+    begin
+      CurrentText := GetSubtitleTextAtTime(CurrentPos);
+      //MPV.ShowText(CurrentText, 3600000, '');
+      MPV.ShowOverlayText(CurrentText, '');
+    end;
+
+    // ---------------------------------------------------------
+    // D. ACTUALIZAR GRID (VST)
+    // ---------------------------------------------------------
+    if SubtitleInfo.LastSubtitle.Selected <> SubtitleInfo.LastSubtitle.ShowIndex then
+    begin
+      SubtitleInfo.LastSubtitle.Selected := SubtitleInfo.LastSubtitle.ShowIndex;
+
+      if actMediaAutoScroll.Checked then
+        VSTSelectNode(VST, SubtitleInfo.LastSubtitle.Selected, True, True);
+    end;
+  finally
+    (Sender as TTimer).Enabled := True;
   end;
-
-  if MPVOptions.SubtitleHandleByMPV then
-  begin
-    if actMediaAutoScroll.Checked then
-      GetSubtitleIndexAtTime(mpvPos);
-  end
-  else
-  begin
-    //MPV.ShowOverlayText(GetSubtitleTextAtTime(MPV.GetMediaPosInMs));
-    MPV.ShowText(GetSubtitleTextAtTime(mpvPos), 3600000, '');
-  end;
-
-  if SubtitleInfo.LastSubtitle.Selected <> SubtitleInfo.LastSubtitle.ShowIndex then
-  begin
-    SubtitleInfo.LastSubtitle.Selected := SubtitleInfo.LastSubtitle.ShowIndex;
-    if actMediaAutoScroll.Checked then
-      VSTSelectNode(VST, SubtitleInfo.LastSubtitle.Selected, True, True);
-  end;
-
-  TimerSubtitle.Enabled := True;
 end;
 
 // -----------------------------------------------------------------------------
@@ -260,7 +282,8 @@ begin
       else
       begin
         p := Range((X * Max) div Width, 0, sbrSeek.Max);
-        MPV.ShowOverlayText(GetTimeStr(p));
+        //MPV.ShowText(GetTimeStr(p));
+        ShowCustomHint(GetTimeStr(p));
 
         if MPV.IsPaused and (ssCtrl in Shift) then
         begin
@@ -280,7 +303,8 @@ begin
     MPVSeekTo(sbrSeek.Position);
   end;
 
-  MPV.ShowOverlayText('');
+  //MPV.ShowText('');
+  ShowCustomHint('');
 end;
 
 // -----------------------------------------------------------------------------

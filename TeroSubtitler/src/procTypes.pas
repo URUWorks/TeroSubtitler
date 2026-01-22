@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Graphics, LCLType, UWSubtitleAPI, UWSubtitleAPI.Formats,
   BGRABitmap, procConventions, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procMRU,
-  WAVDisplayer, ATSynEdit;
+  WAVDisplayer, ATSynEdit, Forms;
 
 const
 
@@ -255,6 +255,8 @@ type
     MediaPlayMode  : TMediaPlayMode;
     Transcription  : TTranscription;
     Layout         : Byte;
+    HintWindow     : THintWindow;
+    HintText       : String;
   end;
 
   { VST Proc }

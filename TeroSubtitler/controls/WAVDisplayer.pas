@@ -29,9 +29,9 @@
 unit WAVDisplayer;
 
 {$mode ObjFPC}{$H+}
-{$IFNDEF WINDOWS}
+{.$IFNDEF WINDOWS}
   {$DEFINE USEBGRABITMAP}
-{$ENDIF}
+{.$ENDIF}
 
 interface
 
@@ -185,6 +185,8 @@ type
 
     FTS : TTextStyle;
     FEmptyText : String;
+
+    FMsToPixelRatio: Double; // caché
 
     FOnPeakCreation               : TPeakCreationEvent;
     FOnCustomDrawSubtitleItem     : TCustomDrawSubtitleEvent;
@@ -626,9 +628,9 @@ begin
   else
   begin
     if FFPSTimeMode then
-      Result := Round(GetCorrectTimePos(Time) / (FPageSizeMs / Width))
+      Result := Round(GetCorrectTimePos(Time) * FMsToPixelRatio)
     else
-      Result := Round(Time / (FPageSizeMs / Width));
+      Result := Round(Time * FMsToPixelRatio);
   end;
 end;
 
@@ -873,6 +875,11 @@ begin
     FStepLog := Trunc(Power(10, Trunc(Log10(FStepMs))));
     FStepMs  := FStepMs div FStepLog * FStepLog;
   end;
+
+  if FPageSizeMS > 0 then
+    FMsToPixelRatio := Width / FPageSizeMS
+  else
+    FMsToPixelRatio := 0;
 end;
 
 //------------------------------------------------------------------------------
@@ -887,20 +894,28 @@ end;
 procedure TUWWaveformDisplayer.SetPlayCursorMS(NewPosMS: Integer; const ABothCursor: Boolean = False);
 var
   AMiddle: Integer;
+  OldPixel, NewPixel: Integer;
 begin
   Constrain(NewPosMS, 0, FLengthMS);
   if FPlayCursorMS <> NewPosMS then
   begin
+    OldPixel := TimeToPixel(FPlayCursorMS - FPositionMS);
+
     FPlayCursorMS := NewPosMS;
     if ABothCursor then FCursorMS := FPlayCursorMS;
     if Assigned(FOnPlayCursorChange) then FOnPlayCursorChange(Self);
+
+    NewPixel := TimeToPixel(FPlayCursorMS - FPositionMS);
 
     if not FCenterPlay then
     begin
       if not FMouseIsDown and ((NewPosMS < FPositionMS) or (NewPosMS > (FPositionMS + FPageSizeMS))) then
         SetPositionMS(NewPosMS - (FPageSizeMS div 8)) // Keep 1/8 of the previous display
       else
-        UpdateView([uvfPlayCursor]);
+      begin
+        if OldPixel <> NewPixel then
+          UpdateView([uvfPlayCursor]);
+      end;
     end
     else
     begin
@@ -910,7 +925,10 @@ begin
         ((NewPosMS < FPositionMS) or (NewPosMS > (FPositionMS + FPageSizeMS))) then
         SetPositionMS(NewPosMS - AMiddle)
       else
-        UpdateView([uvfPlayCursor]);
+      begin
+        if OldPixel <> NewPixel then
+          UpdateView([uvfPlayCursor]);
+      end;
     end;
   end;
 end;

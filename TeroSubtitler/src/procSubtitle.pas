@@ -953,7 +953,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetSubtitleIndexAtTime(MSecs: Cardinal): Integer;
+{function GetSubtitleIndexAtTime(MSecs: Cardinal): Integer;
 var
   i: Integer;
 begin
@@ -974,6 +974,48 @@ begin
           Break;
         end;
       end;
+  end;
+end;}
+
+function GetSubtitleIndexAtTime(MSecs: Cardinal): Integer;
+var
+  Idx: Integer;
+begin
+  Result := -1;
+  if Subtitles.Count = 0 then Exit;
+
+  if not MPVOptions.SubtitleHandleByMPV and (Workspace.WorkMode = wmFrames) then
+    MSecs += 1;
+
+  // 1. Busqueda Binaria: Encuentra el índice cercano
+  Idx := Subtitles.FindInsertPos(MSecs, -1);
+
+  // 2. Verificar el índice ANTERIOR (El caso más probable: estamos "dentro" del subtítulo)
+  if (Idx > 0) then
+  begin
+    with Subtitles[Idx - 1] do
+    begin
+      if (InitialTime <= MSecs) and (FinalTime > MSecs) then
+      begin
+        Result := Idx - 1;
+        SubtitleInfo.LastSubtitle.ShowIndex := Result;
+        Exit;
+      end;
+    end;
+  end;
+
+  // 3. Verificar el índice ACTUAL (Caso borde: justo en el milisegundo de inicio)
+  if (Idx < Subtitles.Count) then
+  begin
+    with Subtitles[Idx] do
+    begin
+      if (InitialTime <= MSecs) and (FinalTime > MSecs) then
+      begin
+        Result := Idx;
+        SubtitleInfo.LastSubtitle.ShowIndex := Result;
+        Exit;
+      end;
+    end;
   end;
 end;
 
