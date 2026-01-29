@@ -686,52 +686,123 @@ end;
 
 procedure VSTDivideEntry(const AVST: TLazVirtualStringTree);
 var
-  s : TStringList;
+  s, sTrans : TStringList;
   NodeArray : TNodeArray;
   Item : PUWSubtitleItem;
   i, c, x, t1, t2, p : Integer;
-  changed : Boolean;
+  changed, UseTextAsMaster : Boolean;
   idxs : TIntegerDynArray;
+  TextPart, TransPart, TempTrans : String;
 begin
   if AVST.SelectedCount > 0 then
   begin
     changed := False;
     p := 0;
     s := TStringList.Create;
+    sTrans := TStringList.Create;
     try
       s.SkipLastLineBreak := True;
+      sTrans.SkipLastLineBreak := True;
+
       NodeArray := AVST.GetSortedSelection(False);
       if NodeArray = NIL then Exit;
+
       for i := High(NodeArray) downto Low(NodeArray) do
       begin
         x    := AVST.AbsoluteIndex(NodeArray[i]);
         Item := Subtitles.ItemPointer[x];
-        if Assigned(Item) then
-          with Item^, AppOptions.Conventions do
-            if GetTextLength(Text) > AppOptions.Conventions.CPL then
-            begin
-              SplitRegExpr('\|\|', DivideLines(Text, InitialTime, FinalTime, AppOptions.Conventions.DotsOnSplit, AppOptions.Conventions.CPL, GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames)), s);
-              if s.Count >= 3 then
-              begin
-                changed := True;
-                DeleteSubtitle(x, False, False);
 
-                while s.Count >= 3 do
+        if Assigned(Item) then
+        begin
+          // 1. Guardamos la Traducción
+          TempTrans := Item^.Translation;
+
+          // Verificamos si el TEXTO o la TRADUCCIÓN superan el límite
+          if (GetTextLength(Item^.Text) > AppOptions.Conventions.CPL) or
+             (GetTextLength(TempTrans) > AppOptions.Conventions.CPL) then
+          begin
+            s.Clear;
+            sTrans.Clear;
+
+            // 2. Generamos las divisiones
+            // A. Dividimos el Texto
+            SplitRegExpr('\|\|', DivideLines(Item^.Text, Item^.InitialTime, Item^.FinalTime, AppOptions.Conventions.DotsOnSplit, AppOptions.Conventions.CPL, GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames)), s);
+
+            // B. Dividimos la Traducción (si existe)
+            if TempTrans <> '' then
+            begin
+               SplitRegExpr('\|\|', DivideLines(TempTrans, Item^.InitialTime, Item^.FinalTime, AppOptions.Conventions.DotsOnSplit, AppOptions.Conventions.CPL, GetCorrectTime(AppOptions.Conventions.MinPause, AppOptions.Conventions.PauseInFrames)), sTrans);
+            end;
+
+            // 3. Verificamos si realmente hubo una división en alguno de los dos
+            // (Count > 3 significa que hay más de 1 bloque, ya que el formato es T1||T2||Texto)
+            if (s.Count > 3) or (sTrans.Count > 3) then
+            begin
+              changed := True;
+
+              // El "Maestro" es quien tenga más cortes
+              // Si el texto se divide en 2 y la traducción en 1, el texto manda
+              UseTextAsMaster := s.Count >= sTrans.Count;
+
+              // Borramos el subtítulo original
+              DeleteSubtitle(x, False, False);
+
+              while (s.Count >= 3) or (sTrans.Count >= 3) do
+              begin
+                Inc(p);
+                SetLength(idxs, p);
+
+                // A. OBTENER TIEMPOS
+                // Si el texto manda y tiene datos, usamos sus tiempos
+                if UseTextAsMaster and (s.Count >= 3) then
                 begin
-                  Inc(p);
-                  SetLength(idxs, p);
                   t1 := StrToIntDef(s[0], 0);
                   t2 := StrToIntDef(s[1], 0);
-                  idxs[p-1] := InsertSubtitle(x, t1, t2, FixIncompleteTags(s[2]), '', False, False);
-                  for c := 1 to 3 do s.Delete(0);
-                  Inc(x);
+                end
+                // Si la traducción manda (o el texto se termino), usamos tiempos de traducción
+                else if (sTrans.Count >= 3) then
+                begin
+                  t1 := StrToIntDef(sTrans[0], 0);
+                  t2 := StrToIntDef(sTrans[1], 0);
+                end
+                else
+                begin
+                   t1 := 0; t2 := 0;
                 end;
+
+                // B. OBTENER PARTE DE TEXTO
+                TextPart := '';
+                if s.Count >= 3 then
+                begin
+                  TextPart := FixIncompleteTags(s[2]);
+                  for c := 1 to 3 do s.Delete(0);
+                end;
+
+                // C. OBTENER PARTE DE TRADUCCION
+                TransPart := '';
+                if sTrans.Count >= 3 then
+                begin
+                  TransPart := FixIncompleteTags(sTrans[2]);
+                  for c := 1 to 3 do sTrans.Delete(0);
+                end;
+
+                // D. INSERTAR EL NUEVO SUBTITULO
+                idxs[p-1] := InsertSubtitle(x, t1, t2, TextPart, TransPart, False, False);
+
+                Inc(x);
               end;
+
+              // Limpieza
+              s.Clear;
+              sTrans.Clear;
             end;
+          end;
+        end;
       end;
       SetLength(NodeArray, 0);
     finally
       s.Free;
+      sTrans.Free;
     end;
 
     if changed then
