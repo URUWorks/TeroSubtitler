@@ -1692,8 +1692,8 @@ begin
       end
       else
         case Tag of
-          TAG_CONTROL_TEXT        : VSTDoLoop(VST, @ApplySetTextFromMemo);
-          TAG_CONTROL_TRANSLATION : VSTDoLoop(VST, @ApplySetTranslationFromMemo);
+          TAG_CONTROL_TEXT        : VSTDoLoop(VST, @ApplySetTextFromMemo, dlSelected, True, True);
+          TAG_CONTROL_TRANSLATION : VSTDoLoop(VST, @ApplySetTranslationFromMemo, dlSelected, True, True);
         end;
 end;
 

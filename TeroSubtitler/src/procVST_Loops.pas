@@ -94,14 +94,14 @@ end;
 
 procedure ApplySetTextFromMemo(const Item: PUWSubtitleItem; const Index: Integer);
 begin
-  SetSubtitleText(Index, frmMain.mmoText.Text);
+  SetSubtitleText(Index, frmMain.mmoText.Text, smText, False, frmMain.VST.SelectedCount = 1, False);
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure ApplySetTranslationFromMemo(const Item: PUWSubtitleItem; const Index: Integer);
 begin
-  SetSubtitleText(Index, frmMain.mmoTranslation.Text, smTranslation);
+  SetSubtitleText(Index, frmMain.mmoTranslation.Text, smTranslation, False, frmMain.VST.SelectedCount = 1, False);
 end;
 
 // -----------------------------------------------------------------------------
