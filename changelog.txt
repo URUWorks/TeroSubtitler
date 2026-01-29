@@ -5,6 +5,8 @@
 - fixed: Timecode truncated for current video position #453
 - fixed: Cursor indicator incorrect in timeline in SMPTE at some zoom levels #379
 - fixed: Visual freezing during playback at the start and end of subtitles #347
+- fixed: Corrupted undo stack after pasting entries in Translation #340
+- fixed: Translation deleted when entry is divided #335
 - fixed: [macOS] Crash when trying to resize video preview #229
 - improved: Speed and performance optimizations
 
