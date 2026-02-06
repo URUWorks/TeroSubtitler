@@ -312,7 +312,15 @@ begin
   if AVideoCodec = 'libx265' then
     VideoSettings += ' -tag:v hvc1'
   else if (AVideoCodec = 'prores_ks') and (AVideoProfile <> -1) then
+  begin
     VideoSettings += ' -profile:v ' + AVideoProfile.ToString;
+
+    // Pixel format ProRes
+    case AVideoProfile of
+      0..3 : VideoSettings += ' -pix_fmt yuv422p10le';  // 422 profiles
+      4,5  : VideoSettings += ' -pix_fmt yuv444p10le'; // 4444 profiles
+    end;
+  end;
 
   if (ACutFrom > -1) and (ACutTo > -1) then
     VideoSettings += Format(' -ss %s -to %s', [TimeToString(ACutFrom, DefTimeFormat, GetFPS), TimeToString(ACutTo, DefTimeFormat, GetFPS)]);

@@ -577,14 +577,14 @@ procedure TfrmGenerateVideo.btnGenerateClick(Sender: TObject);
   function GetVideoCodec: String;
   begin
     case cboFormat.ItemIndex of
-      0, 1 :  case cboVideoCodec.ItemIndex of
-                1 : Result := TFFVideoH265Subtype[cboVideoSubtype.ItemIndex].Value;
-                2 : Result := TFFVideoVP9Subtype[cboVideoSubtype.ItemIndex].Value;
-                else
-                  Result := TFFVideoH264Subtype[cboVideoSubtype.ItemIndex].Value;
-                end;
-      2: Result := TFFVideoVP9Subtype[cboVideoSubtype.ItemIndex].Value;
-      3: Result := TFFVideoProResSubtype[cboVideoSubtype.ItemIndex].Value;
+      0, 1 : case cboVideoCodec.ItemIndex of
+               1 : Result := TFFVideoH265Subtype[cboVideoSubtype.ItemIndex].Value;
+               2 : Result := TFFVideoVP9Subtype[cboVideoSubtype.ItemIndex].Value;
+             else
+               Result := TFFVideoH264Subtype[cboVideoSubtype.ItemIndex].Value;
+             end;
+      2: Result := TFFVideoVP9Subtype[0].Value;
+      3: Result := TFFVideoProResSubtype[0].Value;
     end;
   end;
 
