@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tero Subtitler\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-10-13 23:08+0800\n"
+"PO-Revision-Date: 2025-12-22 08:52+0800\n"
 "Last-Translator: Little-data\n"
 "Language-Team: Little-data\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 
 #: proclocalize.lngabversion
 #, object-pascal-format
@@ -123,8 +123,6 @@ msgid "Contains a prohibited character"
 msgstr "包含禁用字符"
 
 #: proclocalize.lngasreadingvideofile
-#, fuzzy
-#| msgid "Reading video file..."
 msgid "Reading media file..."
 msgstr "读取视频文件中..."
 
@@ -308,8 +306,6 @@ msgid "No content downloaded, missing file or no Internet connection."
 msgstr "未下载内容、文件丢失或无网络连接。"
 
 #: proclocalize.lngfeaturenotavailablefromurl
-#, fuzzy
-#| msgid "Function not available for online video."
 msgid "Function not available for online media."
 msgstr "该功能不适用于在线视频。"
 
@@ -640,7 +636,7 @@ msgstr "新的持续时间短于原来的持续时间"
 
 #: proclocalize.lngnewshortcutpreset
 msgid "Enter a name for your shortcuts preset"
-msgstr "输入快捷方式预设的名称"
+msgstr "输入快捷键预设的名称"
 
 #: proclocalize.lngnewshortcutpresetname
 msgctxt "proclocalize.lngnewshortcutpresetname"
@@ -685,8 +681,6 @@ msgid "Open file"
 msgstr "打开文件"
 
 #: proclocalize.lngopenvideofromurl
-#, fuzzy
-#| msgid "Open video from"
 msgid "Open media from"
 msgstr "打开视频"
 
@@ -958,7 +952,7 @@ msgstr "增加平移 %dms"
 #: proclocalize.lngshortcutinuse
 #, object-pascal-format
 msgid "Shortcut currently used in “%s”."
-msgstr "当前在\"%s \"中使用的快捷方式。"
+msgstr "当前在\"%s \"中使用的快捷键。"
 
 #: proclocalize.lngsourcemodewarning
 msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
@@ -996,7 +990,7 @@ msgstr "深色模式"
 
 #: proclocalize.lngssfiletypeassociations
 msgid "File types"
-msgstr "文件类型"
+msgstr "文件关联"
 
 #: proclocalize.lngssframes
 msgctxt "proclocalize.lngssframes"
@@ -1022,8 +1016,6 @@ msgid "Milliseconds"
 msgstr "毫秒"
 
 #: proclocalize.lngssmpv
-#, fuzzy
-#| msgid "Video player"
 msgid "Media player"
 msgstr "视频播放器"
 
@@ -1033,7 +1025,7 @@ msgstr "无"
 
 #: proclocalize.lngssshortcuts
 msgid "Shortcuts"
-msgstr "快捷方式"
+msgstr "快捷键"
 
 #: proclocalize.lngsstools
 msgctxt "proclocalize.lngsstools"
@@ -1103,7 +1095,7 @@ msgstr "条目数：%d"
 #: proclocalize.lngstnumberofwords
 #, object-pascal-format
 msgid "Number of words: %d"
-msgstr "单词数：%d"
+msgstr "字数：%d"
 
 #: proclocalize.lngstshortestcharacterspersecond
 #, object-pascal-format
@@ -1143,7 +1135,7 @@ msgstr "总持续时间：%s"
 #: proclocalize.lngstwordsperminuteaverage
 #, object-pascal-format
 msgid "Words per minute average: %.2f"
-msgstr "平均每分钟单词数：%.2f"
+msgstr "平均每分钟字数：%.2f"
 
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
@@ -1237,11 +1229,10 @@ msgstr "提示：使用<%s/%s>转到上一个/下一个字幕"
 #: proclocalize.lngttip2
 #, object-pascal-format
 msgid "Tip: Use <%s> for a web word reference"
-msgstr "提示：使用<%s>来在网络上查询单词"
+msgstr "提示：使用<%s>来在网络上查询字符"
 
 #: proclocalize.lngttip3
-#, object-pascal-format, fuzzy
-#| msgid "Tip: Use <%s> dock/undock video window"
+#, object-pascal-format
 msgid "Tip: Use <%s> dock/undock media window"
 msgstr "提示：使用<%s>锁定/解锁视频停靠窗口"
 
@@ -1326,8 +1317,6 @@ msgid "Video tracks: %d"
 msgstr "视频轨：%d"
 
 #: proclocalize.lngwebvideounsupported
-#, fuzzy
-#| msgid "The video format is not supported for playback in the web browser."
 msgid "The media format is not supported for playback in the web browser."
 msgstr "不支持在网络浏览器中播放这种视频格式。"
 
@@ -1544,7 +1533,7 @@ msgstr "范围："
 
 #: tfrmautomaticdurations.lblword.caption
 msgid "per word"
-msgstr "每单词"
+msgstr "每字"
 
 #: tfrmautomaticdurations.rbnallthesubtitles.caption
 msgctxt "tfrmautomaticdurations.rbnallthesubtitles.caption"
@@ -2908,7 +2897,7 @@ msgstr "标记字幕..."
 #: tfrmmain.actexportsup.caption
 msgctxt "tfrmmain.actexportsup.caption"
 msgid "Blu-ray SUP..."
-msgstr "蓝光字幕。"
+msgstr "蓝光字幕"
 
 #: tfrmmain.actexporttextonly.caption
 msgid "Text only..."
@@ -3860,8 +3849,6 @@ msgid "Undo last action"
 msgstr "撤销上次操作"
 
 #: tfrmmain.actundockvideo.caption
-#, fuzzy
-#| msgid "Dock video"
 msgid "Dock media"
 msgstr "停靠视频"
 
@@ -4001,10 +3988,11 @@ msgstr "复古"
 msgid "Information..."
 msgstr "信息..."
 
+#: tfrmmain.actvideooffset.caption
+msgid "Video offset..."
+msgstr ""
+
 #: tfrmmain.actvideopreview.caption
-#, fuzzy
-#| msgid "Video preview"
-msgctxt "tfrmmain.actvideopreview.caption"
 msgid "Media preview"
 msgstr "视频预览"
 
@@ -4155,7 +4143,7 @@ msgstr "行"
 #: tfrmmain.mnutextwords.caption
 msgctxt "tfrmmain.mnutextwords.caption"
 msgid "Words"
-msgstr "单词"
+msgstr "字"
 
 #: tfrmmain.mnutools.caption
 msgctxt "tfrmmain.mnutools.caption"
@@ -4233,8 +4221,6 @@ msgid "Toolbars"
 msgstr "工具栏"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
-#, fuzzy
-#| msgid "Video"
 msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
 msgid "Media"
 msgstr "视频"
@@ -4530,8 +4516,6 @@ msgid "Settings"
 msgstr "设置"
 
 #: tfrmsettings.chkautoplay.caption
-#, fuzzy
-#| msgid "Autoplay on video load"
 msgid "Autoplay on media load"
 msgstr "视频加载后自动播放"
 
@@ -4729,7 +4713,7 @@ msgstr "平移时间（毫秒）"
 
 #: tfrmsettings.lblshortcut.caption
 msgid "Shortcut"
-msgstr "快捷方式"
+msgstr "快捷键"
 
 #: tfrmsettings.lblshortcutcat.caption
 msgid "Category"
@@ -4853,6 +4837,10 @@ msgctxt "tfrmshifttimes.lblscope.caption"
 msgid "Scope:"
 msgstr "范围："
 
+#: tfrmshifttimes.rbnabsolute.caption
+msgid "Absolute"
+msgstr ""
+
 #: tfrmshifttimes.rbnallthesubtitles.caption
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
 msgid "All entries"
@@ -4867,6 +4855,10 @@ msgstr "从选择的条目开始"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "仅限选择的条目"
+
+#: tfrmshifttimes.rbnrelative.caption
+msgid "Relative"
+msgstr ""
 
 #: tfrmshotchanges.btnapply.caption
 msgctxt "tfrmshotchanges.btnapply.caption"
@@ -5445,6 +5437,22 @@ msgstr "语音："
 #: tfrmvideodubbing.lblvolume.caption
 msgid "Volume %:"
 msgstr "音量 %："
+
+#: tfrmvideooffset.btnapply.caption
+#, fuzzy
+msgctxt "tfrmvideooffset.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmvideooffset.btnclose.caption
+#, fuzzy
+msgctxt "tfrmvideooffset.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmvideooffset.caption
+msgid "Video offset"
+msgstr ""
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"

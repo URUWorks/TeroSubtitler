@@ -4042,6 +4042,10 @@ msgstr "Retroeffekt"
 msgid "Information..."
 msgstr "Information..."
 
+#: tfrmmain.actvideooffset.caption
+msgid "Video offset..."
+msgstr ""
+
 #: tfrmmain.actvideopreview.caption
 #, fuzzy
 #| msgid "Video preview"
@@ -4899,6 +4903,10 @@ msgctxt "tfrmshifttimes.lblscope.caption"
 msgid "Scope:"
 msgstr "Omfattning:"
 
+#: tfrmshifttimes.rbnabsolute.caption
+msgid "Absolute"
+msgstr ""
+
 #: tfrmshifttimes.rbnallthesubtitles.caption
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
 msgid "All entries"
@@ -4913,6 +4921,10 @@ msgstr "Från vald post"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Endast valda poster"
+
+#: tfrmshifttimes.rbnrelative.caption
+msgid "Relative"
+msgstr ""
 
 #: tfrmshotchanges.btnapply.caption
 msgctxt "tfrmshotchanges.btnapply.caption"
@@ -5491,6 +5503,22 @@ msgstr "Röst:"
 #: tfrmvideodubbing.lblvolume.caption
 msgid "Volume %:"
 msgstr "Volym %:"
+
+#: tfrmvideooffset.btnapply.caption
+#, fuzzy
+msgctxt "tfrmvideooffset.btnapply.caption"
+msgid "Apply"
+msgstr "Verkställ"
+
+#: tfrmvideooffset.btnclose.caption
+#, fuzzy
+msgctxt "tfrmvideooffset.btnclose.caption"
+msgid "Close"
+msgstr "Stäng"
+
+#: tfrmvideooffset.caption
+msgid "Video offset"
+msgstr ""
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"

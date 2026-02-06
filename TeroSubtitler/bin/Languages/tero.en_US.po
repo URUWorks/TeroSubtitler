@@ -3978,6 +3978,10 @@ msgstr ""
 msgid "Information..."
 msgstr ""
 
+#: tfrmmain.actvideooffset.caption
+msgid "Video offset..."
+msgstr ""
+
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
 msgid "Media preview"
@@ -4824,6 +4828,10 @@ msgctxt "tfrmshifttimes.lblscope.caption"
 msgid "Scope:"
 msgstr ""
 
+#: tfrmshifttimes.rbnabsolute.caption
+msgid "Absolute"
+msgstr ""
+
 #: tfrmshifttimes.rbnallthesubtitles.caption
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
 msgid "All entries"
@@ -4837,6 +4845,10 @@ msgstr ""
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
+msgstr ""
+
+#: tfrmshifttimes.rbnrelative.caption
+msgid "Relative"
 msgstr ""
 
 #: tfrmshotchanges.btnapply.caption
@@ -5415,6 +5427,20 @@ msgstr ""
 
 #: tfrmvideodubbing.lblvolume.caption
 msgid "Volume %:"
+msgstr ""
+
+#: tfrmvideooffset.btnapply.caption
+msgctxt "tfrmvideooffset.btnapply.caption"
+msgid "Apply"
+msgstr ""
+
+#: tfrmvideooffset.btnclose.caption
+msgctxt "tfrmvideooffset.btnclose.caption"
+msgid "Close"
+msgstr ""
+
+#: tfrmvideooffset.caption
+msgid "Video offset"
 msgstr ""
 
 #: tfrmwaveextractor.btnclose.caption

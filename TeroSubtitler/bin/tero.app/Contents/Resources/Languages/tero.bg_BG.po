@@ -4016,6 +4016,10 @@ msgstr ""
 msgid "Information..."
 msgstr "Сведения..."
 
+#: tfrmmain.actvideooffset.caption
+msgid "Video offset..."
+msgstr ""
+
 #: tfrmmain.actvideopreview.caption
 #, fuzzy
 #| msgid "Video preview"
@@ -4873,6 +4877,10 @@ msgctxt "tfrmshifttimes.lblscope.caption"
 msgid "Scope:"
 msgstr "Обхват:"
 
+#: tfrmshifttimes.rbnabsolute.caption
+msgid "Absolute"
+msgstr ""
+
 #: tfrmshifttimes.rbnallthesubtitles.caption
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
 msgid "All entries"
@@ -4887,6 +4895,10 @@ msgstr "От избрания надпис"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Само избраните надписи"
+
+#: tfrmshifttimes.rbnrelative.caption
+msgid "Relative"
+msgstr ""
 
 #: tfrmshotchanges.btnapply.caption
 msgctxt "tfrmshotchanges.btnapply.caption"
@@ -5466,6 +5478,22 @@ msgstr "Глас:"
 #: tfrmvideodubbing.lblvolume.caption
 msgid "Volume %:"
 msgstr "Сила %:"
+
+#: tfrmvideooffset.btnapply.caption
+#, fuzzy
+msgctxt "tfrmvideooffset.btnapply.caption"
+msgid "Apply"
+msgstr "Прилагане"
+
+#: tfrmvideooffset.btnclose.caption
+#, fuzzy
+msgctxt "tfrmvideooffset.btnclose.caption"
+msgid "Close"
+msgstr "Затваряне"
+
+#: tfrmvideooffset.caption
+msgid "Video offset"
+msgstr ""
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"

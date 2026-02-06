@@ -1232,6 +1232,7 @@ msgid "Tip: Use <%s> for a web word reference"
 msgstr "提示：使用<%s>来在网络上查询字符"
 
 #: proclocalize.lngttip3
+#, object-pascal-format
 msgid "Tip: Use <%s> dock/undock media window"
 msgstr "提示：使用<%s>锁定/解锁视频停靠窗口"
 
@@ -3987,11 +3988,16 @@ msgstr "复古"
 msgid "Information..."
 msgstr "信息..."
 
+#: tfrmmain.actvideooffset.caption
+msgid "Video offset..."
+msgstr ""
+
 #: tfrmmain.actvideopreview.caption
 msgid "Media preview"
 msgstr "视频预览"
 
 #: tfrmmain.actviewshotchange.caption
+msgctxt "tfrmmain.actviewshotchange.caption"
 msgid "Shot changes"
 msgstr "镜头切换"
 
@@ -4215,6 +4221,7 @@ msgid "Toolbars"
 msgstr "工具栏"
 
 #: tfrmmain.mnuviewtoolbarvideo.caption
+msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
 msgid "Media"
 msgstr "视频"
 
@@ -4830,6 +4837,10 @@ msgctxt "tfrmshifttimes.lblscope.caption"
 msgid "Scope:"
 msgstr "范围："
 
+#: tfrmshifttimes.rbnabsolute.caption
+msgid "Absolute"
+msgstr ""
+
 #: tfrmshifttimes.rbnallthesubtitles.caption
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
 msgid "All entries"
@@ -4844,6 +4855,10 @@ msgstr "从选择的条目开始"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "仅限选择的条目"
+
+#: tfrmshifttimes.rbnrelative.caption
+msgid "Relative"
+msgstr ""
 
 #: tfrmshotchanges.btnapply.caption
 msgctxt "tfrmshotchanges.btnapply.caption"
@@ -5423,6 +5438,22 @@ msgstr "语音："
 msgid "Volume %:"
 msgstr "音量 %："
 
+#: tfrmvideooffset.btnapply.caption
+#, fuzzy
+msgctxt "tfrmvideooffset.btnapply.caption"
+msgid "Apply"
+msgstr "应用"
+
+#: tfrmvideooffset.btnclose.caption
+#, fuzzy
+msgctxt "tfrmvideooffset.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmvideooffset.caption
+msgid "Video offset"
+msgstr ""
+
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
 msgid "Close"
@@ -5592,3 +5623,4 @@ msgstr "反转"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "纵向"
+

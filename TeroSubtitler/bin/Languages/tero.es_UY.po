@@ -3988,6 +3988,10 @@ msgstr "Antiguo"
 msgid "Information..."
 msgstr "Información..."
 
+#: tfrmmain.actvideooffset.caption
+msgid "Video offset..."
+msgstr "Desplazamiento de vídeo..."
+
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
 msgid "Media preview"
@@ -4834,6 +4838,10 @@ msgctxt "tfrmshifttimes.lblscope.caption"
 msgid "Scope:"
 msgstr "Alcance:"
 
+#: tfrmshifttimes.rbnabsolute.caption
+msgid "Absolute"
+msgstr "Absoluto"
+
 #: tfrmshifttimes.rbnallthesubtitles.caption
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
 msgid "All entries"
@@ -4848,6 +4856,10 @@ msgstr "Desde la entrada seleccionada"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
 msgid "Only selected entries"
 msgstr "Solo entradas seleccionadas"
+
+#: tfrmshifttimes.rbnrelative.caption
+msgid "Relative"
+msgstr "Relativo"
 
 #: tfrmshotchanges.btnapply.caption
 msgctxt "tfrmshotchanges.btnapply.caption"
@@ -5426,6 +5438,20 @@ msgstr "Voz:"
 #: tfrmvideodubbing.lblvolume.caption
 msgid "Volume %:"
 msgstr "Volumen %:"
+
+#: tfrmvideooffset.btnapply.caption
+msgctxt "tfrmvideooffset.btnapply.caption"
+msgid "Apply"
+msgstr "Aplicar"
+
+#: tfrmvideooffset.btnclose.caption
+msgctxt "tfrmvideooffset.btnclose.caption"
+msgid "Close"
+msgstr "Cerrar"
+
+#: tfrmvideooffset.caption
+msgid "Video offset"
+msgstr "Desplazamiento de vídeo"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
