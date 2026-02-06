@@ -37,9 +37,12 @@ type
     lblScope: TLabel;
     lyoSimple1: TUWLayout;
     rbnAllTheSubtitles: TUWRadioButton;
+    rbnAbsolute: TUWRadioButton;
     rbnFromTheSelectedSubtitle: TUWRadioButton;
+    rbnRelative: TUWRadioButton;
     rbnOnlySelectedSubtitles: TUWRadioButton;
     tedOffset: TUWTimeEdit;
+    lyoMode: TUWLayout;
     procedure btnApplyClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -83,6 +86,23 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure ApplyTimeOffsetRelative(const Item: PUWSubtitleItem; const Index: Integer);
+var
+  it, ft, v: Integer;
+begin
+  with frmShiftTimes do
+  begin
+    if cboOffset.ItemIndex = 0 then
+      v := tedOffset.Value
+    else
+      v := -tedOffset.Value;
+  end;
+  ShiftTimeRelative(Item^.InitialTime, Item^.FinalTime, v, frmMain.MPV.GetMediaPosInMs, it, ft);
+  SetSubtitleTimes(Index, it, ft, False, False);
+end;
+
+// -----------------------------------------------------------------------------
+
 { TfrmShiftTimes }
 
 // -----------------------------------------------------------------------------
@@ -91,6 +111,14 @@ procedure TfrmShiftTimes.FormCreate(Sender: TObject);
 begin
   tedOffset.FPS      := GetFPS;
   tedOffset.TimeMode := GetTimeEditMode;
+
+  if frmMain.MPV.IsMediaLoaded then
+    rbnRelative.Checked := True
+  else
+  begin
+    rbnAbsolute.Checked := True;
+    rbnRelative.Enabled := False;
+  end;
 
   if (frmMain.VST.SelectedCount = 1) then
     rbnFromTheSelectedSubtitle.Checked := True
@@ -140,7 +168,11 @@ begin
   else
     SelLoop := dlSelected;
 
-  VSTDoLoop(frmMain.VST, @ApplyTimeOffset, SelLoop, True, True);
+  if rbnAbsolute.Checked then
+    VSTDoLoop(frmMain.VST, @ApplyTimeOffset, SelLoop, True, True)
+  else
+    VSTDoLoop(frmMain.VST, @ApplyTimeOffsetRelative, SelLoop, True, True);
+
   Close;
 end;
 

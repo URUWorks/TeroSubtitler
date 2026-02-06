@@ -1,68 +1,69 @@
 object frmShiftTimes: TfrmShiftTimes
   Left = 237
-  Height = 188
+  Height = 302
   Top = 115
-  Width = 293
+  Width = 366
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Shift times'
-  ClientHeight = 188
-  ClientWidth = 293
+  ClientHeight = 302
+  ClientWidth = 366
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '4.2.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
   object btnClose: TButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 194
-    Height = 26
-    Top = 154
-    Width = 91
+    Left = 242
+    Height = 32
+    Top = 260
+    Width = 114
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
+    BorderSpacing.Right = 10
+    BorderSpacing.Bottom = 10
     Cancel = True
     Caption = 'Close'
-    TabOrder = 3
+    TabOrder = 8
     OnClick = btnCloseClick
   end
   object btnApply: TButton
     AnchorSideRight.Control = btnClose
     AnchorSideBottom.Control = btnClose
     AnchorSideBottom.Side = asrBottom
-    Left = 98
-    Height = 26
-    Top = 154
-    Width = 91
+    Left = 122
+    Height = 32
+    Top = 260
+    Width = 114
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     Caption = 'Apply'
     Default = True
-    TabOrder = 2
+    TabOrder = 7
     OnClick = btnApplyClick
   end
   object lblOffset: TLabel
     AnchorSideTop.Control = cboOffset
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = cboOffset
-    Left = 8
-    Height = 15
-    Top = 9
-    Width = 32
-    BorderSpacing.Right = 8
+    Left = 10
+    Height = 20
+    Top = 10
+    Width = 40
+    BorderSpacing.Right = 10
     Caption = 'Offset'
     ParentColor = False
   end
   object cboOffset: TComboBox
-    Left = 78
-    Height = 23
-    Top = 5
-    Width = 66
-    ItemHeight = 15
+    Left = 98
+    Height = 28
+    Top = 6
+    Width = 82
+    ItemHeight = 20
     ItemIndex = 0
     Items.Strings = (
       '+'
@@ -75,59 +76,92 @@ object frmShiftTimes: TfrmShiftTimes
   object tedOffset: TUWTimeEdit
     AnchorSideLeft.Control = cboOffset
     AnchorSideLeft.Side = asrBottom
-    Left = 149
-    Height = 23
-    Top = 5
-    Width = 123
+    Left = 186
+    Height = 29
+    Top = 6
+    Width = 154
     Value = 0
     FPS = 25
     FrameStep = 1
     TimeStep = 1
     TimeMode = temTime
     Alignment = taCenter
-    BorderSpacing.Left = 5
-    Constraints.MinHeight = 21
-    Constraints.MinWidth = 80
+    BorderSpacing.Left = 6
+    Constraints.MinHeight = 26
+    Constraints.MinWidth = 100
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
   end
   object lblScope: TLabel
-    Left = 8
-    Height = 15
-    Top = 49
-    Width = 35
+    Left = 10
+    Height = 20
+    Top = 128
+    Width = 44
+    Anchors = [akLeft, akBottom]
     Caption = 'Scope:'
     ParentColor = False
   end
   object rbnAllTheSubtitles: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 69
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 153
+    Width = 22
+    Anchors = [akLeft, akBottom]
     AutoSize = False
     Caption = 'All entries'
-    TabOrder = 5
+    TabOrder = 3
     TabStop = False
   end
   object rbnFromTheSelectedSubtitle: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 88
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 177
+    Width = 22
+    Anchors = [akLeft, akBottom]
     AutoSize = False
     Caption = 'From selected entry'
-    TabOrder = 6
+    TabOrder = 5
     TabStop = False
   end
   object rbnOnlySelectedSubtitles: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 107
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 201
+    Width = 22
+    Anchors = [akLeft, akBottom]
     AutoSize = False
     Caption = 'Only selected entries'
-    TabOrder = 7
+    TabOrder = 6
     TabStop = False
+  end
+  object lyoMode: TUWLayout
+    Left = 10
+    Height = 64
+    Top = 56
+    Width = 340
+    ClientHeight = 64
+    ClientWidth = 340
+    TabOrder = 2
+    object rbnAbsolute: TUWRadioButton
+      Left = 0
+      Height = 24
+      Top = 0
+      Width = 22
+      AutoSize = False
+      Caption = 'Absolute'
+      TabOrder = 0
+      TabStop = False
+    end
+    object rbnRelative: TUWRadioButton
+      Left = 0
+      Height = 24
+      Top = 24
+      Width = 22
+      AutoSize = False
+      Caption = 'Relative'
+      TabOrder = 1
+      TabStop = False
+    end
   end
 end
