@@ -38,7 +38,8 @@ function SetDelay(const Time, Delay: Integer): Cardinal;                        
 function TimeExpander(const Text: String; const Duration, MSecsValue, CharsValue, MinMSecsDuration: Cardinal; const Expand: Boolean): Cardinal; // expand/reduce the final time of certain subtitles under certain conditions
 function ExtendLength(const NextInitialTime: Cardinal; const AGapMs: Cardinal): Cardinal;
 function AutomaticDurations(const Text: String; const Duration, msPerChar, msPerWord, msPerLine: Cardinal; const Mode: TAutomaticDurationMode): Cardinal; // calculate the duration of subtitles using a simple formula
-procedure ShiftTime(const InitialTime, FinalTime, Value: Integer; out NewInitialTime, NewFinalTime: Integer); // Time to shift subtitle forwards/backwards
+procedure ShiftTime(const InitialTime, FinalTime, Delta: Integer; out NewInitialTime, NewFinalTime: Integer); // Time to shift subtitle forwards/backwards
+procedure ShiftTimeRelative(const InitialTime, FinalTime, TargetTime, VideoTime: Integer; out NewInitialTime, NewFinalTime: Integer);
 procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Single; out NewInitialTime, NewFinalTime: Integer; const SMPTE: Boolean = False);
 function RoundTimeValue(const ATimeValue, AFactor: Integer; const ARoundUp: Boolean = False): Cardinal;
 
@@ -185,11 +186,25 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure ShiftTime(const InitialTime, FinalTime, Value: Integer;
+procedure ShiftTime(const InitialTime, FinalTime, Delta: Integer;
   out NewInitialTime, NewFinalTime: Integer);
 begin
-  NewInitialTime := InitialTime + Value;
-  NewFinalTime   := FinalTime   + Value;
+  NewInitialTime := InitialTime + Delta;
+  NewFinalTime   := FinalTime   + Delta;
+
+  if NewInitialTime < 0 then NewInitialTime := 0;
+  if NewFinalTime   < 0 then NewFinalTime   := 0;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShiftTimeRelative(const InitialTime, FinalTime, TargetTime, VideoTime: Integer;
+  out NewInitialTime, NewFinalTime: Integer);
+var
+  Delta: Integer;
+begin
+  Delta := TargetTime - VideoTime;
+  ShiftTime(InitialTime, FinalTime, Delta, NewInitialTime, NewFinalTime);
 end;
 
 // -----------------------------------------------------------------------------
