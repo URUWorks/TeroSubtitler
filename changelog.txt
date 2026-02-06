@@ -4,6 +4,7 @@
 - fixed: Status of entries with total of four figures or higher sometimes truncated upon select all #456
 - fixed: Dual event hyphen remains upon removal of hearing impaired text if bottom entry only has text within brackets #455
 - fixed: Timecode truncated for current video position #453
+- fixed: Video generation fails for most ProRes subtypes #416
 - fixed: Cursor indicator incorrect in timeline in SMPTE at some zoom levels #379
 - fixed: Visual freezing during playback at the start and end of subtitles #347
 - fixed: Corrupted undo stack after pasting entries in Translation #340
