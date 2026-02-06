@@ -39,8 +39,8 @@ procedure SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats;
 procedure SaveSubtitleAutoBackup;
 procedure SaveMarkedSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 procedure SaveTextOnlySubtitle(const FileName: String; const Format: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode; const Formatted: Boolean; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
-procedure LoadVideo(const FileName: String; const Pos: Int64 = 0);
-procedure LoadAudio(const FileName: String);
+function LoadVideo(const FileName: String; const Pos: Int64 = 0): Boolean;
+function LoadAudio(const FileName: String): Boolean;
 function GetMediaFileNameIfExists(const FileName: String; const Exts: array of String): String;
 function IsValidMediaFileName(const FileName: String; const Exts: array of String): Boolean;
 function LoadShotChangesFileName(const FileName: String): Boolean;
@@ -404,7 +404,11 @@ begin
 
     if not AVideoFile.IsEmpty then
       LoadVideo(AVideoFile)
-    else if not AKeepVideoOpen and not VFisLoaded then LoadVideo(GetMediaFileNameIfExists(FileName, TVideoExts));
+    else if not AKeepVideoOpen and not VFisLoaded then
+    begin
+      if not LoadVideo(GetMediaFileNameIfExists(FileName, TVideoExts)) then
+        LoadVideo(GetMediaFileNameIfExists(FileName, TAudioExts));
+    end;
 
     if AddToMRU then
       with frmMain do
@@ -623,11 +627,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure LoadVideo(const FileName: String; const Pos: Int64 = 0);
+function LoadVideo(const FileName: String; const Pos: Int64 = 0): Boolean;
 begin
+  Result := False;
   with frmMain do
     if FileExists(FileName) then
     begin
+      Result := True;
+
       if not MPVOptions.KeepVideoOpen then
         actCloseMediaExecute(NIL)
       else
@@ -643,8 +650,9 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure LoadAudio(const FileName: String);
+function LoadAudio(const FileName: String): Boolean;
 begin
+  Result := False;
   with frmMain do
   begin
     if FileName = '' then
@@ -658,6 +666,7 @@ begin
 
     if WAVE.IsPeakDataLoaded then
     begin
+      Result := True;
       LoadShotChangesFileName(FileName);
       EnableActionsByTag([TAG_ACTION_AUDIO], True);
     end;
