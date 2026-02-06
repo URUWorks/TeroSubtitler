@@ -91,6 +91,7 @@ type
     actGoToCurrentEntryFinalTime: TAction;
     actDistributeEntriesEvenly: TAction;
     actImportSUP: TAction;
+    actVideoOffset: TAction;
     actShowVideoToolbarVolume: TAction;
     actVideoDubbing: TAction;
     actTTS: TAction;
@@ -409,6 +410,7 @@ type
     MenuItem289: TMenuItem;
     MenuItem290: TMenuItem;
     MenuItem291: TMenuItem;
+    MenuItem292: TMenuItem;
     mnuViewToolbarVideo: TMenuItem;
     mnuViewToolbarWaveform: TMenuItem;
     mnuViewToolbarEditor: TMenuItem;
@@ -1308,6 +1310,7 @@ type
     procedure actStreamExtractorExecute(Sender: TObject);
     procedure actTTSExecute(Sender: TObject);
     procedure actVideoDubbingExecute(Sender: TObject);
+    procedure actVideoOffsetExecute(Sender: TObject);
   private
 
   public

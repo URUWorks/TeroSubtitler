@@ -253,6 +253,7 @@ type
     DefEncoding    : Integer;
     DefFormat      : TUWSubtitleFormats;
     MediaPlayMode  : TMediaPlayMode;
+    VideoOffset    : Integer;
     Transcription  : TTranscription;
     Layout         : Byte;
     HintWindow     : THintWindow;

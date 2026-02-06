@@ -355,6 +355,7 @@
 {"hash":5435902,"name":"tfrmmain.actstatistics.caption","sourcebytes":[83,116,97,116,105,115,116,105,99,115,46,46,46],"value":"Statistics..."},
 {"hash":256352835,"name":"tfrmmain.actclosesubtitle.caption","sourcebytes":[67,108,111,115,101,32,115,117,98,116,105,116,108,101,115],"value":"Close subtitles"},
 {"hash":4863637,"name":"tfrmmain.actcloseapp.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":123550270,"name":"tfrmmain.actvideooffset.caption","sourcebytes":[86,105,100,101,111,32,111,102,102,115,101,116,46,46,46],"value":"Video offset..."},
 {"hash":261306372,"name":"tfrmmain.mnuvstformat.caption","sourcebytes":[109,110,117,86,83,84,70,111,114,109,97,116],"value":"mnuVSTFormat"},
 {"hash":6093503,"name":"tfrmmain.mnuvstvideo.caption","sourcebytes":[86,105,100,101,111],"value":"Video"},
 {"hash":128765908,"name":"tfrmmain.mnumemoformat.caption","sourcebytes":[109,110,117,77,101,109,111,70,111,114,109,97,116],"value":"mnuMemoFormat"},

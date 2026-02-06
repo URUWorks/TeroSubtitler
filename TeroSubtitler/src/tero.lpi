@@ -823,6 +823,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="formVideoOffset.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmVideoOffset"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

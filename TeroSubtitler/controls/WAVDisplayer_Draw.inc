@@ -264,9 +264,9 @@ begin
       x := TimeToPixel(p - FPositionMS);
       {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, PosRect.Top +2, x, PosRect.Bottom);
       if not FFPSTimeMode then
-        PosString := TimeMSToShortString(p, FStepLog)
+        PosString := TimeMSToShortString(p + FOffsetMs, FStepLog)
       else
-        PosString := TimeMSToShortStringFrames(p, 1, FFPS);
+        PosString := TimeMSToShortStringFrames(p + FOffsetMs, 1, FFPS);
       // Calculate text coordinate
       x1 := x + 3; //x - (CanvasBGRA.TextWidth(PosString) div 2);
       // Draw text

@@ -165,7 +165,7 @@ begin
       if lblMediaTime.Tag = TAG_CONTROL_UPDATE then
         lblMediaTime.Tag := TAG_CONTROL_NORMAL
       else
-        lblMediaTime.Caption := GetTimeStr(Time);
+        lblMediaTime.Caption := GetTimeStr(Time + Workspace.VideoOffset);
     end;
   end;
 end;
@@ -230,11 +230,11 @@ begin
     if MPVOptions.SubtitleHandleByMPV then
     begin
       if actMediaAutoScroll.Checked then
-        GetSubtitleIndexAtTime(CurrentPos);
+        GetSubtitleIndexAtTime(CurrentPos + Workspace.VideoOffset);
     end
     else
     begin
-      CurrentText := GetSubtitleTextAtTime(CurrentPos);
+      CurrentText := GetSubtitleTextAtTime(CurrentPos + Workspace.VideoOffset);
       //MPV.ShowText(CurrentText, 3600000, '');
       MPV.ShowOverlayText(CurrentText, '');
     end;

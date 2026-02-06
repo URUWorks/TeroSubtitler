@@ -1,0 +1,5 @@
+{"version":1,"strings":[
+{"hash":76772820,"name":"tfrmvideooffset.caption","sourcebytes":[86,105,100,101,111,32,111,102,102,115,101,116],"value":"Video offset"},
+{"hash":4749113,"name":"tfrmvideooffset.btnapply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":4863637,"name":"tfrmvideooffset.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

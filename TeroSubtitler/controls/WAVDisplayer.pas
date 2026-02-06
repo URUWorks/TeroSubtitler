@@ -136,6 +136,8 @@ type
     FStepMs  : Integer;
     FStepLog : Integer;
 
+    FOffsetMs : Integer;
+
     FVerticalScaling : Integer; // 1..800%
     FTimeLineHeight  : Byte;
 
@@ -226,6 +228,7 @@ type
     procedure ZoomSubtitle(const Subtitle: TUWSubtitleItem); overload;
     procedure ZoomSubtitle(const Start, Stop: Integer); overload;
     procedure SetEmptyText(const AText: String);
+    procedure SetOffset(const Value: Integer);
 
     // peak
     procedure ClearPeakData;
@@ -319,6 +322,7 @@ type
     property FPS                           : Double                       read FFPS                          write FFPS;
     property FPSTimeMode                   : Boolean                      read FFPSTimeMode                  write FFPSTimeMode;
     property CursorPosMS                   : Integer                      read FCursorMS;
+    property OffsetMs                      : Integer                      read FOffsetMs                     write SetOffset;
     property CenterPlayCursor              : Boolean                      read FCenterPlay                   write FCenterPlay;
     property SceneChangeEnabled            : Boolean                      read FSceneChangeEnabled           write SetSceneChangeEnabled;
     property DrawGAP                       : Boolean                      read FDrawGAP                      write FDrawGAP;
@@ -496,6 +500,8 @@ begin
 
   FOldPositionMs := -1;
   FOldPageSizeMs := -1;
+
+  FOffsetMs := 0;
 
   FScrollBar          := TUWScrollBar.Create(Self);
   FScrollBar.Parent   := Self;
@@ -2070,6 +2076,17 @@ begin
   FEmptyText := AText;
   if not IsTimeLineEnabled then
     UpdateView([uvfPosition]);
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.SetOffset(const Value: Integer);
+begin
+  if FOffsetMs <> Value then
+  begin
+    FOffsetMs := Value;
+    DoUpdate;
+  end;
 end;
 
 //------------------------------------------------------------------------------

@@ -236,6 +236,7 @@ begin
     FPS.OutputFPS := FPS.DefFPS;
     DefEncoding   := MaxEncodings-1; // utf-8
     DefFormat     := sfSubRip;
+    VideoOffset   := 0;
     Transcription.Memo := NIL;
     Layout        := 0;
   end;
@@ -520,6 +521,7 @@ begin
         SetWaveformPreview(GetValue('AudioPreview', False));
         SetDockVideoWindow(GetValue('DockVideoControls', True));
         SetDockWaveformWindow(GetValue('DockAudioControls', True));
+        //VideoOffset := GetValue('VideoOffset', 0);
         Workspace.Layout := GetValue('Layout', 0);
         SetWorkspaceLayout(Workspace.Layout);
         CloseKey;
@@ -976,6 +978,7 @@ begin
         SetValue('AudioPreview', actTimeline.Checked);
         SetValue('DockVideoControls', actUnDockVideo.Checked);
         SetValue('DockAudioControls', actUnDockWaveform.Checked);
+        //SetValue('VideoOffset', VideoOffset);
         SetValue('Layout', Layout);
         CloseKey;
       end;

@@ -71,6 +71,7 @@ procedure ShowGenerateBlankVideo;
 procedure ShowStreamExtractor;
 procedure ShowTTS;
 procedure ShowVideoDubbing;
+procedure ShowVideoOffset;
 procedure ShowTBXSettings;
 procedure ShowTBX;
 procedure ShowTBXList;
@@ -96,8 +97,8 @@ uses
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
   formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
   formRoundTime, formStatistics, formGenerateBlankVideo, formStreamExtractor,
-  formPauses, formTTS, formVideoDubbing, formImportSUP, formImportSUPLanguages,
-  LCLTranslator, procLocalize;
+  formPauses, formTTS, formVideoDubbing, formVideoOffset, formImportSUP,
+  formImportSUPLanguages, LCLTranslator, procLocalize;
 
 // -----------------------------------------------------------------------------
 
@@ -769,6 +770,19 @@ begin
   end
   else
     frmVideoDubbing.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowVideoOffset;
+begin
+  if frmVideoOffset = NIL then
+  begin
+    frmVideoOffset := TfrmVideoOffset.Create(Application);
+    ShowForm(frmVideoOffset);
+  end
+  else
+    frmVideoOffset.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

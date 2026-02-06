@@ -1068,7 +1068,7 @@ begin
       end;
 
       if MPV.IsMediaLoaded and MPV.IsPaused then
-        lblMediaTime.Caption := GetTimeStr(MPV.GetMediaPosInMs);
+        lblMediaTime.Caption := GetTimeStr(MPV.GetMediaPosInMs + Workspace.VideoOffset);
 
       UpdateVideoLengthString;
 
@@ -1288,7 +1288,7 @@ begin
   with frmMain, AppOptions do
     if MPV.Initialized then
     begin
-      l := MPV.GetMediaLenInMs;
+      l := MPV.GetMediaLenInMs + Workspace.VideoOffset;
 
       if l > 0 then
       begin
@@ -1297,7 +1297,7 @@ begin
         else
           s := lngasVideoLenSMPTE;
 
-        lblMediaLength.Caption := Format(s, [GetTimeStr(MPV.GetMediaLenInMs), SingleToStr(MPV.GetVideoFPS, FormatSettings)]);
+        lblMediaLength.Caption := Format(s, [GetTimeStr(l), SingleToStr(MPV.GetVideoFPS, FormatSettings)]);
       end
       else
         lblMediaLength.Caption := '';
@@ -1305,7 +1305,7 @@ begin
       {$IFDEF DARWIN}
       //lblMediaTime.AdjustSize;
       if lblMediaTime.Tag = TAG_CONTROL_NORMAL then
-        lblMediaTime.Caption := GetTimeStr(MPV.GetMediaPosInMs);
+        lblMediaTime.Caption := GetTimeStr(MPV.GetMediaPosInMs + Workspace.VideoOffset);
 
       lblMediaTime.AutoSize := True;
       lblMediaTime.AutoSize := False;

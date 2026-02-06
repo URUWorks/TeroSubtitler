@@ -1749,8 +1749,8 @@ object frmMain: TfrmMain
   end
   object MainMenu: TMainMenu
     Images = ImageList_Default
-    Left = 33
-    Top = 50
+    Left = 32
+    Top = 48
     object mnuFile: TMenuItem
       Caption = 'File'
       object MenuItem3: TMenuItem
@@ -2652,6 +2652,9 @@ object frmMain: TfrmMain
       end
       object Separator52: TMenuItem
         Caption = '-'
+      end
+      object MenuItem292: TMenuItem
+        Action = actVideoOffset
       end
       object MenuItem241: TMenuItem
         Action = actGenerateBlankVideo
@@ -5091,6 +5094,12 @@ object frmMain: TfrmMain
       Category = 'File'
       Caption = 'Close'
       OnExecute = actCloseAppExecute
+    end
+    object actVideoOffset: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Video offset...'
+      OnExecute = actVideoOffsetExecute
     end
   end
   object popDropInsert: TPopupMenu
