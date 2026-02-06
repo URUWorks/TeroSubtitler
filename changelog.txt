@@ -1,4 +1,5 @@
 1.0.2.1 (x.x.2026)
+- fixed: Audio file not being linked to subtitle file #459
 - fixed: [macOS] The CFBundleShortVersionString in Info.plist is incorrect #457
 - fixed: Status of entries with total of four figures or higher sometimes truncated upon select all #456
 - fixed: Dual event hyphen remains upon removal of hearing impaired text if bottom entry only has text within brackets #455
@@ -9,6 +10,7 @@
 - fixed: Translation deleted when entry is divided #335
 - fixed: [macOS] Crash when trying to resize video preview #229
 - improved: Speed and performance optimizations
+- added: Set Video Time Offset #374
 
 1.0.2.0 (21.12.2025)
 - fixed: [macOS] Crash when closing Tero Subtitler while playing a video in some cases
