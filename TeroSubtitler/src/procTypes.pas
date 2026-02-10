@@ -47,11 +47,11 @@ const
   DefFPS          = 23.976;
   DefFPSList      : array[0..12] of Double = (23.976, 24.0, 25.0, 29.97, 30.0, 47.952, 48.0, 50.0, 59.94, 60.0, 75.0, 100.0, 120.0);
 
-  TVideoExts : array[0..21] of String =
+  TVideoExts : array[0..22] of String =
   (
     '.avi', '.mp4', '.mpg', '.mpeg', '.mkv', '.webm', '.flv', '.ogv', '.ogg',
     '.mov', '.qt', '.wmv', '.rm', '.rmvb', '.asf', '.m4v', '.m4p', '.mpv',
-    '.mpe', '.nsv', '.divx', '.vob'
+    '.mpe', '.nsv', '.divx', '.vob', '.dat'
   );
 
   TVideoWebExts : array[0..2] of String =
