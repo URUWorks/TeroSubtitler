@@ -1,28 +1,29 @@
 object frmStreamExtractor: TfrmStreamExtractor
   Left = 240
-  Height = 290
+  Height = 362
   Top = 118
-  Width = 580
+  Width = 725
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Stream extractor'
-  ClientHeight = 290
-  ClientWidth = 580
+  ClientHeight = 362
+  ClientWidth = 725
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '4.2.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
   object btnExtract: TButton
     AnchorSideRight.Control = btnClose
     AnchorSideBottom.Control = btnClose
     AnchorSideBottom.Side = asrBottom
-    Left = 385
-    Height = 26
-    Top = 256
-    Width = 91
+    Left = 481
+    Height = 32
+    Top = 320
+    Width = 114
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     Caption = 'Extract'
     Default = True
     Enabled = False
@@ -34,13 +35,13 @@ object frmStreamExtractor: TfrmStreamExtractor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 481
-    Height = 26
-    Top = 256
-    Width = 91
+    Left = 601
+    Height = 32
+    Top = 320
+    Width = 114
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
+    BorderSpacing.Right = 10
+    BorderSpacing.Bottom = 10
     Cancel = True
     Caption = 'Close'
     TabOrder = 6
@@ -52,13 +53,13 @@ object frmStreamExtractor: TfrmStreamExtractor
     AnchorSideRight.Control = btnClose
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnClose
-    Left = 8
-    Height = 178
-    Top = 70
-    Width = 564
+    Left = 10
+    Height = 223
+    Top = 87
+    Width = 705
     Anchors = [akTop, akLeft, akRight, akBottom]
-    BorderSpacing.Top = 8
-    BorderSpacing.Bottom = 8
+    BorderSpacing.Top = 10
+    BorderSpacing.Bottom = 10
     Header.AutoSizeIndex = 0
     Header.Columns = <>
     Header.MainColumn = -1
@@ -80,13 +81,13 @@ object frmStreamExtractor: TfrmStreamExtractor
   object edtFolder: TEdit
     AnchorSideTop.Control = btnFolder
     AnchorSideRight.Control = btnFolder
-    Left = 120
-    Height = 23
-    Top = 39
-    Width = 399
+    Left = 150
+    Height = 28
+    Top = 49
+    Width = 499
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Left = 10
-    BorderSpacing.Right = 5
+    BorderSpacing.Left = 12
+    BorderSpacing.Right = 6
     ReadOnly = True
     TabOrder = 2
   end
@@ -94,10 +95,10 @@ object frmStreamExtractor: TfrmStreamExtractor
     AnchorSideLeft.Control = VST
     AnchorSideTop.Control = edtFolder
     AnchorSideTop.Side = asrCenter
-    Left = 8
-    Height = 15
-    Top = 43
-    Width = 72
+    Left = 10
+    Height = 20
+    Top = 53
+    Width = 90
     Caption = 'Output folder'
   end
   object btnFolder: TButton
@@ -106,12 +107,12 @@ object frmStreamExtractor: TfrmStreamExtractor
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = btnClose
     AnchorSideRight.Side = asrBottom
-    Left = 524
-    Height = 23
-    Top = 39
-    Width = 48
+    Left = 655
+    Height = 29
+    Top = 49
+    Width = 60
     Anchors = [akTop, akRight]
-    BorderSpacing.Top = 8
+    BorderSpacing.Top = 10
     Caption = '...'
     TabOrder = 3
     OnClick = btnFolderClick
@@ -119,13 +120,13 @@ object frmStreamExtractor: TfrmStreamExtractor
   object edtFile: TEdit
     AnchorSideTop.Control = btnFile
     AnchorSideRight.Control = btnFile
-    Left = 120
-    Height = 23
-    Top = 8
-    Width = 399
+    Left = 150
+    Height = 28
+    Top = 10
+    Width = 499
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Left = 10
-    BorderSpacing.Right = 5
+    BorderSpacing.Left = 12
+    BorderSpacing.Right = 6
     ReadOnly = True
     TabOrder = 0
   end
@@ -133,20 +134,20 @@ object frmStreamExtractor: TfrmStreamExtractor
     AnchorSideLeft.Control = VST
     AnchorSideTop.Control = edtFile
     AnchorSideTop.Side = asrCenter
-    Left = 8
-    Height = 15
-    Top = 12
-    Width = 18
+    Left = 10
+    Height = 20
+    Top = 14
+    Width = 23
     Caption = 'File'
   end
   object btnFile: TButton
     AnchorSideLeft.Side = asrBottom
     AnchorSideRight.Control = btnClose
     AnchorSideRight.Side = asrBottom
-    Left = 524
-    Height = 23
-    Top = 8
-    Width = 48
+    Left = 655
+    Height = 29
+    Top = 10
+    Width = 60
     Anchors = [akTop, akRight]
     Caption = '...'
     TabOrder = 1
@@ -155,9 +156,9 @@ object frmStreamExtractor: TfrmStreamExtractor
   object lblState: TLabel
     AnchorSideTop.Control = btnClose
     AnchorSideTop.Side = asrCenter
-    Left = 8
+    Left = 10
     Height = 1
-    Top = 269
+    Top = 336
     Width = 1
     Font.Style = [fsBold]
     ParentFont = False
@@ -166,12 +167,12 @@ object frmStreamExtractor: TfrmStreamExtractor
     AnchorSideLeft.Control = VST
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = btnExtract
-    Left = 8
-    Height = 8
-    Top = 269
-    Width = 367
+    Left = 10
+    Height = 10
+    Top = 336
+    Width = 459
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Right = 10
+    BorderSpacing.Right = 12
     Step = 1
     TabOrder = 7
     Visible = False

@@ -82,6 +82,7 @@ type
     procedure AllowToExtract;
     procedure SetStateText(const AText: String);
     procedure SetControlsEnabled(const AValue: Boolean);
+    procedure FreeStreamList;
     procedure ScanFile(const AFileName: String);
     procedure OpenFolderClick(Sender: TObject);
   public
@@ -126,7 +127,8 @@ end;
 procedure TfrmStreamExtractor.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
-  FList.Free;
+  FreeStreamList;
+  FreeAndNil(FList);
   CloseAction := caFree;
   frmStreamExtractor := NIL;
 end;
@@ -390,6 +392,16 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmStreamExtractor.FreeStreamList;
+var
+  i: Integer;
+begin
+  for i := 0 to FList.Count-1 do
+    Dispose(PStreamInfo(FList[i]));
+
+  FList.Clear;
+end;
+
 procedure TfrmStreamExtractor.ScanFile(const AFileName: String);
 var
   i : Integer;
@@ -408,7 +420,7 @@ begin
 
   SetStateText(lngseAnalyzingFile);
   VST.RootNodeCount := 0;
-  FList.Clear;
+  FreeStreamList;
 
   AParamArray := FFMPEG_Info.Split(' ');
   for i := 0 to High(AParamArray) do
@@ -451,13 +463,31 @@ begin
             if Info^.Codec.Contains('mpeg1') then
               Info^.Output := 'mpg'
             else if Info^.Codec.Contains('prores') then
-                Info^.Output := 'mov'
+              Info^.Output := 'mov'
+            else if Info^.Codec.Contains('vp9') then
+              Info^.Output := 'webm'
             else
               Info^.Output := 'mp4';
           end
           else if Info^.Kind.ToLower = 'audio' then
           begin
-            if Info^.Codec.Contains('mp3') then
+            if Info^.Codec.Contains('eac3') then
+              Info^.Output := 'eac3'
+            else if Info^.Codec.Contains('ac3') then
+              Info^.Output := 'ac3'
+            else if Info^.Codec.Contains('dts') then
+              Info^.Output := 'dts'
+            else if Info^.Codec.Contains('truehd') then
+              Info^.Output := 'thd'
+            else if Info^.Codec.Contains('flac') then
+              Info^.Output := 'flac'
+            else if Info^.Codec.Contains('alac') then
+              Info^.Output := 'm4a'
+            else if Info^.Codec.Contains('opus') then
+              Info^.Output := 'opus'
+            else if Info^.Codec.Contains('vorbis') then
+              Info^.Output := 'ogg'
+            else if Info^.Codec.Contains('mp3') then
               Info^.Output := 'mp3'
             else if Info^.Codec.Contains('mp2') then
               Info^.Output := 'mp2'
@@ -470,13 +500,17 @@ begin
           begin
             if Info^.Codec.Contains('pgs') then
               Info^.Output := 'sup'
+            else if Info^.Codec.Contains('ass') or Info^.Codec.Contains('ssa') then
+              Info^.Output := 'ass'
             else if Info^.Codec.Contains('vtt') then
               Info^.Output := 'vtt'
             else if Info^.Codec.Contains('subrip') then
               Info^.Output := 'srt'
+            else if Info^.Codec.Contains('dvb') then
+              Info^.Output := 'sub'
             else
             begin
-              Info^.Output  := 'srt';
+              Info^.Output := 'srt';
               Info^.Convert := True;
             end;
           end
