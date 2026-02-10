@@ -231,6 +231,7 @@ begin
       cbnBox.ButtonColor := AParamArray[4].ToInteger;
       chkBox.Checked := AParamArray[5].ToBoolean;
       cboVideoCodec.ItemIndex := AParamArray[6].ToInteger;
+      cboVideoCodecSelect(NIL);
       cboVideoSubtype.ItemIndex := AParamArray[7].ToInteger;
       chkReEncodeAudio.Checked := AParamArray[8].ToBoolean;
       chkReEncodeAudioClick(NIL);
@@ -431,15 +432,8 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmGenerateVideo.cboVideoCodecSelect(Sender: TObject);
-var
-  idx: Integer;
 begin
-  idx := cboVideoCodec.ItemIndex;
-
-  if cboFormat.ItemIndex > 1 then
-    idx += cboFormat.ItemIndex;
-
-  FillComboWithVideoSubtypes(cboVideoSubtype, idx);
+  FillComboWithVideoSubtypes(cboVideoCodec, cboVideoSubtype);
 end;
 
 // -----------------------------------------------------------------------------
@@ -575,17 +569,21 @@ end;
 procedure TfrmGenerateVideo.btnGenerateClick(Sender: TObject);
 
   function GetVideoCodec: String;
+  var
+    i: Byte;
   begin
-    case cboFormat.ItemIndex of
-      0, 1 : case cboVideoCodec.ItemIndex of
-               1 : Result := TFFVideoH265Subtype[cboVideoSubtype.ItemIndex].Value;
-               2 : Result := TFFVideoVP9Subtype[cboVideoSubtype.ItemIndex].Value;
-             else
-               Result := TFFVideoH264Subtype[cboVideoSubtype.ItemIndex].Value;
-             end;
-      2: Result := TFFVideoVP9Subtype[0].Value;
-      3: Result := TFFVideoProResSubtype[0].Value;
-    end;
+    Result := '';
+    for i := 0 to High(TFFVideoEncoders) do
+      if TFFVideoEncoders[i].Name.Equals(cboVideoCodec.Text) then
+      begin
+        case i of
+          0: Result := TFFVideoH264Subtype[cboVideoSubtype.ItemIndex].Value;
+          1: Result := TFFVideoH265Subtype[cboVideoSubtype.ItemIndex].Value;
+          2: Result := TFFVideoVP9Subtype[0].Value;
+          3: Result := TFFVideoProResSubtype[0].Value;
+        end;
+        Break;
+      end;
   end;
 
   function GetCutValue(const TED: TUWTimeEdit): Integer;

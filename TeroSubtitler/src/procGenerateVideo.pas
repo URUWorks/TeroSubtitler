@@ -40,8 +40,8 @@ const
 
   TFFVideoEncoders: array[0..3] of TFFmpegEncoderInfoS =
     (
-      (Name: 'H.264'; Value: '.mp4;.mkv'),
-      (Name: 'H.265/HEVC'; Value: '.mp4;.mkv'),
+      (Name: 'H.264'; Value: '.mp4;.mkv;.mov'),
+      (Name: 'H.265/HEVC'; Value: '.mp4;.mkv;.mov'),
       (Name: 'VP9'; Value: '.webm;.mp4;.mkv'),
       (Name: 'Apple ProRes'; Value: '.mov')
     );
@@ -78,13 +78,15 @@ const
       (Name: 'Opus'; Value: 'libopus')
     );
 
-  TFFAudioProResEncoders: array[0..3] of TFFmpegEncoderInfoS =
-    (
-      (Name: 'PCM 16-bit'; Value: 'pcm_s16le'),
-      (Name: 'PCM 24-bit'; Value: 'pcm_s24le'),
-      (Name: 'PCM 32-bit'; Value: 'pcm_s32le'),
-      (Name: 'AAC'; Value: 'aac')
-    );
+  TFFAudioProResEncoders: array[0..5] of TFFmpegEncoderInfoS =
+  (
+    (Name: 'PCM 16-bit';       Value: 'pcm_s16le'),
+    (Name: 'PCM 24-bit';       Value: 'pcm_s24le'),
+    (Name: 'PCM 32-bit';       Value: 'pcm_s32le'),
+    (Name: 'PCM 32-bit Float'; Value: 'pcm_f32le'),
+    (Name: 'Apple Lossless';   Value: 'alac'),
+    (Name: 'AAC';              Value: 'aac')
+  );
 
   TFFAudioSampleRate: array[0..9] of TFFmpegEncoderInfoI =
     (
@@ -103,7 +105,7 @@ const
 
   TFFAudioBitRate: array[0..4] of String =
     (
-      '64k', '128k', '160k', '196k', '320k'
+      '64k', '128k', '192k', '256k', '320k'
     );
 
   TFFAudioChannels: array[0..4] of TFFmpegEncoderInfoI =
@@ -136,7 +138,7 @@ const
     );
 
 procedure FillComboWithVideoEncoders(const Combo: TComboBox; const AFormat: Integer);
-procedure FillComboWithVideoSubtypes(const Combo: TComboBox; const AEncoderIndex: Integer);
+procedure FillComboWithVideoSubtypes(const ComboCodec, Combo: TComboBox);
 procedure FillComboWithVideoProfileProRes(const Combo: TComboBox);
 procedure FillComboWithAudioEncoders(const Combo: TComboBox; const AProRes: Boolean = False);
 procedure FillComboWithAudioChannels(const Combo: TComboBox);
@@ -157,14 +159,14 @@ uses
 
 // -----------------------------------------------------------------------------
 
-procedure FillComboWithArrayType(const Combo: TComboBox; const AType: array of TFFmpegEncoderInfoS; const AIndex: Integer = 0);
+procedure FillComboWithArrayType(const Combo: TComboBox; const AType: array of TFFmpegEncoderInfoS; const AIndex: Integer = 0; const AClear: Boolean = True);
 var
   i: Byte;
 begin
   with Combo do
   begin
     Items.BeginUpdate;
-    Clear;
+    if AClear then Clear;
     for i := 0 to High(AType) do
       Items.Add(AType[i].Name);
 
@@ -175,14 +177,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure FillComboWithArrayType(const Combo: TComboBox; const AType: array of TFFmpegEncoderInfoI; const AIndex: Integer = 0);
+procedure FillComboWithArrayType(const Combo: TComboBox; const AType: array of TFFmpegEncoderInfoI; const AIndex: Integer = 0; const AClear: Boolean = True);
 var
   i: Byte;
 begin
   with Combo do
   begin
     Items.BeginUpdate;
-    Clear;
+    if AClear then Clear;
     for i := 0 to High(AType) do
       Items.Add(AType[i].Name);
 
@@ -193,14 +195,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure FillComboWithArrayString(const Combo: TComboBox; const AArray: array of String; const AIndex: Integer = 0);
+procedure FillComboWithArrayString(const Combo: TComboBox; const AArray: array of String; const AIndex: Integer = 0; const AClear: Boolean = True);
 var
   i: Byte;
 begin
   with Combo do
   begin
     Items.BeginUpdate;
-    Clear;
+    if AClear then Clear;
     for i := 0 to High(AArray) do
       Items.Add(AArray[i]);
 
@@ -230,15 +232,21 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure FillComboWithVideoSubtypes(const Combo: TComboBox; const AEncoderIndex: Integer);
+procedure FillComboWithVideoSubtypes(const ComboCodec, Combo: TComboBox);
+var
+  i: Byte;
 begin
-  case AEncoderIndex of
-    1: FillComboWithArrayType(Combo, TFFVideoH265Subtype);
-    2: FillComboWithArrayType(Combo, TFFVideoVP9Subtype);
-    3: FillComboWithArrayString(Combo, TFFProResProfile);
-  else
-    FillComboWithArrayType(Combo, TFFVideoH264Subtype);
-  end;
+  for i := 0 to High(TFFVideoEncoders) do
+    if TFFVideoEncoders[i].Name.Equals(ComboCodec.Text) then
+    begin
+      case i of
+        0: FillComboWithArrayType(Combo, TFFVideoH264Subtype);
+        1: FillComboWithArrayType(Combo, TFFVideoH265Subtype);
+        2: FillComboWithArrayType(Combo, TFFVideoVP9Subtype);
+        3: FillComboWithArrayString(Combo, TFFProResProfile);
+      end;
+      Break;
+    end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -317,7 +325,7 @@ begin
 
     // Pixel format ProRes
     case AVideoProfile of
-      0..3 : VideoSettings += ' -pix_fmt yuv422p10le';  // 422 profiles
+      0..3 : VideoSettings += ' -pix_fmt yuv422p10le'; // 422 profiles
       4,5  : VideoSettings += ' -pix_fmt yuv444p10le'; // 4444 profiles
     end;
   end;
