@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 22.10.2025\n"
+"Project-Id-Version: Tero Subtitler - IT - 07.02.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
-"Language-Team: GitGianluc e bovirus\n"
+"Language-Team: GitGianluc e R.B.\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3997,7 +3997,7 @@ msgstr "Informazioni..."
 
 #: tfrmmain.actvideooffset.caption
 msgid "Video offset..."
-msgstr ""
+msgstr "Offset video..."
 
 #: tfrmmain.actvideopreview.caption
 msgctxt "tfrmmain.actvideopreview.caption"
@@ -4847,7 +4847,7 @@ msgstr "Scopo:"
 
 #: tfrmshifttimes.rbnabsolute.caption
 msgid "Absolute"
-msgstr ""
+msgstr "Assoluto"
 
 #: tfrmshifttimes.rbnallthesubtitles.caption
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
@@ -4866,7 +4866,7 @@ msgstr "Solo elementi selezionati"
 
 #: tfrmshifttimes.rbnrelative.caption
 msgid "Relative"
-msgstr ""
+msgstr "Relativo"
 
 #: tfrmshotchanges.btnapply.caption
 msgctxt "tfrmshotchanges.btnapply.caption"
@@ -5447,20 +5447,18 @@ msgid "Volume %:"
 msgstr "% volume:"
 
 #: tfrmvideooffset.btnapply.caption
-#, fuzzy
 msgctxt "tfrmvideooffset.btnapply.caption"
 msgid "Apply"
 msgstr "Applica"
 
 #: tfrmvideooffset.btnclose.caption
-#, fuzzy
 msgctxt "tfrmvideooffset.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmvideooffset.caption
 msgid "Video offset"
-msgstr ""
+msgstr "Offset video"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
@@ -5628,4 +5626,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
