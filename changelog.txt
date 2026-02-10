@@ -3,6 +3,7 @@
 - fixed: [macOS] The CFBundleShortVersionString in Info.plist is incorrect #457
 - fixed: Status of entries with total of four figures or higher sometimes truncated upon select all #456
 - fixed: Dual event hyphen remains upon removal of hearing impaired text if bottom entry only has text within brackets #455
+- fixed: Empty audio when extracting elements from certain formats #454
 - fixed: Timecode truncated for current video position #453
 - fixed: Video generation fails for most ProRes subtypes #416
 - fixed: Cursor indicator incorrect in timeline in SMPTE at some zoom levels #379
@@ -11,6 +12,7 @@
 - fixed: Translation deleted when entry is divided #335
 - fixed: [macOS] Crash when trying to resize video preview #229
 - improved: Speed and performance optimizations
+- added: Support for .DAT files #407
 - added: Set Video Time Offset #374
 
 1.0.2.0 (21.12.2025)
