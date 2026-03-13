@@ -12,6 +12,9 @@
 - fixed: Translation deleted when entry is divided #335
 - fixed: [macOS] Crash when trying to resize video preview #229
 - improved: Speed and performance optimizations
+- updated: Lazarus 4.6
+- added: Turkish language (thx veyselece)
+- added: Drop-Frame #427
 - added: Support for .DAT files #407
 - added: Set Video Time Offset #374
 
