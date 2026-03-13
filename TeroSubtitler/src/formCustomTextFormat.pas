@@ -88,7 +88,7 @@ procedure TfrmCustomTextFormat.FormCreate(Sender: TObject);
 begin
   CustomFormat := TUWSubtitleCustomTextFormat.Create('');
 
-  FillComboWithFPS(cboFPS, GetFPS);
+  FillComboWithFPS(cboFPS, GetFPSInfo);
   FillComboWithEncodings(cboEncoding);
   FillComboWithCustomFormat(cboScript);
 
@@ -156,7 +156,7 @@ begin
         NewLineChar  := edtNewLineChar.Text;
         TimeFormat   := edtTimeFormat.Text;
         DecSeparator := iff(edtSeparatorChar.Text <> '', edtSeparatorChar.Text[1], ',');
-        FPS          := StrToSingle(cboFPS.Text, Workspace.FPS.InputFPS, FormatSettings);
+        FPS          := StrToSingle(cboFPS.Text, Workspace.FPS.InputFPS.FPS, FormatSettings);
         Time         := cboTimeCode.ItemIndex = 0;
         ReadFormattingFromStrings(mmoSource.Lines);
 

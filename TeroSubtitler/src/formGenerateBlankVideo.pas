@@ -97,7 +97,7 @@ begin
   tedDuration.FPS := GetFPS;
   tedDuration.TimeMode := GetTimeEditMode;
 
-  FillComboWithFPS(cboFPS, GetFPS);
+  FillComboWithFPS(cboFPS, GetFPSInfo);
 
   popRes.Items.Clear;
   for i := 0 to High(TResolutionList) do
@@ -251,7 +251,7 @@ begin
       FSaveFolder := ExtractFileDir(SD.FileName);
 
       if GenerateBlankVideo(SD.FileName, spnWidth.Value, spnHeight.Value,
-         DefFPSList[cboFPS.ItemIndex], tedDuration.Value,
+         DefFPSList[cboFPS.ItemIndex].FPS, tedDuration.Value,
          cbnSolidColor.ButtonColor, FBackImage,
          rdoSMPTEColorBars.Checked, rdoSolidColor.Checked, rdoImage.Checked,
          chkGenerateTC.Checked, chkGenerateTone.Checked,

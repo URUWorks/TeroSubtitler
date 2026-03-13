@@ -185,10 +185,10 @@ begin
   Result := Text;
   if Result.IsEmpty then Exit;
 
-  Result := ReplaceRegExpr('<span (s|.*S)tyle="bold">(.*?)<\/span>', Result, '{\\b1}$2{\\b0}', True);
-  Result := ReplaceRegExpr('<span (s|.*S)tyle="italic">(.*?)<\/span>', Result, '{\\i1}$2{\\i0}', True);
-  Result := ReplaceRegExpr('<span (s|.*S)tyle="underline">(.*?)<\/span>', Result, '{\\u1}$2{\\u0}', True);
-  Result := ReplaceRegExpr('<span (s|.*S)tyle="strikeout">(.*?)<\/span>', Result, '{\\s1}$2{\\s0}', True);
+  Result := ReplaceRegExpr('<span\s+[^>]*(style|tts:fontWeight)="[^"]*bold[^"]*"[^>]*>(.*?)<\/span>', Result, '{\\b1}$2{\\b0}', True); //ReplaceRegExpr('<span\s+[^>]*style="[^"]*bold[^"]*"[^>]*>(.*?)<\/span>', Result, '{\\b1}$1{\\b0}', True); //ReplaceRegExpr('<span (s|.*S)tyle="bold">(.*?)<\/span>', Result, '{\\b1}$2{\\b0}', True);
+  Result := ReplaceRegExpr('<span\s+[^>]*(style|tts:fontStyle)="[^"]*italic[^"]*"[^>]*>(.*?)<\/span>', Result, '{\\i1}$2{\\i0}', True); //ReplaceRegExpr('<span\s+[^>]*style="[^"]*italic[^"]*"[^>]*>(.*?)<\/span>', Result, '{\\i1}$1{\\i0}', True); //ReplaceRegExpr('<span (s|.*S)tyle="italic">(.*?)<\/span>', Result, '{\\i1}$2{\\i0}', True);
+  Result := ReplaceRegExpr('<span\s+[^>]*(style|tts:textDecoration)="[^"]*underline[^"]*"[^>]*>(.*?)<\/span>', Result, '{\\u1}$2{\\u0}', True); //ReplaceRegExpr('<span\s+[^>]*style="[^"]*underline[^"]*"[^>]*>(.*?)<\/span>', Result, '{\\u1}$1{\\u0}', True); //ReplaceRegExpr('<span (s|.*S)tyle="underline">(.*?)<\/span>', Result, '{\\u1}$2{\\u0}', True);
+  Result := ReplaceRegExpr('<span\s+[^>]*(style|tts:textDecoration)="[^"]*line-through[^"]*"[^>]*>(.*?)<\/span>', Result, '{\\s1}$2{\\s0}', True); //ReplaceRegExpr('<span\s+[^>]*style="[^"]*strikeout[^"]*"[^>]*>(.*?)<\/span>', Result, '{\\s1}$1{\\s0}', True); //ReplaceRegExpr('<span (s|.*S)tyle="strikeout">(.*?)<\/span>', Result, '{\\s1}$2{\\s0}', True);
   // unsupported tags for now
   repeat
     Result := ReplaceRegExpr(unknowTagExpr, Result, '$1', True);

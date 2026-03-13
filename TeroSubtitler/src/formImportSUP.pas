@@ -298,7 +298,7 @@ begin
          end;
       2: begin
            TS.Alignment := taCenter;
-           RoundFramesValue(FList.DisplaySets[Node^.Index]^.InCue, FList.DisplaySets[Node^.Index]^.OutCue, Workspace.FPS.OutputFPS, it, ft);
+           RoundFramesValue(FList.DisplaySets[Node^.Index]^.InCue, FList.DisplaySets[Node^.Index]^.OutCue, Workspace.FPS.OutputFPS.FPS, it, ft);
            TargetCanvas.TextRect(CellRect, CellRect.Left, CellRect.Top, GetTimeStr(ft-it, True), TS);
          end;
       3: begin

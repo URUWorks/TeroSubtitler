@@ -102,7 +102,7 @@ var
 begin
   CustomFormat := TUWSubtitleCustomImageFormat.Create('');
 
-  FillComboWithFPS(cboFPS, GetFPS);
+  FillComboWithFPS(cboFPS, GetFPSInfo);
   FillComboWithCustomFormat(cboScript, '*.cfi');
 
   cboFont.Items.Assign(Screen.Fonts);

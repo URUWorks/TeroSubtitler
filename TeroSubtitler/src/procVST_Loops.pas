@@ -354,8 +354,8 @@ begin
   begin
     it          := TimeToFrames(InitialTime, GetInputFPS);
     ft          := TimeToFrames(FinalTime, GetInputFPS);
-    InitialTime := FramesToTime(it, Workspace.FPS.InputFPS);
-    FinalTime   := FramesToTime(ft, Workspace.FPS.InputFPS);
+    InitialTime := FramesToTime(it, Workspace.FPS.InputFPS.FPS);
+    FinalTime   := FramesToTime(ft, Workspace.FPS.InputFPS.FPS);
   end;
 end;
 
@@ -368,8 +368,8 @@ begin
   UndoInstance.AddUndo(utSubtitleChange, Index, Item^, False, False);
   with Item^ do
   begin
-    it          := TimeToFrames(InitialTime, Workspace.FPS.OutputFPS);
-    ft          := TimeToFrames(FinalTime, Workspace.FPS.OutputFPS);
+    it          := TimeToFrames(InitialTime, Workspace.FPS.OutputFPS.FPS);
+    ft          := TimeToFrames(FinalTime, Workspace.FPS.OutputFPS.FPS);
     InitialTime := FramesToTime(it, GetFPS);
     FinalTime   := FramesToTime(ft, GetFPS);
   end;

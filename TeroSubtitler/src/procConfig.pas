@@ -231,7 +231,7 @@ begin
   with Workspace do
   begin
     SMPTE         := False;
-    FPS.DefFPS    := 23.976;
+    FPS.DefFPS    := DefFPSList[0]; // 23.976;
     FPS.InputFPS  := FPS.DefFPS;
     FPS.OutputFPS := FPS.DefFPS;
     DefEncoding   := MaxEncodings-1; // utf-8
@@ -512,9 +512,9 @@ begin
         WorkMode := TWorkMode(GetValue('WorkMode', Integer(WorkMode)));
         TranslatorMode := GetValue('TranslatorMode', TranslatorMode);
         SetTranslatorMode(TranslatorMode);
-        FPS.DefFPS := StrToSingle(ReplaceString(GetValue('DefFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
-        FPS.InputFPS := StrToSingle(ReplaceString(GetValue('InputFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
-        FPS.OutputFPS := StrToSingle(ReplaceString(GetValue('OutputFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
+        FPS.DefFPS := DefFPSList[GetValue('DefFPS', 0)]; //StrToSingle(ReplaceString(GetValue('DefFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
+        FPS.InputFPS := DefFPSList[GetValue('InputFPS', 0)]; //StrToSingle(ReplaceString(GetValue('InputFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
+        FPS.OutputFPS := DefFPSList[GetValue('OutputFPS', 0)]; //StrToSingle(ReplaceString(GetValue('OutputFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
         DefEncoding  := GetValue('DefEncoding', DefEncoding);
         DefFormat    := TUWSubtitleFormats(GetValue('DefFormat', Integer(DefFormat)));
         SetVideoPreview(GetValue('VideoPreview', False));
@@ -554,7 +554,7 @@ begin
         CloseKey;
 
         if PauseInFrames then
-          frmMain.WAVE.MinimumBlank := FramesToTime(MinPause, Workspace.FPS.OutputFPS)
+          frmMain.WAVE.MinimumBlank := FramesToTime(MinPause, Workspace.FPS.OutputFPS.FPS)
         else
           frmMain.WAVE.MinimumBlank := MinPause;
 
@@ -969,9 +969,9 @@ begin
         SetValue('ViewMode', Integer(ViewMode));
         SetValue('WorkMode', Integer(WorkMode));
         SetValue('TranslatorMode', TranslatorMode);
-        SetValue('DefFPS', SingleToStr(FPS.DefFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
-        SetValue('InputFPS', SingleToStr(FPS.InputFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
-        SetValue('OutputFPS', SingleToStr(FPS.OutputFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
+        SetValue('DefFPS', FPSInfoToIndex(FPS.DefFPS)); //SingleToStr(FPS.DefFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
+        SetValue('InputFPS', FPSInfoToIndex(FPS.InputFPS)); //SingleToStr(FPS.InputFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
+        SetValue('OutputFPS', FPSInfoToIndex(FPS.OutputFPS)); //SingleToStr(FPS.OutputFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
         SetValue('DefEncoding', DefEncoding);
         SetValue('DefFormat', Integer(DefFormat));
         SetValue('VideoPreview', actVideoPreview.Checked);

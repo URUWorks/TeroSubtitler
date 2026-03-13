@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Controls, Dialogs, formMain, procTypes, LazFileUtils,
-  UWSubtitleAPI, UWSubtitleAPI.Formats, procLocalize;
+  UWSubtitleAPI, UWSubtitleAPI.Formats, procLocalize, UWSystem.TimeUtils;
 
 { Helpers }
 
@@ -106,7 +106,7 @@ uses
   UWSystem.StrUtils, procForms, procProjectFile, formCustomSelectDlg,
   procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils,
   UWSubtitleAPI.Tags, UWTranslateAPI.Google, formCustomSelectDlgWithPreview,
-  FileUtil
+  FileUtil, Math
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -268,12 +268,13 @@ end;
 
 procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AKeepVideoOpen: Boolean = False; const AVideoFile: String = ''; const AddToMRU: Boolean = True);
 var
-  _FPS: Single;
+  _FPS: TFPSInfo;
   MRUInfoObject: TMRUInfoObject;
   VFisLoaded: Boolean;
   _Encoding: TEncoding = NIL;
   _EncIndex: Integer;
   IsBinary: Boolean;
+  i: Integer;
 begin
   {$IFDEF DARWIN}
   if not frmMain.Visible then
@@ -286,8 +287,9 @@ begin
 
   MPVOptions.KeepVideoOpen := AKeepVideoOpen;
 
-  _FPS := AFPS;
-  if _FPS = -1 then _FPS := Workspace.FPS.DefFPS;
+  _FPS := Workspace.FPS.InputFPS;
+  _FPS.FPS := AFPS;
+  if _FPS.FPS = -1 then _FPS := Workspace.FPS.DefFPS;
 
   if not FileExists(FileName) then
   begin
@@ -337,16 +339,23 @@ begin
     frmMain.cboFormat.ItemIndex := Integer(Subtitles.Format)-1;
     if (Subtitles.FrameRate > 0) then
     begin
-      frmMain.cboInputFPS.ItemIndex := frmMain.cboInputFPS.Items.IndexOf(SingleToStr(Subtitles.FrameRate, FormatSettings));
-      _FPS := Subtitles.FrameRate;
+      for i := 0 to High(DefFPSList) do
+      begin
+        if SameValue(DefFPSList[i].FPS, Subtitles.FrameRate, 0.0001) and (DefFPSList[i].Mode = Subtitles.TimecodeMode) then
+        begin
+          frmMain.cboInputFPS.ItemIndex := i; //frmMain.cboInputFPS.Items.IndexOf(SingleToStr(Subtitles.FrameRate, FormatSettings));
+          _FPS := DefFPSList[i];
+          Break;
+        end;
+      end;
     end;
     frmMain.cboInputFPSSelect(NIL);
 
     if not Subtitles.IsSMPTESupported then
     begin
-      if (Workspace.WorkMode = wmFrames) and not IsInteger(Subtitles.FrameRate) then
+      if (Workspace.WorkMode = wmFrames) and (Workspace.FPS.InputFPS.Mode = tcDF) and not IsInteger(Subtitles.FrameRate) then
       begin
-        Subtitles.ConvertTimesToSMPTE(True);
+        Subtitles.ConvertTimesToSMPTE(False);
         SetSMPTEMode(True);
       end
       else
@@ -365,8 +374,10 @@ begin
         end
         else
         begin
-          if not IsInteger(Subtitles.FrameRate) then
-            Subtitles.ConvertTimesToSMPTE(True);
+          {if (Workspace.FPS.InputFPS.Mode = tcDF) and not IsInteger(Subtitles.FrameRate) then
+          begin
+            Subtitles.ConvertTimesToSMPTE(False);
+          end;}
 
           SetSMPTEMode(not IsInteger(Subtitles.FrameRate));
         end;
@@ -383,7 +394,7 @@ begin
     if frmMain.LayoutSource.Visible then
     begin
       frmMain.mmoSourceView.Tag := TAG_CONTROL_UPDATE;
-      frmMain.mmoSourceView.Text := Subtitles.SaveToString(Workspace.FPS.OutputFPS, NIL, TUWSubtitleFormats(frmMain.cboFormat.ItemIndex+1), smText);
+      frmMain.mmoSourceView.Text := Subtitles.SaveToString(Workspace.FPS.OutputFPS.FPS, NIL, TUWSubtitleFormats(frmMain.cboFormat.ItemIndex+1), smText);
       frmMain.mmoSourceView.Tag := TAG_CONTROL_NORMAL;
     end;
 
@@ -425,14 +436,15 @@ end;
 
 procedure ImportSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 var
-  _FPS : Single;
+  _FPS : TFPSInfo;
   Subs : TUWSubtitles;
   i, x : Integer;
 begin
   if Subtitles.Count = 0 then Exit;
 
-  _FPS := AFPS;
-  if _FPS = -1 then _FPS := Workspace.FPS.DefFPS;
+  _FPS.FPS := AFPS;
+  _FPS.Mode := tcNDF;
+  if _FPS.FPS = -1 then _FPS := Workspace.FPS.DefFPS;
 
   Subs := TUWSubtitles.Create;
   try
@@ -464,7 +476,7 @@ begin
 
   if AFormat = sfITunesTimedText then
   begin
-    F := SingleToStr(Workspace.FPS.OutputFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.');
+    F := SingleToStr(Workspace.FPS.OutputFPS.FPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.');
     if ((F <> '29.97') and (F <> '25') and (F <> '24') and (F <> '23.976')) then
     begin
       ShowErrorMessageDialog(Format('%s%s%s', [lngSubtitleSpecificationError, LineEnding+LineEnding, lngSubtitleSpecificationErrorFPS]), '', False, False);
@@ -491,12 +503,13 @@ end;
 
 procedure SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 var
-  _FPS      : Single;
+  _FPS      : TFPSInfo;
   _Encoding : TEncoding;
   S, ext : String;
 begin
-  _FPS := AFPS;
-  if _FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
+  _FPS.FPS := AFPS;
+  _FPS.Mode := tcNDF;
+  if _FPS.FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
   _Encoding := AEncoding;
   //if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
   if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
@@ -536,7 +549,7 @@ end;
 
 procedure SaveSubtitleAutoBackup;
 var
-  AFPS      : Single;
+  AFPS      : TFPSInfo;
   AFileName : String;
   ATimeDate : String;
 begin
@@ -557,13 +570,14 @@ end;
 
 procedure SaveMarkedSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 var
-  _FPS      : Single;
+  _FPS      : TFPSInfo;
   _Encoding : TEncoding;
   Subs      : TUWSubtitles;
   i         : Integer;
 begin
-  _FPS := AFPS;
-  if _FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
+  _FPS.FPS := AFPS;
+  _FPS.Mode := tcNDF;
+  if _FPS.FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
   _Encoding := AEncoding;
   //if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
   if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
@@ -603,7 +617,7 @@ begin
   if Subtitles.Count = 0 then Exit;
 
   _FPS := AFPS;
-  if _FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
+  if _FPS = -1 then _FPS := Workspace.FPS.OutputFPS.FPS;
   _Encoding := AEncoding;
   //if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
   if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
@@ -1327,7 +1341,7 @@ begin
     ts := TStringList.Create;
     try
       ts.Text := HTMLFormat;
-      SubText := EncodeStringBase64(Subtitles.SaveToString(Workspace.FPS.OutputFPS, NIL, sfWebVTT, smText));
+      SubText := EncodeStringBase64(Subtitles.SaveToString(Workspace.FPS.OutputFPS.FPS, NIL, sfWebVTT, smText));
       Delete(VideoExt, 1, 1);
       ts.Text := ts.Text.Replace('[VIDEO]', frmMain.MPV.FileName);
       ts.Text := ts.Text.Replace('[EXT]', VideoExt);
@@ -1411,7 +1425,7 @@ const
 
 var
   s : String;
-  fps : Single;
+  fps : TFPSInfo;
   i, c : Integer;
   Sub : TUWSubtitles;
   sl : TStringList;
@@ -1439,7 +1453,7 @@ begin
           if (ParamCount > 3) then
           begin
             if ParamCount = 5 then
-              fps := StrToSingle(ParamStr(5), Workspace.FPS.DefFPS)
+              fps.FPS := StrToSingle(ParamStr(5), Workspace.FPS.DefFPS.FPS)
             else
               fps := Workspace.FPS.DefFPS;
 
@@ -1482,7 +1496,7 @@ begin
           if (ParamCount > 5) then
           begin
             if ParamCount = 7 then
-              fps := StrToSingle(ParamStr(5), Workspace.FPS.DefFPS)
+              fps.FPS := StrToSingle(ParamStr(5), Workspace.FPS.DefFPS.FPS)
             else
               fps := Workspace.FPS.DefFPS;
 

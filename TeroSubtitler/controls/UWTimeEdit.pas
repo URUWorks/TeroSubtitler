@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, Controls, StdCtrls, ComCtrls, LCLType, LMessages, SysUtils, Forms,
-  Graphics, LazarusPackageIntf;
+  Graphics, UWSystem.TimeUtils, LazarusPackageIntf;
 
 type
 
@@ -41,13 +41,14 @@ type
     {$IFNDEF INSIDECONTROL}
     FSpinSpacing : Integer;
     {$ENDIF}
-    FTimeMode    : TUWTimeEditMode;
-    FValue       : Integer;
-    FFPS         : Double;
-    FSMPTE       : Boolean;
-    FTimeStep    : Word;
-    FFrameStep   : Word;
-    FChangeEvent : TUWTimeEditChangeEvent;
+    FTimeMode     : TUWTimeEditMode;
+    FValue        : Integer;
+    FFPS          : Double;
+    FSMPTE        : Boolean;
+    FTimecodeMode : TTimecodeMode;
+    FTimeStep     : Word;
+    FFrameStep    : Word;
+    FChangeEvent  : TUWTimeEditChangeEvent;
     procedure SetFPS(const AFPS: Double);
     procedure SetTimeMode(const ATimeMode: TUWTimeEditMode);
     procedure SetValueFromString(const S: String);
@@ -96,7 +97,8 @@ type
     procedure SetValueOnly(const NewValue: Integer);
     procedure SetFPSValueOnly(const AFPS: Double);
     procedure ReAdjustWidth;
-    property SMPTE        : Boolean                read FSMPTE       write FSMPTE;
+    property SMPTE        : Boolean                read FSMPTE        write FSMPTE;
+    property TimecodeMode : TTimecodeMode          read FTimecodeMode write FTimecodeMode;
   published
     property Value        : Integer                read FValue       write SetValue;
     property FPS          : Double                 read FFPS         write SetFPS;
@@ -162,7 +164,7 @@ procedure Register;
 implementation
 
 uses
-  UWSystem.SysUtils, UWSystem.TimeUtils, Math, Clipbrd, LCLIntf;
+  UWSystem.SysUtils, Math, Clipbrd, LCLIntf;
 
 const
   OneSecond = 1000;
@@ -184,15 +186,16 @@ begin
 
   Constraints.MinWidth  := 90;
   Constraints.MinHeight := 21;
-  Width      := 90;
-  Height     := 23;
-  FFPS       := 25;
-  FSMPTE     := False;
-  FValue     := 0;
-  FTimeStep  := 1;
-  FFrameStep := 1;
-  FTimeMode  := TUWTimeEditMode.temTime;
-  Text       := '00:00:00.000';
+  Width         := 90;
+  Height        := 23;
+  FFPS          := 25;
+  FSMPTE        := False;
+  FTimecodeMode := tcNDF;
+  FValue        := 0;
+  FTimeStep     := 1;
+  FFrameStep    := 1;
+  FTimeMode     := TUWTimeEditMode.temTime;
+  Text          := '00:00:00.000';
 
   AutoSelect  := False;
   AutoSize    := False;
@@ -531,7 +534,7 @@ procedure TUWTimeEdit.DoTimeDown;
   var
     f: Double;
   begin
-    Value := IncDecFrame(FValue, FFPS, FFrameStep, FSMPTE, False);
+    Value := IncDecFrame(FValue, FFPS, FFrameStep, FTimecodeMode = tcDF, False);
     SetSel(9, 2);
   end;
 
@@ -592,7 +595,7 @@ begin
              end
              else
              begin
-               Value := IncDecFrame(FValue, FFPS, FFrameStep, FSMPTE);
+               Value := IncDecFrame(FValue, FFPS, FFrameStep, FTimecodeMode = tcDF);
                SetSel(9, 2);
              end;
   end;
@@ -627,7 +630,7 @@ end;
 procedure TUWTimeEdit.UpdateValue(const FireChangeEvent: Boolean = True);
 begin
   if FTimeMode = TUWTimeEditMode.temFrames then
-    Text := TimeToString(FValue, 'hh:mm:ss:ff', FFPS)
+    Text := MSToHHMMSSFFTime(FValue, FFPS, FTimecodeMode) //TimeToString(FValue, 'hh:mm:ss:ff', FFPS)
   else
     Text := TimeToString(FValue, Format('hh:mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator])); //Text := TimeToString(FValue, 'hh:mm:ss.zzz');
 
@@ -662,7 +665,7 @@ end;
 procedure TUWTimeEdit.SetValueFromString(const S: String);
 begin
   if FTimeMode = TUWTimeEditMode.temFrames then
-    FValue := StringToTime(S, False, FFPS)
+    FValue := SMPTEStringToMS(S, FFPS, TimecodeMode = tcDF) //StringToTime(S, False, FFPS)
   else
     FValue := StringToTime(S);
 

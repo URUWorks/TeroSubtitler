@@ -24,14 +24,14 @@ interface
 uses
   Classes, StdCtrls, Controls, ComCtrls, SysUtils, Menus, Forms, procTypes,
   UWTimeEdit, UWMemo, UWSubtitleAPI, procColorTheme, ActnList, procConventions,
-  procLocalize, Dialogs, Types;
+  procLocalize, UWSystem.TimeUtils, Dialogs, Types;
 
 procedure CheckColorTheme(const AForm: TForm); overload;
 procedure CheckColorTheme; overload;
 
 procedure AddFPSToCombo(const FPS: Single; const Combo: TComboBox);
 procedure FillComboWithLanguages(const Combo: TComboBox; const aLngList: TStrings);
-procedure FillComboWithFPS(const Combo: TComboBox; const ADefault: Single = -1);
+procedure FillComboWithFPS(const Combo: TComboBox; const ADefault: TFPSInfo);
 procedure FillComboWithEncodings(const Combo: TComboBox);
 procedure FillComboWithFormats(const Combo: TComboBox);
 procedure FillComboWithOCRScripts(const ACombo: TComboBox; const AIndex: Integer = 0);
@@ -70,10 +70,14 @@ procedure FocusMemo(const SelectText: Boolean = True);
 function GetMemoFocused: TUWMemo;
 function GetMemoWordUnderCaret(const Memo: TUWMemo; const SelectWord: Boolean = False): String;
 function GetMemoFocusedCaretLineY: Integer;
-function GetFPSFromString(const AValue: String; const ADefault: Single): Single;
+function GetFPSFromString(const AValue: String; const ADefault: Double): Double;
 function GetInputFPS: Single;
-function GetFPS: Single;
+function GetInputFPSInfo: TFPSInfo;
+function GetFPS: Double;
+function GetFPSInfo: TFPSInfo;
 function GetDefPause: Integer;
+
+function FPSInfoToIndex(const FPSInfo: TFPSInfo): Integer;
 
 function GetTimeEditFocused: TUWTimeEdit;
 procedure SetFocusTimeEdit(const ATag: Byte);
@@ -118,7 +122,8 @@ uses
   UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.Encoding,
   UWSubtitleAPI.Formats, MPVPlayer, character, LazUTF8, formTranslationMemory,
   UWSubtitleAPI.Tags, UWTranslateAPI.Google, procTranscription,
-  formCustomQuestionDlg, UWSystem.TimeUtils, formTBX, procVST_Loops, procMPV
+  formCustomQuestionDlg, formTBX, procVST_Loops, procMPV,
+  Math
   {$IFNDEF WINDOWS}, UWCheckBox, UWRadioButton, UWLayout{$ENDIF};
 
 // -----------------------------------------------------------------------------
@@ -185,22 +190,23 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure FillComboWithFPS(const Combo: TComboBox; const ADefault: Single = -1);
+procedure FillComboWithFPS(const Combo: TComboBox; const ADefault: TFPSInfo);
 var
   i: Byte;
+  s: String;
 begin
   with Combo, AppOptions do
   begin
     Items.BeginUpdate;
     Clear;
     for i := 0 to Length(DefFPSList)-1 do
-      Items.Add(SingleToStr(DefFPSList[i], FormatSettings));
+    begin
+      s := SingleToStr(DefFPSList[i].FPS, FormatSettings);
+      if DefFPSList[i].Mode = tcDF then s += ' ' + lngDropFrame;
+      Items.Add(s);
+    end;
 
-    if ADefault > -1 then
-      ItemIndex := Items.IndexOf(SingleToStr(ADefault, FormatSettings));
-
-    if ItemIndex < 0 then
-      ItemIndex := 0;
+    ItemIndex := FPSInfoToIndex(ADefault); //ADefault; Items.IndexOf(SingleToStr(ADefault, FormatSettings));
 
     Items.EndUpdate;
   end;
@@ -817,7 +823,7 @@ begin
 
         if VST.Enabled and (mmoSourceView.Text <> '') then
         begin
-          Subtitles.LoadFromString(mmoSourceView.Text, NIL, GetFPS, TUWSubtitleFormats(cboFormat.ItemIndex+1));
+          Subtitles.LoadFromString(mmoSourceView.Text, NIL, GetFPSInfo, TUWSubtitleFormats(cboFormat.ItemIndex+1));
           VST.RootNodeCount := Subtitles.Count;
         end;
 
@@ -1015,12 +1021,17 @@ begin
       if Components[i] is TUWTimeEdit then
         with (Components[i] as TUWTimeEdit) do
         begin
-          SetFPSValueOnly(Workspace.FPS.OutputFPS);
+          SetFPSValueOnly(Workspace.FPS.OutputFPS.FPS);
           SMPTE := (Subtitles.TimeBase = stbSMPTE);
+          TimecodeMode := Workspace.FPS.OutputFPS.Mode;
         end;
 
-    WAVE.FPS := Workspace.FPS.OutputFPS;
-    WAVE.SMPTE := (Subtitles.TimeBase = stbSMPTE);
+    with WAVE do
+    begin
+      FPS := Workspace.FPS.OutputFPS.FPS;
+      SMPTE := (Subtitles.TimeBase = stbSMPTE);
+      TimecodeMode := Workspace.FPS.OutputFPS.Mode;
+    end;
   end;
 end;
 
@@ -1034,7 +1045,7 @@ begin
   begin
     VSTBeginUpdate(VST);
 
-    if not IsInteger(GetFPS) then
+    if (Workspace.FPS.OutputFPS.Mode = tcDF) and not IsInteger(GetFPS) then
     begin
       Subtitles.ConvertTimesToSMPTE(Mode = wmFrames);
       SetSMPTEMode(Mode = wmFrames);
@@ -1045,12 +1056,12 @@ begin
         if Components[i] is TUWTimeEdit then
           with (Components[i] as TUWTimeEdit) do
           begin
-            FPS      := Workspace.FPS.OutputFPS;
+            FPS      := Workspace.FPS.OutputFPS.FPS;
             TimeMode := TUWTimeEditMode(Mode);
             SMPTE    := (Subtitles.TimeBase = stbSMPTE);
           end;
 
-      WAVE.FPS := Workspace.FPS.OutputFPS;
+      WAVE.FPS := Workspace.FPS.OutputFPS.FPS;
       WAVE.FPSTimeMode := (Mode = wmFrames);
       WAVE.SMPTE := (Subtitles.TimeBase = stbSMPTE);
 
@@ -1087,7 +1098,7 @@ begin
     //if SMPTE <> AValue then
     begin
       SMPTE := AValue;
-      MPV.SMPTEMode := SMPTE;
+      //MPV.SMPTEMode := SMPTE;
       WAVE.SetSceneChangeTimeMode(SMPTE);
       if MPVOptions.SubtitleHandleByMPV then
       begin
@@ -1196,7 +1207,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetFPSFromString(const AValue: String; const ADefault: Single): Single;
+function GetFPSFromString(const AValue: String; const ADefault: Double): Double;
 begin
   with AppOptions do
     Result := StrToFloatDef(AValue, ADefault, FormatSettings);
@@ -1206,14 +1217,38 @@ end;
 
 function GetInputFPS: Single;
 begin
-  Result := GetFPSFromString(frmMain.cboInputFPS.Text, Workspace.FPS.InputFPS);
+  Result := GetFPSFromString(frmMain.cboInputFPS.Text, Workspace.FPS.InputFPS.FPS);
 end;
 
 // -----------------------------------------------------------------------------
 
-function GetFPS: Single;
+function GetInputFPSInfo: TFPSInfo;
 begin
-  Result := GetFPSFromString(frmMain.cboFPS.Text, Workspace.FPS.OutputFPS);
+  with frmMain do
+    Result := DefFPSList[cboInputFPS.ItemIndex];
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetFPS: Double;
+var
+  fps: TFPSInfo;
+begin
+  //Result := GetFPSFromString(frmMain.cboFPS.Text, Workspace.FPS.OutputFPS.FPS);
+
+  fps := DefFPSList[frmMain.cboFPS.ItemIndex];
+  if fps.Mode = tcDF then
+    Result := Round(fps.FPS) * (1000 / 1001)
+  else
+    Result := fps.FPS;
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetFPSInfo: TFPSInfo;
+begin
+  with frmMain do
+    Result := DefFPSList[cboFPS.ItemIndex];
 end;
 
 // -----------------------------------------------------------------------------
@@ -1224,7 +1259,19 @@ begin
     if not PauseInFrames then
       Result := MinPause
     else
-      Result := FramesToTime(MinPause, Workspace.FPS.OutputFPS);
+      Result := FramesToTime(MinPause, Workspace.FPS.OutputFPS.FPS);
+end;
+
+// -----------------------------------------------------------------------------
+
+function FPSInfoToIndex(const FPSInfo: TFPSInfo): Integer;
+var
+  i: Integer;
+begin
+  Result := 0;
+  for i := 0 to High(DefFPSList) do
+    if (FPSInfo.FPS = DefFPSList[i].FPS) and (FPSInfo.Mode = DefFPSList[i].Mode) then
+      Exit(i);
 end;
 
 // -----------------------------------------------------------------------------

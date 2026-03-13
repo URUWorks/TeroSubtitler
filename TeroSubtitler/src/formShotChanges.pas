@@ -274,7 +274,7 @@ begin
     begin
       if FileName.ToLower.EndsWith('.edl') or FileName.ToLower.EndsWith('.xml') then
       begin
-        edl := TEDL.Create('', '', GetFPS, FormatSettings);
+        edl := TEDL.Create('', '', GetFPS, FormatSettings, TFCM(Integer(Workspace.FPS.InputFPS.Mode)));
         try
           if edl.GetXMLTrackList(FileName, ATracks) and (ATracks.Count > 1) then
             edl.ID := formCustomSelectDlg.ExecuteDialog(lngMultipleTracksDetected, lngSelectTrackToUse, ATracks);

@@ -104,7 +104,7 @@ implementation
 uses
   UWSystem.SysUtils, UWSubtitleAPI, UWSubtitleAPI.Formats, procVST, procTypes,
   RegExpr, procWorkspace, procColorTheme, procDialogs, UWSystem.FileUtils,
-  UWSystem.Encoding;
+  UWSystem.Encoding, formMain;
 
 {$R *.lfm}
 
@@ -119,7 +119,7 @@ begin
   FList := TQueueList.Create;
   FillComboWithFormats(cboFormat);
   FillComboWithEncodings(cboEncoding);
-  FillComboWithFPS(cboFromFPS);
+  FillComboWithFPS(cboFromFPS, DefFPSList[frmMain.cboInputFPS.ItemIndex]);
   cboToFPS.Items.Assign(cboFromFPS.Items);
 
   cboFormat.ItemIndex := Integer(sfSubRip)-1;
@@ -396,9 +396,9 @@ begin
   try
     for i := 0 to FList.Count-1 do
     begin
-      if  SubtitleAPI.LoadFromFile(FList[i]^.FileName, NIL, StrToFloatDef(cboFromFPS.Text, Workspace.FPS.OutputFPS, FormatSettings)) then
+      if  SubtitleAPI.LoadFromFile(FList[i]^.FileName, NIL, Workspace.FPS.OutputFPS) then
       begin
-        if SubtitleAPI.SaveToFile(ConcatPaths([edtFolder.Text, ExtractFileName(FList[i]^.FileName)]), StrToFloatDef(cboToFPS.Text, Workspace.FPS.OutputFPS, FormatSettings),
+        if SubtitleAPI.SaveToFile(ConcatPaths([edtFolder.Text, ExtractFileName(FList[i]^.FileName)]), Workspace.FPS.OutputFPS,
           TEncoding.GetEncoding(Encodings[cboEncoding.ItemIndex].CPID), TUWSubtitleFormats(cboFormat.ItemIndex+1), smText, -1, -1, True) then
         begin
           FList[i]^.Success := True;

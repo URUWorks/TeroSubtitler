@@ -1706,7 +1706,7 @@ procedure TfrmMain.mmoSourceViewChange(Sender: TObject);
 begin
   if (mmoSourceView.Tag = TAG_CONTROL_NORMAL) and ((GetTickCount - LastTickCount) > 700) then // only if > 700ms
   begin
-    Subtitles.LoadFromString(mmoSourceView.Text, NIL, 0, TUWSubtitleFormats(cboFormat.ItemIndex+1));
+    Subtitles.LoadFromString(mmoSourceView.Text, NIL, Workspace.FPS.InputFPS, TUWSubtitleFormats(cboFormat.ItemIndex+1));
     VST.RootNodeCount := Subtitles.Count;
     WAVE.DoUpdate;
     LastTickCount := GetTickCount;
@@ -1737,7 +1737,7 @@ begin
   if (VST.RootNodeCount > 0) and (Sender <> NIL) then
     VSTDoLoop(VST, @ApplyChangeInputFPS, dlAll, False, True);
 
-  Workspace.FPS.InputFPS := GetInputFPS;
+  Workspace.FPS.InputFPS := GetInputFPSInfo;
 
   cboFPS.ItemIndex := cboInputFPS.ItemIndex;
   Workspace.FPS.OutputFPS := Workspace.FPS.InputFPS;
@@ -1757,7 +1757,7 @@ begin
   if (VST.RootNodeCount > 0) and (Sender <> NIL) then
     VSTDoLoop(VST, @ApplyChangeFPS, dlAll, False, True);
 
-  Workspace.FPS.OutputFPS := GetFPS;
+  Workspace.FPS.OutputFPS := GetFPSInfo;
   SetTimeFPStoTimeEditCtrls;
 
   if (Workspace.WorkMode = wmFrames) then
@@ -2006,7 +2006,7 @@ end;
 procedure TfrmMain.MemoClickLink(Sender: TObject; const ALink: String);
 begin
   if Workspace.WorkMode = wmFrames then
-    MPV.SeekInMs(StringToTime(ALink, False, Workspace.FPS.OutputFPS))
+    MPV.SeekInMs(StringToTime(ALink, False, Workspace.FPS.OutputFPS.FPS))
   else
     MPV.SeekInMs(StringToTime(ALink));
 end;

@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Graphics, LCLType, UWSubtitleAPI, UWSubtitleAPI.Formats,
   BGRABitmap, procConventions, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procMRU,
-  WAVDisplayer, ATSynEdit, Forms;
+  WAVDisplayer, ATSynEdit, Forms, UWSystem.TimeUtils;
 
 const
 
@@ -45,7 +45,24 @@ const
 
   DefFramesFormat = 'hh:mm:ss:ff';
   DefFPS          = 23.976;
-  DefFPSList      : array[0..12] of Double = (23.976, 24.0, 25.0, 29.97, 30.0, 47.952, 48.0, 50.0, 59.94, 60.0, 75.0, 100.0, 120.0);
+  //DefFPSList      : array[0..12] of Double = (23.976, 24.0, 25.0, 29.97, 30.0, 47.952, 48.0, 50.0, 59.94, 60.0, 75.0, 100.0, 120.0);
+  DefFPSList : array[0..14] of TFPSInfo = (
+    (FPS: 23.976; Mode: tcNDF),
+    (FPS: 24.0;   Mode: tcNDF),
+    (FPS: 25.0;   Mode: tcNDF),
+    (FPS: 29.97;  Mode: tcNDF),
+    (FPS: 29.97;  Mode: tcDF),
+    (FPS: 30.0;   Mode: tcNDF),
+    (FPS: 47.952; Mode: tcNDF),
+    (FPS: 48.0;   Mode: tcNDF),
+    (FPS: 50.0;   Mode: tcNDF),
+    (FPS: 59.94;  Mode: tcNDF),
+    (FPS: 59.94;  Mode: tcDF),
+    (FPS: 60.0;   Mode: tcNDF),
+    (FPS: 75.0;   Mode: tcNDF),
+    (FPS: 100.0;  Mode: tcNDF),
+    (FPS: 120.0;  Mode: tcNDF)
+  );
 
   TVideoExts : array[0..22] of String =
   (
@@ -246,9 +263,9 @@ type
     TranslatorMode : Boolean;
     SMPTE          : Boolean;
     FPS            : record        // used for conversions
-                       DefFPS    : Double;
-                       InputFPS  : Double;
-                       OutputFPS : Double;
+                       DefFPS    : TFPSInfo;
+                       InputFPS  : TFPSInfo;
+                       OutputFPS : TFPSInfo;
                      end;
     DefEncoding    : Integer;
     DefFormat      : TUWSubtitleFormats;

@@ -266,7 +266,7 @@ begin
       if not FFPSTimeMode then
         PosString := TimeMSToShortString(p + FOffsetMs, FStepLog)
       else
-        PosString := TimeMSToShortStringFrames(p + FOffsetMs, 1, FFPS);
+        PosString := MSToHHMMSSFFTime(p + FOffsetMs, FFPS, FTimecodeMode); //TimeMSToShortStringFrames(p + FOffsetMs, 1, FFPS);
       // Calculate text coordinate
       x1 := x + 3; //x - (CanvasBGRA.TextWidth(PosString) div 2);
       // Draw text

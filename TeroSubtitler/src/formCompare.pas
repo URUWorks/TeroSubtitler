@@ -249,12 +249,12 @@ begin
       if TButton(Sender).Name = 'btnFile1' then
       begin
         edtFile1.Text := FileName;
-        SAPI1.LoadFromFile(FileName, NIL, GetFPS);
+        SAPI1.LoadFromFile(FileName, NIL, GetFPSInfo);
       end
       else
       begin
         edtFile2.Text := FileName;
-        SAPI2.LoadFromFile(FileName, NIL, GetFPS);
+        SAPI2.LoadFromFile(FileName, NIL, GetFPSInfo);
       end;
 
       if (SAPI1.Count > 0) and (SAPI2.Count > 0) then

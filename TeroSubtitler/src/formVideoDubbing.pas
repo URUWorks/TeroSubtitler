@@ -524,12 +524,15 @@ end;
 function TfrmVideoDubbing.GenerateSubtitleFile(const AFileName: String): Boolean;
 var
   Subs : TUWSubtitles;
+  FPSInfo: TFPSInfo;
 begin
   Subs := TUWSubtitles.Create;
   try
     Subs.Assign(Subtitles);
     Subs.Add(frmMain.MPV.GetMediaLenInMs-1, frmMain.MPV.GetMediaLenInMs, ' ', '');
-    Result := Subs.SaveToFile(AFileName, 0, TEncoding.UTF8, sfSubRip, smText);
+    FPSInfo.FPS := 1;
+    FPSInfo.Mode := tcNDF;
+    Result := Subs.SaveToFile(AFileName, FPSInfo, TEncoding.UTF8, sfSubRip, smText);
   finally
     Subs.Free;
   end;

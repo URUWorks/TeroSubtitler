@@ -101,6 +101,7 @@ var
   XmlDoc : TXMLDocument;
   Node   : TDOMNode;
   Item   : TUWSubtitleItem;
+  fr     : Double;
 begin
   Result := False; // TODO: read styles,...
   XmlDoc := NIL;
@@ -116,19 +117,25 @@ begin
       begin
         if XMLHasAttribute(Node, 'ttp:frameRate') then
         begin
-          Subtitles.FrameRate := StrToFloatDef(XMLGetAttrValue(Node, 'ttp:frameRate'), FPS);
-
-          if XMLHasAttribute(Node, 'ttp:frameRateMultiplier') then
-            Subtitles.FrameRate := XMLGetCorrectFPS(Subtitles.FrameRate, XMLGetAttrValue(Node, 'ttp:frameRateMultiplier'));
+          fr := StrToFloatDef(XMLGetAttrValue(Node, 'ttp:frameRate'), FPS);
+          Subtitles.FrameRate := fr;
         end;
 
         if XMLHasAttribute(Node, 'ttp:timeBase') and XMLHasAttribute(Node, 'ttp:dropMode') then
         begin
+          if (XMLGetAttrValue(Node, 'ttp:dropMode') <> 'nonDrop') then
+            Subtitles.TimecodeMode := tcDF
+          else
+            Subtitles.TimecodeMode := tcNDF;
+
           if (XMLGetAttrValue(Node, 'ttp:timeBase') = 'smpte') then //and (XMLGetAttrValue(Node, 'ttp:dropMode') <> 'nonDrop') then
             Subtitles.TimeBase := stbSMPTE
           else
             Subtitles.TimeBase := stbMedia;
         end;
+
+        if XMLHasAttribute(Node, 'ttp:frameRateMultiplier') then
+          Subtitles.FrameRate := XMLGetCorrectFPS(fr, XMLGetAttrValue(Node, 'ttp:frameRateMultiplier'), Subtitles.TimecodeMode = tcDF);
       end;
 
       Node := XMLFindNodeByName(XmlDoc, 'p');
@@ -186,10 +193,10 @@ begin
       TDOMElement(Root).SetAttribute('xmlns:ttm', 'http://www.w3.org/ns/ttml#metadata');
       TDOMElement(Root).SetAttribute('xml:lang', 'en');
 
-      //if Subtitles.TimeBase = stbSMPTE then
-        TDOMElement(Root).SetAttribute('ttp:timeBase', 'smpte');
-      //else
-      //  TDOMElement(Root).SetAttribute('ttp:timeBase', 'media');
+      if Subtitles.TimeBase = stbSMPTE then
+        TDOMElement(Root).SetAttribute('ttp:timeBase', 'smpte')
+      else
+        TDOMElement(Root).SetAttribute('ttp:timeBase', 'media');
 
       if IsInteger(FPS) then
       begin
@@ -199,12 +206,17 @@ begin
       end
       else
       begin
-        NewFPS := FPS + (FPS * 0.001);
+        //NewFPS := FPS + (FPS * 0.001);
+        NewFPS := Round(FPS) * (1000 /  1001);
         TDOMElement(Root).SetAttribute('ttp:frameRate', Round(NewFPS).ToString);
-        TDOMElement(Root).SetAttribute('ttp:frameRateMultiplier', '999 1000');
+        //TDOMElement(Root).SetAttribute('ttp:frameRateMultiplier', '999 1000');
+        TDOMElement(Root).SetAttribute('ttp:frameRateMultiplier', '1000 1001');
       end;
 
-      TDOMElement(Root).SetAttribute('ttp:dropMode', 'nonDrop');
+      if Subtitles.TimecodeMode = tcDF then
+        TDOMElement(Root).SetAttribute('ttp:dropMode', 'dropNTSC')
+      else
+        TDOMElement(Root).SetAttribute('ttp:dropMode', 'nonDrop');
 
       XmlDoc.Appendchild(Root);
     Root := XmlDoc.DocumentElement;
@@ -273,17 +285,17 @@ begin
     begin
       it := Subtitles[i].InitialTime;
       ft := Subtitles[i].FinalTime;
-      if not IsInteger(FPS) and (Subtitles.TimeBase = stbMedia) then
+      {if not IsInteger(FPS) and (Subtitles.TimeBase = stbMedia) then
       begin
         it := Round(it / 1.001);
         ft := Round(ft / 1.001);
-      end;
+      end;}
 
       Element := XmlDoc.CreateElement('p');
       TDOMElement(Element).SetAttribute('region', iff(Subtitles[i].VAlign = svaTop, 'top', 'bottom'));
-      TDOMElement(Element).SetAttribute('begin', TimeToString(it, 'hh:mm:ss:ff', NewFPS));
+      TDOMElement(Element).SetAttribute('begin', MSToHHMMSSFFTime(it, NewFPS, Subtitles.TimecodeMode));
       //TDOMElement(Element).SetAttribute('id', TimeToString(Subtitles.InitialTime[i], 'p' + IntToStr(i)));
-      TDOMElement(Element).SetAttribute('end', TimeToString(ft, 'hh:mm:ss:ff', NewFPS));
+      TDOMElement(Element).SetAttribute('end', MSToHHMMSSFFTime(ft, NewFPS, Subtitles.TimecodeMode));
       SubNode := XmlDoc.CreateTextNode(TSTagsToXML(ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), sLineBreak, '<br/>')));
       Element.AppendChild(SubNode);
       Node.AppendChild(Element);

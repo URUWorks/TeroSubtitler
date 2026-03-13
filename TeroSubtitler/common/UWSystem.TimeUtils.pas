@@ -22,12 +22,18 @@ unit UWSystem.TimeUtils;
 interface
 
 uses
-  SysUtils, StrUtils, UWSystem.StrUtils, UWSystem.SysUtils;
+  SysUtils, StrUtils, Math, UWSystem.StrUtils, UWSystem.SysUtils;
 
 // -----------------------------------------------------------------------------
 
 type
   TRoundMode = (rmFloor, rmCeil, rmNearest);
+  TTimecodeMode = (tcNDF, tcDF);
+
+  TFPSInfo = record
+    FPS  : Double;
+    Mode : TTimecodeMode;
+  end;
 
 function SMPTEConversion(const ATimeMS: Integer; const AValue: Boolean = True; const Mode: TRoundMode = rmNearest): Integer;
 function NormalizeFPS(const FPS: Double): Double;
@@ -37,12 +43,12 @@ function TimeToFrames(const Time: Cardinal; const FPS: Double): Cardinal;
 function TimeToFramesMaxFPS(const Time: Cardinal; const FPS: Double): Cardinal;
 function FramesToTime(const Frames: Cardinal; FPS: Double): Cardinal;
 function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Double; const AAddFrame: Integer = 0): Integer;
-function IncDecFrame(const ATimeMS: Integer; const AFPS: Double; const AStep: Byte = 1; const ASMPTE: Boolean = False; const AIncrement: Boolean = True): Integer;
+function IncDecFrame(const ATimeMS: Integer; const AFPS: Double; const AStep: Byte = 1; const IsDropFrame: Boolean = False; const AIncrement: Boolean = True): Integer;
 function TimeToString(const Time: Cardinal; TimeFormat: String = 'hh:mm:ss'; const FPS: Double = 25; const ATrim: Boolean = False): String;
 function StringToTime(const Time: String; const NoHours: Boolean = False; const FPS: Double = 0): Cardinal;
 function TimeInFormat(const Time, Format: String): Boolean;
 function TrimTimeString(Text: String): String;
-function MSToHHMMSSFFTime(const Time: Integer; const FPS: Double; const FramesSeparator: Char = ':'): String;
+function MSToHHMMSSFFTime(const TimeMS: Integer; const FPS: Double; const Mode: TTimecodeMode = tcNDF): String;
 function MSToHHMMSSFFMax(const Time: Integer; const FPS: Double; const FramesSeparator: Char = ':'): String;
 function HHMMSSFFTimeToMS(const Time: String; const FPS: Double): Integer;
 function RefTimeToMSecs(const RefTime: Int64): Cardinal;
@@ -57,6 +63,7 @@ function GetMSecsInFrames(const Time: Cardinal; const FPS: Double): Integer;
 function GetDateAndTime(Format: String = 'hh:mm:ss, dd/mm/yyyy'): String;
 function TimeMSToShortString(const TimeMS: Cardinal; const Precision: Cardinal): String;
 function TimeMSToShortStringFrames(const TimeMS: Cardinal; const Precision: Cardinal; const AFPS: Double = 25): String;
+function SMPTEStringToMS(const ASMPTE: String; const AFPS: Double; const ADropFrame: Boolean = False): Integer;
 function CalculateOptimalDisplayMS(const Text: String): Cardinal;
 function CalculateOptimalDisplayMSEx(const Text: String; const CPS: Double = 14.7; const MinDisplay: Cardinal = 1000; const MaxDisplay: Cardinal = 8000): Double;
 
@@ -268,31 +275,53 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function IncDecFrame(const ATimeMS: Integer; const AFPS: Double; const AStep: Byte = 1; const ASMPTE: Boolean = False; const AIncrement: Boolean = True): Integer;
+function IncDecFrame(const ATimeMS: Integer; const AFPS: Double; const AStep: Byte = 1; const IsDropFrame: Boolean = False; const AIncrement: Boolean = True): Integer;
 var
-  tmp, frames, scaleFactor: Double;
+  FrameDuration: Double;
+  AbsFrame, DropFrames, Minutes, TenMinutes: Int64;
+  NominalFPS: Integer;
 begin
-  if ASMPTE then
-    scaleFactor := 1001.0 / 1000.0
-  else
-    scaleFactor := 1.0;
+  if AFPS <= 0 then Exit(ATimeMS);
 
-  tmp := ATimeMS * scaleFactor;
-  frames := tmp / 1000.0 * AFPS;
+  NominalFPS := Round(AFPS); // 30 o 60
+  FrameDuration := 1000.0 / AFPS;
 
-  if AIncrement then
-    frames := frames + AStep
-  else
+  // 1. Frame físico actual (lineal)
+  AbsFrame := Round(ATimeMS / FrameDuration);
+
+  // 2. Si es Drop Frame, ajustamos la cuenta de frames como lo hace un reloj SMPTE
+  if IsDropFrame and ((NominalFPS = 30) or (NominalFPS = 60)) then
   begin
-    if frames >= AStep then
-      frames := frames - AStep
-    else
-      frames := 0;
+    DropFrames := Round(NominalFPS * 0.066666); // 2 para 29.97, 4 para 59.94
+
+    // Calculamos cuántos números se han "saltado" hasta este punto
+    Minutes := AbsFrame div Round(AFPS * 60);
+    TenMinutes := Minutes div 10;
+
+    // Ajustamos el contador para que coincida con la etiqueta del TC
+    AbsFrame := AbsFrame + (DropFrames * Minutes) - (DropFrames * TenMinutes);
   end;
 
-  tmp := frames / AFPS * 1000.0;
-  Result := Round(tmp / scaleFactor);
+  // 3. Aplicamos el incremento/decremento sobre la "etiqueta"
+  if AIncrement then
+    Inc(AbsFrame, AStep)
+  else
+    AbsFrame := Max(0, AbsFrame - AStep);
+
+  // 4. Si era DF, debemos revertir el ajuste para volver al tiempo real
+  if IsDropFrame and ((NominalFPS = 30) or (NominalFPS = 60)) then
+  begin
+    DropFrames := Round(NominalFPS * 0.066666);
+    TenMinutes := AbsFrame div (Round(AFPS * 60 * 10) - (DropFrames * 9));
+    Minutes := (AbsFrame + (DropFrames * 9 * TenMinutes)) div Round(AFPS * 60);
+
+    AbsFrame := AbsFrame - (DropFrames * (Minutes - TenMinutes));
+  end;
+
+  // 5. milisegundos
+  Result := Round(AbsFrame * FrameDuration);
 end;
+
 // -----------------------------------------------------------------------------
 
 function TimeToString(const Time: Cardinal; TimeFormat: String = 'hh:mm:ss'; const FPS: Double = 25; const ATrim: Boolean = False): String;
@@ -457,10 +486,54 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function MSToHHMMSSFFTime(const Time: Integer; const FPS: Double; const FramesSeparator: Char = ':'): String;
+function MSToHHMMSSFFTime(const TimeMS: Integer; const FPS: Double; const Mode: TTimecodeMode = tcNDF): String;
+var
+  totalFrames, D, M: Integer;
+  fpsNom, dropFrames, framesPer10Min, framesPerMin: Integer;
+  HH, MM, SS, FF: Integer;
+  sep: String;
+  isNegative, isNTSC: Boolean;
 begin
-  Result := TimeToString(Time, 'hh' + FramesSeparator + 'mm' + FramesSeparator + 'ss');
-  Result := Result + FramesSeparator + AddChar('0', IntToStr(TimeToFrames(Time - StringToTime(Result), FPS)), 2);
+  fpsNom := Round(FPS);
+
+  // NTSC
+  isNTSC := (Mode = tcDF) and (Abs(FPS * 1.001 - fpsNom) < 0.02);
+
+  // ms a frames
+  isNegative := TimeMS < 0;
+  totalFrames := Trunc(Abs(TimeMS) * FPS / 1000 + 0.5);
+
+  // SMPTE drop-frame
+  if isNTSC then
+  begin
+    dropFrames := fpsNom div 15; // 2 para 30, 4 para 60
+    framesPerMin := (fpsNom * 60) - dropFrames;
+    framesPer10Min := (framesPerMin * 10) + dropFrames;
+
+    D := totalFrames div framesPer10Min;
+    M := totalFrames mod framesPer10Min;
+
+    if M >= dropFrames then
+      totalFrames := totalFrames
+        + (dropFrames * 9 * D)
+        + (dropFrames * ((M - dropFrames) div framesPerMin));
+
+    sep := ';';
+  end
+  else
+    sep := ':';
+
+  FF := totalFrames mod fpsNom;
+  totalFrames := totalFrames div fpsNom;
+
+  SS := totalFrames mod 60;
+  totalFrames := totalFrames div 60;
+
+  MM := totalFrames mod 60;
+  HH := totalFrames div 60;
+
+  Result := Format('%0.2d:%0.2d:%0.2d%s%0.2d', [HH, MM, SS, sep, FF]);
+  if isNegative then Result := '-' + Result;
 end;
 
 // -----------------------------------------------------------------------------
@@ -624,6 +697,100 @@ begin
     Result := Result + Format('%d:%.2d:%.2d', [min, sec, ms])
   else
     Result := Result +  Format('%d:%.2d', [sec, ms]);
+end;
+
+// -----------------------------------------------------------------------------
+
+{function SMPTEStringToMS(const ASMPTE: String; const AFPS: Double; const ADropFrame: Boolean = False): Integer;
+var
+  DropFrame : Boolean;
+  ArraySMPTE : TStringArray;
+  DropFrames : Integer;
+  TotalFrames : Integer;
+  h, m, s, f : Integer;
+  TotalMinutes : Integer;
+begin
+  Result := 0;
+  DropFrame := ADropFrame;
+
+  ArraySMPTE := ASMPTE.Split(';');
+  if Length(ArraySMPTE) >= 2 then
+  begin
+    DropFrame := True;
+    f := ArraySMPTE[1].ToInteger;
+    ArraySMPTE := ASMPTE.Split(':');
+    h := ArraySMPTE[0].ToInteger;
+    m := ArraySMPTE[1].ToInteger;
+    s := Copy(ArraySMPTE[2], 1, Pos(';', ArraySMPTE[2])).ToInteger - 1;
+  end
+  else
+  begin
+    ArraySMPTE := ASMPTE.Split(':');
+    h := ArraySMPTE[0].ToInteger;
+    m := ArraySMPTE[1].ToInteger;
+    s := ArraySMPTE[2].ToInteger;
+    f := ArraySMPTE[3].ToInteger;
+  end;
+
+  // Drop frames is the 6% of the framerate rounded to the nearest number.
+  // I get the 0.06666 * framerate to calculate the drop frames from here https://www.davidheidelberger.com/2010/06/10/drop-frame-timecode/
+  if DropFrame then
+    DropFrames := Round(AFPS * 0.0666666)
+  else
+    DropFrames := 0;
+
+  if m > 0 then
+    TotalMinutes := (60 * h) div m
+  else
+    TotalMinutes := 0;
+
+  TotalFrames := (((h * 3600) + (m * 60) + s) * Round(AFPS)) + f - (DropFrames * (TotalMinutes - (Trunc(TotalMinutes / 10))));
+  Result := Round((TotalFrames / AFPS ) * 1000);
+end;}
+
+function SMPTEStringToMS(const ASMPTE: String; const AFPS: Double; const ADropFrame: Boolean = False): Integer;
+const
+  EPS = 1e-6;
+var
+  s: String;
+  p: TStringArray;
+  h, m, sec, f: Integer;
+  df: Boolean;
+  fpsNom, dropsPerMin: Integer;
+  totalMin: Int64;
+  framesTC: Int64;
+  is1000_1001, validDFNom: Boolean;
+begin
+  df := (Pos(';', ASMPTE) > 0) or ADropFrame;
+
+  s := StringReplace(ASMPTE, ';', ':', [rfReplaceAll]);
+  p := s.Split(':');
+  if Length(p) <> 4 then Exit(0);
+
+  h := StrToIntDef(p[0], 0);
+  m := StrToIntDef(p[1], 0);
+  sec := StrToIntDef(p[2], 0);
+  f := StrToIntDef(p[3], 0);
+
+  fpsNom := Round(AFPS);
+  is1000_1001 := Abs(AFPS - (fpsNom * 1000.0 / 1001.0)) <= EPS;
+  validDFNom := (fpsNom mod 30) = 0; // 30, 60, 120...
+
+  if df and is1000_1001 and validDFNom then
+    dropsPerMin := (fpsNom div 30) * 2 // 30->2, 60->4, 120->8
+  else
+  begin
+    dropsPerMin := 0;
+    df := False; // no DF para 24/23.976
+  end;
+
+  if (m >= 60) or (sec >= 60) or (f < 0) or (f >= fpsNom) then Exit(0);
+
+  totalMin := Int64(h) * 60 + m;
+  framesTC := ((Int64(h) * 3600 + Int64(m) * 60 + sec) * fpsNom) + f
+    - Int64(dropsPerMin) * (totalMin - totalMin div 10) * Ord(df);
+
+  Result := Round(framesTC * 1000.0 / AFPS);
 end;
 
 // -----------------------------------------------------------------------------

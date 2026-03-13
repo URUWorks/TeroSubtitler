@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, FGL, UWSubtitleAPI.TimeCode, UWSubtitleAPI.Formats,
-  UWSubtitleAPI.ExtraInfo, Math, LazUTF8;
+  UWSubtitleAPI.ExtraInfo, UWSystem.TimeUtils, Math, LazUTF8;
 
 type
 
@@ -138,6 +138,7 @@ type
   private
     FFormat           : TUWSubtitleFormats;
     FFPS              : Double;
+    FTimecodeMode     : TTimecodeMode;
     FEIType           : TUWSubtitleExtraInfoType;
     FList             : TUWSubtitleItemList;
     FExtraInfo        : TList;
@@ -211,9 +212,9 @@ type
     function IsEqualItem(const I1, I2: TUWSubtitleItem): Boolean;
     function GetFormatFromFile(const AFileName: String): TUWSubtitleFormats;
     function GetTimeBaseFromFile(const AFileName: String): TSubtitleTimeBase;
-    function LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Double; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
-    function LoadFromString(const S: String; Encoding: TEncoding; const FPS: Double; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
-    function SaveToFile(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1; const FixFileName: Boolean = False): Boolean;
+    function LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: TFPSInfo; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
+    function LoadFromString(const S: String; Encoding: TEncoding; const FPS: TFPSInfo; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
+    function SaveToFile(const FileName: String; const FPS: TFPSInfo; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1; const FixFileName: Boolean = False): Boolean;
     function SaveToString(const FPS: Double; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): String;
     function FillDialogFilter(AllSupportedText: String = 'All supported files'): String;
     function FixFileNameExtension(const AFileName: String; const AFormat: TUWSubtitleFormats): String;
@@ -224,6 +225,7 @@ type
     property Format: TUWSubtitleFormats read FFormat write SetFormat;
     property CodePage: Integer read FCodePage;
     property FrameRate: Double read FFPS write FFPS;
+    property TimecodeMode: TTimecodeMode read FTimecodeMode write FTimecodeMode;
     property WriteBOM: Boolean read FWriteBOM write FWriteBOM;
     property AutoSort: Boolean read FAutoSort write FAutoSort; // Auto sort subtitles on load
     property Items[Index: Integer]: TUWSubtitleItem read GetItem write PutItem; default;
@@ -290,8 +292,7 @@ type
 
 implementation
 
-uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.TimeUtils,
-  UWSystem.Encoding, UWSystem.FileUtils,
+uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.Encoding, UWSystem.FileUtils,
   UWSubtitleAPI.Tags, UWSubtitleAPI.Formats.SubRip,
   UWSubtitleAPI.Formats.TimedText, UWSubtitleAPI.Formats.ABCiView,
   UWSubtitleAPI.Formats.AdobeEncoreDVD, UWSubtitleAPI.Formats.AdvancedSubstationAlpha,
@@ -789,6 +790,7 @@ begin
   FCodePage      := -1;
   FFormat        := sfInvalid;
   FFPS           := -1;
+  FTimecodeMode  := tcNDF;
   FList          := TUWSubtitleItemList.Create;
   FExtraInfo     := TList.Create;
   FStyles        := TList.Create;
@@ -1549,11 +1551,14 @@ end;
 function TUWSubtitles.GetTimeBaseFromFile(const AFileName: String): TSubtitleTimeBase;
 var
   Sub : TUWSubtitles;
+  FPSInfo : TFPSInfo;
 begin
   Result := stbMedia;
   Sub := TUWSubtitles.Create;
   try
-    if Sub.LoadFromFile(AFileName, NIL, 0) then
+    FPSInfo.FPS := 0;
+    FPSInfo.Mode := tcNDF;
+    if Sub.LoadFromFile(AFileName, NIL, FPSInfo) then
       Result := Sub.TimeBase;
   finally
     Sub.Free;
@@ -1586,7 +1591,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: Double; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
+function TUWSubtitles.LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: TFPSInfo; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
 var
   AList   : TUWSubtitleCustomFormatList;
   SubFile : TUWStringList;
@@ -1606,9 +1611,10 @@ begin
         ClearList(FList);
       end;
 
-      AFPS := FPS;
+      AFPS := FPS.FPS;
       if AFPS <= 0 then AFPS := 25;
       FFPS := AFPS; //-1;
+      FTimeCodeMode := FPS.Mode;
       FTimeBase := stbMedia;
 
       // First try Text formats
@@ -1640,6 +1646,7 @@ begin
         except
         end;
     finally
+      if (Self.FFormat <> sfITunesTimedText) and (TimecodeMode = tcDF) then ConvertTimesToSMPTE(True);
       if FAutoSort then Sort;
       CheckIsRightToLeft; //
       SubFile.Free;
@@ -1651,14 +1658,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.LoadFromString(const S: String; Encoding: TEncoding; const FPS: Double; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
+function TUWSubtitles.LoadFromString(const S: String; Encoding: TEncoding; const FPS: TFPSInfo; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True): Boolean;
 begin
   Result := LoadFromFile(S, Encoding, FPS, Format, ClearAll, False);
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.SaveToFile(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1; const FixFileName: Boolean = False): Boolean;
+function TUWSubtitles.SaveToFile(const FileName: String; const FPS: TFPSInfo; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1; const FixFileName: Boolean = False): Boolean;
 var
   AList      : TUWSubtitleCustomFormatList;
   f          : Integer;
@@ -1674,9 +1681,9 @@ begin
         if FromItem = -1 then iFrom := 0 else iFrom := FromItem;
         if ToItem   = -1 then iTo := Count-1 else iTo := ToItem;
         if not FixFileName then
-          Result := AList[f].SaveSubtitle(FileName, FPS, Encoding, Self, SubtitleMode, iFrom, iTo)
+          Result := AList[f].SaveSubtitle(FileName, FPS.FPS, Encoding, Self, SubtitleMode, iFrom, iTo)
         else
-          Result := AList[f].SaveSubtitle(FixExtension(FileName, AList[f].Extension), FPS, Encoding, Self, SubtitleMode, iFrom, iTo);
+          Result := AList[f].SaveSubtitle(FixExtension(FileName, AList[f].Extension), FPS.FPS, Encoding, Self, SubtitleMode, iFrom, iTo);
 
         Exit;
       end;
@@ -1800,16 +1807,8 @@ begin
   for i := 0 to Count - 1 do
     with FList[i]^ do
     begin
-      if not AValue then
-      begin
-        InitialTime := SMPTEConversion(InitialTime);
-        FinalTime   := SMPTEConversion(FinalTime);
-      end
-      else
-      begin
-        InitialTime := SMPTEConversion(InitialTime, False);
-        FinalTime   := SMPTEConversion(FinalTime, False);
-      end;
+      InitialTime := SMPTEConversion(InitialTime, not AValue);
+      FinalTime   := SMPTEConversion(FinalTime, not AValue);
     end;
 
   if not AValue then
@@ -1974,13 +1973,16 @@ end;
 function GetSubtitleFileFormat(AFileName: String): TUWSubtitleFormats;
 var
   Sub: TUWSubtitles;
+  FPSInfo: TFPSInfo;
 begin
   Result := sfInvalid;
   if GetFileSize(AFileName) > 2000000 then Exit;
 
   Sub := TUWSubtitles.Create;
   try
-    if Sub.LoadFromFile(AFileName, NIL, 1) then
+    FPSInfo.FPS := 1;
+    FPSInfo.Mode := tcNDF;
+    if Sub.LoadFromFile(AFileName, NIL, FPSInfo) then
       Result := Sub.Format;
   finally
     Sub.Free;

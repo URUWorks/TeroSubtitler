@@ -161,7 +161,7 @@ var
 begin
   with Item^, frmRoundTime do
   begin
-    RoundFramesValue(InitialTime, FinalTime, Workspace.FPS.OutputFPS, it, ft, IsSMPTE);
+    RoundFramesValue(InitialTime, FinalTime, Workspace.FPS.OutputFPS.FPS, it, ft, IsSMPTE);
     SetSubtitleTimes(Index, it, ft, False, False);
   end;
 end;

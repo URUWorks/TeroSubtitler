@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Graphics, Dialogs, ActnList, procTypes, formMain,
-  UWSubtitleAPI, UWSubtitleAPI.Formats, MPVPlayer;
+  UWSubtitleAPI, UWSubtitleAPI.Formats, MPVPlayer, UWSystem.TimeUtils;
 
 procedure PrepareMPV;
 procedure UpdateMPVOptions;
@@ -64,7 +64,7 @@ begin
     YTDLPFileName := procConfig.YTDLPFileName;
     LogLevel := llNo;
     AutoStartPlayback := False;
-    SMPTEMode := Workspace.SMPTE;
+    //SMPTEMode := Workspace.SMPTE;
     with MPVOptions do
     begin
       AddOption('osd-color=' + TextColor);
@@ -253,7 +253,7 @@ end;
 
 function MPVSaveSubtitleTempTrack: Boolean;
 var
-  AFPS : Single;
+  AFPS : TFPSInfo;
 begin
   AFPS := Workspace.FPS.OutputFPS;
 

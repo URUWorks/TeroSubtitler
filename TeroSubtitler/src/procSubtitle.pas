@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, StdCtrls, SysUtils, Graphics, LazUTF8, procTypes, laz.VirtualTrees,
-  UWSubtitleAPI, UWMemo, UWTimeEdit, Types;
+  UWSubtitleAPI, UWMemo, UWTimeEdit, UWSystem.TimeUtils, Types;
 
 type
   TPushWordMode = (pwmUp, pwmDown, pwmToPrevious, pwmToNext);
@@ -58,10 +58,10 @@ procedure SetSubtitleValues(const Index: Integer; const AInitialTime, AFinalTime
 
 function GetCorrectTime(const ATime: Integer; AIsFrames: Boolean): Integer;
 function GetCorrectPause(const AIndex: Integer): Integer;
-function GetTimeStr(const Time: Integer; const Trim: Boolean = False): String;
+function GetTimeStr(const Time: Integer; const Trim: Boolean = False; const TimecodeMode: TTimecodeMode = tcDF): String;
 function GetInitialTimeStr(const Index: Integer; const Trim: Boolean = False): String;
 function GetFinalTimeStr(const Index: Integer; const Trim: Boolean = False): String;
-function GetDurationTimeStr(const Index: Integer; const Trim: Boolean = False): String;
+function GetDurationTimeStr(const Index: Integer; const Trim: Boolean = False; const TimecodeMode: TTimecodeMode = tcNDF): String;
 function GetPauseTimeStr(const Index: Integer; const Trim: Boolean = False): String;
 function GetSubtitleText(const Index: Integer; const SubtitleMode: TSubtitleMode = smText): String;
 
@@ -93,7 +93,7 @@ implementation
 
 uses
   formMain, procVST, procUndo, procVST_Loops, procWorkspace, procFixSubtitles,
-  UWSystem.Encoding, UWSystem.TimeUtils, UWSystem.StrUtils, procMPV,
+  UWSystem.Encoding, UWSystem.StrUtils, procMPV,
   UWSubtitleAPI.Tags, UWSubtitleAPI.Formats, procTranscription,
   UWSubtitles.Utils, Clipbrd, UWSystem.SysUtils;
 
@@ -192,7 +192,7 @@ begin
 
   if Workspace.WorkMode = wmFrames then
   begin
-    RoundFramesValue(InitialTime, FinalTime, Workspace.FPS.OutputFPS, it, ft);
+    RoundFramesValue(InitialTime, FinalTime, Workspace.FPS.OutputFPS.FPS, it, ft);
     Item.InitialTime := it;
     Item.FinalTime   := ft;
   end;
@@ -482,7 +482,7 @@ end;
 
 function SetEndCueOneFrame(const AFinalTime: Integer; const ASubtract: Boolean = False): Integer;
 begin
-  Result := IncDecFrame(AFinalTime, Workspace.FPS.OutputFPS, 1, Workspace.SMPTE, not ASubtract);
+  Result := IncDecFrame(AFinalTime, Workspace.FPS.OutputFPS.FPS, 1, Workspace.SMPTE, not ASubtract);
 end;
 
 // -----------------------------------------------------------------------------
@@ -693,7 +693,7 @@ end;
 function GetCorrectTime(const ATime: Integer; AIsFrames: Boolean): Integer;
 begin
   if AIsFrames then
-    Result := FramesToTime(ATime, Workspace.FPS.OutputFPS)
+    Result := FramesToTime(ATime, Workspace.FPS.OutputFPS.FPS)
   else
     Result := ATime;
 end;
@@ -708,7 +708,7 @@ begin
     Result := Subtitles.Pause[AIndex]
   else
   begin
-    Result := FramesToTime(Subtitles.PauseFrames[AIndex, Workspace.FPS.OutputFPS], Workspace.FPS.OutputFPS);
+    Result := FramesToTime(Subtitles.PauseFrames[AIndex, Workspace.FPS.OutputFPS.FPS], Workspace.FPS.OutputFPS.FPS);
 //    RoundFramesValue(Subtitles[AIndex+1].InitialTime, Subtitles[AIndex].FinalTime, Workspace.FPS.OutputFPS, it, ft);
 //    Result := it-ft;
   end;
@@ -716,12 +716,17 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetTimeStr(const Time: Integer; const Trim: Boolean = False): String;
+function GetTimeStr(const Time: Integer; const Trim: Boolean = False; const TimecodeMode: TTimecodeMode = tcDF): String;
 begin
   if Workspace.WorkMode = wmTime then
-    Result := TimeToString(Time, DefTimeFormat, Workspace.FPS.OutputFPS)
+    Result := TimeToString(Time, DefTimeFormat, Workspace.FPS.OutputFPS.FPS)
   else
-    Result := TimeToString(Time, DefFramesFormat, Workspace.FPS.OutputFPS);
+  begin
+    if TimecodeMode = tcNDF then
+      Result := TimeToString(Time, DefFramesFormat, Workspace.FPS.OutputFPS.FPS)
+    else
+      Result := MSToHHMMSSFFTime(Time, Workspace.FPS.OutputFPS.FPS, Workspace.FPS.OutputFPS.Mode);
+  end;
 
   if Trim then Result := TrimTimeString(Result);
 end;
@@ -756,7 +761,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetDurationTimeStr(const Index: Integer; const Trim: Boolean = False): String;
+function GetDurationTimeStr(const Index: Integer; const Trim: Boolean = False; const TimecodeMode: TTimecodeMode = tcNDF): String;
 var
   it, ft: Integer;
 begin
@@ -764,8 +769,8 @@ begin
     Result := GetTimeStr(Subtitles.Duration[Index], Trim)
   else
   begin
-    RoundFramesValue(Subtitles[Index].InitialTime, Subtitles[Index].FinalTime, Workspace.FPS.OutputFPS, it, ft);
-    Result := GetTimeStr(ft-it, Trim)
+    RoundFramesValue(Subtitles[Index].InitialTime, Subtitles[Index].FinalTime, Workspace.FPS.OutputFPS.FPS, it, ft);
+    Result := GetTimeStr(ft-it, Trim, TimecodeMode)
   end;
 end;
 
@@ -773,7 +778,7 @@ end;
 
 function GetPauseTimeStr(const Index: Integer; const Trim: Boolean = False): String;
 begin
-  Result := GetTimeStr(Subtitles.Pause[Index], Trim);
+  Result := GetTimeStr(Subtitles.Pause[Index], Trim, tcNDF);
 end;
 
 // -----------------------------------------------------------------------------

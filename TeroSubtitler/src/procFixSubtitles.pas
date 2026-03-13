@@ -196,11 +196,11 @@ begin
 
   ClearItems;
   GapMs       := GetCorrectTime(Profile^.MinPause, Profile^.PauseInFrames);
-  SnapMs      := FramesToTime(Profile^.ShotcutSnapArea, Workspace.FPS.OutputFPS);
-  ThresholdMs := FramesToTime(Profile^.ShotcutThreshold, Workspace.FPS.OutputFPS);
-  InCue       := FramesToTime(Profile^.ShotcutInCues, Workspace.FPS.OutputFPS);
-  OutCue      := FramesToTime(Profile^.ShotcutOutCues, Workspace.FPS.OutputFPS);
-  ChainingMS  := FramesToTime(Profile^.Chaining, Workspace.FPS.OutputFPS);
+  SnapMs      := FramesToTime(Profile^.ShotcutSnapArea, Workspace.FPS.OutputFPS.FPS);
+  ThresholdMs := FramesToTime(Profile^.ShotcutThreshold, Workspace.FPS.OutputFPS.FPS);
+  InCue       := FramesToTime(Profile^.ShotcutInCues, Workspace.FPS.OutputFPS.FPS);
+  OutCue      := FramesToTime(Profile^.ShotcutOutCues, Workspace.FPS.OutputFPS.FPS);
+  ChainingMS  := FramesToTime(Profile^.Chaining, Workspace.FPS.OutputFPS.FPS);
   prevSnapFT  := 0;
   ocr := TUWOCRScript.Create(OCRFile);
   try
@@ -589,7 +589,7 @@ begin
       // Chaining
       if (etChaining in FErrors) and (i+1 < Subtitles.Count) then
       begin
-        if ((Subtitles[i+1].InitialTime - FixedItem.FinalTime) < ChainingMS) and (((Subtitles[i+1].InitialTime - GapMs) - FixedItem.FinalTime) > FramesToTime(1, Workspace.FPS.OutputFPS)) then
+        if ((Subtitles[i+1].InitialTime - FixedItem.FinalTime) < ChainingMS) and (((Subtitles[i+1].InitialTime - GapMs) - FixedItem.FinalTime) > FramesToTime(1, Workspace.FPS.OutputFPS.FPS)) then
         begin
           FixedItem.FinalTime := Subtitles[i+1].InitialTime - GapMs;
           FixedItem.ErrorsFixed := [etChaining];

@@ -37,7 +37,7 @@ interface
 
 uses
   Classes, Types, SysUtils, Controls, Graphics, Math, LazarusPackageIntf,
-  LResources,
+  LResources, UWSystem.TimeUtils,
   WAVDisplayer.WaveFile, WAVDisplayer.ScrollBar,
   UWSubtitleAPI, UWSubtitleAPI.Tags
   {$IFDEF USEBGRABITMAP}
@@ -126,6 +126,7 @@ type
     FFPS             : Double;
     FFPSTimeMode     : Boolean;
     FSMPTE           : Boolean;
+    FTimecodeMode    : TTimecodeMode;
 
     FLengthMS      : Integer;
     FPositionMS    : Integer;
@@ -314,6 +315,7 @@ type
     property Thumbnails: TThumbnails read FThumbnails write FThumbnails;
     property DefaultThumbnail: TBitmap read FDefaultThumbnail;
     property SMPTE: Boolean read FSMPTE write FSMPTE;
+    property TimecodeMode: TTimecodeMode read FTimecodeMode write FTimecodeMode;
   published
     property Subtitles                     : TUWSubtitles                 read FSubtitles                    write FSubtitles;
     property MinimumBlank                  : Integer                      read FGAP                          write FGAP;
@@ -367,7 +369,7 @@ const
 implementation
 
 uses
-  UWSystem.TimeUtils, UWSystem.SysUtils;
+  UWSystem.SysUtils;
 
 const
   DefaultPageSizeMS = 10000; // 5000
@@ -518,10 +520,11 @@ begin
   FTS.SingleLine  := False;
   //FTS.EndEllipsis := True;
 
-  FFPS         := 25;
-  FFPSTimeMode := False;
-  FSMPTE       := False;
-  FEmptyText   := '';
+  FFPS          := 25;
+  FFPSTimeMode  := False;
+  FSMPTE        := False;
+  FTimecodeMode := tcNDF;
+  FEmptyText    := '';
 
   with CustomColors do
   begin

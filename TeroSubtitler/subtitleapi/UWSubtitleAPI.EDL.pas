@@ -210,7 +210,7 @@ var
   Item: TItem;
 
   XmlDoc: TXMLDocument;
-  Node, SubNode: TDOMNode;
+  Node, SubNode, ntscNode: TDOMNode;
   NodeTrack, NodeList: TDOMNodeList;
 begin
   if not FileExists(AFileName) then Exit;
@@ -240,9 +240,15 @@ begin
               SubNode := Node.FindNode('rate');
               if Assigned(SubNode) then
               begin
+                ntscNode := SubNode.FindNode('ntsc');
                 SubNode := SubNode.FindNode('timebase');
                 if Assigned(SubNode) then
-                  FFPS := StrToSingle(SubNode.TextContent, 24, FFSettings);
+                begin
+                  FFPS := StrToFloatDef(SubNode.TextContent, 24, FFSettings);
+
+                  if Assigned(ntscNode) and (ntscNode.TextContent.ToLower = 'true') then
+                    FFPS := FFPS * (1000 / 1001);
+                end;
               end;
 
               SubNode := Node.FindNode('start');
@@ -262,6 +268,57 @@ begin
                 if ClipOut > 0 then
                   AddItem(Item);
               end;
+            end;
+        end;
+      end
+      else
+      begin // EZT
+        NodeTrack := XmlDoc.GetElementsByTagName('video');
+        if Assigned(NodeTrack) and (NodeTrack.Count > 0) then
+        begin
+          NodeList := NodeTrack.Item[0].GetChildNodes;
+          if Assigned(NodeList) then
+            for i := 0 to NodeList.Count-1 do
+            begin
+              Node := NodeList.Item[i];
+              if Assigned(Node) then
+              begin
+                Node := Node.FindNode('frame_rate');
+                if Assigned(Node) then
+                  FFPS := StrToFloatDef(Node.TextContent, 24, FFSettings);
+              end;
+            end;
+
+          NodeTrack := XmlDoc.GetElementsByTagName('shotchanges_list');
+          if Assigned(NodeTrack) and (NodeTrack.Count > 0) then
+            with Item do
+            begin
+              NodeList := NodeTrack.Item[0].GetChildNodes;
+              if Assigned(NodeList) then
+                for i := 0 to NodeList.Count-1 do
+                begin
+                  Node := NodeList.Item[i];
+                  if Assigned(Node) then
+                  begin
+                    SubNode := Node.Attributes.GetNamedItem('frame');
+                    if Assigned(SubNode) then
+                    begin
+                      Index       := i+1;
+                      ReelName    := '';
+                      TypeOfTrack := totV;
+                      TypeOfCut   := tocC;
+                      ClipName    := '';
+                      Comment     := '';
+                      ClipIn      := 0;
+                      ClipOut     := FramesToTime(StrToIntDef(SubNode.NodeValue, 0), FFPS);
+                      TapeIn      := 0;
+                      TapeOut     := 0;
+
+                      if ClipOut > 0 then
+                        AddItem(Item);
+                    end;
+                  end;
+                end;
             end;
         end;
       end;
@@ -325,10 +382,10 @@ begin
 
             s := s.Trim;
 
-            ClipIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-            ClipOut := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-            TapeIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-            TapeOut := StringToTime(s, False, FFPS);
+            ClipIn  := SMPTEStringToMS(CopyAndDel(s, ' '), FFPS, FHeader.FCM = fcmDROPFRAME);
+            ClipOut := SMPTEStringToMS(CopyAndDel(s, ' '), FFPS, FHeader.FCM = fcmDROPFRAME);
+            TapeIn  := SMPTEStringToMS(CopyAndDel(s, ' '), FFPS, FHeader.FCM = fcmDROPFRAME);
+            TapeOut := SMPTEStringToMS(s, FFPS, FHeader.FCM = fcmDROPFRAME);
 
             AddItem(Item);
           end
@@ -354,10 +411,10 @@ begin
 
             s := s.Trim;
 
-            ClipIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-            ClipOut := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-            TapeIn  := StringToTime(CopyAndDel(s, ' '), False, FFPS);
-            TapeOut := StringToTime(s, False, FFPS);
+            ClipIn  := SMPTEStringToMS(CopyAndDel(s, ' '), FFPS, FHeader.FCM = fcmDROPFRAME);
+            ClipOut := SMPTEStringToMS(CopyAndDel(s, ' '), FFPS, FHeader.FCM = fcmDROPFRAME);
+            TapeIn  := SMPTEStringToMS(CopyAndDel(s, ' '), FFPS, FHeader.FCM = fcmDROPFRAME);
+            TapeOut := SMPTEStringToMS(s, FFPS, FHeader.FCM = fcmDROPFRAME);
 
             AddItem(Item);
           end;

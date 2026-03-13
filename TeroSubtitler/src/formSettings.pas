@@ -447,7 +447,7 @@ begin
       DotsOnSplit        := chkDotsOnSplit.Checked;
 
       if PauseInFrames then
-        frmMain.WAVE.MinimumBlank := FramesToTime(MinPause, Workspace.FPS.OutputFPS)
+        frmMain.WAVE.MinimumBlank := FramesToTime(MinPause, Workspace.FPS.OutputFPS.FPS)
       else
         frmMain.WAVE.MinimumBlank := MinPause;
 
@@ -514,7 +514,7 @@ begin
   if Workspace.WorkMode <> TWorkMode(cboTimeCodeMode.ItemIndex) then
     SetWorkMode(TWorkMode(cboTimeCodeMode.ItemIndex));
 
-  Workspace.FPS.DefFPS  := StrToFloatDef(cboDefaultFrameRate.Text, DefFPS, FormatSettings);
+  Workspace.FPS.DefFPS  := DefFPSList[cboDefaultFrameRate.ItemIndex]; //StrToFloatDef(cboDefaultFrameRate.Text, DefFPS, FormatSettings);
   Workspace.DefEncoding := cboDefaultFileEncoding.ItemIndex;
   Workspace.DefFormat   := TUWSubtitleFormats(cboDefaultFileFormat.ItemIndex+1);
   if SubtitleInfo.Text.FileName.IsEmpty then

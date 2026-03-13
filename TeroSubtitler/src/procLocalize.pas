@@ -117,6 +117,7 @@ resourcestring
   lngAdditionalOption = 'Additional option';
   lngHHMMSSZZZ = 'Media [HH:MM:SS.ZZZ]';
   lngHHMMSSFF = 'SMPTE [HH:MM:SS:FF]';
+  lngDropFrame = 'DF';
 
   //AppStrings
   lngasTextChars = 'Text (%s characters at %.2f CPS):';

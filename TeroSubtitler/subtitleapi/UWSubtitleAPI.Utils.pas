@@ -32,12 +32,10 @@ function XMLFindNodeByName(const XmlDoc: TXMLDocument; const NodeName: String): 
 function XMLGetAttrValue(const ANode: TDOMNode; const AAttrName: String): String;
 function XMLHasAttribute(const ANode: TDOMNode; const AAttrName: String): Boolean;
 function XMLExtractTextContent(const A: TDOMNodeList): String;
-function XMLGetCorrectFPS(const AFPS: Double; AMultiplier: String): Double;
+function XMLGetCorrectFPS(const AFPS: Double; const AMultiplier: String; const AForceBroadcastNTSC: Boolean  = False): Double;
 
 function HTMLReplaceEntities(const Input: String): String;
 function HTMLDecode(const AStr: String): String;
-
-function SMPTEStringToMS(const ASMPTE: String; const AFPS: Double; const ADropFrame: Boolean = False): Integer;
 
 function IsBinaryFormat(const AFileName: String): Boolean;
 
@@ -194,14 +192,31 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function XMLGetCorrectFPS(const AFPS: Double; AMultiplier: String): Double;
+function XMLGetCorrectFPS(const AFPS: Double; const AMultiplier: String; const AForceBroadcastNTSC: Boolean = False): Double;
 var
-  multiplier: TStringArray;
+  Parts: TStringArray;
+  Num, Den: Integer;
 begin
   Result := AFPS;
-  multiplier := AMultiplier.Split(' ');
-  if Length(multiplier) = 2 then
-    Result := AFPS * (multiplier[0].ToInteger /  multiplier[1].ToInteger);
+
+  Parts := AMultiplier.Split(' ');
+  if Length(Parts) <> 2 then
+    Exit;
+
+  Num := StrToIntDef(Parts[0], 1);
+  Den := StrToIntDef(Parts[1], 1);
+
+  if Den = 0 then
+    Exit;
+
+  if AForceBroadcastNTSC and (Num = 999) and (Den = 1000) and ((Abs(AFPS - 30.0) < 0.0001) or
+    (Abs(AFPS - 60.0) < 0.0001) or (Abs(AFPS - 24.0) < 0.0001)) then
+  begin
+    Num := 1000;
+    Den := 1001;
+  end;
+
+  Result := AFPS * (Num / Den);
 end;
 
 // -----------------------------------------------------------------------------
@@ -326,100 +341,6 @@ begin
     '&Ouml;', '&Uuml;', '&szlig;'],
     [#13, #10, #10#13, '&', '"', '<', '>', ' ', 'ä', 'ö', 'ü', 'Ä',
     'Ö', 'Ü', 'ß'], [rfReplaceAll]);
-end;
-
-// -----------------------------------------------------------------------------
-
-{function SMPTEStringToMS(const ASMPTE: String; const AFPS: Double; const ADropFrame: Boolean = False): Integer;
-var
-  DropFrame : Boolean;
-  ArraySMPTE : TStringArray;
-  DropFrames : Integer;
-  TotalFrames : Integer;
-  h, m, s, f : Integer;
-  TotalMinutes : Integer;
-begin
-  Result := 0;
-  DropFrame := ADropFrame;
-
-  ArraySMPTE := ASMPTE.Split(';');
-  if Length(ArraySMPTE) >= 2 then
-  begin
-    DropFrame := True;
-    f := ArraySMPTE[1].ToInteger;
-    ArraySMPTE := ASMPTE.Split(':');
-    h := ArraySMPTE[0].ToInteger;
-    m := ArraySMPTE[1].ToInteger;
-    s := Copy(ArraySMPTE[2], 1, Pos(';', ArraySMPTE[2])).ToInteger - 1;
-  end
-  else
-  begin
-    ArraySMPTE := ASMPTE.Split(':');
-    h := ArraySMPTE[0].ToInteger;
-    m := ArraySMPTE[1].ToInteger;
-    s := ArraySMPTE[2].ToInteger;
-    f := ArraySMPTE[3].ToInteger;
-  end;
-
-  // Drop frames is the 6% of the framerate rounded to the nearest number.
-  // I get the 0.06666 * framerate to calculate the drop frames from here https://www.davidheidelberger.com/2010/06/10/drop-frame-timecode/
-  if DropFrame then
-    DropFrames := Round(AFPS * 0.0666666)
-  else
-    DropFrames := 0;
-
-  if m > 0 then
-    TotalMinutes := (60 * h) div m
-  else
-    TotalMinutes := 0;
-
-  TotalFrames := (((h * 3600) + (m * 60) + s) * Round(AFPS)) + f - (DropFrames * (TotalMinutes - (Trunc(TotalMinutes / 10))));
-  Result := Round((TotalFrames / AFPS ) * 1000);
-end;}
-
-function SMPTEStringToMS(const ASMPTE: String; const AFPS: Double; const ADropFrame: Boolean = False): Integer;
-const
-  EPS = 1e-6;
-var
-  s: String;
-  p: TStringArray;
-  h, m, sec, f: Integer;
-  df: Boolean;
-  fpsNom, dropsPerMin: Integer;
-  totalMin: Int64;
-  framesTC: Int64;
-  is1000_1001, validDFNom: Boolean;
-begin
-  df := (Pos(';', ASMPTE) > 0) or ADropFrame;
-
-  s := StringReplace(ASMPTE, ';', ':', [rfReplaceAll]);
-  p := s.Split(':');
-  if Length(p) <> 4 then Exit(0);
-
-  h := StrToIntDef(p[0], 0);
-  m := StrToIntDef(p[1], 0);
-  sec := StrToIntDef(p[2], 0);
-  f := StrToIntDef(p[3], 0);
-
-  fpsNom := Round(AFPS);
-  is1000_1001 := Abs(AFPS - (fpsNom * 1000.0 / 1001.0)) <= EPS;
-  validDFNom := (fpsNom mod 30) = 0; // 30, 60, 120...
-
-  if df and is1000_1001 and validDFNom then
-    dropsPerMin := (fpsNom div 30) * 2 // 30->2, 60->4, 120->8
-  else
-  begin
-    dropsPerMin := 0;
-    df := False; // no DF para 24/23.976
-  end;
-
-  if (m >= 60) or (sec >= 60) or (f < 0) or (f >= fpsNom) then Exit(0);
-
-  totalMin := Int64(h) * 60 + m;
-  framesTC := ((Int64(h) * 3600 + Int64(m) * 60 + sec) * fpsNom) + f
-    - Int64(dropsPerMin) * (totalMin - totalMin div 10) * Ord(df);
-
-  Result := Round(framesTC * 1000.0 / AFPS);
 end;
 
 // -----------------------------------------------------------------------------
