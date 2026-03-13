@@ -270,6 +270,10 @@ msgstr "Das Erkennen von Dialogstellen löscht alle Einträge aus der Liste."
 msgid "Download canceled by user."
 msgstr "Download vom Benutzer abgebrochen."
 
+#: proclocalize.lngdropframe
+msgid "DF"
+msgstr ""
+
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"

@@ -1,224 +1,211 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Lazarus LCL\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-11-13 10:36+0100\n"
-"Last-Translator: Chronos <robie@centrum.cz>\n"
-"Language-Team: Czech <vaclav@valicek.name>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
-"X-Generator: Poedit 2.2\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 
 #: lclstrconsts.hhshelpbrowsernotexecutable
 #, object-pascal-format
 msgid "Browser \"%s\" not executable."
-msgstr "Prohlížeč \"%s\" není spustitelný."
+msgstr ""
 
 #: lclstrconsts.hhshelpbrowsernotfound
 #, object-pascal-format
 msgid "Browser \"%s\" not found."
-msgstr "Prohlížeč \"%s\" nenalezen."
+msgstr ""
 
 #: lclstrconsts.hhshelperrorwhileexecuting
 #, object-pascal-format
 msgid "Error while executing \"%s\":%s%s"
-msgstr "Chyba během spouštění \"%s\":%s%s"
+msgstr ""
 
 #: lclstrconsts.hhshelpnohtmlbrowserfound
 msgid "Unable to find a HTML browser."
-msgstr "Nepodařilo se nalézt HTML prohlížeč."
+msgstr ""
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
 #, object-pascal-format
 msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
-msgstr "HTML prohlížeč nenalezen%sProsím nastav jeden v Nástroje -> Volby -> Nápověda -> Volby Nápovědy"
+msgstr ""
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
 #, object-pascal-format
 msgid "The help database \"%s\" was unable to find file \"%s\"."
-msgstr "Databáze nápovědy \"%s\" nemůže najít soubor \"%s\"."
+msgstr ""
 
 #: lclstrconsts.hhshelpthemacrosinbrowserparamswillbereplacedbytheurl
 #, object-pascal-format
 msgid "The macro %s in BrowserParams will be replaced by the URL."
-msgstr "Makro %s v BrowserParams bude nahrazeno URL."
+msgstr ""
 
 #: lclstrconsts.ifsalt
 msgid "Alt"
-msgstr "Alt"
+msgstr ""
 
 #: lclstrconsts.ifsctrl
 msgid "Ctrl"
-msgstr "Ctrl"
+msgstr ""
 
 #: lclstrconsts.ifsvk_cmd
 msgid "Cmd"
-msgstr "Cmd"
+msgstr ""
 
 #: lclstrconsts.ifsvk_help
 msgctxt "lclstrconsts.ifsvk_help"
 msgid "Help"
-msgstr "Nápověda"
+msgstr ""
 
 #: lclstrconsts.ifsvk_meta
 msgid "Meta"
-msgstr "Meta"
+msgstr ""
 
 #: lclstrconsts.ifsvk_shift
 msgid "Shift"
-msgstr "Shift"
+msgstr ""
 
 #: lclstrconsts.ifsvk_super
 msgid "Super"
-msgstr "Super"
+msgstr ""
 
 #: lclstrconsts.ifsvk_unknown
 msgid "Unknown"
-msgstr "Neznámé"
+msgstr ""
 
 #: lclstrconsts.lislclresourcesnotfound
 #, object-pascal-format
 msgctxt "lclstrconsts.lislclresourcesnotfound"
 msgid "Resource %s not found"
-msgstr "Zdroj %s nenalezen"
+msgstr ""
 
 #: lclstrconsts.rs3ddkshadowcolorcaption
 msgid "3D Dark Shadow"
-msgstr "3D tmavě stínová"
+msgstr ""
 
 #: lclstrconsts.rs3dlightcolorcaption
 msgid "3D Light"
-msgstr "3D světlo"
+msgstr ""
 
 #: lclstrconsts.rsacontrolcannothaveitselfasparent
 msgid "A control can't have itself as a parent"
-msgstr "Prvek nemůže mít sebe jako rodiče"
+msgstr ""
 
 #: lclstrconsts.rsactivebordercolorcaption
 msgid "Active Border"
-msgstr "Aktivní okraj"
+msgstr ""
 
 #: lclstrconsts.rsactivecaptioncolorcaption
 msgid "Active Caption"
-msgstr "Aktivní titulek"
+msgstr ""
 
 #: lclstrconsts.rsallfiles
 #, object-pascal-format
 msgid "All files (%s)|%s|%s"
-msgstr "Všechny soubory (%s)|%s|%s"
+msgstr ""
 
 #: lclstrconsts.rsappworkspacecolorcaption
 msgid "Application Workspace"
-msgstr "Pracovní prostředí aplikace"
+msgstr ""
 
 #: lclstrconsts.rsaquacolorcaption
 msgid "Aqua"
-msgstr "Vodní"
+msgstr ""
 
 #: lclstrconsts.rsascannothaveasparent
 #, object-pascal-format
 msgid "Class %s cannot have %s as parent."
-msgstr "Třída %s nemůže mít jako rodiče %s."
+msgstr ""
 
 #: lclstrconsts.rsbackgroundcolorcaption
 msgid "Desktop"
-msgstr "Plocha"
+msgstr ""
 
 #: lclstrconsts.rsbackward
 msgid "Backward"
-msgstr "Nazpět"
+msgstr ""
 
 #: lclstrconsts.rsbitmaps
-#, fuzzy
-#| msgid "Bitmaps"
 msgid "Bitmap Files"
-msgstr "Bitové mapy"
+msgstr ""
 
 #: lclstrconsts.rsblackcolorcaption
 msgid "Black"
-msgstr "Černá"
+msgstr ""
 
 #: lclstrconsts.rsblank
 msgid "Blank"
-msgstr "Prázdné"
+msgstr ""
 
 #: lclstrconsts.rsbluecolorcaption
 msgid "Blue"
-msgstr "Modrá"
+msgstr ""
 
 #: lclstrconsts.rsbtnfacecolorcaption
 msgid "Button Face"
-msgstr "Povrch tlačítka"
+msgstr ""
 
 #: lclstrconsts.rsbtnhighlightcolorcaption
 msgid "Button Highlight"
-msgstr "Zvýraznění tlačítka"
+msgstr ""
 
 #: lclstrconsts.rsbtnshadowcolorcaption
 msgid "Button Shadow"
-msgstr "Stín tlačítka"
+msgstr ""
 
 #: lclstrconsts.rsbtntextcolorcaption
 msgid "Button Text"
-msgstr "Text tlačítka"
+msgstr ""
 
 #: lclstrconsts.rscalculator
 msgid "Calculator"
-msgstr "Kalkulačka"
+msgstr ""
 
 #: lclstrconsts.rscancelrecordhint
 msgctxt "lclstrconsts.rscancelrecordhint"
 msgid "Cancel"
-msgstr "Zrušit"
+msgstr ""
 
 #: lclstrconsts.rscannotfocus
 msgid "Can not focus"
-msgstr "Nelze zaměřit"
+msgstr ""
 
 #: lclstrconsts.rscanvasdoesnotallowdrawing
 msgid "Canvas does not allow drawing"
-msgstr "Plátno neumožňuje kreslení"
+msgstr ""
 
 #: lclstrconsts.rscaptiontextcolorcaption
 msgid "Caption Text"
-msgstr "Text titulku"
+msgstr ""
 
 #: lclstrconsts.rscasesensitive
 msgid "Case sensitive"
-msgstr "Rozlišovat velká/malá"
+msgstr ""
 
 #: lclstrconsts.rscontrolclasscantcontainchildclass
 #, object-pascal-format
 msgid "Control of class '%s' can't have control of class '%s' as a child"
-msgstr "Prvek třídy '%s' nemůže mít prvek třídy '%s' jako dítě"
+msgstr ""
 
 #: lclstrconsts.rscontrolhasnoparentformorframe
 #, object-pascal-format
 msgid "Control '%s' has no parent form or frame"
-msgstr "Prvek '%s' nemá rodičovský formulář nebo rámec"
+msgstr ""
 
 #: lclstrconsts.rscontrolisnotaparent
 #, object-pascal-format
 msgid "'%s' is not a parent of '%s'"
-msgstr "\"%s\" není předchůdcem \"%s\""
+msgstr ""
 
 #: lclstrconsts.rscreamcolorcaption
 msgid "Cream"
-msgstr "Krémová"
+msgstr ""
 
 #: lclstrconsts.rscursor
-#, fuzzy
-#| msgid "Cursor"
 msgid "Cursor Files"
-msgstr "Ukazatel"
+msgstr ""
 
 #: lclstrconsts.rscustomcolorcaption
 msgid "Custom ..."
-msgstr "Vlastní..."
+msgstr ""
 
 #: lclstrconsts.rsdatetoolarge
 #, object-pascal-format
@@ -232,419 +219,396 @@ msgstr ""
 
 #: lclstrconsts.rsdefaultcolorcaption
 msgid "Default"
-msgstr "Výchozí"
+msgstr ""
 
 #: lclstrconsts.rsdefaultfileinfovalue
 msgid "permissions user group size date time"
-msgstr "oprávnění uživatel skupina velikost datum čas"
+msgstr ""
 
 #: lclstrconsts.rsdeleterecord
 msgid "Delete record?"
-msgstr "Smazat záznam?"
+msgstr ""
 
 #: lclstrconsts.rsdeleterecordhint
 msgctxt "lclstrconsts.rsdeleterecordhint"
 msgid "Delete"
-msgstr "Smazat"
+msgstr ""
 
 #: lclstrconsts.rsdirection
 msgid "Direction"
-msgstr "Adresář"
+msgstr ""
 
 #: lclstrconsts.rsdirectory
 msgid "&Directory"
-msgstr "&Adresář"
+msgstr ""
 
 #: lclstrconsts.rsdocopy
+#, fuzzy
 msgctxt "lclstrconsts.rsdocopy"
 msgid "Copy"
-msgstr "Kopírovat"
+msgstr "Αντιγραφή"
 
 #: lclstrconsts.rsdopaste
+#, fuzzy
 msgctxt "lclstrconsts.rsdopaste"
 msgid "Paste"
-msgstr "Vložit"
+msgstr "Επικόλληση"
 
 #: lclstrconsts.rsduplicateiconformat
 msgid "Duplicate icon format."
-msgstr "Duplicitní formát ikony."
+msgstr ""
 
 #: lclstrconsts.rseditrecordhint
+#, fuzzy
 msgctxt "lclstrconsts.rseditrecordhint"
 msgid "Edit"
-msgstr "Upravit"
+msgstr "Επεξεργασία"
 
 #: lclstrconsts.rsentirescope
 msgid "Search entire file"
-msgstr "Prohledat celý soubor"
+msgstr ""
 
 #: lclstrconsts.rserror
 msgctxt "lclstrconsts.rserror"
 msgid "Error"
-msgstr "Chyba"
+msgstr ""
 
 #: lclstrconsts.rserrorcreatingdevicecontext
 #, object-pascal-format
 msgid "Error creating device context for %s.%s"
-msgstr "Chyba vytváření kontextu zařízení %s.%s"
+msgstr ""
 
 #: lclstrconsts.rserroroccurredinataddressframe
 #, object-pascal-format
 msgid "Error occurred in %s at %sAddress %s%s Frame %s"
-msgstr "Nastala chyba v %s na %sAdresa %s%s Rámec %s"
+msgstr ""
 
 #: lclstrconsts.rserrorwhilesavingbitmap
 msgid "Error while saving bitmap."
-msgstr "Chyba během ukládání bitmapy."
+msgstr ""
 
 #: lclstrconsts.rsexception
 msgid "Exception"
-msgstr "Vyjímka"
+msgstr ""
 
 #: lclstrconsts.rsfddirectorymustexist
 msgid "Directory must exist"
-msgstr "Adresář musí existovat"
+msgstr ""
 
 #: lclstrconsts.rsfddirectorynotexist
 #, object-pascal-format
 msgid "The directory \"%s\" does not exist."
-msgstr "Adresář \"%s\" neexistuje."
+msgstr ""
 
 #: lclstrconsts.rsfdfilealreadyexists
 #, object-pascal-format
 msgid "The file \"%s\" already exists. Overwrite ?"
-msgstr "Soubor \"%s\" již existuje. Přepsat ?"
+msgstr ""
 
 #: lclstrconsts.rsfdfilemustexist
 msgid "File must exist"
-msgstr "Soubor musí existovat"
+msgstr ""
 
 #: lclstrconsts.rsfdfilenotexist
 #, object-pascal-format
 msgid "The file \"%s\" does not exist."
-msgstr "Soubor \"%s\" neexistuje."
+msgstr ""
 
 #: lclstrconsts.rsfdfilereadonly
 #, object-pascal-format
 msgid "The file \"%s\" is not writable."
-msgstr "Soubor \"%s\" není zapisovatelný."
+msgstr ""
 
 #: lclstrconsts.rsfdfilereadonlytitle
 msgid "File is not writable"
-msgstr "Soubor není zapisovatelný"
+msgstr ""
 
 #: lclstrconsts.rsfdfilesaveas
 msgid "Save file as"
-msgstr "Uložit soubor jako"
+msgstr ""
 
 #: lclstrconsts.rsfdopenfile
 msgid "Open existing file"
-msgstr "Otevřít existující soubor"
+msgstr ""
 
 #: lclstrconsts.rsfdoverwritefile
 msgid "Overwrite file ?"
-msgstr "Přepsat soubor?"
+msgstr ""
 
 #: lclstrconsts.rsfdpathmustexist
 msgid "Path must exist"
-msgstr "Cesta musí existovat"
+msgstr ""
 
 #: lclstrconsts.rsfdpathnoexist
 #, object-pascal-format
 msgid "The path \"%s\" does not exist."
-msgstr "Cesta \"%s\" neexistuje."
+msgstr ""
 
 #: lclstrconsts.rsfdselectdirectory
 msgid "Select Directory"
-msgstr "Vybrat adresář"
+msgstr ""
 
 #: lclstrconsts.rsfileinfofilenotfound
 #, object-pascal-format
 msgid "(file not found: \"%s\")"
-msgstr "(soubor nenalezen: \"%s\")"
+msgstr ""
 
 #: lclstrconsts.rsfileinformation
 msgid "File information"
-msgstr "Informace o souboru"
+msgstr ""
 
 #: lclstrconsts.rsfilter
 msgctxt "lclstrconsts.rsfilter"
 msgid "(filter)"
-msgstr "(filtr)"
+msgstr ""
 
 #: lclstrconsts.rsfind
 msgid "Find"
-msgstr "Najít"
+msgstr ""
 
 #: lclstrconsts.rsfindmore
 msgid "Find more"
-msgstr "Najít další"
+msgstr ""
 
 #: lclstrconsts.rsfirstrecordhint
 msgid "First"
-msgstr "První"
+msgstr ""
 
 #: lclstrconsts.rsfixedcolstoobig
 msgid "FixedCols can't be > ColCount"
-msgstr "FixedCols nemůže být > ColCount"
+msgstr ""
 
 #: lclstrconsts.rsfixedrowstoobig
 msgid "FixedRows can't be > RowCount"
-msgstr "FixedRows nemůže být > RowCount"
+msgstr ""
 
 #: lclstrconsts.rsformcolorcaption
 msgid "Form"
-msgstr "Formulář"
+msgstr ""
 
 #: lclstrconsts.rsformresourcesnotfoundforresourcelessformscreatenew
 #, object-pascal-format
 msgid "Form resource %s not found. For resourceless forms CreateNew constructor must be used. See the global variable RequireDerivedFormResource."
-msgstr "Zdroj formuláře %s nenalezen. Pro formuláře bez zdroje musí být použit konstruktor CreateNew. Podívejte se na globální proměnnou RequireDerivedFormResource."
+msgstr ""
 
 #: lclstrconsts.rsformstreamingerror
 #, object-pascal-format
 msgid "Form streaming \"%s\" error: %s"
-msgstr "Chyba zřetězení \"%s\" chyba: %s"
+msgstr ""
 
 #: lclstrconsts.rsforward
 msgid "Forward"
-msgstr "Vpřed"
+msgstr ""
 
 #: lclstrconsts.rsfuchsiacolorcaption
 msgid "Fuchsia"
-msgstr "Fuksiová"
+msgstr ""
 
 #: lclstrconsts.rsgdkoptiondebug
-#, fuzzy
-#| msgid "--gdk-debug flags     Turn on specific GDK trace/debug messages."
 msgid "Turn on specific GDK trace/debug messages."
-msgstr "--gdk-debug flags     Zapnout specifické ladící/sledovací zprávy GDK."
+msgstr ""
 
 #: lclstrconsts.rsgdkoptionnodebug
-#, fuzzy
-#| msgid "--gdk-no-debug flags  Turn off specific GDK trace/debug messages."
 msgid "Turn off specific GDK trace/debug messages."
-msgstr "--gdk-no-debug flags  Vypnout specifické ladící/sledovací zprávy GDK."
+msgstr ""
 
 #: lclstrconsts.rsgif
-#, fuzzy
-#| msgid "Graphics Interchange Format"
 msgid "Graphics Interchange Format Files"
-msgstr "Graphics Interchange Format"
+msgstr ""
 
 #: lclstrconsts.rsgoptionfatalwarnings
-#, fuzzy
-#| msgid "--g-fatal-warnings    Warnings and errors generated by Gtk+/GDK will halt the application."
 msgid "Warnings and errors generated by Gtk+/GDK will halt the application."
-msgstr "--g-fatal-warnings    Varování a chyby generované Gtk+/GDK ukončí aplikaci."
+msgstr ""
 
 #: lclstrconsts.rsgradientactivecaptioncolorcaption
 msgid "Gradient Active Caption"
-msgstr "Gradient Aktivního popisku"
+msgstr ""
 
 #: lclstrconsts.rsgradientinactivecaptioncolorcaption
 msgid "Gradient Inactive Caption"
-msgstr "Gradient Neaktivního Popisku"
+msgstr ""
 
 #: lclstrconsts.rsgraphic
 msgid "Graphic"
-msgstr "Grafika"
+msgstr ""
 
 #: lclstrconsts.rsgraycolorcaption
 msgid "Gray"
-msgstr "Šedá"
+msgstr ""
 
 #: lclstrconsts.rsgraytextcolorcaption
 msgid "Gray Text"
-msgstr "Šedý text"
+msgstr ""
 
 #: lclstrconsts.rsgreencolorcaption
 msgid "Green"
-msgstr "Zelená"
+msgstr ""
 
 #: lclstrconsts.rsgridfiledoesnotexist
 msgid "Grid file doesn't exist"
-msgstr "Soubor mřížky neexistuje"
+msgstr ""
 
 #: lclstrconsts.rsgridhasnocols
 msgid "Cannot insert rows into a grid when it has no columns"
-msgstr "Nelze vložit řádky do mřížky, když nemá sloupce"
+msgstr ""
 
 #: lclstrconsts.rsgridhasnorows
 msgid "Cannot insert columns into a grid when it has no rows"
-msgstr "Nelze vložit sloupce do mřížky, když nemá řádky"
+msgstr ""
 
 #: lclstrconsts.rsgridindexoutofrange
 msgid "Grid index out of range."
-msgstr "Index mřížky mimo rozsah."
+msgstr ""
 
 #: lclstrconsts.rsgroupindexcannotbelessthanprevious
 msgid "GroupIndex cannot be less than a previous menu item's GroupIndex"
-msgstr "GroupIndex nemůže být menší než předchozí GroupIndex položky nabídky"
+msgstr ""
 
 #: lclstrconsts.rsgtkfilter
 msgid "Filter:"
-msgstr "Filtr:"
+msgstr ""
 
 #: lclstrconsts.rsgtkhistory
 msgid "History:"
-msgstr "Historie:"
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionclass
-#, fuzzy
-#| msgid "--class classname     Following Xt conventions, the class of a program is the program name with the initial character capitalized. For example, the classname for gimp is \"Gimp\". If --class is specified, the class of the program will be set to \"classname\"."
 msgid "Following Xt conventions, the class of a program is the program name with the initial character capitalized. For example, the classname for gimp is \"Gimp\". If --class is specified, the class of the program will be set to \"classname\"."
-msgstr "--class classname     Následujíce Xt konvence, třída programu je název programu s prvním písmenkem velkým. Například, \"classname\" pro gimp je \"Gimp\". Pokud specifikujeme parametr --class, třída programu bude \"classname\""
+msgstr ""
 
 #: lclstrconsts.rsgtkoptiondebug
-#, fuzzy
-#| msgid "--gtk-debug flags     Turn on specific Gtk+ trace/debug messages."
 msgid "Turn on specific Gtk+ trace/debug messages."
-msgstr "--gtk-debug flags     Zapnout specifické ladící/sledovací zprávy Gtk+"
+msgstr ""
 
 #: lclstrconsts.rsgtkoptiondisplay
-#, fuzzy
-#| msgid "--display h:s:d       Connect to the specified X server, where \"h\" is the hostname, \"s\" is the server number (usually 0), and \"d\" is the display number (typically omitted). If --display is not specified, the DISPLAY environment variable is used."
 msgid "Connect to the specified X server, where \"h\" is the hostname, \"s\" is the server number (usually 0), and \"d\" is the display number (typically omitted). If --display is not specified, the DISPLAY environment variable is used."
-msgstr "--display h:s:d       Připojit k zadanému X serveru, kde \"h\" je jméno hosta, \"s\" je číslo serveru (většinou 0), a \"d\" je číslo displeje (většinou se nezadává). Pokud nezadáme --display, použije se obsah proměnné DISPLAY z prostředí."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionmodule
-#, fuzzy
-#| msgid "--gtk-module module   Load the specified module at startup."
 msgid "Load the specified module at startup."
-msgstr "--gtk-module module   Načíst zadaný modul při startu."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionname
-#, fuzzy
-#| msgid "--name programe       Set program name to \"progname\". If not specified, program name will be set to ParamStrUTF8(0)."
 msgid "Set program name to \"progname\". If not specified, program name will be set to ParamStrUTF8(0)."
-msgstr "--name programe       Nastaví jméno programu na \"progname\". Pokud se nezadá, použije se ParamStrUTF8(0)."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionnodebug
-#, fuzzy
-#| msgid "--gtk-no-debug flags  Turn off specific Gtk+ trace/debug messages."
 msgid "Turn off specific Gtk+ trace/debug messages."
-msgstr "--gtk-no-debug flags  Vypnout zadané ladící/sledovací zprávy Gtk+."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionnotransient
-#, fuzzy
-#| msgid "--lcl-no-transient    Do not set transient order for modal forms"
 msgid "Do not set transient order for modal forms."
-msgstr "--lcl-no-transient    Nenastavovat přechodné pořadí pro modální formuláře."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionnoxshm
-#, fuzzy
-#| msgid "--no-xshm             Disable use of the X Shared Memory Extension."
 msgid "Disable use of the X Shared Memory Extension."
-msgstr "--no-xshm             Vypnout použití rozšíření X Shared Memory Extension."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionsync
-#, fuzzy
-#| msgid "--sync                Call XSynchronize (display, True) after the Xserver connection has been established. This makes debugging X protocol errors easier, because X request buffering will be disabled and X errors will be received immediately after the protocol request that generated the error has been processed by the X server."
 msgid "Call XSynchronize (display, True) after the Xserver connection has been established. This makes debugging X protocol errors easier, because X request buffering will be disabled and X errors will be received immediately after the protocol request that generated the error has been processed by the X server."
-msgstr "--sync                Volat XSynchronize (displej, True) po stabilizaci připojení k X Serveru. Toto dělá ladění chyb X protokolu jednodušší, protože kešování X žádostí bude vypnuto a chyby X budou doručeny okamžitě po žádosti, která vyvolala chybu."
+msgstr ""
 
 #: lclstrconsts.rshelp
 msgctxt "lclstrconsts.rshelp"
 msgid "Help"
-msgstr "Nápověda"
+msgstr ""
 
 #: lclstrconsts.rshelpalreadyregistered
 #, object-pascal-format
 msgid "%s: Already registered"
-msgstr "%s: Již zaregistrováno"
+msgstr ""
 
 #: lclstrconsts.rshelpcontextnotfound
 msgid "A help database was found for this topic, but this topic was not found"
-msgstr "Databáze pro téma nalezena ale téma v databázi ne"
+msgstr ""
 
 #: lclstrconsts.rshelpdatabasenotfound
 msgid "There is no help database installed for this topic"
-msgstr "Databáze nápovědy nenalezena"
+msgstr ""
 
 #: lclstrconsts.rshelperror
 msgid "Help Error"
-msgstr "Chyba nápovědy"
+msgstr ""
 
 #: lclstrconsts.rshelphelpcontextnotfound
 #, object-pascal-format
 msgid "Help context %s not found."
-msgstr "Kontext nápovědy %s nenalezen."
+msgstr ""
 
 #: lclstrconsts.rshelphelpcontextnotfoundindatabase
 #, object-pascal-format
 msgid "Help context %s not found in Database \"%s\"."
-msgstr "Kontext nápovědy %s nenalezen v databázi \"%s\"."
+msgstr ""
 
 #: lclstrconsts.rshelphelpdatabasedidnotfoundaviewerforahelppageoftype
 #, object-pascal-format
 msgid "Help Database \"%s\" did not find a viewer for a help page of type %s"
-msgstr "Databáze nápovědy \"%s\" nenalezla prohlížeč pro stránku nápovědy typu %s"
+msgstr ""
 
 #: lclstrconsts.rshelphelpdatabasenotfound
 #, object-pascal-format
 msgid "Help Database \"%s\" not found"
-msgstr "Databáze nápovědy \"%s\" nenalezena"
+msgstr ""
 
 #: lclstrconsts.rshelphelpfordirectivenotfound
 #, object-pascal-format
 msgid "Help for directive \"%s\" not found."
-msgstr "Nápověda pro direktivu \"%s\" nenalezena"
+msgstr ""
 
 #: lclstrconsts.rshelphelpfordirectivenotfoundindatabase
 #, object-pascal-format
 msgid "Help for directive \"%s\" not found in Database \"%s\"."
-msgstr "Nápověda pro direktivu \"%s\" nenalezena v databázi \"%s\"."
+msgstr ""
 
 #: lclstrconsts.rshelphelpkeywordnotfound
 #, object-pascal-format
 msgid "Help keyword \"%s\" not found."
-msgstr "Klíčové slovo \"%s\" nenalezeno."
+msgstr ""
 
 #: lclstrconsts.rshelphelpkeywordnotfoundindatabase
 #, object-pascal-format
 msgid "Help keyword \"%s\" not found in Database \"%s\"."
-msgstr "Klíčové slovo \"%s\" nebylo nalezeno v Databázi \"%s\""
+msgstr ""
 
 #: lclstrconsts.rshelphelpnodehasnohelpdatabase
 #, object-pascal-format
 msgid "Help node \"%s\" has no Help Database"
-msgstr "Uzel nápovědy \"%s\" nemá Databázi nápovědy"
+msgstr ""
 
 #: lclstrconsts.rshelpnohelpfoundforsource
 #, object-pascal-format
 msgid "No help found for line %d, column %d of %s."
-msgstr "Nápověda nenalezena pro řádek %d, sloupce %d pro %s."
+msgstr ""
 
 #: lclstrconsts.rshelpnohelpnodesavailable
 msgid "No help entries available for this topic"
-msgstr "Uzly nápovědy nejsou dostupné"
+msgstr ""
 
 #: lclstrconsts.rshelpnotfound
 msgid "No help found for this topic"
-msgstr "Nápověda pro téma nenalezena"
+msgstr ""
 
 #: lclstrconsts.rshelpnotregistered
 #, object-pascal-format
 msgid "%s: Not registered"
-msgstr "%s: Neregistrováno"
+msgstr ""
 
 #: lclstrconsts.rshelpselectorerror
 msgid "Help Selector Error"
-msgstr "Chyba výběru nápovědy"
+msgstr ""
 
 #: lclstrconsts.rshelpthereisnoviewerforhelptype
 #, object-pascal-format
 msgid "There is no viewer for help type \"%s\""
-msgstr "Pro typ \"%s\" není prohlížeč"
+msgstr ""
 
 #: lclstrconsts.rshelpviewererror
 msgid "Help Viewer Error"
-msgstr "Chyba prohlížeče nápovědy"
+msgstr ""
 
 #: lclstrconsts.rshelpviewernotfound
 msgid "No viewer was found for this type of help content"
-msgstr "Prohlížeč nápovědy nenalezen pro tento typ"
+msgstr ""
 
 #: lclstrconsts.rshidedetails
 msgid "Hide details"
@@ -652,70 +616,66 @@ msgstr ""
 
 #: lclstrconsts.rshighlightcolorcaption
 msgid "Highlight"
-msgstr "Zvýraznění"
+msgstr ""
 
 #: lclstrconsts.rshighlighttextcolorcaption
 msgid "Highlight Text"
-msgstr "Zvýrazněný text"
+msgstr ""
 
 #: lclstrconsts.rshotlightcolorcaption
 msgid "Hot Light"
-msgstr "Hot Light"
+msgstr ""
 
 #: lclstrconsts.rsicns
-#, fuzzy
-#| msgid "Mac OS X Icon"
 msgid "macOS Icon Files"
-msgstr "Zdroj ikony OS X"
+msgstr ""
 
 #: lclstrconsts.rsicon
-#, fuzzy
-#| msgid "Icon"
 msgid "Icon Files"
-msgstr "Ikona"
+msgstr ""
 
 #: lclstrconsts.rsiconimageempty
 msgid "Icon image cannot be empty"
-msgstr "Obrázek ikony nemůže být prázdný"
+msgstr ""
 
 #: lclstrconsts.rsiconimageformat
 msgid "Icon image must have the same format"
-msgstr "Obrázek ikony musí mít stejný formát"
+msgstr ""
 
 #: lclstrconsts.rsiconimageformatchange
 msgid "Cannot change format of icon image"
-msgstr "Nelze změnit formát obrázku ikony"
+msgstr ""
 
 #: lclstrconsts.rsiconimagesize
 msgid "Icon image must have the same size"
-msgstr "Obrázek ikony musí mít stejnou velikost"
+msgstr ""
 
 #: lclstrconsts.rsiconimagesizechange
 msgid "Cannot change size of icon image"
-msgstr "Nelze změnit velikost obrázku ikony"
+msgstr ""
 
 #: lclstrconsts.rsiconnocurrent
 msgid "Icon has no current image"
-msgstr "Ikona nemá aktuálně obrázek"
+msgstr ""
 
 #: lclstrconsts.rsinactivebordercolorcaption
 msgid "Inactive Border"
-msgstr "Neaktivní okraj"
+msgstr ""
 
 #: lclstrconsts.rsinactivecaptioncolorcaption
 msgctxt "lclstrconsts.rsinactivecaptioncolorcaption"
 msgid "Inactive Caption"
-msgstr "Neaktivní titulek"
+msgstr ""
 
 #: lclstrconsts.rsinactivecaptiontext
 msgctxt "lclstrconsts.rsinactivecaptiontext"
 msgid "Inactive Caption"
-msgstr "Neaktivní titulek"
+msgstr ""
 
 #: lclstrconsts.rsindexoutofbounds
 #, object-pascal-format
 msgid "%s Index %d out of bounds 0 .. %d"
-msgstr "%s Index %d mimo rozsahy 0 .. %d"
+msgstr ""
 
 #: lclstrconsts.rsindexoutofboundsminusone
 #, object-pascal-format
@@ -725,66 +685,64 @@ msgstr ""
 #: lclstrconsts.rsindexoutofrange
 #, object-pascal-format
 msgid "Index Out of range Cell[Col=%d Row=%d]"
-msgstr "Index mimo rozsah Buňka[Sloupec=%d Řádek=%d]"
+msgstr ""
 
 #: lclstrconsts.rsinfobkcolorcaption
 msgid "Info Background"
-msgstr "Informační pozadí"
+msgstr ""
 
 #: lclstrconsts.rsinfotextcolorcaption
 msgid "Info Text"
-msgstr "Informační text"
+msgstr ""
 
 #: lclstrconsts.rsinsertrecordhint
 msgctxt "lclstrconsts.rsinsertrecordhint"
 msgid "Insert"
-msgstr "Vložit"
+msgstr ""
 
 #: lclstrconsts.rsinvaliddate
 #, object-pascal-format
 msgid "Invalid Date : %s"
-msgstr "Neplatný Datum: %s"
+msgstr ""
 
 #: lclstrconsts.rsinvaliddaterangehint
 #, object-pascal-format
 msgid "Invalid Date: %s. Must be between %s and %s"
-msgstr "Neplatný datum: %s. Musí být mezi %s a %s"
+msgstr ""
 
 #: lclstrconsts.rsinvalidformobjectstream
 msgid "invalid Form object stream"
-msgstr "neplatný proud objektu formuláře"
+msgstr ""
 
 #: lclstrconsts.rsinvalidpropertyvalue
 msgid "Invalid property value"
-msgstr "Neplatná hodnota vlastnosti"
+msgstr ""
 
 #: lclstrconsts.rsinvalidstreamformat
 msgid "Invalid stream format"
-msgstr "Neplatný formát proudu"
+msgstr ""
 
 #: lclstrconsts.rsisalreadyassociatedwith
 #, object-pascal-format
 msgid "%s is already associated with %s"
-msgstr "%s již je přidružen k %s"
+msgstr ""
 
 #: lclstrconsts.rsjpeg
-#, fuzzy
-#| msgid "Joint Picture Expert Group"
 msgid "JPEG Files"
-msgstr "Joint Picture Expert Group"
+msgstr ""
 
 #: lclstrconsts.rslastrecordhint
 msgid "Last"
-msgstr "Poslední"
+msgstr ""
 
 #: lclstrconsts.rslimecolorcaption
 msgid "Lime"
-msgstr "Citrusová"
+msgstr ""
 
 #: lclstrconsts.rslistindexexceedsbounds
 #, object-pascal-format
 msgid "List index exceeds bounds (%d)"
-msgstr "Index seznamu překročil meze (%d)"
+msgstr ""
 
 #: lclstrconsts.rsmacoscolordialogmbpick
 msgid "Pick"
@@ -793,33 +751,33 @@ msgstr ""
 #: lclstrconsts.rsmacoseditmenu
 msgctxt "lclstrconsts.rsmacoseditmenu"
 msgid "Edit"
-msgstr "Upravit"
+msgstr "Επεξεργασία"
 
 #: lclstrconsts.rsmacoseditmenucopy
 msgctxt "lclstrconsts.rsmacoseditmenucopy"
 msgid "Copy"
-msgstr "Kopírovat"
+msgstr "Αντιγραφή"
 
 #: lclstrconsts.rsmacoseditmenucut
 msgid "Cut"
-msgstr "Vyjmout"
+msgstr "Αποκοπή"
 
 #: lclstrconsts.rsmacoseditmenupaste
 msgctxt "lclstrconsts.rsmacoseditmenupaste"
 msgid "Paste"
-msgstr "Vložit"
+msgstr "Επικόλληση"
 
 #: lclstrconsts.rsmacoseditmenuredo
 msgid "Redo"
-msgstr "Krok vpřed"
+msgstr "Επανάληψη"
 
 #: lclstrconsts.rsmacoseditmenuselectall
 msgid "Select All"
-msgstr "Vybrat vše"
+msgstr "Επιλογή Όλων"
 
 #: lclstrconsts.rsmacoseditmenuundo
 msgid "Undo"
-msgstr "Krok zpět"
+msgstr "Αναίρεση"
 
 #: lclstrconsts.rsmacosfiledialogpackageswitchtips
 msgid "Treat File Packages (such as *.app files) as Directories to access their internal files"
@@ -838,414 +796,364 @@ msgid "Select"
 msgstr ""
 
 #: lclstrconsts.rsmacosmenuabout
-#, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "About %s"
-msgstr "O aplikaci %s"
+msgstr "Πληροφορίες για το ^s"
 
 #: lclstrconsts.rsmacosmenuhide
 #, object-pascal-format
 msgid "Hide %s"
-msgstr "Skrýt %s"
+msgstr "Απόκρυψη %s"
 
 #: lclstrconsts.rsmacosmenuhideothers
 msgid "Hide Others"
-msgstr "Skrýt ostatní"
+msgstr "Απόκρυψη άλλων"
 
 #: lclstrconsts.rsmacosmenupreferences
 msgid "Preferences..."
-msgstr "Předvolby..."
+msgstr "Προτιμήσεις..."
 
 #: lclstrconsts.rsmacosmenuquit
 #, object-pascal-format
 msgid "Quit %s"
-msgstr "Ukončit %s"
+msgstr "Τερματισμός %s"
 
 #: lclstrconsts.rsmacosmenuservices
 msgid "Services"
-msgstr "Služby"
+msgstr "Υπηρεσίες"
 
 #: lclstrconsts.rsmacosmenushowall
 msgid "Show All"
-msgstr "Ukázat vše"
+msgstr "Προβολή όλων"
 
 #: lclstrconsts.rsmarooncolorcaption
 msgid "Maroon"
-msgstr "Kaštanová"
+msgstr ""
 
 #: lclstrconsts.rsmbabort
 msgid "Abort"
-msgstr "Přerušit"
+msgstr ""
 
 #: lclstrconsts.rsmball
 msgid "&All"
-msgstr "&Všechno"
+msgstr ""
 
 #: lclstrconsts.rsmbcancel
 msgctxt "lclstrconsts.rsmbcancel"
 msgid "Cancel"
-msgstr "Zrušit"
+msgstr ""
 
 #: lclstrconsts.rsmbclose
 msgid "&Close"
-msgstr "&Zavřít"
+msgstr ""
 
 #: lclstrconsts.rsmbhelp
 msgid "&Help"
-msgstr "&Nápověda"
+msgstr ""
 
 #: lclstrconsts.rsmbignore
 msgid "&Ignore"
-msgstr "&Ignorovat"
+msgstr ""
 
 #: lclstrconsts.rsmbno
 msgid "&No"
-msgstr "&Ne"
+msgstr ""
 
 #: lclstrconsts.rsmbnotoall
 msgid "No to all"
-msgstr "Ne všem"
+msgstr ""
 
 #: lclstrconsts.rsmbok
 msgid "&OK"
-msgstr "&OK"
+msgstr ""
 
 #: lclstrconsts.rsmbopen
 msgid "&Open"
-msgstr "&Otevřít"
+msgstr ""
 
 #: lclstrconsts.rsmbretry
 msgid "&Retry"
-msgstr "&Znovu"
+msgstr ""
 
 #: lclstrconsts.rsmbsave
 msgid "&Save"
-msgstr "&Uložit"
+msgstr ""
 
 #: lclstrconsts.rsmbunlock
 msgid "&Unlock"
-msgstr "&Udemknout"
+msgstr ""
 
 #: lclstrconsts.rsmbyes
 msgid "&Yes"
-msgstr "&Ano"
+msgstr ""
 
 #: lclstrconsts.rsmbyestoall
 msgid "Yes to &All"
-msgstr "Ano &všem"
+msgstr ""
 
 #: lclstrconsts.rsmedgraycolorcaption
 msgid "Medium Gray"
-msgstr "Středně šedá"
+msgstr ""
 
 #: lclstrconsts.rsmenubarcolorcaption
 msgid "Menu Bar"
-msgstr "Lišta nabídky"
+msgstr ""
 
 #: lclstrconsts.rsmenucolorcaption
 msgctxt "lclstrconsts.rsmenucolorcaption"
 msgid "Menu"
-msgstr "Nabídka"
+msgstr ""
 
 #: lclstrconsts.rsmenuhighlightcolorcaption
 msgid "Menu Highlight"
-msgstr "Zvýraznění nabídky"
+msgstr ""
 
 #: lclstrconsts.rsmenutextcolorcaption
 msgid "Menu Text"
-msgstr "Text nabídky"
+msgstr ""
 
 #: lclstrconsts.rsmodified
 msgid "  modified "
-msgstr " upravený"
+msgstr ""
 
 #: lclstrconsts.rsmoneygreencolorcaption
 msgid "Money Green"
-msgstr "Peněžní zelená"
+msgstr ""
 
 #: lclstrconsts.rsmtauthentication
 msgid "Authentication"
-msgstr "Autentizace"
+msgstr ""
 
 #: lclstrconsts.rsmtconfirmation
 msgid "Confirmation"
-msgstr "Potvrzení"
+msgstr ""
 
 #: lclstrconsts.rsmtcustom
 msgid "Custom"
-msgstr "Volitelné"
+msgstr ""
 
 #: lclstrconsts.rsmterror
 msgctxt "lclstrconsts.rsmterror"
 msgid "Error"
-msgstr "Chyba"
+msgstr ""
 
 #: lclstrconsts.rsmtinformation
 msgid "Information"
-msgstr "Informace"
+msgstr ""
 
 #: lclstrconsts.rsmtwarning
 msgid "Warning"
-msgstr "Varování"
+msgstr ""
 
 #: lclstrconsts.rsnavycolorcaption
 msgid "Navy"
-msgstr "Námořnická modř"
+msgstr ""
 
 #: lclstrconsts.rsnextrecordhint
 msgctxt "lclstrconsts.rsnextrecordhint"
 msgid "Next"
-msgstr "Další"
+msgstr ""
 
 #: lclstrconsts.rsnonecolorcaption
 msgid "None"
-msgstr "Žádné"
+msgstr ""
 
 #: lclstrconsts.rsnotavalidgridfile
 msgid "Not a valid grid file"
-msgstr "Žádný platný soubor mřížky"
+msgstr ""
 
 #: lclstrconsts.rsnowidgetset
 msgid "No widgetset object. Please check if the unit \"interfaces\" was added to the programs uses clause."
-msgstr "Žádný objekt widgetsetu. Prosíme zkontrolujte, zda jednotka \"interfaces\" byla přidána do sekce uses programu."
+msgstr ""
 
 #: lclstrconsts.rsolivecolorcaption
 msgid "Olive"
-msgstr "Olivová"
+msgstr ""
 
 #: lclstrconsts.rspickdate
 msgid "Select a date"
-msgstr "Vybrat datum"
+msgstr ""
 
 #: lclstrconsts.rspixmap
-#, fuzzy
-#| msgid "Pixmap"
 msgid "Pixmap Files"
-msgstr "Pixmapa"
+msgstr ""
 
 #: lclstrconsts.rsportablenetworkgraphic
-#, fuzzy
-#| msgid "Portable Network Graphic"
 msgid "PNG Files"
-msgstr "Portable Network Graphic"
+msgstr ""
 
 #: lclstrconsts.rsportablepixmap
-#, fuzzy
-#| msgid "Portable PixMap"
 msgid "Portable Pixmap Files"
-msgstr "Přenositelná PixMapa"
+msgstr ""
 
 #: lclstrconsts.rspostrecordhint
 msgid "Post"
-msgstr "Odeslat"
+msgstr ""
 
 #: lclstrconsts.rspressoktoignoreandriskdatacorruptionpressaborttok
 #, object-pascal-format
 msgid "%s%sPress OK to ignore and risk data corruption.%sPress Abort to kill the program."
-msgstr "%s%sStiskněte OK pro ignorování a riskování poškození dat.%sStiskněte Přerušit pro zabití programu."
+msgstr ""
 
 #: lclstrconsts.rspriorrecordhint
 msgctxt "lclstrconsts.rspriorrecordhint"
 msgid "Prior"
-msgstr "Předchozí"
+msgstr ""
 
 #: lclstrconsts.rspromptonreplace
 msgid "Prompt on replace"
-msgstr "Dotázat se před nahrazením"
+msgstr ""
 
 #: lclstrconsts.rspropertydoesnotexist
 #, object-pascal-format
 msgid "Property %s does not exist"
-msgstr "Vlastnost %s neexistuje"
+msgstr ""
 
 #: lclstrconsts.rspurplecolorcaption
 msgid "Purple"
-msgstr "Fialová"
+msgstr ""
 
 #: lclstrconsts.rsqtoptiondisableaccurateframe
 msgid "Disables fully accurate window frame under X11. This feature is implemented for Qt, Qt5 and Gtk2 interfaces and used mostly by GetWindowRect()."
 msgstr ""
 
 #: lclstrconsts.rsqtoptiondograb
-#, fuzzy
-#| msgid "-dograb (only under X11), running under a debugger can cause an implicit -nograb, use -dograb to override. Need QT_DEBUG."
 msgid "Running under a debugger can cause an implicit -nograb, use -dograb to override. Works only under X11, needs QT_DEBUG."
-msgstr "-dograb (pouze pod X11), běh v ladiče může vyústit v implicitní --nograb, použijte -dograb k přepisu. Potřebujete QT_DEBUG."
+msgstr ""
 
 #: lclstrconsts.rsqtoptiongraphicsstyle
-#, fuzzy
-#| msgid "-graphicssystem param, sets the backend to be used for on-screen widgets and QPixmaps. Available options are native, raster and opengl. OpenGL is still unstable."
 msgid "Sets the backend to be used for on-screen widgets and QPixmaps. Available options are native, raster and opengl. OpenGL is still unstable."
-msgstr "-graphicssystem param, nastaví backend k použití pro widgety a QPixmaps na obrazovce. Dostupné volby jsou native, raster a opengl. OpenGL je stále nestabilní."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionnograb
-#, fuzzy
-#| msgid "-nograb, tells Qt that it must never grab the mouse or the keyboard. Need QT_DEBUG."
 msgid "Tells Qt that it must never grab the mouse or the keyboard. Needs QT_DEBUG."
-msgstr "-nograb říká Qt že nemá nikdy zabírat klávesnici a myš. Potřebujete QT_DEBUG."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionreverse
-#, fuzzy
-#| msgid "-reverse, sets the application's layout direction to Qt::RightToLeft."
 msgid "Sets the application's layout direction to Qt::RightToLeft."
-msgstr "-reverse, nastavuje směr rozložení aplikace na Qt::RightToLeft."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionsession
-#, fuzzy
-#| msgid "-session session, restores the application from an earlier session."
 msgid "Restores the application from an earlier session."
-msgstr "-session session - obnovuje aplikaci z dřívějšího sezení"
+msgstr ""
 
 #: lclstrconsts.rsqtoptionstyle
-#, fuzzy
-#| msgid "-style style or -style=style, sets the application GUI style. Possible values are motif, windows, and platinum. If you compiled Qt with additional styles or have additional styles as plugins these will be available to the -style  command line option. NOTE: Not all styles are available on all platforms. If style param does not exist Qt will start an application with default common style (windows)."
 msgid "Sets the application GUI style. Possible values are motif, windows, and platinum. If you compiled Qt with additional styles or have additional styles as plugins these will be available to the -style command line option. NOTE: Not all styles are available on all platforms. If style param does not exist Qt will start an application with default common style (windows)."
-msgstr "-style style nebo -style=style - nastavuje GUI styl aplikace. Možné hodnoty jsou motif, windows a platinum. Pokud jste kompiloval Qt s přidanými styly nebo máte přidané styly jako pluginy, potom budou též dostupné jako volba pro tento parametr. POZOR: Ne všechny styly jsou dostupné na všech platformách - pokud styl neexistuje, Qt spustí aplikaci s vlastním výchozím stylem (windows)."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionstylesheet
-#, fuzzy
-#| msgid "-stylesheet stylesheet or -stylesheet=stylesheet, sets the application Style Sheet. The value must be a path to a file that contains the Style Sheet. Note: Relative URLs in the Style Sheet file are relative to the Style Sheet file's path."
 msgid "Sets the application Style Sheet. The value must be a path to a file that contains the Style Sheet. Note: Relative URLs in the Style Sheet file are relative to the Style Sheet file's path."
-msgstr "-stylesheet stylesheet nebo -stylesheet=stylesheet - nastavuje styl aplikace. Hodnota musí být cesta k souboru obsahujícímu Style Sheet. POZOR: Relativní cesty v URL v souboru jsou relativní vůči cestě k souboru."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionsync
-#, fuzzy
-#| msgid "-sync (only under X11), switches to synchronous mode for debugging."
 msgid "Switches to synchronous mode for debugging. Works only under X11."
-msgstr "-sync (pouze pod X11) - přepíná do synchronního režimu pro ladění."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionwidgetcount
-#, fuzzy
-#| msgid "-widgetcount, prints debug message at the end about number of widgets left undestroyed and maximum number of widgets existed at the same time."
 msgid "Prints debug message at the end about number of widgets left undestroyed and maximum number of widgets existed at the same time."
-msgstr "-widgetcount - vypíše na konci ladící zprávu o počtu nezrušených widgetů a o maximálním počtu widgetů existujícím současně."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11bgcolor
-#, fuzzy
-#| msgid "-bg or -background color, sets the default background color and an application palette (light and dark shades are calculated)."
 msgid "Sets the default background color and an application palette (light and dark shades are calculated)."
-msgstr "-bg nebo -background color - nastavuje výchozí barvu pozadí a paletu aplikace (světlé a tmavé stíny jsou dopočítány)"
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11btncolor
-#, fuzzy
-#| msgid "-btn or -button color, sets the default button color."
 msgid "Sets the default button color."
-msgstr "-btn nebo -button color - nastavuje výchozí barvu tlačítek."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11cmap
-#, fuzzy
-#| msgid "-cmap, causes the application to install a private color map on an 8-bit display."
 msgid "Causes the application to install a private color map on an 8-bit display."
-msgstr "-cmap - způsobuje, že si aplikace nainstaluje soukromou mapu barev na 8-mi bitovém displeji."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11display
-#, fuzzy
-#| msgid "-display display, sets the X display (default is $DISPLAY)."
 msgid "Sets the X display. Default is $DISPLAY."
-msgstr "-display display - nastavuje X display (výchozí je $DISPLAY)."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11fgcolor
-#, fuzzy
-#| msgid "-fg or -foreground color, sets the default foreground color."
 msgid "Sets the default foreground color."
-msgstr "-fg nebo -foreground color - nastavuje výchozí barvu popředí."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11font
-#, fuzzy
-#| msgid "-fn or -font font, defines the application font. The font should be specified using an X logical font description."
 msgid "Defines the application font. The font should be specified using an X logical font description."
-msgstr "-fn nebo -font font - definuje písmo aplikace. Písmo by mělo být určenon X logickým popisem písma."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11geometry
-#, fuzzy
-#| msgid "-geometry geometry, sets the client geometry of the first window that is shown."
 msgid "Sets the client geometry of the first window that is shown."
-msgstr "-geometry geometry - nastavuje klientskou geometrii prvního zobrazeného okna."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11im
-#, fuzzy
-#| msgid "-im, sets the input method server (equivalent to setting the XMODIFIERS environment variable)."
 msgid "Sets the input method server (equivalent to setting the XMODIFIERS environment variable)."
-msgstr "-im - nastavuje server metody vstupu (ekvivalent nastavení proměnné prostředí XMODIFIERS)."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11inputstyle
-#, fuzzy
-#| msgid "-inputstyle, defines how the input is inserted into the given widget, e.g. onTheSpot makes the input appear directly in the widget, while overTheSpot makes the input appear in a box floating over the widget and is not inserted until the editing is done."
 msgid "Defines how the input is inserted into the given widget, e.g. onTheSpot makes the input appear directly in the widget, while overTheSpot makes the input appear in a box floating over the widget and is not inserted until the editing is done."
-msgstr "-inputstyle - definuje jakten NVIDIA Shield zamlouvat. Brzo o něm \"uslyšíte\" i v našem pořadu. Nedávno tam vyšel Portal, teď legenda  je vstup vkládán do daného widgetu, například onTheSpot způsobuje, že se vstup objevuje přímo ve widgetu, zatímco overTheSpot způsobuje, že se vstup objeví v rámu plovoucím nad widgetem a je vložen až po dokončení editace."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11name
-#, fuzzy
-#| msgid "-name name, sets the application name."
 msgid "Sets the application name."
-msgstr "-name name - nastavuje jméno aplikace"
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11ncols
-#, fuzzy
-#| msgid "-ncols count, limits the number of colors allocated in the color cube on an 8-bit display, if the application is using the QApplication::ManyColor color specification. If count is 216 then a 6x6x6 color cube is used (i.e. 6 levels of red, 6 of green, and 6 of blue); for other values, a cube approximately proportional to a 2x3x1 cube is used."
 msgid "Limits the number of colors allocated in the color cube on an 8-bit display, if the application is using the QApplication::ManyColor color specification. If count is 216 then a 6x6x6 color cube is used (i.e. 6 levels of red, 6 of green, and 6 of blue); for other values, a cube approximately proportional to a 2x3x1 cube is used."
-msgstr "-ncols count - omezuje počet barev alokovaných v barevné krychli na 8-mi bitovém displeji pokud aplikace využívá specifikaci QApplication::ManyColor . Pokud je počet barev 216, pak je použita krychle 6x6x6 barev (6 stupňů červené, 6 zelené a 6 modré); pro ostatní případy je použita krychle zhruba v poměru 2x3x1."
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11title
-#, fuzzy
-#| msgid "-title title, sets the application title."
 msgid "Sets the application title."
-msgstr "-title titulek, nastavuje titulek aplikace"
+msgstr ""
 
 #: lclstrconsts.rsqtoptionx11visual
-#, fuzzy
-#| msgid "-visual TrueColor, forces the application to use a TrueColor visual on an 8-bit display."
 msgid "Forces the application to use a TrueColor visual on an 8-bit display."
-msgstr "-visual TrueColor - donutí použít vzhled TrueColor na 8-mi bitovém displeji."
+msgstr ""
 
 #: lclstrconsts.rsrasterimageendupdate
 msgid "Endupdate while no update in progress"
-msgstr "Konec aktualizace zatímco žádná aktualizace nebyla v běhu"
+msgstr ""
 
 #: lclstrconsts.rsrasterimagesaveinupdate
 msgid "Cannot save image while update in progress"
-msgstr "Nelze uložit obrázek zatímco běží aktualizace"
+msgstr ""
 
 #: lclstrconsts.rsrasterimageupdateall
 msgid "Cannot begin update all when canvas only update in progress"
-msgstr "Nelze začít vše aktualizovat, když se aktualizuje plátno"
+msgstr ""
 
 #: lclstrconsts.rsredcolorcaption
 msgid "Red"
-msgstr "Červená"
+msgstr ""
 
 #: lclstrconsts.rsrefreshrecordshint
 msgid "Refresh"
-msgstr "Obnovit"
+msgstr ""
 
 #: lclstrconsts.rsreplace
 msgid "Replace"
-msgstr "Nahradit"
+msgstr ""
 
 #: lclstrconsts.rsreplaceall
 msgid "Replace all"
-msgstr "Nahradit vše"
+msgstr ""
 
 #: lclstrconsts.rsresourcenotfound
 #, object-pascal-format
 msgctxt "lclstrconsts.rsresourcenotfound"
 msgid "Resource %s not found"
-msgstr "Zdroj %s nenalezen"
+msgstr ""
 
 #: lclstrconsts.rsscrollbarcolorcaption
 msgid "ScrollBar"
-msgstr "Posuvník"
+msgstr ""
 
 #: lclstrconsts.rsscrollbaroutofrange
 msgid "ScrollBar property out of range"
-msgstr "Vlastnost posuvníku mimo rozsah"
+msgstr ""
 
 #: lclstrconsts.rsselectcolortitle
 msgid "Select color"
-msgstr "Zvolte barvu"
+msgstr ""
 
 #: lclstrconsts.rsselectfonttitle
 msgid "Select a font"
-msgstr "Zvolte písmo"
+msgstr ""
 
 #: lclstrconsts.rsshowdetails
 msgid "Show details"
@@ -1253,27 +1161,27 @@ msgstr ""
 
 #: lclstrconsts.rssilvercolorcaption
 msgid "Silver"
-msgstr "Stříbrná"
+msgstr ""
 
 #: lclstrconsts.rssize
 msgid "  size "
-msgstr "  velikost "
+msgstr ""
 
 #: lclstrconsts.rsskybluecolorcaption
 msgid "Sky Blue"
-msgstr "Nebeská modrá"
+msgstr ""
 
 #: lclstrconsts.rstcustomtabcontrolaccessibilitydescription
 msgid "A control with tabs"
-msgstr "Ovládací prvek s panely"
+msgstr ""
 
 #: lclstrconsts.rstealcolorcaption
 msgid "Teal"
-msgstr "Hluboká zelenomodrá"
+msgstr ""
 
 #: lclstrconsts.rstext
 msgid "Text"
-msgstr "Text"
+msgstr ""
 
 #: lclstrconsts.rstga
 msgid "TGA Image Files"
@@ -1281,369 +1189,343 @@ msgstr ""
 
 #: lclstrconsts.rsthebuiltinurlisreadonlychangethebaseurlinstead
 msgid "The built-in URL is read only. Change the BaseURL instead."
-msgstr "Vestavěné URL je pouze pro čtení. Místo toho změnte BaseURL."
+msgstr ""
 
 #: lclstrconsts.rstiff
-#, fuzzy
-#| msgid "Tagged Image File Format"
 msgid "Tagged Image File Format Files"
-msgstr "Označkovaný obrazový formát souboru"
+msgstr ""
 
 #: lclstrconsts.rstpanelaccessibilitydescription
 msgctxt "lclstrconsts.rstpanelaccessibilitydescription"
 msgid "Panel"
-msgstr "Panel"
+msgstr ""
 
 #: lclstrconsts.rstsplitteraccessibilitydescription
 msgctxt "lclstrconsts.rstsplitteraccessibilitydescription"
 msgid "A grip to control how much size to give two parts of an area"
-msgstr "Rukojeť k ovládání místa, které zabírají dvě části oblasti"
+msgstr ""
 
 #: lclstrconsts.rsttreeviewaccessibilitydescription
 msgctxt "lclstrconsts.rsttreeviewaccessibilitydescription"
 msgid "A tree of items"
-msgstr "Strom položek"
+msgstr ""
 
 #: lclstrconsts.rsunabletoloaddefaultfont
 msgid "Unable to load default font"
-msgstr "Nelze načíst výchozí písmo"
+msgstr ""
 
 #: lclstrconsts.rsunknownerrorpleasereportthisbug
 msgid "Unknown Error, please report this bug"
-msgstr "Neznámá chyba, prosím nahlašte tuto chybu"
+msgstr ""
 
 #: lclstrconsts.rsunknownpictureextension
 msgid "Unknown picture extension"
-msgstr "Neznámá přípona obrázku"
+msgstr ""
 
 #: lclstrconsts.rsunknownpictureformat
 msgid "Unknown picture format"
-msgstr "Neznámý formát obrázku"
+msgstr ""
 
 #: lclstrconsts.rsunsupportedbitmapformat
 msgid "Unsupported bitmap format."
-msgstr "Nepodporovaný formát bitmapy."
+msgstr ""
 
 #: lclstrconsts.rsunsupportedclipboardformat
 #, object-pascal-format
 msgid "Unsupported clipboard format: %s"
-msgstr "Nepodporovaný formát schránky: %s"
+msgstr ""
 
 #: lclstrconsts.rswarningunreleaseddcsdump
 #, object-pascal-format
 msgid " WARNING: There are %d unreleased DCs, a detailed dump follows:"
-msgstr "VAROVÁNÍ: Existuje %d neuvolněných DC, následuje podrobný popis:"
+msgstr ""
 
 #: lclstrconsts.rswarningunreleasedgdiobjectsdump
 #, object-pascal-format
 msgid " WARNING: There are %d unreleased GDIObjects, a detailed dump follows:"
-msgstr "VAROVÁNÍ: Existuje %d neuvolněných GDIObjects, následuje podrobný popis:"
+msgstr ""
 
 #: lclstrconsts.rswarningunreleasedmessagesinqueue
 #, object-pascal-format
 msgid " WARNING: There are %d messages left in the queue! I'll free them"
-msgstr " VAROVÁNÍ: Ve frontě zbývá %d zpráv! Vyprázdním je."
+msgstr ""
 
 #: lclstrconsts.rswarningunreleasedtimerinfos
 #, object-pascal-format
 msgid " WARNING: There are %d TimerInfo structures left, I'll free them"
-msgstr "VAROVÁNÍ: Zbývá %d TimerInfo struktur, Uvolním je"
+msgstr ""
 
 #: lclstrconsts.rswarningunremovedpaintmessages
 #, object-pascal-format
 msgid " WARNING: There are %s unremoved LM_PAINT/LM_GtkPAINT message links left."
-msgstr "VAROVÁNÍ: Zbývá %s neodstraněných LM_PAINT/LM_GtkPAINT odkazů zpráv."
+msgstr ""
 
 #: lclstrconsts.rswhitecolorcaption
 msgid "White"
-msgstr "Bílá"
+msgstr ""
 
 #: lclstrconsts.rswholewordsonly
 msgid "Whole words only"
-msgstr "Pouze celá slova"
+msgstr ""
 
 #: lclstrconsts.rswin32error
 msgid "Error:"
-msgstr "Chyba:"
+msgstr ""
 
 #: lclstrconsts.rswin32warning
 msgid "Warning:"
-msgstr "Varování:"
+msgstr ""
 
 #: lclstrconsts.rswindowcolorcaption
 msgid "Window"
-msgstr "Okno"
+msgstr ""
 
 #: lclstrconsts.rswindowframecolorcaption
 msgid "Window Frame"
-msgstr "Rámeček okna"
+msgstr ""
 
 #: lclstrconsts.rswindowtextcolorcaption
 msgid "Window Text"
-msgstr "Text okna"
+msgstr ""
 
 #: lclstrconsts.rsyellowcolorcaption
 msgid "Yellow"
-msgstr "Žlutá"
+msgstr ""
 
 #: lclstrconsts.scannotfocus
 msgid "Cannot focus a disabled or invisible window"
-msgstr "Nelze zaktivnit zakázané nebo neviditelné okno"
+msgstr ""
 
 #: lclstrconsts.sduplicatemenus
 msgid "Duplicate menus"
-msgstr "Zdvojit nabídku"
+msgstr ""
 
 #: lclstrconsts.sinvalidactioncreation
 msgid "Invalid action creation"
-msgstr "Neplatná vytvářecí akce"
+msgstr ""
 
 #: lclstrconsts.sinvalidactionenumeration
 msgid "Invalid action enumeration"
-msgstr "Neplatná výčtová akce"
+msgstr ""
 
 #: lclstrconsts.sinvalidactionregistration
 msgid "Invalid action registration"
-msgstr "Neplatná registrační akce"
+msgstr ""
 
 #: lclstrconsts.sinvalidactionunregistration
 msgid "Invalid action unregistration"
-msgstr "Neplatná odregistrační akce"
+msgstr ""
 
 #: lclstrconsts.sinvalidimagesize
 msgid "Invalid image size"
-msgstr "Neplatná velikost obrázku"
+msgstr ""
 
 #: lclstrconsts.sinvalidindex
 msgid "Invalid ImageList Index"
-msgstr "Neplatný index ImageList"
+msgstr ""
 
 #: lclstrconsts.smaskeditnomatch
 msgid "The current text does not match the specified mask."
-msgstr "Současný text neodpovídá specifikované masce"
+msgstr ""
 
 #: lclstrconsts.smenuindexerror
 msgid "Menu index out of range"
-msgstr "Index nabídky mimo rozsah"
+msgstr ""
 
 #: lclstrconsts.smenuitemisnil
 msgid "MenuItem is nil"
-msgstr "Položka nabídky je nil"
+msgstr ""
 
 #: lclstrconsts.smenunotfound
 msgid "Sub-menu is not in menu"
-msgstr "Podnabídka není v nabídce"
+msgstr ""
 
 #: lclstrconsts.smkcalt
 msgid "Alt+"
-msgstr "Alt+"
+msgstr ""
 
 #: lclstrconsts.smkcbksp
 msgid "BkSp"
-msgstr "BkSp"
+msgstr ""
 
 #: lclstrconsts.smkcctrl
 msgid "Ctrl+"
-msgstr "Ctrl+"
+msgstr ""
 
 #: lclstrconsts.smkcdel
 msgid "Del"
-msgstr "Smazat"
+msgstr ""
 
 #: lclstrconsts.smkcdown
 msgctxt "lclstrconsts.smkcdown"
 msgid "Down"
-msgstr "Dolů"
+msgstr ""
 
 #: lclstrconsts.smkcend
 msgctxt "lclstrconsts.smkcend"
 msgid "End"
-msgstr "Konec"
+msgstr ""
 
 #: lclstrconsts.smkcenter
 msgid "Enter"
-msgstr "Enter"
+msgstr ""
 
 #: lclstrconsts.smkcesc
 msgid "Esc"
-msgstr "Esc"
+msgstr ""
 
 #: lclstrconsts.smkchome
 msgctxt "lclstrconsts.smkchome"
 msgid "Home"
-msgstr "Domů"
+msgstr ""
 
 #: lclstrconsts.smkcins
 msgid "Ins"
-msgstr "Vložit"
+msgstr ""
 
 #: lclstrconsts.smkcleft
 msgctxt "lclstrconsts.smkcleft"
 msgid "Left"
-msgstr "Doleva"
+msgstr ""
 
 #: lclstrconsts.smkcmeta
 msgid "Meta+"
-msgstr "Meta+"
+msgstr ""
 
 #: lclstrconsts.smkcpgdn
 msgid "PgDn"
-msgstr "PgDn"
+msgstr ""
 
 #: lclstrconsts.smkcpgup
 msgid "PgUp"
-msgstr "PgUp"
+msgstr ""
 
 #: lclstrconsts.smkcright
 msgctxt "lclstrconsts.smkcright"
 msgid "Right"
-msgstr "Doprava"
+msgstr ""
 
 #: lclstrconsts.smkcshift
 msgid "Shift+"
-msgstr "Shift+"
+msgstr ""
 
 #: lclstrconsts.smkcspace
 msgid "Space"
-msgstr "Mezerník"
+msgstr ""
 
 #: lclstrconsts.smkctab
 msgctxt "lclstrconsts.smkctab"
 msgid "Tab"
-msgstr "Tab"
+msgstr ""
 
 #: lclstrconsts.smkcup
 msgctxt "lclstrconsts.smkcup"
 msgid "Up"
-msgstr "Nahoru"
+msgstr ""
 
 #: lclstrconsts.snotimers
 msgid "No timers available"
-msgstr "Nedostupné žádné časovače"
+msgstr ""
 
 #: lclstrconsts.sparentrequired
 #, object-pascal-format
 msgid "Control \"%s\" has no parent window."
-msgstr "Prvek \"%s\" nemá rodičovské okno."
+msgstr ""
 
 #: lclstrconsts.sparexpected
 #, object-pascal-format
 msgid "Wrong token type: %s expected"
-msgstr "Nesprávný typ symbolu: očekáváno %s"
+msgstr ""
 
 #: lclstrconsts.sparinvalidfloat
 #, object-pascal-format
 msgid "Invalid floating point number: %s"
-msgstr "Neplatné desetinné číslo: %s"
+msgstr ""
 
 #: lclstrconsts.sparinvalidinteger
 #, object-pascal-format
 msgid "Invalid integer number: %s"
-msgstr "Neplatné celé číslo: %s"
+msgstr ""
 
 #: lclstrconsts.sparlocinfo
 #, object-pascal-format
 msgid " (at %d,%d, stream offset %d)"
-msgstr " (u %d,%d, posun proudu %d)"
+msgstr ""
 
 #: lclstrconsts.sparunterminatedbinvalue
 msgid "Unterminated byte value"
-msgstr "Nepřerušená bajtová hodnoty"
+msgstr ""
 
 #: lclstrconsts.sparunterminatedstring
 msgid "Unterminated string"
-msgstr "Neukončený řetězec"
+msgstr ""
 
 #: lclstrconsts.sparwrongtokensymbol
 #, object-pascal-format
 msgid "Wrong token symbol: %s expected but %s found"
-msgstr "Nesprávný symbol: Očekáváno %s, ale nalezeno %s"
+msgstr ""
 
 #: lclstrconsts.sparwrongtokentype
 #, object-pascal-format
 msgid "Wrong token type: %s expected but %s found"
-msgstr "Nesprávný typ symbolu: Očekáváno %s, ale nalezeno %s"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsbytes
 #, object-pascal-format
 msgid "%s bytes"
-msgstr "%s bajtů"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsinvalidpath
-#, object-pascal-format, fuzzy
-#| msgid ""
-#| "Invalid pathname:\n"
-#| "\"%s\"\n"
+#, object-pascal-format
 msgctxt "lclstrconsts.sshellctrlsinvalidpath"
 msgid ""
 "Invalid pathname:\n"
 "\"%s\""
 msgstr ""
-"Neplatná cesta:\n"
-"\"%s\"\n"
 
 #: lclstrconsts.sshellctrlsinvalidpathrelative
-#, object-pascal-format, fuzzy
-#| msgid ""
-#| "Invalid relative pathname:\n"
-#| "\"%s\"\n"
-#| "in relation to rootpath:\n"
-#| "\"%s\"\n"
+#, object-pascal-format
 msgid ""
 "Invalid relative pathname:\n"
 "\"%s\"\n"
 "in relation to rootpath:\n"
 "\"%s\""
 msgstr ""
-"Neplatná relativní cesta:\n"
-"\"%s\"\n"
-"v relaci k kořenové cestě:\n"
-"\"%s\"\n"
 
 #: lclstrconsts.sshellctrlsinvalidroot
-#, object-pascal-format, fuzzy
-#| msgid ""
-#| "Invalid pathname:\n"
-#| "\"%s\"\n"
+#, object-pascal-format
 msgctxt "lclstrconsts.sshellctrlsinvalidroot"
 msgid ""
 "Invalid pathname:\n"
 "\"%s\""
 msgstr ""
-"Neplatná cesta:\n"
-"\"%s\"\n"
 
 #: lclstrconsts.sshellctrlskb
 #, object-pascal-format
 msgid "%s kB"
-msgstr "%s kB"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsmb
 #, object-pascal-format
 msgid "%s MB"
-msgstr "%s MB"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsname
 msgid "Name"
-msgstr "Jméno"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsselecteditemdoesnotexists
-#, object-pascal-format, fuzzy
-#| msgid ""
-#| "The selected item does not exist on disk:\n"
-#| "\"%s\"\n"
+#, object-pascal-format
 msgid ""
 "The selected item does not exist on disk:\n"
 "\"%s\""
 msgstr ""
-"Vybraná položka neexistuje na disku:\n"
-"\"%s\"\n"
 
 #: lclstrconsts.sshellctrlssize
 msgid "Size"
-msgstr "Velikost"
+msgstr ""
 
 #: lclstrconsts.sshellctrlstype
 msgid "Type"
-msgstr "Typ"
+msgstr ""
 

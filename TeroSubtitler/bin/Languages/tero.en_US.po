@@ -258,6 +258,10 @@ msgstr ""
 msgid "Download canceled by user."
 msgstr ""
 
+#: proclocalize.lngdropframe
+msgid "DF"
+msgstr ""
+
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"

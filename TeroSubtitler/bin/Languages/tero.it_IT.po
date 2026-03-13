@@ -267,6 +267,10 @@ msgstr "Tentando di rilevare le parti con dialoghi, tutti i sottotitoli in elenc
 msgid "Download canceled by user."
 msgstr "Download annullato dall’utente."
 
+#: proclocalize.lngdropframe
+msgid "DF"
+msgstr ""
+
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"

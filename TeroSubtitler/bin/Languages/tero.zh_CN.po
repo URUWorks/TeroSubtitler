@@ -266,6 +266,10 @@ msgstr "试图检测对话片段时，会删除列表中的所有条目。"
 msgid "Download canceled by user."
 msgstr "被用户取消下载。"
 
+#: proclocalize.lngdropframe
+msgid "DF"
+msgstr ""
+
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"

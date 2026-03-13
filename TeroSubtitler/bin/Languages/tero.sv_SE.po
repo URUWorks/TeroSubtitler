@@ -270,6 +270,10 @@ msgstr "Att identifiera dialogavsnitt raderar alla poster i listan."
 msgid "Download canceled by user."
 msgstr "Hämtning avbröts av användaren."
 
+#: proclocalize.lngdropframe
+msgid "DF"
+msgstr ""
+
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"

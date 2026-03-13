@@ -1,9 +1,9 @@
 # Giuliano Colla <giuliano.colla@fastwebnet.it>, 2014.
 msgid ""
 msgstr ""
-"Project-Id-Version: lcstrconts - versione 11.02.2024\n"
+"Project-Id-Version: 0.9.2\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-02-17 14:36+0100\n"
+"PO-Revision-Date: 2014-11-10 17:47+0200\n"
 "Last-Translator: Giuliano Colla <giuliano.colla@fastwebnet.it>\n"
 "Language-Team: Lazarus\n"
 "Language: it\n"
@@ -11,42 +11,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
-"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Virtaal 0.6.1\n"
 
 #: lclstrconsts.hhshelpbrowsernotexecutable
 #, object-pascal-format
 msgid "Browser \"%s\" not executable."
-msgstr "Il browser '%s' non è eseguibile."
+msgstr "Il browser \"%s\" non è eseguibile."
 
 #: lclstrconsts.hhshelpbrowsernotfound
 #, object-pascal-format
 msgid "Browser \"%s\" not found."
-msgstr "Il browser '%s' non è disponibile."
+msgstr "Il browser \"%s\" non c'è."
 
 #: lclstrconsts.hhshelperrorwhileexecuting
 #, object-pascal-format
 msgid "Error while executing \"%s\":%s%s"
-msgstr "Errore nell'esecuzione di \"%s\":%s%s"
+msgstr "Errore eseguendo \"%s\":%s%s"
 
 #: lclstrconsts.hhshelpnohtmlbrowserfound
 msgid "Unable to find a HTML browser."
-msgstr "Impossibile trovare un browser HTML."
+msgstr "Impossibile trovare un browser HTML"
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
 #, object-pascal-format
 msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
-msgstr "Nessun browser HTML trovato.%sImposta un browser in Strumenti->Opzioni->Aiuto->Opzioni aiuto"
+msgstr "Nessun Browser HTML trovato.%sDefinirne uno in Strumenti->Opzioni->Aiuto->Opzioni aiuto"
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
 #, object-pascal-format
 msgid "The help database \"%s\" was unable to find file \"%s\"."
-msgstr "L'archivio della Guida in linea '%s' non trova il file '%s'."
+msgstr "L'archivio dell'help \"%s\" non trova il file \"%s\"."
 
 #: lclstrconsts.hhshelpthemacrosinbrowserparamswillbereplacedbytheurl
 #, object-pascal-format
 msgid "The macro %s in BrowserParams will be replaced by the URL."
-msgstr "La macro '%s' nei parametri del browser sarà sostituita dall'URL."
+msgstr "La macro %s nei parametri del browser sarà sostituita dall'URL"
 
 #: lclstrconsts.ifsalt
 msgid "Alt"
@@ -85,7 +84,7 @@ msgstr "Sconosciuto"
 #, object-pascal-format
 msgctxt "lclstrconsts.lislclresourcesnotfound"
 msgid "Resource %s not found"
-msgstr "Risorsa '%s' non trovata"
+msgstr "Risorsa %s non trovata"
 
 #: lclstrconsts.rs3ddkshadowcolorcaption
 msgid "3D Dark Shadow"
@@ -114,7 +113,7 @@ msgstr "Tutti i file (%s)|%s|%s"
 
 #: lclstrconsts.rsappworkspacecolorcaption
 msgid "Application Workspace"
-msgstr "Spazio di lavoro applicazione"
+msgstr "Spazio di lavoro dell'applicazione"
 
 #: lclstrconsts.rsaquacolorcaption
 msgid "Aqua"
@@ -123,19 +122,21 @@ msgstr "Acqua"
 #: lclstrconsts.rsascannothaveasparent
 #, object-pascal-format
 msgid "Class %s cannot have %s as parent."
-msgstr "La classe '%s' non può avere '%s' come genitore."
+msgstr ""
 
 #: lclstrconsts.rsbackgroundcolorcaption
 msgid "Desktop"
-msgstr "Desktop"
+msgstr "Scrivania"
 
 #: lclstrconsts.rsbackward
 msgid "Backward"
 msgstr "Indietro"
 
 #: lclstrconsts.rsbitmaps
+#, fuzzy
+#| msgid "Bitmaps"
 msgid "Bitmap Files"
-msgstr "File bitmap"
+msgstr "Bitmap"
 
 #: lclstrconsts.rsblackcolorcaption
 msgid "Black"
@@ -172,7 +173,7 @@ msgstr "Calcolatore"
 #: lclstrconsts.rscancelrecordhint
 msgctxt "lclstrconsts.rscancelrecordhint"
 msgid "Cancel"
-msgstr "Annulla"
+msgstr "Cancella"
 
 #: lclstrconsts.rscannotfocus
 msgid "Can not focus"
@@ -180,15 +181,15 @@ msgstr "Impossibile dare il focus"
 
 #: lclstrconsts.rscanvasdoesnotallowdrawing
 msgid "Canvas does not allow drawing"
-msgstr "La tela non permette il disegno"
+msgstr "Il canvas non permette il disegno"
 
 #: lclstrconsts.rscaptiontextcolorcaption
 msgid "Caption Text"
-msgstr "Testo titolo"
+msgstr "Testo del titolo"
 
 #: lclstrconsts.rscasesensitive
 msgid "Case sensitive"
-msgstr "Sensibile maiuscolo/minuscolo"
+msgstr "Differenzia maiuscolo e minuscolo"
 
 #: lclstrconsts.rscontrolclasscantcontainchildclass
 #, object-pascal-format
@@ -198,34 +199,36 @@ msgstr "Un controllo di classe '%s' non può avere figli di classe '%s'"
 #: lclstrconsts.rscontrolhasnoparentformorframe
 #, object-pascal-format
 msgid "Control '%s' has no parent form or frame"
-msgstr "Il controllo '%s' non ha un modulo o un frame principale"
+msgstr ""
 
 #: lclstrconsts.rscontrolisnotaparent
 #, object-pascal-format
 msgid "'%s' is not a parent of '%s'"
-msgstr "'%s' non è genitore di '%s'"
+msgstr "'%s' non è genitore di  '%s'"
 
 #: lclstrconsts.rscreamcolorcaption
 msgid "Cream"
 msgstr "Crema"
 
 #: lclstrconsts.rscursor
+#, fuzzy
+#| msgid "Cursor"
 msgid "Cursor Files"
-msgstr "File cursore"
+msgstr "cursore"
 
 #: lclstrconsts.rscustomcolorcaption
 msgid "Custom ..."
-msgstr "Personalizzato..."
+msgstr "Personalizzato ..."
 
 #: lclstrconsts.rsdatetoolarge
 #, object-pascal-format
 msgid "Date cannot be past %s"
-msgstr "La data non può essere successiva a '%s'"
+msgstr ""
 
 #: lclstrconsts.rsdatetoosmall
 #, object-pascal-format
 msgid "Date cannot be before %s"
-msgstr "La data non può essere precedente a '%s'"
+msgstr ""
 
 #: lclstrconsts.rsdefaultcolorcaption
 msgid "Default"
@@ -237,7 +240,7 @@ msgstr "permessi utente gruppo ampiezza data ora"
 
 #: lclstrconsts.rsdeleterecord
 msgid "Delete record?"
-msgstr "Vuoi eliminare un record?"
+msgstr "Eliminare un record?"
 
 #: lclstrconsts.rsdeleterecordhint
 msgctxt "lclstrconsts.rsdeleterecordhint"
@@ -253,10 +256,14 @@ msgid "&Directory"
 msgstr "&Cartella"
 
 #: lclstrconsts.rsdocopy
+#, fuzzy
+msgctxt "lclstrconsts.rsdocopy"
 msgid "Copy"
 msgstr "Copia"
 
 #: lclstrconsts.rsdopaste
+#, fuzzy
+msgctxt "lclstrconsts.rsdopaste"
 msgid "Paste"
 msgstr "Incolla"
 
@@ -265,12 +272,13 @@ msgid "Duplicate icon format."
 msgstr "Formato icona duplicato."
 
 #: lclstrconsts.rseditrecordhint
+msgctxt "lclstrconsts.rseditrecordhint"
 msgid "Edit"
 msgstr "Modifica"
 
 #: lclstrconsts.rsentirescope
 msgid "Search entire file"
-msgstr "Ricerca in tutto il file"
+msgstr "Ricerca tutto il file"
 
 #: lclstrconsts.rserror
 msgctxt "lclstrconsts.rserror"
@@ -285,11 +293,11 @@ msgstr "Errore nella creazione del contesto dispositivo per %s.%s"
 #: lclstrconsts.rserroroccurredinataddressframe
 #, object-pascal-format
 msgid "Error occurred in %s at %sAddress %s%s Frame %s"
-msgstr "Errore in %s a %sIndirizzo %s%s Fotogramma %s"
+msgstr "Errore in %s a %sIndirizzo %s%s Frame %s"
 
 #: lclstrconsts.rserrorwhilesavingbitmap
 msgid "Error while saving bitmap."
-msgstr "Errore durante il salvataggio della bitmap."
+msgstr "Errore salvando il bitmap."
 
 #: lclstrconsts.rsexception
 msgid "Exception"
@@ -302,12 +310,12 @@ msgstr "La cartella deve esistere"
 #: lclstrconsts.rsfddirectorynotexist
 #, object-pascal-format
 msgid "The directory \"%s\" does not exist."
-msgstr "La cartella '%s' non esiste."
+msgstr "La cartella \"%s\" non esiste."
 
 #: lclstrconsts.rsfdfilealreadyexists
 #, object-pascal-format
 msgid "The file \"%s\" already exists. Overwrite ?"
-msgstr "Il file '%s' esiste già. Vuoi sostituirlo?"
+msgstr "Il file \"%s\" esiste già. Sostituirlo?"
 
 #: lclstrconsts.rsfdfilemustexist
 msgid "File must exist"
@@ -316,12 +324,12 @@ msgstr "Il file deve esistere"
 #: lclstrconsts.rsfdfilenotexist
 #, object-pascal-format
 msgid "The file \"%s\" does not exist."
-msgstr "Il file '%s' non esiste."
+msgstr "Il file \"%s\" non esiste."
 
 #: lclstrconsts.rsfdfilereadonly
 #, object-pascal-format
 msgid "The file \"%s\" is not writable."
-msgstr "Il file '%s' non è scrivibile."
+msgstr "Il file \"%s\" non è scrivibile."
 
 #: lclstrconsts.rsfdfilereadonlytitle
 msgid "File is not writable"
@@ -337,7 +345,7 @@ msgstr "Apri file esistenti"
 
 #: lclstrconsts.rsfdoverwritefile
 msgid "Overwrite file ?"
-msgstr "Vuoi sovrascrivere il file?"
+msgstr "Sovrascrivere il file?"
 
 #: lclstrconsts.rsfdpathmustexist
 msgid "Path must exist"
@@ -346,16 +354,16 @@ msgstr "Il percorso deve esistere"
 #: lclstrconsts.rsfdpathnoexist
 #, object-pascal-format
 msgid "The path \"%s\" does not exist."
-msgstr "Il percorso '%s' non esiste."
+msgstr "Il percorso \"%s\" non esiste."
 
 #: lclstrconsts.rsfdselectdirectory
 msgid "Select Directory"
-msgstr "Selezione cartella"
+msgstr "Selezionare una cartella"
 
 #: lclstrconsts.rsfileinfofilenotfound
 #, object-pascal-format
 msgid "(file not found: \"%s\")"
-msgstr "(file non trovato: '%s')"
+msgstr "(file non trovato \"%s\")"
 
 #: lclstrconsts.rsfileinformation
 msgid "File information"
@@ -388,20 +396,17 @@ msgstr "FixedRows non può essere > RowCount"
 
 #: lclstrconsts.rsformcolorcaption
 msgid "Form"
-msgstr "Modulo"
+msgstr "Form"
 
 #: lclstrconsts.rsformresourcesnotfoundforresourcelessformscreatenew
 #, object-pascal-format
 msgid "Form resource %s not found. For resourceless forms CreateNew constructor must be used. See the global variable RequireDerivedFormResource."
-msgstr ""
-"Risorsa '%s' del modulo non trovata. \n"
-"I moduli senza risorse devono essere creati con il costruttore CreateNew. \n"
-"Vedi variabile globale RequireDerivedFormResource."
+msgstr "Risorsa %s del form non trovata. I form senza risorse devono essere creati con il costruttore CreateNew. Vedere variabile globale RequireDerivedFormResource."
 
 #: lclstrconsts.rsformstreamingerror
 #, object-pascal-format
 msgid "Form streaming \"%s\" error: %s"
-msgstr "Streaming modulo '%s' errore: %s"
+msgstr "Streaming del form \"%s\" errore: %s"
 
 #: lclstrconsts.rsforward
 msgid "Forward"
@@ -412,19 +417,27 @@ msgid "Fuchsia"
 msgstr "Fucsia"
 
 #: lclstrconsts.rsgdkoptiondebug
-msgid "--gdk-debug flags     Turn on specific GDK trace/debug messages."
+#, fuzzy
+#| msgid "--gdk-debug flags     Turn on specific GDK trace/debug messages."
+msgid "Turn on specific GDK trace/debug messages."
 msgstr "--gdk-debug-flags    Abilita specifici messaggi di trace/debug GDK."
 
 #: lclstrconsts.rsgdkoptionnodebug
-msgid "--gdk-no-debug flags  Turn off specific GDK trace/debug messages."
-msgstr "--gdk-no-debug flags  Disabilita messaggi specifici di trace/debug di GDK."
+#, fuzzy
+#| msgid "--gdk-no-debug flags  Turn off specific GDK trace/debug messages."
+msgid "Turn off specific GDK trace/debug messages."
+msgstr "--gdk-no-debug flags  Disabilita messaggi specifici di trace/debug di GDK"
 
 #: lclstrconsts.rsgif
+#, fuzzy
+#| msgid "Graphics Interchange Format"
 msgid "Graphics Interchange Format Files"
-msgstr "File GIF"
+msgstr "Formato di scambio grafico"
 
 #: lclstrconsts.rsgoptionfatalwarnings
-msgid "--g-fatal-warnings    Warnings and errors generated by Gtk+/GDK will halt the application."
+#, fuzzy
+#| msgid "--g-fatal-warnings    Warnings and errors generated by Gtk+/GDK will halt the application."
+msgid "Warnings and errors generated by Gtk+/GDK will halt the application."
 msgstr "--g-fatal-warnings    Avvertimenti ed errori generati da Gtk+/GDK bloccheranno l'applicazione."
 
 #: lclstrconsts.rsgradientactivecaptioncolorcaption
@@ -445,7 +458,7 @@ msgstr "Grigio"
 
 #: lclstrconsts.rsgraytextcolorcaption
 msgid "Gray Text"
-msgstr "Testo grigio"
+msgstr "testo grigio"
 
 #: lclstrconsts.rsgreencolorcaption
 msgid "Green"
@@ -457,7 +470,7 @@ msgstr "Il file della griglia non esiste"
 
 #: lclstrconsts.rsgridhasnocols
 msgid "Cannot insert rows into a grid when it has no columns"
-msgstr "Non si possono inserire righe in una griglia che non ha nessuna riga"
+msgstr "Non si possono inserire righe in una grigli che non ha nessuna riga"
 
 #: lclstrconsts.rsgridhasnorows
 msgid "Cannot insert columns into a grid when it has no rows"
@@ -465,7 +478,7 @@ msgstr "Non si possono inserire colonne in una griglia che non ha nessuna riga"
 
 #: lclstrconsts.rsgridindexoutofrange
 msgid "Grid index out of range."
-msgstr "Indice griglia fuori dai limiti."
+msgstr "Indice della griglia fuori dai limiti."
 
 #: lclstrconsts.rsgroupindexcannotbelessthanprevious
 msgid "GroupIndex cannot be less than a previous menu item's GroupIndex"
@@ -480,42 +493,61 @@ msgid "History:"
 msgstr "Cronologia:"
 
 #: lclstrconsts.rsgtkoptionclass
-msgid "--class classname     Following Xt conventions, the class of a program is the program name with the initial character capitalized. For example, the classname for gimp is \"Gimp\". If --class is specified, the class of the program will be set to \"classname\"."
+#, fuzzy
+#| msgid "--class classname     Following Xt conventions, the class of a program is the program name with the initial character capitalized. For example, the classname for gimp is \"Gimp\". If --class is specified, the class of the program will be set to \"classname\"."
+msgid "Following Xt conventions, the class of a program is the program name with the initial character capitalized. For example, the classname for gimp is \"Gimp\". If --class is specified, the class of the program will be set to \"classname\"."
 msgstr "--class nomeclasse     Seguendo le convenzioni Xt, la classe di un programma è il nome del programma con il carattere iniziale maiuscolo. Per esempio il nome della classe per gimp è \"Gimp\". Se --class viene specificata, la classe del programma verrà impostata a \"nomeclasse\"."
 
 #: lclstrconsts.rsgtkoptiondebug
-msgid "--gtk-debug flags     Turn on specific Gtk+ trace/debug messages."
-msgstr "--gtk-debug flags     Abilita messaggi specifici di tracca/debug Gtk+."
+#, fuzzy
+#| msgid "--gtk-debug flags     Turn on specific Gtk+ trace/debug messages."
+msgid "Turn on specific Gtk+ trace/debug messages."
+msgstr "--gtk-debug flags     Abilita messaggi specifici di trace/debug Gtk+"
 
 #: lclstrconsts.rsgtkoptiondisplay
-msgid "--display h:s:d       Connect to the specified X server, where \"h\" is the hostname, \"s\" is the server number (usually 0), and \"d\" is the display number (typically omitted). If --display is not specified, the DISPLAY environment variable is used."
-msgstr "--display h:s:d       Connessione al server X specificato da \"h\" per il nome host, \"s\" per il numero di server (solitamente 0) e \"d\" per il numero di schermo (normalmente viene omesso). Se --display non è specificato verrà usata la variabile di ambiente DISPLAY."
+#, fuzzy
+#| msgid "--display h:s:d       Connect to the specified X server, where \"h\" is the hostname, \"s\" is the server number (usually 0), and \"d\" is the display number (typically omitted). If --display is not specified, the DISPLAY environment variable is used."
+msgid "Connect to the specified X server, where \"h\" is the hostname, \"s\" is the server number (usually 0), and \"d\" is the display number (typically omitted). If --display is not specified, the DISPLAY environment variable is used."
+msgstr "--display h:s:d       Connessione al server X specificato da \"h\" per il nome host, \"s\" per il numero di server (solitamente 0) e \"d\" per il numero di schermo (normalmente viene omesso). Se --display non è specificato verrà utilizzata la variabile di ambiente DISPLAY."
 
 #: lclstrconsts.rsgtkoptionmodule
-msgid "--gtk-module module   Load the specified module at startup."
-msgstr "--gtk-module-modulo   Carica il modulo specificato all'avvio."
+#, fuzzy
+#| msgid "--gtk-module module   Load the specified module at startup."
+msgid "Load the specified module at startup."
+msgstr "--gtk-module-module   Carica il modulo specificato alla partenza."
 
 #: lclstrconsts.rsgtkoptionname
-msgid "--name programe       Set program name to \"progname\". If not specified, program name will be set to ParamStrUTF8(0)."
-msgstr "--name nomeprogramma       Imposta il nome del programma a \"nomeprogramma\". Se non specificato, il nome del programma sarà impostato a ParamStrUTF8(0)."
+#, fuzzy
+#| msgid "--name programe       Set program name to \"progname\". If not specified, program name will be set to ParamStrUTF8(0)."
+msgid "Set program name to \"progname\". If not specified, program name will be set to ParamStrUTF8(0)."
+msgstr "--name programe       Imposta il nome del programma a \"progname\". Se non specificato, il nome del programma sarà impostato a ParamStrUTF8(0)."
 
 #: lclstrconsts.rsgtkoptionnodebug
-msgid "--gtk-no-debug flags  Turn off specific Gtk+ trace/debug messages."
-msgstr "--gtk-no-debug-flags  Disabilita messaggi specifici di trace/debug Gtk+."
+#, fuzzy
+#| msgid "--gtk-no-debug flags  Turn off specific Gtk+ trace/debug messages."
+msgid "Turn off specific Gtk+ trace/debug messages."
+msgstr "--gtk-no-debug-flags  Disabilita messaggi specifici di trace/debug Gtk+"
 
 #: lclstrconsts.rsgtkoptionnotransient
-msgid "--lcl-no-transient    Do not set transient order for modal forms"
+#, fuzzy
+#| msgid "--lcl-no-transient    Do not set transient order for modal forms"
+msgid "Do not set transient order for modal forms."
 msgstr "--lcl-no-transient    Non impostare l'ordine transiente per form modali"
 
 #: lclstrconsts.rsgtkoptionnoxshm
-msgid "--no-xshm             Disable use of the X Shared Memory Extension."
+#, fuzzy
+#| msgid "--no-xshm             Disable use of the X Shared Memory Extension."
+msgid "Disable use of the X Shared Memory Extension."
 msgstr "--no-xshm             Disabilita l'uso dell'estensione della memoria condivisa di X."
 
 #: lclstrconsts.rsgtkoptionsync
-msgid "--sync                Call XSynchronize (display, True) after the Xserver connection has been established. This makes debugging X protocol errors easier, because X request buffering will be disabled and X errors will be received immediately after the protocol request that generated the error has been processed by the X server."
+#, fuzzy
+#| msgid "--sync                Call XSynchronize (display, True) after the Xserver connection has been established. This makes debugging X protocol errors easier, because X request buffering will be disabled and X errors will be received immediately after the protocol request that generated the error has been processed by the X server."
+msgid "Call XSynchronize (display, True) after the Xserver connection has been established. This makes debugging X protocol errors easier, because X request buffering will be disabled and X errors will be received immediately after the protocol request that generated the error has been processed by the X server."
 msgstr "--sync                Chiama XSynchronize (display, True) appena viene stabilita la connessione al server X. Ciò semplifica la correzione degli errori di protocollo X dato che la richiesta di bufferizzazione di X sarà disabilitata e quindi gli errori di X verranno ricevuti subito dopo che la richiesta di protocollo che ha generato l'errore è stata processata dal server X."
 
 #: lclstrconsts.rshelp
+#, fuzzy
 msgctxt "lclstrconsts.rshelp"
 msgid "Help"
 msgstr "Aiuto"
@@ -523,103 +555,108 @@ msgstr "Aiuto"
 #: lclstrconsts.rshelpalreadyregistered
 #, object-pascal-format
 msgid "%s: Already registered"
-msgstr "%s: già registrato"
+msgstr "%s: Già registrato"
 
 #: lclstrconsts.rshelpcontextnotfound
 msgid "A help database was found for this topic, but this topic was not found"
-msgstr "Trovato un database della Guida in linea sull'argomento, ma l'argomento non è stato trovato"
+msgstr "Trovato un archivio di aiuto sull'argomento, ma argomento non trovato"
 
 #: lclstrconsts.rshelpdatabasenotfound
 msgid "There is no help database installed for this topic"
-msgstr "Non è installato un database della Guida in linea per questo argomento"
+msgstr "Non è installato un archivio di aiuto per questo argomento"
 
 #: lclstrconsts.rshelperror
 msgid "Help Error"
-msgstr "Errore nella Guida in linea"
+msgstr "Errore nell'Help"
 
 #: lclstrconsts.rshelphelpcontextnotfound
 #, object-pascal-format
 msgid "Help context %s not found."
-msgstr "Info Guida in linea su '%s' non trovato."
+msgstr "Aiuto su %s non trovato."
 
 #: lclstrconsts.rshelphelpcontextnotfoundindatabase
 #, object-pascal-format
 msgid "Help context %s not found in Database \"%s\"."
-msgstr "Info Guida in linea su '%s' non trovato nel file '%s'."
+msgstr "Aiuto su %s non trovato nell'archivio \"%s\"."
 
 #: lclstrconsts.rshelphelpdatabasedidnotfoundaviewerforahelppageoftype
-#, object-pascal-format
+#, object-pascal-format, fuzzy
+#| msgid "Help Database \"%s\" did not found a viewer for a help page of type %s"
 msgid "Help Database \"%s\" did not find a viewer for a help page of type %s"
-msgstr "Il file della Guida '%s' non ha trovato un visualizzatore per una pagina della guida di tipo '%s'"
+msgstr "L'archivio Help \"%s\" non trova un visualizzatore per le pagine di aiuto di tipo %s"
 
 #: lclstrconsts.rshelphelpdatabasenotfound
 #, object-pascal-format
 msgid "Help Database \"%s\" not found"
-msgstr "File Guida in linea '%s' non trovato"
+msgstr "Archivio Help \"%s\" non trovato"
 
 #: lclstrconsts.rshelphelpfordirectivenotfound
 #, object-pascal-format
 msgid "Help for directive \"%s\" not found."
-msgstr "Info Guida in linea su direttiva '%s' non trovata."
+msgstr "Aiuto per la direttiva \"%s\" non trovato."
 
 #: lclstrconsts.rshelphelpfordirectivenotfoundindatabase
 #, object-pascal-format
 msgid "Help for directive \"%s\" not found in Database \"%s\"."
-msgstr "Info Guida in linea su direttiva '%s' non trovata nel file '%s'."
+msgstr "Aiuto per la direttiva \"%s\" non trovato nel Database \"%s\"."
 
 #: lclstrconsts.rshelphelpkeywordnotfound
 #, object-pascal-format
 msgid "Help keyword \"%s\" not found."
-msgstr "Info Guida in linea sulla parola chiave '%s' non trovata."
+msgstr "Aiuto sulla parola chiave \"%s\" non trovato."
 
 #: lclstrconsts.rshelphelpkeywordnotfoundindatabase
 #, object-pascal-format
 msgid "Help keyword \"%s\" not found in Database \"%s\"."
-msgstr "Info Guida in linea sulla parola chiave '%s' non trovata nel file '%s'."
+msgstr "Aiuto sulla parola chiave \"%s\" non trovato nell'archivio \"%s\"."
 
 #: lclstrconsts.rshelphelpnodehasnohelpdatabase
 #, object-pascal-format
 msgid "Help node \"%s\" has no Help Database"
-msgstr "Il nodo Guida in linea '%s' non ha un file Guida in linea"
+msgstr "Il nodo di aiuto \"%s\" non ha un Database di aiuto"
 
 #: lclstrconsts.rshelpnohelpfoundforsource
 #, object-pascal-format
 msgid "No help found for line %d, column %d of %s."
-msgstr "Nessun aiuto trovato per la linea '%d', colonna '%d' di '%s'."
+msgstr "Nessun aiuto trovato per la linea %d, colonna %d di %s."
 
 #: lclstrconsts.rshelpnohelpnodesavailable
 msgid "No help entries available for this topic"
-msgstr "Nessun elemento aiuto disponibile per questo argomento"
+msgstr "Nessun aiuto disponibile"
 
 #: lclstrconsts.rshelpnotfound
 msgid "No help found for this topic"
-msgstr "Nessun aiuto disponibile per questo argomento"
+msgstr "Aiuto non trovato"
 
 #: lclstrconsts.rshelpnotregistered
 #, object-pascal-format
 msgid "%s: Not registered"
-msgstr "%s: non registrato"
+msgstr "%s: Non registrato"
 
 #: lclstrconsts.rshelpselectorerror
 msgid "Help Selector Error"
-msgstr "Errore selezione Guida in linea"
+msgstr "Errore nella selezione dell'Help"
 
 #: lclstrconsts.rshelpthereisnoviewerforhelptype
 #, object-pascal-format
 msgid "There is no viewer for help type \"%s\""
-msgstr "Nessun visualizzatore disponibile per la Guida in linea di tipo \"%s\""
+msgstr "Nessun visualizzatore per aiuto di tipo \"%s\""
 
 #: lclstrconsts.rshelpviewererror
 msgid "Help Viewer Error"
-msgstr "Errore visualizzatore Guida in linea"
+msgstr "Errore nel visualizzatore dell'Help"
 
 #: lclstrconsts.rshelpviewernotfound
 msgid "No viewer was found for this type of help content"
-msgstr "Nessun visualizzatore disponibile per questo tipo di Guida"
+msgstr "Visualizzatore per questo tipo di aiuto non trovato"
+
+#: lclstrconsts.rshidedetails
+msgid "Hide details"
+msgstr ""
 
 #: lclstrconsts.rshighlightcolorcaption
 msgid "Highlight"
-msgstr "Evidenzia"
+msgstr "Evidenziare"
 
 #: lclstrconsts.rshighlighttextcolorcaption
 msgid "Highlight Text"
@@ -630,12 +667,16 @@ msgid "Hot Light"
 msgstr "Luce calda"
 
 #: lclstrconsts.rsicns
+#, fuzzy
+#| msgid "Mac OS X Icon"
 msgid "macOS Icon Files"
-msgstr "File icone macOS"
+msgstr "Icona Mac OS"
 
 #: lclstrconsts.rsicon
+#, fuzzy
+#| msgid "Icon"
 msgid "Icon Files"
-msgstr "File icone"
+msgstr "Icona"
 
 #: lclstrconsts.rsiconimageempty
 msgid "Icon image cannot be empty"
@@ -643,47 +684,52 @@ msgstr "L'immagine dell'icona non può essere vuota"
 
 #: lclstrconsts.rsiconimageformat
 msgid "Icon image must have the same format"
-msgstr "L'immagine icona deve avere lo stesso formato"
+msgstr "L'immagine dell'icona deve avere lo stesso formato"
 
 #: lclstrconsts.rsiconimageformatchange
 msgid "Cannot change format of icon image"
-msgstr "Impossibile modificare il formato immagine icona"
+msgstr "Impossibile cambiare il formato dell'immagine dell'icona"
 
 #: lclstrconsts.rsiconimagesize
 msgid "Icon image must have the same size"
-msgstr "L'immagine icona deve avere le stesse dimensioni"
+msgstr "L'immaigne dell'icona deve avere le stesse dimensioni"
 
 #: lclstrconsts.rsiconimagesizechange
 msgid "Cannot change size of icon image"
-msgstr "Impossibile modificare il formato immagine icona"
+msgstr "Impossibile cambiare il formato dell'immagine dell'icona"
 
 #: lclstrconsts.rsiconnocurrent
 msgid "Icon has no current image"
-msgstr "L'icona non ha nessuna immagine attuale"
+msgstr "L'icona non ha nessuna immagine corrente"
 
 #: lclstrconsts.rsinactivebordercolorcaption
 msgid "Inactive Border"
-msgstr "Bordo non attivo"
+msgstr "Bordo inattivo"
 
 #: lclstrconsts.rsinactivecaptioncolorcaption
 msgctxt "lclstrconsts.rsinactivecaptioncolorcaption"
 msgid "Inactive Caption"
-msgstr "Titolo non attivo"
+msgstr "Caption inattiva"
 
 #: lclstrconsts.rsinactivecaptiontext
 msgctxt "lclstrconsts.rsinactivecaptiontext"
 msgid "Inactive Caption"
-msgstr "Titolo non attivo"
+msgstr "Caption inattiva"
 
 #: lclstrconsts.rsindexoutofbounds
 #, object-pascal-format
 msgid "%s Index %d out of bounds 0 .. %d"
 msgstr "%s indice %d fuori dai limiti 0 .. %d"
 
+#: lclstrconsts.rsindexoutofboundsminusone
+#, object-pascal-format
+msgid "%s Index %d out of bounds -1 .. %d"
+msgstr ""
+
 #: lclstrconsts.rsindexoutofrange
 #, object-pascal-format
 msgid "Index Out of range Cell[Col=%d Row=%d]"
-msgstr "Indice fuori dall'intervallo Cella[Col=%d Riga=%d]"
+msgstr "Indice fuori dall'intervallo Cell[Col=%d Row=%d]"
 
 #: lclstrconsts.rsinfobkcolorcaption
 msgid "Info Background"
@@ -691,12 +737,12 @@ msgstr "Informazioni sfondo"
 
 #: lclstrconsts.rsinfotextcolorcaption
 msgid "Info Text"
-msgstr "Info testo"
+msgstr "Informazioni testo"
 
 #: lclstrconsts.rsinsertrecordhint
 msgctxt "lclstrconsts.rsinsertrecordhint"
 msgid "Insert"
-msgstr "Inserisci"
+msgstr "Inserimento"
 
 #: lclstrconsts.rsinvaliddate
 #, object-pascal-format
@@ -706,11 +752,11 @@ msgstr "Data non valida: %s"
 #: lclstrconsts.rsinvaliddaterangehint
 #, object-pascal-format
 msgid "Invalid Date: %s. Must be between %s and %s"
-msgstr "Data non valida: '%s'. Deve essere tra '%s' e '%s'"
+msgstr "Data non valida: %s. Deve essere tra %s e %s"
 
 #: lclstrconsts.rsinvalidformobjectstream
 msgid "invalid Form object stream"
-msgstr "modulo oggetto stream non valido"
+msgstr "Stream form oggetto non valido"
 
 #: lclstrconsts.rsinvalidpropertyvalue
 msgid "Invalid property value"
@@ -723,11 +769,13 @@ msgstr "Formato stream non valido"
 #: lclstrconsts.rsisalreadyassociatedwith
 #, object-pascal-format
 msgid "%s is already associated with %s"
-msgstr "'%s' è già associato a '%s'"
+msgstr "%s è già associato con %s"
 
 #: lclstrconsts.rsjpeg
+#, fuzzy
+#| msgid "Joint Picture Expert Group"
 msgid "JPEG Files"
-msgstr "File JPEG"
+msgstr "Joint Picture Expert Group"
 
 #: lclstrconsts.rslastrecordhint
 msgid "Last"
@@ -740,11 +788,63 @@ msgstr "Verde brillante"
 #: lclstrconsts.rslistindexexceedsbounds
 #, object-pascal-format
 msgid "List index exceeds bounds (%d)"
-msgstr "Indice elenco fuori dai limiti (%d)"
+msgstr "Indice della lista fuori dai limiti (%d)"
+
+#: lclstrconsts.rsmacoscolordialogmbpick
+msgid "Pick"
+msgstr ""
+
+#: lclstrconsts.rsmacoseditmenu
+msgctxt "lclstrconsts.rsmacoseditmenu"
+msgid "Edit"
+msgstr "Modifica"
+
+#: lclstrconsts.rsmacoseditmenucopy
+msgctxt "lclstrconsts.rsmacoseditmenucopy"
+msgid "Copy"
+msgstr "Copia"
+
+#: lclstrconsts.rsmacoseditmenucut
+msgid "Cut"
+msgstr "Taglia"
+
+#: lclstrconsts.rsmacoseditmenupaste
+msgctxt "lclstrconsts.rsmacoseditmenupaste"
+msgid "Paste"
+msgstr "Incolla"
+
+#: lclstrconsts.rsmacoseditmenuredo
+msgid "Redo"
+msgstr "Ripristina"
+
+#: lclstrconsts.rsmacoseditmenuselectall
+msgid "Select All"
+msgstr "Seleziona Tutto"
+
+#: lclstrconsts.rsmacoseditmenuundo
+msgid "Undo"
+msgstr "Annulla"
+
+#: lclstrconsts.rsmacosfiledialogpackageswitchtips
+msgid "Treat File Packages (such as *.app files) as Directories to access their internal files"
+msgstr ""
+
+#: lclstrconsts.rsmacosfiledialogpackageswitchtitle
+msgid "Show File Package Contents"
+msgstr ""
 
 #: lclstrconsts.rsmacosfileformat
 msgid "File Format:"
-msgstr "Formato file:"
+msgstr ""
+
+#: lclstrconsts.rsmacosfontdialogmbselect
+msgid "Select"
+msgstr ""
+
+#: lclstrconsts.rsmacosmenuabout
+#, object-pascal-format
+msgid "About %s"
+msgstr "Informazioni su %s"
 
 #: lclstrconsts.rsmacosmenuhide
 #, object-pascal-format
@@ -753,7 +853,11 @@ msgstr "Nascondi %s"
 
 #: lclstrconsts.rsmacosmenuhideothers
 msgid "Hide Others"
-msgstr "Nascondi altri"
+msgstr "Nascondi altre"
+
+#: lclstrconsts.rsmacosmenupreferences
+msgid "Preferences..."
+msgstr "Preferenze..."
 
 #: lclstrconsts.rsmacosmenuquit
 #, object-pascal-format
@@ -766,7 +870,7 @@ msgstr "Servizi"
 
 #: lclstrconsts.rsmacosmenushowall
 msgid "Show All"
-msgstr "Visualizza tutto"
+msgstr "Mostra Tutto"
 
 #: lclstrconsts.rsmarooncolorcaption
 msgid "Maroon"
@@ -774,7 +878,7 @@ msgstr "Marrone"
 
 #: lclstrconsts.rsmbabort
 msgid "Abort"
-msgstr "Interrompi"
+msgstr "Blocca"
 
 #: lclstrconsts.rsmball
 msgid "&All"
@@ -831,11 +935,11 @@ msgstr "&Si"
 
 #: lclstrconsts.rsmbyestoall
 msgid "Yes to &All"
-msgstr "Si a &tutto"
+msgstr "Si a &All"
 
 #: lclstrconsts.rsmedgraycolorcaption
 msgid "Medium Gray"
-msgstr "Grigio medio"
+msgstr "Grigio"
 
 #: lclstrconsts.rsmenubarcolorcaption
 msgid "Menu Bar"
@@ -894,11 +998,11 @@ msgstr "Blu oltremare"
 #: lclstrconsts.rsnextrecordhint
 msgctxt "lclstrconsts.rsnextrecordhint"
 msgid "Next"
-msgstr "Avanti"
+msgstr "Successivo"
 
 #: lclstrconsts.rsnonecolorcaption
 msgid "None"
-msgstr "Nessuno"
+msgstr "Niente"
 
 #: lclstrconsts.rsnotavalidgridfile
 msgid "Not a valid grid file"
@@ -906,7 +1010,7 @@ msgstr "Non è un file griglia valido"
 
 #: lclstrconsts.rsnowidgetset
 msgid "No widgetset object. Please check if the unit \"interfaces\" was added to the programs uses clause."
-msgstr "Nessun oggetto set  widget. Verifica che l'unità 'interfaces' sia nella clausola 'uses' del programma."
+msgstr "Nessun oggetto del widgetset. Verifica che la unit  \"interfaces\" sia nella clausola uses del programma."
 
 #: lclstrconsts.rsolivecolorcaption
 msgid "Olive"
@@ -917,16 +1021,22 @@ msgid "Select a date"
 msgstr "Seleziona una data"
 
 #: lclstrconsts.rspixmap
+#, fuzzy
+#| msgid "Pixmap"
 msgid "Pixmap Files"
-msgstr "File Pixmap"
+msgstr "Pixmap"
 
 #: lclstrconsts.rsportablenetworkgraphic
+#, fuzzy
+#| msgid "Portable Network Graphic"
 msgid "PNG Files"
-msgstr "File PNG"
+msgstr "Portable Network Graphic"
 
 #: lclstrconsts.rsportablepixmap
+#, fuzzy
+#| msgid "Portable PixMap"
 msgid "Portable Pixmap Files"
-msgstr "File Pixmap portabili"
+msgstr "PixMap portabile"
 
 #: lclstrconsts.rspostrecordhint
 msgid "Post"
@@ -935,7 +1045,7 @@ msgstr "Post"
 #: lclstrconsts.rspressoktoignoreandriskdatacorruptionpressaborttok
 #, object-pascal-format
 msgid "%s%sPress OK to ignore and risk data corruption.%sPress Abort to kill the program."
-msgstr "%s%sSeleziona 'OK' per ignorare e rischiare il danneggiamento dei dati.%sSeleziona 'Interrompi' per terminare il programma."
+msgstr ""
 
 #: lclstrconsts.rspriorrecordhint
 msgctxt "lclstrconsts.rspriorrecordhint"
@@ -949,115 +1059,159 @@ msgstr "Chiedi prima di sostituire"
 #: lclstrconsts.rspropertydoesnotexist
 #, object-pascal-format
 msgid "Property %s does not exist"
-msgstr "La proprietà '%s' non esiste"
+msgstr "La proprietà %s non esiste"
 
 #: lclstrconsts.rspurplecolorcaption
 msgid "Purple"
 msgstr "Viola"
 
 #: lclstrconsts.rsqtoptiondisableaccurateframe
-msgid "-disableaccurateframe, disables fully accurate window frame under X11. This feature is implemented for Qt, Qt5 and Gtk2 interfaces and used mostly by GetWindowRect()."
-msgstr "-disableaccurateframe, disabilita il fotogramma finestra accurato in X11. Questa funzionalità è implementata per le interfacce Qt, Qt5 e Gtk2 e usata principalmente da GetWindowRect()."
+msgid "Disables fully accurate window frame under X11. This feature is implemented for Qt, Qt5 and Gtk2 interfaces and used mostly by GetWindowRect()."
+msgstr ""
 
 #: lclstrconsts.rsqtoptiondograb
-msgid "-dograb (only under X11), running under a debugger can cause an implicit -nograb, use -dograb to override. Need QT_DEBUG."
-msgstr "-dograb (solo sotto X11): l'esecuzione sotto un debugger può causare un -nograb implicito: usa -dograb per forzare l'opzione. Richiede QT_DEBUG."
+#, fuzzy
+#| msgid "-dograb (only under X11), running under a debugger can cause an implicit -nograb, use -dograb to override. Need QT_DEBUG."
+msgid "Running under a debugger can cause an implicit -nograb, use -dograb to override. Works only under X11, needs QT_DEBUG."
+msgstr "-dograb (solo sotto X11): l'esecuzione sotto un debugger può causare un -nograb implicito: usare -dograb per forzare l'opzione. Richiede QT_DEBUG."
 
 #: lclstrconsts.rsqtoptiongraphicsstyle
-msgid "-graphicssystem param, sets the backend to be used for on-screen widgets and QPixmaps. Available options are native, raster and opengl. OpenGL is still unstable."
-msgstr "-graphicssystem parametro, imposta il backend per usare widget su schermo e QPixmaps. Opzioni: native, raster e opengl. OpenGL è ancora instabile (0.9.30)"
+#, fuzzy
+#| msgid "-graphicssystem param, sets the backend to be used for on-screen widgets and QPixmaps. Available options are native, raster and opengl. OpenGL is still unstable."
+msgid "Sets the backend to be used for on-screen widgets and QPixmaps. Available options are native, raster and opengl. OpenGL is still unstable."
+msgstr "-graphicssystem param, imposta il backend per usare widget su schermo e QPixmaps. Opzioni: native, raster e opengl. OpenGL è ancora instabile (0.9.30)"
 
 #: lclstrconsts.rsqtoptionnograb
-msgid "-nograb, tells Qt that it must never grab the mouse or the keyboard. Need QT_DEBUG."
-msgstr "-nograb, impedisce a QT di catturare mouse e/o tastiera. Richiede QT_DEBUG."
+#, fuzzy
+#| msgid "-nograb, tells Qt that it must never grab the mouse or the keyboard. Need QT_DEBUG."
+msgid "Tells Qt that it must never grab the mouse or the keyboard. Needs QT_DEBUG."
+msgstr "-nograb, impedisce a QT di catturare mouse e/o tastiera. Richiede QT_DEBUG"
 
 #: lclstrconsts.rsqtoptionreverse
-msgid "-reverse, sets the application's layout direction to Qt::RightToLeft."
+#, fuzzy
+#| msgid "-reverse, sets the application's layout direction to Qt::RightToLeft."
+msgid "Sets the application's layout direction to Qt::RightToLeft."
 msgstr "-reverse: imposta la direzione di disposizione del programma a Qt::RightToLeft."
 
 #: lclstrconsts.rsqtoptionsession
-msgid "-session session, restores the application from an earlier session."
-msgstr "-session sessione, recupera una precedente sessione dello stesso programma."
+#, fuzzy
+#| msgid "-session session, restores the application from an earlier session."
+msgid "Restores the application from an earlier session."
+msgstr "-session session, recupera una precedente sessione dello stesso programma."
 
 #: lclstrconsts.rsqtoptionstyle
-msgid "-style style or -style=style, sets the application GUI style. Possible values are motif, windows, and platinum. If you compiled Qt with additional styles or have additional styles as plugins these will be available to the -style  command line option. NOTE: Not all styles are available on all platforms. If style param does not exist Qt will start an application with default common style (windows)."
-msgstr "-style stile oppure -style=stile, imposta lo stile GUI dell'applicazione. Valori ammessi sono motif, windows, platinum. Se è stato compilato QT con stili aggiuntivi o con stili come plugin, potrete usarli con questa opzione. NOTA: non tutti gli stili sono disponibili su tutte le piattaforme. Se l'opzione non è presente, Qt lancerà l'applicazione con lo stile di default."
+#, fuzzy
+#| msgid "-style style or -style=style, sets the application GUI style. Possible values are motif, windows, and platinum. If you compiled Qt with additional styles or have additional styles as plugins these will be available to the -style  command line option. NOTE: Not all styles are available on all platforms. If style param does not exist Qt will start an application with default common style (windows)."
+msgid "Sets the application GUI style. Possible values are motif, windows, and platinum. If you compiled Qt with additional styles or have additional styles as plugins these will be available to the -style command line option. NOTE: Not all styles are available on all platforms. If style param does not exist Qt will start an application with default common style (windows)."
+msgstr "-style stile oppure -style=stile, imposta lo stile GUI dell'applicazione.Valori ammessi sono motif, windows, platinum. Se avete compilato QT con stili aggiuntivi o con stili come plugin, potrete usarli con questa opzione. NOTA: non tutti gli stili sono disponibili su tutte le piattaforme. Se l'opzione non è presente, Qt lancerà l'applicazione con lo stile di default."
 
 #: lclstrconsts.rsqtoptionstylesheet
-msgid "-stylesheet stylesheet or -stylesheet=stylesheet, sets the application Style Sheet. The value must be a path to a file that contains the Style Sheet. Note: Relative URLs in the Style Sheet file are relative to the Style Sheet file's path."
-msgstr "-stylesheet fogliostile oppure -stylesheet=fogliostile, imposta il fogliostile dell'applicazione. L'opzione deve contenere il cammino a un file che contiene un fogliostile. Nota: Eventuali URL relative nel fogliostile sono relative al percorso in cui si trova il suo file."
+#, fuzzy
+#| msgid "-stylesheet stylesheet or -stylesheet=stylesheet, sets the application Style Sheet. The value must be a path to a file that contains the Style Sheet. Note: Relative URLs in the Style Sheet file are relative to the Style Sheet file's path."
+msgid "Sets the application Style Sheet. The value must be a path to a file that contains the Style Sheet. Note: Relative URLs in the Style Sheet file are relative to the Style Sheet file's path."
+msgstr "-stylesheet stylesheet oppure -stylesheet=stylesheet, imposta lo stylesheet dell'applicazione. L'opzione deve contenere il cammino a un file che contiene uno stylesheet. Nota: Eventuali URL relative nello Style Sheet sono relative al path in cui si trova il suo file."
 
 #: lclstrconsts.rsqtoptionsync
-msgid "-sync (only under X11), switches to synchronous mode for debugging."
-msgstr "-sync (solo sotto X11), commuta in modo sincrono per il debugging."
+#, fuzzy
+#| msgid "-sync (only under X11), switches to synchronous mode for debugging."
+msgid "Switches to synchronous mode for debugging. Works only under X11."
+msgstr "-sync (solo sotto X11), commuta in modo sincrono per il debugging"
 
 #: lclstrconsts.rsqtoptionwidgetcount
-msgid "-widgetcount, prints debug message at the end about number of widgets left undestroyed and maximum number of widgets existed at the same time."
+#, fuzzy
+#| msgid "-widgetcount, prints debug message at the end about number of widgets left undestroyed and maximum number of widgets existed at the same time."
+msgid "Prints debug message at the end about number of widgets left undestroyed and maximum number of widgets existed at the same time."
 msgstr "-widgetcount, stampa messaggi finali di debug sul numero di widget non distrutti e sul massimo numero di widget esistiti contemporaneamente."
 
 #: lclstrconsts.rsqtoptionx11bgcolor
-msgid "-bg or -background color, sets the default background color and an application palette (light and dark shades are calculated)."
+#, fuzzy
+#| msgid "-bg or -background color, sets the default background color and an application palette (light and dark shades are calculated)."
+msgid "Sets the default background color and an application palette (light and dark shades are calculated)."
 msgstr "-bg oppure --background colore, imposta il colore di sfondo di default e la tavolozza di un'applicazione (sono calcolate le ombre chiare e scure)."
 
 #: lclstrconsts.rsqtoptionx11btncolor
-msgid "-btn or -button color, sets the default button color."
-msgstr "-btn oppure -button colore, imposta il colore di default dei pulsanti."
+#, fuzzy
+#| msgid "-btn or -button color, sets the default button color."
+msgid "Sets the default button color."
+msgstr "-btn oppure -button colore, imposta il colore di default dei pulsanti"
 
 #: lclstrconsts.rsqtoptionx11cmap
-msgid "-cmap, causes the application to install a private color map on an 8-bit display."
-msgstr "-cmap, il programma installerà una mappa colori privata per un display a 8 bit."
+#, fuzzy
+#| msgid "-cmap, causes the application to install a private color map on an 8-bit display."
+msgid "Causes the application to install a private color map on an 8-bit display."
+msgstr "-cmap, il programma installerà una mappa colori privata su un display a 8 bit."
 
 #: lclstrconsts.rsqtoptionx11display
-msgid "-display display, sets the X display (default is $DISPLAY)."
-msgstr "-display display, imposta lo schermo X (il default è $DISPLAY)."
+#, fuzzy
+#| msgid "-display display, sets the X display (default is $DISPLAY)."
+msgid "Sets the X display. Default is $DISPLAY."
+msgstr "-display display, impost lo schermo X (il default è $DISPLAY)."
 
 #: lclstrconsts.rsqtoptionx11fgcolor
-msgid "-fg or -foreground color, sets the default foreground color."
+#, fuzzy
+#| msgid "-fg or -foreground color, sets the default foreground color."
+msgid "Sets the default foreground color."
 msgstr "-fg oppure -foreground colore, imposta il colore di default per il testo e la grafica."
 
 #: lclstrconsts.rsqtoptionx11font
-msgid "-fn or -font font, defines the application font. The font should be specified using an X logical font description."
-msgstr "-fn oppure -font nomefont, definisce il font usato da un'applicazione. Per il font dovrebbe essere usata una descrizione logica X."
+#, fuzzy
+#| msgid "-fn or -font font, defines the application font. The font should be specified using an X logical font description."
+msgid "Defines the application font. The font should be specified using an X logical font description."
+msgstr "-fn oppure -font nomefont, definice il font usato da un'applicazione. Per il font dovrebbe essere usata una descrizione logica X."
 
 #: lclstrconsts.rsqtoptionx11geometry
-msgid "-geometry geometry, sets the client geometry of the first window that is shown."
+#, fuzzy
+#| msgid "-geometry geometry, sets the client geometry of the first window that is shown."
+msgid "Sets the client geometry of the first window that is shown."
 msgstr "-geometry geometria, imposta la geometria della prima finestra che viene mostrata."
 
 #: lclstrconsts.rsqtoptionx11im
-msgid "-im, sets the input method server (equivalent to setting the XMODIFIERS environment variable)."
+#, fuzzy
+#| msgid "-im, sets the input method server (equivalent to setting the XMODIFIERS environment variable)."
+msgid "Sets the input method server (equivalent to setting the XMODIFIERS environment variable)."
 msgstr "-im, imposta il metodo di input del server (equivale a impostare la variabile ambiente XMODIFIERS)."
 
 #: lclstrconsts.rsqtoptionx11inputstyle
-msgid "-inputstyle, defines how the input is inserted into the given widget, e.g. onTheSpot makes the input appear directly in the widget, while overTheSpot makes the input appear in a box floating over the widget and is not inserted until the editing is done."
-msgstr "-inputstyle, definisce come l'input è inserito nel dato widget, es. onTheSpot fa apparire il testo direttamente nel widget, mentre overTheSpot lo mette in un box sopra il widget, e non è inserito finché l'editing non finisce."
+#, fuzzy
+#| msgid "-inputstyle, defines how the input is inserted into the given widget, e.g. onTheSpot makes the input appear directly in the widget, while overTheSpot makes the input appear in a box floating over the widget and is not inserted until the editing is done."
+msgid "Defines how the input is inserted into the given widget, e.g. onTheSpot makes the input appear directly in the widget, while overTheSpot makes the input appear in a box floating over the widget and is not inserted until the editing is done."
+msgstr "-inputstyle, definisce come l'input è inserito nel dato widget, es. onTheSpot fa apparire il testo direttamente nel widget, mentre overTheSpot lo mette in un box sopra il widget, e non è imnserito finché l'editing non finisce."
 
 #: lclstrconsts.rsqtoptionx11name
-msgid "-name name, sets the application name."
+#, fuzzy
+#| msgid "-name name, sets the application name."
+msgid "Sets the application name."
 msgstr "-name nome, imposta il nome dell'applicazione."
 
 #: lclstrconsts.rsqtoptionx11ncols
-msgid "-ncols count, limits the number of colors allocated in the color cube on an 8-bit display, if the application is using the QApplication::ManyColor color specification. If count is 216 then a 6x6x6 color cube is used (i.e. 6 levels of red, 6 of green, and 6 of blue); for other values, a cube approximately proportional to a 2x3x1 cube is used."
+#, fuzzy
+#| msgid "-ncols count, limits the number of colors allocated in the color cube on an 8-bit display, if the application is using the QApplication::ManyColor color specification. If count is 216 then a 6x6x6 color cube is used (i.e. 6 levels of red, 6 of green, and 6 of blue); for other values, a cube approximately proportional to a 2x3x1 cube is used."
+msgid "Limits the number of colors allocated in the color cube on an 8-bit display, if the application is using the QApplication::ManyColor color specification. If count is 216 then a 6x6x6 color cube is used (i.e. 6 levels of red, 6 of green, and 6 of blue); for other values, a cube approximately proportional to a 2x3x1 cube is used."
 msgstr "-ncols numero, limita il numero di colori allocati sul cubo colore di un display a 8 bit, se il programma usa le specifiche colore QApplication::ManyColor. Se il numero è 216, viene usato un cubo colore 6x6x6 (6 livelli di rosso, 6 di verde e 6 di blu). Per altri valori, si usa un cubo approssimativamente proporzionale a 2x3x1."
 
 #: lclstrconsts.rsqtoptionx11title
-msgid "-title title, sets the application title."
-msgstr "-title titolo, imposta il titolo del programma."
+#, fuzzy
+#| msgid "-title title, sets the application title."
+msgid "Sets the application title."
+msgstr "-title titolo, imposta il titolo di un programma"
 
 #: lclstrconsts.rsqtoptionx11visual
-msgid "-visual TrueColor, forces the application to use a TrueColor visual on an 8-bit display."
+#, fuzzy
+#| msgid "-visual TrueColor, forces the application to use a TrueColor visual on an 8-bit display."
+msgid "Forces the application to use a TrueColor visual on an 8-bit display."
 msgstr "-visual TrueColor, forza il programma a usare una visualizzazione TrueColor su un display a 8 bit."
 
 #: lclstrconsts.rsrasterimageendupdate
 msgid "Endupdate while no update in progress"
-msgstr "Endupdate mentre non ci sono aggiornamenti in corso"
+msgstr "Endupdate mentre non ci sono refresh"
 
 #: lclstrconsts.rsrasterimagesaveinupdate
 msgid "Cannot save image while update in progress"
-msgstr "Impossibile salvare l'immagine durante un aggiornamento"
+msgstr "Impossibile salvare l'immagine durante un refresh"
 
 #: lclstrconsts.rsrasterimageupdateall
 msgid "Cannot begin update all when canvas only update in progress"
-msgstr "Impossibile iniziare l'aggiornamento di tutto se è in corso quello della tela"
+msgstr "Impossibile iniziare il refresh di tutto se è in corso quello del canvas"
 
 #: lclstrconsts.rsredcolorcaption
 msgid "Red"
@@ -1079,23 +1233,27 @@ msgstr "Sostituisci tutto"
 #, object-pascal-format
 msgctxt "lclstrconsts.rsresourcenotfound"
 msgid "Resource %s not found"
-msgstr "Risorsa '%s' non trovata"
+msgstr "Risorsa %s non trovata"
 
 #: lclstrconsts.rsscrollbarcolorcaption
 msgid "ScrollBar"
-msgstr "Barra scorrimento"
+msgstr "Barra di scorrimento"
 
 #: lclstrconsts.rsscrollbaroutofrange
 msgid "ScrollBar property out of range"
-msgstr "Proprietà barar scorrimento fuori dai limiti"
+msgstr "Proprietà della ScrollBar fuori dai limiti"
 
 #: lclstrconsts.rsselectcolortitle
 msgid "Select color"
-msgstr "Selezione colore"
+msgstr "Selezionare un colore"
 
 #: lclstrconsts.rsselectfonttitle
 msgid "Select a font"
-msgstr "Selezione font"
+msgstr "Selezionare un font"
+
+#: lclstrconsts.rsshowdetails
+msgid "Show details"
+msgstr ""
 
 #: lclstrconsts.rssilvercolorcaption
 msgid "Silver"
@@ -1103,7 +1261,7 @@ msgstr "Argento"
 
 #: lclstrconsts.rssize
 msgid "  size "
-msgstr "  dimensione "
+msgstr "  ampiezza "
 
 #: lclstrconsts.rsskybluecolorcaption
 msgid "Sky Blue"
@@ -1111,7 +1269,7 @@ msgstr "Blu cielo"
 
 #: lclstrconsts.rstcustomtabcontrolaccessibilitydescription
 msgid "A control with tabs"
-msgstr "Un controllo con schede"
+msgstr "Un controllo con linguette"
 
 #: lclstrconsts.rstealcolorcaption
 msgid "Teal"
@@ -1123,15 +1281,17 @@ msgstr "Testo"
 
 #: lclstrconsts.rstga
 msgid "TGA Image Files"
-msgstr "File immagine TGA"
+msgstr ""
 
 #: lclstrconsts.rsthebuiltinurlisreadonlychangethebaseurlinstead
 msgid "The built-in URL is read only. Change the BaseURL instead."
-msgstr "L'URL integrata è in sola lettura. Cambia invece il BaseURL."
+msgstr ""
 
 #: lclstrconsts.rstiff
+#, fuzzy
+#| msgid "Tagged Image File Format"
 msgid "Tagged Image File Format Files"
-msgstr "File TIFF"
+msgstr "Formato del file immagine marcato"
 
 #: lclstrconsts.rstpanelaccessibilitydescription
 msgctxt "lclstrconsts.rstpanelaccessibilitydescription"
@@ -1146,7 +1306,7 @@ msgstr "Un aggancio per controllare le dimensioni di due parti di un'area"
 #: lclstrconsts.rsttreeviewaccessibilitydescription
 msgctxt "lclstrconsts.rsttreeviewaccessibilitydescription"
 msgid "A tree of items"
-msgstr "Una struttura di elementi"
+msgstr "Un albero di voci"
 
 #: lclstrconsts.rsunabletoloaddefaultfont
 msgid "Unable to load default font"
@@ -1154,7 +1314,7 @@ msgstr "Impossibile caricare il font predefinito"
 
 #: lclstrconsts.rsunknownerrorpleasereportthisbug
 msgid "Unknown Error, please report this bug"
-msgstr "Errore sconosciuto. Riporta questo errore al team di sviluppo"
+msgstr "Errore sconosciuto. Per favore, riporta questo errore al team di sviluppo"
 
 #: lclstrconsts.rsunknownpictureextension
 msgid "Unknown picture extension"
@@ -1171,32 +1331,32 @@ msgstr "Formato bitmap non supportato."
 #: lclstrconsts.rsunsupportedclipboardformat
 #, object-pascal-format
 msgid "Unsupported clipboard format: %s"
-msgstr "Formato appunti non supportato %s"
+msgstr "Formato degli appunti non supportato %s"
 
 #: lclstrconsts.rswarningunreleaseddcsdump
 #, object-pascal-format
 msgid " WARNING: There are %d unreleased DCs, a detailed dump follows:"
-msgstr " Attenzione: ci sono %d DC non rilasciati, di seguito i dettagli:"
+msgstr " Attenzione: ci sono %d DC non rilasciati, ecco i dettagli:"
 
 #: lclstrconsts.rswarningunreleasedgdiobjectsdump
 #, object-pascal-format
 msgid " WARNING: There are %d unreleased GDIObjects, a detailed dump follows:"
-msgstr " Attenzione: ci sono %d GDIObjects non rilasciati, di seguito i dettagli:"
+msgstr " Attenzione: ci sono %d GDIObjects non rilasciati, ecco i dettagli:"
 
 #: lclstrconsts.rswarningunreleasedmessagesinqueue
 #, object-pascal-format
 msgid " WARNING: There are %d messages left in the queue! I'll free them"
-msgstr " Attenzione: ci sono %d messaggi ancora in coda! Pulizia in corso"
+msgstr " Attenzione: ci sono %d messaggi ancora in coda! Li sto liberando"
 
 #: lclstrconsts.rswarningunreleasedtimerinfos
 #, object-pascal-format
 msgid " WARNING: There are %d TimerInfo structures left, I'll free them"
-msgstr " Attenzione: sono rimaste '%d' strutture TimerInfo, che verranno liberate"
+msgstr " Attenzione: sono rimaste %d strutture TimerInfo, le sto liberando "
 
 #: lclstrconsts.rswarningunremovedpaintmessages
 #, object-pascal-format
 msgid " WARNING: There are %s unremoved LM_PAINT/LM_GtkPAINT message links left."
-msgstr " Attenzione: restano %s collegamenti a messaggi LM_GtkPAINT da rimuovere."
+msgstr " Attenzione: restano %s link a messaggi LM_GtkPAINT da rimuovere."
 
 #: lclstrconsts.rswhitecolorcaption
 msgid "White"
@@ -1220,11 +1380,11 @@ msgstr "Finestra"
 
 #: lclstrconsts.rswindowframecolorcaption
 msgid "Window Frame"
-msgstr "Bordo finestra"
+msgstr "Frame della finestra"
 
 #: lclstrconsts.rswindowtextcolorcaption
 msgid "Window Text"
-msgstr "Testo finestra"
+msgstr "Testo della finestra"
 
 #: lclstrconsts.rsyellowcolorcaption
 msgid "Yellow"
@@ -1236,7 +1396,7 @@ msgstr "Impossibile dare il focus a finestre disabilitate o invisibili"
 
 #: lclstrconsts.sduplicatemenus
 msgid "Duplicate menus"
-msgstr "Menu duplicati"
+msgstr "Menu dupicati"
 
 #: lclstrconsts.sinvalidactioncreation
 msgid "Invalid action creation"
@@ -1256,7 +1416,7 @@ msgstr "Deregistrazione azione non valida"
 
 #: lclstrconsts.sinvalidimagesize
 msgid "Invalid image size"
-msgstr "Dimensione immagine non valida"
+msgstr "Grandezza immagine non valida"
 
 #: lclstrconsts.sinvalidindex
 msgid "Invalid ImageList Index"
@@ -1264,11 +1424,11 @@ msgstr "Indice ImageList non valido"
 
 #: lclstrconsts.smaskeditnomatch
 msgid "The current text does not match the specified mask."
-msgstr "Il testo attuale non corrisponde alla maschera specificata."
+msgstr "Il testo corrente non si adatta alla maschera specificata."
 
 #: lclstrconsts.smenuindexerror
 msgid "Menu index out of range"
-msgstr "Indice menu fuori intervallo"
+msgstr "Indice del menu fuori range"
 
 #: lclstrconsts.smenuitemisnil
 msgid "MenuItem is nil"
@@ -1368,7 +1528,7 @@ msgstr "Nessun timer disponibile"
 #: lclstrconsts.sparentrequired
 #, object-pascal-format
 msgid "Control \"%s\" has no parent window."
-msgstr "Il controllo '%s' non ha una finestra principale."
+msgstr "Il controllo \"%s\" non ha una finestra genitore."
 
 #: lclstrconsts.sparexpected
 #, object-pascal-format
@@ -1388,7 +1548,7 @@ msgstr "Numero intero non valido: %s"
 #: lclstrconsts.sparlocinfo
 #, object-pascal-format
 msgid " (at %d,%d, stream offset %d)"
-msgstr " (a %d %d, offset stream %d)"
+msgstr " (a %d %d, offset nello stream %d)"
 
 #: lclstrconsts.sparunterminatedbinvalue
 msgid "Unterminated byte value"
@@ -1396,7 +1556,7 @@ msgstr "Valore byte non determinato"
 
 #: lclstrconsts.sparunterminatedstring
 msgid "Unterminated string"
-msgstr "Stringa non determinata"
+msgstr "String non determinata"
 
 #: lclstrconsts.sparwrongtokensymbol
 #, object-pascal-format
@@ -1411,7 +1571,7 @@ msgstr "Tipo token errato: atteso %s, trovato %s"
 #: lclstrconsts.sshellctrlsbytes
 #, object-pascal-format
 msgid "%s bytes"
-msgstr "%s byte"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsinvalidpath
 #, object-pascal-format
@@ -1420,8 +1580,6 @@ msgid ""
 "Invalid pathname:\n"
 "\"%s\""
 msgstr ""
-"Percorso non valido:\n"
-"'%s'"
 
 #: lclstrconsts.sshellctrlsinvalidpathrelative
 #, object-pascal-format
@@ -1431,10 +1589,6 @@ msgid ""
 "in relation to rootpath:\n"
 "\"%s\""
 msgstr ""
-"Percorso relativo non valido:\n"
-"'%s'\n"
-"in relazione a percorso principale:\n"
-"'%s'"
 
 #: lclstrconsts.sshellctrlsinvalidroot
 #, object-pascal-format
@@ -1443,22 +1597,20 @@ msgid ""
 "Invalid pathname:\n"
 "\"%s\""
 msgstr ""
-"Percorso non valido:\n"
-"'%s'"
 
 #: lclstrconsts.sshellctrlskb
 #, object-pascal-format
 msgid "%s kB"
-msgstr "%s kB"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsmb
 #, object-pascal-format
 msgid "%s MB"
-msgstr "%s MB"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsname
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsselecteditemdoesnotexists
 #, object-pascal-format
@@ -1466,13 +1618,12 @@ msgid ""
 "The selected item does not exist on disk:\n"
 "\"%s\""
 msgstr ""
-"L'elemento selezionato non esiste nell disco:\n"
-"'%s'"
 
 #: lclstrconsts.sshellctrlssize
 msgid "Size"
-msgstr "Dimensione"
+msgstr ""
 
 #: lclstrconsts.sshellctrlstype
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
+

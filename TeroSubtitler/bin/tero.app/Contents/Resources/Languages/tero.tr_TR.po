@@ -1,0 +1,5485 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tero Subtitler\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Veysel Karani ECE\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: proclocalize.lngabversion
+#, object-pascal-format
+msgid ""
+"version %s\n"
+"\n"
+"Compiled at %s on %s\n"
+"Compiler version: %s\n"
+"Target CPU: %s"
+msgstr ""
+"versiyon %s\n"
+"\n"
+"%s tarihinde %s saatinde derlendi\n"
+"Derleyici versiyonu: %s\n"
+"Hedef İşlemci: %s"
+
+#: proclocalize.lngadditionaloption
+msgid "Additional option"
+msgstr "Ek seçenek"
+
+#: proclocalize.lngadditionalparams
+msgid "Additional params:"
+msgstr "Ek parametreler:"
+
+#: proclocalize.lngaddnote
+msgid "Add note"
+msgstr "Not ekle"
+
+#: proclocalize.lngallsupportedfiles
+msgid "All supported files"
+msgstr "Tüm desteklenen dosyalar"
+
+#: proclocalize.lngasbadvalues
+msgid "Bad values"
+msgstr "Hatalı değerler"
+
+#: proclocalize.lngasbreaklonglines
+msgid "Line(s) too long"
+msgstr "Satır(lar) çok uzun"
+
+#: proclocalize.lngascustom
+msgid "Custom"
+msgstr "Özel"
+
+#: proclocalize.lngasellipsessinglesmartcharacter
+msgid "Ellipses dots instead of Unicode character"
+msgstr "Unicode karakter yerine üç nokta"
+
+#: proclocalize.lngasempty
+msgid "Empty entry"
+msgstr "Boş giriş"
+
+#: proclocalize.lngasfixtags
+msgid "Invalid or incomplete tags"
+msgstr "Geçersiz veya eksik etiketler"
+
+#: proclocalize.lngasgaptooshort
+msgid "Gap too short"
+msgstr "Boşluk çok kısa"
+
+#: proclocalize.lngashearingimpaired
+msgid "Hearing impaired"
+msgstr "İşitme engelli"
+
+#: proclocalize.lngasktoextractaudio
+msgid "Audio waveform was not found, do you want to extract it?"
+msgstr "Ses dalga formu bulunamadı, dışa aktarmak ister misiniz?"
+
+#: proclocalize.lngasktosave
+#, object-pascal-format
+msgid ""
+"“%s”\n"
+"\n"
+"Do you wish to save it?"
+msgstr ""
+"“%s”\n"
+"\n"
+"Kaydetmek istiyor musunuz?"
+
+#: proclocalize.lngaslineselected
+#, object-pascal-format
+msgid "%d entries selected / %d"
+msgstr "%d giriş seçildi / %d"
+
+#: proclocalize.lngasmarked
+msgid "Marked entry"
+msgstr "İşaretlenmiş giriş"
+
+#: proclocalize.lngasmaxcps
+msgid "Too many CPS"
+msgstr "Çok yüksek CPS"
+
+#: proclocalize.lngasmaxlines
+msgid "Maximum number of lines exceeded"
+msgstr "Maksimum satır sayısı aşıldı"
+
+#: proclocalize.lngasocr
+msgid "OCR error"
+msgstr "OCR hatası"
+
+#: proclocalize.lngasoverlappingwithnext
+msgid "Overlapping with following entry"
+msgstr "Sonraki girişle çakışıyor"
+
+#: proclocalize.lngasoverlappingwithprev
+msgid "Overlapping with previous entry"
+msgstr "Önceki girişle çakışıyor"
+
+#: proclocalize.lngasprohibitedchars
+msgid "Contains a prohibited character"
+msgstr "Yasaklanmış bir karakter içeriyor"
+
+#: proclocalize.lngasreadingvideofile
+msgid "Reading media file..."
+msgstr "Medya dosyası okunuyor..."
+
+#: proclocalize.lngasrepeatedchars
+msgid "Repeated character"
+msgstr "Tekrarlanan karakter"
+
+#: proclocalize.lngasrepeatedentry
+msgid "Repeated entry"
+msgstr "Tekrarlanan giriş"
+
+#: proclocalize.lngastext
+msgctxt "proclocalize.lngastext"
+msgid "Text"
+msgstr "Metin"
+
+#: proclocalize.lngastextchars
+#, object-pascal-format
+msgid "Text (%s characters at %.2f CPS):"
+msgstr "Metin (%s karakter, %.2f CPS):"
+
+#: proclocalize.lngastimetoolong
+msgid "Duration too long"
+msgstr "Süre çok uzun"
+
+#: proclocalize.lngastimetooshort
+msgid "Duration too short"
+msgstr "Süre çok kısa"
+
+#: proclocalize.lngastranslation
+msgctxt "proclocalize.lngastranslation"
+msgid "Translation"
+msgstr "Çeviri"
+
+#: proclocalize.lngastranslationchars
+#, object-pascal-format
+msgid "Translation (%s characters at %.2f CPS):"
+msgstr "Çeviri (%s karakter, %.2f CPS):"
+
+#: proclocalize.lngasunbreak
+#, object-pascal-format
+msgid "Line breaks less than %d characters"
+msgstr "Satır sonları %d karakterden az"
+
+#: proclocalize.lngasunnecessarydots
+msgid "Unnecessary dots"
+msgstr "Gereksiz noktalar"
+
+#: proclocalize.lngasunnecessaryspaces
+msgid "Unnecessary spaces"
+msgstr "Gereksiz boşluklar"
+
+#: proclocalize.lngasvideolen
+#, object-pascal-format
+msgid "%s (%s FPS)"
+msgstr "%s (%s FPS)"
+
+#: proclocalize.lngasvideolensmpte
+#, object-pascal-format
+msgid "%s (%s FPS/SMPTE)"
+msgstr "%s (%s FPS/SMPTE)"
+
+#: proclocalize.lngaswaveformtext
+msgid "Click here to use timeline"
+msgstr "Zaman çizelgesini kullanmak için buraya tıklayın"
+
+#: proclocalize.lngbackupsaved
+msgid "Backup saved."
+msgstr "Yedek kaydedildi."
+
+#: proclocalize.lngbcfileformat
+msgctxt "proclocalize.lngbcfileformat"
+msgid "Format"
+msgstr "Format"
+
+#: proclocalize.lngbcfilename
+msgctxt "proclocalize.lngbcfilename"
+msgid "File name"
+msgstr "Dosya adı"
+
+#: proclocalize.lngbcfilestate
+msgid "Status"
+msgstr "Durum"
+
+#: proclocalize.lngbtnadd
+msgctxt "proclocalize.lngbtnadd"
+msgid "Add"
+msgstr "Ekle"
+
+#: proclocalize.lngbtncancel
+msgctxt "proclocalize.lngbtncancel"
+msgid "Cancel"
+msgstr "İptal"
+
+#: proclocalize.lngbtnclose
+msgctxt "proclocalize.lngbtnclose"
+msgid "Close"
+msgstr "Kapat"
+
+#: proclocalize.lngbtnload
+msgid "Open"
+msgstr "Aç"
+
+#: proclocalize.lngbtnremove
+msgctxt "proclocalize.lngbtnremove"
+msgid "Remove"
+msgstr "Kaldır"
+
+#: proclocalize.lngbtnsave
+msgid "Save"
+msgstr "Kaydet"
+
+#: proclocalize.lngbtnupdate
+msgctxt "proclocalize.lngbtnupdate"
+msgid "Update"
+msgstr "Güncelle"
+
+#: proclocalize.lngcfsframes
+msgctxt "proclocalize.lngcfsframes"
+msgid "Frames"
+msgstr "Kareler"
+
+#: proclocalize.lngcfstime
+msgctxt "proclocalize.lngcfstime"
+msgid "Time"
+msgstr "Zaman"
+
+#: proclocalize.lngcontinueanyway
+msgid "Continue?"
+msgstr "Devam edilsin mi?"
+
+#: proclocalize.lngdetect
+msgid "Auto-detect"
+msgstr "Otomatik algıla"
+
+#: proclocalize.lngdetectdialogsegmentswarning
+msgid "Attempting to detect dialogue segments deletes all entries from the list."
+msgstr "Diyalog bölümlerini algılama işlemi listedeki tüm girişleri silecektir."
+
+#: proclocalize.lngdownloadcanceled
+msgid "Download canceled by user."
+msgstr "İndirme kullanıcı tarafından iptal edildi."
+
+#: proclocalize.lngentry
+#, object-pascal-format
+msgid "Entry %d"
+msgstr "Giriş %d"
+
+#: proclocalize.lngentryendedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentryendedat"
+msgid "Entry ended in %s"
+msgstr "Giriş %s içinde bitti"
+
+#: proclocalize.lngentrystartedat
+#, object-pascal-format
+msgctxt "proclocalize.lngentrystartedat"
+msgid "Entry started at %s"
+msgstr "Giriş %s noktasında başladı"
+
+#: proclocalize.lngerrorexecuting
+#, object-pascal-format
+msgid "Error executing “%s”."
+msgstr "“%s” yürütülürken hata oluştu."
+
+#: proclocalize.lngextractapperror
+#, object-pascal-format
+msgid "Unable to find “%s”. Check in settings if it is configured correctly."
+msgstr "“%s” bulunamadı. Ayarlardan doğru yapılandırılıp yapılandırılmadığını kontrol edin."
+
+#: proclocalize.lngextracting
+msgid "Extracting..."
+msgstr "Çıkartılıyor..."
+
+#: proclocalize.lngfailed
+msgid "Failed."
+msgstr "Başarısız."
+
+#: proclocalize.lngfailedtodownload
+msgid "No content downloaded, missing file or no Internet connection."
+msgstr "İçerik indirilmedi, dosya eksik veya internet bağlantısı yok."
+
+#: proclocalize.lngfeaturenotavailablefromurl
+msgid "Function not available for online media."
+msgstr "Bu fonksiyon çevrimiçi medya için kullanılamaz."
+
+#: proclocalize.lngfilechanged
+msgid "File has not been saved."
+msgstr "Dosya kaydedilmedi."
+
+#: proclocalize.lngfilenotfound
+msgid "File cannot be found."
+msgstr "Dosya bulunamadı."
+
+#: proclocalize.lngfilesavedsuccessfully
+msgid "File saved successfully."
+msgstr "Dosya başarıyla kaydedildi."
+
+#: proclocalize.lngfocenter
+msgid "Center"
+msgstr "Orta"
+
+#: proclocalize.lngfolatin
+msgid "Latin"
+msgstr "Latin"
+
+#: proclocalize.lngfolatinarabic
+msgid "Latin/Arabic"
+msgstr "Latin/Arapça"
+
+#: proclocalize.lngfolatincyrillic
+msgid "Latin/Cyrillic"
+msgstr "Latin/Kiril"
+
+#: proclocalize.lngfolatingreek
+msgid "Latin/Greek"
+msgstr "Latin/Yunan"
+
+#: proclocalize.lngfolatinhebrew
+msgid "Latin/Hebrew"
+msgstr "Latin/İbranice"
+
+#: proclocalize.lngfoldernotempty
+msgid "The folder is not empty."
+msgstr "Klasör boş değil."
+
+#: proclocalize.lngfoleft
+msgctxt "proclocalize.lngfoleft"
+msgid "Left"
+msgstr "Sol"
+
+#: proclocalize.lngfolevel1teletext
+msgid "Level-1 teletext"
+msgstr "Seviye-1 teletekst"
+
+#: proclocalize.lngfolevel2teletext
+msgid "Level-2 teletext"
+msgstr "Seviye-2 teletekst"
+
+#: proclocalize.lngfoopensubtitling
+msgid "Open subtitling"
+msgstr "Açık altyazı (Open subtitling)"
+
+#: proclocalize.lngforight
+msgid "Right"
+msgstr "Sağ"
+
+#: proclocalize.lngfoundefined
+msgid "Undefined"
+msgstr "Tanımlanmamış"
+
+#: proclocalize.lngfsaction
+msgid "Action"
+msgstr "Eylem"
+
+#: proclocalize.lngfsaddspacing
+msgid "Add spacing"
+msgstr "Boşluk ekle"
+
+#: proclocalize.lngfsafter
+msgid "After"
+msgstr "Sonra"
+
+#: proclocalize.lngfscurrent
+msgid "Current"
+msgstr "Mevcut"
+
+#: proclocalize.lngfsetbadvalues
+msgid "Fix bad timing values"
+msgstr "Hatalı zamanlama değerlerini düzelt"
+
+#: proclocalize.lngfsetbreaklonglines
+msgid "Break overlong lines"
+msgstr "Çok uzun satırları böl"
+
+#: proclocalize.lngfsetchaining
+msgid "Chaining entries"
+msgstr "Girişleri birbirine bağla"
+
+#: proclocalize.lngfsetcleanuptags
+msgid "Cleanup tags"
+msgstr "Etiketleri temizle"
+
+#: proclocalize.lngfsetellipsessinglesmartcharacter
+msgid "Convert ellipsis dots to Unicode character"
+msgstr "Üç noktayı Unicode karakterine dönüştür"
+
+#: proclocalize.lngfsetempty
+msgid "Remove empty entries"
+msgstr "Boş girişleri kaldır"
+
+#: proclocalize.lngfsetfixinterrobang
+msgid "Fix interrobang: !? -> ?!"
+msgstr "Soru-ünlem işaretini düzelt: !? -> ?!"
+
+#: proclocalize.lngfsetfixtags
+msgid "Fix invalid tags"
+msgstr "Geçersiz etiketleri düzelt"
+
+#: proclocalize.lngfsethearingimpaired
+msgid "Remove text for hearing impaired"
+msgstr "İşitme engelli metinlerini kaldır"
+
+#: proclocalize.lngfsetincompletehyphentext
+msgid "Remove incomplete hyphenated line"
+msgstr "Tamamlanmamış tireli satırı kaldır"
+
+#: proclocalize.lngfsetocr
+msgid "Fix common OCR errors"
+msgstr "Yaygın OCR hatalarını düzelt"
+
+#: proclocalize.lngfsetoverlapping
+msgid "Fix overlapping display times"
+msgstr "Çakışan görüntüleme sürelerini düzelt"
+
+#: proclocalize.lngfsetprohibitedchars
+#, object-pascal-format
+msgid "Remove entries with %s"
+msgstr "%s içeren girişleri kaldır"
+
+#: proclocalize.lngfsetremovespaceswithinbrackets
+msgid "Remove spaces within brackets"
+msgstr "Parantez içindeki boşlukları kaldır"
+
+#: proclocalize.lngfsetrepeatedchars
+msgid "Remove repeated characters"
+msgstr "Tekrarlanan karakterleri kaldır"
+
+#: proclocalize.lngfsetrepeatedentry
+msgctxt "proclocalize.lngfsetrepeatedentry"
+msgid "Remove repeated entries"
+msgstr "Tekrarlanan girişleri kaldır"
+
+#: proclocalize.lngfsetsnaptoshotchanges
+msgid "Snap times to shot changes"
+msgstr "Zamanları sahne değişimlerine sabitle"
+
+#: proclocalize.lngfsetsnaptoshotchangesincue
+msgid "Snap In Cue to shot change"
+msgstr "Giriş noktasını (In Cue) sahne değişimine sabitle"
+
+#: proclocalize.lngfsetsnaptoshotchangesincueaway
+msgid "Snap In Cue away from shot change"
+msgstr "Giriş noktasını sahne değişiminden uzaklaştır"
+
+#: proclocalize.lngfsetsnaptoshotchangesoutcue
+msgid "Snap Out Cue to shot change"
+msgstr "Çıkış noktasını (Out Cue) sahne değişimine sabitle"
+
+#: proclocalize.lngfsetspaceofopeninghyphen
+msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
+msgid "Spacing of opening hyphen"
+msgstr "Başlangıç tiresinin boşluğu"
+
+#: proclocalize.lngfsettimetoolong
+msgid "Fix durations too long"
+msgstr "Çok uzun süreleri düzelt"
+
+#: proclocalize.lngfsettimetooshort
+msgid "Fix durations too short"
+msgstr "Çok kısa süreleri düzelt"
+
+#: proclocalize.lngfsetunbreak
+#, object-pascal-format
+msgid "Remove line breaks if %d characters not exceeded"
+msgstr "%d karakter aşılmadıysa satır sonlarını kaldır"
+
+#: proclocalize.lngfsetunnecessarydots
+msgid "Remove unnecessary dots"
+msgstr "Gereksiz noktaları kaldır"
+
+#: proclocalize.lngfsetunnecessaryspaces
+msgid "Remove unnecessary spaces"
+msgstr "Gereksiz boşlukları kaldır"
+
+#: proclocalize.lngfsindex
+msgctxt "proclocalize.lngfsindex"
+msgid "#"
+msgstr "#"
+
+#: proclocalize.lngfsremovespacing
+msgid "Remove spacing"
+msgstr "Boşlukları kaldır"
+
+#: proclocalize.lngfstotalerrors
+#, object-pascal-format
+msgid "Total errors: %d (displayed: %d)"
+msgstr "Toplam hata: %d (gösterilen: %d)"
+
+#: proclocalize.lnghcpl
+msgctxt "proclocalize.lnghcpl"
+msgid "CPL"
+msgstr "CPL"
+
+#: proclocalize.lnghcps
+msgctxt "proclocalize.lnghcps"
+msgid "CPS"
+msgstr "CPS"
+
+#: proclocalize.lnghduration
+msgctxt "proclocalize.lnghduration"
+msgid "Duration"
+msgstr "Süre"
+
+#: proclocalize.lnghhmmssff
+msgid "SMPTE [HH:MM:SS:FF]"
+msgstr "SMPTE [SS:DD:SS:KK]"
+
+#: proclocalize.lnghhmmsszzz
+msgid "Media [HH:MM:SS.ZZZ]"
+msgstr "Medya [SS:DD:SS.MMM]"
+
+#: proclocalize.lnghindex
+msgid "#/Gap"
+msgstr "#/Boşluk"
+
+#: proclocalize.lnghstyleandactor
+msgctxt "proclocalize.lnghstyleandactor"
+msgid "Style/Actor"
+msgstr "Stil/Aktör"
+
+#: proclocalize.lnghtext
+msgctxt "proclocalize.lnghtext"
+msgid "Text"
+msgstr "Metin"
+
+#: proclocalize.lnghtimes
+msgctxt "proclocalize.lnghtimes"
+msgid "Times"
+msgstr "Zamanlar"
+
+#: proclocalize.lnghtranslation
+msgctxt "proclocalize.lnghtranslation"
+msgid "Translation"
+msgstr "Çeviri"
+
+#: proclocalize.lnghwpm
+msgctxt "proclocalize.lnghwpm"
+msgid "WPM"
+msgstr "WPM"
+
+#: proclocalize.lngindex
+msgctxt "proclocalize.lngindex"
+msgid "#"
+msgstr "#"
+
+#: proclocalize.lnglibmpverror
+msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
+msgstr "Gömülü mpv oynatıcıyı çalıştırmak için gerekli kütüphaneler bulunamadı. Lütfen onları indirin."
+
+#: proclocalize.lnglibmpvglerror
+msgid "Failed to initialize mpv GL context."
+msgstr "mpv GL bağlamı başlatılamadı."
+
+#: proclocalize.lnglibmpvversionerror
+msgid "Could not initialize libmpv. Check if the right library was installed."
+msgstr "libmpv başlatılamadı. Doğru kütüphanenin kurulu olduğundan emin olun."
+
+#: proclocalize.lngline
+msgid "Line:"
+msgstr "Satır:"
+
+#: proclocalize.lngmrfind
+msgctxt "proclocalize.lngmrfind"
+msgid "Find"
+msgstr "Bul"
+
+#: proclocalize.lngmrregexpr
+msgctxt "proclocalize.lngmrregexpr"
+msgid "R. Expression"
+msgstr "Düzenli İfade (Regex)"
+
+#: proclocalize.lngmrreplacewith
+msgctxt "proclocalize.lngmrreplacewith"
+msgid "Replace with"
+msgstr "Şununla değiştir"
+
+#: proclocalize.lngmscontains
+msgctxt "proclocalize.lngmscontains"
+msgid "Contains"
+msgstr "İçerir"
+
+#: proclocalize.lngmsendswith
+msgctxt "proclocalize.lngmsendswith"
+msgid "Ends with"
+msgstr "Şununla biter"
+
+#: proclocalize.lngmsstartswith
+msgctxt "proclocalize.lngmsstartswith"
+msgid "Starts with"
+msgstr "Şununla başlar"
+
+#: proclocalize.lngmultipletracksdetected
+msgid "Multiple tracks detected"
+msgstr "Birden fazla iz algılandı"
+
+#: proclocalize.lngnewdurationall
+msgctxt "proclocalize.lngnewdurationall"
+msgid "New duration in all cases"
+msgstr "Tüm durumlarda yeni süre"
+
+#: proclocalize.lngnewdurationgreater
+msgctxt "proclocalize.lngnewdurationgreater"
+msgid "New duration is greater than original"
+msgstr "Yeni süre orijinalinden daha uzun"
+
+#: proclocalize.lngnewdurationsmaller
+msgctxt "proclocalize.lngnewdurationsmaller"
+msgid "New duration is smaller than original"
+msgstr "Yeni süre orijinalinden daha kısa"
+
+#: proclocalize.lngnewshortcutpreset
+msgid "Enter a name for your shortcuts preset"
+msgstr "Kısayol önayarınız için bir isim girin"
+
+#: proclocalize.lngnewshortcutpresetname
+msgctxt "proclocalize.lngnewshortcutpresetname"
+msgid "Name"
+msgstr "İsim"
+
+#: proclocalize.lngnewtime
+msgid "New time"
+msgstr "Yeni zaman"
+
+#: proclocalize.lngnewversionfound
+msgid "A new version was found."
+msgstr "Yeni bir versiyon bulundu."
+
+#: proclocalize.lngnoentriesmarked
+msgctxt "proclocalize.lngnoentriesmarked"
+msgid "There are no marked entries."
+msgstr "İşaretlenmiş giriş bulunmuyor."
+
+#: proclocalize.lngnointernetconnection
+msgid "No Internet connection available"
+msgstr "İnternet bağlantısı mevcut değil"
+
+#: proclocalize.lngnoname
+msgid "no name"
+msgstr "isimsiz"
+
+#: proclocalize.lngnonewversion
+msgid "You're using the latest version."
+msgstr "En güncel versiyonu kullanıyorsunuz."
+
+#: proclocalize.lngoldtime
+msgid "Old time"
+msgstr "Eski zaman"
+
+#: proclocalize.lngopencontainingfolder
+msgid "Open containing folder"
+msgstr "İçeren klasörü aç"
+
+#: proclocalize.lngopenfile
+msgid "Open file"
+msgstr "Dosya aç"
+
+#: proclocalize.lngopenvideofromurl
+msgid "Open media from"
+msgstr "Medyayı şuradan aç"
+
+#: proclocalize.lngoperationcancelled
+msgid "Operation cancelled."
+msgstr "İşlem iptal edildi."
+
+#: proclocalize.lngoperationcompleted
+msgid "Operation completed."
+msgstr "İşlem tamamlandı."
+
+#: proclocalize.lngoperationfailed
+#, object-pascal-format
+msgid "Job %d/%d fail with code %d."
+msgstr "%d/%d işi %d koduyla başarısız oldu."
+
+#: proclocalize.lngoriginal
+msgctxt "proclocalize.lngoriginal"
+msgid "Original"
+msgstr "Orijinal"
+
+#: proclocalize.lngpercent
+msgid "Percent"
+msgstr "Yüzde"
+
+#: proclocalize.lngprojectfile
+msgid "Subtitle Translation Project"
+msgstr "Altyazı Çeviri Projesi"
+
+#: proclocalize.lngpromptfordeletelines
+msgid "The selected entries will be deleted."
+msgstr "Seçilen girişler silinecek."
+
+#: proclocalize.lngqccpl
+msgid "CPL (characters-per-line)"
+msgstr "CPL (satır başına karakter)"
+
+#: proclocalize.lngqccps
+msgid "CPS (characters-per-second)"
+msgstr "CPS (saniye başına karakter)"
+
+#: proclocalize.lngqcgap
+msgid "Gap Minimum duration"
+msgstr "Minimum boşluk süresi"
+
+#: proclocalize.lngqcindex
+msgctxt "proclocalize.lngqcindex"
+msgid "#"
+msgstr "#"
+
+#: proclocalize.lngqcmaximumduration
+msgid "Maximum duration"
+msgstr "Maksimum süre"
+
+#: proclocalize.lngqcmaximumlines
+msgid "Maximum lines"
+msgstr "Maksimum satır"
+
+#: proclocalize.lngqcminimumduration
+msgid "Minimum duration"
+msgstr "Minimum süre"
+
+#: proclocalize.lngqcrule
+msgid "Broken rule"
+msgstr "İhlal edilen kural"
+
+#: proclocalize.lngqcwpm
+msgid "WPM (words-per-minute)"
+msgstr "WPM (dakika başına kelime)"
+
+#: proclocalize.lngrbdatetime
+msgid "Date / Time"
+msgstr "Tarih / Zaman"
+
+#: proclocalize.lngrbfilename
+msgctxt "proclocalize.lngrbfilename"
+msgid "File name"
+msgstr "Dosya adı"
+
+#: proclocalize.lngsavefile
+msgid "Save file"
+msgstr "Dosyayı kaydet"
+
+#: proclocalize.lngsavesubtitleerror
+msgid "Error trying to save the file."
+msgstr "Dosya kaydedilirken hata oluştu."
+
+#: proclocalize.lngsavesubtitles
+msgid "Save subtitles"
+msgstr "Altyazıları kaydet"
+
+#: proclocalize.lngsavetranslation
+msgctxt "proclocalize.lngsavetranslation"
+msgid "Save translation"
+msgstr "Çeviriyi kaydet"
+
+#: proclocalize.lngsbspellcheckerlanguage
+msgid "Spell checker language"
+msgstr "Yazım denetimi dili"
+
+#: proclocalize.lngscaudiofilters
+msgctxt "proclocalize.lngscaudiofilters"
+msgid "Audio filters"
+msgstr "Ses filtreleri"
+
+#: proclocalize.lngscedit
+msgctxt "proclocalize.lngscedit"
+msgid "Edit"
+msgstr "Düzenle"
+
+#: proclocalize.lngsceditor
+msgctxt "proclocalize.lngsceditor"
+msgid "Editor"
+msgstr "Editör"
+
+#: proclocalize.lngscedl
+msgid "Edit Decision Lists"
+msgstr "Düzenleme Karar Listeleri (EDL)"
+
+#: proclocalize.lngscentries
+msgctxt "proclocalize.lngscentries"
+msgid "Entries"
+msgstr "Girişler"
+
+#: proclocalize.lngscfile
+msgctxt "proclocalize.lngscfile"
+msgid "File"
+msgstr "Dosya"
+
+#: proclocalize.lngscfind
+msgctxt "proclocalize.lngscfind"
+msgid "Find"
+msgstr "Bul"
+
+#: proclocalize.lngscframes
+msgctxt "proclocalize.lngscframes"
+msgid "Frames"
+msgstr "Kareler"
+
+#: proclocalize.lngschelp
+msgctxt "proclocalize.lngschelp"
+msgid "Help"
+msgstr "Yardım"
+
+#: proclocalize.lngschhmmssff
+msgid "HH:MM:SS:FF"
+msgstr "SS:DD:SS:KK"
+
+#: proclocalize.lngschhmmsszzz
+msgctxt "proclocalize.lngschhmmsszzz"
+msgid "HH:MM:SS.ZZZ"
+msgstr "SS:DD:SS.MMM"
+
+#: proclocalize.lngscmedia
+msgctxt "proclocalize.lngscmedia"
+msgid "Media"
+msgstr "Medya"
+
+#: proclocalize.lngscmilliseconds
+msgctxt "proclocalize.lngscmilliseconds"
+msgid "Milliseconds"
+msgstr "Milisaniye"
+
+#: proclocalize.lngscseconds
+msgid "Seconds"
+msgstr "Saniye"
+
+#: proclocalize.lngscselect
+msgctxt "proclocalize.lngscselect"
+msgid "Select"
+msgstr "Seç"
+
+#: proclocalize.lngscshotchanges
+msgid "Text files"
+msgstr "Metin dosyaları"
+
+#: proclocalize.lngsctext
+msgctxt "proclocalize.lngsctext"
+msgid "Text"
+msgstr "Metin"
+
+#: proclocalize.lngsctimings
+msgctxt "proclocalize.lngsctimings"
+msgid "Timings"
+msgstr "Zamanlamalar"
+
+#: proclocalize.lngsctools
+msgctxt "proclocalize.lngsctools"
+msgid "Tools"
+msgstr "Araçlar"
+
+#: proclocalize.lngscvideofilters
+msgctxt "proclocalize.lngscvideofilters"
+msgid "Video filters"
+msgstr "Video filtreleri"
+
+#: proclocalize.lngscview
+msgctxt "proclocalize.lngscview"
+msgid "View"
+msgstr "Görünüm"
+
+#: proclocalize.lngscwaveform
+msgctxt "proclocalize.lngscwaveform"
+msgid "Timeline"
+msgstr "Zaman Çizelgesi"
+
+#: proclocalize.lngscxml
+msgid "XML"
+msgstr "XML"
+
+#: proclocalize.lngseanalyzingfile
+msgid "Analyzing file..."
+msgstr "Dosya analiz ediliyor..."
+
+#: proclocalize.lngsecodec
+msgctxt "proclocalize.lngsecodec"
+msgid "Format"
+msgstr "Format"
+
+#: proclocalize.lngseechangelist
+msgid "Do you want to see the changelog?"
+msgstr "Değişiklik günlüğünü görmek ister misiniz?"
+
+#: proclocalize.lngseid
+msgid "ID"
+msgstr "ID"
+
+#: proclocalize.lngsekind
+msgid "Type"
+msgstr "Tür"
+
+#: proclocalize.lngselanguage
+msgctxt "proclocalize.lngselanguage"
+msgid "Language"
+msgstr "Dil"
+
+#: proclocalize.lngselectencodingtouse
+msgid "Select encoding:"
+msgstr "Kodlamayı seçin:"
+
+#: proclocalize.lngselectfpstouse
+msgid "Select FPS to use:"
+msgstr "Kullanılacak FPS'yi seçin:"
+
+#: proclocalize.lngselectsheettouse
+msgid "Select sheet to use:"
+msgstr "Kullanılacak sayfayı seçin:"
+
+#: proclocalize.lngselecttracktouse
+msgid "Select the track to use:"
+msgstr "Kullanılacak izi seçin:"
+
+#: proclocalize.lngseoutput
+msgid "Output"
+msgstr "Çıktı"
+
+#: proclocalize.lngshifttimeless
+#, object-pascal-format
+msgctxt "proclocalize.lngshifttimeless"
+msgid "Shift %dms less"
+msgstr "%dms geri kaydır"
+
+#: proclocalize.lngshifttimemore
+#, object-pascal-format
+msgctxt "proclocalize.lngshifttimemore"
+msgid "Shift %dms more"
+msgstr "%dms ileri kaydır"
+
+#: proclocalize.lngshortcutinuse
+#, object-pascal-format
+msgid "Shortcut currently used in “%s”."
+msgstr "Kısayol şu anda “%s” içinde kullanılıyor."
+
+#: proclocalize.lngsourcemodewarning
+msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
+msgstr "Kaynak moduna geçmek formatı “Tero Subtitler” olarak değiştirecektir, aksi takdirde kaydedilmemiş çeviriler kaybolacaktır."
+
+#: proclocalize.lngspcurrentline
+#, object-pascal-format
+msgid "# %d"
+msgstr "# %d"
+
+#: proclocalize.lngspellcheckfinished
+msgid "Spell check finished."
+msgstr "Yazım denetimi tamamlandı."
+
+#: proclocalize.lngssappearance
+msgid "Appearance"
+msgstr "Görünüm"
+
+#: proclocalize.lngssautomode
+msgid "Automatic"
+msgstr "Otomatik"
+
+#: proclocalize.lngssblockmode
+msgid "Block"
+msgstr "Blok"
+
+#: proclocalize.lngssconventions
+msgctxt "proclocalize.lngssconventions"
+msgid "Conventions"
+msgstr "Sözleşmeler / Kurallar"
+
+#: proclocalize.lngssdarkmode
+msgid "Dark mode"
+msgstr "Karanlık mod"
+
+#: proclocalize.lngssfiletypeassociations
+msgid "File types"
+msgstr "Dosya türleri"
+
+#: proclocalize.lngssframes
+msgctxt "proclocalize.lngssframes"
+msgid "Frames"
+msgstr "Kareler"
+
+#: proclocalize.lngssgeneral
+msgctxt "proclocalize.lngssgeneral"
+msgid "General"
+msgstr "Genel"
+
+#: proclocalize.lngsslightmode
+msgid "Light mode"
+msgstr "Aydınlık mod"
+
+#: proclocalize.lngsslistmode
+msgid "List"
+msgstr "Liste"
+
+#: proclocalize.lngssmilliseconds
+msgctxt "proclocalize.lngssmilliseconds"
+msgid "Milliseconds"
+msgstr "Milisaniye"
+
+#: proclocalize.lngssmpv
+msgid "Media player"
+msgstr "Medya oynatıcı"
+
+#: proclocalize.lngssshortcutnone
+msgid "None"
+msgstr "Yok"
+
+#: proclocalize.lngssshortcuts
+msgid "Shortcuts"
+msgstr "Kısayollar"
+
+#: proclocalize.lngsstools
+msgctxt "proclocalize.lngsstools"
+msgid "Tools"
+msgstr "Araçlar"
+
+#: proclocalize.lngstcharacterspersecondaverage
+#, object-pascal-format
+msgid "Characters per second average: %.2f"
+msgstr "Saniye başına ortalama karakter: %.2f"
+
+#: proclocalize.lngstdurationaverage
+#, object-pascal-format
+msgid "Duration average: %s"
+msgstr "Ortalama süre: %s"
+
+#: proclocalize.lngstentrieswithouttext
+#, object-pascal-format
+msgid "Entries without text: %d"
+msgstr "Metin içermeyen girişler: %d"
+
+#: proclocalize.lngstgapaverage
+#, object-pascal-format
+msgid "Gap average: %s"
+msgstr "Ortalama boşluk: %s"
+
+#: proclocalize.lngstlinelengthaverage
+#, object-pascal-format
+msgid "Line length average: %d"
+msgstr "Ortalama satır uzunluğu: %d"
+
+#: proclocalize.lngstlongestcharacterspersecond
+#, object-pascal-format
+msgid "Longest characters per second: %.2f (#%d)"
+msgstr "En yüksek saniye başı karakter: %.2f (#%d)"
+
+#: proclocalize.lngstlongestduration
+#, object-pascal-format
+msgid "Longest duration: %s (#%d)"
+msgstr "En uzun süre: %s (#%d)"
+
+#: proclocalize.lngstlongestgap
+#, object-pascal-format
+msgid "Longest gap: %s (#%d)"
+msgstr "En uzun boşluk: %s (#%d)"
+
+#: proclocalize.lngstlongestline
+#, object-pascal-format
+msgid "Longest line: %d (#%d)"
+msgstr "En uzun satır: %d (#%d)"
+
+#: proclocalize.lngstlongestwordsperminute
+#, object-pascal-format
+msgid "Longest words per minute: %.2f (#%d)"
+msgstr "En yüksek dakika başı kelime: %.2f (#%d)"
+
+#: proclocalize.lngstnumberofcharacters
+#, object-pascal-format
+msgid "Number of characters: %d"
+msgstr "Karakter sayısı: %d"
+
+#: proclocalize.lngstnumberofentries
+#, object-pascal-format
+msgid "Number of entries: %d"
+msgstr "Giriş sayısı: %d"
+
+#: proclocalize.lngstnumberofwords
+#, object-pascal-format
+msgid "Number of words: %d"
+msgstr "Kelime sayısı: %d"
+
+#: proclocalize.lngstshortestcharacterspersecond
+#, object-pascal-format
+msgid "Shortest characters per second: %.2f (#%d)"
+msgstr "En düşük saniye başı karakter: %.2f (#%d)"
+
+#: proclocalize.lngstshortestduration
+#, object-pascal-format
+msgid "Shortest duration: %s (#%d)"
+msgstr "En kısa süre: %s (#%d)"
+
+#: proclocalize.lngstshortestgap
+#, object-pascal-format
+msgid "Shortest gap: %s (#%d)"
+msgstr "En kısa boşluk: %s (#%d)"
+
+#: proclocalize.lngstshortestline
+#, object-pascal-format
+msgid "Shortest line: %d (#%d)"
+msgstr "En kısa satır: %d (#%d)"
+
+#: proclocalize.lngstshortestwordsperminute
+#, object-pascal-format
+msgid "Shortest words per minute: %.2f (#%d)"
+msgstr "En düşük dakika başı kelime: %.2f (#%d)"
+
+#: proclocalize.lngsttotalcharacterspersecond
+#, object-pascal-format
+msgid "Total characters per second: %.2f"
+msgstr "Toplam saniye başı karakter: %.2f"
+
+#: proclocalize.lngsttotalduration
+#, object-pascal-format
+msgid "Total duration: %s"
+msgstr "Toplam süre: %s"
+
+#: proclocalize.lngstwordsperminuteaverage
+#, object-pascal-format
+msgid "Words per minute average: %.2f"
+msgstr "Dakika başına ortalama kelime: %.2f"
+
+#: proclocalize.lngsubtitlehaserrorstofix
+msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
+msgstr "Mevcut altyazı seti çözülmesi önerilen hatalar içeriyor, ancak yine de kaydedilebilir."
+
+#: proclocalize.lngsubtitlespecificationerror
+msgid "The current subtitles do not meet the specifications of the format to be saved."
+msgstr "Mevcut altyazılar, kaydedilecek formatın özelliklerini karşılamıyor."
+
+#: proclocalize.lngsubtitlespecificationerroralign
+msgid "There are entries with vertical alignment which are not allowed."
+msgstr "İzin verilmeyen dikey hizalamaya sahip girişler var."
+
+#: proclocalize.lngsubtitlespecificationerrorbr
+msgid "There are entries which exceed the line break."
+msgstr "Satır sonu sınırını aşan girişler var."
+
+#: proclocalize.lngsubtitlespecificationerrorfps
+msgid "Current frame rate does not match."
+msgstr "Mevcut kare hızı eşleşmiyor."
+
+#: proclocalize.lngsuccess
+msgid "Success."
+msgstr "Başarılı."
+
+#: proclocalize.lngsupportedsites
+msgid "Supported sites"
+msgstr "Desteklenen siteler"
+
+#: proclocalize.lngteexpand
+msgctxt "proclocalize.lngteexpand"
+msgid "Expand"
+msgstr "Genişlet"
+
+#: proclocalize.lngtefinaltime
+msgctxt "proclocalize.lngtefinaltime"
+msgid "Final time"
+msgstr "Bitiş zamanı"
+
+#: proclocalize.lngteindex
+msgctxt "proclocalize.lngteindex"
+msgid "Index"
+msgstr "Dizin"
+
+#: proclocalize.lngteinitialtime
+msgctxt "proclocalize.lngteinitialtime"
+msgid "Initial time"
+msgstr "Başlangıç zamanı"
+
+#: proclocalize.lngtereduce
+msgctxt "proclocalize.lngtereduce"
+msgid "Reduce"
+msgstr "Daralt"
+
+#: proclocalize.lngtetext
+msgctxt "proclocalize.lngtetext"
+msgid "Text"
+msgstr "Metin"
+
+#: proclocalize.lngtetime
+msgctxt "proclocalize.lngtetime"
+msgid "Time"
+msgstr "Zaman"
+
+#: proclocalize.lngtextformatted
+msgid "Export formatted text?"
+msgstr "Biçimlendirilmiş metin dışa aktarılsın mı?"
+
+#: proclocalize.lngtranscribing
+msgid "Transcribing..."
+msgstr "Metne dönüştürülüyor..."
+
+#: proclocalize.lngtranscriptionmodeexit
+msgid "Exiting transcription mode will lose any unsaved changes."
+msgstr "Yazım modundan çıkmak kaydedilmemiş değişikliklerin kaybolmasına neden olur."
+
+#: proclocalize.lngtranslated
+msgctxt "proclocalize.lngtranslated"
+msgid "Translated"
+msgstr "Çevrildi"
+
+#: proclocalize.lngtranslationfilechanged
+msgid "Translation file has not been saved."
+msgstr "Çeviri dosyası kaydedilmedi."
+
+#: proclocalize.lngttip1
+#, object-pascal-format
+msgid "Tip: Use <%s/%s> to go to previous/next entry"
+msgstr "İpucu: Önceki/sonraki girişe gitmek için <%s/%s> kullanın"
+
+#: proclocalize.lngttip2
+#, object-pascal-format
+msgid "Tip: Use <%s> for a web word reference"
+msgstr "İpucu: Web kelime referansı için <%s> kullanın"
+
+#: proclocalize.lngttip3
+#, object-pascal-format
+msgid "Tip: Use <%s> dock/undock media window"
+msgstr "İpucu: Medya penceresini sabitlemek/ayırmak için <%s> kullanın"
+
+#: proclocalize.lngttip4
+#, object-pascal-format
+msgid "Tip: Use <%s> dock/undock waveform window"
+msgstr "İpucu: Dalga formu penceresini sabitlemek/ayırmak için <%s> kullanın"
+
+#: proclocalize.lngunabletoload
+msgid "Error loading file, unrecognized format."
+msgstr "Dosya yükleme hatası, tanınmayan format."
+
+#: proclocalize.lngurl
+msgid "URL"
+msgstr "URL"
+
+#: proclocalize.lngvdgeneratingtts
+msgid "Generating text to speech..."
+msgstr "Metinden sese dönüştürülüyor..."
+
+#: proclocalize.lngvdgeneratingvideo
+msgid "Generating video dubbing..."
+msgstr "Video dublajı oluşturuluyor..."
+
+#: proclocalize.lngvdquotaexceeded
+msgid "We couldn't process this request because you've exceeded your quota."
+msgstr "Kotanızı aştığınız için bu istek işlenemedi."
+
+#: proclocalize.lngvdvoice
+msgid "Voice"
+msgstr "Ses"
+
+#: proclocalize.lngviaudiotracks
+#, object-pascal-format
+msgid "Audio tracks: %d"
+msgstr "Ses izleri: %d"
+
+#: proclocalize.lngvideoerroraoinitfailed
+msgid "Initializing the audio output failed."
+msgstr "Ses çıkışı başlatılamadı."
+
+#: proclocalize.lngvideoerrornothingtoplay
+msgid "There was no audio or video stream to play."
+msgstr "Oynatılacak ses veya video akışı bulunamadı."
+
+#: proclocalize.lngvideoerrorvoinitfailed
+msgid "Initializing the video output failed."
+msgstr "Video çıkışı başlatılamadı."
+
+#: proclocalize.lngvideogenerationfailed
+msgid "Video generation failed."
+msgstr "Video oluşturma başarısız oldu."
+
+#: tfrmadjustsubtitle.caption
+msgid "Adjust subtitle"
+msgstr "Altyazıyı ayarla"
+
+#: tfrmadjustsubtitle.lblfirstspoken.caption
+msgid "First spoken line"
+msgstr "İlk konuşulan satır"
+
+#: tfrmadjustsubtitle.lblindex.caption
+msgid "Subtitle #"
+msgstr "Altyazı #"
+
+#: tfrmadjustsubtitle.lbllastspoken.caption
+msgid "Last spoken line"
+msgstr "Son konuşulan satır"
+
+#: tfrmadjustsubtitle.rdoadvanced.caption
+msgid "Advanced"
+msgstr "Gelişmiş"
+
+#: tfrmadjustsubtitle.rdosimple.caption
+msgid "Simple"
+msgstr "Basit"
+
+#: tfrmaudiototext.chktranslate.caption
+msgid "Translate to Еnglish"
+msgstr "İngilizceye çevir"
+
+#: tfrmaudiototext.lblengine.caption
+msgid "Engine"
+msgstr "Motor"
+
+#: tfrmaudiototext.lbllanguage.caption
+msgctxt "tfrmaudiototext.lbllanguage.caption"
+msgid "Language"
+msgstr "Dil"
+
+#: tfrmaudiototext.lblmodel.caption
+msgid "Model"
+msgstr "Model"
+
+#: tfrmaudiototext.lbltrack.caption
+msgid "Track"
+msgstr "İz"
+
+#: tfrmaudiototext.rbnaddsubtitleswhiletranscribing.caption
+msgid "Add subtitles while transcribing"
+msgstr "Metne dönüştürürken altyazıları ekle"
+
+#: tfrmaudiototext.rbnloadsubtitlesaftertranscript.caption
+msgid "Load subtitles after transcription"
+msgstr "Metne dönüştürme bittikten sonra altyazıları yükle"
+
+#: tfrmaudiototextmodel.caption
+msgid "Audio to text model"
+msgstr "Ses-metin dönüşüm modeli"
+
+#: tfrmautomaticdurations.caption
+msgid "Automatic durations"
+msgstr "Otomatik süreler"
+
+#: tfrmautomaticdurations.lblchars.caption
+msgid "per character"
+msgstr "karakter başına"
+
+#: tfrmautomaticdurations.lblcondition.caption
+msgid "Apply if:"
+msgstr "Şu durumda uygula:"
+
+#: tfrmautomaticdurations.lblline.caption
+msgid "per line"
+msgstr "satır başına"
+
+#: tfrmautomaticdurations.lblscope.caption
+msgctxt "tfrmautomaticdurations.lblscope.caption"
+msgid "Scope:"
+msgstr "Kapsam:"
+
+#: tfrmautomaticdurations.lblword.caption
+msgid "per word"
+msgstr "kelime başına"
+
+#: tfrmautomaticdurations.rbnallthesubtitles.caption
+msgctxt "tfrmautomaticdurations.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Tüm girişler"
+
+#: tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Seçilen girişten itibaren"
+
+#: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Sadece seçilen girişler"
+
+#: tfrmbatchconvert.caption
+msgid "Batch convert"
+msgstr "Toplu dönüştür"
+
+#: tfrmbatchconvert.lblencoding.caption
+msgctxt "tfrmbatchconvert.lblencoding.caption"
+msgid "Encoding"
+msgstr "Kodlama"
+
+#: tfrmbatchconvert.lblformat.caption
+msgctxt "tfrmbatchconvert.lblformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmbatchconvert.lblfromfps.caption
+msgid "Input FPS"
+msgstr "Giriş FPS"
+
+#: tfrmbatchconvert.lbloutput.caption
+msgctxt "tfrmbatchconvert.lbloutput.caption"
+msgid "Output:"
+msgstr "Çıktı:"
+
+#: tfrmbatchconvert.lbloutputfolder.caption
+msgctxt "tfrmbatchconvert.lbloutputfolder.caption"
+msgid "Folder"
+msgstr "Klasör"
+
+#: tfrmbatchconvert.lbltofps.caption
+msgid "Target FPS"
+msgstr "Hedef FPS"
+
+#: tfrmcharactermap.btninsert.caption
+msgid "Insert"
+msgstr "Ekle"
+
+#: tfrmcharactermap.caption
+msgid "Character Map"
+msgstr "Karakter Haritası"
+
+#: tfrmcharactermap.lblfavorites.caption
+msgid "Favorites"
+msgstr "Sık kullanılanlar"
+
+#: tfrmcharactermap.lblunicoderange.caption
+msgid "Range"
+msgstr "Aralık"
+
+#: tfrmcompare.caption
+msgid "Compare"
+msgstr "Karşılaştır"
+
+#: tfrmconvertcase.caption
+msgid "Convert case"
+msgstr "Harf durumunu değiştir"
+
+#: tfrmconvertcase.lblscope.caption
+msgctxt "tfrmconvertcase.lblscope.caption"
+msgid "Scope:"
+msgstr "Kapsam:"
+
+#: tfrmconvertcase.rbnallthesubtitles.caption
+msgctxt "tfrmconvertcase.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Tüm girişler"
+
+#: tfrmconvertcase.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmconvertcase.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "Seçilen girişten itibaren"
+
+#: tfrmconvertcase.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Sadece seçilen girişler"
+
+#: tfrmconvertcase.rdoinversetype.caption
+msgid "iNVERSE tYPE"
+msgstr "tERS dURUM"
+
+#: tfrmconvertcase.rdolowercase.caption
+msgid "lowercase"
+msgstr "küçük harf"
+
+#: tfrmconvertcase.rdosentencetype.caption
+msgid "Sentence type"
+msgstr "Cümle düzeni"
+
+#: tfrmconvertcase.rdotitletype.caption
+msgid "Title Type"
+msgstr "Başlık Düzeni"
+
+#: tfrmconvertcase.rdouppercase.caption
+msgid "UPPERCASE"
+msgstr "BÜYÜK HARF"
+
+#: tfrmcustomimageformat.caption
+msgid "Custom image format"
+msgstr "Özel görüntü formatı"
+
+#: tfrmcustomimageformat.lblfolder.caption
+msgctxt "tfrmcustomimageformat.lblfolder.caption"
+msgid "Folder"
+msgstr "Klasör"
+
+#: tfrmcustomimageformat.lblfont.caption
+msgctxt "tfrmcustomimageformat.lblfont.caption"
+msgid "Font"
+msgstr "Yazı Tipi"
+
+#: tfrmcustomimageformat.lblfontsize.caption
+msgctxt "tfrmcustomimageformat.lblfontsize.caption"
+msgid "Size"
+msgstr "Boyut"
+
+#: tfrmcustomimageformat.lblfps.caption
+msgctxt "tfrmcustomimageformat.lblfps.caption"
+msgid "FPS"
+msgstr "FPS"
+
+#: tfrmcustomimageformat.lblimagesize.caption
+msgid "Image size"
+msgstr "Görüntü boyutu"
+
+#: tfrmcustomimageformat.lblprefix.caption
+msgid "Prefix"
+msgstr "Önek"
+
+#: tfrmcustomimageformat.lblsafearea.caption
+msgctxt "tfrmcustomimageformat.lblsafearea.caption"
+msgid "Safe area pixels (left, top, right, bottom)"
+msgstr "Güvenli alan pikselleri (sol, üst, sağ, alt)"
+
+#: tfrmcustomimageformat.lblscript.caption
+msgctxt "tfrmcustomimageformat.lblscript.caption"
+msgid "Script"
+msgstr "Kod/Betik"
+
+#: tfrmcustomimageformat.lblx.caption
+msgctxt "tfrmcustomimageformat.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmcustommessagedlg.lblmessage.caption
+msgid "Message"
+msgstr "Mesaj"
+
+#: tfrmcustomquestiondlg.lblquestion.caption
+msgid "Question"
+msgstr "Soru"
+
+#: tfrmcustomquestiondlg.lbltitle.caption
+msgctxt "tfrmcustomquestiondlg.lbltitle.caption"
+msgid "Title"
+msgstr "Başlık"
+
+#: tfrmcustomtextformat.caption
+msgid "Custom text format"
+msgstr "Özel metin formatı"
+
+#: tfrmcustomtextformat.lblextension.caption
+msgid "Extension"
+msgstr "Uzantı"
+
+#: tfrmcustomtextformat.lblnewlinechar.caption
+msgid "New line char"
+msgstr "Yeni satır karakteri"
+
+#: tfrmcustomtextformat.lblseparatorchar.caption
+msgid "Separator"
+msgstr "Ayırıcı"
+
+#: tfrmcustomtextformat.lbltimeformat.caption
+msgid "Time format"
+msgstr "Zaman formatı"
+
+#: tfrmdelay.caption
+msgid "Set delay"
+msgstr "Gecikme ayarla"
+
+#: tfrmdownload.caption
+msgctxt "tfrmdownload.caption"
+msgid "Downloading"
+msgstr "İndiriliyor"
+
+#: tfrmdownload.lblelapsed.caption
+msgid "Elapsed:"
+msgstr "Geçen süre:"
+
+#: tfrmdownload.lblfile.caption
+msgid "File:"
+msgstr "Dosya:"
+
+#: tfrmdownload.lblreceived.caption
+msgid "Received:"
+msgstr "Alınan:"
+
+#: tfrmdownload.lblremaining.caption
+msgid "Remaining:"
+msgstr "Kalan:"
+
+#: tfrmdownload.lblspeed.caption
+msgid "Speed:"
+msgstr "Hız:"
+
+#: tfrmdurationlimits.caption
+msgid "Duration limits"
+msgstr "Süre sınırları"
+
+#: tfrmdurationlimits.chksetmaxduration.caption
+msgid "Set maximum duration (ms)"
+msgstr "Maksimum süreyi ayarla (ms)"
+
+#: tfrmdurationlimits.chksetminduration.caption
+msgid "Set minimum duration (ms)"
+msgstr "Minimum süreyi ayarla (ms)"
+
+#: tfrmexportsup.caption
+msgid "Blu-ray SUP"
+msgstr "Blu-ray SUP"
+
+#: tfrmfindandreplace.btnfindprev.caption
+msgid "Find prev"
+msgstr "Öncekini bul"
+
+#: tfrmfindandreplace.btnreplaceall.caption
+msgid "Replace all"
+msgstr "Tümünü değiştir"
+
+#: tfrmfindandreplace.caption
+msgid "Find and replace"
+msgstr "Bul ve değiştir"
+
+#: tfrmfindandreplace.chkcasesensitive.caption
+msgid "Case-sensitive"
+msgstr "Büyük/küçük harf duyarlı"
+
+#: tfrmfindandreplace.chkpreservecaseonreplace.caption
+msgid "Preserve case on replace"
+msgstr "Değiştirirken harf durumunu koru"
+
+#: tfrmfindandreplace.chkregularexpression.caption
+msgid "Use regular expression"
+msgstr "Düzenli ifade (Regex) kullan"
+
+#: tfrmfindandreplace.chkwholeword.caption
+msgid "Whole word"
+msgstr "Tam kelime"
+
+#: tfrmfindandreplace.lbloptions.caption
+msgid "Options:"
+msgstr "Seçenekler:"
+
+#: tfrmfindandreplace.lbltexttofind.caption
+msgid "Text to find:"
+msgstr "Aranacak metin:"
+
+#: tfrmfixsubtitles.caption
+msgid "Fix subtitles"
+msgstr "Altyazıları düzelt"
+
+#: tfrmfixsubtitles.lblconvention.caption
+msgid "Convention"
+msgstr "Kural/Sözleşme"
+
+#: tfrmfixsubtitles.lblocr.caption
+msgid "OCR Script"
+msgstr "OCR Betiği"
+
+#: tfrmfixsubtitles.mnudeselectall.caption
+msgid "Deselect all"
+msgstr "Seçimi kaldır"
+
+#: tfrmformatproperties.chkvttusextimestamp.caption
+msgid "Use X-TIMESTAMP-MAP header"
+msgstr "X-TIMESTAMP-MAP başlığını kullan"
+
+#: tfrmformatproperties.chkvttwritecueidentifiers.caption
+msgid "Write cue identifiers"
+msgstr "Giriş (cue) tanımlayıcılarını yaz"
+
+#: tfrmformatproperties.lblasfontcolor.caption
+msgid "Font color"
+msgstr "Yazı tipi rengi"
+
+#: tfrmformatproperties.lblasfontname.caption
+msgid "Font name"
+msgstr "Yazı tipi adı"
+
+#: tfrmformatproperties.lblasfontsize.caption
+msgid "Font size"
+msgstr "Yazı tipi boyutu"
+
+#: tfrmformatproperties.lblaspositionx.caption
+msgid "Position X"
+msgstr "X Pozisyonu"
+
+#: tfrmformatproperties.lblaspositiony.caption
+msgid "Position Y"
+msgstr "Y Pozisyonu"
+
+#: tfrmformatproperties.lblcavenacomment.caption
+msgid "Comments"
+msgstr "Yorumlar"
+
+#: tfrmformatproperties.lblcavenaoriginaltitle.caption
+msgid "Original title"
+msgstr "Orijinal başlık"
+
+#: tfrmformatproperties.lblcavenatcstart.caption
+msgid "Start timecode"
+msgstr "Başlangıç zaman kodu"
+
+#: tfrmformatproperties.lblcavenatranslatedtitle.caption
+msgid "Translated title"
+msgstr "Çevrilmiş başlık"
+
+#: tfrmformatproperties.lblcavenatranslator.caption
+msgid "Translator"
+msgstr "Çevirmen"
+
+#: tfrmformatproperties.lbldvdauthor.caption
+msgid "Author"
+msgstr "Yazar"
+
+#: tfrmformatproperties.lbldvdweb.caption
+msgid "Web"
+msgstr "Web"
+
+#: tfrmformatproperties.lblebucct.caption
+msgid "Character code table"
+msgstr "Karakter kod tablosu"
+
+#: tfrmformatproperties.lblebuco.caption
+msgid "Country origin"
+msgstr "Menşei ülke"
+
+#: tfrmformatproperties.lblebucpn.caption
+msgid "Code page number"
+msgstr "Kod sayfası numarası"
+
+#: tfrmformatproperties.lblebudfc.caption
+msgid "Disk format code"
+msgstr "Disk format kodu"
+
+#: tfrmformatproperties.lblebudsc.caption
+msgid "Display standard code"
+msgstr "Görüntüleme standart kodu"
+
+#: tfrmformatproperties.lblebulc.caption
+msgid "Language code"
+msgstr "Dil kodu"
+
+#: tfrmformatproperties.lblebundc.caption
+msgid "Max chars"
+msgstr "Maks. karakter"
+
+#: tfrmformatproperties.lblebundr.caption
+msgid "Max rows"
+msgstr "Maks. satır"
+
+#: tfrmformatproperties.lblvttlocal.caption
+msgid "Cue time:"
+msgstr "Giriş (cue) zamanı:"
+
+#: tfrmformatproperties.lblvttmpegts.caption
+msgid "MPEG-2 time:"
+msgstr "MPEG-2 zamanı:"
+
+#: tfrmgenerateblankvideo.btngenerate.caption
+msgid "Generate..."
+msgstr "Oluştur..."
+
+#: tfrmgenerateblankvideo.caption
+msgid "Generate blank video"
+msgstr "Boş video oluştur"
+
+#: tfrmgenerateblankvideo.chkgeneratetone.caption
+msgid "1 kHz test tone"
+msgstr "1 kHz test tonu"
+
+#: tfrmgenerateblankvideo.rdosmptecolorbars.caption
+msgid "SMPTE color bars"
+msgstr "SMPTE renk çubukları"
+
+#: tfrmgenerateblankvideo.rdosolidcolor.caption
+msgid "Solid color"
+msgstr "Düz renk"
+
+#: tfrmgeneratevideo.caption
+msgid "Generate video"
+msgstr "Video oluştur"
+
+#: tfrmgeneratevideo.chkbox.caption
+msgid "Box"
+msgstr "Kutu"
+
+#: tfrmgeneratevideo.chkcrop.caption
+msgid "Crop"
+msgstr "Kırp"
+
+#: tfrmgeneratevideo.chkflip.caption
+msgid "Flip"
+msgstr "Çevir"
+
+#: tfrmgeneratevideo.chkreencodeaudio.caption
+msgid "Re-encode"
+msgstr "Yeniden kodla"
+
+#: tfrmgeneratevideo.chkrotate.caption
+msgid "Rotate"
+msgstr "Döndür"
+
+#: tfrmgeneratevideo.lblaudiochannels.caption
+msgid "Channels"
+msgstr "Kanallar"
+
+#: tfrmgeneratevideo.lblbitrate.caption
+msgid "Bit rate"
+msgstr "Bit hızı"
+
+#: tfrmgeneratevideo.lblcroptop.caption
+msgid "Top"
+msgstr "Üst"
+
+#: tfrmgeneratevideo.lblcutfrom.caption
+msgid "From"
+msgstr "Başlangıç"
+
+#: tfrmgeneratevideo.lblcutto.caption
+msgid "To"
+msgstr "Bitiş"
+
+#: tfrmgeneratevideo.lblsamplerate.caption
+msgid "Sample rate"
+msgstr "Örnekleme hızı"
+
+#: tfrmgeneratevideo.lblvideores.caption
+msgid "Resolution"
+msgstr "Çözünürlük"
+
+#: tfrmgeneratevideo.lblvideosubtype.caption
+msgid "Subtype"
+msgstr "Alt tür"
+
+#: tfrmgoto.lblnumber.caption
+msgid "Entry:"
+msgstr "Giriş:"
+
+#: tfrmgototime.lbltime.caption
+msgid "Time:"
+msgstr "Zaman:"
+
+#: tfrmimportsup.btnocr.caption
+msgid "OCR"
+msgstr "OCR"
+
+#: tfrmimportsup.caption
+msgid "Import Blu-ray SUP"
+msgstr "Blu-ray SUP İçe Aktar"
+
+#: tfrmimportsup.lbllanguage.caption
+msgid "Language:"
+msgstr "Dil:"
+
+#: tfrmimportsuplanguages.caption
+msgid "Tesseract languages"
+msgstr "Tesseract dilleri"
+
+#: tfrmmain.actaddnote.caption
+msgid "Add note..."
+msgstr "Not ekle..."
+
+#: tfrmmain.actaddquotationmarks.caption
+msgid "Add quotation marks"
+msgstr "Tırnak işareti ekle"
+
+#: tfrmmain.actadjustsubtitle.caption
+msgid "Adjust subtitle..."
+msgstr "Altyazıyı ayarla..."
+
+#: tfrmmain.actaudiofilterdialoguenhance.caption
+msgid "Dialogue enhance"
+msgstr "Diyalog iyileştirme"
+
+#: tfrmmain.actaudiofilterspeechnormalizer.caption
+msgid "Speech normalizer"
+msgstr "Konuşma normalleştirici"
+
+#: tfrmmain.actaudiofiltersurround.caption
+msgid "Surround"
+msgstr "Surround (Çevresel Ses)"
+
+#: tfrmmain.actautomaticduration.caption
+msgid "Automatic duration..."
+msgstr "Otomatik süre..."
+
+#: tfrmmain.actcharactermap.caption
+msgid "Character Map..."
+msgstr "Karakter Haritası..."
+
+#: tfrmmain.actcheckforupdates.caption
+msgid "Check for updates..."
+msgstr "Güncellemeleri denetle..."
+
+#: tfrmmain.actcleartext.caption
+msgid "Clear text"
+msgstr "Metni temizle"
+
+#: tfrmmain.actclosemedia.caption
+msgid "Close media"
+msgstr "Medyayı kapat"
+
+#: tfrmmain.actclosesubtitle.caption
+msgid "Close subtitles"
+msgstr "Altyazıları kapat"
+
+#: tfrmmain.actcombineentries.caption
+msgid "Combine entries"
+msgstr "Girişleri birleştir"
+
+#: tfrmmain.actcompare.caption
+msgid "Compare..."
+msgstr "Karşılaştır..."
+
+#: tfrmmain.actconvertcase.caption
+msgid "Convert case..."
+msgstr "Harf durumunu değiştir..."
+
+#: tfrmmain.actcopyvideopostoclipboard.caption
+msgid "Copy video position to clipboard"
+msgstr "Video konumunu panoya kopyala"
+
+#: tfrmmain.actdeleteentry.caption
+msgid "Delete entries"
+msgstr "Girişleri sil"
+
+#: tfrmmain.actdeleteentry.hint
+msgid "Delete selected entries"
+msgstr "Seçilen girişleri sil"
+
+#: tfrmmain.actdeleteshotchange.caption
+msgid "Delete shot change(s)"
+msgstr "Sahne değişimlerini sil"
+
+#: tfrmmain.actdetectdialogsegments.caption
+msgid "Detect dialog segments..."
+msgstr "Diyalog bölümlerini algıla..."
+
+#: tfrmmain.actdistributeentriesevenly.caption
+msgid "Distribute entries evenly"
+msgstr "Girişleri eşit olarak dağıt"
+
+#: tfrmmain.actdivideentry.caption
+msgid "Divide entry"
+msgstr "Girişi böl"
+
+#: tfrmmain.actdurationlimits.caption
+msgid "Duration limits..."
+msgstr "Süre sınırları..."
+
+#: tfrmmain.actendcueaddoneframe.caption
+msgid "Add one frame"
+msgstr "Bir kare ekle"
+
+#: tfrmmain.actendcuesubtractoneframe.caption
+msgid "Subtract one frame"
+msgstr "Bir kare çıkar"
+
+#: tfrmmain.actexportcustomimageformat.caption
+msgid "Custom image format..."
+msgstr "Özel görüntü formatı..."
+
+#: tfrmmain.actexportcustomtextformat.caption
+msgid "Custom text format..."
+msgstr "Özel metin formatı..."
+
+#: tfrmmain.actexportmarkedsubtitles.caption
+msgid "Marked subtitles..."
+msgstr "İşaretlenmiş altyazılar..."
+
+#: tfrmmain.actexportsup.caption
+msgctxt "tfrmmain.actexportsup.caption"
+msgid "Blu-ray SUP..."
+msgstr "Blu-ray SUP..."
+
+#: tfrmmain.actexporttextonly.caption
+msgid "Text only..."
+msgstr "Sadece metin..."
+
+#: tfrmmain.actextendlengthtonext.caption
+msgid "Extend final time to next"
+msgstr "Bitiş zamanını sonrakine uzat"
+
+#: tfrmmain.actextendlengthtoprevious.caption
+msgid "Extend initial time to previous"
+msgstr "Başlangıç zamanını öncekine uzat"
+
+#: tfrmmain.actfind.caption
+msgid "Find..."
+msgstr "Bul..."
+
+#: tfrmmain.actfindprevious.caption
+msgid "Find previous"
+msgstr "Öncekini bul"
+
+#: tfrmmain.actfixrtlpunctuation.caption
+msgid "Fix punctuation"
+msgstr "Noktalamayı düzelt"
+
+#: tfrmmain.actfixsubtitles.caption
+msgid "Fix subtitles..."
+msgstr "Altyazıları düzelt..."
+
+#: tfrmmain.actfocusfinaltime.caption
+msgid "Edit final time"
+msgstr "Bitiş zamanını düzenle"
+
+#: tfrmmain.actfocusinitialtime.caption
+msgid "Edit initial time"
+msgstr "Başlangıç zamanını düzenle"
+
+#: tfrmmain.actfontbold.caption
+msgctxt "tfrmmain.actfontbold.caption"
+msgid "Bold"
+msgstr "Kalın"
+
+#: tfrmmain.actfontclear.caption
+msgctxt "tfrmmain.actfontclear.caption"
+msgid "Clear"
+msgstr "Temizle"
+
+#: tfrmmain.actfontcolor.caption
+msgid "Set current font color"
+msgstr "Mevcut yazı tipi rengini ayarla"
+
+#: tfrmmain.actfontitalic.caption
+msgctxt "tfrmmain.actfontitalic.caption"
+msgid "Italic"
+msgstr "İtalik"
+
+#: tfrmmain.actfontstrikeout.caption
+msgctxt "tfrmmain.actfontstrikeout.caption"
+msgid "Strikeout"
+msgstr "Üstü Çizili"
+
+#: tfrmmain.actfontunderline.caption
+msgctxt "tfrmmain.actfontunderline.caption"
+msgid "Underline"
+msgstr "Altı Çizili"
+
+#: tfrmmain.actformatproperties.caption
+msgctxt "tfrmmain.actformatproperties.caption"
+msgid "Format properties..."
+msgstr "Format özellikleri..."
+
+#: tfrmmain.actgenerateblankvideo.caption
+msgid "Generate blank video..."
+msgstr "Boş video oluştur..."
+
+#: tfrmmain.actgeneratevideo.caption
+msgid "Video with hardcoded subtitles..."
+msgstr "Gömülü altyazılı video..."
+
+#: tfrmmain.actgoto.caption
+msgid "Go to entry..."
+msgstr "Girişe git..."
+
+#: tfrmmain.actgotocurrententryfinaltime.caption
+msgid "Go to current entry final time"
+msgstr "Mevcut girişin bitiş zamanına git"
+
+#: tfrmmain.actgotocurrententryinitialtime.caption
+msgid "Go to current entry initial time"
+msgstr "Mevcut girişin başlangıç zamanına git"
+
+#: tfrmmain.actgotonextentryandplay.caption
+msgid "Go to next entry and play"
+msgstr "Sonraki girişe git ve oynat"
+
+#: tfrmmain.actgotopreviousentryandplay.caption
+msgid "Go to previous entry and play"
+msgstr "Önceki girişe git ve oynat"
+
+#: tfrmmain.actgototime.caption
+msgid "Go to time..."
+msgstr "Zamana git..."
+
+#: tfrmmain.actimportsubtitles.caption
+msgid "Subtitles..."
+msgstr "Altyazılar..."
+
+#: tfrmmain.actinsertcurrenttime.caption
+msgid "Insert current time"
+msgstr "Mevcut zamanı ekle"
+
+#: tfrmmain.actinsertentry.caption
+msgid "Insert entry"
+msgstr "Giriş ekle"
+
+#: tfrmmain.actinsertentry.hint
+msgid "Insert a new entry after the current entry"
+msgstr "Mevcut girişten sonra yeni bir giriş ekle"
+
+#: tfrmmain.actinsertentrybefore.caption
+msgid "Insert entry before"
+msgstr "Öncesine giriş ekle"
+
+#: tfrmmain.actinsertentrybefore.hint
+msgctxt "tfrmmain.actinsertentrybefore.hint"
+msgid "Insert entry before the current entry"
+msgstr "Mevcut girişten önce bir giriş ekle"
+
+#: tfrmmain.actinsertshotchange.caption
+msgid "Insert shot change"
+msgstr "Sahne değişimi ekle"
+
+#: tfrmmain.actjumptonextempty.caption
+msgid "Jump to next without text"
+msgstr "Bir sonraki metinsiz girişe atla"
+
+#: tfrmmain.actjumptonextmarked.caption
+msgid "Jump to next marked"
+msgstr "Bir sonraki işaretli girişe atla"
+
+#: tfrmmain.actjumptonextnote.caption
+msgid "Jump to next note"
+msgstr "Bir sonraki nota atla"
+
+#: tfrmmain.actjumptonextshotchange.caption
+msgid "Jump to next shot change"
+msgstr "Bir sonraki sahne değişimine atla"
+
+#: tfrmmain.actmergewithnext.caption
+msgid "Merge with next"
+msgstr "Sonrakiyle birleştir"
+
+#: tfrmmain.actmergewithprevious.caption
+msgid "Merge with previous"
+msgstr "Öncekiyle birleştir"
+
+#: tfrmmain.actmodifyselection.caption
+msgid "Modify selection..."
+msgstr "Seçimi değiştir..."
+
+#: tfrmmain.actmultiplereplace.caption
+msgid "Multiple replace..."
+msgstr "Çoklu değiştir..."
+
+#: tfrmmain.actpanandscan.caption
+msgid "Pan-and-scan"
+msgstr "Kaydır ve tara (Pan-and-scan)"
+
+#: tfrmmain.actplaycurrententry.caption
+msgid "Play current entry"
+msgstr "Mevcut girişi oynat"
+
+#: tfrmmain.actpullfirstlinefromnextentry.caption
+msgid "Pull the first line from the next entry"
+msgstr "Sonraki girişin ilk satırını çek"
+
+#: tfrmmain.actpulllastlinefrompreviousentry.caption
+msgid "Pull the last line from the previous entry"
+msgstr "Önceki girişin son satırını çek"
+
+#: tfrmmain.actpushfirstlinetopreviousentry.caption
+msgid "Push the first line to the previous entry"
+msgstr "İlk satırı önceki girişe gönder"
+
+#: tfrmmain.actpushlastlinetonextentry.caption
+msgid "Push the last line to the next entry"
+msgstr "Son satırı sonraki girişe gönder"
+
+#: tfrmmain.actpushworddown.caption
+msgid "Push the last word of the current line down"
+msgstr "Mevcut satırın son kelimesini aşağı kaydır"
+
+#: tfrmmain.actpushwordtonextentry.caption
+msgid "Push the last word to the next entry"
+msgstr "Son kelimeyi sonraki girişe gönder"
+
+#: tfrmmain.actpushwordtopreviousentry.caption
+msgid "Push the first word to the previous entry"
+msgstr "İlk kelimeyi önceki girişe gönder"
+
+#: tfrmmain.actpushwordup.caption
+msgid "Push the first word of the current line up"
+msgstr "Mevcut satırın ilk kelimesini yukarı kaydır"
+
+#: tfrmmain.actqualitycheck.caption
+msgid "Quality check..."
+msgstr "Kalite kontrol..."
+
+#: tfrmmain.actreadtextsfromfile.caption
+msgid "Read text from file..."
+msgstr "Dosyadan metin oku..."
+
+#: tfrmmain.actreadtimingsfromfile.caption
+msgid "Read timings from file..."
+msgstr "Dosyadan zamanlamaları oku..."
+
+#: tfrmmain.actremovelinefromentry.caption
+msgid "Remove line from entry..."
+msgstr "Girişten satırı kaldır..."
+
+#: tfrmmain.actremoveunicodecontrolchars.caption
+msgid "Remove Unicode control characters"
+msgstr "Unicode kontrol karakterlerini kaldır"
+
+#: tfrmmain.actreplace.caption
+msgid "Replace..."
+msgstr "Değiştir..."
+
+#: tfrmmain.actrestorebackup.caption
+msgid "Restore backup..."
+msgstr "Yedeği geri yükle..."
+
+#: tfrmmain.actreversetext.caption
+msgid "Reverse text"
+msgstr "Metni ters çevir"
+
+#: tfrmmain.actroundtimes.caption
+msgid "Round times..."
+msgstr "Zamanları yuvarla..."
+
+#: tfrmmain.actsaveproject.caption
+msgid "Save project..."
+msgstr "Projeyi kaydet..."
+
+#: tfrmmain.actsavesubtitleas.caption
+msgid "Save subtitle as..."
+msgstr "Altyazıyı farklı kaydet..."
+
+#: tfrmmain.actsavetranslationas.caption
+msgid "Save translation as..."
+msgstr "Çeviriyi farklı kaydet..."
+
+#: tfrmmain.actscreenshottofile.caption
+msgid "Save screenshot"
+msgstr "Ekran görüntüsünü kaydet"
+
+#: tfrmmain.actselectcurrenttobeginning.caption
+msgid "Select current to beginning"
+msgstr "Mevcut olandan başlangıca kadar seç"
+
+#: tfrmmain.actselectcurrenttoend.caption
+msgid "Select current to end"
+msgstr "Mevcut olandan sona kadar seç"
+
+#: tfrmmain.actsetautomaticduration.caption
+msgid "Set automatic duration"
+msgstr "Otomatik süreyi ayarla"
+
+#: tfrmmain.actsetdefaultgap.caption
+msgid "Set default gap"
+msgstr "Varsayılan boşluğu ayarla"
+
+#: tfrmmain.actsetdelay.caption
+msgid "Set delay..."
+msgstr "Gecikme ayarla..."
+
+#: tfrmmain.actsetgapping.caption
+msgid "Set gapping..."
+msgstr "Boşlukları ayarla..."
+
+#: tfrmmain.actshifttimes.caption
+msgid "Shift times..."
+msgstr "Zamanları kaydır..."
+
+#: tfrmmain.actshotchanges.caption
+msgid "Shot changes..."
+msgstr "Sahne değişimleri..."
+
+#: tfrmmain.actshowactoronpreview.caption
+msgid "Display Actor on Preview"
+msgstr "Önizlemede Aktörü Göster"
+
+#: tfrmmain.actshowcolumncpl.caption
+msgctxt "tfrmmain.actshowcolumncpl.caption"
+msgid "Characters per line"
+msgstr "Satır başına karakter"
+
+#: tfrmmain.actshowcolumncps.caption
+msgctxt "tfrmmain.actshowcolumncps.caption"
+msgid "Characters per second"
+msgstr "Saniye başına karakter"
+
+#: tfrmmain.actshowcolumnduration.caption
+msgctxt "tfrmmain.actshowcolumnduration.caption"
+msgid "Duration"
+msgstr "Süre"
+
+#: tfrmmain.actshowcolumnnumber.caption
+msgid "Number/GAP"
+msgstr "Numara/Boşluk"
+
+#: tfrmmain.actshowcolumnstyleandactor.caption
+msgctxt "tfrmmain.actshowcolumnstyleandactor.caption"
+msgid "Style/Actor"
+msgstr "Stil/Aktör"
+
+#: tfrmmain.actshowcolumntimes.caption
+msgctxt "tfrmmain.actshowcolumntimes.caption"
+msgid "Times"
+msgstr "Zamanlar"
+
+#: tfrmmain.actshowcolumnwpm.caption
+msgctxt "tfrmmain.actshowcolumnwpm.caption"
+msgid "Words per minute"
+msgstr "Dakika başına kelime"
+
+#: tfrmmain.actshowthumbnails.caption
+msgid "Show thumbnails"
+msgstr "Küçük resimleri göster"
+
+#: tfrmmain.actsort.caption
+msgid "Sort"
+msgstr "Sırala"
+
+#: tfrmmain.actspellcheck.caption
+msgid "Spell check..."
+msgstr "Yazım denetimi..."
+
+#: tfrmmain.actstatistics.caption
+msgid "Statistics..."
+msgstr "İstatistikler..."
+
+#: tfrmmain.actstreamextractor.caption
+msgid "Stream extractor..."
+msgstr "Akış çıkarıcı..."
+
+#: tfrmmain.actswaptexts.caption
+msgid "Swap text"
+msgstr "Metinleri takas et"
+
+#: tfrmmain.acttexteffectflash.caption
+msgid "Flash effect"
+msgstr "Flaş efekti"
+
+#: tfrmmain.acttexteffecttypewriter.caption
+msgid "Typewriter effect"
+msgstr "Daktilo efekti"
+
+#: tfrmmain.acttimeexpander.caption
+msgid "Time expander/reducer..."
+msgstr "Zaman genişletici/daraltıcı..."
+
+#: tfrmmain.acttimeline.caption
+msgctxt "tfrmmain.acttimeline.caption"
+msgid "Timeline"
+msgstr "Zaman Çizelgesi"
+
+#: tfrmmain.acttm1.caption
+msgid "Use text from position 1 (tm)"
+msgstr "1. konumdaki metni kullan (tm)"
+
+#: tfrmmain.acttm2.caption
+msgid "Use text from position 2 (tm)"
+msgstr "2. konumdaki metni kullan (tm)"
+
+#: tfrmmain.acttm3.caption
+msgid "Use text from position 3 (tm)"
+msgstr "3. konumdaki metni kullan (tm)"
+
+#: tfrmmain.acttranscriptionmode.caption
+msgctxt "tfrmmain.acttranscriptionmode.caption"
+msgid "Transcription mode"
+msgstr "Yazım modu (Transcription)"
+
+#: tfrmmain.acttranslate.caption
+msgid "Auto translate..."
+msgstr "Otomatik çevir..."
+
+#: tfrmmain.acttranslationmemory.caption
+msgctxt "tfrmmain.acttranslationmemory.caption"
+msgid "Show..."
+msgstr "Göster..."
+
+#: tfrmmain.acttranslationmemorylist.caption
+msgctxt "tfrmmain.acttranslationmemorylist.caption"
+msgid "List..."
+msgstr "Liste..."
+
+#: tfrmmain.acttranslatormode.caption
+msgctxt "tfrmmain.acttranslatormode.caption"
+msgid "Translator mode"
+msgstr "Çevirmen modu"
+
+#: tfrmmain.acttts.caption
+msgid "Text to speech..."
+msgstr "Metinden sese..."
+
+#: tfrmmain.actunbreakentry.caption
+msgid "Unbreak entry"
+msgstr "Girişi birleştir (satır sonunu kaldır)"
+
+#: tfrmmain.actundockvideo.caption
+msgid "Dock media"
+msgstr "Medyayı sabitle"
+
+#: tfrmmain.actundockwaveform.caption
+msgid "Dock waveform"
+msgstr "Dalga formunu sabitle"
+
+#: tfrmmain.actunicodectrllre.caption
+msgid "LRE (Start of Left-to-Right Embedding)"
+msgstr "LRE (Soldan Sağa Yerleştirme Başlangıcı)"
+
+#: tfrmmain.actunicodectrllrm.caption
+msgid "LRM (Left-to-Right Mark)"
+msgstr "LRM (Soldan Sağa İşareti)"
+
+#: tfrmmain.actunicodectrllro.caption
+msgid "LRO (Start of Left-to-Right Override)"
+msgstr "LRO (Soldan Sağa Geçersiz Kılma Başlangıcı)"
+
+#: tfrmmain.actunicodectrlpdf.caption
+msgid "PDF (Pop Directional Formatting)"
+msgstr "PDF (Yönlü Biçimlendirmeyi Bitir)"
+
+#: tfrmmain.actunicodectrlrle.caption
+msgid "RLE (Start of Right-to-Left Embedding)"
+msgstr "RLE (Sağdan Sola Yerleştirme Başlangıcı)"
+
+#: tfrmmain.actunicodectrlrlm.caption
+msgid "RLM (Right-to-Left Mark)"
+msgstr "RLM (Sağdan Sola İşareti)"
+
+#: tfrmmain.actunicodectrlrlo.caption
+msgid "RLO (Start of Right-to-Left Override)"
+msgstr "RLO (Sağdan Sola Geçersiz Kılma Başlangıcı)"
+
+#: tfrmmain.actunicodectrlzwnj.caption
+msgid "ZWNJ (Zero Width Non-Joiner)"
+msgstr "ZWNJ (Sıfır Genişlikli Birleşmeyen)"
+
+#: tfrmmain.actunicodezwj.caption
+msgid "ZWJ (Zero Width Joiner)"
+msgstr "ZWJ (Sıfır Genişlikli Birleştirici)"
+
+#: tfrmmain.actunmarkentry.caption
+msgid "Unmark entry"
+msgstr "Giriş işaretini kaldır"
+
+#: tfrmmain.actvalidatetm.caption
+msgid "Validate translation memory"
+msgstr "Çeviri belleğini doğrula"
+
+#: tfrmmain.actvaligntobottom.caption
+msgctxt "tfrmmain.actvaligntobottom.caption"
+msgid "Vertical align to bottom"
+msgstr "Dikey hizala: Alt"
+
+#: tfrmmain.actvaligntomiddle.caption
+msgctxt "tfrmmain.actvaligntomiddle.caption"
+msgid "Vertical align to middle"
+msgstr "Dikey hizala: Orta"
+
+#: tfrmmain.actvaligntotop.caption
+msgctxt "tfrmmain.actvaligntotop.caption"
+msgid "Vertical align to top"
+msgstr "Dikey hizala: Üst"
+
+#: tfrmmain.actvideodubbing.caption
+msgid "Dubbing..."
+msgstr "Dublaj..."
+
+#: tfrmmain.actvideofilterblur.caption
+msgid "Blur"
+msgstr "Bulanıklaştır"
+
+#: tfrmmain.actvideofilterdeinterlace.caption
+msgctxt "tfrmmain.actvideofilterdeinterlace.caption"
+msgid "Deinterlace"
+msgstr "Taramasız yap (Deinterlace)"
+
+#: tfrmmain.actvideofilteredgeenhance.caption
+msgid "Edge enhance"
+msgstr "Kenar belirginleştirme"
+
+#: tfrmmain.actvideofilteremboss.caption
+msgid "Emboss"
+msgstr "Kabartma"
+
+#: tfrmmain.actvideofilterhflip.caption
+msgid "Horizontal flip"
+msgstr "Yatay çevir"
+
+#: tfrmmain.actvideofilternegative.caption
+msgid "Negative"
+msgstr "Negatif"
+
+#: tfrmmain.actvideofiltersharpen.caption
+msgid "Sharpen"
+msgstr "Keskinleştir"
+
+#: tfrmmain.actvideofiltervflip.caption
+msgid "Vertical flip"
+msgstr "Dikey çevir"
+
+#: tfrmmain.actvideofiltervintage.caption
+msgid "Vintage"
+msgstr "Eskitme (Vintage)"
+
+#: tfrmmain.actvideoinformation.caption
+msgid "Information..."
+msgstr "Bilgi..."
+
+#: tfrmmain.actviewshotchange.caption
+msgctxt "tfrmmain.actviewshotchange.caption"
+msgid "Shot changes"
+msgstr "Sahne değişimleri"
+
+#: tfrmmain.actwaveextract.caption
+msgid "Extract waveform..."
+msgstr "Dalga formunu çıkar..."
+
+#: tfrmmain.actwebpreview.caption
+msgid "Web Preview..."
+msgstr "Web Önizleme..."
+
+#: tfrmmain.actwebreference.caption
+msgid "Web reference..."
+msgstr "Web referansı..."
+
+#: tfrmmain.cboencoding.hint
+msgctxt "tfrmmain.cboencoding.hint"
+msgid "Encoding"
+msgstr "Kodlama"
+
+#: tfrmmain.cboformat.hint
+msgctxt "tfrmmain.cboformat.hint"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmmain.cbofps.hint
+msgid "Target FPS of subtitle file"
+msgstr "Altyazı dosyasının hedef FPS'si"
+
+#: tfrmmain.cboinputfps.hint
+msgid "FPS of the movie the opened subtitle file was made for"
+msgstr "Açılan altyazı dosyasının yapıldığı filmin FPS'si"
+
+#: tfrmmain.edtquickaction.hint
+msgctxt "tfrmmain.edtquickaction.hint"
+msgid "Quick Action Finder"
+msgstr "Hızlı Eylem Bulucu"
+
+#: tfrmmain.lblmedialength.hint
+msgid "Video length and FPS"
+msgstr "Video uzunluğu ve FPS"
+
+#: tfrmmain.lblmediatime.hint
+msgid "Current video position"
+msgstr "Mevcut video konumu"
+
+#: tfrmmain.menuitem291.caption
+msgid "Remove leading hyphens"
+msgstr "Baştaki tireleri kaldır"
+
+#: tfrmmain.mnuedit.caption
+msgctxt "tfrmmain.mnuedit.caption"
+msgid "Edit"
+msgstr "Düzenle"
+
+#: tfrmmain.mnueditentries.caption
+msgctxt "tfrmmain.mnueditentries.caption"
+msgid "Entries"
+msgstr "Girişler"
+
+#: tfrmmain.mnueditformat.caption
+msgctxt "tfrmmain.mnueditformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmmain.mnueditinsertchar.caption
+msgid "Insert Unicode character"
+msgstr "Unicode karakteri ekle"
+
+#: tfrmmain.mnueditrtl.caption
+msgid "Right-to-left"
+msgstr "Sağdan sola"
+
+#: tfrmmain.mnuedittexts.caption
+msgctxt "tfrmmain.mnuedittexts.caption"
+msgid "Text"
+msgstr "Metin"
+
+#: tfrmmain.mnuedittimings.caption
+msgctxt "tfrmmain.mnuedittimings.caption"
+msgid "Timings"
+msgstr "Zamanlamalar"
+
+#: tfrmmain.mnuedittimingsendcue.caption
+msgid "End Cue"
+msgstr "Bitiş İşareti (End Cue)"
+
+#: tfrmmain.mnuedittimingsextend.caption
+msgid "Extend length"
+msgstr "Süreyi uzat"
+
+#: tfrmmain.mnufile.caption
+msgctxt "tfrmmain.mnufile.caption"
+msgid "File"
+msgstr "Dosya"
+
+#: tfrmmain.mnufileexport.caption
+msgid "Export"
+msgstr "Dışa Aktar"
+
+#: tfrmmain.mnufileimport.caption
+msgctxt "tfrmmain.mnufileimport.caption"
+msgid "Import"
+msgstr "İçe Aktar"
+
+#: tfrmmain.mnufilemru.caption
+msgctxt "tfrmmain.mnufilemru.caption"
+msgid "Recent files"
+msgstr "Son dosyalar"
+
+#: tfrmmain.mnufind.caption
+msgctxt "tfrmmain.mnufind.caption"
+msgid "Find"
+msgstr "Bul"
+
+#: tfrmmain.mnuhelp.caption
+msgctxt "tfrmmain.mnuhelp.caption"
+msgid "Help"
+msgstr "Yardım"
+
+#: tfrmmain.mnuselect.caption
+msgctxt "tfrmmain.mnuselect.caption"
+msgid "Select"
+msgstr "Seç"
+
+#: tfrmmain.mnutexteffects.caption
+msgid "Effects"
+msgstr "Efektler"
+
+#: tfrmmain.mnutextlines.caption
+msgctxt "tfrmmain.mnutextlines.caption"
+msgid "Lines"
+msgstr "Satırlar"
+
+#: tfrmmain.mnutextwords.caption
+msgctxt "tfrmmain.mnutextwords.caption"
+msgid "Words"
+msgstr "Kelimeler"
+
+#: tfrmmain.mnutools.caption
+msgctxt "tfrmmain.mnutools.caption"
+msgid "Tools"
+msgstr "Araçlar"
+
+#: tfrmmain.mnutoolsterminology.caption
+msgctxt "tfrmmain.mnutoolsterminology.caption"
+msgid "Terminology"
+msgstr "Terminoloji"
+
+#: tfrmmain.mnutoolstranslationmemory.caption
+msgctxt "tfrmmain.mnutoolstranslationmemory.caption"
+msgid "Translation memory"
+msgstr "Çeviri belleği"
+
+#: tfrmmain.mnuvideo.caption
+msgctxt "tfrmmain.mnuvideo.caption"
+msgid "Media"
+msgstr "Medya"
+
+#: tfrmmain.mnuvideoaspectratio.caption
+msgid "Aspect ratio"
+msgstr "En boy oranı"
+
+#: tfrmmain.mnuvideoaudiofilters.caption
+msgctxt "tfrmmain.mnuvideoaudiofilters.caption"
+msgid "Audio filters"
+msgstr "Ses filtreleri"
+
+#: tfrmmain.mnuvideoaudiostream.caption
+msgid "Audio stream"
+msgstr "Ses akışı"
+
+#: tfrmmain.mnuvideoplayback.caption
+msgid "Playback"
+msgstr "Oynatma"
+
+#: tfrmmain.mnuvideosubtitles.caption
+msgctxt "tfrmmain.mnuvideosubtitles.caption"
+msgid "Subtitles"
+msgstr "Altyazılar"
+
+#: tfrmmain.mnuvideovideofilters.caption
+msgctxt "tfrmmain.mnuvideovideofilters.caption"
+msgid "Video filters"
+msgstr "Video filtreleri"
+
+#: tfrmmain.mnuvideovolume.caption
+msgctxt "tfrmmain.mnuvideovolume.caption"
+msgid "Volume"
+msgstr "Ses Düzeyi"
+
+#: tfrmmain.mnuview.caption
+msgctxt "tfrmmain.mnuview.caption"
+msgid "View"
+msgstr "Görünüm"
+
+#: tfrmmain.mnuviewcolumns.caption
+msgid "Columns"
+msgstr "Sütunlar"
+
+#: tfrmmain.mnuviewtoolbareditor.caption
+msgctxt "tfrmmain.mnuviewtoolbareditor.caption"
+msgid "Editor"
+msgstr "Editör"
+
+#: tfrmmain.mnuviewtoolbarmain.caption
+msgctxt "tfrmmain.mnuviewtoolbarmain.caption"
+msgid "Main"
+msgstr "Ana"
+
+#: tfrmmain.mnuviewtoolbars.caption
+msgid "Toolbars"
+msgstr "Araç Çubukları"
+
+#: tfrmmain.mnuviewtoolbarvideo.caption
+msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
+msgid "Media"
+msgstr "Medya"
+
+#: tfrmmain.mnuviewtoolbarwaveform.caption
+msgctxt "tfrmmain.mnuviewtoolbarwaveform.caption"
+msgid "Waveform"
+msgstr "Dalga Formu"
+
+#: tfrmmain.mnuviewwindows.caption
+msgid "Windows"
+msgstr "Pencereler"
+
+#: tfrmmain.mnuworkspacelayout.caption
+msgid "Layouts"
+msgstr "Düzenler"
+
+#: tfrmmodifyselection.caption
+msgid "Modify selection"
+msgstr "Seçimi değiştir"
+
+#: tfrmmodifyselection.rbnaddtocurrentselection.caption
+msgid "Add to current selection"
+msgstr "Mevcut seçime ekle"
+
+#: tfrmmodifyselection.rbnnewselection.caption
+msgid "New selection"
+msgstr "Yeni seçim"
+
+#: tfrmmodifyselection.rbnsubtractfromcurrentselection.caption
+msgid "Subtract from current selection"
+msgstr "Mevcut seçimden çıkar"
+
+#: tfrmmultiplereplace.caption
+msgid "Multiple replace"
+msgstr "Çoklu değiştir"
+
+#: tfrmmultiplereplace.chkre.caption
+msgid "Regular expression"
+msgstr "Düzenli ifade (Regex)"
+
+#: tfrmmultiplereplace.lblfind.caption
+msgid "Find:"
+msgstr "Bul:"
+
+#: tfrmmultiplereplace.lblreplace.caption
+msgctxt "tfrmmultiplereplace.lblreplace.caption"
+msgid "Replace with:"
+msgstr "Şununla değiştir:"
+
+#: tfrmpauses.caption
+msgid "Set gapping"
+msgstr "Boşlukları ayarla"
+
+#: tfrmpauses.lblduration.caption
+msgid "Shorten duration of:"
+msgstr "Şunun süresini kısalt:"
+
+#: tfrmpauses.lblgap.caption
+msgid "Value:"
+msgstr "Değer:"
+
+#: tfrmpauses.lblscope.caption
+msgctxt "tfrmpauses.lblscope.caption"
+msgid "Scope:"
+msgstr "Kapsam:"
+
+#: tfrmpauses.rbnallthesubtitles.caption
+msgctxt "tfrmpauses.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Tüm girişler"
+
+#: tfrmpauses.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmpauses.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "Seçilen girişten itibaren"
+
+#: tfrmpauses.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Sadece seçilen girişler"
+
+#: tfrmpauses.rdobothentries.caption
+msgid "Both entries equally"
+msgstr "Her iki girişi de eşit"
+
+#: tfrmpauses.rdoentrywithlesscps.caption
+msgid "Entry with less CPS"
+msgstr "Daha düşük CPS'li giriş"
+
+#: tfrmpauses.rdofirstentry.caption
+msgid "First entry only"
+msgstr "Sadece ilk giriş"
+
+#: tfrmpauses.rdosecondentry.caption
+msgid "Second entry only"
+msgstr "Sadece ikinci giriş"
+
+#: tfrmqualitycheck.caption
+msgid "Quality check"
+msgstr "Kalite kontrol"
+
+#: tfrmqualitycheck.lblrules.caption
+msgid "Rules"
+msgstr "Kurallar"
+
+#: tfrmrestorebackup.caption
+msgid "Restore backup"
+msgstr "Yedeği geri yükle"
+
+#: tfrmroundtime.caption
+msgid "Round times"
+msgstr "Zamanları yuvarla"
+
+#: tfrmroundtime.lblscope.caption
+msgctxt "tfrmroundtime.lblscope.caption"
+msgid "Scope:"
+msgstr "Kapsam:"
+
+#: tfrmroundtime.rbnallthesubtitles.caption
+msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Tüm girişler"
+
+#: tfrmroundtime.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmroundtime.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Seçilen girişten itibaren"
+
+#: tfrmroundtime.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Sadece seçilen girişler"
+
+#: tfrmroundtime.rdofps.caption
+msgid "Using FPS"
+msgstr "FPS kullanarak"
+
+#: tfrmroundtime.rdomilliseconds.caption
+msgid "Using Milliseconds"
+msgstr "Milisaniye kullanarak"
+
+#: tfrmsettings.btnshortcutsave.caption
+msgid "Save as..."
+msgstr "Farklı kaydet..."
+
+#: tfrmsettings.caption
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: tfrmsettings.chkautoplay.caption
+msgid "Autoplay on media load"
+msgstr "Medya yüklendiğinde otomatik oynat"
+
+#: tfrmsettings.chkdotsonsplit.caption
+msgctxt "tfrmsettings.chkdotsonsplit.caption"
+msgid "Add '...' on split subtitle"
+msgstr "Bölünen altyazıya '...' ekle"
+
+#: tfrmsettings.chkdrawerrors.caption
+msgid "Show errors in list"
+msgstr "Hataları listede göster"
+
+#: tfrmsettings.chkdrawtags.caption
+msgid "Interpret tags in list"
+msgstr "Etiketleri listede yorumla"
+
+#: tfrmsettings.chkdrawwaveformgap.caption
+msgid "Show gap in timeline"
+msgstr "Zaman çizelgesinde boşlukları göster"
+
+#: tfrmsettings.chkpromptfordeletesubtitles.caption
+msgid "Prompt when deleting subtitles"
+msgstr "Altyazıları silerken onayla"
+
+#: tfrmsettings.chkpromptforinputencoding.caption
+msgid "Prompt for Encoding before loading a file"
+msgstr "Dosya yüklemeden önce kodlama sor"
+
+#: tfrmsettings.chkpromptforinputfps.caption
+msgid "Prompt for FPS before loading a file"
+msgstr "Dosya yüklemeden önce FPS sor"
+
+#: tfrmsettings.chkpromptforsavewitherrors.caption
+msgid "Prompt when saving file with errors"
+msgstr "Dosyayı hatalarla kaydederken sor"
+
+#: tfrmsettings.chkshowcpsbar.caption
+msgid "Show CPS bar"
+msgstr "CPS çubuğunu göster"
+
+#: tfrmsettings.chkshowsplashwindow.caption
+msgid "Show splash window"
+msgstr "Açılış ekranını göster"
+
+#: tfrmsettings.chksubtitlehandlebympv.caption
+msgid "mpv handles subtitles for preview"
+msgstr "Önizleme altyazılarını mpv yönetsin"
+
+#: tfrmsettings.chkusehwdec.caption
+msgid "Use hardware video decoding"
+msgstr "Donanım video kod çözücü kullan"
+
+#: tfrmsettings.chkuseownfiledialog.caption
+msgid "Use Tero file dialog"
+msgstr "Tero dosya diyaloğunu kullan"
+
+#: tfrmsettings.chkwritebom.caption
+msgid "Write BOM on save"
+msgstr "Kaydederken BOM yaz"
+
+#: tfrmsettings.lbladditionalmpvoptions.caption
+msgid "Additional mpv options"
+msgstr "Ek mpv seçenekleri"
+
+#: tfrmsettings.lblapi_tts.caption
+msgid "ElevenLabs API key"
+msgstr "ElevenLabs API anahtarı"
+
+#: tfrmsettings.lblautobackup.caption
+msgid "Auto-backup every (minutes)"
+msgstr "Otomatik yedekleme aralığı (dakika)"
+
+#: tfrmsettings.lblchaining.caption
+msgctxt "tfrmsettings.lblchaining.caption"
+msgid "Chaining (frames)"
+msgstr "Zincirleme (kare)"
+
+#: tfrmsettings.lblcpl.caption
+msgctxt "tfrmsettings.lblcpl.caption"
+msgid "Characters per line"
+msgstr "Satır başına karakter"
+
+#: tfrmsettings.lblcps.caption
+msgctxt "tfrmsettings.lblcps.caption"
+msgid "Characters per second"
+msgstr "Saniye başına karakter"
+
+#: tfrmsettings.lblcpsstrategy.caption
+msgctxt "tfrmsettings.lblcpsstrategy.caption"
+msgid "Chars excluded from CPS count"
+msgstr "CPS sayımına dahil edilmeyen karakterler"
+
+#: tfrmsettings.lbldefaultfileencoding.caption
+msgid "Default file encoding"
+msgstr "Varsayılan dosya kodlaması"
+
+#: tfrmsettings.lbldefaultfileformat.caption
+msgid "Default file format"
+msgstr "Varsayılan dosya formatı"
+
+#: tfrmsettings.lbldefaultframerate.caption
+msgid "Default input frame rate"
+msgstr "Varsayılan giriş kare hızı"
+
+#: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
+msgid "Dialogue segments detection threshold (rms)"
+msgstr "Diyalog bölümü algılama eşiği (rms)"
+
+#: tfrmsettings.lblfasterwhisper.caption
+msgid "Faster-Whisper"
+msgstr "Faster-Whisper"
+
+#: tfrmsettings.lblffmpeg.caption
+msgid "FFmpeg"
+msgstr "FFmpeg"
+
+#: tfrmsettings.lblframestep.caption
+msgid "Frame step"
+msgstr "Kare adımı"
+
+#: tfrmsettings.lbllanguage.caption
+msgctxt "tfrmsettings.lbllanguage.caption"
+msgid "Language"
+msgstr "Dil"
+
+#: tfrmsettings.lbllistfontsize.caption
+msgid "List font size"
+msgstr "Liste yazı tipi boyutu"
+
+#: tfrmsettings.lbllistmode.caption
+msgctxt "tfrmsettings.lbllistmode.caption"
+msgid "List mode"
+msgstr "Liste modu"
+
+#: tfrmsettings.lblmaxdurationms.caption
+msgctxt "tfrmsettings.lblmaxdurationms.caption"
+msgid "Max. duration (ms)"
+msgstr "Maks. süre (ms)"
+
+#: tfrmsettings.lblmaxlinecount.caption
+msgctxt "tfrmsettings.lblmaxlinecount.caption"
+msgid "Max. line count"
+msgstr "Maks. satır sayısı"
+
+#: tfrmsettings.lblmindurationms.caption
+msgctxt "tfrmsettings.lblmindurationms.caption"
+msgid "Min. duration / per word (ms)"
+msgstr "Min. süre / kelime başına (ms)"
+
+#: tfrmsettings.lblnewsubtitlems.caption
+msgctxt "tfrmsettings.lblnewsubtitlems.caption"
+msgid "New subtitle (ms)"
+msgstr "Yeni altyazı (ms)"
+
+#: tfrmsettings.lblprofile.caption
+msgid "Profile"
+msgstr "Profil"
+
+#: tfrmsettings.lblprohibitedchars.caption
+msgctxt "tfrmsettings.lblprohibitedchars.caption"
+msgid "Prohibited characters"
+msgstr "Yasaklanmış karakterler"
+
+#: tfrmsettings.lblrepeatablechars.caption
+msgctxt "tfrmsettings.lblrepeatablechars.caption"
+msgid "Repeatable characters"
+msgstr "Tekrarlanabilir karakterler"
+
+#: tfrmsettings.lblscenedetect.caption
+msgid "PySceneDetect"
+msgstr "PySceneDetect"
+
+#: tfrmsettings.lblscsnaparea.caption
+msgctxt "tfrmsettings.lblscsnaparea.caption"
+msgid "Shot change snap / threshold (frames)"
+msgstr "Sahne değişimi yakalama / eşik (kare)"
+
+#: tfrmsettings.lblscsnapincues.caption
+msgctxt "tfrmsettings.lblscsnapincues.caption"
+msgid "Snap in cues after SC (frames)"
+msgstr "SC sonrası girişleri sabitle (kare)"
+
+#: tfrmsettings.lblscsnapoutcues.caption
+msgctxt "tfrmsettings.lblscsnapoutcues.caption"
+msgid "Snap out cues before SC (frames)"
+msgstr "SC öncesi çıkışları sabitle (kare)"
+
+#: tfrmsettings.lblseektime.caption
+msgid "Seek time (ms)"
+msgstr "Arama süresi (ms)"
+
+#: tfrmsettings.lblshifttimems.caption
+msgid "Shift time (ms)"
+msgstr "Kaydırma süresi (ms)"
+
+#: tfrmsettings.lblshortcut.caption
+msgid "Shortcut"
+msgstr "Kısayol"
+
+#: tfrmsettings.lblshortcutcat.caption
+msgid "Category"
+msgstr "Kategori"
+
+#: tfrmsettings.lblshortcutpreset.caption
+msgid "Preset"
+msgstr "Önayar"
+
+#: tfrmsettings.lblsubbackground.caption
+msgctxt "tfrmsettings.lblsubbackground.caption"
+msgid "Background"
+msgstr "Arka Plan"
+
+#: tfrmsettings.lblsubborder.caption
+msgid "Border"
+msgstr "Kenarlık"
+
+#: tfrmsettings.lblsubcolor.caption
+msgctxt "tfrmsettings.lblsubcolor.caption"
+msgid "Color"
+msgstr "Renk"
+
+#: tfrmsettings.lblsubshadow.caption
+msgid "Shadow"
+msgstr "Gölge"
+
+#: tfrmsettings.lblsubsize.caption
+msgctxt "tfrmsettings.lblsubsize.caption"
+msgid "Size"
+msgstr "Boyut"
+
+#: tfrmsettings.lblsubtitlepausems.caption
+msgctxt "tfrmsettings.lblsubtitlepausems.caption"
+msgid "Min. gap"
+msgstr "Min. boşluk"
+
+#: tfrmsettings.lblsubtitles.caption
+msgctxt "tfrmsettings.lblsubtitles.caption"
+msgid "Subtitles"
+msgstr "Altyazılar"
+
+#: tfrmsettings.lbltesseract.caption
+msgid "Tesseract"
+msgstr "Tesseract"
+
+#: tfrmsettings.lbltextboxfontsize.caption
+msgid "Text box font size"
+msgstr "Metin kutusu yazı tipi boyutu"
+
+#: tfrmsettings.lbltheme.caption
+msgid "Theme"
+msgstr "Tema"
+
+#: tfrmsettings.lbltimecodemode.caption
+msgid "Time code mode"
+msgstr "Zaman kodu modu"
+
+#: tfrmsettings.lblwavecolor.caption
+msgctxt "tfrmsettings.lblwavecolor.caption"
+msgid "Color"
+msgstr "Renk"
+
+#: tfrmsettings.lblwaveentry.caption
+msgctxt "tfrmsettings.lblwaveentry.caption"
+msgid "Entry"
+msgstr "Giriş"
+
+#: tfrmsettings.lblwaveform.caption
+msgctxt "tfrmsettings.lblwaveform.caption"
+msgid "Waveform"
+msgstr "Dalga Formu"
+
+#: tfrmsettings.lblwebreference.caption
+msgid "Web reference"
+msgstr "Web referansı"
+
+#: tfrmsettings.lblwhispercpp.caption
+msgid "Whisper.cpp"
+msgstr "Whisper.cpp"
+
+#: tfrmsettings.lblwpm.caption
+msgctxt "tfrmsettings.lblwpm.caption"
+msgid "Words per minute"
+msgstr "Dakika başına kelime"
+
+#: tfrmsettings.lblytdlp.caption
+msgid "YT-DLP"
+msgstr "YT-DLP"
+
+#: tfrmsettings.lblzerotodisable.caption
+msgid "(0 to disable)"
+msgstr "(0 devre dışı bırakır)"
+
+#: tfrmshifttimes.caption
+msgid "Shift times"
+msgstr "Zamanları kaydır"
+
+#: tfrmshifttimes.lbloffset.caption
+msgctxt "tfrmshifttimes.lbloffset.caption"
+msgid "Offset"
+msgstr "Ofset"
+
+#: tfrmshifttimes.lblscope.caption
+msgctxt "tfrmshifttimes.lblscope.caption"
+msgid "Scope:"
+msgstr "Kapsam:"
+
+#: tfrmshifttimes.rbnallthesubtitles.caption
+msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Tüm girişler"
+
+#: tfrmshifttimes.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmshifttimes.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Seçilen girişten itibaren"
+
+#: tfrmshifttimes.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Sadece seçilen girişler"
+
+#: tfrmshotchanges.caption
+msgctxt "tfrmshotchanges.caption"
+msgid "Shot changes"
+msgstr "Sahne değişimleri"
+
+#: tfrmshotchanges.lbldetectapp.caption
+msgid "App to detect"
+msgstr "Algılama uygulaması"
+
+#: tfrmshotchanges.lbloffset.caption
+msgctxt "tfrmshotchanges.lbloffset.caption"
+msgid "Offset"
+msgstr "Ofset"
+
+#: tfrmshotchanges.lblsensitivity.caption
+msgid "Detection sensitivity"
+msgstr "Algılama hassasiyeti"
+
+#: tfrmshotchanges.lbltimecodein.caption
+msgid "Time code for import"
+msgstr "İçe aktarma için zaman kodu"
+
+#: tfrmshotchanges.lbltimecodeout.caption
+msgid "Time code for export"
+msgstr "Dışa aktarma için zaman kodu"
+
+#: tfrmspellcheck.caption
+msgid "Spell check"
+msgstr "Yazım denetimi"
+
+#: tfrmspellcheck.lbldictionary.caption
+msgctxt "tfrmspellcheck.lbldictionary.caption"
+msgid "Dictionary"
+msgstr "Sözlük"
+
+#: tfrmspellcheck.lblnotfound.caption
+msgid "Not found"
+msgstr "Bulunamadı"
+
+#: tfrmspellcheck.lblsource.caption
+msgid "Source"
+msgstr "Kaynak"
+
+#: tfrmspellcheck.lblsuggestions.caption
+msgid "Suggestions"
+msgstr "Öneriler"
+
+#: tfrmstatistics.caption
+msgid "Statistics"
+msgstr "İstatistikler"
+
+#: tfrmstreamextractor.btnextract.caption
+msgid "Extract"
+msgstr "Ayıkla"
+
+#: tfrmstreamextractor.caption
+msgid "Stream extractor"
+msgstr "Akış ayıklayıcı"
+
+#: tfrmstreamextractor.lblfile.caption
+msgctxt "tfrmstreamextractor.lblfile.caption"
+msgid "File"
+msgstr "Dosya"
+
+#: tfrmstreamextractor.lblfolder.caption
+msgctxt "tfrmstreamextractor.lblfolder.caption"
+msgid "Output folder"
+msgstr "Çıktı klasörü"
+
+#: tfrmtbx.caption
+msgctxt "tfrmtbx.caption"
+msgid "Terminology"
+msgstr "Terminoloji"
+
+#: tfrmtbxedit.caption
+msgctxt "tfrmtbxedit.caption"
+msgid "Terminology"
+msgstr "Terminoloji"
+
+#: tfrmtbxedit.lblnotes.caption
+msgid "Notes"
+msgstr "Notlar"
+
+#: tfrmtbxedit.lbloriginal.caption
+msgctxt "tfrmtbxedit.lbloriginal.caption"
+msgid "Original"
+msgstr "Orijinal"
+
+#: tfrmtbxedit.lbltranslated.caption
+msgctxt "tfrmtbxedit.lbltranslated.caption"
+msgid "Translated"
+msgstr "Çevrildi"
+
+#: tfrmtbxlist.caption
+msgctxt "tfrmtbxlist.caption"
+msgid "Terminology"
+msgstr "Terminoloji"
+
+#: tfrmtbxlist.lblfind.caption
+msgctxt "tfrmtbxlist.lblfind.caption"
+msgid "Find"
+msgstr "Bul"
+
+#: tfrmtbxlist.lbltotal.caption
+msgctxt "tfrmtbxlist.lbltotal.caption"
+msgid "Total:"
+msgstr "Toplam:"
+
+#: tfrmtbxsettings.caption
+msgctxt "tfrmtbxsettings.caption"
+msgid "Terminology settings"
+msgstr "Terminoloji ayarları"
+
+#: tfrmtbxsettings.lblfilename.caption
+msgctxt "tfrmtbxsettings.lblfilename.caption"
+msgid "Filename"
+msgstr "Dosya adı"
+
+#: tfrmtbxsettings.lblsourcelang.caption
+msgctxt "tfrmtbxsettings.lblsourcelang.caption"
+msgid "Source language"
+msgstr "Kaynak dil"
+
+#: tfrmtbxsettings.lbltranslang.caption
+msgctxt "tfrmtbxsettings.lbltranslang.caption"
+msgid "Translation language"
+msgstr "Çeviri dili"
+
+#: tfrmtimeexpander.caption
+msgid "Time expander/reducer"
+msgstr "Zaman genişletici/daraltıcı"
+
+#: tfrmtimeexpander.chkduration.caption
+msgid "Only if duration is longer than"
+msgstr "Sadece süre şundan uzunsa"
+
+#: tfrmtimeexpander.chksubtitle.caption
+msgid "Only if subtitle is longer than"
+msgstr "Sadece altyazı şundan uzunsa"
+
+#: tfrmtimeexpander.lblchars.caption
+msgid "characters"
+msgstr "karakter"
+
+#: tfrmtimeexpander.lblms.caption
+msgctxt "tfrmtimeexpander.lblms.caption"
+msgid "ms"
+msgstr "ms"
+
+#: tfrmtimeexpander.lblms1.caption
+msgctxt "tfrmtimeexpander.lblms1.caption"
+msgid "ms"
+msgstr "ms"
+
+#: tfrmtimeexpander.lblscope.caption
+msgctxt "tfrmtimeexpander.lblscope.caption"
+msgid "Scope:"
+msgstr "Kapsam:"
+
+#: tfrmtimeexpander.rbnallthesubtitles.caption
+msgctxt "tfrmtimeexpander.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Tüm girişler"
+
+#: tfrmtimeexpander.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmtimeexpander.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Seçilen girişten itibaren"
+
+#: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Sadece seçilen girişler"
+
+#: tfrmtranslate.btntranslate.caption
+msgctxt "tfrmtranslate.btntranslate.caption"
+msgid "Translate"
+msgstr "Çevir"
+
+#: tfrmtranslate.caption
+msgctxt "tfrmtranslate.caption"
+msgid "Translate"
+msgstr "Çevir"
+
+#: tfrmtranslate.lblinput.caption
+msgid "Input:"
+msgstr "Giriş:"
+
+#: tfrmtranslate.lbloutput.caption
+msgctxt "tfrmtranslate.lbloutput.caption"
+msgid "Output:"
+msgstr "Çıktı:"
+
+#: tfrmtranslate.lblscope.caption
+msgctxt "tfrmtranslate.lblscope.caption"
+msgid "Scope:"
+msgstr "Kapsam:"
+
+#: tfrmtranslate.lblsourcelanguage.caption
+msgid "Source language:"
+msgstr "Kaynak dil:"
+
+#: tfrmtranslate.lbltranslationlanguage.caption
+msgid "Translation language:"
+msgstr "Çeviri dili:"
+
+#: tfrmtranslationmemory.caption
+msgctxt "tfrmtranslationmemory.caption"
+msgid "Translation memory"
+msgstr "Çeviri belleği"
+
+#: tfrmtranslationmemorylist.caption
+msgctxt "tfrmtranslationmemorylist.caption"
+msgid "Translation memory"
+msgstr "Çeviri belleği"
+
+#: tfrmtranslationmemorylist.lblfind.caption
+msgctxt "tfrmtranslationmemorylist.lblfind.caption"
+msgid "Find"
+msgstr "Bul"
+
+#: tfrmtranslationmemorylist.lbltotal.caption
+msgctxt "tfrmtranslationmemorylist.lbltotal.caption"
+msgid "Total:"
+msgstr "Toplam:"
+
+#: tfrmtranslationmemorysettings.caption
+msgctxt "tfrmtranslationmemorysettings.caption"
+msgid "Translation memory settings"
+msgstr "Çeviri belleği ayarları"
+
+#: tfrmtranslationmemorysettings.lblfilename.caption
+msgctxt "tfrmtranslationmemorysettings.lblfilename.caption"
+msgid "File name"
+msgstr "Dosya adı"
+
+#: tfrmtranslationmemorysettings.lblsourcelang.caption
+msgctxt "tfrmtranslationmemorysettings.lblsourcelang.caption"
+msgid "Source language"
+msgstr "Kaynak dil"
+
+#: tfrmtranslationmemorysettings.lbltranslang.caption
+msgctxt "tfrmtranslationmemorysettings.lbltranslang.caption"
+msgid "Translation language"
+msgstr "Çeviri dili"
+
+#: tfrmtts.btnpreview.caption
+msgid "Preview"
+msgstr "Önizleme"
+
+#: tfrmtts.caption
+msgid "Text to speech"
+msgstr "Metinden sese"
+
+#: tfrmtts.chkboost.caption
+msgctxt "tfrmtts.chkboost.caption"
+msgid "Speaker boost"
+msgstr "Hoparlör artırma"
+
+#: tfrmtts.lblfolder.caption
+msgid "Folder:"
+msgstr "Klasör:"
+
+#: tfrmtts.lblscope.caption
+msgctxt "tfrmtts.lblscope.caption"
+msgid "Scope:"
+msgstr "Kapsam:"
+
+#: tfrmtts.lblsimilarityboost.caption
+msgctxt "tfrmtts.lblsimilarityboost.caption"
+msgid "Similarity boost %:"
+msgstr "Benzerlik artışı %:"
+
+#: tfrmtts.lblstability.caption
+msgctxt "tfrmtts.lblstability.caption"
+msgid "Stability %:"
+msgstr "Kararlılık %:"
+
+#: tfrmtts.lblstyle.caption
+msgctxt "tfrmtts.lblstyle.caption"
+msgid "Style exaggeration %:"
+msgstr "Stil abartısı %:"
+
+#: tfrmtts.lblvoice.caption
+msgctxt "tfrmtts.lblvoice.caption"
+msgid "Voice:"
+msgstr "Ses:"
+
+#: tfrmtts.rbnallthesubtitles.caption
+msgctxt "tfrmtts.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Tüm girişler"
+
+#: tfrmtts.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmtts.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Seçilen girişten itibaren"
+
+#: tfrmtts.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
+msgid "Only selected entries"
+msgstr "Sadece seçilen girişler"
+
+#: tfrmvideodubbing.caption
+msgid "Video dubbing"
+msgstr "Video dublajı"
+
+#: tfrmvideodubbing.chkbackgroundmusic.caption
+msgid "Background music"
+msgstr "Arka plan müziği"
+
+#: tfrmvideodubbing.chkboost.caption
+msgctxt "tfrmvideodubbing.chkboost.caption"
+msgid "Speaker boost"
+msgstr "Hoparlör artırma"
+
+#: tfrmvideodubbing.chkglobalvoice.caption
+msgid "Global voice"
+msgstr "Genel ses"
+
+#: tfrmvideodubbing.chksubtitletrack.caption
+msgid "Subtitle track"
+msgstr "Altyazı izi"
+
+#: tfrmvideodubbing.lblvolume.caption
+msgid "Volume %:"
+msgstr "Ses düzeyi %:"
+
+#: tfrmwaveextractor.caption
+msgid "Waveform extractor"
+msgstr "Dalga formu çıkarıcı"
+
+#: tfrmwaveextractor.lbltrack.caption
+msgid "Track:"
+msgstr "İz:"
+
+#: tfrmwelcome.chkshowonstartup.caption
+msgid "Show on startup"
+msgstr "Başlangıçta göster"
+
+#: tfrmwelcome.lblexit.caption
+msgid "Exit"
+msgstr "Çıkış"
+
+#: tfrmwelcome.lblnewsubtitle.caption
+msgid "New subtitle project"
+msgstr "Yeni altyazı projesi"
+
+#: tfrmwelcome.lblnewtranscription.caption
+msgid "New manual transcription"
+msgstr "Yeni manuel yazım projesi"
+
+#: tfrmwelcome.lblopenfile.caption
+msgid "Open file..."
+msgstr "Dosya aç..."
+
+#: tfrmwelcome.lblrecentfiles.caption
+msgctxt "tfrmwelcome.lblrecentfiles.caption"
+msgid "Recent files"
+msgstr "Son dosyalar"
+
+#: tfrmwelcome.lblwelcome.caption
+msgctxt "tfrmwelcome.lblwelcome.caption"
+msgid "Welcome to"
+msgstr "Hoş geldiniz:"
+
+#: tfrmwizard.btnprevious.caption
+msgid "Back"
+msgstr "Geri"
+
+#: tfrmwizard.caption
+msgid "Getting started wizard"
+msgstr "Başlangıç sihirbazı"
+
+#: tfrmwizard.lblchooselayout.caption
+msgid "Choose workspace layout and timecode mode:"
+msgstr "Çalışma alanı düzenini ve zaman kodu modunu seçin:"
+
+#: tfrmwizard.lblexperience.caption
+msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
+msgstr "Sadece birkaç adımda kurulumu tamamlayacak ve en iyi altyazı deneyimine hazır olacaksınız."
+
+#: tfrmwizard.lblfasterwhisper.caption
+msgid "Faster-Whisper:"
+msgstr "Faster-Whisper:"
+
+#: tfrmwizard.lblfasterwhisper_hint.caption
+msgctxt "tfrmwizard.lblfasterwhisper_hint.caption"
+msgid "Optional, used for speech recognition."
+msgstr "İsteğe bağlı, konuşma tanıma için kullanılır."
+
+#: tfrmwizard.lblffmpeg.caption
+msgid "FFmpeg:"
+msgstr "FFmpeg:"
+
+#: tfrmwizard.lblffmpeg_hint.caption
+msgctxt "tfrmwizard.lblffmpeg_hint.caption"
+msgid "Optional, used to extract audio and generate video."
+msgstr "İsteğe bağlı, ses ayıklamak ve video oluşturmak için kullanılır."
+
+#: tfrmwizard.lbllibmpv.caption
+msgid "libmpv: "
+msgstr "libmpv: "
+
+#: tfrmwizard.lbllibmpv_hint.caption
+msgctxt "tfrmwizard.lbllibmpv_hint.caption"
+msgid "Essential, used for playing video."
+msgstr "Gerekli, video oynatmak için kullanılır."
+
+#: tfrmwizard.lblrequiredfiles.caption
+msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
+msgstr "Tero Subtitler'ın düzgün çalışması için aşağıdaki kütüphaneler gereklidir; sisteminizde bulunmazlarsa Tero Subtitler bunları sizin yerinize indirebilir."
+
+#: tfrmwizard.lblwelcome.caption
+msgctxt "tfrmwizard.lblwelcome.caption"
+msgid "Welcome to"
+msgstr "Hoş geldiniz:"
+
+#: tfrmwizard.lblwhisper.caption
+msgid "Whisper.cpp:"
+msgstr "Whisper.cpp:"
+
+#: tfrmwizard.lblwhisper_hint.caption
+msgctxt "tfrmwizard.lblwhisper_hint.caption"
+msgid "Optional, used for speech recognition."
+msgstr "İsteğe bağlı, konuşma tanıma için kullanılır."
+
+#: tfrmwizard.lblytdlp.caption
+msgid "yt-dlp:"
+msgstr "yt-dlp:"
+
+#: tfrmwizard.lblytdlp_hint.caption
+msgctxt "tfrmwizard.lblytdlp_hint.caption"
+msgid "Optional, used for dowloading from YouTube."
+msgstr "İsteğe bağlı, YouTube'dan indirme yapmak için kullanılır."
+
+#: tfrmwizard.rdolayout0.caption
+msgctxt "tfrmwizard.rdolayout0.caption"
+msgid "Classic"
+msgstr "Klasik"
+
+#: tfrmwizard.rdolayout1.caption
+msgctxt "tfrmwizard.rdolayout1.caption"
+msgid "Inverted"
+msgstr "Ters Çevrilmiş"
+
+#: tfrmwizard.rdolayout2.caption
+msgctxt "tfrmwizard.rdolayout2.caption"
+msgid "Vertical"
+msgstr "Dikey"
+
+#: proclocalize.lngviduration
+#, object-pascal-format
+msgid "Duration: %s (%d frames)"
+msgstr "Süre: %s (%d kare)"
+
+#: proclocalize.lngvifile
+#, object-pascal-format
+msgid "File: %s"
+msgstr "Dosya: %s"
+
+#: proclocalize.lngvifps
+#, object-pascal-format
+msgid "FPS: %s"
+msgstr "FPS: %s"
+
+#: proclocalize.lngviresolution
+#, object-pascal-format
+msgid "Resolution: %dx%d"
+msgstr "Çözünürlük: %dx%d"
+
+#: proclocalize.lngvisubtitletracks
+#, object-pascal-format
+msgid "Subtitle tracks: %d"
+msgstr "Altyazı izleri: %d"
+
+#: proclocalize.lngvivideotracks
+#, object-pascal-format
+msgid "Video tracks: %d"
+msgstr "Video izleri: %d"
+
+#: proclocalize.lngwebvideounsupported
+msgid "The media format is not supported for playback in the web browser."
+msgstr "Medya formatı web tarayıcısında oynatma için desteklenmiyor."
+
+#: proclocalize.lngwizlanguage
+msgctxt "proclocalize.lngwizlanguage"
+msgid "Language"
+msgstr "Dil"
+
+#: proclocalize.lngwritedenieded
+msgid "Write denied. Please check folder permissions."
+msgstr "Yazma reddedildi. Lütfen klasör izinlerini kontrol edin."
+
+#: proclocalize.lngwritestatus
+#, object-pascal-format
+msgid "Writing %d/%d"
+msgstr "Yazılıyor %d/%d"
+
+#: tfrmabout.btnclose.caption
+msgctxt "tfrmabout.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmabout.caption
+msgctxt "tfrmabout.caption"
+msgid "About"
+msgstr "Hakkında"
+
+#: tfrmabout.lbldonate.caption
+msgctxt "tfrmabout.lbldonate.caption"
+msgid ""
+"If you like this software, please consider making a donation.\n"
+"Click here to do it."
+msgstr ""
+"Bu yazılımı beğendiyseniz, lütfen bağış yapmayı düşünün.\n"
+"Buraya tıklayarak yapabilirsiniz."
+
+#: tfrmactors.btnactoradd.caption
+msgctxt "tfrmactors.btnactoradd.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmactors.btnactorremove.caption
+msgctxt "tfrmactors.btnactorremove.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmactors.btnapply.caption
+msgctxt "tfrmactors.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmactors.btnclose.caption
+msgctxt "tfrmactors.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmactors.caption
+msgctxt "tfrmactors.caption"
+msgid "Actors"
+msgstr "Aktörler"
+
+#: tfrmadjustsubtitle.btnapply.caption
+msgctxt "tfrmadjustsubtitle.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmadjustsubtitle.btnclose.caption
+msgctxt "tfrmadjustsubtitle.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmadjustsubtitle.btnminus.caption
+msgctxt "tfrmadjustsubtitle.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmadjustsubtitle.btnplus.caption
+msgctxt "tfrmadjustsubtitle.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmaudiototext.btnclose.caption
+msgctxt "tfrmaudiototext.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmaudiototext.btngenerate.caption
+msgctxt "tfrmaudiototext.btngenerate.caption"
+msgid "Generate"
+msgstr "Oluştur"
+
+#: tfrmaudiototext.chkmaxlinecount.caption
+msgctxt "tfrmaudiototext.chkmaxlinecount.caption"
+msgid "Maximum line count"
+msgstr "Maksimum satır sayısı"
+
+#: tfrmaudiototext.chkmaxlinelength.caption
+msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
+msgid "Maximum line length"
+msgstr "Maksimum satır uzunluğu"
+
+#: tfrmmain.actaligntocenter.caption
+msgctxt "tfrmmain.actaligntocenter.caption"
+msgid "Align to center"
+msgstr "Ortaya hizala"
+
+#: tfrmmain.actaligntoleft.caption
+msgctxt "tfrmmain.actaligntoleft.caption"
+msgid "Align to left"
+msgstr "Sola hizala"
+
+#: tfrmmain.actaligntonone.caption
+msgctxt "tfrmmain.actaligntonone.caption"
+msgid "Align to none"
+msgstr "Hizalamayı kaldır"
+
+#: tfrmmain.actaligntoright.caption
+msgctxt "tfrmmain.actaligntoright.caption"
+msgid "Align to right"
+msgstr "Sağa hizala"
+
+#: tfrmmain.actautobreakentry.caption
+msgctxt "tfrmmain.actautobreakentry.caption"
+msgid "Autobreak"
+msgstr "Otomatik Böl"
+
+#: tfrmmain.actautobreakentry.hint
+msgctxt "tfrmmain.actautobreakentry.hint"
+msgid "Split a long line into two or more lines"
+msgstr "Uzun bir satırı iki veya daha fazla satıra böler"
+
+#: tfrmmain.actframesmode.caption
+msgctxt "tfrmmain.actframesmode.caption"
+msgid "Frame mode"
+msgstr "Kare modu"
+
+#: tfrmmain.actframesmode.hint
+msgid "Set time code format to HH:MM:SS:FF"
+msgstr "Zaman kodu formatını SS:DD:SS:KK olarak ayarlar"
+
+#: tfrmmain.acttimemode.caption
+msgctxt "tfrmmain.acttimemode.caption"
+msgid "Time mode"
+msgstr "Zaman modu"
+
+#: tfrmmain.acttimemode.hint
+msgid "Set time code format to HH:MM:SS.ZZZ"
+msgstr "Zaman kodu formatını SS:DD:SS.MMM olarak ayarlar"
+
+#: tfrmmain.actsourcemode.caption
+msgctxt "tfrmmain.actsourcemode.caption"
+msgid "Source mode"
+msgstr "Kaynak modu"
+
+#: tfrmmain.tedduration.hint
+msgctxt "tfrmmain.tedduration.hint"
+msgid "Duration"
+msgstr "Süre"
+
+#: tfrmmain.tedfinal.hint
+msgctxt "tfrmmain.tedfinal.hint"
+msgid "Final time"
+msgstr "Bitiş zamanı"
+
+#: tfrmmain.tedinitial.hint
+msgctxt "tfrmmain.tedinitial.hint"
+msgid "Initial time"
+msgstr "Başlangıç zamanı"
+
+#: tfrmmain.tedpause.hint
+msgid "Gap"
+msgstr "Boşluk"
+
+#: tfrmwelcome.lblbatchconvert.caption
+msgctxt "tfrmwelcome.lblbatchconvert.caption"
+msgid "Batch convert..."
+msgstr "Toplu dönüştür..."
+
+#: tfrmwizard.btndownload.caption
+msgctxt "tfrmwizard.btndownload.caption"
+msgid "Download"
+msgstr "İndir"
+
+#: tfrmwizard.btndownloadfasterwhisper.caption
+msgctxt "tfrmwizard.btndownloadfasterwhisper.caption"
+msgid "Download"
+msgstr "İndir"
+
+#: tfrmwizard.btndownloadffmpeg.caption
+msgctxt "tfrmwizard.btndownloadffmpeg.caption"
+msgid "Download"
+msgstr "İndir"
+
+#: tfrmwizard.btndownloadwhisper.caption
+msgctxt "tfrmwizard.btndownloadwhisper.caption"
+msgid "Download"
+msgstr "İndir"
+
+#: tfrmwizard.btndownloadytdlp.caption
+msgctxt "tfrmwizard.btndownloadytdlp.caption"
+msgid "Download"
+msgstr "İndir"
+
+#: tfrmwizard.btnnext.caption
+msgctxt "tfrmwizard.btnnext.caption"
+msgid "Next"
+msgstr "İleri"
+
+#: tfrmwizard.lblfasterwhisper_hint.caption
+msgctxt "tfrmwizard.lblfasterwhisper_hint.caption"
+msgid "Optional, used for speech recognition."
+msgstr "İsteğe bağlı, konuşma tanıma için kullanılır."
+
+#: tfrmwizard.lblffmpeg_hint.caption
+msgctxt "tfrmwizard.lblffmpeg_hint.caption"
+msgid "Optional, used to extract audio and generate video."
+msgstr "İsteğe bağlı, ses ayıklamak ve video oluşturmak için kullanılır."
+
+#: tfrmwizard.lbllibmpv_hint.caption
+msgctxt "tfrmwizard.lbllibmpv_hint.caption"
+msgid "Essential, used for playing video."
+msgstr "Gerekli, video oynatmak için kullanılır."
+
+#: tfrmwizard.lblwhisper_hint.caption
+msgctxt "tfrmwizard.lblwhisper_hint.caption"
+msgid "Optional, used for speech recognition."
+msgstr "İsteğe bağlı, konuşma tanıma için kullanılır."
+
+#: tfrmwizard.lblytdlp_hint.caption
+msgctxt "tfrmwizard.lblytdlp_hint.caption"
+msgid "Optional, used for dowloading from YouTube."
+msgstr "İsteğe bağlı, YouTube'dan indirme yapmak için kullanılır."
+
+#: tfrmwizard.rdolayout0.caption
+msgctxt "tfrmwizard.rdolayout0.caption"
+msgid "Classic"
+msgstr "Klasik"
+
+#: tfrmwizard.rdolayout1.caption
+msgctxt "tfrmwizard.rdolayout1.caption"
+msgid "Inverted"
+msgstr "Ters Çevrilmiş"
+
+#: tfrmwizard.rdolayout2.caption
+msgctxt "tfrmwizard.rdolayout2.caption"
+msgid "Vertical"
+msgstr "Dikey"
+
+#: tfrmaudiototext.btnengine.caption
+msgctxt "tfrmaudiototext.btnengine.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmaudiototext.btnmodel.caption
+msgctxt "tfrmaudiototext.btnmodel.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmaudiototext.caption
+msgctxt "tfrmaudiototext.caption"
+msgid "Audio to text"
+msgstr "Sesten metne"
+
+#: tfrmaudiototextmodel.btnclose.caption
+msgctxt "tfrmaudiototextmodel.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmaudiototextmodel.btndownload.caption
+msgctxt "tfrmaudiototextmodel.btndownload.caption"
+msgid "Download"
+msgstr "İndir"
+
+#: tfrmautomaticdurations.btnapply.caption
+msgctxt "tfrmautomaticdurations.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmautomaticdurations.btnclose.caption
+msgctxt "tfrmautomaticdurations.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmbatchconvert.btnadd.caption
+msgctxt "tfrmbatchconvert.btnadd.caption"
+msgid "Add..."
+msgstr "Ekle..."
+
+#: tfrmbatchconvert.btnapply.caption
+msgctxt "tfrmbatchconvert.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmbatchconvert.btnclose.caption
+msgctxt "tfrmbatchconvert.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmbatchconvert.btninvert.caption
+msgctxt "tfrmbatchconvert.btninvert.caption"
+msgid "Invert"
+msgstr "Tersine Çevir"
+
+#: tfrmbatchconvert.btnopenfolder.caption
+msgctxt "tfrmbatchconvert.btnopenfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmbatchconvert.btnremove.caption
+msgctxt "tfrmbatchconvert.btnremove.caption"
+msgid "Remove"
+msgstr "Kaldır"
+
+#: tfrmbatchconvert.btnscanfolder.caption
+msgctxt "tfrmbatchconvert.btnscanfolder.caption"
+msgid "Scan..."
+msgstr "Tara..."
+
+#: tfrmbatchconvert.btnselectall.caption
+msgctxt "tfrmbatchconvert.btnselectall.caption"
+msgid "Select all"
+msgstr "Tümünü seç"
+
+#: tfrmcharactermap.btnclose.caption
+msgctxt "tfrmcharactermap.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmcharactermap.btncopy.caption
+msgctxt "tfrmcharactermap.btncopy.caption"
+msgid "Copy"
+msgstr "Kopyala"
+
+#: tfrmcharactermap.btnminus.caption
+msgctxt "tfrmcharactermap.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmcharactermap.btnplus.caption
+msgctxt "tfrmcharactermap.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmcompare.btnclose.caption
+msgctxt "tfrmcompare.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmcompare.btnfile1.caption
+msgctxt "tfrmcompare.btnfile1.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcompare.btnfile2.caption
+msgctxt "tfrmcompare.btnfile2.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmconvertcase.btnapply.caption
+msgctxt "tfrmconvertcase.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmconvertcase.btnclose.caption
+msgctxt "tfrmconvertcase.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmcustomimageformat.btnclose.caption
+msgctxt "tfrmcustomimageformat.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmcustomimageformat.btnfolder.caption
+msgctxt "tfrmcustomimageformat.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcustomimageformat.btnres.caption
+msgctxt "tfrmcustomimageformat.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcustomimageformat.btnsave.caption
+msgctxt "tfrmcustomimageformat.btnsave.caption"
+msgid "Save..."
+msgstr "Kaydet..."
+
+#: tfrmcustomtextformat.btnclose.caption
+msgctxt "tfrmcustomtextformat.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmcustomtextformat.btnsave.caption
+msgctxt "tfrmcustomtextformat.btnsave.caption"
+msgid "Save..."
+msgstr "Kaydet..."
+
+#: tfrmcustomtextformat.lblencoding.caption
+msgctxt "tfrmcustomtextformat.lblencoding.caption"
+msgid "Encoding"
+msgstr "Kodlama"
+
+#: tfrmcustomtextformat.lblfps.caption
+msgctxt "tfrmcustomtextformat.lblfps.caption"
+msgid "FPS"
+msgstr "FPS"
+
+#: tfrmcustomtextformat.lblscript.caption
+msgctxt "tfrmcustomtextformat.lblscript.caption"
+msgid "Script"
+msgstr "Betik"
+
+#: tfrmcustomtextformat.lbltimecode.caption
+msgctxt "tfrmcustomtextformat.lbltimecode.caption"
+msgid "Time code"
+msgstr "Zaman kodu"
+
+#: tfrmcustomtextformat.lbltitle.caption
+msgctxt "tfrmcustomtextformat.lbltitle.caption"
+msgid "Title"
+msgstr "Başlık"
+
+#: tfrmdelay.btnapply.caption
+msgctxt "tfrmdelay.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmdelay.btnclose.caption
+msgctxt "tfrmdelay.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmdelay.cbomode.text
+msgctxt "tfrmdelay.cbomode.text"
+msgid "+"
+msgstr "+"
+
+#: tfrmdownload.btncancel.caption
+msgctxt "tfrmdownload.btncancel.caption"
+msgid "Cancel"
+msgstr "İptal"
+
+#: tfrmdurationlimits.btnapply.caption
+msgctxt "tfrmdurationlimits.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmdurationlimits.btnclose.caption
+msgctxt "tfrmdurationlimits.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmexportsup.btnclose.caption
+msgctxt "tfrmexportsup.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmexportsup.btnres.caption
+msgctxt "tfrmexportsup.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmexportsup.btnsave.caption
+msgctxt "tfrmexportsup.btnsave.caption"
+msgid "Save..."
+msgstr "Kaydet..."
+
+#: tfrmfindandreplace.btnclose.caption
+msgctxt "tfrmfindandreplace.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmfindandreplace.btnfind.caption
+msgctxt "tfrmfindandreplace.btnfind.caption"
+msgid "Find"
+msgstr "Bul"
+
+#: tfrmfindandreplace.btnfindnext.caption
+msgctxt "tfrmfindandreplace.btnfindnext.caption"
+msgid "Find next"
+msgstr "Sonrakini bul"
+
+#: tfrmfindandreplace.btnreplace.caption
+msgctxt "tfrmfindandreplace.btnreplace.caption"
+msgid "Replace"
+msgstr "Değiştir"
+
+#: tfrmfindandreplace.chkreplacewith.caption
+msgctxt "tfrmfindandreplace.chkreplacewith.caption"
+msgid "Replace with:"
+msgstr "Şununla değiştir:"
+
+#: tfrmfixsubtitles.btnapply.caption
+msgctxt "tfrmfixsubtitles.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmfixsubtitles.btnclose.caption
+msgctxt "tfrmfixsubtitles.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmfixsubtitles.lblspacinghyphen.caption
+msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
+msgid "Spacing of opening hyphen"
+msgstr "Başlangıç tiresi boşluğu"
+
+#: tfrmfixsubtitles.mnuinvertselection.caption
+msgctxt "tfrmfixsubtitles.mnuinvertselection.caption"
+msgid "Invert selection"
+msgstr "Seçimi tersine çevir"
+
+#: tfrmfixsubtitles.mnuselectall.caption
+msgctxt "tfrmfixsubtitles.mnuselectall.caption"
+msgid "Select all"
+msgstr "Tümünü seç"
+
+#: tfrmformatproperties.btnapply.caption
+msgctxt "tfrmformatproperties.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmformatproperties.btnclose.caption
+msgctxt "tfrmformatproperties.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmformatproperties.caption
+msgctxt "tfrmformatproperties.caption"
+msgid "Format properties"
+msgstr "Format özellikleri"
+
+#: tfrmformatproperties.lblasalignment.caption
+msgctxt "tfrmformatproperties.lblasalignment.caption"
+msgid "Alignment"
+msgstr "Hizalama"
+
+#: tfrmformatproperties.lblasheight.caption
+msgctxt "tfrmformatproperties.lblasheight.caption"
+msgid "Height"
+msgstr "Yükseklik"
+
+#: tfrmformatproperties.lblaslanguage.caption
+msgctxt "tfrmformatproperties.lblaslanguage.caption"
+msgid "Language"
+msgstr "Dil"
+
+#: tfrmformatproperties.lblaswidth.caption
+msgctxt "tfrmformatproperties.lblaswidth.caption"
+msgid "Width"
+msgstr "Genişlik"
+
+#: tfrmformatproperties.lblcavenalanguage.caption
+msgctxt "tfrmformatproperties.lblcavenalanguage.caption"
+msgid "Language"
+msgstr "Dil"
+
+#: tfrmformatproperties.lbldvdinfo.caption
+msgctxt "tfrmformatproperties.lbldvdinfo.caption"
+msgid "Info"
+msgstr "Bilgi"
+
+#: tfrmformatproperties.lbldvdlanguage.caption
+msgctxt "tfrmformatproperties.lbldvdlanguage.caption"
+msgid "Language"
+msgstr "Dil"
+
+#: tfrmformatproperties.lbldvdtitle.caption
+msgctxt "tfrmformatproperties.lbldvdtitle.caption"
+msgid "Title"
+msgstr "Başlık"
+
+#: tfrmgenerateblankvideo.btnclose.caption
+msgctxt "tfrmgenerateblankvideo.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmgenerateblankvideo.btnimage.caption
+msgctxt "tfrmgenerateblankvideo.btnimage.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmgenerateblankvideo.btnres.caption
+msgctxt "tfrmgenerateblankvideo.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmgenerateblankvideo.chkgeneratetc.caption
+msgctxt "tfrmgenerateblankvideo.chkgeneratetc.caption"
+msgid "Time code"
+msgstr "Zaman kodu"
+
+#: tfrmgenerateblankvideo.lblbackground.caption
+msgctxt "tfrmgenerateblankvideo.lblbackground.caption"
+msgid "Background"
+msgstr "Arka plan"
+
+#: tfrmgenerateblankvideo.lblduration.caption
+msgctxt "tfrmgenerateblankvideo.lblduration.caption"
+msgid "Duration"
+msgstr "Süre"
+
+#: tfrmgenerateblankvideo.lblfps.caption
+msgctxt "tfrmgenerateblankvideo.lblfps.caption"
+msgid "FPS"
+msgstr "FPS"
+
+#: tfrmgenerateblankvideo.lblvideores.caption
+msgctxt "tfrmgenerateblankvideo.lblvideores.caption"
+msgid "Video resolution"
+msgstr "Video çözünürlüğü"
+
+#: tfrmgenerateblankvideo.lblx.caption
+msgctxt "tfrmgenerateblankvideo.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmgenerateblankvideo.rdoimage.caption
+msgid "Image"
+msgstr "Görüntü"
+
+#: tfrmgeneratevideo.btnclose.caption
+msgctxt "tfrmgeneratevideo.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmgeneratevideo.btngenerate.caption
+msgctxt "tfrmgeneratevideo.btngenerate.caption"
+msgid "Generate"
+msgstr "Oluştur"
+
+#: tfrmgeneratevideo.btnres.caption
+msgctxt "tfrmgeneratevideo.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmgeneratevideo.chkcut.caption
+msgctxt "tfrmgeneratevideo.chkcut.caption"
+msgid "Cut"
+msgstr "Kes"
+
+#: tfrmgeneratevideo.chkdeinterlace.caption
+msgctxt "tfrmgeneratevideo.chkdeinterlace.caption"
+msgid "Deinterlace"
+msgstr "Taramasız yap"
+
+#: tfrmgeneratevideo.lblaudioencoding.caption
+msgctxt "tfrmgeneratevideo.lblaudioencoding.caption"
+msgid "Codec"
+msgstr "Kodek"
+
+#: tfrmgeneratevideo.lblcropheight.caption
+msgctxt "tfrmgeneratevideo.lblcropheight.caption"
+msgid "Height"
+msgstr "Yükseklik"
+
+#: tfrmgeneratevideo.lblcropleft.caption
+msgctxt "tfrmgeneratevideo.lblcropleft.caption"
+msgid "Left"
+msgstr "Sol"
+
+#: tfrmgeneratevideo.lblcropwidth.caption
+msgctxt "tfrmgeneratevideo.lblcropwidth.caption"
+msgid "Width"
+msgstr "Genişlik"
+
+#: tfrmgeneratevideo.lblfont.caption
+msgctxt "tfrmgeneratevideo.lblfont.caption"
+msgid "Font"
+msgstr "Yazı Tipi"
+
+#: tfrmgeneratevideo.lblfontcolor.caption
+msgctxt "tfrmgeneratevideo.lblfontcolor.caption"
+msgid "Color"
+msgstr "Renk"
+
+#: tfrmgeneratevideo.lblfontsize.caption
+msgctxt "tfrmgeneratevideo.lblfontsize.caption"
+msgid "Size"
+msgstr "Boyut"
+
+#: tfrmgeneratevideo.lblformat.caption
+msgctxt "tfrmgeneratevideo.lblformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmgeneratevideo.lblvideocodec.caption
+msgctxt "tfrmgeneratevideo.lblvideocodec.caption"
+msgid "Codec"
+msgstr "Kodek"
+
+#: tfrmgeneratevideo.lblx.caption
+msgctxt "tfrmgeneratevideo.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmgeneratevideo.rdoaudio.caption
+msgctxt "tfrmgeneratevideo.rdoaudio.caption"
+msgid "Audio"
+msgstr "Ses"
+
+#: tfrmgeneratevideo.rdoothers.caption
+msgctxt "tfrmgeneratevideo.rdoothers.caption"
+msgid "Others"
+msgstr "Diğerleri"
+
+#: tfrmgeneratevideo.rdosubtitle.caption
+msgctxt "tfrmgeneratevideo.rdosubtitle.caption"
+msgid "Subtitles"
+msgstr "Altyazılar"
+
+#: tfrmgeneratevideo.rdovideo.caption
+msgctxt "tfrmgeneratevideo.rdovideo.caption"
+msgid "Video"
+msgstr "Video"
+
+#: tfrmgoto.btnclose.caption
+msgctxt "tfrmgoto.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmgoto.btngo.caption
+msgctxt "tfrmgoto.btngo.caption"
+msgid "Go"
+msgstr "Git"
+
+#: tfrmgoto.caption
+msgctxt "tfrmgoto.caption"
+msgid "Go to line"
+msgstr "Satıra git"
+
+#: tfrmgototime.btnclose.caption
+msgctxt "tfrmgototime.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmgototime.btngo.caption
+msgctxt "tfrmgototime.btngo.caption"
+msgid "Go"
+msgstr "Git"
+
+#: tfrmgototime.caption
+msgctxt "tfrmgototime.caption"
+msgid "Go to"
+msgstr "Git"
+
+#: tfrmimportsup.btnclose.caption
+msgctxt "tfrmimportsup.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmimportsup.btnimport.caption
+msgctxt "tfrmimportsup.btnimport.caption"
+msgid "Import"
+msgstr "İçe Aktar"
+
+#: tfrmimportsup.btnlanguage.caption
+msgctxt "tfrmimportsup.btnlanguage.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmimportsuplanguages.btnclose.caption
+msgctxt "tfrmimportsuplanguages.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmimportsuplanguages.btndownload.caption
+msgctxt "tfrmimportsuplanguages.btndownload.caption"
+msgid "Download"
+msgstr "İndir"
+
+#: tfrmmodifyselection.btnapply.caption
+msgctxt "tfrmmodifyselection.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmmodifyselection.btnclose.caption
+msgctxt "tfrmmodifyselection.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmmultiplereplace.btnapply.caption
+msgctxt "tfrmmultiplereplace.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmmultiplereplace.btnclose.caption
+msgctxt "tfrmmultiplereplace.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmmultiplereplace.btnminus.caption
+msgctxt "tfrmmultiplereplace.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmmultiplereplace.btnplus.caption
+msgctxt "tfrmmultiplereplace.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmpauses.btnapply.caption
+msgctxt "tfrmpauses.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmpauses.btnclose.caption
+msgctxt "tfrmpauses.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmqualitycheck.btnclose.caption
+msgctxt "tfrmqualitycheck.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmrestorebackup.btnclose.caption
+msgctxt "tfrmrestorebackup.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmrestorebackup.btnrestore.caption
+msgctxt "tfrmrestorebackup.btnrestore.caption"
+msgid "Restore"
+msgstr "Geri Yükle"
+
+#: tfrmroundtime.btnapply.caption
+msgctxt "tfrmroundtime.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmroundtime.btnclose.caption
+msgctxt "tfrmroundtime.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmsettings.btnclose.caption
+msgctxt "tfrmsettings.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmsettings.btnfasterwhisper.caption
+msgctxt "tfrmsettings.btnfasterwhisper.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnffmpeg.caption
+msgctxt "tfrmsettings.btnffmpeg.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnminus.caption
+msgctxt "tfrmsettings.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmsettings.btnplus.caption
+msgctxt "tfrmsettings.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmsettings.btnprofile.caption
+msgctxt "tfrmsettings.btnprofile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnscenedetect.caption
+msgctxt "tfrmsettings.btnscenedetect.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnshortcutapply.caption
+msgctxt "tfrmsettings.btnshortcutapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmsettings.btntesseract.caption
+msgctxt "tfrmsettings.btntesseract.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnwhispercpp.caption
+msgctxt "tfrmsettings.btnwhispercpp.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnytdlp.caption
+msgctxt "tfrmsettings.btnytdlp.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmshifttimes.btnapply.caption
+msgctxt "tfrmshifttimes.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmshifttimes.btnclose.caption
+msgctxt "tfrmshifttimes.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmshifttimes.cbooffset.text
+msgctxt "tfrmshifttimes.cbooffset.text"
+msgid "+"
+msgstr "+"
+
+#: tfrmshotchanges.btnapply.caption
+msgctxt "tfrmshotchanges.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmshotchanges.btnclose.caption
+msgctxt "tfrmshotchanges.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmshotchanges.btndetect.caption
+msgctxt "tfrmshotchanges.btndetect.caption"
+msgid "Detect"
+msgstr "Algıla"
+
+#: tfrmshotchanges.btnexport.caption
+msgctxt "tfrmshotchanges.btnexport.caption"
+msgid "Export..."
+msgstr "Dışa Aktar..."
+
+#: tfrmshotchanges.btnimport.caption
+msgctxt "tfrmshotchanges.btnimport.caption"
+msgid "Import..."
+msgstr "İçe Aktar..."
+
+#: tfrmshotchanges.cbooffset.text
+msgctxt "tfrmshotchanges.cbooffset.text"
+msgid "+"
+msgstr "+"
+
+#: tfrmspellcheck.btnadd.caption
+msgctxt "tfrmspellcheck.btnadd.caption"
+msgid "Add"
+msgstr "Ekle"
+
+#: tfrmspellcheck.btnchange.caption
+msgctxt "tfrmspellcheck.btnchange.caption"
+msgid "Change"
+msgstr "Değiştir"
+
+#: tfrmspellcheck.btnchangeall.caption
+msgctxt "tfrmspellcheck.btnchangeall.caption"
+msgid "Change all"
+msgstr "Tümünü Değiştir"
+
+#: tfrmspellcheck.btnclose.caption
+msgctxt "tfrmspellcheck.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmspellcheck.btnskip.caption
+msgctxt "tfrmspellcheck.btnskip.caption"
+msgid "Skip"
+msgstr "Atla"
+
+#: tfrmspellcheck.btnskipall.caption
+msgctxt "tfrmspellcheck.btnskipall.caption"
+msgid "Skip all"
+msgstr "Tümünü Atla"
+
+#: tfrmstatistics.btnclose.caption
+msgctxt "tfrmstatistics.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmstatistics.btnexport.caption
+msgctxt "tfrmstatistics.btnexport.caption"
+msgid "Export..."
+msgstr "Dışa Aktar..."
+
+#: tfrmstreamextractor.btnclose.caption
+msgctxt "tfrmstreamextractor.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmstreamextractor.btnfile.caption
+msgctxt "tfrmstreamextractor.btnfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmstreamextractor.btnfolder.caption
+msgctxt "tfrmstreamextractor.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtbx.btnclose.caption
+msgctxt "tfrmtbx.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmtbxedit.btnadd.caption
+msgctxt "tfrmtbxedit.btnadd.caption"
+msgid "Add"
+msgstr "Ekle"
+
+#: tfrmtbxedit.btnclose.caption
+msgctxt "tfrmtbxedit.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmtbxlist.btnclose.caption
+msgctxt "tfrmtbxlist.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmtbxlist.btncopy.caption
+msgctxt "tfrmtbxlist.btncopy.caption"
+msgid "Copy"
+msgstr "Kopyala"
+
+#: tfrmtbxsettings.btnapply.caption
+msgctxt "tfrmtbxsettings.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmtbxsettings.btnclose.caption
+msgctxt "tfrmtbxsettings.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmtbxsettings.btnopenfile.caption
+msgctxt "tfrmtbxsettings.btnopenfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtimeexpander.btnapply.caption
+msgctxt "tfrmtimeexpander.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmtimeexpander.btnclose.caption
+msgctxt "tfrmtimeexpander.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmtranslate.btnclose.caption
+msgctxt "tfrmtranslate.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmtranslationmemory.btnclose.caption
+msgctxt "tfrmtranslationmemory.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmtranslationmemory.btncopy.caption
+msgctxt "tfrmtranslationmemory.btncopy.caption"
+msgid "Copy"
+msgstr "Kopyala"
+
+#: tfrmtranslationmemory.btnuse.caption
+msgctxt "tfrmtranslationmemory.btnuse.caption"
+msgid "Use"
+msgstr "Kullan"
+
+#: tfrmtranslationmemory.btnvalidate.caption
+msgctxt "tfrmtranslationmemory.btnvalidate.caption"
+msgid "Validate"
+msgstr "Doğrula"
+
+#: tfrmtranslationmemorylist.btnclose.caption
+msgctxt "tfrmtranslationmemorylist.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmtranslationmemorylist.btncopy.caption
+msgctxt "tfrmtranslationmemorylist.btncopy.caption"
+msgid "Copy"
+msgstr "Kopyala"
+
+#: tfrmtranslationmemorysettings.btnapply.caption
+msgctxt "tfrmtranslationmemorysettings.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmtranslationmemorysettings.btnclose.caption
+msgctxt "tfrmtranslationmemorysettings.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmtranslationmemorysettings.btnopenfile.caption
+msgctxt "tfrmtranslationmemorysettings.btnopenfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtts.btnclose.caption
+msgctxt "tfrmtts.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmtts.btnfolder.caption
+msgctxt "tfrmtts.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtts.btngenerate.caption
+msgctxt "tfrmtts.btngenerate.caption"
+msgid "Generate"
+msgstr "Oluştur"
+
+#: tfrmvideodubbing.btnbackgroundmusic.caption
+msgctxt "tfrmvideodubbing.btnbackgroundmusic.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmvideodubbing.btnclose.caption
+msgctxt "tfrmvideodubbing.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmvideodubbing.btngenerate.caption
+msgctxt "tfrmvideodubbing.btngenerate.caption"
+msgid "Generate"
+msgstr "Oluştur"
+
+#: tfrmwaveextractor.btnclose.caption
+msgctxt "tfrmwaveextractor.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmmain.actabout.caption
+msgctxt "tfrmmain.actabout.caption"
+msgid "About..."
+msgstr "Hakkında..."
+
+#: tfrmmain.actactor.caption
+msgctxt "tfrmmain.actactor.caption"
+msgid "Actors"
+msgstr "Aktörler"
+
+#: tfrmmain.actaudiototext.caption
+msgctxt "tfrmmain.actaudiototext.caption"
+msgid "Audio to text..."
+msgstr "Sesten metne..."
+
+#: tfrmmain.actbatchconvert.caption
+msgctxt "tfrmmain.actbatchconvert.caption"
+msgid "Batch convert..."
+msgstr "Toplu dönüştür..."
+
+#: tfrmmain.actcenterwaveform.caption
+msgctxt "tfrmmain.actcenterwaveform.caption"
+msgid "Center waveform"
+msgstr "Dalga formunu ortala"
+
+#: tfrmmain.actcloseapp.caption
+msgctxt "tfrmmain.actcloseapp.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmmain.actcombineentries.hint
+msgctxt "tfrmmain.actcombineentries.hint"
+msgid "Combines all the selected entries into one"
+msgstr "Seçilen tüm girişleri tek bir girişte birleştirir"
+
+#: tfrmmain.actcopy.caption
+msgctxt "tfrmmain.actcopy.caption"
+msgid "Copy"
+msgstr "Kopyala"
+
+#: tfrmmain.actcut.caption
+msgctxt "tfrmmain.actcut.caption"
+msgid "Cut"
+msgstr "Kes"
+
+#: tfrmmain.actdetectsilentzones.caption
+msgctxt "tfrmmain.actdetectsilentzones.caption"
+msgid "Detect silent zones"
+msgstr "Sessiz bölgeleri algıla"
+
+#: tfrmmain.actdetectsilentzones.hint
+msgid "Click to refresh list"
+msgstr "Listeyi yenilemek için tıklayın"
+
+#: tfrmmain.actfindnext.caption
+msgctxt "tfrmmain.actfindnext.caption"
+msgid "Find next"
+msgstr "Sonrakini bul"
+
+#: tfrmmain.actfontcolordlg.caption
+msgctxt "tfrmmain.actfontcolordlg.caption"
+msgid "Color..."
+msgstr "Renk..."
+
+#: tfrmmain.acthelp.caption
+msgctxt "tfrmmain.acthelp.caption"
+msgid "Help"
+msgstr "Yardım"
+
+#: tfrmmain.actinvertselection.caption
+msgctxt "tfrmmain.actinvertselection.caption"
+msgid "Invert selection"
+msgstr "Seçimi tersine çevir"
+
+#: tfrmmain.actjumptopreviousempty.caption
+msgid "Jump to previous without text"
+msgstr "Önceki metinsiz girişe atla"
+
+#: tfrmmain.actjumptopreviousmarked.caption
+msgid "Jump to previous marked"
+msgstr "Önceki işaretli girişe atla"
+
+#: tfrmmain.actjumptopreviousnote.caption
+msgid "Jump to previous note"
+msgstr "Önceki nota atla"
+
+#: tfrmmain.actjumptoprevshotchange.caption
+msgid "Jump to previous shot change"
+msgstr "Önceki sahne değişimine atla"
+
+#: tfrmmain.actlistmode.caption
+msgctxt "tfrmmain.actlistmode.caption"
+msgid "List mode"
+msgstr "Liste modu"
+
+#: tfrmmain.actloadmedia.caption
+msgid "Open media..."
+msgstr "Medya aç..."
+
+#: tfrmmain.actloadmedia.hint
+msgctxt "tfrmmain.actloadmedia.hint"
+msgid "Open a media file"
+msgstr "Bir medya dosyası açın"
+
+#: tfrmmain.actloadmediafromurl.caption
+msgid "Open media from URL..."
+msgstr "URL'den medya aç..."
+
+#: tfrmmain.actloadproject.caption
+msgid "Load project..."
+msgstr "Proje yükle..."
+
+#: tfrmmain.actloadsubtitle.caption
+msgctxt "tfrmmain.actloadsubtitle.caption"
+msgid "Load subtitle..."
+msgstr "Altyazı yükle..."
+
+#: tfrmmain.actloadsubtitle.hint
+msgid "Load a subtitle file"
+msgstr "Bir altyazı dosyası yükleyin"
+
+#: tfrmmain.actloadtranscription.caption
+msgctxt "tfrmmain.actloadtranscription.caption"
+msgid "Transcription..."
+msgstr "Yazım (Transcription)..."
+
+#: tfrmmain.actloadtranslation.caption
+msgid "Load translation..."
+msgstr "Çeviri yükle..."
+
+#: tfrmmain.actmarkentry.caption
+msgid "Mark entry"
+msgstr "Girişi işaretle"
+
+#: tfrmmain.actmediaaddentry.caption
+msgctxt "tfrmmain.actmediaaddentry.caption"
+msgid "Add entry"
+msgstr "Giriş ekle"
+
+#: tfrmmain.actmediaautoscroll.caption
+msgctxt "tfrmmain.actmediaautoscroll.caption"
+msgid "Update list on preview"
+msgstr "Önizlemede listeyi güncelle"
+
+#: tfrmmain.actmediaback1min.caption
+msgid "Go back 1 minute"
+msgstr "1 dakika geri git"
+
+#: tfrmmain.actmediaback1sec.caption
+msgid "Go back 1 second"
+msgstr "1 saniye geri git"
+
+#: tfrmmain.actmediachangeplayrate.caption
+msgctxt "tfrmmain.actmediachangeplayrate.caption"
+msgid "Playback rate"
+msgstr "Oynatma hızı"
+
+#: tfrmmain.actmediadeleteentry.caption
+msgctxt "tfrmmain.actmediadeleteentry.caption"
+msgid "Delete entry"
+msgstr "Girişi sil"
+
+#: tfrmmain.actmediaendsubtitleentry.caption
+msgid "End entry"
+msgstr "Girişi bitir"
+
+#: tfrmmain.actmediaforward.caption
+msgctxt "tfrmmain.actmediaforward.caption"
+msgid "Forward"
+msgstr "İleri"
+
+#: tfrmmain.actmediaforward1min.caption
+msgid "Forward 1 minute"
+msgstr "1 dakika ileri sar"
+
+#: tfrmmain.actmediaforward1sec.caption
+msgid "Forward 1 second"
+msgstr "1 saniye ileri sar"
+
+#: tfrmmain.actmediamovesubtitleentry.caption
+msgid "Move entry"
+msgstr "Girişi taşı"
+
+#: tfrmmain.actmedianextframe.caption
+msgctxt "tfrmmain.actmedianextframe.caption"
+msgid "Next frame"
+msgstr "Sonraki kare"
+
+#: tfrmmain.actmediaplay.caption
+msgctxt "tfrmmain.actmediaplay.caption"
+msgid "Play/Pause"
+msgstr "Oynat/Duraklat"
+
+#: tfrmmain.actmediaplayafterselection.caption
+msgctxt "tfrmmain.actmediaplayafterselection.caption"
+msgid "Play after selection"
+msgstr "Seçimden sonra oynat"
+
+#: tfrmmain.actmediaplaybeforeselection.caption
+msgctxt "tfrmmain.actmediaplaybeforeselection.caption"
+msgid "Play before selection"
+msgstr "Seçimden önce oynat"
+
+#: tfrmmain.actmediaplayfromselection.caption
+msgctxt "tfrmmain.actmediaplayfromselection.caption"
+msgid "Play from selection"
+msgstr "Seçimden itibaren oynat"
+
+#: tfrmmain.actmediaplayselection.caption
+msgctxt "tfrmmain.actmediaplayselection.caption"
+msgid "Play selection"
+msgstr "Seçimi oynat"
+
+#: tfrmmain.actmediaplayselection.hint
+msgid "Click on the arrow to select playback repetitions"
+msgstr "Oynatma tekrarlarını seçmek için oka tıklayın"
+
+#: tfrmmain.actmediapreviousframe.caption
+msgctxt "tfrmmain.actmediapreviousframe.caption"
+msgid "Previous frame"
+msgstr "Önceki kare"
+
+#: tfrmmain.actmediarewind.caption
+msgctxt "tfrmmain.actmediarewind.caption"
+msgid "Rewind"
+msgstr "Geri sar"
+
+#: tfrmmain.actmediasetfinaltime.caption
+msgctxt "tfrmmain.actmediasetfinaltime.caption"
+msgid "Set final time"
+msgstr "Bitiş zamanını ayarla"
+
+#: tfrmmain.actmediasetinitialtime.caption
+msgctxt "tfrmmain.actmediasetinitialtime.caption"
+msgid "Set initial time"
+msgstr "Başlangıç zamanını ayarla"
+
+#: tfrmmain.actmediasplitentryatcursorposition.caption
+msgid "Split at cursor position"
+msgstr "İmleç konumunda böl"
+
+#: tfrmmain.actmediastartsubtitleentry.caption
+msgid "Start entry"
+msgstr "Girişi başlat"
+
+#: tfrmmain.actmediastop.caption
+msgctxt "tfrmmain.actmediastop.caption"
+msgid "Stop"
+msgstr "Durdur"
+
+#: tfrmmain.actmediasubsizedec.caption
+msgid "Reduce video font size"
+msgstr "Video yazı tipi boyutunu küçült"
+
+#: tfrmmain.actmediasubsizeinc.caption
+msgid "Increase video font size"
+msgstr "Video yazı tipi boyutunu büyüt"
+
+#: tfrmmain.actmediavolumedown.caption
+msgid "Down"
+msgstr "Aşağı"
+
+#: tfrmmain.actmediavolumemute.caption
+msgid "Mute"
+msgstr "Sessiz"
+
+#: tfrmmain.actmediavolumeup.caption
+msgid "Up"
+msgstr "Yukarı"
+
+#: tfrmmain.actmediazoomin.caption
+msgctxt "tfrmmain.actmediazoomin.caption"
+msgid "Zoom in"
+msgstr "Yakınlaştır"
+
+#: tfrmmain.actmediazoomout.caption
+msgctxt "tfrmmain.actmediazoomout.caption"
+msgid "Zoom out"
+msgstr "Uzaklaştır"
+
+#: tfrmmain.actmediazoomselection.caption
+msgctxt "tfrmmain.actmediazoomselection.caption"
+msgid "Zoom selection"
+msgstr "Seçimi yakınlaştır"
+
+#: tfrmmain.actnewsubtitle.caption
+msgctxt "tfrmmain.actnewsubtitle.caption"
+msgid "New project"
+msgstr "Yeni proje"
+
+#: tfrmmain.actnewsubtitle.hint
+msgid "Start a new subtitle project"
+msgstr "Yeni bir altyazı projesi başlatın"
+
+#: tfrmmain.actnextsubtitle.caption
+msgctxt "tfrmmain.actnextsubtitle.caption"
+msgid "Next subtitle"
+msgstr "Sonraki altyazı"
+
+#: tfrmmain.actpaste.caption
+msgctxt "tfrmmain.actpaste.caption"
+msgid "Paste"
+msgstr "Yapıştır"
+
+#: tfrmmain.actprevioussubtitle.caption
+msgctxt "tfrmmain.actprevioussubtitle.caption"
+msgid "Previous subtitle"
+msgstr "Önceki altyazı"
+
+#: tfrmmain.actredo.caption
+msgctxt "tfrmmain.actredo.caption"
+msgid "Redo"
+msgstr "Yinele"
+
+#: tfrmmain.actredo.hint
+msgid "Redo last undo"
+msgstr "Son geri almayı yinele"
+
+#: tfrmmain.actsavesubtitle.caption
+msgctxt "tfrmmain.actsavesubtitle.caption"
+msgid "Save subtitle"
+msgstr "Altyazıyı kaydet"
+
+#: tfrmmain.actsavesubtitle.hint
+msgid "Save current subtitle to file"
+msgstr "Mevcut altyazıyı dosyaya kaydet"
+
+#: tfrmmain.actsavesubtitleas.hint
+msgid "Save current subtitle to a specific file"
+msgstr "Mevcut altyazıyı belirli bir dosyaya farklı kaydet"
+
+#: tfrmmain.actsavetranscription.caption
+msgctxt "tfrmmain.actsavetranscription.caption"
+msgid "Transcription..."
+msgstr "Yazım..."
+
+#: tfrmmain.actsavetranslation.caption
+msgctxt "tfrmmain.actsavetranslation.caption"
+msgid "Save translation"
+msgstr "Çeviriyi kaydet"
+
+#: tfrmmain.actsavetranslation.hint
+msgid "Save current translation to file"
+msgstr "Mevcut çeviriyi dosyaya kaydet"
+
+#: tfrmmain.actsavetranslationas.hint
+msgid "Save current translation to a specific file"
+msgstr "Mevcut çeviriyi belirli bir dosyaya farklı kaydet"
+
+#: tfrmmain.actselectall.caption
+msgctxt "tfrmmain.actselectall.caption"
+msgid "Select all"
+msgstr "Tümünü seç"
+
+#: tfrmmain.actsetasdefaultencoding.caption
+msgctxt "tfrmmain.actsetasdefaultencoding.caption"
+msgid "Set as default save encoding"
+msgstr "Varsayılan kaydetme kodlaması olarak ayarla"
+
+#: tfrmmain.actsetasdefaultformat.caption
+msgctxt "tfrmmain.actsetasdefaultformat.caption"
+msgid "Set as default save format"
+msgstr "Varsayılan kaydetme formatı olarak ayarla"
+
+#: tfrmmain.actsetdefaultgap.hint
+msgid "Only if the gap is too short"
+msgstr "Yalnızca boşluk çok kısaysa"
+
+#: tfrmmain.actsetguilayout0.caption
+msgctxt "tfrmmain.actsetguilayout0.caption"
+msgid "Classic"
+msgstr "Klasik"
+
+#: tfrmmain.actsetguilayout1.caption
+msgctxt "tfrmmain.actsetguilayout1.caption"
+msgid "Inverted"
+msgstr "Ters çevrilmiş"
+
+#: tfrmmain.actsetguilayout2.caption
+msgctxt "tfrmmain.actsetguilayout2.caption"
+msgid "Vertical"
+msgstr "Dikey"
+
+#: tfrmmain.actsettings.caption
+msgctxt "tfrmmain.actsettings.caption"
+msgid "Settings..."
+msgstr "Ayarlar..."
+
+#: tfrmmain.actshoweditortoolbaralignment.caption
+msgctxt "tfrmmain.actshoweditortoolbaralignment.caption"
+msgid "Alignment"
+msgstr "Hizalama"
+
+#: tfrmmain.actshoweditortoolbarbasic.caption
+msgid "Basic"
+msgstr "Temel"
+
+#: tfrmmain.actshoweditortoolbarentry.caption
+msgctxt "tfrmmain.actshoweditortoolbarentry.caption"
+msgid "Entry"
+msgstr "Giriş"
+
+#: tfrmmain.actshoweditortoolbarformat.caption
+msgctxt "tfrmmain.actshoweditortoolbarformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmmain.actshoweditortoolbarlines.caption
+msgctxt "tfrmmain.actshoweditortoolbarlines.caption"
+msgid "Lines"
+msgstr "Satırlar"
+
+#: tfrmmain.actshoweditortoolbarwords.caption
+msgctxt "tfrmmain.actshoweditortoolbarwords.caption"
+msgid "Words"
+msgstr "Kelimeler"
+
+#: tfrmmain.actshowtoolbarencoding.caption
+msgctxt "tfrmmain.actshowtoolbarencoding.caption"
+msgid "Encoding"
+msgstr "Kodlama"
+
+#: tfrmmain.actshowtoolbarentry.caption
+msgctxt "tfrmmain.actshowtoolbarentry.caption"
+msgid "Entry"
+msgstr "Giriş"
+
+#: tfrmmain.actshowtoolbarfile.caption
+msgctxt "tfrmmain.actshowtoolbarfile.caption"
+msgid "File"
+msgstr "Dosya"
+
+#: tfrmmain.actshowtoolbarformat.caption
+msgctxt "tfrmmain.actshowtoolbarformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmmain.actshowtoolbarfps.caption
+msgctxt "tfrmmain.actshowtoolbarfps.caption"
+msgid "FPS"
+msgstr "FPS"
+
+#: tfrmmain.actshowtoolbargeneral.caption
+msgctxt "tfrmmain.actshowtoolbargeneral.caption"
+msgid "General"
+msgstr "Genel"
+
+#: tfrmmain.actshowtoolbarquickaction.caption
+msgid "Quick Action"
+msgstr "Hızlı İşlem"
+
+#: tfrmmain.actshowtoolbarview.caption
+msgctxt "tfrmmain.actshowtoolbarview.caption"
+msgid "View"
+msgstr "Görünüm"
+
+#: tfrmmain.actshowvideotoolbarcontrols.caption
+msgctxt "tfrmmain.actshowvideotoolbarcontrols.caption"
+msgid "Controls"
+msgstr "Kontroller"
+
+#: tfrmmain.actshowvideotoolbarentry.caption
+msgctxt "tfrmmain.actshowvideotoolbarentry.caption"
+msgid "Entry"
+msgstr "Giriş"
+
+#: tfrmmain.actshowvideotoolbarother.caption
+msgctxt "tfrmmain.actshowvideotoolbarother.caption"
+msgid "Other"
+msgstr "Diğer"
+
+#: tfrmmain.actshowvideotoolbarvolume.caption
+msgctxt "tfrmmain.actshowvideotoolbarvolume.caption"
+msgid "Volume"
+msgstr "Ses Düzeyi"
+
+#: tfrmmain.actshowwaveformtoolbarcontrols.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarcontrols.caption"
+msgid "Controls"
+msgstr "Kontroller"
+
+#: tfrmmain.actshowwaveformtoolbarentry.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarentry.caption"
+msgid "Entry"
+msgstr "Giriş"
+
+#: tfrmmain.actshowwaveformtoolbarother.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
+msgid "Other"
+msgstr "Diğer"
+
+#: tfrmmain.actshowwaveformtoolbarshotchanges.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarshotchanges.caption"
+msgid "Shot changes"
+msgstr "Sahne değişimleri"
+
+#: tfrmmain.actshowwaveformtoolbarzoom.caption
+msgid "Zoom"
+msgstr "Yakınlaştırma"
+
+#: tfrmmain.actsplitentryatposition.caption
+msgctxt "tfrmmain.actsplitentryatposition.caption"
+msgid "Split line at cursor position"
+msgstr "Satırı imleç konumunda böl"
+
+#: tfrmmain.acttbx.caption
+msgctxt "tfrmmain.acttbx.caption"
+msgid "Show..."
+msgstr "Göster..."
+
+#: tfrmmain.acttbxclose.caption
+msgctxt "tfrmmain.acttbxclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmmain.acttbxedit.caption
+msgctxt "tfrmmain.acttbxedit.caption"
+msgid "Add..."
+msgstr "Ekle..."
+
+#: tfrmmain.acttbxlist.caption
+msgctxt "tfrmmain.acttbxlist.caption"
+msgid "List..."
+msgstr "Liste..."
+
+#: tfrmmain.acttbxsettings.caption
+msgctxt "tfrmmain.acttbxsettings.caption"
+msgid "Settings..."
+msgstr "Ayarlar..."
+
+#: tfrmmain.actundo.caption
+msgctxt "tfrmmain.actundo.caption"
+msgid "Undo"
+msgstr "Geri Al"
+
+#: tfrmmain.actundo.hint
+msgid "Undo last action"
+msgstr "Son işlemi geri al"
+
+#: tfrmmain.actvalidatetm.hint
+msgid "Validates and advances to the next"
+msgstr "Doğrular ve sonrakine geçer"
+
+#: tfrmmain.actvar169.caption
+msgid "16:9"
+msgstr "16:9"
+
+#: tfrmmain.actvar1851.caption
+msgid "1.85:1"
+msgstr "1.85:1"
+
+#: tfrmmain.actvar2351.caption
+msgid "2.35:1"
+msgstr "2.35:1"
+
+#: tfrmmain.actvar43.caption
+msgid "4:3"
+msgstr "4:3"
+
+#: tfrmmain.actvarcycle.caption
+msgid "Cycle Aspect Ratio"
+msgstr "En Boy Oranını Değiştir"
+
+#: tfrmmain.actvardefault.caption
+msgid "Default"
+msgstr "Varsayılan"
+
+#: tfrmmain.actvideopreview.caption
+msgctxt "tfrmmain.actvideopreview.caption"
+msgid "Media preview"
+msgstr "Medya önizlemesi"
+
+#: tfrmmain.actviewshotchange.hint
+msgid "Enable/disable shot changes"
+msgstr "Sahne değişimlerini etkinleştir/devre dışı bırak"
+
+#: tfrmmain.mnumemoinsertunicodecontrolchar.caption
+msgid "Insert Unicode control character"
+msgstr "Unicode kontrol karakteri ekle"
+
+#: tfrmmain.mnuvstvideo.caption
+msgctxt "tfrmmain.mnuvstvideo.caption"
+msgid "Video"
+msgstr "Video"
+
+#: tfrmconventions.btnadd.caption
+msgctxt "tfrmconventions.btnadd.caption"
+msgid "Add"
+msgstr "Ekle"
+
+#: tfrmconventions.btnclose.caption
+msgctxt "tfrmconventions.btnclose.caption"
+msgid "Close"
+msgstr "Kapat"
+
+#: tfrmconventions.btnremove.caption
+msgctxt "tfrmconventions.btnremove.caption"
+msgid "Remove"
+msgstr "Kaldır"
+
+#: tfrmconventions.btnupdate.caption
+msgctxt "tfrmconventions.btnupdate.caption"
+msgid "Update"
+msgstr "Güncelle"
+
+#: tfrmconventions.caption
+msgctxt "tfrmconventions.caption"
+msgid "Conventions"
+msgstr "Kurallar"
+
+#: tfrmcustomfiledlg.btnapply.caption
+msgctxt "tfrmcustomfiledlg.btnapply.caption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: tfrmcustomfiledlg.btncancel.caption
+msgctxt "tfrmcustomfiledlg.btncancel.caption"
+msgid "Cancel"
+msgstr "İptal"
+
+#: tfrmcustomfiledlg.btnopenfile.caption
+msgctxt "tfrmcustomfiledlg.btnopenfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcustomfiledlg.lblencoding.caption
+msgctxt "tfrmcustomfiledlg.lblencoding.caption"
+msgid "Encoding"
+msgstr "Kodlama"
+
+#: tfrmcustomfiledlg.lblfilename.caption
+msgctxt "tfrmcustomfiledlg.lblfilename.caption"
+msgid "Filename"
+msgstr "Dosya adı"
+
+#: tfrmcustomfiledlg.lblformat.caption
+msgctxt "tfrmcustomfiledlg.lblformat.caption"
+msgid "Format"
+msgstr "Format"
+
+#: tfrmcustomfiledlg.lblfps.caption
+msgctxt "tfrmcustomfiledlg.lblfps.caption"
+msgid "FPS"
+msgstr "FPS"
+
+#: tfrmcustominputdlg.btncancel.caption
+msgctxt "tfrmcustominputdlg.btncancel.caption"
+msgid "Cancel"
+msgstr "İptal"
+
+#: tfrmcustominputdlg.btnok.caption
+msgctxt "tfrmcustominputdlg.btnok.caption"
+msgid "OK"
+msgstr "Tamam"
+
+#: tfrmcustommessagedlg.btnok.caption
+msgctxt "tfrmcustommessagedlg.btnok.caption"
+msgid "OK"
+msgstr "Tamam"
+
+#: tfrmcustomquestiondlg.btncancel.caption
+msgctxt "tfrmcustomquestiondlg.btncancel.caption"
+msgid "Cancel"
+msgstr "İptal"
+
+#: tfrmcustomquestiondlg.btnno.caption
+msgctxt "tfrmcustomquestiondlg.btnno.caption"
+msgid "No"
+msgstr "Hayır"
+
+#: tfrmcustomquestiondlg.btnyes.caption
+msgctxt "tfrmcustomquestiondlg.btnyes.caption"
+msgid "Yes"
+msgstr "Evet"
+
+#: tfrmcustomselectdlg.btncancel.caption
+msgctxt "tfrmcustomselectdlg.btncancel.caption"
+msgid "Cancel"
+msgstr "İptal"
+
+#: tfrmcustomselectdlg.btnok.caption
+msgctxt "tfrmcustomselectdlg.btnok.caption"
+msgid "OK"
+msgstr "Tamam"
+
+#: tfrmcustomselectdlgwithpreview.btncancel.caption
+msgctxt "tfrmcustomselectdlgwithpreview.btncancel.caption"
+msgid "Cancel"
+msgstr "İptal"
+
+#: tfrmcustomselectdlgwithpreview.btnok.caption
+msgctxt "tfrmcustomselectdlgwithpreview.btnok.caption"
+msgid "OK"
+msgstr "Tamam"

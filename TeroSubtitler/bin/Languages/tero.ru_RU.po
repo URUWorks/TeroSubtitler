@@ -268,6 +268,10 @@ msgstr "При попытке обнаружить сегменты диалог
 msgid "Download canceled by user."
 msgstr "Скачивание прервано пользователем."
 
+#: proclocalize.lngdropframe
+msgid "DF"
+msgstr ""
+
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"

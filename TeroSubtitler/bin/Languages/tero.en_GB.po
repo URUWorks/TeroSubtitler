@@ -266,6 +266,10 @@ msgstr "Attempting to detect dialogue segments deletes all entries from the list
 msgid "Download canceled by user."
 msgstr "Download canceled by user."
 
+#: proclocalize.lngdropframe
+msgid "DF"
+msgstr ""
+
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"
