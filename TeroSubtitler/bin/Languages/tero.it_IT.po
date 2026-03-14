@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 07.02.2026\n"
+"Project-Id-Version: Tero Subtitler - IT - 14.03.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: proclocalize.lngabversion
@@ -269,7 +269,7 @@ msgstr "Download annullato dall’utente."
 
 #: proclocalize.lngdropframe
 msgid "DF"
-msgstr ""
+msgstr "DF"
 
 #: proclocalize.lngentry
 #, object-pascal-format
@@ -425,7 +425,7 @@ msgstr "Rimuovi elementi vuoti"
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
-msgstr "Correggi punto interrogarativo: !? -> ?!"
+msgstr "Correggi punto interrogativo: !? -> ?!"
 
 #: proclocalize.lngfsetfixtags
 msgid "Fix invalid tags"
@@ -471,15 +471,15 @@ msgstr "Allinea tempistiche ai cambi inquadratura"
 
 #: proclocalize.lngfsetsnaptoshotchangesincue
 msgid "Snap In Cue to shot change"
-msgstr "Àncora il punto di ingresso al cambio inquadratura"
+msgstr "Allinea il punto di ingresso al cambio inquadratura"
 
 #: proclocalize.lngfsetsnaptoshotchangesincueaway
 msgid "Snap In Cue away from shot change"
-msgstr "Àncora il punto di ingresso lontano dal cambio inquadratura"
+msgstr "Allinea il punto di ingresso lontano dal cambio inquadratura"
 
 #: proclocalize.lngfsetsnaptoshotchangesoutcue
 msgid "Snap Out Cue to shot change"
-msgstr "Àncora il punto di uscita al cambio inquadratura"
+msgstr "Allinea il punto di uscita al cambio inquadratura"
 
 #: proclocalize.lngfsetspaceofopeninghyphen
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
@@ -1147,7 +1147,7 @@ msgstr "Media di parole al minuto: %.2f"
 
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
-msgstr "L’attuale insieme di sottotitoli contiene errori che ti suggeriamo di corregere, ma è possibile salvare il file."
+msgstr "L’attuale insieme di sottotitoli contiene errori che ti suggeriamo di correggere, ma è possibile salvare il file."
 
 #: proclocalize.lngsubtitlespecificationerror
 msgid "The current subtitles do not meet the specifications of the format to be saved."
@@ -3446,7 +3446,7 @@ msgstr "Salva sottotitoli come..."
 
 #: tfrmmain.actsavesubtitleas.hint
 msgid "Save current subtitle to a specific file"
-msgstr "Salva sottotitoliattuali  in un formato file specifico"
+msgstr "Salva sottotitoli attuali in un formato file specifico"
 
 #: tfrmmain.actsavetranscription.caption
 msgctxt "tfrmmain.actsavetranscription.caption"
@@ -4708,12 +4708,12 @@ msgstr "Ancoraggio/soglia cambi scena (fotogrammi)"
 #: tfrmsettings.lblscsnapincues.caption
 msgctxt "tfrmsettings.lblscsnapincues.caption"
 msgid "Snap in cues after SC (frames)"
-msgstr "Àncora punti di ingresso dopo il c.i. (fotogrammi)"
+msgstr "Allinea punti di ingresso dopo il c.i. (fotogrammi)"
 
 #: tfrmsettings.lblscsnapoutcues.caption
 msgctxt "tfrmsettings.lblscsnapoutcues.caption"
 msgid "Snap out cues before SC (frames)"
-msgstr "Àncora punti di uscita prima del c.i. (fotogrammi)"
+msgstr "Allinea punti di uscita prima del c.i. (fotogrammi)"
 
 #: tfrmsettings.lblseektime.caption
 msgid "Seek time (ms)"
@@ -5424,7 +5424,7 @@ msgstr "Voce globale"
 
 #: tfrmvideodubbing.chksubtitletrack.caption
 msgid "Subtitle track"
-msgstr "Traccia sottotioli"
+msgstr "Traccia sottotitoli"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
@@ -5630,4 +5630,3 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
-
