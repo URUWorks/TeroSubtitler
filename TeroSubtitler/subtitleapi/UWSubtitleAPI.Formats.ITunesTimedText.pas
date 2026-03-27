@@ -22,7 +22,7 @@ unit UWSubtitleAPI.Formats.ITunesTimedText;
 interface
 
 uses
-  Classes, SysUtils, UWSubtitleAPI, UWSystem.TimeUtils,
+  Classes, SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, StrUtils,
   UWSubtitleAPI.Formats, laz2_XMLRead, laz2_DOM; // laz2_XMLWrite;
 
 type
@@ -47,6 +47,165 @@ implementation
 
 uses UWSubtitleAPI.Tags, UWSubtitleAPI.Utils, UWSystem.StrUtils,
   UWSystem.SysUtils;
+
+// -----------------------------------------------------------------------------
+
+{ Helpers }
+
+// -----------------------------------------------------------------------------
+
+procedure AppendStyledTextDirect(XmlDoc: TXMLDocument; Parent: TDOMNode; const Txt: string);
+var
+  i: Integer;
+  Buffer: String;
+  Stack: array of TDOMElement;
+  CurrentNode: TDOMNode;
+
+  procedure FlushText;
+  begin
+    if Buffer <> '' then
+    begin
+      CurrentNode.AppendChild(XmlDoc.CreateTextNode(Buffer));
+      Buffer := '';
+    end;
+  end;
+
+  procedure PushSpan(const StyleName: string);
+  var
+    Span: TDOMElement;
+  begin
+    Span := XmlDoc.CreateElement('span');
+    Span.SetAttribute('style', StyleName);
+    CurrentNode.AppendChild(Span);
+
+    SetLength(Stack, Length(Stack) + 1);
+    Stack[High(Stack)] := Span;
+    CurrentNode := Span;
+  end;
+
+  procedure PushColor(const ColorHex: string);
+  var
+    Span: TDOMElement;
+  begin
+    Span := XmlDoc.CreateElement('span');
+    Span.SetAttribute('tts:color', ColorHex);
+    CurrentNode.AppendChild(Span);
+
+    SetLength(Stack, Length(Stack) + 1);
+    Stack[High(Stack)] := Span;
+    CurrentNode := Span;
+  end;
+
+  procedure PopSpan;
+  begin
+    if Length(Stack) > 0 then
+    begin
+      SetLength(Stack, Length(Stack) - 1);
+      if Length(Stack) > 0 then
+        CurrentNode := Stack[High(Stack)]
+      else
+        CurrentNode := Parent;
+    end;
+  end;
+
+  function MatchTag(const S: string; Pos: Integer; const Tag: string): Boolean;
+  begin
+    Result := Copy(S, Pos, Length(Tag)) = Tag;
+  end;
+
+  function ParseASSColor(const S: string; var Advance: Integer): string;
+  // \c&HBBGGRR&
+  var
+    tmp: string;
+    b, g, r: string;
+  begin
+    Result := '';
+    Advance := 0;
+
+    if (Length(S) < 10) then Exit;
+
+    // &H......&
+    if (S[1] = '\') and ((S[2] = 'c') or (S[2] = '1')) then
+    begin
+      if Pos('&H', S) > 0 then
+      begin
+        tmp := Copy(S, Pos('&H', S) + 2, 6); // BBGGRR
+
+        if Length(tmp) = 6 then
+        begin
+          b := Copy(tmp, 1, 2);
+          g := Copy(tmp, 3, 2);
+          r := Copy(tmp, 5, 2);
+
+          Result := '#' + r + g + b;
+        end;
+
+        Advance := Pos('&', Copy(S, Pos('&H', S) + 2, 10)) + Pos('&H', S) + 1;
+      end;
+    end;
+  end;
+
+var
+  TagContent, ColorHex: String;
+  j, Adv: Integer;
+begin
+  Buffer := '';
+  CurrentNode := Parent;
+  SetLength(Stack, 0);
+
+  i := 1;
+  while i <= Length(Txt) do
+  begin
+    // TAG BLOCK { ... }
+    if Txt[i] = '{' then
+    begin
+      FlushText;
+
+      // buscamos cierre
+      j := i + 1;
+      while (j <= Length(Txt)) and (Txt[j] <> '}') do Inc(j);
+
+      if j > Length(Txt) then Break;
+
+      TagContent := Copy(Txt, i + 1, j - i - 1);
+
+      // estilos
+      if TagContent = '\b1' then PushSpan('bold')
+      else if TagContent = '\b0' then PopSpan
+      else if TagContent = '\i1' then PushSpan('italic')
+      else if TagContent = '\i0' then PopSpan
+      else if TagContent = '\u1' then PushSpan('underline')
+      else if TagContent = '\u0' then PopSpan
+      else if TagContent = '\s1' then PushSpan('strikeout')
+      else if TagContent = '\s0' then PopSpan
+      else
+      begin
+        // color
+        ColorHex := ParseASSColor(TagContent, Adv);
+        if ColorHex <> '' then
+          PushColor(ColorHex);
+      end;
+
+      i := j + 1;
+      Continue;
+    end;
+
+    // SALTO
+    if Txt[i] = #10 then
+    begin
+      FlushText;
+      CurrentNode.AppendChild(XmlDoc.CreateElement('br'));
+      Inc(i);
+      Continue;
+    end;
+
+    // TEXTO
+    Buffer += Txt[i];
+    Inc(i);
+  end;
+
+  FlushText;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -182,6 +341,7 @@ var
   Root, Element, Node, SubNode : TDOMNode;
   i, it, ft : Integer;
   NewFPS: Double;
+  txt: String;
 begin
   Result := False;
   XmlDoc := TXMLDocument.Create;
@@ -296,8 +456,12 @@ begin
       TDOMElement(Element).SetAttribute('begin', MSToHHMMSSFFTime(it, NewFPS, Subtitles.TimecodeMode));
       //TDOMElement(Element).SetAttribute('id', TimeToString(Subtitles.InitialTime[i], 'p' + IntToStr(i)));
       TDOMElement(Element).SetAttribute('end', MSToHHMMSSFFTime(ft, NewFPS, Subtitles.TimecodeMode));
-      SubNode := XmlDoc.CreateTextNode(TSTagsToXML(ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), sLineBreak, '<br/>')));
-      Element.AppendChild(SubNode);
+
+      //SubNode := XmlDoc.CreateTextNode(TSTagsToXML(ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), sLineBreak, '<br/>')));
+      //Element.AppendChild(SubNode);
+      Txt := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
+      AppendStyledTextDirect(XmlDoc, Element, Txt);
+
       Node.AppendChild(Element);
     end;
 
