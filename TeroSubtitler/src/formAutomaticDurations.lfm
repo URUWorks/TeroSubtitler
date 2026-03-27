@@ -1,41 +1,42 @@
 object frmAutomaticDurations: TfrmAutomaticDurations
   Left = 241
-  Height = 307
+  Height = 384
   Top = 119
-  Width = 280
+  Width = 350
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Automatic durations'
-  ClientHeight = 307
-  ClientWidth = 280
+  ClientHeight = 384
+  ClientWidth = 350
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '4.6.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
   object lblCondition: TLabel
-    Left = 8
-    Height = 15
-    Top = 8
-    Width = 44
+    Left = 10
+    Height = 20
+    Top = 10
+    Width = 55
     Caption = 'Apply if:'
     ParentColor = False
   end
   object cboCondition: TComboBox
-    Left = 8
-    Height = 23
-    Top = 28
-    Width = 264
+    Left = 10
+    Height = 28
+    Top = 36
+    Width = 330
     Anchors = [akLeft, akRight, akBottom]
-    ItemHeight = 15
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 0
   end
   object btnClose: TButton
-    Left = 181
-    Height = 26
-    Top = 274
-    Width = 91
+    Left = 226
+    Height = 32
+    Top = 343
+    Width = 114
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Close'
@@ -44,78 +45,78 @@ object frmAutomaticDurations: TfrmAutomaticDurations
   end
   object btnApply: TButton
     AnchorSideRight.Control = btnClose
-    Left = 85
-    Height = 26
-    Top = 274
-    Width = 91
+    Left = 106
+    Height = 32
+    Top = 343
+    Width = 114
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     Caption = 'Apply'
     TabOrder = 1
     OnClick = btnApplyClick
   end
   object edtChars: TEdit
-    Left = 142
-    Height = 23
-    Top = 66
-    Width = 50
+    Left = 178
+    Height = 28
+    Top = 84
+    Width = 62
     Anchors = [akLeft, akBottom]
     NumbersOnly = True
     TabOrder = 3
     Text = '1'
   end
   object lblChars: TLabel
-    Left = 26
-    Height = 15
-    Top = 70
-    Width = 69
+    Left = 32
+    Height = 20
+    Top = 86
+    Width = 87
     Anchors = [akLeft, akBottom]
     Caption = 'per character'
     ParentColor = False
   end
   object edtWord: TEdit
-    Left = 142
-    Height = 23
-    Top = 96
-    Width = 50
+    Left = 178
+    Height = 28
+    Top = 121
+    Width = 62
     Anchors = [akLeft, akBottom]
     NumbersOnly = True
     TabOrder = 4
     Text = '1'
   end
   object lblWord: TLabel
-    Left = 26
-    Height = 15
-    Top = 100
-    Width = 47
+    Left = 32
+    Height = 20
+    Top = 124
+    Width = 60
     Anchors = [akLeft, akBottom]
     Caption = 'per word'
     ParentColor = False
   end
   object edtLine: TEdit
-    Left = 142
-    Height = 23
-    Top = 126
-    Width = 50
+    Left = 178
+    Height = 28
+    Top = 158
+    Width = 62
     Anchors = [akLeft, akBottom]
     NumbersOnly = True
     TabOrder = 5
     Text = '1'
   end
   object lblLine: TLabel
-    Left = 26
-    Height = 15
-    Top = 130
-    Width = 39
+    Left = 32
+    Height = 20
+    Top = 162
+    Width = 50
     Anchors = [akLeft, akBottom]
     Caption = 'per line'
     ParentColor = False
   end
   object rbnFromTheSelectedSubtitle: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 209
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 261
+    Width = 22
     Anchors = [akLeft, akBottom]
     AutoSize = False
     Caption = 'From selected entry'
@@ -123,10 +124,10 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     TabStop = False
   end
   object rbnAllTheSubtitles: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 190
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 238
+    Width = 22
     Anchors = [akLeft, akBottom]
     AutoSize = False
     Caption = 'All entries'
@@ -134,22 +135,22 @@ object frmAutomaticDurations: TfrmAutomaticDurations
     TabStop = False
   end
   object lblScope: TLabel
-    Left = 8
-    Height = 15
-    Top = 170
-    Width = 35
+    Left = 10
+    Height = 20
+    Top = 212
+    Width = 44
     Anchors = [akLeft, akBottom]
     Caption = 'Scope:'
     ParentColor = False
   end
   object rbnOnlySelectedSubtitles: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 228
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 285
+    Width = 22
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = 'Only selected entries'
+    Caption = 'Selected entries'
     TabOrder = 8
     TabStop = False
   end

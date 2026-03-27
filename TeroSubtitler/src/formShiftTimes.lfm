@@ -10,7 +10,7 @@ object frmShiftTimes: TfrmShiftTimes
   ClientWidth = 366
   DesignTimePPI = 120
   Position = poMainFormCenter
-  LCLVersion = '4.2.0.0'
+  LCLVersion = '4.6.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -43,7 +43,7 @@ object frmShiftTimes: TfrmShiftTimes
     BorderSpacing.Right = 6
     Caption = 'Apply'
     Default = True
-    TabOrder = 7
+    TabOrder = 6
     OnClick = btnApplyClick
   end
   object lblOffset: TLabel
@@ -121,7 +121,7 @@ object frmShiftTimes: TfrmShiftTimes
     Anchors = [akLeft, akBottom]
     AutoSize = False
     Caption = 'From selected entry'
-    TabOrder = 5
+    TabOrder = 4
     TabStop = False
   end
   object rbnOnlySelectedSubtitles: TUWRadioButton
@@ -131,8 +131,8 @@ object frmShiftTimes: TfrmShiftTimes
     Width = 22
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = 'Only selected entries'
-    TabOrder = 6
+    Caption = 'Selected entries'
+    TabOrder = 5
     TabStop = False
   end
   object lyoMode: TUWLayout

@@ -1,26 +1,27 @@
 object frmConvertCase: TfrmConvertCase
   Left = 260
-  Height = 266
+  Height = 332
   Top = 127
-  Width = 280
+  Width = 350
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Convert case'
-  ClientHeight = 266
-  ClientWidth = 280
+  ClientHeight = 332
+  ClientWidth = 350
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '4.6.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
   object btnApply: TButton
     AnchorSideRight.Control = btnClose
-    Left = 83
-    Height = 26
-    Top = 232
-    Width = 91
+    Left = 104
+    Height = 32
+    Top = 290
+    Width = 114
     Anchors = [akTop, akRight]
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     Caption = 'Apply'
     Default = True
     TabOrder = 6
@@ -29,10 +30,10 @@ object frmConvertCase: TfrmConvertCase
   object btnClose: TButton
     AnchorSideRight.Control = lyoScope
     AnchorSideRight.Side = asrBottom
-    Left = 179
-    Height = 26
-    Top = 232
-    Width = 91
+    Left = 224
+    Height = 32
+    Top = 290
+    Width = 114
     Anchors = [akTop, akRight]
     Cancel = True
     Caption = 'Close'
@@ -40,10 +41,10 @@ object frmConvertCase: TfrmConvertCase
     OnClick = btnCloseClick
   end
   object rdoSentenceType: TUWRadioButton
-    Left = 16
-    Height = 19
-    Top = 8
-    Width = 18
+    Left = 20
+    Height = 24
+    Top = 10
+    Width = 22
     AutoSize = False
     Caption = 'Sentence type'
     Checked = True
@@ -51,67 +52,67 @@ object frmConvertCase: TfrmConvertCase
     State = cbChecked
   end
   object rdoLowercase: TUWRadioButton
-    Left = 16
-    Height = 19
-    Top = 27
-    Width = 18
+    Left = 20
+    Height = 24
+    Top = 34
+    Width = 22
     AutoSize = False
     Caption = 'lowercase'
     TabOrder = 1
     TabStop = False
   end
   object rdoUppercase: TUWRadioButton
-    Left = 16
-    Height = 19
-    Top = 46
-    Width = 18
+    Left = 20
+    Height = 24
+    Top = 58
+    Width = 22
     AutoSize = False
     Caption = 'UPPERCASE'
     TabOrder = 2
     TabStop = False
   end
   object rdoTitleType: TUWRadioButton
-    Left = 16
-    Height = 19
-    Top = 65
-    Width = 18
+    Left = 20
+    Height = 24
+    Top = 81
+    Width = 22
     AutoSize = False
     Caption = 'Title Type'
     TabOrder = 3
     TabStop = False
   end
   object rdoInverseType: TUWRadioButton
-    Left = 16
-    Height = 19
-    Top = 84
-    Width = 18
+    Left = 20
+    Height = 24
+    Top = 105
+    Width = 22
     AutoSize = False
     Caption = 'iNVERSE tYPE'
     TabOrder = 4
     TabStop = False
   end
   object lyoScope: TUWLayout
-    Left = 16
-    Height = 96
-    Top = 128
-    Width = 254
+    Left = 20
+    Height = 120
+    Top = 160
+    Width = 318
     Anchors = [akTop, akLeft, akRight]
-    ClientHeight = 96
-    ClientWidth = 254
+    ClientHeight = 120
+    ClientWidth = 318
     TabOrder = 5
     object lblScope: TLabel
       Left = 0
-      Height = 15
+      Height = 20
       Top = 0
-      Width = 35
+      Width = 44
       Caption = 'Scope:'
       ParentColor = False
     end
     object rbnAllTheSubtitles: TUWRadioButton
       Left = 0
-      Height = 19
-      Top = 20
-      Width = 18
+      Height = 24
+      Top = 25
+      Width = 22
       AutoSize = False
       Caption = 'All entries'
       TabOrder = 0
@@ -119,9 +120,9 @@ object frmConvertCase: TfrmConvertCase
     end
     object rbnFromTheSelectedSubtitle: TUWRadioButton
       Left = 0
-      Height = 19
-      Top = 39
-      Width = 18
+      Height = 24
+      Top = 49
+      Width = 22
       AutoSize = False
       Caption = 'From the selected entry'
       TabOrder = 1
@@ -129,11 +130,11 @@ object frmConvertCase: TfrmConvertCase
     end
     object rbnOnlySelectedSubtitles: TUWRadioButton
       Left = 0
-      Height = 19
-      Top = 58
-      Width = 18
+      Height = 24
+      Top = 72
+      Width = 22
       AutoSize = False
-      Caption = 'Only selected entries'
+      Caption = 'Selected entries'
       TabOrder = 2
       TabStop = False
     end

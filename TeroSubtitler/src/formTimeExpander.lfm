@@ -1,34 +1,35 @@
 object frmTimeExpander: TfrmTimeExpander
   Left = 246
-  Height = 329
+  Height = 411
   Top = 121
-  Width = 283
+  Width = 354
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Time expander/reducer'
-  ClientHeight = 329
-  ClientWidth = 283
+  ClientHeight = 411
+  ClientWidth = 354
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '4.6.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
   object cboMode: TComboBox
-    Left = 8
-    Height = 23
-    Top = 8
-    Width = 171
+    Left = 10
+    Height = 28
+    Top = 10
+    Width = 214
     Anchors = [akTop, akLeft, akRight]
     AutoSize = False
-    ItemHeight = 15
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 0
   end
   object edtTime: TEdit
-    Left = 184
-    Height = 23
-    Top = 8
-    Width = 64
+    Left = 240
+    Height = 28
+    Top = 10
+    Width = 80
     Anchors = [akTop]
     NumbersOnly = True
     TabOrder = 1
@@ -38,12 +39,12 @@ object frmTimeExpander: TfrmTimeExpander
   object btnApply: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
-    Left = 88
-    Height = 26
-    Top = 295
-    Width = 91
+    Left = 110
+    Height = 32
+    Top = 369
+    Width = 114
     Anchors = [akTop, akRight]
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     Caption = 'Apply'
     Default = True
     TabOrder = 9
@@ -54,23 +55,23 @@ object frmTimeExpander: TfrmTimeExpander
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 184
-    Height = 26
-    Top = 295
-    Width = 91
+    Left = 230
+    Height = 32
+    Top = 369
+    Width = 114
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
+    BorderSpacing.Right = 10
+    BorderSpacing.Bottom = 10
     Cancel = True
     Caption = 'Close'
     TabOrder = 10
     OnClick = btnCloseClick
   end
   object chkSubtitle: TUWCheckBox
-    Left = 8
-    Height = 19
-    Top = 48
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 60
+    Width = 22
     AutoSize = False
     Caption = 'Only if subtitle is longer than'
     Checked = True
@@ -78,28 +79,28 @@ object frmTimeExpander: TfrmTimeExpander
     TabOrder = 2
   end
   object edtSubtitleValue: TEdit
-    Left = 24
-    Height = 23
-    Top = 72
-    Width = 64
+    Left = 30
+    Height = 28
+    Top = 90
+    Width = 80
     NumbersOnly = True
     TabOrder = 3
     Text = '1'
     OnChange = edtTimeChange
   end
   object lblChars: TLabel
-    Left = 96
-    Height = 15
-    Top = 76
-    Width = 54
+    Left = 120
+    Height = 20
+    Top = 95
+    Width = 67
     Caption = 'characters'
     ParentColor = False
   end
   object chkDuration: TUWCheckBox
-    Left = 8
-    Height = 19
-    Top = 112
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 140
+    Width = 22
     AutoSize = False
     Caption = 'Only if duration is longer than'
     Checked = True
@@ -107,69 +108,69 @@ object frmTimeExpander: TfrmTimeExpander
     TabOrder = 4
   end
   object edtDurationValue: TEdit
-    Left = 24
-    Height = 23
-    Top = 140
-    Width = 64
+    Left = 30
+    Height = 28
+    Top = 175
+    Width = 80
     NumbersOnly = True
     TabOrder = 5
     Text = '1'
     OnChange = edtTimeChange
   end
   object lblMs: TLabel
-    Left = 96
-    Height = 15
-    Top = 144
-    Width = 16
+    Left = 120
+    Height = 20
+    Top = 180
+    Width = 19
     Caption = 'ms'
     ParentColor = False
   end
   object rbnFromTheSelectedSubtitle: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 231
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 289
+    Width = 22
     AutoSize = False
     Caption = 'From selected entry'
     TabOrder = 7
     TabStop = False
   end
   object rbnAllTheSubtitles: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 212
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 265
+    Width = 22
     AutoSize = False
     Caption = 'All entries'
     TabOrder = 6
     TabStop = False
   end
   object lblScope: TLabel
-    Left = 8
-    Height = 15
-    Top = 192
-    Width = 35
+    Left = 10
+    Height = 20
+    Top = 240
+    Width = 44
     Caption = 'Scope:'
     ParentColor = False
   end
   object rbnOnlySelectedSubtitles: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 250
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 312
+    Width = 22
     AutoSize = False
-    Caption = 'Only selected entries'
+    Caption = 'Selected entries'
     TabOrder = 8
     TabStop = False
   end
   object lblMs1: TLabel
     AnchorSideLeft.Control = edtTime
     AnchorSideLeft.Side = asrBottom
-    Left = 253
-    Height = 15
-    Top = 12
-    Width = 16
-    BorderSpacing.Left = 5
+    Left = 326
+    Height = 20
+    Top = 15
+    Width = 19
+    BorderSpacing.Left = 6
     Caption = 'ms'
     ParentColor = False
   end

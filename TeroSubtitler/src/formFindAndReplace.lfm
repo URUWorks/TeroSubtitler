@@ -1,22 +1,24 @@
 object frmFindAndReplace: TfrmFindAndReplace
   Left = 260
-  Height = 440
+  Height = 550
   Top = 127
-  Width = 520
+  Width = 650
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Find and replace'
-  ClientHeight = 440
-  ClientWidth = 520
+  ClientHeight = 550
+  ClientWidth = 650
+  DesignTimePPI = 120
   Position = poMainFormCenter
+  LCLVersion = '4.6.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object lblTextToFind: TLabel
-    Left = 8
-    Height = 15
-    Top = 12
-    Width = 120
+    Left = 10
+    Height = 19
+    Top = 15
+    Width = 150
     AutoSize = False
     Caption = 'Text to find:'
     ParentColor = False
@@ -26,33 +28,33 @@ object frmFindAndReplace: TfrmFindAndReplace
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 420
-    Height = 30
-    Top = 402
-    Width = 92
+    Left = 525
+    Height = 32
+    Top = 508
+    Width = 115
     Anchors = [akRight, akBottom]
     AutoSize = True
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
+    BorderSpacing.Right = 10
+    BorderSpacing.Bottom = 10
     Cancel = True
     Caption = 'Close'
-    Constraints.MinHeight = 26
-    Constraints.MinWidth = 92
+    Constraints.MinHeight = 32
+    Constraints.MinWidth = 115
     TabOrder = 12
     OnClick = btnCloseClick
   end
   object btnFind: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
-    Left = 328
-    Height = 30
-    Top = 402
-    Width = 92
+    Left = 410
+    Height = 32
+    Top = 508
+    Width = 115
     Anchors = [akTop, akRight]
     AutoSize = True
     Caption = 'Find'
-    Constraints.MinHeight = 26
-    Constraints.MinWidth = 92
+    Constraints.MinHeight = 32
+    Constraints.MinWidth = 115
     Default = True
     TabOrder = 11
     OnClick = btnFindClick
@@ -60,85 +62,86 @@ object frmFindAndReplace: TfrmFindAndReplace
   object btnFindNext: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnFind
-    Left = 236
-    Height = 30
-    Top = 402
-    Width = 92
+    Left = 295
+    Height = 32
+    Top = 508
+    Width = 115
     Anchors = [akTop, akRight]
     AutoSize = True
     Caption = 'Find next'
-    Constraints.MinHeight = 26
-    Constraints.MinWidth = 92
+    Constraints.MinHeight = 32
+    Constraints.MinWidth = 115
     TabOrder = 8
     OnClick = btnFindNextClick
   end
   object btnFindPrev: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnFindNext
-    Left = 144
-    Height = 30
-    Top = 402
-    Width = 92
+    Left = 180
+    Height = 32
+    Top = 508
+    Width = 115
     Anchors = [akTop, akRight]
     AutoSize = True
     Caption = 'Find prev'
-    Constraints.MinHeight = 26
-    Constraints.MinWidth = 92
+    Constraints.MinHeight = 32
+    Constraints.MinWidth = 115
     TabOrder = 7
     OnClick = btnFindPrevClick
   end
   object btnReplace: TButton
     AnchorSideLeft.Control = btnReplaceAll
     AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = btnReplaceAll
+    AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
-    Left = 328
-    Height = 30
-    Top = 168
-    Width = 92
+    Left = 410
+    Height = 32
+    Top = 508
+    Width = 115
     Anchors = [akTop, akRight]
     AutoSize = True
     Caption = 'Replace'
-    Constraints.MinHeight = 26
-    Constraints.MinWidth = 92
+    Constraints.MinHeight = 32
+    Constraints.MinWidth = 115
     TabOrder = 10
     OnClick = btnReplaceClick
   end
   object btnReplaceAll: TButton
+    AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnReplace
-    Left = 236
-    Height = 30
-    Top = 168
-    Width = 92
+    Left = 295
+    Height = 32
+    Top = 508
+    Width = 115
     Anchors = [akTop, akRight]
     AutoSize = True
     Caption = 'Replace all'
-    Constraints.MinHeight = 26
-    Constraints.MinWidth = 92
+    Constraints.MinHeight = 32
+    Constraints.MinWidth = 115
     TabOrder = 9
     OnClick = btnReplaceAllClick
   end
   object mmoTextToFind: TMemo
-    Left = 133
-    Height = 58
-    Top = 12
-    Width = 379
+    Left = 166
+    Height = 72
+    Top = 15
+    Width = 474
     TabOrder = 0
     OnKeyDown = mmoTextToFindKeyDown
   end
   object mmoReplaceWith: TMemo
-    Left = 133
-    Height = 58
-    Top = 80
-    Width = 379
+    Left = 166
+    Height = 72
+    Top = 100
+    Width = 474
     TabOrder = 1
     OnKeyDown = mmoReplaceWithKeyDown
   end
   object chkReplaceWith: TUWCheckBox
-    Left = 8
-    Height = 19
-    Top = 80
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 100
+    Width = 22
     AutoSize = False
     Caption = 'Replace with:'
     Checked = True
@@ -147,73 +150,73 @@ object frmFindAndReplace: TfrmFindAndReplace
     OnChange = chkReplaceWithChange
   end
   object chkCaseSensitive: TUWCheckBox
-    Left = 213
-    Height = 23
-    Top = 152
-    Width = 18
+    Left = 266
+    Height = 29
+    Top = 190
+    Width = 22
     AutoSize = False
     Caption = 'Case-sensitive'
     TabOrder = 3
   end
   object chkPreserveCaseOnReplace: TUWCheckBox
-    Left = 213
-    Height = 23
-    Top = 171
-    Width = 18
+    Left = 266
+    Height = 29
+    Top = 214
+    Width = 22
     AutoSize = False
     Caption = 'Preserve case on replace'
     TabOrder = 4
   end
   object chkRegularExpression: TUWCheckBox
-    Left = 213
-    Height = 23
-    Top = 209
-    Width = 18
+    Left = 266
+    Height = 29
+    Top = 261
+    Width = 22
     AutoSize = False
     Caption = 'Use regular expression'
     TabOrder = 6
   end
   object lblOptions: TLabel
-    Left = 133
-    Height = 16
-    Top = 156
-    Width = 49
+    Left = 166
+    Height = 20
+    Top = 195
+    Width = 55
     Caption = 'Options:'
     ParentColor = False
   end
   object lblScope: TLabel
-    Left = 133
-    Height = 16
-    Top = 250
-    Width = 41
+    Left = 166
+    Height = 20
+    Top = 312
+    Width = 44
     Caption = 'Scope:'
     ParentColor = False
   end
   object chkWholeWord: TUWCheckBox
-    Left = 213
-    Height = 23
-    Top = 190
-    Width = 18
+    Left = 266
+    Height = 29
+    Top = 238
+    Width = 22
     AutoSize = False
     Caption = 'Whole word'
     TabOrder = 5
   end
   object pnlScope: TPanel
     AnchorSideTop.Side = asrBottom
-    Left = 213
-    Height = 43
-    Top = 248
-    Width = 18
+    Left = 266
+    Height = 48
+    Top = 310
+    Width = 152
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 43
-    ClientWidth = 18
+    ClientHeight = 48
+    ClientWidth = 152
     TabOrder = 13
     object rbnAllTheSubtitles: TUWRadioButton
       Left = 0
-      Height = 19
+      Height = 24
       Top = 0
-      Width = 18
+      Width = 22
       AutoSize = False
       Caption = 'All entries'
       Checked = True
@@ -223,9 +226,9 @@ object frmFindAndReplace: TfrmFindAndReplace
     end
     object rbnFromTheSelectedSubtitle: TUWRadioButton
       Left = 0
-      Height = 19
+      Height = 24
       Top = 24
-      Width = 18
+      Width = 22
       AutoSize = False
       Caption = 'From selected entry'
       TabOrder = 1
@@ -233,20 +236,20 @@ object frmFindAndReplace: TfrmFindAndReplace
     end
   end
   object pnlLocation: TPanel
-    Left = 213
-    Height = 71
-    Top = 312
-    Width = 90
+    Left = 266
+    Height = 72
+    Top = 390
+    Width = 94
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 71
-    ClientWidth = 90
+    ClientHeight = 72
+    ClientWidth = 94
     TabOrder = 14
     object rbnText: TRadioButton
       Left = 0
-      Height = 23
+      Height = 24
       Top = 0
-      Width = 51
+      Width = 49
       Caption = 'Text'
       Checked = True
       TabOrder = 0
@@ -254,26 +257,26 @@ object frmFindAndReplace: TfrmFindAndReplace
     end
     object rbnTranslation: TRadioButton
       Left = 0
-      Height = 23
+      Height = 24
       Top = 24
-      Width = 90
+      Width = 94
       Caption = 'Translation'
       TabOrder = 1
     end
     object rbnSearchBoth: TRadioButton
       Left = 0
-      Height = 23
+      Height = 24
       Top = 48
-      Width = 53
+      Width = 52
       Caption = 'Both'
       TabOrder = 2
     end
   end
   object lblSource: TLabel
-    Left = 133
-    Height = 16
-    Top = 312
-    Width = 45
+    Left = 166
+    Height = 20
+    Top = 390
+    Width = 48
     Caption = 'Source:'
     ParentColor = False
   end

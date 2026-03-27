@@ -1,32 +1,33 @@
 object frmDurationLimits: TfrmDurationLimits
   Left = 260
-  Height = 289
+  Height = 361
   Top = 127
-  Width = 315
+  Width = 394
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Duration limits'
-  ClientHeight = 289
-  ClientWidth = 315
+  ClientHeight = 361
+  ClientWidth = 394
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '4.6.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
   object edtSetMaxDuration: TEdit
-    Left = 24
-    Height = 23
-    Top = 32
-    Width = 283
+    Left = 30
+    Height = 28
+    Top = 40
+    Width = 354
     Anchors = [akTop, akLeft, akRight]
     NumbersOnly = True
     TabOrder = 0
   end
   object edtSetMinDuration: TEdit
-    Left = 24
-    Height = 23
-    Top = 104
-    Width = 283
+    Left = 30
+    Height = 28
+    Top = 130
+    Width = 354
     Anchors = [akTop, akLeft, akRight]
     NumbersOnly = True
     TabOrder = 1
@@ -34,12 +35,12 @@ object frmDurationLimits: TfrmDurationLimits
   object btnClose: TButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 216
-    Height = 26
-    Top = 256
-    Width = 91
+    Left = 270
+    Height = 32
+    Top = 320
+    Width = 114
     Anchors = [akTop, akRight]
-    BorderSpacing.Right = 8
+    BorderSpacing.Right = 10
     Cancel = True
     Caption = 'Close'
     TabOrder = 8
@@ -47,22 +48,22 @@ object frmDurationLimits: TfrmDurationLimits
   end
   object btnApply: TButton
     AnchorSideRight.Control = btnClose
-    Left = 120
-    Height = 26
-    Top = 256
-    Width = 91
+    Left = 150
+    Height = 32
+    Top = 320
+    Width = 114
     Anchors = [akTop, akRight]
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     Caption = 'Apply'
     Default = True
     TabOrder = 7
     OnClick = btnApplyClick
   end
   object chkSetMaxDuration: TUWCheckBox
-    Left = 8
-    Height = 19
-    Top = 8
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 10
+    Width = 22
     AutoSize = False
     Caption = 'Set maximum duration (ms)'
     Checked = True
@@ -71,10 +72,10 @@ object frmDurationLimits: TfrmDurationLimits
     OnChange = chkSetMaxDurationChange
   end
   object chkSetMinDuration: TUWCheckBox
-    Left = 8
-    Height = 19
-    Top = 80
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 100
+    Width = 22
     AutoSize = False
     Caption = 'Set minimum duration (ms)'
     Checked = True
@@ -83,40 +84,40 @@ object frmDurationLimits: TfrmDurationLimits
     OnChange = chkSetMinDurationChange
   end
   object rbnFromTheSelectedSubtitle: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 191
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 239
+    Width = 22
     AutoSize = False
     Caption = 'From the selected entry'
     TabOrder = 5
     TabStop = False
   end
   object rbnAllTheSubtitles: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 172
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 215
+    Width = 22
     AutoSize = False
     Caption = 'All entries'
     TabOrder = 4
     TabStop = False
   end
   object lblScope: TLabel
-    Left = 8
-    Height = 15
-    Top = 152
-    Width = 35
+    Left = 10
+    Height = 20
+    Top = 190
+    Width = 44
     Caption = 'Scope:'
     ParentColor = False
   end
   object rbnOnlySelectedSubtitles: TUWRadioButton
-    Left = 8
-    Height = 19
-    Top = 210
-    Width = 18
+    Left = 10
+    Height = 24
+    Top = 262
+    Width = 22
     AutoSize = False
-    Caption = 'Only selected entries'
+    Caption = 'Selected entries'
     TabOrder = 6
     TabStop = False
   end
