@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: proclocalize.lngabversion
 #, object-pascal-format
@@ -268,7 +268,7 @@ msgstr "Download canceled by user."
 
 #: proclocalize.lngdropframe
 msgid "DF"
-msgstr ""
+msgstr "DF"
 
 #: proclocalize.lngentry
 #, object-pascal-format
@@ -1551,7 +1551,7 @@ msgstr "From selected entry"
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Only selected entries"
 
 #: tfrmbatchconvert.btnadd.caption
@@ -1737,7 +1737,7 @@ msgstr "From the selected entry"
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Only selected entries"
 
 #: tfrmconvertcase.rdoinversetype.caption
@@ -2016,7 +2016,7 @@ msgstr "From the selected entry"
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Only selected entries"
 
 #: tfrmdownload.btncancel.caption
@@ -2088,7 +2088,7 @@ msgstr "From the selected entry"
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Only selected entries"
 
 #: tfrmexportsup.btnclose.caption
@@ -2197,6 +2197,10 @@ msgctxt "tfrmfindandreplace.lblscope.caption"
 msgid "Scope:"
 msgstr "Scope:"
 
+#: tfrmfindandreplace.lblsource.caption
+msgid "Source:"
+msgstr "Source:"
+
 #: tfrmfindandreplace.lbltexttofind.caption
 msgid "Text to find:"
 msgstr "Text to find:"
@@ -2210,6 +2214,20 @@ msgstr "All entries"
 msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "From the selected entry"
+
+#: tfrmfindandreplace.rbnsearchboth.caption
+msgid "Both"
+msgstr "Both"
+
+#: tfrmfindandreplace.rbntext.caption
+msgctxt "tfrmfindandreplace.rbntext.caption"
+msgid "Text"
+msgstr "Text"
+
+#: tfrmfindandreplace.rbntranslation.caption
+msgctxt "tfrmfindandreplace.rbntranslation.caption"
+msgid "Translation"
+msgstr "Translation"
 
 #: tfrmfixsubtitles.btnapply.caption
 msgctxt "tfrmfixsubtitles.btnapply.caption"
@@ -4369,7 +4387,7 @@ msgstr "From the selected entry"
 
 #: tfrmpauses.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Only selected entries"
 
 #: tfrmpauses.rdobothentries.caption
@@ -4446,7 +4464,7 @@ msgstr "From the selected entry"
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Only selected entries"
 
 #: tfrmroundtime.rdofps.caption
@@ -4858,7 +4876,7 @@ msgstr "From the selected entry"
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Only selected entries"
 
 #: tfrmshifttimes.rbnrelative.caption
@@ -5171,7 +5189,7 @@ msgstr "From the selected entry"
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Only selected entries"
 
 #: tfrmtranslate.btnclose.caption
@@ -5223,7 +5241,7 @@ msgstr "From the selected entry"
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Only selected entries"
 
 #: tfrmtranslationmemory.btnclose.caption
@@ -5380,7 +5398,7 @@ msgstr "From selected entry"
 
 #: tfrmtts.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Only selected entries"
 
 #: tfrmvideodubbing.btnbackgroundmusic.caption
@@ -5624,4 +5642,3 @@ msgstr "Inverted"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-

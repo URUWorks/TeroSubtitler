@@ -1567,8 +1567,10 @@ msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmbatchconvert.btnadd.caption
@@ -1753,8 +1755,10 @@ msgid "From the selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmconvertcase.rdoinversetype.caption
@@ -2032,8 +2036,10 @@ msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmdownload.btncancel.caption
@@ -2104,8 +2110,10 @@ msgid "From the selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmexportsup.btnclose.caption
@@ -2214,6 +2222,10 @@ msgctxt "tfrmfindandreplace.lblscope.caption"
 msgid "Scope:"
 msgstr "Обхват:"
 
+#: tfrmfindandreplace.lblsource.caption
+msgid "Source:"
+msgstr ""
+
 #: tfrmfindandreplace.lbltexttofind.caption
 msgid "Text to find:"
 msgstr "Текст за търсене:"
@@ -2227,6 +2239,22 @@ msgstr "Всички надписи"
 msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "От избрания надпис"
+
+#: tfrmfindandreplace.rbnsearchboth.caption
+msgid "Both"
+msgstr ""
+
+#: tfrmfindandreplace.rbntext.caption
+#, fuzzy
+msgctxt "tfrmfindandreplace.rbntext.caption"
+msgid "Text"
+msgstr "Текст"
+
+#: tfrmfindandreplace.rbntranslation.caption
+#, fuzzy
+msgctxt "tfrmfindandreplace.rbntranslation.caption"
+msgid "Translation"
+msgstr "Превод"
 
 #: tfrmfixsubtitles.btnapply.caption
 msgctxt "tfrmfixsubtitles.btnapply.caption"
@@ -4404,8 +4432,10 @@ msgid "From the selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmpauses.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmpauses.rdobothentries.caption
@@ -4481,8 +4511,10 @@ msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmroundtime.rdofps.caption
@@ -4896,8 +4928,10 @@ msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmshifttimes.rbnrelative.caption
@@ -5209,8 +5243,10 @@ msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmtranslate.btnclose.caption
@@ -5261,8 +5297,10 @@ msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmtranslationmemory.btnclose.caption
@@ -5418,8 +5456,10 @@ msgid "From selected entry"
 msgstr "От избрания надпис"
 
 #: tfrmtts.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Само избраните надписи"
 
 #: tfrmvideodubbing.btnbackgroundmusic.caption

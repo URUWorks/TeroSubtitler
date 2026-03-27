@@ -1586,8 +1586,10 @@ msgid "From selected entry"
 msgstr "Från vald post"
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Endast valda poster"
 
 #: tfrmbatchconvert.btnadd.caption
@@ -1774,8 +1776,10 @@ msgid "From the selected entry"
 msgstr "Från vald post"
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Endast valda poster"
 
 #: tfrmconvertcase.rdoinversetype.caption
@@ -2053,8 +2057,10 @@ msgid "From selected entry"
 msgstr "Från vald post"
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Endast valda poster"
 
 #: tfrmdownload.btncancel.caption
@@ -2125,8 +2131,10 @@ msgid "From the selected entry"
 msgstr "Från vald post"
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Endast valda poster"
 
 #: tfrmexportsup.btnclose.caption
@@ -2235,6 +2243,10 @@ msgctxt "tfrmfindandreplace.lblscope.caption"
 msgid "Scope:"
 msgstr "Omfattning:"
 
+#: tfrmfindandreplace.lblsource.caption
+msgid "Source:"
+msgstr ""
+
 #: tfrmfindandreplace.lbltexttofind.caption
 msgid "Text to find:"
 msgstr "Text att söka efter:"
@@ -2248,6 +2260,22 @@ msgstr "Alla poster"
 msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "Från vald post"
+
+#: tfrmfindandreplace.rbnsearchboth.caption
+msgid "Both"
+msgstr ""
+
+#: tfrmfindandreplace.rbntext.caption
+#, fuzzy
+msgctxt "tfrmfindandreplace.rbntext.caption"
+msgid "Text"
+msgstr "Text"
+
+#: tfrmfindandreplace.rbntranslation.caption
+#, fuzzy
+msgctxt "tfrmfindandreplace.rbntranslation.caption"
+msgid "Translation"
+msgstr "Översättning"
 
 #: tfrmfixsubtitles.btnapply.caption
 msgctxt "tfrmfixsubtitles.btnapply.caption"
@@ -4430,8 +4458,10 @@ msgid "From the selected entry"
 msgstr "Från vald post"
 
 #: tfrmpauses.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Endast valda poster"
 
 #: tfrmpauses.rdobothentries.caption
@@ -4507,8 +4537,10 @@ msgid "From selected entry"
 msgstr "Från vald post"
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Endast valda poster"
 
 #: tfrmroundtime.rdofps.caption
@@ -4922,8 +4954,10 @@ msgid "From selected entry"
 msgstr "Från vald post"
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Endast valda poster"
 
 #: tfrmshifttimes.rbnrelative.caption
@@ -5235,8 +5269,10 @@ msgid "From selected entry"
 msgstr "Från vald post"
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Endast valda poster"
 
 #: tfrmtranslate.btnclose.caption
@@ -5287,8 +5323,10 @@ msgid "From selected entry"
 msgstr "Från vald post"
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Endast valda poster"
 
 #: tfrmtranslationmemory.btnclose.caption
@@ -5444,8 +5482,10 @@ msgid "From selected entry"
 msgstr "Från vald post"
 
 #: tfrmtts.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Endast valda poster"
 
 #: tfrmvideodubbing.btnbackgroundmusic.caption

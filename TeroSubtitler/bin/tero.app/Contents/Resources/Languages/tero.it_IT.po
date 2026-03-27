@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 07.02.2026\n"
+"Project-Id-Version: Tero Subtitler - IT - 14.03.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: proclocalize.lngabversion
@@ -267,6 +267,10 @@ msgstr "Tentando di rilevare le parti con dialoghi, tutti i sottotitoli in elenc
 msgid "Download canceled by user."
 msgstr "Download annullato dall’utente."
 
+#: proclocalize.lngdropframe
+msgid "DF"
+msgstr "DF"
+
 #: proclocalize.lngentry
 #, object-pascal-format
 msgid "Entry %d"
@@ -421,7 +425,7 @@ msgstr "Rimuovi elementi vuoti"
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
-msgstr "Correggi punto interrogarativo: !? -> ?!"
+msgstr "Correggi punto interrogativo: !? -> ?!"
 
 #: proclocalize.lngfsetfixtags
 msgid "Fix invalid tags"
@@ -467,15 +471,15 @@ msgstr "Allinea tempistiche ai cambi inquadratura"
 
 #: proclocalize.lngfsetsnaptoshotchangesincue
 msgid "Snap In Cue to shot change"
-msgstr "Àncora il punto di ingresso al cambio inquadratura"
+msgstr "Allinea il punto di ingresso al cambio inquadratura"
 
 #: proclocalize.lngfsetsnaptoshotchangesincueaway
 msgid "Snap In Cue away from shot change"
-msgstr "Àncora il punto di ingresso lontano dal cambio inquadratura"
+msgstr "Allinea il punto di ingresso lontano dal cambio inquadratura"
 
 #: proclocalize.lngfsetsnaptoshotchangesoutcue
 msgid "Snap Out Cue to shot change"
-msgstr "Àncora il punto di uscita al cambio inquadratura"
+msgstr "Allinea il punto di uscita al cambio inquadratura"
 
 #: proclocalize.lngfsetspaceofopeninghyphen
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
@@ -1143,7 +1147,7 @@ msgstr "Media di parole al minuto: %.2f"
 
 #: proclocalize.lngsubtitlehaserrorstofix
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
-msgstr "L’attuale insieme di sottotitoli contiene errori che ti suggeriamo di corregere, ma è possibile salvare il file."
+msgstr "L’attuale insieme di sottotitoli contiene errori che ti suggeriamo di correggere, ma è possibile salvare il file."
 
 #: proclocalize.lngsubtitlespecificationerror
 msgid "The current subtitles do not meet the specifications of the format to be saved."
@@ -1553,8 +1557,10 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmbatchconvert.btnadd.caption
@@ -1739,8 +1745,10 @@ msgid "From the selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmconvertcase.rdoinversetype.caption
@@ -2018,8 +2026,10 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmdownload.btncancel.caption
@@ -2090,8 +2100,10 @@ msgid "From the selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmexportsup.btnclose.caption
@@ -2200,6 +2212,10 @@ msgctxt "tfrmfindandreplace.lblscope.caption"
 msgid "Scope:"
 msgstr "Destinazione:"
 
+#: tfrmfindandreplace.lblsource.caption
+msgid "Source:"
+msgstr ""
+
 #: tfrmfindandreplace.lbltexttofind.caption
 msgid "Text to find:"
 msgstr "Testo da cercare:"
@@ -2213,6 +2229,22 @@ msgstr "Tutti gli elementi"
 msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
+
+#: tfrmfindandreplace.rbnsearchboth.caption
+msgid "Both"
+msgstr ""
+
+#: tfrmfindandreplace.rbntext.caption
+#, fuzzy
+msgctxt "tfrmfindandreplace.rbntext.caption"
+msgid "Text"
+msgstr "Testo"
+
+#: tfrmfindandreplace.rbntranslation.caption
+#, fuzzy
+msgctxt "tfrmfindandreplace.rbntranslation.caption"
+msgid "Translation"
+msgstr "Traduzione"
 
 #: tfrmfixsubtitles.btnapply.caption
 msgctxt "tfrmfixsubtitles.btnapply.caption"
@@ -3442,7 +3474,7 @@ msgstr "Salva sottotitoli come..."
 
 #: tfrmmain.actsavesubtitleas.hint
 msgid "Save current subtitle to a specific file"
-msgstr "Salva sottotitoliattuali  in un formato file specifico"
+msgstr "Salva sottotitoli attuali in un formato file specifico"
 
 #: tfrmmain.actsavetranscription.caption
 msgctxt "tfrmmain.actsavetranscription.caption"
@@ -4371,8 +4403,10 @@ msgid "From the selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmpauses.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmpauses.rdobothentries.caption
@@ -4448,8 +4482,10 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmroundtime.rdofps.caption
@@ -4704,12 +4740,12 @@ msgstr "Ancoraggio/soglia cambi scena (fotogrammi)"
 #: tfrmsettings.lblscsnapincues.caption
 msgctxt "tfrmsettings.lblscsnapincues.caption"
 msgid "Snap in cues after SC (frames)"
-msgstr "Àncora punti di ingresso dopo il c.i. (fotogrammi)"
+msgstr "Allinea punti di ingresso dopo il c.i. (fotogrammi)"
 
 #: tfrmsettings.lblscsnapoutcues.caption
 msgctxt "tfrmsettings.lblscsnapoutcues.caption"
 msgid "Snap out cues before SC (frames)"
-msgstr "Àncora punti di uscita prima del c.i. (fotogrammi)"
+msgstr "Allinea punti di uscita prima del c.i. (fotogrammi)"
 
 #: tfrmsettings.lblseektime.caption
 msgid "Seek time (ms)"
@@ -4860,8 +4896,10 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmshifttimes.rbnrelative.caption
@@ -5173,8 +5211,10 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmtranslate.btnclose.caption
@@ -5225,8 +5265,10 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmtranslationmemory.btnclose.caption
@@ -5382,8 +5424,10 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmtts.rbnonlyselectedsubtitles.caption
+#, fuzzy
+#| msgid "Only selected entries"
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr "Solo elementi selezionati"
 
 #: tfrmvideodubbing.btnbackgroundmusic.caption
@@ -5420,7 +5464,7 @@ msgstr "Voce globale"
 
 #: tfrmvideodubbing.chksubtitletrack.caption
 msgid "Subtitle track"
-msgstr "Traccia sottotioli"
+msgstr "Traccia sottotitoli"
 
 #: tfrmvideodubbing.lblsimilarityboost.caption
 msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
@@ -5626,3 +5670,4 @@ msgstr "Invertita"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
+

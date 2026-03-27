@@ -1528,7 +1528,7 @@ msgstr ""
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr ""
 
 #: tfrmbatchconvert.btnadd.caption
@@ -1714,7 +1714,7 @@ msgstr ""
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr ""
 
 #: tfrmconvertcase.rdoinversetype.caption
@@ -1993,7 +1993,7 @@ msgstr ""
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr ""
 
 #: tfrmdownload.btncancel.caption
@@ -2065,7 +2065,7 @@ msgstr ""
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr ""
 
 #: tfrmexportsup.btnclose.caption
@@ -2174,6 +2174,10 @@ msgctxt "tfrmfindandreplace.lblscope.caption"
 msgid "Scope:"
 msgstr ""
 
+#: tfrmfindandreplace.lblsource.caption
+msgid "Source:"
+msgstr ""
+
 #: tfrmfindandreplace.lbltexttofind.caption
 msgid "Text to find:"
 msgstr ""
@@ -2186,6 +2190,20 @@ msgstr ""
 #: tfrmfindandreplace.rbnfromtheselectedsubtitle.caption
 msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
 msgid "From selected entry"
+msgstr ""
+
+#: tfrmfindandreplace.rbnsearchboth.caption
+msgid "Both"
+msgstr ""
+
+#: tfrmfindandreplace.rbntext.caption
+msgctxt "tfrmfindandreplace.rbntext.caption"
+msgid "Text"
+msgstr ""
+
+#: tfrmfindandreplace.rbntranslation.caption
+msgctxt "tfrmfindandreplace.rbntranslation.caption"
+msgid "Translation"
 msgstr ""
 
 #: tfrmfixsubtitles.btnapply.caption
@@ -4346,7 +4364,7 @@ msgstr ""
 
 #: tfrmpauses.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr ""
 
 #: tfrmpauses.rdobothentries.caption
@@ -4423,7 +4441,7 @@ msgstr ""
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr ""
 
 #: tfrmroundtime.rdofps.caption
@@ -4835,7 +4853,7 @@ msgstr ""
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr ""
 
 #: tfrmshifttimes.rbnrelative.caption
@@ -5148,7 +5166,7 @@ msgstr ""
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr ""
 
 #: tfrmtranslate.btnclose.caption
@@ -5200,7 +5218,7 @@ msgstr ""
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr ""
 
 #: tfrmtranslationmemory.btnclose.caption
@@ -5357,7 +5375,7 @@ msgstr ""
 
 #: tfrmtts.rbnonlyselectedsubtitles.caption
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
-msgid "Only selected entries"
+msgid "Selected entries"
 msgstr ""
 
 #: tfrmvideodubbing.btnbackgroundmusic.caption
