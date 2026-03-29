@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 14.03.2026\n"
+"Project-Id-Version: Tero Subtitler - IT - 29.03.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -1557,11 +1557,9 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
-msgstr "Solo elementi selezionati"
+msgstr "Elementi selezionati"
 
 #: tfrmbatchconvert.btnadd.caption
 msgctxt "tfrmbatchconvert.btnadd.caption"
@@ -1745,11 +1743,9 @@ msgid "From the selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
-msgstr "Solo elementi selezionati"
+msgstr "Elementi selezionati"
 
 #: tfrmconvertcase.rdoinversetype.caption
 msgid "iNVERSE tYPE"
@@ -2026,11 +2022,9 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
-msgstr "Solo elementi selezionati"
+msgstr "Elementi selezionati"
 
 #: tfrmdownload.btncancel.caption
 msgctxt "tfrmdownload.btncancel.caption"
@@ -2100,11 +2094,9 @@ msgid "From the selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
-msgstr "Solo elementi selezionati"
+msgstr "Elementi selezionati"
 
 #: tfrmexportsup.btnclose.caption
 msgctxt "tfrmexportsup.btnclose.caption"
@@ -2214,7 +2206,7 @@ msgstr "Destinazione:"
 
 #: tfrmfindandreplace.lblsource.caption
 msgid "Source:"
-msgstr ""
+msgstr "Sorgente:"
 
 #: tfrmfindandreplace.lbltexttofind.caption
 msgid "Text to find:"
@@ -2232,16 +2224,14 @@ msgstr "Dall’elemento selezionato"
 
 #: tfrmfindandreplace.rbnsearchboth.caption
 msgid "Both"
-msgstr ""
+msgstr "Entrambi"
 
 #: tfrmfindandreplace.rbntext.caption
-#, fuzzy
 msgctxt "tfrmfindandreplace.rbntext.caption"
 msgid "Text"
 msgstr "Testo"
 
 #: tfrmfindandreplace.rbntranslation.caption
-#, fuzzy
 msgctxt "tfrmfindandreplace.rbntranslation.caption"
 msgid "Translation"
 msgstr "Traduzione"
@@ -4403,11 +4393,9 @@ msgid "From the selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmpauses.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
-msgstr "Solo elementi selezionati"
+msgstr "Elementi selezionati"
 
 #: tfrmpauses.rdobothentries.caption
 msgid "Both entries equally"
@@ -4482,11 +4470,9 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
-msgstr "Solo elementi selezionati"
+msgstr "Elementi selezionati"
 
 #: tfrmroundtime.rdofps.caption
 msgid "Using FPS"
@@ -4896,11 +4882,9 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
-msgstr "Solo elementi selezionati"
+msgstr "Elementi selezionati"
 
 #: tfrmshifttimes.rbnrelative.caption
 msgid "Relative"
@@ -5211,11 +5195,9 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
-msgstr "Solo elementi selezionati"
+msgstr "Elementi selezionati"
 
 #: tfrmtranslate.btnclose.caption
 msgctxt "tfrmtranslate.btnclose.caption"
@@ -5265,11 +5247,9 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
-msgstr "Solo elementi selezionati"
+msgstr "Elementi selezionati"
 
 #: tfrmtranslationmemory.btnclose.caption
 msgctxt "tfrmtranslationmemory.btnclose.caption"
@@ -5424,11 +5404,9 @@ msgid "From selected entry"
 msgstr "Dall’elemento selezionato"
 
 #: tfrmtts.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
-msgstr "Solo elementi selezionati"
+msgstr "Elementi selezionati"
 
 #: tfrmvideodubbing.btnbackgroundmusic.caption
 msgctxt "tfrmvideodubbing.btnbackgroundmusic.caption"
