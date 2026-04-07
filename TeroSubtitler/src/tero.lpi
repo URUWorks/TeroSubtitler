@@ -11,7 +11,7 @@
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <XPManifest>
-        <TextName Value="URUWorks.TeroSubtitler"/>
+        <TextName Value="URUWorks.Tero Subtitler"/>
         <TextDesc Value="Tero Subtitler"/>
       </XPManifest>
       <Icon Value="0"/>
