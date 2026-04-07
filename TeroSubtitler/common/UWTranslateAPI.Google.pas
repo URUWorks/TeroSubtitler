@@ -22,7 +22,7 @@ unit UWTranslateAPI.Google;
 interface
 
 uses
-  SysUtils, Classes, fpjson, UWSystem.InetUtils, HTTPDefs;
+  SysUtils, Classes, fpjson, UWSystem.InetUtils, HTTPDefs, UWSystem.StrUtils;
 
 
 function GoogleTranslateText(const AText, SourceLng, DestLng: String): String;
@@ -180,8 +180,40 @@ const
 
 implementation
 
+uses RegExpr;
+
 const
   GoogleTranslateURL = 'https://translate.googleapis.com/translate_a/single?client=gtx&q=%s&sl=%s&tl=%s&dt=t&ie=UTF-8&oe=UTF-8';
+
+// -----------------------------------------------------------------------------
+
+function WrapASSTags(const S: String): String;
+var
+  r: TRegExpr;
+begin
+  r := TRegExpr.Create;
+  try
+    r.Expression := '\{\\[^}]*\}';
+    Result := r.Replace(S, '<<<$0>>>', True);
+  finally
+    r.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function UnwrapASSTags(const S: String): String;
+var
+  r: TRegExpr;
+begin
+  r := TRegExpr.Create;
+  try
+    r.Expression := '<<<(\{\\[^}]*\})>>>';
+    Result := r.Replace(S, '$1', True);
+  finally
+    r.Free;
+  end;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -199,6 +231,7 @@ end;
 function GoogleTranslateText(const AText, SourceLng, DestLng: String): String;
 var
   Index: Integer;
+  s: String;
   strResponse: TJSONStringType;
   jdResponse, jdTranslation, jdTranslationArray: TJSONData;
   jaTranslation, jaTranslationArray: TJSONArray;
@@ -206,7 +239,8 @@ begin
   Result := '';
   if (AText = '') or (SourceLng = '') or (DestLng = '') then Exit;
 
-  strResponse := CallGoogleTranslate(Format(GoogleTranslateURL,[HTTPEncode(AText), SourceLng, DestLng]));
+  s := WrapASSTags(ReplaceString(AText, LineEnding, '<<<BR>>>'));
+  strResponse := CallGoogleTranslate(Format(GoogleTranslateURL,[HTTPEncode(s), SourceLng, DestLng]));
   if strResponse <> '' then
     try
       jdResponse    := GetJSON(strResponse);
@@ -226,6 +260,7 @@ begin
               Result := Result + LineEnding;
           end;
         end;
+        Result := UnwrapASSTags(ReplaceString(Result,'<<<BR>>>', LineEnding));
       end;
     finally
       jdResponse.Free;

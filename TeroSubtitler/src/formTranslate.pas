@@ -160,15 +160,15 @@ begin
       1: s1 := Translation;
     end;
 
-    s1 := TSTagsToHTML(s1);
+    s1 := s1; //TSTagsToHTML(s1);
     s2 := GoogleTranslateText(s1,
       GoogleCultureInfo[cboSourceLanguage.ItemIndex].CultureName,
       GoogleCultureInfo[cboTranslationLanguage.ItemIndex+1].CultureName);
 
-    // quick but precise way?
-    s2 := s2.Replace(' <', '<', [rfReplaceAll]);
-    s2 := s2.Replace('> ', '>', [rfReplaceAll]);
-    s2 := HTMLTagsToTS(s2);
+    //quick but precise way?
+    //s2 := s2.Replace(' <', '<', [rfReplaceAll]);
+    //s2 := s2.Replace('> ', '>', [rfReplaceAll]);
+    //s2 := HTMLTagsToTS(s2);
 
     case cboOutput.ItemIndex of
       0: Text        := s2;
