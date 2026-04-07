@@ -1,4 +1,4 @@
-1.0.2.1 (x.x.2026)
+1.0.2.1 (07.04.2026)
 - fixed: Audio file not being linked to subtitle file #459
 - fixed: [macOS] The CFBundleShortVersionString in Info.plist is incorrect #457
 - fixed: Status of entries with total of four figures or higher sometimes truncated upon select all #456
@@ -76,7 +76,7 @@
 - added: German language (thx cutegitcat)
 - added: Swedish language (thx cutegitcat)
 
-1.0.1.9 (6.4.2024)
+1.0.1.9 (06.04.2024)
 - fixed: Interface Italian - Bottom info set as English #298
 - fixed: Auto translate null value
 - fixed: Access violation in video dubbing without the API key
@@ -88,7 +88,7 @@
 - updated: Faster-Whisper
 - added: Faster-Whisper distilled models
 
-1.0.1.8 (28.3.2024)
+1.0.1.8 (28.03.2024)
 - fixed: Multi-line text pasted from external source appears on list with gap in-between #288
 - fixed: Whitespace in exported unformatted text #285
 - fixed: [macOS] Start centre appears when opening Tero with millisecond-based file #284
@@ -106,7 +106,7 @@
 - added: Set gapping #276
 - added: TTS using elevenlabsTTS for dubbing feature #232
 
-1.0.1.7 (1.3.2024)
+1.0.1.7 (01.03.2024)
 - fixed: Extract waveform window #275
 - fixed: Audio to text non auto-choose error #274
 - fixed: Crash error on Settings exit #271
@@ -248,7 +248,7 @@
 - added: Change font-size of editor Text + Display Time to subtitles? #185
 - added: Remove line from entry
 
-1.0.1.1 (16.9.2023)
+1.0.1.1 (16.09.2023)
 - fixed: Window closes after going to line number #180
 - fixed: Window disappears after applying Replace All #179
 - fixed: Gapping not respected when dividing subtitle #178
@@ -260,7 +260,7 @@
 - added: Spreadsheet (XLS, XLSX, ODS) format
 - added: CSV/TSV format
 
-1.0.1.0 (1.9.2023)
+1.0.1.0 (01.09.2023)
 - fixed: Colour and alignment ignored in SRT #161
 - fixed: Auto translate sometimes produces more than two lines #160
 - fixed: Don’t allow export of iTT if it breaches specification #158
@@ -286,7 +286,7 @@
 - added: Project file to the "Recent Files" menu
 - added: [Windows] new installer icon
 
-1.0.0.9 (14.8.2023)
+1.0.0.9 (14.08.2023)
 - fixed: Loading iTT changes default frame rate #144
 - fixed: Tagging included in character count in Fix Subtitles #143
 - fixed: Some entries in iTunes Timed Text don't display at the right time in videos with non-integer rates when mpv doesn't handle subtitles #63
@@ -301,7 +301,7 @@
 - added: Brazilian Portuguese language (thx Gzushgshsh)
 - added: Chaining subtitles
 
-1.0.0.8 (30.7.2023)
+1.0.0.8 (30.07.2023)
 - fixed: Project autoname #132
 - fixed: Missing strings in language file
 - fixed: Remember settings in Auto Translate
@@ -315,7 +315,7 @@
 - added: Shotchanges offset
 - added: Custom image format export
 
-1.0.0.7 (21.7.2023)
+1.0.0.7 (21.07.2023)
 - fixed: Extend length should respect gapping #128
 - fixed: Delay is not set #124
 - fixed: After changing the language, the list headers remain on the previous language
@@ -327,7 +327,7 @@
 - added: Actors
 - added: Snapping to shot changes
 
-1.0.0.6 (7.7.2023)
+1.0.0.6 (07.07.2023)
 - fixed: Blocked save function #119
 - fixed: Video title not displayed #118
 - fixed: Select the number of the audio track #117
@@ -336,7 +336,7 @@
 - added: Custom format export
 - added: [Windows] more file type icons
 
-1.0.0.5 (30.6.2023)
+1.0.0.5 (30.06.2023)
 - fixed: Musical notes excluded from Hearing Impaired filter #111
 - fixed: File doesn't open when dragged onto Tero Subtitler icon #102
 - fixed: CPL flag appeared with some text when there was no breach
@@ -346,7 +346,7 @@
 - added: [Windows] File type associations
 - added: Sort subtitles
 
-1.0.0.4 (23.6.2023)
+1.0.0.4 (23.06.2023)
 - improved: Make it clearer what URLs are accepted #46
 - improved: Conventions: count space characters #26
 - fixed: Resize handles for columns do not show a preview of the dragging result #105
@@ -355,19 +355,19 @@
 - fixed: 'Remove spaces within brackets' bug
 - added: X-TIMESTAMP-MAP for WebVTT format properties
 
-1.0.0.3 (17.6.2023)
+1.0.0.3 (17.06.2023)
 - fixed: EDL from Final Cut Pro 7 don't import properly #75
 - added: XML from Final Cut Pro 7 #76
 - improved: iTunes Timed Text: exported file doesn't comply with Apple's guidelines #101
 - improved: Various subtitle formats
 
-1.0.0.2 (11.6.2023)
+1.0.0.2 (11.06.2023)
 - fixed: Make subtitle list and video window equal size #77
 - fixed: Remnants of previously loaded video present when loading a subtitle file with no video previously attributed #91
 - fixed: [macOS – ARM64] Tero 1.0.0.1: EXC_BAD_ACCESS (SIGKILL (Code Signature Invalid)) #98
 - fixed: [enhancement] Inaccurate message within the update dialogue box #99
 
-1.0.0.1 (10.6.2023)
+1.0.0.1 (10.06.2023)
 - fixed: Inaccurate warning after accessing relocated file #55
 - fixed: Different default file format won't be saved in tero.cfg #61
 - fixed: Shortcuts don't immediately work after start-up #66
