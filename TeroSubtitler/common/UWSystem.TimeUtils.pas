@@ -494,6 +494,9 @@ var
   sep: String;
   isNegative, isNTSC: Boolean;
 begin
+  if FPS < 0.5 then
+    Exit('00:00:00:00');
+
   fpsNom := Round(FPS);
 
   // NTSC
