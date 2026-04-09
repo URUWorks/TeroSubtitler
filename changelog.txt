@@ -1,3 +1,7 @@
+1.0.2.2 (09.04.2026)
+- fixed: [macOS] Division by zero error #468
+- fixed: [macOS] “List mode” view is broken #467
+
 1.0.2.1 (07.04.2026)
 - fixed: Audio file not being linked to subtitle file #459
 - fixed: [macOS] The CFBundleShortVersionString in Info.plist is incorrect #457
