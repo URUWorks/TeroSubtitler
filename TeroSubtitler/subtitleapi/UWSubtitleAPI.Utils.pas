@@ -347,34 +347,45 @@ end;
 
 function IsBinaryFormat(const AFileName: String): Boolean;
 var
-  Stream : TStream;
-  BOM    : TBytes;
-  Ext    : String;
+  Stream    : TFileStream;
+  BOM       : array[0..39] of Byte;
+  BytesRead : Integer;
+  Ext       : String;
 begin
   Result := False;
   if not FileExists(AFileName) then Exit;
 
   Ext := LowerCase(ExtractFileExt(AFileName));
-  if (Ext = '.xls') or (Ext = '.xlsx') or (Ext = '.xls') or (Ext = '.890') or (Ext = '.cap') then
+
+  // 1. Verificación rápida por extensión
+  if (Ext = '.xls') or (Ext = '.xlsx') or (Ext = '.ods') or (Ext = '.890') or (Ext = '.cap') then
     Exit(True);
 
+  // 2. Verificación profunda por Firma Binaria (Magic Numbers)
   Stream := TFileStream.Create(AFileName, fmOpenRead or fmShareDenyWrite);
   try
-    SetLength(BOM, 39);
-    Stream.Position := 0;
-    Stream.Read(BOM[0], Length(BOM));
+    FillChar(BOM, SizeOf(BOM), 0);
+    BytesRead := Stream.Read(BOM, SizeOf(BOM));
 
-    if (BOM[3] = 53) and (BOM[4] = 54) and (BOM[5] = $4C) and (BOM[8] = $2E) then // STL
+    // Si el archivo es extremadamente pequeño descartarlo inmediatamente
+    if BytesRead < 8 then Exit;
+
+    // EBU STL ("STL" en bytes 3,4,5)
+    if (BytesRead >= 9) and (BOM[3] = $53) and (BOM[4] = $54) and (BOM[5] = $4C) and (BOM[8] = $2E) then
       Exit(True)
-    else if (BOM[0] = $D0) and (BOM[1] = $CF) and (BOM[2] = 11) and (BOM[3] = $E0) and (BOM[4] = $A1) and (BOM[5] = $B1) and (BOM[6] = $1A) and (BOM[7] = $E1) then // XLS
+    // OLE2 (XLS Antiguo)
+    else if (BOM[0] = $D0) and (BOM[1] = $CF) and (BOM[2] = $11) and (BOM[3] = $E0) and
+            (BOM[4] = $A1) and (BOM[5] = $B1) and (BOM[6] = $1A) and (BOM[7] = $E1) then
       Exit(True)
-    else if (BOM[0] = 50) and (BOM[1] = $4B) and (BOM[2] = 03) and (BOM[3] = 04) then // ODS
+    // Archivos ZIP (ODS, XLSX, DOCX, etc.) "PK" ($50, $4B)
+    else if (BOM[0] = $50) and (BOM[1] = $4B) and (BOM[2] = $03) and (BOM[3] = $04) then
       Exit(True)
-    else if (BOM[0] = 0) and (BOM[1] = 0) and (BOM[2] = 03) and (BOM[3] = 04) and (BOM[38] = 0) and (BOM[39] = 0) then // 890
-      Exit(True)
+    // Cavena 890
+    else if (BytesRead >= 40) and (BOM[0] = $00) and (BOM[1] = $00) and
+            (BOM[2] = $03) and (BOM[3] = $04) and (BOM[38] = $00) and (BOM[39] = $00) then
+      Exit(True);
   finally
     Stream.Free;
-    SetLength(BOM, 0);
   end;
 end;
 

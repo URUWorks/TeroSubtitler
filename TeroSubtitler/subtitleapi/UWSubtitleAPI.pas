@@ -310,7 +310,7 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.Encoding, UWSystem.FileUtils
   UWSubtitleAPI.Formats.KaraokeLyricsVKT, UWSubtitleAPI.Formats.MacDVDStudioPro,
   UWSubtitleAPI.Formats.MacSUB, UWSubtitleAPI.Formats.MPlayer,
   UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.SubViewer,
-  UWSubtitleAPI.Formats.Sofni, UWSubtitleAPI.Formats.SpruceSubtitleFile,
+  UWSubtitleAPI.Formats.SoftNi, UWSubtitleAPI.Formats.SpruceSubtitleFile,
   UWSubtitleAPI.Formats.ITunesTimedText, UWSubtitleAPI.Formats.TeroSubtitler,
   UWSubtitleAPI.Formats.CSV, UWSubtitleAPI.Formats.Spreadsheet,
   UWSubtitleAPI.Formats.TSV;
@@ -757,7 +757,7 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWMPlayer.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWMPlayer2.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWNetflixTimedText.Create(AShouldWriteBOM)) );
-  AList.Add( TUWSubtitleCustomFormat(TUWSofni.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSoftNi.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWSpreadsheet.Create(AShouldWriteBOM)) ); // binary
   AList.Add( TUWSubtitleCustomFormat(TUWSpruceSubtitleFile.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create(AShouldWriteBOM)) );

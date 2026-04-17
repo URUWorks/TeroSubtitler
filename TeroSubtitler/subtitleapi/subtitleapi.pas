@@ -9,8 +9,8 @@ interface
 
 uses
   UWSubtitleAPI, UWSubtitleAPI.Tags, UWSubtitleAPI.ExtraInfo, 
-  UWSubtitleAPI.TimeCode, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, 
-  UWSubtitleAPI.EDL, UWSubtitleAPI.CustomFormat, 
+  UWSubtitleAPI.TimeCode, UWSubtitleAPI.EDL, UWSubtitleAPI.TBX, 
+  UWSubtitleAPI.TMX, UWSubtitleAPI.CustomFormat, UWSubtitleAPI.Formats, 
   UWSubtitleAPI.Formats.ABCiView, UWSubtitleAPI.Formats.AdobeEncoreDVD, 
   UWSubtitleAPI.Formats.AdvancedSubstationAlpha, 
   UWSubtitleAPI.Formats.AdvancedSubtitles, UWSubtitleAPI.Formats.AQTitle, 
@@ -31,12 +31,11 @@ uses
   UWSubtitleAPI.Formats.MacDVDStudioPro, UWSubtitleAPI.Formats.MacSUB, 
   UWSubtitleAPI.Formats.MicroDVD, UWSubtitleAPI.Formats.MPlayer, 
   UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.NetflixTimedText, 
-  UWSubtitleAPI.Formats, UWSubtitleAPI.Formats.Sofni, 
-  UWSubtitleAPI.Formats.Spreadsheet, UWSubtitleAPI.Formats.SpruceSubtitleFile, 
-  UWSubtitleAPI.Formats.SubRip, UWSubtitleAPI.Formats.SubViewer, 
-  UWSubtitleAPI.Formats.TeroSubtitler, UWSubtitleAPI.Formats.TimedText, 
-  UWSubtitleAPI.Formats.TSV, UWSubtitleAPI.Formats.WebVTT, 
-  UWSubtitleAPI.Utils, LazarusPackageIntf;
+  UWSubtitleAPI.Formats.SoftNi, UWSubtitleAPI.Formats.Spreadsheet, 
+  UWSubtitleAPI.Formats.SpruceSubtitleFile, UWSubtitleAPI.Formats.SubRip, 
+  UWSubtitleAPI.Formats.SubViewer, UWSubtitleAPI.Formats.TeroSubtitler, 
+  UWSubtitleAPI.Formats.TimedText, UWSubtitleAPI.Formats.TSV, 
+  UWSubtitleAPI.Formats.WebVTT, UWSubtitleAPI.Utils, LazarusPackageIntf;
 
 implementation
 

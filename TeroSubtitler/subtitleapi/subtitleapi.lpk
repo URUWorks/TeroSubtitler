@@ -30,20 +30,24 @@
         <UnitName Value="UWSubtitleAPI.TimeCode"/>
       </Item>
       <Item>
-        <Filename Value="UWSubtitleAPI.TMX.pas"/>
-        <UnitName Value="UWSubtitleAPI.TMX"/>
+        <Filename Value="UWSubtitleAPI.EDL.pas"/>
+        <UnitName Value="UWSubtitleAPI.EDL"/>
       </Item>
       <Item>
         <Filename Value="UWSubtitleAPI.TBX.pas"/>
         <UnitName Value="UWSubtitleAPI.TBX"/>
       </Item>
       <Item>
-        <Filename Value="UWSubtitleAPI.EDL.pas"/>
-        <UnitName Value="UWSubtitleAPI.EDL"/>
+        <Filename Value="UWSubtitleAPI.TMX.pas"/>
+        <UnitName Value="UWSubtitleAPI.TMX"/>
       </Item>
       <Item>
         <Filename Value="UWSubtitleAPI.CustomFormat.pas"/>
         <UnitName Value="UWSubtitleAPI.CustomFormat"/>
+      </Item>
+      <Item>
+        <Filename Value="UWSubtitleAPI.Formats.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats"/>
       </Item>
       <Item>
         <Filename Value="UWSubtitleAPI.Formats.ABCiView.pas"/>
@@ -190,12 +194,8 @@
         <UnitName Value="UWSubtitleAPI.Formats.NetflixTimedText"/>
       </Item>
       <Item>
-        <Filename Value="UWSubtitleAPI.Formats.pas"/>
-        <UnitName Value="UWSubtitleAPI.Formats"/>
-      </Item>
-      <Item>
-        <Filename Value="UWSubtitleAPI.Formats.Sofni.pas"/>
-        <UnitName Value="UWSubtitleAPI.Formats.Sofni"/>
+        <Filename Value="UWSubtitleAPI.Formats.SoftNi.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.SoftNi"/>
       </Item>
       <Item>
         <Filename Value="UWSubtitleAPI.Formats.Spreadsheet.pas"/>

@@ -35,6 +35,8 @@ function TSTagsToXML(const Text: String): String;
 function XMLTagsToTS(const Text: String): String;
 function MacDVDTagsToTS(const Text: String): String;
 function TSToMacDVDTags(const Text: String): String;
+function TSTagsToSoftNi(const Text: String): String;
+function SoftNiTagsToTS(const Text: String): String;
 
 // -----------------------------------------------------------------------------
 
@@ -219,6 +221,57 @@ begin
   Result := ReplaceRegExpr('\{\\i1\}(.*?)\{\\i0\}', Result, '\^I$1\^I', True);
   Result := ReplaceRegExpr('\{\\u1\}(.*?)\{\\u0\}', Result, '\^U$1\^U', True);
   Result := ReplaceRegExpr('\{\\s1\}(.*?)\{\\s0\}', Result, '\^S$1\^S', True);
+end;
+
+// -----------------------------------------------------------------------------
+
+function TSTagsToSoftNi(const Text: String): String;
+var
+  S: String;
+begin
+  S := TSTagsToHTML(Text);
+
+  // Traducimos los colores estrictamente soportados por SoftNi a sus índices
+  S := StringReplace(S, '<font color="#FFFF00">', '<CO1>', [rfReplaceAll, rfIgnoreCase]);
+  S := StringReplace(S, '<font color="#00FFFF">', '<CO2>', [rfReplaceAll, rfIgnoreCase]);
+  S := StringReplace(S, '<font color="#00FF00">', '<CO3>', [rfReplaceAll, rfIgnoreCase]);
+  S := StringReplace(S, '<font color="#FF00FF">', '<CO4>', [rfReplaceAll, rfIgnoreCase]);
+  S := StringReplace(S, '<font color="#FF0000">', '<CO5>', [rfReplaceAll, rfIgnoreCase]);
+  S := StringReplace(S, '<font color="#0000FF">', '<CO6>', [rfReplaceAll, rfIgnoreCase]);
+
+  // Eliminamos cualquier etiqueta <font color="..."> no soportada
+  S := ReplaceRegExpr('(?i)<font\s+color="[^"]+">', S, '', False);
+
+  // Convertimos los cierres de fuente a etiquetas de Reset de SoftNi
+  S := StringReplace(S, '</font>', '<CO>', [rfReplaceAll, rfIgnoreCase]);
+
+  // Limpieza de Resets "perdidos"
+  while Pos('<CO><CO>', S) > 0 do
+    S := StringReplace(S, '<CO><CO>', '<CO>', [rfReplaceAll, rfIgnoreCase]);
+
+  Result := S;
+end;
+
+// -----------------------------------------------------------------------------
+
+function SoftNiTagsToTS(const Text: String): String;
+var
+  S: String;
+begin
+  S := Text;
+
+  // Reemplazamos los colores indexados de SoftNi por hexadecimales HTML estándar
+  S := StringReplace(S, '<CO1>', '<font color="#FFFF00">', [rfReplaceAll, rfIgnoreCase]); // Amarillo (Estándar de TV)
+  S := StringReplace(S, '<CO2>', '<font color="#00FFFF">', [rfReplaceAll, rfIgnoreCase]); // Cian
+  S := StringReplace(S, '<CO3>', '<font color="#00FF00">', [rfReplaceAll, rfIgnoreCase]); // Verde
+  S := StringReplace(S, '<CO4>', '<font color="#FF00FF">', [rfReplaceAll, rfIgnoreCase]); // Magenta
+  S := StringReplace(S, '<CO5>', '<font color="#FF0000">', [rfReplaceAll, rfIgnoreCase]); // Rojo
+  S := StringReplace(S, '<CO6>', '<font color="#0000FF">', [rfReplaceAll, rfIgnoreCase]); // Azul
+
+  // Reemplazamos el Reset de color de SoftNi por el cierre de font
+  S := StringReplace(S, '<CO>', '</font>', [rfReplaceAll, rfIgnoreCase]);
+
+  Result := HTMLTagsToTS(S);
 end;
 
 // -----------------------------------------------------------------------------

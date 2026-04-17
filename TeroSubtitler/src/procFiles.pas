@@ -322,7 +322,8 @@ begin
     end;
   end;
 
-  if AppOptions.AskForInputFPS and (Subtitles.GetTimeBaseFromFile(FileName) = stbMedia) and not AppOptions.UseOwnFileDialog and not IsBinary then //not Subtitles.IsSMPTESupported(Subtitles.GetFormatFromFile(FileName)) then
+  if AppOptions.AskForInputFPS and (Subtitles.GetTimeBaseFromFile(FileName) = stbMedia) and not AppOptions.UseOwnFileDialog and
+    (not IsBinary or SameText(ExtractFileExt(FileName), '.890')) then
   begin
     with frmMain.cboInputFPS do
     begin
