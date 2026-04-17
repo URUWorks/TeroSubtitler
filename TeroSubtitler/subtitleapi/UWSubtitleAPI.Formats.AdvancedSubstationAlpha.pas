@@ -1,18 +1,18 @@
 {*
- *  URUWorks Subtitle API
+ * URUWorks Subtitle API
  *
- *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 2.0 (the "License"); you may
- *  not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  http://www.mozilla.org/MPL/2.0.html
+ * The contents of this file are used with permission, subject to
+ * the Mozilla Public License Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/2.0.html
  *
- *  Software distributed under the License is distributed on an
- *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  rights and limitations under the License.
+ * Software distributed under the License is distributed on an
+ * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ * Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSubtitleAPI.Formats.AdvancedSubstationAlpha;
@@ -88,15 +88,33 @@ end;
 // -----------------------------------------------------------------------------
 
 function TUWAdvancedSubstationAlpha.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
+var
+  Line, StartTime, EndTime: String;
+  P1, P2, P3: Integer;
 begin
-  if (Pos('Dialogue:', SubtitleFile[Row]) > 0) and
-     (Pos('Marked=', SubtitleFile[Row]) = 0) and
-     (Pos('!effect', SubtitleFile[Row]) = 0) and
-     (TimeInFormat(Trim(Copy(SubtitleFile[Row], Pos(',', SubtitleFile[Row]) + 1, PosEx(',', SubtitleFile[Row], Pos(',', SubtitleFile[Row]) + 1) - (Pos(',', SubtitleFile[Row]) + 1))), 'h:mm:ss.zz'))  and
-     (TimeInFormat(Trim(Copy(SubtitleFile[Row], PosEx(',', SubtitleFile[Row], Pos(',', SubtitleFile[Row]) + 1) + 1, PosEx(',', SubtitleFile[Row], PosEx(',', SubtitleFile[Row], Pos(',', SubtitleFile[Row]) + 1) + 1) - (PosEx(',', SubtitleFile[Row], Pos(',', SubtitleFile[Row]) + 1) + 1))), 'h:mm:ss.zz')) then
-    Result := True
-  else
-    Result := False;
+  Line := SubtitleFile[Row];
+
+  if (not Contains('Dialogue:', Line)) or
+     (Pos('Marked=', Line) > 0) or
+     (Pos('!effect', Line) > 0) then
+    Exit(False);
+
+  P1 := Pos(',', Line);
+  if P1 = 0 then Exit(False);
+
+  P2 := PosEx(',', Line, P1 + 1);
+  if P2 = 0 then Exit(False);
+
+  P3 := PosEx(',', Line, P2 + 1);
+  if P3 = 0 then Exit(False);
+
+  // Extraemos los tiempos basándonos en la posición de las comas
+  StartTime := Trim(Copy(Line, P1 + 1, P2 - P1 - 1));
+  EndTime := Trim(Copy(Line, P2 + 1, P3 - P2 - 1));
+
+  // Aceptamos máscaras estándar (1 dígito de hora) y variantes de broadcast (2 dígitos)
+  Result := (TimeInFormat(StartTime, 'h:mm:ss.zz') or TimeInFormat(StartTime, 'hh:mm:ss.zz')) and
+            (TimeInFormat(EndTime, 'h:mm:ss.zz') or TimeInFormat(EndTime, 'hh:mm:ss.zz'));
 end;
 
 // -----------------------------------------------------------------------------
@@ -127,7 +145,7 @@ begin
           Actor := Copy(Text, 1, Pos(',', Text)-1);
           for a := 1 to 5 do Delete(Text, 1, Pos(',', Text));
 
-          Text := ReplaceString(Trim(Text), '\N', LineEnding);
+          Text := ReplaceString(Trim(Text), '\N', LineEnding, True, True);
 
           a := Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
           Subtitles.ItemPointer[a]^.Actor := Actor;
@@ -149,8 +167,11 @@ var
 begin
   Result  := False;
 
+  StringList.Clear;
+
   StringList.Add('[Script Info]');
   StringList.Add('ScriptType: v4.00+');
+
 //  StringList.Add('Collisions: ' + ASSAttributes.Collisions);
 //  StringList.Add('PlayResX: ' + IntToStr(ASSAttributes.PlayResX));
 //  StringList.Add('PlayResY: ' + IntToStr(ASSAttributes.PlayResY));
