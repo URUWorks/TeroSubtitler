@@ -1,5 +1,5 @@
 1.0.2.3 (xx.xx.2026)
-- improved: [SubtitleAPI] Cavena 890 and SoftNi
+- improved: [SubtitleAPI] Adobe Encore DVD, Advanced Substation Alpha, Cavena 890 & SoftNi
 
 1.0.2.2 (09.04.2026)
 - fixed: [macOS] Division by zero error #468
