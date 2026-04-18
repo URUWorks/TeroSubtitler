@@ -1,18 +1,18 @@
 {*
- *  URUWorks Subtitle API
+ * URUWorks Subtitle API
  *
- *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 2.0 (the "License"); you may
- *  not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  http://www.mozilla.org/MPL/2.0.html
+ * The contents of this file are used with permission, subject to
+ * the Mozilla Public License Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/2.0.html
  *
- *  Software distributed under the License is distributed on an
- *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  rights and limitations under the License.
+ * Software distributed under the License is distributed on an
+ * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ * Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSubtitleAPI.Formats.ITunesTimedText;
@@ -258,15 +258,17 @@ end;
 function TUWITunesTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
 var
   XmlDoc : TXMLDocument;
-  Node   : TDOMNode;
+  Node, LayoutNode, RegionNode : TDOMNode;
   Item   : TUWSubtitleItem;
   fr     : Double;
+  RegionMap: TStringList;
+  RegionID, AlignVal: String;
 begin
-  Result := False; // TODO: read styles,...
+  Result := False;
   XmlDoc := NIL;
+  RegionMap := TStringList.Create;
 
   StringsToXML(XmlDoc, SubtitleFile);
-  //ReadXMLFile(XmlDoc, SubtitleFile.FileName);
   if Assigned(XmlDoc) then
     try
       Node := XMLFindNodeByName(XmlDoc, 'tt');
@@ -287,7 +289,7 @@ begin
           else
             Subtitles.TimecodeMode := tcNDF;
 
-          if (XMLGetAttrValue(Node, 'ttp:timeBase') = 'smpte') then //and (XMLGetAttrValue(Node, 'ttp:dropMode') <> 'nonDrop') then
+          if (XMLGetAttrValue(Node, 'ttp:timeBase') = 'smpte') then
             Subtitles.TimeBase := stbSMPTE
           else
             Subtitles.TimeBase := stbMedia;
@@ -295,6 +297,30 @@ begin
 
         if XMLHasAttribute(Node, 'ttp:frameRateMultiplier') then
           Subtitles.FrameRate := XMLGetCorrectFPS(fr, XMLGetAttrValue(Node, 'ttp:frameRateMultiplier'), Subtitles.TimecodeMode = tcDF);
+      end;
+
+      LayoutNode := XMLFindNodeByName(XmlDoc, 'layout');
+      if Assigned(LayoutNode) then
+      begin
+        RegionNode := LayoutNode.FirstChild;
+        while Assigned(RegionNode) do
+        begin
+          if RegionNode.NodeName = 'region' then
+          begin
+            if XMLHasAttribute(RegionNode, 'xml:id') then
+            begin
+              RegionID := XMLGetAttrValue(RegionNode, 'xml:id');
+
+              if XMLHasAttribute(RegionNode, 'tts:displayAlign') then
+                AlignVal := XMLGetAttrValue(RegionNode, 'tts:displayAlign')
+              else
+                AlignVal := '';
+
+              RegionMap.Values[RegionID] := AlignVal;
+            end;
+          end;
+          RegionNode := RegionNode.NextSibling;
+        end;
       end;
 
       Node := XMLFindNodeByName(XmlDoc, 'p');
@@ -307,12 +333,26 @@ begin
             begin
               if Node.Attributes.GetNamedItem('region') <> NIL then
               begin
-                with Node.Attributes.GetNamedItem('region') do
-                if NodeValue.Contains('top') or (NodeValue = 'sh0') then
-                    VAlign := svaTop
-                  else
-                    VAlign := svaBottom;
-              end;
+                RegionID := Node.Attributes.GetNamedItem('region').NodeValue;
+                AlignVal := RegionMap.Values[RegionID];
+
+                // tts:displayAlign
+                if SameText(AlignVal, 'before') then
+                  VAlign := svaTop
+                else if SameText(AlignVal, 'center') then
+                  VAlign := svaCenter
+                else if SameText(AlignVal, 'after') then
+                  VAlign := svaBottom
+                // no existe tts:displayAlign
+                else if LowerCase(RegionID).Contains('top') or (RegionID = 'sh0') then
+                  VAlign := svaTop
+                else if LowerCase(RegionID).Contains('middle') or LowerCase(RegionID).Contains('center') then
+                  VAlign := svaCenter
+                else
+                  VAlign := svaBottom;
+              end
+              else
+                VAlign := svaBottom;
 
               if Node.Attributes.GetNamedItem('begin') <> NIL then
                 InitialTime := SMPTEStringToMS(Node.Attributes.GetNamedItem('begin').NodeValue, Subtitles.FrameRate);
@@ -328,6 +368,7 @@ begin
           Node := Node.NextSibling;
         until (Node = NIL);
     finally
+       RegionMap.Free;
        XmlDoc.Free;
        Result := Subtitles.Count > 0;
     end;
@@ -341,7 +382,7 @@ var
   Root, Element, Node, SubNode : TDOMNode;
   i, it, ft : Integer;
   NewFPS: Double;
-  txt: String;
+  txt, RegionStr: String;
 begin
   Result := False;
   XmlDoc := TXMLDocument.Create;
@@ -366,10 +407,8 @@ begin
       end
       else
       begin
-        //NewFPS := FPS + (FPS * 0.001);
         NewFPS := Round(FPS) * (1000 /  1001);
         TDOMElement(Root).SetAttribute('ttp:frameRate', Round(NewFPS).ToString);
-        //TDOMElement(Root).SetAttribute('ttp:frameRateMultiplier', '999 1000');
         TDOMElement(Root).SetAttribute('ttp:frameRateMultiplier', '1000 1001');
       end;
 
@@ -382,7 +421,6 @@ begin
     Root := XmlDoc.DocumentElement;
 
     Element := XmlDoc.CreateElement('head');
-      //TDOMElement(Element).SetAttribute('xmlns', '');
       Node := XmlDoc.CreateElement('metadata');
       Element.AppendChild(Node);
       SubNode := XmlDoc.CreateElement('ttm:title');
@@ -425,6 +463,15 @@ begin
       TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
       TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'before');
       Node.AppendChild(SubNode);
+
+      SubNode := XmlDoc.CreateElement('region');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'middle');
+      TDOMElement(SubNode).SetAttribute('tts:origin', '0% 40%');
+      TDOMElement(SubNode).SetAttribute('tts:extent', '100% 20%');
+      TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
+      TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'center');
+      Node.AppendChild(SubNode);
+
       SubNode := XmlDoc.CreateElement('region');
       TDOMElement(SubNode).SetAttribute('xml:id', 'bottom');
       TDOMElement(SubNode).SetAttribute('tts:origin', '0% 85%');
@@ -445,20 +492,21 @@ begin
     begin
       it := Subtitles[i].InitialTime;
       ft := Subtitles[i].FinalTime;
-      {if not IsInteger(FPS) and (Subtitles.TimeBase = stbMedia) then
-      begin
-        it := Round(it / 1.001);
-        ft := Round(ft / 1.001);
-      end;}
 
       Element := XmlDoc.CreateElement('p');
-      TDOMElement(Element).SetAttribute('region', iff(Subtitles[i].VAlign = svaTop, 'top', 'bottom'));
+
+      if Subtitles[i].VAlign = svaTop then
+        RegionStr := 'top'
+      else if Subtitles[i].VAlign = svaCenter then
+        RegionStr := 'middle'
+      else
+        RegionStr := 'bottom';
+
+      TDOMElement(Element).SetAttribute('xml:id', 'p' + IntToStr(i + 1)); // XML Estándar ID
+      TDOMElement(Element).SetAttribute('region', RegionStr);
       TDOMElement(Element).SetAttribute('begin', MSToHHMMSSFFTime(it, NewFPS, Subtitles.TimecodeMode));
-      //TDOMElement(Element).SetAttribute('id', TimeToString(Subtitles.InitialTime[i], 'p' + IntToStr(i)));
       TDOMElement(Element).SetAttribute('end', MSToHHMMSSFFTime(ft, NewFPS, Subtitles.TimecodeMode));
 
-      //SubNode := XmlDoc.CreateTextNode(TSTagsToXML(ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), sLineBreak, '<br/>')));
-      //Element.AppendChild(SubNode);
       Txt := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
       AppendStyledTextDirect(XmlDoc, Element, Txt);
 

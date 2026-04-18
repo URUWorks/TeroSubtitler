@@ -1,18 +1,18 @@
 {*
- *  URUWorks Subtitle API
+ * URUWorks Subtitle API
  *
- *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 2.0 (the "License"); you may
- *  not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  http://www.mozilla.org/MPL/2.0.html
+ * The contents of this file are used with permission, subject to
+ * the Mozilla Public License Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/2.0.html
  *
- *  Software distributed under the License is distributed on an
- *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  rights and limitations under the License.
+ * Software distributed under the License is distributed on an
+ * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ * Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSubtitleAPI.Formats.Spreadsheet;
@@ -97,19 +97,17 @@ var
   s : String;
 begin
   s := LowerCase(ExtractFileExt(SubtitleFile.FileName));
-  if ((s = '.xls') or (s = '.xlsx') or (s = '.ods')) then
-    Result := True
-  else
-    Result := False;
+  Result := (s = '.xls') or (s = '.xlsx') or (s = '.ods');
 end;
 
 // -----------------------------------------------------------------------------
 
 function TUWSpreadsheet.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
 var
-  Workbook : TsWorkbook;
+  Workbook  : TsWorkbook;
   Worksheet : TsWorksheet;
-  col, row : Cardinal;
+  col, row  : Cardinal;
+  tempRow   : Cardinal;
   InitialTime : Integer;
   FinalTime : Integer;
   Text : String;
@@ -138,7 +136,7 @@ begin
       else
         Worksheet := Workbook.GetFirstWorksheet;
 
-      if Worksheet.GetLastColIndex < 3 then Exit; // Minimum columns required
+      if Worksheet.GetLastColIndex < 2 then Exit;
 
       // find necessary indexes
       for row := 0 to Worksheet.GetLastRowIndex do
@@ -153,20 +151,20 @@ begin
           Text := Worksheet.ReadAsText(row, col);
           if not Text.IsEmpty then
           begin
-            if StrToIntDef(Text, -1) > -1 then
+            if StrToIntDef(Text, -1) = -1 then
             begin
-            end
-            else if (StringToTime(Text, False, FPS) > 0) and (iIT = -1) and (iFT = -1) then
-            begin
-              iIT := col;
-            end
-            else if (StringToTime(Text, False, FPS) > 0) and (iFT = -1) and (iIT > -1) then
-            begin
-              iFT := col;
-            end
-            else if (iIT > 0) and (iFT > 0) and (iT < 0) then
-            begin
-              iT := col;
+              if (StringToTime(Text, False, FPS) >= 0) and (iIT = -1) and (iFT = -1) then
+              begin
+                iIT := col;
+              end
+              else if (StringToTime(Text, False, FPS) > 0) and (iFT = -1) and (iIT > -1) then
+              begin
+                iFT := col;
+              end
+              else if (iIT > -1) and (iFT > -1) and (iT < 0) then
+              begin
+                iT := col;
+              end;
             end;
           end;
         end;
@@ -186,8 +184,15 @@ begin
         FinalTime := StringToTime(Worksheet.ReadAsText(row, iFT), False, FPS);
         Text := HTMLTagsToTS(Worksheet.ReadAsText(row, iT));
 
-        if (row < Worksheet.GetLastRowIndex) and Worksheet.ReadAsText(row+1, iIT).IsEmpty and Worksheet.ReadAsText(row+1, iFT).IsEmpty and not Worksheet.ReadAsText(row+1, iT).IsEmpty then
-          Text += sLineBreak + HTMLTagsToTS(Worksheet.ReadAsText(row+1, iT));
+        tempRow := row + 1;
+        while (tempRow <= Worksheet.GetLastRowIndex) and
+              Worksheet.ReadAsText(tempRow, iIT).IsEmpty and
+              Worksheet.ReadAsText(tempRow, iFT).IsEmpty and
+              not Worksheet.ReadAsText(tempRow, iT).IsEmpty do
+        begin
+          Text += sLineBreak + HTMLTagsToTS(Worksheet.ReadAsText(tempRow, iT));
+          Inc(tempRow);
+        end;
 
         if (InitialTime >= 0) and (FinalTime > 0) then
           Subtitles.Add(InitialTime, FinalTime, Text, '');
@@ -217,7 +222,7 @@ begin
     WorkName := ChangeFileExt(ExtractFileName(FileName), '');
     SetLength(WorkName, Min(Length(WorkName), 31)); // The length must be less than or equal to 31 characters
     Worksheet := Workbook.AddWorksheet(WorkName);
-    //Worksheet := Workbook.AddWorksheet('Tero Subtitler');
+
     Count := 0;
     for i := FromItem to ToItem do
     begin

@@ -37,6 +37,8 @@ function MacDVDTagsToTS(const Text: String): String;
 function TSToMacDVDTags(const Text: String): String;
 function TSTagsToSoftNi(const Text: String): String;
 function SoftNiTagsToTS(const Text: String): String;
+function STLTagsToTS(const Text: String): String;
+function TSTagsToSTL(const Text: String): String;
 
 // -----------------------------------------------------------------------------
 
@@ -273,6 +275,50 @@ begin
   S := StringReplace(S, '<CO>', '</font>', [rfReplaceAll, rfIgnoreCase]);
 
   Result := HTMLTagsToTS(S);
+end;
+
+// -----------------------------------------------------------------------------
+
+function STLTagsToTS(const Text: String): String;
+
+  function ReplaceTag(const sText, Tag: String): String;
+  var
+    StartTag : Boolean;
+    sTag     : String;
+  begin
+    Result   := sText;
+    StartTag := True;
+    sTag     := '^' + Tag.ToUpper;
+
+    while Pos(sTag, UpperCase(Result)) > 0 do
+    begin
+      if StartTag then
+        Result := StringReplace(Result, sTag, '{\' + Tag + '1}', [rfIgnoreCase])
+      else
+        Result := StringReplace(Result, sTag, '{\' + Tag + '0}', [rfIgnoreCase]);
+
+      StartTag := not StartTag;
+    end;
+  end;
+
+begin
+  Result := ReplaceTag(Text, 'b');
+  Result := ReplaceTag(Result, 'i');
+  Result := ReplaceTag(Result, 'u');
+end;
+
+// -----------------------------------------------------------------------------
+
+function TSTagsToSTL(const Text: String): String;
+begin
+  Result := Text;
+  Result := Result.Replace('{\b0}', '^B', [rfReplaceAll]);
+  Result := Result.Replace('{\b1}', '^B', [rfReplaceAll]);
+  Result := Result.Replace('{\i0}', '^I', [rfReplaceAll]);
+  Result := Result.Replace('{\i1}', '^I', [rfReplaceAll]);
+  Result := Result.Replace('{\u0}', '^U', [rfReplaceAll]);
+  Result := Result.Replace('{\u1}', '^U', [rfReplaceAll]);
+  Result := RemoveTSTags(Result);
 end;
 
 // -----------------------------------------------------------------------------

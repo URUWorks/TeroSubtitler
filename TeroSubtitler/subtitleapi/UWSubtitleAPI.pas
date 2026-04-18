@@ -1559,7 +1559,12 @@ begin
     FPSInfo.FPS := 0;
     FPSInfo.Mode := tcNDF;
     if Sub.LoadFromFile(AFileName, NIL, FPSInfo) then
-      Result := Sub.TimeBase;
+    begin
+      if ((Sub.Format = sfTimedText) or (Sub.Format = sfNetflixTimedText) or (Sub.Format = sfITunesTimedText)) and (Sub.FFPS > 0) then
+        Result := stbSMPTE
+      else
+        Result := Sub.TimeBase;
+    end;
   finally
     Sub.Free;
   end;
