@@ -139,14 +139,16 @@ begin
   Result := Text;
   if Result.IsEmpty then Exit;
 
-  Result := ReplaceString(Result, '{\i1}', '{y:i}');
-  Result := ReplaceString(Result, '{\i0}', '');
-  Result := ReplaceString(Result, '{\b1}', '{y:b}');
-  Result := ReplaceString(Result, '{\b0}', '');
-  Result := ReplaceString(Result, '{\u1}', '{y:u}');
-  Result := ReplaceString(Result, '{\u0}', '');
-  Result := ReplaceString(Result, '{\s1}', '{y:s}');
-  Result := ReplaceString(Result, '{\s0}', '');
+  Result := ReplaceString(Result, '{\i1}', '{y:i}', True, True);
+  Result := ReplaceString(Result, '{\i0}', '', True, True);
+  Result := ReplaceString(Result, '{\b1}', '{y:b}', True, True);
+  Result := ReplaceString(Result, '{\b0}', '', True, True);
+  Result := ReplaceString(Result, '{\u1}', '{y:u}', True, True);
+  Result := ReplaceString(Result, '{\u0}', '', True, True);
+  Result := ReplaceString(Result, '{\s1}', '{y:s}', True, True);
+  Result := ReplaceString(Result, '{\s0}', '', True, True);
+  Result := ReplaceRegExpr('\{\\c&([^&]+)&\ a}', Result, '{c:$$$1}', True);
+  Result := ReplaceRegExpr('\{\\[^}]*\}', Result, '', True);
 end;
 
 // -----------------------------------------------------------------------------
@@ -156,12 +158,11 @@ begin
   Result := Text;
   if Result.IsEmpty then Exit;
 
-  Result := ReplaceString(Result, '{y:i}', '{\i1}');
-  Result := ReplaceString(Result, '{y:b}', '{\b1}');
-  Result := ReplaceString(Result, '{y:u}', '{\u1}');
-  Result := ReplaceString(Result, '{y:s}', '{\s1}');
-  Result := ReplaceRegExpr('{c:$(.*?|var)}', Result, '{\c&$1&}', True);
-  Result := ReplaceRegExpr('{(.*?)}', Result, '', True);
+  Result := ReplaceString(Result, '{y:i}', '{\i1}', True, True);
+  Result := ReplaceString(Result, '{y:b}', '{\b1}', True, True);
+  Result := ReplaceString(Result, '{y:u}', '{\u1}', True, True);
+  Result := ReplaceString(Result, '{y:s}', '{\s1}', True, True);
+  Result := ReplaceRegExpr('\{[cC]:[\$]?([^}]+|var)\}', Result, '{\\c&$1&}', True);
 end;
 
 // -----------------------------------------------------------------------------

@@ -322,8 +322,11 @@ begin
     end;
   end;
 
+  //if AppOptions.AskForInputFPS and (Subtitles.GetTimeBaseFromFile(FileName) = stbMedia) and not AppOptions.UseOwnFileDialog and
+  //  (not IsBinary or SameText(ExtractFileExt(FileName), '.890')) then
   if AppOptions.AskForInputFPS and (Subtitles.GetTimeBaseFromFile(FileName) = stbMedia) and not AppOptions.UseOwnFileDialog and
-    (not IsBinary or SameText(ExtractFileExt(FileName), '.890')) then
+    (not IsBinary or SameText(ExtractFileExt(FileName), '.890') or SameText(ExtractFileExt(FileName), '.cap') or
+    SameText(ExtractFileExt(FileName), '.asc')) then
   begin
     with frmMain.cboInputFPS do
     begin

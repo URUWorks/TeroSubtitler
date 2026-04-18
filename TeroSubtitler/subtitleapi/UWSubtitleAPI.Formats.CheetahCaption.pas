@@ -1,18 +1,18 @@
 {*
- *  URUWorks Subtitle API
+ * URUWorks Subtitle API
  *
- *  The contents of this file are used with permission, subject to
- *  the Mozilla Public License Version 2.0 (the "License"); you may
- *  not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  http://www.mozilla.org/MPL/2.0.html
+ * The contents of this file are used with permission, subject to
+ * the Mozilla Public License Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/2.0.html
  *
- *  Software distributed under the License is distributed on an
- *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
- *  implied. See the License for the specific language governing
- *  rights and limitations under the License.
+ * Software distributed under the License is distributed on an
+ * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ * Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSubtitleAPI.Formats.CheetahCaption;
@@ -151,7 +151,10 @@ var
   Len,
   TextLen,
   start,
+  usedBytes,
   index,
+  LastIdx,
+  Duration,
   InitialTime   : Integer;
   FinalTime, ft : Integer;
   Text          : String;
@@ -166,14 +169,46 @@ begin
       FileStream.Read(Bytes[0], FileStream.Size);
 
       i := 128;
-      while (i < Length(Bytes) - 20) do
+      while (i < Length(Bytes) - 16) do
       begin
-        Len     := Bytes[i];
-        TextLen := Len - 20;
-        start   := 19;
+        Len := Bytes[i];
+        if Len = 0 then
+        begin
+          Inc(i);
+          Continue;
+        end;
+
+        usedBytes := 20; // Default
+        InitialTime := DecodeTime(Bytes, i + 2, FPS);
+
+        if Subtitles.Count > 0 then
+        begin
+          LastIdx := Subtitles.Count - 1;
+
+          if Subtitles.FinalTime[LastIdx] > InitialTime then
+            Subtitles.FinalTime[LastIdx] := InitialTime - 100;
+
+          Duration := Subtitles.FinalTime[LastIdx] - Subtitles.InitialTime[LastIdx];
+
+          if (Duration > 5000) or (Duration < 0) then
+          begin
+            Subtitles.FinalTime[LastIdx] := Subtitles.InitialTime[LastIdx] + CalculateOptimalDisplayMS(Subtitles.Text[LastIdx]);
+
+            if Subtitles.FinalTime[LastIdx] > (InitialTime - 100) then
+              Subtitles.FinalTime[LastIdx] := InitialTime - 100;
+          end;
+        end;
+
+        if (Bytes[i + 6] = 2) and (Bytes[i + 7] = 1) and (Bytes[i + 8] = 0) and (Bytes[i + 9] = 0) then
+          usedBytes := 16;
+
+        ft := DecodeTime(Bytes, i + 6, FPS);
+
+        TextLen := Len - usedBytes;
+        start   := usedBytes - 1;
 
         j := 0;
-        while j < 4 do
+        while (j < 4) and (i + start - 1 < Length(Bytes)) do
         begin
           if Bytes[i + start - 1] > $10 then
           begin
@@ -183,14 +218,8 @@ begin
           inc(j);
         end;
 
-        if (TextLen > 0) and (Length(Bytes) >= i + TextLen) then
+        if (TextLen > 0) and (Length(Bytes) >= i + start + TextLen) then
         begin
-          InitialTime := DecodeTime(Bytes, i + 2, FPS);
-          if (Bytes[i + 6] = 2) and (Bytes[i + 7] = 1) and (Bytes[i + 8] = 0) and (Bytes[i + 9] = 0) then
-            ft := -1
-          else
-            ft := DecodeTime(Bytes, i + 6, FPS);
-
           Text := '';
           j    := 0;
           italics := False;
@@ -206,10 +235,9 @@ begin
             begin
               Text := Text + TLatinLetters[IsLatinChar(Bytes[index])];
             end
-            else if (Bytes[index] >= $C0) or (Bytes[index] <= $14) then // styles?
+            else if (Bytes[index] >= $C0) or (Bytes[index] <= $14) then
             begin
-              if (Bytes[index] = $d0) then // italic
-                italics := True;
+              if (Bytes[index] = $d0) then italics := True;
             end
             else
             begin
@@ -221,22 +249,27 @@ begin
           Text := Text.Trim;
           if italics then Text := '{\i1}' + Text + '{\i0}';
 
-          if ft >= 0 then
-            FinalTime := ft
-          else
-            FinalTime := InitialTime + CalculateOptimalDisplayMS(Text);
-
+          FinalTime := ft;
           Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
         end;
-        if Len = 0 then Inc(Len);
+
         inc(i, Len);
+      end;
+
+      if Subtitles.Count > 0 then
+      begin
+        LastIdx := Subtitles.Count - 1;
+        Duration := Subtitles.FinalTime[LastIdx] - Subtitles.InitialTime[LastIdx];
+
+        if (Duration > 5000) or (Duration < 0) then
+          Subtitles.FinalTime[LastIdx] := Subtitles.InitialTime[LastIdx] + CalculateOptimalDisplayMS(Subtitles.Text[LastIdx]);
       end;
     end;
   finally
     FileStream.Free;
     if Subtitles.Count > 0 then
     begin
-      Subtitles.ExtraInfoType := eiNone; //eiCheetahCaption;
+      Subtitles.ExtraInfoType := eiNone;
       Result := True;
     end;
   end;
@@ -250,9 +283,11 @@ var
   i, j, c, idx : Integer;
   HeaderBlock  : THeaderBlock;
   StyleBlock   : TStyleBlock;
-  text         : String;
-  len          : Integer;
-  endpos       : Integer;
+  text, Plain  : String;
+  len, endpos  : Integer;
+  IsItalic     : Boolean;
+  TextBytes    : array of Byte;
+  ByteCount    : Integer;
 begin
   Result := False;
 
@@ -275,25 +310,88 @@ begin
     end;
     Stream.WriteBuffer(HeaderBlock, SizeOf(THeaderBlock));
 
-    // Subtitles
-    with StyleBlock do
-    begin
-      UnknowCodes1[0] := $12;
-      UnknowCodes1[1] := 1;
-      UnknowCodes1[2] := 0;
-      UnknowCodes1[3] := 0;
-      UnknowCodes1[4] := 0;
-      UnknowCodes1[5] := 0;
-      Justification   := 3;
-      HorizontalPos   := $F;
-      VerticalPos     := $10;
-    end;
-
     for i := FromItem to ToItem do
     begin
-      Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])) + ' ';
+      Text := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
 
-      len    := Text.Length + 20;
+      // Detección de cursivas
+      IsItalic := (Pos('{\i1}', Text) > 0) or (Pos('<i>', LowerCase(Text)) > 0);
+
+      // Configuración de Posición y Estilo Base
+      with StyleBlock do
+      begin
+        UnknowCodes1[0] := $12;
+        UnknowCodes1[1] := 1;
+        UnknowCodes1[2] := 0;
+        UnknowCodes1[3] := 0;
+        UnknowCodes1[4] := 0;
+        UnknowCodes1[5] := 0;
+        Justification   := 3;
+        HorizontalPos   := $F;  // Default: Bottom
+        VerticalPos     := $10; // Default: Center
+      end;
+
+      if Pos('{\an7}', Text) > 0 then begin StyleBlock.HorizontalPos := $1; StyleBlock.VerticalPos := $05; end
+      else if Pos('{\an8}', Text) > 0 then begin StyleBlock.HorizontalPos := $1; StyleBlock.VerticalPos := $10; end
+      else if Pos('{\an9}', Text) > 0 then begin StyleBlock.HorizontalPos := $1; StyleBlock.VerticalPos := $1C; end
+      else if Pos('{\an4}', Text) > 0 then begin StyleBlock.HorizontalPos := $8; StyleBlock.VerticalPos := $05; end
+      else if Pos('{\an5}', Text) > 0 then begin StyleBlock.HorizontalPos := $8; StyleBlock.VerticalPos := $10; end
+      else if Pos('{\an6}', Text) > 0 then begin StyleBlock.HorizontalPos := $8; StyleBlock.VerticalPos := $1C; end
+      else if Pos('{\an1}', Text) > 0 then begin StyleBlock.HorizontalPos := $F; StyleBlock.VerticalPos := $05; end
+      else if Pos('{\an2}', Text) > 0 then begin StyleBlock.HorizontalPos := $F; StyleBlock.VerticalPos := $10; end
+      else if Pos('{\an3}', Text) > 0 then begin StyleBlock.HorizontalPos := $F; StyleBlock.VerticalPos := $1E; end;
+
+      Plain := RemoveTSTags(Text) + ' ';
+
+      // Procesamiento en Buffer (calcular longitud exacta con inyecciones $d0)
+      SetLength(TextBytes, Plain.Length * 2 + 10);
+      ByteCount := 0;
+
+      if IsItalic then
+      begin
+        TextBytes[ByteCount] := $d0;
+        Inc(ByteCount);
+      end;
+
+      j := 1;
+      while j <= Length(Plain) do
+      begin
+        if (j < Length(Plain)) and (Plain[j] = #13) and (Plain[j+1] = #10) then
+        begin
+          TextBytes[ByteCount] := 0; // Null byte para nueva linea Cheetah
+          Inc(ByteCount);
+          if IsItalic then
+          begin
+            TextBytes[ByteCount] := $d0; // Reactivar cursiva tras salto
+            Inc(ByteCount);
+          end;
+          Inc(j, 2);
+          Continue;
+        end;
+
+        idx := -1;
+        for c := 0 to Length(TLatinLetters)-1 do
+          if Plain[j] = TLatinLetters[c] then
+          begin
+            idx := c;
+            Break;
+          end;
+
+        if idx >= 0 then
+        begin
+          TextBytes[ByteCount] := TLatinCodes[idx];
+          Inc(ByteCount);
+        end
+        else
+        begin
+          TextBytes[ByteCount] := Encoding.GetBytes(Plain[j])[0];
+          Inc(ByteCount);
+        end;
+
+        inc(j);
+      end;
+
+      len    := ByteCount + 20;
       endpos := Stream.Position + len;
 
       WriteByte(Stream, Byte(len));
@@ -304,25 +402,8 @@ begin
 
       Stream.WriteBuffer(StyleBlock, SizeOf(TStyleBlock));
 
-      j := 0;
-      while j < Text.Length do
-      begin
-        idx := -1;
-        for c := 0 to Length(TLatinLetters)-1 do
-          if Text[j] = TLatinLetters[c] then
-          begin
-            idx := c;
-            Break;
-          end;
-
-        if idx >= 0 then
-          WriteByte(Stream, Byte(TLatinCodes[idx]))
-        else
-          WriteByte(Stream, Encoding.GetBytes(Text[j])[0]); //TEncoding.GetEncoding(1252).GetBytes(Text[j])[0]);
-
-
-        inc(j);
-      end;
+      if ByteCount > 0 then
+        Stream.WriteBuffer(TextBytes[0], ByteCount);
 
       while endpos > Stream.Position do WriteByte(Stream, 0);
     end;

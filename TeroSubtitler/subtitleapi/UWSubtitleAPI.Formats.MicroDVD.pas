@@ -100,13 +100,16 @@ end;
 
 function TUWMicroDVD.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
 var
-  i, x        : Integer;
+  i         : Integer;
+  StartStr, EndStr : String;
+  P1, P2, P3, P4   : Integer;
   InitialTime : Integer;
   FinalTime   : Integer;
   Text        : String;
   AFPS        : Single;
   DecimalSep  : Char;
   ExtraInfo   : PMicroDVD_ExtraInfo;
+  P_Start, P_Comma, P_End: Integer;
 begin
   Result := False;
   try
@@ -126,46 +129,70 @@ begin
 
           DecimalSeparator := DecimalSep;
         end;
-      end
-      else if (Pos('{', SubtitleFile[i]) = 1) and (Pos('}', SubtitleFile[i]) > 1) and
-        (StringCount('{',SubtitleFile[i]) >= 2) and (StringCount('}',SubtitleFile[i]) >= 2) then
+        Continue;
+      end;
+
+      P1 := Pos('{', SubtitleFile[i]);
+      if P1 > 0 then
       begin
-        InitialTime := FramesToTime(StrToIntDef(Copy(SubtitleFile[i], 2, Pos('}', SubtitleFile[i]) - 2), 0), AFPS);
-        Text := Copy(SubtitleFile[i], Pos('{', SubtitleFile[i], 2) + 1, Pos('}', SubtitleFile[i], Pos('}', SubtitleFile[i]) + 1) - (Pos('{', SubtitleFile[i], 2) + 1));
-        if IsInteger(Text) then
-          FinalTime := FramesToTime(StrToIntDef(Text, 0), AFPS)
-        else
-          FinalTime := InitialTime + 2000;
-
-        Text := ReplaceString(Copy(SubtitleFile[i], Pos('}', SubtitleFile[i], Pos('}', SubtitleFile[i]) + 1) + 1, Length(SubtitleFile[i])), '|', LineEnding);
-
-        if (InitialTime = 0) and (i > 0) then
+        P2 := Pos('}', SubtitleFile[i], P1 + 1);
+        if P2 > P1 then
         begin
-          InitialTime := FramesToTime(StrToIntDef(Copy(SubtitleFile[i-1], Pos('{', SubtitleFile[i-1], 2) + 1, Pos('}', SubtitleFile[i-1], Pos('}', SubtitleFile[i-1]) + 1) - (Pos('{', SubtitleFile[i-1], 2) + 1)), 0), AFPS);
-          if InitialTime < 0 then InitialTime := 0;
+          P3 := Pos('{', SubtitleFile[i], P2 + 1);
+          if P3 > P2 then
+          begin
+            P4 := Pos('}', SubtitleFile[i], P3 + 1);
+            if P4 > P3 then
+            begin
+              StartStr := Copy(SubtitleFile[i], P1 + 1, P2 - P1 - 1);
+              EndStr   := Copy(SubtitleFile[i], P3 + 1, P4 - P3 - 1);
+              Text     := Copy(SubtitleFile[i], P4 + 1, Length(SubtitleFile[i]));
+
+              // Reemplazo de saltos de línea
+              Text := ReplaceString(Text, '|', LineEnding);
+
+              // Tiempos Iniciales
+              if StartStr <> '' then
+                InitialTime := FramesToTime(StrToIntDef(StartStr, 0), AFPS)
+              else if (i > 0) and (Subtitles.Count > 0) then
+                InitialTime := Subtitles.FinalTime[Subtitles.Count - 1] // Hereda final del anterior real
+              else
+                InitialTime := 0;
+
+              // Tiempos Finales
+              if EndStr <> '' then
+                FinalTime := FramesToTime(StrToIntDef(EndStr, 0), AFPS)
+              else
+                FinalTime := InitialTime + 2000;
+
+              // Extraer y ELIMINAR el código {P:X,Y}
+              ExtraInfo := NIL;
+              P_Start := Pos('{P:', Text);
+              if P_Start > 0 then
+              begin
+                P_End := Pos('}', Text, P_Start);
+                if P_End > P_Start then
+                begin
+                  P_Comma := Pos(',', Text, P_Start);
+                  if (P_Comma > P_Start) and (P_Comma < P_End) then
+                  begin
+                    New(ExtraInfo);
+                    ExtraInfo^.X := StrToIntDef(Copy(Text, P_Start + 3, P_Comma - P_Start - 3), 0);
+                    ExtraInfo^.Y := StrToIntDef(Copy(Text, P_Comma + 1, P_End - P_Comma - 1), 0);
+
+                    Delete(Text, P_Start, P_End - P_Start + 1);
+                  end;
+                end;
+              end;
+
+              // Parseo de tags
+              Text := MicroDVDTagsToTS(Text);
+
+              if (InitialTime >= 0) and (FinalTime > InitialTime) then
+                Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
+            end;
+          end;
         end;
-        if (FinalTime = 0) and (i < SubtitleFile.Count-1) then
-        begin
-          FinalTime := FramesToTime(StrToIntDef(Copy(SubtitleFile[i+1], 2, Pos('}', SubtitleFile[i+1]) - 2), 0), AFPS);
-          if FinalTime < 0 then FinalTime := 0;
-        end;
-
-        // control codes
-        if Text.Contains('{P:') then
-        begin
-          New(ExtraInfo);
-          x := Pos('{P:', Text);
-          ExtraInfo^.X := StrToIntDef(Copy(Text, x+3, Pos(',', Text)-x-3), 0);
-          ExtraInfo^.Y := StrToIntDef(Copy(Text, Pos(',', Text, x)+1, Pos('}', Text, x)-Pos(',', Text, x)-1), 0);
-        end
-        else
-          ExtraInfo := NIL;
-
-        // tags
-        Text := MicroDVDTagsToTS(Text);
-
-        if (InitialTime >= 0) and (FinalTime > 0) then
-          Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
       end;
     end;
   finally
@@ -184,6 +211,7 @@ var
   i          : Integer;
   DecimalSep : Char;
   XY         : String;
+  OutText    : String;
 begin
   Result  := False;
 
@@ -204,9 +232,13 @@ begin
         if (X > 0) or (Y > 0) then
           XY := SysUtils.Format('{P:%d,%d}', [X, Y]);
 
-    Subtitles.Text[i] := TSTagsToMicroDVD(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
-    StringList.Add('{' + IntToStr(TimeToFrames(Subtitles.InitialTime[i], FPS)) + '}{' + IntToStr(TimeToFrames(Subtitles.FinalTime[i], FPS)) + '}' +
-    XY + ReplaceEnters(Subtitles[i].Text));
+    OutText := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
+    OutText := TSTagsToMicroDVD(OutText);
+    OutText := ReplaceEnters(OutText);
+
+    StringList.Add('{' + IntToStr(TimeToFrames(Subtitles.InitialTime[i], FPS)) + '}' +
+                   '{' + IntToStr(TimeToFrames(Subtitles.FinalTime[i], FPS)) + '}' +
+                   XY + OutText);
   end;
 
   try
