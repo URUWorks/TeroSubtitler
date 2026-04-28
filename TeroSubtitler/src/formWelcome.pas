@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Buttons,
-  StdCtrls, UWFlatButton, UWCheckBox, LResources, LCLTranslator;
+  StdCtrls, UWFlatButton, UWCheckBox, LResources, LCLTranslator, StrUtils;
 
 type
 
@@ -178,7 +178,7 @@ begin
   end;
 
   for i := 0 to ComponentCount-1 do
-    if Components[i].Name.StartsWith('lMRUItem') then
+    if StartsStr('lMRUItem', Components[i].Name) then
     begin
       lbl := TLabel(Components[i]);
       if lbl.Width > (Width - lbl.Left) then

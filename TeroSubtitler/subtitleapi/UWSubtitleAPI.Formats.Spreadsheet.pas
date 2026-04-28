@@ -110,9 +110,36 @@ var
   tempRow   : Cardinal;
   InitialTime : Integer;
   FinalTime : Integer;
-  Text : String;
+  TaggedText : String;
   sl : TStrings;
   iIT, iFT, iT : Integer;
+
+  function GetStyledText(ARow, ACol: Cardinal): String;
+  var
+    lCell: PCell;
+    lFont: TsFont;
+    lStyle: TsFontStyles;
+    lText: String;
+  begin
+    lText := Worksheet.ReadAsText(ARow, ACol);
+    if lText.IsEmpty then Exit('');
+
+    lCell := Worksheet.FindCell(ARow, ACol);
+    if lCell <> NIL then
+    begin
+      lFont := Worksheet.ReadCellFont(lCell);
+      if lFont <> NIL then
+      begin
+        lStyle := lFont.Style;
+        if fssItalic in lStyle then lText := '{\i1}' + lText + '{\i0}';
+        if fssBold in lStyle then lText := '{\b1}' + lText + '{\b0}';
+        if fssUnderline in lStyle then lText := '{\u1}' + lText + '{\u0}';
+        if fssStrikeout in lStyle then lText := '{\s1}' + lText + '{\s0}';
+      end;
+    end;
+    Result := lText;
+  end;
+
 begin
   Result := False;
 
@@ -138,33 +165,26 @@ begin
 
       if Worksheet.GetLastColIndex < 2 then Exit;
 
-      // find necessary indexes
+      // Encontrar índices de columnas "Tiempos y Texto"
       for row := 0 to Worksheet.GetLastRowIndex do
       begin
         iIT  := -1;
         iFT  := -1;
         iT   := -1;
-        Text := '';
 
         for col := 0 to Worksheet.GetLastColIndex do
         begin
-          Text := Worksheet.ReadAsText(row, col);
-          if not Text.IsEmpty then
+          TaggedText := Worksheet.ReadAsText(row, col);
+          if not TaggedText.IsEmpty then
           begin
-            if StrToIntDef(Text, -1) = -1 then
+            if StrToIntDef(TaggedText, -1) = -1 then
             begin
-              if (StringToTime(Text, False, FPS) >= 0) and (iIT = -1) and (iFT = -1) then
-              begin
-                iIT := col;
-              end
-              else if (StringToTime(Text, False, FPS) > 0) and (iFT = -1) and (iIT > -1) then
-              begin
-                iFT := col;
-              end
+              if (StringToTime(TaggedText, False, FPS) >= 0) and (iIT = -1) and (iFT = -1) then
+                iIT := col
+              else if (StringToTime(TaggedText, False, FPS) > 0) and (iFT = -1) and (iIT > -1) then
+                iFT := col
               else if (iIT > -1) and (iFT > -1) and (iT < 0) then
-              begin
                 iT := col;
-              end;
             end;
           end;
         end;
@@ -172,17 +192,18 @@ begin
         if (iIT >= 0) and (iFT >= 0) and (iT >= 0) then Break;
       end;
 
-      if (iIT < 0) and (iFT < 0) and (iT < 0) then Exit; // necessary indices were not found
+      if (iIT < 0) or (iFT < 0) or (iT < 0) then Exit;
 
+      // Procesar filas con detección de tiempo y estilos
       for row := 0 to Worksheet.GetLastRowIndex do
       begin
-        InitialTime := -1;
-        FinalTime   := -1;
-        Text        := '';
-
         InitialTime := StringToTime(Worksheet.ReadAsText(row, iIT), False, FPS);
-        FinalTime := StringToTime(Worksheet.ReadAsText(row, iFT), False, FPS);
-        Text := HTMLTagsToTS(Worksheet.ReadAsText(row, iT));
+        FinalTime   := StringToTime(Worksheet.ReadAsText(row, iFT), False, FPS);
+
+        if (InitialTime < 0) or (FinalTime <= 0) then Continue;
+
+        // Obtener texto con "formato"
+        TaggedText := GetStyledText(row, iT);
 
         tempRow := row + 1;
         while (tempRow <= Worksheet.GetLastRowIndex) and
@@ -190,12 +211,11 @@ begin
               Worksheet.ReadAsText(tempRow, iFT).IsEmpty and
               not Worksheet.ReadAsText(tempRow, iT).IsEmpty do
         begin
-          Text += sLineBreak + HTMLTagsToTS(Worksheet.ReadAsText(tempRow, iT));
+          TaggedText := TaggedText + sLineBreak + GetStyledText(tempRow, iT);
           Inc(tempRow);
         end;
 
-        if (InitialTime >= 0) and (FinalTime > 0) then
-          Subtitles.Add(InitialTime, FinalTime, Text, '');
+        Subtitles.Add(InitialTime, FinalTime, TaggedText, '');
       end;
     end;
   finally

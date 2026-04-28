@@ -31,8 +31,9 @@ uses
   UWSubtitleAPI.Formats.MacDVDStudioPro, UWSubtitleAPI.Formats.MacSUB, 
   UWSubtitleAPI.Formats.MicroDVD, UWSubtitleAPI.Formats.MPlayer, 
   UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.NetflixTimedText, 
-  UWSubtitleAPI.Formats.SoftNi, UWSubtitleAPI.Formats.Spreadsheet, 
-  UWSubtitleAPI.Formats.SpruceSubtitleFile, UWSubtitleAPI.Formats.SubRip, 
+  UWSubtitleAPI.Formats.SoftNI, UWSubtitleAPI.Formats.Spreadsheet, 
+  UWSubtitleAPI.Formats.SpruceSubtitleFile, 
+  UWSubtitleAPI.Formats.SpruceSubtitleScript, UWSubtitleAPI.Formats.SubRip, 
   UWSubtitleAPI.Formats.SubViewer, UWSubtitleAPI.Formats.TeroSubtitler, 
   UWSubtitleAPI.Formats.TimedText, UWSubtitleAPI.Formats.TSV, 
   UWSubtitleAPI.Formats.WebVTT, UWSubtitleAPI.Utils, LazarusPackageIntf;

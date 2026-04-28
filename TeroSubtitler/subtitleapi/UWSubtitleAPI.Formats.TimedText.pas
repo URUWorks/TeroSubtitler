@@ -119,7 +119,9 @@ var
   Item   : TUWSubtitleItem;
   prefix : String;
   RegionMap: TStringList;
-  RegionID, AlignVal: String;
+  RegionID, AlignVal, NewText: String;
+  CurBegin, CurEnd: Integer;
+  IsContinuation: Boolean;
 begin
   Result := False;
   XmlDoc := NIL;
@@ -156,6 +158,7 @@ begin
         end;
       end;
 
+      // VAlign
       LayoutNode := XMLFindNodeByName(XmlDoc, prefix+'layout');
       if Assigned(LayoutNode) then
       begin
@@ -167,7 +170,6 @@ begin
             if XMLHasAttribute(RegionNode, 'xml:id') then
             begin
               RegionID := XMLGetAttrValue(RegionNode, 'xml:id');
-
               if XMLHasAttribute(RegionNode, 'tts:displayAlign') then
                 AlignVal := XMLGetAttrValue(RegionNode, 'tts:displayAlign')
               else
@@ -180,50 +182,73 @@ begin
         end;
       end;
 
+      // <p> con UNIFICACIÓN de tiempos
       Node := XMLFindNodeByName(XmlDoc, prefix+'p');
       if Assigned(Node) then
         repeat
           if Node.HasAttributes then
           begin
-            ClearSubtitleItem(Item);
-            with Item do
+            // Extraer tiempos para comparar
+            CurBegin := 0;
+            CurEnd := 0;
+            if XMLHasAttribute(Node, 'begin') then
+              CurBegin := GetTime(XMLGetAttrValue(Node, 'begin'), Subtitles.FrameRate);
+            if XMLHasAttribute(Node, 'end') then
+              CurEnd := GetTime(XMLGetAttrValue(Node, 'end'), Subtitles.FrameRate);
+
+            // Extraer y limpiar el texto del nodo actual
+            NewText := XMLExtractTextContent(Node.ChildNodes);
+            NewText := HTMLTagsToTS(ReplaceEnters(NewText, '<'+prefix+'br/>', LineEnding));
+
+            // Lógica de UNIFICACIÓN
+            IsContinuation := (Subtitles.Count > 0) and
+                             (Subtitles[Subtitles.Count-1].InitialTime = CurBegin) and
+                             (Subtitles[Subtitles.Count-1].FinalTime = CurEnd);
+
+            if IsContinuation then
             begin
-              if Node.Attributes.GetNamedItem('region') <> NIL then
+              // Si el tiempo es el mismo, concatenamos el texto al ítem anterior
+              Subtitles.Text[Subtitles.Count-1] := Subtitles[Subtitles.Count-1].Text + LineEnding + NewText;
+            end
+            else
+            begin
+              // Si es un tiempo nuevo, creamos un nuevo TUWSubtitleItem
+              ClearSubtitleItem(Item);
+              Item.InitialTime := CurBegin;
+              Item.FinalTime := CurEnd;
+              Item.Text := NewText;
+
+              // Determinar alineación vertical
+              if XMLHasAttribute(Node, 'region') then
               begin
-                RegionID := Node.Attributes.GetNamedItem('region').NodeValue;
+                RegionID := XMLGetAttrValue(Node, 'region');
                 AlignVal := RegionMap.Values[RegionID];
 
                 // tts:displayAlign
                 if SameText(AlignVal, 'before') then
-                  VAlign := svaTop
+                  Item.VAlign := svaTop
                 else if SameText(AlignVal, 'center') then
-                  VAlign := svaCenter
+                  Item.VAlign := svaCenter
                 else if SameText(AlignVal, 'after') then
-                  VAlign := svaBottom
+                  Item.VAlign := svaBottom
                 // no existe tts:displayAlign
                 else if SameText(RegionID, 'top') or SameText(RegionID, 'sh0') then
-                  VAlign := svaTop
+                  Item.VAlign := svaTop
                 else if SameText(RegionID, 'middle') or SameText(RegionID, 'center') then
-                  VAlign := svaCenter
+                  Item.VAlign := svaCenter
                 else
-                  VAlign := svaBottom;
+                  Item.VAlign := svaBottom;
               end
               else
-                VAlign := svaBottom;
+                Item.VAlign := svaBottom;
 
-              if Node.Attributes.GetNamedItem('begin') <> NIL then
-                InitialTime := GetTime(Node.Attributes.GetNamedItem('begin').NodeValue, Subtitles.FrameRate);
-              if Node.Attributes.GetNamedItem('end') <> NIL then
-                FinalTime   := GetTime(Node.Attributes.GetNamedItem('end').NodeValue, Subtitles.FrameRate);
-
-              Text := XMLExtractTextContent(Node.ChildNodes);
-              Text := HTMLTagsToTS(ReplaceEnters(Text, '<'+prefix+'br/>', LineEnding));
+              Subtitles.Add(Item, NIL);
             end;
-            Subtitles.Add(Item, NIL);
           end;
 
           Node := Node.NextSibling;
         until (Node = NIL);
+
     finally
        RegionMap.Free;
        XmlDoc.Free;

@@ -12,10 +12,10 @@
  * implied. See the License for the specific language governing
  * rights and limitations under the License.
  *
- * Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ * Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
-unit UWSubtitleAPI.Formats.SoftNi;
+unit UWSubtitleAPI.Formats.SoftNI;
 
 // -----------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ type
 
   { TUWSoftNi }
 
-  TUWSoftNi = class(TUWSubtitleCustomFormat)
+  TUWSoftNI = class(TUWSubtitleCustomFormat)
   public
     function Name: String; override;
     function Format: TUWSubtitleFormats; override;
@@ -47,51 +47,75 @@ uses UWSubtitleAPI.Tags, UWSystem.SysUtils;
 
 // -----------------------------------------------------------------------------
 
-function TUWSoftNi.Name: String;
+function TUWSoftNI.Name: String;
 begin
   Result := IndexToName(Integer(Format));
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSoftNi.Format: TUWSubtitleFormats;
+function TUWSoftNI.Format: TUWSubtitleFormats;
 begin
-  Result := TUWSubtitleFormats.sfSoftNi;
+  Result := TUWSubtitleFormats.sfSoftNI;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSoftNi.Extension: String;
+function TUWSoftNI.Extension: String;
 begin
   Result := '*.sub';
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSoftNi.HasStyleSupport: Boolean;
+function TUWSoftNI.HasStyleSupport: Boolean;
 begin
   Result := True;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSoftNi.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
+function TUWSoftNI.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
 begin
   Result := (Pos('\', Trim(SubtitleFile[Row])) = 12) or SubtitleFile[Row].StartsWith('*PART', True);
 end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSoftNi.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
+function TUWSoftNI.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
 var
   i           : Integer;
   InitialTime : Integer;
   FinalTime   : Integer;
   Text        : String;
   CurrentLine : String;
+  Item        : TUWSubtitleItem;
+  LocalFPS    : Double;
+  TimingParts : array of String;
 begin
   Result := False;
+  LocalFPS := FPS;
+
+  // Pre-análisis de *TIMING* para "FPS"
+  for i := SubtitleFile.Count - 1 downto 0 do
+  begin
+    if Trim(SubtitleFile[i]).StartsWith('*TIMING*', True) then
+    begin
+      if i + 1 < SubtitleFile.Count then
+      begin
+        TimingParts := Trim(SubtitleFile[i + 1]).Split([' ']);
+        if Length(TimingParts) >= 2 then
+        begin
+          // El segundo valor contiene el framerate (ej. 1 24 0)
+          TryStrToFloat(TimingParts[1], LocalFPS);
+        end;
+      end;
+      Break;
+    end;
+  end;
+
   try
+    Subtitles.FrameRate := LocalFPS;
     i := 0;
     while i < SubtitleFile.Count do
     begin
@@ -103,47 +127,55 @@ begin
         Inc(i);
         if (i < SubtitleFile.Count) and (Pos('\', Trim(SubtitleFile[i])) = 12) then
           Inc(i);
-
         Continue;
       end;
 
-      // Final del bloque de subtítulos (comienzan los metadatos de SoftNi)
-      if CurrentLine.StartsWith('*END*', True) then
-        Break;
+      if CurrentLine.StartsWith('*END*', True) then Break;
 
-      // Si no detectamos la barra de tiempo en la columna 12 asumimos que es inicio de texto
       if Pos('\', CurrentLine) <> 12 then
       begin
         Text := '';
-
-        // Acumular texto hasta encontrar el timecode (o el final de los subs)
         while (i < SubtitleFile.Count) do
         begin
           CurrentLine := Trim(SubtitleFile[i]);
-
-          if (Pos('\', CurrentLine) = 12) or CurrentLine.StartsWith('*END*', True) then
-            Break;
+          if (Pos('\', CurrentLine) = 12) or CurrentLine.StartsWith('*END*', True) then Break;
 
           if Text <> '' then
             Text := Text + LineEnding + CurrentLine
           else
             Text := CurrentLine;
-
           Inc(i);
         end;
 
         if (i < SubtitleFile.Count) and (Pos('\', Trim(SubtitleFile[i])) = 12) then
         begin
           CurrentLine := Trim(SubtitleFile[i]);
-          InitialTime := StringToTime(Copy(CurrentLine, 1, 11), False, FPS);
-          FinalTime   := StringToTime(Copy(CurrentLine, 13, 11), False, FPS);
+          // Usamos LocalFPS para calcular el tiempo exacto basado en el archivo
+          InitialTime := StringToTime(Copy(CurrentLine, 1, 11), False, LocalFPS);
+          FinalTime   := StringToTime(Copy(CurrentLine, 13, 11), False, LocalFPS);
 
-          Text := SoftNiTagsToTS(Trim(Text));
-          if (InitialTime >= 0) and (FinalTime > 0) and (Text <> '') then
-            Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
+          Text := Trim(Text);
+
+          ClearSubtitleItem(Item);
+          Item.InitialTime := InitialTime;
+          Item.FinalTime := FinalTime;
+
+          // Detectar posición en pantalla ("Top")
+          if Text.StartsWith('}') then
+          begin
+            Item.VAlign := svaTop;
+            // Eliminar "}"
+            Text := Trim(Copy(Text, 2, Length(Text)));
+          end
+          else
+            Item.VAlign := svaBottom; // Por defecto
+
+          Item.Text := SoftNITagsToTS(Text);
+
+          if (InitialTime >= 0) and (FinalTime > 0) and (Item.Text <> '') then
+            Subtitles.Add(Item, NIL);
         end;
       end;
-
       Inc(i);
     end;
   finally
@@ -153,7 +185,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSoftNi.SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+function TUWSoftNI.SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   i    : Integer;
   Text : String;
@@ -166,7 +198,11 @@ begin
 
     for i := FromItem to ToItem do
     begin
-      Text := TSTagsToSoftNi(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
+      Text := TSTagsToSoftNI(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
+
+      if Subtitles[i].VAlign = svaTop then
+        Text := '}' + Text;
+
       StringList.Add(Text);
       StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.ff', FPS) + '\' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.ff', FPS));
     end;
@@ -181,7 +217,7 @@ begin
     StringList.Add('*READ*');
     StringList.Add('0.300 15.000 130.000 100.000 25.000');
     StringList.Add('*TIMING*');
-    StringList.Add('1 30 1 1 1');
+    StringList.Add(SysUtils.Format('1 %d 1 1 1', [Round(FPS)]));
     StringList.Add('*TIMED BACKUP NAME*');
     StringList.Add('C:\');
     StringList.Add('*FORMAT SAMPLE ÅåÉéÌìÕõÛûÿ*');

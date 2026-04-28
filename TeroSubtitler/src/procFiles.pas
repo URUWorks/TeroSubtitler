@@ -275,6 +275,8 @@ var
   _EncIndex: Integer;
   IsBinary: Boolean;
   i: Integer;
+  _Format: TUWSubtitleFormats;
+  _TimeBase: TSubtitleTimeBase;
 begin
   {$IFDEF DARWIN}
   if not frmMain.Visible then
@@ -322,9 +324,7 @@ begin
     end;
   end;
 
-  //if AppOptions.AskForInputFPS and (Subtitles.GetTimeBaseFromFile(FileName) = stbMedia) and not AppOptions.UseOwnFileDialog and
-  //  (not IsBinary or SameText(ExtractFileExt(FileName), '.890')) then
-  if AppOptions.AskForInputFPS and (Subtitles.GetTimeBaseFromFile(FileName) = stbMedia) and not AppOptions.UseOwnFileDialog and
+  if AppOptions.AskForInputFPS and Subtitles.GetFormatInfoFromFile(FileName, _Format, _TimeBase) and ((_TimeBase = stbMedia) and (_Format <> sfSoftNI)) and not AppOptions.UseOwnFileDialog and
     (not IsBinary or SameText(ExtractFileExt(FileName), '.890') or SameText(ExtractFileExt(FileName), '.cap') or
     SameText(ExtractFileExt(FileName), '.asc')) then
   begin

@@ -1,31 +1,32 @@
 object frmWelcome: TfrmWelcome
   Left = 256
-  Height = 401
+  Height = 501
   Top = 127
-  Width = 720
+  Width = 900
   BorderIcons = []
   BorderStyle = bsNone
-  ClientHeight = 401
-  ClientWidth = 720
+  ClientHeight = 501
+  ClientWidth = 900
+  DesignTimePPI = 120
+  Position = poScreenCenter
+  LCLVersion = '4.6.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poScreenCenter
-  LCLVersion = '3.2.0.0'
   object shaBackground: TShape
     Left = 0
-    Height = 401
+    Height = 501
     Top = 0
-    Width = 264
+    Width = 330
     Align = alLeft
     Enabled = False
     Pen.Style = psClear
   end
   object shaBorder: TShape
     Left = 0
-    Height = 401
+    Height = 501
     Top = 0
-    Width = 720
+    Width = 900
     Anchors = [akTop, akLeft, akRight, akBottom]
     Brush.Style = bsClear
     Pen.Width = 2
@@ -33,9 +34,9 @@ object frmWelcome: TfrmWelcome
   object imgLogo: TImage
     AnchorSideTop.Control = lblWelcome
     AnchorSideTop.Side = asrBottom
-    Left = 19
+    Left = 24
     Height = 33
-    Top = 29
+    Top = 38
     Width = 226
     AutoSize = True
     Enabled = False
@@ -48,11 +49,11 @@ object frmWelcome: TfrmWelcome
     AnchorSideTop.Control = fbnNewSubtitle
     AnchorSideTop.Side = asrCenter
     Cursor = crHandPoint
-    Left = 65
-    Height = 15
-    Top = 109
-    Width = 114
-    BorderSpacing.Left = 10
+    Left = 81
+    Height = 20
+    Top = 134
+    Width = 142
+    BorderSpacing.Left = 12
     Caption = 'New subtitle project'
     Font.Style = [fsBold]
     ParentColor = False
@@ -65,11 +66,11 @@ object frmWelcome: TfrmWelcome
     AnchorSideTop.Control = fbnOpenSubtitle
     AnchorSideTop.Side = asrCenter
     Cursor = crHandPoint
-    Left = 65
-    Height = 15
-    Top = 205
-    Width = 60
-    BorderSpacing.Left = 10
+    Left = 81
+    Height = 20
+    Top = 252
+    Width = 75
+    BorderSpacing.Left = 12
     Caption = 'Open file...'
     Font.Style = [fsBold]
     ParentColor = False
@@ -83,12 +84,12 @@ object frmWelcome: TfrmWelcome
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Control = imgLogo
     AnchorSideBottom.Side = asrBottom
-    Left = 283
-    Height = 15
-    Top = 47
-    Width = 66
+    Left = 354
+    Height = 20
+    Top = 51
+    Width = 81
     Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 19
+    BorderSpacing.Left = 24
     Caption = 'Recent files'
     Font.Style = [fsBold]
     ParentColor = False
@@ -96,10 +97,10 @@ object frmWelcome: TfrmWelcome
   end
   object fbnNewSubtitle: TUWFlatButton
     Cursor = crHandPoint
-    Left = 19
-    Height = 36
-    Top = 98
-    Width = 36
+    Left = 24
+    Height = 45
+    Top = 122
+    Width = 45
     ButtonStyle = True
     HightlightColor = clBtnHighlight
     BorderColor = clActiveCaption
@@ -114,17 +115,17 @@ object frmWelcome: TfrmWelcome
     AnchorSideTop.Control = bvlLine4
     AnchorSideTop.Side = asrBottom
     Cursor = crHandPoint
-    Left = 19
-    Height = 36
-    Top = 194
-    Width = 36
+    Left = 24
+    Height = 45
+    Top = 240
+    Width = 45
     ButtonStyle = True
     HightlightColor = clBtnHighlight
     BorderColor = clActiveCaption
     CheckedColor = clInactiveBorder
     Images = ImageList_Default
     ImageIndex = 2
-    BorderSpacing.Top = 5
+    BorderSpacing.Top = 6
     Color = clBtnFace
     OnClick = fbnOpenFileClick
   end
@@ -132,14 +133,14 @@ object frmWelcome: TfrmWelcome
     AnchorSideLeft.Control = Owner
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 19
-    Height = 19
-    Top = 368
-    Width = 18
+    Left = 24
+    Height = 24
+    Top = 459
+    Width = 22
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    BorderSpacing.Left = 19
-    BorderSpacing.Bottom = 14
+    BorderSpacing.Left = 24
+    BorderSpacing.Bottom = 18
     Caption = 'Show on startup'
     TabOrder = 0
   end
@@ -148,17 +149,17 @@ object frmWelcome: TfrmWelcome
     AnchorSideTop.Control = bvlLine2
     AnchorSideTop.Side = asrBottom
     Cursor = crHandPoint
-    Left = 19
-    Height = 36
-    Top = 242
-    Width = 36
+    Left = 24
+    Height = 45
+    Top = 299
+    Width = 45
     ButtonStyle = True
     HightlightColor = clBtnHighlight
     BorderColor = clActiveCaption
     CheckedColor = clInactiveBorder
     Images = ImageList_Default
     ImageIndex = 3
-    BorderSpacing.Top = 5
+    BorderSpacing.Top = 6
     Color = clBtnFace
     OnClick = fbnBatchConvertClick
   end
@@ -168,11 +169,11 @@ object frmWelcome: TfrmWelcome
     AnchorSideTop.Control = fbnBatchConvert
     AnchorSideTop.Side = asrCenter
     Cursor = crHandPoint
-    Left = 65
-    Height = 15
-    Top = 253
-    Width = 88
-    BorderSpacing.Left = 10
+    Left = 81
+    Height = 20
+    Top = 311
+    Width = 109
+    BorderSpacing.Left = 12
     Caption = 'Batch convert...'
     Font.Style = [fsBold]
     ParentColor = False
@@ -183,33 +184,33 @@ object frmWelcome: TfrmWelcome
     AnchorSideLeft.Control = fbnNewSubtitle
     AnchorSideTop.Control = fbnNewSubtitle
     AnchorSideTop.Side = asrBottom
-    Left = 19
+    Left = 24
     Height = 2
-    Top = 139
-    Width = 245
-    BorderSpacing.Top = 5
+    Top = 173
+    Width = 306
+    BorderSpacing.Top = 6
     Shape = bsTopLine
   end
   object bvlLine2: TBevel
     AnchorSideLeft.Control = fbnOpenSubtitle
     AnchorSideTop.Control = fbnOpenSubtitle
     AnchorSideTop.Side = asrBottom
-    Left = 19
+    Left = 24
     Height = 2
-    Top = 235
-    Width = 245
-    BorderSpacing.Top = 5
+    Top = 291
+    Width = 306
+    BorderSpacing.Top = 6
     Shape = bsTopLine
   end
   object bvlLine3: TBevel
     AnchorSideLeft.Control = fbnBatchConvert
     AnchorSideTop.Control = fbnBatchConvert
     AnchorSideTop.Side = asrBottom
-    Left = 19
+    Left = 24
     Height = 2
-    Top = 283
-    Width = 245
-    BorderSpacing.Top = 5
+    Top = 350
+    Width = 306
+    BorderSpacing.Top = 6
     Shape = bsTopLine
   end
   object fbnExit: TUWFlatButton
@@ -217,17 +218,17 @@ object frmWelcome: TfrmWelcome
     AnchorSideTop.Control = bvlLine3
     AnchorSideTop.Side = asrBottom
     Cursor = crHandPoint
-    Left = 19
-    Height = 36
-    Top = 290
-    Width = 36
+    Left = 24
+    Height = 45
+    Top = 358
+    Width = 45
     ButtonStyle = True
     HightlightColor = clBtnHighlight
     BorderColor = clActiveCaption
     CheckedColor = clInactiveBorder
     Images = ImageList_Default
     ImageIndex = 4
-    BorderSpacing.Top = 5
+    BorderSpacing.Top = 6
     Color = clBtnFace
     OnClick = fbnExitClick
   end
@@ -237,11 +238,11 @@ object frmWelcome: TfrmWelcome
     AnchorSideTop.Control = fbnExit
     AnchorSideTop.Side = asrCenter
     Cursor = crHandPoint
-    Left = 65
-    Height = 15
-    Top = 301
-    Width = 21
-    BorderSpacing.Left = 10
+    Left = 81
+    Height = 20
+    Top = 370
+    Width = 26
+    BorderSpacing.Left = 12
     Caption = 'Exit'
     Font.Style = [fsBold]
     ParentColor = False
@@ -253,17 +254,17 @@ object frmWelcome: TfrmWelcome
     AnchorSideTop.Control = bvlLine1
     AnchorSideTop.Side = asrBottom
     Cursor = crHandPoint
-    Left = 19
-    Height = 36
-    Top = 146
-    Width = 36
+    Left = 24
+    Height = 45
+    Top = 181
+    Width = 45
     ButtonStyle = True
     HightlightColor = clBtnHighlight
     BorderColor = clActiveCaption
     CheckedColor = clInactiveBorder
     Images = ImageList_Default
     ImageIndex = 1
-    BorderSpacing.Top = 5
+    BorderSpacing.Top = 6
     Color = clBtnFace
     OnClick = fbnNewTranscriptionClick
   end
@@ -273,11 +274,11 @@ object frmWelcome: TfrmWelcome
     AnchorSideTop.Control = fbnNewTranscription
     AnchorSideTop.Side = asrCenter
     Cursor = crHandPoint
-    Left = 65
-    Height = 15
-    Top = 157
-    Width = 143
-    BorderSpacing.Left = 10
+    Left = 81
+    Height = 20
+    Top = 193
+    Width = 182
+    BorderSpacing.Left = 12
     Caption = 'New manual transcription'
     Font.Style = [fsBold]
     ParentColor = False
@@ -288,22 +289,22 @@ object frmWelcome: TfrmWelcome
     AnchorSideLeft.Control = fbnNewTranscription
     AnchorSideTop.Control = fbnNewTranscription
     AnchorSideTop.Side = asrBottom
-    Left = 19
+    Left = 24
     Height = 2
-    Top = 187
-    Width = 245
-    BorderSpacing.Top = 5
+    Top = 232
+    Width = 306
+    BorderSpacing.Top = 6
     Shape = bsTopLine
   end
   object lblWelcome: TLabel
     AnchorSideLeft.Control = imgLogo
     AnchorSideTop.Control = Owner
     AnchorSideBottom.Control = imgLogo
-    Left = 19
-    Height = 15
-    Top = 14
-    Width = 68
-    BorderSpacing.Top = 14
+    Left = 24
+    Height = 20
+    Top = 18
+    Width = 84
+    BorderSpacing.Top = 18
     Caption = 'Welcome to'
     Font.Style = [fsBold]
     ParentColor = False
@@ -312,8 +313,8 @@ object frmWelcome: TfrmWelcome
   object ImageList_Dark: TImageList
     Height = 32
     Width = 32
-    Left = 400
-    Top = 344
+    Left = 500
+    Top = 430
     Bitmap = {
       4C7A050000002000000020000000670400000000000078DAED9B4F48544118C0
       37AC0D8C120249D922BA068150784A2483D8437FA09B9866141E6A69A14B5D32
@@ -356,8 +357,8 @@ object frmWelcome: TfrmWelcome
   object ImageList_Default: TImageList
     Height = 32
     Width = 32
-    Left = 296
-    Top = 344
+    Left = 370
+    Top = 430
     Bitmap = {
       4C7A0500000020000000200000004D0400000000000078DAED9B4D48554114C7
       6F582F304A08A427AF88B6412014AE12C9205AF401EDC434A3705192D0A63619

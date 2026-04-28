@@ -115,7 +115,9 @@ var
   Node, LayoutNode, RegionNode : TDOMNode;
   Item   : TUWSubtitleItem;
   RegionMap: TStringList;
-  RegionID, AlignVal: String;
+  RegionID, AlignVal, NewText: String;
+  CurBegin, CurEnd: Integer;
+  IsContinuation: Boolean;
 begin
   Result := False;
   XmlDoc := NIL;
@@ -147,6 +149,7 @@ begin
         end;
       end;
 
+      // Regiones
       LayoutNode := XMLFindNodeByName(XmlDoc, 'layout');
       if Assigned(LayoutNode) then
       begin
@@ -171,46 +174,68 @@ begin
         end;
       end;
 
+      // <p> con UNIFICACIÓN de tiempos
       Node := XMLFindNodeByName(XmlDoc, 'p');
       if Assigned(Node) then
         repeat
           if Node.HasAttributes then
           begin
-            ClearSubtitleItem(Item);
-            with Item do
+            // Extraer tiempos
+            CurBegin := 0;
+            CurEnd := 0;
+            if XMLHasAttribute(Node, 'begin') then
+              CurBegin := GetTime(XMLGetAttrValue(Node, 'begin'), Subtitles.FrameRate);
+            if XMLHasAttribute(Node, 'end') then
+              CurEnd := GetTime(XMLGetAttrValue(Node, 'end'), Subtitles.FrameRate);
+
+            // Extraer y limpiar el texto
+            NewText := XMLExtractTextContent(Node.ChildNodes);
+            NewText := HTMLTagsToTS(ReplaceEnters(NewText, '<br/>', LineEnding));
+
+            // Lógica de UNIFICACIÓN
+            IsContinuation := (Subtitles.Count > 0) and
+                             (Subtitles[Subtitles.Count-1].InitialTime = CurBegin) and
+                             (Subtitles[Subtitles.Count-1].FinalTime = CurEnd);
+
+            if IsContinuation then
             begin
-              if Node.Attributes.GetNamedItem('region') <> NIL then
+              // Concatenar texto al ítem existente
+              Subtitles.Text[Subtitles.Count-1] := Subtitles[Subtitles.Count-1].Text + LineEnding + NewText;
+            end
+            else
+            begin
+              // Nuevo subtítulo
+              ClearSubtitleItem(Item);
+              Item.InitialTime := CurBegin;
+              Item.FinalTime := CurEnd;
+              Item.Text := NewText;
+
+              // Determinar alineación vertical
+              if XMLHasAttribute(Node, 'region') then
               begin
-                RegionID := Node.Attributes.GetNamedItem('region').NodeValue;
+                RegionID := XMLGetAttrValue(Node, 'region');
                 AlignVal := RegionMap.Values[RegionID];
 
                 // tts:displayAlign
                 if SameText(AlignVal, 'before') then
-                  VAlign := svaTop
+                  Item.VAlign := svaTop
                 else if SameText(AlignVal, 'center') then
-                  VAlign := svaCenter
+                  Item.VAlign := svaCenter
                 else if SameText(AlignVal, 'after') then
-                  VAlign := svaBottom
+                  Item.VAlign := svaBottom
                 // no existe tts:displayAlign
                 else if LowerCase(RegionID).Contains('top') or (RegionID = 'sh0') then
-                  VAlign := svaTop
+                  Item.VAlign := svaTop
                 else if LowerCase(RegionID).Contains('middle') or LowerCase(RegionID).Contains('center') then
-                  VAlign := svaCenter
+                  Item.VAlign := svaCenter
                 else
-                  VAlign := svaBottom;
+                  Item.VAlign := svaBottom;
               end
               else
-                VAlign := svaBottom;
+                Item.VAlign := svaBottom;
 
-              if Node.Attributes.GetNamedItem('begin') <> NIL then
-                InitialTime := GetTime(Node.Attributes.GetNamedItem('begin').NodeValue, Subtitles.FrameRate);
-              if Node.Attributes.GetNamedItem('end') <> NIL then
-                FinalTime   := GetTime(Node.Attributes.GetNamedItem('end').NodeValue, Subtitles.FrameRate);
-
-              Text := XMLExtractTextContent(Node.ChildNodes);
-              Text := HTMLTagsToTS(ReplaceEnters(Text, '<br/>', LineEnding));
+              Subtitles.Add(Item, NIL);
             end;
-            Subtitles.Add(Item, NIL);
           end;
 
           Node := Node.NextSibling;

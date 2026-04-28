@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSubtitleAPI;
@@ -210,6 +210,7 @@ type
     procedure Sort;
     function IsEqualItemTimes(const I1, I2: TUWSubtitleItem): Boolean;
     function IsEqualItem(const I1, I2: TUWSubtitleItem): Boolean;
+    function GetFormatInfoFromFile(const AFileName: String; out AFormat: TUWSubtitleFormats; out ATimeBase: TSubtitleTimeBase): Boolean;
     function GetFormatFromFile(const AFileName: String): TUWSubtitleFormats;
     function GetTimeBaseFromFile(const AFileName: String): TSubtitleTimeBase;
     function LoadFromFile(const FileName: String; Encoding: TEncoding; const FPS: TFPSInfo; const Format: TUWSubtitleFormats = sfInvalid; const ClearAll: Boolean = True; const NameIsFile: Boolean = True): Boolean;
@@ -310,10 +311,10 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.Encoding, UWSystem.FileUtils
   UWSubtitleAPI.Formats.KaraokeLyricsVKT, UWSubtitleAPI.Formats.MacDVDStudioPro,
   UWSubtitleAPI.Formats.MacSUB, UWSubtitleAPI.Formats.MPlayer,
   UWSubtitleAPI.Formats.MPlayer2, UWSubtitleAPI.Formats.SubViewer,
-  UWSubtitleAPI.Formats.SoftNi, UWSubtitleAPI.Formats.SpruceSubtitleFile,
-  UWSubtitleAPI.Formats.ITunesTimedText, UWSubtitleAPI.Formats.TeroSubtitler,
-  UWSubtitleAPI.Formats.CSV, UWSubtitleAPI.Formats.Spreadsheet,
-  UWSubtitleAPI.Formats.TSV;
+  UWSubtitleAPI.Formats.SoftNI, UWSubtitleAPI.Formats.SpruceSubtitleFile,
+  UWSubtitleAPI.Formats.SpruceSubtitleScript, UWSubtitleAPI.Formats.ITunesTimedText,
+  UWSubtitleAPI.Formats.TeroSubtitler, UWSubtitleAPI.Formats.CSV,
+  UWSubtitleAPI.Formats.Spreadsheet, UWSubtitleAPI.Formats.TSV;
 
 // -----------------------------------------------------------------------------
 
@@ -757,9 +758,10 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWMPlayer.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWMPlayer2.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWNetflixTimedText.Create(AShouldWriteBOM)) );
-  AList.Add( TUWSubtitleCustomFormat(TUWSoftNi.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSoftNI.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWSpreadsheet.Create(AShouldWriteBOM)) ); // binary
   AList.Add( TUWSubtitleCustomFormat(TUWSpruceSubtitleFile.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSpruceSubtitleScript.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubViewer.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWTeroSubtitler.Create(AShouldWriteBOM)) );
@@ -1504,70 +1506,53 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TUWSubtitles.GetFormatFromFile(const AFileName: String): TUWSubtitleFormats;
-var
-  AList   : TUWSubtitleCustomFormatList = NIL;
-  SubFile : TUWStringList;
-  i, f    : Integer;
-begin
-  Result := sfInvalid;
-  InitializeSubtitleFormats(AList, WriteBOM);
-  try
-    SubFile := TUWStringList.Create(AFileName);
-    try
-      // First try Text formats
-      if SubFile.Count > 0 then
-        for i := 0 to SubFile.Count-1 do
-          try
-            for f := 0 to AList.Count-1 do
-              if AList[f].IsTextBased and AList[f].IsMine(SubFile, i) then
-              begin
-                Result := AList[f].Format;
-                Exit;
-              end;
-          except
-          end;
-
-      // If not, try binary formats
-      try
-        for f := 0 to AList.Count-1 do
-          if not AList[f].IsTextBased and AList[f].IsMine(SubFile, 0) then
-          begin
-            Result := AList[f].Format;
-            Exit;
-          end;
-      except
-      end;
-    finally
-      SubFile.Free;
-    end;
-  finally
-    FinalizeSubtitleFormats(AList);
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-function TUWSubtitles.GetTimeBaseFromFile(const AFileName: String): TSubtitleTimeBase;
+function TUWSubtitles.GetFormatInfoFromFile(const AFileName: String; out AFormat: TUWSubtitleFormats; out ATimeBase: TSubtitleTimeBase): Boolean;
 var
   Sub : TUWSubtitles;
   FPSInfo : TFPSInfo;
 begin
-  Result := stbMedia;
+  Result := False;
+  AFormat := sfInvalid;
+  ATimeBase := stbMedia;
+
   Sub := TUWSubtitles.Create;
   try
     FPSInfo.FPS := 0;
     FPSInfo.Mode := tcNDF;
     if Sub.LoadFromFile(AFileName, NIL, FPSInfo) then
     begin
-      if ((Sub.Format = sfTimedText) or (Sub.Format = sfNetflixTimedText) or (Sub.Format = sfITunesTimedText)) and (Sub.FFPS > 0) then
-        Result := stbSMPTE
+      Result := True;
+      AFormat := Sub.Format;
+      if ((AFormat = sfTimedText) or (AFormat = sfNetflixTimedText) or (AFormat = sfITunesTimedText)) and (Sub.FFPS > 0) then
+        ATimeBase := stbSMPTE
       else
-        Result := Sub.TimeBase;
+        ATimeBase := Sub.TimeBase;
     end;
   finally
     Sub.Free;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWSubtitles.GetFormatFromFile(const AFileName: String): TUWSubtitleFormats;
+var
+  AFormat: TUWSubtitleFormats;
+  ATimeBase: TSubtitleTimeBase;
+begin
+  GetFormatInfoFromFile(AFileName, AFormat, ATimeBase);
+  Result := AFormat;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWSubtitles.GetTimeBaseFromFile(const AFileName: String): TSubtitleTimeBase;
+var
+  AFormat: TUWSubtitleFormats;
+  ATimeBase: TSubtitleTimeBase;
+begin
+  GetFormatInfoFromFile(AFileName, AFormat, ATimeBase);
+  Result := ATimeBase;
 end;
 
 // -----------------------------------------------------------------------------

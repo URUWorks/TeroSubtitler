@@ -194,8 +194,8 @@
         <UnitName Value="UWSubtitleAPI.Formats.NetflixTimedText"/>
       </Item>
       <Item>
-        <Filename Value="UWSubtitleAPI.Formats.SoftNi.pas"/>
-        <UnitName Value="UWSubtitleAPI.Formats.SoftNi"/>
+        <Filename Value="UWSubtitleAPI.Formats.SoftNI.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.SoftNI"/>
       </Item>
       <Item>
         <Filename Value="UWSubtitleAPI.Formats.Spreadsheet.pas"/>
@@ -204,6 +204,10 @@
       <Item>
         <Filename Value="UWSubtitleAPI.Formats.SpruceSubtitleFile.pas"/>
         <UnitName Value="UWSubtitleAPI.Formats.SpruceSubtitleFile"/>
+      </Item>
+      <Item>
+        <Filename Value="UWSubtitleAPI.Formats.SpruceSubtitleScript.pas"/>
+        <UnitName Value="UWSubtitleAPI.Formats.SpruceSubtitleScript"/>
       </Item>
       <Item>
         <Filename Value="UWSubtitleAPI.Formats.STL.pas"/>
