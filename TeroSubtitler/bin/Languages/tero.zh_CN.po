@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tero Subtitler\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-12-22 08:52+0800\n"
+"PO-Revision-Date: 2026-05-27 00:04+0800\n"
 "Last-Translator: Little-data\n"
 "Language-Team: Little-data\n"
 "Language: zh_CN\n"
@@ -1550,8 +1550,6 @@ msgid "From selected entry"
 msgstr "从选择的条目开始"
 
 #: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "仅限选择的条目"
@@ -1738,8 +1736,6 @@ msgid "From the selected entry"
 msgstr "从选择的条目开始"
 
 #: tfrmconvertcase.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "仅限选择的条目"
@@ -2019,8 +2015,6 @@ msgid "From selected entry"
 msgstr "从选择的条目开始"
 
 #: tfrmdelay.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "仅限选择的条目"
@@ -2093,8 +2087,6 @@ msgid "From the selected entry"
 msgstr "从选择的条目开始"
 
 #: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "仅限选择的条目"
@@ -2207,7 +2199,7 @@ msgstr "范围："
 
 #: tfrmfindandreplace.lblsource.caption
 msgid "Source:"
-msgstr ""
+msgstr "来源："
 
 #: tfrmfindandreplace.lbltexttofind.caption
 msgid "Text to find:"
@@ -2225,16 +2217,14 @@ msgstr "从选择的条目开始"
 
 #: tfrmfindandreplace.rbnsearchboth.caption
 msgid "Both"
-msgstr ""
+msgstr "全部"
 
 #: tfrmfindandreplace.rbntext.caption
-#, fuzzy
 msgctxt "tfrmfindandreplace.rbntext.caption"
 msgid "Text"
 msgstr "文本"
 
 #: tfrmfindandreplace.rbntranslation.caption
-#, fuzzy
 msgctxt "tfrmfindandreplace.rbntranslation.caption"
 msgid "Translation"
 msgstr "翻译"
@@ -2525,7 +2515,7 @@ msgstr ""
 
 #: tfrmgeneratevideo.chkcrop.caption
 msgid "Crop"
-msgstr ""
+msgstr "裁剪"
 
 #: tfrmgeneratevideo.chkcut.caption
 msgctxt "tfrmgeneratevideo.chkcut.caption"
@@ -4022,7 +4012,7 @@ msgstr "信息..."
 
 #: tfrmmain.actvideooffset.caption
 msgid "Video offset..."
-msgstr ""
+msgstr "视频偏移"
 
 #: tfrmmain.actvideopreview.caption
 msgid "Media preview"
@@ -4395,8 +4385,6 @@ msgid "From the selected entry"
 msgstr "从选择的条目开始"
 
 #: tfrmpauses.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "仅限选择的条目"
@@ -4474,8 +4462,6 @@ msgid "From selected entry"
 msgstr "从选择的条目开始"
 
 #: tfrmroundtime.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "仅限选定条目"
@@ -4842,7 +4828,7 @@ msgstr ""
 
 #: tfrmsettings.lblzerotodisable.caption
 msgid "(0 to disable)"
-msgstr "(0 表示禁用）"
+msgstr "（0 表示禁用）"
 
 #: tfrmshifttimes.btnapply.caption
 msgctxt "tfrmshifttimes.btnapply.caption"
@@ -4875,7 +4861,7 @@ msgstr "范围："
 
 #: tfrmshifttimes.rbnabsolute.caption
 msgid "Absolute"
-msgstr ""
+msgstr "绝对"
 
 #: tfrmshifttimes.rbnallthesubtitles.caption
 msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
@@ -4888,8 +4874,6 @@ msgid "From selected entry"
 msgstr "从选择的条目开始"
 
 #: tfrmshifttimes.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "仅限选择的条目"
@@ -5203,8 +5187,6 @@ msgid "From selected entry"
 msgstr "从选择的条目开始"
 
 #: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "仅限选择的条目"
@@ -5257,8 +5239,6 @@ msgid "From selected entry"
 msgstr "从选定条目"
 
 #: tfrmtranslate.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "仅限选定条目"
@@ -5416,8 +5396,6 @@ msgid "From selected entry"
 msgstr "从选择的条目开始"
 
 #: tfrmtts.rbnonlyselectedsubtitles.caption
-#, fuzzy
-#| msgid "Only selected entries"
 msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "仅限选择的条目"
@@ -5483,13 +5461,11 @@ msgid "Volume %:"
 msgstr "音量 %："
 
 #: tfrmvideooffset.btnapply.caption
-#, fuzzy
 msgctxt "tfrmvideooffset.btnapply.caption"
 msgid "Apply"
 msgstr "应用"
 
 #: tfrmvideooffset.btnclose.caption
-#, fuzzy
 msgctxt "tfrmvideooffset.btnclose.caption"
 msgid "Close"
 msgstr "关闭"
@@ -5667,4 +5643,3 @@ msgstr "反转"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "纵向"
-
