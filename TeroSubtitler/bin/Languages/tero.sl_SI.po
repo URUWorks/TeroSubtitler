@@ -1,0 +1,6096 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
+"Language-Team: \n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#: proclocalize.lngabversion
+#, fuzzy, object-pascal-format
+msgid ""
+"version %s\n"
+"\n"
+"Compiled at %s on %s\n"
+"Compiler version: %s\n"
+"Target CPU: %s"
+msgstr "uporablja %s različice %s (prevedeno z različico %s)"
+
+#: proclocalize.lngadditionaloption
+msgid "Additional option"
+msgstr "Dodatna možnost"
+
+#: proclocalize.lngadditionalparams
+msgid "Additional params:"
+msgstr "Dodatni parametri:"
+
+#: proclocalize.lngaddnote
+msgid "Add note"
+msgstr "Dodaj opombo"
+
+#: proclocalize.lngallsupportedfiles
+msgid "All supported files"
+msgstr "Vse podprte datoteke"
+
+#: proclocalize.lngasbadvalues
+msgid "Bad values"
+msgstr "Neustrezne vrednosti"
+
+#: proclocalize.lngasbreaklonglines
+msgid "Line(s) too long"
+msgstr "Predolga/e vrstica/e"
+
+#: proclocalize.lngascustom
+msgid "Custom"
+msgstr "Po meri"
+
+#: proclocalize.lngasellipsessinglesmartcharacter
+msgid "Ellipses dots instead of Unicode character"
+msgstr "Posamične pike tripičja namesto znaka Unicode"
+
+#: proclocalize.lngasempty
+msgid "Empty entry"
+msgstr "Prazen vnos"
+
+#: proclocalize.lngasfixtags
+#, fuzzy
+msgid "Invalid or incomplete tags"
+msgstr "Povezava imen datotek ni popolna ali je neveljavna."
+
+#: proclocalize.lngasgaptooshort
+#, fuzzy
+msgid "Gap too short"
+msgstr "Novo geslo je prekratko"
+
+#: proclocalize.lngashearingimpaired
+#, fuzzy
+msgid "Hearing impaired"
+msgstr "_Zvočna obvestila"
+
+#: proclocalize.lngasktoextractaudio
+msgid "Audio waveform was not found, do you want to extract it?"
+msgstr "Signalne oblike zvoka ni bilo mogoče najti. Ali jo želite izluščiti?"
+
+#: proclocalize.lngasktosave
+#, fuzzy, object-pascal-format
+msgid ""
+"“%s”\n"
+"\n"
+"Do you wish to save it?"
+msgstr "Ali želite shraniti spremembe?"
+
+#: proclocalize.lngaslineselected
+#, object-pascal-format
+msgid "%d entries selected / %d"
+msgstr "%d izbranih vnosov / %d"
+
+#: proclocalize.lngasmarked
+msgid "Marked entry"
+msgstr "Označen vnos"
+
+#: proclocalize.lngasmaxcps
+msgid "Too many CPS"
+msgstr "Preveč zn/s"
+
+#: proclocalize.lngasmaxlines
+msgid "Maximum number of lines exceeded"
+msgstr "Preseženo največje število vrstic"
+
+#: proclocalize.lngasocr
+#, fuzzy
+msgid "OCR error"
+msgstr "Napaka OCR"
+
+#: proclocalize.lngasoverlappingwithnext
+msgid "Overlapping with following entry"
+msgstr "Prekrivanje z naslednjim vnosom"
+
+#: proclocalize.lngasoverlappingwithprev
+msgid "Overlapping with previous entry"
+msgstr "Prekrivanje s predhodnim vnosom"
+
+#: proclocalize.lngasprohibitedchars
+msgid "Contains a prohibited character"
+msgstr "Vsebuje neveljaven znak"
+
+#: proclocalize.lngasreadingvideofile
+#, fuzzy
+msgid "Reading media file..."
+msgstr "Napaka pri branju iz datoteke."
+
+#: proclocalize.lngasrepeatedchars
+msgid "Repeated character"
+msgstr "Ponovljen znak"
+
+#: proclocalize.lngasrepeatedentry
+msgid "Repeated entry"
+msgstr "Ponovljen vnos"
+
+#: proclocalize.lngastext
+msgctxt "proclocalize.lngastext"
+msgid "Text"
+msgstr "Besedilo"
+
+#: proclocalize.lngastextchars
+#, object-pascal-format
+msgid "Text (%s characters at %.2f CPS):"
+msgstr "Besedilo (%s znakov pri %.2f zn/s):"
+
+#: proclocalize.lngastimetoolong
+msgid "Duration too long"
+msgstr "Trajanje je predolgo"
+
+#: proclocalize.lngastimetooshort
+msgid "Duration too short"
+msgstr "Trajanje je prekratko"
+
+#: proclocalize.lngastranslation
+msgctxt "proclocalize.lngastranslation"
+msgid "Translation"
+msgstr "Prevod"
+
+#: proclocalize.lngastranslationchars
+#, object-pascal-format
+msgid "Translation (%s characters at %.2f CPS):"
+msgstr "Prevod (%s znakov pri %.2f zn/s):"
+
+#: proclocalize.lngasunbreak
+#, fuzzy, object-pascal-format
+msgid "Line breaks less than %d characters"
+msgstr "Napaka pri razločevanju »%%s«: vrstica daljša od %s znakov."
+
+#: proclocalize.lngasunnecessarydots
+msgid "Unnecessary dots"
+msgstr "Nepotrebne pike"
+
+#: proclocalize.lngasunnecessaryspaces
+msgid "Unnecessary spaces"
+msgstr "Nepotrebni presledki"
+
+#: proclocalize.lngasvideolen
+#, object-pascal-format
+msgid "%s (%s FPS)"
+msgstr "%s (%s sl/s)"
+
+#: proclocalize.lngasvideolensmpte
+#, object-pascal-format
+msgid "%s (%s FPS/SMPTE)"
+msgstr "%s (%s sl/s/SMPTE)"
+
+#: proclocalize.lngaswaveformtext
+msgid "Click here to use timeline"
+msgstr "Kliknite semkaj za uporabo časovnice"
+
+#: proclocalize.lngbackupsaved
+msgid "Backup saved."
+msgstr "Varnostna kopija shranjena."
+
+#: proclocalize.lngbcfileformat
+msgctxt "proclocalize.lngbcfileformat"
+msgid "Format"
+msgstr "Oblika"
+
+#: proclocalize.lngbcfilename
+msgctxt "proclocalize.lngbcfilename"
+msgid "File name"
+msgstr "Ime datoteke"
+
+#: proclocalize.lngbcfilestate
+msgid "Status"
+msgstr "Stanje"
+
+#: proclocalize.lngbtnadd
+msgctxt "proclocalize.lngbtnadd"
+msgid "Add"
+msgstr "Dodaj"
+
+#: proclocalize.lngbtncancel
+msgctxt "proclocalize.lngbtncancel"
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: proclocalize.lngbtnclose
+msgctxt "proclocalize.lngbtnclose"
+msgid "Close"
+msgstr "Zapri"
+
+#: proclocalize.lngbtnload
+msgid "Open"
+msgstr "Odpri"
+
+#: proclocalize.lngbtnremove
+msgctxt "proclocalize.lngbtnremove"
+msgid "Remove"
+msgstr "Odstrani"
+
+#: proclocalize.lngbtnsave
+msgid "Save"
+msgstr "Shrani"
+
+#: proclocalize.lngbtnupdate
+msgctxt "proclocalize.lngbtnupdate"
+msgid "Update"
+msgstr "Posodobi"
+
+#: proclocalize.lngcfsframes
+#, fuzzy
+msgctxt "proclocalize.lngcfsframes"
+msgid "Frames"
+msgstr "Sličice"
+
+#: proclocalize.lngcfstime
+msgctxt "proclocalize.lngcfstime"
+msgid "Time"
+msgstr "Čas"
+
+#: proclocalize.lngcontinueanyway
+msgid "Continue?"
+msgstr "Ali želite nadaljevati?"
+
+#: proclocalize.lngdetect
+msgid "Auto-detect"
+msgstr "Samodejno zaznavanje"
+
+#: proclocalize.lngdetectdialogsegmentswarning
+msgid ""
+"Attempting to detect dialogue segments deletes all entries from the list."
+msgstr "Poskus zaznavanja odlomkov dialoga izbriše vse vnose s seznama."
+
+#: proclocalize.lngdownloadcanceled
+msgid "Download canceled by user."
+msgstr "Uporabnik je preklical prejemanje."
+
+#: proclocalize.lngdropframe
+#, fuzzy
+msgid "DF"
+msgstr "df: stopnje prostosti"
+
+#: proclocalize.lngentry
+#, object-pascal-format
+msgid "Entry %d"
+msgstr "Vnos %d"
+
+#: proclocalize.lngentryendedat
+#, fuzzy, object-pascal-format
+msgctxt "proclocalize.lngentryendedat"
+msgid "Entry ended in %s"
+msgstr "Odstranitev vnosa je spodletela: %s"
+
+#: proclocalize.lngentrystartedat
+#, fuzzy, object-pascal-format
+msgctxt "proclocalize.lngentrystartedat"
+msgid "Entry started at %s"
+msgstr "Program je bil zagnan ob %s"
+
+#: proclocalize.lngerrorexecuting
+#, object-pascal-format
+msgid "Error executing “%s”."
+msgstr "Napaka pri izvajanju »%s«."
+
+#: proclocalize.lngextractapperror
+#, object-pascal-format
+msgid "Unable to find “%s”. Check in settings if it is configured correctly."
+msgstr ""
+"»%s« ni mogoče najti. Preverite nastavitve, če je pravilno nastavljeno."
+
+#: proclocalize.lngextracting
+#, fuzzy
+msgid "Extracting..."
+msgstr "Razširjanje…"
+
+#: proclocalize.lngfailed
+msgid "Failed."
+msgstr "Spodletelo."
+
+#: proclocalize.lngfailedtodownload
+msgid "No content downloaded, missing file or no Internet connection."
+msgstr "Vsebina ni bila prenesena, datoteka manjka ali ni internetne povezave."
+
+#: proclocalize.lngfeaturenotavailablefromurl
+#, fuzzy
+msgid "Function not available for online media."
+msgstr "Za predvajanje te vrste medija ni na voljo noben vstavek"
+
+#: proclocalize.lngfilechanged
+msgid "File has not been saved."
+msgstr "Datoteka ni bila shranjena."
+
+#: proclocalize.lngfilenotfound
+msgid "File cannot be found."
+msgstr "Datoteke ni možno najti."
+
+#: proclocalize.lngfilesavedsuccessfully
+msgid "File saved successfully."
+msgstr "Datoteka uspešno shranjena."
+
+#: proclocalize.lngfocenter
+#, fuzzy
+msgid "Center"
+msgstr "Sredinsko"
+
+#: proclocalize.lngfolatin
+msgid "Latin"
+msgstr "latinica"
+
+#: proclocalize.lngfolatinarabic
+msgid "Latin/Arabic"
+msgstr "latinica/arabska"
+
+#: proclocalize.lngfolatincyrillic
+msgid "Latin/Cyrillic"
+msgstr "latinica/cirilica"
+
+#: proclocalize.lngfolatingreek
+msgid "Latin/Greek"
+msgstr "latinica/grška"
+
+#: proclocalize.lngfolatinhebrew
+msgid "Latin/Hebrew"
+msgstr "latinica/hebrejska"
+
+#: proclocalize.lngfoldernotempty
+msgid "The folder is not empty."
+msgstr "Mapa ni prazna."
+
+#: proclocalize.lngfoleft
+msgctxt "proclocalize.lngfoleft"
+msgid "Left"
+msgstr "Leva"
+
+#: proclocalize.lngfolevel1teletext
+msgid "Level-1 teletext"
+msgstr "Teletekst 1. ravni"
+
+#: proclocalize.lngfolevel2teletext
+msgid "Level-2 teletext"
+msgstr "Teletekst 2. ravni"
+
+#: proclocalize.lngfoopensubtitling
+msgid "Open subtitling"
+msgstr "Odpri podnaslavljanje"
+
+#: proclocalize.lngforight
+msgid "Right"
+msgstr "Desno"
+
+#: proclocalize.lngfoundefined
+msgid "Undefined"
+msgstr "Nedoločeno"
+
+#: proclocalize.lngfsaction
+msgid "Action"
+msgstr "Dejanje"
+
+#: proclocalize.lngfsaddspacing
+msgid "Add spacing"
+msgstr "Dodaj razmik"
+
+#: proclocalize.lngfsafter
+msgid "After"
+msgstr "Po"
+
+#: proclocalize.lngfscurrent
+#, fuzzy
+msgid "Current"
+msgstr "Trenutna"
+
+#: proclocalize.lngfsetbadvalues
+#, fuzzy
+msgid "Fix bad timing values"
+msgstr "Popravljen STT Vosk, ki izdeluje slabe podnapise"
+
+#: proclocalize.lngfsetbreaklonglines
+#, fuzzy
+msgid "Break overlong lines"
+msgstr "Brez preloma"
+
+#: proclocalize.lngfsetchaining
+msgid "Chaining entries"
+msgstr "Veriženje vnosov"
+
+#: proclocalize.lngfsetcleanuptags
+#, fuzzy
+msgid "Cleanup tags"
+msgstr "Čiščenje"
+
+#: proclocalize.lngfsetellipsessinglesmartcharacter
+msgid "Convert ellipsis dots to Unicode character"
+msgstr "Pretvori pike tripičja v znak Unicode"
+
+#: proclocalize.lngfsetempty
+msgid "Remove empty entries"
+msgstr "Odstrani prazne vnose"
+
+#: proclocalize.lngfsetfixinterrobang
+#, fuzzy
+msgid "Fix interrobang: !? -> ?!"
+msgstr "Popravi"
+
+#: proclocalize.lngfsetfixtags
+msgid "Fix invalid tags"
+msgstr "Popravi neveljavne značke"
+
+#: proclocalize.lngfsethearingimpaired
+#, fuzzy
+msgid "Remove text for hearing impaired"
+msgstr "Odstrani besedilo"
+
+#: proclocalize.lngfsetincompletehyphentext
+#, fuzzy
+msgid "Remove incomplete hyphenated line"
+msgstr "Največje število zaporednih deljenih vrstic"
+
+#: proclocalize.lngfsetocr
+#, fuzzy
+msgid "Fix common OCR errors"
+msgstr "Popravi pogoste napake OCR"
+
+#: proclocalize.lngfsetoverlapping
+#, fuzzy
+msgid "Fix overlapping display times"
+msgstr "_Časi"
+
+#: proclocalize.lngfsetprohibitedchars
+#, object-pascal-format
+msgid "Remove entries with %s"
+msgstr "Odstrani vnose s/z %s"
+
+#: proclocalize.lngfsetremovespaceswithinbrackets
+msgid "Remove spaces within brackets"
+msgstr "Odstrani presledke v oklepajih"
+
+#: proclocalize.lngfsetrepeatedchars
+msgid "Remove repeated characters"
+msgstr "Odstrani ponavljene znake"
+
+#: proclocalize.lngfsetrepeatedentry
+msgctxt "proclocalize.lngfsetrepeatedentry"
+msgid "Remove repeated entries"
+msgstr "Odstrani ponovljene vnose"
+
+#: proclocalize.lngfsetsnaptoshotchanges
+#, fuzzy
+msgid "Snap times to shot changes"
+msgstr "_Časi"
+
+#: proclocalize.lngfsetsnaptoshotchangesincue
+#, fuzzy
+msgid "Snap In Cue to shot change"
+msgstr "P&ripni na"
+
+#: proclocalize.lngfsetsnaptoshotchangesincueaway
+msgid "Snap In Cue away from shot change"
+msgstr ""
+
+#: proclocalize.lngfsetsnaptoshotchangesoutcue
+msgid "Snap Out Cue to shot change"
+msgstr ""
+
+#: proclocalize.lngfsetspaceofopeninghyphen
+msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
+msgid "Spacing of opening hyphen"
+msgstr "Razmik začetnega vezaja"
+
+#: proclocalize.lngfsettimetoolong
+msgid "Fix durations too long"
+msgstr "Popravi predolga trajanja"
+
+#: proclocalize.lngfsettimetooshort
+msgid "Fix durations too short"
+msgstr "Popravi prekratka trajanja"
+
+#: proclocalize.lngfsetunbreak
+#, object-pascal-format
+msgid "Remove line breaks if %d characters not exceeded"
+msgstr "Odstrani prelome vrstic, če število znakov ne presega %d"
+
+#: proclocalize.lngfsetunnecessarydots
+msgid "Remove unnecessary dots"
+msgstr "Odstrani nepotrebne pike"
+
+#: proclocalize.lngfsetunnecessaryspaces
+msgid "Remove unnecessary spaces"
+msgstr "Odstrani nepotrebne presledke"
+
+#: proclocalize.lngfsindex
+msgctxt "proclocalize.lngfsindex"
+msgid "#"
+msgstr "#"
+
+#: proclocalize.lngfsremovespacing
+msgid "Remove spacing"
+msgstr "Odstrani razmik"
+
+#: proclocalize.lngfstotalerrors
+#, object-pascal-format
+msgid "Total errors: %d (displayed: %d)"
+msgstr "Vseh napak: %d (prikazano: %d)"
+
+#: proclocalize.lnghcpl
+msgctxt "proclocalize.lnghcpl"
+msgid "CPL"
+msgstr "CPL"
+
+#: proclocalize.lnghcps
+msgctxt "proclocalize.lnghcps"
+msgid "CPS"
+msgstr "zn/s"
+
+#: proclocalize.lnghduration
+msgctxt "proclocalize.lnghduration"
+msgid "Duration"
+msgstr "Trajanje"
+
+#: proclocalize.lnghhmmssff
+msgid "SMPTE [HH:MM:SS:FF]"
+msgstr "SMPTE [UU:MM:SS:SL]"
+
+#: proclocalize.lnghhmmsszzz
+#, fuzzy
+msgid "Media [HH:MM:SS.ZZZ]"
+msgstr "UU-MM-SS"
+
+#: proclocalize.lnghindex
+#, fuzzy
+msgid "#/Gap"
+msgstr "Vrzel"
+
+#: proclocalize.lnghstyleandactor
+#, fuzzy
+msgctxt "proclocalize.lnghstyleandactor"
+msgid "Style/Actor"
+msgstr "Slog/Igralec"
+
+#: proclocalize.lnghtext
+msgctxt "proclocalize.lnghtext"
+msgid "Text"
+msgstr "Besedilo"
+
+#: proclocalize.lnghtimes
+msgctxt "proclocalize.lnghtimes"
+msgid "Times"
+msgstr "Čas"
+
+#: proclocalize.lnghtranslation
+msgctxt "proclocalize.lnghtranslation"
+msgid "Translation"
+msgstr "Prevod"
+
+#: proclocalize.lnghwpm
+#, fuzzy
+msgctxt "proclocalize.lnghwpm"
+msgid "WPM"
+msgstr "bes/min"
+
+#: proclocalize.lngindex
+msgctxt "proclocalize.lngindex"
+msgid "#"
+msgstr "#"
+
+#: proclocalize.lnglibmpverror
+msgid ""
+"Unable to find the required libraries to run the embedded mpv player. Please "
+"download them."
+msgstr ""
+
+#: proclocalize.lnglibmpvglerror
+#, fuzzy
+msgid "Failed to initialize mpv GL context."
+msgstr "Začenjanje vsebine odšifriranja je spodletelo."
+
+#: proclocalize.lnglibmpvversionerror
+msgid "Could not initialize libmpv. Check if the right library was installed."
+msgstr ""
+
+#: proclocalize.lngline
+msgid "Line:"
+msgstr "Črta:"
+
+#: proclocalize.lngmrfind
+msgctxt "proclocalize.lngmrfind"
+msgid "Find"
+msgstr "Najdi"
+
+#: proclocalize.lngmrregexpr
+#, fuzzy
+msgctxt "proclocalize.lngmrregexpr"
+msgid "R. Expression"
+msgstr "Izraz"
+
+#: proclocalize.lngmrreplacewith
+msgctxt "proclocalize.lngmrreplacewith"
+msgid "Replace with"
+msgstr "Zamenjaj z"
+
+#: proclocalize.lngmscontains
+msgctxt "proclocalize.lngmscontains"
+msgid "Contains"
+msgstr "vsebuje"
+
+#: proclocalize.lngmsendswith
+msgctxt "proclocalize.lngmsendswith"
+msgid "Ends with"
+msgstr "Se konča s/z"
+
+#: proclocalize.lngmsstartswith
+msgctxt "proclocalize.lngmsstartswith"
+msgid "Starts with"
+msgstr "Se začne s/z"
+
+#: proclocalize.lngmultipletracksdetected
+msgid "Multiple tracks detected"
+msgstr "Zaznanih več stez"
+
+#: proclocalize.lngnewdurationall
+#, fuzzy
+msgid "New duration in all cases"
+msgstr "Uveljavi trajanje za vse elemente"
+
+#: proclocalize.lngnewdurationgreater
+#, fuzzy
+msgid "New duration is greater than original"
+msgstr "je večje kot"
+
+#: proclocalize.lngnewdurationsmaller
+#, fuzzy
+msgid "New duration is smaller than original"
+msgstr "Tlakuj sliko v manjše različice izvirnika"
+
+#: proclocalize.lngnewshortcutpreset
+#, fuzzy
+msgid "Enter a name for your shortcuts preset"
+msgstr "Vnesite ime te prednastavitve:"
+
+#: proclocalize.lngnewshortcutpresetname
+msgctxt "proclocalize.lngnewshortcutpresetname"
+msgid "Name"
+msgstr "Ime"
+
+#: proclocalize.lngnewtime
+msgid "New time"
+msgstr "Nov čas"
+
+#: proclocalize.lngnewversionfound
+#, fuzzy
+msgid "A new version was found."
+msgstr "Nova različica"
+
+#: proclocalize.lngnoentriesmarked
+msgctxt "proclocalize.lngnoentriesmarked"
+msgid "There are no marked entries."
+msgstr "Ni označenih vnosov."
+
+#: proclocalize.lngnointernetconnection
+#, fuzzy
+msgid "No Internet connection available"
+msgstr "Brez internetne povezave"
+
+#: proclocalize.lngnoname
+msgid "no name"
+msgstr "Neimenovano"
+
+#: proclocalize.lngnonewversion
+#, fuzzy
+msgid "You're using the latest version."
+msgstr "Odkljukajte plast, ki jo uporabljate."
+
+#: proclocalize.lngoldtime
+#, fuzzy
+msgid "Old time"
+msgstr " (staro)"
+
+#: proclocalize.lngopencontainingfolder
+#, fuzzy
+msgid "Open containing folder"
+msgstr "Odpri vsebujočo mapo"
+
+#: proclocalize.lngopenfile
+msgid "Open file"
+msgstr "Odpri datoteko"
+
+#: proclocalize.lngopenvideofromurl
+#, fuzzy
+msgid "Open media from"
+msgstr "Ni odprtega nosilca"
+
+#: proclocalize.lngoperationcancelled
+msgid "Operation cancelled."
+msgstr "Opravilo je preklicano."
+
+#: proclocalize.lngoperationcompleted
+msgid "Operation completed."
+msgstr "Opravilo je končano."
+
+#: proclocalize.lngoperationfailed
+#, fuzzy, object-pascal-format
+msgid "Job %d/%d fail with code %d."
+msgstr "%d poslov v vrsti"
+
+#: proclocalize.lngoriginal
+#, fuzzy
+msgctxt "proclocalize.lngoriginal"
+msgid "Original"
+msgstr "Izvirnik"
+
+#: proclocalize.lngpercent
+msgid "Percent"
+msgstr "Odstotek"
+
+#: proclocalize.lngprojectfile
+#, fuzzy
+msgid "Subtitle Translation Project"
+msgstr ":menuselection:`Projekt --> Podnaslov --> Dodaj podnaslov`"
+
+#: proclocalize.lngpromptfordeletelines
+#, fuzzy
+msgid "The selected entries will be deleted."
+msgstr "Vnosi"
+
+#: proclocalize.lngqccpl
+msgid "CPL (characters-per-line)"
+msgstr "zn/v (znaki na vrstico)"
+
+#: proclocalize.lngqccps
+msgid "CPS (characters-per-second)"
+msgstr "zn/s (znaki na sekundo)"
+
+#: proclocalize.lngqcgap
+#, fuzzy
+msgid "Gap Minimum duration"
+msgstr "Najkrajše trajanje"
+
+#: proclocalize.lngqcindex
+msgctxt "proclocalize.lngqcindex"
+msgid "#"
+msgstr "#"
+
+#: proclocalize.lngqcmaximumduration
+msgid "Maximum duration"
+msgstr "Najdaljše trajanje"
+
+#: proclocalize.lngqcmaximumlines
+msgid "Maximum lines"
+msgstr "Največ vrstic"
+
+#: proclocalize.lngqcminimumduration
+msgid "Minimum duration"
+msgstr "Najkrajše trajanje"
+
+#: proclocalize.lngqcrule
+msgid "Broken rule"
+msgstr "Prekršeno pravilo"
+
+#: proclocalize.lngqcwpm
+msgid "WPM (words-per-minute)"
+msgstr "bes/min (besede na minuto)"
+
+#: proclocalize.lngrbdatetime
+msgid "Date / Time"
+msgstr "Datum / čas"
+
+#: proclocalize.lngrbfilename
+msgctxt "proclocalize.lngrbfilename"
+msgid "File name"
+msgstr "Ime datoteke"
+
+#: proclocalize.lngsavefile
+msgid "Save file"
+msgstr "Shrani datoteko"
+
+#: proclocalize.lngsavesubtitleerror
+msgid "Error trying to save the file."
+msgstr "Napaka pri shranjevanju datoteke."
+
+#: proclocalize.lngsavesubtitles
+msgid "Save subtitles"
+msgstr "Shrani podnapise"
+
+#: proclocalize.lngsavetranslation
+msgctxt "proclocalize.lngsavetranslation"
+msgid "Save translation"
+msgstr "Shrani prevod"
+
+#: proclocalize.lngsbspellcheckerlanguage
+msgid "Spell checker language"
+msgstr "Jezik preverjanja črkovanja"
+
+#: proclocalize.lngscaudiofilters
+msgctxt "proclocalize.lngscaudiofilters"
+msgid "Audio filters"
+msgstr "Zvočni filtri"
+
+#: proclocalize.lngscedit
+msgctxt "proclocalize.lngscedit"
+msgid "Edit"
+msgstr "Uredi"
+
+#: proclocalize.lngsceditor
+msgctxt "proclocalize.lngsceditor"
+msgid "Editor"
+msgstr "Urejevalnik"
+
+#: proclocalize.lngscedl
+msgid "Edit Decision Lists"
+msgstr "Seznami EDL"
+
+#: proclocalize.lngscentries
+msgctxt "proclocalize.lngscentries"
+msgid "Entries"
+msgstr "Vnosi"
+
+#: proclocalize.lngscfile
+msgctxt "proclocalize.lngscfile"
+msgid "File"
+msgstr "Datoteka"
+
+#: proclocalize.lngscfind
+msgctxt "proclocalize.lngscfind"
+msgid "Find"
+msgstr "Najdi"
+
+#: proclocalize.lngscframes
+msgctxt "proclocalize.lngscframes"
+msgid "Frames"
+msgstr "Sličice"
+
+#: proclocalize.lngschelp
+msgctxt "proclocalize.lngschelp"
+msgid "Help"
+msgstr "Pomoč"
+
+#: proclocalize.lngschhmmssff
+msgid "HH:MM:SS:FF"
+msgstr "UU:MM:SS:SL"
+
+#: proclocalize.lngschhmmsszzz
+msgctxt "proclocalize.lngschhmmsszzz"
+msgid "HH:MM:SS.ZZZ"
+msgstr "UU:MM:SS.ZZZ"
+
+#: proclocalize.lngscmedia
+#, fuzzy
+msgctxt "proclocalize.lngscmedia"
+msgid "Media"
+msgstr "Medijske datoteke"
+
+#: proclocalize.lngscmilliseconds
+#, fuzzy
+msgctxt "proclocalize.lngscmilliseconds"
+msgid "Milliseconds"
+msgstr "milisekund"
+
+#: proclocalize.lngscseconds
+#, fuzzy
+msgid "Seconds"
+msgstr "sekund"
+
+#: proclocalize.lngscselect
+#, fuzzy
+msgctxt "proclocalize.lngscselect"
+msgid "Select"
+msgstr "Izberi"
+
+#: proclocalize.lngscshotchanges
+msgid "Text files"
+msgstr "Besedilne datoteke"
+
+#: proclocalize.lngsctext
+msgctxt "proclocalize.lngsctext"
+msgid "Text"
+msgstr "Besedilo"
+
+#: proclocalize.lngsctimings
+msgctxt "proclocalize.lngsctimings"
+msgid "Timings"
+msgstr "Časi"
+
+#: proclocalize.lngsctools
+msgctxt "proclocalize.lngsctools"
+msgid "Tools"
+msgstr "Orodja"
+
+#: proclocalize.lngscvideofilters
+msgctxt "proclocalize.lngscvideofilters"
+msgid "Video filters"
+msgstr "Video filtri"
+
+#: proclocalize.lngscview
+msgctxt "proclocalize.lngscview"
+msgid "View"
+msgstr "Pogled"
+
+#: proclocalize.lngscwaveform
+msgctxt "proclocalize.lngscwaveform"
+msgid "Timeline"
+msgstr "Časovnica"
+
+#: proclocalize.lngscxml
+msgid "XML"
+msgstr "XML"
+
+#: proclocalize.lngseanalyzingfile
+msgid "Analyzing file..."
+msgstr "Analiziranje datoteke …"
+
+#: proclocalize.lngsecodec
+msgctxt "proclocalize.lngsecodec"
+msgid "Format"
+msgstr "Oblika"
+
+#: proclocalize.lngseechangelist
+#, fuzzy
+msgid "Do you want to see the changelog?"
+msgstr "Je to tisto, kar želite narediti?"
+
+#: proclocalize.lngseid
+msgid "ID"
+msgstr "ID"
+
+#: proclocalize.lngsekind
+msgid "Type"
+msgstr "Vrsta"
+
+#: proclocalize.lngselanguage
+msgctxt "proclocalize.lngselanguage"
+msgid "Language"
+msgstr "Jezik"
+
+#: proclocalize.lngselectencodingtouse
+#, fuzzy
+msgid "Select encoding:"
+msgstr "Izberite kodiranje:"
+
+#: proclocalize.lngselectfpstouse
+#, fuzzy
+msgid "Select FPS to use:"
+msgstr "Sličic na sekundo:"
+
+#: proclocalize.lngselectsheettouse
+#, fuzzy
+msgid "Select sheet to use:"
+msgstr "Izberite pogled delovnega lista"
+
+#: proclocalize.lngselecttracktouse
+#, fuzzy
+msgid "Select the track to use:"
+msgstr "Izberi vse na trenutni stezi"
+
+#: proclocalize.lngseoutput
+msgid "Output"
+msgstr "Izhod"
+
+#: proclocalize.lngshifttimeless
+#, fuzzy, object-pascal-format
+msgctxt "proclocalize.lngshifttimeless"
+msgid "Shift %dms less"
+msgstr "Sličica %d (%d ms)"
+
+#: proclocalize.lngshifttimemore
+#, fuzzy, object-pascal-format
+msgctxt "proclocalize.lngshifttimemore"
+msgid "Shift %dms more"
+msgstr "Sličica %d (%d ms)"
+
+#: proclocalize.lngshortcutinuse
+#, fuzzy, object-pascal-format
+msgid "Shortcut currently used in “%s”."
+msgstr "Bližnjico uporablja dejanje »%s«"
+
+#: proclocalize.lngsourcemodewarning
+msgid ""
+"Switching to source mode will change the format to “Tero Subtitler”, "
+"otherwise unsaved translations will be lost."
+msgstr ""
+
+#: proclocalize.lngspcurrentline
+#, fuzzy, object-pascal-format
+msgid "# %d"
+msgstr "%d %%"
+
+#: proclocalize.lngspellcheckfinished
+msgid "Spell check finished."
+msgstr "Preverjanje črkovanja zaključeno."
+
+#: proclocalize.lngssappearance
+msgid "Appearance"
+msgstr "Videz"
+
+#: proclocalize.lngssautomode
+msgid "Automatic"
+msgstr "Samodejno"
+
+#: proclocalize.lngssblockmode
+msgid "Block"
+msgstr "Blok"
+
+#: proclocalize.lngssconventions
+#, fuzzy
+msgctxt "proclocalize.lngssconventions"
+msgid "Conventions"
+msgstr ""
+"Funkcija AMORLINC izračuna amortizacijo sredstev z uporabo francoskih "
+"računovodskih načel. Pri sredstvih, pridobljenih na sredini obdobja, se "
+"upošteva sorazmerna porazdelitev amortizacije."
+
+#: proclocalize.lngssdarkmode
+msgid "Dark mode"
+msgstr "Temni način"
+
+#: proclocalize.lngssfiletypeassociations
+msgid "File types"
+msgstr "Vrste datotek"
+
+#: proclocalize.lngssframes
+#, fuzzy
+msgctxt "proclocalize.lngssframes"
+msgid "Frames"
+msgstr "Sličice"
+
+#: proclocalize.lngssgeneral
+msgctxt "proclocalize.lngssgeneral"
+msgid "General"
+msgstr "Splošno"
+
+#: proclocalize.lngsslightmode
+msgid "Light mode"
+msgstr "Svetli način"
+
+#: proclocalize.lngsslistmode
+msgid "List"
+msgstr "Seznam"
+
+#: proclocalize.lngssmilliseconds
+#, fuzzy
+msgctxt "proclocalize.lngssmilliseconds"
+msgid "Milliseconds"
+msgstr "milisekund"
+
+#: proclocalize.lngssmpv
+msgid "Media player"
+msgstr "Predvajalnik predstavnih datotek"
+
+#: proclocalize.lngssshortcutnone
+msgid "None"
+msgstr "Brez"
+
+#: proclocalize.lngssshortcuts
+msgid "Shortcuts"
+msgstr "Tipke za bližnjice"
+
+#: proclocalize.lngsstools
+msgctxt "proclocalize.lngsstools"
+msgid "Tools"
+msgstr "Orodja"
+
+#: proclocalize.lngstcharacterspersecondaverage
+#, fuzzy, object-pascal-format
+msgid "Characters per second average: %.2f"
+msgstr "Znaki na sekundo, povprečno: %.2f"
+
+#: proclocalize.lngstdurationaverage
+#, object-pascal-format
+msgid "Duration average: %s"
+msgstr "Povprečno trajanje: %s"
+
+#: proclocalize.lngstentrieswithouttext
+#, object-pascal-format
+msgid "Entries without text: %d"
+msgstr "Vnosi brez besedila: %d"
+
+#: proclocalize.lngstgapaverage
+#, fuzzy, object-pascal-format
+msgid "Gap average: %s"
+msgstr "Preneseno: %s (povprečno: %s/s)"
+
+#: proclocalize.lngstlinelengthaverage
+#, fuzzy, object-pascal-format
+msgid "Line length average: %d"
+msgstr "Dolžina zgodovine ukazne vrstice"
+
+#: proclocalize.lngstlongestcharacterspersecond
+#, object-pascal-format
+msgid "Longest characters per second: %.2f (#%d)"
+msgstr "Največ znakov na sekundo: %.2f (#%d)"
+
+#: proclocalize.lngstlongestduration
+#, fuzzy, object-pascal-format
+msgid "Longest duration: %s (#%d)"
+msgstr "Neveljavno trajanje ping »%s«."
+
+#: proclocalize.lngstlongestgap
+#, fuzzy, object-pascal-format
+msgid "Longest gap: %s (#%d)"
+msgstr "Pokaži »%s-%d.%d«"
+
+#: proclocalize.lngstlongestline
+#, fuzzy, object-pascal-format
+msgid "Longest line: %d (#%d)"
+msgstr "Vrstica: %d, znak: %d"
+
+#: proclocalize.lngstlongestwordsperminute
+#, fuzzy, object-pascal-format
+msgid "Longest words per minute: %.2f (#%d)"
+msgstr "Besed na minuto"
+
+#: proclocalize.lngstnumberofcharacters
+#, object-pascal-format
+msgid "Number of characters: %d"
+msgstr "Število znakov: %d"
+
+#: proclocalize.lngstnumberofentries
+#, object-pascal-format
+msgid "Number of entries: %d"
+msgstr "Število vnosov: %d"
+
+#: proclocalize.lngstnumberofwords
+#, object-pascal-format
+msgid "Number of words: %d"
+msgstr "Število besed: %d"
+
+#: proclocalize.lngstshortestcharacterspersecond
+#, object-pascal-format
+msgid "Shortest characters per second: %.2f (#%d)"
+msgstr "Najmanj znakov na sekundo: %.2f (#%d)"
+
+#: proclocalize.lngstshortestduration
+#, fuzzy, object-pascal-format
+msgid "Shortest duration: %s (#%d)"
+msgstr "Neveljavno trajanje ping »%s«."
+
+#: proclocalize.lngstshortestgap
+#, fuzzy, object-pascal-format
+msgid "Shortest gap: %s (#%d)"
+msgstr "Pokaži »%s-%d.%d«"
+
+#: proclocalize.lngstshortestline
+#, fuzzy, object-pascal-format
+msgid "Shortest line: %d (#%d)"
+msgstr "Vrstica: %d, znak: %d"
+
+#: proclocalize.lngstshortestwordsperminute
+#, fuzzy, object-pascal-format
+msgid "Shortest words per minute: %.2f (#%d)"
+msgstr "Besed na minuto"
+
+#: proclocalize.lngsttotalcharacterspersecond
+#, fuzzy, object-pascal-format
+msgid "Total characters per second: %.2f"
+msgstr "Znaki na vrstico"
+
+#: proclocalize.lngsttotalduration
+#, object-pascal-format
+msgid "Total duration: %s"
+msgstr "Skupno trajanje: %s"
+
+#: proclocalize.lngstwordsperminuteaverage
+#, fuzzy, object-pascal-format
+msgid "Words per minute average: %.2f"
+msgstr "Besed na minuto"
+
+#: proclocalize.lngsubtitlehaserrorstofix
+msgid ""
+"The current subtitle set contains errors that are recommended to be "
+"resolved, but it can be saved."
+msgstr ""
+
+#: proclocalize.lngsubtitlespecificationerror
+msgid ""
+"The current subtitles do not meet the specifications of the format to be "
+"saved."
+msgstr ""
+
+#: proclocalize.lngsubtitlespecificationerroralign
+#, fuzzy
+msgid "There are entries with vertical alignment which are not allowed."
+msgstr "Vodoravna / navpična poravnava"
+
+#: proclocalize.lngsubtitlespecificationerrorbr
+#, fuzzy
+msgid "There are entries which exceed the line break."
+msgstr "Prelom vrstice"
+
+#: proclocalize.lngsubtitlespecificationerrorfps
+#, fuzzy
+msgid "Current frame rate does not match."
+msgstr "Prilagodi hitrosti sličic"
+
+#: proclocalize.lngsuccess
+msgid "Success."
+msgstr "Uspešno zaključeno."
+
+#: proclocalize.lngsupportedsites
+#, fuzzy
+msgid "Supported sites"
+msgstr "Dovoli spletne strani:"
+
+#: proclocalize.lngteexpand
+#, fuzzy
+msgctxt "proclocalize.lngteexpand"
+msgid "Expand"
+msgstr "Razširi"
+
+#: proclocalize.lngtefinaltime
+msgctxt "proclocalize.lngtefinaltime"
+msgid "Final time"
+msgstr "Končni čas"
+
+#: proclocalize.lngteindex
+#, fuzzy
+msgctxt "proclocalize.lngteindex"
+msgid "Index"
+msgstr "Stvarno kazalo"
+
+#: proclocalize.lngteinitialtime
+msgctxt "proclocalize.lngteinitialtime"
+msgid "Initial time"
+msgstr "Začetni čas"
+
+#: proclocalize.lngtereduce
+msgctxt "proclocalize.lngtereduce"
+msgid "Reduce"
+msgstr "Zmanjšaj"
+
+#: proclocalize.lngtetext
+msgctxt "proclocalize.lngtetext"
+msgid "Text"
+msgstr "Besedilo"
+
+#: proclocalize.lngtetime
+msgctxt "proclocalize.lngtetime"
+msgid "Time"
+msgstr "Čas"
+
+#: proclocalize.lngtextformatted
+#, fuzzy
+msgid "Export formatted text?"
+msgstr "Ni besedila za izvoz"
+
+#: proclocalize.lngtranscribing
+#, fuzzy
+msgid "Transcribing..."
+msgstr "Transkripcija …"
+
+#: proclocalize.lngtranscriptionmodeexit
+msgid "Exiting transcription mode will lose any unsaved changes."
+msgstr ""
+
+#: proclocalize.lngtranslated
+msgctxt "proclocalize.lngtranslated"
+msgid "Translated"
+msgstr "Prevedeno"
+
+#: proclocalize.lngtranslationfilechanged
+#, fuzzy
+msgid "Translation file has not been saved."
+msgstr "Datoteka {} je bila shranjena"
+
+#: proclocalize.lngttip1
+#, object-pascal-format
+msgid "Tip: Use <%s/%s> to go to previous/next entry"
+msgstr ""
+
+#: proclocalize.lngttip2
+#, object-pascal-format
+msgid "Tip: Use <%s> for a web word reference"
+msgstr ""
+
+#: proclocalize.lngttip3
+#, object-pascal-format
+msgid "Tip: Use <%s> dock/undock media window"
+msgstr ""
+
+#: proclocalize.lngttip4
+#, object-pascal-format
+msgid "Tip: Use <%s> dock/undock waveform window"
+msgstr ""
+
+#: proclocalize.lngunabletoload
+#, fuzzy
+msgid "Error loading file, unrecognized format."
+msgstr "neprepoznavna vrsta datoteke: %s"
+
+#: proclocalize.lngurl
+msgid "URL"
+msgstr "URL"
+
+#: proclocalize.lngvdgeneratingtts
+#, fuzzy
+msgid "Generating text to speech..."
+msgstr "Nastavite razpoznavanje govora v besedilo."
+
+#: proclocalize.lngvdgeneratingvideo
+#, fuzzy
+msgid "Generating video dubbing..."
+msgstr "Tvorjenje video maske"
+
+#: proclocalize.lngvdquotaexceeded
+msgid "We couldn't process this request because you've exceeded your quota."
+msgstr ""
+
+#: proclocalize.lngvdvoice
+msgid "Voice"
+msgstr "Glas"
+
+#: proclocalize.lngviaudiotracks
+#, object-pascal-format
+msgid "Audio tracks: %d"
+msgstr "Zvočne steze: %d"
+
+#: proclocalize.lngvideoerroraoinitfailed
+#, fuzzy
+msgid "Initializing the audio output failed."
+msgstr "Zvočni odvod"
+
+#: proclocalize.lngvideoerrornothingtoplay
+#, fuzzy
+msgid "There was no audio or video stream to play."
+msgstr "Predvajanje zvočnih in video datotek."
+
+#: proclocalize.lngvideoerrorvoinitfailed
+#, fuzzy
+msgid "Initializing the video output failed."
+msgstr "Ni možno nastaviti izhodnega zapisa.\n"
+
+#: proclocalize.lngvideogenerationfailed
+#, fuzzy
+msgid "Video generation failed."
+msgstr "generiranje parov ključev ni uspelo: %s"
+
+#: proclocalize.lngviduration
+#, object-pascal-format
+msgid "Duration: %s (%d frames)"
+msgstr "Trajanje: %s (%d sličic)"
+
+#: proclocalize.lngvifile
+#, object-pascal-format
+msgid "File: %s"
+msgstr "Datoteka: %s"
+
+#: proclocalize.lngvifps
+#, object-pascal-format
+msgid "FPS: %s"
+msgstr "Sl/s: %s"
+
+#: proclocalize.lngviresolution
+#, object-pascal-format
+msgid "Resolution: %dx%d"
+msgstr "Ločljivost: %dx%d"
+
+#: proclocalize.lngvisubtitletracks
+#, object-pascal-format
+msgid "Subtitle tracks: %d"
+msgstr "Steze podnapisov: %d"
+
+#: proclocalize.lngvivideotracks
+#, object-pascal-format
+msgid "Video tracks: %d"
+msgstr "Slikovne steze: %d"
+
+#: proclocalize.lngwebvideounsupported
+msgid "The media format is not supported for playback in the web browser."
+msgstr ""
+
+#: proclocalize.lngwizlanguage
+msgctxt "proclocalize.lngwizlanguage"
+msgid "Language"
+msgstr "Jezik"
+
+#: proclocalize.lngwritedenieded
+#, fuzzy
+msgid "Write denied. Please check folder permissions."
+msgstr "Poteka zapisovanje dovoljenj mape …"
+
+#: proclocalize.lngwritestatus
+#, fuzzy, object-pascal-format
+msgid "Writing %d/%d"
+msgstr "Notranja napaka %d pri pisanju v datoteko %s\n"
+
+#: tfrmabout.btnclose.caption
+msgctxt "tfrmabout.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmabout.caption
+msgctxt "tfrmabout.caption"
+msgid "About"
+msgstr "O programu"
+
+#: tfrmabout.lbldonate.caption
+msgctxt "tfrmabout.lbldonate.caption"
+msgid ""
+"If you like this software, please consider making a donation.\n"
+"Click here to do it."
+msgstr ""
+
+#: tfrmactors.btnactoradd.caption
+msgctxt "tfrmactors.btnactoradd.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmactors.btnactorremove.caption
+msgctxt "tfrmactors.btnactorremove.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmactors.btnapply.caption
+msgctxt "tfrmactors.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmactors.btnclose.caption
+msgctxt "tfrmactors.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmactors.caption
+msgctxt "tfrmactors.caption"
+msgid "Actors"
+msgstr "Igralci"
+
+#: tfrmadjustsubtitle.btnapply.caption
+msgctxt "tfrmadjustsubtitle.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmadjustsubtitle.btnclose.caption
+msgctxt "tfrmadjustsubtitle.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmadjustsubtitle.btnminus.caption
+msgctxt "tfrmadjustsubtitle.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmadjustsubtitle.btnplus.caption
+msgctxt "tfrmadjustsubtitle.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmadjustsubtitle.caption
+msgid "Adjust subtitle"
+msgstr "Prilagodi podnapis"
+
+#: tfrmadjustsubtitle.lblfirstspoken.caption
+#, fuzzy
+msgid "First spoken line"
+msgstr "Razdeli po prvi vrstici"
+
+#: tfrmadjustsubtitle.lblindex.caption
+msgid "Subtitle #"
+msgstr "Št. podnapisa"
+
+#: tfrmadjustsubtitle.lbllastspoken.caption
+#, fuzzy
+msgid "Last spoken line"
+msgstr "Zadnja vrstica (Položaj \"konec\"):"
+
+#: tfrmadjustsubtitle.rdoadvanced.caption
+msgid "Advanced"
+msgstr "Napredno"
+
+#: tfrmadjustsubtitle.rdosimple.caption
+msgid "Simple"
+msgstr "Enostavno"
+
+#: tfrmaudiototext.btnclose.caption
+msgctxt "tfrmaudiototext.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmaudiototext.btnengine.caption
+msgctxt "tfrmaudiototext.btnengine.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmaudiototext.btngenerate.caption
+msgctxt "tfrmaudiototext.btngenerate.caption"
+msgid "Generate"
+msgstr "Tvori"
+
+#: tfrmaudiototext.btnmodel.caption
+msgctxt "tfrmaudiototext.btnmodel.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmaudiototext.caption
+msgctxt "tfrmaudiototext.caption"
+msgid "Audio to text"
+msgstr "Zvok v besedilo"
+
+#: tfrmaudiototext.chkmaxlinecount.caption
+#, fuzzy
+msgctxt "tfrmaudiototext.chkmaxlinecount.caption"
+msgid "Maximum line count"
+msgstr "Štetje vrstic"
+
+#: tfrmaudiototext.chkmaxlinelength.caption
+#, fuzzy
+msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
+msgid "Maximum line length"
+msgstr "Želena največja dolžina vrstice"
+
+#: tfrmaudiototext.chktranslate.caption
+msgid "Translate to Еnglish"
+msgstr "Prevedi v angleščino"
+
+#: tfrmaudiototext.lblengine.caption
+#, fuzzy
+msgid "Engine"
+msgstr "Pogon"
+
+#: tfrmaudiototext.lbllanguage.caption
+msgctxt "tfrmaudiototext.lbllanguage.caption"
+msgid "Language"
+msgstr "Jezik"
+
+#: tfrmaudiototext.lblmodel.caption
+msgid "Model"
+msgstr "Model"
+
+#: tfrmaudiototext.lbltrack.caption
+msgid "Track"
+msgstr "Steza"
+
+#: tfrmaudiototext.rbnaddsubtitleswhiletranscribing.caption
+#, fuzzy
+msgid "Add subtitles while transcribing"
+msgstr "**Dodaj podnaslove** z gumbom :guilabel:`+`"
+
+#: tfrmaudiototext.rbnloadsubtitlesaftertranscript.caption
+#, fuzzy
+msgid "Load subtitles after transcription"
+msgstr "Podnaslovi"
+
+#: tfrmaudiototextmodel.btnclose.caption
+msgctxt "tfrmaudiototextmodel.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmaudiototextmodel.btndownload.caption
+msgctxt "tfrmaudiototextmodel.btndownload.caption"
+msgid "Download"
+msgstr "Prenesi"
+
+#: tfrmaudiototextmodel.caption
+#, fuzzy
+msgid "Audio to text model"
+msgstr "Model:"
+
+#: tfrmautomaticdurations.btnapply.caption
+msgctxt "tfrmautomaticdurations.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmautomaticdurations.btnclose.caption
+msgctxt "tfrmautomaticdurations.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmautomaticdurations.caption
+msgid "Automatic durations"
+msgstr "Samodejna trajanja"
+
+#: tfrmautomaticdurations.lblchars.caption
+#, fuzzy
+msgid "per character"
+msgstr "Znak"
+
+#: tfrmautomaticdurations.lblcondition.caption
+#, fuzzy
+msgid "Apply if:"
+msgstr "Uveljavi"
+
+#: tfrmautomaticdurations.lblline.caption
+#, fuzzy
+msgid "per line"
+msgstr "Znaki na vrstico"
+
+#: tfrmautomaticdurations.lblscope.caption
+#, fuzzy
+msgctxt "tfrmautomaticdurations.lblscope.caption"
+msgid "Scope:"
+msgstr "Področje"
+
+#: tfrmautomaticdurations.lblword.caption
+#, fuzzy
+msgid "per word"
+msgstr "beseda"
+
+#: tfrmautomaticdurations.rbnallthesubtitles.caption
+msgctxt "tfrmautomaticdurations.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Vsi vnosi"
+
+#: tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmautomaticdurations.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Od izbranega vnosa"
+
+#: tfrmautomaticdurations.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmautomaticdurations.rbnonlyselectedsubtitles.caption"
+msgid "Selected entries"
+msgstr "Izbrani vnosi"
+
+#: tfrmbatchconvert.btnadd.caption
+msgctxt "tfrmbatchconvert.btnadd.caption"
+msgid "Add..."
+msgstr "Dodaj ..."
+
+#: tfrmbatchconvert.btnapply.caption
+msgctxt "tfrmbatchconvert.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmbatchconvert.btnclose.caption
+msgctxt "tfrmbatchconvert.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmbatchconvert.btninvert.caption
+msgctxt "tfrmbatchconvert.btninvert.caption"
+msgid "Invert"
+msgstr "Preobrni"
+
+#: tfrmbatchconvert.btnopenfolder.caption
+msgctxt "tfrmbatchconvert.btnopenfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmbatchconvert.btnremove.caption
+msgctxt "tfrmbatchconvert.btnremove.caption"
+msgid "Remove"
+msgstr "Odstrani"
+
+#: tfrmbatchconvert.btnscanfolder.caption
+msgctxt "tfrmbatchconvert.btnscanfolder.caption"
+msgid "Scan..."
+msgstr "Preišči …"
+
+#: tfrmbatchconvert.btnselectall.caption
+msgctxt "tfrmbatchconvert.btnselectall.caption"
+msgid "Select all"
+msgstr "Izberi vse"
+
+#: tfrmbatchconvert.caption
+msgid "Batch convert"
+msgstr "Paketno pretvori"
+
+#: tfrmbatchconvert.lblencoding.caption
+msgctxt "tfrmbatchconvert.lblencoding.caption"
+msgid "Encoding"
+msgstr "Kodiranje znakov"
+
+#: tfrmbatchconvert.lblformat.caption
+msgctxt "tfrmbatchconvert.lblformat.caption"
+msgid "Format"
+msgstr "Oblika"
+
+#: tfrmbatchconvert.lblfromfps.caption
+msgid "Input FPS"
+msgstr "Vhodna hitrost sl/s"
+
+#: tfrmbatchconvert.lbloutput.caption
+msgctxt "tfrmbatchconvert.lbloutput.caption"
+msgid "Output:"
+msgstr "Izhod:"
+
+#: tfrmbatchconvert.lbloutputfolder.caption
+msgctxt "tfrmbatchconvert.lbloutputfolder.caption"
+msgid "Folder"
+msgstr "Mapa"
+
+#: tfrmbatchconvert.lbltofps.caption
+msgid "Target FPS"
+msgstr "Ciljna hitrost sl/s"
+
+#: tfrmcharactermap.btnclose.caption
+msgctxt "tfrmcharactermap.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmcharactermap.btncopy.caption
+msgctxt "tfrmcharactermap.btncopy.caption"
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: tfrmcharactermap.btninsert.caption
+msgid "Insert"
+msgstr "Vstavi"
+
+#: tfrmcharactermap.btnminus.caption
+msgctxt "tfrmcharactermap.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmcharactermap.btnplus.caption
+msgctxt "tfrmcharactermap.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmcharactermap.caption
+msgid "Character Map"
+msgstr "Razpredelnica znakov"
+
+#: tfrmcharactermap.lblfavorites.caption
+msgid "Favorites"
+msgstr "Priljubljeni"
+
+#: tfrmcharactermap.lblunicoderange.caption
+msgid "Range"
+msgstr "Obseg"
+
+#: tfrmcompare.btnclose.caption
+msgctxt "tfrmcompare.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmcompare.btnfile1.caption
+msgctxt "tfrmcompare.btnfile1.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcompare.btnfile2.caption
+msgctxt "tfrmcompare.btnfile2.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcompare.caption
+msgid "Compare"
+msgstr "Primerjaj"
+
+#: tfrmconventions.btnadd.caption
+msgctxt "tfrmconventions.btnadd.caption"
+msgid "Add"
+msgstr "Dodaj"
+
+#: tfrmconventions.btnclose.caption
+msgctxt "tfrmconventions.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmconventions.btnremove.caption
+msgctxt "tfrmconventions.btnremove.caption"
+msgid "Remove"
+msgstr "Odstrani"
+
+#: tfrmconventions.btnupdate.caption
+msgctxt "tfrmconventions.btnupdate.caption"
+msgid "Update"
+msgstr "Posodobi"
+
+#: tfrmconventions.caption
+#, fuzzy
+msgctxt "tfrmconventions.caption"
+msgid "Conventions"
+msgstr ""
+"Funkcija AMORLINC izračuna amortizacijo sredstev z uporabo francoskih "
+"računovodskih načel. Pri sredstvih, pridobljenih na sredini obdobja, se "
+"upošteva sorazmerna porazdelitev amortizacije."
+
+#: tfrmconvertcase.btnapply.caption
+msgctxt "tfrmconvertcase.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmconvertcase.btnclose.caption
+msgctxt "tfrmconvertcase.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmconvertcase.caption
+#, fuzzy
+msgid "Convert case"
+msgstr "Pretvori izbor besedila v velike črke"
+
+#: tfrmconvertcase.lblscope.caption
+#, fuzzy
+msgctxt "tfrmconvertcase.lblscope.caption"
+msgid "Scope:"
+msgstr "Področje"
+
+#: tfrmconvertcase.rbnallthesubtitles.caption
+msgctxt "tfrmconvertcase.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Vsi vnosi"
+
+#: tfrmconvertcase.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmconvertcase.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "Od izbranega vnosa"
+
+#: tfrmconvertcase.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmconvertcase.rbnonlyselectedsubtitles.caption"
+msgid "Selected entries"
+msgstr "Izbrani vnosi"
+
+#: tfrmconvertcase.rdoinversetype.caption
+msgid "iNVERSE tYPE"
+msgstr "iNVERZNA oBLIKA"
+
+#: tfrmconvertcase.rdolowercase.caption
+msgid "lowercase"
+msgstr "male črke"
+
+#: tfrmconvertcase.rdosentencetype.caption
+msgid "Sentence type"
+msgstr "Oblika stavka"
+
+#: tfrmconvertcase.rdotitletype.caption
+msgid "Title Type"
+msgstr "Oblika Naslova"
+
+#: tfrmconvertcase.rdouppercase.caption
+msgid "UPPERCASE"
+msgstr "VELIKE ČRKE"
+
+#: tfrmcustomfiledlg.btnapply.caption
+msgctxt "tfrmcustomfiledlg.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmcustomfiledlg.btncancel.caption
+msgctxt "tfrmcustomfiledlg.btncancel.caption"
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: tfrmcustomfiledlg.btnopenfile.caption
+msgctxt "tfrmcustomfiledlg.btnopenfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcustomfiledlg.lblencoding.caption
+msgctxt "tfrmcustomfiledlg.lblencoding.caption"
+msgid "Encoding"
+msgstr "Kodiranje znakov"
+
+#: tfrmcustomfiledlg.lblfilename.caption
+msgctxt "tfrmcustomfiledlg.lblfilename.caption"
+msgid "Filename"
+msgstr "Ime datoteke"
+
+#: tfrmcustomfiledlg.lblformat.caption
+msgctxt "tfrmcustomfiledlg.lblformat.caption"
+msgid "Format"
+msgstr "Oblika"
+
+#: tfrmcustomfiledlg.lblfps.caption
+msgctxt "tfrmcustomfiledlg.lblfps.caption"
+msgid "FPS"
+msgstr "sl/s"
+
+#: tfrmcustomimageformat.btnclose.caption
+msgctxt "tfrmcustomimageformat.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmcustomimageformat.btnfolder.caption
+msgctxt "tfrmcustomimageformat.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcustomimageformat.btnres.caption
+msgctxt "tfrmcustomimageformat.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmcustomimageformat.btnsave.caption
+msgctxt "tfrmcustomimageformat.btnsave.caption"
+msgid "Save..."
+msgstr "Shrani ..."
+
+#: tfrmcustomimageformat.caption
+#, fuzzy
+msgid "Custom image format"
+msgstr "Oblika po meri"
+
+#: tfrmcustomimageformat.lblfolder.caption
+msgctxt "tfrmcustomimageformat.lblfolder.caption"
+msgid "Folder"
+msgstr "Mapa"
+
+#: tfrmcustomimageformat.lblfont.caption
+msgctxt "tfrmcustomimageformat.lblfont.caption"
+msgid "Font"
+msgstr "Pisava"
+
+#: tfrmcustomimageformat.lblfontsize.caption
+msgctxt "tfrmcustomimageformat.lblfontsize.caption"
+msgid "Size"
+msgstr "Velikost"
+
+#: tfrmcustomimageformat.lblfps.caption
+msgctxt "tfrmcustomimageformat.lblfps.caption"
+msgid "FPS"
+msgstr "sl/s"
+
+#: tfrmcustomimageformat.lblimagesize.caption
+msgid "Image size"
+msgstr "Velikost slike"
+
+#: tfrmcustomimageformat.lblprefix.caption
+msgid "Prefix"
+msgstr "Predpona"
+
+#: tfrmcustomimageformat.lblsafearea.caption
+#, fuzzy
+msgctxt "tfrmcustomimageformat.lblsafearea.caption"
+msgid "Safe area pixels (left, top, right, bottom)"
+msgstr "Z leve proti desni, od zgoraj navzdol"
+
+#: tfrmcustomimageformat.lblscript.caption
+msgctxt "tfrmcustomimageformat.lblscript.caption"
+msgid "Script"
+msgstr "Skript"
+
+#: tfrmcustomimageformat.lblx.caption
+msgctxt "tfrmcustomimageformat.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmcustominputdlg.btncancel.caption
+msgctxt "tfrmcustominputdlg.btncancel.caption"
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: tfrmcustominputdlg.btnok.caption
+msgctxt "tfrmcustominputdlg.btnok.caption"
+msgid "OK"
+msgstr "V redu"
+
+#: tfrmcustommessagedlg.btnok.caption
+msgctxt "tfrmcustommessagedlg.btnok.caption"
+msgid "OK"
+msgstr "V redu"
+
+#: tfrmcustommessagedlg.lblmessage.caption
+msgid "Message"
+msgstr "Sporočilo"
+
+#: tfrmcustomquestiondlg.btncancel.caption
+msgctxt "tfrmcustomquestiondlg.btncancel.caption"
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: tfrmcustomquestiondlg.btnno.caption
+msgctxt "tfrmcustomquestiondlg.btnno.caption"
+msgid "No"
+msgstr "Ne"
+
+#: tfrmcustomquestiondlg.btnyes.caption
+msgctxt "tfrmcustomquestiondlg.btnyes.caption"
+msgid "Yes"
+msgstr "Da"
+
+#: tfrmcustomquestiondlg.lblquestion.caption
+msgid "Question"
+msgstr "Vprašanje"
+
+#: tfrmcustomquestiondlg.lbltitle.caption
+msgctxt "tfrmcustomquestiondlg.lbltitle.caption"
+msgid "Title"
+msgstr "Naslov"
+
+#: tfrmcustomselectdlg.btncancel.caption
+msgctxt "tfrmcustomselectdlg.btncancel.caption"
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: tfrmcustomselectdlg.btnok.caption
+msgctxt "tfrmcustomselectdlg.btnok.caption"
+msgid "OK"
+msgstr "V redu"
+
+#: tfrmcustomselectdlgwithpreview.btncancel.caption
+msgctxt "tfrmcustomselectdlgwithpreview.btncancel.caption"
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: tfrmcustomselectdlgwithpreview.btnok.caption
+msgctxt "tfrmcustomselectdlgwithpreview.btnok.caption"
+msgid "OK"
+msgstr "V redu"
+
+#: tfrmcustomtextformat.btnclose.caption
+msgctxt "tfrmcustomtextformat.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmcustomtextformat.btnsave.caption
+msgctxt "tfrmcustomtextformat.btnsave.caption"
+msgid "Save..."
+msgstr "Shrani ..."
+
+#: tfrmcustomtextformat.caption
+#, fuzzy
+msgid "Custom text format"
+msgstr "Oblika po meri"
+
+#: tfrmcustomtextformat.lblencoding.caption
+msgctxt "tfrmcustomtextformat.lblencoding.caption"
+msgid "Encoding"
+msgstr "Kodiranje znakov"
+
+#: tfrmcustomtextformat.lblextension.caption
+#, fuzzy
+msgid "Extension"
+msgstr "Razširitev"
+
+#: tfrmcustomtextformat.lblfps.caption
+msgctxt "tfrmcustomtextformat.lblfps.caption"
+msgid "FPS"
+msgstr "sl/s"
+
+#: tfrmcustomtextformat.lblnewlinechar.caption
+msgid "New line char"
+msgstr "Znak za novo vrstico"
+
+#: tfrmcustomtextformat.lblscript.caption
+msgctxt "tfrmcustomtextformat.lblscript.caption"
+msgid "Script"
+msgstr "Skript"
+
+#: tfrmcustomtextformat.lblseparatorchar.caption
+msgid "Separator"
+msgstr "Ločilo"
+
+#: tfrmcustomtextformat.lbltimecode.caption
+msgctxt "tfrmcustomtextformat.lbltimecode.caption"
+msgid "Time code"
+msgstr "Časovna koda"
+
+#: tfrmcustomtextformat.lbltimeformat.caption
+msgid "Time format"
+msgstr "Oblika izpisa časa"
+
+#: tfrmcustomtextformat.lbltitle.caption
+msgctxt "tfrmcustomtextformat.lbltitle.caption"
+msgid "Title"
+msgstr "Naslov"
+
+#: tfrmdelay.btnapply.caption
+msgctxt "tfrmdelay.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmdelay.btnclose.caption
+msgctxt "tfrmdelay.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmdelay.caption
+#, fuzzy
+msgid "Set delay"
+msgstr "Nastavite interpolacijo zakasnitvene črte, linearno ali kvadratno."
+
+#: tfrmdelay.cbomode.text
+msgctxt "tfrmdelay.cbomode.text"
+msgid "+"
+msgstr "+"
+
+#: tfrmdelay.lblscope.caption
+#, fuzzy
+msgctxt "tfrmdelay.lblscope.caption"
+msgid "Scope:"
+msgstr "Področje"
+
+#: tfrmdelay.rbnallthesubtitles.caption
+msgctxt "tfrmdelay.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Vsi vnosi"
+
+#: tfrmdelay.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmdelay.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Od izbranega vnosa"
+
+#: tfrmdelay.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
+msgid "Selected entries"
+msgstr "Izbrani vnosi"
+
+#: tfrmdownload.btncancel.caption
+msgctxt "tfrmdownload.btncancel.caption"
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: tfrmdownload.caption
+msgctxt "tfrmdownload.caption"
+msgid "Downloading"
+msgstr "Prejemanje"
+
+#: tfrmdownload.lblelapsed.caption
+msgid "Elapsed:"
+msgstr "Pretečeno:"
+
+#: tfrmdownload.lblfile.caption
+msgid "File:"
+msgstr "Datoteka:"
+
+#: tfrmdownload.lblreceived.caption
+msgid "Received:"
+msgstr "Prejeto:"
+
+#: tfrmdownload.lblremaining.caption
+msgid "Remaining:"
+msgstr "Preostalo:"
+
+#: tfrmdownload.lblspeed.caption
+msgid "Speed:"
+msgstr "Hitrost:"
+
+#: tfrmdurationlimits.btnapply.caption
+msgctxt "tfrmdurationlimits.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmdurationlimits.btnclose.caption
+msgctxt "tfrmdurationlimits.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmdurationlimits.caption
+#, fuzzy
+msgid "Duration limits"
+msgstr "brez omejitev"
+
+#: tfrmdurationlimits.chksetmaxduration.caption
+#, fuzzy
+msgid "Set maximum duration (ms)"
+msgstr "Najdaljše trajanje"
+
+#: tfrmdurationlimits.chksetminduration.caption
+#, fuzzy
+msgid "Set minimum duration (ms)"
+msgstr "Trajanje: %.0lf ms"
+
+#: tfrmdurationlimits.lblscope.caption
+#, fuzzy
+msgctxt "tfrmdurationlimits.lblscope.caption"
+msgid "Scope:"
+msgstr "Področje"
+
+#: tfrmdurationlimits.rbnallthesubtitles.caption
+msgctxt "tfrmdurationlimits.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Vsi vnosi"
+
+#: tfrmdurationlimits.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmdurationlimits.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "Od izbranega vnosa"
+
+#: tfrmdurationlimits.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmdurationlimits.rbnonlyselectedsubtitles.caption"
+msgid "Selected entries"
+msgstr "Izbrani vnosi"
+
+#: tfrmexportsup.btnclose.caption
+msgctxt "tfrmexportsup.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmexportsup.btnres.caption
+msgctxt "tfrmexportsup.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmexportsup.btnsave.caption
+msgctxt "tfrmexportsup.btnsave.caption"
+msgid "Save..."
+msgstr "Shrani ..."
+
+#: tfrmexportsup.caption
+#, fuzzy
+msgid "Blu-ray SUP"
+msgstr "prazen disk Blu-Ray"
+
+#: tfrmexportsup.lblfont.caption
+msgctxt "tfrmexportsup.lblfont.caption"
+msgid "Font"
+msgstr "Pisava"
+
+#: tfrmexportsup.lblfontsize.caption
+msgctxt "tfrmexportsup.lblfontsize.caption"
+msgid "Size"
+msgstr "Velikost"
+
+#: tfrmexportsup.lblsafearea.caption
+#, fuzzy
+msgctxt "tfrmexportsup.lblsafearea.caption"
+msgid "Safe area pixels (left, top, right, bottom)"
+msgstr "Z leve proti desni, od zgoraj navzdol"
+
+#: tfrmexportsup.lblvideores.caption
+#, fuzzy
+msgctxt "tfrmexportsup.lblvideores.caption"
+msgid "Video resolution"
+msgstr "Ločljivost videoposnetka"
+
+#: tfrmexportsup.lblx.caption
+msgctxt "tfrmexportsup.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmfindandreplace.btnclose.caption
+msgctxt "tfrmfindandreplace.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmfindandreplace.btnfind.caption
+msgctxt "tfrmfindandreplace.btnfind.caption"
+msgid "Find"
+msgstr "Najdi"
+
+#: tfrmfindandreplace.btnfindnext.caption
+#, fuzzy
+msgctxt "tfrmfindandreplace.btnfindnext.caption"
+msgid "Find next"
+msgstr "Najdi naslednje"
+
+#: tfrmfindandreplace.btnfindprev.caption
+#, fuzzy
+msgid "Find prev"
+msgstr "Najdi prejšnje"
+
+#: tfrmfindandreplace.btnreplace.caption
+msgctxt "tfrmfindandreplace.btnreplace.caption"
+msgid "Replace"
+msgstr "Zamenjaj"
+
+#: tfrmfindandreplace.btnreplaceall.caption
+msgid "Replace all"
+msgstr "Zamenjaj vse"
+
+#: tfrmfindandreplace.caption
+msgid "Find and replace"
+msgstr "Najdi in zamenjaj"
+
+#: tfrmfindandreplace.chkcasesensitive.caption
+#, fuzzy
+msgid "Case-sensitive"
+msgstr "Razlikovanje velikosti črk"
+
+#: tfrmfindandreplace.chkpreservecaseonreplace.caption
+#, fuzzy
+msgid "Preserve case on replace"
+msgstr "Ohrani"
+
+#: tfrmfindandreplace.chkregularexpression.caption
+#, fuzzy
+msgid "Use regular expression"
+msgstr "Logični izraz"
+
+#: tfrmfindandreplace.chkreplacewith.caption
+msgctxt "tfrmfindandreplace.chkreplacewith.caption"
+msgid "Replace with:"
+msgstr "Zamenjaj z:"
+
+#: tfrmfindandreplace.chkwholeword.caption
+msgid "Whole word"
+msgstr "Cela beseda"
+
+#: tfrmfindandreplace.lbloptions.caption
+msgid "Options:"
+msgstr "Možnosti:"
+
+#: tfrmfindandreplace.lblscope.caption
+#, fuzzy
+msgctxt "tfrmfindandreplace.lblscope.caption"
+msgid "Scope:"
+msgstr "Področje"
+
+#: tfrmfindandreplace.lblsource.caption
+msgid "Source:"
+msgstr "Vir:"
+
+#: tfrmfindandreplace.lbltexttofind.caption
+msgid "Text to find:"
+msgstr "Besedilo za iskanje:"
+
+#: tfrmfindandreplace.rbnallthesubtitles.caption
+msgctxt "tfrmfindandreplace.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Vsi vnosi"
+
+#: tfrmfindandreplace.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmfindandreplace.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Od izbranega vnosa"
+
+#: tfrmfindandreplace.rbnsearchboth.caption
+#, fuzzy
+msgid "Both"
+msgstr "Oboje"
+
+#: tfrmfindandreplace.rbntext.caption
+msgctxt "tfrmfindandreplace.rbntext.caption"
+msgid "Text"
+msgstr "Besedilo"
+
+#: tfrmfindandreplace.rbntranslation.caption
+msgctxt "tfrmfindandreplace.rbntranslation.caption"
+msgid "Translation"
+msgstr "Prevod"
+
+#: tfrmfixsubtitles.btnapply.caption
+msgctxt "tfrmfixsubtitles.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmfixsubtitles.btnclose.caption
+msgctxt "tfrmfixsubtitles.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmfixsubtitles.caption
+#, fuzzy
+msgid "Fix subtitles"
+msgstr ""
+"Popravite podnapise, ki so prikazani na zgornji plasti, namesto da bi se "
+"pojavili v spodnjih plasteh ob nalaganju projekta."
+
+#: tfrmfixsubtitles.lblconvention.caption
+#, fuzzy
+msgid "Convention"
+msgstr ""
+"Linux: Začni končnico datoteke .AppImage z veliko začetnico, kar ustreza "
+"konvenciji, ki jo pričakujejo zaganjalniki ([poročilo o napaki](https://"
+"bugs.kde.org/447445)); ([sprememba](https://invent.kde.org/graphics/krita/-/"
+"merge_requests/2269), avtor Dmitrij Kazakov)."
+
+#: tfrmfixsubtitles.lblocr.caption
+#, fuzzy
+msgid "OCR Script"
+msgstr "Skript"
+
+#: tfrmfixsubtitles.lblspacinghyphen.caption
+#, fuzzy
+msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
+msgid "Spacing of opening hyphen"
+msgstr "Razmik"
+
+#: tfrmfixsubtitles.mnudeselectall.caption
+msgid "Deselect all"
+msgstr "Prekliči izbor vseh"
+
+#: tfrmfixsubtitles.mnuinvertselection.caption
+#, fuzzy
+msgctxt "tfrmfixsubtitles.mnuinvertselection.caption"
+msgid "Invert selection"
+msgstr "Obrni izbiro"
+
+#: tfrmfixsubtitles.mnuselectall.caption
+msgctxt "tfrmfixsubtitles.mnuselectall.caption"
+msgid "Select all"
+msgstr "Izberi vse"
+
+#: tfrmformatproperties.btnapply.caption
+msgctxt "tfrmformatproperties.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmformatproperties.btnclose.caption
+msgctxt "tfrmformatproperties.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmformatproperties.caption
+msgctxt "tfrmformatproperties.caption"
+msgid "Format properties"
+msgstr "Lastnosti oblike"
+
+#: tfrmformatproperties.chkvttusextimestamp.caption
+#, fuzzy
+msgid "Use X-TIMESTAMP-MAP header"
+msgstr "Uporabi navadno poslikavo"
+
+#: tfrmformatproperties.chkvttwritecueidentifiers.caption
+#, fuzzy
+msgid "Write cue identifiers"
+msgstr "ALSA na po-moč"
+
+#: tfrmformatproperties.lblasalignment.caption
+msgctxt "tfrmformatproperties.lblasalignment.caption"
+msgid "Alignment"
+msgstr "Poravnava"
+
+#: tfrmformatproperties.lblasfontcolor.caption
+msgid "Font color"
+msgstr "Barva pisave"
+
+#: tfrmformatproperties.lblasfontname.caption
+msgid "Font name"
+msgstr "Ime pisave"
+
+#: tfrmformatproperties.lblasfontsize.caption
+msgid "Font size"
+msgstr "Velikost pisave"
+
+#: tfrmformatproperties.lblasheight.caption
+msgctxt "tfrmformatproperties.lblasheight.caption"
+msgid "Height"
+msgstr "Višina"
+
+#: tfrmformatproperties.lblaslanguage.caption
+msgctxt "tfrmformatproperties.lblaslanguage.caption"
+msgid "Language"
+msgstr "Jezik"
+
+#: tfrmformatproperties.lblaspositionx.caption
+msgid "Position X"
+msgstr "Položaj X"
+
+#: tfrmformatproperties.lblaspositiony.caption
+msgid "Position Y"
+msgstr "Položaj Y"
+
+#: tfrmformatproperties.lblaswidth.caption
+msgctxt "tfrmformatproperties.lblaswidth.caption"
+msgid "Width"
+msgstr "Širina"
+
+#: tfrmformatproperties.lblcavenacomment.caption
+msgid "Comments"
+msgstr "Komentarji"
+
+#: tfrmformatproperties.lblcavenalanguage.caption
+msgctxt "tfrmformatproperties.lblcavenalanguage.caption"
+msgid "Language"
+msgstr "Jezik"
+
+#: tfrmformatproperties.lblcavenaoriginaltitle.caption
+#, fuzzy
+msgid "Original title"
+msgstr "Izvorno"
+
+#: tfrmformatproperties.lblcavenatcstart.caption
+#, fuzzy
+msgid "Start timecode"
+msgstr "Podpora za začetno časovno kodo"
+
+#: tfrmformatproperties.lblcavenatranslatedtitle.caption
+msgid "Translated title"
+msgstr "Prevedeni naslov"
+
+#: tfrmformatproperties.lblcavenatranslator.caption
+msgid "Translator"
+msgstr "Prevajalec"
+
+#: tfrmformatproperties.lbldvdauthor.caption
+msgid "Author"
+msgstr "Avtor"
+
+#: tfrmformatproperties.lbldvdinfo.caption
+msgctxt "tfrmformatproperties.lbldvdinfo.caption"
+msgid "Info"
+msgstr "Podrobnosti"
+
+#: tfrmformatproperties.lbldvdlanguage.caption
+msgctxt "tfrmformatproperties.lbldvdlanguage.caption"
+msgid "Language"
+msgstr "Jezik"
+
+#: tfrmformatproperties.lbldvdtitle.caption
+msgctxt "tfrmformatproperties.lbldvdtitle.caption"
+msgid "Title"
+msgstr "Naslov"
+
+#: tfrmformatproperties.lbldvdweb.caption
+msgid "Web"
+msgstr "Splet"
+
+#: tfrmformatproperties.lblebucct.caption
+#, fuzzy
+msgid "Character code table"
+msgstr "&Koda znaka:"
+
+#: tfrmformatproperties.lblebuco.caption
+msgid "Country origin"
+msgstr "Država izvora"
+
+#: tfrmformatproperties.lblebucpn.caption
+#, fuzzy
+msgid "Code page number"
+msgstr "Skoči na številko strani"
+
+#: tfrmformatproperties.lblebudfc.caption
+#, fuzzy
+msgid "Disk format code"
+msgstr "Formatiraj disk …"
+
+#: tfrmformatproperties.lblebudsc.caption
+#, fuzzy
+msgid "Display standard code"
+msgstr "Prikaže mrežni vzorec pod izvorno kodo"
+
+#: tfrmformatproperties.lblebulc.caption
+msgid "Language code"
+msgstr "Koda jezika"
+
+#: tfrmformatproperties.lblebundc.caption
+#, fuzzy
+msgid "Max chars"
+msgstr "Najv"
+
+#: tfrmformatproperties.lblebundr.caption
+#, fuzzy
+msgid "Max rows"
+msgstr "Vrstice"
+
+#: tfrmformatproperties.lblvttlocal.caption
+#, fuzzy
+msgid "Cue time:"
+msgstr "ALSA na po-moč"
+
+#: tfrmformatproperties.lblvttmpegts.caption
+#, fuzzy
+msgid "MPEG-2 time:"
+msgstr "Pretok prenosa MPEG-2"
+
+#: tfrmgenerateblankvideo.btnclose.caption
+msgctxt "tfrmgenerateblankvideo.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmgenerateblankvideo.btngenerate.caption
+msgid "Generate..."
+msgstr "Tvori …"
+
+#: tfrmgenerateblankvideo.btnimage.caption
+msgctxt "tfrmgenerateblankvideo.btnimage.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmgenerateblankvideo.btnres.caption
+msgctxt "tfrmgenerateblankvideo.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmgenerateblankvideo.caption
+#, fuzzy
+msgid "Generate blank video"
+msgstr "prazno"
+
+#: tfrmgenerateblankvideo.chkgeneratetc.caption
+msgctxt "tfrmgenerateblankvideo.chkgeneratetc.caption"
+msgid "Time code"
+msgstr "Časovna koda"
+
+#: tfrmgenerateblankvideo.chkgeneratetone.caption
+#, fuzzy
+msgid "1 kHz test tone"
+msgstr "1 kHz pred koncem"
+
+#: tfrmgenerateblankvideo.lblbackground.caption
+msgctxt "tfrmgenerateblankvideo.lblbackground.caption"
+msgid "Background"
+msgstr "Ozadje"
+
+#: tfrmgenerateblankvideo.lblduration.caption
+msgctxt "tfrmgenerateblankvideo.lblduration.caption"
+msgid "Duration"
+msgstr "Trajanje"
+
+#: tfrmgenerateblankvideo.lblfps.caption
+msgctxt "tfrmgenerateblankvideo.lblfps.caption"
+msgid "FPS"
+msgstr "sl/s"
+
+#: tfrmgenerateblankvideo.lblvideores.caption
+#, fuzzy
+msgctxt "tfrmgenerateblankvideo.lblvideores.caption"
+msgid "Video resolution"
+msgstr "Uporabi ločljivost videoposnetka namesto ločljivosti projekta."
+
+#: tfrmgenerateblankvideo.lblx.caption
+msgctxt "tfrmgenerateblankvideo.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmgenerateblankvideo.rdoimage.caption
+msgid "Image"
+msgstr "Slika"
+
+#: tfrmgenerateblankvideo.rdosmptecolorbars.caption
+msgid "SMPTE color bars"
+msgstr "Barvni stolpci SMPTE"
+
+#: tfrmgenerateblankvideo.rdosolidcolor.caption
+msgid "Solid color"
+msgstr "Enakomerna barva"
+
+#: tfrmgeneratevideo.btnclose.caption
+msgctxt "tfrmgeneratevideo.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmgeneratevideo.btngenerate.caption
+msgctxt "tfrmgeneratevideo.btngenerate.caption"
+msgid "Generate"
+msgstr "Tvori"
+
+#: tfrmgeneratevideo.btnres.caption
+msgctxt "tfrmgeneratevideo.btnres.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmgeneratevideo.caption
+#, fuzzy
+msgid "Generate video"
+msgstr "Tvori video"
+
+#: tfrmgeneratevideo.chkbox.caption
+#, fuzzy
+msgid "Box"
+msgstr "Polje"
+
+#: tfrmgeneratevideo.chkcrop.caption
+msgid "Crop"
+msgstr "Obreži"
+
+#: tfrmgeneratevideo.chkcut.caption
+msgctxt "tfrmgeneratevideo.chkcut.caption"
+msgid "Cut"
+msgstr "Izreži"
+
+#: tfrmgeneratevideo.chkdeinterlace.caption
+msgctxt "tfrmgeneratevideo.chkdeinterlace.caption"
+msgid "Deinterlace"
+msgstr "Razpletanje"
+
+#: tfrmgeneratevideo.chkflip.caption
+#, fuzzy
+msgid "Flip"
+msgstr "Prezrcali"
+
+#: tfrmgeneratevideo.chkreencodeaudio.caption
+#, fuzzy
+msgid "Re-encode"
+msgstr "_Ponovno kodiraj sporočilo pred pošiljanjem"
+
+#: tfrmgeneratevideo.chkrotate.caption
+msgid "Rotate"
+msgstr "Zavrti"
+
+#: tfrmgeneratevideo.lblaudiochannels.caption
+msgid "Channels"
+msgstr "Kanali"
+
+#: tfrmgeneratevideo.lblaudioencoding.caption
+msgctxt "tfrmgeneratevideo.lblaudioencoding.caption"
+msgid "Codec"
+msgstr "Kodek"
+
+#: tfrmgeneratevideo.lblbitrate.caption
+msgid "Bit rate"
+msgstr "Bitna hitrost"
+
+#: tfrmgeneratevideo.lblcropheight.caption
+msgctxt "tfrmgeneratevideo.lblcropheight.caption"
+msgid "Height"
+msgstr "Višina"
+
+#: tfrmgeneratevideo.lblcropleft.caption
+msgctxt "tfrmgeneratevideo.lblcropleft.caption"
+msgid "Left"
+msgstr "Levo"
+
+#: tfrmgeneratevideo.lblcroptop.caption
+#, fuzzy
+msgid "Top"
+msgstr "Na vrh"
+
+#: tfrmgeneratevideo.lblcropwidth.caption
+msgctxt "tfrmgeneratevideo.lblcropwidth.caption"
+msgid "Width"
+msgstr "Širina"
+
+#: tfrmgeneratevideo.lblcutfrom.caption
+#, fuzzy
+msgid "From"
+msgstr "Iz"
+
+#: tfrmgeneratevideo.lblcutto.caption
+msgid "To"
+msgstr ""
+
+#: tfrmgeneratevideo.lblfont.caption
+msgctxt "tfrmgeneratevideo.lblfont.caption"
+msgid "Font"
+msgstr "Pisava"
+
+#: tfrmgeneratevideo.lblfontcolor.caption
+msgctxt "tfrmgeneratevideo.lblfontcolor.caption"
+msgid "Color"
+msgstr "Barva"
+
+#: tfrmgeneratevideo.lblfontsize.caption
+msgctxt "tfrmgeneratevideo.lblfontsize.caption"
+msgid "Size"
+msgstr "Velikost"
+
+#: tfrmgeneratevideo.lblformat.caption
+msgctxt "tfrmgeneratevideo.lblformat.caption"
+msgid "Format"
+msgstr "Oblika"
+
+#: tfrmgeneratevideo.lblsamplerate.caption
+msgid "Sample rate"
+msgstr "Mera vzorčenja"
+
+#: tfrmgeneratevideo.lblvideocodec.caption
+msgctxt "tfrmgeneratevideo.lblvideocodec.caption"
+msgid "Codec"
+msgstr "Kodek"
+
+#: tfrmgeneratevideo.lblvideores.caption
+msgid "Resolution"
+msgstr "Ločljivost"
+
+#: tfrmgeneratevideo.lblvideosubtype.caption
+msgid "Subtype"
+msgstr "Podvrsta"
+
+#: tfrmgeneratevideo.lblx.caption
+msgctxt "tfrmgeneratevideo.lblx.caption"
+msgid "x"
+msgstr "x"
+
+#: tfrmgeneratevideo.rdoaudio.caption
+msgctxt "tfrmgeneratevideo.rdoaudio.caption"
+msgid "Audio"
+msgstr "Zvok"
+
+#: tfrmgeneratevideo.rdoothers.caption
+#, fuzzy
+msgctxt "tfrmgeneratevideo.rdoothers.caption"
+msgid "Others"
+msgstr "Drugi"
+
+#: tfrmgeneratevideo.rdosubtitle.caption
+msgctxt "tfrmgeneratevideo.rdosubtitle.caption"
+msgid "Subtitles"
+msgstr "Podnapisi"
+
+#: tfrmgeneratevideo.rdovideo.caption
+msgctxt "tfrmgeneratevideo.rdovideo.caption"
+msgid "Video"
+msgstr "Video"
+
+#: tfrmgoto.btnclose.caption
+msgctxt "tfrmgoto.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmgoto.btngo.caption
+#, fuzzy
+msgctxt "tfrmgoto.btngo.caption"
+msgid "Go"
+msgstr "Pojdi"
+
+#: tfrmgoto.caption
+msgctxt "tfrmgoto.caption"
+msgid "Go to line"
+msgstr "Pojdi v vrstico"
+
+#: tfrmgoto.lblnumber.caption
+msgid "Entry:"
+msgstr "Vnos:"
+
+#: tfrmgototime.btnclose.caption
+msgctxt "tfrmgototime.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmgototime.btngo.caption
+#, fuzzy
+msgctxt "tfrmgototime.btngo.caption"
+msgid "Go"
+msgstr "Pojdi"
+
+#: tfrmgototime.caption
+#, fuzzy
+msgctxt "tfrmgototime.caption"
+msgid "Go to"
+msgstr "_Skoči na"
+
+#: tfrmgototime.lbltime.caption
+msgid "Time:"
+msgstr "Čas:"
+
+#: tfrmimportsup.btnclose.caption
+msgctxt "tfrmimportsup.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmimportsup.btnimport.caption
+msgctxt "tfrmimportsup.btnimport.caption"
+msgid "Import"
+msgstr "Uvozi"
+
+#: tfrmimportsup.btnlanguage.caption
+msgctxt "tfrmimportsup.btnlanguage.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmimportsup.btnocr.caption
+msgid "OCR"
+msgstr ""
+
+#: tfrmimportsup.caption
+#, fuzzy
+msgid "Import Blu-ray SUP"
+msgstr "prazen disk Blu-Ray"
+
+#: tfrmimportsup.lbllanguage.caption
+msgid "Language:"
+msgstr "Jezik:"
+
+#: tfrmimportsuplanguages.btnclose.caption
+msgctxt "tfrmimportsuplanguages.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmimportsuplanguages.btndownload.caption
+msgctxt "tfrmimportsuplanguages.btndownload.caption"
+msgid "Download"
+msgstr "Prenesi"
+
+#: tfrmimportsuplanguages.caption
+msgid "Tesseract languages"
+msgstr "Jeziki tesseract"
+
+#: tfrmmain.actabout.caption
+msgctxt "tfrmmain.actabout.caption"
+msgid "About..."
+msgstr "O programu …"
+
+#: tfrmmain.actactor.caption
+msgctxt "tfrmmain.actactor.caption"
+msgid "Actors"
+msgstr "Igralci"
+
+#: tfrmmain.actaddnote.caption
+msgid "Add note..."
+msgstr "Dodaj opombo …"
+
+#: tfrmmain.actaddquotationmarks.caption
+#, fuzzy
+msgid "Add quotation marks"
+msgstr "Citat"
+
+#: tfrmmain.actadjustsubtitle.caption
+msgid "Adjust subtitle..."
+msgstr "Prilagodi podnapis …"
+
+#: tfrmmain.actaligntocenter.caption
+#, fuzzy
+msgctxt "tfrmmain.actaligntocenter.caption"
+msgid "Align to center"
+msgstr "align-vertical-center"
+
+#: tfrmmain.actaligntoleft.caption
+#, fuzzy
+msgctxt "tfrmmain.actaligntoleft.caption"
+msgid "Align to left"
+msgstr "align-horizontal-left"
+
+#: tfrmmain.actaligntonone.caption
+#, fuzzy
+msgctxt "tfrmmain.actaligntonone.caption"
+msgid "Align to none"
+msgstr "Poravnaj z:"
+
+#: tfrmmain.actaligntoright.caption
+#, fuzzy
+msgctxt "tfrmmain.actaligntoright.caption"
+msgid "Align to right"
+msgstr "align-horizontal-right"
+
+#: tfrmmain.actaudiofilterdialoguenhance.caption
+#, fuzzy
+msgid "Dialogue enhance"
+msgstr "Pogovorno okno Prilagajanje orodnih vrstic"
+
+#: tfrmmain.actaudiofilterspeechnormalizer.caption
+#, fuzzy
+msgid "Speech normalizer"
+msgstr "Normalizator govora (|avfilter.speechnorm|)"
+
+#: tfrmmain.actaudiofiltersurround.caption
+#, fuzzy
+msgid "Surround"
+msgstr "Surround sistem zvoka"
+
+#: tfrmmain.actaudiototext.caption
+msgctxt "tfrmmain.actaudiototext.caption"
+msgid "Audio to text..."
+msgstr "Zvok v besedilo …"
+
+#: tfrmmain.actautobreakentry.caption
+msgctxt "tfrmmain.actautobreakentry.caption"
+msgid "Autobreak"
+msgstr ""
+
+#: tfrmmain.actautobreakentry.hint
+#, fuzzy
+msgctxt "tfrmmain.actautobreakentry.hint"
+msgid "Split a long line into two or more lines"
+msgstr "Ne _deli besed v dve vrstici"
+
+#: tfrmmain.actautomaticduration.caption
+msgid "Automatic duration..."
+msgstr "Samodejno trajanje …"
+
+#: tfrmmain.actbatchconvert.caption
+msgctxt "tfrmmain.actbatchconvert.caption"
+msgid "Batch convert..."
+msgstr "Paketno pretvori …"
+
+#: tfrmmain.actcenterwaveform.caption
+#, fuzzy
+msgctxt "tfrmmain.actcenterwaveform.caption"
+msgid "Center waveform"
+msgstr "Oblika signala"
+
+#: tfrmmain.actcharactermap.caption
+msgid "Character Map..."
+msgstr "Razpredelnica znakov …"
+
+#: tfrmmain.actcheckforupdates.caption
+msgid "Check for updates..."
+msgstr "Preveri obstoj posodobitev …"
+
+#: tfrmmain.actcleartext.caption
+msgid "Clear text"
+msgstr "Počisti besedilo"
+
+#: tfrmmain.actcloseapp.caption
+msgctxt "tfrmmain.actcloseapp.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmmain.actclosemedia.caption
+#, fuzzy
+msgid "Close media"
+msgstr "Nosilci"
+
+#: tfrmmain.actclosesubtitle.caption
+msgid "Close subtitles"
+msgstr "Zapri podnapise"
+
+#: tfrmmain.actcombineentries.caption
+#, fuzzy
+msgid "Combine entries"
+msgstr "Združi"
+
+#: tfrmmain.actcombineentries.hint
+#, fuzzy
+msgctxt "tfrmmain.actcombineentries.hint"
+msgid "Combines all the selected entries into one"
+msgstr "Ali želite izbrisati vse vnose?"
+
+#: tfrmmain.actcompare.caption
+msgid "Compare..."
+msgstr "Primerjaj …"
+
+#: tfrmmain.actconvertcase.caption
+#, fuzzy
+msgid "Convert case..."
+msgstr "Pretvori izbor besedila v velike črke"
+
+#: tfrmmain.actcopy.caption
+msgctxt "tfrmmain.actcopy.caption"
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: tfrmmain.actcopyvideopostoclipboard.caption
+#, fuzzy
+msgid "Copy video position to clipboard"
+msgstr "Kopiraj v odložišče."
+
+#: tfrmmain.actcut.caption
+msgctxt "tfrmmain.actcut.caption"
+msgid "Cut"
+msgstr "Izreži"
+
+#: tfrmmain.actdeleteentry.caption
+msgid "Delete entries"
+msgstr "Izbriši vnose"
+
+#: tfrmmain.actdeleteentry.hint
+msgid "Delete selected entries"
+msgstr "Izbriši izbrane vnose"
+
+#: tfrmmain.actdeleteshotchange.caption
+#, fuzzy
+msgid "Delete shot change(s)"
+msgstr "Izbriše spremembo"
+
+#: tfrmmain.actdetectdialogsegments.caption
+#, fuzzy
+msgid "Detect dialog segments..."
+msgstr "Odseki"
+
+#: tfrmmain.actdetectsilentzones.caption
+#, fuzzy
+msgctxt "tfrmmain.actdetectsilentzones.caption"
+msgid "Detect silent zones"
+msgstr "Tiho"
+
+#: tfrmmain.actdetectsilentzones.hint
+#, fuzzy
+msgid "Click to refresh list"
+msgstr "Kliknite za osvežitev valovne oblike zvoka"
+
+#: tfrmmain.actdistributeentriesevenly.caption
+#, fuzzy
+msgid "Distribute entries evenly"
+msgstr "Enakomerno razporedi odseke"
+
+#: tfrmmain.actdivideentry.caption
+#, fuzzy
+msgid "Divide entry"
+msgstr "Razdeli v"
+
+#: tfrmmain.actdurationlimits.caption
+msgid "Duration limits..."
+msgstr "Omejitve trajanja …"
+
+#: tfrmmain.actendcueaddoneframe.caption
+msgid "Add one frame"
+msgstr "Dodaj eno sličico"
+
+#: tfrmmain.actendcuesubtractoneframe.caption
+msgid "Subtract one frame"
+msgstr "Odštej eno sličico"
+
+#: tfrmmain.actexportcustomimageformat.caption
+#, fuzzy
+msgid "Custom image format..."
+msgstr "Oblika po meri"
+
+#: tfrmmain.actexportcustomtextformat.caption
+#, fuzzy
+msgid "Custom text format..."
+msgstr "Oblika po meri"
+
+#: tfrmmain.actexportmarkedsubtitles.caption
+#, fuzzy
+msgid "Marked subtitles..."
+msgstr "Podnapisi"
+
+#: tfrmmain.actexportsup.caption
+msgctxt "tfrmmain.actexportsup.caption"
+msgid "Blu-ray SUP..."
+msgstr "Blu-ray SUP ..."
+
+#: tfrmmain.actexporttextonly.caption
+msgid "Text only..."
+msgstr "Le besedilo …"
+
+#: tfrmmain.actextendlengthtonext.caption
+#, fuzzy
+msgid "Extend final time to next"
+msgstr "Končno"
+
+#: tfrmmain.actextendlengthtoprevious.caption
+#, fuzzy
+msgid "Extend initial time to previous"
+msgstr "Spremeni čas na prejšnjo ključno sličico"
+
+#: tfrmmain.actfind.caption
+msgid "Find..."
+msgstr "Najdi ..."
+
+#: tfrmmain.actfindnext.caption
+#, fuzzy
+msgctxt "tfrmmain.actfindnext.caption"
+msgid "Find next"
+msgstr "Najdi naslednje"
+
+#: tfrmmain.actfindprevious.caption
+#, fuzzy
+msgid "Find previous"
+msgstr "Najdi prejšnje"
+
+#: tfrmmain.actfixrtlpunctuation.caption
+#, fuzzy
+msgid "Fix punctuation"
+msgstr "Raven ločil"
+
+#: tfrmmain.actfixsubtitles.caption
+#, fuzzy
+msgid "Fix subtitles..."
+msgstr ""
+"Popravite podnapise, ki so prikazani na zgornji plasti, namesto da bi se "
+"pojavili v spodnjih plasteh ob nalaganju projekta."
+
+#: tfrmmain.actfocusfinaltime.caption
+#, fuzzy
+msgid "Edit final time"
+msgstr "Končno"
+
+#: tfrmmain.actfocusinitialtime.caption
+#, fuzzy
+msgid "Edit initial time"
+msgstr "Uredi čas"
+
+#: tfrmmain.actfontbold.caption
+msgctxt "tfrmmain.actfontbold.caption"
+msgid "Bold"
+msgstr "Krepko"
+
+#: tfrmmain.actfontclear.caption
+msgctxt "tfrmmain.actfontclear.caption"
+msgid "Clear"
+msgstr "Počisti"
+
+#: tfrmmain.actfontcolor.caption
+#, fuzzy
+msgid "Set current font color"
+msgstr "Ni nastavljene pisave"
+
+#: tfrmmain.actfontcolordlg.caption
+msgctxt "tfrmmain.actfontcolordlg.caption"
+msgid "Color..."
+msgstr "Barva …"
+
+#: tfrmmain.actfontitalic.caption
+msgctxt "tfrmmain.actfontitalic.caption"
+msgid "Italic"
+msgstr "Ležeče"
+
+#: tfrmmain.actfontstrikeout.caption
+msgctxt "tfrmmain.actfontstrikeout.caption"
+msgid "Strikeout"
+msgstr "Oblikuje pisavo prečrtano"
+
+#: tfrmmain.actfontunderline.caption
+msgctxt "tfrmmain.actfontunderline.caption"
+msgid "Underline"
+msgstr "Podčrtano"
+
+#: tfrmmain.actformatproperties.caption
+msgctxt "tfrmmain.actformatproperties.caption"
+msgid "Format properties..."
+msgstr "Lastnosti oblike …"
+
+#: tfrmmain.actframesmode.caption
+#, fuzzy
+msgctxt "tfrmmain.actframesmode.caption"
+msgid "Frame mode"
+msgstr "Način samodejnih sličic"
+
+#: tfrmmain.actframesmode.hint
+msgid "Set time code format to HH:MM:SS:FF"
+msgstr ""
+
+#: tfrmmain.actgenerateblankvideo.caption
+#, fuzzy
+msgid "Generate blank video..."
+msgstr "prazno"
+
+#: tfrmmain.actgeneratevideo.caption
+#, fuzzy
+msgid "Video with hardcoded subtitles..."
+msgstr "Izrišite podnapise v videoposnetek"
+
+#: tfrmmain.actgoto.caption
+#, fuzzy
+msgid "Go to entry..."
+msgstr "Skoči na naslednji vnos"
+
+#: tfrmmain.actgotocurrententryfinaltime.caption
+#, fuzzy
+msgid "Go to current entry final time"
+msgstr "trenutni čas"
+
+#: tfrmmain.actgotocurrententryinitialtime.caption
+#, fuzzy
+msgid "Go to current entry initial time"
+msgstr "trenutni čas"
+
+#: tfrmmain.actgotonextentryandplay.caption
+#, fuzzy
+msgid "Go to next entry and play"
+msgstr "Skoči na naslednji vnos"
+
+#: tfrmmain.actgotopreviousentryandplay.caption
+#, fuzzy
+msgid "Go to previous entry and play"
+msgstr "Skoči na predhodni vnos"
+
+#: tfrmmain.actgototime.caption
+#, fuzzy
+msgid "Go to time..."
+msgstr ""
+"To zloženo okno omogoča hitro premikanje med stanji razveljavitev ter celo "
+"vrnitev v času, veliko hitreje kot z uporabo bližnjice :kbd:`krmilka + Z`."
+
+#: tfrmmain.acthelp.caption
+msgctxt "tfrmmain.acthelp.caption"
+msgid "Help"
+msgstr "Pomoč"
+
+#: tfrmmain.actimportsubtitles.caption
+msgid "Subtitles..."
+msgstr "Podnapisi …"
+
+#: tfrmmain.actimportsup.caption
+#, fuzzy
+msgctxt "tfrmmain.actimportsup.caption"
+msgid "Blu-ray SUP..."
+msgstr "prazen disk Blu-Ray"
+
+#: tfrmmain.actinsertcurrenttime.caption
+#, fuzzy
+msgid "Insert current time"
+msgstr "trenutni čas"
+
+#: tfrmmain.actinsertentry.caption
+msgid "Insert entry"
+msgstr "Vstavi vnos"
+
+#: tfrmmain.actinsertentry.hint
+#, fuzzy
+msgid "Insert a new entry after the current entry"
+msgstr "Nov vnos menija časovnice :ref:`Trenutna steza <timeline_menu>`"
+
+#: tfrmmain.actinsertentrybefore.caption
+#, fuzzy
+msgid "Insert entry before"
+msgstr "_Vnos"
+
+#: tfrmmain.actinsertentrybefore.hint
+#, fuzzy
+msgctxt "tfrmmain.actinsertentrybefore.hint"
+msgid "Insert entry before the current entry"
+msgstr "Odstrani vnos"
+
+#: tfrmmain.actinsertshotchange.caption
+#, fuzzy
+msgid "Insert shot change"
+msgstr "Vstavi"
+
+#: tfrmmain.actinvertselection.caption
+#, fuzzy
+msgctxt "tfrmmain.actinvertselection.caption"
+msgid "Invert selection"
+msgstr "Obrni izbiro"
+
+#: tfrmmain.actjumptonextempty.caption
+#, fuzzy
+msgid "Jump to next without text"
+msgstr "Skoči na naslednjo ključno sličico"
+
+#: tfrmmain.actjumptonextmarked.caption
+#, fuzzy
+msgid "Jump to next marked"
+msgstr "Pokaže naslednje neprebrano sporočilo"
+
+#: tfrmmain.actjumptonextnote.caption
+#, fuzzy
+msgid "Jump to next note"
+msgstr "Skoči na naslednjo ključno sličico"
+
+#: tfrmmain.actjumptonextshotchange.caption
+#, fuzzy
+msgid "Jump to next shot change"
+msgstr "Skoči na naslednjo ključno sličico"
+
+#: tfrmmain.actjumptopreviousempty.caption
+#, fuzzy
+msgid "Jump to previous without text"
+msgstr "Pokaže predhodno neprebrano sporočilo"
+
+#: tfrmmain.actjumptopreviousmarked.caption
+#, fuzzy
+msgid "Jump to previous marked"
+msgstr "Pokaže predhodno neprebrano sporočilo"
+
+#: tfrmmain.actjumptopreviousnote.caption
+#, fuzzy
+msgid "Jump to previous note"
+msgstr "Odpri prejšnjo beležko"
+
+#: tfrmmain.actjumptoprevshotchange.caption
+#, fuzzy
+msgid "Jump to previous shot change"
+msgstr "Pokaže predhodno neprebrano sporočilo"
+
+#: tfrmmain.actlistmode.caption
+#, fuzzy
+msgctxt "tfrmmain.actlistmode.caption"
+msgid "List mode"
+msgstr "napaka nastavljanja načina seznama ključa"
+
+#: tfrmmain.actloadmedia.caption
+#, fuzzy
+msgid "Open media..."
+msgstr "Odpri nosilec …"
+
+#: tfrmmain.actloadmedia.hint
+#, fuzzy
+msgctxt "tfrmmain.actloadmedia.hint"
+msgid "Open a media file"
+msgstr "Ni odprtega nosilca"
+
+#: tfrmmain.actloadmediafromurl.caption
+#, fuzzy
+msgid "Open media from URL..."
+msgstr "Odpri naslov URL"
+
+#: tfrmmain.actloadproject.caption
+msgid "Load project..."
+msgstr "Naloži projekt …"
+
+#: tfrmmain.actloadsubtitle.caption
+msgctxt "tfrmmain.actloadsubtitle.caption"
+msgid "Load subtitle..."
+msgstr "_Naloži podnapis …"
+
+#: tfrmmain.actloadsubtitle.hint
+msgid "Load a subtitle file"
+msgstr "Naloži datoteko s podnapisi"
+
+#: tfrmmain.actloadtranscription.caption
+#, fuzzy
+msgctxt "tfrmmain.actloadtranscription.caption"
+msgid "Transcription..."
+msgstr "Transkripcija …"
+
+#: tfrmmain.actloadtranslation.caption
+msgid "Load translation..."
+msgstr "Naloži prevod …"
+
+#: tfrmmain.actmarkentry.caption
+msgid "Mark entry"
+msgstr "Označi vnos"
+
+#: tfrmmain.actmediaaddentry.caption
+msgctxt "tfrmmain.actmediaaddentry.caption"
+msgid "Add entry"
+msgstr "Dodaj vnos"
+
+#: tfrmmain.actmediaautoscroll.caption
+#, fuzzy
+msgctxt "tfrmmain.actmediaautoscroll.caption"
+msgid "Update list on preview"
+msgstr "_Samodejno posodobi predogled"
+
+#: tfrmmain.actmediaback1min.caption
+msgid "Go back 1 minute"
+msgstr "Pojdi nazaj za 1 minuto"
+
+#: tfrmmain.actmediaback1sec.caption
+msgid "Go back 1 second"
+msgstr "Pojdi nazaj za 1 sekundo"
+
+#: tfrmmain.actmediachangeplayrate.caption
+#, fuzzy
+msgctxt "tfrmmain.actmediachangeplayrate.caption"
+msgid "Playback rate"
+msgstr "Hitrosti predvajanja ni bilo mogoče spremeniti v %.2f"
+
+#: tfrmmain.actmediadeleteentry.caption
+msgctxt "tfrmmain.actmediadeleteentry.caption"
+msgid "Delete entry"
+msgstr "Izbriši vnos"
+
+#: tfrmmain.actmediaendsubtitleentry.caption
+msgid "End entry"
+msgstr "Zaključi vnos"
+
+#: tfrmmain.actmediaforward.caption
+#, fuzzy
+msgctxt "tfrmmain.actmediaforward.caption"
+msgid "Forward"
+msgstr "Previj naprej"
+
+#: tfrmmain.actmediaforward1min.caption
+#, fuzzy
+msgid "Forward 1 minute"
+msgstr "Pojdi naprej za 1 minuto"
+
+#: tfrmmain.actmediaforward1sec.caption
+#, fuzzy
+msgid "Forward 1 second"
+msgstr "Pojdi naprej za 1 sekundo"
+
+#: tfrmmain.actmediamovesubtitleentry.caption
+msgid "Move entry"
+msgstr "Premakni vnos"
+
+#: tfrmmain.actmedianextframe.caption
+msgctxt "tfrmmain.actmedianextframe.caption"
+msgid "Next frame"
+msgstr "Naslednja sličica"
+
+#: tfrmmain.actmediaplay.caption
+msgctxt "tfrmmain.actmediaplay.caption"
+msgid "Play/Pause"
+msgstr "Predvajaj / premor"
+
+#: tfrmmain.actmediaplayafterselection.caption
+#, fuzzy
+msgctxt "tfrmmain.actmediaplayafterselection.caption"
+msgid "Play after selection"
+msgstr "Predvajaj po izrisu"
+
+#: tfrmmain.actmediaplaybeforeselection.caption
+#, fuzzy
+msgctxt "tfrmmain.actmediaplaybeforeselection.caption"
+msgid "Play before selection"
+msgstr "Najmanjša dolžina izbora pred poudarjanjem ujemanj"
+
+#: tfrmmain.actmediaplayfromselection.caption
+#, fuzzy
+msgctxt "tfrmmain.actmediaplayfromselection.caption"
+msgid "Play from selection"
+msgstr "Predvajaj območje od kazalca"
+
+#: tfrmmain.actmediaplayselection.caption
+msgctxt "tfrmmain.actmediaplayselection.caption"
+msgid "Play selection"
+msgstr "Predvajaj izbrano"
+
+#: tfrmmain.actmediaplayselection.hint
+#, fuzzy
+msgid "Click on the arrow to select playback repetitions"
+msgstr "Kliknite na desno puščico!"
+
+#: tfrmmain.actmediapreviousframe.caption
+msgctxt "tfrmmain.actmediapreviousframe.caption"
+msgid "Previous frame"
+msgstr "Prejšnja sličica"
+
+#: tfrmmain.actmediarewind.caption
+msgctxt "tfrmmain.actmediarewind.caption"
+msgid "Rewind"
+msgstr "Previj nazaj"
+
+#: tfrmmain.actmediasetfinaltime.caption
+#, fuzzy
+msgctxt "tfrmmain.actmediasetfinaltime.caption"
+msgid "Set final time"
+msgstr "Je končni"
+
+#: tfrmmain.actmediasetinitialtime.caption
+#, fuzzy
+msgctxt "tfrmmain.actmediasetinitialtime.caption"
+msgid "Set initial time"
+msgstr "Nastavi začetni naslov okna"
+
+#: tfrmmain.actmediasplitentryatcursorposition.caption
+msgid "Split at cursor position"
+msgstr "Razdeli na položaju kazalca"
+
+#: tfrmmain.actmediastartsubtitleentry.caption
+msgid "Start entry"
+msgstr "Začni vnos"
+
+#: tfrmmain.actmediastop.caption
+msgctxt "tfrmmain.actmediastop.caption"
+msgid "Stop"
+msgstr "Ustavi"
+
+#: tfrmmain.actmediasubsizedec.caption
+#, fuzzy
+msgid "Reduce video font size"
+msgstr "Zmanjšaj velikost pisave"
+
+#: tfrmmain.actmediasubsizeinc.caption
+#, fuzzy
+msgid "Increase video font size"
+msgstr "Povečaj velikost pisave"
+
+#: tfrmmain.actmediavolumedown.caption
+msgid "Down"
+msgstr "Navzdol"
+
+#: tfrmmain.actmediavolumemute.caption
+msgid "Mute"
+msgstr "Nemo"
+
+#: tfrmmain.actmediavolumeup.caption
+msgid "Up"
+msgstr "Navzgor"
+
+#: tfrmmain.actmediazoomin.caption
+msgctxt "tfrmmain.actmediazoomin.caption"
+msgid "Zoom in"
+msgstr "Približaj"
+
+#: tfrmmain.actmediazoomout.caption
+msgctxt "tfrmmain.actmediazoomout.caption"
+msgid "Zoom out"
+msgstr "Oddalji"
+
+#: tfrmmain.actmediazoomselection.caption
+msgctxt "tfrmmain.actmediazoomselection.caption"
+msgid "Zoom selection"
+msgstr "Približaj na izbor"
+
+#: tfrmmain.actmergewithnext.caption
+msgid "Merge with next"
+msgstr "Združi z naslednjim"
+
+#: tfrmmain.actmergewithprevious.caption
+msgid "Merge with previous"
+msgstr "Združi s prejšnjim"
+
+#: tfrmmain.actmodifyselection.caption
+msgid "Modify selection..."
+msgstr "Spremeni izbor …"
+
+#: tfrmmain.actmultiplereplace.caption
+#, fuzzy
+msgid "Multiple replace..."
+msgstr "Večkrat zamenjaj …"
+
+#: tfrmmain.actnewsubtitle.caption
+msgctxt "tfrmmain.actnewsubtitle.caption"
+msgid "New project"
+msgstr "Nov projekt"
+
+#: tfrmmain.actnewsubtitle.hint
+msgid "Start a new subtitle project"
+msgstr "Začni nov projekt podnapisov"
+
+#: tfrmmain.actnextsubtitle.caption
+msgctxt "tfrmmain.actnextsubtitle.caption"
+msgid "Next subtitle"
+msgstr "Naslednji podnapis"
+
+#: tfrmmain.actpanandscan.caption
+#, fuzzy
+msgid "Pan-and-scan"
+msgstr "_Optično preberi"
+
+#: tfrmmain.actpaste.caption
+msgctxt "tfrmmain.actpaste.caption"
+msgid "Paste"
+msgstr "Prilepi"
+
+#: tfrmmain.actplaycurrententry.caption
+msgid "Play current entry"
+msgstr "Predvajaj trenutni vnos"
+
+#: tfrmmain.actprevioussubtitle.caption
+#, fuzzy
+msgctxt "tfrmmain.actprevioussubtitle.caption"
+msgid "Previous subtitle"
+msgstr "Pojdi na predhodni podnaslov"
+
+#: tfrmmain.actpullfirstlinefromnextentry.caption
+#, fuzzy
+msgid "Pull the first line from the next entry"
+msgstr "%s: vrnjena je prazna vrednost (NULL) predmeta ldap_first_entry"
+
+#: tfrmmain.actpulllastlinefrompreviousentry.caption
+msgid "Pull the last line from the previous entry"
+msgstr ""
+
+#: tfrmmain.actpushfirstlinetopreviousentry.caption
+#, fuzzy
+msgid "Push the first line to the previous entry"
+msgstr "Skoči na predhodni vnos"
+
+#: tfrmmain.actpushlastlinetonextentry.caption
+#, fuzzy
+msgid "Push the last line to the next entry"
+msgstr "Skoči na naslednji vnos"
+
+#: tfrmmain.actpushworddown.caption
+#, fuzzy
+msgid "Push the last word of the current line down"
+msgstr "Premakne trenutno vrstico nižje"
+
+#: tfrmmain.actpushwordtonextentry.caption
+#, fuzzy
+msgid "Push the last word to the next entry"
+msgstr "Deli zadnjo besedo odstavka"
+
+#: tfrmmain.actpushwordtopreviousentry.caption
+#, fuzzy
+msgid "Push the first word to the previous entry"
+msgstr "Skoči na predhodno besedo"
+
+#: tfrmmain.actpushwordup.caption
+#, fuzzy
+msgid "Push the first word of the current line up"
+msgstr "Premakne trenutno vrstico višje"
+
+#: tfrmmain.actqualitycheck.caption
+msgid "Quality check..."
+msgstr "Preverjanje kakovosti …"
+
+#: tfrmmain.actreadtextsfromfile.caption
+msgid "Read text from file..."
+msgstr "Preberi besedilo iz datoteke …"
+
+#: tfrmmain.actreadtimingsfromfile.caption
+#, fuzzy
+msgid "Read timings from file..."
+msgstr "Branje iz izvožene datoteke ni uspelo"
+
+#: tfrmmain.actredo.caption
+msgctxt "tfrmmain.actredo.caption"
+msgid "Redo"
+msgstr "Ponovi"
+
+#: tfrmmain.actredo.hint
+#, fuzzy
+msgid "Redo last undo"
+msgstr "Razveljavi in ponovno uveljavi"
+
+#: tfrmmain.actremovelinefromentry.caption
+#, fuzzy
+msgid "Remove line from entry..."
+msgstr "Odstrani izbrani vnos"
+
+#: tfrmmain.actremoveunicodecontrolchars.caption
+#, fuzzy
+msgid "Remove Unicode control characters"
+msgstr "_Vstavi nadzorni znak Unicode"
+
+#: tfrmmain.actreplace.caption
+msgid "Replace..."
+msgstr "Zamenjaj ..."
+
+#: tfrmmain.actrestorebackup.caption
+#, fuzzy
+msgid "Restore backup..."
+msgstr "Obnovi varnostno kopijo"
+
+#: tfrmmain.actreversetext.caption
+#, fuzzy
+msgid "Reverse text"
+msgstr "_Obrnjeno"
+
+#: tfrmmain.actroundtimes.caption
+#, fuzzy
+msgid "Round times..."
+msgstr "okrogla"
+
+#: tfrmmain.actsaveproject.caption
+msgid "Save project..."
+msgstr "Shrani projekt …"
+
+#: tfrmmain.actsavesubtitle.caption
+msgctxt "tfrmmain.actsavesubtitle.caption"
+msgid "Save subtitle"
+msgstr "Shrani podnapis"
+
+#: tfrmmain.actsavesubtitle.hint
+#, fuzzy
+msgid "Save current subtitle to file"
+msgstr "Shrani trenutno datoteko"
+
+#: tfrmmain.actsavesubtitleas.caption
+msgid "Save subtitle as..."
+msgstr "Shrani podnapis kot …"
+
+#: tfrmmain.actsavesubtitleas.hint
+#, fuzzy
+msgid "Save current subtitle to a specific file"
+msgstr "Shrani trenutno datoteko samodejno"
+
+#: tfrmmain.actsavetranscription.caption
+#, fuzzy
+msgctxt "tfrmmain.actsavetranscription.caption"
+msgid "Transcription..."
+msgstr ""
+"Tako lažje razdelite podnaslove, kjer imate prepis z enim podnaslovom na "
+"vrstico. To izhaja iz nekaj situacij:"
+
+#: tfrmmain.actsavetranslation.caption
+msgctxt "tfrmmain.actsavetranslation.caption"
+msgid "Save translation"
+msgstr "Shrani prevod"
+
+#: tfrmmain.actsavetranslation.hint
+#, fuzzy
+msgid "Save current translation to file"
+msgstr "Shrani trenutno datoteko samodejno"
+
+#: tfrmmain.actsavetranslationas.caption
+msgid "Save translation as..."
+msgstr "Shrani prevod kot …"
+
+#: tfrmmain.actsavetranslationas.hint
+#, fuzzy
+msgid "Save current translation to a specific file"
+msgstr "Shrani trenutno datoteko samodejno"
+
+#: tfrmmain.actscreenshottofile.caption
+#, fuzzy
+msgid "Save screenshot"
+msgstr "Shrani zajeto sliko"
+
+#: tfrmmain.actselectall.caption
+#, fuzzy
+msgctxt "tfrmmain.actselectall.caption"
+msgid "Select all"
+msgstr "Izberi vse"
+
+#: tfrmmain.actselectcurrenttobeginning.caption
+#, fuzzy
+msgid "Select current to beginning"
+msgstr "Premakne na začetek trenutne vrstice"
+
+#: tfrmmain.actselectcurrenttoend.caption
+#, fuzzy
+msgid "Select current to end"
+msgstr "S tem se bo končala vaša trenutna igra."
+
+#: tfrmmain.actsetasdefaultencoding.caption
+#, fuzzy
+msgctxt "tfrmmain.actsetasdefaultencoding.caption"
+msgid "Set as default save encoding"
+msgstr "Privzet nabor znakov"
+
+#: tfrmmain.actsetasdefaultformat.caption
+#, fuzzy
+msgctxt "tfrmmain.actsetasdefaultformat.caption"
+msgid "Set as default save format"
+msgstr "Preoblikuj ob shranjevanju"
+
+#: tfrmmain.actsetautomaticduration.caption
+#, fuzzy
+msgid "Set automatic duration"
+msgstr "Nastavi ocenjeno trajanje za"
+
+#: tfrmmain.actsetdefaultgap.caption
+#, fuzzy
+msgid "Set default gap"
+msgstr "Nastavi privzeto"
+
+#: tfrmmain.actsetdefaultgap.hint
+#, fuzzy
+msgid "Only if the gap is too short"
+msgstr "ime vmesnika je prekratko"
+
+#: tfrmmain.actsetdelay.caption
+#, fuzzy
+msgid "Set delay..."
+msgstr "Nastavite interpolacijo zakasnitvene črte, linearno ali kvadratno."
+
+#: tfrmmain.actsetgapping.caption
+#, fuzzy
+msgid "Set gapping..."
+msgstr "_Nastavi"
+
+#: tfrmmain.actsetguilayout0.caption
+#, fuzzy
+msgctxt "tfrmmain.actsetguilayout0.caption"
+msgid "Classic"
+msgstr "Klasično"
+
+#: tfrmmain.actsetguilayout1.caption
+#, fuzzy
+msgctxt "tfrmmain.actsetguilayout1.caption"
+msgid "Inverted"
+msgstr "_Obrnjeno"
+
+#: tfrmmain.actsetguilayout2.caption
+#, fuzzy
+msgctxt "tfrmmain.actsetguilayout2.caption"
+msgid "Vertical"
+msgstr "Navpično"
+
+#: tfrmmain.actsettings.caption
+msgctxt "tfrmmain.actsettings.caption"
+msgid "Settings..."
+msgstr "Nastavitve …"
+
+#: tfrmmain.actshifttimeless.caption
+#, fuzzy, object-pascal-format
+msgctxt "tfrmmain.actshifttimeless.caption"
+msgid "Shift %dms less"
+msgstr "Sličica %d (%d ms)"
+
+#: tfrmmain.actshifttimemore.caption
+#, fuzzy, object-pascal-format
+msgctxt "tfrmmain.actshifttimemore.caption"
+msgid "Shift %dms more"
+msgstr "Sličica %d (%d ms)"
+
+#: tfrmmain.actshifttimes.caption
+#, fuzzy
+msgid "Shift times..."
+msgstr "_Časi"
+
+#: tfrmmain.actshotchanges.caption
+#, fuzzy
+msgid "Shot changes..."
+msgstr "Spremembe"
+
+#: tfrmmain.actshowactoronpreview.caption
+#, fuzzy
+msgid "Display Actor on Preview"
+msgstr "Igralec/vršilec"
+
+#: tfrmmain.actshowcolumncpl.caption
+msgctxt "tfrmmain.actshowcolumncpl.caption"
+msgid "Characters per line"
+msgstr "Znaki na vrstico"
+
+#: tfrmmain.actshowcolumncps.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowcolumncps.caption"
+msgid "Characters per second"
+msgstr "Znaki na vrstico"
+
+#: tfrmmain.actshowcolumnduration.caption
+msgctxt "tfrmmain.actshowcolumnduration.caption"
+msgid "Duration"
+msgstr "Trajanje"
+
+#: tfrmmain.actshowcolumnnumber.caption
+#, fuzzy
+msgid "Number/GAP"
+msgstr "Vrzel"
+
+#: tfrmmain.actshowcolumnstyleandactor.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowcolumnstyleandactor.caption"
+msgid "Style/Actor"
+msgstr "Igralec/vršilec"
+
+#: tfrmmain.actshowcolumntimes.caption
+msgctxt "tfrmmain.actshowcolumntimes.caption"
+msgid "Times"
+msgstr "Čas"
+
+#: tfrmmain.actshowcolumnwpm.caption
+#, fuzzy
+msgctxt "tfrmmain.actshowcolumnwpm.caption"
+msgid "Words per minute"
+msgstr "Besed na minuto"
+
+#: tfrmmain.actshoweditortoolbaralignment.caption
+msgctxt "tfrmmain.actshoweditortoolbaralignment.caption"
+msgid "Alignment"
+msgstr "Poravnava"
+
+#: tfrmmain.actshoweditortoolbarbasic.caption
+#, fuzzy
+msgid "Basic"
+msgstr "Osnovno"
+
+#: tfrmmain.actshoweditortoolbarentry.caption
+msgctxt "tfrmmain.actshoweditortoolbarentry.caption"
+msgid "Entry"
+msgstr "Vnos"
+
+#: tfrmmain.actshoweditortoolbarformat.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarformat.caption"
+msgid "Format"
+msgstr "Oblika"
+
+#: tfrmmain.actshoweditortoolbarlines.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarlines.caption"
+msgid "Lines"
+msgstr "Črte"
+
+#: tfrmmain.actshoweditortoolbarwords.caption
+#, fuzzy
+msgctxt "tfrmmain.actshoweditortoolbarwords.caption"
+msgid "Words"
+msgstr "Besede"
+
+#: tfrmmain.actshowthumbnails.caption
+msgid "Show thumbnails"
+msgstr "Pokaži sličice"
+
+#: tfrmmain.actshowtoolbarencoding.caption
+msgctxt "tfrmmain.actshowtoolbarencoding.caption"
+msgid "Encoding"
+msgstr "Kodiranje znakov"
+
+#: tfrmmain.actshowtoolbarentry.caption
+msgctxt "tfrmmain.actshowtoolbarentry.caption"
+msgid "Entry"
+msgstr "Vnos"
+
+#: tfrmmain.actshowtoolbarfile.caption
+msgctxt "tfrmmain.actshowtoolbarfile.caption"
+msgid "File"
+msgstr "Datoteka"
+
+#: tfrmmain.actshowtoolbarformat.caption
+msgctxt "tfrmmain.actshowtoolbarformat.caption"
+msgid "Format"
+msgstr "Oblika"
+
+#: tfrmmain.actshowtoolbarfps.caption
+msgctxt "tfrmmain.actshowtoolbarfps.caption"
+msgid "FPS"
+msgstr "sl/s"
+
+#: tfrmmain.actshowtoolbargeneral.caption
+msgctxt "tfrmmain.actshowtoolbargeneral.caption"
+msgid "General"
+msgstr "Splošno"
+
+#: tfrmmain.actshowtoolbarquickaction.caption
+#, fuzzy
+msgid "Quick Action"
+msgstr "Dejanje"
+
+#: tfrmmain.actshowtoolbarview.caption
+msgctxt "tfrmmain.actshowtoolbarview.caption"
+msgid "View"
+msgstr "Pogled"
+
+#: tfrmmain.actshowvideotoolbarcontrols.caption
+msgctxt "tfrmmain.actshowvideotoolbarcontrols.caption"
+msgid "Controls"
+msgstr "Kontrolniki"
+
+#: tfrmmain.actshowvideotoolbarentry.caption
+msgctxt "tfrmmain.actshowvideotoolbarentry.caption"
+msgid "Entry"
+msgstr "Vnos"
+
+#: tfrmmain.actshowvideotoolbarother.caption
+msgctxt "tfrmmain.actshowvideotoolbarother.caption"
+msgid "Other"
+msgstr "Drugo"
+
+#: tfrmmain.actshowvideotoolbarvolume.caption
+msgctxt "tfrmmain.actshowvideotoolbarvolume.caption"
+msgid "Volume"
+msgstr "Glasnost"
+
+#: tfrmmain.actshowwaveformtoolbarcontrols.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarcontrols.caption"
+msgid "Controls"
+msgstr "Kontrolniki"
+
+#: tfrmmain.actshowwaveformtoolbarentry.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarentry.caption"
+msgid "Entry"
+msgstr "Vnos"
+
+#: tfrmmain.actshowwaveformtoolbarother.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarother.caption"
+msgid "Other"
+msgstr "Drugo"
+
+#: tfrmmain.actshowwaveformtoolbarshotchanges.caption
+msgctxt "tfrmmain.actshowwaveformtoolbarshotchanges.caption"
+msgid "Shot changes"
+msgstr "Spremembe kadra"
+
+#: tfrmmain.actshowwaveformtoolbarzoom.caption
+#, fuzzy
+msgid "Zoom"
+msgstr "Povečava"
+
+#: tfrmmain.actsort.caption
+msgid "Sort"
+msgstr "Razvrsti"
+
+#: tfrmmain.actsourcemode.caption
+#, fuzzy
+msgctxt "tfrmmain.actsourcemode.caption"
+msgid "Source mode"
+msgstr "Vir"
+
+#: tfrmmain.actspellcheck.caption
+msgid "Spell check..."
+msgstr "Preveri črkovanje …"
+
+#: tfrmmain.actsplitentryatposition.caption
+#, fuzzy
+msgctxt "tfrmmain.actsplitentryatposition.caption"
+msgid "Split line at cursor position"
+msgstr "Razdeli podnaslov na položaju kazalca"
+
+#: tfrmmain.actstatistics.caption
+msgid "Statistics..."
+msgstr "Statistika …"
+
+#: tfrmmain.actstreamextractor.caption
+#, fuzzy
+msgid "Stream extractor..."
+msgstr "Tok"
+
+#: tfrmmain.actswaptexts.caption
+#, fuzzy
+msgid "Swap text"
+msgstr "Izmenjevalni razdelek"
+
+#: tfrmmain.acttbx.caption
+msgctxt "tfrmmain.acttbx.caption"
+msgid "Show..."
+msgstr "Pokaži …"
+
+#: tfrmmain.acttbxclose.caption
+msgctxt "tfrmmain.acttbxclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmmain.acttbxedit.caption
+msgctxt "tfrmmain.acttbxedit.caption"
+msgid "Add..."
+msgstr "Dodaj ..."
+
+#: tfrmmain.acttbxlist.caption
+#, fuzzy
+msgctxt "tfrmmain.acttbxlist.caption"
+msgid "List..."
+msgstr "Seznam"
+
+#: tfrmmain.acttbxsettings.caption
+msgctxt "tfrmmain.acttbxsettings.caption"
+msgid "Settings..."
+msgstr "Nastavitve …"
+
+#: tfrmmain.acttexteffectflash.caption
+#, fuzzy
+msgid "Flash effect"
+msgstr "Flash"
+
+#: tfrmmain.acttexteffecttypewriter.caption
+msgid "Typewriter effect"
+msgstr "Učinek pisalnega stroja"
+
+#: tfrmmain.acttimeexpander.caption
+#, fuzzy
+msgid "Time expander/reducer..."
+msgstr "Razširjevalnik"
+
+#: tfrmmain.acttimeline.caption
+msgctxt "tfrmmain.acttimeline.caption"
+msgid "Timeline"
+msgstr "Časovnica"
+
+#: tfrmmain.acttimemode.caption
+#, fuzzy
+msgctxt "tfrmmain.acttimemode.caption"
+msgid "Time mode"
+msgstr "Maska: časovni način"
+
+#: tfrmmain.acttimemode.hint
+msgid "Set time code format to HH:MM:SS.ZZZ"
+msgstr ""
+
+#: tfrmmain.acttm1.caption
+#, fuzzy
+msgid "Use text from position 1 (tm)"
+msgstr "Preberi znake iz datoteke, če je potrjeno, ali uporabi besedilni vnos"
+
+#: tfrmmain.acttm2.caption
+#, fuzzy
+msgid "Use text from position 2 (tm)"
+msgstr "Preberi znake iz datoteke, če je potrjeno, ali uporabi besedilni vnos"
+
+#: tfrmmain.acttm3.caption
+#, fuzzy
+msgid "Use text from position 3 (tm)"
+msgstr ""
+"Položaj okna, ki naj bo uporabljen pri odpiranju novega okna, ki ni "
+"obnovljeno iz predhodne seje."
+
+#: tfrmmain.acttranscriptionmode.caption
+#, fuzzy
+msgctxt "tfrmmain.acttranscriptionmode.caption"
+msgid "Transcription mode"
+msgstr "Način:"
+
+#: tfrmmain.acttranscriptionmode.hint
+#, fuzzy
+msgid "Enable free-write mode"
+msgstr "Omogoči predpomnilnik pisanja"
+
+#: tfrmmain.acttranslate.caption
+msgid "Auto translate..."
+msgstr "Samodejno prevedi …"
+
+#: tfrmmain.acttranslationmemory.caption
+msgctxt "tfrmmain.acttranslationmemory.caption"
+msgid "Show..."
+msgstr "Pokaži …"
+
+#: tfrmmain.acttranslationmemoryclose.caption
+msgctxt "tfrmmain.acttranslationmemoryclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmmain.acttranslationmemorylist.caption
+#, fuzzy
+msgctxt "tfrmmain.acttranslationmemorylist.caption"
+msgid "List..."
+msgstr "Seznam …"
+
+#: tfrmmain.acttranslationmemorysettings.caption
+msgctxt "tfrmmain.acttranslationmemorysettings.caption"
+msgid "Settings..."
+msgstr "Nastavitve …"
+
+#: tfrmmain.acttranslatormode.caption
+#, fuzzy
+msgctxt "tfrmmain.acttranslatormode.caption"
+msgid "Translator mode"
+msgstr "Prevajalec"
+
+#: tfrmmain.acttts.caption
+msgid "Text to speech..."
+msgstr "Besedilo v govor …"
+
+#: tfrmmain.actunbreakentry.caption
+#, fuzzy
+msgid "Unbreak entry"
+msgstr "_Vnos"
+
+#: tfrmmain.actundo.caption
+msgctxt "tfrmmain.actundo.caption"
+msgid "Undo"
+msgstr "Razveljavi"
+
+#: tfrmmain.actundo.hint
+msgid "Undo last action"
+msgstr "Razveljavi zadnje dejanje"
+
+#: tfrmmain.actundockvideo.caption
+#, fuzzy
+msgid "Dock media"
+msgstr "Zasidraj"
+
+#: tfrmmain.actundockwaveform.caption
+#, fuzzy
+msgid "Dock waveform"
+msgstr "Oblika signala"
+
+#: tfrmmain.actunicodectrllre.caption
+#, fuzzy
+msgid "LRE (Start of Left-to-Right Embedding)"
+msgstr "LRE _Leva-proti-desni _vgradnja"
+
+#: tfrmmain.actunicodectrllrm.caption
+#, fuzzy
+msgid "LRM (Left-to-Right Mark)"
+msgstr "LRM oznaka _Leva-proti-desni"
+
+#: tfrmmain.actunicodectrllro.caption
+#, fuzzy
+msgid "LRO (Start of Left-to-Right Override)"
+msgstr "LRO Leva-proti-desni _prepis"
+
+#: tfrmmain.actunicodectrlpdf.caption
+#, fuzzy
+msgid "PDF (Pop Directional Formatting)"
+msgstr "PDF _Odprto usmerjeno oblikovanje"
+
+#: tfrmmain.actunicodectrlrle.caption
+#, fuzzy
+msgid "RLE (Start of Right-to-Left Embedding)"
+msgstr "RLE Desna-proti-levi v_gradnja"
+
+#: tfrmmain.actunicodectrlrlm.caption
+#, fuzzy
+msgid "RLM (Right-to-Left Mark)"
+msgstr "RLM oznaka _Desna-proti-levi"
+
+#: tfrmmain.actunicodectrlrlo.caption
+#, fuzzy
+msgid "RLO (Start of Right-to-Left Override)"
+msgstr "RLO Desna-proti-levi p_repis"
+
+#: tfrmmain.actunicodectrlzwnj.caption
+#, fuzzy
+msgid "ZWNJ (Zero Width Non-Joiner)"
+msgstr "ZWNJ _razdruževalnik nične širine"
+
+#: tfrmmain.actunicodezwj.caption
+#, fuzzy
+msgid "ZWJ (Zero Width Joiner)"
+msgstr "ZWJ _združevalnik nične širine"
+
+#: tfrmmain.actunmarkentry.caption
+#, fuzzy
+msgid "Unmark entry"
+msgstr "Vnos"
+
+#: tfrmmain.actvalidatetm.caption
+#, fuzzy
+msgid "Validate translation memory"
+msgstr "Pomnilnik prevodov"
+
+#: tfrmmain.actvalidatetm.hint
+#, fuzzy
+msgid "Validates and advances to the next"
+msgstr "Določi veljavnost dostopnosti programa"
+
+#: tfrmmain.actvaligntobottom.caption
+#, fuzzy
+msgctxt "tfrmmain.actvaligntobottom.caption"
+msgid "Vertical align to bottom"
+msgstr "|align-vertical-bottom|"
+
+#: tfrmmain.actvaligntomiddle.caption
+#, fuzzy
+msgctxt "tfrmmain.actvaligntomiddle.caption"
+msgid "Vertical align to middle"
+msgstr "navpična poravnava"
+
+#: tfrmmain.actvaligntotop.caption
+#, fuzzy
+msgctxt "tfrmmain.actvaligntotop.caption"
+msgid "Vertical align to top"
+msgstr "|align-vertical-top|"
+
+#: tfrmmain.actvar169.caption
+msgid "16:9"
+msgstr "16:9"
+
+#: tfrmmain.actvar1851.caption
+msgid "1.85:1"
+msgstr "1,85∶1"
+
+#: tfrmmain.actvar2351.caption
+msgid "2.35:1"
+msgstr "2,35:1"
+
+#: tfrmmain.actvar43.caption
+msgid "4:3"
+msgstr "4:3"
+
+#: tfrmmain.actvarcycle.caption
+#, fuzzy
+msgid "Cycle Aspect Ratio"
+msgstr "Razmerje stranic"
+
+#: tfrmmain.actvardefault.caption
+msgid "Default"
+msgstr "Privzeto"
+
+#: tfrmmain.actvideodubbing.caption
+msgid "Dubbing..."
+msgstr ""
+
+#: tfrmmain.actvideofilterblur.caption
+msgid "Blur"
+msgstr "Zabriši"
+
+#: tfrmmain.actvideofilterdeinterlace.caption
+msgctxt "tfrmmain.actvideofilterdeinterlace.caption"
+msgid "Deinterlace"
+msgstr "Razpletanje"
+
+#: tfrmmain.actvideofilteredgeenhance.caption
+#, fuzzy
+msgid "Edge enhance"
+msgstr "Izboljšaj"
+
+#: tfrmmain.actvideofilteremboss.caption
+msgid "Emboss"
+msgstr "Izboči"
+
+#: tfrmmain.actvideofilterhflip.caption
+#, fuzzy
+msgid "Horizontal flip"
+msgstr "Vodoravno prezrcali"
+
+#: tfrmmain.actvideofilternegative.caption
+#, fuzzy
+msgid "Negative"
+msgstr "Negativno"
+
+#: tfrmmain.actvideofiltersharpen.caption
+msgid "Sharpen"
+msgstr "Izostri"
+
+#: tfrmmain.actvideofiltervflip.caption
+#, fuzzy
+msgid "Vertical flip"
+msgstr "Navpično prezrcali"
+
+#: tfrmmain.actvideofiltervintage.caption
+msgid "Vintage"
+msgstr "Starodobno"
+
+#: tfrmmain.actvideoinformation.caption
+#, fuzzy
+msgid "Information..."
+msgstr "Podrobnosti"
+
+#: tfrmmain.actvideooffset.caption
+#, fuzzy
+msgid "Video offset..."
+msgstr "Odmik"
+
+#: tfrmmain.actvideopreview.caption
+#, fuzzy
+msgctxt "tfrmmain.actvideopreview.caption"
+msgid "Media preview"
+msgstr "Skrij predogled predstavnosti"
+
+#: tfrmmain.actviewshotchange.caption
+#, fuzzy
+msgctxt "tfrmmain.actviewshotchange.caption"
+msgid "Shot changes"
+msgstr "Spremembe"
+
+#: tfrmmain.actviewshotchange.hint
+#, fuzzy
+msgid "Enable/disable shot changes"
+msgstr "Vključi/izključi predogled sprememb v realnem času"
+
+#: tfrmmain.actwaveextract.caption
+#, fuzzy
+msgid "Extract waveform..."
+msgstr "Razširi v"
+
+#: tfrmmain.actwebpreview.caption
+msgid "Web Preview..."
+msgstr "Spletni predogled …"
+
+#: tfrmmain.actwebreference.caption
+#, fuzzy
+msgid "Web reference..."
+msgstr "Na spletu"
+
+#: tfrmmain.cboencoding.hint
+msgctxt "tfrmmain.cboencoding.hint"
+msgid "Encoding"
+msgstr "Kodiranje znakov"
+
+#: tfrmmain.cboformat.hint
+msgctxt "tfrmmain.cboformat.hint"
+msgid "Format"
+msgstr "Oblika"
+
+#: tfrmmain.cbofps.hint
+#, fuzzy
+msgid "Target FPS of subtitle file"
+msgstr "Ciljna datoteka ni običajna datoteka"
+
+#: tfrmmain.cboinputfps.hint
+msgid "FPS of the movie the opened subtitle file was made for"
+msgstr ""
+
+#: tfrmmain.edtquickaction.hint
+#, fuzzy
+msgctxt "tfrmmain.edtquickaction.hint"
+msgid "Quick Action Finder"
+msgstr "Dejanje"
+
+#: tfrmmain.lblmedialength.hint
+#, fuzzy
+msgid "Video length and FPS"
+msgstr "Hitrost videa (sl/s):"
+
+#: tfrmmain.lblmediatime.hint
+#, fuzzy
+msgid "Current video position"
+msgstr "Nastavi predstavitev do trenutnega položaja"
+
+#: tfrmmain.menuitem291.caption
+#, fuzzy
+msgid "Remove leading hyphens"
+msgstr "začetne"
+
+#: tfrmmain.mnuedit.caption
+msgctxt "tfrmmain.mnuedit.caption"
+msgid "Edit"
+msgstr "Uredi"
+
+#: tfrmmain.mnueditentries.caption
+msgctxt "tfrmmain.mnueditentries.caption"
+msgid "Entries"
+msgstr "Vnosi"
+
+#: tfrmmain.mnueditformat.caption
+msgctxt "tfrmmain.mnueditformat.caption"
+msgid "Format"
+msgstr "Oblika"
+
+#: tfrmmain.mnueditinsertchar.caption
+msgid "Insert Unicode character"
+msgstr "Vnesite znak Unicode"
+
+#: tfrmmain.mnueditrtl.caption
+msgid "Right-to-left"
+msgstr "Z desne proti levi"
+
+#: tfrmmain.mnuedittexts.caption
+msgctxt "tfrmmain.mnuedittexts.caption"
+msgid "Text"
+msgstr "Besedilo"
+
+#: tfrmmain.mnuedittimings.caption
+msgctxt "tfrmmain.mnuedittimings.caption"
+msgid "Timings"
+msgstr "Časi"
+
+#: tfrmmain.mnuedittimingsendcue.caption
+#, fuzzy
+msgid "End Cue"
+msgstr "ALSA na po-moč"
+
+#: tfrmmain.mnuedittimingsextend.caption
+msgid "Extend length"
+msgstr "Podaljšaj"
+
+#: tfrmmain.mnufile.caption
+msgctxt "tfrmmain.mnufile.caption"
+msgid "File"
+msgstr "Datoteka"
+
+#: tfrmmain.mnufileexport.caption
+msgid "Export"
+msgstr "Izvozi"
+
+#: tfrmmain.mnufileimport.caption
+msgctxt "tfrmmain.mnufileimport.caption"
+msgid "Import"
+msgstr "Uvozi"
+
+#: tfrmmain.mnufilemru.caption
+msgctxt "tfrmmain.mnufilemru.caption"
+msgid "Recent files"
+msgstr "Nedavne datoteke"
+
+#: tfrmmain.mnufind.caption
+msgctxt "tfrmmain.mnufind.caption"
+msgid "Find"
+msgstr "Najdi"
+
+#: tfrmmain.mnuhelp.caption
+msgctxt "tfrmmain.mnuhelp.caption"
+msgid "Help"
+msgstr "Pomoč"
+
+#: tfrmmain.mnumemoinsertunicodecontrolchar.caption
+msgid "Insert Unicode control character"
+msgstr "Vstavi nadzorni znak Unicode"
+
+#: tfrmmain.mnuselect.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuselect.caption"
+msgid "Select"
+msgstr "Izberi"
+
+#: tfrmmain.mnutexteffects.caption
+msgid "Effects"
+msgstr "Učinki"
+
+#: tfrmmain.mnutextlines.caption
+msgctxt "tfrmmain.mnutextlines.caption"
+msgid "Lines"
+msgstr "Vrstice"
+
+#: tfrmmain.mnutextwords.caption
+msgctxt "tfrmmain.mnutextwords.caption"
+msgid "Words"
+msgstr "Besede"
+
+#: tfrmmain.mnutools.caption
+msgctxt "tfrmmain.mnutools.caption"
+msgid "Tools"
+msgstr "Orodja"
+
+#: tfrmmain.mnutoolsterminology.caption
+msgctxt "tfrmmain.mnutoolsterminology.caption"
+msgid "Terminology"
+msgstr "Terminologija"
+
+#: tfrmmain.mnutoolstranslationmemory.caption
+msgctxt "tfrmmain.mnutoolstranslationmemory.caption"
+msgid "Translation memory"
+msgstr "Pomnilnik prevodov"
+
+#: tfrmmain.mnuvideo.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuvideo.caption"
+msgid "Media"
+msgstr "Medijske datoteke"
+
+#: tfrmmain.mnuvideoaspectratio.caption
+msgid "Aspect ratio"
+msgstr "Razmerje stranic"
+
+#: tfrmmain.mnuvideoaudiofilters.caption
+msgctxt "tfrmmain.mnuvideoaudiofilters.caption"
+msgid "Audio filters"
+msgstr "Zvočni filtri"
+
+#: tfrmmain.mnuvideoaudiostream.caption
+#, fuzzy
+msgid "Audio stream"
+msgstr " Samo prvi zvočni tok bo uporabljen\n"
+
+#: tfrmmain.mnuvideoplayback.caption
+msgid "Playback"
+msgstr "Predvajanje"
+
+#: tfrmmain.mnuvideosubtitles.caption
+msgctxt "tfrmmain.mnuvideosubtitles.caption"
+msgid "Subtitles"
+msgstr "Podnapisi"
+
+#: tfrmmain.mnuvideovideofilters.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuvideovideofilters.caption"
+msgid "Video filters"
+msgstr ""
+"Knjižnica za visokokakovostne in zmogljive video filtre. Potrebna je za "
+"omogočanje predogleda in predvajanja s podporo grafičnega procesorja. "
+"Glejte :doc:`prilagoditve predvajanja</getting_started/configure_kdenlive/"
+"configuration_playback>` pod :menuselection:`Meni --> Nastavitve --> "
+"Prilagodi Kdenlive`."
+
+#: tfrmmain.mnuvideovolume.caption
+msgctxt "tfrmmain.mnuvideovolume.caption"
+msgid "Volume"
+msgstr "Glasnost"
+
+#: tfrmmain.mnuview.caption
+msgctxt "tfrmmain.mnuview.caption"
+msgid "View"
+msgstr "Pogled"
+
+#: tfrmmain.mnuviewcolumns.caption
+msgid "Columns"
+msgstr "Stolpci"
+
+#: tfrmmain.mnuviewtoolbareditor.caption
+msgctxt "tfrmmain.mnuviewtoolbareditor.caption"
+msgid "Editor"
+msgstr "Urejevalnik"
+
+#: tfrmmain.mnuviewtoolbarmain.caption
+msgctxt "tfrmmain.mnuviewtoolbarmain.caption"
+msgid "Main"
+msgstr "Glavno"
+
+#: tfrmmain.mnuviewtoolbars.caption
+msgid "Toolbars"
+msgstr "Orodne vrstice"
+
+#: tfrmmain.mnuviewtoolbarvideo.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuviewtoolbarvideo.caption"
+msgid "Media"
+msgstr "Medijske datoteke"
+
+#: tfrmmain.mnuviewtoolbarwaveform.caption
+msgctxt "tfrmmain.mnuviewtoolbarwaveform.caption"
+msgid "Waveform"
+msgstr "Oblika signala"
+
+#: tfrmmain.mnuviewwindows.caption
+#, fuzzy
+msgid "Windows"
+msgstr "Okna"
+
+#: tfrmmain.mnuvstvideo.caption
+#, fuzzy
+msgctxt "tfrmmain.mnuvstvideo.caption"
+msgid "Video"
+msgstr "Video"
+
+#: tfrmmain.mnuworkspacelayout.caption
+msgid "Layouts"
+msgstr "Postavitve"
+
+#: tfrmmain.tedduration.hint
+msgctxt "tfrmmain.tedduration.hint"
+msgid "Duration"
+msgstr "Trajanje"
+
+#: tfrmmain.tedfinal.hint
+#, fuzzy
+msgctxt "tfrmmain.tedfinal.hint"
+msgid "Final time"
+msgstr "Je končni"
+
+#: tfrmmain.tedinitial.hint
+#, fuzzy
+msgctxt "tfrmmain.tedinitial.hint"
+msgid "Initial time"
+msgstr "Začetni ustvarjalec"
+
+#: tfrmmain.tedpause.hint
+msgid "Gap"
+msgstr "Vrzel"
+
+#: tfrmmodifyselection.btnapply.caption
+msgctxt "tfrmmodifyselection.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmmodifyselection.btnclose.caption
+msgctxt "tfrmmodifyselection.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmmodifyselection.caption
+#, fuzzy
+msgid "Modify selection"
+msgstr ""
+"Označite del risbe, ki ga želite obdelati. Na voljo so dodatne funkcije, ki "
+"omogočajo dodajanje in odstranjevanje iz izbora. Izbor lahko dodatno "
+"spremenite s operjanjem in inverzijo. Izbor lahko obarvate z masko za "
+"globalni izbor."
+
+#: tfrmmodifyselection.rbnaddtocurrentselection.caption
+#, fuzzy
+msgid "Add to current selection"
+msgstr "Dod&aj trenutnemu izboru"
+
+#: tfrmmodifyselection.rbnnewselection.caption
+msgid "New selection"
+msgstr "Nov izbor"
+
+#: tfrmmodifyselection.rbnsubtractfromcurrentselection.caption
+#, fuzzy
+msgid "Subtract from current selection"
+msgstr "Odštej od trenutnega izbora"
+
+#: tfrmmultiplereplace.btnapply.caption
+msgctxt "tfrmmultiplereplace.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmmultiplereplace.btnclose.caption
+msgctxt "tfrmmultiplereplace.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmmultiplereplace.btnminus.caption
+msgctxt "tfrmmultiplereplace.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmmultiplereplace.btnplus.caption
+msgctxt "tfrmmultiplereplace.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmmultiplereplace.caption
+#, fuzzy
+msgid "Multiple replace"
+msgstr "Zamenjaj"
+
+#: tfrmmultiplereplace.chkre.caption
+msgid "Regular expression"
+msgstr "Logični izraz"
+
+#: tfrmmultiplereplace.lblfind.caption
+msgid "Find:"
+msgstr "Najdi:"
+
+#: tfrmmultiplereplace.lblreplace.caption
+msgctxt "tfrmmultiplereplace.lblreplace.caption"
+msgid "Replace with:"
+msgstr "Zamenjaj z:"
+
+#: tfrmpauses.btnapply.caption
+msgctxt "tfrmpauses.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmpauses.btnclose.caption
+msgctxt "tfrmpauses.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmpauses.caption
+#, fuzzy
+msgid "Set gapping"
+msgstr "_Nastavi"
+
+#: tfrmpauses.lblduration.caption
+msgid "Shorten duration of:"
+msgstr "Skrajšaj trajanje:"
+
+#: tfrmpauses.lblgap.caption
+msgid "Value:"
+msgstr "Vrednost:"
+
+#: tfrmpauses.lblscope.caption
+#, fuzzy
+msgctxt "tfrmpauses.lblscope.caption"
+msgid "Scope:"
+msgstr "Področje"
+
+#: tfrmpauses.rbnallthesubtitles.caption
+msgctxt "tfrmpauses.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Vsi vnosi"
+
+#: tfrmpauses.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmpauses.rbnfromtheselectedsubtitle.caption"
+msgid "From the selected entry"
+msgstr "Od izbranega vnosa"
+
+#: tfrmpauses.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmpauses.rbnonlyselectedsubtitles.caption"
+msgid "Selected entries"
+msgstr "Izbrani vnosi"
+
+#: tfrmpauses.rdobothentries.caption
+#, fuzzy
+msgid "Both entries equally"
+msgstr "Vnosi"
+
+#: tfrmpauses.rdoentrywithlesscps.caption
+#, fuzzy
+msgid "Entry with less CPS"
+msgstr "Intenzivnost (cps)"
+
+#: tfrmpauses.rdofirstentry.caption
+msgid "First entry only"
+msgstr " Samo prvi vnos"
+
+#: tfrmpauses.rdosecondentry.caption
+msgid "Second entry only"
+msgstr "Samo drugi vnos"
+
+#: tfrmqualitycheck.btnclose.caption
+msgctxt "tfrmqualitycheck.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmqualitycheck.caption
+msgid "Quality check"
+msgstr "Preverjanje kakovosti"
+
+#: tfrmqualitycheck.lblrules.caption
+msgid "Rules"
+msgstr "Pravila"
+
+#: tfrmrestorebackup.btnclose.caption
+msgctxt "tfrmrestorebackup.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmrestorebackup.btnrestore.caption
+msgctxt "tfrmrestorebackup.btnrestore.caption"
+msgid "Restore"
+msgstr "Obnovi"
+
+#: tfrmrestorebackup.caption
+msgid "Restore backup"
+msgstr "Obnovi varnostno kopijo"
+
+#: tfrmroundtime.btnapply.caption
+msgctxt "tfrmroundtime.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmroundtime.btnclose.caption
+msgctxt "tfrmroundtime.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmroundtime.caption
+msgid "Round times"
+msgstr "Zaokroži čase"
+
+#: tfrmroundtime.lblscope.caption
+#, fuzzy
+msgctxt "tfrmroundtime.lblscope.caption"
+msgid "Scope:"
+msgstr "Področje"
+
+#: tfrmroundtime.rbnallthesubtitles.caption
+msgctxt "tfrmroundtime.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Vsi vnosi"
+
+#: tfrmroundtime.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmroundtime.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Od izbranega vnosa"
+
+#: tfrmroundtime.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmroundtime.rbnonlyselectedsubtitles.caption"
+msgid "Selected entries"
+msgstr "Izbrani vnosi"
+
+#: tfrmroundtime.rdofps.caption
+#, fuzzy
+msgid "Using FPS"
+msgstr "Sličic na sekundo:"
+
+#: tfrmroundtime.rdomilliseconds.caption
+#, fuzzy
+msgid "Using Milliseconds"
+msgstr "milisekunde"
+
+#: tfrmsettings.btnclose.caption
+msgctxt "tfrmsettings.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmsettings.btnfasterwhisper.caption
+msgctxt "tfrmsettings.btnfasterwhisper.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnffmpeg.caption
+msgctxt "tfrmsettings.btnffmpeg.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnminus.caption
+msgctxt "tfrmsettings.btnminus.caption"
+msgid "-"
+msgstr "-"
+
+#: tfrmsettings.btnplus.caption
+msgctxt "tfrmsettings.btnplus.caption"
+msgid "+"
+msgstr "+"
+
+#: tfrmsettings.btnprofile.caption
+msgctxt "tfrmsettings.btnprofile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnscenedetect.caption
+msgctxt "tfrmsettings.btnscenedetect.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnshortcutapply.caption
+msgctxt "tfrmsettings.btnshortcutapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmsettings.btnshortcutsave.caption
+msgid "Save as..."
+msgstr "Shrani kot ..."
+
+#: tfrmsettings.btntesseract.caption
+msgctxt "tfrmsettings.btntesseract.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnwhispercpp.caption
+msgctxt "tfrmsettings.btnwhispercpp.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.btnytdlp.caption
+msgctxt "tfrmsettings.btnytdlp.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmsettings.caption
+msgid "Settings"
+msgstr "Nastavitve"
+
+#: tfrmsettings.chkautoplay.caption
+#, fuzzy
+msgid "Autoplay on media load"
+msgstr "Samodejno predvajanje predstavitev"
+
+#: tfrmsettings.chkdotsonsplit.caption
+msgctxt "tfrmsettings.chkdotsonsplit.caption"
+msgid "Add '...' on split subtitle"
+msgstr "Dodaj »…« pri deljenih podnaslovih"
+
+#: tfrmsettings.chkdrawerrors.caption
+msgid "Show errors in list"
+msgstr "Pokaži napake na seznamu"
+
+#: tfrmsettings.chkdrawtags.caption
+#, fuzzy
+msgid "Interpret tags in list"
+msgstr "Dodajanje, odstranjevanje in izpisovanje oznak"
+
+#: tfrmsettings.chkdrawwaveformgap.caption
+msgid "Show gap in timeline"
+msgstr "Pokaži vrzel na časovnici"
+
+#: tfrmsettings.chkpromptfordeletesubtitles.caption
+#, fuzzy
+msgid "Prompt when deleting subtitles"
+msgstr "Opozori ob brisanju sporočil v iskalni mapi"
+
+#: tfrmsettings.chkpromptforinputencoding.caption
+#, fuzzy
+msgid "Prompt for Encoding before loading a file"
+msgstr "_Opozori pred označevanjem sporočilo kot vsiljena pošta"
+
+#: tfrmsettings.chkpromptforinputfps.caption
+#, fuzzy
+msgid "Prompt for FPS before loading a file"
+msgstr "_Opozori pred označevanjem sporočilo kot vsiljena pošta"
+
+#: tfrmsettings.chkpromptforsavewitherrors.caption
+#, fuzzy
+msgid "Prompt when saving file with errors"
+msgstr "Pri odpiranju projektne datoteke (%1) so bile odkrite napake"
+
+#: tfrmsettings.chkshowcpsbar.caption
+#, fuzzy
+msgid "Show CPS bar"
+msgstr "Intenzivnost (cps)"
+
+#: tfrmsettings.chkshowsplashwindow.caption
+msgid "Show splash window"
+msgstr "Pokaži začetni zaslon"
+
+#: tfrmsettings.chksubtitlehandlebympv.caption
+#, fuzzy
+msgid "mpv handles subtitles for preview"
+msgstr "Podnapisi"
+
+#: tfrmsettings.chkusehwdec.caption
+#, fuzzy
+msgid "Use hardware video decoding"
+msgstr "Omogoči dekodiranje s strojno opremo: %1"
+
+#: tfrmsettings.chkuseownfiledialog.caption
+#, fuzzy
+msgid "Use Tero file dialog"
+msgstr "Pogovorno okno izbirnika datotek"
+
+#: tfrmsettings.chkwritebom.caption
+#, fuzzy
+msgid "Write BOM on save"
+msgstr "Dokument CycloneDX BOM"
+
+#: tfrmsettings.lbladditionalmpvoptions.caption
+#, fuzzy
+msgid "Additional mpv options"
+msgstr "Dodatne možnosti"
+
+#: tfrmsettings.lblapi_tts.caption
+#, fuzzy
+msgid "ElevenLabs API key"
+msgstr "Brskalnik API"
+
+#: tfrmsettings.lblautobackup.caption
+#, fuzzy
+msgid "Auto-backup every (minutes)"
+msgstr "minut"
+
+#: tfrmsettings.lblchaining.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblchaining.caption"
+msgid "Chaining (frames)"
+msgstr "Sličice"
+
+#: tfrmsettings.lblcpl.caption
+msgctxt "tfrmsettings.lblcpl.caption"
+msgid "Characters per line"
+msgstr "Znaki na vrstico"
+
+#: tfrmsettings.lblcps.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblcps.caption"
+msgid "Characters per second"
+msgstr "Znaki na vrstico"
+
+#: tfrmsettings.lblcpsstrategy.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblcpsstrategy.caption"
+msgid "Chars excluded from CPS count"
+msgstr "Ni izključenih predmetov iz varnostne kopije"
+
+#: tfrmsettings.lbldefaultfileencoding.caption
+#, fuzzy
+msgid "Default file encoding"
+msgstr "Privzet nabor znakov"
+
+#: tfrmsettings.lbldefaultfileformat.caption
+#, fuzzy
+msgid "Default file format"
+msgstr ""
+"**OpenOffice.org XML**, privzeta vrsta datoteke, ki jo uporablja zbirka, so "
+"prispevali konzorciju OASIS - ta se je kasneje razvila v **[Open Document "
+"Format (ODF)](https://www.libreoffice.org/privacy-policy/)**"
+
+#: tfrmsettings.lbldefaultframerate.caption
+#, fuzzy
+msgid "Default input frame rate"
+msgstr "Hitrost sličic"
+
+#: tfrmsettings.lbldialogsegmentsdetectionthreshold.caption
+#, fuzzy
+msgid "Dialogue segments detection threshold (rms)"
+msgstr "Prag pri zaznavanju sprememb prizorov."
+
+#: tfrmsettings.lblfasterwhisper.caption
+#, fuzzy
+msgid "Faster-Whisper"
+msgstr "Hitreje"
+
+#: tfrmsettings.lblffmpeg.caption
+msgid "FFmpeg"
+msgstr "FFmpeg"
+
+#: tfrmsettings.lblframestep.caption
+msgid "Frame step"
+msgstr "Korak sličice"
+
+#: tfrmsettings.lbllanguage.caption
+msgctxt "tfrmsettings.lbllanguage.caption"
+msgid "Language"
+msgstr "Jezik"
+
+#: tfrmsettings.lbllistfontsize.caption
+#, fuzzy
+msgid "List font size"
+msgstr "Velikost pisave"
+
+#: tfrmsettings.lbllistmode.caption
+#, fuzzy
+msgctxt "tfrmsettings.lbllistmode.caption"
+msgid "List mode"
+msgstr "napaka nastavljanja načina seznama ključa"
+
+#: tfrmsettings.lblmaxdurationms.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblmaxdurationms.caption"
+msgid "Max. duration (ms)"
+msgstr "Trajanje: %.0lf ms"
+
+#: tfrmsettings.lblmaxlinecount.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblmaxlinecount.caption"
+msgid "Max. line count"
+msgstr "Število vzorcev pri najv. hitrosti:"
+
+#: tfrmsettings.lblmindurationms.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblmindurationms.caption"
+msgid "Min. duration / per word (ms)"
+msgstr "Trajanje: %.0lf ms"
+
+#: tfrmsettings.lblnewsubtitlems.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblnewsubtitlems.caption"
+msgid "New subtitle (ms)"
+msgstr "ms"
+
+#: tfrmsettings.lblprofile.caption
+msgid "Profile"
+msgstr "Profil"
+
+#: tfrmsettings.lblprohibitedchars.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblprohibitedchars.caption"
+msgid "Prohibited characters"
+msgstr "znakih"
+
+#: tfrmsettings.lblrepeatablechars.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblrepeatablechars.caption"
+msgid "Repeatable characters"
+msgstr "Dejanje, ki naj bo ovirano (se lahko ponavlja)"
+
+#: tfrmsettings.lblscenedetect.caption
+msgid "PySceneDetect"
+msgstr "PySceneDetect"
+
+#: tfrmsettings.lblscsnaparea.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblscsnaparea.caption"
+msgid "Shot change snap / threshold (frames)"
+msgstr "Določite prag spremembe prizora"
+
+#: tfrmsettings.lblscsnapincues.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblscsnapincues.caption"
+msgid "Snap in cues after SC (frames)"
+msgstr "Vstavi N zadržanih sličic za vsako ključno sličico"
+
+#: tfrmsettings.lblscsnapoutcues.caption
+msgctxt "tfrmsettings.lblscsnapoutcues.caption"
+msgid "Snap out cues before SC (frames)"
+msgstr ""
+
+#: tfrmsettings.lblseektime.caption
+#, fuzzy
+msgid "Seek time (ms)"
+msgstr "Časovno okno (ms)"
+
+#: tfrmsettings.lblshifttimems.caption
+#, fuzzy
+msgid "Shift time (ms)"
+msgstr "Časovno okno (ms)"
+
+#: tfrmsettings.lblshortcut.caption
+msgid "Shortcut"
+msgstr "Bližnjica"
+
+#: tfrmsettings.lblshortcutcat.caption
+msgid "Category"
+msgstr "Kategorija"
+
+#: tfrmsettings.lblshortcutpreset.caption
+msgid "Preset"
+msgstr "Prednastavitev"
+
+#: tfrmsettings.lblsubbackground.caption
+msgctxt "tfrmsettings.lblsubbackground.caption"
+msgid "Background"
+msgstr "Ozadje"
+
+#: tfrmsettings.lblsubborder.caption
+msgid "Border"
+msgstr "Obroba"
+
+#: tfrmsettings.lblsubcolor.caption
+msgctxt "tfrmsettings.lblsubcolor.caption"
+msgid "Color"
+msgstr "Barva"
+
+#: tfrmsettings.lblsubshadow.caption
+msgid "Shadow"
+msgstr "Senca"
+
+#: tfrmsettings.lblsubsize.caption
+msgctxt "tfrmsettings.lblsubsize.caption"
+msgid "Size"
+msgstr "Velikost"
+
+#: tfrmsettings.lblsubtitlepausems.caption
+#, fuzzy
+msgctxt "tfrmsettings.lblsubtitlepausems.caption"
+msgid "Min. gap"
+msgstr "Najm. vrzel"
+
+#: tfrmsettings.lblsubtitles.caption
+msgctxt "tfrmsettings.lblsubtitles.caption"
+msgid "Subtitles"
+msgstr "Podnaslovi"
+
+#: tfrmsettings.lbltesseract.caption
+msgid "Tesseract"
+msgstr "Tesseract"
+
+#: tfrmsettings.lbltextboxfontsize.caption
+msgid "Text box font size"
+msgstr "Velikost pisave za polje besedila"
+
+#: tfrmsettings.lbltheme.caption
+msgid "Theme"
+msgstr "Tema"
+
+#: tfrmsettings.lbltimecodemode.caption
+msgid "Time code mode"
+msgstr "Način časovne kode"
+
+#: tfrmsettings.lblwavecolor.caption
+msgctxt "tfrmsettings.lblwavecolor.caption"
+msgid "Color"
+msgstr "Barva"
+
+#: tfrmsettings.lblwaveentry.caption
+msgctxt "tfrmsettings.lblwaveentry.caption"
+msgid "Entry"
+msgstr "Vnos"
+
+#: tfrmsettings.lblwaveform.caption
+msgctxt "tfrmsettings.lblwaveform.caption"
+msgid "Waveform"
+msgstr "Oblika signala"
+
+#: tfrmsettings.lblwebreference.caption
+#, fuzzy
+msgid "Web reference"
+msgstr "Na spletu"
+
+#: tfrmsettings.lblwhispercpp.caption
+msgid "Whisper.cpp"
+msgstr "Whisper.cpp"
+
+#: tfrmsettings.lblwpm.caption
+msgctxt "tfrmsettings.lblwpm.caption"
+msgid "Words per minute"
+msgstr "Besed na minuto"
+
+#: tfrmsettings.lblytdlp.caption
+msgid "YT-DLP"
+msgstr "YT-DLP"
+
+#: tfrmsettings.lblzerotodisable.caption
+#, fuzzy
+msgid "(0 to disable)"
+msgstr ""
+"Čas v milisekundah, po katerih se mora odjemalec odzvati na zahtevo ping, "
+"preden sistem sporoči napako odziva. Vrednost 0 povsem omogoči preverjanje "
+"stanja povezave."
+
+#: tfrmshifttimes.btnapply.caption
+msgctxt "tfrmshifttimes.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmshifttimes.btnclose.caption
+msgctxt "tfrmshifttimes.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmshifttimes.caption
+#, fuzzy
+msgid "Shift times"
+msgstr "_Časi"
+
+#: tfrmshifttimes.cbooffset.text
+msgctxt "tfrmshifttimes.cbooffset.text"
+msgid "+"
+msgstr "+"
+
+#: tfrmshifttimes.lbloffset.caption
+msgctxt "tfrmshifttimes.lbloffset.caption"
+msgid "Offset"
+msgstr "Odmik"
+
+#: tfrmshifttimes.lblscope.caption
+#, fuzzy
+msgctxt "tfrmshifttimes.lblscope.caption"
+msgid "Scope:"
+msgstr "Področje"
+
+#: tfrmshifttimes.rbnabsolute.caption
+msgid "Absolute"
+msgstr "Absolutno"
+
+#: tfrmshifttimes.rbnallthesubtitles.caption
+msgctxt "tfrmshifttimes.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Vsi vnosi"
+
+#: tfrmshifttimes.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmshifttimes.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Od izbranega vnosa"
+
+#: tfrmshifttimes.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmshifttimes.rbnonlyselectedsubtitles.caption"
+msgid "Selected entries"
+msgstr "Izbrani vnosi"
+
+#: tfrmshifttimes.rbnrelative.caption
+msgid "Relative"
+msgstr "Relativno"
+
+#: tfrmshotchanges.btnapply.caption
+msgctxt "tfrmshotchanges.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmshotchanges.btnclose.caption
+msgctxt "tfrmshotchanges.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmshotchanges.btndetect.caption
+msgctxt "tfrmshotchanges.btndetect.caption"
+msgid "Detect"
+msgstr "Zaznaj"
+
+#: tfrmshotchanges.btnexport.caption
+msgctxt "tfrmshotchanges.btnexport.caption"
+msgid "Export..."
+msgstr "Izvozi ..."
+
+#: tfrmshotchanges.btnimport.caption
+msgctxt "tfrmshotchanges.btnimport.caption"
+msgid "Import..."
+msgstr "Uvozi …"
+
+#: tfrmshotchanges.caption
+#, fuzzy
+msgctxt "tfrmshotchanges.caption"
+msgid "Shot changes"
+msgstr "Spremembe"
+
+#: tfrmshotchanges.cbooffset.text
+msgctxt "tfrmshotchanges.cbooffset.text"
+msgid "+"
+msgstr "+"
+
+#: tfrmshotchanges.lbldetectapp.caption
+#, fuzzy
+msgid "App to detect"
+msgstr "Zaznavanje obraza"
+
+#: tfrmshotchanges.lbloffset.caption
+msgctxt "tfrmshotchanges.lbloffset.caption"
+msgid "Offset"
+msgstr "Odmik"
+
+#: tfrmshotchanges.lblsensitivity.caption
+msgid "Detection sensitivity"
+msgstr "Občutljivost razpoznave"
+
+#: tfrmshotchanges.lbltimecodein.caption
+msgid "Time code for import"
+msgstr "Časovna koda za uvoz"
+
+#: tfrmshotchanges.lbltimecodeout.caption
+msgid "Time code for export"
+msgstr "Časovna koda za izvoz"
+
+#: tfrmspellcheck.btnadd.caption
+msgctxt "tfrmspellcheck.btnadd.caption"
+msgid "Add"
+msgstr "Dodaj"
+
+#: tfrmspellcheck.btnchange.caption
+msgctxt "tfrmspellcheck.btnchange.caption"
+msgid "Change"
+msgstr "Spremeni"
+
+#: tfrmspellcheck.btnchangeall.caption
+msgctxt "tfrmspellcheck.btnchangeall.caption"
+msgid "Change all"
+msgstr "Spremeni vse"
+
+#: tfrmspellcheck.btnclose.caption
+msgctxt "tfrmspellcheck.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmspellcheck.btnskip.caption
+msgctxt "tfrmspellcheck.btnskip.caption"
+msgid "Skip"
+msgstr "Preskoči"
+
+#: tfrmspellcheck.btnskipall.caption
+msgctxt "tfrmspellcheck.btnskipall.caption"
+msgid "Skip all"
+msgstr "Preskoči vse"
+
+#: tfrmspellcheck.caption
+msgid "Spell check"
+msgstr "Preverjanje črkovanja"
+
+#: tfrmspellcheck.lbldictionary.caption
+msgctxt "tfrmspellcheck.lbldictionary.caption"
+msgid "Dictionary"
+msgstr "Slovar"
+
+#: tfrmspellcheck.lblnotfound.caption
+msgid "Not found"
+msgstr "Ni zadetkov"
+
+#: tfrmspellcheck.lblsource.caption
+#, fuzzy
+msgid "Source"
+msgstr "Vir"
+
+#: tfrmspellcheck.lblsuggestions.caption
+msgid "Suggestions"
+msgstr "Predlogi"
+
+#: tfrmstatistics.btnclose.caption
+msgctxt "tfrmstatistics.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmstatistics.btnexport.caption
+msgctxt "tfrmstatistics.btnexport.caption"
+msgid "Export..."
+msgstr "Izvozi ..."
+
+#: tfrmstatistics.caption
+msgid "Statistics"
+msgstr "Statistika"
+
+#: tfrmstreamextractor.btnclose.caption
+msgctxt "tfrmstreamextractor.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmstreamextractor.btnextract.caption
+#, fuzzy
+msgid "Extract"
+msgstr "Razširi"
+
+#: tfrmstreamextractor.btnfile.caption
+msgctxt "tfrmstreamextractor.btnfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmstreamextractor.btnfolder.caption
+msgctxt "tfrmstreamextractor.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmstreamextractor.caption
+#, fuzzy
+msgid "Stream extractor"
+msgstr "Tok"
+
+#: tfrmstreamextractor.lblfile.caption
+msgctxt "tfrmstreamextractor.lblfile.caption"
+msgid "File"
+msgstr "Datoteka"
+
+#: tfrmstreamextractor.lblfolder.caption
+msgctxt "tfrmstreamextractor.lblfolder.caption"
+msgid "Output folder"
+msgstr "Izhodna mapa"
+
+#: tfrmtbx.btnclose.caption
+msgctxt "tfrmtbx.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmtbx.caption
+msgctxt "tfrmtbx.caption"
+msgid "Terminology"
+msgstr "Terminologija"
+
+#: tfrmtbxedit.btnadd.caption
+msgctxt "tfrmtbxedit.btnadd.caption"
+msgid "Add"
+msgstr "Dodaj"
+
+#: tfrmtbxedit.btnclose.caption
+msgctxt "tfrmtbxedit.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmtbxedit.caption
+msgctxt "tfrmtbxedit.caption"
+msgid "Terminology"
+msgstr "Terminologija"
+
+#: tfrmtbxedit.lblnotes.caption
+msgid "Notes"
+msgstr "Opombe"
+
+#: tfrmtbxedit.lbloriginal.caption
+msgctxt "tfrmtbxedit.lbloriginal.caption"
+msgid "Original"
+msgstr "Izvirnik"
+
+#: tfrmtbxedit.lbltranslated.caption
+msgctxt "tfrmtbxedit.lbltranslated.caption"
+msgid "Translated"
+msgstr "Prevedeno"
+
+#: tfrmtbxlist.btnclose.caption
+msgctxt "tfrmtbxlist.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmtbxlist.btncopy.caption
+msgctxt "tfrmtbxlist.btncopy.caption"
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: tfrmtbxlist.caption
+msgctxt "tfrmtbxlist.caption"
+msgid "Terminology"
+msgstr "Terminologija"
+
+#: tfrmtbxlist.lblfind.caption
+msgctxt "tfrmtbxlist.lblfind.caption"
+msgid "Find"
+msgstr "Najdi"
+
+#: tfrmtbxlist.lbltotal.caption
+msgctxt "tfrmtbxlist.lbltotal.caption"
+msgid "Total:"
+msgstr "Skupaj:"
+
+#: tfrmtbxsettings.btnapply.caption
+msgctxt "tfrmtbxsettings.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmtbxsettings.btnclose.caption
+msgctxt "tfrmtbxsettings.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmtbxsettings.btnopenfile.caption
+msgctxt "tfrmtbxsettings.btnopenfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtbxsettings.caption
+msgctxt "tfrmtbxsettings.caption"
+msgid "Terminology settings"
+msgstr "Nastavitve terminologije"
+
+#: tfrmtbxsettings.lblfilename.caption
+msgctxt "tfrmtbxsettings.lblfilename.caption"
+msgid "Filename"
+msgstr "Ime datoteke"
+
+#: tfrmtbxsettings.lblsourcelang.caption
+#, fuzzy
+msgctxt "tfrmtbxsettings.lblsourcelang.caption"
+msgid "Source language"
+msgstr ""
+"Preoblikuje izvorno kodo pri shranjevanju na disk. Zahteva registriran "
+"formatnik za izvorni jezik."
+
+#: tfrmtbxsettings.lbltranslang.caption
+msgctxt "tfrmtbxsettings.lbltranslang.caption"
+msgid "Translation language"
+msgstr "Jezik prevoda"
+
+#: tfrmtimeexpander.btnapply.caption
+msgctxt "tfrmtimeexpander.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmtimeexpander.btnclose.caption
+msgctxt "tfrmtimeexpander.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmtimeexpander.caption
+#, fuzzy
+msgid "Time expander/reducer"
+msgstr "Razširjevalnik"
+
+#: tfrmtimeexpander.chkduration.caption
+#, fuzzy
+msgid "Only if duration is longer than"
+msgstr ""
+"Trajanje nadomestnega posnetka je daljše od trajanja izvornega posnetka"
+
+#: tfrmtimeexpander.chksubtitle.caption
+#, fuzzy
+msgid "Only if subtitle is longer than"
+msgstr "Poudari čase odmora, ki so daljši od določene vrednosti."
+
+#: tfrmtimeexpander.lblchars.caption
+msgid "characters"
+msgstr "znakih"
+
+#: tfrmtimeexpander.lblms.caption
+msgctxt "tfrmtimeexpander.lblms.caption"
+msgid "ms"
+msgstr "ms"
+
+#: tfrmtimeexpander.lblms1.caption
+msgctxt "tfrmtimeexpander.lblms1.caption"
+msgid "ms"
+msgstr "ms"
+
+#: tfrmtimeexpander.lblscope.caption
+#, fuzzy
+msgctxt "tfrmtimeexpander.lblscope.caption"
+msgid "Scope:"
+msgstr "Področje"
+
+#: tfrmtimeexpander.rbnallthesubtitles.caption
+msgctxt "tfrmtimeexpander.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Vsi vnosi"
+
+#: tfrmtimeexpander.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmtimeexpander.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Od izbranega vnosa"
+
+#: tfrmtimeexpander.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmtimeexpander.rbnonlyselectedsubtitles.caption"
+msgid "Selected entries"
+msgstr "Izbrani vnosi"
+
+#: tfrmtranslate.btnclose.caption
+msgctxt "tfrmtranslate.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmtranslate.btntranslate.caption
+msgctxt "tfrmtranslate.btntranslate.caption"
+msgid "Translate"
+msgstr "Prevedi"
+
+#: tfrmtranslate.caption
+msgctxt "tfrmtranslate.caption"
+msgid "Translate"
+msgstr "Prevedi"
+
+#: tfrmtranslate.lblinput.caption
+msgid "Input:"
+msgstr "Vhod:"
+
+#: tfrmtranslate.lbloutput.caption
+msgctxt "tfrmtranslate.lbloutput.caption"
+msgid "Output:"
+msgstr "Izhod:"
+
+#: tfrmtranslate.lblscope.caption
+#, fuzzy
+msgctxt "tfrmtranslate.lblscope.caption"
+msgid "Scope:"
+msgstr "Področje"
+
+#: tfrmtranslate.lblsourcelanguage.caption
+msgid "Source language:"
+msgstr "Izvorni jezik:"
+
+#: tfrmtranslate.lbltranslationlanguage.caption
+msgid "Translation language:"
+msgstr "Jezik prevoda:"
+
+#: tfrmtranslate.rbnallthesubtitles.caption
+msgctxt "tfrmtranslate.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Vsi vnosi"
+
+#: tfrmtranslate.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmtranslate.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Od izbranega vnosa"
+
+#: tfrmtranslate.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmtranslate.rbnonlyselectedsubtitles.caption"
+msgid "Selected entries"
+msgstr "Izbrani vnosi"
+
+#: tfrmtranslationmemory.btnclose.caption
+msgctxt "tfrmtranslationmemory.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmtranslationmemory.btncopy.caption
+msgctxt "tfrmtranslationmemory.btncopy.caption"
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: tfrmtranslationmemory.btnuse.caption
+msgctxt "tfrmtranslationmemory.btnuse.caption"
+msgid "Use"
+msgstr "Uporabi"
+
+#: tfrmtranslationmemory.btnvalidate.caption
+#, fuzzy
+msgctxt "tfrmtranslationmemory.btnvalidate.caption"
+msgid "Validate"
+msgstr "Preverjanje projekta ni uspelo"
+
+#: tfrmtranslationmemory.caption
+msgctxt "tfrmtranslationmemory.caption"
+msgid "Translation memory"
+msgstr "Pomnilnik prevodov"
+
+#: tfrmtranslationmemorylist.btnclose.caption
+msgctxt "tfrmtranslationmemorylist.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmtranslationmemorylist.btncopy.caption
+msgctxt "tfrmtranslationmemorylist.btncopy.caption"
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: tfrmtranslationmemorylist.caption
+msgctxt "tfrmtranslationmemorylist.caption"
+msgid "Translation memory"
+msgstr "Pomnilnik prevodov"
+
+#: tfrmtranslationmemorylist.lblfind.caption
+msgctxt "tfrmtranslationmemorylist.lblfind.caption"
+msgid "Find"
+msgstr "Najdi"
+
+#: tfrmtranslationmemorylist.lbltotal.caption
+msgctxt "tfrmtranslationmemorylist.lbltotal.caption"
+msgid "Total:"
+msgstr "Skupaj:"
+
+#: tfrmtranslationmemorysettings.btnapply.caption
+msgctxt "tfrmtranslationmemorysettings.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmtranslationmemorysettings.btnclose.caption
+msgctxt "tfrmtranslationmemorysettings.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmtranslationmemorysettings.btnopenfile.caption
+msgctxt "tfrmtranslationmemorysettings.btnopenfile.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtranslationmemorysettings.caption
+msgctxt "tfrmtranslationmemorysettings.caption"
+msgid "Translation memory settings"
+msgstr "Nastavitve pomnilnika prevodov"
+
+#: tfrmtranslationmemorysettings.lblfilename.caption
+msgctxt "tfrmtranslationmemorysettings.lblfilename.caption"
+msgid "File name"
+msgstr "Ime datoteke"
+
+#: tfrmtranslationmemorysettings.lblsourcelang.caption
+msgctxt "tfrmtranslationmemorysettings.lblsourcelang.caption"
+msgid "Source language"
+msgstr "Izvorni jezik"
+
+#: tfrmtranslationmemorysettings.lbltranslang.caption
+msgctxt "tfrmtranslationmemorysettings.lbltranslang.caption"
+msgid "Translation language"
+msgstr "Prevodni jezik"
+
+#: tfrmtts.btnclose.caption
+msgctxt "tfrmtts.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmtts.btnfolder.caption
+msgctxt "tfrmtts.btnfolder.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmtts.btngenerate.caption
+msgctxt "tfrmtts.btngenerate.caption"
+msgid "Generate"
+msgstr "Tvori"
+
+#: tfrmtts.btnpreview.caption
+msgid "Preview"
+msgstr "Predogled"
+
+#: tfrmtts.caption
+msgid "Text to speech"
+msgstr "Besedilo v govor"
+
+#: tfrmtts.chkboost.caption
+#, fuzzy
+msgctxt "tfrmtts.chkboost.caption"
+msgid "Speaker boost"
+msgstr "Zvočnik"
+
+#: tfrmtts.lblfolder.caption
+msgid "Folder:"
+msgstr "Mapa:"
+
+#: tfrmtts.lblscope.caption
+#, fuzzy
+msgctxt "tfrmtts.lblscope.caption"
+msgid "Scope:"
+msgstr "Področje"
+
+#: tfrmtts.lblsimilarityboost.caption
+#, fuzzy
+msgctxt "tfrmtts.lblsimilarityboost.caption"
+msgid "Similarity boost %:"
+msgstr "Ojačitev"
+
+#: tfrmtts.lblstability.caption
+#, fuzzy
+msgctxt "tfrmtts.lblstability.caption"
+msgid "Stability %:"
+msgstr ""
+"Posodobite sistem za najnovejše zmožnosti, izboljšano delovanje in večjo "
+"stabilnost."
+
+#: tfrmtts.lblstyle.caption
+#, fuzzy
+msgctxt "tfrmtts.lblstyle.caption"
+msgid "Style exaggeration %:"
+msgstr "Slog"
+
+#: tfrmtts.lblvoice.caption
+msgctxt "tfrmtts.lblvoice.caption"
+msgid "Voice:"
+msgstr "Glas:"
+
+#: tfrmtts.rbnallthesubtitles.caption
+msgctxt "tfrmtts.rbnallthesubtitles.caption"
+msgid "All entries"
+msgstr "Vsi vnosi"
+
+#: tfrmtts.rbnfromtheselectedsubtitle.caption
+msgctxt "tfrmtts.rbnfromtheselectedsubtitle.caption"
+msgid "From selected entry"
+msgstr "Od izbranega vnosa"
+
+#: tfrmtts.rbnonlyselectedsubtitles.caption
+msgctxt "tfrmtts.rbnonlyselectedsubtitles.caption"
+msgid "Selected entries"
+msgstr "Izbrani vnosi"
+
+#: tfrmvideodubbing.btnbackgroundmusic.caption
+msgctxt "tfrmvideodubbing.btnbackgroundmusic.caption"
+msgid "..."
+msgstr "..."
+
+#: tfrmvideodubbing.btnclose.caption
+msgctxt "tfrmvideodubbing.btnclose.caption"
+msgid "Close"
+msgstr "Zapri "
+
+#: tfrmvideodubbing.btngenerate.caption
+msgctxt "tfrmvideodubbing.btngenerate.caption"
+msgid "Generate"
+msgstr "Tvori"
+
+#: tfrmvideodubbing.caption
+#, fuzzy
+msgid "Video dubbing"
+msgstr "Video"
+
+#: tfrmvideodubbing.chkbackgroundmusic.caption
+msgid "Background music"
+msgstr "Glasba v ozadju"
+
+#: tfrmvideodubbing.chkboost.caption
+#, fuzzy
+msgctxt "tfrmvideodubbing.chkboost.caption"
+msgid "Speaker boost"
+msgstr "Zvočnik"
+
+#: tfrmvideodubbing.chkglobalvoice.caption
+#, fuzzy
+msgid "Global voice"
+msgstr "Splošne nastavitve glasu"
+
+#: tfrmvideodubbing.chksubtitletrack.caption
+msgid "Subtitle track"
+msgstr "Steza podnapisov"
+
+#: tfrmvideodubbing.lblsimilarityboost.caption
+#, fuzzy
+msgctxt "tfrmvideodubbing.lblsimilarityboost.caption"
+msgid "Similarity boost %:"
+msgstr "Ojačitev"
+
+#: tfrmvideodubbing.lblstability.caption
+#, fuzzy
+msgctxt "tfrmvideodubbing.lblstability.caption"
+msgid "Stability %:"
+msgstr ""
+"Posodobite sistem za najnovejše zmožnosti, izboljšano delovanje in večjo "
+"stabilnost."
+
+#: tfrmvideodubbing.lblstyle.caption
+#, fuzzy
+msgctxt "tfrmvideodubbing.lblstyle.caption"
+msgid "Style exaggeration %:"
+msgstr "Slog"
+
+#: tfrmvideodubbing.lblvoice.caption
+msgctxt "tfrmvideodubbing.lblvoice.caption"
+msgid "Voice:"
+msgstr "Glas:"
+
+#: tfrmvideodubbing.lblvolume.caption
+msgid "Volume %:"
+msgstr "Glasnost v %:"
+
+#: tfrmvideooffset.btnapply.caption
+msgctxt "tfrmvideooffset.btnapply.caption"
+msgid "Apply"
+msgstr "Uveljavi"
+
+#: tfrmvideooffset.btnclose.caption
+msgctxt "tfrmvideooffset.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmvideooffset.caption
+#, fuzzy
+msgid "Video offset"
+msgstr "Odmik"
+
+#: tfrmwaveextractor.btnclose.caption
+msgctxt "tfrmwaveextractor.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmwaveextractor.btnextract.caption
+#, fuzzy
+msgctxt "tfrmwaveextractor.btnextract.caption"
+msgid "Extract..."
+msgstr "Izvleci"
+
+#: tfrmwaveextractor.caption
+#, fuzzy
+msgid "Waveform extractor"
+msgstr "Ekstraktor sličic"
+
+#: tfrmwaveextractor.lbltrack.caption
+msgid "Track:"
+msgstr "Steza:"
+
+#: tfrmwelcome.chkshowonstartup.caption
+#, fuzzy
+msgid "Show on startup"
+msgstr "&Pokaži namige ob zagonu"
+
+#: tfrmwelcome.lblbatchconvert.caption
+msgctxt "tfrmwelcome.lblbatchconvert.caption"
+msgid "Batch convert..."
+msgstr "Paketno pretvori …"
+
+#: tfrmwelcome.lblexit.caption
+msgid "Exit"
+msgstr "Izhod"
+
+#: tfrmwelcome.lblnewsubtitle.caption
+msgid "New subtitle project"
+msgstr "Nov projekt podnapisov"
+
+#: tfrmwelcome.lblnewtranscription.caption
+msgid "New manual transcription"
+msgstr "Nov ročni prevod"
+
+#: tfrmwelcome.lblopenfile.caption
+msgid "Open file..."
+msgstr "Odpri datoteko …"
+
+#: tfrmwelcome.lblrecentfiles.caption
+msgctxt "tfrmwelcome.lblrecentfiles.caption"
+msgid "Recent files"
+msgstr "Nedavne datoteke"
+
+#: tfrmwelcome.lblwelcome.caption
+msgctxt "tfrmwelcome.lblwelcome.caption"
+msgid "Welcome to"
+msgstr "Dobrodošli v"
+
+#: tfrmwizard.btndownload.caption
+msgctxt "tfrmwizard.btndownload.caption"
+msgid "Download"
+msgstr "Prenesi"
+
+#: tfrmwizard.btndownloadfasterwhisper.caption
+msgctxt "tfrmwizard.btndownloadfasterwhisper.caption"
+msgid "Download"
+msgstr "Prenesi"
+
+#: tfrmwizard.btndownloadffmpeg.caption
+msgctxt "tfrmwizard.btndownloadffmpeg.caption"
+msgid "Download"
+msgstr "Prenesi"
+
+#: tfrmwizard.btndownloadwhisper.caption
+msgctxt "tfrmwizard.btndownloadwhisper.caption"
+msgid "Download"
+msgstr "Prenesi"
+
+#: tfrmwizard.btndownloadytdlp.caption
+msgctxt "tfrmwizard.btndownloadytdlp.caption"
+msgid "Download"
+msgstr "Prenesi"
+
+#: tfrmwizard.btnnext.caption
+#, fuzzy
+msgctxt "tfrmwizard.btnnext.caption"
+msgid "Next"
+msgstr "Naslednje"
+
+#: tfrmwizard.btnprevious.caption
+#, fuzzy
+msgid "Back"
+msgstr "Nazaj"
+
+#: tfrmwizard.caption
+#, fuzzy
+msgid "Getting started wizard"
+msgstr "Čarovnik Kako začeti"
+
+#: tfrmwizard.lblchooselayout.caption
+#, fuzzy
+msgid "Choose workspace layout and timecode mode:"
+msgstr "Nalaganje postavitve delovnega prostora"
+
+#: tfrmwizard.lblexperience.caption
+msgid ""
+"In just a few steps, you'll be setup and ready for the best subtitling "
+"experience."
+msgstr ""
+
+#: tfrmwizard.lblfasterwhisper.caption
+#, fuzzy
+msgid "Faster-Whisper:"
+msgstr "Hitreje"
+
+#: tfrmwizard.lblfasterwhisper_hint.caption
+#, fuzzy
+msgctxt "tfrmwizard.lblfasterwhisper_hint.caption"
+msgid "Optional, used for speech recognition."
+msgstr "Zapisnik razpoznavanja govora"
+
+#: tfrmwizard.lblffmpeg.caption
+msgid "FFmpeg:"
+msgstr "FFmpeg:"
+
+#: tfrmwizard.lblffmpeg_hint.caption
+msgid "Optional, used to extract audio and generate video."
+msgstr ""
+"Neobvezno, uporablja se za izluščenje zvoka in ustvarjanje videoposnetka."
+
+#: tfrmwizard.lbllibmpv.caption
+msgid "libmpv: "
+msgstr "libmpv: "
+
+#: tfrmwizard.lbllibmpv_hint.caption
+#, fuzzy
+msgid "Essential, used for playing video."
+msgstr "Predvajanje video datotek"
+
+#: tfrmwizard.lblrequiredfiles.caption
+msgid ""
+"For Tero Subtitler to function properly, the following libraries are "
+"necessary; if they are not found on your system, Tero Subtitler can download "
+"them for you."
+msgstr ""
+
+#: tfrmwizard.lblwelcome.caption
+msgctxt "tfrmwizard.lblwelcome.caption"
+msgid "Welcome to"
+msgstr "Dobrodošli v"
+
+#: tfrmwizard.lblwhisper.caption
+msgid "Whisper.cpp:"
+msgstr "Whisper.cpp:"
+
+#: tfrmwizard.lblwhisper_hint.caption
+#, fuzzy
+msgctxt "tfrmwizard.lblwhisper_hint.caption"
+msgid "Optional, used for speech recognition."
+msgstr "Zapisnik razpoznavanja govora"
+
+#: tfrmwizard.lblytdlp.caption
+msgid "yt-dlp:"
+msgstr "yt-dlp:"
+
+#: tfrmwizard.lblytdlp_hint.caption
+#, fuzzy
+msgid "Optional, used for dowloading from YouTube."
+msgstr "Uporablja se za izbor neobveznega elementa ali funkcije"
+
+#: tfrmwizard.rdolayout0.caption
+#, fuzzy
+msgctxt "tfrmwizard.rdolayout0.caption"
+msgid "Classic"
+msgstr "Klasično"
+
+#: tfrmwizard.rdolayout1.caption
+#, fuzzy
+msgctxt "tfrmwizard.rdolayout1.caption"
+msgid "Inverted"
+msgstr "_Obrnjeno"
+
+#: tfrmwizard.rdolayout2.caption
+#, fuzzy
+msgctxt "tfrmwizard.rdolayout2.caption"
+msgid "Vertical"
+msgstr "Navpično"
