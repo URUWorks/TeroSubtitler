@@ -165,11 +165,11 @@ begin
     for Result in OutDep do
       FindAllFiles(List, ExtractPackage(GetPackage('https://packages.lazarus-ide.org/', Result)), '*.lpk');
     FindAllFiles(List, GetCurrentDir + PathDelim + 'use', '*.lpk');
-    for Result in Dirs do
+    for Result in List do
       AddPackage(Result, true);
     List.Clear;
     OutLog(etDebug, #10'#----------------------------------[GET INTERNAL DEPENDENCIES]--------------------------#'#10);
-    for Result in List do
+    for Result in Dirs do
       FindAllFiles(List, GetCurrentDir + PathDelim + 'TeroSubtitler' + PathDelim + Result, '*.lpk');
     for Result in List do
       AddPackage(Result, false);
