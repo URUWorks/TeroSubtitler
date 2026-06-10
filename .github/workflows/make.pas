@@ -156,7 +156,7 @@ function BuildAll(const OutDep: array of string): string;
 var
   DT: TDateTime;
   List: TStringList;
-  Dirs : array of string = ('common','controls','subtitleapi'); 
+  Dirs : array of string = ('common','subtitleapi','controls'); 
 begin
   DT := Time;
   List :=  TStringList.Create;
