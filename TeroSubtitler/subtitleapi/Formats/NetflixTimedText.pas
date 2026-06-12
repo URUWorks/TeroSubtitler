@@ -1,0 +1,383 @@
+{*
+ * URUWorks Subtitle API
+ *
+ * The contents of this file are used with permission, subject to
+ * the Mozilla Public License Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/2.0.html
+ *
+ * Software distributed under the License is distributed on an
+ * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
+ *
+ * Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *}
+
+unit NetflixTimedText;
+
+// -----------------------------------------------------------------------------
+
+interface
+
+uses
+  Classes, SysUtils, StrUtils, UWSubtitleAPI, UWSystem.TimeUtils,
+  UWSubtitleAPI.Formats, laz2_XMLRead, laz2_DOM; // laz2_XMLWrite;
+
+type
+
+  { TUWNetflixTimedText }
+
+  TUWNetflixTimedText = class(TUWSubtitleCustomFormat)
+  public
+    function Name: String; override;
+    function Format: TUWSubtitleFormats; override;
+    function Extension: String; override;
+    function IsTimeBased: Boolean; override;
+    function HasStyleSupport: Boolean; override;
+    function IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean; override;
+    function LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean; override;
+    function SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean; override;
+  end;
+
+// -----------------------------------------------------------------------------
+
+implementation
+
+uses UWSubtitleAPI.Tags, UWSubtitleAPI.Utils, UWSystem.StrUtils,
+  UWSystem.SysUtils;
+
+// -----------------------------------------------------------------------------
+
+function TUWNetflixTimedText.Name: String;
+begin
+  Result := IndexToName(Integer(Format));
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWNetflixTimedText.Format: TUWSubtitleFormats;
+begin
+  Result := TUWSubtitleFormats.sfNetflixTimedText;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWNetflixTimedText.Extension: String;
+begin
+  Result := '*.dfxp';
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWNetflixTimedText.IsTimeBased: Boolean;
+begin
+  Result := True;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWNetflixTimedText.HasStyleSupport: Boolean;
+begin
+  Result := True;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWNetflixTimedText.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
+begin
+  if (LowerCase(ExtractFileExt(SubtitleFile.FileName)) = '.dfxp')
+    and Contains('<tt xmlns=', SubtitleFile[Row]) then
+    Result := True
+  else
+    Result := False;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWNetflixTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
+
+  function GetTime(const S: String; const aFPS: Double): Integer;
+  begin
+    if AnsiEndsStr('t', S) then // ticks
+      Result := TicksToMSecs(StrToInt64(Copy(S, 1, Length(S)-1)))
+    else if AnsiEndsStr('s', S) then // seconds
+      Result := StrSecsToMSecs(Copy(S, 1, Length(S)-1).Replace(',', '.'))
+    else if TimeInFormat(S, 'hh:mm:ss:ff') or TimeInFormat(S, 'hh:mm:ss;ff') then
+      Result := SMPTEStringToMS(S, aFPS)
+    else
+      Result := StringToTime(S, False, aFPS);
+  end;
+
+var
+  XmlDoc : TXMLDocument;
+  Node, LayoutNode, RegionNode : TDOMNode;
+  Item   : TUWSubtitleItem;
+  RegionMap: TStringList;
+  RegionID, AlignVal, NewText: String;
+  CurBegin, CurEnd: Integer;
+  IsContinuation: Boolean;
+begin
+  Result := False;
+  XmlDoc := NIL;
+  RegionMap := TStringList.Create;
+
+  StringsToXML(XmlDoc, SubtitleFile);
+
+  if Assigned(XmlDoc) then
+    try
+      Node := XMLFindNodeByName(XmlDoc, 'tt');
+      Subtitles.FrameRate := FPS;
+
+      if Assigned(Node) then
+      begin
+        if XMLHasAttribute(Node, 'ttp:frameRate') then
+        begin
+          Subtitles.FrameRate := StrToFloatDef(XMLGetAttrValue(Node, 'ttp:frameRate'), FPS);
+
+          if XMLHasAttribute(Node, 'ttp:frameRateMultiplier') then
+            Subtitles.FrameRate := XMLGetCorrectFPS(Subtitles.FrameRate, XMLGetAttrValue(Node, 'ttp:frameRateMultiplier'));
+        end;
+
+        if XMLHasAttribute(Node, 'ttp:timeBase') then
+        begin
+          if XMLGetAttrValue(Node, 'ttp:timeBase') = 'smpte' then
+            Subtitles.TimeBase := stbSMPTE
+          else
+            Subtitles.TimeBase := stbMedia;
+        end;
+      end;
+
+      // Regiones
+      LayoutNode := XMLFindNodeByName(XmlDoc, 'layout');
+      if Assigned(LayoutNode) then
+      begin
+        RegionNode := LayoutNode.FirstChild;
+        while Assigned(RegionNode) do
+        begin
+          if RegionNode.NodeName = 'region' then
+          begin
+            if XMLHasAttribute(RegionNode, 'xml:id') then
+            begin
+              RegionID := XMLGetAttrValue(RegionNode, 'xml:id');
+
+              if XMLHasAttribute(RegionNode, 'tts:displayAlign') then
+                AlignVal := XMLGetAttrValue(RegionNode, 'tts:displayAlign')
+              else
+                AlignVal := '';
+
+              RegionMap.Values[RegionID] := AlignVal;
+            end;
+          end;
+          RegionNode := RegionNode.NextSibling;
+        end;
+      end;
+
+      // <p> con UNIFICACIÓN de tiempos
+      Node := XMLFindNodeByName(XmlDoc, 'p');
+      if Assigned(Node) then
+        repeat
+          if Node.HasAttributes then
+          begin
+            // Extraer tiempos
+            CurBegin := 0;
+            CurEnd := 0;
+            if XMLHasAttribute(Node, 'begin') then
+              CurBegin := GetTime(XMLGetAttrValue(Node, 'begin'), Subtitles.FrameRate);
+            if XMLHasAttribute(Node, 'end') then
+              CurEnd := GetTime(XMLGetAttrValue(Node, 'end'), Subtitles.FrameRate);
+
+            // Extraer y limpiar el texto
+            NewText := XMLExtractTextContent(Node.ChildNodes);
+            NewText := HTMLTagsToTS(ReplaceEnters(NewText, '<br/>', LineEnding));
+
+            // Lógica de UNIFICACIÓN
+            IsContinuation := (Subtitles.Count > 0) and
+                             (Subtitles[Subtitles.Count-1].InitialTime = CurBegin) and
+                             (Subtitles[Subtitles.Count-1].FinalTime = CurEnd);
+
+            if IsContinuation then
+            begin
+              // Concatenar texto al ítem existente
+              Subtitles.Text[Subtitles.Count-1] := Subtitles[Subtitles.Count-1].Text + LineEnding + NewText;
+            end
+            else
+            begin
+              // Nuevo subtítulo
+              ClearSubtitleItem(Item);
+              Item.InitialTime := CurBegin;
+              Item.FinalTime := CurEnd;
+              Item.Text := NewText;
+
+              // Determinar alineación vertical
+              if XMLHasAttribute(Node, 'region') then
+              begin
+                RegionID := XMLGetAttrValue(Node, 'region');
+                AlignVal := RegionMap.Values[RegionID];
+
+                // tts:displayAlign
+                if SameText(AlignVal, 'before') then
+                  Item.VAlign := svaTop
+                else if SameText(AlignVal, 'center') then
+                  Item.VAlign := svaCenter
+                else if SameText(AlignVal, 'after') then
+                  Item.VAlign := svaBottom
+                // no existe tts:displayAlign
+                else if LowerCase(RegionID).Contains('top') or (RegionID = 'sh0') then
+                  Item.VAlign := svaTop
+                else if LowerCase(RegionID).Contains('middle') or LowerCase(RegionID).Contains('center') then
+                  Item.VAlign := svaCenter
+                else
+                  Item.VAlign := svaBottom;
+              end
+              else
+                Item.VAlign := svaBottom;
+
+              Subtitles.Add(Item, NIL);
+            end;
+          end;
+
+          Node := Node.NextSibling;
+        until (Node = NIL);
+    finally
+       RegionMap.Free;
+       XmlDoc.Free;
+       Result := Subtitles.Count > 0;
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWNetflixTimedText.SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
+var
+  XmlDoc : TXMLDocument;
+  Root, Element, Node, SubNode : TDOMNode;
+  i : Integer;
+  RegionStr: String;
+begin
+  Result := False;
+  XmlDoc := TXMLDocument.Create;
+  try
+    Root := XmlDoc.CreateElement('tt');
+      TDOMElement(Root).SetAttribute('xmlns', 'http://www.w3.org/ns/ttml');
+      TDOMElement(Root).SetAttribute('xmlns:ttm', 'http://www.w3.org/ns/ttml#metadata');
+      TDOMElement(Root).SetAttribute('xmlns:tts', 'http://www.w3.org/ns/ttml#styling');
+      TDOMElement(Root).SetAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+      TDOMElement(Root).SetAttribute('xml:lang', 'en');
+      XmlDoc.Appendchild(Root);
+    Root := XmlDoc.DocumentElement;
+
+    Element := XmlDoc.CreateElement('head');
+      Node := XmlDoc.CreateElement('metadata');
+      Element.AppendChild(Node);
+      SubNode := XmlDoc.CreateElement('ttm:title');
+      SubNode.AppendChild(XmlDoc.CreateTextNode('Netflix Subtitle'));
+      Node.AppendChild(SubNode);
+    Root.AppendChild(Element);
+
+    Node := XmlDoc.CreateElement('styling');
+      Element.AppendChild(Node);
+      SubNode := XmlDoc.CreateElement('style');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'normal');
+      TDOMElement(SubNode).SetAttribute('tts:fontStyle', 'normal');
+      TDOMElement(SubNode).SetAttribute('tts:fontSize', '100%');
+      TDOMElement(SubNode).SetAttribute('tts:fontWeight', 'normal');
+      TDOMElement(SubNode).SetAttribute('tts:fontFamily', 'sansSerif');
+      TDOMElement(SubNode).SetAttribute('tts:color', 'white');
+      Node.AppendChild(SubNode);
+
+      SubNode := XmlDoc.CreateElement('style');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'italic');
+      TDOMElement(SubNode).SetAttribute('tts:fontStyle', 'italic');
+      TDOMElement(SubNode).SetAttribute('tts:fontSize', '100%');
+      TDOMElement(SubNode).SetAttribute('tts:fontWeight', 'normal');
+      TDOMElement(SubNode).SetAttribute('tts:fontFamily', 'sansSerif');
+      TDOMElement(SubNode).SetAttribute('tts:color', 'white');
+      Node.AppendChild(SubNode);
+
+      SubNode := XmlDoc.CreateElement('style');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'bold');
+      TDOMElement(SubNode).SetAttribute('tts:fontStyle', 'bold');
+      TDOMElement(SubNode).SetAttribute('tts:fontSize', '100%');
+      TDOMElement(SubNode).SetAttribute('tts:fontWeight', 'normal');
+      TDOMElement(SubNode).SetAttribute('tts:fontFamily', 'sansSerif');
+      TDOMElement(SubNode).SetAttribute('tts:color', 'white');
+      Node.AppendChild(SubNode);
+    Root.AppendChild(Element);
+
+    Node := XmlDoc.CreateElement('layout');
+      Element.AppendChild(Node);
+      SubNode := XmlDoc.CreateElement('region');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'bottomCenter');
+      TDOMElement(SubNode).SetAttribute('tts:extent', '80% 40%');
+      TDOMElement(SubNode).SetAttribute('tts:origin', '10% 50%');
+      TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'after');
+      TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
+      Node.AppendChild(SubNode);
+
+      SubNode := XmlDoc.CreateElement('region');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'middleCenter');
+      TDOMElement(SubNode).SetAttribute('tts:extent', '80% 40%');
+      TDOMElement(SubNode).SetAttribute('tts:origin', '10% 30%');
+      TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'center');
+      TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
+      Node.AppendChild(SubNode);
+
+      SubNode := XmlDoc.CreateElement('region');
+      TDOMElement(SubNode).SetAttribute('xml:id', 'topCenter');
+      TDOMElement(SubNode).SetAttribute('tts:extent', '80% 40%');
+      TDOMElement(SubNode).SetAttribute('tts:origin', '10% 10%');
+      TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'before');
+      TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
+      Node.AppendChild(SubNode);
+
+    Root.AppendChild(Element);
+
+    Element := XmlDoc.CreateElement('body');
+    Root.AppendChild(Element);
+
+    Node := XmlDoc.CreateElement('div');
+    TDOMElement(Node).SetAttribute('style', 'normal');
+    TDOMElement(Node).SetAttribute('xml:id', 'd1');
+    Element.AppendChild(Node);
+
+    for i := FromItem to ToItem do
+    begin
+      Element := XmlDoc.CreateElement('p');
+
+      TDOMElement(Element).SetAttribute('xml:id', 'p' + IntToStr(i + 1));
+
+      if Subtitles[i].VAlign = svaTop then
+        RegionStr := 'topCenter'
+      else if Subtitles[i].VAlign = svaCenter then
+        RegionStr := 'middleCenter'
+      else
+        RegionStr := 'bottomCenter';
+
+      TDOMElement(Element).SetAttribute('region', RegionStr);
+      TDOMElement(Element).SetAttribute('begin', TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz'));
+      TDOMElement(Element).SetAttribute('end', TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz'));
+      SubNode := XmlDoc.CreateTextNode(TSTagsToXML(ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), sLineBreak, '<br/>')));
+      Element.AppendChild(SubNode);
+      Node.AppendChild(Element);
+    end;
+
+    try
+      StringList.Clear;
+      XMLToStrings(XmlDoc, StringList, Subtitles.ReplaceEntities);
+
+      if not FileName.IsEmpty then
+        StringList.SaveToFile(FileName, TEncoding.UTF8); // must be encoded using UTF-8
+
+      Result := True;
+    except
+    end;
+  finally
+    XmlDoc.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+end.

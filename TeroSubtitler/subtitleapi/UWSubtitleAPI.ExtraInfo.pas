@@ -22,7 +22,7 @@ unit UWSubtitleAPI.ExtraInfo;
 interface
 
 uses
-  UWSubtitleAPI.Formats.Cavena890.Types;
+  Cavena890.Types;
 
 // -----------------------------------------------------------------------------
 
