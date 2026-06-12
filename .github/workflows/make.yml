@@ -4,16 +4,9 @@ name: Make
 on:
   schedule:
     - cron: '0 0 1 * *'
-  push:
-    branches:
-      - "**"
   pull_request:
     branches:
       - main
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   make:
@@ -23,7 +16,7 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          # - windows-latest
+          - windows-latest
         arch:
           - x86_64
           # - aarch64

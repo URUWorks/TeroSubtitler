@@ -53,8 +53,7 @@ Function Install-Package {
 $ErrorActionPreference = 'stop'
 Set-PSDebug -Strict
 @(
-    'https://download.lazarus-ide.org/Lazarus%20Windows%2064%20bits/Lazarus%204.6/lazarus-4.6-fpc-3.2.2-win64.exe'
-    'https://slproweb.com/download/Win64OpenSSL_Light-4_0_0.msi'
+    'https://download.lazarus-ide.org/Lazarus%20Windows%2064%20bits/Lazarus%204.8/lazarus-4.8-fpc-3.2.2-win64.exe'
 ) | Get-Package | Install-Package
 $env:PATH+=';{0}\OpenSSL-Win64\tools' -f $env:PROGRAMFILES
 (Get-Command 'openssl').Source | Out-Log
