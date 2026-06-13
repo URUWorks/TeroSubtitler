@@ -2,6 +2,7 @@
 - improved: [SubtitleAPI] Adobe Encore DVD, Advanced Substation Alpha, Cavena 890 & SoftNI
 - improved: [SubtitleAPI] Cheetah, Cheetah Caption & MicroDVD
 - improved: [SubtitleAPI] Spreadsheet, Spruce, iTunes Timed Text, Netflix Timed Text & Timed Text
+- updated: Lazarus 4.8
 - added: [SubtitleAPI] Spruce Subtitle Script
 - added: Slovenian language (thx filmsi) #472
 
