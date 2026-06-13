@@ -122,7 +122,7 @@ implementation
 
 uses
   procTypes, LazUTF8, procWorkspace, UWSubtitleAPI.Formats, UWSystem.TimeUtils,
-  UWTranslateAPI.Google, UWSubtitleAPI.Formats.Cavena890.Types, LCLTranslator;
+  UWTranslateAPI.Google, Cavena890.Types, LCLTranslator;
 
 {$R *.lfm}
 
