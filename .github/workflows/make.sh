@@ -15,3 +15,4 @@ elif [[ -f '/System/Library/CoreServices/SystemVersion.plist' ]]; then
     declare -rx DYLD_LIBRARY_PATH="${OPENSSL%\n}/lib" \
         INSTANTFPCOPTIONS='-Fu/Applications/Lazarus/components/lazutils'
 fi
+instantfpc '.github/workflows/make.pas' build

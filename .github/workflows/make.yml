@@ -4,6 +4,9 @@ name: Make
 on:
   schedule:
     - cron: '0 0 1 * *'
+  push:
+    branches:
+      - "**"
   pull_request:
     branches:
       - main
@@ -11,15 +14,12 @@ on:
 jobs:
   make:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 120
+    timeout-minutes: 15
     strategy:
       matrix:
         os:
           - ubuntu-latest
           - windows-latest
-        arch:
-          - x86_64
-          # - aarch64
 
     steps:
       - name: Checkout
@@ -30,12 +30,9 @@ jobs:
       - name: Build on Unix
         if: runner.os != 'Windows'
         shell: bash
-        run: |
-          source '.github/workflows/make.sh'
-          instantfpc '.github/workflows/make.pas' build
+        run: source '.github/workflows/make.sh'
 
       - name: Build on Windows
         if: runner.os == 'Windows'
         shell: powershell
-        run: |
-          pwsh -File '.github/workflows/make.ps1'
+        run: pwsh -File '.github/workflows/make.ps1'
