@@ -55,13 +55,9 @@ Set-PSDebug -Strict
 @(
     'https://download.lazarus-ide.org/Lazarus%20Windows%2064%20bits/Lazarus%204.8/lazarus-4.8-fpc-3.2.2-win64.exe'
 ) | Get-Package | Install-Package
-$env:PATH+=';{0}\OpenSSL-Win64\tools' -f $env:PROGRAMFILES
-(Get-Command 'openssl').Source | Out-Log
-$env:PATH+=';C:\Lazarus'
+$env:PATH+=';C:\Lazarus;C:\Lazarus\fpc\3.2.2\bin\x86_64-win64'
 (Get-Command 'lazbuild').Source | Out-Log
-$env:PATH+=';C:\Lazarus\fpc\3.2.2\bin\x86_64-win64'
 (Get-Command 'instantfpc').Source | Out-Log
 $env:INSTANTFPCOPTIONS='-FuC:\Lazarus\components\lazutils'
-$env:DYLD_LIBRARY_PATH='{0}\OpenSSL-Win64\lib' -f $env:PROGRAMFILES
 & instantfpc '.github/workflows/make.pas' build | Out-Log
 Exit $LastExitCode
