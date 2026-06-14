@@ -236,7 +236,7 @@ begin
     begin
       CurrentText := GetSubtitleTextAtTime(CurrentPos + Workspace.VideoOffset);
       //MPV.ShowText(CurrentText, 3600000, '');
-      MPV.ShowOverlayText(CurrentText, '');
+      MPV.ShowOverlayText(CurrentText);
     end;
 
     // ---------------------------------------------------------
