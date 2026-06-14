@@ -94,7 +94,7 @@ var Text: string;
 begin
   OutLog(etDebug, 'BuildProject from:'#9 + Path);
   if not RunCommand('lazbuild',
-    ['--build-all', '--recursive', {$IFDEF UNIX}'--widgetset=qt',{$ENDIF} '--no-write-project', Path], Result, [poStderrToOutPut, poWaitOnExit])
+    ['--build-all', '--recursive', {{$IFDEF UNIX}'--widgetset=qt',{$ENDIF}} '--no-write-project', Path], Result, [poStderrToOutPut, poWaitOnExit])
   then OutLog(etError, SelectString(Result, '(Fatal|Error|/ld(\.[a-z]+)?):'))
   else begin
     Result := SelectString(Result, 'Linking').Split(' ')[2].Replace(LineEnding, EmptyStr);
