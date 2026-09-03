@@ -58,12 +58,6 @@ SetupIconFile={#SourcePath}\images\install.ico
 Compression=lzma
 SolidCompression=yes
 
-[Languages]
-Name: "english";   MessagesFile: "compiler:Default.isl"
-Name: "bulgarian"; MessagesFile: "compiler:Languages\Bulgarian.isl"
-Name: "italian";   MessagesFile: "compiler:Languages\Italian.isl"
-Name: "spanish";   MessagesFile: "compiler:Languages\Spanish.isl"
-
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
