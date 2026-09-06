@@ -94,7 +94,7 @@ begin
       sIni := Trim(Copy(LineText, 1, p1 - 1));
       sFin := Trim(Copy(LineText, p1 + 1, p2 - p1 - 1));
 
-      if TimeInFormat(sIni, 'hh:mm:ss:zz') and TimeInFormat(sFin, 'hh:mm:ss:zz') then
+      if TimeInFormat(sIni, 'hh:mm:ss:ff') and TimeInFormat(sFin, 'hh:mm:ss:ff') then
         Result := True;
     end;
   end;
@@ -155,10 +155,10 @@ begin
             sIni := Trim(Copy(LineText, 1, p1 - 1));
             sFin := Trim(Copy(LineText, p1 + 1, p2 - p1 - 1));
 
-            if TimeInFormat(sIni, 'hh:mm:ss:zz') and TimeInFormat(sFin, 'hh:mm:ss:zz') then
+            if TimeInFormat(sIni, 'hh:mm:ss:ff') and TimeInFormat(sFin, 'hh:mm:ss:ff') then
             begin
-              InitialTime := StringToTime(sIni);
-              FinalTime   := StringToTime(sFin);
+              InitialTime := StringToTime(sIni, False, FPS);
+              FinalTime   := StringToTime(sFin, False, FPS);
               Text        := Trim(Copy(LineText, p2 + 1, Length(LineText)));
             end;
           end;
@@ -233,8 +233,8 @@ begin
     SubtitleText := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
     SubtitleText := ReplaceEnters(SubtitleText, sLineBreak);
 
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + ' , ' +
-                   TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz') + ' , ' +
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff') + ' , ' +
+                   TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff') + ' , ' +
                    TSTagsToSTL(SubtitleText));
   end;
 
