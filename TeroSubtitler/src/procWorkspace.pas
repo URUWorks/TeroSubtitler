@@ -1443,7 +1443,11 @@ begin
   else
     s := ProgramName;
 
+  {$IFDEF DARWIN}
+  frmMain.Caption := StringReplace(s, '&', '&&', [rfReplaceAll]);
+  {$ELSE}
   frmMain.Caption := s;
+  {$ENDIF}
   {$IFDEF WINDOWS}
   Application.Title := s;
   {$ENDIF}

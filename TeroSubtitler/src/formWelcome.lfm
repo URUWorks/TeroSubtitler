@@ -9,7 +9,7 @@ object frmWelcome: TfrmWelcome
   ClientWidth = 900
   DesignTimePPI = 120
   Position = poScreenCenter
-  LCLVersion = '4.6.0.0'
+  LCLVersion = '4.8.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow

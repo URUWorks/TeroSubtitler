@@ -16,7 +16,7 @@ object frmMain: TfrmMain
   ShowHint = True
   SnapOptions.SnapToMonitor = True
   SnapOptions.SnapToForms = True
-  LCLVersion = '4.2.0.0'
+  LCLVersion = '4.8.0.0'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -45,6 +45,7 @@ object frmMain: TfrmMain
       EmptyText = 'Click to add waveform'
       FPS = 25
       FPSTimeMode = False
+      OffsetMs = 0
       CenterPlayCursor = False
       SceneChangeEnabled = False
       DrawGAP = False
@@ -399,15 +400,16 @@ object frmMain: TfrmMain
         OnClick = MPVClick
         OnMouseWheelDown = MPVMouseWheelDown
         OnMouseWheelUp = MPVMouseWheelUp
-        AutoStartPlayback = True
-        AutoLoadSubtitle = False
         KeepAspect = True
         AspectRatio = arDefault
         NoAudioDisplay = False
         RendererMode = rmEmbedding
         RenderFailAction = rfNone
+        AutoStartPlayback = True
+        AutoLoadSubtitle = False
         UseHWDec = False
         LogLevel = llStatus
+        SMPTEMode = False
         OnStartFile = MPVStartFile
         OnEndFile = MPVEndFile
         OnFileLoaded = MPVFileLoaded

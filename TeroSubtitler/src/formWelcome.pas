@@ -98,6 +98,7 @@ begin
   begin
     lbl            := TLabel.Create(Self);
     lbl.Parent     := Self;
+    lbl.ShowAccelChar := False;
     lbl.SetBounds(lblRecentFiles.Left, h + (i*(lblRecentFiles.Height+8)), 400, 15);
     lbl.Name       := 'lMRUItem' + i.ToString;
     lbl.Caption    := ExtractFileName(MRU.Items[i]);

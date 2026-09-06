@@ -1783,7 +1783,9 @@ procedure TfrmMain.MRUItemClick(Sender: TObject);
 var
   s : String;
 begin
-  s := (Sender as TMenuItem).Caption;
+  s := StringReplace((Sender as TMenuItem).Caption, '&&', '&', [rfReplaceAll]);
+  //s := (Sender as TMenuItem).Caption;
+
   if LowerCase(ExtractFileExt(s)) = TProjectExt then
     LoadProject(s)
   else

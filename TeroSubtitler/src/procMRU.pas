@@ -113,7 +113,7 @@ begin
     begin
       mnu         := TMenuItem.Create(AMenu);
       mnu.Name    := 'mru_' + IntToStr(Idx);
-      mnu.Caption := FStrings[Idx];
+      mnu.Caption := StringReplace(FStrings[Idx], '&', '&&', [rfReplaceAll]);
       mnu.OnClick := FOnMRUItemClick;
       mnu.Tag     := Idx;
       if not FileExists(FStrings[Idx]) then mnu.Enabled := False;
