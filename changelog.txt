@@ -1,4 +1,5 @@
 1.0.2.3 (xx.xx.2026)
+- fixed: Ampersand in filename excluded from titlebar and Recent files #481
 - improved: [SubtitleAPI] Adobe Encore DVD, Advanced Substation Alpha, Cavena 890 & SoftNI
 - improved: [SubtitleAPI] Cheetah, Cheetah Caption & MicroDVD
 - improved: [SubtitleAPI] Spreadsheet, Spruce, iTunes Timed Text, Netflix Timed Text & Timed Text
