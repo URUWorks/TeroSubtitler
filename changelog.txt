@@ -1,4 +1,5 @@
 1.0.2.3 (18.09.2026)
+- fixed: Corrupted undo/redo stack when changing input/output FPS
 - fixed: Ampersand in filename excluded from titlebar and Recent files #481
 - improved: [SubtitleAPI] Adobe Encore DVD, Advanced Substation Alpha, Cavena 890 & SoftNI
 - improved: [SubtitleAPI] Cheetah, Cheetah Caption & MicroDVD
