@@ -181,7 +181,7 @@ jobs:
           for p in BGRABitmap FPSpreadsheet ATFlatControls EncConv ATSynEdit; do
             curl -fsSL -o "$RUNNER_TEMP/$p.zip" "https://packages.lazarus-ide.org/$p.zip"
             mkdir -p "$opm/$p"
-            unzip -q -o "$RUNNER_TEMP/$p.zip" -d "$opm/$p"
+            unzip -q -o "$RUNNER_TEMP/$p.zip" -d "$opm/$p" -x "*/test_files/*"
           done
           find "$opm" use TeroSubtitler/common TeroSubtitler/subtitleapi TeroSubtitler/controls \
             -name '*.lpk' | grep -Ev '(gdi|x11|_template)' | while read -r lpk; do
