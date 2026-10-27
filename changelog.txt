@@ -4,6 +4,7 @@
 - fixed: Audio-to-text stops after 1 hour #473
 - fixed: Show one thumbnail per shot change #420
 - fixed: Entered text doesn't immediately appear on timeline #404
+- fixed: Notes were lost when saving to formats that can’t store them; they are now kept in a hidden file next to the subtitle #353
 - fixed: [macOS] Turn off beep when moving between entries #331
 - fixed: Applying Netflix profile then another doesn't flag all shot changes #289
 - fixed: Translation Memory problem #279
