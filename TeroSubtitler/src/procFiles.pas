@@ -279,6 +279,156 @@ end;
 
 // -----------------------------------------------------------------------------
 
+{ Notes of non Tero formats (SRT, etc. can't store them) }
+
+// -----------------------------------------------------------------------------
+
+const
+  NotesFileHeader = '# Tero Subtitler notes';
+
+// hidden file next to the subtitle: ".name.srt.notes"
+function NotesFileName(const FileName: String): String;
+begin
+  Result := ExtractFilePath(FileName) + '.' + ExtractFileName(FileName) + '.notes';
+end;
+
+// -----------------------------------------------------------------------------
+
+function EscapeNote(const S: String): String;
+begin
+  Result := S.Replace('\', '\\', [rfReplaceAll]);
+  Result := Result.Replace(#13#10, '\n', [rfReplaceAll]);
+  Result := Result.Replace(#10, '\n', [rfReplaceAll]);
+  Result := Result.Replace(#13, '\n', [rfReplaceAll]);
+  Result := Result.Replace(#9, '\t', [rfReplaceAll]);
+end;
+
+// -----------------------------------------------------------------------------
+
+function UnescapeNote(const S: String): String;
+var
+  i: Integer;
+begin
+  Result := '';
+  i := 1;
+  while i <= Length(S) do
+  begin
+    if (S[i] = '\') and (i < Length(S)) then
+    begin
+      Inc(i);
+      case S[i] of
+        'n': Result := Result + LineEnding;
+        't': Result := Result + #9;
+      else
+        Result := Result + S[i];
+      end;
+    end
+    else
+      Result := Result + S[i];
+    Inc(i);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SaveNotesFile(const FileName: String);
+var
+  sl: TStringList;
+  f: String;
+  i: Integer;
+begin
+  f := NotesFileName(FileName);
+  sl := TStringList.Create;
+  try
+    for i := 0 to Subtitles.Count-1 do
+      if not Subtitles[i].Notes.IsEmpty then
+        sl.Add(Format('%d'#9'%d'#9'%s', [i, Subtitles[i].InitialTime, EscapeNote(Subtitles[i].Notes)]));
+
+    if sl.Count = 0 then
+    begin
+      if FileExists(f) then DeleteFile(f);
+      Exit;
+    end;
+
+    sl.Insert(0, NotesFileHeader);
+    try
+      {$IFDEF WINDOWS}
+      if FileExists(f) then FileSetAttr(f, 0); // a hidden file can't be overwritten
+      {$ENDIF}
+      sl.SaveToFile(f);
+      {$IFDEF WINDOWS}
+      FileSetAttr(f, faHidden);
+      {$ENDIF}
+    except
+    end;
+  finally
+    sl.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure LoadNotesFile(const FileName: String);
+const
+  MaxDiff = 100; // ms, times can change a bit after a save/load round trip
+var
+  sl: TStringList;
+  f: String;
+  i, x, idx, t, d, best: Integer;
+  parts: TStringArray;
+
+  function TimeMatches(const AIndex: Integer): Boolean;
+  begin
+    Result := Subtitles.ValidIndex(AIndex) and (Abs(Subtitles[AIndex].InitialTime - t) <= MaxDiff);
+  end;
+
+begin
+  f := NotesFileName(FileName);
+  if not FileExists(f) then Exit;
+
+  sl := TStringList.Create;
+  try
+    try
+      sl.LoadFromFile(f);
+    except
+      Exit;
+    end;
+    if (sl.Count = 0) or (sl[0] <> NotesFileHeader) then Exit;
+
+    for i := 1 to sl.Count-1 do
+    begin
+      parts := sl[i].Split([#9], 3);
+      if Length(parts) < 3 then Continue;
+      idx := StrToIntDef(parts[0], -1);
+      t   := StrToIntDef(parts[1], -1);
+      if t < 0 then Continue;
+
+      // same entry, or the nearest one with that initial time (lines added/removed outside)
+      if not TimeMatches(idx) then
+      begin
+        idx := -1;
+        best := MaxDiff + 1;
+        for x := 0 to Subtitles.Count-1 do
+        begin
+          d := Abs(Subtitles[x].InitialTime - t);
+          if d < best then
+          begin
+            best := d;
+            idx := x;
+          end;
+        end;
+      end;
+
+      if Subtitles.ValidIndex(idx) then
+        Subtitles.ItemPointer[idx]^.Notes := UnescapeNote(parts[2]);
+    end;
+  finally
+    sl.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AKeepVideoOpen: Boolean = False; const AVideoFile: String = ''; const AddToMRU: Boolean = True);
 var
   _FPS: TFPSInfo;
@@ -351,6 +501,8 @@ begin
 
   if Subtitles.LoadFromFile(FileName, _Encoding, _FPS, AFormat) then
   begin
+    if Subtitles.Format <> sfTeroSubtitler then
+      LoadNotesFile(FileName);
     frmMain.VST.RootNodeCount := Subtitles.Count;
     frmMain.cboEncoding.ItemIndex := GetEncodingIndex(Subtitles.CodePage);
     frmMain.cboFormat.ItemIndex := Integer(Subtitles.Format)-1;
@@ -557,7 +709,11 @@ begin
   if CheckIfValidFileName(S) and Subtitles.SaveToFile(S, _FPS, _Encoding, Format, SubtitleMode) then
   begin
     if (SubtitleMode = smText) then
-      SubtitleInfo.Text.FileName := S
+    begin
+      SubtitleInfo.Text.FileName := S;
+      if Format <> sfTeroSubtitler then
+        SaveNotesFile(S);
+    end
     else
       SubtitleInfo.Translation.FileName := S;
 
