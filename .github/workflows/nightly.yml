@@ -125,8 +125,133 @@ jobs:
             dist/*.tar.gz
           retention-days: 7
 
+  build-macos:
+    needs: check
+    if: needs.check.outputs.changed == 'true'
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15-intel
+            mode: macOS_Release
+            bin: tero-intel
+          - os: macos-latest
+            mode: macOS_arm64_Release
+            bin: tero-silicon
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Configure GitHub HTTPS
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
+
+      - name: Update submodules
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --remote --recursive use/UW_BlurayPGSParser
+          git submodule update --init --remote --recursive use/UW_MPVPlayer
+
+      - name: Install Lazarus
+        run: |
+          brew install fpc
+          brew install --cask lazarus
+          echo "/Applications/Lazarus" >> "$GITHUB_PATH"
+
+      # Same dependencies as make.pas, but without its OpenSSL requirement
+      - name: Install packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          opm="$HOME/.lazarus/onlinepackagemanager/packages"
+          for p in BGRABitmap FPSpreadsheet ATFlatControls EncConv ATSynEdit; do
+            curl -fsSL -o "$RUNNER_TEMP/$p.zip" "https://packages.lazarus-ide.org/$p.zip"
+            mkdir -p "$opm/$p"
+            unzip -q -o "$RUNNER_TEMP/$p.zip" -d "$opm/$p"
+          done
+          find "$opm" use TeroSubtitler/common TeroSubtitler/subtitleapi TeroSubtitler/controls \
+            -name '*.lpk' | grep -Ev '(gdi|x11|_template)' | while read -r lpk; do
+              lazbuild --lazarusdir=/Applications/Lazarus --add-package-link "$lpk"
+          done
+
+      - name: Build
+        shell: bash
+        run: |
+          set -euo pipefail
+          lazbuild --lazarusdir=/Applications/Lazarus --build-all --recursive \
+            --build-mode=${{ matrix.mode }} --widgetset=cocoa \
+            --no-write-project TeroSubtitler/src/tero.lpi
+          mkdir -p dist
+          cp TeroSubtitler/bin/tero "dist/${{ matrix.bin }}"
+          strip -x "dist/${{ matrix.bin }}" || true
+          lipo -archs "dist/${{ matrix.bin }}"
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.bin }}
+          path: dist/${{ matrix.bin }}
+          retention-days: 7
+
+  package-macos:
+    needs: build-macos
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Download binaries
+        uses: actions/download-artifact@v4
+        with:
+          path: binaries
+          merge-multiple: true
+
+      # Same steps as ts1app.command (universal) and ts1legacy.command (Intel only)
+      - name: Build app bundles
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="TeroSubtitler-$(tr -d '[:space:]' < version.txt)-nightly-$(date -u +%Y%m%d)"
+          bin=TeroSubtitler/bin
+          mkdir -p dist
+
+          make_app() {  # $1 = binary, $2 = frameworks folder, $3 = zip suffix
+            local work="$RUNNER_TEMP/$3" app
+            app="$work/Tero Subtitler.app"
+            rm -rf "$work"; mkdir -p "$work"
+            ditto "$bin/tero.app" "$app"
+            mkdir -p "$app/Contents/MacOS"
+            rm -f "$app/Contents/MacOS/tero"
+            cp "$1" "$app/Contents/MacOS/tero"
+            chmod +x "$app/Contents/MacOS/tero"
+            echo "$3: $(lipo -archs "$app/Contents/MacOS/tero")"
+            rm -rf "$app/Contents/Frameworks"
+            ditto "$bin/$2" "$app/Contents/Frameworks"
+            rm -rf "$app/Contents/Resources/Languages"
+            ditto "$bin/Languages" "$app/Contents/Resources/Languages"
+            find "$app" -name '.DS_Store' -delete
+            xattr -cr "$app"
+            codesign --force --deep --sign - "$app"
+            ditto -c -k --keepParent "$app" "dist/$base-$3.zip"
+          }
+
+          lipo -create binaries/tero-intel binaries/tero-silicon -output "$RUNNER_TEMP/tero-universal"
+          make_app "$RUNNER_TEMP/tero-universal" frameworks macos-universal
+          make_app binaries/tero-intel frameworks-legacy macos-legacy-intel
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos
+          path: dist/*.zip
+          retention-days: 7
+
   release:
-    needs: build
+    needs: [build, package-macos]
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
@@ -147,7 +272,7 @@ jobs:
           EOF
           echo -e "\nBuilt from commit ${{ github.sha }}." >> notes.md
           gh release delete nightly --cleanup-tag --yes || true
-          gh release create nightly dist/* \
+          gh release create nightly dist/*.zip dist/*.tar.gz \
             --prerelease \
             --target "${{ github.sha }}" \
             --title "Nightly build $(date -u +%Y-%m-%d)" \
