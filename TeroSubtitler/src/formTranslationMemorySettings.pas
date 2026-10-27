@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formTranslationMemorySettings;
@@ -150,9 +150,6 @@ var
   s : String;
   hdr : TUWTMXHeader;
 begin
-  TMX.Langs^.SrcLang := GetCultureName(cboSourceLang.ItemIndex);
-  TMX.Langs^.DstLang := GetCultureName(cboTransLang.ItemIndex);
-
   if edtOpenFile.Text <> '' then
   begin
     s := edtOpenFile.Text;
@@ -160,7 +157,7 @@ begin
     if not FileExists(s) and (ExtractFileDir(s) = '') then
       s := ConcatPaths([TranslationMemoryFolder, ChangeFileExt(s, '.tmx')]);
 
-    TMX.LoadFromFile(s);
+    OpenTranslationMemory(s, GetCultureName(cboSourceLang.ItemIndex), GetCultureName(cboTransLang.ItemIndex));
 
     hdr := TMX.Header;
     hdr.creationtool := ProgramName;

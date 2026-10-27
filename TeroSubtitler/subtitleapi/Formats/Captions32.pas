@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit Captions32;
@@ -43,7 +43,7 @@ type
 
 implementation
 
-uses UWSubtitleAPI.Tags, UWSystem.StrUtils, UWSystem.SysUtils;
+uses UWSubtitleAPI.Tags, UWSystem.StrUtils, UWSystem.SysUtils, LazUTF8;
 
 // -----------------------------------------------------------------------------
 
@@ -81,7 +81,7 @@ begin
      (TimeInFormat(Copy(SubtitleFile[Row], 15, 11), 'hh:mm:ss:zz')) and
      (Pos(',', SubtitleFile[Row]) = 13) and
      (Pos(',', SubtitleFile[Row], 14) = 27) and
-     (Copy(SubtitleFile[Row], 62, 1) = '|') then
+     (UTF8Copy(SubtitleFile[Row], 62, 1) = '|') then // por CARÁCTER: con un acento, por byte el '|' se corría a la col. 63
      //(Pos('|', SubtitleFile[Row], 15) = 62) then
     Result := True
   else
@@ -101,13 +101,18 @@ begin
   try
     for i := 0 to SubtitleFile.Count-1 do
     begin
+      // Antes se parseaba CADA línea sin validar los tiempos, y las columnas
+      // fijas se cortaban por BYTE sobre texto UTF-8 (un acento corría el corte).
+      if not (TimeInFormat(Copy(SubtitleFile[i], 1, 11), 'hh:mm:ss:zz') and
+              TimeInFormat(Copy(SubtitleFile[i], 15, 11), 'hh:mm:ss:zz')) then Continue;
+
       InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11));
       FinalTime   := StringToTime(Copy(SubtitleFile[i], 15, 11));
 
       if (InitialTime >= 0) and (FinalTime > 0) then
       begin
-        Text := Trim(Copy(SubtitleFile[i], 29, 33));
-        Txt  := Trim(Copy(SubtitleFile[i], 63, Length(SubtitleFile[i])-62));
+        Text := Trim(UTF8Copy(SubtitleFile[i], 29, 33));
+        Txt  := Trim(UTF8Copy(SubtitleFile[i], 63, UTF8Length(SubtitleFile[i])-62));
         if Txt <> '' then
           Text := Text + LineEnding + Txt;
 
@@ -125,6 +130,15 @@ function TUWCaptions32.SaveSubtitle(const FileName: String; const FPS: Double; c
 var
   i, c    : Integer;
   Text, s : String;
+
+  // Recorta o rellena con espacios a EXACTAMENTE N caracteres (no bytes).
+  function FitR(const S: String; const N: Integer): String;
+  begin
+    Result := UTF8Copy(S, 1, N);
+    if UTF8Length(Result) < N then
+      Result := Result + StringOfChar(' ', N - UTF8Length(Result));
+  end;
+
 begin
   Result  := False;
 
@@ -133,36 +147,22 @@ begin
     Text := ReplaceEnters(RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])));
     s    := Text;
     c    := StringCount('|', s);
+    // Columnas fijas medidas en CARACTERES (33 + '|' + hasta 67 en total):
+    // antes por BYTE, con acentos el relleno quedaba corto y el '|' dejaba de
+    // caer en la columna 62 (el archivo no se re-detectaba).
     if c = 0 then
-    begin
-      if Length(s) > 33 then
-        Text := Copy(s, 1, 33)
-      else
-        Text := AddCharR(' ', s, 33);
-
-      Text := AddCharR(' ', Text + '|', 67);
-    end
+      Text := FitR(FitR(s, 33) + '|', 67)
     else
     begin
       if c > 1 then
       begin
-        c := Pos('|', s);
-        s := Copy(s, 1, Pos('|', s, c+1)-1);
+        c := UTF8Pos('|', s);
+        s := UTF8Copy(s, 1, UTF8Pos('|', s, c+1)-1);
       end;
 
-      c    := Pos('|', s);
-      Text := Copy(s, 1, c-1);
-      if Length(Text) > 33 then
-        Text := Copy(Text, 1, 33)
-      else
-        Text := AddCharR(' ', Text, 33);
-
-      Text := Text + '|' + Copy(s, c+1, Length(s)-c);
-
-      if Length(Text) > 67 then
-        Text := Copy(Text, 1, 67)
-      else
-        Text := AddCharR(' ', Text, 67);
+      c    := UTF8Pos('|', s);
+      Text := FitR(UTF8Copy(s, 1, c-1), 33) + '|' + UTF8Copy(s, c+1, UTF8Length(s)-c);
+      Text := FitR(Text, 67);
     end;
 
     StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + ' , ' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz') + ' , ' + Text);

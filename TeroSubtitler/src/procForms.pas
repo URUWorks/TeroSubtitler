@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023-2024 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procForms;
@@ -76,6 +76,11 @@ procedure ShowTBXSettings;
 procedure ShowTBX;
 procedure ShowTBXList;
 procedure ShowTBXEdit;
+{ Translation memory }
+function OpenTranslationMemory(const AFileName, ASrcLang, ADstLang: String; const AWarnIfEmpty: Boolean = True): Boolean;
+procedure UpdateTranslationMemoryActions;
+procedure AddTranslatedLinesToTranslationMemory;
+procedure SaveTranslationMemoryCopy;
 { Close }
 procedure CloseTranslationMemory;
 procedure CloseTBX;
@@ -98,7 +103,8 @@ uses
   formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
   formRoundTime, formStatistics, formGenerateBlankVideo, formStreamExtractor,
   formPauses, formTTS, formVideoDubbing, formVideoOffset, formImportSUP,
-  formImportSUPLanguages, LCLTranslator, procLocalize;
+  formImportSUPLanguages, LCLTranslator, procLocalize, procDialogs, SysUtils, Dialogs, procFiles,
+  UWSubtitleAPI;
 
 // -----------------------------------------------------------------------------
 
@@ -405,7 +411,8 @@ begin
       begin
         if MPVOptions.SubtitleHandleByMPV then
         begin
-          frmMain.MPV.ShowText('', 0, '');
+          // the text drawn by Tero is an osd-overlay, ShowText doesn't clear it
+          frmMain.MPV.ShowOverlayText('');
           if MPVSaveSubtitleTempTrack then
             MPVLoadSubtitleTempTrack;
         end
@@ -477,6 +484,96 @@ begin
     frmTranslationMemory.BringToFront;
 
   frmMain.tlbValidate.Visible := TMX.Ready;
+end;
+
+// -----------------------------------------------------------------------------
+
+function OpenTranslationMemory(const AFileName, ASrcLang, ADstLang: String; const AWarnIfEmpty: Boolean = True): Boolean;
+begin
+  // save the pending changes of the current one, then load (it replaces)
+  TMX.Save;
+  TMX.Langs^.SrcLang := ASrcLang;
+  TMX.Langs^.DstLang := ADstLang;
+  TMX.LoadFromFile(AFileName);
+  Result := TMX.Ready;
+
+  // remember it, so it's reopened with the next subtitles and at startup
+  if Result then
+  begin
+    AppOptions.TMFileName := AFileName;
+    AppOptions.TMSrcLang  := ASrcLang;
+    AppOptions.TMDstLang  := ADstLang;
+  end;
+
+  if AWarnIfEmpty and FileExists(AFileName) and (TMX.Items.Count = 0) then
+    ShowErrorMessageDialog(lngTMNoEntriesLoaded);
+
+  UpdateTranslationMemoryActions;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure UpdateTranslationMemoryActions;
+begin
+  with frmMain do
+  begin
+    actTranslationMemoryClose.Enabled  := TMX.Ready;
+    actTranslationMemory.Enabled       := TMX.Ready;
+    actTranslationMemoryList.Enabled   := TMX.Ready;
+    actTranslationMemoryAddAll.Enabled := TMX.Ready;
+    actTranslationMemorySaveCopy.Enabled := TMX.Ready;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure AddTranslatedLinesToTranslationMemory;
+var
+  i, c, x: Integer;
+begin
+  if not TMX.Ready or (Subtitles.Count = 0) then Exit;
+
+  c := TMX.Items.Count;
+  for i := 0 to Subtitles.Count-1 do
+    if (Subtitles[i].Text <> '') and (Subtitles[i].Translation <> '') then
+    begin
+      x := TMX.AddItem(Subtitles[i].Text, Subtitles[i].Translation, '');
+      if x > 0 then Subtitles.ItemPointer[i]^.Data := x;
+    end;
+
+  ShowMessageDialog(Format(lngTMEntriesAdded, [TMX.Items.Count - c]));
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SaveTranslationMemoryCopy;
+var
+  SD: TSaveDialog;
+  CurrentFile: String;
+begin
+  if not TMX.Ready or (TMX.Items.Count = 0) then Exit;
+
+  SD := TSaveDialog.Create(NIL);
+  try
+    SD.Filter     := lngAllSupportedFiles + ' (*.tmx)|*.tmx';
+    SD.DefaultExt := 'tmx';
+    SD.FileName   := ExtractFileName(TMX.FileName);
+    SD.Options    := [ofOverwritePrompt, ofEnableSizing];
+
+    if SD.Execute then
+    begin
+      // save the current one, write the copy and keep working with the current
+      TMX.Save;
+      CurrentFile := TMX.FileName;
+      try
+        TMX.SaveToFile(EnsureSaveFileExt(SD.FileName, '.tmx'));
+      finally
+        TMX.FileName := CurrentFile;
+      end;
+    end;
+  finally
+    SD.Free;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -854,6 +951,9 @@ end;
 procedure CloseTranslationMemory;
 begin
   TMX.Close;
+  TMX.FileName := '';
+  // closed by the user, don't reopen it
+  AppOptions.TMFileName := '';
   if frmTranslationMemory <> NIL then
     frmTranslationMemory.Close;
 
@@ -866,6 +966,8 @@ begin
     actTranslationMemoryClose.Enabled := False;
     actTranslationMemory.Enabled      := False;
     actTranslationMemoryList.Enabled  := False;
+    actTranslationMemoryAddAll.Enabled := False;
+    actTranslationMemorySaveCopy.Enabled := False;
   end;
 end;
 

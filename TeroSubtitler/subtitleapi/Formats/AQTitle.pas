@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit AQTitle;
@@ -105,6 +105,9 @@ begin
     i := 0;
     while i < SubtitleFile.Count do
     begin
+      // c se usa SIEMPRE en el Inc(i, c+1) del final: sin inicializar, una
+      // línea que no coincide saltaba un valor basura (o el de la vuelta anterior)
+      c := 0;
       if (Pos('-->> ', SubtitleFile[i]) = 1) and
          (IsInteger(Copy(SubtitleFile[i], 6, Length(SubtitleFile[i])))) then
       begin
@@ -154,7 +157,11 @@ begin
     TextSrc := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
     if StringCount(sLineBreak, TextSrc) = 0      then Text := TextSrc + sLineBreak
     else if StringCount(sLineBreak, TextSrc) = 1 then Text := TextSrc
-    else if StringCount(sLineBreak, TextSrc) > 1 then Text := Copy(TextSrc, 0, Pos(sLineBreak, TextSrc) + 2) + ReplaceEnters(Copy(TextSrc, Pos(sLineBreak, TextSrc) + 2, Length(TextSrc)), ' ');
+    else if StringCount(sLineBreak, TextSrc) > 1 then
+      // Antes se reemplazaban los ESPACIOS por '|' (no los saltos que sobran) y
+      // los '+ 2' asumían un sLineBreak de 2 caracteres (en Linux/macOS es 1).
+      Text := Copy(TextSrc, 1, Pos(sLineBreak, TextSrc) - 1) + sLineBreak +
+              ReplaceEnters(Copy(TextSrc, Pos(sLineBreak, TextSrc) + Length(sLineBreak), Length(TextSrc)), sLineBreak, '|');
 
     StringList.Add(Text);
     StringList.Add('-->> ' + AddChar('0', IntToStr(TimeToFrames(Subtitles.FinalTime[i], FPS)), 6));

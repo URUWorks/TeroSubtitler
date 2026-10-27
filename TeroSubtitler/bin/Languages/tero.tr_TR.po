@@ -1208,6 +1208,15 @@ msgstr "Zaman"
 msgid "Export formatted text?"
 msgstr "Biçimlendirilmiş metin dışa aktarılsın mı?"
 
+#: proclocalize.lngtmentriesadded
+#, object-pascal-format
+msgid "%d entries added to the translation memory."
+msgstr ""
+
+#: proclocalize.lngtmnoentriesloaded
+msgid "No entries were loaded from the translation memory. Check that its languages match the selected ones."
+msgstr ""
+
 #: proclocalize.lngtranscribing
 msgid "Transcribing..."
 msgstr "Metne dönüştürülüyor..."
@@ -3858,6 +3867,10 @@ msgctxt "tfrmmain.acttranslationmemory.caption"
 msgid "Show..."
 msgstr "Göster..."
 
+#: tfrmmain.acttranslationmemoryaddall.caption
+msgid "Add translated lines to memory"
+msgstr ""
+
 #: tfrmmain.acttranslationmemoryclose.caption
 #, fuzzy
 msgctxt "tfrmmain.acttranslationmemoryclose.caption"
@@ -3868,6 +3881,14 @@ msgstr "Kapat"
 msgctxt "tfrmmain.acttranslationmemorylist.caption"
 msgid "List..."
 msgstr "Liste..."
+
+#: tfrmmain.acttranslationmemoryopenfolder.caption
+msgid "Open translation memories folder"
+msgstr ""
+
+#: tfrmmain.acttranslationmemorysavecopy.caption
+msgid "Save a copy..."
+msgstr ""
 
 #: tfrmmain.acttranslationmemorysettings.caption
 #, fuzzy

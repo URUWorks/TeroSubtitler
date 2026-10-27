@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023-2024 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procThumbnails;
@@ -30,33 +30,23 @@ type
 
   { TGenerateThumbnails }
 
-  TGenerateThumbnailMode = (gtmArray, gtmSubtitle, gtmShotchange);
+  TThumbnailReadyEvent = procedure (const ATimeMS: Integer; const AFileName: String) of object;
 
   TGenerateThumbnails = class(TThread)
   private
-    FFileName: String;
-    FDuration: Integer;
-    FMode: TGenerateThumbnailMode;
-    FShotChanges: TIntegerDynArray;
-    FTempDir: String;
+    FFileName  : String;
+    FTimes     : TIntegerDynArray; // snapshot of the scene changes (main thread)
+    FOffsetMS  : Integer;
+    FTempDir   : String;
+    FOnReady   : TThumbnailReadyEvent;
+    FCurTime   : Integer;
+    FCurFile   : String;
+    procedure DoReadySync;
+    procedure RunAndWait(const AProcess: TProcess);
   protected
     procedure Execute; override;
   public
-    constructor Create(const AVideoFile: String; const AVideoDuration: Integer; const AMode: TGenerateThumbnailMode; AOnTerminate: TNotifyEvent = NIL; const AShotChanges: TIntegerDynArray = NIL);
-    property TempDir: String read FTempDir write FTempDir;
-  end;
-
-  { TLoadThumbnails }
-
-  TLoadThumbnails = class(TThread)
-  private
-    FMode: TGenerateThumbnailMode;
-    FShotChanges: TIntegerDynArray;
-    FTempDir: String;
-  protected
-    procedure Execute; override;
-  public
-    constructor Create(const AMode: TGenerateThumbnailMode; const ATempDir: String; const AShotChanges: TIntegerDynArray = NIL);
+    constructor Create(const AVideoFile: String; const ATimes: TIntegerDynArray; const AFPS: Single; AOnReady: TThumbnailReadyEvent; AOnTerminate: TNotifyEvent = NIL);
     property TempDir: String read FTempDir write FTempDir;
   end;
 
@@ -65,7 +55,7 @@ type
 implementation
 
 uses
-  procTypes, WAVDisplayer, Math;
+  procTypes, Math;
 
 // -----------------------------------------------------------------------------
 
@@ -73,17 +63,50 @@ uses
 
 // -----------------------------------------------------------------------------
 
-constructor TGenerateThumbnails.Create(const AVideoFile: String; const AVideoDuration: Integer; const AMode: TGenerateThumbnailMode; AOnTerminate: TNotifyEvent = NIL; const AShotChanges: TIntegerDynArray = NIL);
+constructor TGenerateThumbnails.Create(const AVideoFile: String; const ATimes: TIntegerDynArray; const AFPS: Single; AOnReady: TThumbnailReadyEvent; AOnTerminate: TNotifyEvent = NIL);
+var
+  i: Integer;
 begin
   inherited Create(True);
 
   FFileName       := AVideoFile;
-  FDuration       := AVideoDuration - 1000;
-  FMode           := AMode;
-  FShotChanges    := AShotChanges;
+  FOnReady        := AOnReady;
   OnTerminate     := AOnTerminate;
   FTempDir        := ConcatPaths([GetTempDir, ChangeFileExt(ExtractFileName(FFileName), '')]);
   FreeOnTerminate := True;
+
+  // half a frame, so ffmpeg doesn't give the last frame of the previous shot
+  if AFPS > 0 then
+    FOffsetMS := Round(500 / AFPS)
+  else
+    FOffsetMS := 0;
+
+  // the thread must not read the scene change list while the user edits it,
+  // so copy the times it needs now, from the main thread
+  SetLength(FTimes, Length(ATimes));
+  for i := 0 to High(ATimes) do
+    FTimes[i] := ATimes[i];
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TGenerateThumbnails.DoReadySync;
+begin
+  // TBitmap is not thread safe: it's loaded in the main thread
+  if Assigned(FOnReady) then
+    FOnReady(FCurTime, FCurFile);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TGenerateThumbnails.RunAndWait(const AProcess: TProcess);
+begin
+  // wait without spinning a core at 100%
+  AProcess.Execute;
+  while AProcess.Running and not Terminated do
+    Sleep(10);
+  if AProcess.Running then
+    AProcess.Terminate(0);
 end;
 
 // -----------------------------------------------------------------------------
@@ -95,6 +118,8 @@ var
   i, x : Integer;
   s : String;
 begin
+  if Length(FTimes) = 0 then Exit;
+
   AProcess := TProcess.Create(NIL);
   try
     AProcess.ShowWindow := swoHide;
@@ -104,159 +129,45 @@ begin
     if not DirectoryExists(FTempDir) then
       CreateDir(FTempDir);
 
-    case FMode of
-      gtmArray:
+    try
+      for i := 0 to High(FTimes) do
+      begin
+        if Terminated then Exit;
+
+        // the files are named by time, so they are also a cache ("t" = 24-bit,
+        // the old 16-bit ones looked wrong on macOS)
+        s := ConcatPaths([FTempDir, FTimes[i].ToString + 't.bmp']);
+
+        if not FileExists(s) then
         begin
-          s := ChangeFileExt(GetTempFileName, '.bmp');
-          try
-            for i := 1 to 100 do
-            begin
-              AProcess.Parameters.Clear;
-              for x := 0 to High(AParamArray) do
-              begin
-                if AParamArray[x] = '%timestr' then
-                  AProcess.Parameters.Add(IntToStr(Max(Round((FDuration / DefaultThumbnailsCount) * i), 0)) + 'ms')
-                else if AParamArray[x].Contains('%input') then
-                  AProcess.Parameters.Add(FFileName)
-                else if AParamArray[x].Contains('%output') then
-                  AProcess.Parameters.Add(s)
-                else
-                  AProcess.Parameters.Add(AParamArray[x]);
-              end;
-
-              AProcess.Execute;
-              while AProcess.Running and not Terminated do;
-
-              if FileExists(s) then
-              try
-                WAVEOptions.Thumbnails[i-1].LoadFromFile(s);
-                DeleteFile(s);
-              except
-              end;
-
-              if Terminated then Exit;
-            end;
-          except
+          AProcess.Parameters.Clear;
+          for x := 0 to High(AParamArray) do
+          begin
+            if AParamArray[x] = '%timestr' then
+              AProcess.Parameters.Add(Max(FTimes[i] + FOffsetMS, 0).ToString + 'ms')
+            else if AParamArray[x].Contains('%input') then
+              AProcess.Parameters.Add(FFileName)
+            else if AParamArray[x].Contains('%output') then
+              AProcess.Parameters.Add(s)
+            else
+              AProcess.Parameters.Add(AParamArray[x]);
           end;
+
+          RunAndWait(AProcess);
+          if Terminated then Exit;
         end;
 
-      gtmSubtitle:
-        if Subtitles.Count > 0 then
+        if FileExists(s) then
         begin
-          try
-            for i := 0 to Subtitles.Count-1 do
-            begin
-              s := ConcatPaths([FTempDir, IntToStr(i) + '.bmp']);
-              AProcess.Parameters.Clear;
-
-              for x := 0 to High(AParamArray) do
-              begin
-                if AParamArray[x] = '%timestr' then
-                  AProcess.Parameters.Add(IntToStr(Subtitles[i].InitialTime) + 'ms')
-                else if AParamArray[x].Contains('%input') then
-                  AProcess.Parameters.Add(FFileName)
-                else if AParamArray[x].Contains('%output') then
-                  AProcess.Parameters.Add(s)
-                else
-                  AProcess.Parameters.Add(AParamArray[x]);
-              end;
-
-              AProcess.Execute;
-              while AProcess.Running and not Terminated do;
-              if Terminated then Exit;
-            end;
-          except
-          end;
+          FCurTime := FTimes[i];
+          FCurFile := s;
+          Synchronize(@DoReadySync);
         end;
-
-      gtmShotchange:
-        if Assigned(FShotChanges) and (Length(FShotChanges) > 0) then
-        begin
-          try
-            for i := Low(FShotChanges) to High(FShotChanges) do
-            begin
-              AParamArray := FFMPEG_Thumbnail.Split(' ');
-              s := ConcatPaths([FTempDir, IntToStr(FShotChanges[i]) + '.bmp']);
-              AProcess.Parameters.Clear;
-
-              for x := 0 to High(AParamArray) do
-              begin
-                if AParamArray[x] = '%timestr' then
-                  AProcess.Parameters.Add(IntToStr(FShotChanges[i]) + 'ms')
-                else if AParamArray[x].Contains('%input') then
-                  AProcess.Parameters.Add(FFileName)
-                else if AParamArray[x].Contains('%output') then
-                  AProcess.Parameters.Add(s)
-                else
-                  AProcess.Parameters.Add(AParamArray[x]);
-              end;
-
-              AProcess.Execute;
-              while AProcess.Running and not Terminated do;
-              if Terminated then Exit;
-            end;
-          except
-          end;
-        end;
+      end;
+    except
     end;
   finally
     AProcess.Free;
-  end;
-end;
-
-// -----------------------------------------------------------------------------
-
-{ TLoadThumbnails }
-
-// -----------------------------------------------------------------------------
-
-constructor TLoadThumbnails.Create(const AMode: TGenerateThumbnailMode; const ATempDir: String; const AShotChanges: TIntegerDynArray = NIL);
-begin
-  inherited Create(True);
-
-  FMode           := AMode;
-  FShotChanges    := AShotChanges;
-  FTempDir        := ATempDir;
-  FreeOnTerminate := True;
-end;
-
-// -----------------------------------------------------------------------------
-
-procedure TLoadThumbnails.Execute;
-var
-  i : Integer;
-  s : String;
-begin
-  case FMode of
-    gtmSubtitle:
-      if Subtitles.Count > 0 then
-      begin
-        try
-          for i := 0 to Subtitles.Count-1 do
-          begin
-            s := ConcatPaths([FTempDir, IntToStr(i) + '.bmp']);
-            if FileExists(s) then
-            begin
-            end;
-          end;
-        except
-        end;
-      end;
-
-    gtmShotchange:
-      if Assigned(FShotChanges) and (Length(FShotChanges) > 0) then
-      begin
-        try
-          for i := Low(FShotChanges) to High(FShotChanges) do
-          begin
-            s := ConcatPaths([FTempDir, IntToStr(FShotChanges[i]) + '.bmp']);
-            if FileExists(s) then
-            begin
-            end;
-          end;
-        except
-        end;
-      end;
   end;
 end;
 

@@ -220,7 +220,7 @@ end;
 
 procedure TUWWaveformDisplayer.GenerateDummyPeakTab(const LengthMS: Cardinal);
 begin
-  FPageSizeMS     := 5000;
+  FPageSizeMS     := DefaultPageSizeMS;
   FSamplesPerPeak := 1;
   FPeakTabSize    := 1;
   FPeakTab        := NIL;

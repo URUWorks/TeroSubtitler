@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formAudioToText;
@@ -322,6 +322,34 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// "[00:01.000 --> 00:03.500] text" (faster-whisper, mm:ss.zzz until one
+// hour, then hh:mm:ss.zzz) or "[00:00:01.000 --> 00:00:03.500]   text"
+// (whisper.cpp)
+function ParseWhisperLine(const ALine: String; out AInitialTime, AFinalTime: Integer; out AText: String): Boolean;
+
+  function ToMs(const ATime: String): Integer;
+  begin
+    // without hours if there is only one ':'
+    Result := StringToTime(ATime, ATime.CountChar(':') < 2);
+  end;
+
+var
+  p1, p2, p3: Integer;
+begin
+  Result := False;
+  p1 := Pos('[', ALine);
+  p2 := Pos('-->', ALine);
+  p3 := PosEx(']', ALine, p2+3);
+  if (p1 = 0) or (p2 <= p1) or (p3 = 0) then Exit;
+
+  AInitialTime := ToMs(Trim(Copy(ALine, p1+1, p2-p1-1)));
+  AFinalTime   := ToMs(Trim(Copy(ALine, p2+3, p3-p2-3)));
+  AText        := Trim(Copy(ALine, p3+1, Length(ALine)));
+  Result       := True;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure ThreadProcessCB(Output: String; var ATerminate: Boolean);
 var
   sl : TStringList;
@@ -343,13 +371,8 @@ begin
       if Tools.WhisperEngine = WhisperCPP then
       begin
         // Subtitle info
-        if Pos('-->', sl[i]) = 15 then
-        begin
-          it     := StringToTime(Copy(sl[i], 2, 12));
-          ft     := StringToTime(Copy(sl[i], 19, 12));
-          Output := Copy(sl[i], 35, sl[i].Length-34);
+        if ParseWhisperLine(sl[i], it, ft, Output) then
           VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True, True);
-        end;
         // Progress
         if Pos('progress =', sl[i]) > 0 then
         begin
@@ -362,14 +385,10 @@ begin
       end
       else
       begin
-        // Subtitle info
-        if Pos('-->', sl[i]) = 12 then
-        begin
-          it     := StringToTime(Copy(sl[i], 2, 9), True);
-          ft     := StringToTime(Copy(sl[i], 16, 9), True);
-          Output := Copy(sl[i], 28);
+        // Subtitle info (after one hour the times have hours, before only
+        // the lines with '-->' at 12 were read, so it stopped at 59:59)
+        if ParseWhisperLine(sl[i], it, ft, Output) then
           VSTSelectNode(frmMain.VST, InsertSubtitle(frmMain.VST.RootNodeCount+1, it, ft, Output, '', False, True), True, True);
-        end;
       end;
     end;
   finally

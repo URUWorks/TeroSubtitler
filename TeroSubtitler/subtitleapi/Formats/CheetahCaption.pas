@@ -1,18 +1,18 @@
 {*
- * URUWorks Subtitle API
+ *  URUWorks Subtitle API
  *
- * The contents of this file are used with permission, subject to
- * the Mozilla Public License Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/2.0.html
+ *  The contents of this file are used with permission, subject to
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
- * Software distributed under the License is distributed on an
- * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
- * implied. See the License for the specific language governing
- * rights and limitations under the License.
+ *  Software distributed under the License is distributed on an
+ *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ *  implied. See the License for the specific language governing
+ *  rights and limitations under the License.
  *
- * Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit CheetahCaption;
@@ -45,7 +45,7 @@ type
 implementation
 
 uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSystem.SysUtils,
-  CheetahCaption.Types;
+  CheetahCaption.Types, UWSystem.Encoding;
 
 // -----------------------------------------------------------------------------
 
@@ -190,13 +190,19 @@ begin
 
           Duration := Subtitles.FinalTime[LastIdx] - Subtitles.InitialTime[LastIdx];
 
-          if (Duration > 5000) or (Duration < 0) then
+          // Antes (Duration > 5000): un cue legítimo de más de 5 s se recortaba
+          // siempre. Solo se recalcula si tras el recorte quedó demasiado corto.
+          if (Duration < 200) then
           begin
             Subtitles.FinalTime[LastIdx] := Subtitles.InitialTime[LastIdx] + CalculateOptimalDisplayMS(Subtitles.Text[LastIdx]);
 
             if Subtitles.FinalTime[LastIdx] > (InitialTime - 100) then
               Subtitles.FinalTime[LastIdx] := InitialTime - 100;
           end;
+
+          // nunca dejar un fin anterior al inicio del propio cue
+          if Subtitles.FinalTime[LastIdx] <= Subtitles.InitialTime[LastIdx] then
+            Subtitles.FinalTime[LastIdx] := Subtitles.InitialTime[LastIdx] + 1;
         end;
 
         if (Bytes[i + 6] = 2) and (Bytes[i + 7] = 1) and (Bytes[i + 8] = 0) and (Bytes[i + 9] = 0) then
@@ -241,7 +247,7 @@ begin
             end
             else
             begin
-              Text := Text + TEncoding.GetEncoding(SubtitleFile.CodePage).GetString(Bytes, index, 1);
+              Text := Text + GetCachedEncoding(SubtitleFile.CodePage).GetString(Bytes, index, 1);
             end;
             inc(j);
           end;
@@ -288,6 +294,10 @@ var
   IsItalic     : Boolean;
   TextBytes    : array of Byte;
   ByteCount    : Integer;
+  CP           : String;
+  CPLen        : Integer;
+  WC           : WideString;
+  CPBytes      : TBytes;
 begin
   Result := False;
 
@@ -356,8 +366,11 @@ begin
       j := 1;
       while j <= Length(Plain) do
       begin
-        if (j < Length(Plain)) and (Plain[j] = #13) and (Plain[j+1] = #10) then
+        // Salto de línea: #13#10 o solo #10 (antes solo #13#10, en Linux/macOS
+        // las dos líneas se unían en una)
+        if (Plain[j] = #13) or (Plain[j] = #10) then
         begin
+          if (Plain[j] = #13) and (j < Length(Plain)) and (Plain[j+1] = #10) then Inc(j);
           TextBytes[ByteCount] := 0; // Null byte para nueva linea Cheetah
           Inc(ByteCount);
           if IsItalic then
@@ -365,31 +378,53 @@ begin
             TextBytes[ByteCount] := $d0; // Reactivar cursiva tras salto
             Inc(ByteCount);
           end;
-          Inc(j, 2);
+          Inc(j);
           Continue;
         end;
 
+        // Un carácter UTF-8 completo: antes se comparaba BYTE a byte con la
+        // tabla (WideChar), así que las letras acentuadas nunca coincidían y se
+        // escribía el primer byte de su secuencia UTF-8.
+        case Byte(Plain[j]) of
+          $C0..$DF: CPLen := 2;
+          $E0..$EF: CPLen := 3;
+          $F0..$F7: CPLen := 4;
+        else
+          CPLen := 1;
+        end;
+        if j + CPLen - 1 > Length(Plain) then CPLen := Length(Plain) - j + 1;
+        CP := Copy(Plain, j, CPLen);
+        WC := UTF8Decode(CP);
+
         idx := -1;
-        for c := 0 to Length(TLatinLetters)-1 do
-          if Plain[j] = TLatinLetters[c] then
-          begin
-            idx := c;
-            Break;
-          end;
+        if Length(WC) = 1 then
+          for c := 0 to Length(TLatinLetters)-1 do
+            if WC[1] = TLatinLetters[c] then
+            begin
+              idx := c;
+              Break;
+            end;
 
         if idx >= 0 then
-        begin
-          TextBytes[ByteCount] := TLatinCodes[idx];
-          Inc(ByteCount);
-        end
+          TextBytes[ByteCount] := TLatinCodes[idx]
+        else if CPLen = 1 then
+          TextBytes[ByteCount] := Byte(CP[1])
         else
         begin
-          TextBytes[ByteCount] := Encoding.GetBytes(Plain[j])[0];
-          Inc(ByteCount);
+          CPBytes := TEncoding.ANSI.GetBytes(CP);
+          if Length(CPBytes) = 1 then
+            TextBytes[ByteCount] := CPBytes[0]
+          else
+            TextBytes[ByteCount] := Ord('?');
         end;
+        Inc(ByteCount);
 
-        inc(j);
+        Inc(j, CPLen);
       end;
+
+      // La longitud del bloque se guarda en UN byte: el texto se limita a 235
+      // bytes (antes un cue largo desbordaba el byte y corrompía el archivo).
+      if ByteCount > 235 then ByteCount := 235;
 
       len    := ByteCount + 20;
       endpos := Stream.Position + len;

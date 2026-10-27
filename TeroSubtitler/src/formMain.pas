@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023-2025 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formMain;
@@ -201,6 +201,9 @@ type
     actSetAsDefaultEncoding: TAction;
     actSetAsDefaultFormat: TAction;
     actTranslationMemoryList: TAction;
+    actTranslationMemoryAddAll: TAction;
+    actTranslationMemorySaveCopy: TAction;
+    actTranslationMemoryOpenFolder: TAction;
     actViewShotChange: TAction;
     actMediaDeleteEntry: TAction;
     actQualityCheck: TAction;
@@ -601,6 +604,10 @@ type
     MenuItem24: TMenuItem;
     MenuItem25: TMenuItem;
     mnuToolsTranslationMemory: TMenuItem;
+    mnuToolsTMAddAll: TMenuItem;
+    mnuToolsTMSep: TMenuItem;
+    mnuToolsTMSaveCopy: TMenuItem;
+    mnuToolsTMOpenFolder: TMenuItem;
     MenuItem116: TMenuItem;
     MenuItem117: TMenuItem;
     MenuItem118: TMenuItem;
@@ -1007,7 +1014,9 @@ type
     procedure DetectDialogSegments;
     procedure GenerateThumbnails;
     procedure FreeThumbnails;
+    procedure DoThumbnailReady(const ATimeMS: Integer; const AFileName: String);
     procedure DoThumbnailsDone(Sender: TObject);
+    procedure WAVESceneChangeListChange(Sender: TObject);
     // formMain_MPV
     procedure MPVClick(Sender: TObject);
     procedure MPVEndFile(ASender: TObject; AReason, AError: Integer);
@@ -1178,6 +1187,9 @@ type
     procedure actFixSubtitlesExecute(Sender: TObject);
     procedure actTranslationMemorySettingsExecute(Sender: TObject);
     procedure actTranslationMemoryListExecute(Sender: TObject);
+    procedure actTranslationMemoryAddAllExecute(Sender: TObject);
+    procedure actTranslationMemorySaveCopyExecute(Sender: TObject);
+    procedure actTranslationMemoryOpenFolderExecute(Sender: TObject);
     procedure actTranslationMemoryExecute(Sender: TObject);
     procedure actTranslationMemoryCloseExecute(Sender: TObject);
     procedure actTM1Execute(Sender: TObject);
@@ -1312,7 +1324,11 @@ type
     procedure actVideoDubbingExecute(Sender: TObject);
     procedure actVideoOffsetExecute(Sender: TObject);
   private
-
+    FThumbnailThread: TThread; // TGenerateThumbnails, see formMain_WAVE
+    {$IFDEF LCLCocoa}
+    FVSTOldWindowProc: TWndMethod;
+    procedure VSTWindowProc(var TheMessage: TLMessage);
+    {$ENDIF}
   public
 
   end;
@@ -1335,13 +1351,38 @@ uses
   procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.SysUtils,
   UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procThumbnails,
   formCustomQuestionDlg, formCustomSelectDlg, formTranslationMemory, formTBX,
-  libMPV.Client;
+  libMPV.Client, procMacMediaKeys;
 
 {$R *.lfm}
 
 // -----------------------------------------------------------------------------
 
 { TfrmMain }
+
+// -----------------------------------------------------------------------------
+
+{$IFDEF LCLCocoa}
+procedure TfrmMain.VSTWindowProc(var TheMessage: TLMessage);
+var
+  Msg: TLMessage;
+begin
+  // LCL Cocoa passes navigation keys to Cocoa before sending LM_KEYDOWN,
+  // Cocoa finds no handler for moveUp:/moveDown: and beeps even though the
+  // tree moves the focus afterwards. Handle them at CN_KEYDOWN instead.
+  FVSTOldWindowProc(TheMessage); // KeyPreview, OnKeyDown, shortcuts
+
+  if (TheMessage.Msg = CN_KEYDOWN) and (TheMessage.Result = 0) and
+    (TLMKeyDown(TheMessage).CharCode in [VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT,
+    VK_PRIOR, VK_NEXT, VK_HOME, VK_END]) then
+  begin
+    Msg := TheMessage;
+    Msg.Msg := LM_KEYDOWN;
+    Msg.Result := 0;
+    FVSTOldWindowProc(Msg);
+    TheMessage.Result := 1;
+  end;
+end;
+{$ENDIF}
 
 // -----------------------------------------------------------------------------
 
@@ -1354,6 +1395,10 @@ var
 begin
   Randomize; // used for tips
   DoubleBuffered := True;
+  {$IFDEF LCLCocoa}
+  FVSTOldWindowProc := VST.WindowProc;
+  VST.WindowProc := @VSTWindowProc;
+  {$ENDIF}
   // Initialize SubtitleAPI
   Subtitles := TUWSubtitles.Create;
   Subtitles.OnLoadDataFunc := @SAPILoadDataFunc;
@@ -1398,6 +1443,7 @@ begin
   PrepareMPV;
   // WAVE
   WAVE.DefaultThumbnail.LoadFromLazarusResource('video_countdown');
+  WAVE.OnSceneChangeListChange := @WAVESceneChangeListChange;
   // QuickAction
   edtQuickAction.LocalizeFunc := @LocalizeCategory;
   // MRU
@@ -1409,6 +1455,11 @@ begin
   LoadActors;
   // TMX
   TMX := TUWTMX.Create('', '', '', @TMXOnFindFinished);
+  // reopen the last translation memory
+  if (AppOptions.TMFileName <> '') and FileExists(AppOptions.TMFileName) then
+    OpenTranslationMemory(AppOptions.TMFileName, AppOptions.TMSrcLang, AppOptions.TMDstLang, False)
+  else
+    UpdateTranslationMemoryActions;
   // TBX
   TBX := TUWTBX.Create('', '', '', @TBXOnFindFinished);
   // Hunspell
@@ -1550,6 +1601,8 @@ begin
   StatusBar.Panels[0].Width := ClientWidth - c;
 end;
 
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
   LoadFormSettings(Self);
@@ -1685,7 +1738,10 @@ begin
       if VST.SelectedCount = 1 then
       begin
         SetSubtitleText(VSTFocusedNode(VST), Text, TSubtitleMode(TAG_CONTROL_TEXT - Tag));
-        if WAVE.IsTimeLineEnabled and not MPV.IsPlaying then WAVE.DoUpdate; // Would it be better to repaint only if it is visible on the timeline?
+        // redraw only the subtitles layer over the cached wave: it is cheap, so
+        // it is also done while playing (before, the new text appeared only
+        // after pausing or scrolling)
+        if WAVE.IsTimeLineEnabled then WAVE.DoUpdateSubtitles;
         if (GetTickCount - LastTickCount) > 700 then // only if > 700ms
         begin
           CheckForTerminology(VSTFocusedNode(VST));
@@ -1694,10 +1750,13 @@ begin
         end;
       end
       else
+      begin
         case Tag of
           TAG_CONTROL_TEXT        : VSTDoLoop(VST, @ApplySetTextFromMemo, dlSelected, True, True);
           TAG_CONTROL_TRANSLATION : VSTDoLoop(VST, @ApplySetTranslationFromMemo, dlSelected, True, True);
         end;
+        if WAVE.IsTimeLineEnabled then WAVE.DoUpdateSubtitles;
+      end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1733,31 +1792,57 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.cboInputFPSSelect(Sender: TObject);
+var
+  OldFPS, NewFPS: TFPSInfo;
 begin
-  if (VST.RootNodeCount > 0) and (Sender <> NIL) then
-    VSTDoLoop(VST, @ApplyChangeInputFPS, dlAll, False, True);
-
-  Workspace.FPS.InputFPS := GetInputFPSInfo;
-
-  cboFPS.ItemIndex := cboInputFPS.ItemIndex;
-  Workspace.FPS.OutputFPS := Workspace.FPS.InputFPS;
-  SetTimeFPStoTimeEditCtrls;
-
   if (Sender <> NIL) then
   begin
+    OldFPS := Workspace.FPS.InputFPS;
+    NewFPS := GetInputFPSInfo;
+
+    UndoInstance.AddUndoFPS(OldFPS, NewFPS, True);
+
+    if (VST.RootNodeCount > 0) then
+      VSTDoLoop(VST, @ApplyChangeInputFPS, dlAll, False, True);
+
+    Workspace.FPS.InputFPS := GetInputFPSInfo;
+    Workspace.FPS.OutputFPS := Workspace.FPS.InputFPS;
+
+    cboFPS.ItemIndex := cboInputFPS.ItemIndex;
+    SetTimeFPStoTimeEditCtrls;
+
     DoAutoCheckErrors;
     UpdateValues(True);
+  end
+  else
+  begin
+    Workspace.FPS.InputFPS := GetInputFPSInfo;
+    Workspace.FPS.OutputFPS := Workspace.FPS.InputFPS;
+    cboFPS.ItemIndex := cboInputFPS.ItemIndex;
+    // the time edits and the waveform keep their own FPS/timecode mode,
+    // without this they stay with the previous one (e.g. DF after loading a NDF file)
+    SetTimeFPStoTimeEditCtrls;
   end;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.cboFPSSelect(Sender: TObject);
+var
+  OldFPS, NewFPS: TFPSInfo;
 begin
-  if (VST.RootNodeCount > 0) and (Sender <> NIL) then
-    VSTDoLoop(VST, @ApplyChangeFPS, dlAll, False, True);
+  OldFPS := Workspace.FPS.OutputFPS;
+  NewFPS := GetFPSInfo;
 
-  Workspace.FPS.OutputFPS := GetFPSInfo;
+  if (Sender <> NIL) then
+  begin
+    UndoInstance.AddUndoFPS(OldFPS, NewFPS, False);
+
+    if (VST.RootNodeCount > 0) then
+      VSTDoLoop(VST, @ApplyChangeFPS, dlAll, False, True);
+  end;
+
+  Workspace.FPS.OutputFPS := NewFPS;
   SetTimeFPStoTimeEditCtrls;
 
   if (Workspace.WorkMode = wmFrames) then
@@ -1784,7 +1869,6 @@ var
   s : String;
 begin
   s := StringReplace((Sender as TMenuItem).Caption, '&&', '&', [rfReplaceAll]);
-  //s := (Sender as TMenuItem).Caption;
 
   if LowerCase(ExtractFileExt(s)) = TProjectExt then
     LoadProject(s)
@@ -1993,6 +2077,8 @@ begin
   begin
     SaveSubtitleAutoBackup;
   end;
+  // save the translation memory too (only if it has changes)
+  TMX.Save;
 end;
 
 // -----------------------------------------------------------------------------
@@ -2078,7 +2164,7 @@ begin
     with TSaveDialog(Sender) do
     begin
       DefaultExt := GetDefaultExtFromFilter(FilterIndex, Filter);
-      {$ifdef darwin}ChangeFileExt(FileName, DefaultExt);{$endif}
+      {$ifdef darwin}FileName := ChangeFileExt(FileName, DefaultExt);{$endif}
     end;
 end;
 {$ENDIF}

@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSubtitleAPI.TMX;
@@ -101,6 +101,7 @@ type
     constructor Create(const AFileName: String; ASrcLang: String = ''; ADstLang: String = ''; AOnFindFinished: TUWTMXOnFindFinished = NIL);
     destructor Destroy; override;
     procedure Clear;
+    procedure ClearItems;
     procedure Close;
     procedure Save;
     procedure LoadFromFile(const AFileName: String);
@@ -841,9 +842,22 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWTMX.Clear;
+begin
+  ClearItems;
+
+  FLangs.SrcLang := '';
+  FLangs.DstLang := '';
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTMX.ClearItems;
 var
   i: Integer;
 begin
+  Cancel; // the search thread uses the list
+  FMap.Clear;
+
   if FList.Count > 0 then
   begin
     for i := FList.Count-1 downto 0 do
@@ -854,8 +868,7 @@ begin
     end;
   end;
 
-  FLangs.SrcLang := '';
-  FLangs.DstLang := '';
+  FChanged := False;
 end;
 
 // -----------------------------------------------------------------------------
@@ -876,13 +889,76 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// tmx files from other tools may write "EN-US", "en_US" or just "en"
+function NormLang(const ALang: String): String;
+begin
+  Result := StringReplace(LowerCase(Trim(ALang)), '_', '-', [rfReplaceAll]);
+end;
+
+function BaseLang(const ALang: String): String;
+var
+  p: Integer;
+begin
+  Result := NormLang(ALang);
+  p := Pos('-', Result);
+  if p > 0 then SetLength(Result, p-1);
+end;
+
+function FindLangExact(const ALangs: TStrings; const ALang: String): Integer;
+var
+  i: Integer;
+begin
+  Result := -1;
+  for i := 0 to ALangs.Count-1 do
+    if NormLang(ALangs[i]) = NormLang(ALang) then Exit(i);
+end;
+
+// index of the language of the list that matches ALang, exact first, then by
+// base language ("en" = "en-US")
+function FindLang(const ALangs: TStrings; const ALang: String; const AExclude: Integer = -1): Integer;
+var
+  i: Integer;
+begin
+  Result := -1;
+  if ALang = '' then Exit;
+
+  for i := 0 to ALangs.Count-1 do
+    if (i <> AExclude) and (NormLang(ALangs[i]) = NormLang(ALang)) then Exit(i);
+
+  for i := 0 to ALangs.Count-1 do
+    if (i <> AExclude) and (BaseLang(ALangs[i]) = BaseLang(ALang)) then Exit(i);
+end;
+
+function GetAttr(const ANode: TDOMNode; const AName: String): String;
+var
+  Attr: TDOMNode;
+begin
+  Result := '';
+  if (ANode = NIL) or (ANode.Attributes = NIL) then Exit;
+  Attr := ANode.Attributes.GetNamedItem(AName);
+  if Attr <> NIL then Result := Attr.NodeValue;
+end;
+
+function GetTUVLang(const ANode: TDOMNode): String;
+begin
+  Result := GetAttr(ANode, 'xml:lang');
+  if Result = '' then Result := GetAttr(ANode, 'lang'); // tmx 1.1
+end;
+
 procedure TUWTMX.LoadFromFile(const AFileName: String);
 var
   XmlDoc: TXMLDocument;
   NodeTU, NodeTUV,
   NodeID, NodeText: TDOMNode;
   Item: PUWTMXItem;
+  FileLangs: TStringList;
+  s: String;
+  iSrc, iDst: Integer;
+  SrcLang, DstLang: String;
 begin
+  // a new file replaces the current items (before, they were mixed)
+  ClearItems;
+  FillByte(FHeader, SizeOf(TUWTMXHeader), 0);
   FFileName := AFileName;
   if not FileExists(AFileName) then Exit;
 
@@ -890,37 +966,74 @@ begin
   ReadXMLFile(XmlDoc, AFileName);
   if Assigned(XmlDoc) then
   try
-    // Header
+    // Header (attributes may be missing in files from other tools)
     NodeID := XMLFindNodeByName(XmlDoc, 'header');
     if NodeID <> NIL then
-      with FHeader, NodeID.Attributes do
+      with FHeader do
       begin
-        creationtool        := GetNamedItem('creationtool').NodeValue;
-        creationtoolversion := GetNamedItem('creationtoolversion').NodeValue;
-        datatype            := GetNamedItem('datatype').NodeValue;
-        segtype             := GetNamedItem('segtype').NodeValue;
-        adminlang           := GetNamedItem('adminlang').NodeValue;
-        srclang             := GetNamedItem('srclang').NodeValue;
-        otmf                := GetNamedItem('o-tmf').NodeValue;
+        creationtool        := GetAttr(NodeID, 'creationtool');
+        creationtoolversion := GetAttr(NodeID, 'creationtoolversion');
+        datatype            := GetAttr(NodeID, 'datatype');
+        segtype             := GetAttr(NodeID, 'segtype');
+        adminlang           := GetAttr(NodeID, 'adminlang');
+        srclang             := GetAttr(NodeID, 'srclang');
+        otmf                := GetAttr(NodeID, 'o-tmf');
       end;
 
-    if FHeader.srclang <> '' then FLangs.SrcLang := FHeader.srclang;
+    // Languages used in the file
+    FileLangs := TStringList.Create;
+    try
+      NodeTU := XMLFindNodeByName(XmlDoc, 'tu');
+      while NodeTU <> NIL do
+      begin
+        NodeTUV := NodeTU.FirstChild;
+        while NodeTUV <> NIL do
+        begin
+          if NodeTUV.NodeName = 'tuv' then
+          begin
+            s := GetTUVLang(NodeTUV);
+            if (s <> '') and (FindLangExact(FileLangs, s) < 0) then FileLangs.Add(s);
+          end;
+          NodeTUV := NodeTUV.NextSibling;
+        end;
+        NodeTU := NodeTU.NextSibling;
+      end;
+
+      // Source: the selected one, else the header one
+      iSrc := FindLang(FileLangs, FLangs.SrcLang);
+      if (iSrc < 0) and (FHeader.srclang <> '*all*') then
+        iSrc := FindLang(FileLangs, FHeader.srclang);
+      // Target: the selected one
+      iDst := FindLang(FileLangs, FLangs.DstLang, iSrc);
+      // With only two languages in the file, use them
+      if FileLangs.Count = 2 then
+      begin
+        if (iSrc < 0) and (iDst < 0) then
+          iSrc := 0;
+        if iSrc < 0 then iSrc := 1 - iDst;
+        if iDst < 0 then iDst := 1 - iSrc;
+      end;
+
+      if (iSrc < 0) or (iDst < 0) then Exit;
+      SrcLang := NormLang(FileLangs[iSrc]);
+      DstLang := NormLang(FileLangs[iDst]);
+    finally
+      FileLangs.Free;
+    end;
 
     // TMs
-    Item := NIL;
     NodeTU := XMLFindNodeByName(XmlDoc, 'tu');
     while NodeTU <> NIL do
     begin
       New(Item);
-      FillByte(Item[0], SizeOf(PUWTMXItem), 0);
 
       NodeTUV := NodeTU.FirstChild;
       while NodeTUV <> NIL do
       begin
-        NodeID := NodeTUV.Attributes.GetNamedItem('xml:lang');
-        if NodeID <> NIL then
+        if NodeTUV.NodeName = 'tuv' then
         begin
-          if (NodeID.NodeValue = FLangs.SrcLang) then
+          s := NormLang(GetTUVLang(NodeTUV));
+          if s = SrcLang then
           begin // src
             NodeText := NodeTUV.FirstChild;
             while NodeText <> NIL do
@@ -931,7 +1044,7 @@ begin
               NodeText := NodeText.NextSibling;
             end;
           end
-          else if (NodeID.NodeValue = FLangs.DstLang) then
+          else if s = DstLang then
           begin // dst
             NodeText := NodeTUV.FirstChild;
             while NodeText <> NIL do
@@ -959,6 +1072,7 @@ begin
   end;
   // Sort for fast searching
   if FList.Count > 0 then FList.Sort(@ListCompare);
+  FChanged := False;
 end;
 
 // -----------------------------------------------------------------------------
@@ -990,7 +1104,10 @@ begin
         SetAttribute('datatype', datatype);
         SetAttribute('segtype', segtype);
         SetAttribute('adminlang', adminlang);
-        SetAttribute('srclang', srclang);
+        if srclang <> '' then
+          SetAttribute('srclang', srclang)
+        else
+          SetAttribute('srclang', FLangs.SrcLang);
         SetAttribute('o-tmf', otmf);
 
       end;
@@ -1032,6 +1149,7 @@ begin
     try
       WriteXMLFile(XmlDoc, FFileName);
       Result := True;
+      FChanged := False;
     except
     end;
   finally

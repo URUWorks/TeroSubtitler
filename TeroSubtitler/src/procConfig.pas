@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procConfig;
@@ -115,7 +115,7 @@ uses
   procDialogs, UWSubtitleAPI.Formats, MPVPlayer, procWorkspace, procColorTheme,
   LCLProc, UWSystem.Globalization, UWSystem.TimeUtils, libMPV.Client, procMPV,
   UWSpellcheck.Hunspell, procConventions, UWSystem.InetUtils, lazfileutils,
-  fileinfo, winpeimagereader, elfreader, machoreader,LCLIntf, UWSystem.StrUtils;
+  fileinfo, winpeimagereader, elfreader, machoreader,LCLIntf, UWSystem.StrUtils, Math;
 
 // -----------------------------------------------------------------------------
 
@@ -455,6 +455,9 @@ begin
       OpenKey('Settings');
       GUILanguage := GetValue('Language', GUILanguage);
       HunspellLanguage := GetValue('HunspellLanguage', HunspellLanguage);
+      TMFileName := GetValue('TMFileName', TMFileName);
+      TMSrcLang := GetValue('TMSrcLang', TMSrcLang);
+      TMDstLang := GetValue('TMDstLang', TMDstLang);
       ShortCutPreset := GetValue('ShortCutFile', ShortCutPreset);
       ShowWelcomeAtStartup := GetValue('ShowWelcomeAtStartup', ShowWelcomeAtStartup);
       AutoBackupSeconds := GetValue('AutoBackupSeconds', AutoBackupSeconds);
@@ -868,6 +871,13 @@ begin
       end;
       CloseKey;
       //
+      OpenKey('TimedText');
+      with Subtitles.FormatProperties^.TimedText do
+      begin
+        Language := GetValue('Language', Language);
+      end;
+      CloseKey;
+      //
       OpenKey(FormatToName(sfWebVTT, True));
       with Subtitles.FormatProperties^.WebVTT do
       begin
@@ -900,6 +910,9 @@ begin
       OpenKey('Settings');
       SetValue('Language', GUILanguage);
       SetValue('HunspellLanguage', HunspellLanguage);
+      SetValue('TMFileName', TMFileName);
+      SetValue('TMSrcLang', TMSrcLang);
+      SetValue('TMDstLang', TMDstLang);
       SetValue('ShortCutFile', ShortCutPreset);
       SetValue('ShowWelcomeAtStartup', ShowWelcomeAtStartup);
       SetValue('AutoBackupSeconds', AutoBackupSeconds);
@@ -1230,6 +1243,13 @@ begin
       with Subtitles.FormatProperties^.SSA do
       begin
         SetValue('DefaultStyleSettings', DefaultStyleSettings);
+      end;
+      CloseKey;
+      //
+      OpenKey('TimedText');
+      with Subtitles.FormatProperties^.TimedText do
+      begin
+        SetValue('Language', Language);
       end;
       CloseKey;
       //
@@ -1970,6 +1990,23 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function CompareVersions(const A, B: String): Integer;
+var
+  pa, pb: TStringArray;
+  i, va, vb: Integer;
+begin
+  // numeric compare by components: "1.10" > "1.9"
+  pa := A.Trim.Split(['.']);
+  pb := B.Trim.Split(['.']);
+  for i := 0 to Max(High(pa), High(pb)) do
+  begin
+    if i <= High(pa) then va := StrToIntDef(pa[i].Trim, 0) else va := 0;
+    if i <= High(pb) then vb := StrToIntDef(pb[i].Trim, 0) else vb := 0;
+    if va <> vb then Exit(Sign(va - vb));
+  end;
+  Result := 0;
+end;
+
 procedure CheckForUpdates;
 var
   sNew, sOld: String;
@@ -1981,7 +2018,7 @@ begin
     try
       FileVerInfo.ReadFileInfo;
       sOld := FileVerInfo.VersionStrings.Values['FileVersion'];
-      if (sNew.Trim > sOld.Trim) then // New version available
+      if CompareVersions(sNew, sOld) > 0 then // New version available
       begin
         if CustomQuestionDialog(lngNewVersionFound, lngSeeChangeList, [dbYes, dbNo]) = mrYes then
           OpenURL(ProgramReleaseURL);

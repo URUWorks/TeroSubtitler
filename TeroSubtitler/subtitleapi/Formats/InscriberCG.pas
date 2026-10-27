@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit InscriberCG;
@@ -126,7 +126,8 @@ end;
 
 function TUWInscriberCG.SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
-  i : Integer;
+  i   : Integer;
+  Txt : String;
 begin
   Result  := False;
 
@@ -138,9 +139,11 @@ begin
 
   for i := FromItem to ToItem do
   begin
-    Subtitles.Text[i] := RemoveTSTags(Subtitles.Text[i]);
+    // Antes: Subtitles.Text[i] := ... — se modificaba el documento ABIERTO al
+    // guardar (sin undo) y la traducción se escribía con tags.
+    Txt := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
 
-    StringList.Add('@@9 ' + ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), LineEnding, LineEnding + '@@9 ') +
+    StringList.Add('@@9 ' + ReplaceEnters(Txt, LineEnding, LineEnding + '@@9 ') +
                 '<' + TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:zz') + '><'  +
                 TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:zz') + '>');
 

@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 // -----------------------------------------------------------------------------
@@ -900,6 +900,7 @@ end;
 
 procedure TfrmMain.actCloseMediaExecute(Sender: TObject);
 begin
+  MacMediaKeysClear;
   MPV.Close;
   WAVE.EmptyText := '';
   WAVE.Close;
@@ -1400,6 +1401,27 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actTranslationMemoryAddAllExecute(Sender: TObject);
+begin
+  AddTranslatedLinesToTranslationMemory;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actTranslationMemorySaveCopyExecute(Sender: TObject);
+begin
+  SaveTranslationMemoryCopy;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actTranslationMemoryOpenFolderExecute(Sender: TObject);
+begin
+  OpenDocument(TranslationMemoryFolder);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actTranslationMemoryExecute(Sender: TObject);
 begin
   ShowTranslationMemory;
@@ -1627,7 +1649,6 @@ begin
     LayoutWaveform.Top   := 0;
     SplitterWaveform.Top := 0;
 
-    if (WAVE.Thumbnails = NIL) then
     GenerateThumbnails;
   end;
 end;

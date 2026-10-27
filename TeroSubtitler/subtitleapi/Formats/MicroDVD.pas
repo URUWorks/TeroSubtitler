@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit MicroDVD;
@@ -85,15 +85,24 @@ end;
 // -----------------------------------------------------------------------------
 
 function TUWMicroDVD.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
+var
+  L, A, B: String;
+  P2, P4: Integer;
 begin
-  if (StringCount('{', SubtitleFile[Row]) >= 2) and
-     (StringCount('}', SubtitleFile[Row]) >= 2) and
-     (Pos('{', SubtitleFile[Row]) = 1) and
-     ((IsInteger(Copy(SubtitleFile[Row], 2, Pos('}', SubtitleFile[Row]) - 2)) or ((Copy(SubtitleFile[Row], 2, Pos('}', SubtitleFile[Row]) - 2) = '') and (Row > 0) and (IsInteger(Copy(SubtitleFile[Row-1], Pos('{', SubtitleFile[Row-1], 2) + 1, Pos('}', SubtitleFile[Row-1], Pos('}', SubtitleFile[Row-1]) + 1) - (Pos('{', SubtitleFile[Row-1], 2) + 1)))))) and
-     (IsInteger(Copy(SubtitleFile[Row], Pos('{', SubtitleFile[Row], 2) + 1, Pos('}', SubtitleFile[Row], Pos('}', SubtitleFile[Row]) + 1) - (Pos('{', SubtitleFile[Row], 2) + 1))) or ((Copy(SubtitleFile[Row], Pos('{', SubtitleFile[Row], 2) + 1, Pos('}', SubtitleFile[Row], Pos('}', SubtitleFile[Row]) + 1) - (Pos('{', SubtitleFile[Row], 2) + 1)) = '') and (Row < SubtitleFile.Count) and (IsInteger(Copy(SubtitleFile[Row+1], 2, Pos('}', SubtitleFile[Row+1]) - 2)))))) then
-    Result := True
-  else
-    Result := False;
+  Result := False;
+  L := SubtitleFile[Row];
+  if (L = '') or (L[1] <> '{') then Exit;
+  P2 := Pos('}', L);
+  if (P2 < 2) or (P2 >= Length(L)) or (L[P2 + 1] <> '{') then Exit;
+  P4 := Pos('}', Copy(L, P2 + 2, MaxInt));
+  if P4 = 0 then Exit;
+  A := Trim(Copy(L, 2, P2 - 2));
+  B := Trim(Copy(L, P2 + 2, P4 - 1));
+  // Cada número es un cuadro o está vacío (inicio = "justo después del anterior",
+  // fin = duración automática), pero no los dos. Antes la condición miraba
+  // también las líneas vecinas y leía SubtitleFile[Row+1] sin comprobar el
+  // final de la lista.
+  Result := ((A = '') or IsInteger(A)) and ((B = '') or IsInteger(B)) and not ((A = '') and (B = ''));
 end;
 
 // -----------------------------------------------------------------------------
@@ -107,7 +116,8 @@ var
   FinalTime   : Integer;
   Text        : String;
   AFPS        : Single;
-  DecimalSep  : Char;
+  FpsVal      : Double;
+  FS          : TFormatSettings;
   ExtraInfo   : PMicroDVD_ExtraInfo;
   P_Start, P_Comma, P_End: Integer;
 begin
@@ -117,18 +127,17 @@ begin
     for i := 0 to SubtitleFile.Count-1 do
     begin
       // DivXG400 FPS Info tag
-      if Copy(SubtitleFile[i], 1, 6) = '{1}{1}' then
+      if (Copy(SubtitleFile[i], 1, 6) = '{1}{1}') or (Copy(SubtitleFile[i], 1, 6) = '{0}{0}') then
       begin
-        with FormatSettings do
-        begin
-          DecimalSep       := DecimalSeparator;
-          DecimalSeparator := '.';
-
-          if IsInteger(Copy(SubtitleFile[i], 7, Length(SubtitleFile[i]))) then
-            AFPS := StrToFloat(Copy(SubtitleFile[i], 7, Length(SubtitleFile[i])));
-
-          DecimalSeparator := DecimalSep;
-        end;
+        // Antes IsInteger(...) antes de StrToFloat: el tag se escribe como
+        // '{1}{1}23.976' y con el punto decimal IsInteger fallaba, así que el
+        // FPS del archivo NUNCA se aplicaba (ni con un archivo de esta misma
+        // app). Además se cambiaba el DecimalSeparator GLOBAL; ahora uno local.
+        FS := FormatSettings;
+        FS.DecimalSeparator := '.';
+        FpsVal := StrToFloatDef(Trim(Copy(SubtitleFile[i], 7, Length(SubtitleFile[i]))), 0, FS);
+        if (FpsVal >= 1) and (FpsVal <= 240) then
+          AFPS := FpsVal;
         Continue;
       end;
 
@@ -159,11 +168,12 @@ begin
               else
                 InitialTime := 0;
 
-              // Tiempos Finales
+              // Tiempos Finales (sin cuadro de fin, la duración sale del largo
+              // del texto, ver más abajo)
               if EndStr <> '' then
                 FinalTime := FramesToTime(StrToIntDef(EndStr, 0), AFPS)
               else
-                FinalTime := InitialTime + 2000;
+                FinalTime := -1;
 
               // Extraer y ELIMINAR el código {P:X,Y}
               ExtraInfo := NIL;
@@ -188,8 +198,13 @@ begin
               // Parseo de tags
               Text := MicroDVDTagsToTS(Text);
 
+              if EndStr = '' then
+                FinalTime := InitialTime + CalculateOptimalDisplayMS(RemoveTSTags(Text));
+
               if (InitialTime >= 0) and (FinalTime > InitialTime) then
-                Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
+                Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo)
+              else if ExtraInfo <> NIL then
+                Dispose(ExtraInfo); // antes se perdía sin liberar
             end;
           end;
         end;
@@ -208,26 +223,23 @@ end;
 
 function TUWMicroDVD.SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
-  i          : Integer;
-  DecimalSep : Char;
+  i, T1, T2  : Integer;
+  FS         : TFormatSettings;
   XY         : String;
   OutText    : String;
 begin
   Result  := False;
 
-  // DivXG400 FPS Info tag
-  with FormatSettings do
-  begin
-    DecimalSep       := DecimalSeparator;
-    DecimalSeparator := '.';
-    StringList.Add(SysUtils.Format('{1}{1}%.3f', [FPS]));
-    DecimalSeparator := DecimalSep;
-  end;
+  // DivXG400 FPS Info tag (TFormatSettings local en vez de cambiar y
+  // restaurar el DecimalSeparator GLOBAL)
+  FS := FormatSettings;
+  FS.DecimalSeparator := '.';
+  StringList.Add(SysUtils.Format('{1}{1}%.3f', [FPS], FS));
 
   for i := FromItem to ToItem do
   begin
     XY := '';
-    if Subtitles.ExtraInfo[i] <> NIL then
+    if (Subtitles.ExtraInfoType = eiMicroDVD) and (Subtitles.ExtraInfo[i] <> NIL) then
       with PMicroDVD_ExtraInfo(Subtitles.ExtraInfo[i])^ do
         if (X > 0) or (Y > 0) then
           XY := SysUtils.Format('{P:%d,%d}', [X, Y]);
@@ -236,8 +248,16 @@ begin
     OutText := TSTagsToMicroDVD(OutText);
     OutText := ReplaceEnters(OutText);
 
-    StringList.Add('{' + IntToStr(TimeToFrames(Subtitles.InitialTime[i], FPS)) + '}' +
-                   '{' + IntToStr(TimeToFrames(Subtitles.FinalTime[i], FPS)) + '}' +
+    // Un cue sin texto no se escribe; sin cuadros negativos y con el fin
+    // posterior al inicio (el loader descarta los cues con fin <= inicio).
+    if Trim(ReplaceString(OutText, '|', '')) = '' then Continue;
+    T1 := TimeToFrames(Subtitles.InitialTime[i], FPS);
+    T2 := TimeToFrames(Subtitles.FinalTime[i], FPS);
+    if T1 < 0 then T1 := 0;
+    if T2 <= T1 then T2 := T1 + 1;
+
+    StringList.Add('{' + IntToStr(T1) + '}' +
+                   '{' + IntToStr(T2) + '}' +
                    XY + OutText);
   end;
 

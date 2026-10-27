@@ -5,7 +5,23 @@
   <key>CFBundleIconFile</key>
   <string>tero</string>
   <key>CFBundleDevelopmentRegion</key>
-  <string>English</string>
+  <string>en</string>
+  <key>CFBundleLocalizations</key>
+  <array>
+    <string>en</string>
+    <string>es</string>
+    <string>it</string>
+    <string>de</string>
+    <string>pt_BR</string>
+    <string>ru</string>
+    <string>sl</string>
+    <string>sv</string>
+    <string>tr</string>
+    <string>zh_CN</string>
+    <string>bg</string>
+  </array>
+  <key>CFBundleAllowMixedLocalizations</key>
+  <true/>
   <key>CFBundleExecutable</key>
   <string>tero</string>
   <key>CFBundleName</key>
@@ -19,7 +35,7 @@
   <key>CFBundleSignature</key>
   <string>tero</string>
   <key>CFBundleShortVersionString</key>
-  <string>1.0.2.3</string>
+  <string>1.0.2.4</string>
   <key>CFBundleVersion</key>
   <string>4</string>
   <key>CSResourcesFileMapped</key>
@@ -69,6 +85,6 @@
   <key>NSHighResolutionCapable</key>
   <true/>
   <key>NSHumanReadableCopyright</key>
-  <string>© 2023-2025 URUWorks</string>
+  <string>© 2023-2026 URUWorks</string>
 </dict>
 </plist>

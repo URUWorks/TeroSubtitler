@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit MacDVDStudioPro;
@@ -91,9 +91,11 @@ end;
 function VAlignToString(const AValue: TSubtitleVAlign): String;
 begin
   case AValue of
-    svaBottom : Result := '$HorzAlign = Bottom';
-    svaCenter : Result := '$HorzAlign = Center';
-    svaTop    : Result := '$HorzAlign = Top';
+    // Antes se escribía '$HorzAlign' también para la vertical: al recargar
+    // pisaba la alineación horizontal y se perdía la vertical.
+    svaBottom : Result := '$VertAlign = Bottom';
+    svaCenter : Result := '$VertAlign = Center';
+    svaTop    : Result := '$VertAlign = Top';
   else
     Result := '';
   end;
@@ -160,10 +162,10 @@ begin
     ClearSubtitleItem(Item);
     for i := 0 to SubtitleFile.Count-1 do
     begin
-      if SubtitleFile[i].StartsWith('$HorzAlign') then
-        Item.Align := StringToHAlign(SubtitleFile[i])
-      else if SubtitleFile[i].StartsWith('$VertAlign') then
-        Item.VAlign := StringToVAlign(SubtitleFile[i]);
+      if SubtitleFile[i].StartsWith('$HorzAlign', True) then
+        Item.Align := StringToHAlign(Copy(SubtitleFile[i], Pos('=', SubtitleFile[i]) + 1, MaxInt))
+      else if SubtitleFile[i].StartsWith('$VertAlign', True) then
+        Item.VAlign := StringToVAlign(Copy(SubtitleFile[i], Pos('=', SubtitleFile[i]) + 1, MaxInt));
 
       if not TimeInFormat(Copy(SubtitleFile[i], 1, 11), 'hh:mm:ss:ff') or
         not TimeInFormat(Copy(SubtitleFile[i], 13, 11), 'hh:mm:ss:ff') then
@@ -200,8 +202,14 @@ var
   FinalTime   : String;
   i           : Integer;
   Text        : String;
+  PrevH       : Integer;
+  PrevV       : Integer;
 begin
   Result  := False;
+
+  StringList.Clear;
+  PrevH := -1; // fuerza escribir la alineación en el primer cue
+  PrevV := -1;
 
   for i := FromItem to ToItem do
   begin
@@ -217,8 +225,22 @@ begin
 //    FinalTime := TimeToString(Subtitles[i].FinalTime, 'hh:mm:ss:') +
 //                 AddChar('0', IntToStr(GetMSecsInFrames(Subtitles[i].FinalTime, FPS)), 2);
 
-    StringList.Add(HAlignToString(Subtitles[i].Align));
-    StringList.Add(VAlignToString(Subtitles[i].VAlign));
+    // solo cuando cambia (los comandos '$' son persistentes al cargar);
+    // antes se repetían en cada cue, con una línea vacía si no había alineación
+    if Ord(Subtitles[i].Align) <> PrevH then
+    begin
+      // sin alineación propia: centro (el default), salvo al principio
+      if Subtitles[i].Align <> shaNone then
+        StringList.Add(HAlignToString(Subtitles[i].Align))
+      else if PrevH <> -1 then
+        StringList.Add(HAlignToString(shaCenter));
+      PrevH := Ord(Subtitles[i].Align);
+    end;
+    if Ord(Subtitles[i].VAlign) <> PrevV then
+    begin
+      PrevV := Ord(Subtitles[i].VAlign);
+      StringList.Add(VAlignToString(Subtitles[i].VAlign));
+    end;
 //    StringList.Add(InitialTime + #9 + FinalTime + #9 + ReplaceString(Text, LineEnding, '<P>'));
     StringList.Add(InitialTime + #9 + FinalTime + #9 + ReplaceString(Text, LineEnding, '<P>'));
   end;

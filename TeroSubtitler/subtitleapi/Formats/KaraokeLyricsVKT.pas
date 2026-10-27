@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit KaraokeLyricsVKT;
@@ -94,16 +94,36 @@ var
   InitialTime : Integer;
   FinalTime   : Integer;
   Text        : String;
+
+  // Centésimas de segundo de una línea '{01234 texto}' -> ms, o -1 si la línea
+  // no trae un número válido. Antes StrToInt(Copy(s, 2, Pos(' ', s) - 2)): con
+  // una línea '{...' sin espacio el Copy daba '' y StrToInt lanzaba
+  // EConvertError, abortando toda la carga.
+  function LineToMS(const S: String): Integer;
+  var
+    P, V: Integer;
+  begin
+    Result := -1;
+    P := Pos(' ', S);
+    if P <= 2 then Exit;
+    V := StrToIntDef(Copy(S, 2, P - 2), -1);
+    if (V < 0) or (V > 100000000) then Exit; // *10 no debe desbordar Integer
+    Result := V * 10;
+  end;
+
 begin
   Result := False;
   try
     for i := 0 to SubtitleFile.Count-1 do
       if SubtitleFile[i].StartsWith('{') then
       begin
-        InitialTime := StrToInt(Copy(SubtitleFile[i], 2, Pos(' ', SubtitleFile[i]) - 2))*10;
+        InitialTime := LineToMS(SubtitleFile[i]);
+        if InitialTime < 0 then Continue;
+
+        FinalTime := -1;
         if (i+1 <= (SubtitleFile.Count-1)) and (Copy(SubtitleFile[i+1], 1, 1) = '{') then
-          FinalTime := StrToInt(Copy(SubtitleFile[i+1], 2, Pos(' ', SubtitleFile[i+1]) - 2))*10
-        else
+          FinalTime := LineToMS(SubtitleFile[i+1]);
+        if FinalTime < 0 then
           FinalTime := InitialTime + 2000;
 
         Text := Copy(SubtitleFile[i], Pos(' ', SubtitleFile[i]) + 1, LastDelimiter('}', SubtitleFile[i]) - (Pos(' ', SubtitleFile[i]) + 1));
@@ -122,8 +142,6 @@ function TUWKaraokeLyricsVKT.SaveSubtitle(const FileName: String; const FPS: Dou
 var
   i       : Integer;
   Text    : String;
-  DateSep : Char;
-  DateFor : String;
 begin
   Result  := False;
 
@@ -132,13 +150,9 @@ begin
   StringList.Add('# CREATOR=Project author');
   StringList.Add('# VIDEO SOURCE=C:\Untitled.avi');
   // DATE
-  DateSep         := SysUtils.FormatSettings.DateSeparator;
-  DateFor         := SysUtils.FormatSettings.ShortDateFormat;
-  SysUtils.FormatSettings.DateSeparator   := '-';
-  SysUtils.FormatSettings.ShortDateFormat := 'yyyy/mm/dd';
-  StringList.Add('# DATE=' + DateToStr(Date));
-  SysUtils.FormatSettings.DateSeparator   := DateSep;
-  SysUtils.FormatSettings.ShortDateFormat := DateFor;
+  // Antes se cambiaban DateSeparator/ShortDateFormat GLOBALES y se
+  // restauraban después; FormatDateTime da el mismo 'yyyy-mm-dd' sin tocarlos.
+  StringList.Add('# DATE=' + FormatDateTime('yyyy-mm-dd', Date));
   //
   StringList.Add('# </HEAD>');
   StringList.Add('#');

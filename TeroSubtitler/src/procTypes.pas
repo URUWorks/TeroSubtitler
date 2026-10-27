@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procTypes;
@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Graphics, LCLType, UWSubtitleAPI, UWSubtitleAPI.Formats,
   BGRABitmap, procConventions, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procMRU,
-  WAVDisplayer, ATSynEdit, Forms, UWSystem.TimeUtils;
+  WAVDisplayer, ATSynEdit, Forms, Types, UWSystem.TimeUtils;
 
 const
 
@@ -148,7 +148,7 @@ const
   FFMPEG_Params        = '-i "%input" -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y "%output"';
   FFMPEG_SCParams      = '-hide_banner -i "%input" -vf "select=''gt(scene,%value)'',showinfo" -f null -';
   FFMPEG_VideoEncoding = '-i "%input" -vf "%extrasubtitles=''%subtitle'':force_style=''%style''" -s %widthx%height %videosettings %audiosettings -y -hide_banner "%output"';
-  FFMPEG_Thumbnail     = '-ss %timestr -i "%input" -frames:v 1 -update 1 -s 90x58 -pix_fmt rgb565 -y -hide_banner "%output"';
+  FFMPEG_Thumbnail     = '-ss %timestr -i "%input" -frames:v 1 -update 1 -vf scale=-2:120 -pix_fmt bgr24 -y -hide_banner "%output"';
   FFMPEG_Info          = '-hide_banner -i "%input"';
   FFMPEG_ExtractStream = '-hide_banner -i "%input" -map 0:%trackid -c copy -y "%output"';
   FFMPEG_Karaoke       = '-hide_banner -i "%input" -af pan=''stereo|c0=c0|c1=-1*c1'' -ac 1 -y "%output"';
@@ -184,7 +184,7 @@ const
   //FFMPEG_Params        = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y %output';
   FFMPEG_SCParams      = '-hide_banner -i %input -vf select=''gt(scene,%value)'',showinfo -f null -';
   FFMPEG_VideoEncoding = '-i %input -vf %extrasubtitles=''%subtitle'':force_style=''%style'' -s %widthx%height %videosettings %audiosettings -y -hide_banner %output';
-  FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -s 90x58 -pix_fmt rgb565 -y -hide_banner %output';
+  FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -vf scale=-2:120 -pix_fmt bgr24 -y -hide_banner %output';
   FFMPEG_Info          = '-hide_banner -i %input';
   FFMPEG_ExtractStream = '-hide_banner -i %input -map 0:%trackid -c copy -y %output';
   FFMPEG_Karaoke       = '-hide_banner -i %input -af pan=''stereo|c0=c0|c1=-1*c1'' -ac 1 -y %output';
@@ -220,7 +220,7 @@ const
   //FFMPEG_Params        = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y %output';
   FFMPEG_SCParams      = '-hide_banner -i %input -vf select=''gt(scene,%value)'',showinfo -f null -';
   FFMPEG_VideoEncoding = '-i %input -vf %extrasubtitles=''%subtitle'':force_style=''%style'' -s %widthx%height %videosettings %audiosettings -y -hide_banner %output';
-  FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -s 90x58 -pix_fmt rgb565 -y -hide_banner %output';
+  FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -vf scale=-2:120 -pix_fmt bgr24 -y -hide_banner %output';
   FFMPEG_Info          = '-hide_banner -i %input';
   FFMPEG_ExtractStream = '-hide_banner -i %input -map 0:%trackid -c copy -y %output';
   FFMPEG_Karaoke       = '-hide_banner -i %input -af pan=''stereo|c0=c0|c1=-1*c1'' -ac 1 -y %output';
@@ -333,7 +333,7 @@ type
   TWAVEOptions = record
     LoopCount           : Byte;
     Thumbnails          : TThumbnails;
-    ThumbnailsInProcess : Boolean;
+    ThumbnailTimes      : TIntegerDynArray; // scene change of each thumbnail
   end;
 
   { TTools }
@@ -423,6 +423,9 @@ type
     WebSearchURL           : String;
     GUILanguage            : String;
     HunspellLanguage       : String;
+    TMFileName             : String; // last translation memory, reopened at startup
+    TMSrcLang              : String;
+    TMDstLang              : String;
     ShortCutPreset         : String;
     UnicodeChars           : array of TUTF8Char;
   end;

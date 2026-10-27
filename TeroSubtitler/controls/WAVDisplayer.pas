@@ -1,7 +1,7 @@
 {*
  *  URUWorks Waveform Displayer Control
  *
- *  Copyright (C) 2021-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2021-2026 URUWorks, uruworks@gmail.com.
  *
  *  Based on the great work of:
  * -----------------------------------------------------------------------------
@@ -131,8 +131,6 @@ type
     FLengthMS      : Integer;
     FPositionMS    : Integer;
     FPageSizeMS    : Integer;
-    FOldPositionMs : Integer; // Used to optimize drawing
-    FOldPageSizeMs : Integer;
 
     FStepMs  : Integer;
     FStepLog : Integer;
@@ -154,8 +152,17 @@ type
 
     FDrawThumbnails    : Boolean;
     FThumbnails        : TThumbnails;
+    FThumbTimes        : TIntegerDynArray; // shot change time of each thumbnail
     FDefaultThumbnail  : TBitmap;
     FStretchThumbnails : Boolean;
+    {$IFDEF USEBGRABITMAP}
+    // thumbnails already converted and resampled to the drawn size
+    FThumbCache        : array of TBGRABitmap;
+    FDefaultThumbCache : TBGRABitmap;
+    // rendered texts (time line labels, subtitle texts), see DrawCachedText
+    FTextCache         : TStringList;
+    FTextCachePixels   : Int64;
+    {$ENDIF}
 
     FGAP               : Integer; // Minimum blank between subtitle in ms
     FDrawGAP           : Boolean;
@@ -172,6 +179,7 @@ type
 
     FSceneChangeList    : TIntegerDynArray;
     FSceneChangeEnabled : Boolean;
+    FOnSceneChangeListChange : TNotifyEvent;
 
     FMouseIsDown                 : Boolean;
     FEnableMouseAntiOverlapping  : Boolean;
@@ -220,7 +228,7 @@ type
     function SetMinBlankAt(const TimeMs: Integer): Boolean;
 
     procedure SetSelectedSubtitleItem(const Value: PUWSubtitleItem; const UpdateDisplay: Boolean; const UpdatePosition: Boolean);
-    function CheckSubtitleItemForDynamicSelection(const Subtitle: TUWSubtitleItem; const CursorPosMS, SubtitleSelWindow, X, Y: Integer): Boolean;
+    function CheckSubtitleItemForDynamicSelection(constref Subtitle: TUWSubtitleItem; const CursorPosMS, SubtitleSelWindow, X, Y: Integer): Boolean;
     procedure SetLengthMS(const LenghtMS: Integer);
     procedure SetPositionMS(NewPosition: Integer);
     procedure OnScrollBarChange(Sender: TObject);
@@ -238,7 +246,7 @@ type
     // draw
     procedure DrawAlphaRect(const ABitmap:{$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const x1, x2 : Integer; const y1, y2 : Integer; const AColor: {$IFDEF USEBGRABITMAP}TBGRAPixel{$ELSE}TColor{$ENDIF});
     procedure DrawAlphaRectByTimes(const ABitmap:{$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const t1, t2 : Integer; const y1, y2 : Integer; const AColor: {$IFDEF USEBGRABITMAP}TBGRAPixel{$ELSE}TColor{$ENDIF});
-    procedure DrawWave(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const TryOptimize: Boolean = False);
+    procedure DrawWave(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
     procedure DrawTimeLine(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
     procedure DrawItemsCanvas(const ACompleteDraw: Boolean = False);
     procedure DrawSubtitleItem(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
@@ -249,7 +257,23 @@ type
     procedure DrawGridLines(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
     procedure DrawSceneChange(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
     procedure DrawMinimumBlank(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
+    procedure PutThumbnail(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const R: TRect; const AIndex: Integer; const AVisibleWidth: Integer = -1);
+    procedure DoSceneChangeListChange;
+    procedure DefaultThumbnailChange(Sender: TObject);
+    procedure ClearThumbCache(const AOnlyDefault: Boolean = False);
+    {$IFDEF USEBGRABITMAP}
+    function GetThumbBGRA(const AIndex, AWidth, AHeight: Integer): TBGRABitmap;
+    procedure ClearTextCache;
+    procedure DrawCachedText(const ABitmap: TBGRABitmap; const AIsRect: Boolean; const R: TRect; const X, Y: Integer; const S: String; const ATS: TTextStyle);
+    {$ENDIF}
+    procedure DoTextOut(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const X, Y: Integer; const S: String);
+    procedure DoTextRect(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const R: TRect; const X, Y: Integer; const S: String; const ATS: TTextStyle);
     procedure CalculateTimeDivisionStepMs;
+    procedure GetFrameRulerStep(out AStepFrames, ASubFrames: Integer);
+    function RulerFrameToMs(const AFrame: Int64): Integer;
+    function RulerFirstFrame(const AStepFrames: Integer): Int64;
+    function GetFramePixels: Double;
+    function GetMinorGridColor: {$IFDEF USEBGRABITMAP}TBGRAPixel{$ELSE}TColor{$ENDIF};
   protected
     procedure Paint; override;
     procedure DoOnResize; override;
@@ -286,6 +310,7 @@ type
     procedure SelectSubtitle(const Index: Integer; const UpdateDisplay: Boolean; const UpdatePosition: Boolean);
     function GetSubtitleIdxAtCursorPos: Integer;
     procedure DoUpdate(const Complete: Boolean = True);
+    procedure DoUpdateSubtitles;
     // scenechange
     procedure SetSceneChangeEnabled(const AValue: Boolean);
     procedure LoadSceneChangeFile(const AFileName: String; const ASMPTE: Boolean = False);
@@ -303,6 +328,10 @@ type
     procedure InsertSceneChange(const Src: TIntegerDynArray); overload;
     procedure InsertSceneChange(const ATimeInMS: Integer); overload;
     procedure SetSceneChangeTimeMode(const ASMPTE: Boolean);
+    // thumbnails (one for each scene change)
+    procedure SetThumbnails(const ATimes: TIntegerDynArray; const ABitmaps: TThumbnails);
+    procedure ThumbnailChanged(const AIndex: Integer);
+    function ThumbnailsVisible: Boolean;
     // silent/zonelist
     procedure ClearZoneList(var AZoneList: TZonesList);
     function DetectZoneList(var AZoneList: TZonesList; const AFindSilent: Boolean = True; const Threshold: Integer = 100; const WinSizeMS: Integer = 100): Boolean;
@@ -312,7 +341,7 @@ type
     property SelectedItem: PUWSubtitleItem read FSelectedSubtitle;
     property IsMouseDown: Boolean read FMouseIsDown;
     property SubTextStyle: TTextStyle read FTS write FTS;
-    property Thumbnails: TThumbnails read FThumbnails write FThumbnails;
+    property Thumbnails: TThumbnails read FThumbnails;
     property DefaultThumbnail: TBitmap read FDefaultThumbnail;
     property SMPTE: Boolean read FSMPTE write FSMPTE;
     property TimecodeMode: TTimecodeMode read FTimecodeMode write FTimecodeMode;
@@ -342,6 +371,7 @@ type
     property OnSelectedSubtitleItemChanged : TSubtitleItemChangedEvent    read FOnItemChangedEvent           write FOnItemChangedEvent;
     property OnTimeLineClick               : TTimeLineClickEvent          read FOnTimeLineClickEvent         write FOnTimeLineClickEvent;
     property OnPeakCreation                : TPeakCreationEvent           read FOnPeakCreation               write FOnPeakCreation;
+    property OnSceneChangeListChange       : TNotifyEvent                 read FOnSceneChangeListChange      write FOnSceneChangeListChange;
     //property OnSubtitleItemStartDblClick   : TSubtitleItemDblClickEvent   read FOnSubtitleItemStartDblClick  write FOnSubtitleItemStartDblClick;
     //property OnSubtitleItemStopDblClick    : TSubtitleItemDblClickEvent   read FOnSubtitleItemStopDblClick   write FOnSubtitleItemStopDblClick;
 
@@ -361,9 +391,6 @@ type
 
 procedure Register;
 
-const
-  DefaultThumbnailsCount = 100;
-
 // -----------------------------------------------------------------------------
 
 implementation
@@ -372,7 +399,8 @@ uses
   UWSystem.SysUtils;
 
 const
-  DefaultPageSizeMS = 10000; // 5000
+  DefaultPageSizeMS = 15000;
+  MinFramePixels = 5; // min. pixels per frame to draw a line for every frame
 
 // -----------------------------------------------------------------------------
 
@@ -476,8 +504,19 @@ begin
 
   FDrawThumbnails   := False;
   FThumbnails       := NIL;
+  FThumbTimes       := NIL;
   FDefaultThumbnail := TBitmap.Create;
+  FDefaultThumbnail.OnChange := @DefaultThumbnailChange;
   StretchThumbnails := False;
+  {$IFDEF USEBGRABITMAP}
+  FThumbCache        := NIL;
+  FDefaultThumbCache := NIL;
+  FTextCache         := TStringList.Create;
+  FTextCache.Sorted        := True;
+  FTextCache.CaseSensitive := True;
+  FTextCache.OwnsObjects   := True;
+  FTextCachePixels   := 0;
+  {$ENDIF}
 
   FDynamicSelection.InitialTime := 0;
   FDynamicSelection.FinalTime   := 0;
@@ -500,8 +539,6 @@ begin
   FPrevSubIdx := -1;
   FNextSubIdx := -1;
 
-  FOldPositionMs := -1;
-  FOldPageSizeMs := -1;
 
   FOffsetMs := 0;
 
@@ -583,6 +620,10 @@ begin
 
   ClearZoneList(FSilentZones);
 
+  ClearThumbCache;
+  {$IFDEF USEBGRABITMAP}
+  FTextCache.Free;
+  {$ENDIF}
   FDefaultThumbnail.Free;
   FBackBufferItems.Free;
   FBackBufferWAVE.Free;
@@ -636,8 +677,8 @@ begin
     Result := 0
   else
   begin
-    if FFPSTimeMode then
-      Result := Round(GetCorrectTimePos(Time) * FMsToPixelRatio)
+    if FFPSTimeMode then // round the absolute time to frames, not the relative one
+      Result := Round((GetCorrectTimePos(Time + FPositionMS) - FPositionMS) * FMsToPixelRatio)
     else
       Result := Round(Time * FMsToPixelRatio);
   end;
@@ -669,21 +710,21 @@ end;
 
 function TUWWaveformDisplayer.GetSubCanvasHeight: Integer;
 begin
-  Result := GetCanvasHeight div iff(FDrawThumbnails, 3, 2);
+  Result := GetCanvasHeight div iff(ThumbnailsVisible, 3, 2);
 end;
 
 //------------------------------------------------------------------------------
 
 function TUWWaveformDisplayer.GetSubCanvasY: Integer;
 begin
-  Result := GetSubCanvasHeight * iff(FDrawThumbnails, 1, 0);
+  Result := GetSubCanvasHeight * iff(ThumbnailsVisible, 1, 0);
 end;
 
 //------------------------------------------------------------------------------
 
 function TUWWaveformDisplayer.GetWAVECanvasY: Integer;
 begin
-  Result := GetSubCanvasHeight * iff(FDrawThumbnails, 2, 1);
+  Result := GetSubCanvasHeight * iff(ThumbnailsVisible, 2, 1);
 end;
 
 //------------------------------------------------------------------------------
@@ -865,30 +906,95 @@ var
   MaxPosStep : Integer;
 begin
   // Do some little calculation to try to show "round" time
-  if FFPSTimeMode then
-  begin
-    MaxPosStep := Round(Width / (Canvas.TextWidth('0:00:00:00') * 2));
-    FStepMs    := Round(FPageSizeMS / MaxPosStep);
-    if FStepMs = 0 then FStepMs := 1;
+  // (frames mode uses GetFrameRulerStep, calculated when drawing)
+  MaxPosStep := Max(1, Round(Width / (Canvas.TextWidth('0:00:00.000') * 2)));
+  FStepMs    := Round(FPageSizeMS / MaxPosStep);
+  if FStepMs = 0 then FStepMs := 1;
 
-    FStepLog := Trunc(Power(10, Trunc(Log10(FStepMs))));
-    FStepMs  := GetCorrectTimePos(FStepMs div FStepLog * FStepLog);
-    if FStepMs = 0 then FStepMs := 1;
-  end
-  else
-  begin
-    MaxPosStep := Round(Width / (Canvas.TextWidth('0:00:00.000') * 2));
-    FStepMs    := Round(FPageSizeMS / MaxPosStep);
-    if FStepMs = 0 then FStepMs := 1;
-
-    FStepLog := Trunc(Power(10, Trunc(Log10(FStepMs))));
-    FStepMs  := FStepMs div FStepLog * FStepLog;
-  end;
+  FStepLog := Trunc(Power(10, Trunc(Log10(FStepMs))));
+  FStepMs  := FStepMs div FStepLog * FStepLog;
 
   if FPageSizeMS > 0 then
     FMsToPixelRatio := Width / FPageSizeMS
   else
     FMsToPixelRatio := 0;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.GetFrameRulerStep(out AStepFrames, ASubFrames: Integer);
+const
+  // frame steps, then steps in seconds (multiplied by the nominal fps)
+  FrameSteps : array[0..3] of Integer = (1, 2, 5, 10);
+  SecSteps   : array[0..12] of Integer = (1, 2, 5, 10, 15, 30, 60, 120, 300, 600, 900, 1800, 3600);
+var
+  FPSNom, MinPx, i : Integer;
+  FramePx : Double;
+begin
+  if FFPS > 0 then
+    FPSNom := Max(1, Round(FFPS))
+  else
+    FPSNom := 25;
+
+  FramePx := GetFramePixels;
+  MinPx := Canvas.TextWidth('00:00:00:00') + 12;
+
+  AStepFrames := 0;
+  for i := Low(FrameSteps) to High(FrameSteps) do
+    if (FrameSteps[i] < FPSNom) and (FrameSteps[i] * FramePx >= MinPx) then
+    begin
+      AStepFrames := FrameSteps[i];
+      Break;
+    end;
+
+  if AStepFrames = 0 then
+  begin
+    AStepFrames := SecSteps[High(SecSteps)] * FPSNom;
+    for i := Low(SecSteps) to High(SecSteps) do
+      if (SecSteps[i] * FPSNom * FramePx >= MinPx) then
+      begin
+        AStepFrames := SecSteps[i] * FPSNom;
+        Break;
+      end;
+  end;
+
+  // subdivision
+  if AStepFrames mod 2 = 0 then
+    ASubFrames := AStepFrames div 2
+  else if AStepFrames mod 5 = 0 then
+    ASubFrames := AStepFrames div 5
+  else
+    ASubFrames := 0;
+
+  if (ASubFrames > 0) and (ASubFrames * FramePx < 4) then
+    ASubFrames := 0;
+end;
+
+//------------------------------------------------------------------------------
+
+function TUWWaveformDisplayer.RulerFrameToMs(const AFrame: Int64): Integer;
+begin
+  if FFPS > 0 then
+    Result := Round(AFrame * 1000.0 / FFPS)
+  else
+    Result := Round(AFrame * 1000.0 / 25);
+end;
+
+//------------------------------------------------------------------------------
+
+function TUWWaveformDisplayer.GetFramePixels: Double;
+begin
+  Result := FMsToPixelRatio * (RulerFrameToMs(1000) / 1000.0);
+end;
+
+//------------------------------------------------------------------------------
+
+function TUWWaveformDisplayer.RulerFirstFrame(const AStepFrames: Integer): Int64;
+var
+  AFPS: Double;
+begin
+  if FFPS > 0 then AFPS := FFPS else AFPS := 25;
+  Result := Trunc(FPositionMS * AFPS / 1000) div AStepFrames * AStepFrames;
 end;
 
 //------------------------------------------------------------------------------
@@ -902,7 +1008,7 @@ end;
 
 procedure TUWWaveformDisplayer.SetPlayCursorMS(NewPosMS: Integer; const ABothCursor: Boolean = False);
 var
-  AMiddle: Integer;
+  AMiddle, OldPositionMS: Integer;
   OldPixel, NewPixel: Integer;
 begin
   Constrain(NewPosMS, 0, FLengthMS);
@@ -915,16 +1021,12 @@ begin
     if Assigned(FOnPlayCursorChange) then FOnPlayCursorChange(Self);
 
     NewPixel := TimeToPixel(FPlayCursorMS - FPositionMS);
+    OldPositionMS := FPositionMS;
 
     if not FCenterPlay then
     begin
       if not FMouseIsDown and ((NewPosMS < FPositionMS) or (NewPosMS > (FPositionMS + FPageSizeMS))) then
-        SetPositionMS(NewPosMS - (FPageSizeMS div 8)) // Keep 1/8 of the previous display
-      else
-      begin
-        if OldPixel <> NewPixel then
-          UpdateView([uvfPlayCursor]);
-      end;
+        SetPositionMS(NewPosMS - (FPageSizeMS div 8)); // Keep 1/8 of the previous display
     end
     else
     begin
@@ -932,13 +1034,14 @@ begin
       if not FMouseIsDown and
         ((NewPosMS >= (FPositionMS + AMiddle)) and ((NewPosMS - AMiddle) <= (FLengthMS - FPageSizeMS))) or
         ((NewPosMS < FPositionMS) or (NewPosMS > (FPositionMS + FPageSizeMS))) then
-        SetPositionMS(NewPosMS - AMiddle)
-      else
-      begin
-        if OldPixel <> NewPixel then
-          UpdateView([uvfPlayCursor]);
-      end;
+        SetPositionMS(NewPosMS - AMiddle);
     end;
+
+    // The view didn't scroll, redraw only the play cursor. This also covers
+    // SetPositionMS with the same position (it doesn't redraw), e.g. a frame
+    // step back to the centered position after stepping backwards
+    if (FPositionMS = OldPositionMS) and (OldPixel <> NewPixel) then
+      UpdateView([uvfPlayCursor]);
   end;
 end;
 
@@ -1011,7 +1114,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-function TUWWaveformDisplayer.CheckSubtitleItemForDynamicSelection(const Subtitle: TUWSubtitleItem;
+function TUWWaveformDisplayer.CheckSubtitleItemForDynamicSelection(constref Subtitle: TUWSubtitleItem;
   const CursorPosMS, SubtitleSelWindow, X, Y: Integer): Boolean;
 var
   NewDynamicEditMode : TDynamicEditMode;
@@ -1132,7 +1235,7 @@ begin
 
     if (ssShift in Shift) or (FDynamicEditMode <> demNone) then
     begin
-      if Assigned(FDynamicSelSub) and (FDynamicSelSub <> @FSelectedSubtitle) then
+      if Assigned(FDynamicSelSub) and (FDynamicSelSub <> FSelectedSubtitle) then
       begin
         SetSelectedSubtitleItem(FDynamicSelSub, False, False);
         Include(UpdateFlags, uvfSelection);
@@ -1180,7 +1283,7 @@ begin
           FSelectedSubtitle^.FinalTime   := FDynamicSelection.FinalTime;
         end;
         Include(UpdateFlags, uvfSubtitle);
-        if Assigned(FOnSelectedSubtitleItem) and (FDynamicEditMode = demNone) then FOnSelectedSubtitleItemChange(Self);
+        if Assigned(FOnSelectedSubtitleItemChange) and (FDynamicEditMode = demNone) then FOnSelectedSubtitleItemChange(Self);
       end;
       if Assigned(FOnSelectionChange) then FOnSelectionChange(Self);
       Include(UpdateFlags, uvfSelection);
@@ -1310,12 +1413,16 @@ var
   SubLen,
   NewIT, NewFT      : Integer;
   Dist              : Integer;
+  SnapPos           : Integer;
 begin
   inherited;
 
   if (ssDouble in Shift) or (not IsTimeLineEnabled) then Exit;
 
   UpdateFlags := [];
+  // Dist is the tolerance used when pushing the neighbour subtitle (Alt+drag),
+  // it must not depend on the snapping result
+  Dist := 0;
 
   if (FMouseIsDown) then
   begin
@@ -1334,9 +1441,9 @@ begin
       // Snapping
       if (not (ssCtrl in Shift)) and (FSnappingEnabled) then
       begin
-        Dist := FindCorrectedSnappingPoint(ACursorPosMS);
-        if (Dist <> -1) then
-          ACursorPosMS := Dist;
+        SnapPos := FindCorrectedSnappingPoint(ACursorPosMS);
+        if (SnapPos <> -1) then
+          ACursorPosMS := SnapPos;
       end;
 
       if (FDynamicSelValueMs <> -1) and (FDynamicSelValueMs <> ACursorPosMS) then
@@ -1698,42 +1805,59 @@ begin
   PeakFileName := ChangeFileExt(FileName, '.peak');
   if FileExists(PeakFileName) then
   begin
-    // Load peak file
+    // Load peak file. Validate signature, version and size: a damaged file
+    // must not make us allocate a huge table or read past its end; in that
+    // case the peak data is regenerated from the wave file.
+    Normalized := False;
     PeakFS := TFileStream.Create(PeakFileName, fmOpenRead or fmShareDenyWrite);
     try
-      // Check filesize, we need at least
-      HDRSize := Length(PeakFileID) + SizeOf(PeakFileVerRead) + SizeOf(FLengthMs) +
-        SizeOf(FWaveFormat.nSamplesPerSec) + SizeOf(FWaveFormat.nChannels) +
-        SizeOf(FWaveFormat.wBitsPerSample) + SizeOf(FSamplesPerPeak) +
-        SizeOf(FPeakTabSize);
+      try
+        // Check filesize, we need at least
+        HDRSize := Length(PeakFileID) + SizeOf(PeakFileVerRead) + SizeOf(FLengthMs) +
+          SizeOf(FWaveFormat.nSamplesPerSec) + SizeOf(FWaveFormat.nChannels) +
+          SizeOf(FWaveFormat.wBitsPerSample) + SizeOf(FSamplesPerPeak) +
+          SizeOf(FPeakTabSize);
 
-      if (PeakFS.Size > HDRSize) then
-      begin
-        SetLength(PeakFileIDRead, Length(PeakFileID));
-        PeakFS.ReadBuffer(PeakFileIDRead[1], Length(PeakFileID));
-        PeakFS.ReadBuffer(PeakFileVerRead, SizeOf(PeakFileVerRead));
-        PeakFS.ReadBuffer(LengthMS, SizeOf(LengthMS));
-        PeakFS.ReadBuffer(FWaveFormat.nSamplesPerSec, SizeOf(FWaveFormat.nSamplesPerSec));
-        PeakFS.ReadBuffer(FWaveFormat.nChannels, SizeOf(FWaveFormat.nChannels));
-        PeakFS.ReadBuffer(FWaveFormat.wBitsPerSample, SizeOf(FWaveFormat.wBitsPerSample));
-        PeakFS.ReadBuffer(FSamplesPerPeak, SizeOf(FSamplesPerPeak));
-        PeakFS.ReadBuffer(FPeakTabSize, SizeOf(FPeakTabSize));
-        FPeakTab := NIL;
-        SetLength(FPeakTab, FPeakTabSize);
-        PeakFS.Read(FPeakTab[0], FPeakTabSize * SizeOf(TPeak));
-
-        Normalized := NormalizePeakTab(-1);
-        if Normalized then
+        if (PeakFS.Size > HDRSize) then
         begin
-          // rewrite normalized data
-          SavePeakFile;
-        end;
+          SetLength(PeakFileIDRead, Length(PeakFileID));
+          PeakFS.ReadBuffer(PeakFileIDRead[1], Length(PeakFileID));
+          PeakFS.ReadBuffer(PeakFileVerRead, SizeOf(PeakFileVerRead));
+          PeakFS.ReadBuffer(LengthMS, SizeOf(LengthMS));
+          PeakFS.ReadBuffer(FWaveFormat.nSamplesPerSec, SizeOf(FWaveFormat.nSamplesPerSec));
+          PeakFS.ReadBuffer(FWaveFormat.nChannels, SizeOf(FWaveFormat.nChannels));
+          PeakFS.ReadBuffer(FWaveFormat.wBitsPerSample, SizeOf(FWaveFormat.wBitsPerSample));
+          PeakFS.ReadBuffer(FSamplesPerPeak, SizeOf(FSamplesPerPeak));
+          PeakFS.ReadBuffer(FPeakTabSize, SizeOf(FPeakTabSize));
 
-        CreatePeakFile := False;
+          if (PeakFileIDRead = PeakFileID) and (PeakFileVerRead = PeakFileVer) and
+             (FPeakTabSize > 0) and (FSamplesPerPeak > 0) and
+             (Int64(FPeakTabSize) * SizeOf(TPeak) = PeakFS.Size - HDRSize) then
+          begin
+            FPeakTab := NIL;
+            SetLength(FPeakTab, FPeakTabSize);
+            PeakFS.ReadBuffer(FPeakTab[0], FPeakTabSize * SizeOf(TPeak));
+
+            Normalized := NormalizePeakTab(-1);
+            CreatePeakFile := False;
+          end;
+        end;
+      except
+        CreatePeakFile := True;
+      end;
+
+      if CreatePeakFile then
+      begin
+        FPeakTab := NIL;
+        FPeakTabSize := 0;
       end;
     finally
       PeakFS.Free;
     end;
+
+    // rewrite normalized data, once the file is no longer open for reading
+    if Normalized and not CreatePeakFile then
+      SavePeakFile;
   end;
 
   if CreatePeakFile then
@@ -1887,26 +2011,17 @@ begin
   begin
     CalculateTimeDivisionStepMs;
     DrawWave(FBackBufferWAVE);
-
-    FOldPositionMs := FPositionMs;
-    FOldPageSizeMs := FPageSizeMs;
-
     DrawTimeLine(FBackBufferWAVE);
 
-    if FDrawThumbnails then
+    if ThumbnailsVisible then
       DrawThumbnails(FBackBufferWAVE, 0, GetSubCanvasHeight);
   end
   else if (uvfPosition in UpdateViewFlags) then
   begin
-    // Maybe we can draw only a part of the WAV
-    DrawWave(FBackBufferWAVE, True);
-
-    FOldPositionMs := FPositionMs;
-    FOldPageSizeMs := FPageSizeMs;
-
+    DrawWave(FBackBufferWAVE);
     DrawTimeLine(FBackBufferWAVE);
 
-    if FDrawThumbnails then
+    if ThumbnailsVisible then
       DrawThumbnails(FBackBufferWAVE, 0, GetSubCanvasHeight);
   end;
 
@@ -2058,6 +2173,15 @@ end;
 function TUWWaveformDisplayer.GetSubtitleIdxAtCursorPos: Integer;
 begin
   Result := FSubtitles.FindFirst(FCursorMS);
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.DoUpdateSubtitles;
+begin
+  // redraw only the subtitles layer over the cached wave (cheap), e.g. while
+  // typing, also during playback
+  UpdateView([uvfSubtitle]);
 end;
 
 //------------------------------------------------------------------------------

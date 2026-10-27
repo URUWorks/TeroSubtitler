@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit MPlayer;
@@ -109,7 +109,8 @@ begin
     for i := 0 to SubtitleFile.Count-1 do
     begin
       if (IsInteger(Copy(SubtitleFile[i], 1, Pos(',',SubtitleFile[i]) - 1))) and
-         (IsInteger(Copy(SubtitleFile[i], Pos(',',SubtitleFile[i]) + 1, Pos(',', SubtitleFile[i], Pos(',',SubtitleFile[i]) + 1) - (Pos(',',SubtitleFile[i]) + 1)))) then
+         (IsInteger(Copy(SubtitleFile[i], Pos(',',SubtitleFile[i]) + 1, Pos(',', SubtitleFile[i], Pos(',',SubtitleFile[i]) + 1) - (Pos(',',SubtitleFile[i]) + 1)))) and
+         (StringCount(',', SubtitleFile[i]) >= 3) then // sin 3 comas el texto salía como la línea entera
       begin
         InitialTime   := FramesToTime(StrToInt(Copy(SubtitleFile[i], 1, Pos(',',SubtitleFile[i]) - 1)), FPS);
         FinalTime     := FramesToTime(StrToInt(Copy(SubtitleFile[i], Pos(',',SubtitleFile[i]) + 1, Pos(',', SubtitleFile[i], Pos(',',SubtitleFile[i]) + 1) - (Pos(',',SubtitleFile[i]) + 1))), FPS);

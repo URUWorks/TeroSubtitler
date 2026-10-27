@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit SubRip;
@@ -22,8 +22,8 @@ unit SubRip;
 interface
 
 uses
-  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats;
+  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.SysUtils,
+  UWSubtitleAPI.Formats;
 
 type
 
@@ -100,13 +100,55 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// Parses "h:mm:ss,zzz" also accepting 1-2 digit hours and "." as decimal
+// separator. Returns -1 if the text is not a valid time.
+function ParseSRTTime(const AText: String): Integer;
+var
+  Parts : TStringArray;
+  s, ms : String;
+  p, h, m, sec, z : Integer;
+begin
+  Result := -1;
+  s := Trim(AText);
+  p := Pos(' ', s); // remove coordinates after the final time (X1:...)
+  if p > 0 then s := Copy(s, 1, p-1);
+  s := StringReplace(s, '.', ',', [rfReplaceAll]);
+
+  Parts := s.Split([':']);
+  if Length(Parts) <> 3 then Exit;
+  p := Pos(',', Parts[2]);
+  if p > 0 then
+  begin
+    ms := Copy(Parts[2], p+1, 3);
+    while Length(ms) < 3 do ms := ms + '0';
+    Parts[2] := Copy(Parts[2], 1, p-1);
+  end
+  else
+    ms := '0';
+
+  if not TryStrToInt(Parts[0], h) or not TryStrToInt(Parts[1], m) or
+     not TryStrToInt(Parts[2], sec) or not TryStrToInt(ms, z) then Exit;
+
+  Result := ((h * 3600) + (m * 60) + sec) * 1000 + z;
+end;
+
+// -----------------------------------------------------------------------------
+
+// Antes se exigía ' --> ' con espacios: '00:00:01,000-->00:00:03,000' se perdía
+function IsSRTTimingLine(const ALine: String): Boolean;
+var
+  x: Integer;
+begin
+  x := Pos('-->', ALine);
+  Result := (x > 0) and (ParseSRTTime(Copy(ALine, 1, x-1)) >= 0) and
+    (ParseSRTTime(Copy(ALine, x+3, MaxInt)) >= 0);
+end;
+
+// -----------------------------------------------------------------------------
+
 function TUWSubRip.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
 begin
-  if (Pos(' --> ', SubtitleFile[Row]) > 0) and
-    TimeInFormat(Copy(ReplaceString(SubtitleFile[Row], ' ', ''), 1, 12), 'hh:mm:ss,zzz') then
-    Result := True
-  else
-    Result := False;
+  Result := IsSRTTimingLine(SubtitleFile[Row]);
 end;
 
 // -----------------------------------------------------------------------------
@@ -120,21 +162,25 @@ var
   ExtraInfo   : PSubRip_ExtraInfo;
   X1, X2,
   Y1, Y2      : Integer;
+  IsTop       : Boolean;
 begin
   Result := False;
   try
     i := 0;
     while i < SubtitleFile.Count do
     begin
-      if Pos(' --> ', SubtitleFile[i]) > 0 then
+      if IsSRTTimingLine(SubtitleFile[i]) then
       begin
-        s := ReplaceString(SubtitleFile[i], ' ', '');
-
-        InitialTime := StringToTime(Copy(s, 1, 12));
-        FinalTime   := StringToTime(Copy(s, 16, 12));
+        // split by "-->" instead of fixed widths, so single digit hours or
+        // milliseconds with "." are also read
+        s := SubtitleFile[i];
+        x := Pos('-->', s);
+        InitialTime := ParseSRTTime(Copy(s, 1, x-1));
+        FinalTime   := ParseSRTTime(Copy(s, x+3, MaxInt));
 
         X1 := Pos('X1', SubtitleFile[i]); X2 := Pos('X2', SubtitleFile[i]);
         Y1 := Pos('Y1', SubtitleFile[i]); Y2 := Pos('Y2', SubtitleFile[i]);
+        IsTop := False;
         if (X1 > 0) and (X2 > 0) and (Y1 > 0) and (Y2 > 0) then
         begin
           New(ExtraInfo);  // X1:left X2:right Y1:top Y2:bottom
@@ -155,7 +201,7 @@ begin
               s := Copy(s, 1, X2-1);
 
             if StrToIntDef(s, -1) = 0 then
-              X1 := 2;
+              IsTop := True;
           end;
         end;
 
@@ -166,7 +212,7 @@ begin
 
           while (i < SubtitleFile.Count) and
             ( (i = SubtitleFile.Count-1) or
-              ((i+1 < SubtitleFile.Count) and (Pos(' --> ', SubtitleFile[i+1]) = 0)) ) do
+              ((i+1 < SubtitleFile.Count) and not IsSRTTimingLine(SubtitleFile[i+1])) ) do
           begin
             if Text <> '' then
               Text := Text + sLineBreak + SubtitleFile[i]
@@ -176,15 +222,27 @@ begin
             Inc(i);
           end;
 
-          if Text.IsEmpty and not IsInteger(SubtitleFile[i]) then //
-            Text := SubtitleFile[i];
+          // the line just before the next "-->" is the entry number in a
+          // normal SRT, but text in an SRT without numbering: keep it
+          if (i < SubtitleFile.Count) and (Trim(SubtitleFile[i]) <> '') and
+             not IsSRTTimingLine(SubtitleFile[i]) and not IsInteger(Trim(SubtitleFile[i])) then
+          begin
+            if Text <> '' then
+              Text := Text + sLineBreak + SubtitleFile[i]
+            else
+              Text := SubtitleFile[i];
+          end;
 
           Text := HTMLTagsToTS(Text);
           x := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
 
-          if (ExtraInfo = NIL) and (X1 > 0) then
-            Subtitles.ItemPointer[x]^.VAlign := TSubtitleVAlign(X1);
-        end;
+          // Antes: TSubtitleVAlign(X1), y si X1 no era 'X1:0' quedaba la
+          // posición del texto como valor del enum (fuera de rango)
+          if (ExtraInfo = NIL) and IsTop and (x >= 0) then
+            Subtitles.ItemPointer[x]^.VAlign := svaTop;
+        end
+        else if ExtraInfo <> NIL then
+          Dispose(ExtraInfo); // invalid times: the entry is not added
       end;
       Inc(i);
     end;
@@ -213,7 +271,7 @@ begin
   begin
     StringList.Add(IntToStr(Count));
     Inc(Count);
-    if Subtitles.ExtraInfo[i] <> NIL then
+    if (Subtitles.ExtraInfoType = eiSubRip) and (Subtitles.ExtraInfo[i] <> NIL) then
       with PSubRip_ExtraInfo(Subtitles.ExtraInfo[i])^ do
       begin
         if (X1 <> 0) or (X2 <> 0) or (Y1 <> 0) or (Y2 <> 0) then

@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procSubtitle;
@@ -95,7 +95,29 @@ uses
   formMain, procVST, procUndo, procVST_Loops, procWorkspace, procFixSubtitles,
   UWSystem.Encoding, UWSystem.StrUtils, procMPV,
   UWSubtitleAPI.Tags, UWSubtitleAPI.Formats, procTranscription,
-  UWSubtitles.Utils, Clipbrd, UWSystem.SysUtils;
+  UWSubtitles.Utils, Clipbrd, UWSystem.SysUtils, Math, ExtCtrls;
+
+type
+
+  { TMPVTrackDebounce }
+
+  // When mpv handles the subtitles, rewriting the temporary track and reloading
+  // it on every change (each key, each item inside loops) is very slow; the
+  // changes are grouped and written once after a short pause instead.
+  TMPVTrackDebounce = class
+    procedure DoTimer(Sender: TObject);
+  end;
+
+var
+  MPVTrackTimer: TTimer = NIL;
+  MPVTrackDebounce: TMPVTrackDebounce = NIL;
+
+procedure TMPVTrackDebounce.DoTimer(Sender: TObject);
+begin
+  MPVTrackTimer.Enabled := False;
+  if MPVOptions.SubtitleHandleByMPV and MPVSaveSubtitleTempTrack then
+    MPVReloadSubtitleTempTrack;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -453,6 +475,17 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function JoinNonEmpty(const A, B: String): String;
+begin
+  // avoid leaving a "ghost" line break when one of the parts is empty
+  if A = '' then
+    Result := B
+  else if B = '' then
+    Result := A
+  else
+    Result := A + sLineBreak + B;
+end;
+
 procedure MergeWithNext(const Index: Integer; const APrevious: Boolean = False);
 begin
   if not Subtitles.ValidIndex(Index) or
@@ -462,12 +495,12 @@ begin
 
   if APrevious then
   begin
-    SetSubtitleTexts(Index-1, Subtitles.Text[Index-1] + sLineBreak + Subtitles.Text[Index], Subtitles.Translation[Index-1] + sLineBreak + Subtitles.Translation[Index], False, False, False);
+    SetSubtitleTexts(Index-1, JoinNonEmpty(Subtitles.Text[Index-1], Subtitles.Text[Index]), JoinNonEmpty(Subtitles.Translation[Index-1], Subtitles.Translation[Index]), False, False, False);
     SetSubtitleTime(Index-1, Subtitles[Index].FinalTime, TAG_CONTROL_FINALTIME, False, False);
   end
   else
   begin
-    SetSubtitleTexts(Index+1, Subtitles[Index].Text + sLineBreak + Subtitles.Text[Index+1], Subtitles[Index].Translation + sLineBreak + Subtitles.Translation[Index+1], False, False, False);
+    SetSubtitleTexts(Index+1, JoinNonEmpty(Subtitles.Text[Index], Subtitles.Text[Index+1]), JoinNonEmpty(Subtitles.Translation[Index], Subtitles.Translation[Index+1]), False, False, False);
     SetSubtitleTime(Index+1, Subtitles[Index].InitialTime, TAG_CONTROL_INITIALTIME, False, False);
   end;
   DeleteSubtitle(Index, False, False);
@@ -513,7 +546,7 @@ end;
 function CalcNewSubtitleFinalTime(const Index: Integer; const AInitialTime: Integer): Integer;
 begin
   Result := AInitialTime + AppOptions.Conventions.MinDuration;
-  if (Index >= 0) and (Index < Subtitles.Count) then
+  if (Index >= 0) and (Index+1 < Subtitles.Count) then
   begin
     if Result >= Subtitles[Index+1].InitialTime then
       Result := Subtitles[Index+1].InitialTime - GetDefPause;
@@ -532,8 +565,17 @@ begin
 
   if MPVOptions.SubtitleHandleByMPV then
   begin
-    if MPVSaveSubtitleTempTrack then
-      MPVReloadSubtitleTempTrack;
+    if MPVTrackTimer = NIL then
+    begin
+      MPVTrackDebounce := TMPVTrackDebounce.Create;
+      MPVTrackTimer := TTimer.Create(NIL);
+      MPVTrackTimer.Enabled  := False;
+      MPVTrackTimer.Interval := 300;
+      MPVTrackTimer.OnTimer  := @MPVTrackDebounce.DoTimer;
+    end;
+    // restart the countdown
+    MPVTrackTimer.Enabled := False;
+    MPVTrackTimer.Enabled := True;
   end;
 end;
 
@@ -559,7 +601,10 @@ end;
 
 procedure SetSubtitleTimes(const Index: Integer; const AInitialTime, AFinalTime: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
 begin
-  if (Subtitles.InitialTime[Index] = AInitialTime) and (Subtitles.FinalTime[Index] = AFinalTime) then
+  if not Subtitles.ValidIndex(Index) then Exit;
+  // compare raw stored values: the InitialTime[]/FinalTime[] getters apply the
+  // SMPTE conversion while the setters store the value as given
+  if (Subtitles.ItemPointer[Index]^.InitialTime = AInitialTime) and (Subtitles.ItemPointer[Index]^.FinalTime = AFinalTime) then
     Exit;
 
   UndoInstance.AddUndo(utSubtitleChange, Index, Subtitles[Index], AutoIncrementUndo);
@@ -669,8 +714,9 @@ end;
 
 procedure SetSubtitleValues(const Index: Integer; const AInitialTime, AFinalTime: Integer; const Text: String; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
 begin
-  if (Subtitles.InitialTime[Index] = AInitialTime) and
-     (Subtitles.FinalTime[Index] = AFinalTime) and
+  if not Subtitles.ValidIndex(Index) then Exit;
+  if (Subtitles.ItemPointer[Index]^.InitialTime = AInitialTime) and
+     (Subtitles.ItemPointer[Index]^.FinalTime = AFinalTime) and
      (Subtitles.Text[Index] = Text) then
     Exit;
 
@@ -679,6 +725,7 @@ begin
   Subtitles.InitialTime[Index] := AInitialTime;
   Subtitles.FinalTime[Index]   := AFinalTime;
   Subtitles.Text[Index]        := Text;
+  SubtitleChanged(True, False);
 
   if AUpdate then
   begin
@@ -777,8 +824,20 @@ end;
 // -----------------------------------------------------------------------------
 
 function GetPauseTimeStr(const Index: Integer; const Trim: Boolean = False): String;
+var
+  t: Integer;
 begin
-  Result := GetTimeStr(Subtitles.Pause[Index], Trim, tcNDF);
+  // Subtitles.Pause never goes below 0, the list shows the overlap as a
+  // negative gap so it can be seen when the next subtitle is breached
+  if (Index >= 0) and (Index < Subtitles.Count-1) then
+    t := Subtitles[Index+1].InitialTime - Subtitles[Index].FinalTime
+  else
+    t := 0;
+
+  if t < 0 then
+    Result := '-' + GetTimeStr(-t, Trim, tcNDF)
+  else
+    Result := GetTimeStr(t, Trim, tcNDF);
 end;
 
 // -----------------------------------------------------------------------------
@@ -795,54 +854,44 @@ end;
 
 function GetMaxLinesOf(Text: String; const Separator: String = sLineBreak): Integer;
 var
-  l, PosEnter: Integer;
+  Lines: TStringArray;
+  i, l: Integer;
 begin
-  Result   := 0;
-  Text     := RemoveTSTags(Text);
-  PosEnter := Pos(sLineBreak, Text);
-  if PosEnter > 0 then
+  // split by any line break (CRLF/LF/CR) so the last line is also measured
+  // and multibyte characters are counted correctly
+  Result := 0;
+  Lines  := RemoveTSTags(Text).Split([#13#10, #10, #13]);
+  for i := 0 to High(Lines) do
   begin
-    while PosEnter > 0 do
-    begin
-      l := UTF8Length(Copy(Text, 1, PosEnter-1));
-      if Result < l then
-        Result := l;
-
-      Text     := Copy(Text, PosEnter + 2, UTF8Length(Text));
-      PosEnter := Pos(sLineBreak, Text);
-    end;
-  end
-  else
-    Result := UTF8Length(Text);
+    l := UTF8Length(Lines[i]);
+    if Result < l then
+      Result := l;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
 
 function GetLengthForEachLine(Text: String; const Separator: String = sLineBreak; const LastSeparator: String = sLineBreak): String;
 var
-  TotLen   : Integer;
-  BreakLen : Integer;
-  PosEnter : Integer;
+  Lines  : TStringArray;
+  i, l   : Integer;
+  TotLen : Integer;
 begin
-  Result   := '';
-  Text     := RemoveTSTags(Text);
-  BreakLen := Length(sLineBreak);
-  TotLen   := UTF8Length(Text) - (StringCount(sLineBreak, Text) * BreakLen);
-  PosEnter := Pos(sLineBreak, Text);
-  if PosEnter > 0 then
+  Result := '';
+  Lines  := RemoveTSTags(Text).Split([#13#10, #10, #13]);
+  if Length(Lines) = 0 then Exit('0');
+
+  TotLen := 0;
+  for i := 0 to High(Lines) do
   begin
-    while PosEnter > 0 do
-    begin
-      Result   := Result + IntToStr(UTF8Length(Copy(Text, 1, PosEnter-1))) + Separator;
-      Text     := Copy(Text, PosEnter + BreakLen, UTF8Length(Text));
-      PosEnter := Pos(sLineBreak, Text);
-    end;
-    Result := Result + IntToStr(UTF8Length(Text));
-    if LastSeparator <> '' then
-      Result := Result + LastSeparator + IntToStr(TotLen);
-  end
-  else
-    Result := IntToStr(UTF8Length(Text));
+    l := UTF8Length(Lines[i]);
+    Inc(TotLen, l);
+    if i > 0 then Result := Result + Separator;
+    Result := Result + IntToStr(l);
+  end;
+
+  if (Length(Lines) > 1) and (LastSeparator <> '') then
+    Result := Result + LastSeparator + IntToStr(TotLen);
 end;
 
 // -----------------------------------------------------------------------------
@@ -984,7 +1033,8 @@ end;}
 
 function GetSubtitleIndexAtTime(MSecs: Cardinal): Integer;
 var
-  Idx: Integer;
+  Idx, i, Lim: Integer;
+  Item: PUWSubtitleItem;
 begin
   Result := -1;
   if Subtitles.Count = 0 then Exit;
@@ -992,36 +1042,22 @@ begin
   if not MPVOptions.SubtitleHandleByMPV and (Workspace.WorkMode = wmFrames) then
     MSecs += 1;
 
-  // 1. Busqueda Binaria: Encuentra el índice cercano
+  // Binary search for the first entry starting after MSecs, then walk back:
+  // with overlaps (a long sign) the covering entry may be several positions
+  // before. Like the old linear search, the lowest covering index wins.
   Idx := Subtitles.FindInsertPos(MSecs, -1);
+  if Idx > Subtitles.Count-1 then Idx := Subtitles.Count-1;
+  Lim := Max(0, Idx - 64);
 
-  // 2. Verificar el índice ANTERIOR (El caso más probable: estamos "dentro" del subtítulo)
-  if (Idx > 0) then
+  for i := Idx downto Lim do
   begin
-    with Subtitles[Idx - 1] do
-    begin
-      if (InitialTime <= MSecs) and (FinalTime > MSecs) then
-      begin
-        Result := Idx - 1;
-        SubtitleInfo.LastSubtitle.ShowIndex := Result;
-        Exit;
-      end;
-    end;
+    Item := Subtitles.ItemPointer[i];
+    if (Item <> NIL) and (Item^.InitialTime <= MSecs) and (Item^.FinalTime > MSecs) then
+      Result := i;
   end;
 
-  // 3. Verificar el índice ACTUAL (Caso borde: justo en el milisegundo de inicio)
-  if (Idx < Subtitles.Count) then
-  begin
-    with Subtitles[Idx] do
-    begin
-      if (InitialTime <= MSecs) and (FinalTime > MSecs) then
-      begin
-        Result := Idx;
-        SubtitleInfo.LastSubtitle.ShowIndex := Result;
-        Exit;
-      end;
-    end;
-  end;
+  if Result >= 0 then
+    SubtitleInfo.LastSubtitle.ShowIndex := Result;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1042,6 +1078,9 @@ begin
         TSubtitleMode.smText        : Result := Text;
         TSubtitleMode.smTranslation : Result := Translation;
       end;
+      // the overlay is rendered by libass: escape the braces that are not
+      // ASS tags, otherwise that text would be hidden as a comment
+      Result := EscapeNonTagBraces(Result);
       Result := ReplaceString(Result, sLineBreak, #10) + #10 + ' ';
       s := '';
       if Align <> shaNone then
@@ -1211,6 +1250,12 @@ begin
     if Subtitles[i].Marked then
       Inc(Result);
 end;
+
+// -----------------------------------------------------------------------------
+
+finalization
+  FreeAndNil(MPVTrackTimer);
+  FreeAndNil(MPVTrackDebounce);
 
 // -----------------------------------------------------------------------------
 

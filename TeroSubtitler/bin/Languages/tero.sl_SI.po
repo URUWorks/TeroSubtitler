@@ -5,14 +5,14 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: \n"
-"Language: sl\n"
+"Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.8\n"
 
 #: proclocalize.lngabversion
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid ""
 "version %s\n"
 "\n"
@@ -77,7 +77,7 @@ msgid "Audio waveform was not found, do you want to extract it?"
 msgstr "Signalne oblike zvoka ni bilo mogoče najti. Ali jo želite izluščiti?"
 
 #: proclocalize.lngasktosave
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid ""
 "“%s”\n"
 "\n"
@@ -160,7 +160,7 @@ msgid "Translation (%s characters at %.2f CPS):"
 msgstr "Prevod (%s znakov pri %.2f zn/s):"
 
 #: proclocalize.lngasunbreak
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Line breaks less than %d characters"
 msgstr "Napaka pri razločevanju »%%s«: vrstica daljša od %s znakov."
 
@@ -257,8 +257,7 @@ msgid "Auto-detect"
 msgstr "Samodejno zaznavanje"
 
 #: proclocalize.lngdetectdialogsegmentswarning
-msgid ""
-"Attempting to detect dialogue segments deletes all entries from the list."
+msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "Poskus zaznavanja odlomkov dialoga izbriše vse vnose s seznama."
 
 #: proclocalize.lngdownloadcanceled
@@ -276,13 +275,13 @@ msgid "Entry %d"
 msgstr "Vnos %d"
 
 #: proclocalize.lngentryendedat
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy
 msgctxt "proclocalize.lngentryendedat"
 msgid "Entry ended in %s"
 msgstr "Odstranitev vnosa je spodletela: %s"
 
 #: proclocalize.lngentrystartedat
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy
 msgctxt "proclocalize.lngentrystartedat"
 msgid "Entry started at %s"
 msgstr "Program je bil zagnan ob %s"
@@ -295,8 +294,7 @@ msgstr "Napaka pri izvajanju »%s«."
 #: proclocalize.lngextractapperror
 #, object-pascal-format
 msgid "Unable to find “%s”. Check in settings if it is configured correctly."
-msgstr ""
-"»%s« ni mogoče najti. Preverite nastavitve, če je pravilno nastavljeno."
+msgstr "»%s« ni mogoče najti. Preverite nastavitve, če je pravilno nastavljeno."
 
 #: proclocalize.lngextracting
 #, fuzzy
@@ -593,9 +591,7 @@ msgid "#"
 msgstr "#"
 
 #: proclocalize.lnglibmpverror
-msgid ""
-"Unable to find the required libraries to run the embedded mpv player. Please "
-"download them."
+msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
 msgstr ""
 
 #: proclocalize.lnglibmpvglerror
@@ -727,7 +723,7 @@ msgid "Operation completed."
 msgstr "Opravilo je končano."
 
 #: proclocalize.lngoperationfailed
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Job %d/%d fail with code %d."
 msgstr "%d poslov v vrsti"
 
@@ -985,30 +981,28 @@ msgid "Output"
 msgstr "Izhod"
 
 #: proclocalize.lngshifttimeless
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgctxt "proclocalize.lngshifttimeless"
 msgid "Shift %dms less"
 msgstr "Sličica %d (%d ms)"
 
 #: proclocalize.lngshifttimemore
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgctxt "proclocalize.lngshifttimemore"
 msgid "Shift %dms more"
 msgstr "Sličica %d (%d ms)"
 
 #: proclocalize.lngshortcutinuse
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy
 msgid "Shortcut currently used in “%s”."
 msgstr "Bližnjico uporablja dejanje »%s«"
 
 #: proclocalize.lngsourcemodewarning
-msgid ""
-"Switching to source mode will change the format to “Tero Subtitler”, "
-"otherwise unsaved translations will be lost."
+msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
 msgstr ""
 
 #: proclocalize.lngspcurrentline
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy
 msgid "# %d"
 msgstr "%d %%"
 
@@ -1032,10 +1026,7 @@ msgstr "Blok"
 #, fuzzy
 msgctxt "proclocalize.lngssconventions"
 msgid "Conventions"
-msgstr ""
-"Funkcija AMORLINC izračuna amortizacijo sredstev z uporabo francoskih "
-"računovodskih načel. Pri sredstvih, pridobljenih na sredini obdobja, se "
-"upošteva sorazmerna porazdelitev amortizacije."
+msgstr "Funkcija AMORLINC izračuna amortizacijo sredstev z uporabo francoskih računovodskih načel. Pri sredstvih, pridobljenih na sredini obdobja, se upošteva sorazmerna porazdelitev amortizacije."
 
 #: proclocalize.lngssdarkmode
 msgid "Dark mode"
@@ -1088,7 +1079,7 @@ msgid "Tools"
 msgstr "Orodja"
 
 #: proclocalize.lngstcharacterspersecondaverage
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy
 msgid "Characters per second average: %.2f"
 msgstr "Znaki na sekundo, povprečno: %.2f"
 
@@ -1103,12 +1094,12 @@ msgid "Entries without text: %d"
 msgstr "Vnosi brez besedila: %d"
 
 #: proclocalize.lngstgapaverage
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Gap average: %s"
 msgstr "Preneseno: %s (povprečno: %s/s)"
 
 #: proclocalize.lngstlinelengthaverage
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Line length average: %d"
 msgstr "Dolžina zgodovine ukazne vrstice"
 
@@ -1118,22 +1109,22 @@ msgid "Longest characters per second: %.2f (#%d)"
 msgstr "Največ znakov na sekundo: %.2f (#%d)"
 
 #: proclocalize.lngstlongestduration
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Longest duration: %s (#%d)"
 msgstr "Neveljavno trajanje ping »%s«."
 
 #: proclocalize.lngstlongestgap
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Longest gap: %s (#%d)"
 msgstr "Pokaži »%s-%d.%d«"
 
 #: proclocalize.lngstlongestline
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy
 msgid "Longest line: %d (#%d)"
 msgstr "Vrstica: %d, znak: %d"
 
 #: proclocalize.lngstlongestwordsperminute
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Longest words per minute: %.2f (#%d)"
 msgstr "Besed na minuto"
 
@@ -1158,27 +1149,27 @@ msgid "Shortest characters per second: %.2f (#%d)"
 msgstr "Najmanj znakov na sekundo: %.2f (#%d)"
 
 #: proclocalize.lngstshortestduration
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Shortest duration: %s (#%d)"
 msgstr "Neveljavno trajanje ping »%s«."
 
 #: proclocalize.lngstshortestgap
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Shortest gap: %s (#%d)"
 msgstr "Pokaži »%s-%d.%d«"
 
 #: proclocalize.lngstshortestline
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy
 msgid "Shortest line: %d (#%d)"
 msgstr "Vrstica: %d, znak: %d"
 
 #: proclocalize.lngstshortestwordsperminute
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Shortest words per minute: %.2f (#%d)"
 msgstr "Besed na minuto"
 
 #: proclocalize.lngsttotalcharacterspersecond
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Total characters per second: %.2f"
 msgstr "Znaki na vrstico"
 
@@ -1188,20 +1179,16 @@ msgid "Total duration: %s"
 msgstr "Skupno trajanje: %s"
 
 #: proclocalize.lngstwordsperminuteaverage
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Words per minute average: %.2f"
 msgstr "Besed na minuto"
 
 #: proclocalize.lngsubtitlehaserrorstofix
-msgid ""
-"The current subtitle set contains errors that are recommended to be "
-"resolved, but it can be saved."
+msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr ""
 
 #: proclocalize.lngsubtitlespecificationerror
-msgid ""
-"The current subtitles do not meet the specifications of the format to be "
-"saved."
+msgid "The current subtitles do not meet the specifications of the format to be saved."
 msgstr ""
 
 #: proclocalize.lngsubtitlespecificationerroralign
@@ -1269,6 +1256,15 @@ msgstr "Čas"
 #, fuzzy
 msgid "Export formatted text?"
 msgstr "Ni besedila za izvoz"
+
+#: proclocalize.lngtmentriesadded
+#, object-pascal-format
+msgid "%d entries added to the translation memory."
+msgstr ""
+
+#: proclocalize.lngtmnoentriesloaded
+msgid "No entries were loaded from the translation memory. Check that its languages match the selected ones."
+msgstr ""
 
 #: proclocalize.lngtranscribing
 #, fuzzy
@@ -1406,7 +1402,7 @@ msgid "Write denied. Please check folder permissions."
 msgstr "Poteka zapisovanje dovoljenj mape …"
 
 #: proclocalize.lngwritestatus
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Writing %d/%d"
 msgstr "Notranja napaka %d pri pisanju v datoteko %s\n"
 
@@ -1788,10 +1784,7 @@ msgstr "Posodobi"
 #, fuzzy
 msgctxt "tfrmconventions.caption"
 msgid "Conventions"
-msgstr ""
-"Funkcija AMORLINC izračuna amortizacijo sredstev z uporabo francoskih "
-"računovodskih načel. Pri sredstvih, pridobljenih na sredini obdobja, se "
-"upošteva sorazmerna porazdelitev amortizacije."
+msgstr "Funkcija AMORLINC izračuna amortizacijo sredstev z uporabo francoskih računovodskih načel. Pri sredstvih, pridobljenih na sredini obdobja, se upošteva sorazmerna porazdelitev amortizacije."
 
 #: tfrmconvertcase.btnapply.caption
 msgctxt "tfrmconvertcase.btnapply.caption"
@@ -2351,18 +2344,12 @@ msgstr "Zapri"
 #: tfrmfixsubtitles.caption
 #, fuzzy
 msgid "Fix subtitles"
-msgstr ""
-"Popravite podnapise, ki so prikazani na zgornji plasti, namesto da bi se "
-"pojavili v spodnjih plasteh ob nalaganju projekta."
+msgstr "Popravite podnapise, ki so prikazani na zgornji plasti, namesto da bi se pojavili v spodnjih plasteh ob nalaganju projekta."
 
 #: tfrmfixsubtitles.lblconvention.caption
 #, fuzzy
 msgid "Convention"
-msgstr ""
-"Linux: Začni končnico datoteke .AppImage z veliko začetnico, kar ustreza "
-"konvenciji, ki jo pričakujejo zaganjalniki ([poročilo o napaki](https://"
-"bugs.kde.org/447445)); ([sprememba](https://invent.kde.org/graphics/krita/-/"
-"merge_requests/2269), avtor Dmitrij Kazakov)."
+msgstr "Linux: Začni končnico datoteke .AppImage z veliko začetnico, kar ustreza konvenciji, ki jo pričakujejo zaganjalniki ([poročilo o napaki](https://bugs.kde.org/447445)); ([sprememba](https://invent.kde.org/graphics/krita/-/merge_requests/2269), avtor Dmitrij Kazakov)."
 
 #: tfrmfixsubtitles.lblocr.caption
 #, fuzzy
@@ -3128,9 +3115,7 @@ msgstr "Raven ločil"
 #: tfrmmain.actfixsubtitles.caption
 #, fuzzy
 msgid "Fix subtitles..."
-msgstr ""
-"Popravite podnapise, ki so prikazani na zgornji plasti, namesto da bi se "
-"pojavili v spodnjih plasteh ob nalaganju projekta."
+msgstr "Popravite podnapise, ki so prikazani na zgornji plasti, namesto da bi se pojavili v spodnjih plasteh ob nalaganju projekta."
 
 #: tfrmmain.actfocusfinaltime.caption
 #, fuzzy
@@ -3230,9 +3215,7 @@ msgstr "Skoči na predhodni vnos"
 #: tfrmmain.actgototime.caption
 #, fuzzy
 msgid "Go to time..."
-msgstr ""
-"To zloženo okno omogoča hitro premikanje med stanji razveljavitev ter celo "
-"vrnitev v času, veliko hitreje kot z uporabo bližnjice :kbd:`krmilka + Z`."
+msgstr "To zloženo okno omogoča hitro premikanje med stanji razveljavitev ter celo vrnitev v času, veliko hitreje kot z uporabo bližnjice :kbd:`krmilka + Z`."
 
 #: tfrmmain.acthelp.caption
 msgctxt "tfrmmain.acthelp.caption"
@@ -3707,9 +3690,7 @@ msgstr "Shrani trenutno datoteko samodejno"
 #, fuzzy
 msgctxt "tfrmmain.actsavetranscription.caption"
 msgid "Transcription..."
-msgstr ""
-"Tako lažje razdelite podnaslove, kjer imate prepis z enim podnaslovom na "
-"vrstico. To izhaja iz nekaj situacij:"
+msgstr "Tako lažje razdelite podnaslove, kjer imate prepis z enim podnaslovom na vrstico. To izhaja iz nekaj situacij:"
 
 #: tfrmmain.actsavetranslation.caption
 msgctxt "tfrmmain.actsavetranslation.caption"
@@ -3812,13 +3793,13 @@ msgid "Settings..."
 msgstr "Nastavitve …"
 
 #: tfrmmain.actshifttimeless.caption
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgctxt "tfrmmain.actshifttimeless.caption"
 msgid "Shift %dms less"
 msgstr "Sličica %d (%d ms)"
 
 #: tfrmmain.actshifttimemore.caption
-#, fuzzy, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgctxt "tfrmmain.actshifttimemore.caption"
 msgid "Shift %dms more"
 msgstr "Sličica %d (%d ms)"
@@ -4100,9 +4081,7 @@ msgstr "Preberi znake iz datoteke, če je potrjeno, ali uporabi besedilni vnos"
 #: tfrmmain.acttm3.caption
 #, fuzzy
 msgid "Use text from position 3 (tm)"
-msgstr ""
-"Položaj okna, ki naj bo uporabljen pri odpiranju novega okna, ki ni "
-"obnovljeno iz predhodne seje."
+msgstr "Položaj okna, ki naj bo uporabljen pri odpiranju novega okna, ki ni obnovljeno iz predhodne seje."
 
 #: tfrmmain.acttranscriptionmode.caption
 #, fuzzy
@@ -4124,6 +4103,10 @@ msgctxt "tfrmmain.acttranslationmemory.caption"
 msgid "Show..."
 msgstr "Pokaži …"
 
+#: tfrmmain.acttranslationmemoryaddall.caption
+msgid "Add translated lines to memory"
+msgstr ""
+
 #: tfrmmain.acttranslationmemoryclose.caption
 msgctxt "tfrmmain.acttranslationmemoryclose.caption"
 msgid "Close"
@@ -4134,6 +4117,14 @@ msgstr "Zapri"
 msgctxt "tfrmmain.acttranslationmemorylist.caption"
 msgid "List..."
 msgstr "Seznam …"
+
+#: tfrmmain.acttranslationmemoryopenfolder.caption
+msgid "Open translation memories folder"
+msgstr ""
+
+#: tfrmmain.acttranslationmemorysavecopy.caption
+msgid "Save a copy..."
+msgstr ""
 
 #: tfrmmain.acttranslationmemorysettings.caption
 msgctxt "tfrmmain.acttranslationmemorysettings.caption"
@@ -4546,12 +4537,7 @@ msgstr "Podnapisi"
 #, fuzzy
 msgctxt "tfrmmain.mnuvideovideofilters.caption"
 msgid "Video filters"
-msgstr ""
-"Knjižnica za visokokakovostne in zmogljive video filtre. Potrebna je za "
-"omogočanje predogleda in predvajanja s podporo grafičnega procesorja. "
-"Glejte :doc:`prilagoditve predvajanja</getting_started/configure_kdenlive/"
-"configuration_playback>` pod :menuselection:`Meni --> Nastavitve --> "
-"Prilagodi Kdenlive`."
+msgstr "Knjižnica za visokokakovostne in zmogljive video filtre. Potrebna je za omogočanje predogleda in predvajanja s podporo grafičnega procesorja. Glejte :doc:`prilagoditve predvajanja</getting_started/configure_kdenlive/configuration_playback>` pod :menuselection:`Meni --> Nastavitve --> Prilagodi Kdenlive`."
 
 #: tfrmmain.mnuvideovolume.caption
 msgctxt "tfrmmain.mnuvideovolume.caption"
@@ -4641,11 +4627,7 @@ msgstr "Zapri"
 #: tfrmmodifyselection.caption
 #, fuzzy
 msgid "Modify selection"
-msgstr ""
-"Označite del risbe, ki ga želite obdelati. Na voljo so dodatne funkcije, ki "
-"omogočajo dodajanje in odstranjevanje iz izbora. Izbor lahko dodatno "
-"spremenite s operjanjem in inverzijo. Izbor lahko obarvate z masko za "
-"globalni izbor."
+msgstr "Označite del risbe, ki ga želite obdelati. Na voljo so dodatne funkcije, ki omogočajo dodajanje in odstranjevanje iz izbora. Izbor lahko dodatno spremenite s operjanjem in inverzijo. Izbor lahko obarvate z masko za globalni izbor."
 
 #: tfrmmodifyselection.rbnaddtocurrentselection.caption
 #, fuzzy
@@ -5014,10 +4996,7 @@ msgstr "Privzet nabor znakov"
 #: tfrmsettings.lbldefaultfileformat.caption
 #, fuzzy
 msgid "Default file format"
-msgstr ""
-"**OpenOffice.org XML**, privzeta vrsta datoteke, ki jo uporablja zbirka, so "
-"prispevali konzorciju OASIS - ta se je kasneje razvila v **[Open Document "
-"Format (ODF)](https://www.libreoffice.org/privacy-policy/)**"
+msgstr "**OpenOffice.org XML**, privzeta vrsta datoteke, ki jo uporablja zbirka, so prispevali konzorciju OASIS - ta se je kasneje razvila v **[Open Document Format (ODF)](https://www.libreoffice.org/privacy-policy/)**"
 
 #: tfrmsettings.lbldefaultframerate.caption
 #, fuzzy
@@ -5227,10 +5206,7 @@ msgstr "YT-DLP"
 #: tfrmsettings.lblzerotodisable.caption
 #, fuzzy
 msgid "(0 to disable)"
-msgstr ""
-"Čas v milisekundah, po katerih se mora odjemalec odzvati na zahtevo ping, "
-"preden sistem sporoči napako odziva. Vrednost 0 povsem omogoči preverjanje "
-"stanja povezave."
+msgstr "Čas v milisekundah, po katerih se mora odjemalec odzvati na zahtevo ping, preden sistem sporoči napako odziva. Vrednost 0 povsem omogoči preverjanje stanja povezave."
 
 #: tfrmshifttimes.btnapply.caption
 msgctxt "tfrmshifttimes.btnapply.caption"
@@ -5538,9 +5514,7 @@ msgstr "Ime datoteke"
 #, fuzzy
 msgctxt "tfrmtbxsettings.lblsourcelang.caption"
 msgid "Source language"
-msgstr ""
-"Preoblikuje izvorno kodo pri shranjevanju na disk. Zahteva registriran "
-"formatnik za izvorni jezik."
+msgstr "Preoblikuje izvorno kodo pri shranjevanju na disk. Zahteva registriran formatnik za izvorni jezik."
 
 #: tfrmtbxsettings.lbltranslang.caption
 msgctxt "tfrmtbxsettings.lbltranslang.caption"
@@ -5565,8 +5539,7 @@ msgstr "Razširjevalnik"
 #: tfrmtimeexpander.chkduration.caption
 #, fuzzy
 msgid "Only if duration is longer than"
-msgstr ""
-"Trajanje nadomestnega posnetka je daljše od trajanja izvornega posnetka"
+msgstr "Trajanje nadomestnega posnetka je daljše od trajanja izvornega posnetka"
 
 #: tfrmtimeexpander.chksubtitle.caption
 #, fuzzy
@@ -5796,9 +5769,7 @@ msgstr "Ojačitev"
 #, fuzzy
 msgctxt "tfrmtts.lblstability.caption"
 msgid "Stability %:"
-msgstr ""
-"Posodobite sistem za najnovejše zmožnosti, izboljšano delovanje in večjo "
-"stabilnost."
+msgstr "Posodobite sistem za najnovejše zmožnosti, izboljšano delovanje in večjo stabilnost."
 
 #: tfrmtts.lblstyle.caption
 #, fuzzy
@@ -5875,9 +5846,7 @@ msgstr "Ojačitev"
 #, fuzzy
 msgctxt "tfrmvideodubbing.lblstability.caption"
 msgid "Stability %:"
-msgstr ""
-"Posodobite sistem za najnovejše zmožnosti, izboljšano delovanje in večjo "
-"stabilnost."
+msgstr "Posodobite sistem za najnovejše zmožnosti, izboljšano delovanje in večjo stabilnost."
 
 #: tfrmvideodubbing.lblstyle.caption
 #, fuzzy
@@ -6012,9 +5981,7 @@ msgid "Choose workspace layout and timecode mode:"
 msgstr "Nalaganje postavitve delovnega prostora"
 
 #: tfrmwizard.lblexperience.caption
-msgid ""
-"In just a few steps, you'll be setup and ready for the best subtitling "
-"experience."
+msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
 msgstr ""
 
 #: tfrmwizard.lblfasterwhisper.caption
@@ -6034,8 +6001,7 @@ msgstr "FFmpeg:"
 
 #: tfrmwizard.lblffmpeg_hint.caption
 msgid "Optional, used to extract audio and generate video."
-msgstr ""
-"Neobvezno, uporablja se za izluščenje zvoka in ustvarjanje videoposnetka."
+msgstr "Neobvezno, uporablja se za izluščenje zvoka in ustvarjanje videoposnetka."
 
 #: tfrmwizard.lbllibmpv.caption
 msgid "libmpv: "
@@ -6047,10 +6013,7 @@ msgid "Essential, used for playing video."
 msgstr "Predvajanje video datotek"
 
 #: tfrmwizard.lblrequiredfiles.caption
-msgid ""
-"For Tero Subtitler to function properly, the following libraries are "
-"necessary; if they are not found on your system, Tero Subtitler can download "
-"them for you."
+msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
 msgstr ""
 
 #: tfrmwizard.lblwelcome.caption
@@ -6094,3 +6057,4 @@ msgstr "_Obrnjeno"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Navpično"
+

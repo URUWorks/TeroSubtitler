@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit DKS;
@@ -105,8 +105,17 @@ begin
          (TimeInFormat(Copy(SubtitleFile[i], 2, 8), 'hh:mm:ss')) then
       begin
         InitialTime := StringToTime(Copy(SubtitleFile[i], 2, 8));
-        if (i <= SubtitleFile.Count-1) then FinalTime := StringToTime(Copy(SubtitleFile[i+1], 2, 8));
-        if FinalTime = -1 then FinalTime := InitialTime + 2000;
+        // Antes "if (i <= Count-1)" era SIEMPRE verdadero: en el último cue (o si
+        // la línea siguiente no era un marcador de fin) se leía SubtitleFile[i+1]
+        // fuera de rango o basura, y FinalTime quedaba heredado del cue anterior.
+        // Ahora solo se usa la línea siguiente si realmente es un [hh:mm:ss].
+        FinalTime := -1;
+        if (i+1 <= SubtitleFile.Count-1) and
+           (Pos('[', SubtitleFile[i+1]) = 1) and
+           (Pos(']', SubtitleFile[i+1]) = 10) and
+           TimeInFormat(Copy(SubtitleFile[i+1], 2, 8), 'hh:mm:ss') then
+          FinalTime := StringToTime(Copy(SubtitleFile[i+1], 2, 8));
+        if FinalTime <= InitialTime then FinalTime := InitialTime + 2000;
 
         Text := ReplaceString(Copy(SubtitleFile[i], 11, Length(SubtitleFile[i])), '[br]', LineEnding);
 
@@ -125,6 +134,7 @@ function TUWDKS.SaveSubtitle(const FileName: String; const FPS: Double; const En
 var
   i    : Integer;
   Text : String;
+  EndT : Integer;
 begin
   Result  := False;
 
@@ -132,11 +142,14 @@ begin
   begin
     Text := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
 
-    if (Subtitles[i].InitialTime = Subtitles[i].FinalTime) then
-      Subtitles.FinalTime[i] := Subtitles[i].InitialTime + 1000;
+    // Antes se modificaba el FinalTime del documento al GUARDAR (sin undo).
+    // Ahora un fin local, sin tocar el subtítulo.
+    EndT := Subtitles.FinalTime[i];
+    if EndT = Subtitles.InitialTime[i] then
+      EndT := Subtitles.InitialTime[i] + 1000;
 
     StringList.Add('[' + TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss') + ']' + ReplaceEnters(Text, LineEnding, '[br]'));
-    StringList.Add('[' + TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss') + ']');
+    StringList.Add('[' + TimeToString(EndT, 'hh:mm:ss') + ']');
   end;
 
   try

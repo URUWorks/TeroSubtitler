@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit TSV;
@@ -78,6 +78,17 @@ end;
 function TSVDecode(const AStr: String): String;
 begin
   Result := StringsReplace(AStr, ['\r\n', '\r', '\n', '\t', '\\'], [sLineBreak, '', sLineBreak, #9, '\'], [rfReplaceAll]);
+end;
+
+// -----------------------------------------------------------------------------
+
+function TSVQuote(const AStr: String): String;
+begin
+  // Antes: las comillas dentro del texto se perdían al cargar
+  if Pos('"', AStr) > 0 then
+    Result := '"' + StringReplace(AStr, '"', '""', [rfReplaceAll]) + '"'
+  else
+    Result := AStr;
 end;
 
 // -----------------------------------------------------------------------------
@@ -169,7 +180,9 @@ begin
           begin
             iFT := x;
           end
-          else if (iIT > 0) and (iFT > 0) and (iT < 0) then
+          // Antes (iIT > 0) and (iFT > 0): un archivo SIN columna 'No.' (inicio
+          // en la columna 0) nunca encontraba la columna de texto.
+          else if (iIT >= 0) and (iFT >= 0) and (iT < 0) then
           begin
             iT := x;
           end;
@@ -178,7 +191,8 @@ begin
         if (iIT >= 0) and (iFT >= 0) and (iT >= 0) then Break;
       end;
 
-      if (iIT < 0) and (iFT < 0) and (iT < 0) then Exit; // necessary indices were not found
+      // Antes 'and': bastaba con UNA columna y con iT = -1 se leía Cells[-1, y]
+      if (iIT < 0) or (iFT < 0) or (iT < 0) then Exit; // necessary indices were not found
 
       for y := 0 to CSVDoc.RowCount-1 do
       begin
@@ -188,10 +202,13 @@ begin
 
         InitialTime := StringToTime(CSVDoc.Cells[iIT, y], False, FPS);
         FinalTime := StringToTime(CSVDoc.Cells[iFT, y], False, FPS);
-        Text := HTMLTagsToTS(CSVDoc.Cells[iT, y]);
+        // Antes sin TSVDecode: SaveSubtitle escapa saltos de línea, tabs y
+        // barras (TSVEncode) y TSVDecode existía pero NUNCA se llamaba: un
+        // subtítulo de 2 líneas volvía como una con '\r\n' literal.
+        Text := HTMLTagsToTS(TSVDecode(CSVDoc.Cells[iT, y]));
 
         if (y < CSVDoc.RowCount-1) and CSVDoc.Cells[iIT, y+1].IsEmpty and CSVDoc.Cells[iFT, y+1].IsEmpty and not CSVDoc.Cells[iT, y+1].IsEmpty then
-          Text += sLineBreak + HTMLTagsToTS(CSVDoc.Cells[iT, y+1]);
+          Text += sLineBreak + HTMLTagsToTS(TSVDecode(CSVDoc.Cells[iT, y+1]));
 
         if (InitialTime >= 0) and (FinalTime > 0) then
           Subtitles.Add(InitialTime, FinalTime, Text, '');
@@ -220,7 +237,7 @@ begin
       [Count, #9,
        TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS), #9, //iff(Subtitles.TimeBase = stbMedia, TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz'), TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS)), #9,
        TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS), #9, //iff(Subtitles.TimeBase = stbMedia, TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz'), TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS)), #9,
-       TSTagsToHTML(TSVEncode(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])))]));
+       TSVQuote(TSTagsToHTML(TSVEncode(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]))))]));
     Inc(Count);
   end;
 

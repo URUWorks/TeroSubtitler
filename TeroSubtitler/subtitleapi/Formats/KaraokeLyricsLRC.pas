@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit KaraokeLyricsLRC;
@@ -100,9 +100,15 @@ begin
       if SubtitleFile[i].StartsWith('[') and (Pos(']', SubtitleFile[i]) = 10) then
       begin
         InitialTime := StringToTime(Copy(SubtitleFile[i], 2, Pos(']', SubtitleFile[i]) - 2), True);
-        if i+1 <= (SubtitleFile.Count-1) then
-          FinalTime := StringToTime(Copy(SubtitleFile[i+1], 2, Pos(']', SubtitleFile[i+1]) - 2), True)
-        else
+        // Antes el fin se parseaba de la línea siguiente SIN validarla: si no
+        // era un '[mm:ss.zz]' (metadatos, otra cosa) el Copy quedaba vacío y el
+        // subtítulo se descartaba en silencio. Ahora solo se usa si realmente
+        // es una marca de tiempo posterior; si no, 2 s de duración.
+        FinalTime := -1;
+        if (i+1 <= (SubtitleFile.Count-1)) and SubtitleFile[i+1].StartsWith('[') and
+           (Pos(']', SubtitleFile[i+1]) = 10) then
+          FinalTime := StringToTime(Copy(SubtitleFile[i+1], 2, Pos(']', SubtitleFile[i+1]) - 2), True);
+        if FinalTime <= InitialTime then
           FinalTime := InitialTime + 2000;
 
         Text := Copy(SubtitleFile[i], Pos(']', SubtitleFile[i]) + 1, Length(SubtitleFile[i]));

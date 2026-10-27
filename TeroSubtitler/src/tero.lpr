@@ -37,7 +37,7 @@ uses
   formCharacterMap, formRoundTime, formStatistics, formGenerateBlankVideo,
   procThumbnails, formStreamExtractor, formPauses,
   formCustomSelectDlgWithPreview, formTTS, formVideoDubbing, formImportSUP,
-  formImportSUPLanguages;
+  formImportSUPLanguages, procMacOpenFiles, procMacMediaKeys, procMacMenuKeys;
 
 {$R *.res}
 
@@ -46,9 +46,22 @@ begin
   Application.Title:='Tero Subtitler';
   Application.Scaled:=True;
   Application.Initialize;
+  {$IFDEF DARWIN}
+  // Let macOS use the bundle icon (tero.icns). Otherwise the LCL picks the
+  // 48x48 image from MAINICON (closest to SM_CXICON = 128) for the Dock.
+  Application.Icon.Clear;
+  // files dropped on the app icon on macOS < 10.13 (Lazarus 4+)
+  InstallMacOpenFilesFix;
+  {$ENDIF}
   Application.ShowMainForm := False;
   Application.CreateForm(TfrmMain, frmMain);
   InitializeApp;
+  {$IFDEF DARWIN}
+  // media keys (Control Center) on macOS 10.12.2+
+  MacMediaKeysInitialize;
+  // main menu shortcuts through NSMenu, so the top menu flashes
+  MacMenuKeysInstall(frmMain);
+  {$ENDIF}
   Application.Run;
 end.
 

@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit CaptionsInc;
@@ -102,14 +102,16 @@ begin
     begin
       if ((TimeInFormat(Copy(SubtitleFile[i], 1, 11), 'hh:mm:ss:zz') and
        (TimeInFormat(Copy(SubtitleFile[i], 13, 11), 'hh:mm:ss:zz') and
-       (Length(SubtitleFile[i]) = 23)))) and ((i+1) < SubtitleFile.Count-1) then
+       (Length(SubtitleFile[i]) = 23)))) and ((i+1) <= SubtitleFile.Count-1) then
       begin
         InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11));
         FinalTime   := StringToTime(Copy(SubtitleFile[i], 13, 11));
         Text        := '';
 
         c := i+1;
-        while c < (SubtitleFile.Count-1) do
+        // Antes '<': las líneas vacías se descartan al cargar, así que el último
+        // texto ES la última línea y el último subtítulo se perdía siempre.
+        while c <= (SubtitleFile.Count-1) do
         begin
           if (Copy(SubtitleFile[c], 1, 1)='{') and (Copy(SubtitleFile[c], 4, 1)='[') then
           begin

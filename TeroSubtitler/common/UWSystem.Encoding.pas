@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSystem.Encoding;
@@ -33,8 +33,61 @@ type
     CPName : String;
   end;
 
-const
+  TAnsiProfileData = record
+    CP   : Integer;
+    Data : String; // letter + weight (frequency * 100), UTF-8
+  end;
 
+  TAnsiProfile = record
+    CP      : Integer;
+    Letters : UnicodeString;
+    Probs   : array of Double;
+  end;
+
+  TAnsiTable = array[$80..$FF] of UnicodeChar;
+
+  TAnsiTableCache = record
+    CP    : Integer;
+    Table : TAnsiTable;
+  end;
+
+const
+  AnsiCandidates: array[0..7] of Integer = (1252, 1250, 1251, 1253, 1254, 1255, 1256, 1257);
+
+  AnsiProfiles: array[0..29] of TAnsiProfileData = (
+    (CP: 1252; Data: 'á50é43í73ó83ú17ñ31ü2'), // es
+    (CP: 1252; Data: 'é190è27ê22à49â5ç9ù6û6î5ô2ë1ï1œ2'), // fr
+    (CP: 1252; Data: 'à60è100é5ì3ò10ù17'), // it
+    (CP: 1252; Data: 'á12à7â15ã73ç53é34ê45í13ó30ô10õ4ú21'), // pt
+    (CP: 1252; Data: 'ä58ö44ü99ß31'), // de
+    (CP: 1252; Data: 'å134ä180ö131é2'), // sv
+    (CP: 1252; Data: 'æ87ø94å119é2'), // da
+    (CP: 1252; Data: 'ä360ö44'), // fi
+    (CP: 1252; Data: 'à50è40é40í30ò30ó30ú10ç20ï10'), // ca
+    (CP: 1252; Data: 'á180ð440é60í150ó100ú60ý90þ150æ90ö80'), // is
+    (CP: 1252; Data: 'ä100õ100ö20ü90'), // et
+    (CP: 1250; Data: 'á87č46ď2é63ě122í164ň1ó2ř38š69ť1ú5ů20ý99ž72'), // cs
+    (CP: 1250; Data: 'á200ä10č90ď10é70í140ĺ1ľ30ň10ó20ô20š70ť30ú70ý140ž80'), // sk
+    (CP: 1250; Data: 'ą99ć40ę111ł182ń20ó85ś68ź6ż83'), // pl
+    (CP: 1250; Data: 'á340é390í50ó100ö100ő90ú30ü50ű10'), // hu
+    (CP: 1250; Data: 'č100ć100đ20š100ž70'), // hr
+    (CP: 1250; Data: 'č150š100ž70'), // sl
+    (CP: 1250; Data: 'ă400â100î100ş140ţ100'), // ro
+    (CP: 1254; Data: 'ç146ğ113ı511ö78ş178ü185â5'), // tr
+    (CP: 1257; Data: 'ā400č50ē200ģ10ī170ķ20ļ40ņ50š100ū50ž50'), // lv
+    (CP: 1257; Data: 'ą60č40ę20ė170į100š100ų70ū50ž70'), // lt
+    (CP: 1257; Data: 'ä100õ100ö20ü90'), // et
+    (CP: 1251; Data: 'о1100е850а800и740н670т630с550р470в450л440к350м320д300п280у260я200ы190ь170г170з160б160ч140й120х97ж94ш73ю64ц48щ36э32ф26ъ4ё4'), // ru
+    (CP: 1251; Data: 'а1000о900е800и800н700т700р500с450в450л330к350д300п300м260з160у100ъ250я200г150б130ч130ж70ц60ш50щ40х50ф20ю20й70ь10'), // bg
+    (CP: 1251; Data: 'о940а800н650і550и610в540т530е490р460с430к360л360у340д320м310п280я240з220ь180г160б160ч130х120ж90й120ц70ш80ю80є80ї80щ60ф20ґ2'), // uk
+    (CP: 1251; Data: 'а1150и980о920е850н500т480р470с490ј500у400в360д340к360л300м340п290з170г160б140ш100ч100ц80ћ100х30ж60њ70љ40ђ30ф10џ10'), // sr
+    (CP: 1253; Data: 'α1050ε700ι680ο790τ800ν670σ460ς250η340κ400ρ420π400μ340λ270υ360ω130γ180δ170θ120χ100φ80β70ξ50ζ40ψ10ά180έ130ή90ί160ό150ύ70ώ50ϊ5'), // el
+    (CP: 1255; Data: 'י1100ו1000ה900ל700א600ר550ת500ב450מ500ש400נ400ע300ד250כ250ק200ח200פ150ם250ן150צ100ג100ס100ז70ט80ך50ף30ץ10'), // he
+    (CP: 1256; Data: 'ا1200ل1100ي650م600و550ن550ه400ر450ت400ب350ع300ك250ف250د300ق200س200ة200أ200ح200ج100إ80ذ80ى100خ90ش100ص80ط70ض40ز50ث50غ30ظ20ئ30ؤ10آ10ء20'), // ar
+    (CP: 1256; Data: 'ا1100ي900ر600د550ن550م500و500ه500ت400ب400س300ش200ک300ل250ز150گ100خ100ف100ق100ج80پ80چ60ع70ح40آ100ژ5ط20ص30غ20')  // fa
+  );
+
+  AnsiProfileEps = 0.002;
   MaxEncodings = 140;
 
   Encodings: array[0..MaxEncodings-1] of TCPData =
@@ -186,6 +239,10 @@ function GetEncodingInteger(const CPName: String): Integer;
 function GetEncodingIndex(const CPID: Integer): Integer;
 
 function GetEncodingFromFile(const FileName: String; const TryAnsiDetect: Boolean = True): TEncoding;
+// Returns a shared TEncoding instance for ACodePage. TEncoding.GetEncoding
+// creates a new object on each call, so use this one instead and never free
+// the result: the cached instances are released at finalization.
+function GetCachedEncoding(const ACodePage: Integer): TEncoding;
 
 function IsRightToLeftText(const AText: String): Boolean;
 function IsRightToLeftByUCC(const AText: String): Boolean;
@@ -194,24 +251,48 @@ function IsRightToLeftByUCC(const AText: String): Boolean;
 
 implementation
 
-uses RegExpr, LazUTF8;
+uses RegExpr, LazUTF8, Character;
+
+var
+  FEncodingCache: TList = NIL;
+  FAnsiProfiles: array of TAnsiProfile;
+  FAnsiTables: array of TAnsiTableCache;
+  AnsiSingleLetters: UnicodeString; // latin letters that can be a word
+  AnsiNoStartLetters: UnicodeString; // ...or only a word, never its start
+
+// -----------------------------------------------------------------------------
+
+function GetCachedEncoding(const ACodePage: Integer): TEncoding;
+var
+  i: Integer;
+begin
+  if FEncodingCache = NIL then
+    FEncodingCache := TList.Create;
+
+  for i := 0 to FEncodingCache.Count-1 do
+    if TEncoding(FEncodingCache[i]).CodePage = ACodePage then
+      Exit(TEncoding(FEncodingCache[i]));
+
+  Result := TEncoding.GetEncoding(ACodePage);
+  FEncodingCache.Add(Result);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure FreeEncodingCache;
+var
+  i: Integer;
+begin
+  if FEncodingCache = NIL then Exit;
+  for i := 0 to FEncodingCache.Count-1 do
+    TEncoding(FEncodingCache[i]).Free;
+  FreeAndNil(FEncodingCache);
+end;
 
 const
-  _Russian: array of String = ('что', 'быть', 'весь', 'этот', 'один', 'такой', '[Ээч]?то', '[Нн]е', '[ТтМмбв]ы', 'Да', '[Нн]ет', 'Он', 'его', 'тебя', 'как', 'меня', 'Но', 'всё', 'мне', 'вас', 'знаю', 'ещё', 'за', 'нас', 'чтобы', 'был', 'Я', '[Bb]тор.*', 'Держ.*');
-  _Bulgarian: array of String = ('Какво', 'тук', 'може', 'Как', 'Ваше', 'какво');
-  _SerbianCyrillic: array of String = ('сам', 'али', 'није', 'само', 'ово', 'како', 'добро', 'све', 'тако', 'ће', 'могу', 'ћу', 'зашто', 'нешто', 'за', 'шта', 'овде', 'бити', 'чини', 'учениче', 'побегне', 'остати', 'Један', 'Назад', 'Молим', 'ће', 'ћемо', 'Хоћу');
-  _Greek: array of String = ('μου', '[Εε]ίναι', 'αυτό', 'Τόμπυ', 'καλά', 'Ενταξει', 'πρεπει', 'Λοιπον', 'τιποτα', 'ξερεις');
-  _CroatianAndSerbian: array of String = ('sam', 'ali', 'nije', 'Nije', 'samo', 'ovo', 'kako', 'dobro', 'Dobro', 'sve', 'tako', 'će', 'mogu', 'ću', 'zašto', 'nešto', 'za', 'misliš', 'možeš', 'možemo', 'ništa', 'znaš', 'ćemo', 'znam');
-  _CzechAndSlovak: array of String = ('[Oo]n[ao]?', '[Jj]?si', '[Aa]le', '[Tt]en(to)?', '[Rr]ok', '[Tt]ak', '[Aa]by', '[Tt]am', '[Jj]ed(en|na|no)', '[Nn]ež', '[Aa]ni', '[Bb]ez', '[Dd]obr[ýáé]', '[Vv]šak', '[Cc]el[ýáé]', '[Nn]ov[ýáé]', '[Dd]ruh[ýáé]', 'jsem', 'poøádku', 'Pojïme', 'háje', 'není', 'Jdeme', 'všecko', 'jsme', 'Prosím', 'Vezmi', 'když', 'Takže', 'Dìkuji', 'prechádzku', 'všetko', 'Poïme', 'potom', 'Takže', 'Neviem', 'budúcnosti', 'trochu');
-  _Czech: array of String = ('.*[Řř].*', '.*[ůě].*', '[Bb]ýt', '[Jj]sem', '[Jj]si', '[Jj]á', '[Mm]ít', '[Aa]no', '[Nn]e',  '[Nn]ic', '[Dd]en', '[Jj]en', '[Cc]o', '[Jj]ak[o]?', '[Nn]ebo',  '[Pp]ři', '[Pp]ro', '[Pp]řed.*', '[Jj](ít|du|de|deme|dou)', '[Mm]ezi',  '[Jj]eště', '[Čč]lověk', '[Pp]odle', '[Dd]alší', 'přejděte', 'používat', 'obrázky', 'obrázek', 'vašem', 'vygenerovat');
-  _Polish: array of String = ('Czy', 'ale', 'ty', 'siê', 'się', 'jest', 'mnie', 'Proszę', 'życie', 'statku', 'życia', 'Czyli', 'Wszystko', 'Wiem', 'Przepraszam', 'dobrze', 'chciałam', 'Dziękuję', 'Żołnierzyk', 'Łowca', 'został', 'stało', 'dolarów', 'wiadomości', 'Dobrze', 'będzie', 'Dzień', 'przyszłość', 'Uratowałaś', 'Cześć', 'Trzeba', 'zginąć', 'walczyć', 'ludzkość', 'maszyny', 'Jeszcze', 'okrążenie', 'wyścigu', 'porządku', 'detektywie', 'przebieralni', 'który', 'śmierci', 'zabić', 'wiedźminie', 'przeznaczenie');
-  _Hungarian: array of String = ('hogy', 'lesz', 'tudom', 'vagy', 'mondtam', 'még', 'vagyok', 'csak', 'Hát', 'felesége', 'Csak', 'utána', 'jött', 'Miért', 'Akkor', 'magát', 'holnap', 'Tudja', 'Köszönöm', 'élet', 'Örvendek', 'vissza', 'hogy', 'tudom', 'Rendben', 'Istenem', 'Gyerünk', 'értem', 'vagyok', 'hiszem', 'történt', 'rendben', 'olyan', 'őket', 'vannak', 'mindig', 'Kérlek', 'Gyere', 'kicsim', 'vagyunk');
-  _Latvian: array of String = ('Paldies', 'neesmu ', 'nezinu', 'viòð', 'viņš', 'viņu', 'kungs', 'esmu', 'Viņš', 'Velns', 'viņa', 'dievs', 'Pagaidi', 'varonis', 'agrāk', 'varbūt');
   _Arabic: array of String = ('من', 'هل', 'لا', 'في', 'لقد', 'ما', 'ماذا', 'يا', 'هذا', 'إلى', 'على', 'أنا', 'أنت', 'حسناً', 'أيها', 'كان', 'كيف', 'يكون', 'هذه', 'هذان', 'الذي', 'التي', 'الذين', 'هناك', 'هنالك');
-  //_Hebrew: array of String = ('אתה', 'אולי', 'הוא', 'בסדר', 'יודע', 'טוב');
   _Hebrew: array of String = ('אתה', 'אולי', 'הוא', 'בסדר', 'יודע', 'טוב', 'אֶת', 'שֶׁל', 'עַל', 'הוּא', 'אֲשֶׁר', 'הִיא', 'הַמְלֶט', 'נָסִיךְ', 'הֲלֹא', 'עוֹד', 'אֵין', 'אֲנִי', 'זֹאת', 'וְלֹא', 'כָּךְ', 'הִנֵּה', 'מְאֹד', 'אֲדוֹנִי');
   _Farsi: array of String = ('این', 'برای', 'اون', 'سیب', 'کال', 'رو', 'خيلي', 'آره', 'بود', 'اون', 'نيست', 'اينجا', 'باشه', 'سلام', 'ميکني', 'داري', 'چيزي', 'چرا', 'خوبه');
-  _Turkish: array of String = ('için', 'Tamam', 'Hayır', 'benim', 'daha', 'deðil', 'önce', 'lazým', 'çalýþýyor', 'Aldırma', 'burada', 'efendim', 'şey', 'çok', 'Çok', 'için', 'Merhaba', 'Evet', 'kötü', 'musun', 'güzel', 'çünkü', 'büyük', 'Bebeğim', 'olduğunu', 'istiyorum', 'değilsin', 'bilmiyorum', 'otursana', 'Selam', 'Tabii','konuda','istiyor','Tetekkürler', 'istemiyorum', 'Gerçekte');
 
 // -----------------------------------------------------------------------------
 
@@ -440,81 +521,347 @@ end;
 
 // -----------------------------------------------------------------------------
 
+{ ANSI code page detection
+
+  Each candidate code page decodes the text, and every word with non ASCII
+  characters is checked for plausibility: letters of a single script, sane
+  casing, no symbols between letters... A wrong code page usually produces
+  words like "żDónde", "mьssen" or "×òî".
+  The non ASCII letters are then compared with the letter frequencies of the
+  languages that use that code page, so code pages that decode to plausible
+  words (1250 vs 1252, 1251 vs 1253...) can be told apart. }
+
+
+// -----------------------------------------------------------------------------
+
+procedure LoadAnsiProfiles;
+var
+  i, j, w, sum : Integer;
+  s : UnicodeString;
+  Weights : array of Integer;
+begin
+  if Length(FAnsiProfiles) > 0 then Exit;
+  AnsiSingleLetters := UTF8Decode('àèéìòùóáőöå');
+  AnsiNoStartLetters := UTF8Decode('ÀÈÌÒÙ');
+  SetLength(FAnsiProfiles, Length(AnsiProfiles));
+  for i := 0 to High(AnsiProfiles) do
+  begin
+    FAnsiProfiles[i].CP := AnsiProfiles[i].CP;
+    FAnsiProfiles[i].Letters := '';
+    SetLength(Weights, 0);
+    s := UTF8Decode(AnsiProfiles[i].Data);
+    j := 1;
+    while j <= Length(s) do
+    begin
+      FAnsiProfiles[i].Letters := FAnsiProfiles[i].Letters + s[j];
+      Inc(j);
+      w := 0;
+      while (j <= Length(s)) and (s[j] >= '0') and (s[j] <= '9') do
+      begin
+        w := w * 10 + Ord(s[j]) - Ord('0');
+        Inc(j);
+      end;
+      SetLength(Weights, Length(Weights)+1);
+      Weights[High(Weights)] := w;
+    end;
+    sum := 0;
+    for j := 0 to High(Weights) do sum := sum + Weights[j];
+    if sum = 0 then sum := 1;
+    SetLength(FAnsiProfiles[i].Probs, Length(Weights));
+    for j := 0 to High(Weights) do
+      FAnsiProfiles[i].Probs[j] := Weights[j] / sum;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetAnsiTable(const ACodePage: Integer): TAnsiTable;
+var
+  i, b : Integer;
+  Enc  : TEncoding;
+  B1   : TBytes;
+  u    : UnicodeString;
+  c    : UnicodeChar;
+begin
+  for i := 0 to High(FAnsiTables) do
+    if FAnsiTables[i].CP = ACodePage then
+      Exit(FAnsiTables[i].Table);
+
+  Enc := GetCachedEncoding(ACodePage);
+  // followed by a space, some converters (iconv 1255/1258) wait for combining marks
+  SetLength(B1, 2);
+  B1[1] := $20;
+  for b := $80 to $FF do
+  begin
+    c := #0;
+    B1[0] := b;
+    try
+      u := Enc.GetString(B1);
+      if (Length(u) = 2) and (u[2] = ' ') then c := u[1];
+    except
+      c := #0;
+    end;
+    // undefined bytes (replacement chars, C1 controls, private use area...)
+    if (c < #$A0) or (c = '?') or (c = #$FFFD) or ((c >= #$E000) and (c <= #$F8FF)) then
+      c := #0;
+    Result[b] := c;
+  end;
+
+  SetLength(FAnsiTables, Length(FAnsiTables)+1);
+  FAnsiTables[High(FAnsiTables)].CP := ACodePage;
+  FAnsiTables[High(FAnsiTables)].Table := Result;
+end;
+
+// -----------------------------------------------------------------------------
+
+function IsAnsiSeparator(const C: UnicodeChar): Boolean;
+begin
+  case Ord(C) of
+    $A0, $A1, $BF, $AB, $BB, $B7, $B4, $B0, $A8, $B8,
+    $2018, $2019, $201A, $201C, $201D, $201E, $2026, $2013, $2014, $2022,
+    $060C, $061B, $061F: Result := True;
+  else
+    Result := TCharacter.IsWhiteSpace(C);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// 1 = Latin, 2 = Greek, 3 = Cyrillic, 4 = Hebrew, 5 = Arabic, 0 = other
+function CharScript(const C: UnicodeChar): Integer;
+begin
+  case Ord(C) of
+    $41..$5A, $61..$7A, $C0..$24F : Result := 1;
+    $370..$3FF : Result := 2;
+    $400..$4FF : Result := 3;
+    $590..$5FF : Result := 4;
+    $600..$6FF : Result := 5;
+  else
+    Result := 0;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function ScoreAnsiCodePage(const Buffer: TBytes; const ACodePage: Integer; out AScore, ARatio: Double): Boolean;
+var
+  Table : TAnsiTable;
+  Freq  : array[$80..$FF] of Integer;
+  i, b, p, Good, Bad, Cased, Caps, AsciiWords : Integer;
+  // current word
+  wLen, wLetters, wNonAscii, wUpper, wScripts, wScript : Integer;
+  wInvalid, wFirstUpper, wFirstCased : Boolean;
+  wFirst : UnicodeChar;
+  // letter frequencies
+  Chars  : UnicodeString;
+  Counts : array of Integer;
+  c : UnicodeChar;
+  n : Integer;
+  LL, Best, r : Double;
+
+  procedure EndWord;
+  var
+    ok : Boolean;
+  begin
+    if wLen = 0 then Exit;
+    if wFirstCased then
+    begin
+      Inc(Cased);
+      if wFirstUpper then Inc(Caps);
+    end;
+
+    if wNonAscii = 0 then
+    begin
+      if (wLetters >= 2) and not wInvalid then Inc(AsciiWords);
+    end
+    else
+    begin
+      ok := not wInvalid and (wScript > 0) and (wScripts = 1 shl wScript);
+      // casing: lower, UPPER or Capitalized
+      if ok and (wScript <= 3) and (wUpper > 0) and (wUpper < wLetters) then
+        ok := (wUpper = 1) and TCharacter.IsUpper(wFirst);
+      // latin: a word can't be made of accented letters only
+      if ok and (wScript = 1) then
+      begin
+        if (wLetters = 1) then
+          ok := Pos(TCharacter.ToLower(wFirst), AnsiSingleLetters) > 0
+        else if Pos(wFirst, AnsiNoStartLetters) > 0 then
+          ok := False
+        else if (wLetters >= 3) and (wNonAscii = wLetters) then
+          ok := False
+        else if (wLetters >= 4) and (wNonAscii*3 > wLetters*2) then
+          ok := False;
+      end;
+
+      if ok then Inc(Good) else Inc(Bad);
+    end;
+
+    wLen := 0; wLetters := 0; wNonAscii := 0; wUpper := 0; wScripts := 0; wScript := 0;
+    wInvalid := False; wFirstUpper := False; wFirstCased := False; wFirst := #0;
+  end;
+
+  procedure AddLetter(const AChar: UnicodeChar; const ANonAscii: Boolean);
+  var
+    s : Integer;
+  begin
+    s := CharScript(AChar);
+    if wLetters = 0 then wFirst := AChar;
+    if wLen = 0 then
+    begin
+      wFirstCased := (s >= 1) and (s <= 3);
+      wFirstUpper := TCharacter.IsUpper(AChar);
+    end;
+    if s = 0 then
+      wInvalid := True
+    else
+    begin
+      if wScript = 0 then wScript := s;
+      wScripts := wScripts or (1 shl s);
+    end;
+    if TCharacter.IsUpper(AChar) then Inc(wUpper);
+    Inc(wLetters);
+    if ANonAscii then Inc(wNonAscii);
+    Inc(wLen);
+  end;
+
+begin
+  Result := False;
+  AScore := 0;
+  ARatio := 0;
+  LoadAnsiProfiles;
+  Table := GetAnsiTable(ACodePage);
+  FillChar(Freq, SizeOf(Freq), 0);
+  Good := 0; Bad := 0; Cased := 0; Caps := 0; AsciiWords := 0;
+  wLen := 0; wLetters := 0; wNonAscii := 0; wUpper := 0; wScripts := 0; wScript := 0;
+  wInvalid := False; wFirstUpper := False; wFirstCased := False; wFirst := #0;
+
+  for i := 0 to High(Buffer) do
+  begin
+    b := Buffer[i];
+    if b < $80 then
+    begin
+      if Char(b) in ['A'..'Z', 'a'..'z'] then
+        AddLetter(UnicodeChar(b), False)
+      else
+        EndWord;
+    end
+    else
+    begin
+      c := Table[b];
+      if c = #0 then
+      begin
+        // undefined in this code page
+        wInvalid := True;
+        Inc(wNonAscii);
+        Inc(wLen);
+      end
+      else if IsAnsiSeparator(c) then
+        EndWord
+      else if TCharacter.IsLetter(c) then
+      begin
+        AddLetter(c, True);
+        Inc(Freq[b]);
+      end
+      else if (TCharacter.GetUnicodeCategory(c) in [TUnicodeCategory.ucNonSpacingMark, TUnicodeCategory.ucCombiningMark, TUnicodeCategory.ucEnclosingMark]) or (c = #$0640) then
+      begin
+        // marks (niqqud, harakat) and tatweel
+        Inc(wNonAscii);
+        Inc(wLen);
+      end
+      else
+      begin
+        // symbols can't be inside a word
+        wInvalid := True;
+        Inc(wNonAscii);
+        Inc(wLen);
+      end;
+    end;
+  end;
+  EndWord;
+
+  if Good + Bad = 0 then Exit;
+  ARatio := Good / (Good + Bad);
+
+  // frequencies of the (lowercase) non ASCII letters
+  Chars := '';
+  SetLength(Counts, 0);
+  n := 0;
+  for b := $80 to $FF do
+    if Freq[b] > 0 then
+    begin
+      c := TCharacter.ToLower(Table[b]);
+      p := Pos(c, Chars);
+      if p = 0 then
+      begin
+        Chars := Chars + c;
+        SetLength(Counts, Length(Chars));
+        Counts[High(Counts)] := 0;
+        p := Length(Chars);
+      end;
+      Inc(Counts[p-1], Freq[b]);
+      Inc(n, Freq[b]);
+    end;
+
+  // best matching language of this code page
+  Best := -1000;
+  for i := 0 to High(FAnsiProfiles) do
+    if FAnsiProfiles[i].CP = ACodePage then
+    begin
+      LL := 0;
+      for b := 1 to Length(Chars) do
+      begin
+        p := Pos(Chars[b], FAnsiProfiles[i].Letters);
+        if p > 0 then
+          r := FAnsiProfiles[i].Probs[p-1]
+        else
+          r := 0;
+        LL := LL + Counts[b-1] * Ln(r + AnsiProfileEps);
+      end;
+      if n > 0 then LL := LL / n;
+      if LL > Best then Best := LL;
+    end;
+
+  // words of cased scripts must start with uppercase sometimes
+  if (Cased >= 50) and (Caps * 50 < Cased) then
+    Best := Best - 1;
+  // a non latin text has (almost) no ascii words
+  if ((ACodePage = 1251) or (ACodePage = 1253) or (ACodePage = 1255) or (ACodePage = 1256)) and (AsciiWords > Good + Bad) then
+    Best := Best - 3;
+
+  if ARatio > 0.01 then
+    AScore := Best + 3 * Ln(ARatio)
+  else
+    AScore := Best + 3 * Ln(0.01);
+  // 1252 is the most common one
+  if ACodePage = 1252 then
+    AScore := AScore + 0.2;
+
+  Result := True;
+end;
+
+// -----------------------------------------------------------------------------
+
 function DetectAnsiEncoding(const Buffer: TBytes): TEncoding;
 var
-  Encoding, Enc : TEncoding;
-  Text : String;
-  MinCount : Integer;
+  i, BestCP : Integer;
+  Score, Ratio, BestScore, BestRatio : Double;
 begin
   Result := NIL;
-  MinCount := Length(Buffer) div 300;
+  BestCP := 0;
+  BestScore := 0;
+  BestRatio := 0;
 
-  // Cyrillic
-  Encoding := TEncoding.GetEncoding(1251);
-  Text := Encoding.GetString(Buffer);
-  if (GetStringCount(Text, _Russian) > 5) or
-     (GetStringCount(Text, _Bulgarian) > 5) or
-     (GetStringCount(Text, _SerbianCyrillic) > MinCount) then
-  begin
-    Exit(Encoding);
-  end;
+  for i := 0 to High(AnsiCandidates) do
+    if ScoreAnsiCodePage(Buffer, AnsiCandidates[i], Score, Ratio) then
+      if (BestCP = 0) or (Score > BestScore) then
+      begin
+        BestCP := AnsiCandidates[i];
+        BestScore := Score;
+        BestRatio := Ratio;
+      end;
 
-  // Greek
-  Encoding := TEncoding.GetEncoding(1253);
-  Text := Encoding.GetString(Buffer);
-  if (GetStringCount(Text, _Greek) > 5) then
-  begin
-    Exit(Encoding);
-  end;
-
-  // Latvian
-  Encoding := TEncoding.GetEncoding(1257);
-  Text := Encoding.GetString(Buffer);
-  if (GetStringCount(Text, _Latvian) > 5) then
-  begin
-    Exit(Encoding);
-  end;
-
-  // Central European/Eastern European
-  Encoding := TEncoding.GetEncoding(1250);
-  Text := Encoding.GetString(Buffer);
-  if (GetStringCount(Text, _CroatianAndSerbian) > MinCount) or
-     (GetStringCount(Text, _CzechAndSlovak) > MinCount) or
-     //(GetStringCount(Text, _Czech) > MinCount) or
-     (GetStringCount(Text, _Polish) > MinCount) or
-     (GetStringCount(Text, _Hungarian) > MinCount) or
-     (GetStringCount(Text, ['să', 'şi', 'văzut', 'regulă', 'găsit', 'viaţă']) > 99) then
-  begin
-    Exit(Encoding);
-  end;
-
-  // Arabic
-  Encoding := TEncoding.GetEncoding(1256);
-  // Hebrew
-  Enc := TEncoding.GetEncoding(1255);
-  Text := Encoding.GetString(Buffer);
-  if (GetStringCount(Text, _Arabic) > 5) then
-  begin
-    // Hebrew
-    if (GetStringCount(Enc.GetString(Buffer), _Hebrew) > 10) then
-    begin
-      Exit(Enc);
-    end;
-    Exit(Encoding);
-  end;
-  // Hebrew
-  if (GetStringCount(Enc.GetString(Buffer), _Hebrew) > 5) then
-  begin
-    Exit(Enc);
-  end;
-
-  // Turkish
-  Enc := TEncoding.GetEncoding(1254);
-  Text := Encoding.GetString(Buffer);
-  if (GetStringCount(Text, _Turkish) > MinCount) then
-  begin
-    Exit(Enc);
-  end;
+  if (BestCP > 0) and (BestRatio >= 0.5) then
+    Result := GetCachedEncoding(BestCP);
 end;
 
 // -----------------------------------------------------------------------------
@@ -539,21 +886,36 @@ begin
     if (BOM[0] = $EF) and (BOM[1] = $BB) and (BOM[2] = $BF) then // UTF-8
        Result := TEncoding.UTF8
     else if (BOM[0] = $FF) and (BOM[1] = $FE) and (BOM[2] = 0) and (BOM[3] = 0) then // UTF-32 (LE)
-       Result := TEncoding.GetEncoding(12000)
+       Result := GetCachedEncoding(12000)
     else if (BOM[0] = $FF) and (BOM[1] = $FE) then // UTF-16 (LE)
        Result := TEncoding.Unicode
     else if (BOM[0] = $FE) and (BOM[1] = $FF) then // UTF-16 (BE)
        Result := TEncoding.BigEndianUnicode
     else if (BOM[0] = 0) and (BOM[1] = 0) and (BOM[2] = $FE) and (BOM[3] = $FF) then // UTF-32 (BE)
-       Result := TEncoding.GetEncoding(12001)
+       Result := GetCachedEncoding(12001)
     else if (BOM[0] = $2B) and (BOM[1] = $2F) and (BOM[2] = $76) and ((BOM[3] = $38) or (BOM[3] = $39) or (BOM[3] = $2B) or (BOM[3] = $2F)) then // UTF-7
        Result := TEncoding.UTF7
-    else if Size > Length(BOM) then
+    else if Size > 0 then
     begin
       if Size > 500000 then Size := 500000;
       Stream.Position := 0;
       SetLength(BOM, Size);
       Stream.Read(BOM[0], Size);
+
+      // UTF-16 without BOM: ASCII text would also pass as UTF-8,
+      // so check it first when there are nulls (never in UTF-8/ANSI text)
+      if ContainNulls(BOM) then
+      begin
+        if IsUTF16_NewLineChars(BOM, CouldBeUTF) then
+          Result := TEncoding.Unicode
+        else if CouldBeUTF then
+          Result := TEncoding.BigEndianUnicode
+        else if IsUTF16_ASCII(BOM, CouldBeUTF) then
+          Result := TEncoding.Unicode
+        else if CouldBeUTF then
+          Result := TEncoding.BigEndianUnicode;
+        if Result <> NIL then Exit;
+      end;
 
       if IsUTF8(BOM, CouldBeUTF) then
         Result := TEncoding.UTF8
@@ -612,5 +974,8 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
+
+finalization
+  FreeEncodingCache;
 
 end.

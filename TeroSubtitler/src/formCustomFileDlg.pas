@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formCustomFileDlg;
@@ -130,12 +130,12 @@ begin
       if cboEncoding.ItemIndex = 0 then
         Encoding := NIL
       else
-        Encoding := TEncoding.GetEncoding(Encodings[cboEncoding.ItemIndex-1].CPID);
+        Encoding := GetCachedEncoding(Encodings[cboEncoding.ItemIndex-1].CPID);
     end
     else
     begin
       Format   := TUWSubtitleFormats(cboFormat.ItemIndex+1);
-      Encoding := TEncoding.GetEncoding(Encodings[cboEncoding.ItemIndex].CPID);
+      Encoding := GetCachedEncoding(Encodings[cboEncoding.ItemIndex].CPID);
     end;
 
     FPS    := cboFPS.ItemIndex;

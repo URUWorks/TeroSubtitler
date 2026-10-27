@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formCustomImageFormat;
@@ -85,7 +85,7 @@ implementation
 
 uses
   procWorkspace, procTypes, procConfig, UWSystem.Encoding, UWSystem.SysUtils,
-  procCustomFormat;
+  procCustomFormat, procFiles;
 
 {$R *.lfm}
 
@@ -198,10 +198,13 @@ begin
       SD.Title  := lngSaveFile;
       SD.Filter := Format('%s (%s)|%s', [CustomFormat.Name, CustomFormat.Extension, CustomFormat.Extension]);
       SD.FilterIndex := 0;
+      SD.DefaultExt := ExtractFileExt(CFFixExtension('a', CustomFormat.Extension));
       SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
       if SD.Execute then
       begin
+        SD.FileName := EnsureSaveFileExt(SD.FileName, SD.DefaultExt);
+        if SD.FileName.IsEmpty then Exit;
         SetControlsEnabled(False);
         with CustomFormat do
         begin

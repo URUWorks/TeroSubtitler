@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSystem.TimeUtils;
@@ -39,9 +39,9 @@ function SMPTEConversion(const ATimeMS: Integer; const AValue: Boolean = True; c
 function NormalizeFPS(const FPS: Double): Double;
 function EncodeTime(const Hour, Min, Secs, MSecs: Word): Integer;
 procedure DecodeTime(const Time: Cardinal; out Hour, Min, Secs, MSecs: Word);
-function TimeToFrames(const Time: Cardinal; const FPS: Double): Cardinal;
-function TimeToFramesMaxFPS(const Time: Cardinal; const FPS: Double): Cardinal;
-function FramesToTime(const Frames: Cardinal; FPS: Double): Cardinal;
+function TimeToFrames(const Time: Integer; const FPS: Double): Integer;
+function TimeToFramesMaxFPS(const Time: Integer; const FPS: Double): Integer;
+function FramesToTime(const Frames: Integer; FPS: Double): Integer;
 function RoundTimeWithFrames(const ATimeMS: Integer; const AFPS: Double; const AAddFrame: Integer = 0): Integer;
 function IncDecFrame(const ATimeMS: Integer; const AFPS: Double; const AStep: Byte = 1; const IsDropFrame: Boolean = False; const AIncrement: Boolean = True): Integer;
 function TimeToString(const Time: Cardinal; TimeFormat: String = 'hh:mm:ss'; const FPS: Double = 25; const ATrim: Boolean = False): String;
@@ -220,14 +220,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TimeToFrames(const Time: Cardinal; const FPS: Double): Cardinal;
+function TimeToFrames(const Time: Integer; const FPS: Double): Integer;
 begin
   Result := Round((Time * FPS) / 1000.0);
 end;
 
 // -----------------------------------------------------------------------------
 
-function TimeToFramesMaxFPS(const Time: Cardinal; const FPS: Double): Cardinal;
+function TimeToFramesMaxFPS(const Time: Integer; const FPS: Double): Integer;
 begin
   Result := Round((Time * FPS) / 1000.0);
   if Result >= Trunc(FPS) then
@@ -236,7 +236,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function FramesToTime(const Frames: Cardinal; FPS: Double): Cardinal;
+function FramesToTime(const Frames: Integer; FPS: Double): Integer;
 begin
   if FPS > 0 then
     Result := Round((Frames * 1000.0) / FPS)
@@ -244,7 +244,7 @@ begin
     Result := 0;
 end;
 
-{function FramesToTime(const Frames: Cardinal; FPS: Double): Cardinal;
+{function FramesToTime(const Frames: Integer; FPS: Double): Integer;
 begin
   if Abs(FPS - 23.976) < 0.001 then
     Result := Round((Frames * 1001.0) / 24.0)
@@ -278,47 +278,22 @@ end;
 function IncDecFrame(const ATimeMS: Integer; const AFPS: Double; const AStep: Byte = 1; const IsDropFrame: Boolean = False; const AIncrement: Boolean = True): Integer;
 var
   FrameDuration: Double;
-  AbsFrame, DropFrames, Minutes, TenMinutes: Int64;
-  NominalFPS: Integer;
+  AbsFrame: Int64;
 begin
+  // Times are stored as real media time. Drop-frame only changes how the
+  // timecode label is written (frame numbers are skipped, not frames), so
+  // moving N frames is the same arithmetic in DF and NDF. The previous DF
+  // adjustment was not invertible and could move the time backwards.
   if AFPS <= 0 then Exit(ATimeMS);
 
-  NominalFPS := Round(AFPS); // 30 o 60
   FrameDuration := 1000.0 / AFPS;
-
-  // 1. Frame físico actual (lineal)
   AbsFrame := Round(ATimeMS / FrameDuration);
 
-  // 2. Si es Drop Frame, ajustamos la cuenta de frames como lo hace un reloj SMPTE
-  if IsDropFrame and ((NominalFPS = 30) or (NominalFPS = 60)) then
-  begin
-    DropFrames := Round(NominalFPS * 0.066666); // 2 para 29.97, 4 para 59.94
-
-    // Calculamos cuántos números se han "saltado" hasta este punto
-    Minutes := AbsFrame div Round(AFPS * 60);
-    TenMinutes := Minutes div 10;
-
-    // Ajustamos el contador para que coincida con la etiqueta del TC
-    AbsFrame := AbsFrame + (DropFrames * Minutes) - (DropFrames * TenMinutes);
-  end;
-
-  // 3. Aplicamos el incremento/decremento sobre la "etiqueta"
   if AIncrement then
     Inc(AbsFrame, AStep)
   else
     AbsFrame := Max(0, AbsFrame - AStep);
 
-  // 4. Si era DF, debemos revertir el ajuste para volver al tiempo real
-  if IsDropFrame and ((NominalFPS = 30) or (NominalFPS = 60)) then
-  begin
-    DropFrames := Round(NominalFPS * 0.066666);
-    TenMinutes := AbsFrame div (Round(AFPS * 60 * 10) - (DropFrames * 9));
-    Minutes := (AbsFrame + (DropFrames * 9 * TenMinutes)) div Round(AFPS * 60);
-
-    AbsFrame := AbsFrame - (DropFrames * (Minutes - TenMinutes));
-  end;
-
-  // 5. milisegundos
   Result := Round(AbsFrame * FrameDuration);
 end;
 
@@ -476,7 +451,7 @@ end;
 function TrimTimeString(Text: String): String;
 begin
   while (Length(Text) > 1) and (Text[1] in [Char('0'), Char(':')]) do
-    if (Text.CountChar(FormatSettings.DecimalSeparator) = 1) and (Text[3] <> Char(FormatSettings.DecimalSeparator)) or (Text.CountChar(':') > 1) then
+    if (Text.CountChar(FormatSettings.DecimalSeparator) = 1) and (Length(Text) >= 3) and (Text[3] <> Char(FormatSettings.DecimalSeparator)) or (Text.CountChar(':') > 1) then
       Delete(Text, 1, 1)
     else
       Break;
@@ -652,8 +627,16 @@ end;
 function TimeMSToShortString(const TimeMS: Cardinal; const Precision: Cardinal): String;
 var
   hour, min, sec, ms: Cardinal;
+  msf: String;
 begin
   Result := '';
+  // decimals according to precision (1 = 3 digits, 10 = 2, 100 = 1)
+  if Precision >= 100 then
+    msf := '%.1d'
+  else if Precision >= 10 then
+    msf := '%.2d'
+  else
+    msf := '%.3d';
 
   ms   := TimeMs div 1000;
   hour := ms div 3600;
@@ -664,19 +647,19 @@ begin
   if (hour > 0) then
   begin
     if (ms > 0) then
-      Result := Format('%d:%.2d:%.2d.%d', [hour, min, sec, ms])
+      Result := Format('%d:%.2d:%.2d.' + msf, [hour, min, sec, ms])
     else
       Result := Format('%d:%.2d:%.2d', [hour, min, sec])
   end
   else if (min > 0) then
   begin
     if (ms > 0) then
-      Result := Result + Format('%d:%.2d.%d', [min, sec, ms])
+      Result := Result + Format('%d:%.2d.' + msf, [min, sec, ms])
     else
       Result := Result + Format('%d:%.2d', [min, sec]);
   end
   else
-    Result := Result +  Format('%d.%d', [sec, ms]);
+    Result := Result +  Format('%d.' + msf, [sec, ms]);
 end;
 
 // -----------------------------------------------------------------------------

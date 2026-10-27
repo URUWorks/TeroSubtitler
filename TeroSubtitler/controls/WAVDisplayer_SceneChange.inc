@@ -32,6 +32,19 @@
 
 //------------------------------------------------------------------------------
 
+procedure TUWWaveformDisplayer.DoSceneChangeListChange;
+begin
+  // the thumbnails are drawn at the scene changes (and their row is only
+  // shown if there are scene changes), redraw the wave too
+  if FDrawThumbnails then
+    UpdateView([uvfPageSize]);
+
+  if Assigned(FOnSceneChangeListChange) then
+    FOnSceneChangeListChange(Self);
+end;
+
+//------------------------------------------------------------------------------
+
 procedure TUWWaveformDisplayer.SetSceneChangeEnabled(const AValue: Boolean);
 begin
   FSceneChangeEnabled := AValue;
@@ -67,6 +80,7 @@ begin
             FSceneChangeList[i] := Round(StrToIntDef(s[i], 0) * 1.001);
 
         SetSceneChangeEnabled(FSceneChangeEnabled);
+        DoSceneChangeListChange;
       end;
     finally
       s.Free;
@@ -108,6 +122,7 @@ begin
     SetLength(FSceneChangeList, Length(SceneChangeList));
     Move(SceneChangeList[0], FSceneChangeList[0], Length(SceneChangeList) * SizeOf(Integer));
     SetSceneChangeEnabled(FSceneChangeEnabled);
+    DoSceneChangeListChange;
   end;
 end;
 
@@ -117,6 +132,7 @@ procedure TUWWaveformDisplayer.ClearSceneChange;
 begin
   SetLength(FSceneChangeList, 0);
   UpdateView([uvfSubtitle]);
+  DoSceneChangeListChange;
 end;
 
 //------------------------------------------------------------------------------
@@ -203,6 +219,7 @@ begin
   end;
   SetLength(FSceneChangeList, Length(FSceneChangeList) - Count);
   UpdateView([uvfSubtitle]);
+  DoSceneChangeListChange;
 end;
 
 //------------------------------------------------------------------------------
@@ -283,6 +300,7 @@ begin
         FSceneChangeList[i] := Round(FSceneChangeList[i] * 1.001);
     end;
     DoUpdate;
+    DoSceneChangeListChange;
   end;
 end;
 

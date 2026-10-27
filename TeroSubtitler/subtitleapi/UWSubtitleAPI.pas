@@ -41,6 +41,9 @@ type
     FLineBreak : String;
     FCodePage  : Cardinal;
     FWriteBOM  : Boolean;
+    FBlankBefore : array of Boolean; // por linea: la precedia una linea en blanco?
+    FBlankValid  : Boolean;          // solo es fiable justo despues de SetTextStr
+    FInSetText   : Boolean;
     function Get(Index: Integer): String;
     procedure Put(Index: Integer; const S: String);
     procedure SetCapacity(const NewCapacity: Integer);
@@ -60,6 +63,10 @@ type
     procedure Move(const CurIndex, NewIndex: Integer);
     procedure Delete(const Index: Integer);
     procedure Clear;
+    // Las lineas vacias se descartan al cargar; BlockStart(i) dice si la linea
+    // i abria un bloque (la precedia una linea vacia o es la primera)
+    function BlockStart(const Index: Integer): Boolean;
+    property HasBlockInfo: Boolean read FBlankValid;
     property Capacity: Integer read FCapacity write SetCapacity;
     property Count: Integer read FCount;
     property LineBreak: String read FLineBreak write FLineBreak;
@@ -220,7 +227,7 @@ type
     function FillDialogFilter(AllSupportedText: String = 'All supported files'): String;
     function FixFileNameExtension(const AFileName: String; const AFormat: TUWSubtitleFormats): String;
     procedure DoFPSConversion(const AOldFPS, ANewFPS: Double);
-    procedure ConvertTimesToSMPTE(const AValue: Boolean);
+    procedure ConvertTimesToSMPTE(const AValue: Boolean; const AFromIndex: Integer = 0);
     function IsSMPTESupported(const AFormat: TUWSubtitleFormats = sfInvalid): Boolean;
     property Count: Integer read GetCount;
     property Format: TUWSubtitleFormats read FFormat write SetFormat;
@@ -401,7 +408,7 @@ begin
     SetLength(Buffer, Size);
     Stream.Read(Buffer[0], Size);
     if Encoding = NIL then Encoding := GetEncodingFromFile(FileName);
-    Size := TEncoding.GetBufferEncoding(Buffer, Encoding, TEncoding.GetEncoding(1252));
+    Size := TEncoding.GetBufferEncoding(Buffer, Encoding, GetCachedEncoding(1252));
     SetTextStr(Encoding.GetString(Buffer, Size, Length(Buffer) - Size));
     FCodePage := Encoding.CodePage;
   finally
@@ -416,6 +423,8 @@ var
   Stream   : TFileStream;
   Buffer,
   Preamble : TBytes;
+  TmpName,
+  BakName  : String;
 begin
   if (FCount = 0) or (FileName.IsEmpty) then Exit;
 
@@ -424,14 +433,42 @@ begin
   Buffer   := Encoding.GetBytes(GetTextStr);
   Preamble := Encoding.GetPreamble;
 
-  Stream := TFileStream.Create(FileName, fmCreate);
+  // write to a temporary file first and replace the original only when
+  // everything was written, so an interrupted save can't truncate it
+  TmpName := FileName + '.tmp';
+  Stream := TFileStream.Create(TmpName, fmCreate);
   try
     if FWriteBOM and (Length(Preamble) > 0) then
       Stream.WriteBuffer(Preamble[0], Length(Preamble));
 
-    Stream.WriteBuffer(Buffer[0], Length(Buffer));
+    if Length(Buffer) > 0 then
+      Stream.WriteBuffer(Buffer[0], Length(Buffer));
   finally
     Stream.Free;
+  end;
+
+  if FileExists(FileName) then
+  begin
+    BakName := FileName + '.bak~';
+    if FileExists(BakName) then DeleteFile(BakName);
+    if not RenameFile(FileName, BakName) then
+    begin
+      DeleteFile(TmpName);
+      raise EFCreateError.CreateFmt('Unable to replace file "%s"', [FileName]);
+    end;
+    if RenameFile(TmpName, FileName) then
+      DeleteFile(BakName)
+    else
+    begin
+      RenameFile(BakName, FileName);
+      DeleteFile(TmpName);
+      raise EFCreateError.CreateFmt('Unable to replace file "%s"', [FileName]);
+    end;
+  end
+  else if not RenameFile(TmpName, FileName) then
+  begin
+    DeleteFile(TmpName);
+    raise EFCreateError.CreateFmt('Unable to create file "%s"', [FileName]);
   end;
 end;
 
@@ -449,15 +486,11 @@ begin
   Buffer   := Encoding.GetBytes(GetTextStr);
   Preamble := Encoding.GetPreamble;
 
-  Stream := TMemoryStream.Create;
-  try
-    if FWriteBOM and (Length(Preamble) > 0) then
-      Stream.WriteBuffer(Preamble, Length(Preamble));
+  if FWriteBOM and (Length(Preamble) > 0) then
+    Stream.WriteBuffer(Preamble[0], Length(Preamble));
 
+  if Length(Buffer) > 0 then
     Stream.WriteBuffer(Buffer[0], Length(Buffer));
-  finally
-    Stream.Free;
-  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -498,7 +531,9 @@ end;
 procedure TUWStringList.Insert(const Index: Integer; const S: String; const SkipEmptyLine: Boolean = False);
 var
   FLine: String;
+  Idx: Integer;
 begin
+  if not FInSetText then FBlankValid := False;
   if SkipEmptyLine then
   begin
     FLine := SysUtils.Trim(S);
@@ -507,14 +542,19 @@ begin
   else
     FLine := S;
 
+  // an out of range index would corrupt memory, clamp it to [0..Count]
+  Idx := Index;
+  if Idx < 0 then Idx := 0;
+  if Idx > FCount then Idx := FCount;
+
   if FCount = FCapacity then
     Grow;
 
-  if Index < FCount then
-    System.Move(FList^[Index], FList^[Index + 1], (FCount - Index) * SizeOf(String));
+  if Idx < FCount then
+    System.Move(FList^[Idx], FList^[Idx + 1], (FCount - Idx) * SizeOf(String));
 
-  Pointer(FList^[Index]) := NIL;
-  FList^[Index]          := FLine;
+  Pointer(FList^[Idx]) := NIL;
+  FList^[Idx]          := FLine;
 
   Inc(FCount);
 end;
@@ -538,6 +578,7 @@ end;
 procedure TUWStringList.Delete(const Index: Integer);
 begin
   if (Index < 0) or (Index >= FCount) then Exit;
+  if not FInSetText then FBlankValid := False;
 
   Finalize(FList^[Index]);
   Dec(FCount);
@@ -550,6 +591,7 @@ end;
 
 procedure TUWStringList.Clear;
 begin
+  FBlankValid := False;
   if FCount <> 0 then
   begin
     Finalize(FList^[0], FCount);
@@ -627,8 +669,27 @@ var
   P, Start, LB : PChar;
   S            : String;
   LineBreakLen : Integer;
+  Pending      : Boolean;
+
+  procedure AddLine(const L: String);
+  begin
+    if Trim(L) = '' then
+    begin
+      Pending := True;
+      Exit;
+    end;
+    Add(L, True);
+    if FCount > Length(FBlankBefore) then
+      SetLength(FBlankBefore, FCount * 2 + 64);
+    FBlankBefore[FCount - 1] := Pending;
+    Pending := False;
+  end;
+
 begin
   Clear;
+  FInSetText := True;
+  SetLength(FBlankBefore, 0);
+  Pending := True;
   P := Pointer(Value);
 
   if P <> NIL then
@@ -641,7 +702,7 @@ begin
         while not CharInSet(P^, [#0, #10, #13]) do Inc(P);
 
         SetString(S, Start, P - Start);
-        Add(S, True);
+        AddLine(S);
 
         if P^ = #13 then Inc(P);
         if P^ = #10 then Inc(P);
@@ -658,10 +719,23 @@ begin
         while (P^ <> #0) and (P <> LB) do Inc(P);
 
         SetString(S, Start, P - Start);
-        Add(S, True);
+        AddLine(S);
         if P = LB then Inc(P, LineBreakLen);
       end;
     end;
+
+  FInSetText := False;
+  FBlankValid := True;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWStringList.BlockStart(const Index: Integer): Boolean;
+begin
+  if FBlankValid and (Index >= 0) and (Index < FCount) then
+    Result := FBlankBefore[Index]
+  else
+    Result := False;
 end;
 
 // -----------------------------------------------------------------------------
@@ -783,7 +857,7 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWNetflixTimedText.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWSoftNI.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWSpreadsheet.Create(AShouldWriteBOM)) ); // binary
-  AList.Add( TUWSubtitleCustomFormat(TUWSpruceSubtitleFile.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWSpruceSubtitleFile.Create(True)) );  // must contain BOM?
   AList.Add( TUWSubtitleCustomFormat(TUWSpruceSubtitleScript.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubRip.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWSubViewer.Create(AShouldWriteBOM)) );
@@ -881,6 +955,7 @@ end;
 
 function TUWSubtitles.GetItem(Index: Integer): TUWSubtitleItem;
 begin
+  ClearSubtitleItem(Result);
   if ValidIndex(Index) then
     with FList[Index]^ do
     begin
@@ -904,6 +979,7 @@ end;
 
 function TUWSubtitles.GetItemPointer(Index: Integer): PUWSubtitleItem;
 begin
+  Result := NIL;
   if ValidIndex(Index) then
     Result := FList[Index];
 end;
@@ -913,6 +989,7 @@ end;
 procedure TUWSubtitles.PutItem(Index: Integer; const Item: TUWSubtitleItem);
 begin
   if ValidIndex(Index) then
+  begin
     with FList[Index]^ do
     begin
       Text        := Item.Text;
@@ -929,6 +1006,7 @@ begin
       Notes       := Item.Notes;
       Data        := Item.Data;
     end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -942,6 +1020,7 @@ end;
 
 function TUWSubtitles.GetText(Index: Integer): String;
 begin
+  Result := '';
   if ValidIndex(Index) then
     Result := FList[Index]^.Text;
 end;
@@ -949,21 +1028,17 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWSubtitles.PutText(Index: Integer; const S: String);
-var
-  I: TUWSubtitleItem;
 begin
+  // assign the field directly instead of copying the whole record twice
   if ValidIndex(Index) then
-  begin
-    I := FList[Index]^;
-    I.Text := S;
-    FList[Index]^ := I;
-  end;
+    FList[Index]^.Text := S;
 end;
 
 // -----------------------------------------------------------------------------
 
 function TUWSubtitles.GetTranslation(Index: Integer): String;
 begin
+  Result := '';
   if ValidIndex(Index) then
     Result := FList[Index]^.Translation;
 end;
@@ -971,15 +1046,10 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWSubtitles.PutTranslation(Index: Integer; const S: String);
-var
-  I: TUWSubtitleItem;
 begin
+  // assign the field directly instead of copying the whole record twice
   if ValidIndex(Index) then
-  begin
-    I := FList[Index]^;
-    I.Translation := S;
-    FList[Index]^ := I;
-  end;
+    FList[Index]^.Translation := S;
 end;
 
 // -----------------------------------------------------------------------------
@@ -999,15 +1069,10 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWSubtitles.PutInitialTime(Index: Integer; const Time: TUWTimeCode);
-var
-  I: TUWSubtitleItem;
 begin
+  // assign the field directly instead of copying the whole record twice
   if ValidIndex(Index) then
-  begin
-    I := FList[Index]^;
-    I.InitialTime := Time;
-    FList[Index]^ := I;
-  end;
+    FList[Index]^.InitialTime := Time;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1037,15 +1102,10 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWSubtitles.PutFinalTime(Index: Integer; const Time: TUWTimeCode);
-var
-  I: TUWSubtitleItem;
 begin
+  // assign the field directly instead of copying the whole record twice
   if ValidIndex(Index) then
-  begin
-    I := FList[Index]^;
-    I.FinalTime := Time;
-    FList[Index]^ := I;
-  end;
+    FList[Index]^.FinalTime := Time;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1071,15 +1131,10 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWSubtitles.PutDuration(Index: Integer; const Time: TUWTimeCode);
-var
-  I: TUWSubtitleItem;
 begin
+  // assign the field directly instead of copying the whole record twice
   if ValidIndex(Index) then
-  begin
-    I := FList[Index]^;
-    I.FinalTime := Time + I.InitialTime;
-    FList[Index]^ := I;
-  end;
+    FList[Index]^.FinalTime := Time + FList[Index]^.InitialTime;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1105,18 +1160,9 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWSubtitles.PutPause(Index: Integer; const Time: TUWTimeCode);
-var
-  I: TUWSubtitleItem;
-  NewPause: Integer;
 begin
   if (Index >= 0) and ((Index+1) < Count) then
-  begin
-    I := FList[Index+1]^;
-    NewPause := FList[Index]^.FinalTime + Time;
-    Constrain(NewPause, 0, NewPause);
-    I.InitialTime := NewPause;
-    FList[Index+1]^ := I;
-  end;
+    FList[Index+1]^.InitialTime := Max(0, FList[Index]^.FinalTime + Time);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1125,7 +1171,7 @@ function TUWSubtitles.GetPauseFrames(Index: Integer; FPS: Double): Integer;
 begin
   Result := 0;
 
-  if ValidIndex(Index) then
+  if (Index >= 0) and ((Index+1) < Count) then
     Result := TimeToFrames(FList[Index+1]^.InitialTime - FList[Index]^.FinalTime, FPS);
 end;
 
@@ -1134,7 +1180,7 @@ end;
 function TUWSubtitles.GetExtraInfo(Index: Integer): Pointer;
 begin
   Result := NIL;
-  if (Index >= 0) or (Index < FExtraInfo.Count) then
+  if (Index >= 0) and (Index < FExtraInfo.Count) then
     Result := FExtraInfo[Index];
 end;
 
@@ -1142,7 +1188,7 @@ end;
 
 procedure TUWSubtitles.SetExtraInfo(Index: Integer; const P: Pointer);
 begin
-  if (Index >= 0) or (Index < FExtraInfo.Count) then
+  if (Index >= 0) and (Index < FExtraInfo.Count) then
     FExtraInfo[Index] := P;
 end;
 
@@ -1245,7 +1291,7 @@ end;
 
 function TUWSubtitles.Add(const Item: TUWSubtitleItem; const ExtraInfo: Pointer = NIL; const SkipInvalidValues: Boolean = False): Integer;
 begin
-  if (SkipInvalidValues and (Trim(Item.Text) = '') or (Item.InitialTime > Item.FinalTime)) then
+  if SkipInvalidValues and ((Trim(Item.Text) = '') or (Item.InitialTime > Item.FinalTime)) then
   begin
     Result := -1;
     Exit;
@@ -1264,27 +1310,34 @@ begin
 //  if (SkipInvalidValues and ((Trim(AText) = '')) or (AInitialTime > AFinalTime) or (AInitialTime = -1)) then Exit;
   if SkipInvalidValues and (Trim(AText) = '') and ((AInitialTime > AFinalTime) or (AInitialTime = -1)) then Exit;
 
-  FExtraInfo.Insert(Index, ExtraInfo);
-
   New(I);
-  with I^ do
-  begin
-    Text         := AText;
-    Translation  := ATranslation;
-    InitialTime  := AInitialTime;
-    FinalTime    := AFinalTime;
-    Marked       := False;
-    ErrorType    := [];
-    Align        := shaNone;
-    VAlign       := svaBottom;
-    R            := Rect(0, 0, 0, 0);
-    Style        := '';
-    Actor        := '';
-    Notes        := '';
-    Data         := 0;
-  end;
+  try
+    FillChar(I^, SizeOf(TUWSubtitleItem), 0);
+    with I^ do
+    begin
+      Text         := AText;
+      Translation  := ATranslation;
+      InitialTime  := AInitialTime;
+      FinalTime    := AFinalTime;
+      Marked       := False;
+      ErrorType    := [];
+      Align        := shaNone;
+      VAlign       := svaBottom;
+      R            := Rect(0, 0, 0, 0);
+      Style        := '';
+      Actor        := '';
+      Notes        := '';
+      Data         := 0;
+    end;
 
-  FList.Insert(Index, I);
+    FList.Insert(Index, I);
+    try
+      FExtraInfo.Insert(Index, ExtraInfo);
+    except
+    end;
+  except
+    Dispose(I);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1293,27 +1346,17 @@ procedure TUWSubtitles.Insert(const Index: Integer; const Item: TUWSubtitleItem;
 var
   I: PUWSubtitleItem;
 begin
-  FExtraInfo.Insert(Index, ExtraInfo);
-
   New(I);
-  with I^ do
-  begin
-    Text         := Item.Text;
-    Translation  := Item.Translation;
-    InitialTime  := Item.InitialTime;
-    FinalTime    := Item.FinalTime;
-    Marked       := Item.Marked;
-    ErrorType    := Item.ErrorType;
-    Align        := Item.Align;
-    VAlign       := Item.VAlign;
-    R            := Item.R;
-    Style        := Item.Style;
-    Actor        := Item.Actor;
-    Notes        := Item.Notes;
-    Data         := Item.Data;
+  try
+    I^ := Item;
+    FList.Insert(Index, I);
+    try
+      FExtraInfo.Insert(Index, ExtraInfo);
+    except
+    end;
+  except
+    Dispose(I);
   end;
-
-  FList.Insert(Index, I);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1337,8 +1380,21 @@ procedure TUWSubtitles.Delete(const Index: Integer);
 begin
   if not ValidIndex(Index) then Exit;
 
+  Dispose(PUWSubtitleItem(FList[Index]));
   FList.Delete(Index);
-  FExtraInfo.Delete(Index);
+  if Index < FExtraInfo.Count then
+  begin
+    if FExtraInfo[Index] <> NIL then
+      case FEIType of
+        eiCavena890 : Dispose(PCavena890_Info(FExtraInfo[Index]));
+        eiEBU       : Dispose(PEBU_ExtraInfo(FExtraInfo[Index]));
+        eiMicroDVD  : Dispose(PMicroDVD_ExtraInfo(FExtraInfo[Index]));
+        eiSSA       : Dispose(PSSA_ExtraInfo(FExtraInfo[Index]));
+        eiSubRip    : Dispose(PSubRip_ExtraInfo(FExtraInfo[Index]));
+        eiWebVTT    : Dispose(PWebVTT_ExtraInfo(FExtraInfo[Index]));
+      end;
+    FExtraInfo.Delete(Index);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1346,11 +1402,9 @@ end;
 procedure TUWSubtitles.Clear;
 begin
   FIsRTL := False;
-  if FList.Count <> 0 then
-  begin
-    FList.Clear;
-    FExtraInfo.Clear;
-  end;
+  // free the items and their extra info, not only the pointers
+  ClearExtraInfoList(FExtraInfo, FEIType);
+  ClearList(FList);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1369,15 +1423,18 @@ end;
 
 function TUWSubtitles.IndexOf(const PosMS: Integer): Integer;
 var
-  C: Integer;
+  C, Lim: Integer;
 begin
   Result := -1;
   if FList.Count = 0 then Exit;
 
   C := FindInsertPos(PosMS, -1);
   Constrain(C, 0, FList.Count-1);
+  // the list is sorted by initial time, so only a few previous entries can
+  // still cover PosMS; bound the backward scan (called on every mouse move)
+  Lim := Max(0, C - 64);
 
-  while (C >= 0) do
+  while (C >= Lim) do
   begin
     if (FList[C]^.InitialTime <= PosMS) and (FList[C]^.FinalTime >= PosMS) then
       Exit(C);
@@ -1506,8 +1563,66 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWSubtitles.Sort;
+var
+  Idx, Tmp: array of Integer;
+  OldItems: array of PUWSubtitleItem;
+  OldExtra: array of Pointer;
+  i, c, w, lo, mid, hi, a, b, k: Integer;
 begin
-  FList.Sort(@CompareItemsToSort);
+  // stable merge sort over an index array, so FExtraInfo can follow FList
+  c := FList.Count;
+  if c < 2 then Exit;
+
+  SetLength(Idx, c);
+  SetLength(Tmp, c);
+  for i := 0 to c-1 do Idx[i] := i;
+
+  w := 1;
+  while w < c do
+  begin
+    lo := 0;
+    while lo < c do
+    begin
+      mid := Min(lo + w, c);
+      hi  := Min(lo + 2*w, c);
+      a := lo; b := mid; k := lo;
+      while (a < mid) and (b < hi) do
+      begin
+        if CompareItemsToSort(FList[Idx[b]], FList[Idx[a]]) < 0 then
+        begin
+          Tmp[k] := Idx[b]; Inc(b);
+        end
+        else
+        begin
+          Tmp[k] := Idx[a]; Inc(a);
+        end;
+        Inc(k);
+      end;
+      while a < mid do begin Tmp[k] := Idx[a]; Inc(a); Inc(k); end;
+      while b < hi do begin Tmp[k] := Idx[b]; Inc(b); Inc(k); end;
+      lo := hi;
+    end;
+    for i := 0 to c-1 do Idx[i] := Tmp[i];
+    w := w * 2;
+  end;
+
+  SetLength(OldItems, c);
+  SetLength(OldExtra, c);
+  for i := 0 to c-1 do
+  begin
+    OldItems[i] := FList[i];
+    if i < FExtraInfo.Count then
+      OldExtra[i] := FExtraInfo[i]
+    else
+      OldExtra[i] := NIL;
+  end;
+
+  for i := 0 to c-1 do
+  begin
+    FList[i] := OldItems[Idx[i]];
+    if i < FExtraInfo.Count then
+      FExtraInfo[i] := OldExtra[Idx[i]];
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1610,6 +1725,7 @@ var
   SubFile : TUWStringList;
   i, f    : Integer;
   AFPS    : Double;
+  StartCount : Integer;
 begin
   Result := False;
   AList  := NIL;
@@ -1620,9 +1736,12 @@ begin
       if ClearAll then
       begin
         ClearExtraInfoList(FExtraInfo, FEIType);
+        FEIType := eiNone;
         //FStyles.Clear;
         ClearList(FList);
       end;
+      // when appending, only the newly loaded items must be converted to SMPTE
+      StartCount := FList.Count;
 
       AFPS := FPS.FPS;
       if AFPS <= 0 then AFPS := 25;
@@ -1659,7 +1778,7 @@ begin
         except
         end;
     finally
-      if (Self.FFormat <> sfITunesTimedText) and (TimecodeMode = tcDF) then ConvertTimesToSMPTE(True);
+      if (Self.FFormat <> sfITunesTimedText) and (TimecodeMode = tcDF) then ConvertTimesToSMPTE(True, StartCount);
       if FAutoSort then Sort;
       CheckIsRightToLeft; //
       SubFile.Free;
@@ -1813,11 +1932,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWSubtitles.ConvertTimesToSMPTE(const AValue: Boolean);
+procedure TUWSubtitles.ConvertTimesToSMPTE(const AValue: Boolean; const AFromIndex: Integer = 0);
 var
   i: Integer;
 begin
-  for i := 0 to Count - 1 do
+  for i := Max(0, AFromIndex) to Count - 1 do
     with FList[i]^ do
     begin
       InitialTime := SMPTEConversion(InitialTime, not AValue);

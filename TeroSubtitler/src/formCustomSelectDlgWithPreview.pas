@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023-2024 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formCustomSelectDlgWithPreview;
@@ -92,7 +92,7 @@ procedure TfrmCustomSelectDlgWithPreview.lstItemsSelectionChange(
   Sender: TObject; User: boolean);
 begin
   if (lstItems.Count > 0) and (lstItems.ItemIndex >= 0) then
-    DoPreview(TEncoding.GetEncoding(Encodings[lstItems.ItemIndex].CPID));
+    DoPreview(GetCachedEncoding(Encodings[lstItems.ItemIndex].CPID));
 end;
 
 // -----------------------------------------------------------------------------
@@ -124,7 +124,7 @@ var
 begin
   if Length(PrevBuffer) > 0 then
   begin
-    Size := TEncoding.GetBufferEncoding(PrevBuffer, AEncoding, TEncoding.GetEncoding(1252));
+    Size := TEncoding.GetBufferEncoding(PrevBuffer, AEncoding, GetCachedEncoding(1252));
     mmoPreview.Text := AEncoding.GetString(PrevBuffer, Size, Length(PrevBuffer) - Size);
   end;
 end;

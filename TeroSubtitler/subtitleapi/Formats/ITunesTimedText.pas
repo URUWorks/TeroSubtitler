@@ -1,18 +1,18 @@
 {*
- * URUWorks Subtitle API
+ *  URUWorks Subtitle API
  *
- * The contents of this file are used with permission, subject to
- * the Mozilla Public License Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/2.0.html
+ *  The contents of this file are used with permission, subject to
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
- * Software distributed under the License is distributed on an
- * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
- * implied. See the License for the specific language governing
- * rights and limitations under the License.
+ *  Software distributed under the License is distributed on an
+ *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ *  implied. See the License for the specific language governing
+ *  rights and limitations under the License.
  *
- * Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit ITunesTimedText;
@@ -22,7 +22,7 @@ unit ITunesTimedText;
 interface
 
 uses
-  Classes, SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, StrUtils,
+  Classes, SysUtils, UWSubtitleAPI, UWSystem.TimeUtils,
   UWSubtitleAPI.Formats, laz2_XMLRead, laz2_DOM; // laz2_XMLWrite;
 
 type
@@ -45,167 +45,7 @@ type
 
 implementation
 
-uses UWSubtitleAPI.Tags, UWSubtitleAPI.Utils, UWSystem.StrUtils,
-  UWSystem.SysUtils;
-
-// -----------------------------------------------------------------------------
-
-{ Helpers }
-
-// -----------------------------------------------------------------------------
-
-procedure AppendStyledTextDirect(XmlDoc: TXMLDocument; Parent: TDOMNode; const Txt: string);
-var
-  i: Integer;
-  Buffer: String;
-  Stack: array of TDOMElement;
-  CurrentNode: TDOMNode;
-
-  procedure FlushText;
-  begin
-    if Buffer <> '' then
-    begin
-      CurrentNode.AppendChild(XmlDoc.CreateTextNode(Buffer));
-      Buffer := '';
-    end;
-  end;
-
-  procedure PushSpan(const StyleName: string);
-  var
-    Span: TDOMElement;
-  begin
-    Span := XmlDoc.CreateElement('span');
-    Span.SetAttribute('style', StyleName);
-    CurrentNode.AppendChild(Span);
-
-    SetLength(Stack, Length(Stack) + 1);
-    Stack[High(Stack)] := Span;
-    CurrentNode := Span;
-  end;
-
-  procedure PushColor(const ColorHex: string);
-  var
-    Span: TDOMElement;
-  begin
-    Span := XmlDoc.CreateElement('span');
-    Span.SetAttribute('tts:color', ColorHex);
-    CurrentNode.AppendChild(Span);
-
-    SetLength(Stack, Length(Stack) + 1);
-    Stack[High(Stack)] := Span;
-    CurrentNode := Span;
-  end;
-
-  procedure PopSpan;
-  begin
-    if Length(Stack) > 0 then
-    begin
-      SetLength(Stack, Length(Stack) - 1);
-      if Length(Stack) > 0 then
-        CurrentNode := Stack[High(Stack)]
-      else
-        CurrentNode := Parent;
-    end;
-  end;
-
-  function MatchTag(const S: string; Pos: Integer; const Tag: string): Boolean;
-  begin
-    Result := Copy(S, Pos, Length(Tag)) = Tag;
-  end;
-
-  function ParseASSColor(const S: string; var Advance: Integer): string;
-  // \c&HBBGGRR&
-  var
-    tmp: string;
-    b, g, r: string;
-  begin
-    Result := '';
-    Advance := 0;
-
-    if (Length(S) < 10) then Exit;
-
-    // &H......&
-    if (S[1] = '\') and ((S[2] = 'c') or (S[2] = '1')) then
-    begin
-      if Pos('&H', S) > 0 then
-      begin
-        tmp := Copy(S, Pos('&H', S) + 2, 6); // BBGGRR
-
-        if Length(tmp) = 6 then
-        begin
-          b := Copy(tmp, 1, 2);
-          g := Copy(tmp, 3, 2);
-          r := Copy(tmp, 5, 2);
-
-          Result := '#' + r + g + b;
-        end;
-
-        Advance := Pos('&', Copy(S, Pos('&H', S) + 2, 10)) + Pos('&H', S) + 1;
-      end;
-    end;
-  end;
-
-var
-  TagContent, ColorHex: String;
-  j, Adv: Integer;
-begin
-  Buffer := '';
-  CurrentNode := Parent;
-  SetLength(Stack, 0);
-
-  i := 1;
-  while i <= Length(Txt) do
-  begin
-    // TAG BLOCK { ... }
-    if Txt[i] = '{' then
-    begin
-      FlushText;
-
-      // buscamos cierre
-      j := i + 1;
-      while (j <= Length(Txt)) and (Txt[j] <> '}') do Inc(j);
-
-      if j > Length(Txt) then Break;
-
-      TagContent := Copy(Txt, i + 1, j - i - 1);
-
-      // estilos
-      if TagContent = '\b1' then PushSpan('bold')
-      else if TagContent = '\b0' then PopSpan
-      else if TagContent = '\i1' then PushSpan('italic')
-      else if TagContent = '\i0' then PopSpan
-      else if TagContent = '\u1' then PushSpan('underline')
-      else if TagContent = '\u0' then PopSpan
-      else if TagContent = '\s1' then PushSpan('strikeout')
-      else if TagContent = '\s0' then PopSpan
-      else
-      begin
-        // color
-        ColorHex := ParseASSColor(TagContent, Adv);
-        if ColorHex <> '' then
-          PushColor(ColorHex);
-      end;
-
-      i := j + 1;
-      Continue;
-    end;
-
-    // SALTO
-    if Txt[i] = #10 then
-    begin
-      FlushText;
-      CurrentNode.AppendChild(XmlDoc.CreateElement('br'));
-      Inc(i);
-      Continue;
-    end;
-
-    // TEXTO
-    Buffer += Txt[i];
-    Inc(i);
-  end;
-
-  FlushText;
-end;
+uses UWSubtitleAPI.Tags, UWSubtitleAPI.Utils, UWSystem.SysUtils;
 
 // -----------------------------------------------------------------------------
 
@@ -262,19 +102,36 @@ var
   Item   : TUWSubtitleItem;
   fr     : Double;
   RegionMap: TStringList;
-  RegionID, AlignVal, NewText: String;
+  RegionID, AlignVal, TextAlignVal, NewText: String;
   CurBegin, CurEnd: Integer;
   IsContinuation: Boolean;
+
+  function GetTime(const S: String): Integer;
+  begin
+    if Length(Trim(S).Replace(';', ':').Split(':')) = 4 then // hh:mm:ss:ff
+      Result := SMPTEStringToMS(Trim(S), Subtitles.FrameRate, Subtitles.TimecodeMode = tcDF)
+    else
+      Result := TTMLTimeToMS(S, Subtitles.FrameRate);
+  end;
+
 begin
   Result := False;
   XmlDoc := NIL;
-  RegionMap := TStringList.Create;
 
   StringsToXML(XmlDoc, SubtitleFile);
-  if Assigned(XmlDoc) then
-    try
+  // Antes: RegionMap se creaba siempre y no se liberaba si el XML era inválido
+  if not Assigned(XmlDoc) then Exit;
+
+  RegionMap := TStringList.Create;
+  try
       Node := XMLFindNodeByName(XmlDoc, 'tt');
       Subtitles.FrameRate := FPS;
+      fr := FPS; // Antes: sin ttp:frameRate, fr quedaba sin inicializar
+
+      if Assigned(Node) and XMLHasAttribute(Node, 'xml:lang') and
+        (Trim(XMLGetAttrValue(Node, 'xml:lang')) <> '') then
+        Subtitles.FormatProperties^.TimedText.Language := Trim(XMLGetAttrValue(Node, 'xml:lang'));
+
 
       if Assigned(Node) then
       begin
@@ -319,7 +176,8 @@ begin
               else
                 AlignVal := '';
 
-              RegionMap.Values[RegionID] := AlignVal;
+              // Antes: tts:textAlign nunca se leía
+              RegionMap.Values[RegionID] := AlignVal + '|' + XMLGetAttrValue(RegionNode, 'tts:textAlign');
             end;
           end;
           RegionNode := RegionNode.NextSibling;
@@ -332,17 +190,24 @@ begin
         repeat
           if Node.HasAttributes then
           begin
-            // Extraer tiempos (usando SMPTEStringToMS como en tu archivo original)
+            // Antes: siempre como non-drop (un archivo dropNTSC se corría ~3.6 s
+            // por hora) y sin aceptar tiempos de reloj ni de desplazamiento
             CurBegin := 0;
             CurEnd := 0;
             if XMLHasAttribute(Node, 'begin') then
-              CurBegin := SMPTEStringToMS(XMLGetAttrValue(Node, 'begin'), Subtitles.FrameRate);
+              CurBegin := GetTime(XMLGetAttrValue(Node, 'begin'));
             if XMLHasAttribute(Node, 'end') then
-              CurEnd := SMPTEStringToMS(XMLGetAttrValue(Node, 'end'), Subtitles.FrameRate);
+              CurEnd := GetTime(XMLGetAttrValue(Node, 'end'))
+            else if XMLHasAttribute(Node, 'dur') then
+              CurEnd := CurBegin + GetTime(XMLGetAttrValue(Node, 'dur'));
 
             // Extraer y limpiar el texto
-            NewText := XMLExtractTextContent(Node.ChildNodes);
-            NewText := HTMLTagsToTS(ReplaceEnters(NewText, '<br/>', LineEnding));
+            // Antes: el XML del <p> se volvía a serializar y se pasaba por regex,
+            // que perdía los spans anidados, los tts:* en línea y los <tt:br/>
+            NewText := HTMLTagsToTS(ExtractStyledTTMLText(Node));
+            // Cursiva en toda la entrada: tts:fontStyle="italic" en el <p> (como FCP)
+            if (NewText <> '') and SameText(XMLGetAttrValue(Node, 'tts:fontStyle'), 'italic') then
+              NewText := '{\i1}' + NewText + '{\i0}';
 
             // Lógica de UNIFICACIÓN
             IsContinuation := (Subtitles.Count > 0) and
@@ -367,6 +232,18 @@ begin
               begin
                 RegionID := XMLGetAttrValue(Node, 'region');
                 AlignVal := RegionMap.Values[RegionID];
+                TextAlignVal := '';
+                if Pos('|', AlignVal) > 0 then
+                begin
+                  TextAlignVal := Copy(AlignVal, Pos('|', AlignVal) + 1, MaxInt);
+                  AlignVal := Copy(AlignVal, 1, Pos('|', AlignVal) - 1);
+                end;
+
+                // tts:textAlign
+                if SameText(TextAlignVal, 'left') or SameText(TextAlignVal, 'start') then
+                  Item.Align := shaLeft
+                else if SameText(TextAlignVal, 'right') or SameText(TextAlignVal, 'end') then
+                  Item.Align := shaRight;
 
                 // tts:displayAlign
                 if SameText(AlignVal, 'before') then
@@ -378,6 +255,9 @@ begin
                 // no existe tts:displayAlign
                 else if LowerCase(RegionID).Contains('top') or (RegionID = 'sh0') then
                   Item.VAlign := svaTop
+                // Antes: 'bottomCenter' contiene 'center' y quedaba centrado
+                else if LowerCase(RegionID).Contains('bottom') then
+                  Item.VAlign := svaBottom
                 else if LowerCase(RegionID).Contains('middle') or LowerCase(RegionID).Contains('center') then
                   Item.VAlign := svaCenter
                 else
@@ -392,11 +272,11 @@ begin
 
           Node := Node.NextSibling;
         until (Node = NIL);
-    finally
-       RegionMap.Free;
-       XmlDoc.Free;
-       Result := Subtitles.Count > 0;
-    end;
+  finally
+    RegionMap.Free;
+    XmlDoc.Free;
+    Result := Subtitles.Count > 0;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -404,25 +284,69 @@ end;
 function TUWITunesTimedText.SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   XmlDoc : TXMLDocument;
-  Root, Element, Node, SubNode : TDOMNode;
+  Root, Element, Node, StylingNode, LayoutNode, DivNode : TDOMNode;
   i, it, ft : Integer;
   NewFPS: Double;
-  txt, RegionStr: String;
+  txt, StripTxt: String;
+  NeedTop: Boolean;
+
+  // Preset de <style>: solo se escriben los que el texto realmente referencia
+  procedure AddPresetStyle(const AName, AFontStyle, AFontWeight, ADecoration: String);
+  var
+    S: TDOMNode;
+  begin
+    S := XmlDoc.CreateElement('style');
+    TDOMElement(S).SetAttribute('xml:id', AName);
+    TDOMElement(S).SetAttribute('tts:color', 'white');
+    TDOMElement(S).SetAttribute('tts:fontFamily', 'sansSerif');
+    TDOMElement(S).SetAttribute('tts:fontSize', '100%');
+    // Antes el estilo bold tenía tts:fontStyle="bold" (valor inválido)
+    TDOMElement(S).SetAttribute('tts:fontStyle', AFontStyle);
+    TDOMElement(S).SetAttribute('tts:fontWeight', AFontWeight);
+    if ADecoration <> '' then
+      TDOMElement(S).SetAttribute('tts:textDecoration', ADecoration);
+    StylingNode.AppendChild(S);
+  end;
+
+  // Región fija de iTT/FCP (iTT centra todo el texto)
+  procedure AddRegion(const AId, ADisplayAlign, AExtent, AOrigin: String);
+  var
+    R: TDOMNode;
+  begin
+    R := XmlDoc.CreateElement('region');
+    TDOMElement(R).SetAttribute('xml:id', AId);
+    TDOMElement(R).SetAttribute('tts:displayAlign', ADisplayAlign);
+    TDOMElement(R).SetAttribute('tts:extent', AExtent);
+    TDOMElement(R).SetAttribute('tts:origin', AOrigin);
+    LayoutNode.AppendChild(R);
+  end;
+
 begin
   Result := False;
+  NeedTop := False;
   XmlDoc := TXMLDocument.Create;
   try
     Root := XmlDoc.CreateElement('tt');
-      TDOMElement(Root).SetAttribute('xmlns', 'http://www.w3.org/ns/ttml');
+      // Mismos namespaces y orden de atributos que escribe Final Cut Pro
+      TDOMElement(Root).SetAttribute('xmlns:vt', 'http://namespace.itunes.apple.com/itt/ttml-extension#vertical');
       TDOMElement(Root).SetAttribute('xmlns:ttp', 'http://www.w3.org/ns/ttml#parameter');
-      TDOMElement(Root).SetAttribute('xmlns:tts', 'http://www.w3.org/ns/ttml#style');
+      TDOMElement(Root).SetAttribute('xmlns:ittp', 'http://www.w3.org/ns/ttml/profile/imsc1#parameter');
+      TDOMElement(Root).SetAttribute('xmlns:tt_feature', 'http://www.w3.org/ns/ttml/feature/');
+      TDOMElement(Root).SetAttribute('xmlns:ebutts', 'urn:ebu:tt:style');
+      // Antes: '#style', la URI del namespace de estilos TTML es '#styling'
+      TDOMElement(Root).SetAttribute('xmlns:tts', 'http://www.w3.org/ns/ttml#styling');
+      TDOMElement(Root).SetAttribute('xmlns:tt_extension', 'http://www.w3.org/ns/ttml/extension/');
+      TDOMElement(Root).SetAttribute('xmlns:tt_profile', 'http://www.w3.org/ns/ttml/profile/');
       TDOMElement(Root).SetAttribute('xmlns:ttm', 'http://www.w3.org/ns/ttml#metadata');
-      TDOMElement(Root).SetAttribute('xml:lang', 'en');
+      TDOMElement(Root).SetAttribute('xmlns:ry', 'http://namespace.itunes.apple.com/itt/ttml-extension#ruby');
+      TDOMElement(Root).SetAttribute('xmlns:itts', 'http://www.w3.org/ns/ttml/profile/imsc1#styling');
+      TDOMElement(Root).SetAttribute('xmlns', 'http://www.w3.org/ns/ttml');
+      TDOMElement(Root).SetAttribute('xml:lang', TimedTextLanguage(Subtitles));
 
-      if Subtitles.TimeBase = stbSMPTE then
-        TDOMElement(Root).SetAttribute('ttp:timeBase', 'smpte')
+      if Subtitles.TimecodeMode = tcDF then
+        TDOMElement(Root).SetAttribute('ttp:dropMode', 'dropNTSC')
       else
-        TDOMElement(Root).SetAttribute('ttp:timeBase', 'media');
+        TDOMElement(Root).SetAttribute('ttp:dropMode', 'nonDrop');
 
       if IsInteger(FPS) then
       begin
@@ -437,81 +361,36 @@ begin
         TDOMElement(Root).SetAttribute('ttp:frameRateMultiplier', '1000 1001');
       end;
 
-      if Subtitles.TimecodeMode = tcDF then
-        TDOMElement(Root).SetAttribute('ttp:dropMode', 'dropNTSC')
+      // En TS ttp:timeBase también indica el modo SMPTE del proyecto
+      if Subtitles.TimeBase = stbSMPTE then
+        TDOMElement(Root).SetAttribute('ttp:timeBase', 'smpte')
       else
-        TDOMElement(Root).SetAttribute('ttp:dropMode', 'nonDrop');
+        TDOMElement(Root).SetAttribute('ttp:timeBase', 'media');
+      TDOMElement(Root).SetAttribute('xmlns:tt', 'http://www.w3.org/ns/ttml');
+      TDOMElement(Root).SetAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
 
       XmlDoc.Appendchild(Root);
     Root := XmlDoc.DocumentElement;
 
+    // Sin <metadata>: FCP no lo escribe y un <ttm:title/> vacío no aporta nada
     Element := XmlDoc.CreateElement('head');
-      Node := XmlDoc.CreateElement('metadata');
-      Element.AppendChild(Node);
-      SubNode := XmlDoc.CreateElement('ttm:title');
-      Node.AppendChild(SubNode);
     Root.AppendChild(Element);
-      Node := XmlDoc.CreateElement('styling');
-      Element.AppendChild(Node);
-      SubNode := XmlDoc.CreateElement('style');
-      TDOMElement(SubNode).SetAttribute('xml:id', 'normal');
-      TDOMElement(SubNode).SetAttribute('tts:fontStyle', 'normal');
-      TDOMElement(SubNode).SetAttribute('tts:fontSize', '100%');
-      TDOMElement(SubNode).SetAttribute('tts:fontWeight', 'normal');
-      TDOMElement(SubNode).SetAttribute('tts:fontFamily', 'sansSerif');
-      TDOMElement(SubNode).SetAttribute('tts:color', 'white');
-      Node.AppendChild(SubNode);
-      SubNode := XmlDoc.CreateElement('style');
-      TDOMElement(SubNode).SetAttribute('xml:id', 'italic');
-      TDOMElement(SubNode).SetAttribute('tts:fontStyle', 'italic');
-      TDOMElement(SubNode).SetAttribute('tts:fontSize', '100%');
-      TDOMElement(SubNode).SetAttribute('tts:fontWeight', 'normal');
-      TDOMElement(SubNode).SetAttribute('tts:fontFamily', 'sansSerif');
-      TDOMElement(SubNode).SetAttribute('tts:color', 'white');
-      Node.AppendChild(SubNode);
-      SubNode := XmlDoc.CreateElement('style');
-      TDOMElement(SubNode).SetAttribute('xml:id', 'bold');
-      TDOMElement(SubNode).SetAttribute('tts:fontStyle', 'bold');
-      TDOMElement(SubNode).SetAttribute('tts:fontSize', '100%');
-      TDOMElement(SubNode).SetAttribute('tts:fontWeight', 'normal');
-      TDOMElement(SubNode).SetAttribute('tts:fontFamily', 'sansSerif');
-      TDOMElement(SubNode).SetAttribute('tts:color', 'white');
-      Node.AppendChild(SubNode);
-    Root.AppendChild(Element);
+      StylingNode := XmlDoc.CreateElement('styling');
+      Element.AppendChild(StylingNode);
+      AddPresetStyle('normal', 'normal', 'normal', '');
 
-    Node := XmlDoc.CreateElement('layout');
-    Element.AppendChild(Node);
-      SubNode := XmlDoc.CreateElement('region');
-      TDOMElement(SubNode).SetAttribute('xml:id', 'top');
-      TDOMElement(SubNode).SetAttribute('tts:origin', '0% 0%');
-      TDOMElement(SubNode).SetAttribute('tts:extent', '100% 15%');
-      TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
-      TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'before');
-      Node.AppendChild(SubNode);
+      LayoutNode := XmlDoc.CreateElement('layout');
+      Element.AppendChild(LayoutNode);
 
-      SubNode := XmlDoc.CreateElement('region');
-      TDOMElement(SubNode).SetAttribute('xml:id', 'middle');
-      TDOMElement(SubNode).SetAttribute('tts:origin', '0% 40%');
-      TDOMElement(SubNode).SetAttribute('tts:extent', '100% 20%');
-      TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
-      TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'center');
-      Node.AppendChild(SubNode);
-
-      SubNode := XmlDoc.CreateElement('region');
-      TDOMElement(SubNode).SetAttribute('xml:id', 'bottom');
-      TDOMElement(SubNode).SetAttribute('tts:origin', '0% 85%');
-      TDOMElement(SubNode).SetAttribute('tts:extent', '100% 15%');
-      TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
-      TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'after');
-      Node.AppendChild(SubNode);
-    Root.AppendChild(Element);
-
+    // <body> como en FCP: color, región y estilo por defecto
     Element := XmlDoc.CreateElement('body');
+      TDOMElement(Element).SetAttribute('tts:color', 'white');
+      TDOMElement(Element).SetAttribute('region', 'bottom');
       TDOMElement(Element).SetAttribute('style', 'normal');
     Root.AppendChild(Element);
 
-    Node := XmlDoc.CreateElement('div');
-    Element.AppendChild(Node);
+    DivNode := XmlDoc.CreateElement('div');
+    Element.AppendChild(DivNode);
 
     for i := FromItem to ToItem do
     begin
@@ -520,27 +399,51 @@ begin
 
       Element := XmlDoc.CreateElement('p');
 
-      if Subtitles[i].VAlign = svaTop then
-        RegionStr := 'top'
-      else if Subtitles[i].VAlign = svaCenter then
-        RegionStr := 'middle'
-      else
-        RegionStr := 'bottom';
-
-      TDOMElement(Element).SetAttribute('xml:id', 'p' + IntToStr(i + 1)); // XML Estándar ID
-      TDOMElement(Element).SetAttribute('region', RegionStr);
+      // Orden como FCP: begin/end, después fontStyle y region
       TDOMElement(Element).SetAttribute('begin', MSToHHMMSSFFTime(it, NewFPS, Subtitles.TimecodeMode));
       TDOMElement(Element).SetAttribute('end', MSToHHMMSSFFTime(ft, NewFPS, Subtitles.TimecodeMode));
 
-      Txt := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
-      AppendStyledTextDirect(XmlDoc, Element, Txt);
+      // Cursiva en toda la entrada: tts:fontStyle="italic" en el <p> (como FCP)
+      txt := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
+      if IsEntireTextItalic(txt, StripTxt) then
+      begin
+        TDOMElement(Element).SetAttribute('tts:fontStyle', 'italic');
+        txt := StripTxt;
+      end;
 
-      Node.AppendChild(Element);
+      // Apple/FCP solo admite top y bottom: lo que no es arriba va abajo
+      // (antes se escribía también 'middle', que iTT no admite)
+      if Subtitles[i].VAlign = svaTop then
+      begin
+        NeedTop := True;
+        TDOMElement(Element).SetAttribute('region', 'top');
+      end
+      else
+        TDOMElement(Element).SetAttribute('region', 'bottom');
+
+      // Antes: <span style="italic"> apuntando al <head>; FCP usa
+      // <span tts:fontStyle="italic"> en línea
+      AppendStyledTextDirect(XmlDoc, Element, txt, True);
+
+      DivNode.AppendChild(Element);
     end;
+
+    // Regiones: top antes que bottom, solo las usadas ('bottom' siempre,
+    // porque el <body> la referencia)
+    if NeedTop then
+      AddRegion('top', 'before', '100% 15%', '0% 0%');
+    AddRegion('bottom', 'after', '100% 15%', '0% 85%');
 
     try
       StringList.Clear;
       XMLToStrings(XmlDoc, StringList, Subtitles.ReplaceEntities);
+      // Declaración como la de FCP (sin encoding; UTF-8 por defecto)
+      if (StringList.Count > 0) and (Pos('<?xml', StringList[0]) = 1) then
+        StringList[0] := '<?xml version="1.0"?>';
+      // Antes: un <p> que empezaba con <span> se partía en 3 líneas y
+      // esos saltos se volvían parte del texto al releer
+      JoinXMLElementLines(StringList, 'p');
+      IndentXMLLines(StringList, 2); // 2 espacios por nivel, como FCP
 
       if not FileName.IsEmpty then
         StringList.SaveToFile(FileName, TEncoding.UTF8); // must be encoded using UTF-8

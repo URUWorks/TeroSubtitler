@@ -1225,6 +1225,15 @@ msgstr "Время"
 msgid "Export formatted text?"
 msgstr "Экспортировать форматированный текст?"
 
+#: proclocalize.lngtmentriesadded
+#, object-pascal-format
+msgid "%d entries added to the translation memory."
+msgstr ""
+
+#: proclocalize.lngtmnoentriesloaded
+msgid "No entries were loaded from the translation memory. Check that its languages match the selected ones."
+msgstr ""
+
 #: proclocalize.lngtranscribing
 msgid "Transcribing..."
 msgstr "Транскрибирование..."
@@ -3871,6 +3880,10 @@ msgctxt "tfrmmain.acttranslationmemory.caption"
 msgid "Show..."
 msgstr "Показать..."
 
+#: tfrmmain.acttranslationmemoryaddall.caption
+msgid "Add translated lines to memory"
+msgstr ""
+
 #: tfrmmain.acttranslationmemoryclose.caption
 msgctxt "tfrmmain.acttranslationmemoryclose.caption"
 msgid "Close"
@@ -3880,6 +3893,14 @@ msgstr "Закрыть"
 msgctxt "tfrmmain.acttranslationmemorylist.caption"
 msgid "List..."
 msgstr "Список..."
+
+#: tfrmmain.acttranslationmemoryopenfolder.caption
+msgid "Open translation memories folder"
+msgstr ""
+
+#: tfrmmain.acttranslationmemorysavecopy.caption
+msgid "Save a copy..."
+msgstr ""
 
 #: tfrmmain.acttranslationmemorysettings.caption
 msgctxt "tfrmmain.acttranslationmemorysettings.caption"

@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procFixSubtitles;
@@ -164,6 +164,20 @@ procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile:
     AFixedItem.ErrorsFixed := [etNone];
   end;
 
+  // time +/- the overlap gap. In frames mode the gap is at least one frame
+  // and is added in whole frames, so the fixed time is a visible change
+  // (1 ms or a gap under a frame showed the same timecode as before)
+  function OverlapGapTime(const ATime: Integer; const ASign: Integer; const AGapMs: Integer): Integer;
+  var
+    FPS: Double;
+  begin
+    FPS := Workspace.FPS.OutputFPS.FPS;
+    if (Workspace.WorkMode = wmFrames) and (FPS > 0) then
+      Result := FramesToTime(TimeToFrames(ATime, FPS) + ASign * Max(1, Ceil(AGapMs * FPS / 1000 - 0.001)), FPS)
+    else
+      Result := ATime + ASign * Max(1, AGapMs);
+  end;
+
   function NewItem(AFixedItem: TSubtitleInfoItem): PSubtitleInfoItem;
   begin
     New(Result);
@@ -180,7 +194,9 @@ procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile:
 
 var
   FixedItem : TSubtitleInfoItem;
+  PrevFixed : TSubtitleInfoItem;
   i, x, z   : Integer;
+  MinDurMs  : Integer;
   tmp, s    : String;
   ocr       : TUWOCRScript;
   GapMs     : Integer;
@@ -190,6 +206,7 @@ var
   ThresholdMs,
   InCue, OutCue,
   ChainingMS : Integer;
+  NextIT     : Integer;
   SnapAway : Boolean;
 begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
@@ -495,87 +512,95 @@ begin
         begin
           if FixedItem.InitialTime <= FSubtitles[i-1].FinalTime then
           begin
-            FixedItem.InitialTime := FSubtitles[i-1].FinalTime + GapMs;
-            FixedItem.ErrorsFixed := [etOverlapping, etOverlappingWithPrev];
-            Add(NewItem(FixedItem));
+            x := OverlapGapTime(FSubtitles[i-1].FinalTime, 1, GapMs);
+            MinDurMs := OverlapGapTime(0, 1, 0); // one frame (1 ms in time mode)
+            // moving the start would leave this one without duration (a short
+            // subtitle chained to the previous one): end the previous earlier
+            if ((FixedItem.FinalTime - x) < MinDurMs) and
+              ((OverlapGapTime(FixedItem.InitialTime, -1, GapMs) - PrevFixed.InitialTime) >= MinDurMs) then
+            begin
+              PrevFixed.FinalTime   := OverlapGapTime(FixedItem.InitialTime, -1, GapMs);
+              PrevFixed.ErrorsFixed := [etOverlapping, etOverlappingWithNext];
+              Add(NewItem(PrevFixed));
+            end
+            else
+            begin
+              FixedItem.InitialTime := x;
+              FixedItem.ErrorsFixed := [etOverlapping, etOverlappingWithPrev];
+              Add(NewItem(FixedItem));
+            end;
           end;
-        end
-        else if (i < (FSubtitles.Count-1)) and (FixedItem.FinalTime >= FSubtitles[i+1].InitialTime) then
-        begin
-          x := FSubtitles[i+1].InitialTime - 1;
-          if x < (FixedItem.InitialTime + Profile^.MinDuration) then
-          begin
-            FixedItem.FinalTime := FSubtitles[i+1].InitialTime;
-            FSubtitles.ItemPointer[i+1].InitialTime := FSubtitles[i+1].InitialTime + 1;
-          end
-          else
-            FixedItem.FinalTime := x;
-
-          FixedItem.ErrorsFixed := [etOverlapping, etOverlappingWithNext];
-          Add(NewItem(FixedItem));
         end;
       end;
 
       //ClearItem(FixedItem, i);
       // Snap to shot changes
+      // The checks use where the neighbours will end up with THIS profile
+      // (end = cut - OutCue, start = cut + InCue) instead of their current
+      // times, so a list already snapped with another profile (e.g. Netflix)
+      // is fully checked again with the new one.
       if (etSnapToShotChanges in FErrors) and (AShotChanges <> NIL) and (Length(AShotChanges) > 0) then
       begin
         FixedItem.ErrorsFixed := [];
         // In Cue
         ShotCut := FindBestShotCutMs(AShotChanges, FixedItem.InitialTime);
-        if ShotCut >= 0 then
+        if (ShotCut >= 0) and (Abs(ShotCut - FixedItem.InitialTime) < ThresholdMs) and
+           (FSubtitles.Duration[i] >= Profile^.MinDuration) then
         begin
-          if (Abs(ShotCut - FixedItem.InitialTime) < ThresholdMs) and (Subtitles.Duration[i] >= Profile^.MinDuration) and
-             (i-1 >= 0) and (ShotCut >= prevSnapFT + GapMs) then //and (FixedItem.InitialTime < ShotCut) then
+          SnapAway := True;
+          if (Abs(ShotCut - FixedItem.InitialTime) <= SnapMs) then
           begin
-            SnapAway := True;
-            z := FixedItem.InitialTime;
+            z := ShotCut + InCue;
+            SnapAway := False;
+          end
+          else if Sign(ShotCut - FixedItem.InitialTime) <= 0 then
+            z := ShotCut + ThresholdMs
+          else
+            z := ShotCut - ThresholdMs;
 
-            if (Abs(ShotCut - FixedItem.InitialTime) <= SnapMs) then
-            begin
-              z := ShotCut + InCue;
-              SnapAway := False;
-            end
-            else if Sign(ShotCut - FixedItem.InitialTime) <= 0 then
-              z := ShotCut + ThresholdMs
+          // prevSnapFT is the final end time of the previous subtitle
+          if ((i = 0) or (z >= prevSnapFT + GapMs)) and (FixedItem.InitialTime <> z) then
+          begin
+            FixedItem.InitialTime := z;
+            if SnapAway then
+              FixedItem.ErrorsFixed := [etSnapToShotChangesInCueAway]
             else
-              z := ShotCut - ThresholdMs;
-
-            if (FixedItem.InitialTime <> z) then //and (Abs(FixedItem.InitialTime - z) >= FramesToTime(1, Workspace.FPS.OutputFPS)) then
-            begin
-              FixedItem.InitialTime := z;
-              if SnapAway then
-                FixedItem.ErrorsFixed := [etSnapToShotChangesInCueAway]
-              else
-                FixedItem.ErrorsFixed := [etSnapToShotChangesInCue];
-            end;
+              FixedItem.ErrorsFixed := [etSnapToShotChangesInCue];
           end;
         end;
+
         // Out Cue
-        if (i-1 < Subtitles.Count) then
-          prevSnapFT := Subtitles[i-1].FinalTime;
-
         ShotCut := FindBestShotCutMs(AShotChanges, FixedItem.FinalTime);
-        if ShotCut >= 0 then
+        if (ShotCut >= 0) and (Abs(ShotCut - FixedItem.FinalTime) < ThresholdMs) and
+           (FSubtitles.Duration[i] >= Profile^.MinDuration) then
         begin
-          if (Abs(ShotCut - FixedItem.FinalTime) < ThresholdMs) and (Subtitles.Duration[i] >= Profile^.MinDuration) and
-             (i+1 < Subtitles.Count) and (ShotCut - OutCue <= Subtitles[i+1].InitialTime - GapMs) then //and (FixedItem.FinalTime > ShotCut) then
+          // start of the next subtitle: if it starts at this same cut it will
+          // be moved to cut + InCue, so use that position
+          if i+1 < FSubtitles.Count then
           begin
-            z := FixedItem.FinalTime;
+            NextIT := FSubtitles[i+1].InitialTime;
+            if Abs(ShotCut - NextIT) <= SnapMs then
+              NextIT := ShotCut + InCue;
+          end
+          else
+            NextIT := MaxInt div 2;
 
-            if (Abs(ShotCut - FixedItem.FinalTime) <= SnapMs) then
-              z := ShotCut - OutCue
-            else if (ShotCut + ThresholdMs) <= (Subtitles[i+1].InitialTime - GapMs) then
-              z := ShotCut + ThresholdMs;
+          z := FixedItem.FinalTime;
+          if (Abs(ShotCut - FixedItem.FinalTime) <= SnapMs) then
+          begin
+            if (ShotCut - OutCue) <= (NextIT - GapMs) then
+              z := ShotCut - OutCue;
+          end
+          else if (ShotCut + ThresholdMs) <= (NextIT - GapMs) then
+            z := ShotCut + ThresholdMs;
 
-            if (FixedItem.FinalTime <> z) then //and (Abs(FixedItem.FinalTime - z) >= FramesToTime(1, Workspace.FPS.OutputFPS)) then
-            begin
-              FixedItem.FinalTime   := z;
-              FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etSnapToShotChangesOutCue];
-            end;
-            prevSnapFT := FixedItem.FinalTime;
+          if (FixedItem.FinalTime <> z) and (z > FixedItem.InitialTime) then
+          begin
+            FixedItem.FinalTime   := z;
+            FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etSnapToShotChangesOutCue];
           end;
         end;
+        prevSnapFT := FixedItem.FinalTime;
 
         if (etSnapToShotChangesInCue in FixedItem.ErrorsFixed) or (etSnapToShotChangesInCueAway in FixedItem.ErrorsFixed) or (etSnapToShotChangesOutCue in FixedItem.ErrorsFixed) then
         begin
@@ -587,15 +612,18 @@ begin
       end;
 
       // Chaining
-      if (etChaining in FErrors) and (i+1 < Subtitles.Count) then
+      if (etChaining in FErrors) and (i+1 < FSubtitles.Count) then
       begin
-        if ((Subtitles[i+1].InitialTime - FixedItem.FinalTime) < ChainingMS) and (((Subtitles[i+1].InitialTime - GapMs) - FixedItem.FinalTime) > FramesToTime(1, Workspace.FPS.OutputFPS.FPS)) then
+        if ((FSubtitles[i+1].InitialTime - FixedItem.FinalTime) < ChainingMS) and (((FSubtitles[i+1].InitialTime - GapMs) - FixedItem.FinalTime) > FramesToTime(1, Workspace.FPS.OutputFPS.FPS)) then
         begin
-          FixedItem.FinalTime := Subtitles[i+1].InitialTime - GapMs;
+          FixedItem.FinalTime := FSubtitles[i+1].InitialTime - GapMs;
           FixedItem.ErrorsFixed := [etChaining];
           Add(NewItem(FixedItem));
         end;
       end;
+
+      // final state of this one, used to fix it from the next overlap
+      PrevFixed := FixedItem;
     end;
   finally
     ocr.Free;

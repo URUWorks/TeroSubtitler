@@ -12,13 +12,16 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *  Copyright (C) 2023 CM630.
  *}
 
 unit procLocalize;
 
 {$mode ObjFPC}{$H+}
+{$IFDEF DARWIN}
+{$modeswitch objectivec1}
+{$ENDIF}
 
 interface
 
@@ -38,6 +41,8 @@ resourcestring
 
   //CommonStrings
   lngOpenFile = 'Open file';
+  lngTMNoEntriesLoaded = 'No entries were loaded from the translation memory. Check that its languages match the selected ones.';
+  lngTMEntriesAdded = '%d entries added to the translation memory.';
   lngSaveFile = 'Save file';
   lngSaveSubtitles = 'Save subtitles';
   lngSaveTranslation = 'Save translation';
@@ -391,7 +396,8 @@ procedure SetGUILanguage;
 implementation
 
 uses
-  UWSystem.Globalization, ActnList, procTypes, procConfig, formMain;
+  UWSystem.Globalization, ActnList, procTypes, procConfig, formMain
+  {$IFDEF DARWIN}, CocoaAll{$ENDIF};
 
 // -----------------------------------------------------------------------------
 
@@ -494,6 +500,35 @@ end;
 
 // -----------------------------------------------------------------------------
 
+{$IFDEF DARWIN}
+//Sets AppleLanguages for the app, so the menu items created by macOS
+//(Enter Full Screen, Minimize, Dock menu...) follow the GUI language.
+//Takes effect on the next launch.
+procedure SetMacAppleLanguages(const ALang: String);
+var
+  Code: String;
+begin
+  Code := LowerCase(StringReplace(ALang, '_', '-', [rfReplaceAll]));
+  if Code = '' then
+    Code := 'en'
+  else if (Code = 'zh-cn') or (Code = 'zh-sg') or (Code = 'zh-hans') then
+    Code := 'zh-Hans'
+  else if (Code = 'zh-tw') or (Code = 'zh-hk') or (Code = 'zh-hant') then
+    Code := 'zh-Hant'
+  else if Code = 'pt-br' then
+    Code := 'pt-BR'
+  else if Pos('-', Code) > 0 then
+    Code := Copy(Code, 1, Pos('-', Code)-1);
+
+  NSUserDefaults.standardUserDefaults.setObject_forKey(
+    NSArray.arrayWithObject(NSString.stringWithUTF8String(PChar(Code))),
+    NSString.stringWithUTF8String('AppleLanguages'));
+  NSUserDefaults.standardUserDefaults.synchronize;
+end;
+{$ENDIF}
+
+// -----------------------------------------------------------------------------
+
 procedure SetGUILanguage;
 var
   i: Integer;
@@ -503,6 +538,9 @@ begin
       Hint := '';
 
   SetDefaultLang(AppOptions.GUILanguage, LanguageFolder);
+  {$IFDEF DARWIN}
+  SetMacAppleLanguages(AppOptions.GUILanguage);
+  {$ENDIF}
   UpdateCommonActionString;
 
   for i := 0 to frmMain.ActionList.ActionCount-1 do

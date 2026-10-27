@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit EBU.Types;
@@ -22,7 +22,7 @@ unit EBU.Types;
 interface
 
 uses
-  StrUtils;
+  SysUtils;
 
 type
 
@@ -159,14 +159,16 @@ const
   TTC_ReleaseMosaic    = $1F;
 
 function CharCodeTableToEncoding(const CCT: AnsiString): Integer;
-function ReplaceTagsEBU2TS(const Text: String): String;
-function ReplaceTagsTS2EBU(const Text: String): String;
+// Conversion a nivel de BYTES (los codigos de control 00h-1Fh y 80h-9Fh no son
+// caracteres de texto: pasarlos por TEncoding los mutaba/perdia segun la tabla).
+function EBUBytesToText(const Bytes: TBytes; const Enc: TEncoding): String;
+function EBUTextToBytes(const Text: String; const Enc: TEncoding): TBytes;
 
 //------------------------------------------------------------------------------
 
 implementation
 
-uses SysUtils, UWSystem.Encoding;
+uses UWSystem.Encoding;
 
 //------------------------------------------------------------------------------
 
@@ -188,43 +190,183 @@ end;
 
 //------------------------------------------------------------------------------
 
-function ReplaceTagsEBU2TS(const Text: String): String;
+function EBUBytesToText(const Bytes: TBytes; const Enc: TEncoding): String;
 var
-  i: Integer;
-begin
-  // Unused space
-  Result := ReplaceStr(Text, Chr(TF_UnusedSpace), '');
-  // Codes reserved for future use
-  for i := $86 to $89 do Result := ReplaceStr(Result, Chr(i), '');
-  for i := $8B to $8E do Result := ReplaceStr(Result, Chr(i), '');
-  for i := $90 to $9F do Result := ReplaceStr(Result, Chr(i), '');
-  // Teletext Control Codes, TO DO!
-  for i := 0 to 31 do Result := ReplaceStr(Result, Chr(i), '');
+  i, SegLen: Integer;
+  Seg: TBytes;
+  B: Byte;
 
-  Result := ReplaceStr(Result, '|', LineEnding);
-  Result := ReplaceStr(Result, Chr(TF_CRLF), LineEnding);
-  Result := ReplaceStr(Result, Chr(TF_ItalicsOn), '{\i1}');
-  Result := ReplaceStr(Result, Chr(TF_ItalicsOff), '{\i0}');
-  Result := ReplaceStr(Result, Chr(TF_UnderlineOn), '{\u1}');
-  Result := ReplaceStr(Result, Chr(TF_UnderlineOff), '{\u0}');
-  Result := ReplaceStr(Result, Chr(TF_BoxingOn), '{\b1}');
-  Result := ReplaceStr(Result, Chr(TF_BoxingOff), '{\b0}');
+  procedure Flush;
+  begin
+    if SegLen > 0 then
+    begin
+      Result := Result + Enc.GetString(Seg, 0, SegLen);
+      SegLen := 0;
+    end;
+  end;
+
+  procedure Put(const S: String);
+  begin
+    Flush;
+    Result := Result + S;
+  end;
+
+begin
+  Result := '';
+  SetLength(Seg, Length(Bytes));
+  SegLen := 0;
+
+  for i := 0 to High(Bytes) do
+  begin
+    B := Bytes[i];
+    case B of
+      TF_UnusedSpace: ; // relleno
+      TTC_AlphaBlack:   Put('{\c&000000&}');
+      TTC_AlphaRed:     Put('{\c&0000FF&}');
+      TTC_AlphaGreen:   Put('{\c&00FF00&}');
+      TTC_AlphaYellow:  Put('{\c&00FFFF&}');
+      TTC_AlphaBlue:    Put('{\c&FF0000&}');
+      TTC_AlphaMagenta: Put('{\c&FF00FF&}');
+      TTC_AlphaCyn:     Put('{\c&FFFF00&}');
+      TTC_AlphaWhite:   Put('{\c&FFFFFF&}');
+      TF_CRLF:          Put(LineEnding);
+      TF_ItalicsOn:     Put('{\i1}');
+      TF_ItalicsOff:    Put('{\i0}');
+      TF_UnderlineOn:   Put('{\u1}');
+      TF_UnderlineOff:  Put('{\u0}');
+      // Boxing, flash, mosaicos, altura doble, fondo, reservados...: sin
+      // equivalente en los tags TS (antes Boxing se mapeaba a negrita).
+      $08..$1F, $7F, $84, $85, $86..$89, $8B..$8E, $90..$9F: Flush;
+    else
+      begin
+        Seg[SegLen] := B;
+        Inc(SegLen);
+      end;
+    end;
+  end;
+  Flush;
 
   Result := Result.Trim;
 end;
 
 //------------------------------------------------------------------------------
 
-function ReplaceTagsTS2EBU(const Text: String): String;
+// Color teletexto (8 colores alpha) mas cercano a un {\c&BBGGRR&}.
+function NearestTeletextColor(const BGRHex: String): Byte;
+const
+  Palette: array[0..7] of array[0..3] of Integer = (
+    (TTC_AlphaBlack,   0,   0,   0),
+    (TTC_AlphaRed,     255, 0,   0),
+    (TTC_AlphaGreen,   0,   255, 0),
+    (TTC_AlphaYellow,  255, 255, 0),
+    (TTC_AlphaBlue,    0,   0,   255),
+    (TTC_AlphaMagenta, 255, 0,   255),
+    (TTC_AlphaCyn,     0,   255, 255),
+    (TTC_AlphaWhite,   255, 255, 255)
+  );
+var
+  R, G, B: Integer;
+  k, BestIdx: Integer;
+  Dist, BestDist: Int64;
 begin
-  Result := ReplaceStr(Text, LineEnding, '|');
-  //Result := ReplaceStr(Text, LineEnding, Chr(TF_CRLF));
-  Result := ReplaceStr(Result, '{\i1}', Chr(TF_ItalicsOn));
-  Result := ReplaceStr(Result, '{\i0}', Chr(TF_ItalicsOff));
-  Result := ReplaceStr(Result, '{\u1}', Chr(TF_UnderlineOn));
-  Result := ReplaceStr(Result, '{\u0}', Chr(TF_UnderlineOff));
-  Result := ReplaceStr(Result, '{\b1}', Chr(TF_BoxingOn));
-  Result := ReplaceStr(Result, '{\b1}', Chr(TF_BoxingOff));
+  Result := TTC_AlphaWhite;
+  if Length(BGRHex) <> 6 then Exit;
+
+  B := StrToIntDef('$' + Copy(BGRHex, 1, 2), 255);
+  G := StrToIntDef('$' + Copy(BGRHex, 3, 2), 255);
+  R := StrToIntDef('$' + Copy(BGRHex, 5, 2), 255);
+
+  BestIdx  := 7;
+  BestDist := High(Int64);
+  for k := 0 to 7 do
+  begin
+    Dist := Sqr(Int64(R - Palette[k][1])) + Sqr(Int64(G - Palette[k][2])) + Sqr(Int64(B - Palette[k][3]));
+    if Dist < BestDist then
+    begin
+      BestDist := Dist;
+      BestIdx  := k;
+    end;
+  end;
+  Result := Palette[BestIdx][0];
+end;
+
+//------------------------------------------------------------------------------
+
+function EBUTextToBytes(const Text: String; const Enc: TEncoding): TBytes;
+var
+  Len: Integer;
+  p, q, RunStart: Integer;
+  Hex: String;
+
+  procedure AddByte(const B: Byte);
+  begin
+    if Len >= Length(Result) then SetLength(Result, Length(Result) * 2 + 16);
+    Result[Len] := B;
+    Inc(Len);
+  end;
+
+  procedure FlushRun(const UpTo: Integer);
+  var
+    Chunk: TBytes;
+    k: Integer;
+  begin
+    if UpTo > RunStart then
+    begin
+      Chunk := Enc.GetBytes(Copy(Text, RunStart, UpTo - RunStart));
+      for k := 0 to High(Chunk) do AddByte(Chunk[k]);
+    end;
+  end;
+
+  function TagIs(const Tag: String): Boolean;
+  begin
+    Result := (p + Length(Tag) - 1 <= Length(Text)) and (Copy(Text, p, Length(Tag)) = Tag);
+  end;
+
+begin
+  SetLength(Result, Length(Text) + 16);
+  Len := 0;
+  p := 1;
+  RunStart := 1;
+
+  while p <= Length(Text) do
+  begin
+    if (Text[p] = #13) and (p < Length(Text)) and (Text[p + 1] = #10) then
+    begin
+      FlushRun(p); AddByte(TF_CRLF); Inc(p, 2); RunStart := p;
+    end
+    else if Text[p] = #10 then
+    begin
+      FlushRun(p); AddByte(TF_CRLF); Inc(p); RunStart := p;
+    end
+    else if Text[p] = #13 then
+    begin
+      FlushRun(p); Inc(p); RunStart := p;
+    end
+    else if (Text[p] = '{') and (p < Length(Text)) and (Text[p + 1] = '\') then
+    begin
+      FlushRun(p);
+      q := Pos('}', Text, p);
+      if q = 0 then q := Length(Text);
+      if TagIs('{\i1}') then AddByte(TF_ItalicsOn)
+      else if TagIs('{\i0}') then AddByte(TF_ItalicsOff)
+      else if TagIs('{\u1}') then AddByte(TF_UnderlineOn)
+      else if TagIs('{\u0}') then AddByte(TF_UnderlineOff)
+      else if TagIs('{\c&') then
+      begin
+        Hex := Copy(Text, p + 4, q - (p + 4));
+        if (Length(Hex) > 0) and (Hex[Length(Hex)] = '&') then Delete(Hex, Length(Hex), 1);
+        AddByte(NearestTeletextColor(Hex));
+      end;
+      // cualquier otro tag ({\b1}, {\s1}, {\c}...) no tiene codigo EBU: se descarta
+      p := q + 1;
+      RunStart := p;
+    end
+    else
+      Inc(p);
+  end;
+  FlushRun(p);
+
+  SetLength(Result, Len);
 end;
 
 //------------------------------------------------------------------------------

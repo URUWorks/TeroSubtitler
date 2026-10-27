@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procUndo;
@@ -24,13 +24,13 @@ unit procUndo;
 interface
 
 uses
-  UWSubtitleAPI, FGL, LCLIntf, laz.VirtualTrees;
+  UWSubtitleAPI, FGL, LCLIntf, laz.VirtualTrees, UWSystem.TimeUtils;
 
 type
 
   { TUndoItem }
 
-  TUndoType = (utInsertLine, utDeleteLine, utSubtitleChange);
+  TUndoType = (utInsertLine, utDeleteLine, utSubtitleChange, utFPSChange);
 
   PUndoItem = ^TUndoItem;
   TUndoItem = record
@@ -38,6 +38,8 @@ type
     Index    : Integer;
     Subtitle : TUWSubtitleItem;
     Group    : Byte;
+    OldFPS   : TFPSInfo;
+    NewFPS   : TFPSInfo;
   end;
 
   { TUndoList }
@@ -53,10 +55,14 @@ type
   private
     FUndoList      : TUndoList;
     FRedoList      : TUndoList;
-    //FMax           : Integer;
+    FMax           : Integer;
     FLastUndoGroup : Byte;
     FLastTickCount : Cardinal;
+    FLastResentIndex : Integer;
+    FLastResentType  : TUndoType;
     FOnChange      : TUndoChangeEvent;
+    procedure TrimUndoList;
+    function GetGroupChangeType(const AList: TUndoList): TUndoChangeType;
     procedure Changed(const ChangeType: TUndoChangeType);
     procedure SetOnChanged(const AValue: TUndoChangeEvent);
   public
@@ -70,10 +76,11 @@ type
     procedure AddUndo(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
     procedure AddUndoIfNotResent(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
     procedure AddRedo(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const Group: Byte);
+    procedure AddUndoFPS(const OldFPS, NewFPS: TFPSInfo; const InputFPS: Boolean);
     procedure Undo(const VST: TLazVirtualStringTree);
     procedure Redo(const VST: TLazVirtualStringTree);
     procedure IncrementUndoGroup;
-    //property Max: Integer read FMax write FMax;
+    property Max: Integer read FMax write FMax;
     property OnChange: TUndoChangeEvent read FOnChange write SetOnChanged;
   end;
 
@@ -85,7 +92,7 @@ var
 implementation
 
 uses
-  procTypes, procVST;
+  procTypes, procVST, procWorkspace, formMain;
 
 // -----------------------------------------------------------------------------
 
@@ -100,6 +107,25 @@ begin
   Result^.Index    := AIndex;
   Result^.Subtitle := ASubtitle;
   Result^.Group    := AGroup;
+  //Result^.OldFPS   := NIL;
+  //Result^.NewFPS   := NIL;
+end;
+
+// -----------------------------------------------------------------------------
+
+function NewPUndoFPS(const AGroup: Byte; const AOldFPS, ANewFPS: TFPSInfo; const AInputFPS: Boolean): PUndoItem;
+begin
+  New(Result);
+  if AInputFPS then
+    Result^.Index := -1
+  else
+    Result^.Index := -2;
+
+  Result^.UndoType := utFPSChange;
+  Result^.Subtitle := Default(TUWSubtitleItem);
+  Result^.Group    := AGroup;
+  Result^.OldFPS   := AOldFPS;
+  Result^.NewFPS   := ANewFPS;
 end;
 
 // -----------------------------------------------------------------------------
@@ -116,8 +142,8 @@ begin
     begin
       Dispose(PUndoItem(AList.Items[i]));
       AList.Items[i] := NIL;
-      AList.Delete(i);
     end;
+    AList.Clear;
   end;
 end;
 
@@ -139,60 +165,85 @@ end;
 
 procedure CheckList(const VST: TLazVirtualStringTree; var FromList, ToList: TUndoList);
 var
-  i     : Integer;
-  group : Byte;
+  group: Byte;
+  Item: PUndoItem;
+  i, it, ft: Integer;
 begin
-  if not Assigned(VST) or not Assigned(FromList) or not Assigned(ToList) then Exit;
+  if not Assigned(VST) or not Assigned(FromList) or not Assigned(ToList) or (FromList.Count = 0) then Exit;
 
   VST.BeginUpdate;
   try
     VST.ClearSelection;
-
     group := FromList.Last^.Group;
-    if (FromList.Last^.UndoType = utSubtitleChange) and Subtitles.ValidIndex(FromList.Last^.Index) then
-    begin
-      ToList.Add(NewPUndo(utSubtitleChange, FromList.Last^.Index, Subtitles.Items[FromList.Last^.Index], FromList.Last^.Group));
-      Subtitles.Items[FromList.Last^.Index] := FromList.Last^.Subtitle;
-      VSTSelectNode(VST, FromList.Last^.Index, False, True);
-    end
-    else if (FromList.Last^.UndoType = utInsertLine) and Subtitles.ValidIndex(FromList.Last^.Index) then
-    begin
-      ToList.Add(NewPUndo(utDeleteLine, FromList.Last^.Index, Subtitles.Items[FromList.Last^.Index], FromList.Last^.Group));
-      Subtitles.Delete(FromList.Last^.Index);
-    end
-    else if (FromList.Last^.UndoType = utDeleteLine) then
-    begin
-      ToList.Add(NewPUndo(utInsertLine, FromList.Last^.Index, Subtitles.Items[FromList.Last^.Index], FromList.Last^.Group));
-      Subtitles.Insert(FromList.Last^.Index, FromList.Last^.Subtitle, NIL);
-      VSTSelectNode(VST, FromList.Last^.Index, False, True);
-    end;
 
-    DeleteLastItem(FromList);
-    for i := FromList.Count-1 downto 0 do
+    while (FromList.Count > 0) and (FromList.Last^.Group = group) do
     begin
-      if group = FromList[i]^.Group then
-      begin
-        if (FromList.Last^.UndoType = utSubtitleChange) and Subtitles.ValidIndex(FromList[i]^.Index) then
+      Item := FromList.Last;
+
+      case Item^.UndoType of
+        utSubtitleChange:
+          if Subtitles.ValidIndex(Item^.Index) then
+          begin
+            ToList.Add(NewPUndo(utSubtitleChange, Item^.Index, Subtitles.Items[Item^.Index], Item^.Group));
+            Subtitles.Items[Item^.Index] := Item^.Subtitle;
+            VSTSelectNode(VST, Item^.Index, False, True);
+          end;
+
+        utInsertLine:
+          if Subtitles.ValidIndex(Item^.Index) then
+          begin
+            ToList.Add(NewPUndo(utDeleteLine, Item^.Index, Subtitles.Items[Item^.Index], Item^.Group));
+            Subtitles.Delete(Item^.Index);
+          end;
+
+        utDeleteLine:
+          begin
+            ToList.Add(NewPUndo(utInsertLine, Item^.Index, Item^.Subtitle, Item^.Group));
+            Subtitles.Insert(Item^.Index, Item^.Subtitle, NIL);
+            VSTSelectNode(VST, Item^.Index, False, True);
+          end;
+
+        utFPSChange:
         begin
-          ToList.Add(NewPUndo(utSubtitleChange, FromList[i]^.Index, Subtitles.Items[FromList.Last^.Index], FromList[i]^.Group));
-          Subtitles.Items[FromList[i]^.Index] := FromList[i]^.Subtitle;
-          VSTSelectNode(VST, FromList.Last^.Index, False, True);
-        end
-        else if (FromList.Last^.UndoType = utInsertLine) and Subtitles.ValidIndex(FromList[i]^.Index) then
-        begin
-          ToList.Add(NewPUndo(utDeleteLine, FromList[i]^.Index, Subtitles.Items[FromList.Last^.Index], FromList[i]^.Group));
-          Subtitles.Delete(FromList[i]^.Index);
-        end
-        else if FromList.Last^.UndoType = utDeleteLine then
-        begin
-          ToList.Add(NewPUndo(utInsertLine, FromList[i]^.Index, Subtitles.Items[FromList.Last^.Index], FromList[i]^.Group));
-          Subtitles.Insert(FromList[i]^.Index, FromList[i]^.Subtitle, NIL);
-          VSTSelectNode(VST, FromList[i]^.Index, False, True);
+          ToList.Add(NewPUndoFPS(Item^.Group, Item^.NewFPS, Item^.OldFPS, Item^.Index = -1));
+
+          for i := 0 to Subtitles.Count - 1 do
+          begin
+            if Item^.Index = -1 then
+            begin
+              it := TimeToFrames(Subtitles.Items[i].InitialTime, Item^.OldFPS.FPS);
+              ft := TimeToFrames(Subtitles.Items[i].FinalTime, Item^.OldFPS.FPS);
+              Subtitles.ItemPointer[i]^.InitialTime := FramesToTime(it, Item^.NewFPS.FPS);
+              Subtitles.ItemPointer[i]^.FinalTime   := FramesToTime(ft, Item^.NewFPS.FPS);
+            end
+            else
+            begin
+              it := TimeToFrames(Subtitles.Items[i].InitialTime, Item^.NewFPS.FPS);
+              ft := TimeToFrames(Subtitles.Items[i].FinalTime, Item^.NewFPS.FPS);
+              Subtitles.ItemPointer[i]^.InitialTime := FramesToTime(it, Item^.OldFPS.FPS);
+              Subtitles.ItemPointer[i]^.FinalTime   := FramesToTime(ft, Item^.OldFPS.FPS);
+            end;
+          end;
+
+          if Item^.Index = -1 then
+          begin
+            Workspace.FPS.InputFPS  := Item^.OldFPS;
+            Workspace.FPS.OutputFPS := Item^.OldFPS;
+
+            frmMain.cboInputFPS.ItemIndex := FPSInfoToIndex(Workspace.FPS.InputFPS);
+            frmMain.cboFPS.ItemIndex := frmMain.cboInputFPS.ItemIndex;
+          end
+          else
+          begin
+            Workspace.FPS.OutputFPS := Item^.OldFPS;
+            frmMain.cboFPS.ItemIndex := FPSInfoToIndex(Workspace.FPS.OutputFPS);
+          end;
+
+          SetTimeFPStoTimeEditCtrls;
         end;
-        DeleteLastItem(FromList);
-      end
-      else
-        Break;
+      end;
+
+      DeleteLastItem(FromList);
     end;
   finally
     VST.EndUpdate;
@@ -209,15 +260,18 @@ constructor TUndo.Create;
 begin
   FUndoList      := TUndoList.Create;
   FRedoList      := TUndoList.Create;
-  //FMax           := 1000;
+  FMax           := 20000; // maximum number of undo items kept
   FLastUndoGroup := 0;
   FLastTickCount := GetTickCount;
+  FLastResentIndex := -1;
+  FLastResentType  := utSubtitleChange;
 end;
 
 // -----------------------------------------------------------------------------
 
 destructor TUndo.Destroy;
 begin
+  FOnChange := NIL;
   Clear;
   FUndoList.Free;
   FRedoList.Free;
@@ -280,9 +334,8 @@ end;
 
 procedure TUndo.AddUndo(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
 begin
-  //if FUndoList.Count >= FMax then FUndoList.Delete(0);
-
   FUndoList.Add(NewPUndo(UndoType, Index, Subtitle, FLastUndoGroup));
+  TrimUndoList;
   if IncrementGroup then IncrementUndoGroup;
   if ClearRedo then ClearList(FRedoList);
   Changed(uctCount);
@@ -292,11 +345,55 @@ end;
 
 procedure TUndo.AddUndoIfNotResent(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
 begin
-  if ((GetTickCount - FLastTickCount) > 500) then // add undo only if > 500ms
+  // merge with the previous undo only when it was for the same entry and the
+  // same kind of change, sent less than 500ms ago (e.g. typing in the memo)
+  if ((GetTickCount - FLastTickCount) > 500) or
+     (Index <> FLastResentIndex) or (UndoType <> FLastResentType) then
   begin
-    AddUndo(UndoType, Index, Subtitle, ClearRedo);
+    AddUndo(UndoType, Index, Subtitle, False, ClearRedo);
     if IncrementGroup then IncrementUndoGroup;
-    FLastTickCount := GetTickCount;
+    FLastResentIndex := Index;
+    FLastResentType  := UndoType;
+    FLastTickCount   := GetTickCount;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUndo.TrimUndoList;
+var
+  Group: Byte;
+begin
+  // drop whole groups from the oldest end so memory doesn't grow forever
+  if (FMax <= 0) or (FUndoList.Count <= FMax) then Exit;
+
+  while (FUndoList.Count > FMax) do
+  begin
+    Group := FUndoList.First^.Group;
+    while (FUndoList.Count > 1) and (FUndoList.First^.Group = Group) do
+    begin
+      Dispose(FUndoList.First);
+      FUndoList.Delete(0);
+    end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUndo.GetGroupChangeType(const AList: TUndoList): TUndoChangeType;
+var
+  i: Integer;
+  Group: Byte;
+begin
+  // reindex if any item of the last group inserts or deletes lines
+  Result := uctItems;
+  if AList.Count = 0 then Exit;
+  Group := AList.Last^.Group;
+  for i := AList.Count-1 downto 0 do
+  begin
+    if AList[i]^.Group <> Group then Break;
+    if AList[i]^.UndoType in [utInsertLine, utDeleteLine] then
+      Exit(uctReIndex);
   end;
 end;
 
@@ -310,59 +407,41 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUndo.Undo(const VST: TLazVirtualStringTree);
+procedure TUndo.AddUndoFPS(const OldFPS, NewFPS: TFPSInfo; const InputFPS: Boolean);
 begin
-  if not CanUndo then Exit;
+  FUndoList.Add(NewPUndoFPS(FLastUndoGroup, OldFPS, NewFPS, InputFPS));
+  IncrementUndoGroup;
+  ClearList(FRedoList);
+  Changed(uctCount);
+end;
 
-  case FUndoList.Last^.UndoType of
-    utInsertLine: begin // then delete!
-                    if (Subtitles.Count > 0) and (FUndoList.Last^.Index <= Subtitles.Count) then
-                    begin
-                      CheckList(VST, FUndoList, FRedoList);
-                      Changed(uctReIndex);
-                    end;
-                  end;
-    utDeleteLine: begin // then insert!
-                    CheckList(VST, FUndoList, FRedoList);
-                    Changed(uctReIndex);
-                  end;
-    else // utSubtitleChange then Undo!
-      if (Subtitles.Count > 0) and (FUndoList.Count > 0) and (FUndoList.Last^.Index <= Subtitles.Count) then
-      begin
-        CheckList(VST, FUndoList, FRedoList);
-        Changed(uctItems);
-      end;
-    end;
+// -----------------------------------------------------------------------------
 
+procedure TUndo.Undo(const VST: TLazVirtualStringTree);
+var
+  ChangeType: TUndoChangeType;
+begin
+  if not CanUndo or (VST = NIL) then Exit;
+
+  ChangeType := GetGroupChangeType(FUndoList);
+
+  CheckList(VST, FUndoList, FRedoList);
+  Changed(ChangeType);
   VST.Invalidate;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TUndo.Redo(const VST: TLazVirtualStringTree);
+var
+  ChangeType: TUndoChangeType;
 begin
-  if not CanRedo then Exit;
+  if not CanRedo or (VST = NIL) then Exit;
 
-  case FRedoList.Last^.UndoType of
-    utInsertLine: begin // then Insert!
-                    if (Subtitles.Count > 0) and (FRedoList.Last^.Index <= Subtitles.Count) then
-                    begin
-                      CheckList(VST, FRedoList, FUndoList);
-                      Changed(uctReIndex);
-                    end;
-                  end;
-    utDeleteLine: begin // then Delete!
-                    CheckList(VST, FRedoList, FUndoList);
-                    Changed(uctReIndex);
-                  end;
-    else // utSubtitleChange then Redo!
-      if (Subtitles.Count > 0) and (FRedoList.Count > 0) and (FRedoList.Last^.Index <= Subtitles.Count) then
-      begin
-        CheckList(VST, FRedoList, FUndoList);
-        Changed(uctItems);
-      end;
-    end;
+  ChangeType := GetGroupChangeType(FRedoList);
 
+  CheckList(VST, FRedoList, FUndoList);
+  Changed(ChangeType);
   VST.Invalidate;
 end;
 

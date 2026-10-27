@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSystem.Globalization;
@@ -55,52 +55,42 @@ type
   end;
 
 const
-  MaxCultureItems = 137;
+  MaxCultureItems = 242;
 
   CultureInfo: array[0..MaxCultureItems-1] of TCultureInfo =
   (
-    (CultureName: 'af-ZA'; DisplayName: 'Afrikaans - South Africa'),
-    (CultureName: 'sq-AL'; DisplayName: 'Albanian - Albania'),
-    (CultureName: 'ar-DZ'; DisplayName: 'Arabic - Algeria'),
-    (CultureName: 'ar-BH'; DisplayName: 'Arabic - Bahrain'),
-    (CultureName: 'ar-EG'; DisplayName: 'Arabic - Egypt'),
-    (CultureName: 'ar-IQ'; DisplayName: 'Arabic - Iraq'),
-    (CultureName: 'ar-JO'; DisplayName: 'Arabic - Jordan'),
-    (CultureName: 'ar-KW'; DisplayName: 'Arabic - Kuwait'),
-    (CultureName: 'ar-LB'; DisplayName: 'Arabic - Lebanon'),
-    (CultureName: 'ar-LY'; DisplayName: 'Arabic - Libya'),
-    (CultureName: 'ar-MA'; DisplayName: 'Arabic - Morocco'),
-    (CultureName: 'ar-OM'; DisplayName: 'Arabic - Oman'),
-    (CultureName: 'ar-QA'; DisplayName: 'Arabic - Qatar'),
-    (CultureName: 'ar-SA'; DisplayName: 'Arabic - Saudi Arabia'),
-    (CultureName: 'ar-SY'; DisplayName: 'Arabic - Syria'),
-    (CultureName: 'ar-TN'; DisplayName: 'Arabic - Tunisia'),
-    (CultureName: 'ar-AE'; DisplayName: 'Arabic - United Arab Emirates'),
-    (CultureName: 'ar-YE'; DisplayName: 'Arabic - Yemen'),
-    (CultureName: 'hy-AM'; DisplayName: 'Armenian - Armenia'),
-    (CultureName: 'Cy-az-AZ'; DisplayName: 'Azeri (Cyrillic) - Azerbaijan'),
-    (CultureName: 'Lt-az-AZ'; DisplayName: 'Azeri (Latin) - Azerbaijan'),
-    (CultureName: 'eu-ES'; DisplayName: 'Basque - Basque'),
-    (CultureName: 'be-BY'; DisplayName: 'Belarusian - Belarus'),
-    (CultureName: 'bg-BG'; DisplayName: 'Български - БАН'),
-    (CultureName: 'ca-ES'; DisplayName: 'Catalan - Catalan'),
-    (CultureName: 'zh-CN'; DisplayName: 'Chinese - China'),
-    (CultureName: 'zh-HK'; DisplayName: 'Chinese - Hong Kong SAR'),
-    (CultureName: 'zh-MO'; DisplayName: 'Chinese - Macau SAR'),
-    (CultureName: 'zh-SG'; DisplayName: 'Chinese - Singapore'),
-    (CultureName: 'zh-TW'; DisplayName: 'Chinese - Taiwan'),
-    (CultureName: 'zh-CHS'; DisplayName: 'Chinese (Simplified)'),
-    (CultureName: 'zh-CHT'; DisplayName: 'Chinese (Traditional)'),
-    (CultureName: 'hr-HR'; DisplayName: 'Croatian - Croatia'),
-    (CultureName: 'cs-CZ'; DisplayName: 'Czech - Czech Republic'),
-    (CultureName: 'da-DK'; DisplayName: 'Danish - Denmark'),
-    (CultureName: 'div-MV'; DisplayName: 'Dhivehi - Maldives'),
-    (CultureName: 'nl-BE'; DisplayName: 'Dutch - Belgium'),
-    (CultureName: 'nl-NL'; DisplayName: 'Dutch - The Netherlands'),
+    (CultureName: 'af'; DisplayName: 'Afrikaans'),
+    (CultureName: 'af-ZA'; DisplayName: 'Afrikaans - Suid-Afrika'),
+    (CultureName: 'az'; DisplayName: 'Azərbaycan'),
+    (CultureName: 'az-Latn-AZ'; DisplayName: 'Azərbaycan (Latın) - Azərbaycan'),
+    (CultureName: 'az-Cyrl-AZ'; DisplayName: 'Азәрбајҹан (Кирил) - Азәрбајҹан'),
+    (CultureName: 'id'; DisplayName: 'Bahasa Indonesia'),
+    (CultureName: 'id-ID'; DisplayName: 'Bahasa Indonesia - Indonesia'),
+    (CultureName: 'ms'; DisplayName: 'Bahasa Melayu'),
+    (CultureName: 'ms-BN'; DisplayName: 'Bahasa Melayu - Brunei'),
+    (CultureName: 'ms-MY'; DisplayName: 'Bahasa Melayu - Malaysia'),
+    (CultureName: 'bs'; DisplayName: 'Bosanski'),
+    (CultureName: 'ca'; DisplayName: 'Català'),
+    (CultureName: 'ca-ES'; DisplayName: 'Català - Catalunya'),
+    (CultureName: 'cs'; DisplayName: 'Čeština'),
+    (CultureName: 'cs-CZ'; DisplayName: 'Čeština - Česko'),
+    (CultureName: 'cy'; DisplayName: 'Cymraeg'),
+    (CultureName: 'da'; DisplayName: 'Dansk'),
+    (CultureName: 'da-DK'; DisplayName: 'Dansk - Danmark'),
+    (CultureName: 'de'; DisplayName: 'Deutsch'),
+    (CultureName: 'de-DE'; DisplayName: 'Deutsch - Deutschland'),
+    (CultureName: 'de-LI'; DisplayName: 'Deutsch - Liechtenstein'),
+    (CultureName: 'de-LU'; DisplayName: 'Deutsch - Luxemburg'),
+    (CultureName: 'de-AT'; DisplayName: 'Deutsch - Österreich'),
+    (CultureName: 'de-CH'; DisplayName: 'Deutsch - Schweiz'),
+    (CultureName: 'et'; DisplayName: 'Eesti'),
+    (CultureName: 'et-EE'; DisplayName: 'Eesti - Eesti'),
+    (CultureName: 'en'; DisplayName: 'English'),
     (CultureName: 'en-AU'; DisplayName: 'English - Australia'),
     (CultureName: 'en-BZ'; DisplayName: 'English - Belize'),
     (CultureName: 'en-CA'; DisplayName: 'English - Canada'),
-    (CultureName: 'en-CB'; DisplayName: 'English - Caribbean'),
+    (CultureName: 'en-029'; DisplayName: 'English - Caribbean'),
+    (CultureName: 'en-IN'; DisplayName: 'English - India'),
     (CultureName: 'en-IE'; DisplayName: 'English - Ireland'),
     (CultureName: 'en-JM'; DisplayName: 'English - Jamaica'),
     (CultureName: 'en-NZ'; DisplayName: 'English - New Zealand'),
@@ -110,92 +100,207 @@ const
     (CultureName: 'en-GB'; DisplayName: 'English - United Kingdom'),
     (CultureName: 'en-US'; DisplayName: 'English - United States'),
     (CultureName: 'en-ZW'; DisplayName: 'English - Zimbabwe'),
-    (CultureName: 'et-EE'; DisplayName: 'Estonian - Estonia'),
-    (CultureName: 'fo-FO'; DisplayName: 'Faroese - Faroe Islands'),
-    (CultureName: 'fa-IR'; DisplayName: 'Farsi - Iran'),
-    (CultureName: 'fi-FI'; DisplayName: 'Finnish - Finland'),
-    (CultureName: 'fr-BE'; DisplayName: 'French - Belgium'),
-    (CultureName: 'fr-CA'; DisplayName: 'French - Canada'),
-    (CultureName: 'fr-FR'; DisplayName: 'French - France'),
-    (CultureName: 'fr-LU'; DisplayName: 'French - Luxembourg'),
-    (CultureName: 'fr-MC'; DisplayName: 'French - Monaco'),
-    (CultureName: 'fr-CH'; DisplayName: 'French - Switzerland'),
-    (CultureName: 'gl-ES'; DisplayName: 'Galician - Galician'),
-    (CultureName: 'ka-GE'; DisplayName: 'Georgian - Georgia'),
-    (CultureName: 'de-AT'; DisplayName: 'German - Austria'),
-    (CultureName: 'de-DE'; DisplayName: 'German - Germany'),
-    (CultureName: 'de-LI'; DisplayName: 'German - Liechtenstein'),
-    (CultureName: 'de-LU'; DisplayName: 'German - Luxembourg'),
-    (CultureName: 'de-CH'; DisplayName: 'German - Switzerland'),
-    (CultureName: 'el-GR'; DisplayName: 'Greek - Greece'),
-    (CultureName: 'gu-IN'; DisplayName: 'Gujarati - India'),
-    (CultureName: 'he-IL'; DisplayName: 'Hebrew - Israel'),
-    (CultureName: 'hi-IN'; DisplayName: 'Hindi - India'),
-    (CultureName: 'hu-HU'; DisplayName: 'Hungarian - Hungary'),
-    (CultureName: 'is-IS'; DisplayName: 'Icelandic - Iceland'),
-    (CultureName: 'id-ID'; DisplayName: 'Indonesian - Indonesia'),
-    (CultureName: 'it-IT'; DisplayName: 'Italian - Italy'),
-    (CultureName: 'it-CH'; DisplayName: 'Italian - Switzerland'),
-    (CultureName: 'ja-JP'; DisplayName: 'Japanese - Japan'),
-    (CultureName: 'kn-IN'; DisplayName: 'Kannada - India'),
-    (CultureName: 'kk-KZ'; DisplayName: 'Kazakh - Kazakhstan'),
-    (CultureName: 'kok-IN'; DisplayName: 'Konkani - India'),
-    (CultureName: 'ko-KR'; DisplayName: 'Korean - Korea'),
-    (CultureName: 'ky-KZ'; DisplayName: 'Kyrgyz - Kazakhstan'),
-    (CultureName: 'lv-LV'; DisplayName: 'Latvian - Latvia'),
-    (CultureName: 'lt-LT'; DisplayName: 'Lithuanian - Lithuania'),
-    (CultureName: 'mk-MK'; DisplayName: 'Macedonian (FYROM)'),
-    (CultureName: 'ms-BN'; DisplayName: 'Malay - Brunei'),
-    (CultureName: 'ms-MY'; DisplayName: 'Malay - Malaysia'),
-    (CultureName: 'mr-IN'; DisplayName: 'Marathi - India'),
-    (CultureName: 'mn-MN'; DisplayName: 'Mongolian - Mongolia'),
-    (CultureName: 'nb-NO'; DisplayName: 'Norwegian (Bokmål) - Norway'),
-    (CultureName: 'nn-NO'; DisplayName: 'Norwegian (Nynorsk) - Norway'),
-    (CultureName: 'pl-PL'; DisplayName: 'Polish - Poland'),
-    (CultureName: 'pt-BR'; DisplayName: 'Portuguese - Brazil'),
-    (CultureName: 'pt-PT'; DisplayName: 'Portuguese - Portugal'),
-    (CultureName: 'pa-IN'; DisplayName: 'Punjabi - India'),
-    (CultureName: 'ro-RO'; DisplayName: 'Romanian - Romania'),
-    (CultureName: 'ru-RU'; DisplayName: 'Russian - Russia'),
-    (CultureName: 'sa-IN'; DisplayName: 'Sanskrit - India'),
-    (CultureName: 'sr-Cyrl-BA'; DisplayName: 'Serbian (Cyrillic, Bosnia and Herzegovina)'),
-    (CultureName: 'sr-Cyrl-RS'; DisplayName: 'Serbian (Cyrillic) - Serbia'),
-    (CultureName: 'sr-Latn-RS'; DisplayName: 'Serbian (Latin) - Serbia'),
-    (CultureName: 'sk-SK'; DisplayName: 'Slovak - Slovakia'),
-    (CultureName: 'sl-SI'; DisplayName: 'Slovenian - Slovenia'),
+    (CultureName: 'es'; DisplayName: 'Español'),
     (CultureName: 'es-AR'; DisplayName: 'Español - Argentina'),
     (CultureName: 'es-BO'; DisplayName: 'Español - Bolivia'),
     (CultureName: 'es-CL'; DisplayName: 'Español - Chile'),
     (CultureName: 'es-CO'; DisplayName: 'Español - Colombia'),
     (CultureName: 'es-CR'; DisplayName: 'Español - Costa Rica'),
-    (CultureName: 'es-DO'; DisplayName: 'Español - Dominican Republic'),
     (CultureName: 'es-EC'; DisplayName: 'Español - Ecuador'),
     (CultureName: 'es-SV'; DisplayName: 'Español - El Salvador'),
+    (CultureName: 'es-ES'; DisplayName: 'Español - España'),
+    (CultureName: 'es-US'; DisplayName: 'Español - Estados Unidos'),
     (CultureName: 'es-GT'; DisplayName: 'Español - Guatemala'),
     (CultureName: 'es-HN'; DisplayName: 'Español - Honduras'),
-    (CultureName: 'es-MX'; DisplayName: 'Español - Mexico'),
+    (CultureName: 'es-419'; DisplayName: 'Español - Latinoamérica'),
+    (CultureName: 'es-MX'; DisplayName: 'Español - México'),
     (CultureName: 'es-NI'; DisplayName: 'Español - Nicaragua'),
-    (CultureName: 'es-PA'; DisplayName: 'Español - Panama'),
+    (CultureName: 'es-PA'; DisplayName: 'Español - Panamá'),
     (CultureName: 'es-PY'; DisplayName: 'Español - Paraguay'),
-    (CultureName: 'es-PE'; DisplayName: 'Español - Peru'),
+    (CultureName: 'es-PE'; DisplayName: 'Español - Perú'),
     (CultureName: 'es-PR'; DisplayName: 'Español - Puerto Rico'),
-    (CultureName: 'es-ES'; DisplayName: 'Español - Spain'),
+    (CultureName: 'es-DO'; DisplayName: 'Español - República Dominicana'),
     (CultureName: 'es-UY'; DisplayName: 'Español - Uruguay'),
     (CultureName: 'es-VE'; DisplayName: 'Español - Venezuela'),
-    (CultureName: 'sw-KE'; DisplayName: 'Swahili - Kenya'),
-    (CultureName: 'sv-FI'; DisplayName: 'Swedish - Finland'),
-    (CultureName: 'sv-SE'; DisplayName: 'Swedish - Sweden'),
-    (CultureName: 'syr-SY'; DisplayName: 'Syriac - Syria'),
-    (CultureName: 'ta-IN'; DisplayName: 'Tamil - India'),
-    (CultureName: 'tt-RU'; DisplayName: 'Tatar - Russia'),
-    (CultureName: 'te-IN'; DisplayName: 'Telugu - India'),
-    (CultureName: 'th-TH'; DisplayName: 'Thai - Thailand'),
-    (CultureName: 'tr-TR'; DisplayName: 'Turkish - Turkey'),
-    (CultureName: 'uk-UA'; DisplayName: 'Ukrainian - Ukraine'),
-    (CultureName: 'ur-PK'; DisplayName: 'Urdu - Pakistan'),
-    (CultureName: 'Cy-uz-UZ'; DisplayName: 'Uzbek (Cyrillic) - Uzbekistan'),
-    (CultureName: 'Lt-uz-UZ'; DisplayName: 'Uzbek (Latin) - Uzbekistan'),
-    (CultureName: 'vi-VN'; DisplayName: 'Vietnamese - Vietnam')
+    (CultureName: 'eu'; DisplayName: 'Euskara'),
+    (CultureName: 'eu-ES'; DisplayName: 'Euskara - Euskal Herria'),
+    (CultureName: 'fil'; DisplayName: 'Filipino'),
+    (CultureName: 'fil-PH'; DisplayName: 'Filipino - Pilipinas'),
+    (CultureName: 'fr'; DisplayName: 'Français'),
+    (CultureName: 'fr-BE'; DisplayName: 'Français - Belgique'),
+    (CultureName: 'fr-CA'; DisplayName: 'Français - Canada'),
+    (CultureName: 'fr-FR'; DisplayName: 'Français - France'),
+    (CultureName: 'fr-LU'; DisplayName: 'Français - Luxembourg'),
+    (CultureName: 'fr-MC'; DisplayName: 'Français - Monaco'),
+    (CultureName: 'fr-CH'; DisplayName: 'Français - Suisse'),
+    (CultureName: 'fo'; DisplayName: 'Føroyskt'),
+    (CultureName: 'fo-FO'; DisplayName: 'Føroyskt - Føroyar'),
+    (CultureName: 'ga'; DisplayName: 'Gaeilge'),
+    (CultureName: 'gl'; DisplayName: 'Galego'),
+    (CultureName: 'gl-ES'; DisplayName: 'Galego - Galicia'),
+    (CultureName: 'ha'; DisplayName: 'Hausa'),
+    (CultureName: 'hr'; DisplayName: 'Hrvatski'),
+    (CultureName: 'hr-HR'; DisplayName: 'Hrvatski - Hrvatska'),
+    (CultureName: 'ig'; DisplayName: 'Igbo'),
+    (CultureName: 'xh'; DisplayName: 'isiXhosa'),
+    (CultureName: 'zu'; DisplayName: 'isiZulu'),
+    (CultureName: 'is'; DisplayName: 'Íslenska'),
+    (CultureName: 'is-IS'; DisplayName: 'Íslenska - Ísland'),
+    (CultureName: 'it'; DisplayName: 'Italiano'),
+    (CultureName: 'it-IT'; DisplayName: 'Italiano - Italia'),
+    (CultureName: 'it-CH'; DisplayName: 'Italiano - Svizzera'),
+    (CultureName: 'sw'; DisplayName: 'Kiswahili'),
+    (CultureName: 'sw-KE'; DisplayName: 'Kiswahili - Kenya'),
+    (CultureName: 'lv'; DisplayName: 'Latviešu'),
+    (CultureName: 'lv-LV'; DisplayName: 'Latviešu - Latvija'),
+    (CultureName: 'lb'; DisplayName: 'Lëtzebuergesch'),
+    (CultureName: 'lt'; DisplayName: 'Lietuvių'),
+    (CultureName: 'lt-LT'; DisplayName: 'Lietuvių - Lietuva'),
+    (CultureName: 'hu'; DisplayName: 'Magyar'),
+    (CultureName: 'hu-HU'; DisplayName: 'Magyar - Magyarország'),
+    (CultureName: 'mt'; DisplayName: 'Malti'),
+    (CultureName: 'mi'; DisplayName: 'Māori'),
+    (CultureName: 'nl'; DisplayName: 'Nederlands'),
+    (CultureName: 'nl-BE'; DisplayName: 'Nederlands - België'),
+    (CultureName: 'nl-NL'; DisplayName: 'Nederlands - Nederland'),
+    (CultureName: 'no'; DisplayName: 'Norsk'),
+    (CultureName: 'nb'; DisplayName: 'Norsk (Bokmål)'),
+    (CultureName: 'nb-NO'; DisplayName: 'Norsk (Bokmål) - Norge'),
+    (CultureName: 'nn'; DisplayName: 'Norsk (Nynorsk)'),
+    (CultureName: 'nn-NO'; DisplayName: 'Norsk (Nynorsk) - Noreg'),
+    (CultureName: 'uz'; DisplayName: 'O''zbek'),
+    (CultureName: 'uz-Latn-UZ'; DisplayName: 'O''zbek (Lotin) - O''zbekiston'),
+    (CultureName: 'uz-Cyrl-UZ'; DisplayName: 'Ўзбек (Кирил) - Ўзбекистон'),
+    (CultureName: 'pl'; DisplayName: 'Polski'),
+    (CultureName: 'pl-PL'; DisplayName: 'Polski - Polska'),
+    (CultureName: 'pt'; DisplayName: 'Português'),
+    (CultureName: 'pt-AO'; DisplayName: 'Português - Angola'),
+    (CultureName: 'pt-BR'; DisplayName: 'Português - Brasil'),
+    (CultureName: 'pt-MZ'; DisplayName: 'Português - Moçambique'),
+    (CultureName: 'pt-PT'; DisplayName: 'Português - Portugal'),
+    (CultureName: 'ro'; DisplayName: 'Română'),
+    (CultureName: 'ro-RO'; DisplayName: 'Română - România'),
+    (CultureName: 'sq'; DisplayName: 'Shqip'),
+    (CultureName: 'sq-AL'; DisplayName: 'Shqip - Shqipëri'),
+    (CultureName: 'sk'; DisplayName: 'Slovenčina'),
+    (CultureName: 'sk-SK'; DisplayName: 'Slovenčina - Slovensko'),
+    (CultureName: 'sl'; DisplayName: 'Slovenščina'),
+    (CultureName: 'sl-SI'; DisplayName: 'Slovenščina - Slovenija'),
+    (CultureName: 'so'; DisplayName: 'Soomaali'),
+    (CultureName: 'fi'; DisplayName: 'Suomi'),
+    (CultureName: 'fi-FI'; DisplayName: 'Suomi - Suomi'),
+    (CultureName: 'sv'; DisplayName: 'Svenska'),
+    (CultureName: 'sv-FI'; DisplayName: 'Svenska - Finland'),
+    (CultureName: 'sv-SE'; DisplayName: 'Svenska - Sverige'),
+    (CultureName: 'vi'; DisplayName: 'Tiếng Việt'),
+    (CultureName: 'vi-VN'; DisplayName: 'Tiếng Việt - Việt Nam'),
+    (CultureName: 'tr'; DisplayName: 'Türkçe'),
+    (CultureName: 'tr-TR'; DisplayName: 'Türkçe - Türkiye'),
+    (CultureName: 'yo'; DisplayName: 'Yorùbá'),
+    (CultureName: 'el'; DisplayName: 'Ελληνικά'),
+    (CultureName: 'el-GR'; DisplayName: 'Ελληνικά - Ελλάδα'),
+    (CultureName: 'be'; DisplayName: 'Беларуская'),
+    (CultureName: 'be-BY'; DisplayName: 'Беларуская - Беларусь'),
+    (CultureName: 'bg'; DisplayName: 'Български'),
+    (CultureName: 'bg-BG'; DisplayName: 'Български - България'),
+    (CultureName: 'ky'; DisplayName: 'Кыргызча'),
+    (CultureName: 'ky-KG'; DisplayName: 'Кыргызча - Кыргызстан'),
+    (CultureName: 'mk'; DisplayName: 'Македонски'),
+    (CultureName: 'mk-MK'; DisplayName: 'Македонски - Северна Македонија'),
+    (CultureName: 'mn'; DisplayName: 'Монгол'),
+    (CultureName: 'mn-MN'; DisplayName: 'Монгол - Монгол Улс'),
+    (CultureName: 'ru'; DisplayName: 'Русский'),
+    (CultureName: 'ru-RU'; DisplayName: 'Русский - Россия'),
+    (CultureName: 'sr'; DisplayName: 'Српски'),
+    (CultureName: 'sr-Latn'; DisplayName: 'Srpski (latinica)'),
+    (CultureName: 'sr-Latn-RS'; DisplayName: 'Srpski (latinica) - Srbija'),
+    (CultureName: 'sr-Cyrl'; DisplayName: 'Српски (ћирилица)'),
+    (CultureName: 'sr-Cyrl-BA'; DisplayName: 'Српски (ћирилица) - Босна и Херцеговина'),
+    (CultureName: 'sr-Cyrl-RS'; DisplayName: 'Српски (ћирилица) - Србија'),
+    (CultureName: 'tt'; DisplayName: 'Татар'),
+    (CultureName: 'tt-RU'; DisplayName: 'Татар - Россия'),
+    (CultureName: 'uk'; DisplayName: 'Українська'),
+    (CultureName: 'uk-UA'; DisplayName: 'Українська - Україна'),
+    (CultureName: 'kk'; DisplayName: 'Қазақ'),
+    (CultureName: 'kk-KZ'; DisplayName: 'Қазақ - Қазақстан'),
+    (CultureName: 'hy'; DisplayName: 'Հայերեն'),
+    (CultureName: 'hy-AM'; DisplayName: 'Հայերեն - Հայաստան'),
+    (CultureName: 'he'; DisplayName: 'עברית'),
+    (CultureName: 'he-IL'; DisplayName: 'עברית - ישראל'),
+    (CultureName: 'ur'; DisplayName: 'اردو'),
+    (CultureName: 'ur-PK'; DisplayName: 'اردو - پاکستان'),
+    (CultureName: 'ar'; DisplayName: 'العربية'),
+    (CultureName: 'ar-JO'; DisplayName: 'العربية - الأردن'),
+    (CultureName: 'ar-AE'; DisplayName: 'العربية - الإمارات'),
+    (CultureName: 'ar-BH'; DisplayName: 'العربية - البحرين'),
+    (CultureName: 'ar-DZ'; DisplayName: 'العربية - الجزائر'),
+    (CultureName: 'ar-SA'; DisplayName: 'العربية - السعودية'),
+    (CultureName: 'ar-IQ'; DisplayName: 'العربية - العراق'),
+    (CultureName: 'ar-KW'; DisplayName: 'العربية - الكويت'),
+    (CultureName: 'ar-MA'; DisplayName: 'العربية - المغرب'),
+    (CultureName: 'ar-YE'; DisplayName: 'العربية - اليمن'),
+    (CultureName: 'ar-TN'; DisplayName: 'العربية - تونس'),
+    (CultureName: 'ar-SY'; DisplayName: 'العربية - سوريا'),
+    (CultureName: 'ar-OM'; DisplayName: 'العربية - عُمان'),
+    (CultureName: 'ar-QA'; DisplayName: 'العربية - قطر'),
+    (CultureName: 'ar-LB'; DisplayName: 'العربية - لبنان'),
+    (CultureName: 'ar-LY'; DisplayName: 'العربية - ليبيا'),
+    (CultureName: 'ar-EG'; DisplayName: 'العربية - مصر'),
+    (CultureName: 'fa'; DisplayName: 'فارسی'),
+    (CultureName: 'fa-IR'; DisplayName: 'فارسی - ایران'),
+    (CultureName: 'ps'; DisplayName: 'پښتو'),
+    (CultureName: 'syr'; DisplayName: 'ܣܘܪܝܝܐ'),
+    (CultureName: 'syr-SY'; DisplayName: 'ܣܘܪܝܝܐ - ܣܘܪܝܐ'),
+    (CultureName: 'dv'; DisplayName: 'ދިވެހި'),
+    (CultureName: 'dv-MV'; DisplayName: 'ދިވެހި - ދިވެހިރާއްޖެ'),
+    (CultureName: 'kok'; DisplayName: 'कोंकणी'),
+    (CultureName: 'kok-IN'; DisplayName: 'कोंकणी - भारत'),
+    (CultureName: 'ne'; DisplayName: 'नेपाली'),
+    (CultureName: 'mr'; DisplayName: 'मराठी'),
+    (CultureName: 'mr-IN'; DisplayName: 'मराठी - भारत'),
+    (CultureName: 'sa'; DisplayName: 'संस्कृतम्'),
+    (CultureName: 'sa-IN'; DisplayName: 'संस्कृतम् - भारतम्'),
+    (CultureName: 'hi'; DisplayName: 'हिन्दी'),
+    (CultureName: 'hi-IN'; DisplayName: 'हिन्दी - भारत'),
+    (CultureName: 'as'; DisplayName: 'অসমীয়া'),
+    (CultureName: 'bn'; DisplayName: 'বাংলা'),
+    (CultureName: 'bn-BD'; DisplayName: 'বাংলা - বাংলাদেশ'),
+    (CultureName: 'bn-IN'; DisplayName: 'বাংলা - ভারত'),
+    (CultureName: 'pa'; DisplayName: 'ਪੰਜਾਬੀ'),
+    (CultureName: 'pa-IN'; DisplayName: 'ਪੰਜਾਬੀ - ਭਾਰਤ'),
+    (CultureName: 'gu'; DisplayName: 'ગુજરાતી'),
+    (CultureName: 'gu-IN'; DisplayName: 'ગુજરાતી - ભારત'),
+    (CultureName: 'or'; DisplayName: 'ଓଡ଼ିଆ'),
+    (CultureName: 'ta'; DisplayName: 'தமிழ்'),
+    (CultureName: 'ta-IN'; DisplayName: 'தமிழ் - இந்தியா'),
+    (CultureName: 'te'; DisplayName: 'తెలుగు'),
+    (CultureName: 'te-IN'; DisplayName: 'తెలుగు - భారతదేశం'),
+    (CultureName: 'kn'; DisplayName: 'ಕನ್ನಡ'),
+    (CultureName: 'kn-IN'; DisplayName: 'ಕನ್ನಡ - ಭಾರತ'),
+    (CultureName: 'ml'; DisplayName: 'മലയാളം'),
+    (CultureName: 'si'; DisplayName: 'සිංහල'),
+    (CultureName: 'th'; DisplayName: 'ไทย'),
+    (CultureName: 'th-TH'; DisplayName: 'ไทย - ประเทศไทย'),
+    (CultureName: 'lo'; DisplayName: 'ລາວ'),
+    (CultureName: 'my'; DisplayName: 'မြန်မာ'),
+    (CultureName: 'ka'; DisplayName: 'ქართული'),
+    (CultureName: 'ka-GE'; DisplayName: 'ქართული - საქართველო'),
+    (CultureName: 'ko'; DisplayName: '한국어'),
+    (CultureName: 'ko-KR'; DisplayName: '한국어 - 대한민국'),
+    (CultureName: 'am'; DisplayName: 'አማርኛ'),
+    (CultureName: 'km'; DisplayName: 'ខ្មែរ'),
+    (CultureName: 'zh'; DisplayName: '中文'),
+    (CultureName: 'zh-Hans'; DisplayName: '中文 (简体)'),
+    (CultureName: 'zh-Hant'; DisplayName: '中文 (繁體)'),
+    (CultureName: 'zh-CN'; DisplayName: '中文 - 中国'),
+    (CultureName: 'zh-TW'; DisplayName: '中文 - 台灣'),
+    (CultureName: 'zh-SG'; DisplayName: '中文 - 新加坡'),
+    (CultureName: 'zh-MO'; DisplayName: '中文 - 澳門特別行政區'),
+    (CultureName: 'zh-HK'; DisplayName: '中文 - 香港特別行政區'),
+    (CultureName: 'ja'; DisplayName: '日本語'),
+    (CultureName: 'ja-JP'; DisplayName: '日本語 - 日本'),
+    (CultureName: 'yue'; DisplayName: '粵語'),
+    (CultureName: 'yue-Hant'; DisplayName: '粵語 (繁體)')
   );
 
 
@@ -683,12 +788,38 @@ const
 
 // -----------------------------------------------------------------------------
 
+// old (.NET) culture names that were in the list, now BCP 47 ones: they can
+// be in files saved before (translation memories, TBX...)
+function NormalizeCultureName(const ACultureName: String): String;
+const
+  Aliases: array[0..8] of array[0..1] of String = (
+    ('cy-az-az', 'az-cyrl-az'),
+    ('lt-az-az', 'az-latn-az'),
+    ('cy-uz-uz', 'uz-cyrl-uz'),
+    ('lt-uz-uz', 'uz-latn-uz'),
+    ('zh-chs',   'zh-hans'),
+    ('zh-cht',   'zh-hant'),
+    ('div-mv',   'dv-mv'),
+    ('en-cb',    'en-029'),
+    ('ky-kz',    'ky-kg')
+  );
+var
+  i: Integer;
+begin
+  Result := AnsiLowerCase(Trim(ACultureName).Replace('_', '-'));
+  for i := 0 to High(Aliases) do
+    if Result = Aliases[i][0] then
+      Exit(Aliases[i][1]);
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetCultureDisplayName(CultureName: AnsiString): String;
 var
   i: Integer;
 begin
   Result := '';
-  CultureName := AnsiLowerCase(CultureName.Replace('_', '-'));
+  CultureName := NormalizeCultureName(CultureName);
 
   for i := 0 to MaxCultureItems-1 do
     if AnsiLowerCase(CultureInfo[i].CultureName) = CultureName then
@@ -729,7 +860,7 @@ end;
 function GetCultureShortName(const Index: Integer): String;
 begin
   Result := GetCultureName(Index);
-  if not Result.IsEmpty then
+  if Pos('-', Result) > 0 then
     Result := Copy(Result, 1, Pos('-', Result)-1);
 end;
 
@@ -741,7 +872,7 @@ var
   s : String;
 begin
   Result := 0;
-  s := AnsiLowerCase(ACultureName);
+  s := NormalizeCultureName(ACultureName);
 
   for i := 0 to MaxCultureItems-1 do
     if AnsiLowerCase(CultureInfo[i].CultureName) = s then
@@ -757,7 +888,7 @@ begin
   Result := 0;
 
   for i := 0 to MaxCultureItems-1 do
-    if AnsiLowerCase(Copy(CultureInfo[i].CultureName, 1, Pos('-', CultureInfo[i].CultureName)-1)) = AnsiLowerCase(ACultureName) then
+    if AnsiLowerCase(GetCultureShortName(i)) = AnsiLowerCase(ACultureName) then
       Exit(i);
 end;
 
@@ -769,7 +900,7 @@ var
 begin
   Items.BeginUpdate;
   try
-    for i := 0 to High(CultureInfo)-1 do
+    for i := 0 to High(CultureInfo) do
       Items.Add(CultureInfo[i].DisplayName);
   finally
     Items.EndUpdate;

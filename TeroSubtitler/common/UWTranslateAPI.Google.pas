@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWTranslateAPI.Google;
@@ -241,7 +241,11 @@ begin
 
   s := WrapASSTags(ReplaceString(AText, LineEnding, '<<<BR>>>'));
   strResponse := CallGoogleTranslate(Format(GoogleTranslateURL,[HTTPEncode(s), SourceLng, DestLng]));
+  // GetJSON raises on a non JSON answer (e.g. a quota HTML page): jdResponse
+  // must be NIL so the finally doesn't free garbage, and we return ''
+  jdResponse := NIL;
   if strResponse <> '' then
+  try
     try
       jdResponse    := GetJSON(strResponse);
       jdTranslation := jdResponse.FindPath('[0]');
@@ -265,6 +269,9 @@ begin
     finally
       jdResponse.Free;
     end;
+  except
+    Result := '';
+  end;
 end;
 
 // -----------------------------------------------------------------------------

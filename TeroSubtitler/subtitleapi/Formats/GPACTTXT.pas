@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit GPACTTXT;
@@ -120,7 +120,12 @@ begin
         begin
           Node := NodeList.Item[i];
           // First node has InitialTime and Subtitle text
-          InitialTime := StringToTime(Node.Attributes.GetNamedItem('sampleTime').NodeValue);
+          // Antes GetNamedItem('sampleTime').NodeValue sin chequeo de NIL: un
+          // <TextSample> sin ese atributo era un access violation.
+          if XMLHasAttribute(Node, 'sampleTime') then
+            InitialTime := StringToTime(XMLGetAttrValue(Node, 'sampleTime'))
+          else
+            InitialTime := -1;
           if XMLHasAttribute(Node, 'text') then
             Text := HTMLTagsToTS(ReplaceEnters(XMLGetAttrValue(Node, 'text'), '<br/>', LineEnding))
           else

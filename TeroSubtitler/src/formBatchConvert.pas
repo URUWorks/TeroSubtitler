@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formBatchConvert;
@@ -399,7 +399,7 @@ begin
       if  SubtitleAPI.LoadFromFile(FList[i]^.FileName, NIL, Workspace.FPS.OutputFPS) then
       begin
         if SubtitleAPI.SaveToFile(ConcatPaths([edtFolder.Text, ExtractFileName(FList[i]^.FileName)]), Workspace.FPS.OutputFPS,
-          TEncoding.GetEncoding(Encodings[cboEncoding.ItemIndex].CPID), TUWSubtitleFormats(cboFormat.ItemIndex+1), smText, -1, -1, True) then
+          GetCachedEncoding(Encodings[cboEncoding.ItemIndex].CPID), TUWSubtitleFormats(cboFormat.ItemIndex+1), smText, -1, -1, True) then
         begin
           FList[i]^.Success := True;
 

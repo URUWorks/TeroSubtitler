@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 // -----------------------------------------------------------------------------
@@ -156,32 +156,77 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// one thumbnail for each scene change, generated in the background; the ones
+// already loaded are reused, so only the new scene changes cost a ffmpeg call
 procedure TfrmMain.GenerateThumbnails;
 var
-  i : Integer;
-  gt : TGenerateThumbnails;
+  sc, NewTimes : TIntegerDynArray;
+  NewBitmaps   : TThumbnails;
+  i, j, c      : Integer;
 begin
+  if not WAVE.DrawThumbnail or not MPV.IsMediaLoaded then Exit;
+
+  sc := WAVE.GetSceneChangeList;
+  if Length(sc) = 0 then
+  begin
+    FreeThumbnails;
+    Exit;
+  end;
+
   if not FileExists(GetExtractAppFile) then
   begin
     ShowErrorMessageDialog(Format(lngExtractAppError, [FFMPEG_EXE]));
     Exit;
   end;
 
+  // a thread already running was started for the old list
+  if Assigned(FThumbnailThread) then
+  begin
+    FThumbnailThread.OnTerminate := NIL;
+    FThumbnailThread.Terminate;
+    FThumbnailThread := NIL;
+  end;
+
+  // the scene change list is sorted, but it may have repeated times
+  SetLength(NewTimes, Length(sc));
+  c := 0;
+  for i := 0 to High(sc) do
+    if (c = 0) or (NewTimes[c-1] <> sc[i]) then
+    begin
+      NewTimes[c] := sc[i];
+      Inc(c);
+    end;
+  SetLength(NewTimes, c);
+  SetLength(NewBitmaps, c);
+
+  // keep the thumbnails of the scene changes that are still there
   with WAVEOptions do
   begin
-    if ThumbnailsInProcess then Exit;
-
-    if Length(Thumbnails) = 0 then
+    for i := 0 to High(NewTimes) do
     begin
-      SetLength(Thumbnails, DefaultThumbnailsCount);
-      for i := 0 to DefaultThumbnailsCount-1 do
-        Thumbnails[i] := TBitmap.Create;
+      j := BinarySearch_IntArray(ThumbnailTimes, NewTimes[i]);
+      if (j >= 0) and (j <= High(ThumbnailTimes)) and (ThumbnailTimes[j] = NewTimes[i]) then
+      begin
+        NewBitmaps[i] := Thumbnails[j];
+        Thumbnails[j] := NIL;
+      end
+      else
+        NewBitmaps[i] := TBitmap.Create;
     end;
 
-    ThumbnailsInProcess := True;
-    gt := TGenerateThumbnails.Create(MPV.FileName, mpv.GetMediaLenInMs, gtmArray, @DoThumbnailsDone);
-    gt.Start;
+    for i := 0 to High(Thumbnails) do
+      Thumbnails[i].Free;
+
+    Thumbnails     := NewBitmaps;
+    ThumbnailTimes := NewTimes;
   end;
+
+  WAVE.SetThumbnails(WAVEOptions.ThumbnailTimes, WAVEOptions.Thumbnails);
+
+  FThumbnailThread := TGenerateThumbnails.Create(MPV.FileName,
+    WAVEOptions.ThumbnailTimes, Workspace.FPS.OutputFPS.FPS, @DoThumbnailReady,
+    @DoThumbnailsDone);
+  FThumbnailThread.Start;
 end;
 
 // -----------------------------------------------------------------------------
@@ -190,29 +235,65 @@ procedure TfrmMain.FreeThumbnails;
 var
   i: Integer;
 begin
-  if WAVE.Thumbnails <> NIL then
-    WAVE.Thumbnails := NIL;
+  if Assigned(FThumbnailThread) then
+  begin
+    FThumbnailThread.OnTerminate := NIL;
+    FThumbnailThread.Terminate;
+    FThumbnailThread := NIL;
+  end;
+
+  WAVE.SetThumbnails(NIL, NIL);
 
   with WAVEOptions do
-    if (Length(Thumbnails) > 0) and not ThumbnailsInProcess then
-    begin
-      for i := 0 to Length(Thumbnails)-1 do
-        Thumbnails[i].Free;
+  begin
+    for i := 0 to High(Thumbnails) do
+      Thumbnails[i].Free;
 
-      SetLength(Thumbnails, 0);
+    SetLength(Thumbnails, 0);
+    SetLength(ThumbnailTimes, 0);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// a thumbnail is ready (in the main thread): load it and redraw only its shot
+procedure TfrmMain.DoThumbnailReady(const ATimeMS: Integer; const AFileName: String);
+var
+  i: Integer;
+begin
+  with WAVEOptions do
+  begin
+    i := BinarySearch_IntArray(ThumbnailTimes, ATimeMS);
+    // the scene change may not be there anymore
+    if (i < 0) or (i > High(ThumbnailTimes)) or (ThumbnailTimes[i] <> ATimeMS) or
+      (i > High(Thumbnails)) or (Thumbnails[i] = NIL) then Exit;
+
+    try
+      Thumbnails[i].LoadFromFile(AFileName);
+      WAVE.ThumbnailChanged(i);
+    except
     end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.DoThumbnailsDone(Sender: TObject);
 begin
-  WAVE.Thumbnails := WAVEOptions.Thumbnails;
-  WAVE.DoUpdate;
+  if Sender = FThumbnailThread then
+    FThumbnailThread := NIL;
+end;
 
-  with WAVEOptions do
-    if ThumbnailsInProcess then
-      ThumbnailsInProcess := False;
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.WAVESceneChangeListChange(Sender: TObject);
+begin
+  // scene changes imported/detected/added/deleted: only the new ones are
+  // generated, the rest are reused
+  if WAVE.DrawThumbnail and MPV.IsMediaLoaded then
+    GenerateThumbnails
+  else if WAVE.GetSceneChangeCount = 0 then
+    FreeThumbnails;
 end;
 
 // -----------------------------------------------------------------------------

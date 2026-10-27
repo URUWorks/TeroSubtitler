@@ -88,6 +88,10 @@ const
 
 var
   SubClassValid: Boolean = False;
+  // menu background brush: one for all the menus (it was created on every
+  // popup and never deleted, a GDI object leak)
+  MenuBrush      : HBRUSH = 0;
+  MenuBrushColor : TColor = clNone;
 
 // -----------------------------------------------------------------------------
 
@@ -222,7 +226,16 @@ begin
   if AReset then
     mi.hbrBack := 0
   else
-    mi.hbrBack := CreateSolidBrush(Theme.ColorBk);
+  begin
+    // a new color (theme change): the old brush may still be in use by a
+    // menu, so it's not deleted (once per theme change)
+    if (MenuBrush = 0) or (MenuBrushColor <> Theme.ColorBk) then
+    begin
+      MenuBrush      := CreateSolidBrush(ColorToRGB(Theme.ColorBk));
+      MenuBrushColor := Theme.ColorBk;
+    end;
+    mi.hbrBack := MenuBrush;
+  end;
 
   SetMenuInfo(h, @mi);
 end;

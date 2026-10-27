@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit CPC600;
@@ -77,6 +77,9 @@ end;
 
 function TUWCPC600.IsMine(const SubtitleFile: TUWStringList; const Row: Integer): Boolean;
 begin
+  // SubtitleFile[Row+1] sin comprobar el límite: error de rango en la última línea
+  if Row + 1 >= SubtitleFile.Count then Exit(False);
+
   if (TimeInFormat(Copy(SubtitleFile[Row], 1, 11), 'hh:mm:ss:zz')) and
      (TimeInFormat(Copy(SubtitleFile[Row+1], 1, 11), 'hh:mm:ss:zz')) and
      (Pos('_0NEN_', SubtitleFile[Row]) = 12) and
@@ -97,7 +100,8 @@ var
 begin
   Result := False;
   try
-    for i := 0 to SubtitleFile.Count-2 do
+    i := 0;
+    while i < SubtitleFile.Count-1 do
     begin
       if (TimeInFormat(Copy(SubtitleFile[i], 1, 11), 'hh:mm:ss:zz')) and
          (TimeInFormat(Copy(SubtitleFile[i+1], 1, 11), 'hh:mm:ss:zz')) and
@@ -109,8 +113,12 @@ begin
         Text        := ReplaceString(Copy(SubtitleFile[i], 18, Length(SubtitleFile[i])), '\', LineEnding);
 
         if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+        begin
           Subtitles.Add(InitialTime, FinalTime, Text, '');
+          Inc(i); // la línea siguiente es el tiempo final de este cue
+        end;
       end;
+      Inc(i);
     end;
   finally
     Result := Subtitles.Count > 0;

@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 // -----------------------------------------------------------------------------
@@ -64,6 +64,10 @@ var
 begin
   SetStatusBarText('');
   EnableActionsByTag([TAG_ACTION_VIDEO], True);
+  // apply the text options at runtime too: the start options alone could
+  // leave the overlay with mpv's default OSD size (seen on macOS)
+  UpdateMPVOptions;
+  MPV.ShowOverlayText('');
   MPVSetFilters;
   MPVSetPanAndScan(actPanAndScan.Checked);
 
@@ -122,6 +126,7 @@ end;
 procedure TfrmMain.MPVPause(Sender: TObject);
 begin
   actMediaPlay.ImageIndex := 38;
+  MacMediaKeysUpdate(False);
 end;
 
 // -----------------------------------------------------------------------------
@@ -129,6 +134,7 @@ end;
 procedure TfrmMain.MPVPlay(Sender: TObject);
 begin
   actMediaPlay.ImageIndex := 39;
+  MacMediaKeysUpdate(True);
 end;
 
 // -----------------------------------------------------------------------------
@@ -207,9 +213,7 @@ begin
     // 1. OBTENER TIEMPO
     CurrentPos := MPV.GetMediaPosInMs;
 
-    // ---------------------------------------------------------
     // A. LÓGICA DE CONTROL (Loop / Auto-Pause)
-    // ---------------------------------------------------------
     if (MPVOptions.EndTime > 0) and (CurrentPos >= MPVOptions.EndTime-1) then
     begin
       MPV.Pause;
@@ -218,15 +222,11 @@ begin
       CurrentPos := MPVOptions.EndTime;
     end;
 
-    // ---------------------------------------------------------
     // B. ACTUALIZAR WAVEFORM
-    // ---------------------------------------------------------
     if (not WAVE.IsMouseDown) and WAVE.IsTimeLineEnabled then
       WAVE.SetPlayCursorMS(CurrentPos);
 
-    // ---------------------------------------------------------
     // C. ACTUALIZAR SUBTÍTULOS Y OVERLAY
-    // ---------------------------------------------------------
     if MPVOptions.SubtitleHandleByMPV then
     begin
       if actMediaAutoScroll.Checked then
@@ -236,12 +236,12 @@ begin
     begin
       CurrentText := GetSubtitleTextAtTime(CurrentPos + Workspace.VideoOffset);
       //MPV.ShowText(CurrentText, 3600000, '');
+      // the size comes from osd-font-size (MPV.FontSize, scaled to the video
+      // area), the same one mpv uses for its own subtitles
       MPV.ShowOverlayText(CurrentText, '');
     end;
 
-    // ---------------------------------------------------------
     // D. ACTUALIZAR GRID (VST)
-    // ---------------------------------------------------------
     if SubtitleInfo.LastSubtitle.Selected <> SubtitleInfo.LastSubtitle.ShowIndex then
     begin
       SubtitleInfo.LastSubtitle.Selected := SubtitleInfo.LastSubtitle.ShowIndex;

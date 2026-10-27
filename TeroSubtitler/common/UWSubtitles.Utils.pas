@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSubtitles.Utils;
@@ -47,6 +47,9 @@ function RoundTimeValue(const ATimeValue, AFactor: Integer; const ARoundUp: Bool
 
 function FixTags(const Text: String; const StartTag, EndTag: Char): String;
 function FixIncompleteTags(const Text: String; const StartTag: Char = '{'; const EndTag: Char = '}'): String;
+function IsValidASSTag(const ATag: String): Boolean;
+function RemoveInvalidTags(const Text: String): String;
+function HasInvalidTags(const Text: String): Boolean;
 function CleanupTags(const Text: String; const Tags: Array of String; const StartTag: Char = '{'; const EndTag: Char = '}'): String;
 function RemoveUnnecessaryDots(Text: String): String;
 function RemoveUnnecessarySpaces(const Text: String; const BreakChar: String = sLineBreak): String;
@@ -269,50 +272,221 @@ function FixTags(const Text: String; const StartTag, EndTag: Char): String;
 
 begin
   Result := RemoveSpaces(Text); //Result := ReplaceRegExpr(Format('\s+(?=[^%s%s]*\%s)', [StartTag, EndTag, EndTag]), Text, '', [rroModifierG]);
+  if (StartTag = '{') and (EndTag = '}') then
+    Result := RemoveInvalidTags(Result);
   Result := FixIncompleteTags(Result, StartTag, EndTag);
 end;
 
 // -----------------------------------------------------------------------------
 
-function FixIncompleteTags(const Text: String; const StartTag: Char = '{'; const EndTag: Char = '}'): String;
-var
-  L : TStrings;
-  s : String;
-  x, i : Integer;
+function IsValidASSTag(const ATag: String): Boolean;
+const
+  Num  = '-?\d+(\.\d+)?';
+  UNum = '\d+(\.\d+)?';
+  Hex  = '&H[0-9A-Fa-f]{1,8}&?';
 begin
-  if Text.IsEmpty then Exit;
-  Result := Text;
+  // ATag is a single override tag without the leading backslash, e.g. "i1",
+  // "an8", "c&H00FF00&", "pos(10,20)"
+  Result := ExecRegExpr('^(' +
+    '[ius][01]|b([01]|[1-9]00)' +                         // styles
+    '|an[1-9]|a(1[01]?|[235679])' +                       // alignment
+    '|[1-4]?c(' + Hex + ')?' +                            // colors
+    '|alpha(' + Hex + ')?|[1-4]a' + Hex +                 // alpha
+    '|fn.+|fs[+-]?' + UNum + '|fe\d+' +                   // font
+    '|fsc[xy]?' + UNum + '|fsp' + Num +                   // scale/spacing
+    '|fr[xyz]?' + Num + '|fa[xy]' + Num +                 // rotation/shearing
+    '|[xy]?(bord|shad)' + Num + '|be' + UNum + '|blur' + UNum +
+    '|q[0-3]|r.*|p\d+|pbo' + Num +
+    '|(k|K|kf|ko)\d+' +                                   // karaoke
+    '|(pos|org|move|fad|fade|i?clip|t)\(.*\)' +           // functions
+    ')$', ATag);
+end;
 
-  L := TStringList.Create;
-  try
-    RE_ExtractTags(Text, L);
-    if L.Count > 0 then
+// -----------------------------------------------------------------------------
+
+function RemoveInvalidTags(const Text: String): String;
+var
+  i, p, Depth, BlockEnd : Integer;
+  Block, Tag, NewBlock  : String;
+
+  procedure AddTag;
+  begin
+    if not Tag.IsEmpty and IsValidASSTag(Tag) then
+      NewBlock := NewBlock + '\' + Tag;
+    Tag := '';
+  end;
+
+begin
+  // Only override blocks ({\...}) are checked, other {...} are comments.
+  // Unknown tags or tags with invalid arguments (e.g. {\i2}) are removed, and
+  // so are the blocks that become empty.
+  Result := '';
+  i := 1;
+  while i <= Text.Length do
+  begin
+    BlockEnd := 0;
+    if (Text[i] = '{') and (i < Text.Length) and (Text[i+1] = '\') then
+      BlockEnd := PosEx('}', Text, i+1);
+
+    if BlockEnd = 0 then
     begin
-      for i := 0 to L.Count-1 do
-      begin
-        x := Pos(L.NameValueSeparator, L[i]);
-        s := Copy(L[i], 1, x-1);
-        x := Copy(L[i], x+1).ToInteger;
+      Result := Result + Text[i];
+      Inc(i);
+      Continue;
+    end;
 
-        if s.EndsWith('1') then
-        begin
-          if x < Result.Length then
-            Result := Format('%s%s\%s0%s', [Result, StartTag, Copy(s, 1, s.Length-1), EndTag])
-          else
-            Delete(Result, x, s.Length+3);
-        end
-        else if s.EndsWith('0') then
-        begin
-          if x >= (Result.Length - (s.Length+3)) then
-            Result := Format('%s\%s1%s%s', [StartTag, Copy(s, 1, s.Length-1), EndTag, Result])
-          else
-            Delete(Result, x, s.Length+3);
-        end;
+    Block    := Copy(Text, i+1, BlockEnd-i-1);
+    NewBlock := '';
+    Tag      := '';
+    Depth    := 0;
+    for p := 1 to Block.Length do
+    begin
+      if (Block[p] = '\') and (Depth = 0) then
+        AddTag
+      else
+      begin
+        if Block[p] = '(' then
+          Inc(Depth)
+        else if (Block[p] = ')') and (Depth > 0) then
+          Dec(Depth);
+        Tag := Tag + Block[p];
       end;
     end;
-  finally
-    L.Free;
+    AddTag;
+
+    if not NewBlock.IsEmpty then
+      Result := Result + '{' + NewBlock + '}';
+
+    i := BlockEnd + 1;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function HasInvalidTags(const Text: String): Boolean;
+begin
+  Result := RemoveInvalidTags(Text) <> Text;
+end;
+
+// -----------------------------------------------------------------------------
+
+function FixIncompleteTags(const Text: String; const StartTag: Char = '{'; const EndTag: Char = '}'): String;
+type
+  TTagPos = record
+    Pos, Len : Integer;
+    Name     : String;
+  end;
+  TTagPosArray = array of TTagPos;
+var
+  Opened,
+  Deletes : TTagPosArray;
+  Num     : String;
+  p, TagLen : Integer;
+  Prefix,
+  Suffix  : String;
+  Name    : String;
+  i, x    : Integer;
+  Tmp     : TTagPos;
+
+  procedure Add(var AList: TTagPosArray; const APos, ALen: Integer; const AName: String);
+  begin
+    SetLength(AList, Length(AList)+1);
+    AList[High(AList)].Pos  := APos;
+    AList[High(AList)].Len  := ALen;
+    AList[High(AList)].Name := AName;
+  end;
+
+  function IsAtEnd(const APos, ALen: Integer): Boolean;
+  begin
+    Result := (APos + ALen - 1) >= Text.Length;
+  end;
+
+begin
+  // Balances single toggle tags ({\i1}...{\i0}, also b (incl. weights), u, s):
+  // - an opening tag never closed gets its closing tag appended, or is
+  //   removed if nothing follows it
+  // - a closing tag never opened gets its opening tag prepended if it is at
+  //   the end of the text, otherwise it is removed
+  // Positions refer to the original text and all edits are applied at the
+  // end, so an edit doesn't shift the positions of the next ones.
+  Result := Text;
+  if Text.IsEmpty then Exit;
+
+  Opened  := NIL;
+  Deletes := NIL;
+  Prefix  := '';
+  Suffix  := '';
+
+  // byte scan (not TRegExpr, whose positions are in UTF-16 chars)
+  p := 1;
+  while p <= Text.Length - 4 do
+  begin
+    TagLen := 0;
+    if (Text[p] = StartTag) and (Text[p+1] = '\') and (Text[p+2] in ['i', 'b', 'u', 's']) then
+    begin
+      Num := '';
+      x := p + 3;
+      while (x <= Text.Length) and (Text[x] in ['0'..'9']) and (Num.Length < 3) do
+      begin
+        Num := Num + Text[x];
+        Inc(x);
+      end;
+      if not Num.IsEmpty and (x <= Text.Length) and (Text[x] = EndTag) then
+        TagLen := x - p + 1;
+    end;
+
+    if TagLen = 0 then
+    begin
+      Inc(p);
+      Continue;
+    end;
+
+    Name := Text[p+2];
+    x := -1;
+    for i := High(Opened) downto 0 do
+      if Opened[i].Name = Name then
+      begin
+        x := i;
+        Break;
+      end;
+
+    if Num <> '0' then
+    begin
+      if x = -1 then // an already open tag is left as it is
+        Add(Opened, p, TagLen, Name);
+    end
+    else if x > -1 then
+      System.Delete(Opened, x, 1)
+    else if IsAtEnd(p, TagLen) then
+      Prefix := Prefix + StartTag + '\' + Name + '1' + EndTag
+    else
+      Add(Deletes, p, TagLen, Name);
+
+    Inc(p, TagLen);
+  end;
+
+  for i := High(Opened) downto 0 do
+    if IsAtEnd(Opened[i].Pos, Opened[i].Len) then
+      Add(Deletes, Opened[i].Pos, Opened[i].Len, Opened[i].Name)
+    else
+      Suffix := Suffix + StartTag + '\' + Opened[i].Name + '0' + EndTag;
+
+  // delete from the end so the positions stay valid
+  for i := 1 to High(Deletes) do
+  begin
+    x := i;
+    while (x > 0) and (Deletes[x-1].Pos < Deletes[x].Pos) do
+    begin
+      Tmp          := Deletes[x-1];
+      Deletes[x-1] := Deletes[x];
+      Deletes[x]   := Tmp;
+      Dec(x);
+    end;
+  end;
+  for i := 0 to High(Deletes) do
+    System.Delete(Result, Deletes[i].Pos, Deletes[i].Len);
+
+  Result := Prefix + Result + Suffix;
 end;
 
 // -----------------------------------------------------------------------------
@@ -551,13 +725,11 @@ function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const
 var
   s: TStringList;
   i, startt, endt, duration, N: Cardinal;
-  dots: Boolean;
   str: String;
   TotalTime: Integer;
   GapReal: Integer;
 begin
   Result := '';
-  dots   := False;
   s := TStringList.Create;
   try
     s.SkipLastLineBreak := True;
@@ -835,34 +1007,39 @@ end;
 // -----------------------------------------------------------------------------
 
 function HasRepeatedChar(const Text, RepeatableChars: String): Boolean;
-var
-  i: Integer;
 begin
-  Result := False;
-  for i := 1 to UTF8Length(Text)-1 do
-  begin
-    if (UTF8Pos(Text[i], RepeatableChars) > 0) and (Text[i+1] = Text[i]) then
-      if (Text[i] <> '/') or (UTF8Copy(Text, i-1, 3) <> '://') then
-      begin
-        Result := True;
-        Exit;
-      end;
-  end;
+  // work with whole UTF-8 characters (before it compared bytes with char
+  // indexes, so nothing was found in lines with accents, ¡, ¿...)
+  Result := FixRepeatedChar(Text, RepeatableChars) <> Text;
 end;
 
 // -----------------------------------------------------------------------------
 
 function FixRepeatedChar(Text: String; const RepeatableChars: String): String;
 var
-  i: Integer;
+  p, Len: PtrInt;
+  c, Prev, Prev2: String;
 begin
-  for i := UTF8Length(Text) downto 2 do
+  Result := '';
+  Prev   := '';
+  Prev2  := '';
+  p := 1;
+  while p <= Length(Text) do
   begin
-    if (UTF8Pos(Text[i], RepeatableChars) > 0) and (Text[i-1] = Text[i]) then
-      if (Text[i] <> '/') or (UTF8Copy(Text, i-2, 3) <> '://') then
-        UTF8Delete(Text, i, 1);
+    Len := UTF8CodepointSize(@Text[p]);
+    if Len < 1 then Len := 1;
+    c := Copy(Text, p, Len);
+    Inc(p, Len);
+
+    // skip a repeated char of the list, except the '//' of an url ('://')
+    if (c = Prev) and (Pos(c, RepeatableChars) > 0) and
+      not ((c = '/') and (Prev2 = ':')) then
+      Continue;
+
+    Result := Result + c;
+    Prev2  := Prev;
+    Prev   := c;
   end;
-  Result := Text;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1193,7 +1370,11 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String);
     if (p > 0) and (px > 0) then
     begin
       TagID := 'c';
-      Result := UTF8Copy(ATag, p + 1, px - 1);
+      Result := UTF8Copy(ATag, p + 1, px - p - 1);
+      if (Result <> '') and (Result[1] in ['H', 'h']) then
+        System.Delete(Result, 1, 1);
+      if Length(Result) > 6 then // &HAABBGGRR&, ignore alpha
+        Result := Copy(Result, Length(Result)-5, 6);
       Exit;
     end;
     // font name
@@ -1223,15 +1404,71 @@ procedure DrawASSText(const ACanvas: TCanvas; const ARect: TRect; Text: String);
   end;
 
 var
-  x, y, idx,
+  x, y, idx, p,
   CharWidth,
   MaxCharHeight   : Integer;
   CurrChar        : String;
-  Tag, TagValue   : String;
-  TagTmp, TagTmpX : String;
-  TagID           : String;
+  Block           : String;
+  Tags            : TStringArray;
+  i               : Integer;
   PrevFontColour  : TColor;
   NeedBreak       : Boolean;
+
+  procedure ApplyTag(const Tag: String);
+  var
+    TagTmp, TagTmpX : String;
+    TagValue, TagID : String;
+  begin
+    TagTmp  := UTF8Copy(Tag, 2, 1);
+    TagTmpX := UTF8RightStr(Tag, 1);
+    if Length(Tag) = 3 then
+    begin
+      // Starting tags
+      if TagTmpX = '1' then
+      begin
+        if TagTmp = boldTag then
+          ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsBold]
+        else if TagTmp = italicTag then
+          ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsItalic]
+        else if TagTmp = underlineTag then
+          ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsUnderline]
+        else if TagTmp = strikeoutTag then
+          ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsStrikeout]
+      end;
+      // Closing tags
+      if TagTmpX = '0' then
+      begin
+        if TagTmp = boldTag then
+          ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsBold]
+        else if TagTmp = italicTag then
+          ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsItalic]
+        else if TagTmp = UnderlineTag then
+          ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsUnderline]
+        else if TagTmp = strikeoutTag then
+          ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsStrikeout]
+      end;
+    end
+    else
+    // Tags with values
+    begin
+      if TagTmp = colorTag then
+        ACanvas.Font.Color := PrevFontColour;
+
+      TagValue := GetTagValue(Tag, TagID);
+      if TagValue <> '' then
+      begin
+        if TagID = colorTag then
+        begin
+          PrevFontColour := ACanvas.Font.Color;
+          try
+            ACanvas.Font.Color := BGRHex2Color(TagValue);
+          except
+          end;
+        end;
+      end;
+    end;
+  end;
+
 begin
   if IsRightToLeftByUCC(Text) then
     Text := ReverseText(Text);
@@ -1247,73 +1484,28 @@ begin
   while idx <= UTF8Length(Text) do
   begin
     CurrChar := UTF8Copy(Text, idx, 1);
-    // Is this a start tag?
+    // Only an ASS override block ("{\...}") is a tag. Any other text between
+    // braces, or a "{" without its closing "}", is drawn as normal text.
     if UTF8CompareStr(CurrChar, startTag) = 0 then
     begin
-      Tag := '';
-      Inc(idx);
-
-      // Find the end of the tag
-      while (UTF8CompareStr(UTF8Copy(Text, idx, 1), endTag) <> 0) and (idx <= UTF8Length(Text)) do
+      p := UTF8Pos(endTag, Text, idx + 1);
+      if p > 0 then
       begin
-        Tag := Concat(Tag, (UTF8Copy(Text, idx, 1)));
-        Inc(idx);
-      end;
-      // Simple tags
-      if UTF8Copy(Tag, 1, 1) = '\' then
-      begin
-        TagTmp  := UTF8Copy(Tag, 2, 1);
-        TagTmpX := UTF8RightStr(Tag, 1);
-        if Length(Tag) = 3 then
+        Block := UTF8Copy(Text, idx + 1, p - idx - 1);
+        if (Block <> '') and (Block[1] = '\') then
         begin
-          // Starting tags
-          if TagTmpX = '1' then
-          begin
-            if TagTmp = boldTag then
-              ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsBold]
-            else if TagTmp = italicTag then
-              ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsItalic]
-            else if TagTmp = underlineTag then
-              ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsUnderline]
-            else if TagTmp = strikeoutTag then
-              ACanvas.Font.Style := ACanvas.Font.Style + [TFontStyle.fsStrikeout]
-          end;
-          // Closing tags
-          if TagTmpX = '0' then
-          begin
-            if TagTmp = boldTag then
-              ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsBold]
-            else if TagTmp = italicTag then
-              ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsItalic]
-            else if TagTmp = UnderlineTag then
-              ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsUnderline]
-            else if TagTmp = strikeoutTag then
-              ACanvas.Font.Style := ACanvas.Font.Style - [TFontStyle.fsStrikeout]
-          end;
-        end
-        else
-        // Tags with values
-        begin
-          if TagTmp = colorTag then
-            ACanvas.Font.Color := PrevFontColour;
+          // a block can hold several tags: {\b1\i1\c&H0000FF&}
+          Tags := Block.Split(['\']);
+          for i := 0 to High(Tags) do
+            if Tags[i] <> '' then
+              ApplyTag('\' + Tags[i]);
 
-          // Get the tag value (everything after ':')
-          TagValue := GetTagValue(Tag, TagID);
-          if TagValue <> '' then
-          begin
-            if TagID = colorTag then
-            begin
-              PrevFontColour := ACanvas.Font.Color;
-              try
-                ACanvas.Font.Color := BGRHex2Color(TagValue);
-              except
-              end;
-            end;
-          end;
+          idx := p + 1;
+          Continue;
         end;
       end;
-    end
-    else
+    end;
+
     // Enter char?
     if CurrChar = #10 then
     begin

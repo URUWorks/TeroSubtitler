@@ -1,7 +1,7 @@
 {*
  *  URUWorks Waveform Displayer Control
  *
- *  Copyright (C) 2021-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2021-2026 URUWorks, uruworks@gmail.com.
  *
  *  Based on the great work of:
  * -----------------------------------------------------------------------------

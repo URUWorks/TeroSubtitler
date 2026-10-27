@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procVST_Loops;
@@ -231,8 +231,6 @@ end;
 
 // -----------------------------------------------------------------------------
 
-
-
 procedure ApplyAddQuotationMarks(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^ do
@@ -349,7 +347,7 @@ procedure ApplyChangeInputFPS(const Item: PUWSubtitleItem; const Index: Integer)
 var
   it, ft : Integer;
 begin
-  UndoInstance.AddUndo(utSubtitleChange, Index, Item^, False, False);
+  //UndoInstance.AddUndo(utSubtitleChange, Index, Item^, False, False);
   with Item^ do
   begin
     it          := TimeToFrames(InitialTime, GetInputFPS);
@@ -365,7 +363,7 @@ procedure ApplyChangeFPS(const Item: PUWSubtitleItem; const Index: Integer);
 var
   it, ft : Integer;
 begin
-  UndoInstance.AddUndo(utSubtitleChange, Index, Item^, False, False);
+  //UndoInstance.AddUndo(utSubtitleChange, Index, Item^, False, False);
   with Item^ do
   begin
     it          := TimeToFrames(InitialTime, Workspace.FPS.OutputFPS.FPS);

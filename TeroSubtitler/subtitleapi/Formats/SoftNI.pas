@@ -1,18 +1,18 @@
 {*
- * URUWorks Subtitle API
+ *  URUWorks Subtitle API
  *
- * The contents of this file are used with permission, subject to
- * the Mozilla Public License Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/2.0.html
+ *  The contents of this file are used with permission, subject to
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
- * Software distributed under the License is distributed on an
- * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
- * implied. See the License for the specific language governing
- * rights and limitations under the License.
+ *  Software distributed under the License is distributed on an
+ *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ *  implied. See the License for the specific language governing
+ *  rights and limitations under the License.
  *
- * Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit SoftNI;
@@ -91,6 +91,8 @@ var
   CurrentLine : String;
   Item        : TUWSubtitleItem;
   LocalFPS    : Double;
+  FileFPS     : Double;
+  FS          : TFormatSettings;
   TimingParts : array of String;
 begin
   Result := False;
@@ -107,7 +109,13 @@ begin
         if Length(TimingParts) >= 2 then
         begin
           // El segundo valor contiene el framerate (ej. 1 24 0)
-          TryStrToFloat(TimingParts[1], LocalFPS);
+          // Antes TryStrToFloat con el separador decimal del locale ('23.976'
+          // fallaba con coma decimal) y sin validar el valor leído.
+          FS := FormatSettings;
+          FS.DecimalSeparator := '.';
+          if TryStrToFloat(TimingParts[1], FileFPS, FS) and
+             (FileFPS >= 1) and (FileFPS <= 240) then
+            LocalFPS := FileFPS;
         end;
       end;
       Break;

@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSubtitleAPI.ExtraInfo;
@@ -157,6 +157,13 @@ type
     TextAlign    : AnsiString; // align:left or align:center or align:right
   end;
 
+  { Timed Text (iTT, TTML/DFXP, Netflix) }
+
+  PTimedText_Info = ^TTimedText_Info;
+  TTimedText_Info = record
+    Language : AnsiString; // xml:lang (BCP 47: en, en-US, es-419, pt-BR...)
+  end;
+
   { Format properties }
 
   PFormatProperties = ^TFormatProperties;
@@ -166,6 +173,7 @@ type
     DVDSubtitle       : TDVDSubtitle_Info;
     EBU               : TEBU_Info;
     SSA               : TSSA_Info;
+    TimedText         : TTimedText_Info;
     WebVTT            : TWebVTT_Info;
   end;
 
@@ -240,6 +248,11 @@ begin
     with SSA do
     begin
       DefaultStyleSettings := 'Default,Arial,18,&H00FFFFFF,&H0000FFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,1,1,2,10,10,10,1';
+    end;
+
+    with TimedText do
+    begin
+      Language := 'en';
     end;
 
     with WebVTT do

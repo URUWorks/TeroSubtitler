@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSubtitleAPI.Formats;
@@ -139,6 +139,8 @@ procedure AddFormatsToStrings(var AStrings: TStrings);
 
 implementation
 
+uses UWSystem.Encoding;
+
 // -----------------------------------------------------------------------------
 
 { Helpers }
@@ -200,7 +202,7 @@ begin
     65000 : Result := TEncoding.UTF7;
     65001 : Result := TEncoding.UTF8;
     else
-      Result := TEncoding.GetEncoding(Encoding);
+      Result := GetCachedEncoding(Encoding);
   end;
 end;
 

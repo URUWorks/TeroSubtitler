@@ -1208,6 +1208,15 @@ msgstr "时间"
 msgid "Export formatted text?"
 msgstr "导出格式化文本？"
 
+#: proclocalize.lngtmentriesadded
+#, object-pascal-format
+msgid "%d entries added to the translation memory."
+msgstr ""
+
+#: proclocalize.lngtmnoentriesloaded
+msgid "No entries were loaded from the translation memory. Check that its languages match the selected ones."
+msgstr ""
+
 #: proclocalize.lngtranscribing
 msgid "Transcribing..."
 msgstr "转录..."
@@ -3833,6 +3842,10 @@ msgctxt "tfrmmain.acttranslationmemory.caption"
 msgid "Show..."
 msgstr "显示..."
 
+#: tfrmmain.acttranslationmemoryaddall.caption
+msgid "Add translated lines to memory"
+msgstr ""
+
 #: tfrmmain.acttranslationmemoryclose.caption
 msgctxt "tfrmmain.acttranslationmemoryclose.caption"
 msgid "Close"
@@ -3842,6 +3855,14 @@ msgstr "关闭"
 msgctxt "tfrmmain.acttranslationmemorylist.caption"
 msgid "List..."
 msgstr "列表..."
+
+#: tfrmmain.acttranslationmemoryopenfolder.caption
+msgid "Open translation memories folder"
+msgstr ""
+
+#: tfrmmain.acttranslationmemorysavecopy.caption
+msgid "Save a copy..."
+msgstr ""
 
 #: tfrmmain.acttranslationmemorysettings.caption
 msgctxt "tfrmmain.acttranslationmemorysettings.caption"
@@ -5643,3 +5664,4 @@ msgstr "反转"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "纵向"
+

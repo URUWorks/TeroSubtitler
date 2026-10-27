@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit DVDJunior;
@@ -100,12 +100,19 @@ begin
   try
     for i := 0 to SubtitleFile.Count-1 do
     begin
-      InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11));
-      FinalTime   := StringToTime(Copy(SubtitleFile[i], 13, 11));
-      Text        := ReplaceString(Copy(SubtitleFile[i], 25), '<', LineEnding);
+      // Antes se parseaba CADA línea sin validar, incluida la de encabezado
+      // 'Subtitle File Mark:...' que IsMine acepta a propósito. Mismo
+      // criterio que IsMine (TimeInFormat).
+      if (TimeInFormat(Copy(SubtitleFile[i], 1, 11), 'hh:mm:ss:zz')) and
+         (TimeInFormat(Copy(SubtitleFile[i], 13, 11), 'hh:mm:ss:zz')) then
+      begin
+        InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11));
+        FinalTime   := StringToTime(Copy(SubtitleFile[i], 13, 11));
+        Text        := ReplaceString(Copy(SubtitleFile[i], 25), '<', LineEnding);
 
-      if (InitialTime >= 0) and (FinalTime > 0) then
-        Subtitles.Add(InitialTime, FinalTime, Text, '');
+        if (InitialTime >= 0) and (FinalTime > 0) then
+          Subtitles.Add(InitialTime, FinalTime, Text, '');
+      end;
     end;
   finally
     Result := Subtitles.Count > 0;

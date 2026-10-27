@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,12 +12,15 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procWorkspace;
 
 {$mode ObjFPC}{$H+}
+{$IFDEF DARWIN}
+{$modeswitch objectivec1}
+{$ENDIF}
 
 interface
 
@@ -73,7 +76,8 @@ function GetMemoFocusedCaretLineY: Integer;
 function GetFPSFromString(const AValue: String; const ADefault: Double): Double;
 function GetInputFPS: Single;
 function GetInputFPSInfo: TFPSInfo;
-function GetFPS: Double;
+function GetFPS(const FPS: TFPSInfo): Double; overload;
+function GetFPS: Double; overload;
 function GetFPSInfo: TFPSInfo;
 function GetDefPause: Integer;
 
@@ -122,9 +126,9 @@ uses
   UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.Encoding,
   UWSubtitleAPI.Formats, MPVPlayer, character, LazUTF8, formTranslationMemory,
   UWSubtitleAPI.Tags, UWTranslateAPI.Google, procTranscription,
-  formCustomQuestionDlg, formTBX, procVST_Loops, procMPV,
-  Math
-  {$IFNDEF WINDOWS}, UWCheckBox, UWRadioButton, UWLayout{$ENDIF};
+  formCustomQuestionDlg, formTBX, procVST_Loops, procMPV
+  {$IFNDEF WINDOWS}, UWCheckBox, UWRadioButton, UWLayout{$ENDIF}
+  {$IFDEF DARWIN}, CocoaAll{$ENDIF};
 
 // -----------------------------------------------------------------------------
 
@@ -175,7 +179,13 @@ begin
     repeat
       FileName := LanguageFolder + SearchRec.Name;
       poLangID := GetPOLanguage(FileName);
+      // without "Language:" in the header, use the one of the file name
+      if poLangID.IsEmpty then
+        poLangID := LanguageIDFromFileName(FileName);
       poLangName := GetPOLanguageNameFromID(poLangID);
+      // unknown culture (e.g. only "sl"): show the id instead of nothing
+      if poLangName.IsEmpty then
+        poLangName := poLangID;
       aLngList.Add(poLangID + ';' + poLangName);
       x := Combo.Items.Add(poLangName);
       if poLangID = AppOptions.GUILanguage then
@@ -1230,17 +1240,20 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function GetFPS(const FPS: TFPSInfo): Double;
+begin
+  if FPS.Mode = tcDF then
+    Result := Round(FPS.FPS) * (1000 / 1001)
+  else
+    Result := FPS.FPS;
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetFPS: Double;
-var
-  fps: TFPSInfo;
 begin
   //Result := GetFPSFromString(frmMain.cboFPS.Text, Workspace.FPS.OutputFPS.FPS);
-
-  fps := DefFPSList[frmMain.cboFPS.ItemIndex];
-  if fps.Mode = tcDF then
-    Result := Round(fps.FPS) * (1000 / 1001)
-  else
-    Result := fps.FPS;
+  Result := GetFPS(DefFPSList[frmMain.cboFPS.ItemIndex]);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1445,6 +1458,18 @@ begin
 
   {$IFDEF DARWIN}
   frmMain.Caption := StringReplace(s, '&', '&&', [rfReplaceAll]);
+  // Path shown when right-clicking (or Cmd+clicking) the window title.
+  // Without it macOS shows the application path.
+  if frmMain.HandleAllocated and Assigned(NSView(frmMain.Handle).window) then
+  begin
+    if FileExists(SubtitleInfo.Text.FileName) then
+      s := SubtitleInfo.Text.FileName
+    else if FileExists(frmMain.MPV.FileName) then
+      s := frmMain.MPV.FileName
+    else
+      s := '';
+    NSView(frmMain.Handle).window.setRepresentedFilename(NSString.stringWithUTF8String(PChar(s)));
+  end;
   {$ELSE}
   frmMain.Caption := s;
   {$ENDIF}

@@ -1,18 +1,18 @@
 {*
- * URUWorks Subtitle API
+ *  URUWorks Subtitle API
  *
- * The contents of this file are used with permission, subject to
- * the Mozilla Public License Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/2.0.html
+ *  The contents of this file are used with permission, subject to
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
- * Software distributed under the License is distributed on an
- * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
- * implied. See the License for the specific language governing
- * rights and limitations under the License.
+ *  Software distributed under the License is distributed on an
+ *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ *  implied. See the License for the specific language governing
+ *  rights and limitations under the License.
  *
- * Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit SpruceSubtitleFile;
@@ -22,7 +22,7 @@ unit SpruceSubtitleFile;
 interface
 
 uses
-  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSubtitleAPI.Formats;
+  Classes, SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSubtitleAPI.Formats;
 
 type
 
@@ -84,7 +84,8 @@ begin
   Result := False;
   if LowerCase(ExtractFileExt(SubtitleFile.FileName)) <> '.stl' then Exit;
 
-  LineText := SubtitleFile[Row];
+  LineText := Trim(SubtitleFile[Row]);
+  if (LineText = '') or LineText.StartsWith('//') or LineText.StartsWith('$') then Exit;
   p1 := Pos(',', LineText);
   if p1 > 0 then
   begin
@@ -123,23 +124,48 @@ var
   p1, p2      : Integer;
   sIni, sFin  : String;
   LineText    : String;
+  CurrHAlign  : TSubtitleHAlign;
+  CurrVAlign  : TSubtitleVAlign;
+  PropStr     : String;
+  x           : Integer;
 begin
   Result := False;
   try
     Bold       := False;
     Italic     := False;
     UnderLined := False;
+
+    CurrHAlign := shaCenter;
+    CurrVAlign := svaBottom;
+
     for i := 0 to SubtitleFile.Count-1 do
     begin
       LineText := Trim(SubtitleFile[i]);
-      if LineText.IsEmpty then Continue;
+      if LineText.IsEmpty or LineText.StartsWith('//') then Continue; // '//' = comentario
 
-      if LineText.StartsWith('$Bold') then
+      // Propiedades globales (los comandos no distinguen mayúsculas)
+      if LineText.StartsWith('$Bold', True) then
         Bold := IsFontTagEnabled(LineText)
-      else if LineText.StartsWith('$Italic') then
+      else if LineText.StartsWith('$Italic', True) then
         Italic := IsFontTagEnabled(LineText)
-      else if LineText.StartsWith('$UnderLined') then
+      else if LineText.StartsWith('$UnderLined', True) then
         UnderLined := IsFontTagEnabled(LineText)
+      else if LineText.StartsWith('$HorzAlign', True) then
+      begin
+        PropStr := Trim(Copy(LineText, Pos('=', LineText) + 1, Length(LineText))).ToLower;
+        if PropStr = 'left' then CurrHAlign := shaLeft
+        else if PropStr = 'right' then CurrHAlign := shaRight
+        else CurrHAlign := shaCenter;
+      end
+      else if LineText.StartsWith('$VertAlign', True) then
+      begin
+        PropStr := Trim(Copy(LineText, Pos('=', LineText) + 1, Length(LineText))).ToLower;
+        if PropStr = 'top' then CurrVAlign := svaTop
+        else if PropStr = 'center' then CurrVAlign := svaCenter
+        else CurrVAlign := svaBottom;
+      end
+      else if LineText.StartsWith('$') then
+        Continue // otros comandos ($FontName, $ColorIndex...) no son subtítulos
       else
       begin
         InitialTime := -1;
@@ -171,7 +197,14 @@ begin
           if UnderLined then Text := '{\u1}' + Text + '{\u0}';
 
           Text := STLTagsToTS(ReplaceEnters(Text, '|', sLineBreak));
-          Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
+
+          x := Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
+
+          if x >= 0 then
+          begin
+            Subtitles.ItemPointer[x]^.Align  := CurrHAlign;
+            Subtitles.ItemPointer[x]^.VAlign := CurrVAlign;
+          end;
         end;
       end;
     end;
@@ -186,6 +219,8 @@ function TUWSpruceSubtitleFile.SaveSubtitle(const FileName: String; const FPS: D
 var
   i : Integer;
   SubtitleText: String;
+  CurrHAlign  : TSubtitleHAlign;
+  CurrVAlign  : TSubtitleVAlign;
 begin
   Result  := False;
 
@@ -200,8 +235,6 @@ begin
   StringList.Add('$Italic         = FALSE');
   StringList.Add('');
   StringList.Add('//Position Control');
-  StringList.Add('$HorzAlign      = Center');
-  StringList.Add('$VertAlign      = Bottom');
   StringList.Add('$XOffset        = 0');
   StringList.Add('$YOffset        = 0');
   StringList.Add('');
@@ -221,20 +254,46 @@ begin
   StringList.Add('//$SetFilePathToken  = <<:>>');
   StringList.Add('');
   StringList.Add('//Colors');
-  StringList.Add('$ColorIndex1    = 0');
+  StringList.Add('$ColorIndex1    = 3');
   StringList.Add('$ColorIndex2    = 1');
-  StringList.Add('$ColorIndex3    = 2');
-  StringList.Add('$ColorIndex4    = 3');
+  StringList.Add('$ColorIndex3    = 1');
+  StringList.Add('$ColorIndex4    = 0');
   StringList.Add('');
   StringList.Add('//Subtitles');
 
+  CurrHAlign := shaCenter;
+  CurrVAlign := svaBottom;
+
   for i := FromItem to ToItem do
   begin
-    SubtitleText := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
-    SubtitleText := ReplaceEnters(SubtitleText, sLineBreak);
+    if Subtitles.Items[i].Align <> CurrHAlign then
+    begin
+      CurrHAlign := Subtitles.Items[i].Align;
+      case CurrHAlign of
+        shaLeft  : StringList.Add('$HorzAlign      = Left');
+        shaRight : StringList.Add('$HorzAlign      = Right');
+        else
+          StringList.Add('$HorzAlign      = Center');
+      end;
+    end;
 
-    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff') + ' , ' +
-                   TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff') + ' , ' +
+    if Subtitles.Items[i].VAlign <> CurrVAlign then
+    begin
+      CurrVAlign := Subtitles.Items[i].VAlign;
+      case CurrVAlign of
+        svaTop    : StringList.Add('$VertAlign      = Top');
+        svaCenter : StringList.Add('$VertAlign      = Center');
+        else
+          StringList.Add('$VertAlign      = Bottom');
+      end;
+    end;
+
+    SubtitleText := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
+    SubtitleText := ReplaceEnters(SubtitleText);
+
+    // Antes sin el FPS: los cuadros siempre se calculaban a 25 fps
+    StringList.Add(TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS) + ',' +
+                   TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS) + ',' +
                    TSTagsToSTL(SubtitleText));
   end;
 

@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023-2024 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formStatistics;
@@ -53,7 +53,7 @@ implementation
 
 uses
   procTypes, procWorkspace, procSubtitle, UWSystem.StrUtils, procColorTheme,
-  Math, UWSubtitleAPI.Tags;
+  Math, UWSubtitleAPI.Tags, procFiles;
 
 {$R *.lfm}
 
@@ -105,10 +105,9 @@ begin
     Options := [ofOverwritePrompt, ofEnableSizing];
     if Execute then
     begin
-      if ExtractFileExt(FileName) <> DefaultExt then
-        ChangeFileExt(FileName, DefaultExt);
-
-      mmoStatistics.Lines.SaveToFile(FileName);
+      FileName := EnsureSaveFileExt(FileName, DefaultExt);
+      if not FileName.IsEmpty then
+        mmoStatistics.Lines.SaveToFile(FileName);
     end;
   finally
     Free;

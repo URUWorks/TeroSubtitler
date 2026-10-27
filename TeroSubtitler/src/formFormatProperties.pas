@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formFormatProperties;
@@ -88,6 +88,10 @@ type
     lyoEBU: TUWLayout;
     lyoCavena890: TUWLayout;
     lyoWebVTT: TUWLayout;
+    lyoTimedText: TUWLayout;
+    lblTTLanguage: TLabel;
+    lblTTLanguageHint: TLabel;
+    cboTTLanguage: TComboBox;
     chkVTTWriteCueIdentifiers: TUWCheckBox;
     lyoAdvancedSubtitles: TUWLayout;
     spnASFontSize: TSpinEdit;
@@ -107,8 +111,11 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
+    FTTOtherLanguage: String; // xml:lang that is not in the culture list (es-419...)
     procedure FillComboWithFormatProperties;
     procedure SetLayoutPage(const APage: TUWLayout);
+    procedure cboTTLanguageSelect(Sender: TObject);
+    function GetTTLanguage: String;
   public
 
   end;
@@ -122,7 +129,7 @@ implementation
 
 uses
   procTypes, LazUTF8, procWorkspace, UWSubtitleAPI.Formats, UWSystem.TimeUtils,
-  UWTranslateAPI.Google, Cavena890.Types, LCLTranslator;
+  UWTranslateAPI.Google, Cavena890.Types, LCLTranslator, UWSystem.Globalization;
 
 {$R *.lfm}
 
@@ -244,6 +251,24 @@ begin
       spnEBUNDC.Value := MaxNumberDisplayableChars.ToInteger;
       spnEBUNDR.Value := MaxNumberDisplayableRows.ToInteger;
     end;
+    // Timed Text (iTT, TTML, Netflix): any BCP 47 tag can be typed
+    with Subtitles.FormatProperties^.TimedText do
+    begin
+      FillCultureTStrings(cboTTLanguage.Items);
+      FTTOtherLanguage := '';
+      if not GetCultureDisplayName(Language).IsEmpty then
+        cboTTLanguage.ItemIndex := GetCultureIndex(Language.Replace('_', '-'))
+      else
+      begin
+        // a code that is not in the list (from the file, like es-419 or en):
+        // shown as is, so it's kept when saving
+        FTTOtherLanguage := Trim(Language);
+        if FTTOtherLanguage.IsEmpty then FTTOtherLanguage := 'en';
+        cboTTLanguage.ItemIndex := cboTTLanguage.Items.Add(FTTOtherLanguage);
+      end;
+      cboTTLanguage.OnSelect := @cboTTLanguageSelect;
+      cboTTLanguageSelect(NIL);
+    end;
     // WebVTT
     with Subtitles.FormatProperties^.WebVTT do
     begin
@@ -340,6 +365,11 @@ begin
     MaxNumberDisplayableChars := spnEBUNDC.Value.ToString;
     MaxNumberDisplayableRows := spnEBUNDR.Value.ToString;
   end;
+  // Timed Text
+  with Subtitles.FormatProperties^.TimedText do
+  begin
+    Language := GetTTLanguage;
+  end;
   // WebVTT
   with Subtitles.FormatProperties^.WebVTT do
   begin
@@ -364,10 +394,32 @@ begin
     Add(FormatToName(sfCavena890));
     Add(FormatToName(sfDVDSubtitle));
     Add(FormatToName(sfEBU));
+    Add('Timed Text (iTT, TTML, Netflix)');
     Add(FormatToName(sfWebVTT));
     EndUpdate;
   end;
   cboFormats.ItemIndex := 0;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmFormatProperties.GetTTLanguage: String;
+begin
+  if (cboTTLanguage.ItemIndex < 0) or (not FTTOtherLanguage.IsEmpty and
+    (cboTTLanguage.ItemIndex = cboTTLanguage.Items.Count-1)) then
+    Result := FTTOtherLanguage
+  else
+    Result := GetCultureName(cboTTLanguage.ItemIndex);
+
+  if Result.IsEmpty then
+    Result := 'en';
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmFormatProperties.cboTTLanguageSelect(Sender: TObject);
+begin
+  lblTTLanguageHint.Caption := 'xml:lang="' + GetTTLanguage + '"';
 end;
 
 // -----------------------------------------------------------------------------
@@ -397,7 +449,8 @@ begin
     1: SetLayoutPage(lyoCavena890);
     2: SetLayoutPage(lyoDVDSubtitle);
     3: SetLayoutPage(lyoEBU);
-    4: SetLayoutPage(lyoWebVTT);
+    4: SetLayoutPage(lyoTimedText);
+    5: SetLayoutPage(lyoWebVTT);
   end;
 end;
 

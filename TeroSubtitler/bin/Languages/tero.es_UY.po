@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #: proclocalize.lngabversion
 #, object-pascal-format
@@ -1207,6 +1207,15 @@ msgstr "Tiempo"
 #: proclocalize.lngtextformatted
 msgid "Export formatted text?"
 msgstr "¿Exportar texto con formato?"
+
+#: proclocalize.lngtmentriesadded
+#, object-pascal-format
+msgid "%d entries added to the translation memory."
+msgstr "Se han añadido %d entradas a la memoria de traducción."
+
+#: proclocalize.lngtmnoentriesloaded
+msgid "No entries were loaded from the translation memory. Check that its languages match the selected ones."
+msgstr "No se cargó ninguna entrada de la memoria de traducción. Comprueba que sus idiomas coincidan con los seleccionados."
 
 #: proclocalize.lngtranscribing
 msgid "Transcribing..."
@@ -3833,6 +3842,10 @@ msgctxt "tfrmmain.acttranslationmemory.caption"
 msgid "Show..."
 msgstr "Mostrar..."
 
+#: tfrmmain.acttranslationmemoryaddall.caption
+msgid "Add translated lines to memory"
+msgstr "Añadir líneas traducidas a la memoria"
+
 #: tfrmmain.acttranslationmemoryclose.caption
 msgctxt "tfrmmain.acttranslationmemoryclose.caption"
 msgid "Close"
@@ -3842,6 +3855,14 @@ msgstr "Cerrar"
 msgctxt "tfrmmain.acttranslationmemorylist.caption"
 msgid "List..."
 msgstr "Listado..."
+
+#: tfrmmain.acttranslationmemoryopenfolder.caption
+msgid "Open translation memories folder"
+msgstr "Abrir carpeta de memorias de traducción"
+
+#: tfrmmain.acttranslationmemorysavecopy.caption
+msgid "Save a copy..."
+msgstr "Guardar una copia..."
 
 #: tfrmmain.acttranslationmemorysettings.caption
 msgctxt "tfrmmain.acttranslationmemorysettings.caption"
@@ -5642,3 +5663,4 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
+

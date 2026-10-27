@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procFiles;
@@ -28,6 +28,8 @@ uses
 { Helpers }
 
 function GetDefaultExtFromFilter(const AIndex: Integer; const AFilter: String): String;
+function GetSubtitleFormatExt(const AFormat: TUWSubtitleFormats): String;
+function EnsureSaveFileExt(const AFileName, AExt: String; const AKnownFilter: String = ''): String;
 
 { Subtitle files }
 
@@ -104,9 +106,10 @@ uses
   procConfig, procDialogs, procWorkspace, procVST, procSubtitle, procUndo,
   UWSystem.Encoding, formCustomFileDlg, UWSystem.SysUtils, Forms, procMRU,
   UWSystem.StrUtils, procForms, procProjectFile, formCustomSelectDlg,
-  procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils,
+  procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils, LCLStrConsts,
+  RegExpr,
   UWSubtitleAPI.Tags, UWTranslateAPI.Google, formCustomSelectDlgWithPreview,
-  FileUtil, Math
+  FileUtil, Math, URIParser
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -149,9 +152,11 @@ var
   s : String;
   index, a, b : Integer;
 begin
+  Result := '';
   if AFilter.IsEmpty then Exit;
   sa := AFilter.Split('|');
   index := (AIndex-1) * 2;
+  if (index < 0) or (index >= Length(sa)) then Exit;
   s := sa[index];
   a := Pos('*.', s);
   if a > 0 then
@@ -185,7 +190,11 @@ begin
       begin
         r := MsgSaveSubtitle(ExtractFileName(SubtitleInfo.Text.FileName));
         case r of
-          mrYes    : actSaveSubtitle.Execute;
+          mrYes    : begin
+                       actSaveSubtitle.Execute;
+                       // save dialog cancelled or save failed, don't lose changes
+                       if SubtitleInfo.Text.Changed then Abort;
+                     end;
           mrCancel : Abort;
         end;
       end;
@@ -196,7 +205,10 @@ begin
         begin
           r := MsgSaveSubtitle(ExtractFileName(SubtitleInfo.Translation.FileName), smTranslation);
           case r of
-            mrYes    : actSaveTranslation.Execute;
+            mrYes    : begin
+                         actSaveTranslation.Execute;
+                         if SubtitleInfo.Translation.Changed then Abort;
+                       end;
             mrCancel : Abort;
           end;
         end;
@@ -209,7 +221,8 @@ begin
     if not AKeepVideoOpen then
       actCloseMedia.Execute;
 
-    CloseTranslationMemory;
+    // keep the translation memory for the next subtitle, only save it
+    TMX.Save;
     CloseTerminology;
 
     SubtitleInfo.Text.FileName := '';
@@ -274,7 +287,7 @@ var
   _Encoding: TEncoding = NIL;
   _EncIndex: Integer;
   IsBinary: Boolean;
-  i: Integer;
+  i, _FPSIndex: Integer;
   _Format: TUWSubtitleFormats;
   _TimeBase: TSubtitleTimeBase;
 begin
@@ -319,7 +332,7 @@ begin
 
         //_EncIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectEncodingToUse, Items, _EncIndex, True);
         _EncIndex := formCustomSelectDlgWithPreview.ExecuteDialog('', lngSelectEncodingToUse, Items, FileName,_EncIndex, True);
-        _Encoding := TEncoding.GetEncoding(Encodings[_EncIndex].CPID);
+        _Encoding := GetCachedEncoding(Encodings[_EncIndex].CPID);
       end;
     end;
   end;
@@ -343,14 +356,24 @@ begin
     frmMain.cboFormat.ItemIndex := Integer(Subtitles.Format)-1;
     if (Subtitles.FrameRate > 0) then
     begin
+      _FPSIndex := -1;
       for i := 0 to High(DefFPSList) do
-      begin
-        if SameValue(DefFPSList[i].FPS, Subtitles.FrameRate, 0.0001) and (DefFPSList[i].Mode = Subtitles.TimecodeMode) then
+        if SameValue(DefFPSList[i].FPS, Subtitles.FrameRate, 0.0001) then
         begin
-          frmMain.cboInputFPS.ItemIndex := i; //frmMain.cboInputFPS.Items.IndexOf(SingleToStr(Subtitles.FrameRate, FormatSettings));
-          _FPS := DefFPSList[i];
-          Break;
+          // same fps and timecode mode, or at least the same fps
+          if (DefFPSList[i].Mode = Subtitles.TimecodeMode) then
+          begin
+            _FPSIndex := i;
+            Break;
+          end
+          else if _FPSIndex < 0 then
+            _FPSIndex := i;
         end;
+
+      if _FPSIndex >= 0 then
+      begin
+        frmMain.cboInputFPS.ItemIndex := _FPSIndex;
+        _FPS := DefFPSList[_FPSIndex];
       end;
     end;
     frmMain.cboInputFPSSelect(NIL);
@@ -515,8 +538,8 @@ begin
   _FPS.Mode := tcNDF;
   if _FPS.FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
   _Encoding := AEncoding;
-  //if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
-  if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
+  //if _Encoding = NIL then _Encoding := GetCachedEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
+  if _Encoding = NIL then _Encoding := GetCachedEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
 
   if Workspace.SMPTE then
     Subtitles.TimeBase := stbSMPTE
@@ -583,12 +606,13 @@ begin
   _FPS.Mode := tcNDF;
   if _FPS.FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
   _Encoding := AEncoding;
-  //if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
-  if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
+  //if _Encoding = NIL then  _Encoding := GetCachedEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
+  if _Encoding = NIL then _Encoding := GetCachedEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
 
   Subs := TUWSubtitles.Create;
   try
-    Subs.FormatProperties := Subtitles.FormatProperties;
+    // copy the values, Subs owns (and disposes) its own pointer
+    Subs.FormatProperties^ := Subtitles.FormatProperties^;
 
     for i := 0 to Subtitles.Count-1 do
       if Subtitles[i].Marked then
@@ -623,19 +647,22 @@ begin
   _FPS := AFPS;
   if _FPS = -1 then _FPS := Workspace.FPS.OutputFPS.FPS;
   _Encoding := AEncoding;
-  //if _Encoding = NIL then  _Encoding := TEncoding.GetEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
-  if _Encoding = NIL then _Encoding := TEncoding.GetEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
+  //if _Encoding = NIL then  _Encoding := GetCachedEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
+  if _Encoding = NIL then _Encoding := GetCachedEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
 
   txt := TUWStringList.Create;
   try
     for i := 0 to Subtitles.Count-1 do
       txt.Add(iff(SubtitleMode = smText, Subtitles[i].Text, Subtitles[i].Translation));
 
+    // without formatting: the whole text in a single block. Any kind of line
+    // break is removed (texts may have #10 or #13#10 regardless of the OS,
+    // e.g. iTT read from XML), and repeated spaces are collapsed
     if not Formatted then
-      txt.Text := ReplaceEnters(RemoveTSTags(txt.Text), sLineBreak, ' ');
+      txt.Text := Trim(ReplaceRegExpr('[ \t]{2,}', ReplaceRegExpr('\r\n|\r|\n', RemoveTSTags(txt.Text), ' ', False), ' ', False));
 
     if CheckIfValidFileName(FileName) then
-      txt.SaveToFile(FileName, AEncoding)
+      txt.SaveToFile(FileName, _Encoding)
     else
       ShowErrorMessageDialog(lngSaveSubtitleError);
   finally
@@ -808,17 +835,49 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function AppendExtension(FileName : String; Extension : String): String;
+function GetSubtitleFormatExt(const AFormat: TUWSubtitleFormats): String;
 begin
-  if FileName.EndsWith(Extension)
-    then Result := FileName
-    else Result := FileName + Extension;
+  Result := ExtractFileExt(Subtitles.FixFileNameExtension('a', AFormat));
+end;
+
+// -----------------------------------------------------------------------------
+
+function EnsureSaveFileExt(const AFileName, AExt: String; const AKnownFilter: String = ''): String;
+var
+  Ext, Known: String;
+begin
+  // Native save dialogs (macOS in particular) don't always append the
+  // extension of the selected filter. Append it when the name has none, or
+  // when its "extension" is not a known one (e.g. "Movie.S01E02").
+  // Returns '' if the user cancels overwriting an existing file.
+  Result := AFileName;
+  if AFileName.IsEmpty or AExt.IsEmpty then Exit;
+
+  Ext := LowerCase(ExtractFileExt(AFileName));
+  if Ext = LowerCase(AExt) then Exit;
+  if (Ext.Length > 1) and not AKnownFilter.IsEmpty then
+  begin
+    Known := LowerCase(AKnownFilter);
+    if (Pos('*' + Ext + '|', Known) > 0) or (Pos('*' + Ext + ';', Known) > 0) or
+      (Pos('*' + Ext + ')', Known) > 0) or Known.EndsWith('*' + Ext) then
+      Exit;
+  end;
+
+  if Result.EndsWith('.') then
+    SetLength(Result, Result.Length-1);
+  Result := Result + AExt;
+
+  // the dialog only asked about the name without extension
+  if FileExists(Result) and (MessageDlg(rsfdOverwriteFile,
+    Format(rsfdFileAlreadyExists, [Result]), mtConfirmation, [mbOK, mbCancel], 0) <> mrOK) then
+    Result := '';
 end;
 
 procedure SaveSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 var
   SD : TSaveDialog;
   CD : TfrmCustomFileDlg;
+  s  : String;
 begin
   if AppOptions.CheckErrorsBeforeSave and NeedToCheckErrors(Subtitles) then
     if MsgSaveWithErrors = mrNo then
@@ -829,8 +888,12 @@ begin
     CD := TfrmCustomFileDlg.Create(NIL);
     try
       CD.FileName := GetSuggestedFileNameForSave;
-      if CD.Execute(dmSave) and AllowSaveFormat(TUWSubtitleFormats(SD.FilterIndex)) then
-        SaveSubtitle(CD.FileName, CD.Format, SubtitleMode, CD.Encoding, CD.FPS)
+      if CD.Execute(dmSave) and AllowSaveFormat(CD.Format) then
+      begin
+        s := EnsureSaveFileExt(CD.FileName, GetSubtitleFormatExt(CD.Format), Subtitles.FillDialogFilter(''));
+        if not s.IsEmpty then
+          SaveSubtitle(s, CD.Format, SubtitleMode, CD.Encoding, CD.FPS);
+      end;
     finally
       CD.Free;
     end;
@@ -846,7 +909,8 @@ begin
         SD.InitialDir := ExtractFileDir(MRU.Items[0{MRU.Items.Count -1}]);
       SD.Filter := Subtitles.FillDialogFilter('');
       SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
-      SD.FileName := GetSuggestedFileNameForSave{$IFDEF DARWIN}+GetDefaultExtFromFilter(SD.FilterIndex, SD.Filter){$ENDIF};
+      SD.DefaultExt := GetDefaultExtFromFilter(SD.FilterIndex, SD.Filter);
+      SD.FileName := GetSuggestedFileNameForSave{$IFDEF DARWIN}+SD.DefaultExt{$ENDIF};
       {$IFDEF UNIX}
       SD.OnTypeChange := @frmMain.DoSaveDialogTypeChange;
       {$ENDIF}
@@ -854,8 +918,9 @@ begin
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
       if SD.Execute and AllowSaveFormat(TUWSubtitleFormats(SD.FilterIndex)) then
       begin
-        {$ifdef Linux}SD.FileName := AppendExtension(SD.FileName,SD.DefaultExt);{$endif}
-        SaveSubtitle(SD.FileName, TUWSubtitleFormats(SD.FilterIndex), SubtitleMode);
+        s := EnsureSaveFileExt(SD.FileName, GetSubtitleFormatExt(TUWSubtitleFormats(SD.FilterIndex)), SD.Filter);
+        if not s.IsEmpty then
+          SaveSubtitle(s, TUWSubtitleFormats(SD.FilterIndex), SubtitleMode);
        end;
     finally
       frmMain.cboFormat.ItemIndex := Integer(Subtitles.Format)-1;
@@ -917,12 +982,15 @@ procedure ReadSubtitleData(const AFileName: String; const OnlyTimings: Boolean; 
 var
   Sub  : TUWSubtitles;
   i, c : Integer;
+  AFPSInfo : TFPSInfo;
 begin
   if not AFileName.IsEmpty then
   begin
     Sub := TUWSubtitles.Create;
     try
-      if Sub.LoadFromFile(AFileName, NIL, Workspace.FPS.DefFPS) then
+      AFPSInfo := Workspace.FPS.DefFPS;
+      if AFPS > 0 then AFPSInfo.FPS := AFPS;
+      if Sub.LoadFromFile(AFileName, AEncoding, AFPSInfo, AFormat) then
       begin
         if Sub.Count > Subtitles.Count then
           c := Subtitles.Count
@@ -1038,6 +1106,7 @@ procedure ExportMarkedSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smT
 var
   SD : TSaveDialog;
   CD : TfrmCustomFileDlg;
+  s  : String;
 begin
   if GetSubtitleMarkedCount = 0 then
   begin
@@ -1052,7 +1121,9 @@ begin
       CD.FileName := SubtitleInfo.Text.FileName;
       if CD.Execute(dmSave) then
       begin
-        SaveMarkedSubtitle(CD.FileName, CD.Format, SubtitleMode, CD.Encoding, CD.FPS);
+        s := EnsureSaveFileExt(CD.FileName, GetSubtitleFormatExt(CD.Format), Subtitles.FillDialogFilter(''));
+        if not s.IsEmpty then
+          SaveMarkedSubtitle(s, CD.Format, SubtitleMode, CD.Encoding, CD.FPS);
       end;
     finally
       CD.Free;
@@ -1065,11 +1136,14 @@ begin
       SD.Title  := lngSaveFile;
       SD.Filter := Subtitles.FillDialogFilter('');
       SD.FilterIndex := frmMain.cboFormat.ItemIndex+1;
+      SD.DefaultExt := GetDefaultExtFromFilter(SD.FilterIndex, SD.Filter);
       SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
       if SD.Execute then
       begin
-        SaveMarkedSubtitle(SD.FileName, TUWSubtitleFormats(SD.FilterIndex), SubtitleMode);
+        s := EnsureSaveFileExt(SD.FileName, GetSubtitleFormatExt(TUWSubtitleFormats(SD.FilterIndex)), SD.Filter);
+        if not s.IsEmpty then
+          SaveMarkedSubtitle(s, TUWSubtitleFormats(SD.FilterIndex), SubtitleMode);
       end;
     finally
       SD.Free;
@@ -1085,6 +1159,7 @@ var
   CD : TfrmCustomFileDlg;
   Formatted: Boolean;
   r : Integer;
+  s : String;
 begin
   if Subtitles.Count = 0 then Exit;
 
@@ -1101,7 +1176,9 @@ begin
       CD.FileName := SubtitleInfo.Text.FileName;
       if CD.Execute(dmSave) then
       begin
-        SaveTextOnlySubtitle(CD.FileName, CD.Format, SubtitleMode, Formatted, CD.Encoding, CD.FPS);
+        s := EnsureSaveFileExt(CD.FileName, GetSubtitleFormatExt(CD.Format), Subtitles.FillDialogFilter(''));
+        if not s.IsEmpty then
+          SaveTextOnlySubtitle(s, CD.Format, SubtitleMode, Formatted, CD.Encoding, CD.FPS);
       end;
     finally
       CD.Free;
@@ -1114,11 +1191,14 @@ begin
       SD.Title  := lngSaveFile;
       SD.Filter := lngscShotChanges + ' (*.txt)|*.txt';
       SD.FilterIndex := 0;
+      SD.DefaultExt := '.txt';
       SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '.txt');
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
       if SD.Execute then
       begin
-        SaveTextOnlySubtitle(SD.FileName, TUWSubtitleFormats(SD.FilterIndex), SubtitleMode, Formatted);
+        s := EnsureSaveFileExt(SD.FileName, '.txt');
+        if not s.IsEmpty then
+          SaveTextOnlySubtitle(s, TUWSubtitleFormats(SD.FilterIndex), SubtitleMode, Formatted);
       end;
     finally
       SD.Free;
@@ -1209,10 +1289,15 @@ begin
     SD.Title   := lngSaveFile;
     SD.Filter  := lngProjectFile + '|*' + TProjectExt;
     SD.Options := [ofOverwritePrompt, ofEnableSizing];
+    SD.DefaultExt := TProjectExt;
     SD.FileName := ChangeFileExt('Project_' + ExtractFileName(SubtitleInfo.Text.FileName), TProjectExt);
 
     if SD.Execute then
-      SaveProject(SD.FileName);
+    begin
+      SD.FileName := EnsureSaveFileExt(SD.FileName, TProjectExt);
+      if not SD.FileName.IsEmpty then
+        SaveProject(SD.FileName);
+    end;
   finally
     SD.Free;
   end;
@@ -1282,11 +1367,14 @@ begin
   try
     SD.Title    := lngSaveFile;
     SD.Filter   := lngAllSupportedFiles + ' (*.txt)|' + '*.txt';
+    SD.DefaultExt := '.txt';
     SD.FileName := '';
     SD.Options  := [ofOverwritePrompt, ofEnableSizing];
     if SD.Execute then
     begin
-      SaveTranscription(SD.FileName);
+      SD.FileName := EnsureSaveFileExt(SD.FileName, '.txt');
+      if not SD.FileName.IsEmpty then
+        SaveTranscription(SD.FileName);
     end;
   finally
     SD.Free;
@@ -1311,7 +1399,7 @@ const HTMLFormat: String =
   '  <body style="background-color:Black;">' + sLineBreak +
   '    <center>' + sLineBreak +
   '      <video controls preload="metadata">' + sLineBreak +
-  '        <source src="file://[VIDEO]" type="video/[EXT]">' + sLineBreak +
+  '        <source src="[VIDEO]" type="video/[EXT]">' + sLineBreak +
   '        <track label="' + ProgramName + '" kind="subtitles" srclang="en" src="data:text/vtt;base64, [BASE64]" default>' + sLineBreak +
   '      </video>' + sLineBreak +
   '    </center>' + sLineBreak +
@@ -1347,7 +1435,10 @@ begin
       ts.Text := HTMLFormat;
       SubText := EncodeStringBase64(Subtitles.SaveToString(Workspace.FPS.OutputFPS.FPS, NIL, sfWebVTT, smText));
       Delete(VideoExt, 1, 1);
-      ts.Text := ts.Text.Replace('[VIDEO]', frmMain.MPV.FileName);
+      // a proper file:/// URL (percent-encoded) escaped for an HTML attribute,
+      // so paths with spaces, # or quotes work, also on Windows
+      ts.Text := ts.Text.Replace('[VIDEO]', FilenameToURI(frmMain.MPV.FileName, True)
+        .Replace('&', '&amp;').Replace('"', '&quot;').Replace('<', '&lt;').Replace('>', '&gt;'));
       ts.Text := ts.Text.Replace('[EXT]', VideoExt);
       ts.Text := ts.Text.Replace('[BASE64]', SubText);
 
@@ -1456,10 +1547,9 @@ begin
         begin
           if (ParamCount > 3) then
           begin
+            fps := Workspace.FPS.DefFPS; // also initializes fps.Mode
             if ParamCount = 5 then
-              fps.FPS := StrToSingle(ParamStr(5), Workspace.FPS.DefFPS.FPS)
-            else
-              fps := Workspace.FPS.DefFPS;
+              fps.FPS := StrToSingle(ParamStr(5), Workspace.FPS.DefFPS.FPS);
 
             s := ExtractFileName(ParamStr(2));
             if s.StartsWith('*') then
@@ -1499,10 +1589,9 @@ begin
         begin
           if (ParamCount > 5) then
           begin
-            if ParamCount = 7 then
-              fps.FPS := StrToSingle(ParamStr(5), Workspace.FPS.DefFPS.FPS)
-            else
-              fps := Workspace.FPS.DefFPS;
+            fps := Workspace.FPS.DefFPS; // also initializes fps.Mode
+            if ParamCount = 7 then // [fps] is the 7th parameter, the 5th is dstlang
+              fps.FPS := StrToSingle(ParamStr(7), Workspace.FPS.DefFPS.FPS);
 
             s := ExtractFileName(ParamStr(2));
             if s.StartsWith('*') then

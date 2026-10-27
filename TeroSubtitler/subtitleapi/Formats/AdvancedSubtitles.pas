@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit AdvancedSubtitles;
@@ -115,15 +115,23 @@ begin
       Node := XMLFindNodeByName(XmlDoc, 'style');
       if Assigned(Node) then
       begin
-        Style := Node.Attributes.GetNamedItem('id').NodeValue;
+        // sin atributo 'id' GetNamedItem devuelve NIL (access violation)
+        if Assigned(Node.Attributes.GetNamedItem('id')) then
+          Style := Node.Attributes.GetNamedItem('id').NodeValue
+        else
+          Style := '';
         // Subtitles
         Node := XMLFindNodeByName(XmlDoc, 'p');
         if Assigned(Node) then
           repeat
             if Node.HasAttributes then
             begin
-              if Style = Node.Attributes.GetNamedItem('style').NodeValue then
+              if Assigned(Node.Attributes.GetNamedItem('style')) and
+                 (Style = Node.Attributes.GetNamedItem('style').NodeValue) then
               begin
+                // reset en cada <p>: uno sin begin/end heredaba el tiempo del anterior
+                InitialTime := -1;
+                FinalTime   := -1;
                 if Node.Attributes.GetNamedItem('begin') <> NIL then
                   InitialTime := StringToTime(Node.Attributes.GetNamedItem('begin').NodeValue);
                 if Node.Attributes.GetNamedItem('end') <> NIL then

@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procMPV;
@@ -64,6 +64,7 @@ begin
     YTDLPFileName := procConfig.YTDLPFileName;
     LogLevel := llNo;
     AutoStartPlayback := False;
+    FontSize := MPVOptions.TextSize;
     //SMPTEMode := Workspace.SMPTE;
     with MPVOptions do
     begin
@@ -109,8 +110,11 @@ procedure UpdateMPVOptions;
 begin
   with frmMain, MPVOptions do
   begin
-    MPV.mpv_set_option_string_('osd-font-size=' + IntToStr(TextSize));
-    MPV.mpv_set_option_string_('sub-font-size=' + IntToStr(TextSize));
+    // the player sets osd/sub-font-size itself on every resize and video
+    // reconfig (scaled to the video area), from its FontSize property. Setting
+    // the mpv options directly was overwritten with its default size (55) at
+    // the next resize, the text looked huge until Settings was closed.
+    MPV.FontSize := TextSize;
     MPV.mpv_set_option_string_('osd-color=' + TextColor);
     MPV.mpv_set_option_string_('sub-color=' + TextColor);
     MPV.mpv_set_option_string_('osd-border-color=' + TextBorderColor);
@@ -135,8 +139,6 @@ begin
       MPV.mpv_set_option_string_('sub-back-color=#00000000');
     end;
   end;
-
-  Subtitles.FormatProperties^.SSA.DefaultStyleSettings := PrepareSSAStyleString;
 end;
 
 // -----------------------------------------------------------------------------
@@ -254,22 +256,34 @@ end;
 function MPVSaveSubtitleTempTrack: Boolean;
 var
   AFPS : TFPSInfo;
+  OldTimeBase : TSubtitleTimeBase;
+  OldStyle    : AnsiString;
 begin
   AFPS := Workspace.FPS.OutputFPS;
 
-  if Workspace.WorkMode = wmTime then
-    Subtitles.TimeBase := stbMedia
-  else
-  begin
-    if IsInteger(Subtitles.FrameRate) then
-      Subtitles.TimeBase := stbMedia
-    else
-      Subtitles.TimeBase := stbSMPTE;
-  end;
+  // mpv plays media time and the stored times are already media times (the
+  // same ones the overlay compares with the player position), so they are
+  // written without the SMPTE x1.001 conversion. Before, any frames mode with
+  // a non integer FPS forced it (~3.6 s late per hour) and TimeBase stayed
+  // changed for the rest of the program.
+  OldTimeBase := Subtitles.TimeBase;
+  Subtitles.TimeBase := stbMedia;
+
+  // the style is built from the current mpv options when writing, so the
+  // track never depends on the call order (before, it used the stored ASS
+  // style until UpdateMPVOptions ran, huge text until Settings was closed)
+  OldStyle := Subtitles.FormatProperties^.SSA.DefaultStyleSettings;
+  Subtitles.FormatProperties^.SSA.DefaultStyleSettings := PrepareSSAStyleString;
 
   Subtitles.Tag := 1;
-  Result := Subtitles.SaveToFile(MPVTempSubFileName, AFPS, TEncoding.UTF8, sfAdvancedSubStationAlpha, smText);
-  Subtitles.Tag := 0;
+  try
+    // same text the overlay shows (text or translation)
+    Result := Subtitles.SaveToFile(MPVTempSubFileName, AFPS, TEncoding.UTF8, sfAdvancedSubStationAlpha, MPVOptions.SubtitleToShow);
+  finally
+    Subtitles.Tag := 0;
+    Subtitles.TimeBase := OldTimeBase;
+    Subtitles.FormatProperties^.SSA.DefaultStyleSettings := OldStyle;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

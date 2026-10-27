@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formFixSubtitles;
@@ -98,7 +98,7 @@ type
     procedure VSTSelect(const ASelectMode: TVSTSelectionMode);
     procedure CheckListSelect(const ASelectMode: TVSTSelectionMode);
     procedure GetTotalErrorsCount;
-    procedure RefreshTotalErrorsCount(const AInfoList: TSubtitleInfoList);
+    procedure RefreshTotalErrorsCount(const AInfoList: TSubtitleInfoList; const AOnlyEnabled: Boolean = False);
   public
 
   end;
@@ -461,6 +461,12 @@ begin
     else
       FList.FixErrors('', FProfile, frmMain.WAVE.GetSceneChangeList);
 
+    // The totals are estimated with every fix enabled, and fixes interact
+    // (e.g. a duration fix can move an end time next to a shot change), so
+    // an enabled option could show [1] while the list showed nothing. Take
+    // the count of the enabled options from the list itself.
+    RefreshTotalErrorsCount(FList, True);
+
     lblTotalErrors.Caption := Format(lngfsTotalErrors, [FTotalErrorCount, FList.Count]);
   finally
     VST.RootNodeCount := FList.Count;
@@ -686,11 +692,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmFixSubtitles.RefreshTotalErrorsCount(const AInfoList: TSubtitleInfoList);
+procedure TfrmFixSubtitles.RefreshTotalErrorsCount(const AInfoList: TSubtitleInfoList; const AOnlyEnabled: Boolean = False);
 
   procedure IncCount(const AId: Byte);
   begin
-    FOptions[AId].Count := FOptions[AId].Count + 1;
+    if not AOnlyEnabled or FOptions[AId].Enabled then
+      FOptions[AId].Count := FOptions[AId].Count + 1;
   end;
 
   procedure UpdatedOption(const AId: Byte; const ADesc: String);
@@ -703,7 +710,8 @@ var
   i: Integer;
 begin
   for i := 0 to Length(FOptions)-1 do
-    FOptions[i].Count := 0;
+    if not AOnlyEnabled or FOptions[i].Enabled then
+      FOptions[i].Count := 0;
 
   if AInfoList.Count > 0 then
     for i := 0 to AInfoList.Count-1 do

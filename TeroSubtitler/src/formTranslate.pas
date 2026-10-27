@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formTranslate;
@@ -67,7 +67,7 @@ implementation
 uses
   procWorkspace, procTypes, procVST, procConfig, procDialogs,
   UWSystem.InetUtils, UWTranslateAPI.Google, UWSubtitleAPI, formMain,
-  UWSubtitleAPI.Tags;
+  procSubtitle;
 
 {$R *.lfm}
 
@@ -170,9 +170,13 @@ begin
     //s2 := s2.Replace('> ', '>', [rfReplaceAll]);
     //s2 := HTMLTagsToTS(s2);
 
+    // translation failed (no internet, quota, etc), keep the original text
+    if s2 = '' then Exit;
+
+    // use SetSubtitleTexts so the change can be undone
     case cboOutput.ItemIndex of
-      0: Text        := s2;
-      1: Translation := s2;
+      0: SetSubtitleTexts(Index, s2, Translation, False, False, False);
+      1: SetSubtitleTexts(Index, Text, s2, False, False, False);
     end;
   end;
 end;

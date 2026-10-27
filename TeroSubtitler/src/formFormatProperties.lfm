@@ -624,4 +624,43 @@ object frmFormatProperties: TfrmFormatProperties
       TabOrder = 4
     end
   end
+  object lyoTimedText: TUWLayout
+    Left = 8
+    Height = 280
+    Top = 40
+    Width = 352
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ClientHeight = 280
+    ClientWidth = 352
+    TabOrder = 8
+    Visible = False
+    object lblTTLanguage: TLabel
+      Left = 0
+      Height = 15
+      Top = 4
+      Width = 52
+      Caption = 'Language'
+      ParentColor = False
+    end
+    object cboTTLanguage: TComboBox
+      Left = 152
+      Height = 23
+      Top = 0
+      Width = 200
+      ItemHeight = 15
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object lblTTLanguageHint: TLabel
+      Left = 152
+      Height = 15
+      Top = 28
+      Width = 200
+      AutoSize = False
+      Caption = 'xml:lang'
+      Font.Color = clGrayText
+      ParentColor = False
+      ParentFont = False
+    end
+  end
 end

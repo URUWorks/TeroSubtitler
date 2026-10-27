@@ -13,7 +13,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSystem.InetUtils;
@@ -108,6 +108,11 @@ function FormatSpeed(const Speed: LongInt): String;
 
 implementation
 
+const
+  // without timeouts a missing network freezes the UI thread indefinitely
+  HTTPConnectTimeout = 10000; // ms
+  HTTPIOTimeout      = 30000; // ms
+
 // -----------------------------------------------------------------------------
 
 { Helpers }
@@ -168,6 +173,8 @@ begin
   HTTPClient := TFPHTTPClient.Create(NIL);
   try
     HTTPClient.AllowRedirect := True;
+    HTTPClient.ConnectTimeout := HTTPConnectTimeout;
+    HTTPClient.IOTimeout := HTTPIOTimeout;
 
     try
       HTTPClient.HTTPMethod('HEAD', AURL, NIL, []);
@@ -175,10 +182,8 @@ begin
       Exit;
     end;
 
-    if HTTPClient.ResponseStatusCode = 404 then // file not exists
-      Exit;
-
-    Result := True;
+    // only a 2xx answer means the file exists (403, 500... don't)
+    Result := (HTTPClient.ResponseStatusCode >= 200) and (HTTPClient.ResponseStatusCode < 300);
   finally
     HTTPClient.Free;
   end;
@@ -196,6 +201,8 @@ begin
   HTTPClient := TFPHTTPClient.Create(NIL);
   try
     HTTPClient.AllowRedirect := True;
+    HTTPClient.ConnectTimeout := HTTPConnectTimeout;
+    HTTPClient.IOTimeout := HTTPIOTimeout;
     HTTPClient.AddHeader('User-Agent', 'Mozilla/5.0 (compatible; fpweb)');
     try
       AString := HTTPClient.Get(AURL);
@@ -219,6 +226,7 @@ begin
   Result := False;
   with TCheckInternet.Create(NIL) do
   try
+    ConnectTimeout := HTTPConnectTimeout;
     try
       ConnectToServer(AServer, 80);
       Result := True;
@@ -305,6 +313,8 @@ begin
   inherited Create(True);
   FreeOnTerminate := True;
   FFPHTTPClient := TFPHTTPClient.Create(NIL);
+  FFPHTTPClient.ConnectTimeout := HTTPConnectTimeout;
+  FFPHTTPClient.IOTimeout := HTTPIOTimeout;
 end;
 
 // -----------------------------------------------------------------------------
@@ -404,9 +414,11 @@ begin
     HttpClient := TFPHTTPClient.Create(NIL);
     try
       HttpClient.AllowRedirect := True;
+      HttpClient.ConnectTimeout := HTTPConnectTimeout;
+      HttpClient.IOTimeout := HTTPIOTimeout;
 
       HttpClient.HTTPMethod('HEAD', URL, NIL, []);
-      if HttpClient.ResponseStatusCode = 404 then // file not exists
+      if (HttpClient.ResponseStatusCode < 200) or (HttpClient.ResponseStatusCode >= 300) then
         Exit;
 
       HttpClient.OnDataReceived := @DoOnDataReceived;

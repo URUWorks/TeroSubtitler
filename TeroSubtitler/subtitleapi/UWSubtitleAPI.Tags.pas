@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSubtitleAPI.Tags;
@@ -27,6 +27,7 @@ uses
 { Tags Helpers }
 
 function RemoveTSTags(const Text: String): String;
+function EscapeNonTagBraces(const Text: String): String;
 function TSTagsToHTML(const Text: String): String;
 function HTMLTagsToTS(const Text: String): String;
 function TSTagsToMicroDVD(const Text: String): String;
@@ -54,7 +55,41 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, RegExpr;
 
 function RemoveTSTags(const Text: String): String;
 begin
-  Result := ReplaceRegExpr('\{.*?\}', Text, '', True);
+  // only ASS override blocks ({\...}) are tags, any other text between
+  // braces is part of the subtitle (same rule as DrawASSText)
+  Result := ReplaceRegExpr('\{\\[^}]*\}', Text, '', True);
+end;
+
+//------------------------------------------------------------------------------
+
+function EscapeNonTagBraces(const Text: String): String;
+var
+  i, p: Integer;
+begin
+  // For text sent to libass (mpv): a {...} block that is not an override
+  // block is a comment in ASS and is hidden, so escape its braces as \{ \}
+  // to show them. Override blocks ({\...}) are kept as they are.
+  Result := '';
+  i := 1;
+  while i <= Length(Text) do
+  begin
+    if Text[i] = '{' then
+    begin
+      p := Pos('}', Text, i+1);
+      if (p > 0) and (p > i+1) and (Text[i+1] = '\') then
+      begin
+        Result := Result + Copy(Text, i, p-i+1);
+        i := p + 1;
+        Continue;
+      end;
+      Result := Result + '\{';
+    end
+    else if Text[i] = '}' then
+      Result := Result + '\}'
+    else
+      Result := Result + Text[i];
+    Inc(i);
+  end;
 end;
 
 //------------------------------------------------------------------------------

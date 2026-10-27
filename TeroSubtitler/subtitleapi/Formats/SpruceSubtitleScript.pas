@@ -1,18 +1,18 @@
 {*
- * URUWorks Subtitle API
+ *  URUWorks Subtitle API
  *
- * The contents of this file are used with permission, subject to
- * the Mozilla Public License Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/2.0.html
+ *  The contents of this file are used with permission, subject to
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
- * Software distributed under the License is distributed on an
- * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
- * implied. See the License for the specific language governing
- * rights and limitations under the License.
+ *  Software distributed under the License is distributed on an
+ *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ *  implied. See the License for the specific language governing
+ *  rights and limitations under the License.
  *
- * Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit SpruceSubtitleScript;
@@ -139,6 +139,9 @@ begin
 
           if (InitialTime >= 0) and (FinalTime > 0) then
           begin
+            // Restaurar saltos de línea (se guardan como '|')
+            TempText := ReplaceString(TempText, '|', LineEnding);
+
             if IsItalic then
               TempText := '{\i1}' + TempText + '{\i0}';
 
@@ -177,13 +180,12 @@ begin
   begin
     SubtitleText := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
     
-    IsItalic := SubtitleText.Contains('{\i1}');
-    
+    IsItalic := Pos('{\i1}', LowerCase(SubtitleText)) > 0;
+
+    // Limpieza general de tags (antes solo cursiva/negrita: el resto, p. ej.
+    // colores o subrayado, quedaba como texto literal)
+    SubtitleText := RemoveTSTags(SubtitleText);
     SubtitleText := ReplaceEnters(SubtitleText, sLineBreak);
-    SubtitleText := StringReplace(SubtitleText, '{\i1}', '', [rfReplaceAll, rfIgnoreCase]);
-    SubtitleText := StringReplace(SubtitleText, '{\i0}', '', [rfReplaceAll, rfIgnoreCase]);
-    SubtitleText := StringReplace(SubtitleText, '{\b1}', '', [rfReplaceAll, rfIgnoreCase]);
-    SubtitleText := StringReplace(SubtitleText, '{\b0}', '', [rfReplaceAll, rfIgnoreCase]);
 
     // Construcción del bloque
     StringList.Add('@JUST C');

@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSystem.StrUtils;
@@ -204,17 +204,24 @@ var
   i,
   l1,
   l2: Integer;
+  c : String;
 begin
+  // Text is the matched text, NewText the replacement. Work by code points
+  // (not bytes) so accented and non latin characters are not broken.
   Result := NewText;
   l1     := UTF8Length(Text);
   l2     := UTF8Length(NewText);
   if l1 = l2 then
   begin
+    Result := '';
     for i := 1 to l1 do
-      if IsUpperCase(Text[i]) then
-        Result[i] := UTF8UpperCase(NewText)[i]
+    begin
+      c := UTF8Copy(Text, i, 1);
+      if (UTF8UpperCase(c) = c) and (UTF8LowerCase(c) <> c) then
+        Result := Result + UTF8UpperCase(UTF8Copy(NewText, i, 1))
       else
-        Result[i] := LowerCase(NewText[i]);
+        Result := Result + UTF8LowerCase(UTF8Copy(NewText, i, 1));
+    end;
   end
   else if IsUpperCase(Text) then
     Result := UTF8UpperCase(NewText);

@@ -12,7 +12,7 @@
  * implied. See the License for the specific language governing
  * rights and limitations under the License.
  *
- * Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ * Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit AdvancedSubstationAlpha;
@@ -44,7 +44,7 @@ type
 
 implementation
 
-uses strUtils, UWSystem.StrUtils, UWSystem.SysUtils;
+uses strUtils, UWSystem.StrUtils, UWSystem.SysUtils, UWSubtitleAPI.Tags;
 
 const
   SSA_EventFormat = 'Format: Layer, Start, End, Style, Actor, MarginL, MarginR, MarginV, Effect, Text';
@@ -171,6 +171,14 @@ begin
 
   StringList.Add('[Script Info]');
   StringList.Add('ScriptType: v4.00+');
+  // temporary track for mpv (Tag = 1): without PlayRes libass uses 384x288,
+  // so the style font size would be huge if mpv doesn't override it. 720 is
+  // the same scale mpv uses for sub-font-size.
+  if Subtitles.Tag = 1 then
+  begin
+    StringList.Add('PlayResX: 1280');
+    StringList.Add('PlayResY: 720');
+  end;
 
 //  StringList.Add('Collisions: ' + ASSAttributes.Collisions);
 //  StringList.Add('PlayResX: ' + IntToStr(ASSAttributes.PlayResX));
@@ -188,6 +196,10 @@ begin
   begin
     Text := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
     Text := ReplaceString(Trim(Text), LineEnding, '\N');
+    // temporary track for mpv (Tag = 1): show the text between braces that
+    // is not an ASS tag, libass would hide it as a comment
+    if Subtitles.Tag = 1 then
+      Text := EscapeNonTagBraces(Text);
 
     s := '';
     if Subtitles[i].Align <> shaNone then

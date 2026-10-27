@@ -1,5 +1,5 @@
 {*
- *  URUWorks
+ *  URUWorks Tero Subtitler
  *
  *  The contents of this file are used with permission, subject to
  *  the Mozilla Public License Version 2.0 (the "License"); you may
@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit procVST;
@@ -269,10 +269,12 @@ end;
 procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AIdxs: TIntegerDynArray; const AClear: Boolean);
 var
   Run: PVirtualNode;
-  i: Integer;
+  i, LastIdx: Integer;
   NodeToFocus: PVirtualNode;
+  Wanted: array of Boolean;
 begin
   if Length(AIdxs) = 0 then Exit;
+  Wanted := NIL;
 
   AVST.BeginUpdate;
   try
@@ -281,21 +283,23 @@ begin
       if AClear then AVST.ClearSelection;
 
       NodeToFocus := nil;
-      Run := AVST.GetFirst;
 
+      // one pass over the tree with a lookup table of the wanted indexes,
+      // instead of comparing every node with every index (O(n*m))
+      SetLength(Wanted, AVST.RootNodeCount);
+      for i := Low(AIdxs) to High(AIdxs) do
+        if (AIdxs[i] >= 0) and (AIdxs[i] < Length(Wanted)) then
+          Wanted[AIdxs[i]] := True;
+      LastIdx := AIdxs[High(AIdxs)];
+
+      Run := AVST.GetFirst;
       while Assigned(Run) do
       begin
-        for i := Low(AIdxs) to High(AIdxs) do
+        if (Run^.Index < Cardinal(Length(Wanted))) and Wanted[Run^.Index] then
         begin
-          if AIdxs[i] = Run^.Index then
-          begin
-            AVST.Selected[Run] := True;
-
-            if i = High(AIdxs) then
-              NodeToFocus := Run;
-
-            Break;
-          end;
+          AVST.Selected[Run] := True;
+          if Integer(Run^.Index) = LastIdx then
+            NodeToFocus := Run;
         end;
         Run := AVST.GetNext(Run);
       end;
@@ -352,7 +356,7 @@ begin
     end;
 end;
 
-//----------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
 procedure VSTJumpToNextMarkedEntry(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
 var
@@ -482,33 +486,43 @@ begin
   end;
 end;
 
-//----------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
 procedure VSTPasteEntriesFromClipboard(const AVST: TLazVirtualStringTree);
 var
   s      : TStringList;
   i, x   : Integer;
   t1, t2 : Integer;
+  Idxs   : TIntegerDynArray;
 begin
-  if AVST.SelectedCount > 0 then
+  // pasting is allowed with no selection (e.g. an empty list): append at the end
   begin
     AVST.BeginUpdate;
     s := TStringList.Create;
+    Idxs := NIL;
     try
-      x := VSTFocusedNode(AVST);
+      if AVST.SelectedCount > 0 then
+        x := VSTFocusedNode(AVST)
+      else
+        x := -1;
+      if (x < 0) or (x > Subtitles.Count) then x := Subtitles.Count;
       AVST.ClearSelection;
       SplitRegExpr('\|\|', Clipboard.AsText, s);
       while s.Count > 4 do
       begin
-        t1 := StrToIntDef(s[0], 0);
-        t2 := StrToIntDef(s[1], 0);
+        // validate the block: both times must be numbers, otherwise this is
+        // not our clipboard format
+        if not TryStrToInt(s[0], t1) or not TryStrToInt(s[1], t2) then Break;
         InsertSubtitle(x, t1, t2,
           ReplaceRegExpr('\\~', s[2], sLineBreak, False),
-          ReplaceRegExpr('\\~', s[3], sLineBreak, False), False);
-        AVST.Selected[VSTGetNodeAtIndex(AVST, x)] := True;
+          ReplaceRegExpr('\\~', s[3], sLineBreak, False), False, False);
+        SetLength(Idxs, Length(Idxs)+1);
+        Idxs[High(Idxs)] := x;
         inc(x);
         for i := 1 to 4 do s.Delete(0);
       end;
+      if Length(Idxs) > 0 then
+        VSTSelectNodes(AVST, Idxs, True);
     finally
       s.Free;
       AVST.EndUpdate;
@@ -519,7 +533,7 @@ begin
   end;
 end;
 
-//----------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
 procedure VSTInsertEntries(const AVST: TLazVirtualStringTree; const Before: Boolean = False);
 var
@@ -548,7 +562,7 @@ begin
           begin
             ti  := Range(Item^.InitialTime - AppOptions.Conventions.NewSubtitleMs - Pause, 0, Item^.InitialTime);
             tf  := ti + AppOptions.Conventions.NewSubtitleMs;
-            SelArray[i] := InsertSubtitle(Run^.Index, ti, tf, '', '', False);
+            SelArray[i] := InsertSubtitle(Run^.Index, ti, tf, '', '', False, False);
             Dec(i);
           end;
           Run := AVST.GetPreviousSelected(Run);
@@ -556,8 +570,10 @@ begin
       end
       else
       begin
-        i := 0;
-        Run := AVST.GetFirstSelected;
+        // walk from the bottom up, like the "before" branch: inserting first
+        // would shift the indexes of the selected nodes still to process
+        i := AVST.SelectedCount-1;
+        Run := VSTLastSelectedNode(AVST);
         while Assigned(Run) do
         begin
           Item := Subtitles.ItemPointer[Run^.Index];
@@ -565,13 +581,17 @@ begin
           begin
             ti  := Item^.FinalTime + Pause;
             tf  := ti + AppOptions.Conventions.NewSubtitleMs;
-            SelArray[i] := InsertSubtitle(Run^.Index+1, ti, tf, '', '', False);
-            Inc(i);
+            SelArray[i] := InsertSubtitle(Run^.Index+1, ti, tf, '', '', False, False);
+            Dec(i);
           end;
-          Run := AVST.GetNextSelected(Run);
+          Run := AVST.GetPreviousSelected(Run);
         end;
       end;
+      // every entry inserted later (above) shifted the previous ones down by one
+      for i := 0 to High(SelArray) do
+        SelArray[i] := SelArray[i] + i;
       VSTSelectNodes(AVST, SelArray, True);
+      UpdateValues(True);
     finally
       SetLength(SelArray, 0);
       UndoInstance.IncrementUndoGroup;
@@ -631,7 +651,7 @@ begin
   DoAutoCheckErrors;
 end;
 
-//----------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
 procedure VSTCombineEntries(const AVST: TLazVirtualStringTree);
 var
@@ -848,6 +868,46 @@ function VSTFind(const FindText: String; const CaseSensitive: Boolean; const Fin
   end;
 
 
+  function ReplaceFound(const S: String): String;
+  var
+    Pattern, Rep: String;
+    Rx: TRegExpr;
+    LastPos: Integer;
+  begin
+    // one regex for every mode, so case-insensitive, whole word and
+    // "replace all occurrences" behave the same as the search does
+    if RE then
+      Pattern := FindText
+    else
+      Pattern := QuoteRegExprMetaChars(FindText);
+    if WholeWord and not (RE and Contains('\b', FindText)) then
+      Pattern := '\b' + Pattern + '\b';
+    if not CaseSensitive and not (RE and Contains('(?i)', FindText)) then
+      Pattern := '(?i)' + Pattern;
+
+    Result  := '';
+    LastPos := 1;
+    Rx := TRegExpr.Create(Pattern);
+    try
+      if Rx.Exec(S) then
+        repeat
+          if RE then
+            Rep := Rx.Substitute(NewText)
+          else
+            Rep := NewText;
+          // preserve the case of the text actually found, not the searched one
+          if CasePreserve then
+            Rep := PreserveCase(Rx.Match[0], Rep);
+          Result  := Result + Copy(S, LastPos, Rx.MatchPos[0] - LastPos) + Rep;
+          LastPos := Rx.MatchPos[0] + Rx.MatchLen[0];
+          if Rx.MatchLen[0] = 0 then Break; // avoid looping on empty matches
+        until not Rx.ExecNext;
+      Result := Result + Copy(S, LastPos, MaxInt);
+    finally
+      Rx.Free;
+    end;
+  end;
+
   function Found(const Location: TFindSource; const Text: string; const Translation: string): Boolean;
   begin
     Result := False;
@@ -914,19 +974,13 @@ begin
               if (FindLocation = fsText) or (FindLocation = fsTextAndTranslation) then
                 if FoundText(Text) then
                 begin
-                  if not RE then
-                    s := ReplaceString(Text, FindText, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False)
-                  else
-                    s := ReplaceRegExpr(FindText, Text, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False);
+                  s := ReplaceFound(Text);
                   SetSubtitleText(i, s, smText, False, False, False);
                 end; //if FoundText(Text)
               if (FindLocation = fsTranslation) or (FindLocation = fsTextAndTranslation) then
                 if FoundText(Translation) then
                 begin
-                  if not RE then
-                    s := ReplaceString(Translation, FindText, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False)
-                  else
-                    s := ReplaceRegExpr(FindText, Translation, iff(CasePreserve, PreserveCase(FindText, NewText), NewText), False);
+                  s := ReplaceFound(Translation);
                   SetSubtitleText(i, s, smTranslation, False, False, False);
                 end; //FoundText(Translation)
               if not ReplaceAll then Break;
@@ -1113,7 +1167,11 @@ begin
         Delta1 := Deltas[i];
         Delta2 := Deltas[i+1]-Delta1;
         x      := Subtitles[AdjSub[i+1].SubtitleIndex].InitialTime;
-        DeltaX := Delta2 / (x-Subtitles[AdjSub[i].SubtitleIndex].InitialTime);
+        // two synch points at the same initial time would divide by zero
+        if x <> Subtitles[AdjSub[i].SubtitleIndex].InitialTime then
+          DeltaX := Delta2 / (x-Subtitles[AdjSub[i].SubtitleIndex].InitialTime)
+        else
+          DeltaX := 0;
 
         if (i=(l-2)) then
         begin // we have left one subtitle: at the last synch point
@@ -1150,41 +1208,39 @@ end;
 
 procedure VSTSort(const AVST: TLazVirtualStringTree);
 var
-  i, a, c : Integer;
-  tmp     : TUWSubtitleItem;
-  List    : array of TUWSubtitleItem;
+  i       : Integer;
+  OldPtrs : array of PUWSubtitleItem;
+  OldItems: array of TUWSubtitleItem;
+  Changed : Boolean;
 begin
-  if AVST.RootNodeCount > 0 then
+  // O(n log n) sort in the API (keeps ExtraInfo aligned) and one undo entry
+  // per index that actually changed, instead of a swap sort with 2 undos per swap
+  if (AVST.RootNodeCount > 0) and (Subtitles.Count > 1) then
   begin
-    SetLength(List, Subtitles.Count);
-    try
-      for i := 0 to Subtitles.Count-1 do
-        List[i] := Subtitles.Items[i];
+    SetLength(OldPtrs, Subtitles.Count);
+    SetLength(OldItems, Subtitles.Count);
+    for i := 0 to Subtitles.Count-1 do
+    begin
+      OldPtrs[i]  := Subtitles.ItemPointer[i];
+      OldItems[i] := OldPtrs[i]^;
+    end;
 
-      c := UndoInstance.UndoCount;
-      for i := 0 to High(List) do
-        for a := i to High(List) do
-          if List[i].InitialTime > List[a].InitialTime then
-          begin
-            UndoInstance.AddUndo(utSubtitleChange, i, List[i], False);
-            UndoInstance.AddUndo(utSubtitleChange, a, List[a], False);
+    Subtitles.Sort;
 
-            tmp     := List[i];
-            List[i] := List[a];
-            List[a] := tmp;
-          end;
-
-      if UndoInstance.UndoCount <> c then
+    Changed := False;
+    for i := 0 to Subtitles.Count-1 do
+      if Subtitles.ItemPointer[i] <> OldPtrs[i] then
       begin
-        for i := 0 to Subtitles.Count-1 do
-          Subtitles.Items[i] := List[i];
-
-        UndoInstance.IncrementUndoGroup;
-        DoAutoCheckErrors(False);
-        AVST.Invalidate;
+        UndoInstance.AddUndo(utSubtitleChange, i, OldItems[i], False);
+        Changed := True;
       end;
-    finally
-      SetLength(List, 0);
+
+    if Changed then
+    begin
+      UndoInstance.IncrementUndoGroup;
+      SubtitleChanged(True, True);
+      DoAutoCheckErrors(False);
+      AVST.Invalidate;
     end;
   end;
 end;
@@ -1194,21 +1250,40 @@ end;
 procedure VSTDeleteLineFromEntry(const AVST: TLazVirtualStringTree; const ALines: TStringArray);
 var
   Nodes : TNodeArray;
-  I, c, n : Integer;
+  I, c, n, t : Integer;
+  Lines : array of Integer;
 begin
   Nodes := NIL;
   if (AVST.SelectedCount > 0) and (Length(ALines) > 0) then
   begin
+    // delete from the highest line number down, otherwise each deletion
+    // shifts the lines still to delete ("1,2" deleted original lines 1 and 3)
+    Lines := NIL;
+    for c := 0 to High(ALines) do
+    begin
+      n := StrToIntDef(ALines[c], 0);
+      if n > 0 then
+      begin
+        SetLength(Lines, Length(Lines)+1);
+        Lines[High(Lines)] := n;
+      end;
+    end;
+    for c := 0 to High(Lines)-1 do
+      for n := c+1 to High(Lines) do
+        if Lines[n] > Lines[c] then
+        begin
+          t := Lines[c]; Lines[c] := Lines[n]; Lines[n] := t;
+        end;
+
     AVST.BeginUpdate;
     try
       Nodes := AVST.GetSortedSelection(True);
 
       for I := 0 to High(Nodes) do
-        for c := 0 to Length(ALines)-1 do
+        for c := 0 to High(Lines) do
         begin
-          n := StrToIntDef(ALines[c], 0);
-          if n > 0 then
-            SetSubtitleText(Nodes[I]^.Index, DeleteLineFromText(Nodes[I]^.Index, n-1), smText, I=High(Nodes), I=High(Nodes), False);
+          if (c > 0) and (Lines[c] = Lines[c-1]) then Continue; // duplicated
+          SetSubtitleText(Nodes[I]^.Index, DeleteLineFromText(Nodes[I]^.Index, Lines[c]-1), smText, I=High(Nodes), I=High(Nodes), False);
         end;
     finally
       AVST.EndUpdate;
@@ -1225,8 +1300,9 @@ var
   FTime   : Integer;
   CurTime : Integer;
   CharDur : Integer;
-  Pos1    : Byte;
-  SumLen  : Byte;
+  Pos1    : Integer;
+  SumLen  : Integer;
+  VisLen  : Integer;
   s       : String;
 begin
   x      := Index;
@@ -1237,6 +1313,7 @@ begin
   case Effect of
     fxFlash:
     begin
+      if (Param1 + Param2) <= 0 then Exit; // would never end
       repeat
         Inc(x);
         CurTime := ITime + Param1;
@@ -1248,7 +1325,9 @@ begin
 
     fxTypewriter:
     begin
-      CharDur := Rnd((FTime - ITime) / UTF8Length(RemoveTSTags(Text)));
+      VisLen := UTF8Length(RemoveTSTags(Text));
+      if VisLen = 0 then Exit; // only tags or empty: nothing to type
+      CharDur := Rnd((FTime - ITime) / VisLen);
       SumLen  := UTF8Length(Text);
 
       Pos1 := 0;
@@ -1274,7 +1353,7 @@ begin
   end;
 end;
 
-//----------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
 {procedure VSTTextEffect(const AVST: TLazVirtualStringTree; const AEffect: TTextEffect; const AParam1, AParam2: Integer);
 var
@@ -1369,6 +1448,8 @@ begin
         totLen += GetTextLength(Subtitles.Text[x]);
     end;
 
+    if totLen <= 0 then Exit; // all texts empty, nothing to distribute
+
     prevTime := Subtitles[AVST.AbsoluteIndex(NodeArray[Low(NodeArray)])].InitialTime - gap;
 
     for i := Low(NodeArray) to High(NodeArray) do
@@ -1397,8 +1478,11 @@ procedure VSTSetPauses(const AVST: TLazVirtualStringTree; const Pause: Integer; 
 
   procedure SetPauseValue(const AIndex: Integer);
   var
-    IT2, FT1 : Integer;
+    IT2, FT1, d : Integer;
   begin
+    // the last entry has no next one (selection mode or a range up to Count-1)
+    if (AIndex < 0) or (AIndex+1 >= Subtitles.Count) then Exit;
+
     FT1 := Subtitles[AIndex].FinalTime;
     IT2 := Subtitles[AIndex+1].InitialTime;
 
@@ -1407,8 +1491,10 @@ procedure VSTSetPauses(const AVST: TLazVirtualStringTree; const Pause: Integer; 
         spmFirst  : SetSubtitleTime(AIndex, IT2-Pause, TAG_CONTROL_FINALTIME, False, False);
         spmSecond : SetSubtitleTime(AIndex+1, FT1+Pause, TAG_CONTROL_INITIALTIME, False, False);
         spmBoth   : begin
-                      SetSubtitleTime(AIndex, FT1-((IT2-FT1) div 2), TAG_CONTROL_FINALTIME, False, False);
-                      SetSubtitleTime(AIndex+1, Subtitles[AIndex].FinalTime + Pause, TAG_CONTROL_INITIALTIME, False, False);
+                      // split what is missing (not the existing gap) between both
+                      d := Pause - (IT2 - FT1);
+                      SetSubtitleTime(AIndex, FT1 - (d div 2), TAG_CONTROL_FINALTIME, False, False);
+                      SetSubtitleTime(AIndex+1, FT1 - (d div 2) + Pause, TAG_CONTROL_INITIALTIME, False, False);
                     end;
         spmCPS    : if Subtitles.TextCPS[AIndex+1, AppOptions.Conventions.CPSLineLenStrategy] < Subtitles.TextCPS[AIndex, AppOptions.Conventions.CPSLineLenStrategy] then
                       SetSubtitleTime(AIndex, IT2-Pause, TAG_CONTROL_FINALTIME, False, False)

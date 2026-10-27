@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit FABSubtitler;
@@ -98,36 +98,49 @@ end;
 
 function TUWFABSubtitler.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
 var
-  i, c        : Integer;
+  i           : Integer;
   InitialTime : Integer;
   FinalTime   : Integer;
   Text        : String;
+
+  function IsTimeLine(const S: String): Boolean;
+  begin
+    Result := TimeInFormat(Copy(S, 1, 11), 'hh:mm:ss:ff') and
+              TimeInFormat(Copy(S, 14, 11), 'hh:mm:ss:ff');
+  end;
+
 begin
   Result := False;
   try
     i := 0;
     while i < SubtitleFile.Count-1 do
     begin
-      InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11), False, FPS);
-      FinalTime   := StringToTime(Copy(SubtitleFile[i], 14, 11), False, FPS);
-
-      Inc(i);
-
-      Text := '';
-      while (i <= (SubtitleFile.Count-1)) and
-            (StringToTime(Copy(SubtitleFile[i], 1, 11)) = 0) and
-            (StringToTime(Copy(SubtitleFile[i], 14, 11)) = 0) do
+      // Antes cualquier línea se parseaba como tiempos, y las siguientes se
+      // tomaban como texto solo mientras StringToTime diera 0: un texto que
+      // empezara con dígitos ("24 horas después") se confundía con una nueva
+      // línea de tiempos y cortaba el subtítulo. Ahora con TimeInFormat.
+      if IsTimeLine(SubtitleFile[i]) then
       begin
-        if Text <> '' then
-          Text := Text + LineEnding + SubtitleFile[i]
-        else
-          Text := SubtitleFile[i];
-
+        InitialTime := StringToTime(Copy(SubtitleFile[i], 1, 11), False, FPS);
+        FinalTime   := StringToTime(Copy(SubtitleFile[i], 14, 11), False, FPS);
         Inc(i);
-      end;
+        Text := '';
 
-      if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
-        Subtitles.Add(InitialTime, FinalTime, Text, '');
+        while (i <= (SubtitleFile.Count-1)) and not IsTimeLine(SubtitleFile[i]) do
+        begin
+          if Text <> '' then
+            Text := Text + LineEnding + SubtitleFile[i]
+          else
+            Text := SubtitleFile[i];
+
+          Inc(i);
+        end;
+
+        if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
+          Subtitles.Add(InitialTime, FinalTime, Text, '');
+      end
+      else
+        Inc(i);
     end;
   finally
     Result := Subtitles.Count > 0;

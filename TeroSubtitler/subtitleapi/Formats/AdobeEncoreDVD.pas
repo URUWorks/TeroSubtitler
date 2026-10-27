@@ -12,7 +12,7 @@
  * implied. See the License for the specific language governing
  * rights and limitations under the License.
  *
- * Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ * Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit AdobeEncoreDVD;
@@ -22,8 +22,8 @@ unit AdobeEncoreDVD;
 interface
 
 uses
-  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Formats;
+  SysUtils, UWSubtitleAPI, UWSystem.TimeUtils, UWSystem.SysUtils,
+  UWSubtitleAPI.Formats;
 
 type
 
@@ -62,10 +62,11 @@ begin
   // Si no hay nada antes es válido (Encore estándar)
   if P = '' then Exit(True);
 
-  // Si contiene el metadato lo quitamos temporalmente
-  Idx := Pos('', P);
+  // Si contiene la marca BOM (U+FEFF) la quitamos. Antes Pos('', P) con
+  // cadena vacía: siempre 0, código muerto.
+  Idx := Pos(#$EF#$BB#$BF, P);
   if Idx > 0 then
-    P := Trim(Copy(P, Idx + 1, MaxInt));
+    P := Trim(Copy(P, Idx + 3, MaxInt));
 
   Result := (P = '') or IsInteger(P);
 end;

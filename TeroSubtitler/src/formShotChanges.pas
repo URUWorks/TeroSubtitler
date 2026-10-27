@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit formShotChanges;
@@ -89,6 +89,52 @@ const
   tcHHMMSSFF     = 4;
 
 {$R *.lfm}
+
+// -----------------------------------------------------------------------------
+
+{ Helpers }
+
+// -----------------------------------------------------------------------------
+
+// seconds with or without decimals, always with '.', whatever the system decimal separator
+function SecondsToMs(const AText: String; out AMs: Integer): Boolean;
+var
+  fs: TFormatSettings;
+  d: Double;
+begin
+  fs := DefaultFormatSettings;
+  fs.DecimalSeparator := '.';
+  fs.ThousandSeparator := #0;
+  Result := TryStrToFloat(Trim(AText), d, fs) and (d >= 0) and (d < MaxInt / 1000);
+  if Result then
+    AMs := Round(d * 1000)
+  else
+    AMs := 0;
+end;
+
+// -----------------------------------------------------------------------------
+
+function MsToSeconds(const AMs: Integer): String;
+var
+  fs: TFormatSettings;
+begin
+  fs := DefaultFormatSettings;
+  fs.DecimalSeparator := '.';
+  Result := FormatFloat('0.000', AMs / 1000, fs);
+end;
+
+// -----------------------------------------------------------------------------
+
+// slugs, stills, black, etc.: events without a real clip timecode
+function IsEDLEventWithoutTimecode(const AItem: PItem): Boolean;
+var
+  s: String;
+begin
+  s := AItem^.Comment.ToUpper;
+  Result := (AItem^.ReelName.ToUpper = 'BL') or (AItem^.ReelName.ToUpper = 'BLACK') or
+    (AItem^.ClipName.ToUpper = 'SLUG') or (s.Contains('IS A STILL')) or
+    (s.Contains('NO TIMECODE'));
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -207,7 +253,8 @@ begin
     for i := mmoTimes.Lines.Count-1 downto 0 do
     begin
       if (IsTimeCode(tcHHMMSSZZZ) and not TimeInFormat(mmoTimes.Lines[i], 'hh:mm:ss.zzz'))
-        or (not IsTimeCode(tcHHMMSSZZZ) and not IsInteger(mmoTimes.Lines[i])) then
+        or (IsTimeCode(tcSeconds) and not SecondsToMs(mmoTimes.Lines[i], v))
+        or (not IsTimeCode(tcHHMMSSZZZ) and not IsTimeCode(tcSeconds) and not IsInteger(mmoTimes.Lines[i])) then
         mmoTimes.Lines.Delete(i);
     end;
 
@@ -219,7 +266,7 @@ begin
         if IsTimeCode(tcFrames) then
           v := FramesToTime(StrToIntDef(mmoTimes.Lines[i], 0), GetFPS)
         else if IsTimeCode(tcSeconds) then
-          v := StrToIntDef(mmoTimes.Lines[i], 0) * 1000
+          SecondsToMs(mmoTimes.Lines[i], v)
         else if IsTimeCode(tcMilliseconds) then
           v := StrToIntDef(mmoTimes.Lines[i], 0)
         else if IsTimeCode(tcHHMMSSFF) then
@@ -263,6 +310,18 @@ var
   i   : Integer;
   edl : TEDL;
   ATracks: TStrings = NIL;
+  Tracks, TrackNames, Clips: TStringList;
+  Selected, s: String;
+  c, x, h, Base: Integer;
+  UseSource: Boolean;
+  Times: TIntegerDynArray;
+
+  procedure AddTime(const AValue: Integer);
+  begin
+    SetLength(Times, Length(Times)+1);
+    Times[High(Times)] := AValue;
+  end;
+
 begin
   with TOpenDialog.Create(Self) do
   try
@@ -283,16 +342,122 @@ begin
           mmoTimes.Lines.BeginUpdate;
           try
             mmoTimes.Clear;
+            // edl tracks (V, A, A2, AA, AA/V, B...), video ones first. With
+            // more than one, ask which to use (e.g. Final Cut Pro 7 can export
+            // all the cuts in the audio track)
+            Selected := '';
+            TrackNames := TStringList.Create;
+            Tracks := TStringList.Create;
+            try
+              for x := 0 to 1 do
+                for i := 0 to edl.Items.Count-1 do
+                  with edl.Items[i]^ do
+                    if not IsEDLEventWithoutTimecode(edl.Items[i]) and
+                      (TrackName <> '') and (TrackNames.IndexOf(TrackName) < 0) and
+                      ((x = 0) = ((Pos('V', TrackName) > 0) or (TrackName = 'B'))) then
+                      TrackNames.Add(TrackName);
+
+              if TrackNames.Count = 1 then
+                Selected := TrackNames[0]
+              else if TrackNames.Count > 1 then
+              begin
+                for x := 0 to TrackNames.Count-1 do
+                begin
+                  c := 0;
+                  for i := 0 to edl.Items.Count-1 do
+                    if (edl.Items[i]^.TrackName = TrackNames[x]) and
+                      not IsEDLEventWithoutTimecode(edl.Items[i]) then Inc(c);
+                  Tracks.Add(Format('%s (%d)', [TrackNames[x], c]));
+                end;
+                x := formCustomSelectDlg.ExecuteDialog(lngMultipleTracksDetected, lngSelectTrackToUse, Tracks);
+                if (x < 0) or (x >= TrackNames.Count) then x := 0;
+                Selected := TrackNames[x];
+              end;
+            finally
+              Tracks.Free;
+              TrackNames.Free;
+            end;
+
+            // all the events from the same clip (the video is that file): use
+            // the clip (source) times. From several clips (the video is the
+            // edited program): use the sequence (record) times
+            Clips := TStringList.Create;
+            try
+              Clips.Sorted := True;
+              Clips.Duplicates := dupIgnore;
+              for i := 0 to edl.Items.Count-1 do
+                with edl.Items[i]^ do
+                  if ((Selected = '') or (TrackName = Selected)) and not IsEDLEventWithoutTimecode(edl.Items[i]) then
+                    if ClipName <> '' then
+                      Clips.Add(ClipName.ToUpper)
+                    else
+                      Clips.Add(ReelName.ToUpper);
+              UseSource := Clips.Count <= 1;
+            finally
+              Clips.Free;
+            end;
+
+            // every edit point (in and out)
+            Times := NIL;
             for i := 0 to edl.Items.Count-1 do
               with edl.Items[i]^ do
-                if TypeOfTrack <> totAA then
-                  mmoTimes.Lines.Add(edl.Items[i]^.ClipOut.ToString);
+                if ((Selected = '') or (TrackName = Selected)) and not IsEDLEventWithoutTimecode(edl.Items[i]) then
+                begin
+                  if UseSource then
+                  begin
+                    AddTime(ClipIn);
+                    AddTime(ClipOut);
+                  end
+                  else
+                  begin
+                    AddTime(TapeIn);
+                    AddTime(TapeOut);
+                  end;
+                end;
+
+            if Length(Times) > 0 then
+            begin
+              // the timecodes usually start at 01:00:00:00: subtract the
+              // hour of the first one
+              c := MaxInt;
+              for i := 0 to High(Times) do
+                if Times[i] < c then c := Times[i];
+
+              Base := 0;
+              for h := 23 downto 1 do
+                if SMPTEStringToMS(Format('%.2d:00:00:00', [h]), GetFPS, edl.Header.FCM = fcmDROPFRAME) <= c then
+                begin
+                  Base := SMPTEStringToMS(Format('%.2d:00:00:00', [h]), GetFPS, edl.Header.FCM = fcmDROPFRAME);
+                  Break;
+                end;
+
+              // subtract and sort (insertion, the edl is almost sorted)
+              for i := 0 to High(Times) do
+              begin
+                x := Times[i] - Base;
+                c := i - 1;
+                while (c >= 0) and (Times[c] > x) do
+                begin
+                  Times[c+1] := Times[c];
+                  Dec(c);
+                end;
+                Times[c+1] := x;
+              end;
+
+              for i := 0 to High(Times) do
+                // skip the start of the video and repeated cuts (same cut in
+                // several events/tracks)
+                if (Times[i] > 0) and ((i = 0) or (Times[i] <> Times[i-1])) then
+                  mmoTimes.Lines.Add(Times[i].ToString);
+            end;
           finally
             mmoTimes.Lines.EndUpdate;
           end;
           cboTimeCodeImport.ItemIndex := tcMilliseconds;
         finally
-          FSMPTE := edl.IsSMPTE;
+          // the edl times are already real times (SMPTEStringToMS uses the
+          // real fps), they don't need the 1.001 correction when applying
+          FSMPTE := False;
           edl.Free;
           if Assigned(ATracks) then ATracks.Free;
         end;
@@ -306,6 +471,9 @@ begin
 
           if StrToIntDef(mmoTimes.Lines[0], 0) > 0 then
             cboTimeCodeImport.ItemIndex := tcMilliseconds
+          else if (Pos('.', mmoTimes.Lines[0]) > 0) and (Pos(':', mmoTimes.Lines[0]) = 0) and
+            SecondsToMs(mmoTimes.Lines[0], i) then
+            cboTimeCodeImport.ItemIndex := tcSeconds
           else if TimeInFormat(mmoTimes.Lines[0], 'hh:mm:ss.zzz') then
             cboTimeCodeImport.ItemIndex := tcHHMMSSZZZ;
         end;
@@ -359,7 +527,7 @@ begin
               if IsTimeCode(tcFrames) then
                 x := FramesToTime(StrToIntDef(mmoTimes.Lines[i], 0), GetFPS)
               else if IsTimeCode(tcSeconds) then
-                x := StrToIntDef(mmoTimes.Lines[i], 0) * 1000
+                SecondsToMs(mmoTimes.Lines[i], x)
               else if IsTimeCode(tcMilliseconds) then
                 x := StrToIntDef(mmoTimes.Lines[i], 0)
               else if IsTimeCode(tcHHMMSSFF) then
@@ -370,7 +538,7 @@ begin
               if IsTimeCodeOut(tcFrames) then
                 s := TimeToFrames(x, GetFPS).ToString
               else if IsTimeCodeOut(tcSeconds) then
-                s := (x div 1000).ToString
+                s := MsToSeconds(x)
               else if IsTimeCodeOut(tcMilliseconds) then
                 s := x.ToString
               else if IsTimeCodeOut(tcHHMMSSFF) then

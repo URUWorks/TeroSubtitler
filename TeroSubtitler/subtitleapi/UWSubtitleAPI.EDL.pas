@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2023-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit UWSubtitleAPI.EDL;
@@ -46,6 +46,7 @@ type
     Index       : Cardinal;     // line event number
     ReelName    : String;       // reel name 7 digit abbreviation
     TypeOfTrack : TTypeOfTrack; // AA/V, AA, V
+    TrackName   : String;       // track as written in the edl (V, A, A2, AA/V, B...)
     TypeOfCut   : TTypeOfCut;   // C
     ClipIn,                     // clip in
     ClipOut,                    // clip out
@@ -257,6 +258,7 @@ begin
                 Index       := i+1;
                 ReelName    := '';
                 TypeOfTrack := totV;
+                TrackName   := '';
                 TypeOfCut   := tocC;
                 ClipName    := '';
                 Comment     := '';
@@ -306,6 +308,7 @@ begin
                       Index       := i+1;
                       ReelName    := '';
                       TypeOfTrack := totV;
+                      TrackName   := '';
                       TypeOfCut   := tocC;
                       ClipName    := '';
                       Comment     := '';
@@ -354,6 +357,23 @@ begin
       for i := 0 to SL.Count-1 do
         with Item do
         begin
+          // "* FROM CLIP NAME: ...", "* FROM CLIP IS A STILL"... are notes of
+          // the previous event
+          s := Trim(SL[i]);
+          if s.StartsWith('*') then
+          begin
+            if FList.Count > 0 then
+              with FList.Last^ do
+              begin
+                s := Trim(Copy(s, 2, Length(s)));
+                if Comment <> '' then Comment := Comment + LineEnding;
+                Comment := Comment + s;
+                if s.ToUpper.StartsWith('FROM CLIP NAME:') then
+                  ClipName := Trim(Copy(s, Length('FROM CLIP NAME:')+1, Length(s)));
+              end;
+            Continue;
+          end;
+
           s  := SL[i];
           sx := CopyAndDel(s, ' ');
           s  := s.Trim;
@@ -361,12 +381,17 @@ begin
           Index := StrToIntDef(sx, 0);
           if Index = 0 then Continue;
 
+          ReelName := '';
+          ClipName := '';
+          Comment  := '';
+
           if sx.Length = 6 then // 000001
           begin
             ReelName := CopyAndDel(s, '|');
             ClipName := CopyAndDel(s, ' ');
 
             sx := CopyAndDel(s, ' ');
+            TrackName := sx;
             if sx = 'V' then
               TypeOfTrack := totV
             else if sx.StartsWith('A') then
@@ -392,10 +417,12 @@ begin
           else
           begin // 001
             sx := CopyAndDel(s, ' '); // AX
+            ReelName := sx;
             s := s.Trim;
 
             sx := CopyAndDel(s, ' '); // AA...
             s := s.Trim;
+            TrackName := sx;
             if sx = 'V' then
               TypeOfTrack := totV
             else if sx = 'AA' then
@@ -616,6 +643,7 @@ begin
     Index       := AItem.Index;
     ReelName    := AItem.ReelName;
     TypeOfTrack := AItem.TypeOfTrack;
+    TrackName   := AItem.TrackName;
     TypeOfCut   := AItem.TypeOfCut;
     ClipIn      := AItem.ClipIn;
     ClipOut     := AItem.ClipOut;
@@ -638,6 +666,7 @@ begin
     Index       := AIndex;
     ReelName    := AReelName;
     TypeOfTrack := ATypeOfTrack;
+    TrackName   := totToStr(ATypeOfTrack);
     TypeOfCut   := ATypeOfCut;
     ClipIn      := AClipIn;
     ClipOut     := AClipOut;

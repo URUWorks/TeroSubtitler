@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit IAuthor;
@@ -94,6 +94,8 @@ var
   InitialTime : Integer;
   FinalTime   : Integer;
   DecimalSep  : Char;
+  SecsStart, SecsEnd: Double;
+  EndStr      : String;
   Text        : String;
 begin
   Result := False;
@@ -121,24 +123,45 @@ begin
       if (Pos('BMPFILE:', SubtitleFile[i]) = 1) then
       begin
         Text := Trim(Copy(SubtitleFile[i], 9));
-        if (Pos('STARTTIME:', SubtitleFile[i+1]) = 1) then
+        if (i+1 < SubtitleFile.Count) and (Pos('STARTTIME:', SubtitleFile[i+1]) = 1) then
         begin
-          InitialTime := Round((StrToFloat(Trim(Copy(SubtitleFile[i+1], 11, Length(SubtitleFile[i+1]))))+(256*c))*1000);
-
-          if InitialTime > u then
-            u := InitialTime
-          else
+          // SaveSubtitle escribe el tiempo módulo 256 s, así que al cargar hay
+          // que sumar 256*c segundos (c = veces que el tiempo "envolvió").
+          // Antes: (1) con '>' dos cues en el MISMO instante contaban como
+          // envoltura falsa, (2) el cue que dispara la envoltura quedaba 256 s
+          // corto (se calculaba con el c viejo) y (3) el fin se leía con
+          // Copy(s, 6, Pos(' ', s)), que con 'TIME: 12.34 DISABLE_OGT' incluía
+          // el resto de la línea y StrToFloat lanzaba excepción.
+          SecsStart := StrToFloatDef(Trim(Copy(SubtitleFile[i+1], 11, MaxInt)), -1);
+          if SecsStart >= 0 then
           begin
+            InitialTime := Round((SecsStart + 256.0 * c) * 1000);
+            if InitialTime < u then
+            begin
+              Inc(c);
+              InitialTime := Round((SecsStart + 256.0 * c) * 1000);
+            end;
             u := InitialTime;
-            Inc(c);
-          end;
-          if (Pos('TIME:', SubtitleFile[i+2]) = 1) then
-            FinalTime := Round((StrToFloat(Trim(Copy(SubtitleFile[i+2], 6, Pos(' ', SubtitleFile[i+2]))))+(256*c))*1000)
-          else
-            FinalTime := InitialTime + 2000;
 
-          if (InitialTime >= 0) and (FinalTime > 0) then
-            Subtitles.Add(InitialTime, FinalTime, Text, '');
+            FinalTime := InitialTime + 2000;
+            if (i+2 < SubtitleFile.Count) and (Pos('TIME:', SubtitleFile[i+2]) = 1) then
+            begin
+              EndStr := Trim(Copy(SubtitleFile[i+2], 6, MaxInt));
+              if Pos(' ', EndStr) > 0 then
+                EndStr := Copy(EndStr, 1, Pos(' ', EndStr) - 1);
+              SecsEnd := StrToFloatDef(EndStr, -1);
+              if SecsEnd >= 0 then
+              begin
+                FinalTime := Round((SecsEnd + 256.0 * c) * 1000);
+                // el final puede haber envuelto justo después del inicio
+                if FinalTime <= InitialTime then
+                  FinalTime := Round((SecsEnd + 256.0 * (c + 1)) * 1000);
+              end;
+            end;
+
+            if (InitialTime >= 0) and (FinalTime > 0) then
+              Subtitles.Add(InitialTime, FinalTime, Text, '');
+          end;
         end;
       end;
     end;
@@ -156,6 +179,7 @@ var
   i, c       : Integer;
   tmpNum     : String;
   DecimalSep : Char;
+  Txt        : String;
 begin
   Result  := False;
 
@@ -168,7 +192,9 @@ begin
 
   for i := FromItem to ToItem do
   begin
-    Subtitles.Text[i] := RemoveTSTags(Subtitles.Text[i]);
+    // Antes: Subtitles.Text[i] := ... — se modificaba el documento ABIERTO al
+    // guardar (sin undo) y además se escribía el texto con tags.
+    Txt := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
 
     sTime := Subtitles.InitialTime[i] / 1000;
     if sTime > (256*c) Then inc(c);
@@ -181,7 +207,7 @@ begin
     if Length(Copy(tmpNum,Pos('.',tmpNum)+1,Length(tmpNum))) < 2 then
       tmpNum := tmpNum + '0';
 
-    StringList.Add('BMPFILE: ' + ReplaceEnters(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), LineEnding, ' '));
+    StringList.Add('BMPFILE: ' + ReplaceEnters(Txt, LineEnding, ' '));
     StringList.Add('');
     StringList.Add('STARTTIME: ' + tmpNum);
     StringList.Add('');

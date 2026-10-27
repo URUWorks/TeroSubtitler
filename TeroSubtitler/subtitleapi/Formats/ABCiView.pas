@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit ABCiView;
@@ -115,6 +115,9 @@ begin
         repeat
           if Node.HasAttributes then
           begin
+            // reset en cada <title>: uno sin start/end heredaba el tiempo del anterior
+            InitialTime := -1;
+            FinalTime   := -1;
             if Node.Attributes.GetNamedItem('start') <> NIL then
               InitialTime := StringToTime(Node.Attributes.GetNamedItem('start').NodeValue);
             if Node.Attributes.GetNamedItem('end') <> NIL then

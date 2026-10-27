@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit DVDSubtitle;
@@ -114,8 +114,14 @@ begin
         c := 1;
         while (i+c < (SubtitleFile.Count-1)) and (Pos('{T ', SubtitleFile[i+c]) = 0) do
           Inc(c);
-        FinalTime := StringToTime(Copy(SubtitleFile[i+c], 4, 11));
-        if FinalTime = -1 then FinalTime := InitialTime + 2000;
+        // Antes se parseaba SubtitleFile[i+c] sin validar que fuera una línea
+        // '{T ...': sin marcador de fin para el último cue, StringToTime('')
+        // daba 0 (no -1), el fallback nunca se activaba y el cue se descartaba.
+        FinalTime := -1;
+        if (Pos('{T ', SubtitleFile[i+c]) = 1) and
+           TimeInFormat(Copy(SubtitleFile[i+c], 4, 11), 'hh:mm:ss:zz') then
+          FinalTime := StringToTime(Copy(SubtitleFile[i+c], 4, 11));
+        if FinalTime <= InitialTime then FinalTime := InitialTime + 2000;
 
       if (InitialTime >= 0) and (FinalTime > 0) and not Text.IsEmpty then
         Subtitles.Add(InitialTime, FinalTime, Text, '');

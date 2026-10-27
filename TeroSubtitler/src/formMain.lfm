@@ -16,7 +16,7 @@ object frmMain: TfrmMain
   ShowHint = True
   SnapOptions.SnapToMonitor = True
   SnapOptions.SnapToForms = True
-  LCLVersion = '4.8.0.0'
+  LCLVersion = '5.0.1.0'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -2253,6 +2253,18 @@ object frmMain: TfrmMain
         object MenuItem140: TMenuItem
           Action = actTranslationMemoryList
         end
+        object mnuToolsTMAddAll: TMenuItem
+          Action = actTranslationMemoryAddAll
+        end
+        object mnuToolsTMSep: TMenuItem
+          Caption = '-'
+        end
+        object mnuToolsTMSaveCopy: TMenuItem
+          Action = actTranslationMemorySaveCopy
+        end
+        object mnuToolsTMOpenFolder: TMenuItem
+          Action = actTranslationMemoryOpenFolder
+        end
       end
       object mnuToolsTerminology: TMenuItem
         Caption = 'Terminology'
@@ -4019,6 +4031,23 @@ object frmMain: TfrmMain
       Category = 'Tools'
       Caption = 'List...'
       OnExecute = actTranslationMemoryListExecute
+    end
+    object actTranslationMemoryAddAll: TAction
+      Tag = 2
+      Category = 'Tools'
+      Caption = 'Add translated lines to memory'
+      OnExecute = actTranslationMemoryAddAllExecute
+    end
+    object actTranslationMemorySaveCopy: TAction
+      Tag = 2
+      Category = 'Tools'
+      Caption = 'Save a copy...'
+      OnExecute = actTranslationMemorySaveCopyExecute
+    end
+    object actTranslationMemoryOpenFolder: TAction
+      Category = 'Tools'
+      Caption = 'Open translation memories folder'
+      OnExecute = actTranslationMemoryOpenFolderExecute
     end
     object actTM1: TAction
       Tag = 1

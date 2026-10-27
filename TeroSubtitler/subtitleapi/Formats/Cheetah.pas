@@ -1,18 +1,18 @@
 {*
- * URUWorks Subtitle API
+ *  URUWorks Subtitle API
  *
- * The contents of this file are used with permission, subject to
- * the Mozilla Public License Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/2.0.html
+ *  The contents of this file are used with permission, subject to
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
- * Software distributed under the License is distributed on an
- * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
- * implied. See the License for the specific language governing
- * rights and limitations under the License.
+ *  Software distributed under the License is distributed on an
+ *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ *  implied. See the License for the specific language governing
+ *  rights and limitations under the License.
  *
- * Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit Cheetah;
@@ -98,8 +98,26 @@ var
   i: Integer;
   InitialTime, FinalTime: Integer;
   Text, Line, STime: String;
+  NoEnd: array of Boolean; // cues sin '*E' (su fin se deduce del siguiente)
+
+  procedure AddCue;
+  var
+    x: Integer;
+    Missing: Boolean;
+  begin
+    Missing := FinalTime < 0;
+    if Missing then FinalTime := InitialTime + 3000;
+    x := Subtitles.Add(InitialTime, FinalTime, TrimRight(Text), '');
+    if x >= 0 then
+    begin
+      if x >= Length(NoEnd) then SetLength(NoEnd, x + 1);
+      NoEnd[x] := Missing;
+    end;
+  end;
+
 begin
   Result := False;
+  SetLength(NoEnd, 0);
   InitialTime := -1;
   FinalTime   := -1;
   Text        := '';
@@ -114,10 +132,7 @@ begin
       if Pos('** ', Line) = 1 then
       begin
         if (InitialTime >= 0) and (Text <> '') then
-        begin
-          if FinalTime = -1 then FinalTime := InitialTime + 3000;
-          Subtitles.Add(InitialTime, FinalTime, TrimRight(Text), '');
-        end;
+          AddCue;
 
         InitialTime := -1;
         FinalTime   := -1;
@@ -152,10 +167,7 @@ begin
 
     // último bloque
     if (InitialTime >= 0) and (Text <> '') then
-    begin
-      if FinalTime = -1 then FinalTime := InitialTime + 3000;
-      Subtitles.Add(InitialTime, FinalTime, TrimRight(Text), '');
-    end;
+      AddCue;
 
     // Si algún bloque carecía de etiqueta *E, recalculamos su tiempo de fin real
     // basándonos en el inicio del siguiente bloque (común en subtitulado Broadcast).
@@ -165,7 +177,9 @@ begin
         Subtitles.Text[i] := Subtitles.Text[i] + '{\i0}';
 
       // Arreglo de tiempos finales perdidos
-      if (i < Subtitles.Count - 1) and (Subtitles.FinalTime[i] = Subtitles.InitialTime[i] + 3000) then
+      // Antes se adivinaba por "duración = 3000 ms", lo que también recortaba
+      // cues que SÍ traían su '*E'; ahora solo los que no lo tenían.
+      if (i < Subtitles.Count - 1) and (i < Length(NoEnd)) and NoEnd[i] then
       begin
         // Ajustamos para que desaparezca justo 100ms antes de que empiece el siguiente
         if Subtitles.FinalTime[i] > Subtitles.InitialTime[i+1] then
@@ -198,14 +212,12 @@ begin
   begin
     Text := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
 
-    // Reconvertimos las etiquetas internas de cursiva al estándar Cheetah
-    if Pos('{\i1}', LowerCase(Text)) > 0 then
-    begin
-      CleanText := RemoveTSTags(Text);
-      CleanText := '\AI\' + CleanText;
-    end
-    else
-      CleanText := RemoveTSTags(Text);
+    // Reconvertimos las etiquetas internas de cursiva al estándar Cheetah en su
+    // lugar (antes solo un '\AI\' al principio: se perdía dónde terminaba)
+    CleanText := ReplaceString(Text, '{\i1}', '\AI\', True, True);
+    CleanText := ReplaceString(CleanText, '{\i0}', '\AN\', True, True);
+    // Luego eliminamos cualquier otra etiqueta que no sea de cursiva
+    CleanText := RemoveTSTags(CleanText);
 
     // Cheetah exige la \E al final del texto físico
     CleanText := CleanText + '\E';

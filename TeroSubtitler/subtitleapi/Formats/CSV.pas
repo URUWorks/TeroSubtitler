@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit CSV;
@@ -136,7 +136,9 @@ begin
           begin
             iFT := x;
           end
-          else if (iIT > 0) and (iFT > 0) and (iT < 0) then
+          // Antes (iIT > 0) and (iFT > 0): un archivo SIN columna 'No.' (inicio
+          // en la columna 0) nunca encontraba la columna de texto.
+          else if (iIT >= 0) and (iFT >= 0) and (iT < 0) then
           begin
             iT := x;
           end;
@@ -145,7 +147,8 @@ begin
         if (iIT >= 0) and (iFT >= 0) and (iT >= 0) then Break;
       end;
 
-      if (iIT < 0) and (iFT < 0) and (iT < 0) then Exit; // necessary indices were not found
+      // Antes 'and': bastaba con UNA columna y con iT = -1 se leía Cells[-1, y]
+      if (iIT < 0) or (iFT < 0) or (iT < 0) then Exit; // necessary indices were not found
 
       for y := 0 to CSVDoc.RowCount-1 do
       begin
@@ -189,7 +192,8 @@ begin
       [Count,
        TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS), //iff(Subtitles.TimeBase = stbMedia, TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz'), TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss:ff', FPS)),
        TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS), //iff(Subtitles.TimeBase = stbMedia, TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz'), TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss:ff', FPS)),
-       TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]))]));
+       // Antes: las comillas no se duplicaban y rompían la columna
+       StringReplace(TSTagsToHTML(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i])), '"', '""', [rfReplaceAll])]));
     Inc(Count);
   end;
 

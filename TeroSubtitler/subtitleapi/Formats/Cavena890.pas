@@ -1,18 +1,18 @@
 {*
- * URUWorks Subtitle API
+ *  URUWorks Subtitle API
  *
- * The contents of this file are used with permission, subject to
- * the Mozilla Public License Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/2.0.html
+ *  The contents of this file are used with permission, subject to
+ *  the Mozilla Public License Version 2.0 (the "License"); you may
+ *  not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.mozilla.org/MPL/2.0.html
  *
- * Software distributed under the License is distributed on an
- * "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
- * implied. See the License for the specific language governing
- * rights and limitations under the License.
+ *  Software distributed under the License is distributed on an
+ *  "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ *  implied. See the License for the specific language governing
+ *  rights and limitations under the License.
  *
- * Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit Cavena890;
@@ -45,7 +45,7 @@ type
 implementation
 
 uses
-  UWSubtitleAPI.ExtraInfo, UWSystem.StrUtils, UWSystem.SysUtils,
+  UWSubtitleAPI.ExtraInfo, UWSystem.SysUtils,
   Cavena890.Types;
 
 const
@@ -59,16 +59,38 @@ const
 
 // -----------------------------------------------------------------------------
 
+function IsKnownLangID(const LangID: Integer): Boolean;
+var
+  k: Integer;
+begin
+  Result := False;
+  for k := 0 to High(LanguageId) do
+    if LanguageId[k].Hex = LangID then Exit(True);
+end;
+
+// -----------------------------------------------------------------------------
+
+// El llamador debe liberar el TEncoding devuelto.
+// Antes el case usaba numeros decimales (45..47, 34, 36, 39, 40, 41) que no
+// corresponden a los LangId* de este formato ($07, $28, $56...): p.ej. Sueco
+// ($28 = 40) se decodificaba como GRIEGO (1253).
 function GetEncodingFromLangID(LangID: Integer): TEncoding;
+var
+  CP: Integer;
 begin
   case LangID of
-    45,46,47: Result := TEncoding.GetEncoding(1252); // nórdicos
-    34:       Result := TEncoding.GetEncoding(1250); // checo
-    36:       Result := TEncoding.GetEncoding(1250); // polaco
-    39:       Result := TEncoding.GetEncoding(1251); // ruso
-    40:       Result := TEncoding.GetEncoding(1253); // griego
-    41:       Result := TEncoding.GetEncoding(1254); // turco
+    LangIdRussian, LangIdBulgarian: CP := 1251;
+    LangIdHebrew:                   CP := 1255;
+    LangIdArabic:                   CP := 1256;
+    LangIdChineseTraditional:       CP := 950;
+    LangIdChineseSimplified:        CP := 936;
   else
+    CP := 1252; // ingles, danes, sueco, espanol, frances, italiano, portugues...
+  end;
+
+  try
+    Result := TEncoding.GetEncoding(CP);
+  except
     Result := TEncoding.GetEncoding(1252);
   end;
 end;
@@ -130,15 +152,30 @@ var
   LocalBytes : TBytes;
   I          : Integer;
   SChar      : String;
+  SafeLen    : Integer;
 begin
-  SetLength(LocalBytes, TextLength);
-  Move(Bytes[Start], LocalBytes[0], TextLength);
+  // Defensa en profundidad: esta función no tiene forma de saber si el
+  // llamador calculó bien Start/TextLength contra el tamaño real de
+  // Bytes (ver el fix del loop en LoadSubtitle, que SÍ tenía este
+  // problema). Clampeamos acá también para que Move() nunca lea fuera
+  // de rango, sin importar quién la llame.
+  SafeLen := TextLength;
+  if (Start < 0) or (Start >= Length(Bytes)) then
+    SafeLen := 0
+  else if Start + SafeLen > Length(Bytes) then
+    SafeLen := Length(Bytes) - Start;
+
+  SetLength(LocalBytes, SafeLen);
+  if SafeLen > 0 then
+    Move(Bytes[Start], LocalBytes[0], SafeLen);
 
   I := 0;
-  while I < TextLength do
+  // SafeLen (no TextLength): LocalBytes puede haber quedado más chico
+  // que TextLength si el clamp de arriba recortó por seguridad.
+  while I < SafeLen do
   begin
     // Buscar secuencias UTF-8 rotas exportadas incorrectamente por "otros" programas
-    if (I < TextLength - 2) and (LocalBytes[I] = $E2) and (LocalBytes[I+1] = $80) then
+    if (I < SafeLen - 2) and (LocalBytes[I] = $E2) and (LocalBytes[I+1] = $80) then
     begin
       case LocalBytes[I+2] of
         $98, $99, $B2, $B3:
@@ -180,7 +217,7 @@ begin
   if (LangID = LangIdRussian) or (LangID = LangIdHebrew) then
   begin
     Result := '';
-    for I := 0 to TextLength - 1 do
+    for I := 0 to SafeLen - 1 do
     begin
       if LocalBytes[I] = $00 then Continue;
       SChar := MapSpecialLang(LocalBytes[I], LangID);
@@ -289,24 +326,19 @@ begin
 
   SetLength(BChar, 0);
   SetLength(LocalBytes, 0);
-
-  SetLength(BChar, 0);
-  SetLength(LocalBytes, 0);
+  Encoding.Free; // GetEncodingFromLangID crea una instancia por llamada (antes se fugaba 2 por subtitulo)
 end;
 
 // -----------------------------------------------------------------------------
 
+// Solo extrae la alineacion ({\anX}) y quita esas marcas. El resto de tags se
+// convierte a bytes en GetTextAsBytes (antes se pasaba por TEncoding.Default:
+// en Linux/macOS (UTF-8) los codigos 80h-9Fh daban U+FFFD y se escribia EFh).
 function EncodeTags(const Text: String; var AlignByte: Byte): String;
-var
-  Encoding: TEncoding;
-  BChar   : TBytes;
 begin
   Result := Text;
   AlignByte := $50; // Por defecto: Inferior Izquierdo / Centro
-  Encoding := TEncoding.Default;
-  SetLength(BChar, 1);
 
-  // Mapeo Alineación ASS {\anX} -> Cavena Alignment
   if Result.Contains('{\an1}') then AlignByte := $50 else
   if Result.Contains('{\an2}') then AlignByte := $51 else
   if Result.Contains('{\an3}') then AlignByte := $52 else
@@ -317,27 +349,9 @@ begin
   if Result.Contains('{\an8}') then AlignByte := $59 else
   if Result.Contains('{\an9}') then AlignByte := $5A;
 
-  // Limpiar etiquetas de alineación
   Result := Result.Replace('{\an1}','').Replace('{\an2}','').Replace('{\an3}','')
                   .Replace('{\an4}','').Replace('{\an5}','').Replace('{\an6}','')
                   .Replace('{\an7}','').Replace('{\an8}','').Replace('{\an9}','');
-
-  // Reemplazos Inversos
-  BChar[0] := $88; Result := Result.Replace('{\i1}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $98; Result := Result.Replace('{\i0}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $1C; Result := Result.Replace('{\be1}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $1D; Result := Result.Replace('{\be0}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $81; Result := Result.Replace('{\c&H0000FF&}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $82; Result := Result.Replace('{\c&H00FF00&}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $83; Result := Result.Replace('{\c&H00FFFF&}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $84; Result := Result.Replace('{\c&HFF0000&}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $85; Result := Result.Replace('{\c&HFF00FF&}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $86; Result := Result.Replace('{\c&HFFFF00&}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $87; Result := Result.Replace('{\c&HFFFFFF&}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $89; Result := Result.Replace('{\flash1}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-  BChar[0] := $8A; Result := Result.Replace('{\flash0}', Encoding.GetString(BChar), [rfReplaceAll, rfIgnoreCase]);
-
-  SetLength(BChar, 0);
 end;
 
 // -----------------------------------------------------------------------------
@@ -361,17 +375,25 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function GetTextAsBytes(const Text: String; const LangID: Integer): TBytes;
+function GetTextAsBytes(const Text: String; const LangID: Integer; const Enc: TEncoding): TBytes;
 var
-  Idx, I, K  : Integer;
-  CleanText  : String;
-  Found      : Boolean;
-  Encoding   : TEncoding;
-  Current    : String;
+  Idx, I, K, CPLen, TagEnd: Integer;
+  CleanText, Current, Tag: String;
+  Found, IsCJK: Boolean;
+  Chunk: TBytes;
+  B: Byte;
+
+  procedure Put(const V: Byte);
+  begin
+    Result[Idx] := V;
+    Inc(Idx);
+  end;
+
 begin
   SetLength(Result, CAVENA_TEXT_LEN);
+  IsCJK := (LangID = LangIdChineseTraditional) or (LangID = LangIdChineseSimplified);
 
-  if (LangID = LangIdChineseTraditional) or (LangID = LangIdChineseSimplified) then
+  if IsCJK then
     FillChar(Result[0], CAVENA_TEXT_LEN, $00)
   else
     FillChar(Result[0], CAVENA_TEXT_LEN, $7F);
@@ -381,62 +403,99 @@ begin
   CleanText := CleanText.Replace('“', '"').Replace('”', '"');
   CleanText := CleanText.Replace('—', '-').Replace('–', '-');
   CleanText := CleanText.Replace('…', '...');
+  CleanText := CleanText.Replace(LineEnding, ' ').Replace(#10, ' ').Replace(#13, '');
 
-  Encoding := TEncoding.Default;
   Idx := 0;
-
-  for I := 0 to CleanText.Length - 1 do
+  I := 1;
+  while (I <= Length(CleanText)) and (Idx < CAVENA_TEXT_LEN - 1) do
   begin
-    if Idx >= (CAVENA_TEXT_LEN - 1) then Break;
-    Current := CleanText.Substring(I, 1);
+    // Tags {\...}: los conocidos pasan a su byte de control, el resto se descarta
+    if (CleanText[I] = '{') and (I < Length(CleanText)) and (CleanText[I + 1] = '\') then
+    begin
+      TagEnd := Pos('}', CleanText, I);
+      if TagEnd = 0 then TagEnd := Length(CleanText);
+      Tag := LowerCase(Copy(CleanText, I, TagEnd - I + 1));
+      B := 0;
+      if Tag = '{\i1}' then B := $88
+      else if Tag = '{\i0}' then B := $98
+      else if Tag = '{\be1}' then B := $1C
+      else if Tag = '{\be0}' then B := $1D
+      else if Tag = '{\c&h0000ff&}' then B := $81
+      else if Tag = '{\c&h00ff00&}' then B := $82
+      else if Tag = '{\c&h00ffff&}' then B := $83
+      else if Tag = '{\c&hff0000&}' then B := $84
+      else if Tag = '{\c&hff00ff&}' then B := $85
+      else if Tag = '{\c&hffff00&}' then B := $86
+      else if Tag = '{\c&hffffff&}' then B := $87
+      else if Tag = '{\flash1}' then B := $89
+      else if Tag = '{\flash0}' then B := $8A;
+      if B <> 0 then Put(B);
+      I := TagEnd + 1;
+      Continue;
+    end;
+
+    // un code point UTF-8 completo (antes Substring(I,1) partia los multibyte)
+    case Byte(CleanText[I]) of
+      $C0..$DF: CPLen := 2;
+      $E0..$EF: CPLen := 3;
+      $F0..$F7: CPLen := 4;
+    else
+      CPLen := 1;
+    end;
+    if I + CPLen - 1 > Length(CleanText) then CPLen := Length(CleanText) - I + 1;
+    Current := Copy(CleanText, I, CPLen);
+    Inc(I, CPLen);
     Found := False;
 
-    // SDH
     if Current = '[' then
     begin
-      Result[Idx] := $1D;
+      Put($1D);
       Found := True;
     end
     else if Current = ']' then
     begin
-      Result[Idx] := $1B;
+      Put($1B);
       Found := True;
     end
     else if LangID = LangIdRussian then
     begin
       for K := 0 to Length(TRussianLetters)-1 do
-      begin
         if TRussianLetters[K] = Current then
         begin
-          Result[Idx] := TRussianCodes[K];
+          Put(TRussianCodes[K]);
           Found := True;
           Break;
         end;
-      end;
     end
     else if LangID = LangIdHebrew then
     begin
       for K := 0 to Length(THebrewLetters)-1 do
-      begin
         if THebrewLetters[K] = Current then
         begin
-          Result[Idx] := THebrewCodes[K];
+          Put(THebrewCodes[K]);
           Found := True;
           Break;
         end;
-      end;
     end;
 
     if not Found then
-      Result[Idx] := Encoding.GetBytes(Current)[0];
-
-    Inc(Idx);
+    begin
+      // bytes COMPLETOS del caracter en la tabla del idioma (chino = 2 bytes);
+      // antes solo se tomaba el primero ([0]) con TEncoding.Default.
+      Chunk := Enc.GetBytes(Current);
+      if Length(Chunk) = 0 then
+        Put(Ord('?'))
+      else if Idx + Length(Chunk) > CAVENA_TEXT_LEN - 1 then
+        Break
+      else
+        for K := 0 to High(Chunk) do Put(Chunk[K]);
+    end;
   end;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure WriteText(const Stream: TStream; const Text: String; const IsLast: Boolean; const LangID: Integer);
+procedure WriteText(const Stream: TStream; const Text: String; const IsLast: Boolean; const LangID: Integer; const Enc: TEncoding);
 var
   Line1, Line2 : String;
   IdxSeparator : Integer;
@@ -454,14 +513,14 @@ begin
   else
     Line2 := Text;
 
-  Buffer := GetTextAsBytes(Line1, LangID);
+  Buffer := GetTextAsBytes(Line1, LangID, Enc);
   Stream.Write(Buffer[0], Length(Buffer));
 
   SetLength(Buffer, 6);
   FillChar(Buffer[0], 6, 0);
   Stream.Write(Buffer[0], 6);
 
-  Buffer := GetTextAsBytes(Line2, LangID);
+  Buffer := GetTextAsBytes(Line2, LangID, Enc);
   Stream.Write(Buffer[0], Length(Buffer));
 
   if not IsLast then
@@ -540,10 +599,10 @@ var
   CurrentNum  : Integer;
   StartFrame  : Integer;
   EndFrame    : Integer;
-  Lang1, Lang2: Integer;
-  Line1, Line2: String;
   InitialMs   : Integer;
   FinalMs     : Integer;
+  Lang1, Lang2: Integer;
+  Line1, Line2: String;
   FullText    : String;
 begin
   Result := False;
@@ -557,10 +616,22 @@ begin
     Lang1 := Bytes[146];
     Lang2 := Bytes[147];
 
+    // Idiomas del archivo en las propiedades (round-trip al guardar)
+    Subtitles.FormatProperties^.Cavena890.PrimaryLanguage   := Lang1;
+    Subtitles.FormatProperties^.Cavena890.SecondaryLanguage := Lang2;
+
     I       := CAVENA_HDR_OFFSET;
     LastNum := -1;
 
-    while I < (Length(Bytes) - 20) do
+    // Antes: "while I < (Length(Bytes) - 20) do" — guard insuficiente.
+    // StartPos = I - CAVENA_TEXT_LEN(51); el segundo llamado a FixText
+    // lee hasta Bytes[StartPos + CAVENA_TEXT_LEN(51) + 6 + CAVENA_TEXT_LEN(51) - 1]
+    // = Bytes[I + 56]. Con el guard viejo, el último I que entraba al
+    // loop era Length(Bytes)-21, así que la lectura máxima llegaba a
+    // Length(Bytes)+35 — 36 bytes LEÍDOS FUERA DE RANGO en el último
+    // bloque de CUALQUIER archivo .890, no solo uno corrupto/truncado.
+    // El margen correcto es 56 (no 20).
+    while I < (Length(Bytes) - 56) do
     begin
       StartPos   := I - CAVENA_TEXT_LEN;
       CurrentNum := (Bytes[StartPos - 16] shl 8) or Bytes[StartPos - 15];
@@ -578,9 +649,9 @@ begin
       end
       else
       begin
+        FullText  := (Line1 + LineEnding + Line2).Trim;
         InitialMs := Trunc((1000.0 / FPS) * StartFrame);
         FinalMs   := Trunc((1000.0 / FPS) * EndFrame);
-        FullText  := (Line1 + LineEnding + Line2).Trim;
         Subtitles.Add(InitialMs, FinalMs, FullText, '', NIL);
       end;
 
@@ -599,59 +670,82 @@ function TUWCavena890.SaveSubtitle(const FileName: String; const FPS: Double; co
 var
   Stream     : TStream;
   Buffer     : TBytes;
+  Header     : TBytes;
   I          : Integer;
   LangID     : Integer;
+  Lang2      : Integer;
   BlockNum   : Integer;
   AlignByte  : Byte;
   TextToSave : String;
+  Enc        : TEncoding;
 begin
   Result := False;
-  Stream := TFileStream.Create(FileName, fmCreate);
+
+  // Idioma: el del archivo/propiedades si es conocido; ingles por defecto
+  LangID := Subtitles.FormatProperties^.Cavena890.PrimaryLanguage;
+  if not IsKnownLangID(LangID) then LangID := LangIdEnglish;
+  Lang2 := Subtitles.FormatProperties^.Cavena890.SecondaryLanguage;
+  if not IsKnownLangID(Lang2) then Lang2 := LangID;
+
+  for I := FromItem to ToItem do
+  begin
+    TextToSave := iff(SubtitleMode = smText, Subtitles.Text[I], Subtitles.Translation[I]);
+    if TextToSave.Contains('的') or
+       TextToSave.Contains('是') or
+       TextToSave.Contains('啊') or
+       TextToSave.Contains('吧') or
+       TextToSave.Contains('好') or
+       TextToSave.Contains('亲') or
+       TextToSave.Contains('爱') or
+       TextToSave.Contains('早') or
+       TextToSave.Contains('上') then
+    begin
+      LangID := LangIdChineseSimplified;
+      Lang2  := LangID;
+      Break;
+    end;
+  end;
+
+  Enc := GetEncodingFromLangID(LangID);
   try
-    LangID := LangIdEnglish;
+    Stream := TFileStream.Create(FileName, fmCreate);
+    try
+      // HEADER (el idioma tambien en los offsets 146/147 que lee LoadSubtitle)
+      SetLength(Header, SizeOf(TCavena890_Info));
+      Move(Subtitles.FormatProperties^.Cavena890, Header[0], SizeOf(TCavena890_Info));
+      Header[146] := LangID;
+      Header[147] := Lang2;
+      Stream.WriteBuffer(Header[0], Length(Header));
 
-    for I := FromItem to ToItem do
-    begin
-      if Subtitles.Text[I].Contains('的') or Subtitles.Text[I].Contains('是') or
-         Subtitles.Text[I].Contains('啊') or Subtitles.Text[I].Contains('吧') or
-         Subtitles.Text[I].Contains('好') or Subtitles.Text[I].Contains('亲') or
-         Subtitles.Text[I].Contains('爱') or Subtitles.Text[I].Contains('早') or
-         Subtitles.Text[I].Contains('上') then
+      // Bloques de Subtitulos
+      BlockNum := 16;
+      for I := FromItem to ToItem do
       begin
-        LangID := LangIdChineseSimplified;
-        Break;
+        WriteByte(Stream, (BlockNum shr 8) and $FF);
+        WriteByte(Stream, BlockNum and $FF);
+
+        WriteTime(Stream, Subtitles.InitialTime[I], FPS);
+        WriteTime(Stream, Subtitles.FinalTime[I], FPS);
+
+        TextToSave := EncodeTags(iff(SubtitleMode = smText, Subtitles.Text[I], Subtitles.Translation[I]), AlignByte);
+
+        WriteByte(Stream, AlignByte);
+
+        SetLength(Buffer, SizeOf(TReservedBlock));
+        Move(TReservedBlock[0], Buffer[0], SizeOf(TReservedBlock));
+        Stream.Write(Buffer[0], Length(Buffer));
+
+        WriteText(Stream, TextToSave, I = ToItem, LangID, Enc);
+
+        Inc(BlockNum, 16);
       end;
+
+      Result := True;
+    finally
+      Stream.Free;
     end;
-
-    // HEADER
-    Stream.WriteBuffer(Subtitles.FormatProperties^.Cavena890, SizeOf(TCavena890_Info));
-
-    // Bloques de Subtítulos
-    BlockNum := 16;
-    for I := FromItem to ToItem do
-    begin
-      WriteByte(Stream, (BlockNum shr 8) and $FF);
-      WriteByte(Stream, BlockNum and $FF);
-
-      WriteTime(Stream, Subtitles.InitialTime[I], FPS);
-      WriteTime(Stream, Subtitles.FinalTime[I], FPS);
-
-      TextToSave := EncodeTags(iff(SubtitleMode = smText, Subtitles.Text[I], Subtitles.Translation[I]), AlignByte);
-
-      WriteByte(Stream, AlignByte);
-
-      SetLength(Buffer, SizeOf(TReservedBlock));
-      Move(TReservedBlock[0], Buffer[0], SizeOf(TReservedBlock));
-      Stream.Write(Buffer[0], Length(Buffer));
-
-      WriteText(Stream, TextToSave, I = ToItem, LangID);
-
-      Inc(BlockNum, 16);
-    end;
-
-    Result := True;
   finally
-    Stream.Free;
+    Enc.Free;
   end;
 end;
 

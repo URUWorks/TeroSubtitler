@@ -12,7 +12,7 @@
  *  implied. See the License for the specific language governing
  *  rights and limitations under the License.
  *
- *  Copyright (C) 2001-2023 URUWorks, uruworks@gmail.com.
+ *  Copyright (C) 2001-2026 URUWorks, uruworks@gmail.com.
  *}
 
 unit DRTIC;
@@ -106,7 +106,8 @@ var
   FinalTime   : Integer;
   Text        : String;
   AFPS        : Single;
-  DecimalSep  : Char;
+  FpsVal      : Double;
+  FS          : TFormatSettings;
   ExtraInfo   : PMicroDVD_ExtraInfo;
 begin
   Result := False;
@@ -117,16 +118,15 @@ begin
       // DivXG400 FPS Info tag
       if Copy(SubtitleFile[i], 1, 6) = '{1}{1}' then
       begin
-        with FormatSettings do
-        begin
-          DecimalSep       := DecimalSeparator;
-          DecimalSeparator := '.';
-
-          if IsInteger(Copy(SubtitleFile[i], 7, Length(SubtitleFile[i]))) then
-            AFPS := StrToFloat(Copy(SubtitleFile[i], 7, Length(SubtitleFile[i])));
-
-          DecimalSeparator := DecimalSep;
-        end;
+        // Antes IsInteger(...) antes de StrToFloat: el tag se escribe como
+        // '{1}{1}23.976' y con el punto decimal IsInteger fallaba, así que el
+        // FPS del archivo NUNCA se aplicaba. Además se cambiaba el
+        // DecimalSeparator GLOBAL; ahora un TFormatSettings local.
+        FS := FormatSettings;
+        FS.DecimalSeparator := '.';
+        FpsVal := StrToFloatDef(Trim(Copy(SubtitleFile[i], 7, Length(SubtitleFile[i]))), 0, FS);
+        if (FpsVal >= 1) and (FpsVal <= 240) then
+          AFPS := FpsVal;
       end
       else if (Pos('{', SubtitleFile[i]) = 1) and (Pos('}', SubtitleFile[i]) > 1) and
         (StringCount('{',SubtitleFile[i]) >= 2) and (StringCount('}',SubtitleFile[i]) >= 2) then
@@ -166,7 +166,9 @@ begin
         Text := MicroDVDTagsToTS(Text);
 
         if (InitialTime >= 0) and (FinalTime > 0) then
-          Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
+          Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo)
+        else if ExtraInfo <> NIL then
+          Dispose(ExtraInfo); // antes se perdía sin liberar
       end;
     end;
   finally
@@ -183,33 +185,32 @@ end;
 function TUWDRTIC.SaveSubtitle(const FileName: String; const FPS: Double; const Encoding: TEncoding; const Subtitles: TUWSubtitles; const SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): Boolean;
 var
   i          : Integer;
-  DecimalSep : Char;
-  XY         : String;
+  FS         : TFormatSettings;
+  XY, Txt    : String;
 begin
   Result  := False;
 
   StringList.Add(SysUtils.Format('[JRT2: %d 0 ]', [Subtitles.Count]));
 
   // DivXG400 FPS Info tag
-  with FormatSettings do
-  begin
-    DecimalSep       := DecimalSeparator;
-    DecimalSeparator := '.';
-    StringList.Add(SysUtils.Format('{1}{1}%.3f', [FPS]));
-    DecimalSeparator := DecimalSep;
-  end;
+  FS := FormatSettings;
+  FS.DecimalSeparator := '.';
+  StringList.Add(SysUtils.Format('{1}{1}%.3f', [FPS], FS));
 
   for i := FromItem to ToItem do
   begin
     XY := '';
-    if Subtitles.ExtraInfo[i] <> NIL then
+    if (Subtitles.ExtraInfoType = eiMicroDVD) and (Subtitles.ExtraInfo[i] <> NIL) then
       with PMicroDVD_ExtraInfo(Subtitles.ExtraInfo[i])^ do
         if (X > 0) or (Y > 0) then
           XY := SysUtils.Format('{P:%d,%d}', [X, Y]);
 
-    Subtitles.Text[i] := TSTagsToMicroDVD(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
+    // Antes: Subtitles.Text[i] := ... — se modificaba el documento ABIERTO al
+    // guardar (sin undo): el texto quedaba con los tags convertidos y, al
+    // exportar la traducción, el original se reemplazaba por ella.
+    Txt := TSTagsToMicroDVD(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
     StringList.Add('{' + IntToStr(TimeToFrames(Subtitles.InitialTime[i], FPS)) + '}{' + IntToStr(TimeToFrames(Subtitles.FinalTime[i], FPS)) + '}' +
-      XY + ReplaceEnters(Subtitles[i].Text));
+      XY + ReplaceEnters(Txt));
   end;
 
   try
