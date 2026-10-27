@@ -1,3 +1,98 @@
+1.0.2.4 (xx.10.2026)
+- fixed: Curly brackets and enclosed text don't appear in list, timeline, or video #485
+- fixed: [Windows] Unresponsive UI / interface freezes during continuous editing #482
+- fixed: Audio-to-text stops after 1 hour #473
+- fixed: Show one thumbnail per shot change #420
+- fixed: Entered text doesn't immediately appear on timeline #404
+- fixed: [macOS] Turn off beep when moving between entries #331
+- fixed: Applying Netflix profile then another doesn't flag all shot changes #289
+- fixed: Translation Memory problem #279
+- fixed: [macOS] The default system commands are not translated #136
+- fixed: Playback head and visual don't always update when skipping frames #48
+- fixed: Subtitle size doesn't increase/decrease when adjusting dimensions of preview window if mpv doesn't handle subtitles #42
+- fixed: Top menu doesn't flash if I perform shortcuts #38
+- fixed: Invalid tags not detected #30
+- fixed: [macOS] Directory in title window leads to application instead of file #4
+- fixed: [macOS] Extension not automatically added to filename during save or export #3
+- fixed: [macOS] Application icon is slightly blurry #2
+- fixed: [macOS] Dock icon is low-res and distorted upon load of application #1
+- fixed: [macOS] Dropping files on the app icon (Dock/Finder) failed on macOS before 10.13
+- fixed: Encoding detection for ANSI subtitles (German, Greek and Arabic were detected as Cyrillic; English, French and Italian as Central European)
+- fixed: UTF-16 files without BOM were detected as UTF-8
+- fixed: Shot changes couldn’t be imported from EDL files with only audio events (FCP)
+- fixed: Translation memory files using different language codes (EN-US, es, en_US, ...) loaded empty
+- fixed: Possible crash loading translation memory files from other tools
+- fixed: Loading a translation memory mixed its entries with the previous one
+- fixed: Waveform play cursor not updated after some frame steps when “center play cursor” is enabled
+- fixed: Subtitles out of sync in mpv with non-integer frame rates
+- fixed: Huge subtitles in video preview until Settings was closed
+- fixed: Subtitle stuck on video when switching to mpv subtitle rendering
+- fixed: mpv subtitle track ignored "subtitle to show" (translation)
+- fixed: Crash when saving with the custom file dialog enabled
+- fixed: Double memory free when exporting marked entries
+- fixed: Unsaved changes lost when closing and the save is cancelled or fails
+- fixed: Google Translate erasing texts on network/quota errors (now undoable)
+- fixed: Memory leaks when closing subtitles, deleting entries and with text encodings
+- fixed: Extra info (positions/styles) misaligned after sorting and wrong extra info when converting between formats
+- fixed: Possible crash with invalid indexes (alignment, pauses, new subtitle duration)
+- fixed: Crash on Shift+click in the waveform
+- fixed: Characters per line ignoring the last line and miscounting non-Latin text
+- fixed: Find &amp; Replace ignoring case-insensitive, whole word and multiple matches per line; Preserve case breaking accented characters
+- fixed: Insert after with several entries selected inserting in the wrong place
+- fixed: Delete lines from entry deleting the wrong lines
+- fixed: Set pauses "both" mode and crash on the last selected entry
+- fixed: Undo lost when editing two subtitles quickly
+- fixed: Command line FPS ignored in -translate
+- fixed: Export text only using the wrong encoding and joining the whole file in one line
+- fixed: Check for updates comparing versions as text
+- fixed: Merge with next/previous adding empty lines to the translation
+- fixed: Spurious undo entries and missing "modified" state in SMPTE mode
+- fixed: Division by zero in Adjust subtitles, Typewriter effect and Distribute evenly
+- fixed: Paste not working on an empty list and accepting invalid clipboard data
+- fixed: Preview not showing overlapping subtitles
+- fixed: Corrupted .peak files crashing the waveform
+- fixed: Web preview with spaces, # or quotes in the video path
+- fixed: Fix subtitles showed overlap suggestions with the same timecodes as before in frames mode
+- fixed: Fixing overlaps no longer leaves short chained subtitles with zero duration
+- fixed: Shot change files with seconds with decimals were discarded on import
+- fixed: [SubtitleAPI] EBU STL subtitles longer than 112 bytes and comment blocks
+- fixed: [SubtitleAPI] SubRip times with 1-digit hours or "." milliseconds, last line lost in unnumbered files
+- fixed: [SubtitleAPI] Timed Text times were saved as hh:mm:ss:zz and read back as frames
+- fixed: [SubtitleAPI] Avid Caption, Captions 32 & Captions Inc. (last subtitle lost, empty lines)
+- fixed: [SubtitleAPI] CSV & TSV (quotes in text, multi-line text in TSV)
+- fixed: [SubtitleAPI] Tero Subtitler format saved Notes as Actor
+- fixed: [SubtitleAPI] DRTIC, SoftNI & MicroDVD frame rate tag depended on system decimal separator
+- fixed: [SubtitleAPI] AQTitle, ABC iView, Advanced Subtitles, CPC-600, DKS, DVD Subtitle, DVD Subtitle System, DVD Junior, FAB Subtitler, GPAC TTXT, I-Author, Inscriber CG, Karaoke LRC/VKT, Mac DVD Studio Pro, MPlayer, Spruce STL & Spruce Script (parsing robustness)
+- fixed: EDL shot change import, timecodes now start from the video start
+- fixed: Loading a subtitle with a different frame rate mode left the time fields and waveform in the previous timecode mode
+- improved: [SubtitleAPI] Cavena 890 & EBU (accents, special chars, tags, language/code page and alignment)
+- improved: [SubtitleAPI] Cheetah & Cheetah Caption (italics, accents, line breaks)
+- improved: [SubtitleAPI] WebVTT (cues without hours, identifiers, NOTE/STYLE blocks, voices with spaces, align:start/end, line:0, escaped text, STYLE colors)
+- improved: [SubtitleAPI] Timed Text, Netflix Timed Text & iTunes Timed Text (valid TTML: real line breaks and italic/bold spans, styling namespace, bold style, offset times h/m/s/ms/f/t, tickRate, dur)
+- improved: [SubtitleAPI] Advanced SubStation Alpha (reads \an alignment back, Format: column order, inline colors)
+- improved: [SubtitleAPI] MicroDVD, MPlayer2, JACOSub & SubViewer
+- improved: [SubtitleAPI] SubRip (timing lines without spaces around -->)
+- improved: Encoding detection now covers more languages (Baltic, Ukrainian, Serbian, Farsi, Nordic...)
+- improved: Language list with generic languages (English, Español...), more languages and correct BCP 47 codes
+- improved: Exporting shot changes in seconds now keeps milliseconds
+- improved: The gap in the subtitle list now shows a negative value when a subtitle overlaps the next one
+- improved: When importing an EDL with several tracks, you can choose which one to use
+- improved: The translation memory stays open between subtitles and is reopened at startup
+- improved: The translation memory is saved automatically along with the auto backup
+- improved: Incomplete tags fix
+- improved: Safe save (temporary file + rename), an interrupted save no longer truncates the original
+- improved: Network timeouts, no more freezes without internet
+- improved: Undo history limit
+- improved: Thumbnails thread safety and no CPU busy-wait
+- improved: Faster sort, select, paste and insert with many entries
+- improved: Faster waveform drawing (shot changes, subtitle lookup)
+- improved: Typing with "mpv handles subtitles" no longer rewrites the temp track on every key
+- improved: Language names are now shown in their own language
+- added: Language (xml:lang) option for iTT, Timed Text and Netflix Timed Text formats, read from the file when loading
+- added: [macOS] Support for multimedia keys on macOS (10.12.2+) #236
+- added: Tools/Translation memory/Add translated lines to memory
+- added: Translation memory/Save a copy... and Open translation memories folder
+
 1.0.2.3 (18.09.2026)
 - fixed: Corrupted undo/redo stack when changing input/output FPS
 - fixed: Ampersand in filename excluded from titlebar and Recent files #481
