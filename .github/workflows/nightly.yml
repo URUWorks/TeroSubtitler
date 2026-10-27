@@ -143,7 +143,8 @@ jobs:
             mode: macOS_Release
             bin: tero-intel
             ldclassic: false
-          - os: macos-latest
+          # macos-15 still ships Xcode 16, whose ld_classic Xcode 26 removed
+          - os: macos-15
             mode: macOS_arm64_Release
             bin: tero-silicon
             ldclassic: true
@@ -198,12 +199,14 @@ jobs:
         run: |
           set -euo pipefail
           xcode=$(ls -d /Applications/Xcode_16*.app 2>/dev/null | sort -V | tail -1 || true)
-          if [[ -n "$xcode" ]]; then sudo xcode-select -s "$xcode"; fi
+          [[ -n "$xcode" ]] || { echo "Xcode 16 not found:"; ls -d /Applications/Xcode*.app; exit 1; }
+          sudo xcode-select -s "$xcode"
           xcodebuild -version
-          cfg="$(brew --prefix)/etc/fpc.cfg"
-          [[ -f "$cfg" ]] || cfg=/etc/fpc.cfg
-          [[ -f "$cfg" ]] || { echo "fpc.cfg not found"; exit 1; }
-          echo '-k-ld_classic' | sudo tee -a "$cfg"
+          ld -ld_classic -v 2>&1 | head -1 || true
+          # Pass -ld_classic straight to ld through the project's linker options
+          sed -i '' 's#<LinkerOptions Value="-rpath @executable_path\\..\\Frameworks"/>#<LinkerOptions Value="-rpath @executable_path\\..\\Frameworks -ld_classic"/>#' \
+            TeroSubtitler/src/tero.lpi
+          grep -n 'LinkerOptions' TeroSubtitler/src/tero.lpi
 
       - name: Build
         shell: bash
