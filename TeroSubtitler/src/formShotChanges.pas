@@ -125,15 +125,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
-// slugs, stills, black, etc.: events without a real clip timecode
+// slugs, stills, black, etc.: events without a real clip timecode.
+// "CLIP HAD NO TIMECODE TRACK" is not one of them: the clip times are still
+// valid, counted from 00:00:00:00
 function IsEDLEventWithoutTimecode(const AItem: PItem): Boolean;
-var
-  s: String;
 begin
-  s := AItem^.Comment.ToUpper;
   Result := (AItem^.ReelName.ToUpper = 'BL') or (AItem^.ReelName.ToUpper = 'BLACK') or
-    (AItem^.ClipName.ToUpper = 'SLUG') or (s.Contains('IS A STILL')) or
-    (s.Contains('NO TIMECODE'));
+    (AItem^.ClipName.ToUpper = 'SLUG') or AItem^.Comment.ToUpper.Contains('IS A STILL');
 end;
 
 // -----------------------------------------------------------------------------
@@ -310,7 +308,7 @@ var
   i   : Integer;
   edl : TEDL;
   ATracks: TStrings = NIL;
-  Tracks, TrackNames, Clips: TStringList;
+  Tracks, TrackNames: TStringList;
   Selected, s: String;
   c, x, h, Base: Integer;
   UseSource: Boolean;
@@ -378,24 +376,27 @@ begin
               TrackNames.Free;
             end;
 
-            // all the events from the same clip (the video is that file): use
-            // the clip (source) times. From several clips (the video is the
-            // edited program): use the sequence (record) times
-            Clips := TStringList.Create;
-            try
-              Clips.Sorted := True;
-              Clips.Duplicates := dupIgnore;
-              for i := 0 to edl.Items.Count-1 do
-                with edl.Items[i]^ do
-                  if ((Selected = '') or (TrackName = Selected)) and not IsEDLEventWithoutTimecode(edl.Items[i]) then
-                    if ClipName <> '' then
-                      Clips.Add(ClipName.ToUpper)
-                    else
-                      Clips.Add(ReelName.ToUpper);
-              UseSource := Clips.Count <= 1;
-            finally
-              Clips.Free;
-            end;
+            // the video is the edited program: use the sequence (record)
+            // times. Some exporters write broken record times (e.g. Shutter
+            // Encoder drops the minutes: 00:00:57:23 -> 00:00:00:01), if they
+            // go backwards use the clip (source) times
+            UseSource := False;
+            c := -1;
+            for i := 0 to edl.Items.Count-1 do
+              with edl.Items[i]^ do
+                if ((Selected = '') or (TrackName = Selected)) and not IsEDLEventWithoutTimecode(edl.Items[i]) then
+                begin
+                  if (TapeOut < TapeIn) or (Integer(TapeIn) < c) then
+                  begin
+                    UseSource := True;
+                    Break;
+                  end;
+                  c := TapeIn;
+                end;
+
+            // xml: only the clip times
+            if FileName.ToLower.EndsWith('.xml') then
+              UseSource := True;
 
             // every edit point (in and out)
             Times := NIL;
