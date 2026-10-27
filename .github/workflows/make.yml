@@ -27,8 +27,13 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Configure GitHub HTTPS
+        run: 
+          git config --global url."https://github.com/".insteadOf "git@github.com:"
+
       - name: Update submodules
         run: |
+          git submodule sync --recursive
           git submodule update --init --remote --recursive use/UW_BlurayPGSParser
           git submodule update --init --remote --recursive use/UW_MPVPlayer
           
