@@ -142,9 +142,11 @@ jobs:
           - os: macos-15-intel
             mode: macOS_Release
             bin: tero-intel
+            ldclassic: false
           - os: macos-latest
             mode: macOS_arm64_Release
             bin: tero-silicon
+            ldclassic: true
 
     steps:
       - name: Checkout
@@ -187,6 +189,21 @@ jobs:
             -name '*.lpk' | grep -Ev '(gdi|x11|_template)' | while read -r lpk; do
               lazbuild --lazarusdir=$HOME/lazarus --add-package-link "$lpk"
           done
+
+      # FPC 3.2.2 Objective-C objects break the new Apple linker on arm64
+      # ("malformed method list atom"), so link with ld_classic there
+      - name: Use classic linker
+        if: matrix.ldclassic
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcode=$(ls -d /Applications/Xcode_16*.app 2>/dev/null | sort -V | tail -1 || true)
+          if [[ -n "$xcode" ]]; then sudo xcode-select -s "$xcode"; fi
+          xcodebuild -version
+          cfg="$(brew --prefix)/etc/fpc.cfg"
+          [[ -f "$cfg" ]] || cfg=/etc/fpc.cfg
+          [[ -f "$cfg" ]] || { echo "fpc.cfg not found"; exit 1; }
+          echo '-k-ld_classic' | sudo tee -a "$cfg"
 
       - name: Build
         shell: bash
