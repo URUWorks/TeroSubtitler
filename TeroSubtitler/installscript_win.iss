@@ -71,7 +71,7 @@ Source: "{#SourcePath}\bin\libhunspellx64.dll"; DestDir: "{app}"; Flags: ignorev
 Source: "{#SourcePath}\bin\libmpv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#SourcePath}\bin\libssl-1_1-x64.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#SourcePath}\bin\tero.cfs"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourcePath}\bin\ShortCuts\*.key"; DestDir: "{app}\ShortCuts"; Flags: ignoreversion
+Source: "{#SourcePath}\bin\Shortcuts\*.key"; DestDir: "{app}\Shortcuts"; Flags: ignoreversion
 Source: "{#SourcePath}\bin\OCR\*.ocr"; DestDir: "{app}\OCR"; Flags: ignoreversion
 Source: "{#SourcePath}\bin\Languages\*.po"; DestDir: "{app}\Languages"; Flags: ignoreversion
 Source: "{#SourcePath}\bin\Icons\*.ico"; DestDir: "{app}\Icons"; Flags: ignoreversion
