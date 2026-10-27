@@ -72,7 +72,7 @@ jobs:
         shell: bash
         run: |
           source '.github/workflows/make.sh'
-          lazbuild --build-all --build-mode=Release --widgetset=gtk2 --opt=-dWITH_GTK2_IM \
+          lazbuild --build-all --build-mode=Release --widgetset=gtk2 \
             --no-write-project TeroSubtitler/src/tero.lpi
           strip TeroSubtitler/bin/tero
 
