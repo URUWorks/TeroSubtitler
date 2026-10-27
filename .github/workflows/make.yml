@@ -27,6 +27,11 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Update submodules
+        run: |
+          git submodule update --init --remote --recursive use/UW_BlurayPGSParser
+          git submodule update --init --remote --recursive use/UW_MPVPlayer
+          
       - name: Build on Unix
         if: runner.os != 'Windows'
         shell: bash
