@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 29.03.2026\n"
+"Project-Id-Version: Tero Subtitler - IT - 27.10.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -1215,7 +1215,7 @@ msgstr "Vuoi esportare il testo formattato?"
 #: proclocalize.lngtmentriesadded
 #, object-pascal-format
 msgid "%d entries added to the translation memory."
-msgstr ""
+msgstr "%d voci aggiunte alla memoria traduzione."
 
 #: proclocalize.lngtmnoentriesloaded
 msgid "No entries were loaded from the translation memory. Check that its languages match the selected ones."
@@ -3851,7 +3851,7 @@ msgstr "Visualizza..."
 
 #: tfrmmain.acttranslationmemoryaddall.caption
 msgid "Add translated lines to memory"
-msgstr ""
+msgstr "Aggiungi linee tradotte alla memoria"
 
 #: tfrmmain.acttranslationmemoryclose.caption
 msgctxt "tfrmmain.acttranslationmemoryclose.caption"
@@ -3865,11 +3865,11 @@ msgstr "Elenco..."
 
 #: tfrmmain.acttranslationmemoryopenfolder.caption
 msgid "Open translation memories folder"
-msgstr ""
+msgstr "Apri la cartella memorie traduzione"
 
 #: tfrmmain.acttranslationmemorysavecopy.caption
 msgid "Save a copy..."
-msgstr ""
+msgstr "Salva una copia..."
 
 #: tfrmmain.acttranslationmemorysettings.caption
 msgctxt "tfrmmain.acttranslationmemorysettings.caption"
