@@ -72,7 +72,12 @@ jobs:
         shell: bash
         run: |
           source '.github/workflows/make.sh'
-          lazbuild --build-all --build-mode=Release --widgetset=gtk2 \
+          # ATSynEdit needs the LCL gtk2 interface built with WITH_GTK2_IM.
+          # Ubuntu's lazbuild has no --opt, so set the define globally and
+          # let the recursive build recompile LCL.
+          echo '-dWITH_GTK2_IM' | sudo tee -a /etc/fpc.cfg
+          sudo chown -R "$USER" /usr/lib/lazarus
+          lazbuild --build-all --recursive --build-mode=Release --widgetset=gtk2 \
             --no-write-project TeroSubtitler/src/tero.lpi
           strip TeroSubtitler/bin/tero
 
@@ -156,11 +161,16 @@ jobs:
           git submodule update --init --remote --recursive use/UW_BlurayPGSParser
           git submodule update --init --remote --recursive use/UW_MPVPlayer
 
+      # The Homebrew lazarus cask is disabled, so build lazbuild from source
       - name: Install Lazarus
         run: |
           brew install fpc
-          brew install --cask lazarus
-          echo "/Applications/Lazarus" >> "$GITHUB_PATH"
+          curl -fsSL -o "$RUNNER_TEMP/lazarus.tar.gz" \
+            "https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/lazarus_4_8/lazarus-lazarus_4_8.tar.gz"
+          mkdir -p "$HOME/lazarus"
+          tar -xzf "$RUNNER_TEMP/lazarus.tar.gz" -C "$HOME/lazarus" --strip-components=1
+          make -C "$HOME/lazarus" lazbuild
+          echo "$HOME/lazarus" >> "$GITHUB_PATH"
 
       # Same dependencies as make.pas, but without its OpenSSL requirement
       - name: Install packages
@@ -175,14 +185,14 @@ jobs:
           done
           find "$opm" use TeroSubtitler/common TeroSubtitler/subtitleapi TeroSubtitler/controls \
             -name '*.lpk' | grep -Ev '(gdi|x11|_template)' | while read -r lpk; do
-              lazbuild --lazarusdir=/Applications/Lazarus --add-package-link "$lpk"
+              lazbuild --lazarusdir=$HOME/lazarus --add-package-link "$lpk"
           done
 
       - name: Build
         shell: bash
         run: |
           set -euo pipefail
-          lazbuild --lazarusdir=/Applications/Lazarus --build-all --recursive \
+          lazbuild --lazarusdir=$HOME/lazarus --build-all --recursive \
             --build-mode=${{ matrix.mode }} --widgetset=cocoa \
             --no-write-project TeroSubtitler/src/tero.lpi
           mkdir -p dist
