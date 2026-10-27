@@ -1,0 +1,154 @@
+---
+name: Nightly
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nightly
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+    steps:
+      - name: Compare HEAD with current nightly tag
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag_sha=$(gh api "repos/${{ github.repository }}/git/ref/tags/nightly" --jq .object.sha 2>/dev/null || true)
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" || "$tag_sha" != "${{ github.sha }}" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    needs: check
+    if: needs.check.outputs.changed == 'true'
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            name: win64
+          - os: ubuntu-latest
+            name: linux-x86_64-gtk2
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Configure GitHub HTTPS
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
+
+      - name: Update submodules
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --remote --recursive use/UW_BlurayPGSParser
+          git submodule update --init --remote --recursive use/UW_MPVPlayer
+
+      - name: Set nightly version
+        id: ver
+        shell: bash
+        run: echo "name=TeroSubtitler-$(cat version.txt | tr -d '[:space:]')-nightly-$(date -u +%Y%m%d)-${{ matrix.name }}" >> "$GITHUB_OUTPUT"
+
+      # Install Lazarus and the packages via the existing Make scripts,
+      # then rebuild tero in Release mode.
+      - name: Build on Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          source '.github/workflows/make.sh'
+          lazbuild --build-all --build-mode=Release --widgetset=gtk2 --opt=-dWITH_GTK2_IM \
+            --no-write-project TeroSubtitler/src/tero.lpi
+          strip TeroSubtitler/bin/tero
+
+      - name: Build on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          pwsh -File '.github/workflows/make.ps1'
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
+          $env:PATH += ';C:\Lazarus;C:\Lazarus\fpc\3.2.2\bin\x86_64-win64'
+          lazbuild --build-all --build-mode=Release --no-write-project TeroSubtitler/src/tero.lpi
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
+
+      - name: Package Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          out="dist/${{ steps.ver.outputs.name }}"
+          mkdir -p "$out"
+          cd TeroSubtitler/bin
+          cp -r CustomFormat Dictionaries Languages OCR "../../$out/"
+          cp -r Shortcuts "../../$out/"
+          cp libhunspellx64.so tero tero.cfs "../../$out/"
+          chmod +x "../../$out/tero"
+          cd ../../dist
+          tar -czf "${{ steps.ver.outputs.name }}.tar.gz" "${{ steps.ver.outputs.name }}"
+
+      - name: Package Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $out = "dist/${{ steps.ver.outputs.name }}"
+          New-Item -ItemType Directory -Force -Path $out | Out-Null
+          $bin = 'TeroSubtitler/bin'
+          foreach ($d in 'CustomFormat','Dictionaries','Icons','Languages','OCR') {
+            Copy-Item -Recurse "$bin/$d" "$out/$d"
+          }
+          Copy-Item -Recurse "$bin/Shortcuts" "$out/Shortcuts"
+          foreach ($f in 'libcrypto-1_1-x64.dll','libhunspellx64.dll','libmpv-2.dll','libssl-1_1-x64.dll','tero.cfs','tero.exe') {
+            Copy-Item "$bin/$f" "$out/$f"
+          }
+          Compress-Archive -Path $out -DestinationPath "dist/${{ steps.ver.outputs.name }}.zip"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: |
+            dist/*.zip
+            dist/*.tar.gz
+          retention-days: 7
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Publish nightly pre-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          cat > notes.md <<'EOF'
+          Nightly builds are automatically generated every day and contain the latest development changes. They are intended for testing new features, verifying bug fixes, identifying regressions, and helping track down bugs. They also provide an early preview of what may be included in a future stable release.
+
+          **Please note:** Nightly builds are experimental and may contain bugs or unstable features. They are not recommended for everyday use.
+          EOF
+          echo -e "\nBuilt from commit ${{ github.sha }}." >> notes.md
+          gh release delete nightly --cleanup-tag --yes || true
+          gh release create nightly dist/* \
+            --prerelease \
+            --target "${{ github.sha }}" \
+            --title "Nightly build $(date -u +%Y-%m-%d)" \
+            --notes-file notes.md
