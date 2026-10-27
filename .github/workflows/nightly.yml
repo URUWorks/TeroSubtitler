@@ -18,7 +18,23 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.check.outputs.changed }}
+      version: ${{ steps.version.outputs.version }}
+      base: ${{ steps.version.outputs.base }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Version comes from the project (Project Options > Version Info)
+      - name: Read version from tero.lpi
+        id: version
+        run: |
+          lpi=TeroSubtitler/src/tero.lpi
+          nr() { grep -o "<$1 Value=\"[0-9]*\"" "$lpi" | head -1 | grep -o '[0-9][0-9]*' || echo 0; }
+          version="$(nr MajorVersionNr).$(nr MinorVersionNr).$(nr RevisionNr).$(nr BuildNr)"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "base=TeroSubtitler-$version-nightly-$(date -u +%Y%m%d)-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+          echo "Version: $version"
+
       - name: Compare HEAD with current nightly tag
         id: check
         env:
@@ -63,7 +79,7 @@ jobs:
       - name: Set nightly version
         id: ver
         shell: bash
-        run: echo "name=TeroSubtitler-$(cat version.txt | tr -d '[:space:]')-nightly-$(date -u +%Y%m%d)-${{ matrix.name }}" >> "$GITHUB_OUTPUT"
+        run: echo "name=${{ needs.check.outputs.base }}-${{ matrix.name }}" >> "$GITHUB_OUTPUT"
 
       # Install Lazarus and the packages via the existing Make scripts,
       # then rebuild tero in Release mode.
@@ -230,7 +246,7 @@ jobs:
           retention-days: 7
 
   package-macos:
-    needs: build-macos
+    needs: [check, build-macos]
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -247,7 +263,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          base="TeroSubtitler-$(tr -d '[:space:]' < version.txt)-nightly-$(date -u +%Y%m%d)"
+          base="${{ needs.check.outputs.base }}"
           bin=TeroSubtitler/bin
           mkdir -p dist
 
@@ -283,7 +299,7 @@ jobs:
           retention-days: 7
 
   release:
-    needs: [build, package-macos]
+    needs: [check, build, package-macos]
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
@@ -302,10 +318,10 @@ jobs:
 
           **Please note:** Nightly builds are experimental and may contain bugs or unstable features. They are not recommended for everyday use.
           EOF
-          echo -e "\nBuilt from commit ${{ github.sha }}." >> notes.md
+          echo -e "\nVersion ${{ needs.check.outputs.version }}, built from commit [${GITHUB_SHA::7}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})." >> notes.md
           gh release delete nightly --cleanup-tag --yes || true
           gh release create nightly dist/*.zip dist/*.tar.gz \
             --prerelease \
             --target "${{ github.sha }}" \
-            --title "Nightly build $(date -u +%Y-%m-%d)" \
+            --title "Nightly build ${{ needs.check.outputs.version }} ($(date -u +%Y-%m-%d), ${GITHUB_SHA::7})" \
             --notes-file notes.md
