@@ -192,6 +192,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # lazbuild links tero.app/Contents/MacOS/tero to the binary; git does not keep the empty folder
+          mkdir -p TeroSubtitler/bin/tero.app/Contents/MacOS
           lazbuild --lazarusdir=$HOME/lazarus --build-all --recursive \
             --build-mode=${{ matrix.mode }} --widgetset=cocoa \
             --no-write-project TeroSubtitler/src/tero.lpi
