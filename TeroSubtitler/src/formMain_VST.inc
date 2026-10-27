@@ -171,7 +171,7 @@ procedure TfrmMain.VSTDrawText(Sender: TBaseVirtualTree; TargetCanvas: TCanvas;
 var
   TS : TTextStyle;
   R : TRect;
-  c : Cardinal;
+  c : TColor;
   TextHeight : Integer;
   oldColor : TColor;
   iArray : TIntegerDynArray;
