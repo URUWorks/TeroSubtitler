@@ -4,15 +4,20 @@
 - fixed: Audio-to-text stops after 1 hour #473
 - fixed: Show one thumbnail per shot change #420
 - fixed: Entered text doesn't immediately appear on timeline #404
+- fixed: Preview frame when adjusting entry in timeline #380
 - fixed: Notes were lost when saving to formats that can’t store them; they are now kept in a hidden file next to the subtitle #353
+- fixed: Defective preview when İ character is used #337
+- fixed: Multi-select and multi-check in Fix Subtitles #333
 - fixed: [macOS] Turn off beep when moving between entries #331
 - fixed: Applying Netflix profile then another doesn't flag all shot changes #289
 - fixed: Translation Memory problem #279
+- fixed: [Windows] Taskbar icon only shows on main display, not on secondary displays #212
 - fixed: [macOS] The default system commands are not translated #136
 - fixed: Playback head and visual don't always update when skipping frames #48
 - fixed: Subtitle size doesn't increase/decrease when adjusting dimensions of preview window if mpv doesn't handle subtitles #42
 - fixed: Top menu doesn't flash if I perform shortcuts #38
 - fixed: Invalid tags not detected #30
+- fixed: Shortcuts disabled when saving or exporting #11
 - fixed: [macOS] Directory in title window leads to application instead of file #4
 - fixed: [macOS] Extension not automatically added to filename during save or export #3
 - fixed: [macOS] Application icon is slightly blurry #2
