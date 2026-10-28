@@ -2,6 +2,7 @@
 - fixed: Curly brackets and enclosed text don't appear in list, timeline, or video #485
 - fixed: [Windows] Unresponsive UI / interface freezes during continuous editing #482
 - fixed: Audio-to-text stops after 1 hour #473
+- fixed: yt-dlp dependency has stopped working #462
 - fixed: Show one thumbnail per shot change #420
 - fixed: Entered text doesn't immediately appear on timeline #404
 - fixed: Preview frame when adjusting entry in timeline #380
@@ -74,6 +75,9 @@
 - fixed: [SubtitleAPI] AQTitle, ABC iView, Advanced Subtitles, CPC-600, DKS, DVD Subtitle, DVD Subtitle System, DVD Junior, FAB Subtitler, GPAC TTXT, I-Author, Inscriber CG, Karaoke LRC/VKT, Mac DVD Studio Pro, MPlayer, Spruce STL & Spruce Script (parsing robustness)
 - fixed: EDL shot change import, timecodes now start from the video start
 - fixed: Loading a subtitle with a different frame rate mode left the time fields and waveform in the previous timecode mode
+- fixed: Linux downloaded the ARM build of yt-dlp on x86_64 computers
+- fixed: Downloaded yt-dlp wasn’t marked as executable on Linux
+- improved: [macOS] now uses the standalone yt-dlp, which can update itself
 - improved: [SubtitleAPI] Cavena 890 & EBU (accents, special chars, tags, language/code page and alignment)
 - improved: [SubtitleAPI] Cheetah & Cheetah Caption (italics, accents, line breaks)
 - improved: [SubtitleAPI] WebVTT (cues without hours, identifiers, NOTE/STYLE blocks, voices with spaces, align:start/end, line:0, escaped text, STYLE colors)
@@ -98,6 +102,7 @@
 - improved: Faster waveform drawing (shot changes, subtitle lookup)
 - improved: Typing with "mpv handles subtitles" no longer rewrites the temp track on every key
 - improved: Language names are now shown in their own language
+- added: “Update” button for yt-dlp in Settings/Tools
 - added: Language (xml:lang) option for iTT, Timed Text and Netflix Timed Text formats, read from the file when loading
 - added: [macOS] Support for multimedia keys on macOS (10.12.2+) #236
 - added: Tools/Translation memory/Add translated lines to memory
