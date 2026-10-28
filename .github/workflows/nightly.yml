@@ -165,7 +165,7 @@ jobs:
         run: |
           set -euo pipefail
           if [[ "${{ matrix.widgetset }}" == qt5 ]]; then
-            sudo apt-get install -y -qq qtbase5-dev qt5-qmake
+            sudo apt-get install -y -qq qtbase5-dev qt5-qmake libqt5x11extras5-dev
             qmake=qmake
           else
             sudo apt-get install -y -qq qt6-base-dev qmake6
