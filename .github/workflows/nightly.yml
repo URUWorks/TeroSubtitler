@@ -58,8 +58,6 @@ jobs:
         include:
           - os: windows-latest
             name: win64
-          - os: ubuntu-latest
-            name: linux-x86_64-gtk2
 
     steps:
       - name: Checkout
@@ -81,22 +79,6 @@ jobs:
         shell: bash
         run: echo "name=${{ needs.check.outputs.base }}-${{ matrix.name }}" >> "$GITHUB_OUTPUT"
 
-      # Install Lazarus and the packages via the existing Make scripts,
-      # then rebuild tero in Release mode.
-      - name: Build on Linux
-        if: runner.os == 'Linux'
-        shell: bash
-        run: |
-          source '.github/workflows/make.sh'
-          # ATSynEdit needs the LCL gtk2 interface built with WITH_GTK2_IM.
-          # Ubuntu's lazbuild has no --opt, so set the define globally and
-          # let the recursive build recompile LCL.
-          echo '-dWITH_GTK2_IM' | sudo tee -a /etc/fpc.cfg
-          sudo chown -R "$USER" /usr/lib/lazarus
-          lazbuild --build-all --recursive --build-mode=Release --widgetset=gtk2 \
-            --no-write-project TeroSubtitler/src/tero.lpi
-          strip TeroSubtitler/bin/tero
-
       - name: Build on Windows
         if: runner.os == 'Windows'
         shell: pwsh
@@ -106,20 +88,6 @@ jobs:
           $env:PATH += ';C:\Lazarus;C:\Lazarus\fpc\3.2.2\bin\x86_64-win64'
           lazbuild --build-all --build-mode=Release --no-write-project TeroSubtitler/src/tero.lpi
           if ($LastExitCode -ne 0) { exit $LastExitCode }
-
-      - name: Package Linux
-        if: runner.os == 'Linux'
-        shell: bash
-        run: |
-          out="dist/${{ steps.ver.outputs.name }}"
-          mkdir -p "$out"
-          cd TeroSubtitler/bin
-          cp -r CustomFormat Dictionaries Languages OCR "../../$out/"
-          cp -r Shortcuts "../../$out/"
-          cp libhunspellx64.so tero tero.cfs "../../$out/"
-          chmod +x "../../$out/tero"
-          cd ../../dist
-          tar -czf "${{ steps.ver.outputs.name }}.tar.gz" "${{ steps.ver.outputs.name }}"
 
       - name: Package Windows
         if: runner.os == 'Windows'
@@ -144,6 +112,123 @@ jobs:
           path: |
             dist/*.zip
             dist/*.tar.gz
+          retention-days: 7
+
+  build-linux:
+    needs: check
+    if: needs.check.outputs.changed == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        widgetset: [gtk2, gtk3, qt5, qt6]
+
+    env:
+      NAME: ${{ needs.check.outputs.base }}-linux-x86_64-${{ matrix.widgetset }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Configure GitHub HTTPS
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
+
+      - name: Update submodules
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --remote --recursive use/UW_BlurayPGSParser
+          git submodule update --init --remote --recursive use/UW_MPVPlayer
+
+      # Official Lazarus 4.8 debs (same version as Windows and macOS)
+      - name: Install Lazarus
+        run: |
+          set -euo pipefail
+          sf="https://sourceforge.net/projects/lazarus/files/Lazarus%20Linux%20amd64%20DEB/Lazarus%204.8"
+          cd "$RUNNER_TEMP"
+          for deb in fpc-laz_3.2.2-210709_amd64.deb fpc-src_3.2.2-210709_amd64.deb lazarus-project_4.8.0-0_amd64.deb; do
+            curl -fsSL --retry 3 -o "$deb" "$sf/$deb/download"
+          done
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ./fpc-laz_*.deb ./fpc-src_*.deb ./lazarus-project_*.deb \
+            libgtk2.0-dev libgtk-3-dev libgl-dev libmpv-dev patchelf
+          lazdir=$(dirname "$(readlink -f "$(command -v lazbuild)")")
+          sudo chown -R "$USER" "$lazdir"
+          echo "LAZDIR=$lazdir" >> "$GITHUB_ENV"
+          lazbuild --version
+
+      # Qt bindings from Lazarus 4.8 (Ubuntu has no libqt6pas, and its libqt5pas is older)
+      - name: Build Qt bindings
+        if: startsWith(matrix.widgetset, 'qt')
+        run: |
+          set -euo pipefail
+          if [[ "${{ matrix.widgetset }}" == qt5 ]]; then
+            sudo apt-get install -y -qq qtbase5-dev qt5-qmake
+            qmake=qmake
+          else
+            sudo apt-get install -y -qq qt6-base-dev qmake6
+            qmake=qmake6
+          fi
+          cd "$LAZDIR/lcl/interfaces/${{ matrix.widgetset }}/cbindings"
+          $qmake
+          make -j"$(nproc)"
+          sudo make install
+          sudo ldconfig
+          ls -l /usr/lib/x86_64-linux-gnu/libQt*Pas.so* /usr/lib/libQt*Pas.so* 2>/dev/null || true
+
+      - name: Install packages
+        run: |
+          set -euo pipefail
+          opm="$HOME/.lazarus/onlinepackagemanager/packages"
+          for p in BGRABitmap FPSpreadsheet ATFlatControls EncConv ATSynEdit; do
+            curl -fsSL --retry 3 -o "$RUNNER_TEMP/$p.zip" "https://packages.lazarus-ide.org/$p.zip"
+            mkdir -p "$opm/$p"
+            unzip -q -o "$RUNNER_TEMP/$p.zip" -d "$opm/$p" -x "*/test_files/*"
+          done
+          find "$opm" use TeroSubtitler/common TeroSubtitler/subtitleapi TeroSubtitler/controls \
+            -name '*.lpk' | grep -Ev '(cocoa|gdi|_template)' | while read -r lpk; do
+              lazbuild --add-package-link "$lpk"
+          done
+
+      # ATSynEdit needs the LCL gtk2 interface built with WITH_GTK2_IM;
+      # set it globally so the recursive build recompiles LCL with it
+      - name: Enable GTK2 input method
+        if: matrix.widgetset == 'gtk2'
+        run: echo '-dWITH_GTK2_IM' | sudo tee -a /etc/fpc.cfg
+
+      - name: Build
+        run: |
+          set -euo pipefail
+          lazbuild --build-all --recursive --build-mode=Release --widgetset=${{ matrix.widgetset }} \
+            --no-write-project TeroSubtitler/src/tero.lpi
+          strip TeroSubtitler/bin/tero
+
+      - name: Package
+        run: |
+          set -euo pipefail
+          out="dist/$NAME"
+          mkdir -p "$out"
+          cd TeroSubtitler/bin
+          cp -r CustomFormat Dictionaries Languages OCR Shortcuts "../../$out/"
+          cp libhunspellx64.so tero tero.cfs "../../$out/"
+          cd ../..
+          # Ship the Qt bindings next to tero and let it find them there
+          if [[ "${{ matrix.widgetset }}" == qt* ]]; then
+            lib=$(ldd "$out/tero" | awk '/libQt[56]Pas/ {print $3}')
+            [[ -n "$lib" ]] || { echo "libQtPas not linked"; ldd "$out/tero"; exit 1; }
+            cp -L "$lib" "$out/"
+            patchelf --set-rpath '$ORIGIN' "$out/tero"
+          fi
+          chmod +x "$out/tero"
+          tar -czf "dist/$NAME.tar.gz" -C dist "$NAME"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-${{ matrix.widgetset }}
+          path: dist/*.tar.gz
           retention-days: 7
 
   build-macos:
@@ -299,7 +384,7 @@ jobs:
           retention-days: 7
 
   release:
-    needs: [check, build, package-macos]
+    needs: [check, build, build-linux, package-macos]
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
