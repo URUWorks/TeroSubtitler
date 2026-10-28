@@ -23,6 +23,8 @@
 - fixed: [macOS] Application icon is slightly blurry #2
 - fixed: [macOS] Dock icon is low-res and distorted upon load of application #1
 - fixed: [macOS] Dropping files on the app icon (Dock/Finder) failed on macOS before 10.13
+- fixed: Possible crash in Spell check with some dictionaries
+- fixed: Dictionaries with a variant in their name, weren’t shown correctly in Spell check
 - fixed: Encoding detection for ANSI subtitles (German, Greek and Arabic were detected as Cyrillic; English, French and Italian as Central European)
 - fixed: UTF-16 files without BOM were detected as UTF-8
 - fixed: Shot changes couldn’t be imported from EDL files with only audio events (FCP)
@@ -57,6 +59,7 @@
 - fixed: Paste not working on an empty list and accepting invalid clipboard data
 - fixed: Preview not showing overlapping subtitles
 - fixed: Corrupted .peak files crashing the waveform
+- fixed: the timeline shows the entry number and duration also for multi-line entries when there is room
 - fixed: Web preview with spaces, # or quotes in the video path
 - fixed: Fix subtitles showed overlap suggestions with the same timecodes as before in frames mode
 - fixed: Fixing overlaps no longer leaves short chained subtitles with zero duration
@@ -86,6 +89,7 @@
 - improved: The translation memory stays open between subtitles and is reopened at startup
 - improved: The translation memory is saved automatically along with the auto backup
 - improved: Incomplete tags fix
+- improved: Dictionaries list is now sorted alphabetically
 - improved: Safe save (temporary file + rename), an interrupted save no longer truncates the original
 - improved: Network timeouts, no more freezes without internet
 - improved: Undo history limit
