@@ -45,10 +45,18 @@ implementation
 // It's done in an application "key down before" handler, which the LCL calls
 // before any shortcut check: from the form OnShortCut it was too late when a
 // control has a popup menu with the same shortcuts (the memo, Cmd+C/V/X/A...).
+//
+// While a modal dialog is shown (the native open/save panels too), the LCL
+// disables the main menu items but they keep their key equivalents. In a
+// native panel the text fields edit through the standard Edit menu actions
+// (selectAll:, copy:...), and a disabled Tero item with the same shortcut
+// (Select all, Cmd+A) is found first and the key does nothing. So the
+// standard edit shortcuts are removed from the main menu items while a modal
+// is shown and restored after.
 
 {$IFDEF DARWIN}
 uses
-  Classes, Controls, LCLType, CocoaAll;
+  Classes, Controls, LCLType, Menus, CocoaAll;
 
 type
 
@@ -58,10 +66,18 @@ type
   public
     Form: TCustomForm;
     procedure KeyDownBefore(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure ModalBegin(Sender: TObject);
+    procedure ModalEnd(Sender: TObject);
+  end;
+
+  TSavedKeyEquivalent = record
+    Item : TMenuItem;
+    Key  : NSString;
   end;
 
 var
   FMenuKeys: TMacMenuKeys = NIL;
+  FSavedKeys: array of TSavedKeyEquivalent;
 
 // -----------------------------------------------------------------------------
 
@@ -102,6 +118,81 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function IsStandardEditKey(const AItem: NSMenuItem): Boolean;
+var
+  k: String;
+  m: NSUInteger;
+begin
+  Result := False;
+  if (AItem.keyEquivalent = NIL) then Exit;
+  k := AItem.keyEquivalent.UTF8String;
+  m := AItem.keyEquivalentModifierMask and (NSCommandKeyMask or NSShiftKeyMask or NSControlKeyMask or NSAlternateKeyMask);
+  // Cmd+A/C/V/X/Z and Shift+Cmd+Z (redo)
+  if m = NSCommandKeyMask then
+    Result := (k = 'a') or (k = 'c') or (k = 'v') or (k = 'x') or (k = 'z') or (k = 'Z')
+  else if m = (NSCommandKeyMask or NSShiftKeyMask) then
+    Result := (k = 'z') or (k = 'Z');
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TMacMenuKeys.ModalBegin(Sender: TObject);
+
+  procedure Scan(const AItem: TMenuItem);
+  var
+    i: Integer;
+    it: NSMenuItem;
+  begin
+    for i := 0 to AItem.Count-1 do
+    begin
+      if AItem[i].HandleAllocated then
+      begin
+        it := NSMenuItem(AItem[i].Handle);
+        if (it <> NIL) and IsStandardEditKey(it) then
+        begin
+          SetLength(FSavedKeys, Length(FSavedKeys)+1);
+          FSavedKeys[High(FSavedKeys)].Item := AItem[i];
+          FSavedKeys[High(FSavedKeys)].Key  := it.keyEquivalent;
+          FSavedKeys[High(FSavedKeys)].Key.retain;
+          it.setKeyEquivalent(NSSTR(''));
+        end;
+      end;
+      Scan(AItem[i]);
+    end;
+  end;
+
+begin
+  if (Length(FSavedKeys) > 0) or (Form = NIL) or (Form.Menu = NIL) then Exit;
+  Scan(Form.Menu.Items);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TMacMenuKeys.ModalEnd(Sender: TObject);
+var
+  i: Integer;
+  it: NSMenuItem;
+begin
+  for i := 0 to High(FSavedKeys) do
+  begin
+    with FSavedKeys[i] do
+    begin
+      // only if the shortcut wasn't changed (or removed) while the modal was
+      // shown, e.g. in the shortcuts settings
+      if (Item.ShortCut <> 0) and Item.HandleAllocated then
+      begin
+        it := NSMenuItem(Item.Handle);
+        if (it <> NIL) and ((it.keyEquivalent = NIL) or (it.keyEquivalent.length = 0)) then
+          it.setKeyEquivalent(Key);
+      end;
+      Key.release;
+    end;
+  end;
+  SetLength(FSavedKeys, 0);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure MacMenuKeysInstall(const AForm: TCustomForm);
 begin
   if Assigned(FMenuKeys) or (AForm = NIL) then Exit;
@@ -109,6 +200,8 @@ begin
   FMenuKeys := TMacMenuKeys.Create;
   FMenuKeys.Form := AForm;
   Application.AddOnKeyDownBeforeHandler(@FMenuKeys.KeyDownBefore);
+  Application.AddOnModalBeginHandler(@FMenuKeys.ModalBegin);
+  Application.AddOnModalEndHandler(@FMenuKeys.ModalEnd);
 end;
 {$ELSE}
 // -----------------------------------------------------------------------------
