@@ -46,6 +46,12 @@ begin
   Application.Title:='Tero Subtitler';
   Application.Scaled:=True;
   Application.Initialize;
+  {$IFDEF WINDOWS}
+  // the taskbar button belongs to the main form instead of the hidden
+  // application window, so Windows shows it on the taskbar of the monitor
+  // where the window is (Show taskbar buttons on: taskbar where window is open)
+  Application.MainFormOnTaskBar := True;
+  {$ENDIF}
   {$IFDEF DARWIN}
   // Let macOS use the bundle icon (tero.icns). Otherwise the LCL picks the
   // 48x48 image from MAINICON (closest to SM_CXICON = 128) for the Dock.
