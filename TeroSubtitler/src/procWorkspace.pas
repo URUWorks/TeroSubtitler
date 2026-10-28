@@ -444,31 +444,44 @@ end;
 procedure FillWithDictionaries(const AParent: TComponent; const ACombo: TComboBox);
 var
   SearchRec : TSearchRec;
+  List      : TStringList;
   mnu       : TMenuItem;
   x, i, l   : Integer;
   s, s1     : String;
 begin
-  if FindFirst(DictionariesFolder + '*.dic', faAnyFile, SearchRec) = 0 then
+  // collect captions first, FindFirst order depends on the file system
+  List := TStringList.Create;
   try
-    x := 0;
-    repeat
-      s := ChangeFileExt(SearchRec.Name, '');
-      if AParent <> NIL then
-      begin
+    if FindFirst(DictionariesFolder + '*.dic', faAnyFile, SearchRec) = 0 then
+    try
+      repeat
+        s := ChangeFileExt(SearchRec.Name, '');
+        // use only the culture part (e.g. "pt_PT (pre-AO 1990)" -> "pt_PT")
         l := Pos(' ', s);
         if l > 0 then
           s1 := Copy(s, 1, l-1)
         else
           s1 := s;
+        List.Add(Trim(GetCultureDisplayName(s1) + ' [' + s + ']'));
+      until FindNext(SearchRec) <> 0;
+    finally
+      FindClose(SearchRec);
+    end;
 
+    List.Sort;
+
+    for x := 0 to List.Count-1 do
+    begin
+      s1 := List[x];
+      s  := GetDictionaryNameFromCaption(s1);
+
+      if AParent <> NIL then
+      begin
         mnu         := TMenuItem.Create(AParent);
         mnu.Name    := 'dic_' + IntToStr(x);
-        mnu.Caption := Trim(GetCultureDisplayName(s1) + ' [' + s + ']');
+        mnu.Caption := s1;
         mnu.OnClick := @frmMain.DoDictionaryItemClick;
-        if s = AppOptions.HunspellLanguage then
-          mnu.Checked := True
-        else
-          mnu.Checked := False;
+        mnu.Checked := (s = AppOptions.HunspellLanguage);
 
         if AParent is TPopupMenu then
           with AParent as TPopupMenu do
@@ -479,13 +492,12 @@ begin
       end
       else if ACombo <> NIL then
       begin
-        i := ACombo.Items.Add(Trim(GetCultureDisplayName(ReplaceString(s, '_', '-')) + ' [' + s + ']'));
+        i := ACombo.Items.Add(s1);
         if s = AppOptions.HunspellLanguage then ACombo.ItemIndex := i;
       end;
-     inc(x);
-    until FindNext(SearchRec) <> 0;
+    end;
   finally
-    FindClose(SearchRec);
+    List.Free;
   end;
 end;
 
