@@ -39,6 +39,7 @@ type
     Enabled     : Boolean;
     Description : String;
     Count       : Integer;
+    Estimate    : Integer; // count with every fix enabled (GetTotalErrorsCount)
   end;
 
   TfrmFixSubtitles = class(TForm)
@@ -90,6 +91,7 @@ type
     FProfiles: TProfiles;
     FProfile: PProfileItem;
     FTotalErrorCount: Integer;
+    FCheckingSelected: Boolean;
     procedure UpdateItemList(const AUpdateTotalCount: Boolean = True);
     function GetErrorStr(const AError: TSubtitleErrorTypeSet): String;
     function IsTimeFixed(const Item: TSubtitleInfoItem): Boolean;
@@ -134,6 +136,8 @@ procedure TfrmFixSubtitles.FormCreate(Sender: TObject);
       Error       := AError;
       Enabled     := AEnabled;
       Description := ADescription;
+      Count       := 0;
+      Estimate    := 0;
     end;
     l := Length(FOptions);
     clbOptions.AddItem(ADescription, NIL);
@@ -223,6 +227,8 @@ begin
   cboSpacingHyphen.AddItem(lngfsRemoveSpacing, NIL);
   cboSpacingHyphen.ItemIndex := x;
 
+  // select several entries (Shift/Cmd) and check or uncheck them at once
+  VST.TreeOptions.SelectionOptions := VST.TreeOptions.SelectionOptions + [toMultiSelect];
   VSTAddColumn(VST, lngfsIndex, 75);
   VSTAddColumn(VST, lngfsAction, 50, taLeftJustify);
   VSTAddColumn(VST, lngfsCurrent, 50, taLeftJustify);
@@ -257,7 +263,7 @@ begin
     SetValue('OCRScript', cboOCR.Text);
     SetValue('SpaceOfOpeningHyphen', cboSpacingHyphen.ItemIndex);
     CloseKey;
-    Flush;
+    SafeFlush;
   finally
     Free;
   end;
@@ -340,9 +346,33 @@ end;
 
 procedure TfrmFixSubtitles.VSTChecked(Sender: TBaseVirtualTree;
   Node: PVirtualNode);
+var
+  Run: PVirtualNode;
 begin
-  if Assigned(Node) and (FList.Count > 0) then
-    FList[Node^.Index]^.Apply := Node^.CheckState = csCheckedNormal;
+  if not Assigned(Node) or (FList.Count = 0) then Exit;
+
+  FList[Node^.Index]^.Apply := Node^.CheckState = csCheckedNormal;
+
+  // checking one of several selected entries checks all of them
+  if not FCheckingSelected and (vsSelected in Node^.States) and (VST.SelectedCount > 1) then
+  begin
+    FCheckingSelected := True;
+    try
+      Run := VST.GetFirstSelected;
+      while Assigned(Run) do
+      begin
+        if Run <> Node then
+        begin
+          Run^.CheckState := Node^.CheckState;
+          FList[Run^.Index]^.Apply := Node^.CheckState = csCheckedNormal;
+        end;
+        Run := VST.GetNextSelected(Run);
+      end;
+    finally
+      FCheckingSelected := False;
+    end;
+    VST.Invalidate;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -711,7 +741,12 @@ var
 begin
   for i := 0 to Length(FOptions)-1 do
     if not AOnlyEnabled or FOptions[i].Enabled then
-      FOptions[i].Count := 0;
+      FOptions[i].Count := 0
+    else
+      // a disabled option shows the estimate again, not the count it had
+      // the last time it was enabled (it depends on the other options, e.g.
+      // empty entries only appear after removing the hearing impaired text)
+      FOptions[i].Count := FOptions[i].Estimate;
 
   if AInfoList.Count > 0 then
     for i := 0 to AInfoList.Count-1 do
@@ -764,6 +799,10 @@ begin
         else if etCleanupTags in ErrorsFixed then
           IncCount(22);
       end;
+
+  if not AOnlyEnabled then
+    for i := 0 to Length(FOptions)-1 do
+      FOptions[i].Estimate := FOptions[i].Count;
 
   UpdatedOption(0, lngfsetUnnecessarySpaces);
   UpdatedOption(1, lngfsetUnnecessaryDots);
