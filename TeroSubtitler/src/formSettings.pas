@@ -41,6 +41,7 @@ type
     btnWhisperCPP: TButton;
     btnFasterWhisper: TButton;
     btnYTDLP: TButton;
+    btnYTDLPUpdate: TButton;
     btnShortCutApply: TButton;
     btnShortCutSave: TButton;
     btnTesseract: TButton;
@@ -191,6 +192,7 @@ type
     procedure btnTesseractClick(Sender: TObject);
     procedure btnWhisperCPPClick(Sender: TObject);
     procedure btnYTDLPClick(Sender: TObject);
+    procedure btnYTDLPUpdateClick(Sender: TObject);
     procedure cboProfileSelect(Sender: TObject);
     procedure cboShortcutCatSelect(Sender: TObject);
     procedure cboShortCutPresetSelect(Sender: TObject);
@@ -253,6 +255,8 @@ procedure TfrmSettings.FormCreate(Sender: TObject);
 var
   i: Integer;
 begin
+  btnYTDLPUpdate.Caption := lngbtnUpdate;
+
   FLngList := TStringList.Create;
   try
     with lstTree.Items do
@@ -632,6 +636,36 @@ end;
 procedure TfrmSettings.btnYTDLPClick(Sender: TObject);
 begin
   edtYTDLP.Text := GetFileFromOpenDialog(edtYTDLP.Text);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.btnYTDLPUpdateClick(Sender: TObject);
+var
+  f, s: String;
+begin
+  f := Trim(edtYTDLP.Text);
+  if f.IsEmpty then f := ConcatPaths([YTDLPFolder, YTDLP_EXE]);
+
+  btnYTDLPUpdate.Enabled := False;
+  Screen.Cursor := crHourGlass;
+  try
+    if UpdateYTDLP(f, s) then
+    begin
+      edtYTDLP.Text := f;
+      Screen.Cursor := crDefault;
+      ShowMessageDialog(s);
+    end
+    else
+    begin
+      Screen.Cursor := crDefault;
+      if s.IsEmpty then s := lngFailed;
+      ShowErrorMessageDialog(s, '', False, False);
+    end;
+  finally
+    Screen.Cursor := crDefault;
+    btnYTDLPUpdate.Enabled := True;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

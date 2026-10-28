@@ -320,12 +320,13 @@ end;
 procedure TfrmWizard.btnDownloadYTDLPClick(Sender: TObject);
 begin
   {$IFDEF DARWIN}
-  ShowDownloadDialog(URL_YTDLP, ConcatPaths([YTDLPFolder, 'ytdlp.zip']));
+  ShowDownloadDialog(URL_YTDLP, ConcatPaths([YTDLPFolder, YTDLP_EXE]));
   {$ELSE}
   ShowDownloadDialog(URL_YTDLP, YTDLPFileName);
   {$ENDIF}
   if FileExists(ConcatPaths([YTDLPFolder, YTDLP_EXE])) then
   begin
+    MakeFileExecutable(ConcatPaths([YTDLPFolder, YTDLP_EXE]));
     Tools.YTDLP := ConcatPaths([YTDLPFolder, YTDLP_EXE]);
     CheckState_ytdlp;
   end;

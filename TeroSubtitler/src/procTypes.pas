@@ -174,7 +174,11 @@ const
   {$IFDEF LINUX}
   URL_FFMPEG = '';
   URL_LIBMPV = '';
+  {$IFDEF CPUAARCH64}
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux_aarch64';
+  {$ELSE}
+  URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux';
+  {$ENDIF}
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_linux.zip';
   URL_FASTERWHISPER     = 'https://github.com/Purfview/whisper-standalone-win/releases/download/faster-whisper/Whisper-Faster_r189.1_linux.zip';
   URL_FASTERWHISPERCUDA = 'https://github.com/Purfview/whisper-standalone-win/releases/download/libs/cuBLAS.and.cuDNN_CUDA11_linux_v2.zip';
@@ -192,7 +196,11 @@ const
   FFPROBE_EXE          = 'ffprobe';
   FFPROBE_Params       = '-v quiet -print_format json -show_format -show_streams %input';
 
+  {$IFDEF CPUAARCH64}
   YTDLP_EXE = 'yt-dlp_linux_aarch64';
+  {$ELSE}
+  YTDLP_EXE = 'yt-dlp_linux';
+  {$ENDIF}
 
   WHISPER_EXE      = 'main';
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
@@ -210,7 +218,7 @@ const
   {$IFDEF DARWIN}
   URL_FFMPEG = 'https://github.com/URUWorks/additional-files/raw/main/ffmpeg/ffmpeg_macos64.zip';
   URL_LIBMPV = 'https://github.com/URUWorks/additional-files/raw/main/libmpv/libmpv_macos.zip';
-  URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos.zip';
+  URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos'; // standalone, can self update
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_macos_%cpu.zip';
   URL_FASTERWHISPER     = 'https://github.com/URUWorks/additional-files/raw/main/whisper/fasterwhisper_macos_%cpu.zip';
   //URL_FASTERWHISPERCUDA = '';

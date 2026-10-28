@@ -103,6 +103,9 @@ function libmpvFolder: String;
 function YTDLPFolder: String;
 function ffmpegFolder: String;
 
+procedure MakeFileExecutable(const AFileName: String);
+function UpdateYTDLP(const AFileName: String; out AOutput: String): Boolean;
+
 function GetDictionaryNameFromCaption(const AText: String): String;
 function GetExtractAppFile(const FFmpeg: Boolean = True): String;
 function GetAudioToTextAppFile(const AOriginalName: Boolean = False): String;
@@ -124,7 +127,8 @@ uses
   procDialogs, UWSubtitleAPI.Formats, MPVPlayer, procWorkspace, procColorTheme,
   LCLProc, UWSystem.Globalization, UWSystem.TimeUtils, libMPV.Client, procMPV,
   UWSpellcheck.Hunspell, procConventions, UWSystem.InetUtils, lazfileutils,
-  fileinfo, winpeimagereader, elfreader, machoreader,LCLIntf, UWSystem.StrUtils, Math;
+  fileinfo, winpeimagereader, elfreader, machoreader,LCLIntf, UWSystem.StrUtils, Math,
+  UWSystem.Process, formDownload{$IFDEF UNIX}, BaseUnix{$ENDIF};
 
 // -----------------------------------------------------------------------------
 
@@ -1883,6 +1887,73 @@ begin
   {$ELSE}
   Result := libmpvFolder;
   {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MakeFileExecutable(const AFileName: String);
+{$IFDEF DARWIN}
+var
+  sl: TStringList;
+{$ENDIF}
+begin
+  {$IFDEF UNIX}
+  if not FileExists(AFileName) then Exit;
+  FpChmod(AFileName, &755);
+  {$IFDEF DARWIN}
+  // Gatekeeper may block a quarantined executable
+  sl := NIL;
+  try
+    ExecuteAppLoop('/usr/bin/xattr', ['-d', 'com.apple.quarantine', AFileName], sl);
+  finally
+    sl.Free;
+  end;
+  {$ENDIF}
+  {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
+function UpdateYTDLP(const AFileName: String; out AOutput: String): Boolean;
+var
+  sl: TStringList;
+  s: String;
+begin
+  Result  := False;
+  AOutput := '';
+  if AFileName.IsEmpty then Exit;
+
+  // the standalone builds can update themselves
+  if FileExists(AFileName) then
+  begin
+    sl := NIL;
+    try
+      Result := ExecuteAppLoop(AFileName, ['-U'], sl);
+      if Assigned(sl) then
+      begin
+        AOutput := Trim(sl.Text);
+        if Pos('ERROR', AOutput) > 0 then Result := False;
+      end;
+    finally
+      sl.Free;
+    end;
+  end;
+
+  // missing or unable to update itself (e.g. old macOS zip build), download it again
+  if not Result then
+  begin
+    s := AFileName + '.new';
+    if ShowDownloadDialog(URL_YTDLP, s) = dfCompleted then
+    begin
+      if FileExists(AFileName) then DeleteFile(AFileName);
+      Result := RenameFile(s, AFileName);
+      if Result then AOutput := lngSuccess;
+    end;
+    if FileExists(s) then DeleteFile(s);
+  end;
+
+  if Result then
+    MakeFileExecutable(AFileName);
 end;
 
 // -----------------------------------------------------------------------------
