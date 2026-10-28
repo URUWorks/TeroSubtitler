@@ -389,8 +389,18 @@ var
   FullHLines : Boolean;
   CustomDrawRect : TRect;
   ViewEndTime : Integer;
+  LineH, TextLines, c : Integer;
+  s : String;
 begin
   if FSubtitles.Count = 0 then Exit;
+
+  // height of a line of the item text (same font as _TextOut)
+  with ABitmap.{$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF} do
+  begin
+    Font.Height := 14;
+    Font.Style  := [fsBold];
+    LineH := TextHeight('Ág');
+  end;
 
   with ABitmap do
   begin
@@ -484,10 +494,19 @@ begin
               FTS.Alignment := taLeftJustify;
             end;
 
-            _TextOut(CustomDrawRect, RemoveTSTags(FSubtitles.ItemPointer[i]^.Text), FSubtitles.ItemPointer[i]^.Notes, tlTop);
+            s := RemoveTSTags(FSubtitles.ItemPointer[i]^.Text);
+            _TextOut(CustomDrawRect, s, FSubtitles.ItemPointer[i]^.Notes, tlTop);
             FTS.Alignment := taLeftJustify;
 
-            if (CustomDrawRect.Height > (FTimeLineHeight*2)) and (Pos(LineEnding, FSubtitles.ItemPointer[i]^.Text) = 0) then
+            // lines used by the text (and the note icon, two more), the
+            // "#index  duration" line is drawn at the bottom only if it fits
+            // below them (before, never with more than one line of text)
+            TextLines := 1;
+            for c := 1 to Length(s) do
+              if s[c] = #10 then Inc(TextLines);
+            if FSubtitles.ItemPointer[i]^.Notes <> '' then Inc(TextLines, 2);
+
+            if (CustomDrawRect.Height > (FTimeLineHeight*2)) and ((TextLines+1) * LineH <= CustomDrawRect.Height) then
             begin
               if not FFPSTimeMode then
                 _TextOut(CustomDrawRect, '#' + IntToStr(i+1) + '  ' + TimeMSToShortString(FSubtitles.Duration[i], 1), '', tlBottom)
