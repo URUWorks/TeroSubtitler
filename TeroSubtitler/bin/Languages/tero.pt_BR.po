@@ -4640,6 +4640,12 @@ msgctxt "tfrmsettings.btnytdlp.caption"
 msgid "..."
 msgstr "..."
 
+#: tfrmsettings.btnytdlpupdate.caption
+#, fuzzy
+msgctxt "tfrmsettings.btnytdlpupdate.caption"
+msgid "Update"
+msgstr "Atualizar"
+
 #: tfrmsettings.caption
 msgid "Settings"
 msgstr "Configurações"
@@ -4666,6 +4672,10 @@ msgstr "Interpretar tags na lista"
 #: tfrmsettings.chkdrawwaveformgap.caption
 msgid "Show gap in timeline"
 msgstr "Mostrar intervalo na linha do tempo"
+
+#: tfrmsettings.chkpreviewframeondrag.caption
+msgid "Show the frame when dragging an entry edge in the timeline"
+msgstr ""
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
 msgid "Prompt when deleting subtitles"

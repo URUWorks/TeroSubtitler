@@ -4532,6 +4532,11 @@ msgctxt "tfrmsettings.btnytdlp.caption"
 msgid "..."
 msgstr ""
 
+#: tfrmsettings.btnytdlpupdate.caption
+msgctxt "tfrmsettings.btnytdlpupdate.caption"
+msgid "Update"
+msgstr ""
+
 #: tfrmsettings.caption
 msgid "Settings"
 msgstr ""
@@ -4555,6 +4560,10 @@ msgstr ""
 
 #: tfrmsettings.chkdrawwaveformgap.caption
 msgid "Show gap in timeline"
+msgstr ""
+
+#: tfrmsettings.chkpreviewframeondrag.caption
+msgid "Show the frame when dragging an entry edge in the timeline"
 msgstr ""
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption

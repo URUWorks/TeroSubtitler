@@ -4555,6 +4555,11 @@ msgctxt "tfrmsettings.btnytdlp.caption"
 msgid "..."
 msgstr "..."
 
+#: tfrmsettings.btnytdlpupdate.caption
+msgctxt "tfrmsettings.btnytdlpupdate.caption"
+msgid "Update"
+msgstr "Update"
+
 #: tfrmsettings.caption
 msgid "Settings"
 msgstr "Settings"
@@ -4579,6 +4584,10 @@ msgstr "Interpret tags in list"
 #: tfrmsettings.chkdrawwaveformgap.caption
 msgid "Show gap in timeline"
 msgstr "Show gap in timeline"
+
+#: tfrmsettings.chkpreviewframeondrag.caption
+msgid "Show the frame when dragging an entry edge in the timeline"
+msgstr "Show the frame when dragging an entry edge in the timeline"
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
 msgid "Prompt when deleting subtitles"
@@ -5663,4 +5672,3 @@ msgstr "Inverted"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-
