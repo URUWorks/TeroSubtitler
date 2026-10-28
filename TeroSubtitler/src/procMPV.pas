@@ -138,6 +138,9 @@ begin
       MPV.mpv_set_option_string_('osd-back-color=#00000000');
       MPV.mpv_set_option_string_('sub-back-color=#00000000');
     end;
+    // the subtitle overlay is only sent when its text changes: send it again
+    // with the new style (also when paused, the playback timer keeps running)
+    MPV.InvalidateOverlayText;
   end;
 end;
 

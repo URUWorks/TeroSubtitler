@@ -311,6 +311,7 @@ type
     TextSize               : Integer;
     TextShadowOffset       : Integer;
     AutoStartPlaying       : Boolean;
+    PreviewFrameOnDrag     : Boolean; // seek the video while dragging an entry in the timeline
     SubtitleToShow         : TSubtitleMode;
     SeekTime               : Integer;
     FrameStep              : Byte;

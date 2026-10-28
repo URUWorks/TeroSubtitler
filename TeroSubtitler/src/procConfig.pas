@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, Controls, SysUtils, Menus, Forms, procTypes, UWSubtitleAPI,
-  UWHotKey, formCustomQuestionDlg, procLocalize
+  UWHotKey, formCustomQuestionDlg, procLocalize, XMLConf
   {$IFNDEF WINDOWS}, UWCheckBox, UWRadioButton{$ENDIF}
   {$IFDEF DARWIN}, CocoaAll, CocoaUtils{$ENDIF};
 
@@ -38,6 +38,15 @@ procedure SaveSettings;
 
 function LoadFormSettings(const AForm: TForm): String;
 procedure SaveFormSettings(const AForm: TForm; const AExtra: String = '');
+
+type
+
+  { TXMLConfigSafeFlush }
+
+  TXMLConfigSafeFlush = class helper for TXMLConfig
+    // Flush, but without raising if the file can't be written
+    procedure SafeFlush;
+  end;
 
 procedure LoadActors;
 procedure SaveActors;
@@ -111,7 +120,7 @@ procedure CheckForUpdates;
 implementation
 
 uses
-  RegExpr, formMain, XMLConf, UWSystem.Encoding, UWSystem.SysUtils, Dialogs,
+  RegExpr, formMain, UWSystem.Encoding, UWSystem.SysUtils, Dialogs,
   procDialogs, UWSubtitleAPI.Formats, MPVPlayer, procWorkspace, procColorTheme,
   LCLProc, UWSystem.Globalization, UWSystem.TimeUtils, libMPV.Client, procMPV,
   UWSpellcheck.Hunspell, procConventions, UWSystem.InetUtils, lazfileutils,
@@ -210,9 +219,10 @@ begin
     TextBackgroundColor    := '#000000';
     UseTextBackgroundColor := False;
     TextPosition           := 'bottom';
-    TextSize               := 32;
+    TextSize               := 40;
     TextShadowOffset       := 2;
     AutoStartPlaying       := False;
+    PreviewFrameOnDrag     := True;
     SeekTime               := 5000;
     FrameStep              := 1;
     Volume.Percent         := 75;
@@ -586,6 +596,7 @@ begin
         SubtitleHandleByMPV := GetValue('SubtitleHandleByMPV', SubtitleHandleByMPV);
         MPV.UseHWDec := GetValue('UseHWDec', MPV.UseHWDec);
         AutoStartPlaying := GetValue('AutoStartPlaying', AutoStartPlaying);
+        PreviewFrameOnDrag := GetValue('PreviewFrameOnDrag', PreviewFrameOnDrag);
         SubtitleToShow := TSubtitleMode(GetValue('SubtitleToShow', Integer(SubtitleToShow)));
         actMediaAutoScroll.Checked := GetValue('UpdateListOnPreview', actMediaAutoScroll.Checked);
         actMediaChangePlayRate.Checked := GetValue('MediaChangePlayRate', actMediaChangePlayRate.Checked);
@@ -896,6 +907,32 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// Writes the settings file. Creating it fails if another process has it
+// locked (FPC locks the file while creating it, and then reports a bogus
+// "Bad file number" error), e.g. another Tero instance saving at the same
+// time or a sync/backup tool. Retry a few times and, if it still fails, don't
+// raise: losing this save is better than the "Press Abort to kill the
+// program" dialog. The previous file is not modified in that case.
+procedure TXMLConfigSafeFlush.SafeFlush;
+var
+  i: Integer;
+begin
+  for i := 1 to 5 do
+    try
+      Flush;
+      Exit;
+    except
+      on E: EStreamError do
+        if i < 5 then
+          Sleep(100)
+        else
+          // don't try again when it is freed
+          FModified := False;
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure SaveSettings;
 var
   i: Integer;
@@ -1025,6 +1062,7 @@ begin
         SetValue('SubtitleHandleByMPV', SubtitleHandleByMPV);
         SetValue('UseHWDec', MPV.UseHWDec);
         SetValue('AutoStartPlaying', AutoStartPlaying);
+        SetValue('PreviewFrameOnDrag', PreviewFrameOnDrag);
         SetValue('SubtitleToShow', Integer(SubtitleToShow));
         SetValue('UpdateListOnPreview', actMediaAutoScroll.Checked);
         SetValue('MediaChangePlayRate', actMediaChangePlayRate.Checked);
@@ -1265,7 +1303,7 @@ begin
       //
     CloseKey;
     //
-    Flush;
+    SafeFlush;
   finally
     Free;
   end;
@@ -1318,7 +1356,7 @@ begin
       SetValue('Extra', AExtra);
       CloseKey;
     end;
-    Flush;
+    SafeFlush;
   finally
     Free;
   end;

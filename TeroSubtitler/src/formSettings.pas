@@ -71,6 +71,7 @@ type
     chkAutoPlay: TUWCheckBox;
     chkSubShadow: TCheckBox;
     chkUseHWDec: TUWCheckBox;
+    chkPreviewFrameOnDrag: TUWCheckBox;
     chkUseOwnFileDialog: TUWCheckBox;
     cboProfile: TComboBox;
     cboShortcutCat: TComboBox;
@@ -354,6 +355,7 @@ begin
     chkAutoPlay.Checked            := AutoStartPlaying;
     chkSubtitleHandleByMPV.Checked := SubtitleHandleByMPV;
     chkUseHWDec.Checked            := frmMain.MPV.UseHWDec;
+    chkPreviewFrameOnDrag.Checked  := PreviewFrameOnDrag;
     spnSeekTime.Value              := SeekTime;
     spnFrameStep.Value             := FrameStep;
 
@@ -481,6 +483,7 @@ begin
     AutoStartPlaying       := chkAutoPlay.Checked;
     SubtitleHandleByMPV    := chkSubtitleHandleByMPV.Checked;
     frmMain.MPV.UseHWDec   := chkUseHWDec.Checked;
+    PreviewFrameOnDrag     := chkPreviewFrameOnDrag.Checked;
     SeekTime               := spnSeekTime.Value;
     FrameStep              := spnFrameStep.Value;
     TextColor              := ColorToHexStr(cbnSub.ButtonColor);

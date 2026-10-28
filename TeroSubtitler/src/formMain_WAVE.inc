@@ -286,6 +286,23 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.WAVEDynamicEditTime(Sender: TObject; const Time: Integer);
+var
+  t: Integer;
+begin
+  // dragging an entry (or one of its edges) in the timeline: show that frame
+  // in the video. Only when paused, not to interrupt the playback. mpv drops
+  // the pending seeks when a new one arrives, so there is no need to throttle.
+  if not MPVOptions.PreviewFrameOnDrag or not MPV.IsMediaLoaded or not MPV.IsPaused then Exit;
+
+  t := Time - Workspace.VideoOffset;
+  if t < 0 then t := 0;
+  if t <> MPV.GetMediaPosInMs then
+    MPVSeekTo(t);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.WAVESceneChangeListChange(Sender: TObject);
 begin
   // scene changes imported/detected/added/deleted: only the new ones are

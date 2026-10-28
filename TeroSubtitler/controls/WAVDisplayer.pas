@@ -209,6 +209,7 @@ type
     FOnSelectedSubtitleItem       : TSelectedSubtitleItemEvent;
     FOnSelectedSubtitleItemChange : TNotifyEvent;
     FOnTimeLineClickEvent         : TTimeLineClickEvent;
+    FOnDynamicEditTime            : TTimeLineClickEvent;
     //FOnSubtitleItemStartDblClick  : TSubtitleItemDblClickEvent;
     //FOnSubtitleItemStopDblClick   : TSubtitleItemDblClickEvent;
 
@@ -370,6 +371,8 @@ type
     property OnSelectedSubtitleItemChange  : TNotifyEvent                 read FOnSelectedSubtitleItemChange write FOnSelectedSubtitleItemChange;
     property OnSelectedSubtitleItemChanged : TSubtitleItemChangedEvent    read FOnItemChangedEvent           write FOnItemChangedEvent;
     property OnTimeLineClick               : TTimeLineClickEvent          read FOnTimeLineClickEvent         write FOnTimeLineClickEvent;
+    // while dragging an entry: the time of the edge being moved (the start if the whole entry is moved)
+    property OnDynamicEditTime             : TTimeLineClickEvent          read FOnDynamicEditTime            write FOnDynamicEditTime;
     property OnPeakCreation                : TPeakCreationEvent           read FOnPeakCreation               write FOnPeakCreation;
     property OnSceneChangeListChange       : TNotifyEvent                 read FOnSceneChangeListChange      write FOnSceneChangeListChange;
     //property OnSubtitleItemStartDblClick   : TSubtitleItemDblClickEvent   read FOnSubtitleItemStartDblClick  write FOnSubtitleItemStartDblClick;
@@ -1512,6 +1515,12 @@ begin
 
             Include(UpdateFlags, uvfSubtitle);
             if Assigned(FOnSelectedSubtitleItemChange) then FOnSelectedSubtitleItemChange(Self);
+
+            if Assigned(FOnDynamicEditTime) then
+              if FDynamicEditMode = demWhole then
+                FOnDynamicEditTime(Self, FDynamicSelection.InitialTime)
+              else if FDynamicEditMode in [demInitial, demFinal] then
+                FOnDynamicEditTime(Self, ACursorPosMS);
           end;
         end;
         if Assigned(FOnSelectionChange) then FOnSelectionChange(Self);

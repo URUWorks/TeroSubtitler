@@ -1017,6 +1017,7 @@ type
     procedure DoThumbnailReady(const ATimeMS: Integer; const AFileName: String);
     procedure DoThumbnailsDone(Sender: TObject);
     procedure WAVESceneChangeListChange(Sender: TObject);
+    procedure WAVEDynamicEditTime(Sender: TObject; const Time: Integer);
     // formMain_MPV
     procedure MPVClick(Sender: TObject);
     procedure MPVEndFile(ASender: TObject; AReason, AError: Integer);
@@ -1444,6 +1445,7 @@ begin
   // WAVE
   WAVE.DefaultThumbnail.LoadFromLazarusResource('video_countdown');
   WAVE.OnSceneChangeListChange := @WAVESceneChangeListChange;
+  WAVE.OnDynamicEditTime := @WAVEDynamicEditTime;
   // QuickAction
   edtQuickAction.LocalizeFunc := @LocalizeCategory;
   // MRU
@@ -1820,7 +1822,7 @@ begin
     Workspace.FPS.OutputFPS := Workspace.FPS.InputFPS;
     cboFPS.ItemIndex := cboInputFPS.ItemIndex;
     // the time edits and the waveform keep their own FPS/timecode mode,
-    // without this they stay with the previous one (e.g. DF after loading a NDF file)
+    // without this they stay with the previous one
     SetTimeFPStoTimeEditCtrls;
   end;
 end;
