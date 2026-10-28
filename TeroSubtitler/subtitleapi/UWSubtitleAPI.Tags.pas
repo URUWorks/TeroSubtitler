@@ -54,10 +54,52 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, RegExpr;
 //------------------------------------------------------------------------------
 
 function RemoveTSTags(const Text: String): String;
+var
+  pIn, pEnd, pOut, pStart, pTag: PChar;
+  InTag: Boolean;
+  Len: Integer;
 begin
-  // only ASS override blocks ({\...}) are tags, any other text between
-  // braces is part of the subtitle (same rule as DrawASSText)
-  Result := ReplaceRegExpr('\{\\[^}]*\}', Text, '', True);
+  Len := Length(Text);
+  if (Len = 0) or (Pos('{\', Text) = 0) then Exit(Text);
+
+  SetLength(Result, Len);
+  pIn    := PChar(Text);
+  pEnd   := pIn + Len;
+  pOut   := PChar(Result);
+  pStart := pOut;
+  pTag   := nil;
+  InTag  := False;
+
+  while pIn < pEnd do
+  begin
+    if not InTag then
+    begin
+      if (pIn^ = '{') and (pIn + 1 < pEnd) and ((pIn + 1)^ = '\') then
+      begin
+        InTag := True;
+        pTag  := pIn;
+        Inc(pIn); // salta tambien la '\'
+      end
+      else
+      begin
+        pOut^ := pIn^;
+        Inc(pOut);
+      end;
+    end
+    else if pIn^ = '}' then
+      InTag := False;
+
+    Inc(pIn);
+  end;
+
+  // Tag sin cerrar: se devuelve su texto (cabe: pOut <= posicion de pTag)
+  if InTag then
+  begin
+    Move(pTag^, pOut^, pEnd - pTag);
+    Inc(pOut, pEnd - pTag);
+  end;
+
+  SetLength(Result, pOut - pStart);
 end;
 
 //------------------------------------------------------------------------------
