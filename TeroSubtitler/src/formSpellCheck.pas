@@ -199,7 +199,7 @@ begin
   FLastPos  := 0;
   FLastLine := ALine;
 
-  if ALine < (Subtitles.Count-1) then
+  if ALine < Subtitles.Count then
   begin
     lblCurrentLine.Caption := Format(lngspCurrentLine, [ALine+1]);
     mmoNotFound.Text := GetSubtitleText(ALine, FSource);
@@ -214,57 +214,51 @@ var
   Suggests: TStrings;
   i, x: Integer;
 begin
-  if FLastLine < (Subtitles.Count-1) then
+  while FLastLine < Subtitles.Count do
   begin
-    Suggests := NIL;
     lstSuggestions.Clear;
-    try
-      for i := 0 to FWordMap.Count-1 do
+    for i := 0 to FWordMap.Count-1 do
+    begin
+      if not HunspellInstance.Spell(UTF8LowerCase(FWordMap.Data[i])) and
+        (FSkipList.IndexOf(FWordMap.Data[i]) < 0) and (FTempList.IndexOf(FWordMap.Data[i]) < 0) then
       begin
-        if not HunspellInstance.Spell(UTF8LowerCase(FWordMap.Data[i])) and
-          (FSkipList.IndexOf(FWordMap.Data[i]) < 0) and (FTempList.IndexOf(FWordMap.Data[i]) < 0) then
+        x := FChangeList.IndexOf(FWordMap.Data[i]);
+        if x >= 0 then
         begin
-          x := FChangeList.IndexOf(FWordMap.Data[i]);
-          if x >= 0 then
-          begin
-            SetSubtitleText(FLastLine, ReplaceString(GetSubtitleText(FLastLine, FSource), FChangeList.Keys[x], FChangeList.Data[x], True, False), FSource, False, False, False);
-          end
-          else
-          begin
-            FLastPos := FWordMap.Keys[i];
-            mmoNotFound.SelStart  := FLastPos-1;
-            mmoNotFound.SelLength := UTF8Length(FWordMap.Data[i]);
+          SetSubtitleText(FLastLine, ReplaceString(GetSubtitleText(FLastLine, FSource), FChangeList.Keys[x], FChangeList.Data[x], True, False), FSource, False, False, False);
+        end
+        else
+        begin
+          FLastPos := FWordMap.Keys[i];
+          mmoNotFound.SelStart  := FLastPos-1;
+          mmoNotFound.SelLength := UTF8Length(FWordMap.Data[i]);
 
+          Suggests := NIL;
+          try
             if HunspellInstance.Suggest(FWordMap.Data[i], Suggests) then
             begin
               lstSuggestions.Items.Assign(Suggests);
               lstSuggestions.ItemIndex := 0;
             end;
-
-            btnChange.Enabled    := lstSuggestions.Count > 0;
-            btnChangeAll.Enabled := btnChange.Enabled;
-
-            Exit;
+          finally
+            Suggests.Free;
           end;
+
+          btnChange.Enabled    := lstSuggestions.Count > 0;
+          btnChangeAll.Enabled := btnChange.Enabled;
+
+          Exit;
         end;
       end;
-      InitializeSpellAtLine(FLastLine+1);
-      DoSpell(FirstLoad);
-    finally
-      if Suggests <> NIL then
-        Suggests.Free;
     end;
-  end
-  else
-  begin
-    edtCustom.Text := '';
-    lblCurrentLine.Caption := '';
-
-    if not FirstLoad then
-    begin
-        ShowMessageDialog(lngSpellCheckFinished);
-    end;
+    InitializeSpellAtLine(FLastLine+1);
   end;
+
+  edtCustom.Text := '';
+  lblCurrentLine.Caption := '';
+
+  if not FirstLoad then
+    ShowMessageDialog(lngSpellCheckFinished);
 end;
 
 // -----------------------------------------------------------------------------
@@ -354,7 +348,8 @@ end;
 procedure TfrmSpellCheck.lstSuggestionsSelectionChange(Sender: TObject;
   User: boolean);
 begin
-  edtCustom.Text := lstSuggestions.Items[lstSuggestions.ItemIndex];
+  if (lstSuggestions.ItemIndex >= 0) and (lstSuggestions.ItemIndex < lstSuggestions.Count) then
+    edtCustom.Text := lstSuggestions.Items[lstSuggestions.ItemIndex];
 end;
 
 // -----------------------------------------------------------------------------
