@@ -624,6 +624,9 @@ end;
 procedure TfrmMain.VSTFocusChanged(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Column: TColumnIndex);
 begin
+  // VSTSelectNode calls it once when it finishes
+  if VSTSelectingNode then Exit;
+
   if VST.Enabled then
   begin
     VSTBeginUpdate(VST);

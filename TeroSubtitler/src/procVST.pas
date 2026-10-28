@@ -41,8 +41,8 @@ function VSTFocusedNode(const AVST: TLazVirtualStringTree): Integer;
 function VSTLastSelectedNode(const AVST: TLazVirtualStringTree): PVirtualNode;
 function VSTLastSelectedNodeIndex(const AVST: TLazVirtualStringTree): Integer;
 function VSTGetNodeAtIndex(const AVST: TLazVirtualStringTree; const AIndex: Integer): PVirtualNode;
-procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer; const AClear: Boolean; const AForceUpdate: Boolean = False);
-procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean; const AForceUpdate: Boolean = False); overload;
+procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer; const AClear: Boolean; const AForceUpdate: Boolean = False; const ACenterOnlyIfHidden: Boolean = False);
+procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean; const AForceUpdate: Boolean = False; const ACenterOnlyIfHidden: Boolean = False); overload;
 procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AIdxs: TIntegerDynArray; const AClear: Boolean); overload;
 procedure VSTSelectNodes(const AVST: TLazVirtualStringTree; const AFrom, ATo: Integer; const AClear: Boolean); overload;
 procedure VSTMarkEntries(const AVST: TLazVirtualStringTree; const Value: Boolean = True);
@@ -70,6 +70,11 @@ procedure VSTTextEffect(const AVST: TLazVirtualStringTree; const AEffect: TTextE
 
 procedure VSTDistributeEntriesEvenly(const AVST: TLazVirtualStringTree);
 procedure VSTSetPauses(const AVST: TLazVirtualStringTree; const Pause: Integer; const Mode: TVSTSetPausesMode; const Selection: TVSTDoLoopSelection = dlSelected; const AFrom: Integer = 0; const ATo: Integer = 1);
+
+var
+  // True while VSTSelectNode changes the focus/selection: VSTFocusChanged
+  // waits and VSTSelectNode updates the values once at the end
+  VSTSelectingNode: Boolean = False;
 
 // -----------------------------------------------------------------------------
 
@@ -242,25 +247,53 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer; const AClear: Boolean; const AForceUpdate: Boolean = False);
+procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const AIndex: Integer; const AClear: Boolean; const AForceUpdate: Boolean = False; const ACenterOnlyIfHidden: Boolean = False);
 begin
-  VSTSelectNode(AVST, VSTGetNodeAtIndex(AVST, AIndex), AClear, AForceUpdate);
+  VSTSelectNode(AVST, VSTGetNodeAtIndex(AVST, AIndex), AClear, AForceUpdate, ACenterOnlyIfHidden);
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean; const AForceUpdate: Boolean = False);
+procedure VSTSelectNode(const AVST: TLazVirtualStringTree; const ANode: PVirtualNode; const AClear: Boolean; const AForceUpdate: Boolean = False; const ACenterOnlyIfHidden: Boolean = False);
+
+  function NodeFullyVisible: Boolean;
+  var
+    R: TRect;
+  begin
+    // same test as TBaseVirtualTree.ScrollIntoView
+    R := AVST.GetDisplayRect(ANode, NoColumn, False);
+    if hoVisible in AVST.Header.Options then
+      OffsetRect(R, 0, -AVST.Header.Height);
+    Result := (R.Top >= 0) and (R.Bottom <= AVST.ClientHeight);
+  end;
+
+var
+  FocusChanged: Boolean;
 begin
+  FocusChanged := False;
   if Assigned(ANode) then
     with AVST, frmMain do
     begin
-      if AClear then ClearSelection;
-      FocusedNode     := ANode;
-      Selected[ANode] := True;
-      ScrollIntoView(ANode, True);
+      // setting FocusedNode runs VSTFocusChanged (UpdateValues) before the
+      // node is selected, and AForceUpdate ran it again: twice on every new
+      // subtitle while playing. Now it runs once, with the final selection.
+      FocusChanged := (FocusedNode <> ANode);
+      VSTSelectingNode := True;
+      try
+        if AClear then ClearSelection;
+        FocusedNode     := ANode;
+        Selected[ANode] := True;
+      finally
+        VSTSelectingNode := False;
+      end;
+      // ACenterOnlyIfHidden (following the playback): centering on every
+      // new entry scrolled and repainted the whole list each time, now only
+      // when the entry goes out of view (then it is centered again)
+      if not ACenterOnlyIfHidden or not NodeFullyVisible then
+        ScrollIntoView(ANode, True);
     end;
 
-  if AForceUpdate then
+  if AForceUpdate or FocusChanged then
     frmMain.VSTFocusChanged(NIL, NIL, 0);
 end;
 
