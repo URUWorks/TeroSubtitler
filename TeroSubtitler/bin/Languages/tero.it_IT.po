@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 27.10.2026\n"
+"Project-Id-Version: Tero Subtitler - IT - 28.10.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -1219,7 +1219,7 @@ msgstr "%d voci aggiunte alla memoria traduzione."
 
 #: proclocalize.lngtmnoentriesloaded
 msgid "No entries were loaded from the translation memory. Check that its languages match the selected ones."
-msgstr ""
+msgstr "Nessuna voce è stata caricata dalla memoria traduzione.\nVerifica che le lingue corrispondano a quelle selezionate."
 
 #: proclocalize.lngtranscribing
 msgid "Transcribing..."
@@ -4595,7 +4595,7 @@ msgstr "Visualizza intervallo nella timeline"
 
 #: tfrmsettings.chkpreviewframeondrag.caption
 msgid "Show the frame when dragging an entry edge in the timeline"
-msgstr ""
+msgstr "Quando trascini un bordo  nella timeline visualizza il fotogramma"
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
 msgid "Prompt when deleting subtitles"
