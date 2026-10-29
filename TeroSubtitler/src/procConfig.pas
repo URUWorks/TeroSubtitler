@@ -95,6 +95,7 @@ function CustomFormatFolder: String;
 function TranslationMemoryFolder: String;
 function TerminologyFolder: String;
 function WhisperFolder: String;
+function ResolveWhisperCPP(const AFileName: String): String;
 function WhisperFileName: String;
 function WhisperModelsFolder: String;
 function WhisperTranscriptionsFolder: String;
@@ -157,7 +158,7 @@ begin
 
     if DirectoryExists(GetCustomUserPath('Whisper')) then
     begin
-      WhisperCPP    := ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE]);
+      WhisperCPP    := ResolveWhisperCPP(ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE]));
       FasterWhisper := ConcatPaths([GetCustomUserPath('Whisper'), FASTERWHISPER_EXE]);
     end;
 
@@ -178,12 +179,12 @@ begin
 
     if DirectoryExists(GetCustomUserPath('Whisper')) then
     begin
-      WhisperCPP    := ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE]);
+      WhisperCPP    := ResolveWhisperCPP(ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE]));
       FasterWhisper := ConcatPaths([GetCustomUserPath('Whisper'), FASTERWHISPER_EXE]);
     end
     else
     begin
-      WhisperCPP    := GetInstallFolder(WHISPER_EXE);
+      WhisperCPP    := ResolveWhisperCPP(GetInstallFolder(WHISPER_EXE));
       FasterWhisper := GetInstallFolder(FASTERWHISPER_EXE);
     end;
 
@@ -674,7 +675,7 @@ begin
         FFmpeg_ParamsForWhisper      := GetValue('FFmpeg_ParamsForWhisper', FFmpeg_ParamsForWhisper);
         PySceneDetect        := GetValue('PySceneDetect', PySceneDetect);
         PySceneDetect_Params := GetValue('PySceneDetect_Params', PySceneDetect_Params);
-        WhisperCPP        := GetValue('WhisperCPP', WhisperCPP);
+        WhisperCPP        := ResolveWhisperCPP(GetValue('WhisperCPP', WhisperCPP));
         WhisperCPP_Params := GetValue('WhisperCPP_Params', WhisperCPP_Params);
         WhisperCPP_Additional := GetValue('WhisperCPP_Additional', WhisperCPP_Additional);
         FasterWhisper        := GetValue('FasterWhisper', FasterWhisper);
@@ -1846,6 +1847,28 @@ end;
 function WhisperFolder: String;
 begin
   Result := GetCustomUserPath('Whisper');
+end;
+
+// -----------------------------------------------------------------------------
+
+function ResolveWhisperCPP(const AFileName: String): String;
+var
+  dir, ext, cli, main: String;
+begin
+  // whisper.cpp renamed main to whisper-cli (1.7.4), main is only a stub that
+  // does nothing since then. Use whisper-cli when it's there (settings saved
+  // with main), or main when whisper-cli isn't (older downloads)
+  Result := AFileName;
+  if AFileName = '' then Exit;
+  dir  := ExtractFilePath(AFileName);
+  ext  := ExtractFileExt(AFileName);
+  cli  := dir + 'whisper-cli' + ext;
+  main := dir + 'main' + ext;
+
+  if SameText(ExtractFileName(AFileName), 'main' + ext) and FileExists(cli) then
+    Result := cli
+  else if not FileExists(AFileName) and SameText(ExtractFileName(AFileName), 'whisper-cli' + ext) and FileExists(main) then
+    Result := main;
 end;
 
 // -----------------------------------------------------------------------------

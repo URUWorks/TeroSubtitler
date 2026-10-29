@@ -370,9 +370,9 @@ begin
   {$ELSE}
   ShowDownloadDialog(URL_WHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
   {$ENDIF}
-  if FileExists(ConcatPaths([WhisperFolder, WHISPER_EXE])) then
+  if FileExists(ResolveWhisperCPP(ConcatPaths([WhisperFolder, WHISPER_EXE]))) then
   begin
-    Tools.WhisperCPP := ConcatPaths([WhisperFolder, WHISPER_EXE]);
+    Tools.WhisperCPP := ResolveWhisperCPP(ConcatPaths([WhisperFolder, WHISPER_EXE]));
     CheckState_whispercpp;
   end;
 end;

@@ -238,7 +238,7 @@ const
 
   YTDLP_EXE = 'yt-dlp_macos';
 
-  WHISPER_EXE      = 'main';
+  WHISPER_EXE      = 'whisper-cli'; // our zip has a copy named main for old settings
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
   WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
 
