@@ -1484,6 +1484,10 @@ msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
 msgid "Maximum line length"
 msgstr "最大行长"
 
+#: tfrmaudiototext.chksmartsegment.caption
+msgid "Smart segmentation (using the conventions)"
+msgstr ""
+
 #: tfrmaudiototext.chksynctext.caption
 msgid "Synchronize the current texts (only timings)"
 msgstr ""
