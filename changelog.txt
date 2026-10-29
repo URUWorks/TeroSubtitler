@@ -7,9 +7,11 @@
 - fixed: Double-click to select all of time code; options upon right-click #458
 - fixed: Not possible to select if recent files are loaded in the Text column or Translation column #437
 - fixed: Minimum Gap unavailable in Fix Subtitles #423
+- fixed: Unable to select source for some operations #421
 - fixed: Show one thumbnail per shot change #420
 - fixed: Entered text doesn't immediately appear on timeline #404
 - fixed: Preview frame when adjusting entry in timeline #380
+- fixed: Characters limits - (One line limit) #369
 - fixed: Generate audio waveform by default #368
 - fixed: Notes were lost when saving to formats that can’t store them; they are now kept in a hidden file next to the subtitle #353
 - fixed: Assuming brackets to indicate hearing-impaired elements should be optional #345
