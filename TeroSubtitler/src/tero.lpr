@@ -12,6 +12,9 @@ uses
   {$IFDEF UNIX}
   cthreads,
   {$ENDIF}
+  {$IFDEF DARWIN}
+  procMacPath, // before anything starts mpv/yt-dlp
+  {$ENDIF}
   {$IFDEF HASAMIGA}
   athreads,
   {$ENDIF}
