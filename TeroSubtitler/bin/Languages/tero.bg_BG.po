@@ -3593,6 +3593,10 @@ msgctxt "tfrmmain.actsettings.caption"
 msgid "Settings..."
 msgstr "Настройки..."
 
+#: tfrmmain.actsetupwizard.caption
+msgid "Setup wizard..."
+msgstr ""
+
 #: tfrmmain.actshifttimeless.caption
 #, object-pascal-format
 msgctxt "tfrmmain.actshifttimeless.caption"
@@ -4638,6 +4642,10 @@ msgstr "Тълкуване на етикетите в списъка"
 #: tfrmsettings.chkdrawwaveformgap.caption
 msgid "Show gap in timeline"
 msgstr "Показване на междината във времевата линия"
+
+#: tfrmsettings.chkhiroundbrackets.caption
+msgid "Round brackets ( ) mark hearing impaired text"
+msgstr ""
 
 #: tfrmsettings.chkpreviewframeondrag.caption
 msgid "Show the frame when dragging an entry edge in the timeline"

@@ -3792,6 +3792,10 @@ msgctxt "tfrmmain.actsettings.caption"
 msgid "Settings..."
 msgstr "Nastavitve …"
 
+#: tfrmmain.actsetupwizard.caption
+msgid "Setup wizard..."
+msgstr ""
+
 #: tfrmmain.actshifttimeless.caption
 #, object-pascal-format, fuzzy, badformat
 msgctxt "tfrmmain.actshifttimeless.caption"
@@ -4906,6 +4910,10 @@ msgstr "Dodajanje, odstranjevanje in izpisovanje oznak"
 #: tfrmsettings.chkdrawwaveformgap.caption
 msgid "Show gap in timeline"
 msgstr "Pokaži vrzel na časovnici"
+
+#: tfrmsettings.chkhiroundbrackets.caption
+msgid "Round brackets ( ) mark hearing impaired text"
+msgstr ""
 
 #: tfrmsettings.chkpreviewframeondrag.caption
 msgid "Show the frame when dragging an entry edge in the timeline"

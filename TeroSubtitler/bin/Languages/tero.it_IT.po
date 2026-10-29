@@ -1219,7 +1219,9 @@ msgstr "%d voci aggiunte alla memoria traduzione."
 
 #: proclocalize.lngtmnoentriesloaded
 msgid "No entries were loaded from the translation memory. Check that its languages match the selected ones."
-msgstr "Nessuna voce è stata caricata dalla memoria traduzione.\nVerifica che le lingue corrispondano a quelle selezionate."
+msgstr ""
+"Nessuna voce è stata caricata dalla memoria traduzione.\n"
+"Verifica che le lingue corrispondano a quelle selezionate."
 
 #: proclocalize.lngtranscribing
 msgid "Transcribing..."
@@ -3564,6 +3566,10 @@ msgctxt "tfrmmain.actsettings.caption"
 msgid "Settings..."
 msgstr "Impostazioni..."
 
+#: tfrmmain.actsetupwizard.caption
+msgid "Setup wizard..."
+msgstr ""
+
 #: tfrmmain.actshifttimeless.caption
 #, object-pascal-format
 msgctxt "tfrmmain.actshifttimeless.caption"
@@ -4592,6 +4598,10 @@ msgstr "Interpreta tag nell’elenco"
 #: tfrmsettings.chkdrawwaveformgap.caption
 msgid "Show gap in timeline"
 msgstr "Visualizza intervallo nella timeline"
+
+#: tfrmsettings.chkhiroundbrackets.caption
+msgid "Round brackets ( ) mark hearing impaired text"
+msgstr ""
 
 #: tfrmsettings.chkpreviewframeondrag.caption
 msgid "Show the frame when dragging an entry edge in the timeline"

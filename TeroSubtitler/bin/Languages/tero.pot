@@ -3534,6 +3534,10 @@ msgctxt "tfrmmain.actsettings.caption"
 msgid "Settings..."
 msgstr ""
 
+#: tfrmmain.actsetupwizard.caption
+msgid "Setup wizard..."
+msgstr ""
+
 #: tfrmmain.actshifttimeless.caption
 #, object-pascal-format
 msgctxt "tfrmmain.actshifttimeless.caption"
@@ -4560,6 +4564,10 @@ msgstr ""
 
 #: tfrmsettings.chkdrawwaveformgap.caption
 msgid "Show gap in timeline"
+msgstr ""
+
+#: tfrmsettings.chkhiroundbrackets.caption
+msgid "Round brackets ( ) mark hearing impaired text"
 msgstr ""
 
 #: tfrmsettings.chkpreviewframeondrag.caption
