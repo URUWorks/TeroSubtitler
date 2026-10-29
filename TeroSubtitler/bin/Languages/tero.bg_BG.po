@@ -4620,6 +4620,10 @@ msgstr "Обновяване"
 msgid "Settings"
 msgstr "Настройки"
 
+#: tfrmsettings.chkautoextractwaveform.caption
+msgid "Extract the waveform automatically when loading a video"
+msgstr ""
+
 #: tfrmsettings.chkautoplay.caption
 #, fuzzy
 #| msgid "Autoplay on video load"

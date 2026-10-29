@@ -4646,6 +4646,10 @@ msgstr "Uppdatera"
 msgid "Settings"
 msgstr "Inställningar"
 
+#: tfrmsettings.chkautoextractwaveform.caption
+msgid "Extract the waveform automatically when loading a video"
+msgstr ""
+
 #: tfrmsettings.chkautoplay.caption
 #, fuzzy
 #| msgid "Autoplay on video load"

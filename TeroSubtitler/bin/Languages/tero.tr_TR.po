@@ -4600,6 +4600,10 @@ msgstr "Güncelle"
 msgid "Settings"
 msgstr "Ayarlar"
 
+#: tfrmsettings.chkautoextractwaveform.caption
+msgid "Extract the waveform automatically when loading a video"
+msgstr ""
+
 #: tfrmsettings.chkautoplay.caption
 msgid "Autoplay on media load"
 msgstr "Medya yüklendiğinde otomatik oynat"

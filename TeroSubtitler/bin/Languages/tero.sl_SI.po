@@ -4888,6 +4888,10 @@ msgstr "Posodobi"
 msgid "Settings"
 msgstr "Nastavitve"
 
+#: tfrmsettings.chkautoextractwaveform.caption
+msgid "Extract the waveform automatically when loading a video"
+msgstr ""
+
 #: tfrmsettings.chkautoplay.caption
 #, fuzzy
 msgid "Autoplay on media load"
