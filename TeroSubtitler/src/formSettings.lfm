@@ -1502,11 +1502,11 @@ object frmSettings: TfrmSettings
       TabOrder = 0
     end
     object lblSeekTime: TLabel
-      AnchorSideTop.Control = chkPreviewFrameOnDrag
+      AnchorSideTop.Control = chkAutoExtractWaveform
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 19
-      Top = 123
+      Top = 147
       Width = 308
       AutoSize = False
       BorderSpacing.Top = 22
@@ -1518,11 +1518,11 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Left = 310
       Height = 28
-      Top = 118
+      Top = 142
       Width = 100
       MaxValue = 10000
       MinValue = 100
-      TabOrder = 4
+      TabOrder = 5
       Value = 5000
     end
     object lblFrameStep: TLabel
@@ -1530,7 +1530,7 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 19
-      Top = 163
+      Top = 187
       Width = 308
       AutoSize = False
       Caption = 'Frame step'
@@ -1541,12 +1541,12 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 310
       Height = 28
-      Top = 158
+      Top = 182
       Width = 100
       BorderSpacing.Top = 12
       MaxValue = 60
       MinValue = 1
-      TabOrder = 5
+      TabOrder = 6
       Value = 1
     end
     object chkSubtitleHandleByMPV: TUWCheckBox
@@ -1565,7 +1565,7 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 2
       Height = 19
-      Top = 206
+      Top = 230
       Width = 308
       AutoSize = False
       BorderSpacing.Top = 24
@@ -1577,11 +1577,11 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 29
-      Top = 497
+      Top = 521
       Width = 48
       BorderSpacing.Top = 6
       Caption = '+'
-      TabOrder = 7
+      TabOrder = 8
       OnClick = btnPlusClick
     end
     object btnMinus: TButton
@@ -1591,12 +1591,12 @@ object frmSettings: TfrmSettings
       AnchorSideRight.Side = asrBottom
       Left = 54
       Height = 29
-      Top = 497
+      Top = 521
       Width = 48
       BorderSpacing.Left = 6
       Caption = '-'
       Enabled = False
-      TabOrder = 8
+      TabOrder = 9
       OnClick = btnMinusClick
     end
     object lstMPVOptions: TListBox
@@ -1604,12 +1604,12 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 260
-      Top = 231
+      Top = 255
       Width = 869
       BorderSpacing.Top = 6
       ExtendedSelect = False
       ItemHeight = 0
-      TabOrder = 6
+      TabOrder = 7
     end
     object chkUseHWDec: TUWCheckBox
       AnchorSideTop.Control = chkSubtitleHandleByMPV
@@ -1632,6 +1632,17 @@ object frmSettings: TfrmSettings
       AutoSize = False
       Caption = 'Show the frame when dragging an entry edge in the timeline'
       TabOrder = 3
+    end
+    object chkAutoExtractWaveform: TUWCheckBox
+      AnchorSideTop.Control = chkPreviewFrameOnDrag
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 24
+      Top = 101
+      Width = 22
+      AutoSize = False
+      Caption = 'Extract the waveform automatically when loading a video'
+      TabOrder = 4
     end
   end
   object lyoFileTypeAssociations: TUWLayout

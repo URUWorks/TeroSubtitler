@@ -74,6 +74,7 @@ type
     chkSubShadow: TCheckBox;
     chkUseHWDec: TUWCheckBox;
     chkPreviewFrameOnDrag: TUWCheckBox;
+    chkAutoExtractWaveform: TUWCheckBox;
     chkUseOwnFileDialog: TUWCheckBox;
     cboProfile: TComboBox;
     cboShortcutCat: TComboBox;
@@ -362,6 +363,7 @@ begin
     chkSubtitleHandleByMPV.Checked := SubtitleHandleByMPV;
     chkUseHWDec.Checked            := frmMain.MPV.UseHWDec;
     chkPreviewFrameOnDrag.Checked  := PreviewFrameOnDrag;
+    chkAutoExtractWaveform.Checked := AutoExtractWaveform;
     spnSeekTime.Value              := SeekTime;
     spnFrameStep.Value             := FrameStep;
 
@@ -418,6 +420,7 @@ end;
 procedure TfrmSettings.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 var
   i: Integer;
+  OldMPVOptions: TStringArray;
 begin
   with AppOptions do
   begin
@@ -491,6 +494,7 @@ begin
     SubtitleHandleByMPV    := chkSubtitleHandleByMPV.Checked;
     frmMain.MPV.UseHWDec   := chkUseHWDec.Checked;
     PreviewFrameOnDrag     := chkPreviewFrameOnDrag.Checked;
+    AutoExtractWaveform    := chkAutoExtractWaveform.Checked;
     SeekTime               := spnSeekTime.Value;
     FrameStep              := spnFrameStep.Value;
     TextColor              := ColorToHexStr(cbnSub.ButtonColor);
@@ -501,6 +505,7 @@ begin
     UseTextBackgroundColor := chkSubBackground.Checked;
     TextSize               := spnSubSize.Value;
 
+    OldMPVOptions := Copy(AdditionalOptions);
     SetLength(AdditionalOptions, lstMPVOptions.Count);
     if Length(AdditionalOptions) > 0 then
       for i := 0 to High(AdditionalOptions) do
@@ -544,6 +549,7 @@ begin
   AppOptions.ShortCutPreset := cboShortCutPreset.Text + '.key';
 
   UpdateMPVOptions;
+  UpdateMPVStartOptions(OldMPVOptions); // applied the next time a video is loaded
 
   {$IFDEF WINDOWS}
   UpdateFileTypeAssociations;

@@ -38,6 +38,16 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.DoAutoExtractWaveform(Data: PtrInt);
+begin
+  if WAVE.IsPeakDataLoaded or MPV.FileName.IsEmpty or
+    not FileExists(GetExtractAppFile) then Exit;
+
+  ShowWaveExtractor(True);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.DoMPVLoadError(Data: PtrInt);
 begin
   case Data of
@@ -106,7 +116,12 @@ begin
     LoadAudio(GetMediaFileNameIfExists(MPV.FileName, TWaveformAudioExts));
 
   if not WAVE.IsPeakDataLoaded then
+  begin
     WAVE.EmptyText := lngasWaveformText;
+    // not inside the mpv event (it's a modal form)
+    if MPVOptions.AutoExtractWaveform and not MPV.FileName.StartsWith('http') then
+      Application.QueueAsyncCall(@DoAutoExtractWaveform, 0);
+  end;
 
   TimerPlayback.Enabled := True;
 

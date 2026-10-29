@@ -227,6 +227,7 @@ begin
     TextShadowOffset       := 2;
     AutoStartPlaying       := False;
     PreviewFrameOnDrag     := True;
+    AutoExtractWaveform    := False;
     SeekTime               := 5000;
     FrameStep              := 1;
     Volume.Percent         := 75;
@@ -603,6 +604,7 @@ begin
         MPV.UseHWDec := GetValue('UseHWDec', MPV.UseHWDec);
         AutoStartPlaying := GetValue('AutoStartPlaying', AutoStartPlaying);
         PreviewFrameOnDrag := GetValue('PreviewFrameOnDrag', PreviewFrameOnDrag);
+        AutoExtractWaveform := GetValue('AutoExtractWaveform', AutoExtractWaveform);
         SubtitleToShow := TSubtitleMode(GetValue('SubtitleToShow', Integer(SubtitleToShow)));
         actMediaAutoScroll.Checked := GetValue('UpdateListOnPreview', actMediaAutoScroll.Checked);
         actMediaChangePlayRate.Checked := GetValue('MediaChangePlayRate', actMediaChangePlayRate.Checked);
@@ -1070,6 +1072,7 @@ begin
         SetValue('UseHWDec', MPV.UseHWDec);
         SetValue('AutoStartPlaying', AutoStartPlaying);
         SetValue('PreviewFrameOnDrag', PreviewFrameOnDrag);
+        SetValue('AutoExtractWaveform', AutoExtractWaveform);
         SetValue('SubtitleToShow', Integer(SubtitleToShow));
         SetValue('UpdateListOnPreview', actMediaAutoScroll.Checked);
         SetValue('MediaChangePlayRate', actMediaChangePlayRate.Checked);

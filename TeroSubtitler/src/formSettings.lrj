@@ -82,5 +82,6 @@
 {"hash":43,"name":"tfrmsettings.btnplus.caption","sourcebytes":[43],"value":"+"},
 {"hash":45,"name":"tfrmsettings.btnminus.caption","sourcebytes":[45],"value":"-"},
 {"hash":250288903,"name":"tfrmsettings.chkusehwdec.caption","sourcebytes":[85,115,101,32,104,97,114,100,119,97,114,101,32,118,105,100,101,111,32,100,101,99,111,100,105,110,103],"value":"Use hardware video decoding"},
-{"hash":15864357,"name":"tfrmsettings.chkpreviewframeondrag.caption","sourcebytes":[83,104,111,119,32,116,104,101,32,102,114,97,109,101,32,119,104,101,110,32,100,114,97,103,103,105,110,103,32,97,110,32,101,110,116,114,121,32,101,100,103,101,32,105,110,32,116,104,101,32,116,105,109,101,108,105,110,101],"value":"Show the frame when dragging an entry edge in the timeline"}
+{"hash":15864357,"name":"tfrmsettings.chkpreviewframeondrag.caption","sourcebytes":[83,104,111,119,32,116,104,101,32,102,114,97,109,101,32,119,104,101,110,32,100,114,97,103,103,105,110,103,32,97,110,32,101,110,116,114,121,32,101,100,103,101,32,105,110,32,116,104,101,32,116,105,109,101,108,105,110,101],"value":"Show the frame when dragging an entry edge in the timeline"},
+{"hash":108826543,"name":"tfrmsettings.chkautoextractwaveform.caption","sourcebytes":[69,120,116,114,97,99,116,32,116,104,101,32,119,97,118,101,102,111,114,109,32,97,117,116,111,109,97,116,105,99,97,108,108,121,32,119,104,101,110,32,108,111,97,100,105,110,103,32,97,32,118,105,100,101,111],"value":"Extract the waveform automatically when loading a video"}
 ]}

@@ -43,8 +43,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
-
+    procedure DoAutoStart(Data: PtrInt);
   public
+    AutoStart: Boolean; // start the extraction when shown (auto extract option)
 
   end;
 
@@ -89,6 +90,16 @@ end;
 procedure TfrmWaveExtractor.FormShow(Sender: TObject);
 begin
   CheckColorTheme(Self);
+  if AutoStart and btnExtract.Enabled then
+    Application.QueueAsyncCall(@DoAutoStart, 0); // once the window is shown
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmWaveExtractor.DoAutoStart(Data: PtrInt);
+begin
+  if btnExtract.Enabled then
+    btnExtractClick(NIL);
 end;
 
 // -----------------------------------------------------------------------------

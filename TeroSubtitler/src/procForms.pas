@@ -43,7 +43,7 @@ procedure ShowAdjustSubtitle;
 procedure ShowMultipleReplace;
 procedure ShowModifySelection;
 procedure ShowTranslate;
-procedure ShowWaveExtractor;
+procedure ShowWaveExtractor(const AAutoStart: Boolean = False);
 procedure ShowSettings;
 procedure ShowFormatProperties;
 procedure ShowRestoreBackup;
@@ -360,11 +360,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure ShowWaveExtractor;
+procedure ShowWaveExtractor(const AAutoStart: Boolean);
 begin
   if frmWaveExtractor = NIL then
   begin
     frmWaveExtractor := TfrmWaveExtractor.Create(Application);
+    frmWaveExtractor.AutoStart := AAutoStart;
     ShowForm(frmWaveExtractor);
   end
   else

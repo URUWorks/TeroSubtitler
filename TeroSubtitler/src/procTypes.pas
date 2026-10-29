@@ -320,6 +320,7 @@ type
     TextShadowOffset       : Integer;
     AutoStartPlaying       : Boolean;
     PreviewFrameOnDrag     : Boolean; // seek the video while dragging an entry in the timeline
+    AutoExtractWaveform    : Boolean; // extract the waveform when a video without one is loaded
     SubtitleToShow         : TSubtitleMode;
     SeekTime               : Integer;
     FrameStep              : Byte;

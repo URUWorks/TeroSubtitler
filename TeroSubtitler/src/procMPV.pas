@@ -26,6 +26,7 @@ uses
   UWSubtitleAPI, UWSubtitleAPI.Formats, MPVPlayer, UWSystem.TimeUtils;
 
 procedure PrepareMPV;
+procedure UpdateMPVStartOptions(const AOldAdditionalOptions: TStringArray);
 procedure UpdateMPVOptions;
 procedure MPVPlaySelectionOnly;
 procedure MPVPlay(const PlayMode: TMediaPlayMode = mpmAll);
@@ -55,17 +56,12 @@ uses procConfig, UWSystem.Encoding, UWSystem.SysUtils, MPVPlayer.Filters,
 
 // -----------------------------------------------------------------------------
 
-procedure PrepareMPV;
+procedure SetMPVStartOptions;
 var
   i: Integer;
 begin
   with frmMain.MPV do
   begin
-    YTDLPFileName := procConfig.YTDLPFileName;
-    LogLevel := llNo;
-    AutoStartPlayback := False;
-    FontSize := MPVOptions.TextSize;
-    //SMPTEMode := Workspace.SMPTE;
     with MPVOptions do
     begin
       AddOption('osd-color=' + TextColor);
@@ -102,6 +98,46 @@ begin
           AddOption(AdditionalOptions[i]);
     end;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure PrepareMPV;
+begin
+  with frmMain.MPV do
+  begin
+    YTDLPFileName := procConfig.YTDLPFileName;
+    LogLevel := llNo;
+    AutoStartPlayback := False;
+    FontSize := MPVOptions.TextSize;
+    //SMPTEMode := Workspace.SMPTE;
+  end;
+  SetMPVStartOptions;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure UpdateMPVStartOptions(const AOldAdditionalOptions: TStringArray);
+var
+  i: Integer;
+begin
+  // start options are only applied by mpv when it is initialized (on video
+  // load), they were filled once at startup so changes made in Settings
+  // (e.g. additional options) needed a restart. Rebuild them here, removing
+  // the previous ones first (optional and user ones may have been removed).
+  with frmMain.MPV do
+  begin
+    for i := 0 to High(AOldAdditionalOptions) do
+      RemoveOption(AOldAdditionalOptions[i]);
+
+    RemoveOption('osd-shadow-color=');
+    RemoveOption('sub-shadow-color=');
+    RemoveOption('osd-shadow-offset=');
+    RemoveOption('sub-shadow-offset=');
+    RemoveOption('osd-back-color=');
+    RemoveOption('sub-back-color=');
+  end;
+  SetMPVStartOptions;
 end;
 
 // -----------------------------------------------------------------------------
