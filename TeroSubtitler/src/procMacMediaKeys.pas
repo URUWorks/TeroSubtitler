@@ -254,7 +254,7 @@ var
 begin
   if (FInfoCenter = NIL) or not MediaLoaded then Exit;
 
-  Title := ExtractFileName(frmMain.MPV.FileName);
+  Title := MPVMediaName;
 
   Info := NSMutableDictionary.alloc.init;
   try

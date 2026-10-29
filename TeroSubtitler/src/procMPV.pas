@@ -26,6 +26,9 @@ uses
   UWSubtitleAPI, UWSubtitleAPI.Formats, MPVPlayer, UWSystem.TimeUtils;
 
 procedure PrepareMPV;
+procedure MPVUpdateMediaTitle(const AClear: Boolean = False);
+function MPVMediaName: String;
+function MPVMediaBaseName: String;
 procedure UpdateMPVStartOptions(const AOldAdditionalOptions: TStringArray);
 procedure UpdateMPVOptions;
 procedure MPVPlaySelectionOnly;
@@ -53,6 +56,46 @@ implementation
 
 uses procConfig, UWSystem.Encoding, UWSystem.SysUtils, MPVPlayer.Filters,
   procSubtitle, formCustomMessageDlg, procLocalize;
+
+var
+  MediaTitle: String = ''; // title of an url (media-title of mpv/yt-dlp)
+
+// -----------------------------------------------------------------------------
+
+procedure MPVUpdateMediaTitle(const AClear: Boolean = False);
+begin
+  MediaTitle := '';
+  if not AClear and frmMain.MPV.FileName.StartsWith('http') then
+    MediaTitle := Trim(frmMain.MPV.mpv_get_property_string_('media-title'));
+end;
+
+// -----------------------------------------------------------------------------
+
+function MPVMediaName: String;
+begin
+  // the url is not useful to show (e.g. watch?v=...), use its title
+  if MediaTitle <> '' then
+    Result := MediaTitle
+  else
+    Result := ExtractFileName(frmMain.MPV.FileName);
+end;
+
+// -----------------------------------------------------------------------------
+
+function MPVMediaBaseName: String;
+var
+  c: Char;
+begin
+  // to suggest file names (subtitle, screenshots...)
+  if MediaTitle <> '' then
+  begin
+    Result := MediaTitle;
+    for c in '\/:*?"<>|' do
+      Result := StringReplace(Result, c, '_', [rfReplaceAll]);
+  end
+  else
+    Result := ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '');
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -501,7 +544,7 @@ begin
                lngviVideoTracks + LineEnding +
                lngviAudioTracks + LineEnding +
                lngviSubtitleTracks,
-               [ExtractFileName(MPV.FileName),
+               [MPVMediaName,
                GetTimeStr(MPV.GetMediaLenInMs), MPV.GetVideoTotalFrames,
                SingleToStr(MPV.GetVideoFPS, FormatSettings),
                MPV.GetVideoWidth, MPV.GetVideoHeight,

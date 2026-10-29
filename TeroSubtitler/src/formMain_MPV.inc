@@ -26,6 +26,8 @@ end;
 
 procedure TfrmMain.MPVEndFile(ASender: TObject; AReason, AError: Integer);
 begin
+  StopURLLoadTimer;
+  MPVUpdateMediaTitle(True);
   MPVOptions.EndTime := 0;
   SetStatusBarText('');
 
@@ -71,7 +73,43 @@ end;
 procedure TfrmMain.MPVStartFile(Sender: TObject);
 begin
   MPVOptions.EndTime := 0;
-  SetStatusBarText(lngasReadingVideoFile);
+  MPVUpdateMediaTitle(True);
+
+  if MPV.FileName.StartsWith('http') then
+  begin
+    // yt-dlp gives no progress, show the elapsed time so it doesn't look
+    // stuck (it can take a while: JS challenges, format selection...)
+    if FURLLoadTimer = NIL then
+    begin
+      FURLLoadTimer := TTimer.Create(Self);
+      FURLLoadTimer.Interval := 1000;
+      FURLLoadTimer.OnTimer  := @URLLoadTimerTimer;
+    end;
+    FURLLoadStart := GetTickCount64;
+    URLLoadTimerTimer(NIL);
+    FURLLoadTimer.Enabled := True;
+  end
+  else
+    SetStatusBarText(lngasReadingVideoFile);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.URLLoadTimerTimer(Sender: TObject);
+begin
+  SetStatusBarText(Format(lngasLoadingVideoFromURL,
+    [TimeToString(GetTickCount64 - FURLLoadStart, 'mm:ss')]), 0, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.StopURLLoadTimer;
+begin
+  if Assigned(FURLLoadTimer) and FURLLoadTimer.Enabled then
+  begin
+    FURLLoadTimer.Enabled := False;
+    SetStatusBarText('');
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -80,7 +118,10 @@ procedure TfrmMain.MPVFileLoaded(Sender: TObject);
 var
   MRUInfoObject: TMRUInfoObject;
 begin
+  StopURLLoadTimer;
   SetStatusBarText('');
+  MPVUpdateMediaTitle;
+  RefreshAppTitle;
   EnableActionsByTag([TAG_ACTION_VIDEO], True);
   // apply the text options at runtime too: the start options alone could
   // leave the overlay with mpv's default OSD size (seen on macOS)
@@ -94,7 +135,7 @@ begin
   sbrSeek.Enabled := True;
 
   if Assigned(frmVideo) then
-    frmVideo.Caption := ExtractFileName(MPV.FileName);
+    frmVideo.Caption := MPVMediaName;
 
   actCloseMedia.Enabled       := True;
   mnuVideoPlayback.Enabled    := True;

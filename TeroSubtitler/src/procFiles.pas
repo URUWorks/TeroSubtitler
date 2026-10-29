@@ -103,6 +103,7 @@ procedure InitializeApp;
 implementation
 
 uses
+  procMPV,
   procConfig, procDialogs, procWorkspace, procVST, procSubtitle, procUndo,
   UWSystem.Encoding, formCustomFileDlg, UWSystem.SysUtils, Forms, procMRU,
   UWSystem.StrUtils, procForms, procProjectFile, formCustomSelectDlg,
@@ -141,7 +142,7 @@ function GetSuggestedFileNameForSave: String;
 begin
   Result := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), '');
   if Result.IsEmpty and not frmMain.MPV.FileName.IsEmpty then
-    Result := ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '');
+    Result := MPVMediaBaseName;
 end;
 
 // -----------------------------------------------------------------------------

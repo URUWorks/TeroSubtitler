@@ -2002,7 +2002,7 @@ var
 begin
   if MPV.IsMediaLoaded then
   begin
-    s := Format('%s%s%d.png', [ScreenshotsFolder, ChangeFileExt(ExtractFileName(MPV.FileName), ''), MPV.GetMediaPosInMs]);
+    s := Format('%s%s%d.png', [ScreenshotsFolder, MPVMediaBaseName, MPV.GetMediaPosInMs]);
     MPV.ScreenshotToFile(s);
     SetStatusBarText(s);
   end;

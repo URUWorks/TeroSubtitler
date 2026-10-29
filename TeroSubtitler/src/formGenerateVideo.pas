@@ -138,6 +138,7 @@ var
 implementation
 
 uses
+  procMPV,
   procTypes, procWorkspace, procColorTheme, procConfig, procCustomFormat,
   procGenerateVideo, formMain, UWSubtitleAPI, UWSubtitleAPI.Formats,
   UWSystem.Encoding, UWSystem.TimeUtils, UWSystem.SysUtils, procDialogs;
@@ -550,7 +551,7 @@ end;
 
 function TfrmGenerateVideo.SuggestNewVideoFileName: String;
 begin
-  Result := ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '');
+  Result := MPVMediaBaseName;
 
   case cboFormat.ItemIndex of
     0, 1 :  case cboVideoCodec.ItemIndex of

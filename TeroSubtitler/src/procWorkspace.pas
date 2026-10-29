@@ -1464,7 +1464,7 @@ begin
     s := s + ' - ' + ProgramName;
   end
   else if not frmMain.MPV.FileName.IsEmpty then
-    s := ExtractFileName(frmMain.MPV.FileName) + ' - ' + ProgramName
+    s := MPVMediaName + ' - ' + ProgramName
   else
     s := ProgramName;
 
