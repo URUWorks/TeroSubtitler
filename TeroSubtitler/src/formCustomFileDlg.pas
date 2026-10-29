@@ -54,7 +54,7 @@ type
     FileName : String;
     Format   : TUWSubtitleFormats;
     Encoding : TEncoding;
-    FPS      : Integer;
+    FPS      : Single;
     function Execute(const ADlgMode: TfrmCustomFileDlgMode = dmOpen): Boolean; // our showmodal function
   end;
 
@@ -138,7 +138,10 @@ begin
       Encoding := GetCachedEncoding(Encodings[cboEncoding.ItemIndex].CPID);
     end;
 
-    FPS    := cboFPS.ItemIndex;
+    if (cboFPS.ItemIndex >= 0) and (cboFPS.ItemIndex < Length(DefFPSList)) then
+      FPS := DefFPSList[cboFPS.ItemIndex].FPS // it was the index, not the fps
+    else
+      FPS := -1;
     Result := True;
   end
   else
