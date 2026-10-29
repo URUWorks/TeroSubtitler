@@ -71,7 +71,9 @@ type
     FSkipList   : TStrings;
     FTempList   : TStrings;
     FSource     : TSubtitleMode;
+    FStarted    : Boolean;
 
+    procedure SelectWord(const AStart, ALength: Integer);
     procedure PopulateWordMap(const AText: String);
     procedure InitializeSpellAtLine(const ALine: Integer = 0);
     procedure DoSpell(const FirstLoad: Boolean = False);
@@ -88,7 +90,7 @@ implementation
 
 uses
   procTypes, procWorkspace, procColorTheme, procSubtitle, procConfig,
-  procDialogs, UWSystem.StrUtils, UWSpellcheck.Hunspell, formMain;
+  procDialogs, UWSystem.StrUtils, UWSpellcheck.Hunspell, formMain, Math;
 
 {$R *.lfm}
 
@@ -114,8 +116,8 @@ begin
     cboSource.ItemIndex := 1
   else
     cboSource.ItemIndex := 0;
-
-  cboSourceChange(NIL);
+  // the first check is done in FormShow, selecting text in the memo before
+  // the window exists could raise an exception on macOS
 end;
 
 // -----------------------------------------------------------------------------
@@ -147,6 +149,11 @@ end;
 procedure TfrmSpellCheck.FormShow(Sender: TObject);
 begin
   CheckColorTheme(Self);
+  if not FStarted then
+  begin
+    FStarted := True;
+    cboSourceChange(NIL);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -154,6 +161,19 @@ end;
 procedure TfrmSpellCheck.btnCloseClick(Sender: TObject);
 begin
   Close;
+end;
+
+// -----------------------------------------------------------------------------
+
+// a selection out of the text raises an NSRangeException on macOS
+procedure TfrmSpellCheck.SelectWord(const AStart, ALength: Integer);
+var
+  len, s: Integer;
+begin
+  len := UTF8Length(mmoNotFound.Text);
+  s   := EnsureRange(AStart, 0, len);
+  mmoNotFound.SelStart  := s;
+  mmoNotFound.SelLength := EnsureRange(ALength, 0, len - s);
 end;
 
 // -----------------------------------------------------------------------------
@@ -202,7 +222,8 @@ begin
   if ALine < Subtitles.Count then
   begin
     lblCurrentLine.Caption := Format(lngspCurrentLine, [ALine+1]);
-    mmoNotFound.Text := GetSubtitleText(ALine, FSource);
+    // the memo uses only LF on macOS/Linux, so a CRLF would shift the positions
+    mmoNotFound.Text := AdjustLineBreaks(GetSubtitleText(ALine, FSource));
     PopulateWordMap(mmoNotFound.Text);
   end;
 end;
@@ -230,8 +251,7 @@ begin
         else
         begin
           FLastPos := FWordMap.Keys[i];
-          mmoNotFound.SelStart  := FLastPos-1;
-          mmoNotFound.SelLength := UTF8Length(FWordMap.Data[i]);
+          SelectWord(FLastPos-1, UTF8Length(FWordMap.Data[i]));
 
           Suggests := NIL;
           try
