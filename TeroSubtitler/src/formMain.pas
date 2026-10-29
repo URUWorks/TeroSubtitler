@@ -69,6 +69,7 @@ type
     actAddQuotationMarks: TAction;
     actAudioToText: TAction;
     actCheckForUpdates: TAction;
+    actSetupWizard: TAction;
     actFormatProperties: TAction;
     actExportCustomTextFormat: TAction;
     actActor: TAction;
@@ -1021,6 +1022,7 @@ type
     // formMain_MPV
     procedure MPVClick(Sender: TObject);
     procedure MPVEndFile(ASender: TObject; AReason, AError: Integer);
+    procedure DoMPVLoadError(Data: PtrInt);
     procedure MPVStartFile(Sender: TObject);
     procedure MPVFileLoaded(Sender: TObject);
     procedure MPVPause(Sender: TObject);
@@ -1046,6 +1048,7 @@ type
     procedure actAboutExecute(Sender: TObject);
     procedure actHelpExecute(Sender: TObject);
     procedure actCheckForUpdatesExecute(Sender: TObject);
+    procedure actSetupWizardExecute(Sender: TObject);
     procedure actListModeExecute(Sender: TObject);
     procedure actSourceModeExecute(Sender: TObject);
     procedure actTranscriptionModeExecute(Sender: TObject);

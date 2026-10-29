@@ -38,6 +38,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actSetupWizardExecute(Sender: TObject);
+begin
+  ShowWizard;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actListModeExecute(Sender: TObject);
 begin
   SetViewMode(vmList);

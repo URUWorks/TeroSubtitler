@@ -83,6 +83,7 @@ type
   private
     FIndex: Integer;
     FLngList: TStrings;
+    FReopened: Boolean; // opened from the menu, not on first start
     procedure SetPageStep(const AForward: Boolean = True);
     function CheckState_libMPV: Boolean;
     function CheckState_ytdlp: Boolean;
@@ -113,8 +114,9 @@ uses
 
 procedure TfrmWizard.FormCreate(Sender: TObject);
 begin
-  FLngList := TStringList.Create;
-  FIndex   := 0;
+  FLngList  := TStringList.Create;
+  FIndex    := 0;
+  FReopened := FileExists(SettingsFileName);
 
   btnDownloadYTDLP.Caption   := btnDownload.Caption;
   btnDownloadFFMPEG.Caption  := btnDownload.Caption;
@@ -137,12 +139,21 @@ begin
   lblLanguage.Visible := False;
   cboLanguage.Visible := False;
 
-  AppOptions.GUILanguage := LanguageIDFromFileName(LanguageFileName(True));
+  // first start: suggest the OS language, otherwise keep the current one
+  if not FReopened then
+    AppOptions.GUILanguage := LanguageIDFromFileName(LanguageFileName(True));
   FillComboWithLanguages(cboLanguage, FLngList);
   cboTimeCode.Items.Add('');
   cboTimeCode.Items.Add('');
   cboLanguageChange(NIL);
   cboTimeCode.ItemIndex := Integer(Workspace.WorkMode);
+
+  if FReopened then
+  begin
+    rdoLayout0.Checked := (Workspace.Layout = 0);
+    rdoLayout1.Checked := (Workspace.Layout = 1);
+    rdoLayout2.Checked := (Workspace.Layout = 2);
+  end;
 
   {$IFNDEF WINDOWS}
   PrepareCustomControls(Self);
@@ -175,7 +186,8 @@ begin
       SetWorkMode(wmTime);
   end;
 
-  if (AppOptions.HunspellLanguage <> AppOptions.GUILanguage) and FileExists(DictionariesFolder+AppOptions.GUILanguage + '.dic') and FileExists(DictionariesFolder+AppOptions.GUILanguage + '.aff') then
+  // don't replace the dictionary chosen by the user when reopened
+  if not FReopened and (AppOptions.HunspellLanguage <> AppOptions.GUILanguage) and FileExists(DictionariesFolder+AppOptions.GUILanguage + '.dic') and FileExists(DictionariesFolder+AppOptions.GUILanguage + '.aff') then
   begin
     AppOptions.HunspellLanguage := AppOptions.GUILanguage;
     UpdateStatusBar(True);

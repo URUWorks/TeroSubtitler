@@ -2700,6 +2700,9 @@ object frmMain: TfrmMain
       object mnuCheckForUpdates: TMenuItem
         Action = actCheckForUpdates
       end
+      object mnuSetupWizard: TMenuItem
+        Action = actSetupWizard
+      end
       object mnuHelpSeparator: TMenuItem
         Caption = '-'
       end
@@ -4109,6 +4112,11 @@ object frmMain: TfrmMain
       Category = 'Help'
       Caption = 'Check for updates...'
       OnExecute = actCheckForUpdatesExecute
+    end
+    object actSetupWizard: TAction
+      Category = 'Help'
+      Caption = 'Setup wizard...'
+      OnExecute = actSetupWizardExecute
     end
     object actLoadTranslation: TAction
       Tag = 1
