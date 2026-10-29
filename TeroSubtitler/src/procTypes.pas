@@ -158,7 +158,7 @@ const
 
   YTDLP_EXE = 'yt-dlp.exe';
 
-  WHISPER_EXE      = 'main.exe';
+  WHISPER_EXE      = 'whisper-cli.exe'; // main.exe is only a deprecation stub since whisper.cpp 1.7.4
   WHISPER_Params   = '-m "%model" -l %lang -osrt -of "%output" -f "%input"';
   WHISPER_ffParams = '-i "%input" -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y "%output"';
 
