@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, Controls, StdCtrls, ComCtrls, LCLType, LMessages, SysUtils, Forms,
-  Graphics, UWSystem.TimeUtils, LazarusPackageIntf;
+  Graphics, Menus, UWSystem.TimeUtils, LazarusPackageIntf;
 
 type
 
@@ -49,6 +49,12 @@ type
     FTimeStep     : Word;
     FFrameStep    : Word;
     FChangeEvent  : TUWTimeEditChangeEvent;
+    FPopup        : TPopupMenu;
+    FLastClick    : QWord; // csDoubleClicks is off, detect it ourselves
+    procedure PopupCopyClick(Sender: TObject);
+    procedure PopupPasteClick(Sender: TObject);
+    function IsSecondClick(const Button: TMouseButton): Boolean;
+    function ValueToClipboardText: String;
     procedure SetFPS(const AFPS: Double);
     procedure SetTimeMode(const ATimeMode: TUWTimeEditMode);
     procedure SetValueFromString(const S: String);
@@ -138,6 +144,7 @@ type
     property OnKeyPress;
     property OnKeyUp;
     property OnMouseDown;
+    property PopupMenu;
     property OnMouseEnter;
     property OnMouseLeave;
     property OnMouseMove;
@@ -164,7 +171,7 @@ procedure Register;
 implementation
 
 uses
-  UWSystem.SysUtils, Math, Clipbrd, LCLIntf;
+  UWSystem.SysUtils, Math, Clipbrd, LCLIntf, LCLStrConsts;
 
 const
   OneSecond = 1000;
@@ -276,18 +283,85 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWTimeEdit.DoContextPopup(MousePos: TPoint; var Handled: Boolean);
+var
+  Item: TMenuItem;
 begin
-  Handled := True; // Turn off default right mouse click popup
+  Handled := True; // our own popup instead of the default one
+  if not Enabled then Exit;
+
+  // focus first, the actions of a custom popup act on the focused control
+  if CanSetFocus and not Focused then SetFocus;
+
+  // a custom popup assigned by the app wins
+  if Assigned(PopupMenu) then
+  begin
+    PopupMenu.PopupComponent := Self;
+    PopupMenu.PopUp;
+    Exit;
+  end;
+
+  if FPopup = NIL then
+  begin
+    FPopup := TPopupMenu.Create(Self);
+    Item := TMenuItem.Create(FPopup);
+    Item.Caption := rsDoCopy;
+    Item.OnClick := @PopupCopyClick;
+    FPopup.Items.Add(Item);
+    Item := TMenuItem.Create(FPopup);
+    Item.Caption := rsDoPaste;
+    Item.OnClick := @PopupPasteClick;
+    FPopup.Items.Add(Item);
+  end;
+
+  FPopup.Items[1].Enabled := not ReadOnly and Clipboard.HasFormat(PredefinedClipboardFormat(pcfText));
+  FPopup.PopUp;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTimeEdit.PopupCopyClick(Sender: TObject);
+begin
+  CopyToClipboard;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTimeEdit.PopupPasteClick(Sender: TObject);
+begin
+  PasteFromClipboard;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWTimeEdit.IsSecondClick(const Button: TMouseButton): Boolean;
+var
+  t: QWord;
+begin
+  Result := False;
+  if Button <> mbLeft then Exit;
+  t := GetTickCount64;
+  Result := (FLastClick > 0) and (t - FLastClick <= QWord(GetDoubleClickTime));
+  if Result then
+    FLastClick := 0 // a third click starts again
+  else
+    FLastClick := t;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWTimeEdit.ValueToClipboardText: String;
+begin
+  if FTimeMode = TUWTimeEditMode.temFrames then
+    Result := TimeToString(FValue, 'hh:mm:ss:ff', FFPS)
+  else
+    Result := TimeToString(FValue, Format('hh:mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator]));
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TUWTimeEdit.CopyToClipboard;
 begin
-  if FTimeMode = TUWTimeEditMode.temFrames then
-    Clipboard.AsText := TimeToString(FValue, 'hh:mm:ss:ff', FFPS)
-  else
-    Clipboard.AsText := TimeToString(FValue, Format('hh:mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator]));
+  Clipboard.AsText := ValueToClipboardText;
 end;
 
 // -----------------------------------------------------------------------------
@@ -295,14 +369,25 @@ end;
 procedure TUWTimeEdit.PasteFromClipboard;
 var
   S: String;
+  i, c: Integer;
 begin
   if not Clipboard.HasFormat(PredefinedClipboardFormat(pcfText)) then
     Exit;
 
-  S := Clipboard.AsText;
-  if S = '' then Exit;
+  S := Trim(Clipboard.AsText);
+  // same text we would copy, keep the exact value (frames are rounded)
+  if (S = '') or (S = ValueToClipboardText) then Exit;
 
-  Value := StringToTime(S);
+  // hh:mm:ss:ff (or hh:mm:ss;ff) has frames in the last field, not ms
+  c := 0;
+  for i := 1 to Length(S) do
+    if S[i] in [':', ';', ',', '.'] then Inc(c);
+
+  i := LastDelimiter(':;,.', S);
+  if (c = 3) and (S[i] in [':', ';']) and (FFPS > 0) then
+    Value := StringToTime(S, False, FFPS)
+  else
+    Value := StringToTime(S);
 end;
 
 // -----------------------------------------------------------------------------
@@ -320,6 +405,17 @@ procedure TUWTimeEdit.MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: In
 procedure TUWTimeEdit.MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 {$ENDIF}
 begin
+  // only the left button moves the selection, a right click keeps it
+  // (e.g. the whole time code selected to copy it from the popup)
+  if Button <> mbLeft then Exit;
+
+  // double click: select the whole time code
+  if IsSecondClick(Button) then
+  begin
+    SetSel(0, Length(Text));
+    Abort;
+  end;
+
   // 01 34 67 901
   //   2  5  8
   // 00:00:00,000 times

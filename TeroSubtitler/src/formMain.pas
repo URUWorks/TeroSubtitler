@@ -714,6 +714,10 @@ type
     MenuItem32: TMenuItem;
     popLoopCount: TPopupMenu;
     popMemo: TPopupMenu;
+    mnuSetupWizard: TMenuItem;
+    popTimeEdit: TPopupMenu;
+    mnuTimeEditCopy: TMenuItem;
+    mnuTimeEditPaste: TMenuItem;
     popTranscription: TPopupMenu;
     popSilentZones: TPopupMenu;
     popCoolBarMain: TPopupMenu;
@@ -1023,6 +1027,7 @@ type
     procedure MPVClick(Sender: TObject);
     procedure MPVEndFile(ASender: TObject; AReason, AError: Integer);
     procedure DoMPVLoadError(Data: PtrInt);
+    procedure DoAutoExtractWaveform(Data: PtrInt);
     procedure MPVStartFile(Sender: TObject);
     procedure MPVFileLoaded(Sender: TObject);
     procedure MPVPause(Sender: TObject);
@@ -1877,6 +1882,8 @@ begin
 
   if LowerCase(ExtractFileExt(s)) = TProjectExt then
     LoadProject(s)
+  else if (GetKeyState(VK_SHIFT) < 0) and (Subtitles.Count > 0) then // Shift+Click loads as translation
+    ReadSubtitleData(s, False, smTranslation)
   else
     LoadSubtitle(s);
 end;

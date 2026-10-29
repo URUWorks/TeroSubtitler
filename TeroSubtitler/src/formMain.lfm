@@ -690,6 +690,7 @@ object frmMain: TfrmMain
             Top = 38
             Width = 130
             Value = 0
+            PopupMenu = popTimeEdit
             FPS = 25
             FrameStep = 1
             TimeStep = 1
@@ -737,6 +738,7 @@ object frmMain: TfrmMain
             Top = 72
             Width = 130
             Value = 0
+            PopupMenu = popTimeEdit
             FPS = 25
             FrameStep = 1
             TimeStep = 1
@@ -770,6 +772,7 @@ object frmMain: TfrmMain
             Top = 109
             Width = 130
             Value = 0
+            PopupMenu = popTimeEdit
             FPS = 25
             FrameStep = 1
             TimeStep = 1
@@ -803,6 +806,7 @@ object frmMain: TfrmMain
             Top = 142
             Width = 130
             Value = 0
+            PopupMenu = popTimeEdit
             FPS = 25
             FrameStep = 1
             TimeStep = 1
@@ -5788,5 +5792,16 @@ object frmMain: TfrmMain
   object popDictionaries: TPopupMenu
     Left = 190
     Top = 470
+  end
+  object popTimeEdit: TPopupMenu
+    Images = ImageList_Default
+    Left = 190
+    Top = 543
+    object mnuTimeEditCopy: TMenuItem
+      Action = actCopy
+    end
+    object mnuTimeEditPaste: TMenuItem
+      Action = actPaste
+    end
   end
 end
