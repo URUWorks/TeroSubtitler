@@ -226,6 +226,7 @@ type
     function SaveToString(const FPS: Double; const Encoding: TEncoding; const Format: TUWSubtitleFormats; SubtitleMode: TSubtitleMode; const FromItem: Integer = -1; const ToItem: Integer = -1): String;
     function FillDialogFilter(AllSupportedText: String = 'All supported files'): String;
     function FixFileNameExtension(const AFileName: String; const AFormat: TUWSubtitleFormats): String;
+    function FormatExtensions(const AFormat: TUWSubtitleFormats): String;
     procedure DoFPSConversion(const AOldFPS, ANewFPS: Double);
     procedure ConvertTimesToSMPTE(const AValue: Boolean; const AFromIndex: Integer = 0);
     function IsSMPTESupported(const AFormat: TUWSubtitleFormats = sfInvalid): Boolean;
@@ -1893,6 +1894,26 @@ begin
     s := AExtension;
 
   Result := ChangeFileExt(AFileName, s.Replace('*', ''));
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWSubtitles.FormatExtensions(const AFormat: TUWSubtitleFormats): String;
+var
+  AList : TUWSubtitleCustomFormatList;
+  f     : Integer;
+begin
+  // e.g. '*.vtt;*.webvtt'
+  Result := '';
+  AList  := NIL;
+  InitializeSubtitleFormats(AList, WriteBOM);
+  try
+    for f := 0 to AList.Count-1 do
+      if (AList[f].Format = AFormat) then
+        Exit(AList[f].Extension);
+  finally
+    FinalizeSubtitleFormats(AList);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
