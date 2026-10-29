@@ -120,9 +120,9 @@ var
 begin
   StopURLLoadTimer;
   SetStatusBarText('');
+  EnableActionsByTag([TAG_ACTION_VIDEO], True);
   MPVUpdateMediaTitle;
   RefreshAppTitle;
-  EnableActionsByTag([TAG_ACTION_VIDEO], True);
   // apply the text options at runtime too: the start options alone could
   // leave the overlay with mpv's default OSD size (seen on macOS)
   UpdateMPVOptions;

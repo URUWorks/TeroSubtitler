@@ -1,12 +1,12 @@
 object frmAudioToText: TfrmAudioToText
   Left = 237
-  Height = 570
+  Height = 598
   Top = 117
   Width = 485
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Audio to text'
-  ClientHeight = 570
+  ClientHeight = 598
   ClientWidth = 485
   DesignTimePPI = 120
   Position = poMainFormCenter
@@ -71,7 +71,7 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideRight.Control = btnClose
     Left = 241
     Height = 32
-    Top = 528
+    Top = 556
     Width = 114
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
@@ -87,14 +87,14 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideBottom.Side = asrBottom
     Left = 361
     Height = 32
-    Top = 528
+    Top = 556
     Width = 114
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 10
     BorderSpacing.Bottom = 10
     Cancel = True
     Caption = 'Close'
-    TabOrder = 14
+    TabOrder = 17
     OnClick = btnCloseClick
   end
   object lblTrack: TLabel
@@ -119,7 +119,7 @@ object frmAudioToText: TfrmAudioToText
   object lblWait: TLabel
     Left = 0
     Height = 40
-    Top = 436
+    Top = 464
     Width = 486
     Alignment = taCenter
     Anchors = [akLeft, akRight, akBottom]
@@ -133,7 +133,7 @@ object frmAudioToText: TfrmAudioToText
   object lblStatus: TLabel
     Left = 0
     Height = 50
-    Top = 476
+    Top = 504
     Width = 486
     Alignment = taCenter
     Anchors = [akLeft, akRight, akBottom]
@@ -150,7 +150,7 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideRight.Control = lblTimeElapsed
     Left = 10
     Height = 10
-    Top = 539
+    Top = 567
     Width = 150
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 6
@@ -164,7 +164,7 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideRight.Control = btnGenerate
     Left = 166
     Height = 16
-    Top = 536
+    Top = 564
     Width = 69
     Alignment = taRightJustify
     Anchors = [akTop, akRight, akBottom]
@@ -307,6 +307,19 @@ object frmAudioToText: TfrmAudioToText
     BorderSpacing.Top = 5
     Caption = 'Synchronize the current texts (only timings)'
     TabOrder = 13
+    OnChange = chkSyncTextChange
+  end
+  object chkSmartSegment: TUWCheckBox
+    AnchorSideTop.Control = chkSyncText
+    AnchorSideTop.Side = asrBottom
+    Left = 120
+    Height = 29
+    Top = 417
+    Width = 20
+    AutoSize = False
+    BorderSpacing.Top = 5
+    Caption = 'Smart segmentation (using the conventions)'
+    TabOrder = 14
     OnChange = chkSyncTextChange
   end
 end

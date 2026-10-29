@@ -23,7 +23,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  UWRadioButton, UWCheckBox, LCLIntf, LCLTranslator, Spin, procLocalize;
+  UWRadioButton, UWCheckBox, LCLIntf, LCLTranslator, Spin, procLocalize,
+  procTextSync;
 
 type
 
@@ -55,6 +56,7 @@ type
     spnMaxLineCount: TSpinEdit;
     chkMaxLineLength: TUWCheckBox;
     chkSyncText: TUWCheckBox;
+    chkSmartSegment: TUWCheckBox;
     chkMaxLineCount: TUWCheckBox;
     procedure btnCloseClick(Sender: TObject);
     procedure btnEngineClick(Sender: TObject);
@@ -72,6 +74,9 @@ type
     procedure OpenFolderClick(Sender: TObject);
     procedure CheckEngineOptions;
     procedure SyncTexts(const AFileName: String);
+    function LoadWords(const AFileName: String; out AWords: TSyncWords): Boolean;
+    function UseWhisperDTW: Boolean;
+    function SmartSegment(const AWordsFile, ASrtFile, ALanguage: String): Boolean;
   public
 
   end;
@@ -88,7 +93,7 @@ uses
   procWorkspace, procConfig, procDialogs, procTypes, UWSystem.TimeUtils,
   formMain, UWSystem.Process, procFiles, procForms, StrUtils,
   procSubtitle, procVST, UWSubtitleAPI.Formats, UWSystem.SysUtils,
-  UWSystem.ThreadProcess, procTextSync, UWSubtitleAPI, UWSubtitleAPI.Tags,
+  UWSystem.ThreadProcess, UWSubtitleAPI, UWSubtitleAPI.Tags,
   procUndo;
 
 type
@@ -322,7 +327,13 @@ end;
 
 procedure TfrmAudioToText.chkSyncTextChange(Sender: TObject);
 begin
-  if chkSyncText.Checked then
+  // only one of them
+  if (Sender = chkSyncText) and chkSyncText.Checked then
+    chkSmartSegment.Checked := False
+  else if (Sender = chkSmartSegment) and chkSmartSegment.Checked then
+    chkSyncText.Checked := False;
+
+  if chkSyncText.Checked or chkSmartSegment.Checked then
     rbnLoadSubtitlesAfterTranscript.Checked := True;
 
   CheckEngineOptions;
@@ -477,9 +488,17 @@ begin
 
           if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
           begin
-            if chkSyncText.Checked then
+            if chkSyncText.Checked or chkSmartSegment.Checked then
+            begin
               // one word per segment, with its times
-              ss.Insert(ss.IndexOf(' -osrt'), ' -ml 1 -sow')
+              ss.Insert(ss.IndexOf(' -osrt'), ' -ml 1 -sow');
+              // whisper-cli (1.8+): full json with the dtw time of each token,
+              // more precise; dtw doesn't work with flash attention (-nfa)
+              if UseWhisperDTW then
+                ss.Insert(ss.IndexOf(' -osrt'), ' -ojf -dtw ' + WhisperDTWPreset(cboModel.Text) + ' -nfa');
+              if chkSmartSegment.Checked and chkTranslate.Checked then
+                ss.Insert(ss.IndexOf(' -osrt'), ' -tr');
+            end
             else
             begin
               if rbnAddSubtitlesWhileTranscribing.Checked then
@@ -503,13 +522,14 @@ begin
             if cboLanguage.ItemIndex <> 0 then
               ss := ss + ' --language %lang';
 
-            if chkSyncText.Checked then
+            if chkSyncText.Checked or chkSmartSegment.Checked then
               // words with their times
-              ss := StringReplace(ss, '--output_format srt', '--output_format json', []) + ' --word_timestamps True'
-            else if chkTranslate.Checked then
+              ss := StringReplace(ss, '--output_format srt', '--output_format json', []) + ' --word_timestamps True';
+
+            if chkTranslate.Checked and not chkSyncText.Checked then
               ss := ss + ' --task translate';
 
-            if not chkSyncText.Checked and (chkMaxLineLength.Checked or chkMaxLineCount.Checked) then
+            if not chkSyncText.Checked and not chkSmartSegment.Checked and (chkMaxLineLength.Checked or chkMaxLineCount.Checked) then
             begin
               ss := ss + ' --sentence';
 
@@ -548,7 +568,7 @@ begin
           for i := 0 to High(AParamArray) do
             AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%model', '%binpath', '%lang'], [s, ss, model, modelpath, cn], []);
 
-          if rbnAddSubtitlesWhileTranscribing.Checked and not chkSyncText.Checked then //and rbnAddSubtitlesWhileTranscribing.Enabled then
+          if rbnAddSubtitlesWhileTranscribing.Checked and not chkSyncText.Checked and not chkSmartSegment.Checked then //and rbnAddSubtitlesWhileTranscribing.Enabled then
           begin
             //if ExecuteAppEx(GetAudioToTextAppFile, AParamArray, AEnvironment, @ThreadProcessCB) then
             if ExecuteThreadProcess(GetAudioToTextAppFile, AParamArray, AEnvironment, @ThreadProcessCB, @ThreadProcessCBTime) then
@@ -590,7 +610,12 @@ begin
               if chkSyncText.Checked then
               begin
                 if Tools.WhisperEngine <> TWhisperEngine.WhisperCPP then
-                  srtfile := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(s), '.json')]);
+                  srtfile := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(s), '.json')])
+                else if UseWhisperDTW and FileExists(ChangeFileExt(srtfile, '.json')) then
+                begin
+                  DeleteFile(srtfile);
+                  srtfile := ChangeFileExt(srtfile, '.json');
+                end;
 
                 prbProgress.Position := 100;
                 SyncTexts(srtfile);
@@ -599,7 +624,24 @@ begin
                 Exit;
               end;
 
-              if Tools.WhisperEngine <> TWhisperEngine.WhisperCPP then
+              if chkSmartSegment.Checked then
+              begin
+                // words (whisper.cpp srt or faster-whisper json) -> our subtitles
+                if Tools.WhisperEngine <> TWhisperEngine.WhisperCPP then
+                  s := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(s), '.json')])
+                else if UseWhisperDTW and FileExists(ChangeFileExt(srtfile, '.json')) then
+                  s := ChangeFileExt(srtfile, '.json')
+                else
+                  s := srtfile;
+
+                if not SmartSegment(s, srtfile, cn) then
+                begin
+                  ShowErrorMessageDialog(lngTextSyncNoWords);
+                  Exit;
+                end;
+                if s <> srtfile then DeleteFile(s);
+              end
+              else if Tools.WhisperEngine <> TWhisperEngine.WhisperCPP then
               begin
                 s := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(s), '.srt')]);
                 if FileExists(srtfile) then DeleteFile(srtfile);
@@ -664,6 +706,7 @@ begin
 
   chkTranslate.Enabled := AValue;
   chkSyncText.Enabled  := AValue and (Subtitles.Count > 0);
+  chkSmartSegment.Enabled := AValue;
 
   rbnAddSubtitlesWhileTranscribing.Enabled := AValue;
   rbnLoadSubtitlesAfterTranscript.Enabled  := AValue;
@@ -700,9 +743,9 @@ end;
 procedure TfrmAudioToText.CheckEngineOptions;
 begin
   // synchronizing: the segmentation and texts are the ones of the entries
-  rbnAddSubtitlesWhileTranscribing.Enabled := not chkSyncText.Checked;
+  rbnAddSubtitlesWhileTranscribing.Enabled := not chkSyncText.Checked and not chkSmartSegment.Checked;
   chkTranslate.Enabled := not chkSyncText.Checked;
-  if chkSyncText.Checked then
+  if chkSyncText.Checked or chkSmartSegment.Checked then
   begin
     chkMaxLineLength.Enabled := False;
     spnMaxLineLength.Enabled := False;
@@ -734,28 +777,10 @@ var
   TextWords, RecWords: TSyncWords;
   Times: TSyncTimes;
   Chars: array of Integer;
-  Subs: TUWSubtitles;
-  FPSInfo: TFPSInfo;
   i, Matched: Integer;
   t: String;
 begin
-  SetLength(RecWords, 0);
-  if AFileName.EndsWith('.json') then
-    LoadRecognizedWordsFromJSON(AFileName, RecWords)
-  else if FileExists(AFileName) then
-  begin
-    // whisper.cpp srt, one word per entry (-ml 1 -sow)
-    Subs := TUWSubtitles.Create;
-    try
-      FPSInfo.FPS  := 25;
-      FPSInfo.Mode := tcNDF;
-      if Subs.LoadFromFile(AFileName, NIL, FPSInfo, sfSubRip) then
-        for i := 0 to Subs.Count-1 do
-          AddRecognizedWords(RecWords, Subs[i].Text, Subs[i].InitialTime, Subs[i].FinalTime);
-    finally
-      Subs.Free;
-    end;
-  end;
+  LoadWords(AFileName, RecWords);
 
   if Length(RecWords) = 0 then
   begin
@@ -786,6 +811,91 @@ begin
   UpdateValues(True);
 
   ShowMessageDialog(Format(lngTextSyncResult, [Subtitles.Count, Matched, Length(TextWords)]));
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmAudioToText.UseWhisperDTW: Boolean;
+begin
+  // only whisper-cli knows -ojf/-dtw/-nfa (the old main exits with them), and
+  // the model must have a dtw preset
+  Result := (Tools.WhisperEngine = TWhisperEngine.WhisperCPP) and
+    LowerCase(ExtractFileName(Tools.WhisperCPP)).StartsWith('whisper-cli') and
+    (WhisperDTWPreset(cboModel.Text) <> '');
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmAudioToText.LoadWords(const AFileName: String; out AWords: TSyncWords): Boolean;
+var
+  Subs: TUWSubtitles;
+  FPSInfo: TFPSInfo;
+  i: Integer;
+begin
+  SetLength(AWords, 0);
+  if AFileName.EndsWith('.json') then
+    LoadRecognizedWordsFromJSON(AFileName, AWords)
+  else if FileExists(AFileName) then
+  begin
+    // whisper.cpp srt, one word per entry (-ml 1 -sow)
+    Subs := TUWSubtitles.Create;
+    try
+      FPSInfo.FPS  := 25;
+      FPSInfo.Mode := tcNDF;
+      if Subs.LoadFromFile(AFileName, NIL, FPSInfo, sfSubRip) then
+        for i := 0 to Subs.Count-1 do
+          AddRecognizedWords(AWords, Subs[i].Text, Subs[i].InitialTime, Subs[i].FinalTime);
+    finally
+      Subs.Free;
+    end;
+  end;
+  Result := Length(AWords) > 0;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmAudioToText.SmartSegment(const AWordsFile, ASrtFile, ALanguage: String): Boolean;
+var
+  Words: TSyncWords;
+  Segments: TSegments;
+  Options: TSegmentOptions;
+  Subs: TUWSubtitles;
+  FPSInfo: TFPSInfo;
+  i: Integer;
+begin
+  // subtitles made by us from the words, following the conventions (whisper
+  // segments can be very long, e.g. ~20 s after a silence)
+  Result := LoadWords(AWordsFile, Words);
+  if not Result then Exit;
+
+  with AppOptions.Conventions do
+  begin
+    Options.CPL         := CPL;
+    Options.MaxLines    := MaxLines;
+    Options.MaxDuration := MaxDuration;
+    Options.MinDuration := MinDuration;
+    Options.MinPause    := GetCorrectTime(MinPause, PauseInFrames);
+    Options.PauseSplit  := 500;
+    Options.MaxCPS      := MaxCPS;
+    if chkTranslate.Checked then
+      Options.Language := 'en'
+    else
+      Options.Language := ALanguage;
+  end;
+
+  Segments := SegmentWords(Words, Options);
+
+  Subs := TUWSubtitles.Create;
+  try
+    for i := 0 to High(Segments) do
+      Subs.Add(Segments[i].InitialTime, Segments[i].FinalTime, Segments[i].Text, '');
+
+    FPSInfo.FPS  := 25;
+    FPSInfo.Mode := tcNDF;
+    Result := Subs.SaveToFile(ASrtFile, FPSInfo, TEncoding.UTF8, sfSubRip, smText);
+  finally
+    Subs.Free;
+  end;
 end;
 
 end.
