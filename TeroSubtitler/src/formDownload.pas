@@ -54,6 +54,7 @@ type
     FDownloaded: TDownloadResult;
     procedure DoOnDownloadProgress(Sender: TObject; const AFrom, ATo: String; const APos, ASize: Int64; const AElapsed, ARemaining, ASpeed: LongInt);
     procedure DoOnDownloadCompleted(Sender: TObject);
+    procedure DoOnDownloadError(Sender: TObject; const AErrMsg: String = '');
   public
     function Execute(const AURL, ALocalFile: String): TDownloadResult;
   end;
@@ -106,6 +107,7 @@ begin
   FDownloader := TDownload.Create;
   FDownloader.OnDownloadProgress := @DoOnDownloadProgress;
   FDownloader.OnDownloadCompleted := @DoOnDownloadCompleted;
+  FDownloader.OnDownloadError := @DoOnDownloadError;
 end;
 
 // -----------------------------------------------------------------------------
@@ -191,6 +193,17 @@ begin
     DeleteFile(FLocalFile);
   end;
 
+  Close;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmDownload.DoOnDownloadError(Sender: TObject; const AErrMsg: String = '');
+begin
+  // without it the dialog stayed open doing nothing when the file wasn't on
+  // the server (404) or the connection failed, the download "never started"
+  FDownloaded := dfError;
+  btnCancel.Enabled := False;
   Close;
 end;
 
