@@ -34,6 +34,7 @@
 - fixed: [macOS] Application icon is slightly blurry #2
 - fixed: [macOS] Dock icon is low-res and distorted upon load of application #1
 - fixed: [macOS] Dropping files on the app icon (Dock/Finder) failed on macOS before 10.13
+- fixed: [macOS] Homebrew/MacPorts tools (deno, ffmpeg) weren’t found by yt-dlp when Tero was opened from Finder 
 - fixed: Possible crash in Spell check with some dictionaries
 - fixed: Dictionaries with a variant in their name, weren’t shown correctly in Spell check
 - fixed: Encoding detection for ANSI subtitles (German, Greek and Arabic were detected as Cyrillic; English, French and Italian as Central European)
