@@ -832,7 +832,7 @@ begin
     VSTDoLoop(VST, @ApplyAutoBreakSubtitles, dlSelected, True, True)
   else
   begin
-    Memo.Text := AutoBreakSubtitle(Memo.Text, AppOptions.Conventions.CPL);
+    Memo.Text := AutoBreakSubtitle(Memo.Text, GetAutoBreakCPL(AppOptions.Conventions, Memo.Text));
   end;
 end;
 

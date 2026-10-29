@@ -49,6 +49,8 @@ type
     cboConvention: TComboBox;
     clbOptions: TCheckListBox;
     cboSpacingHyphen: TComboBox;
+    cboSource: TComboBox;
+    lblSource: TLabel;
     lblSpacingHyphen: TLabel;
     lblOCR: TLabel;
     lblConvention: TLabel;
@@ -65,6 +67,7 @@ type
     procedure btnApplyClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure cboConventionSelect(Sender: TObject);
+    procedure cboSourceSelect(Sender: TObject);
     procedure clbOptionsClickCheck(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -169,7 +172,7 @@ begin
       AddOptionItem(etTimeTooLong, lngfsetTimeTooLong, GetValue('Option4', True));
       AddOptionItem(etOverlapping, lngfsetOverlapping, GetValue('Option5', True));
       AddOptionItem(etBadValues, lngfsetBadValues, GetValue('Option6', True));
-      AddOptionItem(etUnbreak, Format(lngfsetUnbreak, [AppOptions.Conventions.CPL]), GetValue('Option7', True));
+      AddOptionItem(etUnbreak, Format(lngfsetUnbreak, [GetCPL(AppOptions.Conventions, '')]), GetValue('Option7', True));
       AddOptionItem(etBreakLongLines, lngfsetBreakLongLines, GetValue('Option8', True));
       AddOptionItem(etEmpty, lngfsetEmpty, GetValue('Option9', True));
       AddOptionItem(etEllipsesSingleSmartCharacter, lngfsetEllipsesSingleSmartCharacter, GetValue('Option10', True));
@@ -205,7 +208,7 @@ begin
     AddOptionItem(etTimeTooLong, lngfsetTimeTooLong);
     AddOptionItem(etOverlapping, lngfsetOverlapping);
     AddOptionItem(etBadValues, lngfsetBadValues);
-    AddOptionItem(etUnbreak, Format(lngfsetUnbreak, [AppOptions.Conventions.CPL]));
+    AddOptionItem(etUnbreak, Format(lngfsetUnbreak, [GetCPL(AppOptions.Conventions, '')]));
     AddOptionItem(etBreakLongLines, lngfsetBreakLongLines);
     AddOptionItem(etEmpty, lngfsetEmpty);
     AddOptionItem(etEllipsesSingleSmartCharacter, lngfsetEllipsesSingleSmartCharacter);
@@ -227,6 +230,12 @@ begin
   cboSpacingHyphen.AddItem(lngfsRemoveSpacing, NIL);
   cboSpacingHyphen.ItemIndex := x;
 
+  // fix the text or the translation
+  cboSource.AddItem(lngasText, NIL);
+  cboSource.AddItem(lngasTranslation, NIL);
+  cboSource.ItemIndex := 0;
+  cboSource.Enabled   := Workspace.TranslatorMode;
+
   // select several entries (Shift/Cmd) and check or uncheck them at once
   VST.TreeOptions.SelectionOptions := VST.TreeOptions.SelectionOptions + [toMultiSelect];
   VSTAddColumn(VST, lngfsIndex, 75);
@@ -235,6 +244,7 @@ begin
   VSTAddColumn(VST, lngfsAfter, 50, taLeftJustify);
 
   FList := TSubtitleInfoList.Create(Subtitles);
+  FList.Source := smText;
 
   x := cboConvention.Items.IndexOf(AppOptions.Conventions.Name);
   if x >= 0 then
@@ -411,6 +421,18 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmFixSubtitles.cboSourceSelect(Sender: TObject);
+begin
+  if cboSource.ItemIndex = 1 then
+    FList.Source := smTranslation
+  else
+    FList.Source := smText;
+
+  UpdateItemList;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmFixSubtitles.clbOptionsClickCheck(Sender: TObject);
 var
   i: Integer;
@@ -441,7 +463,7 @@ begin
             if (etEmpty in ErrorsFixed) or (etProhibitedChars in ErrorsFixed) or (etRepeatedSubtitle in ErrorsFixed) then
               numList.Add(Index)
             else
-              SetSubtitleValues(Index, InitialTime, FinalTime, Text, False, False);
+              SetSubtitleValues(Index, InitialTime, FinalTime, Text, False, False, FList.Source);
           end;
 
       // Remove empty/prohibited lines...
@@ -452,7 +474,7 @@ begin
       end;
 
       UndoInstance.IncrementUndoGroup;
-      SubtitleChanged(True, False);
+      SubtitleChanged(FList.Source = smText, FList.Source = smTranslation);
       DoAutoCheckErrors;
       UpdateValues(True);
     finally
@@ -602,6 +624,8 @@ begin
     if IsTimeFixed(Item) then
       Result := GetTimeStr(InitialTime) + ' --> ' +
                 GetTimeStr(FinalTime) // + ' ' + Text
+    else if FList.Source = smTranslation then
+      Result := ReplaceEnters(Translation)
     else
       Result := ReplaceEnters(Text);
 end;
@@ -694,6 +718,7 @@ var
   InfoList : TSubtitleInfoList;
 begin
   InfoList := TSubtitleInfoList.Create(Subtitles);
+  InfoList.Source := FList.Source;
   try
     InfoList.Errors := [etBadValues, etTimeTooLong,etTimeTooShort,
       etPauseTooShort, etMaxCPS, etOverlapping, etFixTags, etEmpty, etUnbreak,
@@ -811,7 +836,7 @@ begin
   UpdatedOption(4, lngfsetTimeTooLong);
   UpdatedOption(5, lngfsetOverlapping);
   UpdatedOption(6, lngfsetBadValues);
-  UpdatedOption(7, Format(lngfsetUnbreak, [AppOptions.Conventions.CPL]));
+  UpdatedOption(7, Format(lngfsetUnbreak, [GetCPL(AppOptions.Conventions, '')]));
   UpdatedOption(8, lngfsetBreakLongLines);
   UpdatedOption(9, lngfsetEmpty);
   UpdatedOption(10, lngfsetEllipsesSingleSmartCharacter);

@@ -120,6 +120,25 @@ object frmTTS: TfrmTTS
     TabOrder = 7
     TabStop = False
   end
+  object lblSource: TLabel
+    Left = 300
+    Height = 20
+    Top = 322
+    Width = 47
+    Anchors = [akTop, akRight]
+    Caption = 'Source'
+    ParentColor = False
+  end
+  object cboSource: TComboBox
+    Left = 300
+    Height = 28
+    Top = 348
+    Width = 200
+    Anchors = [akTop, akRight]
+    ItemHeight = 20
+    Style = csDropDownList
+    TabOrder = 20
+  end
   object lblScope: TLabel
     AnchorSideTop.Control = chkBoost
     AnchorSideTop.Side = asrBottom

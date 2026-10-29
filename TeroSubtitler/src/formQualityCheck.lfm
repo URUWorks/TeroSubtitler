@@ -55,6 +55,26 @@ object frmQualityCheck: TfrmQualityCheck
     OnHeaderDrawQueryElements = VSTHeaderDrawQueryElements
     OnResize = VSTResize
   end
+  object lblSource: TLabel
+    Left = 8
+    Height = 15
+    Top = 363
+    Width = 40
+    Anchors = [akLeft, akBottom]
+    Caption = 'Source'
+    ParentColor = False
+  end
+  object cboSource: TComboBox
+    Left = 112
+    Height = 23
+    Top = 359
+    Width = 150
+    Anchors = [akLeft, akBottom]
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 3
+    OnChange = cboRulesChange
+  end
   object btnClose: TButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom

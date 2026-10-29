@@ -180,6 +180,7 @@ type
     spnCPS: TSpinEdit;
     spnWPM: TSpinEdit;
     spnCPL: TSpinEdit;
+    spnCPLOneLine: TSpinEdit;
     lyoMPV: TUWLayout;
     tlbFileTypeIco: TToolBar;
     procedure btnCloseClick(Sender: TObject);
@@ -329,6 +330,7 @@ begin
       spnCPS.Value                := MaxCPS;
       spnWPM.Value                := WPM;
       spnCPL.Value                := CPL;
+      spnCPLOneLine.Value         := CPLOneLine;
       spnSCSnapArea.Value         := ShotcutSnapArea;
       spnSCSnapThreshold.Value    := ShotcutThreshold;
       spnSCSnapInCues.Value       := ShotcutInCues;
@@ -450,6 +452,7 @@ begin
       MaxCPS             := spnCPS.Value;
       WPM                := spnWPM.Value;
       CPL                := spnCPL.Value;
+      CPLOneLine         := spnCPLOneLine.Value;
       ShotcutSnapArea    := spnSCSnapArea.Value;
       ShotcutThreshold   := spnSCSnapThreshold.Value;
       ShotcutInCues      := spnSCSnapInCues.Value;
@@ -955,6 +958,7 @@ begin
     spnCPS.Value                := MaxCPS;
     spnWPM.Value                := WPM;
     spnCPL.Value                := CPL;
+    spnCPLOneLine.Value         := CPLOneLine;
     spnSCSnapArea.Value         := ShotcutSnapArea;
     spnSCSnapThreshold.Value    := ShotcutThreshold;
     spnSCSnapInCues.Value       := ShotcutInCues;

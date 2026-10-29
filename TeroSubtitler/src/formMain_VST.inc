@@ -347,7 +347,7 @@ begin
              iArray := GetLengthForEachLineIntArray(Subtitles[Node^.Index].Translation, sLineBreak, '');
              for i := 0 to High(iArray) do
              begin
-               if iArray[i] > AppOptions.Conventions.CPL then
+               if iArray[i] > GetCPL(AppOptions.Conventions, Subtitles[Node^.Index].Translation) then
                  TargetCanvas.Font.Color := clRed;
 
                TargetCanvas.TextRect(R, R.Left, R.Top, iArray[i].ToString, TS);
@@ -361,7 +361,7 @@ begin
            iArray := GetLengthForEachLineIntArray(Subtitles[Node^.Index].Text, sLineBreak, '');
            for i := 0 to High(iArray) do
            begin
-             if iArray[i] > AppOptions.Conventions.CPL then
+             if iArray[i] > GetCPL(AppOptions.Conventions, Subtitles[Node^.Index].Text) then
                TargetCanvas.Font.Color := clRed;
 
              TargetCanvas.TextRect(R, R.Left, R.Top, iArray[i].ToString, TS);
@@ -673,7 +673,7 @@ begin
       if etOverlappingWithNext in ErrorType then SetHintText(lngasOverlappingWithNext);
       if etFixTags             in ErrorType then SetHintText(lngasFixTags);
       if etEmpty               in ErrorType then SetHintText(lngfsetEmpty);
-      if etUnbreak             in ErrorType then SetHintText(Format(lngfsetUnbreak, [AppOptions.Conventions.CPL]));
+      if etUnbreak             in ErrorType then SetHintText(Format(lngfsetUnbreak, [GetCPL(AppOptions.Conventions, '')]));
       if etUnnecessarySpaces   in ErrorType then SetHintText(lngasUnnecessarySpaces);
       if etUnnecessaryDots     in ErrorType then SetHintText(lngasUnnecessaryDots);
       if etRepeatedChars       in ErrorType then SetHintText(lngasRepeatedChars);

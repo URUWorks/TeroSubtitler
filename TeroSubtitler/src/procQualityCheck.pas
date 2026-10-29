@@ -23,7 +23,7 @@ unit procQualityCheck;
 interface
 
 uses
-  Classes, SysUtils, generics.collections, procConventions;
+  Classes, SysUtils, generics.collections, procConventions, UWSubtitleAPI;
 
 type
 
@@ -44,7 +44,7 @@ type
 
   TSubtitleCheckItemList = TList<TSubtitleCheckItem>;
 
-function DoQualityCheck(const AProfileName: String; const AProfiles: TProfiles; var AList: TSubtitleCheckItemList; const AFPS: Single): Boolean;
+function DoQualityCheck(const AProfileName: String; const AProfiles: TProfiles; var AList: TSubtitleCheckItemList; const AFPS: Single; const ASource: TSubtitleMode = smText): Boolean;
 
 // -----------------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ uses
 
 // -----------------------------------------------------------------------------
 
-function DoQualityCheck(const AProfileName: String; const AProfiles: TProfiles; var AList: TSubtitleCheckItemList; const AFPS: Single): Boolean;
+function DoQualityCheck(const AProfileName: String; const AProfiles: TProfiles; var AList: TSubtitleCheckItemList; const AFPS: Single; const ASource: TSubtitleMode = smText): Boolean;
 
   procedure AddQCItem(const AIndex: Integer; const AQC: TQualityCheckType);
   var
@@ -70,6 +70,8 @@ function DoQualityCheck(const AProfileName: String; const AProfiles: TProfiles; 
 var
   i: Integer;
   Profile: PProfileItem;
+  s: String;
+  cps, wpm: Double;
 begin
   Result := False;
   if (AProfiles = NIL) or (Subtitles.Count = 0) then Exit;
@@ -84,21 +86,35 @@ begin
 
   for i := 0 to Subtitles.Count-1 do
   begin
-    if (Profile.MaxCPS > 0) and (Subtitles.TextCPS[i, Profile.CPSLineLenStrategy] > Profile.MaxCPS) then
+    // checks of the text or of the translation
+    if ASource = smTranslation then
+    begin
+      s   := Subtitles[i].Translation;
+      cps := Subtitles.TranslationCPS[i, Profile.CPSLineLenStrategy];
+      wpm := Subtitles.TranslationWPM[i];
+    end
+    else
+    begin
+      s   := Subtitles[i].Text;
+      cps := Subtitles.TextCPS[i, Profile.CPSLineLenStrategy];
+      wpm := Subtitles.TextWPM[i];
+    end;
+
+    if (Profile.MaxCPS > 0) and (cps > Profile.MaxCPS) then
       AddQCItem(i, qcCPS);
 
-    if (Profile.WPM > 0) and (Subtitles.TextWPM[i] > Profile.WPM) then
+    if (Profile.WPM > 0) and (wpm > Profile.WPM) then
       AddQCItem(i, qcWPM);
 
-    if (Profile.CPL > 0) and (GetMaxLinesOf(Subtitles[i].Text) > Profile.CPL) then
+    if (Profile.CPL > 0) and (GetMaxLinesOf(s) > GetCPL(Profile^, s)) then
       AddQCItem(i, qcCPL);
 
-    if (Profile.MaxLines > 0) and (LineCount(Subtitles[i].Text, sLineBreak) > Profile.MaxLines) then
+    if (Profile.MaxLines > 0) and (LineCount(s, sLineBreak) > Profile.MaxLines) then
       AddQCItem(i, qcMaximumLines);
 
     if (Profile.MinDuration > 0) and (Subtitles.Duration[i] < Profile.MinDuration) then
       AddQCItem(i, qcMinimumDuration)
-    else if (Profile.MinDurationPerWord > 0) and (Subtitles[i].Text <> '') and  ((Subtitles.Duration[i] div WordCount(Subtitles[i].Text)) < Profile.MinDurationPerWord) then
+    else if (Profile.MinDurationPerWord > 0) and (s <> '') and  ((Subtitles.Duration[i] div WordCount(s)) < Profile.MinDurationPerWord) then
       AddQCItem(i, qcMinimumDuration);
 
     if (Profile.MaxDuration > 0) and (Subtitles.Duration[i] > Profile.MaxDuration) then

@@ -54,7 +54,7 @@ procedure SetSubtitleTimes(const Index: Integer; const AInitialTime, AFinalTime:
 procedure SetSubtitleTime(const Index: Integer; const Time: Integer; const Tag: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
 procedure SetSubtitleText(const Index: Integer; const Text: String; const SubtitleMode: TSubtitleMode = smText; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True; const Resent: Boolean = True);
 procedure SetSubtitleTexts(const Index: Integer; const Text: String; const Translation: String; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True; const Resent: Boolean = True);
-procedure SetSubtitleValues(const Index: Integer; const AInitialTime, AFinalTime: Integer; const Text: String; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
+procedure SetSubtitleValues(const Index: Integer; const AInitialTime, AFinalTime: Integer; const Text: String; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True; const SubtitleMode: TSubtitleMode = smText);
 
 function GetCorrectTime(const ATime: Integer; AIsFrames: Boolean): Integer;
 function GetCorrectPause(const AIndex: Integer): Integer;
@@ -712,20 +712,24 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure SetSubtitleValues(const Index: Integer; const AInitialTime, AFinalTime: Integer; const Text: String; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
+procedure SetSubtitleValues(const Index: Integer; const AInitialTime, AFinalTime: Integer; const Text: String; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True; const SubtitleMode: TSubtitleMode = smText);
 begin
   if not Subtitles.ValidIndex(Index) then Exit;
   if (Subtitles.ItemPointer[Index]^.InitialTime = AInitialTime) and
      (Subtitles.ItemPointer[Index]^.FinalTime = AFinalTime) and
-     (Subtitles.Text[Index] = Text) then
+     (((SubtitleMode = smText) and (Subtitles.Text[Index] = Text)) or
+      ((SubtitleMode = smTranslation) and (Subtitles.Translation[Index] = Text))) then
     Exit;
 
   UndoInstance.AddUndo(utSubtitleChange, Index, Subtitles[Index], AutoIncrementUndo);
 
   Subtitles.InitialTime[Index] := AInitialTime;
   Subtitles.FinalTime[Index]   := AFinalTime;
-  Subtitles.Text[Index]        := Text;
-  SubtitleChanged(True, False);
+  if SubtitleMode = smTranslation then
+    Subtitles.Translation[Index] := Text
+  else
+    Subtitles.Text[Index] := Text;
+  SubtitleChanged(SubtitleMode = smText, SubtitleMode = smTranslation);
 
   if AUpdate then
   begin

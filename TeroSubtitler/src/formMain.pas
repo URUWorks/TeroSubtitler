@@ -1360,7 +1360,7 @@ uses
   procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.SysUtils,
   UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procThumbnails,
   formCustomQuestionDlg, formCustomSelectDlg, formTranslationMemory, formTBX,
-  libMPV.Client, procMacMediaKeys;
+  libMPV.Client, procMacMediaKeys, procConventions;
 
 {$R *.lfm}
 

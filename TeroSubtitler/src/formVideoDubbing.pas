@@ -35,6 +35,8 @@ type
     btnBackgroundMusic: TButton;
     btnGenerate: TButton;
     cboVoice: TComboBox;
+    cboSource: TComboBox;
+    lblSource: TLabel;
     chkBackgroundMusic: TUWCheckBox;
     chkBoost: TUWCheckBox;
     edtBackgroundMusic: TEdit;
@@ -74,6 +76,7 @@ type
     procedure VSTHeaderDrawQueryElements(Sender: TVTHeader;
       var PaintInfo: THeaderPaintInfo; var Elements: THeaderPaintElements);
     procedure VSTResize(Sender: TObject);
+    procedure cboSourceChange(Sender: TObject);
   private
     TTS: TTextToSpeech;
     TempDir: String;
@@ -89,6 +92,7 @@ type
     function GenerateSubtitleFile(const AFileName: String): Boolean;
     function GenerateAudioFile: Boolean;
     procedure GenerateVideoFile;
+    function GetSourceText(const AIndex: Integer): String;
   public
 
   end;
@@ -122,6 +126,12 @@ begin
   VSTAddColumn(VST, lngvdVoice, 70);
   VSTAddColumn(VST, lnghTimes, 90);
   VSTAddColumn(VST, lnghText, 100, taLeftJustify);
+
+  // dub the text or the translation
+  cboSource.AddItem(lngasText, NIL);
+  cboSource.AddItem(lngasTranslation, NIL);
+  cboSource.ItemIndex := 0;
+  cboSource.Enabled   := Workspace.TranslatorMode;
 
   TTS := TTextToSpeech.Create(Tools.API_KEY_TTS);
   TTS.OnJobsError := @DoError;
@@ -297,7 +307,7 @@ begin
        else
          CellText := '';
     2: CellText := GetInitialTimeStr(Node^.Index);
-    3: CellText := Subtitles[Node^.Index].Text;
+    3: CellText := GetSourceText(Node^.Index);
   end;
 end;
 
@@ -490,6 +500,23 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function TfrmVideoDubbing.GetSourceText(const AIndex: Integer): String;
+begin
+  if cboSource.ItemIndex = 1 then
+    Result := Subtitles[AIndex].Translation
+  else
+    Result := Subtitles[AIndex].Text;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmVideoDubbing.cboSourceChange(Sender: TObject);
+begin
+  VST.Invalidate;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmVideoDubbing.SetJobTTS;
 var
   job : PJobInfo;
@@ -498,7 +525,7 @@ begin
   for i := 0 to Subtitles.Count-1 do
   begin
     New(job);
-    job^.Text := RemoveTSTags(Subtitles[i].Text);
+    job^.Text := RemoveTSTags(GetSourceText(i));
     job^.FileName := ConcatPaths([TempDir, IntToStr(i+1) + '.mp3']);
     if (TTS.Voices.Count > 0) and (cboVoice.ItemIndex >= 0) then
       job^.VoiceID := TTS.Voices[cboVoice.ItemIndex]^.ID;
@@ -525,14 +552,16 @@ function TfrmVideoDubbing.GenerateSubtitleFile(const AFileName: String): Boolean
 var
   Subs : TUWSubtitles;
   FPSInfo: TFPSInfo;
+  Mode: TSubtitleMode;
 begin
+  if cboSource.ItemIndex = 1 then Mode := smTranslation else Mode := smText;
   Subs := TUWSubtitles.Create;
   try
     Subs.Assign(Subtitles);
-    Subs.Add(frmMain.MPV.GetMediaLenInMs-1, frmMain.MPV.GetMediaLenInMs, ' ', '');
+    Subs.Add(frmMain.MPV.GetMediaLenInMs-1, frmMain.MPV.GetMediaLenInMs, ' ', ' ');
     FPSInfo.FPS := 1;
     FPSInfo.Mode := tcNDF;
-    Result := Subs.SaveToFile(AFileName, FPSInfo, TEncoding.UTF8, sfSubRip, smText);
+    Result := Subs.SaveToFile(AFileName, FPSInfo, TEncoding.UTF8, sfSubRip, Mode);
   finally
     Subs.Free;
   end;

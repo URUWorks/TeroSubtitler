@@ -260,13 +260,28 @@ object frmConventions: TfrmConventions
       TabOrder = 13
       Value = 37
     end
+    object spnCPLOneLine: TSpinEdit
+      AnchorSideLeft.Control = spnCPL
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = spnCPL
+      Left = 432
+      Height = 23
+      Hint = 'Maximum characters when the subtitle has only one line (0 = disabled)'
+      Top = 356
+      Width = 91
+      BorderSpacing.Left = 5
+      MaxValue = 500
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 40
+    end
     object lblCPL: TLabel
       Left = 0
       Height = 15
       Top = 360
       Width = 328
       AutoSize = False
-      Caption = 'Characters per line'
+      Caption = 'Characters per line (multiple lines / one line)'
       ParentColor = False
     end
     object lblName: TLabel

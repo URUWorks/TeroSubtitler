@@ -36,6 +36,8 @@ type
     btnGenerate: TButton;
     btnClose: TButton;
     cboVoice: TComboBox;
+    cboSource: TComboBox;
+    lblSource: TLabel;
     edtFolder: TEdit;
     lblStability: TLabel;
     lblSimilarityBoost: TLabel;
@@ -95,6 +97,12 @@ uses
 procedure TfrmTTS.FormCreate(Sender: TObject);
 begin
   CancelJobs := False;
+
+  // speak the text or the translation
+  cboSource.AddItem(lngasText, NIL);
+  cboSource.AddItem(lngasTranslation, NIL);
+  cboSource.ItemIndex := 0;
+  cboSource.Enabled   := Workspace.TranslatorMode;
 
   if (frmMain.VST.SelectedCount = 1) then
     rbnFromTheSelectedSubtitle.Checked := True
@@ -197,7 +205,10 @@ var
   job: PJobInfo;
 begin
   New(job);
-  job^.Text := RemoveTSTags(Item^.Text);
+  if frmTTS.cboSource.ItemIndex = 1 then
+    job^.Text := RemoveTSTags(Item^.Translation)
+  else
+    job^.Text := RemoveTSTags(Item^.Text);
   job^.FileName := ConcatPaths([frmTTS.edtFolder.Text, 'Entry' + IntToStr(Index+1) + '.mp3']);
   job^.VoiceID := frmTTS.TTS.Voices[frmTTS.cboVoice.ItemIndex]^.ID;
   job^.VoiceIndex := 0;

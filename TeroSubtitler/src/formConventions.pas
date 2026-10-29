@@ -60,6 +60,7 @@ type
     lstTree: TListBox;
     lyoConvention: TUWLayout;
     spnCPL: TSpinEdit;
+    spnCPLOneLine: TSpinEdit;
     spnSCSnapArea: TSpinEdit;
     spnChaining: TSpinEdit;
     spnSCSnapThreshold: TSpinEdit;
@@ -171,6 +172,7 @@ begin
         spnCPS.Value                := MaxCPS;
         spnWPM.Value                := WPM;
         spnCPL.Value                := CPL;
+        spnCPLOneLine.Value         := CPLOneLine;
         spnSCSnapArea.Value         := ShotcutSnapArea;
         spnSCSnapThreshold.Value    := ShotcutThreshold;
         spnSCSnapInCues.Value       := ShotcutInCues;
@@ -193,7 +195,7 @@ begin
       i := FList.AddItem(edtName.Text, spnNewSubtitleMs.Value, spnMinDurationMs.Value,
         spnMinDurationPerWord.Value, spnMaxDurationMs.Value,
         spnMaxLineCount.Value, spnSubtitlePauseMs.Value,
-        spnCPS.Value, spnWPM.Value, spnCPL.Value,
+        spnCPS.Value, spnWPM.Value, spnCPL.Value, spnCPLOneLine.Value,
         spnSCSnapArea.Value, spnSCSnapThreshold.Value, spnSCSnapInCues.Value, spnSCSnapOutCues.Value,
         spnChaining.Value,
         cboPauseMode.ItemIndex = 1,
@@ -236,7 +238,7 @@ begin
     FList.UpdateItem(lstTree.ItemIndex, edtName.Text, spnNewSubtitleMs.Value,
       spnMinDurationMs.Value, spnMinDurationPerWord.Value, spnMaxDurationMs.Value,
       spnMaxLineCount.Value, spnSubtitlePauseMs.Value,
-      spnCPS.Value, spnWPM.Value, spnCPL.Value,
+      spnCPS.Value, spnWPM.Value, spnCPL.Value, spnCPLOneLine.Value,
       spnSCSnapArea.Value, spnSCSnapThreshold.Value, spnSCSnapInCues.Value, spnSCSnapOutCues.Value,
       spnChaining.Value,
       cboPauseMode.ItemIndex = 1, edtRepeatableChars.Text,

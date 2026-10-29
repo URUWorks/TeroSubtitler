@@ -41,6 +41,7 @@ type
     RepeatedTolerance  : Cardinal;
     WPM                : Cardinal;
     CPL                : Cardinal;
+    CPLOneLine         : Cardinal; // max chars when the subtitle has one line (0 = CPL)
     RepeatableChars    : String;
     ProhibitedChars    : String;
     DotsOnSplit        : Boolean;
@@ -71,8 +72,8 @@ type
     procedure Close;
     procedure LoadFromFile(const AFileName: String);
     function SaveToFile(const AFileName: String): Boolean;
-    function AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
-    procedure UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
+    function AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, ACPLOneLine, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
+    procedure UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, ACPLOneLine, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
     function Ready: Boolean;
     procedure FillTStrings(const AStrings: TStrings; const AClear: Boolean = True);
     function FindItemIndex(const AName: String): Integer;
@@ -82,15 +83,41 @@ type
     property Items    : TProfileList read FList;
   end;
 
+function GetCPL(const AProfile: TProfileItem; const AText: String): Cardinal;
+function GetAutoBreakCPL(const AProfile: TProfileItem; const AText: String): Cardinal;
+
 // -----------------------------------------------------------------------------
 
 implementation
 
-uses UWSubtitleAPI.Utils, LazUTF8;
+uses UWSubtitleAPI.Utils, UWSubtitleAPI.Tags, UWSubtitles.Utils, LazUTF8;
 
 // -----------------------------------------------------------------------------
 
 { Helpers }
+
+// -----------------------------------------------------------------------------
+
+function GetCPL(const AProfile: TProfileItem; const AText: String): Cardinal;
+begin
+  // a subtitle of only one line can have its own (smaller) limit
+  if (AProfile.CPLOneLine > 0) and (Pos(#10, AText) = 0) and (Pos(#13, AText) = 0) then
+    Result := AProfile.CPLOneLine
+  else
+    Result := AProfile.CPL;
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetAutoBreakCPL(const AProfile: TProfileItem; const AText: String): Cardinal;
+begin
+  // the text is unbroken before breaking it, if it fits in CPL but is longer
+  // than the one line limit, break it with the smaller limit to get two lines
+  Result := AProfile.CPL;
+  if (AProfile.CPLOneLine > 0) and (AProfile.CPLOneLine < AProfile.CPL) and
+    (UTF8Length(RemoveTSTags(UnbreakSubtitles(AText, sLineBreak, True))) <= AProfile.CPL) then
+    Result := AProfile.CPLOneLine;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -202,6 +229,7 @@ begin
             MaxCPS             := TryGetNamedItem(NodeProfile, 'MaxCPS', '15').ToInteger;
             WPM                := TryGetNamedItem(NodeProfile, 'WPM', '180').ToInteger;
             CPL                := TryGetNamedItem(NodeProfile, 'CPL', '37').ToInteger;
+            CPLOneLine         := TryGetNamedItem(NodeProfile, 'CPLOneLine', '0').ToInteger;
             RepeatableChars    := TryGetNamedItem(NodeProfile, 'RepeatableChars', '');
             ProhibitedChars    := TryGetNamedItem(NodeProfile, 'ProhibitedChars', '');
             DotsOnSplit        := TryGetNamedItem(NodeProfile, 'DotsOnSplit', '1').ToBoolean;
@@ -260,6 +288,7 @@ begin
         TDOMElement(Node).SetAttribute('MaxCPS', MaxCPS.ToString);
         TDOMElement(Node).SetAttribute('WPM', WPM.ToString);
         TDOMElement(Node).SetAttribute('CPL', CPL.ToString);
+        TDOMElement(Node).SetAttribute('CPLOneLine', CPLOneLine.ToString);
         TDOMElement(Node).SetAttribute('RepeatableChars', RepeatableChars);
         TDOMElement(Node).SetAttribute('ProhibitedChars', ProhibitedChars);
         TDOMElement(Node).SetAttribute('DotsOnSplit', DotsOnSplit.ToString);
@@ -285,7 +314,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TProfiles.AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
+function TProfiles.AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, ACPLOneLine, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
 var
   s : String;
   Item : PProfileItem;
@@ -320,6 +349,7 @@ begin
     MaxCPS             := AMaxCPS;
     WPM                := AWPM;
     CPL                := ACPL;
+    CPLOneLine         := ACPLOneLine;
     DotsOnSplit        := ADotsOnSplit;
     CPSLineLenStrategy := ACPSLineLenStrategy;
     ShotcutSnapArea    := AShotcutSnapArea;
@@ -341,12 +371,12 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TProfiles.UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
+procedure TProfiles.UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, ACPLOneLine, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
 begin
   if FList.Count = 0 then Exit;
 
   AddItem(AName, ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration,
-    AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining,
+    AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, ACPLOneLine, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining,
     APauseInFrames, ARepeatableChars, AProhibitedChars, ADotsOnSplit, ACPSLineLenStrategy, True, AIndex);
 end;
 

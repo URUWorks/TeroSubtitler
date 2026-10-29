@@ -278,6 +278,7 @@ begin
       RepeatedTolerance  := 100;
       WPM                := 0;
       CPL                := 42;
+      CPLOneLine         := 0;
       ShotcutSnapArea    := 7;
       ShotcutThreshold   := 12;
       ShotcutInCues      := 0;
@@ -565,6 +566,7 @@ begin
         RepeatedTolerance := GetValue('RepeatedTolerance', RepeatedTolerance);
         WPM := GetValue('WPM', WPM);
         CPL := GetValue('CPL', CPL);
+        CPLOneLine := GetValue('CPLOneLine', CPLOneLine);
         ShotcutSnapArea := GetValue('ShotcutSnapArea', ShotcutSnapArea);
         ShotcutThreshold := GetValue('ShotcutThreshold', ShotcutThreshold);
         ShotcutInCues := GetValue('ShotcutInCues', ShotcutInCues);
@@ -1011,6 +1013,7 @@ begin
         SetValue('RepeatedTolerance', RepeatedTolerance);
         SetValue('WPM', WPM);
         SetValue('CPL', CPL);
+        SetValue('CPLOneLine', CPLOneLine);
         SetValue('CPSLineLenStrategy', CPSLineLenStrategy);
         SetValue('NewSubtitleMS', NewSubtitleMS);
         SetValue('ShotcutSnapArea', ShotcutSnapArea);
@@ -1425,6 +1428,7 @@ begin
         Conventions.MaxCPS             := MaxCPS;
         Conventions.WPM                := WPM;
         Conventions.CPL                := CPL;
+        Conventions.CPLOneLine         := CPLOneLine;
         Conventions.ShotcutSnapArea    := ShotcutSnapArea;
         Conventions.ShotcutThreshold   := ShotcutThreshold;
         Conventions.ShotcutInCues      := ShotcutInCues;

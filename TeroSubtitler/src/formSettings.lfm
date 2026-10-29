@@ -527,7 +527,7 @@ object frmSettings: TfrmSettings
       Width = 22
       AutoSize = False
       Caption = 'Add ''...'' on split subtitle'
-      TabOrder = 20
+      TabOrder = 21
       OnChange = spnConventionChange
     end
     object cboProfile: TComboBox
@@ -635,13 +635,29 @@ object frmSettings: TfrmSettings
       Value = 37
       OnChange = spnConventionChange
     end
+    object spnCPLOneLine: TSpinEdit
+      AnchorSideLeft.Control = spnCPL
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = spnCPL
+      Left = 540
+      Height = 28
+      Hint = 'Maximum characters when the subtitle has only one line (0 = disabled)'
+      Top = 445
+      Width = 100
+      BorderSpacing.Left = 5
+      MaxValue = 500
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 15
+      OnChange = spnConventionChange
+    end
     object lblCPL: TLabel
       Left = 0
       Height = 38
       Top = 450
       Width = 432
       AutoSize = False
-      Caption = 'Characters per line'
+      Caption = 'Characters per line (multiple lines / one line)'
       ParentColor = False
       WordWrap = True
     end
@@ -702,7 +718,7 @@ object frmSettings: TfrmSettings
       Top = 485
       Width = 100
       MaxValue = 20
-      TabOrder = 15
+      TabOrder = 16
       Value = 7
       OnChange = spnConventionChange
     end
@@ -722,7 +738,7 @@ object frmSettings: TfrmSettings
       Top = 525
       Width = 100
       MaxValue = 15
-      TabOrder = 17
+      TabOrder = 18
       OnChange = spnConventionChange
     end
     object lblSCSnapOutCues: TLabel
@@ -741,7 +757,7 @@ object frmSettings: TfrmSettings
       Top = 565
       Width = 100
       MaxValue = 15
-      TabOrder = 18
+      TabOrder = 19
       Value = 2
       OnChange = spnConventionChange
     end
@@ -751,7 +767,7 @@ object frmSettings: TfrmSettings
       Top = 485
       Width = 100
       MaxValue = 20
-      TabOrder = 16
+      TabOrder = 17
       Value = 11
       OnChange = spnConventionChange
     end
@@ -761,7 +777,7 @@ object frmSettings: TfrmSettings
       Top = 605
       Width = 100
       MaxValue = 30
-      TabOrder = 19
+      TabOrder = 20
       Value = 12
       OnChange = spnConventionChange
     end

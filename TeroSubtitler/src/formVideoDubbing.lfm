@@ -274,6 +274,34 @@ object frmVideoDubbing: TfrmVideoDubbing
     TabOrder = 4
     OnChange = cboVoiceChange
   end
+  object cboSource: TComboBox
+    AnchorSideRight.Control = VST
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = VST
+    Left = 640
+    Height = 28
+    Top = 4
+    Width = 200
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Bottom = 4
+    ItemHeight = 20
+    Style = csDropDownList
+    TabOrder = 20
+    OnChange = cboSourceChange
+  end
+  object lblSource: TLabel
+    AnchorSideTop.Control = cboSource
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = cboSource
+    Left = 587
+    Height = 20
+    Top = 8
+    Width = 47
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 6
+    Caption = 'Source'
+    ParentColor = False
+  end
   object VST: TLazVirtualStringTree
     AnchorSideLeft.Control = cboVoice
     AnchorSideLeft.Side = asrBottom

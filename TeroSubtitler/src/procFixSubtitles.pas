@@ -50,11 +50,14 @@ type
   private
     FErrors    : TSubtitleErrorTypeSet;
     FSubtitles : TUWSubtitles;
+    FSource    : TSubtitleMode;
+    function SourceText(const Index: Integer): String;
   public
     constructor Create(const Subtitles: TUWSubtitles = NIL);
     destructor Destroy; override;
     procedure ClearItems;
     property Errors: TSubtitleErrorTypeSet read FErrors write FErrors;
+    property Source: TSubtitleMode read FSource write FSource; // text or translation
     procedure FixErrors(const OCRFile: String = ''; const Profile: PProfileItem = NIL; const AShotChanges: TIntegerDynArray = NIL);
   end;
 
@@ -107,22 +110,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function IsEqualSubtitle(const Item1: TSubtitleInfoItem; const Item2: TUWSubtitleItem): Boolean;
-begin
-  if (Item1.InitialTime = Item2.InitialTime) and
-     (Item1.FinalTime = Item2.FinalTime) and
-     (Item1.Text = Item2.Text) then
-    Result := True
-  else
-    Result := False;
-end;
-
-// -----------------------------------------------------------------------------
-
 constructor TSubtitleInfoList.Create(const Subtitles: TUWSubtitles = NIL);
 begin
   FSubtitles := Subtitles;
   FErrors    := [];
+  FSource    := smText;
 
   inherited Create;
 end;
@@ -134,6 +126,16 @@ begin
   if FSubtitles <> NIL then FSubtitles := NIL;
   ClearItems;
   inherited;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TSubtitleInfoList.SourceText(const Index: Integer): String;
+begin
+  if FSource = smTranslation then
+    Result := FSubtitles[Index].Translation
+  else
+    Result := FSubtitles[Index].Text;
 end;
 
 // -----------------------------------------------------------------------------
@@ -160,7 +162,7 @@ procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile:
     AFixedItem.Apply       := True;
     AFixedItem.InitialTime := FSubtitles[Index].InitialTime;
     AFixedItem.FinalTime   := FSubtitles[Index].FinalTime;
-    AFixedItem.Text        := FSubtitles[Index].Text;
+    AFixedItem.Text        := SourceText(Index);
     AFixedItem.ErrorsFixed := [etNone];
   end;
 
@@ -243,7 +245,8 @@ begin
       // Repeated subtitle
       if etRepeatedSubtitle in FErrors then
       begin
-        if (i > 0) and IsEqualSubtitle(FixedItem, FSubtitles[i-1]) then
+        if (i > 0) and (FixedItem.InitialTime = FSubtitles[i-1].InitialTime) and
+          (FixedItem.FinalTime = FSubtitles[i-1].FinalTime) and (FixedItem.Text = SourceText(i-1)) then
         begin
           FixedItem.ErrorsFixed := [etRepeatedSubtitle];
           Add(NewItem(FixedItem));
@@ -373,10 +376,10 @@ begin
       if etUnbreak in FErrors then
       begin
         s   := RemoveTSTags(FixedItem.Text);
-        tmp := UnbreakSubtitlesIfLessThanChars(s, Profile^.CPL);
+        tmp := UnbreakSubtitlesIfLessThanChars(s, GetCPL(Profile^, '')); // result is one line
         if s <> tmp then
         begin
-          FixedItem.Text := UnbreakSubtitlesIfLessThanChars(FixedItem.Text, Profile^.CPL);
+          FixedItem.Text := UnbreakSubtitlesIfLessThanChars(FixedItem.Text, GetCPL(Profile^, ''));
           FixedItem.ErrorsFixed := [etUnbreak];
           Add(NewItem(FixedItem));
         end;
@@ -435,9 +438,9 @@ begin
       // Break long lines
       if etBreakLongLines in FErrors then
       begin
-        if HasTooLongLine(RemoveTSTags(FixedItem.Text), Profile^.CPL) then //and (Pos(sLineBreak, FixedItem.Text) = 0) then
+        if HasTooLongLine(RemoveTSTags(FixedItem.Text), GetCPL(Profile^, FixedItem.Text)) then //and (Pos(sLineBreak, FixedItem.Text) = 0) then
         begin
-          tmp := AutoBreakSubtitle(FixedItem.Text, Profile^.CPL);
+          tmp := AutoBreakSubtitle(FixedItem.Text, GetAutoBreakCPL(Profile^, FixedItem.Text));
           if FixedItem.Text <> tmp then
           begin
             FixedItem.Text := tmp;
@@ -467,7 +470,8 @@ begin
       // Empty subtitle
       if (etEmpty in FErrors) then
       begin
-        if FixedItem.Text = '' then
+        // the entry is removed, an untranslated one is not empty
+        if (FixedItem.Text = '') and (FSubtitles[i].Text = '') then
         begin
           FixedItem.ErrorsFixed := [etEmpty];
           Add(NewItem(FixedItem));
@@ -678,7 +682,7 @@ begin
       if Options.CPL > 0 then
       begin
         t := RemoveTSTags(Text);
-        s := UnbreakSubtitlesIfLessThanChars(t, Options.CPL);
+        s := UnbreakSubtitlesIfLessThanChars(t, GetCPL(Options, '')); // result is one line
         if t <> s then
           Result := Result + [etUnbreak];
       end;
@@ -741,7 +745,7 @@ begin
     // Break long lines
     if etBreakLongLines in ErrorsToCheck then
     begin
-      if (Options.CPL > 0) and HasTooLongLine(RemoveTSTags(Text), Options.CPL) then
+      if (Options.CPL > 0) and HasTooLongLine(RemoveTSTags(Text), GetCPL(Options, Text)) then
         Result := Result + [etBreakLongLines];
     end;
 

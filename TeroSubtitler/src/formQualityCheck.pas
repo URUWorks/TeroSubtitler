@@ -33,6 +33,8 @@ type
   TfrmQualityCheck = class(TForm)
     btnClose: TButton;
     cboRules: TComboBox;
+    cboSource: TComboBox;
+    lblSource: TLabel;
     lblRules: TLabel;
     VST: TLazVirtualStringTree;
     procedure btnCloseClick(Sender: TObject);
@@ -67,7 +69,8 @@ var
 implementation
 
 uses
-  procTypes, procVST, procWorkspace, procColorTheme, procConfig, formMain;
+  procTypes, procVST, procWorkspace, procColorTheme, procConfig, formMain,
+  UWSubtitleAPI;
 
 {$R *.lfm}
 
@@ -86,6 +89,12 @@ begin
   cboRules.Items.Insert(0, lngasCustom);
 
   FList := NIL;
+
+  // check the text or the translation
+  cboSource.AddItem(lngasText, NIL);
+  cboSource.AddItem(lngasTranslation, NIL);
+  cboSource.ItemIndex := 0;
+  cboSource.Enabled   := Workspace.TranslatorMode;
 
   VSTAddColumn(VST, lngqcIndex, 50);
   VSTAddColumn(VST, lngqcRule, 50, taLeftJustify);
@@ -130,7 +139,7 @@ end;
 
 procedure TfrmQualityCheck.cboRulesChange(Sender: TObject);
 begin
-  if DoQualityCheck(cboRules.Text, FProfiles, FList, GetFPS) then
+  if DoQualityCheck(cboRules.Text, FProfiles, FList, GetFPS, TSubtitleMode(cboSource.ItemIndex)) then
     VST.RootNodeCount := FList.Count
   else
     VST.RootNodeCount := 0;

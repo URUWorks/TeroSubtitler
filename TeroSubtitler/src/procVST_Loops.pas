@@ -72,7 +72,7 @@ implementation
 
 uses
   StrUtils, formMain, procUndo, procSubtitle, procWorkspace, procFixSubtitles,
-  UWSubtitleAPI.Tags, UWSubtitles.Utils, UWSystem.TimeUtils, UWSystem.StrUtils;
+  UWSubtitleAPI.Tags, UWSubtitles.Utils, UWSystem.TimeUtils, UWSystem.StrUtils, procConventions;
 
 // -----------------------------------------------------------------------------
 
@@ -338,7 +338,7 @@ end;
 procedure ApplyAutoBreakSubtitles(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^, AppOptions.Conventions do
-    ApplyText(Item, Index, AutoBreakSubtitle(Text, CPL), AutoBreakSubtitle(Translation, CPL), False);
+    ApplyText(Item, Index, AutoBreakSubtitle(Text, GetAutoBreakCPL(AppOptions.Conventions, Text)), AutoBreakSubtitle(Translation, GetAutoBreakCPL(AppOptions.Conventions, Translation)), False);
 end;
 
 // -----------------------------------------------------------------------------

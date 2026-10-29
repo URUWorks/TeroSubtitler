@@ -74,7 +74,7 @@ object frmFixSubtitles: TfrmFixSubtitles
     TabOrder = 0
     object clbOptions: TCheckListBox
       Left = 8
-      Height = 455
+      Height = 423
       Top = 8
       Width = 372
       Anchors = [akTop, akLeft, akRight, akBottom]
@@ -83,6 +83,26 @@ object frmFixSubtitles: TfrmFixSubtitles
       PopupMenu = PopupMenuSelect
       TabOrder = 0
       OnClickCheck = clbOptionsClickCheck
+    end
+    object lblSource: TLabel
+      Left = 8
+      Height = 15
+      Top = 443
+      Width = 62
+      Anchors = [akLeft, akBottom]
+      Caption = 'Source'
+      ParentColor = False
+    end
+    object cboSource: TComboBox
+      Left = 192
+      Height = 23
+      Top = 439
+      Width = 188
+      Anchors = [akLeft, akRight, akBottom]
+      ItemHeight = 15
+      Style = csDropDownList
+      TabOrder = 1
+      OnSelect = cboSourceSelect
     end
     object lblConvention: TLabel
       Left = 8
@@ -101,7 +121,7 @@ object frmFixSubtitles: TfrmFixSubtitles
       Anchors = [akLeft, akRight, akBottom]
       ItemHeight = 15
       Style = csDropDownList
-      TabOrder = 1
+      TabOrder = 2
       OnSelect = cboConventionSelect
     end
     object lblOCR: TLabel
@@ -121,7 +141,7 @@ object frmFixSubtitles: TfrmFixSubtitles
       Anchors = [akLeft, akRight, akBottom]
       ItemHeight = 15
       Style = csDropDownList
-      TabOrder = 2
+      TabOrder = 3
       OnChange = cboConventionSelect
     end
     object lblSpacingHyphen: TLabel
@@ -141,7 +161,7 @@ object frmFixSubtitles: TfrmFixSubtitles
       Anchors = [akLeft, akRight, akBottom]
       ItemHeight = 15
       Style = csDropDownList
-      TabOrder = 3
+      TabOrder = 4
       OnChange = cboConventionSelect
     end
   end
