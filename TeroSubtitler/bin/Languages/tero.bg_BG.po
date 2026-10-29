@@ -4713,8 +4713,10 @@ msgid "Chaining (frames)"
 msgstr ""
 
 #: tfrmsettings.lblcpl.caption
+#, fuzzy
+#| msgid "Characters per line"
 msgctxt "tfrmsettings.lblcpl.caption"
-msgid "Characters per line"
+msgid "Characters per line (multiple lines / one line)"
 msgstr "Знака на ред"
 
 #: tfrmsettings.lblcps.caption
@@ -4926,6 +4928,10 @@ msgstr ""
 #: tfrmsettings.lblzerotodisable.caption
 msgid "(0 to disable)"
 msgstr "(0 за изключване)"
+
+#: tfrmsettings.spncploneline.hint
+msgid "Maximum characters when the subtitle has only one line (0 = disabled)"
+msgstr ""
 
 #: tfrmshifttimes.btnapply.caption
 msgctxt "tfrmshifttimes.btnapply.caption"

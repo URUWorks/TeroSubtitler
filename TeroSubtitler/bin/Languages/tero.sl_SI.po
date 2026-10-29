@@ -4994,8 +4994,10 @@ msgid "Chaining (frames)"
 msgstr "Sličice"
 
 #: tfrmsettings.lblcpl.caption
+#, fuzzy
+#| msgid "Characters per line"
 msgctxt "tfrmsettings.lblcpl.caption"
-msgid "Characters per line"
+msgid "Characters per line (multiple lines / one line)"
 msgstr "Znaki na vrstico"
 
 #: tfrmsettings.lblcps.caption
@@ -5229,6 +5231,10 @@ msgstr "YT-DLP"
 #, fuzzy
 msgid "(0 to disable)"
 msgstr "Čas v milisekundah, po katerih se mora odjemalec odzvati na zahtevo ping, preden sistem sporoči napako odziva. Vrednost 0 povsem omogoči preverjanje stanja povezave."
+
+#: tfrmsettings.spncploneline.hint
+msgid "Maximum characters when the subtitle has only one line (0 = disabled)"
+msgstr ""
 
 #: tfrmshifttimes.btnapply.caption
 msgctxt "tfrmshifttimes.btnapply.caption"

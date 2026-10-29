@@ -4660,8 +4660,8 @@ msgstr "Encadenamiento (fotogramas)"
 
 #: tfrmsettings.lblcpl.caption
 msgctxt "tfrmsettings.lblcpl.caption"
-msgid "Characters per line"
-msgstr "Caracteres por línea"
+msgid "Characters per line (multiple lines / one line)"
+msgstr "Caracteres por línea (varias líneas / una sola línea)"
 
 #: tfrmsettings.lblcps.caption
 msgctxt "tfrmsettings.lblcps.caption"
@@ -4872,6 +4872,10 @@ msgstr "Ruta de YT-DLP"
 #: tfrmsettings.lblzerotodisable.caption
 msgid "(0 to disable)"
 msgstr "(0 para deshabilitar)"
+
+#: tfrmsettings.spncploneline.hint
+msgid "Maximum characters when the subtitle has only one line (0 = disabled)"
+msgstr "Número máximo de caracteres cuando el subtítulo consta de una sola línea (0 = desactivado)"
 
 #: tfrmshifttimes.btnapply.caption
 msgctxt "tfrmshifttimes.btnapply.caption"
