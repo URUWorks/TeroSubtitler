@@ -3,13 +3,18 @@
 - fixed: [Windows] Unresponsive UI / interface freezes during continuous editing #482
 - fixed: Audio-to-text stops after 1 hour #473
 - fixed: yt-dlp dependency has stopped working #462
+- fixed: Allow reopening the initial Setup Wizard #461
+- fixed: Minimum Gap unavailable in Fix Subtitles #423
 - fixed: Show one thumbnail per shot change #420
 - fixed: Entered text doesn't immediately appear on timeline #404
 - fixed: Preview frame when adjusting entry in timeline #380
 - fixed: Notes were lost when saving to formats that can’t store them; they are now kept in a hidden file next to the subtitle #353
+- fixed: Assuming brackets to indicate hearing-impaired elements should be optional #345
+- fixed: Prompts when loading subtitle file #338
 - fixed: Defective preview when İ character is used #337
 - fixed: Multi-select and multi-check in Fix Subtitles #333
 - fixed: [macOS] Turn off beep when moving between entries #331
+- fixed: Misguiding file extension (apparently creating .ASS, but internal is .SRT) #324
 - fixed: Applying Netflix profile then another doesn't flag all shot changes #289
 - fixed: Translation Memory problem #279
 - fixed: [Windows] Taskbar icon only shows on main display, not on secondary displays #212
@@ -75,6 +80,7 @@
 - fixed: [SubtitleAPI] AQTitle, ABC iView, Advanced Subtitles, CPC-600, DKS, DVD Subtitle, DVD Subtitle System, DVD Junior, FAB Subtitler, GPAC TTXT, I-Author, Inscriber CG, Karaoke LRC/VKT, Mac DVD Studio Pro, MPlayer, Spruce STL & Spruce Script (parsing robustness)
 - fixed: EDL shot change import, timecodes now start from the video start
 - fixed: Loading a subtitle with a different frame rate mode left the time fields and waveform in the previous timecode mode
+- fixed: Tero’s own file dialog used a wrong FPS value
 - fixed: Linux downloaded the ARM build of yt-dlp on x86_64 computers
 - fixed: Downloaded yt-dlp wasn’t marked as executable on Linux
 - improved: [macOS] now uses the standalone yt-dlp, which can update itself
