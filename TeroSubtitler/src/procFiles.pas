@@ -465,7 +465,7 @@ begin
   _Encoding := AEncoding;
   IsBinary := IsBinaryFormat(FileName);
 
-  if (_Encoding = NIL) and AppOptions.AskForInputEncoding and not AppOptions.UseOwnFileDialog and not IsBinary then
+  if (_Encoding = NIL) and AppOptions.AskForInputEncoding and not IsBinary then
   begin
     _Encoding := GetEncodingFromFile(FileName, False);
 
@@ -487,7 +487,7 @@ begin
     end;
   end;
 
-  if AppOptions.AskForInputFPS and Subtitles.GetFormatInfoFromFile(FileName, _Format, _TimeBase) and ((_TimeBase = stbMedia) and (_Format <> sfSoftNI)) and not AppOptions.UseOwnFileDialog and
+  if AppOptions.AskForInputFPS and Subtitles.GetFormatInfoFromFile(FileName, _Format, _TimeBase) and ((_TimeBase = stbMedia) and (_Format <> sfSoftNI)) and (AFPS = -1) and // not chosen in our file dialog
     (not IsBinary or SameText(ExtractFileExt(FileName), '.890') or SameText(ExtractFileExt(FileName), '.cap') or
     SameText(ExtractFileExt(FileName), '.asc')) then
   begin
@@ -722,7 +722,10 @@ begin
 
     with frmMain do
       MRU.Add(S, MPV.FileName, WAVE.FileName, VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPV.IsPlaying);
-    {$ifdef linux}Subtitles.Format := Format;{$endif} //СМ630: I do not understand how it works on other OSes without this
+    // keep the format of what was written, so Save doesn't write another
+    // format into this file (it happened after a "Save as" in another format)
+    if SubtitleMode = smText then
+      Subtitles.Format := Format;
   end
   else
     ShowErrorMessageDialog(lngSaveSubtitleError);
@@ -991,6 +994,18 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function FileExtMatchesFormat(const AFileName: String; const AFormat: TUWSubtitleFormats): Boolean;
+var
+  ext, exts: String;
+begin
+  ext  := LowerCase(ExtractFileExt(AFileName));
+  exts := LowerCase(Subtitles.FormatExtensions(AFormat)) + ';';
+  // unknown format info: don't block the save
+  Result := (exts = ';') or (ext = '') or (Pos('*' + ext + ';', exts) > 0);
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetSubtitleFormatExt(const AFormat: TUWSubtitleFormats): String;
 begin
   Result := ExtractFileExt(Subtitles.FixFileNameExtension('a', AFormat));
@@ -1096,7 +1111,9 @@ begin
   else
     s := SubtitleInfo.Translation.FileName;
 
-  if s.IsEmpty then
+  // ask if the current format doesn't match the file extension (e.g. the
+  // format combo was changed), instead of writing srt data into a .ass file
+  if s.IsEmpty or not FileExtMatchesFormat(s, Subtitles.Format) then
     SaveSubtitleWithDialog(SubtitleMode)
   else
     SaveSubtitle(s, Subtitles.Format, SubtitleMode);
