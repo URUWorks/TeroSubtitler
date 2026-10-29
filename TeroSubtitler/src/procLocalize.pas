@@ -76,6 +76,8 @@ resourcestring
   lngExtractAppError = 'Unable to find “%s”. Check in settings if it is configured correctly.';
   lngExtracting = 'Extracting...';
   lngTranscribing = 'Transcribing...';
+  lngTextSyncResult = 'Synchronized %d entries (%d of %d words found in the audio).';
+  lngTextSyncNoWords = 'No words were recognized in the audio, the texts could not be synchronized.';
   lngDetectDialogSegmentsWarning = 'Attempting to detect dialogue segments deletes all entries from the list.';
   lngEntry = 'Entry %d';
   lnglibMPVError = 'Unable to find the required libraries to run the embedded mpv player. Please download them.';
@@ -155,6 +157,7 @@ resourcestring
   lngasVideoLen = '%s (%s FPS)';
   lngasVideoLenSMPTE = '%s (%s FPS/SMPTE)';
   lngasReadingVideoFile = 'Reading media file...';
+  lngasLoadingVideoFromURL = 'Loading media from URL (yt-dlp)... %s';
   lngasCustom = 'Custom';
 
   //AboutStrings

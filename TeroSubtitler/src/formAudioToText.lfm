@@ -1,66 +1,67 @@
 object frmAudioToText: TfrmAudioToText
   Left = 237
-  Height = 428
+  Height = 570
   Top = 117
-  Width = 388
+  Width = 485
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Audio to text'
-  ClientHeight = 428
-  ClientWidth = 388
+  ClientHeight = 570
+  ClientWidth = 485
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '5.0.1.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
   object lblLanguage: TLabel
     AnchorSideTop.Control = cboLanguage
     AnchorSideTop.Side = asrCenter
-    Left = 8
-    Height = 15
-    Top = 44
-    Width = 52
+    Left = 10
+    Height = 20
+    Top = 54
+    Width = 65
     Caption = 'Language'
     ParentColor = False
   end
   object cboLanguage: TComboBox
-    Left = 96
-    Height = 23
-    Top = 40
-    Width = 284
-    ItemHeight = 15
+    Left = 120
+    Height = 28
+    Top = 50
+    Width = 355
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 1
   end
   object lblModel: TLabel
     AnchorSideTop.Control = cboModel
     AnchorSideTop.Side = asrCenter
-    Left = 8
-    Height = 15
-    Top = 108
-    Width = 34
+    Left = 10
+    Height = 20
+    Top = 134
+    Width = 43
     Caption = 'Model'
     ParentColor = False
   end
   object cboModel: TComboBox
     AnchorSideRight.Control = btnModel
-    Left = 96
-    Height = 23
-    Top = 104
-    Width = 231
+    Left = 120
+    Height = 28
+    Top = 130
+    Width = 289
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Right = 5
-    ItemHeight = 15
+    BorderSpacing.Right = 6
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 4
   end
   object btnModel: TButton
     AnchorSideTop.Control = cboModel
     AnchorSideTop.Side = asrCenter
-    Left = 332
-    Height = 23
-    Top = 104
-    Width = 48
+    Left = 415
+    Height = 28
+    Top = 130
+    Width = 60
     Caption = '...'
     TabOrder = 5
     OnClick = btnModelClick
@@ -68,15 +69,15 @@ object frmAudioToText: TfrmAudioToText
   object btnGenerate: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
-    Left = 193
-    Height = 26
-    Top = 394
-    Width = 91
+    Left = 241
+    Height = 32
+    Top = 528
+    Width = 114
     Anchors = [akTop, akRight]
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     Caption = 'Generate'
     Default = True
-    TabOrder = 13
+    TabOrder = 16
     OnClick = btnGenerateClick
   end
   object btnClose: TButton
@@ -84,13 +85,13 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 289
-    Height = 26
-    Top = 394
-    Width = 91
+    Left = 361
+    Height = 32
+    Top = 528
+    Width = 114
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
+    BorderSpacing.Right = 10
+    BorderSpacing.Bottom = 10
     Cancel = True
     Caption = 'Close'
     TabOrder = 14
@@ -99,27 +100,27 @@ object frmAudioToText: TfrmAudioToText
   object lblTrack: TLabel
     AnchorSideTop.Control = cboTrack
     AnchorSideTop.Side = asrCenter
-    Left = 8
-    Height = 15
-    Top = 12
-    Width = 27
+    Left = 10
+    Height = 20
+    Top = 14
+    Width = 34
     Caption = 'Track'
     ParentColor = False
   end
   object cboTrack: TComboBox
-    Left = 96
-    Height = 23
-    Top = 8
-    Width = 284
-    ItemHeight = 15
+    Left = 120
+    Height = 28
+    Top = 10
+    Width = 355
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 0
   end
   object lblWait: TLabel
     Left = 0
-    Height = 32
-    Top = 321
-    Width = 389
+    Height = 40
+    Top = 436
+    Width = 486
     Alignment = taCenter
     Anchors = [akLeft, akRight, akBottom]
     AutoSize = False
@@ -131,9 +132,9 @@ object frmAudioToText: TfrmAudioToText
   end
   object lblStatus: TLabel
     Left = 0
-    Height = 40
-    Top = 353
-    Width = 389
+    Height = 50
+    Top = 476
+    Width = 486
     Alignment = taCenter
     Anchors = [akLeft, akRight, akBottom]
     AutoSize = False
@@ -147,12 +148,12 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideTop.Control = lblTimeElapsed
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = lblTimeElapsed
-    Left = 8
-    Height = 8
-    Top = 403
-    Width = 120
+    Left = 10
+    Height = 10
+    Top = 539
+    Width = 150
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     Step = 1
     TabOrder = 15
     Visible = False
@@ -161,14 +162,14 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideTop.Control = btnGenerate
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = btnGenerate
-    Left = 133
-    Height = 14
-    Top = 400
-    Width = 55
+    Left = 166
+    Height = 16
+    Top = 536
+    Width = 69
     Alignment = taRightJustify
     Anchors = [akTop, akRight, akBottom]
     AutoSize = False
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
@@ -176,12 +177,12 @@ object frmAudioToText: TfrmAudioToText
   object rbnAddSubtitlesWhileTranscribing: TUWRadioButton
     AnchorSideTop.Control = cboModel
     AnchorSideTop.Side = asrBottom
-    Left = 96
-    Height = 23
-    Top = 137
-    Width = 18
+    Left = 120
+    Height = 28
+    Top = 170
+    Width = 22
     AutoSize = False
-    BorderSpacing.Top = 10
+    BorderSpacing.Top = 12
     Caption = 'Add subtitles while transcribing'
     Checked = True
     TabOrder = 6
@@ -191,10 +192,10 @@ object frmAudioToText: TfrmAudioToText
   object rbnLoadSubtitlesAfterTranscript: TUWRadioButton
     AnchorSideTop.Control = rbnAddSubtitlesWhileTranscribing
     AnchorSideTop.Side = asrBottom
-    Left = 96
-    Height = 23
-    Top = 160
-    Width = 18
+    Left = 120
+    Height = 29
+    Top = 198
+    Width = 22
     AutoSize = False
     Caption = 'Load subtitles after transcription'
     TabOrder = 7
@@ -204,21 +205,21 @@ object frmAudioToText: TfrmAudioToText
   object chkTranslate: TUWCheckBox
     AnchorSideTop.Control = rbnLoadSubtitlesAfterTranscript
     AnchorSideTop.Side = asrBottom
-    Left = 96
-    Height = 23
-    Top = 188
-    Width = 16
+    Left = 120
+    Height = 29
+    Top = 233
+    Width = 20
     AutoSize = False
-    BorderSpacing.Top = 5
+    BorderSpacing.Top = 6
     Caption = 'Translate to Еnglish'
     TabOrder = 8
   end
   object cboEngine: TComboBox
-    Left = 96
-    Height = 23
-    Top = 72
-    Width = 231
-    ItemHeight = 15
+    Left = 120
+    Height = 28
+    Top = 90
+    Width = 289
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 2
     OnSelect = cboEngineSelect
@@ -226,20 +227,20 @@ object frmAudioToText: TfrmAudioToText
   object lblEngine: TLabel
     AnchorSideTop.Control = cboEngine
     AnchorSideTop.Side = asrCenter
-    Left = 8
-    Height = 15
-    Top = 76
-    Width = 36
+    Left = 10
+    Height = 20
+    Top = 94
+    Width = 45
     Caption = 'Engine'
     ParentColor = False
   end
   object btnEngine: TButton
     AnchorSideTop.Control = cboEngine
     AnchorSideTop.Side = asrCenter
-    Left = 332
-    Height = 23
-    Top = 72
-    Width = 48
+    Left = 415
+    Height = 28
+    Top = 90
+    Width = 60
     Caption = '...'
     TabOrder = 3
     OnClick = btnEngineClick
@@ -248,11 +249,11 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideLeft.Control = chkMaxLineLength
     AnchorSideTop.Control = chkMaxLineLength
     AnchorSideTop.Side = asrBottom
-    Left = 111
-    Height = 23
-    Top = 234
-    Width = 80
-    BorderSpacing.Left = 15
+    Left = 139
+    Height = 28
+    Top = 291
+    Width = 100
+    BorderSpacing.Left = 19
     MaxValue = 1000
     MinValue = 1
     TabOrder = 10
@@ -262,11 +263,11 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideLeft.Control = chkMaxLineCount
     AnchorSideTop.Control = chkMaxLineCount
     AnchorSideTop.Side = asrBottom
-    Left = 111
-    Height = 23
-    Top = 282
-    Width = 80
-    BorderSpacing.Left = 15
+    Left = 139
+    Height = 28
+    Top = 350
+    Width = 100
+    BorderSpacing.Left = 19
     MaxValue = 10
     MinValue = 1
     TabOrder = 12
@@ -275,10 +276,10 @@ object frmAudioToText: TfrmAudioToText
   object chkMaxLineLength: TUWCheckBox
     AnchorSideTop.Control = chkTranslate
     AnchorSideTop.Side = asrBottom
-    Left = 96
-    Height = 23
-    Top = 211
-    Width = 16
+    Left = 120
+    Height = 29
+    Top = 262
+    Width = 20
     AutoSize = False
     Caption = 'Maximum line length'
     TabOrder = 9
@@ -286,13 +287,26 @@ object frmAudioToText: TfrmAudioToText
   object chkMaxLineCount: TUWCheckBox
     AnchorSideTop.Control = spnMaxLineLength
     AnchorSideTop.Side = asrBottom
-    Left = 96
-    Height = 23
-    Top = 259
-    Width = 16
+    Left = 120
+    Height = 29
+    Top = 321
+    Width = 20
     AutoSize = False
     BorderSpacing.Top = 2
     Caption = 'Maximum line count'
     TabOrder = 11
+  end
+  object chkSyncText: TUWCheckBox
+    AnchorSideTop.Control = spnMaxLineCount
+    AnchorSideTop.Side = asrBottom
+    Left = 120
+    Height = 29
+    Top = 383
+    Width = 20
+    AutoSize = False
+    BorderSpacing.Top = 5
+    Caption = 'Synchronize the current texts (only timings)'
+    TabOrder = 13
+    OnChange = chkSyncTextChange
   end
 end

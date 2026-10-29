@@ -54,6 +54,7 @@ type
     spnMaxLineLength: TSpinEdit;
     spnMaxLineCount: TSpinEdit;
     chkMaxLineLength: TUWCheckBox;
+    chkSyncText: TUWCheckBox;
     chkMaxLineCount: TUWCheckBox;
     procedure btnCloseClick(Sender: TObject);
     procedure btnEngineClick(Sender: TObject);
@@ -64,11 +65,13 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure rbnAddSubtitlesWhileTranscribingChange(Sender: TObject);
+    procedure chkSyncTextChange(Sender: TObject);
   private
     procedure RefreshModelsList;
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure OpenFolderClick(Sender: TObject);
     procedure CheckEngineOptions;
+    procedure SyncTexts(const AFileName: String);
   public
 
   end;
@@ -85,7 +88,8 @@ uses
   procWorkspace, procConfig, procDialogs, procTypes, UWSystem.TimeUtils,
   formMain, UWSystem.Process, procFiles, procForms, StrUtils,
   procSubtitle, procVST, UWSubtitleAPI.Formats, UWSystem.SysUtils,
-  UWSystem.ThreadProcess;
+  UWSystem.ThreadProcess, procTextSync, UWSubtitleAPI, UWSubtitleAPI.Tags,
+  procUndo;
 
 type
 
@@ -241,6 +245,8 @@ begin
   CancelProcess := False;
   spnMaxLineLength.Value := AppOptions.Conventions.CPL;
   spnMaxLineCount.Value := AppOptions.Conventions.MaxLines;
+  // keep the texts of the entries, only their times from the audio
+  chkSyncText.Enabled := Subtitles.Count > 0;
   cboEngineSelect(NIL);
 
   {$IFNDEF WINDOWS}
@@ -309,6 +315,16 @@ end;
 procedure TfrmAudioToText.rbnAddSubtitlesWhileTranscribingChange(Sender: TObject
   );
 begin
+  CheckEngineOptions;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAudioToText.chkSyncTextChange(Sender: TObject);
+begin
+  if chkSyncText.Checked then
+    rbnLoadSubtitlesAfterTranscript.Checked := True;
+
   CheckEngineOptions;
 end;
 
@@ -461,14 +477,20 @@ begin
 
           if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
           begin
-            if rbnAddSubtitlesWhileTranscribing.Checked then
-              ss.Insert(ss.IndexOf(' -osrt'), ' -pp');
+            if chkSyncText.Checked then
+              // one word per segment, with its times
+              ss.Insert(ss.IndexOf(' -osrt'), ' -ml 1 -sow')
+            else
+            begin
+              if rbnAddSubtitlesWhileTranscribing.Checked then
+                ss.Insert(ss.IndexOf(' -osrt'), ' -pp');
 
-            if chkTranslate.Checked then
-              ss.Insert(ss.IndexOf(' -osrt'), ' -tr');
+              if chkTranslate.Checked then
+                ss.Insert(ss.IndexOf(' -osrt'), ' -tr');
 
-            if chkMaxLineLength.Checked then
-              ss.Insert(ss.IndexOf(' -osrt'), ' -ml ' + IntToStr(spnMaxLineLength.Value));
+              if chkMaxLineLength.Checked then
+                ss.Insert(ss.IndexOf(' -osrt'), ' -ml ' + IntToStr(spnMaxLineLength.Value));
+            end;
 
             if not Tools.WhisperCPP_Additional.IsEmpty then
               ss := ss + ' ' + Tools.WhisperCPP_Additional;
@@ -481,10 +503,13 @@ begin
             if cboLanguage.ItemIndex <> 0 then
               ss := ss + ' --language %lang';
 
-            if chkTranslate.Checked then
+            if chkSyncText.Checked then
+              // words with their times
+              ss := StringReplace(ss, '--output_format srt', '--output_format json', []) + ' --word_timestamps True'
+            else if chkTranslate.Checked then
               ss := ss + ' --task translate';
 
-            if chkMaxLineLength.Checked or chkMaxLineCount.Checked then
+            if not chkSyncText.Checked and (chkMaxLineLength.Checked or chkMaxLineCount.Checked) then
             begin
               ss := ss + ' --sentence';
 
@@ -523,7 +548,7 @@ begin
           for i := 0 to High(AParamArray) do
             AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%model', '%binpath', '%lang'], [s, ss, model, modelpath, cn], []);
 
-          if rbnAddSubtitlesWhileTranscribing.Checked then //and rbnAddSubtitlesWhileTranscribing.Enabled then
+          if rbnAddSubtitlesWhileTranscribing.Checked and not chkSyncText.Checked then //and rbnAddSubtitlesWhileTranscribing.Enabled then
           begin
             //if ExecuteAppEx(GetAudioToTextAppFile, AParamArray, AEnvironment, @ThreadProcessCB) then
             if ExecuteThreadProcess(GetAudioToTextAppFile, AParamArray, AEnvironment, @ThreadProcessCB, @ThreadProcessCBTime) then
@@ -562,6 +587,18 @@ begin
               // delete wave file
               DeleteFile(s);
 
+              if chkSyncText.Checked then
+              begin
+                if Tools.WhisperEngine <> TWhisperEngine.WhisperCPP then
+                  srtfile := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(s), '.json')]);
+
+                prbProgress.Position := 100;
+                SyncTexts(srtfile);
+                DeleteFile(srtfile);
+                if isPlaying then frmMain.MPV.Resume;
+                Exit;
+              end;
+
               if Tools.WhisperEngine <> TWhisperEngine.WhisperCPP then
               begin
                 s := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(s), '.srt')]);
@@ -584,6 +621,10 @@ begin
       else
         ShowErrorMessageDialog(Format(lngErrorExecuting, [ExtractFileName(Tools.FFmpeg)]));
     finally
+      // it was disabled while transcribing, without it the timeline and the
+      // entries don't follow the playback anymore (only the "add while
+      // transcribing" mode restored it)
+      frmMain.TimerPlayback.Enabled := TimerSub;
       SetLength(AParamArray, 0);
       SetLength(AEnvironment, 0);
       SetControlsEnabled(True);
@@ -622,6 +663,7 @@ begin
   cboModel.Enabled    := AValue;
 
   chkTranslate.Enabled := AValue;
+  chkSyncText.Enabled  := AValue and (Subtitles.Count > 0);
 
   rbnAddSubtitlesWhileTranscribing.Enabled := AValue;
   rbnLoadSubtitlesAfterTranscript.Enabled  := AValue;
@@ -657,7 +699,17 @@ end;
 
 procedure TfrmAudioToText.CheckEngineOptions;
 begin
-  if Tools.WhisperEngine = WhisperCPP then
+  // synchronizing: the segmentation and texts are the ones of the entries
+  rbnAddSubtitlesWhileTranscribing.Enabled := not chkSyncText.Checked;
+  chkTranslate.Enabled := not chkSyncText.Checked;
+  if chkSyncText.Checked then
+  begin
+    chkMaxLineLength.Enabled := False;
+    spnMaxLineLength.Enabled := False;
+    chkMaxLineCount.Enabled  := False;
+    spnMaxLineCount.Enabled  := False;
+  end
+  else if Tools.WhisperEngine = WhisperCPP then
   begin
     chkMaxLineLength.Enabled := True;
     spnMaxLineLength.Enabled := True;
@@ -674,6 +726,67 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAudioToText.SyncTexts(const AFileName: String);
+var
+  TextWords, RecWords: TSyncWords;
+  Times: TSyncTimes;
+  Chars: array of Integer;
+  Subs: TUWSubtitles;
+  FPSInfo: TFPSInfo;
+  i, Matched: Integer;
+  t: String;
+begin
+  SetLength(RecWords, 0);
+  if AFileName.EndsWith('.json') then
+    LoadRecognizedWordsFromJSON(AFileName, RecWords)
+  else if FileExists(AFileName) then
+  begin
+    // whisper.cpp srt, one word per entry (-ml 1 -sow)
+    Subs := TUWSubtitles.Create;
+    try
+      FPSInfo.FPS  := 25;
+      FPSInfo.Mode := tcNDF;
+      if Subs.LoadFromFile(AFileName, NIL, FPSInfo, sfSubRip) then
+        for i := 0 to Subs.Count-1 do
+          AddRecognizedWords(RecWords, Subs[i].Text, Subs[i].InitialTime, Subs[i].FinalTime);
+    finally
+      Subs.Free;
+    end;
+  end;
+
+  if Length(RecWords) = 0 then
+  begin
+    ShowErrorMessageDialog(lngTextSyncNoWords);
+    Exit;
+  end;
+
+  SetLength(TextWords, 0);
+  SetLength(Chars, Subtitles.Count);
+  for i := 0 to Subtitles.Count-1 do
+  begin
+    t := RemoveTSTags(Subtitles[i].Text);
+    AddTextWords(TextWords, t, i);
+    Chars[i] := Length(t);
+  end;
+
+  AlignSyncWords(TextWords, RecWords);
+  with AppOptions.Conventions do
+    Times := BuildSyncTimes(TextWords, RecWords, Subtitles.Count, Chars,
+      MinDuration, GetCorrectTime(MinPause, PauseInFrames), Matched);
+
+  for i := 0 to High(Times) do
+    SetSubtitleTimes(i, Times[i].InitialTime, Times[i].FinalTime, False, False);
+
+  UndoInstance.IncrementUndoGroup;
+  SubtitleChanged(True, False);
+  DoAutoCheckErrors;
+  UpdateValues(True);
+
+  ShowMessageDialog(Format(lngTextSyncResult, [Subtitles.Count, Matched, Length(TextWords)]));
+end;
 
 end.
 
