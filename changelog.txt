@@ -117,6 +117,7 @@
 - improved: Typing with "mpv handles subtitles" no longer rewrites the temp track on every key
 - improved: Language names are now shown in their own language
 - improved: Media loaded from a url shows its title instead of the url
+- added: Sub-optimal presentation of auto-transcribed subtitles #256
 - added: Synchronize texts with the audio (Audio to text/Synchronize the current texts) #41
 - added: “Update” button for yt-dlp in Settings/Tools
 - added: Elapsed time in the status bar while a media url is loading
