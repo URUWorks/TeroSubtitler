@@ -58,6 +58,7 @@ type
     chkPromptForInputFPS: TUWCheckBox;
     chkPromptForInputEncoding: TUWCheckBox;
     chkPromptForSaveWithErrors: TUWCheckBox;
+    chkHIRoundBrackets: TUWCheckBox;
     chkPromptForSaveWithErrors1: TUWCheckBox;
     chkWriteBOM: TUWCheckBox;
     chkSubtitleHandleByMPV: TUWCheckBox;
@@ -348,6 +349,7 @@ begin
     chkPromptForInputFPS.Checked        := AskForInputFPS;
     chkPromptForInputEncoding.Checked   := AskForInputEncoding;
     chkPromptForSaveWithErrors.Checked  := CheckErrorsBeforeSave;
+    chkHIRoundBrackets.Checked          := HIRoundBrackets;
 
     cboTheme.ItemIndex := Integer(ColorThemeInstance.ColorMode);
   end;
@@ -474,6 +476,7 @@ begin
     AskForInputFPS      := chkPromptForInputFPS.Checked;
     AskForInputEncoding := chkPromptForInputEncoding.Checked;
     CheckErrorsBeforeSave := chkPromptForSaveWithErrors.Checked;
+    HIRoundBrackets := chkHIRoundBrackets.Checked;
   end; //with
 
   frmMain.VST.Font.Size            := spnListFontSize.Value;
@@ -559,6 +562,7 @@ procedure TfrmSettings.FormShow(Sender: TObject);
 begin
   CheckColorTheme(Self);
   tlbFileTypeIco.Images := imlFileTypes;
+  lstTreeSelectionChange(NIL, False); // place the first page like the others
 end;
 
 // -----------------------------------------------------------------------------
@@ -578,8 +582,9 @@ begin
     if (C is TUWLayout) then
       if TUWLayout(C) = APage then
       begin
-        TUWLayout(C).Left := 196;
-        TUWLayout(C).Top  := 8;
+        // next to the list (fixed values didn't follow the DPI scaling)
+        TUWLayout(C).Left := lstTree.Left + lstTree.Width + lstTree.Left;
+        TUWLayout(C).Top  := lstTree.Top;
         TUWLayout(C).Show;
       end
       else

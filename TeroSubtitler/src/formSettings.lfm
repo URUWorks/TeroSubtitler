@@ -380,6 +380,18 @@ object frmSettings: TfrmSettings
       Caption = 'Write BOM on save'
       TabOrder = 19
     end
+    object chkHIRoundBrackets: TUWCheckBox
+      AnchorSideTop.Control = chkWriteBOM
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 24
+      Top = 656
+      Width = 22
+      AutoSize = False
+      BorderSpacing.Top = 2
+      Caption = 'Round brackets ( ) mark hearing impaired text'
+      TabOrder = 20
+    end
   end
   object lyoConventions: TUWLayout
     Left = -635

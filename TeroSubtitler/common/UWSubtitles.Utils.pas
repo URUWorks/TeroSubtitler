@@ -63,8 +63,8 @@ function DivideLines(Text: String; const InitialTime, FinalTime: Cardinal; const
 function DivideLinesAtPosition(Text: String; const InitialTime, FinalTime, Position: Cardinal; const Gap: Integer = 833): String;
 function ReverseText(Text: String): String;
 function FixRTLPunctuation(const Text: String; const Delimiter: String = sLineBreak): String;
-function IsHearingImpaired(const Text: String): Boolean;
-function FixHearingImpaired(const Text: String; const Enter: String = sLineBreak): String;
+function IsHearingImpaired(const Text: String; const ARoundBrackets: Boolean = True): Boolean;
+function FixHearingImpaired(const Text: String; const Enter: String = sLineBreak; const ARoundBrackets: Boolean = True): String;
 function HasRepeatedChar(const Text, RepeatableChars: String): Boolean;
 function FixRepeatedChar(Text: String; const RepeatableChars: String): String;
 function FixIncompleteOpenedHyphen(const Text: String): String;
@@ -896,11 +896,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function IsHearingImpaired(const Text: String): Boolean;
+function IsHearingImpaired(const Text: String; const ARoundBrackets: Boolean = True): Boolean;
 begin
-  if ((Pos('(', Text) > 0) and (Pos(')', Text) > Pos('(', Text))) or
+  // <...> are tags (<i>, <b>...), not hearing impaired text
+  if (ARoundBrackets and (Pos('(', Text) > 0) and (Pos(')', Text) > Pos('(', Text))) or
     ((Pos('[', Text) > 0) and (Pos(']', Text) > Pos('[', Text))) or
-    ((Pos('<', Text) > 0) and (Pos('>', Text) > Pos('<', Text))) or
     (StringCount('♪', Text) > 1) or (StringCount('♫', Text) > 1) then
     Result := True
   else
@@ -909,7 +909,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function FixHearingImpaired(const Text: String; const Enter: String = sLineBreak): String;
+function FixHearingImpaired(const Text: String; const Enter: String = sLineBreak; const ARoundBrackets: Boolean = True): String;
 
   // Función auxiliar interna para limpiar rangos [...] (...)
   procedure RemoveRange(var Line: String; const OpenChar, CloseChar: String);
@@ -951,7 +951,7 @@ begin
       Line := sl[i];
 
       // Limpieza de etiquetas y símbolos
-      RemoveRange(Line, '(', ')');
+      if ARoundBrackets then RemoveRange(Line, '(', ')');
       RemoveRange(Line, '[', ']');
       Line := StringReplace(Line, '♪', '', [rfReplaceAll]);
       Line := StringReplace(Line, '♫', '', [rfReplaceAll]);

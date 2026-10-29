@@ -312,6 +312,7 @@ begin
     AskForInputFPS         := True;
     AskForInputEncoding    := True;
     CheckErrorsBeforeSave  := True;
+    HIRoundBrackets        := True;
     TextToFind             := '';
     WebSearchURL           := URL_WordReference;
     GUILanguage            := GetOSLanguage;
@@ -491,6 +492,7 @@ begin
       AskForInputFPS := GetValue('AskForInputFPS', AskForInputFPS);
       AskForInputEncoding := GetValue('AskForInputEncoding', AskForInputEncoding);
       CheckErrorsBeforeSave := GetValue('CheckErrorsBeforeSave', CheckErrorsBeforeSave);
+      HIRoundBrackets := GetValue('HIRoundBrackets', HIRoundBrackets);
       WebSearchURL := GetValue('WebSearchURL', WebSearchURL);
       TextToFind := GetValue('TextToFind', TextToFind);
       CommonErrors := TSubtitleErrorTypeSet(GetValue('CommonErrors', Integer(CommonErrors)));
@@ -973,6 +975,7 @@ begin
       SetValue('AskForInputFPS', AskForInputFPS);
       SetValue('AskForInputEncoding', AskForInputEncoding);
       SetValue('CheckErrorsBeforeSave', CheckErrorsBeforeSave);
+      SetValue('HIRoundBrackets', HIRoundBrackets);
       SetValue('WebSearchURL', WebSearchURL);
       SetValue('TextToFind', TextToFind);
       SetValue('CommonErrors', Integer(CommonErrors));

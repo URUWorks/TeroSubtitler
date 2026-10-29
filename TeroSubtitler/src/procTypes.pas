@@ -427,6 +427,7 @@ type
     AskForInputFPS         : Boolean;
     AskForInputEncoding    : Boolean;
     CheckErrorsBeforeSave  : Boolean;
+    HIRoundBrackets        : Boolean; // (...) marks hearing impaired text
     TextToFind             : String;
     LastUnicodeChar        : TUTF8Char;
     WebSearchURL           : String;
