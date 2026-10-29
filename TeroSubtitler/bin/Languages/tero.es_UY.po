@@ -94,6 +94,11 @@ msgstr ""
 msgid "%d entries selected / %d"
 msgstr "%d líneas seleccionadas / %d"
 
+#: proclocalize.lngasloadingvideofromurl
+#, object-pascal-format
+msgid "Loading media from URL (yt-dlp)... %s"
+msgstr "Cargando contenido multimedia desde la URL (yt-dlp)... %s"
+
 #: proclocalize.lngasmarked
 msgid "Marked entry"
 msgstr "Entrada marcada"
@@ -1208,6 +1213,15 @@ msgstr "Tiempo"
 msgid "Export formatted text?"
 msgstr "¿Exportar texto con formato?"
 
+#: proclocalize.lngtextsyncnowords
+msgid "No words were recognized in the audio, the texts could not be synchronized."
+msgstr "No se reconoció ninguna palabra en el audio; los textos no pudieron sincronizarse."
+
+#: proclocalize.lngtextsyncresult
+#, object-pascal-format
+msgid "Synchronized %d entries (%d of %d words found in the audio)."
+msgstr "Se han sincronizado %d entradas (%d de %d palabras encontradas en el audio)."
+
 #: proclocalize.lngtmentriesadded
 #, object-pascal-format
 msgid "%d entries added to the translation memory."
@@ -1469,6 +1483,10 @@ msgstr "Número máximo de líneas"
 msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
 msgid "Maximum line length"
 msgstr "Longitud máxima de línea"
+
+#: tfrmaudiototext.chksynctext.caption
+msgid "Synchronize the current texts (only timings)"
+msgstr "Sincronizar los textos actuales (solo los tiempos)"
 
 #: tfrmaudiototext.chktranslate.caption
 msgid "Translate to Еnglish"
