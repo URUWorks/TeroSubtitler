@@ -178,6 +178,18 @@ procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile:
       Result := ATime + ASign * Max(1, AGapMs);
   end;
 
+  // overlapping with the previous one, or a pause shorter than the min gap
+  function StartTooClose(const AStart, APrevEnd, AGapMs: Integer): Boolean;
+  var
+    FPS: Double;
+  begin
+    FPS := Workspace.FPS.OutputFPS.FPS;
+    if (Workspace.WorkMode = wmFrames) and (FPS > 0) then
+      Result := TimeToFrames(AStart, FPS) < TimeToFrames(OverlapGapTime(APrevEnd, 1, AGapMs), FPS)
+    else
+      Result := AStart < OverlapGapTime(APrevEnd, 1, AGapMs);
+  end;
+
   function NewItem(AFixedItem: TSubtitleInfoItem): PSubtitleInfoItem;
   begin
     New(Result);
@@ -373,9 +385,9 @@ begin
       // Hearing impaired
       if etHearingImpaired in FErrors then
       begin
-        if IsHearingImpaired(FixedItem.Text) then
+        if IsHearingImpaired(FixedItem.Text, AppOptions.HIRoundBrackets) then
         begin
-          tmp := FixHearingImpaired(FixedItem.Text, sLineBreak);
+          tmp := FixHearingImpaired(FixedItem.Text, sLineBreak, AppOptions.HIRoundBrackets);
           if FixedItem.Text <> tmp then
           begin
             FixedItem.Text        := tmp;
@@ -510,7 +522,7 @@ begin
       begin
         if i > 0 then
         begin
-          if FixedItem.InitialTime <= FSubtitles[i-1].FinalTime then
+          if StartTooClose(FixedItem.InitialTime, FSubtitles[i-1].FinalTime, GapMs) then
           begin
             x := OverlapGapTime(FSubtitles[i-1].FinalTime, 1, GapMs);
             MinDurMs := OverlapGapTime(0, 1, 0); // one frame (1 ms in time mode)
@@ -736,7 +748,7 @@ begin
     // Hearing impaired
     if etHearingImpaired in ErrorsToCheck then
     begin
-      if IsHearingImpaired(Text) then
+      if IsHearingImpaired(Text, AppOptions.HIRoundBrackets) then
         Result := Result + [etHearingImpaired];
     end;
 
