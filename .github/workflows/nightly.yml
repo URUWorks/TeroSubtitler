@@ -389,6 +389,11 @@ jobs:
             ditto "$bin/$2" "$app/Contents/Frameworks"
             rm -rf "$app/Contents/Resources/Languages"
             ditto "$bin/Languages" "$app/Contents/Resources/Languages"
+            # resources from bin too, the copies in the tero.app template are not kept in sync
+            for d in Dictionaries OCR CustomFormat; do
+              rm -rf "$app/Contents/Resources/$d"
+              ditto "$bin/$d" "$app/Contents/Resources/$d"
+            done
             find "$app" -name '.DS_Store' -delete
             xattr -cr "$app"
             codesign --force --deep --sign - "$app"
