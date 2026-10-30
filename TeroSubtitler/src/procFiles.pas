@@ -110,7 +110,7 @@ uses
   procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils, LCLStrConsts,
   RegExpr,
   UWSubtitleAPI.Tags, UWTranslateAPI.Google, formCustomSelectDlgWithPreview,
-  FileUtil, Math, URIParser
+  FileUtil, Math, URIParser, formCustomQuestionDlg
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -430,6 +430,100 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// try to guess the fps of a subtitle with times in ms (not frames or smpte),
+// if all times fall on the frames of one rate, returns its DefFPSList index
+function GuessFPSFromFile(const FileName: String; const AEncoding: TEncoding): Integer;
+const
+  Candidates : array[0..9] of Integer = (0, 1, 2, 3, 5, 6, 7, 8, 9, 11); // DefFPSList
+  MinTimes   = 10;
+var
+  Sub1, Sub2 : TUWSubtitles;
+  FPSA, FPSB : TFPSInfo;
+  Times      : array of Integer;
+  i, c, n, Matches : Integer;
+  Tolerance, f, Err : Double;
+  OnlyCS : Boolean;
+
+  function FrameError(const ATime: Integer; const AFPS: Double): Double;
+  begin
+    f := ATime * AFPS / 1000;
+    Result := Abs(ATime - Round(f) * 1000 / AFPS);
+  end;
+
+begin
+  Result := -1;
+  Times  := NIL;
+  Sub1 := TUWSubtitles.Create;
+  Sub2 := TUWSubtitles.Create;
+  try
+    // load twice with different fps, if the times change they are in frames
+    FPSA.FPS := 25; FPSA.Mode := tcNDF;
+    FPSB.FPS := 30; FPSB.Mode := tcNDF;
+    if not Sub1.LoadFromFile(FileName, AEncoding, FPSA) or
+      not Sub2.LoadFromFile(FileName, AEncoding, FPSB) or (Sub1.Count <> Sub2.Count) then
+      Exit;
+
+    SetLength(Times, Sub1.Count * 2);
+    n := 0;
+    for i := 0 to Sub1.Count-1 do
+    begin
+      if (Sub1[i].InitialTime <> Sub2[i].InitialTime) or (Sub1[i].FinalTime <> Sub2[i].FinalTime) then
+        Exit;
+      // time 0 is a frame in any rate
+      if Sub1[i].InitialTime > 0 then
+      begin
+        Times[n] := Sub1[i].InitialTime;
+        Inc(n);
+      end;
+      if Sub1[i].FinalTime > 0 then
+      begin
+        Times[n] := Sub1[i].FinalTime;
+        Inc(n);
+      end;
+    end;
+    SetLength(Times, n);
+
+    if Length(Times) < MinTimes then Exit;
+
+    // centiseconds (e.g. ass) are rounded to 10 ms
+    OnlyCS := True;
+    for i := 0 to High(Times) do
+      if Times[i] mod 10 <> 0 then
+      begin
+        OnlyCS := False;
+        Break;
+      end;
+
+    if OnlyCS then
+      Tolerance := 5.01
+    else
+      Tolerance := 1.01;
+
+    // lower rates first (all the times of 25 fps are also frames of 50 fps)
+    for c := 0 to High(Candidates) do
+    begin
+      n := Candidates[c];
+      Matches := 0;
+      for i := 0 to High(Times) do
+      begin
+        Err := FrameError(Times[i], DefFPSList[n].FPS);
+        // ntsc rates are 24000/1001, 30000/1001...
+        if not IsInteger(DefFPSList[n].FPS) then
+          Err := Min(Err, FrameError(Times[i], Round(DefFPSList[n].FPS) * 1000 / 1001));
+        if Err <= Tolerance then Inc(Matches);
+      end;
+
+      if Matches >= Length(Times) * 0.95 then
+        Exit(n);
+    end;
+  finally
+    Sub1.Free;
+    Sub2.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AKeepVideoOpen: Boolean = False; const AVideoFile: String = ''; const AddToMRU: Boolean = True);
 var
   _FPS: TFPSInfo;
@@ -494,7 +588,17 @@ begin
   begin
     with frmMain.cboInputFPS do
     begin
-      ItemIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectFPSToUse, Items, ItemIndex, True);
+      // times in ms that match the frames of a rate, suggest it
+      if not IsBinary then
+        _FPSIndex := GuessFPSFromFile(FileName, _Encoding)
+      else
+        _FPSIndex := -1;
+
+      if (_FPSIndex >= 0) and (CustomQuestionDialog(lngSelectFPSToUse,
+        Format(lngFPSGuessed, [Items[_FPSIndex]]), [dbYes, dbNo]) = mrYes) then
+        ItemIndex := _FPSIndex
+      else
+        ItemIndex := formCustomSelectDlg.ExecuteDialog('', lngSelectFPSToUse, Items, ItemIndex, True);
       _FPS := DefFPSList[ItemIndex];
       frmMain.cboInputFPSSelect(NIL);
     end;

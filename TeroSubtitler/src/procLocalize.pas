@@ -106,6 +106,7 @@ resourcestring
   lngMultipleTracksDetected = 'Multiple tracks detected';
   lngSelectTrackToUse = 'Select the track to use:';
   lngSelectFPSToUse = 'Select FPS to use:';
+  lngFPSGuessed = 'The times of this subtitle match %s fps. Use this frame rate?';
   lngSelectEncodingToUse = 'Select encoding:';
   lngSelectSheetToUse = 'Select sheet to use:';
   lngWriteStatus = 'Writing %d/%d';
