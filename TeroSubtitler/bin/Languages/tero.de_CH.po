@@ -425,6 +425,10 @@ msgstr "Einträge verketten"
 msgid "Cleanup tags"
 msgstr "Tags bereinigen"
 
+#: proclocalize.lngfsetcurlytostraightquotes
+msgid "Curly quotes to straight: “” -> \"\""
+msgstr ""
+
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
 msgstr "Auslassungspunkte in Unicode-Zeichen umwandeln"
@@ -432,6 +436,10 @@ msgstr "Auslassungspunkte in Unicode-Zeichen umwandeln"
 #: proclocalize.lngfsetempty
 msgid "Remove empty entries"
 msgstr "Leere Einträge entfernen"
+
+#: proclocalize.lngfsetfixbrackets
+msgid "Fix brackets: switched, mismatched or empty"
+msgstr ""
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
@@ -495,6 +503,10 @@ msgstr "Endzeitpunkt an Szenenwechsel anpassen"
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
 msgstr "Abstand beim Trennstrich am Zeilenanfang"
+
+#: proclocalize.lngfsetstraighttocurlyquotes
+msgid "Straight quotes to curly: \"\" -> “”"
+msgstr ""
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -739,6 +751,10 @@ msgstr "Untertitel-Übersetzungsprojekt"
 #| msgid "The selected lines will be deleted."
 msgid "The selected entries will be deleted."
 msgstr "Die ausgewählten Zeilen werden gelöscht."
+
+#: proclocalize.lngqcbrackets
+msgid "Brackets: switched, mismatched, empty or unbalanced"
+msgstr ""
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -2337,6 +2353,12 @@ msgstr "Konvention"
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
 msgstr "OCR-Skript"
+
+#: tfrmfixsubtitles.lblsource.caption
+#, fuzzy
+msgctxt "tfrmfixsubtitles.lblsource.caption"
+msgid "Source"
+msgstr "Quelle"
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
 msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
@@ -5143,6 +5165,7 @@ msgid "Not found"
 msgstr "Nicht gefunden"
 
 #: tfrmspellcheck.lblsource.caption
+msgctxt "tfrmspellcheck.lblsource.caption"
 msgid "Source"
 msgstr "Quelle"
 

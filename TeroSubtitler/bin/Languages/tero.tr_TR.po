@@ -415,6 +415,10 @@ msgstr "Girişleri birbirine bağla"
 msgid "Cleanup tags"
 msgstr "Etiketleri temizle"
 
+#: proclocalize.lngfsetcurlytostraightquotes
+msgid "Curly quotes to straight: “” -> \"\""
+msgstr ""
+
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
 msgstr "Üç noktayı Unicode karakterine dönüştür"
@@ -422,6 +426,10 @@ msgstr "Üç noktayı Unicode karakterine dönüştür"
 #: proclocalize.lngfsetempty
 msgid "Remove empty entries"
 msgstr "Boş girişleri kaldır"
+
+#: proclocalize.lngfsetfixbrackets
+msgid "Fix brackets: switched, mismatched or empty"
+msgstr ""
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
@@ -485,6 +493,10 @@ msgstr "Çıkış noktasını (Out Cue) sahne değişimine sabitle"
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
 msgstr "Başlangıç tiresinin boşluğu"
+
+#: proclocalize.lngfsetstraighttocurlyquotes
+msgid "Straight quotes to curly: \"\" -> “”"
+msgstr ""
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -722,6 +734,10 @@ msgstr "Altyazı Çeviri Projesi"
 #: proclocalize.lngpromptfordeletelines
 msgid "The selected entries will be deleted."
 msgstr "Seçilen girişler silinecek."
+
+#: proclocalize.lngqcbrackets
+msgid "Brackets: switched, mismatched, empty or unbalanced"
+msgstr ""
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -2313,6 +2329,12 @@ msgstr "Kural/Sözleşme"
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
 msgstr "OCR Betiği"
+
+#: tfrmfixsubtitles.lblsource.caption
+#, fuzzy
+msgctxt "tfrmfixsubtitles.lblsource.caption"
+msgid "Source"
+msgstr "Kaynak"
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
 msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
@@ -5095,6 +5117,7 @@ msgid "Not found"
 msgstr "Bulunamadı"
 
 #: tfrmspellcheck.lblsource.caption
+msgctxt "tfrmspellcheck.lblsource.caption"
 msgid "Source"
 msgstr "Kaynak"
 

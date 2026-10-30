@@ -421,6 +421,10 @@ msgstr "Veriženje vnosov"
 msgid "Cleanup tags"
 msgstr "Čiščenje"
 
+#: proclocalize.lngfsetcurlytostraightquotes
+msgid "Curly quotes to straight: “” -> \"\""
+msgstr ""
+
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
 msgstr "Pretvori pike tripičja v znak Unicode"
@@ -428,6 +432,10 @@ msgstr "Pretvori pike tripičja v znak Unicode"
 #: proclocalize.lngfsetempty
 msgid "Remove empty entries"
 msgstr "Odstrani prazne vnose"
+
+#: proclocalize.lngfsetfixbrackets
+msgid "Fix brackets: switched, mismatched or empty"
+msgstr ""
 
 #: proclocalize.lngfsetfixinterrobang
 #, fuzzy
@@ -498,6 +506,10 @@ msgstr ""
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
 msgstr "Razmik začetnega vezaja"
+
+#: proclocalize.lngfsetstraighttocurlyquotes
+msgid "Straight quotes to curly: \"\" -> “”"
+msgstr ""
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -751,6 +763,10 @@ msgstr ":menuselection:`Projekt --> Podnaslov --> Dodaj podnaslov`"
 #, fuzzy
 msgid "The selected entries will be deleted."
 msgstr "Vnosi"
+
+#: proclocalize.lngqcbrackets
+msgid "Brackets: switched, mismatched, empty or unbalanced"
+msgstr ""
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -2385,6 +2401,11 @@ msgstr "Linux: Začni končnico datoteke .AppImage z veliko začetnico, kar ustr
 #, fuzzy
 msgid "OCR Script"
 msgstr "Skript"
+
+#: tfrmfixsubtitles.lblsource.caption
+msgctxt "tfrmfixsubtitles.lblsource.caption"
+msgid "Source"
+msgstr ""
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
 #, fuzzy
@@ -5423,6 +5444,7 @@ msgstr "Ni zadetkov"
 
 #: tfrmspellcheck.lblsource.caption
 #, fuzzy
+msgctxt "tfrmspellcheck.lblsource.caption"
 msgid "Source"
 msgstr "Vir"
 

@@ -419,6 +419,10 @@ msgstr "Свързване на надписи"
 msgid "Cleanup tags"
 msgstr "Разчистване на етикетите"
 
+#: proclocalize.lngfsetcurlytostraightquotes
+msgid "Curly quotes to straight: “” -> \"\""
+msgstr ""
+
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
 msgstr "Преобразуване на знака за многоточие в знак на уникод"
@@ -426,6 +430,10 @@ msgstr "Преобразуване на знака за многоточие в 
 #: proclocalize.lngfsetempty
 msgid "Remove empty entries"
 msgstr "Премахване на празните надписи"
+
+#: proclocalize.lngfsetfixbrackets
+msgid "Fix brackets: switched, mismatched or empty"
+msgstr ""
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
@@ -489,6 +497,10 @@ msgstr ""
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
 msgstr "Разстояние на началните тирета"
+
+#: proclocalize.lngfsetstraighttocurlyquotes
+msgid "Straight quotes to curly: \"\" -> “”"
+msgstr ""
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -727,6 +739,10 @@ msgstr "Проект за превод на надписи"
 #| msgid "The selected lines will be deleted."
 msgid "The selected entries will be deleted."
 msgstr "Избраните редове ще бъдат изтрити."
+
+#: proclocalize.lngqcbrackets
+msgid "Brackets: switched, mismatched, empty or unbalanced"
+msgstr ""
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -2316,6 +2332,12 @@ msgstr "Условности"
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
 msgstr ""
+
+#: tfrmfixsubtitles.lblsource.caption
+#, fuzzy
+msgctxt "tfrmfixsubtitles.lblsource.caption"
+msgid "Source"
+msgstr "Източник"
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
 msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
@@ -5117,6 +5139,7 @@ msgid "Not found"
 msgstr "Не е намерено"
 
 #: tfrmspellcheck.lblsource.caption
+msgctxt "tfrmspellcheck.lblsource.caption"
 msgid "Source"
 msgstr "Източник"
 

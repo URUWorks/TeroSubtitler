@@ -425,6 +425,10 @@ msgstr "Länka samman poster"
 msgid "Cleanup tags"
 msgstr "Rensa taggar"
 
+#: proclocalize.lngfsetcurlytostraightquotes
+msgid "Curly quotes to straight: “” -> \"\""
+msgstr ""
+
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
 msgstr "Omvandla utelämningspunkter till Unicode-tecken"
@@ -432,6 +436,10 @@ msgstr "Omvandla utelämningspunkter till Unicode-tecken"
 #: proclocalize.lngfsetempty
 msgid "Remove empty entries"
 msgstr "Ta bort tomma poster"
+
+#: proclocalize.lngfsetfixbrackets
+msgid "Fix brackets: switched, mismatched or empty"
+msgstr ""
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
@@ -495,6 +503,10 @@ msgstr "Justera sluttid till scenbyte"
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
 msgstr "Mellanrum vid inledande avstavning"
+
+#: proclocalize.lngfsetstraighttocurlyquotes
+msgid "Straight quotes to curly: \"\" -> “”"
+msgstr ""
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -739,6 +751,10 @@ msgstr "Projekt för undertextöversättning"
 #| msgid "The selected lines will be deleted."
 msgid "The selected entries will be deleted."
 msgstr "De markerade raderna kommer att tas bort."
+
+#: proclocalize.lngqcbrackets
+msgid "Brackets: switched, mismatched, empty or unbalanced"
+msgstr ""
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -2337,6 +2353,12 @@ msgstr "Konvention"
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
 msgstr "OCR-skript"
+
+#: tfrmfixsubtitles.lblsource.caption
+#, fuzzy
+msgctxt "tfrmfixsubtitles.lblsource.caption"
+msgid "Source"
+msgstr "Källa"
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
 msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
@@ -5143,6 +5165,7 @@ msgid "Not found"
 msgstr "Hittades inte"
 
 #: tfrmspellcheck.lblsource.caption
+msgctxt "tfrmspellcheck.lblsource.caption"
 msgid "Source"
 msgstr "Källa"
 

@@ -415,6 +415,10 @@ msgstr "Encadenamiento de entradas"
 msgid "Cleanup tags"
 msgstr "Limpieza de etiquetas"
 
+#: proclocalize.lngfsetcurlytostraightquotes
+msgid "Curly quotes to straight: “” -> \"\""
+msgstr "De comillas curvas a rectas: “” -> \"\""
+
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
 msgstr "Cambiar puntos suspensivos a carácter inteligente"
@@ -422,6 +426,10 @@ msgstr "Cambiar puntos suspensivos a carácter inteligente"
 #: proclocalize.lngfsetempty
 msgid "Remove empty entries"
 msgstr "Eliminar entradas vacías"
+
+#: proclocalize.lngfsetfixbrackets
+msgid "Fix brackets: switched, mismatched or empty"
+msgstr "Corregir paréntesis: cambiados, mal emparejados o vacíos"
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
@@ -485,6 +493,10 @@ msgstr "Ajustar salida a cambio de plano"
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
 msgstr "Espaciado de guión de apertura"
+
+#: proclocalize.lngfsetstraighttocurlyquotes
+msgid "Straight quotes to curly: \"\" -> “”"
+msgstr "Comillas rectas a comillas curvas: \"\" -> “”"
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -722,6 +734,10 @@ msgstr "Proyecto de traducción de subtítulos"
 #: proclocalize.lngpromptfordeletelines
 msgid "The selected entries will be deleted."
 msgstr "Las líneas seleccionadas serán eliminadas."
+
+#: proclocalize.lngqcbrackets
+msgid "Brackets: switched, mismatched, empty or unbalanced"
+msgstr "Paréntesis: cambiados, no coincidentes, vacíos o desequilibrados"
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -2289,6 +2305,11 @@ msgstr "Convención"
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
 msgstr "Guión OCR"
+
+#: tfrmfixsubtitles.lblsource.caption
+msgctxt "tfrmfixsubtitles.lblsource.caption"
+msgid "Source"
+msgstr "Fuente"
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
 msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
@@ -5059,6 +5080,7 @@ msgid "Not found"
 msgstr "No se encontró"
 
 #: tfrmspellcheck.lblsource.caption
+msgctxt "tfrmspellcheck.lblsource.caption"
 msgid "Source"
 msgstr "Fuente"
 

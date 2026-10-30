@@ -415,6 +415,10 @@ msgstr "Chaining entries"
 msgid "Cleanup tags"
 msgstr "Cleanup tags"
 
+#: proclocalize.lngfsetcurlytostraightquotes
+msgid "Curly quotes to straight: “” -> \"\""
+msgstr "Curly quotes to straight: “” -> \"\""
+
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
 msgstr "Convert ellipsis dots to Unicode character"
@@ -422,6 +426,10 @@ msgstr "Convert ellipsis dots to Unicode character"
 #: proclocalize.lngfsetempty
 msgid "Remove empty entries"
 msgstr "Remove empty entries"
+
+#: proclocalize.lngfsetfixbrackets
+msgid "Fix brackets: switched, mismatched or empty"
+msgstr "Fix brackets: switched, mismatched or empty"
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
@@ -485,6 +493,10 @@ msgstr "Snap Out Cue to shot change"
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
 msgstr "Spacing of opening hyphen"
+
+#: proclocalize.lngfsetstraighttocurlyquotes
+msgid "Straight quotes to curly: \"\" -> “”"
+msgstr "Straight quotes to curly: \"\" -> “”"
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -722,6 +734,10 @@ msgstr "Subtitle Translation Project"
 #: proclocalize.lngpromptfordeletelines
 msgid "The selected entries will be deleted."
 msgstr "The selected entries will be deleted."
+
+#: proclocalize.lngqcbrackets
+msgid "Brackets: switched, mismatched, empty or unbalanced"
+msgstr "Brackets: switched, mismatched, empty or unbalanced"
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -2289,6 +2305,11 @@ msgstr "Convention"
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
 msgstr "OCR Script"
+
+#: tfrmfixsubtitles.lblsource.caption
+msgctxt "tfrmfixsubtitles.lblsource.caption"
+msgid "Source"
+msgstr "Source"
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
 msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
@@ -5059,6 +5080,7 @@ msgid "Not found"
 msgstr "Not found"
 
 #: tfrmspellcheck.lblsource.caption
+msgctxt "tfrmspellcheck.lblsource.caption"
 msgid "Source"
 msgstr "Source"
 

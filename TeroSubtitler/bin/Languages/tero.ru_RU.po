@@ -419,6 +419,10 @@ msgstr "Объединить субтитры"
 msgid "Cleanup tags"
 msgstr "Очистить метки"
 
+#: proclocalize.lngfsetcurlytostraightquotes
+msgid "Curly quotes to straight: “” -> \"\""
+msgstr ""
+
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
 msgstr "Преобразование многоточия в юникодный символ"
@@ -426,6 +430,10 @@ msgstr "Преобразование многоточия в юникодный 
 #: proclocalize.lngfsetempty
 msgid "Remove empty entries"
 msgstr "Удалить пустые субтитры"
+
+#: proclocalize.lngfsetfixbrackets
+msgid "Fix brackets: switched, mismatched or empty"
+msgstr ""
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
@@ -489,6 +497,10 @@ msgstr "(Привязка реплик перед sc)"
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
 msgstr "Интервал между начальными дефисами"
+
+#: proclocalize.lngfsetstraighttocurlyquotes
+msgid "Straight quotes to curly: \"\" -> “”"
+msgstr ""
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -730,6 +742,10 @@ msgstr "Проект перевода субтитров"
 #| msgid "The selected lines will be deleted."
 msgid "The selected entries will be deleted."
 msgstr "Выбранные строки будут удалены."
+
+#: proclocalize.lngqcbrackets
+msgid "Brackets: switched, mismatched, empty or unbalanced"
+msgstr ""
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -2319,6 +2335,12 @@ msgstr "Правила"
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
 msgstr "Распознавание OCR"
+
+#: tfrmfixsubtitles.lblsource.caption
+#, fuzzy
+msgctxt "tfrmfixsubtitles.lblsource.caption"
+msgid "Source"
+msgstr "Что проверить"
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
 msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
@@ -5118,6 +5140,7 @@ msgid "Not found"
 msgstr "Не найдено"
 
 #: tfrmspellcheck.lblsource.caption
+msgctxt "tfrmspellcheck.lblsource.caption"
 msgid "Source"
 msgstr "Что проверить"
 

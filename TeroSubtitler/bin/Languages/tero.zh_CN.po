@@ -415,6 +415,10 @@ msgstr "连锁条目"
 msgid "Cleanup tags"
 msgstr "清理标签"
 
+#: proclocalize.lngfsetcurlytostraightquotes
+msgid "Curly quotes to straight: “” -> \"\""
+msgstr ""
+
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
 msgstr "将省略号点转换为 Unicode 字符"
@@ -422,6 +426,10 @@ msgstr "将省略号点转换为 Unicode 字符"
 #: proclocalize.lngfsetempty
 msgid "Remove empty entries"
 msgstr "移除空行"
+
+#: proclocalize.lngfsetfixbrackets
+msgid "Fix brackets: switched, mismatched or empty"
+msgstr ""
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
@@ -485,6 +493,10 @@ msgstr "字幕向外对齐到镜头切换时刻"
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
 msgstr "开头连字符间距"
+
+#: proclocalize.lngfsetstraighttocurlyquotes
+msgid "Straight quotes to curly: \"\" -> “”"
+msgstr ""
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -722,6 +734,10 @@ msgstr "字幕翻译项目"
 #: proclocalize.lngpromptfordeletelines
 msgid "The selected entries will be deleted."
 msgstr "选定的行将被删除。"
+
+#: proclocalize.lngqcbrackets
+msgid "Brackets: switched, mismatched, empty or unbalanced"
+msgstr ""
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -2289,6 +2305,12 @@ msgstr "转换"
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
 msgstr "OCR脚本"
+
+#: tfrmfixsubtitles.lblsource.caption
+#, fuzzy
+msgctxt "tfrmfixsubtitles.lblsource.caption"
+msgid "Source"
+msgstr "来源"
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
 msgctxt "tfrmfixsubtitles.lblspacinghyphen.caption"
@@ -5061,6 +5083,7 @@ msgid "Not found"
 msgstr "找不到"
 
 #: tfrmspellcheck.lblsource.caption
+msgctxt "tfrmspellcheck.lblsource.caption"
 msgid "Source"
 msgstr "来源"
 

@@ -407,12 +407,20 @@ msgstr ""
 msgid "Cleanup tags"
 msgstr ""
 
+#: proclocalize.lngfsetcurlytostraightquotes
+msgid "Curly quotes to straight: “” -> \"\""
+msgstr ""
+
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
 msgstr ""
 
 #: proclocalize.lngfsetempty
 msgid "Remove empty entries"
+msgstr ""
+
+#: proclocalize.lngfsetfixbrackets
+msgid "Fix brackets: switched, mismatched or empty"
 msgstr ""
 
 #: proclocalize.lngfsetfixinterrobang
@@ -476,6 +484,10 @@ msgstr ""
 #: proclocalize.lngfsetspaceofopeninghyphen
 msgctxt "proclocalize.lngfsetspaceofopeninghyphen"
 msgid "Spacing of opening hyphen"
+msgstr ""
+
+#: proclocalize.lngfsetstraighttocurlyquotes
+msgid "Straight quotes to curly: \"\" -> “”"
 msgstr ""
 
 #: proclocalize.lngfsettimetoolong
@@ -713,6 +725,10 @@ msgstr ""
 
 #: proclocalize.lngpromptfordeletelines
 msgid "The selected entries will be deleted."
+msgstr ""
+
+#: proclocalize.lngqcbrackets
+msgid "Brackets: switched, mismatched, empty or unbalanced"
 msgstr ""
 
 #: proclocalize.lngqccpl
@@ -2278,6 +2294,11 @@ msgstr ""
 
 #: tfrmfixsubtitles.lblocr.caption
 msgid "OCR Script"
+msgstr ""
+
+#: tfrmfixsubtitles.lblsource.caption
+msgctxt "tfrmfixsubtitles.lblsource.caption"
+msgid "Source"
 msgstr ""
 
 #: tfrmfixsubtitles.lblspacinghyphen.caption
@@ -5049,6 +5070,7 @@ msgid "Not found"
 msgstr ""
 
 #: tfrmspellcheck.lblsource.caption
+msgctxt "tfrmspellcheck.lblsource.caption"
 msgid "Source"
 msgstr ""
 
