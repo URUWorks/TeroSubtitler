@@ -69,10 +69,28 @@ function HasRepeatedChar(const Text, RepeatableChars: String): Boolean;
 function FixRepeatedChar(Text: String; const RepeatableChars: String): String;
 function FixIncompleteOpenedHyphen(const Text: String): String;
 function SpacingOfOpeningHyphen(const Text: String; const AddSpace: Boolean): String;
+type
+  TQuoteStyle = record
+    Name, DOpen, DClose, SOpen, SClose: String;
+  end;
+
+const
+  // AppOptions.QuoteStyle, 0 = straight
+  QuoteStyles: array[0..6] of TQuoteStyle = (
+    (Name: '"..." ''...'''; DOpen: '"'; DClose: '"'; SOpen: ''''; SClose: ''''),
+    (Name: '“...” ‘...’'; DOpen: '“'; DClose: '”'; SOpen: '‘'; SClose: '’'),
+    (Name: '«...» “...”'; DOpen: '«'; DClose: '»'; SOpen: '“'; SClose: '”'),
+    (Name: '« ... » ‹ ... ›'; DOpen: '«'#$C2#$A0; DClose: #$C2#$A0'»'; SOpen: '‹'#$C2#$A0; SClose: #$C2#$A0'›'),
+    (Name: '„...“ ‚...‘'; DOpen: '„'; DClose: '“'; SOpen: '‚'; SClose: '‘'),
+    (Name: '„...” ‚...’'; DOpen: '„'; DClose: '”'; SOpen: '‚'; SClose: '’'),
+    (Name: '”...” ’...’'; DOpen: '”'; DClose: '”'; SOpen: '’'; SClose: '’')
+  );
+
 function FixInterrobang(Text: String): String;
 function RemoveSpacesWithinBrackets(const Text: String): String;
-function StraightToCurlyQuotes(const Text: String): String;
+function StraightToCurlyQuotes(const Text: String; const AStyle: Integer = 1): String;
 function CurlyToStraightQuotes(const Text: String): String;
+function SmartQuoteChar(const ATextBefore: String; const AQuote: Char; const AStyle: Integer): String;
 function FixBrackets(const Text: String): String;
 function HasBracketErrors(const Text: String): Boolean;
 function RemoveLeadingChar(const Text: String; const LeadCharsPrimary: array of String; const LeadCharsSecondary: array of String): String;
@@ -1198,12 +1216,103 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function StraightToCurlyQuotes(const Text: String): String;
+function QuoteOpensAfter(const APrev: String): Boolean;
 const
-  OpenAfter: array[0..10] of String = (' ', #9, #10, #13, '(', '[', '-', '>', '—', '–', '¿');
+  OpenAfter: array[0..15] of String = ('', ' ', #9, #10, #13, '(', '[', '-', '>',
+    '—', '–', '¿', '¡', '“', '‘', '«');
+var
+  k: Integer;
+begin
+  // a quote after these chars opens, otherwise it closes
+  for k := 0 to High(OpenAfter) do
+    if APrev = OpenAfter[k] then Exit(True);
+  Result := (APrev = '„') or (APrev = '‚');
+end;
+
+// -----------------------------------------------------------------------------
+
+function LastUTF8Char(const AText: String; const AEnd: Integer): String;
+var
+  p: Integer;
+begin
+  // the whole utf-8 char ending at AEnd
+  p := AEnd;
+  while (p > 1) and (AText[p] in [#128..#191]) do Dec(p);
+  if (p < 1) or (AEnd < 1) then
+    Result := ''
+  else
+    Result := Copy(AText, p, AEnd-p+1);
+end;
+
+// -----------------------------------------------------------------------------
+
+function SmartQuoteChar(const ATextBefore: String; const AQuote: Char; const AStyle: Integer): String;
+var
+  st: TQuoteStyle;
+  i, x: Integer;
+  prev: String;
+
+  function CountOf(const ASub: String): Integer;
+  var
+    p: Integer;
+  begin
+    Result := 0;
+    p := Pos(ASub, ATextBefore);
+    while p > 0 do
+    begin
+      Inc(Result);
+      p := PosEx(ASub, ATextBefore, p+Length(ASub));
+    end;
+  end;
+
+begin
+  // the quote to type after ATextBefore (smart quotes while typing), straight
+  // inside a tag (<font color="red">)
+  Result := AQuote;
+  if (AStyle <= 0) or (AStyle > High(QuoteStyles)) then Exit;
+  i := 1;
+  while i <= Length(ATextBefore) do
+  begin
+    if IsTagStart(ATextBefore, i, x) then
+      i := x+1
+    else if (ATextBefore[i] = '<') and (i < Length(ATextBefore)) and (ATextBefore[i+1] in ['a'..'z', 'A'..'Z', '/']) and
+      (Pos('>', Copy(ATextBefore, i, MaxInt)) = 0) then
+      Exit // an open tag
+    else if (ATextBefore[i] = '{') and (i < Length(ATextBefore)) and (ATextBefore[i+1] = '') and
+      (Pos('}', Copy(ATextBefore, i, MaxInt)) = 0) then
+      Exit
+    else
+      Inc(i);
+  end;
+
+  st   := QuoteStyles[AStyle];
+  prev := LastUTF8Char(ATextBefore, Length(ATextBefore));
+  if AQuote = '"' then
+  begin
+    if QuoteOpensAfter(prev) then Result := st.DOpen else Result := st.DClose;
+  end
+  else if (prev <> '') and IsWordByte(prev[1]) then
+  begin
+    // ends an open single quote (‚go‘), or don't, dogs'
+    if (st.SOpen <> st.SClose) and (CountOf(st.SOpen) > CountOf(st.SClose)) then
+      Result := st.SClose
+    else
+      Result := '’';
+  end
+  else if QuoteOpensAfter(prev) then
+    Result := st.SOpen
+  else
+    Result := st.SClose;
+end;
+
+// -----------------------------------------------------------------------------
+
+function StraightToCurlyQuotes(const Text: String; const AStyle: Integer = 1): String;
 var
   i, x, l: Integer;
   prev: String;
+  st: TQuoteStyle;
+  OpenSingles: Integer;
 
   function PrevChar(const AIndex: Integer): String;
   var
@@ -1219,16 +1328,11 @@ var
   end;
 
   function IsOpening(const AIndex: Integer): Boolean;
-  var
-    k: Integer;
   begin
     // by position, so it works when the quote starts in an entry and ends in
     // another one
     prev := PrevChar(AIndex);
-    Result := (prev = '') or (prev = '“') or (prev = '‘') or (prev = '¡');
-    if not Result then
-      for k := 0 to High(OpenAfter) do
-        if prev = OpenAfter[k] then Exit(True);
+    Result := QuoteOpensAfter(prev);
   end;
 
   function HasClosingSingle(const AFrom: Integer): Boolean;
@@ -1244,7 +1348,12 @@ var
   end;
 
 begin
+  if (AStyle <= 0) or (AStyle > High(QuoteStyles)) then
+    st := QuoteStyles[1]
+  else
+    st := QuoteStyles[AStyle];
   Result := '';
+  OpenSingles := 0;
   l := Length(Text);
   i := 1;
   while i <= l do
@@ -1260,26 +1369,38 @@ begin
     if Text[i] = '"' then
     begin
       if IsOpening(i) then
-        Result += '“'
+        Result += st.DOpen
       else
-        Result += '”';
+        Result += st.DClose;
     end
     else if Text[i] = '''' then
     begin
       if (i > 1) and IsWordByte(Text[i-1]) then
-        Result += '’' // don't, dogs', ends a quote
+      begin
+        // ends a quote (‚go‘) or don't, dogs'
+        if (OpenSingles > 0) and ((i = l) or not IsWordByte(Text[i+1])) then
+        begin
+          Result += st.SClose;
+          Dec(OpenSingles);
+        end
+        else
+          Result += '’';
+      end
       else if (i < l) and IsWordByte(Text[i+1]) and IsOpening(i) then
       begin
         // starts a quote or an elision ('em, '90s)
         if HasClosingSingle(i+2) then
-          Result += '‘'
+        begin
+          Result += st.SOpen;
+          Inc(OpenSingles);
+        end
         else
           Result += '’';
       end
       else if IsOpening(i) then
         Result += ''''
       else
-        Result += '’'; // after punctuation
+        Result += st.SClose; // after punctuation
     end
     else
       Result += Text[i];
@@ -1291,8 +1412,8 @@ end;
 
 function CurlyToStraightQuotes(const Text: String): String;
 begin
-  Result := StringsReplace(Text, ['“', '”', '„', '‟', '‘', '’', '‚', '‛'],
-    ['"', '"', '"', '"', '''', '''', '''', ''''], [rfReplaceAll]);
+  Result := StringsReplace(Text, ['«'#$C2#$A0, #$C2#$A0'»', '‹'#$C2#$A0, #$C2#$A0'›', '«', '»', '“', '”', '„', '‟', '‹', '›', '‘', '’', '‚', '‛'],
+    ['"', '"', '''', '''', '"', '"', '"', '"', '"', '"', '''', '''', '''', '''', '''', ''''], [rfReplaceAll]);
 end;
 
 // -----------------------------------------------------------------------------

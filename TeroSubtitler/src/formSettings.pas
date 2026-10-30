@@ -59,6 +59,9 @@ type
     chkPromptForInputEncoding: TUWCheckBox;
     chkPromptForSaveWithErrors: TUWCheckBox;
     chkHIRoundBrackets: TUWCheckBox;
+    lblQuoteStyle: TLabel;
+    cboQuoteStyle: TComboBox;
+    chkSmartQuotesTyping: TUWCheckBox;
     chkPromptForSaveWithErrors1: TUWCheckBox;
     chkWriteBOM: TUWCheckBox;
     chkSubtitleHandleByMPV: TUWCheckBox;
@@ -241,7 +244,7 @@ implementation
 uses
   procTypes, procWorkspace, procConfig, procDialogs, UWSystem.SysUtils,
   procColorTheme, formMain, UWSystem.Globalization, formConventions,
-  procShortCut, procMPV, UWSystem.TimeUtils
+  procShortCut, procMPV, UWSystem.TimeUtils, UWSubtitles.Utils
   {$IFDEF WINDOWS}
   , FileUtil, procFileTypes
   {$ENDIF};
@@ -353,6 +356,14 @@ begin
     chkPromptForInputEncoding.Checked   := AskForInputEncoding;
     chkPromptForSaveWithErrors.Checked  := CheckErrorsBeforeSave;
     chkHIRoundBrackets.Checked          := HIRoundBrackets;
+    cboQuoteStyle.Items.Clear;
+    for i := 0 to High(QuoteStyles) do
+      cboQuoteStyle.Items.Add(QuoteStyles[i].Name);
+    if (QuoteStyle >= 0) and (QuoteStyle < cboQuoteStyle.Items.Count) then
+      cboQuoteStyle.ItemIndex := QuoteStyle
+    else
+      cboQuoteStyle.ItemIndex := 1;
+    chkSmartQuotesTyping.Checked := SmartQuotesTyping;
 
     cboTheme.ItemIndex := Integer(ColorThemeInstance.ColorMode);
   end;
@@ -483,6 +494,8 @@ begin
     AskForInputEncoding := chkPromptForInputEncoding.Checked;
     CheckErrorsBeforeSave := chkPromptForSaveWithErrors.Checked;
     HIRoundBrackets := chkHIRoundBrackets.Checked;
+    QuoteStyle := cboQuoteStyle.ItemIndex;
+    SmartQuotesTyping := chkSmartQuotesTyping.Checked;
   end; //with
 
   frmMain.VST.Font.Size            := spnListFontSize.Value;

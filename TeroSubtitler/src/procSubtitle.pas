@@ -80,6 +80,7 @@ procedure InsertMemoText(const AText: String; const AVSTLoop: Boolean = True);
 
 procedure SetTextTag(const Tag: String);
 procedure SetTextCustomTag(const Tag: String);
+procedure SetTextQuotes;
 procedure SetTextTagColor(const HexColor: String);
 
 procedure SetAlignTo(const AAlign: TSubtitleHAlign);
@@ -1181,6 +1182,34 @@ end;
 procedure SetTextCustomTag(const Tag: String);
 begin
   SetTag(Tag, '%s%s%s', Tag.Length);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SetTextQuotes;
+var
+  Memo : TUWMemo;
+  st   : TQuoteStyle;
+  i, l : Integer;
+begin
+  // quotation marks with the quote style of the settings
+  Memo := GetMemoFocused;
+  if Memo = NIL then Exit;
+
+  if (AppOptions.QuoteStyle < 0) or (AppOptions.QuoteStyle > High(QuoteStyles)) then
+    st := QuoteStyles[0]
+  else
+    st := QuoteStyles[AppOptions.QuoteStyle];
+
+  i := Memo.SelStart;
+  l := Memo.SelLength;
+  if Memo.SelText <> '' then
+    Memo.SelText := st.DOpen + Memo.SelText + st.DClose
+  else
+    Memo.Text := st.DOpen + Memo.Text + st.DClose;
+
+  Memo.SelStart  := i + UTF8Length(st.DOpen);
+  Memo.SelLength := l;
 end;
 
 // -----------------------------------------------------------------------------

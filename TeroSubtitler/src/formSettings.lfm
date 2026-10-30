@@ -392,6 +392,33 @@ object frmSettings: TfrmSettings
       Caption = 'Round brackets ( ) mark hearing impaired text'
       TabOrder = 20
     end
+    object lblQuoteStyle: TLabel
+      Left = 435
+      Height = 20
+      Top = 370
+      Width = 435
+      AutoSize = False
+      Caption = 'Quotation marks'
+      ParentColor = False
+    end
+    object cboQuoteStyle: TComboBox
+      Left = 435
+      Height = 28
+      Top = 394
+      Width = 435
+      ItemHeight = 20
+      Style = csDropDownList
+      TabOrder = 21
+    end
+    object chkSmartQuotesTyping: TUWCheckBox
+      Left = 435
+      Height = 24
+      Top = 430
+      Width = 22
+      AutoSize = False
+      Caption = 'Replace " and '' while typing'
+      TabOrder = 22
+    end
   end
   object lyoConventions: TUWLayout
     Left = -635

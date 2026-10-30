@@ -469,7 +469,7 @@ begin
       // of each one is the same as when it's the only one enabled
       if (etStraightToCurlyQuotes in FErrors) and not Straightened then
       begin
-        tmp := StraightToCurlyQuotes(FixedItem.Text);
+        tmp := StraightToCurlyQuotes(FixedItem.Text, AppOptions.QuoteStyle);
         if FixedItem.Text <> tmp then
         begin
           FixedItem.Text := tmp;

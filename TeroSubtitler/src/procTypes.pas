@@ -431,6 +431,8 @@ type
     AskForInputEncoding    : Boolean;
     CheckErrorsBeforeSave  : Boolean;
     HIRoundBrackets        : Boolean; // (...) marks hearing impaired text
+    QuoteStyle             : Integer; // QuoteStyles index, 0 = straight
+    SmartQuotesTyping      : Boolean; // " and ' typed as QuoteStyle
     TextToFind             : String;
     LastUnicodeChar        : TUTF8Char;
     WebSearchURL           : String;

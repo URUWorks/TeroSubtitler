@@ -934,6 +934,7 @@ type
     procedure tedTimeChange(Sender: TObject; const NewTime: Cardinal);
     procedure UndoChanged(const ChangeType: TUndoChangeType);
     procedure mmoTextChange(Sender: TObject);
+    procedure mmoTextUTF8KeyPress(Sender: TObject; var UTF8Key: TUTF8Char);
     procedure mmoSourceViewChange(Sender: TObject);
     procedure cboInputFPSSelect(Sender: TObject);
     procedure cboFPSKeyPress(Sender: TObject; var Key: char);
@@ -1363,7 +1364,7 @@ uses
   FormVideo, UWSpellcheck.Hunspell, RegExpr, procShortCut, procTranscription,
   procConfig, procDialogs, procWorkspace, procVST, procVST_Loops,
   procUnDockVideoControls, procColorTheme, procFiles, procMPV, procSubtitle,
-  procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, procMRU, UWSystem.SysUtils,
+  procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, LazUTF8, procMRU, UWSystem.SysUtils,
   UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procThumbnails,
   formCustomQuestionDlg, formCustomSelectDlg, formTranslationMemory, formTBX,
   libMPV.Client, procMacMediaKeys, procConventions;
@@ -1410,6 +1411,9 @@ var
 begin
   Randomize; // used for tips
   DoubleBuffered := True;
+  // smart quotes while typing
+  mmoText.OnUTF8KeyPress        := @mmoTextUTF8KeyPress;
+  mmoTranslation.OnUTF8KeyPress := @mmoTextUTF8KeyPress;
   {$IFDEF LCLCocoa}
   FVSTOldWindowProc := VST.WindowProc;
   VST.WindowProc := @VSTWindowProc;
@@ -1743,6 +1747,27 @@ begin
   end
   else if ChangeType = uctItems then
     UpdateValues(True);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.mmoTextUTF8KeyPress(Sender: TObject; var UTF8Key: TUTF8Char);
+var
+  Memo: TUWMemo;
+  q: String;
+begin
+  // " and ' as the quotes of the settings, by the char before the caret
+  if not AppOptions.SmartQuotesTyping or (AppOptions.QuoteStyle <= 0) or
+    ((UTF8Key <> '"') and (UTF8Key <> '''')) or not (Sender is TUWMemo) then Exit;
+
+  Memo := TUWMemo(Sender);
+  q := SmartQuoteChar(UTF8Copy(Memo.Text, 1, Memo.SelStart), UTF8Key[1], AppOptions.QuoteStyle);
+  if q = UTF8Key then Exit;
+
+  // inserted by us, a changed UTF8Key is not taken by every widgetset (cocoa
+  // ignores it), a cleared one is (the key is not processed)
+  UTF8Key := '';
+  Memo.SelText := q;
 end;
 
 // -----------------------------------------------------------------------------

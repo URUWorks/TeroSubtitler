@@ -231,10 +231,28 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function ApplyQuotes(const Text: String): String;
+var
+  st: TQuoteStyle;
+begin
+  // with the quote style of the settings
+  if (AppOptions.QuoteStyle < 0) or (AppOptions.QuoteStyle > High(QuoteStyles)) then
+    st := QuoteStyles[0]
+  else
+    st := QuoteStyles[AppOptions.QuoteStyle];
+
+  if Text <> '' then
+    Result := st.DOpen + Text + st.DClose
+  else
+    Result := '';
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure ApplyAddQuotationMarks(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with Item^ do
-    ApplyText(Item, Index, ApplyCustomTag(Text, '"'), ApplyCustomTag(Translation, '"'), False);
+    ApplyText(Item, Index, ApplyQuotes(Text), ApplyQuotes(Translation), False);
 end;
 
 // -----------------------------------------------------------------------------

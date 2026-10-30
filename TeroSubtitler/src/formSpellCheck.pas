@@ -240,7 +240,8 @@ begin
     lstSuggestions.Clear;
     for i := 0 to FWordMap.Count-1 do
     begin
-      if not HunspellInstance.Spell(UTF8LowerCase(FWordMap.Data[i])) and
+      // as written (I'm, London) or in lowercase (a sentence start)
+      if not HunspellInstance.Spell(FWordMap.Data[i]) and not HunspellInstance.Spell(UTF8LowerCase(FWordMap.Data[i])) and
         (FSkipList.IndexOf(FWordMap.Data[i]) < 0) and (FTempList.IndexOf(FWordMap.Data[i]) < 0) then
       begin
         x := FChangeList.IndexOf(FWordMap.Data[i]);

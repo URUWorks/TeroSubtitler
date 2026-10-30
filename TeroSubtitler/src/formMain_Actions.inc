@@ -445,7 +445,7 @@ begin
     if GetMemoFocused = NIL then
       VSTDoLoop(VST, @ApplyAddQuotationMarks, dlSelected, True, True)
     else
-      SetTextCustomTag('"');
+      SetTextQuotes;
   end;
 end;
 
