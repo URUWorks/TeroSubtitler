@@ -119,6 +119,7 @@
 - improved: Media loaded from a url shows its title instead of the url
 - added: Sub-optimal presentation of auto-transcribed subtitles #256
 - added: Synchronize texts with the audio (Audio to text/Synchronize the current texts) #41
+- added: Fix subtitles: caps lock to normal casing #18
 - added: “Update” button for yt-dlp in Settings/Tools
 - added: Elapsed time in the status bar while a media url is loading
 - added: Language (xml:lang) option for iTT, Timed Text and Netflix Timed Text formats, read from the file when loading
