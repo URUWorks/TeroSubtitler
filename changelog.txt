@@ -126,6 +126,7 @@
 - added: Elapsed time in the status bar while a media url is loading
 - added: Language (xml:lang) option for iTT, Timed Text and Netflix Timed Text formats, read from the file when loading
 - added: [macOS] Support for multimedia keys on macOS (10.12.2+) #236
+- added: Add support for smart quotes #214
 - added: Tools/Translation memory/Add translated lines to memory
 - added: Translation memory/Save a copy... and Open translation memories folder
 
