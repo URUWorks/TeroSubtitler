@@ -4677,6 +4677,10 @@ msgstr "显示 每秒字符数 栏"
 msgid "Show splash window"
 msgstr "显示欢迎窗口"
 
+#: tfrmsettings.chksmartquotestyping.caption
+msgid "Replace \" and ' while typing"
+msgstr ""
+
 #: tfrmsettings.chksubtitlehandlebympv.caption
 msgid "mpv handles subtitles for preview"
 msgstr "mpv 处理预览字幕"
@@ -4797,6 +4801,10 @@ msgstr "配置文件"
 msgctxt "tfrmsettings.lblprohibitedchars.caption"
 msgid "Prohibited characters"
 msgstr "禁止使用的字符"
+
+#: tfrmsettings.lblquotestyle.caption
+msgid "Quotation marks"
+msgstr ""
 
 #: tfrmsettings.lblrepeatablechars.caption
 msgctxt "tfrmsettings.lblrepeatablechars.caption"

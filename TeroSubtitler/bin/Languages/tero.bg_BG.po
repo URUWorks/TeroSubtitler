@@ -4731,6 +4731,10 @@ msgstr "Показване на лента за знаци в секунда"
 msgid "Show splash window"
 msgstr "Показване на натрапчив прозорец"
 
+#: tfrmsettings.chksmartquotestyping.caption
+msgid "Replace \" and ' while typing"
+msgstr ""
+
 #: tfrmsettings.chksubtitlehandlebympv.caption
 msgid "mpv handles subtitles for preview"
 msgstr "Използване на MPV за преглед на надписи"
@@ -4851,6 +4855,10 @@ msgstr "Очерк"
 msgctxt "tfrmsettings.lblprohibitedchars.caption"
 msgid "Prohibited characters"
 msgstr "Забранени знаци"
+
+#: tfrmsettings.lblquotestyle.caption
+msgid "Quotation marks"
+msgstr ""
 
 #: tfrmsettings.lblrepeatablechars.caption
 msgctxt "tfrmsettings.lblrepeatablechars.caption"

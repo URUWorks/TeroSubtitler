@@ -4687,6 +4687,10 @@ msgstr "Visualizza barra CPS"
 msgid "Show splash window"
 msgstr "Visualizza schermata di avvio"
 
+#: tfrmsettings.chksmartquotestyping.caption
+msgid "Replace \" and ' while typing"
+msgstr ""
+
 #: tfrmsettings.chksubtitlehandlebympv.caption
 msgid "mpv handles subtitles for preview"
 msgstr "Gestisci sottotitoli nell'anteprima con mpv"
@@ -4807,6 +4811,10 @@ msgstr "Profilo"
 msgctxt "tfrmsettings.lblprohibitedchars.caption"
 msgid "Prohibited characters"
 msgstr "Caratteri non consentiti"
+
+#: tfrmsettings.lblquotestyle.caption
+msgid "Quotation marks"
+msgstr ""
 
 #: tfrmsettings.lblrepeatablechars.caption
 msgctxt "tfrmsettings.lblrepeatablechars.caption"

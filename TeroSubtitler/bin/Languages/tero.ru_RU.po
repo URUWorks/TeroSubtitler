@@ -4732,6 +4732,10 @@ msgstr "Показать прогресс символов в секунду"
 msgid "Show splash window"
 msgstr "Показать заставку"
 
+#: tfrmsettings.chksmartquotestyping.caption
+msgid "Replace \" and ' while typing"
+msgstr ""
+
 #: tfrmsettings.chksubtitlehandlebympv.caption
 msgid "mpv handles subtitles for preview"
 msgstr "mpv обрабатывает субтитры для предпросмотра"
@@ -4852,6 +4856,10 @@ msgstr "Профиль"
 msgctxt "tfrmsettings.lblprohibitedchars.caption"
 msgid "Prohibited characters"
 msgstr "Запрещённые символы"
+
+#: tfrmsettings.lblquotestyle.caption
+msgid "Quotation marks"
+msgstr ""
 
 #: tfrmsettings.lblrepeatablechars.caption
 msgctxt "tfrmsettings.lblrepeatablechars.caption"

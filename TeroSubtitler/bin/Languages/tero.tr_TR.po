@@ -4709,6 +4709,10 @@ msgstr "CPS çubuğunu göster"
 msgid "Show splash window"
 msgstr "Açılış ekranını göster"
 
+#: tfrmsettings.chksmartquotestyping.caption
+msgid "Replace \" and ' while typing"
+msgstr ""
+
 #: tfrmsettings.chksubtitlehandlebympv.caption
 msgid "mpv handles subtitles for preview"
 msgstr "Önizleme altyazılarını mpv yönetsin"
@@ -4829,6 +4833,10 @@ msgstr "Profil"
 msgctxt "tfrmsettings.lblprohibitedchars.caption"
 msgid "Prohibited characters"
 msgstr "Yasaklanmış karakterler"
+
+#: tfrmsettings.lblquotestyle.caption
+msgid "Quotation marks"
+msgstr ""
 
 #: tfrmsettings.lblrepeatablechars.caption
 msgctxt "tfrmsettings.lblrepeatablechars.caption"

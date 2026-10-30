@@ -4757,6 +4757,10 @@ msgstr "Visa TPS-fält"
 msgid "Show splash window"
 msgstr "Visa startfönster"
 
+#: tfrmsettings.chksmartquotestyping.caption
+msgid "Replace \" and ' while typing"
+msgstr ""
+
 #: tfrmsettings.chksubtitlehandlebympv.caption
 msgid "mpv handles subtitles for preview"
 msgstr "mpv visar undertexter i förhandsvisning"
@@ -4877,6 +4881,10 @@ msgstr "Profil"
 msgctxt "tfrmsettings.lblprohibitedchars.caption"
 msgid "Prohibited characters"
 msgstr "Otillåtna tecken"
+
+#: tfrmsettings.lblquotestyle.caption
+msgid "Quotation marks"
+msgstr ""
 
 #: tfrmsettings.lblrepeatablechars.caption
 msgctxt "tfrmsettings.lblrepeatablechars.caption"

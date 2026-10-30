@@ -5003,6 +5003,10 @@ msgstr "Intenzivnost (cps)"
 msgid "Show splash window"
 msgstr "Pokaži začetni zaslon"
 
+#: tfrmsettings.chksmartquotestyping.caption
+msgid "Replace \" and ' while typing"
+msgstr ""
+
 #: tfrmsettings.chksubtitlehandlebympv.caption
 #, fuzzy
 msgid "mpv handles subtitles for preview"
@@ -5145,6 +5149,10 @@ msgstr "Profil"
 msgctxt "tfrmsettings.lblprohibitedchars.caption"
 msgid "Prohibited characters"
 msgstr "znakih"
+
+#: tfrmsettings.lblquotestyle.caption
+msgid "Quotation marks"
+msgstr ""
 
 #: tfrmsettings.lblrepeatablechars.caption
 #, fuzzy
