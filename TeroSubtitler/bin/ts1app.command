@@ -1,6 +1,7 @@
 #!/bin/bash
 # Arma "Tero Subtitler.app" en el Escritorio a partir de los archivos de esta carpeta:
 #   Languages/     idiomas, van a Contents/Resources/Languages
+#   Dictionaries/ OCR/ CustomFormat/   copias de bin, van a Contents/Resources/
 #   tero.app       plantilla del bundle (Info.plist, icono, recursos)
 #   tero-intel     binario x86_64
 #   tero-silicon   binario arm64 (se unen con lipo en un binario universal)
@@ -17,6 +18,9 @@ die() { echo "ERROR: $*" >&2; echo; read -n 1 -s -r -p "Presioná una tecla para
 [ -d "$SRC_APP" ] || die "No encuentro tero.app en $HERE"
 [ -d "$HERE/$FRAMEWORKS_DIR" ] || die "No encuentro la carpeta $FRAMEWORKS_DIR en $HERE"
 [ -d "$HERE/Languages" ] || die "No encuentro la carpeta Languages en $HERE"
+for d in Dictionaries OCR CustomFormat; do
+  [ -d "$HERE/$d" ] || die "No encuentro la carpeta $d en $HERE"
+done
 [ -f "$HERE/tero-intel" ]   || die "No encuentro el binario tero-intel en $HERE"
 [ -f "$HERE/tero-silicon" ] || die "No encuentro el binario tero-silicon en $HERE"
 lipo "$HERE/tero-intel"   -verify_arch x86_64 2>/dev/null || die "tero-intel no es un binario x86_64"
@@ -48,6 +52,15 @@ mkdir -p "$DEST_APP/Contents/Resources"
 rm -rf "$DEST_APP/Contents/Resources/Languages"
 ditto "$HERE/Languages" "$DEST_APP/Contents/Resources/Languages"
 find "$DEST_APP/Contents/Resources/Languages" -name '.DS_Store' -delete
+
+# Diccionarios, OCR y formatos personalizados también desde bin: las copias de la
+# plantilla tero.app no están al día (faltaba en_GB)
+for d in Dictionaries OCR CustomFormat; do
+  echo "==> Copiando $d a Contents/Resources/$d"
+  rm -rf "$DEST_APP/Contents/Resources/$d"
+  ditto "$HERE/$d" "$DEST_APP/Contents/Resources/$d"
+  find "$DEST_APP/Contents/Resources/$d" -name '.DS_Store' -delete
+done
 
 echo "==> Quitando cuarentena y firmando ad-hoc"
 xattr -cr "$DEST_APP"
