@@ -56,7 +56,7 @@ implementation
 
 {$IFDEF DARWIN}
 uses
-  Classes, Controls, LCLType, Menus, CocoaAll;
+  Classes, Controls, LCLType, Menus, CocoaAll, procShortCut;
 
 type
 
@@ -111,6 +111,8 @@ begin
   if (Key = VK_UNKNOWN) or ([ssMeta, ssCtrl, ssAlt] * Shift = []) then Exit;
   // only keys of the main form controls, not of other forms (dialogs)
   if not (Sender is TControl) or (GetParentForm(TControl(Sender)) <> Form) then Exit;
+  // Option/Cmd+arrows... move the caret in a text field (see TfrmMain.IsShortcut)
+  if IsTextControl(TControl(Sender)) and IsTextEditingKey(Key, Shift) then Exit;
 
   if MacMenuPerformKeyEquivalent then
     Key := VK_UNKNOWN;

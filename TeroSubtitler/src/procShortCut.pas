@@ -22,17 +22,20 @@ unit procShortCut;
 interface
 
 uses
-  Classes, SysUtils, ActnList;
+  Classes, SysUtils, ActnList, Controls;
 
 procedure LoadShortCutsFromFile(const AFileName: String; const AActionList: TActionList);
 procedure SaveShortCutsToFile(const FileName: String; const AActionList: TActionList);
+
+function IsTextControl(const AControl: TControl): Boolean;
+function IsTextEditingKey(const AKey: Word; const AShift: TShiftState): Boolean;
 
 // -----------------------------------------------------------------------------
 
 implementation
 
 uses
-  fpjson, jsonparser, LCLProc, procDialogs, procLocalize;
+  fpjson, jsonparser, LCLProc, procDialogs, procLocalize, StdCtrls, LCLType;
 
 // -----------------------------------------------------------------------------
 
@@ -143,5 +146,62 @@ end;
 
 // -----------------------------------------------------------------------------
 
-end.
+// -----------------------------------------------------------------------------
 
+{ Keys of the text fields }
+
+// -----------------------------------------------------------------------------
+
+function IsTextControl(const AControl: TControl): Boolean;
+var
+  c: TClass;
+begin
+  Result := False;
+  if AControl = NIL then Exit;
+
+  if (AControl is TCustomEdit) or ((AControl is TCustomComboBox) and
+    (TCustomComboBox(AControl).Style in [csDropDown, csSimple, csOwnerDrawEditableFixed, csOwnerDrawEditableVariable])) then
+    Exit(True);
+
+  // the transcription editor (TATSynEdit), by name to not depend on it
+  c := AControl.ClassType;
+  while c <> NIL do
+  begin
+    if c.ClassNameIs('TATSynEdit') then Exit(True);
+    c := c.ClassParent;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// keys used to type or to move the caret in a text field: with the focus in a
+// text field they are for the field and not shortcuts (e.g. Space assigned to
+// play/pause or Option+Left/Right to rewind/forward on macOS)
+function IsTextEditingKey(const AKey: Word; const AShift: TShiftState): Boolean;
+var
+  Mods: TShiftState;
+begin
+  Mods := AShift * [ssCtrl, ssAlt, ssMeta];
+
+  if Mods = [] then
+    Exit(AKey in [VK_SPACE, VK_0..VK_9, VK_A..VK_Z, VK_OEM_1..VK_OEM_3, VK_OEM_4..VK_OEM_8, VK_OEM_102,
+      VK_LEFT, VK_RIGHT, VK_UP, VK_DOWN, VK_HOME, VK_END, VK_PRIOR, VK_NEXT, VK_BACK, VK_DELETE]);
+
+  {$IFDEF DARWIN}
+  // Option: word/paragraph, Cmd: line/document
+  if Mods = [ssAlt] then
+    Exit(AKey in [VK_LEFT, VK_RIGHT, VK_UP, VK_DOWN, VK_BACK, VK_DELETE]);
+  if Mods = [ssMeta] then
+    Exit(AKey in [VK_LEFT, VK_RIGHT, VK_UP, VK_DOWN, VK_BACK]);
+  {$ELSE}
+  // Ctrl: word/paragraph and start/end of the text
+  if Mods = [ssCtrl] then
+    Exit(AKey in [VK_LEFT, VK_RIGHT, VK_UP, VK_DOWN, VK_HOME, VK_END, VK_BACK, VK_DELETE]);
+  {$ENDIF}
+
+  Result := False;
+end;
+
+// -----------------------------------------------------------------------------
+
+end.
