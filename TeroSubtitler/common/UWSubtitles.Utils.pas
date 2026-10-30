@@ -74,6 +74,7 @@ function RemoveSpacesWithinBrackets(const Text: String): String;
 function StraightToCurlyQuotes(const Text: String): String;
 function CurlyToStraightQuotes(const Text: String): String;
 function FixBrackets(const Text: String): String;
+function HasBracketErrors(const Text: String): Boolean;
 function RemoveLeadingChar(const Text: String; const LeadCharsPrimary: array of String; const LeadCharsSecondary: array of String): String;
 
 { Draw }
@@ -1160,176 +1161,267 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function StraightToCurlyQuotes(const Text: String): String;
+function IsTagStart(const Text: String; const Index: Integer; out AEnd: Integer): Boolean;
 var
   i: Integer;
-  Ch: String;
-  Output: String;
-  InDoubleQuote, InSingleQuote: Boolean;
 begin
-  Output := '';
-  InDoubleQuote := False;
-  InSingleQuote := False;
+  // <i>, </font>, <font color="..">, {\an8}, {\pos(10,20)}: not brackets
+  Result := False;
+  AEnd   := 0;
+  if Index >= Length(Text) then Exit;
 
-  for i := 1 to UTF8Length(Text) do
+  if Text[Index] = '<' then
   begin
-    Ch := UTF8Copy(Text, i, 1);
-
-    if Ch = '"' then
-    begin
-      if not InDoubleQuote then
-        Output += #$201C  // “
-      else
-        Output += #$201D; // ”
-      InDoubleQuote := not InDoubleQuote;
-    end
-    else if Ch = '''' then
-    begin
-      if not InSingleQuote then
-        Output += #$2018  // ‘
-      else
-        Output += #$2019; // ’
-      InSingleQuote := not InSingleQuote;
-    end
-    else
-      Output += Ch;
+    i := Index+1;
+    if Text[i] = '/' then Inc(i);
+    if (i > Length(Text)) or not (Text[i] in ['a'..'z', 'A'..'Z']) then Exit;
+    while (i <= Length(Text)) and not (Text[i] in ['<', '>', #10, #13]) do Inc(i);
+    Result := (i <= Length(Text)) and (Text[i] = '>');
+  end
+  else if (Text[Index] = '{') and (Text[Index+1] = '\') then
+  begin
+    i := Index+2;
+    while (i <= Length(Text)) and not (Text[i] in ['{', '}', #10, #13]) do Inc(i);
+    Result := (i <= Length(Text)) and (Text[i] = '}');
   end;
 
-  Result := Output;
+  if Result then AEnd := i;
+end;
+
+// -----------------------------------------------------------------------------
+
+function IsWordByte(const C: Char): Boolean;
+begin
+  // UTF-8 bytes of non ascii chars are taken as letters (á, ñ, ü...)
+  Result := C in ['a'..'z', 'A'..'Z', '0'..'9', #128..#255];
+end;
+
+// -----------------------------------------------------------------------------
+
+function StraightToCurlyQuotes(const Text: String): String;
+const
+  OpenAfter: array[0..10] of String = (' ', #9, #10, #13, '(', '[', '-', '>', '—', '–', '¿');
+var
+  i, x, l: Integer;
+  prev: String;
+
+  function PrevChar(const AIndex: Integer): String;
+  var
+    p: Integer;
+  begin
+    // the whole utf-8 char before AIndex
+    p := AIndex-1;
+    while (p > 1) and (Text[p] in [#128..#191]) do Dec(p);
+    if p < 1 then
+      Result := ''
+    else
+      Result := Copy(Text, p, AIndex-p);
+  end;
+
+  function IsOpening(const AIndex: Integer): Boolean;
+  var
+    k: Integer;
+  begin
+    // by position, so it works when the quote starts in an entry and ends in
+    // another one
+    prev := PrevChar(AIndex);
+    Result := (prev = '') or (prev = '“') or (prev = '‘') or (prev = '¡');
+    if not Result then
+      for k := 0 to High(OpenAfter) do
+        if prev = OpenAfter[k] then Exit(True);
+  end;
+
+  function HasClosingSingle(const AFrom: Integer): Boolean;
+  var
+    k: Integer;
+  begin
+    // a ' ending a word or after punctuation, not an apostrophe (don't)
+    Result := False;
+    for k := AFrom to l do
+      if (Text[k] = '''') and (k > 1) and (IsWordByte(Text[k-1]) or (Text[k-1] in ['.', ',', '!', '?', ';', ':'])) and
+        ((k = l) or not IsWordByte(Text[k+1])) then
+        Exit(True);
+  end;
+
+begin
+  Result := '';
+  l := Length(Text);
+  i := 1;
+  while i <= l do
+  begin
+    // tags as they are, <font color="red">
+    if IsTagStart(Text, i, x) then
+    begin
+      Result += Copy(Text, i, x-i+1);
+      i := x+1;
+      Continue;
+    end;
+
+    if Text[i] = '"' then
+    begin
+      if IsOpening(i) then
+        Result += '“'
+      else
+        Result += '”';
+    end
+    else if Text[i] = '''' then
+    begin
+      if (i > 1) and IsWordByte(Text[i-1]) then
+        Result += '’' // don't, dogs', ends a quote
+      else if (i < l) and IsWordByte(Text[i+1]) and IsOpening(i) then
+      begin
+        // starts a quote or an elision ('em, '90s)
+        if HasClosingSingle(i+2) then
+          Result += '‘'
+        else
+          Result += '’';
+      end
+      else if IsOpening(i) then
+        Result += ''''
+      else
+        Result += '’'; // after punctuation
+    end
+    else
+      Result += Text[i];
+    Inc(i);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
 
 function CurlyToStraightQuotes(const Text: String): String;
-var
-  i: Integer;
-  Ch: String;
-  Output: String;
 begin
-  Output := '';
-  for i := 1 to UTF8Length(Text) do
-  begin
-    Ch := UTF8Copy(Text, i, 1);
-
-    if (Ch = #$2018) or (Ch = #$2019) then
-      Output += ''''
-    else if (Ch = #$201C) or (Ch = #$201D) then
-      Output += '"'
-    else
-      Output += Ch;
-  end;
-
-  Result := Output;
+  Result := StringsReplace(Text, ['“', '”', '„', '‟', '‘', '’', '‚', '‛'],
+    ['"', '"', '"', '"', '''', '''', '''', ''''], [rfReplaceAll]);
 end;
 
 // -----------------------------------------------------------------------------
 
 function FixBrackets(const Text: String): String;
-const
-  Opens: array[1..4] of Char = ('(', '[', '{', '<');
-  Closes: array[1..4] of Char = (')', ']', '}', '>');
-
 var
-  Stack: array of Integer;  // Guarda el índice del bracket de apertura
-  StackPos: Integer;
-  i, j, idx: Integer;
-  Ch, NextCh: String;
-  Output: String;
-  Skip: array of Boolean;
-begin
-  SetLength(Stack, 0);
-  SetLength(Skip, UTF8Length(Text) + 1); // Para eliminar brackets vacíos
-  for i := 1 to Length(Skip) do Skip[i] := False;
+  BPos: array of Integer; // ( ) [ ] out of tags
+  Stack: array of Integer;
+  i, x, k, sp: Integer;
+  sl: TStringList;
+  s: String;
+  Changed: Boolean;
 
-  Output := '';
-  StackPos := 0;
-  i := 1;
-  while i <= UTF8Length(Text) do
+  function IsOpen(const C: Char): Boolean;
   begin
-    Ch := UTF8Copy(Text, i, 1);
+    Result := C in ['(', '['];
+  end;
 
-    // 1. Brackets invertidos ]texto[ -> [texto]
-    // Busca patrón ]...[
-    if (Ch = ']') or (Ch = ')') or (Ch = '}') or (Ch = '>') then
-    begin
-      // Busca si más adelante hay el bracket abierto correspondiente antes de uno de cierre
-      for j := i + 1 to UTF8Length(Text) do
-      begin
-        NextCh := UTF8Copy(Text, j, 1);
-        idx := -1;
-        if (Ch = ']') and (NextCh = '[') then idx := 2;
-        if (Ch = ')') and (NextCh = '(') then idx := 1;
-        if (Ch = '}') and (NextCh = '{') then idx := 3;
-        if (Ch = '>') and (NextCh = '<') then idx := 4;
-        if idx <> -1 then
-        begin
-          // Intercambia
-          Skip[i] := True; // Elimina el bracket de cierre invertido
-          Skip[j] := True; // Elimina el bracket de apertura invertido
-          Output += Opens[idx] + UTF8Copy(Text, i + 1, j - i - 1) + Closes[idx];
-          i := j; // Salta hasta después del bracket de apertura invertido
-          Break;
-        end
-        else if (NextCh = ']') or (NextCh = ')') or (NextCh = '}') or (NextCh = '>') then
-          Break; // Otro bracket de cierre, no corregimos
-      end;
-    end
+  function CloseOf(const C: Char): Char;
+  begin
+    if C in ['(', ')'] then Result := ')' else Result := ']';
+  end;
 
-    // 2. Mismatched: <ejemplo} -> <ejemplo>
-    else if (Ch = '(') or (Ch = '[') or (Ch = '{') or (Ch = '<') then
-    begin
-      // Busca el cierre
-      idx := -1;
-      for j := 1 to 4 do
-        if Ch = Opens[j] then
-        begin
-          idx := j;
-          Break;
-        end;
-      if idx <> -1 then
-      begin
-        StackPos := StackPos + 1;
-        SetLength(Stack, StackPos);
-        Stack[StackPos - 1] := idx; // Guarda el tipo de bracket abierto
-        Output += Ch;
-      end;
-    end
-    else if (Ch = ')') or (Ch = ']') or (Ch = '}') or (Ch = '>') then
-    begin
-      idx := -1;
-      for j := 1 to 4 do
-        if Ch = Closes[j] then
-        begin
-          idx := j;
-          Break;
-        end;
-      if (StackPos > 0) and (Stack[StackPos - 1] <> idx) then
-        Output[Length(Output)] := Closes[Stack[StackPos - 1]] // Corrige mismatched
-      else
-        Output += Ch;
-      if StackPos > 0 then
-        Dec(StackPos);
-    end
+  function OpenOf(const C: Char): Char;
+  begin
+    if C in ['(', ')'] then Result := '(' else Result := '[';
+  end;
 
-    // 3. Brackets vacíos: () [] {} <> -> se eliminan
-    else
+begin
+  // only () and [], < and { can be tags
+  Result := Text;
+  BPos := NIL;
+  i := 1;
+  while i <= Length(Result) do
+  begin
+    if IsTagStart(Result, i, x) then
+      i := x
+    else if Result[i] in ['(', ')', '[', ']'] then
     begin
-      // Mira hacia atrás si hay bracket abierto y siguiente char es bracket cerrado
-      if (Length(Output) > 0) and
-         ((Output[Length(Output)] in ['(', '[', '{', '<']) and
-         (i <= UTF8Length(Text)) and
-         ((UTF8Copy(Text, i, 1) = ')') or (UTF8Copy(Text, i, 1) = ']') or (UTF8Copy(Text, i, 1) = '}') or (UTF8Copy(Text, i, 1) = '>'))) then
-      begin
-        Output := Copy(Output, 1, Length(Output)-1); // Elimina el bracket abierto
-        Inc(i); // Salta el bracket cerrado
-        Continue;
-      end;
-      Output += Ch;
+      SetLength(BPos, Length(BPos)+1);
+      BPos[High(BPos)] := i;
     end;
     Inc(i);
   end;
+  if BPos = NIL then Exit;
 
-  Result := Output;
+  Stack := NIL;
+  SetLength(Stack, Length(BPos));
+  sp := 0;
+  k  := 0;
+  while k <= High(BPos) do
+  begin
+    i := BPos[k];
+    if IsOpen(Result[i]) then
+    begin
+      Stack[sp] := i;
+      Inc(sp);
+    end
+    else if sp > 0 then
+    begin
+      // mismatched, (groans] -> (groans)
+      Dec(sp);
+      if CloseOf(Result[Stack[sp]]) <> Result[i] then
+        Result[i] := CloseOf(Result[Stack[sp]]);
+    end
+    else if (k < High(BPos)) and IsOpen(Result[BPos[k+1]]) and
+      ((k+1 = High(BPos)) or IsOpen(Result[BPos[k+2]])) then
+    begin
+      // switched, ]groans[ -> [groans]
+      Result[BPos[k+1]] := CloseOf(Result[i]);
+      Result[i] := OpenOf(Result[i]);
+      Inc(k);
+    end;
+    Inc(k);
+  end;
+
+  // empty, () or [ ]
+  Changed := False;
+  sl := TStringList.Create;
+  try
+    sl.Text := Result;
+    for i := sl.Count-1 downto 0 do
+    begin
+      s := ReplaceRegExpr('[\(\[]\s*[\)\]]', sl[i], '', False);
+      if s <> sl[i] then
+      begin
+        Changed := True;
+        s := Trim(ReplaceRegExpr('\s{2,}', s, ' ', False));
+        if (s = '') or (s = '-') then
+          sl.Delete(i)
+        else
+          sl[i] := s;
+      end;
+    end;
+    if Changed then
+      Result := TrimRight(sl.Text);
+  finally
+    sl.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function HasBracketErrors(const Text: String): Boolean;
+var
+  Stack: String;
+  i, x: Integer;
+  c: Char;
+begin
+  // unbalanced, switched, mismatched or empty (), [], {}, <>, valid tags apart
+  Result := False;
+  Stack  := '';
+  i := 1;
+  while i <= Length(Text) do
+  begin
+    c := Text[i];
+    if IsTagStart(Text, i, x) then
+      i := x
+    else if c in ['(', '[', '{', '<'] then
+      Stack += c
+    else if c in [')', ']', '}', '>'] then
+    begin
+      if (Stack = '') or (Pos(Stack[Length(Stack)] + c, '()[]{}<>') = 0) then Exit(True);
+      if (i > 1) and (Text[i-1] = Stack[Length(Stack)]) then Exit(True); // empty
+      Delete(Stack, Length(Stack), 1);
+    end;
+    Inc(i);
+  end;
+  Result := Stack <> '';
 end;
 
 // -----------------------------------------------------------------------------

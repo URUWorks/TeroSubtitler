@@ -222,6 +222,7 @@ var
   ChainingMS : Integer;
   NextIT     : Integer;
   SnapAway : Boolean;
+  Straightened : Boolean;
 begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
 
@@ -430,6 +431,49 @@ begin
         begin
           FixedItem.Text := tmp;
           FixedItem.ErrorsFixed := [etCleanupTags];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      Straightened := False;
+      // Fix brackets, ]switched[, (mismatched], empty ()
+      if etFixBrackets in FErrors then
+      begin
+        tmp := FixBrackets(FixedItem.Text);
+        if FixedItem.Text <> tmp then
+        begin
+          FixedItem.Text := tmp;
+          FixedItem.ErrorsFixed := [etFixBrackets];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      // Curly quotes to straight
+      if etCurlyToStraightQuotes in FErrors then
+      begin
+        tmp := CurlyToStraightQuotes(FixedItem.Text);
+        if FixedItem.Text <> tmp then
+        begin
+          Straightened := True;
+          FixedItem.Text := tmp;
+          FixedItem.ErrorsFixed := [etCurlyToStraightQuotes];
+          Add(NewItem(FixedItem));
+        end;
+      end;
+
+      //ClearItem(FixedItem, i);
+      // Straight quotes to curly, they are opposite, with both (the estimate of
+      // the dialog has all) only the first one changes the entry, so the count
+      // of each one is the same as when it's the only one enabled
+      if (etStraightToCurlyQuotes in FErrors) and not Straightened then
+      begin
+        tmp := StraightToCurlyQuotes(FixedItem.Text);
+        if FixedItem.Text <> tmp then
+        begin
+          FixedItem.Text := tmp;
+          FixedItem.ErrorsFixed := [etStraightToCurlyQuotes];
           Add(NewItem(FixedItem));
         end;
       end;

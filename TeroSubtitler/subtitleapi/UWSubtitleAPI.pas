@@ -112,6 +112,9 @@ type
     etSnapToShotChangesInCueAway,
     etChaining,
     etCleanupTags,
+    etStraightToCurlyQuotes,
+    etCurlyToStraightQuotes,
+    etFixBrackets,
     etNone
   );
 

@@ -229,6 +229,7 @@ begin
     qcMinimumDuration: Result := lngqcMinimumDuration;
     qcMaximumDuration: Result := lngqcMaximumDuration;
     qcGAP: Result := lngqcGAP;
+    qcBrackets: Result := lngqcBrackets;
   end;
 end;
 

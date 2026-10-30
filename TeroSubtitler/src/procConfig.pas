@@ -134,6 +134,36 @@ uses
 
 // -----------------------------------------------------------------------------
 
+// TSubtitleErrorTypeSet has more than 32 items, it's saved in two integers,
+// the first one as before (settings of older versions)
+function ErrorSetToInteger(const ASet: TSubtitleErrorTypeSet; const APart: Integer): Integer;
+var
+  e: TSubtitleErrorType;
+begin
+  Result := 0;
+  for e := Low(TSubtitleErrorType) to High(TSubtitleErrorType) do
+    if (e in ASet) and (Ord(e) div 32 = APart) then
+      Result := Result or Integer(1 shl (Ord(e) mod 32));
+end;
+
+// -----------------------------------------------------------------------------
+
+function IntegersToErrorSet(const AValue1, AValue2: Integer): TSubtitleErrorTypeSet;
+var
+  e: TSubtitleErrorType;
+  v: Integer;
+begin
+  Result := [];
+  for e := Low(TSubtitleErrorType) to High(TSubtitleErrorType) do
+  begin
+    if Ord(e) < 32 then v := AValue1 else v := AValue2;
+    if (v and Integer(1 shl (Ord(e) mod 32))) <> 0 then
+      Include(Result, e);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 { Settings }
 
 // -----------------------------------------------------------------------------
@@ -499,7 +529,7 @@ begin
       HIRoundBrackets := GetValue('HIRoundBrackets', HIRoundBrackets);
       WebSearchURL := GetValue('WebSearchURL', WebSearchURL);
       TextToFind := GetValue('TextToFind', TextToFind);
-      CommonErrors := TSubtitleErrorTypeSet(GetValue('CommonErrors', Integer(CommonErrors)));
+      CommonErrors := IntegersToErrorSet(GetValue('CommonErrors', ErrorSetToInteger(CommonErrors, 0)), GetValue('CommonErrors2', ErrorSetToInteger(CommonErrors, 1)));
       frmMain.mmoText.CPSBar.Visible := GetValue('ShowCPSBar', True);
       frmMain.mmoTranslation.CPSBar.Visible := frmMain.mmoText.CPSBar.Visible;
       Subtitles.WriteBOM := GetValue('WriteBOMOnSave', True);
@@ -984,7 +1014,8 @@ begin
       SetValue('HIRoundBrackets', HIRoundBrackets);
       SetValue('WebSearchURL', WebSearchURL);
       SetValue('TextToFind', TextToFind);
-      SetValue('CommonErrors', Integer(CommonErrors));
+      SetValue('CommonErrors', ErrorSetToInteger(CommonErrors, 0));
+      SetValue('CommonErrors2', ErrorSetToInteger(CommonErrors, 1));
       SetValue('ShowCPSBar', frmMain.mmoText.CPSBar.Visible);
       SetValue('WriteBOMOnSave', Subtitles.WriteBOM);
       CloseKey;

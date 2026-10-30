@@ -29,7 +29,7 @@ type
 
   { TQualityCheck }
 
-  TQualityCheckType    = (qcCPS, qcWPM, qcCPL, qcMaximumLines, qcMinimumDuration, qcMaximumDuration, qcGAP);
+  TQualityCheckType    = (qcCPS, qcWPM, qcCPL, qcMaximumLines, qcMinimumDuration, qcMaximumDuration, qcGAP, qcBrackets);
   TQualityCheckTypeSet = set of TQualityCheckType;
 
   TSubtitleCheckItem = record
@@ -51,7 +51,7 @@ function DoQualityCheck(const AProfileName: String; const AProfiles: TProfiles; 
 implementation
 
 uses
-  procTypes, procSubtitle, UWSystem.StrUtils, UWSystem.TimeUtils;
+  procTypes, procSubtitle, UWSystem.StrUtils, UWSystem.TimeUtils, UWSubtitles.Utils;
 
 // -----------------------------------------------------------------------------
 
@@ -119,6 +119,10 @@ begin
 
     if (Profile.MaxDuration > 0) and (Subtitles.Duration[i] > Profile.MaxDuration) then
       AddQCItem(i, qcMaximumDuration);
+
+    // ]switched[, (mismatched], empty (), unbalanced
+    if HasBracketErrors(s) then
+      AddQCItem(i, qcBrackets);
 
     if i <> Subtitles.Count-1 then
     begin

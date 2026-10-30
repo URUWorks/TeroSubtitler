@@ -209,6 +209,9 @@ resourcestring
   lngfsetSnapToShotChangesInCueAway = 'Snap In Cue away from shot change';
   lngfsetChaining = 'Chaining entries';
   lngfsetCleanupTags = 'Cleanup tags';
+  lngfsetStraightToCurlyQuotes = 'Straight quotes to curly: "" -> “”';
+  lngfsetCurlyToStraightQuotes = 'Curly quotes to straight: “” -> ""';
+  lngfsetFixBrackets = 'Fix brackets: switched, mismatched or empty';
   lngfsIndex = '#';
   lngfsAction = 'Action';
   lngfsCurrent = 'Current';
@@ -262,6 +265,7 @@ resourcestring
   lngqcMinimumDuration = 'Minimum duration';
   lngqcMaximumDuration = 'Maximum duration';
   lngqcGAP = 'Gap Minimum duration';
+  lngqcBrackets = 'Brackets: switched, mismatched, empty or unbalanced';
 
   //RestoreBackupStrings
   lngrbDateTime = 'Date / Time';

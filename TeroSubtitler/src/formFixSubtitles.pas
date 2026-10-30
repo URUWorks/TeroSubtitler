@@ -188,6 +188,9 @@ begin
       AddOptionItem(etSnapToShotChanges, lngfsetSnapToShotChanges, GetValue('Option20', False));
       AddOptionItem(etChaining, lngfsetChaining, GetValue('Option21', False));
       AddOptionItem(etCleanupTags, lngfsetCleanupTags, GetValue('Option22', False));
+      AddOptionItem(etStraightToCurlyQuotes, lngfsetStraightToCurlyQuotes, GetValue('Option23', False));
+      AddOptionItem(etCurlyToStraightQuotes, lngfsetCurlyToStraightQuotes, GetValue('Option24', False));
+      AddOptionItem(etFixBrackets, lngfsetFixBrackets, GetValue('Option25', False));
       s := GetValue('OCRScript', '');
       x := cboOCR.Items.IndexOf(s);
       if x >= 0 then
@@ -224,6 +227,9 @@ begin
     AddOptionItem(etSnapToShotChanges, lngfsetSnapToShotChanges, False);
     AddOptionItem(etChaining, lngfsetChaining, False);
     AddOptionItem(etCleanupTags, lngfsetCleanupTags, False);
+    AddOptionItem(etStraightToCurlyQuotes, lngfsetStraightToCurlyQuotes, False);
+    AddOptionItem(etCurlyToStraightQuotes, lngfsetCurlyToStraightQuotes, False);
+    AddOptionItem(etFixBrackets, lngfsetFixBrackets, False);
   end;
 
   cboSpacingHyphen.AddItem(lngfsAddSpacing, NIL);
@@ -437,6 +443,16 @@ procedure TfrmFixSubtitles.clbOptionsClickCheck(Sender: TObject);
 var
   i: Integer;
 begin
+  // straight to curly quotes and curly to straight are opposite
+  i := clbOptions.ItemIndex;
+  if (i >= 0) and (i < Length(FOptions)) and clbOptions.Checked[i] then
+  begin
+    if FOptions[i].Error = etStraightToCurlyQuotes then
+      clbOptions.Checked[i+1] := False
+    else if FOptions[i].Error = etCurlyToStraightQuotes then
+      clbOptions.Checked[i-1] := False;
+  end;
+
   for i := 0 to clbOptions.Items.Count-1 do
     FOptions[i].Enabled := clbOptions.Checked[i];
 
@@ -583,6 +599,12 @@ begin
     Result := FOptions[21].Description
   else if etCleanupTags in AError then
     Result := FOptions[22].Description
+  else if etStraightToCurlyQuotes in AError then
+    Result := FOptions[23].Description
+  else if etCurlyToStraightQuotes in AError then
+    Result := FOptions[24].Description
+  else if etFixBrackets in AError then
+    Result := FOptions[25].Description
   else
     Result := '';
 end;
@@ -727,7 +749,8 @@ begin
       etOCR, etMaxLines, etIncompleteHyphenText, etSpaceOfOpeningHyphen, etRemoveSpacesWithinBrackets,
       etFixInterrobang, etOverlappingWithPrev,  etOverlappingWithNext, etSnapToShotChanges,
       etSnapToShotChangesInCue, etSnapToShotChangesOutCue, etSnapToShotChangesInCueAway,
-      etChaining, etCleanupTags];
+      etChaining, etCleanupTags, etStraightToCurlyQuotes, etCurlyToStraightQuotes,
+      etFixBrackets];
 
     if FProfile = NIL then
       FProfile := @AppOptions.Conventions;
@@ -822,7 +845,13 @@ begin
         else if etChaining in ErrorsFixed then
           IncCount(21)
         else if etCleanupTags in ErrorsFixed then
-          IncCount(22);
+          IncCount(22)
+        else if etStraightToCurlyQuotes in ErrorsFixed then
+          IncCount(23)
+        else if etCurlyToStraightQuotes in ErrorsFixed then
+          IncCount(24)
+        else if etFixBrackets in ErrorsFixed then
+          IncCount(25);
       end;
 
   if not AOnlyEnabled then
@@ -852,6 +881,9 @@ begin
   UpdatedOption(20, lngfsetSnapToShotChanges);
   UpdatedOption(21, lngfsetChaining);
   UpdatedOption(22, lngfsetCleanupTags);
+  UpdatedOption(23, lngfsetStraightToCurlyQuotes);
+  UpdatedOption(24, lngfsetCurlyToStraightQuotes);
+  UpdatedOption(25, lngfsetFixBrackets);
 
   FTotalErrorCount := 0;
   for i := 0 to Length(FOptions)-1 do

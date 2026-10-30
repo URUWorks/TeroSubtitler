@@ -1,46 +1,47 @@
 object frmFixSubtitles: TfrmFixSubtitles
   Left = 242
-  Height = 600
+  Height = 750
   Top = 116
-  Width = 1024
+  Width = 1280
   BorderIcons = []
   Caption = 'Fix subtitles'
-  ClientHeight = 600
-  ClientWidth = 1024
-  Constraints.MinHeight = 200
-  Constraints.MinWidth = 200
+  ClientHeight = 750
+  ClientWidth = 1280
+  Constraints.MinHeight = 250
+  Constraints.MinWidth = 250
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '5.0.1.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
   object lyoBottom: TUWLayout
     Left = 0
-    Height = 42
-    Top = 558
-    Width = 1024
+    Height = 52
+    Top = 698
+    Width = 1280
     Align = alBottom
-    ClientHeight = 42
-    ClientWidth = 1024
+    ClientHeight = 52
+    ClientWidth = 1280
     TabOrder = 2
     object btnApply: TButton
       AnchorSideRight.Control = btnClose
-      Left = 829
-      Height = 26
-      Top = 8
-      Width = 91
+      Left = 1036
+      Height = 32
+      Top = 10
+      Width = 114
       Anchors = [akTop, akRight]
-      BorderSpacing.Right = 5
+      BorderSpacing.Right = 6
       Caption = 'Apply'
       Default = True
       TabOrder = 0
       OnClick = btnApplyClick
     end
     object btnClose: TButton
-      Left = 925
-      Height = 26
-      Top = 8
-      Width = 91
+      Left = 1156
+      Height = 32
+      Top = 10
+      Width = 114
       Anchors = [akTop, akRight]
       Cancel = True
       Caption = 'Close'
@@ -51,9 +52,9 @@ object frmFixSubtitles: TfrmFixSubtitles
       AnchorSideTop.Side = asrCenter
       AnchorSideBottom.Control = btnApply
       AnchorSideBottom.Side = asrBottom
-      Left = 8
+      Left = 10
       Height = 1
-      Top = 33
+      Top = 41
       Width = 1
       Anchors = [akLeft, akBottom]
       Font.Style = [fsBold]
@@ -63,122 +64,122 @@ object frmFixSubtitles: TfrmFixSubtitles
   end
   object lyoLeft: TUWLayout
     Left = 0
-    Height = 558
+    Height = 698
     Top = 0
-    Width = 380
+    Width = 475
     Align = alLeft
-    ClientHeight = 558
-    ClientWidth = 380
-    Constraints.MaxWidth = 400
-    Constraints.MinWidth = 250
+    ClientHeight = 698
+    ClientWidth = 475
+    Constraints.MaxWidth = 500
+    Constraints.MinWidth = 312
     TabOrder = 0
     object clbOptions: TCheckListBox
-      Left = 8
-      Height = 423
-      Top = 8
-      Width = 372
+      Left = 10
+      Height = 529
+      Top = 10
+      Width = 465
       Anchors = [akTop, akLeft, akRight, akBottom]
       ExtendedSelect = False
-      ItemHeight = 0
+      ItemHeight = 21
       PopupMenu = PopupMenuSelect
       TabOrder = 0
       OnClickCheck = clbOptionsClickCheck
     end
     object lblSource: TLabel
-      Left = 8
-      Height = 15
-      Top = 443
-      Width = 62
+      Left = 10
+      Height = 20
+      Top = 552
+      Width = 45
       Anchors = [akLeft, akBottom]
       Caption = 'Source'
       ParentColor = False
     end
     object cboSource: TComboBox
-      Left = 192
-      Height = 23
-      Top = 439
-      Width = 188
+      Left = 240
+      Height = 28
+      Top = 550
+      Width = 235
       Anchors = [akLeft, akRight, akBottom]
-      ItemHeight = 15
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 1
       OnSelect = cboSourceSelect
     end
     object lblConvention: TLabel
-      Left = 8
-      Height = 15
-      Top = 475
-      Width = 62
+      Left = 10
+      Height = 20
+      Top = 592
+      Width = 75
       Anchors = [akLeft, akBottom]
       Caption = 'Convention'
       ParentColor = False
     end
     object cboConvention: TComboBox
-      Left = 192
-      Height = 23
-      Top = 471
-      Width = 188
+      Left = 240
+      Height = 28
+      Top = 590
+      Width = 235
       Anchors = [akLeft, akRight, akBottom]
-      ItemHeight = 15
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 2
       OnSelect = cboConventionSelect
     end
     object lblOCR: TLabel
-      Left = 8
-      Height = 15
-      Top = 507
-      Width = 57
+      Left = 10
+      Height = 20
+      Top = 632
+      Width = 71
       Anchors = [akLeft, akBottom]
       Caption = 'OCR Script'
       ParentColor = False
     end
     object cboOCR: TComboBox
-      Left = 192
-      Height = 23
-      Top = 503
-      Width = 188
+      Left = 240
+      Height = 28
+      Top = 630
+      Width = 235
       Anchors = [akLeft, akRight, akBottom]
-      ItemHeight = 15
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 3
       OnChange = cboConventionSelect
     end
     object lblSpacingHyphen: TLabel
-      Left = 8
-      Height = 15
-      Top = 539
-      Width = 146
+      Left = 10
+      Height = 20
+      Top = 672
+      Width = 182
       Anchors = [akLeft, akBottom]
       Caption = 'Spacing of opening hyphen'
       ParentColor = False
     end
     object cboSpacingHyphen: TComboBox
-      Left = 192
-      Height = 23
-      Top = 535
-      Width = 188
+      Left = 240
+      Height = 28
+      Top = 670
+      Width = 235
       Anchors = [akLeft, akRight, akBottom]
-      ItemHeight = 15
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 4
       OnChange = cboConventionSelect
     end
   end
   object lyoClient: TUWLayout
-    Left = 386
-    Height = 558
+    Left = 482
+    Height = 698
     Top = 0
-    Width = 638
+    Width = 798
     Align = alClient
-    ClientHeight = 558
-    ClientWidth = 638
+    ClientHeight = 698
+    ClientWidth = 798
     TabOrder = 1
     object VST: TLazVirtualStringTree
       Left = 0
-      Height = 550
-      Top = 8
-      Width = 630
+      Height = 688
+      Top = 10
+      Width = 788
       Anchors = [akTop, akLeft, akRight, akBottom]
       Header.AutoSizeIndex = 0
       Header.Columns = <>
@@ -201,14 +202,14 @@ object frmFixSubtitles: TfrmFixSubtitles
     end
   end
   object Splitter1: TSplitter
-    Left = 380
-    Height = 558
+    Left = 475
+    Height = 698
     Top = 0
-    Width = 6
+    Width = 7
   end
   object PopupMenuSelect: TPopupMenu
-    Left = 432
-    Top = 496
+    Left = 540
+    Top = 620
     object mnuSelectAll: TMenuItem
       Caption = 'Select all'
       OnClick = mnuSelectAllClick
