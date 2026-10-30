@@ -396,11 +396,8 @@ begin
     actShowVideoToolbarOther.Checked    := False;
     actShowVideoToolbarVolume.Checked   := True;
 
-    // Toolbar: don't allow buttons to encroach others when repositioning #27
-    SetCoolBarMinWidth(CoolBarMain);
-    SetCoolBarMinWidth(CoolBarEditor);
-    SetCoolBarMinWidth(CoolBarWaveform);
-    SetCoolBarMinWidth(CoolBarVideo);
+    // Toolbar: don't allow buttons to encroach others when repositioning #27,
+    // the min width of the bands is set in FitCoolBars (with the form shown)
   end;
 
   Subtitles.WriteBOM := True;
@@ -427,6 +424,7 @@ begin
   begin
     if OnlyVSTColumnsSize then Exit;
 
+    CoolBarsFirstStart := True;
     SetVideoPreview(False);
     SetWaveformPreview(False);
     AppOptions.GUILanguage := GetOSLanguage;
