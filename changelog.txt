@@ -20,6 +20,8 @@
 - fixed: Multi-select and multi-check in Fix Subtitles #333
 - fixed: [macOS] Turn off beep when moving between entries #331
 - fixed: Misguiding file extension (apparently creating .ASS, but internal is .SRT) #324
+- fixed: Option + Left/Right arrow doesn't go to the left/right word in text field #310
+- fixed: Spacebar shortcut conflict #308
 - fixed: Applying Netflix profile then another doesn't flag all shot changes #289
 - fixed: Translation Memory problem #279
 - fixed: [Windows] Taskbar icon only shows on main display, not on secondary displays #212
@@ -68,6 +70,7 @@
 - fixed: Command line FPS ignored in -translate
 - fixed: Export text only using the wrong encoding and joining the whole file in one line
 - fixed: Check for updates comparing versions as text
+- fixed: Space between the toolbars on the first start
 - fixed: Merge with next/previous adding empty lines to the translation
 - fixed: Spurious undo entries and missing "modified" state in SMPTE mode
 - fixed: Division by zero in Adjust subtitles, Typewriter effect and Distribute evenly
@@ -119,6 +122,8 @@
 - improved: Typing with "mpv handles subtitles" no longer rewrites the temp track on every key
 - improved: Language names are now shown in their own language
 - improved: Media loaded from a url shows its title instead of the url
+- added: Auto-guess FPS of non-SMPTE subtitle file #414
+- added: Selective pasting #332
 - added: Sub-optimal presentation of auto-transcribed subtitles #256
 - added: Synchronize texts with the audio (Audio to text/Synchronize the current texts) #41
 - added: Fix subtitles: caps lock to normal casing #18
