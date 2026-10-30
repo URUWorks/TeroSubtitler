@@ -80,6 +80,7 @@ function MRUFileName: String;
 function ConventionsFileName: String;
 function StylesFileName: String;
 function ActorsFileName: String;
+function NamesFileName: String;
 function HunspellFileName: String;
 function libMPVFileName(const AFullRoot: Boolean = True): String;
 function YTDLPFileName(const AFullRoot: Boolean = True): String;
@@ -1705,6 +1706,19 @@ begin
   Result := GetUserDir + RootCfg+'/'+RootCfg+'.act';
   {$ELSE}
   Result := GetCustomFilePath(RootCfg+'.act');
+  {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
+function NamesFileName: String;
+begin
+  // names, places, acronyms... written as they must be kept, one per line
+  // (convert case, smart)
+  {$IFDEF DARWIN}
+  Result := GetUserDir + RootCfg+'/'+RootCfg+'.nam';
+  {$ELSE}
+  Result := GetCustomFilePath(RootCfg+'.nam');
   {$ENDIF}
 end;
 

@@ -1,16 +1,16 @@
 object frmConvertCase: TfrmConvertCase
   Left = 260
-  Height = 332
+  Height = 356
   Top = 127
   Width = 350
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Convert case'
-  ClientHeight = 332
+  ClientHeight = 356
   ClientWidth = 350
   DesignTimePPI = 120
   Position = poMainFormCenter
-  LCLVersion = '4.6.0.0'
+  LCLVersion = '5.0.1.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -18,13 +18,13 @@ object frmConvertCase: TfrmConvertCase
     AnchorSideRight.Control = btnClose
     Left = 104
     Height = 32
-    Top = 290
+    Top = 314
     Width = 114
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
     Caption = 'Apply'
     Default = True
-    TabOrder = 6
+    TabOrder = 8
     OnClick = btnApplyClick
   end
   object btnClose: TButton
@@ -32,12 +32,12 @@ object frmConvertCase: TfrmConvertCase
     AnchorSideRight.Side = asrBottom
     Left = 224
     Height = 32
-    Top = 290
+    Top = 314
     Width = 114
     Anchors = [akTop, akRight]
     Cancel = True
     Caption = 'Close'
-    TabOrder = 7
+    TabOrder = 9
     OnClick = btnCloseClick
   end
   object rdoSentenceType: TUWRadioButton
@@ -91,15 +91,37 @@ object frmConvertCase: TfrmConvertCase
     TabOrder = 4
     TabStop = False
   end
+  object rdoSmartCase: TUWRadioButton
+    Left = 20
+    Height = 24
+    Top = 129
+    Width = 22
+    AutoSize = False
+    Caption = 'Smart (all caps to normal)'
+    TabOrder = 5
+    TabStop = False
+  end
+  object btnNames: TButton
+    AnchorSideRight.Control = lyoScope
+    AnchorSideRight.Side = asrBottom
+    Left = 224
+    Height = 32
+    Top = 10
+    Width = 114
+    Anchors = [akTop, akRight]
+    Caption = 'Names...'
+    TabOrder = 6
+    OnClick = btnNamesClick
+  end
   object lyoScope: TUWLayout
     Left = 20
     Height = 120
-    Top = 160
+    Top = 184
     Width = 318
     Anchors = [akTop, akLeft, akRight]
     ClientHeight = 120
     ClientWidth = 318
-    TabOrder = 5
+    TabOrder = 7
     object lblScope: TLabel
       Left = 0
       Height = 20

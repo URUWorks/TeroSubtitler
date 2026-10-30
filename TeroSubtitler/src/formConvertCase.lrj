@@ -7,6 +7,8 @@
 {"hash":77999141,"name":"tfrmconvertcase.rdouppercase.caption","sourcebytes":[85,80,80,69,82,67,65,83,69],"value":"UPPERCASE"},
 {"hash":40898773,"name":"tfrmconvertcase.rdotitletype.caption","sourcebytes":[84,105,116,108,101,32,84,121,112,101],"value":"Title Type"},
 {"hash":26489909,"name":"tfrmconvertcase.rdoinversetype.caption","sourcebytes":[105,78,86,69,82,83,69,32,116,89,80,69],"value":"iNVERSE tYPE"},
+{"hash":127502425,"name":"tfrmconvertcase.rdosmartcase.caption","sourcebytes":[83,109,97,114,116,32,40,97,108,108,32,99,97,112,115,32,116,111,32,110,111,114,109,97,108,41],"value":"Smart (all caps to normal)"},
+{"hash":138176078,"name":"tfrmconvertcase.btnnames.caption","sourcebytes":[78,97,109,101,115,46,46,46],"value":"Names..."},
 {"hash":94004874,"name":"tfrmconvertcase.lblscope.caption","sourcebytes":[83,99,111,112,101,58],"value":"Scope:"},
 {"hash":202613155,"name":"tfrmconvertcase.rbnallthesubtitles.caption","sourcebytes":[65,108,108,32,101,110,116,114,105,101,115],"value":"All entries"},
 {"hash":195302217,"name":"tfrmconvertcase.rbnfromtheselectedsubtitle.caption","sourcebytes":[70,114,111,109,32,116,104,101,32,115,101,108,101,99,116,101,100,32,101,110,116,114,121],"value":"From the selected entry"},
