@@ -393,6 +393,11 @@ msgstr "Rechts"
 msgid "Undefined"
 msgstr "Nicht definiert"
 
+#: proclocalize.lngfpsguessed
+#, object-pascal-format
+msgid "The times of this subtitle match %s fps. Use this frame rate?"
+msgstr ""
+
 #: proclocalize.lngfsaction
 msgid "Action"
 msgstr "Handlung"
