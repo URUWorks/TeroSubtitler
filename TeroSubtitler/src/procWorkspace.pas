@@ -107,7 +107,11 @@ procedure UpdateCPSAndTexts(const AIndex: Integer);
 procedure UpdateValuesForSubtitle(const AIndex: Integer);
 procedure UpdateValues(const AInvalidate: Boolean = False);
 
-procedure SetCoolBarMinWidth(const ACoolbar: TCoolbar);
+var
+  CoolBarsFirstStart: Boolean = False; // no settings file, autosize the bands
+
+procedure SetCoolBarMinWidth(const ACoolbar: TCoolbar; const AAutosize: Boolean = False);
+procedure FitCoolBars;
 procedure UpdateCoolBar(const ACoolbar: TCoolbar; const ABandFromControl: TControl; const AVisible: Boolean);
 
 procedure ShowCustomHint(const Text: String);
@@ -1753,13 +1757,45 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure SetCoolBarMinWidth(const ACoolbar: TCoolbar);
+procedure SetCoolBarMinWidth(const ACoolbar: TCoolbar; const AAutosize: Boolean = False);
 var
-  i : Integer;
+  i, w : Integer;
 begin
-  for i := 0 to ACoolbar.Bands.Count-1 do
-    if ACoolbar.Bands[i].Control <> NIL then
-      ACoolbar.Bands[i].MinWidth := ACoolbar.ScaleFormTo96(ACoolbar.Bands[i].Control.Width + (ACoolbar.GrabWidth * 2));
+  // the width the band needs for its control, in pixels: the design time
+  // width of the controls (another dpi, the form is designed at 120) left a
+  // space between the bands on the first start
+  ACoolbar.BeginUpdate;
+  try
+    for i := 0 to ACoolbar.Bands.Count-1 do
+      if ACoolbar.Bands[i].Control <> NIL then
+        with ACoolbar.Bands[i] do
+        begin
+          w := Width;
+          Control.InvalidatePreferredSize;
+          MinWidth := 0;
+          AutosizeWidth;
+          MinWidth := Width;
+          if not AAutosize then
+            if w > MinWidth then Width := w;
+        end;
+  finally
+    ACoolbar.EndUpdate;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// once the main form is shown, with the controls already scaled and sized
+procedure FitCoolBars;
+begin
+  with frmMain do
+  begin
+    SetCoolBarMinWidth(CoolBarMain, CoolBarsFirstStart);
+    SetCoolBarMinWidth(CoolBarEditor, CoolBarsFirstStart);
+    SetCoolBarMinWidth(CoolBarWaveform, CoolBarsFirstStart);
+    SetCoolBarMinWidth(CoolBarVideo, CoolBarsFirstStart);
+  end;
+  CoolBarsFirstStart := False;
 end;
 
 // -----------------------------------------------------------------------------
