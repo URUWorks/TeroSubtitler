@@ -26,6 +26,7 @@ uses
 
 type
   TFindMode = (fmBegin, fmCurrent, fmNext, fmBackward);
+  TPasteSpecialMode = (psmTexts, psmTranslations, psmAsTranslations, psmTimes);
 
 function VSTUpdating(const AVST: TLazVirtualStringTree): Boolean;
 procedure VSTBeginUpdate(const AVST: TLazVirtualStringTree);
@@ -51,6 +52,7 @@ procedure VSTJumpToNextEmptyEntry(const AVST: TLazVirtualStringTree; const AForw
 procedure VSTJumpToNextNoteEntry(const AVST: TLazVirtualStringTree; const AForward: Boolean = True);
 procedure VSTCopyEntriesToClipboard(const AVST: TLazVirtualStringTree; const ACut: Boolean = False);
 procedure VSTPasteEntriesFromClipboard(const AVST: TLazVirtualStringTree);
+procedure VSTPasteSpecialFromClipboard(const AVST: TLazVirtualStringTree; const AMode: TPasteSpecialMode);
 procedure VSTInsertEntries(const AVST: TLazVirtualStringTree; const Before: Boolean = False);
 procedure VSTDeleteEntries(const AVST: TLazVirtualStringTree);
 procedure VSTCombineEntries(const AVST: TLazVirtualStringTree);
@@ -563,6 +565,115 @@ begin
       UpdateValues(True);
       DoAutoCheckErrors;
     end;
+  end;
+end;
+
+// ------------------------------------------------------------------------------
+
+// paste only a part of the copied entries (texts, translations or times) over
+// the existing ones: over the selected entries when more than one is selected,
+// or over the consecutive entries from the focused one. Plain text (not copied
+// from tero) is pasted one line per entry.
+procedure VSTPasteSpecialFromClipboard(const AVST: TLazVirtualStringTree; const AMode: TPasteSpecialMode);
+var
+  s       : TStringList;
+  Items   : array of record
+    InTime, OutTime : Integer;
+    Text, Tr        : String;
+  end;
+  Targets : TIntegerDynArray;
+  Nodes   : TNodeArray;
+  i, x, n : Integer;
+  t1, t2  : Integer;
+  IsOurs  : Boolean;
+begin
+  if Subtitles.Count = 0 then Exit;
+
+  Items := NIL;
+  s := TStringList.Create;
+  try
+    // our clipboard format: initial||final||text||translation||...
+    SplitRegExpr('\|\|', Clipboard.AsText, s);
+    IsOurs := (s.Count > 4) and TryStrToInt(s[0], t1) and TryStrToInt(s[1], t2);
+    if IsOurs then
+    begin
+      while s.Count > 4 do
+      begin
+        if not TryStrToInt(s[0], t1) or not TryStrToInt(s[1], t2) then Break;
+        SetLength(Items, Length(Items)+1);
+        with Items[High(Items)] do
+        begin
+          InTime  := t1;
+          OutTime := t2;
+          Text := ReplaceRegExpr('\\~', s[2], sLineBreak, False);
+          Tr   := ReplaceRegExpr('\\~', s[3], sLineBreak, False);
+        end;
+        for i := 1 to 4 do s.Delete(0);
+      end;
+    end
+    else
+    begin
+      // plain text, there are no times to paste
+      if AMode = psmTimes then Exit;
+      s.Text := Clipboard.AsText;
+      for i := 0 to s.Count-1 do
+        if s[i].Trim <> '' then
+        begin
+          SetLength(Items, Length(Items)+1);
+          with Items[High(Items)] do
+          begin
+            InTime  := -1;
+            OutTime := -1;
+            Text := s[i].Trim;
+            Tr   := Text;
+          end;
+        end;
+    end;
+  finally
+    s.Free;
+  end;
+
+  if Length(Items) = 0 then Exit;
+
+  Targets := NIL;
+  Nodes   := NIL;
+  if AVST.SelectedCount > 1 then
+  begin
+    Nodes := AVST.GetSortedSelection(True);
+    n := Min(Length(Nodes), Length(Items));
+    SetLength(Targets, n);
+    for i := 0 to n-1 do
+      Targets[i] := Nodes[i]^.Index;
+  end
+  else
+  begin
+    x := Max(0, VSTFocusedNode(AVST));
+    n := Min(Subtitles.Count - x, Length(Items));
+    SetLength(Targets, n);
+    for i := 0 to n-1 do
+      Targets[i] := x + i;
+  end;
+
+  if (AMode in [psmTranslations, psmAsTranslations]) and not Workspace.TranslatorMode then
+    SetTranslatorMode(True);
+
+  AVST.BeginUpdate;
+  try
+    for i := 0 to High(Targets) do
+      case AMode of
+        psmTexts          : SetSubtitleText(Targets[i], Items[i].Text, smText, False, False, False);
+        psmTranslations   : SetSubtitleText(Targets[i], Items[i].Tr, smTranslation, False, False, False);
+        psmAsTranslations : SetSubtitleText(Targets[i], Items[i].Text, smTranslation, False, False, False);
+        psmTimes          : SetSubtitleTimes(Targets[i], Items[i].InTime, Items[i].OutTime, False, False);
+      end;
+
+    if Length(Targets) > 0 then
+      VSTSelectNodes(AVST, Targets, True);
+  finally
+    AVST.EndUpdate;
+    UndoInstance.IncrementUndoGroup;
+    UpdateValues(True);
+    DoAutoCheckErrors;
   end;
 end;
 

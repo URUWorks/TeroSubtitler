@@ -310,6 +310,20 @@ type
     actCut: TAction;
     actCopy: TAction;
     actPaste: TAction;
+    mnuEditPasteSpecial: TMenuItem;
+    mnuVSTPasteSpecial: TMenuItem;
+    mnuEditPasteSpecial0: TMenuItem;
+    mnuVSTPasteSpecial0: TMenuItem;
+    mnuEditPasteSpecial1: TMenuItem;
+    mnuVSTPasteSpecial1: TMenuItem;
+    mnuEditPasteSpecial2: TMenuItem;
+    mnuVSTPasteSpecial2: TMenuItem;
+    mnuEditPasteSpecial3: TMenuItem;
+    mnuVSTPasteSpecial3: TMenuItem;
+    actPasteTexts: TAction;
+    actPasteTranslations: TAction;
+    actPasteAsTranslations: TAction;
+    actPasteTimes: TAction;
     actLoadSubtitle: TAction;
     actSaveSubtitleAs: TAction;
     actSaveTranslationAs: TAction;
@@ -1075,6 +1089,10 @@ type
     procedure actCutExecute(Sender: TObject);
     procedure actCopyExecute(Sender: TObject);
     procedure actPasteExecute(Sender: TObject);
+    procedure actPasteTextsExecute(Sender: TObject);
+    procedure actPasteTranslationsExecute(Sender: TObject);
+    procedure actPasteAsTranslationsExecute(Sender: TObject);
+    procedure actPasteTimesExecute(Sender: TObject);
     procedure actCopyVideoPosToClipboardExecute(Sender: TObject);
     procedure actInsertEntryBeforeExecute(Sender: TObject);
     procedure actInsertEntryExecute(Sender: TObject);
@@ -1340,13 +1358,15 @@ type
     {$IFDEF LCLCocoa}
     FVSTOldWindowProc: TWndMethod;
     {$ENDIF}
+    FCoolBarsFitted: Boolean;
     procedure URLLoadTimerTimer(Sender: TObject);
     procedure StopURLLoadTimer;
+    procedure DoFitCoolBars(Data: PtrInt);
     {$IFDEF LCLCocoa}
     procedure VSTWindowProc(var TheMessage: TLMessage);
     {$ENDIF}
   public
-
+    function IsShortcut(var Message: TLMKey): Boolean; override;
   end;
 
   { SubtileAPI OnLoadDataFunc }
@@ -1628,6 +1648,19 @@ begin
   LoadFormSettings(Self);
   // Show random tip
   SetStatusBarText(GetRandomTipString, 0, False);
+  // after the first layout, when the toolbars have their real width
+  if not FCoolBarsFitted then
+  begin
+    FCoolBarsFitted := True;
+    Application.QueueAsyncCall(@DoFitCoolBars, 0);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.DoFitCoolBars(Data: PtrInt);
+begin
+  FitCoolBars;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1644,6 +1677,19 @@ begin
     PostMessage(Screen.ActiveControl.Handle, LM_CHAR, Ord(NumChar), 0);
     Handled := True;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmMain.IsShortcut(var Message: TLMKey): Boolean;
+begin
+  // with the focus in a text field, the keys to type or to move the caret
+  // are for the field and not shortcuts (#308, #310)
+  if IsTextControl(Screen.ActiveControl) and
+    IsTextEditingKey(Message.CharCode, MsgKeyDataToShiftState(Message.KeyData)) then
+    Exit(False);
+
+  Result := inherited IsShortcut(Message);
 end;
 
 // -----------------------------------------------------------------------------

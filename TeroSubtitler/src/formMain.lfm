@@ -1885,6 +1885,21 @@ object frmMain: TfrmMain
       object MenuItem13: TMenuItem
         Action = actPaste
       end
+      object mnuEditPasteSpecial: TMenuItem
+        Caption = 'Paste special'
+        object mnuEditPasteSpecial0: TMenuItem
+          Action = actPasteTexts
+        end
+        object mnuEditPasteSpecial1: TMenuItem
+          Action = actPasteTranslations
+        end
+        object mnuEditPasteSpecial2: TMenuItem
+          Action = actPasteAsTranslations
+        end
+        object mnuEditPasteSpecial3: TMenuItem
+          Action = actPasteTimes
+        end
+      end
       object Separator3: TMenuItem
         Caption = '-'
       end
@@ -3384,6 +3399,30 @@ object frmMain: TfrmMain
       Caption = 'Paste'
       ImageIndex = 7
       OnExecute = actPasteExecute
+    end
+    object actPasteTexts: TAction
+      Tag = 1
+      Category = 'Edit'
+      Caption = 'Paste texts'
+      OnExecute = actPasteTextsExecute
+    end
+    object actPasteTranslations: TAction
+      Tag = 1
+      Category = 'Edit'
+      Caption = 'Paste translations'
+      OnExecute = actPasteTranslationsExecute
+    end
+    object actPasteAsTranslations: TAction
+      Tag = 1
+      Category = 'Edit'
+      Caption = 'Paste as translations'
+      OnExecute = actPasteAsTranslationsExecute
+    end
+    object actPasteTimes: TAction
+      Tag = 1
+      Category = 'Edit'
+      Caption = 'Paste times'
+      OnExecute = actPasteTimesExecute
     end
     object actFind: TAction
       Tag = 1
@@ -5429,6 +5468,21 @@ object frmMain: TfrmMain
     end
     object MenuItem93: TMenuItem
       Action = actPaste
+    end
+    object mnuVSTPasteSpecial: TMenuItem
+      Caption = 'Paste special'
+      object mnuVSTPasteSpecial0: TMenuItem
+        Action = actPasteTexts
+      end
+      object mnuVSTPasteSpecial1: TMenuItem
+        Action = actPasteTranslations
+      end
+      object mnuVSTPasteSpecial2: TMenuItem
+        Action = actPasteAsTranslations
+      end
+      object mnuVSTPasteSpecial3: TMenuItem
+        Action = actPasteTimes
+      end
     end
     object Separator8: TMenuItem
       Caption = '-'

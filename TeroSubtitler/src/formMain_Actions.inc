@@ -240,6 +240,38 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actPasteTextsExecute(Sender: TObject);
+begin
+  if Workspace.ViewMode = vmList then
+    VSTPasteSpecialFromClipboard(VST, psmTexts);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actPasteTranslationsExecute(Sender: TObject);
+begin
+  if Workspace.ViewMode = vmList then
+    VSTPasteSpecialFromClipboard(VST, psmTranslations);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actPasteAsTranslationsExecute(Sender: TObject);
+begin
+  if Workspace.ViewMode = vmList then
+    VSTPasteSpecialFromClipboard(VST, psmAsTranslations);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actPasteTimesExecute(Sender: TObject);
+begin
+  if Workspace.ViewMode = vmList then
+    VSTPasteSpecialFromClipboard(VST, psmTimes);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actCopyVideoPosToClipboardExecute(Sender: TObject);
 begin
   CopyCurrentVideoPosToClipboard;
