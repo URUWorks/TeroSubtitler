@@ -123,11 +123,14 @@ begin
   btnDownloadWhisper.Caption := btnDownload.Caption;
 
   {$IFDEF LINUX}
+  // libmpv and ffmpeg come from the distro packages
   btnDownload.Visible              := False;
-  btnDownloadYTDLP.Visible         := False;
   btnDownloadFFMPEG.Visible        := False;
+  {$IFNDEF CPUX86_64}
+  // our whisper zips are x86_64 only
   btnDownloadWhisper.Visible       := False;
   btnDownloadFasterWhisper.Visible := False;
+  {$ENDIF}
   {$ENDIF};
 
   CheckState_libMPV;
@@ -331,7 +334,8 @@ end;
 
 procedure TfrmWizard.btnDownloadYTDLPClick(Sender: TObject);
 begin
-  {$IFDEF DARWIN}
+  {$IFDEF UNIX}
+  ForceDirectories(YTDLPFolder);
   ShowDownloadDialog(URL_YTDLP, ConcatPaths([YTDLPFolder, YTDLP_EXE]));
   {$ELSE}
   ShowDownloadDialog(URL_YTDLP, YTDLPFileName);
@@ -385,7 +389,9 @@ begin
   ShowDownloadDialog(StringReplace(URL_FASTERWHISPER, '%cpu', GetCPUArchitectureString, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
   {$ELSE}
   ShowDownloadDialog(URL_FASTERWHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
+  {$IFDEF WINDOWS}
   ShowDownloadDialog(URL_FASTERWHISPERCUDA, ConcatPaths([WhisperFolder, 'cuda.zip']));
+  {$ENDIF}
   {$ENDIF}
   if FileExists(ConcatPaths([WhisperFolder, FASTERWHISPER_EXE])) then
   begin

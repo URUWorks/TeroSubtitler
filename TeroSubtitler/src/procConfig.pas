@@ -1915,7 +1915,8 @@ end;
 
 function YTDLPFolder: String;
 begin
-  {$IFDEF DARWIN}
+  {$IFDEF UNIX}
+  // DefaultValues looks for it there
   Result := GetCustomUserPath('ytdlp');
   {$ELSE}
   Result := libmpvFolder;

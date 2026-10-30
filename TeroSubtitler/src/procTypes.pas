@@ -180,8 +180,10 @@ const
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux';
   {$ENDIF}
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_linux.zip';
-  URL_FASTERWHISPER     = 'https://github.com/Purfview/whisper-standalone-win/releases/download/faster-whisper/Whisper-Faster_r189.1_linux.zip';
-  URL_FASTERWHISPERCUDA = 'https://github.com/Purfview/whisper-standalone-win/releases/download/libs/cuBLAS.and.cuDNN_CUDA11_linux_v2.zip';
+  URL_FASTERWHISPER     = 'https://github.com/URUWorks/additional-files/raw/main/whisper/fasterwhisper_linux.zip';
+  // our faster-whisper (CTranslate2 4.x) uses CUDA 12 + cuDNN 9 from the system
+  // when they are installed, Purfview's CUDA 11 libs don't work with it
+  //URL_FASTERWHISPERCUDA = '';
 
   FFMPEG_EXE           = 'ffmpeg';
   FFMPEG_Params        = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -y %output';
@@ -202,7 +204,7 @@ const
   YTDLP_EXE = 'yt-dlp_linux';
   {$ENDIF}
 
-  WHISPER_EXE      = 'main';
+  WHISPER_EXE      = 'whisper-cli'; // our zip has a copy named main for old settings
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
   WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
 

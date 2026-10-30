@@ -690,7 +690,6 @@ object frmMain: TfrmMain
             Top = 38
             Width = 130
             Value = 0
-            PopupMenu = popTimeEdit
             FPS = 25
             FrameStep = 1
             TimeStep = 1
@@ -700,6 +699,7 @@ object frmMain: TfrmMain
             Constraints.MinHeight = 26
             Constraints.MinWidth = 112
             Font.Style = [fsBold]
+            PopupMenu = popTimeEdit
             ParentFont = False
             TabOrder = 2
           end
@@ -738,7 +738,6 @@ object frmMain: TfrmMain
             Top = 72
             Width = 130
             Value = 0
-            PopupMenu = popTimeEdit
             FPS = 25
             FrameStep = 1
             TimeStep = 1
@@ -748,6 +747,7 @@ object frmMain: TfrmMain
             Constraints.MinHeight = 26
             Constraints.MinWidth = 112
             Font.Style = [fsBold]
+            PopupMenu = popTimeEdit
             ParentFont = False
             TabOrder = 4
           end
@@ -772,7 +772,6 @@ object frmMain: TfrmMain
             Top = 109
             Width = 130
             Value = 0
-            PopupMenu = popTimeEdit
             FPS = 25
             FrameStep = 1
             TimeStep = 1
@@ -782,6 +781,7 @@ object frmMain: TfrmMain
             Constraints.MinHeight = 26
             Constraints.MinWidth = 112
             Font.Style = [fsBold]
+            PopupMenu = popTimeEdit
             ParentFont = False
             TabOrder = 6
           end
@@ -806,7 +806,6 @@ object frmMain: TfrmMain
             Top = 142
             Width = 130
             Value = 0
-            PopupMenu = popTimeEdit
             FPS = 25
             FrameStep = 1
             TimeStep = 1
@@ -816,6 +815,7 @@ object frmMain: TfrmMain
             Constraints.MinHeight = 26
             Constraints.MinWidth = 112
             Font.Style = [fsBold]
+            PopupMenu = popTimeEdit
             ParentFont = False
             TabOrder = 8
           end

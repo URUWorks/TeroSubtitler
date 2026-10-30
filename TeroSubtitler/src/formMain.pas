@@ -1336,10 +1336,12 @@ type
     FThumbnailThread: TThread; // TGenerateThumbnails, see formMain_WAVE
     FURLLoadTimer: TTimer;     // elapsed time while yt-dlp resolves an url
     FURLLoadStart: QWord;
+    {$IFDEF LCLCocoa}
+    FVSTOldWindowProc: TWndMethod;
+    {$ENDIF}
     procedure URLLoadTimerTimer(Sender: TObject);
     procedure StopURLLoadTimer;
     {$IFDEF LCLCocoa}
-    FVSTOldWindowProc: TWndMethod;
     procedure VSTWindowProc(var TheMessage: TLMessage);
     {$ENDIF}
   public
