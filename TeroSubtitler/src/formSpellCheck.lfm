@@ -1,52 +1,53 @@
 object frmSpellCheck: TfrmSpellCheck
   Left = 256
-  Height = 342
+  Height = 428
   Top = 127
-  Width = 466
+  Width = 582
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Spell check'
-  ClientHeight = 342
-  ClientWidth = 466
+  ClientHeight = 428
+  ClientWidth = 582
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '5.0.1.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
   object lblDictionary: TLabel
-    Left = 8
-    Height = 15
-    Top = 12
-    Width = 54
+    Left = 10
+    Height = 20
+    Top = 15
+    Width = 68
     Caption = 'Dictionary'
     ParentColor = False
   end
   object cboDictionary: TComboBox
-    Left = 120
-    Height = 23
-    Top = 8
-    Width = 240
-    ItemHeight = 15
+    Left = 150
+    Height = 28
+    Top = 10
+    Width = 300
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 0
     TabStop = False
     OnChange = cboDictionaryChange
   end
   object lblNotFound: TLabel
-    Left = 8
-    Height = 15
-    Top = 80
-    Width = 55
+    Left = 10
+    Height = 20
+    Top = 100
+    Width = 68
     Caption = 'Not found'
     ParentColor = False
   end
   object mmoNotFound: TMemo
     AnchorSideBottom.Control = btnAdd
     AnchorSideBottom.Side = asrBottom
-    Left = 8
-    Height = 88
-    Top = 100
-    Width = 352
+    Left = 10
+    Height = 110
+    Top = 125
+    Width = 440
     Anchors = [akTop, akLeft, akBottom]
     HideSelection = False
     ReadOnly = True
@@ -54,28 +55,28 @@ object frmSpellCheck: TfrmSpellCheck
     TabStop = False
   end
   object lblSuggestions: TLabel
-    Left = 8
-    Height = 15
-    Top = 196
-    Width = 64
+    Left = 10
+    Height = 20
+    Top = 245
+    Width = 80
     Caption = 'Suggestions'
     ParentColor = False
   end
   object lstSuggestions: TListBox
-    Left = 8
-    Height = 88
-    Top = 216
-    Width = 352
+    Left = 10
+    Height = 110
+    Top = 270
+    Width = 440
     ExtendedSelect = False
     ItemHeight = 0
     TabOrder = 3
     OnSelectionChange = lstSuggestionsSelectionChange
   end
   object btnSkip: TButton
-    Left = 367
-    Height = 26
-    Top = 100
-    Width = 91
+    Left = 459
+    Height = 33
+    Top = 125
+    Width = 113
     Caption = 'Skip'
     TabOrder = 5
     OnClick = btnSkipClick
@@ -83,11 +84,11 @@ object frmSpellCheck: TfrmSpellCheck
   object btnSkipAll: TButton
     AnchorSideTop.Control = btnSkip
     AnchorSideTop.Side = asrBottom
-    Left = 367
-    Height = 26
-    Top = 131
-    Width = 91
-    BorderSpacing.Top = 5
+    Left = 459
+    Height = 32
+    Top = 164
+    Width = 113
+    BorderSpacing.Top = 6
     Caption = 'Skip all'
     TabOrder = 6
     OnClick = btnSkipAllClick
@@ -95,20 +96,20 @@ object frmSpellCheck: TfrmSpellCheck
   object btnAdd: TButton
     AnchorSideTop.Control = btnSkipAll
     AnchorSideTop.Side = asrBottom
-    Left = 367
-    Height = 26
-    Top = 162
-    Width = 91
-    BorderSpacing.Top = 5
+    Left = 459
+    Height = 33
+    Top = 202
+    Width = 113
+    BorderSpacing.Top = 6
     Caption = 'Add'
     TabOrder = 7
     OnClick = btnAddClick
   end
   object btnChange: TButton
-    Left = 367
-    Height = 26
-    Top = 216
-    Width = 91
+    Left = 459
+    Height = 32
+    Top = 270
+    Width = 113
     Caption = 'Change'
     TabOrder = 8
     OnClick = btnChangeClick
@@ -116,11 +117,11 @@ object frmSpellCheck: TfrmSpellCheck
   object btnChangeAll: TButton
     AnchorSideTop.Control = btnChange
     AnchorSideTop.Side = asrBottom
-    Left = 367
-    Height = 26
-    Top = 247
-    Width = 91
-    BorderSpacing.Top = 5
+    Left = 459
+    Height = 32
+    Top = 308
+    Width = 113
+    BorderSpacing.Top = 6
     Caption = 'Change all'
     TabOrder = 9
     OnClick = btnChangeAllClick
@@ -130,13 +131,13 @@ object frmSpellCheck: TfrmSpellCheck
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 367
-    Height = 26
-    Top = 308
-    Width = 91
+    Left = 459
+    Height = 33
+    Top = 385
+    Width = 113
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
+    BorderSpacing.Right = 10
+    BorderSpacing.Bottom = 10
     Cancel = True
     Caption = 'Close'
     TabOrder = 10
@@ -145,37 +146,37 @@ object frmSpellCheck: TfrmSpellCheck
   object edtCustom: TEdit
     AnchorSideTop.Control = lstSuggestions
     AnchorSideTop.Side = asrBottom
-    Left = 8
-    Height = 23
-    Top = 309
-    Width = 352
-    BorderSpacing.Top = 5
+    Left = 10
+    Height = 28
+    Top = 386
+    Width = 440
+    BorderSpacing.Top = 6
     TabOrder = 4
   end
   object lblSource: TLabel
-    Left = 8
-    Height = 15
-    Top = 44
-    Width = 36
+    Left = 10
+    Height = 20
+    Top = 55
+    Width = 45
     Caption = 'Source'
     ParentColor = False
   end
   object cboSource: TComboBox
-    Left = 120
-    Height = 23
-    Top = 40
-    Width = 240
-    ItemHeight = 15
+    Left = 150
+    Height = 28
+    Top = 50
+    Width = 300
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 1
     TabStop = False
     OnChange = cboSourceChange
   end
   object lblCurrentLine: TLabel
-    Left = 210
-    Height = 15
-    Top = 80
-    Width = 150
+    Left = 262
+    Height = 19
+    Top = 100
+    Width = 188
     Alignment = taRightJustify
     AutoSize = False
     ParentColor = False

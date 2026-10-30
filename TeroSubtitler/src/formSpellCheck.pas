@@ -116,8 +116,6 @@ begin
     cboSource.ItemIndex := 1
   else
     cboSource.ItemIndex := 0;
-  // the first check is done in FormShow, selecting text in the memo before
-  // the window exists could raise an exception on macOS
 end;
 
 // -----------------------------------------------------------------------------
