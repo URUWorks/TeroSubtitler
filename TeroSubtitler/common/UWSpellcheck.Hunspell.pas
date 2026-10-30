@@ -115,7 +115,17 @@ begin
       not Assigned(hunspell_spell) or not Assigned(hunspell_suggest) or
       not Assigned(hunspell_free_list) or not Assigned(hunspell_add) then
     begin
+      // an incompatible library: no handle and no pointers into the unloaded
+      // library (Ready was True and the next call jumped to an invalid address)
       FreeLibrary(FHandle);
+      FHandle := 0;
+      hunspell_create    := NIL;
+      hunspell_destroy   := NIL;
+      hunspell_spell     := NIL;
+      hunspell_suggest   := NIL;
+      hunspell_free_list := NIL;
+      hunspell_add       := NIL;
+      hunspell_get_dic_encoding := NIL;
       Result := False;
     end;
   end;
