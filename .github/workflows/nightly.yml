@@ -13,6 +13,14 @@ concurrency:
   group: nightly
   cancel-in-progress: true
 
+# Lazarus/FPC used by every build: change these to switch versions
+env:
+  LAZARUS_WIN64_URL: https://sourceforge.net/projects/lazarus-snapshots/files/Window%2064/2026-10-08%20Lazarus-5.0RC1%20with%20FPC-3.2.4RC2/lazarus-5.0RC1-fpc-3.2.4-rc2-win64.exe/download
+  LAZARUS_LINUX_URL: https://sourceforge.net/projects/lazarus/files/Lazarus%20Linux%20amd64%20DEB/Lazarus%205.0RC1
+  LAZARUS_LINUX_DEBS: fpc-laz_3.2.2-210709_amd64.deb fpc-src_3.2.2-210709_amd64.deb lazarus-project_5.0.0-0_amd64.deb
+  LAZARUS_SOURCE_TAG: lazarus_5_0_RC1
+  FPC_MACOS_URL: https://sourceforge.net/projects/lazarus/files/Lazarus%20macOS%20aarch64/Lazarus%205.0RC1/fpc-3.2.4rc2.intelarm64-macosx.dmg/download
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -83,9 +91,17 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          pwsh -File '.github/workflows/make.ps1'
+          $ErrorActionPreference = 'stop'
+          $exe = "$env:RUNNER_TEMP\lazarus-setup.exe"
+          curl.exe -fsSL --retry 3 -o $exe $env:LAZARUS_WIN64_URL
+          Start-Process -FilePath $exe -ArgumentList '/SP-','/VERYSILENT','/NORESTART','/SUPPRESSMSGBOXES' -Wait -NoNewWindow
+          $fpcbin = (Get-ChildItem 'C:\Lazarus\fpc\*\bin\x86_64-win64' -Directory | Select-Object -First 1).FullName
+          $env:PATH += ";C:\Lazarus;$fpcbin"
+          lazbuild --version
+          # Packages and internal dependencies, as in make.ps1
+          $env:INSTANTFPCOPTIONS = '-FuC:\Lazarus\components\lazutils'
+          instantfpc '.github/workflows/make.pas' build
           if ($LastExitCode -ne 0) { exit $LastExitCode }
-          $env:PATH += ';C:\Lazarus;C:\Lazarus\fpc\3.2.2\bin\x86_64-win64'
           lazbuild --build-all --build-mode=Release --no-write-project TeroSubtitler/src/tero.lpi
           if ($LastExitCode -ne 0) { exit $LastExitCode }
 
@@ -142,14 +158,13 @@ jobs:
           git submodule update --init --remote --recursive use/UW_BlurayPGSParser
           git submodule update --init --remote --recursive use/UW_MPVPlayer
 
-      # Official Lazarus 4.8 debs (same version as Windows and macOS)
+      # Official Lazarus debs (see LAZARUS_LINUX_* at the top)
       - name: Install Lazarus
         run: |
           set -euo pipefail
-          sf="https://sourceforge.net/projects/lazarus/files/Lazarus%20Linux%20amd64%20DEB/Lazarus%204.8"
           cd "$RUNNER_TEMP"
-          for deb in fpc-laz_3.2.2-210709_amd64.deb fpc-src_3.2.2-210709_amd64.deb lazarus-project_4.8.0-0_amd64.deb; do
-            curl -fsSL --retry 3 -o "$deb" "$sf/$deb/download"
+          for deb in $LAZARUS_LINUX_DEBS; do
+            curl -fsSL --retry 3 -o "$deb" "$LAZARUS_LINUX_URL/$deb/download"
           done
           sudo apt-get update -qq
           sudo apt-get install -y -qq ./fpc-laz_*.deb ./fpc-src_*.deb ./lazarus-project_*.deb \
@@ -159,7 +174,7 @@ jobs:
           echo "LAZDIR=$lazdir" >> "$GITHUB_ENV"
           lazbuild --version
 
-      # Qt bindings from Lazarus 4.8 (Ubuntu has no libqt6pas, and its libqt5pas is older)
+      # Qt bindings from the installed Lazarus (Ubuntu has no libqt6pas, and its libqt5pas is older)
       - name: Build Qt bindings
         if: startsWith(matrix.widgetset, 'qt')
         run: |
@@ -265,12 +280,20 @@ jobs:
           git submodule update --init --remote --recursive use/UW_BlurayPGSParser
           git submodule update --init --remote --recursive use/UW_MPVPlayer
 
-      # The Homebrew lazarus cask is disabled, so build lazbuild from source
+      # Official FPC package; the Homebrew lazarus cask is disabled, so build lazbuild from source
       - name: Install Lazarus
         run: |
-          brew install fpc
-          curl -fsSL -o "$RUNNER_TEMP/lazarus.tar.gz" \
-            "https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/lazarus_4_8/lazarus-lazarus_4_8.tar.gz"
+          set -euo pipefail
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/fpc.dmg" "$FPC_MACOS_URL"
+          mnt=$(hdiutil attach -nobrowse -readonly "$RUNNER_TEMP/fpc.dmg" | grep -o '/Volumes/.*' | tail -1)
+          pkg=$(find "$mnt" -maxdepth 2 -name '*.pkg' | head -1)
+          sudo installer -pkg "$pkg" -target /
+          hdiutil detach "$mnt"
+          export PATH="/usr/local/bin:$PATH"
+          echo "/usr/local/bin" >> "$GITHUB_PATH"
+          fpc -iV
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/lazarus.tar.gz" \
+            "https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/$LAZARUS_SOURCE_TAG/lazarus-$LAZARUS_SOURCE_TAG.tar.gz"
           mkdir -p "$HOME/lazarus"
           tar -xzf "$RUNNER_TEMP/lazarus.tar.gz" -C "$HOME/lazarus" --strip-components=1
           make -C "$HOME/lazarus" lazbuild
@@ -292,7 +315,7 @@ jobs:
               lazbuild --lazarusdir=$HOME/lazarus --add-package-link "$lpk"
           done
 
-      # FPC 3.2.2 Objective-C objects break the new Apple linker on arm64
+      # FPC 3.2.2 Objective-C objects break the new Apple linker on arm64 (may no longer be needed with 3.2.4)
       # ("malformed method list atom"), so link with ld_classic there
       - name: Use classic linker
         if: matrix.ldclassic
