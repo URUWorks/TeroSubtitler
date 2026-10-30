@@ -161,10 +161,14 @@ end;
 
 function TUWHunspell.ToDic(const AWord: String): String;
 begin
-  if FEncoding = '' then
-    Result := AWord
-  else
-    Result := ConvertEncoding(AWord, EncodingUTF8, FEncoding);
+  // typographic apostrophes (’ ‘ ʼ) as ', the dictionaries use it, and some
+  // hunspell versions crash with dictionaries converting them (ICONV ’ ')
+  Result := StringReplace(AWord, #$E2#$80#$99, '''', [rfReplaceAll]);
+  Result := StringReplace(Result, #$E2#$80#$98, '''', [rfReplaceAll]);
+  Result := StringReplace(Result, #$CA#$BC, '''', [rfReplaceAll]);
+
+  if FEncoding <> '' then
+    Result := ConvertEncoding(Result, EncodingUTF8, FEncoding);
 end;
 
 // -----------------------------------------------------------------------------
@@ -207,6 +211,7 @@ function TUWHunspell.Suggest(const AWord: String; var ASuggests: TStrings): Bool
 var
   l, i : Integer;
   s, w : PPChar;
+  d    : String;
 begin
   if (ASuggests = NIL) then ASuggests := TStringList.Create;
   ASuggests.Clear;
@@ -214,13 +219,19 @@ begin
   if (AWord <> '') and Assigned(FSpell) and Assigned(hunspell_suggest) then
   begin
     s := NIL;
-    l := hunspell_suggest(FSpell, s, PChar(ToDic(AWord)));
+    d := ToDic(AWord);
+    l := hunspell_suggest(FSpell, s, PChar(d));
     if (l > 0) and (s <> NIL) then
     begin
       w := s;
       for i := 1 to l do
       begin
-        if w^ <> NIL then ASuggests.Add(FromDic(StrPas(w^)));
+        if w^ <> NIL then
+          if Pos(#$E2#$80#$99, AWord) > 0 then
+            // as it was written, Kun’s -> Ken’s
+            ASuggests.Add(StringReplace(FromDic(StrPas(w^)), '''', #$E2#$80#$99, [rfReplaceAll]))
+          else
+            ASuggests.Add(FromDic(StrPas(w^)));
         Inc(w);
       end;
     end;
