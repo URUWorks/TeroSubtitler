@@ -24,11 +24,13 @@
 - fixed: Translation Memory problem #279
 - fixed: [Windows] Taskbar icon only shows on main display, not on secondary displays #212
 - fixed: [macOS] The default system commands are not translated #136
+- fixed: Fix Subtitles: Brackets #96
 - fixed: Playback head and visual don't always update when skipping frames #48
 - fixed: Subtitle size doesn't increase/decrease when adjusting dimensions of preview window if mpv doesn't handle subtitles #42
 - fixed: Top menu doesn't flash if I perform shortcuts #38
 - fixed: Invalid tags not detected #30
 - fixed: Shortcuts disabled when saving or exporting #11
+- fixed: Transform straight inverted commas to curly (and vice versa) #8
 - fixed: [macOS] Directory in title window leads to application instead of file #4
 - fixed: [macOS] Extension not automatically added to filename during save or export #3
 - fixed: [macOS] Application icon is slightly blurry #2
