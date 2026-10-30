@@ -1787,6 +1787,10 @@ msgctxt "tfrmconvertcase.btnclose.caption"
 msgid "Close"
 msgstr "Stäng"
 
+#: tfrmconvertcase.btnnames.caption
+msgid "Names..."
+msgstr ""
+
 #: tfrmconvertcase.caption
 msgid "Convert case"
 msgstr "Ändra skiftläge"
@@ -1824,6 +1828,10 @@ msgstr "små bokstäver"
 #: tfrmconvertcase.rdosentencetype.caption
 msgid "Sentence type"
 msgstr "Meningsformat"
+
+#: tfrmconvertcase.rdosmartcase.caption
+msgid "Smart (all caps to normal)"
+msgstr ""
 
 #: tfrmconvertcase.rdotitletype.caption
 msgid "Title Type"

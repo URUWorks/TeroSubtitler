@@ -1749,6 +1749,10 @@ msgctxt "tfrmconvertcase.btnclose.caption"
 msgid "Close"
 msgstr "Kapat"
 
+#: tfrmconvertcase.btnnames.caption
+msgid "Names..."
+msgstr ""
+
 #: tfrmconvertcase.caption
 msgid "Convert case"
 msgstr "Harf durumunu değiştir"
@@ -1786,6 +1790,10 @@ msgstr "küçük harf"
 #: tfrmconvertcase.rdosentencetype.caption
 msgid "Sentence type"
 msgstr "Cümle düzeni"
+
+#: tfrmconvertcase.rdosmartcase.caption
+msgid "Smart (all caps to normal)"
+msgstr ""
 
 #: tfrmconvertcase.rdotitletype.caption
 msgid "Title Type"

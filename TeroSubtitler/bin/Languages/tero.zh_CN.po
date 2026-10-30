@@ -1747,6 +1747,10 @@ msgctxt "tfrmconvertcase.btnclose.caption"
 msgid "Close"
 msgstr "关闭"
 
+#: tfrmconvertcase.btnnames.caption
+msgid "Names..."
+msgstr ""
+
 #: tfrmconvertcase.caption
 msgid "Convert case"
 msgstr "转换器"
@@ -1782,6 +1786,10 @@ msgstr "小写"
 #: tfrmconvertcase.rdosentencetype.caption
 msgid "Sentence type"
 msgstr "句型"
+
+#: tfrmconvertcase.rdosmartcase.caption
+msgid "Smart (all caps to normal)"
+msgstr ""
 
 #: tfrmconvertcase.rdotitletype.caption
 msgid "Title Type"

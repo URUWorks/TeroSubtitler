@@ -1769,6 +1769,10 @@ msgctxt "tfrmconvertcase.btnclose.caption"
 msgid "Close"
 msgstr "Закрыть"
 
+#: tfrmconvertcase.btnnames.caption
+msgid "Names..."
+msgstr ""
+
 #: tfrmconvertcase.caption
 msgid "Convert case"
 msgstr "Преобразовать регистр"
@@ -1806,6 +1810,10 @@ msgstr "нижний регистр"
 #: tfrmconvertcase.rdosentencetype.caption
 msgid "Sentence type"
 msgstr "Первое слово с прописной буквы"
+
+#: tfrmconvertcase.rdosmartcase.caption
+msgid "Smart (all caps to normal)"
+msgstr ""
 
 #: tfrmconvertcase.rdotitletype.caption
 msgid "Title Type"

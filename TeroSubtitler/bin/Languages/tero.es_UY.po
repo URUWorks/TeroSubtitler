@@ -1747,6 +1747,10 @@ msgctxt "tfrmconvertcase.btnclose.caption"
 msgid "Close"
 msgstr "Cerrar"
 
+#: tfrmconvertcase.btnnames.caption
+msgid "Names..."
+msgstr "Nombres..."
+
 #: tfrmconvertcase.caption
 msgid "Convert case"
 msgstr "Convertir mayúsculas/minúsculas"
@@ -1782,6 +1786,10 @@ msgstr "minúsculas"
 #: tfrmconvertcase.rdosentencetype.caption
 msgid "Sentence type"
 msgstr "Tipo oración"
+
+#: tfrmconvertcase.rdosmartcase.caption
+msgid "Smart (all caps to normal)"
+msgstr "Smart (de mayúsculas a minúsculas)"
 
 #: tfrmconvertcase.rdotitletype.caption
 msgid "Title Type"
