@@ -44,7 +44,8 @@ type
 
 implementation
 
-uses strUtils, UWSystem.StrUtils, UWSystem.SysUtils, UWSubtitleAPI.Tags;
+uses strUtils, UWSystem.StrUtils, UWSystem.SysUtils, UWSubtitleAPI.Tags,
+  UWSubtitleAPI.ExtraInfo;
 
 const
   SSA_EventFormat = 'Format: Layer, Start, End, Style, Actor, MarginL, MarginR, MarginV, Effect, Text';
@@ -121,40 +122,110 @@ end;
 
 function TUWAdvancedSubstationAlpha.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
 var
-  i, a        : Integer;
+  i, a, e     : Integer;
   InitialTime : Integer;
   FinalTime   : Integer;
-  Text, Actor : String;
+  Fields      : array[0..8] of String; // layer, start, end, style, actor, marginl, marginr, marginv, effect
+  Line, Text  : String;
+  Header,
+  Footer      : String;
+  InEvents    : Boolean;
+  SeenEvents  : Boolean;
+  UseExtra    : Boolean;
+  ExtraInfo   : PSSA_ExtraInfo;
 begin
   Result := False;
+  Header := '';
+  Footer := '';
+  InEvents := False;
+  SeenEvents := False;
+  // when appending to a subtitle with other extra info, it can't be mixed
+  UseExtra := Subtitles.ExtraInfoType in [eiNone, eiSSA];
   try
     i := 0;
     while i < SubtitleFile.Count do
     begin
-      if Contains('Dialogue:', SubtitleFile[i]) then
+      Line := SubtitleFile[i];
+      // the other sections are kept as they are (styles, script info, fonts...)
+      if Line.Trim.StartsWith('[') then
       begin
-        a := Pos(',', SubtitleFile[i]);
-        InitialTime := StringToTime(Trim(Copy(SubtitleFile[i], a + 1, PosEx(',', SubtitleFile[i], a + 1) - (a + 1))));
-        a := PosEx(',', SubtitleFile[i], a + 1);
-        FinalTime   := StringToTime(Trim(Copy(SubtitleFile[i], a + 1, PosEx(',', SubtitleFile[i], a + 1) - (a + 1))));
+        InEvents := SameText(Line.Trim, '[Events]');
+        if InEvents then SeenEvents := True;
+      end;
+
+      if not InEvents then
+      begin
+        if not SeenEvents then
+          Header := Header + Line + LineEnding
+        else
+          Footer := Footer + Line + LineEnding;
+      end
+      else if Contains('Dialogue:', Line) then
+      begin
+        // the first 9 fields, the text is the rest (it can have commas)
+        Text := Copy(Line, Pos(':', Line) + 1, Length(Line));
+        for a := 0 to High(Fields) do
+        begin
+          e := Pos(',', Text);
+          if e = 0 then
+          begin
+            Fields[a] := '';
+            Continue;
+          end;
+          Fields[a] := Trim(Copy(Text, 1, e - 1));
+          Delete(Text, 1, e);
+        end;
+
+        InitialTime := StringToTime(Fields[1]);
+        FinalTime   := StringToTime(Fields[2]);
 
         if (InitialTime >= 0) and (FinalTime > 0) then
         begin
-          Text := SubtitleFile[i];
-          for a := 1 to 4 do Delete(Text, 1, Pos(',', Text));
-          Actor := Copy(Text, 1, Pos(',', Text)-1);
-          for a := 1 to 5 do Delete(Text, 1, Pos(',', Text));
-
           Text := ReplaceString(Trim(Text), '\N', LineEnding, True, True);
 
-          a := Subtitles.Add(InitialTime, FinalTime, Text, '', NIL);
-          Subtitles.ItemPointer[a]^.Actor := Actor;
+          // layer, margins and effect of the file
+          ExtraInfo := NIL;
+          if UseExtra then
+          begin
+            New(ExtraInfo);
+            FillChar(ExtraInfo^, SizeOf(TSSA_ExtraInfo), 0);
+            with ExtraInfo^ do
+            begin
+              EventType := etDialogue;
+              Marked    := False;
+              Style     := Fields[3];
+              Name      := Fields[4];
+              Layer     := StrToIntDef(Fields[0], 0);
+              MarginL   := StrToIntDef(Fields[5], 0);
+              MarginR   := StrToIntDef(Fields[6], 0);
+              MarginV   := StrToIntDef(Fields[7], 0);
+              Effect    := Fields[8];
+            end;
+          end;
+
+          a := Subtitles.Add(InitialTime, FinalTime, Text, '', ExtraInfo);
+          with Subtitles.ItemPointer[a]^ do
+          begin
+            Actor := Fields[4];
+            Style := Fields[3];
+          end;
         end;
       end;
       Inc(i);
     end;
   finally
-    if Subtitles.Count > 0 then Result := True;
+    if Subtitles.Count > 0 then
+    begin
+      Result := True;
+      if UseExtra then
+        Subtitles.ExtraInfoType := eiSSA;
+      // only with styles, otherwise ours are used as before
+      if (Subtitles.ASSHeader = '') and (Pos('styles]', LowerCase(Header)) > 0) then
+      begin
+        Subtitles.ASSHeader := TrimRight(Header);
+        Subtitles.ASSFooter := TrimRight(Footer);
+      end;
+    end;
   end;
 end;
 
@@ -164,30 +235,45 @@ function TUWAdvancedSubstationAlpha.SaveSubtitle(const FileName: String; const F
 var
   i : Integer;
   Text, s : String;
+  sLayer, sMarginL, sMarginR, sMarginV, sEffect : String;
 begin
   Result  := False;
 
   StringList.Clear;
 
-  StringList.Add('[Script Info]');
-  StringList.Add('ScriptType: v4.00+');
-  // temporary track for mpv (Tag = 1): without PlayRes libass uses 384x288,
-  // so the style font size would be huge if mpv doesn't override it. 720 is
-  // the same scale mpv uses for sub-font-size.
-  if Subtitles.Tag = 1 then
+  // the original sections of the file (script info and styles)
+  if Subtitles.ASSHeader <> '' then
   begin
-    StringList.Add('PlayResX: 1280');
-    StringList.Add('PlayResY: 720');
-  end;
+    for s in Subtitles.ASSHeader.Split([LineEnding]) do
+    begin
+      // the loaded lines have no blank ones, a blank line between sections
+      if s.StartsWith('[') and (StringList.Count > 0) then
+        StringList.Add('');
+      StringList.Add(s);
+    end;
+  end
+  else
+  begin
+    StringList.Add('[Script Info]');
+    StringList.Add('ScriptType: v4.00+');
+    // temporary track for mpv (Tag = 1): without PlayRes libass uses 384x288,
+    // so the style font size would be huge if mpv doesn't override it. 720 is
+    // the same scale mpv uses for sub-font-size.
+    if Subtitles.Tag = 1 then
+    begin
+      StringList.Add('PlayResX: 1280');
+      StringList.Add('PlayResY: 720');
+    end;
 
-//  StringList.Add('Collisions: ' + ASSAttributes.Collisions);
-//  StringList.Add('PlayResX: ' + IntToStr(ASSAttributes.PlayResX));
-//  StringList.Add('PlayResY: ' + IntToStr(ASSAttributes.PlayResY));
-//  StringList.Add('Timer: ' + ASSAttributes.Timer);
-  StringList.Add('');
-  StringList.Add('[V4+ Styles]');
-  StringList.Add(SSA_StyleFormat);
-  StringList.Add('Style: ' + Subtitles.FormatProperties^.SSA.DefaultStyleSettings);
+  //  StringList.Add('Collisions: ' + ASSAttributes.Collisions);
+  //  StringList.Add('PlayResX: ' + IntToStr(ASSAttributes.PlayResX));
+  //  StringList.Add('PlayResY: ' + IntToStr(ASSAttributes.PlayResY));
+  //  StringList.Add('Timer: ' + ASSAttributes.Timer);
+    StringList.Add('');
+    StringList.Add('[V4+ Styles]');
+    StringList.Add(SSA_StyleFormat);
+    StringList.Add('Style: ' + Subtitles.FormatProperties^.SSA.DefaultStyleSettings);
+  end;
   StringList.Add('');
   StringList.Add('[Events]');
   StringList.Add(SSA_EventFormat);
@@ -238,7 +324,37 @@ begin
     if not s.IsEmpty then
       Text := s + Text + '{\an0}';
 
-    StringList.Add('Dialogue: 0,' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.InitialTime[i], Subtitles.InitialTime[i] - 1), 'h:mm:ss.zz') + ',' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.FinalTime[i], Subtitles.FinalTime[i] - 1), 'h:mm:ss.zz') + ',Default,' + Subtitles[i].Actor + ',0000,0000,0000,,' + Text);
+    // layer, margins and effect of the file
+    if (Subtitles.ExtraInfoType = eiSSA) and (Subtitles.ExtraInfo[i] <> NIL) then
+      with PSSA_ExtraInfo(Subtitles.ExtraInfo[i])^ do
+      begin
+        sLayer   := IntToStr(Layer);
+        sMarginL := SysUtils.Format('%.4d', [MarginL]);
+        sMarginR := SysUtils.Format('%.4d', [MarginR]);
+        sMarginV := SysUtils.Format('%.4d', [MarginV]);
+        sEffect  := Effect;
+      end
+    else
+    begin
+      sLayer   := '0';
+      sMarginL := '0000';
+      sMarginR := '0000';
+      sMarginV := '0000';
+      sEffect  := '';
+    end;
+
+    StringList.Add('Dialogue: ' + sLayer + ',' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.InitialTime[i], Subtitles.InitialTime[i] - 1), 'h:mm:ss.zz') + ',' + TimeToString(iff(Subtitles.Tag = 0, Subtitles.FinalTime[i], Subtitles.FinalTime[i] - 1), 'h:mm:ss.zz') + ',' +
+      iff(Subtitles[i].Style <> '', Subtitles[i].Style, 'Default') + ',' + Subtitles[i].Actor + ',' + sMarginL + ',' + sMarginR + ',' + sMarginV + ',' + sEffect + ',' + Text);
+  end;
+
+  if Subtitles.ASSFooter <> '' then
+  begin
+    for s in Subtitles.ASSFooter.Split([LineEnding]) do
+    begin
+      if s.StartsWith('[') and (StringList[StringList.Count-1] <> '') then
+        StringList.Add('');
+      StringList.Add(s);
+    end;
   end;
 
   try
