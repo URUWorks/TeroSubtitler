@@ -122,7 +122,7 @@ jobs:
           Compress-Archive -Path $out -DestinationPath "dist/${{ steps.ver.outputs.name }}.zip"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.name }}
           path: |
@@ -240,7 +240,7 @@ jobs:
           tar -czf "dist/$NAME.tar.gz" -C dist "$NAME"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: linux-${{ matrix.widgetset }}
           path: dist/*.tar.gz
@@ -347,7 +347,7 @@ jobs:
           lipo -archs "dist/${{ matrix.bin }}"
 
       - name: Upload binary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.bin }}
           path: dist/${{ matrix.bin }}
@@ -405,7 +405,7 @@ jobs:
           make_app binaries/tero-intel frameworks-legacy macos-legacy-intel
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: macos
           path: dist/*.zip
