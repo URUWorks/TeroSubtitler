@@ -1,4 +1,4 @@
-1.0.2.4 (xx.10.2026)
+1.0.2.4 (xx.11.2026)
 - fixed: Curly brackets and enclosed text don't appear in list, timeline, or video #485
 - fixed: [Windows] Unresponsive UI / interface freezes during continuous editing #482
 - fixed: Audio-to-text stops after 1 hour #473
@@ -20,6 +20,7 @@
 - fixed: Multi-select and multi-check in Fix Subtitles #333
 - fixed: [macOS] Turn off beep when moving between entries #331
 - fixed: Misguiding file extension (apparently creating .ASS, but internal is .SRT) #324
+- fixed: Styles in ASS is fully unfunctional #322
 - fixed: Option + Left/Right arrow doesn't go to the left/right word in text field #310
 - fixed: Spacebar shortcut conflict #308
 - fixed: Applying Netflix profile then another doesn't flag all shot changes #289
@@ -123,6 +124,7 @@
 - improved: Language names are now shown in their own language
 - improved: Media loaded from a url shows its title instead of the url
 - added: Auto-guess FPS of non-SMPTE subtitle file #414
+- added: [SubtitleAPI] Support of InterOP (TI) and SMPTE 428-7-2007 XML Subtitles #352
 - added: Selective pasting #332
 - added: Sub-optimal presentation of auto-transcribed subtitles #256
 - added: Synchronize texts with the audio (Audio to text/Synchronize the current texts) #41
