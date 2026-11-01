@@ -786,7 +786,10 @@ begin
 
     SetSubtitleTime(idx, t1, TAG_CONTROL_FINALTIME, False, False);
     Item.InitialTime := t2;
-    InsertSubtitle(idx + 1, Item);
+    Item.Style       := Subtitles[Idx].Style;
+    Item.Actor       := Subtitles[Idx].Actor;
+    // the new part keeps the extra info (layer, margins...) of the original
+    InsertSubtitle(idx + 1, Item, True, True, Subtitles.CopyExtraInfo(Idx));
   end;
 end;
 

@@ -737,7 +737,11 @@ begin
       for i := 0 to Subs.Count-1 do
       begin
         x := Subtitles.FindInsertPos(Subs[i]);
-        InsertSubtitle(x, Subs[i], False, False);
+        // the extra info is imported only when both are of the same type
+        if Subs.ExtraInfoType = Subtitles.ExtraInfoType then
+          InsertSubtitle(x, Subs[i], False, False, Subs.CopyExtraInfo(i))
+        else
+          InsertSubtitle(x, Subs[i], False, False);
       end;
       UndoInstance.IncrementUndoGroup;
       UpdateValues(True);

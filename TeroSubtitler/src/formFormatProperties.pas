@@ -85,6 +85,14 @@ type
     lblASFontSize: TLabel;
     lblEBUNDC: TLabel;
     lyoDVDSubtitle: TUWLayout;
+    lyoDCinema: TUWLayout;
+    lblDCTitle, lblDCReel, lblDCLanguage, lblDCFont, lblDCFontSize, lblDCEffect,
+    lblDCVPosition, lblDCLineSpacing, lblDCFadeUp: TLabel;
+    edtDCTitle, edtDCLanguage, edtDCFont: TEdit;
+    spnDCReel, spnDCFontSize, spnDCVPosition, spnDCLineSpacing, spnDCFadeUp,
+    spnDCFadeDown: TSpinEdit;
+    cboDCEffect: TComboBox;
+    cbnDCFontColor, cbnDCEffectColor: TColorButton;
     lyoEBU: TUWLayout;
     lyoCavena890: TUWLayout;
     lyoWebVTT: TUWLayout;
@@ -129,13 +137,32 @@ implementation
 
 uses
   procTypes, LazUTF8, procWorkspace, UWSubtitleAPI.Formats, UWSystem.TimeUtils,
-  UWTranslateAPI.Google, Cavena890.Types, LCLTranslator, UWSystem.Globalization;
+  UWTranslateAPI.Google, Cavena890.Types, LCLTranslator, UWSystem.Globalization,
+  Math;
 
 {$R *.lfm}
 
 // -----------------------------------------------------------------------------
 
 { Helpers }
+
+// -----------------------------------------------------------------------------
+
+// D-Cinema colors are AARRGGBB, TColor is BGR
+function DCColorToColor(const AColor: Cardinal): TColor;
+begin
+  Result := RGBToColor((AColor shr 16) and $FF, (AColor shr 8) and $FF, AColor and $FF);
+end;
+
+// -----------------------------------------------------------------------------
+
+function ColorToDCColor(const AColor: TColor): Cardinal;
+var
+  C: TColor;
+begin
+  C := ColorToRGB(AColor);
+  Result := $FF000000 or (Cardinal(Red(C)) shl 16) or (Cardinal(Green(C)) shl 8) or Cardinal(Blue(C));
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -198,6 +225,31 @@ begin
       edtCavenaComment.Text := Comments;
       cboCavenaLanguage.ItemIndex := GetCavena890LangIndex(PrimaryLanguage);
       tedCavenaTCStart.Value := StringToTime(StartTime, False, GetFPS);
+    end;
+    // D-Cinema (Interop and SMPTE)
+    with Subtitles.FormatProperties^.DCinema do
+    begin
+      edtDCTitle.Text := Title;
+      spnDCReel.MinValue := 1;
+      spnDCReel.Value := ReelNumber;
+      edtDCLanguage.Text := Language;
+      edtDCFont.Text := FontURI;
+      spnDCFontSize.MinValue := 1;
+      spnDCFontSize.Value := FontSize;
+      cbnDCFontColor.ButtonColor := DCColorToColor(FontColor);
+      with cboDCEffect.Items do
+      begin
+        Add('none');
+        Add('border');
+        Add('shadow');
+      end;
+      cboDCEffect.ItemIndex := Effect;
+      cbnDCEffectColor.ButtonColor := DCColorToColor(EffectColor);
+      spnDCVPosition.Value := VPosition;
+      spnDCLineSpacing.MinValue := 1;
+      spnDCLineSpacing.Value := LineSpacing;
+      spnDCFadeUp.Value := FadeUpTime;
+      spnDCFadeDown.Value := FadeDownTime;
     end;
     // DVD Subtitle
     with Subtitles.FormatProperties^.DVDSubtitle do
@@ -338,6 +390,22 @@ begin
     PrimaryLanguage := LanguageId[cboCavenaLanguage.ItemIndex].Hex;
     StartTime := TimeToString(tedCavenaTCStart.Value, 'hh:mm:ss:ff', GetFPS);
   end;
+  // D-Cinema (Interop and SMPTE)
+  with Subtitles.FormatProperties^.DCinema do
+  begin
+    Title := edtDCTitle.Text;
+    ReelNumber := spnDCReel.Value;
+    Language := edtDCLanguage.Text;
+    FontURI := edtDCFont.Text;
+    FontSize := spnDCFontSize.Value;
+    FontColor := ColorToDCColor(cbnDCFontColor.ButtonColor);
+    Effect := Max(0, cboDCEffect.ItemIndex);
+    EffectColor := ColorToDCColor(cbnDCEffectColor.ButtonColor);
+    VPosition := spnDCVPosition.Value;
+    LineSpacing := spnDCLineSpacing.Value;
+    FadeUpTime := spnDCFadeUp.Value;
+    FadeDownTime := spnDCFadeDown.Value;
+  end;
   // DVD Subtitle
   with Subtitles.FormatProperties^.DVDSubtitle do
   begin
@@ -392,6 +460,7 @@ begin
     Clear;
     Add(FormatToName(sfAdvancedSubtitles));
     Add(FormatToName(sfCavena890));
+    Add('D-Cinema (Interop, SMPTE)');
     Add(FormatToName(sfDVDSubtitle));
     Add(FormatToName(sfEBU));
     Add('Timed Text (iTT, TTML, Netflix)');
@@ -447,10 +516,11 @@ begin
   case cboFormats.ItemIndex of
     0: SetLayoutPage(lyoAdvancedSubtitles);
     1: SetLayoutPage(lyoCavena890);
-    2: SetLayoutPage(lyoDVDSubtitle);
-    3: SetLayoutPage(lyoEBU);
-    4: SetLayoutPage(lyoTimedText);
-    5: SetLayoutPage(lyoWebVTT);
+    2: SetLayoutPage(lyoDCinema);
+    3: SetLayoutPage(lyoDVDSubtitle);
+    4: SetLayoutPage(lyoEBU);
+    5: SetLayoutPage(lyoTimedText);
+    6: SetLayoutPage(lyoWebVTT);
   end;
 end;
 

@@ -14,7 +14,7 @@ uses
   UWSubtitleAPI.TMX, ABCiView, AdobeEncoreDVD, AdvancedSubstationAlpha, 
   AdvancedSubtitles, AQTitle, AvidCaption, Captions32, CaptionsInc, Cavena890, 
   Cavena890.Types, Cheetah, CheetahCaption, CheetahCaption.Types, CPC600, CSV, 
-  DKS, DRTIC, DVDJunior, DVDSubtitle, DVDSubtitleSystem, EBU, EBU.Types, 
+  DCinema.Utils, DCinemaInterop, DCinemaSMPTE, DKS, DRTIC, DVDJunior, DVDSubtitle, DVDSubtitleSystem, EBU, EBU.Types, 
   FABSubtitler, GPACTTXT, IAuthor, InscriberCG, ITunesTimedText, JACOSub, 
   KaraokeLyricsLRC, KaraokeLyricsVKT, MacDVDStudioPro, MacSUB, MicroDVD, 
   MPlayer, MPlayer2, NetflixTimedText, SoftNI, Spreadsheet, 

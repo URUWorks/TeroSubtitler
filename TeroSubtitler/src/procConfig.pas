@@ -571,7 +571,18 @@ begin
         FPS.InputFPS := DefFPSList[GetValue('InputFPS', 0)]; //StrToSingle(ReplaceString(GetValue('InputFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
         FPS.OutputFPS := DefFPSList[GetValue('OutputFPS', 0)]; //StrToSingle(ReplaceString(GetValue('OutputFPS', SingleToStr(FPS.DefFPS, FormatSettings)), '.', FormatSettings.DecimalSeparator), 25, FormatSettings);
         DefEncoding  := GetValue('DefEncoding', DefEncoding);
-        DefFormat    := TUWSubtitleFormats(GetValue('DefFormat', Integer(DefFormat)));
+        // by name, the index changes when a format is added (alphabetical order)
+        DefFormat    := NameToFormat(GetValue('DefFormatName', ''), True);
+        if DefFormat = sfInvalid then
+        begin
+          // settings of older versions, before D-Cinema Interop and SMPTE
+          i := GetValue('DefFormat', Integer(sfSubRip));
+          if i >= Integer(sfDCinemaInterop) then Inc(i, 2);
+          if (i > Integer(sfInvalid)) and (i <= Integer(High(TUWSubtitleFormats))) then
+            DefFormat := TUWSubtitleFormats(i)
+          else
+            DefFormat := sfSubRip;
+        end;
         SetVideoPreview(GetValue('VideoPreview', False));
         SetWaveformPreview(GetValue('AudioPreview', False));
         SetDockVideoWindow(GetValue('DockVideoControls', True));
@@ -891,6 +902,25 @@ begin
       end;
       CloseKey;
       //
+      OpenKey('DCinema');
+      with Subtitles.FormatProperties^.DCinema do
+      begin
+        Title        := GetValue('Title', Title);
+        ReelNumber   := GetValue('ReelNumber', ReelNumber);
+        Language     := GetValue('Language', Language);
+        FontId       := GetValue('FontId', FontId);
+        FontURI      := GetValue('FontURI', FontURI);
+        FontSize     := GetValue('FontSize', FontSize);
+        FontColor    := Cardinal(GetValue('FontColor', Integer(FontColor)));
+        Effect       := GetValue('Effect', Effect);
+        EffectColor  := Cardinal(GetValue('EffectColor', Integer(EffectColor)));
+        VPosition    := GetValue('VPosition', VPosition);
+        LineSpacing  := GetValue('LineSpacing', LineSpacing);
+        FadeUpTime   := GetValue('FadeUpTime', FadeUpTime);
+        FadeDownTime := GetValue('FadeDownTime', FadeDownTime);
+      end;
+      CloseKey;
+      //
       OpenKey(FormatToName(sfDVDSubtitle, True));
       with Subtitles.FormatProperties^.DVDSubtitle do
       begin
@@ -1073,6 +1103,7 @@ begin
         SetValue('OutputFPS', FPSInfoToIndex(FPS.OutputFPS)); //SingleToStr(FPS.OutputFPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.'));
         SetValue('DefEncoding', DefEncoding);
         SetValue('DefFormat', Integer(DefFormat));
+        SetValue('DefFormatName', FormatToName(DefFormat, True));
         SetValue('VideoPreview', actVideoPreview.Checked);
         SetValue('AudioPreview', actTimeline.Checked);
         SetValue('DockVideoControls', actUnDockVideo.Checked);
@@ -1296,6 +1327,25 @@ begin
         SetValue('Producer', Producer);
         SetValue('EpisodeTitle', EpisodeTitle);
         SetValue('PrimaryLanguage', PrimaryLanguage);
+      end;
+      CloseKey;
+      //
+      OpenKey('DCinema');
+      with Subtitles.FormatProperties^.DCinema do
+      begin
+        SetValue('Title', Title);
+        SetValue('ReelNumber', ReelNumber);
+        SetValue('Language', Language);
+        SetValue('FontId', FontId);
+        SetValue('FontURI', FontURI);
+        SetValue('FontSize', FontSize);
+        SetValue('FontColor', Integer(FontColor));
+        SetValue('Effect', Effect);
+        SetValue('EffectColor', Integer(EffectColor));
+        SetValue('VPosition', VPosition);
+        SetValue('LineSpacing', LineSpacing);
+        SetValue('FadeUpTime', FadeUpTime);
+        SetValue('FadeDownTime', FadeDownTime);
       end;
       CloseKey;
       //

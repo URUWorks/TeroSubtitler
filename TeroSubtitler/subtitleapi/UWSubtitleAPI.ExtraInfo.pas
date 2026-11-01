@@ -124,6 +124,7 @@ type
     MarginR   : Integer;       // Right margin (4 numbers)             (Default = "0000")
     MarginV   : Integer;       // Vertical margin (4 numbers)          (Default = "0000")
     Effect    : AnsiString;    // Effect                               (Default = "!Effect")
+    Layer     : Integer;       // Layer (ASS)                          (Default = "0")
   end;
 
   { SubRip }
@@ -164,12 +165,32 @@ type
     Language : AnsiString; // xml:lang (BCP 47: en, en-US, es-419, pt-BR...)
   end;
 
+  { D-Cinema (Interop and SMPTE) }
+
+  PDCinema_Info = ^TDCinema_Info;
+  TDCinema_Info = record
+    Title        : AnsiString; // MovieTitle / ContentTitleText
+    ReelNumber   : Integer;
+    Language     : AnsiString; // Interop: free text (English), SMPTE: xs:language (en)
+    FontId       : AnsiString;
+    FontURI      : AnsiString; // Interop: font file, SMPTE: urn:uuid of the font (new one if empty)
+    FontSize     : Integer;
+    FontColor    : Cardinal;   // AARRGGBB
+    Effect       : Byte;       // 0 = none, 1 = border, 2 = shadow
+    EffectColor  : Cardinal;   // AARRGGBB
+    VPosition    : Integer;    // % from the bottom (or top) of the screen
+    LineSpacing  : Integer;    // % between lines
+    FadeUpTime   : Integer;    // ms
+    FadeDownTime : Integer;    // ms
+  end;
+
   { Format properties }
 
   PFormatProperties = ^TFormatProperties;
   TFormatProperties = record
     AdvancedSubtitles : TXAS_Info;
     Cavena890         : TCavena890_Info;
+    DCinema           : TDCinema_Info;
     DVDSubtitle       : TDVDSubtitle_Info;
     EBU               : TEBU_Info;
     SSA               : TSSA_Info;
@@ -219,6 +240,23 @@ begin
       //AnsiStringToAnsiChar(Producer, '');
       //AnsiStringToAnsiChar(EpisodeTitle, '');
       PrimaryLanguage := LangIdEnglish;
+    end;
+
+    with DCinema do
+    begin
+      Title        := 'Untitled';
+      ReelNumber   := 1;
+      Language     := 'en';
+      FontId       := 'Font1';
+      FontURI      := '';
+      FontSize     := 42;
+      FontColor    := $FFFFFFFF;
+      Effect       := 1;
+      EffectColor  := $FF000000;
+      VPosition    := 8;
+      LineSpacing  := 7;
+      FadeUpTime   := 0;
+      FadeDownTime := 0;
     end;
 
     with DVDSubtitle do

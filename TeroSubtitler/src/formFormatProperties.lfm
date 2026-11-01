@@ -663,4 +663,194 @@ object frmFormatProperties: TfrmFormatProperties
       ParentFont = False
     end
   end
+  object lyoDCinema: TUWLayout
+    Left = 8
+    Height = 280
+    Top = 40
+    Width = 352
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ClientHeight = 280
+    ClientWidth = 352
+    TabOrder = 9
+    Visible = False
+    object lblDCTitle: TLabel
+      Left = 0
+      Height = 15
+      Top = 4
+      Width = 140
+      AutoSize = False
+      Caption = 'Title'
+      ParentColor = False
+    end
+    object edtDCTitle: TEdit
+      Left = 152
+      Height = 23
+      Top = 0
+      Width = 190
+      TabOrder = 0
+    end
+    object lblDCReel: TLabel
+      Left = 0
+      Height = 15
+      Top = 34
+      Width = 140
+      AutoSize = False
+      Caption = 'Reel number'
+      ParentColor = False
+    end
+    object spnDCReel: TSpinEdit
+      Left = 152
+      Height = 23
+      Top = 30
+      Width = 190
+      MaxValue = 999
+      TabOrder = 1
+    end
+    object lblDCLanguage: TLabel
+      Left = 0
+      Height = 15
+      Top = 64
+      Width = 140
+      AutoSize = False
+      Caption = 'Language'
+      ParentColor = False
+    end
+    object edtDCLanguage: TEdit
+      Left = 152
+      Height = 23
+      Top = 60
+      Width = 190
+      TabOrder = 2
+    end
+    object lblDCFont: TLabel
+      Left = 0
+      Height = 15
+      Top = 94
+      Width = 140
+      AutoSize = False
+      Caption = 'Font (file or urn:uuid)'
+      ParentColor = False
+    end
+    object edtDCFont: TEdit
+      Left = 152
+      Height = 23
+      Top = 90
+      Width = 190
+      TabOrder = 3
+    end
+    object lblDCFontSize: TLabel
+      Left = 0
+      Height = 15
+      Top = 124
+      Width = 140
+      AutoSize = False
+      Caption = 'Font size'
+      ParentColor = False
+    end
+    object spnDCFontSize: TSpinEdit
+      Left = 152
+      Height = 23
+      Top = 120
+      Width = 92
+      MaxValue = 200
+      TabOrder = 4
+    end
+    object cbnDCFontColor: TColorButton
+      Left = 250
+      Height = 25
+      Top = 119
+      Width = 92
+      BorderWidth = 2
+      ButtonColorSize = 16
+      ButtonColor = clWhite
+      Flat = True
+    end
+    object lblDCEffect: TLabel
+      Left = 0
+      Height = 15
+      Top = 154
+      Width = 140
+      AutoSize = False
+      Caption = 'Effect'
+      ParentColor = False
+    end
+    object cboDCEffect: TComboBox
+      Left = 152
+      Height = 23
+      Top = 150
+      Width = 92
+      ItemHeight = 15
+      Style = csDropDownList
+      TabOrder = 5
+    end
+    object cbnDCEffectColor: TColorButton
+      Left = 250
+      Height = 25
+      Top = 149
+      Width = 92
+      BorderWidth = 2
+      ButtonColorSize = 16
+      ButtonColor = clBlack
+      Flat = True
+    end
+    object lblDCVPosition: TLabel
+      Left = 0
+      Height = 15
+      Top = 184
+      Width = 140
+      AutoSize = False
+      Caption = 'Vertical position (%)'
+      ParentColor = False
+    end
+    object spnDCVPosition: TSpinEdit
+      Left = 152
+      Height = 23
+      Top = 180
+      Width = 190
+      MaxValue = 100
+      TabOrder = 6
+    end
+    object lblDCLineSpacing: TLabel
+      Left = 0
+      Height = 15
+      Top = 214
+      Width = 140
+      AutoSize = False
+      Caption = 'Line spacing (%)'
+      ParentColor = False
+    end
+    object spnDCLineSpacing: TSpinEdit
+      Left = 152
+      Height = 23
+      Top = 210
+      Width = 190
+      MaxValue = 50
+      TabOrder = 7
+    end
+    object lblDCFadeUp: TLabel
+      Left = 0
+      Height = 15
+      Top = 244
+      Width = 140
+      AutoSize = False
+      Caption = 'Fade in / out (ms)'
+      ParentColor = False
+    end
+    object spnDCFadeUp: TSpinEdit
+      Left = 152
+      Height = 23
+      Top = 240
+      Width = 92
+      MaxValue = 10000
+      TabOrder = 8
+    end
+    object spnDCFadeDown: TSpinEdit
+      Left = 250
+      Height = 23
+      Top = 240
+      Width = 92
+      MaxValue = 10000
+      TabOrder = 9
+    end
+  end
 end

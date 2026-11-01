@@ -857,6 +857,8 @@ var
   changed, UseTextAsMaster : Boolean;
   idxs : TIntegerDynArray;
   TextPart, TransPart, TempTrans : String;
+  SrcStyle, SrcActor : String;
+  SrcExtra : Pointer;
 begin
   if AVST.SelectedCount > 0 then
   begin
@@ -908,6 +910,11 @@ begin
               // Si el texto se divide en 2 y la traducción en 1, el texto manda
               UseTextAsMaster := s.Count >= sTrans.Count;
 
+              // the parts keep the style, actor and extra info of the original
+              SrcStyle := Item^.Style;
+              SrcActor := Item^.Actor;
+              SrcExtra := Subtitles.CopyExtraInfo(x);
+
               // Borramos el subtítulo original
               DeleteSubtitle(x, False, False);
 
@@ -952,9 +959,13 @@ begin
 
                 // D. INSERTAR EL NUEVO SUBTITULO
                 idxs[p-1] := InsertSubtitle(x, t1, t2, TextPart, TransPart, False, False);
+                Subtitles.ItemPointer[idxs[p-1]]^.Style := SrcStyle;
+                Subtitles.ItemPointer[idxs[p-1]]^.Actor := SrcActor;
+                Subtitles.ReplaceExtraInfo(idxs[p-1], CloneExtraInfo(SrcExtra, Subtitles.ExtraInfoType));
 
                 Inc(x);
               end;
+              DisposeExtraInfo(SrcExtra, Subtitles.ExtraInfoType);
 
               // Limpieza
               s.Clear;
@@ -1355,6 +1366,7 @@ var
   i       : Integer;
   OldPtrs : array of PUWSubtitleItem;
   OldItems: array of TUWSubtitleItem;
+  OldExtra: array of Pointer;
   Changed : Boolean;
 begin
   // O(n log n) sort in the API (keeps ExtraInfo aligned) and one undo entry
@@ -1369,13 +1381,18 @@ begin
       OldItems[i] := OldPtrs[i]^;
     end;
 
+    SetLength(OldExtra, Subtitles.Count);
+    for i := 0 to Subtitles.Count-1 do
+      OldExtra[i] := Subtitles.ExtraInfo[i];
+
     Subtitles.Sort;
 
     Changed := False;
     for i := 0 to Subtitles.Count-1 do
       if Subtitles.ItemPointer[i] <> OldPtrs[i] then
       begin
-        UndoInstance.AddUndo(utSubtitleChange, i, OldItems[i], False);
+        // the extra info moved with the entry, undo must put it back too
+        UndoInstance.AddUndoWithExtra(utSubtitleChange, i, OldItems[i], CloneExtraInfo(OldExtra[i], Subtitles.ExtraInfoType), False);
         Changed := True;
       end;
 

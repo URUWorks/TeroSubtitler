@@ -24,7 +24,8 @@ unit procUndo;
 interface
 
 uses
-  UWSubtitleAPI, FGL, LCLIntf, laz.VirtualTrees, UWSystem.TimeUtils;
+  UWSubtitleAPI, UWSubtitleAPI.ExtraInfo, FGL, LCLIntf, laz.VirtualTrees,
+  UWSystem.TimeUtils;
 
 type
 
@@ -40,6 +41,9 @@ type
     Group    : Byte;
     OldFPS   : TFPSInfo;
     NewFPS   : TFPSInfo;
+    HasExtra : Boolean;                  // Extra must be restored with the item
+    Extra    : Pointer;                  // copy of Subtitles.ExtraInfo[Index] (owned)
+    ExtraType: TUWSubtitleExtraInfoType; // type of Extra
   end;
 
   { TUndoList }
@@ -74,6 +78,7 @@ type
     function RedoCount: Integer;
     procedure Clear;
     procedure AddUndo(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
+    procedure AddUndoWithExtra(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const Extra: Pointer; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
     procedure AddUndoIfNotResent(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
     procedure AddRedo(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const Group: Byte);
     procedure AddUndoFPS(const OldFPS, NewFPS: TFPSInfo; const InputFPS: Boolean);
@@ -100,7 +105,7 @@ uses
 
 // -----------------------------------------------------------------------------
 
-function NewPUndo(const AUndoType: TUndoType; const AIndex: Integer; const ASubtitle: TUWSubtitleItem; const AGroup: Byte): PUndoItem;
+function NewPUndo(const AUndoType: TUndoType; const AIndex: Integer; const ASubtitle: TUWSubtitleItem; const AGroup: Byte; const AHasExtra: Boolean = False; const AExtra: Pointer = NIL): PUndoItem;
 begin
   New(Result);
   Result^.UndoType := AUndoType;
@@ -109,6 +114,42 @@ begin
   Result^.Group    := AGroup;
   //Result^.OldFPS   := NIL;
   //Result^.NewFPS   := NIL;
+  // a deleted line takes its extra info with it, so undo can insert it again
+  // with the same data (layer, margins, positions...) and the lists stay in sync
+  Result^.HasExtra  := AHasExtra or (AUndoType = utDeleteLine);
+  Result^.ExtraType := Subtitles.ExtraInfoType;
+  if AHasExtra then
+    Result^.Extra := AExtra
+  else if AUndoType = utDeleteLine then
+    Result^.Extra := Subtitles.CopyExtraInfo(AIndex)
+  else
+    Result^.Extra := NIL;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure DisposePUndo(var AItem: PUndoItem);
+begin
+  if AItem = NIL then Exit;
+  DisposeExtraInfo(AItem^.Extra, AItem^.ExtraType);
+  Dispose(AItem);
+  AItem := NIL;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TakeExtra(const AItem: PUndoItem): Pointer;
+begin
+  // the extra info passes to the subtitle list, only if it's of the same type
+  Result := NIL;
+  if AItem^.Extra = NIL then Exit;
+  if AItem^.ExtraType = Subtitles.ExtraInfoType then
+  begin
+    Result := AItem^.Extra;
+    AItem^.Extra := NIL;
+  end
+  else
+    DisposeExtraInfo(AItem^.Extra, AItem^.ExtraType);
 end;
 
 // -----------------------------------------------------------------------------
@@ -126,6 +167,9 @@ begin
   Result^.Group    := AGroup;
   Result^.OldFPS   := AOldFPS;
   Result^.NewFPS   := ANewFPS;
+  Result^.HasExtra := False;
+  Result^.Extra    := NIL;
+  Result^.ExtraType:= eiNone;
 end;
 
 // -----------------------------------------------------------------------------
@@ -133,6 +177,7 @@ end;
 procedure ClearList(var AList: TUndoList);
 var
   i: Integer;
+  P: PUndoItem;
 begin
   if not Assigned(AList) then Exit;
 
@@ -140,7 +185,8 @@ begin
   begin
     for i := AList.Count-1 downto 0 do
     begin
-      Dispose(PUndoItem(AList.Items[i]));
+      P := AList.Items[i];
+      DisposePUndo(P);
       AList.Items[i] := NIL;
     end;
     AList.Clear;
@@ -152,11 +198,13 @@ end;
 procedure DeleteLastItem(var AList: TUndoList);
 var
   i: Integer;
+  P: PUndoItem;
 begin
   if not Assigned(AList) then Exit;
 
   i := AList.Count-1;
-  Dispose(PUndoItem(AList.Items[i]));
+  P := AList.Items[i];
+  DisposePUndo(P);
   AList.Items[i] := NIL;
   AList.Delete(i);
 end;
@@ -184,7 +232,14 @@ begin
         utSubtitleChange:
           if Subtitles.ValidIndex(Item^.Index) then
           begin
-            ToList.Add(NewPUndo(utSubtitleChange, Item^.Index, Subtitles.Items[Item^.Index], Item^.Group));
+            if Item^.HasExtra then
+            begin
+              // the entry moved (sort), its extra info goes back with it
+              ToList.Add(NewPUndo(utSubtitleChange, Item^.Index, Subtitles.Items[Item^.Index], Item^.Group, True, Subtitles.CopyExtraInfo(Item^.Index)));
+              Subtitles.ReplaceExtraInfo(Item^.Index, TakeExtra(Item));
+            end
+            else
+              ToList.Add(NewPUndo(utSubtitleChange, Item^.Index, Subtitles.Items[Item^.Index], Item^.Group));
             Subtitles.Items[Item^.Index] := Item^.Subtitle;
             VSTSelectNode(VST, Item^.Index, False, True);
           end;
@@ -199,7 +254,7 @@ begin
         utDeleteLine:
           begin
             ToList.Add(NewPUndo(utInsertLine, Item^.Index, Item^.Subtitle, Item^.Group));
-            Subtitles.Insert(Item^.Index, Item^.Subtitle, NIL);
+            Subtitles.Insert(Item^.Index, Item^.Subtitle, TakeExtra(Item));
             VSTSelectNode(VST, Item^.Index, False, True);
           end;
 
@@ -343,6 +398,18 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TUndo.AddUndoWithExtra(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const Extra: Pointer; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
+begin
+  // Extra is a copy owned by the undo item (Subtitles.CopyExtraInfo)
+  FUndoList.Add(NewPUndo(UndoType, Index, Subtitle, FLastUndoGroup, True, Extra));
+  TrimUndoList;
+  if IncrementGroup then IncrementUndoGroup;
+  if ClearRedo then ClearList(FRedoList);
+  Changed(uctCount);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TUndo.AddUndoIfNotResent(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
 begin
   // merge with the previous undo only when it was for the same entry and the
@@ -363,6 +430,7 @@ end;
 procedure TUndo.TrimUndoList;
 var
   Group: Byte;
+  P: PUndoItem;
 begin
   // drop whole groups from the oldest end so memory doesn't grow forever
   if (FMax <= 0) or (FUndoList.Count <= FMax) then Exit;
@@ -372,7 +440,8 @@ begin
     Group := FUndoList.First^.Group;
     while (FUndoList.Count > 1) and (FUndoList.First^.Group = Group) do
     begin
-      Dispose(FUndoList.First);
+      P := FUndoList.First;
+      DisposePUndo(P);
       FUndoList.Delete(0);
     end;
   end;

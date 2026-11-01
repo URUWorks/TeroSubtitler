@@ -154,6 +154,8 @@ type
     FExtraInfo        : TList;
     FHeader           : Pointer;
     FStyles           : TList;
+    FASSHeader        : String; // ASS sections before [Events] (script info, styles...)
+    FASSFooter        : String; // ASS sections after [Events] (fonts, graphics...)
     FCodePage         : Integer;
     FSearchStartAt    : Integer;
     FSearchIdx        : Integer;
@@ -190,6 +192,9 @@ type
     function GetPauseFrames(Index: Integer; FPS: Double): Integer;
     function GetExtraInfo(Index: Integer): Pointer;
     procedure SetExtraInfo(Index: Integer; const P: Pointer);
+    procedure SyncExtraInfo(const ACount: Integer);
+    procedure InsertItem(const Index: Integer; const AItem: PUWSubtitleItem; const ExtraInfo: Pointer);
+    procedure DeleteFrom(const AIndex: Integer);
     function GetStringCPS(Index: Integer; const IsOriginal: Boolean; const SkipChars: String = ''): Double;
     function GetTextCPS(Index: Integer; const SkipChars: String = ''): Double;
     function GetTranslationCPS(Index: Integer; const SkipChars: String = ''): Double;
@@ -218,6 +223,8 @@ type
     function FindNext: Integer;
     function FindNextPointer: PUWSubtitleItem;
     procedure Sort;
+    function CopyExtraInfo(const Index: Integer): Pointer;
+    procedure ReplaceExtraInfo(const Index: Integer; const P: Pointer);
     function IsEqualItemTimes(const I1, I2: TUWSubtitleItem): Boolean;
     function IsEqualItem(const I1, I2: TUWSubtitleItem): Boolean;
     function GetFormatInfoFromFile(const AFileName: String; out AFormat: TUWSubtitleFormats; out ATimeBase: TSubtitleTimeBase): Boolean;
@@ -259,6 +266,8 @@ type
     property ExtraInfoType: TUWSubtitleExtraInfoType read FEIType write FEIType;
     property ExtraInfo[Index: Integer]: Pointer read GetExtraInfo write SetExtraInfo;
     property Header: Pointer read FHeader write FHeader;
+    property ASSHeader: String read FASSHeader write FASSHeader;
+    property ASSFooter: String read FASSFooter write FASSFooter;
     property IsRightToLeft: Boolean read FIsRTL;
     property Tag: Byte read FTag write FTag;
     property ReplaceEntities: Boolean read FReplaceEntity write FReplaceEntity;
@@ -295,6 +304,8 @@ type
   { Helpers }
 
   procedure ClearSubtitleItem(var Item: TUWSubtitleItem);
+  function CloneExtraInfo(const P: Pointer; const EIType: TUWSubtitleExtraInfoType): Pointer;
+  procedure DisposeExtraInfo(var P: Pointer; const EIType: TUWSubtitleExtraInfoType);
   function GetColorCPS(const CPS: Double; const Default: Cardinal): Cardinal;
   function GetSubtitleFileFormat(AFileName: String): TUWSubtitleFormats;
   function HAlignToAlignment(const HAlign: TSubtitleHAlign): TAlignment;
@@ -319,6 +330,8 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.Encoding, UWSystem.FileUtils
   CheetahCaption,
   CPC600,
   CSV,
+  DCinemaInterop,
+  DCinemaSMPTE,
   DKS,
   DRTIC,
   DVDJunior,
@@ -774,9 +787,45 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function CloneExtraInfo(const P: Pointer; const EIType: TUWSubtitleExtraInfoType): Pointer;
+begin
+  // a copy of the extra info of an entry, for undo, duplicate, split...
+  Result := NIL;
+  if P = NIL then Exit;
+
+  case EIType of
+    eiCavena890 : begin Result := New(PCavena890_Info);     PCavena890_Info(Result)^     := PCavena890_Info(P)^;     end;
+    eiEBU       : begin Result := New(PEBU_ExtraInfo);      PEBU_ExtraInfo(Result)^      := PEBU_ExtraInfo(P)^;      end;
+    eiMicroDVD  : begin Result := New(PMicroDVD_ExtraInfo); PMicroDVD_ExtraInfo(Result)^ := PMicroDVD_ExtraInfo(P)^; end;
+    eiSSA       : begin Result := New(PSSA_ExtraInfo);      PSSA_ExtraInfo(Result)^      := PSSA_ExtraInfo(P)^;      end;
+    eiSubRip    : begin Result := New(PSubRip_ExtraInfo);   PSubRip_ExtraInfo(Result)^   := PSubRip_ExtraInfo(P)^;   end;
+    eiWebVTT    : begin Result := New(PWebVTT_ExtraInfo);   PWebVTT_ExtraInfo(Result)^   := PWebVTT_ExtraInfo(P)^;   end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure DisposeExtraInfo(var P: Pointer; const EIType: TUWSubtitleExtraInfoType);
+begin
+  if P = NIL then Exit;
+
+  case EIType of
+    eiCavena890 : Dispose(PCavena890_Info(P));
+    eiEBU       : Dispose(PEBU_ExtraInfo(P));
+    eiMicroDVD  : Dispose(PMicroDVD_ExtraInfo(P));
+    eiSSA       : Dispose(PSSA_ExtraInfo(P));
+    eiSubRip    : Dispose(PSubRip_ExtraInfo(P));
+    eiWebVTT    : Dispose(PWebVTT_ExtraInfo(P));
+  end;
+  P := NIL;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure ClearExtraInfoList(var List: TList; const EIType: TUWSubtitleExtraInfoType);
 var
   i: Integer;
+  P: Pointer;
 begin
   if not Assigned(List) then Exit;
 
@@ -786,14 +835,8 @@ begin
     begin
       if List.Items[i] <> NIL then
       begin
-        case EIType of
-          eiCavena890 : Dispose(PCavena890_Info(List.Items[i]));
-          eiEBU       : Dispose(PEBU_ExtraInfo(List.Items[i]));
-          eiMicroDVD  : Dispose(PMicroDVD_ExtraInfo(List.Items[i]));
-          eiSSA       : Dispose(PSSA_ExtraInfo(List.Items[i]));
-          eiSubRip    : Dispose(PSubRip_ExtraInfo(List.Items[i]));
-          eiWebVTT    : Dispose(PWebVTT_ExtraInfo(List.Items[i]));
-        end;
+        P := List.Items[i];
+        DisposeExtraInfo(P, EIType);
         List.Items[i] := NIL;
       end;
       List.Delete(i);
@@ -839,6 +882,8 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWCheetahCaption.Create(AShouldWriteBOM)) ); // binary
   AList.Add( TUWSubtitleCustomFormat(TUWCPC600.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWCSV.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWDCinemaInterop.Create(False)) ); // UTF-8 without BOM
+  AList.Add( TUWSubtitleCustomFormat(TUWDCinemaSMPTE.Create(False)) );
   AList.Add( TUWSubtitleCustomFormat(TUWDKS.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWDRTIC.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWDVDJunior.Create(AShouldWriteBOM)) );
@@ -949,34 +994,23 @@ var
   i: Integer;
 begin
   Clear;
+  // the extra info (a copy of each one) and the ASS sections go with the items
+  FEIType    := Source.ExtraInfoType;
+  FASSHeader := Source.ASSHeader;
+  FASSFooter := Source.ASSFooter;
   for i := 0 to Source.Count-1 do
-  begin
-    Add(Source[i]);
-  end;
+    Add(Source.ItemPointer[i]^, Source.CopyExtraInfo(i));
 end;
 
 // -----------------------------------------------------------------------------
 
 function TUWSubtitles.GetItem(Index: Integer): TUWSubtitleItem;
 begin
-  ClearSubtitleItem(Result);
+  // the whole record, so a new field can't be forgotten here
   if ValidIndex(Index) then
-    with FList[Index]^ do
-    begin
-      Result.Text        := Text;
-      Result.Translation := Translation;
-      Result.InitialTime := InitialTime;
-      Result.FinalTime   := FinalTime;
-      Result.Marked      := Marked;
-      Result.ErrorType   := ErrorType;
-      Result.Align       := Align;
-      Result.VAlign      := VAlign;
-      Result.R           := R;
-      Result.Style       := Style;
-      Result.Actor       := Actor;
-      Result.Notes       := Notes;
-      Result.Data        := Data;
-    end;
+    Result := FList[Index]^
+  else
+    ClearSubtitleItem(Result);
 end;
 
 // -----------------------------------------------------------------------------
@@ -993,24 +1027,7 @@ end;
 procedure TUWSubtitles.PutItem(Index: Integer; const Item: TUWSubtitleItem);
 begin
   if ValidIndex(Index) then
-  begin
-    with FList[Index]^ do
-    begin
-      Text        := Item.Text;
-      Translation := Item.Translation;
-      InitialTime := Item.InitialTime;
-      FinalTime   := Item.FinalTime;
-      Marked      := Item.Marked;
-      ErrorType   := Item.ErrorType;
-      Align       := Item.Align;
-      VAlign      := Item.VAlign;
-      R           := Item.R;
-      Style       := Item.Style;
-      Actor       := Item.Actor;
-      Notes       := Item.Notes;
-      Data        := Item.Data;
-    end;
-  end;
+    FList[Index]^ := Item;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1198,6 +1215,47 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TUWSubtitles.SyncExtraInfo(const ACount: Integer);
+var
+  P: Pointer;
+begin
+  // FExtraInfo[i] is the extra info of FList[i], both lists with the same count
+  while FExtraInfo.Count < ACount do
+    FExtraInfo.Add(NIL);
+
+  while FExtraInfo.Count > ACount do
+  begin
+    P := FExtraInfo.Last;
+    DisposeExtraInfo(P, FEIType);
+    FExtraInfo.Delete(FExtraInfo.Count-1);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TUWSubtitles.CopyExtraInfo(const Index: Integer): Pointer;
+begin
+  // a new copy, the caller owns it (or passes it to Insert/Add)
+  Result := CloneExtraInfo(GetExtraInfo(Index), FEIType);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWSubtitles.ReplaceExtraInfo(const Index: Integer; const P: Pointer);
+var
+  Old: Pointer;
+begin
+  // the old one is freed, P is owned by the list from now
+  if not ValidIndex(Index) then Exit;
+  SyncExtraInfo(FList.Count);
+  Old := FExtraInfo[Index];
+  if Old = P then Exit;
+  DisposeExtraInfo(Old, FEIType);
+  FExtraInfo[Index] := P;
+end;
+
+// -----------------------------------------------------------------------------
+
 function TUWSubtitles.GetStringCPS(Index: Integer; const IsOriginal: Boolean; const SkipChars: String = ''): Double;
 var
   s: String;
@@ -1333,15 +1391,12 @@ begin
       Notes        := '';
       Data         := 0;
     end;
-
-    FList.Insert(Index, I);
-    try
-      FExtraInfo.Insert(Index, ExtraInfo);
-    except
-    end;
   except
     Dispose(I);
+    Exit;
   end;
+
+  InsertItem(Index, I, ExtraInfo);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1351,16 +1406,25 @@ var
   I: PUWSubtitleItem;
 begin
   New(I);
+  I^ := Item;
+  InsertItem(Index, I, ExtraInfo);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWSubtitles.InsertItem(const Index: Integer; const AItem: PUWSubtitleItem; const ExtraInfo: Pointer);
+begin
+  // FExtraInfo must always have one entry for each item of FList
+  SyncExtraInfo(FList.Count);
   try
-    I^ := Item;
-    FList.Insert(Index, I);
-    try
-      FExtraInfo.Insert(Index, ExtraInfo);
-    except
-    end;
+    FList.Insert(Index, AItem);
   except
-    Dispose(I);
+    // not in the list (invalid index), it can be freed. Before, it was also
+    // freed when the error came after inserting it (dangling pointer)
+    Dispose(AItem);
+    Exit;
   end;
+  FExtraInfo.Insert(Index, ExtraInfo);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1372,6 +1436,7 @@ begin
   if (CurIndex >= 0) and (CurIndex < FList.Count) and (CurIndex <> NewIndex) then
   begin
     FList.Move(CurIndex, NewIndex);
+    SyncExtraInfo(FList.Count);
     TempExtra := FExtraInfo.Items[CurIndex];
     FExtraInfo.Delete(CurIndex);
     FExtraInfo.Insert(NewIndex, TempExtra);
@@ -1381,6 +1446,8 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWSubtitles.Delete(const Index: Integer);
+var
+  P: Pointer;
 begin
   if not ValidIndex(Index) then Exit;
 
@@ -1388,15 +1455,8 @@ begin
   FList.Delete(Index);
   if Index < FExtraInfo.Count then
   begin
-    if FExtraInfo[Index] <> NIL then
-      case FEIType of
-        eiCavena890 : Dispose(PCavena890_Info(FExtraInfo[Index]));
-        eiEBU       : Dispose(PEBU_ExtraInfo(FExtraInfo[Index]));
-        eiMicroDVD  : Dispose(PMicroDVD_ExtraInfo(FExtraInfo[Index]));
-        eiSSA       : Dispose(PSSA_ExtraInfo(FExtraInfo[Index]));
-        eiSubRip    : Dispose(PSubRip_ExtraInfo(FExtraInfo[Index]));
-        eiWebVTT    : Dispose(PWebVTT_ExtraInfo(FExtraInfo[Index]));
-      end;
+    P := FExtraInfo[Index];
+    DisposeExtraInfo(P, FEIType);
     FExtraInfo.Delete(Index);
   end;
 end;
@@ -1406,9 +1466,24 @@ end;
 procedure TUWSubtitles.Clear;
 begin
   FIsRTL := False;
+  FASSHeader := '';
+  FASSFooter := '';
   // free the items and their extra info, not only the pointers
   ClearExtraInfoList(FExtraInfo, FEIType);
+  // empty list: the next load (or append) sets its own type
+  FEIType := eiNone;
   ClearList(FList);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWSubtitles.DeleteFrom(const AIndex: Integer);
+var
+  i: Integer;
+begin
+  // the items of a failed load
+  for i := FList.Count-1 downto Max(0, AIndex) do
+    Delete(i);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1533,17 +1608,18 @@ end;
 
 function TUWSubtitles.FindNext: Integer;
 var
-  Item: TUWSubtitleItem;
+  Item: PUWSubtitleItem;
 begin
+  // a pointer, copying the record (with its strings) on each step is slow
   Result := -1;
   while (FSearchIdx >= 0) and (FSearchIdx < FList.Count) do
   begin
-    Item := FList[FSearchIdx]^;
+    Item := FList[FSearchIdx];
     Inc(FSearchIdx);
-    if((Item.InitialTime - FSearchSkip) > FSearchStartAt) then
+    if((Item^.InitialTime - FSearchSkip) > FSearchStartAt) then
       Exit
-    else if ((Item.InitialTime - FSearchSkip) <= FSearchStartAt) and
-            ((Item.FinalTime + FSearchSkip) >= FSearchStartAt) then
+    else if ((Item^.InitialTime - FSearchSkip) <= FSearchStartAt) and
+            ((Item^.FinalTime + FSearchSkip) >= FSearchStartAt) then
     begin
       Result := (FSearchIdx-1);
       Exit;
@@ -1576,6 +1652,11 @@ begin
   // stable merge sort over an index array, so FExtraInfo can follow FList
   c := FList.Count;
   if c < 2 then Exit;
+
+  // most times it's already sorted (e.g. after loading), check it first
+  i := 1;
+  while (i < c) and (CompareItemsToSort(FList[i], FList[i-1]) >= 0) do Inc(i);
+  if i = c then Exit;
 
   SetLength(Idx, c);
   SetLength(Tmp, c);
@@ -1728,8 +1809,30 @@ var
   AList   : TUWSubtitleCustomFormatList;
   SubFile : TUWStringList;
   i, f    : Integer;
+  Found   : Boolean;
   AFPS    : Double;
   StartCount : Integer;
+  OldEIType  : TUWSubtitleExtraInfoType;
+  OldHeader, OldFooter : String;
+
+  function DoLoad(const AFormat: TUWSubtitleCustomFormat; const ACodePage: Integer): Boolean;
+  begin
+    // an error in the middle of the load: the loaded items are removed and the
+    // search ends here. Before, the next lines were still checked and the same
+    // format could load the file again (duplicated entries)
+    try
+      Result := AFormat.LoadSubtitle(SubFile, AFPS, Self);
+      FCodePage := ACodePage;
+      FFormat := AFormat.Format;
+    except
+      Result := False;
+      DeleteFrom(StartCount);
+      FEIType := OldEIType;
+      FASSHeader := OldHeader;
+      FASSFooter := OldFooter;
+    end;
+  end;
+
 begin
   Result := False;
   AList  := NIL;
@@ -1742,10 +1845,15 @@ begin
         ClearExtraInfoList(FExtraInfo, FEIType);
         FEIType := eiNone;
         //FStyles.Clear;
+        FASSHeader := '';
+        FASSFooter := '';
         ClearList(FList);
       end;
       // when appending, only the newly loaded items must be converted to SMPTE
       StartCount := FList.Count;
+      OldEIType  := FEIType;
+      OldHeader  := FASSHeader;
+      OldFooter  := FASSFooter;
 
       AFPS := FPS.FPS;
       if AFPS <= 0 then AFPS := 25;
@@ -1756,30 +1864,34 @@ begin
       // First try Text formats
       if SubFile.Count > 0 then
         for i := 0 to SubFile.Count-1 do
-          try
-            for f := 0 to AList.Count-1 do
-              if AList[f].IsTextBased and (((Format = sfInvalid) and AList[f].IsMine(SubFile, i)) or (AList[f].Format = Format)) then
-              begin
-                Result := AList[f].LoadSubtitle(SubFile, AFPS, Self);
-                Self.FCodePage := SubFile.CodePage;
-                Self.FFormat := AList[f].Format;
-                Exit;
-              end;
-          except
+          for f := 0 to AList.Count-1 do
+          begin
+            try
+              Found := AList[f].IsTextBased and (((Format = sfInvalid) and AList[f].IsMine(SubFile, i)) or (AList[f].Format = Format));
+            except
+              Found := False;
+            end;
+            if Found then
+            begin
+              Result := DoLoad(AList[f], SubFile.CodePage);
+              Exit;
+            end;
           end;
 
       // If not, try binary formats
       if NameIsFile then
-        try
-          for f := 0 to AList.Count-1 do
-            if not AList[f].IsTextBased and (((Format = sfInvalid) and AList[f].IsMine(SubFile, 0)) or (AList[f].Format = Format)) then
-            begin
-              Result := AList[f].LoadSubtitle(SubFile, AFPS, Self);
-              Self.FCodePage := 65001; //SubFile.CodePage;
-              Self.FFormat := AList[f].Format;
-              Exit;
-            end;
-        except
+        for f := 0 to AList.Count-1 do
+        begin
+          try
+            Found := not AList[f].IsTextBased and (((Format = sfInvalid) and AList[f].IsMine(SubFile, 0)) or (AList[f].Format = Format));
+          except
+            Found := False;
+          end;
+          if Found then
+          begin
+            Result := DoLoad(AList[f], 65001); //SubFile.CodePage;
+            Exit;
+          end;
         end;
     finally
       if (Self.FFormat <> sfITunesTimedText) and (TimecodeMode = tcDF) then ConvertTimesToSMPTE(True, StartCount);

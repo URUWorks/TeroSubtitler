@@ -32,7 +32,7 @@ procedure CopyToClipboard(const ACut: Boolean = False);
 procedure PasteFromClipboard;
 procedure CopyCurrentVideoPosToClipboard;
 
-function InsertSubtitle(const Index: Integer; const Item: TUWSubtitleItem; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer; overload;
+function InsertSubtitle(const Index: Integer; const Item: TUWSubtitleItem; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True; const ExtraInfo: Pointer = NIL): Integer; overload;
 function InsertSubtitle(const Index: Integer; const InitialTime, FinalTime: Integer; const Text, Translation: String; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer; overload;
 procedure DeleteSubtitle(const Index: Integer; const AUpdate: Boolean = True; const AutoIncrementUndo: Boolean = True);
 function DeleteLineFromText(const Index, ALine: Integer): String;
@@ -183,13 +183,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function InsertSubtitle(const Index: Integer; const Item: TUWSubtitleItem; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True): Integer;
+function InsertSubtitle(const Index: Integer; const Item: TUWSubtitleItem; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True; const ExtraInfo: Pointer = NIL): Integer;
 begin
+  // ExtraInfo: NIL or a copy (Subtitles.CopyExtraInfo), the list owns it
   Result := Index;
   if Subtitles.ValidIndex(Result) then
-    Subtitles.Insert(Result, Item, NIL)
+    Subtitles.Insert(Result, Item, ExtraInfo)
   else
-    Result := Subtitles.Add(Item, NIL);
+    Result := Subtitles.Add(Item, ExtraInfo);
 
   UndoInstance.AddUndo(utInsertLine, Result, Item, AutoIncrementUndo);
 

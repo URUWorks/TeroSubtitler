@@ -116,6 +116,18 @@
         <UnitName Value="CSV"/>
       </Item>
       <Item>
+        <Filename Value="Formats\DCinema.Utils.pas"/>
+        <UnitName Value="DCinema.Utils"/>
+      </Item>
+      <Item>
+        <Filename Value="Formats\DCinemaInterop.pas"/>
+        <UnitName Value="DCinemaInterop"/>
+      </Item>
+      <Item>
+        <Filename Value="Formats\DCinemaSMPTE.pas"/>
+        <UnitName Value="DCinemaSMPTE"/>
+      </Item>
+      <Item>
         <Filename Value="Formats\DKS.pas"/>
         <UnitName Value="DKS"/>
       </Item>
