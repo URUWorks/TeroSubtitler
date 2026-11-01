@@ -2397,6 +2397,7 @@ msgid "Font name"
 msgstr "Yazı tipi adı"
 
 #: tfrmformatproperties.lblasfontsize.caption
+msgctxt "tfrmformatproperties.lblasfontsize.caption"
 msgid "Font size"
 msgstr "Yazı tipi boyutu"
 
@@ -2447,6 +2448,48 @@ msgstr "Çevrilmiş başlık"
 #: tfrmformatproperties.lblcavenatranslator.caption
 msgid "Translator"
 msgstr "Çevirmen"
+
+#: tfrmformatproperties.lbldceffect.caption
+msgid "Effect"
+msgstr ""
+
+#: tfrmformatproperties.lbldcfadeup.caption
+msgid "Fade in / out (ms)"
+msgstr ""
+
+#: tfrmformatproperties.lbldcfont.caption
+msgid "Font (file or urn:uuid)"
+msgstr ""
+
+#: tfrmformatproperties.lbldcfontsize.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lbldcfontsize.caption"
+msgid "Font size"
+msgstr "Yazı tipi boyutu"
+
+#: tfrmformatproperties.lbldclanguage.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lbldclanguage.caption"
+msgid "Language"
+msgstr "Dil"
+
+#: tfrmformatproperties.lbldclinespacing.caption
+msgid "Line spacing (%)"
+msgstr ""
+
+#: tfrmformatproperties.lbldcreel.caption
+msgid "Reel number"
+msgstr ""
+
+#: tfrmformatproperties.lbldctitle.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lbldctitle.caption"
+msgid "Title"
+msgstr "Başlık"
+
+#: tfrmformatproperties.lbldcvposition.caption
+msgid "Vertical position (%)"
+msgstr ""
 
 #: tfrmformatproperties.lbldvdauthor.caption
 msgid "Author"
@@ -2502,6 +2545,16 @@ msgstr "Maks. karakter"
 #: tfrmformatproperties.lblebundr.caption
 msgid "Max rows"
 msgstr "Maks. satır"
+
+#: tfrmformatproperties.lblttlanguage.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lblttlanguage.caption"
+msgid "Language"
+msgstr "Dil"
+
+#: tfrmformatproperties.lblttlanguagehint.caption
+msgid "xml:lang"
+msgstr ""
 
 #: tfrmformatproperties.lblvttlocal.caption
 msgid "Cue time:"

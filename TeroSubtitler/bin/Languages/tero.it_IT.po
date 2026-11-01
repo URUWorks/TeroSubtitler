@@ -2382,6 +2382,7 @@ msgid "Font name"
 msgstr "Nome font"
 
 #: tfrmformatproperties.lblasfontsize.caption
+msgctxt "tfrmformatproperties.lblasfontsize.caption"
 msgid "Font size"
 msgstr "Dimensione font"
 
@@ -2432,6 +2433,48 @@ msgstr "Titolo tradotto"
 #: tfrmformatproperties.lblcavenatranslator.caption
 msgid "Translator"
 msgstr "Traduttore"
+
+#: tfrmformatproperties.lbldceffect.caption
+msgid "Effect"
+msgstr ""
+
+#: tfrmformatproperties.lbldcfadeup.caption
+msgid "Fade in / out (ms)"
+msgstr ""
+
+#: tfrmformatproperties.lbldcfont.caption
+msgid "Font (file or urn:uuid)"
+msgstr ""
+
+#: tfrmformatproperties.lbldcfontsize.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lbldcfontsize.caption"
+msgid "Font size"
+msgstr "Dimensione font"
+
+#: tfrmformatproperties.lbldclanguage.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lbldclanguage.caption"
+msgid "Language"
+msgstr "Lingua"
+
+#: tfrmformatproperties.lbldclinespacing.caption
+msgid "Line spacing (%)"
+msgstr ""
+
+#: tfrmformatproperties.lbldcreel.caption
+msgid "Reel number"
+msgstr ""
+
+#: tfrmformatproperties.lbldctitle.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lbldctitle.caption"
+msgid "Title"
+msgstr "Titolo"
+
+#: tfrmformatproperties.lbldcvposition.caption
+msgid "Vertical position (%)"
+msgstr ""
 
 #: tfrmformatproperties.lbldvdauthor.caption
 msgid "Author"
@@ -2487,6 +2530,16 @@ msgstr "N. max caratteri"
 #: tfrmformatproperties.lblebundr.caption
 msgid "Max rows"
 msgstr "N. max linee"
+
+#: tfrmformatproperties.lblttlanguage.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lblttlanguage.caption"
+msgid "Language"
+msgstr "Lingua"
+
+#: tfrmformatproperties.lblttlanguagehint.caption
+msgid "xml:lang"
+msgstr ""
 
 #: tfrmformatproperties.lblvttlocal.caption
 msgid "Cue time:"

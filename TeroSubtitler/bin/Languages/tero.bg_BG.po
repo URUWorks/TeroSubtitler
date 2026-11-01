@@ -2400,6 +2400,7 @@ msgid "Font name"
 msgstr "Име на шрифта"
 
 #: tfrmformatproperties.lblasfontsize.caption
+msgctxt "tfrmformatproperties.lblasfontsize.caption"
 msgid "Font size"
 msgstr "Размер на шрифта"
 
@@ -2450,6 +2451,48 @@ msgstr "Преведено заглавие"
 #: tfrmformatproperties.lblcavenatranslator.caption
 msgid "Translator"
 msgstr "Преводач"
+
+#: tfrmformatproperties.lbldceffect.caption
+msgid "Effect"
+msgstr ""
+
+#: tfrmformatproperties.lbldcfadeup.caption
+msgid "Fade in / out (ms)"
+msgstr ""
+
+#: tfrmformatproperties.lbldcfont.caption
+msgid "Font (file or urn:uuid)"
+msgstr ""
+
+#: tfrmformatproperties.lbldcfontsize.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lbldcfontsize.caption"
+msgid "Font size"
+msgstr "Размер на шрифта"
+
+#: tfrmformatproperties.lbldclanguage.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lbldclanguage.caption"
+msgid "Language"
+msgstr "Език"
+
+#: tfrmformatproperties.lbldclinespacing.caption
+msgid "Line spacing (%)"
+msgstr ""
+
+#: tfrmformatproperties.lbldcreel.caption
+msgid "Reel number"
+msgstr ""
+
+#: tfrmformatproperties.lbldctitle.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lbldctitle.caption"
+msgid "Title"
+msgstr "Заглавие"
+
+#: tfrmformatproperties.lbldcvposition.caption
+msgid "Vertical position (%)"
+msgstr ""
 
 #: tfrmformatproperties.lbldvdauthor.caption
 msgid "Author"
@@ -2505,6 +2548,16 @@ msgstr "Знаци до"
 #: tfrmformatproperties.lblebundr.caption
 msgid "Max rows"
 msgstr "Редове до"
+
+#: tfrmformatproperties.lblttlanguage.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lblttlanguage.caption"
+msgid "Language"
+msgstr "Език"
+
+#: tfrmformatproperties.lblttlanguagehint.caption
+msgid "xml:lang"
+msgstr ""
 
 #: tfrmformatproperties.lblvttlocal.caption
 msgid "Cue time:"
