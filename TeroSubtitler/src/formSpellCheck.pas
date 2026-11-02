@@ -310,11 +310,22 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the suggestions have the plain apostrophe, as it was written: Kun’s -> Ken’s
+function ApostropheAsWritten(const AWord, AReplacement: String): String;
+begin
+  if Pos(#$E2#$80#$99, AWord) > 0 then
+    Result := StringReplace(AReplacement, '''', #$E2#$80#$99, [rfReplaceAll])
+  else
+    Result := AReplacement;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmSpellCheck.btnChangeClick(Sender: TObject);
 begin
   if (lstSuggestions.Count > 0) and (mmoNotFound.SelText <> '') then
   begin
-    SetSubtitleText(FLastLine, ReplaceString(GetSubtitleText(FLastLine, FSource), mmoNotFound.SelText, edtCustom.Text, True, False), FSource, False, False, False);
+    SetSubtitleText(FLastLine, ReplaceString(GetSubtitleText(FLastLine, FSource), mmoNotFound.SelText, ApostropheAsWritten(mmoNotFound.SelText, edtCustom.Text), True, False), FSource, False, False, False);
     FTempList.Add(mmoNotFound.SelText);
   end;
 
@@ -327,8 +338,8 @@ procedure TfrmSpellCheck.btnChangeAllClick(Sender: TObject);
 begin
   if (lstSuggestions.Count > 0) and (mmoNotFound.SelText <> '') then
   begin
-    SetSubtitleText(FLastLine, ReplaceString(GetSubtitleText(FLastLine, FSource), mmoNotFound.SelText, edtCustom.Text, True, False), FSource, False, False, False);
-    FChangeList.Add(mmoNotFound.SelText, edtCustom.Text);
+    SetSubtitleText(FLastLine, ReplaceString(GetSubtitleText(FLastLine, FSource), mmoNotFound.SelText, ApostropheAsWritten(mmoNotFound.SelText, edtCustom.Text), True, False), FSource, False, False, False);
+    FChangeList.Add(mmoNotFound.SelText, ApostropheAsWritten(mmoNotFound.SelText, edtCustom.Text));
   end;
 
   DoSpell;
