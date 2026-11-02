@@ -33,5 +33,16 @@
 {"hash":76328802,"name":"tfrmformatproperties.lbldvdauthor.caption","sourcebytes":[65,117,116,104,111,114],"value":"Author"},
 {"hash":328911,"name":"tfrmformatproperties.lbldvdinfo.caption","sourcebytes":[73,110,102,111],"value":"Info"},
 {"hash":23986,"name":"tfrmformatproperties.lbldvdweb.caption","sourcebytes":[87,101,98],"value":"Web"},
-{"hash":139375349,"name":"tfrmformatproperties.lbldvdlanguage.caption","sourcebytes":[76,97,110,103,117,97,103,101],"value":"Language"}
+{"hash":139375349,"name":"tfrmformatproperties.lbldvdlanguage.caption","sourcebytes":[76,97,110,103,117,97,103,101],"value":"Language"},
+{"hash":139375349,"name":"tfrmformatproperties.lblttlanguage.caption","sourcebytes":[76,97,110,103,117,97,103,101],"value":"Language"},
+{"hash":67183031,"name":"tfrmformatproperties.lblttlanguagehint.caption","sourcebytes":[120,109,108,58,108,97,110,103],"value":"xml:lang"},
+{"hash":5966629,"name":"tfrmformatproperties.lbldctitle.caption","sourcebytes":[84,105,116,108,101],"value":"Title"},
+{"hash":117736226,"name":"tfrmformatproperties.lbldcreel.caption","sourcebytes":[82,101,101,108,32,110,117,109,98,101,114],"value":"Reel number"},
+{"hash":139375349,"name":"tfrmformatproperties.lbldclanguage.caption","sourcebytes":[76,97,110,103,117,97,103,101],"value":"Language"},
+{"hash":98133193,"name":"tfrmformatproperties.lbldcfont.caption","sourcebytes":[70,111,110,116,32,40,102,105,108,101,32,111,114,32,117,114,110,58,117,117,105,100,41],"value":"Font (file or urn:uuid)"},
+{"hash":90697317,"name":"tfrmformatproperties.lbldcfontsize.caption","sourcebytes":[70,111,110,116,32,115,105,122,101],"value":"Font size"},
+{"hash":79481764,"name":"tfrmformatproperties.lbldceffect.caption","sourcebytes":[69,102,102,101,99,116],"value":"Effect"},
+{"hash":43598329,"name":"tfrmformatproperties.lbldcvposition.caption","sourcebytes":[86,101,114,116,105,99,97,108,32,112,111,115,105,116,105,111,110,32,40,37,41],"value":"Vertical position (%)"},
+{"hash":154566057,"name":"tfrmformatproperties.lbldclinespacing.caption","sourcebytes":[76,105,110,101,32,115,112,97,99,105,110,103,32,40,37,41],"value":"Line spacing (%)"},
+{"hash":10774105,"name":"tfrmformatproperties.lbldcfadeup.caption","sourcebytes":[70,97,100,101,32,105,110,32,47,32,111,117,116,32,40,109,115,41],"value":"Fade in / out (ms)"}
 ]}

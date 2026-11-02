@@ -77,6 +77,9 @@ type
     function LoadWords(const AFileName: String; out AWords: TSyncWords): Boolean;
     function UseWhisperDTW: Boolean;
     function SmartSegment(const AWordsFile, ASrtFile, ALanguage: String): Boolean;
+    function GetCleanOptions: TSegmentOptions;
+    procedure CleanTranscriptionFile(const ASrtFile: String; const AJoinFragments: Boolean);
+    procedure CleanTranscribedEntries(const AFrom: Integer);
   public
 
   end;
@@ -444,6 +447,7 @@ var
   AEnvironment: TStringArray;
   isPlaying: Boolean;
   TimerSub: Boolean;
+  FirstNew: Integer;
 begin
   if frmMain.MPV.FileName.StartsWith('http') then
     ShowErrorMessageDialog(lngFeatureNotAvailableFromURL)
@@ -511,6 +515,12 @@ begin
                 ss.Insert(ss.IndexOf(' -osrt'), ' -ml ' + IntToStr(spnMaxLineLength.Value));
             end;
 
+            // without the previous text as context: whisper can get stuck
+            // repeating it (mostly with silence or music at the end)
+            if (Pos('-mc ', Tools.WhisperCPP_Additional + ' ') = 0) and
+              (Pos('--max-context', Tools.WhisperCPP_Additional) = 0) then
+              ss.Insert(ss.IndexOf(' -osrt'), ' -mc 0');
+
             if not Tools.WhisperCPP_Additional.IsEmpty then
               ss := ss + ' ' + Tools.WhisperCPP_Additional;
 
@@ -539,6 +549,10 @@ begin
               if chkMaxLineCount.Checked then
                 ss := ss + ' --max_line_count ' + IntToStr(spnMaxLineCount.Value);
             end;
+
+            // the same for faster-whisper, see above
+            if Pos('condition_on_previous_text', Tools.FasterWhisper_Additional) = 0 then
+              ss := ss + ' --condition_on_previous_text False';
 
             if not Tools.FasterWhisper_Additional.IsEmpty then
               ss := ss + ' ' + Tools.FasterWhisper_Additional;
@@ -570,11 +584,15 @@ begin
 
           if rbnAddSubtitlesWhileTranscribing.Checked and not chkSyncText.Checked and not chkSmartSegment.Checked then //and rbnAddSubtitlesWhileTranscribing.Enabled then
           begin
+            FirstNew := Subtitles.Count;
             //if ExecuteAppEx(GetAudioToTextAppFile, AParamArray, AEnvironment, @ThreadProcessCB) then
             if ExecuteThreadProcess(GetAudioToTextAppFile, AParamArray, AEnvironment, @ThreadProcessCB, @ThreadProcessCBTime) then
             begin
               // delete wave file
               DeleteFile(s);
+
+              // the entries added while transcribing, without the repetitions
+              CleanTranscribedEntries(FirstNew);
 
               with frmMain, AppOptions do
               begin
@@ -651,6 +669,7 @@ begin
               if FileExists(srtfile) then
               begin
                 prbProgress.Position := 100;
+                CleanTranscriptionFile(srtfile, not chkSmartSegment.Checked);
                 ShowMessageDialog(lngFileSavedSuccessfully, '', lngOpenContainingFolder, @OpenFolderClick);
                 LoadSubtitle(srtfile, sfSubRip, NIL, -1, True);
               end;
@@ -898,5 +917,96 @@ begin
   end;
 end;
 
-end.
+// -----------------------------------------------------------------------------
 
+function TfrmAudioToText.GetCleanOptions: TSegmentOptions;
+begin
+  with AppOptions.Conventions do
+  begin
+    Result.CPL         := CPL;
+    Result.MaxLines    := MaxLines;
+    Result.MaxDuration := MaxDuration;
+    Result.MinDuration := MinDuration;
+    Result.MinPause    := GetCorrectTime(MinPause, PauseInFrames);
+    Result.PauseSplit  := 0;
+    Result.MaxCPS      := MaxCPS;
+    Result.Language    := '';
+  end;
+  // the line length chosen here, when it's checked
+  if chkMaxLineLength.Checked and chkMaxLineLength.Enabled then
+    Result.CPL := spnMaxLineLength.Value;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAudioToText.CleanTranscriptionFile(const ASrtFile: String; const AJoinFragments: Boolean);
+var
+  Subs: TUWSubtitles;
+  Segments: TSegments;
+  FPSInfo: TFPSInfo;
+  i: Integer;
+begin
+  // the repetitions of whisper, the hallucinations of the silences and
+  // (AJoinFragments) the fragments of one or two words
+  FPSInfo.FPS  := 25;
+  FPSInfo.Mode := tcNDF;
+  Subs := TUWSubtitles.Create;
+  try
+    if not Subs.LoadFromFile(ASrtFile, TEncoding.UTF8, FPSInfo, sfSubRip) or (Subs.Count = 0) then Exit;
+
+    SetLength(Segments, Subs.Count);
+    for i := 0 to Subs.Count-1 do
+    begin
+      Segments[i].InitialTime := Subs[i].InitialTime;
+      Segments[i].FinalTime   := Subs[i].FinalTime;
+      Segments[i].Text        := Subs[i].Text;
+    end;
+
+    if CleanTranscription(Segments, GetCleanOptions, AJoinFragments) = 0 then Exit;
+
+    Subs.Clear;
+    for i := 0 to High(Segments) do
+      Subs.Add(Segments[i].InitialTime, Segments[i].FinalTime, Segments[i].Text, '');
+
+    Subs.SaveToFile(ASrtFile, FPSInfo, TEncoding.UTF8, sfSubRip, smText);
+  finally
+    Subs.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAudioToText.CleanTranscribedEntries(const AFrom: Integer);
+var
+  Segments: TSegments;
+  i: Integer;
+begin
+  // the same for the entries added while transcribing (from AFrom)
+  if (AFrom < 0) or (AFrom >= Subtitles.Count) then Exit;
+
+  SetLength(Segments, Subtitles.Count - AFrom);
+  for i := AFrom to Subtitles.Count-1 do
+  begin
+    Segments[i-AFrom].InitialTime := Subtitles[i].InitialTime;
+    Segments[i-AFrom].FinalTime   := Subtitles[i].FinalTime;
+    Segments[i-AFrom].Text        := Subtitles[i].Text;
+  end;
+
+  if CleanTranscription(Segments, GetCleanOptions, True) = 0 then Exit;
+
+  frmMain.VST.BeginUpdate;
+  try
+    for i := Subtitles.Count-1 downto AFrom do
+      DeleteSubtitle(i, False, False);
+    for i := 0 to High(Segments) do
+      InsertSubtitle(Subtitles.Count, Segments[i].InitialTime, Segments[i].FinalTime, Segments[i].Text, '', False, False);
+  finally
+    frmMain.VST.EndUpdate;
+  end;
+  UndoInstance.IncrementUndoGroup;
+  UpdateValues(True);
+end;
+
+// -----------------------------------------------------------------------------
+
+end.

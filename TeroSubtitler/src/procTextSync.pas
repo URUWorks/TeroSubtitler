@@ -86,12 +86,38 @@ function BuildSyncTimes(const ATextWords: TSyncWords; const ARecognized: TSyncWo
 
 function SegmentWords(const AWords: TSyncWords; const AOptions: TSegmentOptions): TSegments;
 
+{ Plain text import }
+
+type
+  TPlainTextMode = (ptmLine, ptmParagraph, ptmAutomatic);
+
+// The entries for a plain text (a transcription without times): one for each
+// line, for each paragraph (blank line separated) or made with the smart
+// segmentation (only the paragraphs are kept). The times are estimated from
+// the reading speed, one after the other from AStartTime, until they are
+// synchronized with the audio. The style tags of Tero ({\b1}{\i1}{\u1}{\s1}
+// and their {\x0}) are kept: each entry opens and closes its own (a text in
+// italics can continue in the next entry); other {\...} tags are removed.
+function PlainTextToSegments(const ALines: TStrings; const AMode: TPlainTextMode; const AOptions: TSegmentOptions; const AStartTime: Integer = 0): TSegments;
+
+{ Transcription cleanup }
+
+// Whisper can get stuck repeating what it has just transcribed (it uses its
+// own text as context), mostly at the end, with silence or music: entries
+// without duration (or impossibly fast) repeating the previous ones. These
+// are removed, consecutive entries with the same text are merged and the
+// known hallucinations of the silences ("Subtitles by...") are removed.
+// AJoinFragments also joins the fragments of one or two words with the next
+// entry when there's no real pause between them (CPL, MaxLines and
+// MaxDuration of AOptions). Returns the number of entries removed/joined.
+function CleanTranscription(var ASegments: TSegments; const AOptions: TSegmentOptions; const AJoinFragments: Boolean): Integer;
+
 // -----------------------------------------------------------------------------
 
 implementation
 
 uses
-  LazUTF8, Character, Math, fpjson, jsonparser, generics.collections,
+  LazUTF8, Character, Math, StrUtils, fpjson, jsonparser, generics.collections,
   UWSubtitles.Utils;
 
 const
@@ -989,9 +1015,19 @@ var
   end;
 
   function Fits(const A, B: Integer): Boolean;
+  var
+    t: String;
   begin
     Result := (TextLen(A, B) <= MaxChars) and
       ((AOptions.MaxDuration <= 0) or (AWords[B].EndTime - AWords[A].StartTime <= AOptions.MaxDuration));
+    // it must also fit in the lines once broken (the words don't always fill
+    // them, "CPL * MaxLines" alone gives 3 lines sometimes)
+    if Result and (AOptions.MaxLines > 0) and (AOptions.CPL > 0) then
+    begin
+      t := JoinText(A, B);
+      if UTF8Length(t) > AOptions.CPL then
+        Result := Length(AutoBreakSubtitle(t, AOptions.CPL).Split([sLineBreak])) <= AOptions.MaxLines;
+    end;
   end;
 
   function SentenceEnd(const AIndex: Integer): Boolean;
@@ -1108,6 +1144,509 @@ begin
     if Result[i].FinalTime > limit then
       Result[i].FinalTime := Max(Result[i].InitialTime, limit);
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+{ Plain text import }
+
+// -----------------------------------------------------------------------------
+
+const
+  StyleTags: array[0..3] of Char = ('b', 'i', 'u', 's'); // bit 0..3
+
+// -----------------------------------------------------------------------------
+
+// AText without the tags, and each of its words with its style (AState: the
+// style at the start, updated)
+function StripStyleTags(const AText: String; var AState: Byte; var AWords: TStringArray; var AStyles: TBytes): String;
+var
+  i, k, e: Integer;
+  Styles: array of Byte; // of each byte of the result
+  c: Char;
+begin
+  Result := '';
+  SetLength(Styles, Length(AText));
+  i := 1;
+  while i <= Length(AText) do
+  begin
+    if (AText[i] = '{') and (i < Length(AText)) and (AText[i+1] = '\') then
+    begin
+      e := PosEx('}', AText, i);
+      if e > 0 then
+      begin
+        // {\i1} / {\i0}, the others are removed
+        if (e - i = 4) and (AText[i+3] in ['0', '1']) then
+          for k := 0 to High(StyleTags) do
+            if LowerCase(AText[i+2]) = StyleTags[k] then
+              if AText[i+3] = '1' then
+                AState := AState or (1 shl k)
+              else
+                AState := AState and not (1 shl k);
+        i := e + 1;
+        Continue;
+      end;
+    end;
+    c := AText[i];
+    Result := Result + c;
+    Styles[Length(Result)-1] := AState;
+    Inc(i);
+  end;
+
+  // the words (as Split(' ') of the trimmed text)
+  for i := 1 to Length(Result) do
+    if (Result[i] <> ' ') and ((i = 1) or (Result[i-1] = ' ')) then
+    begin
+      e := i;
+      while (e <= Length(Result)) and (Result[e] <> ' ') do Inc(e);
+      k := Length(AStyles);
+      SetLength(AStyles, k+1);
+      SetLength(AWords, k+1);
+      AStyles[k] := Styles[i-1];
+      AWords[k]  := Copy(Result, i, e-i);
+    end;
+  Result := Trim(Result);
+end;
+
+// -----------------------------------------------------------------------------
+
+// the text of an entry with the tags of its words (from AIndex, AOffset in it
+// when a word was divided), opened and closed in it. The words are followed
+// by their text: a line break can divide one or add a dash to it
+function ApplyStyleTags(const AText: String; const AWords: TStringArray; const AStyles: TBytes; var AIndex, AOffset: Integer): String;
+var
+  i, j: Integer;
+  cur, st: Byte;
+  ws, w, rem: String;
+
+  function Tags(const AFrom, ATo: Byte; const AOpen: Boolean): String;
+  var
+    x: Integer;
+  begin
+    Result := '';
+    if AOpen then
+    begin
+      for x := 0 to High(StyleTags) do
+        if (ATo and (1 shl x) <> 0) and (AFrom and (1 shl x) = 0) then
+          Result := Result + '{\' + StyleTags[x] + '1}';
+    end
+    else
+      for x := High(StyleTags) downto 0 do
+        if (AFrom and (1 shl x) <> 0) and (ATo and (1 shl x) = 0) then
+          Result := Result + '{\' + StyleTags[x] + '0}';
+  end;
+
+begin
+  Result := '';
+  cur := 0;
+  ws  := '';
+  i := 1;
+  while i <= Length(AText) do
+  begin
+    if AText[i] in [' ', #13, #10] then
+    begin
+      ws := ws + AText[i];
+      Inc(i);
+      Continue;
+    end;
+    j := i;
+    while (j <= Length(AText)) and not (AText[j] in [' ', #13, #10]) do Inc(j);
+    w := Copy(AText, i, j-i);
+    i := j;
+
+    if AIndex <= High(AStyles) then
+    begin
+      st  := AStyles[AIndex];
+      rem := Copy(AWords[AIndex], AOffset+1, MaxInt);
+      if (w <> rem) and rem.StartsWith(w) then
+        AOffset := AOffset + Length(w) // the rest in the next one
+      else if (w <> rem) and not w.EndsWith(rem) and (Pos(w, rem) > 0) then
+        AOffset := AOffset + Pos(w, rem) - 1 + Length(w)
+      else
+      begin
+        Inc(AIndex);
+        AOffset := 0;
+      end;
+    end
+    else
+      st := 0;
+
+    // closed after the previous word, opened before this one
+    Result := Result + Tags(cur, st, False) + ws + Tags(cur, st, True) + w;
+    ws  := '';
+    cur := st;
+  end;
+  Result := Result + Tags(cur, 0, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+function PlainTextToSegments(const ALines: TStrings; const AMode: TPlainTextMode; const AOptions: TSegmentOptions; const AStartTime: Integer = 0): TSegments;
+var
+  Styles: TBytes; // of each word of the text, in order
+  StyleWords: TStringArray;
+  State: Byte;
+  Styled: Boolean;
+  Paragraphs: array of String; // lines joined with sLineBreak
+  ParaLines: TStringArray;
+  Opt: TSegmentOptions;
+  cps: Double;
+  i, j, t, d, p, dlgCount: Integer;
+  s, para, txt, dlg: String;
+
+  procedure AddSegment(const AText: String);
+  var
+    x: Integer;
+  begin
+    if AText = '' then Exit;
+    x := Length(Result);
+    SetLength(Result, x+1);
+    Result[x].InitialTime := 0;
+    Result[x].FinalTime   := 0;
+    Result[x].Text        := AText;
+  end;
+
+  procedure EndParagraph;
+  begin
+    if para = '' then Exit;
+    SetLength(Paragraphs, Length(Paragraphs)+1);
+    Paragraphs[High(Paragraphs)] := para;
+    para := '';
+  end;
+
+  function ReadTime(const AText: String): Integer;
+  begin
+    Result := Round(UTF8Length(StringReplace(AText, sLineBreak, ' ', [rfReplaceAll])) * 1000 / cps);
+  end;
+
+  function IsDialogLine(const AText: String): Boolean;
+  begin
+    Result := AText.StartsWith('-') or AText.StartsWith('–') or AText.StartsWith('—');
+  end;
+
+  // the smart segmentation of a text, its words with fake times at the
+  // reading speed (one after the other)
+  procedure Segment(const AText: String);
+  var
+    w: TStringArray;
+    Words: TSyncWords;
+    Segs: TSegments;
+    x, l, t, d: Integer;
+  begin
+    w := AText.Split([' '], TStringSplitOptions.ExcludeEmpty);
+    if Length(w) = 0 then Exit;
+    SetLength(Words, Length(w));
+    t := 0;
+    for x := 0 to High(w) do
+    begin
+      d := Max(1, ReadTime(w[x] + ' '));
+      Words[x].Text      := w[x];
+      Words[x].Norm      := NormalizeSyncWord(w[x]);
+      Words[x].StartTime := t;
+      Words[x].EndTime   := t + d;
+      Words[x].Entry     := 0;
+      Words[x].Match     := -1;
+      Words[x].MatchLast := -1;
+      t := t + d;
+    end;
+    Segs := SegmentWords(Words, Opt);
+    for x := 0 to High(Segs) do
+    begin
+      l := Length(Result);
+      SetLength(Result, l+1);
+      Result[l] := Segs[x];
+    end;
+  end;
+
+begin
+  SetLength(Result, 0);
+  SetLength(Paragraphs, 0);
+  if (ALines = NIL) or (ALines.Count = 0) then Exit;
+
+  if AOptions.MaxCPS > 0 then
+    cps := AOptions.MaxCPS
+  else
+    cps := 15;
+
+  Opt := AOptions;
+  Opt.PauseSplit := 0; // no silences in a text
+
+  // the lines (no tabs, tags or trailing spaces) and the paragraphs
+  SetLength(Styles, 0);
+  SetLength(StyleWords, 0);
+  State  := 0;
+  Styled := False;
+  para := '';
+  for i := 0 to ALines.Count-1 do
+  begin
+    s := StringReplace(ALines[i], #9, ' ', [rfReplaceAll]);
+    if (i = 0) and s.StartsWith(#$EF#$BB#$BF) then Delete(s, 1, 3); // BOM
+    if Pos('{\', s) > 0 then Styled := True;
+    s := StripStyleTags(s, State, StyleWords, Styles);
+    if s = '' then
+      EndParagraph
+    else
+    begin
+      if AMode = ptmLine then
+      begin
+        if (AOptions.CPL > 0) and (UTF8Length(s) > AOptions.CPL) then
+          s := AutoBreakSubtitle(s, AOptions.CPL);
+        AddSegment(s);
+      end
+      else if para = '' then
+        para := s
+      else
+        para := para + sLineBreak + s;
+    end;
+  end;
+  EndParagraph;
+
+  case AMode of
+    ptmParagraph:
+      for i := 0 to High(Paragraphs) do
+        AddSegment(Paragraphs[i]);
+
+    ptmAutomatic:
+      for i := 0 to High(Paragraphs) do
+      begin
+        // a paragraph is text (segmented by words) and dialogues: the lines
+        // that start with a dash, together while they fit ("- Yes.\n- No.")
+        ParaLines := Paragraphs[i].Split([sLineBreak]);
+        txt := '';
+        dlg := '';
+        dlgCount := 0;
+        for j := 0 to High(ParaLines) do
+        begin
+          s := ParaLines[j];
+          if IsDialogLine(s) then
+          begin
+            Segment(txt);
+            txt := '';
+            if (dlgCount > 0) and ((dlgCount >= Max(1, AOptions.MaxLines)) or
+              ((AOptions.CPL > 0) and (UTF8Length(s) > AOptions.CPL))) then
+            begin
+              AddSegment(dlg);
+              dlg := '';
+              dlgCount := 0;
+            end;
+            if (AOptions.CPL > 0) and (UTF8Length(s) > AOptions.CPL) then
+              Segment(s) // too long for a line of a dialogue
+            else
+            begin
+              if dlg = '' then dlg := s else dlg := dlg + sLineBreak + s;
+              Inc(dlgCount);
+            end;
+          end
+          else
+          begin
+            AddSegment(dlg);
+            dlg := '';
+            dlgCount := 0;
+            if txt = '' then txt := s else txt := txt + ' ' + s;
+          end;
+        end;
+        Segment(txt);
+        AddSegment(dlg);
+      end;
+  end;
+
+  // estimated times: enough to read them, and the minimum gap between them
+  t := Max(0, AStartTime);
+  p := Max(0, AOptions.MinPause);
+  for i := 0 to High(Result) do
+  begin
+    d := Max(AOptions.MinDuration, ReadTime(Result[i].Text));
+    if (AOptions.MaxDuration > 0) and (d > AOptions.MaxDuration) then
+      d := Max(AOptions.MinDuration, AOptions.MaxDuration);
+    d := Max(d, 1);
+    Result[i].InitialTime := t;
+    Result[i].FinalTime   := t + d;
+    t := t + d + p;
+  end;
+
+  // the tags again (the words are the same and in the same order)
+  if Styled then
+  begin
+    j := 0;
+    d := 0;
+    for i := 0 to High(Result) do
+      Result[i].Text := ApplyStyleTags(Result[i].Text, StyleWords, Styles, j, d);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+{ Transcription cleanup }
+
+// -----------------------------------------------------------------------------
+
+function NormalizedWords(const AText: String): String;
+var
+  w: TStringArray;
+  i: Integer;
+  n: String;
+begin
+  Result := '';
+  w := SplitWords(AText);
+  for i := 0 to High(w) do
+  begin
+    n := NormalizeSyncWord(w[i]);
+    if n <> '' then
+      if Result = '' then
+        Result := n
+      else
+        Result := Result + ' ' + n;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function IsKnownHallucination(const ANorm: String): Boolean;
+const
+  // what whisper "hears" in the silences (from the subtitles it was trained with)
+  Phrases: array[0..10] of String = (
+    'amara.org',
+    'Subtítulos realizados por la comunidad de Amara.org',
+    'Subtítulos por la comunidad de Amara.org',
+    'Subtitles by the Amara.org community',
+    'Thanks for watching!',
+    'Thank you for watching!',
+    'Please subscribe',
+    'Gracias por ver el video',
+    'Sous-titres réalisés par la communauté d''Amara.org',
+    'Legendas pela comunidade Amara.org',
+    'Untertitel im Auftrag des ZDF für funk, 2017'
+  );
+var
+  ph, n: String;
+begin
+  Result := False;
+  if ANorm = '' then Exit;
+  for ph in Phrases do
+  begin
+    n := NormalizedWords(ph);
+    // the phrase alone (perhaps with a few more words: "...for watching, bye")
+    if (ANorm = n) or ((Pos(n, ANorm) > 0) and (Length(ANorm) < Length(n) + 12) and (Length(n) > 12)) then
+      Exit(True);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function CleanTranscription(var ASegments: TSegments; const AOptions: TSegmentOptions; const AJoinFragments: Boolean): Integer;
+const
+  RecentTime    = 30000; // ms, the text "just transcribed"
+  RepeatGap     = 2000;  // ms, same text again before this = the same entry
+  MaxSpeechCPS  = 40;    // faster is not speech, a repetition without time
+  FragmentGap   = 500;   // ms, no real pause between two entries
+  FragmentWords = 2;
+var
+  Res: TSegments;
+  Norms: array of String;
+  i, k, n, dur, c, words, maxChars: Integer;
+  norm, recent, joined: String;
+
+  function WordCount(const ANorm: String): Integer;
+  begin
+    if ANorm = '' then
+      Result := 0
+    else
+      Result := Length(ANorm.Split([' ']));
+  end;
+
+  function SentenceEnd(const AText: String): Boolean;
+  begin
+    Result := EndsWithAny(AText, ['.', '?', '!', '…', ':', ';', '。', '？', '！']);
+  end;
+
+  function OneLine(const AText: String): String;
+  begin
+    Result := Trim(StringReplace(StringReplace(AText, #13#10, ' ', [rfReplaceAll]), #10, ' ', [rfReplaceAll]));
+  end;
+
+begin
+  Result := 0;
+  SetLength(Res, 0);
+  SetLength(Norms, 0);
+
+  for i := 0 to High(ASegments) do
+  begin
+    norm := NormalizedWords(ASegments[i].Text);
+    n := Length(Res);
+
+    // empty or a hallucination of the silences
+    if (norm = '') or IsKnownHallucination(norm) then
+    begin
+      Inc(Result);
+      Continue;
+    end;
+
+    // the same text again right away: the same entry
+    if (n > 0) and (norm = Norms[n-1]) and
+      (ASegments[i].InitialTime - Res[n-1].FinalTime < RepeatGap) then
+    begin
+      Res[n-1].FinalTime := Max(Res[n-1].FinalTime, ASegments[i].FinalTime);
+      Inc(Result);
+      Continue;
+    end;
+
+    // impossibly fast (no time) and repeating what was just transcribed
+    dur := ASegments[i].FinalTime - ASegments[i].InitialTime;
+    c := UTF8Length(norm);
+    if (WordCount(norm) >= 2) and ((dur <= 0) or (c * 1000 / dur > MaxSpeechCPS)) then
+    begin
+      recent := '';
+      for k := n-1 downto 0 do
+      begin
+        if Res[k].FinalTime < ASegments[i].InitialTime - RecentTime then Break;
+        recent := Norms[k] + ' ' + recent;
+      end;
+      if Pos(' ' + norm + ' ', ' ' + recent) > 0 then
+      begin
+        Inc(Result);
+        Continue;
+      end;
+    end;
+
+    SetLength(Res, n+1);
+    SetLength(Norms, n+1);
+    Res[n] := ASegments[i];
+    Norms[n] := norm;
+  end;
+
+  // fragments of one or two words (whisper splits the segments at the pauses
+  // of the speaker): together with the next one when there's no real pause
+  if AJoinFragments and (Length(Res) > 1) then
+  begin
+    maxChars := Max(1, AOptions.CPL) * Max(1, AOptions.MaxLines);
+    ASegments := Res;
+    SetLength(Res, 0);
+    for i := 0 to High(ASegments) do
+    begin
+      n := Length(Res);
+      if n > 0 then
+      begin
+        words := Min(WordCount(NormalizedWords(Res[n-1].Text)), WordCount(NormalizedWords(ASegments[i].Text)));
+        joined := OneLine(Res[n-1].Text) + ' ' + OneLine(ASegments[i].Text);
+        if (words <= FragmentWords) and not SentenceEnd(OneLine(Res[n-1].Text)) and
+          (ASegments[i].InitialTime - Res[n-1].FinalTime <= FragmentGap) and
+          (UTF8Length(joined) <= maxChars) and
+          ((AOptions.MaxDuration <= 0) or (ASegments[i].FinalTime - Res[n-1].InitialTime <= AOptions.MaxDuration)) then
+        begin
+          if (AOptions.CPL > 0) and (UTF8Length(joined) > AOptions.CPL) then
+            joined := AutoBreakSubtitle(joined, AOptions.CPL);
+          Res[n-1].Text := joined;
+          Res[n-1].FinalTime := Max(Res[n-1].FinalTime, ASegments[i].FinalTime);
+          Inc(Result);
+          Continue;
+        end;
+      end;
+      SetLength(Res, n+1);
+      Res[n] := ASegments[i];
+    end;
+  end;
+
+  ASegments := Res;
 end;
 
 // -----------------------------------------------------------------------------

@@ -2003,6 +2003,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actImportPlainTextExecute(Sender: TObject);
+begin
+  ImportPlainTextWithDialog;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actActorExecute(Sender: TObject);
 begin
   ShowActors;

@@ -1,0 +1,142 @@
+object frmImportPlainText: TfrmImportPlainText
+  Left = 243
+  Height = 560
+  Top = 121
+  Width = 560
+  BorderIcons = [biSystemMenu]
+  Caption = 'Import plain text'
+  ClientHeight = 560
+  ClientWidth = 560
+  Constraints.MinHeight = 400
+  Constraints.MinWidth = 460
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '5.0.1.0'
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  object lblMode: TLabel
+    Left = 20
+    Height = 20
+    Top = 12
+    Width = 170
+    Caption = 'Create one entry for each:'
+    ParentColor = False
+  end
+  object cboMode: TComboBox
+    AnchorSideTop.Control = lblMode
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 20
+    Height = 28
+    Top = 38
+    Width = 520
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 20
+    ItemHeight = 20
+    Style = csDropDownList
+    TabOrder = 0
+    OnSelect = cboModeSelect
+  end
+  object chkReplace: TUWCheckBox
+    AnchorSideTop.Control = cboMode
+    AnchorSideTop.Side = asrBottom
+    Left = 20
+    Height = 29
+    Top = 76
+    Width = 20
+    AutoSize = False
+    BorderSpacing.Top = 10
+    Caption = 'Replace the current entries'
+    TabOrder = 1
+    OnChange = cboModeSelect
+  end
+  object chkSyncWithAudio: TUWCheckBox
+    AnchorSideTop.Control = chkReplace
+    AnchorSideTop.Side = asrBottom
+    Left = 20
+    Height = 29
+    Top = 105
+    Width = 20
+    AutoSize = False
+    Caption = 'Synchronize with the audio after importing'
+    TabOrder = 2
+  end
+  object lblPreview: TLabel
+    AnchorSideTop.Control = chkSyncWithAudio
+    AnchorSideTop.Side = asrBottom
+    Left = 20
+    Height = 20
+    Top = 146
+    Width = 54
+    BorderSpacing.Top = 12
+    Caption = 'Preview:'
+    ParentColor = False
+  end
+  object lblCount: TLabel
+    AnchorSideTop.Control = lblPreview
+    AnchorSideRight.Control = mmoPreview
+    AnchorSideRight.Side = asrBottom
+    Left = 484
+    Height = 20
+    Top = 146
+    Width = 56
+    Alignment = taRightJustify
+    Anchors = [akTop, akRight]
+    Caption = '0 entries'
+    ParentColor = False
+  end
+  object mmoPreview: TMemo
+    AnchorSideTop.Control = lblPreview
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = btnClose
+    Left = 20
+    Height = 330
+    Top = 172
+    Width = 520
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 20
+    BorderSpacing.Bottom = 10
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 3
+    WordWrap = False
+  end
+  object btnImport: TButton
+    AnchorSideTop.Control = btnClose
+    AnchorSideRight.Control = btnClose
+    Left = 306
+    Height = 32
+    Top = 512
+    Width = 114
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 6
+    Caption = 'Import'
+    Default = True
+    TabOrder = 4
+    OnClick = btnImportClick
+  end
+  object btnClose: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 426
+    Height = 32
+    Top = 512
+    Width = 114
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 20
+    BorderSpacing.Bottom = 16
+    Cancel = True
+    Caption = 'Close'
+    TabOrder = 5
+    OnClick = btnCloseClick
+  end
+end

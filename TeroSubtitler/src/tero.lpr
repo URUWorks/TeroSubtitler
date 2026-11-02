@@ -38,7 +38,7 @@ uses
   procProjectFile, formCustomImageFormat, procCustomFormat, procDialogs,
   formExportSUP, formGenerateVideo, procGenerateVideo, procLocalize,
   formCharacterMap, formRoundTime, formStatistics, formGenerateBlankVideo,
-  procThumbnails, formStreamExtractor, formPauses,
+  procThumbnails, formStreamExtractor, formPauses, formImportPlainText,
   formCustomSelectDlgWithPreview, formTTS, formVideoDubbing, formImportSUP,
   formImportSUPLanguages, procMacOpenFiles, procMacMediaKeys, procMacMenuKeys;
 

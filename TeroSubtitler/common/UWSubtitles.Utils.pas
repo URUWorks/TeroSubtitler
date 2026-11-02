@@ -627,27 +627,27 @@ begin
 
   Text := RemoveUnnecessarySpaces(Text, BreakChar);
 
-  // try to break dialogs
-  if AnsiContainsText(Text, '-') then
+  // try to break dialogs: only a text that starts with a dash and has another
+  // one after a space ("- Yes. - No."), not every hyphen ("Co-starring" or
+  // "well-known" aren't dialogs)
+  if String(ReplaceRegExpr('^(\{[^}]*\})+', Text, '', False)).StartsWith('-') and
+    ExecRegExpr('\s(\{[^}]*\})*-', Text) then
   begin
     s := TStringList.Create;
     try
       s.SkipLastLineBreak := True;
-      s.AddDelimitedText(Text, '-', True);
-      if s.Count > 0 then
-      begin
-        Result := '';
-        for i := 0 to s.Count-1 do
-          if not s[i].IsEmpty then
-          begin
-            if i < s.Count-1 then
-              Result := Format('%s-%s%s', [Result, s[i], BreakChar])
-            else
-              Result := Format('%s-%s', [Result, s[i]]);
-          end;
+      s.Text := ReplaceRegExpr('\s+((\{[^}]*\})*-)', Text, #10 + '$1', True);
+      Result := '';
+      for i := 0 to s.Count-1 do
+        if not Trim(s[i]).IsEmpty then
+        begin
+          if Result = '' then
+            Result := Trim(s[i])
+          else
+            Result := Result + BreakChar + Trim(s[i]);
+        end;
 
-        Result := RemoveUnnecessarySpaces(Result, BreakChar);
-      end;
+      Result := RemoveUnnecessarySpaces(Result, BreakChar);
     finally
       s.Free;
     end;

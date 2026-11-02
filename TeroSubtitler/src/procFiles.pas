@@ -57,6 +57,7 @@ procedure ReadSubtitleData(const AFileName: String; const OnlyTimings: Boolean; 
 procedure ReadTimingsFromFileWithDialog;
 procedure ReadTextsFromFileWithDialog;
 procedure ImportSubtitleWithDialog;
+procedure ImportPlainTextWithDialog;
 procedure ExportMarkedSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 procedure ExportTextOnlySubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 
@@ -1037,7 +1038,7 @@ begin
 
   for i := 0 to Length(TShotChangeExts)-1 do
   begin
-    s := ConcatPaths([ShotChangesFolder, ExtractFileName(ChangeFileExt(FileName, TShotChangeExts[i]))]);
+    s := ShotChangesFileName(FileName, TShotChangeExts[i]);
     if FileExists(s) then
     begin
       frmMain.WAVE.LoadSceneChangeFile(s, (Workspace.WorkMode = wmTime));
@@ -1379,6 +1380,27 @@ begin
     finally
       OD.Free;
     end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ImportPlainTextWithDialog;
+var
+  OD : TOpenDialog;
+begin
+  // a transcription without times: the entries are made from its lines,
+  // paragraphs or sentences (to synchronize them with the audio later)
+  OD := TOpenDialog.Create(NIL);
+  try
+    OD.Title   := lngOpenFile;
+    OD.Filter  := lngPlainTextFiles + ' (*.txt)|*.txt|' + lngPlainTextAllFiles + ' (*)|*';
+    OD.Options := OD.Options + [ofFileMustExist];
+
+    if OD.Execute then
+      ShowImportPlainText(OD.FileName);
+  finally
+    OD.Free;
   end;
 end;
 

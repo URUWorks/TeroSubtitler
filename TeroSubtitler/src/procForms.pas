@@ -55,7 +55,7 @@ procedure ShowSpellCheck;
 procedure ShowGoToTime;
 procedure ShowActors;
 procedure ShowShotChanges;
-procedure ShowAudioToText;
+procedure ShowAudioToText(const ASyncTexts: Boolean = False);
 procedure ShowAudioToTextModels;
 procedure ShowBatchConvert;
 procedure ShowQualityCheck;
@@ -65,6 +65,7 @@ procedure ShowCustomTextFormat;
 procedure ShowCustomImageFormat;
 procedure ShowExportSUP;
 procedure ShowImportSUP;
+procedure ShowImportPlainText(const AFileName: String);
 procedure ShowImportSUPLanguages;
 procedure ShowGenerateVideo;
 procedure ShowGenerateBlankVideo;
@@ -102,9 +103,9 @@ uses
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
   formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
   formRoundTime, formStatistics, formGenerateBlankVideo, formStreamExtractor,
-  formPauses, formTTS, formVideoDubbing, formVideoOffset, formImportSUP,
+  formPauses, formTTS, formVideoDubbing, formVideoOffset, formImportSUP, formImportPlainText,
   formImportSUPLanguages, LCLTranslator, procLocalize, procDialogs, SysUtils, Dialogs, procFiles,
-  UWSubtitleAPI;
+  UWSubtitleAPI, procVST;
 
 // -----------------------------------------------------------------------------
 
@@ -395,6 +396,9 @@ begin
       SetGUILanguage;
       UpdateVideoLengthString;
       RefreshAppTitle;
+      // the texts set at runtime ("Text (n characters...)", the tip)
+      UpdateCPSAndTexts(procVST.VSTFocusedNode(frmMain.VST));
+      SetStatusBarText(GetRandomTipString, 0, False);
     end
     else if OldShiftMs <> AppOptions.ShiftTimeMS then
       UpdateCommonActionString;
@@ -664,11 +668,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure ShowAudioToText;
+procedure ShowAudioToText(const ASyncTexts: Boolean = False);
 begin
   if frmAudioToText = NIL then
   begin
     frmAudioToText := TfrmAudioToText.Create(Application);
+    // ASyncTexts: synchronize the texts of the entries (e.g. a plain text imported)
+    if ASyncTexts and frmAudioToText.chkSyncText.Enabled then
+      frmAudioToText.chkSyncText.Checked := True;
     ShowForm(frmAudioToText);
   end
   else
@@ -790,6 +797,26 @@ begin
   end
   else
     frmImportSUP.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowImportPlainText(const AFileName: String);
+begin
+  if frmImportPlainText = NIL then
+  begin
+    frmImportPlainText := TfrmImportPlainText.Create(Application);
+    frmImportPlainText.LoadFile(AFileName);
+    ShowForm(frmImportPlainText);
+    // the texts imported, now their times from the audio
+    if ImportPlainTextSyncRequested then
+    begin
+      ImportPlainTextSyncRequested := False;
+      ShowAudioToText(True);
+    end;
+  end
+  else
+    frmImportPlainText.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

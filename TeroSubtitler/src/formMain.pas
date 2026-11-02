@@ -92,6 +92,7 @@ type
     actGoToCurrentEntryFinalTime: TAction;
     actDistributeEntriesEvenly: TAction;
     actImportSUP: TAction;
+    actImportPlainText: TAction;
     actVideoOffset: TAction;
     actShowVideoToolbarVolume: TAction;
     actVideoDubbing: TAction;
@@ -606,6 +607,7 @@ type
     MenuItem125: TMenuItem;
     mnuTranscriptionInsertTime: TMenuItem;
     MenuItem126: TMenuItem;
+    mnuFileImportPlainText: TMenuItem;
     MenuItem127: TMenuItem;
     MenuItem128: TMenuItem;
     MenuItem129: TMenuItem;
@@ -1287,6 +1289,7 @@ type
     procedure actExportCustomImageFormatExecute(Sender: TObject);
     procedure actExportSUPExecute(Sender: TObject);
     procedure actImportSUPExecute(Sender: TObject);
+    procedure actImportPlainTextExecute(Sender: TObject);
     procedure actActorExecute(Sender: TObject);
     procedure actLoadProjectExecute(Sender: TObject);
     procedure actSaveProjectExecute(Sender: TObject);

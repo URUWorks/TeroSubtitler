@@ -1809,6 +1809,9 @@ object frmMain: TfrmMain
         object MenuItem126: TMenuItem
           Action = actLoadTranscription
         end
+        object mnuFileImportPlainText: TMenuItem
+          Action = actImportPlainText
+        end
         object MenuItem290: TMenuItem
           Action = actImportSUP
         end
@@ -5154,6 +5157,12 @@ object frmMain: TfrmMain
       Category = 'File'
       Caption = 'Blu-ray SUP...'
       OnExecute = actImportSUPExecute
+    end
+    object actImportPlainText: TAction
+      Category = 'File'
+      Caption = 'Plain text...'
+      Hint = 'Import a transcription without times, to synchronize it with the audio'
+      OnExecute = actImportPlainTextExecute
     end
     object actCompare: TAction
       Category = 'File'

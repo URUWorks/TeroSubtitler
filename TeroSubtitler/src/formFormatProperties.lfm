@@ -1,105 +1,106 @@
 object frmFormatProperties: TfrmFormatProperties
   Left = 236
-  Height = 361
+  Height = 451
   Top = 117
-  Width = 368
+  Width = 460
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Format properties'
-  ClientHeight = 361
-  ClientWidth = 368
+  ClientHeight = 451
+  ClientWidth = 460
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '5.0.1.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
   object lyoWebVTT: TUWLayout
-    Left = 8
-    Height = 280
-    Top = 40
-    Width = 352
-    ClientHeight = 280
-    ClientWidth = 352
+    Left = 10
+    Height = 350
+    Top = 50
+    Width = 440
+    ClientHeight = 350
+    ClientWidth = 440
     TabOrder = 1
     Visible = False
     object chkVTTWriteCueIdentifiers: TUWCheckBox
       Left = 0
-      Height = 23
+      Height = 29
       Top = 0
-      Width = 16
+      Width = 20
       AutoSize = False
       Caption = 'Write cue identifiers'
       TabOrder = 0
     end
     object chkVTTUseXTIMESTAMP: TUWCheckBox
       Left = 0
-      Height = 23
-      Top = 24
-      Width = 16
+      Height = 29
+      Top = 30
+      Width = 20
       AutoSize = False
       Caption = 'Use X-TIMESTAMP-MAP header'
       TabOrder = 1
     end
     object spnVTTMPEGTS: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 56
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 70
+      Width = 250
       TabOrder = 2
     end
     object lblVTTMPEGTS: TLabel
       Left = 0
-      Height = 15
-      Top = 60
-      Width = 73
+      Height = 20
+      Top = 75
+      Width = 90
       Caption = 'MPEG-2 time:'
       ParentColor = False
     end
     object lblVTTLOCAL: TLabel
       Left = 0
-      Height = 15
-      Top = 92
-      Width = 51
+      Height = 20
+      Top = 115
+      Width = 62
       Caption = 'Cue time:'
       ParentColor = False
     end
     object tedVTTLOCAL: TUWTimeEdit
-      Left = 152
-      Height = 23
-      Top = 88
-      Width = 186
+      Left = 190
+      Height = 29
+      Top = 110
+      Width = 232
       Value = 0
       FPS = 25
       FrameStep = 1
       TimeStep = 1
       TimeMode = temTime
       Alignment = taCenter
-      Constraints.MinHeight = 21
-      Constraints.MinWidth = 90
+      Constraints.MinHeight = 26
+      Constraints.MinWidth = 112
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
     end
   end
   object cboFormats: TComboBox
-    Left = 8
-    Height = 23
-    Top = 8
-    Width = 352
+    Left = 10
+    Height = 28
+    Top = 10
+    Width = 440
     Anchors = [akTop, akLeft, akRight]
-    ItemHeight = 15
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 0
     OnSelect = cboFormatsSelect
   end
   object btnApply: TButton
     AnchorSideRight.Control = btnClose
-    Left = 173
-    Height = 26
-    Top = 328
-    Width = 91
+    Left = 216
+    Height = 32
+    Top = 410
+    Width = 114
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     Caption = 'Apply'
     Default = True
     TabOrder = 2
@@ -108,63 +109,63 @@ object frmFormatProperties: TfrmFormatProperties
   object btnClose: TButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 269
-    Height = 26
-    Top = 328
-    Width = 91
+    Left = 336
+    Height = 32
+    Top = 410
+    Width = 114
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 8
+    BorderSpacing.Right = 10
     Cancel = True
     Caption = 'Close'
     TabOrder = 3
     OnClick = btnCloseClick
   end
   object lyoAdvancedSubtitles: TUWLayout
-    Left = 8
-    Height = 280
-    Top = 40
-    Width = 352
+    Left = 10
+    Height = 350
+    Top = 50
+    Width = 440
     Anchors = [akTop, akLeft, akRight, akBottom]
-    ClientHeight = 280
-    ClientWidth = 352
+    ClientHeight = 350
+    ClientWidth = 440
     TabOrder = 4
     Visible = False
     object lblASLanguage: TLabel
       Left = 0
-      Height = 15
-      Top = 4
-      Width = 52
+      Height = 20
+      Top = 5
+      Width = 65
       Caption = 'Language'
       ParentColor = False
     end
     object lblASFontName: TLabel
       Left = 0
-      Height = 15
-      Top = 36
-      Width = 57
+      Height = 20
+      Top = 45
+      Width = 70
       Caption = 'Font name'
       ParentColor = False
     end
     object lblASFontSize: TLabel
       Left = 0
-      Height = 15
-      Top = 68
-      Width = 46
+      Height = 20
+      Top = 85
+      Width = 58
       Caption = 'Font size'
       ParentColor = False
     end
     object edtASFontName: TEdit
-      Left = 152
-      Height = 23
-      Top = 32
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 40
+      Width = 250
       TabOrder = 1
     end
     object spnASFontSize: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 64
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 80
+      Width = 250
       MaxValue = 600
       MinValue = 1
       TabOrder = 2
@@ -172,251 +173,251 @@ object frmFormatProperties: TfrmFormatProperties
     end
     object lblASFontColor: TLabel
       Left = 0
-      Height = 15
-      Top = 101
-      Width = 54
+      Height = 20
+      Top = 126
+      Width = 67
       Caption = 'Font color'
       ParentColor = False
     end
     object lblASPositionX: TLabel
       Left = 0
-      Height = 15
-      Top = 132
-      Width = 53
+      Height = 20
+      Top = 165
+      Width = 65
       Caption = 'Position X'
       ParentColor = False
     end
     object spnASPositionX: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 128
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 160
+      Width = 250
       MaxValue = 100
       TabOrder = 3
     end
     object lblASPositionY: TLabel
       Left = 0
-      Height = 15
-      Top = 164
-      Width = 53
+      Height = 20
+      Top = 205
+      Width = 64
       Caption = 'Position Y'
       ParentColor = False
     end
     object spnASPositionY: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 160
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 200
+      Width = 250
       MaxValue = 100
       TabOrder = 4
     end
     object lblASWidth: TLabel
       Left = 0
-      Height = 15
-      Top = 196
-      Width = 32
+      Height = 20
+      Top = 245
+      Width = 40
       Caption = 'Width'
       ParentColor = False
     end
     object spnASWidth: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 192
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 240
+      Width = 250
       MaxValue = 100
       TabOrder = 5
     end
     object lblASHeight: TLabel
       Left = 0
-      Height = 15
-      Top = 228
-      Width = 36
+      Height = 20
+      Top = 285
+      Width = 45
       Caption = 'Height'
       ParentColor = False
     end
     object spnASHeight: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 224
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 280
+      Width = 250
       MaxValue = 100
       TabOrder = 6
     end
     object lblASAlignment: TLabel
       Left = 0
-      Height = 15
-      Top = 260
-      Width = 56
+      Height = 20
+      Top = 325
+      Width = 69
       Caption = 'Alignment'
       ParentColor = False
     end
     object cboASAlignment: TComboBox
-      Left = 152
-      Height = 23
-      Top = 256
-      Width = 200
-      ItemHeight = 15
+      Left = 190
+      Height = 28
+      Top = 320
+      Width = 250
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 7
     end
     object cbnASFontColor: TColorButton
-      Left = 152
-      Height = 25
-      Top = 96
-      Width = 200
+      Left = 190
+      Height = 31
+      Top = 120
+      Width = 250
       BorderWidth = 2
-      ButtonColorSize = 16
+      ButtonColorSize = 20
       ButtonColor = clWhite
       Flat = True
     end
     object cboASLanguage: TComboBox
-      Left = 152
-      Height = 23
+      Left = 190
+      Height = 28
       Top = 0
-      Width = 200
-      ItemHeight = 15
+      Width = 250
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 0
     end
   end
   object lyoEBU: TUWLayout
-    Left = 8
-    Height = 280
-    Top = 40
-    Width = 352
+    Left = 10
+    Height = 350
+    Top = 50
+    Width = 440
     Anchors = [akTop, akLeft, akRight, akBottom]
-    ClientHeight = 280
-    ClientWidth = 352
+    ClientHeight = 350
+    ClientWidth = 440
     TabOrder = 5
     Visible = False
     object lblEBUDFC: TLabel
       Left = 0
-      Height = 15
-      Top = 4
-      Width = 90
+      Height = 20
+      Top = 5
+      Width = 114
       Caption = 'Disk format code'
       ParentColor = False
     end
     object lblEBUDSC: TLabel
       Left = 0
-      Height = 15
-      Top = 36
-      Width = 116
+      Height = 20
+      Top = 45
+      Width = 148
       Caption = 'Display standard code'
       ParentColor = False
     end
     object lblEBUCCT: TLabel
       Left = 0
-      Height = 15
-      Top = 68
-      Width = 109
+      Height = 20
+      Top = 85
+      Width = 138
       Caption = 'Character code table'
       ParentColor = False
     end
     object edtEBUCPN: TEdit
-      Left = 152
-      Height = 23
-      Top = 96
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 120
+      Width = 250
       NumbersOnly = True
       TabOrder = 3
     end
     object lblEBUCPN: TLabel
       Left = 0
-      Height = 15
-      Top = 101
-      Width = 102
+      Height = 20
+      Top = 126
+      Width = 128
       Caption = 'Code page number'
       ParentColor = False
     end
     object lblEBULC: TLabel
       Left = 0
-      Height = 15
-      Top = 132
-      Width = 81
+      Height = 20
+      Top = 165
+      Width = 102
       Caption = 'Language code'
       ParentColor = False
     end
     object lblEBUCO: TLabel
       Left = 0
-      Height = 15
-      Top = 164
-      Width = 77
+      Height = 20
+      Top = 205
+      Width = 94
       Caption = 'Country origin'
       ParentColor = False
     end
     object lblEBUNDC: TLabel
       Left = 0
-      Height = 15
-      Top = 196
-      Width = 54
+      Height = 20
+      Top = 245
+      Width = 66
       Caption = 'Max chars'
       ParentColor = False
     end
     object lblEBUNDR: TLabel
       Left = 0
-      Height = 15
-      Top = 228
-      Width = 51
+      Height = 20
+      Top = 285
+      Width = 63
       Caption = 'Max rows'
       ParentColor = False
     end
     object cboEBUDFC: TComboBox
-      Left = 152
-      Height = 23
+      Left = 190
+      Height = 28
       Top = 0
-      Width = 200
-      ItemHeight = 15
+      Width = 250
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 0
     end
     object cboEBUDSC: TComboBox
-      Left = 152
-      Height = 23
-      Top = 32
-      Width = 200
-      ItemHeight = 15
+      Left = 190
+      Height = 28
+      Top = 40
+      Width = 250
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 1
     end
     object cboEBUCCT: TComboBox
-      Left = 152
-      Height = 23
-      Top = 64
-      Width = 200
-      ItemHeight = 15
+      Left = 190
+      Height = 28
+      Top = 80
+      Width = 250
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 2
     end
     object edtEBULC: TEdit
-      Left = 152
-      Height = 23
-      Top = 128
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 160
+      Width = 250
       TabOrder = 4
     end
     object edtEBUCO: TEdit
-      Left = 152
-      Height = 23
-      Top = 160
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 200
+      Width = 250
       TabOrder = 5
     end
     object spnEBUNDC: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 192
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 240
+      Width = 250
       MaxValue = 255
       MinValue = 1
       TabOrder = 6
       Value = 1
     end
     object spnEBUNDR: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 224
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 280
+      Width = 250
       MaxValue = 10
       MinValue = 1
       TabOrder = 7
@@ -424,238 +425,238 @@ object frmFormatProperties: TfrmFormatProperties
     end
   end
   object lyoCavena890: TUWLayout
-    Left = 8
-    Height = 280
-    Top = 40
-    Width = 352
+    Left = 10
+    Height = 350
+    Top = 50
+    Width = 440
     Anchors = [akTop, akLeft, akRight, akBottom]
-    ClientHeight = 280
-    ClientWidth = 352
+    ClientHeight = 350
+    ClientWidth = 440
     TabOrder = 6
     Visible = False
     object lblCavenaTranslatedTitle: TLabel
       Left = 0
-      Height = 15
-      Top = 4
-      Width = 76
+      Height = 20
+      Top = 5
+      Width = 98
       Caption = 'Translated title'
       ParentColor = False
     end
     object lblCavenaOriginalTitle: TLabel
       Left = 0
-      Height = 15
-      Top = 36
-      Width = 65
+      Height = 20
+      Top = 45
+      Width = 83
       Caption = 'Original title'
       ParentColor = False
     end
     object lblCavenaTranslator: TLabel
       Left = 0
-      Height = 15
-      Top = 68
-      Width = 51
+      Height = 20
+      Top = 85
+      Width = 65
       Caption = 'Translator'
       ParentColor = False
     end
     object edtCavenaComment: TEdit
-      Left = 152
-      Height = 23
-      Top = 96
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 120
+      Width = 250
       TabOrder = 3
     end
     object lblCavenaComment: TLabel
       Left = 0
-      Height = 15
-      Top = 101
-      Width = 59
+      Height = 20
+      Top = 126
+      Width = 71
       Caption = 'Comments'
       ParentColor = False
     end
     object lblCavenaLanguage: TLabel
       Left = 0
-      Height = 15
-      Top = 132
-      Width = 52
+      Height = 20
+      Top = 165
+      Width = 65
       Caption = 'Language'
       ParentColor = False
     end
     object lblCavenaTCStart: TLabel
       Left = 0
-      Height = 15
-      Top = 164
-      Width = 77
+      Height = 20
+      Top = 205
+      Width = 98
       Caption = 'Start timecode'
       ParentColor = False
     end
     object edtCavenaTranslatedTitle: TEdit
-      Left = 152
-      Height = 23
+      Left = 190
+      Height = 28
       Top = 0
-      Width = 200
+      Width = 250
       TabOrder = 0
     end
     object edtCavenaOriginalTitle: TEdit
-      Left = 152
-      Height = 23
-      Top = 32
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 40
+      Width = 250
       TabOrder = 1
     end
     object edtCavenaTranslator: TEdit
-      Left = 152
-      Height = 23
-      Top = 64
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 80
+      Width = 250
       TabOrder = 2
     end
     object cboCavenaLanguage: TComboBox
-      Left = 152
-      Height = 23
-      Top = 128
-      Width = 200
-      ItemHeight = 15
+      Left = 190
+      Height = 28
+      Top = 160
+      Width = 250
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 4
     end
     object tedCavenaTCStart: TUWTimeEdit
-      Left = 152
-      Height = 23
-      Top = 160
-      Width = 186
+      Left = 190
+      Height = 29
+      Top = 200
+      Width = 232
       Value = 0
       FPS = 25
       FrameStep = 1
       TimeStep = 1
       TimeMode = temFrames
       Alignment = taCenter
-      Constraints.MinHeight = 21
-      Constraints.MinWidth = 90
+      Constraints.MinHeight = 26
+      Constraints.MinWidth = 112
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 5
     end
   end
   object lyoDVDSubtitle: TUWLayout
-    Left = 8
-    Height = 280
-    Top = 40
-    Width = 352
+    Left = 10
+    Height = 350
+    Top = 50
+    Width = 440
     Anchors = [akTop, akLeft, akRight, akBottom]
-    ClientHeight = 280
-    ClientWidth = 352
+    ClientHeight = 350
+    ClientWidth = 440
     TabOrder = 7
     Visible = False
     object lblDVDTitle: TLabel
       Left = 0
-      Height = 15
-      Top = 4
-      Width = 22
+      Height = 20
+      Top = 5
+      Width = 29
       Caption = 'Title'
       ParentColor = False
     end
     object lblDVDAuthor: TLabel
       Left = 0
-      Height = 15
-      Top = 36
-      Width = 37
+      Height = 20
+      Top = 45
+      Width = 45
       Caption = 'Author'
       ParentColor = False
     end
     object lblDVDInfo: TLabel
       Left = 0
-      Height = 15
-      Top = 68
-      Width = 21
+      Height = 20
+      Top = 85
+      Width = 26
       Caption = 'Info'
       ParentColor = False
     end
     object edtDVDWeb: TEdit
-      Left = 152
-      Height = 23
-      Top = 96
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 120
+      Width = 250
       TabOrder = 3
     end
     object lblDVDWeb: TLabel
       Left = 0
-      Height = 15
-      Top = 101
-      Width = 24
+      Height = 20
+      Top = 126
+      Width = 30
       Caption = 'Web'
       ParentColor = False
     end
     object lblDVDLanguage: TLabel
       Left = 0
-      Height = 15
-      Top = 132
-      Width = 52
+      Height = 20
+      Top = 165
+      Width = 65
       Caption = 'Language'
       ParentColor = False
     end
     object edtDVDTitle: TEdit
-      Left = 152
-      Height = 23
+      Left = 190
+      Height = 28
       Top = 0
-      Width = 200
+      Width = 250
       TabOrder = 0
     end
     object edtDVDAuthor: TEdit
-      Left = 152
-      Height = 23
-      Top = 32
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 40
+      Width = 250
       TabOrder = 1
     end
     object edtDVDInfo: TEdit
-      Left = 152
-      Height = 23
-      Top = 64
-      Width = 200
+      Left = 190
+      Height = 28
+      Top = 80
+      Width = 250
       TabOrder = 2
     end
     object cboDVDLanguage: TComboBox
-      Left = 152
-      Height = 23
-      Top = 128
-      Width = 200
-      ItemHeight = 15
+      Left = 190
+      Height = 28
+      Top = 160
+      Width = 250
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 4
     end
   end
   object lyoTimedText: TUWLayout
-    Left = 8
-    Height = 280
-    Top = 40
-    Width = 352
+    Left = 10
+    Height = 350
+    Top = 50
+    Width = 440
     Anchors = [akTop, akLeft, akRight, akBottom]
-    ClientHeight = 280
-    ClientWidth = 352
+    ClientHeight = 350
+    ClientWidth = 440
     TabOrder = 8
     Visible = False
     object lblTTLanguage: TLabel
       Left = 0
-      Height = 15
-      Top = 4
-      Width = 52
+      Height = 20
+      Top = 5
+      Width = 65
       Caption = 'Language'
       ParentColor = False
     end
     object cboTTLanguage: TComboBox
-      Left = 152
-      Height = 23
+      Left = 190
+      Height = 28
       Top = 0
-      Width = 200
-      ItemHeight = 15
+      Width = 250
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 0
     end
     object lblTTLanguageHint: TLabel
-      Left = 152
-      Height = 15
-      Top = 28
-      Width = 200
+      Left = 190
+      Height = 19
+      Top = 35
+      Width = 250
       AutoSize = False
       Caption = 'xml:lang'
       Font.Color = clGrayText
@@ -664,191 +665,191 @@ object frmFormatProperties: TfrmFormatProperties
     end
   end
   object lyoDCinema: TUWLayout
-    Left = 8
-    Height = 280
-    Top = 40
-    Width = 352
+    Left = 10
+    Height = 350
+    Top = 50
+    Width = 440
     Anchors = [akTop, akLeft, akRight, akBottom]
-    ClientHeight = 280
-    ClientWidth = 352
+    ClientHeight = 350
+    ClientWidth = 440
     TabOrder = 9
     Visible = False
     object lblDCTitle: TLabel
       Left = 0
-      Height = 15
-      Top = 4
-      Width = 140
+      Height = 19
+      Top = 5
+      Width = 175
       AutoSize = False
       Caption = 'Title'
       ParentColor = False
     end
     object edtDCTitle: TEdit
-      Left = 152
-      Height = 23
+      Left = 190
+      Height = 28
       Top = 0
-      Width = 190
+      Width = 238
       TabOrder = 0
     end
     object lblDCReel: TLabel
       Left = 0
-      Height = 15
-      Top = 34
-      Width = 140
+      Height = 19
+      Top = 42
+      Width = 175
       AutoSize = False
       Caption = 'Reel number'
       ParentColor = False
     end
     object spnDCReel: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 30
-      Width = 190
+      Left = 190
+      Height = 28
+      Top = 38
+      Width = 238
       MaxValue = 999
       TabOrder = 1
     end
     object lblDCLanguage: TLabel
       Left = 0
-      Height = 15
-      Top = 64
-      Width = 140
+      Height = 19
+      Top = 80
+      Width = 175
       AutoSize = False
       Caption = 'Language'
       ParentColor = False
     end
     object edtDCLanguage: TEdit
-      Left = 152
-      Height = 23
-      Top = 60
-      Width = 190
+      Left = 190
+      Height = 28
+      Top = 75
+      Width = 238
       TabOrder = 2
     end
     object lblDCFont: TLabel
       Left = 0
-      Height = 15
-      Top = 94
-      Width = 140
+      Height = 18
+      Top = 118
+      Width = 175
       AutoSize = False
       Caption = 'Font (file or urn:uuid)'
       ParentColor = False
     end
     object edtDCFont: TEdit
-      Left = 152
-      Height = 23
-      Top = 90
-      Width = 190
+      Left = 190
+      Height = 28
+      Top = 112
+      Width = 238
       TabOrder = 3
     end
     object lblDCFontSize: TLabel
       Left = 0
-      Height = 15
-      Top = 124
-      Width = 140
+      Height = 19
+      Top = 155
+      Width = 175
       AutoSize = False
       Caption = 'Font size'
       ParentColor = False
     end
     object spnDCFontSize: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 120
-      Width = 92
+      Left = 190
+      Height = 28
+      Top = 150
+      Width = 115
       MaxValue = 200
       TabOrder = 4
     end
     object cbnDCFontColor: TColorButton
-      Left = 250
-      Height = 25
-      Top = 119
-      Width = 92
+      Left = 312
+      Height = 31
+      Top = 149
+      Width = 116
       BorderWidth = 2
-      ButtonColorSize = 16
+      ButtonColorSize = 20
       ButtonColor = clWhite
       Flat = True
     end
     object lblDCEffect: TLabel
       Left = 0
-      Height = 15
-      Top = 154
-      Width = 140
+      Height = 19
+      Top = 192
+      Width = 175
       AutoSize = False
       Caption = 'Effect'
       ParentColor = False
     end
     object cboDCEffect: TComboBox
-      Left = 152
-      Height = 23
-      Top = 150
-      Width = 92
-      ItemHeight = 15
+      Left = 190
+      Height = 28
+      Top = 188
+      Width = 115
+      ItemHeight = 20
       Style = csDropDownList
       TabOrder = 5
     end
     object cbnDCEffectColor: TColorButton
-      Left = 250
-      Height = 25
-      Top = 149
-      Width = 92
+      Left = 312
+      Height = 32
+      Top = 186
+      Width = 116
       BorderWidth = 2
-      ButtonColorSize = 16
+      ButtonColorSize = 20
       ButtonColor = clBlack
       Flat = True
     end
     object lblDCVPosition: TLabel
       Left = 0
-      Height = 15
-      Top = 184
-      Width = 140
+      Height = 19
+      Top = 230
+      Width = 175
       AutoSize = False
       Caption = 'Vertical position (%)'
       ParentColor = False
     end
     object spnDCVPosition: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 180
-      Width = 190
+      Left = 190
+      Height = 28
+      Top = 225
+      Width = 238
       MaxValue = 100
       TabOrder = 6
     end
     object lblDCLineSpacing: TLabel
       Left = 0
-      Height = 15
-      Top = 214
-      Width = 140
+      Height = 18
+      Top = 268
+      Width = 175
       AutoSize = False
       Caption = 'Line spacing (%)'
       ParentColor = False
     end
     object spnDCLineSpacing: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 210
-      Width = 190
+      Left = 190
+      Height = 28
+      Top = 262
+      Width = 238
       MaxValue = 50
       TabOrder = 7
     end
     object lblDCFadeUp: TLabel
       Left = 0
-      Height = 15
-      Top = 244
-      Width = 140
+      Height = 19
+      Top = 305
+      Width = 175
       AutoSize = False
       Caption = 'Fade in / out (ms)'
       ParentColor = False
     end
     object spnDCFadeUp: TSpinEdit
-      Left = 152
-      Height = 23
-      Top = 240
-      Width = 92
+      Left = 190
+      Height = 28
+      Top = 300
+      Width = 115
       MaxValue = 10000
       TabOrder = 8
     end
     object spnDCFadeDown: TSpinEdit
-      Left = 250
-      Height = 23
-      Top = 240
-      Width = 92
+      Left = 312
+      Height = 28
+      Top = 300
+      Width = 116
       MaxValue = 10000
       TabOrder = 9
     end

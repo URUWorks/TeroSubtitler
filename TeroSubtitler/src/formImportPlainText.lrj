@@ -1,0 +1,10 @@
+{"version":1,"strings":[
+{"hash":120625636,"name":"tfrmimportplaintext.caption","sourcebytes":[73,109,112,111,114,116,32,112,108,97,105,110,32,116,101,120,116],"value":"Import plain text"},
+{"hash":17817434,"name":"tfrmimportplaintext.lblmode.caption","sourcebytes":[67,114,101,97,116,101,32,111,110,101,32,101,110,116,114,121,32,102,111,114,32,101,97,99,104,58],"value":"Create one entry for each:"},
+{"hash":1539299,"name":"tfrmimportplaintext.chkreplace.caption","sourcebytes":[82,101,112,108,97,99,101,32,116,104,101,32,99,117,114,114,101,110,116,32,101,110,116,114,105,101,115],"value":"Replace the current entries"},
+{"hash":111033495,"name":"tfrmimportplaintext.chksyncwithaudio.caption","sourcebytes":[83,121,110,99,104,114,111,110,105,122,101,32,119,105,116,104,32,116,104,101,32,97,117,100,105,111,32,97,102,116,101,114,32,105,109,112,111,114,116,105,110,103],"value":"Synchronize with the audio after importing"},
+{"hash":147651034,"name":"tfrmimportplaintext.lblpreview.caption","sourcebytes":[80,114,101,118,105,101,119,58],"value":"Preview:"},
+{"hash":207338915,"name":"tfrmimportplaintext.lblcount.caption","sourcebytes":[48,32,101,110,116,114,105,101,115],"value":"0 entries"},
+{"hash":84178580,"name":"tfrmimportplaintext.btnimport.caption","sourcebytes":[73,109,112,111,114,116],"value":"Import"},
+{"hash":4863637,"name":"tfrmimportplaintext.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}
