@@ -881,7 +881,12 @@ begin
     edtQuickAction.SelectAll
   else if Workspace.ViewMode = vmList then
   begin
-    Memo := GetMemoFocused;
+    // with the mouse over the timeline, select all the entries (not the text)
+    if WAVE.IsVisible and WAVE.MouseInClient then
+      Memo := NIL
+    else
+      Memo := GetMemoFocused;
+
     if Memo <> NIL then
       Memo.SelectAll
     else

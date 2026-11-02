@@ -1032,6 +1032,10 @@ type
     procedure WAVESelectionChange(Sender: TObject);
     procedure WAVEClick(Sender: TObject);
     procedure WAVETimeLineClick(Sender: TObject; const Time: Integer);
+    procedure WAVESubtitleItemToggle(Sender: TObject; const Index: Integer);
+    procedure WAVESubtitleItemsMoved(Sender: TObject; const Items: TMovedSubtitleItems);
+    procedure VSTChange(Sender: TBaseVirtualTree; Node: PVirtualNode);
+    procedure UpdateWAVEMultiSelection;
     procedure GoToNextShotChange(const APrevious: Boolean = False);
     procedure DetectDialogSegments;
     procedure GenerateThumbnails;
@@ -1447,6 +1451,10 @@ begin
   // Link subtitles to Waveform
   WAVE.EmptyText := '';
   WAVE.Subtitles := Subtitles;
+  // multiple selection in the timeline (it shows the entries selected in the list)
+  WAVE.OnSubtitleItemToggle := @WAVESubtitleItemToggle;
+  WAVE.OnSubtitleItemsMoved := @WAVESubtitleItemsMoved;
+  VST.OnChange := @VSTChange;
   // Link undo event
   UndoInstance.OnChange := @UndoChanged;
   // Set default values

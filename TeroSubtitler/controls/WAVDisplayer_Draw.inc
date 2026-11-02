@@ -328,7 +328,9 @@ begin
     y1 := GetSubCanvasY;
     y2 := y1 + GetSubCanvasHeight;
     DrawMinimumBlank(FBackBufferItems, y1, y2);
-    DrawSceneChange(FBackBufferItems, GetWAVECanvasY, GetWAVECanvasY + GetSubCanvasHeight);
+    // shot changes cover the subtitles row too (drawn before the entries, so
+    // they stay behind them) and the wave
+    DrawSceneChange(FBackBufferItems, y1, GetWAVECanvasY + GetSubCanvasHeight);
     DrawSubtitleItem(FBackBufferItems, y1, y2);
 
     {$IFDEF USEBGRABITMAP}
@@ -470,6 +472,9 @@ begin
         // Dibujar Fondo
         {$IFDEF USEBGRABITMAP}
         ABitmap.FillRect(x1, y1, x2, y2, CustomColors.Item, dmDrawWithTransparency);
+        // the shot changes seen through the entry, as if it were semi-transparent
+        // (only them, not the grid lines; behind the text)
+        DrawSceneChange(ABitmap, y1, y2, SceneChangeOverItemsAlpha, r.InitialTime, r.FinalTime);
         {$ELSE}
         ABitmap.Canvas.Brush.Color := CustomColors.Item;
         ABitmap.Canvas.FillRect(x1, y1, x2, y2);
@@ -604,10 +609,48 @@ end;
 
 //------------------------------------------------------------------------------
 
+procedure TUWWaveformDisplayer.DrawMultiSelection(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
+var
+  i, StartIdx,
+  x1, x2,
+  ViewEndTime : Integer;
+  P : PUWSubtitleItem;
+begin
+  // the other entries selected in the list (the focused one is the selection)
+  if (Length(FMultiSel) < 2) or not Assigned(FSubtitles) or (FSubtitles.Count = 0) then Exit;
+
+  ViewEndTime := FPositionMS + FPageSizeMS;
+  StartIdx := FSubtitles.FindInsertPos(FPositionMS, -1);
+  if StartIdx > 0 then Dec(StartIdx);
+  if StartIdx < 0 then StartIdx := 0;
+
+  for i := StartIdx to FSubtitles.Count-1 do
+  begin
+    P := FSubtitles.ItemPointer[i];
+    if P^.InitialTime > ViewEndTime then Break;
+    if (P^.FinalTime < FPositionMS) or (P = FSelectedSubtitle) or not IsMultiSelected(P) then Continue;
+
+    x1 := TimeToPixel(Max(P^.InitialTime, FPositionMS) - FPositionMS);
+    x2 := TimeToPixel(Min(P^.FinalTime, ViewEndTime) - FPositionMS);
+    Constrain(x1, 0, Width);
+    Constrain(x2, 0, Width);
+    if (x2 > x1) then
+      {$IFDEF USEBGRABITMAP}
+      ABitmap.FillRect(x1, GetSubCanvasY, x2, GetSubCanvasY+GetSubCanvasHeight, CustomColors.ItemSelected, dmDrawWithTransparency, 3070);
+      {$ELSE}
+      DrawAlphaRect(ABitmap, x1, x2, GetSubCanvasY, GetSubCanvasY+GetSubCanvasHeight, CustomColors.ItemSelected);
+      {$ENDIF}
+  end;
+end;
+
+//------------------------------------------------------------------------------
+
 procedure TUWWaveformDisplayer.DrawSelection(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
 var
   x1, x2 : Integer;
 begin
+  DrawMultiSelection(ABitmap);
+
   // Selection
   if (FDynamicSelection.FinalTime > 0) then
     with ABitmap do
@@ -812,11 +855,21 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure TUWWaveformDisplayer.DrawSceneChange(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
+procedure TUWWaveformDisplayer.DrawSceneChange(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer; const AAlpha: Byte = 255; const AFromMS: Integer = -1; const AToMS: Integer = -1);
 var
   x, i, SceneChange : Integer;
   lo, hi, mid       : Integer;
+  {$IFDEF USEBGRABITMAP}
+  LineColor         : TBGRAPixel;
+  {$ENDIF}
 begin
+  {$IFNDEF USEBGRABITMAP}
+  if AAlpha < 255 then Exit;
+  {$ELSE}
+  LineColor := CustomColors.SceneChange;
+  LineColor.alpha := AAlpha;
+  {$ENDIF}
+
   if FSceneChangeEnabled then
     with ABitmap do
     begin
@@ -832,7 +885,7 @@ begin
       while lo < hi do
       begin
         mid := (lo + hi) div 2;
-        if FSceneChangeList[mid] < FPositionMS then
+        if FSceneChangeList[mid] < Max(FPositionMS, AFromMS) then
           lo := mid + 1
         else
           hi := mid;
@@ -842,9 +895,16 @@ begin
       begin
         SceneChange := FSceneChangeList[i];
         if SceneChange > FPositionMs + FPageSizeMS then Break;
+        // only the ones inside AFromMS..AToMS (an entry)
+        if (AToMS >= 0) and (SceneChange > AToMS) then Break;
         if (SceneChange >= FPositionMS) then
         begin
           x := TimeToPixel(SceneChange - FPositionMS);
+          {$IFDEF USEBGRABITMAP}
+          if AAlpha < 255 then
+            DrawVertLine(x, ATop, ABottom-1, LineColor)
+          else
+          {$ENDIF}
           {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, ATop, x, ABottom);
         end;
       end;

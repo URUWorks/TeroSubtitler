@@ -98,6 +98,22 @@ type
   TSubtitleItemChangedEvent  = procedure(Sender: TObject; const Index: Integer; const OldInitialTime, OldFinalTime: Integer; const NeedSort: Boolean) of object;
   TSelectedSubtitleItemEvent = procedure(Sender: TObject; const Index: Integer; const SubtitleItem: TUWSubtitleItem; const IsDynamic: Boolean) of object;
   TTimeLineClickEvent        = procedure(Sender: TObject; const Time: Integer) of object;
+  TSubtitleItemIndexEvent    = procedure(Sender: TObject; const Index: Integer) of object;
+
+  // entries moved together (several selected entries dragged at once)
+  TMovedSubtitleItem = record
+    Index          : Integer; // index after sorting the list
+    OldInitialTime : Integer;
+    OldFinalTime   : Integer;
+  end;
+  TMovedSubtitleItems = array of TMovedSubtitleItem;
+  TSubtitleItemsMovedEvent = procedure(Sender: TObject; const Items: TMovedSubtitleItems) of object;
+
+  TGroupDragItem = record
+    Item        : PUWSubtitleItem;
+    InitialTime : Integer;
+    FinalTime   : Integer;
+  end;
   //TSubtitleItemDblClickEvent = procedure(Sender: TObject; const SubtitleItem: TUWSubtitleItem) of object;
 
   TUpdateViewFlag  = (uvfCursor, uvfSelection, uvfSubtitle, uvfPosition, uvfPageSize, uvfPlayCursor);
@@ -149,6 +165,15 @@ type
     FDynamicSelection  : TUWSubtitleItem;
     FDynamicSelValueMs : Integer;
     FNeedToSortList    : Boolean;
+    FPendingUpdate     : TUpdateViewFlags; // to draw in the next Paint
+
+    // multiple selection: the entries selected in the list (sorted pointers,
+    // only compared, never dereferenced) and the group being dragged
+    FMultiSel          : array of PtrUInt;
+    FGroupDrag         : Boolean;
+    FGroup             : array of TGroupDragItem;
+    FGroupMinIT        : Integer;
+    FGroupMaxFT        : Integer;
 
     FDrawThumbnails    : Boolean;
     FThumbnails        : TThumbnails;
@@ -210,6 +235,8 @@ type
     FOnSelectedSubtitleItemChange : TNotifyEvent;
     FOnTimeLineClickEvent         : TTimeLineClickEvent;
     FOnDynamicEditTime            : TTimeLineClickEvent;
+    FOnSubtitleItemToggle         : TSubtitleItemIndexEvent;
+    FOnSubtitleItemsMoved         : TSubtitleItemsMovedEvent;
     //FOnSubtitleItemStartDblClick  : TSubtitleItemDblClickEvent;
     //FOnSubtitleItemStopDblClick   : TSubtitleItemDblClickEvent;
 
@@ -229,6 +256,10 @@ type
     function SetMinBlankAt(const TimeMs: Integer): Boolean;
 
     procedure SetSelectedSubtitleItem(const Value: PUWSubtitleItem; const UpdateDisplay: Boolean; const UpdatePosition: Boolean);
+    function IsMultiSelected(const Item: PUWSubtitleItem): Boolean;
+    function SubtitleAtPos(const X, Y: Integer): PUWSubtitleItem;
+    procedure PrepareGroupDrag(const ALimits: Boolean);
+    procedure MoveGroup(const ADelta: Integer);
     function CheckSubtitleItemForDynamicSelection(constref Subtitle: TUWSubtitleItem; const CursorPosMS, SubtitleSelWindow, X, Y: Integer): Boolean;
     procedure SetLengthMS(const LenghtMS: Integer);
     procedure SetPositionMS(NewPosition: Integer);
@@ -253,10 +284,11 @@ type
     procedure DrawSubtitleItem(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
     procedure DrawThumbnails(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
     procedure DrawSelection(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
+    procedure DrawMultiSelection(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
     procedure DrawCursor(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
     procedure DrawPlayCursor(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
     procedure DrawGridLines(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF});
-    procedure DrawSceneChange(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
+    procedure DrawSceneChange(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer; const AAlpha: Byte = 255; const AFromMS: Integer = -1; const AToMS: Integer = -1);
     procedure DrawMinimumBlank(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const ATop, ABottom: Integer);
     procedure PutThumbnail(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const R: TRect; const AIndex: Integer; const AVisibleWidth: Integer = -1);
     procedure DoSceneChangeListChange;
@@ -309,6 +341,8 @@ type
     procedure VZoomMore(const AInvalidate: Boolean = False);
     procedure VZoomLess(const AInvalidate: Boolean = False);
     procedure SelectSubtitle(const Index: Integer; const UpdateDisplay: Boolean; const UpdatePosition: Boolean);
+    // the entries selected in the list, drawn selected too (2 or more)
+    procedure SetMultiSelection(const AItems: array of PUWSubtitleItem);
     function GetSubtitleIdxAtCursorPos: Integer;
     procedure DoUpdate(const Complete: Boolean = True);
     procedure DoUpdateSubtitles;
@@ -341,6 +375,9 @@ type
     property Selection: TUWSubtitleItem read FDynamicSelection;
     property SelectedItem: PUWSubtitleItem read FSelectedSubtitle;
     property IsMouseDown: Boolean read FMouseIsDown;
+    // True while the clicked entry is part of a multiple selection, which
+    // must be kept (to drag all of them)
+    property KeepMultiSelection: Boolean read FGroupDrag;
     property SubTextStyle: TTextStyle read FTS write FTS;
     property Thumbnails: TThumbnails read FThumbnails;
     property DefaultThumbnail: TBitmap read FDefaultThumbnail;
@@ -371,9 +408,13 @@ type
     property OnSelectedSubtitleItemChange  : TNotifyEvent                 read FOnSelectedSubtitleItemChange write FOnSelectedSubtitleItemChange;
     property OnSelectedSubtitleItemChanged : TSubtitleItemChangedEvent    read FOnItemChangedEvent           write FOnItemChangedEvent;
     property OnTimeLineClick               : TTimeLineClickEvent          read FOnTimeLineClickEvent         write FOnTimeLineClickEvent;
-    // while dragging an entry: the time of the edge being moved (the start if the whole entry is moved)
+    // while resizing an entry: the time of the edge being moved (not when the whole entry is moved)
     property OnDynamicEditTime             : TTimeLineClickEvent          read FOnDynamicEditTime            write FOnDynamicEditTime;
     property OnPeakCreation                : TPeakCreationEvent           read FOnPeakCreation               write FOnPeakCreation;
+    // Ctrl+click (Cmd+click on macOS) on an entry: add it to or remove it from the selection
+    property OnSubtitleItemToggle          : TSubtitleItemIndexEvent      read FOnSubtitleItemToggle         write FOnSubtitleItemToggle;
+    // several selected entries were dragged together (the list is already sorted)
+    property OnSubtitleItemsMoved          : TSubtitleItemsMovedEvent     read FOnSubtitleItemsMoved         write FOnSubtitleItemsMoved;
     property OnSceneChangeListChange       : TNotifyEvent                 read FOnSceneChangeListChange      write FOnSceneChangeListChange;
     //property OnSubtitleItemStartDblClick   : TSubtitleItemDblClickEvent   read FOnSubtitleItemStartDblClick  write FOnSubtitleItemStartDblClick;
     //property OnSubtitleItemStopDblClick    : TSubtitleItemDblClickEvent   read FOnSubtitleItemStopDblClick   write FOnSubtitleItemStopDblClick;
@@ -404,6 +445,10 @@ uses
 const
   DefaultPageSizeMS = 15000;
   MinFramePixels = 5; // min. pixels per frame to draw a line for every frame
+  // key to add/remove entries to/from the selection with a click
+  MultiSelectKey = {$IFDEF DARWIN}ssMeta{$ELSE}ssCtrl{$ENDIF};
+  // shot change lines seen through the entries (0..255)
+  SceneChangeOverItemsAlpha = 110;
 
 // -----------------------------------------------------------------------------
 
@@ -641,7 +686,18 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TUWWaveformDisplayer.Paint;
+var
+  Flags : TUpdateViewFlags;
 begin
+  // the view changed while dragging (see MouseMove)
+  if (FPendingUpdate <> []) then
+  begin
+    Flags := FPendingUpdate;
+    FPendingUpdate := [];
+    if IsTimeLineEnabled then
+      UpdateView(Flags, False);
+  end;
+
   if (FBackBuffer.Width > 0) and (FBackBuffer.Height > 0) then
     {$IFDEF USEBGRABITMAP}
     FBackBuffer.Draw(Canvas, 0, 0)
@@ -1085,6 +1141,206 @@ end;
 
 //------------------------------------------------------------------------------
 
+procedure TUWWaveformDisplayer.SetMultiSelection(const AItems: array of PUWSubtitleItem);
+
+  procedure QuickSort(var A: array of PtrUInt; L, R: Integer);
+  var
+    i, j: Integer;
+    p, t: PtrUInt;
+  begin
+    repeat
+      i := L;
+      j := R;
+      p := A[(L + R) div 2];
+      repeat
+        while A[i] < p do Inc(i);
+        while A[j] > p do Dec(j);
+        if i <= j then
+        begin
+          t := A[i]; A[i] := A[j]; A[j] := t;
+          Inc(i);
+          Dec(j);
+        end;
+      until i > j;
+      if L < j then QuickSort(A, L, j);
+      L := i;
+    until i >= R;
+  end;
+
+var
+  A : array of PtrUInt;
+  i : Integer;
+  IsChanged : Boolean;
+begin
+  A := NIL;
+  SetLength(A, Length(AItems));
+  for i := 0 to High(AItems) do
+    A[i] := PtrUInt(AItems[i]);
+
+  if Length(A) > 1 then
+    QuickSort(A, 0, High(A));
+
+  // one entry (or none) is the normal selection, nothing to draw
+  if (Length(A) < 2) and (Length(FMultiSel) < 2) then
+  begin
+    FMultiSel := A;
+    Exit;
+  end;
+
+  IsChanged := Length(A) <> Length(FMultiSel);
+  if not IsChanged then
+    for i := 0 to High(A) do
+      if A[i] <> FMultiSel[i] then
+      begin
+        IsChanged := True;
+        Break;
+      end;
+
+  if not IsChanged then Exit;
+  FMultiSel := A;
+
+  if IsTimeLineEnabled then
+    UpdateView([uvfSelection]);
+end;
+
+//------------------------------------------------------------------------------
+
+function TUWWaveformDisplayer.IsMultiSelected(const Item: PUWSubtitleItem): Boolean;
+var
+  lo, hi, mid : Integer;
+  P : PtrUInt;
+begin
+  Result := False;
+  if (Item = NIL) or (Length(FMultiSel) < 2) then Exit;
+
+  P  := PtrUInt(Item);
+  lo := 0;
+  hi := High(FMultiSel);
+  while lo <= hi do
+  begin
+    mid := (lo + hi) div 2;
+    if FMultiSel[mid] = P then
+      Exit(True)
+    else if FMultiSel[mid] < P then
+      lo := mid + 1
+    else
+      hi := mid - 1;
+  end;
+end;
+
+//------------------------------------------------------------------------------
+
+function TUWWaveformDisplayer.SubtitleAtPos(const X, Y: Integer): PUWSubtitleItem;
+var
+  t : Integer;
+  P : PUWSubtitleItem;
+begin
+  Result := NIL;
+  if not Assigned(FSubtitles) or (Y <= GetSubCanvasY) or (Y >= GetSubCanvasY+GetSubCanvasHeight) then Exit;
+
+  t := PixelToTime(X) + FPositionMS;
+  P := FSubtitles.FindFirstPointer(t, 0);
+  while Assigned(P) do
+  begin
+    if (t >= P^.InitialTime) and (t <= P^.FinalTime) then Exit(P);
+    P := FSubtitles.FindNextPointer;
+  end;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.PrepareGroupDrag(const ALimits: Boolean);
+var
+  i, c, First, Last : Integer;
+  P : PUWSubtitleItem;
+  HasSelected : Boolean;
+  MinDelta, MaxDelta : Integer;
+begin
+  // the selected entries that still exist, in the order of the list
+  FGroup := NIL;
+  SetLength(FGroup, Length(FMultiSel));
+  c := 0;
+  First := -1;
+  Last  := -1;
+  HasSelected := False;
+  FGroupMinIT := MaxInt;
+  FGroupMaxFT := 0;
+
+  for i := 0 to FSubtitles.Count-1 do
+  begin
+    P := FSubtitles.ItemPointer[i];
+    if IsMultiSelected(P) and (c <= High(FGroup)) then
+    begin
+      FGroup[c].Item        := P;
+      FGroup[c].InitialTime := P^.InitialTime;
+      FGroup[c].FinalTime   := P^.FinalTime;
+      Inc(c);
+      if First = -1 then First := i;
+      Last := i;
+      if P = FSelectedSubtitle then HasSelected := True;
+      FGroupMinIT := Min(FGroupMinIT, P^.InitialTime);
+      FGroupMaxFT := Max(FGroupMaxFT, P^.FinalTime);
+    end;
+  end;
+  SetLength(FGroup, c);
+
+  if (c < 2) or not HasSelected then
+  begin
+    FGroupDrag := False;
+    FGroup := NIL;
+    Exit;
+  end;
+
+  // anti-overlapping: no selected entry can go over a not selected one
+  // (the ones between the selected entries too), the group stops at the
+  // first one it touches
+  if ALimits then
+  begin
+    MinDelta := -FGroupMinIT;
+    MaxDelta := MaxInt;
+    if FLengthMS > FGroupMaxFT then
+      MaxDelta := FLengthMS - FGroupMaxFT;
+
+    for i := First to Last do
+    begin
+      P := FSubtitles.ItemPointer[i];
+      if not IsMultiSelected(P) then Continue;
+
+      if (i > 0) and not IsMultiSelected(FSubtitles.ItemPointer[i-1]) then
+        MinDelta := Max(MinDelta, FSubtitles[i-1].FinalTime + FGAP - P^.InitialTime);
+
+      if (i < FSubtitles.Count-1) and not IsMultiSelected(FSubtitles.ItemPointer[i+1]) then
+        MaxDelta := Min(MaxDelta, FSubtitles[i+1].InitialTime - FGAP - P^.FinalTime);
+    end;
+
+    // entries already overlapping: don't jump, only block that direction
+    MinDelta := Min(MinDelta, 0);
+    MaxDelta := Max(MaxDelta, 0);
+
+    FMinSelTime := FSelectedSubtitle^.InitialTime + MinDelta;
+    if MaxDelta = MaxInt then
+      FMaxSelTime := MaxInt
+    else
+      FMaxSelTime := FSelectedSubtitle^.FinalTime + MaxDelta;
+  end;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.MoveGroup(const ADelta: Integer);
+var
+  i : Integer;
+begin
+  for i := 0 to High(FGroup) do
+    if FGroup[i].Item <> FSelectedSubtitle then
+    begin
+      FGroup[i].Item^.InitialTime := FGroup[i].InitialTime + ADelta;
+      FGroup[i].Item^.FinalTime   := FGroup[i].FinalTime + ADelta;
+    end;
+end;
+
+//------------------------------------------------------------------------------
+
 procedure TUWWaveformDisplayer.SetSelectedSubtitleItem(const Value: PUWSubtitleItem; const UpdateDisplay: Boolean; const UpdatePosition: Boolean);
 begin
   // Make sure to reset selection if Value is nil
@@ -1198,6 +1454,7 @@ var
   ACursorPosMs : Integer;
   x1, x2, i,
   Dist         : Integer;
+  SubAtPos     : PUWSubtitleItem;
 begin
   inherited;
 
@@ -1215,7 +1472,7 @@ begin
     Exit;
   end;
 
-  if (ssLeft in Shift) and not (ssCtrl in Shift) then
+  if (ssLeft in Shift) and not (ssCtrl in Shift) and not (MultiSelectKey in Shift) then
   begin
     FMouseIsDown   := True;
     FOldMouseDownX := PixelToTime(X) + FPositionMS;
@@ -1238,6 +1495,9 @@ begin
 
     if (ssShift in Shift) or (FDynamicEditMode <> demNone) then
     begin
+      // dragging an entry of a multiple selection moves all of them
+      FGroupDrag := (FDynamicEditMode = demWhole) and not (ssShift in Shift) and IsMultiSelected(FDynamicSelSub);
+
       if Assigned(FDynamicSelSub) and (FDynamicSelSub <> FSelectedSubtitle) then
       begin
         SetSelectedSubtitleItem(FDynamicSelSub, False, False);
@@ -1245,8 +1505,26 @@ begin
         if Assigned(FOnSelectedSubtitleItem) then FOnSelectedSubtitleItem(Self, FSubtitles.IndexOf(FSelectedSubtitle), FSelectedSubtitle^, True);
       end;
 
+      // Shift+click extends the selected entry: it must not go over the
+      // previous/next entry (Alt allows it, as when dragging the edges)
+      if (ssShift in Shift) and (FDynamicEditMode = demNone) and Assigned(FSelectedSubtitle) and
+        FEnableMouseAntiOverlapping and not (ssAlt in Shift) then
+      begin
+        i  := FSubtitles.IndexOf(FSelectedSubtitle);
+        x1 := 0;
+        x2 := MaxInt;
+        if (i > 0) then
+          x1 := FSubtitles[i-1].FinalTime + FGAP;
+        if (i >= 0) and (i < FSubtitles.Count-1) then
+          x2 := FSubtitles[i+1].InitialTime - FGAP;
+        // (entries already overlapping: only the side that is free)
+        x1 := Min(x1, FSelectedSubtitle^.InitialTime);
+        x2 := Max(x2, FSelectedSubtitle^.FinalTime);
+        Constrain(ACursorPosMs, x1, x2);
+      end;
+
       // Selection modification using shift key
-      if (ACursorPosMs > FDynamicSelection.InitialTime + ((FDynamicSelection.FinalTime - FDynamicSelection.InitialTime) div 2)) then
+      if (ACursorPosMs >FDynamicSelection.InitialTime + ((FDynamicSelection.FinalTime - FDynamicSelection.InitialTime) div 2)) then
       begin
         // We are close to the end of the selection
         if SelectionIsEmpty then
@@ -1386,6 +1664,9 @@ begin
         end;
       end;
     end;
+    if FGroupDrag then
+      PrepareGroupDrag(FEnableMouseAntiOverlapping and not (ssAlt in Shift));
+
     Constrain(x1, 0, Width);
     Constrain(x2, 0, Width);
     if (FCursorMS <> ACursorPosMs) and (FDynamicEditMode = demNone) then
@@ -1396,8 +1677,19 @@ begin
 
     UpdateView(UpdateFlags);
   end
-  else if (ssLeft in Shift) and (ssCtrl in Shift) then
+  else if (ssLeft in Shift) and ((ssCtrl in Shift) or (MultiSelectKey in Shift)) then
   begin
+    // Ctrl+click (Cmd+click on macOS) on an entry: add/remove it to/from the selection
+    if (MultiSelectKey in Shift) and Assigned(FOnSubtitleItemToggle) then
+    begin
+      SubAtPos := SubtitleAtPos(X, Y);
+      if Assigned(SubAtPos) then
+      begin
+        FOnSubtitleItemToggle(Self, FSubtitles.IndexOf(SubAtPos));
+        Exit;
+      end;
+    end;
+
     FDynamicSelection.InitialTime := 0;
     FDynamicSelection.FinalTime   := 0;
     FCursorMs := PixelToTime(X) + FPositionMS;
@@ -1417,6 +1709,7 @@ var
   NewIT, NewFT      : Integer;
   Dist              : Integer;
   SnapPos           : Integer;
+  GroupDelta        : Integer;
 begin
   inherited;
 
@@ -1485,6 +1778,19 @@ begin
           NewIT := GetCorrectTimePos(NewIT);
           NewFT  := NewIT + SubLen;
 
+          // Snapping of the moved entry: its start or its end, the closest
+          if (not (ssCtrl in Shift)) and (FSnappingEnabled) then
+          begin
+            SnapPos := FindSnappingPoint(NewIT);
+            Dist    := FindSnappingPoint(NewFT);
+            if (Dist <> -1) and ((SnapPos = -1) or (Abs(Dist - NewFT) < Abs(SnapPos - NewIT))) then
+              NewIT := Dist - SubLen
+            else if (SnapPos <> -1) then
+              NewIT := SnapPos;
+            NewFT := NewIT + SubLen;
+            Dist  := 0;
+          end;
+
           if FEnableMouseAntiOverlapping and not (ssAlt in Shift) then
           begin
             if NewFT >= FMaxSelTime then
@@ -1501,6 +1807,19 @@ begin
 
           FDynamicSelection.InitialTime := Range(NewIT, 0, FLengthMS-SubLen);
           FDynamicSelection.FinalTime   := Range(NewFT, SubLen, FLengthMS);
+
+          if FGroupDrag then
+          begin
+            // the whole group must stay inside the media
+            GroupDelta := FDynamicSelection.InitialTime - FOldInitialTime;
+            if GroupDelta < -FGroupMinIT then
+              GroupDelta := -FGroupMinIT
+            else if (FLengthMS > FGroupMaxFT) and (GroupDelta > FLengthMS - FGroupMaxFT) then
+              GroupDelta := FLengthMS - FGroupMaxFT;
+
+            FDynamicSelection.InitialTime := FOldInitialTime + GroupDelta;
+            FDynamicSelection.FinalTime   := FDynamicSelection.InitialTime + SubLen;
+          end;
         end; //Drag selection
 
         if Assigned(FSelectedSubtitle) then
@@ -1513,14 +1832,15 @@ begin
             FSelectedSubtitle^.InitialTime := FDynamicSelection.InitialTime;
             FSelectedSubtitle^.FinalTime   := FDynamicSelection.FinalTime;
 
+            if FGroupDrag then
+              MoveGroup(FSelectedSubtitle^.InitialTime - FOldInitialTime);
+
             Include(UpdateFlags, uvfSubtitle);
             if Assigned(FOnSelectedSubtitleItemChange) then FOnSelectedSubtitleItemChange(Self);
 
-            if Assigned(FOnDynamicEditTime) then
-              if FDynamicEditMode = demWhole then
-                FOnDynamicEditTime(Self, FDynamicSelection.InitialTime)
-              else if FDynamicEditMode in [demInitial, demFinal] then
-                FOnDynamicEditTime(Self, ACursorPosMS);
+            // only when resizing: moving the whole entry doesn't seek the video
+            if Assigned(FOnDynamicEditTime) and (FDynamicEditMode in [demInitial, demFinal]) then
+              FOnDynamicEditTime(Self, ACursorPosMS);
           end;
         end;
         if Assigned(FOnSelectionChange) then FOnSelectionChange(Self);
@@ -1593,12 +1913,23 @@ begin
       Include(UpdateFlags, uvfSubtitle);
   end;
 
-  UpdateView(UpdateFlags);
+  if FMouseIsDown and (UpdateFlags <> []) then
+  begin
+    // while dragging, several mouse moves can arrive before the control is
+    // painted again: compose the view once, when it is painted
+    FPendingUpdate := FPendingUpdate + UpdateFlags;
+    Invalidate;
+  end
+  else
+    UpdateView(UpdateFlags);
 end;
 
 //------------------------------------------------------------------------------
 
 procedure TUWWaveformDisplayer.MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var
+  Moved : TMovedSubtitleItems;
+  i     : Integer;
 begin
   inherited;
 
@@ -1607,6 +1938,37 @@ begin
     if ((FDynamicSelection.FinalTime - FDynamicSelection.InitialTime) < 40) and
       (not (Assigned(FSelectedSubtitle) or Assigned(FDynamicSelSub))) then
       ClearSelection;
+
+    if FGroupDrag and Assigned(FSelectedSubtitle) then
+    begin
+      // several entries dragged together
+      if FNeedToSortList then FSubtitles.Sort;
+      FNeedToSortList := False;
+
+      if (FSelectedSubtitle^.InitialTime <> FOldInitialTime) then
+      begin
+        if Assigned(FOnSubtitleItemsMoved) then
+        begin
+          SetLength(Moved, Length(FGroup));
+          for i := 0 to High(FGroup) do
+          begin
+            Moved[i].Index          := FSubtitles.IndexOf(FGroup[i].Item);
+            Moved[i].OldInitialTime := FGroup[i].InitialTime;
+            Moved[i].OldFinalTime   := FGroup[i].FinalTime;
+          end;
+          FGroupDrag := False;
+          FOnSubtitleItemsMoved(Self, Moved);
+        end;
+      end
+      else if Assigned(FOnSelectedSubtitleItem) then
+      begin
+        // a click (without dragging) on an entry of the group selects only it
+        FGroupDrag := False;
+        FOnSelectedSubtitleItem(Self, FSubtitles.IndexOf(FSelectedSubtitle), FSelectedSubtitle^, False);
+      end;
+    end;
+    FGroupDrag := False;
+    FGroup     := NIL;
 
     // The selected sub has changed, we need to keep Subtitle list sorted
     if FNeedToSortList then
