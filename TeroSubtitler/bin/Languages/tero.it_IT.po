@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 28.10.2026\n"
+"Project-Id-Version: Tero Subtitler - IT - 02.11.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -98,7 +98,7 @@ msgstr "%d voci selezionate / %d"
 #: proclocalize.lngasloadingvideofromurl
 #, object-pascal-format
 msgid "Loading media from URL (yt-dlp)... %s"
-msgstr ""
+msgstr "Caricamento supporto da URL (yt-dlp)... %s"
 
 #: proclocalize.lngasmarked
 msgid "Marked entry"
@@ -391,7 +391,7 @@ msgstr "Non definito"
 #: proclocalize.lngfpsguessed
 #, object-pascal-format
 msgid "The times of this subtitle match %s fps. Use this frame rate?"
-msgstr ""
+msgstr "I tempi di questo sottotitolo corrispondono a '%s' fps.\nVuoi usare questa frequenza fotogrammi?"
 
 #: proclocalize.lngfsaction
 msgid "Action"
@@ -427,7 +427,7 @@ msgstr "Pulizia tag"
 
 #: proclocalize.lngfsetcurlytostraightquotes
 msgid "Curly quotes to straight: “” -> \"\""
-msgstr ""
+msgstr "Da virgolette curve a dritte: “” -> \"\""
 
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
@@ -439,7 +439,7 @@ msgstr "Rimuovi elementi vuoti"
 
 #: proclocalize.lngfsetfixbrackets
 msgid "Fix brackets: switched, mismatched or empty"
-msgstr ""
+msgstr "Correggi parentesi: commutate, non corrispondenti o vuote"
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
@@ -506,7 +506,7 @@ msgstr "Spaziatura trattino apertura"
 
 #: proclocalize.lngfsetstraighttocurlyquotes
 msgid "Straight quotes to curly: \"\" -> “”"
-msgstr ""
+msgstr "Da virgolette dritte a curve: \"\" -> “”"
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -746,7 +746,7 @@ msgstr "Le voci selezionate verranno eliminate."
 
 #: proclocalize.lngqcbrackets
 msgid "Brackets: switched, mismatched, empty or unbalanced"
-msgstr ""
+msgstr "Parentesi: commutate, non corrispondenti, vuote o sbilanciate"
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -1240,12 +1240,12 @@ msgstr "Vuoi esportare il testo formattato?"
 
 #: proclocalize.lngtextsyncnowords
 msgid "No words were recognized in the audio, the texts could not be synchronized."
-msgstr ""
+msgstr "Nell'audio non è stata riconosciuta nessuna parola, i testi non possono essere sincronizzati."
 
 #: proclocalize.lngtextsyncresult
 #, object-pascal-format
 msgid "Synchronized %d entries (%d of %d words found in the audio)."
-msgstr ""
+msgstr "'%d' voci sincronizzate ('%d' delle '%d' parole trovate nell'audio)."
 
 #: proclocalize.lngtmentriesadded
 #, object-pascal-format
@@ -1516,11 +1516,11 @@ msgstr "Lunghezza massima linea"
 
 #: tfrmaudiototext.chksmartsegment.caption
 msgid "Smart segmentation (using the conventions)"
-msgstr ""
+msgstr "Segmentazione intelligente (usando le convenzioni)"
 
 #: tfrmaudiototext.chksynctext.caption
 msgid "Synchronize the current texts (only timings)"
-msgstr ""
+msgstr "Sincronizza testi attuali (solo tempi)"
 
 #: tfrmaudiototext.chktranslate.caption
 msgid "Translate to Еnglish"
@@ -1779,7 +1779,7 @@ msgstr "Chiudi"
 
 #: tfrmconvertcase.btnnames.caption
 msgid "Names..."
-msgstr ""
+msgstr "Nomi..."
 
 #: tfrmconvertcase.caption
 msgid "Convert case"
@@ -1819,7 +1819,7 @@ msgstr "Modalità frase"
 
 #: tfrmconvertcase.rdosmartcase.caption
 msgid "Smart (all caps to normal)"
-msgstr ""
+msgstr "Smart (tutte le maiuscole in normali)"
 
 #: tfrmconvertcase.rdotitletype.caption
 msgid "Title Type"
@@ -2321,7 +2321,6 @@ msgid "OCR Script"
 msgstr "Script OCR"
 
 #: tfrmfixsubtitles.lblsource.caption
-#, fuzzy
 msgctxt "tfrmfixsubtitles.lblsource.caption"
 msgid "Source"
 msgstr "Sorgente"
@@ -2436,45 +2435,42 @@ msgstr "Traduttore"
 
 #: tfrmformatproperties.lbldceffect.caption
 msgid "Effect"
-msgstr ""
+msgstr "Effetto"
 
 #: tfrmformatproperties.lbldcfadeup.caption
 msgid "Fade in / out (ms)"
-msgstr ""
+msgstr "Dissolvenza ingresso/uscita (ms)"
 
 #: tfrmformatproperties.lbldcfont.caption
 msgid "Font (file or urn:uuid)"
-msgstr ""
+msgstr "Font (file per urn:uuid)"
 
 #: tfrmformatproperties.lbldcfontsize.caption
-#, fuzzy
 msgctxt "tfrmformatproperties.lbldcfontsize.caption"
 msgid "Font size"
 msgstr "Dimensione font"
 
 #: tfrmformatproperties.lbldclanguage.caption
-#, fuzzy
 msgctxt "tfrmformatproperties.lbldclanguage.caption"
 msgid "Language"
 msgstr "Lingua"
 
 #: tfrmformatproperties.lbldclinespacing.caption
 msgid "Line spacing (%)"
-msgstr ""
+msgstr "Interlinea (%)"
 
 #: tfrmformatproperties.lbldcreel.caption
 msgid "Reel number"
-msgstr ""
+msgstr "Numero bobina"
 
 #: tfrmformatproperties.lbldctitle.caption
-#, fuzzy
 msgctxt "tfrmformatproperties.lbldctitle.caption"
 msgid "Title"
 msgstr "Titolo"
 
 #: tfrmformatproperties.lbldcvposition.caption
 msgid "Vertical position (%)"
-msgstr ""
+msgstr "Posizione verticale (%)"
 
 #: tfrmformatproperties.lbldvdauthor.caption
 msgid "Author"
@@ -2532,14 +2528,13 @@ msgid "Max rows"
 msgstr "N. max linee"
 
 #: tfrmformatproperties.lblttlanguage.caption
-#, fuzzy
 msgctxt "tfrmformatproperties.lblttlanguage.caption"
 msgid "Language"
 msgstr "Lingua"
 
 #: tfrmformatproperties.lblttlanguagehint.caption
 msgid "xml:lang"
-msgstr ""
+msgstr "xml:lang"
 
 #: tfrmformatproperties.lblvttlocal.caption
 msgid "Cue time:"
@@ -3678,7 +3673,7 @@ msgstr "Impostazioni..."
 
 #: tfrmmain.actsetupwizard.caption
 msgid "Setup wizard..."
-msgstr ""
+msgstr "Impostazione guidata..."
 
 #: tfrmmain.actshifttimeless.caption
 #, object-pascal-format
@@ -4679,7 +4674,6 @@ msgid "..."
 msgstr "..."
 
 #: tfrmsettings.btnytdlpupdate.caption
-#, fuzzy
 msgctxt "tfrmsettings.btnytdlpupdate.caption"
 msgid "Update"
 msgstr "Aggiorna"
@@ -4690,7 +4684,7 @@ msgstr "Impostazioni"
 
 #: tfrmsettings.chkautoextractwaveform.caption
 msgid "Extract the waveform automatically when loading a video"
-msgstr ""
+msgstr "Durante il caricamento di un video estrai automaticamente la forma d'onda"
 
 #: tfrmsettings.chkautoplay.caption
 msgid "Autoplay on media load"
@@ -4715,7 +4709,7 @@ msgstr "Visualizza intervallo nella timeline"
 
 #: tfrmsettings.chkhiroundbrackets.caption
 msgid "Round brackets ( ) mark hearing impaired text"
-msgstr ""
+msgstr "Le parentesi tonde () contrassegnano il testo per non udenti"
 
 #: tfrmsettings.chkpreviewframeondrag.caption
 msgid "Show the frame when dragging an entry edge in the timeline"
@@ -4747,7 +4741,7 @@ msgstr "Visualizza schermata di avvio"
 
 #: tfrmsettings.chksmartquotestyping.caption
 msgid "Replace \" and ' while typing"
-msgstr ""
+msgstr "Durante la digitazione sostituisci \" e '"
 
 #: tfrmsettings.chksubtitlehandlebympv.caption
 msgid "mpv handles subtitles for preview"
@@ -4783,11 +4777,9 @@ msgid "Chaining (frames)"
 msgstr "Concatenazione (fotogrammi)"
 
 #: tfrmsettings.lblcpl.caption
-#, fuzzy
-#| msgid "Characters per line"
 msgctxt "tfrmsettings.lblcpl.caption"
 msgid "Characters per line (multiple lines / one line)"
-msgstr "Caratteri per linea"
+msgstr "Caratteri per linea (linee multiple/singola linea)"
 
 #: tfrmsettings.lblcps.caption
 msgctxt "tfrmsettings.lblcps.caption"
@@ -4872,7 +4864,7 @@ msgstr "Caratteri non consentiti"
 
 #: tfrmsettings.lblquotestyle.caption
 msgid "Quotation marks"
-msgstr ""
+msgstr "Virgolette"
 
 #: tfrmsettings.lblrepeatablechars.caption
 msgctxt "tfrmsettings.lblrepeatablechars.caption"
@@ -5005,7 +4997,7 @@ msgstr "(0 per disabilitare)"
 
 #: tfrmsettings.spncploneline.hint
 msgid "Maximum characters when the subtitle has only one line (0 = disabled)"
-msgstr ""
+msgstr "Numero max caratteri sottotitolo con una sola riga (0 = disabilitato )"
 
 #: tfrmshifttimes.btnapply.caption
 msgctxt "tfrmshifttimes.btnapply.caption"
