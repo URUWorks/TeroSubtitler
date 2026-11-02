@@ -42,7 +42,14 @@
 - fixed: [macOS] Homebrew/MacPorts tools (deno, ffmpeg) weren’t found by yt-dlp when Tero was opened from Finder
 - fixed: [macOS] The shortcut presets are saved in the user folder instead of inside the app
 - fixed: [macOS] Access violation in spell check with words containing the typographic apostrophe (’)
-- fixed: the download dialog stayed open doing nothing when a file couldn’t be downloaded
+- fixed: Shot changes exported to EDL or as HH:MM:SS:FF drifted with 23.976/29.97 fps
+- fixed: Shot changes export/apply could misread the times when the import format didn’t match them; importing HH:MM:SS:FF .shotchanges files didn’t work
+- fixed: The shot changes saved to reload with the video could be wrong (other formats, offset not applied).
+- fixed: The download dialog stayed open doing nothing when a file couldn’t be downloaded
+- fixed: Smart case didn’t convert entries with ordinals (1st) or web/email addresses
+- fixed: Smart case left the entry after a sound description ([DOOR CLOSES]) in lowercase
+- fixed: Smart case capitalised dropped-g words (fuckin’, nothin’) and contractions (police’ll) as if they were names
+- fixed: Smart case left the English “I” and single letters (sector H, R and R) in lowercase
 - fixed: Possible crash in Spell check with some dictionaries
 - fixed: Dictionaries with a variant in their name, weren’t shown correctly in Spell check
 - fixed: Encoding detection for ANSI subtitles (German, Greek and Arabic were detected as Cyrillic; English, French and Italian as Central European)
@@ -105,6 +112,7 @@
 - fixed: Smart segmentation (audio to text) could create subtitles with more lines than the máximum
 - fixed: Applying shot changes showed “Unable to create file” when the video was opened from a URL
 - fixed: Changing the interface language left some texts in the previous language until Tero was restarted
+- Changed: Smart case starts a sentence on song lines (♪) and after a “--” interruption at the end of an entry
 - improved: [macOS] now uses the standalone yt-dlp, which can update itself
 - improved: [SubtitleAPI] Cavena 890 & EBU (accents, special chars, tags, language/code page and alignment)
 - improved: [SubtitleAPI] Cheetah & Cheetah Caption (italics, accents, line breaks)
