@@ -131,7 +131,9 @@
 - improved: Typing with "mpv handles subtitles" no longer rewrites the temp track on every key
 - improved: Language names are now shown in their own language
 - improved: Media loaded from a url shows its title instead of the url
+- added: Extract waveform also works with online media (opened from URL)
 - added: Auto-guess FPS of non-SMPTE subtitle file #414
+- added: Multi-select entries in timeline #390
 - added: [SubtitleAPI] Support of InterOP (TI) and SMPTE 428-7-2007 XML Subtitles #352
 - added: Selective pasting #332
 - added: Sub-optimal presentation of auto-transcribed subtitles #256
