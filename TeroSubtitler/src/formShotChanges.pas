@@ -281,12 +281,18 @@ begin
         SC[i] := v;
       end;
 
-      s := ConcatPaths([ShotChangesFolder, ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '.shotchanges')]);
-
       if FSMPTE then
         mmoTimes.Lines.Insert(0, '-1');
 
-      mmoTimes.Lines.SaveToFile(s);
+      // saved to load them again with the video (only a cache: an error here
+      // must not stop applying them)
+      if frmMain.MPV.FileName <> '' then
+      try
+        s := ShotChangesFileName(frmMain.MPV.FileName, '.shotchanges');
+        ForceDirectories(ExtractFileDir(s));
+        mmoTimes.Lines.SaveToFile(s);
+      except
+      end;
 
       with frmMain.WAVE do
       begin
