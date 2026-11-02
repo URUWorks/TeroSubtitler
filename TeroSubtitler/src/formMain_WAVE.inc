@@ -21,7 +21,110 @@ procedure TfrmMain.WAVESelectedSubtitleItem(Sender: TObject;
   const Index: Integer; const SubtitleItem: TUWSubtitleItem;
   const IsDynamic: Boolean);
 begin
-  VSTSelectNode(VST, Index, True, True);
+  // clicking an entry of a multiple selection keeps it (to drag all of them)
+  VSTSelectNode(VST, Index, not WAVE.KeepMultiSelection, True);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.WAVESubtitleItemToggle(Sender: TObject; const Index: Integer);
+var
+  Node: PVirtualNode;
+begin
+  // Ctrl+click (Cmd+click on macOS) on an entry in the timeline
+  Node := VSTGetNodeAtIndex(VST, Index);
+  if Node = NIL then Exit;
+
+  if VST.Selected[Node] then
+  begin
+    VSTSelectingNode := True;
+    try
+      VST.Selected[Node] := False;
+      if VST.FocusedNode = Node then
+        VST.FocusedNode := VSTLastSelectedNode(VST);
+    finally
+      VSTSelectingNode := False;
+    end;
+    VSTFocusChanged(NIL, NIL, 0);
+  end
+  else
+    VSTSelectNode(VST, Node, False, True, True);
+
+  if VSTFocusedNode(VST) >= 0 then
+    WAVE.SelectSubtitle(VSTFocusedNode(VST), True, False)
+  else
+    WAVE.ClearSelection;
+
+  UpdateWAVEMultiSelection;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.WAVESubtitleItemsMoved(Sender: TObject; const Items: TMovedSubtitleItems);
+var
+  Item  : TUWSubtitleItem;
+  Idxs  : TIntegerDynArray;
+  i, c, FocusIdx : Integer;
+begin
+  // several entries dragged together in the timeline: one undo for all
+  Idxs := NIL;
+  SetLength(Idxs, Length(Items));
+  c := 0;
+  for i := 0 to High(Items) do
+    if Subtitles.ValidIndex(Items[i].Index) then
+    begin
+      Item := Subtitles[Items[i].Index];
+      Item.InitialTime := Items[i].OldInitialTime;
+      Item.FinalTime   := Items[i].OldFinalTime;
+      UndoInstance.AddUndo(utSubtitleChange, Items[i].Index, Item, False);
+      Idxs[c] := Items[i].Index;
+      Inc(c);
+    end;
+  SetLength(Idxs, c);
+  UndoInstance.IncrementUndoGroup;
+
+  // the list was sorted: select the moved entries where they are now
+  FocusIdx := Subtitles.IndexOf(WAVE.SelectedItem);
+  VSTSelectNodes(VST, Idxs, True);
+  if FocusIdx >= 0 then
+    VSTSelectNode(VST, FocusIdx, False, True, True);
+
+  DoAutoCheckErrors;
+  UpdateValues(True);
+  SubtitleChanged(True, Workspace.TranslatorMode);
+  UpdateWAVEMultiSelection;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.UpdateWAVEMultiSelection;
+var
+  Node  : PVirtualNode;
+  Items : array of PUWSubtitleItem;
+  c     : Integer;
+begin
+  Items := NIL;
+  c := 0;
+  if VST.SelectedCount > 1 then
+  begin
+    SetLength(Items, VST.SelectedCount);
+    Node := VST.GetFirstSelected;
+    while Assigned(Node) and (c <= High(Items)) do
+    begin
+      Items[c] := Subtitles.ItemPointer[Node^.Index];
+      if Items[c] <> NIL then Inc(c);
+      Node := VST.GetNextSelected(Node);
+    end;
+  end;
+  SetLength(Items, c);
+  WAVE.SetMultiSelection(Items);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.VSTChange(Sender: TBaseVirtualTree; Node: PVirtualNode);
+begin
+  UpdateWAVEMultiSelection;
 end;
 
 // -----------------------------------------------------------------------------
@@ -290,7 +393,7 @@ procedure TfrmMain.WAVEDynamicEditTime(Sender: TObject; const Time: Integer);
 var
   t: Integer;
 begin
-  // dragging an entry (or one of its edges) in the timeline: show that frame
+  // resizing an entry (dragging one of its edges) in the timeline: show that frame
   // in the video. Only when paused, not to interrupt the playback. mpv drops
   // the pending seeks when a new one arrives, so there is no need to throttle.
   if not MPVOptions.PreviewFrameOnDrag or not MPV.IsMediaLoaded or not MPV.IsPaused then Exit;

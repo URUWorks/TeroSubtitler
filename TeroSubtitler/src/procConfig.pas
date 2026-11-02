@@ -78,6 +78,7 @@ function ExtensionsFolder: String;
 function WaveformsFolder: String;
 function ShotChangesFolder: String;
 function ShotChangesFileName(const AMediaFileName, AExt: String): String;
+function OnlineMediaFileName(const AURL, AExt: String): String;
 function ScreenshotsFolder: String;
 function MRUFileName: String;
 function ConventionsFileName: String;
@@ -1774,6 +1775,30 @@ end;
 
 // the shot changes file of a media file (or url: "watch?v=..."), without the
 // characters not allowed in a file name
+function OnlineMediaFileName(const AURL, AExt: String): String;
+const
+  Invalid: array[0..12] of Char = ('\', '/', ':', '*', '?', '"', '<', '>', '|', '&', '=', '%', '#');
+var
+  c: Char;
+begin
+  // a valid file name (without path) for an url, e.g. www.youtube.com_watch_v_xxxx.peak
+  Result := AURL;
+  if Result.ToLower.StartsWith('https://') then
+    Delete(Result, 1, 8)
+  else if Result.ToLower.StartsWith('http://') then
+    Delete(Result, 1, 7);
+
+  for c in Invalid do
+    Result := StringReplace(Result, c, '_', [rfReplaceAll]);
+
+  if Length(Result) > 100 then
+    SetLength(Result, 100);
+
+  Result := Result + AExt;
+end;
+
+// -----------------------------------------------------------------------------
+
 function ShotChangesFileName(const AMediaFileName, AExt: String): String;
 const
   Invalid: array[0..8] of Char = ('\', '/', ':', '*', '?', '"', '<', '>', '|');

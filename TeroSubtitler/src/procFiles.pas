@@ -1002,8 +1002,17 @@ begin
 
   for i := 0 to Length(Exts)-1 do
   begin
-    s1 := ChangeFileExt(FileName, Exts[i]);
-    s2 := ConcatPaths([WaveformsFolder, ExtractFileName(ChangeFileExt(FileName, Exts[i]))]);
+    if FileName.ToLower.StartsWith('http://') or FileName.ToLower.StartsWith('https://') then
+    begin
+      // online media: only the waveform extracted before
+      s1 := '';
+      s2 := ConcatPaths([WaveformsFolder, OnlineMediaFileName(FileName, Exts[i])]);
+    end
+    else
+    begin
+      s1 := ChangeFileExt(FileName, Exts[i]);
+      s2 := ConcatPaths([WaveformsFolder, ExtractFileName(ChangeFileExt(FileName, Exts[i]))]);
+    end;
 
     if FileExists(s1) then
       Exit(s1)

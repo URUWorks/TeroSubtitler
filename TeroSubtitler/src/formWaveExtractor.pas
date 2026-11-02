@@ -122,16 +122,47 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function IsOnlineMedia(const AFileName: String): Boolean;
+begin
+  Result := AFileName.ToLower.StartsWith('http://') or AFileName.ToLower.StartsWith('https://');
+end;
+
+// -----------------------------------------------------------------------------
+
+function ResolveOnlineAudio(const AURL: String): String;
+var
+  Output: TStringList;
+  i: Integer;
+begin
+  // youtube & co: the direct url of the audio stream, given by yt-dlp (the
+  // same tool mpv uses to play it). A direct link to a media file is used as is.
+  Result := '';
+  if (YTDLPFileName = '') or not FileExists(YTDLPFileName) then Exit;
+
+  Output := NIL;
+  try
+    if ExecuteAppLoop(YTDLPFileName, ['-g', '-f', 'bestaudio/best', '--no-playlist', '--no-warnings', AURL], Output) then
+      for i := 0 to Output.Count-1 do
+        if IsOnlineMedia(Trim(Output[i])) then
+        begin
+          Result := Trim(Output[i]);
+          Break;
+        end;
+  finally
+    Output.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmWaveExtractor.btnExtractClick(Sender: TObject);
 var
-  s: String;
+  s, AInput: String;
   p: Boolean;
-  i: Integer;
+  i, ATrack: Integer;
   AParamArray: TStringArray;
 begin
-  if frmMain.MPV.FileName.StartsWith('http') then
-    ShowErrorMessageDialog(lngFeatureNotAvailableFromURL)
-  else if not FileExists(GetExtractAppFile) then
+  if not FileExists(GetExtractAppFile) then
     ShowErrorMessageDialog(Format(lngExtractAppError, [FFMPEG_EXE]))
   else if (Tools.FFmpeg_ParamsForAudioExtract <> '') then
   begin
@@ -155,13 +186,27 @@ begin
         end;
       end;
 
-      s := WaveformsFolder + ChangeFileExt(ExtractFileName(frmMain.MPV.FileName), '.wav');
+      AInput := frmMain.MPV.FileName;
+      ATrack := cboTrack.ItemIndex;
       p := frmMain.MPV.IsPlaying;
       if p then frmMain.MPV.Pause;
 
+      if IsOnlineMedia(AInput) then
+      begin
+        // online media: ffmpeg reads the audio from the url
+        s := WaveformsFolder + OnlineMediaFileName(AInput, '.wav');
+        AInput := ResolveOnlineAudio(frmMain.MPV.FileName);
+        if AInput <> '' then
+          ATrack := 0 // only the audio stream
+        else
+          AInput := frmMain.MPV.FileName;
+      end
+      else
+        s := WaveformsFolder + ChangeFileExt(ExtractFileName(AInput), '.wav');
+
       AParamArray := Tools.FFmpeg_ParamsForAudioExtract.Split(' ');
       for i := 0 to High(AParamArray) do
-        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%trackid'], [frmMain.MPV.FileName, s, cboTrack.ItemIndex.ToString], []);
+        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%trackid'], [AInput, s, ATrack.ToString], []);
 
       ExecuteApp(GetExtractAppFile, AParamArray, True, True, @ProcessCB);
 
