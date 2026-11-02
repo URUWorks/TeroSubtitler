@@ -96,7 +96,7 @@ uses
   formMain, procVST, procUndo, procVST_Loops, procWorkspace, procFixSubtitles,
   UWSystem.Encoding, UWSystem.StrUtils, procMPV,
   UWSubtitleAPI.Tags, UWSubtitleAPI.Formats, procTranscription,
-  UWSubtitles.Utils, Clipbrd, UWSystem.SysUtils, Math, ExtCtrls;
+  UWSubtitles.Utils, Clipbrd, UWSystem.SysUtils, Math, ExtCtrls, RegExpr;
 
 type
 
@@ -151,10 +151,43 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the texts (or translations) of the entries copied from the list, when the
+// clipboard has them (initial||final||text||translation||...), otherwise ''
+function ClipboardEntriesText(const ATranslation: Boolean): String;
+var
+  s: TStringList;
+  t1, t2: Integer;
+  t: String;
+begin
+  Result := '';
+  s := TStringList.Create;
+  try
+    SplitRegExpr('\|\|', Clipboard.AsText, s);
+    while (s.Count > 4) and TryStrToInt(s[0], t1) and TryStrToInt(s[1], t2) do
+    begin
+      if ATranslation and (s[3] <> '') then
+        t := s[3]
+      else
+        t := s[2];
+      t := ReplaceRegExpr('\\~', t, sLineBreak, False);
+      if Result = '' then
+        Result := t
+      else
+        Result := Result + sLineBreak + t;
+      s.Delete(0); s.Delete(0); s.Delete(0); s.Delete(0);
+    end;
+  finally
+    s.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure PasteFromClipboard;
 var
   Memo: TUWMemo;
   TimeEdit: TUWTimeEdit;
+  t: String;
 begin
   if frmMain.VST.Focused then
     VSTPasteEntriesFromClipboard(frmMain.VST)
@@ -162,7 +195,14 @@ begin
   begin
     Memo := GetMemoFocused;
     if Memo <> NIL then
-      Memo.PasteFromClipboard
+    begin
+      // entries copied from the list: only their texts, not our format
+      t := ClipboardEntriesText(Memo = frmMain.mmoTranslation);
+      if t <> '' then
+        Memo.SelText := t
+      else
+        Memo.PasteFromClipboard;
+    end
     else
     begin
       TimeEdit := GetTimeEditFocused;
