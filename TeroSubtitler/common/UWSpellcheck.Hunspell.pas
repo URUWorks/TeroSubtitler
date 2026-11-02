@@ -237,11 +237,10 @@ begin
       for i := 1 to l do
       begin
         if w^ <> NIL then
-          if Pos(#$E2#$80#$99, AWord) > 0 then
-            // as it was written, Kun’s -> Ken’s
-            ASuggests.Add(StringReplace(FromDic(StrPas(w^)), '''', #$E2#$80#$99, [rfReplaceAll]))
-          else
-            ASuggests.Add(FromDic(StrPas(w^)));
+          // with the plain apostrophe: a typographic one (’) in the suggestions
+          // raised an access violation in AppKit (macOS). formSpellCheck puts
+          // it back when the word is changed
+          ASuggests.Add(FromDic(StrPas(w^)));
         Inc(w);
       end;
     end;
