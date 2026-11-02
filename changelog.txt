@@ -40,6 +40,8 @@
 - fixed: [macOS] Dock icon is low-res and distorted upon load of application #1
 - fixed: [macOS] Dropping files on the app icon (Dock/Finder) failed on macOS before 10.13
 - fixed: [macOS] Homebrew/MacPorts tools (deno, ffmpeg) weren’t found by yt-dlp when Tero was opened from Finder
+- fixed: [macOS] The shortcut presets are saved in the user folder instead of inside the app
+- fixed: [macOS] Access violation in spell check with words containing the typographic apostrophe (’)
 - fixed: the download dialog stayed open doing nothing when a file couldn’t be downloaded
 - fixed: Possible crash in Spell check with some dictionaries
 - fixed: Dictionaries with a variant in their name, weren’t shown correctly in Spell check
@@ -78,7 +80,7 @@
 - fixed: Paste not working on an empty list and accepting invalid clipboard data
 - fixed: Preview not showing overlapping subtitles
 - fixed: Corrupted .peak files crashing the waveform
-- fixed: the timeline shows the entry number and duration also for multi-line entries when there is room
+- fixed: The timeline shows the entry number and duration also for multi-line entries when there is room
 - fixed: Web preview with spaces, # or quotes in the video path
 - fixed: Fix subtitles showed overlap suggestions with the same timecodes as before in frames mode
 - fixed: Fixing overlaps no longer leaves short chained subtitles with zero duration
@@ -94,9 +96,15 @@
 - fixed: EDL shot change import, timecodes now start from the video start
 - fixed: Loading a subtitle with a different frame rate mode left the time fields and waveform in the previous timecode mode
 - fixed: Tero’s own file dialog used a wrong FPS value
-- fixed: the timeline didn’t follow the playback after a transcription (except when adding subtitles while transcribing)
+- fixed: The timeline didn’t follow the playback after a transcription (except when adding subtitles while transcribing)
+- fixed: Pasting entries copied from the list into the text box pasted the internal clipboard format, now only their texts are pasted
+- fixed: Auto break treated any hyphen as a dialog dash (“Co-starring” was broken in two lines)
+- fixed: Audio to text, Whisper could repeat the same line many times; now it doesn’t use the previous text as context and the repetitions are removed
 - fixed: Linux downloaded the ARM build of yt-dlp on x86_64 computers
 - fixed: Downloaded yt-dlp wasn’t marked as executable on Linux
+- fixed: Smart segmentation (audio to text) could create subtitles with more lines than the máximum
+- fixed: Applying shot changes showed “Unable to create file” when the video was opened from a URL
+- fixed: Changing the interface language left some texts in the previous language until Tero was restarted
 - improved: [macOS] now uses the standalone yt-dlp, which can update itself
 - improved: [SubtitleAPI] Cavena 890 & EBU (accents, special chars, tags, language/code page and alignment)
 - improved: [SubtitleAPI] Cheetah & Cheetah Caption (italics, accents, line breaks)
@@ -130,6 +138,8 @@
 - added: Synchronize texts with the audio (Audio to text/Synchronize the current texts) #41
 - added: Fix subtitles: caps lock to normal casing #18
 - added: “Update” button for yt-dlp in Settings/Tools
+- added: File/Import.Plain text…, creates the entries from a transcription without times with a preview, and optionally synchronizes them with the audio
+- added: Audio to text, the hallucinations of the silences (“Subtitles by”…) are removed and the fragments of one or two words are joined with the next entry
 - added: Elapsed time in the status bar while a media url is loading
 - added: Language (xml:lang) option for iTT, Timed Text and Netflix Timed Text formats, read from the file when loading
 - added: [macOS] Support for multimedia keys on macOS (10.12.2+) #236
