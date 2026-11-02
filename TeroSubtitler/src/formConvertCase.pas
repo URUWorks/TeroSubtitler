@@ -74,6 +74,7 @@ var
   FNames: TStringList = NIL; // user names list
   FTextStart, FTransStart: Boolean; // next word starts a sentence
   FDictionary: Boolean; // hunspell dictionary loaded
+  FEnglish: Boolean; // english dictionary, "i" is "I"
 
 // -----------------------------------------------------------------------------
 
@@ -147,11 +148,28 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function IsLiteralWord(const AWord: String): Boolean;
+var
+  i: Integer;
+begin
+  // 1st, 3pm, www.site.org, mail@site.com: as they are, not part of the casing
+  Result := (Pos('@', AWord) > 0) or (Pos('/', AWord) > 0) or (Pos('www.', LowerCase(AWord)) > 0);
+  if Result then Exit;
+  for i := 1 to Length(AWord) do
+    if (AWord[i] in ['0'..'9']) or ((AWord[i] = '.') and (i > 1) and (i < Length(AWord)) and
+      (AWord[i-1] in ['a'..'z']) and (AWord[i+1] in ['a'..'z'])) then
+      Exit(True);
+end;
+
+// -----------------------------------------------------------------------------
+
 function IsAllCaps(const AText: String): Boolean;
 var
-  s: String;
+  s, w: String;
 begin
-  s := RemoveTagsFromText(RemoveTagsFromText(AText), '{', '}');
+  s := '';
+  for w in RemoveTagsFromText(RemoveTagsFromText(AText), '{', '}').Split([' ', #9, #13, #10]) do
+    if not IsLiteralWord(w) then s += w + ' ';
   Result := (UTF8LowerCase(s) <> s) and (UTF8UpperCase(s) = s);
 end;
 
@@ -187,6 +205,7 @@ var
 begin
   lw := UTF8LowerCase(AWord);
   if IsRomanNumeral(AWord) then Exit(AWord); // WORLD WAR II
+  if FEnglish and (UTF8Length(lw) = 1) and (lw <> 'a') then Exit(AWord); // I, PLAN B
 
   // names list, as written there
   if Assigned(FNames) then
@@ -219,6 +238,25 @@ begin
   else
   begin
     // unknown or no dictionary
+    if FDictionary then
+    begin
+      // contractions of a known word: POLICE'LL, WHO'VE (not 's, the dictionary
+      // has the possessives, an unknown one is most likely a name: HING'S)
+      i := UTF8Pos('''', lw);
+      if i = 0 then i := UTF8Pos('’', lw);
+      if i > 1 then
+      begin
+        s := UTF8Copy(lw, i+1, MaxInt);
+        if (s = 'll') or (s = 'd') or (s = 're') or (s = 've') or (s = 'm') then
+          Exit(SmartCaseWord(UTF8Copy(AWord, 1, i-1), ASentenceStart) + UTF8Copy(lw, i, MaxInt));
+      end;
+      // dropped g: FUCKIN', NOTHIN', GOIN'
+      if lw.EndsWith('in') and HunspellInstance.Spell(lw + 'g') then
+      begin
+        if ASentenceStart then Exit(UCFirst(lw)) else Exit(lw);
+      end;
+    end;
+
     HasVowel := False;
     for i := 1 to UTF8Length(lw) do
     begin
@@ -245,9 +283,9 @@ end;
 
 function SmartCase(const AText: String; var ASentenceStart: Boolean; const AChange: Boolean): String;
 var
-  i, l, x: Integer;
-  c, w: String;
-  LineStart: Boolean;
+  i, l, x, y: Integer;
+  c, w, tk: String;
+  LineStart, BracketStart, SavedStart: Boolean;
 
   function Ch(const AIndex: Integer): String;
   begin
@@ -262,6 +300,8 @@ begin
   Result := '';
   l := UTF8Length(AText);
   LineStart := True;
+  BracketStart := False;
+  SavedStart := ASentenceStart;
   i := 1;
   while i <= l do
   begin
@@ -284,12 +324,26 @@ begin
       while (x < l) and (IsCasedLetter(Ch(x+1)) or IsDigitChar(Ch(x+1)) or
         (((Ch(x+1) = '''') or (Ch(x+1) = '’')) and IsCasedLetter(Ch(x+2)))) do Inc(x);
       w := UTF8Copy(AText, i, x-i+1);
+      // the whole token, between spaces
+      y := i;
+      while (y > 1) and not (Ch(y-1)[1] in [' ', #9, #13, #10]) do Dec(y);
+      tk := Ch(y);
+      while (y < l) and not (Ch(y+1)[1] in [' ', #9, #13, #10]) do
+      begin
+        Inc(y);
+        tk += Ch(y);
+      end;
+      tk := UTF8LowerCase(tk);
+      if AChange and ((Pos('www.', tk) > 0) or (Pos('://', tk) > 0) or (Pos('@', tk) > 0)) then
+        w := UTF8LowerCase(w) // www.site.org, mail@site.com
+      else if UTF8UpperCase(w) <> w then
+        // already with lowercase letters (1st, McDONALD), as it is
       // U.S.A., single letters between dots stay
-      if AChange and IsCasedLetter(c) and not ((x = i) and
+      else if AChange and IsCasedLetter(c) and not ((x = i) and
         (((Ch(x+1) = '.') and IsCasedLetter(Ch(x+2))) or ((Ch(i-1) = '.') and IsCasedLetter(Ch(i-2))))) then
         w := SmartCaseWord(w, ASentenceStart);
       Result += w;
-      if IsCasedLetter(c) then ASentenceStart := False;
+      ASentenceStart := False; // 10 YEARS AGO
       LineStart := False;
       i := x+1;
       Continue;
@@ -299,6 +353,26 @@ begin
       LineStart := True
     else if (c = '-') and LineStart then
       ASentenceStart := True // dialog
+    else if (c = '-') and (Ch(i-1) = '-') and (Trim(UTF8Copy(AText, i+1, MaxInt)) = '') then
+      ASentenceStart := True // interrupted at the end, "CAPTAIN--"
+    else if (c = '[') or (c = '(') then
+    begin
+      // sound descriptions: [DOOR CLOSES] alone starts a sentence and so does
+      // the text after it, in the middle of a sentence it's not
+      BracketStart := LineStart;
+      SavedStart := ASentenceStart;
+      ASentenceStart := LineStart;
+    end
+    else if (c = ']') or (c = ')') then
+    begin
+      if BracketStart then
+        ASentenceStart := True
+      else
+        ASentenceStart := SavedStart;
+      BracketStart := False;
+    end
+    else if (c = '♪') or (c = '♫') then
+      ASentenceStart := True // song lines
     else if (c = '!') or (c = '?') or (c = '¿') or (c = '¡') then
       ASentenceStart := True
     else if c = '.' then
@@ -364,6 +438,7 @@ begin
   // without a dictionary unknown words are not taken as names
   FDictionary := HunspellInstance.Spell('the') or HunspellInstance.Spell('de') or
     HunspellInstance.Spell('la') or HunspellInstance.Spell('und') or HunspellInstance.Spell('a');
+  FEnglish := HunspellInstance.Spell('the') and HunspellInstance.Spell('which');
 
   if not FileExists(NamesFileName) then Exit;
 
