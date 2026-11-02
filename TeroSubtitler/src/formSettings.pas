@@ -775,7 +775,7 @@ end;
 
 procedure TfrmSettings.cboShortCutPresetSelect(Sender: TObject);
 begin
-  LoadShortCutsFromFile(ConcatPaths([ShortCutFolder, cboShortCutPreset.Text + '.key']), frmMain.ActionList);
+  LoadShortCutsFromFile(ShortCutPresetFile(cboShortCutPreset.Text + '.key'), frmMain.ActionList);
   cboShortcutCatSelect(Sender);
   btnShortCutApply.Enabled := False;
 end;
@@ -915,7 +915,9 @@ end;
 procedure TfrmSettings.btnShortCutApplyClick(Sender: TObject);
 begin
   AppOptions.ShortCutPreset := cboShortCutPreset.Text + '.key';
-  SaveShortCutsToFile(ShortCutFileName, frmMain.ActionList);
+  // always in the user folder (macOS), it's preferred to the app's one
+  ForceDirectories(ShortCutUserFolder);
+  SaveShortCutsToFile(ConcatPaths([ShortCutUserFolder, AppOptions.ShortCutPreset]), frmMain.ActionList);
   btnShortCutApply.Enabled := False;
 end;
 
@@ -928,9 +930,10 @@ begin
   s := InputDialog(lngNewShortCutPreset, lngNewShortCutPresetName, '');
   if not s.IsEmpty then
   begin
-    f := ConcatPaths([ShortCutFolder, s + '.key']);
-    if not FileExists(f) then
+    f := ConcatPaths([ShortCutUserFolder, s + '.key']);
+    if not FileExists(ShortCutPresetFile(s + '.key')) then
     begin
+      ForceDirectories(ShortCutUserFolder);
       SaveShortCutsToFile(f, frmMain.ActionList);
       cboShortCutPreset.ItemIndex := cboShortCutPreset.Items.Add(s);
     end
