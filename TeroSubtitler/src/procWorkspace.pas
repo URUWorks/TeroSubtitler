@@ -332,20 +332,34 @@ end;
 procedure FillComboWithShortCutsPreset(const ACombo: TComboBox);
 var
   SearchRec : TSearchRec;
-  i, x : Integer;
+  i, x, f : Integer;
+  d : String;
 begin
   ACombo.Items.BeginUpdate;
   try
     i := -1;
-    if FindFirst(ShortCutFolder + '*.key', faAnyFile, SearchRec) = 0 then
-    try
-      repeat
-          x := ACombo.Items.Add(ChangeFileExt(SearchRec.Name, ''));
-          if SearchRec.Name = AppOptions.ShortCutPreset then
-            i := x;
-      until FindNext(SearchRec) <> 0;
-    finally
-      FindClose(SearchRec);
+    // the presets of the app and the ones of the user (macOS), once
+    for f := 0 to 1 do
+    begin
+      if f = 0 then
+        d := ShortCutFolder
+      else if ShortCutUserFolder <> ShortCutFolder then
+        d := ShortCutUserFolder
+      else
+        Break;
+      if FindFirst(IncludeTrailingPathDelimiter(d) + '*.key', faAnyFile, SearchRec) = 0 then
+      try
+        repeat
+          if ACombo.Items.IndexOf(ChangeFileExt(SearchRec.Name, '')) < 0 then
+          begin
+            x := ACombo.Items.Add(ChangeFileExt(SearchRec.Name, ''));
+            if SearchRec.Name = AppOptions.ShortCutPreset then
+              i := x;
+          end;
+        until FindNext(SearchRec) <> 0;
+      finally
+        FindClose(SearchRec);
+      end;
     end;
   finally
     if i > -1 then ACombo.ItemIndex := i;
