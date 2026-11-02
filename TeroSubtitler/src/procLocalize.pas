@@ -78,6 +78,12 @@ resourcestring
   lngTranscribing = 'Transcribing...';
   lngTextSyncResult = 'Synchronized %d entries (%d of %d words found in the audio).';
   lngTextSyncNoWords = 'No words were recognized in the audio, the texts could not be synchronized.';
+  lngPlainTextEachLine = 'Line';
+  lngPlainTextEachParagraph = 'Paragraph (separated by a blank line)';
+  lngPlainTextAutomatic = 'Sentence (smart segmentation, using the conventions)';
+  lngPlainTextEntries = '%d entries';
+  lngPlainTextFiles = 'Text files';
+  lngPlainTextAllFiles = 'All files';
   lngDetectDialogSegmentsWarning = 'Attempting to detect dialogue segments deletes all entries from the list.';
   lngEntry = 'Entry %d';
   lnglibMPVError = 'Unable to find the required libraries to run the embedded mpv player. Please download them.';
@@ -404,8 +410,185 @@ procedure SetGUILanguage;
 implementation
 
 uses
-  UWSystem.Globalization, ActnList, procTypes, procConfig, formMain
+  UWSystem.Globalization, ActnList, procTypes, procConfig, formMain, TypInfo,
+  contnrs, LResources
   {$IFDEF DARWIN}, CocoaAll{$ENDIF};
+
+// -----------------------------------------------------------------------------
+
+{ Original texts of the forms }
+
+// A translation (.po) doesn't change what it doesn't have (an untranslated
+// or new text): changing the language at runtime, those texts kept the ones
+// of the previous language, a mixture of languages until restarting. The
+// original texts (english) of the forms are saved the first time and set
+// again before each translation, the resource strings are reset too.
+
+type
+  TOriginalTexts = class(TUpdateTranslator)
+  private
+    FForms: TFPList;            // the forms saved...
+    FTables: TFPList;           // ...and their texts, TFPStringHashTable
+    FTexts: TFPStringHashTable; // the current one: "instance.property" -> "class|name|text"
+    FRestore: Boolean;
+    procedure Walk(const AForm: TCustomForm);
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure TranslateStringProperty(Sender: TObject; const Instance: TPersistent;
+      PropInfo: PPropInfo; var Content: string); override;
+    procedure Prune;
+    procedure Save(const AForm: TCustomForm);
+    procedure Restore(const AForm: TCustomForm);
+  end;
+
+var
+  OriginalTexts: TOriginalTexts = NIL;
+
+// -----------------------------------------------------------------------------
+
+function InstanceID(const Instance: TPersistent): String;
+begin
+  // the class and the name too: the address alone can be of another object
+  // created later (a component freed and a new one in its place)
+  Result := Instance.ClassName + '|';
+  if Instance is TComponent then
+    Result := Result + TComponent(Instance).Name;
+  Result := Result + '|';
+end;
+
+// -----------------------------------------------------------------------------
+
+function IsPlaceholder(const Instance: TPersistent; const Content: String): Boolean;
+begin
+  // the name of the control (or of its owner, "mmoText" of its label) left by
+  // the designer: a text set at runtime, not saved
+  Result := False;
+  if Instance is TComponent then
+    with TComponent(Instance) do
+      Result := (Content = Name) or (Assigned(Owner) and (Content = Owner.Name));
+end;
+
+// -----------------------------------------------------------------------------
+
+constructor TOriginalTexts.Create;
+begin
+  inherited Create;
+  FForms   := TFPList.Create;
+  FTables  := TFPList.Create;
+  FTexts   := NIL;
+  FRestore := False;
+end;
+
+// -----------------------------------------------------------------------------
+
+destructor TOriginalTexts.Destroy;
+var
+  i: Integer;
+begin
+  for i := 0 to FTables.Count-1 do
+    TFPStringHashTable(FTables[i]).Free;
+  FTables.Free;
+  FForms.Free;
+  inherited Destroy;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TOriginalTexts.TranslateStringProperty(Sender: TObject;
+  const Instance: TPersistent; PropInfo: PPropInfo; var Content: string);
+var
+  Key, ID: String;
+  Node: THTStringNode;
+begin
+  if FTexts = NIL then Exit;
+  Key  := IntToHex(PtrUInt(Instance), 16) + '.' + PropInfo^.Name;
+  ID   := InstanceID(Instance);
+  Node := THTStringNode(FTexts.Find(Key));
+  if FRestore then
+  begin
+    if (Node <> NIL) and Node.Data.StartsWith(ID) then
+      Content := Copy(Node.Data, Length(ID)+1, MaxInt);
+  end
+  else if (Node = NIL) and (Content <> '') and not IsPlaceholder(Instance, Content) then
+    FTexts.Add(Key, ID + Content);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TOriginalTexts.Walk(const AForm: TCustomForm);
+var
+  Old: TAbstractTranslator;
+begin
+  // UpdateTranslation uses the global translator
+  Old := LRSTranslator;
+  LRSTranslator := Self;
+  try
+    UpdateTranslation(AForm);
+  finally
+    LRSTranslator := Old;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TOriginalTexts.Prune;
+var
+  i, f: Integer;
+  Found: Boolean;
+begin
+  // the forms closed (freed)
+  for i := FForms.Count-1 downto 0 do
+  begin
+    Found := False;
+    for f := 0 to Screen.CustomFormCount-1 do
+      if Pointer(Screen.CustomForms[f]) = FForms[i] then
+      begin
+        Found := True;
+        Break;
+      end;
+    if not Found then
+    begin
+      TFPStringHashTable(FTables[i]).Free;
+      FTables.Delete(i);
+      FForms.Delete(i);
+    end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TOriginalTexts.Save(const AForm: TCustomForm);
+begin
+  if FForms.IndexOf(AForm) >= 0 then Exit;
+  FTexts := TFPStringHashTable.Create;
+  FForms.Add(AForm);
+  FTables.Add(FTexts);
+  FRestore := False;
+  try
+    Walk(AForm);
+  finally
+    FTexts := NIL;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TOriginalTexts.Restore(const AForm: TCustomForm);
+var
+  i: Integer;
+begin
+  i := FForms.IndexOf(AForm);
+  if i < 0 then Exit;
+  FTexts   := TFPStringHashTable(FTables[i]);
+  FRestore := True;
+  try
+    Walk(AForm);
+  finally
+    FTexts   := NIL;
+    FRestore := False;
+  end;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -545,6 +728,18 @@ begin
     with TAction(frmMain.ActionList.Actions[i]) do
       Hint := '';
 
+  // the original texts first (see TOriginalTexts): the forms open now, saved
+  // the first time (the main form at startup, still in english)
+  if OriginalTexts = NIL then
+    OriginalTexts := TOriginalTexts.Create;
+  OriginalTexts.Prune;
+  for i := 0 to Screen.CustomFormCount-1 do
+  begin
+    OriginalTexts.Save(Screen.CustomForms[i]);
+    OriginalTexts.Restore(Screen.CustomForms[i]);
+  end;
+  ResetResourceTables;
+
   SetDefaultLang(AppOptions.GUILanguage, LanguageFolder);
   {$IFDEF DARWIN}
   SetMacAppleLanguages(AppOptions.GUILanguage);
@@ -558,6 +753,15 @@ begin
       else
         Hint := Caption;
 end;
+
+// -----------------------------------------------------------------------------
+
+initialization
+
+// -----------------------------------------------------------------------------
+
+finalization
+  FreeAndNil(OriginalTexts);
 
 // -----------------------------------------------------------------------------
 
