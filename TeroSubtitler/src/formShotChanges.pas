@@ -62,10 +62,13 @@ type
     FTimeElapsed: Double;
     FCancel: Boolean;
     FSMPTE: Boolean;
+    FFromWave: Boolean; // the times in the memo are the ones of the timeline (ms)
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure RunApp_CB(Sender, Context: TObject; Status: TRunCommandEventCode; const Message: String);
     function IsTimeCode(const ACode: Integer): Boolean;
     function IsTimeCodeOut(const ACode: Integer): Boolean;
+    function LineToMs(const ALine: String; out AMs: Integer): Boolean;
+    function DetectTimeCode(const ALine: String): Integer;
     function FillDialogFilter(const AAllSupportedFiles: Boolean): String;
   public
 
@@ -171,8 +174,9 @@ begin
   finally
   end;
 
-  FCancel := False;
-  FSMPTE  := False;
+  FCancel   := False;
+  FSMPTE    := False;
+  FFromWave := False;
 
   btnDetect.Enabled := frmMain.MPV.IsMediaLoaded;
 
@@ -187,6 +191,7 @@ begin
         mmoTimes.Lines.EndUpdate;
         mmoTimesChange(NIL);
       end;
+      FFromWave := True;
     end;
 end;
 
@@ -219,6 +224,9 @@ begin
       cboTimeCodeExport.ItemIndex := AParamArray[2].ToInteger;
     end;
   end;
+  // the times of the timeline are in ms, whatever was used the last time
+  if FFromWave then
+    cboTimeCodeImport.ItemIndex := tcMilliseconds;
 end;
 
 // -----------------------------------------------------------------------------
@@ -245,35 +253,31 @@ var
   i, v : Integer;
   s : String;
   SC : TIntegerDynArray;
+  Cache : TStringList;
 begin
   if mmoTimes.Lines.Count > 0 then
   begin
     for i := mmoTimes.Lines.Count-1 downto 0 do
-    begin
-      if (IsTimeCode(tcHHMMSSZZZ) and not TimeInFormat(mmoTimes.Lines[i], 'hh:mm:ss.zzz'))
-        or (IsTimeCode(tcSeconds) and not SecondsToMs(mmoTimes.Lines[i], v))
-        or (not IsTimeCode(tcHHMMSSZZZ) and not IsTimeCode(tcSeconds) and not IsInteger(mmoTimes.Lines[i])) then
+      if not LineToMs(mmoTimes.Lines[i], v) then
         mmoTimes.Lines.Delete(i);
-    end;
 
     SC := NIL;
     SetLength(SC, mmoTimes.Lines.Count);
+    // the cache is always in ms (it is loaded with WAVE.LoadSceneChangeFile),
+    // whatever the format of the times in the memo, with the offset applied
+    Cache := TStringList.Create;
     try
+      if FSMPTE then
+        Cache.Add('-1');
+
       for i := 0 to mmoTimes.Lines.Count-1 do
       begin
-        if IsTimeCode(tcFrames) then
-          v := FramesToTime(StrToIntDef(mmoTimes.Lines[i], 0), GetFPS)
-        else if IsTimeCode(tcSeconds) then
-          SecondsToMs(mmoTimes.Lines[i], v)
-        else if IsTimeCode(tcMilliseconds) then
-          v := StrToIntDef(mmoTimes.Lines[i], 0)
-        else if IsTimeCode(tcHHMMSSFF) then
-          v := StringToTime(mmoTimes.Lines[i], False, GetFPS)
-        else
-          v := StringToTime(mmoTimes.Lines[i]);
+        LineToMs(mmoTimes.Lines[i], v);
 
         if tedOffset.Value > 0 then
           v := v + iff(cboOffset.ItemIndex = 0, tedOffset.Value, -tedOffset.Value);
+
+        Cache.Add(v.ToString);
 
         if FSMPTE and (Workspace.WorkMode = wmTime) then
           v := Round(v * 1.001);
@@ -281,16 +285,13 @@ begin
         SC[i] := v;
       end;
 
-      if FSMPTE then
-        mmoTimes.Lines.Insert(0, '-1');
-
       // saved to load them again with the video (only a cache: an error here
       // must not stop applying them)
       if frmMain.MPV.FileName <> '' then
       try
         s := ShotChangesFileName(frmMain.MPV.FileName, '.shotchanges');
         ForceDirectories(ExtractFileDir(s));
-        mmoTimes.Lines.SaveToFile(s);
+        Cache.SaveToFile(s);
       except
       end;
 
@@ -301,6 +302,7 @@ begin
       end;
     finally
       SetLength(SC, 0);
+      Cache.Free;
     end;
 
     Close;
@@ -472,18 +474,24 @@ begin
       else
       begin
         mmoTimes.Lines.LoadFromFile(FileName);
-        if mmoTimes.Lines.Count > 0 then
+        FFromWave := False;
+        FSMPTE := False;
+        // "-1": saved by Apply with SMPTE times (see btnApplyClick)
+        if (mmoTimes.Lines.Count > 0) and (Trim(mmoTimes.Lines[0]) = '-1') then
         begin
-          FSMPTE := False;
-
-          if StrToIntDef(mmoTimes.Lines[0], 0) > 0 then
-            cboTimeCodeImport.ItemIndex := tcMilliseconds
-          else if (Pos('.', mmoTimes.Lines[0]) > 0) and (Pos(':', mmoTimes.Lines[0]) = 0) and
-            SecondsToMs(mmoTimes.Lines[0], i) then
-            cboTimeCodeImport.ItemIndex := tcSeconds
-          else if TimeInFormat(mmoTimes.Lines[0], 'hh:mm:ss.zzz') then
-            cboTimeCodeImport.ItemIndex := tcHHMMSSZZZ;
+          FSMPTE := True;
+          mmoTimes.Lines.Delete(0);
         end;
+
+        // the format of the times (ms, seconds, hh:mm:ss.zzz, hh:mm:ss:ff)
+        for i := 0 to mmoTimes.Lines.Count-1 do
+          if Trim(mmoTimes.Lines[i]) <> '' then
+          begin
+            c := DetectTimeCode(mmoTimes.Lines[i]);
+            if c >= 0 then
+              cboTimeCodeImport.ItemIndex := c;
+            Break;
+          end;
       end;
     end;
   finally
@@ -495,7 +503,7 @@ end;
 
 procedure TfrmShotChanges.btnExportClick(Sender: TObject);
 var
-  i, x : Integer;
+  i, x, v, c : Integer;
   s    : String;
   edl  : TEDL;
   sl   : TStringList;
@@ -511,14 +519,17 @@ begin
       begin
         if FileName.ToLower.EndsWith('.edl') or FileName.ToLower.EndsWith('.xml') then
         begin
-          edl := TEDL.Create(FileName, frmMain.MPV.FileName, GetFPS, FormatSettings);
+          edl := TEDL.Create('', frmMain.MPV.FileName, GetFPS, FormatSettings);
           try
             x := 0;
+            c := 0;
             for i := 0 to mmoTimes.Lines.Count-1 do
-            begin
-              edl.AddItem(i+1, '',  totV, tocC, x, mmoTimes.Lines[i].ToInteger, 0, 0, '', '');
-              x := mmoTimes.Lines[i].ToInteger;
-            end;
+              if LineToMs(mmoTimes.Lines[i], v) and (v > x) then
+              begin
+                Inc(c);
+                edl.AddItem(c, '',  totV, tocC, x, v, 0, 0, '', '');
+                x := v;
+              end;
             edl.SaveToFile(FileName);
           finally
             edl.Free;
@@ -531,16 +542,7 @@ begin
           try
             for i := 0 to mmoTimes.Lines.Count-1 do
             begin
-              if IsTimeCode(tcFrames) then
-                x := FramesToTime(StrToIntDef(mmoTimes.Lines[i], 0), GetFPS)
-              else if IsTimeCode(tcSeconds) then
-                SecondsToMs(mmoTimes.Lines[i], x)
-              else if IsTimeCode(tcMilliseconds) then
-                x := StrToIntDef(mmoTimes.Lines[i], 0)
-              else if IsTimeCode(tcHHMMSSFF) then
-                x := StringToTime(mmoTimes.Lines[i], False, GetFPS)
-              else
-                x := StringToTime(mmoTimes.Lines[i]);
+              if not LineToMs(mmoTimes.Lines[i], x) then Continue;
 
               if IsTimeCodeOut(tcFrames) then
                 s := TimeToFrames(x, GetFPS).ToString
@@ -549,7 +551,7 @@ begin
               else if IsTimeCodeOut(tcMilliseconds) then
                 s := x.ToString
               else if IsTimeCodeOut(tcHHMMSSFF) then
-                s := TimeToString(x, 'hh:mm:ss:ff', GetFPS)
+                s := MSToHHMMSSFFTime(x, GetFPS) // SMPTE (counting frames)
               else
                 s := TimeToString(x, 'hh:mm:ss.zzz');
 
@@ -737,6 +739,56 @@ end;
 function TfrmShotChanges.IsTimeCodeOut(const ACode: Integer): Boolean;
 begin
   Result := cboTimeCodeExport.ItemIndex = ACode;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmShotChanges.DetectTimeCode(const ALine: String): Integer;
+var
+  s: String;
+  v: Integer;
+begin
+  // the format of a time by its shape (-1 unknown). An integer can be ms or
+  // frames: it keeps the selected one if it is one of them
+  s := Trim(ALine);
+  if (Length(s.Split(':')) = 4) or (Length(s.Split([':', ';'])) = 4) then
+    Result := tcHHMMSSFF
+  else if (Pos(':', s) > 0) and TimeInFormat(s, 'hh:mm:ss.zzz') then
+    Result := tcHHMMSSZZZ
+  else if IsInteger(s) then
+  begin
+    if IsTimeCode(tcFrames) then
+      Result := tcFrames
+    else
+      Result := tcMilliseconds;
+  end
+  else if (Pos(':', s) = 0) and SecondsToMs(s, v) then
+    Result := tcSeconds
+  else
+    Result := -1;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmShotChanges.LineToMs(const ALine: String; out AMs: Integer): Boolean;
+var
+  s: String;
+begin
+  // the time in a line, in the selected format or the one it has (e.g. the
+  // times of the timeline are always ms, an imported file can have another)
+  s := Trim(ALine);
+  AMs := 0;
+  Result := True;
+  case DetectTimeCode(s) of
+    tcFrames       : AMs := FramesToTime(StrToIntDef(s, 0), GetFPS);
+    tcMilliseconds : AMs := StrToIntDef(s, 0);
+    tcSeconds      : Result := SecondsToMs(s, AMs);
+    tcHHMMSSZZZ    : AMs := StringToTime(s);
+    tcHHMMSSFF     : AMs := SMPTEStringToMS(s, GetFPS); // SMPTE (counting frames)
+  else
+    Result := False;
+  end;
+  Result := Result and (AMs >= 0);
 end;
 
 // -----------------------------------------------------------------------------

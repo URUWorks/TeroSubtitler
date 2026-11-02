@@ -473,6 +473,9 @@ begin
       FHeader.Title := ChangeFileExt(f, '');
 
       SL.Add('TITLE : ' + FHeader.Title);
+      SL.Add('FCM: NON-DROP FRAME');
+      // SMPTE timecode (counting frames, as the editors and LoadFromFile do):
+      // with 23.976/29.97 the "clock" time with frames drifts 0.1%
       for i := 0 to FList.Count-1 do
         with FList.Items[i]^ do
         begin
@@ -482,10 +485,10 @@ begin
             ReplaceString(f, ' ', '_'),
             totToStr(TypeOfTrack),
             tocToStr(TypeOfCut),
-            TimeToString(ClipIn, 'hh:mm:ss:ff', FFPS),
-            TimeToString(ClipOut, 'hh:mm:ss:ff', FFPS),
-            TimeToString(ClipIn, 'hh:mm:ss:ff', FFPS),
-            TimeToString(ClipOut, 'hh:mm:ss:ff', FFPS)]);
+            MSToHHMMSSFFTime(ClipIn, FFPS),
+            MSToHHMMSSFFTime(ClipOut, FFPS),
+            MSToHHMMSSFFTime(ClipIn, FFPS),
+            MSToHHMMSSFFTime(ClipOut, FFPS)]);
 
           SL.Add(s);
         end;
