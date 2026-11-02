@@ -32,8 +32,9 @@ msgid "Unable to find a HTML browser."
 msgstr "Nie można znaleźć przeglądarki HTML."
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
-#, object-pascal-format
-msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
+#, object-pascal-format, fuzzy
+#| msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
+msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options."
 msgstr "Nie znaleziono przeglądarki HTML.%sUstaw ją w menu: Narzędzia -> Opcje -> Pomoc -> Opcje pomocy"
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
@@ -57,6 +58,11 @@ msgstr "Ctrl"
 #: lclstrconsts.ifsvk_cmd
 msgid "Cmd"
 msgstr "Komend (cmd)"
+
+#: lclstrconsts.ifsvk_fn
+msgctxt "lclstrconsts.ifsvk_fn"
+msgid "Fn"
+msgstr ""
 
 #: lclstrconsts.ifsvk_help
 msgctxt "lclstrconsts.ifsvk_help"
@@ -175,7 +181,9 @@ msgid "Cancel"
 msgstr "Anuluj"
 
 #: lclstrconsts.rscannotfocus
-msgid "Can not focus"
+#, fuzzy
+#| msgid "Can not focus"
+msgid "Cannot focus"
 msgstr "Nie można ustawić aktywności"
 
 #: lclstrconsts.rscanvasdoesnotallowdrawing
@@ -477,10 +485,6 @@ msgstr "Nie można wstawić kolumn do siatki gdy nie ma wierszy"
 msgid "Grid index out of range."
 msgstr "Indeks siatki poza zakresem."
 
-#: lclstrconsts.rsgroupindexcannotbelessthanprevious
-msgid "GroupIndex cannot be less than a previous menu item's GroupIndex"
-msgstr "GroupIndex nie może być mniejsza niż poprzednia pozycja menu GroupIndex"
-
 #: lclstrconsts.rsgtkfilter
 msgid "Filter:"
 msgstr "Filtr:"
@@ -549,8 +553,9 @@ msgid "Help"
 msgstr "Pomoc"
 
 #: lclstrconsts.rshelpalreadyregistered
-#, object-pascal-format
-msgid "%s: Already registered"
+#, object-pascal-format, fuzzy
+#| msgid "%s: Already registered"
+msgid "%s: already registered."
 msgstr "%s: jest już zarejestrowany"
 
 #: lclstrconsts.rshelpcontextnotfound
@@ -576,13 +581,15 @@ msgid "Help context %s not found in Database \"%s\"."
 msgstr "Nie znaleziono kontekstu Pomocy %s w bazie danych \"%s\"."
 
 #: lclstrconsts.rshelphelpdatabasedidnotfoundaviewerforahelppageoftype
-#, object-pascal-format
-msgid "Help Database \"%s\" did not find a viewer for a help page of type %s"
+#, object-pascal-format, fuzzy
+#| msgid "Help Database \"%s\" did not find a viewer for a help page of type %s"
+msgid "Help Database \"%s\" did not find a viewer for a help page of type %s."
 msgstr "Baza danych Pomocy \"%s\" nie znalazła przeglądarki dla strony pomocy typu %s"
 
 #: lclstrconsts.rshelphelpdatabasenotfound
-#, object-pascal-format
-msgid "Help Database \"%s\" not found"
+#, object-pascal-format, fuzzy
+#| msgid "Help Database \"%s\" not found"
+msgid "Help Database \"%s\" not found."
 msgstr "Nie znaleziono bazy danych Pomocy \"%s\" "
 
 #: lclstrconsts.rshelphelpfordirectivenotfound
@@ -606,8 +613,9 @@ msgid "Help keyword \"%s\" not found in Database \"%s\"."
 msgstr "Nie znaleziono pomocy dla słowa kluczowego \"%s\" w bazie danych \"%s\"."
 
 #: lclstrconsts.rshelphelpnodehasnohelpdatabase
-#, object-pascal-format
-msgid "Help node \"%s\" has no Help Database"
+#, object-pascal-format, fuzzy
+#| msgid "Help node \"%s\" has no Help Database"
+msgid "Help node \"%s\" has no Help Database."
 msgstr "Węzeł pomocy \"%s\" nie ma bazy danych pomocy"
 
 #: lclstrconsts.rshelpnohelpfoundforsource
@@ -616,7 +624,9 @@ msgid "No help found for line %d, column %d of %s."
 msgstr "Nie znaleziono pomocy dla wiersza nr %d, i kolumny nr %d z %s."
 
 #: lclstrconsts.rshelpnohelpnodesavailable
-msgid "No help entries available for this topic"
+#, fuzzy
+#| msgid "No help entries available for this topic"
+msgid "No help entries available for this topic."
 msgstr "Brak dostępnych wpisów pomocy dla tego tematu"
 
 #: lclstrconsts.rshelpnotfound
@@ -624,8 +634,9 @@ msgid "No help found for this topic"
 msgstr "Nie znaleziono pomocy dla tego tematu"
 
 #: lclstrconsts.rshelpnotregistered
-#, object-pascal-format
-msgid "%s: Not registered"
+#, object-pascal-format, fuzzy
+#| msgid "%s: Not registered"
+msgid "%s: not registered."
 msgstr "%s: nie jest zarejestrowany"
 
 #: lclstrconsts.rshelpselectorerror
@@ -633,8 +644,9 @@ msgid "Help Selector Error"
 msgstr "Błąd selektora pomocy"
 
 #: lclstrconsts.rshelpthereisnoviewerforhelptype
-#, object-pascal-format
-msgid "There is no viewer for help type \"%s\""
+#, object-pascal-format, fuzzy
+#| msgid "There is no viewer for help type \"%s\""
+msgid "There is no viewer for help type \"%s\"."
 msgstr "Brak przeglądarki dla pomocy typu \"%s\""
 
 #: lclstrconsts.rshelpviewererror
@@ -867,6 +879,10 @@ msgstr "Usługi"
 msgid "Show All"
 msgstr "Pokaż wszystko"
 
+#: lclstrconsts.rsmacosmenutogglefullscreen
+msgid "Toggle Full Screen"
+msgstr "przełącz na pełny ekran"
+
 #: lclstrconsts.rsmarooncolorcaption
 msgid "Maroon"
 msgstr "Bordowy"
@@ -952,10 +968,6 @@ msgstr "Podświetlenie Menu"
 #: lclstrconsts.rsmenutextcolorcaption
 msgid "Menu Text"
 msgstr "Tekst Menu"
-
-#: lclstrconsts.rsmodified
-msgid "  modified "
-msgstr " zmodyfikowany "
 
 #: lclstrconsts.rsmoneygreencolorcaption
 msgid "Money Green"
@@ -1254,10 +1266,6 @@ msgstr ""
 msgid "Silver"
 msgstr "Srebrny"
 
-#: lclstrconsts.rssize
-msgid "  size "
-msgstr "  rozmiar "
-
 #: lclstrconsts.rsskybluecolorcaption
 msgid "Sky Blue"
 msgstr "Błękit nieba"
@@ -1386,7 +1394,9 @@ msgid "Yellow"
 msgstr "Żółty"
 
 #: lclstrconsts.scannotfocus
-msgid "Cannot focus a disabled or invisible window"
+#, object-pascal-format, fuzzy, badformat
+#| msgid "Cannot focus a disabled or invisible window"
+msgid "Cannot focus a disabled or invisible window \"%s\""
 msgstr "Nie można ustawić aktywności na niedostępnym lub niewidocznym oknie"
 
 #: lclstrconsts.sduplicatemenus
@@ -1467,6 +1477,10 @@ msgstr "Enter"
 #: lclstrconsts.smkcesc
 msgid "Esc"
 msgstr "Esc"
+
+#: lclstrconsts.smkcfn
+msgid "Fn+"
+msgstr ""
 
 #: lclstrconsts.smkchome
 #, fuzzy
@@ -1565,10 +1579,23 @@ msgstr "Nieprawidłowy symbol tokenu: spodziewano się %s lecz znaleziono %s"
 msgid "Wrong token type: %s expected but %s found"
 msgstr "Nieprawidłowy typ tokenu: spodziewano się %s lecz znaleziono %s"
 
+#: lclstrconsts.sshellctrlsattributes
+msgid "Attributes"
+msgstr ""
+
 #: lclstrconsts.sshellctrlsbytes
 #, object-pascal-format
 msgid "%s bytes"
 msgstr "%s bajtów"
+
+#: lclstrconsts.sshellctrlsfolder
+msgid "Folder"
+msgstr ""
+
+#: lclstrconsts.sshellctrlsgb
+#, object-pascal-format
+msgid "%s GB"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsinvalidpath
 #, object-pascal-format, fuzzy
@@ -1623,6 +1650,10 @@ msgstr "%s kB"
 #, object-pascal-format
 msgid "%s MB"
 msgstr "%s MB"
+
+#: lclstrconsts.sshellctrlsmodificationdate
+msgid "Date modified"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsname
 msgid "Name"

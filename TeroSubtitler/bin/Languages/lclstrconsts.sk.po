@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: lclstrconsts\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-02-02 16:22+0100\n"
-"PO-Revision-Date: 2024-09-04 13:59+0200\n"
+"PO-Revision-Date: 2025-07-23 14:34+0200\n"
 "Last-Translator: Slavo Gbúr <slavusec@azet.sk>\n"
 "Language-Team: Slovenský <sk@li.org>\n"
 "Language: sk\n"
@@ -34,8 +34,8 @@ msgstr "Nie je možné nájsť prehliadač HTML."
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
 #, object-pascal-format
-msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
-msgstr "HTML prehliadač nebol nájdený.%sProsím zadajte jeden v Nástroje -> Možnosti -> Pomoc -> Možnosti pomoci"
+msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options."
+msgstr "HTML prehliadač nebol nájdený.%sProsím zadajte jeden v Nástroje -> Možnosti -> Pomoc -> Možnosti pomoci."
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
 #, object-pascal-format
@@ -58,6 +58,11 @@ msgstr "Ctrl"
 #: lclstrconsts.ifsvk_cmd
 msgid "Cmd"
 msgstr "Cmd"
+
+#: lclstrconsts.ifsvk_fn
+msgctxt "lclstrconsts.ifsvk_fn"
+msgid "Fn"
+msgstr ""
 
 #: lclstrconsts.ifsvk_help
 msgctxt "lclstrconsts.ifsvk_help"
@@ -174,7 +179,7 @@ msgid "Cancel"
 msgstr "Zrušiť"
 
 #: lclstrconsts.rscannotfocus
-msgid "Can not focus"
+msgid "Cannot focus"
 msgstr "Nemožno zamerať"
 
 #: lclstrconsts.rscanvasdoesnotallowdrawing
@@ -466,10 +471,6 @@ msgstr "Nie je možné vložiť stĺpce do mriežky, keď nemá žiadne riadky"
 msgid "Grid index out of range."
 msgstr "Index mriežky mimo rozsahu."
 
-#: lclstrconsts.rsgroupindexcannotbelessthanprevious
-msgid "GroupIndex cannot be less than a previous menu item's GroupIndex"
-msgstr "GroupIndex nemôže byť menší ako GroupIndex predchádzajúcej položky ponuky"
-
 #: lclstrconsts.rsgtkfilter
 msgid "Filter:"
 msgstr "Filter:"
@@ -521,8 +522,8 @@ msgstr "Pomoc"
 
 #: lclstrconsts.rshelpalreadyregistered
 #, object-pascal-format
-msgid "%s: Already registered"
-msgstr "%s: Už je registrovaný"
+msgid "%s: already registered."
+msgstr "%s: už je registrovaný."
 
 #: lclstrconsts.rshelpcontextnotfound
 msgid "A help database was found for this topic, but this topic was not found"
@@ -548,13 +549,13 @@ msgstr "Kontextová pomoc %s nenájdená v databáze \"%s\"."
 
 #: lclstrconsts.rshelphelpdatabasedidnotfoundaviewerforahelppageoftype
 #, object-pascal-format
-msgid "Help Database \"%s\" did not find a viewer for a help page of type %s"
-msgstr "Databáza pomoci \"%s\" nenašla zobrazovač pre stránku pomocníka typu %s"
+msgid "Help Database \"%s\" did not find a viewer for a help page of type %s."
+msgstr "Databáza pomoci \"%s\" nenašla zobrazovač pre stránku pomocníka typu %s."
 
 #: lclstrconsts.rshelphelpdatabasenotfound
 #, object-pascal-format
-msgid "Help Database \"%s\" not found"
-msgstr "Databáza pomoci \"%s\" nenájdená"
+msgid "Help Database \"%s\" not found."
+msgstr "Databáza pomoci \"%s\" nenájdená."
 
 #: lclstrconsts.rshelphelpfordirectivenotfound
 #, object-pascal-format
@@ -578,8 +579,8 @@ msgstr "Kľúčové slovo pomoci \"%s\" nenájdené v databáze \"%s\"."
 
 #: lclstrconsts.rshelphelpnodehasnohelpdatabase
 #, object-pascal-format
-msgid "Help node \"%s\" has no Help Database"
-msgstr "Uzol pomocníka \"%s\" nemá databázu pomocníka"
+msgid "Help node \"%s\" has no Help Database."
+msgstr "Uzol pomocníka \"%s\" nemá databázu pomocníka."
 
 #: lclstrconsts.rshelpnohelpfoundforsource
 #, object-pascal-format
@@ -587,8 +588,8 @@ msgid "No help found for line %d, column %d of %s."
 msgstr "Nenájdený pomocník pre riadok %d, stĺpec %d %s."
 
 #: lclstrconsts.rshelpnohelpnodesavailable
-msgid "No help entries available for this topic"
-msgstr "Pre túto tému nie sú k dispozícii žiadne položky pomoci"
+msgid "No help entries available for this topic."
+msgstr "Pre túto tému nie sú k dispozícii žiadne položky pomoci."
 
 #: lclstrconsts.rshelpnotfound
 msgid "No help found for this topic"
@@ -596,8 +597,8 @@ msgstr "Pre túto tému nebola nájdená pomoc"
 
 #: lclstrconsts.rshelpnotregistered
 #, object-pascal-format
-msgid "%s: Not registered"
-msgstr "%s: Neregistrovaný"
+msgid "%s: not registered."
+msgstr "%s: Neregistrovaný."
 
 #: lclstrconsts.rshelpselectorerror
 msgid "Help Selector Error"
@@ -605,8 +606,8 @@ msgstr "Chyba selektora pomoci"
 
 #: lclstrconsts.rshelpthereisnoviewerforhelptype
 #, object-pascal-format
-msgid "There is no viewer for help type \"%s\""
-msgstr "Nie je zobrazovač pre pomoc typu \"%s\""
+msgid "There is no viewer for help type \"%s\"."
+msgstr "Nie je zobrazovač pre pomoc typu \"%s\"."
 
 #: lclstrconsts.rshelpviewererror
 msgid "Help Viewer Error"
@@ -832,6 +833,10 @@ msgstr "Služby"
 msgid "Show All"
 msgstr "Zobraziť všetko"
 
+#: lclstrconsts.rsmacosmenutogglefullscreen
+msgid "Toggle Full Screen"
+msgstr "prepnúť na celú obrazovku"
+
 #: lclstrconsts.rsmarooncolorcaption
 msgid "Maroon"
 msgstr "Gaštanová"
@@ -917,10 +922,6 @@ msgstr "Zvýraznenie ponuky"
 #: lclstrconsts.rsmenutextcolorcaption
 msgid "Menu Text"
 msgstr "Text ponuky"
-
-#: lclstrconsts.rsmodified
-msgid "  modified "
-msgstr "  zmenené "
 
 #: lclstrconsts.rsmoneygreencolorcaption
 msgid "Money Green"
@@ -1169,10 +1170,6 @@ msgstr "Zobraziť podrobnosti"
 msgid "Silver"
 msgstr "Strieborná"
 
-#: lclstrconsts.rssize
-msgid "  size "
-msgstr "  veľkosť "
-
 #: lclstrconsts.rsskybluecolorcaption
 msgid "Sky Blue"
 msgstr "Nebesky modrá"
@@ -1299,8 +1296,9 @@ msgid "Yellow"
 msgstr "Žltá"
 
 #: lclstrconsts.scannotfocus
-msgid "Cannot focus a disabled or invisible window"
-msgstr "Nemôžem zamerať vypnuté alebo neviditeľné okno"
+#, object-pascal-format
+msgid "Cannot focus a disabled or invisible window \"%s\""
+msgstr "Nemôžem zaostriť zakázané alebo neviditeľné okno \"%s\""
 
 #: lclstrconsts.sduplicatemenus
 msgid "Duplicate menus"
@@ -1379,6 +1377,10 @@ msgstr "Enter"
 #: lclstrconsts.smkcesc
 msgid "Esc"
 msgstr "Esc"
+
+#: lclstrconsts.smkcfn
+msgid "Fn+"
+msgstr ""
 
 #: lclstrconsts.smkchome
 msgctxt "lclstrconsts.smkchome"
@@ -1476,10 +1478,23 @@ msgstr "Zlý symbol tokenu: očakávaný bol %s, ale nájdený bol %s"
 msgid "Wrong token type: %s expected but %s found"
 msgstr "Zlý typ tokenu: očakávaný bol %s , ale nájdený bol %s"
 
+#: lclstrconsts.sshellctrlsattributes
+msgid "Attributes"
+msgstr ""
+
 #: lclstrconsts.sshellctrlsbytes
 #, object-pascal-format
 msgid "%s bytes"
 msgstr "%s bytov"
+
+#: lclstrconsts.sshellctrlsfolder
+msgid "Folder"
+msgstr "Priečinok"
+
+#: lclstrconsts.sshellctrlsgb
+#, object-pascal-format
+msgid "%s GB"
+msgstr "%s GB"
 
 #: lclstrconsts.sshellctrlsinvalidpath
 #, object-pascal-format
@@ -1523,6 +1538,10 @@ msgstr "%s kB"
 #, object-pascal-format
 msgid "%s MB"
 msgstr "%s MB"
+
+#: lclstrconsts.sshellctrlsmodificationdate
+msgid "Date modified"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsname
 msgid "Name"

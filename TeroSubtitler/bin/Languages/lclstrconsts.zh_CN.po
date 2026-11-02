@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: X-1.9\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-06-25 22:14+0800\n"
+"PO-Revision-Date: 2025-05-21 21:13+0800\n"
 "Last-Translator: ACTom <i@actom.me>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -33,8 +33,8 @@ msgstr "无法找到一个 HTML 浏览器。"
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
 #, object-pascal-format
-msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
-msgstr "无法找到 HTML 浏览器。%s请在工具 -> 选项 -> 帮助 -> 帮助选项中定义一个"
+msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options."
+msgstr "无法找到 HTML 浏览器。%s请在工具 -> 选项 -> 帮助 -> 帮助选项中定义一个。"
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
 #, object-pascal-format
@@ -57,6 +57,11 @@ msgstr "Ctrl"
 #: lclstrconsts.ifsvk_cmd
 msgid "Cmd"
 msgstr "Cmd"
+
+#: lclstrconsts.ifsvk_fn
+msgctxt "lclstrconsts.ifsvk_fn"
+msgid "Fn"
+msgstr ""
 
 #: lclstrconsts.ifsvk_help
 msgctxt "lclstrconsts.ifsvk_help"
@@ -173,7 +178,7 @@ msgid "Cancel"
 msgstr "取消"
 
 #: lclstrconsts.rscannotfocus
-msgid "Can not focus"
+msgid "Cannot focus"
 msgstr "无法聚焦"
 
 #: lclstrconsts.rscanvasdoesnotallowdrawing
@@ -286,7 +291,7 @@ msgstr "创建 %s 的设备上下文时出错。%s"
 #: lclstrconsts.rserroroccurredinataddressframe
 #, object-pascal-format
 msgid "Error occurred in %s at %sAddress %s%s Frame %s"
-msgstr "错误发生在 %s 在 %s地址 %s%s 帧 %s"
+msgstr "错误发生在 %s 地址%s %s%s 帧 %s"
 
 #: lclstrconsts.rserrorwhilesavingbitmap
 msgid "Error while saving bitmap."
@@ -465,10 +470,6 @@ msgstr "无法在网格没有行时插入列"
 msgid "Grid index out of range."
 msgstr "网格索引越界."
 
-#: lclstrconsts.rsgroupindexcannotbelessthanprevious
-msgid "GroupIndex cannot be less than a previous menu item's GroupIndex"
-msgstr "GroupIndex 不能小于前一个菜单项的 GroupIndex"
-
 #: lclstrconsts.rsgtkfilter
 msgid "Filter:"
 msgstr "过滤器:"
@@ -520,8 +521,8 @@ msgstr "帮助"
 
 #: lclstrconsts.rshelpalreadyregistered
 #, object-pascal-format
-msgid "%s: Already registered"
-msgstr "%s:已经注册"
+msgid "%s: already registered."
+msgstr "%s：已经注册"
 
 #: lclstrconsts.rshelpcontextnotfound
 msgid "A help database was found for this topic, but this topic was not found"
@@ -547,13 +548,13 @@ msgstr "帮助上下文 %s 在数据库 \"%s\" 中未找到。"
 
 #: lclstrconsts.rshelphelpdatabasedidnotfoundaviewerforahelppageoftype
 #, object-pascal-format
-msgid "Help Database \"%s\" did not find a viewer for a help page of type %s"
-msgstr "帮助数据库 \"%s\" 没有找到类型为 %s 的帮助页面的查看器"
+msgid "Help Database \"%s\" did not find a viewer for a help page of type %s."
+msgstr "帮助数据库 \"%s\" 没有找到类型为 %s 的帮助页面的查看器。"
 
 #: lclstrconsts.rshelphelpdatabasenotfound
 #, object-pascal-format
-msgid "Help Database \"%s\" not found"
-msgstr "未找到帮助数据库 \"%s\""
+msgid "Help Database \"%s\" not found."
+msgstr "未找到帮助数据库 \"%s\"。"
 
 #: lclstrconsts.rshelphelpfordirectivenotfound
 #, object-pascal-format
@@ -577,17 +578,17 @@ msgstr "帮助关键字\"%s\"未找到在数据库\"%s\"."
 
 #: lclstrconsts.rshelphelpnodehasnohelpdatabase
 #, object-pascal-format
-msgid "Help node \"%s\" has no Help Database"
-msgstr "帮助节点 \"%s\" 没有帮助数据库"
+msgid "Help node \"%s\" has no Help Database."
+msgstr "帮助节点 \"%s\" 没有帮助数据库。"
 
 #: lclstrconsts.rshelpnohelpfoundforsource
-#, object-pascal-format, fuzzy, badformat
+#, object-pascal-format
 msgid "No help found for line %d, column %d of %s."
-msgstr "没有找到关于 %s 的第 %d 行第 %d 列的帮助。"
+msgstr "未找到第 %d 行第 %d 列的关于 %s 的帮助。"
 
 #: lclstrconsts.rshelpnohelpnodesavailable
-msgid "No help entries available for this topic"
-msgstr "没有可用的帮助条目此主题"
+msgid "No help entries available for this topic."
+msgstr "没有可用的帮助条目此主题。"
 
 #: lclstrconsts.rshelpnotfound
 msgid "No help found for this topic"
@@ -595,8 +596,8 @@ msgstr "没有帮助找到对于这个主题(topic)"
 
 #: lclstrconsts.rshelpnotregistered
 #, object-pascal-format
-msgid "%s: Not registered"
-msgstr "%s: 没有注册"
+msgid "%s: not registered."
+msgstr "%s: 没有注册。"
 
 #: lclstrconsts.rshelpselectorerror
 msgid "Help Selector Error"
@@ -604,8 +605,8 @@ msgstr "帮助选择器错误"
 
 #: lclstrconsts.rshelpthereisnoviewerforhelptype
 #, object-pascal-format
-msgid "There is no viewer for help type \"%s\""
-msgstr "没有用于帮助类型 \"%s\" 的查看器"
+msgid "There is no viewer for help type \"%s\"."
+msgstr "没有用于帮助类型 \"%s\" 的查看器。"
 
 #: lclstrconsts.rshelpviewererror
 msgid "Help Viewer Error"
@@ -831,6 +832,10 @@ msgstr "服务"
 msgid "Show All"
 msgstr "全部显示"
 
+#: lclstrconsts.rsmacosmenutogglefullscreen
+msgid "Toggle Full Screen"
+msgstr "切换全屏模式"
+
 #: lclstrconsts.rsmarooncolorcaption
 msgid "Maroon"
 msgstr "褐红色"
@@ -917,10 +922,6 @@ msgstr "菜单高亮"
 #: lclstrconsts.rsmenutextcolorcaption
 msgid "Menu Text"
 msgstr "菜单文本"
-
-#: lclstrconsts.rsmodified
-msgid "  modified "
-msgstr "  已修改 "
 
 #: lclstrconsts.rsmoneygreencolorcaption
 msgid "Money Green"
@@ -1169,10 +1170,6 @@ msgstr "显示详细信息"
 msgid "Silver"
 msgstr "银白色"
 
-#: lclstrconsts.rssize
-msgid "  size "
-msgstr "  大小 "
-
 #: lclstrconsts.rsskybluecolorcaption
 msgid "Sky Blue"
 msgstr "天蓝色"
@@ -1299,8 +1296,9 @@ msgid "Yellow"
 msgstr "黄色"
 
 #: lclstrconsts.scannotfocus
-msgid "Cannot focus a disabled or invisible window"
-msgstr "无法将焦点设置到已禁用或不可见的窗口"
+#, object-pascal-format
+msgid "Cannot focus a disabled or invisible window \"%s\""
+msgstr "无法将焦点设置到已禁用或不可见的窗口 \"%s\""
 
 #: lclstrconsts.sduplicatemenus
 msgid "Duplicate menus"
@@ -1379,6 +1377,10 @@ msgstr "Enter"
 #: lclstrconsts.smkcesc
 msgid "Esc"
 msgstr "Esc"
+
+#: lclstrconsts.smkcfn
+msgid "Fn+"
+msgstr ""
 
 #: lclstrconsts.smkchome
 msgctxt "lclstrconsts.smkchome"
@@ -1476,10 +1478,23 @@ msgstr "错误的标记符号：期望 %s 但找到 %s"
 msgid "Wrong token type: %s expected but %s found"
 msgstr "错误的标记类型：期望 %s 但找到 %s"
 
+#: lclstrconsts.sshellctrlsattributes
+msgid "Attributes"
+msgstr ""
+
 #: lclstrconsts.sshellctrlsbytes
 #, object-pascal-format
 msgid "%s bytes"
 msgstr "%s字节"
+
+#: lclstrconsts.sshellctrlsfolder
+msgid "Folder"
+msgstr "文件夹"
+
+#: lclstrconsts.sshellctrlsgb
+#, object-pascal-format
+msgid "%s GB"
+msgstr "%s GB"
 
 #: lclstrconsts.sshellctrlsinvalidpath
 #, object-pascal-format
@@ -1523,6 +1538,10 @@ msgstr "%s kB"
 #, object-pascal-format
 msgid "%s MB"
 msgstr "%s MB"
+
+#: lclstrconsts.sshellctrlsmodificationdate
+msgid "Date modified"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsname
 msgid "Name"

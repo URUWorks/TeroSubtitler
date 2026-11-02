@@ -33,8 +33,9 @@ msgid "Unable to find a HTML browser."
 msgstr "Nepavyko rasti HTML naršyklės."
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
-#, object-pascal-format
-msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
+#, object-pascal-format, fuzzy
+#| msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
+msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options."
 msgstr "Nerasta HTML Naršyklė.%sJą galima nustatyti „Aplinka -> Aplinkos parinktys -> Žinynas -> Žinyno parinktys“"
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
@@ -58,6 +59,11 @@ msgstr "Vald"
 #: lclstrconsts.ifsvk_cmd
 msgid "Cmd"
 msgstr "Cmd"
+
+#: lclstrconsts.ifsvk_fn
+msgctxt "lclstrconsts.ifsvk_fn"
+msgid "Fn"
+msgstr ""
 
 #: lclstrconsts.ifsvk_help
 msgctxt "lclstrconsts.ifsvk_help"
@@ -176,7 +182,9 @@ msgid "Cancel"
 msgstr "Atsisakyti"
 
 #: lclstrconsts.rscannotfocus
-msgid "Can not focus"
+#, fuzzy
+#| msgid "Can not focus"
+msgid "Cannot focus"
 msgstr "Negalima sufokusuoti"
 
 #: lclstrconsts.rscanvasdoesnotallowdrawing
@@ -478,10 +486,6 @@ msgstr "Neimanoma lentelėn įterpti stulpelių kai ji neturi eilučių"
 msgid "Grid index out of range."
 msgstr "Tinklelio indeksas peržengia ribas."
 
-#: lclstrconsts.rsgroupindexcannotbelessthanprevious
-msgid "GroupIndex cannot be less than a previous menu item's GroupIndex"
-msgstr "„GroupIndex“ negali būti mažesnis už ankstesnių menių punktų „GroupIndex“"
-
 #: lclstrconsts.rsgtkfilter
 msgid "Filter:"
 msgstr "Filtras:"
@@ -551,8 +555,9 @@ msgid "Help"
 msgstr "Žinynas"
 
 #: lclstrconsts.rshelpalreadyregistered
-#, object-pascal-format
-msgid "%s: Already registered"
+#, object-pascal-format, fuzzy
+#| msgid "%s: Already registered"
+msgid "%s: already registered."
 msgstr "%s: jau yra registruotas"
 
 #: lclstrconsts.rshelpcontextnotfound
@@ -578,13 +583,15 @@ msgid "Help context %s not found in Database \"%s\"."
 msgstr "Žinyno turinys „%s“ duomenų bazėje „%s“ nerastas."
 
 #: lclstrconsts.rshelphelpdatabasedidnotfoundaviewerforahelppageoftype
-#, object-pascal-format
-msgid "Help Database \"%s\" did not find a viewer for a help page of type %s"
+#, object-pascal-format, fuzzy
+#| msgid "Help Database \"%s\" did not find a viewer for a help page of type %s"
+msgid "Help Database \"%s\" did not find a viewer for a help page of type %s."
 msgstr "Žinyno duomenų bazė „%s“ nerado žiūryklės „%s“ tipo žinyno lapui."
 
 #: lclstrconsts.rshelphelpdatabasenotfound
-#, object-pascal-format
-msgid "Help Database \"%s\" not found"
+#, object-pascal-format, fuzzy
+#| msgid "Help Database \"%s\" not found"
+msgid "Help Database \"%s\" not found."
 msgstr "Žinyno duomenų bazė „%s“ nerasta."
 
 #: lclstrconsts.rshelphelpfordirectivenotfound
@@ -608,8 +615,9 @@ msgid "Help keyword \"%s\" not found in Database \"%s\"."
 msgstr "Žinyno raktažodis „%s“ duomenų bazėje „%s“ nerastas."
 
 #: lclstrconsts.rshelphelpnodehasnohelpdatabase
-#, object-pascal-format
-msgid "Help node \"%s\" has no Help Database"
+#, object-pascal-format, fuzzy
+#| msgid "Help node \"%s\" has no Help Database"
+msgid "Help node \"%s\" has no Help Database."
 msgstr "Žinyno mazgas „%s“ neturi žinyno duomenų bazės."
 
 #: lclstrconsts.rshelpnohelpfoundforsource
@@ -618,7 +626,9 @@ msgid "No help found for line %d, column %d of %s."
 msgstr "Žinyne nėra duomenų eilutei %d, stulpeliui %d šio %s."
 
 #: lclstrconsts.rshelpnohelpnodesavailable
-msgid "No help entries available for this topic"
+#, fuzzy
+#| msgid "No help entries available for this topic"
+msgid "No help entries available for this topic."
 msgstr "Žinyne nėra įrašų šia tema"
 
 #: lclstrconsts.rshelpnotfound
@@ -626,8 +636,9 @@ msgid "No help found for this topic"
 msgstr "Žinyne nėra informacijos šia tema"
 
 #: lclstrconsts.rshelpnotregistered
-#, object-pascal-format
-msgid "%s: Not registered"
+#, object-pascal-format, fuzzy
+#| msgid "%s: Not registered"
+msgid "%s: not registered."
 msgstr "%s: neregistruotas"
 
 #: lclstrconsts.rshelpselectorerror
@@ -635,8 +646,9 @@ msgid "Help Selector Error"
 msgstr "Žinyno parinkiklio klaida"
 
 #: lclstrconsts.rshelpthereisnoviewerforhelptype
-#, object-pascal-format
-msgid "There is no viewer for help type \"%s\""
+#, object-pascal-format, fuzzy
+#| msgid "There is no viewer for help type \"%s\""
+msgid "There is no viewer for help type \"%s\"."
 msgstr "Nerasta žiūryklė „%s“ žinyno tipui."
 
 #: lclstrconsts.rshelpviewererror
@@ -869,6 +881,10 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
+#: lclstrconsts.rsmacosmenutogglefullscreen
+msgid "Toggle Full Screen"
+msgstr ""
+
 #: lclstrconsts.rsmarooncolorcaption
 msgid "Maroon"
 msgstr "Kaštoninė"
@@ -954,10 +970,6 @@ msgstr "Paryškintas meniu"
 #: lclstrconsts.rsmenutextcolorcaption
 msgid "Menu Text"
 msgstr "Menu tekstas"
-
-#: lclstrconsts.rsmodified
-msgid "  modified "
-msgstr "  pakeista "
 
 #: lclstrconsts.rsmoneygreencolorcaption
 msgid "Money Green"
@@ -1256,10 +1268,6 @@ msgstr ""
 msgid "Silver"
 msgstr "Sidabrinė"
 
-#: lclstrconsts.rssize
-msgid "  size "
-msgstr "  dydis "
-
 #: lclstrconsts.rsskybluecolorcaption
 msgid "Sky Blue"
 msgstr "Dangaus žydrumo"
@@ -1388,7 +1396,9 @@ msgid "Yellow"
 msgstr "Geltona"
 
 #: lclstrconsts.scannotfocus
-msgid "Cannot focus a disabled or invisible window"
+#, object-pascal-format, fuzzy, badformat
+#| msgid "Cannot focus a disabled or invisible window"
+msgid "Cannot focus a disabled or invisible window \"%s\""
 msgstr "Negalima sufokusuoti neveiksnaus ar nematomo lango"
 
 #: lclstrconsts.sduplicatemenus
@@ -1468,6 +1478,10 @@ msgstr "Įvesti"
 #: lclstrconsts.smkcesc
 msgid "Esc"
 msgstr "Gr"
+
+#: lclstrconsts.smkcfn
+msgid "Fn+"
+msgstr ""
 
 #: lclstrconsts.smkchome
 msgctxt "lclstrconsts.smkchome"
@@ -1565,10 +1579,23 @@ msgstr "Klaidingas leksemos simbolis: tikėtasi %s, tačiau rasta %s"
 msgid "Wrong token type: %s expected but %s found"
 msgstr "Klaidingas leksemos tipas: tikėtasi %s, tačiau rasta %s"
 
+#: lclstrconsts.sshellctrlsattributes
+msgid "Attributes"
+msgstr ""
+
 #: lclstrconsts.sshellctrlsbytes
 #, object-pascal-format
 msgid "%s bytes"
 msgstr "%s baitų"
+
+#: lclstrconsts.sshellctrlsfolder
+msgid "Folder"
+msgstr ""
+
+#: lclstrconsts.sshellctrlsgb
+#, object-pascal-format
+msgid "%s GB"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsinvalidpath
 #, object-pascal-format, fuzzy
@@ -1623,6 +1650,10 @@ msgstr "%s kB"
 #, object-pascal-format
 msgid "%s MB"
 msgstr "%s MB"
+
+#: lclstrconsts.sshellctrlsmodificationdate
+msgid "Date modified"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsname
 msgid "Name"

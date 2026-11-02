@@ -759,6 +759,33 @@ msgstr "Izvirnik"
 msgid "Percent"
 msgstr "Odstotek"
 
+#: proclocalize.lngplaintextallfiles
+msgid "All files"
+msgstr ""
+
+#: proclocalize.lngplaintextautomatic
+msgid "Sentence (smart segmentation, using the conventions)"
+msgstr ""
+
+#: proclocalize.lngplaintexteachline
+msgid "Line"
+msgstr ""
+
+#: proclocalize.lngplaintexteachparagraph
+msgid "Paragraph (separated by a blank line)"
+msgstr ""
+
+#: proclocalize.lngplaintextentries
+#, object-pascal-format
+msgid "%d entries"
+msgstr ""
+
+#: proclocalize.lngplaintextfiles
+#, fuzzy
+msgctxt "proclocalize.lngplaintextfiles"
+msgid "Text files"
+msgstr "Besedilne datoteke"
+
 #: proclocalize.lngprojectfile
 #, fuzzy
 msgid "Subtitle Translation Project"
@@ -918,6 +945,7 @@ msgid "Select"
 msgstr "Izberi"
 
 #: proclocalize.lngscshotchanges
+msgctxt "proclocalize.lngscshotchanges"
 msgid "Text files"
 msgstr "Besedilne datoteke"
 
@@ -2919,6 +2947,42 @@ msgstr "_Skoči na"
 #: tfrmgototime.lbltime.caption
 msgid "Time:"
 msgstr "Čas:"
+
+#: tfrmimportplaintext.btnclose.caption
+#, fuzzy
+msgctxt "tfrmimportplaintext.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmimportplaintext.btnimport.caption
+#, fuzzy
+msgctxt "tfrmimportplaintext.btnimport.caption"
+msgid "Import"
+msgstr "Uvozi"
+
+#: tfrmimportplaintext.caption
+msgid "Import plain text"
+msgstr ""
+
+#: tfrmimportplaintext.chkreplace.caption
+msgid "Replace the current entries"
+msgstr ""
+
+#: tfrmimportplaintext.chksyncwithaudio.caption
+msgid "Synchronize with the audio after importing"
+msgstr ""
+
+#: tfrmimportplaintext.lblcount.caption
+msgid "0 entries"
+msgstr ""
+
+#: tfrmimportplaintext.lblmode.caption
+msgid "Create one entry for each:"
+msgstr ""
+
+#: tfrmimportplaintext.lblpreview.caption
+msgid "Preview:"
+msgstr ""
 
 #: tfrmimportsup.btnclose.caption
 msgctxt "tfrmimportsup.btnclose.caption"

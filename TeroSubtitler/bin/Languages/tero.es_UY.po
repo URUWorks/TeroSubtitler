@@ -732,6 +732,32 @@ msgstr "Original"
 msgid "Percent"
 msgstr "Porcentaje"
 
+#: proclocalize.lngplaintextallfiles
+msgid "All files"
+msgstr "Todos los archivos"
+
+#: proclocalize.lngplaintextautomatic
+msgid "Sentence (smart segmentation, using the conventions)"
+msgstr "Oración (segmentación inteligente, utilizando las convenciones)"
+
+#: proclocalize.lngplaintexteachline
+msgid "Line"
+msgstr "Línea"
+
+#: proclocalize.lngplaintexteachparagraph
+msgid "Paragraph (separated by a blank line)"
+msgstr "Párrafo (separado por una línea en blanco)"
+
+#: proclocalize.lngplaintextentries
+#, object-pascal-format
+msgid "%d entries"
+msgstr "%d entradas"
+
+#: proclocalize.lngplaintextfiles
+msgctxt "proclocalize.lngplaintextfiles"
+msgid "Text files"
+msgstr "Archivos de texto"
+
 #: proclocalize.lngprojectfile
 msgid "Subtitle Translation Project"
 msgstr "Proyecto de traducción de subtítulos"
@@ -884,6 +910,7 @@ msgid "Select"
 msgstr "Selección"
 
 #: proclocalize.lngscshotchanges
+msgctxt "proclocalize.lngscshotchanges"
 msgid "Text files"
 msgstr "Archivos de texto"
 
@@ -2792,6 +2819,40 @@ msgstr "Ir al"
 #: tfrmgototime.lbltime.caption
 msgid "Time:"
 msgstr "Tiempo:"
+
+#: tfrmimportplaintext.btnclose.caption
+msgctxt "tfrmimportplaintext.btnclose.caption"
+msgid "Close"
+msgstr "Cerrar"
+
+#: tfrmimportplaintext.btnimport.caption
+msgctxt "tfrmimportplaintext.btnimport.caption"
+msgid "Import"
+msgstr "Importar"
+
+#: tfrmimportplaintext.caption
+msgid "Import plain text"
+msgstr "Importar texto sin formato"
+
+#: tfrmimportplaintext.chkreplace.caption
+msgid "Replace the current entries"
+msgstr "Reemplaza las entradas actuales"
+
+#: tfrmimportplaintext.chksyncwithaudio.caption
+msgid "Synchronize with the audio after importing"
+msgstr "Sincronizar con el audio tras la importación"
+
+#: tfrmimportplaintext.lblcount.caption
+msgid "0 entries"
+msgstr "0 entradas"
+
+#: tfrmimportplaintext.lblmode.caption
+msgid "Create one entry for each:"
+msgstr "Crea una entrada para cada uno:"
+
+#: tfrmimportplaintext.lblpreview.caption
+msgid "Preview:"
+msgstr "Avance:"
 
 #: tfrmimportsup.btnclose.caption
 msgctxt "tfrmimportsup.btnclose.caption"

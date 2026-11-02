@@ -1,0 +1,1577 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: Mon Mar 3rd 2025\n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: Aruna Hewapathirane <aruna.hewapathirane@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: si\n"
+
+#: lclstrconsts.hhshelpbrowsernotexecutable
+#, object-pascal-format
+msgid "Browser \"%s\" not executable."
+msgstr "බ්රවුසර් \"%s\" ක්‍රියාත්මක කිරීමට නොහැක."
+
+#: lclstrconsts.hhshelpbrowsernotfound
+#, object-pascal-format
+msgid "Browser \"%s\" not found."
+msgstr "\"%s\" බ්‍රවුසරය හමු නොවීය."
+
+#: lclstrconsts.hhshelperrorwhileexecuting
+#, object-pascal-format
+msgid "Error while executing \"%s\":%s%s"
+msgstr "\"%s\" ක්‍රියාත්මක කිරීමේදී දෝෂයක්:%s%s"
+
+#: lclstrconsts.hhshelpnohtmlbrowserfound
+msgid "Unable to find a HTML browser."
+msgstr "HTML බ්‍රව්සරයක් සොයා ගැනීමට නොහැකි විය."
+
+#: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
+#, object-pascal-format, fuzzy
+#| msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
+msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options."
+msgstr "HTML බ්‍රව්සරයක් හමු නොවීය.%sකරුණාකර මෙවලම් -> විකල්ප -> උදව් -> උදව් විකල්ප යටතේ එකක් අර්ථ දක්වන්න"
+
+#: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
+#, object-pascal-format
+msgid "The help database \"%s\" was unable to find file \"%s\"."
+msgstr "\"%s\" උදව් දත්ත සමුදායට \"%s\" ගොනුව සොයා ගැනීමට නොහැකි විය."
+
+#: lclstrconsts.hhshelpthemacrosinbrowserparamswillbereplacedbytheurl
+#, object-pascal-format
+msgid "The macro %s in BrowserParams will be replaced by the URL."
+msgstr "බ්‍රව්සර් පරාමිතීන්හි මැක්‍රෝ %s, URL මඟින් ප්‍රතිස්ථාපනය වේ."
+
+#: lclstrconsts.ifsalt
+msgid "Alt"
+msgstr "Alt"
+
+#: lclstrconsts.ifsctrl
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: lclstrconsts.ifsvk_cmd
+msgid "Cmd"
+msgstr "Cmd"
+
+#: lclstrconsts.ifsvk_fn
+msgctxt "lclstrconsts.ifsvk_fn"
+msgid "Fn"
+msgstr ""
+
+#: lclstrconsts.ifsvk_help
+msgctxt "lclstrconsts.ifsvk_help"
+msgid "Help"
+msgstr "උදව්"
+
+#: lclstrconsts.ifsvk_meta
+msgid "Meta"
+msgstr "මෙටා"
+
+#: lclstrconsts.ifsvk_shift
+msgid "Shift"
+msgstr "Shift"
+
+#: lclstrconsts.ifsvk_super
+msgid "Super"
+msgstr "Super"
+
+#: lclstrconsts.ifsvk_unknown
+msgid "Unknown"
+msgstr "නොදන්නා"
+
+#: lclstrconsts.lislclresourcesnotfound
+#, object-pascal-format
+msgctxt "lclstrconsts.lislclresourcesnotfound"
+msgid "Resource %s not found"
+msgstr "%s සම්පත හමු නොවීය"
+
+#: lclstrconsts.rs3ddkshadowcolorcaption
+msgid "3D Dark Shadow"
+msgstr "3D අඳුරු සෙවනැල්ල"
+
+#: lclstrconsts.rs3dlightcolorcaption
+msgid "3D Light"
+msgstr "3D ආලෝකය"
+
+#: lclstrconsts.rsacontrolcannothaveitselfasparent
+msgid "A control can't have itself as a parent"
+msgstr "පාලකයකට දෙමව්පියෙකු ලෙස සිටිය නොහැක"
+
+#: lclstrconsts.rsactivebordercolorcaption
+msgid "Active Border"
+msgstr "ක්රියාකාරී මායිම"
+
+#: lclstrconsts.rsactivecaptioncolorcaption
+msgid "Active Caption"
+msgstr "ක්‍රියාකාරී සිරස්තල"
+
+#: lclstrconsts.rsallfiles
+#, object-pascal-format
+msgid "All files (%s)|%s|%s"
+msgstr "සියලුම ගොනු (%s)|%s|%s"
+
+#: lclstrconsts.rsappworkspacecolorcaption
+msgid "Application Workspace"
+msgstr "යෙදුම් වැඩබිම"
+
+#: lclstrconsts.rsaquacolorcaption
+msgid "Aqua"
+msgstr "ඇක්වා"
+
+#: lclstrconsts.rsascannothaveasparent
+#, object-pascal-format
+msgid "Class %s cannot have %s as parent."
+msgstr "%s පන්තියට %s දෙමාපියෙකු ලෙස සිටිය නොහැක."
+
+#: lclstrconsts.rsbackgroundcolorcaption
+msgid "Desktop"
+msgstr "ඩෙස්ක්ටොප්"
+
+#: lclstrconsts.rsbackward
+msgid "Backward"
+msgstr "පසුපසට"
+
+#: lclstrconsts.rsbitmaps
+msgid "Bitmap Files"
+msgstr "Bitmap ගොනු"
+
+#: lclstrconsts.rsblackcolorcaption
+msgid "Black"
+msgstr "කළු"
+
+#: lclstrconsts.rsblank
+msgid "Blank"
+msgstr "හිස්"
+
+#: lclstrconsts.rsbluecolorcaption
+msgid "Blue"
+msgstr "නිල්"
+
+#: lclstrconsts.rsbtnfacecolorcaption
+msgid "Button Face"
+msgstr "බොත්තම් මුහුණත"
+
+#: lclstrconsts.rsbtnhighlightcolorcaption
+msgid "Button Highlight"
+msgstr "බොත්තම උද්දීපනය"
+
+#: lclstrconsts.rsbtnshadowcolorcaption
+msgid "Button Shadow"
+msgstr "බොත්තම සෙවන"
+
+#: lclstrconsts.rsbtntextcolorcaption
+msgid "Button Text"
+msgstr "බොත්තම විස්තරය"
+
+#: lclstrconsts.rscalculator
+msgid "Calculator"
+msgstr "ගණනකය"
+
+#: lclstrconsts.rscancelrecordhint
+msgctxt "lclstrconsts.rscancelrecordhint"
+msgid "Cancel"
+msgstr "අවලංගු කරන්න"
+
+#: lclstrconsts.rscannotfocus
+#, fuzzy
+#| msgid "Can not focus"
+msgid "Cannot focus"
+msgstr "අවධානය යොමු කළ නොහැක"
+
+#: lclstrconsts.rscanvasdoesnotallowdrawing
+msgid "Canvas does not allow drawing"
+msgstr "කැන්වසය ඇඳීමට ඉඩ නොදේ"
+
+#: lclstrconsts.rscaptiontextcolorcaption
+msgid "Caption Text"
+msgstr "සිරස්තල පෙළ"
+
+#: lclstrconsts.rscasesensitive
+msgid "Case sensitive"
+msgstr "විෂය සංවේදී"
+
+#: lclstrconsts.rscontrolclasscantcontainchildclass
+#, object-pascal-format
+msgid "Control of class '%s' can't have control of class '%s' as a child"
+msgstr "'%s' පන්තියේ පාලනයට දරුවෙකු ලෙස '%s' පන්තිය පාලනය කළ නොහැක"
+
+#: lclstrconsts.rscontrolhasnoparentformorframe
+#, object-pascal-format
+msgid "Control '%s' has no parent form or frame"
+msgstr "'%s' පාලනයට මාපිය පෝරමයක් හෝ රාමුවක් නොමැත"
+
+#: lclstrconsts.rscontrolisnotaparent
+#, object-pascal-format
+msgid "'%s' is not a parent of '%s'"
+msgstr "'%s' යනු '%s'ගේ මාපියෙකු නොවේ"
+
+#: lclstrconsts.rscreamcolorcaption
+msgid "Cream"
+msgstr "ක්රීම් වර්ණය"
+
+#: lclstrconsts.rscursor
+msgid "Cursor Files"
+msgstr "කර්සර ගොනු"
+
+#: lclstrconsts.rscustomcolorcaption
+msgid "Custom ..."
+msgstr "අභිරුචි ..."
+
+#: lclstrconsts.rsdatetoolarge
+#, object-pascal-format
+msgid "Date cannot be past %s"
+msgstr "දිනය %s පසු විය නොහැක"
+
+#: lclstrconsts.rsdatetoosmall
+#, object-pascal-format
+msgid "Date cannot be before %s"
+msgstr "දිනය %s ට පෙර විය නොහැක"
+
+#: lclstrconsts.rsdefaultcolorcaption
+msgid "Default"
+msgstr "පෙරනිමිය"
+
+#: lclstrconsts.rsdefaultfileinfovalue
+msgid "permissions user group size date time"
+msgstr "අවසර පරිශීලක කණ්ඩායම් ප්‍රමාණයේ දිනය වේලාව"
+
+#: lclstrconsts.rsdeleterecord
+msgid "Delete record?"
+msgstr "වාර්තාව මකන්නද?"
+
+#: lclstrconsts.rsdeleterecordhint
+msgctxt "lclstrconsts.rsdeleterecordhint"
+msgid "Delete"
+msgstr "මකන්න"
+
+#: lclstrconsts.rsdirection
+msgid "Direction"
+msgstr "දිශාව"
+
+#: lclstrconsts.rsdirectory
+msgid "&Directory"
+msgstr "& නාමාවලිය"
+
+#: lclstrconsts.rsdocopy
+msgctxt "lclstrconsts.rsdocopy"
+msgid "Copy"
+msgstr "පිටපත් කරන්න"
+
+#: lclstrconsts.rsdopaste
+msgctxt "lclstrconsts.rsdopaste"
+msgid "Paste"
+msgstr "අලවන්න"
+
+#: lclstrconsts.rsduplicateiconformat
+msgid "Duplicate icon format."
+msgstr "අනුපිටපත් නිරූපක ආකෘතිය."
+
+#: lclstrconsts.rseditrecordhint
+msgctxt "lclstrconsts.rseditrecordhint"
+msgid "Edit"
+msgstr "සංස්කරණය කරන්න"
+
+#: lclstrconsts.rsentirescope
+msgid "Search entire file"
+msgstr "සම්පූර්ණ ගොනුව සොයන්න"
+
+#: lclstrconsts.rserror
+msgctxt "lclstrconsts.rserror"
+msgid "Error"
+msgstr "දෝෂයකි"
+
+#: lclstrconsts.rserrorcreatingdevicecontext
+#, object-pascal-format
+msgid "Error creating device context for %s.%s"
+msgstr "%s.%s සඳහා උපාංග සන්දර්භය සෑදීමේ දෝෂයකි"
+
+#: lclstrconsts.rserroroccurredinataddressframe
+#, object-pascal-format
+msgid "Error occurred in %s at %sAddress %s%s Frame %s"
+msgstr "%s ලිපිනය %s%s රාමුව %s හි %s හි දෝෂයක් සිදු විය"
+
+#: lclstrconsts.rserrorwhilesavingbitmap
+msgid "Error while saving bitmap."
+msgstr "බිට්මැප් සුරැකීමේදී දෝෂයකි."
+
+#: lclstrconsts.rsexception
+msgid "Exception"
+msgstr "ව්යතිරේක"
+
+#: lclstrconsts.rsfddirectorymustexist
+msgid "Directory must exist"
+msgstr "නාමාවලිය පැවතිය යුතුය"
+
+#: lclstrconsts.rsfddirectorynotexist
+#, object-pascal-format
+msgid "The directory \"%s\" does not exist."
+msgstr "\"%s\" නාමාවලිය නොපවතී."
+
+#: lclstrconsts.rsfdfilealreadyexists
+#, object-pascal-format
+msgid "The file \"%s\" already exists. Overwrite ?"
+msgstr "\"%s\" ගොනුව දැනටමත් පවතී. උඩින් ලියන්නද?"
+
+#: lclstrconsts.rsfdfilemustexist
+msgid "File must exist"
+msgstr "ගොනුව පැවතිය යුතුය"
+
+#: lclstrconsts.rsfdfilenotexist
+#, object-pascal-format
+msgid "The file \"%s\" does not exist."
+msgstr "\"%s\" ගොනුව නොපවතී."
+
+#: lclstrconsts.rsfdfilereadonly
+#, object-pascal-format
+msgid "The file \"%s\" is not writable."
+msgstr "\"%s\" ගොනුව ලිවිය නොහැක."
+
+#: lclstrconsts.rsfdfilereadonlytitle
+msgid "File is not writable"
+msgstr "ගොනුව ලිවිය නොහැක"
+
+#: lclstrconsts.rsfdfilesaveas
+msgid "Save file as"
+msgstr "ගොනුව ලෙස සුරකින්න"
+
+#: lclstrconsts.rsfdopenfile
+msgid "Open existing file"
+msgstr "පවතින ගොනුව විවෘත කරන්න"
+
+#: lclstrconsts.rsfdoverwritefile
+msgid "Overwrite file ?"
+msgstr "ගොනුව උඩින් ලියන්නද?"
+
+#: lclstrconsts.rsfdpathmustexist
+msgid "Path must exist"
+msgstr "මාර්ගය පැවතිය යුතුය"
+
+#: lclstrconsts.rsfdpathnoexist
+#, object-pascal-format
+msgid "The path \"%s\" does not exist."
+msgstr "\"%s\" මාර්ගය නොපවතී."
+
+#: lclstrconsts.rsfdselectdirectory
+msgid "Select Directory"
+msgstr "නාමාවලිය තෝරන්න"
+
+#: lclstrconsts.rsfileinfofilenotfound
+#, object-pascal-format
+msgid "(file not found: \"%s\")"
+msgstr "(ගොනුව හමු නොවීය: \"%s\")"
+
+#: lclstrconsts.rsfileinformation
+msgid "File information"
+msgstr "ගොනු තොරතුරු"
+
+#: lclstrconsts.rsfilter
+msgctxt "lclstrconsts.rsfilter"
+msgid "(filter)"
+msgstr "(පෙරහන්)"
+
+#: lclstrconsts.rsfind
+msgid "Find"
+msgstr "සොයන්න"
+
+#: lclstrconsts.rsfindmore
+msgid "Find more"
+msgstr "තව හොයන්න"
+
+#: lclstrconsts.rsfirstrecordhint
+msgid "First"
+msgstr "පළමුව"
+
+#: lclstrconsts.rsfixedcolstoobig
+msgid "FixedCols can't be > ColCount"
+msgstr "FixedCols > ColCount විය නොහැක"
+
+#: lclstrconsts.rsfixedrowstoobig
+msgid "FixedRows can't be > RowCount"
+msgstr "FixedRows > RowCount විය නොහැක"
+
+#: lclstrconsts.rsformcolorcaption
+msgid "Form"
+msgstr "පෝරමය"
+
+#: lclstrconsts.rsformresourcesnotfoundforresourcelessformscreatenew
+#, object-pascal-format
+msgid "Form resource %s not found. For resourceless forms CreateNew constructor must be used. See the global variable RequireDerivedFormResource."
+msgstr "පෝරම සම්පත් %s හමු නොවීය. සම්පත් රහිත ආකෘති සඳහා CreateNew constructor භාවිතා කළ යුතුය. RequireDerivedFormResource ගෝලීය විචල්‍යය බලන්න."
+
+#: lclstrconsts.rsformstreamingerror
+#, object-pascal-format
+msgid "Form streaming \"%s\" error: %s"
+msgstr "පෝරම ප්‍රවාහය \"%s\" දෝෂය: %s"
+
+#: lclstrconsts.rsforward
+msgid "Forward"
+msgstr "ඉදිරියට"
+
+#: lclstrconsts.rsfuchsiacolorcaption
+msgid "Fuchsia"
+msgstr "Fuchsia"
+
+#: lclstrconsts.rsgdkoptiondebug
+msgid "Turn on specific GDK trace/debug messages."
+msgstr "නිශ්චිත GDK ලුහුබැඳීමේ/නිදොස් කිරීමේ පණිවිඩ ක්‍රියාත්මක කරන්න."
+
+#: lclstrconsts.rsgdkoptionnodebug
+msgid "Turn off specific GDK trace/debug messages."
+msgstr "නිශ්චිත GDK ට්‍රේස්/නිදොස් පණිවිඩ අක්‍රිය කරන්න."
+
+#: lclstrconsts.rsgif
+msgid "Graphics Interchange Format Files"
+msgstr "Graphics Interchange Format Files"
+
+#: lclstrconsts.rsgoptionfatalwarnings
+msgid "Warnings and errors generated by Gtk+/GDK will halt the application."
+msgstr "Gtk+/GDK මගින් ජනනය කරන ලද අනතුරු ඇඟවීම් සහ දෝෂ යෙදුම නවත්වනු ඇත."
+
+#: lclstrconsts.rsgradientactivecaptioncolorcaption
+msgid "Gradient Active Caption"
+msgstr "වර්ණවර්ගය සක්‍රිය සිරස්තල"
+
+#: lclstrconsts.rsgradientinactivecaptioncolorcaption
+msgid "Gradient Inactive Caption"
+msgstr "වර්ණවර්ගය අක්‍රිය සිරස්තල"
+
+#: lclstrconsts.rsgraphic
+msgid "Graphic"
+msgstr "ග්‍රැෆික්"
+
+#: lclstrconsts.rsgraycolorcaption
+msgid "Gray"
+msgstr "අළු"
+
+#: lclstrconsts.rsgraytextcolorcaption
+msgid "Gray Text"
+msgstr "අළු පෙළ"
+
+#: lclstrconsts.rsgreencolorcaption
+msgid "Green"
+msgstr "කොළ"
+
+#: lclstrconsts.rsgridfiledoesnotexist
+msgid "Grid file doesn't exist"
+msgstr "ජාල ගොනුව නොපවතී"
+
+#: lclstrconsts.rsgridhasnocols
+msgid "Cannot insert rows into a grid when it has no columns"
+msgstr "තීරු නොමැති විට ජාලකයකට පේළි ඇතුළු කළ නොහැක"
+
+#: lclstrconsts.rsgridhasnorows
+msgid "Cannot insert columns into a grid when it has no rows"
+msgstr "පේළි නොමැති විට ජාලයකට තීරු ඇතුළු කළ නොහැක"
+
+#: lclstrconsts.rsgridindexoutofrange
+msgid "Grid index out of range."
+msgstr "ජාල දර්ශකය පරාසයෙන් පිටත."
+
+#: lclstrconsts.rsgtkfilter
+msgid "Filter:"
+msgstr "පෙරහන:"
+
+#: lclstrconsts.rsgtkhistory
+msgid "History:"
+msgstr "ඉතිහාසය:"
+
+#: lclstrconsts.rsgtkoptionclass
+msgid "Following Xt conventions, the class of a program is the program name with the initial character capitalized. For example, the classname for gimp is \"Gimp\". If --class is specified, the class of the program will be set to \"classname\"."
+msgstr "Xt සම්මුතීන්ට පසුව, වැඩසටහනක පන්තිය යනු ආරම්භක අක්ෂරය කැපිටල් කර ඇති වැඩසටහන් නාමයයි. උදාහරණයක් ලෙස, gimp සඳහා පන්ති නාමය \"Gimp\" වේ. --class සඳහන් කර ඇත්නම්, වැඩසටහනේ පන්තිය \"classname\" ලෙස සකසා ඇත."
+
+#: lclstrconsts.rsgtkoptiondebug
+msgid "Turn on specific Gtk+ trace/debug messages."
+msgstr "නිශ්චිත Gtk+ ට්‍රේස්/ඩීබග් පණිවිඩ ක්‍රියාත්මක කරන්න."
+
+#: lclstrconsts.rsgtkoptiondisplay
+msgid "Connect to the specified X server, where \"h\" is the hostname, \"s\" is the server number (usually 0), and \"d\" is the display number (typically omitted). If --display is not specified, the DISPLAY environment variable is used."
+msgstr "නිශ්චිත X සේවාදායකයට සම්බන්ධ වන්න, එහිදී \"h\" යනු සත්කාරක නාමය වන අතර, \"s\" යනු සේවාදායක අංකය (සාමාන්‍යයෙන් 0), සහ \"d\" යනු සංදර්ශක අංකය (සාමාන්‍යයෙන් ඉවත් කර ඇත). --display නිශ්චිතව දක්වා නොමැති නම්, DISPLAY පරිසර විචල්‍යය භාවිතා වේ."
+
+#: lclstrconsts.rsgtkoptionmodule
+msgid "Load the specified module at startup."
+msgstr "ආරම්භයේදී නිශ්චිත මොඩියුලය පූරණය කරන්න."
+
+#: lclstrconsts.rsgtkoptionname
+msgid "Set program name to \"progname\". If not specified, program name will be set to ParamStrUTF8(0)."
+msgstr "වැඩසටහනේ නම \"progname\" ලෙස සකසන්න. නිශ්චිතව දක්වා නොමැති නම්, වැඩසටහනේ නම ParamStrUTF8(0) ලෙස සකසනු ඇත."
+
+#: lclstrconsts.rsgtkoptionnodebug
+msgid "Turn off specific Gtk+ trace/debug messages."
+msgstr "නිශ්චිත Gtk+ ලුහුබැඳීම/නිදොස්කරණය පණිවිඩ අක්‍රිය කරන්න."
+
+#: lclstrconsts.rsgtkoptionnotransient
+msgid "Do not set transient order for modal forms."
+msgstr "මාදිලි ආකෘති සඳහා තාවකාලික අනුපිළිවෙලක් නොසකසන්න."
+
+#: lclstrconsts.rsgtkoptionnoxshm
+msgid "Disable use of the X Shared Memory Extension."
+msgstr "X Shared Memory Extension භාවිතය අබල කරන්න."
+
+#: lclstrconsts.rsgtkoptionsync
+msgid "Call XSynchronize (display, True) after the Xserver connection has been established. This makes debugging X protocol errors easier, because X request buffering will be disabled and X errors will be received immediately after the protocol request that generated the error has been processed by the X server."
+msgstr "Xserver සම්බන්ධතාවය ස්ථාපිත කිරීමෙන් පසු XSynchronize (දර්ශණය, සත්‍ය) අමතන්න. මෙය X ප්‍රොටෝකෝල දෝෂ නිදොස් කිරීම පහසු කරයි, මන්ද X ඉල්ලීම් බෆරින් කිරීම අක්‍රිය වනු ඇති අතර X සේවාදායකය විසින් දෝෂය උත්පාදනය කරන ලද ප්‍රොටෝකෝල ඉල්ලීම ක්‍රියාවට නැංවූ වහාම X දෝෂ ලැබෙනු ඇත."
+
+#: lclstrconsts.rshelp
+msgctxt "lclstrconsts.rshelp"
+msgid "Help"
+msgstr "උදව්"
+
+#: lclstrconsts.rshelpalreadyregistered
+#, object-pascal-format, fuzzy
+#| msgid "%s: Already registered"
+msgid "%s: already registered."
+msgstr "%s: දැනටමත් ලියාපදිංචි වී ඇත"
+
+#: lclstrconsts.rshelpcontextnotfound
+msgid "A help database was found for this topic, but this topic was not found"
+msgstr "මෙම මාතෘකාව සඳහා උපකාරක දත්ත සමුදායක් හමු වූ නමුත් මෙම මාතෘකාව හමු නොවීය"
+
+#: lclstrconsts.rshelpdatabasenotfound
+msgid "There is no help database installed for this topic"
+msgstr "මෙම මාතෘකාව සඳහා උපකාරක දත්ත සමුදායක් ස්ථාපනය කර නොමැත"
+
+#: lclstrconsts.rshelperror
+msgid "Help Error"
+msgstr "උදවු දෝෂය"
+
+#: lclstrconsts.rshelphelpcontextnotfound
+#, object-pascal-format
+msgid "Help context %s not found."
+msgstr "උදවු සන්දර්භය %s හමු නොවීය."
+
+#: lclstrconsts.rshelphelpcontextnotfoundindatabase
+#, object-pascal-format
+msgid "Help context %s not found in Database \"%s\"."
+msgstr "උදව් සන්දර්භය %s \"%s\" දත්ත සමුදාය තුළ හමු නොවේ."
+
+#: lclstrconsts.rshelphelpdatabasedidnotfoundaviewerforahelppageoftype
+#, object-pascal-format, fuzzy
+#| msgid "Help Database \"%s\" did not find a viewer for a help page of type %s"
+msgid "Help Database \"%s\" did not find a viewer for a help page of type %s."
+msgstr "උදවු දත්ත සමුදාය \"%s\" %s ආකාරයේ උපකාර පිටුවක් සඳහා නරඹන්නෙකු සොයා ගත්තේ නැත"
+
+#: lclstrconsts.rshelphelpdatabasenotfound
+#, object-pascal-format, fuzzy
+#| msgid "Help Database \"%s\" not found"
+msgid "Help Database \"%s\" not found."
+msgstr "උදව් දත්ත සමුදාය \"%s\" හමු නොවීය"
+
+#: lclstrconsts.rshelphelpfordirectivenotfound
+#, object-pascal-format
+msgid "Help for directive \"%s\" not found."
+msgstr "\"%s\" විධානය සඳහා උදවු හමු නොවීය."
+
+#: lclstrconsts.rshelphelpfordirectivenotfoundindatabase
+#, object-pascal-format
+msgid "Help for directive \"%s\" not found in Database \"%s\"."
+msgstr "\"%s\" විධානය සඳහා උදවු \"%s\" දත්ත සමුදාය තුළ හමු නොවේ."
+
+#: lclstrconsts.rshelphelpkeywordnotfound
+#, object-pascal-format
+msgid "Help keyword \"%s\" not found."
+msgstr "උදව් මූල පදය \"%s\" හමු නොවීය."
+
+#: lclstrconsts.rshelphelpkeywordnotfoundindatabase
+#, object-pascal-format
+msgid "Help keyword \"%s\" not found in Database \"%s\"."
+msgstr "උපකාරක මූල පදය \"%s\" \"%s\" දත්ත සමුදායේ හමු නොවේ."
+
+#: lclstrconsts.rshelphelpnodehasnohelpdatabase
+#, object-pascal-format, fuzzy
+#| msgid "Help node \"%s\" has no Help Database"
+msgid "Help node \"%s\" has no Help Database."
+msgstr "උපකාරක නෝඩය \"%s\" හි උදවු දත්ත සමුදායක් නොමැත"
+
+#: lclstrconsts.rshelpnohelpfoundforsource
+#, object-pascal-format
+msgid "No help found for line %d, column %d of %s."
+msgstr "%d පේළිය, %d තීරුව  %s හි සඳහා කිසිදු උපකාරයක් හමු නොවීය."
+
+#: lclstrconsts.rshelpnohelpnodesavailable
+#, fuzzy
+#| msgid "No help entries available for this topic"
+msgid "No help entries available for this topic."
+msgstr "මෙම මාතෘකාව සඳහා උපකාරක ඇතුළත් කිරීම් නොමැත"
+
+#: lclstrconsts.rshelpnotfound
+msgid "No help found for this topic"
+msgstr "මෙම මාතෘකාව සඳහා උපකාරයක් හමු නොවීය"
+
+#: lclstrconsts.rshelpnotregistered
+#, object-pascal-format, fuzzy
+#| msgid "%s: Not registered"
+msgid "%s: not registered."
+msgstr "%s: ලියාපදිංචි වී නැත"
+
+#: lclstrconsts.rshelpselectorerror
+msgid "Help Selector Error"
+msgstr "උදව් තේරීම් දෝෂය"
+
+#: lclstrconsts.rshelpthereisnoviewerforhelptype
+#, object-pascal-format, fuzzy
+#| msgid "There is no viewer for help type \"%s\""
+msgid "There is no viewer for help type \"%s\"."
+msgstr "උදව් වර්ගය \"%s\" සඳහා නරඹන්නෙකු නොමැත"
+
+#: lclstrconsts.rshelpviewererror
+msgid "Help Viewer Error"
+msgstr "බලන්නාගේ දෝෂයට උදවු කරන්න"
+
+#: lclstrconsts.rshelpviewernotfound
+msgid "No viewer was found for this type of help content"
+msgstr "මෙම ආකාරයේ උපකාරක අන්තර්ගතය සඳහා නරඹන්නෙකු හමු නොවීය"
+
+#: lclstrconsts.rshidedetails
+msgid "Hide details"
+msgstr "විස්තර සඟවන්න"
+
+#: lclstrconsts.rshighlightcolorcaption
+msgid "Highlight"
+msgstr "ඉස්මතු කරන්න"
+
+#: lclstrconsts.rshighlighttextcolorcaption
+msgid "Highlight Text"
+msgstr "පෙළ උද්දීපනය කරන්න"
+
+#: lclstrconsts.rshotlightcolorcaption
+msgid "Hot Light"
+msgstr "උණුසුම් ආලෝකය"
+
+#: lclstrconsts.rsicns
+msgid "macOS Icon Files"
+msgstr "macOS අයිකන ගොනු"
+
+#: lclstrconsts.rsicon
+msgid "Icon Files"
+msgstr "අයිකන ගොනු"
+
+#: lclstrconsts.rsiconimageempty
+msgid "Icon image cannot be empty"
+msgstr "නිරූපක රූපය හිස් විය නොහැක"
+
+#: lclstrconsts.rsiconimageformat
+msgid "Icon image must have the same format"
+msgstr "අයිකන රූපය එකම ආකෘතියක් තිබිය යුතුය"
+
+#: lclstrconsts.rsiconimageformatchange
+msgid "Cannot change format of icon image"
+msgstr "නිරූපක රූපයේ ආකෘතිය වෙනස් කළ නොහැක"
+
+#: lclstrconsts.rsiconimagesize
+msgid "Icon image must have the same size"
+msgstr "අයිකන රූපය එකම ප්‍රමාණයෙන් තිබිය යුතුය"
+
+#: lclstrconsts.rsiconimagesizechange
+msgid "Cannot change size of icon image"
+msgstr "නිරූපක රූපයේ ප්‍රමාණය වෙනස් කළ නොහැක"
+
+#: lclstrconsts.rsiconnocurrent
+msgid "Icon has no current image"
+msgstr "අයිකනයට වත්මන් රූපයක් නොමැත"
+
+#: lclstrconsts.rsinactivebordercolorcaption
+msgid "Inactive Border"
+msgstr "අක්රිය මායිම"
+
+#: lclstrconsts.rsinactivecaptioncolorcaption
+msgctxt "lclstrconsts.rsinactivecaptioncolorcaption"
+msgid "Inactive Caption"
+msgstr "අක්‍රිය සිරස්තල"
+
+#: lclstrconsts.rsinactivecaptiontext
+msgctxt "lclstrconsts.rsinactivecaptiontext"
+msgid "Inactive Caption"
+msgstr "අක්‍රිය සිරස්තල"
+
+#: lclstrconsts.rsindexoutofbounds
+#, object-pascal-format
+msgid "%s Index %d out of bounds 0 .. %d"
+msgstr "%s දර්ශකය %d සීමාවෙන් පිටත 0 .. %d"
+
+#: lclstrconsts.rsindexoutofboundsminusone
+#, object-pascal-format
+msgid "%s Index %d out of bounds -1 .. %d"
+msgstr "%s දර්ශකය %d සීමාවෙන් පිටත -1 .. %d"
+
+#: lclstrconsts.rsindexoutofrange
+#, object-pascal-format
+msgid "Index Out of range Cell[Col=%d Row=%d]"
+msgstr "දර්ශකය පරාසයෙන් පිටත කොටුව[Col=%d Row=%d]"
+
+#: lclstrconsts.rsinfobkcolorcaption
+msgid "Info Background"
+msgstr "තොරතුරු පසුබිම"
+
+#: lclstrconsts.rsinfotextcolorcaption
+msgid "Info Text"
+msgstr "තොරතුරු පෙළ"
+
+#: lclstrconsts.rsinsertrecordhint
+msgctxt "lclstrconsts.rsinsertrecordhint"
+msgid "Insert"
+msgstr "ඇතුල් කරන්න"
+
+#: lclstrconsts.rsinvaliddate
+#, object-pascal-format
+msgid "Invalid Date : %s"
+msgstr "වලංගු නොවන දිනය : %s"
+
+#: lclstrconsts.rsinvaliddaterangehint
+#, object-pascal-format
+msgid "Invalid Date: %s. Must be between %s and %s"
+msgstr "වලංගු නොවන දිනය: %s. %s සහ %s අතර විය යුතුය"
+
+#: lclstrconsts.rsinvalidformobjectstream
+msgid "invalid Form object stream"
+msgstr "වලංගු නොවන ආකෘති වස්තු ප්රවාහය"
+
+#: lclstrconsts.rsinvalidpropertyvalue
+msgid "Invalid property value"
+msgstr "වලංගු නොවන අගයක්"
+
+#: lclstrconsts.rsinvalidstreamformat
+msgid "Invalid stream format"
+msgstr "වලංගු නොවන ප්‍රවාහ ආකෘතිය"
+
+#: lclstrconsts.rsisalreadyassociatedwith
+#, object-pascal-format
+msgid "%s is already associated with %s"
+msgstr "%s දැනටමත් %s සමඟ සම්බන්ධ වී ඇත"
+
+#: lclstrconsts.rsjpeg
+msgid "JPEG Files"
+msgstr "JPEG ගොනු"
+
+#: lclstrconsts.rslastrecordhint
+msgid "Last"
+msgstr "අන්තිම"
+
+#: lclstrconsts.rslimecolorcaption
+msgid "Lime"
+msgstr "ලා කොළ පාට"
+
+#: lclstrconsts.rslistindexexceedsbounds
+#, object-pascal-format
+msgid "List index exceeds bounds (%d)"
+msgstr "ලැයිස්තු දර්ශකය සීමා ඉක්මවයි (%d)"
+
+#: lclstrconsts.rsmacoscolordialogmbpick
+msgid "Pick"
+msgstr ""
+
+#: lclstrconsts.rsmacoseditmenu
+msgctxt "lclstrconsts.rsmacoseditmenu"
+msgid "Edit"
+msgstr "සංස්කරණය කරන්න"
+
+#: lclstrconsts.rsmacoseditmenucopy
+msgctxt "lclstrconsts.rsmacoseditmenucopy"
+msgid "Copy"
+msgstr "පිටපත් කරන්න"
+
+#: lclstrconsts.rsmacoseditmenucut
+msgid "Cut"
+msgstr "කැපීම"
+
+#: lclstrconsts.rsmacoseditmenupaste
+msgctxt "lclstrconsts.rsmacoseditmenupaste"
+msgid "Paste"
+msgstr "අලවන්න"
+
+#: lclstrconsts.rsmacoseditmenuredo
+msgid "Redo"
+msgstr "නැවත කරන්න"
+
+#: lclstrconsts.rsmacoseditmenuselectall
+msgid "Select All"
+msgstr "සියල්ල තෝරන්න"
+
+#: lclstrconsts.rsmacoseditmenuundo
+msgid "Undo"
+msgstr "අහෝසි කරන්න"
+
+#: lclstrconsts.rsmacosfiledialogpackageswitchtips
+msgid "Treat File Packages (such as *.app files) as Directories to access their internal files"
+msgstr ""
+
+#: lclstrconsts.rsmacosfiledialogpackageswitchtitle
+msgid "Show File Package Contents"
+msgstr ""
+
+#: lclstrconsts.rsmacosfileformat
+msgid "File Format:"
+msgstr "ගොනු ආකෘතිය:"
+
+#: lclstrconsts.rsmacosfontdialogmbselect
+msgid "Select"
+msgstr ""
+
+#: lclstrconsts.rsmacosmenuabout
+#, object-pascal-format
+msgid "About %s"
+msgstr "%s පමණ"
+
+#: lclstrconsts.rsmacosmenuhide
+#, object-pascal-format
+msgid "Hide %s"
+msgstr "%s සඟවන්න"
+
+#: lclstrconsts.rsmacosmenuhideothers
+msgid "Hide Others"
+msgstr "අන් අය සඟවන්න"
+
+#: lclstrconsts.rsmacosmenupreferences
+msgid "Preferences..."
+msgstr "මනාප..."
+
+#: lclstrconsts.rsmacosmenuquit
+#, object-pascal-format
+msgid "Quit %s"
+msgstr "%s වලින් ඉවත් වන්න"
+
+#: lclstrconsts.rsmacosmenuservices
+msgid "Services"
+msgstr "සේවා"
+
+#: lclstrconsts.rsmacosmenushowall
+msgid "Show All"
+msgstr "සියල්ල පෙන්වන්න"
+
+#: lclstrconsts.rsmacosmenutogglefullscreen
+msgid "Toggle Full Screen"
+msgstr "සම්පූර්ණ තිරය ටොගල කරන්න"
+
+#: lclstrconsts.rsmarooncolorcaption
+msgid "Maroon"
+msgstr "මෙරූන්"
+
+#: lclstrconsts.rsmbabort
+msgid "Abort"
+msgstr "අවලංගු කරන්න"
+
+#: lclstrconsts.rsmball
+msgid "&All"
+msgstr "&සියල්ල"
+
+#: lclstrconsts.rsmbcancel
+msgctxt "lclstrconsts.rsmbcancel"
+msgid "Cancel"
+msgstr "අවලංගු කරන්න"
+
+#: lclstrconsts.rsmbclose
+msgid "&Close"
+msgstr "&වසන්න"
+
+#: lclstrconsts.rsmbhelp
+msgid "&Help"
+msgstr "&උදව්"
+
+#: lclstrconsts.rsmbignore
+msgid "&Ignore"
+msgstr "&නොසලකා හරින්න"
+
+#: lclstrconsts.rsmbno
+msgid "&No"
+msgstr "&නැහැ"
+
+#: lclstrconsts.rsmbnotoall
+msgid "No to all"
+msgstr "හැමෝටම නෑ"
+
+#: lclstrconsts.rsmbok
+msgid "&OK"
+msgstr "&හරි"
+
+#: lclstrconsts.rsmbopen
+msgid "&Open"
+msgstr "&විවෘත කරන්න"
+
+#: lclstrconsts.rsmbretry
+msgid "&Retry"
+msgstr "&නැවත උත්සාහ කරන්න"
+
+#: lclstrconsts.rsmbsave
+msgid "&Save"
+msgstr "&සුරකින්න"
+
+#: lclstrconsts.rsmbunlock
+msgid "&Unlock"
+msgstr "&අගුළු හරින්න"
+
+#: lclstrconsts.rsmbyes
+msgid "&Yes"
+msgstr "&ඔව්"
+
+#: lclstrconsts.rsmbyestoall
+msgid "Yes to &All"
+msgstr "ඔව් &සියල්ලට"
+
+#: lclstrconsts.rsmedgraycolorcaption
+msgid "Medium Gray"
+msgstr "මධ්යම අළු"
+
+#: lclstrconsts.rsmenubarcolorcaption
+msgid "Menu Bar"
+msgstr "මෙනු තීරුව"
+
+#: lclstrconsts.rsmenucolorcaption
+msgctxt "lclstrconsts.rsmenucolorcaption"
+msgid "Menu"
+msgstr "මෙනුව"
+
+#: lclstrconsts.rsmenuhighlightcolorcaption
+msgid "Menu Highlight"
+msgstr "මෙනු උද්දීපනය"
+
+#: lclstrconsts.rsmenutextcolorcaption
+msgid "Menu Text"
+msgstr "මෙනු පෙළ"
+
+#: lclstrconsts.rsmoneygreencolorcaption
+msgid "Money Green"
+msgstr "මුදල් කොළ පාට"
+
+#: lclstrconsts.rsmtauthentication
+msgid "Authentication"
+msgstr "සත්යාපනය"
+
+#: lclstrconsts.rsmtconfirmation
+msgid "Confirmation"
+msgstr "තහවුරු කිරීම"
+
+#: lclstrconsts.rsmtcustom
+msgid "Custom"
+msgstr "අභිරුචි"
+
+#: lclstrconsts.rsmterror
+msgctxt "lclstrconsts.rsmterror"
+msgid "Error"
+msgstr "දෝෂයකි"
+
+#: lclstrconsts.rsmtinformation
+msgid "Information"
+msgstr "තොරතුරු"
+
+#: lclstrconsts.rsmtwarning
+msgid "Warning"
+msgstr "අවවාදයයි"
+
+#: lclstrconsts.rsnavycolorcaption
+msgid "Navy"
+msgstr "නාවික වර්ණය"
+
+#: lclstrconsts.rsnextrecordhint
+msgctxt "lclstrconsts.rsnextrecordhint"
+msgid "Next"
+msgstr "ඊළඟ"
+
+#: lclstrconsts.rsnonecolorcaption
+msgid "None"
+msgstr "කිසිවක් නැත"
+
+#: lclstrconsts.rsnotavalidgridfile
+msgid "Not a valid grid file"
+msgstr "වලංගු ජාල ගොනුවක් නොවේ"
+
+#: lclstrconsts.rsnowidgetset
+msgid "No widgetset object. Please check if the unit \"interfaces\" was added to the programs uses clause."
+msgstr "විජට් කට්ටල වස්තුවක් නැත. වගන්ති භාවිතා කරන වැඩසටහන් වලට \"අතුරුමුහුණත්\" ඒකකය එක් කර ඇත්දැයි කරුණාකර පරීක්ෂා කරන්න."
+
+#: lclstrconsts.rsolivecolorcaption
+msgid "Olive"
+msgstr "ඔලිව් වර්ණය"
+
+#: lclstrconsts.rspickdate
+msgid "Select a date"
+msgstr "දිනයක් තෝරන්න"
+
+#: lclstrconsts.rspixmap
+msgid "Pixmap Files"
+msgstr "Pixmap ගොනු"
+
+#: lclstrconsts.rsportablenetworkgraphic
+msgid "PNG Files"
+msgstr "PNG ගොනු"
+
+#: lclstrconsts.rsportablepixmap
+msgid "Portable Pixmap Files"
+msgstr "පොදු පික්ස්මේප් ගොනු"
+
+#: lclstrconsts.rspostrecordhint
+msgid "Post"
+msgstr "පළ කරන්න"
+
+#: lclstrconsts.rspressoktoignoreandriskdatacorruptionpressaborttok
+#, object-pascal-format
+msgid "%s%sPress OK to ignore and risk data corruption.%sPress Abort to kill the program."
+msgstr "දත්ත දූෂණය නොසලකා හැරීමට සහ අවදානමට ලක් කිරීමට %s%sහරි ඔබන්න.%sවැඩසටහන විනාශ කිරීමට Abort ඔබන්න."
+
+#: lclstrconsts.rspriorrecordhint
+msgctxt "lclstrconsts.rspriorrecordhint"
+msgid "Prior"
+msgstr "පෙර"
+
+#: lclstrconsts.rspromptonreplace
+msgid "Prompt on replace"
+msgstr "ආදේශ කිරීම ගැන දැනුම් දෙන්න"
+
+#: lclstrconsts.rspropertydoesnotexist
+#, object-pascal-format
+msgid "Property %s does not exist"
+msgstr "අගය %s නොපවතී"
+
+#: lclstrconsts.rspurplecolorcaption
+msgid "Purple"
+msgstr "දම් පාට"
+
+#: lclstrconsts.rsqtoptiondisableaccurateframe
+msgid "Disables fully accurate window frame under X11. This feature is implemented for Qt, Qt5 and Gtk2 interfaces and used mostly by GetWindowRect()."
+msgstr "X11 යටතේ සම්පූර්ණ නිවැරදි කවුළු රාමුව අක්‍රීය කරයි. මෙම විශේෂාංගය Qt, Qt5 සහ Gtk2 අතුරුමුහුණත් සඳහා ක්‍රියාත්මක කර ඇති අතර බොහෝ දුරට GetWindowRect() විසින් භාවිතා කරනු ලැබේ."
+
+#: lclstrconsts.rsqtoptiondograb
+msgid "Running under a debugger can cause an implicit -nograb, use -dograb to override. Works only under X11, needs QT_DEBUG."
+msgstr "නිදොස්කරණයක් යටතේ ක්‍රියා කිරීම ව්‍යංග -nograb, ප්‍රතික්ෂේප කිරීමට -dograb භාවිතා කිරීමට හේතු විය හැක. X11 යටතේ පමණක් ක්‍රියා කරයි, QT_DEBUG අවශ්‍යයි."
+
+#: lclstrconsts.rsqtoptiongraphicsstyle
+msgid "Sets the backend to be used for on-screen widgets and QPixmaps. Available options are native, raster and opengl. OpenGL is still unstable."
+msgstr "තිරයේ විජට් සහ QPixmaps සඳහා භාවිතා කිරීමට පසු අන්තය සකසයි. පවතින විකල්ප දේශීය, raster සහ opengl වේ. OpenGL තවමත් අස්ථායි."
+
+#: lclstrconsts.rsqtoptionnograb
+msgid "Tells Qt that it must never grab the mouse or the keyboard. Needs QT_DEBUG."
+msgstr "එය කිසිවිටක මවුසය හෝ යතුරුපුවරුව අල්ලා නොගත යුතු බව Qt වෙත දන්වයි. QT DEBUG අවශ්‍යයි."
+
+#: lclstrconsts.rsqtoptionreverse
+msgid "Sets the application's layout direction to Qt::RightToLeft."
+msgstr "යෙදුමේ පිරිසැලසුම් දිශාව Qt::RightToLeft ලෙස සකසයි."
+
+#: lclstrconsts.rsqtoptionsession
+msgid "Restores the application from an earlier session."
+msgstr "පෙර සැසියකින් යෙදුම ප්‍රතිසාධනය කරයි."
+
+#: lclstrconsts.rsqtoptionstyle
+msgid "Sets the application GUI style. Possible values are motif, windows, and platinum. If you compiled Qt with additional styles or have additional styles as plugins these will be available to the -style command line option. NOTE: Not all styles are available on all platforms. If style param does not exist Qt will start an application with default common style (windows)."
+msgstr "යෙදුම් GUI විලාසය සකසයි. විය හැකි අගයන් වන්නේ මෝස්තරය, ජනෙල් සහ ප්ලැටිනම් ය. ඔබ අමතර ශෛලීන් සමඟින් Qt සම්පාදනය කළේ නම් හෝ ප්ලගීන ලෙස අමතර මෝස්තර තිබේ නම්, මේවා -style විධාන රේඛා විකල්පය වෙත ලබා ගත හැක. සටහන: සියලුම මෝස්තර සියලු වේදිකාවල ලබා ගත නොහැක. style param නොපවතියි නම් Qt පෙරනිමි පොදු විලාසය (වින්ඩෝස්) සමඟ යෙදුමක් ආරම්භ කරයි."
+
+#: lclstrconsts.rsqtoptionstylesheet
+msgid "Sets the application Style Sheet. The value must be a path to a file that contains the Style Sheet. Note: Relative URLs in the Style Sheet file are relative to the Style Sheet file's path."
+msgstr "යෙදුම් ස්ටයිල් ෂීට් සකසයි. අගය ස්ටයිල් ෂීට් අඩංගු ගොනුවකට මාර්ගයක් විය යුතුය. සටහන: ස්ටයිල් ෂීට් ගොනුවේ ඇති සාපේක්ෂ URL ස්ටයිල් ෂීට් ගොනුවේ මාර්ගයට සාපේක්ෂ වේ."
+
+#: lclstrconsts.rsqtoptionsync
+msgid "Switches to synchronous mode for debugging. Works only under X11."
+msgstr "නිදොස්කරණය සඳහා සමමුහුර්ත මාදිලිය වෙත මාරු වේ. X11 යටතේ පමණක් ක්‍රියා කරයි."
+
+#: lclstrconsts.rsqtoptionwidgetcount
+msgid "Prints debug message at the end about number of widgets left undestroyed and maximum number of widgets existed at the same time."
+msgstr "විනාශ නොවී ඉතිරි වී ඇති විජට් සංඛ්‍යාව සහ උපරිම විජට් සංඛ්‍යාව එකම අවස්ථාවේදීම පැවතීම ගැන අවසානයේ නිදොස් කිරීමේ පණිවිඩය මුද්‍රණය කරයි."
+
+#: lclstrconsts.rsqtoptionx11bgcolor
+msgid "Sets the default background color and an application palette (light and dark shades are calculated)."
+msgstr "පෙරනිමි පසුබිම් වර්ණය සහ යෙදුම් තලයක් සකසයි (ආලෝකය සහ අඳුරු සෙවන ගණනය කරනු ලැබේ)."
+
+#: lclstrconsts.rsqtoptionx11btncolor
+msgid "Sets the default button color."
+msgstr "පෙරනිමි බොත්තම් වර්ණය සකසයි."
+
+#: lclstrconsts.rsqtoptionx11cmap
+msgid "Causes the application to install a private color map on an 8-bit display."
+msgstr "8-bit සංදර්ශකයක් මත පුද්ගලික වර්ණ සිතියමක් ස්ථාපනය කිරීමට යෙදුමට හේතු වේ."
+
+#: lclstrconsts.rsqtoptionx11display
+msgid "Sets the X display. Default is $DISPLAY."
+msgstr "X සංදර්ශකය සකසයි. පෙරනිමිය $DISPLAY වේ."
+
+#: lclstrconsts.rsqtoptionx11fgcolor
+msgid "Sets the default foreground color."
+msgstr "පෙරනිමි පෙරබිම් වර්ණය සකසයි."
+
+#: lclstrconsts.rsqtoptionx11font
+msgid "Defines the application font. The font should be specified using an X logical font description."
+msgstr "යෙදුම් අකුරු නිර්වචනය කරයි. X තාර්කික අකුරු විස්තරයක් භාවිතයෙන් අකුරු නියම කළ යුතුය."
+
+#: lclstrconsts.rsqtoptionx11geometry
+msgid "Sets the client geometry of the first window that is shown."
+msgstr "පෙන්වන පළමු කවුළුවේ සේවාදායක ජ්‍යාමිතිය සකසයි."
+
+#: lclstrconsts.rsqtoptionx11im
+msgid "Sets the input method server (equivalent to setting the XMODIFIERS environment variable)."
+msgstr "ආදාන ක්‍රම සේවාදායකය සකසයි (XMODIFIERS පරිසර විචල්‍යය සැකසීමට සමාන)."
+
+#: lclstrconsts.rsqtoptionx11inputstyle
+msgid "Defines how the input is inserted into the given widget, e.g. onTheSpot makes the input appear directly in the widget, while overTheSpot makes the input appear in a box floating over the widget and is not inserted until the editing is done."
+msgstr "දී ඇති විජට් එකට ආදානය ඇතුල් කරන ආකාරය නිර්වචනය කරයි, උදා. onTheSpot මඟින් ආදානය කෙලින්ම විජට් තුළ දිස්වන අතර, overTheSpot මඟින් විජට් එක මත පාවෙන කොටුවක ආදානය දිස්වන අතර සංස්කරණය සිදු කරන තුරු ඇතුළු නොකෙරේ."
+
+#: lclstrconsts.rsqtoptionx11name
+msgid "Sets the application name."
+msgstr "යෙදුමේ නම සකසයි."
+
+#: lclstrconsts.rsqtoptionx11ncols
+msgid "Limits the number of colors allocated in the color cube on an 8-bit display, if the application is using the QApplication::ManyColor color specification. If count is 216 then a 6x6x6 color cube is used (i.e. 6 levels of red, 6 of green, and 6 of blue); for other values, a cube approximately proportional to a 2x3x1 cube is used."
+msgstr "යෙදුම QApplication ::ManyColor වර්ණ පිරිවිතර භාවිතා කරන්නේ නම්, 8-bit සංදර්ශකය මත වර්ණ ඝනකයේ වෙන් කර ඇති වර්ණ ගණන සීමා කරයි. ගණන් කිරීම 216 නම්, 6x6x6 වර්ණ ඝනකයක් භාවිතා වේ (එනම් රතු මට්ටම් 6, කොළ 6 සහ නිල් 6); අනෙකුත් අගයන් සඳහා, 2x3x1 ඝනකයකට ආසන්න වශයෙන් සමානුපාතික ඝනකයක් භාවිතා වේ."
+
+#: lclstrconsts.rsqtoptionx11title
+msgid "Sets the application title."
+msgstr "යෙදුම් මාතෘකාව සකසයි."
+
+#: lclstrconsts.rsqtoptionx11visual
+msgid "Forces the application to use a TrueColor visual on an 8-bit display."
+msgstr "8-bit සංදර්ශකයක් මත TrueColor දෘශ්‍ය භාවිතා කිරීමට යෙදුමට බල කරයි."
+
+#: lclstrconsts.rsrasterimageendupdate
+msgid "Endupdate while no update in progress"
+msgstr "යාවත්කාලීන කිරීමක් සිදු නොවන අතරේ අවසන් කරන්න"
+
+#: lclstrconsts.rsrasterimagesaveinupdate
+msgid "Cannot save image while update in progress"
+msgstr "යාවත්කාලීන වෙමින් පවතින අතරතුර රූපය සුරැකිය නොහැක"
+
+#: lclstrconsts.rsrasterimageupdateall
+msgid "Cannot begin update all when canvas only update in progress"
+msgstr "කැන්වස් පමණක් යාවත්කාලීන වෙමින් පවතින විට සියල්ල යාවත්කාලීන කිරීම ආරම්භ කළ නොහැක"
+
+#: lclstrconsts.rsredcolorcaption
+msgid "Red"
+msgstr "රතු"
+
+#: lclstrconsts.rsrefreshrecordshint
+msgid "Refresh"
+msgstr "නැවුම් කරන්න"
+
+#: lclstrconsts.rsreplace
+msgid "Replace"
+msgstr "ආදේශ කරන්න"
+
+#: lclstrconsts.rsreplaceall
+msgid "Replace all"
+msgstr "සියල්ල ප්රතිස්ථාපනය කරන්න"
+
+#: lclstrconsts.rsresourcenotfound
+#, object-pascal-format
+msgctxt "lclstrconsts.rsresourcenotfound"
+msgid "Resource %s not found"
+msgstr "සම්පත් %s හමු නොවීය"
+
+#: lclstrconsts.rsscrollbarcolorcaption
+msgid "ScrollBar"
+msgstr "අනුචලන තීරුව"
+
+#: lclstrconsts.rsscrollbaroutofrange
+msgid "ScrollBar property out of range"
+msgstr "ScrollBar අගය පරාසයෙන් පිටත"
+
+#: lclstrconsts.rsselectcolortitle
+msgid "Select color"
+msgstr "වර්ණය තෝරන්න"
+
+#: lclstrconsts.rsselectfonttitle
+msgid "Select a font"
+msgstr "අකුරු තෝරන්න"
+
+#: lclstrconsts.rsshowdetails
+msgid "Show details"
+msgstr "විස්තර පෙන්වන්න"
+
+#: lclstrconsts.rssilvercolorcaption
+msgid "Silver"
+msgstr "රිදී"
+
+#: lclstrconsts.rsskybluecolorcaption
+msgid "Sky Blue"
+msgstr "අහස නිල්"
+
+#: lclstrconsts.rstcustomtabcontrolaccessibilitydescription
+msgid "A control with tabs"
+msgstr "ටැබ් සහිත පාලනයක්"
+
+#: lclstrconsts.rstealcolorcaption
+msgid "Teal"
+msgstr "ටීල්"
+
+#: lclstrconsts.rstext
+msgid "Text"
+msgstr "පෙළ"
+
+#: lclstrconsts.rstga
+msgid "TGA Image Files"
+msgstr "TGA රූප ගොනු"
+
+#: lclstrconsts.rsthebuiltinurlisreadonlychangethebaseurlinstead
+msgid "The built-in URL is read only. Change the BaseURL instead."
+msgstr "ගොඩනඟන ලද URL එක කියවීමට පමණි. ඒ වෙනුවට BaseURL වෙනස් කරන්න."
+
+#: lclstrconsts.rstiff
+msgid "Tagged Image File Format Files"
+msgstr "ටැග් කළ රූප ගොනු ආකෘති ගොනු"
+
+#: lclstrconsts.rstpanelaccessibilitydescription
+msgctxt "lclstrconsts.rstpanelaccessibilitydescription"
+msgid "Panel"
+msgstr "පැනලය"
+
+#: lclstrconsts.rstsplitteraccessibilitydescription
+msgctxt "lclstrconsts.rstsplitteraccessibilitydescription"
+msgid "A grip to control how much size to give two parts of an area"
+msgstr "ප්‍රදේශයක කොටස් දෙකක් ලබා දිය යුතු ප්‍රමාණය පාලනය කිරීමට ග්‍රහණයක්"
+
+#: lclstrconsts.rsttreeviewaccessibilitydescription
+msgctxt "lclstrconsts.rsttreeviewaccessibilitydescription"
+msgid "A tree of items"
+msgstr "අයිතම ගසක්"
+
+#: lclstrconsts.rsunabletoloaddefaultfont
+msgid "Unable to load default font"
+msgstr "පෙරනිමි අකුරු පූරණය කළ නොහැක"
+
+#: lclstrconsts.rsunknownerrorpleasereportthisbug
+msgid "Unknown Error, please report this bug"
+msgstr "නොදන්නා දෝෂයක්, කරුණාකර මෙම දෝෂය වාර්තා කරන්න"
+
+#: lclstrconsts.rsunknownpictureextension
+msgid "Unknown picture extension"
+msgstr "නොදන්නා පින්තූර දිගුව"
+
+#: lclstrconsts.rsunknownpictureformat
+msgid "Unknown picture format"
+msgstr "නොදන්නා පින්තූර ආකෘතිය"
+
+#: lclstrconsts.rsunsupportedbitmapformat
+msgid "Unsupported bitmap format."
+msgstr "සහාය නොදක්වන බිට්මැප් ආකෘතිය."
+
+#: lclstrconsts.rsunsupportedclipboardformat
+#, object-pascal-format
+msgid "Unsupported clipboard format: %s"
+msgstr "සහාය නොදක්වන ක්ලිප්බෝඩ් ආකෘතිය: %s"
+
+#: lclstrconsts.rswarningunreleaseddcsdump
+#, object-pascal-format
+msgid " WARNING: There are %d unreleased DCs, a detailed dump follows:"
+msgstr "අවවාදයයි: නිකුත් නොකළ DC %dක් ඇත, සවිස්තරාත්මක ඩම්ප් එකක් පහත දැක්වේ:"
+
+#: lclstrconsts.rswarningunreleasedgdiobjectsdump
+#, object-pascal-format
+msgid " WARNING: There are %d unreleased GDIObjects, a detailed dump follows:"
+msgstr " අවවාදයයි: නිකුත් නොකළ DC %dක් ඇත, සවිස්තරාත්මක ඩම්ප් එකක් පහත දැක්වේ:"
+
+#: lclstrconsts.rswarningunreleasedmessagesinqueue
+#, object-pascal-format
+msgid " WARNING: There are %d messages left in the queue! I'll free them"
+msgstr " අවවාදයයි: පෝලිමේ පණිවිඩ %dක් ඉතිරිව ඇත! මම ඔවුන්ව නිදහස් කරන්නම්"
+
+#: lclstrconsts.rswarningunreleasedtimerinfos
+#, object-pascal-format
+msgid " WARNING: There are %d TimerInfo structures left, I'll free them"
+msgstr " අවවාදයයි: TimerInfo ව්‍යුහයන් %dක් ඉතිරිව ඇත, මම ඒවා නිදහස් කරමි"
+
+#: lclstrconsts.rswarningunremovedpaintmessages
+#, object-pascal-format
+msgid " WARNING: There are %s unremoved LM_PAINT/LM_GtkPAINT message links left."
+msgstr " අවවාදයයි: ඉවත් නොකළ LM_PAINT/LM_GtkPAINT පණිවිඩ සබැඳි %sක් ඉතිරිව ඇත."
+
+#: lclstrconsts.rswhitecolorcaption
+msgid "White"
+msgstr "සුදු"
+
+#: lclstrconsts.rswholewordsonly
+msgid "Whole words only"
+msgstr "සම්පූර්ණ වචන පමණි"
+
+#: lclstrconsts.rswin32error
+msgid "Error:"
+msgstr "දෝෂය:"
+
+#: lclstrconsts.rswin32warning
+msgid "Warning:"
+msgstr "අවවාදයයි:"
+
+#: lclstrconsts.rswindowcolorcaption
+msgid "Window"
+msgstr "කවුළුව"
+
+#: lclstrconsts.rswindowframecolorcaption
+msgid "Window Frame"
+msgstr "කවුළු රාමුව"
+
+#: lclstrconsts.rswindowtextcolorcaption
+msgid "Window Text"
+msgstr "කවුළු පෙළ"
+
+#: lclstrconsts.rsyellowcolorcaption
+msgid "Yellow"
+msgstr "කහ"
+
+#: lclstrconsts.scannotfocus
+#, object-pascal-format, fuzzy, badformat
+#| msgid "Cannot focus a disabled or invisible window"
+msgid "Cannot focus a disabled or invisible window \"%s\""
+msgstr "ආබාධිත හෝ නොපෙනෙන කවුළුවක් නාභිගත කළ නොහැක"
+
+#: lclstrconsts.sduplicatemenus
+msgid "Duplicate menus"
+msgstr "අනුපිටපත් මෙනු"
+
+#: lclstrconsts.sinvalidactioncreation
+msgid "Invalid action creation"
+msgstr "වලංගු නොවන ක්‍රියා නිර්මාණය"
+
+#: lclstrconsts.sinvalidactionenumeration
+msgid "Invalid action enumeration"
+msgstr "වලංගු නොවන ක්‍රියා ගණනය කිරීම"
+
+#: lclstrconsts.sinvalidactionregistration
+msgid "Invalid action registration"
+msgstr "වලංගු නොවන ක්‍රියා ලියාපදිංචිය"
+
+#: lclstrconsts.sinvalidactionunregistration
+msgid "Invalid action unregistration"
+msgstr "වලංගු නොවන ක්‍රියා ලියාපදිංචි නොකිරීම"
+
+#: lclstrconsts.sinvalidimagesize
+msgid "Invalid image size"
+msgstr "වලංගු නොවන රූප ප්‍රමාණය"
+
+#: lclstrconsts.sinvalidindex
+msgid "Invalid ImageList Index"
+msgstr "වලංගු නොවන රූප ලැයිස්තු දර්ශකය"
+
+#: lclstrconsts.smaskeditnomatch
+msgid "The current text does not match the specified mask."
+msgstr "වත්මන් පාඨය සඳහන් කළ වෙස් මුහුණට නොගැළපේ."
+
+#: lclstrconsts.smenuindexerror
+msgid "Menu index out of range"
+msgstr "මෙනු දර්ශකය පරාසයෙන් පිටත"
+
+#: lclstrconsts.smenuitemisnil
+msgid "MenuItem is nil"
+msgstr "මෙනු අයිතමය ශුන්‍ය වේ"
+
+#: lclstrconsts.smenunotfound
+msgid "Sub-menu is not in menu"
+msgstr "උප මෙනුව මෙනුවේ නැත"
+
+#: lclstrconsts.smkcalt
+msgid "Alt+"
+msgstr "Alt+"
+
+#: lclstrconsts.smkcbksp
+msgid "BkSp"
+msgstr "BkSp"
+
+#: lclstrconsts.smkcctrl
+msgid "Ctrl+"
+msgstr "Ctrl+"
+
+#: lclstrconsts.smkcdel
+msgid "Del"
+msgstr "Del"
+
+#: lclstrconsts.smkcdown
+msgctxt "lclstrconsts.smkcdown"
+msgid "Down"
+msgstr "පහළට"
+
+#: lclstrconsts.smkcend
+msgctxt "lclstrconsts.smkcend"
+msgid "End"
+msgstr "අවසානය"
+
+#: lclstrconsts.smkcenter
+msgid "Enter"
+msgstr "ඇතුල් කරන්න"
+
+#: lclstrconsts.smkcesc
+msgid "Esc"
+msgstr "පිට වීම"
+
+#: lclstrconsts.smkcfn
+msgid "Fn+"
+msgstr ""
+
+#: lclstrconsts.smkchome
+msgctxt "lclstrconsts.smkchome"
+msgid "Home"
+msgstr "නිවස"
+
+#: lclstrconsts.smkcins
+msgid "Ins"
+msgstr "Ins"
+
+#: lclstrconsts.smkcleft
+msgctxt "lclstrconsts.smkcleft"
+msgid "Left"
+msgstr "වම"
+
+#: lclstrconsts.smkcmeta
+msgid "Meta+"
+msgstr "මෙටා +"
+
+#: lclstrconsts.smkcpgdn
+msgid "PgDn"
+msgstr "PgDn"
+
+#: lclstrconsts.smkcpgup
+msgid "PgUp"
+msgstr "PgUp"
+
+#: lclstrconsts.smkcright
+msgctxt "lclstrconsts.smkcright"
+msgid "Right"
+msgstr "දකුණ"
+
+#: lclstrconsts.smkcshift
+msgid "Shift+"
+msgstr "Shift+"
+
+#: lclstrconsts.smkcspace
+msgid "Space"
+msgstr "අවකාශය"
+
+#: lclstrconsts.smkctab
+msgctxt "lclstrconsts.smkctab"
+msgid "Tab"
+msgstr "ටැබ්"
+
+#: lclstrconsts.smkcup
+msgctxt "lclstrconsts.smkcup"
+msgid "Up"
+msgstr "ඉහළට"
+
+#: lclstrconsts.snotimers
+msgid "No timers available"
+msgstr "ටයිමර් නොමැත"
+
+#: lclstrconsts.sparentrequired
+#, object-pascal-format
+msgid "Control \"%s\" has no parent window."
+msgstr "\"%s\" පාලනයට මාපිය කවුළුවක් නොමැත."
+
+#: lclstrconsts.sparexpected
+#, object-pascal-format
+msgid "Wrong token type: %s expected"
+msgstr "වැරදි ටෝකන වර්ගය: %s බලාපොරොත්තු වේ"
+
+#: lclstrconsts.sparinvalidfloat
+#, object-pascal-format
+msgid "Invalid floating point number: %s"
+msgstr "වලංගු නොවන පාවෙන ලක්ෂ්‍ය අංකය: %s"
+
+#: lclstrconsts.sparinvalidinteger
+#, object-pascal-format
+msgid "Invalid integer number: %s"
+msgstr "වලංගු නොවන පූර්ණ සංඛ්‍යා: %s"
+
+#: lclstrconsts.sparlocinfo
+#, object-pascal-format
+msgid " (at %d,%d, stream offset %d)"
+msgstr "(%d,%d, ප්‍රවාහ ඕෆ්සෙට් %d)"
+
+#: lclstrconsts.sparunterminatedbinvalue
+msgid "Unterminated byte value"
+msgstr "අවසන් නොකළ බයිට් අගය"
+
+#: lclstrconsts.sparunterminatedstring
+msgid "Unterminated string"
+msgstr "අවසන් නොකළ තන්තුව"
+
+#: lclstrconsts.sparwrongtokensymbol
+#, object-pascal-format
+msgid "Wrong token symbol: %s expected but %s found"
+msgstr "වැරදි සංකේත සංකේතය: %s බලාපොරොත්තු වූ නමුත් %s හමු විය"
+
+#: lclstrconsts.sparwrongtokentype
+#, object-pascal-format
+msgid "Wrong token type: %s expected but %s found"
+msgstr "වැරදි ටෝකන වර්ගය: %s බලාපොරොත්තු වූ නමුත් %s හමු විය"
+
+#: lclstrconsts.sshellctrlsattributes
+msgid "Attributes"
+msgstr "ගුණාංග"
+
+#: lclstrconsts.sshellctrlsbytes
+#, object-pascal-format
+msgid "%s bytes"
+msgstr "බයිට් %s"
+
+#: lclstrconsts.sshellctrlsfolder
+msgid "Folder"
+msgstr "ෆෝල්ඩරය"
+
+#: lclstrconsts.sshellctrlsgb
+#, object-pascal-format
+msgid "%s GB"
+msgstr "%s GB"
+
+#: lclstrconsts.sshellctrlsinvalidpath
+#, object-pascal-format
+msgctxt "lclstrconsts.sshellctrlsinvalidpath"
+msgid ""
+"Invalid pathname:\n"
+"\"%s\""
+msgstr ""
+"වලංගු නොවන මාර්ග නාමය:\n"
+"\"%s\""
+
+#: lclstrconsts.sshellctrlsinvalidpathrelative
+#, object-pascal-format
+msgid ""
+"Invalid relative pathname:\n"
+"\"%s\"\n"
+"in relation to rootpath:\n"
+"\"%s\""
+msgstr ""
+"වලංගු නොවන සාපේක්ෂ ගමන් මාර්ගය:\n"
+"\"%s\"\n"
+"rootpath සම්බන්ධයෙන්:\n"
+"\"%s\""
+
+#: lclstrconsts.sshellctrlsinvalidroot
+#, object-pascal-format
+msgctxt "lclstrconsts.sshellctrlsinvalidroot"
+msgid ""
+"Invalid pathname:\n"
+"\"%s\""
+msgstr ""
+"වලංගු නොවන මාර්ග නාමය:\n"
+"\"%s\""
+
+#: lclstrconsts.sshellctrlskb
+#, object-pascal-format
+msgid "%s kB"
+msgstr "%s kB"
+
+#: lclstrconsts.sshellctrlsmb
+#, object-pascal-format
+msgid "%s MB"
+msgstr "%s MB"
+
+#: lclstrconsts.sshellctrlsmodificationdate
+msgid "Date modified"
+msgstr "වෙනස් කළ දිනය"
+
+#: lclstrconsts.sshellctrlsname
+msgid "Name"
+msgstr "නම"
+
+#: lclstrconsts.sshellctrlsselecteditemdoesnotexists
+#, object-pascal-format
+msgid ""
+"The selected item does not exist on disk:\n"
+"\"%s\""
+msgstr ""
+"තෝරාගත් අයිතමය තැටියේ නොමැත:\n"
+"\"%s\""
+
+#: lclstrconsts.sshellctrlssize
+msgid "Size"
+msgstr "ප්රමාණය"
+
+#: lclstrconsts.sshellctrlstype
+msgid "Type"
+msgstr "Type"
+

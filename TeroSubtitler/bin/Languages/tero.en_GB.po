@@ -732,6 +732,32 @@ msgstr "Original"
 msgid "Percent"
 msgstr "Percent"
 
+#: proclocalize.lngplaintextallfiles
+msgid "All files"
+msgstr "All files"
+
+#: proclocalize.lngplaintextautomatic
+msgid "Sentence (smart segmentation, using the conventions)"
+msgstr "Sentence (smart segmentation, using the conventions)"
+
+#: proclocalize.lngplaintexteachline
+msgid "Line"
+msgstr "Line"
+
+#: proclocalize.lngplaintexteachparagraph
+msgid "Paragraph (separated by a blank line)"
+msgstr "Paragraph (separated by a blank line)"
+
+#: proclocalize.lngplaintextentries
+#, object-pascal-format
+msgid "%d entries"
+msgstr "%d entries"
+
+#: proclocalize.lngplaintextfiles
+msgctxt "proclocalize.lngplaintextfiles"
+msgid "Text files"
+msgstr "Text files"
+
 #: proclocalize.lngprojectfile
 msgid "Subtitle Translation Project"
 msgstr "Subtitle Translation Project"
@@ -884,6 +910,7 @@ msgid "Select"
 msgstr "Select"
 
 #: proclocalize.lngscshotchanges
+msgctxt "proclocalize.lngscshotchanges"
 msgid "Text files"
 msgstr "Text files"
 
@@ -2792,6 +2819,40 @@ msgstr "Go to"
 #: tfrmgototime.lbltime.caption
 msgid "Time:"
 msgstr "Time:"
+
+#: tfrmimportplaintext.btnclose.caption
+msgctxt "tfrmimportplaintext.btnclose.caption"
+msgid "Close"
+msgstr "Close"
+
+#: tfrmimportplaintext.btnimport.caption
+msgctxt "tfrmimportplaintext.btnimport.caption"
+msgid "Import"
+msgstr "Import"
+
+#: tfrmimportplaintext.caption
+msgid "Import plain text"
+msgstr "Import plain text"
+
+#: tfrmimportplaintext.chkreplace.caption
+msgid "Replace the current entries"
+msgstr "Replace the current entries"
+
+#: tfrmimportplaintext.chksyncwithaudio.caption
+msgid "Synchronize with the audio after importing"
+msgstr "Synchronize with the audio after importing"
+
+#: tfrmimportplaintext.lblcount.caption
+msgid "0 entries"
+msgstr "0 entries"
+
+#: tfrmimportplaintext.lblmode.caption
+msgid "Create one entry for each:"
+msgstr "Create one entry for each:"
+
+#: tfrmimportplaintext.lblpreview.caption
+msgid "Preview:"
+msgstr "Preview:"
 
 #: tfrmimportsup.btnclose.caption
 msgctxt "tfrmimportsup.btnclose.caption"

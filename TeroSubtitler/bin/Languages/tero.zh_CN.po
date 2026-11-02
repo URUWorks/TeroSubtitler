@@ -732,6 +732,33 @@ msgstr "原始"
 msgid "Percent"
 msgstr "百分比"
 
+#: proclocalize.lngplaintextallfiles
+msgid "All files"
+msgstr ""
+
+#: proclocalize.lngplaintextautomatic
+msgid "Sentence (smart segmentation, using the conventions)"
+msgstr ""
+
+#: proclocalize.lngplaintexteachline
+msgid "Line"
+msgstr ""
+
+#: proclocalize.lngplaintexteachparagraph
+msgid "Paragraph (separated by a blank line)"
+msgstr ""
+
+#: proclocalize.lngplaintextentries
+#, object-pascal-format
+msgid "%d entries"
+msgstr ""
+
+#: proclocalize.lngplaintextfiles
+#, fuzzy
+msgctxt "proclocalize.lngplaintextfiles"
+msgid "Text files"
+msgstr "文本文件"
+
 #: proclocalize.lngprojectfile
 msgid "Subtitle Translation Project"
 msgstr "字幕翻译项目"
@@ -884,6 +911,7 @@ msgid "Select"
 msgstr "选择"
 
 #: proclocalize.lngscshotchanges
+msgctxt "proclocalize.lngscshotchanges"
 msgid "Text files"
 msgstr "文本文件"
 
@@ -2797,6 +2825,42 @@ msgstr "转到"
 #: tfrmgototime.lbltime.caption
 msgid "Time:"
 msgstr "时间："
+
+#: tfrmimportplaintext.btnclose.caption
+#, fuzzy
+msgctxt "tfrmimportplaintext.btnclose.caption"
+msgid "Close"
+msgstr "关闭"
+
+#: tfrmimportplaintext.btnimport.caption
+#, fuzzy
+msgctxt "tfrmimportplaintext.btnimport.caption"
+msgid "Import"
+msgstr "导入"
+
+#: tfrmimportplaintext.caption
+msgid "Import plain text"
+msgstr ""
+
+#: tfrmimportplaintext.chkreplace.caption
+msgid "Replace the current entries"
+msgstr ""
+
+#: tfrmimportplaintext.chksyncwithaudio.caption
+msgid "Synchronize with the audio after importing"
+msgstr ""
+
+#: tfrmimportplaintext.lblcount.caption
+msgid "0 entries"
+msgstr ""
+
+#: tfrmimportplaintext.lblmode.caption
+msgid "Create one entry for each:"
+msgstr ""
+
+#: tfrmimportplaintext.lblpreview.caption
+msgid "Preview:"
+msgstr ""
 
 #: tfrmimportsup.btnclose.caption
 msgctxt "tfrmimportsup.btnclose.caption"

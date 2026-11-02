@@ -738,6 +738,33 @@ msgstr "Оригинал"
 msgid "Percent"
 msgstr "Процент"
 
+#: proclocalize.lngplaintextallfiles
+msgid "All files"
+msgstr ""
+
+#: proclocalize.lngplaintextautomatic
+msgid "Sentence (smart segmentation, using the conventions)"
+msgstr ""
+
+#: proclocalize.lngplaintexteachline
+msgid "Line"
+msgstr ""
+
+#: proclocalize.lngplaintexteachparagraph
+msgid "Paragraph (separated by a blank line)"
+msgstr ""
+
+#: proclocalize.lngplaintextentries
+#, object-pascal-format
+msgid "%d entries"
+msgstr ""
+
+#: proclocalize.lngplaintextfiles
+#, fuzzy
+msgctxt "proclocalize.lngplaintextfiles"
+msgid "Text files"
+msgstr "Текстовые файлы"
+
 #: proclocalize.lngprojectfile
 msgid "Subtitle Translation Project"
 msgstr "Проект перевода субтитров"
@@ -893,6 +920,7 @@ msgid "Select"
 msgstr "Выбрать"
 
 #: proclocalize.lngscshotchanges
+msgctxt "proclocalize.lngscshotchanges"
 msgid "Text files"
 msgstr "Текстовые файлы"
 
@@ -2827,6 +2855,42 @@ msgstr "Перейти к"
 #: tfrmgototime.lbltime.caption
 msgid "Time:"
 msgstr "Время:"
+
+#: tfrmimportplaintext.btnclose.caption
+#, fuzzy
+msgctxt "tfrmimportplaintext.btnclose.caption"
+msgid "Close"
+msgstr "Закрыть"
+
+#: tfrmimportplaintext.btnimport.caption
+#, fuzzy
+msgctxt "tfrmimportplaintext.btnimport.caption"
+msgid "Import"
+msgstr "Импорт"
+
+#: tfrmimportplaintext.caption
+msgid "Import plain text"
+msgstr ""
+
+#: tfrmimportplaintext.chkreplace.caption
+msgid "Replace the current entries"
+msgstr ""
+
+#: tfrmimportplaintext.chksyncwithaudio.caption
+msgid "Synchronize with the audio after importing"
+msgstr ""
+
+#: tfrmimportplaintext.lblcount.caption
+msgid "0 entries"
+msgstr ""
+
+#: tfrmimportplaintext.lblmode.caption
+msgid "Create one entry for each:"
+msgstr ""
+
+#: tfrmimportplaintext.lblpreview.caption
+msgid "Preview:"
+msgstr ""
 
 #: tfrmimportsup.btnclose.caption
 #, fuzzy

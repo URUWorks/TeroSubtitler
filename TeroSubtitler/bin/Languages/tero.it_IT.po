@@ -391,7 +391,9 @@ msgstr "Non definito"
 #: proclocalize.lngfpsguessed
 #, object-pascal-format
 msgid "The times of this subtitle match %s fps. Use this frame rate?"
-msgstr "I tempi di questo sottotitolo corrispondono a '%s' fps.\nVuoi usare questa frequenza fotogrammi?"
+msgstr ""
+"I tempi di questo sottotitolo corrispondono a '%s' fps.\n"
+"Vuoi usare questa frequenza fotogrammi?"
 
 #: proclocalize.lngfsaction
 msgid "Action"
@@ -736,6 +738,33 @@ msgstr "Originale"
 msgid "Percent"
 msgstr "Percentuale"
 
+#: proclocalize.lngplaintextallfiles
+msgid "All files"
+msgstr ""
+
+#: proclocalize.lngplaintextautomatic
+msgid "Sentence (smart segmentation, using the conventions)"
+msgstr ""
+
+#: proclocalize.lngplaintexteachline
+msgid "Line"
+msgstr ""
+
+#: proclocalize.lngplaintexteachparagraph
+msgid "Paragraph (separated by a blank line)"
+msgstr ""
+
+#: proclocalize.lngplaintextentries
+#, object-pascal-format
+msgid "%d entries"
+msgstr ""
+
+#: proclocalize.lngplaintextfiles
+#, fuzzy
+msgctxt "proclocalize.lngplaintextfiles"
+msgid "Text files"
+msgstr "File testo"
+
 #: proclocalize.lngprojectfile
 msgid "Subtitle Translation Project"
 msgstr "Progetto traduzione sottotitoli"
@@ -888,6 +917,7 @@ msgid "Select"
 msgstr "Seleziona"
 
 #: proclocalize.lngscshotchanges
+msgctxt "proclocalize.lngscshotchanges"
 msgid "Text files"
 msgstr "File testo"
 
@@ -2801,6 +2831,42 @@ msgstr "Vai a"
 #: tfrmgototime.lbltime.caption
 msgid "Time:"
 msgstr "Tempo:"
+
+#: tfrmimportplaintext.btnclose.caption
+#, fuzzy
+msgctxt "tfrmimportplaintext.btnclose.caption"
+msgid "Close"
+msgstr "Chiudi"
+
+#: tfrmimportplaintext.btnimport.caption
+#, fuzzy
+msgctxt "tfrmimportplaintext.btnimport.caption"
+msgid "Import"
+msgstr "Importa"
+
+#: tfrmimportplaintext.caption
+msgid "Import plain text"
+msgstr ""
+
+#: tfrmimportplaintext.chkreplace.caption
+msgid "Replace the current entries"
+msgstr ""
+
+#: tfrmimportplaintext.chksyncwithaudio.caption
+msgid "Synchronize with the audio after importing"
+msgstr ""
+
+#: tfrmimportplaintext.lblcount.caption
+msgid "0 entries"
+msgstr ""
+
+#: tfrmimportplaintext.lblmode.caption
+msgid "Create one entry for each:"
+msgstr ""
+
+#: tfrmimportplaintext.lblpreview.caption
+msgid "Preview:"
+msgstr ""
 
 #: tfrmimportsup.btnclose.caption
 msgctxt "tfrmimportsup.btnclose.caption"

@@ -25,7 +25,7 @@ msgstr ""
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
 #, object-pascal-format
-msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
+msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options."
 msgstr ""
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
@@ -48,6 +48,11 @@ msgstr ""
 
 #: lclstrconsts.ifsvk_cmd
 msgid "Cmd"
+msgstr ""
+
+#: lclstrconsts.ifsvk_fn
+msgctxt "lclstrconsts.ifsvk_fn"
+msgid "Fn"
 msgstr ""
 
 #: lclstrconsts.ifsvk_help
@@ -165,7 +170,7 @@ msgid "Cancel"
 msgstr ""
 
 #: lclstrconsts.rscannotfocus
-msgid "Can not focus"
+msgid "Cannot focus"
 msgstr ""
 
 #: lclstrconsts.rscanvasdoesnotallowdrawing
@@ -460,10 +465,6 @@ msgstr ""
 msgid "Grid index out of range."
 msgstr ""
 
-#: lclstrconsts.rsgroupindexcannotbelessthanprevious
-msgid "GroupIndex cannot be less than a previous menu item's GroupIndex"
-msgstr ""
-
 #: lclstrconsts.rsgtkfilter
 msgid "Filter:"
 msgstr ""
@@ -515,7 +516,7 @@ msgstr ""
 
 #: lclstrconsts.rshelpalreadyregistered
 #, object-pascal-format
-msgid "%s: Already registered"
+msgid "%s: already registered."
 msgstr ""
 
 #: lclstrconsts.rshelpcontextnotfound
@@ -542,12 +543,12 @@ msgstr ""
 
 #: lclstrconsts.rshelphelpdatabasedidnotfoundaviewerforahelppageoftype
 #, object-pascal-format
-msgid "Help Database \"%s\" did not find a viewer for a help page of type %s"
+msgid "Help Database \"%s\" did not find a viewer for a help page of type %s."
 msgstr ""
 
 #: lclstrconsts.rshelphelpdatabasenotfound
 #, object-pascal-format
-msgid "Help Database \"%s\" not found"
+msgid "Help Database \"%s\" not found."
 msgstr ""
 
 #: lclstrconsts.rshelphelpfordirectivenotfound
@@ -572,7 +573,7 @@ msgstr ""
 
 #: lclstrconsts.rshelphelpnodehasnohelpdatabase
 #, object-pascal-format
-msgid "Help node \"%s\" has no Help Database"
+msgid "Help node \"%s\" has no Help Database."
 msgstr ""
 
 #: lclstrconsts.rshelpnohelpfoundforsource
@@ -581,7 +582,7 @@ msgid "No help found for line %d, column %d of %s."
 msgstr ""
 
 #: lclstrconsts.rshelpnohelpnodesavailable
-msgid "No help entries available for this topic"
+msgid "No help entries available for this topic."
 msgstr ""
 
 #: lclstrconsts.rshelpnotfound
@@ -590,7 +591,7 @@ msgstr ""
 
 #: lclstrconsts.rshelpnotregistered
 #, object-pascal-format
-msgid "%s: Not registered"
+msgid "%s: not registered."
 msgstr ""
 
 #: lclstrconsts.rshelpselectorerror
@@ -599,7 +600,7 @@ msgstr ""
 
 #: lclstrconsts.rshelpthereisnoviewerforhelptype
 #, object-pascal-format
-msgid "There is no viewer for help type \"%s\""
+msgid "There is no viewer for help type \"%s\"."
 msgstr ""
 
 #: lclstrconsts.rshelpviewererror
@@ -826,6 +827,10 @@ msgstr "Υπηρεσίες"
 msgid "Show All"
 msgstr "Προβολή όλων"
 
+#: lclstrconsts.rsmacosmenutogglefullscreen
+msgid "Toggle Full Screen"
+msgstr "Εναλλαγή πλήρους οθόνης"
+
 #: lclstrconsts.rsmarooncolorcaption
 msgid "Maroon"
 msgstr ""
@@ -910,10 +915,6 @@ msgstr ""
 
 #: lclstrconsts.rsmenutextcolorcaption
 msgid "Menu Text"
-msgstr ""
-
-#: lclstrconsts.rsmodified
-msgid "  modified "
 msgstr ""
 
 #: lclstrconsts.rsmoneygreencolorcaption
@@ -1163,10 +1164,6 @@ msgstr ""
 msgid "Silver"
 msgstr ""
 
-#: lclstrconsts.rssize
-msgid "  size "
-msgstr ""
-
 #: lclstrconsts.rsskybluecolorcaption
 msgid "Sky Blue"
 msgstr ""
@@ -1293,7 +1290,8 @@ msgid "Yellow"
 msgstr ""
 
 #: lclstrconsts.scannotfocus
-msgid "Cannot focus a disabled or invisible window"
+#, object-pascal-format
+msgid "Cannot focus a disabled or invisible window \"%s\""
 msgstr ""
 
 #: lclstrconsts.sduplicatemenus
@@ -1372,6 +1370,10 @@ msgstr ""
 
 #: lclstrconsts.smkcesc
 msgid "Esc"
+msgstr ""
+
+#: lclstrconsts.smkcfn
+msgid "Fn+"
 msgstr ""
 
 #: lclstrconsts.smkchome
@@ -1470,9 +1472,22 @@ msgstr ""
 msgid "Wrong token type: %s expected but %s found"
 msgstr ""
 
+#: lclstrconsts.sshellctrlsattributes
+msgid "Attributes"
+msgstr ""
+
 #: lclstrconsts.sshellctrlsbytes
 #, object-pascal-format
 msgid "%s bytes"
+msgstr ""
+
+#: lclstrconsts.sshellctrlsfolder
+msgid "Folder"
+msgstr ""
+
+#: lclstrconsts.sshellctrlsgb
+#, object-pascal-format
+msgid "%s GB"
 msgstr ""
 
 #: lclstrconsts.sshellctrlsinvalidpath
@@ -1508,6 +1523,10 @@ msgstr ""
 #: lclstrconsts.sshellctrlsmb
 #, object-pascal-format
 msgid "%s MB"
+msgstr ""
+
+#: lclstrconsts.sshellctrlsmodificationdate
+msgid "Date modified"
 msgstr ""
 
 #: lclstrconsts.sshellctrlsname

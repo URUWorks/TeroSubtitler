@@ -34,7 +34,7 @@ msgstr "Tidak bisa menemukan HTML browser"
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
 #, object-pascal-format
-msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
+msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options."
 msgstr ""
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
@@ -58,6 +58,11 @@ msgstr "Ctrl"
 
 #: lclstrconsts.ifsvk_cmd
 msgid "Cmd"
+msgstr ""
+
+#: lclstrconsts.ifsvk_fn
+msgctxt "lclstrconsts.ifsvk_fn"
+msgid "Fn"
 msgstr ""
 
 #: lclstrconsts.ifsvk_help
@@ -180,7 +185,9 @@ msgid "Cancel"
 msgstr "Batal"
 
 #: lclstrconsts.rscannotfocus
-msgid "Can not focus"
+#, fuzzy
+#| msgid "Can not focus"
+msgid "Cannot focus"
 msgstr "Tidak bisa memfokuskan"
 
 #: lclstrconsts.rscanvasdoesnotallowdrawing
@@ -486,10 +493,6 @@ msgstr ""
 msgid "Grid index out of range."
 msgstr "Indeks grid di luar jangkauan"
 
-#: lclstrconsts.rsgroupindexcannotbelessthanprevious
-msgid "GroupIndex cannot be less than a previous menu item's GroupIndex"
-msgstr "GroupIndex tidak bisa kurang dari item GroupIndex menu sebelumnya"
-
 #: lclstrconsts.rsgtkfilter
 msgid "Filter:"
 msgstr "Filter:"
@@ -557,8 +560,9 @@ msgid "Help"
 msgstr "Panduan"
 
 #: lclstrconsts.rshelpalreadyregistered
-#, object-pascal-format
-msgid "%s: Already registered"
+#, object-pascal-format, fuzzy
+#| msgid "%s: Already registered"
+msgid "%s: already registered."
 msgstr "%s: Sudah teregistrasi"
 
 #: lclstrconsts.rshelpcontextnotfound
@@ -591,13 +595,13 @@ msgstr "Konteks Bantuan %s tidak ditemukan dalam Database %s%s%s."
 #: lclstrconsts.rshelphelpdatabasedidnotfoundaviewerforahelppageoftype
 #, object-pascal-format, fuzzy, badformat
 #| msgid "Help Database \"%s\" did not found a viewer for a help page of type %s"
-msgid "Help Database \"%s\" did not find a viewer for a help page of type %s"
+msgid "Help Database \"%s\" did not find a viewer for a help page of type %s."
 msgstr "Database Bantuan %s%s%s tidak ditemukan peninjau untuk halaman bantuan dari tipe %s"
 
 #: lclstrconsts.rshelphelpdatabasenotfound
 #, object-pascal-format, fuzzy, badformat
 #| msgid "Help Database %s%s%s not found"
-msgid "Help Database \"%s\" not found"
+msgid "Help Database \"%s\" not found."
 msgstr "Database Bantuan %s%s%s tidak ditemukan"
 
 #: lclstrconsts.rshelphelpfordirectivenotfound
@@ -625,7 +629,7 @@ msgstr "Kata kunci Bantuan %s%s%s tidak ditemukan dalam Database %s%s%s."
 #: lclstrconsts.rshelphelpnodehasnohelpdatabase
 #, object-pascal-format, fuzzy, badformat
 #| msgid "Help node %s%s%s has no Help Database"
-msgid "Help node \"%s\" has no Help Database"
+msgid "Help node \"%s\" has no Help Database."
 msgstr "Node Bantuan %s%s%s tidak mempunyai Database Bantuan"
 
 #: lclstrconsts.rshelpnohelpfoundforsource
@@ -636,7 +640,7 @@ msgstr "Tidak ada bantuan ditemukan untuk baris %d, column %d of %s."
 #: lclstrconsts.rshelpnohelpnodesavailable
 #, fuzzy
 #| msgid "No help nodes available"
-msgid "No help entries available for this topic"
+msgid "No help entries available for this topic."
 msgstr "Node bantuan tidak tersedia"
 
 #: lclstrconsts.rshelpnotfound
@@ -646,8 +650,9 @@ msgid "No help found for this topic"
 msgstr "Bantuan tidak ditemukan"
 
 #: lclstrconsts.rshelpnotregistered
-#, object-pascal-format
-msgid "%s: Not registered"
+#, object-pascal-format, fuzzy
+#| msgid "%s: Not registered"
+msgid "%s: not registered."
 msgstr "%s: Tidak teregistrasi"
 
 #: lclstrconsts.rshelpselectorerror
@@ -657,7 +662,7 @@ msgstr "Selektor Bantuan Salah"
 #: lclstrconsts.rshelpthereisnoviewerforhelptype
 #, object-pascal-format, fuzzy, badformat
 #| msgid "There is no viewer for help type %s%s%s"
-msgid "There is no viewer for help type \"%s\""
+msgid "There is no viewer for help type \"%s\"."
 msgstr "Tidak ada peninjau untuk tipe bantuan %s%s%s"
 
 #: lclstrconsts.rshelpviewererror
@@ -888,6 +893,10 @@ msgstr "Perkhidmatan"
 msgid "Show All"
 msgstr "Tunjukkan Al"
 
+#: lclstrconsts.rsmacosmenutogglefullscreen
+msgid "Toggle Full Screen"
+msgstr "Beralih ke layar penuh"
+
 #: lclstrconsts.rsmarooncolorcaption
 msgid "Maroon"
 msgstr ""
@@ -973,10 +982,6 @@ msgstr ""
 #: lclstrconsts.rsmenutextcolorcaption
 msgid "Menu Text"
 msgstr ""
-
-#: lclstrconsts.rsmodified
-msgid "  modified "
-msgstr "  diubah "
 
 #: lclstrconsts.rsmoneygreencolorcaption
 msgid "Money Green"
@@ -1229,10 +1234,6 @@ msgstr ""
 msgid "Silver"
 msgstr ""
 
-#: lclstrconsts.rssize
-msgid "  size "
-msgstr "  ukuran "
-
 #: lclstrconsts.rsskybluecolorcaption
 msgid "Sky Blue"
 msgstr ""
@@ -1359,7 +1360,9 @@ msgid "Yellow"
 msgstr ""
 
 #: lclstrconsts.scannotfocus
-msgid "Cannot focus a disabled or invisible window"
+#, object-pascal-format, fuzzy, badformat
+#| msgid "Cannot focus a disabled or invisible window"
+msgid "Cannot focus a disabled or invisible window \"%s\""
 msgstr "Tidak bisa memberikan fokus ke jendela yang dimatikan atau tidak nampak"
 
 #: lclstrconsts.sduplicatemenus
@@ -1438,6 +1441,10 @@ msgstr ""
 
 #: lclstrconsts.smkcesc
 msgid "Esc"
+msgstr ""
+
+#: lclstrconsts.smkcfn
+msgid "Fn+"
 msgstr ""
 
 #: lclstrconsts.smkchome
@@ -1536,9 +1543,22 @@ msgstr ""
 msgid "Wrong token type: %s expected but %s found"
 msgstr ""
 
+#: lclstrconsts.sshellctrlsattributes
+msgid "Attributes"
+msgstr ""
+
 #: lclstrconsts.sshellctrlsbytes
 #, object-pascal-format
 msgid "%s bytes"
+msgstr ""
+
+#: lclstrconsts.sshellctrlsfolder
+msgid "Folder"
+msgstr ""
+
+#: lclstrconsts.sshellctrlsgb
+#, object-pascal-format
+msgid "%s GB"
 msgstr ""
 
 #: lclstrconsts.sshellctrlsinvalidpath
@@ -1574,6 +1594,10 @@ msgstr ""
 #: lclstrconsts.sshellctrlsmb
 #, object-pascal-format
 msgid "%s MB"
+msgstr ""
+
+#: lclstrconsts.sshellctrlsmodificationdate
+msgid "Date modified"
 msgstr ""
 
 #: lclstrconsts.sshellctrlsname
