@@ -69,12 +69,15 @@ function LanguageFolder: String;
 function LanguageFileName(Default: Boolean = False): String;
 function LanguageIDFromFileName(const AFileName: String): String;
 function ShortCutFolder: String;
+function ShortCutUserFolder: String;
+function ShortCutPresetFile(const APreset: String): String;
 function ShortCutFileName: String;
 function OCRFolder: String;
 function IconsFolder: String;
 function ExtensionsFolder: String;
 function WaveformsFolder: String;
 function ShotChangesFolder: String;
+function ShotChangesFileName(const AMediaFileName, AExt: String): String;
 function ScreenshotsFolder: String;
 function MRUFileName: String;
 function ConventionsFileName: String;
@@ -1691,9 +1694,33 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the presets saved by the user: in macOS in the user folder, not inside the
+// app (it breaks its signature, it can be read-only in /Applications and it's
+// lost with each update); the ones of the app are the defaults
+function ShortCutUserFolder: String;
+begin
+  {$IFDEF DARWIN}
+  Result := GetCustomUserPath('Shortcuts');
+  {$ELSE}
+  Result := ShortCutFolder;
+  {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
+// the file of a preset (name.key): the user's one, otherwise the app's one
+function ShortCutPresetFile(const APreset: String): String;
+begin
+  Result := ConcatPaths([ShortCutUserFolder, APreset]);
+  if not FileExists(Result) then
+    Result := ConcatPaths([ShortCutFolder, APreset]);
+end;
+
+// -----------------------------------------------------------------------------
+
 function ShortCutFileName: String;
 begin
-  Result := ConcatPaths([ShortCutFolder, AppOptions.ShortCutPreset]);
+  Result := ShortCutPresetFile(AppOptions.ShortCutPreset);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1741,6 +1768,23 @@ end;
 function ShotChangesFolder: String;
 begin
   Result := GetCustomUserPath('ShotChanges');
+end;
+
+// -----------------------------------------------------------------------------
+
+// the shot changes file of a media file (or url: "watch?v=..."), without the
+// characters not allowed in a file name
+function ShotChangesFileName(const AMediaFileName, AExt: String): String;
+const
+  Invalid: array[0..8] of Char = ('\', '/', ':', '*', '?', '"', '<', '>', '|');
+var
+  s: String;
+  c: Char;
+begin
+  s := ChangeFileExt(ExtractFileName(AMediaFileName), AExt);
+  for c in Invalid do
+    s := StringReplace(s, c, '_', [rfReplaceAll]);
+  Result := ConcatPaths([ShotChangesFolder, s]);
 end;
 
 // -----------------------------------------------------------------------------
