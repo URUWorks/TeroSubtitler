@@ -228,6 +228,23 @@ begin
 
     if Assigned(XmlDoc) then
     try
+      // the frame rate of the sequence (<rate> with <timebase> and <ntsc>),
+      // a <rate> in the track has priority (see below)
+      NodeList := XmlDoc.GetElementsByTagName('rate');
+      if Assigned(NodeList) then
+        for i := 0 to NodeList.Count-1 do
+        begin
+          SubNode := NodeList.Item[i].FindNode('timebase');
+          if Assigned(SubNode) then
+          begin
+            FFPS := StrToFloatDef(SubNode.TextContent, FFPS, FFSettings);
+            ntscNode := NodeList.Item[i].FindNode('ntsc');
+            if Assigned(ntscNode) and (ntscNode.TextContent.ToLower = 'true') then
+              FFPS := FFPS * (1000 / 1001);
+            Break;
+          end;
+        end;
+
       NodeTrack := XmlDoc.GetElementsByTagName('track');
       if Assigned(NodeTrack) and (NodeTrack.Count > 0) and (FID < NodeTrack.Count) then
       begin
@@ -543,13 +560,19 @@ begin
       Node := XmlDoc.CreateElement('ismasterclip');
       Node.TextContent := 'FALSE';
       Element.AppendChild(Node);
+      // the frame rate of the "start" frames: timebase is the rounded one,
+      // ntsc TRUE for the 1000/1001 rates (23.976 = 24 ntsc, 29.97 = 30 ntsc).
+      // Without the timebase the editors (and LoadFromFile) can't know it
       Node := XmlDoc.CreateElement('rate');
-        SubNode := XmlDoc.CreateElement('ntsc');
-        SubNode.TextContent := 'TRUE';
+        SubNode := XmlDoc.CreateElement('timebase');
+        SubNode.TextContent := Round(FFPS).ToString;
       Node.AppendChild(SubNode);
-//      SubNode := XmlDoc.CreateElement('timebase');
-//        SubNode.TextContent := '';
-//      Node.AppendChild(SubNode);
+        SubNode := XmlDoc.CreateElement('ntsc');
+        if Abs(Round(FFPS) - FFPS) > 0.001 then
+          SubNode.TextContent := 'TRUE'
+        else
+          SubNode.TextContent := 'FALSE';
+      Node.AppendChild(SubNode);
       Element.AppendChild(Node);
       Node := XmlDoc.CreateElement('media');
       Element.AppendChild(Node);

@@ -492,6 +492,35 @@ begin
               cboTimeCodeImport.ItemIndex := c;
             Break;
           end;
+
+        // only integers: frames or milliseconds? With the media loaded, the
+        // last cut read as frames must be inside the video, if not they are
+        // milliseconds (a list of cuts read as ms when they are frames ends
+        // at 1/24 of the video). Without media, the selected one.
+        if (IsTimeCode(tcFrames) or IsTimeCode(tcMilliseconds)) and frmMain.MPV.IsMediaLoaded and
+          (frmMain.MPV.GetMediaLenInMs > 0) then
+        begin
+          x := 0;
+          c := 0;
+          for i := 0 to mmoTimes.Lines.Count-1 do
+            if Trim(mmoTimes.Lines[i]) <> '' then
+            begin
+              if not IsInteger(Trim(mmoTimes.Lines[i])) then
+              begin
+                c := -1;
+                Break;
+              end;
+              if StrToIntDef(Trim(mmoTimes.Lines[i]), 0) > x then x := StrToIntDef(Trim(mmoTimes.Lines[i]), 0);
+            end;
+
+          if (c = 0) and (x > 0) then
+          begin
+            if FramesToTime(x, GetFPS) <= frmMain.MPV.GetMediaLenInMs + 2000 then
+              cboTimeCodeImport.ItemIndex := tcFrames
+            else
+              cboTimeCodeImport.ItemIndex := tcMilliseconds;
+          end;
+        end;
       end;
     end;
   finally
@@ -628,6 +657,11 @@ begin
 
   FCancel := False;
   SetControlsEnabled(False);
+  // the detected times are ms: with "Frames" left selected from a previous
+  // import they were read as frames (exported 2.669 s as 00:01:51:05)
+  cboTimeCodeImport.ItemIndex := tcMilliseconds;
+  FSMPTE := False;
+  FFromWave := False;
   try
     if cboDetectApp.ItemIndex = 0 then // FFmpeg
     begin
