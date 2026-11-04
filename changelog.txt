@@ -112,7 +112,11 @@
 - fixed: Smart segmentation (audio to text) could create subtitles with more lines than the máximum
 - fixed: Applying shot changes showed “Unable to create file” when the video was opened from a URL
 - fixed: Changing the interface language left some texts in the previous language until Tero was restarted
-- Changed: Smart case starts a sentence on song lines (♪) and after a “--” interruption at the end of an entry
+- fixed: Shot changes exported as frames were imported as milliseconds
+- fixed: Shot changes detected with FFmpeg/PySceneDetect were read as frames if “Frames” was selected for import, and exported with wrong times
+- changed: [macOS] removed the menu items added by the system that Tero doesn’t use
+- changed: Faster-Whisper now downloads UW_FasterWhisper, and asks before downloading the optional NVIDIA GPU libraries
+- changed: Smart case starts a sentence on song lines (♪) and after a “--” interruption at the end of an entry
 - improved: [macOS] now uses the standalone yt-dlp, which can update itself
 - improved: [SubtitleAPI] Cavena 890 & EBU (accents, special chars, tags, language/code page and alignment)
 - improved: [SubtitleAPI] Cheetah & Cheetah Caption (italics, accents, line breaks)
@@ -145,6 +149,7 @@
 - added: [SubtitleAPI] Support of InterOP (TI) and SMPTE 428-7-2007 XML Subtitles #352
 - added: Selective pasting #332
 - added: Sub-optimal presentation of auto-transcribed subtitles #256
+- added: Add Project Properties to View #78
 - added: Synchronize texts with the audio (Audio to text/Synchronize the current texts) #41
 - added: Fix subtitles: caps lock to normal casing #18
 - added: “Update” button for yt-dlp in Settings/Tools
