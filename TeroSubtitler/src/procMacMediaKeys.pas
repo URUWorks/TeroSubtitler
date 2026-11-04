@@ -17,7 +17,6 @@
 
 unit procMacMediaKeys;
 
-
 {$mode objfpc}{$H+}
 {$IFDEF DARWIN}
 {$modeswitch objectivec1}

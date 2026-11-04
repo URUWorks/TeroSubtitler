@@ -90,6 +90,9 @@ begin
     objc.IMP(@DelegateOpenFiles), 'v@:@@');
 end;
 {$ELSE}
+
+// -----------------------------------------------------------------------------
+
 procedure InstallMacOpenFilesFix;
 begin
 end;

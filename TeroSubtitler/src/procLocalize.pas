@@ -72,6 +72,8 @@ resourcestring
   lngNoInternetConnection = 'No Internet connection available';
   lngFailedToDownload = 'No content downloaded, missing file or no Internet connection.';
   lngDownloadCanceled = 'Download canceled by user.';
+  lngAskDownloadGPULibs = 'Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?';
+  lngGPULibsOptional = 'Only needed with an NVIDIA card, without them Faster-Whisper uses the processor.';
   lngAskToExtractAudio = 'Audio waveform was not found, do you want to extract it?';
   lngExtractAppError = 'Unable to find “%s”. Check in settings if it is configured correctly.';
   lngExtracting = 'Extracting...';
@@ -387,6 +389,13 @@ resourcestring
   lngviVideoTracks = 'Video tracks: %d';
   lngviAudioTracks = 'Audio tracks: %d';
   lngviSubtitleTracks = 'Subtitle tracks: %d';
+
+  //ViewProperties
+  lngvpProperties = 'Subtitle properties';
+  lngvpInputFPS = 'Input FPS';
+  lngvpOutputFPS = 'Output FPS';
+  lngvpFormat = 'Format';
+  lngvpEncoding = 'Encoding';
 
   //WizardStrings
   lngwizLanguage = 'Language';

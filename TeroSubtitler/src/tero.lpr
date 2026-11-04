@@ -40,12 +40,17 @@ uses
   formCharacterMap, formRoundTime, formStatistics, formGenerateBlankVideo,
   procThumbnails, formStreamExtractor, formPauses, formImportPlainText,
   formCustomSelectDlgWithPreview, formTTS, formVideoDubbing, formImportSUP,
-  formImportSUPLanguages, procMacOpenFiles, procMacMediaKeys, procMacMenuKeys;
+  formImportSUPLanguages, procMacOpenFiles, procMacMediaKeys, procMacMenuKeys,
+  procMacSystemMenus;
 
 {$R *.res}
 
 begin
   RequireDerivedFormResource:=True;
+  {$IFDEF DARWIN}
+  // no Dictation, Emoji & Symbols, Full Screen, tabs... in our menus
+  MacDisableSystemMenuItems;
+  {$ENDIF}
   Application.Title:='Tero Subtitler';
   Application.Scaled:=True;
   Application.Initialize;
@@ -70,6 +75,8 @@ begin
   MacMediaKeysInitialize;
   // main menu shortcuts through NSMenu, so the top menu flashes
   MacMenuKeysInstall(frmMain);
+  // AutoFill, Writing Tools... added by macOS to the Edit/View menus
+  MacSystemMenusInstall([frmMain.mnuEdit, frmMain.mnuView]);
   {$ENDIF}
   Application.Run;
 end.

@@ -71,4 +71,6 @@ initialization
   AddFoldersToPath(['/opt/homebrew/bin', '/usr/local/bin', '/opt/local/bin']);
 {$ENDIF}
 
+// -----------------------------------------------------------------------------
+
 end.
