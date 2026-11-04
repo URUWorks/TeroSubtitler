@@ -59,6 +59,10 @@ msgstr ""
 msgid "Hearing impaired"
 msgstr ""
 
+#: proclocalize.lngaskdownloadgpulibs
+msgid "Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?"
+msgstr ""
+
 #: proclocalize.lngasktoextractaudio
 msgid "Audio waveform was not found, do you want to extract it?"
 msgstr ""
@@ -518,6 +522,10 @@ msgstr ""
 #: proclocalize.lngfstotalerrors
 #, object-pascal-format
 msgid "Total errors: %d (displayed: %d)"
+msgstr ""
+
+#: proclocalize.lnggpulibsoptional
+msgid "Only needed with an NVIDIA card, without them Faster-Whisper uses the processor."
 msgstr ""
 
 #: proclocalize.lnghcpl
@@ -1370,6 +1378,31 @@ msgstr ""
 msgid "Video tracks: %d"
 msgstr ""
 
+#: proclocalize.lngvpencoding
+msgctxt "proclocalize.lngvpencoding"
+msgid "Encoding"
+msgstr ""
+
+#: proclocalize.lngvpformat
+msgctxt "proclocalize.lngvpformat"
+msgid "Format"
+msgstr ""
+
+#: proclocalize.lngvpinputfps
+msgctxt "proclocalize.lngvpinputfps"
+msgid "Input FPS"
+msgstr ""
+
+#: proclocalize.lngvpoutputfps
+msgctxt "proclocalize.lngvpoutputfps"
+msgid "Output FPS"
+msgstr ""
+
+#: proclocalize.lngvpproperties
+msgctxt "proclocalize.lngvpproperties"
+msgid "Subtitle properties"
+msgstr ""
+
 #: proclocalize.lngwebvideounsupported
 msgid "The media format is not supported for playback in the web browser."
 msgstr ""
@@ -1665,6 +1698,7 @@ msgid "Format"
 msgstr ""
 
 #: tfrmbatchconvert.lblfromfps.caption
+msgctxt "tfrmbatchconvert.lblfromfps.caption"
 msgid "Input FPS"
 msgstr ""
 
