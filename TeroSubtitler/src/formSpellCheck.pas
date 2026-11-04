@@ -90,7 +90,7 @@ implementation
 
 uses
   procTypes, procWorkspace, procColorTheme, procSubtitle, procConfig,
-  procDialogs, UWSystem.StrUtils, UWSpellcheck.Hunspell, formMain, Math;
+  procDialogs, UWSystem.StrUtils, UWSpellcheck.Hunspell, formMain, Math, procMacTextView;
 
 {$R *.lfm}
 
@@ -150,6 +150,9 @@ begin
   if not FStarted then
   begin
     FStarted := True;
+    // no Font panel updates on macOS (an access violation in AppKit on
+    // some Macs when the window turns key with a word selected)
+    MacDisableFontPanel(mmoNotFound);
     cboSourceChange(NIL);
   end;
 end;
