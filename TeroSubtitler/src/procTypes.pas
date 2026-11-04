@@ -140,8 +140,10 @@ const
   URL_LIBMPV  = 'https://github.com/URUWorks/additional-files/raw/main/libmpv/libmpv2_win64.zip';
   URL_YTDLP   = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe';
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_win64.zip';
-  URL_FASTERWHISPER     = 'https://github.com/URUWorks/additional-files/raw/main/whisper/fasterwhisper_win64.zip';
-  URL_FASTERWHISPERCUDA = 'https://github.com/Purfview/whisper-standalone-win/releases/download/libs/cuBLAS.and.cuDNN_CUDA11_win_v2.zip';
+  // UW_FasterWhisper (github.com/URUWorks/UW_FasterWhisper), the GPU libraries
+  // are optional (NVIDIA, CUDA 12 + cuDNN 9)
+  URL_FASTERWHISPER     = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_win64.zip';
+  URL_FASTERWHISPERCUDA = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_cuda_win64.zip';
 
   FFMPEG_EXE           = 'ffmpeg.exe';
   //FFMPEG_Params        = '-i "%input" -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -y "%output"';
@@ -180,9 +182,9 @@ const
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux';
   {$ENDIF}
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_linux.zip';
-  URL_FASTERWHISPER     = 'https://github.com/URUWorks/additional-files/raw/main/whisper/fasterwhisper_linux.zip';
+  URL_FASTERWHISPER     = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_linux.zip';
   // our faster-whisper (CTranslate2 4.x) uses CUDA 12 + cuDNN 9 from the system
-  // when they are installed, Purfview's CUDA 11 libs don't work with it
+  // when they are installed, the old CUDA 11 libs don't work with it
   //URL_FASTERWHISPERCUDA = '';
 
   FFMPEG_EXE           = 'ffmpeg';
@@ -222,7 +224,7 @@ const
   URL_LIBMPV = 'https://github.com/URUWorks/additional-files/raw/main/libmpv/libmpv_macos.zip';
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos'; // standalone, can self update
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_macos_%cpu.zip';
-  URL_FASTERWHISPER     = 'https://github.com/URUWorks/additional-files/raw/main/whisper/fasterwhisper_macos_%cpu.zip';
+  URL_FASTERWHISPER     = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_macos_%cpu.zip';
   //URL_FASTERWHISPERCUDA = '';
 
   FFMPEG_EXE           = 'ffmpeg';

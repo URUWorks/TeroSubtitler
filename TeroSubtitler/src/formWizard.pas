@@ -102,7 +102,8 @@ implementation
 
 uses
   procTypes, procWorkspace, procConfig, procColorTheme, formDownload,
-  UWSystem.SysUtils, UWSpellcheck.Hunspell, formMain;
+  UWSystem.SysUtils, UWSpellcheck.Hunspell, formMain, procDialogs,
+  formCustomQuestionDlg;
 
 {$R *.lfm}
 
@@ -390,7 +391,11 @@ begin
   {$ELSE}
   ShowDownloadDialog(URL_FASTERWHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
   {$IFDEF WINDOWS}
-  ShowDownloadDialog(URL_FASTERWHISPERCUDA, ConcatPaths([WhisperFolder, 'cuda.zip']));
+  // the GPU libraries are big and optional (faster-whisper runs on the CPU
+  // without them), only if they're wanted
+  if FileExists(ConcatPaths([WhisperFolder, FASTERWHISPER_EXE])) and
+    (CustomQuestionDialog(lngAskDownloadGPULibs, lngGPULibsOptional, [dbYes, dbNo]) = mrYes) then
+    ShowDownloadDialog(URL_FASTERWHISPERCUDA, ConcatPaths([WhisperFolder, 'cuda.zip']));
   {$ENDIF}
   {$ENDIF}
   if FileExists(ConcatPaths([WhisperFolder, FASTERWHISPER_EXE])) then

@@ -872,7 +872,7 @@ end;
 
 procedure TfrmSettings.lblFasterWhisperClick(Sender: TObject);
 begin
-  OpenURL('https://github.com/Purfview/whisper-standalone-win');
+  OpenURL('https://github.com/URUWorks/UW_FasterWhisper');
 end;
 
 // -----------------------------------------------------------------------------
