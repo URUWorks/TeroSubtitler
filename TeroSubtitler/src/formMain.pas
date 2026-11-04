@@ -956,6 +956,8 @@ type
     procedure cboFPSKeyPress(Sender: TObject; var Key: char);
     procedure cboFPSSelect(Sender: TObject);
     procedure cboFormatSelect(Sender: TObject);
+    procedure mnuViewPropertiesClick(Sender: TObject);
+    procedure mnuViewPropertyItemClick(Sender: TObject);
     procedure cboActorChange(Sender: TObject);
     procedure cboActorKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edtQuickActionClickAction(Sender: TObject; const AAction: TAction);
@@ -1359,6 +1361,7 @@ type
     procedure actVideoDubbingExecute(Sender: TObject);
     procedure actVideoOffsetExecute(Sender: TObject);
   private
+    mnuViewProperties: TMenuItem; // View > Subtitle properties
     FThumbnailThread: TThread; // TGenerateThumbnails, see formMain_WAVE
     FURLLoadTimer: TTimer;     // elapsed time while yt-dlp resolves an url
     FURLLoadStart: QWord;
@@ -1372,6 +1375,8 @@ type
     {$IFDEF LCLCocoa}
     procedure VSTWindowProc(var TheMessage: TLMessage);
     {$ENDIF}
+    procedure CreateViewPropertiesMenu;
+    function ViewPropertiesCombo(const AIndex: Integer): TComboBox;
   public
     function IsShortcut(var Message: TLMKey): Boolean; override;
   end;
@@ -1472,6 +1477,7 @@ begin
   FillComboWithFPS(cboFPS, Workspace.FPS.InputFPS);
   FillComboWithEncodings(cboEncoding);
   FillComboWithFormats(cboFormat);
+  CreateViewPropertiesMenu;
   FillMenuWithPlayRate(popPlayRate);
   FillMenuWithLoopCount(popLoopCount);
   FillWithDictionaries(popDictionaries, NIL);
@@ -1958,6 +1964,123 @@ end;
 procedure TfrmMain.cboFormatSelect(Sender: TObject);
 begin
   Subtitles.Format := TUWSubtitleFormats(cboFormat.ItemIndex+1);
+end;
+
+// -----------------------------------------------------------------------------
+
+// View > Subtitle properties: the same FPS, format and encoding of the
+// toolbar combos, available with those toolbars hidden. The combos are the
+// source, the items are made from them each time the submenus are opened.
+
+function TfrmMain.ViewPropertiesCombo(const AIndex: Integer): TComboBox;
+begin
+  case AIndex of
+    0: Result := cboInputFPS;
+    1: Result := cboFPS;
+    2: Result := cboFormat;
+  else
+    Result := cboEncoding;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.CreateViewPropertiesMenu;
+var
+  i: Integer;
+  mi: TMenuItem;
+begin
+  mnuViewProperties := TMenuItem.Create(Self);
+  mnuViewProperties.Tag := -1;
+  mnuViewProperties.OnClick := @mnuViewPropertiesClick;
+  mnuView.Insert(mnuViewToolbars.MenuIndex+1, mnuViewProperties);
+  if not Assigned(mnuView.OnClick) then mnuView.OnClick := @mnuViewPropertiesClick;
+
+  for i := 0 to 3 do
+  begin
+    mi := TMenuItem.Create(Self);
+    mi.Tag := i;
+    mi.OnClick := @mnuViewPropertiesClick;
+    mnuViewProperties.Add(mi);
+  end;
+
+  mnuViewPropertiesClick(NIL);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.mnuViewPropertiesClick(Sender: TObject);
+
+  procedure UpdateItem(const AItem: TMenuItem);
+  var
+    cbo: TComboBox;
+    mi: TMenuItem;
+    i: Integer;
+    s: String;
+  begin
+    cbo := ViewPropertiesCombo(AItem.Tag);
+    case AItem.Tag of
+      0: s := lngvpInputFPS;
+      1: s := lngvpOutputFPS;
+      2: s := lngvpFormat;
+    else
+      s := lngvpEncoding;
+    end;
+    if cbo.ItemIndex >= 0 then
+      AItem.Caption := s + ': ' + cbo.Items[cbo.ItemIndex]
+    else
+      AItem.Caption := s;
+
+    // the combos can get new items (a custom fps), all again
+    if AItem.Count <> cbo.Items.Count then
+    begin
+      AItem.Clear;
+      for i := 0 to cbo.Items.Count-1 do
+      begin
+        mi := TMenuItem.Create(Self);
+        mi.Tag := i;
+        mi.RadioItem := True;
+        mi.GroupIndex := AItem.Tag+1;
+        mi.OnClick := @mnuViewPropertyItemClick;
+        AItem.Add(mi);
+      end;
+    end;
+
+    for i := 0 to AItem.Count-1 do
+    begin
+      AItem[i].Caption := StringReplace(cbo.Items[i], '&', '&&', [rfReplaceAll]);
+      AItem[i].Checked := (i = cbo.ItemIndex);
+    end;
+  end;
+
+var
+  i: Integer;
+begin
+  if mnuViewProperties = NIL then Exit;
+  mnuViewProperties.Caption := lngvpProperties;
+  for i := 0 to mnuViewProperties.Count-1 do
+    UpdateItem(mnuViewProperties[i]);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.mnuViewPropertyItemClick(Sender: TObject);
+var
+  mi: TMenuItem;
+  cbo: TComboBox;
+begin
+  mi  := TMenuItem(Sender);
+  cbo := ViewPropertiesCombo(mi.Parent.Tag);
+  if (mi.Tag < 0) or (mi.Tag >= cbo.Items.Count) or (mi.Tag = cbo.ItemIndex) then Exit;
+
+  // as if it was selected in the combo, with its undo and updates
+  cbo.ItemIndex := mi.Tag;
+  case mi.Parent.Tag of
+    0: cboInputFPSSelect(cboInputFPS);
+    1: cboFPSSelect(cboFPS);
+    2: cboFormatSelect(cboFormat);
+  end;
+  mnuViewPropertiesClick(NIL);
 end;
 
 // -----------------------------------------------------------------------------
