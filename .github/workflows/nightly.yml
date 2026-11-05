@@ -157,14 +157,13 @@ jobs:
           retention-days: 7
 
   # Windows ARM64, experimental: FPC 3.2.4 has no aarch64-win64 target, so this
-  # builds an FPC main cross compiler and Lazarus main on x64. A failure here
-  # doesn't stop the other builds or the release.
+  # builds an FPC main cross compiler and Lazarus main on x64. The release doesn't
+  # wait for it; its zip is added afterwards, only if it starts on ARM64 Windows.
   build-winarm64:
     needs: check
     if: needs.check.outputs.changed == 'true'
     runs-on: windows-latest
     timeout-minutes: 120
-    continue-on-error: true
     env:
       NAME: ${{ needs.check.outputs.base }}-winarm64
       FPCMAIN: C:\fpcmain
@@ -301,7 +300,6 @@ jobs:
   test-winarm64:
     needs: build-winarm64
     runs-on: windows-11-arm
-    continue-on-error: true
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -614,7 +612,9 @@ jobs:
           retention-days: 7
 
   release:
-    needs: [check, build, build-linux, package-macos, build-winarm64]
+    needs: [check, build, build-linux, package-macos]
+    # only main publishes the nightly (a manual run on a branch just builds)
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
@@ -640,3 +640,20 @@ jobs:
             --target "${{ github.sha }}" \
             --title "Nightly build ${{ needs.check.outputs.version }} ($(date -u +%Y-%m-%d), ${GITHUB_SHA::7})" \
             --notes-file notes.md
+
+  # the ARM64 zip, added to the nightly when it is built and tested
+  release-winarm64:
+    needs: [release, test-winarm64]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: winarm64
+          path: dist
+
+      - name: Add to the nightly
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release upload nightly dist/*.zip --clobber
