@@ -302,7 +302,7 @@ function IsValidASSTag(const ATag: String): Boolean;
 const
   Num  = '-?\d+(\.\d+)?';
   UNum = '\d+(\.\d+)?';
-  Hex  = '&H[0-9A-Fa-f]{1,8}&?';
+  Hex  = '&H?[0-9A-Fa-f]{1,8}&?'; // Tero writes \c&BBGGRR& without the H
 begin
   // ATag is a single override tag without the leading backslash, e.g. "i1",
   // "an8", "c&H00FF00&", "pos(10,20)"
