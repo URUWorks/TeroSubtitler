@@ -319,15 +319,18 @@ jobs:
   build-linux:
     needs: check
     if: needs.check.outputs.changed == 'true'
-    runs-on: ubuntu-24.04
+    runs-on: ${{ matrix.arch == 'aarch64' && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
     timeout-minutes: 40
+    # ARM64 is experimental: if it fails, the release goes out without it
+    continue-on-error: ${{ matrix.arch == 'aarch64' }}
     strategy:
       fail-fast: false
       matrix:
+        arch: [x86_64, aarch64]
         widgetset: [gtk2, gtk3, qt5, qt6]
 
     env:
-      NAME: ${{ needs.check.outputs.base }}-linux-x86_64-${{ matrix.widgetset }}
+      NAME: ${{ needs.check.outputs.base }}-linux-${{ matrix.arch }}-${{ matrix.widgetset }}
 
     steps:
       - name: Checkout
@@ -346,6 +349,7 @@ jobs:
 
       # Official Lazarus debs (see LAZARUS_LINUX_* at the top)
       - name: Install Lazarus
+        if: matrix.arch == 'x86_64'
         run: |
           set -euo pipefail
           cd "$RUNNER_TEMP"
@@ -359,6 +363,25 @@ jobs:
           sudo chown -R "$USER" "$lazdir"
           echo "LAZDIR=$lazdir" >> "$GITHUB_ENV"
           lazbuild --version
+
+      # ARM64: the Lazarus debs are amd64 only, so Ubuntu's FPC 3.2.2 (arm64) and
+      # lazbuild built from the Lazarus sources (LAZARUS_SOURCE_TAG), as on macOS
+      - name: Install Lazarus (ARM64)
+        if: matrix.arch == 'aarch64'
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fpc fpc-source libhunspell-1.7-0 libgtk2.0-dev libgtk-3-dev libgl-dev libmpv-dev patchelf
+          fpc -iV
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/lazarus.tar.gz" \
+            "https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/$LAZARUS_SOURCE_TAG/lazarus-$LAZARUS_SOURCE_TAG.tar.gz"
+          lazdir="$HOME/lazarus"
+          mkdir -p "$lazdir"
+          tar -xzf "$RUNNER_TEMP/lazarus.tar.gz" -C "$lazdir" --strip-components=1
+          make -C "$lazdir" lazbuild
+          echo "$lazdir" >> "$GITHUB_PATH"
+          echo "LAZDIR=$lazdir" >> "$GITHUB_ENV"
+          "$lazdir/lazbuild" --version
 
       # Qt bindings from the installed Lazarus (Ubuntu has no libqt6pas, and its libqt5pas is older)
       - name: Build Qt bindings
@@ -413,8 +436,17 @@ jobs:
           mkdir -p "$out"
           cd TeroSubtitler/bin
           cp -r CustomFormat Dictionaries Languages OCR Shortcuts "../../$out/"
-          cp libhunspellx64.so tero tero.cfs "../../$out/"
+          cp tero tero.cfs "../../$out/"
           cd ../..
+          file "$out/tero"
+          # Hunspell: the one in bin is x86_64; on ARM64 the Ubuntu library, with
+          # the name Tero loads
+          if [[ "${{ matrix.arch }}" == aarch64 ]]; then
+            cp -L /usr/lib/aarch64-linux-gnu/libhunspell-1.7.so.0 "$out/libhunspellx64.so"
+          else
+            cp TeroSubtitler/bin/libhunspellx64.so "$out/"
+          fi
+          file "$out/libhunspellx64.so"
           # Ship the Qt bindings next to tero and let it find them there
           if [[ "${{ matrix.widgetset }}" == qt* ]]; then
             lib=$(ldd "$out/tero" | awk '/libQt[56]Pas/ {print $3}')
@@ -428,7 +460,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux-${{ matrix.widgetset }}
+          name: linux-${{ matrix.arch }}-${{ matrix.widgetset }}
           path: dist/*.tar.gz
           retention-days: 7
 
