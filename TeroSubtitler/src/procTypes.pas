@@ -137,11 +137,17 @@ const
 
   {$IFDEF MSWINDOWS}
   URL_FFMPEG  = 'https://github.com/URUWorks/additional-files/raw/main/ffmpeg/ffmpeg_win64.zip';
-  URL_LIBMPV  = 'https://github.com/URUWorks/additional-files/raw/main/libmpv/libmpv2_win64.zip';
+  // UW_libmpv (github.com/URUWorks/UW_libmpv): Windows 10+, or the legacy one
+  // for Windows 7/8.1 (see GetLibMPVURL in formWizard)
+  {$IFDEF CPUAARCH64}
+  URL_LIBMPV  = 'https://github.com/URUWorks/UW_libmpv/releases/latest/download/libmpv2_winarm64.zip';
+  {$ELSE}
+  URL_LIBMPV  = 'https://github.com/URUWorks/UW_libmpv/releases/latest/download/libmpv2_win64.zip';
+  {$ENDIF}
+  URL_LIBMPV_LEGACY = 'https://github.com/URUWorks/UW_libmpv/releases/latest/download/libmpv2_win64_legacy.zip';
   URL_YTDLP   = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe';
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_win64.zip';
-  // UW_FasterWhisper (github.com/URUWorks/UW_FasterWhisper), the GPU libraries
-  // are optional (NVIDIA, CUDA 12 + cuDNN 9)
+  // UW_FasterWhisper (github.com/URUWorks/UW_FasterWhisper), the GPU libraries are optional (NVIDIA, CUDA 12 + cuDNN 9)
   URL_FASTERWHISPER     = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_win64.zip';
   URL_FASTERWHISPERCUDA = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_cuda_win64.zip';
 
@@ -176,6 +182,7 @@ const
   {$IFDEF LINUX}
   URL_FFMPEG = '';
   URL_LIBMPV = '';
+  URL_LIBMPV_LEGACY = '';
   {$IFDEF CPUAARCH64}
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux_aarch64';
   {$ELSE}
@@ -221,7 +228,9 @@ const
   {$ENDIF}
   {$IFDEF DARWIN}
   URL_FFMPEG = 'https://github.com/URUWorks/additional-files/raw/main/ffmpeg/ffmpeg_macos64.zip';
-  URL_LIBMPV = 'https://github.com/URUWorks/additional-files/raw/main/libmpv/libmpv_macos.zip';
+  // UW_libmpv: universal for macOS 10.15+, or the legacy one for 10.11-10.14
+  URL_LIBMPV = 'https://github.com/URUWorks/UW_libmpv/releases/latest/download/libmpv_macos.zip';
+  URL_LIBMPV_LEGACY = 'https://github.com/URUWorks/UW_libmpv/releases/latest/download/libmpv_macos_legacy.zip';
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos'; // standalone, can self update
   URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_macos_%cpu.zip';
   URL_FASTERWHISPER     = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_macos_%cpu.zip';

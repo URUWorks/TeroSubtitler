@@ -103,9 +103,63 @@ implementation
 uses
   procTypes, procWorkspace, procConfig, procColorTheme, formDownload,
   UWSystem.SysUtils, UWSpellcheck.Hunspell, formMain, procDialogs,
-  formCustomQuestionDlg;
+  formCustomQuestionDlg, DynLibs{$IFDEF DARWIN}, BaseUnix{$ENDIF};
 
 {$R *.lfm}
+
+// -----------------------------------------------------------------------------
+
+{ Helpers }
+
+// -----------------------------------------------------------------------------
+
+// the legacy libmpv for the systems that the current one doesn't support:
+// Windows before 10 and macOS before 10.15 (Darwin 19)
+function GetLibMPVURL: String;
+{$IFDEF MSWINDOWS}
+type
+  TOSVersionInfoW = record
+    dwOSVersionInfoSize, dwMajorVersion, dwMinorVersion, dwBuildNumber, dwPlatformId: DWord;
+    szCSDVersion: array[0..127] of WideChar;
+  end;
+  TRtlGetVersion = function(var AInfo: TOSVersionInfoW): LongInt; stdcall;
+var
+  h: TLibHandle;
+  f: TRtlGetVersion;
+  vi: TOSVersionInfoW;
+{$ENDIF}
+{$IFDEF DARWIN}
+var
+  u: UtsName;
+  r: String;
+{$ENDIF}
+begin
+  Result := URL_LIBMPV;
+  {$IFDEF MSWINDOWS}
+  {$IFNDEF CPUAARCH64}
+  // RtlGetVersion gives the real version, GetVersionEx depends on the manifest
+  h := LoadLibrary('ntdll.dll');
+  if h <> NilHandle then
+  try
+    f := TRtlGetVersion(GetProcAddress(h, 'RtlGetVersion'));
+    FillChar(vi, SizeOf(vi), 0);
+    vi.dwOSVersionInfoSize := SizeOf(vi);
+    if Assigned(f) and (f(vi) = 0) and (vi.dwMajorVersion < 10) then
+      Result := URL_LIBMPV_LEGACY;
+  finally
+    FreeLibrary(h);
+  end;
+  {$ENDIF}
+  {$ENDIF}
+  {$IFDEF DARWIN}
+  if fpUname(u) = 0 then
+  begin
+    r := PChar(@u.release[0]);
+    if StrToIntDef(Copy(r, 1, Pos('.', r)-1), 99) < 19 then
+      Result := URL_LIBMPV_LEGACY;
+  end;
+  {$ENDIF}
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -327,7 +381,7 @@ end;
 
 procedure TfrmWizard.btnDownloadClick(Sender: TObject);
 begin
-  ShowDownloadDialog(URL_LIBMPV, ConcatPaths([libmpvFolder, 'libmpv.zip']));
+  ShowDownloadDialog(GetLibMPVURL, ConcatPaths([libmpvFolder, 'libmpv.zip']));
   CheckState_libMPV;
 end;
 
