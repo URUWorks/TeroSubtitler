@@ -143,6 +143,7 @@
 - improved: Typing with "mpv handles subtitles" no longer rewrites the temp track on every key
 - improved: Language names are now shown in their own language
 - improved: Media loaded from a url shows its title instead of the url
+- added: iTT has its own language in Format properties
 - added: Extract waveform also works with online media (opened from URL)
 - added: Auto-guess FPS of non-SMPTE subtitle file #414
 - added: Multi-select entries in timeline #390
