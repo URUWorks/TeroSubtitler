@@ -100,6 +100,10 @@ type
     lblTTLanguage: TLabel;
     lblTTLanguageHint: TLabel;
     cboTTLanguage: TComboBox;
+    lyoITT: TUWLayout;
+    lblITTLanguage: TLabel;
+    lblITTLanguageHint: TLabel;
+    cboITTLanguage: TComboBox;
     chkVTTWriteCueIdentifiers: TUWCheckBox;
     lyoAdvancedSubtitles: TUWLayout;
     spnASFontSize: TSpinEdit;
@@ -120,10 +124,13 @@ type
     procedure FormShow(Sender: TObject);
   private
     FTTOtherLanguage: String; // xml:lang that is not in the culture list (es-419...)
+    FITTOtherLanguage: String; // xml:lang of an iTT file that is not in the FCP list
     procedure FillComboWithFormatProperties;
     procedure SetLayoutPage(const APage: TUWLayout);
     procedure cboTTLanguageSelect(Sender: TObject);
     function GetTTLanguage: String;
+    procedure cboITTLanguageSelect(Sender: TObject);
+    function GetITTLanguage: String;
   public
 
   end;
@@ -138,7 +145,7 @@ implementation
 uses
   procTypes, LazUTF8, procWorkspace, UWSubtitleAPI.Formats, UWSystem.TimeUtils,
   UWTranslateAPI.Google, Cavena890.Types, LCLTranslator, UWSystem.Globalization,
-  Math;
+  Math, ITunesTimedText;
 
 {$R *.lfm}
 
@@ -303,7 +310,30 @@ begin
       spnEBUNDC.Value := MaxNumberDisplayableChars.ToInteger;
       spnEBUNDR.Value := MaxNumberDisplayableRows.ToInteger;
     end;
-    // Timed Text (iTT, TTML, Netflix): any BCP 47 tag can be typed
+    // iTunes Timed Text: only the subtitle languages of Final Cut Pro
+    with Subtitles.FormatProperties^.ITunesTimedText do
+    begin
+      cboITTLanguage.Items.BeginUpdate;
+      cboITTLanguage.Items.Clear;
+      for i := 0 to High(ITTLanguages) do
+        cboITTLanguage.Items.Add(ITTLanguages[i].Name);
+      cboITTLanguage.Items.EndUpdate;
+      FITTOtherLanguage := '';
+      if Trim(Language).IsEmpty then
+        cboITTLanguage.ItemIndex := ITTLanguageIndex('en')
+      else if ITTLanguageIndex(Language) >= 0 then
+        cboITTLanguage.ItemIndex := ITTLanguageIndex(Language)
+      else
+      begin
+        // a code from a file that is not in the list: shown as is, so it's
+        // kept when saving
+        FITTOtherLanguage := Trim(Language);
+        cboITTLanguage.ItemIndex := cboITTLanguage.Items.Add(FITTOtherLanguage);
+      end;
+      cboITTLanguage.OnSelect := @cboITTLanguageSelect;
+      cboITTLanguageSelect(NIL);
+    end;
+    // Timed Text (TTML, Netflix): any BCP 47 tag can be typed
     with Subtitles.FormatProperties^.TimedText do
     begin
       FillCultureTStrings(cboTTLanguage.Items);
@@ -438,6 +468,11 @@ begin
   begin
     Language := GetTTLanguage;
   end;
+  // iTunes Timed Text
+  with Subtitles.FormatProperties^.ITunesTimedText do
+  begin
+    Language := GetITTLanguage;
+  end;
   // WebVTT
   with Subtitles.FormatProperties^.WebVTT do
   begin
@@ -463,7 +498,8 @@ begin
     Add('D-Cinema (Interop, SMPTE)');
     Add(FormatToName(sfDVDSubtitle));
     Add(FormatToName(sfEBU));
-    Add('Timed Text (iTT, TTML, Netflix)');
+    Add(FormatToName(sfITunesTimedText));
+    Add('Timed Text (TTML, Netflix)');
     Add(FormatToName(sfWebVTT));
     EndUpdate;
   end;
@@ -489,6 +525,26 @@ end;
 procedure TfrmFormatProperties.cboTTLanguageSelect(Sender: TObject);
 begin
   lblTTLanguageHint.Caption := 'xml:lang="' + GetTTLanguage + '"';
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmFormatProperties.GetITTLanguage: String;
+begin
+  if (cboITTLanguage.ItemIndex >= 0) and (cboITTLanguage.ItemIndex <= High(ITTLanguages)) then
+    Result := ITTLanguages[cboITTLanguage.ItemIndex].Code
+  else
+    Result := FITTOtherLanguage;
+
+  if Result.IsEmpty then
+    Result := 'en';
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmFormatProperties.cboITTLanguageSelect(Sender: TObject);
+begin
+  lblITTLanguageHint.Caption := 'xml:lang="' + GetITTLanguage + '"';
 end;
 
 // -----------------------------------------------------------------------------
@@ -519,8 +575,9 @@ begin
     2: SetLayoutPage(lyoDCinema);
     3: SetLayoutPage(lyoDVDSubtitle);
     4: SetLayoutPage(lyoEBU);
-    5: SetLayoutPage(lyoTimedText);
-    6: SetLayoutPage(lyoWebVTT);
+    5: SetLayoutPage(lyoITT);
+    6: SetLayoutPage(lyoTimedText);
+    7: SetLayoutPage(lyoWebVTT);
   end;
 end;
 

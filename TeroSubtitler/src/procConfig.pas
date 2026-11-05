@@ -967,6 +967,13 @@ begin
       end;
       CloseKey;
       //
+      OpenKey('iTunesTimedText');
+      with Subtitles.FormatProperties^.ITunesTimedText do
+      begin
+        Language := GetValue('Language', Language);
+      end;
+      CloseKey;
+      //
       OpenKey(FormatToName(sfWebVTT, True));
       with Subtitles.FormatProperties^.WebVTT do
       begin
@@ -1390,6 +1397,13 @@ begin
       //
       OpenKey('TimedText');
       with Subtitles.FormatProperties^.TimedText do
+      begin
+        SetValue('Language', Language);
+      end;
+      CloseKey;
+      //
+      OpenKey('iTunesTimedText');
+      with Subtitles.FormatProperties^.ITunesTimedText do
       begin
         SetValue('Language', Language);
       end;

@@ -36,6 +36,8 @@
 {"hash":139375349,"name":"tfrmformatproperties.lbldvdlanguage.caption","sourcebytes":[76,97,110,103,117,97,103,101],"value":"Language"},
 {"hash":139375349,"name":"tfrmformatproperties.lblttlanguage.caption","sourcebytes":[76,97,110,103,117,97,103,101],"value":"Language"},
 {"hash":67183031,"name":"tfrmformatproperties.lblttlanguagehint.caption","sourcebytes":[120,109,108,58,108,97,110,103],"value":"xml:lang"},
+{"hash":139375349,"name":"tfrmformatproperties.lblittlanguage.caption","sourcebytes":[76,97,110,103,117,97,103,101],"value":"Language"},
+{"hash":67183031,"name":"tfrmformatproperties.lblittlanguagehint.caption","sourcebytes":[120,109,108,58,108,97,110,103],"value":"xml:lang"},
 {"hash":5966629,"name":"tfrmformatproperties.lbldctitle.caption","sourcebytes":[84,105,116,108,101],"value":"Title"},
 {"hash":117736226,"name":"tfrmformatproperties.lbldcreel.caption","sourcebytes":[82,101,101,108,32,110,117,109,98,101,114],"value":"Reel number"},
 {"hash":139375349,"name":"tfrmformatproperties.lbldclanguage.caption","sourcebytes":[76,97,110,103,117,97,103,101],"value":"Language"},

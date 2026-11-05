@@ -61,6 +61,25 @@ type
   PCavena890_Info = ^TCavena890_Info;
   TCavena890_Info = THeaderBlock;
 
+  { D-Cinema (Interop and SMPTE) }
+
+  PDCinema_Info = ^TDCinema_Info;
+  TDCinema_Info = record
+    Title        : AnsiString; // MovieTitle / ContentTitleText
+    ReelNumber   : Integer;
+    Language     : AnsiString; // Interop: free text (English), SMPTE: xs:language (en)
+    FontId       : AnsiString;
+    FontURI      : AnsiString; // Interop: font file, SMPTE: urn:uuid of the font (new one if empty)
+    FontSize     : Integer;
+    FontColor    : Cardinal;   // AARRGGBB
+    Effect       : Byte;       // 0 = none, 1 = border, 2 = shadow
+    EffectColor  : Cardinal;   // AARRGGBB
+    VPosition    : Integer;    // % from the bottom (or top) of the screen
+    LineSpacing  : Integer;    // % between lines
+    FadeUpTime   : Integer;    // ms
+    FadeDownTime : Integer;    // ms
+  end;
+
   { DVDSubtitle Info }
 
   PDVDSubtitle_Info = ^TDVDSubtitle_Info;
@@ -95,6 +114,13 @@ type
     VerticalPosition  : Byte; //
     JustificationCode : Byte; // JC_Unchanged, JC_Left, JC_Center, JC_Center, JC_Right
     CommentFlag       : Byte; // CF_TFHaveData, CF_TFHaveComments
+  end;
+
+  { iTunes Timed Text (iTT) }
+
+  PITunesTimedText_Info = ^TITunesTimedText_Info;
+  TITunesTimedText_Info = record
+    Language : AnsiString; // xml:lang, one of the FCP subtitle languages
   end;
 
   { MicroDVD }
@@ -137,6 +163,13 @@ type
     Y2: Integer; // Bottom
   end;
 
+  { Timed Text (TTML/DFXP, Netflix) }
+
+  PTimedText_Info = ^TTimedText_Info;
+  TTimedText_Info = record
+    Language : AnsiString; // xml:lang (BCP 47: en, en-US, es-419, pt-BR...)
+  end;
+
   { WebVTT }
 
   PWebVTT_Info = ^TWebVTT_Info;
@@ -158,32 +191,6 @@ type
     TextAlign    : AnsiString; // align:left or align:center or align:right
   end;
 
-  { Timed Text (iTT, TTML/DFXP, Netflix) }
-
-  PTimedText_Info = ^TTimedText_Info;
-  TTimedText_Info = record
-    Language : AnsiString; // xml:lang (BCP 47: en, en-US, es-419, pt-BR...)
-  end;
-
-  { D-Cinema (Interop and SMPTE) }
-
-  PDCinema_Info = ^TDCinema_Info;
-  TDCinema_Info = record
-    Title        : AnsiString; // MovieTitle / ContentTitleText
-    ReelNumber   : Integer;
-    Language     : AnsiString; // Interop: free text (English), SMPTE: xs:language (en)
-    FontId       : AnsiString;
-    FontURI      : AnsiString; // Interop: font file, SMPTE: urn:uuid of the font (new one if empty)
-    FontSize     : Integer;
-    FontColor    : Cardinal;   // AARRGGBB
-    Effect       : Byte;       // 0 = none, 1 = border, 2 = shadow
-    EffectColor  : Cardinal;   // AARRGGBB
-    VPosition    : Integer;    // % from the bottom (or top) of the screen
-    LineSpacing  : Integer;    // % between lines
-    FadeUpTime   : Integer;    // ms
-    FadeDownTime : Integer;    // ms
-  end;
-
   { Format properties }
 
   PFormatProperties = ^TFormatProperties;
@@ -195,6 +202,7 @@ type
     EBU               : TEBU_Info;
     SSA               : TSSA_Info;
     TimedText         : TTimedText_Info;
+    ITunesTimedText   : TITunesTimedText_Info;
     WebVTT            : TWebVTT_Info;
   end;
 
@@ -281,6 +289,11 @@ begin
       CountryOrigin             := 'URY';
       MaxNumberDisplayableChars := '40';
       MaxNumberDisplayableRows  := '23';
+    end;
+
+    with ITunesTimedText do
+    begin
+      Language := 'en';
     end;
 
     with SSA do

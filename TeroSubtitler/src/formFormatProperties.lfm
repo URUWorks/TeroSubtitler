@@ -664,6 +664,46 @@ object frmFormatProperties: TfrmFormatProperties
       ParentFont = False
     end
   end
+  object lyoITT: TUWLayout
+    Left = 10
+    Height = 350
+    Top = 50
+    Width = 440
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ClientHeight = 350
+    ClientWidth = 440
+    TabOrder = 10
+    Visible = False
+    object lblITTLanguage: TLabel
+      Left = 0
+      Height = 20
+      Top = 5
+      Width = 65
+      Caption = 'Language'
+      ParentColor = False
+    end
+    object cboITTLanguage: TComboBox
+      Left = 190
+      Height = 28
+      Top = 0
+      Width = 250
+      DropDownCount = 20
+      ItemHeight = 20
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object lblITTLanguageHint: TLabel
+      Left = 190
+      Height = 19
+      Top = 35
+      Width = 250
+      AutoSize = False
+      Caption = 'xml:lang'
+      Font.Color = clGrayText
+      ParentColor = False
+      ParentFont = False
+    end
+  end
   object lyoDCinema: TUWLayout
     Left = 10
     Height = 350

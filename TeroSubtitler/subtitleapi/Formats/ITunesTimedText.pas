@@ -43,11 +43,97 @@ type
 
 // -----------------------------------------------------------------------------
 
+type
+
+  TITTLanguage = record
+    Name, Code: String;
+  end;
+
+const
+
+  ITTLanguages: array[0..68] of TITTLanguage = (
+    (Name: 'Afrikaans'; Code: 'af'),
+    (Name: 'Arabic'; Code: 'ar'),
+    (Name: 'Bangla'; Code: 'bn'),
+    (Name: 'Bulgarian'; Code: 'bg'),
+    (Name: 'Catalan'; Code: 'ca'),
+    (Name: 'Chinese (Cantonese)'; Code: 'yue-Hant'),
+    (Name: 'Chinese (Simplified)'; Code: 'zh-Hans'),
+    (Name: 'Chinese (Traditional)'; Code: 'zh-Hant'),
+    (Name: 'Croatian'; Code: 'hr'),
+    (Name: 'Czech'; Code: 'cs'),
+    (Name: 'Danish'; Code: 'da'),
+    (Name: 'Dutch'; Code: 'nl'),
+    (Name: 'English'; Code: 'en'),
+    (Name: 'English (Australia)'; Code: 'en-AU'),
+    (Name: 'English (Canada)'; Code: 'en-CA'),
+    (Name: 'English (United Kingdom)'; Code: 'en-GB'),
+    (Name: 'Estonian'; Code: 'et'),
+    (Name: 'Finnish'; Code: 'fi'),
+    (Name: 'French (Belgium)'; Code: 'fr-BE'),
+    (Name: 'French (Canada)'; Code: 'fr-CA'),
+    (Name: 'French (France)'; Code: 'fr-FR'),
+    (Name: 'French (Switzerland)'; Code: 'fr-CH'),
+    (Name: 'German'; Code: 'de'),
+    (Name: 'German (Austria)'; Code: 'de-AT'),
+    (Name: 'German (Germany)'; Code: 'de-DE'),
+    (Name: 'German (Switzerland)'; Code: 'de-CH'),
+    (Name: 'Greek'; Code: 'el'),
+    (Name: 'Greek (Cyprus)'; Code: 'el-CY'),
+    (Name: 'Hebrew'; Code: 'he'),
+    (Name: 'Hindi'; Code: 'hi'),
+    (Name: 'Hungarian'; Code: 'hu'),
+    (Name: 'Icelandic'; Code: 'is'),
+    (Name: 'Indonesian'; Code: 'id'),
+    (Name: 'Italian'; Code: 'it'),
+    (Name: 'Japanese'; Code: 'ja'),
+    (Name: 'Kannada'; Code: 'kn'),
+    (Name: 'Kazakh'; Code: 'kk'),
+    (Name: 'Korean'; Code: 'ko'),
+    (Name: 'Lao'; Code: 'lo'),
+    (Name: 'Latvian'; Code: 'lv'),
+    (Name: 'Lithuanian'; Code: 'lt'),
+    (Name: 'Luxembourgish'; Code: 'lb'),
+    (Name: 'Malay'; Code: 'ms'),
+    (Name: 'Malayalam'; Code: 'ml'),
+    (Name: 'Maltese'; Code: 'mt'),
+    (Name: 'Marathi'; Code: 'mr'),
+    (Name: 'Norwegian'; Code: 'no'),
+    (Name: 'Portuguese (Brazil)'; Code: 'pt-BR'),
+    (Name: 'Portuguese (Portugal)'; Code: 'pt-PT'),
+    (Name: 'Punjabi'; Code: 'pa'),
+    (Name: 'Romanian'; Code: 'ro'),
+    (Name: 'Russian'; Code: 'ru'),
+    (Name: 'Scottish Gaelic'; Code: 'gd'),
+    (Name: 'Slovak'; Code: 'sk'),
+    (Name: 'Slovenian'; Code: 'sl'),
+    (Name: 'Spanish (Latin America)'; Code: 'es-419'),
+    (Name: 'Spanish (Mexico)'; Code: 'es-MX'),
+    (Name: 'Spanish (Spain)'; Code: 'es-ES'),
+    (Name: 'Swedish'; Code: 'sv'),
+    (Name: 'Tagalog'; Code: 'tl'),
+    (Name: 'Tamil'; Code: 'ta'),
+    (Name: 'Telugu'; Code: 'te'),
+    (Name: 'Thai'; Code: 'th'),
+    (Name: 'Turkish'; Code: 'tr'),
+    (Name: 'Ukrainian'; Code: 'uk'),
+    (Name: 'Urdu'; Code: 'ur'),
+    (Name: 'Vietnamese'; Code: 'vi'),
+    (Name: 'Welsh'; Code: 'cy'),
+    (Name: 'Zulu'; Code: 'zu'));
+
+// xml:lang for the iTT files ('en' if none)
+function ITTLanguage(const ASubtitles: TUWSubtitles): String;
+function ITTLanguageIndex(const ACode: String): Integer;
+
+// -----------------------------------------------------------------------------
+
 implementation
 
 uses UWSubtitleAPI.Tags, UWSubtitleAPI.Utils, UWSystem.SysUtils;
 
 type
+
   TITTEntryStyle = record
     Visible   : Boolean; // tiene texto visible
     Italic,
@@ -60,6 +146,29 @@ type
 // -----------------------------------------------------------------------------
 
 { Helpers }
+
+// -----------------------------------------------------------------------------
+
+function ITTLanguage(const ASubtitles: TUWSubtitles): String;
+begin
+  Result := '';
+  if Assigned(ASubtitles) and Assigned(ASubtitles.FormatProperties) then
+    Result := Trim(ASubtitles.FormatProperties^.ITunesTimedText.Language);
+  if Result.IsEmpty then
+    Result := 'en';
+end;
+
+// -----------------------------------------------------------------------------
+
+function ITTLanguageIndex(const ACode: String): Integer;
+var
+  i: Integer;
+begin
+  for i := 0 to High(ITTLanguages) do
+    if SameText(ITTLanguages[i].Code, Trim(ACode)) then
+      Exit(i);
+  Result := -1;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -76,7 +185,6 @@ type
     TagOn : Boolean;
     Color : String;  // 'rgba(R,G,B,255)' al abrir un color
   end;
-
 var
   Toks: array of TTok;
   i, j, n, Count: Integer;
@@ -169,7 +277,7 @@ begin
     i := j + 1;
   end;
 
-  // Qué formato cubre todo el texto visible?
+  // ¿qué formato cubre todo el texto visible?
   It := False; Bo := False; Un := False; Col := '';
   AllIt := True; AllBo := True; AllUn := True; SameCol := True;
   HaveFirst := False; FirstCol := '';
@@ -341,7 +449,7 @@ begin
 
       if Assigned(Node) and XMLHasAttribute(Node, 'xml:lang') and
         (Trim(XMLGetAttrValue(Node, 'xml:lang')) <> '') then
-        Subtitles.FormatProperties^.TimedText.Language := Trim(XMLGetAttrValue(Node, 'xml:lang'));
+        Subtitles.FormatProperties^.ITunesTimedText.Language := Trim(XMLGetAttrValue(Node, 'xml:lang'));
 
 
       if Assigned(Node) then
@@ -574,7 +682,7 @@ begin
       TDOMElement(Root).SetAttribute('xmlns:ry', 'http://namespace.itunes.apple.com/itt/ttml-extension#ruby');
       TDOMElement(Root).SetAttribute('xmlns:itts', 'http://www.w3.org/ns/ttml/profile/imsc1#styling');
       TDOMElement(Root).SetAttribute('xmlns', 'http://www.w3.org/ns/ttml');
-      TDOMElement(Root).SetAttribute('xml:lang', TimedTextLanguage(Subtitles));
+      TDOMElement(Root).SetAttribute('xml:lang', ITTLanguage(Subtitles));
 
       if Subtitles.TimecodeMode = tcDF then
         TDOMElement(Root).SetAttribute('ttp:dropMode', 'dropNTSC')
