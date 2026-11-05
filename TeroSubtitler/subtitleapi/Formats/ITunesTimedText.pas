@@ -47,6 +47,214 @@ implementation
 
 uses UWSubtitleAPI.Tags, UWSubtitleAPI.Utils, UWSystem.SysUtils;
 
+type
+  TITTEntryStyle = record
+    Visible   : Boolean; // tiene texto visible
+    Italic,
+    Bold,
+    Underline : Boolean; // en toda la entrada
+    Color     : String;  // 'rgba(R,G,B,255)' en toda la entrada, o ''
+    Text      : String;  // el texto con solo los tags que van en <span>
+  end;
+
+// -----------------------------------------------------------------------------
+
+{ Helpers }
+
+// -----------------------------------------------------------------------------
+
+// Lee los tags TS de una entrada ({\i1}, {\b1}, {\u1}, {\s1}, {\c&BBGGRR&},
+// también varios en un bloque como {\b1\c&H0000FF&}) y dice qué formato cubre
+// todo el texto visible. Text queda sin ese formato (va en el <p>), sin la
+// negrita ni el color parciales (Apple no los admite) y con un tag por bloque.
+
+function AnalyzeITTEntry(const Txt: String): TITTEntryStyle;
+type
+  TTok = record
+    IsTag : Boolean;
+    S     : String;  // texto, o el nombre del tag: i, b, u, s, c
+    TagOn : Boolean;
+    Color : String;  // 'rgba(R,G,B,255)' al abrir un color
+  end;
+
+var
+  Toks: array of TTok;
+  i, j, n, Count: Integer;
+  Block, Tag, Num, Hex: String;
+  Parts: TStringArray;
+  It, Bo, Un: Boolean;
+  Col, FirstCol: String;
+  AllIt, AllBo, AllUn, SameCol, HaveFirst: Boolean;
+
+  procedure AddText(const C: String);
+  begin
+    if (Length(Toks) > 0) and not Toks[High(Toks)].IsTag then
+      Toks[High(Toks)].S := Toks[High(Toks)].S + C
+    else
+    begin
+      SetLength(Toks, Length(Toks)+1);
+      Toks[High(Toks)].IsTag := False;
+      Toks[High(Toks)].S := C;
+    end;
+  end;
+
+  procedure AddTag(const AName: String; const AOn: Boolean; const AColor: String = '');
+  begin
+    SetLength(Toks, Length(Toks)+1);
+    Toks[High(Toks)].IsTag := True;
+    Toks[High(Toks)].S := AName;
+    Toks[High(Toks)].TagOn := AOn;
+    Toks[High(Toks)].Color := AColor;
+  end;
+
+  function AllDigits(const S: String): Boolean;
+  var
+    k: Integer;
+  begin
+    Result := S <> '';
+    for k := 1 to Length(S) do
+      if not (S[k] in ['0'..'9']) then Exit(False);
+  end;
+
+begin
+  Result.Visible := False;
+  Result.Italic := False;
+  Result.Bold := False;
+  Result.Underline := False;
+  Result.Color := '';
+  Result.Text := '';
+  Toks := NIL;
+
+  // tokens
+  n := Length(Txt);
+  i := 1;
+  while i <= n do
+  begin
+    j := 0;
+    if (Txt[i] = '{') and (i < n) and (Txt[i+1] = '\') then
+      j := Pos('}', Txt, i+1);
+    if j = 0 then
+    begin
+      AddText(Txt[i]);
+      Inc(i);
+      Continue;
+    end;
+
+    Block := Copy(Txt, i+1, j-i-1);
+    Parts := Block.Split(['\']);
+    for Tag in Parts do
+    begin
+      if Tag = '' then Continue;
+      if (Tag[1] in ['i', 'u', 's', 'b']) and AllDigits(Copy(Tag, 2, MaxInt)) then
+        AddTag(Tag[1], StrToIntDef(Copy(Tag, 2, MaxInt), 0) <> 0)
+      else if (Tag = 'c') or (Tag = '1c') then
+        AddTag('c', False)
+      else if (Tag[1] = 'c') or (Copy(Tag, 1, 2) = '1c') then
+      begin
+        // c&BBGGRR&, c&HBBGGRR&, 1c&H...& -> #RRGGBB
+        Hex := Copy(Tag, Pos('c', Tag)+1, MaxInt);
+        Hex := StringReplace(Hex, '&', '', [rfReplaceAll]);
+        if (Hex <> '') and (UpCase(Hex[1]) = 'H') then Delete(Hex, 1, 1);
+        if (Length(Hex) >= 1) and (Length(Hex) <= 6) then
+        begin
+          Hex := UpperCase(StringOfChar('0', 6-Length(Hex)) + Hex);
+          // como FCP: rgba(R,G,B,255)
+          Num := Format('rgba(%d,%d,%d,255)', [StrToInt('$' + Copy(Hex, 5, 2)),
+            StrToInt('$' + Copy(Hex, 3, 2)), StrToInt('$' + Copy(Hex, 1, 2))]);
+          AddTag('c', True, Num);
+        end;
+      end;
+      // los demás tags ({\an8}, {\pos()}...) no existen en iTT
+    end;
+    i := j + 1;
+  end;
+
+  // Qué formato cubre todo el texto visible?
+  It := False; Bo := False; Un := False; Col := '';
+  AllIt := True; AllBo := True; AllUn := True; SameCol := True;
+  HaveFirst := False; FirstCol := '';
+  Count := 0;
+  for i := 0 to High(Toks) do
+    if Toks[i].IsTag then
+    begin
+      case Toks[i].S of
+        'i': It := Toks[i].TagOn;
+        'b': Bo := Toks[i].TagOn;
+        'u': Un := Toks[i].TagOn;
+        'c': if Toks[i].TagOn then Col := Toks[i].Color else Col := '';
+      end;
+    end
+    else
+      for j := 1 to Length(Toks[i].S) do
+        if not (Toks[i].S[j] in [' ', #9, #10, #13]) then
+        begin
+          Inc(Count);
+          if not It then AllIt := False;
+          if not Bo then AllBo := False;
+          if not Un then AllUn := False;
+          if not HaveFirst then
+          begin
+            FirstCol := Col;
+            HaveFirst := True;
+          end
+          else if Col <> FirstCol then
+            SameCol := False;
+        end;
+
+  Result.Visible := Count > 0;
+  if Result.Visible then
+  begin
+    Result.Italic    := AllIt;
+    Result.Bold      := AllBo;
+    Result.Underline := AllUn;
+    if SameCol then Result.Color := FirstCol;
+  end;
+
+  // el texto: cursiva y subrayado parciales en <span>, tachado como antes,
+  // negrita y color fuera (en el <p> si cubren todo, si no se pierden)
+  for i := 0 to High(Toks) do
+    if not Toks[i].IsTag then
+      Result.Text := Result.Text + Toks[i].S
+    else
+      case Toks[i].S of
+        'i': if not Result.Italic then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\i1}', '{\i0}');
+        'u': if not Result.Underline then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\u1}', '{\u0}');
+        's': Result.Text := Result.Text + iff(Toks[i].TagOn, '{\s1}', '{\s0}');
+      end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// Formato de un <p> o del <body> al importar: el del <p> manda sobre el del
+// <body>; el blanco del <body> es el color por defecto, no un formato
+
+procedure ReadITTStyles(const ANode: TDOMNode; var AItalic, ABold, AUnderline: Boolean; var AColor: String);
+var
+  s, t: String;
+begin
+  if not Assigned(ANode) then Exit;
+  if XMLHasAttribute(ANode, 'tts:fontStyle') then
+    AItalic := SameText(XMLGetAttrValue(ANode, 'tts:fontStyle'), 'italic');
+  if XMLHasAttribute(ANode, 'tts:fontWeight') then
+    ABold := SameText(XMLGetAttrValue(ANode, 'tts:fontWeight'), 'bold');
+  if XMLHasAttribute(ANode, 'tts:textDecoration') then
+  begin
+    AUnderline := False;
+    s := LowerCase(XMLGetAttrValue(ANode, 'tts:textDecoration'));
+    for t in s.Split([' ']) do
+      if t = 'underline' then AUnderline := True;
+  end;
+  if XMLHasAttribute(ANode, 'tts:color') then
+  begin
+    AColor := TTMLColorToBGR(XMLGetAttrValue(ANode, 'tts:color'));
+    if AColor = 'FFFFFF' then AColor := '';
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+{ TUWITunesTimedText }
+
 // -----------------------------------------------------------------------------
 
 function TUWITunesTimedText.Name: String;
@@ -98,13 +306,16 @@ end;
 function TUWITunesTimedText.LoadSubtitle(const SubtitleFile: TUWStringList; const FPS: Double; var Subtitles: TUWSubtitles): Boolean;
 var
   XmlDoc : TXMLDocument;
-  Node, LayoutNode, RegionNode : TDOMNode;
+  Node, LayoutNode, RegionNode, BodyNode : TDOMNode;
   Item   : TUWSubtitleItem;
   fr     : Double;
   RegionMap: TStringList;
   RegionID, AlignVal, TextAlignVal, NewText: String;
   CurBegin, CurEnd: Integer;
   IsContinuation: Boolean;
+  BodyRegion, PColor: String;
+  BodyItalic, BodyBold, BodyUnderline, PItalic, PBold, PUnderline: Boolean;
+  BodyColor: String;
 
   function GetTime(const S: String): Integer;
   begin
@@ -184,6 +395,16 @@ begin
         end;
       end;
 
+      // Formato y región del <body>, para todas las entradas (como FCP)
+      BodyItalic := False; BodyBold := False; BodyUnderline := False;
+      BodyColor := ''; BodyRegion := '';
+      BodyNode := XMLFindNodeByName(XmlDoc, 'body');
+      if Assigned(BodyNode) then
+      begin
+        ReadITTStyles(BodyNode, BodyItalic, BodyBold, BodyUnderline, BodyColor);
+        BodyRegion := XMLGetAttrValue(BodyNode, 'region');
+      end;
+
       // <p> con UNIFICACIÓN de tiempos
       Node := XMLFindNodeByName(XmlDoc, 'p');
       if Assigned(Node) then
@@ -205,9 +426,18 @@ begin
             // Antes: el XML del <p> se volvía a serializar y se pasaba por regex,
             // que perdía los spans anidados, los tts:* en línea y los <tt:br/>
             NewText := HTMLTagsToTS(ExtractStyledTTMLText(Node));
-            // Cursiva en toda la entrada: tts:fontStyle="italic" en el <p> (como FCP)
-            if (NewText <> '') and SameText(XMLGetAttrValue(Node, 'tts:fontStyle'), 'italic') then
-              NewText := '{\i1}' + NewText + '{\i0}';
+            // Formato de toda la entrada: en el <p> o en el <body> (como FCP).
+            // Antes solo se leía la cursiva del <p>
+            PItalic := BodyItalic; PBold := BodyBold; PUnderline := BodyUnderline;
+            PColor := BodyColor;
+            ReadITTStyles(Node, PItalic, PBold, PUnderline, PColor);
+            if NewText <> '' then
+            begin
+              if PItalic then NewText := '{\i1}' + NewText + '{\i0}';
+              if PBold then NewText := '{\b1}' + NewText + '{\b0}';
+              if PUnderline then NewText := '{\u1}' + NewText + '{\u0}';
+              if PColor <> '' then NewText := '{\c&' + PColor + '&}' + NewText + '{\c}';
+            end;
 
             // Lógica de UNIFICACIÓN
             IsContinuation := (Subtitles.Count > 0) and
@@ -227,10 +457,11 @@ begin
               Item.FinalTime := CurEnd;
               Item.Text := NewText;
 
-              // Determinar alineación vertical
-              if XMLHasAttribute(Node, 'region') then
+              // Determinar alineación vertical (sin region en el <p>, la del <body>)
+              if XMLHasAttribute(Node, 'region') or (BodyRegion <> '') then
               begin
                 RegionID := XMLGetAttrValue(Node, 'region');
+                if RegionID = '' then RegionID := BodyRegion;
                 AlignVal := RegionMap.Values[RegionID];
                 TextAlignVal := '';
                 if Pos('|', AlignVal) > 0 then
@@ -287,8 +518,10 @@ var
   Root, Element, Node, StylingNode, LayoutNode, DivNode : TDOMNode;
   i, it, ft : Integer;
   NewFPS: Double;
-  txt, StripTxt: String;
-  NeedTop: Boolean;
+  NeedTop, AllTop, AnyVisible, AllItalic, AllBold, AllUnderline, AllColor: Boolean;
+  Styles: array of TITTEntryStyle;
+  St: TITTEntryStyle;
+  RefColor: String;
 
   // Preset de <style>: solo se escriben los que el texto realmente referencia
   procedure AddPresetStyle(const AName, AFontStyle, AFontWeight, ADecoration: String);
@@ -382,9 +615,43 @@ begin
       LayoutNode := XmlDoc.CreateElement('layout');
       Element.AppendChild(LayoutNode);
 
-    // <body> como en FCP: color, región y estilo por defecto
+    // El formato de cada entrada, y lo que comparten todas (va en el <body>)
+    Styles := NIL;
+    SetLength(Styles, ToItem - FromItem + 1);
+    AnyVisible := False; AllItalic := True; AllBold := True; AllUnderline := True;
+    AllColor := True; AllTop := ToItem >= FromItem; RefColor := '';
+    for i := FromItem to ToItem do
+    begin
+      St := AnalyzeITTEntry(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
+      Styles[i-FromItem] := St;
+      if Subtitles[i].VAlign <> svaTop then AllTop := False;
+      if not St.Visible then Continue; // una entrada vacía no cuenta
+      if not St.Italic then AllItalic := False;
+      if not St.Bold then AllBold := False;
+      if not St.Underline then AllUnderline := False;
+      if not AnyVisible then
+      begin
+        AnyVisible := True;
+        RefColor := St.Color; // el de la primera entrada visible
+      end;
+      if (St.Color = '') or (St.Color <> RefColor) then AllColor := False;
+    end;
+    if not AnyVisible then
+    begin
+      AllItalic := False; AllBold := False; AllUnderline := False; AllColor := False;
+    end;
+
+    // <body> como en FCP: color, región y estilo por defecto, y el formato
+    // que tienen todas las entradas (una sola vez, no en cada <p>)
     Element := XmlDoc.CreateElement('body');
-      TDOMElement(Element).SetAttribute('tts:color', 'white');
+      if AllColor then
+        TDOMElement(Element).SetAttribute('tts:color', RefColor)
+      else
+        TDOMElement(Element).SetAttribute('tts:color', 'white');
+      if AllItalic then TDOMElement(Element).SetAttribute('tts:fontStyle', 'italic');
+      if AllBold then TDOMElement(Element).SetAttribute('tts:fontWeight', 'bold');
+      if AllUnderline then TDOMElement(Element).SetAttribute('tts:textDecoration', 'underline');
+      // FCP deja region="bottom" aunque todas vayan arriba (y no haya 'bottom')
       TDOMElement(Element).SetAttribute('region', 'bottom');
       TDOMElement(Element).SetAttribute('style', 'normal');
     Root.AppendChild(Element);
@@ -403,12 +670,21 @@ begin
       TDOMElement(Element).SetAttribute('begin', MSToHHMMSSFFTime(it, NewFPS, Subtitles.TimecodeMode));
       TDOMElement(Element).SetAttribute('end', MSToHHMMSSFFTime(ft, NewFPS, Subtitles.TimecodeMode));
 
-      // Cursiva en toda la entrada: tts:fontStyle="italic" en el <p> (como FCP)
-      txt := iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]);
-      if IsEntireTextItalic(txt, StripTxt) then
+      // Formato de toda la entrada en el <p> (como FCP), salvo el que ya va
+      // en el <body>. Antes solo la cursiva; la negrita y el color iban en
+      // <span>, que Apple no admite
+      St := Styles[i-FromItem];
+      if St.Visible then
       begin
-        TDOMElement(Element).SetAttribute('tts:fontStyle', 'italic');
-        txt := StripTxt;
+        // mismo orden que FCP: color, fontStyle, fontWeight, textDecoration
+        if (St.Color <> '') and not AllColor then
+          TDOMElement(Element).SetAttribute('tts:color', St.Color);
+        if St.Italic and not AllItalic then
+          TDOMElement(Element).SetAttribute('tts:fontStyle', 'italic');
+        if St.Bold and not AllBold then
+          TDOMElement(Element).SetAttribute('tts:fontWeight', 'bold');
+        if St.Underline and not AllUnderline then
+          TDOMElement(Element).SetAttribute('tts:textDecoration', 'underline');
       end;
 
       // Apple/FCP solo admite top y bottom: lo que no es arriba va abajo
@@ -423,16 +699,17 @@ begin
 
       // Antes: <span style="italic"> apuntando al <head>; FCP usa
       // <span tts:fontStyle="italic"> en línea
-      AppendStyledTextDirect(XmlDoc, Element, txt, True);
+      AppendStyledTextDirect(XmlDoc, Element, St.Text, True);
 
       DivNode.AppendChild(Element);
     end;
 
-    // Regiones: top antes que bottom, solo las usadas ('bottom' siempre,
-    // porque el <body> la referencia)
+    // Regiones: top antes que bottom, solo las usadas (si todas van arriba no
+    // hay 'bottom', como FCP)
     if NeedTop then
       AddRegion('top', 'before', '100% 15%', '0% 0%');
-    AddRegion('bottom', 'after', '100% 15%', '0% 85%');
+    if not AllTop then
+      AddRegion('bottom', 'after', '100% 15%', '0% 85%');
 
     try
       StringList.Clear;
