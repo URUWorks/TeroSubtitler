@@ -1438,7 +1438,7 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 {$IFDEF DARWIN}
 var
   AppMenu, AboutMenu, SettingsMenu, //FormatPropertiesMenu,
-  AppUpdate, SepMenu: TMenuItem;
+  AppUpdate, WizardMenu, SepMenu: TMenuItem;
 {$ENDIF}
 begin
   Randomize; // used for tips
@@ -1572,12 +1572,17 @@ begin
   SettingsMenu.Action := actSettings;
   AppMenu.Add(SettingsMenu); {Add Settings as item in application menu}
 
+  WizardMenu := TMenuItem.Create(Self);
+  WizardMenu.Action := actSetupWizard;
+  AppMenu.Add(WizardMenu); {Add Setup wizard as item in application menu}
+
   SepMenu := TMenuItem.Create(Self);
   SepMenu.Caption := '-';
   AppMenu.Add(SepMenu); {Add - as item in application menu}
 
   mnuAbout.Visible            := False;
   mnuCheckForUpdates.Visible  := False;
+  mnuSetupWizard.Visible      := False;
   mnuHelpSeparator.Visible    := False;
   //mnuFormatProperties.Visible := False;
   mnuSettings.Visible         := False;
@@ -2026,10 +2031,8 @@ procedure TfrmMain.mnuViewPropertiesClick(Sender: TObject);
     else
       s := lngvpEncoding;
     end;
-    if cbo.ItemIndex >= 0 then
-      AItem.Caption := s + ': ' + cbo.Items[cbo.ItemIndex]
-    else
-      AItem.Caption := s;
+    // only the name, the current value is the checked item of its submenu
+    AItem.Caption := s;
 
     // the combos can get new items (a custom fps), all again
     if AItem.Count <> cbo.Items.Count then
