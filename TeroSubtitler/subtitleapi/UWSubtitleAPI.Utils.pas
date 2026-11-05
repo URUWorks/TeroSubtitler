@@ -44,6 +44,8 @@ function DOMHasStyleRef(const ANode: TDOMNode; const AStyle: String): Boolean;
 function TTMLTimeToMS(const S: String; const AFPS: Double; const ATickRate: Double = 10000000): Integer;
 // Recorre el DOM de un <p> TTML: <span> (style o tts:* en línea, anidados) y <br> -> texto con tags TS
 function ExtractStyledTTMLText(const ANode: TDOMNode): String;
+// Color TTML (#RRGGBB, #RRGGBBAA, nombre, rgb(), rgba()) -> BGR del tag TS, '' si no es válido
+function TTMLColorToBGR(const AColor: String): String;
 // ¿Todo el texto visible está en cursiva? Stripped es el texto sin esos tags
 function IsEntireTextItalic(const Txt: String; out Stripped: String): Boolean;
 // Indenta un XML que ya tiene un elemento por línea
@@ -807,12 +809,11 @@ begin
           if (DecToken = 'linethrough') or (DecToken = 'line-through') then IsStrike := True;
         end;
 
-        // tts:color="#RRGGBB" -> BGR sin '#' (el tag TS interno usa BGR,
-        // ver ReplaceHTMLTagColor en SubtitleLib.Tags.pas).
-        ColorBGR := '';
+        // tts:color -> BGR sin '#' (el tag TS interno usa BGR, ver
+        // ReplaceHTMLTagColor en SubtitleLib.Tags.pas). Antes solo se leía
+        // #RRGGBB: se perdían #RRGGBBAA, los nombres y rgb()/rgba()
         ColorAttr := XMLGetAttrValue(Child, 'tts:color');
-        if (Length(ColorAttr) = 7) and (ColorAttr[1] = '#') then
-          ColorBGR := Copy(ColorAttr, 6, 2) + Copy(ColorAttr, 4, 2) + Copy(ColorAttr, 2, 2);
+        ColorBGR := TTMLColorToBGR(ColorAttr);
 
         Inner := ExtractStyledTTMLText(Child); // recursivo: los spans anidados se resuelven bien, a diferencia del regex de XMLTagsToTS
 
@@ -841,6 +842,61 @@ begin
   end;
 end;
 
+
+// -----------------------------------------------------------------------------
+
+function TTMLColorToBGR(const AColor: String): String;
+const
+  Names: array[0..17] of array[0..1] of String = (
+    ('black', '000000'), ('silver', 'C0C0C0'), ('gray', '808080'),
+    ('white', 'FFFFFF'), ('maroon', '800000'), ('red', 'FF0000'),
+    ('purple', '800080'), ('fuchsia', 'FF00FF'), ('magenta', 'FF00FF'),
+    ('green', '008000'), ('lime', '00FF00'), ('olive', '808000'),
+    ('yellow', 'FFFF00'), ('navy', '000080'), ('blue', '0000FF'),
+    ('teal', '008080'), ('aqua', '00FFFF'), ('cyan', '00FFFF'));
+var
+  s, rgb: String;
+  parts: TStringArray;
+  i, v: Integer;
+begin
+  Result := '';
+  rgb := '';
+  s := LowerCase(Trim(AColor));
+  if s = '' then Exit;
+
+  if s[1] = '#' then
+  begin
+    // #RRGGBB o #RRGGBBAA (el alfa no existe en el tag TS)
+    if (Length(s) = 7) or (Length(s) = 9) then
+      rgb := Copy(s, 2, 6);
+  end
+  else if (Copy(s, 1, 4) = 'rgb(') or (Copy(s, 1, 5) = 'rgba(') then
+  begin
+    s := Copy(s, Pos('(', s) + 1, MaxInt);
+    if Pos(')', s) > 0 then s := Copy(s, 1, Pos(')', s) - 1);
+    parts := s.Split([',']);
+    if Length(parts) >= 3 then
+      for i := 0 to 2 do
+      begin
+        v := StrToIntDef(Trim(parts[i]), -1);
+        if (v < 0) or (v > 255) then Exit;
+        rgb := rgb + IntToHex(v, 2);
+      end;
+  end
+  else
+    for i := 0 to High(Names) do
+      if s = Names[i][0] then
+      begin
+        rgb := Names[i][1];
+        Break;
+      end;
+
+  if Length(rgb) <> 6 then Exit;
+  for i := 1 to 6 do
+    if not (rgb[i] in ['0'..'9', 'a'..'f', 'A'..'F']) then Exit;
+  rgb := UpperCase(rgb);
+  Result := Copy(rgb, 5, 2) + Copy(rgb, 3, 2) + Copy(rgb, 1, 2);
+end;
 
 // -----------------------------------------------------------------------------
 
