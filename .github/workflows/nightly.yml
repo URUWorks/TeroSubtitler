@@ -116,19 +116,207 @@ jobs:
             Copy-Item -Recurse "$bin/$d" "$out/$d"
           }
           Copy-Item -Recurse "$bin/Shortcuts" "$out/Shortcuts"
-          foreach ($f in 'libcrypto-1_1-x64.dll','libhunspellx64.dll','libmpv-2.dll','libssl-1_1-x64.dll','tero.cfs','tero.exe') {
+          foreach ($f in 'tero.cfs','tero.exe') {
             Copy-Item "$bin/$f" "$out/$f"
           }
+          # libmpv (UW_libmpv) and OpenSSL 3 + Hunspell (UW_TSLibs), the latest releases
+          $libs = "$env:RUNNER_TEMP\libs"
+          New-Item -ItemType Directory -Force -Path $libs | Out-Null
+          foreach ($u in 'UW_libmpv/releases/latest/download/libmpv2_win64.zip','UW_TSLibs/releases/latest/download/tslibs_win64.zip') {
+            $zip = "$libs\" + (Split-Path $u -Leaf)
+            curl.exe -fsSL --retry 3 -o $zip "https://github.com/URUWorks/$u"
+            if ($LastExitCode -ne 0) { exit $LastExitCode }
+            Expand-Archive -Force $zip -DestinationPath "$libs\x"
+          }
+          Get-ChildItem "$libs\x" -Recurse -Filter *.dll | Copy-Item -Destination $out
+          foreach ($f in 'libmpv-2.dll','libssl-3-x64.dll','libcrypto-3-x64.dll','libhunspellx64.dll') {
+            if (-not (Test-Path "$out/$f")) { Write-Error "$f missing" }
+          }
+          Get-ChildItem $out -Filter *.dll | Format-Table Name, Length
           Compress-Archive -Path $out -DestinationPath "dist/${{ steps.ver.outputs.name }}.zip"
 
+          # Windows 7/8.1: the same tero.exe and OpenSSL 3 (checked for no Win8+ imports),
+          # with the last libmpv that runs there (UW_libmpv, release "frozen")
+          $legacy = "dist/${{ steps.ver.outputs.name }}-legacy"
+          Copy-Item -Recurse $out $legacy
+          $zip = "$libs\libmpv2_win64_legacy.zip"
+          curl.exe -fsSL --retry 3 -o $zip "https://github.com/URUWorks/UW_libmpv/releases/download/frozen/libmpv2_win64_legacy.zip"
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
+          Expand-Archive -Force $zip -DestinationPath "$libs\legacy"
+          Get-ChildItem "$libs\legacy" -Recurse -Filter *.dll | Copy-Item -Destination $legacy -Force
+          Get-ChildItem $legacy -Filter *.dll | Format-Table Name, Length
+          Compress-Archive -Path $legacy -DestinationPath "$legacy.zip"
+
       - name: Upload artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.name }}
           path: |
             dist/*.zip
             dist/*.tar.gz
           retention-days: 7
+
+  # Windows ARM64, experimental: FPC 3.2.4 has no aarch64-win64 target, so this
+  # builds an FPC main cross compiler and Lazarus main on x64. A failure here
+  # doesn't stop the other builds or the release.
+  build-winarm64:
+    needs: check
+    if: needs.check.outputs.changed == 'true'
+    runs-on: windows-latest
+    timeout-minutes: 120
+    continue-on-error: true
+    env:
+      NAME: ${{ needs.check.outputs.base }}-winarm64
+      FPCMAIN: C:\fpcmain
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Configure GitHub HTTPS
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
+
+      - name: Update submodules
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --remote --recursive use/UW_BlurayPGSParser
+          git submodule update --init --remote --recursive use/UW_MPVPlayer
+
+      # Lazarus 5 for its FPC 3.2.4 (the starting compiler) and make
+      - name: Install Lazarus 5 (starting compiler)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          $exe = "$env:RUNNER_TEMP\lazarus-setup.exe"
+          curl.exe -fsSL --retry 3 -o $exe $env:LAZARUS_WIN64_URL
+          Start-Process -FilePath $exe -ArgumentList '/SP-','/VERYSILENT','/NORESTART','/SUPPRESSMSGBOXES' -Wait -NoNewWindow
+          $fpcbin = (Get-ChildItem 'C:\Lazarus\fpc\*\bin\x86_64-win64' -Directory | Select-Object -First 1).FullName
+          "FPCBIN=$fpcbin" >> $env:GITHUB_ENV
+
+      - name: Build FPC main (aarch64-win64 cross compiler)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          $env:PATH = "$env:FPCBIN;$env:PATH"
+          $src = "$env:RUNNER_TEMP\fpcsrc"
+          git clone -q --depth 1 https://gitlab.com/freepascal.org/fpc/source.git $src
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
+          git -C $src log -1 --format='FPC main %h %cs'
+          Set-Location $src
+          make clean all install OS_TARGET=win64 CPU_TARGET=x86_64 PP="$env:FPCBIN\ppcx64.exe" INSTALL_PREFIX=$env:FPCMAIN
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
+          $native = "$env:FPCMAIN\bin\x86_64-win64\ppcx64.exe"
+          make clean crossall crossinstall OS_TARGET=win64 CPU_TARGET=aarch64 PP=$native INSTALL_PREFIX=$env:FPCMAIN
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
+          $bin = "$env:FPCMAIN\bin\x86_64-win64"
+          @(
+            '-Fu' + $env:FPCMAIN + '\units\$fpctarget',
+            '-Fu' + $env:FPCMAIN + '\units\$fpctarget\*',
+            '-Fu' + $env:FPCMAIN + '\units\$fpctarget\rtl'
+          ) | Set-Content "$bin\fpc.cfg"
+          & "$bin\fpc.exe" -iV
+          & "$bin\ppcrossa64.exe" -iTP -iTO
+
+      - name: Build Lazarus main (lazbuild)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          $env:PATH = "$env:FPCMAIN\bin\x86_64-win64;$env:FPCBIN;$env:PATH"
+          $laz = "$env:RUNNER_TEMP\lazmain"
+          git clone -q --depth 1 https://gitlab.com/freepascal.org/lazarus/lazarus.git $laz
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
+          git -C $laz log -1 --format='Lazarus main %h %cs'
+          make -C $laz lazbuild FPC="$env:FPCMAIN\bin\x86_64-win64\fpc.exe"
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
+          "LAZMAIN=$laz" >> $env:GITHUB_ENV
+          & "$laz\lazbuild.exe" --version
+
+      - name: Install packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          lb() { "$LAZMAIN/lazbuild.exe" --pcp="$RUNNER_TEMP/pcp" --lazarusdir="$LAZMAIN" \
+            --compiler="$FPCMAIN/bin/x86_64-win64/fpc.exe" "$@"; }
+          opm="$RUNNER_TEMP/opm"
+          for p in BGRABitmap FPSpreadsheet ATFlatControls EncConv ATSynEdit; do
+            curl -fsSL --retry 3 -o "$RUNNER_TEMP/$p.zip" "https://packages.lazarus-ide.org/$p.zip"
+            mkdir -p "$opm/$p"
+            unzip -q -o "$RUNNER_TEMP/$p.zip" -d "$opm/$p" -x "*/test_files/*"
+          done
+          find "$opm" use TeroSubtitler/common TeroSubtitler/subtitleapi TeroSubtitler/controls \
+            -name '*.lpk' | grep -Ev '(cocoa|gtk|qt|x11|_template)' | while read -r lpk; do
+              lb --add-package-link "$lpk"
+          done
+
+      - name: Build
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$LAZMAIN/lazbuild.exe" --pcp="$RUNNER_TEMP/pcp" --lazarusdir="$LAZMAIN" \
+            --compiler="$FPCMAIN/bin/x86_64-win64/fpc.exe" \
+            --build-all --recursive --build-mode=Release --cpu=aarch64 --os=win64 --widgetset=win32 \
+            --no-write-project TeroSubtitler/src/tero.lpi
+
+      - name: Package
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          $bin = 'TeroSubtitler/bin'
+          # PE machine type of tero.exe must be ARM64 (0xAA64)
+          $b = [IO.File]::ReadAllBytes("$bin/tero.exe")
+          $pe = [BitConverter]::ToInt32($b, 0x3C)
+          $m = [BitConverter]::ToUInt16($b, $pe + 4)
+          "tero.exe machine: 0x{0:X4}" -f $m
+          if ($m -ne 0xAA64) { Write-Error 'tero.exe is not ARM64' }
+          $out = "dist/$env:NAME"
+          New-Item -ItemType Directory -Force -Path $out | Out-Null
+          foreach ($d in 'CustomFormat','Dictionaries','Icons','Languages','OCR','Shortcuts') {
+            Copy-Item -Recurse "$bin/$d" "$out/$d"
+          }
+          foreach ($f in 'tero.cfs','tero.exe') { Copy-Item "$bin/$f" "$out/$f" }
+          $libs = "$env:RUNNER_TEMP\libs"
+          New-Item -ItemType Directory -Force -Path $libs | Out-Null
+          foreach ($u in 'UW_libmpv/releases/latest/download/libmpv2_winarm64.zip','UW_TSLibs/releases/latest/download/tslibs_winarm64.zip') {
+            $zip = "$libs\" + (Split-Path $u -Leaf)
+            curl.exe -fsSL --retry 3 -o $zip "https://github.com/URUWorks/$u"
+            if ($LastExitCode -ne 0) { exit $LastExitCode }
+            Expand-Archive -Force $zip -DestinationPath "$libs\x"
+          }
+          Get-ChildItem "$libs\x" -Recurse -Filter *.dll | Copy-Item -Destination $out
+          foreach ($f in 'libmpv-2.dll','libssl-3-arm64.dll','libcrypto-3-arm64.dll','libhunspellx64.dll') {
+            if (-not (Test-Path "$out/$f")) { Write-Error "$f missing" }
+          }
+          Get-ChildItem $out -Filter *.dll | Format-Table Name, Length
+          Compress-Archive -Path $out -DestinationPath "dist/$env:NAME.zip"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: winarm64
+          path: dist/*.zip
+          retention-days: 7
+
+  # Tero for ARM64 starts on a real ARM64 Windows (it should stay open; closes it after 20 s)
+  test-winarm64:
+    needs: build-winarm64
+    runs-on: windows-11-arm
+    continue-on-error: true
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: winarm64
+      - name: Start tero.exe
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          Expand-Archive (Get-ChildItem *.zip | Select-Object -First 1).FullName -DestinationPath t
+          $exe = (Get-ChildItem t -Recurse -Filter tero.exe | Select-Object -First 1).FullName
+          $p = Start-Process $exe -PassThru
+          Start-Sleep 20
+          if ($p.HasExited) { Write-Error "tero.exe exited with code $($p.ExitCode)" }
+          "tero.exe running, pid $($p.Id)"
+          Stop-Process $p
 
   build-linux:
     needs: check
@@ -240,7 +428,7 @@ jobs:
           tar -czf "dist/$NAME.tar.gz" -C dist "$NAME"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: linux-${{ matrix.widgetset }}
           path: dist/*.tar.gz
@@ -347,7 +535,7 @@ jobs:
           lipo -archs "dist/${{ matrix.bin }}"
 
       - name: Upload binary
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.bin }}
           path: dist/${{ matrix.bin }}
@@ -361,7 +549,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Download binaries
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@v4
         with:
           path: binaries
           merge-multiple: true
@@ -375,6 +563,20 @@ jobs:
           bin=TeroSubtitler/bin
           mkdir -p dist
 
+          # Universal: libmpv (UW_libmpv) and OpenSSL 3 + Hunspell (UW_TSLibs), the latest
+          # releases (arm64 from macOS 11, x86_64 from 10.15). Legacy (10.11) keeps
+          # bin/frameworks-legacy: the UW_TSLibs dylibs need 10.15.
+          fw="$RUNNER_TEMP/frameworks"
+          mkdir -p "$fw"
+          for u in UW_libmpv/releases/latest/download/libmpv_macos.zip UW_TSLibs/releases/latest/download/tslibs_macos.zip; do
+            curl -fsSL --retry 3 -o "$RUNNER_TEMP/lib.zip" "https://github.com/URUWorks/$u"
+            unzip -q -o "$RUNNER_TEMP/lib.zip" '*.dylib' -d "$fw"
+          done
+          for f in libmpv.2.dylib libssl.3.dylib libcrypto.3.dylib libhunspellx64.dylib; do
+            [[ -f "$fw/$f" ]] || { echo "$f missing"; ls "$fw"; exit 1; }
+          done
+          ls "$fw"
+
           make_app() {  # $1 = binary, $2 = frameworks folder, $3 = zip suffix
             local work="$RUNNER_TEMP/$3" app
             app="$work/Tero Subtitler.app"
@@ -386,7 +588,7 @@ jobs:
             chmod +x "$app/Contents/MacOS/tero"
             echo "$3: $(lipo -archs "$app/Contents/MacOS/tero")"
             rm -rf "$app/Contents/Frameworks"
-            ditto "$bin/$2" "$app/Contents/Frameworks"
+            ditto "$2" "$app/Contents/Frameworks"
             rm -rf "$app/Contents/Resources/Languages"
             ditto "$bin/Languages" "$app/Contents/Resources/Languages"
             # resources from bin too, the copies in the tero.app template are not kept in sync
@@ -401,22 +603,22 @@ jobs:
           }
 
           lipo -create binaries/tero-intel binaries/tero-silicon -output "$RUNNER_TEMP/tero-universal"
-          make_app "$RUNNER_TEMP/tero-universal" frameworks macos-universal
-          make_app binaries/tero-intel frameworks-legacy macos-legacy-intel
+          make_app "$RUNNER_TEMP/tero-universal" "$fw" macos-universal
+          make_app binaries/tero-intel "$bin/frameworks-legacy" macos-legacy-intel
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: macos
           path: dist/*.zip
           retention-days: 7
 
   release:
-    needs: [check, build, build-linux, package-macos]
+    needs: [check, build, build-linux, package-macos, build-winarm64]
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@v4
         with:
           path: dist
           merge-multiple: true
