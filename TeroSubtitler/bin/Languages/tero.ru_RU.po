@@ -547,7 +547,7 @@ msgid "Total errors: %d (displayed: %d)"
 msgstr "Всего ошибок: %d (отображено: %d)"
 
 #: proclocalize.lnggpulibsoptional
-msgid "Only needed with an NVIDIA card, without them Faster-Whisper uses the processor."
+msgid "These libraries are needed with an NVIDIA card; without them, Faster-Whisper uses the processor."
 msgstr ""
 
 #: proclocalize.lnghcpl
