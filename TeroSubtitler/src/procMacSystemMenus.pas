@@ -36,8 +36,8 @@ implementation
 
 // Menu items that macOS adds by itself to the app menus and that Tero doesn't
 // use: AutoFill, Writing Tools (Edit menu), Enter Full Screen, Show Tab Bar
-// and Show All Tabs (View menu). Start Dictation and Emoji & Symbols are kept,
-// they're useful to write the text (see KeepAction).
+// and Show All Tabs (View menu). Start Dictation and Emoji & Symbols too, for
+// now (KeepDictationAndEmoji brings them back).
 //
 // Dictation, Emoji & Symbols and Full Screen have their own user defaults
 // keys, tabs are disabled with NSWindow.allowsAutomaticWindowTabbing (10.12+).
@@ -51,6 +51,10 @@ implementation
 {$IFDEF DARWIN}
 uses
   Classes, Forms, CocoaAll;
+
+const
+  // Start Dictation and Emoji & Symbols in the Edit menu
+  KeepDictationAndEmoji = False;
 
 type
 
@@ -81,8 +85,11 @@ var
   d: NSMutableDictionary;
 begin
   d := NSMutableDictionary(NSMutableDictionary.dictionary);
-  //d.setObject_forKey(NSNumber.numberWithBool(True), NSSTR('NSDisabledDictationMenuItem'));
-  //d.setObject_forKey(NSNumber.numberWithBool(True), NSSTR('NSDisabledCharacterPaletteMenuItem'));
+  if not KeepDictationAndEmoji then
+  begin
+    d.setObject_forKey(NSNumber.numberWithBool(True), NSSTR('NSDisabledDictationMenuItem'));
+    d.setObject_forKey(NSNumber.numberWithBool(True), NSSTR('NSDisabledCharacterPaletteMenuItem'));
+  end;
   d.setObject_forKey(NSNumber.numberWithBool(False), NSSTR('NSFullScreenMenuItemEverywhere'));
   // AutoFill heuristics in the text fields (macOS 26, also slow typing/scrolling)
   d.setObject_forKey(NSNumber.numberWithBool(False), NSSTR('NSAutoFillHeuristicControllerEnabled'));
@@ -98,8 +105,8 @@ end;
 function KeepAction(const AItem: NSMenuItem): Boolean;
 begin
   // system items we keep: Emoji & Symbols and Start Dictation
-  Result := (AItem.action = objcselector('orderFrontCharacterPalette:')) or
-    (AItem.action = objcselector('startDictation:'));
+  Result := KeepDictationAndEmoji and ((AItem.action = objcselector('orderFrontCharacterPalette:')) or
+    (AItem.action = objcselector('startDictation:')));
 end;
 
 // -----------------------------------------------------------------------------
