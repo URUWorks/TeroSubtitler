@@ -223,6 +223,22 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the gap and overlap errors depend on the neighbours too: when an entry is
+// inserted, deleted or its times change, the previous and next ones are checked
+// again (before, only the changed entry was, so the gap of the previous one
+// didn't turn red until that one was changed)
+procedure CheckTimesErrorsAround(const AFrom, ATo: Integer);
+var
+  i: Integer;
+begin
+  if not AppOptions.AutoCheckErrors then Exit;
+  for i := AFrom to ATo do
+    if Subtitles.ValidIndex(i) then
+      Subtitles.ItemPointer[i]^.ErrorType := CheckErrors(Subtitles, i, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes], NIL, ClearTimesErrors(Subtitles.ItemPointer[i]^.ErrorType));
+end;
+
+// -----------------------------------------------------------------------------
+
 function InsertSubtitle(const Index: Integer; const Item: TUWSubtitleItem; const AutoIncrementUndo: Boolean = True; const AUpdate: Boolean = True; const ExtraInfo: Pointer = NIL): Integer;
 begin
   // ExtraInfo: NIL or a copy (Subtitles.CopyExtraInfo), the list owns it
@@ -238,7 +254,10 @@ begin
   SubtitleChanged(True, True);
 
   if AUpdate then
+  begin
+    CheckTimesErrorsAround(Result-1, Result+1);
     UpdateValues(True);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -276,7 +295,10 @@ begin
   SubtitleChanged(True, True);
 
   if AUpdate then
+  begin
+    CheckTimesErrorsAround(Index-1, Index);
     UpdateValues(True);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -657,7 +679,7 @@ begin
 
   if AUpdate then
   begin
-    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes], NIL, ClearTimesErrors(Subtitles.ItemPointer[Index]^.ErrorType));
+    CheckTimesErrorsAround(Index-1, Index+1);
     UpdateCPSAndTexts(Index);
     if frmMain.VST.SelectedCount = 1 then frmMain.VST.Invalidate;
   end;
@@ -689,7 +711,7 @@ begin
 
   if AUpdate then
   begin
-    if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTimes], NIL, ClearTimesErrors(Subtitles.ItemPointer[Index]^.ErrorType));
+    CheckTimesErrorsAround(Index-1, Index+1);
     UpdateCPSAndTexts(Index);
     if frmMain.VST.SelectedCount = 1 then frmMain.VST.Invalidate;
   end;
@@ -776,6 +798,8 @@ begin
   if AUpdate then
   begin
     if AppOptions.AutoCheckErrors then Subtitles.ItemPointer[Index]^.ErrorType := CheckErrors(Subtitles, Index, smText, AppOptions.CommonErrors - [etOCR], AppOptions.Conventions, [cmTexts, cmTimes]);
+    CheckTimesErrorsAround(Index-1, Index-1);
+    CheckTimesErrorsAround(Index+1, Index+1);
     UpdateCPSAndTexts(Index);
     frmMain.VST.Invalidate;
   end;
