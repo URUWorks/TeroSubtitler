@@ -2609,6 +2609,17 @@ msgstr "Maks. karakter"
 msgid "Max rows"
 msgstr "Maks. satır"
 
+#: tfrmformatproperties.lblittlanguage.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lblittlanguage.caption"
+msgid "Language"
+msgstr "Dil"
+
+#: tfrmformatproperties.lblittlanguagehint.caption
+msgctxt "tfrmformatproperties.lblittlanguagehint.caption"
+msgid "xml:lang"
+msgstr ""
+
 #: tfrmformatproperties.lblttlanguage.caption
 #, fuzzy
 msgctxt "tfrmformatproperties.lblttlanguage.caption"
@@ -2616,6 +2627,7 @@ msgid "Language"
 msgstr "Dil"
 
 #: tfrmformatproperties.lblttlanguagehint.caption
+msgctxt "tfrmformatproperties.lblttlanguagehint.caption"
 msgid "xml:lang"
 msgstr ""
 

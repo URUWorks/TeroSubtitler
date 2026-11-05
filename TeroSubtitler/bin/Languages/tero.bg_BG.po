@@ -2612,6 +2612,17 @@ msgstr "Знаци до"
 msgid "Max rows"
 msgstr "Редове до"
 
+#: tfrmformatproperties.lblittlanguage.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lblittlanguage.caption"
+msgid "Language"
+msgstr "Език"
+
+#: tfrmformatproperties.lblittlanguagehint.caption
+msgctxt "tfrmformatproperties.lblittlanguagehint.caption"
+msgid "xml:lang"
+msgstr ""
+
 #: tfrmformatproperties.lblttlanguage.caption
 #, fuzzy
 msgctxt "tfrmformatproperties.lblttlanguage.caption"
@@ -2619,6 +2630,7 @@ msgid "Language"
 msgstr "Език"
 
 #: tfrmformatproperties.lblttlanguagehint.caption
+msgctxt "tfrmformatproperties.lblttlanguagehint.caption"
 msgid "xml:lang"
 msgstr ""
 

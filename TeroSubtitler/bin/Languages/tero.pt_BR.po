@@ -2625,6 +2625,17 @@ msgstr "Máximo de caracteres"
 msgid "Max rows"
 msgstr "Máximo de linhas"
 
+#: tfrmformatproperties.lblittlanguage.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lblittlanguage.caption"
+msgid "Language"
+msgstr "Idioma"
+
+#: tfrmformatproperties.lblittlanguagehint.caption
+msgctxt "tfrmformatproperties.lblittlanguagehint.caption"
+msgid "xml:lang"
+msgstr ""
+
 #: tfrmformatproperties.lblttlanguage.caption
 #, fuzzy
 msgctxt "tfrmformatproperties.lblttlanguage.caption"
@@ -2632,6 +2643,7 @@ msgid "Language"
 msgstr "Idioma"
 
 #: tfrmformatproperties.lblttlanguagehint.caption
+msgctxt "tfrmformatproperties.lblttlanguagehint.caption"
 msgid "xml:lang"
 msgstr ""
 

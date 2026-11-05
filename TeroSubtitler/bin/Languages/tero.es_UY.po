@@ -2579,12 +2579,23 @@ msgstr "Caracteres máximos"
 msgid "Max rows"
 msgstr "Filas máximas"
 
+#: tfrmformatproperties.lblittlanguage.caption
+msgctxt "tfrmformatproperties.lblittlanguage.caption"
+msgid "Language"
+msgstr "Idioma"
+
+#: tfrmformatproperties.lblittlanguagehint.caption
+msgctxt "tfrmformatproperties.lblittlanguagehint.caption"
+msgid "xml:lang"
+msgstr "xml:lang"
+
 #: tfrmformatproperties.lblttlanguage.caption
 msgctxt "tfrmformatproperties.lblttlanguage.caption"
 msgid "Language"
 msgstr "Idioma"
 
 #: tfrmformatproperties.lblttlanguagehint.caption
+msgctxt "tfrmformatproperties.lblttlanguagehint.caption"
 msgid "xml:lang"
 msgstr "xml:lang"
 

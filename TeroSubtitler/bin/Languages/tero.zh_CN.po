@@ -2585,6 +2585,17 @@ msgstr "最大字符数"
 msgid "Max rows"
 msgstr "最大行数"
 
+#: tfrmformatproperties.lblittlanguage.caption
+#, fuzzy
+msgctxt "tfrmformatproperties.lblittlanguage.caption"
+msgid "Language"
+msgstr "语言"
+
+#: tfrmformatproperties.lblittlanguagehint.caption
+msgctxt "tfrmformatproperties.lblittlanguagehint.caption"
+msgid "xml:lang"
+msgstr ""
+
 #: tfrmformatproperties.lblttlanguage.caption
 #, fuzzy
 msgctxt "tfrmformatproperties.lblttlanguage.caption"
@@ -2592,6 +2603,7 @@ msgid "Language"
 msgstr "语言"
 
 #: tfrmformatproperties.lblttlanguagehint.caption
+msgctxt "tfrmformatproperties.lblttlanguagehint.caption"
 msgid "xml:lang"
 msgstr ""
 
