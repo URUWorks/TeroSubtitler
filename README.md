@@ -41,7 +41,7 @@ Advanced audio/video manipulation tool.
 
 For opening videos via URL.
 
-### [whisper.cpp](https://github.com/ggerganov/whisper.cpp) / [Faster-Whisper](https://github.com/Purfview/whisper-standalone-win)
+### [whisper.cpp](https://github.com/ggerganov/whisper.cpp) / [Faster-Whisper](https://github.com/URUWorks/UW_FasterWhisper#uw_fasterwhisper)
 
 For the automatic transcription of audio to subtitles.
 
