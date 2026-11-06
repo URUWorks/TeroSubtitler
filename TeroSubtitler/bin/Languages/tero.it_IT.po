@@ -2890,7 +2890,7 @@ msgstr "Importa testo semplice"
 
 #: tfrmimportplaintext.chkreplace.caption
 msgid "Replace the current entries"
-msgstr "Sostituisci elementi attuali"
+msgstr "Sostituisci voci attuali"
 
 #: tfrmimportplaintext.chksyncwithaudio.caption
 msgid "Synchronize with the audio after importing"
