@@ -2019,8 +2019,20 @@ end;
 // -----------------------------------------------------------------------------
 
 function DictionariesFolder: String;
+{$IFDEF DARWIN}
+const
+  // dictionaries installed by the macOS .pkg (optional, outside the signed bundle)
+  SharedDictionaries = '/Library/Application Support/Tero Subtitler/Dictionaries/';
+var
+  SR: TSearchRec;
+{$ENDIF}
 begin
   {$IFDEF DARWIN}
+  if FindFirst(SharedDictionaries + '*.dic', faAnyFile, SR) = 0 then
+  begin
+    FindClose(SR);
+    Exit(SharedDictionaries);
+  end;
   Result := GetCustomFolderPath('Resources/Dictionaries/');
   {$ELSE}
   Result := GetCustomFolderPath('Dictionaries');
