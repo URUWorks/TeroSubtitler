@@ -560,7 +560,7 @@ jobs:
     needs: check
     if: needs.check.outputs.changed == 'true'
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 60
+    timeout-minutes: 120  # the full build (LCL + packages) takes ~45 min here
     strategy:
       fail-fast: false
       matrix:
