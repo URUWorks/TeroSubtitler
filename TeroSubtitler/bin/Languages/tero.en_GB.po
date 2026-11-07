@@ -702,6 +702,10 @@ msgstr "no name"
 msgid "You're using the latest version."
 msgstr "You're using the latest version."
 
+#: proclocalize.lngnotlocated
+msgid "Not located."
+msgstr "Not located."
+
 #: proclocalize.lngoldtime
 msgid "Old time"
 msgstr "Old time"
@@ -863,6 +867,11 @@ msgstr "Editor"
 #: proclocalize.lngscedl
 msgid "Edit Decision Lists"
 msgstr "Edit Decision Lists"
+
+#: proclocalize.lngscenedetectnoresults
+#, object-pascal-format
+msgid "“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video."
+msgstr "“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video."
 
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"

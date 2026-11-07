@@ -706,6 +706,10 @@ msgstr "без названия"
 msgid "You're using the latest version."
 msgstr "У вас уже последняя версия."
 
+#: proclocalize.lngnotlocated
+msgid "Not located."
+msgstr ""
+
 #: proclocalize.lngoldtime
 msgid "Old time"
 msgstr "Прежнее время"
@@ -873,6 +877,11 @@ msgstr "Редактор"
 #: proclocalize.lngscedl
 msgid "Edit Decision Lists"
 msgstr "Решение редактировать список"
+
+#: proclocalize.lngscenedetectnoresults
+#, object-pascal-format
+msgid "“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video."
+msgstr ""
 
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"
