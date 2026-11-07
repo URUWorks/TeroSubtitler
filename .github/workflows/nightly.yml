@@ -21,6 +21,8 @@ env:
   LAZARUS_SOURCE_TAG: lazarus_5_0_RC1
   # FPC main only bootstraps from FPC 3.2.2 (Windows ARM64 cross compiler)
   FPC_BOOTSTRAP_WIN64_URL: https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2064%20bits/Lazarus%204.8/lazarus-4.8-fpc-3.2.2-win64.exe/download
+  # Inno Setup for the Windows installer (6.5 or later: ArchiveExtraction)
+  INNOSETUP_URL: https://github.com/jrsoftware/issrc/releases/download/is-6_5_4/innosetup-6.5.4.exe
   FPC_MACOS_URL: https://sourceforge.net/projects/lazarus/files/Lazarus%20macOS%20aarch64/Lazarus%205.0RC1/fpc-3.2.4rc2.intelarm64-macosx.dmg/download
 
 jobs:
@@ -208,6 +210,13 @@ jobs:
           make clean all install OS_TARGET=win64 CPU_TARGET=x86_64 PP="$env:FPCBIN\ppcx64.exe" INSTALL_PREFIX=$env:FPCMAIN
           if ($LastExitCode -ne 0) { exit $LastExitCode }
           $native = "$env:FPCMAIN\bin\x86_64-win64\ppcx64.exe"
+          # aarch64-win64 assembles with clang (LLVM is preinstalled on the runner);
+          # the prefixed name also makes clang default to that target
+          $clang = (Get-Command clang.exe -ErrorAction SilentlyContinue).Source
+          if (-not $clang) { $clang = 'C:\Program Files\LLVM\bin\clang.exe' }
+          Copy-Item $clang "$env:FPCMAIN\bin\x86_64-win64\aarch64-win64-clang.exe"
+          $env:PATH = "$env:FPCMAIN\bin\x86_64-win64;$env:PATH"
+          & aarch64-win64-clang.exe --version
           make clean crossall crossinstall OS_TARGET=win64 CPU_TARGET=aarch64 PP=$native INSTALL_PREFIX=$env:FPCMAIN
           if ($LastExitCode -ne 0) { exit $LastExitCode }
           $bin = "$env:FPCMAIN\bin\x86_64-win64"
@@ -638,11 +647,103 @@ jobs:
           make_app "$RUNNER_TEMP/tero-universal" "$fw" macos-universal
           make_app binaries/tero-intel "$bin/frameworks-legacy" macos-legacy-intel
 
+          # Installer (.pkg): both bundles inside, it installs the universal one from
+          # macOS 10.15 and the Intel legacy one on 10.11-10.14, into /Applications.
+          # Dictionaries are optional, one choice each, in /Library/Application Support
+          # (Tero looks there first), so the signed bundles go without them.
+          pkgs="$RUNNER_TEMP/pkgs"
+          mkdir -p "$pkgs"
+          version="${{ needs.check.outputs.version }}"
+          for v in universal legacy-intel; do
+            root="$RUNNER_TEMP/pkgroot-$v"
+            rm -rf "$root"; mkdir -p "$root"
+            ditto "$RUNNER_TEMP/macos-$v/Tero Subtitler.app" "$root/Tero Subtitler.app"
+            rm -rf "$root/Tero Subtitler.app/Contents/Resources/Dictionaries"
+            codesign --force --deep --sign - "$root/Tero Subtitler.app"
+            pkgbuild --analyze --root "$root" "$pkgs/$v.plist"
+            # always /Applications, not wherever another copy of the bundle is
+            plutil -replace 0.BundleIsRelocatable -bool NO "$pkgs/$v.plist"
+            pkgbuild --root "$root" --component-plist "$pkgs/$v.plist" \
+              --identifier "com.uruworks.tero.$v" --version "$version" \
+              --install-location /Applications "$pkgs/$v.pkg"
+          done
+
+          dics_outline=""; dics_choices=""; dics_refs=""
+          for f in "$bin"/Dictionaries/*.dic; do
+            name="$(basename "$f" .dic)"
+            id="dic_$(echo "$name" | tr -c 'A-Za-z0-9_\n' '_')"
+            root="$RUNNER_TEMP/dicroot/$id"
+            mkdir -p "$root"
+            cp "$bin/Dictionaries/$name.aff" "$bin/Dictionaries/$name.dic" "$root/"
+            cp "$bin/Dictionaries/${name%% *}"*README*.txt "$root/" 2>/dev/null || true
+            pkgbuild --root "$root" --identifier "com.uruworks.tero.$id" --version "$version" \
+              --install-location "/Library/Application Support/Tero Subtitler/Dictionaries" "$pkgs/$id.pkg"
+            dics_outline+="<line choice=\"$id\"/>"
+            dics_choices+="<choice id=\"$id\" title=\"$name\" selected=\"isLanguage('$name')\"><pkg-ref id=\"com.uruworks.tero.$id\"/></choice>"
+            dics_refs+="<pkg-ref id=\"com.uruworks.tero.$id\">$id.pkg</pkg-ref>"
+          done
+
+          cat > "$pkgs/distribution.xml" <<EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <installer-gui-script minSpecVersion="2">
+            <title>Tero Subtitler</title>
+            <options customize="always" require-scripts="false" hostArchitectures="x86_64,arm64"/>
+            <domains enable_localSystem="true"/>
+            <volume-check>
+              <allowed-os-versions><os-version min="10.11"/></allowed-os-versions>
+            </volume-check>
+            <script><![CDATA[
+              function isModern() { return system.compareVersions(system.version.ProductVersion, '10.15') >= 0; }
+              // the dictionary of the system language (from LANG), en_US otherwise
+              function isLanguage(name) {
+                var l = (system.env.LANG || '').split('.')[0];
+                if (l == 'pt_PT') return name.indexOf('pt_PT (pos-AO') == 0;
+                if (l == 'en_GB') return name == 'en_GB';
+                var def = { bg: 'bg_BG', en: 'en_US', es: 'es_UY', it: 'it_IT', ko: 'ko_KR', pt: 'pt_BR', ru: 'ru_RU' };
+                return name == (def[l.split('_')[0]] || 'en_US');
+              }
+            ]]></script>
+            <choices-outline>
+              <line choice="universal"/>
+              <line choice="legacy"/>
+              <line choice="dictionaries">$dics_outline</line>
+            </choices-outline>
+            <choice id="universal" visible="false" selected="isModern()" enabled="isModern()">
+              <pkg-ref id="com.uruworks.tero.universal"/>
+            </choice>
+            <choice id="legacy" visible="false" selected="!isModern()" enabled="!isModern()">
+              <pkg-ref id="com.uruworks.tero.legacy-intel"/>
+            </choice>
+            <choice id="dictionaries" title="Spell checking dictionaries"/>
+            $dics_choices
+            <pkg-ref id="com.uruworks.tero.universal">universal.pkg</pkg-ref>
+            <pkg-ref id="com.uruworks.tero.legacy-intel">legacy-intel.pkg</pkg-ref>
+            $dics_refs
+          </installer-gui-script>
+          EOF
+          xmllint --noout "$pkgs/distribution.xml"
+          productbuild --distribution "$pkgs/distribution.xml" --package-path "$pkgs" "dist/$base-macos.pkg"
+
+          # the .pkg must install the universal bundle here (macOS 14 or later), and en_US
+          sudo installer -pkg "dist/$base-macos.pkg" -target /
+          app="/Applications/Tero Subtitler.app"
+          archs="$(lipo -archs "$app/Contents/MacOS/tero")"
+          echo "installed: $archs"
+          [[ "$archs" == *arm64* && "$archs" == *x86_64* ]] || { echo "the .pkg did not install the universal bundle"; exit 1; }
+          for f in libmpv.2.dylib libssl.3.dylib libcrypto.3.dylib libhunspellx64.dylib; do
+            [[ -f "$app/Contents/Frameworks/$f" ]] || { echo "$f missing in the installed bundle"; exit 1; }
+          done
+          ls -l "/Library/Application Support/Tero Subtitler/Dictionaries"
+          [[ -f "/Library/Application Support/Tero Subtitler/Dictionaries/en_US.dic" ]] || { echo "en_US dictionary missing"; exit 1; }
+          codesign --verify --deep "$app"
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos
-          path: dist/*.zip
+          path: |
+            dist/*.zip
+            dist/*.pkg
           retention-days: 7
 
   release:
@@ -669,7 +770,7 @@ jobs:
           EOF
           echo -e "\nVersion ${{ needs.check.outputs.version }}, built from commit [${GITHUB_SHA::7}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})." >> notes.md
           gh release delete nightly --cleanup-tag --yes || true
-          gh release create nightly dist/*.zip dist/*.tar.gz \
+          gh release create nightly dist/*.zip dist/*.tar.gz dist/*.pkg \
             --prerelease \
             --target "${{ github.sha }}" \
             --title "Nightly build ${{ needs.check.outputs.version }} ($(date -u +%Y-%m-%d), ${GITHUB_SHA::7})" \
@@ -691,3 +792,134 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: gh release upload nightly dist/*.zip --clobber
+
+  # Windows web installer (TeroSubtitler/make_installer.ps1): tero.exe and its data inside;
+  # libmpv, OpenSSL 3, Hunspell and the chosen dictionaries are downloaded when installing,
+  # for the Windows it runs on (x64, ARM64 or 7/8.1), each checked by its SHA-256
+  installer:
+    needs: [check, build, test-winarm64]
+    # with or without ARM64 (experimental)
+    if: always() && needs.build.result == 'success'
+    runs-on: windows-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BASE: ${{ needs.check.outputs.base }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Download Windows build
+        uses: actions/download-artifact@v4
+        with:
+          name: win64
+          path: artifacts/win64
+
+      - name: Download Windows ARM64 build
+        if: needs.test-winarm64.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          name: winarm64
+          path: artifacts/winarm64
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          $exe = "$env:RUNNER_TEMP\innosetup.exe"
+          curl.exe -fsSL --retry 3 -o $exe $env:INNOSETUP_URL
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
+          Start-Process -FilePath $exe -ArgumentList '/SP-','/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART',"/DIR=$env:RUNNER_TEMP\InnoSetup" -Wait -NoNewWindow
+          "$env:RUNNER_TEMP\InnoSetup" >> $env:GITHUB_PATH
+
+      - name: Build installer
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          Expand-Archive "artifacts/win64/$env:BASE-win64.zip" -DestinationPath x64
+          $opts = @{ Bin = "x64/$env:BASE-win64" }
+          if (Test-Path artifacts/winarm64) {
+            Expand-Archive "artifacts/winarm64/$env:BASE-winarm64.zip" -DestinationPath arm64
+            $opts.Arm64Bin = "arm64/$env:BASE-winarm64"
+          }
+          ./TeroSubtitler/make_installer.ps1 @opts -Web `
+            -DicBaseUrl "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/TeroSubtitler/bin/Dictionaries/" `
+            -AppVersion "${{ needs.check.outputs.version }} nightly" `
+            -OutputName "$env:BASE-win-setup" -OutputDir dist
+
+      # silent install on Windows x64: downloads, checks and installs everything
+      - name: Test installer
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          $dir = "$env:RUNNER_TEMP\Tero"
+          $log = "$env:RUNNER_TEMP\setup.log"
+          $p = Start-Process (Get-ChildItem dist/*.exe).FullName -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART',"/DIR=$dir","/LOG=$log" -Wait -PassThru
+          Get-Content $log -Tail 30
+          if ($p.ExitCode -ne 0) { Write-Error "setup exited with code $($p.ExitCode)" }
+          foreach ($f in 'tero.exe','libmpv-2.dll','libssl-3-x64.dll','libcrypto-3-x64.dll','libhunspellx64.dll','Dictionaries\en_US.dic','Dictionaries\en_US.aff','Languages\tero.es_UY.po') {
+            if (-not (Test-Path "$dir\$f")) { Write-Error "$f missing" }
+          }
+          $t = Start-Process "$dir\tero.exe" -PassThru
+          Start-Sleep 20
+          if ($t.HasExited) { Write-Error "tero.exe exited with code $($t.ExitCode)" }
+          Stop-Process $t
+          Get-ChildItem $dir | Format-Table Name, Length
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: installer
+          path: dist/*.exe
+          retention-days: 7
+
+  # the same installer on a real ARM64 Windows: it must pick the ARM64 build
+  test-installer-winarm64:
+    needs: [installer, test-winarm64]
+    if: always() && needs.installer.result == 'success' && needs.test-winarm64.result == 'success'
+    runs-on: windows-11-arm
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: installer
+
+      - name: Install and start
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          $dir = "$env:RUNNER_TEMP\Tero"
+          $log = "$env:RUNNER_TEMP\setup.log"
+          $p = Start-Process (Get-ChildItem *.exe).FullName -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART',"/DIR=$dir","/LOG=$log" -Wait -PassThru
+          Get-Content $log -Tail 30
+          if ($p.ExitCode -ne 0) { Write-Error "setup exited with code $($p.ExitCode)" }
+          foreach ($f in 'libmpv-2.dll','libssl-3-arm64.dll','libcrypto-3-arm64.dll','libhunspellx64.dll','Dictionaries\en_US.dic') {
+            if (-not (Test-Path "$dir\$f")) { Write-Error "$f missing" }
+          }
+          # PE machine type of the installed tero.exe must be ARM64 (0xAA64)
+          $b = [IO.File]::ReadAllBytes("$dir\tero.exe")
+          $pe = [BitConverter]::ToInt32($b, 0x3C)
+          if ([BitConverter]::ToUInt16($b, $pe + 4) -ne 0xAA64) { Write-Error 'the installed tero.exe is not ARM64' }
+          $t = Start-Process "$dir\tero.exe" -PassThru
+          Start-Sleep 20
+          if ($t.HasExited) { Write-Error "tero.exe exited with code $($t.ExitCode)" }
+          Stop-Process $t
+
+  # the installer, added to the nightly (not if it failed on ARM64)
+  release-installer:
+    needs: [release, installer, test-installer-winarm64]
+    if: >-
+      always() && github.ref == 'refs/heads/main' &&
+      needs.release.result == 'success' && needs.installer.result == 'success' &&
+      needs.test-installer-winarm64.result != 'failure'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: installer
+          path: dist
+
+      - name: Add to the nightly
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release upload nightly dist/*.exe --clobber
