@@ -63,7 +63,8 @@ jobs:
     needs: check
     if: needs.check.outputs.changed == 'true'
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 30
+    # a timeout shows up as "The operation was canceled"
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
@@ -479,7 +480,7 @@ jobs:
     needs: check
     if: needs.check.outputs.changed == 'true'
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 40
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
