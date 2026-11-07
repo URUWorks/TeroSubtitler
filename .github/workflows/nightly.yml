@@ -98,7 +98,7 @@ jobs:
         run: |
           $ErrorActionPreference = 'stop'
           $exe = "$env:RUNNER_TEMP\lazarus-setup.exe"
-          curl.exe -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o $exe $env:LAZARUS_WIN64_URL
+          curl.exe -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o $exe $env:LAZARUS_WIN64_URL
           if ($LastExitCode -ne 0) { exit $LastExitCode }
           Start-Process -FilePath $exe -ArgumentList '/SP-','/VERYSILENT','/NORESTART','/SUPPRESSMSGBOXES' -Wait -NoNewWindow
           $fpcbin = (Get-ChildItem 'C:\Lazarus\fpc\*\bin\x86_64-win64' -Directory | Select-Object -First 1).FullName
@@ -130,7 +130,7 @@ jobs:
           New-Item -ItemType Directory -Force -Path $libs | Out-Null
           foreach ($u in 'UW_libmpv/releases/latest/download/libmpv2_win64.zip','UW_TSLibs/releases/latest/download/tslibs_win64.zip') {
             $zip = "$libs\" + (Split-Path $u -Leaf)
-            curl.exe -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o $zip "https://github.com/URUWorks/$u"
+            curl.exe -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o $zip "https://github.com/URUWorks/$u"
             if ($LastExitCode -ne 0) { exit $LastExitCode }
             Expand-Archive -Force $zip -DestinationPath "$libs\x"
           }
@@ -146,7 +146,7 @@ jobs:
           $legacy = "dist/${{ steps.ver.outputs.name }}-legacy"
           Copy-Item -Recurse $out $legacy
           $zip = "$libs\libmpv2_win64_legacy.zip"
-          curl.exe -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o $zip "https://github.com/URUWorks/UW_libmpv/releases/download/frozen/libmpv2_win64_legacy.zip"
+          curl.exe -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o $zip "https://github.com/URUWorks/UW_libmpv/releases/download/frozen/libmpv2_win64_legacy.zip"
           if ($LastExitCode -ne 0) { exit $LastExitCode }
           Expand-Archive -Force $zip -DestinationPath "$libs\legacy"
           Get-ChildItem "$libs\legacy" -Recurse -Filter *.dll | Copy-Item -Destination $legacy -Force
@@ -194,7 +194,7 @@ jobs:
         run: |
           $ErrorActionPreference = 'stop'
           $exe = "$env:RUNNER_TEMP\lazarus-setup.exe"
-          curl.exe -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o $exe $env:FPC_BOOTSTRAP_WIN64_URL
+          curl.exe -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o $exe $env:FPC_BOOTSTRAP_WIN64_URL
           if ($LastExitCode -ne 0) { exit $LastExitCode }
           Start-Process -FilePath $exe -ArgumentList '/SP-','/VERYSILENT','/NORESTART','/SUPPRESSMSGBOXES' -Wait -NoNewWindow
           $fpcbin = (Get-ChildItem 'C:\Lazarus\fpc\*\bin\x86_64-win64' -Directory | Select-Object -First 1).FullName
@@ -265,7 +265,7 @@ jobs:
             --compiler="$FPCMAIN/bin/x86_64-win64/fpc.exe" "$@"; }
           opm="$RUNNER_TEMP/opm"
           for p in BGRABitmap FPSpreadsheet ATFlatControls EncConv ATSynEdit; do
-            curl -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o "$RUNNER_TEMP/$p.zip" "https://packages.lazarus-ide.org/$p.zip"
+            curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$RUNNER_TEMP/$p.zip" "https://packages.lazarus-ide.org/$p.zip"
             mkdir -p "$opm/$p"
             unzip -q -o "$RUNNER_TEMP/$p.zip" -d "$opm/$p" -x "*/test_files/*"
           done
@@ -304,7 +304,7 @@ jobs:
           New-Item -ItemType Directory -Force -Path $libs | Out-Null
           foreach ($u in 'UW_libmpv/releases/latest/download/libmpv2_winarm64.zip','UW_TSLibs/releases/latest/download/tslibs_winarm64.zip') {
             $zip = "$libs\" + (Split-Path $u -Leaf)
-            curl.exe -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o $zip "https://github.com/URUWorks/$u"
+            curl.exe -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o $zip "https://github.com/URUWorks/$u"
             if ($LastExitCode -ne 0) { exit $LastExitCode }
             Expand-Archive -Force $zip -DestinationPath "$libs\x"
           }
@@ -338,7 +338,14 @@ jobs:
           $exe = (Get-ChildItem t -Recurse -Filter tero.exe | Select-Object -First 1).FullName
           $p = Start-Process $exe -PassThru
           Start-Sleep 20
-          if ($p.HasExited) { Write-Error "tero.exe exited with code $($p.ExitCode)" }
+          if ($p.HasExited) {
+            # crash details: faulting module and offset from the Application log
+            Start-Sleep 5
+            Get-WinEvent -FilterHashtable @{ LogName = 'Application'; StartTime = (Get-Date).AddMinutes(-5) } -ErrorAction SilentlyContinue |
+              Where-Object { $_.ProviderName -in 'Application Error','Windows Error Reporting' } |
+              ForEach-Object { '----- ' + $_.ProviderName; $_.Message }
+            Write-Error ("tero.exe exited with code 0x{0:X8}" -f $p.ExitCode)
+          }
           "tero.exe running, pid $($p.Id)"
           Stop-Process $p
 
@@ -380,7 +387,7 @@ jobs:
           set -euo pipefail
           cd "$RUNNER_TEMP"
           for deb in $LAZARUS_LINUX_DEBS; do
-            curl -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o "$deb" "$LAZARUS_LINUX_URL/$deb/download"
+            curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$deb" "$LAZARUS_LINUX_URL/$deb/download"
           done
           sudo apt-get update -qq
           sudo apt-get install -y -qq ./fpc-laz_*.deb ./fpc-src_*.deb ./lazarus-project_*.deb \
@@ -399,7 +406,7 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq fpc fpc-source libhunspell-1.7-0 libgtk2.0-dev libgtk-3-dev libgl-dev libmpv-dev patchelf
           fpc -iV
-          curl -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o "$RUNNER_TEMP/lazarus.tar.gz" \
+          curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$RUNNER_TEMP/lazarus.tar.gz" \
             "https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/$LAZARUS_SOURCE_TAG/lazarus-$LAZARUS_SOURCE_TAG.tar.gz"
           lazdir="$HOME/lazarus"
           mkdir -p "$lazdir"
@@ -433,7 +440,7 @@ jobs:
           set -euo pipefail
           opm="$HOME/.lazarus/onlinepackagemanager/packages"
           for p in BGRABitmap FPSpreadsheet ATFlatControls EncConv ATSynEdit; do
-            curl -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o "$RUNNER_TEMP/$p.zip" "https://packages.lazarus-ide.org/$p.zip"
+            curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$RUNNER_TEMP/$p.zip" "https://packages.lazarus-ide.org/$p.zip"
             mkdir -p "$opm/$p"
             unzip -q -o "$RUNNER_TEMP/$p.zip" -d "$opm/$p" -x "*/test_files/*"
           done
@@ -528,7 +535,7 @@ jobs:
       - name: Install Lazarus
         run: |
           set -euo pipefail
-          curl -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o "$RUNNER_TEMP/fpc.dmg" "$FPC_MACOS_URL"
+          curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$RUNNER_TEMP/fpc.dmg" "$FPC_MACOS_URL"
           mnt=$(hdiutil attach -nobrowse -readonly "$RUNNER_TEMP/fpc.dmg" | grep -o '/Volumes/.*' | tail -1)
           pkg=$(find "$mnt" -maxdepth 2 -name '*.pkg' | head -1)
           sudo installer -pkg "$pkg" -target /
@@ -536,7 +543,7 @@ jobs:
           export PATH="/usr/local/bin:$PATH"
           echo "/usr/local/bin" >> "$GITHUB_PATH"
           fpc -iV
-          curl -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o "$RUNNER_TEMP/lazarus.tar.gz" \
+          curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$RUNNER_TEMP/lazarus.tar.gz" \
             "https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/$LAZARUS_SOURCE_TAG/lazarus-$LAZARUS_SOURCE_TAG.tar.gz"
           mkdir -p "$HOME/lazarus"
           tar -xzf "$RUNNER_TEMP/lazarus.tar.gz" -C "$HOME/lazarus" --strip-components=1
@@ -550,7 +557,7 @@ jobs:
           set -euo pipefail
           opm="$HOME/.lazarus/onlinepackagemanager/packages"
           for p in BGRABitmap FPSpreadsheet ATFlatControls EncConv ATSynEdit; do
-            curl -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o "$RUNNER_TEMP/$p.zip" "https://packages.lazarus-ide.org/$p.zip"
+            curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$RUNNER_TEMP/$p.zip" "https://packages.lazarus-ide.org/$p.zip"
             mkdir -p "$opm/$p"
             unzip -q -o "$RUNNER_TEMP/$p.zip" -d "$opm/$p" -x "*/test_files/*"
           done
@@ -625,7 +632,7 @@ jobs:
           fw="$RUNNER_TEMP/frameworks"
           mkdir -p "$fw"
           for u in UW_libmpv/releases/latest/download/libmpv_macos.zip UW_TSLibs/releases/latest/download/tslibs_macos.zip; do
-            curl -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o "$RUNNER_TEMP/lib.zip" "https://github.com/URUWorks/$u"
+            curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$RUNNER_TEMP/lib.zip" "https://github.com/URUWorks/$u"
             unzip -q -o "$RUNNER_TEMP/lib.zip" '*.dylib' -d "$fw"
           done
           for f in libmpv.2.dylib libssl.3.dylib libcrypto.3.dylib libhunspellx64.dylib; do
@@ -842,7 +849,7 @@ jobs:
         run: |
           $ErrorActionPreference = 'stop'
           $exe = "$env:RUNNER_TEMP\innosetup.exe"
-          curl.exe -fsSL --retry 5 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -o $exe $env:INNOSETUP_URL
+          curl.exe -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o $exe $env:INNOSETUP_URL
           if ($LastExitCode -ne 0) { exit $LastExitCode }
           Start-Process -FilePath $exe -ArgumentList '/SP-','/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART',"/DIR=$env:RUNNER_TEMP\InnoSetup" -Wait -NoNewWindow
           "$env:RUNNER_TEMP\InnoSetup" >> $env:GITHUB_PATH
