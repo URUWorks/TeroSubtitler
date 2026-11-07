@@ -97,6 +97,9 @@ type
 
 var
   frmWizard: TfrmWizard;
+  // the wizard was already shown in this session: reopened from the menu
+  // before the settings file is written (on close) is not a first start
+  WizardShown: Boolean = False;
 
 implementation
 
@@ -171,7 +174,11 @@ procedure TfrmWizard.FormCreate(Sender: TObject);
 begin
   FLngList  := TStringList.Create;
   FIndex    := 0;
-  FReopened := FileExists(SettingsFileName);
+  // before, only the settings file was checked: reopened before closing Tero
+  // for the first time it acted as a first start, the layout options were
+  // not set from the current one and layout 0 was applied on close
+  FReopened := FileExists(SettingsFileName) or WizardShown;
+  WizardShown := True;
 
   btnDownloadYTDLP.Caption   := btnDownload.Caption;
   btnDownloadFFMPEG.Caption  := btnDownload.Caption;
@@ -182,8 +189,7 @@ begin
   btnDownload.Visible              := False;
   btnDownloadFFMPEG.Visible        := False;
   {$IFNDEF CPUX86_64}
-  // our whisper zips are x86_64 only
-  btnDownloadWhisper.Visible       := False;
+  // UW_WhisperCPP has aarch64 builds, UW_FasterWhisper is x86_64 only
   btnDownloadFasterWhisper.Visible := False;
   {$ENDIF}
   {$ENDIF};
@@ -345,7 +351,7 @@ procedure TfrmWizard.cboLanguageChange(Sender: TObject);
 
   procedure FixStateLang(const ALabel: TLabel);
   begin
-    ALabel.Caption := iff(ALabel.Tag = 1, lngSuccess, lngFailed);
+    ALabel.Caption := iff(ALabel.Tag = 1, lngSuccess, lngNotLocated);
   end;
 
 var
@@ -473,7 +479,7 @@ begin
   else
   begin
     btnDownload.Enabled := True;
-    lblLibMPVStatus.Caption := lngFailed;
+    lblLibMPVStatus.Caption := lngNotLocated;
     lblLibMPVStatus.Tag := -1;
   end;
   Result := not btnDownload.Enabled;
@@ -493,7 +499,7 @@ begin
   else
   begin
     btnDownloadYTDLP.Enabled := True;
-    lblYTDLPStatus.Caption := lngFailed;
+    lblYTDLPStatus.Caption := lngNotLocated;
     lblYTDLPStatus.Tag := -1;
   end;
   Result := not btnDownloadYTDLP.Enabled;
@@ -513,7 +519,7 @@ begin
   else
   begin
     btnDownloadFFMPEG.Enabled := True;
-    lblFFMPEGStatus.Caption := lngFailed;
+    lblFFMPEGStatus.Caption := lngNotLocated;
     lblFFMPEGStatus.Tag := -1;
   end;
   Result := not btnDownloadFFMPEG.Enabled;
@@ -533,7 +539,7 @@ begin
   else
   begin
     btnDownloadWhisper.Enabled := True;
-    lblWhisperStatus.Caption := lngFailed;
+    lblWhisperStatus.Caption := lngNotLocated;
     lblWhisperStatus.Tag := -1;
   end;
   Result := not btnDownloadWhisper.Enabled;
@@ -553,7 +559,7 @@ begin
   else
   begin
     btnDownloadFasterWhisper.Enabled := True;
-    lblFasterWhisperStatus.Caption := lngFailed;
+    lblFasterWhisperStatus.Caption := lngNotLocated;
     lblFasterWhisperStatus.Tag := -1;
   end;
   Result := not btnDownloadFasterWhisper.Enabled;
