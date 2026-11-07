@@ -19,6 +19,8 @@ env:
   LAZARUS_LINUX_URL: https://sourceforge.net/projects/lazarus/files/Lazarus%20Linux%20amd64%20DEB/Lazarus%205.0RC1
   LAZARUS_LINUX_DEBS: fpc-laz_3.2.2-210709_amd64.deb fpc-src_3.2.2-210709_amd64.deb lazarus-project_5.0.0-0_amd64.deb
   LAZARUS_SOURCE_TAG: lazarus_5_0_RC1
+  # FPC main only bootstraps from FPC 3.2.2 (Windows ARM64 cross compiler)
+  FPC_BOOTSTRAP_WIN64_URL: https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2064%20bits/Lazarus%204.8/lazarus-4.8-fpc-3.2.2-win64.exe/download
   FPC_MACOS_URL: https://sourceforge.net/projects/lazarus/files/Lazarus%20macOS%20aarch64/Lazarus%205.0RC1/fpc-3.2.4rc2.intelarm64-macosx.dmg/download
 
 jobs:
@@ -182,13 +184,13 @@ jobs:
           git submodule update --init --remote --recursive use/UW_BlurayPGSParser
           git submodule update --init --remote --recursive use/UW_MPVPlayer
 
-      # Lazarus 5 for its FPC 3.2.4 (the starting compiler) and make
-      - name: Install Lazarus 5 (starting compiler)
+      # Lazarus 4.8 for its FPC 3.2.2 (the only starting compiler FPC main accepts) and make
+      - name: Install FPC 3.2.2 (starting compiler)
         shell: pwsh
         run: |
           $ErrorActionPreference = 'stop'
           $exe = "$env:RUNNER_TEMP\lazarus-setup.exe"
-          curl.exe -fsSL --retry 3 -o $exe $env:LAZARUS_WIN64_URL
+          curl.exe -fsSL --retry 3 -o $exe $env:FPC_BOOTSTRAP_WIN64_URL
           Start-Process -FilePath $exe -ArgumentList '/SP-','/VERYSILENT','/NORESTART','/SUPPRESSMSGBOXES' -Wait -NoNewWindow
           $fpcbin = (Get-ChildItem 'C:\Lazarus\fpc\*\bin\x86_64-win64' -Directory | Select-Object -First 1).FullName
           "FPCBIN=$fpcbin" >> $env:GITHUB_ENV
@@ -413,7 +415,7 @@ jobs:
           done
           find "$opm" use TeroSubtitler/common TeroSubtitler/subtitleapi TeroSubtitler/controls \
             -name '*.lpk' | grep -Ev '(cocoa|gdi|_template)' | while read -r lpk; do
-              lazbuild --add-package-link "$lpk"
+              lazbuild --lazarusdir="$LAZDIR" --add-package-link "$lpk"
           done
 
       # ATSynEdit needs the LCL gtk2 interface built with WITH_GTK2_IM;
@@ -425,7 +427,7 @@ jobs:
       - name: Build
         run: |
           set -euo pipefail
-          lazbuild --build-all --recursive --build-mode=Release --widgetset=${{ matrix.widgetset }} \
+          lazbuild --lazarusdir="$LAZDIR" --build-all --recursive --build-mode=Release --widgetset=${{ matrix.widgetset }} \
             --no-write-project TeroSubtitler/src/tero.lpi
           strip TeroSubtitler/bin/tero
 
