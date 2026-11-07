@@ -893,7 +893,7 @@ end;
 
 procedure TfrmSettings.lblWhisperCPPClick(Sender: TObject);
 begin
-  OpenURL('https://github.com/ggerganov/whisper.cpp');
+  OpenURL('https://github.com/URUWorks/UW_WhisperCPP');
 end;
 
 // -----------------------------------------------------------------------------

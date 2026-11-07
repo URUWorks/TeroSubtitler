@@ -146,7 +146,12 @@ const
   {$ENDIF}
   URL_LIBMPV_LEGACY = 'https://github.com/URUWorks/UW_libmpv/releases/latest/download/libmpv2_win64_legacy.zip';
   URL_YTDLP   = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe';
-  URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_win64.zip';
+  // UW_WhisperCPP (github.com/URUWorks/UW_WhisperCPP): Windows 7 SP1+ x64 (CPU + Vulkan) or Windows 10/11 ARM64 (CPU)
+  {$IFDEF CPUAARCH64}
+  URL_WHISPER = 'https://github.com/URUWorks/UW_WhisperCPP/releases/latest/download/whisper_winarm64.zip';
+  {$ELSE}
+  URL_WHISPER = 'https://github.com/URUWorks/UW_WhisperCPP/releases/latest/download/whisper_win64.zip';
+  {$ENDIF}
   // UW_FasterWhisper (github.com/URUWorks/UW_FasterWhisper), the GPU libraries are optional (NVIDIA, CUDA 12 + cuDNN 9)
   URL_FASTERWHISPER     = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_win64.zip';
   URL_FASTERWHISPERCUDA = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_cuda_win64.zip';
@@ -174,7 +179,10 @@ const
   FASTERWHISPER_Params = '"%input" --output_dir "%output" --model %model --model_dir "%binpath" --output_format srt --beep_off';
 
   SCENEDETECT_EXE      = 'scenedetect.exe';
-  SCENEDETECT_SCParams = '-i "%input" list-scenes -f "%output" -q';
+  // detect-content explicit: PySceneDetect 0.5 has no default detector and the
+  // default one changed later. %value is its threshold (see SceneDetectThreshold)
+  SCENEDETECT_SCParams     = '-i "%input" detect-content -t %value list-scenes -f "%output" -q';
+  SCENEDETECT_SCParams_Old = '-i "%input" list-scenes -f "%output" -q';
 
   TESSERACT_EXE    = 'tesseract.exe';
   TESSERACT_Params = '"%input" - -l %lang -c debug_file=/dev/null';
@@ -188,7 +196,12 @@ const
   {$ELSE}
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux';
   {$ENDIF}
-  URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_linux.zip';
+  // UW_WhisperCPP: glibc 2.17+, x86_64 (CPU + Vulkan) or aarch64 (CPU)
+  {$IFDEF CPUAARCH64}
+  URL_WHISPER = 'https://github.com/URUWorks/UW_WhisperCPP/releases/latest/download/whisper_linux_arm64.zip';
+  {$ELSE}
+  URL_WHISPER = 'https://github.com/URUWorks/UW_WhisperCPP/releases/latest/download/whisper_linux.zip';
+  {$ENDIF}
   URL_FASTERWHISPER     = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_linux.zip';
   // our faster-whisper (CTranslate2 4.x) uses CUDA 12 + cuDNN 9 from the system
   // when they are installed, the old CUDA 11 libs don't work with it
@@ -213,7 +226,7 @@ const
   YTDLP_EXE = 'yt-dlp_linux';
   {$ENDIF}
 
-  WHISPER_EXE      = 'whisper-cli'; // our zip has a copy named main for old settings
+  WHISPER_EXE      = 'whisper-cli'; // old settings with main are fixed by ResolveWhisperCPP
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
   WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
 
@@ -221,7 +234,10 @@ const
   FASTERWHISPER_Params = '%input --output_dir %output --model %model --model_dir %binpath --output_format srt --beep_off';
 
   SCENEDETECT_EXE      = 'scenedetect';
-  SCENEDETECT_SCParams = '-i %input list-scenes -f %output -q';
+  // detect-content explicit: PySceneDetect 0.5 has no default detector and the
+  // default one changed later. %value is its threshold (see SceneDetectThreshold)
+  SCENEDETECT_SCParams     = '-i %input detect-content -t %value list-scenes -f %output -q';
+  SCENEDETECT_SCParams_Old = '-i %input list-scenes -f %output -q';
 
   TESSERACT_EXE    = 'tesseract';
   TESSERACT_Params = '%input - -l %lang -c debug_file=/dev/null';
@@ -232,7 +248,8 @@ const
   URL_LIBMPV = 'https://github.com/URUWorks/UW_libmpv/releases/latest/download/libmpv_macos.zip';
   URL_LIBMPV_LEGACY = 'https://github.com/URUWorks/UW_libmpv/releases/latest/download/libmpv_macos_legacy.zip';
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos'; // standalone, can self update
-  URL_WHISPER = 'https://github.com/URUWorks/additional-files/raw/main/whisper/whisper_macos_%cpu.zip';
+  // UW_WhisperCPP: %cpu = arm64 (macOS 11+, Metal) or x86_64 (macOS 10.11+, CPU)
+  URL_WHISPER = 'https://github.com/URUWorks/UW_WhisperCPP/releases/latest/download/whisper_macos_%cpu.zip';
   URL_FASTERWHISPER     = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_macos_%cpu.zip';
   //URL_FASTERWHISPERCUDA = '';
 
@@ -251,7 +268,7 @@ const
 
   YTDLP_EXE = 'yt-dlp_macos';
 
-  WHISPER_EXE      = 'whisper-cli'; // our zip has a copy named main for old settings
+  WHISPER_EXE      = 'whisper-cli'; // old settings with main are fixed by ResolveWhisperCPP
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
   WHISPER_ffParams = '-i %input -ar 16000 -ac 1 -map 0:a:%trackid -c:a pcm_s16le -y %output';
 
@@ -259,7 +276,10 @@ const
   FASTERWHISPER_Params = '%input --output_dir %output --model %model --model_dir %binpath --output_format srt --beep_off';
 
   SCENEDETECT_EXE      = 'scenedetect';
-  SCENEDETECT_SCParams = '-i %input list-scenes -f %output -q';
+  // detect-content explicit: PySceneDetect 0.5 has no default detector and the
+  // default one changed later. %value is its threshold (see SceneDetectThreshold)
+  SCENEDETECT_SCParams     = '-i %input detect-content -t %value list-scenes -f %output -q';
+  SCENEDETECT_SCParams_Old = '-i %input list-scenes -f %output -q';
 
   TESSERACT_EXE    = 'tesseract';
   TESSERACT_Params = '%input - -l %lang -c debug_file=/dev/null';
