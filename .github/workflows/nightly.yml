@@ -92,14 +92,24 @@ jobs:
         shell: bash
         run: echo "name=${{ needs.check.outputs.base }}-${{ matrix.name }}" >> "$GITHUB_OUTPUT"
 
+      # SourceForge downloads are kept in the Actions cache, so a version is fetched once
+      - name: Cache downloads
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dl
+          key: dl-${{ env.LAZARUS_WIN64_URL }}
+
       - name: Build on Windows
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
           $ErrorActionPreference = 'stop'
-          $exe = "$env:RUNNER_TEMP\lazarus-setup.exe"
-          curl.exe -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o $exe $env:LAZARUS_WIN64_URL
-          if ($LastExitCode -ne 0) { exit $LastExitCode }
+          New-Item -ItemType Directory -Force "$env:RUNNER_TEMP\dl" | Out-Null
+          $exe = "$env:RUNNER_TEMP\dl\lazarus-setup.exe"
+          if (-not (Test-Path $exe)) {
+            curl.exe -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o $exe $env:LAZARUS_WIN64_URL
+            if ($LastExitCode -ne 0) { Remove-Item $exe -ErrorAction SilentlyContinue; exit $LastExitCode }
+          }
           Start-Process -FilePath $exe -ArgumentList '/SP-','/VERYSILENT','/NORESTART','/SUPPRESSMSGBOXES' -Wait -NoNewWindow
           $fpcbin = (Get-ChildItem 'C:\Lazarus\fpc\*\bin\x86_64-win64' -Directory | Select-Object -First 1).FullName
           $env:PATH += ";C:\Lazarus;$fpcbin"
@@ -189,13 +199,23 @@ jobs:
           git submodule update --init --remote --recursive use/UW_MPVPlayer
 
       # Lazarus 4.8 for its FPC 3.2.2 (the only starting compiler FPC main accepts) and make
+      # SourceForge downloads are kept in the Actions cache, so a version is fetched once
+      - name: Cache downloads
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dl
+          key: dl-${{ env.FPC_BOOTSTRAP_WIN64_URL }}
+
       - name: Install FPC 3.2.2 (starting compiler)
         shell: pwsh
         run: |
           $ErrorActionPreference = 'stop'
-          $exe = "$env:RUNNER_TEMP\lazarus-setup.exe"
-          curl.exe -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o $exe $env:FPC_BOOTSTRAP_WIN64_URL
-          if ($LastExitCode -ne 0) { exit $LastExitCode }
+          New-Item -ItemType Directory -Force "$env:RUNNER_TEMP\dl" | Out-Null
+          $exe = "$env:RUNNER_TEMP\dl\lazarus-setup.exe"
+          if (-not (Test-Path $exe)) {
+            curl.exe -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o $exe $env:FPC_BOOTSTRAP_WIN64_URL
+            if ($LastExitCode -ne 0) { Remove-Item $exe -ErrorAction SilentlyContinue; exit $LastExitCode }
+          }
           Start-Process -FilePath $exe -ArgumentList '/SP-','/VERYSILENT','/NORESTART','/SUPPRESSMSGBOXES' -Wait -NoNewWindow
           $fpcbin = (Get-ChildItem 'C:\Lazarus\fpc\*\bin\x86_64-win64' -Directory | Select-Object -First 1).FullName
           "FPCBIN=$fpcbin" >> $env:GITHUB_ENV
@@ -238,7 +258,8 @@ jobs:
             "-Fu$root\*"
             "-Fu$root\rtl"
           }
-          $cfg | Sort-Object -Unique | Set-Content "$bin\fpc.cfg"
+          # -Xm: linker map, to turn a crash offset into a routine name
+          @($cfg | Sort-Object -Unique) + '-Xm' | Set-Content "$bin\fpc.cfg"
           Get-Content "$bin\fpc.cfg"
           & "$bin\fpc.exe" -iV
           & "$bin\ppcrossa64.exe" -iTP -iTO
@@ -322,6 +343,14 @@ jobs:
           path: dist/*.zip
           retention-days: 7
 
+      - name: Upload linker map
+        uses: actions/upload-artifact@v4
+        with:
+          name: winarm64-map
+          path: TeroSubtitler/bin/tero.map
+          if-no-files-found: warn
+          retention-days: 7
+
   # Tero for ARM64 starts on a real ARM64 Windows (it should stay open; closes it after 20 s)
   test-winarm64:
     needs: build-winarm64
@@ -330,6 +359,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: winarm64
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: winarm64-map
+          path: map
       - name: Start tero.exe
         shell: pwsh
         run: |
@@ -343,7 +377,24 @@ jobs:
             Start-Sleep 5
             Get-WinEvent -FilterHashtable @{ LogName = 'Application'; StartTime = (Get-Date).AddMinutes(-5) } -ErrorAction SilentlyContinue |
               Where-Object { $_.ProviderName -in 'Application Error','Windows Error Reporting' } |
-              ForEach-Object { '----- ' + $_.ProviderName; $_.Message }
+              ForEach-Object { '----- ' + $_.ProviderName; $_.Message } | Tee-Object -Variable ev
+            # fault offset -> nearest symbols in the linker map
+            $m = [regex]::Match(($ev -join "`n"), 'Fault offset: 0x([0-9a-fA-F]+)')
+            $map = Get-ChildItem map -Recurse -Filter *.map -ErrorAction SilentlyContinue | Select-Object -First 1
+            if ($m.Success -and $map) {
+              $b = [IO.File]::ReadAllBytes($exe)
+              $pe = [BitConverter]::ToInt32($b, 0x3C)
+              $base = [BitConverter]::ToUInt64($b, $pe + 24 + 24)
+              $va = $base + [Convert]::ToUInt64($m.Groups[1].Value, 16)
+              "image base 0x{0:X}, fault address 0x{1:X}" -f $base, $va
+              $syms = foreach ($l in [IO.File]::ReadLines($map.FullName)) {
+                if ($l -match '^\s+0x([0-9a-fA-F]{8,16})\s+(\S+)\s*$') {
+                  [pscustomobject]@{ A = [Convert]::ToUInt64($Matches[1], 16); N = $Matches[2] }
+                }
+              }
+              $syms | Where-Object A -le $va | Sort-Object A | Select-Object -Last 3 |
+                ForEach-Object { "0x{0:X}  {1}  (+0x{2:X})" -f $_.A, $_.N, ($va - $_.A) }
+            }
             Write-Error ("tero.exe exited with code 0x{0:X8}" -f $p.ExitCode)
           }
           "tero.exe running, pid $($p.Id)"
@@ -380,14 +431,22 @@ jobs:
           git submodule update --init --remote --recursive use/UW_BlurayPGSParser
           git submodule update --init --remote --recursive use/UW_MPVPlayer
 
+      - name: Cache downloads
+        if: matrix.arch == 'x86_64'
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dl
+          key: dl-${{ env.LAZARUS_LINUX_URL }}-${{ env.LAZARUS_LINUX_DEBS }}
+
       # Official Lazarus debs (see LAZARUS_LINUX_* at the top)
       - name: Install Lazarus
         if: matrix.arch == 'x86_64'
         run: |
           set -euo pipefail
-          cd "$RUNNER_TEMP"
+          mkdir -p "$RUNNER_TEMP/dl"
+          cd "$RUNNER_TEMP/dl"
           for deb in $LAZARUS_LINUX_DEBS; do
-            curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$deb" "$LAZARUS_LINUX_URL/$deb/download"
+            [[ -f "$deb" ]] || curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$deb" "$LAZARUS_LINUX_URL/$deb/download" || { rm -f "$deb"; exit 1; }
           done
           sudo apt-get update -qq
           sudo apt-get install -y -qq ./fpc-laz_*.deb ./fpc-src_*.deb ./lazarus-project_*.deb \
@@ -532,11 +591,20 @@ jobs:
           git submodule update --init --remote --recursive use/UW_MPVPlayer
 
       # Official FPC package; the Homebrew lazarus cask is disabled, so build lazbuild from source
+      # SourceForge downloads are kept in the Actions cache, so a version is fetched once
+      - name: Cache downloads
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dl
+          key: dl-${{ env.FPC_MACOS_URL }}
+
       - name: Install Lazarus
         run: |
           set -euo pipefail
-          curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$RUNNER_TEMP/fpc.dmg" "$FPC_MACOS_URL"
-          mnt=$(hdiutil attach -nobrowse -readonly "$RUNNER_TEMP/fpc.dmg" | grep -o '/Volumes/.*' | tail -1)
+          mkdir -p "$RUNNER_TEMP/dl"
+          dmg="$RUNNER_TEMP/dl/fpc.dmg"
+          [[ -f "$dmg" ]] || curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$dmg" "$FPC_MACOS_URL" || { rm -f "$dmg"; exit 1; }
+          mnt=$(hdiutil attach -nobrowse -readonly "$dmg" | grep -o '/Volumes/.*' | tail -1)
           pkg=$(find "$mnt" -maxdepth 2 -name '*.pkg' | head -1)
           sudo installer -pkg "$pkg" -target /
           hdiutil detach "$mnt"
