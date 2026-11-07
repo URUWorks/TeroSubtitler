@@ -700,8 +700,8 @@ jobs:
           fw="$RUNNER_TEMP/frameworks"
           mkdir -p "$fw"
           for u in UW_libmpv/releases/latest/download/libmpv_macos.zip UW_TSLibs/releases/latest/download/tslibs_macos.zip; do
-            curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$RUNNER_TEMP/lib.zip" "https://github.com/URUWorks/$u"
-            unzip -q -o "$RUNNER_TEMP/lib.zip" '*.dylib' -d "$fw"
+            curl -fsSL --retry 8 --retry-all-errors --retry-delay 10 --speed-limit 10000 --speed-time 60 -C - -o "$RUNNER_TEMP/$(basename "$u")" "https://github.com/URUWorks/$u"
+            unzip -q -o "$RUNNER_TEMP/$(basename "$u")" '*.dylib' -d "$fw"
           done
           for f in libmpv.2.dylib libssl.3.dylib libcrypto.3.dylib libhunspellx64.dylib; do
             [[ -f "$fw/$f" ]] || { echo "$f missing"; ls "$fw"; exit 1; }
