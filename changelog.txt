@@ -42,6 +42,14 @@
 - fixed: [macOS] Homebrew/MacPorts tools (deno, ffmpeg) weren’t found by yt-dlp when Tero was opened from Finder
 - fixed: [macOS] The shortcut presets are saved in the user folder instead of inside the app
 - fixed: [macOS] Access violation in spell check with words containing the typographic apostrophe (’)
+- fixed: The layout chosen in the Setup wizard was lost when the wizard was reopened before Tero was closed for the first time
+- fixed: Recent files was enabled and empty when no file had been opened yet
+- fixed: PySceneDetect not detected when installed with the official installer, pip/pipx (~/.local/bin) or Homebrew
+- fixed: PySceneDetect option never appeared if Tero was opened before installing it
+- fixed: Shot changes from PySceneDetect read from the wrong CSV rows
+- fixed: PySceneDetect ignored the sensitivity setting and custom parameters
+- fixed: No error shown when PySceneDetect fails or returns no results
+- fixed: [macOS] Tools in ~/Applications were never found
 - fixed: Shot changes exported to EDL or as HH:MM:SS:FF drifted with 23.976/29.97 fps
 - fixed: Shot changes export/apply could misread the times when the import format didn’t match them; importing HH:MM:SS:FF .shotchanges files didn’t work
 - fixed: The shot changes saved to reload with the video could be wrong (other formats, offset not applied).
@@ -114,6 +122,8 @@
 - fixed: Changing the interface language left some texts in the previous language until Tero was restarted
 - fixed: Shot changes exported as frames were imported as milliseconds
 - fixed: Shot changes detected with FFmpeg/PySceneDetect were read as frames if “Frames” was selected for import, and exported with wrong times
+- fixed: PySceneDetect detection on all systems, Sensitivity value and error messages in Shot changes
+- changed: Whisper.cpp now downloads UW_WhisperCPP (Windows 7+, macOS 10.11+, Linux glibc 2.17+), with GPU support via Vulkan on Windows/Linux x64 and Metal on Apple Silicon
 - changed: [macOS] removed the menu items added by the system that Tero doesn’t use
 - changed: Faster-Whisper now downloads UW_FasterWhisper, and asks before downloading the optional NVIDIA GPU libraries
 - changed: Smart case starts a sentence on song lines (♪) and after a “--” interruption at the end of an entry
@@ -143,6 +153,8 @@
 - improved: Typing with "mpv handles subtitles" no longer rewrites the temp track on every key
 - improved: Language names are now shown in their own language
 - improved: Media loaded from a url shows its title instead of the url
+- added: [Windows] Whisper.cpp download for ARM64
+- added: [Linux] Whisper.cpp download for ARM64 (aarch64)
 - added: iTT has its own language in Format properties
 - added: Extract waveform also works with online media (opened from URL)
 - added: Auto-guess FPS of non-SMPTE subtitle file #414
