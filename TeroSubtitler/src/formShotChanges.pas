@@ -139,6 +139,73 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the sensitivity is FFmpeg's scene score (0.1..0.9, 0.4 by default), that is
+// about the average pixel difference / 100. detect-content uses the average
+// HSV difference (0..255, 27 by default): 0.4 gives its default, 0.1 = 7 and
+// 0.9 = 61, higher is less sensitive in both
+function SceneDetectThreshold(const ASensitivity: Double): String;
+var
+  fs: TFormatSettings;
+  t: Double;
+begin
+  fs := DefaultFormatSettings;
+  fs.DecimalSeparator := '.';
+  t := ASensitivity * 67.5;
+  if t < 1 then
+    t := 1
+  else if t > 255 then
+    t := 255;
+  Result := FloatToStrF(t, ffFixed, 15, 1, fs);
+end;
+
+// -----------------------------------------------------------------------------
+
+// the cuts (ms) of a "scenedetect list-scenes" CSV: an optional "Timecode
+// List:" line (not with --skip-cuts), the header and a line per scene. The
+// columns are found by the header; the start of the first scene (0) isn't a cut
+procedure ParseSceneDetectCSV(const ACSV, ATimes: TStrings);
+var
+  i, j, h, colSecs, colTC, ms: Integer;
+  cols: TStringArray;
+  fs: TFormatSettings;
+  v: Double;
+begin
+  fs := DefaultFormatSettings;
+  fs.DecimalSeparator := '.';
+  colSecs := -1;
+  colTC   := 2;
+  h := -1;
+  for i := 0 to ACSV.Count-1 do
+    if ACSV[i].StartsWith('Scene Number') then
+    begin
+      h := i;
+      cols := ACSV[i].Split(',');
+      for j := 0 to High(cols) do
+        if Trim(cols[j]) = 'Start Time (seconds)' then
+          colSecs := j
+        else if Trim(cols[j]) = 'Start Timecode' then
+          colTC := j;
+      Break;
+    end;
+
+  if h < 0 then Exit;
+
+  for i := h+1 to ACSV.Count-1 do
+  begin
+    cols := ACSV[i].Split(',');
+    ms := 0;
+    if (colSecs >= 0) and (colSecs <= High(cols)) and TryStrToFloat(Trim(cols[colSecs]), v, fs) then
+      ms := Round(v * 1000)
+    else if colTC <= High(cols) then
+      ms := StringToTime(Trim(cols[colTC]));
+
+    if ms > 0 then
+      ATimes.Add(ms.ToString);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 { TfrmShotChanges }
 
 // -----------------------------------------------------------------------------
@@ -665,7 +732,10 @@ begin
   try
     if cboDetectApp.ItemIndex = 0 then // FFmpeg
     begin
-      AParamArray := FFMPEG_SCParams.Split(' ');
+      if Tools.FFmpeg_ParamsForShotChanges <> '' then
+        AParamArray := Tools.FFmpeg_ParamsForShotChanges.Split(' ')
+      else
+        AParamArray := FFMPEG_SCParams.Split(' ');
       for i := 0 to High(AParamArray) do
         AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%value'], [frmMain.MPV.FileName, StringReplace(FloatToStr(spnSensitivity.Value, FormatSettings), FormatSettings.DecimalSeparator, '.', [])], []);
 
@@ -701,9 +771,12 @@ begin
     else // PySceneDetect
     begin
       outfile := ChangeFileExt(GetTempFileName, '.csv');
-      AParamArray := SCENEDETECT_SCParams.Split(' ');
+      if Tools.PySceneDetect_Params <> '' then
+        AParamArray := Tools.PySceneDetect_Params.Split(' ')
+      else
+        AParamArray := SCENEDETECT_SCParams.Split(' ');
       for i := 0 to High(AParamArray) do
-        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%value'], [frmMain.MPV.FileName, outfile, FloatToStr(spnSensitivity.Value)], []);
+        AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%value'], [frmMain.MPV.FileName, outfile, SceneDetectThreshold(spnSensitivity.Value)], []);
 
       if not FileExists(GetExtractAppFile(False)) then
       begin
@@ -713,33 +786,27 @@ begin
       begin
         FTimeElapsed := 0;
 
-        if ExecuteApp(GetExtractAppFile(False), AParamArray, True, True, @RunAppTime_CB) then
+        if not ExecuteApp(GetExtractAppFile(False), AParamArray, True, True, @RunAppTime_CB) then
+          ShowErrorMessageDialog(Format(lngErrorExecuting, [GetExtractAppFile(False)]))
+        else if FileExists(outfile) then
         begin
-          if FileExists(outfile) then
-          begin
-            sl := TStringList.Create;
-            try
-              sl.LoadFromFile(outfile);
-              if sl.Count > 2 then
-                for i := 0 to 1 do
-                  sl.Delete(i);
-
-              mmoTimes.Lines.BeginUpdate;
-              mmoTimes.Clear;
-              for i := 0 to sl.Count-1 do
-              begin
-                AParamArray := sl[i].Split(',');
-                sc := StringToTime(AParamArray[2]);
-                if sc > 0 then
-                  mmoTimes.Lines.Add(sc.ToString);
-              end;
-              DeleteFile(outfile);
-            finally
-              mmoTimes.Lines.EndUpdate;
-              if Assigned(sl) then sl.Free;
-            end;
+          sl := TStringList.Create;
+          try
+            sl.LoadFromFile(outfile);
+            mmoTimes.Lines.BeginUpdate;
+            mmoTimes.Clear;
+            ParseSceneDetectCSV(sl, mmoTimes.Lines);
+          finally
+            mmoTimes.Lines.EndUpdate;
+            sl.Free;
+            sl := NIL;
+            DeleteFile(outfile);
           end;
-        end;
+        end
+        else if not FCancel then
+          // it ran but wrote nothing: usually no video backend (pip install
+          // scenedetect without opencv-python) or a video it can't open
+          ShowErrorMessageDialog(Format(lngSceneDetectNoResults, [SCENEDETECT_EXE]));
       end;
     end;
   finally
