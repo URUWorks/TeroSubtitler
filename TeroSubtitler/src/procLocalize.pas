@@ -76,6 +76,7 @@ resourcestring
   lngGPULibsOptional = 'These libraries are needed with an NVIDIA card; without them, Faster-Whisper uses the processor.';
   lngAskToExtractAudio = 'Audio waveform was not found, do you want to extract it?';
   lngExtractAppError = 'Unable to find “%s”. Check in settings if it is configured correctly.';
+  lngSceneDetectNoResults = '“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video.';
   lngExtracting = 'Extracting...';
   lngTranscribing = 'Transcribing...';
   lngTextSyncResult = 'Synchronized %d entries (%d of %d words found in the audio).';
@@ -104,6 +105,7 @@ resourcestring
   lngContinueAnyway = 'Continue?';
   lngEntryStartedAt = 'Entry started at %s';
   lngEntryEndedAt = 'Entry ended in %s';
+  lngNotLocated = 'Not located.';
   lngFailed = 'Failed.';
   lngSuccess = 'Success.';
   lngNewVersionFound = 'A new version was found.';
