@@ -1,4 +1,4 @@
-﻿; Inno Setup 6.5+ script for Tero Subtitler (Windows x64 and ARM64)
+; Inno Setup 6.5+ script for Tero Subtitler (Windows x64 and ARM64)
 ;
 ; Two modes, same script. make_installer.ps1 prepares the libraries and passes the defines:
 ;
@@ -166,35 +166,62 @@ Name: "turkish";             MessagesFile: "compiler:Languages\Turkish.isl"
 Dictionaries=Spell checking dictionaries
 OtherTasks=Other tasks:
 AssocSubtitles=Associate subtitle files with %1
+TypeCompact=Compact installation
+TypeFull=Full installation
+TypeCustom=Custom installation
 spanish.Dictionaries=Diccionarios ortográficos
 spanish.OtherTasks=Otras tareas:
 spanish.AssocSubtitles=Asociar los archivos de subtítulos con %1
+spanish.TypeCompact=Instalación compacta
+spanish.TypeFull=Instalación completa
+spanish.TypeCustom=Instalación personalizada
 brazilianportuguese.Dictionaries=Dicionários de verificação ortográfica
 brazilianportuguese.OtherTasks=Outras tarefas:
 brazilianportuguese.AssocSubtitles=Associar os arquivos de legenda ao %1
+brazilianportuguese.TypeCompact=Instalação compacta
+brazilianportuguese.TypeFull=Instalação completa
+brazilianportuguese.TypeCustom=Instalação personalizada
 bulgarian.Dictionaries=Речници за проверка на правописа
 bulgarian.OtherTasks=Други задачи:
 bulgarian.AssocSubtitles=Асоцииране на файловете със субтитри с %1
+bulgarian.TypeCompact=Компактна инсталация
+bulgarian.TypeFull=Пълна инсталация
+bulgarian.TypeCustom=Инсталация по избор
 german.Dictionaries=Wörterbücher für die Rechtschreibprüfung
 german.OtherTasks=Weitere Aufgaben:
 german.AssocSubtitles=Untertiteldateien mit %1 verknüpfen
+german.TypeCompact=Minimale Installation
+german.TypeFull=Vollständige Installation
+german.TypeCustom=Benutzerdefinierte Installation
 italian.Dictionaries=Dizionari per il controllo ortografico
 italian.OtherTasks=Altre attività:
 italian.AssocSubtitles=Associa i file di sottotitoli a %1
+italian.TypeCompact=Installazione compatta
+italian.TypeFull=Installazione completa
+italian.TypeCustom=Installazione personalizzata
 russian.Dictionaries=Словари для проверки орфографии
 russian.OtherTasks=Другие задачи:
 russian.AssocSubtitles=Связать файлы субтитров с %1
+russian.TypeCompact=Компактная установка
+russian.TypeFull=Полная установка
+russian.TypeCustom=Выборочная установка
 slovenian.Dictionaries=Slovarji za preverjanje črkovanja
 slovenian.OtherTasks=Druga opravila:
 slovenian.AssocSubtitles=Poveži datoteke podnapisov s programom %1
+slovenian.TypeCompact=Osnovna namestitev
+slovenian.TypeFull=Polna namestitev
+slovenian.TypeCustom=Namestitev po meri
 turkish.Dictionaries=Yazım denetimi sözlükleri
 turkish.OtherTasks=Diğer görevler:
 turkish.AssocSubtitles=Altyazı dosyalarını %1 ile ilişkilendir
+turkish.TypeCompact=Küçük kurulum
+turkish.TypeFull=Tam kurulum
+turkish.TypeCustom=Özel kurulum
 
 [Types]
-Name: "compact"; Description: "{cm:CompactInstallation}"
-Name: "full";    Description: "{cm:FullInstallation}"
-Name: "custom";  Description: "{cm:CustomInstallation}"; Flags: iscustom
+Name: "compact"; Description: "{cm:TypeCompact}"
+Name: "full";    Description: "{cm:TypeFull}"
+Name: "custom";  Description: "{cm:TypeCustom}"; Flags: iscustom
 
 [Components]
 Name: "main"; Description: "{#MyAppName}"; Types: compact full custom; Flags: fixed
