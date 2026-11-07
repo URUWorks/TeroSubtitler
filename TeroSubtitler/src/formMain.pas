@@ -1508,6 +1508,9 @@ begin
   MRU.OnMRUItemClick := @MRUItemClick;
   MRU.OnChange       := @MRUOnChange;
   MRU.LoadFromXML(MRUFileName);
+  // also without a recent files list yet (LoadFromXML exits without a
+  // file), so the empty Recent files menu is disabled like the others
+  MRU.UpdateMenu(mnuFileMRU);
   // Actors
   LoadActors;
   // TMX
