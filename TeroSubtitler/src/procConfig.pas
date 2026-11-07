@@ -90,6 +90,7 @@ function libMPVFileName(const AFullRoot: Boolean = True): String;
 function YTDLPFileName(const AFullRoot: Boolean = True): String;
 function ffmpegFileName: String;
 function SceneDetectFileName: String;
+function FindSceneDetect: String;
 function LogMPVFileName: String;
 function MPVTempSubFileName: String;
 function WebPreviewTempFileName: String;
@@ -188,8 +189,7 @@ begin
     if DirectoryExists(GetCustomUserPath('ffmpeg')) then
       FFmpeg := ConcatPaths([GetCustomUserPath('ffmpeg'), FFMPEG_EXE]);
 
-    if DirectoryExists(GetCustomUserPath('PySceneDetect')) then
-      PySceneDetect := ConcatPaths([GetCustomUserPath('PySceneDetect'), SCENEDETECT_EXE]);
+    PySceneDetect := FindSceneDetect;
 
     if DirectoryExists(GetCustomUserPath('Whisper')) then
     begin
@@ -207,10 +207,7 @@ begin
     else
       FFmpeg := GetInstallFolder(FFMPEG_EXE);
 
-    if DirectoryExists(GetCustomUserPath('PySceneDetect')) then
-      PySceneDetect := ConcatPaths([GetCustomUserPath('PySceneDetect'), SCENEDETECT_EXE])
-    else
-      PySceneDetect := GetInstallFolder(SCENEDETECT_EXE);
+    PySceneDetect := FindSceneDetect;
 
     if DirectoryExists(GetCustomUserPath('Whisper')) then
     begin
@@ -721,8 +718,18 @@ begin
         FFmpeg_ParamsForAudioExtract := GetValue('FFmpeg_ParamsForAudioExtract', FFmpeg_ParamsForAudioExtract);
         FFmpeg_ParamsForShotChanges  := GetValue('FFmpeg_ParamsForShotChanges', FFmpeg_ParamsForShotChanges);
         FFmpeg_ParamsForWhisper      := GetValue('FFmpeg_ParamsForWhisper', FFmpeg_ParamsForWhisper);
-        PySceneDetect        := GetValue('PySceneDetect', PySceneDetect);
+        // the path is saved even when empty: an empty one (saved before
+        // installing PySceneDetect) or one that no longer exists would hide
+        // the detected one forever
+        if FileExists(GetValue('PySceneDetect', '')) then
+          PySceneDetect := GetValue('PySceneDetect', PySceneDetect);
         PySceneDetect_Params := GetValue('PySceneDetect_Params', PySceneDetect_Params);
+        // saved by older versions, which didn't use it: without a detector and
+        // without %value the sensitivity would do nothing
+        if (PySceneDetect_Params = '') or (PySceneDetect_Params = SCENEDETECT_SCParams_Old) then
+          PySceneDetect_Params := SCENEDETECT_SCParams;
+        if FFmpeg_ParamsForShotChanges = '' then
+          FFmpeg_ParamsForShotChanges := FFMPEG_SCParams;
         WhisperCPP        := ResolveWhisperCPP(GetValue('WhisperCPP', WhisperCPP));
         WhisperCPP_Params := GetValue('WhisperCPP_Params', WhisperCPP_Params);
         WhisperCPP_Additional := GetValue('WhisperCPP_Additional', WhisperCPP_Additional);
@@ -1951,6 +1958,41 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// where PySceneDetect is usually installed: our folder, the official Windows
+// installer, pip/pipx (~/.local/bin), Homebrew and python.org on macOS, and
+// last the PATH (an app opened from Finder or a .desktop gets a short one)
+function FindSceneDetect: String;
+
+  function Check(const ADir: String; out AFileName: String): Boolean;
+  begin
+    AFileName := '';
+    if ADir = '' then Exit(False);
+    AFileName := ConcatPaths([ADir, SCENEDETECT_EXE]);
+    Result := FileExists(AFileName);
+  end;
+
+begin
+  if Check(GetCustomUserPath('PySceneDetect'), Result) then Exit;
+  {$IFDEF WINDOWS}
+  if Check(ConcatPaths([GetEnvironmentVariable('ProgramFiles'), 'PySceneDetect']), Result) then Exit;
+  if Check(ConcatPaths([GetEnvironmentVariable('ProgramW6432'), 'PySceneDetect']), Result) then Exit;
+  if Check(ConcatPaths([GetEnvironmentVariable('ProgramFiles(x86)'), 'PySceneDetect']), Result) then Exit;
+  if Check(ConcatPaths([GetEnvironmentVariable('LOCALAPPDATA'), 'Programs', 'PySceneDetect']), Result) then Exit;
+  {$ELSE}
+  Result := GetInstallFolder(SCENEDETECT_EXE);
+  if Result <> '' then Exit;
+  if Check(ConcatPaths([GetUserDir, '.local', 'bin']), Result) then Exit;
+  {$IFDEF DARWIN}
+  if Check('/opt/homebrew/bin', Result) then Exit;
+  if Check('/Library/Frameworks/Python.framework/Versions/Current/bin', Result) then Exit;
+  {$ENDIF}
+  {$ENDIF}
+  Result := ExeSearch(SCENEDETECT_EXE, GetEnvironmentVariable('PATH'));
+  if (Result <> '') and not FileExists(Result) then Result := '';
+end;
+
+// -----------------------------------------------------------------------------
+
 function LogMPVFileName: String;
 begin
   {$IFDEF DARWIN}
@@ -2299,7 +2341,7 @@ begin
     Exit
   else
   begin
-    Result := '~' + Result;
+    Result := ExcludeTrailingPathDelimiter(GetUserDir) + Result; // FileExists doesn't expand '~'
     if FileExists(Result) then
       Exit;
   end;
