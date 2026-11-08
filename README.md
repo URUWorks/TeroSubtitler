@@ -53,7 +53,7 @@ Auto-translation API.
 
 for video dubbing.
 
-### [Tesseract](https://github.com/tesseract-ocr/tesseract/)
+### [Tesseract](https://github.com/URUWorks/UW_Tesseract#uw_tesseract)
 
 Open Source OCR Engine.
 
