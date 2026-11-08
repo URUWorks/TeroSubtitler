@@ -1,4 +1,4 @@
-; Inno Setup 6.5+ script for Tero Subtitler (Windows x64 and ARM64)
+﻿; Inno Setup 6.5+ script for Tero Subtitler (Windows x64 and ARM64)
 ;
 ; Two modes, same script. make_installer.ps1 prepares the libraries and passes the defines:
 ;
@@ -94,8 +94,8 @@ Source: "{#DicDir}\{#DicBase}.dic"; DestDir: "{app}\Dictionaries"; Components: {
   #define DicBase DicBaseOf(FindGetFileName(FindHandle))
   if WizardIsComponentSelected('{#DicIdOf(DicBase)}') then
   begin
-    DownloadPage.Add('{#DicUrlOf(DicBase)}.aff', 'dic-{#DicBase}.aff', '');
-    DownloadPage.Add('{#DicUrlOf(DicBase)}.dic', 'dic-{#DicBase}.dic', '');
+    QueueDownload('{#DicUrlOf(DicBase)}.aff', 'dic-{#DicBase}.aff', '');
+    QueueDownload('{#DicUrlOf(DicBase)}.dic', 'dic-{#DicBase}.dic', '');
   end;
 #endsub
 #endif
@@ -169,54 +169,72 @@ AssocSubtitles=Associate subtitle files with %1
 TypeCompact=Compact installation
 TypeFull=Full installation
 TypeCustom=Custom installation
+DownloadingFile=Downloading file %1 of %2
+DownloadRetry=Downloading file %1 of %2 (try %3)
 spanish.Dictionaries=Diccionarios ortográficos
 spanish.OtherTasks=Otras tareas:
 spanish.AssocSubtitles=Asociar los archivos de subtítulos con %1
 spanish.TypeCompact=Instalación compacta
 spanish.TypeFull=Instalación completa
 spanish.TypeCustom=Instalación personalizada
+spanish.DownloadingFile=Descargando el archivo %1 de %2
+spanish.DownloadRetry=Descargando el archivo %1 de %2 (intento %3)
 brazilianportuguese.Dictionaries=Dicionários de verificação ortográfica
 brazilianportuguese.OtherTasks=Outras tarefas:
 brazilianportuguese.AssocSubtitles=Associar os arquivos de legenda ao %1
 brazilianportuguese.TypeCompact=Instalação compacta
 brazilianportuguese.TypeFull=Instalação completa
 brazilianportuguese.TypeCustom=Instalação personalizada
+brazilianportuguese.DownloadingFile=Baixando o arquivo %1 de %2
+brazilianportuguese.DownloadRetry=Baixando o arquivo %1 de %2 (tentativa %3)
 bulgarian.Dictionaries=Речници за проверка на правописа
 bulgarian.OtherTasks=Други задачи:
 bulgarian.AssocSubtitles=Асоцииране на файловете със субтитри с %1
 bulgarian.TypeCompact=Компактна инсталация
 bulgarian.TypeFull=Пълна инсталация
 bulgarian.TypeCustom=Инсталация по избор
+bulgarian.DownloadingFile=Изтегляне на файл %1 от %2
+bulgarian.DownloadRetry=Изтегляне на файл %1 от %2 (опит %3)
 german.Dictionaries=Wörterbücher für die Rechtschreibprüfung
 german.OtherTasks=Weitere Aufgaben:
 german.AssocSubtitles=Untertiteldateien mit %1 verknüpfen
 german.TypeCompact=Minimale Installation
 german.TypeFull=Vollständige Installation
 german.TypeCustom=Benutzerdefinierte Installation
+german.DownloadingFile=Datei %1 von %2 wird heruntergeladen
+german.DownloadRetry=Datei %1 von %2 wird heruntergeladen (Versuch %3)
 italian.Dictionaries=Dizionari per il controllo ortografico
 italian.OtherTasks=Altre attività:
 italian.AssocSubtitles=Associa i file di sottotitoli a %1
 italian.TypeCompact=Installazione compatta
 italian.TypeFull=Installazione completa
 italian.TypeCustom=Installazione personalizzata
+italian.DownloadingFile=Download del file %1 di %2
+italian.DownloadRetry=Download del file %1 di %2 (tentativo %3)
 russian.Dictionaries=Словари для проверки орфографии
 russian.OtherTasks=Другие задачи:
 russian.AssocSubtitles=Связать файлы субтитров с %1
 russian.TypeCompact=Компактная установка
 russian.TypeFull=Полная установка
 russian.TypeCustom=Выборочная установка
+russian.DownloadingFile=Загрузка файла %1 из %2
+russian.DownloadRetry=Загрузка файла %1 из %2 (попытка %3)
 slovenian.Dictionaries=Slovarji za preverjanje črkovanja
 slovenian.OtherTasks=Druga opravila:
 slovenian.AssocSubtitles=Poveži datoteke podnapisov s programom %1
 slovenian.TypeCompact=Osnovna namestitev
 slovenian.TypeFull=Polna namestitev
 slovenian.TypeCustom=Namestitev po meri
+slovenian.DownloadingFile=Prenašanje datoteke %1 od %2
+slovenian.DownloadRetry=Prenašanje datoteke %1 od %2 (poskus %3)
 turkish.Dictionaries=Yazım denetimi sözlükleri
 turkish.OtherTasks=Diğer görevler:
 turkish.AssocSubtitles=Altyazı dosyalarını %1 ile ilişkilendir
 turkish.TypeCompact=Küçük kurulum
 turkish.TypeFull=Tam kurulum
 turkish.TypeCustom=Özel kurulum
+turkish.DownloadingFile=Dosya indiriliyor: %1 / %2
+turkish.DownloadRetry=Dosya indiriliyor: %1 / %2 (deneme %3)
 
 [Types]
 Name: "compact"; Description: "{cm:TypeCompact}"
@@ -504,6 +522,8 @@ end;
 #ifdef WebInstall
 var
   DownloadPage: TDownloadWizardPage;
+  ExtractionPage: TExtractionWizardPage;
+  DlUrls, DlNames, DlShas: TArrayOfString;
 #endif
 
 procedure InitializeWizard;
@@ -519,26 +539,44 @@ begin
   end;
 #ifdef WebInstall
   DownloadPage := CreateDownloadPage(SetupMessage(msgWizardPreparing), SetupMessage(msgPreparingDesc), nil);
+  DownloadPage.ShowBaseNameInsteadOfUrl := True;
+  ExtractionPage := CreateExtractionPage(SetupMessage(msgWizardPreparing), SetupMessage(msgPreparingDesc), nil);
 #endif
 end;
 
 #ifdef WebInstall
-procedure AddDownloads;
+procedure QueueDownload(const Url, BaseName, Sha: String);
+var
+  N: Integer;
 begin
+  N := GetArrayLength(DlUrls);
+  SetArrayLength(DlUrls, N + 1);
+  SetArrayLength(DlNames, N + 1);
+  SetArrayLength(DlShas, N + 1);
+  DlUrls[N] := Url;
+  DlNames[N] := BaseName;
+  DlShas[N] := Sha;
+end;
+
+procedure QueueDownloads;
+begin
+  SetArrayLength(DlUrls, 0);
+  SetArrayLength(DlNames, 0);
+  SetArrayLength(DlShas, 0);
   if UseArm64 then
   begin
   #ifdef Arm64Bin
-    DownloadPage.Add('{#MpvArm64Url}', 'libmpv.zip', '{#MpvArm64Sha}');
-    DownloadPage.Add('{#TSLibsArm64Url}', 'tslibs.zip', '{#TSLibsArm64Sha}');
+    QueueDownload('{#MpvArm64Url}', 'libmpv.zip', '{#MpvArm64Sha}');
+    QueueDownload('{#TSLibsArm64Url}', 'openssl-hunspell.zip', '{#TSLibsArm64Sha}');
   #endif
   end
   else
   begin
     if IsModernWindows then
-      DownloadPage.Add('{#MpvX64Url}', 'libmpv.zip', '{#MpvX64Sha}')
+      QueueDownload('{#MpvX64Url}', 'libmpv.zip', '{#MpvX64Sha}')
     else
-      DownloadPage.Add('{#MpvLegacyUrl}', 'libmpv.zip', '{#MpvLegacySha}');
-    DownloadPage.Add('{#TSLibsX64Url}', 'tslibs.zip', '{#TSLibsX64Sha}');
+      QueueDownload('{#MpvLegacyUrl}', 'libmpv.zip', '{#MpvLegacySha}');
+    QueueDownload('{#TSLibsX64Url}', 'openssl-hunspell.zip', '{#TSLibsX64Sha}');
   end;
   // Dictionaries, from the same commit as this build
 #for {FindHandle = FindResult = FindFirst(DicDir + "\*.dic", 0); FindResult; FindResult = FindNext(FindHandle)} DicDownloads
@@ -547,28 +585,74 @@ begin
 #endif
 end;
 
+// One file at a time, so the page says which one ("2 of 5") and a failed one
+// (a 504 from the server, a dropped connection) is tried again, up to 4 times
+procedure DownloadQueued;
+var
+  I, Attempt: Integer;
+  Done: Boolean;
+begin
+  for I := 0 to GetArrayLength(DlUrls) - 1 do
+  begin
+    Attempt := 0;
+    Done := False;
+    repeat
+      Attempt := Attempt + 1;
+      DownloadPage.Clear;
+      DownloadPage.Add(DlUrls[I], DlNames[I], DlShas[I]);
+      if Attempt = 1 then
+        DownloadPage.SetText(FmtMessage(CustomMessage('DownloadingFile'), [IntToStr(I + 1), IntToStr(GetArrayLength(DlUrls))]), DlNames[I])
+      else
+        DownloadPage.SetText(FmtMessage(CustomMessage('DownloadRetry'), [IntToStr(I + 1), IntToStr(GetArrayLength(DlUrls)), IntToStr(Attempt)]), DlNames[I]);
+      try
+        DownloadPage.Download;
+        Done := True;
+      except
+        Log(Format('Download of %s failed (try %d): %s', [DlUrls[I], Attempt, GetExceptionMessage]));
+        if DownloadPage.AbortedByUser or (Attempt >= 4) then
+          RaiseException(DlNames[I] + ': ' + GetExceptionMessage);
+        Sleep(Attempt * 3000);
+      end;
+    until Done;
+  end;
+end;
+
 // Called in silent installs too: downloads, checks the SHA-256 and extracts the libraries
 function PrepareToInstall(var NeedsRestart: Boolean): String;
 var
   Libs: String;
 begin
   Result := '';
-  DownloadPage.Clear;
-  AddDownloads;
+  QueueDownloads;
   DownloadPage.Show;
   try
     try
-      DownloadPage.Download;
-      Libs := ExpandConstant('{tmp}\libs');
-      ForceDirectories(Libs);
-      ExtractArchive(ExpandConstant('{tmp}\libmpv.zip'), Libs, '', False, nil);
-      ExtractArchive(ExpandConstant('{tmp}\tslibs.zip'), Libs, '', False, nil);
+      DownloadQueued;
     except
       Result := AddPeriod(GetExceptionMessage);
-      Log('Download or extraction failed: ' + Result);
+      Log('Download failed: ' + Result);
     end;
   finally
     DownloadPage.Hide;
+  end;
+  if Result <> '' then
+    Exit;
+
+  Libs := ExpandConstant('{tmp}\libs');
+  ForceDirectories(Libs);
+  ExtractionPage.Clear;
+  ExtractionPage.Add(ExpandConstant('{tmp}\libmpv.zip'), Libs, False);
+  ExtractionPage.Add(ExpandConstant('{tmp}\openssl-hunspell.zip'), Libs, False);
+  ExtractionPage.Show;
+  try
+    try
+      ExtractionPage.Extract;
+    except
+      Result := AddPeriod(GetExceptionMessage);
+      Log('Extraction failed: ' + Result);
+    end;
+  finally
+    ExtractionPage.Hide;
   end;
 end;
 #endif
