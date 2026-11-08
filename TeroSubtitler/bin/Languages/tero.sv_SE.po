@@ -79,6 +79,10 @@ msgstr "Döv/Hörselskadad"
 msgid "Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?"
 msgstr ""
 
+#: proclocalize.lngaskdownloadtesseract
+msgid "Tesseract was not found. Download it now?"
+msgstr ""
+
 #: proclocalize.lngasktoextractaudio
 msgid "Audio waveform was not found, do you want to extract it?"
 msgstr "Ljudvåg hittades inte. Vill du ta fram den?"
@@ -201,6 +205,19 @@ msgstr "%s (%s BPS/EBU-TC)"
 #: proclocalize.lngaswaveformtext
 msgid "Click here to use timeline"
 msgstr "Klicka här för att använda tidslinjen"
+
+#: proclocalize.lngautocropapplied
+#, object-pascal-format
+msgid "Cropped to %dx%d"
+msgstr ""
+
+#: proclocalize.lngautocropnobars
+msgid "No black bars were detected in the current frame."
+msgstr ""
+
+#: proclocalize.lngautocropnoimage
+msgid "The black bars could not be detected. Go to a frame with image (the first ones are usually black) and try again."
+msgstr ""
 
 #: proclocalize.lngbackupsaved
 msgid "Backup saved."
@@ -1294,6 +1311,16 @@ msgstr "Starttid"
 msgctxt "proclocalize.lngtereduce"
 msgid "Reduce"
 msgstr "Minska"
+
+#: proclocalize.lngtesseractlangerror
+#, object-pascal-format
+msgid "Tesseract could not load the language “%s”. Download it again from the languages window."
+msgstr ""
+
+#: proclocalize.lngtesseractrunerror
+#, object-pascal-format
+msgid "Tesseract could not be run (%s). Check in Settings > Tools that the path is correct and that this version works on your system."
+msgstr ""
 
 #: proclocalize.lngtetext
 msgctxt "proclocalize.lngtetext"
@@ -3341,6 +3368,14 @@ msgctxt "tfrmmain.acthelp.caption"
 msgid "Help"
 msgstr "Hjälp"
 
+#: tfrmmain.actimportplaintext.caption
+msgid "Plain text..."
+msgstr ""
+
+#: tfrmmain.actimportplaintext.hint
+msgid "Import a transcription without times, to synchronize it with the audio"
+msgstr ""
+
 #: tfrmmain.actimportsubtitles.caption
 msgid "Subtitles..."
 msgstr "Textning..."
@@ -3651,6 +3686,22 @@ msgctxt "tfrmmain.actpaste.caption"
 msgid "Paste"
 msgstr "Klistra in"
 
+#: tfrmmain.actpasteastranslations.caption
+msgid "Paste as translations"
+msgstr ""
+
+#: tfrmmain.actpastetexts.caption
+msgid "Paste texts"
+msgstr ""
+
+#: tfrmmain.actpastetimes.caption
+msgid "Paste times"
+msgstr ""
+
+#: tfrmmain.actpastetranslations.caption
+msgid "Paste translations"
+msgstr ""
+
 #: tfrmmain.actplaycurrententry.caption
 msgid "Play current entry"
 msgstr "Spela aktuell post"
@@ -3712,6 +3763,10 @@ msgstr "Gör om"
 #: tfrmmain.actredo.hint
 msgid "Redo last undo"
 msgstr "Upprepa senaste ångring"
+
+#: tfrmmain.actregeneratethumbnails.caption
+msgid "Regenerate thumbnails"
+msgstr ""
 
 #: tfrmmain.actremovelinefromentry.caption
 msgid "Remove line from entry..."
@@ -4276,6 +4331,10 @@ msgstr "2.35:1"
 msgid "4:3"
 msgstr "4:3"
 
+#: tfrmmain.actvarautocrop.caption
+msgid "Auto-crop"
+msgstr ""
+
 #: tfrmmain.actvarcycle.caption
 msgid "Cycle Aspect Ratio"
 msgstr "Växla bildförhållande"
@@ -4414,6 +4473,11 @@ msgstr "Format"
 #: tfrmmain.mnueditinsertchar.caption
 msgid "Insert Unicode character"
 msgstr "Infoga Unicode-tecken"
+
+#: tfrmmain.mnueditpastespecial.caption
+msgctxt "tfrmmain.mnueditpastespecial.caption"
+msgid "Paste special"
+msgstr ""
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
@@ -4581,6 +4645,11 @@ msgstr "Vågform"
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
 msgstr "Fönster"
+
+#: tfrmmain.mnuvstpastespecial.caption
+msgctxt "tfrmmain.mnuvstpastespecial.caption"
+msgid "Paste special"
+msgstr ""
 
 #: tfrmmain.mnuvstvideo.caption
 msgctxt "tfrmmain.mnuvstvideo.caption"

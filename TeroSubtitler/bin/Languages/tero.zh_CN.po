@@ -78,6 +78,10 @@ msgstr "不可见"
 msgid "Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?"
 msgstr ""
 
+#: proclocalize.lngaskdownloadtesseract
+msgid "Tesseract was not found. Download it now?"
+msgstr ""
+
 #: proclocalize.lngasktoextractaudio
 msgid "Audio waveform was not found, do you want to extract it?"
 msgstr "未找到音频波形，是否要提取？"
@@ -197,6 +201,19 @@ msgstr ""
 #: proclocalize.lngaswaveformtext
 msgid "Click here to use timeline"
 msgstr "点这里使用时间轴"
+
+#: proclocalize.lngautocropapplied
+#, object-pascal-format
+msgid "Cropped to %dx%d"
+msgstr ""
+
+#: proclocalize.lngautocropnobars
+msgid "No black bars were detected in the current frame."
+msgstr ""
+
+#: proclocalize.lngautocropnoimage
+msgid "The black bars could not be detected. Go to a frame with image (the first ones are usually black) and try again."
+msgstr ""
 
 #: proclocalize.lngbackupsaved
 msgid "Backup saved."
@@ -1264,6 +1281,16 @@ msgstr "初始时间"
 msgctxt "proclocalize.lngtereduce"
 msgid "Reduce"
 msgstr "减少"
+
+#: proclocalize.lngtesseractlangerror
+#, object-pascal-format
+msgid "Tesseract could not load the language “%s”. Download it again from the languages window."
+msgstr ""
+
+#: proclocalize.lngtesseractrunerror
+#, object-pascal-format
+msgid "Tesseract could not be run (%s). Check in Settings > Tools that the path is correct and that this version works on your system."
+msgstr ""
 
 #: proclocalize.lngtetext
 msgctxt "proclocalize.lngtetext"
@@ -3286,6 +3313,14 @@ msgctxt "tfrmmain.acthelp.caption"
 msgid "Help"
 msgstr "帮助"
 
+#: tfrmmain.actimportplaintext.caption
+msgid "Plain text..."
+msgstr ""
+
+#: tfrmmain.actimportplaintext.hint
+msgid "Import a transcription without times, to synchronize it with the audio"
+msgstr ""
+
 #: tfrmmain.actimportsubtitles.caption
 msgid "Subtitles..."
 msgstr "字幕..."
@@ -3591,6 +3626,22 @@ msgctxt "tfrmmain.actpaste.caption"
 msgid "Paste"
 msgstr "粘贴"
 
+#: tfrmmain.actpasteastranslations.caption
+msgid "Paste as translations"
+msgstr ""
+
+#: tfrmmain.actpastetexts.caption
+msgid "Paste texts"
+msgstr ""
+
+#: tfrmmain.actpastetimes.caption
+msgid "Paste times"
+msgstr ""
+
+#: tfrmmain.actpastetranslations.caption
+msgid "Paste translations"
+msgstr ""
+
 #: tfrmmain.actplaycurrententry.caption
 msgid "Play current entry"
 msgstr "播放当前条目"
@@ -3652,6 +3703,10 @@ msgstr "重做"
 #: tfrmmain.actredo.hint
 msgid "Redo last undo"
 msgstr "重做上次撤销的操作"
+
+#: tfrmmain.actregeneratethumbnails.caption
+msgid "Regenerate thumbnails"
+msgstr ""
 
 #: tfrmmain.actremovelinefromentry.caption
 msgid "Remove line from entry..."
@@ -4212,6 +4267,10 @@ msgstr ""
 msgid "4:3"
 msgstr ""
 
+#: tfrmmain.actvarautocrop.caption
+msgid "Auto-crop"
+msgstr ""
+
 #: tfrmmain.actvarcycle.caption
 msgid "Cycle Aspect Ratio"
 msgstr "循环长宽比"
@@ -4347,6 +4406,11 @@ msgstr "样式"
 #: tfrmmain.mnueditinsertchar.caption
 msgid "Insert Unicode character"
 msgstr "插入 Unicode 字符"
+
+#: tfrmmain.mnueditpastespecial.caption
+msgctxt "tfrmmain.mnueditpastespecial.caption"
+msgid "Paste special"
+msgstr ""
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
@@ -4510,6 +4574,11 @@ msgstr "音频波形"
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
 msgstr "窗口"
+
+#: tfrmmain.mnuvstpastespecial.caption
+msgctxt "tfrmmain.mnuvstpastespecial.caption"
+msgid "Paste special"
+msgstr ""
 
 #: tfrmmain.mnuvstvideo.caption
 msgctxt "tfrmmain.mnuvstvideo.caption"

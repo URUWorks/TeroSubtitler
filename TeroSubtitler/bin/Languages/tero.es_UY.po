@@ -78,6 +78,10 @@ msgstr "Discapacidad auditiva"
 msgid "Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?"
 msgstr "¿Descargar las bibliotecas para utilizar una tarjeta gráfica NVIDIA (aproximadamente 1,3 GB)?"
 
+#: proclocalize.lngaskdownloadtesseract
+msgid "Tesseract was not found. Download it now?"
+msgstr "No se encontró Tesseract. ¿Descargarlo ahora?"
+
 #: proclocalize.lngasktoextractaudio
 msgid "Audio waveform was not found, do you want to extract it?"
 msgstr "No se encontró la forma de onda de audio, ¿desea extraerla?"
@@ -197,6 +201,19 @@ msgstr "%s (%s FPS/SMPTE)"
 #: proclocalize.lngaswaveformtext
 msgid "Click here to use timeline"
 msgstr "Haga clic aquí para usar la línea de tiempo"
+
+#: proclocalize.lngautocropapplied
+#, object-pascal-format
+msgid "Cropped to %dx%d"
+msgstr "Recortado a %dx%d"
+
+#: proclocalize.lngautocropnobars
+msgid "No black bars were detected in the current frame."
+msgstr "No se detectaron franjas negras en el fotograma actual."
+
+#: proclocalize.lngautocropnoimage
+msgid "The black bars could not be detected. Go to a frame with image (the first ones are usually black) and try again."
+msgstr "No se pudieron detectar las franjas negras. Vaya a un fotograma que contenga imagen (los primeros suelen ser negros) e inténtelo de nuevo."
 
 #: proclocalize.lngbackupsaved
 msgid "Backup saved."
@@ -1263,6 +1280,16 @@ msgstr "Tiempo inicial"
 msgctxt "proclocalize.lngtereduce"
 msgid "Reduce"
 msgstr "Reducir"
+
+#: proclocalize.lngtesseractlangerror
+#, object-pascal-format
+msgid "Tesseract could not load the language “%s”. Download it again from the languages window."
+msgstr "Tesseract no ha podido cargar el idioma «%s». Vuelve a descargarlo desde la ventana de idiomas."
+
+#: proclocalize.lngtesseractrunerror
+#, object-pascal-format
+msgid "Tesseract could not be run (%s). Check in Settings > Tools that the path is correct and that this version works on your system."
+msgstr "No se pudo ejecutar Tesseract (%s). Comprueba en Configuración/Herramientas que la ruta sea correcta y que esta versión funcione en tu sistema."
 
 #: proclocalize.lngtetext
 msgctxt "proclocalize.lngtetext"
@@ -3276,6 +3303,14 @@ msgctxt "tfrmmain.acthelp.caption"
 msgid "Help"
 msgstr "Ayuda"
 
+#: tfrmmain.actimportplaintext.caption
+msgid "Plain text..."
+msgstr "Texto sin formato..."
+
+#: tfrmmain.actimportplaintext.hint
+msgid "Import a transcription without times, to synchronize it with the audio"
+msgstr "Importa una transcripción sin marcas de tiempo para sincronizarla con el audio"
+
 #: tfrmmain.actimportsubtitles.caption
 msgid "Subtitles..."
 msgstr "Subtítulos..."
@@ -3581,6 +3616,22 @@ msgctxt "tfrmmain.actpaste.caption"
 msgid "Paste"
 msgstr "Pegar"
 
+#: tfrmmain.actpasteastranslations.caption
+msgid "Paste as translations"
+msgstr "Pegar como traducciones"
+
+#: tfrmmain.actpastetexts.caption
+msgid "Paste texts"
+msgstr "Pegar textos"
+
+#: tfrmmain.actpastetimes.caption
+msgid "Paste times"
+msgstr "Pegar tiempos"
+
+#: tfrmmain.actpastetranslations.caption
+msgid "Paste translations"
+msgstr "Pegar traducciones"
+
 #: tfrmmain.actplaycurrententry.caption
 msgid "Play current entry"
 msgstr "Reproducir entrada actual"
@@ -3642,6 +3693,10 @@ msgstr "Rehacer"
 #: tfrmmain.actredo.hint
 msgid "Redo last undo"
 msgstr "Rehacer última acción"
+
+#: tfrmmain.actregeneratethumbnails.caption
+msgid "Regenerate thumbnails"
+msgstr "Regenerar miniaturas"
 
 #: tfrmmain.actremovelinefromentry.caption
 msgid "Remove line from entry..."
@@ -4202,6 +4257,10 @@ msgstr "2.35:1"
 msgid "4:3"
 msgstr "4:3"
 
+#: tfrmmain.actvarautocrop.caption
+msgid "Auto-crop"
+msgstr "Recorte automático"
+
 #: tfrmmain.actvarcycle.caption
 msgid "Cycle Aspect Ratio"
 msgstr "Alternar relación de aspecto"
@@ -4338,6 +4397,11 @@ msgstr "Formato"
 #: tfrmmain.mnueditinsertchar.caption
 msgid "Insert Unicode character"
 msgstr "Insertar carácter Unicode"
+
+#: tfrmmain.mnueditpastespecial.caption
+msgctxt "tfrmmain.mnueditpastespecial.caption"
+msgid "Paste special"
+msgstr "Pegado especial"
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
@@ -4501,6 +4565,11 @@ msgstr "Forma de onda"
 #: tfrmmain.mnuviewwindows.caption
 msgid "Windows"
 msgstr "Ventanas"
+
+#: tfrmmain.mnuvstpastespecial.caption
+msgctxt "tfrmmain.mnuvstpastespecial.caption"
+msgid "Paste special"
+msgstr "Pegado especial"
 
 #: tfrmmain.mnuvstvideo.caption
 msgctxt "tfrmmain.mnuvstvideo.caption"
@@ -5917,3 +5986,4 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
+
