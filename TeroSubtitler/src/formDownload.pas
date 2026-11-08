@@ -52,6 +52,7 @@ type
     FDownloader: TDownload;
     FURL, FLocalFile: String;
     FDownloaded: TDownloadResult;
+    FErrMsg: String;
     procedure DoOnDownloadProgress(Sender: TObject; const AFrom, ATo: String; const APos, ASize: Int64; const AElapsed, ARemaining, ASpeed: LongInt);
     procedure DoOnDownloadCompleted(Sender: TObject);
     procedure DoOnDownloadError(Sender: TObject; const AErrMsg: String = '');
@@ -203,6 +204,7 @@ begin
   // without it the dialog stayed open doing nothing when the file wasn't on
   // the server (404) or the connection failed, the download "never started"
   FDownloaded := dfError;
+  FErrMsg := AErrMsg;
   btnCancel.Enabled := False;
   Close;
 end;
@@ -215,7 +217,18 @@ begin
   try
     Result := Execute(AURL, ALocalFile);
     if Result = dfError then
-      ShowErrorMessageDialog(lngFailedToDownload)
+    begin
+      // the file is created before the download starts, an empty or partial one
+      // looked like a valid download (e.g. a Tesseract language in the list)
+      if ADeleteFileOnCancel and FileExists(ALocalFile) then
+        DeleteFile(ALocalFile);
+
+      // the reason helps to know what failed (HTTP status, folder, connection)
+      if FErrMsg <> '' then
+        ShowErrorMessageDialog(lngFailedToDownload + LineEnding + LineEnding + FErrMsg + LineEnding + AURL)
+      else
+        ShowErrorMessageDialog(lngFailedToDownload);
+    end
     else if Result = dfCanceled then
     begin
       if ADeleteFileOnCancel and FileExists(ALocalFile) then

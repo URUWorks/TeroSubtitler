@@ -72,10 +72,16 @@ resourcestring
   lngNoInternetConnection = 'No Internet connection available';
   lngFailedToDownload = 'No content downloaded, missing file or no Internet connection.';
   lngDownloadCanceled = 'Download canceled by user.';
+  lngAskDownloadTesseract = 'Tesseract was not found. Download it now?';
+  lngTesseractRunError = 'Tesseract could not be run (%s). Check in Settings > Tools that the path is correct and that this version works on your system.';
+  lngTesseractLangError = 'Tesseract could not load the language “%s”. Download it again from the languages window.';
   lngAskDownloadGPULibs = 'Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?';
   lngGPULibsOptional = 'These libraries are needed with an NVIDIA card; without them, Faster-Whisper uses the processor.';
   lngAskToExtractAudio = 'Audio waveform was not found, do you want to extract it?';
   lngExtractAppError = 'Unable to find “%s”. Check in settings if it is configured correctly.';
+  lngAutoCropNoBars = 'No black bars were detected in the current frame.';
+  lngAutoCropNoImage = 'The black bars could not be detected. Go to a frame with image (the first ones are usually black) and try again.';
+  lngAutoCropApplied = 'Cropped to %dx%d';
   lngSceneDetectNoResults = '“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video.';
   lngExtracting = 'Extracting...';
   lngTranscribing = 'Transcribing...';

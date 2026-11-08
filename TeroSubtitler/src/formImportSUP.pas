@@ -79,7 +79,7 @@ implementation
 uses
   procTypes, procWorkspace, procVST, procColorTheme, FileUtil, procSubtitle,
   UWSubtitleAPI.Formats, UWSubtitles.Utils, BGRABitmap, procTesseract,
-  procConfig, procForms, UWSystem.Process, StrUtils;
+  procConfig, procForms, UWSystem.Process, StrUtils, procDialogs, formCustomQuestionDlg;
 
 {$R *.lfm}
 
@@ -179,17 +179,56 @@ end;
 
 // -----------------------------------------------------------------------------
 
+var
+  TessOutput: String;
+
 procedure TessCB(Output: String; var Cancel: Boolean);
 begin
   //writeln(Output);
   Cancel := CancelProcess;
-  if Output.IsEmpty then Exit;
+  // stderr comes mixed with the text (poStderrToOutPut), it's checked at the end
+  TessOutput := TessOutput + Output;
+end;
 
-  with frmImportSUP do
-  begin
-    FList.DisplaySets[CurrentJob]^.Text := Trim(Output);
-    VSTSelectNode(VST, CurrentJob, True);
+// -----------------------------------------------------------------------------
+
+function FirstLine(const AText: String): String;
+var
+  sl: TStringList;
+  i: Integer;
+begin
+  Result := '';
+  sl := TStringList.Create;
+  try
+    sl.Text := AText;
+    for i := 0 to sl.Count-1 do
+      if Trim(sl[i]) <> '' then
+        Exit(Trim(sl[i]));
+  finally
+    sl.Free;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function IsTesseractLangError(const AOutput: String): Boolean;
+begin
+  Result := (Pos('Could not initialize tesseract', AOutput) > 0) or
+            (Pos('Failed loading language', AOutput) > 0) or
+            (Pos('Error opening data file', AOutput) > 0);
+end;
+
+// -----------------------------------------------------------------------------
+
+function IsTesseractRunError(const AOutput: String): Boolean;
+begin
+  // a binary built for a newer macOS or another CPU, or missing libraries:
+  // the output is the loader's message and not the text of the image
+  Result := (Pos('dyld', AOutput) > 0) or
+            (Pos('Library not loaded', AOutput) > 0) or
+            (Pos('Symbol not found', AOutput) > 0) or
+            (Pos('Bad CPU type', AOutput) > 0) or
+            (Pos('error while loading shared libraries', AOutput) > 0);
 end;
 
 // -----------------------------------------------------------------------------
@@ -199,8 +238,24 @@ var
   i, c: Integer;
   params: TStringArray;
   s, lang: String;
+  ok: Boolean;
 begin
   CancelProcess := False;
+  if not FileExists(Tools.Tesseract) then
+  begin
+    // our UW_Tesseract build, it works on old systems too; if the download
+    // fails the download dialog already says why
+    if (CustomQuestionDialog(lngAskDownloadTesseract, '', [dbYes, dbNo]) <> mrYes) or
+      not DownloadTesseract then
+      Exit;
+    FillComboWithAvailableLanguages(TessDataFolder, cboLanguage);
+    if cboLanguage.Items.Count = 0 then
+    begin
+      CheckButtons;
+      Exit;
+    end;
+  end;
+
   if FList.DisplaySets.Count > 0 then
   begin
     SetControlsEnabled(False);
@@ -227,11 +282,40 @@ begin
         for i := 0 to High(params) do
           params[i] := StringsReplace(params[i], ['%input', '%lang'], [s, lang], []);
 
-        ExecuteAppEx(Tools.Tesseract, params, NIL, @TessCB);
-      end;
+        // without it tesseract looks in the folder it was built with
+        // (/usr/local/share/tessdata, /opt/homebrew/share/tessdata...) and
+        // doesn't see the languages downloaded by Tero
+        SetLength(params, Length(params)+2);
+        params[High(params)-1] := '--tessdata-dir';
+        params[High(params)]   := TessDataFolder;
 
-      if FileExists(s) then
-        DeleteFile(s);
+        TessOutput := '';
+        ok := ExecuteAppEx(Tools.Tesseract, params, NIL, @TessCB);
+
+        if FileExists(s) then
+          DeleteFile(s);
+
+        if not ok then
+        begin
+          ShowErrorMessageDialog(Format(lngTesseractRunError, [Tools.Tesseract]));
+          Exit;
+        end
+        else if IsTesseractRunError(TessOutput) then
+        begin
+          ShowErrorMessageDialog(Format(lngTesseractRunError, [FirstLine(TessOutput)]));
+          Exit;
+        end
+        else if IsTesseractLangError(TessOutput) then
+        begin
+          ShowErrorMessageDialog(Format(lngTesseractLangError, [cboLanguage.Text]));
+          Exit;
+        end;
+
+        if CancelProcess then Exit;
+
+        FList.DisplaySets[c]^.Text := Trim(TessOutput);
+        VSTSelectNode(VST, c, True);
+      end;
     finally
       SetControlsEnabled(True);
     end;
@@ -357,7 +441,8 @@ end;
 procedure TfrmImportSUP.CheckButtons;
 begin
   btnImport.Enabled := VST.RootNodeCount > 0;
-  btnOCR.Enabled := FileExists(Tools.Tesseract) and (cboLanguage.Items.Count > 0);
+  // enabled without Tesseract too, so clicking it explains what's missing
+  btnOCR.Enabled := (VST.RootNodeCount > 0) and (cboLanguage.Items.Count > 0);
 end;
 
 // -----------------------------------------------------------------------------

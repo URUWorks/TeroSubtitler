@@ -95,7 +95,8 @@ end;
 
 procedure TfrmImportSUPLanguages.btnDownloadClick(Sender: TObject);
 const
-  URL = 'https://github.com/tesseract-ocr/tessdata/raw/main/';
+  // directly, without the github.com/.../raw redirect
+  URL = 'https://raw.githubusercontent.com/tesseract-ocr/tessdata/main/';
 
 var
   filename, s: String;
@@ -104,6 +105,7 @@ begin
   try
     s := DisplayNameToCultureName(cboLanguages.Text)+'.traineddata';
     filename := ConcatPaths([TessDataFolder, s]);
+    ForceDirectories(TessDataFolder);
     ShowDownloadDialog(URL + s, filename);
   finally
     SetControlsEnabled(True);

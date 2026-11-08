@@ -416,10 +416,22 @@ begin
       HttpClient.AllowRedirect := True;
       HttpClient.ConnectTimeout := HTTPConnectTimeout;
       HttpClient.IOTimeout := HTTPIOTimeout;
+      HttpClient.AddHeader('User-Agent', 'Mozilla/5.0 (compatible; fpweb)');
 
-      HttpClient.HTTPMethod('HEAD', URL, NIL, []);
+      try
+        HttpClient.HTTPMethod('HEAD', URL, NIL, []);
+      except
+        on E: Exception do
+        begin
+          FErrMsg := E.Message;
+          Exit;
+        end;
+      end;
       if (HttpClient.ResponseStatusCode < 200) or (HttpClient.ResponseStatusCode >= 300) then
+      begin
+        FErrMsg := 'HTTP ' + IntToStr(HttpClient.ResponseStatusCode);
         Exit;
+      end;
 
       HttpClient.OnDataReceived := @DoOnDataReceived;
       HttpClient.ResponseHeaders.NameValueSeparator := ':';
@@ -453,9 +465,9 @@ begin
   FStartTime := GetTickCount64;
 
   Dir := ExtractFileDir(FLocalFile);
-  if not DirectoryExists(Dir) and not CreateDir(Dir) then
+  if not DirectoryExists(Dir) and not ForceDirectories(Dir) then
   begin
-    FErrMsg := '-1';
+    FErrMsg := Dir;
     Synchronize(@DoOnDownloadError);
   end
   else if GetContentLength then
@@ -505,7 +517,7 @@ begin
   end
   else
   begin
-    FErrMsg := '404';
+    if FErrMsg = '' then FErrMsg := '404';
     Synchronize(@DoOnDownloadError);
   end;
 end;

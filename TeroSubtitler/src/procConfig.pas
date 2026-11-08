@@ -106,6 +106,8 @@ function WhisperFileName: String;
 function WhisperModelsFolder: String;
 function WhisperTranscriptionsFolder: String;
 function TessDataFolder: String;
+function FindTesseract: String;
+function DownloadTesseract: Boolean;
 function libmpvFolder: String;
 function YTDLPFolder: String;
 function ffmpegFolder: String;
@@ -130,7 +132,7 @@ procedure CheckForUpdates;
 implementation
 
 uses
-  RegExpr, formMain, UWSystem.Encoding, UWSystem.SysUtils, Dialogs,
+  FileUtil, RegExpr, formMain, UWSystem.Encoding, UWSystem.SysUtils, Dialogs,
   procDialogs, UWSubtitleAPI.Formats, MPVPlayer, procWorkspace, procColorTheme,
   LCLProc, UWSystem.Globalization, UWSystem.TimeUtils, libMPV.Client, procMPV,
   UWSpellcheck.Hunspell, procConventions, UWSystem.InetUtils, lazfileutils,
@@ -226,7 +228,7 @@ begin
       YTDLP := GetInstallFolder(YTDLP_EXE);
     {$ENDIF}
 
-    Tesseract := '';
+    Tesseract := FindTesseract;
 
     FFmpeg_ParamsForAudioExtract := FFMPEG_Params;
     FFmpeg_ParamsForShotChanges  := FFMPEG_SCParams;
@@ -739,6 +741,9 @@ begin
         WhisperEngine := TWhisperEngine(GetValue('WhisperEngine', 0));
         YTDLP := GetValue('YTDLP', YTDLP);
         Tesseract := GetValue('Tesseract', Tesseract);
+        // older settings saved it empty, and an install moved/removed leaves a dead path
+        if not FileExists(Tesseract) then
+          Tesseract := FindTesseract;
 
         API_KEY_TTS := GetValue('API_KEY_TTS', '');
         CloseKey;
@@ -2131,8 +2136,100 @@ end;
 // -----------------------------------------------------------------------------
 
 function TessDataFolder: String;
+var
+  s: String;
 begin
-  Result := ConcatPaths([ExtractFileDir(Tools.Tesseract), 'tessdata']);
+  // The tessdata folder next to the executable is only used when we can write
+  // there (Windows installer folder, our own build). System installs (Homebrew,
+  // MacPorts, apt, Program Files) don't keep it there or don't let us write, and
+  // with no Tesseract configured the old code returned the relative "tessdata",
+  // so the downloaded languages ended up nowhere. The user folder always works,
+  // and it's passed to tesseract with --tessdata-dir.
+  if Tools.Tesseract <> '' then
+  begin
+    s := ConcatPaths([ExtractFileDir(Tools.Tesseract), 'tessdata']);
+    if DirectoryExists(s) and DirectoryIsWritable(s) then
+      Exit(s);
+  end;
+
+  Result := ExcludeTrailingPathDelimiter(GetCustomUserPath('tessdata'));
+  // on Windows that's the Tero folder; if it was installed somewhere we can't
+  // write (an old installer, a copy in Program Files...), use the user profile
+  if not (ForceDirectories(Result) and DirectoryIsWritable(Result)) then
+    Result := ConcatPaths([GetAppConfigDir(False), 'tessdata']);
+end;
+
+// -----------------------------------------------------------------------------
+
+function FindTesseract: String;
+{$IFDEF WINDOWS}
+var
+  dirs: array[0..2] of String;
+  i: Integer;
+{$ENDIF}
+begin
+  // our own copy first (portable / downloaded by Tero)
+  Result := ConcatPaths([GetCustomUserPath('Tesseract'), TESSERACT_EXE]);
+  if FileExists(Result) then Exit;
+
+  {$IFDEF WINDOWS}
+  // UB Mannheim installer, for all users or only for the current one
+  dirs[0] := GetEnvironmentVariable('ProgramFiles');
+  dirs[1] := GetEnvironmentVariable('ProgramFiles(x86)');
+  dirs[2] := ConcatPaths([GetEnvironmentVariable('LOCALAPPDATA'), 'Programs']);
+  for i := 0 to High(dirs) do
+    if dirs[i] <> '' then
+    begin
+      Result := ConcatPaths([dirs[i], 'Tesseract-OCR', TESSERACT_EXE]);
+      if FileExists(Result) then Exit;
+    end;
+  Result := '';
+  {$ELSE}
+  // Homebrew (Intel and Apple Silicon), MacPorts, apt...
+  Result := GetInstallFolder(TESSERACT_EXE);
+  if not FileExists(Result) then Result := '';
+  {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
+function DownloadTesseract: Boolean;
+var
+  folder, exe, oldData, newData: String;
+  files: TStringList;
+  i: Integer;
+begin
+  // UW_Tesseract: a single static executable that also runs on old systems
+  // (macOS 10.11+ Intel, Windows 7, glibc 2.17), see github.com/URUWorks/UW_Tesseract
+  folder := GetCustomUserPath('Tesseract');
+  exe := ConcatPaths([folder, TESSERACT_EXE]);
+  oldData := TessDataFolder;
+  ForceDirectories(folder);
+  {$IFDEF DARWIN}
+  ShowDownloadDialog(StringReplace(URL_TESSERACT, '%cpu', GetCPUArchitectureString, []), ConcatPaths([folder, 'tesseract.zip']));
+  {$ELSE}
+  ShowDownloadDialog(URL_TESSERACT, ConcatPaths([folder, 'tesseract.zip']));
+  {$ENDIF}
+  Result := FileExists(exe);
+  if not Result then Exit;
+
+  MakeFileExecutable(exe);
+  Tools.Tesseract := exe;
+
+  // the languages already downloaded stay available with the new tessdata folder
+  newData := TessDataFolder;
+  if (oldData <> newData) and DirectoryExists(oldData) then
+  begin
+    ForceDirectories(newData);
+    files := FindAllFiles(oldData, '*.traineddata', False);
+    try
+      for i := 0 to files.Count-1 do
+        if not FileExists(ConcatPaths([newData, ExtractFileName(files[i])])) then
+          CopyFile(files[i], ConcatPaths([newData, ExtractFileName(files[i])]));
+    finally
+      files.Free;
+    end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -2309,10 +2406,12 @@ const
     '/usr/lib/x86_64-linux-gnu'
   );
   {$ELSE}
-  pathLst : array[0..3] of String = (
+  pathLst : array[0..5] of String = (
     '/usr/local/bin',
+    '/opt/homebrew/bin', // Homebrew on Apple Silicon
     '/opt/local/bin',
     '/usr/local/lib',
+    '/opt/homebrew/lib',
     '/opt/local/lib'
     );
   {$ENDIF}
