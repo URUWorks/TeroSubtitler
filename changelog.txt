@@ -42,6 +42,7 @@
 - fixed: [macOS] Homebrew/MacPorts tools (deno, ffmpeg) weren’t found by yt-dlp when Tero was opened from Finder
 - fixed: [macOS] The shortcut presets are saved in the user folder instead of inside the app
 - fixed: [macOS] Access violation in spell check with words containing the typographic apostrophe (’)
+- fixed: Thumbnails of anamorphic videos were distorted
 - fixed: The layout chosen in the Setup wizard was lost when the wizard was reopened before Tero was closed for the first time
 - fixed: Recent files was enabled and empty when no file had been opened yet
 - fixed: PySceneDetect not detected when installed with the official installer, pip/pipx (~/.local/bin) or Homebrew
@@ -165,6 +166,8 @@
 - added: Add Project Properties to View #78
 - added: Synchronize texts with the audio (Audio to text/Synchronize the current texts) #41
 - added: Fix subtitles: caps lock to normal casing #18
+- added: Media > Aspect ratio > Auto-crop, detects the black bars on the current frame and crops them
+- added: Regenerate thumbnails (timeline context menu)
 - added: “Update” button for yt-dlp in Settings/Tools
 - added: File/Import.Plain text…, creates the entries from a transcription without times with a preview, and optionally synchronizes them with the audio
 - added: Audio to text, the hallucinations of the silences (“Subtitles by”…) are removed and the fragments of one or two words are joined with the next entry
@@ -174,6 +177,7 @@
 - added: Add support for smart quotes #214
 - added: Tools/Translation memory/Add translated lines to memory
 - added: Translation memory/Save a copy... and Open translation memories folder
+- added: Import SUP: offers to download Tesseract if it isn't found
 
 1.0.2.3 (18.09.2026)
 - fixed: Corrupted undo/redo stack when changing input/output FPS
