@@ -38,9 +38,11 @@ type
     FTimes     : TIntegerDynArray; // snapshot of the scene changes (main thread)
     FOffsetMS  : Integer;
     FTempDir   : String;
+    FCrop      : String;  // ffmpeg crop filter (Auto-crop), empty = none
     FOnReady   : TThumbnailReadyEvent;
     FCurTime   : Integer;
     FCurFile   : String;
+    procedure SetCrop(const ARect: TRect);
     procedure DoReadySync;
     procedure RunAndWait(const AProcess: TProcess);
   protected
@@ -48,14 +50,33 @@ type
   public
     constructor Create(const AVideoFile: String; const ATimes: TIntegerDynArray; const AFPS: Single; AOnReady: TThumbnailReadyEvent; AOnTerminate: TNotifyEvent = NIL);
     property TempDir: String read FTempDir write FTempDir;
+    // the black bars cropped in the video (pixels of the decoded video), set before Start
+    property Crop: TRect write SetCrop;
   end;
+
+// the folder of the thumbnails of a video (also a cache between sessions)
+function GetThumbnailsCacheDir(const AVideoFile: String): String;
 
 // -----------------------------------------------------------------------------
 
 implementation
 
 uses
-  procTypes, Math;
+  procTypes, Math, crc, LazFileUtils;
+
+// -----------------------------------------------------------------------------
+
+function GetThumbnailsCacheDir(const AVideoFile: String): String;
+var
+  s: String;
+begin
+  // the full name, extension included (video.mp4 and video.mkv used to share
+  // the folder, mixing their thumbnails), plus the date and size of the file,
+  // so a replaced video doesn't reuse the old ones
+  s := AVideoFile + '|' + IntToStr(FileAgeUTF8(AVideoFile)) + '|' + IntToStr(FileSizeUtf8(AVideoFile));
+  Result := ConcatPaths([GetTempDir, ExtractFileName(AVideoFile) + '_' +
+    IntToHex(crc32(0, PByte(PChar(s)), Length(s)), 8)]);
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -72,7 +93,7 @@ begin
   FFileName       := AVideoFile;
   FOnReady        := AOnReady;
   OnTerminate     := AOnTerminate;
-  FTempDir        := ConcatPaths([GetTempDir, ChangeFileExt(ExtractFileName(FFileName), '')]);
+  FTempDir        := GetThumbnailsCacheDir(FFileName);
   FreeOnTerminate := True;
 
   // half a frame, so ffmpeg doesn't give the last frame of the previous shot
@@ -86,6 +107,16 @@ begin
   SetLength(FTimes, Length(ATimes));
   for i := 0 to High(ATimes) do
     FTimes[i] := ATimes[i];
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TGenerateThumbnails.SetCrop(const ARect: TRect);
+begin
+  if ARect.IsEmpty then
+    FCrop := ''
+  else
+    FCrop := Format('crop=%d:%d:%d:%d', [ARect.Width, ARect.Height, ARect.Left, ARect.Top]);
 end;
 
 // -----------------------------------------------------------------------------
@@ -134,9 +165,12 @@ begin
       begin
         if Terminated then Exit;
 
-        // the files are named by time, so they are also a cache ("t" = 24-bit,
-        // the old 16-bit ones looked wrong on macOS)
-        s := ConcatPaths([FTempDir, FTimes[i].ToString + 't.bmp']);
+        // the files are named by time, so they are also a cache ("d" = 24-bit
+        // with the display aspect ratio, anamorphic videos looked distorted)
+        if FCrop.IsEmpty then
+          s := ConcatPaths([FTempDir, FTimes[i].ToString + 'd.bmp'])
+        else // a cropped one is another file (the crop is in its name)
+          s := ConcatPaths([FTempDir, FTimes[i].ToString + 'd_' + FCrop.Replace('crop=', '').Replace(':', '_') + '.bmp']);
 
         if not FileExists(s) then
         begin
@@ -149,6 +183,8 @@ begin
               AProcess.Parameters.Add(FFileName)
             else if AParamArray[x].Contains('%output') then
               AProcess.Parameters.Add(s)
+            else if not FCrop.IsEmpty and AParamArray[x].StartsWith('scale=') then
+              AProcess.Parameters.Add(FCrop + ',' + AParamArray[x]) // crop before scale
             else
               AProcess.Parameters.Add(AParamArray[x]);
           end;

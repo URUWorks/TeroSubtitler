@@ -266,8 +266,18 @@ var
   sc, NewTimes : TIntegerDynArray;
   NewBitmaps   : TThumbnails;
   i, j, c      : Integer;
+  Key          : String;
+  R            : TRect;
 begin
   if not WAVE.DrawThumbnail or not MPV.IsMediaLoaded then Exit;
+
+  // the loaded thumbnails are reused by time only for the same video and
+  // crop: opening another video (without closing the first) mixed them
+  R   := MPV.GetVideoCrop;
+  Key := MPV.FileName + Format('|%d,%d,%d,%d', [R.Left, R.Top, R.Right, R.Bottom]);
+  if Key <> FThumbnailsKey then
+    FreeThumbnails;
+  FThumbnailsKey := Key;
 
   sc := WAVE.GetSceneChangeList;
   if Length(sc) = 0 then
@@ -329,6 +339,7 @@ begin
   FThumbnailThread := TGenerateThumbnails.Create(MPV.FileName,
     WAVEOptions.ThumbnailTimes, Workspace.FPS.OutputFPS.FPS, @DoThumbnailReady,
     @DoThumbnailsDone);
+  TGenerateThumbnails(FThumbnailThread).Crop := MPV.GetVideoCrop;
   FThumbnailThread.Start;
 end;
 
@@ -346,6 +357,7 @@ begin
   end;
 
   WAVE.SetThumbnails(NIL, NIL);
+  FThumbnailsKey := '';
 
   with WAVEOptions do
   begin

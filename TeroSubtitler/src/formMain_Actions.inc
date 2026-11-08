@@ -1702,6 +1702,26 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the thumbnails are a cache in the temp folder: delete the ones of this video
+// and generate them again
+procedure TfrmMain.actRegenerateThumbnailsExecute(Sender: TObject);
+begin
+  if not MPV.IsMediaLoaded then Exit;
+
+  FreeThumbnails;
+  DeleteDirectory(GetThumbnailsCacheDir(MPV.FileName), True);
+
+  if WAVE.DrawThumbnail then
+    GenerateThumbnails
+  else
+  begin
+    actShowThumbnails.Checked := True;
+    actShowThumbnailsExecute(NIL);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actTBXExecute(Sender: TObject);
 begin
   ShowTBX;
@@ -2385,6 +2405,14 @@ end;
 procedure TfrmMain.actVAR2351Execute(Sender: TObject);
 begin
   MPVSetVideoAspectRatio(ar235_1);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actVARAutoCropExecute(Sender: TObject);
+begin
+  // a toggle: on, detects the black bars of the current frame; off, removes the crop
+  MPVAutoCrop(not MPV.IsVideoCropped);
 end;
 
 // -----------------------------------------------------------------------------
