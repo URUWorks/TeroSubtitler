@@ -152,6 +152,12 @@ const
   {$ELSE}
   URL_WHISPER = 'https://github.com/URUWorks/UW_WhisperCPP/releases/latest/download/whisper_win64.zip';
   {$ENDIF}
+  // UW_Tesseract (github.com/URUWorks/UW_Tesseract): Windows 7 SP1+ x64 or Windows 10/11 ARM64
+  {$IFDEF CPUAARCH64}
+  URL_TESSERACT = 'https://github.com/URUWorks/UW_Tesseract/releases/latest/download/tesseract_winarm64.zip';
+  {$ELSE}
+  URL_TESSERACT = 'https://github.com/URUWorks/UW_Tesseract/releases/latest/download/tesseract_win64.zip';
+  {$ENDIF}
   // UW_FasterWhisper (github.com/URUWorks/UW_FasterWhisper), the GPU libraries are optional (NVIDIA, CUDA 12 + cuDNN 9)
   URL_FASTERWHISPER     = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_win64.zip';
   URL_FASTERWHISPERCUDA = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_cuda_win64.zip';
@@ -161,7 +167,7 @@ const
   FFMPEG_Params        = '-i "%input" -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y "%output"';
   FFMPEG_SCParams      = '-hide_banner -i "%input" -vf "select=''gt(scene,%value)'',showinfo" -f null -';
   FFMPEG_VideoEncoding = '-i "%input" -vf "%extrasubtitles=''%subtitle'':force_style=''%style''" -s %widthx%height %videosettings %audiosettings -y -hide_banner "%output"';
-  FFMPEG_Thumbnail     = '-ss %timestr -i "%input" -frames:v 1 -update 1 -vf scale=-2:120 -pix_fmt bgr24 -y -hide_banner "%output"';
+  FFMPEG_Thumbnail     = '-ss %timestr -i "%input" -frames:v 1 -update 1 -vf scale=trunc(120*dar/2)*2:120,setsar=1 -pix_fmt bgr24 -y -hide_banner "%output"';
   FFMPEG_Info          = '-hide_banner -i "%input"';
   FFMPEG_ExtractStream = '-hide_banner -i "%input" -map 0:%trackid -c copy -y "%output"';
   FFMPEG_Karaoke       = '-hide_banner -i "%input" -af pan=''stereo|c0=c0|c1=-1*c1'' -ac 1 -y "%output"';
@@ -202,6 +208,12 @@ const
   {$ELSE}
   URL_WHISPER = 'https://github.com/URUWorks/UW_WhisperCPP/releases/latest/download/whisper_linux.zip';
   {$ENDIF}
+  // UW_Tesseract: glibc 2.17+, x86_64 or aarch64
+  {$IFDEF CPUAARCH64}
+  URL_TESSERACT = 'https://github.com/URUWorks/UW_Tesseract/releases/latest/download/tesseract_linux_arm64.zip';
+  {$ELSE}
+  URL_TESSERACT = 'https://github.com/URUWorks/UW_Tesseract/releases/latest/download/tesseract_linux.zip';
+  {$ENDIF}
   URL_FASTERWHISPER     = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_linux.zip';
   // our faster-whisper (CTranslate2 4.x) uses CUDA 12 + cuDNN 9 from the system
   // when they are installed, the old CUDA 11 libs don't work with it
@@ -212,7 +224,7 @@ const
   //FFMPEG_Params        = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y %output';
   FFMPEG_SCParams      = '-hide_banner -i %input -vf select=''gt(scene,%value)'',showinfo -f null -';
   FFMPEG_VideoEncoding = '-i %input -vf %extrasubtitles=''%subtitle'':force_style=''%style'' -s %widthx%height %videosettings %audiosettings -y -hide_banner %output';
-  FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -vf scale=-2:120 -pix_fmt bgr24 -y -hide_banner %output';
+  FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -vf scale=trunc(120*dar/2)*2:120,setsar=1 -pix_fmt bgr24 -y -hide_banner %output';
   FFMPEG_Info          = '-hide_banner -i %input';
   FFMPEG_ExtractStream = '-hide_banner -i %input -map 0:%trackid -c copy -y %output';
   FFMPEG_Karaoke       = '-hide_banner -i %input -af pan=''stereo|c0=c0|c1=-1*c1'' -ac 1 -y %output';
@@ -250,6 +262,8 @@ const
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos'; // standalone, can self update
   // UW_WhisperCPP: %cpu = arm64 (macOS 11+, Metal) or x86_64 (macOS 10.11+, CPU)
   URL_WHISPER = 'https://github.com/URUWorks/UW_WhisperCPP/releases/latest/download/whisper_macos_%cpu.zip';
+  // UW_Tesseract: %cpu = arm64 (macOS 11+) or x86_64 (macOS 10.11+)
+  URL_TESSERACT = 'https://github.com/URUWorks/UW_Tesseract/releases/latest/download/tesseract_macos_%cpu.zip';
   URL_FASTERWHISPER     = 'https://github.com/URUWorks/UW_FasterWhisper/releases/latest/download/fasterwhisper_macos_%cpu.zip';
   //URL_FASTERWHISPERCUDA = '';
 
@@ -258,7 +272,7 @@ const
   //FFMPEG_Params        = '-i %input -vn -ac 1 -ar 44100 -map 0:a:%trackid -acodec pcm_s16le -af "highpass=f=300,asendcmd=0.0 afftdn sn start,asendcmd=1.5 afftdn sn stop,afftdn=nf=-20,dialoguenhance,lowpass=f=3000" -y %output';
   FFMPEG_SCParams      = '-hide_banner -i %input -vf select=''gt(scene,%value)'',showinfo -f null -';
   FFMPEG_VideoEncoding = '-i %input -vf %extrasubtitles=''%subtitle'':force_style=''%style'' -s %widthx%height %videosettings %audiosettings -y -hide_banner %output';
-  FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -vf scale=-2:120 -pix_fmt bgr24 -y -hide_banner %output';
+  FFMPEG_Thumbnail     = '-ss %timestr -i %input -frames:v 1 -update 1 -vf scale=trunc(120*dar/2)*2:120,setsar=1 -pix_fmt bgr24 -y -hide_banner %output';
   FFMPEG_Info          = '-hide_banner -i %input';
   FFMPEG_ExtractStream = '-hide_banner -i %input -map 0:%trackid -c copy -y %output';
   FFMPEG_Karaoke       = '-hide_banner -i %input -af pan=''stereo|c0=c0|c1=-1*c1'' -ac 1 -y %output';

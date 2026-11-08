@@ -2619,6 +2619,9 @@ object frmMain: TfrmMain
         object Separator38: TMenuItem
           Caption = '-'
         end
+        object mnuVideoAutoCrop: TMenuItem
+          Action = actVARAutoCrop
+        end
         object MenuItem248: TMenuItem
           Action = actPanAndScan
         end
@@ -4840,6 +4843,12 @@ object frmMain: TfrmMain
       Caption = '2.35:1'
       OnExecute = actVAR2351Execute
     end
+    object actVARAutoCrop: TAction
+      Tag = 4
+      Category = 'Video'
+      Caption = 'Auto-crop'
+      OnExecute = actVARAutoCropExecute
+    end
     object actVARCycle: TAction
       Tag = 4
       Category = 'Video'
@@ -4955,6 +4964,12 @@ object frmMain: TfrmMain
       AutoCheck = True
       Caption = 'Show thumbnails'
       OnExecute = actShowThumbnailsExecute
+    end
+    object actRegenerateThumbnails: TAction
+      Tag = 4
+      Category = 'Waveform'
+      Caption = 'Regenerate thumbnails'
+      OnExecute = actRegenerateThumbnailsExecute
     end
     object actShowToolbarGeneral: TAction
       Category = 'View'
@@ -5698,6 +5713,9 @@ object frmMain: TfrmMain
     end
     object MenuItem138: TMenuItem
       Action = actDeleteShotChange
+    end
+    object mnuWAVERegenerateThumbnails: TMenuItem
+      Action = actRegenerateThumbnails
     end
   end
   object TimerAutoBackup: TTimer

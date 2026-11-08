@@ -129,6 +129,8 @@ begin
   MPV.ShowOverlayText('');
   MPVSetFilters;
   MPVSetPanAndScan(actPanAndScan.Checked);
+  // the crop is kept if the same file is reloaded, removed with another one
+  actVARAutoCrop.Checked := MPV.IsVideoCropped;
 
   SubtitleInfo.LastSubtitle.ShowIndex := 0;
   sbrSeek.Max := MPV.GetMediaLenInMs;

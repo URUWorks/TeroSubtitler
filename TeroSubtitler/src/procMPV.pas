@@ -48,6 +48,7 @@ procedure MPVSetFilters;
 procedure MPVSetVideoAspectRatio(const AValue: TMPVPlayerVideoAspectRatio);
 procedure MPVCycleVideoAspectRatio;
 procedure MPVSetPanAndScan(const AValue: Boolean);
+procedure MPVAutoCrop(const AValue: Boolean);
 procedure MPVShowVideoInformation;
 
 // -----------------------------------------------------------------------------
@@ -55,7 +56,7 @@ procedure MPVShowVideoInformation;
 implementation
 
 uses procConfig, UWSystem.Encoding, UWSystem.SysUtils, MPVPlayer.Filters,
-  procSubtitle, formCustomMessageDlg, procLocalize;
+  procSubtitle, formCustomMessageDlg, procLocalize, procDialogs, procWorkspace;
 
 var
   MediaTitle: String = ''; // title of an url (media-title of mpv/yt-dlp)
@@ -501,6 +502,53 @@ begin
   begin
     actPanAndScan.Checked := AValue;
     MPV.mpv_set_option_string_('panscan=' + IntToStr(iff(AValue, 1, 0)));
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// Media > Aspect ratio > Auto-crop: crops the black bars detected in the
+// current frame (the image is centered by mpv). The timeline thumbnails are
+// generated again with the same crop.
+procedure MPVAutoCrop(const AValue: Boolean);
+var
+  R: TRect;
+begin
+  with frmMain do
+  begin
+    if not MPV.IsMediaLoaded then Exit;
+
+    if AValue then
+    begin
+      case MPV.DetectVideoCrop(R) of
+        cdOk:
+          begin
+            MPV.SetVideoCrop(R);
+            SetStatusBarText(Format(lngAutoCropApplied, [R.Width, R.Height]));
+          end;
+        cdNoBars:
+          begin
+            ShowMessageDialog(lngAutoCropNoBars);
+            Exit;
+          end;
+      else
+        ShowMessageDialog(lngAutoCropNoImage);
+        Exit;
+      end;
+    end
+    else
+    begin
+      MPV.SetVideoCrop(Rect(0, 0, 0, 0));
+      SetStatusBarText('');
+    end;
+
+    actVARAutoCrop.Checked := MPV.IsVideoCropped;
+
+    if WAVE.DrawThumbnail then
+    begin
+      FreeThumbnails;
+      GenerateThumbnails;
+    end;
   end;
 end;
 

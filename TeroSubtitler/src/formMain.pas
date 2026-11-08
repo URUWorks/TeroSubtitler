@@ -117,6 +117,7 @@ type
     actShowWaveformToolbarEntry: TAction;
     actShowWaveformToolbarControls: TAction;
     actShowThumbnails: TAction;
+    actRegenerateThumbnails: TAction;
     actVideoInformation: TAction;
     actPanAndScan: TAction;
     actVideoFilterDeinterlace: TAction;
@@ -138,6 +139,7 @@ type
     actVAR1851: TAction;
     actVARCycle: TAction;
     actVAR2351: TAction;
+    actVARAutoCrop: TAction;
     actVAR169: TAction;
     actVAR43: TAction;
     actVARDefault: TAction;
@@ -504,6 +506,7 @@ type
     MenuItem217: TMenuItem;
     MenuItem227: TMenuItem;
     mnuVideoAspectRatio: TMenuItem;
+    mnuVideoAutoCrop: TMenuItem;
     MenuItem218: TMenuItem;
     MenuItem219: TMenuItem;
     MenuItem220: TMenuItem;
@@ -1254,6 +1257,7 @@ type
     procedure actDetectSilentZonesExecute(Sender: TObject);
     procedure actDetectDialogSegmentsExecute(Sender: TObject);
     procedure actShowThumbnailsExecute(Sender: TObject);
+    procedure actRegenerateThumbnailsExecute(Sender: TObject);
     procedure actTBXExecute(Sender: TObject);
     procedure actTBXListExecute(Sender: TObject);
     procedure actTBXSettingsExecute(Sender: TObject);
@@ -1345,6 +1349,7 @@ type
     procedure actVAR169Execute(Sender: TObject);
     procedure actVAR1851Execute(Sender: TObject);
     procedure actVAR2351Execute(Sender: TObject);
+    procedure actVARAutoCropExecute(Sender: TObject);
     procedure actVARCycleExecute(Sender: TObject);
     procedure actPanAndScanExecute(Sender: TObject);
     procedure actVideoInformationExecute(Sender: TObject);
@@ -1362,8 +1367,9 @@ type
     procedure actVideoOffsetExecute(Sender: TObject);
   private
     mnuViewProperties: TMenuItem; // View > Subtitle properties
-    FThumbnailThread: TThread; // TGenerateThumbnails, see formMain_WAVE
-    FURLLoadTimer: TTimer;     // elapsed time while yt-dlp resolves an url
+    FThumbnailThread: TThread;    // TGenerateThumbnails, see formMain_WAVE
+    FThumbnailsKey: String;       // video + crop of the thumbnails loaded
+    FURLLoadTimer: TTimer;        // elapsed time while yt-dlp resolves an url
     FURLLoadStart: QWord;
     {$IFDEF LCLCocoa}
     FVSTOldWindowProc: TWndMethod;
@@ -1399,7 +1405,7 @@ uses
   procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, LazUTF8, procMRU, UWSystem.SysUtils,
   UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procThumbnails,
   formCustomQuestionDlg, formCustomSelectDlg, formTranslationMemory, formTBX,
-  libMPV.Client, procMacMediaKeys, procConventions;
+  libMPV.Client, procMacMediaKeys, procConventions, FileUtil;
 
 {$R *.lfm}
 
