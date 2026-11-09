@@ -1405,6 +1405,10 @@ msgstr "Error al inicializar la salida de vídeo."
 msgid "Video generation failed."
 msgstr "Error en la generación de vídeo."
 
+#: proclocalize.lngvideohasnoaudio
+msgid "This video has no audio track, there is no waveform to extract."
+msgstr "Este video no tiene pista de audio; no hay ninguna forma de onda que extraer."
+
 #: proclocalize.lngviduration
 #, object-pascal-format
 msgid "Duration: %s (%d frames)"
@@ -5986,4 +5990,3 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
-

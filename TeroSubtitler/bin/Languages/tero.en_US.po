@@ -1397,6 +1397,10 @@ msgstr ""
 msgid "Video generation failed."
 msgstr ""
 
+#: proclocalize.lngvideohasnoaudio
+msgid "This video has no audio track, there is no waveform to extract."
+msgstr ""
+
 #: proclocalize.lngviduration
 #, object-pascal-format
 msgid "Duration: %s (%d frames)"
