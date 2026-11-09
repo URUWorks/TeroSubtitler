@@ -78,7 +78,7 @@ implementation
 
 uses
   procTypes, procWorkspace, procVST, procColorTheme, FileUtil, procSubtitle,
-  UWSubtitleAPI.Formats, UWSubtitles.Utils, BGRABitmap, procTesseract,
+  UWSubtitleAPI.Formats, UWSubtitles.Utils, BGRABitmap, BGRABitmapTypes, procTesseract,
   procConfig, procForms, UWSystem.Process, StrUtils, procDialogs, formCustomQuestionDlg;
 
 {$R *.lfm}
@@ -233,12 +233,135 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function FixOCRText(const AText: String): String;
+var
+  sl: TStringList;
+  i: Integer;
+begin
+  // tesseract often reads a lone capital I as "|", which never appears in subtitles
+  sl := TStringList.Create;
+  try
+    sl.Text := AText;
+    for i := 0 to sl.Count-1 do
+    begin
+      sl[i] := StringReplace(sl[i], ' | ', ' I ', [rfReplaceAll]);
+      sl[i] := StringReplace(sl[i], ' |''', ' I''', [rfReplaceAll]);
+      if sl[i].StartsWith('| ') or sl[i].StartsWith('|''') or (sl[i] = '|') then
+        sl[i] := 'I' + Copy(sl[i], 2, MaxInt);
+      if sl[i].EndsWith(' |') then
+        sl[i] := Copy(sl[i], 1, Length(sl[i])-1) + 'I';
+    end;
+    Result := TrimRight(sl.Text);
+  finally
+    sl.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function SaveImageForOCR(const ASource: TBGRABitmap; const AFileName: String; out AItalic: Boolean): Boolean;
+const
+  PAD = 20; // tesseract misses text touching the border of the image
+var
+  dst: TBGRABitmap;
+  ink: array of array of Boolean;
+  x, y, n, opaque, lum, k: Integer;
+  p: PBGRAPixel;
+  lightText: Boolean;
+  sc0, sc, best: Double;
+
+  // sum of squares of the column projection after shearing the rows: vertical
+  // strokes pile up in fewer columns, so italic text scores higher once it's
+  // straightened (Tesseract 4/5 doesn't report italics)
+  function ShearScore(const AShear: Double): Double;
+  var
+    cols: array of Integer;
+    xx, yy, off, w: Integer;
+  begin
+    w := ASource.Width + Round(AShear * ASource.Height) + 1;
+    SetLength(cols, w);
+    for yy := 0 to ASource.Height-1 do
+    begin
+      off := Round(AShear * yy); // the top row moves the most to the left
+      for xx := 0 to ASource.Width-1 do
+        if ink[yy][xx] then
+          Inc(cols[xx + off]);
+    end;
+    Result := 0;
+    for xx := 0 to w-1 do
+      Result := Result + Sqr(Double(cols[xx]));
+  end;
+
+begin
+  Result := False;
+  AItalic := False;
+  if (ASource = NIL) or (ASource.Width = 0) or (ASource.Height = 0) then Exit;
+
+  // subtitles are a light fill with a dark outline over a transparent
+  // background; the fill is the text. If almost nothing is light, it's
+  // dark text with a light outline instead
+  SetLength(ink, ASource.Height, ASource.Width);
+  for k := 0 to 1 do
+  begin
+    lightText := k = 0;
+    n := 0;
+    opaque := 0;
+    for y := 0 to ASource.Height-1 do
+    begin
+      p := ASource.ScanLine[y];
+      for x := 0 to ASource.Width-1 do
+      begin
+        lum := (p^.red * 299 + p^.green * 587 + p^.blue * 114) div 1000;
+        ink[y][x] := (p^.alpha >= 128) and ((lum >= 110) = lightText);
+        if p^.alpha >= 128 then Inc(opaque);
+        if ink[y][x] then Inc(n);
+        Inc(p);
+      end;
+    end;
+    if (n * 100 >= opaque) then Break;
+  end;
+  if n = 0 then Exit;
+
+  // black text on white, which is what tesseract reads best
+  dst := TBGRABitmap.Create(ASource.Width + PAD*2, ASource.Height + PAD*2, BGRAWhite);
+  try
+    for y := 0 to ASource.Height-1 do
+    begin
+      p := dst.ScanLine[y + PAD];
+      Inc(p, PAD);
+      for x := 0 to ASource.Width-1 do
+      begin
+        if ink[y][x] then p^ := BGRABlack;
+        Inc(p);
+      end;
+    end;
+    dst.InvalidateBitmap;
+    dst.SaveToFile(AFileName);
+    Result := FileExists(AFileName);
+  finally
+    dst.Free;
+  end;
+
+  // italic fonts lean about 10-15 degrees
+  sc0 := ShearScore(0);
+  best := 0;
+  for k := 2 to 5 do
+  begin
+    sc := ShearScore(k * 0.05);
+    if sc > best then best := sc;
+  end;
+  AItalic := (sc0 > 0) and (best / sc0 > 0.98);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmImportSUP.btnOCRClick(Sender: TObject);
 var
   i, c: Integer;
   params: TStringArray;
   s, lang: String;
-  ok: Boolean;
+  ok, italic: Boolean;
+  bmp: TBGRABitmap;
 begin
   CancelProcess := False;
   if not FileExists(Tools.Tesseract) then
@@ -263,6 +386,19 @@ begin
       lang := DisplayNameToCultureName(cboLanguage.Text);
       if lang.IsEmpty then lang := 'eng';
 
+      // check once that tesseract runs here, instead of finding out entry
+      // by entry in the middle of the process
+      TessOutput := '';
+      if not ExecuteAppEx(Tools.Tesseract, ['--version'], NIL, @TessCB) or
+        IsTesseractRunError(TessOutput) or (Pos('tesseract', LowerCase(TessOutput)) = 0) then
+      begin
+        if FirstLine(TessOutput) <> '' then
+          ShowErrorMessageDialog(Format(lngTesseractRunError, [FirstLine(TessOutput)]))
+        else
+          ShowErrorMessageDialog(Format(lngTesseractRunError, [Tools.Tesseract]));
+        Exit;
+      end;
+
       for c := 0 to FList.DisplaySets.Count-1 do
       begin
         CurrentJob := c;
@@ -275,8 +411,13 @@ begin
         Application.ProcessMessages;
 
         s := ChangeFileExt(GetTempFileName, '.png');
-        if not FList.SaveBitmapToFile(c, s, False) then
-          Continue;
+        bmp := FList.GetBitmap(c, True);
+        try
+          if not SaveImageForOCR(bmp, s, italic) then
+            Continue;
+        finally
+          bmp.Free;
+        end;
 
         params := Tesseract_Params.Split(' ');
         for i := 0 to High(params) do
@@ -285,9 +426,13 @@ begin
         // without it tesseract looks in the folder it was built with
         // (/usr/local/share/tessdata, /opt/homebrew/share/tessdata...) and
         // doesn't see the languages downloaded by Tero
-        SetLength(params, Length(params)+2);
-        params[High(params)-1] := '--tessdata-dir';
-        params[High(params)]   := TessDataFolder;
+        // --psm 6: a single block of text. With the automatic page layout
+        // short entries ("OK.", "Go!") often came back empty
+        SetLength(params, Length(params)+4);
+        params[High(params)-3] := '--tessdata-dir';
+        params[High(params)-2] := TessDataFolder;
+        params[High(params)-1] := '--psm';
+        params[High(params)]   := '6';
 
         TessOutput := '';
         ok := ExecuteAppEx(Tools.Tesseract, params, NIL, @TessCB);
@@ -313,7 +458,10 @@ begin
 
         if CancelProcess then Exit;
 
-        FList.DisplaySets[c]^.Text := Trim(TessOutput);
+        s := FixOCRText(Trim(TessOutput));
+        if italic and (s <> '') then
+          s := '{\i1}' + s + '{\i0}';
+        FList.DisplaySets[c]^.Text := s;
         VSTSelectNode(VST, c, True);
       end;
     finally

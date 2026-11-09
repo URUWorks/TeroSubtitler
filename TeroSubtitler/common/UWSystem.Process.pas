@@ -147,6 +147,11 @@ begin
         end;
       until BytesRead = 0; // Stop if no more data is available
 
+      // reap the child: without it each run leaves a zombie process on
+      // macOS/Linux and, after a few hundred (an OCR of a whole film), the
+      // per-user process limit is reached and nothing else can be started
+      AProcess.WaitOnExit;
+
       Result := True;
     except
       on e: Exception do
