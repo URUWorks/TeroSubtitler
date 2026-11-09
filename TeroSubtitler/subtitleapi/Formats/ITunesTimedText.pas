@@ -139,7 +139,7 @@ type
     Italic,
     Bold,
     Underline : Boolean; // en toda la entrada
-    Color     : String;  // 'rgba(R,G,B,255)' en toda la entrada, o ''
+    Color     : String;  // 'yellow', 'rgba(R,G,B,255)'... en toda la entrada, o ''
     Text      : String;  // el texto con solo los tags que van en <span>
   end;
 
@@ -168,6 +168,146 @@ begin
     if SameText(ITTLanguages[i].Code, Trim(ACode)) then
       Exit(i);
   Result := -1;
+end;
+
+// -----------------------------------------------------------------------------
+
+// Color de iTT como lo escribe Final Cut Pro: los de la paleta con su nombre
+// TTML (tts:color="yellow") y el resto como rgba(R,G,B,255)
+
+function ITTColor(const R, G, B: Byte): String;
+const
+  Names: array[0..7] of record Name: String; R, G, B: Byte; end = (
+    (Name: 'white';   R: $FF; G: $FF; B: $FF),
+    (Name: 'black';   R: $00; G: $00; B: $00),
+    (Name: 'red';     R: $FF; G: $00; B: $00),
+    (Name: 'lime';    R: $00; G: $FF; B: $00),
+    (Name: 'blue';    R: $00; G: $00; B: $FF),
+    (Name: 'yellow';  R: $FF; G: $FF; B: $00),
+    (Name: 'cyan';    R: $00; G: $FF; B: $FF),
+    (Name: 'magenta'; R: $FF; G: $00; B: $FF));
+var
+  i: Integer;
+begin
+  for i := 0 to High(Names) do
+    if (Names[i].R = R) and (Names[i].G = G) and (Names[i].B = B) then
+      Exit(Names[i].Name);
+  // la paleta de FCP en su SRT: el amarillo (#FEFB00) es 'yellow' en su iTT
+  // y el blanco (#FEFFFF) es el 'white' por defecto
+  if (R = $FE) and (G = $FB) and (B = $00) then
+    Exit('yellow');
+  if (R = $FE) and (G = $FF) and (B = $FF) then
+    Exit('white');
+  Result := Format('rgba(%d,%d,%d,255)', [R, G, B]);
+end;
+
+// -----------------------------------------------------------------------------
+
+// Escribe el texto de un <p> como FCP: la cursiva, el subrayado (y el tachado)
+// parciales en un solo <span> por tramo, con todos sus atributos en el orden
+// de FCP (tts:fontStyle y después tts:textDecoration), nunca spans anidados,
+// y los saltos de línea como <br/>. Txt solo trae {\i}, {\u} y {\s}.
+// Antes: AppendStyledTextDirect usaba una pila (un span por tag, anidados) y
+// con tags solapados ({\i1}a{\u1}b{\i0}c{\u0}) cerraba el span equivocado
+
+procedure AppendITTText(const XmlDoc: TXMLDocument; const Parent: TDOMNode; const Txt: String);
+type
+  TRunStyle = record
+    It, Un, St: Boolean;
+  end;
+var
+  Cur, Seg: TRunStyle;
+  Buffer: String;
+  i, j: Integer;
+  Block, Tag: String;
+  OnOff: Boolean;
+
+  function SameStyle(const A, B: TRunStyle): Boolean;
+  begin
+    Result := (A.It = B.It) and (A.Un = B.Un) and (A.St = B.St);
+  end;
+
+  procedure AddTextTo(const ANode: TDOMNode; const S: String);
+  var
+    k: Integer;
+    Part: String;
+  begin
+    Part := '';
+    for k := 1 to Length(S) do
+      if S[k] = #10 then
+      begin
+        if Part <> '' then ANode.AppendChild(XmlDoc.CreateTextNode(Part));
+        Part := '';
+        ANode.AppendChild(XmlDoc.CreateElement('br'));
+      end
+      else if S[k] <> #13 then
+        Part := Part + S[k];
+    if Part <> '' then ANode.AppendChild(XmlDoc.CreateTextNode(Part));
+  end;
+
+  procedure Flush;
+  var
+    Span: TDOMElement;
+    Deco: String;
+  begin
+    if Buffer = '' then Exit;
+    if not (Seg.It or Seg.Un or Seg.St) then
+      AddTextTo(Parent, Buffer)
+    else
+    begin
+      Span := XmlDoc.CreateElement('span');
+      if Seg.It then Span.SetAttribute('tts:fontStyle', 'italic');
+      Deco := '';
+      if Seg.Un then Deco := 'underline';
+      if Seg.St then
+      begin
+        if Deco <> '' then Deco := Deco + ' ';
+        Deco := Deco + 'lineThrough';
+      end;
+      if Deco <> '' then Span.SetAttribute('tts:textDecoration', Deco);
+      Parent.AppendChild(Span);
+      AddTextTo(Span, Buffer);
+    end;
+    Buffer := '';
+  end;
+
+begin
+  Cur.It := False; Cur.Un := False; Cur.St := False;
+  Seg := Cur;
+  Buffer := '';
+  i := 1;
+  while i <= Length(Txt) do
+  begin
+    j := 0;
+    if (Txt[i] = '{') and (i < Length(Txt)) and (Txt[i+1] = '\') then
+      j := Pos('}', Txt, i+1);
+    if j > 0 then
+    begin
+      Block := Copy(Txt, i+1, j-i-1);
+      for Tag in Block.Split(['\']) do
+        if (Length(Tag) = 2) and (Tag[1] in ['i', 'u', 's']) and (Tag[2] in ['0', '1']) then
+        begin
+          OnOff := Tag[2] = '1';
+          case Tag[1] of
+            'i': Cur.It := OnOff;
+            'u': Cur.Un := OnOff;
+            's': Cur.St := OnOff;
+          end;
+        end;
+      i := j + 1;
+      Continue;
+    end;
+    // un tramo nuevo solo cuando el formato cambia de verdad (así
+    // {\i0}{\i1} o tags repetidos no parten el <span>)
+    if not SameStyle(Cur, Seg) then
+    begin
+      Flush;
+      Seg := Cur;
+    end;
+    Buffer := Buffer + Txt[i];
+    Inc(i);
+  end;
+  Flush;
 end;
 
 // -----------------------------------------------------------------------------
@@ -266,10 +406,15 @@ begin
         if (Length(Hex) >= 1) and (Length(Hex) <= 6) then
         begin
           Hex := UpperCase(StringOfChar('0', 6-Length(Hex)) + Hex);
-          // como FCP: rgba(R,G,B,255)
-          Num := Format('rgba(%d,%d,%d,255)', [StrToInt('$' + Copy(Hex, 5, 2)),
-            StrToInt('$' + Copy(Hex, 3, 2)), StrToInt('$' + Copy(Hex, 1, 2))]);
-          AddTag('c', True, Num);
+          // como FCP: 'yellow'... o rgba(R,G,B,255)
+          Num := ITTColor(StrToInt('$' + Copy(Hex, 5, 2)),
+            StrToInt('$' + Copy(Hex, 3, 2)), StrToInt('$' + Copy(Hex, 1, 2)));
+          // el blanco es el color por defecto (el del <body>), como en FCP:
+          // no se repite en cada <p>
+          if Num = 'white' then
+            AddTag('c', False)
+          else
+            AddTag('c', True, Num);
         end;
       end;
       // los demás tags ({\an8}, {\pos()}...) no existen en iTT
@@ -659,6 +804,8 @@ var
     TDOMElement(R).SetAttribute('tts:displayAlign', ADisplayAlign);
     TDOMElement(R).SetAttribute('tts:extent', AExtent);
     TDOMElement(R).SetAttribute('tts:origin', AOrigin);
+    // Antes faltaba: FCP siempre lo escribe
+    TDOMElement(R).SetAttribute('tts:writingMode', 'lrtb');
     LayoutNode.AppendChild(R);
   end;
 
@@ -806,8 +953,9 @@ begin
         TDOMElement(Element).SetAttribute('region', 'bottom');
 
       // Antes: <span style="italic"> apuntando al <head>; FCP usa
-      // <span tts:fontStyle="italic"> en línea
-      AppendStyledTextDirect(XmlDoc, Element, St.Text, True);
+      // <span tts:fontStyle="italic"> en línea, y cursiva + subrayado en un
+      // mismo <span> (antes eran dos spans anidados)
+      AppendITTText(XmlDoc, Element, St.Text);
 
       DivNode.AppendChild(Element);
     end;
