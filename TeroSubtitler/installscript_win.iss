@@ -1,4 +1,4 @@
-﻿; Inno Setup 6.5+ script for Tero Subtitler (Windows x64 and ARM64)
+; Inno Setup 6.5+ script for Tero Subtitler (Windows x64 and ARM64)
 ;
 ; Two modes, same script. make_installer.ps1 prepares the libraries and passes the defines:
 ;
@@ -364,10 +364,15 @@ Type: filesandordirs; Name: "{app}\Tero.act"
 Type: filesandordirs; Name: "{app}"
 
 [Code]
-// Windows 10 or later runs the current libmpv; Windows 7/8.1 need the "frozen" one
+// Windows 10 or later runs the current libmpv; Windows 7/8.1 need the "frozen" one.
+// The current x64 libmpv also imports vulkan-1.dll (the Vulkan loader, installed with
+// the GPU drivers): without it (old PCs, virtual machines, old or missing drivers) it
+// doesn't load, so those get the "frozen" one too.
 function IsModernWindows: Boolean;
 begin
-  Result := GetWindowsVersion >= $0A000000;
+  Result := (GetWindowsVersion >= $0A000000) and FileExists(ExpandConstant('{sys}\vulkan-1.dll'));
+  if not Result then
+    Log('Using the frozen libmpv: Windows older than 10 or no vulkan-1.dll');
 end;
 
 // The ARM64 build, when the installer has it and the machine is ARM64
