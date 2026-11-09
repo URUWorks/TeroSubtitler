@@ -42,6 +42,7 @@
 - fixed: [macOS] Homebrew/MacPorts tools (deno, ffmpeg) weren’t found by yt-dlp when Tero was opened from Finder
 - fixed: [macOS] The shortcut presets are saved in the user folder instead of inside the app
 - fixed: [macOS] Access violation in spell check with words containing the typographic apostrophe (’)
+- fixed: [macOS/Linux] OCR stopped after a few hundred entries ("Tesseract could not be run")
 - fixed: Thumbnails of anamorphic videos were distorted
 - fixed: The layout chosen in the Setup wizard was lost when the wizard was reopened before Tero was closed for the first time
 - fixed: Recent files was enabled and empty when no file had been opened yet
@@ -144,6 +145,7 @@
 - improved: The translation memory stays open between subtitles and is reopened at startup
 - improved: The translation memory is saved automatically along with the auto backup
 - improved: Incomplete tags fix
+- improved: Import SUP: fewer empty entries, italics detected, "|" read as "I" fixed
 - improved: Dictionaries list is now sorted alphabetically
 - improved: Safe save (temporary file + rename), an interrupted save no longer truncates the original
 - improved: Network timeouts, no more freezes without internet
