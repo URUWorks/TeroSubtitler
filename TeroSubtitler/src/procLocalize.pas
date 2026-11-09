@@ -137,6 +137,7 @@ resourcestring
   lngVideoErrorAOInitFailed = 'Initializing the audio output failed.';
   lngVideoErrorVOInitFailed = 'Initializing the video output failed.';
   lngVideoErrorNothingToPlay = 'There was no audio or video stream to play.';
+  lngVideoHasNoAudio = 'This video has no audio track, there is no waveform to extract.';
   lngOpenContainingFolder = 'Open containing folder';
   lngAdditionalOption = 'Additional option';
   lngHHMMSSZZZ = 'Media [HH:MM:SS.ZZZ]';

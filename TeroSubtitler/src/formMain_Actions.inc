@@ -1401,7 +1401,10 @@ end;
 
 procedure TfrmMain.actWaveExtractExecute(Sender: TObject);
 begin
-  ShowWaveExtractor;
+  if not MPVHasAudioTrack then
+    ShowMessageDialog(lngVideoHasNoAudio)
+  else
+    ShowWaveExtractor;
 end;
 
 // -----------------------------------------------------------------------------

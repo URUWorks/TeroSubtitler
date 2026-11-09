@@ -623,6 +623,8 @@ begin
   begin
     Items.BeginUpdate;
     Clear;
+    // up to date: the cached list may not be filled yet right after loading
+    if frmMain.MPV.IsMediaLoaded then frmMain.MPV.GetTracks;
     tl := Length(frmMain.MPV.TrackList);
     if tl > 0 then
     begin

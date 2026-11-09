@@ -50,6 +50,7 @@ procedure MPVCycleVideoAspectRatio;
 procedure MPVSetPanAndScan(const AValue: Boolean);
 procedure MPVAutoCrop(const AValue: Boolean);
 procedure MPVShowVideoInformation;
+function MPVHasAudioTrack: Boolean;
 
 // -----------------------------------------------------------------------------
 
@@ -606,6 +607,28 @@ begin
         Free;
       end;
     end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function MPVHasAudioTrack: Boolean;
+var
+  i: Integer;
+begin
+  // the cached track list is filled on the audio/video reconfig events, that
+  // can arrive after the file is loaded: read it again from mpv here.
+  // An empty list means "don't know" (mpv not ready), never block in that case.
+  Result := True;
+  with frmMain do
+  begin
+    if not MPV.IsMediaLoaded then Exit;
+    MPV.GetTracks;
+    if Length(MPV.TrackList) = 0 then Exit;
+
+    for i := 0 to Length(MPV.TrackList)-1 do
+      if MPV.TrackList[i].Kind = ttAudio then Exit;
+  end;
+  Result := False;
 end;
 
 // -----------------------------------------------------------------------------

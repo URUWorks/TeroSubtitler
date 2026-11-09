@@ -45,6 +45,9 @@ begin
   if WAVE.IsPeakDataLoaded or MPV.FileName.IsEmpty or
     not FileExists(GetExtractAppFile) then Exit;
 
+  // a video without audio has no waveform to extract
+  if not MPVHasAudioTrack then Exit;
+
   ShowWaveExtractor(True);
 end;
 
