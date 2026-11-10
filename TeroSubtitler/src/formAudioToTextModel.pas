@@ -81,12 +81,14 @@ const
     (Name: 'medium.en'; Size: '1.5 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.en.bin'),
     (Name: 'medium-q5_0'; Size: '539 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium-q5_0.bin'),
     (Name: 'medium.en-q5_0'; Size: '539 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.en-q5_0.bin'),
-    (Name: 'large'; Size: '2.9 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large.bin'),
     (Name: 'large-v1'; Size: '2.9 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v1.bin'),
     (Name: 'large-v2'; Size: '2.9 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v2.bin'),
     (Name: 'large-v2-q5_0'; Size: '1.08 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v2-q5_0.bin'),
     (Name: 'large-v3'; Size: '3.1 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3.bin'),
-    (Name: 'large-v3-q5_0'; Size: '1.08 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-q5_0.bin')
+    (Name: 'large-v3-q5_0'; Size: '1.08 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-q5_0.bin'),
+    (Name: 'large-v3-turbo'; Size: '1.62 GB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin'),
+    (Name: 'large-v3-turbo-q5_0'; Size: '574 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo-q5_0.bin'),
+    (Name: 'large-v3-turbo-q8_0'; Size: '874 MB'; URL: 'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo-q8_0.bin')
   );
 
   FasterModels: TModels =
