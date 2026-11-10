@@ -128,8 +128,9 @@ WizardStyle=modern
 
 DefaultDirName={autopf}\{#MyAppName}
 ChangesAssociations=yes
-DefaultGroupName={#MyAppName}
-AllowNoIcons=yes
+; No Start menu folder: only the Tero Subtitler shortcut, uninstalled from Settings or
+; with right click > Uninstall, as other apps
+DisableProgramGroupPage=yes
 PrivilegesRequiredOverridesAllowed=dialog
 #ifdef Arm64Bin
 ; Windows 11 on ARM64 is also x64compatible; Windows 10 on ARM64 only runs the ARM64 build
@@ -176,6 +177,8 @@ Name: "fileassoc";   Description: "{cm:AssocSubtitles,{#MyAppName}}"; GroupDescr
 Name: "{app}"; Permissions: everyone-full
 
 [InstallDelete]
+; Start menu folder of older versions (now only a shortcut)
+Type: filesandordirs; Name: "{autoprograms}\{#MyAppName}"
 ; OpenSSL 1.1 from older versions (Tero now uses OpenSSL 3)
 Type: files; Name: "{app}\libssl-1_1-x64.dll"
 Type: files; Name: "{app}\libcrypto-1_1-x64.dll"
@@ -337,9 +340,7 @@ Root: HKA; Subkey: "Software\Classes\TeroSubtitler.webvtt\DefaultIcon"; ValueTyp
 Root: HKA; Subkey: "Software\Classes\TeroSubtitler.webvtt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
