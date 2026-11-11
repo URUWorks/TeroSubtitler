@@ -58,6 +58,7 @@ type
     chkSyncText: TUWCheckBox;
     chkSmartSegment: TUWCheckBox;
     chkMaxLineCount: TUWCheckBox;
+    chkSounds: TUWCheckBox;
     procedure btnCloseClick(Sender: TObject);
     procedure btnEngineClick(Sender: TObject);
     procedure btnGenerateClick(Sender: TObject);
@@ -69,6 +70,8 @@ type
     procedure rbnAddSubtitlesWhileTranscribingChange(Sender: TObject);
     procedure chkSyncTextChange(Sender: TObject);
   private
+    FKeepSounds: Boolean;
+    FUseMaxLineLength: Boolean;
     procedure RefreshModelsList;
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure OpenFolderClick(Sender: TObject);
@@ -461,6 +464,9 @@ begin
   begin
     CancelProcess     := False;
     lblStatus.Caption := lngExtracting;
+    // read before the controls are disabled (the cleanup is at the end)
+    FKeepSounds       := chkSounds.Checked and chkSounds.Enabled;
+    FUseMaxLineLength := chkMaxLineLength.Checked and chkMaxLineLength.Enabled;
     SetControlsEnabled(False);
 
     TimerSub := frmMain.TimerPlayback.Enabled;
@@ -521,6 +527,9 @@ begin
               (Pos('--max-context', Tools.WhisperCPP_Additional) = 0) then
               ss.Insert(ss.IndexOf(' -osrt'), ' -mc 0');
 
+            // the sounds ([Music]...): whisper.cpp writes them unless -sns
+            // (--suppress-nst) is given, the cleanup keeps or removes them
+
             if not Tools.WhisperCPP_Additional.IsEmpty then
               ss := ss + ' ' + Tools.WhisperCPP_Additional;
 
@@ -553,6 +562,11 @@ begin
             // the same for faster-whisper, see above
             if Pos('condition_on_previous_text', Tools.FasterWhisper_Additional) = 0 then
               ss := ss + ' --condition_on_previous_text False';
+
+            // the sounds ([Music]...): faster-whisper suppresses them by
+            // default (suppress_tokens -1), an empty list allows them
+            if FKeepSounds and (Pos('suppress_tokens', Tools.FasterWhisper_Additional) = 0) then
+              ss := ss + ' --suppress_tokens=';
 
             if not Tools.FasterWhisper_Additional.IsEmpty then
               ss := ss + ' ' + Tools.FasterWhisper_Additional;
@@ -747,6 +761,7 @@ begin
     spnMaxLineLength.Enabled := False;
     chkMaxLineCount.Enabled  := False;
     spnMaxLineCount.Enabled  := False;
+    chkSounds.Enabled        := False;
   end;
 end;
 
@@ -764,6 +779,9 @@ begin
   // synchronizing: the segmentation and texts are the ones of the entries
   rbnAddSubtitlesWhileTranscribing.Enabled := not chkSyncText.Checked and not chkSmartSegment.Checked;
   chkTranslate.Enabled := not chkSyncText.Checked;
+  // the sounds are entries of their own, there are no entries to make when
+  // synchronizing and the smart segmentation uses only the words
+  chkSounds.Enabled := not chkSyncText.Checked and not chkSmartSegment.Checked;
   if chkSyncText.Checked or chkSmartSegment.Checked then
   begin
     chkMaxLineLength.Enabled := False;
@@ -933,7 +951,8 @@ begin
     Result.Language    := '';
   end;
   // the line length chosen here, when it's checked
-  if chkMaxLineLength.Checked and chkMaxLineLength.Enabled then
+  // (FUseMaxLineLength: the controls are disabled while transcribing)
+  if FUseMaxLineLength then
     Result.CPL := spnMaxLineLength.Value;
 end;
 
@@ -962,7 +981,7 @@ begin
       Segments[i].Text        := Subs[i].Text;
     end;
 
-    if CleanTranscription(Segments, GetCleanOptions, AJoinFragments) = 0 then Exit;
+    if CleanTranscription(Segments, GetCleanOptions, AJoinFragments, FKeepSounds) = 0 then Exit;
 
     Subs.Clear;
     for i := 0 to High(Segments) do
@@ -992,7 +1011,7 @@ begin
     Segments[i-AFrom].Text        := Subtitles[i].Text;
   end;
 
-  if CleanTranscription(Segments, GetCleanOptions, True) = 0 then Exit;
+  if CleanTranscription(Segments, GetCleanOptions, True, FKeepSounds) = 0 then Exit;
 
   frmMain.VST.BeginUpdate;
   try
