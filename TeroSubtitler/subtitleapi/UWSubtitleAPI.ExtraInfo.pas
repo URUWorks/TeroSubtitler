@@ -151,6 +151,8 @@ type
     MarginV   : Integer;       // Vertical margin (4 numbers)          (Default = "0000")
     Effect    : AnsiString;    // Effect                               (Default = "!Effect")
     Layer     : Integer;       // Layer (ASS)                          (Default = "0")
+    Before    : AnsiString;    // other lines of [Events] before this one, as they are (Comment:, Picture:, Sound:, Movie:, Command:)
+    After     : AnsiString;    // the same after the last entry
   end;
 
   { SubRip }
