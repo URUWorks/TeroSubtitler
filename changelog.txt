@@ -162,6 +162,7 @@
 - added: Extract waveform also works with online media (opened from URL)
 - added: Auto-guess FPS of non-SMPTE subtitle file #414
 - added: Multi-select entries in timeline #390
+- added: Automatically detect non-dialog audio and display them as short text info #375
 - added: [SubtitleAPI] Support of InterOP (TI) and SMPTE 428-7-2007 XML Subtitles #352
 - added: Selective pasting #332
 - added: Sub-optimal presentation of auto-transcribed subtitles #256
