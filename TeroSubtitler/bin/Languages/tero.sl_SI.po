@@ -1672,6 +1672,10 @@ msgstr "Želena največja dolžina vrstice"
 msgid "Smart segmentation (using the conventions)"
 msgstr ""
 
+#: tfrmaudiototext.chksounds.caption
+msgid "Include sounds ([Music], [Applause]...)"
+msgstr ""
+
 #: tfrmaudiototext.chksynctext.caption
 msgid "Synchronize the current texts (only timings)"
 msgstr ""

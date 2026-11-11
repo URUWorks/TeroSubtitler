@@ -1607,6 +1607,10 @@ msgstr "Maximum line length"
 msgid "Smart segmentation (using the conventions)"
 msgstr "Smart segmentation (using the conventions)"
 
+#: tfrmaudiototext.chksounds.caption
+msgid "Include sounds ([Music], [Applause]...)"
+msgstr "Include sounds ([Music], [Applause]...)"
+
 #: tfrmaudiototext.chksynctext.caption
 msgid "Synchronize the current texts (only timings)"
 msgstr "Synchronize the current texts (only timings)"

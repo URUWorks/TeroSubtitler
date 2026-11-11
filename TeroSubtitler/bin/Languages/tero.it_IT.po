@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 09.11.2026\n"
+"Project-Id-Version: Tero Subtitler - IT - 02.11.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -81,7 +81,7 @@ msgstr ""
 
 #: proclocalize.lngaskdownloadtesseract
 msgid "Tesseract was not found. Download it now?"
-msgstr "Tesseract non è stato trovato. Vuoi scaricarlo?"
+msgstr ""
 
 #: proclocalize.lngasktoextractaudio
 msgid "Audio waveform was not found, do you want to extract it?"
@@ -206,15 +206,15 @@ msgstr "Clic qui per usare la timeline"
 #: proclocalize.lngautocropapplied
 #, object-pascal-format
 msgid "Cropped to %dx%d"
-msgstr "Ritagliato a %dx%d"
+msgstr ""
 
 #: proclocalize.lngautocropnobars
 msgid "No black bars were detected in the current frame."
-msgstr "Nel fotogramma attuale non sono state rilevate barre nere."
+msgstr ""
 
 #: proclocalize.lngautocropnoimage
 msgid "The black bars could not be detected. Go to a frame with image (the first ones are usually black) and try again."
-msgstr "Non è stato possibile rilevare le barre nere. Vai su un fotogramma con immagine (i primi solitamente sono neri) e riprova."
+msgstr ""
 
 #: proclocalize.lngbackupsaved
 msgid "Backup saved."
@@ -568,7 +568,7 @@ msgstr "Errori totali: %d (visualizzati: %d)"
 
 #: proclocalize.lnggpulibsoptional
 msgid "These libraries are needed with an NVIDIA card; without them, Faster-Whisper uses the processor."
-msgstr "Queste librerie sono necessarie con una scheda NVIDIA; senza di essi, Faster-Whisper usa la CPU."
+msgstr ""
 
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
@@ -727,7 +727,7 @@ msgstr "Questa versione del programma è aggiornata."
 
 #: proclocalize.lngnotlocated
 msgid "Not located."
-msgstr "Non localizzato."
+msgstr ""
 
 #: proclocalize.lngoldtime
 msgid "Old time"
@@ -769,26 +769,27 @@ msgstr "Percentuale"
 
 #: proclocalize.lngplaintextallfiles
 msgid "All files"
-msgstr "Tutti i file"
+msgstr ""
 
 #: proclocalize.lngplaintextautomatic
 msgid "Sentence (smart segmentation, using the conventions)"
-msgstr "Frase (segmentazione intelligente, usando le convenzioni)"
+msgstr ""
 
 #: proclocalize.lngplaintexteachline
 msgid "Line"
-msgstr "Riga"
+msgstr ""
 
 #: proclocalize.lngplaintexteachparagraph
 msgid "Paragraph (separated by a blank line)"
-msgstr "Paragrafo (separato da una riga vuota)"
+msgstr ""
 
 #: proclocalize.lngplaintextentries
 #, object-pascal-format
 msgid "%d entries"
-msgstr "%d voci"
+msgstr ""
 
 #: proclocalize.lngplaintextfiles
+#, fuzzy
 msgctxt "proclocalize.lngplaintextfiles"
 msgid "Text files"
 msgstr "File testo"
@@ -894,7 +895,7 @@ msgstr "Modifica elenchi decisioni"
 #: proclocalize.lngscenedetectnoresults
 #, object-pascal-format
 msgid "“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video."
-msgstr "'%s' non ha restituito alcun risultato.\nVerifica che sia installato correttamente, con un backend video come OpenCV e che possa aprire questo video."
+msgstr ""
 
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"
@@ -1290,12 +1291,12 @@ msgstr "Riduci"
 #: proclocalize.lngtesseractlangerror
 #, object-pascal-format
 msgid "Tesseract could not load the language “%s”. Download it again from the languages window."
-msgstr "Tesseract non è riuscito a caricare la lingua '%s'.\nScaricalo di nuovo dalla finestra delle lingue."
+msgstr ""
 
 #: proclocalize.lngtesseractrunerror
 #, object-pascal-format
 msgid "Tesseract could not be run (%s). Check in Settings > Tools that the path is correct and that this version works on your system."
-msgstr "Impossibile eseguire Tesseract (%s).\nControlla in Impostazioni > Strumenti che il percorso sia corretto e che questa versione funzioni nel sistema."
+msgstr ""
 
 #: proclocalize.lngtetext
 msgctxt "proclocalize.lngtetext"
@@ -1415,7 +1416,7 @@ msgstr "Errore nella creazione del video."
 
 #: proclocalize.lngvideohasnoaudio
 msgid "This video has no audio track, there is no waveform to extract."
-msgstr "Questo video non ha traccia audio, non c'è forma d'onda da estrarre."
+msgstr ""
 
 #: proclocalize.lngviduration
 #, object-pascal-format
@@ -1448,27 +1449,30 @@ msgid "Video tracks: %d"
 msgstr "Tracce video: %d"
 
 #: proclocalize.lngvpencoding
+#, fuzzy
 msgctxt "proclocalize.lngvpencoding"
 msgid "Encoding"
 msgstr "Codifica"
 
 #: proclocalize.lngvpformat
+#, fuzzy
 msgctxt "proclocalize.lngvpformat"
 msgid "Format"
 msgstr "Formato"
 
 #: proclocalize.lngvpinputfps
+#, fuzzy
 msgctxt "proclocalize.lngvpinputfps"
 msgid "Input FPS"
 msgstr "FPS sorgente"
 
 #: proclocalize.lngvpoutputfps
 msgid "Output FPS"
-msgstr "FPS destinazione"
+msgstr ""
 
 #: proclocalize.lngvpproperties
 msgid "Subtitle properties"
-msgstr "Proprietà sottotitoli"
+msgstr ""
 
 #: proclocalize.lngwebvideounsupported
 msgid "The media format is not supported for playback in the web browser."
@@ -1617,6 +1621,10 @@ msgstr "Lunghezza massima linea"
 #: tfrmaudiototext.chksmartsegment.caption
 msgid "Smart segmentation (using the conventions)"
 msgstr "Segmentazione intelligente (usando le convenzioni)"
+
+#: tfrmaudiototext.chksounds.caption
+msgid "Include sounds ([Music], [Applause]...)"
+msgstr ""
 
 #: tfrmaudiototext.chksynctext.caption
 msgid "Synchronize the current texts (only timings)"
@@ -2629,11 +2637,13 @@ msgid "Max rows"
 msgstr "N. max linee"
 
 #: tfrmformatproperties.lblittlanguage.caption
+#, fuzzy
 msgctxt "tfrmformatproperties.lblittlanguage.caption"
 msgid "Language"
 msgstr "Lingua"
 
 #: tfrmformatproperties.lblittlanguagehint.caption
+#, fuzzy
 msgctxt "tfrmformatproperties.lblittlanguagehint.caption"
 msgid "xml:lang"
 msgstr "xml:lang"
@@ -2915,38 +2925,40 @@ msgid "Time:"
 msgstr "Tempo:"
 
 #: tfrmimportplaintext.btnclose.caption
+#, fuzzy
 msgctxt "tfrmimportplaintext.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmimportplaintext.btnimport.caption
+#, fuzzy
 msgctxt "tfrmimportplaintext.btnimport.caption"
 msgid "Import"
 msgstr "Importa"
 
 #: tfrmimportplaintext.caption
 msgid "Import plain text"
-msgstr "Importa testo semplice"
+msgstr ""
 
 #: tfrmimportplaintext.chkreplace.caption
 msgid "Replace the current entries"
-msgstr "Sostituisci voci attuali"
+msgstr ""
 
 #: tfrmimportplaintext.chksyncwithaudio.caption
 msgid "Synchronize with the audio after importing"
-msgstr "Dopo l'importazione sincronizza con l'audio"
+msgstr ""
 
 #: tfrmimportplaintext.lblcount.caption
 msgid "0 entries"
-msgstr "0 voci"
+msgstr ""
 
 #: tfrmimportplaintext.lblmode.caption
 msgid "Create one entry for each:"
-msgstr "Crea una voce per ciascuna:"
+msgstr ""
 
 #: tfrmimportplaintext.lblpreview.caption
 msgid "Preview:"
-msgstr "Anteprima:"
+msgstr ""
 
 #: tfrmimportsup.btnclose.caption
 msgctxt "tfrmimportsup.btnclose.caption"
@@ -3318,11 +3330,11 @@ msgstr "Aiuto"
 
 #: tfrmmain.actimportplaintext.caption
 msgid "Plain text..."
-msgstr "Testo semplice..."
+msgstr ""
 
 #: tfrmmain.actimportplaintext.hint
 msgid "Import a transcription without times, to synchronize it with the audio"
-msgstr "Importa una trascrizione senza tempi, per sincronizzarla con l'audio"
+msgstr ""
 
 #: tfrmmain.actimportsubtitles.caption
 msgid "Subtitles..."
@@ -3631,19 +3643,19 @@ msgstr "Incolla"
 
 #: tfrmmain.actpasteastranslations.caption
 msgid "Paste as translations"
-msgstr "Incolla come traduzioni"
+msgstr ""
 
 #: tfrmmain.actpastetexts.caption
 msgid "Paste texts"
-msgstr "Incolla testo"
+msgstr ""
 
 #: tfrmmain.actpastetimes.caption
 msgid "Paste times"
-msgstr "Incolla tempi"
+msgstr ""
 
 #: tfrmmain.actpastetranslations.caption
 msgid "Paste translations"
-msgstr "Incolla traduzioni"
+msgstr ""
 
 #: tfrmmain.actplaycurrententry.caption
 msgid "Play current entry"
@@ -3709,7 +3721,7 @@ msgstr "Ripeti ultima azione annullata"
 
 #: tfrmmain.actregeneratethumbnails.caption
 msgid "Regenerate thumbnails"
-msgstr "Rigenera miniature"
+msgstr ""
 
 #: tfrmmain.actremovelinefromentry.caption
 msgid "Remove line from entry..."
@@ -4272,7 +4284,7 @@ msgstr "4:3"
 
 #: tfrmmain.actvarautocrop.caption
 msgid "Auto-crop"
-msgstr "Ritaglio automatico"
+msgstr ""
 
 #: tfrmmain.actvarcycle.caption
 msgid "Cycle Aspect Ratio"
@@ -4414,7 +4426,7 @@ msgstr "Inserisci carattere Unicode"
 #: tfrmmain.mnueditpastespecial.caption
 msgctxt "tfrmmain.mnueditpastespecial.caption"
 msgid "Paste special"
-msgstr "Incolla speciale"
+msgstr ""
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
@@ -4582,7 +4594,7 @@ msgstr "Finestre"
 #: tfrmmain.mnuvstpastespecial.caption
 msgctxt "tfrmmain.mnuvstpastespecial.caption"
 msgid "Paste special"
-msgstr "Incolla speciale"
+msgstr ""
 
 #: tfrmmain.mnuvstvideo.caption
 msgctxt "tfrmmain.mnuvstvideo.caption"
