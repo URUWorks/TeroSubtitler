@@ -226,9 +226,18 @@ jobs:
           $ErrorActionPreference = 'stop'
           $env:PATH = "$env:FPCBIN;$env:PATH"
           $src = "$env:RUNNER_TEMP\fpcsrc"
-          git clone -q --depth 1 https://gitlab.com/freepascal.org/fpc/source.git $src
+          git clone -q --depth 1 -c core.autocrlf=false https://gitlab.com/freepascal.org/fpc/source.git $src
           if ($LastExitCode -ne 0) { exit $LastExitCode }
           git -C $src log -1 --format='FPC main %h %cs'
+          # Internal linker fix for IMAGE_REL_ARM64_PAGEOFFSET_12L (FPC issue #42048):
+          # without it LDR page offsets are not scaled and tero.exe crashes at start-up.
+          # Skipped once FPC main has it (or anything else in the patch changed).
+          # with LF line endings, as the sources (the checkout may have made it CRLF)
+          $patch = "$env:RUNNER_TEMP\fpc.patch"
+          $text = Get-Content -Raw "$env:GITHUB_WORKSPACE\.github\workflows\fpc-aarch64-win64-pageoffset12l.patch"
+          [IO.File]::WriteAllText($patch, $text.Replace("`r`n", "`n"))
+          git -C $src apply --check $patch
+          if ($LastExitCode -eq 0) { git -C $src apply $patch; 'FPC patch applied' } else { 'FPC patch not applied' }
           Set-Location $src
           make clean all install OS_TARGET=win64 CPU_TARGET=x86_64 PP="$env:FPCBIN\ppcx64.exe" INSTALL_PREFIX=$env:FPCMAIN
           if ($LastExitCode -ne 0) { exit $LastExitCode }
