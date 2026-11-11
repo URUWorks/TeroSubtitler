@@ -1,0 +1,47 @@
+diff --git a/compiler/ogcoff.pas b/compiler/ogcoff.pas
+index 63a10bdb..c8b1f56b 100644
+--- a/compiler/ogcoff.pas
++++ b/compiler/ogcoff.pas
+@@ -1363,6 +1363,9 @@ implementation
+ {$if defined(arm) or defined(aarch64)}
+         addend   : aint;
+ {$endif arm or aarch64}
++{$ifdef aarch64}
++        scale    : longint;
++{$endif aarch64}
+         relocsec : TObjSection;
+ {$ifdef cpu64bitaddr}
+         s        : string;
+@@ -1506,7 +1509,6 @@ implementation
+                     address:=address and not (($3 shl 29) or ($7ffff shl 5));
+                     address:=address or ((relocval and $3) shl 29) or (((relocval shr 2) and $7ffff) shl 5);
+                   end;
+-                RELOC_LDST8_ABS_LO12,
+                 RELOC_ADD_ABS_LO12:
+                   begin
+                     addend:=(address shr 10) and $fff;
+@@ -1514,6 +1516,24 @@ implementation
+                     address:=address and not ($fff shl 10);
+                     address:=address or (relocval shl 10);
+                   end;
++                RELOC_LDST8_ABS_LO12:
++                  begin
++                    { IMAGE_REL_ARM64_PAGEOFFSET_12L: the immediate of an
++                      LDR/STR (unsigned offset) is scaled by the access size,
++                      bits 31..30, plus 4 for a 128 bit SIMD&FP access (V and
++                      opc<1> set); the addend already in the instruction is
++                      in the same scaled units }
++                    scale:=(address shr 30) and 3;
++                    if (address and $4800000)=$4800000 then
++                      inc(scale,4);
++                    relocval:=relocval and $fff;
++                    if (relocval and ((1 shl scale)-1))<>0 then
++                      internalerror(2026111001);  { misaligned page offset }
++                    addend:=(address shr 10) and $fff;
++                    relocval:=((relocval shr scale) + addend) and $fff;
++                    address:=address and not ($fff shl 10);
++                    address:=address or (relocval shl 10);
++                  end;
+ {$endif aarch64}
+ {$ifdef x86_64}
+                 { 64 bit coff only }
