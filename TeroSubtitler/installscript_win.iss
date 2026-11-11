@@ -1,4 +1,4 @@
-﻿; Inno Setup 6.5+ script for Tero Subtitler (Windows x64 and ARM64)
+; Inno Setup 6.5+ script for Tero Subtitler (Windows x64 and ARM64)
 ;
 ; Two modes, same script. make_installer.ps1 prepares the libraries and passes the defines:
 ;
@@ -128,8 +128,9 @@ WizardStyle=modern
 
 DefaultDirName={autopf}\{#MyAppName}
 ChangesAssociations=yes
-DefaultGroupName={#MyAppName}
-AllowNoIcons=yes
+; No Start menu folder: only the Tero Subtitler shortcut, uninstalled from Settings or
+; with right click > Uninstall, as other apps
+DisableProgramGroupPage=yes
 PrivilegesRequiredOverridesAllowed=dialog
 #ifdef Arm64Bin
 ; Windows 11 on ARM64 is also x64compatible; Windows 10 on ARM64 only runs the ARM64 build
@@ -176,6 +177,8 @@ Name: "fileassoc";   Description: "{cm:AssocSubtitles,{#MyAppName}}"; GroupDescr
 Name: "{app}"; Permissions: everyone-full
 
 [InstallDelete]
+; Start menu folder of older versions (now only a shortcut)
+Type: filesandordirs; Name: "{autoprograms}\{#MyAppName}"
 ; OpenSSL 1.1 from older versions (Tero now uses OpenSSL 3)
 Type: files; Name: "{app}\libssl-1_1-x64.dll"
 Type: files; Name: "{app}\libcrypto-1_1-x64.dll"
@@ -337,9 +340,7 @@ Root: HKA; Subkey: "Software\Classes\TeroSubtitler.webvtt\DefaultIcon"; ValueTyp
 Root: HKA; Subkey: "Software\Classes\TeroSubtitler.webvtt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
@@ -364,10 +365,15 @@ Type: filesandordirs; Name: "{app}\Tero.act"
 Type: filesandordirs; Name: "{app}"
 
 [Code]
-// Windows 10 or later runs the current libmpv; Windows 7/8.1 need the "frozen" one
+// Windows 10 or later runs the current libmpv; Windows 7/8.1 need the "frozen" one.
+// The current x64 libmpv also imports vulkan-1.dll (the Vulkan loader, installed with
+// the GPU drivers): without it (old PCs, virtual machines, old or missing drivers) it
+// doesn't load, so those get the "frozen" one too.
 function IsModernWindows: Boolean;
 begin
-  Result := GetWindowsVersion >= $0A000000;
+  Result := (GetWindowsVersion >= $0A000000) and FileExists(ExpandConstant('{sys}\vulkan-1.dll'));
+  if not Result then
+    Log('Using the frozen libmpv: Windows older than 10 or no vulkan-1.dll');
 end;
 
 // The ARM64 build, when the installer has it and the machine is ARM64
