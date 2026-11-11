@@ -1,3 +1,19 @@
+diff --git a/compiler/aarch64/cgcpu.pas b/compiler/aarch64/cgcpu.pas
+index c6f2aeb9..4f1bcf11 100644
+--- a/compiler/aarch64/cgcpu.pas
++++ b/compiler/aarch64/cgcpu.pas
+@@ -2236,8 +2236,10 @@ implementation
+                 load_regs(list,R_INTREGISTER,RS_X19,RS_X28,R_SUBWHOLE);
+                 { on Windows also restore SP even if the add should be enough
+                   to have matching exit sequence to the entry sequence.
+-                  Skip for exceptfilters where FP points to parent's frame, not local frame. }
++                  Skip for exceptfilters where FP points to parent's frame, not local frame,
++                  and without a frame pointer, where FP is still the caller's }
+                 if (target_info.system=system_aarch64_win64) and
++                   not(pi_no_framepointer_needed in current_procinfo.flags) and
+                    (current_procinfo.procdef.proctypeoption<>potype_exceptfilter) then
+                   a_load_reg_reg(list,OS_ADDR,OS_ADDR,NR_FP,NR_SP);
+               end
 diff --git a/compiler/ogcoff.pas b/compiler/ogcoff.pas
 index 63a10bdb..c8b1f56b 100644
 --- a/compiler/ogcoff.pas
