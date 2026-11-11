@@ -379,6 +379,13 @@ jobs:
           $ErrorActionPreference = 'stop'
           Expand-Archive (Get-ChildItem *.zip | Select-Object -First 1).FullName -DestinationPath t
           $exe = (Get-ChildItem t -Recurse -Filter tero.exe | Select-Object -First 1).FullName
+          # Windows Error Reporting writes a full memory dump if tero.exe crashes
+          $dumps = "$env:RUNNER_TEMP\dumps"
+          New-Item -ItemType Directory -Force $dumps | Out-Null
+          $key = 'HKLM:\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\tero.exe'
+          New-Item -Force $key | Out-Null
+          New-ItemProperty -Force $key -Name DumpFolder -PropertyType ExpandString -Value $dumps | Out-Null
+          New-ItemProperty -Force $key -Name DumpType -PropertyType DWord -Value 2 | Out-Null
           $p = Start-Process $exe -PassThru
           Start-Sleep 20
           if ($p.HasExited) {
@@ -404,10 +411,21 @@ jobs:
               $syms | Where-Object A -le $va | Sort-Object A | Select-Object -Last 3 |
                 ForEach-Object { "0x{0:X}  {1}  (+0x{2:X})" -f $_.A, $_.N, ($va - $_.A) }
             }
+            Start-Sleep 10
+            Get-ChildItem $dumps | Format-Table Name, Length
             Write-Error ("tero.exe exited with code 0x{0:X8}" -f $p.ExitCode)
           }
           "tero.exe running, pid $($p.Id)"
           Stop-Process $p
+
+      # the crash dump, to find the caller and the data behind a crash
+      - name: Upload crash dump
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: winarm64-dump
+          path: ${{ runner.temp }}/dumps/*.dmp
+          retention-days: 7
 
   build-linux:
     needs: check
