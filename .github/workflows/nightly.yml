@@ -379,13 +379,16 @@ jobs:
           $ErrorActionPreference = 'stop'
           Expand-Archive (Get-ChildItem *.zip | Select-Object -First 1).FullName -DestinationPath t
           $exe = (Get-ChildItem t -Recurse -Filter tero.exe | Select-Object -First 1).FullName
-          # Windows Error Reporting writes a full memory dump if tero.exe crashes
+          # Windows Error Reporting writes a small dump if tero.exe crashes: stacks,
+          # registers, the program's globals and the memory they point to
           $dumps = "$env:RUNNER_TEMP\dumps"
           New-Item -ItemType Directory -Force $dumps | Out-Null
           $key = 'HKLM:\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\tero.exe'
           New-Item -Force $key | Out-Null
           New-ItemProperty -Force $key -Name DumpFolder -PropertyType ExpandString -Value $dumps | Out-Null
-          New-ItemProperty -Force $key -Name DumpType -PropertyType DWord -Value 2 | Out-Null
+          New-ItemProperty -Force $key -Name DumpType -PropertyType DWord -Value 0 | Out-Null
+          # DataSegs, UnloadedModules, IndirectlyReferencedMemory, ThreadInfo
+          New-ItemProperty -Force $key -Name CustomDumpFlags -PropertyType DWord -Value 0x1061 | Out-Null
           $p = Start-Process $exe -PassThru
           Start-Sleep 20
           if ($p.HasExited) {
