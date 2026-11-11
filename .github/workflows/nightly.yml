@@ -229,12 +229,14 @@ jobs:
           git clone -q --depth 1 -c core.autocrlf=false https://gitlab.com/freepascal.org/fpc/source.git $src
           if ($LastExitCode -ne 0) { exit $LastExitCode }
           git -C $src log -1 --format='FPC main %h %cs'
-          # Internal linker fix for IMAGE_REL_ARM64_PAGEOFFSET_12L (FPC issue #42048):
-          # without it LDR page offsets are not scaled and tero.exe crashes at start-up.
-          # Skipped once FPC main has it (or anything else in the patch changed).
+          # Two aarch64-win64 fixes (FPC issue #42048), without which tero.exe crashes:
+          # - internal linker: LDR page offsets (IMAGE_REL_ARM64_PAGEOFFSET_12L) were not scaled
+          # - code generator: a routine without frame pointer that saves d8-d15 or x19-x28
+          #   ended with "mov sp, x29", the caller's frame, so the caller's stack moved
+          # Skipped once FPC main has them (or anything else in the patch changed).
           # with LF line endings, as the sources (the checkout may have made it CRLF)
           $patch = "$env:RUNNER_TEMP\fpc.patch"
-          $text = Get-Content -Raw "$env:GITHUB_WORKSPACE\.github\workflows\fpc-aarch64-win64-pageoffset12l.patch"
+          $text = Get-Content -Raw "$env:GITHUB_WORKSPACE\.github\workflows\fpc-aarch64-win64.patch"
           [IO.File]::WriteAllText($patch, $text.Replace("`r`n", "`n"))
           git -C $src apply --check $patch
           if ($LastExitCode -eq 0) { git -C $src apply $patch; 'FPC patch applied' } else { 'FPC patch not applied' }
