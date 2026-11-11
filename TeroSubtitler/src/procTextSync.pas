@@ -110,7 +110,14 @@ function PlainTextToSegments(const ALines: TStrings; const AMode: TPlainTextMode
 // AJoinFragments also joins the fragments of one or two words with the next
 // entry when there's no real pause between them (CPL, MaxLines and
 // MaxDuration of AOptions). Returns the number of entries removed/joined.
-function CleanTranscription(var ASegments: TSegments; const AOptions: TSegmentOptions; const AJoinFragments: Boolean): Integer;
+// The entries that are only a sound ([Music], (door closes), ♪) are kept
+// with AKeepSounds, as entries of their own (never joined with the speech),
+// or removed without it. The silences ([BLANK_AUDIO], [Silence]) are always
+// removed.
+function CleanTranscription(var ASegments: TSegments; const AOptions: TSegmentOptions; const AJoinFragments: Boolean; const AKeepSounds: Boolean = False): Integer;
+
+// The text is only a sound description: [Music], (applause), *laughs*, ♪
+function IsSoundTag(const AText: String): Boolean;
 
 // -----------------------------------------------------------------------------
 
@@ -1533,7 +1540,62 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function CleanTranscription(var ASegments: TSegments; const AOptions: TSegmentOptions; const AJoinFragments: Boolean): Integer;
+function SoundTagInner(const AText: String; out AInner: String): Boolean;
+var
+  t: String;
+  c: Char;
+begin
+  // one line, without the spaces
+  t := Trim(StringReplace(StringReplace(AText, #13, ' ', [rfReplaceAll]), #10, ' ', [rfReplaceAll]));
+  AInner := '';
+  Result := False;
+  if t = '' then Exit;
+
+  // only music symbols
+  if Trim(StringsReplace(t, ['♪', '♫', '♬', '♩'], ['', '', '', ''], [rfReplaceAll])) = '' then
+  begin
+    AInner := t;
+    Exit(True);
+  end;
+
+  // [Music], (door closes), *laughs*: one pair around the whole text
+  if Length(t) < 3 then Exit;
+  c := t[1];
+  case c of
+    '[': Result := (t[Length(t)] = ']') and (Pos(']', t) = Length(t)) and (Pos('[', Copy(t, 2, MaxInt)) = 0);
+    '(': Result := (t[Length(t)] = ')') and (Pos(')', t) = Length(t)) and (Pos('(', Copy(t, 2, MaxInt)) = 0);
+    '*': Result := (t[Length(t)] = '*') and (Pos('*', Copy(t, 2, Length(t)-2)) = 0);
+  end;
+  if Result then
+    AInner := Trim(Copy(t, 2, Length(t)-2));
+end;
+
+// -----------------------------------------------------------------------------
+
+function IsSoundTag(const AText: String): Boolean;
+var
+  inner: String;
+begin
+  Result := SoundTagInner(AText, inner);
+end;
+
+// -----------------------------------------------------------------------------
+
+function IsSilenceTag(const AText: String): Boolean;
+var
+  inner, n: String;
+begin
+  // what whisper.cpp writes when there is nothing: [BLANK_AUDIO], [ Silence ]
+  Result := False;
+  if not SoundTagInner(AText, inner) then Exit;
+  n := NormalizeSyncWord(inner);
+  Result := (n = 'blankaudio') or (n = 'silence') or (n = 'nospeech') or
+    (n = 'silencio') or (n = 'sinaudio') or (n = 'noaudio');
+end;
+
+// -----------------------------------------------------------------------------
+
+function CleanTranscription(var ASegments: TSegments; const AOptions: TSegmentOptions; const AJoinFragments: Boolean; const AKeepSounds: Boolean = False): Integer;
 const
   RecentTime    = 30000; // ms, the text "just transcribed"
   RepeatGap     = 2000;  // ms, same text again before this = the same entry
@@ -1573,6 +1635,31 @@ begin
   begin
     norm := NormalizedWords(ASegments[i].Text);
     n := Length(Res);
+
+    // only a sound: kept as it is (the same one again is merged below) or
+    // removed; the silences are always removed
+    if IsSoundTag(ASegments[i].Text) then
+    begin
+      if not AKeepSounds or IsSilenceTag(ASegments[i].Text) then
+      begin
+        Inc(Result);
+        Continue;
+      end;
+      // ♪ has no letters, the text itself is the key
+      norm := '#' + UTF8LowerCase(OneLine(ASegments[i].Text));
+      if (n > 0) and (norm = Norms[n-1]) and
+        (ASegments[i].InitialTime - Res[n-1].FinalTime < RepeatGap) then
+      begin
+        Res[n-1].FinalTime := Max(Res[n-1].FinalTime, ASegments[i].FinalTime);
+        Inc(Result);
+        Continue;
+      end;
+      SetLength(Res, n+1);
+      SetLength(Norms, n+1);
+      Res[n] := ASegments[i];
+      Norms[n] := norm;
+      Continue;
+    end;
 
     // empty or a hallucination of the silences
     if (norm = '') or IsKnownHallucination(norm) then
@@ -1629,6 +1716,7 @@ begin
         words := Min(WordCount(NormalizedWords(Res[n-1].Text)), WordCount(NormalizedWords(ASegments[i].Text)));
         joined := OneLine(Res[n-1].Text) + ' ' + OneLine(ASegments[i].Text);
         if (words <= FragmentWords) and not SentenceEnd(OneLine(Res[n-1].Text)) and
+          not IsSoundTag(Res[n-1].Text) and not IsSoundTag(ASegments[i].Text) and
           (ASegments[i].InitialTime - Res[n-1].FinalTime <= FragmentGap) and
           (UTF8Length(joined) <= maxChars) and
           ((AOptions.MaxDuration <= 0) or (ASegments[i].FinalTime - Res[n-1].InitialTime <= AOptions.MaxDuration)) then

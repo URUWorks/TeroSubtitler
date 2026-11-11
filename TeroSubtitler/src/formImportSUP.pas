@@ -79,7 +79,7 @@ implementation
 uses
   procTypes, procWorkspace, procVST, procColorTheme, FileUtil, procSubtitle,
   UWSubtitleAPI.Formats, UWSubtitles.Utils, BGRABitmap, BGRABitmapTypes, procTesseract,
-  procConfig, procForms, UWSystem.Process, StrUtils, procDialogs, formCustomQuestionDlg, formMain;
+  procConfig, procForms, UWSystem.Process, StrUtils, procDialogs, formCustomQuestionDlg;
 
 {$R *.lfm}
 
@@ -160,11 +160,6 @@ var
 begin
   if (VST.RootNodeCount > 0) then
   begin
-    // with no subtitle open the work area (main list included) is disabled;
-    // like the other importers (plain text, audio to text) it has to be
-    // enabled, otherwise nothing in the main list can be clicked
-    if not frmMain.VST.Enabled then EnableWorkArea;
-
     ClearSubtitles(False);
     for i := FList.DisplaySets.Count-1 downto 0 do
       InsertSubtitle(0, FList.DisplaySets[i]^.InCue, FList.DisplaySets[i]^.OutCue, FList.DisplaySets[i]^.Text, '', i = 0, i = 0);
@@ -604,9 +599,7 @@ procedure TfrmImportSUP.SetControlsEnabled(const AValue: Boolean);
 begin
   prbProgress.Position := 0;
 
-  // the list isn't disabled during OCR anymore: on older macOS versions it
-  // didn't respond to clicks again after VST.Enabled := True (Mac Pro). OCR
-  // works by index, so clicking an entry meanwhile only shows its image
+  VST.Enabled         := AValue;
   btnOCR.Enabled      := False;
   btnImport.Enabled   := False;
   cboLanguage.Enabled := AValue;
@@ -618,7 +611,6 @@ begin
     btnClose.Caption := lngbtnClose;
     btnClose.Tag := 0;
     CheckButtons;
-    if VST.CanFocus then VST.SetFocus;
   end
   else
   begin

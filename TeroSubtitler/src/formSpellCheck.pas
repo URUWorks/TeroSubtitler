@@ -90,9 +90,232 @@ implementation
 
 uses
   procTypes, procWorkspace, procColorTheme, procSubtitle, procConfig,
-  procDialogs, UWSystem.StrUtils, UWSpellcheck.Hunspell, formMain, Math, procMacTextView;
+  procDialogs, UWSystem.StrUtils, UWSpellcheck.Hunspell, formMain, Math, procMacTextView, Character;
 
 {$R *.lfm}
+
+// -----------------------------------------------------------------------------
+
+{ Words to check }
+
+// Words are runs of letters, marks and digits (any script), joined by an
+// apostrophe (' ’) or a middle dot (col·lecció) only between two of them.
+// Everything else separates words: spaces (no-break too), punctuation, curly
+// quotes (“ ” ‘ « »), ellipsis (…), dashes, symbols (♪), etc. Before, only a
+// list of ASCII separators was used, so “Hello”, Wait… or ♪ were checked as
+// they are and reported as misspelled. Runs without letters (♪, 1990) aren't
+// checked. ASS override blocks ({\i1}, {\an8}) and HTML format tags (<i>,
+// <font color=...>) aren't text.
+
+type
+  TSpellCharKind = (sckSeparator, sckWord, sckJoiner);
+
+  TSpellWord = record
+    Start, Len: Integer; // bytes, Start is 1-based
+  end;
+  TSpellWords = array of TSpellWord;
+
+// -----------------------------------------------------------------------------
+
+function SpellCodepointSize(const AText: String; const APos: Integer): Integer;
+var
+  c: Byte;
+begin
+  c := Ord(AText[APos]);
+  if c < $C0 then
+    Result := 1
+  else if c < $E0 then
+    Result := 2
+  else if c < $F0 then
+    Result := 3
+  else
+    Result := 4;
+
+  if APos + Result - 1 > Length(AText) then
+    Result := Length(AText) - APos + 1;
+end;
+
+// -----------------------------------------------------------------------------
+
+function SpellCharKind(const AText: String; const APos, ALen: Integer; out AIsLetter: Boolean): TSpellCharKind;
+var
+  s: String;
+  u: UnicodeString;
+begin
+  AIsLetter := False;
+  if ALen = 1 then
+  begin
+    case AText[APos] of
+      'a'..'z', 'A'..'Z' : begin
+                             AIsLetter := True;
+                             Result := sckWord;
+                           end;
+      '0'..'9'           : Result := sckWord;
+      ''''               : Result := sckJoiner;
+    else
+      Result := sckSeparator;
+    end;
+    Exit;
+  end;
+
+  s := Copy(AText, APos, ALen);
+  // ’ (U+2019), · (U+00B7), ZWNJ and ZWJ (U+200C, U+200D)
+  if (s = #$E2#$80#$99) or (s = #$C2#$B7) or (s = #$E2#$80#$8C) or (s = #$E2#$80#$8D) then
+    Exit(sckJoiner);
+
+  Result := sckSeparator;
+  u := UTF8Decode(s);
+  if u = '' then Exit;
+  case TCharacter.GetUnicodeCategory(u, 1) of
+    TUnicodeCategory.ucUppercaseLetter,
+    TUnicodeCategory.ucLowercaseLetter,
+    TUnicodeCategory.ucTitlecaseLetter,
+    TUnicodeCategory.ucModifierLetter,
+    TUnicodeCategory.ucOtherLetter     : begin
+                                           AIsLetter := True;
+                                           Result := sckWord;
+                                         end;
+    TUnicodeCategory.ucNonSpacingMark,
+    TUnicodeCategory.ucCombiningMark,
+    TUnicodeCategory.ucEnclosingMark,
+    TUnicodeCategory.ucDecimalNumber,
+    TUnicodeCategory.ucLetterNumber,
+    TUnicodeCategory.ucOtherNumber     : Result := sckWord;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// length in bytes of the tag at APos ({\...}, <i>, </font>...), 0 if none
+function SpellTagLength(const AText: String; const APos: Integer): Integer;
+var
+  p: Integer;
+  t: String;
+begin
+  Result := 0;
+  case AText[APos] of
+    '{': if (APos < Length(AText)) and (AText[APos+1] = '\') then
+         begin
+           // same rule as RemoveTSTags: only override blocks are tags
+           p := Pos('}', AText, APos+2);
+           if p > 0 then Result := p - APos + 1;
+         end;
+    '<': begin
+           p := Pos('>', AText, APos+1);
+           if p > 0 then
+           begin
+             t := LowerCase(Copy(AText, APos, p - APos + 1));
+             if (t = '<i>') or (t = '</i>') or (t = '<b>') or (t = '</b>') or
+               (t = '<u>') or (t = '</u>') or (t = '<s>') or (t = '</s>') or
+               (t = '</font>') or t.StartsWith('<font ') then
+               Result := p - APos + 1;
+           end;
+         end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// the text as shown in the window, without tags
+function SpellVisibleText(const AText: String): String;
+var
+  i, l: Integer;
+begin
+  Result := '';
+  i := 1;
+  while i <= Length(AText) do
+  begin
+    l := SpellTagLength(AText, i);
+    if l > 0 then
+      Inc(i, l)
+    else
+    begin
+      Result := Result + AText[i];
+      Inc(i);
+    end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetSpellWords(const AText: String): TSpellWords;
+var
+  i, l, ws, we, n : Integer;
+  k               : TSpellCharKind;
+  isL, hasL, join : Boolean;
+
+  procedure EndWord;
+  begin
+    if (ws > 0) and hasL then
+    begin
+      if n = Length(Result) then SetLength(Result, n + 16);
+      Result[n].Start := ws;
+      Result[n].Len   := we - ws;
+      Inc(n);
+    end;
+    ws   := 0;
+    hasL := False;
+    join := False;
+  end;
+
+begin
+  Result := NIL;
+  n    := 0;
+  ws   := 0;
+  we   := 0;
+  hasL := False;
+  join := False;
+  i    := 1;
+  while i <= Length(AText) do
+  begin
+    l := SpellTagLength(AText, i);
+    if l > 0 then
+    begin
+      EndWord;
+      Inc(i, l);
+      Continue;
+    end;
+
+    l := SpellCodepointSize(AText, i);
+    k := SpellCharKind(AText, i, l, isL);
+    case k of
+      sckWord     : begin
+                      if (ws > 0) and (we <> i) and not join then EndWord;
+                      if ws = 0 then ws := i;
+                      we   := i + l;
+                      hasL := hasL or isL;
+                      join := False;
+                    end;
+      sckJoiner   : if (ws > 0) and (we = i) then
+                      join := True // inside a word if a letter follows
+                    else
+                      EndWord;
+      sckSeparator: EndWord;
+    end;
+    Inc(i, l);
+  end;
+  EndWord;
+  SetLength(Result, n);
+end;
+
+// -----------------------------------------------------------------------------
+
+// AOld as a whole word (out of the tags) by ANew, in all the text
+function ReplaceSpellWord(const AText, AOld, ANew: String): String;
+var
+  w : TSpellWords;
+  i : Integer;
+begin
+  Result := AText;
+  if AOld = '' then Exit;
+  w := GetSpellWords(AText);
+  for i := High(w) downto 0 do
+    if Copy(Result, w[i].Start, w[i].Len) = AOld then
+    begin
+      Delete(Result, w[i].Start, w[i].Len);
+      Insert(ANew, Result, w[i].Start);
+    end;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -180,33 +403,17 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmSpellCheck.PopulateWordMap(const AText: String);
-const
-  WordSplit: array [0..18] of String = (' ',',','.',';','/',':','"','`','-','(',')','[',']','{','}','!','?','¿',sLineBreak);
-
 var
-  sArr : TStringArray;
-  s : String;
-  i, p, l : Integer;
+  w : TSpellWords;
+  i : Integer;
 begin
   FWordMap.Clear;
   if AText = '' then Exit;
 
-  sArr := AText.Split(WordSplit);
-  p    := 0;
-  l    := 1;
-  for i := 0 to High(sArr) do
-  begin
-    if sArr[i].Trim <> '' then
-    begin
-      p := UTF8Pos(sArr[i], AText, p + l);
-      l := UTF8Length(sArr[i]);
-      s := UTF8Copy(AText, p-1, l+2);
-      if not s.StartsWith(tst_StartTag) and not s.EndsWith(tst_EndTag) then // skip possible Tero tags
-      begin
-        FWordMap.Add(p, sArr[i]);
-      end;
-    end;
-  end;
+  // the keys are positions in characters (1-based), like the memo
+  w := GetSpellWords(AText);
+  for i := 0 to High(w) do
+    FWordMap.Add(UTF8Length(Copy(AText, 1, w[i].Start-1)) + 1, Copy(AText, w[i].Start, w[i].Len));
 end;
 
 // -----------------------------------------------------------------------------
@@ -223,8 +430,9 @@ begin
   if ALine < Subtitles.Count then
   begin
     lblCurrentLine.Caption := Format(lngspCurrentLine, [ALine+1]);
-    // the memo uses only LF on macOS/Linux, so a CRLF would shift the positions
-    mmoNotFound.Text := AdjustLineBreaks(GetSubtitleText(ALine, FSource));
+    // the memo uses only LF on macOS/Linux, so a CRLF would shift the positions.
+    // Without tags: they aren't checked and only made the text harder to read
+    mmoNotFound.Text := SpellVisibleText(AdjustLineBreaks(GetSubtitleText(ALine, FSource)));
     PopulateWordMap(mmoNotFound.Text);
   end;
 end;
@@ -248,7 +456,7 @@ begin
         x := FChangeList.IndexOf(FWordMap.Data[i]);
         if x >= 0 then
         begin
-          SetSubtitleText(FLastLine, ReplaceString(GetSubtitleText(FLastLine, FSource), FChangeList.Keys[x], FChangeList.Data[x], True, False), FSource, False, False, False);
+          SetSubtitleText(FLastLine, ReplaceSpellWord(GetSubtitleText(FLastLine, FSource), FChangeList.Keys[x], FChangeList.Data[x]), FSource, False, False, False);
         end
         else
         begin
@@ -328,7 +536,7 @@ procedure TfrmSpellCheck.btnChangeClick(Sender: TObject);
 begin
   if (lstSuggestions.Count > 0) and (mmoNotFound.SelText <> '') then
   begin
-    SetSubtitleText(FLastLine, ReplaceString(GetSubtitleText(FLastLine, FSource), mmoNotFound.SelText, ApostropheAsWritten(mmoNotFound.SelText, edtCustom.Text), True, False), FSource, False, False, False);
+    SetSubtitleText(FLastLine, ReplaceSpellWord(GetSubtitleText(FLastLine, FSource), mmoNotFound.SelText, ApostropheAsWritten(mmoNotFound.SelText, edtCustom.Text)), FSource, False, False, False);
     FTempList.Add(mmoNotFound.SelText);
   end;
 
@@ -341,7 +549,7 @@ procedure TfrmSpellCheck.btnChangeAllClick(Sender: TObject);
 begin
   if (lstSuggestions.Count > 0) and (mmoNotFound.SelText <> '') then
   begin
-    SetSubtitleText(FLastLine, ReplaceString(GetSubtitleText(FLastLine, FSource), mmoNotFound.SelText, ApostropheAsWritten(mmoNotFound.SelText, edtCustom.Text), True, False), FSource, False, False, False);
+    SetSubtitleText(FLastLine, ReplaceSpellWord(GetSubtitleText(FLastLine, FSource), mmoNotFound.SelText, ApostropheAsWritten(mmoNotFound.SelText, edtCustom.Text)), FSource, False, False, False);
     FChangeList.Add(mmoNotFound.SelText, ApostropheAsWritten(mmoNotFound.SelText, edtCustom.Text));
   end;
 

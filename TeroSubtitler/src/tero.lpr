@@ -41,7 +41,7 @@ uses
   procThumbnails, formStreamExtractor, formPauses, formImportPlainText,
   formCustomSelectDlgWithPreview, formTTS, formVideoDubbing, formImportSUP,
   formImportSUPLanguages, procMacOpenFiles, procMacMediaKeys, procMacMenuKeys,
-  procMacSystemMenus;
+  procMacSystemMenus, procMacTextView;
 
 {$R *.res}
 
@@ -77,6 +77,9 @@ begin
   MacMenuKeysInstall(frmMain);
   // AutoFill, Writing Tools... added by macOS to the Edit/View menus
   MacSystemMenusInstall([frmMain.mnuEdit, frmMain.mnuView]);
+  // no Font panel updates from the text fields (access violation in AppKit
+  // on some Macs when the selection changes)
+  MacFontPanelInstall;
   {$ENDIF}
   Application.Run;
 end.
