@@ -80,6 +80,9 @@ function NormalizeSyncWord(const AWord: String): String;
 procedure AddTextWords(var AWords: TSyncWords; const AText: String; const AEntry: Integer);
 procedure AddRecognizedWords(var AWords: TSyncWords; const AText: String; const AStart, AEnd: Integer);
 function LoadRecognizedWordsFromJSON(const AFileName: String; var AWords: TSyncWords): Boolean;
+// NaN, Infinity, -Infinity, nan, -nan, inf... (not valid json, but written by
+// python's json.dump and by the C++ streams of whisper.cpp) -> null
+function SanitizeJSONNumbers(const AText: String): String;
 function WhisperDTWPreset(const AModel: String): String;
 procedure AlignSyncWords(var ATextWords: TSyncWords; const ARecognized: TSyncWords);
 function BuildSyncTimes(const ATextWords: TSyncWords; const ARecognized: TSyncWords; const AEntryCount: Integer; const AEntryChars: array of Integer; const AMinDuration, AMinPause: Integer; out AMatchedWords: Integer): TSyncTimes;
@@ -372,6 +375,66 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function SanitizeJSONNumbers(const AText: String): String;
+const
+  Bad: array[0..5] of String = ('-infinity', 'infinity', '-nan', 'nan', '-inf', 'inf');
+var
+  i, n, k, l, r: Integer;
+  inStr, rep: Boolean;
+begin
+  // one of these values anywhere (a token probability, avg_logprob...) and
+  // fpjson rejects the whole file: no words, "No words were recognized"
+  n := Length(AText);
+  // 'nan'/'inf' -> 'null' is one char more, never more than n/3 of them
+  SetLength(Result, n + n div 3 + 4);
+  r := 0;
+  i := 1;
+  inStr := False;
+  while i <= n do
+  begin
+    rep := False;
+    if inStr then
+    begin
+      if AText[i] = '\' then
+      begin
+        Inc(r);
+        Result[r] := AText[i];
+        Inc(i);
+        if i > n then Break;
+      end
+      else if AText[i] = '"' then
+        inStr := False;
+    end
+    else if AText[i] = '"' then
+      inStr := True
+    else if AText[i] in ['-', 'N', 'n', 'I', 'i'] then
+      for k := 0 to High(Bad) do
+      begin
+        l := Length(Bad[k]);
+        // the whole word, not the beginning of another one
+        if (i+l-1 <= n) and (LowerCase(Copy(AText, i, l)) = Bad[k]) and
+          ((i+l > n) or not (AText[i+l] in ['A'..'Z', 'a'..'z', '0'..'9', '_'])) then
+        begin
+          Move(PChar('null')^, Result[r+1], 4);
+          Inc(r, 4);
+          Inc(i, l);
+          rep := True;
+          Break;
+        end;
+      end;
+
+    if not rep then
+    begin
+      Inc(r);
+      Result[r] := AText[i];
+      Inc(i);
+    end;
+  end;
+  SetLength(Result, r);
+end;
+
+// -----------------------------------------------------------------------------
+
 function LoadRecognizedWordsFromJSON(const AFileName: String; var AWords: TSyncWords): Boolean;
 var
   sl: TStringList;
@@ -389,7 +452,7 @@ begin
   try
     sl.LoadFromFile(AFileName);
     try
-      Data := GetJSON(sl.Text);
+      Data := GetJSON(SanitizeJSONNumbers(sl.Text));
     except
       Exit;
     end;
@@ -417,8 +480,10 @@ begin
               if Words[x] is TJSONObject then
               begin
                 W := TJSONObject(Words[x]);
-                AddRecognizedWords(AWords, W.Get('word', ''),
-                  Round(W.Get('start', 0.0) * 1000), Round(W.Get('end', 0.0) * 1000));
+                // a time NaN/Infinity (null now): without it, the word is skipped
+                if (W.Find('start') is TJSONNumber) and (W.Find('end') is TJSONNumber) then
+                  AddRecognizedWords(AWords, W.Get('word', ''),
+                    Round(W.Get('start', 0.0) * 1000), Round(W.Get('end', 0.0) * 1000));
               end;
           end
           else

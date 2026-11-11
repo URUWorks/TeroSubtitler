@@ -76,10 +76,11 @@ type
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure OpenFolderClick(Sender: TObject);
     procedure CheckEngineOptions;
-    procedure SyncTexts(const AFileName: String);
-    function LoadWords(const AFileName: String; out AWords: TSyncWords): Boolean;
+    function SyncTexts(const AFileName, AFallbackFile: String): Boolean;
+    function LoadWords(const AFileName, AFallbackFile: String; out AWords: TSyncWords): Boolean;
     function UseWhisperDTW: Boolean;
-    function SmartSegment(const AWordsFile, ASrtFile, ALanguage: String): Boolean;
+    procedure GetWordsFiles(const AWaveFile, ASrtFile: String; out AWordsFile, AFallbackFile: String);
+    function SmartSegment(const AWordsFile, AFallbackFile, ASrtFile, ALanguage: String): Boolean;
     function GetCleanOptions: TSegmentOptions;
     procedure CleanTranscriptionFile(const ASrtFile: String; const AJoinFragments: Boolean);
     procedure CleanTranscribedEntries(const AFrom: Integer);
@@ -451,6 +452,7 @@ var
   isPlaying: Boolean;
   TimerSub: Boolean;
   FirstNew: Integer;
+  wfile, wfallback: String;
 begin
   if frmMain.MPV.FileName.StartsWith('http') then
     ShowErrorMessageDialog(lngFeatureNotAvailableFromURL)
@@ -641,37 +643,37 @@ begin
 
               if chkSyncText.Checked then
               begin
-                if Tools.WhisperEngine <> TWhisperEngine.WhisperCPP then
-                  srtfile := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(s), '.json')])
-                else if UseWhisperDTW and FileExists(ChangeFileExt(srtfile, '.json')) then
-                begin
-                  DeleteFile(srtfile);
-                  srtfile := ChangeFileExt(srtfile, '.json');
-                end;
-
+                GetWordsFiles(s, srtfile, wfile, wfallback);
                 prbProgress.Position := 100;
-                SyncTexts(srtfile);
-                DeleteFile(srtfile);
+                // no file at all: the engine failed (model, parameters...),
+                // it's not that there were no words
+                if not FileExists(wfile) and ((wfallback = '') or not FileExists(wfallback)) then
+                  ShowErrorMessageDialog(Format(lngErrorExecuting, [ExtractFileName(GetAudioToTextAppFile)]))
+                else if SyncTexts(wfile, wfallback) then
+                begin
+                  DeleteFile(wfile);
+                  if wfallback <> '' then DeleteFile(wfallback);
+                end;
+                // without words the files are kept, to see what the engine wrote
                 if isPlaying then frmMain.MPV.Resume;
                 Exit;
               end;
 
               if chkSmartSegment.Checked then
               begin
-                // words (whisper.cpp srt or faster-whisper json) -> our subtitles
-                if Tools.WhisperEngine <> TWhisperEngine.WhisperCPP then
-                  s := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(s), '.json')])
-                else if UseWhisperDTW and FileExists(ChangeFileExt(srtfile, '.json')) then
-                  s := ChangeFileExt(srtfile, '.json')
-                else
-                  s := srtfile;
-
-                if not SmartSegment(s, srtfile, cn) then
+                // words (whisper.cpp json/srt or faster-whisper json) -> our subtitles
+                GetWordsFiles(s, srtfile, wfile, wfallback);
+                if not FileExists(wfile) and ((wfallback = '') or not FileExists(wfallback)) then
                 begin
-                  ShowErrorMessageDialog(lngTextSyncNoWords);
+                  ShowErrorMessageDialog(Format(lngErrorExecuting, [ExtractFileName(GetAudioToTextAppFile)]));
                   Exit;
                 end;
-                if s <> srtfile then DeleteFile(s);
+                if not SmartSegment(wfile, wfallback, srtfile, cn) then
+                begin
+                  ShowErrorMessageDialog(lngTextSyncNoWords + LineEnding + LineEnding + wfile);
+                  Exit;
+                end;
+                if wfile <> srtfile then DeleteFile(wfile);
               end
               else if Tools.WhisperEngine <> TWhisperEngine.WhisperCPP then
               begin
@@ -809,7 +811,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmAudioToText.SyncTexts(const AFileName: String);
+function TfrmAudioToText.SyncTexts(const AFileName, AFallbackFile: String): Boolean;
 var
   TextWords, RecWords: TSyncWords;
   Times: TSyncTimes;
@@ -817,11 +819,15 @@ var
   i, Matched: Integer;
   t: String;
 begin
-  LoadWords(AFileName, RecWords);
+  Result := LoadWords(AFileName, AFallbackFile, RecWords);
 
-  if Length(RecWords) = 0 then
+  if not Result then
   begin
-    ShowErrorMessageDialog(lngTextSyncNoWords);
+    // the file, to see what the engine wrote (it's not deleted)
+    if FileExists(AFileName) or (AFallbackFile = '') then
+      ShowErrorMessageDialog(lngTextSyncNoWords + LineEnding + LineEnding + AFileName)
+    else
+      ShowErrorMessageDialog(lngTextSyncNoWords + LineEnding + LineEnding + AFallbackFile);
     Exit;
   end;
 
@@ -863,35 +869,65 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function TfrmAudioToText.LoadWords(const AFileName: String; out AWords: TSyncWords): Boolean;
-var
-  Subs: TUWSubtitles;
-  FPSInfo: TFPSInfo;
-  i: Integer;
+procedure TfrmAudioToText.GetWordsFiles(const AWaveFile, ASrtFile: String; out AWordsFile, AFallbackFile: String);
+begin
+  // the file with the words of each engine and, with whisper.cpp + dtw, the
+  // srt (-ml 1 -sow) written with the json, used if the json can't be read
+  AFallbackFile := '';
+  if Tools.WhisperEngine <> TWhisperEngine.WhisperCPP then
+    AWordsFile := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(AWaveFile), '.json')])
+  else if UseWhisperDTW then
+  begin
+    AWordsFile    := ChangeFileExt(ASrtFile, '.json');
+    AFallbackFile := ASrtFile;
+  end
+  else
+    AWordsFile := ASrtFile;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmAudioToText.LoadWords(const AFileName, AFallbackFile: String; out AWords: TSyncWords): Boolean;
+
+  procedure LoadFile(const AFile: String);
+  var
+    Subs: TUWSubtitles;
+    FPSInfo: TFPSInfo;
+    i: Integer;
+  begin
+    if (AFile = '') or not FileExists(AFile) then Exit;
+    if LowerCase(ExtractFileExt(AFile)) = '.json' then
+      LoadRecognizedWordsFromJSON(AFile, AWords)
+    else
+    begin
+      // whisper.cpp srt, one word per entry (-ml 1 -sow)
+      Subs := TUWSubtitles.Create;
+      try
+        FPSInfo.FPS  := 25;
+        FPSInfo.Mode := tcNDF;
+        if Subs.LoadFromFile(AFile, NIL, FPSInfo, sfSubRip) then
+          for i := 0 to Subs.Count-1 do
+            AddRecognizedWords(AWords, Subs[i].Text, Subs[i].InitialTime, Subs[i].FinalTime);
+      finally
+        Subs.Free;
+      end;
+    end;
+  end;
+
 begin
   SetLength(AWords, 0);
-  if AFileName.EndsWith('.json') then
-    LoadRecognizedWordsFromJSON(AFileName, AWords)
-  else if FileExists(AFileName) then
+  LoadFile(AFileName);
+  if Length(AWords) = 0 then
   begin
-    // whisper.cpp srt, one word per entry (-ml 1 -sow)
-    Subs := TUWSubtitles.Create;
-    try
-      FPSInfo.FPS  := 25;
-      FPSInfo.Mode := tcNDF;
-      if Subs.LoadFromFile(AFileName, NIL, FPSInfo, sfSubRip) then
-        for i := 0 to Subs.Count-1 do
-          AddRecognizedWords(AWords, Subs[i].Text, Subs[i].InitialTime, Subs[i].FinalTime);
-    finally
-      Subs.Free;
-    end;
+    SetLength(AWords, 0);
+    LoadFile(AFallbackFile);
   end;
   Result := Length(AWords) > 0;
 end;
 
 // -----------------------------------------------------------------------------
 
-function TfrmAudioToText.SmartSegment(const AWordsFile, ASrtFile, ALanguage: String): Boolean;
+function TfrmAudioToText.SmartSegment(const AWordsFile, AFallbackFile, ASrtFile, ALanguage: String): Boolean;
 var
   Words: TSyncWords;
   Segments: TSegments;
@@ -902,7 +938,7 @@ var
 begin
   // subtitles made by us from the words, following the conventions (whisper
   // segments can be very long, e.g. ~20 s after a silence)
-  Result := LoadWords(AWordsFile, Words);
+  Result := LoadWords(AWordsFile, AFallbackFile, Words);
   if not Result then Exit;
 
   with AppOptions.Conventions do
