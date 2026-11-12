@@ -42,7 +42,10 @@
 - fixed: [macOS] Homebrew/MacPorts tools (deno, ffmpeg) weren’t found by yt-dlp when Tero was opened from Finder
 - fixed: [macOS] The shortcut presets are saved in the user folder instead of inside the app
 - fixed: [macOS] Access violation in spell check with words containing the typographic apostrophe (’)
+- Fixed: [macOS] Crashes when editing or deleting text
 - fixed: [macOS/Linux] OCR stopped after a few hundred entries ("Tesseract could not be run")
+- Fixed: Spell check errors with quotes, symbols, tags and non-Latin languages
+- Fixed: Audio transcription errors involving invalid values and missing words			
 - fixed: Thumbnails of anamorphic videos were distorted
 - fixed: The layout chosen in the Setup wizard was lost when the wizard was reopened before Tero was closed for the first time
 - fixed: Recent files was enabled and empty when no file had been opened yet
@@ -110,6 +113,8 @@
 - fixed: [SubtitleAPI] Tero Subtitler format saved Notes as Actor
 - fixed: [SubtitleAPI] DRTIC, SoftNI & MicroDVD frame rate tag depended on system decimal separator
 - fixed: [SubtitleAPI] AQTitle, ABC iView, Advanced Subtitles, CPC-600, DKS, DVD Subtitle, DVD Subtitle System, DVD Junior, FAB Subtitler, GPAC TTXT, I-Author, Inscriber CG, Karaoke LRC/VKT, Mac DVD Studio Pro, MPlayer, Spruce STL & Spruce Script (parsing robustness)
+- Fixed: [SubtitleAPI] ASS subtitle data loss and incorrect column handling when saving
+- Fixed: [SubtitleAPI] Timed Text strikethrough not being recognized
 - fixed: EDL shot change import, timecodes now start from the video start
 - fixed: Loading a subtitle with a different frame rate mode left the time fields and waveform in the previous timecode mode
 - fixed: Tero’s own file dialog used a wrong FPS value
