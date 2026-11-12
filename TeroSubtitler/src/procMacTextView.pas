@@ -29,6 +29,7 @@ uses
 
 procedure MacDisableFontPanel(const AControl: TWinControl);
 procedure MacFontPanelInstall;
+procedure MacRedrawTextView(const AControl: TWinControl);
 
 // -----------------------------------------------------------------------------
 
@@ -100,6 +101,47 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// The Spell check window changes the text of its memo (setString) and its
+// selection several times in a row before AppKit draws (the lines without
+// errors are skipped in the same click). Sometimes AppKit then redraws only
+// the rect of the new selection and the other lines keep the glyphs of an
+// earlier entry (the second line of #285 under the first line of #294) until
+// the window loses the focus and the whole view is drawn again. The whole
+// text is invalidated here, so the next draw covers every line.
+procedure MacRedrawTextView(const AControl: TWinControl);
+var
+  v  : NSView;
+  tv : NSTextView;
+  r  : NSRange;
+begin
+  if (AControl = NIL) or not AControl.HandleAllocated then Exit;
+  v := NSView(AControl.Handle);
+  if (v = NIL) then Exit;
+
+  if v.isKindOfClass(NSScrollView) then
+  begin
+    v.setNeedsDisplay(True);
+    NSScrollView(v).contentView.setNeedsDisplay(True);
+    v := NSView(NSScrollView(v).documentView);
+  end;
+
+  if (v <> NIL) and v.isKindOfClass(NSTextView) then
+  begin
+    tv := NSTextView(v);
+    if (tv.layoutManager <> NIL) and (tv.textStorage <> NIL) then
+    begin
+      tv.layoutManager.ensureLayoutForTextContainer(tv.textContainer);
+      r.location := 0;
+      r.length   := tv.textStorage.length;
+      tv.layoutManager.invalidateDisplayForCharacterRange(r);
+    end;
+    tv.setNeedsDisplayInRect(tv.visibleRect);
+    tv.setNeedsDisplay(True);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 { TMacFontPanel }
 
 // -----------------------------------------------------------------------------
@@ -139,6 +181,12 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure MacFontPanelInstall;
+begin
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MacRedrawTextView(const AControl: TWinControl);
 begin
 end;
 {$ENDIF}
