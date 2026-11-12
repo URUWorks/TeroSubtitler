@@ -203,17 +203,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
-// Escribe el texto de un <p> como FCP: la cursiva, el subrayado (y el tachado)
-// parciales en un solo <span> por tramo, con todos sus atributos en el orden
-// de FCP (tts:fontStyle y después tts:textDecoration), nunca spans anidados,
-// y los saltos de línea como <br/>. Txt solo trae {\i}, {\u} y {\s}.
+// Escribe el texto de un <p> como FCP: la cursiva y el subrayado parciales en
+// un solo <span> por tramo, con todos sus atributos en el orden de FCP
+// (tts:fontStyle y después tts:textDecoration), nunca spans anidados, y los
+// saltos de línea como <br/>. Txt solo trae {\i} y {\u}.
+// Antes también escribía el tachado (tts:textDecoration="lineThrough"), que
+// iTT no admite: ahora el texto tachado se exporta sin tachar
 // Antes: AppendStyledTextDirect usaba una pila (un span por tag, anidados) y
 // con tags solapados ({\i1}a{\u1}b{\i0}c{\u0}) cerraba el span equivocado
 
 procedure AppendITTText(const XmlDoc: TXMLDocument; const Parent: TDOMNode; const Txt: String);
 type
   TRunStyle = record
-    It, Un, St: Boolean;
+    It, Un: Boolean;
   end;
 var
   Cur, Seg: TRunStyle;
@@ -224,7 +226,7 @@ var
 
   function SameStyle(const A, B: TRunStyle): Boolean;
   begin
-    Result := (A.It = B.It) and (A.Un = B.Un) and (A.St = B.St);
+    Result := (A.It = B.It) and (A.Un = B.Un);
   end;
 
   procedure AddTextTo(const ANode: TDOMNode; const S: String);
@@ -248,23 +250,15 @@ var
   procedure Flush;
   var
     Span: TDOMElement;
-    Deco: String;
   begin
     if Buffer = '' then Exit;
-    if not (Seg.It or Seg.Un or Seg.St) then
+    if not (Seg.It or Seg.Un) then
       AddTextTo(Parent, Buffer)
     else
     begin
       Span := XmlDoc.CreateElement('span');
       if Seg.It then Span.SetAttribute('tts:fontStyle', 'italic');
-      Deco := '';
-      if Seg.Un then Deco := 'underline';
-      if Seg.St then
-      begin
-        if Deco <> '' then Deco := Deco + ' ';
-        Deco := Deco + 'lineThrough';
-      end;
-      if Deco <> '' then Span.SetAttribute('tts:textDecoration', Deco);
+      if Seg.Un then Span.SetAttribute('tts:textDecoration', 'underline');
       Parent.AppendChild(Span);
       AddTextTo(Span, Buffer);
     end;
@@ -272,7 +266,7 @@ var
   end;
 
 begin
-  Cur.It := False; Cur.Un := False; Cur.St := False;
+  Cur.It := False; Cur.Un := False;
   Seg := Cur;
   Buffer := '';
   i := 1;
@@ -285,13 +279,12 @@ begin
     begin
       Block := Copy(Txt, i+1, j-i-1);
       for Tag in Block.Split(['\']) do
-        if (Length(Tag) = 2) and (Tag[1] in ['i', 'u', 's']) and (Tag[2] in ['0', '1']) then
+        if (Length(Tag) = 2) and (Tag[1] in ['i', 'u']) and (Tag[2] in ['0', '1']) then
         begin
           OnOff := Tag[2] = '1';
           case Tag[1] of
             'i': Cur.It := OnOff;
             'u': Cur.Un := OnOff;
-            's': Cur.St := OnOff;
           end;
         end;
       i := j + 1;
@@ -315,7 +308,8 @@ end;
 // Lee los tags TS de una entrada ({\i1}, {\b1}, {\u1}, {\s1}, {\c&BBGGRR&},
 // también varios en un bloque como {\b1\c&H0000FF&}) y dice qué formato cubre
 // todo el texto visible. Text queda sin ese formato (va en el <p>), sin la
-// negrita ni el color parciales (Apple no los admite) y con un tag por bloque.
+// negrita ni el color parciales (Apple no los admite), sin el tachado (iTT no
+// lo admite) y con un tag por bloque.
 
 function AnalyzeITTEntry(const Txt: String): TITTEntryStyle;
 type
@@ -463,8 +457,10 @@ begin
     if SameCol then Result.Color := FirstCol;
   end;
 
-  // el texto: cursiva y subrayado parciales en <span>, tachado como antes,
-  // negrita y color fuera (en el <p> si cubren todo, si no se pierden)
+  // el texto: cursiva y subrayado parciales en <span>, negrita y color fuera
+  // (en el <p> si cubren todo, si no se pierden). Antes el tachado pasaba como
+  // {\s1}/{\s0} y se exportaba con tts:textDecoration="lineThrough", que iTT
+  // no admite: ahora se quita (el texto queda, sin tachar)
   for i := 0 to High(Toks) do
     if not Toks[i].IsTag then
       Result.Text := Result.Text + Toks[i].S
@@ -472,7 +468,6 @@ begin
       case Toks[i].S of
         'i': if not Result.Italic then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\i1}', '{\i0}');
         'u': if not Result.Underline then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\u1}', '{\u0}');
-        's': Result.Text := Result.Text + iff(Toks[i].TagOn, '{\s1}', '{\s0}');
       end;
 end;
 
