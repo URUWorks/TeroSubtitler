@@ -445,9 +445,17 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmWizard.btnDownloadFasterWhisperClick(Sender: TObject);
+{$IFDEF DARWIN}
+var
+  cpu: String;
+{$ENDIF}
 begin
   {$IFDEF DARWIN}
-  ShowDownloadDialog(StringReplace(URL_FASTERWHISPER, '%cpu', GetCPUArchitectureString, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
+  // fasterwhisper_macos_x86_64.zip needs macOS 11; before Big Sur, the legacy build (10.11+)
+  cpu := GetCPUArchitectureString;
+  if (cpu = 'x86_64') and (GetDarwinMajorVersion < 20) then
+    cpu := 'legacy_x86_64';
+  ShowDownloadDialog(StringReplace(URL_FASTERWHISPER, '%cpu', cpu, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
   {$ELSE}
   ShowDownloadDialog(URL_FASTERWHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
   {$IFDEF WINDOWS}
