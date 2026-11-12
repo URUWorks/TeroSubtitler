@@ -29,6 +29,7 @@ object frmAudioToText: TfrmAudioToText
     Height = 28
     Top = 50
     Width = 355
+    AutoSize = False
     ItemHeight = 20
     Style = csDropDownList
     TabOrder = 1
@@ -50,6 +51,7 @@ object frmAudioToText: TfrmAudioToText
     Top = 130
     Width = 289
     Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
     BorderSpacing.Right = 6
     ItemHeight = 20
     Style = csDropDownList
@@ -112,6 +114,7 @@ object frmAudioToText: TfrmAudioToText
     Height = 28
     Top = 10
     Width = 355
+    AutoSize = False
     ItemHeight = 20
     Style = csDropDownList
     TabOrder = 0
@@ -160,11 +163,12 @@ object frmAudioToText: TfrmAudioToText
   end
   object lblTimeElapsed: TLabel
     AnchorSideTop.Control = btnGenerate
-    AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = btnGenerate
+    AnchorSideBottom.Control = btnGenerate
+    AnchorSideBottom.Side = asrBottom
     Left = 166
-    Height = 16
-    Top = 598
+    Height = 32
+    Top = 590
     Width = 69
     Alignment = taRightJustify
     Anchors = [akTop, akRight, akBottom]
@@ -219,6 +223,7 @@ object frmAudioToText: TfrmAudioToText
     Height = 28
     Top = 90
     Width = 289
+    AutoSize = False
     ItemHeight = 20
     Style = csDropDownList
     TabOrder = 2
