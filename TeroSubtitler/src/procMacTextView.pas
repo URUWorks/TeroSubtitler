@@ -120,8 +120,10 @@ begin
 
   if v.isKindOfClass(NSScrollView) then
   begin
-    v.setNeedsDisplay(True);
-    NSScrollView(v).contentView.setNeedsDisplay(True);
+    // setNeedsDisplayInRect: setNeedsDisplay is setNeedsDisplay_ in the
+    // FPC 3.2 Cocoa headers and setNeedsDisplay in FPC main
+    v.setNeedsDisplayInRect(v.bounds);
+    NSScrollView(v).contentView.setNeedsDisplayInRect(NSScrollView(v).contentView.bounds);
     v := NSView(NSScrollView(v).documentView);
   end;
 
@@ -135,8 +137,7 @@ begin
       r.length   := tv.textStorage.length;
       tv.layoutManager.invalidateDisplayForCharacterRange(r);
     end;
-    tv.setNeedsDisplayInRect(tv.visibleRect);
-    tv.setNeedsDisplay(True);
+    tv.setNeedsDisplayInRect(tv.bounds);
   end;
 end;
 
