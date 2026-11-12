@@ -130,6 +130,10 @@
 - fixed: Shot changes exported as frames were imported as milliseconds
 - fixed: Shot changes detected with FFmpeg/PySceneDetect were read as frames if “Frames” was selected for import, and exported with wrong times
 - fixed: PySceneDetect detection on all systems, Sensitivity value and error messages in Shot changes
+- fixed: Web preview subtitles drifted out of sync with 23.976 fps (SMPTE) files
+- fixed: Some shot changes on the timeline couldn’t be deleted when they were very close together
+- fixed: Frame stepping in the video preview could repeat or skip frames
+- fixed: Double-clicking the timeline could show a different frame than the one under the cursor
 - changed: Whisper.cpp now downloads UW_WhisperCPP (Windows 7+, macOS 10.11+, Linux glibc 2.17+), with GPU support via Vulkan on Windows/Linux x64 and Metal on Apple Silicon
 - changed: [macOS] removed the menu items added by the system that Tero doesn’t use
 - changed: Faster-Whisper now downloads UW_FasterWhisper, and asks before downloading the optional NVIDIA GPU libraries
