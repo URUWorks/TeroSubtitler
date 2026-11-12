@@ -182,10 +182,50 @@ end;
 
 //------------------------------------------------------------------------------
 
+function TUWWaveformDisplayer.FindSceneChangeIndexAt(const ATimeMS: Integer): Integer;
+var
+  I, Tolerance, Dist, BestDist : Integer;
+begin
+  // the shot change under the cursor: the closest one within a few pixels or
+  // half a frame. An exact match was needed and the cursor (rounded to frames)
+  // rarely falls on the ms of a detected shot change, so some of them couldn't
+  // be deleted, mainly when they are one or two frames apart
+  Result := -1;
+  if Length(FSceneChangeList) = 0 then Exit;
+
+  Tolerance := PixelToTime(3);
+  if (FFPS > 0) then
+    Tolerance := Max(Tolerance, Round(500 / FFPS));
+
+  BestDist := MaxInt;
+  I := GetNextSceneChangeIndex(ATimeMS);
+  // I is the first one >= ATimeMS, I-1 the last one < ATimeMS
+  if (I <= High(FSceneChangeList)) then
+  begin
+    Dist := FSceneChangeList[I] - ATimeMS;
+    if (Dist <= Tolerance) then
+    begin
+      Result   := I;
+      BestDist := Dist;
+    end;
+  end;
+  if (I > 0) then
+  begin
+    Dist := ATimeMS - FSceneChangeList[I-1];
+    if (Dist <= Tolerance) and (Dist < BestDist) then
+      Result := I-1;
+  end;
+end;
+
+//------------------------------------------------------------------------------
+
 function TUWWaveformDisplayer.ContainsSceneChange(const AStart, AStop: Integer): Boolean;
 var
   I : Integer;
 begin
+  if (AStart = AStop) then
+    Exit(FindSceneChangeIndexAt(AStart) >= 0);
+
   I := GetNextSceneChangeIndex(AStart);
   Result := (I <= High(FSceneChangeList)) and (FSceneChangeList[I] <= AStop);
 end;
@@ -196,9 +236,18 @@ function TUWWaveformDisplayer.DeleteSceneChange(const AInitialTimeMS, AFinalTime
 var
   StartIdx, StopIdx, Count, I, J: Integer;
 begin
-  StartIdx := GetNextSceneChangeIndex(AInitialTimeMS);
-  StopIdx  := GetNextSceneChangeIndex(AFinalTimeMS, True);
-  if (StopIdx = -1) then
+  if (AInitialTimeMS = AFinalTimeMS) then
+  begin
+    // only the cursor: the shot change under it
+    StartIdx := FindSceneChangeIndexAt(AInitialTimeMS);
+    StopIdx  := StartIdx;
+  end
+  else
+  begin
+    StartIdx := GetNextSceneChangeIndex(AInitialTimeMS);
+    StopIdx  := GetNextSceneChangeIndex(AFinalTimeMS, True);
+  end;
+  if (StopIdx = -1) or (StartIdx = -1) or (StopIdx < StartIdx) then
   begin
     SetLength(Result, 0);
     Exit;

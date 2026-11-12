@@ -216,6 +216,7 @@ type
     FOldInitialTime : Integer;
     FOldFinalTime   : Integer;
     FOldMouseDownX  : Integer;
+    FDblClickOnTimeLine : Boolean; // the double click was on the time ruler
 
     FScrollBar : TUWScrollBar;
 
@@ -358,6 +359,7 @@ type
     function GetNextSceneChangeIndex(const ATimeMS: Integer; const ABackward: Boolean = False): Integer;
     function GetNextSceneChange(const ATimeMS: Integer): Integer;
     function GetPreviousSceneChange(const ATimeMS: Integer): Integer;
+    function FindSceneChangeIndexAt(const ATimeMS: Integer): Integer;
     function ContainsSceneChange(const AStart, AStop: Integer): Boolean;
     function DeleteSceneChange(const AInitialTimeMS, AFinalTimeMS: Integer): TIntegerDynArray;
     procedure InsertSceneChange(const Src: TIntegerDynArray); overload;
@@ -1462,6 +1464,9 @@ begin
   FNextSubIdx := -1;
   UpdateFlags  := [];
 
+  if (ssDouble in Shift) then
+    FDblClickOnTimeLine := IsTimeLineClicked(Y);
+
   if (ssDouble in Shift) or (not IsTimeLineEnabled) or (not InRange(X, 0, Width)) then Exit;
 
   if IsTimeLineClicked(Y) then
@@ -1930,11 +1935,14 @@ procedure TUWWaveformDisplayer.MouseUp(Button: TMouseButton; Shift: TShiftState;
 var
   Moved : TMovedSubtitleItems;
   i     : Integer;
+  SnapPos : Integer;
+  WasNoneEditMode : Boolean;
 begin
   inherited;
 
   if (FMouseIsDown) then
   begin
+    WasNoneEditMode := (FDynamicEditMode = demNone);
     if ((FDynamicSelection.FinalTime - FDynamicSelection.InitialTime) < 40) and
       (not (Assigned(FSelectedSubtitle) or Assigned(FDynamicSelSub))) then
       ClearSelection;
@@ -1992,7 +2000,16 @@ begin
     FMaxSelTime        := -1;
     FPrevSubIdx        := -1;
     FNextSubIdx        := -1;
-    FCursorMS          :=  GetCorrectTimePos(PixelToTime(X) + FPositionMS);
+    // a click keeps the snapped position of MouseDown/MouseMove (a shot
+    // change, an entry edge...): without it the cursor ended a few ms off
+    // the shot change and "Delete shot change" didn't find it
+    SnapPos := -1;
+    if WasNoneEditMode and FSnappingEnabled and not (ssCtrl in Shift) then
+      SnapPos := FindSnappingPoint(PixelToTime(X) + FPositionMS);
+    if (SnapPos <> -1) then
+      FCursorMS := SnapPos
+    else
+      FCursorMS := GetCorrectTimePos(PixelToTime(X) + FPositionMS);
 
     UpdateView([uvfSelection, uvfSubtitle]);
   end;
@@ -2011,11 +2028,28 @@ procedure TUWWaveformDisplayer.DblClick;
 {var
   idx : Integer;
   Sub : PUWSubtitleItem;}
+var
+  SeekMS : Integer;
 begin
   if not IsTimeLineEnabled then Exit;
 
+  // on the time ruler the first click already went to that position (and
+  // FOldMouseDownX/FCursorMS are from an older click on the wave)
+  if FDblClickOnTimeLine then Exit;
+
   if Assigned(FOnTimeLineClickEvent) then
-    FOnTimeLineClickEvent(Self, FOldMouseDownX);
+  begin
+    // go to the frame the cursor shows: the raw mouse position is the frame
+    // under the mouse, but the cursor is rounded to the nearest frame (the
+    // next one when clicking in the second half of a frame) or snapped to a
+    // shot change/entry, so the preview showed a different frame. A quarter
+    // of frame inside it, exactly on the frame start the seek can land on
+    // the previous frame
+    SeekMS := FCursorMS;
+    if FFPSTimeMode and (FFPS > 0) then
+      SeekMS := SeekMS + Round(250 / FFPS);
+    FOnTimeLineClickEvent(Self, SeekMS);
+  end;
 
 {  // Detect double click on start or stop timestamp
   inherited;
