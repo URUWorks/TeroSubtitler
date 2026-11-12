@@ -1725,6 +1725,7 @@ var
   SubText : String;
   VideoExt : String;
   VideoSupport : Boolean;
+  OldTimeBase  : TSubtitleTimeBase;
 begin
   if (Subtitles.Count > 0) and frmMain.MPV.IsMediaLoaded then
   begin
@@ -1746,7 +1747,17 @@ begin
     ts := TStringList.Create;
     try
       ts.Text := HTMLFormat;
-      SubText := EncodeStringBase64(Subtitles.SaveToString(Workspace.FPS.OutputFPS.FPS, NIL, sfWebVTT, smText));
+      // the browser plays media time, like mpv, and the stored times are
+      // already media times, so they are written without the SMPTE x1.001
+      // conversion (same as MPVSaveSubtitleTempTrack). Before, an iTT/TTML at
+      // 23.976 in frames mode was ~3.6 s late per hour in the web preview.
+      OldTimeBase := Subtitles.TimeBase;
+      Subtitles.TimeBase := stbMedia;
+      try
+        SubText := EncodeStringBase64(Subtitles.SaveToString(Workspace.FPS.OutputFPS.FPS, NIL, sfWebVTT, smText));
+      finally
+        Subtitles.TimeBase := OldTimeBase;
+      end;
       Delete(VideoExt, 1, 1);
       // a proper file:/// URL (percent-encoded) escaped for an HTML attribute,
       // so paths with spaces, # or quotes work, also on Windows
