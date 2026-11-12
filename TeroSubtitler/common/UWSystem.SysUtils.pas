@@ -29,6 +29,7 @@ uses
 
 {$IFDEF DARWIN}
 function GetCPUArchitectureString: AnsiString;
+function GetDarwinMajorVersion: Integer;
 {$ENDIF}
 
 function Iff(const Condition: Boolean; const TruePart, FalsePart: String): String; overload;
@@ -143,6 +144,25 @@ begin
     Result := 'arm64'
   else
     Result := 'x86_64'
+end;
+
+//------------------------------------------------------------------------------
+
+// Darwin version (kern.osrelease): 15 = OS X 10.11 ... 19 = 10.15, 20 = macOS 11
+function GetDarwinMajorVersion: Integer;
+var
+  buf  : array[0..63] of AnsiChar;
+  size : size_t;
+  s    : String;
+begin
+  Result := 0;
+  FillChar(buf, SizeOf(buf), 0);
+  size := SizeOf(buf) - 1;
+  if FPsysctlbyname('kern.osrelease', @buf, @size, NIL, 0) = 0 then
+  begin
+    s := StrPas(buf);
+    Result := StrToIntDef(Copy(s, 1, Pos('.', s) - 1), 0);
+  end;
 end;
 {$ENDIF}
 
