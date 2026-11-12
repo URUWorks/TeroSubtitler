@@ -477,6 +477,11 @@ begin
           btnChange.Enabled    := lstSuggestions.Count > 0;
           btnChangeAll.Enabled := btnChange.Enabled;
 
+          // the memo may have changed several times since the last paint
+          // (lines without errors), all of it has to be drawn again
+          mmoNotFound.Invalidate;
+          MacRedrawTextView(mmoNotFound);
+
           Exit;
         end;
       end;
@@ -486,6 +491,8 @@ begin
 
   edtCustom.Text := '';
   lblCurrentLine.Caption := '';
+  mmoNotFound.Invalidate;
+  MacRedrawTextView(mmoNotFound);
 
   if not FirstLoad then
     ShowMessageDialog(lngSpellCheckFinished);
