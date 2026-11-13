@@ -2,6 +2,7 @@
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 [![TS release](https://img.shields.io/github/v/release/URUWorks/TeroSubtitler?style=badge&sort=semver)](https://github.com/URUWorks/TeroSubtitler/releases)
 [![TS downloads](https://img.shields.io/github/downloads/URUWorks/TeroSubtitler/total.svg)](https://github.com/URUWorks/TeroSubtitler/releases)
+[![Website](https://img.shields.io/badge/Website-uruworks.net-1764b8)](https://uruworks.net)
 [![Handbook](https://img.shields.io/badge/Handbook-EN%20%7C%20ES-1764b8)](https://handbook.uruworks.net)
 [![discord](https://img.shields.io/badge/Discord-blue)](https://discord.gg/EqzXEa8pHK)
 [![ko-fi](https://img.shields.io/badge/Ko--fi-F16061?logo=ko-fi&logoColor=white)](https://ko-fi.com/uruworks)
@@ -10,6 +11,7 @@
 
 Tero Subtitler is an open source, cross-platform, and free subtitle editing software for Windows, macOS and Linux.
 
+- **Website:** [uruworks.net](https://uruworks.net)
 - **Download:** [latest release](https://github.com/URUWorks/TeroSubtitler/releases) (Windows installer or portable, macOS, Linux)
 - **User manual:** [handbook.uruworks.net](https://handbook.uruworks.net), in English and Spanish
 - **Community:** [Discord](https://discord.gg/EqzXEa8pHK) and [GitHub Discussions](https://github.com/URUWorks/TeroSubtitler/discussions)
@@ -96,7 +98,6 @@ We appreciate anyone who can offer skills towards the project (additions and ref
 - Documentation (keeping the [handbook](https://handbook.uruworks.net) up to date and translating it)
 - Subtitling consultant (for QC and keeping abreast of industry developments)
 - Video producer (for social media)
-- Web designer (for URUWorks)
 
 We encourage public discussions (ideally in English) to avoid the doubling of work and reach agreements with others:
 - If there are questions or proposals, please create a topic (after searching for existing ones) in Discussions before heading to Issues.
