@@ -1474,7 +1474,6 @@ begin
   LoadShortCutsFromFile(ShortCutFileName, ActionList);
   // Init language
   SetGUILanguage;
-  RefreshAppTitle;
   // VST
   VSTDrawInitialize(VSTOptions.DrawMode);
   LoadSettings(True);

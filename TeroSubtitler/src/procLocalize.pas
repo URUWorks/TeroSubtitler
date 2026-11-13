@@ -429,7 +429,7 @@ implementation
 
 uses
   UWSystem.Globalization, ActnList, procTypes, procConfig, formMain, TypInfo,
-  contnrs, LResources
+  contnrs, LResources, procWorkspace
   {$IFDEF DARWIN}, CocoaAll{$ENDIF};
 
 // -----------------------------------------------------------------------------
@@ -770,6 +770,11 @@ begin
         Hint := Caption + LineEnding + LineEnding + Hint
       else
         Hint := Caption;
+
+  // the translation also sets again the caption of the main form from the
+  // .lfm ("tero"): the window title is rebuilt here, after each change of
+  // language, also the one of the wizard at the first start (Windows)
+  RefreshAppTitle;
 end;
 
 // -----------------------------------------------------------------------------

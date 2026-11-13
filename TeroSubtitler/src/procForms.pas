@@ -395,7 +395,6 @@ begin
     begin
       SetGUILanguage;
       UpdateVideoLengthString;
-      RefreshAppTitle;
       // the texts set at runtime ("Text (n characters...)", the tip)
       UpdateCPSAndTexts(procVST.VSTFocusedNode(frmMain.VST));
       SetStatusBarText(GetRandomTipString, 0, False);
