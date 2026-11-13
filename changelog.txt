@@ -169,6 +169,7 @@
 - added: [Linux] Whisper.cpp download for ARM64 (aarch64)
 - added: iTT has its own language in Format properties
 - added: Extract waveform also works with online media (opened from URL)
+- added: Improve detection of multilingual dialogue by leveraging Whisper's Translate task accuracy #447
 - added: Auto-guess FPS of non-SMPTE subtitle file #414
 - added: Multi-select entries in timeline #390
 - added: Automatically detect non-dialog audio and display them as short text info #375
