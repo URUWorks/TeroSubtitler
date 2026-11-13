@@ -1603,6 +1603,10 @@ msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
 msgid "Maximum line length"
 msgstr "Maximum line length"
 
+#: tfrmaudiototext.chkmultilingual.caption
+msgid "Mixed languages (detect each part)"
+msgstr "Mixed languages (detect each part)"
+
 #: tfrmaudiototext.chksmartsegment.caption
 msgid "Smart segmentation (using the conventions)"
 msgstr "Smart segmentation (using the conventions)"

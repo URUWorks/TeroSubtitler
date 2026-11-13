@@ -1668,6 +1668,10 @@ msgctxt "tfrmaudiototext.chkmaxlinelength.caption"
 msgid "Maximum line length"
 msgstr "Želena največja dolžina vrstice"
 
+#: tfrmaudiototext.chkmultilingual.caption
+msgid "Mixed languages (detect each part)"
+msgstr ""
+
 #: tfrmaudiototext.chksmartsegment.caption
 msgid "Smart segmentation (using the conventions)"
 msgstr ""
