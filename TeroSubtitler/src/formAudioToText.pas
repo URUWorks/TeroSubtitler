@@ -52,6 +52,7 @@ type
     rbnAddSubtitlesWhileTranscribing: TUWRadioButton;
     rbnLoadSubtitlesAfterTranscript: TUWRadioButton;
     chkTranslate: TUWCheckBox;
+    chkMultilingual: TUWCheckBox;
     spnMaxLineLength: TSpinEdit;
     spnMaxLineCount: TSpinEdit;
     chkMaxLineLength: TUWCheckBox;
@@ -64,6 +65,7 @@ type
     procedure btnGenerateClick(Sender: TObject);
     procedure btnModelClick(Sender: TObject);
     procedure cboEngineSelect(Sender: TObject);
+    procedure cboLanguageSelect(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -71,6 +73,7 @@ type
     procedure chkSyncTextChange(Sender: TObject);
   private
     FKeepSounds: Boolean;
+    FMultilingual: Boolean;
     FUseMaxLineLength: Boolean;
     procedure RefreshModelsList;
     procedure SetControlsEnabled(const AValue: Boolean);
@@ -324,6 +327,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmAudioToText.cboLanguageSelect(Sender: TObject);
+begin
+  CheckEngineOptions;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmAudioToText.rbnAddSubtitlesWhileTranscribingChange(Sender: TObject
   );
 begin
@@ -468,6 +478,7 @@ begin
     lblStatus.Caption := lngExtracting;
     // read before the controls are disabled (the cleanup is at the end)
     FKeepSounds       := chkSounds.Checked and chkSounds.Enabled;
+    FMultilingual     := chkMultilingual.Checked and chkMultilingual.Enabled;
     FUseMaxLineLength := chkMaxLineLength.Checked and chkMaxLineLength.Enabled;
     SetControlsEnabled(False);
 
@@ -549,6 +560,11 @@ begin
 
             if chkTranslate.Checked and not chkSyncText.Checked then
               ss := ss + ' --task translate';
+
+            // audio with several languages: the language is detected again in
+            // each 30 s window instead of once at the start (#447)
+            if FMultilingual and (Pos('multilingual', Tools.FasterWhisper_Additional) = 0) then
+              ss := ss + ' --multilingual True';
 
             if not chkSyncText.Checked and not chkSmartSegment.Checked and (chkMaxLineLength.Checked or chkMaxLineCount.Checked) then
             begin
@@ -764,6 +780,7 @@ begin
     chkMaxLineCount.Enabled  := False;
     spnMaxLineCount.Enabled  := False;
     chkSounds.Enabled        := False;
+    chkMultilingual.Enabled  := False;
   end;
 end;
 
@@ -784,6 +801,9 @@ begin
   // the sounds are entries of their own, there are no entries to make when
   // synchronizing and the smart segmentation uses only the words
   chkSounds.Enabled := not chkSyncText.Checked and not chkSmartSegment.Checked;
+  // only faster-whisper detects the language of each part, and only when
+  // the language is not given
+  chkMultilingual.Enabled := (Tools.WhisperEngine <> WhisperCPP) and (cboLanguage.ItemIndex = 0);
   if chkSyncText.Checked or chkSmartSegment.Checked then
   begin
     chkMaxLineLength.Enabled := False;
