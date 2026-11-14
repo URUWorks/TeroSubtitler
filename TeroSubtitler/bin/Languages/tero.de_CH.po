@@ -1083,6 +1083,11 @@ msgstr "Beim Wechsel in den Quelltext-Modus wird das Format auf “Tero Subtitle
 msgid "# %d"
 msgstr "# %d"
 
+#: proclocalize.lngspeakern
+#, object-pascal-format
+msgid "Speaker %d"
+msgstr ""
+
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
 msgstr "Rechtschreibprüfung abgeschlossen."
@@ -1653,6 +1658,10 @@ msgstr ""
 
 #: tfrmaudiototext.chksounds.caption
 msgid "Include sounds ([Music], [Applause]...)"
+msgstr ""
+
+#: tfrmaudiototext.chkspeakers.caption
+msgid "Identify the speakers in Actor (number, 0 = automatic)"
 msgstr ""
 
 #: tfrmaudiototext.chksynctext.caption

@@ -1076,6 +1076,11 @@ msgstr "Ao mudar para o modo fonte o formato será alterado para \"Tero Subtitle
 msgid "# %d"
 msgstr "# %d"
 
+#: proclocalize.lngspeakern
+#, object-pascal-format
+msgid "Speaker %d"
+msgstr ""
+
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
 msgstr "Revisão ortográfica finalizada."
@@ -1643,6 +1648,10 @@ msgstr ""
 
 #: tfrmaudiototext.chksounds.caption
 msgid "Include sounds ([Music], [Applause]...)"
+msgstr ""
+
+#: tfrmaudiototext.chkspeakers.caption
+msgid "Identify the speakers in Actor (number, 0 = automatic)"
 msgstr ""
 
 #: tfrmaudiototext.chksynctext.caption

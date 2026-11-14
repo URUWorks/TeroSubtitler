@@ -1055,6 +1055,11 @@ msgstr "Kaynak moduna geçmek formatı “Tero Subtitler” olarak değiştirece
 msgid "# %d"
 msgstr "# %d"
 
+#: proclocalize.lngspeakern
+#, object-pascal-format
+msgid "Speaker %d"
+msgstr ""
+
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
 msgstr "Yazım denetimi tamamlandı."
@@ -1617,6 +1622,10 @@ msgstr ""
 
 #: tfrmaudiototext.chksounds.caption
 msgid "Include sounds ([Music], [Applause]...)"
+msgstr ""
+
+#: tfrmaudiototext.chkspeakers.caption
+msgid "Identify the speakers in Actor (number, 0 = automatic)"
 msgstr ""
 
 #: tfrmaudiototext.chksynctext.caption

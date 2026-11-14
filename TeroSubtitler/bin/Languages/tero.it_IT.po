@@ -1062,6 +1062,11 @@ msgstr "Passando alla modalità sorgente, il formato del file sarà modificato i
 msgid "# %d"
 msgstr "# %d"
 
+#: proclocalize.lngspeakern
+#, object-pascal-format
+msgid "Speaker %d"
+msgstr ""
+
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
 msgstr "Controllo ortografico completato."
@@ -1633,6 +1638,10 @@ msgstr "Segmentazione intelligente (usando le convenzioni)"
 #: tfrmaudiototext.chksounds.caption
 msgid "Include sounds ([Music], [Applause]...)"
 msgstr "Includi suoni ([Musica], [Applausi]...)"
+
+#: tfrmaudiototext.chkspeakers.caption
+msgid "Identify the speakers in Actor (number, 0 = automatic)"
+msgstr ""
 
 #: tfrmaudiototext.chksynctext.caption
 msgid "Synchronize the current texts (only timings)"

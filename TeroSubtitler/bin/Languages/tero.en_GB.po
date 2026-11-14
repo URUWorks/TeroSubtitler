@@ -1054,6 +1054,11 @@ msgstr "Switching to source mode will change the format to “Tero Subtitler”,
 msgid "# %d"
 msgstr "# %d"
 
+#: proclocalize.lngspeakern
+#, object-pascal-format
+msgid "Speaker %d"
+msgstr "Speaker %d"
+
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
 msgstr "Spell check finished."
@@ -1614,6 +1619,10 @@ msgstr "Smart segmentation (using the conventions)"
 #: tfrmaudiototext.chksounds.caption
 msgid "Include sounds ([Music], [Applause]...)"
 msgstr "Include sounds ([Music], [Applause]...)"
+
+#: tfrmaudiototext.chkspeakers.caption
+msgid "Identify the speakers in Actor (number, 0 = automatic)"
+msgstr "Identify the speakers in Actor (number, 0 = automatic)"
 
 #: tfrmaudiototext.chksynctext.caption
 msgid "Synchronize the current texts (only timings)"

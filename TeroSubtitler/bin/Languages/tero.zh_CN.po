@@ -1055,6 +1055,11 @@ msgstr "切换到源码模式后，格式将变为 \"Tero Subtitler\"，否则�
 msgid "# %d"
 msgstr ""
 
+#: proclocalize.lngspeakern
+#, object-pascal-format
+msgid "Speaker %d"
+msgstr ""
+
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
 msgstr "拼写检查完成。"
@@ -1617,6 +1622,10 @@ msgstr ""
 
 #: tfrmaudiototext.chksounds.caption
 msgid "Include sounds ([Music], [Applause]...)"
+msgstr ""
+
+#: tfrmaudiototext.chkspeakers.caption
+msgid "Identify the speakers in Actor (number, 0 = automatic)"
 msgstr ""
 
 #: tfrmaudiototext.chksynctext.caption

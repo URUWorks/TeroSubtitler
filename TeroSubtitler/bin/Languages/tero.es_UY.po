@@ -1054,6 +1054,11 @@ msgstr "Al cambiar al modo código se cambiará el formato a \"Tero Subtitler\",
 msgid "# %d"
 msgstr "# %d"
 
+#: proclocalize.lngspeakern
+#, object-pascal-format
+msgid "Speaker %d"
+msgstr "Actor %d"
+
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
 msgstr "Revisión ortográfica terminada."
@@ -1616,6 +1621,10 @@ msgstr "Segmentación inteligente"
 #: tfrmaudiototext.chksounds.caption
 msgid "Include sounds ([Music], [Applause]...)"
 msgstr "Incluye sonidos ([Música], [Aplausos]...)"
+
+#: tfrmaudiototext.chkspeakers.caption
+msgid "Identify the speakers in Actor (number, 0 = automatic)"
+msgstr "Identifica a los hablantes en Actor (número, 0 = automático)"
 
 #: tfrmaudiototext.chksynctext.caption
 msgid "Synchronize the current texts (only timings)"
