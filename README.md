@@ -27,7 +27,7 @@ Tero Subtitler is an open source, cross-platform, and free subtitle editing soft
 - Source, Translator and Transcription modes
 - Translation memory and terminology
 - Audiovisual preview for many formats
-- Timeline with waveform visualizer and shot change detection
+- Timeline with waveform visualizer and built-in shot change detection (frame exact cuts, dissolves and fades)
 - Tools for manipulation (frame/video rate conversion), formatting (fonts and alignment), quality control (spell check), analysis (comparing subtitle sets), translation (including auto), transcription (including auto), validation (industry and customizable profiles), and automation (correcting errors and breaches)
 - Text to speech (export subtitles to audio)
 - Import/Export Blu-ray SUP format
@@ -41,7 +41,7 @@ See the [handbook](https://handbook.uruworks.net) for a full guide to every menu
 
 ### [mpv](https://mpv.io/) playback engine
 
-Powerful multimedia playback engine.
+Powerful multimedia playback engine, also used for the built-in shot change detection.
 
 ### [FFmpeg](https://ffmpeg.org/)
 
@@ -65,7 +65,7 @@ Text to speech and video dubbing.
 
 ### [PySceneDetect](https://www.scenedetect.com/)
 
-Optional shot change detector.
+Optional external shot change detector (Tero has its own built-in one).
 
 ### [Tesseract](https://github.com/URUWorks/UW_Tesseract#uw_tesseract)
 
@@ -78,6 +78,7 @@ Open source OCR engine, used to import Blu-ray SUP subtitles.
 ### Internal packages required to compile
 
 - [UW Blu-ray PGS Parser](https://github.com/URUWorks/UW_BlurayPGSParser)
+- [UW MPVPlayer](https://github.com/URUWorks/UW_MPVPlayer) (2.5 or later)
 - [UW Common units](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/common)
 - [UW Subtitle API](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/subtitleapi)
 - [UW Tero controls](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/controls)
@@ -87,7 +88,6 @@ Open source OCR engine, used to import Blu-ray SUP subtitles.
 - [ATSynEdit](https://wiki.freepascal.org/ATSynEdit) ([EncConv](https://github.com/Alexey-T/EncConv), [ATFlatControls](https://github.com/Alexey-T/ATFlatControls))
 - [BGRABitmap](https://wiki.freepascal.org/BGRABitmap)
 - [FPSpreadsheet](https://wiki.lazarus.freepascal.org/FPSpreadsheet)
-- [UW MPVPlayer](https://github.com/URUWorks/UW_MPVPlayer)
 
 ## Contributions
 
