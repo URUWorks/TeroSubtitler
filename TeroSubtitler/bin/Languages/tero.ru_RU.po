@@ -881,6 +881,10 @@ msgctxt "proclocalize.lngscaudiofilters"
 msgid "Audio filters"
 msgstr "Аудиофильтры"
 
+#: proclocalize.lngscbuiltin
+msgid "Tero (built-in)"
+msgstr ""
+
 #: proclocalize.lngscedit
 msgctxt "proclocalize.lngscedit"
 msgid "Edit"
