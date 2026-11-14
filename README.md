@@ -78,8 +78,8 @@ Open source OCR engine, used to import Blu-ray SUP subtitles.
 ### Internal packages required to compile
 
 - [UW Blu-ray PGS Parser](https://github.com/URUWorks/UW_BlurayPGSParser)
-- [UW MPVPlayer](https://github.com/URUWorks/UW_MPVPlayer) (2.5 or later)
 - [UW Common units](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/common)
+- [UW MPVPlayer](https://github.com/URUWorks/UW_MPVPlayer)
 - [UW Subtitle API](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/subtitleapi)
 - [UW Tero controls](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/controls)
 
