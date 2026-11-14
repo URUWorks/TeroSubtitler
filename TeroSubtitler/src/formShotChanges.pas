@@ -23,7 +23,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  Spin, UWTimeEdit, Types, process, StrUtils, LCLTranslator,procLocalize;
+  Spin, UWTimeEdit, Types, process, StrUtils, LCLTranslator,procLocalize,
+  MPVPlayer.SceneDetect;
 
 type
 
@@ -55,14 +56,19 @@ type
     procedure btnDetectClick(Sender: TObject);
     procedure btnImportClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mmoTimesChange(Sender: TObject);
+    procedure spnSensitivityChange(Sender: TObject);
   private
     FTimeElapsed: Double;
     FCancel: Boolean;
     FSMPTE: Boolean;
     FFromWave: Boolean; // the times in the memo are the ones of the timeline (ms)
+    FDetector: TMPVSceneDetector; // the last native detection: its scores, to change the sensitivity at once
+    FFillingMemo: Boolean;
+    procedure FillNativeCuts;
     procedure SetControlsEnabled(const AValue: Boolean);
     procedure RunApp_CB(Sender, Context: TObject; Status: TRunCommandEventCode; const Message: String);
     function IsTimeCode(const ACode: Integer): Boolean;
@@ -70,6 +76,9 @@ type
     function LineToMs(const ALine: String; out AMs: Integer): Boolean;
     function DetectTimeCode(const ALine: String): Integer;
     function FillDialogFilter(const AAllSupportedFiles: Boolean): String;
+    function GetDetectApp: Integer;
+    procedure SetDetectApp(const AApp: Integer);
+    procedure DetectNative;
   public
 
   end;
@@ -90,6 +99,12 @@ const
   tcMilliseconds = 2;
   tcHHMMSSZZZ    = 3;
   tcHHMMSSFF     = 4;
+
+  // cboDetectApp: the app of each item is in Objects (the saved setting is
+  // the app, not the item index: PySceneDetect is only listed if installed)
+  daFFmpeg       = 0;
+  daSceneDetect  = 1;
+  daNative       = 2; // UW_MPVPlayer's TMPVSceneDetector (libmpv)
 
 {$R *.lfm}
 
@@ -219,8 +234,9 @@ begin
     begin
       BeginUpdate;
       Clear;
-      Add('FFmpeg');
-      if FileExists(SceneDetectFileName) then Add('PySceneDetect');
+      AddObject(lngscBuiltin, TObject(PtrInt(daNative)));
+      AddObject('FFmpeg', TObject(PtrInt(daFFmpeg)));
+      if FileExists(SceneDetectFileName) then AddObject('PySceneDetect', TObject(PtrInt(daSceneDetect)));
       EndUpdate;
     end;
     with cboTimeCodeImport.Items do
@@ -237,13 +253,15 @@ begin
     cboTimeCodeExport.Items.Assign(cboTimeCodeImport.Items);
     cboTimeCodeImport.ItemIndex := 2;
     cboTimeCodeExport.ItemIndex := 4;
-    cboDetectApp.ItemIndex := 0;
+    SetDetectApp(daNative);
   finally
   end;
 
   FCancel   := False;
   FSMPTE    := False;
   FFromWave := False;
+  FDetector := NIL;
+  FFillingMemo := False;
 
   btnDetect.Enabled := frmMain.MPV.IsMediaLoaded;
 
@@ -267,9 +285,46 @@ end;
 procedure TfrmShotChanges.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
-  SaveFormSettings(Self, Format('%d,%d,%d', [cboDetectApp.ItemIndex, cboTimeCodeImport.ItemIndex, cboTimeCodeExport.ItemIndex]));
+  SaveFormSettings(Self, Format('%d,%d,%d', [GetDetectApp, cboTimeCodeImport.ItemIndex, cboTimeCodeExport.ItemIndex]));
+  FreeAndNil(FDetector);
   CloseAction := caFree;
   frmShotChanges := NIL;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmShotChanges.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  // detecting: cancel it first (the detection loop is running in this form)
+  CanClose := btnClose.Tag = 0;
+  if not CanClose then
+    FCancel := True;
+end;
+
+// -----------------------------------------------------------------------------
+
+function TfrmShotChanges.GetDetectApp: Integer;
+begin
+  if cboDetectApp.ItemIndex >= 0 then
+    Result := PtrInt(cboDetectApp.Items.Objects[cboDetectApp.ItemIndex])
+  else
+    Result := daNative;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmShotChanges.SetDetectApp(const AApp: Integer);
+var
+  i: Integer;
+begin
+  for i := 0 to cboDetectApp.Items.Count-1 do
+    if PtrInt(cboDetectApp.Items.Objects[i]) = AApp then
+    begin
+      cboDetectApp.ItemIndex := i;
+      Exit;
+    end;
+  // not available (PySceneDetect no longer installed)
+  cboDetectApp.ItemIndex := 0;
 end;
 
 // -----------------------------------------------------------------------------
@@ -286,7 +341,7 @@ begin
     AParamArray := s.Split(',');
     if Length(AParamArray) = 3 then
     begin
-      cboDetectApp.ItemIndex := AParamArray[0].ToInteger;
+      SetDetectApp(StrToIntDef(AParamArray[0], daNative));
       cboTimeCodeImport.ItemIndex := AParamArray[1].ToInteger;
       cboTimeCodeExport.ItemIndex := AParamArray[2].ToInteger;
     end;
@@ -300,6 +355,11 @@ end;
 
 procedure TfrmShotChanges.mmoTimesChange(Sender: TObject);
 begin
+  // edited, imported or detected with another app: the scores of the last
+  // native detection are not the list anymore
+  // (Sender = NIL: only refreshing the buttons)
+  if (Sender <> NIL) and not FFillingMemo and Assigned(FDetector) and not FDetector.IsRunning then
+    FreeAndNil(FDetector);
   btnExport.Enabled := (mmoTimes.Lines.Count > 0);
 end;
 
@@ -730,7 +790,9 @@ begin
   FSMPTE := False;
   FFromWave := False;
   try
-    if cboDetectApp.ItemIndex = 0 then // FFmpeg
+    if GetDetectApp = daNative then
+      DetectNative
+    else if GetDetectApp = daFFmpeg then
     begin
       if Tools.FFmpeg_ParamsForShotChanges <> '' then
         AParamArray := Tools.FFmpeg_ParamsForShotChanges.Split(' ')
@@ -811,6 +873,116 @@ begin
     end;
   finally
     SetControlsEnabled(True);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// cuts, dissolves and fades with a second libmpv in its own thread
+// (UW_MPVPlayer), frame exact and without external apps
+
+// the sensitivity is FFmpeg's scene score (0.1..0.9, 0.4 by default, higher
+// is less sensitive). Here: the minimum gray difference of a cut (0..255) and
+// how many times it must be over the frames around it. 0.4 = 8 and 3, the
+// defaults (the best F1 in the UW_MPVPlayer benchmark), 0.1 = 2 and 1.5,
+// 0.9 = 18 and 5.5
+
+procedure SensitivityToParams(const AValue: Double; out AMinScore, ARatio: Double);
+begin
+  AMinScore := AValue * 20;
+  ARatio    := 1 + AValue * 5;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmShotChanges.FillNativeCuts;
+var
+  cuts: TIntegerDynArray;
+  i: Integer;
+begin
+  cuts := FDetector.GetCutsMs;
+  FFillingMemo := True;
+  mmoTimes.Lines.BeginUpdate;
+  try
+    mmoTimes.Clear;
+    for i := 0 to High(cuts) do
+      if cuts[i] > 0 then
+        mmoTimes.Lines.Add(IntToStr(cuts[i]));
+  finally
+    mmoTimes.Lines.EndUpdate;
+    FFillingMemo := False;
+  end;
+  mmoTimesChange(NIL);
+end;
+
+// -----------------------------------------------------------------------------
+
+// after a native detection the cuts are decided again from its scores, at
+// once, without reading the video again
+
+procedure TfrmShotChanges.spnSensitivityChange(Sender: TObject);
+var
+  ms, r: Double;
+begin
+  if not Assigned(FDetector) or FDetector.IsRunning or not FDetector.HasScores then Exit;
+  SensitivityToParams(spnSensitivity.Value, ms, r);
+  if FDetector.Recalculate(ms, r) then
+    FillNativeCuts;
+end;
+
+// -----------------------------------------------------------------------------
+
+// cuts, dissolves and fades with a second libmpv in its own thread
+// (UW_MPVPlayer), frame exact and without external apps
+
+procedure TfrmShotChanges.DetectNative;
+var
+  t0: QWord;
+  ms, r: Double;
+begin
+  FreeAndNil(FDetector);
+  FDetector := TMPVSceneDetector.Create(frmMain.MPV.MPVFileName);
+  SensitivityToParams(spnSensitivity.Value, ms, r);
+  FDetector.MinScore := ms;
+  FDetector.Ratio    := r;
+
+  if not FDetector.Start(frmMain.MPV.FileName) then
+  begin
+    FreeAndNil(FDetector);
+    ShowErrorMessageDialog(Format(lngErrorExecuting, ['libmpv']));
+    Exit;
+  end;
+
+  prbExtracting.Style    := pbstNormal;
+  prbExtracting.Max      := 1000;
+  prbExtracting.Position := 0;
+  t0 := GetTickCount64;
+  try
+    while FDetector.IsRunning do
+    begin
+      prbExtracting.Position := Round(FDetector.GetProgress * 1000);
+      lblIdle.Caption := TimeToString(((GetTickCount64 - t0) div 1000) * 1000, 'mm:ss') +
+        Format('  %d%%', [Round(FDetector.GetProgress * 100)]);
+      Application.ProcessMessages;
+      if FCancel then
+        FDetector.Cancel;
+      Sleep(30);
+    end;
+    FDetector.WaitFor;
+  finally
+    prbExtracting.Style := pbstMarquee;
+  end;
+
+  case FDetector.Status of
+    sdsDone:
+      FillNativeCuts; // keeps the detector: its scores for the sensitivity
+    sdsError:
+      begin
+        ShowErrorMessageDialog(Format(lngErrorExecuting, ['libmpv']) + sLineBreak + FDetector.ErrorText);
+        FreeAndNil(FDetector);
+      end;
+  else
+    FreeAndNil(FDetector);
   end;
 end;
 

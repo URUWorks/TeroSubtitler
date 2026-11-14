@@ -1,27 +1,29 @@
 object frmShotChanges: TfrmShotChanges
   Left = 242
-  Height = 466
+  Height = 582
   Top = 118
-  Width = 490
+  Width = 612
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Shot changes'
-  ClientHeight = 466
-  ClientWidth = 490
+  ClientHeight = 582
+  ClientWidth = 612
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '5.0.1.0'
   OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
   object btnApply: TButton
     AnchorSideTop.Control = btnClose
     AnchorSideRight.Control = btnClose
-    Left = 295
-    Height = 26
-    Top = 432
-    Width = 91
+    Left = 370
+    Height = 32
+    Top = 540
+    Width = 113
     Anchors = [akTop, akRight]
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     Caption = 'Apply'
     Default = True
     TabOrder = 10
@@ -32,23 +34,23 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 391
-    Height = 26
-    Top = 432
-    Width = 91
+    Left = 489
+    Height = 32
+    Top = 540
+    Width = 113
     Anchors = [akRight, akBottom]
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
+    BorderSpacing.Right = 10
+    BorderSpacing.Bottom = 10
     Cancel = True
     Caption = 'Close'
     TabOrder = 11
     OnClick = btnCloseClick
   end
   object mmoTimes: TMemo
-    Left = 8
-    Height = 240
-    Top = 8
-    Width = 378
+    Left = 10
+    Height = 300
+    Top = 10
+    Width = 472
     Anchors = [akTop, akLeft, akRight]
     ReadOnly = True
     ScrollBars = ssAutoVertical
@@ -58,19 +60,19 @@ object frmShotChanges: TfrmShotChanges
   object lblTimeCodeIn: TLabel
     AnchorSideTop.Control = cboTimeCodeImport
     AnchorSideTop.Side = asrCenter
-    Left = 8
-    Height = 15
-    Top = 292
-    Width = 112
+    Left = 10
+    Height = 20
+    Top = 363
+    Width = 142
     Caption = 'Time code for import'
     ParentColor = False
   end
   object btnImport: TButton
     AnchorSideLeft.Control = btnClose
-    Left = 391
-    Height = 26
-    Top = 8
-    Width = 91
+    Left = 489
+    Height = 32
+    Top = 10
+    Width = 113
     Caption = 'Import...'
     TabOrder = 1
     OnClick = btnImportClick
@@ -79,11 +81,11 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideLeft.Control = btnClose
     AnchorSideTop.Control = btnExport
     AnchorSideTop.Side = asrBottom
-    Left = 391
-    Height = 26
-    Top = 70
-    Width = 91
-    BorderSpacing.Top = 5
+    Left = 489
+    Height = 32
+    Top = 86
+    Width = 113
+    BorderSpacing.Top = 6
     Caption = 'Detect'
     TabOrder = 3
     OnClick = btnDetectClick
@@ -92,11 +94,11 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideLeft.Control = btnClose
     AnchorSideTop.Control = btnImport
     AnchorSideTop.Side = asrBottom
-    Left = 391
-    Height = 26
-    Top = 39
-    Width = 91
-    BorderSpacing.Top = 5
+    Left = 489
+    Height = 32
+    Top = 48
+    Width = 113
+    BorderSpacing.Top = 6
     Caption = 'Export...'
     Enabled = False
     TabOrder = 2
@@ -106,13 +108,13 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideTop.Control = btnApply
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = btnApply
-    Left = 289
+    Left = 363
     Height = 1
-    Top = 445
+    Top = 556
     Width = 1
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
-    BorderSpacing.Right = 5
+    BorderSpacing.Right = 6
     ParentColor = False
     ShowAccelChar = False
     Visible = False
@@ -121,28 +123,29 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = cboTimeCodeExport
     AnchorSideTop.Side = asrBottom
-    Left = 200
-    Height = 23
-    Top = 350
-    Width = 186
+    Left = 250
+    Height = 28
+    Top = 435
+    Width = 232
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Top = 8
-    BorderSpacing.Right = 8
+    BorderSpacing.Top = 10
+    BorderSpacing.Right = 10
     Increment = 0.1
     MaxValue = 0.9
     MinValue = 0.1
     TabOrder = 7
     Value = 0.4
+    OnChange = spnSensitivityChange
   end
   object lblSensitivity: TLabel
     AnchorSideTop.Control = spnSensitivity
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = spnSensitivity
-    Left = 8
-    Height = 15
-    Top = 354
-    Width = 106
-    BorderSpacing.Right = 8
+    Left = 10
+    Height = 20
+    Top = 439
+    Width = 133
+    BorderSpacing.Right = 10
     Caption = 'Detection sensitivity'
     ParentColor = False
   end
@@ -150,10 +153,10 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideTop.Control = btnApply
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = cboOffset
-    Left = 8
-    Height = 8
-    Top = 441
-    Width = 192
+    Left = 10
+    Height = 10
+    Top = 551
+    Width = 240
     Anchors = [akTop, akLeft, akRight]
     Style = pbstMarquee
     TabOrder = 13
@@ -162,36 +165,36 @@ object frmShotChanges: TfrmShotChanges
   object cboTimeCodeImport: TComboBox
     AnchorSideTop.Control = cboDetectApp
     AnchorSideTop.Side = asrBottom
-    Left = 200
-    Height = 23
-    Top = 288
-    Width = 186
+    Left = 250
+    Height = 28
+    Top = 359
+    Width = 232
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Top = 8
-    ItemHeight = 15
+    BorderSpacing.Top = 10
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 5
   end
   object lblTimeCodeOut: TLabel
     AnchorSideTop.Control = cboTimeCodeExport
     AnchorSideTop.Side = asrCenter
-    Left = 8
-    Height = 15
-    Top = 323
-    Width = 110
+    Left = 10
+    Height = 20
+    Top = 401
+    Width = 140
     Caption = 'Time code for export'
     ParentColor = False
   end
   object cboTimeCodeExport: TComboBox
     AnchorSideTop.Control = cboTimeCodeImport
     AnchorSideTop.Side = asrBottom
-    Left = 200
-    Height = 23
-    Top = 319
-    Width = 186
+    Left = 250
+    Height = 28
+    Top = 397
+    Width = 232
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Top = 8
-    ItemHeight = 15
+    BorderSpacing.Top = 10
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 6
   end
@@ -200,13 +203,13 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideTop.Control = tedOffset
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = tedOffset
-    Left = 200
-    Height = 23
-    Top = 381
-    Width = 43
+    Left = 250
+    Height = 28
+    Top = 473
+    Width = 54
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Right = 5
-    ItemHeight = 15
+    BorderSpacing.Right = 6
+    ItemHeight = 20
     ItemIndex = 0
     Items.Strings = (
       '+'
@@ -219,10 +222,10 @@ object frmShotChanges: TfrmShotChanges
   object tedOffset: TUWTimeEdit
     AnchorSideTop.Control = spnSensitivity
     AnchorSideTop.Side = asrBottom
-    Left = 248
-    Height = 23
-    Top = 381
-    Width = 122
+    Left = 310
+    Height = 29
+    Top = 473
+    Width = 152
     Value = 0
     FPS = 25
     FrameStep = 1
@@ -230,9 +233,9 @@ object frmShotChanges: TfrmShotChanges
     TimeMode = temTime
     Alignment = taCenter
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Top = 8
-    Constraints.MinHeight = 21
-    Constraints.MinWidth = 80
+    BorderSpacing.Top = 10
+    Constraints.MinHeight = 26
+    Constraints.MinWidth = 100
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 9
@@ -241,31 +244,31 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideTop.Control = cboOffset
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = spnSensitivity
-    Left = 8
-    Height = 15
-    Top = 385
-    Width = 32
-    BorderSpacing.Right = 8
+    Left = 10
+    Height = 20
+    Top = 477
+    Width = 40
+    BorderSpacing.Right = 10
     Caption = 'Offset'
     ParentColor = False
   end
   object lblDetectApp: TLabel
     AnchorSideTop.Control = cboDetectApp
     AnchorSideTop.Side = asrCenter
-    Left = 8
-    Height = 15
-    Top = 261
-    Width = 72
+    Left = 10
+    Height = 20
+    Top = 325
+    Width = 92
     Caption = 'App to detect'
     ParentColor = False
   end
   object cboDetectApp: TComboBox
-    Left = 200
-    Height = 23
-    Top = 257
-    Width = 186
+    Left = 250
+    Height = 28
+    Top = 321
+    Width = 232
     Anchors = [akTop, akLeft, akRight]
-    ItemHeight = 15
+    ItemHeight = 20
     Style = csDropDownList
     TabOrder = 4
   end

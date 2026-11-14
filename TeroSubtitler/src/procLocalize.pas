@@ -316,6 +316,7 @@ resourcestring
   lngscEDL = 'Edit Decision Lists';
   lngscShotChanges = 'Text files';
   lngscXML = 'XML';
+  lngscBuiltin = 'Tero (built-in)';
 
   //ShortCutCategoryStrings
   lngscEdit = 'Edit';
