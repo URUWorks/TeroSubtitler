@@ -76,10 +76,24 @@ type
   end;
   TSegments = array of TSegment;
 
+  // who speaks (1, 2...) from InitialTime to FinalTime (ms), UW_FasterWhisper
+  // --diarize
+  TSpeakerTime = record
+    InitialTime : Integer;
+    FinalTime   : Integer;
+    Speaker     : Integer;
+  end;
+  TSpeakerTimes = array of TSpeakerTime;
+
 function NormalizeSyncWord(const AWord: String): String;
 procedure AddTextWords(var AWords: TSyncWords; const AText: String; const AEntry: Integer);
 procedure AddRecognizedWords(var AWords: TSyncWords; const AText: String; const AStart, AEnd: Integer);
 function LoadRecognizedWordsFromJSON(const AFileName: String; var AWords: TSyncWords): Boolean;
+// the "speaker" of each segment of the json (UW_FasterWhisper --diarize)
+function LoadSpeakersFromJSON(const AFileName: String; out ASpeakers: TSpeakerTimes): Boolean;
+// the speaker with more time inside AInitialTime..AFinalTime (the closest
+// one if none), 0 without speakers
+function SpeakerAt(const ASpeakers: TSpeakerTimes; const AInitialTime, AFinalTime: Integer): Integer;
 // NaN, Infinity, -Infinity, nan, -nan, inf... (not valid json, but written by
 // python's json.dump and by the C++ streams of whisper.cpp) -> null
 function SanitizeJSONNumbers(const AText: String): String;
@@ -497,6 +511,108 @@ begin
     end;
   finally
     sl.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function LoadSpeakersFromJSON(const AFileName: String; out ASpeakers: TSpeakerTimes): Boolean;
+var
+  sl: TStringList;
+  Data: TJSONData;
+  Segments: TJSONArray;
+  Seg: TJSONObject;
+  i, c: Integer;
+begin
+  // {"segments": [{"start", "end", "text", "speaker"}]}, times in seconds
+  Result := False;
+  SetLength(ASpeakers, 0);
+  if not FileExists(AFileName) then Exit;
+
+  sl := TStringList.Create;
+  try
+    sl.LoadFromFile(AFileName);
+    try
+      Data := GetJSON(SanitizeJSONNumbers(sl.Text));
+    except
+      Exit;
+    end;
+    try
+      if not (Data is TJSONObject) or not (TJSONObject(Data).Find('segments') is TJSONArray) then Exit;
+
+      Segments := TJSONArray(TJSONObject(Data).Find('segments'));
+      SetLength(ASpeakers, Segments.Count);
+      c := 0;
+      for i := 0 to Segments.Count-1 do
+        if Segments[i] is TJSONObject then
+        begin
+          Seg := TJSONObject(Segments[i]);
+          if (Seg.Find('speaker') is TJSONNumber) and (Seg.Find('start') is TJSONNumber) and
+            (Seg.Find('end') is TJSONNumber) then
+          begin
+            ASpeakers[c].InitialTime := Round(Seg.Get('start', 0.0) * 1000);
+            ASpeakers[c].FinalTime   := Round(Seg.Get('end', 0.0) * 1000);
+            ASpeakers[c].Speaker     := Seg.Get('speaker', 0);
+            Inc(c);
+          end;
+        end;
+      SetLength(ASpeakers, c);
+      Result := c > 0;
+    finally
+      Data.Free;
+    end;
+  finally
+    sl.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function SpeakerAt(const ASpeakers: TSpeakerTimes; const AInitialTime, AFinalTime: Integer): Integer;
+var
+  Times: array of Integer;
+  i, ov, best, bestTime, dist, bestDist: Integer;
+begin
+  Result := 0;
+  if Length(ASpeakers) = 0 then Exit;
+
+  // time of each speaker inside the entry
+  SetLength(Times, 0);
+  for i := 0 to High(ASpeakers) do
+  begin
+    ov := Min(AFinalTime, ASpeakers[i].FinalTime) - Max(AInitialTime, ASpeakers[i].InitialTime);
+    if (ov > 0) and (ASpeakers[i].Speaker > 0) then
+    begin
+      if ASpeakers[i].Speaker > High(Times) then
+        SetLength(Times, ASpeakers[i].Speaker + 1);
+      Inc(Times[ASpeakers[i].Speaker], ov);
+    end;
+  end;
+
+  bestTime := 0;
+  for best := 1 to High(Times) do
+    if Times[best] > bestTime then
+    begin
+      bestTime := Times[best];
+      Result   := best;
+    end;
+  if Result > 0 then Exit;
+
+  // no segment inside (the times were changed): the closest one
+  bestDist := MaxInt;
+  for i := 0 to High(ASpeakers) do
+  begin
+    if ASpeakers[i].FinalTime < AInitialTime then
+      dist := AInitialTime - ASpeakers[i].FinalTime
+    else if ASpeakers[i].InitialTime > AFinalTime then
+      dist := ASpeakers[i].InitialTime - AFinalTime
+    else
+      dist := 0;
+    if dist < bestDist then
+    begin
+      bestDist := dist;
+      Result   := ASpeakers[i].Speaker;
+    end;
   end;
 end;
 

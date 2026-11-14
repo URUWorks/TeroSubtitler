@@ -100,6 +100,7 @@ resourcestring
   lnglibMPVVersionError = 'Could not initialize libmpv. Check if the right library was installed.';
   lngSpellCheckFinished = 'Spell check finished.';
   lngDetect = 'Auto-detect';
+  lngSpeakerN = 'Speaker %d';
   lngAddNote = 'Add note';
   lngOpenVideoFromURL = 'Open media from';
   lngURL = 'URL';

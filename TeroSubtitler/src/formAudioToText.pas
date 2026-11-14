@@ -60,6 +60,8 @@ type
     chkSmartSegment: TUWCheckBox;
     chkMaxLineCount: TUWCheckBox;
     chkSounds: TUWCheckBox;
+    chkSpeakers: TUWCheckBox;
+    spnSpeakers: TSpinEdit;
     procedure btnCloseClick(Sender: TObject);
     procedure btnEngineClick(Sender: TObject);
     procedure btnGenerateClick(Sender: TObject);
@@ -74,6 +76,7 @@ type
   private
     FKeepSounds: Boolean;
     FMultilingual: Boolean;
+    FSpeakers: Boolean;
     FUseMaxLineLength: Boolean;
     procedure RefreshModelsList;
     procedure SetControlsEnabled(const AValue: Boolean);
@@ -87,6 +90,7 @@ type
     function GetCleanOptions: TSegmentOptions;
     procedure CleanTranscriptionFile(const ASrtFile: String; const AJoinFragments: Boolean);
     procedure CleanTranscribedEntries(const AFrom: Integer);
+    procedure ApplySpeakers(const ASpeakers: TSpeakerTimes);
   public
 
   end;
@@ -463,6 +467,8 @@ var
   TimerSub: Boolean;
   FirstNew: Integer;
   wfile, wfallback: String;
+  jsonfile: String;
+  Speakers: TSpeakerTimes;
 begin
   if frmMain.MPV.FileName.StartsWith('http') then
     ShowErrorMessageDialog(lngFeatureNotAvailableFromURL)
@@ -480,6 +486,8 @@ begin
     FKeepSounds       := chkSounds.Checked and chkSounds.Enabled;
     FMultilingual     := chkMultilingual.Checked and chkMultilingual.Enabled;
     FUseMaxLineLength := chkMaxLineLength.Checked and chkMaxLineLength.Enabled;
+    FSpeakers         := chkSpeakers.Checked and chkSpeakers.Enabled;
+    SetLength(Speakers, 0);
     SetControlsEnabled(False);
 
     TimerSub := frmMain.TimerPlayback.Enabled;
@@ -586,6 +594,17 @@ begin
             if FKeepSounds and (Pos('suppress_tokens', Tools.FasterWhisper_Additional) = 0) then
               ss := ss + ' --suppress_tokens=';
 
+            // who speaks in each entry (UW_FasterWhisper 1.2 --diarize): in the json, the srt
+            // without labels (the speaker goes to the Actor of each entry)
+            if FSpeakers and (Pos('diarize', Tools.FasterWhisper_Additional) = 0) then
+            begin
+              ss := ss + ' --diarize True --speaker_format=';
+              if spnSpeakers.Value > 0 then
+                ss := ss + ' --num_speakers ' + IntToStr(spnSpeakers.Value);
+              // srt and json (the words modes write the json already)
+              ss := StringReplace(ss, '--output_format srt', '--output_format all', []);
+            end;
+
             if not Tools.FasterWhisper_Additional.IsEmpty then
               ss := ss + ' ' + Tools.FasterWhisper_Additional;
 
@@ -657,6 +676,21 @@ begin
               // delete wave file
               DeleteFile(s);
 
+              // the speakers, before the json is deleted (the words modes)
+              if FSpeakers then
+              begin
+                jsonfile := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(s), '.json')]);
+                LoadSpeakersFromJSON(jsonfile, Speakers);
+                // the other files of "--output_format all"
+                if not chkSmartSegment.Checked then
+                begin
+                  DeleteFile(jsonfile);
+                  DeleteFile(ChangeFileExt(jsonfile, '.txt'));
+                  DeleteFile(ChangeFileExt(jsonfile, '.vtt'));
+                  DeleteFile(ChangeFileExt(jsonfile, '.tsv'));
+                end;
+              end;
+
               if chkSyncText.Checked then
               begin
                 GetWordsFiles(s, srtfile, wfile, wfallback);
@@ -704,6 +738,7 @@ begin
                 CleanTranscriptionFile(srtfile, not chkSmartSegment.Checked);
                 ShowMessageDialog(lngFileSavedSuccessfully, '', lngOpenContainingFolder, @OpenFolderClick);
                 LoadSubtitle(srtfile, sfSubRip, NIL, -1, True);
+                ApplySpeakers(Speakers);
               end;
             end
             else
@@ -781,6 +816,8 @@ begin
     spnMaxLineCount.Enabled  := False;
     chkSounds.Enabled        := False;
     chkMultilingual.Enabled  := False;
+    chkSpeakers.Enabled      := False;
+    spnSpeakers.Enabled      := False;
   end;
 end;
 
@@ -804,6 +841,12 @@ begin
   // only faster-whisper detects the language of each part, and only when
   // the language is not given
   chkMultilingual.Enabled := (Tools.WhisperEngine <> WhisperCPP) and (cboLanguage.ItemIndex = 0);
+  // the speakers: only faster-whisper (UW_FasterWhisper --diarize), when
+  // the entries are made at the end (the lines read while transcribing
+  // don't have them) and not when only the timings are synchronized
+  chkSpeakers.Enabled := (Tools.WhisperEngine <> WhisperCPP) and not chkSyncText.Checked and
+    (rbnLoadSubtitlesAfterTranscript.Checked or chkSmartSegment.Checked);
+  spnSpeakers.Enabled := chkSpeakers.Enabled;
   if chkSyncText.Checked or chkSmartSegment.Checked then
   begin
     chkMaxLineLength.Enabled := False;
@@ -1047,6 +1090,29 @@ begin
   finally
     Subs.Free;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmAudioToText.ApplySpeakers(const ASpeakers: TSpeakerTimes);
+var
+  i, n: Integer;
+begin
+  // the speaker of each entry (by its time, the cleanup and the smart
+  // segmentation make other entries) -> Actor
+  if Length(ASpeakers) = 0 then Exit;
+  for i := 0 to Subtitles.Count-1 do
+  begin
+    n := SpeakerAt(ASpeakers, Subtitles[i].InitialTime, Subtitles[i].FinalTime);
+    if n > 0 then
+    begin
+      Subtitles.ItemPointer[i]^.Actor := Format(lngSpeakerN, [n]);
+      // in the list of actors, to choose them or rename them
+      if frmMain.cboActor.Items.IndexOf(Subtitles[i].Actor) < 0 then
+        frmMain.cboActor.Items.Add(Subtitles[i].Actor);
+    end;
+  end;
+  UpdateValues(True);
 end;
 
 // -----------------------------------------------------------------------------
