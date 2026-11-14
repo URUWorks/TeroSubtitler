@@ -165,6 +165,7 @@
 - improved: Typing with "mpv handles subtitles" no longer rewrites the temp track on every key
 - improved: Language names are now shown in their own language
 - improved: Media loaded from a url shows its title instead of the url
+- added: Shot changes built-in detection (frame exact cuts, dissolves and fades, ignoring flashes and camera motion)
 - added: [Windows] Whisper.cpp download for ARM64
 - added: [Linux] Whisper.cpp download for ARM64 (aarch64)
 - added: iTT has its own language in Format properties
