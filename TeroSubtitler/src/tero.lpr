@@ -41,7 +41,8 @@ uses
   procThumbnails, formStreamExtractor, formPauses, formImportPlainText,
   formCustomSelectDlgWithPreview, formTTS, formVideoDubbing, formImportSUP,
   formImportSUPLanguages, procMacOpenFiles, procMacMediaKeys, procMacMenuKeys,
-  procMacSystemMenus, procMacTextView;
+  procMacSystemMenus, procMacTextView,
+  procCrashLog;
 
 {$R *.res}
 
@@ -54,6 +55,8 @@ begin
   Application.Title:='Tero Subtitler';
   Application.Scaled:=True;
   Application.Initialize;
+  // DIAGNOSTIC (temporary): see procCrashLog
+  InstallCrashLog;
   {$IFDEF WINDOWS}
   // the taskbar button belongs to the main form instead of the hidden
   // application window, so Windows shows it on the taskbar of the monitor
