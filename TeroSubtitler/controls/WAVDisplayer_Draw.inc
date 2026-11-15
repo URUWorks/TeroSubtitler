@@ -150,8 +150,15 @@ begin
     PeakMax := FPeakTab[x_scaled].Max;
     PeakMin := FPeakTab[x_scaled].Min;
 
+    // past the end of the audio (the timeline can be longer to reach the
+    // last subtitles): draw silence instead of repeating the last peak
+    if (CurrentPeakPos - PeaksPerPixelScaled) >= FPeakTabSize then
+    begin
+      PeakMax := 0;
+      PeakMin := 0;
+    end
     // Bucle interno optimizado (se ejecuta solo si hay más de 1 muestra por pixel)
-    if Next_x_scaled > x_scaled + 1 then
+    else if Next_x_scaled > x_scaled + 1 then
     begin
       for i := x_scaled + 1 to Next_x_scaled - 1 do
       begin

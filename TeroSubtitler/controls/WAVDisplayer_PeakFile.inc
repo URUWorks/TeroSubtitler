@@ -160,7 +160,7 @@ begin
 
   MaxAbsoluteValue := Max(Abs(PeakMaxMax), Abs(PeakMinMin));
   if MaxAbsoluteValue > 0 then
-    NormFactor := 32768.0 / MaxAbsoluteValue
+    NormFactor := 32767.0 / MaxAbsoluteValue
   else
     NormFactor := 1.0;
 
@@ -200,7 +200,7 @@ begin
     if MaxAbsoluteValue = 0 then
       Exit(False);
 
-    NormFactor := 32768.0 / MaxAbsoluteValue;
+    NormFactor := 32767.0 / MaxAbsoluteValue;
   end;
 
   // Normalize if the factor differs significantly from 1

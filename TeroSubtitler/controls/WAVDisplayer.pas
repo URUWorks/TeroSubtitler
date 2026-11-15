@@ -145,6 +145,7 @@ type
     FTimecodeMode    : TTimecodeMode;
 
     FLengthMS      : Integer;
+    FMediaLengthMS : Integer; // real media/audio length, FLengthMS can be longer to reach the last subtitle
     FPositionMS    : Integer;
     FPageSizeMS    : Integer;
 
@@ -263,6 +264,9 @@ type
     procedure MoveGroup(const ADelta: Integer);
     function CheckSubtitleItemForDynamicSelection(constref Subtitle: TUWSubtitleItem; const CursorPosMS, SubtitleSelWindow, X, Y: Integer): Boolean;
     procedure SetLengthMS(const LenghtMS: Integer);
+    procedure ApplyLengthMS(const NewLengthMS: Integer);
+    function GetSubtitlesEndMS: Integer;
+    procedure UpdateLengthMS;
     procedure SetPositionMS(NewPosition: Integer);
     procedure OnScrollBarChange(Sender: TObject);
     function GetPositionMS: Integer;
@@ -532,6 +536,7 @@ begin
   TabStop  := True;
 
   FLengthMS        := 0;
+  FMediaLengthMS   := 0;
   FPositionMS      := 0;
   FPageSizeMS      := DefaultPageSizeMS;
   FPeakDataLoaded  := False;
@@ -2137,6 +2142,7 @@ begin
   FCursorMS              := 0;
   FPlayCursorMS          := 0;
   FLengthMS              := 0;
+  FMediaLengthMS         := 0;
   FDynamicSelValueMs     := -1;
   FOldInitialTime        := -1;
   FOldFinalTime          := -1;
@@ -2302,21 +2308,29 @@ procedure TUWWaveformDisplayer.SetLengthMS(const LenghtMS: Integer);
 begin
   if FPeakDataLoaded then Exit;
 
-  if (FLengthMS <> LenghtMS) then
+  FMediaLengthMS := LenghtMS;
+  UpdateLengthMS;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.ApplyLengthMS(const NewLengthMS: Integer);
+begin
+  if (FLengthMS <> NewLengthMS) then
   begin
-    FLengthMS := LenghtMS;
-    if (FPositionMS + FPageSizeMS > LenghtMS) then
+    FLengthMS := NewLengthMS;
+    if (FPositionMS + FPageSizeMS > NewLengthMS) then
     begin
-      if (FPageSizeMS < LenghtMS) then
-        FPositionMS := LenghtMS - FPageSizeMS
+      if (FPageSizeMS < NewLengthMS) then
+        FPositionMS := NewLengthMS - FPageSizeMS
       else
       begin
         FPositionMS := 0;
-        FPageSizeMS := LenghtMS;
+        FPageSizeMS := NewLengthMS;
       end;
     end;
 
-    FScrollBar.Max      := LenghtMs;
+    FScrollBar.Max      := NewLengthMS;
     FScrollBar.PageSize := FPageSizeMs;
     FScrollBar.Position := FPositionMs;
   end;
@@ -2324,8 +2338,49 @@ end;
 
 //------------------------------------------------------------------------------
 
+// Final time of the subtitle that ends last (not always the last one in the list)
+function TUWWaveformDisplayer.GetSubtitlesEndMS: Integer;
+var
+  i: Integer;
+begin
+  Result := 0;
+  if FSubtitles = NIL then Exit;
+
+  for i := 0 to FSubtitles.Count-1 do
+    if FSubtitles.ItemPointer[i]^.FinalTime > Result then
+      Result := FSubtitles.ItemPointer[i]^.FinalTime;
+end;
+
+//------------------------------------------------------------------------------
+
+// The timeline length is the media length, extended when there are subtitles
+// after the end of the media: otherwise the last entries can't be reached
+procedure TUWWaveformDisplayer.UpdateLengthMS;
+const
+  EndMarginMS = 5000;
+var
+  SubsEndMS: Integer;
+begin
+  // without media the timeline stays disabled
+  if FMediaLengthMS <= 0 then
+  begin
+    ApplyLengthMS(FMediaLengthMS);
+    Exit;
+  end;
+
+  SubsEndMS := GetSubtitlesEndMS;
+  if SubsEndMS > FMediaLengthMS then
+    ApplyLengthMS(SubsEndMS + EndMarginMS)
+  else
+    ApplyLengthMS(FMediaLengthMS);
+end;
+
+//------------------------------------------------------------------------------
+
 procedure TUWWaveformDisplayer.SetPositionMS(NewPosition: Integer);
 begin
+  // subtitles may have been loaded/changed: keep the last ones reachable
+  if FMediaLengthMS > 0 then UpdateLengthMS;
   Constrain(NewPosition, 0, FLengthMS - FPageSizeMS);
   if NewPosition <> FPositionMS then
   begin
@@ -2364,6 +2419,9 @@ begin
 
   if (uvfPageSize in UpdateViewFlags) then
   begin
+    // subtitles may have been loaded/changed: keep the last ones reachable
+    if FMediaLengthMS > 0 then UpdateLengthMS;
+
     FBackBufferWAVE.SetSize(Width, Height);
     FBackBuffer.SetSize(FBackBufferWAVE.Width, FBackBufferWAVE.Height);
     FBackBufferItems.SetSize(FBackBufferWAVE.Width, FBackBufferWAVE.Height);
