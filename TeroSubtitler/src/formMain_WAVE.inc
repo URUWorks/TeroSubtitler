@@ -267,14 +267,13 @@ var
   NewBitmaps   : TThumbnails;
   i, j, c      : Integer;
   Key          : String;
-  R            : TRect;
 begin
   if not WAVE.DrawThumbnail or not MPV.IsMediaLoaded then Exit;
 
-  // the loaded thumbnails are reused by time only for the same video and
-  // crop: opening another video (without closing the first) mixed them
-  R   := MPV.GetVideoCrop;
-  Key := MPV.FileName + Format('|%d,%d,%d,%d', [R.Left, R.Top, R.Right, R.Bottom]);
+  // the loaded thumbnails are reused by time only for the same video:
+  // opening another video (without closing the first) mixed them. The
+  // Auto-crop of the player doesn't change them (always the full frame).
+  Key := MPV.FileName;
   if Key <> FThumbnailsKey then
     FreeThumbnails;
   FThumbnailsKey := Key;
@@ -339,7 +338,6 @@ begin
   FThumbnailThread := TGenerateThumbnails.Create(MPV.FileName,
     WAVEOptions.ThumbnailTimes, Workspace.FPS.OutputFPS.FPS, @DoThumbnailReady,
     @DoThumbnailsDone);
-  TGenerateThumbnails(FThumbnailThread).Crop := MPV.GetVideoCrop;
   FThumbnailThread.Start;
 end;
 
@@ -372,10 +370,15 @@ end;
 // -----------------------------------------------------------------------------
 
 // a thumbnail is ready (in the main thread): load it and redraw only its shot
-procedure TfrmMain.DoThumbnailReady(const ATimeMS: Integer; const AFileName: String);
+procedure TfrmMain.DoThumbnailReady(Sender: TObject; const ATimeMS: Integer; const AFileName: String);
 var
   i: Integer;
 begin
+  // a thread already replaced (another video, the scene changes edited...)
+  // can still deliver the thumbnail it was making when it was cancelled: it's
+  // of another list/video, don't load it
+  if (Sender = NIL) or (Sender <> FThumbnailThread) then Exit;
+
   with WAVEOptions do
   begin
     i := BinarySearch_IntArray(ThumbnailTimes, ATimeMS);
@@ -385,9 +388,16 @@ begin
 
     try
       Thumbnails[i].LoadFromFile(AFileName);
-      WAVE.ThumbnailChanged(i);
     except
+      // a damaged file: leave the default thumbnail (an empty bitmap) and
+      // delete it from the cache, so it's generated again the next time
+      try
+        Thumbnails[i].Clear;
+      except
+      end;
+      SysUtils.DeleteFile(AFileName);
     end;
+    WAVE.ThumbnailChanged(i);
   end;
 end;
 

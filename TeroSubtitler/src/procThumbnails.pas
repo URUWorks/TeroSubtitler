@@ -30,7 +30,8 @@ type
 
   { TGenerateThumbnails }
 
-  TThumbnailReadyEvent = procedure (const ATimeMS: Integer; const AFileName: String) of object;
+  // Sender: the thread, so the results of a thread already replaced are ignored
+  TThumbnailReadyEvent = procedure (Sender: TObject; const ATimeMS: Integer; const AFileName: String) of object;
 
   TGenerateThumbnails = class(TThread)
   private
@@ -38,11 +39,9 @@ type
     FTimes     : TIntegerDynArray; // snapshot of the scene changes (main thread)
     FOffsetMS  : Integer;
     FTempDir   : String;
-    FCrop      : String;  // ffmpeg crop filter (Auto-crop), empty = none
     FOnReady   : TThumbnailReadyEvent;
     FCurTime   : Integer;
     FCurFile   : String;
-    procedure SetCrop(const ARect: TRect);
     procedure DoReadySync;
     procedure RunAndWait(const AProcess: TProcess);
   protected
@@ -50,8 +49,6 @@ type
   public
     constructor Create(const AVideoFile: String; const ATimes: TIntegerDynArray; const AFPS: Single; AOnReady: TThumbnailReadyEvent; AOnTerminate: TNotifyEvent = NIL);
     property TempDir: String read FTempDir write FTempDir;
-    // the black bars cropped in the video (pixels of the decoded video), set before Start
-    property Crop: TRect write SetCrop;
   end;
 
 // the folder of the thumbnails of a video (also a cache between sessions)
@@ -111,21 +108,11 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TGenerateThumbnails.SetCrop(const ARect: TRect);
-begin
-  if ARect.IsEmpty then
-    FCrop := ''
-  else
-    FCrop := Format('crop=%d:%d:%d:%d', [ARect.Width, ARect.Height, ARect.Left, ARect.Top]);
-end;
-
-// -----------------------------------------------------------------------------
-
 procedure TGenerateThumbnails.DoReadySync;
 begin
   // TBitmap is not thread safe: it's loaded in the main thread
   if Assigned(FOnReady) then
-    FOnReady(FCurTime, FCurFile);
+    FOnReady(Self, FCurTime, FCurFile);
 end;
 
 // -----------------------------------------------------------------------------
@@ -147,7 +134,7 @@ var
   AProcess : TProcess;
   AParamArray : TStringArray;
   i, x : Integer;
-  s : String;
+  s, tmp : String;
 begin
   if Length(FTimes) = 0 then Exit;
 
@@ -166,11 +153,15 @@ begin
         if Terminated then Exit;
 
         // the files are named by time, so they are also a cache ("d" = 24-bit
-        // with the display aspect ratio, anamorphic videos looked distorted)
-        if FCrop.IsEmpty then
-          s := ConcatPaths([FTempDir, FTimes[i].ToString + 'd.bmp'])
-        else // a cropped one is another file (the crop is in its name)
-          s := ConcatPaths([FTempDir, FTimes[i].ToString + 'd_' + FCrop.Replace('crop=', '').Replace(':', '_') + '.bmp']);
+        // with the display aspect ratio, anamorphic videos looked distorted).
+        // They are always of the full frame: the Auto-crop of the player
+        // doesn't change them.
+        s := ConcatPaths([FTempDir, FTimes[i].ToString + 'd.bmp']);
+        // ffmpeg writes to a temporary name that is renamed when it ends well:
+        // a ffmpeg killed when the thread is cancelled (another video, the
+        // scene changes edited, Auto-crop...) used to leave a cut .bmp in the
+        // cache, loaded as a valid thumbnail afterwards
+        tmp := ConcatPaths([FTempDir, FTimes[i].ToString + 'd_part.bmp']);
 
         if not FileExists(s) then
         begin
@@ -182,15 +173,22 @@ begin
             else if AParamArray[x].Contains('%input') then
               AProcess.Parameters.Add(FFileName)
             else if AParamArray[x].Contains('%output') then
-              AProcess.Parameters.Add(s)
-            else if not FCrop.IsEmpty and AParamArray[x].StartsWith('scale=') then
-              AProcess.Parameters.Add(FCrop + ',' + AParamArray[x]) // crop before scale
+              AProcess.Parameters.Add(tmp)
             else
               AProcess.Parameters.Add(AParamArray[x]);
           end;
 
           RunAndWait(AProcess);
-          if Terminated then Exit;
+          if Terminated or (AProcess.ExitStatus <> 0) then
+          begin
+            if FileExists(tmp) then DeleteFile(tmp);
+            if Terminated then Exit;
+          end
+          else if FileExists(tmp) then
+          begin
+            if FileExists(s) then DeleteFile(s);
+            if not RenameFile(tmp, s) then DeleteFile(tmp);
+          end;
         end;
 
         if FileExists(s) then

@@ -1045,7 +1045,7 @@ type
     procedure DetectDialogSegments;
     procedure GenerateThumbnails;
     procedure FreeThumbnails;
-    procedure DoThumbnailReady(const ATimeMS: Integer; const AFileName: String);
+    procedure DoThumbnailReady(Sender: TObject; const ATimeMS: Integer; const AFileName: String);
     procedure DoThumbnailsDone(Sender: TObject);
     procedure WAVESceneChangeListChange(Sender: TObject);
     procedure WAVEDynamicEditTime(Sender: TObject; const Time: Integer);
@@ -1368,7 +1368,7 @@ type
   private
     mnuViewProperties: TMenuItem; // View > Subtitle properties
     FThumbnailThread: TThread;    // TGenerateThumbnails, see formMain_WAVE
-    FThumbnailsKey: String;       // video + crop of the thumbnails loaded
+    FThumbnailsKey: String;       // video of the thumbnails loaded
     FURLLoadTimer: TTimer;        // elapsed time while yt-dlp resolves an url
     FURLLoadStart: QWord;
     {$IFDEF LCLCocoa}
