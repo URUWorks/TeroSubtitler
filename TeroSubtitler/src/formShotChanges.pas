@@ -878,19 +878,17 @@ end;
 
 // -----------------------------------------------------------------------------
 
-// cuts, dissolves and fades with a second libmpv in its own thread
-// (UW_MPVPlayer), frame exact and without external apps
-
 // the sensitivity is FFmpeg's scene score (0.1..0.9, 0.4 by default, higher
-// is less sensitive). Here: the minimum gray difference of a cut (0..255) and
-// how many times it must be over the frames around it. 0.4 = 8 and 3, the
-// defaults (the best F1 in the UW_MPVPlayer benchmark), 0.1 = 2 and 1.5,
-// 0.9 = 18 and 5.5
+// is less sensitive). Here: the minimum difference of a cut, how many times it
+// must be over the frames around it, and the minimum difference of a dissolve.
+// 0.4 = 6, 2 and 25, the defaults (the best F1 in the UW_MPVPlayer
+// benchmark), 0.1 = 1.5, 1.25 and 6.25, 0.9 = 13.5, 3.25 and 56.25
 
-procedure SensitivityToParams(const AValue: Double; out AMinScore, ARatio: Double);
+procedure SensitivityToParams(const AValue: Double; out AMinScore, ARatio, AGradualMin: Double);
 begin
-  AMinScore := AValue * 20;
-  ARatio    := 1 + AValue * 5;
+  AMinScore   := AValue * 15;
+  ARatio      := 1 + AValue * 2.5;
+  AGradualMin := AMinScore * 25 / 6;
 end;
 
 // -----------------------------------------------------------------------------
@@ -922,10 +920,11 @@ end;
 
 procedure TfrmShotChanges.spnSensitivityChange(Sender: TObject);
 var
-  ms, r: Double;
+  ms, r, g: Double;
 begin
   if not Assigned(FDetector) or FDetector.IsRunning or not FDetector.HasScores then Exit;
-  SensitivityToParams(spnSensitivity.Value, ms, r);
+  SensitivityToParams(spnSensitivity.Value, ms, r, g);
+  FDetector.GradualMinScore := g;
   if FDetector.Recalculate(ms, r) then
     FillNativeCuts;
 end;
@@ -933,18 +932,23 @@ end;
 // -----------------------------------------------------------------------------
 
 // cuts, dissolves and fades with a second libmpv in its own thread
-// (UW_MPVPlayer), frame exact and without external apps
+// (UW_MPVPlayer), frame exact and without external apps. With the video
+// cropped (auto-crop), only the cropped part is analysed: subtitles burnt
+// into the black bars aren't changes
 
 procedure TfrmShotChanges.DetectNative;
 var
   t0: QWord;
-  ms, r: Double;
+  ms, r, g: Double;
 begin
   FreeAndNil(FDetector);
   FDetector := TMPVSceneDetector.Create(frmMain.MPV.MPVFileName);
-  SensitivityToParams(spnSensitivity.Value, ms, r);
-  FDetector.MinScore := ms;
-  FDetector.Ratio    := r;
+  SensitivityToParams(spnSensitivity.Value, ms, r, g);
+  FDetector.MinScore        := ms;
+  FDetector.Ratio           := r;
+  FDetector.GradualMinScore := g;
+  if frmMain.MPV.IsVideoCropped then
+    FDetector.Crop := frmMain.MPV.GetVideoCrop;
 
   if not FDetector.Start(frmMain.MPV.FileName) then
   begin
