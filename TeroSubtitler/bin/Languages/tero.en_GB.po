@@ -288,6 +288,89 @@ msgstr "Auto-detect"
 msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "Attempting to detect dialogue segments deletes all entries from the list."
 
+#: proclocalize.lngdoviapplied
+#, object-pascal-format
+msgid "%d shots changed, %d removed."
+msgstr "%d shots changed, %d removed."
+
+#: proclocalize.lngdovibadtimecode
+msgid "Invalid timecode or frame number."
+msgstr "Invalid timecode or frame number."
+
+#: proclocalize.lngdovicheckcount
+#, object-pascal-format
+msgid "%d differences."
+msgstr "%d differences."
+
+#: proclocalize.lngdovicheckmoved
+#, object-pascal-format
+msgid "%s  “%s”: the shot change is at %s (%s frames)"
+msgstr "%s  “%s”: the shot change is at %s (%s frames)"
+
+#: proclocalize.lngdovichecknocut
+#, object-pascal-format
+msgid "%s  shot change without a cut in the metadata (in “%s”)"
+msgstr "%s  shot change without a cut in the metadata (in “%s”)"
+
+#: proclocalize.lngdovichecknoshotchange
+#, object-pascal-format
+msgid "%s  “%s”: no shot change near the cut"
+msgstr "%s  “%s”: no shot change near the cut"
+
+#: proclocalize.lngdovicheckok
+msgid "All the cuts match the shot changes of the video."
+msgstr "All the cuts match the shot changes of the video."
+
+#: proclocalize.lngdoviinfo
+#, object-pascal-format
+msgid "%d shots at %s fps, from %s to %s (record timecode)."
+msgstr "%d shots at %s fps, from %s to %s (record timecode)."
+
+#: proclocalize.lngdovimovecutnotadjacent
+msgid "Only a cut between two contiguous shots can be moved."
+msgstr "Only a cut between two contiguous shots can be moved."
+
+#: proclocalize.lngdovinoshotchanges
+msgid "There are no shot changes. Detect them first."
+msgstr "There are no shot changes. Detect them first."
+
+#: proclocalize.lngdovinotloaded
+msgctxt "proclocalize.lngdovinotloaded"
+msgid "Open a Dolby Vision XML to use this tool."
+msgstr "Open a Dolby Vision XML to use this tool."
+
+#: proclocalize.lngdovioriginchanged
+msgid "The times of all the entries changed and the undo history was cleared."
+msgstr "The times of all the entries changed and the undo history was cleared."
+
+#: proclocalize.lngdoviposatcut
+#, object-pascal-format
+msgid "%s is the first frame of “%s” (a cut)."
+msgstr "%s is the first frame of “%s” (a cut)."
+
+#: proclocalize.lngdoviposinshot
+#, object-pascal-format
+msgid "%s is the frame %d of %d of “%s”."
+msgstr "%s is the frame %d of %d of “%s”."
+
+#: proclocalize.lngdoviposoutside
+#, object-pascal-format
+msgid "%s is not in any shot."
+msgstr "%s is not in any shot."
+
+#: proclocalize.lngdovisaveanyway
+msgid "Do you want to save it anyway?"
+msgstr "Do you want to save it anyway?"
+
+#: proclocalize.lngdovisaveonlydovi
+msgid "Only a Dolby Vision XML opened in Tero Subtitler can be saved in this format."
+msgstr "Only a Dolby Vision XML opened in Tero Subtitler can be saved in this format."
+
+#: proclocalize.lngdovisaveproblems
+#, object-pascal-format
+msgid "The shots are not contiguous: %d gaps, %d overlaps, %d without frames and %d new entries (written as copies of the previous shot). The first one is the entry %d."
+msgstr "The shots are not contiguous: %d gaps, %d overlaps, %d without frames and %d new entries (written as copies of the previous shot). The first one is the entry %d."
+
 #: proclocalize.lngdownloadcanceled
 msgid "Download canceled by user."
 msgstr "Download canceled by user."
@@ -2199,6 +2282,77 @@ msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "Only selected entries"
 
+#: tfrmdolbyvision.btnapplyedit.caption
+msgctxt "tfrmdolbyvision.btnapplyedit.caption"
+msgid "Apply"
+msgstr "Apply"
+
+#: tfrmdolbyvision.btnapplyorigin.caption
+msgid "Set"
+msgstr "Set"
+
+#: tfrmdolbyvision.btncheck.caption
+msgid "Check"
+msgstr "Check"
+
+#: tfrmdolbyvision.btnclose.caption
+msgctxt "tfrmdolbyvision.btnclose.caption"
+msgid "Close"
+msgstr "Close"
+
+#: tfrmdolbyvision.btnmovecut.caption
+msgid "Move the cut to the shot change"
+msgstr "Move the cut to the shot change"
+
+#: tfrmdolbyvision.btnvideoposition.caption
+msgid "Video position"
+msgstr "Video position"
+
+#: tfrmdolbyvision.caption
+msgid "Dolby Vision metadata"
+msgstr "Dolby Vision metadata"
+
+#: tfrmdolbyvision.chkextendprevious.caption
+msgid "At a cut, add the inserted frames to the end of the previous shot"
+msgstr "At a cut, add the inserted frames to the end of the previous shot"
+
+#: tfrmdolbyvision.lblchecktitle.caption
+msgid "Check the cuts against the shot changes of the video"
+msgstr "Check the cuts against the shot changes of the video"
+
+#: tfrmdolbyvision.lblcount.caption
+msgid "Number of frames:"
+msgstr "Number of frames:"
+
+#: tfrmdolbyvision.lbledittitle.caption
+msgid "Edit frames"
+msgstr "Edit frames"
+
+#: tfrmdolbyvision.lblinfo.caption
+msgctxt "tfrmdolbyvision.lblinfo.caption"
+msgid "Open a Dolby Vision XML to use this tool."
+msgstr "Open a Dolby Vision XML to use this tool."
+
+#: tfrmdolbyvision.lblorigin.caption
+msgid "First frame of the video (record timecode):"
+msgstr "First frame of the video (record timecode):"
+
+#: tfrmdolbyvision.lblposition.caption
+msgid "At (record timecode or frame):"
+msgstr "At (record timecode or frame):"
+
+#: tfrmdolbyvision.lbltolerance.caption
+msgid "Search up to (frames):"
+msgstr "Search up to (frames):"
+
+#: tfrmdolbyvision.rbndelete.caption
+msgid "Delete frames"
+msgstr "Delete frames"
+
+#: tfrmdolbyvision.rbninsert.caption
+msgid "Insert frames"
+msgstr "Insert frames"
+
 #: tfrmdownload.btncancel.caption
 msgctxt "tfrmdownload.btncancel.caption"
 msgid "Cancel"
@@ -3170,6 +3324,10 @@ msgstr "Distribute entries evenly"
 #: tfrmmain.actdivideentry.caption
 msgid "Divide entry"
 msgstr "Divide entry"
+
+#: tfrmmain.actdolbyvision.caption
+msgid "Dolby Vision metadata..."
+msgstr "Dolby Vision metadata..."
 
 #: tfrmmain.actdurationlimits.caption
 msgid "Duration limits..."

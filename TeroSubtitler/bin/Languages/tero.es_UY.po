@@ -288,6 +288,89 @@ msgstr "Detección automática"
 msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "Intentar detectar segmentos de diálogo elimina todos las entradas de la lista."
 
+#: proclocalize.lngdoviapplied
+#, object-pascal-format
+msgid "%d shots changed, %d removed."
+msgstr "%d tomas modificadas, %d eliminadas."
+
+#: proclocalize.lngdovibadtimecode
+msgid "Invalid timecode or frame number."
+msgstr "Código de tiempo o número de fotograma no válido."
+
+#: proclocalize.lngdovicheckcount
+#, object-pascal-format
+msgid "%d differences."
+msgstr "%d diferencias."
+
+#: proclocalize.lngdovicheckmoved
+#, object-pascal-format
+msgid "%s  “%s”: the shot change is at %s (%s frames)"
+msgstr "%s  «%s»: el cambio de plano se produce en %s (%s fotogramas)"
+
+#: proclocalize.lngdovichecknocut
+#, object-pascal-format
+msgid "%s  shot change without a cut in the metadata (in “%s”)"
+msgstr "%s cambio de plano sin corte en los metadatos (en «%s»)"
+
+#: proclocalize.lngdovichecknoshotchange
+#, object-pascal-format
+msgid "%s  “%s”: no shot change near the cut"
+msgstr "%s  «%s»: no hay cambio de plano cerca del corte"
+
+#: proclocalize.lngdovicheckok
+msgid "All the cuts match the shot changes of the video."
+msgstr "Todos los cortes coinciden con los cambios de plano del vídeo."
+
+#: proclocalize.lngdoviinfo
+#, object-pascal-format
+msgid "%d shots at %s fps, from %s to %s (record timecode)."
+msgstr "%d tomas a %s fps, de %s a %s (código de tiempo de grabación)."
+
+#: proclocalize.lngdovimovecutnotadjacent
+msgid "Only a cut between two contiguous shots can be moved."
+msgstr "Solo se puede desplazar un corte situado entre dos planos contiguos."
+
+#: proclocalize.lngdovinoshotchanges
+msgid "There are no shot changes. Detect them first."
+msgstr "No hay cambios de plano. Detecta primero los cambios de plano."
+
+#: proclocalize.lngdovinotloaded
+msgctxt "proclocalize.lngdovinotloaded"
+msgid "Open a Dolby Vision XML to use this tool."
+msgstr "Abrir un archivo XML de Dolby Vision para utilizar esta herramienta."
+
+#: proclocalize.lngdovioriginchanged
+msgid "The times of all the entries changed and the undo history was cleared."
+msgstr "Las horas de todas las entradas cambiaron y el historial de deshacer se borró."
+
+#: proclocalize.lngdoviposatcut
+#, object-pascal-format
+msgid "%s is the first frame of “%s” (a cut)."
+msgstr "%s es el primer fotograma de «%s» (un corte)."
+
+#: proclocalize.lngdoviposinshot
+#, object-pascal-format
+msgid "%s is the frame %d of %d of “%s”."
+msgstr "%s es el fotograma %d de %d de «%s»."
+
+#: proclocalize.lngdoviposoutside
+#, object-pascal-format
+msgid "%s is not in any shot."
+msgstr "%s no aparece en ninguna toma."
+
+#: proclocalize.lngdovisaveanyway
+msgid "Do you want to save it anyway?"
+msgstr "¿Quieres guardarlo de todos modos?"
+
+#: proclocalize.lngdovisaveonlydovi
+msgid "Only a Dolby Vision XML opened in Tero Subtitler can be saved in this format."
+msgstr "Solo un archivo XML de Dolby Vision abierto en Tero Subtitler puede guardarse en este formato."
+
+#: proclocalize.lngdovisaveproblems
+#, object-pascal-format
+msgid "The shots are not contiguous: %d gaps, %d overlaps, %d without frames and %d new entries (written as copies of the previous shot). The first one is the entry %d."
+msgstr "Los planos no son contiguos: %d huecos, %d solapamientos, %d sin fotogramas y %d entradas nuevas (escritas como copias del plano anterior). La primera es la entrada %d."
+
 #: proclocalize.lngdownloadcanceled
 msgid "Download canceled by user."
 msgstr "Descarga cancelada por el usuario."
@@ -2201,6 +2284,77 @@ msgctxt "tfrmdelay.rbnonlyselectedsubtitles.caption"
 msgid "Selected entries"
 msgstr "Entradas seleccionadas"
 
+#: tfrmdolbyvision.btnapplyedit.caption
+msgctxt "tfrmdolbyvision.btnapplyedit.caption"
+msgid "Apply"
+msgstr "Aplicar"
+
+#: tfrmdolbyvision.btnapplyorigin.caption
+msgid "Set"
+msgstr "Colocar"
+
+#: tfrmdolbyvision.btncheck.caption
+msgid "Check"
+msgstr "Controlar"
+
+#: tfrmdolbyvision.btnclose.caption
+msgctxt "tfrmdolbyvision.btnclose.caption"
+msgid "Close"
+msgstr "Cerrar"
+
+#: tfrmdolbyvision.btnmovecut.caption
+msgid "Move the cut to the shot change"
+msgstr "Desplaza el corte al cambio de plano"
+
+#: tfrmdolbyvision.btnvideoposition.caption
+msgid "Video position"
+msgstr "Posición del vídeo"
+
+#: tfrmdolbyvision.caption
+msgid "Dolby Vision metadata"
+msgstr "Metadatos de Dolby Vision"
+
+#: tfrmdolbyvision.chkextendprevious.caption
+msgid "At a cut, add the inserted frames to the end of the previous shot"
+msgstr "En un corte, añade los fotogramas insertados al final del plano anterior"
+
+#: tfrmdolbyvision.lblchecktitle.caption
+msgid "Check the cuts against the shot changes of the video"
+msgstr "Compara los cortes con los cambios de plano del vídeo"
+
+#: tfrmdolbyvision.lblcount.caption
+msgid "Number of frames:"
+msgstr "Número de fotogramas:"
+
+#: tfrmdolbyvision.lbledittitle.caption
+msgid "Edit frames"
+msgstr "Editar fotogramas"
+
+#: tfrmdolbyvision.lblinfo.caption
+msgctxt "tfrmdolbyvision.lblinfo.caption"
+msgid "Open a Dolby Vision XML to use this tool."
+msgstr "Abrir un archivo XML de Dolby Vision para utilizar esta herramienta."
+
+#: tfrmdolbyvision.lblorigin.caption
+msgid "First frame of the video (record timecode):"
+msgstr "Primer fotograma del vídeo (registrar código de tiempo):"
+
+#: tfrmdolbyvision.lblposition.caption
+msgid "At (record timecode or frame):"
+msgstr "En (registrar código de tiempo o fotograma):"
+
+#: tfrmdolbyvision.lbltolerance.caption
+msgid "Search up to (frames):"
+msgstr "Buscar hasta (fotogramas):"
+
+#: tfrmdolbyvision.rbndelete.caption
+msgid "Delete frames"
+msgstr "Eliminar fotogramas"
+
+#: tfrmdolbyvision.rbninsert.caption
+msgid "Insert frames"
+msgstr "Insertar fotogramas"
+
 #: tfrmdownload.btncancel.caption
 msgctxt "tfrmdownload.btncancel.caption"
 msgid "Cancel"
@@ -3172,6 +3326,10 @@ msgstr "Distribuir entradas uniformemente"
 #: tfrmmain.actdivideentry.caption
 msgid "Divide entry"
 msgstr "Dividir entrada"
+
+#: tfrmmain.actdolbyvision.caption
+msgid "Dolby Vision metadata..."
+msgstr "Metadatos de Dolby Vision..."
 
 #: tfrmmain.actdurationlimits.caption
 msgid "Duration limits..."
