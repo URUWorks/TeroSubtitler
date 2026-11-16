@@ -50,7 +50,7 @@ implementation
 
 {$IFDEF LCLCocoa}
 uses
-  Forms, CocoaWSScrolling; // Lazarus 5 (4.x: CocoaWSScrollers, TCocoaWSScrollerUtil)
+  Classes, Forms, CocoaWSScrolling; // Lazarus 5 (4.x: CocoaWSScrollers, TCocoaWSScrollerUtil)
 
 type
   TMacAdjustSizeFix = class
