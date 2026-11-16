@@ -1,0 +1,246 @@
+object frmDolbyVision: TfrmDolbyVision
+  Left = 250
+  Height = 750
+  Top = 110
+  Width = 700
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Dolby Vision metadata'
+  ClientHeight = 750
+  ClientWidth = 700
+  DesignTimePPI = 120
+  FormStyle = fsStayOnTop
+  Position = poMainFormCenter
+  LCLVersion = '5.0.1.0'
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  object lblInfo: TLabel
+    Left = 10
+    Height = 19
+    Top = 10
+    Width = 680
+    AutoSize = False
+    Caption = 'Open a Dolby Vision XML to use this tool.'
+    ParentColor = False
+  end
+  object lblOrigin: TLabel
+    AnchorSideTop.Control = edtOrigin
+    AnchorSideTop.Side = asrCenter
+    Left = 10
+    Height = 20
+    Top = 49
+    Width = 281
+    Caption = 'First frame of the video (record timecode):'
+    ParentColor = False
+  end
+  object edtOrigin: TEdit
+    Left = 375
+    Height = 28
+    Top = 45
+    Width = 163
+    Alignment = taCenter
+    TabOrder = 0
+  end
+  object btnApplyOrigin: TButton
+    AnchorSideTop.Control = edtOrigin
+    AnchorSideTop.Side = asrCenter
+    Left = 545
+    Height = 33
+    Top = 43
+    Width = 145
+    Caption = 'Set'
+    TabOrder = 1
+    OnClick = btnApplyOriginClick
+  end
+  object lblEditTitle: TLabel
+    Left = 10
+    Height = 20
+    Top = 100
+    Width = 80
+    Caption = 'Edit frames'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object rbnDelete: TUWRadioButton
+    Left = 10
+    Height = 30
+    Top = 128
+    Width = 28
+    AutoSize = False
+    Caption = 'Delete frames'
+    TabOrder = 2
+    TabStop = False
+  end
+  object rbnInsert: TUWRadioButton
+    Left = 275
+    Height = 30
+    Top = 128
+    Width = 27
+    AutoSize = False
+    Caption = 'Insert frames'
+    TabOrder = 3
+    TabStop = False
+  end
+  object lblPosition: TLabel
+    AnchorSideTop.Control = edtPosition
+    AnchorSideTop.Side = asrCenter
+    Left = 10
+    Height = 20
+    Top = 174
+    Width = 203
+    Caption = 'At (record timecode or frame):'
+    ParentColor = False
+  end
+  object edtPosition: TEdit
+    Left = 375
+    Height = 28
+    Top = 170
+    Width = 163
+    Alignment = taCenter
+    TabOrder = 4
+    OnChange = edtPositionChange
+  end
+  object btnVideoPosition: TButton
+    AnchorSideTop.Control = edtPosition
+    AnchorSideTop.Side = asrCenter
+    Left = 545
+    Height = 33
+    Top = 168
+    Width = 145
+    Caption = 'Video position'
+    TabOrder = 5
+    OnClick = btnVideoPositionClick
+  end
+  object lblPositionInfo: TLabel
+    Left = 10
+    Height = 18
+    Top = 208
+    Width = 680
+    AutoSize = False
+    ParentColor = False
+  end
+  object lblCount: TLabel
+    AnchorSideTop.Control = spnCount
+    AnchorSideTop.Side = asrCenter
+    Left = 10
+    Height = 20
+    Top = 242
+    Width = 124
+    Caption = 'Number of frames:'
+    ParentColor = False
+  end
+  object spnCount: TSpinEdit
+    Left = 375
+    Height = 28
+    Top = 238
+    Width = 163
+    MaxValue = 1000000
+    MinValue = 1
+    TabOrder = 6
+    Value = 1
+  end
+  object chkExtendPrevious: TUWCheckBox
+    Left = 10
+    Height = 30
+    Top = 278
+    Width = 28
+    AutoSize = False
+    Caption = 'At a cut, add the inserted frames to the end of the previous shot'
+    TabOrder = 7
+  end
+  object btnApplyEdit: TButton
+    Left = 545
+    Height = 33
+    Top = 315
+    Width = 145
+    Caption = 'Apply'
+    TabOrder = 8
+    OnClick = btnApplyEditClick
+  end
+  object lblCheckTitle: TLabel
+    Left = 10
+    Height = 20
+    Top = 370
+    Width = 367
+    Caption = 'Check the cuts against the shot changes of the video'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object lblTolerance: TLabel
+    AnchorSideTop.Control = spnTolerance
+    AnchorSideTop.Side = asrCenter
+    Left = 10
+    Height = 20
+    Top = 404
+    Width = 145
+    Caption = 'Search up to (frames):'
+    ParentColor = False
+  end
+  object spnTolerance: TSpinEdit
+    Left = 375
+    Height = 28
+    Top = 400
+    Width = 163
+    MaxValue = 1000
+    MinValue = 1
+    TabOrder = 9
+    Value = 12
+  end
+  object btnCheck: TButton
+    AnchorSideTop.Control = spnTolerance
+    AnchorSideTop.Side = asrCenter
+    Left = 545
+    Height = 33
+    Top = 398
+    Width = 145
+    Caption = 'Check'
+    TabOrder = 10
+    OnClick = btnCheckClick
+  end
+  object lstResults: TListBox
+    Left = 10
+    Height = 250
+    Top = 440
+    Width = 680
+    ItemHeight = 0
+    TabOrder = 11
+    OnDblClick = lstResultsDblClick
+    OnSelectionChange = lstResultsSelectionChange
+  end
+  object btnMoveCut: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 10
+    Height = 32
+    Top = 708
+    Width = 275
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 10
+    BorderSpacing.Bottom = 10
+    Caption = 'Move the cut to the shot change'
+    Enabled = False
+    TabOrder = 12
+    OnClick = btnMoveCutClick
+  end
+  object btnClose: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 545
+    Height = 32
+    Top = 708
+    Width = 145
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 10
+    BorderSpacing.Bottom = 10
+    Cancel = True
+    Caption = 'Close'
+    TabOrder = 13
+    OnClick = btnCloseClick
+  end
+end

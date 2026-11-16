@@ -111,7 +111,7 @@ uses
   procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils, LCLStrConsts,
   RegExpr,
   UWSubtitleAPI.Tags, UWTranslateAPI.Google, formCustomSelectDlgWithPreview,
-  FileUtil, Math, URIParser, formCustomQuestionDlg
+  FileUtil, Math, URIParser, formCustomQuestionDlg, DolbyVision
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -583,7 +583,7 @@ begin
     end;
   end;
 
-  if AppOptions.AskForInputFPS and Subtitles.GetFormatInfoFromFile(FileName, _Format, _TimeBase) and ((_TimeBase = stbMedia) and (_Format <> sfSoftNI)) and (AFPS = -1) and // not chosen in our file dialog
+  if AppOptions.AskForInputFPS and Subtitles.GetFormatInfoFromFile(FileName, _Format, _TimeBase) and ((_TimeBase = stbMedia) and (_Format <> sfSoftNI) and (_Format <> sfDolbyVision)) and (AFPS = -1) and // not chosen in our file dialog
     (not IsBinary or SameText(ExtractFileExt(FileName), '.890') or SameText(ExtractFileExt(FileName), '.cap') or
     SameText(ExtractFileExt(FileName), '.asc')) then
   begin
@@ -790,6 +790,32 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function AllowSaveDolbyVision: Boolean;
+var
+  Problems: TDoViProblems;
+begin
+  Result := False;
+  if not DoViIsEditable(Subtitles) then
+  begin
+    ShowErrorMessageDialog(lngDoViSaveOnlyDoVi);
+    Exit;
+  end;
+
+  // the shots of the track must be contiguous
+  Problems := DoViCheckProblems(Subtitles);
+  if Problems.First >= 0 then
+  begin
+    VSTSelectNode(frmMain.VST, Problems.First, True, True);
+    if CustomQuestionDialog(lngDoViSaveAnyway, SysUtils.Format(lngDoViSaveProblems, [Problems.Gaps,
+      Problems.Overlaps, Problems.Empty, Problems.NoShot, Problems.First+1]), [dbYes, dbNo]) <> mrYes then
+      Exit;
+  end;
+
+  Result := True;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 var
   _FPS      : TFPSInfo;
@@ -807,6 +833,9 @@ begin
     Subtitles.TimeBase := stbSMPTE
   else
     Subtitles.TimeBase := stbMedia;
+
+  // Dolby Vision XML: only the times of the shots of an opened XML are written
+  if (Format = sfDolbyVision) and not AllowSaveDolbyVision then Exit;
 
   S := FileName;
   if (Format = sfSpreadsheet) then

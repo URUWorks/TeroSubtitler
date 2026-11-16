@@ -209,6 +209,7 @@
 {"hash":121212001,"name":"tfrmmain.actclosemedia.caption","sourcebytes":[67,108,111,115,101,32,109,101,100,105,97],"value":"Close media"},
 {"hash":182217678,"name":"tfrmmain.actaudiototext.caption","sourcebytes":[65,117,100,105,111,32,116,111,32,116,101,120,116,46,46,46],"value":"Audio to text..."},
 {"hash":45787294,"name":"tfrmmain.actshotchanges.caption","sourcebytes":[83,104,111,116,32,99,104,97,110,103,101,115,46,46,46],"value":"Shot changes..."},
+{"hash":192896654,"name":"tfrmmain.actdolbyvision.caption","sourcebytes":[68,111,108,98,121,32,86,105,115,105,111,110,32,109,101,116,97,100,97,116,97,46,46,46],"value":"Dolby Vision metadata..."},
 {"hash":133106782,"name":"tfrmmain.actwaveextract.caption","sourcebytes":[69,120,116,114,97,99,116,32,119,97,118,101,102,111,114,109,46,46,46],"value":"Extract waveform..."},
 {"hash":131947806,"name":"tfrmmain.actloadproject.caption","sourcebytes":[76,111,97,100,32,112,114,111,106,101,99,116,46,46,46],"value":"Load project..."},
 {"hash":15963102,"name":"tfrmmain.actrestorebackup.caption","sourcebytes":[82,101,115,116,111,114,101,32,98,97,99,107,117,112,46,46,46],"value":"Restore backup..."},

@@ -837,6 +837,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="formDolbyVision.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmDolbyVision"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

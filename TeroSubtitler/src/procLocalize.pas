@@ -179,6 +179,26 @@ resourcestring
   lngasLoadingVideoFromURL = 'Loading media from URL (yt-dlp)... %s';
   lngasCustom = 'Custom';
 
+  //Dolby Vision metadata
+  lngDoViNotLoaded = 'Open a Dolby Vision XML to use this tool.';
+  lngDoViInfo = '%d shots at %s fps, from %s to %s (record timecode).';
+  lngDoViBadTimecode = 'Invalid timecode or frame number.';
+  lngDoViPosInShot = '%s is the frame %d of %d of “%s”.';
+  lngDoViPosAtCut = '%s is the first frame of “%s” (a cut).';
+  lngDoViPosOutside = '%s is not in any shot.';
+  lngDoViApplied = '%d shots changed, %d removed.';
+  lngDoViCheckMoved = '%s  “%s”: the shot change is at %s (%s frames)';
+  lngDoViCheckNoShotChange = '%s  “%s”: no shot change near the cut';
+  lngDoViCheckNoCut = '%s  shot change without a cut in the metadata (in “%s”)';
+  lngDoViCheckOK = 'All the cuts match the shot changes of the video.';
+  lngDoViCheckCount = '%d differences.';
+  lngDoViNoShotChanges = 'There are no shot changes. Detect them first.';
+  lngDoViSaveOnlyDoVi = 'Only a Dolby Vision XML opened in Tero Subtitler can be saved in this format.';
+  lngDoViSaveProblems = 'The shots are not contiguous: %d gaps, %d overlaps, %d without frames and %d new entries (written as copies of the previous shot). The first one is the entry %d.';
+  lngDoViSaveAnyway = 'Do you want to save it anyway?';
+  lngDoViOriginChanged = 'The times of all the entries changed and the undo history was cleared.';
+  lngDoViMoveCutNotAdjacent = 'Only a cut between two contiguous shots can be moved.';
+
   //AboutStrings
   lngabVersion = 'version %s'+ LineEnding + LineEnding + 'Compiled at %s on %s' + LineEnding + 'Compiler version: %s' + LineEnding + 'Target CPU: %s';
 

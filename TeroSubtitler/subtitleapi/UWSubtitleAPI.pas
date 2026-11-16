@@ -156,6 +156,8 @@ type
     FStyles           : TList;
     FASSHeader        : String; // ASS sections before [Events] (script info, styles...)
     FASSFooter        : String; // ASS sections after [Events] (fonts, graphics...)
+    FSourceText       : String;  // original file, for formats that rewrite only some values of it (Dolby Vision XML)
+    FSourceOrigin     : Integer; // frame of the original file that is the time 0 of the entries (Dolby Vision XML)
     FCodePage         : Integer;
     FSearchStartAt    : Integer;
     FSearchIdx        : Integer;
@@ -268,6 +270,8 @@ type
     property Header: Pointer read FHeader write FHeader;
     property ASSHeader: String read FASSHeader write FASSHeader;
     property ASSFooter: String read FASSFooter write FASSFooter;
+    property SourceText: String read FSourceText write FSourceText;
+    property SourceOrigin: Integer read FSourceOrigin write FSourceOrigin;
     property IsRightToLeft: Boolean read FIsRTL;
     property Tag: Byte read FTag write FTag;
     property ReplaceEntities: Boolean read FReplaceEntity write FReplaceEntity;
@@ -333,6 +337,7 @@ uses UWSystem.StrUtils, UWSystem.SysUtils, UWSystem.Encoding, UWSystem.FileUtils
   DCinemaInterop,
   DCinemaSMPTE,
   DKS,
+  DolbyVision,
   DRTIC,
   DVDJunior,
   DVDSubtitle,
@@ -795,6 +800,7 @@ begin
 
   case EIType of
     eiCavena890 : begin Result := New(PCavena890_Info);     PCavena890_Info(Result)^     := PCavena890_Info(P)^;     end;
+    eiDolbyVision: begin Result := New(PDolbyVision_ExtraInfo); PDolbyVision_ExtraInfo(Result)^ := PDolbyVision_ExtraInfo(P)^; end;
     eiEBU       : begin Result := New(PEBU_ExtraInfo);      PEBU_ExtraInfo(Result)^      := PEBU_ExtraInfo(P)^;      end;
     eiMicroDVD  : begin Result := New(PMicroDVD_ExtraInfo); PMicroDVD_ExtraInfo(Result)^ := PMicroDVD_ExtraInfo(P)^; end;
     eiSSA       : begin Result := New(PSSA_ExtraInfo);      PSSA_ExtraInfo(Result)^      := PSSA_ExtraInfo(P)^;      end;
@@ -811,6 +817,7 @@ begin
 
   case EIType of
     eiCavena890 : Dispose(PCavena890_Info(P));
+    eiDolbyVision: Dispose(PDolbyVision_ExtraInfo(P));
     eiEBU       : Dispose(PEBU_ExtraInfo(P));
     eiMicroDVD  : Dispose(PMicroDVD_ExtraInfo(P));
     eiSSA       : Dispose(PSSA_ExtraInfo(P));
@@ -885,6 +892,7 @@ begin
   AList.Add( TUWSubtitleCustomFormat(TUWDCinemaInterop.Create(False)) ); // UTF-8 without BOM
   AList.Add( TUWSubtitleCustomFormat(TUWDCinemaSMPTE.Create(False)) );
   AList.Add( TUWSubtitleCustomFormat(TUWDKS.Create(AShouldWriteBOM)) );
+  AList.Add( TUWSubtitleCustomFormat(TUWDolbyVision.Create(False)) ); // written as it was read
   AList.Add( TUWSubtitleCustomFormat(TUWDRTIC.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWDVDJunior.Create(AShouldWriteBOM)) );
   AList.Add( TUWSubtitleCustomFormat(TUWDVDSubtitleSystem.Create(AShouldWriteBOM)) );
@@ -998,6 +1006,8 @@ begin
   FEIType    := Source.ExtraInfoType;
   FASSHeader := Source.ASSHeader;
   FASSFooter := Source.ASSFooter;
+  FSourceText := Source.SourceText;
+  FSourceOrigin := Source.SourceOrigin;
   for i := 0 to Source.Count-1 do
     Add(Source.ItemPointer[i]^, Source.CopyExtraInfo(i));
 end;
@@ -1468,6 +1478,8 @@ begin
   FIsRTL := False;
   FASSHeader := '';
   FASSFooter := '';
+  FSourceText := '';
+  FSourceOrigin := 0;
   // free the items and their extra info, not only the pointers
   ClearExtraInfoList(FExtraInfo, FEIType);
   // empty list: the next load (or append) sets its own type
@@ -1814,6 +1826,8 @@ var
   StartCount : Integer;
   OldEIType  : TUWSubtitleExtraInfoType;
   OldHeader, OldFooter : String;
+  OldSource  : String;
+  OldOrigin  : Integer;
 
   function DoLoad(const AFormat: TUWSubtitleCustomFormat; const ACodePage: Integer): Boolean;
   begin
@@ -1830,6 +1844,8 @@ var
       FEIType := OldEIType;
       FASSHeader := OldHeader;
       FASSFooter := OldFooter;
+      FSourceText := OldSource;
+      FSourceOrigin := OldOrigin;
     end;
   end;
 
@@ -1847,6 +1863,8 @@ begin
         //FStyles.Clear;
         FASSHeader := '';
         FASSFooter := '';
+        FSourceText := '';
+        FSourceOrigin := 0;
         ClearList(FList);
       end;
       // when appending, only the newly loaded items must be converted to SMPTE
@@ -1854,6 +1872,8 @@ begin
       OldEIType  := FEIType;
       OldHeader  := FASSHeader;
       OldFooter  := FASSFooter;
+      OldSource  := FSourceText;
+      OldOrigin  := FSourceOrigin;
 
       AFPS := FPS.FPS;
       if AFPS <= 0 then AFPS := 25;

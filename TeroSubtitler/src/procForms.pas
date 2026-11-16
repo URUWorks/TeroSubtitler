@@ -73,6 +73,7 @@ procedure ShowStreamExtractor;
 procedure ShowTTS;
 procedure ShowVideoDubbing;
 procedure ShowVideoOffset;
+procedure ShowDolbyVision;
 procedure ShowTBXSettings;
 procedure ShowTBX;
 procedure ShowTBXList;
@@ -103,7 +104,7 @@ uses
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
   formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
   formRoundTime, formStatistics, formGenerateBlankVideo, formStreamExtractor,
-  formPauses, formTTS, formVideoDubbing, formVideoOffset, formImportSUP, formImportPlainText,
+  formPauses, formTTS, formVideoDubbing, formVideoOffset, formDolbyVision, formImportSUP, formImportPlainText,
   formImportSUPLanguages, LCLTranslator, procLocalize, procDialogs, SysUtils, Dialogs, procFiles,
   UWSubtitleAPI, procVST;
 
@@ -907,6 +908,20 @@ begin
   end
   else
     frmVideoOffset.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowDolbyVision;
+begin
+  // not modal: the video and the timeline are used while it is open
+  if frmDolbyVision = NIL then
+  begin
+    frmDolbyVision := TfrmDolbyVision.Create(Application);
+    ShowForm(frmDolbyVision, False);
+  end
+  else
+    frmDolbyVision.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

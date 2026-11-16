@@ -212,6 +212,7 @@ type
     actMediaDeleteEntry: TAction;
     actQualityCheck: TAction;
     actShotChanges: TAction;
+    actDolbyVision: TAction;
     actLoadTranscription: TAction;
     actSaveTranscription: TAction;
     actTranslationMemoryClose: TAction;
@@ -1241,6 +1242,7 @@ type
     procedure actSaveTranscriptionExecute(Sender: TObject);
     procedure actGoToTimeExecute(Sender: TObject);
     procedure actShotChangesExecute(Sender: TObject);
+    procedure actDolbyVisionExecute(Sender: TObject);
     procedure actAudioToTextExecute(Sender: TObject);
     procedure actBatchConvertExecute(Sender: TObject);
     procedure actQualityCheckExecute(Sender: TObject);

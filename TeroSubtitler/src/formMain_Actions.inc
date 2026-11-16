@@ -1569,6 +1569,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actDolbyVisionExecute(Sender: TObject);
+begin
+  ShowDolbyVision;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actAudioToTextExecute(Sender: TObject);
 begin
   ShowAudioToText;

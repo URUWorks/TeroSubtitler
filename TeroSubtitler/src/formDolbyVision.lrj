@@ -1,0 +1,19 @@
+{"version":1,"strings":[
+{"hash":131643377,"name":"tfrmdolbyvision.caption","sourcebytes":[68,111,108,98,121,32,86,105,115,105,111,110,32,109,101,116,97,100,97,116,97],"value":"Dolby Vision metadata"},
+{"hash":65317518,"name":"tfrmdolbyvision.lblinfo.caption","sourcebytes":[79,112,101,110,32,97,32,68,111,108,98,121,32,86,105,115,105,111,110,32,88,77,76,32,116,111,32,117,115,101,32,116,104,105,115,32,116,111,111,108,46],"value":"Open a Dolby Vision XML to use this tool."},
+{"hash":64824490,"name":"tfrmdolbyvision.lblorigin.caption","sourcebytes":[70,105,114,115,116,32,102,114,97,109,101,32,111,102,32,116,104,101,32,118,105,100,101,111,32,40,114,101,99,111,114,100,32,116,105,109,101,99,111,100,101,41,58],"value":"First frame of the video (record timecode):"},
+{"hash":22980,"name":"tfrmdolbyvision.btnapplyorigin.caption","sourcebytes":[83,101,116],"value":"Set"},
+{"hash":110351267,"name":"tfrmdolbyvision.lbledittitle.caption","sourcebytes":[69,100,105,116,32,102,114,97,109,101,115],"value":"Edit frames"},
+{"hash":203082227,"name":"tfrmdolbyvision.rbndelete.caption","sourcebytes":[68,101,108,101,116,101,32,102,114,97,109,101,115],"value":"Delete frames"},
+{"hash":109169395,"name":"tfrmdolbyvision.rbninsert.caption","sourcebytes":[73,110,115,101,114,116,32,102,114,97,109,101,115],"value":"Insert frames"},
+{"hash":34750986,"name":"tfrmdolbyvision.lblposition.caption","sourcebytes":[65,116,32,40,114,101,99,111,114,100,32,116,105,109,101,99,111,100,101,32,111,114,32,102,114,97,109,101,41,58],"value":"At (record timecode or frame):"},
+{"hash":156024558,"name":"tfrmdolbyvision.btnvideoposition.caption","sourcebytes":[86,105,100,101,111,32,112,111,115,105,116,105,111,110],"value":"Video position"},
+{"hash":26519434,"name":"tfrmdolbyvision.lblcount.caption","sourcebytes":[78,117,109,98,101,114,32,111,102,32,102,114,97,109,101,115,58],"value":"Number of frames:"},
+{"hash":102036868,"name":"tfrmdolbyvision.chkextendprevious.caption","sourcebytes":[65,116,32,97,32,99,117,116,44,32,97,100,100,32,116,104,101,32,105,110,115,101,114,116,101,100,32,102,114,97,109,101,115,32,116,111,32,116,104,101,32,101,110,100,32,111,102,32,116,104,101,32,112,114,101,118,105,111,117,115,32,115,104,111,116],"value":"At a cut, add the inserted frames to the end of the previous shot"},
+{"hash":4749113,"name":"tfrmdolbyvision.btnapplyedit.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":124018079,"name":"tfrmdolbyvision.lblchecktitle.caption","sourcebytes":[67,104,101,99,107,32,116,104,101,32,99,117,116,115,32,97,103,97,105,110,115,116,32,116,104,101,32,115,104,111,116,32,99,104,97,110,103,101,115,32,111,102,32,116,104,101,32,118,105,100,101,111],"value":"Check the cuts against the shot changes of the video"},
+{"hash":122490042,"name":"tfrmdolbyvision.lbltolerance.caption","sourcebytes":[83,101,97,114,99,104,32,117,112,32,116,111,32,40,102,114,97,109,101,115,41,58],"value":"Search up to (frames):"},
+{"hash":4844443,"name":"tfrmdolbyvision.btncheck.caption","sourcebytes":[67,104,101,99,107],"value":"Check"},
+{"hash":204223429,"name":"tfrmdolbyvision.btnmovecut.caption","sourcebytes":[77,111,118,101,32,116,104,101,32,99,117,116,32,116,111,32,116,104,101,32,115,104,111,116,32,99,104,97,110,103,101],"value":"Move the cut to the shot change"},
+{"hash":4863637,"name":"tfrmdolbyvision.btnclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

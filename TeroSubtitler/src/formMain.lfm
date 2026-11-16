@@ -2704,6 +2704,9 @@ object frmMain: TfrmMain
       object MenuItem8: TMenuItem
         Action = actShotChanges
       end
+      object mnuVideoDolbyVision: TMenuItem
+        Action = actDolbyVision
+      end
       object MenuItem32: TMenuItem
         Action = actWaveExtract
       end
@@ -4272,6 +4275,12 @@ object frmMain: TfrmMain
       Category = 'Video'
       Caption = 'Shot changes...'
       OnExecute = actShotChangesExecute
+    end
+    object actDolbyVision: TAction
+      Tag = 1
+      Category = 'Video'
+      Caption = 'Dolby Vision metadata...'
+      OnExecute = actDolbyVisionExecute
     end
     object actWaveExtract: TAction
       Tag = 4

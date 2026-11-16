@@ -132,6 +132,10 @@
         <UnitName Value="DKS"/>
       </Item>
       <Item>
+        <Filename Value="Formats\DolbyVision.pas"/>
+        <UnitName Value="DolbyVision"/>
+      </Item>
+      <Item>
         <Filename Value="Formats\DRTIC.pas"/>
         <UnitName Value="DRTIC"/>
       </Item>

@@ -34,6 +34,7 @@ type
   (
     eiNone,
     eiCavena890,
+    eiDolbyVision,
     eiEBU,
     eiMicroDVD,
     eiSSA,
@@ -92,6 +93,17 @@ type
     Web      : String;
     Info     : String;
     License  : String;
+  end;
+
+  { Dolby Vision metadata (XML) }
+
+  PDolbyVision_ExtraInfo = ^TDolbyVision_ExtraInfo;
+  TDolbyVision_ExtraInfo = record
+    Shot    : Integer;    // index (from 0) of its <Shot> in the original XML (Subtitles.SourceText)
+    BaseIn  : Integer;    // record in (frames) when Edits was last brought up to date
+    BaseOut : Integer;    // record out (frames, exclusive) idem
+    Edits   : AnsiString; // changes to the frames of the shot, in order: d<offset>,<count>; (deleted)
+                          // and i<offset>,<count>; (inserted, copies of the previous frame)
   end;
 
   { EBU }
