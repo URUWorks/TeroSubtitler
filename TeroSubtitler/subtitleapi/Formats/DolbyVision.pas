@@ -34,8 +34,8 @@ unit DolbyVision;
 //
 //  Everything is done in whole frames of the <EditRate> of the track, never
 //  in ms: the entries have the times of their frames, the frame of the time
-//  0 is Subtitles.SourceOrigin (by default the first shot, the first frame
-//  of the video).
+//  0 is Subtitles.SourceOrigin (by default 0, so the entries show the record
+//  timecode of the XML; the video is aligned with the video offset).
 //
 //  Changes of the frames inside of a shot (a deleted duplicated frame, an
 //  inserted frame, a trimmed head) are kept in its extra info as a list of
@@ -1180,10 +1180,10 @@ begin
 
   if not DoViParse(XML, Doc) or (Length(Doc.Shots) = 0) then Exit;
 
-  // the first shot is the first frame of the video
-  Origin := Doc.Shots[0].RecordIn;
-  for i := 1 to High(Doc.Shots) do
-    if Doc.Shots[i].RecordIn < Origin then Origin := Doc.Shots[i].RecordIn;
+  // the times of the entries are the record frames of the XML (the first shot
+  // of 86352 is at 00:59:58:00), as the timecode of the video; the video is
+  // aligned with Video > Video offset. Subtitles.SourceOrigin can move them.
+  Origin := 0;
 
   Subtitles.ExtraInfoType := eiDolbyVision;
   Subtitles.SourceText    := XML;
