@@ -2374,7 +2374,7 @@ begin
     Exit;
   end;
 
-  MediaEndMS := Max(FMediaLengthMS, FVideoLengthMS);
+  MediaEndMS := Max(FMediaLengthMS, FVideoLengthMS) + Max(FOffsetMs, 0);
   SubsEndMS  := GetSubtitlesEndMS;
   if SubsEndMS + EndMarginMS > MediaEndMS then
     ApplyLengthMS(SubsEndMS + EndMarginMS)
@@ -2690,12 +2690,37 @@ end;
 
 //------------------------------------------------------------------------------
 
+// The video offset: the timeline is in entry time (the times of the
+// subtitles), the audio/video start at FOffsetMs. The wave is drawn moved and
+// the scene changes (always in entry time here) are moved with it
 procedure TUWWaveformDisplayer.SetOffset(const Value: Integer);
+var
+  Delta, i: Integer;
+  NewList: TIntegerDynArray;
 begin
   if FOffsetMs <> Value then
   begin
+    Delta := Value - FOffsetMs;
     FOffsetMs := Value;
-    DoUpdate;
+
+    if System.Length(FSceneChangeList) > 0 then
+    begin
+      // a new array: GetSceneChangeList may have given the old one
+      NewList := NIL;
+      SetLength(NewList, System.Length(FSceneChangeList));
+      for i := 0 to High(FSceneChangeList) do
+        NewList[i] := FSceneChangeList[i] + Delta;
+      FSceneChangeList := NewList;
+      DoSceneChangeListChange;
+    end;
+
+    if FMediaLengthMS > 0 then
+    begin
+      UpdateLengthMS;
+      UpdateView([uvfPageSize]);
+    end
+    else
+      DoUpdate;
   end;
 end;
 

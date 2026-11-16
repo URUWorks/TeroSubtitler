@@ -86,7 +86,7 @@ var
 implementation
 
 uses
-  procVST, procWorkspace, procSubtitle, procColorTheme, formMain;
+  procVST, procWorkspace, procSubtitle, procColorTheme, formMain, procMPV;
 
 {$R *.lfm}
 
@@ -241,7 +241,7 @@ procedure TfrmAdjustSubtitle.DropperClick(Sender: TObject);
 var
   ms: Integer;
 begin
-  ms := frmMain.MPV.GetMediaPosInMs;
+  ms := MPVGetEntryPosInMs;
   with TUWFlatButton(Sender) do
     case Tag of
       0: tedFirst.SetValueOnly(ms);
@@ -264,7 +264,7 @@ end;
 procedure TfrmAdjustSubtitle.tedFirstTimeChange(Sender: TObject;
   const NewTime: Cardinal);
 begin
-  frmMain.MPV.SetMediaPosInMs(TUWTimeEdit(Sender).Value);
+  frmMain.MPV.SetMediaPosInMs(EntryToVideoMS(TUWTimeEdit(Sender).Value));
 end;
 
 // -----------------------------------------------------------------------------

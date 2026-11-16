@@ -184,7 +184,7 @@ end;
 procedure TfrmMain.WAVETimeLineClick(Sender: TObject; const Time: Integer);
 begin
   if MPV.Initialized then
-    MPV.SeekInMs(Time);
+    MPV.SeekInMs(EntryToVideoMS(Time));
 end;
 
 // -----------------------------------------------------------------------------
@@ -215,7 +215,7 @@ begin
         begin
           if MPV.IsPlaying then MPV.Pause;
           SetCursorMS(x);
-          MPV.SetMediaPosInMs(x);
+          MPV.SetMediaPosInMs(EntryToVideoMS(x));
         end
         else
           WAVE.SetPlayCursorMS(x, True);
@@ -337,7 +337,7 @@ begin
 
   FThumbnailThread := TGenerateThumbnails.Create(MPV.FileName,
     WAVEOptions.ThumbnailTimes, Workspace.FPS.OutputFPS.FPS, @DoThumbnailReady,
-    @DoThumbnailsDone);
+    @DoThumbnailsDone, WAVE.OffsetMs);
   FThumbnailThread.Start;
 end;
 

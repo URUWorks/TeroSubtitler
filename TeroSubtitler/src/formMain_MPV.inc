@@ -295,7 +295,7 @@ begin
 
     // B. ACTUALIZAR WAVEFORM
     if (not WAVE.IsMouseDown) and WAVE.IsTimeLineEnabled then
-      WAVE.SetPlayCursorMS(CurrentPos);
+      WAVE.SetPlayCursorMS(VideoToEntryMS(CurrentPos));
 
     // C. ACTUALIZAR SUBTÍTULOS Y OVERLAY
     if MPVOptions.SubtitleHandleByMPV then
@@ -349,12 +349,12 @@ begin
   if MPV.IsMediaLoaded then
     with sbrSeek do
       if MouseIsDown then
-        lblMediaTime.Caption := GetTimeStr(Range((X * Max) div Width, 0, Max))
+        lblMediaTime.Caption := GetTimeStr(VideoToEntryMS(Range((X * Max) div Width, 0, Max)))
       else
       begin
         p := Range((X * Max) div Width, 0, sbrSeek.Max);
         //MPV.ShowText(GetTimeStr(p));
-        ShowCustomHint(GetTimeStr(p));
+        ShowCustomHint(GetTimeStr(VideoToEntryMS(p)));
 
         if MPV.IsPaused and (ssCtrl in Shift) then
         begin

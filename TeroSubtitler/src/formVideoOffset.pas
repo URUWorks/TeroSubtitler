@@ -54,7 +54,7 @@ implementation
 // -----------------------------------------------------------------------------
 
 uses procTypes, procSubtitle, procWorkspace, UWSubtitles.Utils, formMain,
-  LCLTranslator;
+  LCLTranslator, procMPV;
 
 {$R *.lfm}
 
@@ -101,13 +101,7 @@ end;
 
 procedure TfrmVideoOffset.btnApplyClick(Sender: TObject);
 begin
-  if tedTime.Value <> Workspace.VideoOffset then
-  begin
-    Workspace.VideoOffset := tedTime.Value;
-    frmMain.lblMediaTime.Caption := GetTimeStr(frmMain.MPV.GetMediaPosInMs + Workspace.VideoOffset);
-    frmMain.WAVE.OffsetMs := Workspace.VideoOffset;
-    UpdateVideoLengthString;
-  end;
+  MPVSetVideoOffset(tedTime.Value);
 
   Close;
 end;

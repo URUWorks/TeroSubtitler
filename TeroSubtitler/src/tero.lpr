@@ -41,7 +41,7 @@ uses
   procThumbnails, formStreamExtractor, formPauses, formImportPlainText,
   formCustomSelectDlgWithPreview, formTTS, formVideoDubbing, formImportSUP,
   formImportSUPLanguages, procMacOpenFiles, procMacMediaKeys, procMacMenuKeys,
-  procMacSystemMenus, procMacTextView,
+  procMacSystemMenus, procMacTextView, procMacAdjustSizeFix,
   procCrashLog;
 
 {$R *.res}
@@ -69,6 +69,9 @@ begin
   Application.Icon.Clear;
   // files dropped on the app icon on macOS < 10.13 (Lazarus 4+)
   InstallMacOpenFilesFix;
+  // a form freed with an AdjustSize of LCL Cocoa still queued (access
+  // violation with legacy scroll bars, Lazarus 5)
+  MacAdjustSizeFixInstall;
   {$ENDIF}
   Application.ShowMainForm := False;
   Application.CreateForm(TfrmMain, frmMain);

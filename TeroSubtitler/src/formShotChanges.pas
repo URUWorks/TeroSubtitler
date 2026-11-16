@@ -91,7 +91,7 @@ implementation
 uses
   procTypes, procWorkspace, procConfig, procDialogs, UWSystem.TimeUtils,
   UWSystem.SysUtils, UWSystem.Process, formMain, UWSubtitleAPI.EDL,
-  formCustomSelectDlg;
+  formCustomSelectDlg, procMPV;
 
 const
   tcFrames       = 0;
@@ -270,8 +270,10 @@ begin
     begin
       mmoTimes.Lines.BeginUpdate;
       try
+        // the timeline has them in entry time (with the video offset), the
+        // memo and the cache in video time
         for i := 0 to High(GetSceneChangeList) do
-          mmoTimes.Lines.Add(GetSceneChangeList[i].ToString);
+          mmoTimes.Lines.Add(EntryToVideoMS(GetSceneChangeList[i]).ToString);
       finally
         mmoTimes.Lines.EndUpdate;
         mmoTimesChange(NIL);
@@ -409,7 +411,7 @@ begin
         if FSMPTE and (Workspace.WorkMode = wmTime) then
           v := Round(v * 1.001);
 
-        SC[i] := v;
+        SC[i] := VideoToEntryMS(v);
       end;
 
       // saved to load them again with the video (only a cache: an error here

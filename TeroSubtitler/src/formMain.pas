@@ -2330,9 +2330,9 @@ end;
 procedure TfrmMain.MemoClickLink(Sender: TObject; const ALink: String);
 begin
   if Workspace.WorkMode = wmFrames then
-    MPV.SeekInMs(StringToTime(ALink, False, Workspace.FPS.OutputFPS.FPS))
+    MPV.SeekInMs(EntryToVideoMS(StringToTime(ALink, False, Workspace.FPS.OutputFPS.FPS)))
   else
-    MPV.SeekInMs(StringToTime(ALink));
+    MPV.SeekInMs(EntryToVideoMS(StringToTime(ALink)));
 end;
 
 // -----------------------------------------------------------------------------

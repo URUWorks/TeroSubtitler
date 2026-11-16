@@ -67,7 +67,7 @@ procedure TfrmGoToTime.FormCreate(Sender: TObject);
 begin
   tedPosition.TimeMode := GetTimeEditMode;
   tedPosition.FPS := GetFPS;
-  tedPosition.Value := frmMain.MPV.GetMediaPosInMs;
+  tedPosition.Value := MPVGetEntryPosInMs;
 end;
 
 // -----------------------------------------------------------------------------
@@ -97,7 +97,7 @@ end;
 
 procedure TfrmGoToTime.btnGoClick(Sender: TObject);
 begin
-  MPVSeekTo(tedPosition.Value);
+  MPVSeekTo(EntryToVideoMS(tedPosition.Value));
   Close;
 end;
 

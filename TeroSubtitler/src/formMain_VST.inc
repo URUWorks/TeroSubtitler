@@ -701,7 +701,7 @@ begin
     WAVE.SelectSubtitle(VSTFocusedNode(VST), True, True);
 
   it := Subtitles.ItemPointer[VSTFocusedNode(VST)]^.InitialTime;
-  MPV.SetMediaPosInMs(it);
+  MPV.SetMediaPosInMs(EntryToVideoMS(it));
 
   FocusMemo;
 end;

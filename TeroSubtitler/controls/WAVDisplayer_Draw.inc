@@ -110,7 +110,8 @@ begin
 
   // Calculos previos
   PeaksPerPixelScaled := (((FPageSizeMS / 1000.0) * FWaveFormat.nSamplesPerSec) / FSamplesPerPeak) / Width;
-  StartPositionInPeaks := ((FPositionMS / 1000.0) * FWaveFormat.nSamplesPerSec) / FSamplesPerPeak;
+  // the timeline is in entry time, the audio starts at the video offset
+  StartPositionInPeaks := (((FPositionMS - FOffsetMs) / 1000.0) * FWaveFormat.nSamplesPerSec) / FSamplesPerPeak;
 
   // the whole wave is redrawn: it's cheap with VertLine (copying the old
   // part on scroll is not worth it, the grid/time line are on this layer)
@@ -139,6 +140,7 @@ begin
   begin
     x_scaled := Round(CurrentPeakPos);
     if (x_scaled >= FPeakTabSize) then x_scaled := FPeakTabSize - 1;
+    if (x_scaled < 0) then x_scaled := 0;
 
     // Calcular el siguiente indice para el bucle interno
     CurrentPeakPos := CurrentPeakPos + PeaksPerPixelScaled;
@@ -152,7 +154,8 @@ begin
 
     // past the end of the audio (the timeline can be longer to reach the
     // last subtitles): draw silence instead of repeating the last peak
-    if (CurrentPeakPos - PeaksPerPixelScaled) >= FPeakTabSize then
+    // (or before its start, with a video offset)
+    if ((CurrentPeakPos - PeaksPerPixelScaled) >= FPeakTabSize) or ((CurrentPeakPos - PeaksPerPixelScaled) < 0) then
     begin
       PeakMax := 0;
       PeakMin := 0;
@@ -262,7 +265,7 @@ begin
         // Draw main division
         x := TimeToPixel(p - FPositionMS);
         {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, PosRect.Top +2, x, PosRect.Bottom);
-        PosString := MSToHHMMSSFFTime(p + FOffsetMs, FFPS, FTimecodeMode);
+        PosString := MSToHHMMSSFFTime(p, FFPS, FTimecodeMode);
         x1 := x + 3;
         if oldx <> x1 then
         begin
@@ -293,7 +296,7 @@ begin
       // Draw main division
       x := TimeToPixel(p - FPositionMS);
       {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, PosRect.Top +2, x, PosRect.Bottom);
-      PosString := TimeMSToShortString(p + FOffsetMs, FStepLog);
+      PosString := TimeMSToShortString(p, FStepLog);
       // Calculate text coordinate
       x1 := x + 3; //x - (CanvasBGRA.TextWidth(PosString) div 2);
       // Draw text

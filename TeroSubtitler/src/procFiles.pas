@@ -227,6 +227,11 @@ begin
     TMX.Save;
     CloseTerminology;
 
+    // the video offset of a Dolby Vision XML (the record timecode of the
+    // first frame of the video) belongs to it: not to the next file
+    if DoViIsEditable(Subtitles) then
+      MPVSetVideoOffset(0);
+
     SubtitleInfo.Text.FileName := '';
     SubtitleInfo.Translation.FileName := '';
     SubtitleChangedReset;
@@ -607,6 +612,10 @@ begin
 
   if Subtitles.LoadFromFile(FileName, _Encoding, _FPS, AFormat) then
   begin
+    // Dolby Vision XML: the entries are in record time, the video starts at
+    // the first shot (it can be changed in Video > Dolby Vision metadata)
+    if DoViIsEditable(Subtitles) and (Subtitles.Count > 0) then
+      MPVSetVideoOffset(Subtitles[0].InitialTime);
     if Subtitles.Format <> sfTeroSubtitler then
       LoadNotesFile(FileName);
     frmMain.VST.RootNodeCount := Subtitles.Count;

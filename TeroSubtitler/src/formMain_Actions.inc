@@ -663,7 +663,7 @@ begin
   if not (MPV.GetMediaLenInMs > 0) then Exit;
   with SubtitleInfo.LastSubtitle do
   begin
-    InitialTime := MPV.GetMediaPosInMs;
+    InitialTime := MPVGetEntryPosInMs;
     SetStatusBarText(Format(lngEntryStartedAt, [GetTimeStr(InitialTime, True)]));
   end;
 end;
@@ -678,7 +678,7 @@ begin
 
   with SubtitleInfo.LastSubtitle do
   begin
-    l := MPV.GetMediaPosInMs;
+    l := MPVGetEntryPosInMs;
     i := Subtitles.FindInsertPos(InitialTime, l);
 
     if l < InitialTime then
@@ -1534,7 +1534,7 @@ begin
   if (Workspace.ViewMode = vmTranscription) and (MPV.GetMediaLenInMs > 0) and
     Assigned(Workspace.Transcription.Memo) then
   begin
-    Workspace.Transcription.Memo.TextInsertAtCarets(' ('+GetTimeStr(MPV.GetMediaPosInMs)+') ', False, False, False);
+    Workspace.Transcription.Memo.TextInsertAtCarets(' ('+GetTimeStr(MPVGetEntryPosInMs)+') ', False, False, False);
   end;
 end;
 

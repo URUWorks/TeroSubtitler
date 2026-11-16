@@ -84,7 +84,7 @@ implementation
 
 uses procWorkspace, procUndo, procSubtitle, Clipbrd, RegExpr, UWSubtitles.Utils,
   UWSubtitleAPI, UWSystem.SysUtils, UWSystem.StrUtils, formMain, Math, lazUTF8,
-  UWSubtitleAPI.Tags, formFindAndReplace;
+  UWSubtitleAPI.Tags, formFindAndReplace, procMPV;
 
 // -----------------------------------------------------------------------------
 
@@ -1261,7 +1261,7 @@ begin
   Run := AVST.GetFirstSelected;
   if Assigned(Run) then
   begin
-    Delay := frmMain.MPV.GetMediaPosInMs - Subtitles.ItemPointer[Run^.Index]^.InitialTime;
+    Delay := MPVGetEntryPosInMs - Subtitles.ItemPointer[Run^.Index]^.InitialTime;
     while Assigned(Run) do
     begin
       Item := Subtitles.ItemPointer[Run^.Index];

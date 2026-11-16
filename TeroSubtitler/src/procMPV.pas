@@ -52,6 +52,16 @@ procedure MPVAutoCrop(const AValue: Boolean);
 procedure MPVShowVideoInformation;
 function MPVHasAudioTrack: Boolean;
 
+// Video offset (Media > Video offset): the time of the first frame of the
+// video. The entries, the timeline and the time shown are in entry time
+// (video time + offset); mpv always plays video time
+function EntryToVideoMS(const AEntryMS: Integer): Integer;
+function VideoToEntryMS(const AVideoMS: Integer): Integer;
+function MPVGetEntryPosInMs: Integer;
+procedure MPVSeekToEntryTime(const AEntryMS: Integer; const AEndEntryMS: Integer = 0; const APlay: Boolean = False);
+procedure MPVSetVideoOffset(const AValue: Integer);
+procedure MPVApplySubtitleDelay;
+
 // -----------------------------------------------------------------------------
 
 implementation
@@ -231,7 +241,7 @@ procedure MPVPlaySelectionOnly;
 begin
   with frmMain do
     if WAVE.IsTimeLineEnabled and (not WAVE.SelectionIsEmpty) then
-      MPV.Loop(WAVE.Selection.InitialTime, WAVE.Selection.FinalTime, WAVEOptions.LoopCount);
+      MPV.Loop(EntryToVideoMS(WAVE.Selection.InitialTime), EntryToVideoMS(WAVE.Selection.FinalTime), WAVEOptions.LoopCount);
 end;
 
 // -----------------------------------------------------------------------------
@@ -241,9 +251,9 @@ begin
   with frmMain do
     if WAVE.IsTimeLineEnabled and (not WAVE.SelectionIsEmpty) then
       if FromInitialTime then
-        MPVSeekTo(WAVE.Selection.InitialTime + Value, True)
+        MPVSeekTo(EntryToVideoMS(WAVE.Selection.InitialTime + Value), True)
       else
-        MPVSeekTo(WAVE.Selection.FinalTime + Value, True);
+        MPVSeekTo(EntryToVideoMS(WAVE.Selection.FinalTime + Value), True);
 end;
 
 // -----------------------------------------------------------------------------
@@ -292,6 +302,83 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function EntryToVideoMS(const AEntryMS: Integer): Integer;
+begin
+  Result := AEntryMS - Workspace.VideoOffset;
+  if Result < 0 then Result := 0;
+end;
+
+// -----------------------------------------------------------------------------
+
+function VideoToEntryMS(const AVideoMS: Integer): Integer;
+begin
+  Result := AVideoMS + Workspace.VideoOffset;
+end;
+
+// -----------------------------------------------------------------------------
+
+function MPVGetEntryPosInMs: Integer;
+begin
+  Result := VideoToEntryMS(frmMain.MPV.GetMediaPosInMs);
+end;
+
+// -----------------------------------------------------------------------------
+
+// seeks the video to an entry time (and pauses at AEndEntryMS if > 0)
+procedure MPVSeekToEntryTime(const AEntryMS: Integer; const AEndEntryMS: Integer = 0; const APlay: Boolean = False);
+begin
+  with frmMain do
+  begin
+    MPV.SetMediaPosInMs(EntryToVideoMS(AEntryMS));
+    // EndTime is compared with the player position: video time
+    if AEndEntryMS > 0 then
+      MPVOptions.EndTime := EntryToVideoMS(AEndEntryMS)
+    else
+      MPVOptions.EndTime := 0;
+
+    if APlay and not MPV.IsPlaying then
+      MPV.Resume(True);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// mpv draws the subtitle track at entry time - offset
+procedure MPVApplySubtitleDelay;
+var
+  fs: TFormatSettings;
+begin
+  fs := DefaultFormatSettings;
+  fs.DecimalSeparator := '.';
+  with frmMain do
+    if MPV.Initialized then
+      MPV.mpv_set_option_string_('sub-delay=' + FormatFloat('0.000', -Workspace.VideoOffset / 1000, fs));
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MPVSetVideoOffset(const AValue: Integer);
+begin
+  if AValue = Workspace.VideoOffset then Exit;
+
+  Workspace.VideoOffset := AValue;
+  MPVApplySubtitleDelay;
+  with frmMain do
+  begin
+    // the timeline is in entry time: its scene changes are moved too
+    WAVE.OffsetMs := AValue;
+    if MPV.Initialized then
+    begin
+      lblMediaTime.Caption := GetTimeStr(MPVGetEntryPosInMs);
+      if WAVE.IsTimeLineEnabled then
+        WAVE.SetPlayCursorMS(MPVGetEntryPosInMs);
+    end;
+  end;
+  UpdateVideoLengthString;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure MPVSeekTo(const Value: Integer; const Play: Boolean = False);
 begin
   with frmMain do
@@ -318,6 +405,7 @@ end;
 procedure MPVLoadSubtitleTempTrack;
 begin
   frmMain.MPV.LoadTrack(ttSubtitle, MPVTempSubFileName);
+  MPVApplySubtitleDelay;
 end;
 
 // -----------------------------------------------------------------------------

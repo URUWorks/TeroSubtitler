@@ -218,7 +218,7 @@ procedure CopyCurrentVideoPosToClipboard;
 begin
   with frmMain.MPV do
     if IsMediaLoaded then
-      Clipboard.AsText := GetTimeStr(GetMediaPosInMs);
+      Clipboard.AsText := GetTimeStr(VideoToEntryMS(GetMediaPosInMs));
 end;
 
 // -----------------------------------------------------------------------------
@@ -1023,11 +1023,7 @@ begin
 
     if x >= 0 then
     begin
-      MPV.SetMediaPosInMs(Subtitles[x].InitialTime);
-      MPVOptions.EndTime := Subtitles[x].FinalTime;
-
-      if not MPV.IsPlaying then
-        MPV.Resume(True);
+      MPVSeekToEntryTime(Subtitles[x].InitialTime, Subtitles[x].FinalTime, True);
     end;
   end;
 end;
@@ -1049,7 +1045,7 @@ begin
       else
         t := Subtitles[x].FinalTime;
 
-      MPV.SetMediaPosInMs(t);
+      MPV.SetMediaPosInMs(EntryToVideoMS(t));
     end;
   end;
 end;
@@ -1066,11 +1062,7 @@ begin
 
     if x >= 0 then
     begin
-      MPV.SetMediaPosInMs(Subtitles[x].InitialTime);
-      MPVOptions.EndTime := Subtitles[x].FinalTime;
-
-      if not MPV.IsPlaying then
-        MPV.Resume(True);
+      MPVSeekToEntryTime(Subtitles[x].InitialTime, Subtitles[x].FinalTime, True);
     end;
   end;
 end;

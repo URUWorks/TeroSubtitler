@@ -72,7 +72,7 @@ implementation
 
 uses
   StrUtils, formMain, procUndo, procSubtitle, procWorkspace, procFixSubtitles,
-  UWSubtitleAPI.Tags, UWSubtitles.Utils, UWSystem.TimeUtils, UWSystem.StrUtils, procConventions;
+  UWSubtitleAPI.Tags, UWSubtitles.Utils, UWSystem.TimeUtils, UWSystem.StrUtils, procConventions, procMPV;
 
 // -----------------------------------------------------------------------------
 
@@ -332,7 +332,7 @@ end;
 procedure ApplySetTimeInitialFromMPV(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with frmMain do
-    SetSubtitleTime(Index, MPV.GetMediaPosInMs, tedInitial.Tag);
+    SetSubtitleTime(Index, MPVGetEntryPosInMs, tedInitial.Tag);
 end;
 
 // -----------------------------------------------------------------------------
@@ -340,7 +340,7 @@ end;
 procedure ApplySetTimeFinalFromMPV(const Item: PUWSubtitleItem; const Index: Integer);
 begin
   with frmMain do
-    SetSubtitleTime(Index, MPV.GetMediaPosInMs, tedFinal.Tag);
+    SetSubtitleTime(Index, MPVGetEntryPosInMs, tedFinal.Tag);
 end;
 
 // -----------------------------------------------------------------------------

@@ -63,7 +63,7 @@ implementation
 
 uses
   procVST, procWorkspace, procSubtitle, procColorTheme, procTypes, formMain,
-  UWSubtitles.Utils, UWSubtitleAPI;
+  UWSubtitles.Utils, UWSubtitleAPI, procMPV;
 
 {$R *.lfm}
 
@@ -97,7 +97,7 @@ begin
     else
       v := -tedOffset.Value;
   end;
-  ShiftTimeRelative(Item^.InitialTime, Item^.FinalTime, v, frmMain.MPV.GetMediaPosInMs, it, ft);
+  ShiftTimeRelative(Item^.InitialTime, Item^.FinalTime, v, MPVGetEntryPosInMs, it, ft);
   SetSubtitleTimes(Index, it, ft, False, False);
 end;
 

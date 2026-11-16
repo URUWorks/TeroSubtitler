@@ -73,11 +73,12 @@ begin
 
         SetLength(FSceneChangeList, s.Count);
 
+        // the file is in video time, the timeline in entry time (+ offset)
         for i := 0 to s.Count-1 do
           if not isSmpte then
-            FSceneChangeList[i] := StrToIntDef(s[i], 0)
+            FSceneChangeList[i] := StrToIntDef(s[i], 0) + FOffsetMs
           else
-            FSceneChangeList[i] := Round(StrToIntDef(s[i], 0) * 1.001);
+            FSceneChangeList[i] := Round(StrToIntDef(s[i], 0) * 1.001) + FOffsetMs;
 
         SetSceneChangeEnabled(FSceneChangeEnabled);
         DoSceneChangeListChange;
@@ -102,7 +103,7 @@ begin
     s.BeginUpdate;
     try
       for i := Low(FSceneChangeList) to High(FSceneChangeList) do
-        s.Add(FSceneChangeList[i].ToString);
+        s.Add((FSceneChangeList[i] - FOffsetMs).ToString);
 
       s.SaveToFile(AFileName);
     finally

@@ -199,7 +199,7 @@ function TfrmDolbyVision.CurrentVideoFrame: Integer;
 begin
   // the frame on screen, in record frames
   if frmMain.MPV.IsMediaLoaded then
-    Result := DoViRecordFrame(Subtitles, frmMain.MPV.GetMediaPosInMs + Workspace.VideoOffset)
+    Result := DoViRecordFrame(Subtitles, MPVGetEntryPosInMs)
   else
     Result := Subtitles.SourceOrigin;
 end;
@@ -276,7 +276,7 @@ procedure TfrmDolbyVision.GoToFrame(const AFrame: Integer; const AIndex: Integer
 begin
   // +1 ms: inside of the frame, never at the end of the previous one
   if frmMain.MPV.IsMediaLoaded then
-    MPVSeekTo(DoViRecordToMS(Subtitles, AFrame) - Workspace.VideoOffset + 1);
+    MPVSeekTo(EntryToVideoMS(DoViRecordToMS(Subtitles, AFrame) + 1));
   if Subtitles.ValidIndex(AIndex) then
     VSTSelectNode(frmMain.VST, AIndex, True, True);
 end;
@@ -298,13 +298,8 @@ begin
   end;
 
   NewOffset := DoViRecordToMS(Subtitles, NewFrame);
-  if NewOffset <> Workspace.VideoOffset then
-  begin
-    Workspace.VideoOffset := NewOffset;
-    frmMain.lblMediaTime.Caption := GetTimeStr(frmMain.MPV.GetMediaPosInMs + Workspace.VideoOffset);
-    frmMain.WAVE.OffsetMs := Workspace.VideoOffset;
-    UpdateVideoLengthString;
-  end;
+  // also moves the timeline (and its shot changes) and the subtitles of mpv
+  MPVSetVideoOffset(NewOffset);
   UpdateInfo;
 end;
 

@@ -38,6 +38,7 @@ type
     FFileName  : String;
     FTimes     : TIntegerDynArray; // snapshot of the scene changes (main thread)
     FOffsetMS  : Integer;
+    FVideoOffset : Integer; // the times are entry times: video time + this
     FTempDir   : String;
     FOnReady   : TThumbnailReadyEvent;
     FCurTime   : Integer;
@@ -47,7 +48,7 @@ type
   protected
     procedure Execute; override;
   public
-    constructor Create(const AVideoFile: String; const ATimes: TIntegerDynArray; const AFPS: Single; AOnReady: TThumbnailReadyEvent; AOnTerminate: TNotifyEvent = NIL);
+    constructor Create(const AVideoFile: String; const ATimes: TIntegerDynArray; const AFPS: Single; AOnReady: TThumbnailReadyEvent; AOnTerminate: TNotifyEvent = NIL; const AVideoOffset: Integer = 0);
     property TempDir: String read FTempDir write FTempDir;
   end;
 
@@ -81,7 +82,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-constructor TGenerateThumbnails.Create(const AVideoFile: String; const ATimes: TIntegerDynArray; const AFPS: Single; AOnReady: TThumbnailReadyEvent; AOnTerminate: TNotifyEvent = NIL);
+constructor TGenerateThumbnails.Create(const AVideoFile: String; const ATimes: TIntegerDynArray; const AFPS: Single; AOnReady: TThumbnailReadyEvent; AOnTerminate: TNotifyEvent = NIL; const AVideoOffset: Integer = 0);
 var
   i: Integer;
 begin
@@ -98,6 +99,8 @@ begin
     FOffsetMS := Round(500 / AFPS)
   else
     FOffsetMS := 0;
+
+  FVideoOffset := AVideoOffset;
 
   // the thread must not read the scene change list while the user edits it,
   // so copy the times it needs now, from the main thread
@@ -156,12 +159,12 @@ begin
         // with the display aspect ratio, anamorphic videos looked distorted).
         // They are always of the full frame: the Auto-crop of the player
         // doesn't change them.
-        s := ConcatPaths([FTempDir, FTimes[i].ToString + 'd.bmp']);
+        s := ConcatPaths([FTempDir, (FTimes[i] - FVideoOffset).ToString + 'd.bmp']);
         // ffmpeg writes to a temporary name that is renamed when it ends well:
         // a ffmpeg killed when the thread is cancelled (another video, the
         // scene changes edited, Auto-crop...) used to leave a cut .bmp in the
         // cache, loaded as a valid thumbnail afterwards
-        tmp := ConcatPaths([FTempDir, FTimes[i].ToString + 'd_part.bmp']);
+        tmp := ConcatPaths([FTempDir, (FTimes[i] - FVideoOffset).ToString + 'd_part.bmp']);
 
         if not FileExists(s) then
         begin
@@ -169,7 +172,7 @@ begin
           for x := 0 to High(AParamArray) do
           begin
             if AParamArray[x] = '%timestr' then
-              AProcess.Parameters.Add(Max(FTimes[i] + FOffsetMS, 0).ToString + 'ms')
+              AProcess.Parameters.Add(Max(FTimes[i] - FVideoOffset + FOffsetMS, 0).ToString + 'ms')
             else if AParamArray[x].Contains('%input') then
               AProcess.Parameters.Add(FFileName)
             else if AParamArray[x].Contains('%output') then

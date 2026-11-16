@@ -73,8 +73,9 @@ begin
       Rms := Sqrt(Sum / j);
       if (AFindSilent and (Rms < Threshold)) or (not AFindSilent and (Rms > Threshold)) then
       begin
-        Start := Round((i - j) * PeakLen * 1000.0);
-        Stop  := Round(i * PeakLen * 1000.0);
+        // in timeline (entry) time: audio time + video offset
+        Start := Round((i - j) * PeakLen * 1000.0) + FOffsetMs;
+        Stop  := Round(i * PeakLen * 1000.0) + FOffsetMs;
 
         if Assigned(ZoneRange) then
         begin
