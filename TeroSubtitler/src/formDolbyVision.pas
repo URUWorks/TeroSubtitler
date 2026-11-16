@@ -222,7 +222,8 @@ begin
     lblInfo.Caption := Format(lngDoViInfo, [Subtitles.Count, IntToStr(FNum), TC(a), TC(d)])
   else
     lblInfo.Caption := Format(lngDoViInfo, [Subtitles.Count, Format('%d/%d', [FNum, FDen]), TC(a), TC(d)]);
-  edtOrigin.Text := TC(Subtitles.SourceOrigin);
+  // the video offset, as a record timecode
+  edtOrigin.Text := TC(DoViRecordFrame(Subtitles, Workspace.VideoOffset));
 end;
 
 // -----------------------------------------------------------------------------
@@ -284,42 +285,27 @@ end;
 
 procedure TfrmDolbyVision.btnApplyOriginClick(Sender: TObject);
 var
-  NewOrigin, i, a, b: Integer;
-  Frames: array of array[0..1] of Integer;
+  NewFrame, NewOffset: Integer;
 begin
-  // the record timecode of the first frame of the video: the entries move, the
-  // record frames of the shots stay the same (only how they are shown)
+  // the record timecode of the first frame of the video: it is the video
+  // offset (Video > Video offset), the shots don't move. E.g. 00:59:58:00 for
+  // a ProRes that starts at the first shot of 86352.
   if not Ready then Exit;
-  if not DoViTCToFrames(edtOrigin.Text, FNum, FDen, NewOrigin) then
+  if not DoViTCToFrames(edtOrigin.Text, FNum, FDen, NewFrame) then
   begin
     ShowErrorMessageDialog(lngDoViBadTimecode);
     Exit;
   end;
-  if NewOrigin = Subtitles.SourceOrigin then Exit;
 
-  Frames := NIL;
-  SetLength(Frames, Subtitles.Count);
-  for i := 0 to Subtitles.Count-1 do
+  NewOffset := DoViRecordToMS(Subtitles, NewFrame);
+  if NewOffset <> Workspace.VideoOffset then
   begin
-    DoViEntryFrames(Subtitles, i, a, b);
-    Frames[i][0] := a;
-    Frames[i][1] := b;
+    Workspace.VideoOffset := NewOffset;
+    frmMain.lblMediaTime.Caption := GetTimeStr(frmMain.MPV.GetMediaPosInMs + Workspace.VideoOffset);
+    frmMain.WAVE.OffsetMs := Workspace.VideoOffset;
+    UpdateVideoLengthString;
   end;
-
-  Subtitles.SourceOrigin := NewOrigin;
-  for i := 0 to Subtitles.Count-1 do
-  begin
-    Subtitles.ItemPointer[i]^.InitialTime := DoViRecordToMS(Subtitles, Frames[i][0]);
-    Subtitles.ItemPointer[i]^.FinalTime   := DoViRecordToMS(Subtitles, Frames[i][1]);
-  end;
-
-  // the undo items have the times of the old origin
-  UndoInstance.Clear;
-  SubtitleChanged(True, True);
-  UpdateValues(True);
-  frmMain.WAVE.DoUpdate;
   UpdateInfo;
-  ShowMessageDialog(lngDoViOriginChanged);
 end;
 
 // -----------------------------------------------------------------------------
