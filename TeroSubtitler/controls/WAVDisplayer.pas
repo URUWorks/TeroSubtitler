@@ -146,6 +146,7 @@ type
 
     FLengthMS      : Integer;
     FMediaLengthMS : Integer; // real media/audio length, FLengthMS can be longer to reach the last subtitle
+    FVideoLengthMS : Integer; // length of the video in the player, can be longer than its audio/wave
     FPositionMS    : Integer;
     FPageSizeMS    : Integer;
 
@@ -267,6 +268,7 @@ type
     procedure ApplyLengthMS(const NewLengthMS: Integer);
     function GetSubtitlesEndMS: Integer;
     procedure UpdateLengthMS;
+    procedure SetVideoLengthMS(const AValue: Integer);
     procedure SetPositionMS(NewPosition: Integer);
     procedure OnScrollBarChange(Sender: TObject);
     function GetPositionMS: Integer;
@@ -398,6 +400,7 @@ type
     property FPSTimeMode                   : Boolean                      read FFPSTimeMode                  write FFPSTimeMode;
     property CursorPosMS                   : Integer                      read FCursorMS;
     property OffsetMs                      : Integer                      read FOffsetMs                     write SetOffset;
+    property VideoLengthMS                 : Integer                      read FVideoLengthMS                write SetVideoLengthMS;
     property CenterPlayCursor              : Boolean                      read FCenterPlay                   write FCenterPlay;
     property SceneChangeEnabled            : Boolean                      read FSceneChangeEnabled           write SetSceneChangeEnabled;
     property DrawGAP                       : Boolean                      read FDrawGAP                      write FDrawGAP;
@@ -537,6 +540,7 @@ begin
 
   FLengthMS        := 0;
   FMediaLengthMS   := 0;
+  FVideoLengthMS   := 0;
   FPositionMS      := 0;
   FPageSizeMS      := DefaultPageSizeMS;
   FPeakDataLoaded  := False;
@@ -2143,6 +2147,7 @@ begin
   FPlayCursorMS          := 0;
   FLengthMS              := 0;
   FMediaLengthMS         := 0;
+  FVideoLengthMS         := 0;
   FDynamicSelValueMs     := -1;
   FOldInitialTime        := -1;
   FOldFinalTime          := -1;
@@ -2353,13 +2358,14 @@ end;
 
 //------------------------------------------------------------------------------
 
-// The timeline length is the media length, extended when there are subtitles
-// after the end of the media: otherwise the last entries can't be reached
+// The timeline length is the media length (the longest of the wave and the
+// video, its audio can end before), extended when there are subtitles after
+// the end of the media: otherwise the last entries can't be reached
 procedure TUWWaveformDisplayer.UpdateLengthMS;
 const
   EndMarginMS = 5000;
 var
-  SubsEndMS: Integer;
+  MediaEndMS, SubsEndMS: Integer;
 begin
   // without media the timeline stays disabled
   if FMediaLengthMS <= 0 then
@@ -2368,11 +2374,25 @@ begin
     Exit;
   end;
 
-  SubsEndMS := GetSubtitlesEndMS;
-  if SubsEndMS > FMediaLengthMS then
+  MediaEndMS := Max(FMediaLengthMS, FVideoLengthMS);
+  SubsEndMS  := GetSubtitlesEndMS;
+  if SubsEndMS + EndMarginMS > MediaEndMS then
     ApplyLengthMS(SubsEndMS + EndMarginMS)
   else
-    ApplyLengthMS(FMediaLengthMS);
+    ApplyLengthMS(MediaEndMS);
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.SetVideoLengthMS(const AValue: Integer);
+begin
+  if FVideoLengthMS = AValue then Exit;
+  FVideoLengthMS := AValue;
+  if FMediaLengthMS > 0 then
+  begin
+    UpdateLengthMS;
+    UpdateView([uvfPageSize]);
+  end;
 end;
 
 //------------------------------------------------------------------------------

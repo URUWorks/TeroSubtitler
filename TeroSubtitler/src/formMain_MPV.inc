@@ -138,6 +138,8 @@ begin
   SubtitleInfo.LastSubtitle.ShowIndex := 0;
   sbrSeek.Max := MPV.GetMediaLenInMs;
   sbrSeek.Enabled := True;
+  // the timeline must reach the end of the video, its audio can end before
+  WAVE.VideoLengthMS := MPV.GetMediaLenInMs;
 
   if Assigned(frmVideo) then
     frmVideo.Caption := MPVMediaName;
