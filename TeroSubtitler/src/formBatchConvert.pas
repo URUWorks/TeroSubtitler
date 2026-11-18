@@ -104,7 +104,7 @@ implementation
 uses
   UWSystem.SysUtils, UWSubtitleAPI, UWSubtitleAPI.Formats, procVST, procTypes,
   RegExpr, procWorkspace, procColorTheme, procDialogs, UWSystem.FileUtils,
-  UWSystem.Encoding, formMain;
+  UWSystem.Encoding, UWSystem.TimeUtils, Math, formMain;
 
 {$R *.lfm}
 
@@ -123,8 +123,10 @@ begin
   cboToFPS.Items.Assign(cboFromFPS.Items);
 
   cboFormat.ItemIndex := Integer(sfSubRip)-1;
-  cboFromFPS.ItemIndex  := cboFromFPS.Items.IndexOf(SingleToStr(GetInputFPS, FormatSettings));
-  cboToFPS.ItemIndex    := cboToFPS.Items.IndexOf(SingleToStr(GetFPS, FormatSettings));
+  // the items are the ones of DefFPSList, in the same order (as the main
+  // window FPS combos), so the indexes can be shared
+  cboFromFPS.ItemIndex  := frmMain.cboInputFPS.ItemIndex;
+  cboToFPS.ItemIndex    := frmMain.cboFPS.ItemIndex;
   cboEncoding.ItemIndex := Workspace.DefEncoding;
 
   VSTAddColumn(VST, lngbcFileName, 150);
@@ -366,8 +368,10 @@ end;
 
 procedure TfrmBatchConvert.btnApplyClick(Sender: TObject);
 var
-  i: Integer;
+  i, x: Integer;
   SubtitleAPI: TUWSubtitles;
+  InFPS, OutFPS: TFPSInfo;
+  InRate, OutRate: Double;
 begin
   if edtFolder.Text = '' then
   begin
@@ -386,6 +390,22 @@ begin
     if MsgFolderNotEmpty = mrNo then
       Exit;
 
+  // the frame rate the files were made for and the one to convert them to,
+  // like the input and output FPS of the main window: the frame numbers are
+  // kept, so the times change (e.g. 23.976 -> 25 is the PAL speed-up)
+  if cboFromFPS.ItemIndex >= 0 then
+    InFPS := DefFPSList[cboFromFPS.ItemIndex]
+  else
+    InFPS := Workspace.FPS.InputFPS;
+
+  if cboToFPS.ItemIndex >= 0 then
+    OutFPS := DefFPSList[cboToFPS.ItemIndex]
+  else
+    OutFPS := Workspace.FPS.OutputFPS;
+
+  InRate  := GetFPS(InFPS);
+  OutRate := GetFPS(OutFPS);
+
   prbProgress.Position := 0;
   prbProgress.Max := FList.Count-1;
 
@@ -396,9 +416,17 @@ begin
   try
     for i := 0 to FList.Count-1 do
     begin
-      if  SubtitleAPI.LoadFromFile(FList[i]^.FileName, NIL, Workspace.FPS.OutputFPS) then
+      if SubtitleAPI.LoadFromFile(FList[i]^.FileName, NIL, InFPS) then
       begin
-        if SubtitleAPI.SaveToFile(ConcatPaths([edtFolder.Text, ExtractFileName(FList[i]^.FileName)]), Workspace.FPS.OutputFPS,
+        if not SameValue(InRate, OutRate) then
+          for x := 0 to SubtitleAPI.Count-1 do
+            with SubtitleAPI.ItemPointer[x]^ do
+            begin
+              InitialTime := FramesToTime(TimeToFrames(InitialTime, InRate), OutRate);
+              FinalTime   := FramesToTime(TimeToFrames(FinalTime, InRate), OutRate);
+            end;
+
+        if SubtitleAPI.SaveToFile(ConcatPaths([edtFolder.Text, ExtractFileName(FList[i]^.FileName)]), OutFPS,
           GetCachedEncoding(Encodings[cboEncoding.ItemIndex].CPID), TUWSubtitleFormats(cboFormat.ItemIndex+1), smText, -1, -1, True) then
         begin
           FList[i]^.Success := True;
