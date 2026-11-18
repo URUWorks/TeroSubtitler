@@ -37,7 +37,7 @@ interface
 
 uses
   Classes, Types, SysUtils, Controls, Graphics, Math, LazarusPackageIntf,
-  LResources, UWSystem.TimeUtils,
+  LResources, ExtCtrls, UWSystem.TimeUtils,
   WAVDisplayer.WaveFile, WAVDisplayer.ScrollBar,
   UWSubtitleAPI, UWSubtitleAPI.Tags
   {$IFDEF USEBGRABITMAP}
@@ -222,6 +222,14 @@ type
 
     FScrollBar : TUWScrollBar;
 
+    // scrolls the view while dragging an entry/edge/selection outside it
+    FAutoScrollTimer : TTimer;
+    FLastMoveX       : Integer;
+    FLastMoveY       : Integer;
+    FLastMoveShift   : TShiftState;
+    FMouseDownPixelX : Integer;
+    FDragMoved       : Boolean;
+
     FTS : TTextStyle;
     FEmptyText : String;
 
@@ -271,6 +279,9 @@ type
     procedure SetVideoLengthMS(const AValue: Integer);
     procedure SetPositionMS(NewPosition: Integer);
     procedure OnScrollBarChange(Sender: TObject);
+    procedure OnAutoScrollTimer(Sender: TObject);
+    procedure CheckAutoScroll;
+    procedure StopAutoScroll;
     function GetPositionMS: Integer;
     procedure UpdateView(const UpdateViewFlags: TUpdateViewFlags; const DoRepaint: Boolean = True);
     procedure ZoomSubtitle(const Subtitle: TUWSubtitleItem); overload;
@@ -336,6 +347,7 @@ type
     function SelectionIsEmpty: Boolean;
     procedure ClearSelection;
     function IsTimeLineEnabled: Boolean;
+    function IsTimeInView(const ATimeMS: Integer): Boolean;
     function GetPlayCursorMS: Integer;
     procedure SetPlayCursorMS(NewPosMS: Integer; const ABothCursor: Boolean = False);
     procedure SetCursorMS(NewPosMS: Integer; const AUpdate: Boolean = False);
@@ -440,6 +452,7 @@ type
     property Visible;
     property OnClick; // only if not wav is loaded
     property OnContextPopup;
+    property OnKeyDown;
   end;
 
 procedure Register;
@@ -611,6 +624,16 @@ begin
   FScrollBar.PageSize := FLengthMs;
   FScrollBar.OnChange := @OnScrollBarChange;
 
+  FAutoScrollTimer          := TTimer.Create(Self);
+  FAutoScrollTimer.Enabled  := False;
+  FAutoScrollTimer.Interval := 40;
+  FAutoScrollTimer.OnTimer  := @OnAutoScrollTimer;
+  FLastMoveX       := 0;
+  FLastMoveY       := 0;
+  FLastMoveShift   := [];
+  FMouseDownPixelX := 0;
+  FDragMoved       := False;
+
   FillByte(FTS, SizeOf(FTS), 0);
   FTS.Clipping    := True;
   FTS.SingleLine  := False;
@@ -678,6 +701,9 @@ begin
   FSubtitles        := NIL;
 
   ClearZoneList(FSilentZones);
+
+  FAutoScrollTimer.Enabled := False;
+  FAutoScrollTimer.OnTimer := NIL;
 
   ClearThumbCache;
   {$IFDEF USEBGRABITMAP}
@@ -1372,13 +1398,25 @@ begin
       SetMinBlankAt(FSelectedSubtitle^.InitialTime);
     end;
 
-    if UpdatePosition and (Value <> NIL) then
-      SetPositionMS(Value^.InitialTime);
-
     if UpdateDisplay and not UpdatePosition then
       UpdateView([uvfSelection, uvfSubtitle]);
 
     if Assigned(FOnSelectionChange) then FOnSelectionChange(Self);
+  end;
+
+  // (also when it was already selected, e.g. a double click in the list)
+  if UpdatePosition and (Value <> NIL) then
+  begin
+    // the start of the entry at the left edge made it awkward to edit it:
+    // center the entry when it fits in the view, otherwise leave 1/8 of
+    // the view before its start (like when following the play cursor)
+    if (Value^.FinalTime - Value^.InitialTime) <= (FPageSizeMS * 3 div 4) then
+      SetPositionMS(((Value^.InitialTime + Value^.FinalTime) div 2) - (FPageSizeMS div 2))
+    else
+      SetPositionMS(Value^.InitialTime - (FPageSizeMS div 8));
+    // SetPositionMS doesn't redraw when the position doesn't change
+    if UpdateDisplay then
+      UpdateView([uvfSelection, uvfSubtitle]);
   end;
 end;
 
@@ -1473,6 +1511,13 @@ begin
   FNextSubIdx := -1;
   UpdateFlags  := [];
 
+  // take the keyboard focus, so the keys (arrows...) work in the timeline
+  if not Focused and CanFocus then
+  try
+    SetFocus;
+  except
+  end;
+
   if (ssDouble in Shift) then
     FDblClickOnTimeLine := IsTimeLineClicked(Y);
 
@@ -1486,10 +1531,26 @@ begin
     Exit;
   end;
 
+  // right click on an entry not selected: select it, so the actions of the
+  // context menu (combine, extend, delete...) work on the entry clicked
+  if (Button = mbRight) then
+  begin
+    SubAtPos := SubtitleAtPos(X, Y);
+    if Assigned(SubAtPos) and (SubAtPos <> FSelectedSubtitle) and not IsMultiSelected(SubAtPos) then
+    begin
+      SetSelectedSubtitleItem(SubAtPos, True, False);
+      if Assigned(FOnSelectedSubtitleItem) then
+        FOnSelectedSubtitleItem(Self, FSubtitles.IndexOf(FSelectedSubtitle), FSelectedSubtitle^, False);
+    end;
+    Exit;
+  end;
+
   if (ssLeft in Shift) and not (ssCtrl in Shift) and not (MultiSelectKey in Shift) then
   begin
     FMouseIsDown   := True;
     FOldMouseDownX := PixelToTime(X) + FPositionMS;
+    FMouseDownPixelX := X;
+    FDragMoved       := False;
 
     // Re-adjust mouse cursor position
     if (FDynamicEditMode <> demNone) then
@@ -1738,6 +1799,13 @@ begin
   begin
     if (ssLeft in Shift) then
     begin
+      // (the auto scroll repeats this move with the same mouse position)
+      FLastMoveX     := X;
+      FLastMoveY     := Y;
+      FLastMoveShift := Shift;
+      if Abs(X - FMouseDownPixelX) > 3 then FDragMoved := True;
+      CheckAutoScroll;
+
       Constrain(X, 0, Width);
       ACursorPosMS := PixelToTime(X) + FPositionMS;
 
@@ -1948,6 +2016,8 @@ var
   WasNoneEditMode : Boolean;
 begin
   inherited;
+
+  StopAutoScroll;
 
   if (FMouseIsDown) then
   begin
@@ -2422,6 +2492,72 @@ end;
 
 //------------------------------------------------------------------------------
 
+const
+  AutoScrollEdge = 8; // px from the edges where the view starts to scroll
+
+procedure TUWWaveformDisplayer.CheckAutoScroll;
+begin
+  // dragging (an entry, one of its edges or a selection) to the left/right
+  // edge of the view, or beyond it: scroll the view while the mouse is there
+  if FMouseIsDown and FDragMoved and (FDynamicSelValueMs <> -1) and
+    ((FLastMoveX < AutoScrollEdge) or (FLastMoveX > Width - AutoScrollEdge)) then
+  begin
+    if not FAutoScrollTimer.Enabled then
+      FAutoScrollTimer.Enabled := True;
+  end
+  else
+    StopAutoScroll;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.StopAutoScroll;
+begin
+  if FAutoScrollTimer.Enabled then
+    FAutoScrollTimer.Enabled := False;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.OnAutoScrollTimer(Sender: TObject);
+var
+  Dist, Step, OldPos: Integer;
+begin
+  if not FMouseIsDown or not IsTimeLineEnabled then
+  begin
+    StopAutoScroll;
+    Exit;
+  end;
+
+  // faster the further the mouse is outside the view
+  if FLastMoveX < AutoScrollEdge then
+    Dist := AutoScrollEdge - FLastMoveX
+  else
+    Dist := FLastMoveX - (Width - AutoScrollEdge);
+  if Dist <= 0 then
+  begin
+    StopAutoScroll;
+    Exit;
+  end;
+
+  Step := Max(1, FPageSizeMS div 40) * (1 + Min(Dist, 200) div 25);
+  if FLastMoveX < AutoScrollEdge then Step := -Step;
+
+  OldPos := FPositionMS;
+  SetPositionMS(FPositionMS + Step);
+  if FPositionMS = OldPos then
+  begin
+    // start/end of the media reached
+    StopAutoScroll;
+    Exit;
+  end;
+
+  // move the entry/edge/selection with the view, as if the mouse moved
+  MouseMove(FLastMoveShift, FLastMoveX, FLastMoveY);
+end;
+
+//------------------------------------------------------------------------------
+
 // Called only internally when the scroll bar change
 function TUWWaveformDisplayer.GetPositionMS: Integer;
 begin
@@ -2722,6 +2858,13 @@ begin
     else
       DoUpdate;
   end;
+end;
+
+//------------------------------------------------------------------------------
+
+function TUWWaveformDisplayer.IsTimeInView(const ATimeMS: Integer): Boolean;
+begin
+  Result := (ATimeMS >= FPositionMS) and (ATimeMS <= FPositionMS + FPageSizeMS);
 end;
 
 //------------------------------------------------------------------------------

@@ -130,8 +130,20 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.WAVESelectedSubtitleItemChange(Sender: TObject);
+var
+  Idx: Integer;
 begin
-  UpdateValuesForSubtitle(VSTFocusedNode(VST));
+  // while dragging an entry (or one of its edges) in the timeline: update
+  // the times, the CPS and the entry in the list right away, not only when
+  // the mouse button is released
+  Idx := VSTFocusedNode(VST);
+  UpdateValuesForSubtitle(Idx);
+  if Subtitles.ValidIndex(Idx) then
+  begin
+    UpdateCPSAndTexts(Idx);
+    if Assigned(VST.FocusedNode) then
+      VST.InvalidateNode(VST.FocusedNode);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -424,6 +436,47 @@ begin
   if t < 0 then t := 0;
   if t <> MPV.GetMediaPosInMs then
     MPVSeekTo(t);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.WAVEKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  Idx: Integer;
+begin
+  // the timeline takes the focus when clicked: arrows without modifiers
+  // (the ones with modifiers are left to the shortcuts)
+  if (Shift <> []) or not WAVE.IsTimeLineEnabled then Exit;
+
+  case Key of
+    VK_LEFT, VK_RIGHT:
+      if MPV.IsMediaLoaded then
+      begin
+        // previous/next frame, like the mouse wheel on the video
+        if Key = VK_LEFT then
+          MPV.PreviousFrame(MPVOptions.FrameStep)
+        else
+          MPV.NextFrame(MPVOptions.FrameStep);
+        Key := 0;
+      end;
+    VK_UP, VK_DOWN:
+      if VST.RootNodeCount > 0 then
+      begin
+        // previous/next entry
+        Idx := VSTFocusedNode(VST);
+        if Idx < 0 then
+          Idx := 0
+        else if (Key = VK_UP) and (Idx > 0) then
+          Dec(Idx)
+        else if (Key = VK_DOWN) and (Idx < Subtitles.Count - 1) then
+          Inc(Idx);
+
+        VSTSelectNode(VST, Idx, True, True, True);
+        WAVE.SelectSubtitle(Idx, True, not WAVE.IsTimeInView(Subtitles[Idx].InitialTime));
+        UpdateWAVEMultiSelection;
+        Key := 0;
+      end;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

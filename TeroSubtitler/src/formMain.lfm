@@ -5708,6 +5708,18 @@ object frmMain: TfrmMain
     object MenuItem232: TMenuItem
       Action = actMediaSplitEntryAtCursorPosition
     end
+    object MenuItem293: TMenuItem
+      Action = actCombineEntries
+    end
+    object Separator61: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem294: TMenuItem
+      Action = actExtendLengthToPrevious
+    end
+    object MenuItem295: TMenuItem
+      Action = actExtendLengthToNext
+    end
     object Separator41: TMenuItem
       Caption = '-'
     end

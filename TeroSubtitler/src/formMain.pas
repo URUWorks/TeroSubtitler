@@ -452,6 +452,9 @@ type
     MenuItem230: TMenuItem;
     MenuItem231: TMenuItem;
     MenuItem232: TMenuItem;
+    MenuItem293: TMenuItem;
+    MenuItem294: TMenuItem;
+    MenuItem295: TMenuItem;
     MenuItem234: TMenuItem;
     MenuItem235: TMenuItem;
     MenuItem236: TMenuItem;
@@ -777,6 +780,7 @@ type
     Separator39: TMenuItem;
     Separator40: TMenuItem;
     Separator41: TMenuItem;
+    Separator61: TMenuItem;
     Separator42: TMenuItem;
     Separator43: TMenuItem;
     Separator44: TMenuItem;
@@ -1050,6 +1054,7 @@ type
     procedure DoThumbnailsDone(Sender: TObject);
     procedure WAVESceneChangeListChange(Sender: TObject);
     procedure WAVEDynamicEditTime(Sender: TObject; const Time: Integer);
+    procedure WAVEKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     // formMain_MPV
     procedure MPVClick(Sender: TObject);
     procedure MPVEndFile(ASender: TObject; AReason, AError: Integer);
@@ -1509,6 +1514,7 @@ begin
   WAVE.DefaultThumbnail.LoadFromLazarusResource('video_countdown');
   WAVE.OnSceneChangeListChange := @WAVESceneChangeListChange;
   WAVE.OnDynamicEditTime := @WAVEDynamicEditTime;
+  WAVE.OnKeyDown := @WAVEKeyDown;
   // QuickAction
   edtQuickAction.LocalizeFunc := @LocalizeCategory;
   // MRU
