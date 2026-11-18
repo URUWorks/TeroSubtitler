@@ -1334,10 +1334,10 @@ begin
   // first one it touches
   if ALimits then
   begin
+    // (the end of the timeline is checked in MouseMove with the current
+    // FLengthMS, it grows while the group is dragged after the end)
     MinDelta := -FGroupMinIT;
     MaxDelta := MaxInt;
-    if FLengthMS > FGroupMaxFT then
-      MaxDelta := FLengthMS - FGroupMaxFT;
 
     for i := First to Last do
     begin
@@ -1674,10 +1674,14 @@ begin
             else
               FMinSelTime := 0;
 
+            // the last entry: no limit here, the timeline grows while it is
+            // dragged after the end (MouseMove keeps it inside FLengthMS,
+            // updated on every scroll). FLengthMS of the mouse down was an
+            // invisible wall when the view scrolled and the timeline grew
             if (i < FSubtitles.Count-1) then
               FMaxSelTime := FSubtitles[i+1].InitialTime - FGAP
             else
-              FMaxSelTime := FLengthMS;
+              FMaxSelTime := MaxInt;
           end
           else
           begin
