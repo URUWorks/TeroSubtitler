@@ -182,6 +182,7 @@
 - added: Synchronize texts with the audio (Audio to text/Synchronize the current texts) #41
 - added: Fix subtitles: caps lock to normal casing #18
 - added: Media > Aspect ratio > Auto-crop, detects the black bars on the current frame and crops them
+- added: iTunes Timed Text export at 30 fps NDF
 - added: Regenerate thumbnails (timeline context menu)
 - added: “Update” button for yt-dlp in Settings/Tools
 - added: File/Import.Plain text…, creates the entries from a transcription without times with a preview, and optionally synchronizes them with the audio
