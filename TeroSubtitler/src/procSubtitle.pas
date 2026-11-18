@@ -62,6 +62,7 @@ function GetTimeStr(const Time: Integer; const Trim: Boolean = False; const Time
 function GetInitialTimeStr(const Index: Integer; const Trim: Boolean = False): String;
 function GetFinalTimeStr(const Index: Integer; const Trim: Boolean = False): String;
 function GetDurationTimeStr(const Index: Integer; const Trim: Boolean = False; const TimecodeMode: TTimecodeMode = tcNDF): String;
+function GetSignedDuration(const Index: Integer): Integer;
 function GetPauseTimeStr(const Index: Integer; const Trim: Boolean = False): String;
 function GetSubtitleText(const Index: Integer; const SubtitleMode: TSubtitleMode = smText): String;
 
@@ -701,7 +702,7 @@ begin
   case Tag of
     TAG_CONTROL_INITIALTIME, TAG_CONTROL_FINALTIME:
     begin
-      frmMain.tedDuration.SetValueOnly(Subtitles.Duration[Index]);
+      frmMain.tedDuration.SetValueOnly(GetSignedDuration(Index));
       frmMain.tedPause.SetValueOnly(Subtitles.Pause[Index]);
     end;
     TAG_CONTROL_DURATION: frmMain.tedFinal.SetValueOnly(Subtitles[Index].FinalTime);
@@ -882,13 +883,35 @@ function GetDurationTimeStr(const Index: Integer; const Trim: Boolean = False; c
 var
   it, ft: Integer;
 begin
-  if Workspace.WorkMode = wmTime then
-    Result := GetTimeStr(Subtitles.Duration[Index], Trim)
-  else
+  // Subtitles.Duration never goes below 0, show a final time before the
+  // initial time as a negative duration (like the negative gap)
+  if not Subtitles.ValidIndex(Index) then
   begin
+    it := 0;
+    ft := 0;
+  end
+  else if Workspace.WorkMode = wmTime then
+  begin
+    it := Subtitles[Index].InitialTime;
+    ft := Subtitles[Index].FinalTime;
+  end
+  else
     RoundFramesValue(Subtitles[Index].InitialTime, Subtitles[Index].FinalTime, Workspace.FPS.OutputFPS.FPS, it, ft);
-    Result := GetTimeStr(ft-it, Trim, TimecodeMode)
-  end;
+
+  if ft < it then
+    Result := '-' + GetTimeStr(it-ft, Trim, TimecodeMode)
+  else
+    Result := GetTimeStr(ft-it, Trim, TimecodeMode);
+end;
+
+// -----------------------------------------------------------------------------
+
+function GetSignedDuration(const Index: Integer): Integer;
+begin
+  if Subtitles.ValidIndex(Index) then
+    Result := Subtitles[Index].FinalTime - Subtitles[Index].InitialTime
+  else
+    Result := 0;
 end;
 
 // -----------------------------------------------------------------------------

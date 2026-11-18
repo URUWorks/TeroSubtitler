@@ -1641,7 +1641,7 @@ begin
   begin
     tedInitial.SetValueOnly(Subtitles[AIndex].InitialTime);
     tedFinal.SetValueOnly(Subtitles[AIndex].FinalTime);
-    tedDuration.SetValueOnly(Subtitles.Duration[AIndex]);
+    tedDuration.SetValueOnly(GetSignedDuration(AIndex));
     tedPause.SetValueOnly(Subtitles.Pause[AIndex]);
   end;
   //UpdateCPSAndTexts(AIndex);
@@ -1698,7 +1698,7 @@ begin
           if VST.FocusedNode <> NIL then
             NodeIndex := VST.FocusedNode^.Index;
 
-          tedDuration.SetValueOnly(Subtitles.Duration[NodeIndex]);
+          tedDuration.SetValueOnly(GetSignedDuration(NodeIndex));
           tedPause.SetValueOnly(Subtitles.Pause[NodeIndex]);
           mmoText.Text        := Subtitles[NodeIndex].Text;
           mmoTranslation.Text := Subtitles[NodeIndex].Translation;

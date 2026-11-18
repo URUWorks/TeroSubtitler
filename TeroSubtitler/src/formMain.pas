@@ -1499,6 +1499,7 @@ begin
   tedInitial.Tag     := TAG_CONTROL_INITIALTIME;
   tedFinal.Tag       := TAG_CONTROL_FINALTIME;
   tedDuration.Tag    := TAG_CONTROL_DURATION;
+  tedDuration.AllowNegative := True; // show final time < initial time as negative
   tedPause.Tag       := TAG_CONTROL_PAUSE;
   mmoText.Tag        := TAG_CONTROL_TEXT;
   mmoTranslation.Tag := TAG_CONTROL_TRANSLATION;
