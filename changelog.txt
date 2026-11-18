@@ -44,6 +44,8 @@
 - fixed: [macOS] Access violation in spell check with words containing the typographic apostrophe (’)
 - Fixed: [macOS] Crashes when editing or deleting text
 - fixed: [macOS/Linux] OCR stopped after a few hundred entries ("Tesseract could not be run")
+- fixed: [macOS/Linux] Correct frame doesn't always display when stepping with the mouse wheel
+- fixed: CPS and timings don't update while dragging entries on the timeline
 - Fixed: Spell check errors with quotes, symbols, tags and non-Latin languages
 - Fixed: Audio transcription errors involving invalid values and missing words			
 - fixed: Thumbnails of anamorphic videos were distorted
@@ -135,6 +137,8 @@
 - fixed: Frame stepping in the video preview could repeat or skip frames
 - fixed: Double-clicking the timeline could show a different frame than the one under the cursor
 - fixed: Timeline doesn't scroll to the last entries when they go past the end of the audio or video
+- fixed: Double-clicking an entry in the list places its start at the left edge of the timeline (now centered)
+- fixed: Keyboard inactive in the timeline (arrows now step frames and move between entries)
 - changed: Whisper.cpp now downloads UW_WhisperCPP (Windows 7+, macOS 10.11+, Linux glibc 2.17+), with GPU support via Vulkan on Windows/Linux x64 and Metal on Apple Silicon
 - changed: [macOS] removed the menu items added by the system that Tero doesn’t use
 - changed: Faster-Whisper now downloads UW_FasterWhisper, and asks before downloading the optional NVIDIA GPU libraries
@@ -194,6 +198,8 @@
 - added: Tools/Translation memory/Add translated lines to memory
 - added: Translation memory/Save a copy... and Open translation memories folder
 - added: Import SUP: offers to download Tesseract if it isn't found
+- added: Combine entries and Extend initial/final time to previous/next in the timeline context menu
+- added: Timeline scrolls automatically when dragging an entry outside the current view
 
 1.0.2.3 (18.09.2026)
 - fixed: Corrupted undo/redo stack when changing input/output FPS
