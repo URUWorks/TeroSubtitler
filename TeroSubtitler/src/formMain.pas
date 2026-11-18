@@ -1382,7 +1382,17 @@ type
     FVSTOldWindowProc: TWndMethod;
     {$ENDIF}
     FCoolBarsFitted: Boolean;
+    FWAVEValuesTimer: TTimer;     // times/CPS while dragging in the timeline
+    // the text doesn't change while an entry is dragged: its length and the
+    // label (chars of each line) are calculated once, only the CPS changes
+    FDragIdx: Integer;
+    FDragText, FDragTrans: String;
+    FDragTextLen, FDragTransLen: Integer;
+    FDragTextLines, FDragTransLines: String;
+    procedure UpdateDraggedCPS(const AIdx: Integer);
     procedure URLLoadTimerTimer(Sender: TObject);
+    procedure WAVEValuesTimerTimer(Sender: TObject);
+    procedure UpdateWAVEDraggedValues;
     procedure StopURLLoadTimer;
     procedure DoFitCoolBars(Data: PtrInt);
     {$IFDEF LCLCocoa}
@@ -1515,6 +1525,7 @@ begin
   WAVE.OnSceneChangeListChange := @WAVESceneChangeListChange;
   WAVE.OnDynamicEditTime := @WAVEDynamicEditTime;
   WAVE.OnKeyDown := @WAVEKeyDown;
+  FDragIdx := -1;
   // QuickAction
   edtQuickAction.LocalizeFunc := @LocalizeCategory;
   // MRU

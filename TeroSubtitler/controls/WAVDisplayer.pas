@@ -229,6 +229,7 @@ type
     FLastMoveShift   : TShiftState;
     FMouseDownPixelX : Integer;
     FDragMoved       : Boolean;
+    FAutoScrollBlocked : Boolean; // the dragged entry/edge reached another entry
 
     FTS : TTextStyle;
     FEmptyText : String;
@@ -1551,6 +1552,7 @@ begin
     FOldMouseDownX := PixelToTime(X) + FPositionMS;
     FMouseDownPixelX := X;
     FDragMoved       := False;
+    FAutoScrollBlocked := False;
 
     // Re-adjust mouse cursor position
     if (FDynamicEditMode <> demNone) then
@@ -2499,14 +2501,19 @@ procedure TUWWaveformDisplayer.CheckAutoScroll;
 begin
   // dragging (an entry, one of its edges or a selection) to the left/right
   // edge of the view, or beyond it: scroll the view while the mouse is there
-  if FMouseIsDown and FDragMoved and (FDynamicSelValueMs <> -1) and
+  if FMouseIsDown and FDragMoved and (FDynamicSelValueMs <> -1) and not FAutoScrollBlocked and
     ((FLastMoveX < AutoScrollEdge) or (FLastMoveX > Width - AutoScrollEdge)) then
   begin
     if not FAutoScrollTimer.Enabled then
       FAutoScrollTimer.Enabled := True;
   end
   else
+  begin
     StopAutoScroll;
+    // the mouse is back in the view: it can scroll again
+    if (FLastMoveX >= AutoScrollEdge) and (FLastMoveX <= Width - AutoScrollEdge) then
+      FAutoScrollBlocked := False;
+  end;
 end;
 
 //------------------------------------------------------------------------------
@@ -2521,7 +2528,8 @@ end;
 
 procedure TUWWaveformDisplayer.OnAutoScrollTimer(Sender: TObject);
 var
-  Dist, Step, OldPos: Integer;
+  Dist, Step, OldPos, OldIT, OldFT: Integer;
+  Editing: Boolean;
 begin
   if not FMouseIsDown or not IsTimeLineEnabled then
   begin
@@ -2540,7 +2548,9 @@ begin
     Exit;
   end;
 
-  Step := Max(1, FPageSizeMS div 40) * (1 + Min(Dist, 200) div 25);
+  // (at least 3 times the snapping distance, 8 px: a step can't snap again
+  // to the same point, it would look like the entry is blocked)
+  Step := Max(Max(1, FPageSizeMS div 40), PixelToTime(24)) * (1 + Min(Dist, 200) div 25);
   if FLastMoveX < AutoScrollEdge then Step := -Step;
 
   OldPos := FPositionMS;
@@ -2553,7 +2563,28 @@ begin
   end;
 
   // move the entry/edge/selection with the view, as if the mouse moved
+  Editing := Assigned(FSelectedSubtitle) and (FDynamicEditMode <> demNone);
+  if Editing then
+  begin
+    OldIT := FSelectedSubtitle^.InitialTime;
+    OldFT := FSelectedSubtitle^.FinalTime;
+  end;
   MouseMove(FLastMoveShift, FLastMoveX, FLastMoveY);
+
+  // the entry (or its edge) reached the previous/next entry and can't move
+  // anymore: undo this step and stop, before the view kept scrolling alone
+  // and the entry stopped out of sight, as if there were an invisible wall
+  if Editing and Assigned(FSelectedSubtitle) and
+    (FSelectedSubtitle^.InitialTime = OldIT) and (FSelectedSubtitle^.FinalTime = OldFT) then
+  begin
+    FAutoScrollBlocked := True;
+    StopAutoScroll;
+    // show where it stopped, with the entry that blocks it
+    if Step > 0 then
+      SetPositionMS(FSelectedSubtitle^.FinalTime + (FPageSizeMS div 8) - FPageSizeMS)
+    else
+      SetPositionMS(FSelectedSubtitle^.InitialTime - (FPageSizeMS div 8));
+  end;
 end;
 
 //------------------------------------------------------------------------------

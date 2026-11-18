@@ -130,19 +130,105 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.WAVESelectedSubtitleItemChange(Sender: TObject);
+begin
+  // while dragging an entry (or one of its edges) in the timeline the times,
+  // the CPS and the entry in the list are updated while it moves, not only
+  // when the mouse button is released. Not on every mouse move (it made the
+  // drag lag), at most every 80 ms; the last values are always shown.
+  if not WAVE.IsMouseDown then
+  begin
+    UpdateWAVEDraggedValues;
+    Exit;
+  end;
+
+  if FWAVEValuesTimer = NIL then
+  begin
+    FWAVEValuesTimer := TTimer.Create(Self);
+    FWAVEValuesTimer.Enabled  := False;
+    FWAVEValuesTimer.Interval := 80;
+    FWAVEValuesTimer.OnTimer  := @WAVEValuesTimerTimer;
+  end;
+  if not FWAVEValuesTimer.Enabled then
+    FWAVEValuesTimer.Enabled := True;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.WAVEValuesTimerTimer(Sender: TObject);
+begin
+  FWAVEValuesTimer.Enabled := False;
+  UpdateWAVEDraggedValues;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.UpdateWAVEDraggedValues;
 var
   Idx: Integer;
 begin
-  // while dragging an entry (or one of its edges) in the timeline: update
-  // the times, the CPS and the entry in the list right away, not only when
-  // the mouse button is released
   Idx := VSTFocusedNode(VST);
+  if not Subtitles.ValidIndex(Idx) then Exit;
+
+  // only the times are read here (nothing is calculated) and the CPS is a
+  // division with the length of the text, calculated once for the entry
   UpdateValuesForSubtitle(Idx);
-  if Subtitles.ValidIndex(Idx) then
-  begin
+  if VST.SelectedCount = 1 then
+    UpdateDraggedCPS(Idx)
+  else
     UpdateCPSAndTexts(Idx);
-    if Assigned(VST.FocusedNode) then
-      VST.InvalidateNode(VST.FocusedNode);
+  if Assigned(VST.FocusedNode) then
+    VST.InvalidateNode(VST.FocusedNode);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.UpdateDraggedCPS(const AIdx: Integer);
+
+  // same as TUWSubtitles.GetStringCPS, without the duration
+  function CPSLength(S: String): Integer;
+  var
+    x: Integer;
+    Skip: String;
+  begin
+    Skip := AppOptions.Conventions.CPSLineLenStrategy;
+    for x := 1 to Skip.Length do
+      S := ReplaceString(S, Skip[x], '');
+    Result := UTF8Length(ReplaceString(RemoveTSTags(S), sLineBreak, ' '));
+  end;
+
+var
+  Item: PUWSubtitleItem;
+  Dur: Double;
+  NewCPS: Double;
+begin
+  Item := Subtitles.ItemPointer[AIdx];
+  if Item = NIL then Exit;
+
+  // (string compare: same string = same pointer, fast)
+  if (AIdx <> FDragIdx) or (Item^.Text <> FDragText) or (Item^.Translation <> FDragTrans) then
+  begin
+    FDragIdx         := AIdx;
+    FDragText        := Item^.Text;
+    FDragTrans       := Item^.Translation;
+    FDragTextLen     := CPSLength(FDragText);
+    FDragTransLen    := CPSLength(FDragTrans);
+    FDragTextLines   := GetLengthForEachLine(FDragText, '/', '=');
+    FDragTransLines  := GetLengthForEachLine(FDragTrans, '/', '=');
+  end;
+
+  Dur := 0;
+  if (Item^.InitialTime >= 0) and (Item^.FinalTime > 0) then
+    Dur := (Item^.FinalTime - Item^.InitialTime) / 1000;
+
+  if Dur > 0 then NewCPS := FDragTextLen / Dur else NewCPS := 0;
+  mmoText.LabelMemo.Caption := Format(lngasTextChars, [FDragTextLines, NewCPS], FormatSettings);
+  mmoText.CPSBar.SetCPS(NewCPS);
+
+  if Workspace.TranslatorMode then
+  begin
+    if Dur > 0 then NewCPS := FDragTransLen / Dur else NewCPS := 0;
+    mmoTranslation.LabelMemo.Caption := Format(lngasTranslationChars, [FDragTransLines, NewCPS], FormatSettings);
+    mmoTranslation.CPSBar.SetCPS(NewCPS);
   end;
 end;
 
