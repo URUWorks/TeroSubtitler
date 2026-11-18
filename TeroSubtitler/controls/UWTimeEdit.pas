@@ -51,6 +51,9 @@ type
     FChangeEvent  : TUWTimeEditChangeEvent;
     FPopup        : TPopupMenu;
     FLastClick    : QWord; // csDoubleClicks is off, detect it ourselves
+    FAllowNegative: Boolean; // SetValueOnly may show a negative value (e.g. an invalid duration)
+    function ValueToText(const AValue: Integer): String;
+    procedure ClearNegative;
     procedure PopupCopyClick(Sender: TObject);
     procedure PopupPasteClick(Sender: TObject);
     function IsSecondClick(const Button: TMouseButton): Boolean;
@@ -105,6 +108,7 @@ type
     procedure ReAdjustWidth;
     property SMPTE        : Boolean                read FSMPTE        write FSMPTE;
     property TimecodeMode : TTimecodeMode          read FTimecodeMode write FTimecodeMode;
+    property AllowNegative: Boolean                read FAllowNegative write FAllowNegative;
   published
     property Value        : Integer                read FValue       write SetValue;
     property FPS          : Double                 read FFPS         write SetFPS;
@@ -199,6 +203,7 @@ begin
   FSMPTE        := False;
   FTimecodeMode := tcNDF;
   FValue        := 0;
+  FAllowNegative := False;
   FTimeStep     := 1;
   FFrameStep    := 1;
   FTimeMode     := TUWTimeEditMode.temTime;
@@ -350,11 +355,16 @@ end;
 // -----------------------------------------------------------------------------
 
 function TUWTimeEdit.ValueToClipboardText: String;
+var
+  v: Integer;
 begin
+  v := Abs(FValue);
   if FTimeMode = TUWTimeEditMode.temFrames then
-    Result := TimeToString(FValue, 'hh:mm:ss:ff', FFPS)
+    Result := TimeToString(v, 'hh:mm:ss:ff', FFPS)
   else
-    Result := TimeToString(FValue, Format('hh:mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator]));
+    Result := TimeToString(v, Format('hh:mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator]));
+
+  if FValue < 0 then Result := '-' + Result;
 end;
 
 // -----------------------------------------------------------------------------
@@ -409,6 +419,14 @@ begin
   // (e.g. the whole time code selected to copy it from the popup)
   if Button <> mbLeft then Exit;
 
+  // negative value (read only, e.g. an invalid duration): the positions
+  // below don't match because of the sign, select the whole text
+  if FValue < 0 then
+  begin
+    SetSel(0, Length(Text));
+    Abort;
+  end;
+
   // double click: select the whole time code
   if IsSecondClick(Button) then
   begin
@@ -462,6 +480,17 @@ begin
     begin
       PerformTab(True);
       Exit;
+    end;
+
+    // negative value: arrows don't move inside the text, editing it starts
+    // from zero (it can't be typed over because of the sign)
+    if FValue < 0 then
+    begin
+      if (Key = VK_LEFT) or (Key = VK_RIGHT) or (Key = VK_DOWN) then
+        Exit
+      else if ((Key = VK_UP) or ((Key >= VK_0) and (Key <= VK_9)) or ((Key >= VK_NUMPAD0) and (Key <= VK_NUMPAD9)))
+        and not (ssCtrl in Shift) and not (ssAlt in Shift) and not (ssMeta in Shift) then
+        ClearNegative;
     end;
 
     case Key of
@@ -663,6 +692,8 @@ procedure TUWTimeEdit.DoTimeUp;
 var
   f: Double;
 begin
+  if FValue < 0 then ClearNegative; // e.g. spin or wheel over a negative duration
+
   if SelLength <= 1 then
   begin
     if FTimeMode = TUWTimeEditMode.temTime then
@@ -716,19 +747,46 @@ begin
   //if FValue <> NewValue then
   //begin
     FValue := NewValue;
-    Constrain(FValue, 0, MaxTime);
+    if FAllowNegative then
+      Constrain(FValue, -MaxTime, MaxTime)
+    else
+      Constrain(FValue, 0, MaxTime);
     UpdateValue(False);
   //end;
 end;
 
 // -----------------------------------------------------------------------------
 
-procedure TUWTimeEdit.UpdateValue(const FireChangeEvent: Boolean = True);
+function TUWTimeEdit.ValueToText(const AValue: Integer): String;
 begin
   if FTimeMode = TUWTimeEditMode.temFrames then
-    Text := MSToHHMMSSFFTime(FValue, FFPS, FTimecodeMode) //TimeToString(FValue, 'hh:mm:ss:ff', FFPS)
+    Result := MSToHHMMSSFFTime(AValue, FFPS, FTimecodeMode) //TimeToString(FValue, 'hh:mm:ss:ff', FFPS)
   else
-    Text := TimeToString(FValue, Format('hh:mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator]), FFPS); //Text := TimeToString(FValue, 'hh:mm:ss.zzz');
+    Result := TimeToString(AValue, Format('hh:mm:ss%szzz', [DefaultFormatSettings.DecimalSeparator]), FFPS); //Text := TimeToString(FValue, 'hh:mm:ss.zzz');
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTimeEdit.ClearNegative;
+begin
+  // start editing a negative value from zero, at the frames/ms position
+  FValue := 0;
+  Text := ValueToText(0);
+  if FTimeMode = TUWTimeEditMode.temTime then
+    SetSel(9, 3)
+  else
+    SetSel(9, 2);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUWTimeEdit.UpdateValue(const FireChangeEvent: Boolean = True);
+begin
+  // the time functions work with positive values only, add the sign
+  if FValue < 0 then
+    Text := '-' + ValueToText(-FValue)
+  else
+    Text := ValueToText(FValue);
 
   if FireChangeEvent and Assigned(FChangeEvent) then FChangeEvent(Self, FValue);
 end;
