@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 11.11.2026\n"
+"Project-Id-Version: Tero Subtitler - IT - 18.11.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -292,85 +292,85 @@ msgstr "Tentando di rilevare le parti con dialoghi, tutti i sottotitoli in elenc
 #: proclocalize.lngdoviapplied
 #, object-pascal-format
 msgid "%d shots changed, %d removed."
-msgstr ""
+msgstr "%d inquadrature cambiate, %d rimosse."
 
 #: proclocalize.lngdovibadtimecode
 msgid "Invalid timecode or frame number."
-msgstr ""
+msgstr "Timecode o numero di fotogrammi non valido."
 
 #: proclocalize.lngdovicheckcount
 #, object-pascal-format
 msgid "%d differences."
-msgstr ""
+msgstr "%d differenze."
 
 #: proclocalize.lngdovicheckmoved
 #, object-pascal-format
 msgid "%s  “%s”: the shot change is at %s (%s frames)"
-msgstr ""
+msgstr "%s '%s': la modifica dell'inquadratura è a %s (%s fotogrammi)"
 
 #: proclocalize.lngdovichecknocut
 #, object-pascal-format
 msgid "%s  shot change without a cut in the metadata (in “%s”)"
-msgstr ""
+msgstr "cambio inquadratura %s senza un taglio nei metadati (in '%s')"
 
 #: proclocalize.lngdovichecknoshotchange
 #, object-pascal-format
 msgid "%s  “%s”: no shot change near the cut"
-msgstr ""
+msgstr "%s '%s' : nessun cambiamento inquadratura vicino al taglio"
 
 #: proclocalize.lngdovicheckok
 msgid "All the cuts match the shot changes of the video."
-msgstr ""
+msgstr "Tutti i tagli corrispondono alle modifiche del video."
 
 #: proclocalize.lngdoviinfo
 #, object-pascal-format
 msgid "%d shots at %s fps, from %s to %s (record timecode)."
-msgstr ""
+msgstr "%d inquadrature a %s fps, da %s a %s (timecode registrazione)."
 
 #: proclocalize.lngdovimovecutnotadjacent
 msgid "Only a cut between two contiguous shots can be moved."
-msgstr ""
+msgstr "Può essere spostato solo un taglio tra due inquadrature contigue."
 
 #: proclocalize.lngdovinoshotchanges
 msgid "There are no shot changes. Detect them first."
-msgstr ""
+msgstr "Non ci sono cambi inquadratura. Prima rilevali."
 
 #: proclocalize.lngdovinotloaded
 msgctxt "proclocalize.lngdovinotloaded"
 msgid "Open a Dolby Vision XML to use this tool."
-msgstr ""
+msgstr "Per usare questo strumento apri un XML Dolby Vision."
 
 #: proclocalize.lngdovioriginchanged
 msgid "The times of all the entries changed and the undo history was cleared."
-msgstr ""
+msgstr "I tempi di tutte le voci sono cambiati e la cronologia degli annullamenti è stata cancellata."
 
 #: proclocalize.lngdoviposatcut
 #, object-pascal-format
 msgid "%s is the first frame of “%s” (a cut)."
-msgstr ""
+msgstr "%s è il primo fotogramma di '%s' (un taglio)."
 
 #: proclocalize.lngdoviposinshot
 #, object-pascal-format
 msgid "%s is the frame %d of %d of “%s”."
-msgstr ""
+msgstr "%s è il fotogramma %d di %d di '%s'."
 
 #: proclocalize.lngdoviposoutside
 #, object-pascal-format
 msgid "%s is not in any shot."
-msgstr ""
+msgstr "%s non è in nessuna inquadratura."
 
 #: proclocalize.lngdovisaveanyway
 msgid "Do you want to save it anyway?"
-msgstr ""
+msgstr "Vuoi salvarla comunque?"
 
 #: proclocalize.lngdovisaveonlydovi
 msgid "Only a Dolby Vision XML opened in Tero Subtitler can be saved in this format."
-msgstr ""
+msgstr "Solo un XML Dolby Vision aperto in Tero Subtitler può essere salvato in questo formato."
 
 #: proclocalize.lngdovisaveproblems
 #, object-pascal-format
 msgid "The shots are not contiguous: %d gaps, %d overlaps, %d without frames and %d new entries (written as copies of the previous shot). The first one is the entry %d."
-msgstr ""
+msgstr "Le inquadrature sono contigue: %d gap, %d sovrapposizioni, %d senza fotogrammi e %d nuove voci (scritte come copie dell'inquadratura precedente). La prima è la voce %d."
 
 #: proclocalize.lngdownloadcanceled
 msgid "Download canceled by user."
@@ -962,7 +962,7 @@ msgstr "Filtri audio"
 
 #: proclocalize.lngscbuiltin
 msgid "Tero (built-in)"
-msgstr ""
+msgstr "Tero (integrato)"
 
 #: proclocalize.lngscedit
 msgctxt "proclocalize.lngscedit"
@@ -1152,7 +1152,7 @@ msgstr "# %d"
 #: proclocalize.lngspeakern
 #, object-pascal-format
 msgid "Speaker %d"
-msgstr ""
+msgstr "Altoparlante %d"
 
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
@@ -1716,7 +1716,7 @@ msgstr "Lunghezza massima linea"
 
 #: tfrmaudiototext.chkmultilingual.caption
 msgid "Mixed languages (detect each part)"
-msgstr ""
+msgstr "Lingue miste (rileva ogni parte)"
 
 #: tfrmaudiototext.chksmartsegment.caption
 msgid "Smart segmentation (using the conventions)"
@@ -1728,7 +1728,7 @@ msgstr "Includi suoni ([Musica], [Applausi]...)"
 
 #: tfrmaudiototext.chkspeakers.caption
 msgid "Identify the speakers in Actor (number, 0 = automatic)"
-msgstr ""
+msgstr "Identifica gli altoparlanti in Attori (numero, 0 = automatico)"
 
 #: tfrmaudiototext.chksynctext.caption
 msgid "Synchronize the current texts (only timings)"
@@ -2302,77 +2302,75 @@ msgid "Selected entries"
 msgstr "Elementi selezionati"
 
 #: tfrmdolbyvision.btnapplyedit.caption
-#, fuzzy
 msgctxt "tfrmdolbyvision.btnapplyedit.caption"
 msgid "Apply"
 msgstr "Applica"
 
 #: tfrmdolbyvision.btnapplyorigin.caption
 msgid "Set"
-msgstr ""
+msgstr "Imposta"
 
 #: tfrmdolbyvision.btncheck.caption
 msgid "Check"
-msgstr ""
+msgstr "Controlla"
 
 #: tfrmdolbyvision.btnclose.caption
-#, fuzzy
 msgctxt "tfrmdolbyvision.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmdolbyvision.btnmovecut.caption
 msgid "Move the cut to the shot change"
-msgstr ""
+msgstr "Sposta il taglio al cambio inquadratura"
 
 #: tfrmdolbyvision.btnvideoposition.caption
 msgid "Video position"
-msgstr ""
+msgstr "Posizione video"
 
 #: tfrmdolbyvision.caption
 msgid "Dolby Vision metadata"
-msgstr ""
+msgstr "Metadati Dolby Vision"
 
 #: tfrmdolbyvision.chkextendprevious.caption
 msgid "At a cut, add the inserted frames to the end of the previous shot"
-msgstr ""
+msgstr "Ad un taglio, aggiungi i fotogrammi inseriti alla fine dell'inquadratura precedente"
 
 #: tfrmdolbyvision.lblchecktitle.caption
 msgid "Check the cuts against the shot changes of the video"
-msgstr ""
+msgstr "Controlla i tagli rispetto alle modifiche di inquadratura del video"
 
 #: tfrmdolbyvision.lblcount.caption
 msgid "Number of frames:"
-msgstr ""
+msgstr "Numero di fotogrammi:"
 
 #: tfrmdolbyvision.lbledittitle.caption
 msgid "Edit frames"
-msgstr ""
+msgstr "Modifica fotogrammi"
 
 #: tfrmdolbyvision.lblinfo.caption
 msgctxt "tfrmdolbyvision.lblinfo.caption"
 msgid "Open a Dolby Vision XML to use this tool."
-msgstr ""
+msgstr "Per usare questo strumento apri un XML Dolby Vision."
 
 #: tfrmdolbyvision.lblorigin.caption
 msgid "First frame of the video (record timecode):"
-msgstr ""
+msgstr "Primo fotogramma del video (timecode registrazione):"
 
 #: tfrmdolbyvision.lblposition.caption
 msgid "At (record timecode or frame):"
-msgstr ""
+msgstr "A (timecode registrazione o fotogramma):"
 
 #: tfrmdolbyvision.lbltolerance.caption
 msgid "Search up to (frames):"
-msgstr ""
+msgstr "Ricerca fino a (fotogrammi):"
 
 #: tfrmdolbyvision.rbndelete.caption
 msgid "Delete frames"
-msgstr ""
+msgstr "Elimina fotogrammi"
 
 #: tfrmdolbyvision.rbninsert.caption
 msgid "Insert frames"
-msgstr ""
+msgstr "Inserisci fotogrammi"
 
 #: tfrmdownload.btncancel.caption
 msgctxt "tfrmdownload.btncancel.caption"
@@ -3348,7 +3346,7 @@ msgstr "Separa elemento"
 
 #: tfrmmain.actdolbyvision.caption
 msgid "Dolby Vision metadata..."
-msgstr ""
+msgstr "Metadati Dolby Vision..."
 
 #: tfrmmain.actdurationlimits.caption
 msgid "Duration limits..."
