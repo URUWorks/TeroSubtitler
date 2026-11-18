@@ -615,6 +615,11 @@ begin
 
         if XMLHasAttribute(Node, 'ttp:frameRateMultiplier') then
           Subtitles.FrameRate := XMLGetCorrectFPS(fr, XMLGetAttrValue(Node, 'ttp:frameRateMultiplier'), Subtitles.TimecodeMode = tcDF);
+
+        // Drop-frame only exists at 29.97/59.94: an integer rate (e.g. 30 with
+        // multiplier "1 1") is always non-drop, even if dropMode says otherwise
+        if IsInteger(Subtitles.FrameRate) then
+          Subtitles.TimecodeMode := tcNDF;
       end;
 
       // Regiones
@@ -766,6 +771,7 @@ var
   Root, Element, Node, StylingNode, LayoutNode, DivNode : TDOMNode;
   i, it, ft : Integer;
   NewFPS: Double;
+  TCMode: TTimecodeMode;
   NeedTop, AllTop, AnyVisible, AllItalic, AllBold, AllUnderline, AllColor: Boolean;
   Styles: array of TITTEntryStyle;
   St: TITTEntryStyle;
@@ -826,7 +832,13 @@ begin
       TDOMElement(Root).SetAttribute('xmlns', 'http://www.w3.org/ns/ttml');
       TDOMElement(Root).SetAttribute('xml:lang', ITTLanguage(Subtitles));
 
-      if Subtitles.TimecodeMode = tcDF then
+      // Integer rates (24, 25, 30) are always non-drop
+      if IsInteger(FPS) then
+        TCMode := tcNDF
+      else
+        TCMode := Subtitles.TimecodeMode;
+
+      if TCMode = tcDF then
         TDOMElement(Root).SetAttribute('ttp:dropMode', 'dropNTSC')
       else
         TDOMElement(Root).SetAttribute('ttp:dropMode', 'nonDrop');
@@ -917,8 +929,8 @@ begin
       Element := XmlDoc.CreateElement('p');
 
       // Orden como FCP: begin/end, después fontStyle y region
-      TDOMElement(Element).SetAttribute('begin', MSToHHMMSSFFTime(it, NewFPS, Subtitles.TimecodeMode));
-      TDOMElement(Element).SetAttribute('end', MSToHHMMSSFFTime(ft, NewFPS, Subtitles.TimecodeMode));
+      TDOMElement(Element).SetAttribute('begin', MSToHHMMSSFFTime(it, NewFPS, TCMode));
+      TDOMElement(Element).SetAttribute('end', MSToHHMMSSFFTime(ft, NewFPS, TCMode));
 
       // Formato de toda la entrada en el <p> (como FCP), salvo el que ya va
       // en el <body>. Antes solo la cursiva; la negrita y el color iban en

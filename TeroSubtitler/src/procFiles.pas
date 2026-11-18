@@ -775,7 +775,8 @@ begin
   if AFormat = sfITunesTimedText then
   begin
     F := SingleToStr(Workspace.FPS.OutputFPS.FPS, FormatSettings).Replace(FormatSettings.DecimalSeparator, '.');
-    if ((F <> '29.97') and (F <> '25') and (F <> '24') and (F <> '23.976')) then
+    // 30 NDF (frameRate 30, frameRateMultiplier "1 1") is also accepted by Apple
+    if ((F <> '29.97') and (F <> '30') and (F <> '25') and (F <> '24') and (F <> '23.976')) then
     begin
       ShowErrorMessageDialog(Format('%s%s%s', [lngSubtitleSpecificationError, LineEnding+LineEnding, lngSubtitleSpecificationErrorFPS]), '', False, False);
       Exit;
