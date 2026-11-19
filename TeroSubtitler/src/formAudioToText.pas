@@ -290,6 +290,12 @@ end;
 procedure TfrmAudioToText.FormShow(Sender: TObject);
 begin
   CheckColorTheme(Self);
+  // The color theme paints every TPanel with the "Window" color (and a raised
+  // bevel in light mode); this one is only a container for the radio buttons,
+  // so it must look like the form background
+  pnlTextMode.Color      := Color;
+  pnlTextMode.BevelOuter := bvNone;
+  pnlTextMode.BevelColor := Color;
 end;
 
 // -----------------------------------------------------------------------------
