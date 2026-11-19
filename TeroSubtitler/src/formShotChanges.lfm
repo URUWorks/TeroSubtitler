@@ -1,12 +1,12 @@
 object frmShotChanges: TfrmShotChanges
   Left = 242
-  Height = 582
+  Height = 602
   Top = 118
   Width = 612
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Shot changes'
-  ClientHeight = 582
+  ClientHeight = 602
   ClientWidth = 612
   DesignTimePPI = 120
   Position = poMainFormCenter
@@ -20,7 +20,7 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideRight.Control = btnClose
     Left = 370
     Height = 32
-    Top = 540
+    Top = 560
     Width = 113
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
@@ -36,7 +36,7 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideBottom.Side = asrBottom
     Left = 489
     Height = 32
-    Top = 540
+    Top = 560
     Width = 113
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 10
@@ -62,7 +62,7 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideTop.Side = asrCenter
     Left = 10
     Height = 20
-    Top = 363
+    Top = 421
     Width = 142
     Caption = 'Time code for import'
     ParentColor = False
@@ -110,7 +110,7 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideRight.Control = btnApply
     Left = 363
     Height = 1
-    Top = 556
+    Top = 576
     Width = 1
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
@@ -121,11 +121,11 @@ object frmShotChanges: TfrmShotChanges
   end
   object spnSensitivity: TFloatSpinEdit
     AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = cboTimeCodeExport
+    AnchorSideTop.Control = cboDetectApp
     AnchorSideTop.Side = asrBottom
     Left = 250
     Height = 28
-    Top = 435
+    Top = 359
     Width = 232
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Top = 10
@@ -133,7 +133,7 @@ object frmShotChanges: TfrmShotChanges
     Increment = 0.1
     MaxValue = 0.9
     MinValue = 0.1
-    TabOrder = 7
+    TabOrder = 5
     Value = 0.4
     OnChange = spnSensitivityChange
   end
@@ -143,7 +143,7 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideRight.Control = spnSensitivity
     Left = 10
     Height = 20
-    Top = 439
+    Top = 363
     Width = 133
     BorderSpacing.Right = 10
     Caption = 'Detection sensitivity'
@@ -155,7 +155,7 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideRight.Control = cboOffset
     Left = 10
     Height = 10
-    Top = 551
+    Top = 571
     Width = 240
     Anchors = [akTop, akLeft, akRight]
     Style = pbstMarquee
@@ -163,24 +163,24 @@ object frmShotChanges: TfrmShotChanges
     Visible = False
   end
   object cboTimeCodeImport: TComboBox
-    AnchorSideTop.Control = cboDetectApp
+    AnchorSideTop.Control = spnSensitivity
     AnchorSideTop.Side = asrBottom
     Left = 250
     Height = 28
-    Top = 359
+    Top = 417
     Width = 232
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Top = 10
+    BorderSpacing.Top = 30
     ItemHeight = 20
     Style = csDropDownList
-    TabOrder = 5
+    TabOrder = 6
   end
   object lblTimeCodeOut: TLabel
     AnchorSideTop.Control = cboTimeCodeExport
     AnchorSideTop.Side = asrCenter
     Left = 10
     Height = 20
-    Top = 401
+    Top = 459
     Width = 140
     Caption = 'Time code for export'
     ParentColor = False
@@ -190,13 +190,13 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideTop.Side = asrBottom
     Left = 250
     Height = 28
-    Top = 397
+    Top = 455
     Width = 232
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Top = 10
     ItemHeight = 20
     Style = csDropDownList
-    TabOrder = 6
+    TabOrder = 7
   end
   object cboOffset: TComboBox
     AnchorSideLeft.Control = spnSensitivity
@@ -205,7 +205,7 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideRight.Control = tedOffset
     Left = 250
     Height = 28
-    Top = 473
+    Top = 493
     Width = 54
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 6
@@ -220,11 +220,11 @@ object frmShotChanges: TfrmShotChanges
     Text = '+'
   end
   object tedOffset: TUWTimeEdit
-    AnchorSideTop.Control = spnSensitivity
+    AnchorSideTop.Control = cboTimeCodeExport
     AnchorSideTop.Side = asrBottom
     Left = 310
     Height = 29
-    Top = 473
+    Top = 493
     Width = 152
     Value = 0
     FPS = 25
@@ -246,7 +246,7 @@ object frmShotChanges: TfrmShotChanges
     AnchorSideRight.Control = spnSensitivity
     Left = 10
     Height = 20
-    Top = 477
+    Top = 497
     Width = 40
     BorderSpacing.Right = 10
     Caption = 'Offset'
@@ -271,5 +271,6 @@ object frmShotChanges: TfrmShotChanges
     ItemHeight = 20
     Style = csDropDownList
     TabOrder = 4
+    OnSelect = cboDetectAppSelect
   end
 end

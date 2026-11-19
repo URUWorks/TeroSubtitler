@@ -55,6 +55,7 @@ type
     procedure btnExportClick(Sender: TObject);
     procedure btnDetectClick(Sender: TObject);
     procedure btnImportClick(Sender: TObject);
+    procedure cboDetectAppSelect(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
@@ -78,6 +79,7 @@ type
     function FillDialogFilter(const AAllSupportedFiles: Boolean): String;
     function GetDetectApp: Integer;
     procedure SetDetectApp(const AApp: Integer);
+    function AppUsesSensitivity: Boolean;
     procedure DetectNative;
   public
 
@@ -331,6 +333,37 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the sensitivity is used by the built-in detection, and by FFmpeg and
+// PySceneDetect only if their parameters have %value (custom parameters, or
+// the ones of the old PySceneDetect versions, may not have it)
+
+function TfrmShotChanges.AppUsesSensitivity: Boolean;
+begin
+  case GetDetectApp of
+    daFFmpeg      : if Tools.FFmpeg_ParamsForShotChanges <> '' then
+                      Result := Pos('%value', Tools.FFmpeg_ParamsForShotChanges) > 0
+                    else
+                      Result := Pos('%value', FFMPEG_SCParams) > 0;
+    daSceneDetect : if Tools.PySceneDetect_Params <> '' then
+                      Result := Pos('%value', Tools.PySceneDetect_Params) > 0
+                    else
+                      Result := Pos('%value', SCENEDETECT_SCParams) > 0;
+  else
+    Result := True;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmShotChanges.cboDetectAppSelect(Sender: TObject);
+begin
+  // grey, if the selected app doesn't use it
+  spnSensitivity.Enabled := cboDetectApp.Enabled and AppUsesSensitivity;
+  lblSensitivity.Enabled := spnSensitivity.Enabled;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmShotChanges.FormShow(Sender: TObject);
 var
   s: String;
@@ -351,6 +384,7 @@ begin
   // the times of the timeline are in ms, whatever was used the last time
   if FFromWave then
     cboTimeCodeImport.ItemIndex := tcMilliseconds;
+  cboDetectAppSelect(NIL);
 end;
 
 // -----------------------------------------------------------------------------
@@ -740,7 +774,8 @@ begin
   cboTimeCodeImport.Enabled := AValue;
   cboTimeCodeExport.Enabled := AValue;
   btnApply.Enabled := AValue;
-  spnSensitivity.Enabled := AValue;
+  spnSensitivity.Enabled := AValue and AppUsesSensitivity;
+  lblSensitivity.Enabled := spnSensitivity.Enabled;
   cboOffset.Enabled := AValue;
   tedOffset.Enabled := AValue;
 
