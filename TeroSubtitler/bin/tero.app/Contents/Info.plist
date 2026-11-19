@@ -70,6 +70,8 @@
         <string>webvtt</string>
         <string>txt</string>
         <string>tero</string>
+        <string>tero1</string>
+        <string>stp</string>
         <string>*</string>
       </array>
       <key>CFBundleTypeOSTypes</key>

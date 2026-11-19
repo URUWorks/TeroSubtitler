@@ -157,6 +157,11 @@ msgstr "Text"
 msgid "Text (%s characters at %.2f CPS):"
 msgstr "Text (%s characters at %.2f CPS):"
 
+#: proclocalize.lngastimelineselection
+#, object-pascal-format
+msgid "Selection: %s - %s, duration %s (%d frames)"
+msgstr "Selection: %s - %s, duration %s (%d frames)"
+
 #: proclocalize.lngastimetoolong
 msgid "Duration too long"
 msgstr "Duration too long"
@@ -1146,6 +1151,49 @@ msgstr "# %d"
 msgid "Speaker %d"
 msgstr "Speaker %d"
 
+#: proclocalize.lngspecbold
+msgid "Bold: not allowed. It will be removed."
+msgstr "Bold: not allowed. It will be removed."
+
+#: proclocalize.lngspeccolor
+msgid "Color: not allowed. It will be removed."
+msgstr "Color: not allowed. It will be removed."
+
+#: proclocalize.lngspecentries
+#, object-pascal-format
+msgid "Entries: %s"
+msgstr "Entries: %s"
+
+#: proclocalize.lngspechaligncentered
+msgid "Left or right alignment: only centered text is allowed. They will be exported centered."
+msgstr "Left or right alignment: only centered text is allowed. They will be exported centered."
+
+#: proclocalize.lngspeclinelength
+#, object-pascal-format
+msgid "Lines longer than %d characters (the maximum per row in the format properties): they may be cut off when displayed."
+msgstr "Lines longer than %d characters (the maximum per row in the format properties): they may be cut off when displayed."
+
+#: proclocalize.lngspecmiddlekept
+msgid "Middle vertical alignment: only top and bottom are allowed. They will be exported in the middle anyway."
+msgstr "Middle vertical alignment: only top and bottom are allowed. They will be exported in the middle anyway."
+
+#: proclocalize.lngspecmiddletobottom
+msgid "Middle vertical alignment: only top and bottom are allowed. They will be exported at the bottom."
+msgstr "Middle vertical alignment: only top and bottom are allowed. They will be exported at the bottom."
+
+#: proclocalize.lngspecstrikeout
+msgid "Strikethrough: not allowed. It will be removed (the text is kept)."
+msgstr "Strikethrough: not allowed. It will be removed (the text is kept)."
+
+#: proclocalize.lngspecunderline
+msgid "Underline: not allowed. It will be removed."
+msgstr "Underline: not allowed. It will be removed."
+
+#: proclocalize.lngspecwillchange
+#, object-pascal-format
+msgid "The %s specification does not allow some of the formatting used, so these entries will be exported with changes:"
+msgstr "The %s specification does not allow some of the formatting used, so these entries will be exported with changes:"
+
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
 msgstr "Spell check finished."
@@ -1324,13 +1372,14 @@ msgstr "Words per minute average: %.2f"
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 
+#: proclocalize.lngsubtitlespecificationentries
+#, object-pascal-format
+msgid "Entries: %s (selected in the list)."
+msgstr "Entries: %s (selected in the list)."
+
 #: proclocalize.lngsubtitlespecificationerror
 msgid "The current subtitles do not meet the specifications of the format to be saved."
 msgstr "The current subtitles do not meet the specifications of the format to be saved."
-
-#: proclocalize.lngsubtitlespecificationerroralign
-msgid "There are entries with vertical alignment which are not allowed."
-msgstr "There are entries with vertical alignment which are not allowed."
 
 #: proclocalize.lngsubtitlespecificationerrorbr
 msgid "There are entries which exceed the line break."
@@ -1699,10 +1748,6 @@ msgstr "Maximum line length"
 msgid "Mixed languages (detect each part)"
 msgstr "Mixed languages (detect each part)"
 
-#: tfrmaudiototext.chksmartsegment.caption
-msgid "Smart segmentation (using the conventions)"
-msgstr "Smart segmentation (using the conventions)"
-
 #: tfrmaudiototext.chksounds.caption
 msgid "Include sounds ([Music], [Applause]...)"
 msgstr "Include sounds ([Music], [Applause]...)"
@@ -1710,10 +1755,6 @@ msgstr "Include sounds ([Music], [Applause]...)"
 #: tfrmaudiototext.chkspeakers.caption
 msgid "Identify the speakers in Actor (number, 0 = automatic)"
 msgstr "Identify the speakers in Actor (number, 0 = automatic)"
-
-#: tfrmaudiototext.chksynctext.caption
-msgid "Synchronize the current texts (only timings)"
-msgstr "Synchronize the current texts (only timings)"
 
 #: tfrmaudiototext.chktranslate.caption
 msgid "Translate to Еnglish"
@@ -1743,6 +1784,20 @@ msgstr "Add subtitles while transcribing"
 #: tfrmaudiototext.rbnloadsubtitlesaftertranscript.caption
 msgid "Load subtitles after transcription"
 msgstr "Load subtitles after transcription"
+
+#: tfrmaudiototext.rbnnewentries.caption
+msgid "New entries (from the transcription)"
+msgstr "New entries (from the transcription)"
+
+#: tfrmaudiototext.rbnsmartsegment.caption
+msgctxt "tfrmaudiototext.rbnsmartsegment.caption"
+msgid "Smart segmentation (using the conventions)"
+msgstr "Smart segmentation (using the conventions)"
+
+#: tfrmaudiototext.rbnsynctext.caption
+msgctxt "tfrmaudiototext.rbnsynctext.caption"
+msgid "Synchronize the current texts (only timings)"
+msgstr "Synchronize the current texts (only timings)"
 
 #: tfrmaudiototextmodel.btnclose.caption
 msgctxt "tfrmaudiototextmodel.btnclose.caption"

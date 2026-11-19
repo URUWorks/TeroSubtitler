@@ -157,6 +157,11 @@ msgstr "文本"
 msgid "Text (%s characters at %.2f CPS):"
 msgstr "文本 (%s 字符以 %.2f 每秒字符):"
 
+#: proclocalize.lngastimelineselection
+#, object-pascal-format
+msgid "Selection: %s - %s, duration %s (%d frames)"
+msgstr ""
+
 #: proclocalize.lngastimetoolong
 msgid "Duration too long"
 msgstr "持续时间过长"
@@ -1147,6 +1152,49 @@ msgstr ""
 msgid "Speaker %d"
 msgstr ""
 
+#: proclocalize.lngspecbold
+msgid "Bold: not allowed. It will be removed."
+msgstr ""
+
+#: proclocalize.lngspeccolor
+msgid "Color: not allowed. It will be removed."
+msgstr ""
+
+#: proclocalize.lngspecentries
+#, object-pascal-format
+msgid "Entries: %s"
+msgstr ""
+
+#: proclocalize.lngspechaligncentered
+msgid "Left or right alignment: only centered text is allowed. They will be exported centered."
+msgstr ""
+
+#: proclocalize.lngspeclinelength
+#, object-pascal-format
+msgid "Lines longer than %d characters (the maximum per row in the format properties): they may be cut off when displayed."
+msgstr ""
+
+#: proclocalize.lngspecmiddlekept
+msgid "Middle vertical alignment: only top and bottom are allowed. They will be exported in the middle anyway."
+msgstr ""
+
+#: proclocalize.lngspecmiddletobottom
+msgid "Middle vertical alignment: only top and bottom are allowed. They will be exported at the bottom."
+msgstr ""
+
+#: proclocalize.lngspecstrikeout
+msgid "Strikethrough: not allowed. It will be removed (the text is kept)."
+msgstr ""
+
+#: proclocalize.lngspecunderline
+msgid "Underline: not allowed. It will be removed."
+msgstr ""
+
+#: proclocalize.lngspecwillchange
+#, object-pascal-format
+msgid "The %s specification does not allow some of the formatting used, so these entries will be exported with changes:"
+msgstr ""
+
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
 msgstr "拼写检查完成。"
@@ -1325,13 +1373,14 @@ msgstr "平均每分钟字数：%.2f"
 msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
 msgstr "当前字幕组合包含建议解决的错误，但可以保存。"
 
+#: proclocalize.lngsubtitlespecificationentries
+#, object-pascal-format
+msgid "Entries: %s (selected in the list)."
+msgstr ""
+
 #: proclocalize.lngsubtitlespecificationerror
 msgid "The current subtitles do not meet the specifications of the format to be saved."
 msgstr "当前字幕不符合要保存格式的标准。"
-
-#: proclocalize.lngsubtitlespecificationerroralign
-msgid "There are entries with vertical alignment which are not allowed."
-msgstr "有些条目不允许垂直对齐。"
 
 #: proclocalize.lngsubtitlespecificationerrorbr
 msgid "There are entries which exceed the line break."
@@ -1703,20 +1752,12 @@ msgstr "最大行长"
 msgid "Mixed languages (detect each part)"
 msgstr ""
 
-#: tfrmaudiototext.chksmartsegment.caption
-msgid "Smart segmentation (using the conventions)"
-msgstr ""
-
 #: tfrmaudiototext.chksounds.caption
 msgid "Include sounds ([Music], [Applause]...)"
 msgstr ""
 
 #: tfrmaudiototext.chkspeakers.caption
 msgid "Identify the speakers in Actor (number, 0 = automatic)"
-msgstr ""
-
-#: tfrmaudiototext.chksynctext.caption
-msgid "Synchronize the current texts (only timings)"
 msgstr ""
 
 #: tfrmaudiototext.chktranslate.caption
@@ -1747,6 +1788,20 @@ msgstr "在转录时添加字幕"
 #: tfrmaudiototext.rbnloadsubtitlesaftertranscript.caption
 msgid "Load subtitles after transcription"
 msgstr "转录后加载字幕"
+
+#: tfrmaudiototext.rbnnewentries.caption
+msgid "New entries (from the transcription)"
+msgstr ""
+
+#: tfrmaudiototext.rbnsmartsegment.caption
+msgctxt "tfrmaudiototext.rbnsmartsegment.caption"
+msgid "Smart segmentation (using the conventions)"
+msgstr ""
+
+#: tfrmaudiototext.rbnsynctext.caption
+msgctxt "tfrmaudiototext.rbnsynctext.caption"
+msgid "Synchronize the current texts (only timings)"
+msgstr ""
 
 #: tfrmaudiototextmodel.btnclose.caption
 msgctxt "tfrmaudiototextmodel.btnclose.caption"
