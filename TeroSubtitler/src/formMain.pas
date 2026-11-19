@@ -314,7 +314,9 @@ type
     actCut: TAction;
     actCopy: TAction;
     actPaste: TAction;
+    MenuItem296: TMenuItem;
     mnuEditPasteSpecial: TMenuItem;
+    mnuVideoDolbyVision: TMenuItem;
     mnuVSTPasteSpecial: TMenuItem;
     mnuEditPasteSpecial0: TMenuItem;
     mnuVSTPasteSpecial0: TMenuItem;
@@ -495,6 +497,7 @@ type
     MenuItem56: TMenuItem;
     mnuVSTVideo: TMenuItem;
     mnuTextEffects: TMenuItem;
+    mnuWAVERegenerateThumbnails: TMenuItem;
     popCoolBarWaveform: TPopupMenu;
     popCoolBarEditor: TPopupMenu;
     popCoolBarVideo: TPopupMenu;
@@ -1044,6 +1047,7 @@ type
     procedure WAVETimeLineClick(Sender: TObject; const Time: Integer);
     procedure WAVESubtitleItemToggle(Sender: TObject; const Index: Integer);
     procedure WAVESubtitleItemsMoved(Sender: TObject; const Items: TMovedSubtitleItems);
+    procedure WAVESubtitleItemRangeSelect(Sender: TObject; const Index: Integer);
     procedure VSTChange(Sender: TBaseVirtualTree; Node: PVirtualNode);
     procedure UpdateWAVEMultiSelection;
     procedure GoToNextShotChange(const APrevious: Boolean = False);
@@ -1383,6 +1387,7 @@ type
     {$ENDIF}
     FCoolBarsFitted: Boolean;
     FWAVEValuesTimer: TTimer;     // times/CPS while dragging in the timeline
+    FWAVESelInStatus: Boolean;    // the status bar shows the timeline selection
     // the text doesn't change while an entry is dragged: its length and the
     // label (chars of each line) are calculated once, only the CPS changes
     FDragIdx: Integer;
@@ -1482,12 +1487,15 @@ begin
   // multiple selection in the timeline (it shows the entries selected in the list)
   WAVE.OnSubtitleItemToggle := @WAVESubtitleItemToggle;
   WAVE.OnSubtitleItemsMoved := @WAVESubtitleItemsMoved;
+  WAVE.OnSubtitleItemRangeSelect := @WAVESubtitleItemRangeSelect;
   VST.OnChange := @VSTChange;
   // Link undo event
   UndoInstance.OnChange := @UndoChanged;
   // Set default values
   DefaultValues;
   LoadSettings;
+  // whisper.cpp/faster-whisper from the Whisper folder to their own folders
+  MigrateWhisperFolders;
   LoadShortCutsFromFile(ShortCutFileName, ActionList);
   // Init language
   SetGUILanguage;
