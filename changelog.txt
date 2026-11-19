@@ -139,10 +139,18 @@
 - fixed: Timeline doesn't scroll to the last entries when they go past the end of the audio or video
 - fixed: Double-clicking an entry in the list places its start at the left edge of the timeline (now centered)
 - fixed: Keyboard inactive in the timeline (arrows now step frames and move between entries)
+- fixed: Default file format, custom profiles and waveform colors weren’t saved
+- fixed: Blank Frames box didn’t open with the current values when creating a convention
+- fixed: Some multi-line dialogs and messages showed truncated text
+- fixed: Leftover drawing on the timeline after combining entries, deleting or setting start/end times
 - changed: Whisper.cpp now downloads UW_WhisperCPP (Windows 7+, macOS 10.11+, Linux glibc 2.17+), with GPU support via Vulkan on Windows/Linux x64 and Metal on Apple Silicon
 - changed: [macOS] removed the menu items added by the system that Tero doesn’t use
+- changed: [macOS] Convention profiles are saved in the user folder instead of inside the app
 - changed: Faster-Whisper now downloads UW_FasterWhisper, and asks before downloading the optional NVIDIA GPU libraries
 - changed: Smart case starts a sentence on song lines (♪) and after a “--” interruption at the end of an entry
+- changed: Whisper.cpp and Faster-Whisper are now installed in separate folders inside Whisper/ (models stay shared); existing installations are migrated automatically
+- changed: Audio to text, “Synchronize the current texts” and “Smart segmentation” are now radio buttons
+- changed: Shot changes, Sensitivity is grouped with the detection app and disabled when the method doesn’t use it
 - improved: [macOS] now uses the standalone yt-dlp, which can update itself
 - improved: [SubtitleAPI] Cavena 890 & EBU (accents, special chars, tags, language/code page and alignment)
 - improved: [SubtitleAPI] Cheetah & Cheetah Caption (italics, accents, line breaks)
@@ -170,6 +178,8 @@
 - improved: Typing with "mpv handles subtitles" no longer rewrites the temp track on every key
 - improved: Language names are now shown in their own language
 - improved: Media loaded from a url shows its title instead of the url
+- improved: [macOS] Enabled buttons and the timeline grid are easier to see
+- improved: When saving to iTT fails, the error lists the entries that don’t comply and selects them
 - added: Shot changes built-in detection (frame exact cuts, dissolves and fades, ignoring flashes and camera motion)
 - added: [Windows] Whisper.cpp download for ARM64
 - added: [Linux] Whisper.cpp download for ARM64 (aarch64)
@@ -200,6 +210,8 @@
 - added: Import SUP: offers to download Tesseract if it isn't found
 - added: Combine entries and Extend initial/final time to previous/next in the timeline context menu
 - added: Timeline scrolls automatically when dragging an entry outside the current view
+- added: Start/end timecodes, duration and frames of the timeline drag-selection in the status bar
+- added: Shift+Click on another entry in the timeline selects the range, as in the list
 
 1.0.2.3 (18.09.2026)
 - fixed: Corrupted undo/redo stack when changing input/output FPS
