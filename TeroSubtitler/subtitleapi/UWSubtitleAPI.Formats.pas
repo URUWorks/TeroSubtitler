@@ -183,15 +183,21 @@ var
   s: String;
 begin
   Result := 0;
+  s := FormatName.ToLower;
+  if ARemoveSpaces then
+    s := s.Replace(' ', '');
+
   for i := Low(TUWSubtitleFormatsName) to High(TUWSubtitleFormatsName) do
   begin
-    s := FormatName.ToLower;
-
+    // without spaces on both sides: FormatToName(.., True) removes them from
+    // the name, "iTunes Timed Text" is saved as "iTunesTimedText"
     if ARemoveSpaces then
-      s := s.Replace(' ', '');
-
-    if s = AnsiLowerCase(TUWSubtitleFormatsName[i]) then
-      Result := i;
+    begin
+      if s = AnsiLowerCase(TUWSubtitleFormatsName[i]).Replace(' ', '') then
+        Exit(i);
+    end
+    else if s = AnsiLowerCase(TUWSubtitleFormatsName[i]) then
+      Exit(i);
   end;
 end;
 
