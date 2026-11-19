@@ -1,12 +1,12 @@
 object frmAudioToText: TfrmAudioToText
   Left = 237
-  Height = 728
+  Height = 762
   Top = 117
   Width = 590
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Audio to text'
-  ClientHeight = 728
+  ClientHeight = 762
   ClientWidth = 590
   DesignTimePPI = 120
   Position = poMainFormCenter
@@ -48,10 +48,10 @@ object frmAudioToText: TfrmAudioToText
   end
   object cboModel: TComboBox
     AnchorSideRight.Control = btnModel
-    Left = 128
+    Left = 120
     Height = 28
     Top = 130
-    Width = 386
+    Width = 394
     Anchors = [akTop, akLeft, akRight]
     AutoSize = False
     BorderSpacing.Right = 6
@@ -76,7 +76,7 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideRight.Control = btnClose
     Left = 346
     Height = 32
-    Top = 686
+    Top = 720
     Width = 114
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
@@ -92,14 +92,14 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideBottom.Side = asrBottom
     Left = 466
     Height = 32
-    Top = 686
+    Top = 720
     Width = 114
     Anchors = [akRight, akBottom]
     BorderSpacing.Right = 10
     BorderSpacing.Bottom = 10
     Cancel = True
     Caption = 'Close'
-    TabOrder = 21
+    TabOrder = 19
     OnClick = btnCloseClick
   end
   object lblTrack: TLabel
@@ -126,7 +126,7 @@ object frmAudioToText: TfrmAudioToText
   object lblWait: TLabel
     Left = 0
     Height = 40
-    Top = 594
+    Top = 628
     Width = 591
     Alignment = taCenter
     Anchors = [akLeft, akRight, akBottom]
@@ -140,7 +140,7 @@ object frmAudioToText: TfrmAudioToText
   object lblStatus: TLabel
     Left = 0
     Height = 50
-    Top = 634
+    Top = 668
     Width = 591
     Alignment = taCenter
     Anchors = [akLeft, akRight, akBottom]
@@ -157,12 +157,12 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideRight.Control = lblTimeElapsed
     Left = 10
     Height = 10
-    Top = 697
+    Top = 731
     Width = 255
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Right = 6
     Step = 1
-    TabOrder = 19
+    TabOrder = 18
     Visible = False
   end
   object lblTimeElapsed: TLabel
@@ -172,7 +172,7 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideBottom.Side = asrBottom
     Left = 271
     Height = 32
-    Top = 686
+    Top = 720
     Width = 69
     Alignment = taRightJustify
     Anchors = [akTop, akRight, akBottom]
@@ -320,46 +320,66 @@ object frmAudioToText: TfrmAudioToText
     Caption = 'Maximum line count'
     TabOrder = 12
   end
-  object chkSyncText: TUWCheckBox
+  object pnlTextMode: TPanel
     AnchorSideTop.Control = spnMaxLineCount
     AnchorSideTop.Side = asrBottom
     Left = 120
-    Height = 29
+    Height = 97
     Top = 412
-    Width = 20
-    AutoSize = False
+    Width = 313
+    AutoSize = True
     BorderSpacing.Top = 5
-    Caption = 'Synchronize the current texts (only timings)'
+    BevelOuter = bvNone
+    ClientHeight = 97
+    ClientWidth = 313
     TabOrder = 14
-    OnChange = chkSyncTextChange
-  end
-  object chkSmartSegment: TUWCheckBox
-    AnchorSideTop.Control = chkSyncText
-    AnchorSideTop.Side = asrBottom
-    Left = 120
-    Height = 29
-    Top = 446
-    Width = 20
-    AutoSize = False
-    BorderSpacing.Top = 5
-    Caption = 'Smart segmentation (using the conventions)'
-    TabOrder = 15
-    OnChange = chkSyncTextChange
+    object rbnNewEntries: TUWRadioButton
+      AnchorSideLeft.Control = pnlTextMode
+      AnchorSideTop.Control = pnlTextMode
+      Left = 0
+      Height = 29
+      Top = 0
+      Width = 22
+      AutoSize = False
+      Caption = 'New entries (from the transcription)'
+      Checked = True
+      TabOrder = 0
+      OnChange = rbnSyncTextChange
+      State = cbChecked
+    end
+    object rbnSyncText: TUWRadioButton
+      AnchorSideLeft.Control = pnlTextMode
+      AnchorSideTop.Control = rbnNewEntries
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 29
+      Top = 34
+      Width = 22
+      AutoSize = False
+      BorderSpacing.Top = 5
+      Caption = 'Synchronize the current texts (only timings)'
+      TabOrder = 1
+      TabStop = False
+      OnChange = rbnSyncTextChange
+    end
+    object rbnSmartSegment: TUWRadioButton
+      AnchorSideLeft.Control = pnlTextMode
+      AnchorSideTop.Control = rbnSyncText
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 29
+      Top = 68
+      Width = 22
+      AutoSize = False
+      BorderSpacing.Top = 5
+      Caption = 'Smart segmentation (using the conventions)'
+      TabOrder = 2
+      TabStop = False
+      OnChange = rbnSyncTextChange
+    end
   end
   object chkSounds: TUWCheckBox
-    AnchorSideTop.Control = chkSmartSegment
-    AnchorSideTop.Side = asrBottom
-    Left = 120
-    Height = 29
-    Top = 480
-    Width = 20
-    AutoSize = False
-    BorderSpacing.Top = 5
-    Caption = 'Include sounds ([Music], [Applause]...)'
-    TabOrder = 16
-  end
-  object chkSpeakers: TUWCheckBox
-    AnchorSideTop.Control = chkSounds
+    AnchorSideTop.Control = pnlTextMode
     AnchorSideTop.Side = asrBottom
     Left = 120
     Height = 29
@@ -367,8 +387,20 @@ object frmAudioToText: TfrmAudioToText
     Width = 20
     AutoSize = False
     BorderSpacing.Top = 5
+    Caption = 'Include sounds ([Music], [Applause]...)'
+    TabOrder = 15
+  end
+  object chkSpeakers: TUWCheckBox
+    AnchorSideTop.Control = chkSounds
+    AnchorSideTop.Side = asrBottom
+    Left = 120
+    Height = 29
+    Top = 548
+    Width = 20
+    AutoSize = False
+    BorderSpacing.Top = 5
     Caption = 'Identify the speakers in Actor (number, 0 = automatic)'
-    TabOrder = 17
+    TabOrder = 16
   end
   object spnSpeakers: TSpinEdit
     AnchorSideLeft.Control = chkSpeakers
@@ -376,10 +408,10 @@ object frmAudioToText: TfrmAudioToText
     AnchorSideTop.Side = asrBottom
     Left = 139
     Height = 28
-    Top = 543
+    Top = 577
     Width = 100
     BorderSpacing.Left = 19
     MaxValue = 20
-    TabOrder = 18
+    TabOrder = 17
   end
 end

@@ -23,6 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
+  ExtCtrls,
   UWRadioButton, UWCheckBox, LCLIntf, LCLTranslator, Spin, procLocalize,
   procTextSync;
 
@@ -56,8 +57,10 @@ type
     spnMaxLineLength: TSpinEdit;
     spnMaxLineCount: TSpinEdit;
     chkMaxLineLength: TUWCheckBox;
-    chkSyncText: TUWCheckBox;
-    chkSmartSegment: TUWCheckBox;
+    pnlTextMode: TPanel;
+    rbnNewEntries: TUWRadioButton;
+    rbnSyncText: TUWRadioButton;
+    rbnSmartSegment: TUWRadioButton;
     chkMaxLineCount: TUWCheckBox;
     chkSounds: TUWCheckBox;
     chkSpeakers: TUWCheckBox;
@@ -72,7 +75,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure rbnAddSubtitlesWhileTranscribingChange(Sender: TObject);
-    procedure chkSyncTextChange(Sender: TObject);
+    procedure rbnSyncTextChange(Sender: TObject);
   private
     FKeepSounds: Boolean;
     FMultilingual: Boolean;
@@ -265,7 +268,7 @@ begin
   spnMaxLineLength.Value := AppOptions.Conventions.CPL;
   spnMaxLineCount.Value := AppOptions.Conventions.MaxLines;
   // keep the texts of the entries, only their times from the audio
-  chkSyncText.Enabled := Subtitles.Count > 0;
+  rbnSyncText.Enabled := Subtitles.Count > 0;
   cboEngineSelect(NIL);
 
   {$IFNDEF WINDOWS}
@@ -346,15 +349,10 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure TfrmAudioToText.chkSyncTextChange(Sender: TObject);
+procedure TfrmAudioToText.rbnSyncTextChange(Sender: TObject);
 begin
-  // only one of them
-  if (Sender = chkSyncText) and chkSyncText.Checked then
-    chkSmartSegment.Checked := False
-  else if (Sender = chkSmartSegment) and chkSmartSegment.Checked then
-    chkSyncText.Checked := False;
-
-  if chkSyncText.Checked or chkSmartSegment.Checked then
+  // only one of them (radio buttons): new entries, synchronize or segment
+  if rbnSyncText.Checked or rbnSmartSegment.Checked then
     rbnLoadSubtitlesAfterTranscript.Checked := True;
 
   CheckEngineOptions;
@@ -519,7 +517,7 @@ begin
 
           if Tools.WhisperEngine = TWhisperEngine.WhisperCPP then
           begin
-            if chkSyncText.Checked or chkSmartSegment.Checked then
+            if rbnSyncText.Checked or rbnSmartSegment.Checked then
             begin
               // one word per segment, with its times
               ss.Insert(ss.IndexOf(' -osrt'), ' -ml 1 -sow');
@@ -527,7 +525,7 @@ begin
               // more precise; dtw doesn't work with flash attention (-nfa)
               if UseWhisperDTW then
                 ss.Insert(ss.IndexOf(' -osrt'), ' -ojf -dtw ' + WhisperDTWPreset(cboModel.Text) + ' -nfa');
-              if chkSmartSegment.Checked and chkTranslate.Checked then
+              if rbnSmartSegment.Checked and chkTranslate.Checked then
                 ss.Insert(ss.IndexOf(' -osrt'), ' -tr');
             end
             else
@@ -562,11 +560,11 @@ begin
             if cboLanguage.ItemIndex <> 0 then
               ss := ss + ' --language %lang';
 
-            if chkSyncText.Checked or chkSmartSegment.Checked then
+            if rbnSyncText.Checked or rbnSmartSegment.Checked then
               // words with their times
               ss := StringReplace(ss, '--output_format srt', '--output_format json', []) + ' --word_timestamps True';
 
-            if chkTranslate.Checked and not chkSyncText.Checked then
+            if chkTranslate.Checked and not rbnSyncText.Checked then
               ss := ss + ' --task translate';
 
             // audio with several languages: the language is detected again in
@@ -574,7 +572,7 @@ begin
             if FMultilingual and (Pos('multilingual', Tools.FasterWhisper_Additional) = 0) then
               ss := ss + ' --multilingual True';
 
-            if not chkSyncText.Checked and not chkSmartSegment.Checked and (chkMaxLineLength.Checked or chkMaxLineCount.Checked) then
+            if not rbnSyncText.Checked and not rbnSmartSegment.Checked and (chkMaxLineLength.Checked or chkMaxLineCount.Checked) then
             begin
               ss := ss + ' --sentence';
 
@@ -633,7 +631,7 @@ begin
           for i := 0 to High(AParamArray) do
             AParamArray[i] := StringsReplace(AParamArray[i], ['%input', '%output', '%model', '%binpath', '%lang'], [s, ss, model, modelpath, cn], []);
 
-          if rbnAddSubtitlesWhileTranscribing.Checked and not chkSyncText.Checked and not chkSmartSegment.Checked then //and rbnAddSubtitlesWhileTranscribing.Enabled then
+          if rbnAddSubtitlesWhileTranscribing.Checked and not rbnSyncText.Checked and not rbnSmartSegment.Checked then //and rbnAddSubtitlesWhileTranscribing.Enabled then
           begin
             FirstNew := Subtitles.Count;
             //if ExecuteAppEx(GetAudioToTextAppFile, AParamArray, AEnvironment, @ThreadProcessCB) then
@@ -682,7 +680,7 @@ begin
                 jsonfile := ConcatPaths([WhisperTranscriptionsFolder, ChangeFileExt(ExtractFileName(s), '.json')]);
                 LoadSpeakersFromJSON(jsonfile, Speakers);
                 // the other files of "--output_format all"
-                if not chkSmartSegment.Checked then
+                if not rbnSmartSegment.Checked then
                 begin
                   DeleteFile(jsonfile);
                   DeleteFile(ChangeFileExt(jsonfile, '.txt'));
@@ -691,7 +689,7 @@ begin
                 end;
               end;
 
-              if chkSyncText.Checked then
+              if rbnSyncText.Checked then
               begin
                 GetWordsFiles(s, srtfile, wfile, wfallback);
                 prbProgress.Position := 100;
@@ -709,7 +707,7 @@ begin
                 Exit;
               end;
 
-              if chkSmartSegment.Checked then
+              if rbnSmartSegment.Checked then
               begin
                 // words (whisper.cpp json/srt or faster-whisper json) -> our subtitles
                 GetWordsFiles(s, srtfile, wfile, wfallback);
@@ -735,7 +733,7 @@ begin
               if FileExists(srtfile) then
               begin
                 prbProgress.Position := 100;
-                CleanTranscriptionFile(srtfile, not chkSmartSegment.Checked);
+                CleanTranscriptionFile(srtfile, not rbnSmartSegment.Checked);
                 ShowMessageDialog(lngFileSavedSuccessfully, '', lngOpenContainingFolder, @OpenFolderClick);
                 LoadSubtitle(srtfile, sfSubRip, NIL, -1, True);
                 ApplySpeakers(Speakers);
@@ -791,8 +789,9 @@ begin
   cboModel.Enabled    := AValue;
 
   chkTranslate.Enabled := AValue;
-  chkSyncText.Enabled  := AValue and (Subtitles.Count > 0);
-  chkSmartSegment.Enabled := AValue;
+  rbnSyncText.Enabled  := AValue and (Subtitles.Count > 0);
+  rbnSmartSegment.Enabled := AValue;
+  rbnNewEntries.Enabled   := AValue;
 
   rbnAddSubtitlesWhileTranscribing.Enabled := AValue;
   rbnLoadSubtitlesAfterTranscript.Enabled  := AValue;
@@ -833,21 +832,21 @@ end;
 procedure TfrmAudioToText.CheckEngineOptions;
 begin
   // synchronizing: the segmentation and texts are the ones of the entries
-  rbnAddSubtitlesWhileTranscribing.Enabled := not chkSyncText.Checked and not chkSmartSegment.Checked;
-  chkTranslate.Enabled := not chkSyncText.Checked;
+  rbnAddSubtitlesWhileTranscribing.Enabled := not rbnSyncText.Checked and not rbnSmartSegment.Checked;
+  chkTranslate.Enabled := not rbnSyncText.Checked;
   // the sounds are entries of their own, there are no entries to make when
   // synchronizing and the smart segmentation uses only the words
-  chkSounds.Enabled := not chkSyncText.Checked and not chkSmartSegment.Checked;
+  chkSounds.Enabled := not rbnSyncText.Checked and not rbnSmartSegment.Checked;
   // only faster-whisper detects the language of each part, and only when
   // the language is not given
   chkMultilingual.Enabled := (Tools.WhisperEngine <> WhisperCPP) and (cboLanguage.ItemIndex = 0);
   // the speakers: only faster-whisper (UW_FasterWhisper --diarize), when
   // the entries are made at the end (the lines read while transcribing
   // don't have them) and not when only the timings are synchronized
-  chkSpeakers.Enabled := (Tools.WhisperEngine <> WhisperCPP) and not chkSyncText.Checked and
-    (rbnLoadSubtitlesAfterTranscript.Checked or chkSmartSegment.Checked);
+  chkSpeakers.Enabled := (Tools.WhisperEngine <> WhisperCPP) and not rbnSyncText.Checked and
+    (rbnLoadSubtitlesAfterTranscript.Checked or rbnSmartSegment.Checked);
   spnSpeakers.Enabled := chkSpeakers.Enabled;
-  if chkSyncText.Checked or chkSmartSegment.Checked then
+  if rbnSyncText.Checked or rbnSmartSegment.Checked then
   begin
     chkMaxLineLength.Enabled := False;
     spnMaxLineLength.Enabled := False;

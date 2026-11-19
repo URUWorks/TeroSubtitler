@@ -674,8 +674,8 @@ begin
   begin
     frmAudioToText := TfrmAudioToText.Create(Application);
     // ASyncTexts: synchronize the texts of the entries (e.g. a plain text imported)
-    if ASyncTexts and frmAudioToText.chkSyncText.Enabled then
-      frmAudioToText.chkSyncText.Checked := True;
+    if ASyncTexts and frmAudioToText.rbnSyncText.Enabled then
+      frmAudioToText.rbnSyncText.Checked := True;
     ShowForm(frmAudioToText);
   end
   else
