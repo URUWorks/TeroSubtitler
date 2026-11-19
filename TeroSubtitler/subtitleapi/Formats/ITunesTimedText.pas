@@ -206,16 +206,21 @@ end;
 // Escribe el texto de un <p> como FCP: la cursiva y el subrayado parciales en
 // un solo <span> por tramo, con todos sus atributos en el orden de FCP
 // (tts:fontStyle y después tts:textDecoration), nunca spans anidados, y los
-// saltos de línea como <br/>. Txt solo trae {\i} y {\u}.
+// saltos de línea como <br/>. Txt trae {\i}, {\u}, {\b} y {\c...}.
+// La negrita y el color parciales van como en la spec de Apple: un estilo del
+// <head> referenciado desde el <span> (<span style="bold">,
+// <span style="yellow">). AStyles junta los que hacen falta (Name=id, Value=
+// 'negrita|color') para escribirlos después en el <styling>.
 // Antes también escribía el tachado (tts:textDecoration="lineThrough"), que
 // iTT no admite: ahora el texto tachado se exporta sin tachar
 // Antes: AppendStyledTextDirect usaba una pila (un span por tag, anidados) y
 // con tags solapados ({\i1}a{\u1}b{\i0}c{\u0}) cerraba el span equivocado
 
-procedure AppendITTText(const XmlDoc: TXMLDocument; const Parent: TDOMNode; const Txt: String);
+procedure AppendITTText(const XmlDoc: TXMLDocument; const Parent: TDOMNode; const Txt: String; const AStyles: TStrings);
 type
   TRunStyle = record
-    It, Un: Boolean;
+    It, Un, Bo: Boolean;
+    Col: String;
   end;
 var
   Cur, Seg: TRunStyle;
@@ -226,7 +231,57 @@ var
 
   function SameStyle(const A, B: TRunStyle): Boolean;
   begin
-    Result := (A.It = B.It) and (A.Un = B.Un);
+    Result := (A.It = B.It) and (A.Un = B.Un) and (A.Bo = B.Bo) and (A.Col = B.Col);
+  end;
+
+  // el id del estilo del <head> para la negrita y/o el color de un tramo
+  function StyleId(const ABold: Boolean; const AColor: String): String;
+  var
+    Key, ColId, Seen, c: String;
+    k: Integer;
+  begin
+    Key := iff(ABold, '1', '0') + '|' + AColor;
+    for k := 0 to AStyles.Count-1 do
+      if AStyles.ValueFromIndex[k] = Key then
+        Exit(AStyles.Names[k]);
+
+    ColId := '';
+    if AColor <> '' then
+    begin
+      // 'yellow'... como id, como en el ejemplo de Apple; rgba() como color1...
+      if Pos('(', AColor) = 0 then
+        ColId := AColor
+      else
+      begin
+        // color1, color2... por cada rgba() distinto; el mismo con y sin
+        // negrita comparte el número (color1 y bold_color1)
+        Seen := '|';
+        for k := 0 to AStyles.Count-1 do
+        begin
+          c := Copy(AStyles.ValueFromIndex[k], 3, MaxInt);
+          if (Pos('(', c) > 0) and (Pos('|' + c + '|', Seen) = 0) then
+          begin
+            if c = AColor then
+            begin
+              ColId := AStyles.Names[k];
+              if Copy(ColId, 1, 5) = 'bold_' then Delete(ColId, 1, 5);
+              Break;
+            end;
+            Seen := Seen + c + '|';
+          end;
+        end;
+        if ColId = '' then
+          ColId := 'color' + IntToStr(Seen.CountChar('|'));
+      end;
+    end;
+
+    if ABold and (ColId <> '') then
+      Result := 'bold_' + ColId
+    else if ABold then
+      Result := 'bold'
+    else
+      Result := ColId;
+    AStyles.Add(Result + '=' + Key);
   end;
 
   procedure AddTextTo(const ANode: TDOMNode; const S: String);
@@ -252,11 +307,12 @@ var
     Span: TDOMElement;
   begin
     if Buffer = '' then Exit;
-    if not (Seg.It or Seg.Un) then
+    if not (Seg.It or Seg.Un or Seg.Bo or (Seg.Col <> '')) then
       AddTextTo(Parent, Buffer)
     else
     begin
       Span := XmlDoc.CreateElement('span');
+      if Seg.Bo or (Seg.Col <> '') then Span.SetAttribute('style', StyleId(Seg.Bo, Seg.Col));
       if Seg.It then Span.SetAttribute('tts:fontStyle', 'italic');
       if Seg.Un then Span.SetAttribute('tts:textDecoration', 'underline');
       Parent.AppendChild(Span);
@@ -266,7 +322,7 @@ var
   end;
 
 begin
-  Cur.It := False; Cur.Un := False;
+  Cur.It := False; Cur.Un := False; Cur.Bo := False; Cur.Col := '';
   Seg := Cur;
   Buffer := '';
   i := 1;
@@ -279,14 +335,17 @@ begin
     begin
       Block := Copy(Txt, i+1, j-i-1);
       for Tag in Block.Split(['\']) do
-        if (Length(Tag) = 2) and (Tag[1] in ['i', 'u']) and (Tag[2] in ['0', '1']) then
+        if (Length(Tag) = 2) and (Tag[1] in ['i', 'u', 'b']) and (Tag[2] in ['0', '1']) then
         begin
           OnOff := Tag[2] = '1';
           case Tag[1] of
             'i': Cur.It := OnOff;
             'u': Cur.Un := OnOff;
+            'b': Cur.Bo := OnOff;
           end;
-        end;
+        end
+        else if (Tag <> '') and (Tag[1] = 'c') then
+          Cur.Col := Copy(Tag, 2, MaxInt);
       i := j + 1;
       Continue;
     end;
@@ -307,9 +366,11 @@ end;
 
 // Lee los tags TS de una entrada ({\i1}, {\b1}, {\u1}, {\s1}, {\c&BBGGRR&},
 // también varios en un bloque como {\b1\c&H0000FF&}) y dice qué formato cubre
-// todo el texto visible. Text queda sin ese formato (va en el <p>), sin la
-// negrita ni el color parciales (Apple no los admite), sin el tachado (iTT no
-// lo admite) y con un tag por bloque.
+// todo el texto visible. Text queda sin ese formato (va en el <p>), con el
+// parcial (cursiva, subrayado, negrita y color, para los <span>), sin el
+// tachado (iTT no lo admite) y con un tag por bloque.
+// Antes la negrita y el color parciales se quitaban como si Apple no los
+// admitiera; su spec los muestra en <span style="..."> con estilos del <head>
 
 function AnalyzeITTEntry(const Txt: String): TITTEntryStyle;
 type
@@ -457,8 +518,10 @@ begin
     if SameCol then Result.Color := FirstCol;
   end;
 
-  // el texto: cursiva y subrayado parciales en <span>, negrita y color fuera
-  // (en el <p> si cubren todo, si no se pierden). Antes el tachado pasaba como
+  // el texto: el formato que no cubre toda la entrada, para los <span>: la
+  // cursiva y el subrayado ({\i}, {\u}), la negrita ({\b}) y el color
+  // ({\cyellow}, {\crgba(R,G,B,255)}... y {\c} para volver al de la entrada).
+  // Antes la negrita y el color parciales se perdían. Antes el tachado pasaba como
   // {\s1}/{\s0} y se exportaba con tts:textDecoration="lineThrough", que iTT
   // no admite: ahora se quita (el texto queda, sin tachar)
   for i := 0 to High(Toks) do
@@ -468,7 +531,94 @@ begin
       case Toks[i].S of
         'i': if not Result.Italic then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\i1}', '{\i0}');
         'u': if not Result.Underline then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\u1}', '{\u0}');
+        'b': if not Result.Bold then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\b1}', '{\b0}');
+        'c': if not SameCol then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\c' + Toks[i].Color + '}', '{\c}');
       end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+
+// Al importar: los <span style="id"> que apuntan a un <style> del <head> (como
+// en los ejemplos de Apple y como exporta TS la negrita y el color parciales)
+// reciben los tts:* de ese estilo, para que ExtractStyledTTMLText los lea.
+// Antes solo se reconocía "bold"/"italic" dentro del nombre del estilo y el
+// color se perdía
+
+procedure ResolveITTSpanStyles(const XmlDoc: TXMLDocument);
+const
+  Attrs: array[0..3] of String = ('tts:fontWeight', 'tts:fontStyle', 'tts:color', 'tts:textDecoration');
+var
+  StylingNode, N: TDOMNode;
+  Ids: TStringList;
+
+  procedure Walk(const ANode: TDOMNode);
+  var
+    C, S: TDOMNode;
+    Id, LocalName: String;
+    a, x: Integer;
+    AllFound: Boolean;
+  begin
+    C := ANode.FirstChild;
+    while Assigned(C) do
+    begin
+      if C.NodeType = ELEMENT_NODE then
+      begin
+        LocalName := C.NodeName;
+        if Pos(':', LocalName) > 0 then
+          LocalName := Copy(LocalName, Pos(':', LocalName) + 1, MaxInt);
+        if (LocalName = 'span') and XMLHasAttribute(C, 'style') then
+        begin
+          AllFound := True;
+          for Id in Trim(XMLGetAttrValue(C, 'style')).Split([' '], TStringSplitOptions.ExcludeEmpty) do
+          begin
+            x := Ids.IndexOf(Id);
+            if x < 0 then
+            begin
+              AllFound := False;
+              Continue;
+            end;
+            S := TDOMNode(Ids.Objects[x]);
+            // los atributos del propio <span> mandan sobre los del estilo
+            // (el blanco es el color por defecto: no se copia, como al leer
+            // el <p>, para no llenar el texto de {\c&FFFFFF&})
+            for a := 0 to High(Attrs) do
+              if XMLHasAttribute(S, Attrs[a]) and not XMLHasAttribute(C, Attrs[a]) and
+                not ((Attrs[a] = 'tts:color') and (TTMLColorToBGR(XMLGetAttrValue(S, Attrs[a])) = 'FFFFFF')) then
+                TDOMElement(C).SetAttribute(Attrs[a], XMLGetAttrValue(S, Attrs[a]));
+          end;
+          // resuelto: sin el nombre, que ya no se adivina por su texto
+          if AllFound then
+            TDOMElement(C).RemoveAttribute('style');
+        end;
+        Walk(C);
+      end;
+      C := C.NextSibling;
+    end;
+  end;
+
+begin
+  StylingNode := XMLFindNodeByName(XmlDoc, 'styling');
+  if not Assigned(StylingNode) then Exit;
+
+  Ids := TStringList.Create;
+  try
+    Ids.CaseSensitive := True;
+    N := StylingNode.FirstChild;
+    while Assigned(N) do
+    begin
+      if (N.NodeType = ELEMENT_NODE) and XMLHasAttribute(N, 'xml:id') then
+        Ids.AddObject(XMLGetAttrValue(N, 'xml:id'), N);
+      N := N.NextSibling;
+    end;
+    if Ids.Count = 0 then Exit;
+
+    N := XMLFindNodeByName(XmlDoc, 'body');
+    if Assigned(N) then Walk(N);
+  finally
+    Ids.Free;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -648,6 +798,9 @@ begin
         end;
       end;
 
+      // <span style="..."> con estilos del <head>
+      ResolveITTSpanStyles(XmlDoc);
+
       // Formato y región del <body>, para todas las entradas (como FCP)
       BodyItalic := False; BodyBold := False; BodyUnderline := False;
       BodyColor := ''; BodyRegion := '';
@@ -776,6 +929,8 @@ var
   Styles: array of TITTEntryStyle;
   St: TITTEntryStyle;
   RefColor: String;
+  SpanStyles: TStringList;
+  k: Integer;
 
   // Preset de <style>: solo se escriben los que el texto realmente referencia
   procedure AddPresetStyle(const AName, AFontStyle, AFontWeight, ADecoration: String);
@@ -814,6 +969,7 @@ begin
   Result := False;
   NeedTop := False;
   XmlDoc := TXMLDocument.Create;
+  SpanStyles := TStringList.Create;
   try
     Root := XmlDoc.CreateElement('tt');
       // Mismos namespaces y orden de atributos que escribe Final Cut Pro
@@ -933,8 +1089,9 @@ begin
       TDOMElement(Element).SetAttribute('end', MSToHHMMSSFFTime(ft, NewFPS, TCMode));
 
       // Formato de toda la entrada en el <p> (como FCP), salvo el que ya va
-      // en el <body>. Antes solo la cursiva; la negrita y el color iban en
-      // <span>, que Apple no admite
+      // en el <body>. Antes solo la cursiva; la negrita y el color de toda la
+      // entrada iban en <span> con tts:* en línea (los parciales ahora van en
+      // <span style> con un estilo del <head>, ver AppendITTText)
       St := Styles[i-FromItem];
       if St.Visible then
       begin
@@ -962,9 +1119,23 @@ begin
       // Antes: <span style="italic"> apuntando al <head>; FCP usa
       // <span tts:fontStyle="italic"> en línea, y cursiva + subrayado en un
       // mismo <span> (antes eran dos spans anidados)
-      AppendITTText(XmlDoc, Element, St.Text);
+      AppendITTText(XmlDoc, Element, St.Text, SpanStyles);
 
       DivNode.AppendChild(Element);
+    end;
+
+    // Estilos de la negrita y el color parciales (los de los <span style>),
+    // después de 'normal'. Solo el atributo que cambian, para no pisar la
+    // cursiva ni el resto de lo que el <span> hereda del <p>
+    for k := 0 to SpanStyles.Count-1 do
+    begin
+      Node := XmlDoc.CreateElement('style');
+      TDOMElement(Node).SetAttribute('xml:id', SpanStyles.Names[k]);
+      if Copy(SpanStyles.ValueFromIndex[k], 3, MaxInt) <> '' then
+        TDOMElement(Node).SetAttribute('tts:color', Copy(SpanStyles.ValueFromIndex[k], 3, MaxInt));
+      if SpanStyles.ValueFromIndex[k][1] = '1' then
+        TDOMElement(Node).SetAttribute('tts:fontWeight', 'bold');
+      StylingNode.AppendChild(Node);
     end;
 
     // Regiones: top antes que bottom, solo las usadas (si todas van arriba no
@@ -992,6 +1163,7 @@ begin
     except
     end;
   finally
+    SpanStyles.Free;
     XmlDoc.Free;
   end;
 end;
