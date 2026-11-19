@@ -67,7 +67,16 @@ resourcestring
   lngSubtitleSpecificationError = 'The current subtitles do not meet the specifications of the format to be saved.';
   lngSubtitleSpecificationErrorFPS = 'Current frame rate does not match.';
   lngSubtitleSpecificationErrorBR = 'There are entries which exceed the line break.';
-  lngSubtitleSpecificationErrorAlign = 'There are entries with vertical alignment which are not allowed.';
+  lngSpecWillChange = 'The %s specification does not allow some of the formatting used, so these entries will be exported with changes:';
+  lngSpecEntries = 'Entries: %s';
+  lngSpecMiddleToBottom = 'Middle vertical alignment: only top and bottom are allowed. They will be exported at the bottom.';
+  lngSpecMiddleKept = 'Middle vertical alignment: only top and bottom are allowed. They will be exported in the middle anyway.';
+  lngSpecHAlignCentered = 'Left or right alignment: only centered text is allowed. They will be exported centered.';
+  lngSpecBold = 'Bold: not allowed. It will be removed.';
+  lngSpecUnderline = 'Underline: not allowed. It will be removed.';
+  lngSpecStrikeout = 'Strikethrough: not allowed. It will be removed (the text is kept).';
+  lngSpecColor = 'Color: not allowed. It will be removed.';
+  lngSpecLineLength = 'Lines longer than %d characters (the maximum per row in the format properties): they may be cut off when displayed.';
   lngSubtitleSpecificationEntries = 'Entries: %s (selected in the list).';
   lngTextFormatted = 'Export formatted text?';
   lngNoInternetConnection = 'No Internet connection available';
