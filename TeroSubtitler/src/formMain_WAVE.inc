@@ -97,6 +97,30 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.WAVESubtitleItemRangeSelect(Sender: TObject; const Index: Integer);
+var
+  Anchor: Integer;
+begin
+  // Shift+click on an entry in the timeline: select the entries from the
+  // focused one to it, as Shift+click in the list. The focused entry stays
+  // (the anchor), so another Shift+click changes the range from it
+  if not Subtitles.ValidIndex(Index) then Exit;
+
+  Anchor := VSTFocusedNode(VST);
+  if not Subtitles.ValidIndex(Anchor) then Anchor := Index;
+
+  if Anchor <= Index then
+    VSTSelectNodes(VST, Anchor, Index, True)
+  else
+    VSTSelectNodes(VST, Index, Anchor, True);
+  VSTSelectNode(VST, Anchor, False, True, True);
+
+  WAVE.SelectSubtitle(Anchor, True, False);
+  UpdateWAVEMultiSelection;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.UpdateWAVEMultiSelection;
 var
   Node  : PVirtualNode;
@@ -253,17 +277,42 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.WAVESelectionChange(Sender: TObject);
+var
+  it, ft, rit, rft, fr: Integer;
+  AFPS: Double;
 begin
   DoWAVEPopup(NIL);
 
   //actMediaAddEntry.Enabled   := not WAVE.SelectionIsEmpty and WAVE.IsOnlySelection;
   actMediaZoomSelection.Enabled := actMediaAddEntry.Enabled;
-{  if WAVE.SelectionIsEmpty then
-    stbStatus.Panels[1].Text := ''
-  else
-    stbStatus.Panels[1].Text := Format(Strings.Selection,
-      [TimeToString(WAVE.Selection.InitialTime, DefTimeFormat, FPS.FPS, True),
-      TimeToString(WAVE.Selection.FinalTime, DefTimeFormat, FPS.FPS, True)]);}
+
+  // a selection (not an entry) in the timeline: its start/end, duration and
+  // frames in the status bar, to know if it is long enough for a new entry
+  if not WAVE.SelectionIsEmpty and WAVE.IsOnlySelection then
+  begin
+    it := WAVE.Selection.InitialTime;
+    ft := WAVE.Selection.FinalTime;
+    AFPS := Workspace.FPS.OutputFPS.FPS;
+    if Workspace.WorkMode = wmFrames then
+    begin
+      RoundFramesValue(it, ft, AFPS, rit, rft);
+      it := rit;
+      ft := rft;
+    end;
+    if AFPS > 0 then
+      fr := Round((ft - it) * AFPS / 1000)
+    else
+      fr := 0;
+
+    SetStatusBarText(Format(lngasTimelineSelection, [GetTimeStr(it), GetTimeStr(ft),
+      GetTimeStr(ft - it, False, tcNDF), fr], FormatSettings), 0, False);
+    FWAVESelInStatus := True;
+  end
+  else if FWAVESelInStatus then
+  begin
+    FWAVESelInStatus := False;
+    SetStatusBarText('', 0, False);
+  end;
 end;
 
 // -----------------------------------------------------------------------------

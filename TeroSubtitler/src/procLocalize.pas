@@ -68,6 +68,7 @@ resourcestring
   lngSubtitleSpecificationErrorFPS = 'Current frame rate does not match.';
   lngSubtitleSpecificationErrorBR = 'There are entries which exceed the line break.';
   lngSubtitleSpecificationErrorAlign = 'There are entries with vertical alignment which are not allowed.';
+  lngSubtitleSpecificationEntries = 'Entries: %s (selected in the list).';
   lngTextFormatted = 'Export formatted text?';
   lngNoInternetConnection = 'No Internet connection available';
   lngFailedToDownload = 'No content downloaded, missing file or no Internet connection.';
@@ -151,6 +152,7 @@ resourcestring
   lngasTranslationChars = 'Translation (%s characters at %.2f CPS):';
   lngasTranslation = 'Translation';
   lngasLineSelected = '%d entries selected / %d';
+  lngasTimelineSelection = 'Selection: %s - %s, duration %s (%d frames)';
   lngasMarked = 'Marked entry';
   lngasBadValues = 'Bad values';
   lngasTimeTooLong = 'Duration too long';

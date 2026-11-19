@@ -104,7 +104,7 @@ procedure InitializeApp;
 implementation
 
 uses
-  procMPV,
+  Types, procMPV,
   procConfig, procDialogs, procWorkspace, procVST, procSubtitle, procUndo,
   UWSystem.Encoding, formCustomFileDlg, UWSystem.SysUtils, Forms, procMRU,
   UWSystem.StrUtils, procForms, procProjectFile, formCustomSelectDlg,
@@ -766,9 +766,37 @@ end;
 // -----------------------------------------------------------------------------
 
 function AllowSaveFormat(const AFormat: TUWSubtitleFormats): Boolean;
+
+  // which entries: their numbers in the message and selected in the list,
+  // to find them (before, only "there are entries...")
+  function CheckEntries(const AIdxs: TIntegerDynArray; const AError: String): Boolean;
+  const
+    MaxNumbers = 20;
+  var
+    s : String;
+    j : Integer;
+  begin
+    Result := Length(AIdxs) = 0;
+    if Result then Exit;
+
+    s := '';
+    for j := 0 to Min(High(AIdxs), MaxNumbers-1) do
+    begin
+      if j > 0 then s += ', ';
+      s += IntToStr(AIdxs[j]+1);
+    end;
+    if Length(AIdxs) > MaxNumbers then
+      s += Format(', ... (%d)', [Length(AIdxs)]);
+
+    VSTSelectNodes(frmMain.VST, AIdxs, True);
+    ShowErrorMessageDialog(lngSubtitleSpecificationError + LineEnding + LineEnding +
+      AError + LineEnding + Format(lngSubtitleSpecificationEntries, [s]), '', False, False);
+  end;
+
 var
   F : AnsiString;
   i : Integer;
+  BR, Align : TIntegerDynArray;
 begin
   Result := False;
 
@@ -782,17 +810,16 @@ begin
       Exit;
     end;
 
+    BR := NIL;
+    Align := NIL;
     for i := 0 to Subtitles.Count-1 do
       if LineCount(Subtitles[i].Text, LineEnding) > 2 then
-      begin
-        ShowErrorMessageDialog(Format('%s%s%s', [lngSubtitleSpecificationError, LineEnding+LineEnding, lngSubtitleSpecificationErrorBR]), '', False, False);
-        Exit;
-      end
+        Insert(i, BR, Length(BR))
       else if (Subtitles[i].VAlign = svaCenter) then
-      begin
-        ShowErrorMessageDialog(Format('%s%s%s', [lngSubtitleSpecificationError, LineEnding+LineEnding, lngSubtitleSpecificationErrorAlign]), '', False, False);
-        Exit;
-      end;
+        Insert(i, Align, Length(Align));
+
+    if not CheckEntries(BR, lngSubtitleSpecificationErrorBR) then Exit;
+    if not CheckEntries(Align, lngSubtitleSpecificationErrorAlign) then Exit;
   end;
 
   Result := True;
