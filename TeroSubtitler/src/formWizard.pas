@@ -430,14 +430,16 @@ end;
 
 procedure TfrmWizard.btnDownloadWhisperClick(Sender: TObject);
 begin
+  // its own folder, the libraries of each engine aren't mixed
+  ForceDirectories(WhisperCPPFolder);
   {$IFDEF DARWIN}
-  ShowDownloadDialog(StringReplace(URL_WHISPER, '%cpu', GetCPUArchitectureString, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
+  ShowDownloadDialog(StringReplace(URL_WHISPER, '%cpu', GetCPUArchitectureString, []), ConcatPaths([WhisperCPPFolder, 'whisper.zip']));
   {$ELSE}
-  ShowDownloadDialog(URL_WHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
+  ShowDownloadDialog(URL_WHISPER, ConcatPaths([WhisperCPPFolder, 'whisper.zip']));
   {$ENDIF}
-  if FileExists(ResolveWhisperCPP(ConcatPaths([WhisperFolder, WHISPER_EXE]))) then
+  if FileExists(ResolveWhisperCPP(ConcatPaths([WhisperCPPFolder, WHISPER_EXE]))) then
   begin
-    Tools.WhisperCPP := ResolveWhisperCPP(ConcatPaths([WhisperFolder, WHISPER_EXE]));
+    Tools.WhisperCPP := ResolveWhisperCPP(ConcatPaths([WhisperCPPFolder, WHISPER_EXE]));
     CheckState_whispercpp;
   end;
 end;
@@ -455,20 +457,24 @@ begin
   cpu := GetCPUArchitectureString;
   if (cpu = 'x86_64') and (GetDarwinMajorVersion < 20) then
     cpu := 'legacy_x86_64';
-  ShowDownloadDialog(StringReplace(URL_FASTERWHISPER, '%cpu', cpu, []), ConcatPaths([WhisperFolder, 'whisper.zip']));
+  {$ENDIF}
+  // its own folder, the libraries of each engine aren't mixed
+  ForceDirectories(FasterWhisperFolder);
+  {$IFDEF DARWIN}
+  ShowDownloadDialog(StringReplace(URL_FASTERWHISPER, '%cpu', cpu, []), ConcatPaths([FasterWhisperFolder, 'whisper.zip']));
   {$ELSE}
-  ShowDownloadDialog(URL_FASTERWHISPER, ConcatPaths([WhisperFolder, 'whisper.zip']));
+  ShowDownloadDialog(URL_FASTERWHISPER, ConcatPaths([FasterWhisperFolder, 'whisper.zip']));
   {$IFDEF WINDOWS}
   // the GPU libraries are big and optional (faster-whisper runs on the CPU
   // without them), only if they're wanted
-  if FileExists(ConcatPaths([WhisperFolder, FASTERWHISPER_EXE])) and
+  if FileExists(ConcatPaths([FasterWhisperFolder, FASTERWHISPER_EXE])) and
     (CustomQuestionDialog(lngAskDownloadGPULibs, lngGPULibsOptional, [dbYes, dbNo]) = mrYes) then
-    ShowDownloadDialog(URL_FASTERWHISPERCUDA, ConcatPaths([WhisperFolder, 'cuda.zip']));
+    ShowDownloadDialog(URL_FASTERWHISPERCUDA, ConcatPaths([FasterWhisperFolder, 'cuda.zip']));
   {$ENDIF}
   {$ENDIF}
-  if FileExists(ConcatPaths([WhisperFolder, FASTERWHISPER_EXE])) then
+  if FileExists(ConcatPaths([FasterWhisperFolder, FASTERWHISPER_EXE])) then
   begin
-    Tools.FasterWhisper := ConcatPaths([WhisperFolder, FASTERWHISPER_EXE]);
+    Tools.FasterWhisper := ConcatPaths([FasterWhisperFolder, FASTERWHISPER_EXE]);
     CheckState_fasterwhisper;
   end;
 end;

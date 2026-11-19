@@ -101,6 +101,9 @@ function CustomFormatFolder: String;
 function TranslationMemoryFolder: String;
 function TerminologyFolder: String;
 function WhisperFolder: String;
+function WhisperCPPFolder: String;
+function FasterWhisperFolder: String;
+procedure MigrateWhisperFolders;
 function ResolveWhisperCPP(const AFileName: String): String;
 function WhisperFileName: String;
 function WhisperModelsFolder: String;
@@ -132,7 +135,7 @@ procedure CheckForUpdates;
 implementation
 
 uses
-  FileUtil, RegExpr, formMain, UWSystem.Encoding, UWSystem.SysUtils, Dialogs,
+  Graphics, BGRABitmapTypes, FileUtil, RegExpr, formMain, UWSystem.Encoding, UWSystem.SysUtils, Dialogs,
   procDialogs, UWSubtitleAPI.Formats, MPVPlayer, procWorkspace, procColorTheme,
   LCLProc, UWSystem.Globalization, UWSystem.TimeUtils, libMPV.Client, procMPV,
   UWSpellcheck.Hunspell, procConventions, UWSystem.InetUtils, lazfileutils,
@@ -195,8 +198,9 @@ begin
 
     if DirectoryExists(GetCustomUserPath('Whisper')) then
     begin
-      WhisperCPP    := ResolveWhisperCPP(ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE]));
-      FasterWhisper := ConcatPaths([GetCustomUserPath('Whisper'), FASTERWHISPER_EXE]);
+      // each engine in its own folder (an old install is moved by MigrateWhisperFolders)
+      WhisperCPP    := ResolveWhisperCPP(ConcatPaths([WhisperCPPFolder, WHISPER_EXE]));
+      FasterWhisper := ConcatPaths([FasterWhisperFolder, FASTERWHISPER_EXE]);
     end;
 
     if FileExists(GetCustomFilePath(YTDLP_EXE)) then
@@ -213,8 +217,9 @@ begin
 
     if DirectoryExists(GetCustomUserPath('Whisper')) then
     begin
-      WhisperCPP    := ResolveWhisperCPP(ConcatPaths([GetCustomUserPath('Whisper'), WHISPER_EXE]));
-      FasterWhisper := ConcatPaths([GetCustomUserPath('Whisper'), FASTERWHISPER_EXE]);
+      // each engine in its own folder (an old install is moved by MigrateWhisperFolders)
+      WhisperCPP    := ResolveWhisperCPP(ConcatPaths([WhisperCPPFolder, WHISPER_EXE]));
+      FasterWhisper := ConcatPaths([FasterWhisperFolder, FASTERWHISPER_EXE]);
     end
     else
     begin
@@ -706,6 +711,13 @@ begin
         OpenKey('WAVE');
         LoopCount := GetValue('LoopCount', LoopCount);
         frmMain.WAVE.DrawGAP := GetValue('DrawGAP', False);
+        // colors chosen in Settings (the theme's ones if not)
+        ColorThemeInstance.CustomWaveColor := TColor(GetValue('CustomWaveColor', Integer(clNone)));
+        ColorThemeInstance.CustomWaveItemColor := TColor(GetValue('CustomWaveItemColor', Integer(clNone)));
+        if ColorThemeInstance.CustomWaveItemColor <> clNone then
+          frmMain.WAVE.CustomColors.Item := ColorToBGRA(ColorThemeInstance.CustomWaveItemColor);
+        if ColorThemeInstance.CustomWaveColor <> clNone then
+          frmMain.WAVE.CustomColors.Waveform := ColorToBGRA(ColorThemeInstance.CustomWaveColor);
         frmMain.actViewShotChange.Checked := GetValue('ViewShotChanges', False);
         frmMain.actViewShotChangeExecute(NIL);
         frmMain.actCenterWaveform.Checked := GetValue('CenterWaveform', False);
@@ -1206,6 +1218,8 @@ begin
         SetValue('ViewShotChanges', frmMain.actViewShotChange.Checked);
         SetValue('CenterWaveform', frmMain.actCenterWaveform.Checked);
         SetValue('DrawGAP', frmMain.WAVE.DrawGAP);
+        SetValue('CustomWaveColor', Integer(ColorThemeInstance.CustomWaveColor));
+        SetValue('CustomWaveItemColor', Integer(ColorThemeInstance.CustomWaveItemColor));
         CloseKey;
       end;
 
@@ -1859,9 +1873,26 @@ end;
 // -----------------------------------------------------------------------------
 
 function ConventionsFileName: String;
+{$IFDEF DARWIN}
+var
+  AppFile: String;
+{$ENDIF}
 begin
   {$IFDEF DARWIN}
-  Result := GetCustomFolderPath('Resources') + RootCfg+'.cfs';
+  // the user's copy: inside the bundle the added, updated or removed profiles
+  // were not saved (read-only/translocated app, replaced when updating it).
+  // The first time, it is made from the one of the app.
+  Result := GetUserDir + RootCfg+'/'+RootCfg+'.cfs';
+  if not FileExists(Result) then
+  begin
+    AppFile := GetCustomFolderPath('Resources') + RootCfg+'.cfs';
+    if FileExists(AppFile) then
+    begin
+      ForceDirectories(ExtractFileDir(Result));
+      if not CopyFile(AppFile, Result) then
+        Result := AppFile;
+    end;
+  end;
   {$ELSE}
   Result := GetCustomFilePath(RootCfg+'.cfs');
   {$ENDIF}
@@ -2088,6 +2119,118 @@ end;
 function WhisperFolder: String;
 begin
   Result := GetCustomUserPath('Whisper');
+end;
+
+// -----------------------------------------------------------------------------
+
+// whisper.cpp and faster-whisper with their libraries, each one in its own
+// folder: before they were extracted together in the Whisper folder, it was
+// hard to know which library was of which engine (e.g. to replace one)
+
+function WhisperCPPFolder: String;
+begin
+  Result := IncludeTrailingPathDelimiter(ConcatPaths([WhisperFolder, 'whisper.cpp']));
+end;
+
+// -----------------------------------------------------------------------------
+
+function FasterWhisperFolder: String;
+begin
+  Result := IncludeTrailingPathDelimiter(ConcatPaths([WhisperFolder, 'faster-whisper']));
+end;
+
+// -----------------------------------------------------------------------------
+
+// moves the files (and folders) of the Whisper folder that match AMasks to
+// ADest, all or nothing: if one can't be moved, the ones moved go back and the
+// old install keeps working as before
+function MoveWhisperFiles(const AMasks: array of String; const ADest: String): Boolean;
+var
+  root : String;
+  names: TStringList;
+  sr   : TSearchRec;
+  i, x : Integer;
+begin
+  Result := False;
+  root := IncludeTrailingPathDelimiter(WhisperFolder);
+  names := TStringList.Create;
+  try
+    // first the names, renaming while FindNext is listing isn't safe
+    for i := 0 to High(AMasks) do
+      if SysUtils.FindFirst(root + AMasks[i], faAnyFile or faDirectory, sr) = 0 then
+      try
+        repeat
+          if (sr.Name <> '.') and (sr.Name <> '..') and (names.IndexOf(sr.Name) < 0) then
+            names.Add(sr.Name);
+        until SysUtils.FindNext(sr) <> 0;
+      finally
+        SysUtils.FindClose(sr);
+      end;
+
+    if (names.Count = 0) or not ForceDirectories(ADest) then Exit;
+
+    for i := 0 to names.Count-1 do
+      if not RenameFile(root + names[i], ADest + names[i]) then
+      begin
+        for x := i-1 downto 0 do
+          RenameFile(ADest + names[x], root + names[x]);
+        Exit;
+      end;
+
+    Result := True;
+  finally
+    names.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MigrateWhisperFolders;
+const
+  // what the zips of UW_WhisperCPP/UW_FasterWhisper (and the older downloads)
+  // extracted in the Whisper folder
+  {$IFDEF WINDOWS}
+  CPP_FILES : array[0..5] of String = ('whisper-cli.exe', 'main.exe', 'whisper.dll', 'ggml*.dll', 'SDL2.dll', 'LICENSE.txt');
+  FW_FILES  : array[0..7] of String = ('whisper-faster.exe', '_internal', 'openvino', 'cublas*.dll', 'cudnn*.dll', 'cudart*.dll', 'nvblas*.dll', 'zlibwapi.dll');
+  {$ELSE}
+  CPP_FILES : array[0..5] of String = ('whisper-cli', 'main', 'libwhisper*', 'libggml*', 'libc++*.dylib', 'LICENSE.txt');
+  FW_FILES  : array[0..2] of String = ('whisper-faster', '_internal', 'openvino');
+  {$ENDIF}
+var
+  root, ext: String;
+
+  function InFolder(const AFileName, AFolder: String): Boolean;
+  begin
+    Result := (AFileName <> '') and SameFileName(ExpandFileName(ExtractFilePath(AFileName)), ExpandFileName(IncludeTrailingPathDelimiter(AFolder)));
+  end;
+
+begin
+  root := IncludeTrailingPathDelimiter(WhisperFolder);
+  if not DirectoryExists(root) then Exit;
+  ext := ExtractFileExt(WHISPER_EXE);
+
+  // whisper.cpp (whisper-cli, or main in older downloads)
+  if (FileExists(root + WHISPER_EXE) or FileExists(root + 'main' + ext)) and
+    not FileExists(ResolveWhisperCPP(WhisperCPPFolder + WHISPER_EXE)) and
+    MoveWhisperFiles(CPP_FILES, WhisperCPPFolder) and InFolder(Tools.WhisperCPP, root) and
+    FileExists(ResolveWhisperCPP(WhisperCPPFolder + ExtractFileName(Tools.WhisperCPP))) then
+      Tools.WhisperCPP := ResolveWhisperCPP(WhisperCPPFolder + ExtractFileName(Tools.WhisperCPP));
+
+  // the new folder is the default, an old install that couldn't be moved
+  if InFolder(Tools.WhisperCPP, WhisperCPPFolder) and not FileExists(Tools.WhisperCPP) and
+    (FileExists(root + WHISPER_EXE) or FileExists(root + 'main' + ext)) then
+      Tools.WhisperCPP := ResolveWhisperCPP(root + WHISPER_EXE);
+
+  // faster-whisper (+ GPU libraries)
+  if FileExists(root + FASTERWHISPER_EXE) and
+    not FileExists(FasterWhisperFolder + FASTERWHISPER_EXE) and
+    MoveWhisperFiles(FW_FILES, FasterWhisperFolder) and InFolder(Tools.FasterWhisper, root) and
+    FileExists(FasterWhisperFolder + ExtractFileName(Tools.FasterWhisper)) then
+      Tools.FasterWhisper := FasterWhisperFolder + ExtractFileName(Tools.FasterWhisper);
+
+  if InFolder(Tools.FasterWhisper, FasterWhisperFolder) and not FileExists(Tools.FasterWhisper) and
+    FileExists(root + FASTERWHISPER_EXE) then
+      Tools.FasterWhisper := root + FASTERWHISPER_EXE;
 end;
 
 // -----------------------------------------------------------------------------
