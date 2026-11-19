@@ -151,6 +151,8 @@
 - changed: Whisper.cpp and Faster-Whisper are now installed in separate folders inside Whisper/ (models stay shared); existing installations are migrated automatically
 - changed: Audio to text, “Synchronize the current texts” and “Smart segmentation” are now radio buttons
 - changed: Shot changes, Sensitivity is grouped with the detection app and disabled when the method doesn’t use it
+- changed: Projects are saved as .tero1 and include the shot changes and the timeline thumbnails, so they are not generated again when the project is opened (.stp projects are still opened)
+- changed: With several entries selected, the start/end time controls shift that time of each entry (it beeps if any can't move further); Shift + up/down moves the whole entries keeping their durations
 - improved: [macOS] now uses the standalone yt-dlp, which can update itself
 - improved: [SubtitleAPI] Cavena 890 & EBU (accents, special chars, tags, language/code page and alignment)
 - improved: [SubtitleAPI] Cheetah & Cheetah Caption (italics, accents, line breaks)
