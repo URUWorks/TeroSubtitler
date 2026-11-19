@@ -249,6 +249,8 @@ type
     FOnDynamicEditTime            : TTimeLineClickEvent;
     FOnSubtitleItemToggle         : TSubtitleItemIndexEvent;
     FOnSubtitleItemsMoved         : TSubtitleItemsMovedEvent;
+    FOnSubtitleItemRangeSelect    : TSubtitleItemIndexEvent;
+    FSelIdxHint                   : Integer; // index of FSelectedSubtitle last time
     //FOnSubtitleItemStartDblClick  : TSubtitleItemDblClickEvent;
     //FOnSubtitleItemStopDblClick   : TSubtitleItemDblClickEvent;
 
@@ -283,6 +285,7 @@ type
     procedure OnAutoScrollTimer(Sender: TObject);
     procedure CheckAutoScroll;
     procedure StopAutoScroll;
+    procedure ValidateSelection;
     function GetPositionMS: Integer;
     procedure UpdateView(const UpdateViewFlags: TUpdateViewFlags; const DoRepaint: Boolean = True);
     procedure ZoomSubtitle(const Subtitle: TUWSubtitleItem); overload;
@@ -437,6 +440,8 @@ type
     property OnSubtitleItemToggle          : TSubtitleItemIndexEvent      read FOnSubtitleItemToggle         write FOnSubtitleItemToggle;
     // several selected entries were dragged together (the list is already sorted)
     property OnSubtitleItemsMoved          : TSubtitleItemsMovedEvent     read FOnSubtitleItemsMoved         write FOnSubtitleItemsMoved;
+    // Shift+click on another entry: select the entries from the selected one to it
+    property OnSubtitleItemRangeSelect     : TSubtitleItemIndexEvent      read FOnSubtitleItemRangeSelect    write FOnSubtitleItemRangeSelect;
     property OnSceneChangeListChange       : TNotifyEvent                 read FOnSceneChangeListChange      write FOnSceneChangeListChange;
     //property OnSubtitleItemStartDblClick   : TSubtitleItemDblClickEvent   read FOnSubtitleItemStartDblClick  write FOnSubtitleItemStartDblClick;
     //property OnSubtitleItemStopDblClick    : TSubtitleItemDblClickEvent   read FOnSubtitleItemStopDblClick   write FOnSubtitleItemStopDblClick;
@@ -634,6 +639,7 @@ begin
   FLastMoveShift   := [];
   FMouseDownPixelX := 0;
   FDragMoved       := False;
+  FSelIdxHint      := -1;
 
   FillByte(FTS, SizeOf(FTS), 0);
   FTS.Clipping    := True;
@@ -1544,6 +1550,20 @@ begin
         FOnSelectedSubtitleItem(Self, FSubtitles.IndexOf(FSelectedSubtitle), FSelectedSubtitle^, False);
     end;
     Exit;
+  end;
+
+  // Shift+click on another entry: select the entries from the selected one to
+  // it, as in the list. Shift+click on an empty place still extends the
+  // selected entry (or the selection) to that point
+  if (ssLeft in Shift) and (ssShift in Shift) and not (ssCtrl in Shift) and
+    not (MultiSelectKey in Shift) and not (ssAlt in Shift) and Assigned(FOnSubtitleItemRangeSelect) then
+  begin
+    SubAtPos := SubtitleAtPos(X, Y);
+    if Assigned(SubAtPos) and (SubAtPos <> FSelectedSubtitle) then
+    begin
+      FOnSubtitleItemRangeSelect(Self, FSubtitles.IndexOf(SubAtPos));
+      Exit;
+    end;
   end;
 
   if (ssLeft in Shift) and not (ssCtrl in Shift) and not (MultiSelectKey in Shift) then
@@ -2831,8 +2851,42 @@ end;
 
 //------------------------------------------------------------------------------
 
+procedure TUWWaveformDisplayer.ValidateSelection;
+var
+  i: Integer;
+begin
+  // The selected entry can be deleted, combined with others or get new times
+  // (time edits, actions...) out of the timeline: the selection kept the old
+  // times and was drawn there, a residue of the entry (and the pointer of a
+  // deleted entry was kept). Follow the entry, or clear it when it's gone.
+  if FMouseIsDown or (FSelectedSubtitle = NIL) or (FSubtitles = NIL) then Exit;
+
+  i := FSelIdxHint;
+  if not ((i >= 0) and (i < FSubtitles.Count) and (FSubtitles.ItemPointer[i] = FSelectedSubtitle)) then
+    i := FSubtitles.IndexOf(FSelectedSubtitle);
+  FSelIdxHint := i;
+
+  if i < 0 then
+  begin
+    FSelectedSubtitle  := NIL;
+    FDynamicSelSub     := NIL;
+    FDynamicSelOldSub  := NIL;
+    FDynamicSelection.InitialTime := 0;
+    FDynamicSelection.FinalTime   := 0;
+    if Assigned(FOnSelectionChange) then FOnSelectionChange(Self);
+  end
+  else
+  begin
+    FDynamicSelection.InitialTime := FSelectedSubtitle^.InitialTime;
+    FDynamicSelection.FinalTime   := FSelectedSubtitle^.FinalTime;
+  end;
+end;
+
+//------------------------------------------------------------------------------
+
 procedure TUWWaveformDisplayer.DoUpdateSubtitles;
 begin
+  ValidateSelection;
   // redraw only the subtitles layer over the cached wave (cheap), e.g. while
   // typing, also during playback
   UpdateView([uvfSubtitle]);
@@ -2842,6 +2896,7 @@ end;
 
 procedure TUWWaveformDisplayer.DoUpdate(const Complete: Boolean = True);
 begin
+  ValidateSelection;
   if Complete then
     UpdateView([uvfPageSize])
   else
