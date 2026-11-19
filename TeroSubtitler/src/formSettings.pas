@@ -221,6 +221,7 @@ type
     FShortCutListIndex: array of Byte;
     FShortCutListCategory: TStrings;
     FLngList: TStrings;
+    FWaveColor, FWaveItemColor: TColor; // to know if they were changed
     {$IFDEF WINDOWS}
     FUpdateFileTypes: Boolean;
     procedure PrepareToolbarAndImagelistIcos;
@@ -400,6 +401,8 @@ begin
     cbnWaveColor.ButtonColor := CustomColors.Waveform;
     cbnWaveEntry.ButtonColor := CustomColors.Item;
   end;
+  FWaveColor     := cbnWaveColor.ButtonColor;
+  FWaveItemColor := cbnWaveEntry.ButtonColor;
 
   edtFFMPEG.Text := Tools.FFmpeg;
   edtSceneDetect.Text := Tools.PySceneDetect;
@@ -527,6 +530,12 @@ begin
       for i := 0 to High(AdditionalOptions) do
         AdditionalOptions[i] := lstMPVOptions.Items[i];
   end;
+
+  // saved with the settings and kept by the color theme (it replaced them)
+  if cbnWaveColor.ButtonColor <> FWaveColor then
+    ColorThemeInstance.CustomWaveColor := cbnWaveColor.ButtonColor;
+  if cbnWaveEntry.ButtonColor <> FWaveItemColor then
+    ColorThemeInstance.CustomWaveItemColor := cbnWaveEntry.ButtonColor;
 
   with frmMain.WAVE do
   begin
@@ -708,6 +717,7 @@ procedure TfrmSettings.btnProfileClick(Sender: TObject);
 var
   i, c: Integer;
   s: String;
+  Src, Dst: TControl;
 begin
   with TfrmConventions.Create(Self) do
   try
@@ -721,10 +731,42 @@ begin
 
     cboPauseMode.Items.Assign(Self.cboPauseMode.Items);
 
+    // the current values (Custom profile) to create a new convention from
+    // them, otherwise the fields are the ones of the form and "Min. gap"
+    // without its unit (Milliseconds/Frames)
+    for i := 0 to lyoConvention.ControlCount-1 do
+    begin
+      Dst := lyoConvention.Controls[i];
+      Src := NIL;
+      for c := 0 to lyoConventions.ControlCount-1 do
+        if lyoConventions.Controls[c].Name = Dst.Name then
+        begin
+          Src := lyoConventions.Controls[c];
+          Break;
+        end;
+
+      if Src = NIL then Continue;
+
+      if (Dst is TSpinEdit) and (Src is TSpinEdit) then
+        TSpinEdit(Dst).Value := TSpinEdit(Src).Value
+      else if (Dst is TComboBox) and (Src is TComboBox) then
+        TComboBox(Dst).ItemIndex := TComboBox(Src).ItemIndex
+      else if (Dst is TUWCheckBox) and (Src is TUWCheckBox) then
+        TUWCheckBox(Dst).Checked := TUWCheckBox(Src).Checked
+      else if (Dst is TEdit) and (Src is TEdit) then
+        TEdit(Dst).Text := TEdit(Src).Text;
+    end;
+    if cboPauseMode.ItemIndex < 0 then
+      cboPauseMode.ItemIndex := 0;
+    edtName.Text := '';
+
     FList := FProfiles;
     FList.FillTStrings(lstTree.Items);
     if cboProfile.ItemIndex > 0 then
+    begin
       lstTree.ItemIndex := cboProfile.ItemIndex-1;
+      lstTreeSelectionChange(NIL, False);
+    end;
     s := cboProfile.Text;
     ShowModal;
 
@@ -1070,11 +1112,14 @@ end;
 
 procedure TfrmSettings.btnPlusClick(Sender: TObject);
 var
-  s: String;
+  s, l: String;
 begin
   s := InputDialog(lngAdditionalOption, '', '');
-  if not s.IsEmpty and (Pos('=', s) > 0) then
-    lstMPVOptions.Items.Add(s);
+  // pasted with several lines: one option per line (before, all of them in
+  // one item, with the line breaks, cut in the list and wrong for mpv)
+  for l in s.Replace(#13, '').Split([#10]) do
+    if not l.Trim.IsEmpty and (Pos('=', l) > 0) then
+      lstMPVOptions.Items.Add(l.Trim);
 
   btnMinus.Enabled := lstMPVOptions.Count > 0;
 end;

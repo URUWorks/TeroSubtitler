@@ -73,6 +73,7 @@ type
     procedure LoadFromFile(const AFileName: String);
     function SaveToFile(const AFileName: String): Boolean;
     function AddItem(const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, ACPLOneLine, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String; const AUpdate: Boolean = False; const AUpdateIndex: Integer = -1): Integer;
+    procedure Delete(const AIndex: Integer);
     procedure UpdateItem(const AIndex: Integer; const AName: String; const ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration, AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, ACPLOneLine, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining: Cardinal; const APauseInFrames: Boolean; const ARepeatableChars, AProhibitedChars: String; const ADotsOnSplit: Boolean; const ACPSLineLenStrategy: String);
     function Ready: Boolean;
     procedure FillTStrings(const AStrings: TStrings; const AClear: Boolean = True);
@@ -261,9 +262,8 @@ var
   i: Integer;
 begin
   Result := False;
-  if FList.Count = 0 then
-    Exit
-  else if not AFileName.IsEmpty then
+  // an empty list is saved too (all the profiles were removed)
+  if not AFileName.IsEmpty then
     FFileName := AFileName;
 
   XmlDoc := TXMLDocument.Create;
@@ -378,6 +378,19 @@ begin
   AddItem(AName, ANewSubtitleMs, AMinDuration, AMinDurationPerWord, AMaxDuration,
     AMaxLines, AMinPause, AMaxCPS, AWPM, ACPL, ACPLOneLine, AShotcutSnapArea, AShotcutThreshold, AShotcutInCues, AShotcutOutCues, AChaining,
     APauseInFrames, ARepeatableChars, AProhibitedChars, ADotsOnSplit, ACPSLineLenStrategy, True, AIndex);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TProfiles.Delete(const AIndex: Integer);
+begin
+  if (AIndex < 0) or (AIndex >= FList.Count) then Exit;
+
+  Dispose(PProfileItem(FList.Items[AIndex]));
+  FList.Items[AIndex] := NIL;
+  FList.Delete(AIndex);
+  // otherwise the removed profile is not saved
+  FChanged := True;
 end;
 
 // -----------------------------------------------------------------------------

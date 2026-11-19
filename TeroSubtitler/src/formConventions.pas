@@ -220,7 +220,8 @@ begin
   if FList <> NIL then
     if (lstTree.Count > 0) and (lstTree.ItemIndex >= 0) then
     begin
-      FList.Items.Delete(lstTree.ItemIndex);
+      // Delete frees the item and marks the list as changed (to save it)
+      FList.Delete(lstTree.ItemIndex);
       lstTree.DeleteSelected;
 
       if lstTree.Count > 0 then
