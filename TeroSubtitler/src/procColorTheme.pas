@@ -96,10 +96,16 @@ type
     procedure ToolBarDoPaintButton(Sender: TToolButton; State: Integer);
     procedure SplitterDoPaint(Sender: TObject);
     {$ENDIF}
+    {$IFDEF DARWIN}
+    procedure MacToolBarPaintButton(Sender: TToolButton; State: Integer);
+    {$ENDIF}
   public
     LightColors : TColors;
     DarkColors  : TColors;
     ColorMode   : TColorMode;
+    // colors of the waveform chosen in Settings (clNone = the theme's one)
+    CustomWaveColor     : TColor;
+    CustomWaveItemColor : TColor;
     constructor Create;
     function IsSystemDarkTheme: Boolean;
     function HasSystemColorThemeChanged: Boolean;
@@ -206,6 +212,8 @@ end;
 
 constructor TColorTheme.Create;
 begin
+  CustomWaveColor     := clNone;
+  CustomWaveItemColor := clNone;
   LastSystemDarkTheme := IsSystemDarkTheme;
   InitializeDefaultColors;
 end;
@@ -284,7 +292,8 @@ begin
 
     WaveBackground := RGBToColor(10, 10, 10);
     Waveform       := RGBToColor(13, 132, 255); // RGBToColor(66, 255, 66);
-    WaveGrid       := RGBToColor(40, 40, 40);
+    // brighter: (40, 40, 40) was barely visible on some displays (Mac Pro)
+    WaveGrid       := RGBToColor(72, 72, 72);
   end;
 
   with DarkColors do
@@ -306,7 +315,7 @@ begin
 
     WaveBackground := RGBToColor(10, 10, 10);
     Waveform       := RGBToColor(0, 84, 184);
-    WaveGrid       := RGBToColor(40, 40, 40);
+    WaveGrid       := RGBToColor(72, 72, 72);
   end;
 
   if LastSystemDarkTheme then
@@ -792,7 +801,13 @@ begin
   with AWave.CustomColors do
   begin
     Background := ColorToBGRA(Colors.WaveBackground);
-    Waveform   := ColorToBGRA(Colors.Waveform);
+    // the one chosen in Settings, otherwise it was replaced by the theme's one
+    if CustomWaveColor <> clNone then
+      Waveform := ColorToBGRA(CustomWaveColor)
+    else
+      Waveform := ColorToBGRA(Colors.Waveform);
+    if CustomWaveItemColor <> clNone then
+      Item := ColorToBGRA(CustomWaveItemColor);
     GridLine   := ColorToBGRA(Colors.WaveGrid);
     //Text       := ColorToBGRA(Colors.Text);
   end;
@@ -849,7 +864,51 @@ begin
       Apply(TUWSeekBar(Ctrl), AColorMode);
   end;
   {$ENDIF}
+  {$IFDEF DARWIN}
+  AToolbar.OnPaintButton := @MacToolBarPaintButton;
+  {$ENDIF}
 end;
+
+// -----------------------------------------------------------------------------
+
+{$IFDEF DARWIN}
+type
+  TToolButtonAccess = class(TToolButton);
+
+procedure TColorTheme.MacToolBarPaintButton(Sender: TToolButton; State: Integer);
+var
+  ToolBar : TToolBar;
+  Handler : TToolBarOnPaintButton;
+  Cnv     : TCanvas;
+begin
+  if not (Sender.Parent is TToolBar) then Exit;
+  ToolBar := TToolBar(Sender.Parent);
+
+  // the LCL painting, as without this event...
+  Handler := ToolBar.OnPaintButton;
+  ToolBar.OnPaintButton := NIL;
+  try
+    TToolButtonAccess(Sender).Paint;
+  finally
+    ToolBar.OnPaintButton := Handler;
+  end;
+
+  // ...and a frame on the checked buttons: the native "down" background is
+  // almost invisible on some displays (Mac Pro), it was better on iMac
+  if Sender.Down and Sender.Enabled and
+    (Sender.Style in [tbsButton, tbsCheck, tbsDropDown, tbsButtonDrop]) then
+  begin
+    // without "with": TCanvas has Colors[] too
+    Cnv := Sender.Canvas;
+    Cnv.Brush.Style := bsClear;
+    Cnv.Pen.Style   := psSolid;
+    Cnv.Pen.Color   := Colors.Highlight;
+    Cnv.Pen.Width   := 2;
+    Cnv.RoundRect(1, 1, Sender.Width-1, Sender.Height-1, 6, 6);
+    Cnv.Pen.Width   := 1;
+  end;
+end;
+{$ENDIF}
 
 // -----------------------------------------------------------------------------
 
