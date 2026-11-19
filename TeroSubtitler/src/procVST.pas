@@ -63,6 +63,7 @@ procedure VSTFindPrevious(const CaseSensitive: Boolean = False; const WholeWord:
 procedure VSTFindNext(const CaseSensitive: Boolean = False; const WholeWord: Boolean = False; const RE: Boolean = False);
 procedure VSTDoLoop(const AVST: TLazVirtualStringTree; Proc: TVSTDoLoopProc; const Selection: TVSTDoLoopSelection = dlSelected; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
 procedure VSTMoveEntry(const AVST: TLazVirtualStringTree; const Refresh: Boolean = True; const IncrementUndo: Boolean = False; const CBProc: TVSTDoLoopProcCB = NIL; const AFrom: Integer = 0; const ATo: Integer = 0);
+function VSTShiftSelectedTimes(const AVST: TLazVirtualStringTree; const ATag, ADelta: Integer; const ABlock: Boolean): Boolean;
 
 procedure VSTAdjustSubtitles(const AdjSub: TAdjustSubtitles);
 procedure VSTSort(const AVST: TLazVirtualStringTree);
@@ -1286,6 +1287,78 @@ begin
       DoAutoCheckErrors;
     end;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// several entries selected: the start/end time edits move that time of each
+// selected entry by the same amount (before, all of them got the same time, so
+// they collapsed and going back didn't restore them). With ABlock (Shift held)
+// the whole entries move, keeping their durations. It's all or nothing: if any
+// entry can't move (below zero, or the start reaching its end) nothing changes
+// and False is returned, so going in the other direction always restores the
+// previous state. One undo step for each change.
+function VSTShiftSelectedTimes(const AVST: TLazVirtualStringTree; const ATag, ADelta: Integer; const ABlock: Boolean): Boolean;
+var
+  Item   : PUWSubtitleItem;
+  Run    : PVirtualNode;
+  it, ft : Integer;
+begin
+  Result := (ADelta = 0);
+  if Result then Exit;
+
+  // check every selected entry first
+  Run := AVST.GetFirstSelected;
+  while Assigned(Run) do
+  begin
+    Item := Subtitles.ItemPointer[Run^.Index];
+    if Assigned(Item) then
+    begin
+      it := Item^.InitialTime;
+      ft := Item^.FinalTime;
+      if ABlock then
+      begin
+        if (it + ADelta < 0) or (ft + ADelta < 0) then Exit;
+      end
+      else if ATag = TAG_CONTROL_INITIALTIME then
+      begin
+        // an entry already wrong (start >= end) can still be fixed
+        if (it + ADelta < 0) or ((ADelta > 0) and (it + ADelta >= ft)) then Exit;
+      end
+      else if ATag = TAG_CONTROL_FINALTIME then
+      begin
+        if (ft + ADelta < 0) or ((ADelta < 0) and (ft + ADelta <= it)) then Exit;
+      end
+      else
+        Exit;
+    end;
+    Run := AVST.GetNextSelected(Run);
+  end;
+
+  // apply
+  Run := AVST.GetFirstSelected;
+  while Assigned(Run) do
+  begin
+    Item := Subtitles.ItemPointer[Run^.Index];
+    if Assigned(Item) then
+    begin
+      it := Item^.InitialTime;
+      ft := Item^.FinalTime;
+      if ABlock then
+        SetSubtitleTimes(Run^.Index, it + ADelta, ft + ADelta, False, False)
+      else if ATag = TAG_CONTROL_INITIALTIME then
+        SetSubtitleTime(Run^.Index, it + ADelta, ATag, False, False)
+      else
+        SetSubtitleTime(Run^.Index, ft + ADelta, ATag, False, False);
+    end;
+    Run := AVST.GetNextSelected(Run);
+  end;
+
+  UndoInstance.IncrementUndoGroup;
+  SubtitleChanged(True, True);
+  UpdateValuesForSubtitle(VSTFocusedNode(AVST));
+  AVST.Invalidate;
+  Result := True;
 end;
 
 // -----------------------------------------------------------------------------
