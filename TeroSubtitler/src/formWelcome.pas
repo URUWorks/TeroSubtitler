@@ -75,7 +75,7 @@ implementation
 
 uses
   procTypes, procFiles, procColorTheme, procForms, formMain,
-  procWorkspace;
+  procWorkspace, procProjectFile;
 
 {$R *.lfm}
 
@@ -201,7 +201,7 @@ begin
   SetViewMode(vmList);
 
   s := MRU.Items[(Sender as TLabel).Tag];
-  if LowerCase(ExtractFileExt(s)) = TProjectExt then
+  if IsProjectFileName(s) then
     LoadProject(s)
   else
     LoadSubtitle(s);
