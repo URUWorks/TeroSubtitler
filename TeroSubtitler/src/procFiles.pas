@@ -111,7 +111,8 @@ uses
   procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils, LCLStrConsts,
   RegExpr,
   UWSubtitleAPI.Tags, UWTranslateAPI.Google, formCustomSelectDlgWithPreview,
-  FileUtil, Math, URIParser, formCustomQuestionDlg, DolbyVision
+  FileUtil, Math, URIParser, formCustomQuestionDlg, DolbyVision, procThumbnails,
+  LazUTF8
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
@@ -765,40 +766,119 @@ end;
 
 // -----------------------------------------------------------------------------
 
-function AllowSaveFormat(const AFormat: TUWSubtitleFormats): Boolean;
+type
+  // formato con tags TS de una entrada, para validar contra la spec
+  TSpecTag = (stBold, stUnderline, stStrikeout, stColor);
+  TSpecTags = set of TSpecTag;
+
+// Qué formato usa el texto ({\b1}, {\u1}, {\s1}, {\c&BBGGRR&}; el blanco es el
+// color por defecto y no cuenta)
+function SpecTagsUsed(const Txt: String): TSpecTags;
+var
+  i, j : Integer;
+  Tag, Hex : String;
+begin
+  Result := [];
+  i := Pos('{\', Txt);
+  while i > 0 do
+  begin
+    j := Pos('}', Txt, i+2);
+    if j = 0 then Break;
+    for Tag in Copy(Txt, i+2, j-i-2).Split(['\']) do
+      if Tag <> '' then
+      begin
+        if (Length(Tag) >= 2) and (Tag[1] in ['b', 'u', 's']) and (Tag[2] in ['1'..'9']) then
+          case Tag[1] of
+            'b': Include(Result, stBold);
+            'u': Include(Result, stUnderline);
+            's': Include(Result, stStrikeout);
+          end
+        else if (Copy(Tag, 1, 2) = 'c&') or (Copy(Tag, 1, 3) = '1c&') then
+        begin
+          Hex := UpperCase(Copy(Tag, Pos('&', Tag)+1, MaxInt).Replace('&', '').Replace('H', ''));
+          if (Hex <> '') and (Hex <> 'FFFFFF') then Include(Result, stColor);
+        end;
+      end;
+    i := Pos('{\', Txt, j+1);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// Antes de guardar en un formato con especificación de entrega (iTT de Apple,
+// Netflix Timed Text, EBU STL): lo que la spec no permite y no tiene arreglo
+// (frame rate, más de dos líneas) impide guardar; lo que el exportador cambia
+// o quita para cumplirla se avisa todo junto, con las entradas, y se puede
+// guardar igual. Antes solo iTT se validaba: la alineación vertical al medio
+// impedía guardar con un mensaje que decía que la alineación vertical no
+// estaba permitida (arriba y abajo sí lo están), y la alineación
+// izquierda/derecha y el tachado se perdían sin ningún aviso, igual que todo
+// el formato salvo la cursiva en Netflix y la negrita y el tachado en EBU
+
+function AllowSaveFormat(const AFormat: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode = smText): Boolean;
+const
+  MaxNumbers = 20;
+
+  // los números de las entradas (1, 2, 3, ... (n)) para el mensaje
+  function EntriesToStr(const AIdxs: TIntegerDynArray): String;
+  var
+    j : Integer;
+  begin
+    Result := '';
+    for j := 0 to Min(High(AIdxs), MaxNumbers-1) do
+    begin
+      if j > 0 then Result += ', ';
+      Result += IntToStr(AIdxs[j]+1);
+    end;
+    if Length(AIdxs) > MaxNumbers then
+      Result += Format(', ... (%d)', [Length(AIdxs)]);
+  end;
 
   // which entries: their numbers in the message and selected in the list,
   // to find them (before, only "there are entries...")
   function CheckEntries(const AIdxs: TIntegerDynArray; const AError: String): Boolean;
-  const
-    MaxNumbers = 20;
-  var
-    s : String;
-    j : Integer;
   begin
     Result := Length(AIdxs) = 0;
     if Result then Exit;
 
-    s := '';
-    for j := 0 to Min(High(AIdxs), MaxNumbers-1) do
-    begin
-      if j > 0 then s += ', ';
-      s += IntToStr(AIdxs[j]+1);
-    end;
-    if Length(AIdxs) > MaxNumbers then
-      s += Format(', ... (%d)', [Length(AIdxs)]);
-
     VSTSelectNodes(frmMain.VST, AIdxs, True);
     ShowErrorMessageDialog(lngSubtitleSpecificationError + LineEnding + LineEnding +
-      AError + LineEnding + Format(lngSubtitleSpecificationEntries, [s]), '', False, False);
+      AError + LineEnding + Format(lngSubtitleSpecificationEntries, [EntriesToStr(AIdxs)]), '', False, False);
   end;
 
+  procedure AddIdx(var AIdxs: TIntegerDynArray; const AIdx: Integer);
+  begin
+    if (Length(AIdxs) = 0) or (AIdxs[High(AIdxs)] <> AIdx) then
+      Insert(AIdx, AIdxs, Length(AIdxs));
+  end;
+
+  // la línea más larga, en caracteres visibles (sin los tags)
+  function LongestLine(const Txt: String): Integer;
+  var
+    Line : String;
+  begin
+    Result := 0;
+    for Line in RemoveTSTags(Txt).Split([LineEnding]) do
+      Result := Max(Result, UTF8Length(Line));
+  end;
+
+type
+  TSpecWarning = (swMiddleToBottom, swMiddleKept, swHAlignCentered, swBold,
+    swUnderline, swStrikeout, swColor, swLineLength);
+
 var
-  F : AnsiString;
-  i : Integer;
-  BR, Align : TIntegerDynArray;
+  F, Msg, Txt, SpecName : String;
+  i, MaxChars : Integer;
+  BR, All : TIntegerDynArray;
+  W : array[TSpecWarning] of TIntegerDynArray;
+  Affected : array of Boolean;
+  Lost : TSpecTags;
+  sw : TSpecWarning;
+  WText : array[TSpecWarning] of String;
+
 begin
   Result := False;
+  if not (AFormat in [sfITunesTimedText, sfNetflixTimedText, sfEBU]) then Exit(True);
 
   if AFormat = sfITunesTimedText then
   begin
@@ -809,17 +889,95 @@ begin
       ShowErrorMessageDialog(Format('%s%s%s', [lngSubtitleSpecificationError, LineEnding+LineEnding, lngSubtitleSpecificationErrorFPS]), '', False, False);
       Exit;
     end;
+  end;
 
-    BR := NIL;
-    Align := NIL;
-    for i := 0 to Subtitles.Count-1 do
-      if LineCount(Subtitles[i].Text, LineEnding) > 2 then
-        Insert(i, BR, Length(BR))
-      else if (Subtitles[i].VAlign = svaCenter) then
-        Insert(i, Align, Length(Align));
+  // lo que cada exportador cambia o quita (ver sus SaveSubtitle):
+  // - iTT: solo regiones top/bottom (el medio va abajo), tts:textAlign solo
+  //   center, sin tachado (la negrita y el color parciales sí: <span style>)
+  // - Netflix: arriba o abajo y centrado (Timed Text Style Guide: General
+  //   Requirements; el medio se escribe igual), solo cursiva
+  //   (StripNonItalicTSFormatting quita negrita, subrayado, tachado y color)
+  // - EBU STL: sin negrita ni tachado (no tienen código teletexto), y el
+  //   máximo de caracteres por fila (MNC) de las propiedades del formato
+  MaxChars := 0;
+  if AFormat = sfEBU then
+    MaxChars := StrToIntDef(Trim(String(Subtitles.FormatProperties^.EBU.MaxNumberDisplayableChars)), 0);
 
-    if not CheckEntries(BR, lngSubtitleSpecificationErrorBR) then Exit;
-    if not CheckEntries(Align, lngSubtitleSpecificationErrorAlign) then Exit;
+  BR := NIL; All := NIL;
+  for sw := Low(TSpecWarning) to High(TSpecWarning) do W[sw] := NIL;
+  Affected := NIL;
+  SetLength(Affected, Subtitles.Count);
+
+  for i := 0 to Subtitles.Count-1 do
+  begin
+    Txt := iff(SubtitleMode = smText, Subtitles[i].Text, Subtitles[i].Translation);
+
+    // iTT y Netflix: dos líneas como máximo
+    if (AFormat <> sfEBU) and (LineCount(Txt, LineEnding) > 2) then
+      AddIdx(BR, i);
+
+    if AFormat <> sfEBU then
+    begin
+      if Subtitles[i].VAlign = svaCenter then
+        if AFormat = sfITunesTimedText then
+          AddIdx(W[swMiddleToBottom], i)
+        else
+          AddIdx(W[swMiddleKept], i);
+      if Subtitles[i].Align in [shaLeft, shaRight] then
+        AddIdx(W[swHAlignCentered], i);
+    end;
+
+    case AFormat of
+      sfITunesTimedText  : Lost := SpecTagsUsed(Txt) * [stStrikeout];
+      sfNetflixTimedText : Lost := SpecTagsUsed(Txt);
+      sfEBU              : Lost := SpecTagsUsed(Txt) * [stBold, stStrikeout];
+    else
+      Lost := [];
+    end;
+    if stBold in Lost then AddIdx(W[swBold], i);
+    if stUnderline in Lost then AddIdx(W[swUnderline], i);
+    if stStrikeout in Lost then AddIdx(W[swStrikeout], i);
+    if stColor in Lost then AddIdx(W[swColor], i);
+
+    if (MaxChars > 0) and (LongestLine(Txt) > MaxChars) then
+      AddIdx(W[swLineLength], i);
+  end;
+
+  if not CheckEntries(BR, lngSubtitleSpecificationErrorBR) then Exit;
+
+  WText[swMiddleToBottom] := lngSpecMiddleToBottom;
+  WText[swMiddleKept]     := lngSpecMiddleKept;
+  WText[swHAlignCentered] := lngSpecHAlignCentered;
+  WText[swBold]           := lngSpecBold;
+  WText[swUnderline]      := lngSpecUnderline;
+  WText[swStrikeout]      := lngSpecStrikeout;
+  WText[swColor]          := lngSpecColor;
+  WText[swLineLength]     := Format(lngSpecLineLength, [MaxChars]);
+
+  Msg := '';
+  for sw := Low(TSpecWarning) to High(TSpecWarning) do
+    if Length(W[sw]) > 0 then
+    begin
+      Msg += LineEnding + LineEnding + '- ' + WText[sw] + LineEnding +
+        Format(lngSpecEntries, [EntriesToStr(W[sw])]);
+      for i in W[sw] do Affected[i] := True;
+    end;
+
+  if Msg <> '' then
+  begin
+    // todas las afectadas seleccionadas en la lista, para encontrarlas
+    for i := 0 to High(Affected) do
+      if Affected[i] then AddIdx(All, i);
+    VSTSelectNodes(frmMain.VST, All, True);
+
+    case AFormat of
+      sfITunesTimedText  : SpecName := 'iTunes Timed Text (iTT)';
+      sfNetflixTimedText : SpecName := 'Netflix Timed Text';
+    else
+      SpecName := 'EBU STL';
+    end;
+    if CustomQuestionDialog(lngDoViSaveAnyway, Format(lngSpecWillChange, [SpecName]) + Msg, [dbYes, dbNo]) <> mrYes then
+      Exit;
   end;
 
   Result := True;
@@ -1592,19 +1750,46 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure LoadProject(const FileName: String);
+var
+  MRUInfoObject : TMRUInfoObject;
+  AVideo        : String;
 begin
   if FileName.IsEmpty then Exit;
   with TProjectFile.Create(FileName) do
   try
     if Ready then
     begin
-      LoadSubtitle(Original, sfInvalid, NIL, -1, False, Movie, False);
+      AVideo := '';
+      if not Movie.IsEmpty and FileExists(Movie) then
+      begin
+        // the thumbnails saved in the project (.tero1) go to the cache of the
+        // video before it's opened, so they are not generated with ffmpeg
+        RestoreThumbnails(GetThumbnailsCacheDir(Movie), Movie);
+        // the same with the shot changes: to their cache file, where they are
+        // loaded from with the waveform (it's the file Video > Shot changes
+        // writes; the ones of the project are the last ones the user had)
+        RestoreShotChanges(ShotChangesFileName(Movie, '.shotchanges'), Movie);
+        // the video of the project, unless the recent files already open it
+        // (it was opened twice)
+        MRUInfoObject := MRU.GetValues(Original);
+        if not Assigned(MRUInfoObject) or not SameFileName(MRUInfoObject.VideoFile, Movie) then
+          AVideo := Movie;
+      end;
+
+      LoadSubtitle(Original, sfInvalid, NIL, -1, False, AVideo, False);
       if Subtitles.Count > 0 then
+      begin
         ReadSubtitleData(Translation, False, smTranslation);
 
-        with frmMain do
-          MRU.Add(FileName, '', '', VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPVOptions.AutoStartPlaying);
-    end;
+        if (FocusedNode >= 0) and (FocusedNode < Subtitles.Count) then
+          VSTSelectNode(frmMain.VST, FocusedNode, True, True);
+      end;
+
+      with frmMain do
+        MRU.Add(FileName, '', '', VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPVOptions.AutoStartPlaying);
+    end
+    else
+      ShowErrorMessageDialog(lngUnableToLoad);
   finally
     Free;
   end;
@@ -1613,16 +1798,56 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure SaveProject(const FileName: String);
+var
+  PrjFileName : String;
+  sc          : TIntegerDynArray;
+  i           : Integer;
 begin
   if FileName.IsEmpty then Exit;
-  with TProjectFile.Create(ChangeFileExt(FileName, TProjectExt), False) do
+  PrjFileName := ChangeFileExt(FileName, TProjectExt);
+  with TProjectFile.Create(PrjFileName, False) do
   try
     Original    := SubtitleInfo.Text.FileName;
     Translation := SubtitleInfo.Translation.FileName;
-    SaveProject;
+    FocusedNode := VSTFocusedNode(frmMain.VST);
+
+    // the video (it wasn't saved) and its thumbnails, in the project
+    with frmMain do
+      if MPV.IsMediaLoaded and FileExists(MPV.FileName) then
+      begin
+        Movie         := MPV.FileName;
+        MoviePos      := MPV.GetMediaPosInMs;
+        ThumbnailsDir := GetThumbnailsCacheDir(Movie);
+
+        // the shot changes of the timeline (also the ones inserted/deleted
+        // by hand), in the format of their cache (as Video > Shot changes
+        // writes it): video time, and "-1" first if they are in SMPTE time,
+        // the inverse of WAVE.LoadSceneChangeFile (x1.001 in time mode)
+        sc := WAVE.GetSceneChangeList;
+        if Length(sc) > 0 then
+        begin
+          if Workspace.SMPTE then
+            ShotChanges.Add('-1');
+          for i := 0 to High(sc) do
+            if Workspace.SMPTE and (Workspace.WorkMode = wmTime) then
+              ShotChanges.Add(Round((sc[i] - WAVE.OffsetMs) / 1.001).ToString)
+            else
+              ShotChanges.Add((sc[i] - WAVE.OffsetMs).ToString);
+        end;
+      end;
+
+    try
+      SaveProject;
+    except
+      on E: Exception do
+      begin
+        ShowErrorMessageDialog(E.Message);
+        Exit;
+      end;
+    end;
 
     with frmMain do
-      MRU.Add(FileName, '', '', VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPVOptions.AutoStartPlaying);
+      MRU.Add(PrjFileName, '', '', VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPVOptions.AutoStartPlaying);
   finally
     Free;
   end;
@@ -1641,7 +1866,8 @@ begin
   OD := TOpenDialog.Create(NIL);
   try
     OD.Title   := lngOpenFile;
-    OD.Filter  := lngProjectFile + '|*' + TProjectExt;
+    // .tero1 and the old projects (.stp)
+    OD.Filter  := lngProjectFile + '|*' + TProjectExt + ';*' + TProjectLegacyExt;
     OD.Options := OD.Options + [ofFileMustExist];
 
     if OD.Execute then
@@ -1887,7 +2113,9 @@ end;
 
 procedure DropFilesProcessFile(const FileName: String);
 begin
-  if IsValidMediaFileName(FileName, TVideoExts) or IsValidMediaFileName(FileName, TAudioExts) then
+  if IsProjectFileName(FileName) then // also when opened from the system (.tero1)
+    LoadProject(FileName)
+  else if IsValidMediaFileName(FileName, TVideoExts) or IsValidMediaFileName(FileName, TAudioExts) then
     LoadVideo(FileName)
   else if IsValidMediaFileName(FileName, TWaveformAudioExts) then
     LoadAudio(FileName)
@@ -1920,7 +2148,12 @@ begin
   begin
     // Subtitle file
     if FileExists(ParamStr(1)) then
-      LoadSubtitle(ParamStr(1))
+    begin
+      if IsProjectFileName(ParamStr(1)) then
+        LoadProject(ParamStr(1))
+      else
+        LoadSubtitle(ParamStr(1));
+    end
     else
     begin // commands
       Sub := TUWSubtitles.Create;
