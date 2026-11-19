@@ -57,7 +57,8 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procColorTheme, LCLTranslator;
+  procTypes, procWorkspace, procColorTheme, LCLTranslator, Math,
+  formCustomMessageDlg;
 
 {$R *.lfm}
 
@@ -88,7 +89,7 @@ end;
 
 function TfrmCustomQuestionDlg.Execute(const ATitle, AQuestion: String; const ACaption: String = ''; AButtons: TCustomDlgButtons = []): Integer;
 var
-  ALeft: Integer;
+  ALeft, h, d: Integer;
 
   procedure SetButton(AButton: TButton; const AID: TCustomDlgBtn);
   begin
@@ -117,6 +118,29 @@ begin
 
   btnCancel.Cancel := btnCancel.Visible;
   btnNo.Cancel := not btnCancel.Visible;
+
+  // taller if the wrapped texts don't fit (they were cut at the bottom)
+  h := GetWrappedTextHeight(lblTitle.Font, ATitle, lblTitle.Width);
+  if h > lblTitle.Height then
+  begin
+    d := h - lblTitle.Height;
+    lblTitle.Height := h;
+    lblQuestion.Top := lblQuestion.Top + d;
+    btnYes.Top      := btnYes.Top + d;
+    btnNo.Top       := btnNo.Top + d;
+    btnCancel.Top   := btnCancel.Top + d;
+    ClientHeight    := ClientHeight + d;
+  end;
+  h := GetWrappedTextHeight(lblQuestion.Font, AQuestion, lblQuestion.Width);
+  if h > lblQuestion.Height then
+  begin
+    d := Min(h - lblQuestion.Height, Max(0, Screen.WorkAreaHeight - 100 - Height));
+    lblQuestion.Height := lblQuestion.Height + d;
+    btnYes.Top      := btnYes.Top + d;
+    btnNo.Top       := btnNo.Top + d;
+    btnCancel.Top   := btnCancel.Top + d;
+    ClientHeight    := ClientHeight + d;
+  end;
 
   Result := ShowModal;
 end;

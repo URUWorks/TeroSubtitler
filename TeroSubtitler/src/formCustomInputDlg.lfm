@@ -49,7 +49,9 @@ object frmCustomInputDlg: TfrmCustomInputDlg
     Top = 28
     Width = 435
     Anchors = [akTop, akLeft, akRight, akBottom]
+    ScrollBars = ssAutoVertical
     TabOrder = 0
+    OnChange = mmoInputChange
     OnKeyDown = mmoInputKeyDown
   end
   object lblHelp: TLabel

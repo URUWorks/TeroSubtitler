@@ -48,14 +48,42 @@ type
 var
   frmCustomMessageDlg: TfrmCustomMessageDlg;
 
+// height of a text wrapped at AWidth, as a word-wrapped label draws it
+function GetWrappedTextHeight(const AFont: TFont; const AText: String; const AWidth: Integer): Integer;
+
 // -----------------------------------------------------------------------------
 
 implementation
 
 uses
-  procTypes, procWorkspace, procColorTheme, UWSystem.StrUtils;
+  procTypes, procWorkspace, procColorTheme, UWSystem.StrUtils, LCLIntf,
+  LCLType, Math;
 
 {$R *.lfm}
+
+// -----------------------------------------------------------------------------
+
+function GetWrappedTextHeight(const AFont: TFont; const AText: String; const AWidth: Integer): Integer;
+var
+  Bmp : TBitmap;
+  R   : TRect;
+begin
+  Result := 0;
+  if AText.IsEmpty or (AWidth <= 0) then Exit;
+
+  Bmp := TBitmap.Create;
+  try
+    Bmp.SetSize(1, 1);
+    Bmp.Canvas.Font.Assign(AFont);
+    R := Rect(0, 0, AWidth, 0);
+    DrawText(Bmp.Canvas.Handle, PChar(AText), Length(AText), R, DT_CALCRECT or DT_WORDBREAK or DT_NOPREFIX);
+    Result := R.Bottom - R.Top;
+    // at least the lines of the text, if DrawText can't measure it
+    Result := Max(Result, Integer(LineCount(AText, LineEnding)) * Bmp.Canvas.TextHeight('Aj'));
+  finally
+    Bmp.Free;
+  end;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -80,7 +108,7 @@ end;
 
 function TfrmCustomMessageDlg.Execute(const AMessage: String; const ACaption: String = ''; const AIcon: TIconMode = imQuestion; const ABold: Boolean = True; const ACenter: Boolean = True; const ACustomAction: String = ''; const ACustomActionClick: TNotifyEvent = NIL): Integer;
 var
-  c, h: Integer;
+  t, h: Integer;
 begin
   if ColorThemeInstance.GetRealColorMode = cmDark then
   begin
@@ -113,9 +141,12 @@ begin
   lblCustomAction.OnClick := ACustomActionClick;
   lblCustomAction.Visible := not ACustomAction.IsEmpty and (ACustomActionClick <> NIL);
 
-  c := LineCount(AMessage, LineEnding);
+  // the height of the wrapped text: before, only the line breaks were
+  // counted and a long line (wrapped in two or more) was cut at the bottom
   h := lblCustomAction.Canvas.TextHeight('Aj');
-  Height := (c*h) + ((Height - lblMessage.Height) + {$IFDEF WINDOWS}h{$ELSE}(h*2){$ENDIF});
+  t := GetWrappedTextHeight(lblMessage.Font, AMessage, lblMessage.Width);
+  Height := Min(t + ((Height - lblMessage.Height) + {$IFDEF WINDOWS}h{$ELSE}(h*2){$ENDIF}),
+    Screen.WorkAreaHeight - 100);
 
   Result := ShowModal;
 end;
