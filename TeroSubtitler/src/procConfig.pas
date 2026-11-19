@@ -286,6 +286,7 @@ begin
   with Workspace do
   begin
     SMPTE         := False;
+    WorkMode      := wmFrames; // SMPTE [HH:MM:SS:FF] by default
     FPS.DefFPS    := DefFPSList[0]; // 23.976;
     FPS.InputFPS  := FPS.DefFPS;
     FPS.OutputFPS := FPS.DefFPS;

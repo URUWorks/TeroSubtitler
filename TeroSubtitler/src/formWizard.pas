@@ -210,7 +210,12 @@ begin
   cboTimeCode.Items.Add('');
   cboTimeCode.Items.Add('');
   cboLanguageChange(NIL);
-  cboTimeCode.ItemIndex := Integer(Workspace.WorkMode);
+  // SMPTE [HH:MM:SS:FF] is listed first and preselected on first start
+  // (default WorkMode is wmFrames), Media [HH:MM:SS.ZZZ] remains available
+  if Workspace.WorkMode = wmTime then
+    cboTimeCode.ItemIndex := 1
+  else
+    cboTimeCode.ItemIndex := 0;
 
   if FReopened then
   begin
@@ -239,15 +244,16 @@ begin
 
   SetWorkspaceLayout(Workspace.Layout);
 
-  if cboTimeCode.ItemIndex > 0 then
-  begin
-    if Workspace.WorkMode <> wmFrames then
-      SetWorkMode(wmFrames);
-  end
-  else
+  // item 0 = SMPTE [HH:MM:SS:FF], item 1 = Media [HH:MM:SS.ZZZ]
+  if cboTimeCode.ItemIndex = 1 then
   begin
     if Workspace.WorkMode <> wmTime then
       SetWorkMode(wmTime);
+  end
+  else
+  begin
+    if Workspace.WorkMode <> wmFrames then
+      SetWorkMode(wmFrames);
   end;
 
   // don't replace the dictionary chosen by the user when reopened
@@ -372,8 +378,8 @@ begin
   else
     lblLanguage.Caption := lngwizLanguage;
 
-  cboTimeCode.Items[0] := lngHHMMSSZZZ;
-  cboTimeCode.Items[1] := lngHHMMSSFF;
+  cboTimeCode.Items[0] := lngHHMMSSFF;
+  cboTimeCode.Items[1] := lngHHMMSSZZZ;
   cboTimeCode.ItemIndex := currIdx;
 
   FixStateLang(lblLibMPVStatus);
