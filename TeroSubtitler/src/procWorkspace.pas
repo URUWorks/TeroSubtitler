@@ -105,6 +105,7 @@ procedure DoAutoCheckErrors(const AAll: Boolean = True; const ARefresh: Boolean 
 procedure UpdateStatusBar(const AUpdateDictionary: Boolean = False);
 procedure UpdateCPSAndTexts(const AIndex: Integer);
 procedure UpdateValuesForSubtitle(const AIndex: Integer);
+procedure DoBeep;
 procedure UpdateValues(const AInvalidate: Boolean = False);
 
 var
@@ -1629,6 +1630,19 @@ begin
         mmoTranslation.CPSBar.SetCPS(0);
       end;
     end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// system alert sound (e.g. a time edit that can't go further). On macOS
+// SysUtils.Beep only writes a BEL to the console, so NSBeep is used
+procedure DoBeep;
+begin
+  {$IFDEF DARWIN}
+  NSBeep;
+  {$ELSE}
+  SysUtils.Beep;
+  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------
