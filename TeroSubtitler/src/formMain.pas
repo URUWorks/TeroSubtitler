@@ -1425,7 +1425,7 @@ uses
   procConfig, procDialogs, procWorkspace, procVST, procVST_Loops,
   procUnDockVideoControls, procColorTheme, procFiles, procMPV, procSubtitle,
   procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, LazUTF8, procMRU, UWSystem.SysUtils,
-  UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procThumbnails,
+  UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procThumbnails, procProjectFile,
   formCustomQuestionDlg, formCustomSelectDlg, formTranslationMemory, formTBX,
   libMPV.Client, procMacMediaKeys, procConventions, FileUtil;
 
@@ -1817,17 +1817,45 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.tedTimeChange(Sender: TObject; const NewTime: Cardinal);
+var
+  Idx, Delta, SS, SL : Integer;
+  Block              : Boolean;
 begin
   if not VSTUpdating(VST) and (VSTFocusedNode(VST) > -1) then
   begin
     with (Sender as TUWTimeEdit) do
     begin
-      if VST.SelectedCount = 1 then
+      Idx   := VSTFocusedNode(VST);
+      // Shift + up/down (keys, spin buttons or wheel) on the start or end time
+      // moves the whole entries, keeping their durations (also with only one)
+      Block := ((Tag = TAG_CONTROL_INITIALTIME) or (Tag = TAG_CONTROL_FINALTIME)) and (ssShift in GetKeyShiftState);
+      if ((Tag = TAG_CONTROL_INITIALTIME) or (Tag = TAG_CONTROL_FINALTIME)) and (Block or (VST.SelectedCount > 1)) then
+      begin
+        // the edit shows the focused entry: move every selected entry by the
+        // same amount that one changed (raw values, like the edit shows them)
+        if Tag = TAG_CONTROL_INITIALTIME then
+          Delta := Integer(NewTime) - Subtitles.ItemPointer[Idx]^.InitialTime
+        else
+          Delta := Integer(NewTime) - Subtitles.ItemPointer[Idx]^.FinalTime;
+
+        if Delta = 0 then Exit; // e.g. the second change event of the arrow keys
+
+        if not VSTShiftSelectedTimes(VST, Tag, Delta, Block) then
+        begin
+          // some entry can't move further: nothing changed, show it again
+          DoBeep;
+          SS := SelStart;
+          SL := SelLength;
+          UpdateValuesForSubtitle(Idx);
+          SelStart  := SS;
+          SelLength := SL;
+          Exit;
+        end;
+      end
+      else if VST.SelectedCount = 1 then
         SetSubtitleTime(VSTFocusedNode(VST), NewTime, Tag)
       else
         case Tag of
-          TAG_CONTROL_INITIALTIME : VSTDoLoop(VST, @ApplySetTimeInitialFromSpin);
-          TAG_CONTROL_FINALTIME   : VSTDoLoop(VST, @ApplySetTimeFinalFromSpin);
           TAG_CONTROL_DURATION    : VSTDoLoop(VST, @ApplySetTimeDurationFromSpin);
           TAG_CONTROL_PAUSE       : VSTDoLoop(VST, @ApplySetTimePauseFromSpin);
         end;
@@ -2130,7 +2158,7 @@ var
 begin
   s := StringReplace((Sender as TMenuItem).Caption, '&&', '&', [rfReplaceAll]);
 
-  if LowerCase(ExtractFileExt(s)) = TProjectExt then
+  if IsProjectFileName(s) then
     LoadProject(s)
   else if (GetKeyState(VK_SHIFT) < 0) and (Subtitles.Count > 0) then // Shift+Click loads as translation
     ReadSubtitleData(s, False, smTranslation)

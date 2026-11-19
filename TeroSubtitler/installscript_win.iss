@@ -328,6 +328,11 @@ Root: HKA; Subkey: "Software\Classes\.tero"; ValueType: string; ValueName: ""; V
 Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.tero)"; Flags: uninsdeletekey
 Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
 Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.tero1\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.tero1"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.tero1"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.tero1"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero1"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} project (.tero1)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero1\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero1\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
 Root: HKA; Subkey: "Software\Classes\.vtt\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.vtt"; ValueData: ""; Flags: uninsdeletevalue
 Root: HKA; Subkey: "Software\Classes\.vtt"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.vtt"; Flags: uninsdeletevalue; Tasks: fileassoc
 Root: HKA; Subkey: "Software\Classes\TeroSubtitler.vtt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.vtt)"; Flags: uninsdeletekey

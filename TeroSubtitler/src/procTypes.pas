@@ -97,7 +97,7 @@ const
     '.png', '.jpg', '.gif', '.tiff', '.bmp'
   );
 
-  TProjectExt = '.stp';
+  // TProjectExt (.tero1) and TProjectLegacyExt (.stp): see procProjectFile
 
   TBluRayExt = '.sup';
 
