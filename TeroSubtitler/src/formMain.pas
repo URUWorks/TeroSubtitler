@@ -449,7 +449,6 @@ type
     MenuItem224: TMenuItem;
     MenuItem225: TMenuItem;
     MenuItem226: TMenuItem;
-    MenuItem228: TMenuItem;
     MenuItem229: TMenuItem;
     MenuItem230: TMenuItem;
     MenuItem231: TMenuItem;
@@ -511,7 +510,6 @@ type
     MenuItem215: TMenuItem;
     MenuItem216: TMenuItem;
     MenuItem217: TMenuItem;
-    MenuItem227: TMenuItem;
     mnuVideoAspectRatio: TMenuItem;
     mnuVideoAutoCrop: TMenuItem;
     MenuItem218: TMenuItem;
@@ -759,7 +757,6 @@ type
     Separator15: TMenuItem;
     Separator16: TMenuItem;
     Separator17: TMenuItem;
-    Separator18: TMenuItem;
     Separator19: TMenuItem;
     Separator20: TMenuItem;
     Separator21: TMenuItem;

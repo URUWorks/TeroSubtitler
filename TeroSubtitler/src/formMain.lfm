@@ -1962,15 +1962,6 @@ object frmMain: TfrmMain
         object Separator13: TMenuItem
           Caption = '-'
         end
-        object MenuItem227: TMenuItem
-          Action = actFocusInitialTime
-        end
-        object MenuItem228: TMenuItem
-          Action = actFocusFinalTime
-        end
-        object Separator18: TMenuItem
-          Caption = '-'
-        end
         object mnuEditTimingsEndCue: TMenuItem
           Caption = 'End Cue'
           object MenuItem66: TMenuItem
