@@ -102,6 +102,8 @@ begin
   tedLast.FPS       := tedFirst.FPS;
   tedFirst.TimeMode := GetTimeEditMode;
   tedLast.TimeMode  := tedFirst.TimeMode;
+  tedTime.FPS       := tedFirst.FPS;
+  tedTime.TimeMode  := tedFirst.TimeMode;
 
   if Subtitles.Count > 1 then
   begin
