@@ -1828,8 +1828,18 @@ begin
       Block := ((Tag = TAG_CONTROL_INITIALTIME) or (Tag = TAG_CONTROL_FINALTIME)) and (ssShift in GetKeyShiftState);
       if ((Tag = TAG_CONTROL_INITIALTIME) or (Tag = TAG_CONTROL_FINALTIME)) and (Block or (VST.SelectedCount > 1)) then
       begin
-        // the edit shows the focused entry: move every selected entry by the
-        // same amount that one changed (raw values, like the edit shows them)
+        // the edit shows the start of the first selected entry and the end of
+        // the last one (the focused one if only one): move every selected
+        // entry by the same amount that one changed (raw values, like the edit)
+        if (VST.SelectedCount > 1) and Assigned(VST.GetFirstSelected) then
+        begin
+          if Tag = TAG_CONTROL_INITIALTIME then
+            Idx := VST.GetFirstSelected^.Index
+          else
+            Idx := VSTLastSelectedNodeIndex(VST);
+          if not Subtitles.ValidIndex(Idx) then Exit;
+        end;
+
         if Tag = TAG_CONTROL_INITIALTIME then
           Delta := Integer(NewTime) - Subtitles.ItemPointer[Idx]^.InitialTime
         else
@@ -1843,7 +1853,7 @@ begin
           DoBeep;
           SS := SelStart;
           SL := SelLength;
-          UpdateValuesForSubtitle(Idx);
+          UpdateTimeValuesForSelection;
           SelStart  := SS;
           SelLength := SL;
           Exit;

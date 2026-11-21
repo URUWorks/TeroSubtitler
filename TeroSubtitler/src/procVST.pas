@@ -1356,7 +1356,7 @@ begin
 
   UndoInstance.IncrementUndoGroup;
   SubtitleChanged(True, True);
-  UpdateValuesForSubtitle(VSTFocusedNode(AVST));
+  UpdateTimeValuesForSelection;
   AVST.Invalidate;
   Result := True;
 end;

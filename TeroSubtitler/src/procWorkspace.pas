@@ -105,6 +105,7 @@ procedure DoAutoCheckErrors(const AAll: Boolean = True; const ARefresh: Boolean 
 procedure UpdateStatusBar(const AUpdateDictionary: Boolean = False);
 procedure UpdateCPSAndTexts(const AIndex: Integer);
 procedure UpdateValuesForSubtitle(const AIndex: Integer);
+procedure UpdateTimeValuesForSelection;
 procedure DoBeep;
 procedure UpdateValues(const AInvalidate: Boolean = False);
 
@@ -1663,6 +1664,31 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the time edits as UpdateValues shows them: with several entries selected,
+// the start of the first one, the end of the last one and the span between
+// them (duration and gap are disabled then); with one, its own times
+procedure UpdateTimeValuesForSelection;
+var
+  First, Last: Integer;
+begin
+  with frmMain do
+    if (VST.SelectedCount > 1) and Assigned(VST.GetFirstSelected) then
+    begin
+      First := VST.GetFirstSelected^.Index;
+      Last  := VSTLastSelectedNodeIndex(VST);
+      if not Subtitles.ValidIndex(Last) then Last := First;
+
+      tedInitial.SetValueOnly(Subtitles[First].InitialTime);
+      tedFinal.SetValueOnly(Subtitles[Last].FinalTime);
+      tedDuration.SetValueOnly(Range(tedFinal.Value - tedInitial.Value, 0, tedFinal.Value));
+      tedPause.SetValueOnly(0);
+    end
+    else
+      UpdateValuesForSubtitle(VSTFocusedNode(VST));
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure UpdateValues(const AInvalidate: Boolean = False);
 var
   NodeIndex: Integer;
@@ -1765,7 +1791,10 @@ begin
           actExtendLengthToPrevious.Enabled  := True;
           actExtendLengthToNext.Enabled      := True;
           actSetDefaultGap.Enabled           := NodeIndex < Subtitles.Count-1;
-          tedPause.Enabled                   := actSetDefaultGap.Enabled;
+          // one duration or gap for several entries makes their times messy
+          // (and going back doesn't restore them): only start/end shift them
+          tedDuration.Enabled                := False;
+          tedPause.Enabled                   := False;
           actDistributeEntriesEvenly.Enabled := True;
         end;
         actAutomaticDuration.Enabled := True;
