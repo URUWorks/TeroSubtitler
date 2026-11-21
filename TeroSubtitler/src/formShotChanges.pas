@@ -145,6 +145,26 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the list shows the times as SMPTE in frame mode, as ms otherwise (the
+// format of each line is detected by its shape, so both are read back)
+function ListTimeCode: Integer;
+begin
+  if Workspace.WorkMode = wmFrames then
+    Result := tcHHMMSSFF
+  else
+    Result := tcMilliseconds;
+end;
+
+function MsToListTime(const AMs: Integer): String;
+begin
+  if Workspace.WorkMode = wmFrames then
+    Result := MSToHHMMSSFFTime(AMs, GetFPS)
+  else
+    Result := IntToStr(AMs);
+end;
+
+// -----------------------------------------------------------------------------
+
 // slugs, stills, black, etc.: events without a real clip timecode.
 // "CLIP HAD NO TIMECODE TRACK" is not one of them: the clip times are still
 // valid, counted from 00:00:00:00
@@ -256,6 +276,8 @@ begin
     cboTimeCodeImport.ItemIndex := 2;
     cboTimeCodeExport.ItemIndex := 4;
     SetDetectApp(daNative);
+    tedOffset.FPS      := GetFPS;
+    tedOffset.TimeMode := GetTimeEditMode;
   finally
   end;
 
@@ -275,7 +297,7 @@ begin
         // the timeline has them in entry time (with the video offset), the
         // memo and the cache in video time
         for i := 0 to High(GetSceneChangeList) do
-          mmoTimes.Lines.Add(EntryToVideoMS(GetSceneChangeList[i]).ToString);
+          mmoTimes.Lines.Add(MsToListTime(EntryToVideoMS(GetSceneChangeList[i])));
       finally
         mmoTimes.Lines.EndUpdate;
         mmoTimesChange(NIL);
@@ -383,7 +405,7 @@ begin
   end;
   // the times of the timeline are in ms, whatever was used the last time
   if FFromWave then
-    cboTimeCodeImport.ItemIndex := tcMilliseconds;
+    cboTimeCodeImport.ItemIndex := ListTimeCode;
   cboDetectAppSelect(NIL);
 end;
 
@@ -823,7 +845,7 @@ begin
   SetControlsEnabled(False);
   // the detected times are ms: with "Frames" left selected from a previous
   // import they were read as frames (exported 2.669 s as 00:01:51:05)
-  cboTimeCodeImport.ItemIndex := tcMilliseconds;
+  cboTimeCodeImport.ItemIndex := ListTimeCode;
   FSMPTE := False;
   FFromWave := False;
   try
@@ -858,7 +880,7 @@ begin
             begin
               sc := Round(StrToSingle(Copy(sl[i], x+sc_timeid.Length, Pos(' ', sl[i], x+1)-x-sc_timeid.Length).Replace('.', FormatSettings.DecimalSeparator), 0, FormatSettings)*1000);
               if sc > 0 then
-                mmoTimes.Lines.Add(IntToStr(sc));
+                mmoTimes.Lines.Add(MsToListTime(sc));
             end;
           end;
         finally
@@ -942,7 +964,7 @@ begin
     mmoTimes.Clear;
     for i := 0 to High(cuts) do
       if cuts[i] > 0 then
-        mmoTimes.Lines.Add(IntToStr(cuts[i]));
+        mmoTimes.Lines.Add(MsToListTime(cuts[i]));
   finally
     mmoTimes.Lines.EndUpdate;
     FFillingMemo := False;
