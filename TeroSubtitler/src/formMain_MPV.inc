@@ -53,6 +53,14 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.DoCheckRoundTimesOnLoad(Data: PtrInt);
+begin
+  // opened a file in ms in frames mode: round its timings? (procFiles)
+  CheckRoundTimesOnLoad;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.DoMPVLoadError(Data: PtrInt);
 begin
   case Data of
@@ -138,6 +146,13 @@ begin
   SubtitleInfo.LastSubtitle.ShowIndex := 0;
   sbrSeek.Max := MPV.GetMediaLenInMs;
   sbrSeek.Enabled := True;
+  // the timeline was used without video (length of the entries): now it's
+  // the one of the video, and the waveform can be extracted
+  if FTimelineWithoutMedia then
+  begin
+    FTimelineWithoutMedia := False;
+    WAVE.Close;
+  end;
   // the timeline must reach the end of the video, its audio can end before
   WAVE.VideoLengthMS := MPV.GetMediaLenInMs;
 
@@ -172,6 +187,9 @@ begin
   end;
 
   TimerPlayback.Enabled := True;
+
+  // the fps of the video is known now (not inside the mpv event, it's a modal form)
+  Application.QueueAsyncCall(@DoCheckRoundTimesOnLoad, 0);
 
   if MPVOptions.SubtitleHandleByMPV then
   begin
@@ -289,9 +307,12 @@ begin
     begin
       MPV.Pause;
       MPV.SetMediaPosInMs(MPVOptions.EndTime);
-      MPVOptions.EndTime := 0;
+      // (the position before clearing EndTime: it was 0, the play cursor
+      // jumped to the start for a moment)
       CurrentPos := MPVOptions.EndTime;
+      MPVOptions.EndTime := 0;
     end;
+    MPVCheckSelectionEnd(CurrentPos);
 
     // B. ACTUALIZAR WAVEFORM
     if (not WAVE.IsMouseDown) and WAVE.IsTimeLineEnabled then

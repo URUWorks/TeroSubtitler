@@ -36,6 +36,7 @@ function EnsureSaveFileExt(const AFileName, AExt: String; const AKnownFilter: St
 function CloseSubtitle(const AKeepVideoOpen: Boolean): Boolean;
 procedure NewSubtitle(const InsertEmptySubtitle: Boolean = True);
 procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AKeepVideoOpen: Boolean = False; const AVideoFile: String = ''; const AddToMRU: Boolean = True);
+procedure CheckRoundTimesOnLoad;
 procedure ImportSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 procedure SaveSubtitle(const FileName: String; const Format: TUWSubtitleFormats; const SubtitleMode: TSubtitleMode; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 procedure SaveSubtitleAutoBackup;
@@ -116,6 +117,11 @@ uses
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
+
+var
+  // a subtitle in milliseconds was opened in frames mode: once the video is
+  // loaded (its fps is known) we offer to round its timings to frames
+  RoundTimesOnLoadPending: Boolean = False;
 
 // -----------------------------------------------------------------------------
 
@@ -531,6 +537,66 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// Opened in frames mode (SMPTE/frames is the default now), a file in
+// milliseconds (SRT, WebVTT...) can have timings between two frames: they
+// show the frame they round to, but the gaps/durations calculated in ms can
+// be one frame off (e.g. chaining). We offer to round them, only:
+// - in frames mode, with a file in ms (not one in frames/SMPTE),
+// - when some timing is not already on a frame,
+// - with the fps of the video, once it's loaded: rounding with the wrong fps
+//   would move every timing. If the fps of the video and the project's differ
+//   nothing is done (the user changes the fps first and uses Round times)
+
+procedure ApplyRoundTimesOnLoad(const Item: PUWSubtitleItem; const Index: Integer);
+var
+  it, ft: Integer;
+begin
+  with Item^ do
+  begin
+    // to the frame the list already shows (MSToHHMMSSFFTime rounds the same)
+    it := RoundTimeWithFrames(InitialTime, Workspace.FPS.OutputFPS.FPS);
+    ft := RoundTimeWithFrames(FinalTime, Workspace.FPS.OutputFPS.FPS);
+    if (it <> InitialTime) or (ft <> FinalTime) then
+      SetSubtitleTimes(Index, it, ft, False, False);
+  end;
+end;
+
+procedure CheckRoundTimesOnLoad;
+var
+  i, n, it, ft: Integer;
+  FPS, VideoFPS: Double;
+begin
+  if not RoundTimesOnLoadPending then Exit;
+  RoundTimesOnLoadPending := False;
+
+  if (Workspace.WorkMode <> wmFrames) or (Subtitles.Count = 0) then Exit;
+  FPS := Workspace.FPS.OutputFPS.FPS;
+  if FPS <= 0 then Exit;
+
+  if frmMain.MPV.IsMediaLoaded then
+  begin
+    VideoFPS := frmMain.MPV.GetVideoFPS;
+    if (VideoFPS > 0) and (Abs(VideoFPS - FPS) > 0.01) then Exit;
+  end;
+
+  n := 0;
+  for i := 0 to Subtitles.Count-1 do
+  begin
+    it := RoundTimeWithFrames(Subtitles[i].InitialTime, FPS);
+    ft := RoundTimeWithFrames(Subtitles[i].FinalTime, FPS);
+    // 1 ms: the ms of a frame are rounded too
+    if (Abs(it - Subtitles[i].InitialTime) > 1) or (Abs(ft - Subtitles[i].FinalTime) > 1) then
+      Inc(n);
+  end;
+  if n = 0 then Exit;
+
+  if CustomQuestionDialog(lngRoundTimesOnLoadTitle, Format(lngRoundTimesOnLoad,
+    [n, SingleToStr(FPS, FormatSettings)]), [dbYes, dbNo]) = mrYes then
+    VSTDoLoop(frmMain.VST, @ApplyRoundTimesOnLoad, dlAll, True, True);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure LoadSubtitle(const FileName: String; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1; const AKeepVideoOpen: Boolean = False; const AVideoFile: String = ''; const AddToMRU: Boolean = True);
 var
   _FPS: TFPSInfo;
@@ -683,6 +749,11 @@ begin
 
     DoAutoCheckErrors;
 
+    // timings in ms opened in frames mode: offer to round them to frames
+    // (with the fps of the video: after it's loaded, see below)
+    RoundTimesOnLoadPending := (Workspace.WorkMode = wmFrames) and
+      (Subtitles.TimeBase = stbMedia) and not (Subtitles.Format in [sfTeroSubtitler, sfDolbyVision]);
+
     SubtitleInfo.Text.FileName := FileName;
     RefreshAppTitle;
 
@@ -709,12 +780,19 @@ begin
     end;
 
     if not AVideoFile.IsEmpty then
-      LoadVideo(AVideoFile)
+      VFisLoaded := LoadVideo(AVideoFile) or VFisLoaded
     else if not AKeepVideoOpen and not VFisLoaded then
     begin
       if not LoadVideo(GetMediaFileNameIfExists(FileName, TVideoExts)) then
-        LoadVideo(GetMediaFileNameIfExists(FileName, TAudioExts));
+        VFisLoaded := LoadVideo(GetMediaFileNameIfExists(FileName, TAudioExts))
+      else
+        VFisLoaded := True;
     end;
+
+    // without a video to load the fps is already the final one (with one,
+    // MPVFileLoaded asks once it's loaded)
+    if RoundTimesOnLoadPending and not VFisLoaded then
+      Application.QueueAsyncCall(@frmMain.DoCheckRoundTimesOnLoad, 0);
 
     if AddToMRU then
       with frmMain do
@@ -1358,7 +1436,15 @@ end;
 
 function EnsureSaveFileExt(const AFileName, AExt: String; const AKnownFilter: String = ''): String;
 var
-  Ext, Known: String;
+  Ext, Known, Inner: String;
+
+  function IsKnownExt(const AValue: String): Boolean;
+  begin
+    Result := (AValue.Length > 1) and not Known.IsEmpty and
+      ((Pos('*' + AValue + '|', Known) > 0) or (Pos('*' + AValue + ';', Known) > 0) or
+      (Pos('*' + AValue + ')', Known) > 0) or Known.EndsWith('*' + AValue));
+  end;
+
 begin
   // Native save dialogs (macOS in particular) don't always append the
   // extension of the selected filter. Append it when the name has none, or
@@ -1367,15 +1453,25 @@ begin
   Result := AFileName;
   if AFileName.IsEmpty or AExt.IsEmpty then Exit;
 
+  Known := LowerCase(AKnownFilter);
   Ext := LowerCase(ExtractFileExt(AFileName));
-  if Ext = LowerCase(AExt) then Exit;
-  if (Ext.Length > 1) and not AKnownFilter.IsEmpty then
+  if Ext = LowerCase(AExt) then
   begin
-    Known := LowerCase(AKnownFilter);
-    if (Pos('*' + Ext + '|', Known) > 0) or (Pos('*' + Ext + ';', Known) > 0) or
-      (Pos('*' + Ext + ')', Known) > 0) or Known.EndsWith('*' + Ext) then
-      Exit;
+    // the suggested name kept the extension of the file (or of the format
+    // before changing it) and the dialog added the new one: "movie.vtt.itt",
+    // "movie.itt.itt" -> "movie.itt"
+    Inner := LowerCase(ExtractFileExt(ChangeFileExt(AFileName, '')));
+    if (Inner = Ext) or IsKnownExt(Inner) then
+    begin
+      Result := ChangeFileExt(ChangeFileExt(AFileName, ''), AExt);
+      if FileExists(Result) and (MessageDlg(rsfdOverwriteFile,
+        Format(rsfdFileAlreadyExists, [Result]), mtConfirmation, [mbOK, mbCancel], 0) <> mrOK) then
+        Result := '';
+    end;
+    Exit;
   end;
+  if IsKnownExt(Ext) then
+    Exit;
 
   if Result.EndsWith('.') then
     SetLength(Result, Result.Length-1);
@@ -1402,7 +1498,7 @@ begin
     CD := TfrmCustomFileDlg.Create(NIL);
     try
       CD.FileName := GetSuggestedFileNameForSave;
-      if CD.Execute(dmSave) and AllowSaveFormat(CD.Format) then
+      if CD.Execute(dmSave) and AllowSaveFormat(CD.Format, SubtitleMode) then
       begin
         s := EnsureSaveFileExt(CD.FileName, GetSubtitleFormatExt(CD.Format), Subtitles.FillDialogFilter(''));
         if not s.IsEmpty then
@@ -1430,7 +1526,7 @@ begin
       {$ENDIF}
 
       SD.Options := [ofOverwritePrompt, ofEnableSizing];
-      if SD.Execute and AllowSaveFormat(TUWSubtitleFormats(SD.FilterIndex)) then
+      if SD.Execute and AllowSaveFormat(TUWSubtitleFormats(SD.FilterIndex), SubtitleMode) then
       begin
         s := EnsureSaveFileExt(SD.FileName, GetSubtitleFormatExt(TUWSubtitleFormats(SD.FilterIndex)), SD.Filter);
         if not s.IsEmpty then
@@ -1458,7 +1554,9 @@ begin
   // format combo was changed), instead of writing srt data into a .ass file
   if s.IsEmpty or not FileExtMatchesFormat(s, Subtitles.Format) then
     SaveSubtitleWithDialog(SubtitleMode)
-  else
+  // the same checks as Save as (iTT/Netflix/EBU): saving again over an .itt
+  // didn't warn about the formatting the format can't keep
+  else if AllowSaveFormat(Subtitles.Format, SubtitleMode) then
     SaveSubtitle(s, Subtitles.Format, SubtitleMode);
 end;
 
@@ -1779,7 +1877,9 @@ begin
       LoadSubtitle(Original, sfInvalid, NIL, -1, False, AVideo, False);
       if Subtitles.Count > 0 then
       begin
-        ReadSubtitleData(Translation, False, smTranslation);
+        // a project without translation (saved outside translator mode)
+        if not Translation.IsEmpty then
+          ReadSubtitleData(Translation, False, smTranslation);
 
         if (FocusedNode >= 0) and (FocusedNode < Subtitles.Count) then
           VSTSelectNode(frmMain.VST, FocusedNode, True, True);
@@ -1808,7 +1908,8 @@ begin
   with TProjectFile.Create(PrjFileName, False) do
   try
     Original    := SubtitleInfo.Text.FileName;
-    Translation := SubtitleInfo.Translation.FileName;
+    if Workspace.TranslatorMode then
+      Translation := SubtitleInfo.Translation.FileName;
     FocusedNode := VSTFocusedNode(frmMain.VST);
 
     // the video (it wasn't saved) and its thumbnails, in the project
@@ -1883,11 +1984,20 @@ procedure SaveProjectWithDialog;
 var
   SD : TSaveDialog;
 begin
+  // the project needs the subtitle saved first. The translation only in
+  // translator mode: before it always asked to save a second file, the
+  // translation, even when there was none
   if SubtitleInfo.Text.FileName.IsEmpty then
+  begin
     SaveSubtitleWithDialog;
+    if SubtitleInfo.Text.FileName.IsEmpty then Exit; // cancelled
+  end;
 
-  if SubtitleInfo.Translation.FileName.IsEmpty then
+  if Workspace.TranslatorMode and SubtitleInfo.Translation.FileName.IsEmpty then
+  begin
     SaveSubtitleWithDialog(smTranslation);
+    if SubtitleInfo.Translation.FileName.IsEmpty then Exit; // cancelled
+  end;
 
   SD := TSaveDialog.Create(NIL);
   try
