@@ -318,11 +318,33 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.WAVEClick(Sender: TObject);
+const
+  // without video: at least one minute, and the timeline grows with the
+  // entries (the last one + 5 s, see UpdateLengthMS of the timeline)
+  NoMediaLengthMS = 60000;
 begin
+  if WAVE.IsTimeLineEnabled then Exit;
+
   if (MPV.GetMediaLenInMs > 0) then
   begin
+    FTimelineWithoutMedia := False;
     WAVE.GenerateDummyPeakTab(MPV.GetMediaLenInMs);
     EnableActionsByTag([TAG_ACTION_AUDIO], True);
+  end
+  else
+  begin
+    // before, without video the click did nothing and the entries couldn't
+    // be seen or edited in the timeline
+    FTimelineWithoutMedia := True;
+    WAVE.GenerateDummyPeakTab(NoMediaLengthMS);
+    EnableActionsByTag([TAG_ACTION_AUDIO], True);
+    // nothing to play or analyze without media
+    actMediaPlaySelection.Enabled       := False;
+    actMediaPlayFromSelection.Enabled   := False;
+    actMediaPlayBeforeSelection.Enabled := False;
+    actMediaPlayAfterSelection.Enabled  := False;
+    actDetectSilentZones.Enabled        := False;
+    actDetectDialogSegments.Enabled     := False;
   end;
 end;
 

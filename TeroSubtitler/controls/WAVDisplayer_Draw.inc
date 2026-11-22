@@ -120,7 +120,7 @@ begin
 
   if x1_update >= x2_update then Exit;
 
-  RectHeight := GetSubCanvasHeight;
+  RectHeight := GetWAVECanvasHeight;
   Middle     := GetWAVECanvasY + (RectHeight div 2);
 
   // Pre-calcular factor de escala Y
@@ -340,7 +340,7 @@ begin
     DrawMinimumBlank(FBackBufferItems, y1, y2);
     // shot changes cover the subtitles row too (drawn before the entries, so
     // they stay behind them) and the wave
-    DrawSceneChange(FBackBufferItems, y1, GetWAVECanvasY + GetSubCanvasHeight);
+    DrawSceneChange(FBackBufferItems, y1, GetWAVECanvasY + GetWAVECanvasHeight);
     DrawSubtitleItem(FBackBufferItems, y1, y2);
 
     {$IFDEF USEBGRABITMAP}
@@ -690,9 +690,9 @@ begin
         begin
           if FSelectedSubtitle = NIL then
             {$IFDEF USEBGRABITMAP}
-            ABitmap.FillRect(x1, GetWAVECanvasY, x2, GetWAVECanvasY+GetSubCanvasHeight, CustomColors.ItemSelected, dmDrawWithTransparency, 3070)
+            ABitmap.FillRect(x1, GetWAVECanvasY, x2, GetWAVECanvasY+GetWAVECanvasHeight, CustomColors.ItemSelected, dmDrawWithTransparency, 3070)
             {$ELSE}
-            DrawAlphaRect(ABitmap, x1, x2, GetWAVECanvasY, GetWAVECanvasY+GetSubCanvasHeight, CustomColors.ItemSelected)
+            DrawAlphaRect(ABitmap, x1, x2, GetWAVECanvasY, GetWAVECanvasY+GetWAVECanvasHeight, CustomColors.ItemSelected)
             {$ENDIF}
           else
             {$IFDEF USEBGRABITMAP}

@@ -193,6 +193,8 @@ type
 
     FGAP               : Integer; // Minimum blank between subtitle in ms
     FDrawGAP           : Boolean;
+    FSubtitlesPercent  : Integer;   // height of the entries row, % of the area below the thumbnails
+    FSplitDragging     : Boolean;   // dragging the line between the entries and the wave
     FSnappingEnabled   : Boolean;
 
     FMinBlankInfo1,
@@ -261,6 +263,10 @@ type
     function GetSubCanvasHeight: Integer;
     function GetSubCanvasY: Integer;
     function GetWAVECanvasY: Integer;
+    function GetWAVECanvasHeight: Integer;
+    function GetThumbCanvasHeight: Integer;
+    function IsOnSplitLine(const Y: Integer): Boolean;
+    procedure SetSubtitlesPercent(const AValue: Integer);
 
     function IsTimeLineClicked(const XY: Integer): Boolean;
 
@@ -420,6 +426,7 @@ type
     property CenterPlayCursor              : Boolean                      read FCenterPlay                   write FCenterPlay;
     property SceneChangeEnabled            : Boolean                      read FSceneChangeEnabled           write SetSceneChangeEnabled;
     property DrawGAP                       : Boolean                      read FDrawGAP                      write FDrawGAP;
+    property SubtitlesPercent              : Integer                      read FSubtitlesPercent             write SetSubtitlesPercent;
     property DrawThumbnail                 : Boolean                      read FDrawThumbnails               write FDrawThumbnails;
     property SilentZones                   : TZonesList                   read FSilentZones;
     property SavePeakToFile                : Boolean                      read FSavePeakToFile               write FSavePeakToFile;
@@ -576,6 +583,8 @@ begin
 
   FSnappingEnabled := True;
   FDrawGAP         := False;
+  FSubtitlesPercent := 50;
+  FSplitDragging   := False;
   FGAP             := 30;
   FMinBlankInfo1   := TMinBlankInfo.Create;
   FMinBlankInfo2   := TMinBlankInfo.Create;
@@ -811,23 +820,61 @@ end;
 
 //------------------------------------------------------------------------------
 
+// the thumbnails take the top third (if visible); the rest is shared by the
+// entries row and the wave, as the user drags the line between them
+function TUWWaveformDisplayer.GetThumbCanvasHeight: Integer;
+begin
+  if ThumbnailsVisible then
+    Result := GetCanvasHeight div 3
+  else
+    Result := 0;
+end;
+
+//------------------------------------------------------------------------------
+
 function TUWWaveformDisplayer.GetSubCanvasHeight: Integer;
 begin
-  Result := GetCanvasHeight div iff(ThumbnailsVisible, 3, 2);
+  Result := ((GetCanvasHeight - GetThumbCanvasHeight) * FSubtitlesPercent) div 100;
 end;
 
 //------------------------------------------------------------------------------
 
 function TUWWaveformDisplayer.GetSubCanvasY: Integer;
 begin
-  Result := GetSubCanvasHeight * iff(ThumbnailsVisible, 1, 0);
+  Result := GetThumbCanvasHeight;
 end;
 
 //------------------------------------------------------------------------------
 
 function TUWWaveformDisplayer.GetWAVECanvasY: Integer;
 begin
-  Result := GetSubCanvasHeight * iff(ThumbnailsVisible, 2, 1);
+  Result := GetSubCanvasY + GetSubCanvasHeight;
+end;
+
+//------------------------------------------------------------------------------
+
+function TUWWaveformDisplayer.GetWAVECanvasHeight: Integer;
+begin
+  Result := GetCanvasHeight - GetWAVECanvasY;
+end;
+
+//------------------------------------------------------------------------------
+
+function TUWWaveformDisplayer.IsOnSplitLine(const Y: Integer): Boolean;
+begin
+  Result := Abs(Y - GetWAVECanvasY) <= 3;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TUWWaveformDisplayer.SetSubtitlesPercent(const AValue: Integer);
+var
+  v: Integer;
+begin
+  v := EnsureRange(AValue, 15, 85);
+  if v = FSubtitlesPercent then Exit;
+  FSubtitlesPercent := v;
+  UpdateView([uvfPageSize]);
 end;
 
 //------------------------------------------------------------------------------
@@ -1538,6 +1585,14 @@ begin
     Exit;
   end;
 
+  // the line between the entries and the wave can be dragged to resize them
+  if (Button = mbLeft) and IsOnSplitLine(Y) then
+  begin
+    FSplitDragging := True;
+    Cursor         := crVSplit;
+    Exit;
+  end;
+
   // right click on an entry not selected: select it, so the actions of the
   // context menu (combine, extend, delete...) work on the entry clicked
   if (Button = mbRight) then
@@ -1742,26 +1797,10 @@ begin
         end
         else
         begin
-          if (i > 0) and (ACursorPosMs >= FSubtitles[i-1].InitialTime) and
-            (ACursorPosMs <= FSubtitles[i-1].FinalTime) then
-          begin
-            // Selection only INSIDE subtitle range
-          end
-          else
-          begin
-            // Selection only OUTSIDE subtitle range
-            if (i > 0) then
-            begin
-              FMinSelTime := FSubtitles[i-1].FinalTime  + FGAP;
-              x1 := TimeToPixel(FMinSelTime - FPositionMs);
-            end;
-
-            if(i < FSubtitles.Count) then
-            begin
-              FMaxSelTime := FSubtitles[i].InitialTime - FGAP;
-              x2 := TimeToPixel(FMaxSelTime - FPositionMs);
-            end;
-          end;
+          // a selection (not an entry): free, it can go over the entries (to
+          // play or zoom a part, delete shot changes...). It was limited to
+          // the gap where it started (and free if it started inside an entry),
+          // an invisible wall; "Add entry" keeps the new entry in the gap
         end;
       end;
     end;
@@ -1811,10 +1850,24 @@ var
   Dist              : Integer;
   SnapPos           : Integer;
   GroupDelta        : Integer;
+  SelX1, SelX2      : Integer;
+  SelMode           : TDynamicEditMode;
 begin
   inherited;
 
   if (ssDouble in Shift) or (not IsTimeLineEnabled) then Exit;
+
+  if FSplitDragging then
+  begin
+    if (GetCanvasHeight - GetThumbCanvasHeight) > 0 then
+      SetSubtitlesPercent(Round((Y - GetThumbCanvasHeight) * 100 / (GetCanvasHeight - GetThumbCanvasHeight)));
+    Exit;
+  end
+  else if not FMouseIsDown and IsOnSplitLine(Y) then
+  begin
+    Cursor := crVSplit;
+    Exit;
+  end;
 
   UpdateFlags := [];
   // Dist is the tolerance used when pushing the neighbour subtitle (Alt+drag),
@@ -2000,13 +2053,32 @@ begin
         SubtitleUnder := FSubtitles.FindNextPointer;
       end;
 
-      // Check selection
-     {if not SelectionIsEmpty then
+      // the edges of a selection (not an entry) can be dragged too
+      if not SelectionIsEmpty and not Assigned(FSelectedSubtitle) and not IsTimeLineClicked(Y) then
       begin
-        SubtitleSelWindow := PixelToTime(4);
-        if (SubtitleSelWindow < 1) then SubtitleSelWindow := 1;
-        if CheckSubtitleItemForDynamicSelection(FDynamicSelection, ACursorPosMS, SubtitleSelWindow, X, Y) then Exit;
-      end;}
+        SelX1 := TimeToPixel(FDynamicSelection.InitialTime - FPositionMS);
+        SelX2 := TimeToPixel(FDynamicSelection.FinalTime - FPositionMS);
+        SelMode := demNone;
+        if Abs(X - SelX1) <= 6 then
+        begin
+          SelMode            := demInitial;
+          FDynamicEditTimeMs := FDynamicSelection.InitialTime;
+        end
+        else if Abs(X - SelX2) <= 6 then
+        begin
+          SelMode            := demFinal;
+          FDynamicEditTimeMs := FDynamicSelection.FinalTime;
+        end;
+
+        if SelMode <> demNone then
+        begin
+          FDynamicEditMode  := SelMode;
+          Cursor            := crHSplit;
+          FDynamicSelOldSub := FDynamicSelSub;
+          FDynamicSelSub    := NIL;
+          Exit;
+        end;
+      end;
     end;
 
     if SetMinBlankAt(ACursorPosMs) then
@@ -2044,6 +2116,13 @@ begin
   inherited;
 
   StopAutoScroll;
+
+  if FSplitDragging then
+  begin
+    FSplitDragging := False;
+    Cursor         := crDefault;
+    Exit;
+  end;
 
   if (FMouseIsDown) then
   begin
@@ -2385,6 +2464,13 @@ begin
     end;
 
     LengthMS    := WAVFile.Duration;
+    // nothing to show (empty or unfinished wav): don't leave the timeline
+    // "loaded" with length 0
+    if LengthMS <= 0 then
+    begin
+      WAVFile.Free;
+      Exit;
+    end;
     FWaveFormat := WAVFile.GetWaveFormatEx^;
     // Create the "peak" file
     CreatePeakTab(WAVFile);
@@ -2393,6 +2479,13 @@ begin
 
     WAVFile.Close;
     WAVFile.Free;
+  end;
+
+  // a peak file of length 0 (saved from an unfinished wav) is not valid either
+  if LengthMS <= 0 then
+  begin
+    ClearPeakData;
+    Exit;
   end;
 
   FPageSizeMS := DefaultPageSizeMS;
@@ -2688,7 +2781,7 @@ begin
     DrawTimeLine(FBackBufferWAVE);
 
     if ThumbnailsVisible then
-      DrawThumbnails(FBackBufferWAVE, 0, GetSubCanvasHeight);
+      DrawThumbnails(FBackBufferWAVE, 0, GetThumbCanvasHeight);
   end
   else if (uvfPosition in UpdateViewFlags) then
   begin
@@ -2696,7 +2789,7 @@ begin
     DrawTimeLine(FBackBufferWAVE);
 
     if ThumbnailsVisible then
-      DrawThumbnails(FBackBufferWAVE, 0, GetSubCanvasHeight);
+      DrawThumbnails(FBackBufferWAVE, 0, GetThumbCanvasHeight);
   end;
 
   if (uvfPageSize in UpdateViewFlags) or (uvfSubtitle in UpdateViewFlags) then
@@ -2885,11 +2978,21 @@ end;
 //------------------------------------------------------------------------------
 
 procedure TUWWaveformDisplayer.DoUpdateSubtitles;
+var
+  OldLengthMS: Integer;
 begin
   ValidateSelection;
-  // redraw only the subtitles layer over the cached wave (cheap), e.g. while
-  // typing, also during playback
-  UpdateView([uvfSubtitle]);
+  // an entry inserted/moved after the end (mainly without video, where the
+  // length is the one of the entries): the timeline grows to reach it
+  OldLengthMS := FLengthMS;
+  if FMediaLengthMS > 0 then UpdateLengthMS;
+
+  if FLengthMS <> OldLengthMS then
+    UpdateView([uvfPageSize])
+  else
+    // redraw only the subtitles layer over the cached wave (cheap), e.g. while
+    // typing, also during playback
+    UpdateView([uvfSubtitle]);
 end;
 
 //------------------------------------------------------------------------------
