@@ -723,12 +723,32 @@ end;
 
 procedure TfrmMain.actMediaAddEntryExecute(Sender: TObject);
 var
-  i: Integer;
+  i, it, ft, gap: Integer;
+  Sel: TUWSubtitleItem;
 begin
   if WAVE.IsTimeLineEnabled then
   begin
     if not WAVE.SelectionIsEmpty and WAVE.IsOnlySelection then
-      WAVE.SelectSubtitle(InsertSubtitle(Subtitles.FindInsertPos(WAVE.Selection), WAVE.Selection), True, False)
+    begin
+      // the selection is free (it can go over the entries): the new entry is
+      // kept in the gap between the previous and the next entry, as the
+      // selection was before; if it doesn't fit, as selected
+      Sel := WAVE.Selection;
+      i   := Subtitles.FindInsertPos(Sel);
+      gap := GetDefPause;
+      it  := Sel.InitialTime;
+      ft  := Sel.FinalTime;
+      if (i > 0) and (Subtitles[i-1].FinalTime + gap > it) then
+        it := Subtitles[i-1].FinalTime + gap;
+      if (i < Subtitles.Count) and (Subtitles[i].InitialTime - gap < ft) then
+        ft := Subtitles[i].InitialTime - gap;
+      if ft > it then
+      begin
+        Sel.InitialTime := it;
+        Sel.FinalTime   := ft;
+      end;
+      WAVE.SelectSubtitle(InsertSubtitle(Subtitles.FindInsertPos(Sel), Sel), True, False);
+    end
     else if WAVE.SelectionIsEmpty then
     begin
       i := Subtitles.FindInsertPos(WAVE.CursorPosMS, WAVE.CursorPosMS);
@@ -949,8 +969,10 @@ procedure TfrmMain.actCloseMediaExecute(Sender: TObject);
 begin
   MacMediaKeysClear;
   MPV.Close;
-  WAVE.EmptyText := '';
+  // the timeline can still be used without video
+  WAVE.EmptyText := lngasWaveformText;
   WAVE.Close;
+  FTimelineWithoutMedia := False;
   FreeThumbnails;
   actCloseMedia.Enabled  := False;
   actWaveExtract.Enabled := False;
@@ -1213,6 +1235,29 @@ end;
 procedure TfrmMain.actExtendLengthToNextExecute(Sender: TObject);
 begin
   VSTDoLoop(VST, @ApplyExtendLengthToNext, dlSelected, True, True);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actExtendStartToShotChangeExecute(Sender: TObject);
+begin
+  VSTDoLoop(VST, @ApplyExtendStartToShotChange, dlSelected, True, True);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actExtendEndToShotChangeExecute(Sender: TObject);
+begin
+  VSTDoLoop(VST, @ApplyExtendEndToShotChange, dlSelected, True, True);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actExtendToShotChangeUpdate(Sender: TObject);
+begin
+  // greyed out without shot changes (or without entries selected)
+  (Sender as TAction).Enabled := (Subtitles.Count > 0) and (VST.SelectedCount > 0) and
+    (WAVE.GetSceneChangeCount > 0);
 end;
 
 // -----------------------------------------------------------------------------

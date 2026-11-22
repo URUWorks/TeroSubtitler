@@ -54,6 +54,8 @@ procedure ApplyChangeInputFPS(const Item: PUWSubtitleItem; const Index: Integer)
 procedure ApplyChangeFPS(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyExtendLengthToNext(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyExtendLengthToPrevious(const Item: PUWSubtitleItem; const Index: Integer);
+procedure ApplyExtendStartToShotChange(const Item: PUWSubtitleItem; const Index: Integer);
+procedure ApplyExtendEndToShotChange(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyAutomaticDuration(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyDefaultPause(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyShiftTimeMore(const Item: PUWSubtitleItem; const Index: Integer);
@@ -71,7 +73,7 @@ procedure ApplyRemoveUnicodeControlChars(const Item: PUWSubtitleItem; const Inde
 implementation
 
 uses
-  StrUtils, formMain, procUndo, procSubtitle, procWorkspace, procFixSubtitles,
+  Types, StrUtils, formMain, procUndo, procSubtitle, procWorkspace, procFixSubtitles,
   UWSubtitleAPI.Tags, UWSubtitles.Utils, UWSystem.TimeUtils, UWSystem.StrUtils, procConventions, procMPV;
 
 // -----------------------------------------------------------------------------
@@ -417,6 +419,67 @@ begin
 
   if NewTime <> Subtitles[Index].InitialTime then
     SetSubtitleTime(Index, NewTime, frmMain.tedInitial.Tag, False, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+// Extend start/end to shot change: the start goes back to the previous shot
+// change (+ in cue of the profile) and the end forward to the next one
+// (- out cue), as Fix Subtitles snaps them. Not over the previous/next entry
+// (min gap): then the entry is left as it is.
+
+procedure ApplyExtendStartToShotChange(const Item: PUWSubtitleItem; const Index: Integer);
+var
+  sc: TIntegerDynArray;
+  k, InCue, NewTime, MinTime: Integer;
+begin
+  sc := frmMain.WAVE.GetSceneChangeList;
+  if Length(sc) = 0 then Exit;
+
+  InCue := FramesToTime(AppOptions.Conventions.ShotcutInCues, Workspace.FPS.OutputFPS.FPS);
+  if Index > 0 then
+    MinTime := Subtitles[Index-1].FinalTime + GetDefPause
+  else
+    MinTime := 0;
+
+  NewTime := -1;
+  for k := High(sc) downto 0 do
+    if (sc[k] + InCue) < Subtitles[Index].InitialTime then
+    begin
+      NewTime := sc[k] + InCue;
+      Break;
+    end;
+
+  if (NewTime >= MinTime) and (NewTime <> Subtitles[Index].InitialTime) then
+    SetSubtitleTime(Index, NewTime, frmMain.tedInitial.Tag, False, False);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ApplyExtendEndToShotChange(const Item: PUWSubtitleItem; const Index: Integer);
+var
+  sc: TIntegerDynArray;
+  k, OutCue, NewTime, MaxTime: Integer;
+begin
+  sc := frmMain.WAVE.GetSceneChangeList;
+  if Length(sc) = 0 then Exit;
+
+  OutCue := FramesToTime(AppOptions.Conventions.ShotcutOutCues, Workspace.FPS.OutputFPS.FPS);
+  if Index < (Subtitles.Count-1) then
+    MaxTime := Subtitles[Index+1].InitialTime - GetDefPause
+  else
+    MaxTime := MaxInt;
+
+  NewTime := -1;
+  for k := 0 to High(sc) do
+    if (sc[k] - OutCue) > Subtitles[Index].FinalTime then
+    begin
+      NewTime := sc[k] - OutCue;
+      Break;
+    end;
+
+  if (NewTime > 0) and (NewTime <= MaxTime) and (NewTime <> Subtitles[Index].FinalTime) then
+    SetSubtitleTime(Index, NewTime, frmMain.tedFinal.Tag, False, False);
 end;
 
 // -----------------------------------------------------------------------------

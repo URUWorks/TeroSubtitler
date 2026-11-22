@@ -1979,6 +1979,12 @@ object frmMain: TfrmMain
           object MenuItem73: TMenuItem
             Action = actExtendLengthToNext
           end
+          object mnuEditTimingsExtendStartShot: TMenuItem
+            Action = actExtendStartToShotChange
+          end
+          object mnuEditTimingsExtendEndShot: TMenuItem
+            Action = actExtendEndToShotChange
+          end
           object Separator14: TMenuItem
             Caption = '-'
           end
@@ -3415,7 +3421,7 @@ object frmMain: TfrmMain
     object actPasteAsTranslations: TAction
       Tag = 1
       Category = 'Edit'
-      Caption = 'Paste as translations'
+      Caption = 'Paste texts as translations'
       OnExecute = actPasteAsTranslationsExecute
     end
     object actPasteTimes: TAction
@@ -4016,6 +4022,18 @@ object frmMain: TfrmMain
       Category = 'Timings'
       Caption = 'Extend final time to next'
       OnExecute = actExtendLengthToNextExecute
+    end
+    object actExtendStartToShotChange: TAction
+      Category = 'Timings'
+      Caption = 'Extend start to shot change'
+      OnExecute = actExtendStartToShotChangeExecute
+      OnUpdate = actExtendToShotChangeUpdate
+    end
+    object actExtendEndToShotChange: TAction
+      Category = 'Timings'
+      Caption = 'Extend end to shot change'
+      OnExecute = actExtendEndToShotChangeExecute
+      OnUpdate = actExtendToShotChangeUpdate
     end
     object actSetAutomaticDuration: TAction
       Tag = 1
@@ -5544,6 +5562,12 @@ object frmMain: TfrmMain
     object MenuItem192: TMenuItem
       Action = actExtendLengthToNext
     end
+    object mnuVSTExtendStartShot: TMenuItem
+      Action = actExtendStartToShotChange
+    end
+    object mnuVSTExtendEndShot: TMenuItem
+      Action = actExtendEndToShotChange
+    end
     object Separator55: TMenuItem
       Caption = '-'
     end
@@ -5713,6 +5737,12 @@ object frmMain: TfrmMain
     end
     object MenuItem295: TMenuItem
       Action = actExtendLengthToNext
+    end
+    object mnuWAVEExtendStartShot: TMenuItem
+      Action = actExtendStartToShotChange
+    end
+    object mnuWAVEExtendEndShot: TMenuItem
+      Action = actExtendEndToShotChange
     end
     object Separator41: TMenuItem
       Caption = '-'

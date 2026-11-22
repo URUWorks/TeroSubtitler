@@ -237,6 +237,14 @@ type
     actEndCueSubtractOneFrame: TAction;
     actExtendLengthToPrevious: TAction;
     actExtendLengthToNext: TAction;
+    actExtendStartToShotChange: TAction;
+    actExtendEndToShotChange: TAction;
+    mnuEditTimingsExtendStartShot: TMenuItem;
+    mnuEditTimingsExtendEndShot: TMenuItem;
+    mnuVSTExtendStartShot: TMenuItem;
+    mnuVSTExtendEndShot: TMenuItem;
+    mnuWAVEExtendStartShot: TMenuItem;
+    mnuWAVEExtendEndShot: TMenuItem;
     actAddNote: TAction;
     actHelp: TAction;
     actTranslate: TAction;
@@ -1061,6 +1069,7 @@ type
     procedure MPVEndFile(ASender: TObject; AReason, AError: Integer);
     procedure DoMPVLoadError(Data: PtrInt);
     procedure DoAutoExtractWaveform(Data: PtrInt);
+    procedure DoCheckRoundTimesOnLoad(Data: PtrInt);
     procedure MPVStartFile(Sender: TObject);
     procedure MPVFileLoaded(Sender: TObject);
     procedure MPVPause(Sender: TObject);
@@ -1210,6 +1219,9 @@ type
     procedure actReadTextsFromFileExecute(Sender: TObject);
     procedure actExtendLengthToNextExecute(Sender: TObject);
     procedure actExtendLengthToPreviousExecute(Sender: TObject);
+    procedure actExtendStartToShotChangeExecute(Sender: TObject);
+    procedure actExtendEndToShotChangeExecute(Sender: TObject);
+    procedure actExtendToShotChangeUpdate(Sender: TObject);
     procedure actSetAutomaticDurationExecute(Sender: TObject);
     procedure actSetDefaultGapExecute(Sender: TObject);
     procedure actSetGappingExecute(Sender: TObject);
@@ -1385,6 +1397,7 @@ type
     FCoolBarsFitted: Boolean;
     FWAVEValuesTimer: TTimer;     // times/CPS while dragging in the timeline
     FWAVESelInStatus: Boolean;    // the status bar shows the timeline selection
+    FTimelineWithoutMedia: Boolean; // timeline used without video (its length is the one of the entries)
     // the text doesn't change while an entry is dragged: its length and the
     // label (chars of each line) are calculated once, only the CPS changes
     FDragIdx: Integer;
@@ -1479,7 +1492,8 @@ begin
   Subtitles := TUWSubtitles.Create;
   Subtitles.OnLoadDataFunc := @SAPILoadDataFunc;
   // Link subtitles to Waveform
-  WAVE.EmptyText := '';
+  // without video too: the timeline can be used with the length of the entries
+  WAVE.EmptyText := lngasWaveformText;
   WAVE.Subtitles := Subtitles;
   // multiple selection in the timeline (it shows the entries selected in the list)
   WAVE.OnSubtitleItemToggle := @WAVESubtitleItemToggle;

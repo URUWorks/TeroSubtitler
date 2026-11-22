@@ -103,6 +103,48 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the start the entry will have after the "in cue" of the shot change fix of
+// Fix Subtitles (the same rules, without the check against the previous one)
+function StartAfterShotCutSnap(const AStart: Integer; const AShotChanges: TIntegerDynArray;
+  const ASnapMs, AThresholdMs, AInCue: Integer): Integer;
+var
+  Cut: Integer;
+begin
+  Result := AStart;
+  if Length(AShotChanges) = 0 then Exit;
+
+  Cut := FindBestShotCutMs(AShotChanges, AStart);
+  if (Cut >= 0) and (Abs(Cut - AStart) < AThresholdMs) then
+  begin
+    if Abs(Cut - AStart) <= ASnapMs then
+      Result := Cut + AInCue
+    else if Sign(Cut - AStart) <= 0 then
+      Result := Cut + AThresholdMs
+    else
+      Result := Cut - AThresholdMs;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// the first shot change in [AFrom, ATo], or -1
+function FirstShotCutIn(const AShotChanges: TIntegerDynArray; const AFrom, ATo: Integer): Integer;
+var
+  k: Integer;
+begin
+  Result := -1;
+  for k := 0 to High(AShotChanges) do
+    if AShotChanges[k] > ATo then
+      Break
+    else if AShotChanges[k] >= AFrom then
+    begin
+      Result := AShotChanges[k];
+      Break;
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetItemDuration(const Item: TSubtitleInfoItem): Cardinal;
 begin
   Result := Item.FinalTime-Item.InitialTime;
@@ -223,6 +265,10 @@ var
   NextIT     : Integer;
   SnapAway : Boolean;
   Straightened : Boolean;
+  SnapEnabled : Boolean;
+  HalfFrameMs : Integer;
+  ChainFPS    : Double;
+
 begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
 
@@ -234,6 +280,10 @@ begin
   OutCue      := FramesToTime(Profile^.ShotcutOutCues, Workspace.FPS.OutputFPS.FPS);
   ChainingMS  := FramesToTime(Profile^.Chaining, Workspace.FPS.OutputFPS.FPS);
   prevSnapFT  := 0;
+  SnapEnabled := (etSnapToShotChanges in FErrors) and (Length(AShotChanges) > 0);
+  // half a frame: under it the difference is rounding of the ms, not a frame
+  ChainFPS    := Workspace.FPS.OutputFPS.FPS;
+  HalfFrameMs := Max(1, FramesToTime(1, ChainFPS) div 2);
   ocr := TUWOCRScript.Create(OCRFile);
   try
     for i := 0 to FSubtitles.Count-1 do
@@ -570,9 +620,12 @@ begin
       begin
         if i > 0 then
         begin
-          if StartTooClose(FixedItem.InitialTime, FSubtitles[i-1].FinalTime, GapMs) then
+          // the end of the previous one as it is fixed in this same pass (its
+          // duration, shot change or chaining fix), not the one in the list:
+          // otherwise the overlap only showed up the next time
+          if StartTooClose(FixedItem.InitialTime, PrevFixed.FinalTime, GapMs) then
           begin
-            x := OverlapGapTime(FSubtitles[i-1].FinalTime, 1, GapMs);
+            x := OverlapGapTime(PrevFixed.FinalTime, 1, GapMs);
             MinDurMs := OverlapGapTime(0, 1, 0); // one frame (1 ms in time mode)
             // moving the start would leave this one without duration (a short
             // subtitle chained to the previous one): end the previous earlier
@@ -672,18 +725,48 @@ begin
       end;
 
       // Chaining
+      // - with the start the next one will have after its own shot change
+      //   fix in this pass (before: the one in the list, so after snapping it
+      //   the gap was wrong again and needed another pass)
+      // - a gap of one frame more than the min gap is chained too (before it
+      //   had to be more than one frame: with 2 frames of min gap, 3 stayed)
+      // - with a shot change in the gap it's chained up to the shot change
+      //   (cut - out cue), not across it: the snap moved it back every pass
       if (etChaining in FErrors) and (i+1 < FSubtitles.Count) then
       begin
-        if ((FSubtitles[i+1].InitialTime - FixedItem.FinalTime) < ChainingMS) and (((FSubtitles[i+1].InitialTime - GapMs) - FixedItem.FinalTime) > FramesToTime(1, Workspace.FPS.OutputFPS.FPS)) then
+        NextIT := FSubtitles[i+1].InitialTime;
+        if SnapEnabled and (FSubtitles.Duration[i+1] >= Profile^.MinDuration) then
+          NextIT := StartAfterShotCutSnap(NextIT, AShotChanges, SnapMs, ThresholdMs, InCue);
+        if (NextIT - FixedItem.FinalTime) < ChainingMS then
         begin
-          FixedItem.FinalTime := FSubtitles[i+1].InitialTime - GapMs;
-          FixedItem.ErrorsFixed := [etChaining];
-          Add(NewItem(FixedItem));
+          z := NextIT - GapMs;
+          if SnapEnabled then
+          begin
+            ShotCut := FirstShotCutIn(AShotChanges, FixedItem.FinalTime + 1, NextIT);
+            if ShotCut >= 0 then
+              z := Min(z, ShotCut - OutCue);
+          end;
+
+          // at least one frame later (as the timecode shows it); a few ms
+          // are rounding of the times, not a gap to close
+          if ChainFPS > 0 then
+            x := TimeToFrames(z, ChainFPS) - TimeToFrames(FixedItem.FinalTime, ChainFPS)
+          else
+            x := Ord((z - FixedItem.FinalTime) >= HalfFrameMs);
+
+          if x > 0 then
+          begin
+            FixedItem.FinalTime := z;
+            FixedItem.ErrorsFixed := [etChaining];
+            Add(NewItem(FixedItem));
+          end;
         end;
       end;
 
-      // final state of this one, used to fix it from the next overlap
-      PrevFixed := FixedItem;
+      // final state of this one, used to fix it from the next overlap and
+      // for the in cue of the next one (chaining can change the end)
+      PrevFixed  := FixedItem;
+      prevSnapFT := FixedItem.FinalTime;
     end;
   finally
     ocr.Free;
