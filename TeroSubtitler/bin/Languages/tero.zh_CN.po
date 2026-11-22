@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tero Subtitler\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-05-27 00:04+0800\n"
+"PO-Revision-Date: 2026-11-22 17:29+0800\n"
 "Last-Translator: Little-data\n"
 "Language-Team: Little-data\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.10\n"
 
 #: proclocalize.lngabversion
 #, object-pascal-format
@@ -76,11 +76,11 @@ msgstr "不可见"
 
 #: proclocalize.lngaskdownloadgpulibs
 msgid "Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?"
-msgstr ""
+msgstr "下载使用 NVIDIA 显卡的支持库（大约 1.3 GB）？"
 
 #: proclocalize.lngaskdownloadtesseract
 msgid "Tesseract was not found. Download it now?"
-msgstr ""
+msgstr "未找到 Tesseract。现在下载吗？"
 
 #: proclocalize.lngasktoextractaudio
 msgid "Audio waveform was not found, do you want to extract it?"
@@ -105,7 +105,7 @@ msgstr "%d 行被选中 / %d"
 #: proclocalize.lngasloadingvideofromurl
 #, object-pascal-format
 msgid "Loading media from URL (yt-dlp)... %s"
-msgstr ""
+msgstr "正在从 URL 加载媒体（yt-dlp）... %s"
 
 #: proclocalize.lngasmarked
 msgid "Marked entry"
@@ -113,7 +113,7 @@ msgstr "标记条目"
 
 #: proclocalize.lngasmaxcps
 msgid "Too many CPS"
-msgstr "每秒字符太多"
+msgstr "每秒字符过多"
 
 #: proclocalize.lngasmaxlines
 msgid "Maximum number of lines exceeded"
@@ -125,11 +125,11 @@ msgstr "OCR 出错"
 
 #: proclocalize.lngasoverlappingwithnext
 msgid "Overlapping with following entry"
-msgstr "与以下条目重叠"
+msgstr "与下面条目重叠"
 
 #: proclocalize.lngasoverlappingwithprev
 msgid "Overlapping with previous entry"
-msgstr "与以上条目重叠"
+msgstr "与上面条目重叠"
 
 #: proclocalize.lngasprohibitedchars
 msgid "Contains a prohibited character"
@@ -160,7 +160,7 @@ msgstr "文本 (%s 字符以 %.2f 每秒字符):"
 #: proclocalize.lngastimelineselection
 #, object-pascal-format
 msgid "Selection: %s - %s, duration %s (%d frames)"
-msgstr ""
+msgstr "选择：%s - %s，持续时间 %s（%d 帧）"
 
 #: proclocalize.lngastimetoolong
 msgid "Duration too long"
@@ -196,12 +196,12 @@ msgstr "不必要的空格"
 #: proclocalize.lngasvideolen
 #, object-pascal-format
 msgid "%s (%s FPS)"
-msgstr ""
+msgstr "%s (%s FPS)"
 
 #: proclocalize.lngasvideolensmpte
 #, object-pascal-format
 msgid "%s (%s FPS/SMPTE)"
-msgstr ""
+msgstr "%s (%s FPS/SMPTE)"
 
 #: proclocalize.lngaswaveformtext
 msgid "Click here to use timeline"
@@ -210,15 +210,15 @@ msgstr "点这里使用时间轴"
 #: proclocalize.lngautocropapplied
 #, object-pascal-format
 msgid "Cropped to %dx%d"
-msgstr ""
+msgstr "裁剪为 %dx%d"
 
 #: proclocalize.lngautocropnobars
 msgid "No black bars were detected in the current frame."
-msgstr ""
+msgstr "在当前帧中未检测到黑边。"
 
 #: proclocalize.lngautocropnoimage
 msgid "The black bars could not be detected. Go to a frame with image (the first ones are usually black) and try again."
-msgstr ""
+msgstr "无法检测到黑边。去有图像的帧看看（前几帧通常是黑的），然后再试一次。"
 
 #: proclocalize.lngbackupsaved
 msgid "Backup saved."
@@ -296,85 +296,85 @@ msgstr "试图检测对话片段时，会删除列表中的所有条目。"
 #: proclocalize.lngdoviapplied
 #, object-pascal-format
 msgid "%d shots changed, %d removed."
-msgstr ""
+msgstr "%d 个镜头已更改，%d 个已删除。"
 
 #: proclocalize.lngdovibadtimecode
 msgid "Invalid timecode or frame number."
-msgstr ""
+msgstr "无效的时间码或帧号。"
 
 #: proclocalize.lngdovicheckcount
 #, object-pascal-format
 msgid "%d differences."
-msgstr ""
+msgstr "%d 个差异。"
 
 #: proclocalize.lngdovicheckmoved
 #, object-pascal-format
 msgid "%s  “%s”: the shot change is at %s (%s frames)"
-msgstr ""
+msgstr "%s “%s”：镜头切换发生在 %s （%s 帧）"
 
 #: proclocalize.lngdovichecknocut
 #, object-pascal-format
 msgid "%s  shot change without a cut in the metadata (in “%s”)"
-msgstr ""
+msgstr "%s 在元数据中没有切割就更换了镜头（在“%s”中）"
 
 #: proclocalize.lngdovichecknoshotchange
 #, object-pascal-format
 msgid "%s  “%s”: no shot change near the cut"
-msgstr ""
+msgstr "%s  “%s”：剪辑附近没有镜头变化"
 
 #: proclocalize.lngdovicheckok
 msgid "All the cuts match the shot changes of the video."
-msgstr ""
+msgstr "所有的剪辑都与视频的镜头切换匹配。"
 
 #: proclocalize.lngdoviinfo
 #, object-pascal-format
 msgid "%d shots at %s fps, from %s to %s (record timecode)."
-msgstr ""
+msgstr "%d 个镜头，%s 帧，从 %s 到 %s（记录时间码）。"
 
 #: proclocalize.lngdovimovecutnotadjacent
 msgid "Only a cut between two contiguous shots can be moved."
-msgstr ""
+msgstr "只有两个连续镜头之间的剪辑可以移动。"
 
 #: proclocalize.lngdovinoshotchanges
 msgid "There are no shot changes. Detect them first."
-msgstr ""
+msgstr "没有镜头切换。请先检测。"
 
 #: proclocalize.lngdovinotloaded
 msgctxt "proclocalize.lngdovinotloaded"
 msgid "Open a Dolby Vision XML to use this tool."
-msgstr ""
+msgstr "打开一个 Dolby Vision XML 来使用这个工具。"
 
 #: proclocalize.lngdovioriginchanged
 msgid "The times of all the entries changed and the undo history was cleared."
-msgstr ""
+msgstr "所有条目时间已改变，撤销历史被清空。"
 
 #: proclocalize.lngdoviposatcut
 #, object-pascal-format
 msgid "%s is the first frame of “%s” (a cut)."
-msgstr ""
+msgstr "%s 是 \"%s\" 的第一帧（一个片段）。"
 
 #: proclocalize.lngdoviposinshot
 #, object-pascal-format
 msgid "%s is the frame %d of %d of “%s”."
-msgstr ""
+msgstr "%s 是 “%s” 的第 %d 帧，共 %d 帧。"
 
 #: proclocalize.lngdoviposoutside
 #, object-pascal-format
 msgid "%s is not in any shot."
-msgstr ""
+msgstr "%s 没有出现在任何镜头里。"
 
 #: proclocalize.lngdovisaveanyway
 msgid "Do you want to save it anyway?"
-msgstr ""
+msgstr "还是想保存吗？"
 
 #: proclocalize.lngdovisaveonlydovi
 msgid "Only a Dolby Vision XML opened in Tero Subtitler can be saved in this format."
-msgstr ""
+msgstr "只有在 Tero Subtitler 中打开的 Dolby Vision XML 才能以这种格式保存。"
 
 #: proclocalize.lngdovisaveproblems
 #, object-pascal-format
 msgid "The shots are not contiguous: %d gaps, %d overlaps, %d without frames and %d new entries (written as copies of the previous shot). The first one is the entry %d."
-msgstr ""
+msgstr "镜头不连续：%d 个空隙，%d 个重叠，%d 个没有帧，%d 个新条目（写成前一个镜头的副本）。第一个是条目 %d。"
 
 #: proclocalize.lngdownloadcanceled
 msgid "Download canceled by user."
@@ -425,7 +425,7 @@ msgstr "未下载内容、文件丢失或无网络连接。"
 
 #: proclocalize.lngfeaturenotavailablefromurl
 msgid "Function not available for online media."
-msgstr "该功能不适用于在线视频。"
+msgstr "该功能不适用于在线媒体。"
 
 #: proclocalize.lngfilechanged
 msgid "File has not been saved."
@@ -495,7 +495,7 @@ msgstr "未定义"
 #: proclocalize.lngfpsguessed
 #, object-pascal-format
 msgid "The times of this subtitle match %s fps. Use this frame rate?"
-msgstr ""
+msgstr "这个字幕的时间与 %s 帧每秒匹配。要使用这个帧率吗？"
 
 #: proclocalize.lngfsaction
 msgid "Action"
@@ -531,7 +531,7 @@ msgstr "清理标签"
 
 #: proclocalize.lngfsetcurlytostraightquotes
 msgid "Curly quotes to straight: “” -> \"\""
-msgstr ""
+msgstr "弯引号变直引号：”“ -> \"\""
 
 #: proclocalize.lngfsetellipsessinglesmartcharacter
 msgid "Convert ellipsis dots to Unicode character"
@@ -543,7 +543,7 @@ msgstr "移除空行"
 
 #: proclocalize.lngfsetfixbrackets
 msgid "Fix brackets: switched, mismatched or empty"
-msgstr ""
+msgstr "修正括号：方向颠倒的、不匹配的或空的"
 
 #: proclocalize.lngfsetfixinterrobang
 msgid "Fix interrobang: !? -> ?!"
@@ -610,7 +610,7 @@ msgstr "开头连字符间距"
 
 #: proclocalize.lngfsetstraighttocurlyquotes
 msgid "Straight quotes to curly: \"\" -> “”"
-msgstr ""
+msgstr "直引号变弯引号：\"\" -> “”"
 
 #: proclocalize.lngfsettimetoolong
 msgid "Fix durations too long"
@@ -649,7 +649,7 @@ msgstr "总错误： %d （已显示：%d）"
 
 #: proclocalize.lnggpulibsoptional
 msgid "These libraries are needed with an NVIDIA card; without them, Faster-Whisper uses the processor."
-msgstr ""
+msgstr "使用 NVIDIA 显卡需要这些库；没有它们，Faster-Whisper 就会使用CPU。"
 
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
@@ -809,7 +809,7 @@ msgstr "已经是最新版了。"
 
 #: proclocalize.lngnotlocated
 msgid "Not located."
-msgstr ""
+msgstr "未找到。"
 
 #: proclocalize.lngoldtime
 msgid "Old time"
@@ -851,27 +851,26 @@ msgstr "百分比"
 
 #: proclocalize.lngplaintextallfiles
 msgid "All files"
-msgstr ""
+msgstr "所有文件"
 
 #: proclocalize.lngplaintextautomatic
 msgid "Sentence (smart segmentation, using the conventions)"
-msgstr ""
+msgstr "句子（智能分段，使用惯例）"
 
 #: proclocalize.lngplaintexteachline
 msgid "Line"
-msgstr ""
+msgstr "行"
 
 #: proclocalize.lngplaintexteachparagraph
 msgid "Paragraph (separated by a blank line)"
-msgstr ""
+msgstr "段落（用空行分隔）"
 
 #: proclocalize.lngplaintextentries
 #, object-pascal-format
 msgid "%d entries"
-msgstr ""
+msgstr "%d 条目"
 
 #: proclocalize.lngplaintextfiles
-#, fuzzy
 msgctxt "proclocalize.lngplaintextfiles"
 msgid "Text files"
 msgstr "文本文件"
@@ -886,7 +885,7 @@ msgstr "选定的行将被删除。"
 
 #: proclocalize.lngqcbrackets
 msgid "Brackets: switched, mismatched, empty or unbalanced"
-msgstr ""
+msgstr "括号：方向颠倒、不匹配、空的或数量不平衡"
 
 #: proclocalize.lngqccpl
 msgid "CPL (characters-per-line)"
@@ -962,7 +961,7 @@ msgstr "音频滤镜"
 
 #: proclocalize.lngscbuiltin
 msgid "Tero (built-in)"
-msgstr ""
+msgstr "Tero (内置)"
 
 #: proclocalize.lngscedit
 msgctxt "proclocalize.lngscedit"
@@ -981,7 +980,7 @@ msgstr "编辑判定列表"
 #: proclocalize.lngscenedetectnoresults
 #, object-pascal-format
 msgid "“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video."
-msgstr ""
+msgstr "“%s” 没有返回任何结果。请检查它是否已正确安装，是否有像 OpenCV 这样的本地视频支持，并且能否打开这个视频。"
 
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"
@@ -1150,50 +1149,50 @@ msgstr ""
 #: proclocalize.lngspeakern
 #, object-pascal-format
 msgid "Speaker %d"
-msgstr ""
+msgstr "说话人 %d"
 
 #: proclocalize.lngspecbold
 msgid "Bold: not allowed. It will be removed."
-msgstr ""
+msgstr "加粗：不允许。会被移除。"
 
 #: proclocalize.lngspeccolor
 msgid "Color: not allowed. It will be removed."
-msgstr ""
+msgstr "颜色：不允许。会被移除。"
 
 #: proclocalize.lngspecentries
 #, object-pascal-format
 msgid "Entries: %s"
-msgstr ""
+msgstr "条目：%s"
 
 #: proclocalize.lngspechaligncentered
 msgid "Left or right alignment: only centered text is allowed. They will be exported centered."
-msgstr ""
+msgstr "左对齐或右对齐：只允许居中文本。它们将以居中方式导出。"
 
 #: proclocalize.lngspeclinelength
 #, object-pascal-format
 msgid "Lines longer than %d characters (the maximum per row in the format properties): they may be cut off when displayed."
-msgstr ""
+msgstr "超过 %d 个字符的行（格式属性中每行的最大长度）：在显示时可能会被截断。"
 
 #: proclocalize.lngspecmiddlekept
 msgid "Middle vertical alignment: only top and bottom are allowed. They will be exported in the middle anyway."
-msgstr ""
+msgstr "垂直居中对齐：只允许顶部和底部。无论如何，它们会被导出为居中。"
 
 #: proclocalize.lngspecmiddletobottom
 msgid "Middle vertical alignment: only top and bottom are allowed. They will be exported at the bottom."
-msgstr ""
+msgstr "中间垂直对齐：只允许顶部和底部。它们会导出到底部。"
 
 #: proclocalize.lngspecstrikeout
 msgid "Strikethrough: not allowed. It will be removed (the text is kept)."
-msgstr ""
+msgstr "删除线：不允许。它会被移除（文本会保留）。"
 
 #: proclocalize.lngspecunderline
 msgid "Underline: not allowed. It will be removed."
-msgstr ""
+msgstr "下划线：不允许，会被移除。"
 
 #: proclocalize.lngspecwillchange
 #, object-pascal-format
 msgid "The %s specification does not allow some of the formatting used, so these entries will be exported with changes:"
-msgstr ""
+msgstr "%s 规范不允许使用某些格式，因此这些条目将会以更改后的方式导出："
 
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
@@ -1376,7 +1375,7 @@ msgstr "当前字幕组合包含建议解决的错误，但可以保存。"
 #: proclocalize.lngsubtitlespecificationentries
 #, object-pascal-format
 msgid "Entries: %s (selected in the list)."
-msgstr ""
+msgstr "条目：%s（列表中已选择）。"
 
 #: proclocalize.lngsubtitlespecificationerror
 msgid "The current subtitles do not meet the specifications of the format to be saved."
@@ -1426,12 +1425,12 @@ msgstr "减少"
 #: proclocalize.lngtesseractlangerror
 #, object-pascal-format
 msgid "Tesseract could not load the language “%s”. Download it again from the languages window."
-msgstr ""
+msgstr "Tesseract 无法加载语言“%s”。请从语言窗口重新下载。"
 
 #: proclocalize.lngtesseractrunerror
 #, object-pascal-format
 msgid "Tesseract could not be run (%s). Check in Settings > Tools that the path is correct and that this version works on your system."
-msgstr ""
+msgstr "Tesseract 无法运行 (%s)。请在 设置 > 工具 中检查路径是否正确，以及此版本是否适用于你的系统。"
 
 #: proclocalize.lngtetext
 msgctxt "proclocalize.lngtetext"
@@ -1449,21 +1448,21 @@ msgstr "导出格式化文本？"
 
 #: proclocalize.lngtextsyncnowords
 msgid "No words were recognized in the audio, the texts could not be synchronized."
-msgstr ""
+msgstr "音频中没有识别出任何文本，文本无法同步。"
 
 #: proclocalize.lngtextsyncresult
 #, object-pascal-format
 msgid "Synchronized %d entries (%d of %d words found in the audio)."
-msgstr ""
+msgstr "已同步 %d 条目（音频中找到 %d/%d 个文本）。"
 
 #: proclocalize.lngtmentriesadded
 #, object-pascal-format
 msgid "%d entries added to the translation memory."
-msgstr ""
+msgstr "已向翻译存储器中添加了 %d 条目。"
 
 #: proclocalize.lngtmnoentriesloaded
 msgid "No entries were loaded from the translation memory. Check that its languages match the selected ones."
-msgstr ""
+msgstr "没有从翻译存储器中加载任何条目。检查一下它的语言是否与所选语言匹配。"
 
 #: proclocalize.lngtranscribing
 msgid "Transcribing..."
@@ -1549,7 +1548,7 @@ msgstr "视频生成失败。"
 
 #: proclocalize.lngvideohasnoaudio
 msgid "This video has no audio track, there is no waveform to extract."
-msgstr ""
+msgstr "这个视频没有音轨，没有波形可供提取。"
 
 #: proclocalize.lngviduration
 #, object-pascal-format
@@ -1582,30 +1581,27 @@ msgid "Video tracks: %d"
 msgstr "视频轨：%d"
 
 #: proclocalize.lngvpencoding
-#, fuzzy
 msgctxt "proclocalize.lngvpencoding"
 msgid "Encoding"
 msgstr "编码"
 
 #: proclocalize.lngvpformat
-#, fuzzy
 msgctxt "proclocalize.lngvpformat"
 msgid "Format"
 msgstr "样式"
 
 #: proclocalize.lngvpinputfps
-#, fuzzy
 msgctxt "proclocalize.lngvpinputfps"
 msgid "Input FPS"
 msgstr "输入帧率"
 
 #: proclocalize.lngvpoutputfps
 msgid "Output FPS"
-msgstr ""
+msgstr "输出帧率"
 
 #: proclocalize.lngvpproperties
 msgid "Subtitle properties"
-msgstr ""
+msgstr "字幕属性"
 
 #: proclocalize.lngwebvideounsupported
 msgid "The media format is not supported for playback in the web browser."
@@ -1726,7 +1722,7 @@ msgstr ""
 #: tfrmaudiototext.btngenerate.caption
 msgctxt "tfrmaudiototext.btngenerate.caption"
 msgid "Generate"
-msgstr "常规"
+msgstr "生成"
 
 #: tfrmaudiototext.btnmodel.caption
 msgctxt "tfrmaudiototext.btnmodel.caption"
@@ -1750,15 +1746,15 @@ msgstr "最大行长"
 
 #: tfrmaudiototext.chkmultilingual.caption
 msgid "Mixed languages (detect each part)"
-msgstr ""
+msgstr "混合语言（检测每一部分）"
 
 #: tfrmaudiototext.chksounds.caption
 msgid "Include sounds ([Music], [Applause]...)"
-msgstr ""
+msgstr "包括声音（[音乐]，[掌声]…）"
 
 #: tfrmaudiototext.chkspeakers.caption
 msgid "Identify the speakers in Actor (number, 0 = automatic)"
-msgstr ""
+msgstr "识别说话人（编号，0 = 自动）"
 
 #: tfrmaudiototext.chktranslate.caption
 msgid "Translate to Еnglish"
@@ -1791,17 +1787,17 @@ msgstr "转录后加载字幕"
 
 #: tfrmaudiototext.rbnnewentries.caption
 msgid "New entries (from the transcription)"
-msgstr ""
+msgstr "新条目（来自转录）"
 
 #: tfrmaudiototext.rbnsmartsegment.caption
 msgctxt "tfrmaudiototext.rbnsmartsegment.caption"
 msgid "Smart segmentation (using the conventions)"
-msgstr ""
+msgstr "智能分割（使用惯例）"
 
 #: tfrmaudiototext.rbnsynctext.caption
 msgctxt "tfrmaudiototext.rbnsynctext.caption"
 msgid "Synchronize the current texts (only timings)"
-msgstr ""
+msgstr "同步当前文本（仅时间）"
 
 #: tfrmaudiototextmodel.btnclose.caption
 msgctxt "tfrmaudiototextmodel.btnclose.caption"
@@ -1966,7 +1962,7 @@ msgstr ""
 
 #: tfrmcharactermap.caption
 msgid "Character Map"
-msgstr "字符映射"
+msgstr "字符表"
 
 #: tfrmcharactermap.lblfavorites.caption
 msgid "Favorites"
@@ -2032,7 +2028,7 @@ msgstr "关闭"
 
 #: tfrmconvertcase.btnnames.caption
 msgid "Names..."
-msgstr ""
+msgstr "名称..."
 
 #: tfrmconvertcase.caption
 msgid "Convert case"
@@ -2072,7 +2068,7 @@ msgstr "句型"
 
 #: tfrmconvertcase.rdosmartcase.caption
 msgid "Smart (all caps to normal)"
-msgstr ""
+msgstr "智能（全大写改为正常）"
 
 #: tfrmconvertcase.rdotitletype.caption
 msgid "Title Type"
@@ -2342,77 +2338,75 @@ msgid "Selected entries"
 msgstr "仅限选择的条目"
 
 #: tfrmdolbyvision.btnapplyedit.caption
-#, fuzzy
 msgctxt "tfrmdolbyvision.btnapplyedit.caption"
 msgid "Apply"
 msgstr "应用"
 
 #: tfrmdolbyvision.btnapplyorigin.caption
 msgid "Set"
-msgstr ""
+msgstr "设置"
 
 #: tfrmdolbyvision.btncheck.caption
 msgid "Check"
-msgstr ""
+msgstr "检查"
 
 #: tfrmdolbyvision.btnclose.caption
-#, fuzzy
 msgctxt "tfrmdolbyvision.btnclose.caption"
 msgid "Close"
 msgstr "关闭"
 
 #: tfrmdolbyvision.btnmovecut.caption
 msgid "Move the cut to the shot change"
-msgstr ""
+msgstr "把剪辑移到镜头切换处"
 
 #: tfrmdolbyvision.btnvideoposition.caption
 msgid "Video position"
-msgstr ""
+msgstr "视频位置"
 
 #: tfrmdolbyvision.caption
 msgid "Dolby Vision metadata"
-msgstr ""
+msgstr "Dolby Vision元数据"
 
 #: tfrmdolbyvision.chkextendprevious.caption
 msgid "At a cut, add the inserted frames to the end of the previous shot"
-msgstr ""
+msgstr "在剪切处，将插入的帧添加到前一个镜头的末尾"
 
 #: tfrmdolbyvision.lblchecktitle.caption
 msgid "Check the cuts against the shot changes of the video"
-msgstr ""
+msgstr "对照视频的镜头切换检查剪辑"
 
 #: tfrmdolbyvision.lblcount.caption
 msgid "Number of frames:"
-msgstr ""
+msgstr "帧编号："
 
 #: tfrmdolbyvision.lbledittitle.caption
 msgid "Edit frames"
-msgstr ""
+msgstr "编辑帧"
 
 #: tfrmdolbyvision.lblinfo.caption
 msgctxt "tfrmdolbyvision.lblinfo.caption"
 msgid "Open a Dolby Vision XML to use this tool."
-msgstr ""
+msgstr "打开一个 Dolby Vision XML 来使用这个工具。"
 
 #: tfrmdolbyvision.lblorigin.caption
 msgid "First frame of the video (record timecode):"
-msgstr ""
+msgstr "视频的第一帧（记录时间码）:"
 
 #: tfrmdolbyvision.lblposition.caption
 msgid "At (record timecode or frame):"
-msgstr ""
+msgstr "位于（记录时间码或帧）："
 
 #: tfrmdolbyvision.lbltolerance.caption
 msgid "Search up to (frames):"
-msgstr ""
+msgstr "搜索最多（帧数）:"
 
 #: tfrmdolbyvision.rbndelete.caption
 msgid "Delete frames"
-msgstr ""
+msgstr "删除帧"
 
 #: tfrmdolbyvision.rbninsert.caption
 msgid "Insert frames"
-msgstr ""
+msgstr "插入帧"
 
 #: tfrmdownload.btncancel.caption
 msgctxt "tfrmdownload.btncancel.caption"
@@ -2647,7 +2641,6 @@ msgid "OCR Script"
 msgstr "OCR脚本"
 
 #: tfrmfixsubtitles.lblsource.caption
-#, fuzzy
 msgctxt "tfrmfixsubtitles.lblsource.caption"
 msgid "Source"
 msgstr "来源"
@@ -2762,45 +2755,42 @@ msgstr "译者"
 
 #: tfrmformatproperties.lbldceffect.caption
 msgid "Effect"
-msgstr ""
+msgstr "效果"
 
 #: tfrmformatproperties.lbldcfadeup.caption
 msgid "Fade in / out (ms)"
-msgstr ""
+msgstr "淡入/淡出(ms)"
 
 #: tfrmformatproperties.lbldcfont.caption
 msgid "Font (file or urn:uuid)"
-msgstr ""
+msgstr "字体（文件或 urn:uuid）"
 
 #: tfrmformatproperties.lbldcfontsize.caption
-#, fuzzy
 msgctxt "tfrmformatproperties.lbldcfontsize.caption"
 msgid "Font size"
 msgstr "字体大小"
 
 #: tfrmformatproperties.lbldclanguage.caption
-#, fuzzy
 msgctxt "tfrmformatproperties.lbldclanguage.caption"
 msgid "Language"
 msgstr "语言"
 
 #: tfrmformatproperties.lbldclinespacing.caption
 msgid "Line spacing (%)"
-msgstr ""
+msgstr "行间距 (%)"
 
 #: tfrmformatproperties.lbldcreel.caption
 msgid "Reel number"
-msgstr ""
+msgstr "编号"
 
 #: tfrmformatproperties.lbldctitle.caption
-#, fuzzy
 msgctxt "tfrmformatproperties.lbldctitle.caption"
 msgid "Title"
 msgstr "标题"
 
 #: tfrmformatproperties.lbldcvposition.caption
 msgid "Vertical position (%)"
-msgstr ""
+msgstr "垂直位置 (%)"
 
 #: tfrmformatproperties.lbldvdauthor.caption
 msgid "Author"
@@ -2858,7 +2848,6 @@ msgid "Max rows"
 msgstr "最大行数"
 
 #: tfrmformatproperties.lblittlanguage.caption
-#, fuzzy
 msgctxt "tfrmformatproperties.lblittlanguage.caption"
 msgid "Language"
 msgstr "语言"
@@ -2869,7 +2858,6 @@ msgid "xml:lang"
 msgstr ""
 
 #: tfrmformatproperties.lblttlanguage.caption
-#, fuzzy
 msgctxt "tfrmformatproperties.lblttlanguage.caption"
 msgid "Language"
 msgstr "语言"
@@ -2977,7 +2965,7 @@ msgstr "生成视频"
 
 #: tfrmgeneratevideo.chkbox.caption
 msgid "Box"
-msgstr ""
+msgstr "区域"
 
 #: tfrmgeneratevideo.chkcrop.caption
 msgid "Crop"
@@ -3146,40 +3134,38 @@ msgid "Time:"
 msgstr "时间："
 
 #: tfrmimportplaintext.btnclose.caption
-#, fuzzy
 msgctxt "tfrmimportplaintext.btnclose.caption"
 msgid "Close"
 msgstr "关闭"
 
 #: tfrmimportplaintext.btnimport.caption
-#, fuzzy
 msgctxt "tfrmimportplaintext.btnimport.caption"
 msgid "Import"
 msgstr "导入"
 
 #: tfrmimportplaintext.caption
 msgid "Import plain text"
-msgstr ""
+msgstr "导入纯文本文件"
 
 #: tfrmimportplaintext.chkreplace.caption
 msgid "Replace the current entries"
-msgstr ""
+msgstr "替换当前条目"
 
 #: tfrmimportplaintext.chksyncwithaudio.caption
 msgid "Synchronize with the audio after importing"
-msgstr ""
+msgstr "导入后与音频同步"
 
 #: tfrmimportplaintext.lblcount.caption
 msgid "0 entries"
-msgstr ""
+msgstr "0 条目"
 
 #: tfrmimportplaintext.lblmode.caption
 msgid "Create one entry for each:"
-msgstr ""
+msgstr "为每个创建一个条目："
 
 #: tfrmimportplaintext.lblpreview.caption
 msgid "Preview:"
-msgstr ""
+msgstr "预览："
 
 #: tfrmimportsup.btnclose.caption
 msgctxt "tfrmimportsup.btnclose.caption"
@@ -3307,7 +3293,7 @@ msgstr "音频波形指示居中"
 
 #: tfrmmain.actcharactermap.caption
 msgid "Character Map..."
-msgstr "字符映射..."
+msgstr "字符表..."
 
 #: tfrmmain.actcheckforupdates.caption
 msgid "Check for updates..."
@@ -3396,7 +3382,7 @@ msgstr "分割条目"
 
 #: tfrmmain.actdolbyvision.caption
 msgid "Dolby Vision metadata..."
-msgstr ""
+msgstr "Dolby Vision元数据..."
 
 #: tfrmmain.actdurationlimits.caption
 msgid "Duration limits..."
@@ -3425,7 +3411,7 @@ msgstr "标记字幕..."
 #: tfrmmain.actexportsup.caption
 msgctxt "tfrmmain.actexportsup.caption"
 msgid "Blu-ray SUP..."
-msgstr "蓝光字幕"
+msgstr "蓝光字幕..."
 
 #: tfrmmain.actexporttextonly.caption
 msgid "Text only..."
@@ -3555,11 +3541,11 @@ msgstr "帮助"
 
 #: tfrmmain.actimportplaintext.caption
 msgid "Plain text..."
-msgstr ""
+msgstr "纯文本..."
 
 #: tfrmmain.actimportplaintext.hint
 msgid "Import a transcription without times, to synchronize it with the audio"
-msgstr ""
+msgstr "导入没有时间的文字转录，以便与音频同步"
 
 #: tfrmmain.actimportsubtitles.caption
 msgid "Subtitles..."
@@ -3684,7 +3670,7 @@ msgstr "添加条目"
 #: tfrmmain.actmediaautoscroll.caption
 msgctxt "tfrmmain.actmediaautoscroll.caption"
 msgid "Update list on preview"
-msgstr "预览时更新列表"
+msgstr "自动选中当前字幕"
 
 #: tfrmmain.actmediaback1min.caption
 msgid "Go back 1 minute"
@@ -3868,19 +3854,19 @@ msgstr "粘贴"
 
 #: tfrmmain.actpasteastranslations.caption
 msgid "Paste as translations"
-msgstr ""
+msgstr "翻译粘贴到翻译栏"
 
 #: tfrmmain.actpastetexts.caption
 msgid "Paste texts"
-msgstr ""
+msgstr "粘贴文本"
 
 #: tfrmmain.actpastetimes.caption
 msgid "Paste times"
-msgstr ""
+msgstr "粘贴时间"
 
 #: tfrmmain.actpastetranslations.caption
 msgid "Paste translations"
-msgstr ""
+msgstr "文本粘贴到翻译栏"
 
 #: tfrmmain.actplaycurrententry.caption
 msgid "Play current entry"
@@ -3946,7 +3932,7 @@ msgstr "重做上次撤销的操作"
 
 #: tfrmmain.actregeneratethumbnails.caption
 msgid "Regenerate thumbnails"
-msgstr ""
+msgstr "重新生成缩略图"
 
 #: tfrmmain.actremovelinefromentry.caption
 msgid "Remove line from entry..."
@@ -4017,7 +4003,7 @@ msgstr "将当前翻译保存到特定文件"
 
 #: tfrmmain.actscreenshottofile.caption
 msgid "Save screenshot"
-msgstr "保存屏幕截图"
+msgstr "保存视频截图"
 
 #: tfrmmain.actselectall.caption
 msgctxt "tfrmmain.actselectall.caption"
@@ -4084,7 +4070,7 @@ msgstr "设置..."
 
 #: tfrmmain.actsetupwizard.caption
 msgid "Setup wizard..."
-msgstr ""
+msgstr "安装向导..."
 
 #: tfrmmain.actshifttimeless.caption
 #, object-pascal-format
@@ -4373,7 +4359,7 @@ msgstr "显示..."
 
 #: tfrmmain.acttranslationmemoryaddall.caption
 msgid "Add translated lines to memory"
-msgstr ""
+msgstr "把翻译的行加到翻译存储器"
 
 #: tfrmmain.acttranslationmemoryclose.caption
 msgctxt "tfrmmain.acttranslationmemoryclose.caption"
@@ -4387,11 +4373,11 @@ msgstr "列表..."
 
 #: tfrmmain.acttranslationmemoryopenfolder.caption
 msgid "Open translation memories folder"
-msgstr ""
+msgstr "打开翻译存储器库文件夹"
 
 #: tfrmmain.acttranslationmemorysavecopy.caption
 msgid "Save a copy..."
-msgstr ""
+msgstr "保存一份副本..."
 
 #: tfrmmain.acttranslationmemorysettings.caption
 msgctxt "tfrmmain.acttranslationmemorysettings.caption"
@@ -4509,7 +4495,7 @@ msgstr ""
 
 #: tfrmmain.actvarautocrop.caption
 msgid "Auto-crop"
-msgstr ""
+msgstr "自动裁剪"
 
 #: tfrmmain.actvarcycle.caption
 msgid "Cycle Aspect Ratio"
@@ -4566,7 +4552,7 @@ msgstr "信息..."
 
 #: tfrmmain.actvideooffset.caption
 msgid "Video offset..."
-msgstr "视频偏移"
+msgstr "视频偏移..."
 
 #: tfrmmain.actvideopreview.caption
 msgid "Media preview"
@@ -4587,11 +4573,11 @@ msgstr "提取波形..."
 
 #: tfrmmain.actwebpreview.caption
 msgid "Web Preview..."
-msgstr "网络预览..."
+msgstr "网页预览..."
 
 #: tfrmmain.actwebreference.caption
 msgid "Web reference..."
-msgstr "网络参考..."
+msgstr "网络词典..."
 
 #: tfrmmain.cboencoding.hint
 msgctxt "tfrmmain.cboencoding.hint"
@@ -4650,7 +4636,7 @@ msgstr "插入 Unicode 字符"
 #: tfrmmain.mnueditpastespecial.caption
 msgctxt "tfrmmain.mnueditpastespecial.caption"
 msgid "Paste special"
-msgstr ""
+msgstr "粘贴为"
 
 #: tfrmmain.mnueditrtl.caption
 msgid "Right-to-left"
@@ -4818,7 +4804,7 @@ msgstr "窗口"
 #: tfrmmain.mnuvstpastespecial.caption
 msgctxt "tfrmmain.mnuvstpastespecial.caption"
 msgid "Paste special"
-msgstr ""
+msgstr "粘贴为"
 
 #: tfrmmain.mnuvstvideo.caption
 msgctxt "tfrmmain.mnuvstvideo.caption"
@@ -5098,7 +5084,6 @@ msgid "..."
 msgstr ""
 
 #: tfrmsettings.btnytdlpupdate.caption
-#, fuzzy
 msgctxt "tfrmsettings.btnytdlpupdate.caption"
 msgid "Update"
 msgstr "更新"
@@ -5109,7 +5094,7 @@ msgstr "设置"
 
 #: tfrmsettings.chkautoextractwaveform.caption
 msgid "Extract the waveform automatically when loading a video"
-msgstr ""
+msgstr "加载视频时自动提取波形"
 
 #: tfrmsettings.chkautoplay.caption
 msgid "Autoplay on media load"
@@ -5134,11 +5119,11 @@ msgstr "显示时间轴上的间距"
 
 #: tfrmsettings.chkhiroundbrackets.caption
 msgid "Round brackets ( ) mark hearing impaired text"
-msgstr ""
+msgstr "圆括号 ( ) 标注不可见的文字"
 
 #: tfrmsettings.chkpreviewframeondrag.caption
 msgid "Show the frame when dragging an entry edge in the timeline"
-msgstr ""
+msgstr "在时间轴拖动条目边缘时显示框架"
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
 msgid "Prompt when deleting subtitles"
@@ -5166,7 +5151,7 @@ msgstr "显示欢迎窗口"
 
 #: tfrmsettings.chksmartquotestyping.caption
 msgid "Replace \" and ' while typing"
-msgstr ""
+msgstr "输入时替换 \" 和 '"
 
 #: tfrmsettings.chksubtitlehandlebympv.caption
 msgid "mpv handles subtitles for preview"
@@ -5202,8 +5187,6 @@ msgid "Chaining (frames)"
 msgstr "连锁（帧）"
 
 #: tfrmsettings.lblcpl.caption
-#, fuzzy
-#| msgid "Characters per line"
 msgctxt "tfrmsettings.lblcpl.caption"
 msgid "Characters per line (multiple lines / one line)"
 msgstr "每行字符数"
@@ -5291,7 +5274,7 @@ msgstr "禁止使用的字符"
 
 #: tfrmsettings.lblquotestyle.caption
 msgid "Quotation marks"
-msgstr ""
+msgstr "引号"
 
 #: tfrmsettings.lblrepeatablechars.caption
 msgctxt "tfrmsettings.lblrepeatablechars.caption"
@@ -5403,7 +5386,7 @@ msgstr "音频波形"
 
 #: tfrmsettings.lblwebreference.caption
 msgid "Web reference"
-msgstr "网络参考"
+msgstr "网络词典"
 
 #: tfrmsettings.lblwhispercpp.caption
 msgid "Whisper.cpp"
@@ -5424,7 +5407,7 @@ msgstr "（0 表示禁用）"
 
 #: tfrmsettings.spncploneline.hint
 msgid "Maximum characters when the subtitle has only one line (0 = disabled)"
-msgstr ""
+msgstr "当字幕只有一行时的最大字符数（0 = 禁用）"
 
 #: tfrmshifttimes.btnapply.caption
 msgctxt "tfrmshifttimes.btnapply.caption"
@@ -5476,7 +5459,7 @@ msgstr "仅限选择的条目"
 
 #: tfrmshifttimes.rbnrelative.caption
 msgid "Relative"
-msgstr ""
+msgstr "相对"
 
 #: tfrmshotchanges.btnapply.caption
 msgctxt "tfrmshotchanges.btnapply.caption"
@@ -5938,7 +5921,7 @@ msgstr ""
 #: tfrmtts.btngenerate.caption
 msgctxt "tfrmtts.btngenerate.caption"
 msgid "Generate"
-msgstr "常规"
+msgstr "生成"
 
 #: tfrmtts.btnpreview.caption
 msgid "Preview"
@@ -6010,7 +5993,7 @@ msgstr "关闭"
 #: tfrmvideodubbing.btngenerate.caption
 msgctxt "tfrmvideodubbing.btngenerate.caption"
 msgid "Generate"
-msgstr "常规"
+msgstr "生成"
 
 #: tfrmvideodubbing.caption
 msgid "Video dubbing"
@@ -6069,7 +6052,7 @@ msgstr "关闭"
 
 #: tfrmvideooffset.caption
 msgid "Video offset"
-msgstr ""
+msgstr "视频偏移"
 
 #: tfrmwaveextractor.btnclose.caption
 msgctxt "tfrmwaveextractor.btnclose.caption"
@@ -6122,7 +6105,7 @@ msgstr "最近文件"
 #: tfrmwelcome.lblwelcome.caption
 msgctxt "tfrmwelcome.lblwelcome.caption"
 msgid "Welcome to"
-msgstr "欢迎来到"
+msgstr "欢迎使用"
 
 #: tfrmwizard.btndownload.caption
 msgctxt "tfrmwizard.btndownload.caption"
@@ -6240,4 +6223,3 @@ msgstr "反转"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "纵向"
-
