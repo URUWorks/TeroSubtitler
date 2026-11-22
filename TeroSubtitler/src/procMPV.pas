@@ -241,7 +241,7 @@ procedure MPVPlaySelectionOnly;
 begin
   with frmMain do
     if WAVE.IsTimeLineEnabled and (not WAVE.SelectionIsEmpty) then
-      MPV.Loop(EntryToVideoMS(WAVE.Selection.InitialTime), EntryToVideoMS(WAVE.Selection.FinalTime), WAVEOptions.LoopCount);
+      MPV.Loop(EntryToVideoMS(WAVE.Selection.InitialTime), EntryToVideoMS(WAVE.Selection.FinalTime), WAVEOptions.LoopCount - 1);
 end;
 
 // -----------------------------------------------------------------------------
