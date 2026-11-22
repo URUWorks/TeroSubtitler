@@ -73,6 +73,8 @@ resourcestring
   lngSpecMiddleKept = 'Middle vertical alignment: only top and bottom are allowed. They will be exported in the middle anyway.';
   lngSpecHAlignCentered = 'Left or right alignment: only centered text is allowed. They will be exported centered.';
   lngSpecBold = 'Bold: not allowed. It will be removed.';
+  lngRoundTimesOnLoadTitle = 'Round the timings to frames?';
+  lngRoundTimesOnLoad = 'The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone.';
   lngSpecUnderline = 'Underline: not allowed. It will be removed.';
   lngSpecStrikeout = 'Strikethrough: not allowed. It will be removed (the text is kept).';
   lngSpecColor = 'Color: not allowed. It will be removed.';
@@ -87,7 +89,6 @@ resourcestring
   lngTesseractLangError = 'Tesseract could not load the language “%s”. Download it again from the languages window.';
   lngAskDownloadGPULibs = 'Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?';
   lngGPULibsOptional = 'These libraries are needed with an NVIDIA card; without them, Faster-Whisper uses the processor.';
-  lngAskToExtractAudio = 'Audio waveform was not found, do you want to extract it?';
   lngExtractAppError = 'Unable to find “%s”. Check in settings if it is configured correctly.';
   lngAutoCropNoBars = 'No black bars were detected in the current frame.';
   lngAutoCropNoImage = 'The black bars could not be detected. Go to a frame with image (the first ones are usually black) and try again.';
@@ -106,7 +107,6 @@ resourcestring
   lngDetectDialogSegmentsWarning = 'Attempting to detect dialogue segments deletes all entries from the list.';
   lngEntry = 'Entry %d';
   lnglibMPVError = 'Unable to find the required libraries to run the embedded mpv player. Please download them.';
-  lnglibMPVglError = 'Failed to initialize mpv GL context.';
   lnglibMPVVersionError = 'Could not initialize libmpv. Check if the right library was installed.';
   lngSpellCheckFinished = 'Spell check finished.';
   lngDetect = 'Auto-detect';
@@ -162,7 +162,6 @@ resourcestring
   lngasTranslation = 'Translation';
   lngasLineSelected = '%d entries selected / %d';
   lngasTimelineSelection = 'Selection: %s - %s, duration %s (%d frames)';
-  lngasMarked = 'Marked entry';
   lngasBadValues = 'Bad values';
   lngasTimeTooLong = 'Duration too long';
   lngasTimeTooShort = 'Duration too short';
@@ -171,8 +170,6 @@ resourcestring
   lngasOverlappingWithPrev = 'Overlapping with previous entry';
   lngasOverlappingWithNext = 'Overlapping with following entry';
   lngasFixTags = 'Invalid or incomplete tags';
-  lngasEmpty = 'Empty entry';
-  lngasUnbreak = 'Line breaks less than %d characters';
   lngasUnnecessarySpaces = 'Unnecessary spaces';
   lngasUnnecessaryDots = 'Unnecessary dots';
   lngasRepeatedChars = 'Repeated character';
@@ -207,7 +204,6 @@ resourcestring
   lngDoViSaveOnlyDoVi = 'Only a Dolby Vision XML opened in Tero Subtitler can be saved in this format.';
   lngDoViSaveProblems = 'The shots are not contiguous: %d gaps, %d overlaps, %d without frames and %d new entries (written as copies of the previous shot). The first one is the entry %d.';
   lngDoViSaveAnyway = 'Do you want to save it anyway?';
-  lngDoViOriginChanged = 'The times of all the entries changed and the undo history was cleared.';
   lngDoViMoveCutNotAdjacent = 'Only a cut between two contiguous shots can be moved.';
 
   //AboutStrings
@@ -337,6 +333,7 @@ resourcestring
   lngssFrames = 'Frames';
   lngssMilliseconds = 'Milliseconds';
   lngssShortCutNone = 'None';
+  lngssDefaultFont = '(Default)';
 
   //ShotChangesStrings
   lngscFrames = 'Frames';
@@ -378,7 +375,6 @@ resourcestring
   lngstTotalCharactersPerSecond = 'Total characters per second: %.2f';
   lngstShortestLine = 'Shortest line: %d (#%d)';
   lngstLongestLine = 'Longest line: %d (#%d)';
-  lngstLineLengthAverage = 'Line length average: %d';
   lngstShortestDuration = 'Shortest duration: %s (#%d)';
   lngstLongestDuration = 'Longest duration: %s (#%d)';
   lngstDurationAverage = 'Duration average: %s';
@@ -406,7 +402,6 @@ resourcestring
   //TimeExpanderStrings/CompareStrings
   lngteExpand = 'Expand';
   lngteReduce = 'Reduce';
-  lngteTime = 'Time';
   lngteText = 'Text';
   lngteIndex = 'Index';
   lngteInitialTime = 'Initial time';
