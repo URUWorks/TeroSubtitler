@@ -318,6 +318,14 @@ begin
 
   FHeaderSize := FFS.Position;
 
+  // unfinished file (ffmpeg cancelled/killed, or written to a pipe): the size
+  // in the header is -1 or 0, use what there is
+  if (FDataSize <= 0) or (Int64(FDataSize) > FFS.Size - FHeaderSize) then
+    FDataSize := Integer(Min(Int64(MaxInt), FFS.Size - FHeaderSize));
+  if (FDataSize <= 0) or (FWFX.wBitsPerSample < 8) or (FWFX.nChannels = 0) or
+    (FWFX.nSamplesPerSec = 0) then
+    Exit;
+
   Result  := True;
   FIsOpen := True;
 end;

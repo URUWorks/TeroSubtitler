@@ -220,6 +220,9 @@ end;
 
 procedure TUWWaveformDisplayer.GenerateDummyPeakTab(const LengthMS: Cardinal);
 begin
+  // it replaces any previous (failed) peak data: SetLengthMS ignores the
+  // length while the peak data is loaded
+  FPeakDataLoaded := False;
   FPageSizeMS     := DefaultPageSizeMS;
   FSamplesPerPeak := 1;
   FPeakTabSize    := 1;
