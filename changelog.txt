@@ -1,4 +1,6 @@
 1.0.2.4 (xx.11.2026)
+- fixed: Play selection, waveform, Insert shot change #504
+- fixed: Menu and high DPI display #501
 - fixed: Curly brackets and enclosed text don't appear in list, timeline, or video #485
 - fixed: [Windows] Unresponsive UI / interface freezes during continuous editing #482
 - fixed: Audio-to-text stops after 1 hour #473
@@ -115,8 +117,8 @@
 - fixed: [SubtitleAPI] Tero Subtitler format saved Notes as Actor
 - fixed: [SubtitleAPI] DRTIC, SoftNI & MicroDVD frame rate tag depended on system decimal separator
 - fixed: [SubtitleAPI] AQTitle, ABC iView, Advanced Subtitles, CPC-600, DKS, DVD Subtitle, DVD Subtitle System, DVD Junior, FAB Subtitler, GPAC TTXT, I-Author, Inscriber CG, Karaoke LRC/VKT, Mac DVD Studio Pro, MPlayer, Spruce STL & Spruce Script (parsing robustness)
-- Fixed: [SubtitleAPI] ASS subtitle data loss and incorrect column handling when saving
-- Fixed: [SubtitleAPI] Timed Text strikethrough not being recognized
+- fixed: [SubtitleAPI] ASS subtitle data loss and incorrect column handling when saving
+- fixed: [SubtitleAPI] Timed Text strikethrough not being recognized
 - fixed: EDL shot change import, timecodes now start from the video start
 - fixed: Loading a subtitle with a different frame rate mode left the time fields and waveform in the previous timecode mode
 - fixed: Tero’s own file dialog used a wrong FPS value
@@ -144,6 +146,14 @@
 - fixed: Some multi-line dialogs and messages showed truncated text
 - fixed: Leftover drawing on the timeline after combining entries, deleting or setting start/end times
 - fixed: Messy timings when adjusting duration or gap of multiple entries
+- fixed: Save project created a second file
+- fixed: Timeline without video (entries can be created, and it grows when needed)
+- fixed: "Click here to use timeline" stopped working after cancelling the waveform extraction
+- fixed: Fix Subtitles needed several passes (overlapping, chaining, snap to shot changes)
+- fixed: Chaining missed small gaps (2 frames)
+- fixed: iTT format warnings not shown when saving with Ctrl+S
+- fixed: File extension added twice when saving
+- fixed: "Paste as translations" renamed to "Paste texts as translations"
 - changed: Whisper.cpp now downloads UW_WhisperCPP (Windows 7+, macOS 10.11+, Linux glibc 2.17+), with GPU support via Vulkan on Windows/Linux x64 and Metal on Apple Silicon
 - changed: [macOS] removed the menu items added by the system that Tero doesn’t use
 - changed: [macOS] Convention profiles are saved in the user folder instead of inside the app
@@ -188,6 +198,9 @@
 - added: [Linux] Whisper.cpp download for ARM64 (aarch64)
 - added: iTT has its own language in Format properties
 - added: Extract waveform also works with online media (opened from URL)
+- added: Extend start/end to shot change
+- added: Offer to round to frames the timings in milliseconds when loading a subtitle
+- added: The subtitle font in the preview area can be changed #502
 - added: Improve detection of multilingual dialogue by leveraging Whisper's Translate task accuracy #447
 - added: Auto-guess FPS of non-SMPTE subtitle file #414
 - added: Multi-select entries in timeline #390
