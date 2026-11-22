@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: X-1.9\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-11-22 16:18+0800\n"
-"Last-Translator: Little-data\n"
+"PO-Revision-Date: 2025-05-21 21:13+0800\n"
+"Last-Translator: ACTom <i@actom.me>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.10\n"
+"X-Generator: TyPoEditor 0.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: lclstrconsts.hhshelpbrowsernotexecutable
@@ -44,7 +44,7 @@ msgstr "帮助数据库 \"%s\" 无法找到文件 \"%s\"。"
 #: lclstrconsts.hhshelpthemacrosinbrowserparamswillbereplacedbytheurl
 #, object-pascal-format
 msgid "The macro %s in BrowserParams will be replaced by the URL."
-msgstr "浏览框里的宏 %s 将被URL所替代。"
+msgstr "浏览框里的宏 %s 将被URL所替代."
 
 #: lclstrconsts.ifsalt
 msgid "Alt"
@@ -61,7 +61,7 @@ msgstr "Cmd"
 #: lclstrconsts.ifsvk_fn
 msgctxt "lclstrconsts.ifsvk_fn"
 msgid "Fn"
-msgstr "Fn"
+msgstr ""
 
 #: lclstrconsts.ifsvk_help
 msgctxt "lclstrconsts.ifsvk_help"
@@ -70,7 +70,7 @@ msgstr "帮助"
 
 #: lclstrconsts.ifsvk_meta
 msgid "Meta"
-msgstr "Meta"
+msgstr "元数据"
 
 #: lclstrconsts.ifsvk_shift
 msgid "Shift"
@@ -78,7 +78,7 @@ msgstr "Shift"
 
 #: lclstrconsts.ifsvk_super
 msgid "Super"
-msgstr "Super"
+msgstr "超级"
 
 #: lclstrconsts.ifsvk_unknown
 msgid "Unknown"
@@ -88,7 +88,7 @@ msgstr "未知"
 #, object-pascal-format
 msgctxt "lclstrconsts.lislclresourcesnotfound"
 msgid "Resource %s not found"
-msgstr "资源 %s 未找到"
+msgstr "资源%s未找到"
 
 #: lclstrconsts.rs3ddkshadowcolorcaption
 msgid "3D Dark Shadow"
@@ -96,7 +96,7 @@ msgstr "3D 暗影"
 
 #: lclstrconsts.rs3dlightcolorcaption
 msgid "3D Light"
-msgstr "3D 浅色"
+msgstr "3D 光线"
 
 #: lclstrconsts.rsacontrolcannothaveitselfasparent
 msgid "A control can't have itself as a parent"
@@ -183,7 +183,7 @@ msgstr "无法聚焦"
 
 #: lclstrconsts.rscanvasdoesnotallowdrawing
 msgid "Canvas does not allow drawing"
-msgstr "Canvas不允许绘制"
+msgstr "Canvas不允许画图"
 
 #: lclstrconsts.rscaptiontextcolorcaption
 msgid "Caption Text"
@@ -223,7 +223,7 @@ msgstr "自定义 ..."
 #: lclstrconsts.rsdatetoolarge
 #, object-pascal-format
 msgid "Date cannot be past %s"
-msgstr "日期不能晚于 %s"
+msgstr "日期不能早于 %s"
 
 #: lclstrconsts.rsdatetoosmall
 #, object-pascal-format
@@ -295,7 +295,7 @@ msgstr "错误发生在 %s 地址%s %s%s 帧 %s"
 
 #: lclstrconsts.rserrorwhilesavingbitmap
 msgid "Error while saving bitmap."
-msgstr "保存位图时错误。"
+msgstr "保存位图时错误."
 
 #: lclstrconsts.rsexception
 msgid "Exception"
@@ -308,12 +308,12 @@ msgstr "目录必须存在"
 #: lclstrconsts.rsfddirectorynotexist
 #, object-pascal-format
 msgid "The directory \"%s\" does not exist."
-msgstr "目录\"%s\"不存在。"
+msgstr "目录\"%s\"不存在."
 
 #: lclstrconsts.rsfdfilealreadyexists
 #, object-pascal-format
 msgid "The file \"%s\" already exists. Overwrite ?"
-msgstr "文件\"%s\"已经存在。覆盖?"
+msgstr "文件\"%s\"已经存在.覆盖?"
 
 #: lclstrconsts.rsfdfilemustexist
 msgid "File must exist"
@@ -322,12 +322,12 @@ msgstr "文件必须存在"
 #: lclstrconsts.rsfdfilenotexist
 #, object-pascal-format
 msgid "The file \"%s\" does not exist."
-msgstr "文件\"%s\"不存在。"
+msgstr "文件\"%s\"不存在."
 
 #: lclstrconsts.rsfdfilereadonly
 #, object-pascal-format
 msgid "The file \"%s\" is not writable."
-msgstr "文件\"%s\"不可写。"
+msgstr "文件\"%s\"不可写."
 
 #: lclstrconsts.rsfdfilereadonlytitle
 msgid "File is not writable"
@@ -335,11 +335,11 @@ msgstr "文件不可写"
 
 #: lclstrconsts.rsfdfilesaveas
 msgid "Save file as"
-msgstr "文件另存为"
+msgstr "Save file as"
 
 #: lclstrconsts.rsfdopenfile
 msgid "Open existing file"
-msgstr "打开现有文件"
+msgstr "Open existing file"
 
 #: lclstrconsts.rsfdoverwritefile
 msgid "Overwrite file ?"
@@ -352,11 +352,11 @@ msgstr "路径必须存在"
 #: lclstrconsts.rsfdpathnoexist
 #, object-pascal-format
 msgid "The path \"%s\" does not exist."
-msgstr "路径\"%s\"不存在。"
+msgstr "路径\"%s\"不存在."
 
 #: lclstrconsts.rsfdselectdirectory
 msgid "Select Directory"
-msgstr "选择目录"
+msgstr "Select Directory"
 
 #: lclstrconsts.rsfileinfofilenotfound
 #, object-pascal-format
@@ -370,7 +370,7 @@ msgstr "文件信息"
 #: lclstrconsts.rsfilter
 msgctxt "lclstrconsts.rsfilter"
 msgid "(filter)"
-msgstr "(筛选器)"
+msgstr "(过滤器)"
 
 #: lclstrconsts.rsfind
 msgid "Find"
@@ -386,11 +386,11 @@ msgstr "第一个"
 
 #: lclstrconsts.rsfixedcolstoobig
 msgid "FixedCols can't be > ColCount"
-msgstr "固定列不能大于列数"
+msgstr "FixedCols 不能大于 ColCount"
 
 #: lclstrconsts.rsfixedrowstoobig
 msgid "FixedRows can't be > RowCount"
-msgstr "固定行不能大于行数"
+msgstr "FixedRows 不能大于 RowCount"
 
 #: lclstrconsts.rsformcolorcaption
 msgid "Form"
@@ -420,7 +420,7 @@ msgstr "打开GDK 跟踪/调试信息。"
 
 #: lclstrconsts.rsgdkoptionnodebug
 msgid "Turn off specific GDK trace/debug messages."
-msgstr "关闭GDK跟踪/调试信息。"
+msgstr "关闭GDK跟踪/调试信息."
 
 #: lclstrconsts.rsgif
 msgid "Graphics Interchange Format Files"
@@ -468,11 +468,11 @@ msgstr "无法在网格没有行时插入列"
 
 #: lclstrconsts.rsgridindexoutofrange
 msgid "Grid index out of range."
-msgstr "网格索引越界。"
+msgstr "网格索引越界."
 
 #: lclstrconsts.rsgtkfilter
 msgid "Filter:"
-msgstr "筛选器:"
+msgstr "过滤器:"
 
 #: lclstrconsts.rsgtkhistory
 msgid "History:"
@@ -484,7 +484,7 @@ msgstr "遵循 Xt 约定，程序的类是程序名称并将首字符大写。�
 
 #: lclstrconsts.rsgtkoptiondebug
 msgid "Turn on specific Gtk+ trace/debug messages."
-msgstr "打开Gtk+跟踪/调试信息。"
+msgstr "打开Gtk+跟踪/调试信息."
 
 #: lclstrconsts.rsgtkoptiondisplay
 msgid "Connect to the specified X server, where \"h\" is the hostname, \"s\" is the server number (usually 0), and \"d\" is the display number (typically omitted). If --display is not specified, the DISPLAY environment variable is used."
@@ -492,7 +492,7 @@ msgstr "连接到指定的 X 服务器，其中 \"h\" 是主机名，\"s\" 是�
 
 #: lclstrconsts.rsgtkoptionmodule
 msgid "Load the specified module at startup."
-msgstr "启动时加载指定模块。"
+msgstr "启动时加载指定模块."
 
 #: lclstrconsts.rsgtkoptionname
 msgid "Set program name to \"progname\". If not specified, program name will be set to ParamStrUTF8(0)."
@@ -500,7 +500,7 @@ msgstr "将程序名称设置为 \"progname\"。如果未指定，程序名称�
 
 #: lclstrconsts.rsgtkoptionnodebug
 msgid "Turn off specific Gtk+ trace/debug messages."
-msgstr "关闭Gtk+跟踪/调试信息。"
+msgstr "关闭Gtk+跟踪/调试信息."
 
 #: lclstrconsts.rsgtkoptionnotransient
 msgid "Do not set transient order for modal forms."
@@ -522,7 +522,7 @@ msgstr "帮助"
 #: lclstrconsts.rshelpalreadyregistered
 #, object-pascal-format
 msgid "%s: already registered."
-msgstr "%s：已经注册。"
+msgstr "%s：已经注册"
 
 #: lclstrconsts.rshelpcontextnotfound
 msgid "A help database was found for this topic, but this topic was not found"
@@ -539,7 +539,7 @@ msgstr "帮助错误"
 #: lclstrconsts.rshelphelpcontextnotfound
 #, object-pascal-format
 msgid "Help context %s not found."
-msgstr "帮助上下文%s未找到。"
+msgstr "帮助上下文%s未找到."
 
 #: lclstrconsts.rshelphelpcontextnotfoundindatabase
 #, object-pascal-format
@@ -574,7 +574,7 @@ msgstr "帮助关键字 \"%s\" 未找到。"
 #: lclstrconsts.rshelphelpkeywordnotfoundindatabase
 #, object-pascal-format
 msgid "Help keyword \"%s\" not found in Database \"%s\"."
-msgstr "帮助关键字\"%s\"未找到在数据库\"%s\"。"
+msgstr "帮助关键字\"%s\"未找到在数据库\"%s\"."
 
 #: lclstrconsts.rshelphelpnodehasnohelpdatabase
 #, object-pascal-format
@@ -714,7 +714,7 @@ msgstr "无效日期: %s"
 #: lclstrconsts.rsinvaliddaterangehint
 #, object-pascal-format
 msgid "Invalid Date: %s. Must be between %s and %s"
-msgstr "无效日期:%s。必须在%s和%s之间"
+msgstr "无效日期:%s.必须在%s和%s之间"
 
 #: lclstrconsts.rsinvalidformobjectstream
 msgid "invalid Form object stream"
@@ -841,10 +841,9 @@ msgid "Maroon"
 msgstr "褐红色"
 
 # 此处翻译为取消更合适，中止在这里表意不正确
-# 20261122：已改为取消
 #: lclstrconsts.rsmbabort
 msgid "Abort"
-msgstr "取消"
+msgstr "放弃"
 
 #: lclstrconsts.rsmball
 msgid "&All"
@@ -1079,7 +1078,7 @@ msgstr "设置 X 显示。默认是 $DISPLAY。"
 
 #: lclstrconsts.rsqtoptionx11fgcolor
 msgid "Sets the default foreground color."
-msgstr "设置默认前景颜色。"
+msgstr "设置默认前景颜色."
 
 #: lclstrconsts.rsqtoptionx11font
 msgid "Defines the application font. The font should be specified using an X logical font description."
@@ -1135,7 +1134,7 @@ msgstr "刷新"
 
 #: lclstrconsts.rsreplace
 msgid "Replace"
-msgstr "替换"
+msgstr "Replace"
 
 #: lclstrconsts.rsreplaceall
 msgid "Replace all"
@@ -1232,7 +1231,7 @@ msgstr "未知图片格式"
 
 #: lclstrconsts.rsunsupportedbitmapformat
 msgid "Unsupported bitmap format."
-msgstr "不支持位图格式。"
+msgstr "不支持位图格式."
 
 #: lclstrconsts.rsunsupportedclipboardformat
 #, object-pascal-format
@@ -1381,7 +1380,7 @@ msgstr "Esc"
 
 #: lclstrconsts.smkcfn
 msgid "Fn+"
-msgstr "Fn+"
+msgstr ""
 
 #: lclstrconsts.smkchome
 msgctxt "lclstrconsts.smkchome"
@@ -1481,7 +1480,7 @@ msgstr "错误的标记类型：期望 %s 但找到 %s"
 
 #: lclstrconsts.sshellctrlsattributes
 msgid "Attributes"
-msgstr "属性"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsbytes
 #, object-pascal-format
@@ -1542,7 +1541,7 @@ msgstr "%s MB"
 
 #: lclstrconsts.sshellctrlsmodificationdate
 msgid "Date modified"
-msgstr "修改日期"
+msgstr ""
 
 #: lclstrconsts.sshellctrlsname
 msgid "Name"
@@ -1564,3 +1563,4 @@ msgstr "大小"
 #: lclstrconsts.sshellctrlstype
 msgid "Type"
 msgstr "类型"
+

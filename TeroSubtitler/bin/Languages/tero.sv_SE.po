@@ -59,10 +59,6 @@ msgstr "Anpassad"
 msgid "Ellipses dots instead of Unicode character"
 msgstr "Punktserie i stället för Unicode-tecken"
 
-#: proclocalize.lngasempty
-msgid "Empty entry"
-msgstr "Tom post"
-
 #: proclocalize.lngasfixtags
 msgid "Invalid or incomplete tags"
 msgstr "Ogiltiga eller ofullständiga taggar"
@@ -82,10 +78,6 @@ msgstr ""
 #: proclocalize.lngaskdownloadtesseract
 msgid "Tesseract was not found. Download it now?"
 msgstr ""
-
-#: proclocalize.lngasktoextractaudio
-msgid "Audio waveform was not found, do you want to extract it?"
-msgstr "Ljudvåg hittades inte. Vill du ta fram den?"
 
 #: proclocalize.lngasktosave
 #, object-pascal-format
@@ -108,10 +100,6 @@ msgstr "%d rader valda / %d"
 #, object-pascal-format
 msgid "Loading media from URL (yt-dlp)... %s"
 msgstr ""
-
-#: proclocalize.lngasmarked
-msgid "Marked entry"
-msgstr "Markerad post"
 
 #: proclocalize.lngasmaxcps
 msgid "Too many CPS"
@@ -183,11 +171,6 @@ msgstr "Översättning"
 #, object-pascal-format
 msgid "Translation (%s characters at %.2f CPS):"
 msgstr "Översättning (%s tecken med %.2f TPS):"
-
-#: proclocalize.lngasunbreak
-#, object-pascal-format
-msgid "Line breaks less than %d characters"
-msgstr "Radbrytning vid färre än %d tecken"
 
 #: proclocalize.lngasunnecessarydots
 msgid "Unnecessary dots"
@@ -346,10 +329,6 @@ msgstr ""
 #: proclocalize.lngdovinotloaded
 msgctxt "proclocalize.lngdovinotloaded"
 msgid "Open a Dolby Vision XML to use this tool."
-msgstr ""
-
-#: proclocalize.lngdovioriginchanged
-msgid "The times of all the entries changed and the undo history was cleared."
 msgstr ""
 
 #: proclocalize.lngdoviposatcut
@@ -728,10 +707,6 @@ msgstr ""
 "Kunde inte hitta de bibliotek som krävs för att köra den inbäddade mpv-spelaren.\n"
 "Vänligen ladda ner dem."
 
-#: proclocalize.lnglibmpvglerror
-msgid "Failed to initialize mpv GL context."
-msgstr "Kunde inte starta grafikmiljön (GL) för mpv."
-
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
 msgstr "Kunde inte starta libmpv. Kontrollera att rätt bibliotek är installerat."
@@ -950,6 +925,15 @@ msgstr "Datum / Tid"
 msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
 msgstr "Filnamn"
+
+#: proclocalize.lngroundtimesonload
+#, object-pascal-format
+msgid "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
+msgstr ""
+
+#: proclocalize.lngroundtimesonloadtitle
+msgid "Round the timings to frames?"
+msgstr ""
 
 #: proclocalize.lngsavefile
 msgid "Save file"
@@ -1248,6 +1232,10 @@ msgstr "Konventioner"
 msgid "Dark mode"
 msgstr "Mörkt läge"
 
+#: proclocalize.lngssdefaultfont
+msgid "(Default)"
+msgstr ""
+
 #: proclocalize.lngssfiletypeassociations
 msgid "File types"
 msgstr "Filtyper"
@@ -1313,11 +1301,6 @@ msgstr "Rader utan text: %d"
 #, object-pascal-format
 msgid "Gap average: %s"
 msgstr "Genomsnittligt mellanrum/lucka: %s"
-
-#: proclocalize.lngstlinelengthaverage
-#, object-pascal-format
-msgid "Line length average: %d"
-msgstr "Genomsnittlig radrängd: %d"
 
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
@@ -1467,11 +1450,6 @@ msgstr ""
 msgctxt "proclocalize.lngtetext"
 msgid "Text"
 msgstr "Text"
-
-#: proclocalize.lngtetime
-msgctxt "proclocalize.lngtetime"
-msgid "Time"
-msgstr "Tid"
 
 #: proclocalize.lngtextformatted
 msgid "Export formatted text?"
@@ -3484,6 +3462,10 @@ msgstr "Blu-ray SUP..."
 msgid "Text only..."
 msgstr "Endast text..."
 
+#: tfrmmain.actextendendtoshotchange.caption
+msgid "Extend end to shot change"
+msgstr ""
+
 #: tfrmmain.actextendlengthtonext.caption
 msgid "Extend final time to next"
 msgstr "Förläng sluttid till nästa post"
@@ -3491,6 +3473,10 @@ msgstr "Förläng sluttid till nästa post"
 #: tfrmmain.actextendlengthtoprevious.caption
 msgid "Extend initial time to previous"
 msgstr "Förläng starttid till föregående post"
+
+#: tfrmmain.actextendstarttoshotchange.caption
+msgid "Extend start to shot change"
+msgstr ""
 
 #: tfrmmain.actfind.caption
 msgid "Find..."
@@ -3927,7 +3913,7 @@ msgid "Paste"
 msgstr "Klistra in"
 
 #: tfrmmain.actpasteastranslations.caption
-msgid "Paste as translations"
+msgid "Paste texts as translations"
 msgstr ""
 
 #: tfrmmain.actpastetexts.caption
@@ -5430,6 +5416,11 @@ msgstr "Kantlinje"
 msgctxt "tfrmsettings.lblsubcolor.caption"
 msgid "Color"
 msgstr "Färg"
+
+#: tfrmsettings.lblsubfont.caption
+msgctxt "tfrmsettings.lblsubfont.caption"
+msgid "Font"
+msgstr "Teckensnitt"
 
 #: tfrmsettings.lblsubshadow.caption
 msgid "Shadow"

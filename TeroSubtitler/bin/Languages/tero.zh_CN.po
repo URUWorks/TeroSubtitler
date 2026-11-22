@@ -58,10 +58,6 @@ msgstr "自定义"
 msgid "Ellipses dots instead of Unicode character"
 msgstr "用椭圆点代替 Unicode 字符"
 
-#: proclocalize.lngasempty
-msgid "Empty entry"
-msgstr "空条目"
-
 #: proclocalize.lngasfixtags
 msgid "Invalid or incomplete tags"
 msgstr "无效或不完整的标签"
@@ -81,10 +77,6 @@ msgstr "下载使用 NVIDIA 显卡的支持库（大约 1.3 GB）？"
 #: proclocalize.lngaskdownloadtesseract
 msgid "Tesseract was not found. Download it now?"
 msgstr "未找到 Tesseract。现在下载吗？"
-
-#: proclocalize.lngasktoextractaudio
-msgid "Audio waveform was not found, do you want to extract it?"
-msgstr "未找到音频波形，是否要提取？"
 
 #: proclocalize.lngasktosave
 #, object-pascal-format
@@ -106,10 +98,6 @@ msgstr "%d 行被选中 / %d"
 #, object-pascal-format
 msgid "Loading media from URL (yt-dlp)... %s"
 msgstr "正在从 URL 加载媒体（yt-dlp）... %s"
-
-#: proclocalize.lngasmarked
-msgid "Marked entry"
-msgstr "标记条目"
 
 #: proclocalize.lngasmaxcps
 msgid "Too many CPS"
@@ -179,11 +167,6 @@ msgstr "翻译"
 #, object-pascal-format
 msgid "Translation (%s characters at %.2f CPS):"
 msgstr "译文 (%s 字符以 %.2f 每秒字符):"
-
-#: proclocalize.lngasunbreak
-#, object-pascal-format
-msgid "Line breaks less than %d characters"
-msgstr "换行小于 %d 字符"
 
 #: proclocalize.lngasunnecessarydots
 msgid "Unnecessary dots"
@@ -344,10 +327,6 @@ msgctxt "proclocalize.lngdovinotloaded"
 msgid "Open a Dolby Vision XML to use this tool."
 msgstr "打开一个 Dolby Vision XML 来使用这个工具。"
 
-#: proclocalize.lngdovioriginchanged
-msgid "The times of all the entries changed and the undo history was cleared."
-msgstr "所有条目时间已改变，撤销历史被清空。"
-
 #: proclocalize.lngdoviposatcut
 #, object-pascal-format
 msgid "%s is the first frame of “%s” (a cut)."
@@ -356,7 +335,7 @@ msgstr "%s 是 \"%s\" 的第一帧（一个片段）。"
 #: proclocalize.lngdoviposinshot
 #, object-pascal-format
 msgid "%s is the frame %d of %d of “%s”."
-msgstr "%s 是 “%s” 的第 %d 帧，共 %d 帧。"
+msgstr "%s 是第 %d 帧（共 %d 帧），属于 “%s”。"
 
 #: proclocalize.lngdoviposoutside
 #, object-pascal-format
@@ -712,10 +691,6 @@ msgstr ""
 msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
 msgstr "无法找到运行嵌入式 mpv 播放器所需的库。请下载。"
 
-#: proclocalize.lnglibmpvglerror
-msgid "Failed to initialize mpv GL context."
-msgstr "初始化 mpv GL 内容失败。"
-
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
 msgstr "无法初始化 libmpv。检查是否安装了正确的库。"
@@ -932,6 +907,15 @@ msgstr "日期/时间"
 msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
 msgstr "文件名"
+
+#: proclocalize.lngroundtimesonload
+#, object-pascal-format
+msgid "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
+msgstr ""
+
+#: proclocalize.lngroundtimesonloadtitle
+msgid "Round the timings to frames?"
+msgstr ""
 
 #: proclocalize.lngsavefile
 msgid "Save file"
@@ -1219,6 +1203,10 @@ msgstr "转换"
 msgid "Dark mode"
 msgstr "深色模式"
 
+#: proclocalize.lngssdefaultfont
+msgid "(Default)"
+msgstr ""
+
 #: proclocalize.lngssfiletypeassociations
 msgid "File types"
 msgstr "文件关联"
@@ -1282,11 +1270,6 @@ msgstr "无文本的条目：%d"
 #, object-pascal-format
 msgid "Gap average: %s"
 msgstr "平均间距：%s"
-
-#: proclocalize.lngstlinelengthaverage
-#, object-pascal-format
-msgid "Line length average: %d"
-msgstr "平均行长%d"
 
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
@@ -1436,11 +1419,6 @@ msgstr "Tesseract 无法运行 (%s)。请在 设置 > 工具 中检查路径是�
 msgctxt "proclocalize.lngtetext"
 msgid "Text"
 msgstr "文本"
-
-#: proclocalize.lngtetime
-msgctxt "proclocalize.lngtetime"
-msgid "Time"
-msgstr "时间"
 
 #: proclocalize.lngtextformatted
 msgid "Export formatted text?"
@@ -3417,6 +3395,10 @@ msgstr "蓝光字幕..."
 msgid "Text only..."
 msgstr "仅文本..."
 
+#: tfrmmain.actextendendtoshotchange.caption
+msgid "Extend end to shot change"
+msgstr ""
+
 #: tfrmmain.actextendlengthtonext.caption
 msgid "Extend final time to next"
 msgstr "将最后时间延长至下一个"
@@ -3424,6 +3406,10 @@ msgstr "将最后时间延长至下一个"
 #: tfrmmain.actextendlengthtoprevious.caption
 msgid "Extend initial time to previous"
 msgstr "将开始时间延长至上一个"
+
+#: tfrmmain.actextendstarttoshotchange.caption
+msgid "Extend start to shot change"
+msgstr ""
 
 #: tfrmmain.actfind.caption
 msgid "Find..."
@@ -3853,8 +3839,8 @@ msgid "Paste"
 msgstr "粘贴"
 
 #: tfrmmain.actpasteastranslations.caption
-msgid "Paste as translations"
-msgstr "翻译粘贴到翻译栏"
+msgid "Paste texts as translations"
+msgstr "文本粘贴到翻译栏"
 
 #: tfrmmain.actpastetexts.caption
 msgid "Paste texts"
@@ -3866,7 +3852,7 @@ msgstr "粘贴时间"
 
 #: tfrmmain.actpastetranslations.caption
 msgid "Paste translations"
-msgstr "文本粘贴到翻译栏"
+msgstr "翻译粘贴到翻译栏"
 
 #: tfrmmain.actplaycurrententry.caption
 msgid "Play current entry"
@@ -5334,6 +5320,11 @@ msgctxt "tfrmsettings.lblsubcolor.caption"
 msgid "Color"
 msgstr "颜色"
 
+#: tfrmsettings.lblsubfont.caption
+msgctxt "tfrmsettings.lblsubfont.caption"
+msgid "Font"
+msgstr "字体"
+
 #: tfrmsettings.lblsubshadow.caption
 msgid "Shadow"
 msgstr "阴影"
@@ -6223,3 +6214,4 @@ msgstr "反转"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "纵向"
+

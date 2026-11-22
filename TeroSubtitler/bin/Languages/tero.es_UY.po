@@ -58,10 +58,6 @@ msgstr "Personalizado"
 msgid "Ellipses dots instead of Unicode character"
 msgstr "Puntos suspensivos en lugar de carácter inteligente"
 
-#: proclocalize.lngasempty
-msgid "Empty entry"
-msgstr "Entrada vacío"
-
 #: proclocalize.lngasfixtags
 msgid "Invalid or incomplete tags"
 msgstr "Etiquetas inválidas o incompletas"
@@ -81,10 +77,6 @@ msgstr "¿Descargar las bibliotecas para utilizar una tarjeta gráfica NVIDIA (a
 #: proclocalize.lngaskdownloadtesseract
 msgid "Tesseract was not found. Download it now?"
 msgstr "No se encontró Tesseract. ¿Descargarlo ahora?"
-
-#: proclocalize.lngasktoextractaudio
-msgid "Audio waveform was not found, do you want to extract it?"
-msgstr "No se encontró la forma de onda de audio, ¿desea extraerla?"
 
 #: proclocalize.lngasktosave
 #, object-pascal-format
@@ -106,10 +98,6 @@ msgstr "%d líneas seleccionadas / %d"
 #, object-pascal-format
 msgid "Loading media from URL (yt-dlp)... %s"
 msgstr "Cargando contenido multimedia desde la URL (yt-dlp)... %s"
-
-#: proclocalize.lngasmarked
-msgid "Marked entry"
-msgstr "Entrada marcada"
 
 #: proclocalize.lngasmaxcps
 msgid "Too many CPS"
@@ -179,11 +167,6 @@ msgstr "Traducción"
 #, object-pascal-format
 msgid "Translation (%s characters at %.2f CPS):"
 msgstr "Traducción (%s caracteres a %.2f CPS):"
-
-#: proclocalize.lngasunbreak
-#, object-pascal-format
-msgid "Line breaks less than %d characters"
-msgstr "Saltos de línea menores a %d caracteres"
 
 #: proclocalize.lngasunnecessarydots
 msgid "Unnecessary dots"
@@ -343,10 +326,6 @@ msgstr "No hay cambios de plano. Detecta primero los cambios de plano."
 msgctxt "proclocalize.lngdovinotloaded"
 msgid "Open a Dolby Vision XML to use this tool."
 msgstr "Abrir un archivo XML de Dolby Vision para utilizar esta herramienta."
-
-#: proclocalize.lngdovioriginchanged
-msgid "The times of all the entries changed and the undo history was cleared."
-msgstr "Las horas de todas las entradas cambiaron y el historial de deshacer se borró."
 
 #: proclocalize.lngdoviposatcut
 #, object-pascal-format
@@ -712,10 +691,6 @@ msgstr "#"
 msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
 msgstr "No se pueden encontrar las bibliotecas necesarias para ejecutar el reproductor mpv incorporado. Por favor, vaya y descárguelos."
 
-#: proclocalize.lnglibmpvglerror
-msgid "Failed to initialize mpv GL context."
-msgstr "No se pudo inicializar el contexto mpv GL."
-
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
 msgstr "No se pudo iniciar libmpv, posiblemente se instaló una biblioteca incorrecta."
@@ -932,6 +907,15 @@ msgstr "Fecha / Hora"
 msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
 msgstr "Nombre de archivo"
+
+#: proclocalize.lngroundtimesonload
+#, object-pascal-format
+msgid "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
+msgstr "El archivo está en milisegundos y algunos tiempos no caen en un frame a %1:s fps (entradas: %0:d). ¿Redondearlos al frame más cercano? Se puede deshacer."
+
+#: proclocalize.lngroundtimesonloadtitle
+msgid "Round the timings to frames?"
+msgstr "¿Redondear los tiempos a frames?"
 
 #: proclocalize.lngsavefile
 msgid "Save file"
@@ -1219,6 +1203,10 @@ msgstr "Convenciones"
 msgid "Dark mode"
 msgstr "Modo oscuro"
 
+#: proclocalize.lngssdefaultfont
+msgid "(Default)"
+msgstr "(Predeterminada)"
+
 #: proclocalize.lngssfiletypeassociations
 msgid "File types"
 msgstr "Tipos de archivo"
@@ -1282,11 +1270,6 @@ msgstr "Entradas sin texto: %d"
 #, object-pascal-format
 msgid "Gap average: %s"
 msgstr "Promedio de pausa: %s"
-
-#: proclocalize.lngstlinelengthaverage
-#, object-pascal-format
-msgid "Line length average: %d"
-msgstr "Promedio de longitud de línea: %d"
 
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
@@ -1436,11 +1419,6 @@ msgstr "No se pudo ejecutar Tesseract (%s). Comprueba en Configuración/Herramie
 msgctxt "proclocalize.lngtetext"
 msgid "Text"
 msgstr "Texto"
-
-#: proclocalize.lngtetime
-msgctxt "proclocalize.lngtetime"
-msgid "Time"
-msgstr "Tiempo"
 
 #: proclocalize.lngtextformatted
 msgid "Export formatted text?"
@@ -3419,6 +3397,10 @@ msgstr "Blu-ray SUP..."
 msgid "Text only..."
 msgstr "Solo texto..."
 
+#: tfrmmain.actextendendtoshotchange.caption
+msgid "Extend end to shot change"
+msgstr "Extender final al cambio de plano"
+
 #: tfrmmain.actextendlengthtonext.caption
 msgid "Extend final time to next"
 msgstr "Extender tiempo final al siguiente"
@@ -3426,6 +3408,10 @@ msgstr "Extender tiempo final al siguiente"
 #: tfrmmain.actextendlengthtoprevious.caption
 msgid "Extend initial time to previous"
 msgstr "Extender tiempo inicial al anterior"
+
+#: tfrmmain.actextendstarttoshotchange.caption
+msgid "Extend start to shot change"
+msgstr "Extender inicio al cambio de plano"
 
 #: tfrmmain.actfind.caption
 msgid "Find..."
@@ -3855,8 +3841,8 @@ msgid "Paste"
 msgstr "Pegar"
 
 #: tfrmmain.actpasteastranslations.caption
-msgid "Paste as translations"
-msgstr "Pegar como traducciones"
+msgid "Paste texts as translations"
+msgstr "Pegar textos como traducciones"
 
 #: tfrmmain.actpastetexts.caption
 msgid "Paste texts"
@@ -5337,6 +5323,11 @@ msgctxt "tfrmsettings.lblsubcolor.caption"
 msgid "Color"
 msgstr "Color"
 
+#: tfrmsettings.lblsubfont.caption
+msgctxt "tfrmsettings.lblsubfont.caption"
+msgid "Font"
+msgstr "Fuente"
+
 #: tfrmsettings.lblsubshadow.caption
 msgid "Shadow"
 msgstr "Sombra"
@@ -6224,3 +6215,4 @@ msgstr "Invertido"
 msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Vertical"
+

@@ -59,10 +59,6 @@ msgstr "Personalizzato"
 msgid "Ellipses dots instead of Unicode character"
 msgstr "Punti sospensione al posto del carattere Unicode corrispondente"
 
-#: proclocalize.lngasempty
-msgid "Empty entry"
-msgstr "Elemento vuoto"
-
 #: proclocalize.lngasfixtags
 msgid "Invalid or incomplete tags"
 msgstr "Tag non validi o incompleti"
@@ -77,17 +73,11 @@ msgstr "Non udenti"
 
 #: proclocalize.lngaskdownloadgpulibs
 msgid "Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?"
-msgstr ""
-"Vuoi scaricare le librerie per usare una scheda grafica NVIDIA (circa 1,3 "
-"GB)?"
+msgstr "Vuoi scaricare le librerie per usare una scheda grafica NVIDIA (circa 1,3 GB)?"
 
 #: proclocalize.lngaskdownloadtesseract
 msgid "Tesseract was not found. Download it now?"
 msgstr "Tesseract non è stato trovato. Vuoi scaricarlo?"
-
-#: proclocalize.lngasktoextractaudio
-msgid "Audio waveform was not found, do you want to extract it?"
-msgstr "Forma d’onda dell’audio non trovata, vuoi estrarla?"
 
 #: proclocalize.lngasktosave
 #, object-pascal-format
@@ -109,10 +99,6 @@ msgstr "%d voci selezionate / %d"
 #, object-pascal-format
 msgid "Loading media from URL (yt-dlp)... %s"
 msgstr "Caricamento supporto da URL (yt-dlp)... %s"
-
-#: proclocalize.lngasmarked
-msgid "Marked entry"
-msgstr "Elemento contrassegnato"
 
 #: proclocalize.lngasmaxcps
 msgid "Too many CPS"
@@ -183,11 +169,6 @@ msgstr "Traduzione"
 msgid "Translation (%s characters at %.2f CPS):"
 msgstr "Traduzione (%s caratteri a %.2f CPS):"
 
-#: proclocalize.lngasunbreak
-#, object-pascal-format
-msgid "Line breaks less than %d characters"
-msgstr "Interruzioni di linea più breve di %d caratteri"
-
 #: proclocalize.lngasunnecessarydots
 msgid "Unnecessary dots"
 msgstr "Punti non necessari"
@@ -220,12 +201,8 @@ msgid "No black bars were detected in the current frame."
 msgstr "Nel fotogramma attuale non sono state rilevate barre nere."
 
 #: proclocalize.lngautocropnoimage
-msgid ""
-"The black bars could not be detected. Go to a frame with image (the first "
-"ones are usually black) and try again."
-msgstr ""
-"Non è stato possibile rilevare le barre nere. Vai su un fotogramma con "
-"immagine (i primi solitamente sono neri) e riprova."
+msgid "The black bars could not be detected. Go to a frame with image (the first ones are usually black) and try again."
+msgstr "Non è stato possibile rilevare le barre nere. Vai su un fotogramma con immagine (i primi solitamente sono neri) e riprova."
 
 #: proclocalize.lngbackupsaved
 msgid "Backup saved."
@@ -297,11 +274,8 @@ msgid "Auto-detect"
 msgstr "Rilevamento automatico"
 
 #: proclocalize.lngdetectdialogsegmentswarning
-msgid ""
-"Attempting to detect dialogue segments deletes all entries from the list."
-msgstr ""
-"Tentando di rilevare le parti con dialoghi, tutti i sottotitoli in elenco "
-"saranno eliminati."
+msgid "Attempting to detect dialogue segments deletes all entries from the list."
+msgstr "Tentando di rilevare le parti con dialoghi, tutti i sottotitoli in elenco saranno eliminati."
 
 #: proclocalize.lngdoviapplied
 #, object-pascal-format
@@ -354,12 +328,6 @@ msgctxt "proclocalize.lngdovinotloaded"
 msgid "Open a Dolby Vision XML to use this tool."
 msgstr "Per usare questo strumento apri un XML Dolby Vision."
 
-#: proclocalize.lngdovioriginchanged
-msgid "The times of all the entries changed and the undo history was cleared."
-msgstr ""
-"I tempi di tutte le voci sono cambiati e la cronologia degli annullamenti è "
-"stata cancellata."
-
 #: proclocalize.lngdoviposatcut
 #, object-pascal-format
 msgid "%s is the first frame of “%s” (a cut)."
@@ -380,22 +348,13 @@ msgid "Do you want to save it anyway?"
 msgstr "Vuoi salvarla comunque?"
 
 #: proclocalize.lngdovisaveonlydovi
-msgid ""
-"Only a Dolby Vision XML opened in Tero Subtitler can be saved in this format."
-msgstr ""
-"Solo un XML Dolby Vision aperto in Tero Subtitler può essere salvato in "
-"questo formato."
+msgid "Only a Dolby Vision XML opened in Tero Subtitler can be saved in this format."
+msgstr "Solo un XML Dolby Vision aperto in Tero Subtitler può essere salvato in questo formato."
 
 #: proclocalize.lngdovisaveproblems
 #, object-pascal-format
-msgid ""
-"The shots are not contiguous: %d gaps, %d overlaps, %d without frames and %d "
-"new entries (written as copies of the previous shot). The first one is the "
-"entry %d."
-msgstr ""
-"Le inquadrature sono contigue: %d gap, %d sovrapposizioni, %d senza "
-"fotogrammi e %d nuove voci (scritte come copie dell'inquadratura "
-"precedente). La prima è la voce %d."
+msgid "The shots are not contiguous: %d gaps, %d overlaps, %d without frames and %d new entries (written as copies of the previous shot). The first one is the entry %d."
+msgstr "Le inquadrature sono contigue: %d gap, %d sovrapposizioni, %d senza fotogrammi e %d nuove voci (scritte come copie dell'inquadratura precedente). La prima è la voce %d."
 
 #: proclocalize.lngdownloadcanceled
 msgid "Download canceled by user."
@@ -675,12 +634,8 @@ msgid "Total errors: %d (displayed: %d)"
 msgstr "Errori totali: %d (visualizzati: %d)"
 
 #: proclocalize.lnggpulibsoptional
-msgid ""
-"These libraries are needed with an NVIDIA card; without them, Faster-Whisper "
-"uses the processor."
-msgstr ""
-"Queste librerie sono necessarie con una scheda NVIDIA; senza di essi, Faster-"
-"Whisper usa la CPU."
+msgid "These libraries are needed with an NVIDIA card; without them, Faster-Whisper uses the processor."
+msgstr "Queste librerie sono necessarie con una scheda NVIDIA; senza di essi, Faster-Whisper usa la CPU."
 
 #: proclocalize.lnghcpl
 msgctxt "proclocalize.lnghcpl"
@@ -740,23 +695,14 @@ msgid "#"
 msgstr "#"
 
 #: proclocalize.lnglibmpverror
-msgid ""
-"Unable to find the required libraries to run the embedded mpv player. Please "
-"download them."
+msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
 msgstr ""
-"Impossibile trovare le librerie necessarie al funzionamento del riproduttore "
-"mpv incorporato. \n"
+"Impossibile trovare le librerie necessarie al funzionamento del riproduttore mpv incorporato. \n"
 "Scarica le librerie necessarie."
-
-#: proclocalize.lnglibmpvglerror
-msgid "Failed to initialize mpv GL context."
-msgstr "Inizializzazione contesto grafico GL di mpv non riuscita."
 
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
-msgstr ""
-"Impossibile inizializzare libmpv; verifica che sia stata installata la "
-"libreria corretta."
+msgstr "Impossibile inizializzare libmpv; verifica che sia stata installata la libreria corretta."
 
 #: proclocalize.lngline
 msgid "Line:"
@@ -968,6 +914,15 @@ msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
 msgstr "Nome file"
 
+#: proclocalize.lngroundtimesonload
+#, object-pascal-format
+msgid "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
+msgstr ""
+
+#: proclocalize.lngroundtimesonloadtitle
+msgid "Round the timings to frames?"
+msgstr ""
+
 #: proclocalize.lngsavefile
 msgid "Save file"
 msgstr "Salva file"
@@ -1014,13 +969,10 @@ msgstr "Modifica elenchi decisioni"
 
 #: proclocalize.lngscenedetectnoresults
 #, object-pascal-format
-msgid ""
-"“%s” did not return any results. Check that it is installed correctly, with "
-"a video backend such as OpenCV, and that it can open this video."
+msgid "“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video."
 msgstr ""
 "'%s' non ha restituito alcun risultato.\n"
-"Verifica che sia installato correttamente, con un backend video come OpenCV "
-"e che possa aprire questo video."
+"Verifica che sia installato correttamente, con un backend video come OpenCV e che possa aprire questo video."
 
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"
@@ -1178,12 +1130,8 @@ msgid "Shortcut currently used in “%s”."
 msgstr "Scorciatoia attualmente in uso per “%s”."
 
 #: proclocalize.lngsourcemodewarning
-msgid ""
-"Switching to source mode will change the format to “Tero Subtitler”, "
-"otherwise unsaved translations will be lost."
-msgstr ""
-"Passando alla modalità sorgente, il formato del file sarà modificato in "
-"“Tero Subtitler”; altrimenti, tutte le traduzioni non salvate verranno perse."
+msgid "Switching to source mode will change the format to “Tero Subtitler”, otherwise unsaved translations will be lost."
+msgstr "Passando alla modalità sorgente, il formato del file sarà modificato in “Tero Subtitler”; altrimenti, tutte le traduzioni non salvate verranno perse."
 
 #: proclocalize.lngspcurrentline
 #, object-pascal-format
@@ -1209,37 +1157,21 @@ msgid "Entries: %s"
 msgstr "Voci: %s"
 
 #: proclocalize.lngspechaligncentered
-msgid ""
-"Left or right alignment: only centered text is allowed. They will be "
-"exported centered."
-msgstr ""
-"Allineamento a sinistra o a destra: è consentito solo il testo centrato. "
-"Saranno esportati centrati."
+msgid "Left or right alignment: only centered text is allowed. They will be exported centered."
+msgstr "Allineamento a sinistra o a destra: è consentito solo il testo centrato. Saranno esportati centrati."
 
 #: proclocalize.lngspeclinelength
 #, object-pascal-format
-msgid ""
-"Lines longer than %d characters (the maximum per row in the format "
-"properties): they may be cut off when displayed."
-msgstr ""
-"Righe più lunghe di %d caratteri (il massimo per riga nel formato "
-"proprietà): possono essere tagliati quando visualizzati."
+msgid "Lines longer than %d characters (the maximum per row in the format properties): they may be cut off when displayed."
+msgstr "Righe più lunghe di %d caratteri (il massimo per riga nel formato proprietà): possono essere tagliati quando visualizzati."
 
 #: proclocalize.lngspecmiddlekept
-msgid ""
-"Middle vertical alignment: only top and bottom are allowed. They will be "
-"exported in the middle anyway."
-msgstr ""
-"Allineamento verticale centrale: sono consentiti solo in alto e in basso. "
-"verranno esportato in mezzo."
+msgid "Middle vertical alignment: only top and bottom are allowed. They will be exported in the middle anyway."
+msgstr "Allineamento verticale centrale: sono consentiti solo in alto e in basso. verranno esportato in mezzo."
 
 #: proclocalize.lngspecmiddletobottom
-msgid ""
-"Middle vertical alignment: only top and bottom are allowed. They will be "
-"exported at the bottom."
-msgstr ""
-"Allineamento verticale centrale: sono consentiti solo in alto e il basso. "
-"Veranno esportati in basso."
+msgid "Middle vertical alignment: only top and bottom are allowed. They will be exported at the bottom."
+msgstr "Allineamento verticale centrale: sono consentiti solo in alto e il basso. Veranno esportati in basso."
 
 #: proclocalize.lngspecstrikeout
 msgid "Strikethrough: not allowed. It will be removed (the text is kept)."
@@ -1251,12 +1183,8 @@ msgstr "Sottolineato: non consentito. Sarà rimosso."
 
 #: proclocalize.lngspecwillchange
 #, object-pascal-format
-msgid ""
-"The %s specification does not allow some of the formatting used, so these "
-"entries will be exported with changes:"
-msgstr ""
-"La specifica %s non consente parte della formattazione usata, quindi queste "
-"voci verranno esportate con le modifiche:"
+msgid "The %s specification does not allow some of the formatting used, so these entries will be exported with changes:"
+msgstr "La specifica %s non consente parte della formattazione usata, quindi queste voci verranno esportate con le modifiche:"
 
 #: proclocalize.lngspellcheckfinished
 msgid "Spell check finished."
@@ -1282,6 +1210,10 @@ msgstr "Convenzioni"
 #: proclocalize.lngssdarkmode
 msgid "Dark mode"
 msgstr "Modalità scura"
+
+#: proclocalize.lngssdefaultfont
+msgid "(Default)"
+msgstr ""
 
 #: proclocalize.lngssfiletypeassociations
 msgid "File types"
@@ -1346,11 +1278,6 @@ msgstr "Elementi vuoti: %d"
 #, object-pascal-format
 msgid "Gap average: %s"
 msgstr "Intervallo medio: %s"
-
-#: proclocalize.lngstlinelengthaverage
-#, object-pascal-format
-msgid "Line length average: %d"
-msgstr "Lunghezza media linee: %d"
 
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
@@ -1433,12 +1360,8 @@ msgid "Words per minute average: %.2f"
 msgstr "Media di parole al minuto: %.2f"
 
 #: proclocalize.lngsubtitlehaserrorstofix
-msgid ""
-"The current subtitle set contains errors that are recommended to be "
-"resolved, but it can be saved."
-msgstr ""
-"L’attuale insieme di sottotitoli contiene errori che ti suggeriamo di "
-"correggere, ma è possibile salvare il file."
+msgid "The current subtitle set contains errors that are recommended to be resolved, but it can be saved."
+msgstr "L’attuale insieme di sottotitoli contiene errori che ti suggeriamo di correggere, ma è possibile salvare il file."
 
 #: proclocalize.lngsubtitlespecificationentries
 #, object-pascal-format
@@ -1446,11 +1369,8 @@ msgid "Entries: %s (selected in the list)."
 msgstr "Voci: %s (selezionate nell'elenco)."
 
 #: proclocalize.lngsubtitlespecificationerror
-msgid ""
-"The current subtitles do not meet the specifications of the format to be "
-"saved."
-msgstr ""
-"I sottotitoli attuali non soddisfano le specifiche del formato da salvare."
+msgid "The current subtitles do not meet the specifications of the format to be saved."
+msgstr "I sottotitoli attuali non soddisfano le specifiche del formato da salvare."
 
 #: proclocalize.lngsubtitlespecificationerrorbr
 msgid "There are entries which exceed the line break."
@@ -1495,43 +1415,30 @@ msgstr "Riduci"
 
 #: proclocalize.lngtesseractlangerror
 #, object-pascal-format
-msgid ""
-"Tesseract could not load the language “%s”. Download it again from the "
-"languages window."
+msgid "Tesseract could not load the language “%s”. Download it again from the languages window."
 msgstr ""
 "Tesseract non è riuscito a caricare la lingua '%s'.\n"
 "Scaricalo di nuovo dalla finestra delle lingue."
 
 #: proclocalize.lngtesseractrunerror
 #, object-pascal-format
-msgid ""
-"Tesseract could not be run (%s). Check in Settings > Tools that the path is "
-"correct and that this version works on your system."
+msgid "Tesseract could not be run (%s). Check in Settings > Tools that the path is correct and that this version works on your system."
 msgstr ""
 "Impossibile eseguire Tesseract (%s).\n"
-"Controlla in Impostazioni > Strumenti che il percorso sia corretto e che "
-"questa versione funzioni nel sistema."
+"Controlla in Impostazioni > Strumenti che il percorso sia corretto e che questa versione funzioni nel sistema."
 
 #: proclocalize.lngtetext
 msgctxt "proclocalize.lngtetext"
 msgid "Text"
 msgstr "Testo"
 
-#: proclocalize.lngtetime
-msgctxt "proclocalize.lngtetime"
-msgid "Time"
-msgstr "Tempo"
-
 #: proclocalize.lngtextformatted
 msgid "Export formatted text?"
 msgstr "Vuoi esportare il testo formattato?"
 
 #: proclocalize.lngtextsyncnowords
-msgid ""
-"No words were recognized in the audio, the texts could not be synchronized."
-msgstr ""
-"Nell'audio non è stata riconosciuta nessuna parola, i testi non possono "
-"essere sincronizzati."
+msgid "No words were recognized in the audio, the texts could not be synchronized."
+msgstr "Nell'audio non è stata riconosciuta nessuna parola, i testi non possono essere sincronizzati."
 
 #: proclocalize.lngtextsyncresult
 #, object-pascal-format
@@ -1544,9 +1451,7 @@ msgid "%d entries added to the translation memory."
 msgstr "%d voci aggiunte alla memoria traduzione."
 
 #: proclocalize.lngtmnoentriesloaded
-msgid ""
-"No entries were loaded from the translation memory. Check that its languages "
-"match the selected ones."
+msgid "No entries were loaded from the translation memory. Check that its languages match the selected ones."
 msgstr ""
 "Nessuna voce è stata caricata dalla memoria traduzione.\n"
 "Verifica che le lingue corrispondano a quelle selezionate."
@@ -1557,9 +1462,7 @@ msgstr "Trascrizione..."
 
 #: proclocalize.lngtranscriptionmodeexit
 msgid "Exiting transcription mode will lose any unsaved changes."
-msgstr ""
-"L’uscita dalla modalità trascrizione causerà la perdita di tutte le "
-"modifiche non salvate."
+msgstr "L’uscita dalla modalità trascrizione causerà la perdita di tutte le modifiche non salvate."
 
 #: proclocalize.lngtranslated
 msgctxt "proclocalize.lngtranslated"
@@ -1573,14 +1476,12 @@ msgstr "Questo file traduzione non è stato salvato."
 #: proclocalize.lngttip1
 #, object-pascal-format
 msgid "Tip: Use <%s/%s> to go to previous/next entry"
-msgstr ""
-"Suggerimento: usa <%s/%s> per passare all’elemento precedente/successivo"
+msgstr "Suggerimento: usa <%s/%s> per passare all’elemento precedente/successivo"
 
 #: proclocalize.lngttip2
 #, object-pascal-format
 msgid "Tip: Use <%s> for a web word reference"
-msgstr ""
-"Suggerimento: usa <%s> per cercare la definizione di una parola in internet"
+msgstr "Suggerimento: usa <%s> per cercare la definizione di una parola in internet"
 
 #: proclocalize.lngttip3
 #, object-pascal-format
@@ -1590,8 +1491,7 @@ msgstr "Suggerimento: usa <%s> per agganciare/sganciare la finestra media"
 #: proclocalize.lngttip4
 #, object-pascal-format
 msgid "Tip: Use <%s> dock/undock waveform window"
-msgstr ""
-"Suggerimento: usa <%s> per agganciare/sganciare il riquadro forma d’onda"
+msgstr "Suggerimento: usa <%s> per agganciare/sganciare il riquadro forma d’onda"
 
 #: proclocalize.lngunabletoload
 msgid "Error loading file, unrecognized format."
@@ -1611,9 +1511,7 @@ msgstr "Generazione doppiaggio video..."
 
 #: proclocalize.lngvdquotaexceeded
 msgid "We couldn't process this request because you've exceeded your quota."
-msgstr ""
-"Non è stato possibile elaborare questa richiesta perché hai superato la tua "
-"quota."
+msgstr "Non è stato possibile elaborare questa richiesta perché hai superato la tua quota."
 
 #: proclocalize.lngvdvoice
 msgid "Voice"
@@ -1701,9 +1599,7 @@ msgstr "Proprietà sottotitoli"
 
 #: proclocalize.lngwebvideounsupported
 msgid "The media format is not supported for playback in the web browser."
-msgstr ""
-"L’attuale formato media non è supportato per la riproduzione all’interno di "
-"un browser web."
+msgstr "L’attuale formato media non è supportato per la riproduzione all’interno di un browser web."
 
 #: proclocalize.lngwizlanguage
 msgctxt "proclocalize.lngwizlanguage"
@@ -2269,8 +2165,7 @@ msgstr "Prefisso"
 #: tfrmcustomimageformat.lblsafearea.caption
 msgctxt "tfrmcustomimageformat.lblsafearea.caption"
 msgid "Safe area pixels (left, top, right, bottom)"
-msgstr ""
-"Margini sicurezza area in pixel (sinistro, superiore, destro, inferiore)"
+msgstr "Margini sicurezza area in pixel (sinistro, superiore, destro, inferiore)"
 
 #: tfrmcustomimageformat.lblscript.caption
 msgctxt "tfrmcustomimageformat.lblscript.caption"
@@ -2471,9 +2366,7 @@ msgstr "Metadati Dolby Vision"
 
 #: tfrmdolbyvision.chkextendprevious.caption
 msgid "At a cut, add the inserted frames to the end of the previous shot"
-msgstr ""
-"Ad un taglio, aggiungi i fotogrammi inseriti alla fine dell'inquadratura "
-"precedente"
+msgstr "Ad un taglio, aggiungi i fotogrammi inseriti alla fine dell'inquadratura precedente"
 
 #: tfrmdolbyvision.lblchecktitle.caption
 msgid "Check the cuts against the shot changes of the video"
@@ -3521,6 +3414,10 @@ msgstr "Formato .sup Blu-ray..."
 msgid "Text only..."
 msgstr "Solo testo..."
 
+#: tfrmmain.actextendendtoshotchange.caption
+msgid "Extend end to shot change"
+msgstr ""
+
 #: tfrmmain.actextendlengthtonext.caption
 msgid "Extend final time to next"
 msgstr "Estendi tempo finale al successivo"
@@ -3528,6 +3425,10 @@ msgstr "Estendi tempo finale al successivo"
 #: tfrmmain.actextendlengthtoprevious.caption
 msgid "Extend initial time to previous"
 msgstr "Estendi tempo iniziale al precedente"
+
+#: tfrmmain.actextendstarttoshotchange.caption
+msgid "Extend start to shot change"
+msgstr ""
 
 #: tfrmmain.actfind.caption
 msgid "Find..."
@@ -3957,7 +3858,7 @@ msgid "Paste"
 msgstr "Incolla"
 
 #: tfrmmain.actpasteastranslations.caption
-msgid "Paste as translations"
+msgid "Paste texts as translations"
 msgstr "Incolla come traduzioni"
 
 #: tfrmmain.actpastetexts.caption
@@ -4700,9 +4601,7 @@ msgstr "FPS destinazione file sottotitoli"
 
 #: tfrmmain.cboinputfps.hint
 msgid "FPS of the movie the opened subtitle file was made for"
-msgstr ""
-"FPS del filmato per il quale il file sottotitoli attualmente aperto è stato "
-"creato"
+msgstr "FPS del filmato per il quale il file sottotitoli attualmente aperto è stato creato"
 
 #: tfrmmain.edtquickaction.hint
 msgctxt "tfrmmain.edtquickaction.hint"
@@ -5201,8 +5100,7 @@ msgstr "Impostazioni"
 
 #: tfrmsettings.chkautoextractwaveform.caption
 msgid "Extract the waveform automatically when loading a video"
-msgstr ""
-"Durante il caricamento di un video estrai automaticamente la forma d'onda"
+msgstr "Durante il caricamento di un video estrai automaticamente la forma d'onda"
 
 #: tfrmsettings.chkautoplay.caption
 msgid "Autoplay on media load"
@@ -5441,6 +5339,11 @@ msgstr "Bordo"
 msgctxt "tfrmsettings.lblsubcolor.caption"
 msgid "Color"
 msgstr "Colore"
+
+#: tfrmsettings.lblsubfont.caption
+msgctxt "tfrmsettings.lblsubfont.caption"
+msgid "Font"
+msgstr "Font"
 
 #: tfrmsettings.lblsubshadow.caption
 msgid "Shadow"
@@ -6258,12 +6161,8 @@ msgid "Choose workspace layout and timecode mode:"
 msgstr "Scegli la disposizione dello spazio di lavoro e la modalità time code:"
 
 #: tfrmwizard.lblexperience.caption
-msgid ""
-"In just a few steps, you'll be setup and ready for the best subtitling "
-"experience."
-msgstr ""
-"In pochi semplici passaggi, sarai guidato e pronto per la migliore "
-"esperienza di sottotitolazione."
+msgid "In just a few steps, you'll be setup and ready for the best subtitling experience."
+msgstr "In pochi semplici passaggi, sarai guidato e pronto per la migliore esperienza di sottotitolazione."
 
 #: tfrmwizard.lblfasterwhisper.caption
 msgid "Faster-Whisper:"
@@ -6280,9 +6179,7 @@ msgstr "FFmpeg:"
 
 #: tfrmwizard.lblffmpeg_hint.caption
 msgid "Optional, used to extract audio and generate video."
-msgstr ""
-"Opzionale: usata per l’estrazione delle tracce audio e la generazione dei "
-"video."
+msgstr "Opzionale: usata per l’estrazione delle tracce audio e la generazione dei video."
 
 #: tfrmwizard.lbllibmpv.caption
 msgid "libmpv: "
@@ -6293,13 +6190,9 @@ msgid "Essential, used for playing video."
 msgstr "Essenziale: usata per la riproduzione dei video."
 
 #: tfrmwizard.lblrequiredfiles.caption
-msgid ""
-"For Tero Subtitler to function properly, the following libraries are "
-"necessary; if they are not found on your system, Tero Subtitler can download "
-"them for you."
+msgid "For Tero Subtitler to function properly, the following libraries are necessary; if they are not found on your system, Tero Subtitler can download them for you."
 msgstr ""
-"Per il corretto funzionamento di Tero Subtitler, sono necessarie alcune "
-"librerie.\n"
+"Per il corretto funzionamento di Tero Subtitler, sono necessarie alcune librerie.\n"
 "Se non sono presenti nel sistema, Tero Subtitler può scaricarle in autonomia."
 
 #: tfrmwizard.lblwelcome.caption
@@ -6339,11 +6232,3 @@ msgctxt "tfrmwizard.rdolayout2.caption"
 msgid "Vertical"
 msgstr "Verticale"
 
-#~ msgid "There are entries with vertical alignment which are not allowed."
-#~ msgstr "Ci sono elementi con allineamento verticale che non è consentito."
-
-#~ msgid "Smart segmentation (using the conventions)"
-#~ msgstr "Segmentazione intelligente (usando le convenzioni)"
-
-#~ msgid "Synchronize the current texts (only timings)"
-#~ msgstr "Sincronizza testi attuali (solo tempi)"

@@ -58,10 +58,6 @@ msgstr "Özel"
 msgid "Ellipses dots instead of Unicode character"
 msgstr "Unicode karakter yerine üç nokta"
 
-#: proclocalize.lngasempty
-msgid "Empty entry"
-msgstr "Boş giriş"
-
 #: proclocalize.lngasfixtags
 msgid "Invalid or incomplete tags"
 msgstr "Geçersiz veya eksik etiketler"
@@ -81,10 +77,6 @@ msgstr ""
 #: proclocalize.lngaskdownloadtesseract
 msgid "Tesseract was not found. Download it now?"
 msgstr ""
-
-#: proclocalize.lngasktoextractaudio
-msgid "Audio waveform was not found, do you want to extract it?"
-msgstr "Ses dalga formu bulunamadı, dışa aktarmak ister misiniz?"
 
 #: proclocalize.lngasktosave
 #, object-pascal-format
@@ -106,10 +98,6 @@ msgstr "%d giriş seçildi / %d"
 #, object-pascal-format
 msgid "Loading media from URL (yt-dlp)... %s"
 msgstr ""
-
-#: proclocalize.lngasmarked
-msgid "Marked entry"
-msgstr "İşaretlenmiş giriş"
 
 #: proclocalize.lngasmaxcps
 msgid "Too many CPS"
@@ -179,11 +167,6 @@ msgstr "Çeviri"
 #, object-pascal-format
 msgid "Translation (%s characters at %.2f CPS):"
 msgstr "Çeviri (%s karakter, %.2f CPS):"
-
-#: proclocalize.lngasunbreak
-#, object-pascal-format
-msgid "Line breaks less than %d characters"
-msgstr "Satır sonları %d karakterden az"
 
 #: proclocalize.lngasunnecessarydots
 msgid "Unnecessary dots"
@@ -342,10 +325,6 @@ msgstr ""
 #: proclocalize.lngdovinotloaded
 msgctxt "proclocalize.lngdovinotloaded"
 msgid "Open a Dolby Vision XML to use this tool."
-msgstr ""
-
-#: proclocalize.lngdovioriginchanged
-msgid "The times of all the entries changed and the undo history was cleared."
 msgstr ""
 
 #: proclocalize.lngdoviposatcut
@@ -712,10 +691,6 @@ msgstr "#"
 msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
 msgstr "Gömülü mpv oynatıcıyı çalıştırmak için gerekli kütüphaneler bulunamadı. Lütfen onları indirin."
 
-#: proclocalize.lnglibmpvglerror
-msgid "Failed to initialize mpv GL context."
-msgstr "mpv GL bağlamı başlatılamadı."
-
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
 msgstr "libmpv başlatılamadı. Doğru kütüphanenin kurulu olduğundan emin olun."
@@ -933,6 +908,15 @@ msgstr "Tarih / Zaman"
 msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
 msgstr "Dosya adı"
+
+#: proclocalize.lngroundtimesonload
+#, object-pascal-format
+msgid "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
+msgstr ""
+
+#: proclocalize.lngroundtimesonloadtitle
+msgid "Round the timings to frames?"
+msgstr ""
 
 #: proclocalize.lngsavefile
 msgid "Save file"
@@ -1220,6 +1204,10 @@ msgstr "Sözleşmeler / Kurallar"
 msgid "Dark mode"
 msgstr "Karanlık mod"
 
+#: proclocalize.lngssdefaultfont
+msgid "(Default)"
+msgstr ""
+
 #: proclocalize.lngssfiletypeassociations
 msgid "File types"
 msgstr "Dosya türleri"
@@ -1283,11 +1271,6 @@ msgstr "Metin içermeyen girişler: %d"
 #, object-pascal-format
 msgid "Gap average: %s"
 msgstr "Ortalama boşluk: %s"
-
-#: proclocalize.lngstlinelengthaverage
-#, object-pascal-format
-msgid "Line length average: %d"
-msgstr "Ortalama satır uzunluğu: %d"
 
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
@@ -1437,11 +1420,6 @@ msgstr ""
 msgctxt "proclocalize.lngtetext"
 msgid "Text"
 msgstr "Metin"
-
-#: proclocalize.lngtetime
-msgctxt "proclocalize.lngtetime"
-msgid "Time"
-msgstr "Zaman"
 
 #: proclocalize.lngtextformatted
 msgid "Export formatted text?"
@@ -3455,6 +3433,10 @@ msgstr "Blu-ray SUP..."
 msgid "Text only..."
 msgstr "Sadece metin..."
 
+#: tfrmmain.actextendendtoshotchange.caption
+msgid "Extend end to shot change"
+msgstr ""
+
 #: tfrmmain.actextendlengthtonext.caption
 msgid "Extend final time to next"
 msgstr "Bitiş zamanını sonrakine uzat"
@@ -3462,6 +3444,10 @@ msgstr "Bitiş zamanını sonrakine uzat"
 #: tfrmmain.actextendlengthtoprevious.caption
 msgid "Extend initial time to previous"
 msgstr "Başlangıç zamanını öncekine uzat"
+
+#: tfrmmain.actextendstarttoshotchange.caption
+msgid "Extend start to shot change"
+msgstr ""
 
 #: tfrmmain.actfind.caption
 msgid "Find..."
@@ -3892,7 +3878,7 @@ msgid "Paste"
 msgstr "Yapıştır"
 
 #: tfrmmain.actpasteastranslations.caption
-msgid "Paste as translations"
+msgid "Paste texts as translations"
 msgstr ""
 
 #: tfrmmain.actpastetexts.caption
@@ -5382,6 +5368,11 @@ msgstr "Kenarlık"
 msgctxt "tfrmsettings.lblsubcolor.caption"
 msgid "Color"
 msgstr "Renk"
+
+#: tfrmsettings.lblsubfont.caption
+msgctxt "tfrmsettings.lblsubfont.caption"
+msgid "Font"
+msgstr "Yazı Tipi"
 
 #: tfrmsettings.lblsubshadow.caption
 msgid "Shadow"

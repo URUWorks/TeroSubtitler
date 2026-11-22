@@ -53,10 +53,6 @@ msgstr "Po meri"
 msgid "Ellipses dots instead of Unicode character"
 msgstr "Posamične pike tripičja namesto znaka Unicode"
 
-#: proclocalize.lngasempty
-msgid "Empty entry"
-msgstr "Prazen vnos"
-
 #: proclocalize.lngasfixtags
 #, fuzzy
 msgid "Invalid or incomplete tags"
@@ -80,10 +76,6 @@ msgstr ""
 msgid "Tesseract was not found. Download it now?"
 msgstr ""
 
-#: proclocalize.lngasktoextractaudio
-msgid "Audio waveform was not found, do you want to extract it?"
-msgstr "Signalne oblike zvoka ni bilo mogoče najti. Ali jo želite izluščiti?"
-
 #: proclocalize.lngasktosave
 #, object-pascal-format, fuzzy, badformat
 msgid ""
@@ -101,10 +93,6 @@ msgstr "%d izbranih vnosov / %d"
 #, object-pascal-format
 msgid "Loading media from URL (yt-dlp)... %s"
 msgstr ""
-
-#: proclocalize.lngasmarked
-msgid "Marked entry"
-msgstr "Označen vnos"
 
 #: proclocalize.lngasmaxcps
 msgid "Too many CPS"
@@ -176,11 +164,6 @@ msgstr "Prevod"
 #, object-pascal-format
 msgid "Translation (%s characters at %.2f CPS):"
 msgstr "Prevod (%s znakov pri %.2f zn/s):"
-
-#: proclocalize.lngasunbreak
-#, object-pascal-format, fuzzy, badformat
-msgid "Line breaks less than %d characters"
-msgstr "Napaka pri razločevanju »%%s«: vrstica daljša od %s znakov."
 
 #: proclocalize.lngasunnecessarydots
 msgid "Unnecessary dots"
@@ -340,10 +323,6 @@ msgstr ""
 #: proclocalize.lngdovinotloaded
 msgctxt "proclocalize.lngdovinotloaded"
 msgid "Open a Dolby Vision XML to use this tool."
-msgstr ""
-
-#: proclocalize.lngdovioriginchanged
-msgid "The times of all the entries changed and the undo history was cleared."
 msgstr ""
 
 #: proclocalize.lngdoviposatcut
@@ -729,11 +708,6 @@ msgstr "#"
 msgid "Unable to find the required libraries to run the embedded mpv player. Please download them."
 msgstr ""
 
-#: proclocalize.lnglibmpvglerror
-#, fuzzy
-msgid "Failed to initialize mpv GL context."
-msgstr "Začenjanje vsebine odšifriranja je spodletelo."
-
 #: proclocalize.lnglibmpvversionerror
 msgid "Could not initialize libmpv. Check if the right library was installed."
 msgstr ""
@@ -963,6 +937,15 @@ msgstr "Datum / čas"
 msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
 msgstr "Ime datoteke"
+
+#: proclocalize.lngroundtimesonload
+#, object-pascal-format
+msgid "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
+msgstr ""
+
+#: proclocalize.lngroundtimesonloadtitle
+msgid "Round the timings to frames?"
+msgstr ""
 
 #: proclocalize.lngsavefile
 msgid "Save file"
@@ -1260,6 +1243,10 @@ msgstr "Funkcija AMORLINC izračuna amortizacijo sredstev z uporabo francoskih r
 msgid "Dark mode"
 msgstr "Temni način"
 
+#: proclocalize.lngssdefaultfont
+msgid "(Default)"
+msgstr ""
+
 #: proclocalize.lngssfiletypeassociations
 msgid "File types"
 msgstr "Vrste datotek"
@@ -1325,11 +1312,6 @@ msgstr "Vnosi brez besedila: %d"
 #, object-pascal-format, fuzzy, badformat
 msgid "Gap average: %s"
 msgstr "Preneseno: %s (povprečno: %s/s)"
-
-#: proclocalize.lngstlinelengthaverage
-#, object-pascal-format, fuzzy, badformat
-msgid "Line length average: %d"
-msgstr "Dolžina zgodovine ukazne vrstice"
 
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
@@ -1484,11 +1466,6 @@ msgstr ""
 msgctxt "proclocalize.lngtetext"
 msgid "Text"
 msgstr "Besedilo"
-
-#: proclocalize.lngtetime
-msgctxt "proclocalize.lngtetime"
-msgid "Time"
-msgstr "Čas"
 
 #: proclocalize.lngtextformatted
 #, fuzzy
@@ -3577,6 +3554,10 @@ msgstr "Blu-ray SUP ..."
 msgid "Text only..."
 msgstr "Le besedilo …"
 
+#: tfrmmain.actextendendtoshotchange.caption
+msgid "Extend end to shot change"
+msgstr ""
+
 #: tfrmmain.actextendlengthtonext.caption
 #, fuzzy
 msgid "Extend final time to next"
@@ -3586,6 +3567,10 @@ msgstr "Končno"
 #, fuzzy
 msgid "Extend initial time to previous"
 msgstr "Spremeni čas na prejšnjo ključno sličico"
+
+#: tfrmmain.actextendstarttoshotchange.caption
+msgid "Extend start to shot change"
+msgstr ""
 
 #: tfrmmain.actfind.caption
 msgid "Find..."
@@ -4066,7 +4051,7 @@ msgid "Paste"
 msgstr "Prilepi"
 
 #: tfrmmain.actpasteastranslations.caption
-msgid "Paste as translations"
+msgid "Paste texts as translations"
 msgstr ""
 
 #: tfrmmain.actpastetexts.caption
@@ -5702,6 +5687,11 @@ msgstr "Obroba"
 msgctxt "tfrmsettings.lblsubcolor.caption"
 msgid "Color"
 msgstr "Barva"
+
+#: tfrmsettings.lblsubfont.caption
+msgctxt "tfrmsettings.lblsubfont.caption"
+msgid "Font"
+msgstr "Pisava"
 
 #: tfrmsettings.lblsubshadow.caption
 msgid "Shadow"
