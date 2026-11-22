@@ -42,11 +42,13 @@ type
     ColorFontSelected          : TColor; // used only if <> clNone
     ColorFontDisabled          : TColor;
     ColorFontShortcut          : TColor;
+    ColorCheckedIconBk         : TColor; // behind the icon of a checked item
+    ColorCheckedIconBorder     : TColor;
     CharCheckmark              : WideChar;
     CharRadiomark              : WideChar;
     CharSubmenu                : WideChar;
     FontName                   : String;
-    FontSize                   : Integer;
+    FontSize                   : Integer; // 0 = the menu font of the system (scaled with the DPI)
     //indents in percents of average char width
     IndentMinPercents          : Integer; // indent from edges to separator line
     IndentBigPercents          : Integer; // indent from left edge to caption
@@ -59,6 +61,7 @@ type
 
    TUWMenuTheming = class
    private
+     procedure SetMenuFont(const ACanvas: TCanvas);
      procedure HandleMenuDrawItem(Sender: TObject; ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
      procedure HandleMenuMeasureItem(Sender: TObject; ACanvas: TCanvas; var AWidth, AHeight: Integer);
      procedure ApplyBackColor(h: HMENU; AReset: Boolean = False);
@@ -154,11 +157,13 @@ begin
     ColorFontSelected          := clNone;
     ColorFontDisabled          := clMedGray;
     ColorFontShortcut          := clNone;
+    ColorCheckedIconBk         := RGBToColor(45, 75, 110);
+    ColorCheckedIconBorder     := RGBToColor(95, 145, 205);
     CharCheckmark              := #$2713;
     CharRadiomark              := #$25CF;
     CharSubmenu                := #$2BC8;
     FontName                   := 'default';
-    FontSize                   := 9;
+    FontSize                   := 0;
     IndentMinPercents          := 50;
     IndentBigPercents          := 550;
     IndentIconPercents         := 40;
@@ -292,6 +297,68 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TUWMenuTheming.SetMenuFont(const ACanvas: TCanvas);
+begin
+  if Theme.FontSize > 0 then
+  begin
+    ACanvas.Font.Name := Theme.FontName;
+    ACanvas.Font.Size := Theme.FontSize;
+  end
+  else
+    ACanvas.Font.Assign(Screen.MenuFont); // the one the OS measured the items with
+  ACanvas.Font.Style := [];
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure DrawMark(const ACanvas: TCanvas; const ARect: TRect; const ARadio: Boolean);
+var
+  s, x, y, w: Integer;
+begin
+  // a square of the height of the text, centered
+  s := (ARect.Bottom - ARect.Top) * 6 div 10;
+  if s < 6 then s := 6;
+  x := ARect.Left + ((ARect.Right - ARect.Left) - s) div 2;
+  y := ARect.Top + ((ARect.Bottom - ARect.Top) - s) div 2;
+  w := s div 7;
+  if w < 1 then w := 1;
+
+  ACanvas.Pen.Color   := ACanvas.Font.Color;
+  ACanvas.Brush.Color := ACanvas.Font.Color;
+  if ARadio then
+  begin
+    ACanvas.Pen.Width := 1;
+    ACanvas.Ellipse(x + s div 4, y + s div 4, x + s - s div 4, y + s - s div 4);
+  end
+  else
+  begin
+    ACanvas.Pen.Width := w + 1;
+    ACanvas.MoveTo(x, y + s div 2);
+    ACanvas.LineTo(x + s * 4 div 10, y + s - s div 6);
+    ACanvas.LineTo(x + s, y + s div 6);
+    ACanvas.Pen.Width := 1;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure DrawSubmenuArrow(const ACanvas: TCanvas; const ARect: TRect);
+var
+  h, x, y: Integer;
+begin
+  // a triangle pointing right, half the height of the text
+  h := (ARect.Bottom - ARect.Top) div 2;
+  if h < 4 then h := 4;
+  x := ARect.Right - h div 2;
+  y := ARect.Top + ((ARect.Bottom - ARect.Top) - h) div 2;
+  ACanvas.Pen.Width   := 1;
+  ACanvas.Pen.Color   := ACanvas.Font.Color;
+  ACanvas.Brush.Color := ACanvas.Font.Color;
+  ACanvas.Polygon([Point(x, y), Point(x + h div 2, y + h div 2), Point(x, y + h)]);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TUWMenuTheming.HandleMenuDrawItem(Sender: TObject; ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
 
 const
@@ -307,7 +374,6 @@ var
   NDrawFlags: UINT;
   bSel, bDisabled, bInBar, bHasSubmenu: Boolean;
   BufW: UnicodeString;
-  mark: WideChar;
   R: TRect;
 begin
   mi          := Sender as TMenuItem;
@@ -337,12 +403,7 @@ begin
     ACanvas.FillRect(ARect);
   end;
 
-  with ACanvas.Font do
-  begin
-    Name  := Theme.FontName;
-    Size  := Theme.FontSize;
-    Style := [];
-  end;
+  SetMenuFont(ACanvas);
 
   Windows.GetTextExtentPoint(ACanvas.Handle, PChar(cSampleShort), Length(cSampleShort), ExtCell);
   dxCell := ExtCell.cx;
@@ -397,7 +458,33 @@ begin
   R.Top    := Y;
   R.Right  := ARect.Right;
   R.Bottom := ARect.Bottom;
+  Windows.SetBkMode(ACanvas.Handle, TRANSPARENT);
   Windows.DrawTextW(ACanvas.Handle, PWideChar(BufW), Length(BufW), R, NDrawFlags);
+
+  // a checked item with an icon: a frame behind the icon (as Windows does),
+  // the check mark itself has no room there
+  if (not bInBar) and mi.Checked and
+    ((Assigned(mi.Bitmap) and (mi.Bitmap.Width > 0)) or (Assigned(Images) and (mi.ImageIndex >= 0))) then
+  begin
+    if Assigned(mi.Bitmap) and (mi.Bitmap.Width > 0) then
+    begin
+      R.Left   := ARect.Left + (Theme.IndentIconPercents div 10);
+      R.Top    := (ARect.Top+ARect.Bottom-mi.Bitmap.Height) div 2;
+      R.Right  := R.Left + mi.Bitmap.Width;
+      R.Bottom := R.Top + mi.Bitmap.Height;
+    end
+    else
+    begin
+      R.Left   := ARect.Left + (dx-Images.Width) div 2;
+      R.Top    := (ARect.Top+ARect.Bottom-Images.Height) div 2;
+      R.Right  := R.Left + Images.Width;
+      R.Bottom := R.Top + Images.Height;
+    end;
+    InflateRect(R, 2, 2);
+    ACanvas.Brush.Color := Theme.ColorCheckedIconBk;
+    ACanvas.Pen.Color   := Theme.ColorCheckedIconBorder;
+    ACanvas.Rectangle(R);
+  end;
 
   if (not bInBar) and Assigned(mi.Bitmap) and (mi.Bitmap.Width > 0) then
   begin
@@ -411,22 +498,28 @@ begin
                 ARect.Left + (dx-Images.Width) div 2,
                (ARect.Top+ARect.Bottom-Images.Height) div 2,
                 mi.ImageIndex, not bDisabled);
-  end else if mi.Checked then
+  end
+  else if (not bInBar) and mi.Checked then
   begin
-    if mi.RadioItem then
-      mark := Theme.CharRadiomark
-    else
-      mark := Theme.CharCheckmark;
-
-    Windows.TextOutW(ACanvas.Handle, ARect.Left + ((dx-dxCell) div 4), Y, @mark, 1);
+    // drawn, not a character: the glyph depends on the font (another one
+    // with a different size, or a box, with some system languages)
+    R.Left   := ARect.Left + ((dx-dxCell) div 4);
+    R.Top    := Y;
+    R.Right  := R.Left + ExtTall.cy;
+    R.Bottom := Y + ExtTall.cy;
+    DrawMark(ACanvas, R, mi.RadioItem);
   end;
 
   if mi.ShortCut <> 0 then
   begin
     if bDisabled then
       ACanvas.Font.Color:= Theme.ColorFontDisabled
+    else if Theme.ColorFontShortcut <> clNone then
+      ACanvas.Font.Color:= Theme.ColorFontShortcut
     else
-      ACanvas.Font.Color:= Theme.ColorFontShortcut;
+      ACanvas.Font.Color:= Theme.ColorFont;
+
+    Windows.SetBkMode(ACanvas.Handle, TRANSPARENT);
 
     BufW := UTF8Decode(ShortCutToText(mi.Shortcut));
     Windows.GetTextExtentPointW(ACanvas.Handle, PWideChar(BufW), Length(BufW), Ext2);
@@ -442,19 +535,17 @@ begin
     else
       ACanvas.Font.Color := Theme.ColorFont;
 
-    Windows.TextOutW(ACanvas.Handle,
-      ARect.Right - dxCell*Theme.IndentSubmenuArrowPercents div 100 - 2,
-      Y,
-      @Theme.CharSubmenu,
-      1);
-
-    //block OS drawing of submenu arrow
-    Windows.ExcludeClipRect(ACanvas.Handle,
-      ARect.Right - dxCell*Theme.IndentRightPercents div 100,
-      ARect.Top,
-      ARect.Right,
-      ARect.Bottom);
+    // drawn, not a character (see the check mark), at any DPI
+    R.Right  := ARect.Right - dxCell*Theme.IndentSubmenuArrowPercents div 100;
+    R.Left   := R.Right - ExtTall.cy;
+    R.Top    := Y;
+    R.Bottom := Y + ExtTall.cy;
+    DrawSubmenuArrow(ACanvas, R);
   end;
+
+  // block the OS drawing over the item: its submenu arrow (black, and wider
+  // than our room with a high DPI) and its check mark
+  Windows.ExcludeClipRect(ACanvas.Handle, ARect.Left, ARect.Top, ARect.Right, ARect.Bottom);
 end;
 
 // -----------------------------------------------------------------------------
@@ -465,19 +556,15 @@ var
   S: String;
   Size: TSize;
 begin
-  if Theme.FontSize <= 9 then Exit;
+  // the system menu font: the OS already measured the item with it
+  if Theme.FontSize <= 0 then Exit;
 
   mi := Sender as TMenuItem;
   S  := mi.Caption;
 
   if S.Equals('-') then Exit;
 
-  with ACanvas.Font do
-  begin
-    Name  := Theme.FontName;
-    Size  := Theme.FontSize;
-    Style := [];
-  end;
+  SetMenuFont(ACanvas);
 
   if not mi.IsInMenuBar then
   begin
@@ -486,7 +573,7 @@ begin
     if mi.ShortCut <> 0 then
       S += '  ' + ShortCutToText(mi.ShortCut);
 
-    if mi.Count > 0 then;
+    if mi.Count > 0 then
       S += ' >';
   end;
 
