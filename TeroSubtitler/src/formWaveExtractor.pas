@@ -210,7 +210,16 @@ begin
 
       ExecuteApp(GetExtractAppFile, AParamArray, True, True, @ProcessCB);
 
-      if FileExists(s) and frmMain.WAVE.LoadWaveFromFile(s) then
+      // cancelled: ffmpeg leaves a half-written wav (the size of the data
+      // still -1 in its header). Loading it left the timeline with length 0
+      // but "peak data loaded", so "Click here to use the timeline" didn't
+      // respond anymore
+      if CancelExtraction then
+      begin
+        if FileExists(s) then DeleteFile(s);
+        if FileExists(ChangeFileExt(s, '.peak')) then DeleteFile(ChangeFileExt(s, '.peak'));
+      end
+      else if FileExists(s) and frmMain.WAVE.LoadWaveFromFile(s) then
       begin
         if not frmMain.actTimeline.Checked then frmMain.actTimeline.Execute;
         EnableActionsByTag([TAG_ACTION_AUDIO], True);
