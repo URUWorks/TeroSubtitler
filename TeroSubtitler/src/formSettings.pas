@@ -112,6 +112,7 @@ type
     lblWaveEntry: TLabel;
     lblWaveColor: TLabel;
     lblSubSize: TLabel;
+    lblSubFont: TLabel;
     lblSubColor: TLabel;
     lblSubBorder: TLabel;
     lblSubShadow: TLabel;
@@ -131,6 +132,7 @@ type
     spnSCSnapOutCues: TSpinEdit;
     spnDetectDialogSegment: TSpinEdit;
     spnSubSize: TSpinEdit;
+    cboSubFont: TComboBox;
     spnSeekTime: TSpinEdit;
     spnFrameStep: TSpinEdit;
     spnListFontSize: TSpinEdit;
@@ -231,6 +233,8 @@ type
     function GetActionFromShortCut(const AShortCut: TShortCut): TAction;
     procedure SetLayoutPage(const APage: TUWLayout);
     procedure FillComboWithShortcuts;
+    procedure FillComboWithSubFonts;
+    procedure SelectSubFont(const AFont: String);
   public
 
   end;
@@ -296,6 +300,7 @@ begin
     FillComboWithEncodings(cboDefaultFileEncoding);
     FillComboWithShortcuts;
     FillComboWithShortCutsPreset(cboShortCutPreset);
+    FillComboWithSubFonts;
     {$IFDEF WINDOWS}
     PrepareToolbarAndImagelistIcos;
     {$ENDIF}
@@ -388,6 +393,7 @@ begin
     cbnSubBackground.ButtonColor   := HexStrToColor(TextBackgroundColor);
     chkSubBackground.Checked       := UseTextBackgroundColor;
     spnSubSize.Value               := TextSize;
+    SelectSubFont(TextFont);
 
     if Length(AdditionalOptions) > 0 then
       for i := 0 to High(AdditionalOptions) do
@@ -523,6 +529,10 @@ begin
     TextBackgroundColor    := ColorToHexStr(cbnSubBackground.ButtonColor);
     UseTextBackgroundColor := chkSubBackground.Checked;
     TextSize               := spnSubSize.Value;
+    if cboSubFont.ItemIndex > 0 then
+      TextFont := cboSubFont.Items[cboSubFont.ItemIndex]
+    else
+      TextFont := '';
 
     OldMPVOptions := Copy(AdditionalOptions);
     SetLength(AdditionalOptions, lstMPVOptions.Count);
@@ -820,6 +830,55 @@ begin
   LoadShortCutsFromFile(ShortCutPresetFile(cboShortCutPreset.Text + '.key'), frmMain.ActionList);
   cboShortcutCatSelect(Sender);
   btnShortCutApply.Enabled := False;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.FillComboWithSubFonts;
+var
+  i: Integer;
+  List: TStringList;
+begin
+  // the fonts of the system, for the subtitles of the preview (mpv); the
+  // first item is the default one of mpv
+  List := TStringList.Create;
+  try
+    List.Sorted     := True;
+    List.Duplicates := dupIgnore;
+    for i := 0 to Screen.Fonts.Count-1 do
+      if (Screen.Fonts[i] <> '') and (Screen.Fonts[i][1] <> '@') then // '@': vertical (Windows)
+        List.Add(Screen.Fonts[i]);
+
+    with cboSubFont.Items do
+    begin
+      BeginUpdate;
+      Clear;
+      Add(lngssDefaultFont);
+      AddStrings(List);
+      EndUpdate;
+    end;
+  finally
+    List.Free;
+  end;
+  cboSubFont.ItemIndex := 0;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.SelectSubFont(const AFont: String);
+var
+  i: Integer;
+begin
+  if AFont = '' then
+  begin
+    cboSubFont.ItemIndex := 0;
+    Exit;
+  end;
+  // not in the list (a font removed from the system): kept
+  i := cboSubFont.Items.IndexOf(AFont);
+  if i < 1 then
+    i := cboSubFont.Items.Add(AFont);
+  cboSubFont.ItemIndex := i;
 end;
 
 // -----------------------------------------------------------------------------

@@ -32,6 +32,7 @@ function MPVMediaBaseName: String;
 procedure UpdateMPVStartOptions(const AOldAdditionalOptions: TStringArray);
 procedure UpdateMPVOptions;
 procedure MPVPlaySelectionOnly;
+procedure MPVCheckSelectionEnd(const ACurrentPos: Integer);
 procedure MPVPlay(const PlayMode: TMediaPlayMode = mpmAll);
 procedure MPVSeekTo(const AForward: Boolean; const MSecsToSeek: Integer); overload;
 procedure MPVSeekTo(const Value: Integer; const Play: Boolean = False); overload;
@@ -68,6 +69,10 @@ implementation
 
 uses procConfig, UWSystem.Encoding, UWSystem.SysUtils, MPVPlayer.Filters,
   procSubtitle, formCustomMessageDlg, procLocalize, procDialogs, procWorkspace;
+
+var
+  // "Play selection": its end (video time) until its last pass ends
+  SelectionLoopEnd: Integer = 0;
 
 var
   MediaTitle: String = ''; // title of an url (media-title of mpv/yt-dlp)
@@ -139,6 +144,11 @@ begin
       AddOption('osd-align-y=' + TextPosition);
       AddOption('osd-font-size=' + IntToStr(TextSize));
       AddOption('sub-font-size=' + IntToStr(TextSize));
+      if TextFont <> '' then
+      begin
+        AddOption('osd-font=' + TextFont);
+        AddOption('sub-font=' + TextFont);
+      end;
       AddOption('osd-scale-by-window=yes');
       AddOption('sub-scale-by-window=yes');
       AddOption('sub-scale-with-window=yes');
@@ -206,6 +216,10 @@ begin
     // the mpv options directly was overwritten with its default size (55) at
     // the next resize, the text looked huge until Settings was closed.
     MPV.FontSize := TextSize;
+    // the font: the overlay text uses osd-font, the subtitle track sub-font
+    // ('sans-serif' is the default of mpv, to undo a font set before)
+    MPV.mpv_set_option_string_('osd-font=' + iff(TextFont <> '', TextFont, 'sans-serif'));
+    MPV.mpv_set_option_string_('sub-font=' + iff(TextFont <> '', TextFont, 'sans-serif'));
     MPV.mpv_set_option_string_('osd-color=' + TextColor);
     MPV.mpv_set_option_string_('sub-color=' + TextColor);
     MPV.mpv_set_option_string_('osd-border-color=' + TextBorderColor);
@@ -241,7 +255,31 @@ procedure MPVPlaySelectionOnly;
 begin
   with frmMain do
     if WAVE.IsTimeLineEnabled and (not WAVE.SelectionIsEmpty) then
-      MPV.Loop(EntryToVideoMS(WAVE.Selection.InitialTime), EntryToVideoMS(WAVE.Selection.FinalTime), WAVEOptions.LoopCount - 1);
+    begin
+      SelectionLoopEnd := EntryToVideoMS(WAVE.Selection.FinalTime);
+      MPV.Loop(EntryToVideoMS(WAVE.Selection.InitialTime), SelectionLoopEnd, WAVEOptions.LoopCount - 1);
+    end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// called by the playback timer: after the last pass of "Play selection" mpv
+// ignores the A-B points (ab-loop-count is 0 then) and kept playing after
+// the end of the selection, to the end of the video
+procedure MPVCheckSelectionEnd(const ACurrentPos: Integer);
+begin
+  if (SelectionLoopEnd <= 0) then Exit;
+
+  with frmMain do
+    if (Workspace.MediaPlayMode <> mpmSelection) then
+      SelectionLoopEnd := 0
+    else if (ACurrentPos >= SelectionLoopEnd-1) and
+      (MPV.mpv_get_property_string_('ab-loop-count') = '0') then
+    begin
+      MPV.Pause;
+      MPV.SetMediaPosInMs(SelectionLoopEnd);
+      SelectionLoopEnd := 0;
+    end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -474,9 +512,15 @@ function PrepareSSAStyleString: AnsiString;
     Result := Format('&H00%s%s%s', [Copy(AColor, 6, 2), Copy(AColor, 4, 2), Copy(AColor, 2, 2)]);
   end;
 
+var
+  FontName: String;
 begin
+  // a comma would split the fields of the style
+  FontName := StringReplace(MPVOptions.TextFont, ',', ' ', [rfReplaceAll]);
+  if FontName = '' then FontName := 'Arial';
+
   with MPVOptions do
-    Result := Format('Default,Arial,%d,%s,%s,%s,%s,0,0,0,0,100,100,0,0,%d,1,1,2,10,10,10,1', [TextSize, CorrectColorFormat(TextColor), CorrectColorFormat(TextColor), CorrectColorFormat(TextBorderColor), CorrectColorFormat(TextBorderColor), iff(MPVOptions.UseTextBackgroundColor, 3, 1)]);
+    Result := Format('Default,%s,%d,%s,%s,%s,%s,0,0,0,0,100,100,0,0,%d,1,1,2,10,10,10,1', [FontName, TextSize, CorrectColorFormat(TextColor), CorrectColorFormat(TextColor), CorrectColorFormat(TextBorderColor), CorrectColorFormat(TextBorderColor), iff(MPVOptions.UseTextBackgroundColor, 3, 1)]);
 end;
 
 // -----------------------------------------------------------------------------

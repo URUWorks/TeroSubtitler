@@ -364,6 +364,7 @@ type
     UseTextBackgroundColor : Boolean;
     TextPosition           : String;
     TextSize               : Integer;
+    TextFont               : String;  // font of the subtitles in the preview, '' = mpv default
     TextShadowOffset       : Integer;
     AutoStartPlaying       : Boolean;
     PreviewFrameOnDrag     : Boolean; // seek the video while dragging an entry in the timeline

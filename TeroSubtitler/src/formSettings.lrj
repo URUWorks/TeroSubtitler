@@ -52,6 +52,7 @@
 {"hash":94272359,"name":"tfrmsettings.lblsubshadow.caption","sourcebytes":[83,104,97,100,111,119],"value":"Shadow"},
 {"hash":32370148,"name":"tfrmsettings.lblsubbackground.caption","sourcebytes":[66,97,99,107,103,114,111,117,110,100],"value":"Background"},
 {"hash":368901,"name":"tfrmsettings.lblsubsize.caption","sourcebytes":[83,105,122,101],"value":"Size"},
+{"hash":317012,"name":"tfrmsettings.lblsubfont.caption","sourcebytes":[70,111,110,116],"value":"Font"},
 {"hash":147575645,"name":"tfrmsettings.lblwaveform.caption","sourcebytes":[87,97,118,101,102,111,114,109],"value":"Waveform"},
 {"hash":4875106,"name":"tfrmsettings.lblwavecolor.caption","sourcebytes":[67,111,108,111,114],"value":"Color"},
 {"hash":5004185,"name":"tfrmsettings.lblwaveentry.caption","sourcebytes":[69,110,116,114,121],"value":"Entry"},

@@ -822,7 +822,7 @@ object frmSettings: TfrmSettings
   object lyoAppearance: TUWLayout
     Left = -635
     Height = 682
-    Top = 330
+    Top = 328
     Width = 870
     ClientHeight = 682
     ClientWidth = 870
@@ -1000,6 +1000,29 @@ object frmSettings: TfrmSettings
       TabOrder = 6
       Value = 32
     end
+    object lblSubFont: TLabel
+      AnchorSideTop.Control = cboSubFont
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 20
+      Top = 385
+      Width = 29
+      Caption = 'Font'
+      ParentColor = False
+    end
+    object cboSubFont: TComboBox
+      AnchorSideTop.Control = spnSubSize
+      AnchorSideTop.Side = asrBottom
+      Left = 310
+      Height = 28
+      Top = 381
+      Width = 250
+      BorderSpacing.Top = 6
+      DropDownCount = 20
+      ItemHeight = 20
+      Style = csDropDownList
+      TabOrder = 7
+    end
     object chkSubBackground: TCheckBox
       AnchorSideLeft.Control = cbnSubBackground
       AnchorSideLeft.Side = asrBottom
@@ -1025,11 +1048,11 @@ object frmSettings: TfrmSettings
       TabOrder = 4
     end
     object lblWaveform: TLabel
-      AnchorSideTop.Control = spnSubSize
+      AnchorSideTop.Control = cboSubFont
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 20
-      Top = 400
+      Top = 434
       Width = 73
       BorderSpacing.Top = 25
       Caption = 'Waveform'
@@ -1042,7 +1065,7 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 20
-      Top = 437
+      Top = 471
       Width = 36
       Caption = 'Color'
       ParentColor = False
@@ -1052,7 +1075,7 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 310
       Height = 31
-      Top = 432
+      Top = 466
       Width = 100
       BorderSpacing.Top = 12
       BorderWidth = 2
@@ -1065,7 +1088,7 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrCenter
       Left = 0
       Height = 20
-      Top = 474
+      Top = 508
       Width = 33
       Caption = 'Entry'
       ParentColor = False
@@ -1075,7 +1098,7 @@ object frmSettings: TfrmSettings
       AnchorSideTop.Side = asrBottom
       Left = 310
       Height = 31
-      Top = 469
+      Top = 503
       Width = 100
       BorderSpacing.Top = 6
       BorderWidth = 2
