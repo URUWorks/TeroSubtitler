@@ -264,6 +264,7 @@ begin
     UseTextBackgroundColor := False;
     TextPosition           := 'bottom';
     TextSize               := 40;
+    TextFont               := '';
     TextShadowOffset       := 2;
     AutoStartPlaying       := False;
     PreviewFrameOnDrag     := True;
@@ -673,6 +674,7 @@ begin
         UseTextBackgroundColor := GetValue('UseTextBackgroundColor', UseTextBackgroundColor);
         TextPosition := GetValue('TextPosition', TextPosition);
         TextSize := GetValue('TextSize', TextSize);
+        TextFont := GetValue('TextFont', TextFont);
         TextShadowOffset := GetValue('TextShadowOffset', TextShadowOffset);
         MPV.RendererMode := TMPVPlayerRenderMode(GetValue('RendererMode', Integer({$IFDEF WINDOWS}rmEmbedding{$ELSE}rmOpenGL{$ENDIF})));
         SeekTime         := GetValue('SeekTime', 5000);
@@ -712,6 +714,7 @@ begin
         OpenKey('WAVE');
         LoopCount := GetValue('LoopCount', LoopCount);
         frmMain.WAVE.DrawGAP := GetValue('DrawGAP', False);
+        frmMain.WAVE.SubtitlesPercent := GetValue('SubtitlesPercent', 50);
         // colors chosen in Settings (the theme's ones if not)
         ColorThemeInstance.CustomWaveColor := TColor(GetValue('CustomWaveColor', Integer(clNone)));
         ColorThemeInstance.CustomWaveItemColor := TColor(GetValue('CustomWaveItemColor', Integer(clNone)));
@@ -1192,6 +1195,7 @@ begin
         SetValue('UseTextBackgroundColor', UseTextBackgroundColor);
         SetValue('TextPosition', TextPosition);
         SetValue('TextSize', TextSize);
+        SetValue('TextFont', TextFont);
         SetValue('TextShadowOffset', TextShadowOffset);
         SetValue('RendererMode', Integer(MPV.RendererMode));
         SetValue('SeekTime', SeekTime);
@@ -1219,6 +1223,7 @@ begin
         SetValue('ViewShotChanges', frmMain.actViewShotChange.Checked);
         SetValue('CenterWaveform', frmMain.actCenterWaveform.Checked);
         SetValue('DrawGAP', frmMain.WAVE.DrawGAP);
+        SetValue('SubtitlesPercent', frmMain.WAVE.SubtitlesPercent);
         SetValue('CustomWaveColor', Integer(ColorThemeInstance.CustomWaveColor));
         SetValue('CustomWaveItemColor', Integer(ColorThemeInstance.CustomWaveItemColor));
         CloseKey;
