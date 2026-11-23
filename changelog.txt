@@ -123,7 +123,7 @@
 - fixed: Loading a subtitle with a different frame rate mode left the time fields and waveform in the previous timecode mode
 - fixed: Tero’s own file dialog used a wrong FPS value
 - fixed: The timeline didn’t follow the playback after a transcription (except when adding subtitles while transcribing)
-- fixed: Pasting entries copied from the list into the text box pasted the internal clipboard format, now only their texts are pasted
+- fixed: Pasting entries copied from the list into the text box pasted the internal clipboard format; now only their texts are pasted
 - fixed: Auto break treated any hyphen as a dialog dash (“Co-starring” was broken in two lines)
 - fixed: Audio to text, Whisper could repeat the same line many times; now it doesn’t use the previous text as context and the repetitions are removed
 - fixed: Linux downloaded the ARM build of yt-dlp on x86_64 computers
@@ -155,7 +155,7 @@
 - fixed: File extension added twice when saving
 - fixed: "Paste as translations" renamed to "Paste texts as translations"
 - changed: Whisper.cpp now downloads UW_WhisperCPP (Windows 7+, macOS 10.11+, Linux glibc 2.17+), with GPU support via Vulkan on Windows/Linux x64 and Metal on Apple Silicon
-- changed: [macOS] removed the menu items added by the system that Tero doesn’t use
+- changed: [macOS] Removed the menu items added by the system that Tero doesn’t use
 - changed: [macOS] Convention profiles are saved in the user folder instead of inside the app
 - changed: Faster-Whisper now downloads UW_FasterWhisper, and asks before downloading the optional NVIDIA GPU libraries
 - changed: Smart case starts a sentence on song lines (♪) and after a “--” interruption at the end of an entry
@@ -164,7 +164,7 @@
 - changed: Shot changes, Sensitivity is grouped with the detection app and disabled when the method doesn’t use it
 - changed: Projects are saved as .tero1 and include the shot changes and the timeline thumbnails, so they are not generated again when the project is opened (.stp projects are still opened)
 - changed: With several entries selected, the start/end time controls shift that time of each entry (it beeps if any can't move further); Shift + up/down moves the whole entries keeping their durations
-- improved: [macOS] now uses the standalone yt-dlp, which can update itself
+- improved: [macOS] Now uses the standalone yt-dlp, which can update itself
 - improved: [SubtitleAPI] Cavena 890 & EBU (accents, special chars, tags, language/code page and alignment)
 - improved: [SubtitleAPI] Cheetah & Cheetah Caption (italics, accents, line breaks)
 - improved: [SubtitleAPI] WebVTT (cues without hours, identifiers, NOTE/STYLE blocks, voices with spaces, align:start/end, line:0, escaped text, STYLE colors)
@@ -190,13 +190,13 @@
 - improved: Faster waveform drawing (shot changes, subtitle lookup)
 - improved: Typing with "mpv handles subtitles" no longer rewrites the temp track on every key
 - improved: Language names are now shown in their own language
-- improved: Media loaded from a url shows its title instead of the url
+- improved: Media loaded from a URL shows its title instead of the URL
 - improved: [macOS] Enabled buttons and the timeline grid are easier to see
 - improved: When saving to iTT fails, the error lists the entries that don’t comply and selects them
 - added: Shot changes built-in detection (frame exact cuts, dissolves and fades, ignoring flashes and camera motion)
 - added: [Windows] Whisper.cpp download for ARM64
 - added: [Linux] Whisper.cpp download for ARM64 (aarch64)
-- added: iTT has its own language in Format properties
+- added: iTT has its own entity in Format properties
 - added: Extract waveform also works with online media (opened from URL)
 - added: Extend start/end to shot change
 - added: Offer to round to frames the timings in milliseconds when loading a subtitle
@@ -217,7 +217,7 @@
 - added: “Update” button for yt-dlp in Settings/Tools
 - added: File/Import.Plain text…, creates the entries from a transcription without times with a preview, and optionally synchronizes them with the audio
 - added: Audio to text, the hallucinations of the silences (“Subtitles by”…) are removed and the fragments of one or two words are joined with the next entry
-- added: Elapsed time in the status bar while a media url is loading
+- added: Elapsed time in the status bar while a media URL is loading
 - added: Language (xml:lang) option for iTT, Timed Text and Netflix Timed Text formats, read from the file when loading
 - added: [macOS] Support for multimedia keys on macOS (10.12.2+) #236
 - added: Add support for smart quotes #214
