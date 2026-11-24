@@ -1997,7 +1997,7 @@ begin
       s := '';
       for i := 0 to ComponentCount-1 do
         if (Components[i] is TAction) and TAction(Components[i]).Checked and
-          (Components[i].Name.StartsWith('actVideoFilter') or Components[i].Name.StartsWith('actAudioFilter')) then
+          ((Pos('actVideoFilter', Components[i].Name) = 1) or (Pos('actAudioFilter', Components[i].Name) = 1)) then
           s := s + Components[i].Name + ';';
       // ';' when none (an empty value would remove the key: "none" must
       // uncheck the filters when it's opened)
@@ -2043,7 +2043,7 @@ begin
         s := ';' + st.Values['Filters'];
         for i := 0 to ComponentCount-1 do
           if (Components[i] is TAction) and
-            (Components[i].Name.StartsWith('actVideoFilter') or Components[i].Name.StartsWith('actAudioFilter')) then
+            ((Pos('actVideoFilter', Components[i].Name) = 1) or (Pos('actAudioFilter', Components[i].Name) = 1)) then
             TAction(Components[i]).Checked := Pos(';' + Components[i].Name + ';', s) > 0;
         MPVSetFilters;
       end;
