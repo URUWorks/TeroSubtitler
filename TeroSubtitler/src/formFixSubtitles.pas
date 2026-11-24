@@ -244,7 +244,7 @@ begin
 
   // select several entries (Shift/Cmd) and check or uncheck them at once
   VST.TreeOptions.SelectionOptions := VST.TreeOptions.SelectionOptions + [toMultiSelect];
-  VSTAddColumn(VST, lngfsIndex, 75);
+  VSTAddColumn(VST, lngfsIndex, 90);
   VSTAddColumn(VST, lngfsAction, 50, taLeftJustify);
   VSTAddColumn(VST, lngfsCurrent, 50, taLeftJustify);
   VSTAddColumn(VST, lngfsAfter, 50, taLeftJustify);

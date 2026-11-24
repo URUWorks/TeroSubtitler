@@ -155,11 +155,14 @@ object frmFixSubtitles: TfrmFixSubtitles
       ParentColor = False
     end
     object cboSpacingHyphen: TComboBox
+      AnchorSideBottom.Control = lyoLeft
+      AnchorSideBottom.Side = asrBottom
       Left = 240
       Height = 28
-      Top = 670
+      Top = 669
       Width = 235
       Anchors = [akLeft, akRight, akBottom]
+      BorderSpacing.Bottom = 1
       ItemHeight = 20
       Style = csDropDownList
       TabOrder = 4
