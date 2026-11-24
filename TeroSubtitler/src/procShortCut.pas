@@ -54,7 +54,14 @@ var
 begin
   if not FileExists(AFileName) then Exit;
 
-  FileStream := TFileStream.Create(AFileName, fmOpenRead);
+  // read only and shared: in Windows fmOpenRead alone opens the file in
+  // exclusive mode and fails if another process has it open (the antivirus,
+  // another instance of Tero...). Without the file, the default shortcuts.
+  try
+    FileStream := TFileStream.Create(AFileName, fmOpenRead or fmShareDenyNone);
+  except
+    Exit;
+  end;
   try
     Parser := TJSONParser.Create(FileStream);
     ZeroArray := TJSONArray.Create;
@@ -114,7 +121,13 @@ begin
       Exit;
     end;
 
-  FileStream := TFileStream.Create(FileName, fmCreate);
+  // without write permissions or with the file locked: an error, not a crash
+  try
+    FileStream := TFileStream.Create(FileName, fmCreate);
+  except
+    ShowErrorMessageDialog(lngSaveSubtitleError);
+    Exit;
+  end;
   try
     joData := TJSONObject.Create;
     jaData := TJSONArray.Create;
