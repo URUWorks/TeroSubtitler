@@ -76,6 +76,20 @@ uses
   procTypes, UWSubtitles.Utils, UWSystem.StrUtils, UWSubtitleAPI.Tags, Math,
   UWSystem.TimeUtils, UWSystem.SysUtils, procSubtitle;
 
+const
+  // the fixes of the times, the ones that are repeated until nothing changes
+  TimeErrors: TSubtitleErrorTypeSet = [etTimeTooShort, etTimeTooLong,
+    etBadValues, etOverlapping, etSnapToShotChanges, etChaining];
+  SnapErrors: TSubtitleErrorTypeSet = [etSnapToShotChanges,
+    etSnapToShotChangesInCue, etSnapToShotChangesOutCue,
+    etSnapToShotChangesInCueAway];
+  // the fixes of one pass can leave work for another one (a snap moves the
+  // start that the chaining of the previous one used, a fixed duration puts
+  // an end near a shot change...), so the passes are repeated with the times
+  // already fixed until nothing changes. A few are enough, it's a limit only
+  // in case two rules keep undoing each other
+  MaxFixPasses = 10;
+
 // -----------------------------------------------------------------------------
 
 function FindBestShotCutMs(const AShotChanges: TIntegerDynArray; const ATimeMs: Integer): Integer;
@@ -198,14 +212,95 @@ end;
 
 procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile: PProfileItem = NIL; const AShotChanges: TIntegerDynArray = NIL);
 
+var
+  FixedItem : TSubtitleInfoItem;
+  PrevFixed : TSubtitleInfoItem;
+  i, x, z   : Integer;
+  MinDurMs  : Integer;
+  tmp, s    : String;
+  ocr       : TUWOCRScript;
+  GapMs     : Integer;
+
+  prevSnapFT,
+  SnapMs, ShotCut,
+  ThresholdMs,
+  InCue, OutCue,
+  ChainingMS : Integer;
+  NextIT     : Integer;
+  SnapAway : Boolean;
+  Straightened : Boolean;
+  SnapEnabled : Boolean;
+  HalfFrameMs : Integer;
+  ChainFPS    : Double;
+  WIT, WFT    : array of Integer; // times as they are at the start of a pass
+  WText       : array of String;
+  Removed     : array of Boolean;
+  NoChange    : array of Boolean;
+  HasPrev     : Boolean;
+  Nx          : Integer; // the next entry (that is not removed), or -1
+  Errs        : TSubtitleErrorTypeSet;
+  Pass, PassStart : Integer;
+  TimesChanged : Boolean;
+  DurMs       : Integer;
+  Seen        : TDictionary<Int64, Boolean>;
+  Key         : Int64;
+
+
   procedure ClearItem(var AFixedItem: TSubtitleInfoItem; const Index: Integer);
   begin
     AFixedItem.Index       := Index;
     AFixedItem.Apply       := True;
-    AFixedItem.InitialTime := FSubtitles[Index].InitialTime;
-    AFixedItem.FinalTime   := FSubtitles[Index].FinalTime;
-    AFixedItem.Text        := SourceText(Index);
+    AFixedItem.InitialTime := WIT[Index];
+    AFixedItem.FinalTime   := WFT[Index];
+    AFixedItem.Text        := WText[Index];
     AFixedItem.ErrorsFixed := [etNone];
+  end;
+
+  // same frame (in frames mode) or same ms: moving it changes nothing that
+  // can be seen, and an item showing the same timecode was always in the list
+  function SameTime(const A, B: Integer): Boolean;
+  begin
+    if (Workspace.WorkMode = wmFrames) and (ChainFPS > 0) then
+      Result := TimeToFrames(A, ChainFPS) = TimeToFrames(B, ChainFPS)
+    else
+      Result := A = B;
+  end;
+
+  // a shot change other than ACut closer than the threshold to ATime
+  function NearOtherShotCut(const ATime, ACut: Integer): Boolean;
+  begin
+    Result := (FirstShotCutIn(AShotChanges, ATime - ThresholdMs + 1, ACut - 1) >= 0) or
+      (FirstShotCutIn(AShotChanges, ACut + 1, ATime + ThresholdMs - 1) >= 0);
+  end;
+
+  function TimeKind(const AErrors: TSubtitleErrorTypeSet): Integer;
+  var
+    e: TSubtitleErrorType;
+  begin
+    if AErrors * SnapErrors <> [] then
+      Result := Ord(etSnapToShotChanges)
+    else if etOverlappingWithNext in AErrors then
+      Result := Ord(etOverlappingWithNext)
+    else
+    begin
+      Result := -1;
+      for e := Low(TSubtitleErrorType) to High(TSubtitleErrorType) do
+        if e in AErrors then
+        begin
+          Result := Ord(e);
+          Break;
+        end;
+    end;
+  end;
+
+  function IsTimeItem(const AErrors: TSubtitleErrorTypeSet): Boolean;
+  begin
+    Result := AErrors * (TimeErrors + SnapErrors + [etOverlappingWithPrev, etOverlappingWithNext]) <> [];
+  end;
+
+  function IsRemoveItem(const AErrors: TSubtitleErrorTypeSet): Boolean;
+  begin
+    Result := (etEmpty in AErrors) or (etProhibitedChars in AErrors) or (etRepeatedSubtitle in AErrors);
   end;
 
   // time +/- the overlap gap. In frames mode the gap is at least one frame
@@ -248,27 +343,6 @@ procedure TSubtitleInfoList.FixErrors(const OCRFile: String = ''; const Profile:
     end;
   end;
 
-var
-  FixedItem : TSubtitleInfoItem;
-  PrevFixed : TSubtitleInfoItem;
-  i, x, z   : Integer;
-  MinDurMs  : Integer;
-  tmp, s    : String;
-  ocr       : TUWOCRScript;
-  GapMs     : Integer;
-
-  prevSnapFT,
-  SnapMs, ShotCut,
-  ThresholdMs,
-  InCue, OutCue,
-  ChainingMS : Integer;
-  NextIT     : Integer;
-  SnapAway : Boolean;
-  Straightened : Boolean;
-  SnapEnabled : Boolean;
-  HalfFrameMs : Integer;
-  ChainFPS    : Double;
-
 begin
   if (FSubtitles = NIL) or (Profile = NIL) or (FSubtitles.Count = 0) then Exit;
 
@@ -284,17 +358,46 @@ begin
   // half a frame: under it the difference is rounding of the ms, not a frame
   ChainFPS    := Workspace.FPS.OutputFPS.FPS;
   HalfFrameMs := Max(1, FramesToTime(1, ChainFPS) div 2);
+  SetLength(WIT, FSubtitles.Count);
+  SetLength(WFT, FSubtitles.Count);
+  SetLength(WText, FSubtitles.Count);
+  SetLength(Removed, FSubtitles.Count);
+  for i := 0 to FSubtitles.Count-1 do
+  begin
+    WIT[i]   := FSubtitles[i].InitialTime;
+    WFT[i]   := FSubtitles[i].FinalTime;
+    WText[i] := SourceText(i);
+    Removed[i] := False;
+  end;
   ocr := TUWOCRScript.Create(OCRFile);
   try
+   Pass := 0;
+   repeat
+    Inc(Pass);
+    PassStart := Count;
+    // the texts are fixed in the first pass, the next ones only the times
+    if Pass = 1 then
+      Errs := FErrors
+    else
+      Errs := FErrors * TimeErrors;
+    prevSnapFT := 0;
+    HasPrev    := False;
+
     for i := 0 to FSubtitles.Count-1 do
     begin
+      // an entry that will be removed (empty...) is not there for the times
+      // of its neighbours from the second pass
+      if Removed[i] then Continue;
+      Nx := i + 1;
+      while (Nx < FSubtitles.Count) and Removed[Nx] do Inc(Nx);
+      if Nx >= FSubtitles.Count then Nx := -1;
       ClearItem(FixedItem, i);
 
       // -- Texts
 
       //ClearItem(FixedItem, i);
       // Repeated subtitle
-      if etRepeatedSubtitle in FErrors then
+      if etRepeatedSubtitle in Errs then
       begin
         if (i > 0) and (FixedItem.InitialTime = FSubtitles[i-1].InitialTime) and
           (FixedItem.FinalTime = FSubtitles[i-1].FinalTime) and (FixedItem.Text = SourceText(i-1)) then
@@ -306,7 +409,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Unnecessary Dots
-      if etUnnecessaryDots in FErrors then
+      if etUnnecessaryDots in Errs then
       begin
         tmp := RemoveUnnecessaryDots(FixedItem.Text);
         if FixedItem.Text <> tmp then
@@ -319,7 +422,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Unnecessary Spaces
-      if etUnnecessarySpaces in FErrors then
+      if etUnnecessarySpaces in Errs then
       begin
         tmp := RemoveUnnecessarySpaces(FixedItem.Text);
         if FixedItem.Text <> tmp then
@@ -332,7 +435,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Ellipses dots to single smart character
-      if etEllipsesSingleSmartCharacter in FErrors then
+      if etEllipsesSingleSmartCharacter in Errs then
       begin
         tmp := ReplaceString(FixedItem.Text, '...', '…');
         if FixedItem.Text <> tmp then
@@ -345,7 +448,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Repeated chars
-      if etRepeatedChars in FErrors then
+      if etRepeatedChars in Errs then
       begin
         if HasRepeatedChar(FixedItem.Text, Profile^.RepeatableChars) then
         begin
@@ -361,7 +464,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Prohibited chars
-      if etProhibitedChars in FErrors then
+      if etProhibitedChars in Errs then
       begin
         if HasProhibitedChars(FixedItem.Text, Profile^.ProhibitedChars) then
         begin
@@ -372,7 +475,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Incomplete opening hyphen text
-      if etIncompleteHyphenText in FErrors then
+      if etIncompleteHyphenText in Errs then
       begin
         tmp := FixIncompleteOpenedHyphen(FixedItem.Text);
         if FixedItem.Text <> tmp then
@@ -385,7 +488,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Spacing of opening hyphen (Add or Remove)
-      if etSpaceOfOpeningHyphen in FErrors then
+      if etSpaceOfOpeningHyphen in Errs then
       begin
         tmp := SpacingOfOpeningHyphen(FixedItem.Text, Profile^.AddHyphenSpace);
         if FixedItem.Text <> tmp then
@@ -398,7 +501,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Remove spaces within brackets
-      if etRemoveSpacesWithinBrackets in FErrors then
+      if etRemoveSpacesWithinBrackets in Errs then
       begin
         tmp := RemoveSpacesWithinBrackets(FixedItem.Text);
         if FixedItem.Text <> tmp then
@@ -411,7 +514,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Fix interrobang
-      if etFixInterrobang in FErrors then
+      if etFixInterrobang in Errs then
       begin
         tmp := FixInterrobang(FixedItem.Text);
         if FixedItem.Text <> tmp then
@@ -424,7 +527,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Unbreak if chars is less than X
-      if etUnbreak in FErrors then
+      if etUnbreak in Errs then
       begin
         s   := RemoveTSTags(FixedItem.Text);
         tmp := UnbreakSubtitlesIfLessThanChars(s, GetCPL(Profile^, '')); // result is one line
@@ -437,7 +540,7 @@ begin
       end;
 
       // Hearing impaired
-      if etHearingImpaired in FErrors then
+      if etHearingImpaired in Errs then
       begin
         if IsHearingImpaired(FixedItem.Text, AppOptions.HIRoundBrackets) then
         begin
@@ -453,7 +556,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Fix Tags
-      if etFixTags in FErrors then
+      if etFixTags in Errs then
       begin
         tmp := FixTags(FixedItem.Text, tst_StartTag, tst_EndTag);
         if FixedItem.Text <> tmp then
@@ -474,7 +577,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Cleanup Tags
-      if etCleanupTags in FErrors then
+      if etCleanupTags in Errs then
       begin
         tmp := CleanupTags(FixedItem.Text, [tst_Bold, tst_Italic, tst_Underline, tst_Strikeout]);
         if FixedItem.Text <> tmp then
@@ -488,7 +591,7 @@ begin
       //ClearItem(FixedItem, i);
       Straightened := False;
       // Fix brackets, ]switched[, (mismatched], empty ()
-      if etFixBrackets in FErrors then
+      if etFixBrackets in Errs then
       begin
         tmp := FixBrackets(FixedItem.Text);
         if FixedItem.Text <> tmp then
@@ -501,7 +604,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Curly quotes to straight
-      if etCurlyToStraightQuotes in FErrors then
+      if etCurlyToStraightQuotes in Errs then
       begin
         tmp := CurlyToStraightQuotes(FixedItem.Text);
         if FixedItem.Text <> tmp then
@@ -517,7 +620,7 @@ begin
       // Straight quotes to curly, they are opposite, with both (the estimate of
       // the dialog has all) only the first one changes the entry, so the count
       // of each one is the same as when it's the only one enabled
-      if (etStraightToCurlyQuotes in FErrors) and not Straightened then
+      if (etStraightToCurlyQuotes in Errs) and not Straightened then
       begin
         tmp := StraightToCurlyQuotes(FixedItem.Text, AppOptions.QuoteStyle);
         if FixedItem.Text <> tmp then
@@ -530,7 +633,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Break long lines
-      if etBreakLongLines in FErrors then
+      if etBreakLongLines in Errs then
       begin
         if HasTooLongLine(RemoveTSTags(FixedItem.Text), GetCPL(Profile^, FixedItem.Text)) then //and (Pos(sLineBreak, FixedItem.Text) = 0) then
         begin
@@ -546,7 +649,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // OCR
-      if etOCR in FErrors then
+      if etOCR in Errs then
       begin
         if ocr.HasErrors(FixedItem.Text) then
         begin
@@ -562,7 +665,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Empty subtitle
-      if (etEmpty in FErrors) then
+      if (etEmpty in Errs) then
       begin
         // the entry is removed, an untranslated one is not empty
         if (FixedItem.Text = '') and (FSubtitles[i].Text = '') then
@@ -576,11 +679,14 @@ begin
 
       //ClearItem(FixedItem, i);
       // Time too short
-      if etTimeTooShort in FErrors then
+      if etTimeTooShort in Errs then
       begin
+        // it fits before the next one with the min gap (before it was
+        // compared with next start - pause, that is its own end, so only the
+        // last entry was ever fixed)
         if (GetItemDuration(FixedItem) < Profile^.MinDuration) then
-          if ((i < FSubtitles.Count-1) and (FixedItem.InitialTime + Profile^.MinDuration < FSubtitles[i+1].InitialTime - GetCorrectPause(i))) or
-            (i = FSubtitles.Count-1) then
+          if ((Nx >= 0) and (FixedItem.InitialTime + Profile^.MinDuration <= WIT[Nx] - GapMs)) or
+            (Nx < 0) then
           begin
             FixedItem.FinalTime   := FixedItem.InitialTime + Profile^.MinDuration;
             FixedItem.ErrorsFixed := [etTimeTooShort];
@@ -590,7 +696,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Time too long
-      if etTimeTooLong in FErrors then
+      if etTimeTooLong in Errs then
       begin
         if GetItemDuration(FixedItem) > Profile^.MaxDuration then
         begin
@@ -602,7 +708,7 @@ begin
 
       //ClearItem(FixedItem, i);
       // Bad Values
-      if etBadValues in FErrors then
+      if etBadValues in Errs then
       begin
         if FixedItem.InitialTime > FixedItem.FinalTime then
         begin
@@ -616,9 +722,9 @@ begin
 
       //ClearItem(FixedItem, i);
       // Overlapping
-      if etOverlapping in FErrors then
+      if etOverlapping in Errs then
       begin
-        if i > 0 then
+        if HasPrev then
         begin
           // the end of the previous one as it is fixed in this same pass (its
           // duration, shot change or chaining fix), not the one in the list:
@@ -652,13 +758,16 @@ begin
       // (end = cut - OutCue, start = cut + InCue) instead of their current
       // times, so a list already snapped with another profile (e.g. Netflix)
       // is fully checked again with the new one.
-      if (etSnapToShotChanges in FErrors) and (AShotChanges <> NIL) and (Length(AShotChanges) > 0) then
+      if (etSnapToShotChanges in Errs) and (AShotChanges <> NIL) and (Length(AShotChanges) > 0) then
       begin
         FixedItem.ErrorsFixed := [];
+        // the duration it has now (before: the one in the list, so one made
+        // longer by "time too short" was only snapped the next time)
+        DurMs := FixedItem.FinalTime - FixedItem.InitialTime;
         // In Cue
         ShotCut := FindBestShotCutMs(AShotChanges, FixedItem.InitialTime);
         if (ShotCut >= 0) and (Abs(ShotCut - FixedItem.InitialTime) < ThresholdMs) and
-           (FSubtitles.Duration[i] >= Profile^.MinDuration) then
+           (DurMs >= Profile^.MinDuration) then
         begin
           SnapAway := True;
           if (Abs(ShotCut - FixedItem.InitialTime) <= SnapMs) then
@@ -671,8 +780,20 @@ begin
           else
             z := ShotCut - ThresholdMs;
 
-          // prevSnapFT is the final end time of the previous subtitle
-          if ((i = 0) or (z >= prevSnapFT + GapMs)) and (FixedItem.InitialTime <> z) then
+          // a shot shorter than two thresholds: away from this shot change
+          // it falls in the threshold of the other one, and the next time it
+          // was moved back (it never stopped). It goes to the shot change
+          if SnapAway and NearOtherShotCut(z, ShotCut) then
+          begin
+            z := ShotCut + InCue;
+            SnapAway := False;
+          end;
+
+          // prevSnapFT is the final end time of the previous subtitle. The
+          // gap is checked as the overlap fix does (in frames, in frames
+          // mode): in ms it could be a frame short, the overlap fix moved the
+          // start and the snap moved it back again
+          if (not HasPrev or not StartTooClose(z, prevSnapFT, GapMs)) and not SameTime(FixedItem.InitialTime, z) then
           begin
             FixedItem.InitialTime := z;
             if SnapAway then
@@ -685,13 +806,13 @@ begin
         // Out Cue
         ShotCut := FindBestShotCutMs(AShotChanges, FixedItem.FinalTime);
         if (ShotCut >= 0) and (Abs(ShotCut - FixedItem.FinalTime) < ThresholdMs) and
-           (FSubtitles.Duration[i] >= Profile^.MinDuration) then
+           (DurMs >= Profile^.MinDuration) then
         begin
           // start of the next subtitle: if it starts at this same cut it will
           // be moved to cut + InCue, so use that position
-          if i+1 < FSubtitles.Count then
+          if Nx >= 0 then
           begin
-            NextIT := FSubtitles[i+1].InitialTime;
+            NextIT := WIT[Nx];
             if Abs(ShotCut - NextIT) <= SnapMs then
               NextIT := ShotCut + InCue;
           end
@@ -699,7 +820,10 @@ begin
             NextIT := MaxInt div 2;
 
           z := FixedItem.FinalTime;
-          if (Abs(ShotCut - FixedItem.FinalTime) <= SnapMs) then
+          // away from it would fall in the threshold of another shot change
+          // (a short shot): to the shot change, the same as inside the snap
+          if (Abs(ShotCut - FixedItem.FinalTime) <= SnapMs) or
+             NearOtherShotCut(ShotCut + ThresholdMs, ShotCut) then
           begin
             if (ShotCut - OutCue) <= (NextIT - GapMs) then
               z := ShotCut - OutCue;
@@ -707,7 +831,13 @@ begin
           else if (ShotCut + ThresholdMs) <= (NextIT - GapMs) then
             z := ShotCut + ThresholdMs;
 
-          if (FixedItem.FinalTime <> z) and (z > FixedItem.InitialTime) then
+          // not shorter than the min duration or longer than the max one:
+          // "time too short/long" changed it again and each pass undid the
+          // other one
+          if not SameTime(FixedItem.FinalTime, z) and (z > FixedItem.InitialTime) and
+             ((z > FixedItem.FinalTime) or (z - FixedItem.InitialTime >= Profile^.MinDuration)) and
+             ((z < FixedItem.FinalTime) or not (etTimeTooLong in Errs) or (Profile^.MaxDuration <= 0) or
+              (z - FixedItem.InitialTime <= Profile^.MaxDuration)) then
           begin
             FixedItem.FinalTime   := z;
             FixedItem.ErrorsFixed := FixedItem.ErrorsFixed + [etSnapToShotChangesOutCue];
@@ -732,14 +862,17 @@ begin
       //   had to be more than one frame: with 2 frames of min gap, 3 stayed)
       // - with a shot change in the gap it's chained up to the shot change
       //   (cut - out cue), not across it: the snap moved it back every pass
-      if (etChaining in FErrors) and (i+1 < FSubtitles.Count) then
+      if (etChaining in Errs) and (Nx >= 0) then
       begin
-        NextIT := FSubtitles[i+1].InitialTime;
-        if SnapEnabled and (FSubtitles.Duration[i+1] >= Profile^.MinDuration) then
+        NextIT := WIT[Nx];
+        if SnapEnabled and ((WFT[Nx] - WIT[Nx]) >= Profile^.MinDuration) then
           NextIT := StartAfterShotCutSnap(NextIT, AShotChanges, SnapMs, ThresholdMs, InCue);
         if (NextIT - FixedItem.FinalTime) < ChainingMS then
         begin
-          z := NextIT - GapMs;
+          // the min gap in whole frames (in frames mode), as the overlap fix
+          // and the timecodes count it: NextIT - GapMs in ms could be a frame
+          // less than the min gap
+          z := OverlapGapTime(NextIT, -1, GapMs);
           if SnapEnabled then
           begin
             ShotCut := FirstShotCutIn(AShotChanges, FixedItem.FinalTime + 1, NextIT);
@@ -754,6 +887,12 @@ begin
           else
             x := Ord((z - FixedItem.FinalTime) >= HalfFrameMs);
 
+          // not longer than the max duration: "time too long" cut it again
+          // and each pass undid the other one
+          if (etTimeTooLong in Errs) and (Profile^.MaxDuration > 0) and
+             ((z - FixedItem.InitialTime) > Profile^.MaxDuration) then
+            x := 0;
+
           if x > 0 then
           begin
             FixedItem.FinalTime := z;
@@ -767,9 +906,77 @@ begin
       // for the in cue of the next one (chaining can change the end)
       PrevFixed  := FixedItem;
       prevSnapFT := FixedItem.FinalTime;
+      HasPrev    := True;
     end;
+
+    // the times (and texts) this pass leaves, the last item of each entry
+    // has them all; the next pass starts from there
+    TimesChanged := False;
+    for x := PassStart to Count-1 do
+      with Items[x]^ do
+        if IsRemoveItem(ErrorsFixed) then
+        begin
+          // the neighbours are checked again without it
+          if not Removed[Index] then TimesChanged := True;
+          Removed[Index] := True;
+        end
+        else
+        begin
+          if (WIT[Index] <> InitialTime) or (WFT[Index] <> FinalTime) then
+            TimesChanged := True;
+          WIT[Index]   := InitialTime;
+          WFT[Index]   := FinalTime;
+          WText[Index] := Text;
+        end;
+   until not TimesChanged or (Errs * TimeErrors = []) or (Pass >= MaxFixPasses);
   finally
     ocr.Free;
+  end;
+
+  // an entry whose fixes end where it started (one fix undid another one):
+  // nothing to apply, it was listed every time
+  if Count > 0 then
+  begin
+    SetLength(NoChange, FSubtitles.Count);
+    for i := 0 to FSubtitles.Count-1 do
+      NoChange[i] := False;
+    for x := 0 to Count-1 do
+      with Items[x]^ do
+        if not IsRemoveItem(ErrorsFixed) then
+          NoChange[Index] := (InitialTime = FSubtitles[Index].InitialTime) and
+            (FinalTime = FSubtitles[Index].FinalTime);
+    for x := Count-1 downto 0 do
+      with Items[x]^ do
+        if IsTimeItem(ErrorsFixed) and not IsRemoveItem(ErrorsFixed) and NoChange[Index] and
+          (Text = SourceText(Index)) then
+        begin
+          Dispose(PSubtitleInfoItem(Items[x]));
+          Delete(x);
+        end;
+  end;
+
+  // the same fix of the same entry in more than one pass: only the last one
+  // is listed (it has the final times). The items are applied in order and
+  // the last one of each entry is never removed, so the result is the same
+  if Pass > 1 then
+  begin
+    Seen := TDictionary<Int64, Boolean>.Create;
+    try
+      for x := Count-1 downto 0 do
+        if IsTimeItem(Items[x]^.ErrorsFixed) then
+        begin
+          Key := Int64(Items[x]^.Index) * 256 + TimeKind(Items[x]^.ErrorsFixed);
+          if Seen.ContainsKey(Key) then
+          begin
+            Dispose(PSubtitleInfoItem(Items[x]));
+            Delete(x);
+          end
+          else
+            Seen.Add(Key, True);
+        end;
+    finally
+      Seen.Free;
+    end;
   end;
 end;
 
