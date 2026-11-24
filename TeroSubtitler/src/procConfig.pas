@@ -1879,29 +1879,30 @@ end;
 // -----------------------------------------------------------------------------
 
 function ConventionsFileName: String;
-{$IFDEF DARWIN}
 var
   AppFile: String;
-{$ENDIF}
 begin
-  {$IFDEF DARWIN}
-  // the user's copy: inside the bundle the added, updated or removed profiles
-  // were not saved (read-only/translocated app, replaced when updating it).
+  // the user's copy: the one of the app has the default profiles and it is
+  // replaced when updating it, the added, updated or removed profiles were
+  // lost (macOS: inside the bundle, read-only/translocated app; Windows: the
+  // installer and the .zip of the nightly builds overwrite tero.cfs of the
+  // program folder; Linux: /usr/share is read-only).
   // The first time, it is made from the one of the app.
-  Result := GetUserDir + RootCfg+'/'+RootCfg+'.cfs';
+  {$IFDEF DARWIN}
+  Result  := GetUserDir + RootCfg+'/'+RootCfg+'.cfs';
+  AppFile := GetCustomFolderPath('Resources') + RootCfg+'.cfs';
+  {$ELSE}
+  // %LOCALAPPDATA%\tero\ (Windows), ~/.config/tero/ (Linux)
+  Result  := ConcatPaths([GetAppConfigDir(False), RootCfg+'.cfs']);
+  AppFile := GetCustomFilePath(RootCfg+'.cfs');
+  {$ENDIF}
   if not FileExists(Result) then
   begin
-    AppFile := GetCustomFolderPath('Resources') + RootCfg+'.cfs';
-    if FileExists(AppFile) then
-    begin
-      ForceDirectories(ExtractFileDir(Result));
-      if not CopyFile(AppFile, Result) then
-        Result := AppFile;
-    end;
+    // the folder also without the file of the app (to save the profiles)
+    ForceDirectories(ExtractFileDir(Result));
+    if FileExists(AppFile) and not CopyFile(AppFile, Result) then
+      Result := AppFile;
   end;
-  {$ELSE}
-  Result := GetCustomFilePath(RootCfg+'.cfs');
-  {$ENDIF}
 end;
 
 // -----------------------------------------------------------------------------
