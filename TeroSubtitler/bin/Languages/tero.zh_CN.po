@@ -851,8 +851,8 @@ msgid "Text files"
 msgstr "文本文件"
 
 #: proclocalize.lngprojectfile
-msgid "Subtitle Translation Project"
-msgstr "字幕翻译项目"
+msgid "Tero Subtitler Project"
+msgstr "Tero Subtitler 项目"
 
 #: proclocalize.lngpromptfordeletelines
 msgid "The selected entries will be deleted."
@@ -1142,6 +1142,14 @@ msgstr "加粗：不允许。会被移除。"
 #: proclocalize.lngspeccolor
 msgid "Color: not allowed. It will be removed."
 msgstr "颜色：不允许。会被移除。"
+
+#: proclocalize.lngspecpartialbold
+msgid "Bold in part of the text: only bold in the whole entry is allowed. It will be removed (the text is kept)."
+msgstr ""
+
+#: proclocalize.lngspecpartialcolor
+msgid "Color in part of the text (or several colors): only one color for the whole entry is allowed. It will be removed (the text is kept)."
+msgstr ""
 
 #: proclocalize.lngspecentries
 #, object-pascal-format
@@ -3694,8 +3702,8 @@ msgid "Forward 1 second"
 msgstr "前进 1 秒"
 
 #: tfrmmain.actmediamovesubtitleentry.caption
-msgid "Move entry"
-msgstr "移动条目"
+msgid "Move entry to playback position"
+msgstr "将条目移动到播放位置"
 
 #: tfrmmain.actmedianextframe.caption
 msgctxt "tfrmmain.actmedianextframe.caption"
@@ -3945,8 +3953,12 @@ msgid "Round times..."
 msgstr "简化时间..."
 
 #: tfrmmain.actsaveproject.caption
-msgid "Save project..."
-msgstr "保存项目..."
+msgid "Save project"
+msgstr "保存项目"
+
+#: tfrmmain.actsaveprojectas.caption
+msgid "Save project as..."
+msgstr "项目另存为..."
 
 #: tfrmmain.actsavesubtitle.caption
 msgctxt "tfrmmain.actsavesubtitle.caption"

@@ -867,8 +867,8 @@ msgid "Text files"
 msgstr "Textfiler"
 
 #: proclocalize.lngprojectfile
-msgid "Subtitle Translation Project"
-msgstr "Projekt för undertextöversättning"
+msgid "Tero Subtitler Project"
+msgstr "Tero Subtitler-projekt"
 
 #: proclocalize.lngpromptfordeletelines
 #, fuzzy
@@ -1170,6 +1170,14 @@ msgstr ""
 
 #: proclocalize.lngspeccolor
 msgid "Color: not allowed. It will be removed."
+msgstr ""
+
+#: proclocalize.lngspecpartialbold
+msgid "Bold in part of the text: only bold in the whole entry is allowed. It will be removed (the text is kept)."
+msgstr ""
+
+#: proclocalize.lngspecpartialcolor
+msgid "Color in part of the text (or several colors): only one color for the whole entry is allowed. It will be removed (the text is kept)."
 msgstr ""
 
 #: proclocalize.lngspecentries
@@ -3766,8 +3774,8 @@ msgid "Forward 1 second"
 msgstr "Spola framåt 1 sekund"
 
 #: tfrmmain.actmediamovesubtitleentry.caption
-msgid "Move entry"
-msgstr "Flytta post"
+msgid "Move entry to playback position"
+msgstr "Flytta post till uppspelningspositionen"
 
 #: tfrmmain.actmedianextframe.caption
 msgctxt "tfrmmain.actmedianextframe.caption"
@@ -4019,8 +4027,12 @@ msgid "Round times..."
 msgstr "Avrunda tider..."
 
 #: tfrmmain.actsaveproject.caption
-msgid "Save project..."
-msgstr "Spara projekt..."
+msgid "Save project"
+msgstr "Spara projekt"
+
+#: tfrmmain.actsaveprojectas.caption
+msgid "Save project as..."
+msgstr "Spara projekt som..."
 
 #: tfrmmain.actsavesubtitle.caption
 msgctxt "tfrmmain.actsavesubtitle.caption"

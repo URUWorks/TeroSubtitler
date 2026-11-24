@@ -852,8 +852,8 @@ msgid "Text files"
 msgstr "Metin dosyaları"
 
 #: proclocalize.lngprojectfile
-msgid "Subtitle Translation Project"
-msgstr "Altyazı Çeviri Projesi"
+msgid "Tero Subtitler Project"
+msgstr "Tero Subtitler Projesi"
 
 #: proclocalize.lngpromptfordeletelines
 msgid "The selected entries will be deleted."
@@ -1142,6 +1142,14 @@ msgstr ""
 
 #: proclocalize.lngspeccolor
 msgid "Color: not allowed. It will be removed."
+msgstr ""
+
+#: proclocalize.lngspecpartialbold
+msgid "Bold in part of the text: only bold in the whole entry is allowed. It will be removed (the text is kept)."
+msgstr ""
+
+#: proclocalize.lngspecpartialcolor
+msgid "Color in part of the text (or several colors): only one color for the whole entry is allowed. It will be removed (the text is kept)."
 msgstr ""
 
 #: proclocalize.lngspecentries
@@ -3733,8 +3741,8 @@ msgid "Forward 1 second"
 msgstr "1 saniye ileri sar"
 
 #: tfrmmain.actmediamovesubtitleentry.caption
-msgid "Move entry"
-msgstr "Girişi taşı"
+msgid "Move entry to playback position"
+msgstr "Girişi oynatma konumuna taşı"
 
 #: tfrmmain.actmedianextframe.caption
 msgctxt "tfrmmain.actmedianextframe.caption"
@@ -3984,8 +3992,12 @@ msgid "Round times..."
 msgstr "Zamanları yuvarla..."
 
 #: tfrmmain.actsaveproject.caption
-msgid "Save project..."
-msgstr "Projeyi kaydet..."
+msgid "Save project"
+msgstr "Projeyi kaydet"
+
+#: tfrmmain.actsaveprojectas.caption
+msgid "Save project as..."
+msgstr "Projeyi farklı kaydet..."
 
 #: tfrmmain.actsavesubtitle.caption
 msgctxt "tfrmmain.actsavesubtitle.caption"

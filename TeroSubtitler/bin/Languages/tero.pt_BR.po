@@ -860,8 +860,8 @@ msgid "Text files"
 msgstr "Arquivos de texto"
 
 #: proclocalize.lngprojectfile
-msgid "Subtitle Translation Project"
-msgstr "Projeto de tradução de legenda"
+msgid "Tero Subtitler Project"
+msgstr "Projeto do Tero Subtitler"
 
 #: proclocalize.lngpromptfordeletelines
 #, fuzzy
@@ -1163,6 +1163,14 @@ msgstr ""
 
 #: proclocalize.lngspeccolor
 msgid "Color: not allowed. It will be removed."
+msgstr ""
+
+#: proclocalize.lngspecpartialbold
+msgid "Bold in part of the text: only bold in the whole entry is allowed. It will be removed (the text is kept)."
+msgstr ""
+
+#: proclocalize.lngspecpartialcolor
+msgid "Color in part of the text (or several colors): only one color for the whole entry is allowed. It will be removed (the text is kept)."
 msgstr ""
 
 #: proclocalize.lngspecentries
@@ -3756,8 +3764,8 @@ msgid "Forward 1 second"
 msgstr "Avançar 1 segundo"
 
 #: tfrmmain.actmediamovesubtitleentry.caption
-msgid "Move entry"
-msgstr "Mover entrada"
+msgid "Move entry to playback position"
+msgstr "Mover entrada para a posição de reprodução"
 
 #: tfrmmain.actmedianextframe.caption
 msgctxt "tfrmmain.actmedianextframe.caption"
@@ -4010,8 +4018,12 @@ msgid "Round times..."
 msgstr "Arredondar tempos..."
 
 #: tfrmmain.actsaveproject.caption
-msgid "Save project..."
-msgstr "Salvar projeto..."
+msgid "Save project"
+msgstr "Salvar projeto"
+
+#: tfrmmain.actsaveprojectas.caption
+msgid "Save project as..."
+msgstr "Salvar projeto como..."
 
 #: tfrmmain.actsavesubtitle.caption
 msgctxt "tfrmmain.actsavesubtitle.caption"

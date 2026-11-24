@@ -878,9 +878,8 @@ msgid "Text files"
 msgstr "Besedilne datoteke"
 
 #: proclocalize.lngprojectfile
-#, fuzzy
-msgid "Subtitle Translation Project"
-msgstr ":menuselection:`Projekt --> Podnaslov --> Dodaj podnaslov`"
+msgid "Tero Subtitler Project"
+msgstr "Projekt Tero Subtitler"
 
 #: proclocalize.lngpromptfordeletelines
 #, fuzzy
@@ -1180,6 +1179,14 @@ msgstr ""
 
 #: proclocalize.lngspeccolor
 msgid "Color: not allowed. It will be removed."
+msgstr ""
+
+#: proclocalize.lngspecpartialbold
+msgid "Bold in part of the text: only bold in the whole entry is allowed. It will be removed (the text is kept)."
+msgstr ""
+
+#: proclocalize.lngspecpartialcolor
+msgid "Color in part of the text (or several colors): only one color for the whole entry is allowed. It will be removed (the text is kept)."
 msgstr ""
 
 #: proclocalize.lngspecentries
@@ -3896,8 +3903,8 @@ msgid "Forward 1 second"
 msgstr "Pojdi naprej za 1 sekundo"
 
 #: tfrmmain.actmediamovesubtitleentry.caption
-msgid "Move entry"
-msgstr "Premakni vnos"
+msgid "Move entry to playback position"
+msgstr "Premakni vnos na položaj predvajanja"
 
 #: tfrmmain.actmedianextframe.caption
 msgctxt "tfrmmain.actmedianextframe.caption"
@@ -4172,8 +4179,12 @@ msgid "Round times..."
 msgstr "okrogla"
 
 #: tfrmmain.actsaveproject.caption
-msgid "Save project..."
-msgstr "Shrani projekt …"
+msgid "Save project"
+msgstr "Shrani projekt"
+
+#: tfrmmain.actsaveprojectas.caption
+msgid "Save project as..."
+msgstr "Shrani projekt kot …"
 
 #: tfrmmain.actsavesubtitle.caption
 msgctxt "tfrmmain.actsavesubtitle.caption"
