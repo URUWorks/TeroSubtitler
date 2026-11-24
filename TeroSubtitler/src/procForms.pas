@@ -140,11 +140,30 @@ end;
 
 // -----------------------------------------------------------------------------
 
+{$IFDEF WINDOWS}
+// at startup the main form is still hidden (Application.ShowMainForm = False)
+// and with MainFormOnTaskBar the forms shown before it have no taskbar
+// button: if Windows doesn't let them take the focus (the user clicked
+// another window while Tero was starting), they stay behind the other
+// windows and it seems that Tero didn't open. With their own button they can
+// be found and Windows flashes it.
+procedure ShowOnTaskBarAtStartup(const AForm: TForm);
+begin
+  if not frmMain.Visible then
+    AForm.ShowInTaskBar := stAlways;
+end;
+{$ENDIF}
+
+// -----------------------------------------------------------------------------
+
 procedure ShowWelcome;
 begin
   if frmWelcome = NIL then
   begin
     frmWelcome := TfrmWelcome.Create(Application);
+    {$IFDEF WINDOWS}
+    ShowOnTaskBarAtStartup(frmWelcome);
+    {$ENDIF}
     ShowForm(frmWelcome{$IFDEF DARWIN}, False{$ENDIF});
   end;
 end;
@@ -156,6 +175,9 @@ begin
   if frmWizard = NIL then
   begin
     frmWizard := TfrmWizard.Create(Application);
+    {$IFDEF WINDOWS}
+    ShowOnTaskBarAtStartup(frmWizard);
+    {$ENDIF}
     ShowForm(frmWizard);
   end;
 end;
