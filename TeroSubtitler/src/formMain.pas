@@ -176,6 +176,7 @@ type
     actJumpToNextShotChange: TAction;
     actJumpToPrevShotChange: TAction;
     actSaveProject: TAction;
+    actSaveProjectAs: TAction;
     actLoadProject: TAction;
     actMediaMoveSubtitleEntry: TAction;
     actLoadTranslation: TAction;
@@ -557,6 +558,7 @@ type
     MenuItem170: TMenuItem;
     MenuItem171: TMenuItem;
     MenuItem172: TMenuItem;
+    MenuItem297: TMenuItem;
     MenuItem173: TMenuItem;
     MenuItem174: TMenuItem;
     MenuItem175: TMenuItem;
@@ -1064,6 +1066,9 @@ type
     procedure WAVESceneChangeListChange(Sender: TObject);
     procedure WAVEDynamicEditTime(Sender: TObject; const Time: Integer);
     procedure WAVEKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure VSTKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    function DoTimelineListKey(const Key: Word; const Shift: TShiftState; const AFromTimeline: Boolean): Boolean;
+    procedure KeySelectEntry(const AIndex: Integer; const AExtend: Boolean);
     // formMain_MPV
     procedure MPVClick(Sender: TObject);
     procedure MPVEndFile(ASender: TObject; AReason, AError: Integer);
@@ -1323,6 +1328,7 @@ type
     procedure actActorExecute(Sender: TObject);
     procedure actLoadProjectExecute(Sender: TObject);
     procedure actSaveProjectExecute(Sender: TObject);
+    procedure actSaveProjectAsExecute(Sender: TObject);
     procedure actWebPreviewExecute(Sender: TObject);
     procedure actScreenshotToFileExecute(Sender: TObject);
     procedure actRemoveLineFromEntryExecute(Sender: TObject);
@@ -1388,7 +1394,7 @@ type
   private
     mnuViewProperties: TMenuItem; // View > Subtitle properties
     FThumbnailThread: TThread;    // TGenerateThumbnails, see formMain_WAVE
-    FThumbnailsKey: String;       // video of the thumbnails loaded
+    FThumbnailsKey: String;       // video + crop of the thumbnails loaded
     FURLLoadTimer: TTimer;        // elapsed time while yt-dlp resolves an url
     FURLLoadStart: QWord;
     {$IFDEF LCLCocoa}
@@ -1397,6 +1403,7 @@ type
     FCoolBarsFitted: Boolean;
     FWAVEValuesTimer: TTimer;     // times/CPS while dragging in the timeline
     FWAVESelInStatus: Boolean;    // the status bar shows the timeline selection
+    FKeySelAnchor: Integer;       // Shift+Up/Down in the timeline: where the selection started
     FTimelineWithoutMedia: Boolean; // timeline used without video (its length is the one of the entries)
     // the text doesn't change while an entry is dragged: its length and the
     // label (chars of each line) are calculated once, only the CPS changes
@@ -1544,6 +1551,8 @@ begin
   WAVE.OnSceneChangeListChange := @WAVESceneChangeListChange;
   WAVE.OnDynamicEditTime := @WAVEDynamicEditTime;
   WAVE.OnKeyDown := @WAVEKeyDown;
+  VST.OnKeyDown  := @VSTKeyDown;
+  FKeySelAnchor  := -1;
   FDragIdx := -1;
   // QuickAction
   edtQuickAction.LocalizeFunc := @LocalizeCategory;
@@ -2201,6 +2210,7 @@ begin
   with Sender as TMenuItem do
   begin
     AppOptions.DefChangePlayRate := StrToInt(Copy(Caption, 1, Length(Caption)-1));
+    CheckMenuItemOnly(TMenuItem(Sender)); // the check mark on the current one
     actMediaChangePlayRate.Checked := True;
     vtlb15.Down := actMediaChangePlayRate.Checked;
     actMediaChangePlayRateExecute(NIL);
@@ -2214,6 +2224,7 @@ begin
   with Sender as TMenuItem do
   begin
     WAVEOptions.LoopCount := StrToInt(Caption);
+    CheckMenuItemOnly(TMenuItem(Sender)); // the check mark on the current one
     MPVPlaySelectionOnly;
   end;
 end;

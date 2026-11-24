@@ -1798,6 +1798,9 @@ object frmMain: TfrmMain
       object MenuItem172: TMenuItem
         Action = actSaveProject
       end
+      object MenuItem297: TMenuItem
+        Action = actSaveProjectAs
+      end
       object Separator29: TMenuItem
         Caption = '-'
       end
@@ -2504,7 +2507,6 @@ object frmMain: TfrmMain
           Caption = '-'
         end
         object mnuWorkspaceLayout: TMenuItem
-          AutoCheck = True
           Caption = 'Layouts'
           object MenuItem136: TMenuItem
             Action = actSetGUILayout0
@@ -4195,7 +4197,7 @@ object frmMain: TfrmMain
     object actMediaMoveSubtitleEntry: TAction
       Tag = 4
       Category = 'Video'
-      Caption = 'Move entry'
+      Caption = 'Move entry to playback position'
       OnExecute = actMediaMoveSubtitleEntryExecute
     end
     object actMediaSetInitialTime: TAction
@@ -4339,8 +4341,14 @@ object frmMain: TfrmMain
     object actSaveProject: TAction
       Tag = 1
       Category = 'File'
-      Caption = 'Save project...'
+      Caption = 'Save project'
       OnExecute = actSaveProjectExecute
+    end
+    object actSaveProjectAs: TAction
+      Tag = 1
+      Category = 'File'
+      Caption = 'Save project as...'
+      OnExecute = actSaveProjectAsExecute
     end
     object actLoadTranscription: TAction
       Category = 'File'
