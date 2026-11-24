@@ -746,7 +746,10 @@ begin
   if not DoViParse(Src, Doc) then Exit;
   Num := Doc.RateNum;
   Den := Doc.RateDen;
-  IsSMPTE := Subtitles.TimeBase = stbSMPTE;
+  // the times are real (also in SMPTE, see TimecodeLabelToMS) and they are
+  // read with DoViFramesToMS: before, saved in SMPTE they were taken as of
+  // the nominal rate (0.1% more frames than the ones read)
+  IsSMPTE := False;
 
   Used := NIL;
   SetLength(Used, Length(Doc.Shots));
@@ -816,10 +819,8 @@ var
 begin
   // record frame (of the XML) of a time of the entries
   DoViGetRate(Subtitles, Num, Den);
-  if Subtitles.TimeBase = stbSMPTE then
-    Result := Round(AMS * NominalFPS(Num, Den) / 1000.0)
-  else
-    Result := DoViMSToFrames(AMS, Num, Den);
+  // real times, also in SMPTE (as they are read)
+  Result := DoViMSToFrames(AMS, Num, Den);
   Result := Result + Subtitles.SourceOrigin;
 end;
 
@@ -830,10 +831,8 @@ var
   Num, Den: Integer;
 begin
   DoViGetRate(Subtitles, Num, Den);
-  if Subtitles.TimeBase = stbSMPTE then
-    Result := Round((AFrame - Subtitles.SourceOrigin) * 1000.0 / NominalFPS(Num, Den))
-  else
-    Result := DoViFramesToMS(AFrame - Subtitles.SourceOrigin, Num, Den);
+  // real times, also in SMPTE (as they are read)
+  Result := DoViFramesToMS(AFrame - Subtitles.SourceOrigin, Num, Den);
 end;
 
 // -----------------------------------------------------------------------------

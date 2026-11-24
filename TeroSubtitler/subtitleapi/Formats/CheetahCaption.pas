@@ -51,7 +51,12 @@ uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSystem.SysUtils,
 
 function DecodeTime(const Bytes: TBytes; const Index: Integer; const FPS: Double): Integer;
 begin
-  Result := EncodeTime(Bytes[Index], Bytes[Index + 1], Bytes[Index + 2], FramesToTime(Bytes[Index + 3], FPS));
+  // a timecode (hh mm ss ff): with 23.976/29.97 its frames are counted, they
+  // are not real seconds (see TimecodeLabelToMS)
+  if IsNTSCFPS(FPS) then
+    Result := TimecodeLabelToMS(Bytes[Index], Bytes[Index + 1], Bytes[Index + 2], Bytes[Index + 3], FPS)
+  else
+    Result := EncodeTime(Bytes[Index], Bytes[Index + 1], Bytes[Index + 2], FramesToTime(Bytes[Index + 3], FPS));
 end;
 
 // -----------------------------------------------------------------------------
@@ -66,7 +71,19 @@ end;
 procedure WriteTime(const Stream: TStream; const Time: Cardinal; const FPS: Double);
 var
   HH, MM, SS, MS: Word;
+  H, M, S, F: Integer;
 begin
+  if IsNTSCFPS(FPS) then
+  begin
+    // the timecode of the real time (see TimecodeLabelToMS)
+    MSToTimecodeLabel(Time, FPS, H, M, S, F);
+    WriteByte(Stream, Byte(H));
+    WriteByte(Stream, Byte(M));
+    WriteByte(Stream, Byte(S));
+    WriteByte(Stream, Byte(F));
+    Exit;
+  end;
+
   UWSystem.TimeUtils.DecodeTime(Time, HH, MM, SS, MS);
 
   WriteByte(Stream, Byte(HH));

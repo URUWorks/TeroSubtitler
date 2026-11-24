@@ -1091,9 +1091,8 @@ begin
 
   if ValidIndex(Index) then
   begin
+    // real time, also in SMPTE (see TimecodeLabelToMS): before x1.001
     Result := FList[Index]^.InitialTime;
-    if FTimeBase = stbSMPTE then
-      Result := SMPTEConversion(Result);
   end;
 end;
 
@@ -1124,9 +1123,8 @@ begin
 
   if ValidIndex(Index) then
   begin
+    // real time, also in SMPTE (see TimecodeLabelToMS): before x1.001
     Result := FList[Index]^.FinalTime;
-    if FTimeBase = stbSMPTE then
-      Result := SMPTEConversion(Result);
   end;
 end;
 
@@ -1828,6 +1826,7 @@ var
   OldHeader, OldFooter : String;
   OldSource  : String;
   OldOrigin  : Integer;
+  OldLabelMode : TTimecodeMode;
 
   function DoLoad(const AFormat: TUWSubtitleCustomFormat; const ACodePage: Integer): Boolean;
   begin
@@ -1852,6 +1851,9 @@ var
 begin
   Result := False;
   AList  := NIL;
+  // the hh:mm:ss:ff labels of the file in the timecode mode of its fps
+  OldLabelMode := LabelTimecodeMode;
+  LabelTimecodeMode := FPS.Mode;
   InitializeSubtitleFormats(AList, WriteBOM);
   try
     SubFile := TUWStringList.Create(FileName, Encoding, NameIsFile);
@@ -1914,13 +1916,19 @@ begin
           end;
         end;
     finally
-      if (Self.FFormat <> sfITunesTimedText) and (TimecodeMode = tcDF) then ConvertTimesToSMPTE(True, StartCount);
+      // the times are already real (the labels are read with their timecode
+      // mode, see TimecodeLabelToMS): before, in drop frame they were divided
+      // by 1.001 here (all the formats but iTT, also SubRip and the others in
+      // ms), 3.6 s per hour earlier than the video, and multiplied again only
+      // if they were saved with the SMPTE mode
+      //if (Self.FFormat <> sfITunesTimedText) and (TimecodeMode = tcDF) then ConvertTimesToSMPTE(True, StartCount);
       if FAutoSort then Sort;
       CheckIsRightToLeft; //
       SubFile.Free;
     end;
   finally
     FinalizeSubtitleFormats(AList);
+    LabelTimecodeMode := OldLabelMode;
   end;
 end;
 
@@ -1938,9 +1946,13 @@ var
   AList      : TUWSubtitleCustomFormatList;
   f          : Integer;
   iFrom, iTo : Integer;
+  OldLabelMode : TTimecodeMode;
 begin
   Result := False;
   AList  := NIL;
+  // the hh:mm:ss:ff labels in the timecode mode of the fps
+  OldLabelMode := LabelTimecodeMode;
+  LabelTimecodeMode := FPS.Mode;
   InitializeSubtitleFormats(AList, WriteBOM);
   try
     for f := 0 to AList.Count-1 do
@@ -1957,6 +1969,7 @@ begin
       end;
   finally
     FinalizeSubtitleFormats(AList);
+    LabelTimecodeMode := OldLabelMode;
   end;
 end;
 
@@ -1967,9 +1980,12 @@ var
   AList      : TUWSubtitleCustomFormatList;
   f          : Integer;
   iFrom, iTo : Integer;
+  OldLabelMode : TTimecodeMode;
 begin
   Result := '';
   AList  := NIL;
+  OldLabelMode := LabelTimecodeMode;
+  LabelTimecodeMode := FTimecodeMode;
   InitializeSubtitleFormats(AList, WriteBOM);
   try
     for f := 0 to AList.Count-1 do
@@ -1983,6 +1999,7 @@ begin
       end;
   finally
     FinalizeSubtitleFormats(AList);
+    LabelTimecodeMode := OldLabelMode;
   end;
 end;
 

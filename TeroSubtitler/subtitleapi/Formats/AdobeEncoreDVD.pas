@@ -240,8 +240,9 @@ begin
   begin
     LineText := RemoveTSTags(iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
 
-    StringList.Add(MSToHHMMSSFFTime(Subtitles.InitialTime[i], FPS) + ' ' +
-                   MSToHHMMSSFFTime(Subtitles.FinalTime[i], FPS) + ' ' +
+    // in drop frame its numbers (without ';', not read)
+    StringList.Add(MSToHHMMSSFFTime(Subtitles.InitialTime[i], FPS, LabelTimecodeMode).Replace(';', ':') + ' ' +
+                   MSToHHMMSSFFTime(Subtitles.FinalTime[i], FPS, LabelTimecodeMode).Replace(';', ':') + ' ' +
                    LineText);
   end;
 

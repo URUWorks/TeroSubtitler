@@ -113,8 +113,12 @@ begin
           // fallaba con coma decimal) y sin validar el valor leído.
           FS := FormatSettings;
           FS.DecimalSeparator := '.';
+          // it is written rounded (24 for 23.976): with the 1000/1001 fps
+          // of the same rate, that one (its timecode counts frames, see
+          // TimecodeLabelToMS)
           if TryStrToFloat(TimingParts[1], FileFPS, FS) and
-             (FileFPS >= 1) and (FileFPS <= 240) then
+             (FileFPS >= 1) and (FileFPS <= 240) and
+             not (IsNTSCFPS(FPS) and (Round(FileFPS) = Round(FPS))) then
             LocalFPS := FileFPS;
         end;
       end;
