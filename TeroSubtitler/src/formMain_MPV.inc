@@ -208,6 +208,10 @@ begin
 
   if WAVE.DrawThumbnail then
     GenerateThumbnails;
+
+  // a project (.tero1) opened: its aspect ratio, filters, volume, audio
+  // track, position... (only if this is its video)
+  ApplyProjectPlayerState;
 end;
 
 // -----------------------------------------------------------------------------
