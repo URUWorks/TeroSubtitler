@@ -93,7 +93,7 @@ implementation
 uses
   procTypes, procWorkspace, procConfig, procDialogs, UWSystem.TimeUtils,
   UWSystem.SysUtils, UWSystem.Process, formMain, UWSubtitleAPI.EDL,
-  formCustomSelectDlg, procMPV;
+  formCustomSelectDlg, procMPV, procFiles;
 
 const
   tcFrames       = 0;
@@ -449,12 +449,11 @@ begin
     SC := NIL;
     SetLength(SC, mmoTimes.Lines.Count);
     // the cache is always in ms (it is loaded with WAVE.LoadSceneChangeFile),
-    // whatever the format of the times in the memo, with the offset applied
+    // whatever the format of the times in the memo, with the offset applied.
+    // In video time, as they are in the timeline: without "-1" (a cache
+    // file of older versions, with the SMPTE mode, is converted here once)
     Cache := TStringList.Create;
     try
-      if FSMPTE then
-        Cache.Add('-1');
-
       for i := 0 to mmoTimes.Lines.Count-1 do
       begin
         LineToMs(mmoTimes.Lines[i], v);
@@ -462,11 +461,10 @@ begin
         if tedOffset.Value > 0 then
           v := v + iff(cboOffset.ItemIndex = 0, tedOffset.Value, -tedOffset.Value);
 
-        Cache.Add(v.ToString);
-
         if FSMPTE and (Workspace.WorkMode = wmTime) then
           v := Round(v * 1.001);
 
+        Cache.Add(v.ToString);
         SC[i] := VideoToEntryMS(v);
       end;
 
@@ -731,6 +729,12 @@ begin
       Options  := [ofOverwritePrompt, ofEnableSizing];
       if Execute then
       begin
+        // macOS: the dialog doesn't always add the extension of the selected
+        // type (#3); without it the times were saved as a plain list
+        if (FilterIndex >= 1) and (FilterIndex <= Length(TShotChangeExts)) then
+          FileName := EnsureSaveFileExt(FileName, TShotChangeExts[FilterIndex-1], Filter);
+        if FileName.IsEmpty then Exit;
+
         if FileName.ToLower.EndsWith('.edl') or FileName.ToLower.EndsWith('.xml') then
         begin
           edl := TEDL.Create('', frmMain.MPV.FileName, GetFPS, FormatSettings);
