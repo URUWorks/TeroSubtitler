@@ -190,7 +190,10 @@ Source: "{#SourceBin}\{#MyAppExeName}"; DestDir: "{app}"; Check: not UseArm64; F
 #else
 Source: "{#SourceBin}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 #endif
-Source: "{#SourceBin}\tero.cfs"; DestDir: "{app}"; Flags: ignoreversion
+; the default profiles: Tero copies them to the user folder (%LOCALAPPDATA%\tero) the first
+; time and uses that copy. Not replaced, the one of older versions can have the user's
+; profiles and it is the one copied when updating
+Source: "{#SourceBin}\tero.cfs"; DestDir: "{app}"; Flags: onlyifdoesntexist
 Source: "{#SourceBin}\Shortcuts\*.key"; DestDir: "{app}\Shortcuts"; Flags: ignoreversion
 Source: "{#SourceBin}\OCR\*.ocr"; DestDir: "{app}\OCR"; Flags: ignoreversion
 Source: "{#SourceBin}\Languages\*.po"; DestDir: "{app}\Languages"; Flags: ignoreversion
