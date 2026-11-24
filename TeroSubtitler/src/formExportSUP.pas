@@ -76,7 +76,7 @@ implementation
 
 uses
   procWorkspace, procTypes, UWSystem.Encoding, procCustomFormat, procDialogs,
-  BlurayPGSParser, LCLIntf;
+  BlurayPGSParser, LCLIntf, procFiles;
 
 {$R *.lfm}
 
@@ -161,6 +161,9 @@ begin
     SD.Options := [ofOverwritePrompt, ofEnableSizing];
     if SD.Execute then
     begin
+      // macOS: the dialog doesn't always add the extension (#3)
+      SD.FileName := EnsureSaveFileExt(SD.FileName, TBluRayExt);
+      if SD.FileName.IsEmpty then Exit;
       SetControlsEnabled(False);
       SaveFolder := ExtractFileDir(SD.FileName);
       lblStatus.Show;

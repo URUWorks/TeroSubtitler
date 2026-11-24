@@ -110,7 +110,7 @@ uses
   procColorTheme, procDialogs, procLocalize, UWSystem.InetUtils, FileUtil,
   UWSubtitleAPI.Tags, UWSystem.Process, UWSystem.TimeUtils, procConfig,
   formMain, UWSystem.SysUtils, UWFiles.MPEGAudio, UWSubtitleAPI.Formats,
-  StrUtils, Math;
+  StrUtils, Math, procFiles;
 
 {$R *.lfm}
 
@@ -336,9 +336,12 @@ begin
     SD.FileName := 'dubbing_' + ExtractFileName(frmMain.MPV.FileName);
 
     if SD.Execute then
-      OutputFileName := SD.FileName
+      // macOS: the dialog doesn't always add the extension (#3), and ffmpeg
+      // needs it to know the container of the output
+      OutputFileName := EnsureSaveFileExt(SD.FileName, ExtractFileExt(frmMain.MPV.FileName), SD.Filter)
     else
       Exit;
+    if OutputFileName.IsEmpty then Exit;
   finally
     SD.Free;
   end;
