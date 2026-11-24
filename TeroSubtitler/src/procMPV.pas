@@ -641,9 +641,11 @@ end;
 // -----------------------------------------------------------------------------
 
 // Media > Aspect ratio > Auto-crop: crops the black bars detected in the
-// current frame (the image is centered by mpv). Only the player: the timeline
-// thumbnails are not regenerated (they were cancelled and made again with
-// ffmpeg on every toggle, and the thumbnails don't need the crop).
+// current frame (the image is centered by mpv). The timeline thumbnails are
+// made again with the same crop (the cropped ones are cached apart, so going
+// back to the full frame doesn't call ffmpeg again). A thread cancelled by the
+// toggle can't load its thumbnail anymore (DoThumbnailReady checks the
+// Sender) nor leave a cut .bmp (temporary name per thread).
 procedure MPVAutoCrop(const AValue: Boolean);
 var
   R: TRect;
@@ -677,6 +679,11 @@ begin
     end;
 
     actVARAutoCrop.Checked := MPV.IsVideoCropped;
+
+    // the Key of GenerateThumbnails includes the crop: it frees the loaded
+    // ones and makes them again (from the cache if they were made before)
+    if WAVE.DrawThumbnail then
+      GenerateThumbnails;
   end;
 end;
 
