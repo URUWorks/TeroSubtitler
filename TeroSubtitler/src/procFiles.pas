@@ -47,12 +47,14 @@ function LoadAudio(const FileName: String): Boolean;
 function GetMediaFileNameIfExists(const FileName: String; const Exts: array of String): String;
 function IsValidMediaFileName(const FileName: String; const Exts: array of String): Boolean;
 function LoadShotChangesFileName(const FileName: String): Boolean;
+procedure GetShotChangesForCache(const AList: TStrings);
+procedure SaveShotChangesCache;
 
 { Subtitle files with dialogs }
 
 procedure LoadSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
 procedure SaveSubtitleWithDialog(const SubtitleMode: TSubtitleMode = smText);
-procedure SaveCurrentSubtitle(const SubtitleMode: TSubtitleMode = smText);
+procedure SaveCurrentSubtitle(const SubtitleMode: TSubtitleMode = smText; const AUpdateProject: Boolean = True);
 function LoadVideoWithDialog: boolean;
 procedure ReadSubtitleData(const AFileName: String; const OnlyTimings: Boolean; const SubtitleMode: TSubtitleMode = smText; const AFormat: TUWSubtitleFormats = sfInvalid; const AEncoding: TEncoding = NIL; const AFPS: Single = -1);
 procedure ReadTimingsFromFileWithDialog;
@@ -66,11 +68,22 @@ procedure ExportTextOnlySubtitleWithDialog(const SubtitleMode: TSubtitleMode = s
 
 procedure LoadProject(const FileName: String);
 procedure SaveProject(const FileName: String);
+// File > Save project: the open project (and its subtitle/translation if
+// they were changed), or Save project as if there is none
+procedure SaveCurrentProject;
+// the state of the player saved in the project, once its video is loaded
+// (called from MPVFileLoaded)
+procedure ApplyProjectPlayerState;
 
 { Project files with dialogs }
 
 procedure LoadProjectWithDialog;
-procedure SaveProjectWithDialog;
+procedure SaveProjectWithDialog; // File > Save project as...
+
+var
+  // the project (.tero1) open or saved last, '' if none: File > Save and
+  // Save project update it. Closing/opening another subtitle forgets it
+  CurrentProjectFile: String = '';
 
 { Transcription files }
 
@@ -112,11 +125,20 @@ uses
   procFixSubtitles, LCLIntf, Base64, fpsTypes, UWSubtitleAPI.Utils, LCLStrConsts,
   RegExpr,
   UWSubtitleAPI.Tags, UWTranslateAPI.Google, formCustomSelectDlgWithPreview,
-  FileUtil, Math, URIParser, formCustomQuestionDlg, DolbyVision, procThumbnails,
-  LazUTF8
+  FileUtil, Math, URIParser, formCustomQuestionDlg, DolbyVision, ITunesTimedText, procThumbnails,
+  LazUTF8, MPVPlayer, ActnList
   {$IFDEF DARWIN}
   , formWelcome
   {$ENDIF};
+
+var
+  // LoadProject is running: the subtitle it closes/opens doesn't forget the
+  // project, nor the state of the player waiting for the video
+  LoadingProject: Boolean = False;
+  // the state of the player of the project and its video (see
+  // ApplyProjectPlayerState)
+  PendingProjectState: TStringList = NIL;
+  PendingProjectVideo: String = '';
 
 var
   // a subtitle in milliseconds was opened in frames mode: once the video is
@@ -241,6 +263,11 @@ begin
 
     SubtitleInfo.Text.FileName := '';
     SubtitleInfo.Translation.FileName := '';
+    if not LoadingProject then
+    begin
+      CurrentProjectFile := '';
+      FreeAndNil(PendingProjectState);
+    end;
     SubtitleChangedReset;
     VST.RootNodeCount := 0;
     Subtitles.Clear;
@@ -714,11 +741,11 @@ begin
 
     if not Subtitles.IsSMPTESupported then
     begin
+      // the times are not converted (x1.001 here, the inverse of the /1.001
+      // of the load in drop frame): they are real, also in SMPTE (see
+      // TimecodeLabelToMS)
       if (Workspace.WorkMode = wmFrames) and (Workspace.FPS.InputFPS.Mode = tcDF) and not IsInteger(Subtitles.FrameRate) then
-      begin
-        Subtitles.ConvertTimesToSMPTE(False);
-        SetSMPTEMode(True);
-      end
+        SetSMPTEMode(True)
       else
         SetSMPTEMode(False);
     end
@@ -942,11 +969,12 @@ const
 
 type
   TSpecWarning = (swMiddleToBottom, swMiddleKept, swHAlignCentered, swBold,
-    swUnderline, swStrikeout, swColor, swLineLength);
+    swPartialBold, swUnderline, swStrikeout, swColor, swPartialColor, swLineLength);
 
 var
   F, Msg, Txt, SpecName : String;
   i, MaxChars : Integer;
+  Partial : TITTPartialStyles;
   BR, All : TIntegerDynArray;
   W : array[TSpecWarning] of TIntegerDynArray;
   Affected : array of Boolean;
@@ -971,7 +999,8 @@ begin
 
   // lo que cada exportador cambia o quita (ver sus SaveSubtitle):
   // - iTT: solo regiones top/bottom (el medio va abajo), tts:textAlign solo
-  //   center, sin tachado (la negrita y el color parciales sí: <span style>)
+  //   center, sin tachado, y la negrita y el color solo en toda la entrada:
+  //   los parciales se quitan, como en Final Cut Pro (#510)
   // - Netflix: arriba o abajo y centrado (Timed Text Style Guide: General
   //   Requirements; el medio se escribe igual), solo cursiva
   //   (StripNonItalicTSFormatting quita negrita, subrayado, tachado y color)
@@ -1017,6 +1046,13 @@ begin
     if stStrikeout in Lost then AddIdx(W[swStrikeout], i);
     if stColor in Lost then AddIdx(W[swColor], i);
 
+    if AFormat = sfITunesTimedText then
+    begin
+      Partial := ITTPartialStyles(Txt);
+      if ipsBold in Partial then AddIdx(W[swPartialBold], i);
+      if ipsColor in Partial then AddIdx(W[swPartialColor], i);
+    end;
+
     if (MaxChars > 0) and (LongestLine(Txt) > MaxChars) then
       AddIdx(W[swLineLength], i);
   end;
@@ -1027,9 +1063,11 @@ begin
   WText[swMiddleKept]     := lngSpecMiddleKept;
   WText[swHAlignCentered] := lngSpecHAlignCentered;
   WText[swBold]           := lngSpecBold;
+  WText[swPartialBold]    := lngSpecPartialBold;
   WText[swUnderline]      := lngSpecUnderline;
   WText[swStrikeout]      := lngSpecStrikeout;
   WText[swColor]          := lngSpecColor;
+  WText[swPartialColor]   := lngSpecPartialColor;
   WText[swLineLength]     := Format(lngSpecLineLength, [MaxChars]);
 
   Msg := '';
@@ -1097,7 +1135,11 @@ var
 begin
   _FPS.FPS := AFPS;
   _FPS.Mode := tcNDF;
-  if _FPS.FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
+  if _FPS.FPS = -1 then
+    _FPS := Workspace.FPS.OutputFPS
+  else if SameValue(_FPS.FPS, Workspace.FPS.OutputFPS.FPS, 0.001) then
+    // the timecode mode (drop frame) of the hh:mm:ss:ff of the format
+    _FPS.Mode := Workspace.FPS.OutputFPS.Mode;
   _Encoding := AEncoding;
   //if _Encoding = NIL then _Encoding := GetCachedEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
   if _Encoding = NIL then _Encoding := GetCachedEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
@@ -1175,7 +1217,11 @@ var
 begin
   _FPS.FPS := AFPS;
   _FPS.Mode := tcNDF;
-  if _FPS.FPS = -1 then _FPS := Workspace.FPS.OutputFPS;
+  if _FPS.FPS = -1 then
+    _FPS := Workspace.FPS.OutputFPS
+  else if SameValue(_FPS.FPS, Workspace.FPS.OutputFPS.FPS, 0.001) then
+    // the timecode mode (drop frame) of the hh:mm:ss:ff of the format
+    _FPS.Mode := Workspace.FPS.OutputFPS.Mode;
   _Encoding := AEncoding;
   //if _Encoding = NIL then  _Encoding := GetCachedEncoding(Encodings[frmMain.cboEncoding.ItemIndex].CPID);
   if _Encoding = NIL then _Encoding := GetCachedEncoding(Encodings[Workspace.DefEncoding].CPID); // default encoding
@@ -1342,20 +1388,81 @@ end;
 
 function LoadShotChangesFileName(const FileName: String): Boolean;
 var
-  s: String;
+  s, Newest: String;
   i: Integer;
+  Age, NewestAge: Int64;
 begin
   Result := False;
-
+  // the newest of the files of the video (.edl, .shotchanges, .xml): the
+  // first one found was loaded and an old .edl/.xml left in the folder was
+  // always loaded instead of the .shotchanges written later (Video > Shot
+  // changes, a project, the ones inserted/deleted by hand)
+  Newest := '';
+  NewestAge := -1;
   for i := 0 to Length(TShotChangeExts)-1 do
   begin
     s := ShotChangesFileName(FileName, TShotChangeExts[i]);
     if FileExists(s) then
     begin
-      frmMain.WAVE.LoadSceneChangeFile(s, (Workspace.WorkMode = wmTime));
-      Result := True;
-      Break;
+      Age := FileAgeUTF8(s);
+      if (Newest = '') or (Age > NewestAge) then
+      begin
+        Newest := s;
+        NewestAge := Age;
+      end;
     end;
+  end;
+
+  if Newest <> '' then
+  begin
+    frmMain.WAVE.LoadSceneChangeFile(Newest, (Workspace.WorkMode = wmTime));
+    Result := True;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// the shot changes of the timeline in the format of their cache: video time
+// in ms, as they are (they are not converted with the SMPTE mode). Without
+// "-1" first: that one was written with the SMPTE mode, and its times were
+// divided by 1.001 in time mode (WAVE.LoadSceneChangeFile still reads those
+// files)
+procedure GetShotChangesForCache(const AList: TStrings);
+var
+  sc : TIntegerDynArray;
+  i  : Integer;
+begin
+  AList.Clear;
+  sc := frmMain.WAVE.GetSceneChangeList;
+  for i := 0 to High(sc) do
+    AList.Add((sc[i] - frmMain.WAVE.OffsetMs).ToString);
+end;
+
+// -----------------------------------------------------------------------------
+
+// the shot changes inserted/deleted by hand, to the cache of the video: only
+// Video > Shot changes (Apply) wrote it, and the next time the video (or a
+// subtitle with it) was opened the shot changes were the ones before the
+// changes. Only a cache: an error here must not stop anything
+procedure SaveShotChangesCache;
+var
+  s  : String;
+  sl : TStringList;
+begin
+  if (frmMain.MPV.FileName = '') or not FileExists(frmMain.MPV.FileName) then Exit;
+  s := ShotChangesFileName(frmMain.MPV.FileName, '.shotchanges');
+  sl := TStringList.Create;
+  try
+    try
+      // also empty (all of them were deleted): as the newest file it is
+      // the one loaded, not an old .edl/.xml of the same video
+      GetShotChangesForCache(sl);
+      ForceDirectories(ExtractFileDir(s));
+      sl.SaveToFile(s);
+    except
+    end;
+  finally
+    sl.Free;
   end;
 end;
 
@@ -1541,7 +1648,7 @@ end;
 
 // -----------------------------------------------------------------------------
 
-procedure SaveCurrentSubtitle(const SubtitleMode: TSubtitleMode = smText);
+procedure SaveCurrentSubtitle(const SubtitleMode: TSubtitleMode = smText; const AUpdateProject: Boolean = True);
 var
   s: String;
 begin
@@ -1558,6 +1665,14 @@ begin
   // didn't warn about the formatting the format can't keep
   else if AllowSaveFormat(Subtitles.Format, SubtitleMode) then
     SaveSubtitle(s, Subtitles.Format, SubtitleMode);
+
+  // a project open: File > Save saves it too (the work: shot changes,
+  // thumbnails, state of the player...), if the subtitle was saved
+  if AUpdateProject and not CurrentProjectFile.IsEmpty and
+    not SubtitleInfo.Text.FileName.IsEmpty and
+    (((SubtitleMode = smText) and not SubtitleInfo.Text.Changed) or
+     ((SubtitleMode = smTranslation) and not SubtitleInfo.Translation.Changed)) then
+    SaveProject(CurrentProjectFile);
 end;
 
 // -----------------------------------------------------------------------------
@@ -1847,46 +1962,211 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the state of the work saved in the project (Name=Value, all optional):
+//  VideoOffset, ViewMode, VideoPreview: applied when it's opened
+//  AspectRatio, PanAndScan, Volume, AudioTrack, Filters, WaveformPosition and
+//  the position of the video: when its video is loaded
+procedure GetProjectState(const AState: TStrings);
+var
+  tl : TMPVPlayerTrackList;
+  i  : Integer;
+  s  : String;
+begin
+  AState.Clear;
+  with frmMain do
+  begin
+    AState.Values['VideoOffset']  := Workspace.VideoOffset.ToString;
+    AState.Values['ViewMode']     := Integer(Workspace.ViewMode).ToString;
+    AState.Values['VideoPreview'] := SysUtils.BoolToStr(actVideoPreview.Checked, '1', '0');
+
+    if MPV.IsMediaLoaded then
+    begin
+      AState.Values['AspectRatio'] := Integer(MPV.AspectRatio).ToString;
+      AState.Values['PanAndScan']  := SysUtils.BoolToStr(actPanAndScan.Checked, '1', '0');
+      AState.Values['Volume']      := MPVOptions.Volume.Percent.ToString;
+
+      tl := MPV.TrackList;
+      for i := 0 to High(tl) do
+        if (tl[i].Kind = ttAudio) and tl[i].Selected then
+        begin
+          AState.Values['AudioTrack'] := tl[i].ID.ToString;
+          Break;
+        end;
+
+      // the video/audio filters checked (by the name of their action)
+      s := '';
+      for i := 0 to ComponentCount-1 do
+        if (Components[i] is TAction) and TAction(Components[i]).Checked and
+          (Components[i].Name.StartsWith('actVideoFilter') or Components[i].Name.StartsWith('actAudioFilter')) then
+          s := s + Components[i].Name + ';';
+      // ';' when none (an empty value would remove the key: "none" must
+      // uncheck the filters when it's opened)
+      if s = '' then s := ';';
+      AState.Values['Filters'] := s;
+    end;
+
+    if WAVE.IsPeakDataLoaded then
+      AState.Values['WaveformPosition'] := WAVE.GetPlayCursorMS.ToString;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ApplyProjectPlayerState;
+var
+  st : TStringList;
+  tl : TMPVPlayerTrackList;
+  i, x : Integer;
+  s  : String;
+begin
+  if not Assigned(PendingProjectState) then Exit;
+  // the video of the project (the recent files can open another one first)
+  if not SameFileName(frmMain.MPV.FileName, PendingProjectVideo) then Exit;
+
+  st := PendingProjectState;
+  PendingProjectState := NIL;
+  try
+    with frmMain do
+    begin
+      if st.IndexOfName('AspectRatio') >= 0 then
+      begin
+        x := StrToIntDef(st.Values['AspectRatio'], 0);
+        if (x >= Ord(Low(TMPVPlayerVideoAspectRatio))) and (x <= Ord(High(TMPVPlayerVideoAspectRatio))) then
+          MPVSetVideoAspectRatio(TMPVPlayerVideoAspectRatio(x));
+      end;
+
+      if st.IndexOfName('PanAndScan') >= 0 then
+        MPVSetPanAndScan(st.Values['PanAndScan'] = '1');
+
+      if st.IndexOfName('Filters') >= 0 then
+      begin
+        s := ';' + st.Values['Filters'];
+        for i := 0 to ComponentCount-1 do
+          if (Components[i] is TAction) and
+            (Components[i].Name.StartsWith('actVideoFilter') or Components[i].Name.StartsWith('actAudioFilter')) then
+            TAction(Components[i]).Checked := Pos(';' + Components[i].Name + ';', s) > 0;
+        MPVSetFilters;
+      end;
+
+      if st.IndexOfName('Volume') >= 0 then
+      begin
+        x := StrToIntDef(st.Values['Volume'], -1);
+        if (x >= 0) and (x <= 100) then
+          sbrVolume.Position := x; // sbrVolumeChange sets it to mpv
+      end;
+
+      if st.IndexOfName('AudioTrack') >= 0 then
+      begin
+        x := StrToIntDef(st.Values['AudioTrack'], -1);
+        tl := MPV.TrackList;
+        for i := 0 to High(tl) do
+          if (tl[i].Kind = ttAudio) and (tl[i].ID = x) then
+          begin
+            if not tl[i].Selected then MPV.SetTrack(ttAudio, x);
+            Break;
+          end;
+      end;
+
+      if st.IndexOfName('VideoPreview') >= 0 then
+        if (st.Values['VideoPreview'] = '0') and actVideoPreview.Checked then
+          actVideoPreview.Execute;
+
+      x := StrToIntDef(st.Values['Position'], 0);
+      if x > 0 then
+        MPVSeekTo(x);
+
+      if st.IndexOfName('WaveformPosition') >= 0 then
+        WAVE.SetPlayCursorMS(StrToIntDef(st.Values['WaveformPosition'], 0));
+    end;
+  finally
+    st.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure LoadProject(const FileName: String);
 var
   MRUInfoObject : TMRUInfoObject;
-  AVideo        : String;
+  AVideo, s     : String;
+  x             : Integer;
 begin
   if FileName.IsEmpty then Exit;
   with TProjectFile.Create(FileName) do
   try
     if Ready then
     begin
-      AVideo := '';
-      if not Movie.IsEmpty and FileExists(Movie) then
-      begin
-        // the thumbnails saved in the project (.tero1) go to the cache of the
-        // video before it's opened, so they are not generated with ffmpeg
-        RestoreThumbnails(GetThumbnailsCacheDir(Movie), Movie);
-        // the same with the shot changes: to their cache file, where they are
-        // loaded from with the waveform (it's the file Video > Shot changes
-        // writes; the ones of the project are the last ones the user had)
-        RestoreShotChanges(ShotChangesFileName(Movie, '.shotchanges'), Movie);
-        // the video of the project, unless the recent files already open it
-        // (it was opened twice)
-        MRUInfoObject := MRU.GetValues(Original);
-        if not Assigned(MRUInfoObject) or not SameFileName(MRUInfoObject.VideoFile, Movie) then
-          AVideo := Movie;
+      LoadingProject := True;
+      try
+        FreeAndNil(PendingProjectState);
+        AVideo := '';
+        if not Movie.IsEmpty and FileExists(Movie) then
+        begin
+          // the thumbnails saved in the project (.tero1) go to the cache of the
+          // video before it's opened, so they are not generated with ffmpeg
+          RestoreThumbnails(GetThumbnailsCacheDir(Movie), Movie);
+          // the same with the shot changes: to their cache file, where they are
+          // loaded from with the waveform (it's the file Video > Shot changes
+          // writes; the ones of the project are the last ones the user had)
+          RestoreShotChanges(ShotChangesFileName(Movie, '.shotchanges'), Movie);
+          // and the waveform, if there's none for the video (so it's not
+          // extracted again)
+          if GetMediaFileNameIfExists(Movie, TWaveformAudioExts).IsEmpty then
+            RestoreWaveform(ConcatPaths([WaveformsFolder, ExtractFileName(ChangeFileExt(Movie, '.peak'))]), Movie);
+
+          // the state of the player, when the video is loaded (before it's
+          // opened: dialogs while the subtitle is loaded can let it load)
+          PendingProjectState := TStringList.Create;
+          PendingProjectState.Assign(State);
+          PendingProjectState.Values['Position'] := MoviePos.ToString;
+          PendingProjectVideo := Movie;
+
+          // the video of the project, unless the recent files already open it
+          // (it was opened twice)
+          MRUInfoObject := MRU.GetValues(Original);
+          if not Assigned(MRUInfoObject) or not SameFileName(MRUInfoObject.VideoFile, Movie) then
+            AVideo := Movie;
+        end;
+
+        LoadSubtitle(Original, sfInvalid, NIL, -1, False, AVideo, False);
+        if Subtitles.Count > 0 then
+        begin
+          // a project without translation (saved outside translator mode)
+          if not Translation.IsEmpty then
+            ReadSubtitleData(Translation, False, smTranslation);
+
+          if (FocusedNode >= 0) and (FocusedNode < Subtitles.Count) then
+            VSTSelectNode(frmMain.VST, FocusedNode, True, True);
+
+          // the offset of the video (a Dolby Vision XML sets its own when
+          // it's loaded: the one of the project is the last one the user had)
+          if State.IndexOfName('VideoOffset') >= 0 then
+            MPVSetVideoOffset(StrToIntDef(State.Values['VideoOffset'], 0));
+
+          s := State.Values['ViewMode'];
+          if s <> '' then
+          begin
+            x := StrToIntDef(s, -1);
+            // the list or the source view (the transcription is another thing)
+            if ((x = Ord(vmList)) or (x = Ord(vmSource))) and (TViewMode(x) <> Workspace.ViewMode) then
+              SetViewMode(TViewMode(x));
+          end;
+
+          CurrentProjectFile := FileName;
+          RefreshAppTitle;
+        end
+        else
+          FreeAndNil(PendingProjectState);
+
+        with frmMain do
+          MRU.Add(FileName, '', '', VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPVOptions.AutoStartPlaying);
+      finally
+        LoadingProject := False;
       end;
 
-      LoadSubtitle(Original, sfInvalid, NIL, -1, False, AVideo, False);
-      if Subtitles.Count > 0 then
-      begin
-        // a project without translation (saved outside translator mode)
-        if not Translation.IsEmpty then
-          ReadSubtitleData(Translation, False, smTranslation);
-
-        if (FocusedNode >= 0) and (FocusedNode < Subtitles.Count) then
-          VSTSelectNode(frmMain.VST, FocusedNode, True, True);
-      end;
-
-      with frmMain do
-        MRU.Add(FileName, '', '', VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPVOptions.AutoStartPlaying);
+      // the video may already be loaded (dialogs while the subtitle loaded)
+      if Assigned(PendingProjectState) and frmMain.MPV.IsMediaLoaded then
+        ApplyProjectPlayerState;
     end
     else
       ShowErrorMessageDialog(lngUnableToLoad);
@@ -1900,8 +2180,6 @@ end;
 procedure SaveProject(const FileName: String);
 var
   PrjFileName : String;
-  sc          : TIntegerDynArray;
-  i           : Integer;
 begin
   if FileName.IsEmpty then Exit;
   PrjFileName := ChangeFileExt(FileName, TProjectExt);
@@ -1911,30 +2189,22 @@ begin
     if Workspace.TranslatorMode then
       Translation := SubtitleInfo.Translation.FileName;
     FocusedNode := VSTFocusedNode(frmMain.VST);
+    GetProjectState(State);
 
-    // the video (it wasn't saved) and its thumbnails, in the project
+    // the video (it wasn't saved), its thumbnails, waveform and shot changes
     with frmMain do
       if MPV.IsMediaLoaded and FileExists(MPV.FileName) then
       begin
         Movie         := MPV.FileName;
         MoviePos      := MPV.GetMediaPosInMs;
         ThumbnailsDir := GetThumbnailsCacheDir(Movie);
+        // the .peak (a .wav makes one next to it)
+        if WAVE.IsPeakDataLoaded and not WAVE.FileName.IsEmpty then
+          WaveformFile := ChangeFileExt(WAVE.FileName, '.peak');
 
         // the shot changes of the timeline (also the ones inserted/deleted
-        // by hand), in the format of their cache (as Video > Shot changes
-        // writes it): video time, and "-1" first if they are in SMPTE time,
-        // the inverse of WAVE.LoadSceneChangeFile (x1.001 in time mode)
-        sc := WAVE.GetSceneChangeList;
-        if Length(sc) > 0 then
-        begin
-          if Workspace.SMPTE then
-            ShotChanges.Add('-1');
-          for i := 0 to High(sc) do
-            if Workspace.SMPTE and (Workspace.WorkMode = wmTime) then
-              ShotChanges.Add(Round((sc[i] - WAVE.OffsetMs) / 1.001).ToString)
-            else
-              ShotChanges.Add((sc[i] - WAVE.OffsetMs).ToString);
-        end;
+        // by hand), in the format of their cache
+        GetShotChangesForCache(ShotChanges);
       end;
 
     try
@@ -1947,11 +2217,41 @@ begin
       end;
     end;
 
+    CurrentProjectFile := PrjFileName;
+    RefreshAppTitle;
+
     with frmMain do
       MRU.Add(PrjFileName, '', '', VSTFocusedNode(VST), MPV.GetMediaPosInMs, WAVE.GetPlayCursorMS, MPVOptions.AutoStartPlaying);
   finally
     Free;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure SaveCurrentProject;
+begin
+  if CurrentProjectFile.IsEmpty or not FileExists(CurrentProjectFile) then
+  begin
+    SaveProjectWithDialog;
+    Exit;
+  end;
+
+  // the subtitle and the translation first, if changed (the project only
+  // has their file names). Without updating the project, it's saved after
+  if SubtitleInfo.Text.Changed or SubtitleInfo.Text.FileName.IsEmpty then
+  begin
+    SaveCurrentSubtitle(smText, False);
+    if SubtitleInfo.Text.Changed or SubtitleInfo.Text.FileName.IsEmpty then Exit; // cancelled
+  end;
+
+  if Workspace.TranslatorMode and (SubtitleInfo.Translation.Changed or SubtitleInfo.Translation.FileName.IsEmpty) then
+  begin
+    SaveCurrentSubtitle(smTranslation, False);
+    if SubtitleInfo.Translation.Changed or SubtitleInfo.Translation.FileName.IsEmpty then Exit;
+  end;
+
+  SaveProject(CurrentProjectFile);
 end;
 
 // -----------------------------------------------------------------------------
@@ -2005,7 +2305,13 @@ begin
     SD.Filter  := lngProjectFile + '|*' + TProjectExt;
     SD.Options := [ofOverwritePrompt, ofEnableSizing];
     SD.DefaultExt := TProjectExt;
-    SD.FileName := ChangeFileExt('Project_' + ExtractFileName(SubtitleInfo.Text.FileName), TProjectExt);
+    if not CurrentProjectFile.IsEmpty then
+    begin
+      SD.InitialDir := ExtractFileDir(CurrentProjectFile);
+      SD.FileName := ExtractFileName(CurrentProjectFile);
+    end
+    else
+      SD.FileName := ChangeFileExt(ExtractFileName(SubtitleInfo.Text.FileName), TProjectExt);
 
     if SD.Execute then
     begin

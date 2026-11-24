@@ -47,7 +47,7 @@ resourcestring
   lngSaveSubtitles = 'Save subtitles';
   lngSaveTranslation = 'Save translation';
   lngAllSupportedFiles = 'All supported files';
-  lngProjectFile = 'Subtitle Translation Project';
+  lngProjectFile = 'Tero Subtitler Project';
   lngUnableToLoad = 'Error loading file, unrecognized format.';
   lngFileNotFound = 'File cannot be found.';
   lngSaveSubtitleError = 'Error trying to save the file.';
@@ -78,6 +78,8 @@ resourcestring
   lngSpecUnderline = 'Underline: not allowed. It will be removed.';
   lngSpecStrikeout = 'Strikethrough: not allowed. It will be removed (the text is kept).';
   lngSpecColor = 'Color: not allowed. It will be removed.';
+  lngSpecPartialBold = 'Bold in part of the text: only bold in the whole entry is allowed. It will be removed (the text is kept).';
+  lngSpecPartialColor = 'Color in part of the text (or several colors): only one color for the whole entry is allowed. It will be removed (the text is kept).';
   lngSpecLineLength = 'Lines longer than %d characters (the maximum per row in the format properties): they may be cut off when displayed.';
   lngSubtitleSpecificationEntries = 'Entries: %s (selected in the list).';
   lngTextFormatted = 'Export formatted text?';
@@ -675,6 +677,11 @@ begin
   if aCategory = ResStringDefault(@lngscAudioFilters) then Exit(lngscAudioFilters);
   if aCategory = ResStringDefault(@lngscView) then Exit(lngscView);
   if aCategory = ResStringDefault(@lngscWaveform) then Exit(lngscWaveform);
+  // the categories of the actions in the .lfm are still 'Video' and
+  // 'Waveform', the texts were renamed to Media and Timeline: they weren't
+  // found and were shown in english (Settings > Shortcuts, #506)
+  if aCategory = 'Video' then Exit(lngscMedia);
+  if aCategory = 'Waveform' then Exit(lngscWaveform);
 end;
 
 // -----------------------------------------------------------------------------
@@ -798,6 +805,11 @@ begin
         Hint := Caption + LineEnding + LineEnding + Hint
       else
         Hint := Caption;
+
+  // the text of the empty timeline is set by code, but the translation of
+  // the form (or its original texts) sets again the one of the .lfm, and at
+  // startup it was assigned before loading the language: in english (#506)
+  frmMain.WAVE.EmptyText := lngasWaveformText;
 
   // the translation also sets again the caption of the main form from the
   // .lfm ("tero"): the window title is rebuilt here, after each change of

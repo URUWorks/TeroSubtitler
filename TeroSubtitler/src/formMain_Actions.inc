@@ -1660,7 +1660,11 @@ procedure TfrmMain.actInsertShotChangeExecute(Sender: TObject);
 begin
   with WAVE do
     if IsTimeLineEnabled then
+    begin
       InsertSceneChange(CursorPosMS);
+      // to the cache of the video: they are loaded again with it
+      SaveShotChangesCache;
+    end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -1674,6 +1678,8 @@ begin
         DeleteSceneChange(CursorPosMS, CursorPosMS)
       else
         DeleteSceneChange(Selection.InitialTime, Selection.FinalTime);
+      // to the cache of the video: they are loaded again with it
+      SaveShotChangesCache;
     end;
 end;
 
@@ -2104,7 +2110,15 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the open project (no dialog), or Save project as if there is none
 procedure TfrmMain.actSaveProjectExecute(Sender: TObject);
+begin
+  SaveCurrentProject;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actSaveProjectAsExecute(Sender: TObject);
 begin
   SaveProjectWithDialog;
 end;
