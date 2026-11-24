@@ -126,6 +126,16 @@ const
 function ITTLanguage(const ASubtitles: TUWSubtitles): String;
 function ITTLanguageIndex(const ACode: String): Integer;
 
+type
+  // Formato de una entrada que iTT no admite y que la exportación quita, para
+  // avisar antes de guardar: como en Final Cut Pro, la negrita y el color
+  // solo pueden cubrir toda la entrada (la cursiva y el subrayado sí pueden
+  // ir en una parte)
+  TITTPartialStyle  = (ipsBold, ipsColor);
+  TITTPartialStyles = set of TITTPartialStyle;
+
+function ITTPartialStyles(const Txt: String): TITTPartialStyles;
+
 // -----------------------------------------------------------------------------
 
 implementation
@@ -141,6 +151,7 @@ type
     Underline : Boolean; // en toda la entrada
     Color     : String;  // 'yellow', 'rgba(R,G,B,255)'... en toda la entrada, o ''
     Text      : String;  // el texto con solo los tags que van en <span>
+    Partial   : TITTPartialStyles; // la negrita o el color parciales que se quitan
   end;
 
 // -----------------------------------------------------------------------------
@@ -206,10 +217,10 @@ end;
 // Escribe el texto de un <p> como FCP: la cursiva y el subrayado parciales en
 // un solo <span> por tramo, con todos sus atributos en el orden de FCP
 // (tts:fontStyle y después tts:textDecoration), nunca spans anidados, y los
-// saltos de línea como <br/>. Txt trae {\i}, {\u}, {\b} y {\c...}.
-// La negrita y el color parciales van como en la spec de Apple: un estilo del
-// <head> referenciado desde el <span> (<span style="bold">,
-// <span style="yellow">). AStyles junta los que hacen falta (Name=id, Value=
+// saltos de línea como <br/>. Txt trae {\i} y {\u}: AnalyzeITTEntry ya quitó
+// la negrita y el color parciales (#510). Si llegaran {\b} o {\c...} irían
+// como un estilo del <head> referenciado desde el <span> (<span style="bold">,
+// <span style="yellow">); AStyles junta los que hacen falta (Name=id, Value=
 // 'negrita|color') para escribirlos después en el <styling>.
 // Antes también escribía el tachado (tts:textDecoration="lineThrough"), que
 // iTT no admite: ahora el texto tachado se exporta sin tachar
@@ -366,11 +377,12 @@ end;
 
 // Lee los tags TS de una entrada ({\i1}, {\b1}, {\u1}, {\s1}, {\c&BBGGRR&},
 // también varios en un bloque como {\b1\c&H0000FF&}) y dice qué formato cubre
-// todo el texto visible. Text queda sin ese formato (va en el <p>), con el
-// parcial (cursiva, subrayado, negrita y color, para los <span>), sin el
-// tachado (iTT no lo admite) y con un tag por bloque.
-// Antes la negrita y el color parciales se quitaban como si Apple no los
-// admitiera; su spec los muestra en <span style="..."> con estilos del <head>
+// todo el texto visible. Text queda sin ese formato (va en el <p>), con la
+// cursiva y el subrayado parciales (para los <span>), sin la negrita ni el
+// color parciales, sin el tachado (iTT no lo admite) y con un tag por bloque.
+// La negrita y el color parciales se quitan como en Final Cut Pro, que solo
+// los deja aplicar a toda la entrada (#510); antes se exportaban en
+// <span style="..."> con estilos del <head>, como en los ejemplos de la spec
 
 function AnalyzeITTEntry(const Txt: String): TITTEntryStyle;
 type
@@ -387,7 +399,7 @@ var
   Parts: TStringArray;
   It, Bo, Un: Boolean;
   Col, FirstCol: String;
-  AllIt, AllBo, AllUn, SameCol, HaveFirst: Boolean;
+  AllIt, AllBo, AllUn, SameCol, HaveFirst, AnyBo: Boolean;
 
   procedure AddText(const C: String);
   begin
@@ -426,6 +438,7 @@ begin
   Result.Underline := False;
   Result.Color := '';
   Result.Text := '';
+  Result.Partial := [];
   Toks := NIL;
 
   // tokens
@@ -480,7 +493,7 @@ begin
   // ¿qué formato cubre todo el texto visible?
   It := False; Bo := False; Un := False; Col := '';
   AllIt := True; AllBo := True; AllUn := True; SameCol := True;
-  HaveFirst := False; FirstCol := '';
+  HaveFirst := False; FirstCol := ''; AnyBo := False;
   Count := 0;
   for i := 0 to High(Toks) do
     if Toks[i].IsTag then
@@ -498,7 +511,7 @@ begin
         begin
           Inc(Count);
           if not It then AllIt := False;
-          if not Bo then AllBo := False;
+          if not Bo then AllBo := False else AnyBo := True;
           if not Un then AllUn := False;
           if not HaveFirst then
           begin
@@ -516,12 +529,14 @@ begin
     Result.Bold      := AllBo;
     Result.Underline := AllUn;
     if SameCol then Result.Color := FirstCol;
+    if AnyBo and not AllBo then Include(Result.Partial, ipsBold);
+    if not SameCol then Include(Result.Partial, ipsColor);
   end;
 
-  // el texto: el formato que no cubre toda la entrada, para los <span>: la
-  // cursiva y el subrayado ({\i}, {\u}), la negrita ({\b}) y el color
-  // ({\cyellow}, {\crgba(R,G,B,255)}... y {\c} para volver al de la entrada).
-  // Antes la negrita y el color parciales se perdían. Antes el tachado pasaba como
+  // el texto: el formato que no cubre toda la entrada, para los <span>: solo
+  // la cursiva y el subrayado ({\i}, {\u}). La negrita y el color parciales
+  // se quitan (#510: FCP solo los admite en toda la entrada; Partial lo dice
+  // para avisar al guardar). Antes el tachado pasaba como
   // {\s1}/{\s0} y se exportaba con tts:textDecoration="lineThrough", que iTT
   // no admite: ahora se quita (el texto queda, sin tachar)
   for i := 0 to High(Toks) do
@@ -531,12 +546,15 @@ begin
       case Toks[i].S of
         'i': if not Result.Italic then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\i1}', '{\i0}');
         'u': if not Result.Underline then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\u1}', '{\u0}');
-        'b': if not Result.Bold then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\b1}', '{\b0}');
-        'c': if not SameCol then Result.Text := Result.Text + iff(Toks[i].TagOn, '{\c' + Toks[i].Color + '}', '{\c}');
       end;
 end;
 
 // -----------------------------------------------------------------------------
+
+function ITTPartialStyles(const Txt: String): TITTPartialStyles;
+begin
+  Result := AnalyzeITTEntry(Txt).Partial;
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -1012,11 +1030,13 @@ begin
         TDOMElement(Root).SetAttribute('ttp:frameRateMultiplier', '1000 1001');
       end;
 
-      // En TS ttp:timeBase también indica el modo SMPTE del proyecto
-      if Subtitles.TimeBase = stbSMPTE then
-        TDOMElement(Root).SetAttribute('ttp:timeBase', 'smpte')
-      else
-        TDOMElement(Root).SetAttribute('ttp:timeBase', 'media');
+      // Siempre smpte: Apple lo exige en iTT ("timeBase must be set to
+      // smpte"), y los begin/end son etiquetas de timecode SMPTE (cuentan
+      // frames, MSToHHMMSSFFTime) en cualquier modo del proyecto. Antes se
+      // escribía media si el proyecto no estaba en modo SMPTE, con los mismos
+      // tiempos: un lector que respetara media los leía como segundos reales
+      // (3.6 s por hora de diferencia a 23.976) (#510)
+      TDOMElement(Root).SetAttribute('ttp:timeBase', 'smpte');
       TDOMElement(Root).SetAttribute('xmlns:tt', 'http://www.w3.org/ns/ttml');
       TDOMElement(Root).SetAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
 
