@@ -52,6 +52,7 @@ procedure FillMenuWithAudioStreams(const AParent: TComponent);
 procedure FillComboWithAudioStreams(const ACombo: TComboBox);
 procedure FillMenuWithUnicodeChars(const AParent: TComponent);
 procedure FillMenuWithSilentZone(const AParent: TComponent);
+procedure CheckMenuItemOnly(const AItem: TMenuItem);
 
 function IsWorkAreaEnabled: Boolean;
 procedure EnableWorkArea(const AValue: Boolean = True);
@@ -535,6 +536,8 @@ begin
     Item := TMenuItem.Create(AParent);
     Item.Caption := IntToStr(i) + '%';
     Item.OnClick := @frmMain.PlayRateClick;
+    // the current one with a check mark (#506)
+    Item.Checked    := (i = AppOptions.DefChangePlayRate);
     if AParent is TPopupMenu then
       with AParent as TPopupMenu do
         Items.Add(Item)
@@ -544,6 +547,19 @@ begin
 
     Inc(i, 10);
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// a check mark on this item and not on the others of its menu (a radio
+// item shows a bullet, not a check mark)
+procedure CheckMenuItemOnly(const AItem: TMenuItem);
+var
+  i: Integer;
+begin
+  if (AItem = NIL) or (AItem.Parent = NIL) then Exit;
+  for i := 0 to AItem.Parent.Count-1 do
+    AItem.Parent.Items[i].Checked := (AItem.Parent.Items[i] = AItem);
 end;
 
 // -----------------------------------------------------------------------------
@@ -560,6 +576,8 @@ begin
     Item := TMenuItem.Create(AParent);
     Item.Caption := IntToStr(i);
     Item.OnClick := @frmMain.LoopCountClick;
+    // the current one with a check mark (#506)
+    Item.Checked    := (i = WAVEOptions.LoopCount);
     if AParent is TPopupMenu then
       with AParent as TPopupMenu do
         Items.Add(Item)
@@ -1089,11 +1107,12 @@ begin
   begin
     VSTBeginUpdate(VST);
 
+    // only the mode: the times are real in both modes (the timecode is
+    // only how they are shown, see TimecodeLabelToMS). Before, in drop frame
+    // they were divided by 1.001 in frames mode (and multiplied again in time
+    // mode), 3.6 s per hour earlier than the video and the shot changes
     if (Workspace.FPS.OutputFPS.Mode = tcDF) and not IsInteger(GetFPS) then
-    begin
-      Subtitles.ConvertTimesToSMPTE(Mode = wmFrames);
       SetSMPTEMode(Mode = wmFrames);
-    end;
 
     try
       for i := 0 to ComponentCount-1 do
@@ -1141,9 +1160,15 @@ begin
   with Workspace, frmMain do
     //if SMPTE <> AValue then
     begin
+      // the shot changes are not converted (before, x1.001 or /1.001 here):
+      // they are positions of the video, in its time like the cursor and the
+      // player (Next shot change seeks the video to them as they are), and
+      // the SMPTE mode doesn't change the video. This is also called again
+      // with the same mode (every subtitle loaded, every change of fps in
+      // frames mode...) and each call moved all of them 0.1% more, seconds
+      // at the end of a movie
       SMPTE := AValue;
       //MPV.SMPTEMode := SMPTE;
-      WAVE.SetSceneChangeTimeMode(SMPTE);
       if MPVOptions.SubtitleHandleByMPV then
       begin
         if SMPTE then

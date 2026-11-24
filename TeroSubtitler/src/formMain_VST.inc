@@ -695,12 +695,17 @@ end;
 
 procedure TfrmMain.VSTDblClick(Sender: TObject);
 var
-  it: Integer;
+  idx, it: Integer;
 begin
-  if WAVE.IsPeakDataLoaded then
-    WAVE.SelectSubtitle(VSTFocusedNode(VST), True, True);
+  // without entries (the last one was deleted) or without a focused one,
+  // a double click in the empty area of the list does nothing (#506)
+  idx := VSTFocusedNode(VST);
+  if not Subtitles.ValidIndex(idx) then Exit;
 
-  it := Subtitles.ItemPointer[VSTFocusedNode(VST)]^.InitialTime;
+  if WAVE.IsPeakDataLoaded then
+    WAVE.SelectSubtitle(idx, True, True);
+
+  it := Subtitles.ItemPointer[idx]^.InitialTime;
   MPV.SetMediaPosInMs(EntryToVideoMS(it));
 
   FocusMemo;

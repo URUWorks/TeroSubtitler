@@ -406,8 +406,11 @@ procedure TProfiles.FillTStrings(const AStrings: TStrings; const AClear: Boolean
 var
   i: Integer;
 begin
-  if not Assigned(AStrings) or (FList.Count = 0) then Exit;
+  if not Assigned(AStrings) then Exit;
 
+  // also without profiles: after deleting the last one the list must be
+  // emptied, otherwise the old names stay and their indexes point to nothing
+  // (access violation selecting them in Settings, #506)
   if AClear then
     AStrings.Clear;
 

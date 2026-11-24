@@ -80,8 +80,9 @@ begin
           else
             FSceneChangeList[i] := Round(StrToIntDef(s[i], 0) * 1.001) + FOffsetMs;
 
+        // it also notifies the change (once: twice started two thumbnail
+        // threads at the same time, #506)
         SetSceneChangeEnabled(FSceneChangeEnabled);
-        DoSceneChangeListChange;
       end;
     finally
       s.Free;
@@ -122,8 +123,9 @@ begin
   begin
     SetLength(FSceneChangeList, Length(SceneChangeList));
     Move(SceneChangeList[0], FSceneChangeList[0], Length(SceneChangeList) * SizeOf(Integer));
+    // it also notifies the change (once: twice started two thumbnail
+    // threads at the same time and the new thumbnail was lost, #506)
     SetSceneChangeEnabled(FSceneChangeEnabled);
-    DoSceneChangeListChange;
   end;
 end;
 

@@ -772,7 +772,7 @@ begin
 
     FList := FProfiles;
     FList.FillTStrings(lstTree.Items);
-    if cboProfile.ItemIndex > 0 then
+    if (cboProfile.ItemIndex > 0) and (cboProfile.ItemIndex <= lstTree.Count) then
     begin
       lstTree.ItemIndex := cboProfile.ItemIndex-1;
       lstTreeSelectionChange(NIL, False);
@@ -1049,10 +1049,14 @@ procedure TfrmSettings.cboProfileSelect(Sender: TObject);
 var
   Profile: PProfileItem;
 begin
+  Profile := NIL;
   if cboProfile.ItemIndex = 0 then
     Profile := @AppOptions.Conventions
   else if (FProfiles.Items.Count > 0) and (cboProfile.ItemIndex > 0) and (cboProfile.ItemIndex <= FProfiles.Items.Count) then
     Profile := FProfiles.Items[cboProfile.ItemIndex-1];
+
+  // an index without profile: nothing to show (it was undefined, #506)
+  if Profile = NIL then Exit;
 
   with Profile^ do
   begin
