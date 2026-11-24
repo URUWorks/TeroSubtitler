@@ -40,9 +40,11 @@ type
     FOffsetMS  : Integer;
     FVideoOffset : Integer; // the times are entry times: video time + this
     FTempDir   : String;
+    FCrop      : String;  // ffmpeg crop filter (Auto-crop), empty = none
     FOnReady   : TThumbnailReadyEvent;
     FCurTime   : Integer;
     FCurFile   : String;
+    procedure SetCrop(const ARect: TRect);
     procedure DoReadySync;
     procedure RunAndWait(const AProcess: TProcess);
   protected
@@ -50,6 +52,9 @@ type
   public
     constructor Create(const AVideoFile: String; const ATimes: TIntegerDynArray; const AFPS: Single; AOnReady: TThumbnailReadyEvent; AOnTerminate: TNotifyEvent = NIL; const AVideoOffset: Integer = 0);
     property TempDir: String read FTempDir write FTempDir;
+    // the black bars cropped in the player (Auto-crop, pixels of the decoded
+    // video), set before Start: the thumbnails are made with the same crop
+    property Crop: TRect write SetCrop;
   end;
 
 // the folder of the thumbnails of a video (also a cache between sessions)
@@ -111,6 +116,16 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TGenerateThumbnails.SetCrop(const ARect: TRect);
+begin
+  if ARect.IsEmpty then
+    FCrop := ''
+  else
+    FCrop := Format('crop=%d:%d:%d:%d', [ARect.Width, ARect.Height, ARect.Left, ARect.Top]);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TGenerateThumbnails.DoReadySync;
 begin
   // TBitmap is not thread safe: it's loaded in the main thread
@@ -137,7 +152,7 @@ var
   AProcess : TProcess;
   AParamArray : TStringArray;
   i, x : Integer;
-  s, tmp : String;
+  s, tmp, n : String;
 begin
   if Length(FTimes) = 0 then Exit;
 
@@ -157,14 +172,22 @@ begin
 
         // the files are named by time, so they are also a cache ("d" = 24-bit
         // with the display aspect ratio, anamorphic videos looked distorted).
-        // They are always of the full frame: the Auto-crop of the player
-        // doesn't change them.
-        s := ConcatPaths([FTempDir, (FTimes[i] - FVideoOffset).ToString + 'd.bmp']);
+        // With the Auto-crop of the player they are cropped too, and a cropped
+        // one is another file (the crop is in its name): the full frame ones
+        // stay as they are, and only those go to the project (.tero1, "*d.bmp")
+        n := (FTimes[i] - FVideoOffset).ToString + 'd';
+        if not FCrop.IsEmpty then
+          n := n + '_' + FCrop.Replace('crop=', '').Replace(':', '_');
+        s := ConcatPaths([FTempDir, n + '.bmp']);
         // ffmpeg writes to a temporary name that is renamed when it ends well:
         // a ffmpeg killed when the thread is cancelled (another video, the
         // scene changes edited, Auto-crop...) used to leave a cut .bmp in the
         // cache, loaded as a valid thumbnail afterwards
-        tmp := ConcatPaths([FTempDir, (FTimes[i] - FVideoOffset).ToString + 'd_part.bmp']);
+        // The name is of this thread: a cancelled thread can still have its
+        // ffmpeg writing the same thumbnail and in Windows the file is locked,
+        // so the new one failed and the thumbnail didn't appear (#506)
+        tmp := ConcatPaths([FTempDir, n + '_part' +
+          IntToHex(PtrUInt(Self), SizeOf(Pointer)*2) + '.bmp']);
 
         if not FileExists(s) then
         begin
@@ -177,6 +200,8 @@ begin
               AProcess.Parameters.Add(FFileName)
             else if AParamArray[x].Contains('%output') then
               AProcess.Parameters.Add(tmp)
+            else if not FCrop.IsEmpty and AParamArray[x].StartsWith('scale=') then
+              AProcess.Parameters.Add(FCrop + ',' + AParamArray[x]) // crop before scale
             else
               AProcess.Parameters.Add(AParamArray[x]);
           end;
