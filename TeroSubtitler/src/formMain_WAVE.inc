@@ -368,7 +368,7 @@ end;
 
 procedure TfrmMain.GoToNextShotChange(const APrevious: Boolean = False);
 var
-  x: Integer;
+  x, FrameMS: Integer;
 begin
   with WAVE do
     if IsTimeLineEnabled then
@@ -376,7 +376,19 @@ begin
       if APrevious then
         x := GetPreviousSceneChange(CursorPosMS-1)
       else
+      begin
         x := GetNextSceneChange(CursorPosMS+1);
+        // the video stops at the start of the frame of the shot change, a few
+        // ms before it (the shot change is rarely at the exact ms of a frame):
+        // that one is the shot change where we are, not the next one, and
+        // Next shot change didn't move from there (#506)
+        if MPV.IsMediaLoaded and (FPS > 0) then
+        begin
+          FrameMS := Round(1000 / FPS);
+          while (x > 0) and (x - CursorPosMS < FrameMS) do
+            x := GetNextSceneChange(x+1);
+        end;
+      end;
 
       if x > 0 then
       begin
@@ -436,13 +448,15 @@ var
   NewBitmaps   : TThumbnails;
   i, j, c      : Integer;
   Key          : String;
+  R            : TRect;
 begin
   if not WAVE.DrawThumbnail or not MPV.IsMediaLoaded then Exit;
 
-  // the loaded thumbnails are reused by time only for the same video:
-  // opening another video (without closing the first) mixed them. The
-  // Auto-crop of the player doesn't change them (always the full frame).
-  Key := MPV.FileName;
+  // the loaded thumbnails are reused by time only for the same video and
+  // crop: opening another video (without closing the first) mixed them, and
+  // with Auto-crop the ones of the full frame were kept
+  R   := MPV.GetVideoCrop;
+  Key := MPV.FileName + Format('|%d,%d,%d,%d', [R.Left, R.Top, R.Right, R.Bottom]);
   if Key <> FThumbnailsKey then
     FreeThumbnails;
   FThumbnailsKey := Key;
@@ -507,6 +521,7 @@ begin
   FThumbnailThread := TGenerateThumbnails.Create(MPV.FileName,
     WAVEOptions.ThumbnailTimes, Workspace.FPS.OutputFPS.FPS, @DoThumbnailReady,
     @DoThumbnailsDone, WAVE.OffsetMs);
+  TGenerateThumbnails(FThumbnailThread).Crop := R;
   FThumbnailThread.Start;
 end;
 
@@ -598,42 +613,192 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.WAVEKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-var
-  Idx: Integer;
 begin
-  // the timeline takes the focus when clicked: arrows without modifiers
-  // (the ones with modifiers are left to the shortcuts)
-  if (Shift <> []) or not WAVE.IsTimeLineEnabled then Exit;
+  // the timeline takes the focus when clicked. The shortcuts are processed
+  // before (a key assigned in Tero.key wins), these are the keys left free
+  if not WAVE.IsTimeLineEnabled then Exit;
 
-  case Key of
-    VK_LEFT, VK_RIGHT:
-      if MPV.IsMediaLoaded then
-      begin
-        // previous/next frame, like the mouse wheel on the video
-        if Key = VK_LEFT then
-          MPV.PreviousFrame(MPVOptions.FrameStep)
-        else
-          MPV.NextFrame(MPVOptions.FrameStep);
-        Key := 0;
-      end;
-    VK_UP, VK_DOWN:
-      if VST.RootNodeCount > 0 then
-      begin
-        // previous/next entry
-        Idx := VSTFocusedNode(VST);
-        if Idx < 0 then
-          Idx := 0
-        else if (Key = VK_UP) and (Idx > 0) then
-          Dec(Idx)
-        else if (Key = VK_DOWN) and (Idx < Subtitles.Count - 1) then
-          Inc(Idx);
+  if DoTimelineListKey(Key, Shift, True) then
+    Key := 0;
+end;
 
-        VSTSelectNode(VST, Idx, True, True, True);
-        WAVE.SelectSubtitle(Idx, True, not WAVE.IsTimeInView(Subtitles[Idx].InitialTime));
-        UpdateWAVEMultiSelection;
-        Key := 0;
-      end;
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.VSTKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  // the same keys in the list (it keeps its own Up/Down, Shift+Up/Down,
+  // Home/End, PgUp/PgDn and Left/Right)
+  if DoTimelineListKey(Key, Shift, False) then
+    Key := 0;
+end;
+
+// -----------------------------------------------------------------------------
+
+// selects an entry (or extends the selection from FKeySelAnchor up to it), in
+// the list and in the timeline
+procedure TfrmMain.KeySelectEntry(const AIndex: Integer; const AExtend: Boolean);
+begin
+  if not Subtitles.ValidIndex(AIndex) then Exit;
+
+  if AExtend then
+  begin
+    if FKeySelAnchor < AIndex then
+      VSTSelectNodes(VST, FKeySelAnchor, AIndex, True)
+    else
+      VSTSelectNodes(VST, AIndex, FKeySelAnchor, True);
+    VSTSelectNode(VST, AIndex, False, True, True);
+  end
+  else
+  begin
+    FKeySelAnchor := AIndex;
+    VSTSelectNode(VST, AIndex, True, True, True);
   end;
+
+  WAVE.SelectSubtitle(AIndex, True, not WAVE.IsTimeInView(Subtitles[AIndex].InitialTime));
+  UpdateWAVEMultiSelection;
+end;
+
+// -----------------------------------------------------------------------------
+
+// keys of the timeline and the list (only the ones without a shortcut):
+//   Space                  play/pause
+//   Del, Backspace         delete the selected entries (with undo)
+//   Enter                  the video to the start of the focused entry
+//   Shift+Left/Right       rewind/forward (Seek time of the options)
+//   Ctrl+Home/End          start/end of the video (Cmd too on macOS)
+// only in the timeline (the list already has them):
+//   Left/Right             previous/next frame
+//   Up/Down, Home/End      previous/next, first/last entry
+//   Shift+Up/Down          extend the selection
+//   PgUp/PgDn              previous/next shot change
+function TfrmMain.DoTimelineListKey(const Key: Word; const Shift: TShiftState;
+  const AFromTimeline: Boolean): Boolean;
+var
+  Idx, FrameMS: Integer;
+  Mods: TShiftState;
+begin
+  Result := False;
+  Mods   := Shift * [ssShift, ssCtrl, ssAlt, ssMeta];
+  Idx    := VSTFocusedNode(VST);
+
+  if Mods = [] then
+    case Key of
+      VK_SPACE:
+        if MPV.IsMediaLoaded and actMediaPlay.Enabled then
+        begin
+          actMediaPlay.Execute;
+          Result := True;
+        end;
+
+      VK_DELETE, VK_BACK:
+        begin
+          // the ones selected in the list (also several); in the timeline with
+          // the list hidden (source view), the one selected in the timeline
+          if (Workspace.ViewMode = vmList) and (VST.SelectedCount > 0) then
+          begin
+            if actDeleteEntry.Enabled then actDeleteEntry.Execute;
+          end
+          else if AFromTimeline and actMediaDeleteEntry.Enabled then
+            actMediaDeleteEntry.Execute;
+          FKeySelAnchor := -1;
+          Result := True;
+        end;
+
+      VK_RETURN:
+        if MPV.IsMediaLoaded and Subtitles.ValidIndex(Idx) then
+        begin
+          // like a double click on the entry, but the focus stays here
+          if WAVE.IsPeakDataLoaded or WAVE.IsTimeLineEnabled then
+            WAVE.SelectSubtitle(Idx, True, True);
+          MPV.SetMediaPosInMs(EntryToVideoMS(Subtitles.ItemPointer[Idx]^.InitialTime));
+          Result := True;
+        end;
+
+      VK_LEFT, VK_RIGHT:
+        if AFromTimeline and MPV.IsMediaLoaded then
+        begin
+          // previous/next frame, like the mouse wheel on the video
+          if Key = VK_LEFT then
+            MPV.PreviousFrame(MPVOptions.FrameStep)
+          else
+            MPV.NextFrame(MPVOptions.FrameStep);
+          Result := True;
+        end;
+
+      VK_UP, VK_DOWN, VK_HOME, VK_END:
+        if AFromTimeline and (Subtitles.Count > 0) then
+        begin
+          // previous/next, first/last entry
+          if Key = VK_HOME then
+            Idx := 0
+          else if Key = VK_END then
+            Idx := Subtitles.Count - 1
+          else if Idx < 0 then
+            Idx := 0
+          else if (Key = VK_UP) and (Idx > 0) then
+            Dec(Idx)
+          else if (Key = VK_DOWN) and (Idx < Subtitles.Count - 1) then
+            Inc(Idx);
+
+          KeySelectEntry(Idx, False);
+          Result := True;
+        end;
+
+      VK_PRIOR, VK_NEXT:
+        if AFromTimeline then
+        begin
+          GoToNextShotChange(Key = VK_PRIOR);
+          Result := True;
+        end;
+    end
+  else if Mods = [ssShift] then
+    case Key of
+      VK_LEFT, VK_RIGHT:
+        if MPV.IsMediaLoaded then
+        begin
+          MPVSeekTo(Key = VK_RIGHT, MPVOptions.SeekTime);
+          Result := True;
+        end;
+
+      VK_UP, VK_DOWN:
+        if AFromTimeline and (Subtitles.Count > 0) then
+        begin
+          // the selection grows/shrinks from where it started, like in the list
+          if Idx < 0 then Idx := 0;
+          if (VST.SelectedCount <= 1) or not Subtitles.ValidIndex(FKeySelAnchor) then
+            FKeySelAnchor := Idx;
+
+          if (Key = VK_UP) and (Idx > 0) then
+            Dec(Idx)
+          else if (Key = VK_DOWN) and (Idx < Subtitles.Count - 1) then
+            Inc(Idx);
+
+          KeySelectEntry(Idx, True);
+          Result := True;
+        end;
+    end
+  else if (Mods = [ssCtrl]) {$IFDEF DARWIN}or (Mods = [ssMeta]){$ENDIF} then
+    case Key of
+      VK_HOME, VK_END:
+        if MPV.IsMediaLoaded then
+        begin
+          // the end: the last frame, mpv at the very end stops (eof)
+          if Key = VK_HOME then
+            MPVSeekTo(0)
+          else
+          begin
+            if Workspace.FPS.OutputFPS.FPS > 0 then
+              FrameMS := Round(1000 / Workspace.FPS.OutputFPS.FPS)
+            else
+              FrameMS := 40;
+            if MPV.GetMediaLenInMs > FrameMS then
+              MPVSeekTo(MPV.GetMediaLenInMs - FrameMS)
+            else
+              MPVSeekTo(0);
+          end;
+          Result := True;
+        end;
+    end;
 end;
 
 // -----------------------------------------------------------------------------
