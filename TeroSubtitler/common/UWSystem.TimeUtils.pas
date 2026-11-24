@@ -35,6 +35,14 @@ type
     Mode : TTimecodeMode;
   end;
 
+var
+  // The timecode mode (drop frame or not) of the hh:mm:ss:ff labels read and
+  // written by TimeToString, StringToTime, HHMMSSFFTimeToMS and
+  // MSToHHMMSSFFMax with a 1000/1001 fps (23.976, 29.97, 59.94).
+  // TUWSubtitles sets it while a subtitle is loaded or saved (the mode of its
+  // fps); otherwise it is non drop frame.
+  LabelTimecodeMode: TTimecodeMode = tcNDF;
+
 function SMPTEConversion(const ATimeMS: Integer; const AValue: Boolean = True; const Mode: TRoundMode = rmNearest): Integer;
 function NormalizeFPS(const FPS: Double): Double;
 function EncodeTime(const Hour, Min, Secs, MSecs: Word): Integer;
@@ -51,6 +59,9 @@ function TrimTimeString(Text: String): String;
 function MSToHHMMSSFFTime(const TimeMS: Integer; const FPS: Double; const Mode: TTimecodeMode = tcNDF): String;
 function MSToHHMMSSFFMax(const Time: Integer; const FPS: Double; const FramesSeparator: Char = ':'): String;
 function HHMMSSFFTimeToMS(const Time: String; const FPS: Double): Integer;
+function IsNTSCFPS(const FPS: Double): Boolean;
+function TimecodeLabelToMS(const H, M, S, F: Integer; const FPS: Double): Integer;
+procedure MSToTimecodeLabel(const TimeMS: Integer; const FPS: Double; out H, M, S, F: Integer);
 function RefTimeToMSecs(const RefTime: Int64): Cardinal;
 function MSecsToRefTime(const MSecs: Cardinal): Int64;
 function TicksToMSecs(const Ticks: Int64; const TicksPerSecond: Integer = 10000): Integer;
@@ -303,8 +314,19 @@ function TimeToString(const Time: Cardinal; TimeFormat: String = 'hh:mm:ss'; con
 var
   Hour, Min, Sec, MSec : Word;
   Count, tmp           : Cardinal;
+  LH, LM, LS, LF       : Integer;
+  IsLabel              : Boolean;
 begin
   DecodeTime(Time, Hour, Min, Sec, MSec);
+  // frames with a 1000/1001 fps: the timecode label (see TimecodeLabelToMS)
+  IsLabel := (Pos('f', TimeFormat) > 0) and IsNTSCFPS(FPS);
+  if IsLabel then
+  begin
+    MSToTimecodeLabel(Time, FPS, LH, LM, LS, LF);
+    Hour := LH;
+    Min  := LM;
+    Sec  := LS;
+  end;
 
   if TimeFormat = 'hh:mm:ss' then
     Result := Format('%.2d:%.2d:%.2d', [Hour, Min, Sec])
@@ -336,7 +358,10 @@ begin
     Count := StringCount('f', TimeFormat);
     if Count > 0 then
     begin
-      tmp := TimeToFrames(MSec, FPS);
+      if IsLabel then
+        tmp := LF
+      else
+        tmp := TimeToFrames(MSec, FPS);
       Constrain(tmp, 0, Round(FPS)-1);
       TimeFormat := ReplaceString(TimeFormat, StringOfChar('f', Count), AddChar('0', IntToStr(tmp), Count));
     end;
@@ -427,6 +452,11 @@ begin
       end;
 
       Result := ((H*3600)*1000) + ((M*60)*1000) + (S*1000) + Z;
+
+      // hh:mm:ss:ff with a 1000/1001 fps: the timecode label (see
+      // TimecodeLabelToMS)
+      if (FPS > 0) and (PThird > 0) and not NoHours and IsNTSCFPS(FPS) then
+        Result := TimecodeLabelToMS(H, M, S, StringToInt(Copy(Time, PThird + 1, Length(Time))), FPS);
     end;
   except
     Result := 0;
@@ -491,10 +521,14 @@ begin
     D := totalFrames div framesPer10Min;
     M := totalFrames mod framesPer10Min;
 
+    // the first two frames of each block of 10 minutes too (D * 18): before
+    // they were not added and 00:10:00;00 was shown as 00:09:59;12
     if M >= dropFrames then
       totalFrames := totalFrames
         + (dropFrames * 9 * D)
-        + (dropFrames * ((M - dropFrames) div framesPerMin));
+        + (dropFrames * ((M - dropFrames) div framesPerMin))
+    else
+      totalFrames := totalFrames + (dropFrames * 9 * D);
 
     sep := ';';
   end
@@ -517,9 +551,100 @@ end;
 // -----------------------------------------------------------------------------
 
 function MSToHHMMSSFFMax(const Time: Integer; const FPS: Double; const FramesSeparator: Char = ':'): String;
+var
+  H, M, S, F: Integer;
 begin
+  if IsNTSCFPS(FPS) then
+  begin
+    MSToTimecodeLabel(Time, FPS, H, M, S, F);
+    Exit(Format('%.2d%s%.2d%s%.2d%s%.2d', [H, FramesSeparator, M, FramesSeparator, S, FramesSeparator, F]));
+  end;
+
   Result := TimeToString(Time, 'hh' + FramesSeparator + 'mm' + FramesSeparator + 'ss');
   Result := Result + FramesSeparator + AddChar('0', IntToStr(TimeToFramesMaxFPS(Time - StringToTime(Result), FPS)), 2);
+end;
+
+// -----------------------------------------------------------------------------
+
+// The times are real media time (as the player). A hh:mm:ss:ff timecode
+// counts frames: with a 1000/1001 fps (23.976, 29.97, 59.94) its seconds are
+// of Round(fps) frames, so they are not real seconds (01:00:00:00 at 23.976 is
+// frame 86400, 01:00:03.600 of the video). Before, the labels were read and
+// written as if they were real seconds plus frames (3.6 s per hour of error,
+// 2 frames in drop frame) and the error was "corrected" with x1.001 or /1.001
+// in other places (TimeBase SMPTE, ConvertTimesToSMPTE), only in some of them.
+
+function IsNTSCFPS(const FPS: Double): Boolean;
+begin
+  Result := (FPS > 0) and not SameValue(FPS, Round(FPS), 0.0001) and
+    (Abs(FPS * 1.001 - Round(FPS * 1.001)) < 0.01);
+end;
+
+// -----------------------------------------------------------------------------
+
+// the real time (ms) of a timecode label
+function TimecodeLabelToMS(const H, M, S, F: Integer; const FPS: Double): Integer;
+var
+  FPSNom, Drops: Integer;
+  TotalMin, Frames: Int64;
+begin
+  if not IsNTSCFPS(FPS) then
+    Exit(((H*3600 + M*60 + S) * 1000) + FramesToTime(F, FPS));
+
+  FPSNom := Round(FPS);
+  if (LabelTimecodeMode = tcDF) and (FPSNom mod 30 = 0) then
+    Drops := (FPSNom div 30) * 2
+  else
+    Drops := 0;
+
+  TotalMin := Int64(H) * 60 + M;
+  Frames := (Int64(H) * 3600 + Int64(M) * 60 + S) * FPSNom + F -
+    Int64(Drops) * (TotalMin - TotalMin div 10);
+  Result := Round(Frames * 1000.0 / FPS);
+end;
+
+// -----------------------------------------------------------------------------
+
+// the timecode label of a real time (ms)
+procedure MSToTimecodeLabel(const TimeMS: Integer; const FPS: Double; out H, M, S, F: Integer);
+var
+  FPSNom, Drops, FramesPerMin, FramesPer10Min: Integer;
+  Frames, D, R: Int64;
+  Hour, Min, Sec, MSec: Word;
+begin
+  if not IsNTSCFPS(FPS) then
+  begin
+    DecodeTime(Cardinal(Max(0, TimeMS)), Hour, Min, Sec, MSec);
+    H := Hour;
+    M := Min;
+    S := Sec;
+    F := TimeToFrames(MSec, FPS);
+    if F > Round(FPS)-1 then F := Round(FPS)-1;
+    Exit;
+  end;
+
+  FPSNom := Round(FPS);
+  Frames := Round(Max(0, TimeMS) * FPS / 1000.0);
+
+  if (LabelTimecodeMode = tcDF) and (FPSNom mod 30 = 0) then
+  begin
+    Drops := (FPSNom div 30) * 2;
+    FramesPerMin := FPSNom * 60 - Drops;
+    FramesPer10Min := FramesPerMin * 10 + Drops;
+    D := Frames div FramesPer10Min;
+    R := Frames mod FramesPer10Min;
+    if R >= Drops then
+      Frames := Frames + Drops * 9 * D + Drops * ((R - Drops) div FramesPerMin)
+    else
+      Frames := Frames + Drops * 9 * D;
+  end;
+
+  F := Frames mod FPSNom;
+  Frames := Frames div FPSNom;
+  S := Frames mod 60;
+  Frames := Frames div 60;
+  M := Frames mod 60;
+  H := Frames div 60;
 end;
 
 // -----------------------------------------------------------------------------
@@ -528,6 +653,10 @@ function HHMMSSFFTimeToMS(const Time: String; const FPS: Double): Integer;
 begin
   if StringToTime(Time) = 0 then
     Result := 0
+  else if IsNTSCFPS(FPS) then
+    Result := TimecodeLabelToMS(StrToIntDef(Copy(Time, 1, 2), 0),
+      StrToIntDef(Copy(Time, 4, 2), 0), StrToIntDef(Copy(Time, 7, 2), 0),
+      StrToIntDef(Copy(Time, 10, 2), 0), FPS)
   else
     Result := StringToTime(Copy(Time, 1, 8)) + Integer(FramesToTime(StrToIntDef(Copy(Time, 10, 2), 0), FPS));
 end;
@@ -735,8 +864,6 @@ begin
 end;}
 
 function SMPTEStringToMS(const ASMPTE: String; const AFPS: Double; const ADropFrame: Boolean = False): Integer;
-const
-  EPS = 1e-6;
 var
   s: String;
   p: TStringArray;
@@ -759,7 +886,10 @@ begin
   f := StrToIntDef(p[3], 0);
 
   fpsNom := Round(AFPS);
-  is1000_1001 := Abs(AFPS - (fpsNom * 1000.0 / 1001.0)) <= EPS;
+  // 29.97 (the fps of the list, not exactly 30000/1001) too: before only an
+  // exact 30000/1001 was drop frame, a drop frame timecode typed or read at
+  // 29.97 was taken as non drop frame (3.6 s per hour later)
+  is1000_1001 := Abs(AFPS - (fpsNom * 1000.0 / 1001.0)) <= 0.01;
   validDFNom := (fpsNom mod 30) = 0; // 30, 60, 120...
 
   if df and is1000_1001 and validDFNom then
