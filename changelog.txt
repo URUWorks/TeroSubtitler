@@ -1,4 +1,13 @@
 1.0.2.4 (xx.11.2026)
+- fixed: Fix Subtitles: "Time too short" only fixed the last entry
+- fixed: iTunes Timed Text: partial bold and color are no longer exported (only allowed in the whole entry); the warning before saving lists the entries #510
+- fixed: iTunes Timed Text: ttp:timeBase is always "smpte", as Apple requires (it was "media" when the project was not in SMPTE mode, with the same SMPTE timecodes) #510
+- fixed: [macOS] Export to Blu-ray SUP, Video dubbing and Shot changes export saved the file without extension #3
+- fixed: Shot change thumbnails, Next shot change, Settings profiles and untranslated shortcut categories #506
+- fixed: [Windows] Tero seemed not to open when the Welcome or Setup Wizard window stayed behind other windows (they now have a taskbar button)
+- fixed: [Windows] Shortcuts file opened in exclusive mode (failed if locked by an antivirus or another instance); saving it without permissions shows an error instead of crashing
+- fixed: Added, updated or removed convention profiles were lost when updating Tero (they are now kept in the user folder)
+- fixed: Shot changes inserted or deleted by hand were lost when the video was opened again, and an old .edl/.xml next to the video was loaded instead of the newer shot changes
 - fixed: Play selection, waveform, Insert shot change #504
 - fixed: Menu and high DPI display #501
 - fixed: Curly brackets and enclosed text don't appear in list, timeline, or video #485
@@ -163,7 +172,9 @@
 - changed: Audio to text, “Synchronize the current texts” and “Smart segmentation” are now radio buttons
 - changed: Shot changes, Sensitivity is grouped with the detection app and disabled when the method doesn’t use it
 - changed: Projects are saved as .tero1 and include the shot changes and the timeline thumbnails, so they are not generated again when the project is opened (.stp projects are still opened)
+- changed: Tero Subtitler projects (.tero1) also save the waveform, the video offset, the player state (aspect ratio, pan & scan, volume, audio track, filters, position) and the view
 - changed: With several entries selected, the start/end time controls shift that time of each entry (it beeps if any can't move further); Shift + up/down moves the whole entries keeping their durations
+- changed: "Move entry" (Media > Subtitles) renamed to "Move entry to playback position" #508
 - improved: [macOS] Now uses the standalone yt-dlp, which can update itself
 - improved: [SubtitleAPI] Cavena 890 & EBU (accents, special chars, tags, language/code page and alignment)
 - improved: [SubtitleAPI] Cheetah & Cheetah Caption (italics, accents, line breaks)
