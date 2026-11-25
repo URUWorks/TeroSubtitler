@@ -1159,14 +1159,6 @@ msgstr ""
 msgid "Color: not allowed. It will be removed."
 msgstr ""
 
-#: proclocalize.lngspecpartialbold
-msgid "Bold in part of the text: only bold in the whole entry is allowed. It will be removed (the text is kept)."
-msgstr ""
-
-#: proclocalize.lngspecpartialcolor
-msgid "Color in part of the text (or several colors): only one color for the whole entry is allowed. It will be removed (the text is kept)."
-msgstr ""
-
 #: proclocalize.lngspecentries
 #, object-pascal-format
 msgid "Entries: %s"
@@ -1187,6 +1179,14 @@ msgstr ""
 
 #: proclocalize.lngspecmiddletobottom
 msgid "Middle vertical alignment: only top and bottom are allowed. They will be exported at the bottom."
+msgstr ""
+
+#: proclocalize.lngspecpartialbold
+msgid "Bold in part of the text: only bold in the whole entry is allowed. It will be removed (the text is kept)."
+msgstr ""
+
+#: proclocalize.lngspecpartialcolor
+msgid "Color in part of the text (or several colors): only one color for the whole entry is allowed. It will be removed (the text is kept)."
 msgstr ""
 
 #: proclocalize.lngspecstrikeout
@@ -5157,6 +5157,10 @@ msgstr "Обновить"
 #: tfrmsettings.caption
 msgid "Settings"
 msgstr "Настройки общие"
+
+#: tfrmsettings.chkallowmultipleinstances.caption
+msgid "Allow multiple instances"
+msgstr ""
 
 #: tfrmsettings.chkautoextractwaveform.caption
 msgid "Extract the waveform automatically when loading a video"
