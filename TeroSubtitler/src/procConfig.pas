@@ -359,6 +359,7 @@ begin
     HIRoundBrackets        := True;
     QuoteStyle             := 1;
     SmartQuotesTyping      := False;
+    AllowMultipleInstances := False;
     TextToFind             := '';
     WebSearchURL           := URL_WordReference;
     GUILanguage            := GetOSLanguage;
@@ -539,6 +540,8 @@ begin
       HIRoundBrackets := GetValue('HIRoundBrackets', HIRoundBrackets);
       QuoteStyle := GetValue('QuoteStyle', QuoteStyle);
       SmartQuotesTyping := GetValue('SmartQuotesTyping', SmartQuotesTyping);
+      // also read before the main form exists, see procSingleInstance
+      AllowMultipleInstances := GetValue('AllowMultipleInstances', AllowMultipleInstances);
       WebSearchURL := GetValue('WebSearchURL', WebSearchURL);
       TextToFind := GetValue('TextToFind', TextToFind);
       CommonErrors := IntegersToErrorSet(GetValue('CommonErrors', ErrorSetToInteger(CommonErrors, 0)), GetValue('CommonErrors2', ErrorSetToInteger(CommonErrors, 1)));
@@ -1085,6 +1088,7 @@ begin
       SetValue('HIRoundBrackets', HIRoundBrackets);
       SetValue('QuoteStyle', QuoteStyle);
       SetValue('SmartQuotesTyping', SmartQuotesTyping);
+      SetValue('AllowMultipleInstances', AllowMultipleInstances);
       SetValue('WebSearchURL', WebSearchURL);
       SetValue('TextToFind', TextToFind);
       SetValue('CommonErrors', ErrorSetToInteger(CommonErrors, 0));

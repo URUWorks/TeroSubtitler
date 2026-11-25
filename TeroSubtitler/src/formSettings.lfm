@@ -419,6 +419,18 @@ object frmSettings: TfrmSettings
       Caption = 'Replace " and '' while typing'
       TabOrder = 22
     end
+    object chkAllowMultipleInstances: TUWCheckBox
+      AnchorSideTop.Control = chkSmartQuotesTyping
+      AnchorSideTop.Side = asrBottom
+      Left = 435
+      Height = 24
+      Top = 456
+      Width = 22
+      AutoSize = False
+      BorderSpacing.Top = 2
+      Caption = 'Allow multiple instances'
+      TabOrder = 23
+    end
   end
   object lyoConventions: TUWLayout
     Left = -635

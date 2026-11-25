@@ -479,6 +479,7 @@ type
     HIRoundBrackets        : Boolean; // (...) marks hearing impaired text
     QuoteStyle             : Integer; // QuoteStyles index, 0 = straight
     SmartQuotesTyping      : Boolean; // " and ' typed as QuoteStyle
+    AllowMultipleInstances : Boolean; // [Windows] False: a second start goes to the running Tero
     TextToFind             : String;
     LastUnicodeChar        : TUTF8Char;
     WebSearchURL           : String;

@@ -25,6 +25,7 @@
 {"hash":208241956,"name":"tfrmsettings.chkhiroundbrackets.caption","sourcebytes":[82,111,117,110,100,32,98,114,97,99,107,101,116,115,32,40,32,41,32,109,97,114,107,32,104,101,97,114,105,110,103,32,105,109,112,97,105,114,101,100,32,116,101,120,116],"value":"Round brackets ( ) mark hearing impaired text"},
 {"hash":115044739,"name":"tfrmsettings.lblquotestyle.caption","sourcebytes":[81,117,111,116,97,116,105,111,110,32,109,97,114,107,115],"value":"Quotation marks"},
 {"hash":75895447,"name":"tfrmsettings.chksmartquotestyping.caption","sourcebytes":[82,101,112,108,97,99,101,32,34,32,97,110,100,32,39,32,119,104,105,108,101,32,116,121,112,105,110,103],"value":"Replace \" and ' while typing"},
+{"hash":206187011,"name":"tfrmsettings.chkallowmultipleinstances.caption","sourcebytes":[65,108,108,111,119,32,109,117,108,116,105,112,108,101,32,105,110,115,116,97,110,99,101,115],"value":"Allow multiple instances"},
 {"hash":144682425,"name":"tfrmsettings.lblnewsubtitlems.caption","sourcebytes":[78,101,119,32,115,117,98,116,105,116,108,101,32,40,109,115,41],"value":"New subtitle (ms)"},
 {"hash":74330857,"name":"tfrmsettings.lblmindurationms.caption","sourcebytes":[77,105,110,46,32,100,117,114,97,116,105,111,110,32,47,32,112,101,114,32,119,111,114,100,32,40,109,115,41],"value":"Min. duration / per word (ms)"},
 {"hash":217247481,"name":"tfrmsettings.lblmaxdurationms.caption","sourcebytes":[77,97,120,46,32,100,117,114,97,116,105,111,110,32,40,109,115,41],"value":"Max. duration (ms)"},

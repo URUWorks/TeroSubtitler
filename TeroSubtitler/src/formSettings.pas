@@ -62,6 +62,7 @@ type
     lblQuoteStyle: TLabel;
     cboQuoteStyle: TComboBox;
     chkSmartQuotesTyping: TUWCheckBox;
+    chkAllowMultipleInstances: TUWCheckBox;
     chkPromptForSaveWithErrors1: TUWCheckBox;
     chkWriteBOM: TUWCheckBox;
     chkSubtitleHandleByMPV: TUWCheckBox;
@@ -370,6 +371,7 @@ begin
     else
       cboQuoteStyle.ItemIndex := 1;
     chkSmartQuotesTyping.Checked := SmartQuotesTyping;
+    chkAllowMultipleInstances.Checked := AllowMultipleInstances;
 
     cboTheme.ItemIndex := Integer(ColorThemeInstance.ColorMode);
   end;
@@ -433,6 +435,8 @@ begin
   hkShortcut.HotKey := 0;
   {$IFNDEF WINDOWS}
   cboTheme.Enabled := False;
+  // only Windows can start Tero more than once (see procSingleInstance)
+  chkAllowMultipleInstances.Visible := False;
   PrepareCustomControls(Self);
   {$ENDIF}
 end;
@@ -505,6 +509,7 @@ begin
     HIRoundBrackets := chkHIRoundBrackets.Checked;
     QuoteStyle := cboQuoteStyle.ItemIndex;
     SmartQuotesTyping := chkSmartQuotesTyping.Checked;
+    AllowMultipleInstances := chkAllowMultipleInstances.Checked;
   end; //with
 
   frmMain.VST.Font.Size            := spnListFontSize.Value;

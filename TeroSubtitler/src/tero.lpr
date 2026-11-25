@@ -42,7 +42,7 @@ uses
   formCustomSelectDlgWithPreview, formTTS, formVideoDubbing, formImportSUP,
   formImportSUPLanguages, procMacOpenFiles, procMacMediaKeys, procMacMenuKeys,
   procMacSystemMenus, procMacTextView, procMacAdjustSizeFix,
-  procCrashLog;
+  procCrashLog, procSingleInstance;
 
 {$R *.res}
 
@@ -55,6 +55,9 @@ begin
   Application.Title:='Tero Subtitler';
   Application.Scaled:=True;
   Application.Initialize;
+  // [Windows] only one Tero: a second start brings the running one to the
+  // front and opens its file there
+  if not SingleInstanceStart then Halt;
   // DIAGNOSTIC (temporary): see procCrashLog
   InstallCrashLog;
   {$IFDEF WINDOWS}
