@@ -352,16 +352,64 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// While the seek bar is dragged the video follows the mouse (like QuickTime),
+// at most one seek every SEEKDRAG_INTERVAL ms. A big jump (fast drag) seeks to
+// the nearest keyframe, so a long video or a slow decoder doesn't fall behind
+// the mouse; a small one (slow drag) seeks to the exact frame. The release
+// does the exact seek (MPVSeekTo) to the frame where it ends.
+
+const
+  SEEKDRAG_INTERVAL = 40;   // ms
+  SEEKDRAG_EXACT    = 1000; // ms, a smaller jump seeks to the exact frame
+
+procedure TfrmMain.sbrSeekDragPreview(const APos: Integer; const AForce: Boolean = False);
+var
+  t: QWord;
+  s: Double;
+  fs: TFormatSettings;
+  m: String;
+begin
+  if not MPV.IsMediaLoaded or (APos = FSeekDragPos) then Exit;
+
+  t := GetTickCount64;
+  if not AForce and (t - FSeekDragTick < SEEKDRAG_INTERVAL) then Exit;
+
+  if (FSeekDragPos >= 0) and (Abs(APos - FSeekDragPos) <= SEEKDRAG_EXACT) then
+    m := 'absolute+exact'
+  else
+    m := 'absolute+keyframes';
+
+  FSeekDragTick := t;
+  FSeekDragPos  := APos;
+
+  s := APos / 1000.0;
+  if MPV.SMPTEMode then
+    s := s * 1.001; // like TMPVPlayer.SetMediaPosInMs
+
+  fs := DefaultFormatSettings;
+  fs.DecimalSeparator := '.';
+  MPV.mpv_command_(['seek', FloatToStr(s, fs), m]);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.sbrSeekMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   MPV.ShowOverlayText('');
+
+  if sbrSeek.MouseIsDown then
+  begin
+    FSeekDragPos := -1;
+    sbrSeekDragPreview(sbrSeek.Position, True);
+  end;
 end;
 
 // -----------------------------------------------------------------------------
 
 procedure TfrmMain.sbrSeekMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
+  FSeekDragPos := -1;
   MPVSeekTo(sbrSeek.Position);
 end;
 
@@ -374,7 +422,11 @@ begin
   if MPV.IsMediaLoaded then
     with sbrSeek do
       if MouseIsDown then
-        lblMediaTime.Caption := GetTimeStr(VideoToEntryMS(Range((X * Max) div Width, 0, Max)))
+      begin
+        p := Range((X * Max) div Width, 0, Max);
+        lblMediaTime.Caption := GetTimeStr(VideoToEntryMS(p));
+        sbrSeekDragPreview(p);
+      end
       else
       begin
         p := Range((X * Max) div Width, 0, sbrSeek.Max);

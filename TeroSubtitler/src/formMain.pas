@@ -1095,6 +1095,7 @@ type
     procedure sbrSeekMouseLeave(Sender: TObject);
     procedure sbrSeekMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
+    procedure sbrSeekDragPreview(const APos: Integer; const AForce: Boolean = False);
     procedure sbrVolumeChange(Sender: TObject);
     // formMain_Actions
     procedure actAboutExecute(Sender: TObject);
@@ -1397,6 +1398,8 @@ type
     FThumbnailsKey: String;       // video + crop of the thumbnails loaded
     FURLLoadTimer: TTimer;        // elapsed time while yt-dlp resolves an url
     FURLLoadStart: QWord;
+    FSeekDragTick: QWord;         // last seek sent while dragging sbrSeek
+    FSeekDragPos: Integer;        // its position (video ms), -1 = none
     {$IFDEF LCLCocoa}
     FVSTOldWindowProc: TWndMethod;
     {$ENDIF}
