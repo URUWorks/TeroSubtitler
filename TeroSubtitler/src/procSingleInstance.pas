@@ -40,7 +40,7 @@ implementation
 {$IFDEF WINDOWS}
 
 uses
-  Windows, Classes, SysUtils, Forms, XMLConf, procTypes, procFiles,
+  Windows, Classes, SysUtils, Forms, ExtCtrls, XMLConf, procTypes, procFiles,
   procWorkspace, procConfig, formMain, formWelcome, formWizard;
 
 const
@@ -52,6 +52,7 @@ const
 type
   TInstanceReceiver = class
     procedure Process(Data: PtrInt);
+    procedure RetryTimer(Sender: TObject);
   end;
 
 var
@@ -59,6 +60,8 @@ var
   ReceiverWnd: HWND = 0;
   Receiver: TInstanceReceiver = NIL;
   PendingFiles: TStringList = NIL;
+  // the files that arrived while a dialog was open: opened when it's closed
+  Retry: TTimer = NIL;
 
 function _AllowSetForegroundWindow(dwProcessId: DWORD): BOOL; stdcall;
   external 'user32.dll' name 'AllowSetForegroundWindow';
@@ -90,7 +93,8 @@ begin
   else
     Target := frmMain;
 
-  if Target.HandleAllocated then
+  // to the front when a file arrives (Data = 0), not on every retry (Data = 1)
+  if (Data = 0) and Target.HandleAllocated then
   begin
     if IsIconic(Target.Handle) then
       ShowWindow(Target.Handle, SW_RESTORE);
@@ -107,11 +111,31 @@ begin
     ((WelcomeOpen and (Application.ModalLevel <= 1)) or
      (not WelcomeOpen and (Application.ModalLevel = 0)));
 
+  // over a dialog: they wait (before, they were lost) and Tero tries again
+  // every half second until the dialog is closed
+  if not CanOpen then
+  begin
+    for FileName in PendingFiles do
+      if FileName <> '' then
+      begin
+        if (Retry = NIL) then
+        begin
+          Retry := TTimer.Create(NIL);
+          Retry.Interval := 500;
+          Retry.OnTimer := @RetryTimer;
+        end;
+        Retry.Enabled := True;
+        Break;
+      end;
+    Exit;
+  end;
+  if Retry <> NIL then Retry.Enabled := False;
+
   while PendingFiles.Count > 0 do
   begin
     FileName := PendingFiles[0];
     PendingFiles.Delete(0);
-    if not CanOpen or (FileName = '') or
+    if (FileName = '') or
       not (FileExists(FileName) or DirectoryExists(FileName)) then
       Continue;
 
@@ -127,6 +151,14 @@ begin
     if frmWelcome <> NIL then
       frmWelcome.Close;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TInstanceReceiver.RetryTimer(Sender: TObject);
+begin
+  Retry.Enabled := False;
+  Process(1); // enables it again if the dialog is still open
 end;
 
 // -----------------------------------------------------------------------------
@@ -245,7 +277,8 @@ end;
 
 function SingleInstanceStart: Boolean;
 var
-  FileName: String;
+  i: Integer;
+  Files: TStringList;
 begin
   Result := True;
   // command line tools (-convert, -translate, -help) run on their own
@@ -267,18 +300,31 @@ begin
   CloseHandle(Mutex);
   Mutex := 0;
 
-  if ParamCount > 0 then
-    FileName := ExpandFileName(ParamStr(1))
-  else
-    FileName := '';
+  // all the files (before, only the first one: the others of a selection
+  // opened from Explorer were lost)
+  Files := TStringList.Create;
+  try
+    for i := 1 to ParamCount do
+      if FileExists(ParamStr(i)) or DirectoryExists(ParamStr(i)) then
+        Files.Add(ExpandFileName(ParamStr(i)));
+    if Files.Count = 0 then Files.Add(''); // only to the front
 
-  // if the running Tero doesn't answer, this one starts as before
-  Result := not SendToRunningInstance(FileName);
+    // if the running Tero doesn't answer, this one starts as before. If it
+    // takes the first file, it takes the others (a later one that fails is
+    // only that file)
+    Result := not SendToRunningInstance(Files[0]);
+    if not Result then
+      for i := 1 to Files.Count-1 do
+        SendToRunningInstance(Files[i]);
+  finally
+    Files.Free;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
 
 finalization
+  Retry.Free;
   if ReceiverWnd <> 0 then DestroyWindow(ReceiverWnd);
   if Mutex <> 0 then CloseHandle(Mutex);
   Receiver.Free;
