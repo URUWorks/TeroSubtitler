@@ -1,4 +1,5 @@
 1.0.2.4 (xx.11.2026)
+- fixed: Play selection didn't stop at the end with 2 or more repetitions #511
 - fixed: iTunes Timed Text: partial bold and color are no longer exported (only allowed in the whole entry); the warning before saving lists the entries #510
 - fixed: iTunes Timed Text: ttp:timeBase is always "smpte", as Apple requires (it was "media" when the project was not in SMPTE mode, with the same SMPTE timecodes) #510
 - fixed: [macOS] Export to Blu-ray SUP, Video dubbing and Shot changes export saved the file without extension #3
@@ -163,6 +164,21 @@
 - fixed: File extension added twice when saving
 - fixed: Fix Subtitles: "Time too short" only fixed the last entry
 - fixed: "Paste as translations" renamed to "Paste texts as translations"
+- fixed: File/Save could empty the project when its video was not loaded
+- fixed: Round times (FPS) moved times already on a frame at 23.976/29.97
+- fixed: Project thumbnails lost quality on every save
+- fixed: Spreadsheet import took any text column as the start time
+- fixed: Fix subtitles could reject a shot change snap after fixing an overlap
+- fixed: Possible crash when closing the Wave extractor quickly
+- fixed: New or corrected convention profiles of an update didn't reach the user copy
+- fixed: Files opened while TS was running were lost if there was a dialog open, and only the first one was opened
+- fixed: The state of a project was applied to another video if the project video never loaded
+- fixed: Styles of an imported .ass file were lost
+- fixed: The Script Info of an .ass file without styles was lost
+- fixed: TTML ignored the left and right alignment of the entries
+- fixed: Saving a .ssa, .ttml or .webvtt changed the extension to .ass, .xml or .vtt
+- fixed: [macOS] The video didn't follow the mouse while dragging the seekbar on slower Macs
+- fixed: Waveform ruler and entry text too small on high DPI screens
 - changed: [Windows] Only one Tero Subtitler runs at a time by default
 - changed: Dragging the video seek bar updates the video while the mouse button is held down, not only when it is released
 - changed: Whisper.cpp now downloads UW_WhisperCPP (Windows 7+, macOS 10.11+, Linux glibc 2.17+), with GPU support via Vulkan on Windows/Linux x64 and Metal on Apple Silicon
@@ -241,6 +257,10 @@
 - added: Timeline scrolls automatically when dragging an entry outside the current view
 - added: Start/end timecodes, duration and frames of the timeline drag-selection in the status bar
 - added: Shift+Click on another entry in the timeline selects the range, as in the list
+- added: Style editor (Edit/Styles...): create, copy, delete and edit ASS/SSA styles, apply them to the selected entries
+- added: Styles are exported to TTML and WebVTT and read back by TS, and exported to DCinema
+- added: Toolbar icon size option (Settings*Appearance), with support for SVG icons
+- added: SSA v4 files (Marked=, \aN, .ssa) are loaded and saved again as SSA v4
 
 1.0.2.3 (18.09.2026)
 - fixed: Corrupted undo/redo stack when changing input/output FPS
