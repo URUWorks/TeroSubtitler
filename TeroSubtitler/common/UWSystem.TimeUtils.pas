@@ -35,13 +35,15 @@ type
     Mode : TTimecodeMode;
   end;
 
-var
+threadvar
   // The timecode mode (drop frame or not) of the hh:mm:ss:ff labels read and
   // written by TimeToString, StringToTime, HHMMSSFFTimeToMS and
   // MSToHHMMSSFFMax with a 1000/1001 fps (23.976, 29.97, 59.94).
   // TUWSubtitles sets it while a subtitle is loaded or saved (the mode of its
-  // fps); otherwise it is non drop frame.
-  LabelTimecodeMode: TTimecodeMode = tcNDF;
+  // fps); otherwise it is non drop frame (tcNDF, the first value: a
+  // threadvar starts at 0 in every thread). Per thread: a subtitle loaded or
+  // saved in another thread doesn't change the labels of this one.
+  LabelTimecodeMode: TTimecodeMode;
 
 function SMPTEConversion(const ATimeMS: Integer; const AValue: Boolean = True; const Mode: TRoundMode = rmNearest): Integer;
 function NormalizeFPS(const FPS: Double): Double;
