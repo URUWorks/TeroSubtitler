@@ -345,7 +345,14 @@ begin
         // the same as the thumbnails thread: written with another name and
         // renamed when complete, so a cut file is never a valid thumbnail
         if RenameFile(tmp, dst) then
-          Inc(FRestored)
+        begin
+          // the age of the project: SaveProject reuses its jpg (bmp not newer
+          // than the project) instead of encoding it again. Otherwise the
+          // first save after opening it encoded all of them again, and
+          // each open/save lost a bit more quality (jpg -> bmp -> jpg)
+          FileSetDate(dst, FileAge(FFileName));
+          Inc(FRestored);
+        end
         else
           DeleteFile(tmp);
       except
@@ -485,7 +492,7 @@ var
   wr       : TFPWriterJPEG;
   e        : TZipFileEntry;
   i, j     : Integer;
-  PrjAge   : LongInt;
+  PrjAge   : Int64; // FileAge is Int64 in FPC 3.3
 
   procedure AddEntry(const AName: String; const AStream: TStream; const AOwned: Boolean = True);
   begin
