@@ -45,7 +45,7 @@ type
 implementation
 
 uses strUtils, Math, UWSystem.StrUtils, UWSystem.SysUtils, UWSubtitleAPI.Tags,
-  UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Styles, RegExpr;
+  UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Styles;
 
 const
   SSA_EventFormat = 'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text';
@@ -186,7 +186,12 @@ var
   Block, Res: String;
 begin
   Result := 0;
-  if (Pos('\an', AText) = 0) and not ExecRegExpr('\\a[0-9]', AText) then Exit;
+  // only with \anN or \aN (before, a regular expression was compiled for
+  // each Dialogue line of the file)
+  p := Pos('\a', AText);
+  while (p > 0) and not ((p + 2 <= Length(AText)) and (AText[p + 2] in ['0'..'9', 'n'])) do
+    p := PosEx('\a', AText, p + 2);
+  if p = 0 then Exit;
   Res := '';
   i := 1;
   while i <= Length(AText) do
