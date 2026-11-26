@@ -233,14 +233,11 @@ end;
 
 procedure RoundFramesValue(const InitialTime, FinalTime: Integer; const AFPS: Single; out NewInitialTime, NewFinalTime: Integer; const SMPTE: Boolean = False);
 begin
-  if SMPTE then
-  begin
-    NewInitialTime := RoundTimeWithFrames(Round(InitialTime * 1.001), AFPS);
-    NewFinalTime   := RoundTimeWithFrames(Round(FinalTime * 1.001), AFPS);
-    NewInitialTime := Round(NewInitialTime / 1.001);
-    NewFinalTime   := Round(NewFinalTime / 1.001);
-  end
-  else
+  // the times are real also in SMPTE (see TimecodeLabelToMS): the frames
+  // are the ones of AFPS (23.976, 29.97...) as they are. Before, x1.001 and
+  // /1.001 here rounded them to the frames of the nominal rate (24, 30), that
+  // are not frames of the video (almost every time moved up to half a frame)
+  //if SMPTE then ...
   begin
     NewInitialTime := RoundTimeWithFrames(InitialTime, AFPS);
     NewFinalTime   := RoundTimeWithFrames(FinalTime, AFPS);
