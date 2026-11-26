@@ -57,16 +57,17 @@ end;
 
 procedure TUWTimeCodeHelper.DecodeTime(out Hour, Min, Secs, MSecs: Word);
 var
-  h, m, x: Integer;
+  x: Integer;
 begin
-  h     := Self - (Hour*3600000);
-  m     := Min * 60000;
-  x     := h - m;
-
-  Hour  := Trunc(Self / 3600000);
-  Min   := Trunc(h / 60000);
-  Secs  := Trunc(x / 1000);
-  MSecs := Trunc(x - (Secs*1000));
+  // before, Hour and Min (out) were used before they were set
+  x     := Self;
+  if x < 0 then x := 0;
+  Hour  := x div 3600000;
+  x     := x mod 3600000;
+  Min   := x div 60000;
+  x     := x mod 60000;
+  Secs  := x div 1000;
+  MSecs := x mod 1000;
 end;
 
 // -----------------------------------------------------------------------------
