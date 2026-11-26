@@ -156,7 +156,8 @@ begin
     FStyles := NIL;
     SetLength(FStyles, 1);
     FStyles[0] := ASSNewStyle('Default', Subtitles.FormatProperties^.SSA.DefaultStyleSettings);
-    FChanged := True; // it doesn't exist in the subtitle yet
+    // not written until it's changed: OK without changes doesn't mark
+    // the subtitle as modified (saving as ASS writes this same style)
   end;
 
   SetLength(FOrigNames, Length(FStyles));
@@ -435,23 +436,28 @@ begin
 
   // the styles and the renamed entries are one undo step
   UndoInstance.AddUndoHeader(Subtitles.ASSHeader, False);
+  // one pass over the entries, each one by the name it had when the editor
+  // was opened: before, a style per pass, and with chained renames (A -> B
+  // and B -> C, or a swap A <-> B) an entry was renamed twice
   Renamed := False;
-  for k := 0 to High(FStyles) do
+  for i := 0 to Subtitles.Count-1 do
   begin
-    Old := FOrigNames[k];
-    NewName := FStyles[k].Name;
-    if (Old = '') or (Old = NewName) then Continue;
-    for i := 0 to Subtitles.Count-1 do
-    begin
-      p := Subtitles.ItemPointer[i];
-      if Assigned(p) and (SameText(Trim(p^.Style), Old) or
-        ((p^.Style = '') and SameText(Old, 'Default'))) then
+    p := Subtitles.ItemPointer[i];
+    if not Assigned(p) then Continue;
+    Old := Trim(p^.Style);
+    if Old = '' then Old := 'Default';
+    for k := 0 to High(FStyles) do
+      if (FOrigNames[k] <> '') and SameText(FOrigNames[k], Old) then
       begin
-        UndoInstance.AddUndo(utSubtitleChange, i, p^, False);
-        p^.Style := NewName;
-        Renamed := True;
+        NewName := FStyles[k].Name;
+        if NewName <> FOrigNames[k] then
+        begin
+          UndoInstance.AddUndo(utSubtitleChange, i, p^, False);
+          p^.Style := NewName;
+          Renamed := True;
+        end;
+        Break;
       end;
-    end;
   end;
 
   Subtitles.ASSHeader := ASSWriteStyles(Subtitles.ASSHeader, FStyles);
