@@ -1258,6 +1258,15 @@ msgctxt "proclocalize.lngssgeneral"
 msgid "General"
 msgstr "Allgemein"
 
+#: proclocalize.lngssiconsizedefault
+msgid "Default (16 px)"
+msgstr ""
+
+#: proclocalize.lngssiconsizepx
+#, object-pascal-format
+msgid "%d px"
+msgstr ""
+
 #: proclocalize.lngsslightmode
 msgid "Light mode"
 msgstr "Heller Modus"
@@ -1310,6 +1319,10 @@ msgstr "Einträge ohne Text: %d"
 msgid "Gap average: %s"
 msgstr "Durchschnittliche Abstände: %s"
 
+#: proclocalize.lngstinvalidstylename
+msgid "Each style needs a name, different from the others."
+msgstr ""
+
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
 msgid "Longest characters per second: %.2f (#%d)"
@@ -1334,6 +1347,10 @@ msgstr "Längste Zeile: %d (#%d)"
 #, object-pascal-format
 msgid "Longest words per minute: %.2f (#%d)"
 msgstr "Höchste Wörter pro Minute (WPM): %.2f (#%d)"
+
+#: proclocalize.lngstnewstyle
+msgid "New style"
+msgstr ""
 
 #: proclocalize.lngstnumberofcharacters
 #, object-pascal-format
@@ -1374,6 +1391,10 @@ msgstr "Kürzeste Zeile: %d (#%d)"
 #, object-pascal-format
 msgid "Shortest words per minute: %.2f (#%d)"
 msgstr "Niedrigste Wörter pro Minute (WPM): %.2f (#%d)"
+
+#: proclocalize.lngstssav4
+msgid "SSA v4 styles: only the columns of the file are saved."
+msgstr ""
 
 #: proclocalize.lngsttotalcharacterspersecond
 #, object-pascal-format
@@ -3010,6 +3031,7 @@ msgid "Generate video"
 msgstr "Video generieren"
 
 #: tfrmgeneratevideo.chkbox.caption
+msgctxt "tfrmgeneratevideo.chkbox.caption"
 msgid "Box"
 msgstr "Rahmen"
 
@@ -4344,6 +4366,10 @@ msgstr "Statistik..."
 msgid "Stream extractor..."
 msgstr "Stream-Extraktor..."
 
+#: tfrmmain.actstyles.caption
+msgid "Styles..."
+msgstr ""
+
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
 msgstr "Text vertauschen"
@@ -5328,6 +5354,10 @@ msgstr "FFmpeg"
 msgid "Frame step"
 msgstr "Schrittweite in Bildern"
 
+#: tfrmsettings.lbliconsize.caption
+msgid "Toolbar icon size"
+msgstr ""
+
 #: tfrmsettings.lbllanguage.caption
 msgctxt "tfrmsettings.lbllanguage.caption"
 msgid "Language"
@@ -5439,6 +5469,7 @@ msgid "Font"
 msgstr "Schriftart"
 
 #: tfrmsettings.lblsubshadow.caption
+msgctxt "tfrmsettings.lblsubshadow.caption"
 msgid "Shadow"
 msgstr "Schatten"
 
@@ -5721,6 +5752,150 @@ msgstr "Datei"
 msgctxt "tfrmstreamextractor.lblfolder.caption"
 msgid "Output folder"
 msgstr "Ausgabeordner"
+
+#: tfrmstyles.btnapplytoselection.caption
+msgid "Apply to selected entries"
+msgstr ""
+
+#: tfrmstyles.btnclose.caption
+#, fuzzy
+msgctxt "tfrmstyles.btnclose.caption"
+msgid "Close"
+msgstr "Schliessen"
+
+#: tfrmstyles.btncopy.caption
+#, fuzzy
+msgctxt "tfrmstyles.btncopy.caption"
+msgid "Copy"
+msgstr "Kopieren"
+
+#: tfrmstyles.btndelete.caption
+msgid "Delete"
+msgstr ""
+
+#: tfrmstyles.btnnew.caption
+msgid "New"
+msgstr ""
+
+#: tfrmstyles.btnok.caption
+#, fuzzy
+msgctxt "tfrmstyles.btnok.caption"
+msgid "OK"
+msgstr "OK"
+
+#: tfrmstyles.caption
+msgid "Styles"
+msgstr ""
+
+#: tfrmstyles.chkbold.caption
+#, fuzzy
+msgctxt "tfrmstyles.chkbold.caption"
+msgid "Bold"
+msgstr "Fett"
+
+#: tfrmstyles.chkitalic.caption
+#, fuzzy
+msgctxt "tfrmstyles.chkitalic.caption"
+msgid "Italic"
+msgstr "Kursiv"
+
+#: tfrmstyles.chkopaquebox.caption
+#, fuzzy
+msgctxt "tfrmstyles.chkopaquebox.caption"
+msgid "Box"
+msgstr "Rahmen"
+
+#: tfrmstyles.chkstrikeout.caption
+#, fuzzy
+msgctxt "tfrmstyles.chkstrikeout.caption"
+msgid "Strikeout"
+msgstr "Durchgestrichen"
+
+#: tfrmstyles.chkunderline.caption
+#, fuzzy
+msgctxt "tfrmstyles.chkunderline.caption"
+msgid "Underline"
+msgstr "Unterstreichen"
+
+#: tfrmstyles.lblalignment.caption
+#, fuzzy
+msgctxt "tfrmstyles.lblalignment.caption"
+msgid "Alignment"
+msgstr "Textausrichtung"
+
+#: tfrmstyles.lblangle.caption
+msgid "Angle"
+msgstr ""
+
+#: tfrmstyles.lblback.caption
+#, fuzzy
+msgctxt "tfrmstyles.lblback.caption"
+msgid "Shadow"
+msgstr "Schatten"
+
+#: tfrmstyles.lblcolors.caption
+msgid "Colors"
+msgstr ""
+
+#: tfrmstyles.lblfont.caption
+#, fuzzy
+msgctxt "tfrmstyles.lblfont.caption"
+msgid "Font"
+msgstr "Schriftart"
+
+#: tfrmstyles.lblmarginl.caption
+msgid "Left margin"
+msgstr ""
+
+#: tfrmstyles.lblmarginr.caption
+msgid "Right margin"
+msgstr ""
+
+#: tfrmstyles.lblmarginv.caption
+msgid "Vertical margin"
+msgstr ""
+
+#: tfrmstyles.lblname.caption
+#, fuzzy
+msgctxt "tfrmstyles.lblname.caption"
+msgid "Name"
+msgstr "Name"
+
+#: tfrmstyles.lbloutline.caption
+msgctxt "tfrmstyles.lbloutline.caption"
+msgid "Outline"
+msgstr ""
+
+#: tfrmstyles.lbloutlinecolor.caption
+msgctxt "tfrmstyles.lbloutlinecolor.caption"
+msgid "Outline"
+msgstr ""
+
+#: tfrmstyles.lblprimary.caption
+msgid "Primary"
+msgstr ""
+
+#: tfrmstyles.lblscalex.caption
+msgid "Scale X %"
+msgstr ""
+
+#: tfrmstyles.lblscaley.caption
+msgid "Scale Y %"
+msgstr ""
+
+#: tfrmstyles.lblsecondary.caption
+msgid "Secondary"
+msgstr ""
+
+#: tfrmstyles.lblshadow.caption
+#, fuzzy
+msgctxt "tfrmstyles.lblshadow.caption"
+msgid "Shadow"
+msgstr "Schatten"
+
+#: tfrmstyles.lblspacing.caption
+msgid "Spacing"
+msgstr ""
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"

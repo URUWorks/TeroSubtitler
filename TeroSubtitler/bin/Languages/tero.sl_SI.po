@@ -1269,6 +1269,15 @@ msgctxt "proclocalize.lngssgeneral"
 msgid "General"
 msgstr "Splošno"
 
+#: proclocalize.lngssiconsizedefault
+msgid "Default (16 px)"
+msgstr ""
+
+#: proclocalize.lngssiconsizepx
+#, object-pascal-format
+msgid "%d px"
+msgstr ""
+
 #: proclocalize.lngsslightmode
 msgid "Light mode"
 msgstr "Svetli način"
@@ -1320,6 +1329,10 @@ msgstr "Vnosi brez besedila: %d"
 msgid "Gap average: %s"
 msgstr "Preneseno: %s (povprečno: %s/s)"
 
+#: proclocalize.lngstinvalidstylename
+msgid "Each style needs a name, different from the others."
+msgstr ""
+
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
 msgid "Longest characters per second: %.2f (#%d)"
@@ -1344,6 +1357,10 @@ msgstr "Vrstica: %d, znak: %d"
 #, object-pascal-format, fuzzy, badformat
 msgid "Longest words per minute: %.2f (#%d)"
 msgstr "Besed na minuto"
+
+#: proclocalize.lngstnewstyle
+msgid "New style"
+msgstr ""
 
 #: proclocalize.lngstnumberofcharacters
 #, object-pascal-format
@@ -1384,6 +1401,10 @@ msgstr "Vrstica: %d, znak: %d"
 #, object-pascal-format, fuzzy, badformat
 msgid "Shortest words per minute: %.2f (#%d)"
 msgstr "Besed na minuto"
+
+#: proclocalize.lngstssav4
+msgid "SSA v4 styles: only the columns of the file are saved."
+msgstr ""
 
 #: proclocalize.lngsttotalcharacterspersecond
 #, object-pascal-format, fuzzy, badformat
@@ -3073,6 +3094,7 @@ msgstr "Tvori video"
 
 #: tfrmgeneratevideo.chkbox.caption
 #, fuzzy
+msgctxt "tfrmgeneratevideo.chkbox.caption"
 msgid "Box"
 msgstr "Polje"
 
@@ -4531,6 +4553,10 @@ msgstr "Statistika …"
 msgid "Stream extractor..."
 msgstr "Tok"
 
+#: tfrmmain.actstyles.caption
+msgid "Styles..."
+msgstr ""
+
 #: tfrmmain.actswaptexts.caption
 #, fuzzy
 msgid "Swap text"
@@ -5586,6 +5612,10 @@ msgstr "FFmpeg"
 msgid "Frame step"
 msgstr "Korak sličice"
 
+#: tfrmsettings.lbliconsize.caption
+msgid "Toolbar icon size"
+msgstr ""
+
 #: tfrmsettings.lbllanguage.caption
 msgctxt "tfrmsettings.lbllanguage.caption"
 msgid "Language"
@@ -5709,6 +5739,7 @@ msgid "Font"
 msgstr "Pisava"
 
 #: tfrmsettings.lblsubshadow.caption
+msgctxt "tfrmsettings.lblsubshadow.caption"
 msgid "Shadow"
 msgstr "Senca"
 
@@ -5999,6 +6030,149 @@ msgstr "Datoteka"
 msgctxt "tfrmstreamextractor.lblfolder.caption"
 msgid "Output folder"
 msgstr "Izhodna mapa"
+
+#: tfrmstyles.btnapplytoselection.caption
+msgid "Apply to selected entries"
+msgstr ""
+
+#: tfrmstyles.btnclose.caption
+#, fuzzy
+msgctxt "tfrmstyles.btnclose.caption"
+msgid "Close"
+msgstr "Zapri"
+
+#: tfrmstyles.btncopy.caption
+#, fuzzy
+msgctxt "tfrmstyles.btncopy.caption"
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: tfrmstyles.btndelete.caption
+msgid "Delete"
+msgstr ""
+
+#: tfrmstyles.btnnew.caption
+msgid "New"
+msgstr ""
+
+#: tfrmstyles.btnok.caption
+#, fuzzy
+msgctxt "tfrmstyles.btnok.caption"
+msgid "OK"
+msgstr "V redu"
+
+#: tfrmstyles.caption
+msgid "Styles"
+msgstr ""
+
+#: tfrmstyles.chkbold.caption
+#, fuzzy
+msgctxt "tfrmstyles.chkbold.caption"
+msgid "Bold"
+msgstr "Krepko"
+
+#: tfrmstyles.chkitalic.caption
+#, fuzzy
+msgctxt "tfrmstyles.chkitalic.caption"
+msgid "Italic"
+msgstr "Ležeče"
+
+#: tfrmstyles.chkopaquebox.caption
+msgctxt "tfrmstyles.chkopaquebox.caption"
+msgid "Box"
+msgstr ""
+
+#: tfrmstyles.chkstrikeout.caption
+#, fuzzy
+msgctxt "tfrmstyles.chkstrikeout.caption"
+msgid "Strikeout"
+msgstr "Oblikuje pisavo prečrtano"
+
+#: tfrmstyles.chkunderline.caption
+#, fuzzy
+msgctxt "tfrmstyles.chkunderline.caption"
+msgid "Underline"
+msgstr "Podčrtano"
+
+#: tfrmstyles.lblalignment.caption
+#, fuzzy
+msgctxt "tfrmstyles.lblalignment.caption"
+msgid "Alignment"
+msgstr "Poravnava"
+
+#: tfrmstyles.lblangle.caption
+msgid "Angle"
+msgstr ""
+
+#: tfrmstyles.lblback.caption
+#, fuzzy
+msgctxt "tfrmstyles.lblback.caption"
+msgid "Shadow"
+msgstr "Senca"
+
+#: tfrmstyles.lblcolors.caption
+msgid "Colors"
+msgstr ""
+
+#: tfrmstyles.lblfont.caption
+#, fuzzy
+msgctxt "tfrmstyles.lblfont.caption"
+msgid "Font"
+msgstr "Pisava"
+
+#: tfrmstyles.lblmarginl.caption
+msgid "Left margin"
+msgstr ""
+
+#: tfrmstyles.lblmarginr.caption
+msgid "Right margin"
+msgstr ""
+
+#: tfrmstyles.lblmarginv.caption
+msgid "Vertical margin"
+msgstr ""
+
+#: tfrmstyles.lblname.caption
+#, fuzzy
+msgctxt "tfrmstyles.lblname.caption"
+msgid "Name"
+msgstr "Ime"
+
+#: tfrmstyles.lbloutline.caption
+msgctxt "tfrmstyles.lbloutline.caption"
+msgid "Outline"
+msgstr ""
+
+#: tfrmstyles.lbloutlinecolor.caption
+msgctxt "tfrmstyles.lbloutlinecolor.caption"
+msgid "Outline"
+msgstr ""
+
+#: tfrmstyles.lblprimary.caption
+msgid "Primary"
+msgstr ""
+
+#: tfrmstyles.lblscalex.caption
+msgid "Scale X %"
+msgstr ""
+
+#: tfrmstyles.lblscaley.caption
+msgid "Scale Y %"
+msgstr ""
+
+#: tfrmstyles.lblsecondary.caption
+msgid "Secondary"
+msgstr ""
+
+#: tfrmstyles.lblshadow.caption
+#, fuzzy
+msgctxt "tfrmstyles.lblshadow.caption"
+msgid "Shadow"
+msgstr "Senca"
+
+#: tfrmstyles.lblspacing.caption
+msgid "Spacing"
+msgstr ""
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"
