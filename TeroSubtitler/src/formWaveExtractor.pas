@@ -81,6 +81,8 @@ end;
 procedure TfrmWaveExtractor.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
+  // the auto start queued in FormShow must not run on a freed form
+  Application.RemoveAsyncCalls(Self);
   CloseAction := caFree;
   frmWaveExtractor := NIL;
 end;
