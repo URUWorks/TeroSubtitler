@@ -226,6 +226,7 @@ type
     function FindNextPointer: PUWSubtitleItem;
     procedure Sort;
     function CopyExtraInfo(const Index: Integer): Pointer;
+    procedure MergeASSStyles(const ASource: TUWSubtitles);
     procedure ReplaceExtraInfo(const Index: Integer; const P: Pointer);
     function IsEqualItemTimes(const I1, I2: TUWSubtitleItem): Boolean;
     function IsEqualItem(const I1, I2: TUWSubtitleItem): Boolean;
@@ -1241,6 +1242,120 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the ASS styles of ASource that this one doesn't have (by name), for the
+// entries imported from another file: before, they kept the name of a style
+// that the saved file didn't have. Without own sections, those of ASource.
+procedure TUWSubtitles.MergeASSStyles(const ASource: TUWSubtitles);
+var
+  Dst, Src : TStringArray;
+  Names    : TStringList;
+  Added    : TStringList;
+  i, Ins   : Integer;
+  InStyles : Boolean;
+  DstFmt,
+  SrcFmt,
+  t        : String;
+
+  function IsStyles(const ALine: String): Boolean;
+  begin
+    Result := ALine.Trim.StartsWith('[') and (Pos('styles]', LowerCase(ALine)) > 0);
+  end;
+
+  function StyleName(const ALine: String): String; // "Style: Name,Font,..."
+  begin
+    Result := Copy(ALine.Trim, 7, MaxInt);
+    if Pos(',', Result) > 0 then
+      Result := Copy(Result, 1, Pos(',', Result)-1);
+    Result := Result.Trim;
+  end;
+
+  function FormatOf(const ALine: String): String; // to compare the columns
+  begin
+    Result := LowerCase(StringReplace(ALine, ' ', '', [rfReplaceAll]));
+  end;
+
+begin
+  if (ASource = NIL) or (ASource = Self) or (Pos('styles]', LowerCase(ASource.ASSHeader)) = 0) then Exit;
+
+  if FASSHeader = '' then
+  begin
+    FASSHeader := ASource.ASSHeader;
+    if FASSFooter = '' then FASSFooter := ASource.ASSFooter;
+    Exit;
+  end;
+
+  Dst := FASSHeader.Split([LineEnding]);
+  Src := ASource.ASSHeader.Split([LineEnding]);
+  Names := TStringList.Create;
+  Added := TStringList.Create;
+  try
+    Names.CaseSensitive := False;
+    Names.Sorted := True;
+    Names.Duplicates := dupIgnore;
+    // the styles of this one, and where the new ones go (after the last)
+    Ins := -1;
+    DstFmt := '';
+    InStyles := False;
+    for i := 0 to High(Dst) do
+    begin
+      t := Dst[i].Trim;
+      if t.StartsWith('[') then
+        InStyles := IsStyles(t)
+      else if InStyles then
+      begin
+        if SameText(Copy(t, 1, 7), 'Format:') then
+        begin
+          DstFmt := FormatOf(t);
+          Ins := i;
+        end
+        else if SameText(Copy(t, 1, 6), 'Style:') then
+        begin
+          Names.Add(StyleName(t));
+          Ins := i;
+        end;
+      end;
+    end;
+    if (Ins < 0) or (DstFmt = '') then Exit; // a styles section without Format
+
+    // the missing ones of the source, only with the same columns (V4+ or V4)
+    SrcFmt := '';
+    InStyles := False;
+    for i := 0 to High(Src) do
+    begin
+      t := Src[i].Trim;
+      if t.StartsWith('[') then
+        InStyles := IsStyles(t)
+      else if InStyles then
+      begin
+        if SameText(Copy(t, 1, 7), 'Format:') then
+          SrcFmt := FormatOf(t)
+        else if SameText(Copy(t, 1, 6), 'Style:') and (SrcFmt = DstFmt) and
+          (Names.IndexOf(StyleName(t)) < 0) then
+        begin
+          Names.Add(StyleName(t));
+          Added.Add(t);
+        end;
+      end;
+    end;
+    if Added.Count = 0 then Exit;
+
+    t := '';
+    for i := 0 to High(Dst) do
+    begin
+      if i > 0 then t := t + LineEnding;
+      t := t + Dst[i];
+      if i = Ins then
+        t := t + LineEnding + TrimRight(Added.Text);
+    end;
+    FASSHeader := t;
+  finally
+    Added.Free;
+    Names.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 function TUWSubtitles.CopyExtraInfo(const Index: Integer): Pointer;
 begin
   // a new copy, the caller owns it (or passes it to Insert/Add)
@@ -2036,9 +2151,16 @@ end;
 
 function TUWSubtitles.FixExtension(const AFileName, AExtension: String): String;
 var
-  s: String;
+  s, e: String;
   x: Integer;
 begin
+  // an extension of the format is kept (.ssa, .ttml, .webvtt), before it was
+  // always changed to the first one (a .ssa was saved as .ass)
+  e := LowerCase(ExtractFileExt(AFileName));
+  if e <> '' then
+    for s in LowerCase(AExtension).Split([';']) do
+      if s.Replace('*', '') = e then Exit(AFileName);
+
   x := Pos(';', AExtension);
   if x > 0 then
     s := Copy(AExtension, 1, x-1)

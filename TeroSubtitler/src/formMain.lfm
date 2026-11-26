@@ -2171,6 +2171,9 @@ object frmMain: TfrmMain
       object Separator23: TMenuItem
         Caption = '-'
       end
+      object mnuStyles: TMenuItem
+        Action = actStyles
+      end
       object mnuFormatProperties: TMenuItem
         Action = actFormatProperties
       end
@@ -4677,6 +4680,11 @@ object frmMain: TfrmMain
       Category = 'Edit'
       Caption = 'Format properties...'
       OnExecute = actFormatPropertiesExecute
+    end
+    object actStyles: TAction
+      Category = 'Edit'
+      Caption = 'Styles...'
+      OnExecute = actStylesExecute
     end
     object actMediaSplitEntryAtCursorPosition: TAction
       Tag = 8

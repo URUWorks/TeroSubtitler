@@ -696,6 +696,17 @@
         <ResourceBaseClass Value="Form"/>
       </Unit>
       <Unit>
+        <Filename Value="formStyles.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmStyles"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
+      <Unit>
+        <Filename Value="procIcons.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
         <Filename Value="formCustomSelectDlg.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmCustomSelectDlg"/>

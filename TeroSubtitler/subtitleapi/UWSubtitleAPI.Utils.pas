@@ -58,6 +58,13 @@ function HTMLDecode(const AStr: String): String;
 
 function IsBinaryFormat(const AFileName: String): Boolean;
 
+// Alineación numpad de una entrada (1-3 abajo, 4-6 medio, 7-9 arriba), sin
+// alineación propia (shaNone) es centrada
+function ItemNumpadAlign(const AAlign: TSubtitleHAlign; const AVAlign: TSubtitleVAlign): Integer;
+// ¿La entrada no tiene alineación propia? (usa la de su estilo, como en ASS)
+function ItemHasNoAlign(const AAlign: TSubtitleHAlign; const AVAlign: TSubtitleVAlign): Boolean;
+procedure NumpadToItemAlign(const ANumpad: Integer; out AAlign: TSubtitleHAlign; out AVAlign: TSubtitleVAlign);
+
 // -----------------------------------------------------------------------------
 
 implementation
@@ -1045,5 +1052,49 @@ end;
 
 // -----------------------------------------------------------------------------
 
-end.
+function ItemNumpadAlign(const AAlign: TSubtitleHAlign; const AVAlign: TSubtitleVAlign): Integer;
+begin
+  case AAlign of
+    shaLeft  : Result := 1;
+    shaRight : Result := 3;
+  else
+    Result := 2;
+  end;
+  case AVAlign of
+    svaCenter : Inc(Result, 3);
+    svaTop    : Inc(Result, 6);
+  else
+    ;
+  end;
+end;
 
+// -----------------------------------------------------------------------------
+
+function ItemHasNoAlign(const AAlign: TSubtitleHAlign; const AVAlign: TSubtitleVAlign): Boolean;
+begin
+  Result := (AAlign = shaNone) and (AVAlign = svaBottom);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure NumpadToItemAlign(const ANumpad: Integer; out AAlign: TSubtitleHAlign; out AVAlign: TSubtitleVAlign);
+begin
+  AAlign  := shaNone;
+  AVAlign := svaBottom;
+  if (ANumpad < 1) or (ANumpad > 9) then Exit;
+  case (ANumpad - 1) mod 3 of
+    0: AAlign := shaLeft;
+    1: AAlign := shaCenter;
+    2: AAlign := shaRight;
+  end;
+  case (ANumpad - 1) div 3 of
+    1: AVAlign := svaCenter;
+    2: AVAlign := svaTop;
+  else
+    ;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+end.

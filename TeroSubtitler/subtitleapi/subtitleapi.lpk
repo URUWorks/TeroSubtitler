@@ -32,6 +32,10 @@
         <UnitName Value="UWSubtitleAPI.TimeCode"/>
       </Item>
       <Item>
+        <Filename Value="UWSubtitleAPI.Styles.pas"/>
+        <UnitName Value="UWSubtitleAPI.Styles"/>
+      </Item>
+      <Item>
         <Filename Value="UWSubtitleAPI.CustomFormat.pas"/>
         <UnitName Value="UWSubtitleAPI.CustomFormat"/>
       </Item>

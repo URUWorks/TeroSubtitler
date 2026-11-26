@@ -31,7 +31,8 @@ type
 
   { TUndoItem }
 
-  TUndoType = (utInsertLine, utDeleteLine, utSubtitleChange, utFPSChange);
+  TUndoType = (utInsertLine, utDeleteLine, utSubtitleChange, utFPSChange,
+    utHeaderChange); // the styles (Subtitles.ASSHeader)
 
   PUndoItem = ^TUndoItem;
   TUndoItem = record
@@ -44,6 +45,7 @@ type
     HasExtra : Boolean;                  // Extra must be restored with the item
     Extra    : Pointer;                  // copy of Subtitles.ExtraInfo[Index] (owned)
     ExtraType: TUWSubtitleExtraInfoType; // type of Extra
+    Header   : String;                   // utHeaderChange: Subtitles.ASSHeader before the change
   end;
 
   { TUndoList }
@@ -82,6 +84,7 @@ type
     procedure AddUndoIfNotResent(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const IncrementGroup: Boolean = True; const ClearRedo: Boolean = True);
     procedure AddRedo(const UndoType: TUndoType; const Index: Integer; const Subtitle: TUWSubtitleItem; const Group: Byte);
     procedure AddUndoFPS(const OldFPS, NewFPS: TFPSInfo; const InputFPS: Boolean);
+    procedure AddUndoHeader(const OldHeader: String; const IncrementGroup: Boolean = True);
     procedure Undo(const VST: TLazVirtualStringTree);
     procedure Redo(const VST: TLazVirtualStringTree);
     procedure IncrementUndoGroup;
@@ -174,6 +177,21 @@ end;
 
 // -----------------------------------------------------------------------------
 
+function NewPUndoHeader(const AGroup: Byte; const AHeader: String): PUndoItem;
+begin
+  New(Result);
+  Result^.UndoType := utHeaderChange;
+  Result^.Index    := -1;
+  Result^.Subtitle := Default(TUWSubtitleItem);
+  Result^.Group    := AGroup;
+  Result^.HasExtra := False;
+  Result^.Extra    := NIL;
+  Result^.ExtraType:= eiNone;
+  Result^.Header   := AHeader;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure ClearList(var AList: TUndoList);
 var
   i: Integer;
@@ -256,6 +274,12 @@ begin
             ToList.Add(NewPUndo(utInsertLine, Item^.Index, Item^.Subtitle, Item^.Group));
             Subtitles.Insert(Item^.Index, Item^.Subtitle, TakeExtra(Item));
             VSTSelectNode(VST, Item^.Index, False, True);
+          end;
+
+        utHeaderChange:
+          begin
+            ToList.Add(NewPUndoHeader(Item^.Group, Subtitles.ASSHeader));
+            Subtitles.ASSHeader := Item^.Header;
           end;
 
         utFPSChange:
@@ -480,6 +504,17 @@ procedure TUndo.AddUndoFPS(const OldFPS, NewFPS: TFPSInfo; const InputFPS: Boole
 begin
   FUndoList.Add(NewPUndoFPS(FLastUndoGroup, OldFPS, NewFPS, InputFPS));
   IncrementUndoGroup;
+  ClearList(FRedoList);
+  Changed(uctCount);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TUndo.AddUndoHeader(const OldHeader: String; const IncrementGroup: Boolean = True);
+begin
+  FUndoList.Add(NewPUndoHeader(FLastUndoGroup, OldHeader));
+  TrimUndoList;
+  if IncrementGroup then IncrementUndoGroup;
   ClearList(FRedoList);
   Changed(uctCount);
 end;

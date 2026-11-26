@@ -54,6 +54,7 @@ procedure ShowTranslationMemoryList;
 procedure ShowSpellCheck;
 procedure ShowGoToTime;
 procedure ShowActors;
+procedure ShowStyles;
 procedure ShowShotChanges;
 procedure ShowAudioToText(const ASyncTexts: Boolean = False);
 procedure ShowAudioToTextModels;
@@ -102,7 +103,7 @@ uses
   formTBX, formTBXSettings, formTBXEdit, formWizard, formShiftTimes,
   formAudioToText, formAudioToTextModel, procTypes, procConfig, procWorkspace,
   formFormatProperties, formCustomTextFormat, formCustomImageFormat,
-  formActors, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
+  formActors, formStyles, formExportSUP, formGenerateVideo, formCharacterMap, procMPV,
   formRoundTime, formStatistics, formGenerateBlankVideo, formStreamExtractor,
   formPauses, formTTS, formVideoDubbing, formVideoOffset, formDolbyVision, formImportSUP, formImportPlainText,
   formImportSUPLanguages, LCLTranslator, procLocalize, procDialogs, SysUtils, Dialogs, procFiles,
@@ -673,6 +674,19 @@ begin
   end
   else
     frmActors.BringToFront;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ShowStyles;
+begin
+  if frmStyles = NIL then
+  begin
+    frmStyles := TfrmStyles.Create(Application);
+    ShowForm(frmStyles);
+  end
+  else
+    frmStyles.BringToFront;
 end;
 
 // -----------------------------------------------------------------------------

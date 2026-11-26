@@ -1,0 +1,469 @@
+object frmStyles: TfrmStyles
+  Left = 246
+  Height = 582
+  Top = 120
+  Width = 800
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Styles'
+  ClientHeight = 582
+  ClientWidth = 800
+  DesignTimePPI = 120
+  Position = poMainFormCenter
+  LCLVersion = '5.0.1.0'
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  object lstStyles: TListBox
+    Left = 10
+    Height = 515
+    Top = 10
+    Width = 238
+    ItemHeight = 0
+    TabOrder = 0
+    OnSelectionChange = lstStylesSelectionChange
+  end
+  object btnNew: TButton
+    Left = 10
+    Height = 32
+    Top = 540
+    Width = 75
+    Caption = 'New'
+    TabOrder = 1
+    OnClick = btnNewClick
+  end
+  object btnCopy: TButton
+    Left = 90
+    Height = 32
+    Top = 540
+    Width = 75
+    Caption = 'Copy'
+    TabOrder = 2
+    OnClick = btnCopyClick
+  end
+  object btnDelete: TButton
+    Left = 170
+    Height = 32
+    Top = 540
+    Width = 78
+    Caption = 'Delete'
+    TabOrder = 3
+    OnClick = btnDeleteClick
+  end
+  object lblName: TLabel
+    Left = 265
+    Height = 24
+    Top = 12
+    Width = 137
+    AutoSize = False
+    Caption = 'Name'
+    ParentColor = False
+  end
+  object edtName: TEdit
+    Left = 406
+    Height = 28
+    Top = 10
+    Width = 384
+    TabOrder = 4
+    OnChange = ControlChange
+  end
+  object lblFont: TLabel
+    Left = 265
+    Height = 24
+    Top = 52
+    Width = 137
+    AutoSize = False
+    Caption = 'Font'
+    ParentColor = False
+  end
+  object cboFont: TComboBox
+    Left = 406
+    Height = 28
+    Top = 50
+    Width = 275
+    ItemHeight = 20
+    Sorted = True
+    TabOrder = 5
+    OnChange = ControlChange
+  end
+  object spnSize: TFloatSpinEdit
+    Left = 690
+    Height = 28
+    Top = 50
+    Width = 100
+    MaxValue = 10000
+    TabOrder = 6
+    OnChange = ControlChange
+  end
+  object chkBold: TCheckBox
+    Left = 406
+    Height = 24
+    Top = 90
+    Width = 52
+    Caption = 'Bold'
+    TabOrder = 7
+    OnChange = ControlChange
+  end
+  object chkItalic: TCheckBox
+    Left = 500
+    Height = 24
+    Top = 90
+    Width = 53
+    Caption = 'Italic'
+    TabOrder = 8
+    OnChange = ControlChange
+  end
+  object chkUnderline: TCheckBox
+    Left = 594
+    Height = 24
+    Top = 90
+    Width = 85
+    Caption = 'Underline'
+    TabOrder = 9
+    OnChange = ControlChange
+  end
+  object chkStrikeOut: TCheckBox
+    Left = 700
+    Height = 24
+    Top = 90
+    Width = 80
+    Caption = 'Strikeout'
+    TabOrder = 10
+    OnChange = ControlChange
+  end
+  object lblColors: TLabel
+    Left = 265
+    Height = 23
+    Top = 159
+    Width = 137
+    AutoSize = False
+    Caption = 'Colors'
+    ParentColor = False
+  end
+  object lblPrimary: TLabel
+    Left = 406
+    Height = 24
+    Top = 130
+    Width = 88
+    AutoSize = False
+    Caption = 'Primary'
+    ParentColor = False
+  end
+  object lblSecondary: TLabel
+    Left = 500
+    Height = 24
+    Top = 130
+    Width = 88
+    AutoSize = False
+    Caption = 'Secondary'
+    ParentColor = False
+  end
+  object lblOutlineColor: TLabel
+    Left = 594
+    Height = 24
+    Top = 130
+    Width = 87
+    AutoSize = False
+    Caption = 'Outline'
+    ParentColor = False
+  end
+  object lblBack: TLabel
+    Left = 688
+    Height = 24
+    Top = 130
+    Width = 87
+    AutoSize = False
+    Caption = 'Shadow'
+    ParentColor = False
+  end
+  object cbnPrimary: TColorButton
+    Left = 406
+    Height = 33
+    Top = 152
+    Width = 88
+    BorderWidth = 2
+    ButtonColorSize = 20
+    ButtonColor = clWhite
+    OnColorChanged = ControlChange
+  end
+  object cbnSecondary: TColorButton
+    Left = 500
+    Height = 33
+    Top = 152
+    Width = 88
+    BorderWidth = 2
+    ButtonColorSize = 20
+    ButtonColor = clWhite
+    OnColorChanged = ControlChange
+  end
+  object cbnOutlineColor: TColorButton
+    Left = 594
+    Height = 33
+    Top = 152
+    Width = 87
+    BorderWidth = 2
+    ButtonColorSize = 20
+    ButtonColor = clWhite
+    OnColorChanged = ControlChange
+  end
+  object cbnBack: TColorButton
+    Left = 688
+    Height = 33
+    Top = 152
+    Width = 87
+    BorderWidth = 2
+    ButtonColorSize = 20
+    ButtonColor = clWhite
+    OnColorChanged = ControlChange
+  end
+  object lblOutline: TLabel
+    Left = 265
+    Height = 24
+    Top = 202
+    Width = 137
+    AutoSize = False
+    Caption = 'Outline'
+    ParentColor = False
+  end
+  object spnOutline: TFloatSpinEdit
+    Left = 406
+    Height = 28
+    Top = 200
+    Width = 88
+    Increment = 0.5
+    MaxValue = 10000
+    TabOrder = 11
+    OnChange = ControlChange
+  end
+  object lblShadow: TLabel
+    Left = 506
+    Height = 24
+    Top = 202
+    Width = 82
+    AutoSize = False
+    Caption = 'Shadow'
+    ParentColor = False
+  end
+  object spnShadow: TFloatSpinEdit
+    Left = 594
+    Height = 28
+    Top = 200
+    Width = 87
+    Increment = 0.5
+    MaxValue = 10000
+    TabOrder = 12
+    OnChange = ControlChange
+  end
+  object chkOpaqueBox: TCheckBox
+    Left = 694
+    Height = 24
+    Top = 202
+    Width = 46
+    Caption = 'Box'
+    TabOrder = 13
+    OnChange = ControlChange
+  end
+  object lblAlignment: TLabel
+    Left = 265
+    Height = 24
+    Top = 240
+    Width = 137
+    AutoSize = False
+    Caption = 'Alignment'
+    ParentColor = False
+  end
+  object rgAlignment: TRadioGroup
+    Left = 406
+    Height = 112
+    Top = 238
+    Width = 188
+    AutoFill = True
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 3
+    ClientHeight = 87
+    ClientWidth = 184
+    Columns = 3
+    Items.Strings = (
+      '7'
+      '8'
+      '9'
+      '4'
+      '5'
+      '6'
+      '1'
+      '2'
+      '3'
+    )
+    TabOrder = 14
+    OnClick = ControlChange
+  end
+  object lblMarginL: TLabel
+    Left = 604
+    Height = 24
+    Top = 240
+    Width = 118
+    AutoSize = False
+    Caption = 'Left margin'
+    ParentColor = False
+  end
+  object spnMarginL: TSpinEdit
+    Left = 725
+    Height = 28
+    Top = 238
+    Width = 65
+    MaxValue = 99999
+    TabOrder = 15
+    OnChange = ControlChange
+  end
+  object lblMarginR: TLabel
+    Left = 604
+    Height = 24
+    Top = 280
+    Width = 118
+    AutoSize = False
+    Caption = 'Right margin'
+    ParentColor = False
+  end
+  object spnMarginR: TSpinEdit
+    Left = 725
+    Height = 28
+    Top = 278
+    Width = 65
+    MaxValue = 99999
+    TabOrder = 16
+    OnChange = ControlChange
+  end
+  object lblMarginV: TLabel
+    Left = 604
+    Height = 24
+    Top = 320
+    Width = 118
+    AutoSize = False
+    Caption = 'Vertical margin'
+    ParentColor = False
+  end
+  object spnMarginV: TSpinEdit
+    Left = 725
+    Height = 28
+    Top = 318
+    Width = 65
+    MaxValue = 99999
+    TabOrder = 17
+    OnChange = ControlChange
+  end
+  object lblScaleX: TLabel
+    Left = 265
+    Height = 23
+    Top = 368
+    Width = 137
+    AutoSize = False
+    Caption = 'Scale X %'
+    ParentColor = False
+  end
+  object spnScaleX: TFloatSpinEdit
+    Left = 406
+    Height = 28
+    Top = 365
+    Width = 88
+    MaxValue = 100000
+    TabOrder = 18
+    OnChange = ControlChange
+  end
+  object lblScaleY: TLabel
+    Left = 506
+    Height = 23
+    Top = 368
+    Width = 82
+    AutoSize = False
+    Caption = 'Scale Y %'
+    ParentColor = False
+  end
+  object spnScaleY: TFloatSpinEdit
+    Left = 594
+    Height = 28
+    Top = 365
+    Width = 87
+    MaxValue = 100000
+    TabOrder = 19
+    OnChange = ControlChange
+  end
+  object lblSpacing: TLabel
+    Left = 265
+    Height = 23
+    Top = 408
+    Width = 137
+    AutoSize = False
+    Caption = 'Spacing'
+    ParentColor = False
+  end
+  object spnSpacing: TFloatSpinEdit
+    Left = 406
+    Height = 28
+    Top = 405
+    Width = 88
+    MaxValue = 10000
+    MinValue = -10000
+    TabOrder = 20
+    OnChange = ControlChange
+  end
+  object lblAngle: TLabel
+    Left = 506
+    Height = 23
+    Top = 408
+    Width = 82
+    AutoSize = False
+    Caption = 'Angle'
+    ParentColor = False
+  end
+  object spnAngle: TFloatSpinEdit
+    Left = 594
+    Height = 28
+    Top = 405
+    Width = 87
+    MaxValue = 100000
+    MinValue = -100000
+    TabOrder = 21
+    OnChange = ControlChange
+  end
+  object pbPreview: TPaintBox
+    Left = 265
+    Height = 83
+    Top = 445
+    Width = 525
+    OnPaint = pbPreviewPaint
+  end
+  object btnApplyToSelection: TButton
+    Left = 265
+    Height = 32
+    Top = 540
+    Width = 250
+    Caption = 'Apply to selected entries'
+    TabOrder = 22
+    OnClick = btnApplyToSelectionClick
+  end
+  object btnOK: TButton
+    Left = 545
+    Height = 32
+    Top = 540
+    Width = 119
+    Caption = 'OK'
+    Default = True
+    TabOrder = 23
+    OnClick = btnOKClick
+  end
+  object btnClose: TButton
+    Left = 671
+    Height = 32
+    Top = 540
+    Width = 119
+    Cancel = True
+    Caption = 'Close'
+    TabOrder = 24
+    OnClick = btnCloseClick
+  end
+end

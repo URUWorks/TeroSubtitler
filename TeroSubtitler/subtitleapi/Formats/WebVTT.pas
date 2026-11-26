@@ -56,7 +56,7 @@ type
 implementation
 
 uses UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Tags, UWSystem.StrUtils,
-  UWSystem.SysUtils, UWSubtitleAPI.Utils;
+  UWSystem.SysUtils, UWSubtitleAPI.Utils, UWSubtitleAPI.Styles;
 
 {
 This format allows for time notation of hours, minutes, seconds and milliseconds,
@@ -394,6 +394,77 @@ end;
 
 // -----------------------------------------------------------------------------
 
+{ The styles of the subtitle (ASS) are written as ::cue(.tero-Name) rules of
+  the STYLE block, and the text of each cue goes in <c.tero-Name>. To read
+  them back as they were, the block also has each "Style:" line and the
+  PlayRes in CSS comments:
+    /* tero-playres: 1920x1080 */
+    /* tero-style: Style: Default,Arial,... */ }
+
+const
+  VTTStyleComment   = '/* tero-style: ';
+  VTTPlayResComment = '/* tero-playres: ';
+
+// -----------------------------------------------------------------------------
+
+// Color ASS -> CSS: rgb() opaco, rgba() con transparencia
+function VTTCSSColor(const AColor: Cardinal): String;
+var
+  R, G, B: Integer;
+begin
+  R := AColor and $FF;
+  G := (AColor shr 8) and $FF;
+  B := (AColor shr 16) and $FF;
+  if ASSColorAlpha(AColor) = 0 then
+    Result := SysUtils.Format('rgb(%d,%d,%d)', [R, G, B])
+  else
+    Result := SysUtils.Format('rgba(%d,%d,%d,%s)', [R, G, B, ASSFloatToStr(ASSColorOpacity(AColor))]);
+end;
+
+// -----------------------------------------------------------------------------
+
+// Regla ::cue de un estilo: el tamaño en % del de WebVTT (5% de la altura)
+function VTTStyleRule(const AId: String; const AStyle: TASSStyle; const AResY: Integer): String;
+var
+  s, o, sh: String;
+begin
+  Result := '::cue(.' + AId + ') { color:' + VTTCSSColor(AStyle.Colors[0]) +
+    '; font-family:' + ASSFontFamily(AStyle.FontName) + ', sans-serif';
+  if (AStyle.FontSize > 0) and (AResY > 0) then
+    Result := Result + '; font-size:' + ASSFloatToStr(AStyle.FontSize * 2000 / AResY) + '%';
+  if AStyle.Bold then Result := Result + '; font-weight:bold';
+  if AStyle.Italic then Result := Result + '; font-style:italic';
+  s := '';
+  if AStyle.Underline then s := 'underline';
+  if AStyle.StrikeOut then s := Trim(s + ' line-through');
+  if s <> '' then Result := Result + '; text-decoration:' + s;
+
+  if AStyle.BorderStyle = 3 then // caja opaca, del color del borde
+    Result := Result + '; background-color:' + VTTCSSColor(AStyle.Colors[2])
+  else if AStyle.FontSize > 0 then
+  begin
+    // borde con cuatro sombras y la sombra del estilo, en em
+    s := '';
+    if AStyle.Outline > 0 then
+    begin
+      o := ASSFloatToStr(AStyle.Outline / AStyle.FontSize) + 'em';
+      sh := VTTCSSColor(AStyle.Colors[2]);
+      s := '-' + o + ' -' + o + ' 0 ' + sh + ', ' + o + ' -' + o + ' 0 ' + sh + ', -' +
+        o + ' ' + o + ' 0 ' + sh + ', ' + o + ' ' + o + ' 0 ' + sh;
+    end;
+    if AStyle.Shadow > 0 then
+    begin
+      o := ASSFloatToStr(AStyle.Shadow / AStyle.FontSize) + 'em';
+      if s <> '' then s := s + ', ';
+      s := s + o + ' ' + o + ' 0 ' + VTTCSSColor(AStyle.Colors[3]);
+    end;
+    if s <> '' then Result := Result + '; text-shadow:' + s;
+  end;
+  Result := Result + ' }';
+end;
+
+// -----------------------------------------------------------------------------
+
 { TUWWebVTT }
 
 // -----------------------------------------------------------------------------
@@ -493,6 +564,8 @@ begin
     if k = 0 then Continue;
     Nm := Trim(Copy(Sel, k + 1, MaxInt));
     if (Nm = '') or (Pos('.', Nm) > 0) or (Pos(' ', Nm) > 0) then Continue;
+    // las clases de los estilos no son colores del texto
+    if Copy(Nm, 1, 5) = 'tero-' then Continue;
 
     Val := VTTCSSProperty(Body, 'color');
     k := Pos('!', Val);
@@ -640,6 +713,9 @@ var
   HasAlign, HasLine, LineIsPct: Boolean;
   AlignC, LineVal: Integer;
   TheV: TSubtitleVAlign;
+  Styles: TASSStyles;
+  StyleIds: TStringList;
+  ResX, ResY, si: Integer;
 
   function IsKeyword(const L, Kw: String): Boolean;
   begin
@@ -701,11 +777,73 @@ var
       end;
   end;
 
+  // los comentarios de Tero en el bloque STYLE: los estilos y su PlayRes
+  procedure ReadTeroStyles(const A, B: Integer);
+  var
+    m, q: Integer;
+    L, Cls: String;
+    St: TASSStyle;
+  begin
+    for m := A to B do
+    begin
+      L := Trim(SubtitleFile[m]);
+      if (Copy(L, 1, Length(VTTPlayResComment)) = VTTPlayResComment) and (Copy(L, Length(L) - 1, 2) = '*/') then
+      begin
+        L := Trim(Copy(L, Length(VTTPlayResComment) + 1, Length(L) - Length(VTTPlayResComment) - 2));
+        q := Pos('x', L);
+        ResX := StrToIntDef(Copy(L, 1, q - 1), 0);
+        ResY := StrToIntDef(Copy(L, q + 1, MaxInt), 0);
+      end
+      else if (Copy(L, 1, Length(VTTStyleComment)) = VTTStyleComment) and (Copy(L, Length(L) - 1, 2) = '*/') then
+      begin
+        L := Trim(Copy(L, Length(VTTStyleComment) + 1, Length(L) - Length(VTTStyleComment) - 2));
+        // la clase va en la regla ::cue de la línea siguiente
+        Cls := '';
+        if m < B then
+        begin
+          Cls := Trim(SubtitleFile[m + 1]);
+          if Copy(Cls, 1, 7) = '::cue(.' then
+          begin
+            Cls := Copy(Cls, 8, MaxInt);
+            q := Pos(')', Cls);
+            if q > 0 then Cls := Copy(Cls, 1, q - 1) else Cls := '';
+          end
+          else
+            Cls := '';
+        end;
+        if (Cls <> '') and ASSStyleFromLine(L, St) and (ASSIndexOfStyle(Styles, St.Name) < 0) then
+        begin
+          SetLength(Styles, Length(Styles) + 1);
+          Styles[High(Styles)] := St;
+          StyleIds.Values[Cls] := IntToStr(High(Styles));
+        end;
+      end;
+    end;
+  end;
+
+  // <c.tero-Name>texto</c> de un estilo: se quita y devuelve el estilo, -1 sin él
+  function ExtractStyle(var T: String): Integer;
+  var
+    q: Integer;
+  begin
+    Result := -1;
+    if (StyleIds.Count = 0) or (Copy(T, 1, 3) <> '<c.') then Exit;
+    q := Pos('>', T);
+    if q = 0 then Exit;
+    Result := StrToIntDef(StyleIds.Values[Copy(T, 4, q - 4)], -1);
+    if (Result < 0) or (Copy(T, Length(T) - 3, 4) <> '</c>') then Exit(-1);
+    T := Copy(T, q + 1, Length(T) - q - 4);
+  end;
+
 begin
   Result := False;
 
   // Antes los colores de un archivo quedaban para los siguientes
   ResetColorsToDefault;
+  Styles := NIL;
+  ResX := 0;
+  ResY := 0;
+  StyleIds := TStringList.Create;
   try
     n := SubtitleFile.Count;
     ExtraTime := 0;
@@ -758,7 +896,10 @@ begin
         // sin texto que cargar
       end
       else if IsKeyword(First, 'STYLE') then
-        ParseCueStyles(JoinLines(i + 1, e - 1))
+      begin
+        ParseCueStyles(JoinLines(i + 1, e - 1));
+        ReadTeroStyles(i + 1, e - 1);
+      end
       else
       begin
         t := -1;
@@ -862,6 +1003,7 @@ begin
 
               Text := JoinLines(t + 1, e - 1);
               Voice := ExtractVoice(Text);
+              si := ExtractStyle(Text);
 
               // Final text
               Text := TagsToTS(HTMLTagsToTS(HTMLDecode(Text)));
@@ -869,13 +1011,29 @@ begin
               Subtitles.ItemPointer[x]^.Actor := Voice;
               Subtitles.ItemPointer[x]^.Align := TSubtitleHAlign(AlignC);
               Subtitles.ItemPointer[x]^.VAlign := TheV;
+              // el estilo; la alineación es la de él cuando se guardó sin una propia
+              if si >= 0 then
+                with Subtitles.ItemPointer[x]^ do
+                begin
+                  Style := Styles[si].Name;
+                  if ItemNumpadAlign(Align, VAlign) = Styles[si].Alignment then
+                  begin
+                    Align  := shaNone;
+                    VAlign := svaBottom;
+                  end;
+                end;
             end;
           end;
         end;
       end;
       i := e;
     end;
+    // una cabecera con los estilos, para ASS y el editor de estilos (al
+    // agregar a un subtítulo que tiene los suyos, se mantienen esos)
+    if (Length(Styles) > 0) and (Subtitles.ASSHeader = '') and (Subtitles.Count > 0) then
+      Subtitles.ASSHeader := ASSHeaderFromStyles(ResX, ResY, Styles);
   finally
+    StyleIds.Free;
     if Subtitles.Count > 0 then
     begin
       Subtitles.ExtraInfoType := eiWebVTT;
@@ -895,8 +1053,13 @@ var
   HasWrittenLine : Boolean;
   b : Boolean;
   Rx : TRegExpr;
+  STab : TASSStyleTable;
+  si : Integer;
+  HA : TSubtitleHAlign;
+  VA : TSubtitleVAlign;
 begin
   Result := False;
+  ASSStyleTableInit(STab, Subtitles.ASSHeader);
 
   StringList.Add('WEBVTT');
 
@@ -917,10 +1080,23 @@ begin
     begin
       Align := '';
 
-      case Subtitles[i].Align of
+      // la alineación de la entrada, o la de su estilo sin una propia
+      HA := Subtitles[i].Align;
+      VA := Subtitles[i].VAlign;
+      si := -1;
+      if Length(STab.Styles) > 0 then
+      begin
+        si := ASSStyleTableFind(STab, Subtitles[i].Style);
+        if (si >= 0) and ItemHasNoAlign(HA, VA) and (STab.Styles[si].Alignment <> 2) then
+          NumpadToItemAlign(STab.Styles[si].Alignment, HA, VA);
+      end;
+
+      case HA of
         shaLeft   : Align := ' align:left';
         shaCenter : Align := ' align:center';
         shaRight  : Align := ' align:right';
+      else
+        ;
       end;
 
       // line: primero el valor exacto del archivo WebVTT de origen
@@ -928,18 +1104,20 @@ begin
       if (Subtitles.ExtraInfoType = eiWebVTT) and (Subtitles.ExtraInfo[i] <> NIL) then
         with PWebVTT_ExtraInfo(Subtitles.ExtraInfo[i])^ do
           if (LinePos <> 0) and
-            (((LinePos < 40) and (Subtitles[i].VAlign = svaTop)) or
-             ((LinePos >= 40) and (LinePos < 70) and (Subtitles[i].VAlign = svaCenter)) or
-             ((LinePos >= 70) and (Subtitles[i].VAlign = svaBottom))) then
+            (((LinePos < 40) and (VA = svaTop)) or
+             ((LinePos >= 40) and (LinePos < 70) and (VA = svaCenter)) or
+             ((LinePos >= 70) and (VA = svaBottom))) then
           begin
             Align := Align + SysUtils.Format(' line:%d%%', [LinePos]);
             HasWrittenLine := True;
           end;
 
-      if (not HasWrittenLine) and (Subtitles[i].VAlign <> svaBottom) then
-        case Subtitles[i].VAlign of
+      if (not HasWrittenLine) and (VA <> svaBottom) then
+        case VA of
           svaCenter : Align := Align + ' line:50%';
           svaTop    : Align := Align + ' line:10%';
+        else
+          ;
         end;
 
       if Subtitles.FormatProperties^.WebVTT.WriteCueIdentifiers then
@@ -965,6 +1143,9 @@ begin
           if Text <> '' then Text := Text + sLineBreak;
           Text := Text + Lines[k];
         end;
+
+      if (Text <> '') and (si >= 0) then
+        Text := '<c.' + STab.Ids[si] + '>' + Text + '</c>';
 
       if (Text <> '') and (not Subtitles[i].Actor.IsEmpty) then
         Text := '<v ' + VTTEscapeAll(Subtitles[i].Actor) + '>' + Text + '</v>';
@@ -999,6 +1180,20 @@ begin
           SysUtils.Format('::cue(.%s) { color:rgb(%d,%d,%d) }',
             [FColors.Names[i], HexToByte(Copy(FColors.ValueFromIndex[i], 5, 2)), HexToByte(Copy(FColors.ValueFromIndex[i], 3, 2)), HexToByte(Copy(FColors.ValueFromIndex[i], 1, 2))])
         );
+    end;
+
+    // los estilos, todos (también los que no se usan, para que vuelvan al cargar)
+    if Length(STab.Styles) > 0 then
+    begin
+      for k := High(STab.Styles) downto 0 do
+      begin
+        SL.Insert(0, VTTStyleRule(STab.Ids[k], STab.Styles[k], STab.ResY));
+        Text := ASSStyleToLine(STab.Styles[k]);
+        // un comentario no puede tener '*/' y el bloque no puede tener '-->'
+        if (Pos('*/', Text) = 0) and (Pos('-->', Text) = 0) then
+          SL.Insert(0, VTTStyleComment + Text + ' */');
+      end;
+      SL.Insert(0, VTTPlayResComment + IntToStr(STab.ResX) + 'x' + IntToStr(STab.ResY) + ' */');
     end;
 
     if SL.Count > 0 then

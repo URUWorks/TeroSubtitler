@@ -73,6 +73,7 @@ type
     actFormatProperties: TAction;
     actExportCustomTextFormat: TAction;
     actActor: TAction;
+    actStyles: TAction;
     actExportCustomImageFormat: TAction;
     actDetectDialogSegments: TAction;
     actExportSUP: TAction;
@@ -601,6 +602,7 @@ type
     mnuVSTFormat: TMenuItem;
     mnuMemoFormat: TMenuItem;
     mnuFormatProperties: TMenuItem;
+    mnuStyles: TMenuItem;
     mnuCheckForUpdates: TMenuItem;
     MenuItem17: TMenuItem;
     MenuItem38: TMenuItem;
@@ -1096,6 +1098,8 @@ type
     procedure sbrSeekMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure sbrSeekDragPreview(const APos: Integer; const AForce: Boolean = False);
+    procedure sbrSeekDragFlush(const AForce: Boolean = False);
+    procedure sbrSeekDragTimer(Sender: TObject);
     procedure sbrVolumeChange(Sender: TObject);
     // formMain_Actions
     procedure actAboutExecute(Sender: TObject);
@@ -1327,6 +1331,7 @@ type
     procedure actImportSUPExecute(Sender: TObject);
     procedure actImportPlainTextExecute(Sender: TObject);
     procedure actActorExecute(Sender: TObject);
+    procedure actStylesExecute(Sender: TObject);
     procedure actLoadProjectExecute(Sender: TObject);
     procedure actSaveProjectExecute(Sender: TObject);
     procedure actSaveProjectAsExecute(Sender: TObject);
@@ -1400,6 +1405,8 @@ type
     FURLLoadStart: QWord;
     FSeekDragTick: QWord;         // last seek sent while dragging sbrSeek
     FSeekDragPos: Integer;        // its position (video ms), -1 = none
+    FSeekDragPending: Integer;    // the last one asked, not sent yet, -1 = none
+    FSeekDragTimer: TTimer;       // sends the pending one when mpv is ready
     {$IFDEF LCLCocoa}
     FVSTOldWindowProc: TWndMethod;
     {$ENDIF}
@@ -1419,7 +1426,6 @@ type
     procedure WAVEValuesTimerTimer(Sender: TObject);
     procedure UpdateWAVEDraggedValues;
     procedure StopURLLoadTimer;
-    procedure DoFitCoolBars(Data: PtrInt);
     {$IFDEF LCLCocoa}
     procedure VSTWindowProc(var TheMessage: TLMessage);
     {$ENDIF}
@@ -1427,6 +1433,8 @@ type
     function ViewPropertiesCombo(const AIndex: Integer): TComboBox;
   public
     function IsShortcut(var Message: TLMKey): Boolean; override;
+    // also queued by procWorkspace (UpdateToolBarIconSize)
+    procedure DoFitCoolBars(Data: PtrInt);
   end;
 
   { SubtileAPI OnLoadDataFunc }
@@ -1597,11 +1605,10 @@ begin
   edtQuickAction.OnPopupList := @DoPopupQuickActionList;
   {$ENDIF}
 
-  {$IFDEF DARWIN}
-  // rsLine not working on macOS?
   SplitterVideo.ResizeStyle    := rsUpdate;
   SplitterWaveform.ResizeStyle := SplitterVideo.ResizeStyle;
 
+  {$IFDEF DARWIN}
   // prepare macOS menu
   AppMenu := TMenuItem.Create(Self); {Application menu}
   AppMenu.Caption := #$EF#$A3#$BF;   {Unicode Apple logo char}
@@ -1654,6 +1661,8 @@ begin
   SetWorkMode(Workspace.WorkMode);
   EnableWorkArea(False);
   UpdateStatusBar(True);
+  // the sized toolbar icons, before the theme gives them to the toolbars
+  UpdateToolBarIconSize;
   CheckColorTheme(Self);
 end;
 

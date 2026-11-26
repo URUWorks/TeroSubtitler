@@ -9,7 +9,7 @@ interface
 
 uses
   UWSubtitleAPI, UWSubtitleAPI.Tags, UWSubtitleAPI.ExtraInfo, 
-  UWSubtitleAPI.TimeCode, UWSubtitleAPI.CustomFormat, UWSubtitleAPI.EDL, 
+  UWSubtitleAPI.TimeCode, UWSubtitleAPI.Styles, UWSubtitleAPI.CustomFormat, UWSubtitleAPI.EDL, 
   UWSubtitleAPI.Formats, UWSubtitleAPI.Utils, UWSubtitleAPI.TBX, 
   UWSubtitleAPI.TMX, ABCiView, AdobeEncoreDVD, AdvancedSubstationAlpha, 
   AdvancedSubtitles, AQTitle, AvidCaption, Captions32, CaptionsInc, Cavena890, 

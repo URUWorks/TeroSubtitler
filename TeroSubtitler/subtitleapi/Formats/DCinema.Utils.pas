@@ -37,7 +37,7 @@ function DCinemaSaveSubtitle(const StringList: TUWStringList; const FPS: Double;
 implementation
 
 uses
-  Math, StrUtils, UWSubtitleAPI.Utils;
+  Math, StrUtils, UWSubtitleAPI.Utils, UWSubtitleAPI.Styles;
 
 const
   DCEffectNames : array[0..2] of String = ('none', 'border', 'shadow');
@@ -601,6 +601,41 @@ var
   Text, VAlign, HAlign, FId : String;
   VPos, HPos : Double;
   FS : TFormatSettings;
+  STab : TASSStyleTable;
+  si : Integer;
+  HA : TSubtitleHAlign;
+  VA : TSubtitleVAlign;
+  LineParent : TDOMElement;
+
+  function DCColor(const AColor: Cardinal): String;
+  begin
+    // ASS $AABBGGRR (AA 0 = opaque) -> AARRGGBB (FF = opaque)
+    Result := ColorToDC((Cardinal(255 - ASSColorAlpha(AColor)) shl 24) or
+      ((AColor and $FF) shl 16) or (AColor and $FF00) or ((AColor shr 16) and $FF));
+  end;
+
+  function StyleFont(const AStyle: TASSStyle): TDOMElement;
+  begin
+    // a <Font> with the style of the entry around its lines; the size and
+    // the font are those of the format properties (the units are not the same)
+    Result := XmlDoc.CreateElement('Font');
+    Result.SetAttribute('Color', DCColor(AStyle.Colors[0]));
+    Result.SetAttribute('Italic', IfThen(AStyle.Italic, 'yes', 'no'));
+    Result.SetAttribute(IfThen(AFlavor = dcfInterop, 'Underlined', 'Underline'), IfThen(AStyle.Underline, 'yes', 'no'));
+    Result.SetAttribute('Weight', IfThen(AStyle.Bold, 'bold', 'normal'));
+    if (AStyle.BorderStyle <> 3) and (AStyle.Outline > 0) then
+    begin
+      Result.SetAttribute('Effect', 'border');
+      Result.SetAttribute('EffectColor', DCColor(AStyle.Colors[2]));
+    end
+    else if (AStyle.BorderStyle <> 3) and (AStyle.Shadow > 0) then
+    begin
+      Result.SetAttribute('Effect', 'shadow');
+      Result.SetAttribute('EffectColor', DCColor(AStyle.Colors[3]));
+    end
+    else
+      Result.SetAttribute('Effect', 'none');
+  end;
 
   procedure AddChild(const AParent: TDOMElement; const AName, AValue: String);
   var
@@ -616,6 +651,8 @@ begin
   Rate := TimeCodeRate(FPS);
   FS := DefaultFormatSettings;
   FS.DecimalSeparator := '.';
+  // the styles of the subtitle (ASS), when it has them
+  ASSStyleTableInit(STab, Subtitles.ASSHeader);
 
   XmlDoc := TXMLDocument.Create;
   try
@@ -694,7 +731,28 @@ begin
         Sub.SetAttribute('FadeDownTime', MSToDCFade(FadeDownTime, AFlavor, Rate));
         FontNode.AppendChild(Sub);
 
-        case Subtitles[i].Align of
+        // the alignment of the entry, or the one of its style without it.
+        // Default keeps the font of the format properties, the other styles
+        // are a <Font> inside the <Subtitle>
+        HA := Subtitles[i].Align;
+        VA := Subtitles[i].VAlign;
+        LineParent := Sub;
+        if Length(STab.Styles) > 0 then
+        begin
+          si := ASSStyleTableFind(STab, Subtitles[i].Style);
+          if si >= 0 then
+          begin
+            if ItemHasNoAlign(HA, VA) then
+              NumpadToItemAlign(STab.Styles[si].Alignment, HA, VA);
+            if not SameText(STab.Styles[si].Name, 'Default') then
+            begin
+              LineParent := StyleFont(STab.Styles[si]);
+              Sub.AppendChild(LineParent);
+            end;
+          end;
+        end;
+
+        case HA of
           shaLeft  : begin HAlign := 'left';  HPos := 10; end;
           shaRight : begin HAlign := 'right'; HPos := 10; end;
         else
@@ -705,7 +763,7 @@ begin
         for j := 0 to n-1 do
         begin
           // one <Text> per line, the position is from the edge of VAlign
-          case Subtitles[i].VAlign of
+          case VA of
             svaTop :
               begin
                 VAlign := 'top';
@@ -738,7 +796,7 @@ begin
             TextNode.SetAttribute('Direction', 'ltr');
           end;
           AppendStyledText(XmlDoc, TextNode, Trim(Lines[j]), AFlavor);
-          Sub.AppendChild(TextNode);
+          LineParent.AppendChild(TextNode);
         end;
       end;
     end;

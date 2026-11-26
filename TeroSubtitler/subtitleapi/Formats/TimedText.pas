@@ -46,7 +46,23 @@ type
 implementation
 
 uses UWSubtitleAPI.Tags, UWSubtitleAPI.Utils, UWSystem.StrUtils,
-  UWSystem.SysUtils;
+  UWSystem.SysUtils, UWSubtitleAPI.Styles;
+
+const
+  // the styles of the subtitle (ASS) go in the <style> elements as normal
+  // TTML attributes, and also as the "Style:" line in an attribute of this
+  // namespace, so that Tero can read them back as they were
+  TeroNS = 'urn:uruworks:terosubtitler';
+
+// -----------------------------------------------------------------------------
+
+function TTMLColor(const AColor: Cardinal): String;
+begin
+  // #RRGGBB, or #RRGGBBAA when it isn't opaque
+  Result := ASSColorToHTML(AColor);
+  if ASSColorAlpha(AColor) <> 0 then
+    Result := Result + IntToHex(255 - ASSColorAlpha(AColor), 2);
+end;
 
 // -----------------------------------------------------------------------------
 
@@ -110,9 +126,37 @@ var
   CurBegin, CurEnd: Integer;
   IsContinuation: Boolean;
   TickRate: Double;
+  Styles: TASSStyles;
+  StyleIds: TStringList;
+  StyleNode: TDOMNode;
+  ResX, ResY, si: Integer;
+  St: TASSStyle;
+
+  procedure ReadTeroStyles(const ANode: TDOMNode);
+  var
+    Child: TDOMNode;
+  begin
+    // the <style> elements with the line of a Tero style (tero:style)
+    Child := ANode.FirstChild;
+    while Assigned(Child) do
+    begin
+      if ((Child.NodeName = prefix+'style') or (Child.NodeName = 'style')) and
+        XMLHasAttribute(Child, 'xml:id') and XMLHasAttribute(Child, 'tero:style') and
+        ASSStyleFromLine(XMLGetAttrValue(Child, 'tero:style'), St) and
+        (ASSIndexOfStyle(Styles, St.Name) < 0) then
+      begin
+        SetLength(Styles, Length(Styles) + 1);
+        Styles[High(Styles)] := St;
+        StyleIds.Values[XMLGetAttrValue(Child, 'xml:id')] := IntToStr(High(Styles));
+      end;
+      Child := Child.NextSibling;
+    end;
+  end;
+
 begin
   Result := False;
   XmlDoc := NIL;
+  Styles := NIL;
 
   StringsToXML(XmlDoc, SubtitleFile);
 
@@ -120,6 +164,7 @@ begin
   if not Assigned(XmlDoc) then Exit;
 
   RegionMap := TStringList.Create;
+  StyleIds := TStringList.Create;
   try
       if Contains('<tt:tt', SubtitleFile.Text) then
         prefix := 'tt:'
@@ -156,6 +201,17 @@ begin
             Subtitles.TimeBase := stbMedia;
         end;
       end;
+
+      // the styles written by Tero
+      ResX := 0;
+      ResY := 0;
+      if Assigned(Node) and XMLHasAttribute(Node, 'tero:playRes') then
+      begin
+        ResX := StrToIntDef(Copy(XMLGetAttrValue(Node, 'tero:playRes'), 1, Pos('x', XMLGetAttrValue(Node, 'tero:playRes')) - 1), 0);
+        ResY := StrToIntDef(Copy(XMLGetAttrValue(Node, 'tero:playRes'), Pos('x', XMLGetAttrValue(Node, 'tero:playRes')) + 1, MaxInt), 0);
+      end;
+      StyleNode := XMLFindNodeByName(XmlDoc, prefix+'styling');
+      if Assigned(StyleNode) then ReadTeroStyles(StyleNode);
 
       // VAlign
       LayoutNode := XMLFindNodeByName(XmlDoc, prefix+'layout');
@@ -257,6 +313,19 @@ begin
               else
                 Item.VAlign := svaBottom;
 
+              // the style of the entry; the alignment of the region is the one
+              // of the style when it was saved without its own
+              si := StrToIntDef(StyleIds.Values[XMLGetAttrValue(Node, 'style')], -1);
+              if si >= 0 then
+              begin
+                Item.Style := Styles[si].Name;
+                if ItemNumpadAlign(Item.Align, Item.VAlign) = Styles[si].Alignment then
+                begin
+                  Item.Align  := shaNone;
+                  Item.VAlign := svaBottom;
+                end;
+              end;
+
               Subtitles.Add(Item, NIL);
             end;
           end;
@@ -264,7 +333,13 @@ begin
           Node := Node.NextSibling;
         until (Node = NIL);
 
+      // a header with the styles, for ASS and the style editor (when
+      // appending to a subtitle that has its own, those are kept)
+      if (Length(Styles) > 0) and (Subtitles.ASSHeader = '') then
+        Subtitles.ASSHeader := ASSHeaderFromStyles(ResX, ResY, Styles);
+
     finally
+      StyleIds.Free;
       RegionMap.Free;
       XmlDoc.Free;
       Result := Subtitles.Count > 0;
@@ -277,9 +352,43 @@ function TUWTimedText.SaveSubtitle(const FileName: String; const FPS: Double; co
 var
   XmlDoc : TXMLDocument;
   Root, Element, Node, SubNode, StylingNode, LayoutNode : TDOMNode;
-  i : Integer;
+  i, si : Integer;
   RegionStr: String;
   WrittenRegions: TStringList;
+  STab: TASSStyleTable;
+  HasStyles: Boolean;
+  HA: TSubtitleHAlign;
+  VA: TSubtitleVAlign;
+
+  procedure AddASSStyle(const AIndex: Integer);
+  var
+    St: TASSStyle;
+    E: TDOMElement;
+    s: String;
+  begin
+    // the style of the subtitle as TTML (the size in cells of the height,
+    // 15 rows) and as its ASS line, to read it back
+    St := STab.Styles[AIndex];
+    E := XmlDoc.CreateElement('style');
+    E.SetAttribute('xml:id', STab.Ids[AIndex]);
+    E.SetAttribute('tts:fontFamily', ASSFontFamily(St.FontName) + ', sansSerif');
+    if St.FontSize > 0 then
+      E.SetAttribute('tts:fontSize', ASSFloatToStr(St.FontSize * 15 / STab.ResY) + 'c');
+    E.SetAttribute('tts:color', TTMLColor(St.Colors[0]));
+    E.SetAttribute('tts:fontWeight', iff(St.Bold, 'bold', 'normal'));
+    E.SetAttribute('tts:fontStyle', iff(St.Italic, 'italic', 'normal'));
+    s := '';
+    if St.Underline then s := 'underline';
+    if St.StrikeOut then s := Trim(s + ' lineThrough');
+    if s = '' then s := 'none';
+    E.SetAttribute('tts:textDecoration', s);
+    if St.BorderStyle = 3 then // opaque box, of the outline color
+      E.SetAttribute('tts:backgroundColor', TTMLColor(St.Colors[2]))
+    else if (St.Outline > 0) and (St.FontSize > 0) then
+      E.SetAttribute('tts:textOutline', TTMLColor(St.Colors[2]) + ' ' + ASSFloatToStr(St.Outline / St.FontSize) + 'em');
+    E.SetAttribute('tero:style', ASSStyleToLine(St));
+    StylingNode.AppendChild(E);
+  end;
 
   procedure AddDecorationStyle(const AId, ADecoration: String);
   begin
@@ -311,6 +420,15 @@ begin
       TDOMElement(Root).SetAttribute('xmlns:tts', 'http://www.w3.org/ns/ttml#styling');
       TDOMElement(Root).SetAttribute('xml:lang', TimedTextLanguage(Subtitles));
       TDOMElement(Root).SetAttribute('xmlns:ttm', 'http://www.w3.org/ns/ttml#metadata');
+      // the styles of the subtitle, only when it has them (ASS)
+      ASSStyleTableInit(STab, Subtitles.ASSHeader);
+      HasStyles := Length(STab.Styles) > 0;
+      if HasStyles then
+      begin
+        TDOMElement(Root).SetAttribute('ttp:cellResolution', '32 15');
+        TDOMElement(Root).SetAttribute('xmlns:tero', TeroNS);
+        TDOMElement(Root).SetAttribute('tero:playRes', IntToStr(STab.ResX) + 'x' + IntToStr(STab.ResY));
+      end;
       XmlDoc.Appendchild(Root);
     Root := XmlDoc.DocumentElement;
 
@@ -349,6 +467,9 @@ begin
       TDOMElement(SubNode).SetAttribute('tts:fontFamily', 'sansSerif');
       TDOMElement(SubNode).SetAttribute('tts:color', 'white');
       Node.AppendChild(SubNode);
+      // all of them, also the ones not used, so they come back on load
+      if HasStyles then
+        for si := 0 to High(STab.Styles) do AddASSStyle(si);
     Root.AppendChild(Element);
 
     // Antes las 3 regiones se escribían siempre; ahora solo las que se usan
@@ -367,25 +488,41 @@ begin
     begin
       Element := XmlDoc.CreateElement('p');
 
-      if Subtitles[i].VAlign = svaTop then
+      // the alignment of the entry, or the one of its style without it
+      HA := Subtitles[i].Align;
+      VA := Subtitles[i].VAlign;
+      si := -1;
+      if HasStyles then
+      begin
+        si := ASSStyleTableFind(STab, Subtitles[i].Style);
+        if (si >= 0) and ItemHasNoAlign(HA, VA) then
+          NumpadToItemAlign(STab.Styles[si].Alignment, HA, VA);
+      end;
+
+      // Antes: la alineación horizontal se ignoraba (siempre centrado)
+      if VA = svaTop then
         RegionStr := 'top'
-      else if Subtitles[i].VAlign = svaCenter then
+      else if VA = svaCenter then
         RegionStr := 'middle'
       else
         RegionStr := 'bottom';
+      if HA = shaLeft then
+        RegionStr := RegionStr + 'Left'
+      else if HA = shaRight then
+        RegionStr := RegionStr + 'Right';
 
       if WrittenRegions.IndexOf(RegionStr) < 0 then
       begin
         WrittenRegions.Add(RegionStr);
         SubNode := XmlDoc.CreateElement('region');
         TDOMElement(SubNode).SetAttribute('xml:id', RegionStr);
-        if RegionStr = 'top' then
+        if VA = svaTop then
         begin
           TDOMElement(SubNode).SetAttribute('tts:origin', '0% 0%');
           TDOMElement(SubNode).SetAttribute('tts:extent', '100% 15%');
           TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'before');
         end
-        else if RegionStr = 'middle' then
+        else if VA = svaCenter then
         begin
           TDOMElement(SubNode).SetAttribute('tts:origin', '0% 40%');
           TDOMElement(SubNode).SetAttribute('tts:extent', '100% 20%');
@@ -397,18 +534,27 @@ begin
           TDOMElement(SubNode).SetAttribute('tts:extent', '100% 15%');
           TDOMElement(SubNode).SetAttribute('tts:displayAlign', 'after');
         end;
-        TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
+        if HA = shaLeft then
+          TDOMElement(SubNode).SetAttribute('tts:textAlign', 'left')
+        else if HA = shaRight then
+          TDOMElement(SubNode).SetAttribute('tts:textAlign', 'right')
+        else
+          TDOMElement(SubNode).SetAttribute('tts:textAlign', 'center');
         LayoutNode.AppendChild(SubNode);
       end;
 
       TDOMElement(Element).SetAttribute('region', RegionStr);
+      if si >= 0 then
+        TDOMElement(Element).SetAttribute('style', STab.Ids[si]);
 
       // Antes: 'hh:mm:ss:zz' (centésimas con ':'), que se leía como cuadros
       TDOMElement(Element).SetAttribute('begin', TimeToString(Subtitles.InitialTime[i], 'hh:mm:ss.zzz'));
       TDOMElement(Element).SetAttribute('xml:id', 'p' + IntToStr(i + 1));
       TDOMElement(Element).SetAttribute('end', TimeToString(Subtitles.FinalTime[i], 'hh:mm:ss.zzz'));
       // Antes: los tags y <br/> se escribían como texto escapado (&lt;br/&gt;)
-      AppendStyledTextDirect(XmlDoc, Element, iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]));
+      // with styles, italic and bold in line: the "italic" and "bold" styles
+      // would change the font and color of the style of the <p> to white
+      AppendStyledTextDirect(XmlDoc, Element, iff(SubtitleMode = smText, Subtitles.Text[i], Subtitles.Translation[i]), HasStyles);
       Node.AppendChild(Element);
     end;
 

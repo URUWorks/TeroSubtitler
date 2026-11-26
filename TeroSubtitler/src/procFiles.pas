@@ -850,6 +850,9 @@ begin
   try
     if Subs.LoadFromFile(FileName, AEncoding, _FPS, AFormat) then
     begin
+      // the styles of an imported .ass that ours doesn't have, the entries
+      // keep their style name
+      Subtitles.MergeASSStyles(Subs);
       for i := 0 to Subs.Count-1 do
       begin
         x := Subtitles.FindInsertPos(Subs[i]);
@@ -1292,6 +1295,13 @@ end;
 function LoadVideo(const FileName: String; const Pos: Int64 = 0): Boolean;
 begin
   Result := False;
+  // another video opened by the user (not by a project being opened): the
+  // state of the player of a project whose video never loaded is not
+  // applied to it later
+  if not LoadingProject and Assigned(PendingProjectState) and
+    not SameFileName(FileName, PendingProjectVideo) then
+    FreeAndNil(PendingProjectState);
+
   with frmMain do
     if FileExists(FileName) then
     begin
@@ -1648,6 +1658,22 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the project has a video and the player doesn't have it loaded now
+function ProjectWouldLoseVideo(const AProjectFile: String): Boolean;
+begin
+  Result := False;
+  if frmMain.MPV.IsMediaLoaded or not FileExists(AProjectFile) then Exit;
+  try
+    with TProjectFile.Create(AProjectFile) do
+    try
+      Result := Ready and not Movie.IsEmpty;
+    finally
+      Free;
+    end;
+  except
+  end;
+end;
+
 procedure SaveCurrentSubtitle(const SubtitleMode: TSubtitleMode = smText; const AUpdateProject: Boolean = True);
 var
   s: String;
@@ -1668,8 +1694,12 @@ begin
 
   // a project open: File > Save saves it too (the work: shot changes,
   // thumbnails, state of the player...), if the subtitle was saved
+  // (not if the video of the project isn't loaded: a video offline, not
+  // found or closed. The project would be saved without the video, its
+  // thumbnails, waveform, shot changes and state)
   if AUpdateProject and not CurrentProjectFile.IsEmpty and
     not SubtitleInfo.Text.FileName.IsEmpty and
+    not ProjectWouldLoseVideo(CurrentProjectFile) and
     (((SubtitleMode = smText) and not SubtitleInfo.Text.Changed) or
      ((SubtitleMode = smTranslation) and not SubtitleInfo.Translation.Changed)) then
     SaveProject(CurrentProjectFile);
@@ -2727,5 +2757,8 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
+
+finalization
+  FreeAndNil(PendingProjectState);
 
 end.

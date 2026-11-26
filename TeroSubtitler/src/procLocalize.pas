@@ -332,6 +332,13 @@ resourcestring
   lngssDarkMode = 'Dark mode';
   lngssListMode = 'List';
   lngssBlockMode = 'Block';
+  lngssIconSizeDefault = 'Default (16 px)';
+  lngssIconSizePx = '%d px';
+
+  //StylesStrings
+  lngstNewStyle = 'New style';
+  lngstInvalidStyleName = 'Each style needs a name, different from the others.';
+  lngstSSAv4 = 'SSA v4 styles: only the columns of the file are saved.';
   lngssFrames = 'Frames';
   lngssMilliseconds = 'Milliseconds';
   lngssShortCutNone = 'None';

@@ -32,6 +32,7 @@ procedure ApplySetTranslationFromMemo(const Item: PUWSubtitleItem; const Index: 
 procedure ApplyText(const Item: PUWSubtitleItem; const Index: Integer; const NewSubtitleText, NewSubtitleTranslation: String; const Resent: Boolean = True);
 procedure ApplyClearText(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyActor(const Item: PUWSubtitleItem; const Index: Integer);
+procedure ApplyStyle(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFontBold(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFontItalic(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyFontStrikeOut(const Item: PUWSubtitleItem; const Index: Integer);
@@ -67,6 +68,9 @@ procedure ApplyEndCueSubtractOneFrame(const Item: PUWSubtitleItem; const Index: 
 procedure ApplySwapTexts(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyUnicodeChar(const Item: PUWSubtitleItem; const Index: Integer);
 procedure ApplyRemoveUnicodeControlChars(const Item: PUWSubtitleItem; const Index: Integer);
+
+var
+  StyleToApply: String = ''; // ApplyStyle
 
 // -----------------------------------------------------------------------------
 
@@ -129,6 +133,17 @@ begin
 
   with frmMain do
     Item^.Actor := cboActor.Text;
+end;
+
+// -----------------------------------------------------------------------------
+
+// the style chosen in the styles editor (formStyles)
+procedure ApplyStyle(const Item: PUWSubtitleItem; const Index: Integer);
+begin
+  if Item^.Style = StyleToApply then Exit;
+
+  UndoInstance.AddUndo(utSubtitleChange, Index, Subtitles[Index]);
+  Item^.Style := StyleToApply;
 end;
 
 // -----------------------------------------------------------------------------

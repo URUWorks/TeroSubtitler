@@ -2103,6 +2103,13 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actStylesExecute(Sender: TObject);
+begin
+  ShowStyles;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actLoadProjectExecute(Sender: TObject);
 begin
   LoadProjectWithDialog;
