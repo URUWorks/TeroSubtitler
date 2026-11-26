@@ -741,6 +741,8 @@ begin
               PrevFixed.FinalTime   := OverlapGapTime(FixedItem.InitialTime, -1, GapMs);
               PrevFixed.ErrorsFixed := [etOverlapping, etOverlappingWithNext];
               Add(NewItem(PrevFixed));
+              // the in cue (snap) of this one is checked against the new end
+              prevSnapFT := PrevFixed.FinalTime;
             end
             else
             begin
@@ -992,7 +994,7 @@ var
 begin
   Result := ADefault;
 
-  if not Assigned(Subtitles) or (Subtitles.Count < 1) or (Index > Subtitles.Count) then Exit;
+  if not Assigned(Subtitles) or (Index < 0) or (Index >= Subtitles.Count) then Exit;
 
   if cmTexts in ACheckMethod then
   begin
