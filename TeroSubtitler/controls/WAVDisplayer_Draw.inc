@@ -237,13 +237,15 @@ begin
     {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Color := CustomColors.Text;
     {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Pen.Width := 1;
     //CanvasBGRA.Font.Name := 'Tahoma';
+    // in pixels of the screen: with 150%/200% scaling (4K...) 10 pixels were
+    // a tiny text that couldn't be read
     {$IFDEF USEBGRABITMAP}
-    CanvasBGRA.Font.Height := 10;
+    CanvasBGRA.Font.Height := UIScale(10);
     {$ELSE}
     Canvas.Font.Size := 7;
     {$ENDIF}
     // text height + a strip below it for the ticks, so labels and ticks don't mix
-    FTimeLineHeight := {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.TextHeight('0') + 5;
+    FTimeLineHeight := Min(255, {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.TextHeight('0') + UIScale(5));
 
     PosRect        := ClientRect;
     PosRect.Bottom := PosRect.Bottom - FScrollBar.Height;
@@ -264,9 +266,9 @@ begin
       begin
         // Draw main division
         x := TimeToPixel(p - FPositionMS);
-        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, PosRect.Top +2, x, PosRect.Bottom);
+        {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, PosRect.Top + UIScale(2), x, PosRect.Bottom);
         PosString := MSToHHMMSSFFTime(p, FFPS, FTimecodeMode);
-        x1 := x + 3;
+        x1 := x + UIScale(3);
         if oldx <> x1 then
         begin
           DoTextOut(ABitmap, x1, PosRect.Top, PosString);
@@ -277,12 +279,12 @@ begin
           if (SubFrames > 0) and (k mod SubFrames = 0) then
           begin
             x2 := TimeToPixel(RulerFrameToMs(f + k) - FPositionMS);
-            {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x2, PosRect.Bottom -4, x2, PosRect.Bottom);
+            {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x2, PosRect.Bottom - UIScale(4), x2, PosRect.Bottom);
           end
           else if GetFramePixels >= MinFramePixels then
           begin
             x2 := TimeToPixel(RulerFrameToMs(f + k) - FPositionMS);
-            {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x2, PosRect.Bottom -2, x2, PosRect.Bottom);
+            {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x2, PosRect.Bottom - UIScale(2), x2, PosRect.Bottom);
           end;
         f := f + StepFrames;
         p := RulerFrameToMs(f);
@@ -295,10 +297,10 @@ begin
     begin
       // Draw main division
       x := TimeToPixel(p - FPositionMS);
-      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, PosRect.Top +2, x, PosRect.Bottom);
+      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x, PosRect.Top + UIScale(2), x, PosRect.Bottom);
       PosString := TimeMSToShortString(p, FStepLog);
       // Calculate text coordinate
-      x1 := x + 3; //x - (CanvasBGRA.TextWidth(PosString) div 2);
+      x1 := x + UIScale(3); //x - (CanvasBGRA.TextWidth(PosString) div 2);
       // Draw text
       if oldx <> x1 then
       begin
@@ -307,7 +309,7 @@ begin
       end;
       // Draw subdivision
       x2 := x + TimeToPixel(FStepMs div 2);
-      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x2, PosRect.Bottom -4, x2, PosRect.Bottom);
+      {$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF}.Line(x2, PosRect.Bottom - UIScale(4), x2, PosRect.Bottom);
       p := p + FStepMs;
     end;
   end;
@@ -379,7 +381,7 @@ procedure TUWWaveformDisplayer.DrawSubtitleItem(const ABitmap: {$IFDEF USEBGRABI
   begin
     with ABitmap.{$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF} do
     begin
-      Font.Height := 14;
+      Font.Height := UIScale(14);
       Font.Style := [fsBold];
       {$IFDEF USEBGRABITMAP}Font.BGRAColor{$ELSE}Font.Color{$ENDIF} := CustomColors.Text;
       FTS.Layout := ALayout;
@@ -409,7 +411,7 @@ begin
   // height of a line of the item text (same font as _TextOut)
   with ABitmap.{$IFDEF USEBGRABITMAP}CanvasBGRA{$ELSE}Canvas{$ENDIF} do
   begin
-    Font.Height := 14;
+    Font.Height := UIScale(14);
     Font.Style  := [fsBold];
     LineH := TextHeight('Ág');
   end;
@@ -1068,6 +1070,22 @@ begin
       ABitmap.PutImage(X + Item.X, Y + Item.Y, Item.Bitmap, dmDrawWithTransparency);
 end;
 {$ENDIF}
+
+//------------------------------------------------------------------------------
+
+// The sizes of the texts and ticks of the time line and the subtitles were in
+// fixed pixels: on a screen with 150%/200% scaling (Windows, Linux) the text
+// of the time line was 10 pixels, half of the size of the rest of Tero, and it
+// couldn't be read. On macOS the pixels are points (Retina is done by the
+// system), so they stay as they are. Never smaller than at 96 dpi.
+function TUWWaveformDisplayer.UIScale(const AValue: Integer): Integer;
+begin
+  {$IFDEF DARWIN}
+  Result := AValue;
+  {$ELSE}
+  Result := Max(AValue, MulDiv(AValue, Screen.PixelsPerInch, 96));
+  {$ENDIF}
+end;
 
 //------------------------------------------------------------------------------
 

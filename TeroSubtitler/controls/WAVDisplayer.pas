@@ -327,6 +327,8 @@ type
     procedure ClearTextCache;
     procedure DrawCachedText(const ABitmap: TBGRABitmap; const AIsRect: Boolean; const R: TRect; const X, Y: Integer; const S: String; const ATS: TTextStyle);
     {$ENDIF}
+    // a size in pixels at 96 dpi, in pixels of the screen (see the .inc)
+    function UIScale(const AValue: Integer): Integer;
     procedure DoTextOut(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const X, Y: Integer; const S: String);
     procedure DoTextRect(const ABitmap: {$IFDEF USEBGRABITMAP}TBGRABitmap{$ELSE}TBitmap{$ENDIF}; const R: TRect; const X, Y: Integer; const S: String; const ATS: TTextStyle);
     procedure CalculateTimeDivisionStepMs;
@@ -475,7 +477,7 @@ procedure Register;
 implementation
 
 uses
-  UWSystem.SysUtils;
+  UWSystem.SysUtils, Forms;
 
 const
   DefaultPageSizeMS = 15000;
@@ -631,7 +633,7 @@ begin
 
   FScrollBar          := TUWScrollBar.Create(Self);
   FScrollBar.Parent   := Self;
-  FScrollBar.Height   := 7;
+  FScrollBar.Height   := UIScale(7);
   FScrollBar.Align    := alBottom;
   FScrollBar.Min      := 0;
   FScrollBar.Max      := FLengthMs;
