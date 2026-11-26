@@ -52,6 +52,7 @@ type
     cboShortCutPreset: TComboBox;
     cboTheme: TComboBox;
     cboListMode: TComboBox;
+    cboIconSize: TComboBox;
     cboTimeCodeMode: TComboBox;
     cboDefaultFrameRate: TComboBox;
     cboDefaultFileEncoding: TComboBox;
@@ -161,6 +162,7 @@ type
     lblRepeatableChars: TLabel;
     lblProhibitedChars: TLabel;
     lblListMode: TLabel;
+    lblIconSize: TLabel;
     lblFFMPEG: TLabel;
     lblTimeCodeMode: TLabel;
     lblDefaultFrameRate: TLabel;
@@ -248,7 +250,7 @@ var
 implementation
 
 uses
-  procTypes, procWorkspace, procConfig, procDialogs, UWSystem.SysUtils,
+  procTypes, procWorkspace, procConfig, procDialogs, UWSystem.SysUtils, procIcons,
   procColorTheme, formMain, UWSystem.Globalization, formConventions,
   procShortCut, procMPV, UWSystem.TimeUtils, UWSubtitles.Utils
   {$IFDEF WINDOWS}
@@ -315,6 +317,10 @@ begin
     cboTheme.AddItem(lngssDarkMode, NIL);
     cboListMode.AddItem(lngssListMode, NIL);
     cboListMode.AddItem(lngssBlockMode, NIL);
+    // the sizes at 100%, they follow the scale of the screen
+    cboIconSize.AddItem(lngssIconSizeDefault, NIL);
+    for i := 1 to High(ToolBarIconSizes) do
+      cboIconSize.AddItem(Format(lngssIconSizePx, [ToolBarIconSizes[i]]), NIL);
   finally
   end;
 
@@ -374,6 +380,7 @@ begin
     chkAllowMultipleInstances.Checked := AllowMultipleInstances;
 
     cboTheme.ItemIndex := Integer(ColorThemeInstance.ColorMode);
+    cboIconSize.ItemIndex := ToolBarIconSizeIndex(ToolBarIconSize);
   end;
 
   spnListFontSize.Value            := frmMain.VST.Font.Size;
@@ -584,6 +591,10 @@ begin
 
   ColorThemeInstance.ColorMode := TColorMode(cboTheme.ItemIndex);
   CheckColorTheme;
+  // after the theme: it applies it again only if the size changed
+  if cboIconSize.ItemIndex >= 0 then
+    AppOptions.ToolBarIconSize := ToolBarIconSizes[cboIconSize.ItemIndex];
+  UpdateToolBarIconSize(True);
 
   SetLength(FShortCutListIndex, 0);
   AppOptions.ShortCutPreset := cboShortCutPreset.Text + '.key';

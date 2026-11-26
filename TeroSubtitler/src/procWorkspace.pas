@@ -31,6 +31,7 @@ uses
 
 procedure CheckColorTheme(const AForm: TForm); overload;
 procedure CheckColorTheme; overload;
+procedure UpdateToolBarIconSize(const AReapply: Boolean = False);
 
 procedure AddFPSToCombo(const FPS: Single; const Combo: TComboBox);
 procedure FillComboWithLanguages(const Combo: TComboBox; const aLngList: TStrings);
@@ -128,7 +129,7 @@ procedure PrepareCustomControls(const AForm: TForm);
 implementation
 
 uses
-  procVST, procConfig, procDialogs, formMain, formVideo, formWaveform,
+  procVST, procConfig, procDialogs, formMain, procIcons, formVideo, formWaveform,
   procSubtitle, procUnDockVideoControls, UWSystem.Globalization, FileUtil,
   UWSystem.SysUtils, UWSystem.StrUtils, UWSystem.Encoding,
   UWSubtitleAPI.Formats, MPVPlayer, character, LazUTF8, formTranslationMemory,
@@ -151,6 +152,27 @@ procedure CheckColorTheme;
 begin
   with frmMain do
     ColorThemeInstance.Apply(ColorThemeInstance.ColorMode, ImageList_Dark, ImageList_Default);
+end;
+
+// -----------------------------------------------------------------------------
+
+// the toolbar icons with the size of the settings (see procIcons); with
+// AReapply the theme is applied again and the bands of the coolbars fitted
+procedure UpdateToolBarIconSize(const AReapply: Boolean = False);
+begin
+  if AReapply and (AppOptions.ToolBarIconSize = ToolBarIconSize) then Exit;
+
+  with frmMain do
+    SetToolBarIconSize(frmMain, ImageList_Default, ImageList_Dark,
+      AppOptions.ToolBarIconSize, IncludeTrailingPathDelimiter(IconsFolder) + 'svg');
+
+  if AReapply then
+  begin
+    CheckColorTheme;
+    // the bands autosized for the new buttons, with the layout done
+    CoolBarsFirstStart := True;
+    Application.QueueAsyncCall(@frmMain.DoFitCoolBars, 0);
+  end;
 end;
 
 // -----------------------------------------------------------------------------

@@ -360,6 +360,7 @@ begin
     QuoteStyle             := 1;
     SmartQuotesTyping      := False;
     AllowMultipleInstances := False;
+    ToolBarIconSize        := 0;
     TextToFind             := '';
     WebSearchURL           := URL_WordReference;
     GUILanguage            := GetOSLanguage;
@@ -542,6 +543,7 @@ begin
       SmartQuotesTyping := GetValue('SmartQuotesTyping', SmartQuotesTyping);
       // also read before the main form exists, see procSingleInstance
       AllowMultipleInstances := GetValue('AllowMultipleInstances', AllowMultipleInstances);
+      ToolBarIconSize := GetValue('ToolBarIconSize', ToolBarIconSize);
       WebSearchURL := GetValue('WebSearchURL', WebSearchURL);
       TextToFind := GetValue('TextToFind', TextToFind);
       CommonErrors := IntegersToErrorSet(GetValue('CommonErrors', ErrorSetToInteger(CommonErrors, 0)), GetValue('CommonErrors2', ErrorSetToInteger(CommonErrors, 1)));
@@ -1089,6 +1091,7 @@ begin
       SetValue('QuoteStyle', QuoteStyle);
       SetValue('SmartQuotesTyping', SmartQuotesTyping);
       SetValue('AllowMultipleInstances', AllowMultipleInstances);
+      SetValue('ToolBarIconSize', ToolBarIconSize);
       SetValue('WebSearchURL', WebSearchURL);
       SetValue('TextToFind', TextToFind);
       SetValue('CommonErrors', ErrorSetToInteger(CommonErrors, 0));
@@ -1882,6 +1885,9 @@ end;
 
 // -----------------------------------------------------------------------------
 
+var
+  ConventionsMerged: Boolean = False;
+
 function ConventionsFileName: String;
 var
   AppFile: String;
@@ -1905,8 +1911,16 @@ begin
     // the folder also without the file of the app (to save the profiles)
     ForceDirectories(ExtractFileDir(Result));
     if FileExists(AppFile) and not CopyFile(AppFile, Result) then
-      Result := AppFile;
-  end;
+      Result := AppFile
+    else if FileExists(AppFile) then
+      // the profiles of the app of this version (see MergeDefaultProfiles)
+      CopyFile(AppFile, Result + '.default');
+  end
+  else if not ConventionsMerged then
+    // the new/corrected profiles of an updated Tero (once per session):
+    // before, the user's copy never got them
+    MergeDefaultProfiles(Result, AppFile, Result + '.default');
+  ConventionsMerged := True;
 end;
 
 // -----------------------------------------------------------------------------

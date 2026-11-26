@@ -47,6 +47,7 @@
 {"hash":155928249,"name":"tfrmsettings.lblchaining.caption","sourcebytes":[67,104,97,105,110,105,110,103,32,40,102,114,97,109,101,115,41],"value":"Chaining (frames)"},
 {"hash":5958709,"name":"tfrmsettings.lbltheme.caption","sourcebytes":[84,104,101,109,101],"value":"Theme"},
 {"hash":174552741,"name":"tfrmsettings.lbllistmode.caption","sourcebytes":[76,105,115,116,32,109,111,100,101],"value":"List mode"},
+{"hash":249080517,"name":"tfrmsettings.lbliconsize.caption","sourcebytes":[84,111,111,108,98,97,114,32,105,99,111,110,32,115,105,122,101],"value":"Toolbar icon size"},
 {"hash":162596979,"name":"tfrmsettings.lblsubtitles.caption","sourcebytes":[83,117,98,116,105,116,108,101,115],"value":"Subtitles"},
 {"hash":4875106,"name":"tfrmsettings.lblsubcolor.caption","sourcebytes":[67,111,108,111,114],"value":"Color"},
 {"hash":76974786,"name":"tfrmsettings.lblsubborder.caption","sourcebytes":[66,111,114,100,101,114],"value":"Border"},

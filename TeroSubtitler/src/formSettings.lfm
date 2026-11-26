@@ -885,6 +885,30 @@ object frmSettings: TfrmSettings
       Style = csDropDownList
       TabOrder = 1
     end
+    object lblIconSize: TLabel
+      AnchorSideTop.Control = cboIconSize
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 19
+      Top = 81
+      Width = 308
+      AutoSize = False
+      Caption = 'Toolbar icon size'
+      ParentColor = False
+    end
+    object cboIconSize: TComboBox
+      AnchorSideTop.Control = cboListMode
+      AnchorSideTop.Side = asrBottom
+      Left = 310
+      Height = 28
+      Top = 76
+      Width = 560
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 10
+      ItemHeight = 20
+      Style = csDropDownList
+      TabOrder = 2
+    end
     object lblSubtitles: TLabel
       AnchorSideTop.Control = spnTextBoxFontSize
       AnchorSideTop.Side = asrBottom
@@ -1009,7 +1033,7 @@ object frmSettings: TfrmSettings
       BorderSpacing.Top = 6
       MaxValue = 150
       MinValue = 1
-      TabOrder = 6
+      TabOrder = 7
       Value = 32
     end
     object lblSubFont: TLabel
@@ -1033,7 +1057,7 @@ object frmSettings: TfrmSettings
       DropDownCount = 20
       ItemHeight = 20
       Style = csDropDownList
-      TabOrder = 7
+      TabOrder = 8
     end
     object chkSubBackground: TCheckBox
       AnchorSideLeft.Control = cbnSubBackground
@@ -1045,7 +1069,7 @@ object frmSettings: TfrmSettings
       Top = 315
       Width = 21
       BorderSpacing.Left = 6
-      TabOrder = 5
+      TabOrder = 6
     end
     object chkSubShadow: TCheckBox
       AnchorSideLeft.Control = cbnSubShadow
@@ -1057,7 +1081,7 @@ object frmSettings: TfrmSettings
       Top = 278
       Width = 21
       BorderSpacing.Left = 6
-      TabOrder = 4
+      TabOrder = 5
     end
     object lblWaveform: TLabel
       AnchorSideTop.Control = cboSubFont
@@ -1129,7 +1153,7 @@ object frmSettings: TfrmSettings
       ParentColor = False
     end
     object spnListFontSize: TSpinEdit
-      AnchorSideTop.Control = cboListMode
+      AnchorSideTop.Control = cboIconSize
       AnchorSideTop.Side = asrBottom
       Left = 310
       Height = 28
@@ -1138,7 +1162,7 @@ object frmSettings: TfrmSettings
       BorderSpacing.Top = 10
       MaxValue = 60
       MinValue = 8
-      TabOrder = 2
+      TabOrder = 3
       Value = 9
     end
     object spnTextBoxFontSize: TSpinEdit
@@ -1151,7 +1175,7 @@ object frmSettings: TfrmSettings
       BorderSpacing.Top = 10
       MaxValue = 60
       MinValue = 8
-      TabOrder = 3
+      TabOrder = 4
       Value = 9
     end
     object lblTextBoxFontSize: TLabel

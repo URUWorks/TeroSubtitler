@@ -480,6 +480,7 @@ type
     QuoteStyle             : Integer; // QuoteStyles index, 0 = straight
     SmartQuotesTyping      : Boolean; // " and ' typed as QuoteStyle
     AllowMultipleInstances : Boolean; // [Windows] False: a second start goes to the running Tero
+    ToolBarIconSize        : Integer; // 0 = 16x16 as always, else the size at 100% (see procIcons)
     TextToFind             : String;
     LastUnicodeChar        : TUTF8Char;
     WebSearchURL           : String;
