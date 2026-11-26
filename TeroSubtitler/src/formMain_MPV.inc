@@ -352,35 +352,78 @@ end;
 
 // -----------------------------------------------------------------------------
 
-// While the seek bar is dragged the video follows the mouse (like QuickTime),
-// at most one seek every SEEKDRAG_INTERVAL ms. A big jump (fast drag) seeks to
-// the nearest keyframe, so a long video or a slow decoder doesn't fall behind
-// the mouse; a small one (slow drag) seeks to the exact frame. The release
-// does the exact seek (MPVSeekTo) to the frame where it ends.
+// While the seek bar is dragged the video follows the mouse (like QuickTime).
+// A big jump (fast drag) seeks to the nearest keyframe, so a long video or a
+// slow decoder doesn't fall behind the mouse; a small one (slow drag) seeks
+// to the exact frame. The release does the exact seek (MPVSeekTo) to the
+// frame where it ends.
+// A new seek is only sent when mpv has finished the previous one (and at
+// most one every SEEKDRAG_INTERVAL ms); meanwhile the last position asked
+// waits and is sent then. Before, one was sent every 40 ms whatever mpv was
+// doing: with a decoder slower than that (an older Mac, 4K/HEVC...) each seek
+// cancelled the previous one before it showed a frame and the video didn't
+// move until the mouse was released.
 
 const
   SEEKDRAG_INTERVAL = 40;   // ms
   SEEKDRAG_EXACT    = 1000; // ms, a smaller jump seeks to the exact frame
+  SEEKDRAG_MAXWAIT  = 1000; // ms, a seek that never ends doesn't stop the next
 
 procedure TfrmMain.sbrSeekDragPreview(const APos: Integer; const AForce: Boolean = False);
+begin
+  if not MPV.IsMediaLoaded then Exit;
+
+  FSeekDragPending := APos;
+  sbrSeekDragFlush(AForce);
+
+  // also when the mouse stops: the pending one is sent when mpv is ready
+  if (FSeekDragPending >= 0) and sbrSeek.MouseIsDown then
+  begin
+    if FSeekDragTimer = NIL then
+    begin
+      FSeekDragTimer := TTimer.Create(Self);
+      FSeekDragTimer.Interval := SEEKDRAG_INTERVAL;
+      FSeekDragTimer.OnTimer := @sbrSeekDragTimer;
+    end;
+    FSeekDragTimer.Enabled := True;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.sbrSeekDragFlush(const AForce: Boolean = False);
 var
   t: QWord;
   s: Double;
   fs: TFormatSettings;
   m: String;
+  APos: Integer;
 begin
-  if not MPV.IsMediaLoaded or (APos = FSeekDragPos) then Exit;
+  APos := FSeekDragPending;
+  if (APos < 0) or not MPV.IsMediaLoaded then Exit;
+  if APos = FSeekDragPos then
+  begin
+    FSeekDragPending := -1;
+    Exit;
+  end;
 
   t := GetTickCount64;
-  if not AForce and (t - FSeekDragTick < SEEKDRAG_INTERVAL) then Exit;
+  if not AForce then
+  begin
+    if (t - FSeekDragTick < SEEKDRAG_INTERVAL) then Exit;
+    // the previous seek is still running (not for ever)
+    if (t - FSeekDragTick < SEEKDRAG_MAXWAIT) and
+      (MPV.mpv_get_property_string_('seeking') = 'yes') then Exit;
+  end;
 
   if (FSeekDragPos >= 0) and (Abs(APos - FSeekDragPos) <= SEEKDRAG_EXACT) then
     m := 'absolute+exact'
   else
     m := 'absolute+keyframes';
 
-  FSeekDragTick := t;
-  FSeekDragPos  := APos;
+  FSeekDragTick    := t;
+  FSeekDragPos     := APos;
+  FSeekDragPending := -1;
 
   s := APos / 1000.0;
   if MPV.SMPTEMode then
@@ -393,6 +436,18 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.sbrSeekDragTimer(Sender: TObject);
+begin
+  if not sbrSeek.MouseIsDown or (FSeekDragPending < 0) then
+  begin
+    FSeekDragTimer.Enabled := False;
+    Exit;
+  end;
+  sbrSeekDragFlush;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.sbrSeekMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -401,6 +456,7 @@ begin
   if sbrSeek.MouseIsDown then
   begin
     FSeekDragPos := -1;
+    FSeekDragPending := -1;
     sbrSeekDragPreview(sbrSeek.Position, True);
   end;
 end;
@@ -410,6 +466,8 @@ end;
 procedure TfrmMain.sbrSeekMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   FSeekDragPos := -1;
+  FSeekDragPending := -1;
+  if FSeekDragTimer <> NIL then FSeekDragTimer.Enabled := False;
   MPVSeekTo(sbrSeek.Position);
 end;
 
