@@ -189,7 +189,7 @@ begin
   if FLabel <> NIL then
     Result := FLabel.Caption
   else
-    inherited RealGetText;
+    Result := inherited RealGetText;
 end;
 
 // -----------------------------------------------------------------------------
