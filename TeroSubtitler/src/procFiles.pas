@@ -839,6 +839,7 @@ var
   _FPS : TFPSInfo;
   Subs : TUWSubtitles;
   i, x : Integer;
+  OldHeader : String;
 begin
   if Subtitles.Count = 0 then Exit;
 
@@ -852,7 +853,11 @@ begin
     begin
       // the styles of an imported .ass that ours doesn't have, the entries
       // keep their style name
+      // (in the same undo step as the imported entries)
+      OldHeader := Subtitles.ASSHeader;
       Subtitles.MergeASSStyles(Subs);
+      if Subtitles.ASSHeader <> OldHeader then
+        UndoInstance.AddUndoHeader(OldHeader, False);
       for i := 0 to Subs.Count-1 do
       begin
         x := Subtitles.FindInsertPos(Subs[i]);
