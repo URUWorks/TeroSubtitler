@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tero Subtitler - IT - 20.11.2026\n"
+"Project-Id-Version: Tero Subtitler - IT - 26.11.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -917,11 +917,11 @@ msgstr "Nome file"
 #: proclocalize.lngroundtimesonload
 #, object-pascal-format
 msgid "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
-msgstr ""
+msgstr "Il file è in millisecondi e alcuni tempi non sono su un fotogramma a %1:s fps (voci: %0:d). Vuoi arrotondare al fotogramma più vicino? L'operazione può essere annullata."
 
 #: proclocalize.lngroundtimesonloadtitle
 msgid "Round the timings to frames?"
-msgstr ""
+msgstr "Vuoi arrotondare i tempi ai fotogrammi?"
 
 #: proclocalize.lngsavefile
 msgid "Save file"
@@ -1175,11 +1175,11 @@ msgstr "Allineamento verticale centrale: sono consentiti solo in alto e il basso
 
 #: proclocalize.lngspecpartialbold
 msgid "Bold in part of the text: only bold in the whole entry is allowed. It will be removed (the text is kept)."
-msgstr ""
+msgstr "Grassetto in parte del testo: è consentito solo il grassetto in tutta la voce. Verrà rimosso (il testo verrà mantenuto)."
 
 #: proclocalize.lngspecpartialcolor
 msgid "Color in part of the text (or several colors): only one color for the whole entry is allowed. It will be removed (the text is kept)."
-msgstr ""
+msgstr "Colore in parte del testo (o più colori): è consentito un solo colore per l'intera voce. Verrà rimosso (il testo verrà mantenuto)."
 
 #: proclocalize.lngspecstrikeout
 msgid "Strikethrough: not allowed. It will be removed (the text is kept)."
@@ -1221,7 +1221,7 @@ msgstr "Modalità scura"
 
 #: proclocalize.lngssdefaultfont
 msgid "(Default)"
-msgstr ""
+msgstr "(Predefinito)"
 
 #: proclocalize.lngssfiletypeassociations
 msgid "File types"
@@ -1239,12 +1239,12 @@ msgstr "Generale"
 
 #: proclocalize.lngssiconsizedefault
 msgid "Default (16 px)"
-msgstr ""
+msgstr "Predefinita (16px)"
 
 #: proclocalize.lngssiconsizepx
 #, object-pascal-format
 msgid "%d px"
-msgstr ""
+msgstr "%d px"
 
 #: proclocalize.lngsslightmode
 msgid "Light mode"
@@ -1298,7 +1298,7 @@ msgstr "Intervallo medio: %s"
 
 #: proclocalize.lngstinvalidstylename
 msgid "Each style needs a name, different from the others."
-msgstr ""
+msgstr "Ogni stile ha bisogno di un nome, diverso dagli altri."
 
 #: proclocalize.lngstlongestcharacterspersecond
 #, object-pascal-format
@@ -1327,7 +1327,7 @@ msgstr "Parole per minuto (massimo): %.2f (#%d)"
 
 #: proclocalize.lngstnewstyle
 msgid "New style"
-msgstr ""
+msgstr "Nuovo stile"
 
 #: proclocalize.lngstnumberofcharacters
 #, object-pascal-format
@@ -1371,7 +1371,7 @@ msgstr "Parole per secondo (minimo): %.2f (#%d)"
 
 #: proclocalize.lngstssav4
 msgid "SSA v4 styles: only the columns of the file are saved."
-msgstr ""
+msgstr "Stili SSA v4: vengono salvate solo le colonne del file."
 
 #: proclocalize.lngsttotalcharacterspersecond
 #, object-pascal-format
@@ -3446,7 +3446,7 @@ msgstr "Solo testo..."
 
 #: tfrmmain.actextendendtoshotchange.caption
 msgid "Extend end to shot change"
-msgstr ""
+msgstr "Estendi fine al cambio inquadratura"
 
 #: tfrmmain.actextendlengthtonext.caption
 msgid "Extend final time to next"
@@ -3458,7 +3458,7 @@ msgstr "Estendi tempo iniziale al precedente"
 
 #: tfrmmain.actextendstarttoshotchange.caption
 msgid "Extend start to shot change"
-msgstr ""
+msgstr "Estendi inizio al cambio inquadratura"
 
 #: tfrmmain.actfind.caption
 msgid "Find..."
@@ -4313,7 +4313,7 @@ msgstr "Estrattore flusso..."
 
 #: tfrmmain.actstyles.caption
 msgid "Styles..."
-msgstr ""
+msgstr "Stili..."
 
 #: tfrmmain.actswaptexts.caption
 msgid "Swap text"
@@ -5138,7 +5138,7 @@ msgstr "Impostazioni"
 
 #: tfrmsettings.chkallowmultipleinstances.caption
 msgid "Allow multiple instances"
-msgstr ""
+msgstr "Consenti più istanze"
 
 #: tfrmsettings.chkautoextractwaveform.caption
 msgid "Extract the waveform automatically when loading a video"
@@ -5279,7 +5279,7 @@ msgstr "Step fotogrammi"
 
 #: tfrmsettings.lbliconsize.caption
 msgid "Toolbar icon size"
-msgstr ""
+msgstr "Dimensione icona barra strumenti"
 
 #: tfrmsettings.lbllanguage.caption
 msgctxt "tfrmsettings.lbllanguage.caption"
@@ -5676,108 +5676,96 @@ msgstr "Cartella destinazione"
 
 #: tfrmstyles.btnapplytoselection.caption
 msgid "Apply to selected entries"
-msgstr ""
+msgstr "Applica alle voci selezionate"
 
 #: tfrmstyles.btnclose.caption
-#, fuzzy
 msgctxt "tfrmstyles.btnclose.caption"
 msgid "Close"
 msgstr "Chiudi"
 
 #: tfrmstyles.btncopy.caption
-#, fuzzy
 msgctxt "tfrmstyles.btncopy.caption"
 msgid "Copy"
 msgstr "Copia"
 
 #: tfrmstyles.btndelete.caption
 msgid "Delete"
-msgstr ""
+msgstr "Elimina"
 
 #: tfrmstyles.btnnew.caption
 msgid "New"
-msgstr ""
+msgstr "Nuovo"
 
 #: tfrmstyles.btnok.caption
-#, fuzzy
 msgctxt "tfrmstyles.btnok.caption"
 msgid "OK"
 msgstr "OK"
 
 #: tfrmstyles.caption
 msgid "Styles"
-msgstr ""
+msgstr "Stili"
 
 #: tfrmstyles.chkbold.caption
-#, fuzzy
 msgctxt "tfrmstyles.chkbold.caption"
 msgid "Bold"
 msgstr "Grassetto"
 
 #: tfrmstyles.chkitalic.caption
-#, fuzzy
 msgctxt "tfrmstyles.chkitalic.caption"
 msgid "Italic"
 msgstr "Corsivo"
 
 #: tfrmstyles.chkopaquebox.caption
-#, fuzzy
 msgctxt "tfrmstyles.chkopaquebox.caption"
 msgid "Box"
 msgstr "Riquadro"
 
 #: tfrmstyles.chkstrikeout.caption
-#, fuzzy
 msgctxt "tfrmstyles.chkstrikeout.caption"
 msgid "Strikeout"
 msgstr "Barrato"
 
 #: tfrmstyles.chkunderline.caption
-#, fuzzy
 msgctxt "tfrmstyles.chkunderline.caption"
 msgid "Underline"
 msgstr "Sottolineato"
 
 #: tfrmstyles.lblalignment.caption
-#, fuzzy
 msgctxt "tfrmstyles.lblalignment.caption"
 msgid "Alignment"
 msgstr "Allineamento"
 
 #: tfrmstyles.lblangle.caption
 msgid "Angle"
-msgstr ""
+msgstr "Angolo"
 
 #: tfrmstyles.lblback.caption
-#, fuzzy
 msgctxt "tfrmstyles.lblback.caption"
 msgid "Shadow"
 msgstr "Ombra"
 
 #: tfrmstyles.lblcolors.caption
 msgid "Colors"
-msgstr ""
+msgstr "Colori"
 
 #: tfrmstyles.lblfont.caption
-#, fuzzy
 msgctxt "tfrmstyles.lblfont.caption"
 msgid "Font"
 msgstr "Font"
 
 #: tfrmstyles.lblmarginl.caption
 msgid "Left margin"
-msgstr ""
+msgstr "Margine sinistro"
 
 #: tfrmstyles.lblmarginr.caption
 msgid "Right margin"
-msgstr ""
+msgstr "Margine destro"
 
 #: tfrmstyles.lblmarginv.caption
 msgid "Vertical margin"
-msgstr ""
+msgstr "Margine verticale"
 
 #: tfrmstyles.lblname.caption
-#, fuzzy
 msgctxt "tfrmstyles.lblname.caption"
 msgid "Name"
 msgstr "Nome"
@@ -5785,38 +5773,37 @@ msgstr "Nome"
 #: tfrmstyles.lbloutline.caption
 msgctxt "tfrmstyles.lbloutline.caption"
 msgid "Outline"
-msgstr ""
+msgstr "Contorno"
 
 #: tfrmstyles.lbloutlinecolor.caption
 msgctxt "tfrmstyles.lbloutlinecolor.caption"
 msgid "Outline"
-msgstr ""
+msgstr "Contorno"
 
 #: tfrmstyles.lblprimary.caption
 msgid "Primary"
-msgstr ""
+msgstr "Primario"
 
 #: tfrmstyles.lblscalex.caption
 msgid "Scale X %"
-msgstr ""
+msgstr "% scala X"
 
 #: tfrmstyles.lblscaley.caption
 msgid "Scale Y %"
-msgstr ""
+msgstr "% scala Y"
 
 #: tfrmstyles.lblsecondary.caption
 msgid "Secondary"
-msgstr ""
+msgstr "Secondario"
 
 #: tfrmstyles.lblshadow.caption
-#, fuzzy
 msgctxt "tfrmstyles.lblshadow.caption"
 msgid "Shadow"
 msgstr "Ombra"
 
 #: tfrmstyles.lblspacing.caption
 msgid "Spacing"
-msgstr ""
+msgstr "Spaziatura"
 
 #: tfrmtbx.btnclose.caption
 msgctxt "tfrmtbx.btnclose.caption"
