@@ -45,10 +45,12 @@ type
 implementation
 
 uses strUtils, Math, UWSystem.StrUtils, UWSystem.SysUtils, UWSubtitleAPI.Tags,
-  UWSubtitleAPI.ExtraInfo;
+  UWSubtitleAPI.ExtraInfo, UWSubtitleAPI.Styles, RegExpr;
 
 const
-  SSA_EventFormat = 'Format: Layer, Start, End, Style, Actor, MarginL, MarginR, MarginV, Effect, Text';
+  SSA_EventFormat = 'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text';
+  // SSA v4: Marked instead of Layer ("Dialogue: Marked=0,...")
+  SSA_V4EventFormat = 'Format: Marked, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text';
   SSA_StyleFormat = 'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding';
 
 type
@@ -56,6 +58,7 @@ type
   // columns of the [Events] Format line, -1 when the file doesn't have it
   TASSEventFields = record
     Count, Layer, Start, EndT, Style, Name, MarginL, MarginR, MarginV, Effect: Integer;
+    IsMarked: Boolean; // the Layer column is Marked (SSA v4)
   end;
 
 // -----------------------------------------------------------------------------
@@ -77,6 +80,7 @@ begin
   E.MarginR := 6;
   E.MarginV := 7;
   E.Effect  := 8;
+  E.IsMarked := False;
 end;
 
 // -----------------------------------------------------------------------------
@@ -100,10 +104,16 @@ begin
   E.MarginR := -1;
   E.MarginV := -1;
   E.Effect  := -1;
+  E.IsMarked := False;
   for k := 0 to High(Names) - 1 do // the last one is the text
   begin
     N := LowerCase(Trim(Names[k]));
-    if (N = 'layer') or (N = 'marked') then E.Layer := k // SSA v4: Marked
+    if N = 'layer' then E.Layer := k
+    else if N = 'marked' then // SSA v4
+    begin
+      E.Layer := k;
+      E.IsMarked := True;
+    end
     else if N = 'start' then E.Start := k
     else if N = 'end' then E.EndT := k
     else if N = 'style' then E.Style := k
@@ -113,6 +123,35 @@ begin
     else if N = 'marginv' then E.MarginV := k
     else if N = 'effect' then E.Effect := k;
   end;
+end;
+
+// -----------------------------------------------------------------------------
+
+// our style (made for 384x288, the resolution of libass without PlayRes, or
+// for 720 in the temporary track of mpv) for a file with PlayResY and no
+// styles: the sizes scaled to its resolution, the text was tiny in a 1080 file
+function ASSStyleForHeader(const AStyle, AHeader: String; const ABaseY: Integer): String;
+var
+  Fields : TStringArray;
+  Line   : String;
+  ResY, k: Integer;
+  f      : Double;
+begin
+  Result := AStyle;
+  ResY := 0;
+  for Line in AHeader.Split([LineEnding]) do
+    if SameText(Copy(Line.Trim, 1, 9), 'PlayResY:') then
+      ResY := StrToIntDef(Trim(Copy(Line.Trim, 10, MaxInt)), 0);
+  if (ResY <= 0) or (ResY = ABaseY) or (ABaseY <= 0) then Exit;
+
+  // Name, Fontname, Fontsize, ... Outline (16), Shadow (17), Alignment,
+  // MarginL (19), MarginR (20), MarginV (21), Encoding
+  Fields := AStyle.Split([',']);
+  if Length(Fields) < 22 then Exit;
+  f := ResY / ABaseY;
+  for k in [2, 16, 17, 19, 20, 21] do
+    Fields[k] := IntToStr(Round(StrToFloatDef(Trim(Fields[k]), 0, DefaultFormatSettings) * f));
+  Result := String.Join(',', Fields);
 end;
 
 // -----------------------------------------------------------------------------
@@ -143,11 +182,11 @@ end;
 // text and was added again on every save.
 function ASSExtractAlign(var AText: String): Integer;
 var
-  i, j, p: Integer;
+  i, j, p, q, v: Integer;
   Block, Res: String;
 begin
   Result := 0;
-  if Pos('\an', AText) = 0 then Exit;
+  if (Pos('\an', AText) = 0) and not ExecRegExpr('\\a[0-9]', AText) then Exit;
   Res := '';
   i := 1;
   while i <= Length(AText) do
@@ -176,6 +215,24 @@ begin
         Result := Ord(Block[p + 3]) - Ord('0');
       Delete(Block, p, 4);
       p := Pos('\an', Block);
+    end;
+
+    // \aN of SSA v4 (1-3 bottom, 5-7 top, 9-11 middle), not \alpha
+    p := Pos('\a', Block);
+    while p > 0 do
+    begin
+      q := p + 2;
+      while (q <= Length(Block)) and (Block[q] in ['0'..'9']) do Inc(q);
+      if (q > p + 2) and (q - p - 2 <= 2) then
+      begin
+        v := StrToIntDef(Copy(Block, p + 2, q - p - 2), 0);
+        if (Result = 0) and (v in [1..3, 5..7, 9..11]) then
+          Result := ASSV4ToNumpad(v);
+        Delete(Block, p, q - p);
+        p := PosEx('\a', Block, p);
+      end
+      else
+        p := PosEx('\a', Block, p + 2);
     end;
 
     if Block <> '' then Res := Res + '{' + Block + '}';
@@ -277,7 +334,7 @@ end;
 
 function TUWAdvancedSubstationAlpha.Extension: String;
 begin
-  Result := '*.ass';
+  Result := '*.ass;*.ssa';
 end;
 
 // -----------------------------------------------------------------------------
@@ -304,9 +361,8 @@ begin
   Line := TrimLeft(SubtitleFile[Row]);
 
   // only at the start of the line (a Comment or a text could have it)
-  if (not SameText(Copy(Line, 1, 9), 'Dialogue:')) or
-     (Pos('Marked=', Line) > 0) or
-     (Pos('!effect', Line) > 0) then
+  // Antes: las líneas de SSA v4 ("Dialogue: Marked=0,...") no se reconocían
+  if not SameText(Copy(Line, 1, 9), 'Dialogue:') then
     Exit(False);
 
   P1 := Pos(',', Line);
@@ -411,10 +467,14 @@ begin
             with ExtraInfo^ do
             begin
               EventType := etDialogue;
-              Marked    := False;
+              // SSA v4: "Marked=1" in place of the layer
+              Marked    := Ev.IsMarked and SameText(Field(Ev.Layer), 'Marked=1');
               Style     := Field(Ev.Style);
               Name      := Field(Ev.Name);
-              Layer     := StrToIntDef(Field(Ev.Layer), 0);
+              if Ev.IsMarked then
+                Layer   := 0
+              else
+                Layer   := StrToIntDef(Field(Ev.Layer), 0);
               MarginL   := StrToIntDef(Field(Ev.MarginL), 0);
               MarginR   := StrToIntDef(Field(Ev.MarginR), 0);
               MarginV   := StrToIntDef(Field(Ev.MarginV), 0);
@@ -429,6 +489,8 @@ begin
           begin
             Actor := Field(Ev.Name);
             Style := Field(Ev.Style);
+            if Ev.IsMarked then
+              Marked := SameText(Field(Ev.Layer), 'Marked=1');
             // numpad layout: 1-3 bottom, 4-6 middle, 7-9 top
             if al > 0 then
             begin
@@ -463,8 +525,11 @@ begin
         if (Pending <> '') and (Subtitles.ExtraInfo[Subtitles.Count-1] <> NIL) then
           PSSA_ExtraInfo(Subtitles.ExtraInfo[Subtitles.Count-1])^.After := TrimRight(Pending);
       end;
-      // only with styles, otherwise ours are used as before
-      if (Subtitles.ASSHeader = '') and (Pos('styles]', LowerCase(Header)) > 0) then
+      // with styles or script info (PlayResX/Y, WrapStyle...: without them
+      // the \pos of the file are for another resolution), otherwise ours are
+      // used as before. Without styles, ours are added when saving
+      if (Subtitles.ASSHeader = '') and ((Pos('styles]', LowerCase(Header)) > 0) or
+        (Pos('[script info]', LowerCase(Header)) > 0)) then
       begin
         Subtitles.ASSHeader := TrimRight(Header);
         Subtitles.ASSFooter := TrimRight(Footer);
@@ -480,20 +545,47 @@ var
   i : Integer;
   Text, s : String;
   sLayer, sMarginL, sMarginR, sMarginV, sEffect : String;
+  HasStyles, HasPlayRes : Boolean;
+  IsV4 : Boolean;
+  al : Integer;
 begin
   Result  := False;
 
   StringList.Clear;
+  // a file of SSA v4 ([V4 Styles]) is saved as SSA v4: the events with
+  // Marked and the alignment with \aN. Before they were written as ASS
+  // events under the v4 styles
+  IsV4 := (Pos('[v4 styles]', LowerCase(Subtitles.ASSHeader)) > 0) and
+    (Pos('[v4+ styles]', LowerCase(Subtitles.ASSHeader)) = 0);
 
   // the original sections of the file (script info and styles)
   if Subtitles.ASSHeader <> '' then
   begin
+    HasStyles  := Pos('styles]', LowerCase(Subtitles.ASSHeader)) > 0;
+    HasPlayRes := Pos('playresy', LowerCase(Subtitles.ASSHeader)) > 0;
     for s in Subtitles.ASSHeader.Split([LineEnding]) do
     begin
       // the loaded lines have no blank ones, a blank line between sections
       if s.StartsWith('[') and (StringList.Count > 0) then
         StringList.Add('');
       StringList.Add(s);
+      // temporary track for mpv, the same as without the sections of the
+      // file (below): only when our style is used and there is no PlayRes
+      if (Subtitles.Tag = 1) and not HasStyles and not HasPlayRes and
+        SameText(s.Trim, '[Script Info]') then
+      begin
+        StringList.Add('PlayResX: 1280');
+        StringList.Add('PlayResY: 720');
+      end;
+    end;
+    // a file with script info but without styles, ours
+    if not HasStyles then
+    begin
+      StringList.Add('');
+      StringList.Add('[V4+ Styles]');
+      StringList.Add(SSA_StyleFormat);
+      StringList.Add('Style: ' + ASSStyleForHeader(Subtitles.FormatProperties^.SSA.DefaultStyleSettings,
+        Subtitles.ASSHeader, iff(Subtitles.Tag = 1, 720, 288)));
     end;
   end
   else
@@ -520,7 +612,7 @@ begin
   end;
   StringList.Add('');
   StringList.Add('[Events]');
-  StringList.Add(SSA_EventFormat);
+  StringList.Add(iff(IsV4, SSA_V4EventFormat, SSA_EventFormat));
 
   for i := FromItem to ToItem do
   begin
@@ -566,13 +658,22 @@ begin
     end;
 
     if not s.IsEmpty then
-      Text := s + Text + '{\an0}';
+    begin
+      if IsV4 then
+      begin
+        al := StrToIntDef(Copy(s, 5, 1), 2);
+        Text := '{\a' + IntToStr(ASSNumpadToV4(al)) + '}' + Text;
+      end
+      else
+        Text := s + Text + '{\an0}';
+    end;
 
     // layer, margins and effect of the file
     if (Subtitles.ExtraInfoType = eiSSA) and (Subtitles.ExtraInfo[i] <> NIL) then
       with PSSA_ExtraInfo(Subtitles.ExtraInfo[i])^ do
       begin
         sLayer   := IntToStr(Layer);
+        if IsV4 then sLayer := 'Marked=' + iff(Subtitles[i].Marked, '1', '0');
         sMarginL := SysUtils.Format('%.4d', [MarginL]);
         sMarginR := SysUtils.Format('%.4d', [MarginR]);
         sMarginV := SysUtils.Format('%.4d', [MarginV]);
@@ -580,7 +681,7 @@ begin
       end
     else
     begin
-      sLayer   := '0';
+      sLayer   := iff(IsV4, 'Marked=' + iff(Subtitles[i].Marked, '1', '0'), '0');
       sMarginL := '0000';
       sMarginR := '0000';
       sMarginV := '0000';
