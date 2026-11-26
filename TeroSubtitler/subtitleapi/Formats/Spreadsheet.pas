@@ -114,6 +114,19 @@ var
   sl : TStrings;
   iIT, iFT, iT : Integer;
 
+  // a time cell (00:00:00,000 too): StringToTime is a Cardinal, ">= 0" was
+  // true for any text, and the first text column (a name, an actor...)
+  // was taken as the start time
+  function IsTimeCell(const S: String): Boolean;
+  var
+    i: Integer;
+  begin
+    Result := Pos(':', S) > 0;
+    if Result then
+      for i := 1 to Length(S) do
+        if not (S[i] in ['0'..'9', ':', ';', ',', '.', ' ']) then Exit(False);
+  end;
+
   function GetStyledText(ARow, ACol: Cardinal): String;
   var
     lCell: PCell;
@@ -179,9 +192,9 @@ begin
           begin
             if StrToIntDef(TaggedText, -1) = -1 then
             begin
-              if (StringToTime(TaggedText, False, FPS) >= 0) and (iIT = -1) and (iFT = -1) then
+              if IsTimeCell(TaggedText) and (iIT = -1) and (iFT = -1) then
                 iIT := col
-              else if (StringToTime(TaggedText, False, FPS) > 0) and (iFT = -1) and (iIT > -1) then
+              else if IsTimeCell(TaggedText) and (StringToTime(TaggedText, False, FPS) > 0) and (iFT = -1) and (iIT > -1) then
                 iFT := col
               else if (iIT > -1) and (iFT > -1) and (iT < 0) then
                 iT := col;
