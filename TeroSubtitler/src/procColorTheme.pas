@@ -85,6 +85,7 @@ type
     procedure Apply(const AHotKey: TUWHotKey; const AColorMode: TColorMode); overload;
     procedure Apply(const AListBox: TListBox; const AColorMode: TColorMode); overload;
     procedure Apply(const ASpinEdit: TSpinEdit; const AColorMode: TColorMode); overload;
+    procedure Apply(const ASpinEdit: TFloatSpinEdit; const AColorMode: TColorMode); overload;
     procedure Apply(const ACheckBox: TCheckBox; const AColorMode: TColorMode); overload;
     procedure Apply(const ARadioButton: TRadioButton; const AColorMode: TColorMode); overload;
     procedure Apply(const ACheckGroup: TCheckGroup; const AColorMode: TColorMode); overload;
@@ -124,10 +125,9 @@ var
 
 implementation
 
-{$IFDEF WINDOWS}
 uses
-  UWWindows.DarkTheme, UWWindows.MenuTheming;
-{$ENDIF}
+  ImgList, procIcons
+  {$IFDEF WINDOWS}, UWWindows.DarkTheme, UWWindows.MenuTheming{$ENDIF};
 
 // -----------------------------------------------------------------------------
 
@@ -404,6 +404,8 @@ begin
     Apply(TListBox(Ctrl), AColorMode)
   else if Ctrl is TSpinEdit then
     Apply(TSpinEdit(Ctrl), AColorMode)
+  else if Ctrl is TFloatSpinEdit then // formShotChanges, formStyles
+    Apply(TFloatSpinEdit(Ctrl), AColorMode)
   else if Ctrl is TCheckBox then
     Apply(TCheckBox(Ctrl), AColorMode)
   else if Ctrl is TRadioButton then
@@ -701,6 +703,19 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TColorTheme.Apply(const ASpinEdit: TFloatSpinEdit; const AColorMode: TColorMode);
+begin
+  ASpinEdit.Color      := Colors.Window;
+  ASpinEdit.Font.Color := Colors.Text;
+
+  if AColorMode = cmLight then
+    ASpinEdit.BorderStyle := bsSingle
+  else
+    ASpinEdit.BorderStyle := bsNone;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TColorTheme.Apply(const ACheckBox: TCheckBox; const AColorMode: TColorMode);
 begin
   ACheckBox.Color := Colors.Window;
@@ -842,7 +857,8 @@ var
   i    : Integer;
   Ctrl : TControl;
 begin
-  AToolbar.Images := AImageList;
+  // the toolbars of the main form use the icon size of the settings
+  AToolbar.Images := ToolBarImages(AToolbar, AImageList);
   {$IFDEF WINDOWS}
   AToolbar.Color  := Colors.Form;
 
@@ -915,7 +931,8 @@ end;
 {$IFDEF WINDOWS}
 procedure TColorTheme.ToolBarDoPaintButton(Sender: TToolButton; State: Integer);
 var
-  Bitmap: TBGRABitmap;
+  Bitmap : TBGRABitmap;
+  Res    : TScaledImageListResolution;
 begin
   Bitmap := NIL;
   if Sender.Style in [tbsButton, tbsDropDown, tbsButtonDrop, tbsCheck] then
@@ -958,9 +975,11 @@ begin
       with TToolBar(Sender.Parent) do
         if Assigned(Images) then
         begin
+          // the resolution of the dpi (and of the icon size of the settings)
+          Res := Images.ResolutionForPPI[ImagesWidth, Font.PixelsPerInch, Sender.GetCanvasScaleFactor];
           if Sender.Style = tbsDropDown then
           begin
-            Images.Draw(Sender.Canvas, ((Sender.Width - (Images.Width)) div 2)-6, (Sender.Height - (Images.Height)) div 2, Sender.ImageIndex, Sender.Enabled);
+            Res.Draw(Sender.Canvas, ((Sender.Width - Res.Width) div 2)-6, (Sender.Height - Res.Height) div 2, Sender.ImageIndex, Sender.Enabled);
             Sender.Canvas.Pen.Color := Colors.Window;
             //{$IFDEF WINDOWS}
             Sender.Canvas.Brush.Style := bsClear;
@@ -972,7 +991,7 @@ begin
             //{$ENDIF}
           end
           else
-            Images.Draw(Sender.Canvas, (Sender.Width - (Images.Width)) div 2, (Sender.Height - (Images.Height)) div 2, Sender.ImageIndex, Sender.Enabled);
+            Res.Draw(Sender.Canvas, (Sender.Width - Res.Width) div 2, (Sender.Height - Res.Height) div 2, Sender.ImageIndex, Sender.Enabled);
         end;
     end;
   end
