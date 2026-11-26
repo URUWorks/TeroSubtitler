@@ -87,6 +87,12 @@ type
 function GetCPL(const AProfile: TProfileItem; const AText: String): Cardinal;
 function GetAutoBreakCPL(const AProfile: TProfileItem; const AText: String): Cardinal;
 
+// The profiles of the app (AAppFile, replaced when Tero is updated) that are
+// new or were corrected since the last time, to the user's copy (AUserFile).
+// ADefaultsFile is the copy of the app file of the last time: a profile the
+// user removed doesn't come back, and one the user changed is not replaced.
+procedure MergeDefaultProfiles(const AUserFile, AAppFile, ADefaultsFile: String);
+
 // -----------------------------------------------------------------------------
 
 implementation
@@ -125,6 +131,108 @@ end;
 function CompareItems(const Item1, Item2: PProfileItem): Integer;
 begin
   Result := CompareText(Item1^.Name, Item2^.Name);
+end;
+
+// -----------------------------------------------------------------------------
+
+// the values saved of a profile (see SaveToFile), to compare them
+function ProfileValues(const P: PProfileItem): String;
+begin
+  with P^ do
+    Result := Format('%d|%d|%d|%d|%d|%d|%s|%d|%d|%d|%d|%s|%s|%s|%s|%d|%d|%d|%d|%d',
+      [NewSubtitleMs, MinDuration, MinDurationPerWord, MaxDuration, MaxLines,
+       MinPause, BoolToStr(PauseInFrames, True), MaxCPS, WPM, CPL, CPLOneLine,
+       RepeatableChars, ProhibitedChars, BoolToStr(DotsOnSplit, True),
+       CPSLineLenStrategy, ShotcutSnapArea, ShotcutThreshold, ShotcutInCues,
+       ShotcutOutCues, Chaining]);
+end;
+
+// -----------------------------------------------------------------------------
+
+function SameFileContent(const AFile1, AFile2: String): Boolean;
+var
+  m1, m2: TMemoryStream;
+begin
+  Result := False;
+  if not FileExists(AFile1) or not FileExists(AFile2) then Exit;
+  m1 := TMemoryStream.Create;
+  m2 := TMemoryStream.Create;
+  try
+    try
+      m1.LoadFromFile(AFile1);
+      m2.LoadFromFile(AFile2);
+      Result := (m1.Size = m2.Size) and CompareMem(m1.Memory, m2.Memory, m1.Size);
+    except
+    end;
+  finally
+    m2.Free;
+    m1.Free;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure MergeDefaultProfiles(const AUserFile, AAppFile, ADefaultsFile: String);
+var
+  App, Old, User: TProfiles;
+  i, u, o: Integer;
+  Item: PProfileItem;
+  Changed: Boolean;
+begin
+  // only a cache of the profiles: an error here must not stop anything
+  if not FileExists(AAppFile) or not FileExists(AUserFile) or
+    SameFileContent(AAppFile, ADefaultsFile) then Exit;
+  try
+    App  := TProfiles.Create(AAppFile);
+    Old  := TProfiles.Create(ADefaultsFile); // empty the first time
+    User := TProfiles.Create(AUserFile);
+    try
+      Changed := False;
+      for i := 0 to App.Items.Count-1 do
+      begin
+        u := User.FindItemIndex(App.Items[i]^.Name);
+        o := Old.FindItemIndex(App.Items[i]^.Name);
+        if u < 0 then
+        begin
+          // a new profile of the app (not one the user removed)
+          if o < 0 then
+          begin
+            New(Item);
+            Item^ := App.Items[i]^;
+            User.Items.Add(Item);
+            Changed := True;
+          end;
+        end
+        else if (o >= 0) and
+          (ProfileValues(User.Items[u]) = ProfileValues(Old.Items[o])) and
+          (ProfileValues(User.Items[u]) <> ProfileValues(App.Items[i])) then
+        begin
+          // corrected in the app and not changed by the user
+          User.Items[u]^ := App.Items[i]^;
+          Changed := True;
+        end;
+      end;
+
+      if Changed then
+      begin
+        User.Sort;
+        if not User.SaveToFile(AUserFile) then Exit; // try again next time
+      end;
+      // the app file of this time, for the next update
+      with TMemoryStream.Create do
+      try
+        LoadFromFile(AAppFile);
+        SaveToFile(ADefaultsFile);
+      finally
+        Free;
+      end;
+    finally
+      User.Free;
+      Old.Free;
+      App.Free;
+    end;
+  except
+  end;
 end;
 
 // -----------------------------------------------------------------------------
