@@ -263,8 +263,25 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the passes left of the A-B loop. Since mpv 0.39 the option ab-loop-count
+// keeps the value it was given and the count is the property
+// remaining-ab-loops: reading ab-loop-count, with 2 or more passes it was
+// never 0 and the selection didn't stop at its end (#511). With an older
+// libmpv (without remaining-ab-loops) the option itself is decremented
+function MPVRemainingABLoops: String;
+begin
+  with frmMain do
+  begin
+    Result := MPV.mpv_get_property_string_('remaining-ab-loops');
+    if Result = '' then
+      Result := MPV.mpv_get_property_string_('ab-loop-count');
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 // called by the playback timer: after the last pass of "Play selection" mpv
-// ignores the A-B points (ab-loop-count is 0 then) and kept playing after
+// ignores the A-B points (no passes left then) and kept playing after
 // the end of the selection, to the end of the video
 procedure MPVCheckSelectionEnd(const ACurrentPos: Integer);
 begin
@@ -274,7 +291,7 @@ begin
     if (Workspace.MediaPlayMode <> mpmSelection) then
       SelectionLoopEnd := 0
     else if (ACurrentPos >= SelectionLoopEnd-1) and
-      (MPV.mpv_get_property_string_('ab-loop-count') = '0') then
+      (MPVRemainingABLoops = '0') then
     begin
       MPV.Pause;
       MPV.SetMediaPosInMs(SelectionLoopEnd);
