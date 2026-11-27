@@ -134,6 +134,7 @@ end;
 function ResolveOnlineAudio(const AURL: String): String;
 var
   Output: TStringList;
+  Args: TStringArray;
   i: Integer;
 begin
   // youtube & co: the direct url of the audio stream, given by yt-dlp (the
@@ -143,7 +144,11 @@ begin
 
   Output := NIL;
   try
-    if ExecuteAppLoop(YTDLPFileName, ['-g', '-f', 'bestaudio/best', '--no-playlist', '--no-warnings', AURL], Output) then
+    if YTDLPJSRuntime <> '' then
+      Args := ['--js-runtimes', YTDLPJSRuntime, '-g', '-f', 'bestaudio/best', '--no-playlist', '--no-warnings', AURL]
+    else
+      Args := ['-g', '-f', 'bestaudio/best', '--no-playlist', '--no-warnings', AURL];
+    if ExecuteAppLoop(YTDLPFileName, Args, Output) then
       for i := 0 to Output.Count-1 do
         if IsOnlineMedia(Trim(Output[i])) then
         begin
