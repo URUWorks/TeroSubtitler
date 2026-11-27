@@ -107,6 +107,7 @@ const
   daFFmpeg       = 0;
   daSceneDetect  = 1;
   daNative       = 2; // UW_MPVPlayer's TMPVSceneDetector (libmpv)
+  daGetSceneDetect = 3; // PySceneDetect isn't installed: install it
 
 {$R *.lfm}
 
@@ -258,7 +259,10 @@ begin
       Clear;
       AddObject(lngscBuiltin, TObject(PtrInt(daNative)));
       AddObject('FFmpeg', TObject(PtrInt(daFFmpeg)));
-      if FileExists(SceneDetectFileName) then AddObject('PySceneDetect', TObject(PtrInt(daSceneDetect)));
+      if FileExists(SceneDetectFileName) then
+        AddObject('PySceneDetect', TObject(PtrInt(daSceneDetect)))
+      else
+        AddObject(lngscGetSceneDetect, TObject(PtrInt(daGetSceneDetect)));
       EndUpdate;
     end;
     with cboTimeCodeImport.Items do
@@ -378,7 +382,22 @@ end;
 // -----------------------------------------------------------------------------
 
 procedure TfrmShotChanges.cboDetectAppSelect(Sender: TObject);
+var
+  i: Integer;
 begin
+  // "PySceneDetect (install)...": installed, it's listed as the others
+  if (Sender <> NIL) and (GetDetectApp = daGetSceneDetect) then
+  begin
+    if InstallSceneDetect then
+    begin
+      i := cboDetectApp.ItemIndex;
+      cboDetectApp.Items[i] := 'PySceneDetect';
+      cboDetectApp.Items.Objects[i] := TObject(PtrInt(daSceneDetect));
+      cboDetectApp.ItemIndex := i;
+    end
+    else
+      SetDetectApp(daNative);
+  end;
   // grey, if the selected app doesn't use it
   spnSensitivity.Enabled := cboDetectApp.Enabled and AppUsesSensitivity;
   lblSensitivity.Enabled := spnSensitivity.Enabled;
