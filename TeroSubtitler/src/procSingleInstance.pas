@@ -44,8 +44,9 @@ uses
   procWorkspace, procConfig, formMain, formWelcome, formWizard;
 
 const
-  csMutexName     = 'Local\URUWorks.TeroSubtitler.Instance';
-  csReceiverClass = 'URUWorks.TeroSubtitler.Instance';
+  // each channel (stable, nightly...) has its own instance, see ChannelSuffix
+  csMutexName     = 'Local\URUWorks.TeroSubtitler.Instance' + ChannelSuffix;
+  csReceiverClass = 'URUWorks.TeroSubtitler.Instance' + ChannelSuffix;
   CopyDataId      = $54455231; // 'TER1'
   HWND_MESSAGE_   = HWND(-3);
 
