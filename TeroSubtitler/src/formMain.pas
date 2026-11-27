@@ -38,6 +38,9 @@ type
     actFindNext: TAction;
     actFindPrevious: TAction;
     actAbout: TAction;
+    actOpenCrashLog: TAction;
+    actCopyDiagnosticInfo: TAction;
+    actResetSettings: TAction;
     actInsertEntryBefore: TAction;
     actInsertEntry: TAction;
     actDeleteEntry: TAction;
@@ -617,6 +620,10 @@ type
     mnuEditInsertChar: TMenuItem;
     MenuItem8: TMenuItem;
     mnuAbout: TMenuItem;
+    mnuOpenCrashLog: TMenuItem;
+    mnuCopyDiagnosticInfo: TMenuItem;
+    mnuResetSettings: TMenuItem;
+    mnuHelpSeparator2: TMenuItem;
     MenuItem110: TMenuItem;
     MenuItem111: TMenuItem;
     mnuSettings: TMenuItem;
@@ -988,6 +995,7 @@ type
     procedure DoAudioTrackSet(Sender: TObject);
     procedure DoHunspellItemClick(Sender: TObject);
     procedure DoDictionaryItemClick(Sender: TObject);
+    procedure DoAddDictionaryClick(Sender: TObject);
     procedure DoUnicodeSymbolClick(Sender: TObject);
     procedure DoInsertUnicodeChar(const C: TUTF8Char);
     procedure DoSilentZoneClick(Sender: TObject);
@@ -1103,6 +1111,9 @@ type
     procedure sbrVolumeChange(Sender: TObject);
     // formMain_Actions
     procedure actAboutExecute(Sender: TObject);
+    procedure actOpenCrashLogExecute(Sender: TObject);
+    procedure actCopyDiagnosticInfoExecute(Sender: TObject);
+    procedure actResetSettingsExecute(Sender: TObject);
     procedure actHelpExecute(Sender: TObject);
     procedure actCheckForUpdatesExecute(Sender: TObject);
     procedure actSetupWizardExecute(Sender: TObject);
@@ -1455,7 +1466,7 @@ uses
   procForms, UWSubtitleAPI.Tags, UWSubtitles.Utils, LazUTF8, procMRU, UWSystem.SysUtils,
   UWSystem.StrUtils, UWSubtitleAPI.TMX, UWSubtitleAPI.TBX, procThumbnails, procProjectFile,
   formCustomQuestionDlg, formCustomSelectDlg, formTranslationMemory, formTBX,
-  libMPV.Client, procMacMediaKeys, procConventions, FileUtil;
+  libMPV.Client, procMacMediaKeys, procConventions, FileUtil, Clipbrd, procCrashLog;
 
 {$R *.lfm}
 
@@ -1589,7 +1600,7 @@ begin
   // Hunspell
   if not HunspellInstance.Ready then
     HunspellInstance.LoadHunspell(HunspellFileName);
-  HunspellInstance.LoadDictionary(DictionariesFolder+AppOptions.HunspellLanguage+'.aff', DictionariesFolder+AppOptions.HunspellLanguage+'.dic');
+  LoadHunspellDictionary(AppOptions.HunspellLanguage);
   // prepare special folders
   ForceDirectories(WaveformsFolder);
   ForceDirectories(ShotChangesFolder);
@@ -2279,7 +2290,23 @@ begin
     (Sender as TMenuItem).Checked := True;
     AppOptions.HunspellLanguage := GetDictionaryNameFromCaption((Sender as TMenuItem).Caption);
 
-    HunspellInstance.LoadDictionary(DictionariesFolder+AppOptions.HunspellLanguage+'.aff', DictionariesFolder+AppOptions.HunspellLanguage+'.dic');
+    LoadHunspellDictionary(AppOptions.HunspellLanguage);
+    UpdateStatusBar(True);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.DoAddDictionaryClick(Sender: TObject);
+var
+  AName: String;
+begin
+  // copied to the user folder and selected
+  if AddDictionaryWithDialog(AName) then
+  begin
+    AppOptions.HunspellLanguage := AName;
+    LoadHunspellDictionary(AName);
+    FillWithDictionaries(popDictionaries, NIL);
     UpdateStatusBar(True);
   end;
 end;

@@ -45,6 +45,39 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmMain.actOpenCrashLogExecute(Sender: TObject);
+begin
+  // the unhandled errors written by procCrashLog
+  if FileExists(CrashLogFileName) then
+    OpenDocument(CrashLogFileName)
+  else
+    ShowMessageDialog(lngNoErrorsLogged);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actCopyDiagnosticInfoExecute(Sender: TObject);
+begin
+  // versions, paths and tools, to paste in a bug report
+  Clipboard.AsText := DiagnosticInfo;
+  ShowMessageDialog(lngDiagnosticInfoCopied);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmMain.actResetSettingsExecute(Sender: TObject);
+begin
+  // the default settings in the next start (the current ones kept as .bak);
+  // shortcut presets, profiles, recent files and styles aren't touched
+  if CustomQuestionDialog(lngAskResetSettings, lngResetSettingsInfo, [dbYes, dbNo]) = mrYes then
+  begin
+    ResetSettings;
+    Close;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmMain.actListModeExecute(Sender: TObject);
 begin
   SetViewMode(vmList);

@@ -43,6 +43,8 @@ uses
 
 procedure InstallCrashLog;
 function CrashLogFileName: String;
+// what is needed in a bug report (Help > Copy diagnostic information)
+function DiagnosticInfo: String;
 
 // -----------------------------------------------------------------------------
 
@@ -51,7 +53,8 @@ implementation
 uses
   {$IFDEF UNIX}dl,{$ENDIF} {$IFDEF DARWIN}CocoaAll,{$ENDIF}
   Controls, InterfaceBase, LCLPlatformDef, LCLVersion, fileinfo,
-  winpeimagereader, elfreader, machoreader, MPVPlayer, formMain;
+  winpeimagereader, elfreader, machoreader, MPVPlayer, formMain, procTypes,
+  procConfig;
 
 const
   MaxLogLines    = 2000; // the oldest reports are removed beyond this
@@ -79,9 +82,9 @@ var
 function CrashLogFileName: String;
 begin
   {$IFDEF DARWIN}
-  Result := ConcatPaths([GetUserDir, 'Library', 'Logs', 'TeroSubtitler-crash.log']);
+  Result := ConcatPaths([GetUserDir, 'Library', 'Logs', 'TeroSubtitler' + ChannelSuffix + '-crash.log']);
   {$ELSE}
-  Result := ConcatPaths([GetTempDir, 'TeroSubtitler-crash.log']);
+  Result := ConcatPaths([GetTempDir, 'TeroSubtitler' + ChannelSuffix + '-crash.log']);
   {$ENDIF}
 end;
 
@@ -254,6 +257,47 @@ begin
   ClosedForms[ClosedCount].Name := DescribeComponent(AForm);
   ClosedForms[ClosedCount].Tick := GetTickCount64;
   Inc(ClosedCount);
+end;
+
+// -----------------------------------------------------------------------------
+
+function DiagnosticInfo: String;
+
+  function FileState(const AFileName: String): String;
+  begin
+    if AFileName = '' then
+      Result := '(none)'
+    else if FileExists(AFileName) then
+      Result := AFileName
+    else
+      Result := AFileName + ' (not found)';
+  end;
+
+var
+  SL: TStringList;
+  Dir: String;
+begin
+  SL := TStringList.Create;
+  try
+    SL.Add(GetSystemInfo);
+    SL.Add('Language: ' + AppOptions.GUILanguage + '  Dictionary: ' + AppOptions.HunspellLanguage);
+    SL.Add('Settings: ' + FileState(SettingsFileName));
+    SL.Add('Profiles: ' + FileState(ConventionsFileName));
+    SL.Add('Crash log: ' + FileState(CrashLogFileName));
+    SL.Add('libmpv: ' + FileState(libMPVFileName));
+    SL.Add('yt-dlp: ' + FileState(Tools.YTDLP));
+    SL.Add('Deno: ' + FileState(DenoFileName));
+    SL.Add('FFmpeg: ' + FileState(Tools.FFmpeg));
+    SL.Add('whisper.cpp: ' + FileState(Tools.WhisperCPP));
+    SL.Add('Faster-Whisper: ' + FileState(Tools.FasterWhisper));
+    SL.Add('PySceneDetect: ' + FileState(Tools.PySceneDetect));
+    SL.Add('Tesseract: ' + FileState(Tools.Tesseract));
+    for Dir in DictionaryFolders do
+      SL.Add('Dictionaries: ' + Dir + BoolToStr(DirectoryExists(Dir), '', ' (not found)'));
+    Result := SL.Text;
+  finally
+    SL.Free;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

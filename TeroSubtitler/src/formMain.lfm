@@ -2733,6 +2733,18 @@ object frmMain: TfrmMain
       object mnuSetupWizard: TMenuItem
         Action = actSetupWizard
       end
+      object mnuHelpSeparator2: TMenuItem
+        Caption = '-'
+      end
+      object mnuOpenCrashLog: TMenuItem
+        Action = actOpenCrashLog
+      end
+      object mnuCopyDiagnosticInfo: TMenuItem
+        Action = actCopyDiagnosticInfo
+      end
+      object mnuResetSettings: TMenuItem
+        Action = actResetSettings
+      end
       object mnuHelpSeparator: TMenuItem
         Caption = '-'
       end
@@ -4183,6 +4195,21 @@ object frmMain: TfrmMain
       Category = 'Help'
       Caption = 'Setup wizard...'
       OnExecute = actSetupWizardExecute
+    end
+    object actOpenCrashLog: TAction
+      Category = 'Help'
+      Caption = 'Open error log'
+      OnExecute = actOpenCrashLogExecute
+    end
+    object actCopyDiagnosticInfo: TAction
+      Category = 'Help'
+      Caption = 'Copy diagnostic information'
+      OnExecute = actCopyDiagnosticInfoExecute
+    end
+    object actResetSettings: TAction
+      Category = 'Help'
+      Caption = 'Reset settings...'
+      OnExecute = actResetSettingsExecute
     end
     object actLoadTranslation: TAction
       Tag = 1
