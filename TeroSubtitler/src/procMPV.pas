@@ -157,6 +157,13 @@ begin
 
       //AddOption('log-file='+LogMPVFileName);
 
+      // Deno for the ytdl_hook (YouTube needs a JavaScript runtime); the path
+      // quoted with [] (it has ":" and maybe "," on Windows)
+      if YTDLPJSRuntime <> '' then
+        AddOption('ytdl-raw-options=js-runtimes=[' + YTDLPJSRuntime + ']')
+      else
+        RemoveOption('ytdl-raw-options=');
+
       // Additional mpv options
       if Length(AdditionalOptions) > 0 then
         for i := 0 to High(AdditionalOptions) do
