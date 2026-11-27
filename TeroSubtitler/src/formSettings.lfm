@@ -431,6 +431,18 @@ object frmSettings: TfrmSettings
       Caption = 'Allow multiple instances'
       TabOrder = 23
     end
+    object chkProjectThumbnails: TUWCheckBox
+      AnchorSideTop.Control = chkAllowMultipleInstances
+      AnchorSideTop.Side = asrBottom
+      Left = 435
+      Height = 24
+      Top = 482
+      Width = 22
+      AutoSize = False
+      BorderSpacing.Top = 2
+      Caption = 'Save the timeline thumbnails in projects'
+      TabOrder = 24
+    end
   end
   object lyoConventions: TUWLayout
     Left = -635
@@ -1251,15 +1263,28 @@ object frmSettings: TfrmSettings
     object edtSceneDetect: TEdit
       AnchorSideTop.Control = edtFFMPEG
       AnchorSideTop.Side = asrBottom
-      AnchorSideRight.Control = edtFFMPEG
-      AnchorSideRight.Side = asrBottom
+      AnchorSideRight.Control = btnSceneDetectUpdate
       Left = 310
       Height = 28
       Top = 38
-      Width = 494
+      Width = 408
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Top = 10
+      BorderSpacing.Right = 6
       TabOrder = 2
+    end
+    object btnSceneDetectUpdate: TButton
+      AnchorSideTop.Control = edtSceneDetect
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = btnSceneDetect
+      Left = 724
+      Height = 29
+      Top = 38
+      Width = 80
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 6
+      Caption = 'Update'
+      OnClick = btnSceneDetectUpdateClick
     end
     object btnSceneDetect: TButton
       AnchorSideTop.Control = edtSceneDetect

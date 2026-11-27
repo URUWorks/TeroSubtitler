@@ -37,6 +37,7 @@ type
     btnMinus: TButton;
     btnPlus: TButton;
     btnSceneDetect: TButton;
+    btnSceneDetectUpdate: TButton;
     btnProfile: TButton;
     btnWhisperCPP: TButton;
     btnFasterWhisper: TButton;
@@ -64,6 +65,7 @@ type
     cboQuoteStyle: TComboBox;
     chkSmartQuotesTyping: TUWCheckBox;
     chkAllowMultipleInstances: TUWCheckBox;
+    chkProjectThumbnails: TUWCheckBox;
     chkPromptForSaveWithErrors1: TUWCheckBox;
     chkWriteBOM: TUWCheckBox;
     chkSubtitleHandleByMPV: TUWCheckBox;
@@ -198,6 +200,7 @@ type
     procedure btnPlusClick(Sender: TObject);
     procedure btnProfileClick(Sender: TObject);
     procedure btnSceneDetectClick(Sender: TObject);
+    procedure btnSceneDetectUpdateClick(Sender: TObject);
     procedure btnShortCutApplyClick(Sender: TObject);
     procedure btnShortCutSaveClick(Sender: TObject);
     procedure btnTesseractClick(Sender: TObject);
@@ -378,6 +381,7 @@ begin
       cboQuoteStyle.ItemIndex := 1;
     chkSmartQuotesTyping.Checked := SmartQuotesTyping;
     chkAllowMultipleInstances.Checked := AllowMultipleInstances;
+    chkProjectThumbnails.Checked := ProjectThumbnails;
 
     cboTheme.ItemIndex := Integer(ColorThemeInstance.ColorMode);
     cboIconSize.ItemIndex := ToolBarIconSizeIndex(ToolBarIconSize);
@@ -517,6 +521,7 @@ begin
     QuoteStyle := cboQuoteStyle.ItemIndex;
     SmartQuotesTyping := chkSmartQuotesTyping.Checked;
     AllowMultipleInstances := chkAllowMultipleInstances.Checked;
+    ProjectThumbnails := chkProjectThumbnails.Checked;
   end; //with
 
   frmMain.VST.Font.Size            := spnListFontSize.Value;
@@ -698,6 +703,35 @@ end;
 procedure TfrmSettings.btnYTDLPClick(Sender: TObject);
 begin
   edtYTDLP.Text := GetFileFromOpenDialog(edtYTDLP.Text);
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure TfrmSettings.btnSceneDetectUpdateClick(Sender: TObject);
+var
+  s: String;
+begin
+  // installed or updated to the latest version (Windows: the official zip;
+  // macOS/Linux: pipx)
+  btnSceneDetectUpdate.Enabled := False;
+  Screen.Cursor := crHourGlass;
+  try
+    if UpdateSceneDetect(s) then
+    begin
+      edtSceneDetect.Text := Tools.PySceneDetect;
+      Screen.Cursor := crDefault;
+      ShowMessageDialog(s);
+    end
+    else
+    begin
+      Screen.Cursor := crDefault;
+      if s.IsEmpty then s := lngFailed;
+      ShowErrorMessageDialog(s, '', False, False);
+    end;
+  finally
+    Screen.Cursor := crDefault;
+    btnSceneDetectUpdate.Enabled := True;
+  end;
 end;
 
 // -----------------------------------------------------------------------------

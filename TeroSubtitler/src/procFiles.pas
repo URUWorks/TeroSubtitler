@@ -2232,7 +2232,9 @@ begin
       begin
         Movie         := MPV.FileName;
         MoviePos      := MPV.GetMediaPosInMs;
-        ThumbnailsDir := GetThumbnailsCacheDir(Movie);
+        // optional, they make the project bigger (they are made again when it's opened)
+        if AppOptions.ProjectThumbnails then
+          ThumbnailsDir := GetThumbnailsCacheDir(Movie);
         // the .peak (a .wav makes one next to it)
         if WAVE.IsPeakDataLoaded and not WAVE.FileName.IsEmpty then
           WaveformFile := ChangeFileExt(WAVE.FileName, '.peak');
