@@ -18,6 +18,7 @@
 unit procTypes;
 
 {$mode ObjFPC}{$H+}
+{$I channel.inc}
 
 interface
 
@@ -35,6 +36,32 @@ const
   ProgramReleaseURL = 'https://github.com/URUWorks/TeroSubtitler/releases';
   UWDonateURL       = 'https://www.paypal.me/URUWorks';
   RootCfg           = 'tero';
+
+  // the release channel: nightly, beta and RC builds have their own user
+  // folders (settings, profiles, caches...), Windows installation and macOS
+  // app, so they never overwrite the stable ones (see channel.inc)
+  {$IF DEFINED(CHANNEL_NIGHTLY)}
+  ChannelName       = 'Nightly';
+  ChannelTitle      = ' Nightly';
+  ChannelSuffix     = '-nightly';
+  {$ELSEIF DEFINED(CHANNEL_BETA)}
+  ChannelName       = 'Beta';
+  ChannelTitle      = ' Beta';
+  ChannelSuffix     = '-beta';
+  {$ELSEIF DEFINED(CHANNEL_RC)}
+  ChannelName       = 'RC';
+  ChannelTitle      = ' RC';
+  ChannelSuffix     = '-rc';
+  {$ELSE}
+  ChannelName       = '';
+  ChannelTitle      = '';
+  ChannelSuffix     = '';
+  {$ENDIF}
+  // the folder of the user files: ~/tero (macOS), %LOCALAPPDATA%\tero
+  // (Windows), ~/.config/tero (Linux); "tero-nightly"... for the other channels
+  UserDirName       = RootCfg + ChannelSuffix;
+  // the name in the window title: "Tero Subtitler Nightly"...
+  ProgramTitle      = ProgramName + ChannelTitle;
 
 var
 
@@ -146,6 +173,17 @@ const
   {$ENDIF}
   URL_LIBMPV_LEGACY = 'https://github.com/URUWorks/UW_libmpv/releases/latest/download/libmpv2_win64_legacy.zip';
   URL_YTDLP   = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe';
+  // PySceneDetect for Windows (scenedetect.exe with OpenCV and FFmpeg, ~190 MB): the
+  // file of the latest release is looked up with the GitHub API (it has the
+  // version in its name); the fixed one only if that fails
+  URL_SCENEDETECT_API = 'https://api.github.com/repos/Breakthrough/PySceneDetect/releases/latest';
+  URL_SCENEDETECT = 'https://github.com/Breakthrough/PySceneDetect/releases/download/v0.7.3/PySceneDetect-0.7.3-win64.zip';
+  // Deno: the JavaScript runtime yt-dlp needs for YouTube (since yt-dlp 2025.11)
+  {$IFDEF CPUAARCH64}
+  URL_DENO    = 'https://github.com/denoland/deno/releases/latest/download/deno-aarch64-pc-windows-msvc.zip';
+  {$ELSE}
+  URL_DENO    = 'https://github.com/denoland/deno/releases/latest/download/deno-x86_64-pc-windows-msvc.zip';
+  {$ENDIF}
   // UW_WhisperCPP (github.com/URUWorks/UW_WhisperCPP): Windows 7 SP1+ x64 (CPU + Vulkan) or Windows 10/11 ARM64 (CPU)
   {$IFDEF CPUAARCH64}
   URL_WHISPER = 'https://github.com/URUWorks/UW_WhisperCPP/releases/latest/download/whisper_winarm64.zip';
@@ -176,6 +214,7 @@ const
   FFPROBE_Params       = '-v quiet -print_format json -show_format -show_streams "%input"';
 
   YTDLP_EXE = 'yt-dlp.exe';
+  DENO_EXE  = 'deno.exe';
 
   WHISPER_EXE      = 'whisper-cli.exe'; // main.exe is only a deprecation stub since whisper.cpp 1.7.4
   WHISPER_Params   = '-m "%model" -l %lang -osrt -of "%output" -f "%input"';
@@ -199,8 +238,10 @@ const
   URL_LIBMPV_LEGACY = '';
   {$IFDEF CPUAARCH64}
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux_aarch64';
+  URL_DENO   = 'https://github.com/denoland/deno/releases/latest/download/deno-aarch64-unknown-linux-gnu.zip';
   {$ELSE}
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux';
+  URL_DENO   = 'https://github.com/denoland/deno/releases/latest/download/deno-x86_64-unknown-linux-gnu.zip';
   {$ENDIF}
   // UW_WhisperCPP: glibc 2.17+, x86_64 (CPU + Vulkan) or aarch64 (CPU)
   {$IFDEF CPUAARCH64}
@@ -237,6 +278,7 @@ const
   {$ELSE}
   YTDLP_EXE = 'yt-dlp_linux';
   {$ENDIF}
+  DENO_EXE  = 'deno';
 
   WHISPER_EXE      = 'whisper-cli'; // old settings with main are fixed by ResolveWhisperCPP
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
@@ -260,6 +302,8 @@ const
   URL_LIBMPV = 'https://github.com/URUWorks/UW_libmpv/releases/latest/download/libmpv_macos.zip';
   URL_LIBMPV_LEGACY = 'https://github.com/URUWorks/UW_libmpv/releases/latest/download/libmpv_macos_legacy.zip';
   URL_YTDLP  = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos'; // standalone, can self update
+  // Deno for yt-dlp (YouTube), %cpu = aarch64 or x86_64
+  URL_DENO   = 'https://github.com/denoland/deno/releases/latest/download/deno-%cpu-apple-darwin.zip';
   // UW_WhisperCPP: %cpu = arm64 (macOS 11+, Metal) or x86_64 (macOS 10.11+, CPU)
   URL_WHISPER = 'https://github.com/URUWorks/UW_WhisperCPP/releases/latest/download/whisper_macos_%cpu.zip';
   // UW_Tesseract: %cpu = arm64 (macOS 11+) or x86_64 (macOS 10.11+)
@@ -281,6 +325,7 @@ const
   FFPROBE_Params       = '-v quiet -print_format json -show_format -show_streams %input';
 
   YTDLP_EXE = 'yt-dlp_macos';
+  DENO_EXE  = 'deno';
 
   WHISPER_EXE      = 'whisper-cli'; // old settings with main are fixed by ResolveWhisperCPP
   WHISPER_Params   = '-m %model -l %lang -pp -osrt -of %output -f %input';
@@ -480,6 +525,7 @@ type
     QuoteStyle             : Integer; // QuoteStyles index, 0 = straight
     SmartQuotesTyping      : Boolean; // " and ' typed as QuoteStyle
     AllowMultipleInstances : Boolean; // [Windows] False: a second start goes to the running Tero
+    ProjectThumbnails      : Boolean; // the thumbnails of the timeline saved in the .tero1
     ToolBarIconSize        : Integer; // 0 = 16x16 as always, else the size at 100% (see procIcons)
     TextToFind             : String;
     LastUnicodeChar        : TUTF8Char;

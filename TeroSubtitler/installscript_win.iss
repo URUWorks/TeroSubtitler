@@ -20,7 +20,15 @@
 ;   /DAppVersion=<text>  shown version (default: the version of tero.exe)
 ;   /DOutputName=<name>  installer file name, without .exe
 
-#define MyAppName              "Tero Subtitler"
+; /DChannel=<Nightly|Beta|RC>: installed apart from the stable release, with its own
+; AppId, folder, shortcut and file types (the nightly installer replaced the stable one)
+#ifdef Channel
+  #define MyAppName            "Tero Subtitler " + Channel
+  #define ProgId               "TeroSubtitler" + Channel
+#else
+  #define MyAppName            "Tero Subtitler"
+  #define ProgId               "TeroSubtitler"
+#endif
 #define MyAppExeName           "tero.exe"
 #define MyAppPublisher         "URUWorks"
 #define MyAppURL               "https://github.com/URUWorks/TeroSubtitler/releases"
@@ -102,7 +110,11 @@ Source: "{#DicDir}\{#DicBase}.dic"; DestDir: "{app}\Dictionaries"; Components: {
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
+#ifdef Channel
+AppId={{216B2DAF-093C-4C88-9C82-E34CE46580E5}{#Channel}
+#else
 AppId={{216B2DAF-093C-4C88-9C82-E34CE46580E5}
+#endif
 AppName={#MyAppName}
 AppVersion={#AppVersion}
 AppVerName={#MyAppName} {#AppVersion}
@@ -171,7 +183,12 @@ Name: "dic";  Description: "{cm:Dictionaries}"; Types: full
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+#ifdef Channel
+; a nightly/beta isn't the default program unless chosen
+Name: "fileassoc";   Description: "{cm:AssocSubtitles,{#MyAppName}}"; GroupDescription: "{cm:OtherTasks}"; Flags: unchecked
+#else
 Name: "fileassoc";   Description: "{cm:AssocSubtitles,{#MyAppName}}"; GroupDescription: "{cm:OtherTasks}"
+#endif
 
 [Dirs]
 Name: "{app}"; Permissions: everyone-full
@@ -227,125 +244,125 @@ Source: "{#LibsArm64}\*"; DestDir: "{app}"; Check: UseArm64; Flags: ignoreversio
 ; Per machine or per user (HKA), so it also works without administrator rights.
 ; Every extension gets "Open with"; the default program only with the fileassoc task
 ; (and never for .scr, which is also the screen saver extension).
-Root: HKA; Subkey: "Software\Classes\.ass\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.ass"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.ass"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.ass"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.ass"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.ass)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.ass\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\ass.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.ass\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.ssa\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.ssa"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.ssa"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.ssa"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.ssa"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.ssa)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.ssa\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\ssa.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.ssa\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.xas\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.xas"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.xas"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.xas"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.xas"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.xas)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.xas\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\xas.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.xas\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.aqt\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.aqt"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.aqt"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.aqt"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.aqt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.aqt)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.aqt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\aqt.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.aqt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.890\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.890"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.890"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.890"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.890"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.890)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.890\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\890.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.890\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.asc\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.asc"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.asc"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.asc"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.asc"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.asc)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.asc\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\asc.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.asc\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.cap\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.cap"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.cap"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.cap"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.cap"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.cap)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.cap\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.cap\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.dks\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.dks"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.dks"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.dks"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.dks"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.dks)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.dks\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.dks\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.dtc\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.dtc"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.dtc"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.dtc"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.dtc"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.dtc)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.dtc\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.dtc\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.sub\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.sub"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.sub"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.sub"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.sub"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.sub)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.sub\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\sub.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.sub\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.stl\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.stl"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.stl"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.stl"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.stl"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.stl)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.stl\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\stl.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.stl\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.ttxt\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.ttxt"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.ttxt"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.ttxt"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.ttxt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.ttxt)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.ttxt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.ttxt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.itt\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.itt"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.itt"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.itt"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.itt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.itt)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.itt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\itt.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.itt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.lrc\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.lrc"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.lrc"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.lrc"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.lrc"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.lrc)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.lrc\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.lrc\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.vkt\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.vkt"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.vkt"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.vkt"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.vkt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.vkt)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.vkt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.vkt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.scr\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.scr"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.scr"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.scr)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.scr\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.scr\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.mpl\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.mpl"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.mpl"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.mpl"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.mpl"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.mpl)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.mpl\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.mpl\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.dfxp\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.dfxp"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.dfxp"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.dfxp"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.dfxp"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.dfxp)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.dfxp\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\dfxp.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.dfxp\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.srt\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.srt"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.srt"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.srt"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.srt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.srt)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.srt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\srt.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.srt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.sbv\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.sbv"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.sbv"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.sbv"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.sbv"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.sbv)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.sbv\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\sbv.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.sbv\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.tero\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.tero"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.tero"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.tero"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.tero)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.tero1\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.tero1"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.tero1"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.tero1"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero1"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} project (.tero1)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero1\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.tero1\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.vtt\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.vtt"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.vtt"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.vtt"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.vtt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.vtt)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.vtt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\vtt.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.vtt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKA; Subkey: "Software\Classes\.webvtt\OpenWithProgids"; ValueType: string; ValueName: "TeroSubtitler.webvtt"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\.webvtt"; ValueType: string; ValueName: ""; ValueData: "TeroSubtitler.webvtt"; Flags: uninsdeletevalue; Tasks: fileassoc
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.webvtt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.webvtt)"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.webvtt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\vtt.ico"
-Root: HKA; Subkey: "Software\Classes\TeroSubtitler.webvtt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.ass\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.ass"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.ass"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.ass"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.ass"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.ass)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.ass\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\ass.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.ass\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.ssa\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.ssa"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.ssa"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.ssa"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.ssa"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.ssa)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.ssa\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\ssa.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.ssa\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.xas\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.xas"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.xas"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.xas"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.xas"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.xas)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.xas\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\xas.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.xas\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.aqt\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.aqt"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.aqt"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.aqt"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.aqt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.aqt)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.aqt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\aqt.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.aqt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.890\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.890"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.890"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.890"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.890"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.890)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.890\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\890.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.890\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.asc\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.asc"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.asc"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.asc"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.asc"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.asc)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.asc\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\asc.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.asc\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.cap\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.cap"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.cap"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.cap"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.cap"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.cap)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.cap\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.cap\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.dks\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.dks"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.dks"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.dks"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.dks"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.dks)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.dks\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.dks\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.dtc\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.dtc"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.dtc"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.dtc"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.dtc"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.dtc)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.dtc\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.dtc\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.sub\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.sub"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.sub"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.sub"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.sub"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.sub)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.sub\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\sub.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.sub\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.stl\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.stl"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.stl"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.stl"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.stl"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.stl)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.stl\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\stl.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.stl\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.ttxt\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.ttxt"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.ttxt"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.ttxt"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.ttxt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.ttxt)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.ttxt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.ttxt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.itt\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.itt"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.itt"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.itt"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.itt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.itt)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.itt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\itt.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.itt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.lrc\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.lrc"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.lrc"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.lrc"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.lrc"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.lrc)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.lrc\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.lrc\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.vkt\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.vkt"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.vkt"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.vkt"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.vkt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.vkt)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.vkt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.vkt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.scr\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.scr"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.scr"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.scr)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.scr\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.scr\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.mpl\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.mpl"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.mpl"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.mpl"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.mpl"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.mpl)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.mpl\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.mpl\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.dfxp\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.dfxp"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.dfxp"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.dfxp"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.dfxp"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.dfxp)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.dfxp\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\dfxp.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.dfxp\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.srt\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.srt"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.srt"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.srt"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.srt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.srt)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.srt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\srt.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.srt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.sbv\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.sbv"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.sbv"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.sbv"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.sbv"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.sbv)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.sbv\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\sbv.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.sbv\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.tero\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.tero"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.tero"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.tero"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.tero"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.tero)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.tero\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.tero\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.tero1\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.tero1"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.tero1"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.tero1"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.tero1"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} project (.tero1)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.tero1\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.tero1\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.vtt\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.vtt"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.vtt"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.vtt"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.vtt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.vtt)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.vtt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\vtt.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.vtt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+Root: HKA; Subkey: "Software\Classes\.webvtt\OpenWithProgids"; ValueType: string; ValueName: "{#ProgId}.webvtt"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\.webvtt"; ValueType: string; ValueName: ""; ValueData: "{#ProgId}.webvtt"; Flags: uninsdeletevalue; Tasks: fileassoc
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.webvtt"; ValueType: string; ValueName: ""; ValueData: "{#MyAppName} (.webvtt)"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.webvtt\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Icons\vtt.ico"
+Root: HKA; Subkey: "Software\Classes\{#ProgId}.webvtt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

@@ -20,6 +20,8 @@ param(
     [string]$DicBaseUrl,
     [string]$AppVersion,
     [string]$OutputName,
+    # Nightly, Beta, RC: installed apart from the stable release (own AppId and folder)
+    [string]$Channel,
     [string]$OutputDir = $PSScriptRoot,
     [string]$Iscc
 )
@@ -111,6 +113,7 @@ try {
     if ($Arm64Bin) { $defines += "/DArm64Bin=$Arm64Bin" }
     if ($AppVersion) { $defines += "/DAppVersion=$AppVersion" }
     if ($OutputName) { $defines += "/DOutputName=$OutputName" }
+    if ($Channel) { $defines += "/DChannel=$Channel" }
 
     $compiler = Find-Iscc
     & $compiler /Qp @defines "/O$OutputDir" (Join-Path $PSScriptRoot 'installscript_win.iss')
