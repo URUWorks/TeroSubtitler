@@ -26,6 +26,11 @@ msgstr ""
 "Compiler version: %s\n"
 "Target CPU: %s"
 
+#: proclocalize.lngadddictionary
+msgctxt "proclocalize.lngadddictionary"
+msgid "Add dictionary..."
+msgstr "Add dictionary..."
+
 #: proclocalize.lngadditionaloption
 msgid "Additional option"
 msgstr "Additional option"
@@ -74,9 +79,17 @@ msgstr "Hearing impaired"
 msgid "Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?"
 msgstr "Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?"
 
+#: proclocalize.lngaskdownloadscenedetect
+msgid "Install PySceneDetect (about 200 MB)?"
+msgstr "Install PySceneDetect (about 200 MB)?"
+
 #: proclocalize.lngaskdownloadtesseract
 msgid "Tesseract was not found. Download it now?"
 msgstr "Tesseract was not found. Download it now?"
+
+#: proclocalize.lngaskresetsettings
+msgid "Reset all settings to their default values?"
+msgstr "Reset all settings to their default values?"
 
 #: proclocalize.lngasktosave
 #, object-pascal-format
@@ -276,6 +289,14 @@ msgstr "Auto-detect"
 msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "Attempting to detect dialogue segments deletes all entries from the list."
 
+#: proclocalize.lngdiagnosticinfocopied
+msgid "The diagnostic information was copied to the clipboard. Paste it in your bug report, with the error log if there is one."
+msgstr "The diagnostic information was copied to the clipboard. Paste it in your bug report, with the error log if there is one."
+
+#: proclocalize.lngdictionaryfiles
+msgid "Hunspell dictionaries"
+msgstr "Hunspell dictionaries"
+
 #: proclocalize.lngdoviapplied
 #, object-pascal-format
 msgid "%d shots changed, %d removed."
@@ -473,8 +494,8 @@ msgstr "Undefined"
 
 #: proclocalize.lngfpsguessed
 #, object-pascal-format
-msgid "The times of this subtitle match %s fps. Use this frame rate?"
-msgstr "The times of this subtitle match %s fps. Use this frame rate?"
+msgid "The timings of this subtitle file match %s FPS. Use this video rate?"
+msgstr "The timings of this subtitle file match %s FPS. Use this video rate?"
 
 #: proclocalize.lngfsaction
 msgid "Action"
@@ -765,10 +786,18 @@ msgstr "New time"
 msgid "A new version was found."
 msgstr "A new version was found."
 
+#: proclocalize.lngnodictionaryfound
+msgid "No dictionary was found in the file. A Hunspell dictionary is a .dic file with its .aff file next to it (or a LibreOffice .oxt extension)."
+msgstr "No dictionary was found in the file. A Hunspell dictionary is a .dic file with its .aff file next to it (or a LibreOffice .oxt extension)."
+
 #: proclocalize.lngnoentriesmarked
 msgctxt "proclocalize.lngnoentriesmarked"
 msgid "There are no marked entries."
 msgstr "There are no marked entries."
+
+#: proclocalize.lngnoerrorslogged
+msgid "No errors have been logged."
+msgstr "No errors have been logged."
 
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
@@ -908,10 +937,14 @@ msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
 msgstr "File name"
 
+#: proclocalize.lngresetsettingsinfo
+msgid "Tero Subtitler will close and the next time it will start as the first time. The current settings are kept in tero.cfg.bak; shortcut presets, profiles, styles and recent files are not changed."
+msgstr "Tero Subtitler will close and the next time it will start as the first time. The current settings are kept in tero.cfg.bak; shortcut presets, profiles, styles and recent files are not changed."
+
 #: proclocalize.lngroundtimesonload
 #, object-pascal-format
-msgid "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
-msgstr "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
+msgid "The file is in milliseconds, and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
+msgstr "The file is in milliseconds, and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
 
 #: proclocalize.lngroundtimesonloadtitle
 msgid "Round the timings to frames?"
@@ -961,10 +994,28 @@ msgstr "Editor"
 msgid "Edit Decision Lists"
 msgstr "Edit Decision Lists"
 
+#: proclocalize.lngscenedetectinstallinfo
+msgid ""
+"PySceneDetect is a Python program and Tero Subtitler installs it with pipx, which was not found. Install pipx (macOS: brew install pipx; Linux: sudo apt install pipx) and try again, or install PySceneDetect from a terminal with:\n"
+"\n"
+"pipx install \"scenedetect[opencv]\"\n"
+"\n"
+"More information at scenedetect.com."
+msgstr ""
+"PySceneDetect is a Python program and Tero Subtitler installs it with pipx, which was not found. Install pipx (macOS: brew install pipx; Linux: sudo apt install pipx) and try again, or install PySceneDetect from a terminal with:\n"
+"\n"
+"pipx install \"scenedetect[opencv]\"\n"
+"\n"
+"More information at scenedetect.com."
+
 #: proclocalize.lngscenedetectnoresults
 #, object-pascal-format
 msgid "“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video."
 msgstr "“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video."
+
+#: proclocalize.lngscenedetectoptional
+msgid "It is optional: the built-in detector of Tero Subtitler and FFmpeg don't need it."
+msgstr "It is optional: the built-in detector of Tero Subtitler and FFmpeg don't need it."
 
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"
@@ -985,6 +1036,10 @@ msgstr "Find"
 msgctxt "proclocalize.lngscframes"
 msgid "Frames"
 msgstr "Frames"
+
+#: proclocalize.lngscgetscenedetect
+msgid "PySceneDetect (install)..."
+msgstr "PySceneDetect (install)..."
 
 #: proclocalize.lngschelp
 msgctxt "proclocalize.lngschelp"
@@ -3346,6 +3401,10 @@ msgctxt "tfrmmain.actcopy.caption"
 msgid "Copy"
 msgstr "Copy"
 
+#: tfrmmain.actcopydiagnosticinfo.caption
+msgid "Copy diagnostic information"
+msgstr "Copy diagnostic information"
+
 #: tfrmmain.actcopyvideopostoclipboard.caption
 msgid "Copy video position to clipboard"
 msgstr "Copy video position to clipboard"
@@ -3859,6 +3918,10 @@ msgctxt "tfrmmain.actnextsubtitle.caption"
 msgid "Next subtitle"
 msgstr "Next subtitle"
 
+#: tfrmmain.actopencrashlog.caption
+msgid "Open error log"
+msgstr "Open error log"
+
 #: tfrmmain.actpanandscan.caption
 msgid "Pan-and-scan"
 msgstr "Pan-and-scan"
@@ -3961,6 +4024,10 @@ msgstr "Remove Unicode control characters"
 #: tfrmmain.actreplace.caption
 msgid "Replace..."
 msgstr "Replace..."
+
+#: tfrmmain.actresetsettings.caption
+msgid "Reset settings..."
+msgstr "Reset settings..."
 
 #: tfrmmain.actrestorebackup.caption
 msgid "Restore backup..."
@@ -5084,6 +5151,11 @@ msgctxt "tfrmsettings.btnscenedetect.caption"
 msgid "..."
 msgstr "..."
 
+#: tfrmsettings.btnscenedetectupdate.caption
+msgctxt "tfrmsettings.btnscenedetectupdate.caption"
+msgid "Update"
+msgstr "Update"
+
 #: tfrmsettings.btnshortcutapply.caption
 msgctxt "tfrmsettings.btnshortcutapply.caption"
 msgid "Apply"
@@ -5153,6 +5225,10 @@ msgstr "Round brackets ( ) mark hearing impaired text"
 #: tfrmsettings.chkpreviewframeondrag.caption
 msgid "Show the frame when dragging an entry edge in the timeline"
 msgstr "Show the frame when dragging an entry edge in the timeline"
+
+#: tfrmsettings.chkprojectthumbnails.caption
+msgid "Save the timeline thumbnails in projects"
+msgstr "Save the timeline thumbnails in projects"
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
 msgid "Prompt when deleting subtitles"
@@ -5560,6 +5636,11 @@ msgstr "Time code for export"
 msgctxt "tfrmspellcheck.btnadd.caption"
 msgid "Add"
 msgstr "Add"
+
+#: tfrmspellcheck.btnadddictionary.caption
+msgctxt "tfrmspellcheck.btnadddictionary.caption"
+msgid "Add dictionary..."
+msgstr "Add dictionary..."
 
 #: tfrmspellcheck.btnchange.caption
 msgctxt "tfrmspellcheck.btnchange.caption"

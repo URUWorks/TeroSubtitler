@@ -26,6 +26,11 @@ msgstr ""
 "Derleyici versiyonu: %s\n"
 "Hedef İşlemci: %s"
 
+#: proclocalize.lngadddictionary
+msgctxt "proclocalize.lngadddictionary"
+msgid "Add dictionary..."
+msgstr ""
+
 #: proclocalize.lngadditionaloption
 msgid "Additional option"
 msgstr "Ek seçenek"
@@ -74,8 +79,16 @@ msgstr "İşitme engelli"
 msgid "Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?"
 msgstr ""
 
+#: proclocalize.lngaskdownloadscenedetect
+msgid "Install PySceneDetect (about 200 MB)?"
+msgstr ""
+
 #: proclocalize.lngaskdownloadtesseract
 msgid "Tesseract was not found. Download it now?"
+msgstr ""
+
+#: proclocalize.lngaskresetsettings
+msgid "Reset all settings to their default values?"
 msgstr ""
 
 #: proclocalize.lngasktosave
@@ -276,6 +289,14 @@ msgstr "Otomatik algıla"
 msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "Diyalog bölümlerini algılama işlemi listedeki tüm girişleri silecektir."
 
+#: proclocalize.lngdiagnosticinfocopied
+msgid "The diagnostic information was copied to the clipboard. Paste it in your bug report, with the error log if there is one."
+msgstr ""
+
+#: proclocalize.lngdictionaryfiles
+msgid "Hunspell dictionaries"
+msgstr ""
+
 #: proclocalize.lngdoviapplied
 #, object-pascal-format
 msgid "%d shots changed, %d removed."
@@ -473,7 +494,7 @@ msgstr "Tanımlanmamış"
 
 #: proclocalize.lngfpsguessed
 #, object-pascal-format
-msgid "The times of this subtitle match %s fps. Use this frame rate?"
+msgid "The timings of this subtitle file match %s FPS. Use this video rate?"
 msgstr ""
 
 #: proclocalize.lngfsaction
@@ -765,10 +786,18 @@ msgstr "Yeni zaman"
 msgid "A new version was found."
 msgstr "Yeni bir versiyon bulundu."
 
+#: proclocalize.lngnodictionaryfound
+msgid "No dictionary was found in the file. A Hunspell dictionary is a .dic file with its .aff file next to it (or a LibreOffice .oxt extension)."
+msgstr ""
+
 #: proclocalize.lngnoentriesmarked
 msgctxt "proclocalize.lngnoentriesmarked"
 msgid "There are no marked entries."
 msgstr "İşaretlenmiş giriş bulunmuyor."
+
+#: proclocalize.lngnoerrorslogged
+msgid "No errors have been logged."
+msgstr ""
 
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
@@ -909,9 +938,13 @@ msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
 msgstr "Dosya adı"
 
+#: proclocalize.lngresetsettingsinfo
+msgid "Tero Subtitler will close and the next time it will start as the first time. The current settings are kept in tero.cfg.bak; shortcut presets, profiles, styles and recent files are not changed."
+msgstr ""
+
 #: proclocalize.lngroundtimesonload
 #, object-pascal-format
-msgid "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
+msgid "The file is in milliseconds, and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
 msgstr ""
 
 #: proclocalize.lngroundtimesonloadtitle
@@ -962,9 +995,22 @@ msgstr "Editör"
 msgid "Edit Decision Lists"
 msgstr "Düzenleme Karar Listeleri (EDL)"
 
+#: proclocalize.lngscenedetectinstallinfo
+msgid ""
+"PySceneDetect is a Python program and Tero Subtitler installs it with pipx, which was not found. Install pipx (macOS: brew install pipx; Linux: sudo apt install pipx) and try again, or install PySceneDetect from a terminal with:\n"
+"\n"
+"pipx install \"scenedetect[opencv]\"\n"
+"\n"
+"More information at scenedetect.com."
+msgstr ""
+
 #: proclocalize.lngscenedetectnoresults
 #, object-pascal-format
 msgid "“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video."
+msgstr ""
+
+#: proclocalize.lngscenedetectoptional
+msgid "It is optional: the built-in detector of Tero Subtitler and FFmpeg don't need it."
 msgstr ""
 
 #: proclocalize.lngscentries
@@ -986,6 +1032,10 @@ msgstr "Bul"
 msgctxt "proclocalize.lngscframes"
 msgid "Frames"
 msgstr "Kareler"
+
+#: proclocalize.lngscgetscenedetect
+msgid "PySceneDetect (install)..."
+msgstr ""
 
 #: proclocalize.lngschelp
 msgctxt "proclocalize.lngschelp"
@@ -3384,6 +3434,10 @@ msgctxt "tfrmmain.actcopy.caption"
 msgid "Copy"
 msgstr "Kopyala"
 
+#: tfrmmain.actcopydiagnosticinfo.caption
+msgid "Copy diagnostic information"
+msgstr ""
+
 #: tfrmmain.actcopyvideopostoclipboard.caption
 msgid "Copy video position to clipboard"
 msgstr "Video konumunu panoya kopyala"
@@ -3898,6 +3952,10 @@ msgctxt "tfrmmain.actnextsubtitle.caption"
 msgid "Next subtitle"
 msgstr "Sonraki altyazı"
 
+#: tfrmmain.actopencrashlog.caption
+msgid "Open error log"
+msgstr ""
+
 #: tfrmmain.actpanandscan.caption
 msgid "Pan-and-scan"
 msgstr "Kaydır ve tara (Pan-and-scan)"
@@ -4000,6 +4058,10 @@ msgstr "Unicode kontrol karakterlerini kaldır"
 #: tfrmmain.actreplace.caption
 msgid "Replace..."
 msgstr "Değiştir..."
+
+#: tfrmmain.actresetsettings.caption
+msgid "Reset settings..."
+msgstr ""
 
 #: tfrmmain.actrestorebackup.caption
 msgid "Restore backup..."
@@ -5129,6 +5191,12 @@ msgctxt "tfrmsettings.btnscenedetect.caption"
 msgid "..."
 msgstr "..."
 
+#: tfrmsettings.btnscenedetectupdate.caption
+#, fuzzy
+msgctxt "tfrmsettings.btnscenedetectupdate.caption"
+msgid "Update"
+msgstr "Güncelle"
+
 #: tfrmsettings.btnshortcutapply.caption
 msgctxt "tfrmsettings.btnshortcutapply.caption"
 msgid "Apply"
@@ -5198,6 +5266,10 @@ msgstr ""
 
 #: tfrmsettings.chkpreviewframeondrag.caption
 msgid "Show the frame when dragging an entry edge in the timeline"
+msgstr ""
+
+#: tfrmsettings.chkprojectthumbnails.caption
+msgid "Save the timeline thumbnails in projects"
 msgstr ""
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
@@ -5610,6 +5682,11 @@ msgstr "Dışa aktarma için zaman kodu"
 msgctxt "tfrmspellcheck.btnadd.caption"
 msgid "Add"
 msgstr "Ekle"
+
+#: tfrmspellcheck.btnadddictionary.caption
+msgctxt "tfrmspellcheck.btnadddictionary.caption"
+msgid "Add dictionary..."
+msgstr ""
 
 #: tfrmspellcheck.btnchange.caption
 msgctxt "tfrmspellcheck.btnchange.caption"

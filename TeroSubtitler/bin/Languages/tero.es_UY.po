@@ -26,6 +26,11 @@ msgstr ""
 "Versión de compilador: %s\n"
 "CPU de destino: %s"
 
+#: proclocalize.lngadddictionary
+msgctxt "proclocalize.lngadddictionary"
+msgid "Add dictionary..."
+msgstr "Agregar diccionario..."
+
 #: proclocalize.lngadditionaloption
 msgid "Additional option"
 msgstr "Opción adicional"
@@ -74,9 +79,17 @@ msgstr "Discapacidad auditiva"
 msgid "Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?"
 msgstr "¿Descargar las bibliotecas para utilizar una tarjeta gráfica NVIDIA (aproximadamente 1,3 GB)?"
 
+#: proclocalize.lngaskdownloadscenedetect
+msgid "Install PySceneDetect (about 200 MB)?"
+msgstr "¿Instalar PySceneDetect (unos 200 MB)?"
+
 #: proclocalize.lngaskdownloadtesseract
 msgid "Tesseract was not found. Download it now?"
 msgstr "No se encontró Tesseract. ¿Descargarlo ahora?"
+
+#: proclocalize.lngaskresetsettings
+msgid "Reset all settings to their default values?"
+msgstr "¿Restablecer todos los ajustes a sus valores predeterminados?"
 
 #: proclocalize.lngasktosave
 #, object-pascal-format
@@ -276,6 +289,14 @@ msgstr "Detección automática"
 msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "Intentar detectar segmentos de diálogo elimina todos las entradas de la lista."
 
+#: proclocalize.lngdiagnosticinfocopied
+msgid "The diagnostic information was copied to the clipboard. Paste it in your bug report, with the error log if there is one."
+msgstr "La información de diagnóstico se copió al portapapeles. Pégala en tu reporte de error, junto con el registro de errores si lo hay."
+
+#: proclocalize.lngdictionaryfiles
+msgid "Hunspell dictionaries"
+msgstr "Diccionarios Hunspell"
+
 #: proclocalize.lngdoviapplied
 #, object-pascal-format
 msgid "%d shots changed, %d removed."
@@ -473,7 +494,7 @@ msgstr "Indefinido"
 
 #: proclocalize.lngfpsguessed
 #, object-pascal-format
-msgid "The times of this subtitle match %s fps. Use this frame rate?"
+msgid "The timings of this subtitle file match %s FPS. Use this video rate?"
 msgstr "Los tiempos de este subtítulo corresponden a %s fps. ¿Deseas usar esta frecuencia de fotogramas?"
 
 #: proclocalize.lngfsaction
@@ -765,10 +786,18 @@ msgstr "Tiempo nuevo"
 msgid "A new version was found."
 msgstr "¡Se encontró una nueva versión!"
 
+#: proclocalize.lngnodictionaryfound
+msgid "No dictionary was found in the file. A Hunspell dictionary is a .dic file with its .aff file next to it (or a LibreOffice .oxt extension)."
+msgstr "No se encontró ningún diccionario en el archivo. Un diccionario Hunspell es un archivo .dic con su archivo .aff al lado (o una extensión .oxt de LibreOffice)."
+
 #: proclocalize.lngnoentriesmarked
 msgctxt "proclocalize.lngnoentriesmarked"
 msgid "There are no marked entries."
 msgstr "No hay entradas marcadas."
+
+#: proclocalize.lngnoerrorslogged
+msgid "No errors have been logged."
+msgstr "No se ha registrado ningún error."
 
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
@@ -908,9 +937,13 @@ msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
 msgstr "Nombre de archivo"
 
+#: proclocalize.lngresetsettingsinfo
+msgid "Tero Subtitler will close and the next time it will start as the first time. The current settings are kept in tero.cfg.bak; shortcut presets, profiles, styles and recent files are not changed."
+msgstr "Tero Subtitler se cerrará y la próxima vez se iniciará como la primera vez. Los ajustes actuales se guardan en tero.cfg.bak; los atajos, perfiles, estilos y archivos recientes no se modifican."
+
 #: proclocalize.lngroundtimesonload
 #, object-pascal-format
-msgid "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
+msgid "The file is in milliseconds, and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
 msgstr "El archivo está en milisegundos y algunos tiempos no caen en un frame a %1:s fps (entradas: %0:d). ¿Redondearlos al frame más cercano? Se puede deshacer."
 
 #: proclocalize.lngroundtimesonloadtitle
@@ -961,10 +994,28 @@ msgstr "Editor"
 msgid "Edit Decision Lists"
 msgstr "Listas de decisiones de edición"
 
+#: proclocalize.lngscenedetectinstallinfo
+msgid ""
+"PySceneDetect is a Python program and Tero Subtitler installs it with pipx, which was not found. Install pipx (macOS: brew install pipx; Linux: sudo apt install pipx) and try again, or install PySceneDetect from a terminal with:\n"
+"\n"
+"pipx install \"scenedetect[opencv]\"\n"
+"\n"
+"More information at scenedetect.com."
+msgstr ""
+"PySceneDetect es un programa de Python y Tero Subtitler lo instala con pipx, que no se encontró. Instala pipx (macOS: brew install pipx; Linux: sudo apt install pipx) y vuelve a intentarlo, o instala PySceneDetect desde una terminal con:\n"
+"\n"
+"pipx install \"scenedetect[opencv]\"\n"
+"\n"
+"Más información en scenedetect.com."
+
 #: proclocalize.lngscenedetectnoresults
 #, object-pascal-format
 msgid "“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video."
 msgstr "«%s» no devolvió ningún resultado. Comprueba que esté instalado correctamente, junto con un motor de procesamiento de vídeo (como OpenCV), y que sea capaz de abrir este vídeo."
+
+#: proclocalize.lngscenedetectoptional
+msgid "It is optional: the built-in detector of Tero Subtitler and FFmpeg don't need it."
+msgstr "Es opcional: el detector integrado de Tero Subtitler y FFmpeg no lo necesitan."
 
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"
@@ -985,6 +1036,10 @@ msgstr "Buscar"
 msgctxt "proclocalize.lngscframes"
 msgid "Frames"
 msgstr "Fotogramas"
+
+#: proclocalize.lngscgetscenedetect
+msgid "PySceneDetect (install)..."
+msgstr "PySceneDetect (instalar)..."
 
 #: proclocalize.lngschelp
 msgctxt "proclocalize.lngschelp"
@@ -3348,6 +3403,10 @@ msgctxt "tfrmmain.actcopy.caption"
 msgid "Copy"
 msgstr "Copiar"
 
+#: tfrmmain.actcopydiagnosticinfo.caption
+msgid "Copy diagnostic information"
+msgstr "Copiar información de diagnóstico"
+
 #: tfrmmain.actcopyvideopostoclipboard.caption
 msgid "Copy video position to clipboard"
 msgstr "Copiar posición de vídeo al portapapeles"
@@ -3861,6 +3920,10 @@ msgctxt "tfrmmain.actnextsubtitle.caption"
 msgid "Next subtitle"
 msgstr "Siguiente subtítulo"
 
+#: tfrmmain.actopencrashlog.caption
+msgid "Open error log"
+msgstr "Abrir registro de errores"
+
 #: tfrmmain.actpanandscan.caption
 msgid "Pan-and-scan"
 msgstr "Barrido panorámico"
@@ -3963,6 +4026,10 @@ msgstr "Eliminar caracteres de control Unicode"
 #: tfrmmain.actreplace.caption
 msgid "Replace..."
 msgstr "Reemplazar..."
+
+#: tfrmmain.actresetsettings.caption
+msgid "Reset settings..."
+msgstr "Restablecer ajustes..."
 
 #: tfrmmain.actrestorebackup.caption
 msgid "Restore backup..."
@@ -5086,6 +5153,11 @@ msgctxt "tfrmsettings.btnscenedetect.caption"
 msgid "..."
 msgstr "..."
 
+#: tfrmsettings.btnscenedetectupdate.caption
+msgctxt "tfrmsettings.btnscenedetectupdate.caption"
+msgid "Update"
+msgstr "Actualizar"
+
 #: tfrmsettings.btnshortcutapply.caption
 msgctxt "tfrmsettings.btnshortcutapply.caption"
 msgid "Apply"
@@ -5155,6 +5227,10 @@ msgstr "Los paréntesis ( ) indican texto para personas con discapacidad auditiv
 #: tfrmsettings.chkpreviewframeondrag.caption
 msgid "Show the frame when dragging an entry edge in the timeline"
 msgstr "Mostrar el fotograma al arrastrar un borde de entrada en la línea de tiempo"
+
+#: tfrmsettings.chkprojectthumbnails.caption
+msgid "Save the timeline thumbnails in projects"
+msgstr "Guardar las miniaturas de la línea de tiempo en los proyectos"
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
 msgid "Prompt when deleting subtitles"
@@ -5562,6 +5638,11 @@ msgstr "Código de tiempo al exportar"
 msgctxt "tfrmspellcheck.btnadd.caption"
 msgid "Add"
 msgstr "Agregar"
+
+#: tfrmspellcheck.btnadddictionary.caption
+msgctxt "tfrmspellcheck.btnadddictionary.caption"
+msgid "Add dictionary..."
+msgstr "Agregar diccionario..."
 
 #: tfrmspellcheck.btnchange.caption
 msgctxt "tfrmspellcheck.btnchange.caption"

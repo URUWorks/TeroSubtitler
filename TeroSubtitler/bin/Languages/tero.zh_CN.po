@@ -26,6 +26,11 @@ msgstr ""
 "编译器版本： %s\n"
 "目标CPU平台： %s"
 
+#: proclocalize.lngadddictionary
+msgctxt "proclocalize.lngadddictionary"
+msgid "Add dictionary..."
+msgstr ""
+
 #: proclocalize.lngadditionaloption
 msgid "Additional option"
 msgstr "附加选项"
@@ -74,9 +79,17 @@ msgstr "不可见"
 msgid "Download the libraries to use an NVIDIA graphics card (about 1.3 GB)?"
 msgstr "下载使用 NVIDIA 显卡的支持库（大约 1.3 GB）？"
 
+#: proclocalize.lngaskdownloadscenedetect
+msgid "Install PySceneDetect (about 200 MB)?"
+msgstr ""
+
 #: proclocalize.lngaskdownloadtesseract
 msgid "Tesseract was not found. Download it now?"
 msgstr "未找到 Tesseract。现在下载吗？"
+
+#: proclocalize.lngaskresetsettings
+msgid "Reset all settings to their default values?"
+msgstr ""
 
 #: proclocalize.lngasktosave
 #, object-pascal-format
@@ -276,6 +289,14 @@ msgstr "自动检测"
 msgid "Attempting to detect dialogue segments deletes all entries from the list."
 msgstr "试图检测对话片段时，会删除列表中的所有条目。"
 
+#: proclocalize.lngdiagnosticinfocopied
+msgid "The diagnostic information was copied to the clipboard. Paste it in your bug report, with the error log if there is one."
+msgstr ""
+
+#: proclocalize.lngdictionaryfiles
+msgid "Hunspell dictionaries"
+msgstr ""
+
 #: proclocalize.lngdoviapplied
 #, object-pascal-format
 msgid "%d shots changed, %d removed."
@@ -472,8 +493,9 @@ msgid "Undefined"
 msgstr "未定义"
 
 #: proclocalize.lngfpsguessed
-#, object-pascal-format
-msgid "The times of this subtitle match %s fps. Use this frame rate?"
+#, object-pascal-format, fuzzy
+#| msgid "The times of this subtitle match %s fps. Use this frame rate?"
+msgid "The timings of this subtitle file match %s FPS. Use this video rate?"
 msgstr "这个字幕的时间与 %s 帧每秒匹配。要使用这个帧率吗？"
 
 #: proclocalize.lngfsaction
@@ -765,10 +787,18 @@ msgstr "新时间"
 msgid "A new version was found."
 msgstr "发现新版本。"
 
+#: proclocalize.lngnodictionaryfound
+msgid "No dictionary was found in the file. A Hunspell dictionary is a .dic file with its .aff file next to it (or a LibreOffice .oxt extension)."
+msgstr ""
+
 #: proclocalize.lngnoentriesmarked
 msgctxt "proclocalize.lngnoentriesmarked"
 msgid "There are no marked entries."
 msgstr "没有标记的条目。"
+
+#: proclocalize.lngnoerrorslogged
+msgid "No errors have been logged."
+msgstr ""
 
 #: proclocalize.lngnointernetconnection
 msgid "No Internet connection available"
@@ -908,9 +938,13 @@ msgctxt "proclocalize.lngrbfilename"
 msgid "File name"
 msgstr "文件名"
 
+#: proclocalize.lngresetsettingsinfo
+msgid "Tero Subtitler will close and the next time it will start as the first time. The current settings are kept in tero.cfg.bak; shortcut presets, profiles, styles and recent files are not changed."
+msgstr ""
+
 #: proclocalize.lngroundtimesonload
 #, object-pascal-format
-msgid "The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
+msgid "The file is in milliseconds, and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone."
 msgstr ""
 
 #: proclocalize.lngroundtimesonloadtitle
@@ -961,10 +995,23 @@ msgstr "编辑器"
 msgid "Edit Decision Lists"
 msgstr "编辑判定列表"
 
+#: proclocalize.lngscenedetectinstallinfo
+msgid ""
+"PySceneDetect is a Python program and Tero Subtitler installs it with pipx, which was not found. Install pipx (macOS: brew install pipx; Linux: sudo apt install pipx) and try again, or install PySceneDetect from a terminal with:\n"
+"\n"
+"pipx install \"scenedetect[opencv]\"\n"
+"\n"
+"More information at scenedetect.com."
+msgstr ""
+
 #: proclocalize.lngscenedetectnoresults
 #, object-pascal-format
 msgid "“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video."
 msgstr "“%s” 没有返回任何结果。请检查它是否已正确安装，是否有像 OpenCV 这样的本地视频支持，并且能否打开这个视频。"
+
+#: proclocalize.lngscenedetectoptional
+msgid "It is optional: the built-in detector of Tero Subtitler and FFmpeg don't need it."
+msgstr ""
 
 #: proclocalize.lngscentries
 msgctxt "proclocalize.lngscentries"
@@ -985,6 +1032,10 @@ msgstr "查找"
 msgctxt "proclocalize.lngscframes"
 msgid "Frames"
 msgstr "帧"
+
+#: proclocalize.lngscgetscenedetect
+msgid "PySceneDetect (install)..."
+msgstr ""
 
 #: proclocalize.lngschelp
 msgctxt "proclocalize.lngschelp"
@@ -3346,6 +3397,10 @@ msgctxt "tfrmmain.actcopy.caption"
 msgid "Copy"
 msgstr "复制"
 
+#: tfrmmain.actcopydiagnosticinfo.caption
+msgid "Copy diagnostic information"
+msgstr ""
+
 #: tfrmmain.actcopyvideopostoclipboard.caption
 msgid "Copy video position to clipboard"
 msgstr "将视频位置复制到剪贴板"
@@ -3859,6 +3914,10 @@ msgctxt "tfrmmain.actnextsubtitle.caption"
 msgid "Next subtitle"
 msgstr "下个字幕"
 
+#: tfrmmain.actopencrashlog.caption
+msgid "Open error log"
+msgstr ""
+
 #: tfrmmain.actpanandscan.caption
 msgid "Pan-and-scan"
 msgstr "平移与扫描"
@@ -3961,6 +4020,10 @@ msgstr "移除 Unicode 控制字符"
 #: tfrmmain.actreplace.caption
 msgid "Replace..."
 msgstr "替换..."
+
+#: tfrmmain.actresetsettings.caption
+msgid "Reset settings..."
+msgstr ""
 
 #: tfrmmain.actrestorebackup.caption
 msgid "Restore backup..."
@@ -5083,6 +5146,12 @@ msgctxt "tfrmsettings.btnscenedetect.caption"
 msgid "..."
 msgstr ""
 
+#: tfrmsettings.btnscenedetectupdate.caption
+#, fuzzy
+msgctxt "tfrmsettings.btnscenedetectupdate.caption"
+msgid "Update"
+msgstr "更新"
+
 #: tfrmsettings.btnshortcutapply.caption
 msgctxt "tfrmsettings.btnshortcutapply.caption"
 msgid "Apply"
@@ -5152,6 +5221,10 @@ msgstr "圆括号 ( ) 标注不可见的文字"
 #: tfrmsettings.chkpreviewframeondrag.caption
 msgid "Show the frame when dragging an entry edge in the timeline"
 msgstr "在时间轴拖动条目边缘时显示框架"
+
+#: tfrmsettings.chkprojectthumbnails.caption
+msgid "Save the timeline thumbnails in projects"
+msgstr ""
 
 #: tfrmsettings.chkpromptfordeletesubtitles.caption
 msgid "Prompt when deleting subtitles"
@@ -5559,6 +5632,11 @@ msgstr "导出时间码"
 msgctxt "tfrmspellcheck.btnadd.caption"
 msgid "Add"
 msgstr "添加"
+
+#: tfrmspellcheck.btnadddictionary.caption
+msgctxt "tfrmspellcheck.btnadddictionary.caption"
+msgid "Add dictionary..."
+msgstr ""
 
 #: tfrmspellcheck.btnchange.caption
 msgctxt "tfrmspellcheck.btnchange.caption"
