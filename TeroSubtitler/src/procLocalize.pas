@@ -74,7 +74,7 @@ resourcestring
   lngSpecHAlignCentered = 'Left or right alignment: only centered text is allowed. They will be exported centered.';
   lngSpecBold = 'Bold: not allowed. It will be removed.';
   lngRoundTimesOnLoadTitle = 'Round the timings to frames?';
-  lngRoundTimesOnLoad = 'The file is in milliseconds and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone.';
+  lngRoundTimesOnLoad = 'The file is in milliseconds, and some timings are not on a frame at %1:s fps (entries: %0:d). Round them to the nearest frame? It can be undone.';
   lngSpecUnderline = 'Underline: not allowed. It will be removed.';
   lngSpecStrikeout = 'Strikethrough: not allowed. It will be removed (the text is kept).';
   lngSpecColor = 'Color: not allowed. It will be removed.';
@@ -93,6 +93,17 @@ resourcestring
   lngGPULibsOptional = 'These libraries are needed with an NVIDIA card; without them, Faster-Whisper uses the processor.';
   lngExtractAppError = 'Unable to find “%s”. Check in settings if it is configured correctly.';
   lngAutoCropNoBars = 'No black bars were detected in the current frame.';
+  lngAddDictionary = 'Add dictionary...';
+  lngNoErrorsLogged = 'No errors have been logged.';
+  lngscGetSceneDetect = 'PySceneDetect (install)...';
+  lngAskDownloadSceneDetect = 'Install PySceneDetect (about 200 MB)?';
+  lngSceneDetectOptional = 'It is optional: the built-in detector of Tero Subtitler and FFmpeg don''t need it.';
+  lngSceneDetectInstallInfo = 'PySceneDetect is a Python program and Tero Subtitler installs it with pipx, which was not found. Install pipx (macOS: brew install pipx; Linux: sudo apt install pipx) and try again, or install PySceneDetect from a terminal with:'#10#10'pipx install "scenedetect[opencv]"'#10#10'More information at scenedetect.com.';
+  lngAskResetSettings = 'Reset all settings to their default values?';
+  lngResetSettingsInfo = 'Tero Subtitler will close and the next time it will start as the first time. The current settings are kept in tero.cfg.bak; shortcut presets, profiles, styles and recent files are not changed.';
+  lngDiagnosticInfoCopied = 'The diagnostic information was copied to the clipboard. Paste it in your bug report, with the error log if there is one.';
+  lngDictionaryFiles = 'Hunspell dictionaries';
+  lngNoDictionaryFound = 'No dictionary was found in the file. A Hunspell dictionary is a .dic file with its .aff file next to it (or a LibreOffice .oxt extension).';
   lngAutoCropNoImage = 'The black bars could not be detected. Go to a frame with image (the first ones are usually black) and try again.';
   lngAutoCropApplied = 'Cropped to %dx%d';
   lngSceneDetectNoResults = '“%s” did not return any results. Check that it is installed correctly, with a video backend such as OpenCV, and that it can open this video.';
@@ -135,7 +146,7 @@ resourcestring
   lngMultipleTracksDetected = 'Multiple tracks detected';
   lngSelectTrackToUse = 'Select the track to use:';
   lngSelectFPSToUse = 'Select FPS to use:';
-  lngFPSGuessed = 'The times of this subtitle match %s fps. Use this frame rate?';
+  lngFPSGuessed = 'The timings of this subtitle file match %s FPS. Use this video rate?';
   lngSelectEncodingToUse = 'Select encoding:';
   lngSelectSheetToUse = 'Select sheet to use:';
   lngWriteStatus = 'Writing %d/%d';
