@@ -257,11 +257,11 @@ begin
   end;
 
   // don't replace the dictionary chosen by the user when reopened
-  if not FReopened and (AppOptions.HunspellLanguage <> AppOptions.GUILanguage) and FileExists(DictionariesFolder+AppOptions.GUILanguage + '.dic') and FileExists(DictionariesFolder+AppOptions.GUILanguage + '.aff') then
+  if not FReopened and (AppOptions.HunspellLanguage <> AppOptions.GUILanguage) and FileExists(DictionaryFileName(AppOptions.GUILanguage, '.dic')) and FileExists(DictionaryFileName(AppOptions.GUILanguage, '.aff')) then
   begin
     AppOptions.HunspellLanguage := AppOptions.GUILanguage;
     UpdateStatusBar(True);
-    HunspellInstance.LoadDictionary(DictionariesFolder+AppOptions.HunspellLanguage+'.aff', DictionariesFolder+AppOptions.HunspellLanguage+'.dic');
+    LoadHunspellDictionary(AppOptions.HunspellLanguage);
 
     with frmMain do
       for i := 0 to popDictionaries.Items.Count-1 do
@@ -411,6 +411,9 @@ begin
   begin
     MakeFileExecutable(ConcatPaths([YTDLPFolder, YTDLP_EXE]));
     Tools.YTDLP := ConcatPaths([YTDLPFolder, YTDLP_EXE]);
+    // yt-dlp needs a JavaScript runtime for YouTube
+    if not FileExists(DenoFileName) then
+      DownloadDeno;
     CheckState_ytdlp;
   end;
 end;
@@ -509,8 +512,8 @@ end;
 
 function TfrmWizard.CheckState_ytdlp: Boolean;
 begin
-  // yt-dlp
-  if FileExists(YTDLPFileName) then
+  // yt-dlp, and Deno for YouTube (a yt-dlp of before is offered again to get it)
+  if FileExists(YTDLPFileName) and FileExists(DenoFileName) then
   begin
     btnDownloadYTDLP.Enabled := False;
     lblYTDLPStatus.Caption := lngSuccess;
