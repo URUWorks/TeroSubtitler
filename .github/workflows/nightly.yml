@@ -23,6 +23,11 @@ env:
   FPC_BOOTSTRAP_WIN64_URL: https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2064%20bits/Lazarus%204.8/lazarus-4.8-fpc-3.2.2-win64.exe/download
   # Inno Setup for the Windows installer (6.5 or later: ArchiveExtraction)
   INNOSETUP_URL: https://github.com/jrsoftware/issrc/releases/download/is-6_5_4/innosetup-6.5.4.exe
+  # the nightly app and its installer ids, not the ones of the stable release (they
+  # replaced it: same bundle in /Applications, same Windows AppId and folder)
+  CHANNEL: Nightly
+  MACOS_APP: Tero Subtitler Nightly.app
+  MACOS_PKGID: com.uruworks.tero.nightly
   FPC_MACOS_URL: https://sourceforge.net/projects/lazarus/files/Lazarus%20macOS%20aarch64/Lazarus%205.0RC1/fpc-3.2.4rc2.intelarm64-macosx.dmg/download
 
 jobs:
@@ -86,6 +91,11 @@ jobs:
           git submodule sync --recursive
           git submodule update --init --remote --recursive use/UW_BlurayPGSParser
           git submodule update --init --remote --recursive use/UW_MPVPlayer
+
+      # nightly channel: own user folder, Windows installation and macOS app (see channel.inc)
+      - name: Set nightly channel
+        shell: bash
+        run: echo '{$DEFINE CHANNEL_NIGHTLY}' >> TeroSubtitler/src/channel.inc
 
       - name: Set nightly version
         id: ver
@@ -197,6 +207,11 @@ jobs:
           git submodule sync --recursive
           git submodule update --init --remote --recursive use/UW_BlurayPGSParser
           git submodule update --init --remote --recursive use/UW_MPVPlayer
+
+      # nightly channel: own user folder, Windows installation and macOS app (see channel.inc)
+      - name: Set nightly channel
+        shell: bash
+        run: echo '{$DEFINE CHANNEL_NIGHTLY}' >> TeroSubtitler/src/channel.inc
 
       # Lazarus 4.8 for its FPC 3.2.2 (the only starting compiler FPC main accepts) and make
       # SourceForge downloads are kept in the Actions cache, so a version is fetched once
@@ -463,6 +478,11 @@ jobs:
           git submodule update --init --remote --recursive use/UW_BlurayPGSParser
           git submodule update --init --remote --recursive use/UW_MPVPlayer
 
+      # nightly channel: own user folder, Windows installation and macOS app (see channel.inc)
+      - name: Set nightly channel
+        shell: bash
+        run: echo '{$DEFINE CHANNEL_NIGHTLY}' >> TeroSubtitler/src/channel.inc
+
       - name: Cache downloads
         if: matrix.arch == 'x86_64'
         uses: actions/cache@v4
@@ -622,6 +642,11 @@ jobs:
           git submodule update --init --remote --recursive use/UW_BlurayPGSParser
           git submodule update --init --remote --recursive use/UW_MPVPlayer
 
+      # nightly channel: own user folder, Windows installation and macOS app (see channel.inc)
+      - name: Set nightly channel
+        shell: bash
+        run: echo '{$DEFINE CHANNEL_NIGHTLY}' >> TeroSubtitler/src/channel.inc
+
       # Official FPC package; the Homebrew lazarus cask is disabled, so build lazbuild from source
       # SourceForge downloads are kept in the Actions cache, so a version is fetched once
       - name: Cache downloads
@@ -742,9 +767,12 @@ jobs:
 
           make_app() {  # $1 = binary, $2 = frameworks folder, $3 = zip suffix
             local work="$RUNNER_TEMP/$3" app
-            app="$work/Tero Subtitler.app"
+            app="$work/$MACOS_APP"
             rm -rf "$work"; mkdir -p "$work"
             ditto "$bin/tero.app" "$app"
+            # its own name and bundle id: next to the stable one, own Dock icon and preferences
+            plutil -replace CFBundleName -string "Tero Subtitler $CHANNEL" "$app/Contents/Info.plist"
+            plutil -replace CFBundleIdentifier -string "$MACOS_PKGID" "$app/Contents/Info.plist"
             mkdir -p "$app/Contents/MacOS"
             rm -f "$app/Contents/MacOS/tero"
             cp "$1" "$app/Contents/MacOS/tero"
@@ -779,14 +807,14 @@ jobs:
           for v in universal legacy-intel; do
             root="$RUNNER_TEMP/pkgroot-$v"
             rm -rf "$root"; mkdir -p "$root"
-            ditto "$RUNNER_TEMP/macos-$v/Tero Subtitler.app" "$root/Tero Subtitler.app"
-            rm -rf "$root/Tero Subtitler.app/Contents/Resources/Dictionaries"
-            codesign --force --deep --sign - "$root/Tero Subtitler.app"
+            ditto "$RUNNER_TEMP/macos-$v/$MACOS_APP" "$root/$MACOS_APP"
+            rm -rf "$root/$MACOS_APP/Contents/Resources/Dictionaries"
+            codesign --force --deep --sign - "$root/$MACOS_APP"
             pkgbuild --analyze --root "$root" "$pkgs/$v.plist"
             # always /Applications, not wherever another copy of the bundle is
             plutil -replace 0.BundleIsRelocatable -bool NO "$pkgs/$v.plist"
             pkgbuild --root "$root" --component-plist "$pkgs/$v.plist" \
-              --identifier "com.uruworks.tero.$v" --version "$version" \
+              --identifier "$MACOS_PKGID.$v" --version "$version" \
               --install-location /Applications "$pkgs/$v.pkg"
           done
 
@@ -801,14 +829,14 @@ jobs:
             pkgbuild --root "$root" --identifier "com.uruworks.tero.$id" --version "$version" \
               --install-location "/Library/Application Support/Tero Subtitler/Dictionaries" "$pkgs/$id.pkg"
             dics_outline+="<line choice=\"$id\"/>"
-            dics_choices+="<choice id=\"$id\" title=\"$name\" selected=\"isLanguage('$name')\"><pkg-ref id=\"com.uruworks.tero.$id\"/></choice>"
+            dics_choices+="<choice id=\"$id\" title=\"$name\" start_selected=\"isLanguage('$name')\"><pkg-ref id=\"com.uruworks.tero.$id\"/></choice>"
             dics_refs+="<pkg-ref id=\"com.uruworks.tero.$id\">$id.pkg</pkg-ref>"
           done
 
           cat > "$pkgs/distribution.xml" <<EOF
           <?xml version="1.0" encoding="utf-8"?>
           <installer-gui-script minSpecVersion="2">
-            <title>Tero Subtitler</title>
+            <title>Tero Subtitler $CHANNEL</title>
             <options customize="always" require-scripts="false" hostArchitectures="x86_64,arm64"/>
             <domains enable_localSystem="true"/>
             <volume-check>
@@ -831,15 +859,15 @@ jobs:
               <line choice="dictionaries">$dics_outline</line>
             </choices-outline>
             <choice id="universal" visible="false" selected="isModern()" enabled="isModern()">
-              <pkg-ref id="com.uruworks.tero.universal"/>
+              <pkg-ref id="$MACOS_PKGID.universal"/>
             </choice>
             <choice id="legacy" visible="false" selected="!isModern()" enabled="!isModern()">
-              <pkg-ref id="com.uruworks.tero.legacy-intel"/>
+              <pkg-ref id="$MACOS_PKGID.legacy-intel"/>
             </choice>
             <choice id="dictionaries" title="Spell checking dictionaries"/>
             $dics_choices
-            <pkg-ref id="com.uruworks.tero.universal">universal.pkg</pkg-ref>
-            <pkg-ref id="com.uruworks.tero.legacy-intel">legacy-intel.pkg</pkg-ref>
+            <pkg-ref id="$MACOS_PKGID.universal">universal.pkg</pkg-ref>
+            <pkg-ref id="$MACOS_PKGID.legacy-intel">legacy-intel.pkg</pkg-ref>
             $dics_refs
           </installer-gui-script>
           EOF
@@ -848,7 +876,7 @@ jobs:
 
           # the .pkg must install the universal bundle here (macOS 14 or later), and en_US
           sudo installer -pkg "dist/$base-macos.pkg" -target /
-          app="/Applications/Tero Subtitler.app"
+          app="/Applications/$MACOS_APP"
           archs="$(lipo -archs "$app/Contents/MacOS/tero")"
           echo "installed: $archs"
           [[ "$archs" == *arm64* && "$archs" == *x86_64* ]] || { echo "the .pkg did not install the universal bundle"; exit 1; }
@@ -889,6 +917,21 @@ jobs:
           Nightly builds are automatically generated every day and contain the latest development changes. They are intended for testing new features, verifying bug fixes, identifying regressions, and helping track down bugs. They also provide an early preview of what may be included in a future stable release.
 
           **Please note:** Nightly builds are experimental and may contain bugs or unstable features. They are not recommended for everyday use.
+
+          They are installed apart from the stable release ("Tero Subtitler Nightly", with its own settings), so both can be used side by side. The first start copies the profiles, shortcut presets and added dictionaries of the stable one (on macOS also its settings).
+
+          ### Minimum system requirements
+
+          | System | Files |
+          |---|---|
+          | Windows 10 1607 or later, x64 | `win-setup.exe` (installer) or `win64.zip` (portable) |
+          | Windows 7 SP1 / 8.1, x64 | `win64-legacy.zip` |
+          | Windows 11 ARM64 (experimental) | `win-setup.exe` or `winarm64.zip` |
+          | macOS 10.15 or later (Intel), 11 or later (Apple Silicon) | `macos.pkg` or `macos-universal.zip` |
+          | macOS 10.11 to 10.14 (Intel) | `macos.pkg` or `macos-legacy-intel.zip` |
+          | Linux x86_64 (glibc 2.39 or later, e.g. Ubuntu 24.04), ARM64 experimental | `linux-*.tar.gz` (GTK2, GTK3, Qt5 or Qt6), with libmpv installed (`sudo apt install libmpv2`) |
+
+          Optional tools (FFmpeg, yt-dlp with Deno, Whisper) are downloaded from *Help > Setup wizard*; PySceneDetect from the shot changes window.
           EOF
           echo -e "\nVersion ${{ needs.check.outputs.version }}, built from commit [${GITHUB_SHA::7}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})." >> notes.md
           gh release delete nightly --cleanup-tag --yes || true
@@ -966,7 +1009,7 @@ jobs:
           }
           ./TeroSubtitler/make_installer.ps1 @opts -Web `
             -DicBaseUrl "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/TeroSubtitler/bin/Dictionaries/" `
-            -AppVersion "${{ needs.check.outputs.version }} nightly" `
+            -AppVersion "${{ needs.check.outputs.version }} nightly" -Channel $env:CHANNEL `
             -OutputName "$env:BASE-win-setup" -OutputDir dist
 
       # silent install on Windows x64: downloads, checks and installs everything
