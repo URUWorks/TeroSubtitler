@@ -73,21 +73,59 @@ Open source OCR engine, used to import Blu-ray SUP subtitles.
 
 ## Compiling
 
-[Lazarus IDE](https://www.lazarus-ide.org/).
+Tero Subtitler is built with [Lazarus](https://www.lazarus-ide.org/) **5.0** and FPC **3.2.4** (the nightly builds use Lazarus 5.0RC1 with FPC 3.2.4RC2; FPC 3.2.2 also works on Linux). The [Nightly workflow](.github/workflows/nightly.yml) is the reference: it builds every platform from scratch.
 
-### Internal packages required to compile
+### 1. Get the sources, with the submodules
 
-- [UW Blu-ray PGS Parser](https://github.com/URUWorks/UW_BlurayPGSParser)
+```sh
+git clone --recursive https://github.com/URUWorks/TeroSubtitler.git
+# an existing clone:
+git submodule update --init --recursive
+```
+
+### 2. Packages
+
+Internal (in this repository and its submodules):
+
+- [UW Blu-ray PGS Parser](https://github.com/URUWorks/UW_BlurayPGSParser) (`use/UW_BlurayPGSParser`)
 - [UW Common units](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/common)
-- [UW MPVPlayer](https://github.com/URUWorks/UW_MPVPlayer)
+- [UW MPVPlayer](https://github.com/URUWorks/UW_MPVPlayer) (`use/UW_MPVPlayer`)
 - [UW Subtitle API](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/subtitleapi)
 - [UW Tero controls](https://github.com/URUWorks/TeroSubtitler/tree/main/TeroSubtitler/controls)
 
-### External packages required to compile
+External (from the Online Package Manager, *Package > Online Package Manager*):
 
-- [ATSynEdit](https://wiki.freepascal.org/ATSynEdit) ([EncConv](https://github.com/Alexey-T/EncConv), [ATFlatControls](https://github.com/Alexey-T/ATFlatControls))
+- [ATSynEdit](https://wiki.freepascal.org/ATSynEdit), with [EncConv](https://github.com/Alexey-T/EncConv) and [ATFlatControls](https://github.com/Alexey-T/ATFlatControls)
 - [BGRABitmap](https://wiki.freepascal.org/BGRABitmap)
 - [FPSpreadsheet](https://wiki.lazarus.freepascal.org/FPSpreadsheet)
+
+Open each internal `.lpk` once in the IDE (*Package > Open Package File*) so Lazarus knows it, or from a terminal:
+
+```sh
+find use TeroSubtitler/common TeroSubtitler/subtitleapi TeroSubtitler/controls -name '*.lpk' \
+  | grep -Ev '(_template)' | while read -r lpk; do lazbuild --add-package-link "$lpk"; done
+```
+
+### 3. Build
+
+Open `TeroSubtitler/src/tero.lpi` and build, or:
+
+```sh
+lazbuild --build-all --recursive --build-mode=Release TeroSubtitler/src/tero.lpi
+```
+
+| System | Build mode | Notes |
+|---|---|---|
+| Windows x64 | `Release` | copy `libmpv-2.dll` ([UW_libmpv](https://github.com/URUWorks/UW_libmpv/releases)), OpenSSL 3 and Hunspell ([UW_TSLibs](https://github.com/URUWorks/UW_TSLibs/releases)) next to `tero.exe` |
+| Linux | `Release` with `--widgetset=gtk2`, `gtk3`, `qt5` or `qt6` | needs `libmpv-dev` and the development package of the widgetset (e.g. `sudo apt install libgtk-3-dev libmpv-dev`) |
+| macOS Intel | `macOS_Release` with `--widgetset=cocoa` | the app bundle is `TeroSubtitler/bin/tero.app`; the libraries go in `Contents/Frameworks` (see the *package-macos* job) |
+| macOS Apple Silicon | `macOS_arm64_Release` with `--widgetset=cocoa` | with Xcode 16 and FPC 3.2.x, link with `-ld_classic` (see the workflow) |
+
+The binary is written to `TeroSubtitler/bin`, next to its data (languages, dictionaries, shortcuts...).
+
+### Release channels
+
+`TeroSubtitler/src/channel.inc` is empty for the stable releases. The nightly workflow adds `{$DEFINE CHANNEL_NIGHTLY}` (`CHANNEL_BETA` and `CHANNEL_RC` also exist), so those builds use their own user folder (`tero-nightly`...), Windows installation and macOS app, and never overwrite the stable ones.
 
 ## Contributions
 
