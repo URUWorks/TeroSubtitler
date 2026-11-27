@@ -35,6 +35,9 @@ uses
 procedure DefaultValues;
 procedure LoadSettings(const OnlyVSTColumnsSize: Boolean = False);
 procedure SaveSettings;
+// Help > Reset settings: the settings file is kept as .bak and nothing is
+// saved until Tero is closed (the next start is a first start)
+procedure ResetSettings;
 
 function LoadFormSettings(const AForm: TForm): String;
 procedure SaveFormSettings(const AForm: TForm; const AExtra: String = '');
@@ -61,6 +64,7 @@ function GetRandomTipString: String;
 { Special folders }
 
 function GetCustomFolderPath(const SubFolder: String): String;
+function UserConfigDir: String;
 function GetCustomUserPath(const AFolder: String): String;
 function GetCustomFilePath(const FileName: String): String;
 function SettingsFileName: String;
@@ -91,10 +95,17 @@ function YTDLPFileName(const AFullRoot: Boolean = True): String;
 function ffmpegFileName: String;
 function SceneDetectFileName: String;
 function FindSceneDetect: String;
+function InstallSceneDetect: Boolean;
+function UpdateSceneDetect(out AOutput: String): Boolean;
 function LogMPVFileName: String;
 function MPVTempSubFileName: String;
 function WebPreviewTempFileName: String;
 function DictionariesFolder: String;
+function UserDictionariesFolder: String;
+function DictionaryFolders: TStringArray;
+function DictionaryFileName(const AName, AExt: String): String;
+function LoadHunspellDictionary(const AName: String): Boolean;
+function AddDictionaryWithDialog(out AName: String): Boolean;
 function BackupFolder: String;
 function ProjectsFolder: String;
 function CustomFormatFolder: String;
@@ -117,6 +128,9 @@ function ffmpegFolder: String;
 
 procedure MakeFileExecutable(const AFileName: String);
 function UpdateYTDLP(const AFileName: String; out AOutput: String): Boolean;
+function DenoFileName: String;
+function DownloadDeno: Boolean;
+function YTDLPJSRuntime: String;
 
 function GetDictionaryNameFromCaption(const AText: String): String;
 function GetExtractAppFile(const FFmpeg: Boolean = True): String;
@@ -140,7 +154,7 @@ uses
   LCLProc, UWSystem.Globalization, UWSystem.TimeUtils, libMPV.Client, procMPV,
   UWSpellcheck.Hunspell, procConventions, UWSystem.InetUtils, lazfileutils,
   fileinfo, winpeimagereader, elfreader, machoreader,LCLIntf, UWSystem.StrUtils, Math,
-  UWSystem.Process, formDownload{$IFDEF UNIX}, BaseUnix{$ENDIF};
+  UWSystem.Process, formDownload, Zipper{$IFDEF UNIX}, BaseUnix{$ENDIF};
 
 // -----------------------------------------------------------------------------
 
@@ -360,6 +374,7 @@ begin
     QuoteStyle             := 1;
     SmartQuotesTyping      := False;
     AllowMultipleInstances := False;
+    ProjectThumbnails      := True;
     ToolBarIconSize        := 0;
     TextToFind             := '';
     WebSearchURL           := URL_WordReference;
@@ -424,12 +439,51 @@ end;
 
 // -----------------------------------------------------------------------------
 
+const
+  // increase it when a setting changes in a way an old value is wrong, and
+  // convert the old one in MigrateSettings
+  CurrentSettingsVersion = 1;
+
+var
+  SettingsResetPending: Boolean = False;
+
+// -----------------------------------------------------------------------------
+
+procedure MigrateSettings(const ACfg: TXMLConfig; const AVersion: Integer);
+begin
+  if AVersion >= CurrentSettingsVersion then Exit;
+  // 0 = before SettingsVersion: nothing to convert yet. A new version adds
+  // here what it changes, e.g.
+  //   if AVersion < 2 then <move the old key to the new one>
+end;
+
+// -----------------------------------------------------------------------------
+
+procedure ResetSettings;
+var
+  s: String;
+begin
+  s := SettingsFileName;
+  if FileExists(s) then
+  begin
+    if FileExists(s + '.bak') then DeleteFile(s + '.bak');
+    RenameFile(s, s + '.bak');
+  end;
+  // SettingsFileName gives a temporary file from now on, the settings and
+  // forms saved when closing don't make the file again
+  SettingsResetPending := True;
+  DeleteFile(SettingsFileName);
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure LoadSettings(const OnlyVSTColumnsSize: Boolean = False);
 var
   i, j, c: Integer;
   s: String;
   sl: TStringList;
   bands: array of Byte;
+  cfg: TXMLConfig;
 begin
   // Possibly first start
   if not FileExists(SettingsFileName) then
@@ -492,7 +546,8 @@ begin
     Exit;
   end; //if not FileExists
 
-  with TXMLConfig.Create(NIL) do
+  cfg := TXMLConfig.Create(NIL);
+  with cfg do
   try
     FileName := SettingsFileName;
 
@@ -510,6 +565,10 @@ begin
       end;
       Exit;
     end;
+
+    // the settings of an older version that must be changed (keys renamed,
+    // values with another meaning...), see MigrateSettings
+    MigrateSettings(cfg, GetValue('Settings/SettingsVersion', 0));
 
     with AppOptions do
     begin
@@ -543,6 +602,7 @@ begin
       SmartQuotesTyping := GetValue('SmartQuotesTyping', SmartQuotesTyping);
       // also read before the main form exists, see procSingleInstance
       AllowMultipleInstances := GetValue('AllowMultipleInstances', AllowMultipleInstances);
+      ProjectThumbnails := GetValue('ProjectThumbnails', ProjectThumbnails);
       ToolBarIconSize := GetValue('ToolBarIconSize', ToolBarIconSize);
       WebSearchURL := GetValue('WebSearchURL', WebSearchURL);
       TextToFind := GetValue('TextToFind', TextToFind);
@@ -1060,6 +1120,7 @@ begin
     FileName := SettingsFileName;
     //Clear;
     RootName := RootCfg;
+    SetValue('Settings/SettingsVersion', CurrentSettingsVersion);
     with AppOptions do
     begin
       OpenKey('Settings');
@@ -1091,6 +1152,7 @@ begin
       SetValue('QuoteStyle', QuoteStyle);
       SetValue('SmartQuotesTyping', SmartQuotesTyping);
       SetValue('AllowMultipleInstances', AllowMultipleInstances);
+      SetValue('ProjectThumbnails', ProjectThumbnails);
       SetValue('ToolBarIconSize', ToolBarIconSize);
       SetValue('WebSearchURL', WebSearchURL);
       SetValue('TextToFind', TextToFind);
@@ -1637,10 +1699,25 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// the folder of the user files outside the program folder: GetAppConfigDir
+// (%LOCALAPPDATA%\tero\, ~/.config/tero/) with the folder of the channel
+// (tero-nightly...); ~/tero/ (or ~/tero-nightly/...) on macOS
+function UserConfigDir: String;
+begin
+  {$IFDEF DARWIN}
+  Result := GetUserDir + UserDirName + '/';
+  {$ELSE}
+  Result := IncludeTrailingPathDelimiter(ConcatPaths([
+    ExtractFileDir(ExcludeTrailingPathDelimiter(GetAppConfigDir(False))), UserDirName]));
+  {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
 function GetCustomUserPath(const AFolder: String): String;
 begin
   {$IFDEF DARWIN}
-  Result := Format('%s%s/%s/', [GetUserDir, RootCfg, AFolder]);
+  Result := Format('%s%s/%s/', [GetUserDir, UserDirName, AFolder]);
   {$ELSE}
   Result := GetCustomFolderPath(AFolder);
   {$ENDIF}
@@ -1661,8 +1738,10 @@ end;
 
 function SettingsFileName: String;
 begin
+  if SettingsResetPending then
+    Exit(ConcatPaths([GetTempDir, RootCfg + '-reset.cfg']));
   {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/'+RootCfg+'.cfg';
+  Result := GetUserDir + UserDirName+'/'+RootCfg+'.cfg';
   {$ELSE}
   Result := GetCustomFilePath(RootCfg+'.cfg');
   {$ENDIF}
@@ -1673,7 +1752,7 @@ end;
 function CurrentWorkFileName: String;
 begin
   {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/'+RootCfg+'.wsf';
+  Result := GetUserDir + UserDirName+'/'+RootCfg+'.wsf';
   {$ELSE}
   Result := GetCustomFilePath(RootCfg+'.wsf');
   {$ENDIF}
@@ -1877,7 +1956,7 @@ end;
 function MRUFileName: String;
 begin
   {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/'+RootCfg+'.mru';
+  Result := GetUserDir + UserDirName+'/'+RootCfg+'.mru';
   {$ELSE}
   Result := GetCustomFilePath(RootCfg+'.mru');
   {$ENDIF}
@@ -1899,11 +1978,11 @@ begin
   // program folder; Linux: /usr/share is read-only).
   // The first time, it is made from the one of the app.
   {$IFDEF DARWIN}
-  Result  := GetUserDir + RootCfg+'/'+RootCfg+'.cfs';
+  Result  := GetUserDir + UserDirName+'/'+RootCfg+'.cfs';
   AppFile := GetCustomFolderPath('Resources') + RootCfg+'.cfs';
   {$ELSE}
   // %LOCALAPPDATA%\tero\ (Windows), ~/.config/tero/ (Linux)
-  Result  := ConcatPaths([GetAppConfigDir(False), RootCfg+'.cfs']);
+  Result  := ConcatPaths([UserConfigDir, RootCfg+'.cfs']);
   AppFile := GetCustomFilePath(RootCfg+'.cfs');
   {$ENDIF}
   if not FileExists(Result) then
@@ -1928,7 +2007,7 @@ end;
 function StylesFileName: String;
 begin
   {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/'+RootCfg+'.sts';
+  Result := GetUserDir + UserDirName+'/'+RootCfg+'.sts';
   {$ELSE}
   Result := GetCustomFilePath(RootCfg+'.sts');
   {$ENDIF}
@@ -1939,7 +2018,7 @@ end;
 function ActorsFileName: String;
 begin
   {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/'+RootCfg+'.act';
+  Result := GetUserDir + UserDirName+'/'+RootCfg+'.act';
   {$ELSE}
   Result := GetCustomFilePath(RootCfg+'.act');
   {$ENDIF}
@@ -1952,7 +2031,7 @@ begin
   // names, places, acronyms... written as they must be kept, one per line
   // (convert case, smart)
   {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/'+RootCfg+'.nam';
+  Result := GetUserDir + UserDirName+'/'+RootCfg+'.nam';
   {$ELSE}
   Result := GetCustomFilePath(RootCfg+'.nam');
   {$ENDIF}
@@ -2019,6 +2098,126 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// Windows: the official build downloaded to our folder (the first place
+// FindSceneDetect looks); macOS/Linux: it's a Python package, how to install
+// it (pipx) and found next time it's asked for
+{$IFDEF WINDOWS}
+// the Windows zip of the latest PySceneDetect release (...-win64.zip)
+function LatestSceneDetectURL: String;
+var
+  Json: String;
+begin
+  Result := URL_SCENEDETECT;
+  if DownloadToString(URL_SCENEDETECT_API, Json) then
+    with TRegExpr.Create do
+    try
+      Expression := '"browser_download_url"\s*:\s*"(https://[^"]+-win64\.zip)"';
+      if Exec(Json) then Result := Match[1];
+    finally
+      Free;
+    end;
+end;
+{$ENDIF}
+
+// -----------------------------------------------------------------------------
+
+{$IFDEF UNIX}
+// pipx (Homebrew, apt...): an app opened from Finder or a .desktop gets a
+// short PATH, so the usual folders first
+function FindPipx: String;
+var
+  Dir: String;
+begin
+  for Dir in TStringArray.Create(ConcatPaths([GetUserDir, '.local', 'bin']),
+    '/opt/homebrew/bin', '/usr/local/bin', '/usr/bin') do
+    if FileExists(ConcatPaths([Dir, 'pipx'])) then
+      Exit(ConcatPaths([Dir, 'pipx']));
+  Result := ExeSearch('pipx', GetEnvironmentVariable('PATH'));
+  if (Result <> '') and not FileExists(Result) then Result := '';
+end;
+{$ENDIF}
+
+// -----------------------------------------------------------------------------
+
+// installs PySceneDetect, or updates it, always to its latest version.
+// Windows: the zip of the latest release in our folder; macOS/Linux: with pipx
+// (pipx install/upgrade, it goes to ~/.local/bin), without it AOutput says how
+function UpdateSceneDetect(out AOutput: String): Boolean;
+var
+  {$IFDEF WINDOWS}
+  Dir: String;
+  {$ELSE}
+  Pipx: String;
+  sl: TStringList;
+  ok: Boolean;
+  {$ENDIF}
+begin
+  AOutput := '';
+  {$IFDEF WINDOWS}
+  Dir := GetCustomUserPath('PySceneDetect');
+  ForceDirectories(Dir);
+  // the zip is extracted over the files of the previous version
+  ShowDownloadDialog(LatestSceneDetectURL, ConcatPaths([Dir, 'scenedetect.zip']));
+  if FileExists(ConcatPaths([Dir, SCENEDETECT_EXE])) then
+    Tools.PySceneDetect := ConcatPaths([Dir, SCENEDETECT_EXE]);
+  {$ELSE}
+  Pipx := FindPipx;
+  if Pipx = '' then
+  begin
+    AOutput := lngSceneDetectInstallInfo;
+    Tools.PySceneDetect := FindSceneDetect;
+    Exit(False);
+  end;
+  sl := NIL;
+  try
+    // upgrade only works with a scenedetect installed by pipx
+    ok := (FindSceneDetect <> '') and ExecuteAppLoop(Pipx, ['upgrade', 'scenedetect'], sl);
+    if not ok then
+    begin
+      FreeAndNil(sl);
+      ok := ExecuteAppLoop(Pipx, ['install', '--force', 'scenedetect[opencv]'], sl);
+    end;
+    if Assigned(sl) then AOutput := Trim(sl.Text);
+  finally
+    sl.Free;
+  end;
+  Tools.PySceneDetect := FindSceneDetect;
+  if not ok then Exit(False);
+  {$ENDIF}
+  Result := FileExists(Tools.PySceneDetect);
+  if Result and (AOutput = '') then AOutput := lngSuccess;
+end;
+
+// -----------------------------------------------------------------------------
+
+// "PySceneDetect (install)..." of the shot changes window
+function InstallSceneDetect: Boolean;
+var
+  s: String;
+begin
+  Result := False;
+  {$IFDEF UNIX}
+  if FindPipx = '' then
+  begin
+    ShowMessageDialog(lngSceneDetectInstallInfo);
+    // maybe installed meanwhile
+    Tools.PySceneDetect := FindSceneDetect;
+    Exit(FileExists(Tools.PySceneDetect));
+  end;
+  {$ENDIF}
+  if CustomQuestionDialog(lngAskDownloadSceneDetect, lngSceneDetectOptional, [dbYes, dbNo]) <> mrYes then Exit;
+  Screen.Cursor := crHourGlass;
+  try
+    Result := UpdateSceneDetect(s);
+  finally
+    Screen.Cursor := crDefault;
+  end;
+  if not Result then
+    ShowErrorMessageDialog(iff(s = '', lngFailed, s), '', False, False);
+end;
+
+// -----------------------------------------------------------------------------
+
 // where PySceneDetect is usually installed: our folder, the official Windows
 // installer, pip/pipx (~/.local/bin), Homebrew and python.org on macOS, and
 // last the PATH (an app opened from Finder or a .desktop gets a short one)
@@ -2057,7 +2256,7 @@ end;
 function LogMPVFileName: String;
 begin
   {$IFDEF DARWIN}
-  Result := GetUserDir + RootCfg+'/'+RootCfg+'_mpv.log';
+  Result := GetUserDir + UserDirName+'/'+RootCfg+'_mpv.log';
   {$ELSE}
   Result := GetCustomFilePath(RootCfg+'_mpv.log');
   {$ENDIF}
@@ -2098,6 +2297,150 @@ begin
   {$ELSE}
   Result := GetCustomFolderPath('Dictionaries');
   {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
+// the dictionaries added by the user (Add dictionary...): always writable,
+// not replaced when updating and without admin rights (the app folder can be
+// read-only: Program Files, /usr, the signed bundle of macOS)
+function UserDictionariesFolder: String;
+begin
+  {$IFDEF DARWIN}
+  Result := GetCustomUserPath('Dictionaries');
+  {$ELSE}
+  // %LOCALAPPDATA%\tero\Dictionaries\ (Windows), ~/.config/tero/Dictionaries/ (Linux)
+  Result := IncludeTrailingPathDelimiter(ConcatPaths([UserConfigDir, 'Dictionaries']));
+  {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
+// where the dictionaries are looked for, the first one wins (a dictionary
+// added by the user replaces the one of the app with the same name)
+function DictionaryFolders: TStringArray;
+{$IFDEF DARWIN}
+const
+  SharedDictionaries = '/Library/Application Support/Tero Subtitler/Dictionaries/';
+{$ENDIF}
+begin
+  {$IFDEF DARWIN}
+  // the ones of the .pkg and the ones of the bundle (.zip), both: before,
+  // the ones of the bundle were ignored when the .pkg installed any
+  Result := [UserDictionariesFolder, SharedDictionaries, GetCustomFolderPath('Resources/Dictionaries/')];
+  {$ELSE}
+  Result := [UserDictionariesFolder, GetCustomFolderPath('Dictionaries')];
+  {$ENDIF}
+end;
+
+// -----------------------------------------------------------------------------
+
+// the .dic/.aff of a dictionary (name without extension) in the first folder
+// that has both, the one of the app if none
+function DictionaryFileName(const AName, AExt: String): String;
+var
+  Dir: String;
+begin
+  for Dir in DictionaryFolders do
+    if FileExists(Dir + AName + '.dic') and FileExists(Dir + AName + '.aff') then
+      Exit(Dir + AName + AExt);
+  Result := DictionariesFolder + AName + AExt;
+end;
+
+// -----------------------------------------------------------------------------
+
+function LoadHunspellDictionary(const AName: String): Boolean;
+begin
+  Result := HunspellInstance.LoadDictionary(DictionaryFileName(AName, '.aff'), DictionaryFileName(AName, '.dic'));
+end;
+
+// -----------------------------------------------------------------------------
+
+// copies the .dic files with their .aff found in AFileName (a .dic, or a .oxt
+// or .zip: LibreOffice/OpenOffice extensions and dictionary packs) to the
+// user folder; AName is the first one copied
+function AddDictionaries(const AFileName: String; out AName: String): Integer;
+var
+  Src, Tmp, Dir: String;
+  Files: TStringList;
+  i: Integer;
+
+  function CopyPair(const ADic: String): Boolean;
+  var
+    b: String;
+  begin
+    Result := False;
+    b := ChangeFileExt(ADic, '');
+    if not FileExists(b + '.aff') then Exit;
+    if not CopyFile(ADic, Dir + ExtractFileName(b) + '.dic') then Exit;
+    if not CopyFile(b + '.aff', Dir + ExtractFileName(b) + '.aff') then Exit;
+    if AName = '' then AName := ExtractFileName(b);
+    Result := True;
+  end;
+
+begin
+  Result := 0;
+  AName  := '';
+  Dir    := UserDictionariesFolder;
+  if not ForceDirectories(Dir) then Exit;
+
+  Src := LowerCase(ExtractFileExt(AFileName));
+  if Src = '.dic' then
+  begin
+    if CopyPair(AFileName) then Result := 1;
+  end
+  else if (Src = '.oxt') or (Src = '.zip') then
+  begin
+    Tmp := ConcatPaths([GetTempDir, 'tero-dic-' + IntToStr(GetTickCount64)]);
+    Files := NIL;
+    try
+      ForceDirectories(Tmp);
+      with TUnZipper.Create do
+      try
+        FileName   := AFileName;
+        OutputPath := Tmp;
+        try
+          Examine;
+          UnZipAllFiles;
+        except
+        end;
+      finally
+        Free;
+      end;
+      // hyphenation (hyph_*) and thesaurus (th_*) files of the .oxt aren't dictionaries
+      Files := FindAllFiles(Tmp, '*.dic', True);
+      for i := 0 to Files.Count-1 do
+        if (Pos('hyph_', LowerCase(ExtractFileName(Files[i]))) <> 1) and
+           (Pos('th_', LowerCase(ExtractFileName(Files[i]))) <> 1) and
+           CopyPair(Files[i]) then
+          Inc(Result);
+    finally
+      Files.Free;
+      DeleteDirectory(Tmp, False);
+    end;
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+function AddDictionaryWithDialog(out AName: String): Boolean;
+begin
+  Result := False;
+  AName  := '';
+  with TOpenDialog.Create(NIL) do
+  try
+    Title   := lngAddDictionary;
+    Filter  := lngDictionaryFiles + ' (*.dic;*.oxt;*.zip)|*.dic;*.oxt;*.zip';
+    Options := Options + [ofPathMustExist, ofFileMustExist];
+    if Execute then
+    begin
+      Result := AddDictionaries(FileName, AName) > 0;
+      if not Result then
+        ShowErrorMessageDialog(lngNoDictionaryFound);
+    end;
+  finally
+    Free;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -2324,7 +2667,7 @@ begin
   // on Windows that's the Tero folder; if it was installed somewhere we can't
   // write (an old installer, a copy in Program Files...), use the user profile
   if not (ForceDirectories(Result) and DirectoryIsWritable(Result)) then
-    Result := ConcatPaths([GetAppConfigDir(False), 'tessdata']);
+    Result := ConcatPaths([UserConfigDir, 'tessdata']);
 end;
 
 // -----------------------------------------------------------------------------
@@ -2449,6 +2792,51 @@ end;
 
 // -----------------------------------------------------------------------------
 
+// Deno, the JavaScript runtime yt-dlp needs for YouTube since 2025.11 (without
+// one it gets no formats or only some of them): next to yt-dlp
+function DenoFileName: String;
+begin
+  if YTDLPFileName <> '' then
+    Result := ConcatPaths([ExtractFileDir(YTDLPFileName), DENO_EXE])
+  else
+    Result := ConcatPaths([YTDLPFolder, DENO_EXE]);
+end;
+
+// -----------------------------------------------------------------------------
+
+function DownloadDeno: Boolean;
+var
+  url: String;
+begin
+  url := URL_DENO;
+  {$IFDEF DARWIN}
+  if GetCPUArchitectureString = 'arm64' then
+    url := StringReplace(url, '%cpu', 'aarch64', [])
+  else
+    url := StringReplace(url, '%cpu', 'x86_64', []);
+  {$ENDIF}
+  ForceDirectories(ExtractFileDir(DenoFileName));
+  // the zip has only the executable, extracted next to it
+  ShowDownloadDialog(url, ChangeFileExt(DenoFileName, '.zip'));
+  Result := FileExists(DenoFileName);
+  if Result then
+    MakeFileExecutable(DenoFileName);
+end;
+
+// -----------------------------------------------------------------------------
+
+// the value of yt-dlp's --js-runtimes, empty without our Deno (yt-dlp then
+// looks for one in the PATH)
+function YTDLPJSRuntime: String;
+begin
+  if FileExists(DenoFileName) then
+    Result := 'deno:' + DenoFileName
+  else
+    Result := '';
+end;
+
+// -----------------------------------------------------------------------------
+
 function UpdateYTDLP(const AFileName: String; out AOutput: String): Boolean;
 var
   sl: TStringList;
@@ -2488,7 +2876,12 @@ begin
   end;
 
   if Result then
+  begin
     MakeFileExecutable(AFileName);
+    // without a JavaScript runtime YouTube doesn't work
+    if not FileExists(DenoFileName) then
+      DownloadDeno;
+  end;
 end;
 
 // -----------------------------------------------------------------------------
@@ -2680,6 +3073,52 @@ begin
 end;
 
 // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+// the first start of a nightly/beta/RC build: a copy of the settings, profiles,
+// styles, actors, names, shortcut presets and dictionaries of the stable one,
+// so it starts as the user has it but never writes the stable files. The
+// caches (waveforms, shot changes, thumbnails), backups and tools aren't copied.
+procedure ImportStableUserFiles;
+var
+  Src, Dst, f, d: String;
+  sr: TSearchRec;
+begin
+  if ChannelSuffix = '' then Exit;
+  Dst := UserConfigDir;
+  if DirectoryExists(Dst) then Exit;
+  Src := ConcatPaths([ExtractFileDir(ExcludeTrailingPathDelimiter(Dst)), RootCfg]) + PathDelim;
+  if not ForceDirectories(Dst) or not DirectoryExists(Src) then Exit;
+  try
+    if FindFirst(Src + RootCfg + '.*', faAnyFile, sr) = 0 then
+    try
+      repeat
+        f := sr.Name;
+        // the current work (.wsf) belongs to the stable one
+        if ((sr.Attr and faDirectory) = 0) and (LowerCase(ExtractFileExt(f)) <> '.wsf') then
+          CopyFile(Src + f, Dst + f);
+      until FindNext(sr) <> 0;
+    finally
+      FindClose(sr);
+    end;
+    // both folders only have files
+    for d in TStringArray.Create('Shortcuts', 'Dictionaries') do
+      if ForceDirectories(Dst + d) and (FindFirst(Src + d + PathDelim + '*', faAnyFile, sr) = 0) then
+      try
+        repeat
+          if (sr.Attr and faDirectory) = 0 then
+            CopyFile(Src + d + PathDelim + sr.Name, Dst + d + PathDelim + sr.Name);
+        until FindNext(sr) <> 0;
+      finally
+        FindClose(sr);
+      end;
+  except
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
+initialization
+  ImportStableUserFiles;
 
 end.
-

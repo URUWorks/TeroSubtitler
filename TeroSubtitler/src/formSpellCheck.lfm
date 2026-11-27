@@ -33,6 +33,16 @@ object frmSpellCheck: TfrmSpellCheck
     TabStop = False
     OnChange = cboDictionaryChange
   end
+  object btnAddDictionary: TButton
+    Left = 459
+    Height = 33
+    Top = 8
+    Width = 113
+    Caption = 'Add dictionary...'
+    TabOrder = 11
+    TabStop = False
+    OnClick = btnAddDictionaryClick
+  end
   object lblNotFound: TLabel
     Left = 10
     Height = 20

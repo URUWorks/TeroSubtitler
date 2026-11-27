@@ -491,25 +491,40 @@ var
   mnu       : TMenuItem;
   x, i, l   : Integer;
   s, s1     : String;
+  Dir       : String;
+  Names     : TStringList;
 begin
+  // the menu is filled again after adding a dictionary
+  if AParent is TPopupMenu then
+    (AParent as TPopupMenu).Items.Clear
+  else if AParent is TMenuItem then
+    (AParent as TMenuItem).Clear;
+  if ACombo <> NIL then ACombo.Items.Clear;
+
   // collect captions first, FindFirst order depends on the file system
-  List := TStringList.Create;
+  List  := TStringList.Create;
+  Names := TStringList.Create;
   try
-    if FindFirst(DictionariesFolder + '*.dic', faAnyFile, SearchRec) = 0 then
-    try
-      repeat
-        s := ChangeFileExt(SearchRec.Name, '');
-        // use only the culture part (e.g. "pt_PT (pre-AO 1990)" -> "pt_PT")
-        l := Pos(' ', s);
-        if l > 0 then
-          s1 := Copy(s, 1, l-1)
-        else
-          s1 := s;
-        List.Add(Trim(GetCultureDisplayName(s1) + ' [' + s + ']'));
-      until FindNext(SearchRec) <> 0;
-    finally
-      FindClose(SearchRec);
-    end;
+    Names.Sorted := True;
+    // the folders of the user and of the app, each dictionary once
+    for Dir in DictionaryFolders do
+      if FindFirst(Dir + '*.dic', faAnyFile, SearchRec) = 0 then
+      try
+        repeat
+          s := ChangeFileExt(SearchRec.Name, '');
+          if (Names.IndexOf(s) >= 0) or not FileExists(Dir + s + '.aff') then Continue;
+          Names.Add(s);
+          // use only the culture part (e.g. "pt_PT (pre-AO 1990)" -> "pt_PT")
+          l := Pos(' ', s);
+          if l > 0 then
+            s1 := Copy(s, 1, l-1)
+          else
+            s1 := s;
+          List.Add(Trim(GetCultureDisplayName(s1) + ' [' + s + ']'));
+        until FindNext(SearchRec) <> 0;
+      finally
+        FindClose(SearchRec);
+      end;
 
     List.Sort;
 
@@ -539,7 +554,30 @@ begin
         if s = AppOptions.HunspellLanguage then ACombo.ItemIndex := i;
       end;
     end;
+
+    // Add dictionary... (any system: a .dic/.aff, or a LibreOffice .oxt)
+    if AParent <> NIL then
+    begin
+      if List.Count > 0 then
+      begin
+        mnu         := TMenuItem.Create(AParent);
+        mnu.Caption := '-';
+        if AParent is TPopupMenu then
+          (AParent as TPopupMenu).Items.Add(mnu)
+        else if AParent is TMenuItem then
+          (AParent as TMenuItem).Add(mnu);
+      end;
+      mnu         := TMenuItem.Create(AParent);
+      mnu.Name    := 'dic_add';
+      mnu.Caption := lngAddDictionary;
+      mnu.OnClick := @frmMain.DoAddDictionaryClick;
+      if AParent is TPopupMenu then
+        (AParent as TPopupMenu).Items.Add(mnu)
+      else if AParent is TMenuItem then
+        (AParent as TMenuItem).Add(mnu);
+    end;
   finally
+    Names.Free;
     List.Free;
   end;
 end;
@@ -1530,12 +1568,12 @@ begin
     if Workspace.TranslatorMode then
       s := s + ' / ' + iff(SubtitleInfo.Translation.FileName.IsEmpty, '?', ExtractFileName(SubtitleInfo.Translation.FileName));
 
-    s := s + ' - ' + ProgramName;
+    s := s + ' - ' + ProgramTitle;
   end
   else if not frmMain.MPV.FileName.IsEmpty then
-    s := MPVMediaName + ' - ' + ProgramName
+    s := MPVMediaName + ' - ' + ProgramTitle
   else
-    s := ProgramName;
+    s := ProgramTitle;
 
   {$IFDEF DARWIN}
   frmMain.Caption := StringReplace(s, '&', '&&', [rfReplaceAll]);

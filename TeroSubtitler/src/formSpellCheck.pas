@@ -40,6 +40,7 @@ type
     btnChangeAll: TButton;
     btnClose: TButton;
     btnSkip: TButton;
+    btnAddDictionary: TButton;
     btnSkipAll: TButton;
     cboDictionary: TComboBox;
     cboSource: TComboBox;
@@ -57,6 +58,7 @@ type
     procedure btnCloseClick(Sender: TObject);
     procedure btnSkipAllClick(Sender: TObject);
     procedure btnSkipClick(Sender: TObject);
+    procedure btnAddDictionaryClick(Sender: TObject);
     procedure cboDictionaryChange(Sender: TObject);
     procedure cboSourceChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -565,12 +567,28 @@ end;
 
 // -----------------------------------------------------------------------------
 
+procedure TfrmSpellCheck.btnAddDictionaryClick(Sender: TObject);
+var
+  AName: String;
+begin
+  // copied to the user folder, selected and checked again with it
+  if AddDictionaryWithDialog(AName) then
+  begin
+    AppOptions.HunspellLanguage := AName;
+    FillWithDictionaries(NIL, cboDictionary);
+    FillWithDictionaries(frmMain.popDictionaries, NIL);
+    cboDictionaryChange(NIL);
+  end;
+end;
+
+// -----------------------------------------------------------------------------
+
 procedure TfrmSpellCheck.cboDictionaryChange(Sender: TObject);
 begin
   if (cboDictionary.Items.Count > 0) then
   begin
     AppOptions.HunspellLanguage := GetDictionaryNameFromCaption(cboDictionary.Text);
-    HunspellInstance.LoadDictionary(DictionariesFolder+AppOptions.HunspellLanguage+'.aff', DictionariesFolder+AppOptions.HunspellLanguage+'.dic');
+    LoadHunspellDictionary(AppOptions.HunspellLanguage);
     UpdateStatusBar(True);
 
     InitializeSpellAtLine;
